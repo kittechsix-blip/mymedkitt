@@ -109,7 +109,7 @@ function handleTree(params) {
     updateTabBar('');
     const id = params['id'] ?? 'unknown';
     const main = clearMain();
-    renderTreeWizard(main, id);
+    void renderTreeWizard(main, id);
 }
 function handleTreeNode(params) {
     setHomeTheme(false);
@@ -123,7 +123,7 @@ function handleReference(params) {
     updateTabBar('');
     const main = clearMain();
     const treeId = params['treeId'];
-    renderReferencePanel(main, treeId);
+    void renderReferencePanel(main, treeId);
 }
 function handleDrugList(_params) {
     setHomeTheme(false);

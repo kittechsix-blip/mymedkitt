@@ -1,189 +1,12 @@
 // MedKitt — Wizard UI Component
 // Renders one decision node at a time with progress, back nav, and option buttons.
 import { TreeEngine } from '../services/tree-engine.js';
-import { NEUROSYPHILIS_NODES, NEUROSYPHILIS_CITATIONS, NEUROSYPHILIS_MODULE_LABELS } from '../data/trees/neurosyphilis.js';
-import { PNEUMOTHORAX_NODES, PNEUMOTHORAX_CITATIONS, PNEUMOTHORAX_MODULE_LABELS } from '../data/trees/pneumothorax.js';
-import { PE_TREATMENT_NODES, PE_TREATMENT_CITATIONS, PE_TREATMENT_MODULE_LABELS } from '../data/trees/pe-treatment.js';
-import { ECHO_VIEWS_NODES, ECHO_VIEWS_CITATIONS, ECHO_VIEWS_MODULE_LABELS } from '../data/trees/echo-views.js';
-import { PRIAPISM_NODES, PRIAPISM_CITATIONS, PRIAPISM_MODULE_LABELS } from '../data/trees/priapism.js';
-import { AFIB_RVR_NODES, AFIB_RVR_CITATIONS, AFIB_RVR_MODULE_LABELS } from '../data/trees/afib-rvr.js';
-import { CHEST_TUBE_NODES, CHEST_TUBE_CITATIONS, CHEST_TUBE_MODULE_LABELS } from '../data/trees/chest-tube.js';
-import { CROUP_NODES, CROUP_CITATIONS, CROUP_MODULE_LABELS } from '../data/trees/croup.js';
-import { PEP_NODES, PEP_CITATIONS, PEP_MODULE_LABELS } from '../data/trees/pep.js';
-import { STROKE_NODES, STROKE_CITATIONS, STROKE_MODULE_LABELS } from '../data/trees/stroke.js';
-import { NSTEMI_NODES, NSTEMI_CITATIONS, NSTEMI_MODULE_LABELS } from '../data/trees/nstemi.js';
-import { POTASSIUM_NODES, POTASSIUM_CITATIONS, POTASSIUM_MODULE_LABELS } from '../data/trees/potassium.js';
-import { UTI_PEDS_NODES, UTI_PEDS_CITATIONS, UTI_PEDS_MODULE_LABELS } from '../data/trees/uti-peds.js';
-import { PEDS_FEVER_NODES, PEDS_FEVER_CITATIONS, PEDS_FEVER_MODULE_LABELS } from '../data/trees/peds-fever.js';
-import { BRONCHIOLITIS_NODES, BRONCHIOLITIS_CITATIONS, BRONCHIOLITIS_MODULE_LABELS } from '../data/trees/bronchiolitis.js';
-import { ECHO_EPSS_NODES, ECHO_EPSS_CITATIONS, ECHO_EPSS_MODULE_LABELS } from '../data/trees/echo-epss.js';
-import { SHOULDER_DYSTOCIA_NODES, SHOULDER_DYSTOCIA_CITATIONS, SHOULDER_DYSTOCIA_MODULE_LABELS } from '../data/trees/shoulder-dystocia.js';
-import { PRECIP_DELIVERY_NODES, PRECIP_DELIVERY_CITATIONS, PRECIP_DELIVERY_MODULE_LABELS } from '../data/trees/precip-delivery.js';
-import { NEONATAL_RESUS_NODES, NEONATAL_RESUS_CITATIONS, NEONATAL_RESUS_MODULE_LABELS } from '../data/trees/neonatal-resus.js';
-import { DISTAL_RADIUS_NODES, DISTAL_RADIUS_CITATIONS, DISTAL_RADIUS_MODULE_LABELS } from '../data/trees/distal-radius.js';
-import { SODIUM_NODES, SODIUM_CITATIONS, SODIUM_MODULE_LABELS } from '../data/trees/sodium.js';
-import { SPLINTING_NODES, SPLINTING_CITATIONS, SPLINTING_MODULE_LABELS } from '../data/trees/splinting.js';
+import { getTreeConfig } from '../services/tree-service.js';
 import { router } from '../services/router.js';
 import { renderInlineCitations } from './reference-table.js';
 import { showInfoModal } from './info-page.js';
 import { showDrugModal } from './drug-store.js';
 import { findDrugIdByName } from '../data/drug-store.js';
-const TREE_CONFIGS = {
-    'neurosyphilis': {
-        nodes: NEUROSYPHILIS_NODES,
-        entryNodeId: 'serology-start',
-        categoryId: 'infectious-disease',
-        moduleLabels: NEUROSYPHILIS_MODULE_LABELS,
-        citations: NEUROSYPHILIS_CITATIONS,
-    },
-    'pneumothorax': {
-        nodes: PNEUMOTHORAX_NODES,
-        entryNodeId: 'pneumothorax-start',
-        categoryId: 'us-rads',
-        moduleLabels: PNEUMOTHORAX_MODULE_LABELS,
-        citations: PNEUMOTHORAX_CITATIONS,
-    },
-    'pe-treatment': {
-        nodes: PE_TREATMENT_NODES,
-        entryNodeId: 'pe-start',
-        categoryId: 'critical-care',
-        moduleLabels: PE_TREATMENT_MODULE_LABELS,
-        citations: PE_TREATMENT_CITATIONS,
-    },
-    'echo-views': {
-        nodes: ECHO_VIEWS_NODES,
-        entryNodeId: 'echo-views-start',
-        categoryId: 'us-rads',
-        moduleLabels: ECHO_VIEWS_MODULE_LABELS,
-        citations: ECHO_VIEWS_CITATIONS,
-    },
-    'priapism': {
-        nodes: PRIAPISM_NODES,
-        entryNodeId: 'priapism-start',
-        categoryId: 'procedures',
-        moduleLabels: PRIAPISM_MODULE_LABELS,
-        citations: PRIAPISM_CITATIONS,
-    },
-    'afib-rvr': {
-        nodes: AFIB_RVR_NODES,
-        entryNodeId: 'afib-start',
-        categoryId: 'cardiology',
-        moduleLabels: AFIB_RVR_MODULE_LABELS,
-        citations: AFIB_RVR_CITATIONS,
-    },
-    'chest-tube': {
-        nodes: CHEST_TUBE_NODES,
-        entryNodeId: 'ctube-start',
-        categoryId: 'trauma-surg',
-        moduleLabels: CHEST_TUBE_MODULE_LABELS,
-        citations: CHEST_TUBE_CITATIONS,
-    },
-    'pep': {
-        nodes: PEP_NODES,
-        entryNodeId: 'pep-start',
-        categoryId: 'infectious-disease',
-        moduleLabels: PEP_MODULE_LABELS,
-        citations: PEP_CITATIONS,
-    },
-    'stroke': {
-        nodes: STROKE_NODES,
-        entryNodeId: 'stroke-start',
-        categoryId: 'neurology',
-        moduleLabels: STROKE_MODULE_LABELS,
-        citations: STROKE_CITATIONS,
-    },
-    'nstemi': {
-        nodes: NSTEMI_NODES,
-        entryNodeId: 'nstemi-start',
-        categoryId: 'cardiology',
-        moduleLabels: NSTEMI_MODULE_LABELS,
-        citations: NSTEMI_CITATIONS,
-    },
-    'potassium': {
-        nodes: POTASSIUM_NODES,
-        entryNodeId: 'k-start',
-        categoryId: 'nephro-rheum-endo',
-        moduleLabels: POTASSIUM_MODULE_LABELS,
-        citations: POTASSIUM_CITATIONS,
-    },
-    'sodium': {
-        nodes: SODIUM_NODES,
-        entryNodeId: 'na-start',
-        categoryId: 'nephro-rheum-endo',
-        moduleLabels: SODIUM_MODULE_LABELS,
-        citations: SODIUM_CITATIONS,
-    },
-    'croup': {
-        nodes: CROUP_NODES,
-        entryNodeId: 'croup-start',
-        categoryId: 'pediatrics',
-        moduleLabels: CROUP_MODULE_LABELS,
-        citations: CROUP_CITATIONS,
-    },
-    'uti-peds': {
-        nodes: UTI_PEDS_NODES,
-        entryNodeId: 'uti-start',
-        categoryId: 'pediatrics',
-        moduleLabels: UTI_PEDS_MODULE_LABELS,
-        citations: UTI_PEDS_CITATIONS,
-    },
-    'peds-fever': {
-        nodes: PEDS_FEVER_NODES,
-        entryNodeId: 'pf-start',
-        categoryId: 'pediatrics',
-        moduleLabels: PEDS_FEVER_MODULE_LABELS,
-        citations: PEDS_FEVER_CITATIONS,
-    },
-    'bronchiolitis': {
-        nodes: BRONCHIOLITIS_NODES,
-        entryNodeId: 'bronch-start',
-        categoryId: 'pediatrics',
-        moduleLabels: BRONCHIOLITIS_MODULE_LABELS,
-        citations: BRONCHIOLITIS_CITATIONS,
-    },
-    'echo-epss': {
-        nodes: ECHO_EPSS_NODES,
-        entryNodeId: 'epss-start',
-        categoryId: 'us-rads',
-        moduleLabels: ECHO_EPSS_MODULE_LABELS,
-        citations: ECHO_EPSS_CITATIONS,
-    },
-    'shoulder-dystocia': {
-        nodes: SHOULDER_DYSTOCIA_NODES,
-        entryNodeId: 'sd-start',
-        categoryId: 'ob-gyn',
-        moduleLabels: SHOULDER_DYSTOCIA_MODULE_LABELS,
-        citations: SHOULDER_DYSTOCIA_CITATIONS,
-    },
-    'precip-delivery': {
-        nodes: PRECIP_DELIVERY_NODES,
-        entryNodeId: 'precip-start',
-        categoryId: 'ob-gyn',
-        moduleLabels: PRECIP_DELIVERY_MODULE_LABELS,
-        citations: PRECIP_DELIVERY_CITATIONS,
-    },
-    'neonatal-resus': {
-        nodes: NEONATAL_RESUS_NODES,
-        entryNodeId: 'nrp-start',
-        categoryId: 'pediatrics',
-        moduleLabels: NEONATAL_RESUS_MODULE_LABELS,
-        citations: NEONATAL_RESUS_CITATIONS,
-    },
-    'distal-radius': {
-        nodes: DISTAL_RADIUS_NODES,
-        entryNodeId: 'dr-start',
-        categoryId: 'orthopedics',
-        moduleLabels: DISTAL_RADIUS_MODULE_LABELS,
-        citations: DISTAL_RADIUS_CITATIONS,
-    },
-    'splinting': {
-        nodes: SPLINTING_NODES,
-        entryNodeId: 'splint-start',
-        categoryId: 'orthopedics',
-        moduleLabels: SPLINTING_MODULE_LABELS,
-        citations: SPLINTING_CITATIONS,
-    },
-};
 let engine = null;
 let currentTreeId = null;
 let currentConfig = null;
@@ -225,8 +48,8 @@ function handleInlineLinkClick(e) {
         showInfoModal(linkId);
 }
 /** Initialize and render the wizard for a given tree */
-export function renderTreeWizard(container, treeId) {
-    const config = TREE_CONFIGS[treeId];
+export async function renderTreeWizard(container, treeId) {
+    const config = await getTreeConfig(treeId);
     if (!config) {
         renderUnavailable(container, treeId);
         return;
@@ -365,7 +188,7 @@ function renderHeader(node) {
     shareBtn.addEventListener('click', () => {
         if (!currentConfig)
             return;
-        const treeId = Object.keys(TREE_CONFIGS).find(k => TREE_CONFIGS[k] === currentConfig) ?? '';
+        const treeId = currentTreeId ?? '';
         const url = `${window.location.origin}${window.location.pathname}#/tree/${treeId}`;
         if (navigator.share) {
             navigator.share({ title: `MedKitt: ${node.title}`, url }).catch(() => { });
@@ -572,7 +395,7 @@ function renderResultNode(content, node, _container) {
         const container = document.getElementById('main-content');
         if (container && currentTreeId) {
             container.innerHTML = '';
-            renderTreeWizard(container, currentTreeId);
+            void renderTreeWizard(container, currentTreeId);
         }
     });
     const homeBtn = document.createElement('button');

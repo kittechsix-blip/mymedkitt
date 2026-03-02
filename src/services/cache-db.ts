@@ -3,9 +3,9 @@
 // Each data type gets its own object store with version tracking.
 
 const DB_NAME = 'medkitt-cache';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
-export type StoreName = 'drugs' | 'categories' | 'category_trees' | 'sync_meta';
+export type StoreName = 'drugs' | 'categories' | 'category_trees' | 'decision_nodes' | 'tree_citations' | 'sync_meta';
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -25,6 +25,12 @@ function openDB(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains('category_trees')) {
         db.createObjectStore('category_trees', { keyPath: ['category_id', 'tree_id'] });
+      }
+      if (!db.objectStoreNames.contains('decision_nodes')) {
+        db.createObjectStore('decision_nodes', { keyPath: ['id', 'tree_id'] });
+      }
+      if (!db.objectStoreNames.contains('tree_citations')) {
+        db.createObjectStore('tree_citations', { keyPath: ['tree_id', 'num'] });
       }
       if (!db.objectStoreNames.contains('sync_meta')) {
         db.createObjectStore('sync_meta', { keyPath: 'key' });
@@ -52,6 +58,26 @@ export async function cachePutAll<T>(storeName: StoreName, records: T[]): Promis
     const tx = db.transaction(storeName, 'readwrite');
     const store = tx.objectStore(storeName);
     store.clear();
+    for (const record of records) {
+      store.put(record);
+    }
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+/** Get all records matching a filter function */
+export async function cacheGetFiltered<T>(storeName: StoreName, filter: (item: T) => boolean): Promise<T[]> {
+  const all = await cacheGetAll<T>(storeName);
+  return all.filter(filter);
+}
+
+/** Append records to a store (does not clear existing) */
+export async function cachePutMany<T>(storeName: StoreName, records: T[]): Promise<void> {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(storeName, 'readwrite');
+    const store = tx.objectStore(storeName);
     for (const record of records) {
       store.put(record);
     }

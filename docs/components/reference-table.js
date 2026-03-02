@@ -1,104 +1,72 @@
 // MedKitt — Reference Tables & Info Panels
 // Diagnostic test performance, monitoring schedules, and evidence citations.
 // Multi-tree aware: data is passed in from tree data files.
-import { NEUROSYPHILIS_CITATIONS, NEUROSYPHILIS_DIAGNOSTIC_TESTS, NEUROSYPHILIS_CLINICAL_NOTES, } from '../data/trees/neurosyphilis.js';
-import { PNEUMOTHORAX_CITATIONS, PNEUMOTHORAX_DIAGNOSTIC_TESTS, PNEUMOTHORAX_CLINICAL_NOTES, } from '../data/trees/pneumothorax.js';
-import { PE_TREATMENT_CITATIONS, PE_TREATMENT_DIAGNOSTIC_TESTS, PE_TREATMENT_CLINICAL_NOTES, } from '../data/trees/pe-treatment.js';
-import { CHEST_TUBE_CITATIONS, CHEST_TUBE_CLINICAL_NOTES, } from '../data/trees/chest-tube.js';
-import { STROKE_CITATIONS, STROKE_CLINICAL_NOTES, } from '../data/trees/stroke.js';
-import { NSTEMI_CITATIONS, NSTEMI_CLINICAL_NOTES, } from '../data/trees/nstemi.js';
-import { ECHO_VIEWS_CITATIONS } from '../data/trees/echo-views.js';
-import { PRIAPISM_CITATIONS, PRIAPISM_CLINICAL_NOTES } from '../data/trees/priapism.js';
-import { AFIB_RVR_CITATIONS } from '../data/trees/afib-rvr.js';
-import { PEP_CITATIONS } from '../data/trees/pep.js';
-import { POTASSIUM_CITATIONS, POTASSIUM_CLINICAL_NOTES, } from '../data/trees/potassium.js';
-import { PEDS_FEVER_CITATIONS } from '../data/trees/peds-fever.js';
-import { PRECIP_DELIVERY_CITATIONS } from '../data/trees/precip-delivery.js';
-import { NEONATAL_RESUS_CITATIONS, NEONATAL_RESUS_CLINICAL_NOTES, } from '../data/trees/neonatal-resus.js';
-import { DISTAL_RADIUS_CITATIONS, DISTAL_RADIUS_CLINICAL_NOTES, } from '../data/trees/distal-radius.js';
-const TREE_REFERENCE_DATA = {
-    'neurosyphilis': {
-        title: 'Neurosyphilis Reference',
-        citations: NEUROSYPHILIS_CITATIONS,
-        diagnosticTests: NEUROSYPHILIS_DIAGNOSTIC_TESTS,
-        clinicalNotes: NEUROSYPHILIS_CLINICAL_NOTES,
-        testTableTitle: 'CSF Diagnostic Test Performance',
-    },
-    'pneumothorax': {
-        title: 'Pneumothorax POCUS Reference',
-        citations: PNEUMOTHORAX_CITATIONS,
-        diagnosticTests: PNEUMOTHORAX_DIAGNOSTIC_TESTS,
-        clinicalNotes: PNEUMOTHORAX_CLINICAL_NOTES,
-        testTableTitle: 'Ultrasound vs CXR for Pneumothorax',
-    },
-    'pe-treatment': {
-        title: 'PE Treatment Reference',
-        citations: PE_TREATMENT_CITATIONS,
-        diagnosticTests: PE_TREATMENT_DIAGNOSTIC_TESTS,
-        clinicalNotes: PE_TREATMENT_CLINICAL_NOTES,
-        testTableTitle: 'PE Risk Stratification Markers',
-    },
+import { getTreeConfig } from '../services/tree-service.js';
+const TREE_REF_META = {
+    'neurosyphilis': { title: 'Neurosyphilis Reference', testTableTitle: 'CSF Diagnostic Test Performance' },
+    'pneumothorax': { title: 'Pneumothorax POCUS Reference', testTableTitle: 'Ultrasound vs CXR for Pneumothorax' },
+    'pe-treatment': { title: 'PE Treatment Reference', testTableTitle: 'PE Risk Stratification Markers' },
     'chest-tube': {
         title: 'Chest Tube Reference',
-        citations: CHEST_TUBE_CITATIONS,
-        clinicalNotes: CHEST_TUBE_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/chest-tube.js'); return { clinicalNotes: m.CHEST_TUBE_CLINICAL_NOTES }; },
     },
     'stroke': {
         title: 'Acute Ischemic Stroke Reference',
-        citations: STROKE_CITATIONS,
-        clinicalNotes: STROKE_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/stroke.js'); return { clinicalNotes: m.STROKE_CLINICAL_NOTES }; },
     },
     'nstemi': {
         title: 'NSTEMI Management Reference',
-        citations: NSTEMI_CITATIONS,
-        clinicalNotes: NSTEMI_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/nstemi.js'); return { clinicalNotes: m.NSTEMI_CLINICAL_NOTES }; },
     },
-    'echo-views': {
-        title: 'Basic Echo Views Reference',
-        citations: ECHO_VIEWS_CITATIONS,
-    },
+    'echo-views': { title: 'Basic Echo Views Reference' },
     'priapism': {
         title: 'Priapism Management Reference',
-        citations: PRIAPISM_CITATIONS,
-        clinicalNotes: PRIAPISM_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/priapism.js'); return { clinicalNotes: m.PRIAPISM_CLINICAL_NOTES }; },
     },
-    'afib-rvr': {
-        title: 'A-Fib with RVR Reference',
-        citations: AFIB_RVR_CITATIONS,
-    },
-    'pep': {
-        title: 'HIV Post-Exposure Prophylaxis Reference',
-        citations: PEP_CITATIONS,
-    },
+    'afib-rvr': { title: 'A-Fib with RVR Reference' },
+    'pep': { title: 'HIV Post-Exposure Prophylaxis Reference' },
     'potassium': {
         title: 'Potassium Disorders Reference',
-        citations: POTASSIUM_CITATIONS,
-        clinicalNotes: POTASSIUM_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/potassium.js'); return { clinicalNotes: m.POTASSIUM_CLINICAL_NOTES }; },
     },
-    'peds-fever': {
-        title: 'Fever < 6 Months Reference',
-        citations: PEDS_FEVER_CITATIONS,
-    },
-    'precip-delivery': {
-        title: 'Precipitous Delivery Reference',
-        citations: PRECIP_DELIVERY_CITATIONS,
-    },
+    'peds-fever': { title: 'Fever < 6 Months Reference' },
+    'precip-delivery': { title: 'Precipitous Delivery Reference' },
     'neonatal-resus': {
         title: 'Neonatal Resuscitation (NRP) Reference',
-        citations: NEONATAL_RESUS_CITATIONS,
-        clinicalNotes: NEONATAL_RESUS_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/neonatal-resus.js'); return { clinicalNotes: m.NEONATAL_RESUS_CLINICAL_NOTES }; },
     },
     'distal-radius': {
         title: 'Distal Radius Fracture Reduction Reference',
-        citations: DISTAL_RADIUS_CITATIONS,
-        clinicalNotes: DISTAL_RADIUS_CLINICAL_NOTES,
+        loadExtra: async () => { const m = await import('../data/trees/distal-radius.js'); return { clinicalNotes: m.DISTAL_RADIUS_CLINICAL_NOTES }; },
     },
 };
+/** Build full reference data for a tree by combining tree-service citations with supplementary data */
+async function getTreeReferenceData(treeId) {
+    const meta = TREE_REF_META[treeId];
+    if (!meta)
+        return null;
+    const config = await getTreeConfig(treeId);
+    const citations = config?.citations ?? [];
+    const data = { title: meta.title, citations, testTableTitle: meta.testTableTitle };
+    if (meta.loadExtra) {
+        try {
+            const extra = await meta.loadExtra();
+            if (extra.clinicalNotes)
+                data.clinicalNotes = extra.clinicalNotes;
+            if (extra.diagnosticTests)
+                data.diagnosticTests = extra.diagnosticTests;
+        }
+        catch {
+            // Supplementary data unavailable — citations still render
+        }
+    }
+    return data;
+}
 // -------------------------------------------------------------------
 // Render: Reference Panel (standalone page)
 // -------------------------------------------------------------------
 /** Render the full reference panel into a container */
-export function renderReferencePanel(container, treeId) {
+export async function renderReferencePanel(container, treeId) {
     container.innerHTML = '';
     // Back button
     const backBtn = document.createElement('button');
@@ -106,14 +74,13 @@ export function renderReferencePanel(container, treeId) {
     backBtn.textContent = '\u2190 Back';
     backBtn.addEventListener('click', () => history.back());
     container.appendChild(backBtn);
-    // If treeId provided, show that tree's references
-    if (treeId && TREE_REFERENCE_DATA[treeId]) {
-        const data = TREE_REFERENCE_DATA[treeId];
-        renderTreeReference(container, data);
-        return;
-    }
-    // Unknown treeId — show message, not all references
+    // If treeId provided, load that tree's references dynamically
     if (treeId) {
+        const data = await getTreeReferenceData(treeId);
+        if (data) {
+            renderTreeReference(container, data);
+            return;
+        }
         const msg = document.createElement('p');
         msg.style.color = 'var(--color-text-muted)';
         msg.textContent = 'No references available for this consult.';
@@ -125,8 +92,10 @@ export function renderReferencePanel(container, treeId) {
     allHeading.className = 'reference-heading';
     allHeading.textContent = 'Reference Tables';
     container.appendChild(allHeading);
-    for (const [_id, data] of Object.entries(TREE_REFERENCE_DATA)) {
-        renderTreeReference(container, data);
+    for (const id of Object.keys(TREE_REF_META)) {
+        const data = await getTreeReferenceData(id);
+        if (data)
+            renderTreeReference(container, data);
     }
 }
 function renderTreeReference(container, data) {
