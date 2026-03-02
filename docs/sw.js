@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v115';
+const CACHE_NAME = 'medkitt-v117';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -21,6 +21,9 @@ const ASSETS_TO_CACHE = [
   './data/trees/neurosyphilis.js',
   './services/storage.js',
   './services/tree-engine.js',
+  './services/supabase.js',
+  './services/cache-db.js',
+  './services/drug-service.js',
   './components/tree-wizard.js',
 
   './components/reference-table.js',
@@ -133,6 +136,12 @@ self.addEventListener('fetch', function(event) {
   if (event.request.method !== 'GET') return;
 
   var url = new URL(event.request.url);
+
+  // Supabase API: pass through to network (IndexedDB handles caching)
+  if (url.hostname.endsWith('supabase.co')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
 
   // Images and icon assets: cache-first (large, rarely change)
   if (url.pathname.match(/\.(png|jpg|jpeg|gif|svg|webp)$/)) {
