@@ -29,6 +29,11 @@
         for (var n of names) { await caches.delete(n); }
         status.textContent = 'Cache cleared...';
 
+        // Delete IndexedDB (stale Supabase/category data)
+        var dbs = await indexedDB.databases();
+        for (var db of dbs) { indexedDB.deleteDatabase(db.name); }
+        status.textContent = 'IndexedDB cleared...';
+
         // Clear sessionStorage (stale tree sessions)
         sessionStorage.clear();
         // Clear localStorage (legal acknowledgment, banner dismissed, etc.)
