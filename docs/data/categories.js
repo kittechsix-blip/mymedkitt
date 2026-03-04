@@ -40,7 +40,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'Risk Stratification \u2192 Management',
                 categoryId: 'critical-care',
                 version: '1.0',
-                nodeCount: 29,
+                nodeCount: 14,
                 entryNodeId: 'pe-start',
             }
         ],
@@ -54,10 +54,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'pe-treatment',
                 title: 'PE Treatment',
-                subtitle: 'Risk Stratification \u2192 Management',
+                subtitle: 'Risk Stratification → Management',
                 categoryId: 'emergency-medicine',
                 version: '1.0',
-                nodeCount: 29,
+                nodeCount: 14,
                 entryNodeId: 'pe-start',
             },
             {
@@ -154,11 +154,11 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'neurosyphilis',
                 title: 'Neurosyphilis Workup',
-                subtitle: 'Serology \u2192 LP decision \u2192 CSF interpretation \u2192 Treatment',
+                subtitle: 'Screening → CSF evaluation → Diagnosis → Treatment',
                 categoryId: 'infectious-disease',
                 version: '1.0',
-                nodeCount: 42,
-                entryNodeId: 'serology-start',
+                nodeCount: 11,
+                entryNodeId: 'ns-start',
             },
             {
                 id: 'pep',

@@ -2,17 +2,15 @@
  * MedKitt Consult Trees Index
  * Export all consult trees for use in the application
  */
-export { neurosyphilisConsult } from './neurosyphilis';
-export { peTreatmentConsult } from './pe-treatment';
-export { pneumothoraxConsult } from './pneumothorax';
+export { NEUROSYPHILIS_NODES, NEUROSYPHILIS_MODULE_LABELS, NEUROSYPHILIS_CITATIONS } from './neurosyphilis';
+export { PE_TREATMENT_NODES, PE_TREATMENT_MODULE_LABELS, PE_TREATMENT_CITATIONS } from './pe-treatment';
+export { PNEUMOTHORAX_NODES, PNEUMOTHORAX_MODULE_LABELS, PNEUMOTHORAX_CITATIONS } from './pneumothorax';
 export { echoViewsConsult } from './echo-views';
 /**
  * Registry of all available consult trees
  */
 export const consultRegistry = {
-    neurosyphilis: () => import('./neurosyphilis'),
-    'pe-treatment': () => import('./pe-treatment'),
-    pneumothorax: () => import('./pneumothorax'),
+    // pneumothorax now uses new flat DecisionNode[] format — loaded via tree-service.ts
     'echo-views': () => import('./echo-views'),
 };
 /**

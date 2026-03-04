@@ -1,239 +1,258 @@
-/**
- * Pulmonary Embolism Treatment Consult Tree
- * Based on 2019 ESC Guidelines for Diagnosis and Management of Acute PE
- */
+// MedKitt — Pulmonary Embolism Treatment
+// Risk stratification → Massive/Submassive/Low-risk pathways → Anticoagulation selection
+// 5 modules: Risk Stratification → Massive PE → Submassive PE → Low-Risk PE → Anticoagulation Selection
+// 14 nodes total.
 
-import type { ConsultTree } from '../types/consult-tree';
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
 
-export const peTreatmentConsult: ConsultTree = {
-  id: 'pe-treatment',
-  title: 'Pulmonary Embolism Treatment',
-  description: 'Evidence-based treatment algorithm for acute pulmonary embolism based on ESC 2019 guidelines',
-  category: 'Emergency Medicine / Cardiology',
-  version: '1.0.0',
-  lastUpdated: '2025-02-26',
-  metadata: {
-    author: 'MedKitt Clinical Team',
-    reviewStatus: 'approved',
-    audience: ['Emergency Medicine', 'Internal Medicine', 'Critical Care'],
-    estimatedTime: 8
-  },
-  references: [
-    {
-      id: 1,
-      title: '2019 ESC Guidelines for the Diagnosis and Management of Acute Pulmonary Embolism',
-      authors: 'Konstantinides SV, Meyer G, Becattini C, et al.',
-      source: 'European Heart Journal',
-      year: 2020,
-      volume: '41(4)',
-      pages: '543-603',
-      doi: '10.1093/eurheartj/ehz405',
-      url: 'https://academic.oup.com/eurheartj/article/41/4/543/5556506',
-      accessedDate: '2025-02-26',
-      shortCitation: 'ESC 2019'
-    },
-    {
-      id: 2,
-      title: 'Guidelines on the Diagnosis and Management of Acute Pulmonary Embolism',
-      authors: 'Torbicki A, Perrier A, Konstantinides S, et al.',
-      source: 'European Heart Journal',
-      year: 2008,
-      volume: '29(18)',
-      pages: '2276-315',
-      doi: '10.1093/eurheartj/ehn310',
-      shortCitation: 'ESC 2008'
-    },
-    {
-      id: 3,
-      title: 'Management of Massive and Submassive Pulmonary Embolism',
-      authors: 'Jaff MR, McMurtry MS, Archer SL, et al.',
-      source: 'Circulation',
-      year: 2011,
-      volume: '123(16)',
-      pages: '1788-830',
-      doi: '10.1161/CIR.0b013e318214914f',
-      shortCitation: 'AHA 2011'
-    },
-    {
-      id: 4,
-      title: 'Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline',
-      authors: 'Stevens SM, Woller SC, Kreuziger LB, et al.',
-      source: 'CHEST',
-      year: 2021,
-      volume: '160(6)',
-      pages: 'e545-e608',
-      doi: '10.1016/j.chest.2021.07.055',
-      shortCitation: 'CHEST 2021'
-    },
-    {
-      id: 5,
-      title: 'Heparin-Induced Thrombocytopenia in the Cardiovascular Patient',
-      authors: 'Warkentin TE, Greinacher A, Gruel Y, et al.',
-      source: 'Circulation',
-      year: 2021,
-      volume: '144(5)',
-      pages: 'e1-e22',
-      doi: '10.1161/CIR.0000000000001000',
-      shortCitation: 'Warkentin et al. 2021'
-    }
-  ],
-  root: {
-    id: 'pe-risk-stratification',
+export const PE_TREATMENT_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: RISK STRATIFICATION
+  // =====================================================================
+
+  {
+    id: 'pe-start',
+    type: 'question',
+    module: 1,
     title: 'PE Risk Stratification',
-    type: 'info',
-    content: 'Risk stratification guides treatment decisions in acute PE. Assess hemodynamic status first. {{ref:1}} {{ref:3}}',
-    metadata: {
-      priority: 'critical',
-      tags: ['Risk Stratification']
-    },
-    children: [
+    body: 'Confirmed or high-probability acute pulmonary embolism. Risk stratification guides treatment.\n\nAssess **hemodynamic status** first:\n• SBP, heart rate, signs of shock\n• Bedside echo for RV strain\n• Troponin and BNP\n\nUse [PESI](#/calculator/pesi) or [sPESI](#/calculator/spesi) to risk-stratify normotensive patients.',
+    citation: [1, 3],
+    calculatorLinks: [
+      { id: 'pesi', label: 'PESI Score' },
+      { id: 'spesi', label: 'sPESI Score' },
+    ],
+    options: [
       {
-        id: 'massive-pe',
-        title: 'Massive PE (High-Risk)',
-        type: 'warning',
-        content: 'Sustained hypotension (SBP <90 mmHg or drop ≥40 mmHg for >15 min), cardiogenic shock, or cardiac arrest. Mortality >15% without immediate treatment. {{ref:1}} {{ref:3}}',
-        metadata: {
-          priority: 'critical',
-          icd10: ['I26.09', 'I26.90'],
-          tags: ['Hemodynamic Collapse', 'Emergency']
-        },
-        children: [
-          {
-            id: 'massive-immediate',
-            title: 'Immediate Interventions',
-            type: 'treatment',
-            content: '1. IV unfractionated heparin (bolus + infusion) OR LMWH if not for thrombolysis\n2. Systemic thrombolysis (tPA 100mg IV over 2h) if no contraindications\n3. Consider surgical embolectomy or catheter-directed therapy if thrombolysis contraindicated per {{ref:1}} {{ref:3}}',
-            metadata: {
-              priority: 'critical',
-              tags: ['Thrombolysis', 'ICU']
-            }
-          }
-        ]
+        label: 'Massive PE (High-Risk)',
+        description: 'Hypotension, cardiogenic shock, or cardiac arrest',
+        next: 'pe-massive',
+        urgency: 'critical',
       },
       {
-        id: 'submassive-pe',
-        title: 'Submassive PE (Intermediate-Risk)',
-        type: 'decision',
-        content: 'Normotensive but with RV dysfunction (echo/CT) or elevated cardiac biomarkers (troponin, BNP). Risk of deterioration. {{ref:1}} {{ref:3}}',
-        metadata: {
-          priority: 'high',
-          icd10: ['I26.09', 'I26.99'],
-          tags: ['RV Dysfunction']
-        },
-        children: [
-          {
-            id: 'submassive-intermediate-high',
-            title: 'Intermediate-High Risk',
-            type: 'decision',
-            content: 'Both RV dysfunction AND elevated cardiac biomarkers. Consider thrombolysis if clinical signs of deterioration per {{ref:1}}.',
-            metadata: {
-              priority: 'high',
-              tags: ['Close Monitoring']
-            },
-            children: [
-              {
-                id: 'submassive-treatment',
-                title: 'Anticoagulation + Consider Thrombolysis',
-                type: 'treatment',
-                content: 'Start anticoagulation immediately (LMWH, fondaparinux, or UFH). Consider "rescue" thrombolysis if clinical deterioration per {{ref:1}} {{ref:4}}. ICU monitoring recommended.',
-                metadata: {
-                  priority: 'high',
-                  tags: ['Anticoagulation', 'ICU']
-                }
-              }
-            ]
-          },
-          {
-            id: 'submassive-intermediate-low',
-            title: 'Intermediate-Low Risk',
-            type: 'treatment',
-            content: 'Either RV dysfunction OR elevated biomarkers, but not both. Anticoagulation alone per {{ref:1}}. Hospital admission for monitoring.',
-            metadata: {
-              priority: 'medium',
-              tags: ['Anticoagulation', 'Admit']
-            }
-          }
-        ]
+        label: 'Submassive PE (Intermediate-Risk)',
+        description: 'Normotensive with RV dysfunction or elevated biomarkers',
+        next: 'pe-submassive',
+        urgency: 'urgent',
       },
       {
-        id: 'low-risk-pe',
-        title: 'Low-Risk PE',
-        type: 'success',
-        content: 'No RV dysfunction on imaging, normal cardiac biomarkers, no hypotension. PESI Class I-II or sPESI = 0. {{ref:1}}',
-        metadata: {
-          priority: 'low',
-          icd10: ['I26.99'],
-          tags: ['Outpatient', 'Low Risk']
-        },
-        children: [
-          {
-            id: 'outpatient-eligible',
-            title: 'Outpatient Treatment Eligible?',
-            type: 'decision',
-            content: 'Assess for outpatient treatment if: good social support, no comorbidities, no hypoxia requiring O2, able to take oral medications, reliable follow-up per {{ref:1}} {{ref:4}}.',
-            children: [
-              {
-                id: 'outpatient-therapy',
-                title: 'Outpatient Anticoagulation',
-                type: 'treatment',
-                content: 'DOACs preferred: apixaban 10mg BID x 7 days then 5mg BID, OR rivaroxaban 15mg BID x 21 days then 20mg daily per {{ref:1}} {{ref:4}}. Early follow-up within 3-7 days.',
-                metadata: {
-                  priority: 'low',
-                  tags: ['DOAC', 'Outpatient']
-                }
-              },
-              {
-                id: 'inpatient-low-risk',
-                title: 'Brief Inpatient Stay',
-                type: 'treatment',
-                content: 'If any concerns for outpatient management, admit for 24-48h observation with initiation of anticoagulation per {{ref:1}}.',
-                metadata: {
-                  priority: 'medium',
-                  tags: ['Short Stay']
-                }
-              }
-            ]
-          }
-        ]
+        label: 'Low-Risk PE',
+        description: 'Normal hemodynamics, no RV dysfunction, normal biomarkers',
+        next: 'pe-low-risk',
       },
-      {
-        id: 'anticoagulation-selection',
-        title: 'Anticoagulation Selection',
-        type: 'decision',
-        content: 'Choice of anticoagulation depends on renal function, bleeding risk, patient preference, and cost per {{ref:4}}.',
-        children: [
-          {
-            id: 'doac-regimen',
-            title: 'DOAC Regimens (Preferred)',
-            type: 'treatment',
-            content: 'Apixaban 10mg BID x 7d then 5mg BID; OR Rivaroxaban 15mg BID x 21d then 20mg daily with food; OR Edoxaban 60mg daily after 5-10 days of parenteral therapy per {{ref:4}}.',
-            metadata: {
-              tags: ['DOAC', 'Oral']
-            }
-          },
-          {
-            id: 'lmwh-warfarin',
-            title: 'LMWH Bridging to Warfarin',
-            type: 'treatment',
-            content: 'Enoxaparin 1mg/kg SC BID (or 1.5mg/kg daily) with warfarin overlap until INR 2.0-3.0 x 24h. Continue warfarin for minimum 3 months per {{ref:4}}.',
-            metadata: {
-              tags: ['LMWH', 'Warfarin']
-            }
-          },
-          {
-            id: 'hepatic-renal-impairment',
-            title: 'Renal or Hepatic Impairment',
-            type: 'treatment',
-            content: 'UFH preferred in renal impairment (CrCl <30) or severe hepatic disease. Adjust LMWH dose for CrCl 15-30 per {{ref:4}} {{ref:5}}.',
-            metadata: {
-              priority: 'high',
-              tags: ['Dose Adjustment']
-            }
-          }
-        ]
-      }
-    ]
-  }
-};
+    ],
+  },
 
-export default peTreatmentConsult;
+  // =====================================================================
+  // MODULE 2: MASSIVE PE (HIGH-RISK)
+  // =====================================================================
+
+  {
+    id: 'pe-massive',
+    type: 'info',
+    module: 2,
+    title: 'Massive PE — High-Risk',
+    body: 'Sustained hypotension (SBP <90 mmHg or drop ≥40 mmHg for >15 min), cardiogenic shock, or cardiac arrest.\n\n**Mortality >15%** without immediate treatment.\n\n**ICD-10:** I26.02 (saddle embolus with acute cor pulmonale), I26.09, I26.90',
+    citation: [1, 3],
+    next: 'pe-massive-tx',
+  },
+
+  {
+    id: 'pe-massive-tx',
+    type: 'info',
+    module: 2,
+    title: 'Immediate Interventions',
+    body: '**1. Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) 80 units/kg bolus → 18 units/kg/hr infusion\n• Preferred over LMWH if thrombolysis anticipated\n\n**2. Systemic thrombolysis** (if no contraindications):\n• [Alteplase](#/drug/alteplase/pulmonary) 100 mg IV over 2 hours\n• OR accelerated regimen: 0.6 mg/kg (max 50 mg) over 15 min in cardiac arrest\n\n**3. If thrombolysis contraindicated:**\n• Catheter-directed therapy (CDT)\n• Surgical embolectomy\n• Consider ECMO as bridge in refractory shock\n\n**Volume resuscitation:** Cautious — >500 mL can worsen RV failure. Use vasopressors (norepinephrine preferred) for hemodynamic support.',
+    citation: [1, 3],
+    next: 'pe-anticoag-selection',
+  },
+
+  // =====================================================================
+  // MODULE 3: SUBMASSIVE PE (INTERMEDIATE-RISK)
+  // =====================================================================
+
+  {
+    id: 'pe-submassive',
+    type: 'question',
+    module: 3,
+    title: 'Submassive PE — Intermediate-Risk',
+    body: 'Normotensive but with evidence of RV strain or myocardial injury.\n\nAssess for **both**:\n• **RV dysfunction** — echo (RV/LV ratio >0.9, McConnell sign, TAPSE <16mm) or CT (RV/LV ≥0.9)\n• **Elevated biomarkers** — troponin AND/OR BNP/NT-proBNP',
+    citation: [1, 3],
+    options: [
+      {
+        label: 'Intermediate-High Risk',
+        description: 'BOTH RV dysfunction AND elevated biomarkers',
+        next: 'pe-submassive-high',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Intermediate-Low Risk',
+        description: 'Either RV dysfunction OR elevated biomarkers (not both)',
+        next: 'pe-submassive-low',
+      },
+    ],
+  },
+
+  {
+    id: 'pe-submassive-high',
+    type: 'info',
+    module: 3,
+    title: 'Intermediate-High Risk Management',
+    body: '**Anticoagulation** — start immediately:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h, OR\n• [UFH](#/drug/ufh/pe) if considering escalation to thrombolysis, OR\n• [Fondaparinux](#/drug/fondaparinux/pe) 5–10 mg SC daily (weight-based)\n\n**ICU monitoring recommended.** Watch closely for clinical deterioration.\n\n**Rescue thrombolysis** if hemodynamic decompensation:\n• [Alteplase](#/drug/alteplase/pulmonary) 100 mg IV over 2h\n• Half-dose alteplase (50 mg) may reduce bleeding risk — emerging evidence\n\n**Consider catheter-directed therapy** if thrombolysis contraindicated but patient deteriorating.',
+    citation: [1, 4],
+    next: 'pe-anticoag-selection',
+  },
+
+  {
+    id: 'pe-submassive-low',
+    type: 'info',
+    module: 3,
+    title: 'Intermediate-Low Risk Management',
+    body: 'Either RV dysfunction OR elevated biomarkers, but **not both**.\n\n**Anticoagulation alone** — thrombolysis not indicated:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h, OR\n• [UFH](#/drug/ufh/pe) if CrCl <30 or concern for rapid escalation\n\n**Hospital admission** for monitoring (typically step-down unit).\n\nReassess if clinical deterioration → escalate to intermediate-high risk pathway.',
+    citation: [1],
+    next: 'pe-anticoag-selection',
+  },
+
+  // =====================================================================
+  // MODULE 4: LOW-RISK PE
+  // =====================================================================
+
+  {
+    id: 'pe-low-risk',
+    type: 'info',
+    module: 4,
+    title: 'Low-Risk PE',
+    body: 'No RV dysfunction on imaging, normal cardiac biomarkers, no hypotension.\n\n**PESI Class I–II** or **sPESI = 0**.\n\nUse [PESI](#/calculator/pesi) or [sPESI](#/calculator/spesi) to confirm low-risk classification.',
+    citation: [1],
+    calculatorLinks: [
+      { id: 'pesi', label: 'PESI Score' },
+      { id: 'spesi', label: 'sPESI Score' },
+    ],
+    next: 'pe-outpatient-check',
+  },
+
+  {
+    id: 'pe-outpatient-check',
+    type: 'question',
+    module: 4,
+    title: 'Outpatient Treatment Eligible?',
+    body: 'Assess for **outpatient management** (Hestia criteria or institutional protocol):\n\n• Hemodynamically stable\n• No need for supplemental O₂\n• No active bleeding or high bleeding risk\n• No severe renal impairment (CrCl >30)\n• No severe pain requiring IV analgesics\n• Good social support and reliable follow-up\n• Able to take oral medications\n• No pregnancy',
+    citation: [1, 4],
+    options: [
+      {
+        label: 'Yes — Outpatient eligible',
+        description: 'Meets all outpatient criteria',
+        next: 'pe-outpatient-tx',
+      },
+      {
+        label: 'No — Brief inpatient stay',
+        description: 'Any concern for outpatient safety',
+        next: 'pe-inpatient-low',
+      },
+    ],
+  },
+
+  {
+    id: 'pe-outpatient-tx',
+    type: 'info',
+    module: 4,
+    title: 'Outpatient Anticoagulation',
+    body: '**DOACs preferred** (no parenteral bridge needed):\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily with food\n\n**Follow-up:** Within 3–7 days with primary care or hematology.\n\n**Patient education:**\n• Return for worsening dyspnea, chest pain, hemoptysis, syncope\n• Adherence to anticoagulation is critical\n• Minimum 3 months of therapy; reassess for extended treatment',
+    citation: [1, 4],
+    next: 'pe-anticoag-selection',
+  },
+
+  {
+    id: 'pe-inpatient-low',
+    type: 'info',
+    module: 4,
+    title: 'Brief Inpatient Stay',
+    body: 'Admit for **24–48h observation** with initiation of anticoagulation.\n\nStart oral DOAC therapy:\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID, OR\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily\n\nTransition to outpatient when clinically stable and oral intake confirmed.',
+    citation: [1],
+    next: 'pe-anticoag-selection',
+  },
+
+  // =====================================================================
+  // MODULE 5: ANTICOAGULATION SELECTION
+  // =====================================================================
+
+  {
+    id: 'pe-anticoag-selection',
+    type: 'question',
+    module: 5,
+    title: 'Anticoagulation Selection',
+    body: 'Choice depends on renal function, bleeding risk, patient preference, and cost.\n\n**Key decision points:**\n• CrCl <30 mL/min → UFH preferred\n• Cancer-associated VTE → DOAC (apixaban/rivaroxaban) or LMWH\n• Pregnancy → LMWH only (DOACs contraindicated)\n• HIT → argatroban or fondaparinux',
+    citation: [4],
+    options: [
+      {
+        label: 'DOAC (Preferred)',
+        description: 'Apixaban, rivaroxaban, edoxaban, dabigatran',
+        next: 'pe-doac',
+      },
+      {
+        label: 'LMWH → Warfarin',
+        description: 'Enoxaparin bridge to warfarin (INR target 2–3)',
+        next: 'pe-lmwh-warfarin',
+      },
+      {
+        label: 'Renal/Hepatic Impairment',
+        description: 'CrCl <30 or severe hepatic disease',
+        next: 'pe-renal-hepatic',
+      },
+    ],
+  },
+
+  {
+    id: 'pe-doac',
+    type: 'info',
+    module: 5,
+    title: 'DOAC Regimens (Preferred)',
+    body: '**Single-drug approach (no parenteral lead-in):**\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily (with food)\n\n**Parenteral lead-in required (5–10 days LMWH/UFH first):**\n• [Edoxaban](#/drug/edoxaban/pe) 60 mg daily (30 mg if CrCl 15–50, weight ≤60 kg, or P-gp inhibitor)\n• [Dabigatran](#/drug/dabigatran/pe) 150 mg BID\n\n**Duration:** Minimum 3 months. Extended treatment for unprovoked PE, recurrent VTE, or persistent risk factors.',
+    citation: [4],
+  },
+
+  {
+    id: 'pe-lmwh-warfarin',
+    type: 'info',
+    module: 5,
+    title: 'LMWH Bridge to Warfarin',
+    body: '• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h (or 1.5 mg/kg daily)\n• Start warfarin on day 1 — overlap until INR 2.0–3.0 for ≥24 hours\n• Discontinue LMWH after INR therapeutic × 2 consecutive days\n• Target INR: 2.0–3.0\n\n**Duration:** Minimum 3 months. Extended for unprovoked or recurrent VTE.\n\n**Monitoring:** INR weekly until stable, then monthly.',
+    citation: [4],
+  },
+
+  {
+    id: 'pe-renal-hepatic',
+    type: 'info',
+    module: 5,
+    title: 'Renal or Hepatic Impairment',
+    body: '**CrCl <30 mL/min:**\n• [UFH](#/drug/ufh/pe) preferred — renally independent clearance\n• Adjust LMWH dose for CrCl 15–30 (enoxaparin 1 mg/kg SC daily)\n• Apixaban may be used cautiously (least renal elimination of DOACs)\n\n**Severe hepatic disease (Child-Pugh C):**\n• UFH preferred\n• DOACs contraindicated in severe hepatic impairment\n\n**HIT (heparin-induced thrombocytopenia):**\n• Discontinue ALL heparin products immediately\n• [Fondaparinux](#/drug/fondaparinux/pe) or argatroban as alternatives\n• Bridge to warfarin only after platelet recovery (>150k)',
+    citation: [4, 5],
+  },
+];
+
+export const PE_TREATMENT_NODE_COUNT = PE_TREATMENT_NODES.length;
+
+// -------------------------------------------------------------------
+// Module Labels (for progress indicator)
+// -------------------------------------------------------------------
+
+export const PE_TREATMENT_MODULE_LABELS = [
+  'Risk Stratification',
+  'Massive PE',
+  'Submassive PE',
+  'Low-Risk PE',
+  'Anticoagulation Selection',
+];
+
+// -------------------------------------------------------------------
+// Evidence Citations
+// -------------------------------------------------------------------
+
+export const PE_TREATMENT_CITATIONS: Citation[] = [
+  { num: 1, text: 'Konstantinides SV, Meyer G, Becattini C, et al. 2019 ESC Guidelines for the Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603. https://academic.oup.com/eurheartj/article/41/4/543/5556506' },
+  { num: 2, text: 'Torbicki A, Perrier A, Konstantinides S, et al. Guidelines on the Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2008;29(18):2276-315.' },
+  { num: 3, text: 'Jaff MR, McMurtry MS, Archer SL, et al. Management of Massive and Submassive Pulmonary Embolism. Circulation. 2011;123(16):1788-830.' },
+  { num: 4, text: 'Stevens SM, Woller SC, Kreuziger LB, et al. Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline. CHEST. 2021;160(6):e545-e608.' },
+  { num: 5, text: 'Warkentin TE, Greinacher A, Gruel Y, et al. Heparin-Induced Thrombocytopenia in the Cardiovascular Patient. Circulation. 2021;144(5):e1-e22.' },
+];

@@ -1,244 +1,210 @@
-/**
- * Pneumothorax POCUS Consult Tree
- * Based on ACEP Ultrasound Guidelines and WINFOCUS recommendations
- */
-export const pneumothoraxConsult = {
-    id: 'pneumothorax-pocus',
-    title: 'Pneumothorax Evaluation with POCUS',
-    description: 'Point-of-care ultrasound for diagnosis and management of pneumothorax',
-    category: 'Emergency Medicine / Critical Care Ultrasound',
-    version: '1.0.0',
-    lastUpdated: '2025-02-26',
-    metadata: {
-        author: 'MedKitt Clinical Team',
-        reviewStatus: 'approved',
-        audience: ['Emergency Medicine', 'Critical Care', 'Trauma Surgery'],
-        estimatedTime: 8
-    },
-    references: [
-        {
-            id: 1,
-            title: 'Clinical Policy: Critical Issues in the Evaluation and Management of Adult Patients Presenting to the Emergency Department with Suspected Pneumothorax',
-            authors: 'American College of Emergency Physicians',
-            source: 'Annals of Emergency Medicine',
-            year: 2019,
-            volume: '74(4)',
-            pages: 'e41-e46',
-            doi: '10.1016/j.annemergmed.2019.07.015',
-            url: 'https://www.acep.org/patient-care/clinical-policies/',
-            accessedDate: '2025-02-26',
-            shortCitation: 'ACEP 2019'
-        },
-        {
-            id: 2,
-            title: 'International Evidence-Based Recommendations for Point-of-Care Lung Ultrasound',
-            authors: 'Volpicelli G, Elbarbary M, Blaivas M, et al.',
-            source: 'Intensive Care Medicine',
-            year: 2012,
-            volume: '38(4)',
-            pages: '577-91',
-            doi: '10.1007/s00134-012-2513-4',
-            shortCitation: 'Volpicelli et al. 2012'
-        },
-        {
-            id: 3,
-            title: 'Bedside Lung Ultrasound in the Critically Ill (BLUE) Protocol',
-            authors: 'Lichtenstein DA, Mezière GA',
-            source: 'Chest',
-            year: 2008,
-            volume: '134(1)',
-            pages: '117-25',
-            doi: '10.1378/chest.07-2800',
-            shortCitation: 'Lichtenstein & Mezière 2008'
-        },
-        {
-            id: 4,
-            title: 'Accuracy of Transthoracic Sonography in Detection of Pneumothorax After Sonographically Guided Lung Biopsy',
-            authors: 'Sistrom CL, Reiheld CT, Gay SB, et al.',
-            source: 'Journal of Ultrasound in Medicine',
-            year: 2004,
-            volume: '23(4)',
-            pages: '495-503',
-            doi: '10.7863/jum.2004.23.4.495',
-            shortCitation: 'Sistrom et al. 2004'
-        },
-        {
-            id: 5,
-            title: 'EFSUMB Guidelines and Recommendations on the Clinical Use of Lung Ultrasound',
-            authors: 'Dietrich CF, Mathis G, Blaivas M, et al.',
-            source: 'Ultraschall in der Medizin',
-            year: 2012,
-            volume: '33(1)',
-            pages: '32-9',
-            doi: '10.1055/s-0031-1286386',
-            shortCitation: 'EFSUMB 2012'
-        }
-    ],
-    root: {
-        id: 'pocus-indication',
-        title: 'POCUS for Pneumothorax',
+// MedKitt — Pneumothorax POCUS Consult
+// Technique → Lung Sliding → A' Profile → Lung Point → Management
+// 4 modules: POCUS Technique → Findings Interpretation → Pneumothorax Confirmation → Management
+// 13 nodes total.
+export const PNEUMOTHORAX_NODES = [
+    // =====================================================================
+    // MODULE 1: POCUS INDICATION & TECHNIQUE
+    // =====================================================================
+    {
+        id: 'pneumothorax-start',
         type: 'info',
-        content: 'Point-of-care ultrasound (POCUS) is highly sensitive and specific for pneumothorax detection, especially in supine trauma patients. It can detect as little as 20-50mL of air. {{ref:1}} {{ref:2}}',
-        metadata: {
-            priority: 'high',
-            tags: ['POCUS', 'Ultrasound']
-        },
-        children: [
+        module: 1,
+        title: 'POCUS for Pneumothorax',
+        body: 'Point-of-care ultrasound (POCUS) is highly sensitive and specific for pneumothorax detection, especially in supine trauma patients. Can detect as little as **20-50 mL of air**.\n\n**Indications:**\n• Chest trauma\n• Sudden dyspnea\n• Pleuritic chest pain\n• Decreased breath sounds\n• Subcutaneous emphysema\n• Post-procedure evaluation',
+        citation: [1, 2],
+        next: 'pocus-technique',
+    },
+    {
+        id: 'pocus-technique',
+        type: 'info',
+        module: 1,
+        title: 'POCUS Technique',
+        body: '**Probe:** High-frequency linear probe\n\n**Position:** Scan anterior chest at **2nd-4th intercostal spaces**, mid-clavicular line\n\n**Steps:**\n1. Compare bilateral lung sliding\n2. Use **M-mode** to confirm findings\n3. Look for lung point if no sliding\n\n**Tip:** In trauma, this is part of the **eFAST** exam. Supine position — air rises anteriorly.',
+        citation: [2, 3],
+        next: 'lung-sliding-assessment',
+    },
+    // =====================================================================
+    // MODULE 2: FINDINGS INTERPRETATION
+    // =====================================================================
+    {
+        id: 'lung-sliding-assessment',
+        type: 'question',
+        module: 2,
+        title: 'Lung Sliding Present?',
+        body: 'Assess for **lung sliding** — the shimmering movement of the visceral pleura against the parietal pleura during respiration.\n\nAlso look for:\n• **Comet tail artifacts** (B-lines)\n• **Seashore sign** on M-mode (normal)\n• **Barcode/stratosphere sign** on M-mode (abnormal)',
+        citation: [2, 3],
+        options: [
             {
-                id: 'clinical-suspicion',
-                title: 'Clinical Suspicion Present?',
-                type: 'decision',
-                content: 'Consider POCUS for: chest trauma, sudden dyspnea, pleuritic chest pain, decreased breath sounds, subcutaneous emphysema, or post-procedure evaluation. {{ref:1}} {{ref:3}}',
-                children: [
-                    {
-                        id: 'pocus-technique',
-                        title: 'POCUS Technique',
-                        type: 'diagnostic',
-                        content: 'Use high-frequency linear probe. Scan anterior chest at 2nd-4th intercostal spaces, mid-clavicular line. Compare bilateral lung sliding. Look for lung point if positive. {{ref:2}} {{ref:3}}',
-                        metadata: {
-                            tags: ['Technique', 'Probe']
-                        },
-                        children: [
-                            {
-                                id: 'normal-findings',
-                                title: 'Normal: Lung Sliding Present',
-                                type: 'success',
-                                content: 'Comet tail artifacts, lung sliding, and B-lines exclude pneumothorax at the scanned locations with high negative predictive value (>99%). {{ref:2}} {{ref:4}}',
-                                metadata: {
-                                    tags: ['Normal', 'NPV >99%']
-                                }
-                            },
-                            {
-                                id: 'stratosphere-sign',
-                                title: 'Abnormal: Stratosphere/M-Mode Sign',
-                                type: 'diagnostic',
-                                content: 'Absent lung sliding with stratosphere sign on M-mode (barcode sign) suggests pneumothorax. Check multiple rib spaces. {{ref:2}} {{ref:3}}',
-                                children: [
-                                    {
-                                        id: 'lung-point',
-                                        title: 'Lung Point Identified?',
-                                        type: 'decision',
-                                        content: 'The "lung point" is pathognomonic for pneumothorax - where lung sliding appears and disappears with respiration. Indicates edge of collapsed lung. {{ref:2}} {{ref:3}}',
-                                        children: [
-                                            {
-                                                id: 'confirmed-ptx',
-                                                title: 'Pneumothorax Confirmed',
-                                                type: 'warning',
-                                                content: 'POCUS has 100% specificity when lung point is identified. Size estimation: anterior chest only = small, extends to mid-axillary line = moderate, extends posteriorly = large. {{ref:2}} {{ref:4}}',
-                                                metadata: {
-                                                    priority: 'high',
-                                                    icd10: ['J93.0', 'J93.1', 'S27.0'],
-                                                    tags: ['Confirmed', 'Specificity 100%']
-                                                },
-                                                children: [
-                                                    {
-                                                        id: 'tension-signs',
-                                                        title: 'Signs of Tension?',
-                                                        type: 'decision',
-                                                        content: 'Tension pneumothorax: hypotension, tracheal deviation, distended neck veins, severe respiratory distress. DO NOT wait for imaging. {{ref:1}}',
-                                                        metadata: {
-                                                            priority: 'critical',
-                                                            tags: ['Tension', 'Emergency']
-                                                        },
-                                                        children: [
-                                                            {
-                                                                id: 'needle-decompression',
-                                                                title: 'Immediate Needle Decompression',
-                                                                type: 'treatment',
-                                                                content: '14-gauge angiocath, 2nd intercostal space, mid-clavicular line (or 4th-5th ICS anterior axillary line). Follow with chest tube placement per {{ref:1}}.',
-                                                                metadata: {
-                                                                    priority: 'critical',
-                                                                    tags: ['Decompression', 'STAT']
-                                                                }
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        id: 'stable-ptx',
-                                                        title: 'Stable Patient - Assess Size',
-                                                        type: 'decision',
-                                                        content: 'CXR or CT to assess size if patient stable. POCUS can estimate size based on lung point location. {{ref:1}} {{ref:5}}',
-                                                        children: [
-                                                            {
-                                                                id: 'small-ptx',
-                                                                title: 'Small Pneumothorax (<3cm apex)',
-                                                                type: 'treatment',
-                                                                content: 'Observation with high-flow O2 (if not COPD) and repeat imaging in 6 hours. May admit for observation per {{ref:1}}.',
-                                                                metadata: {
-                                                                    priority: 'medium',
-                                                                    tags: ['Observation', 'O2']
-                                                                }
-                                                            },
-                                                            {
-                                                                id: 'large-ptx',
-                                                                title: 'Large Pneumothorax (≥3cm or symptomatic)',
-                                                                type: 'treatment',
-                                                                content: 'Chest tube placement. Simple aspiration may be considered for primary spontaneous pneumothorax in select patients per {{ref:1}}.',
-                                                                metadata: {
-                                                                    priority: 'high',
-                                                                    tags: ['Chest Tube']
-                                                                }
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                id: 'no-lung-point',
-                                                title: 'No Lung Point - Massive PTX?',
-                                                type: 'decision',
-                                                content: 'If absent lung sliding throughout entire chest without lung point, may indicate massive pneumothorax with complete lung collapse. {{ref:2}} {{ref:3}}',
-                                                children: [
-                                                    {
-                                                        id: 'confirm-with-cxr',
-                                                        title: 'Confirm with CXR',
-                                                        type: 'diagnostic',
-                                                        content: 'While POCUS is highly sensitive, chest X-ray can help confirm and assess for mediastinal shift. Consider CT if persistent concern. {{ref:1}}',
-                                                        metadata: {
-                                                            tags: ['Confirmatory']
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        id: 'trauma-specific',
-                        title: 'Trauma Patient - eFAST Protocol',
-                        type: 'info',
-                        content: 'In trauma, pneumothorax evaluation is part of the eFAST exam. Extended FAST includes lung sliding assessment. Supine position - air rises anteriorly. {{ref:2}} {{ref:5}}',
-                        metadata: {
-                            priority: 'high',
-                            tags: ['eFAST', 'Trauma']
-                        },
-                        children: [
-                            {
-                                id: 'occult-ptx',
-                                title: 'Occult Pneumothorax',
-                                type: 'info',
-                                content: 'POCUS detects pneumothorax missed on supine CXR in trauma (occult PTX). Up to 50% of pneumothoraces are occult on initial CXR but visible on CT. {{ref:1}} {{ref:4}}',
-                                children: [
-                                    {
-                                        id: 'occult-management',
-                                        title: 'Occult PTX Management',
-                                        type: 'treatment',
-                                        content: 'Observation may be appropriate for small, occult pneumothoraces in stable patients. Consider chest tube if positive pressure ventilation planned or enlarging per {{ref:1}}.',
-                                        metadata: {
-                                            priority: 'medium',
-                                            tags: ['Occult', 'Observation']
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-};
-export default pneumothoraxConsult;
+                label: 'Lung Sliding Present',
+                description: 'Normal sliding, comet tails, or seashore sign on M-mode',
+                next: 'normal-findings',
+            },
+            {
+                label: 'Absent Lung Sliding',
+                description: 'No sliding, barcode/stratosphere sign on M-mode',
+                next: 'stratosphere-sign',
+            },
+            {
+                label: 'Trauma Patient — eFAST',
+                description: 'Evaluate as part of extended FAST exam',
+                next: 'trauma-efast',
+            },
+        ],
+    },
+    {
+        id: 'normal-findings',
+        type: 'result',
+        module: 2,
+        title: 'Normal: Pneumothorax Excluded',
+        body: '**Lung sliding, comet tails, and B-lines exclude pneumothorax** at the scanned locations.\n\n**Negative predictive value >99%**\n\nIf clinical suspicion persists despite normal POCUS:\n• Scan additional rib spaces\n• Consider CT chest\n• Repeat imaging if symptoms change',
+        citation: [2, 4],
+        confidence: 'strong',
+    },
+    // =====================================================================
+    // MODULE 3: PNEUMOTHORAX CONFIRMATION
+    // =====================================================================
+    {
+        id: 'stratosphere-sign',
+        type: 'info',
+        module: 3,
+        title: 'Abnormal: Stratosphere Sign',
+        body: 'Absent lung sliding with **stratosphere sign** on M-mode (barcode sign) suggests pneumothorax.\n\n**Important:** Absent sliding alone is not diagnostic — can also be seen in:\n• Mainstem intubation\n• Pleural adhesions\n• Apnea\n• Severe ARDS\n\nCheck **multiple rib spaces** and look for the **lung point**.',
+        citation: [2, 3],
+        next: 'lung-point',
+    },
+    {
+        id: 'lung-point',
+        type: 'question',
+        module: 3,
+        title: 'Lung Point Identified?',
+        body: 'The **lung point** is **pathognomonic** for pneumothorax — where lung sliding appears and disappears with respiration at the border of the collapsed lung.\n\n**Specificity: 100%**\n\nSlide the probe laterally from the area of absent sliding until you see intermittent sliding.',
+        citation: [2, 3],
+        options: [
+            {
+                label: 'Lung Point Found',
+                description: 'Intermittent sliding at border — PTX confirmed',
+                next: 'confirmed-ptx',
+                urgency: 'urgent',
+            },
+            {
+                label: 'No Lung Point Found',
+                description: 'Absent sliding throughout entire hemithorax',
+                next: 'no-lung-point',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'confirmed-ptx',
+        type: 'info',
+        module: 3,
+        title: 'Pneumothorax Confirmed',
+        body: '**POCUS confirmed pneumothorax** (lung point = 100% specificity).\n\n**Size estimation by lung point location:**\n• Anterior chest only → **Small**\n• Extends to mid-axillary line → **Moderate**\n• Extends posteriorly → **Large**',
+        citation: [2, 4],
+        next: 'tension-assessment',
+    },
+    {
+        id: 'no-lung-point',
+        type: 'info',
+        module: 3,
+        title: 'No Lung Point — Massive PTX?',
+        body: 'If absent lung sliding throughout the **entire hemithorax** without a lung point, suspect **massive pneumothorax** with complete lung collapse.\n\n**Confirm with CXR** — assess for mediastinal shift.\n\nIf hemodynamically unstable → treat as tension pneumothorax.',
+        citation: [2, 3],
+        next: 'tension-assessment',
+    },
+    // =====================================================================
+    // MODULE 4: MANAGEMENT
+    // =====================================================================
+    {
+        id: 'tension-assessment',
+        type: 'question',
+        module: 4,
+        title: 'Signs of Tension?',
+        body: '**Assess for tension pneumothorax:**\n• Hypotension\n• Tracheal deviation\n• Distended neck veins\n• Severe respiratory distress\n\n**DO NOT wait for imaging if tension suspected.**',
+        citation: [1],
+        options: [
+            {
+                label: 'Tension Signs Present',
+                description: 'Hemodynamic compromise — immediate intervention',
+                next: 'needle-decompression',
+                urgency: 'critical',
+            },
+            {
+                label: 'Stable Patient',
+                description: 'No signs of tension — assess size',
+                next: 'stable-ptx-management',
+            },
+        ],
+    },
+    {
+        id: 'needle-decompression',
+        type: 'result',
+        module: 4,
+        title: 'Immediate Needle Decompression',
+        body: '**Needle decompression STAT:**\n• **14-gauge angiocath**\n• **2nd ICS, mid-clavicular line**\n• OR **4th-5th ICS, anterior axillary line**\n\n**Follow with chest tube placement.**\n\nSee [Chest Tube / Pneumothorax Management](#/tree/chest-tube) for tube thoracostomy procedure.',
+        citation: [1],
+        confidence: 'strong',
+    },
+    {
+        id: 'stable-ptx-management',
+        type: 'question',
+        module: 4,
+        title: 'Stable Patient — Size Assessment',
+        body: 'Obtain **CXR or CT** to assess pneumothorax size.\n\nPOCUS lung point location provides initial size estimate.',
+        citation: [1, 5],
+        options: [
+            {
+                label: 'Small PTX (<3cm at apex)',
+                description: 'Observation with supplemental O2',
+                next: 'small-ptx',
+            },
+            {
+                label: 'Large PTX (≥3cm or symptomatic)',
+                description: 'Chest tube or aspiration',
+                next: 'large-ptx',
+            },
+        ],
+    },
+    {
+        id: 'small-ptx',
+        type: 'result',
+        module: 4,
+        title: 'Small Pneumothorax — Observation',
+        body: '**Observation with high-flow O2** (if not COPD):\n• Repeat imaging in **6 hours**\n• Admit for observation\n• Supplemental O2 increases reabsorption rate (~2%/day → ~4%/day)\n\n**Discharge criteria:**\n• Stable or improving on repeat imaging\n• No respiratory distress\n• Reliable follow-up available',
+        citation: [1],
+        confidence: 'moderate',
+    },
+    {
+        id: 'large-ptx',
+        type: 'result',
+        module: 4,
+        title: 'Large Pneumothorax — Intervention',
+        body: '**Chest tube placement** indicated.\n\nSimple aspiration may be considered for **primary spontaneous pneumothorax** in select patients.\n\nSee [Chest Tube / Pneumothorax Management](#/tree/chest-tube) for:\n• Tube thoracostomy procedure\n• Insertion technique\n• Post-placement management',
+        citation: [1],
+        confidence: 'strong',
+    },
+    // Trauma-specific eFAST branch
+    {
+        id: 'trauma-efast',
+        type: 'info',
+        module: 2,
+        title: 'Trauma — eFAST Protocol',
+        body: 'In trauma, pneumothorax evaluation is part of the **eFAST exam**.\n\n**Key points:**\n• Supine position — air rises **anteriorly**\n• Up to **50% of pneumothoraces** are occult on initial CXR but visible on CT\n• POCUS detects occult PTX missed on supine CXR\n\n**Occult PTX management:**\n• Observation appropriate for small, stable occult PTX\n• Consider chest tube if **positive pressure ventilation** planned or PTX enlarging',
+        citation: [1, 4, 5],
+        next: 'lung-sliding-assessment',
+    },
+];
+export const PNEUMOTHORAX_MODULE_LABELS = [
+    'POCUS Technique',
+    'Findings Interpretation',
+    'PTX Confirmation',
+    'Management',
+];
+export const PNEUMOTHORAX_CITATIONS = [
+    { num: 1, text: 'American College of Emergency Physicians. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Patients Presenting to the Emergency Department with Suspected Pneumothorax. Ann Emerg Med. 2019;74(4):e41-e46. https://doi.org/10.1016/j.annemergmed.2019.07.015' },
+    { num: 2, text: 'Volpicelli G, Elbarbary M, Blaivas M, et al. International Evidence-Based Recommendations for Point-of-Care Lung Ultrasound. Intensive Care Med. 2012;38(4):577-91. https://doi.org/10.1007/s00134-012-2513-4' },
+    { num: 3, text: 'Lichtenstein DA, Mezière GA. Bedside Lung Ultrasound in the Critically Ill (BLUE) Protocol. Chest. 2008;134(1):117-25. https://doi.org/10.1378/chest.07-2800' },
+    { num: 4, text: 'Sistrom CL, Reiheld CT, Gay SB, et al. Accuracy of Transthoracic Sonography in Detection of Pneumothorax After Sonographically Guided Lung Biopsy. J Ultrasound Med. 2004;23(4):495-503. https://doi.org/10.7863/jum.2004.23.4.495' },
+    { num: 5, text: 'Dietrich CF, Mathis G, Blaivas M, et al. EFSUMB Guidelines and Recommendations on the Clinical Use of Lung Ultrasound. Ultraschall Med. 2012;33(1):32-9. https://doi.org/10.1055/s-0031-1286386' },
+];

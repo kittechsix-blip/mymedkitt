@@ -96,10 +96,15 @@ async function fetchFromSupabase(treeId) {
 }
 /** Hardcoded fallback — dynamically import the tree file */
 async function loadHardcodedFallback(treeId) {
-    // Map tree IDs to their import paths and export names
-    // NOTE: neurosyphilis, pe-treatment, pneumothorax, echo-views use old ConsultTree format
-    // and need conversion to flat DecisionNode[] before adding fallbacks here.
     const TREE_IMPORTS = {
+        'pneumothorax': async () => {
+            const m = await import('../data/trees/pneumothorax.js');
+            return { nodes: m.PNEUMOTHORAX_NODES, entryNodeId: 'pneumothorax-start', categoryId: 'us-rads', moduleLabels: m.PNEUMOTHORAX_MODULE_LABELS, citations: m.PNEUMOTHORAX_CITATIONS };
+        },
+        'pe-treatment': async () => {
+            const m = await import('../data/trees/pe-treatment.js');
+            return { nodes: m.PE_TREATMENT_NODES, entryNodeId: 'pe-start', categoryId: 'critical-care', moduleLabels: m.PE_TREATMENT_MODULE_LABELS, citations: m.PE_TREATMENT_CITATIONS };
+        },
         'priapism': async () => {
             const m = await import('../data/trees/priapism.js');
             return { nodes: m.PRIAPISM_NODES, entryNodeId: 'priapism-start', categoryId: 'procedures', moduleLabels: m.PRIAPISM_MODULE_LABELS, citations: m.PRIAPISM_CITATIONS };
@@ -171,6 +176,10 @@ async function loadHardcodedFallback(treeId) {
         'splinting': async () => {
             const m = await import('../data/trees/splinting.js');
             return { nodes: m.SPLINTING_NODES, entryNodeId: 'splint-start', categoryId: 'orthopedics', moduleLabels: m.SPLINTING_MODULE_LABELS, citations: m.SPLINTING_CITATIONS };
+        },
+        'neurosyphilis': async () => {
+            const m = await import('../data/trees/neurosyphilis.js');
+            return { nodes: m.NEUROSYPHILIS_NODES, entryNodeId: 'ns-start', categoryId: 'infectious-disease', moduleLabels: m.NEUROSYPHILIS_MODULE_LABELS, citations: m.NEUROSYPHILIS_CITATIONS };
         },
     };
     const loader = TREE_IMPORTS[treeId];

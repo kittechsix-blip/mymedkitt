@@ -3,9 +3,9 @@
  * Export all consult trees for use in the application
  */
 
-export { neurosyphilisConsult } from './neurosyphilis';
-export { peTreatmentConsult } from './pe-treatment';
-export { pneumothoraxConsult } from './pneumothorax';
+export { NEUROSYPHILIS_NODES, NEUROSYPHILIS_MODULE_LABELS, NEUROSYPHILIS_CITATIONS } from './neurosyphilis';
+export { PE_TREATMENT_NODES, PE_TREATMENT_MODULE_LABELS, PE_TREATMENT_CITATIONS } from './pe-treatment';
+export { PNEUMOTHORAX_NODES, PNEUMOTHORAX_MODULE_LABELS, PNEUMOTHORAX_CITATIONS } from './pneumothorax';
 export { echoViewsConsult } from './echo-views';
 
 // Export type for registry
@@ -15,8 +15,7 @@ import type { ConsultTree } from '../../types/consult-tree';
  * Registry of all available consult trees
  */
 export const consultRegistry: Record<string, () => Promise<{ default: ConsultTree }>> = {
-  neurosyphilis: () => import('./neurosyphilis'),
-  'pe-treatment': () => import('./pe-treatment'),
+  // neurosyphilis and pe-treatment use new flat DecisionNode[] format — loaded via tree-service.ts
   pneumothorax: () => import('./pneumothorax'),
   'echo-views': () => import('./echo-views'),
 };
