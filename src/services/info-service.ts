@@ -61,6 +61,17 @@ async function loadHardcodedFallback(): Promise<void> {
   setCache(mod.getAllInfoPagesFallback());
 }
 
+/** Merge hardcoded info pages missing from cached data */
+async function mergeHardcodedInfoPages(): Promise<void> {
+  const mod = await import('../data/info-pages.js');
+  const hardcoded = mod.getAllInfoPagesFallback() as InfoPage[];
+  for (const page of hardcoded) {
+    if (!infoPageMap.has(page.id)) {
+      infoPageMap.set(page.id, page);
+    }
+  }
+}
+
 /**
  * Initialize info page data. Called once at app boot.
  * Loads from the fastest available source, then refreshes in background.
@@ -84,6 +95,9 @@ export async function initInfoPages(): Promise<void> {
   if (!initialized) {
     await loadHardcodedFallback();
     initialized = true;
+  } else {
+    // Merge any hardcoded info pages missing from IndexedDB/Supabase
+    await mergeHardcodedInfoPages();
   }
 
   // 3. If cache is stale (or never synced), refresh from Supabase in background

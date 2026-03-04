@@ -59,6 +59,23 @@ async function loadHardcodedFallback(): Promise<void> {
   setDrugCache(mod.getAllDrugs());
 }
 
+/** Merge hardcoded drugs missing from cached data */
+async function mergeHardcodedDrugs(): Promise<void> {
+  const mod = await import('../data/drug-store.js');
+  const hardcoded = mod.getAllDrugs() as DrugEntry[];
+  let added = false;
+  for (const drug of hardcoded) {
+    if (!drugMap.has(drug.id)) {
+      drugCache.push(drug);
+      drugMap.set(drug.id, drug);
+      added = true;
+    }
+  }
+  if (added) {
+    drugCache.sort((a, b) => a.name.localeCompare(b.name));
+  }
+}
+
 /**
  * Initialize drug data. Called once at app boot.
  * Loads from the fastest available source, then refreshes in background.
@@ -81,6 +98,9 @@ export async function initDrugs(): Promise<void> {
   if (!initialized) {
     await loadHardcodedFallback();
     initialized = true;
+  } else {
+    // Merge any hardcoded drugs missing from IndexedDB/Supabase
+    await mergeHardcodedDrugs();
   }
 
   // 3. If cache is stale (or never synced), refresh from Supabase in background
