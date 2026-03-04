@@ -172,7 +172,8 @@ function renderHeader(node) {
             if (engine)
                 engine.reset();
             visitedModules = new Set();
-            router.navigate(`/category/${currentConfig?.categoryId ?? ''}`);
+            const sourceCategory = sessionStorage.getItem('medkitt-source-category') || currentConfig?.categoryId || '';
+            router.navigate(sourceCategory ? `/category/${sourceCategory}` : '/');
         });
     }
     // "Top" button — right-aligned, hidden on entry node

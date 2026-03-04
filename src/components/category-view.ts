@@ -55,12 +55,12 @@ export function renderCategoryView(container: HTMLElement, categoryId: string): 
     renderEmptyState(container);
   } else {
     const sorted = [...category.decisionTrees].sort((a, b) => a.title.localeCompare(b.title));
-    renderTreeList(container, sorted);
+    renderTreeList(container, sorted, categoryId);
   }
 }
 
 /** Render the list of decision trees with optional search filter */
-function renderTreeList(container: HTMLElement, trees: { id: string; title: string; subtitle: string; nodeCount: number; entryNodeId: string }[]): void {
+function renderTreeList(container: HTMLElement, trees: { id: string; title: string; subtitle: string; nodeCount: number; entryNodeId: string }[], categoryId: string): void {
   // Search filter — show for 3+ consults
   if (trees.length >= 3) {
     const searchInput = document.createElement('input');
@@ -94,6 +94,7 @@ function renderTreeList(container: HTMLElement, trees: { id: string; title: stri
       if (tree.entryNodeId) {
         sessionStorage.setItem('medkitt-tree-entry', tree.entryNodeId);
       }
+      sessionStorage.setItem('medkitt-source-category', categoryId);
       router.navigate(`/tree/${tree.id}`);
     });
 

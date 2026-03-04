@@ -47,11 +47,11 @@ export function renderCategoryView(container, categoryId) {
     }
     else {
         const sorted = [...category.decisionTrees].sort((a, b) => a.title.localeCompare(b.title));
-        renderTreeList(container, sorted);
+        renderTreeList(container, sorted, categoryId);
     }
 }
 /** Render the list of decision trees with optional search filter */
-function renderTreeList(container, trees) {
+function renderTreeList(container, trees, categoryId) {
     // Search filter — show for 3+ consults
     if (trees.length >= 3) {
         const searchInput = document.createElement('input');
@@ -81,6 +81,7 @@ function renderTreeList(container, trees) {
             if (tree.entryNodeId) {
                 sessionStorage.setItem('medkitt-tree-entry', tree.entryNodeId);
             }
+            sessionStorage.setItem('medkitt-source-category', categoryId);
             router.navigate(`/tree/${tree.id}`);
         });
         const title = document.createElement('div');

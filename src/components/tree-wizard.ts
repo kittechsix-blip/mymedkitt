@@ -186,7 +186,8 @@ function renderHeader(node: DecisionNode): HTMLElement {
     backBtn.addEventListener('click', () => {
       if (engine) engine.reset();
       visitedModules = new Set();
-      router.navigate(`/category/${currentConfig?.categoryId ?? ''}`);
+      const sourceCategory = sessionStorage.getItem('medkitt-source-category') || currentConfig?.categoryId || '';
+      router.navigate(sourceCategory ? `/category/${sourceCategory}` : '/');
     });
   }
 
