@@ -16,6 +16,7 @@ export interface WizardOption {
   nextStep?: string;
   isTerminal?: boolean;
   info?: string;
+  type?: 'checkbox';
 }
 
 export interface WizardStep {
@@ -25,6 +26,8 @@ export interface WizardStep {
   subtitle?: string;
   options: WizardOption[];
   info?: string;
+  type?: 'question' | 'checklist';
+  calculatorLink?: { label: string; id: string };
 }
 
 export interface TerminalStep {
@@ -59,6 +62,9 @@ let path: PathEntry[] = [];
 let isComplete: boolean = false;
 let terminalId: string | null = null;
 let expandedInfo: string | null = null;
+let checkedItems: Set<string> = new Set();
+let calculatorModalOpen: boolean = false;
+let activeCalculatorId: string | null = null;
 
 // -------------------------------------------------------------------
 // Colors (Burnt Umber Brand)
@@ -91,6 +97,9 @@ export function renderConsultWizard(container: HTMLElement, consultData: Consult
   isComplete = false;
   terminalId = null;
   expandedInfo = null;
+  checkedItems = new Set();
+  calculatorModalOpen = false;
+  activeCalculatorId = null;
 
   render(container);
 }
@@ -106,6 +115,11 @@ function render(container: HTMLElement): void {
   } else {
     renderStepScreen(container);
   }
+
+  // Render calculator modal if open
+  if (calculatorModalOpen && activeCalculatorId) {
+    renderCalculatorModal(container);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -119,8 +133,10 @@ function renderStepScreen(container: HTMLElement): void {
   if (!currentStep) return;
 
   const stepIndex = currentConsult.steps.findIndex(s => s.id === currentStepId);
-  const progress = ((stepIndex + 1) / currentConsult.steps.length) * 100;
   const accentColor = currentConsult.accentColor || COLORS.brand;
+
+  // Build list of visited step IDs from path
+  const visitedStepIds = new Set(path.map(p => p.stepId));
 
   // Header
   const header = document.createElement('div');
@@ -139,15 +155,53 @@ function renderStepScreen(container: HTMLElement): void {
   // Back button handler
   header.querySelector('.cw-back-btn')?.addEventListener('click', handleBack);
 
-  // Progress bar
+  // Progress dots navigation
   const progressContainer = document.createElement('div');
   progressContainer.className = 'cw-progress';
-  progressContainer.innerHTML = `
-    <div class="cw-progress-track">
-      <div class="cw-progress-fill" style="width: ${progress}%; background: ${accentColor}"></div>
-    </div>
-    <span class="cw-progress-text">Step ${stepIndex + 1} of ${currentConsult.steps.length}</span>
-  `;
+
+  const dotsContainer = document.createElement('div');
+  dotsContainer.className = 'cw-progress-dots';
+
+  currentConsult.steps.forEach((step, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'cw-progress-dot';
+    dot.setAttribute('aria-label', `Step ${i + 1}: ${step.title}`);
+
+    const isVisited = visitedStepIds.has(step.id);
+    const isCurrent = step.id === currentStepId;
+
+    if (isCurrent) {
+      dot.classList.add('cw-progress-dot-current');
+      dot.style.background = accentColor;
+      dot.style.borderColor = accentColor;
+      dot.style.boxShadow = `0 0 0 3px ${accentColor}33`;
+    } else if (isVisited) {
+      dot.classList.add('cw-progress-dot-visited');
+      dot.style.background = accentColor;
+      dot.style.borderColor = accentColor;
+      dot.style.cursor = 'pointer';
+    } else {
+      dot.classList.add('cw-progress-dot-future');
+      dot.style.background = COLORS.border;
+      dot.style.borderColor = COLORS.border;
+      dot.style.cursor = 'not-allowed';
+    }
+
+    // Click handler for visited dots
+    if (isVisited) {
+      dot.addEventListener('click', () => navigateToStep(step.id, container));
+    }
+
+    dotsContainer.appendChild(dot);
+  });
+
+  progressContainer.appendChild(dotsContainer);
+
+  const progressText = document.createElement('span');
+  progressText.className = 'cw-progress-text';
+  progressText.textContent = `Step ${stepIndex + 1} of ${currentConsult.steps.length}`;
+  progressContainer.appendChild(progressText);
+
   container.appendChild(progressContainer);
 
   // Running summary (path chips)
@@ -202,7 +256,66 @@ function renderStepScreen(container: HTMLElement): void {
     render(container);
   });
 
-  // Options
+  // Calculator link button (if present)
+  if (currentStep.calculatorLink) {
+    const calcButton = document.createElement('button');
+    calcButton.className = 'cw-calculator-btn';
+    calcButton.style.borderColor = accentColor;
+    calcButton.style.color = accentColor;
+    calcButton.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${accentColor}" stroke-width="2">
+        <rect x="4" y="2" width="16" height="20" rx="2"/>
+        <line x1="8" y1="6" x2="16" y2="6"/>
+        <line x1="8" y1="10" x2="8" y2="10.01"/>
+        <line x1="12" y1="10" x2="12" y2="10.01"/>
+        <line x1="16" y1="10" x2="16" y2="10.01"/>
+        <line x1="8" y1="14" x2="8" y2="14.01"/>
+        <line x1="12" y1="14" x2="12" y2="14.01"/>
+        <line x1="16" y1="14" x2="16" y2="14.01"/>
+        <line x1="8" y1="18" x2="8" y2="18.01"/>
+        <line x1="12" y1="18" x2="12" y2="18.01"/>
+        <line x1="16" y1="18" x2="16" y2="18.01"/>
+      </svg>
+      <span>${currentStep.calculatorLink.label}</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${accentColor}" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    `;
+    calcButton.addEventListener('click', () => {
+      activeCalculatorId = currentStep.calculatorLink!.id;
+      calculatorModalOpen = true;
+      render(container);
+    });
+    content.appendChild(calcButton);
+  }
+
+  // Render based on step type
+  if (currentStep.type === 'checklist') {
+    renderChecklistOptions(content, currentStep, accentColor, container);
+  } else {
+    renderQuestionOptions(content, currentStep, accentColor, container);
+  }
+
+  container.appendChild(content);
+
+  // Footer disclaimer
+  const footer = document.createElement('div');
+  footer.className = 'cw-footer';
+  footer.innerHTML = `
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${COLORS.textMuted}" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4M12 8h.01"/>
+    </svg>
+    <span>Clinical decision support only - NOT FDA cleared</span>
+  `;
+  container.appendChild(footer);
+}
+
+// -------------------------------------------------------------------
+// Question Options (default)
+// -------------------------------------------------------------------
+
+function renderQuestionOptions(content: HTMLElement, currentStep: WizardStep, _accentColor: string, container: HTMLElement): void {
   const optionsContainer = document.createElement('div');
   optionsContainer.className = 'cw-options';
 
@@ -251,19 +364,173 @@ function renderStepScreen(container: HTMLElement): void {
   });
 
   content.appendChild(optionsContainer);
-  container.appendChild(content);
+}
 
-  // Footer disclaimer
-  const footer = document.createElement('div');
-  footer.className = 'cw-footer';
-  footer.innerHTML = `
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${COLORS.textMuted}" stroke-width="2">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M12 16v-4M12 8h.01"/>
+// -------------------------------------------------------------------
+// Checklist Options
+// -------------------------------------------------------------------
+
+function renderChecklistOptions(content: HTMLElement, currentStep: WizardStep, accentColor: string, container: HTMLElement): void {
+  const checklistContainer = document.createElement('div');
+  checklistContainer.className = 'cw-checklist';
+
+  currentStep.options.forEach(option => {
+    const itemId = `${currentStep.id}-${option.id}`;
+    const isChecked = checkedItems.has(itemId);
+
+    const item = document.createElement('label');
+    item.className = `cw-checklist-item ${isChecked ? 'cw-checklist-item-checked' : ''}`;
+    item.innerHTML = `
+      <div class="cw-checkbox ${isChecked ? 'cw-checkbox-checked' : ''}" style="${isChecked ? `background: ${COLORS.success}; border-color: ${COLORS.success}` : `border-color: ${COLORS.border}`}">
+        ${isChecked ? `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        ` : ''}
+      </div>
+      <span class="cw-checklist-label">${option.label}</span>
+      ${option.info ? `
+        <button class="cw-option-info" data-option-info="${option.id}" aria-label="More info">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${COLORS.textMuted}" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4M12 8h.01"/>
+          </svg>
+        </button>
+      ` : ''}
+    `;
+
+    item.addEventListener('click', (e) => {
+      // Don't toggle if clicking info button
+      if ((e.target as HTMLElement).closest('.cw-option-info')) return;
+
+      if (isChecked) {
+        checkedItems.delete(itemId);
+      } else {
+        checkedItems.add(itemId);
+      }
+      render(container);
+    });
+
+    checklistContainer.appendChild(item);
+
+    // Option info expansion
+    if (expandedInfo === option.id && option.info) {
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'cw-option-info-content';
+      infoDiv.innerHTML = `<p>${option.info}</p>`;
+      checklistContainer.appendChild(infoDiv);
+    }
+  });
+
+  // Option info handlers
+  checklistContainer.querySelectorAll('.cw-option-info').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const optionId = (btn as HTMLElement).dataset.optionInfo;
+      if (optionId) {
+        expandedInfo = expandedInfo === optionId ? null : optionId;
+        render(container);
+      }
+    });
+  });
+
+  content.appendChild(checklistContainer);
+
+  // Proceed button (only enabled when all items checked)
+  const allChecked = currentStep.options.every(opt => checkedItems.has(`${currentStep.id}-${opt.id}`));
+
+  const proceedBtn = document.createElement('button');
+  proceedBtn.className = `cw-proceed-btn ${allChecked ? '' : 'cw-proceed-btn-disabled'}`;
+  proceedBtn.style.background = allChecked ? accentColor : COLORS.border;
+  proceedBtn.disabled = !allChecked;
+  proceedBtn.innerHTML = `
+    <span>Proceed</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
     </svg>
-    <span>Clinical decision support only - NOT FDA cleared</span>
   `;
-  container.appendChild(footer);
+
+  if (allChecked) {
+    proceedBtn.addEventListener('click', () => {
+      // Find the first option with nextStep or isTerminal
+      const targetOption = currentStep.options.find(opt => opt.nextStep || opt.isTerminal);
+      if (targetOption) {
+        handleOptionSelect(targetOption, container);
+      }
+    });
+  }
+
+  content.appendChild(proceedBtn);
+}
+
+// -------------------------------------------------------------------
+// Calculator Modal
+// -------------------------------------------------------------------
+
+function renderCalculatorModal(container: HTMLElement): void {
+  if (!activeCalculatorId) return;
+
+  const accentColor = currentConsult?.accentColor || COLORS.brand;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'cw-modal-overlay';
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeCalculatorModal(container);
+    }
+  });
+
+  const modal = document.createElement('div');
+  modal.className = 'cw-modal';
+
+  const modalHeader = document.createElement('div');
+  modalHeader.className = 'cw-modal-header';
+  modalHeader.innerHTML = `
+    <h3 class="cw-modal-title" style="color: ${accentColor}">Calculator</h3>
+    <button class="cw-modal-close" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${COLORS.textSecondary}" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  `;
+  modal.appendChild(modalHeader);
+
+  modalHeader.querySelector('.cw-modal-close')?.addEventListener('click', () => closeCalculatorModal(container));
+
+  const modalContent = document.createElement('div');
+  modalContent.className = 'cw-modal-content';
+  modalContent.id = 'cw-calculator-container';
+
+  // Placeholder for calculator - the actual calculator will be loaded here
+  modalContent.innerHTML = `
+    <div class="cw-calculator-placeholder">
+      <p>Loading calculator: ${activeCalculatorId}</p>
+    </div>
+  `;
+
+  modal.appendChild(modalContent);
+  overlay.appendChild(modal);
+  container.appendChild(overlay);
+
+  // Dispatch custom event for external calculator loading
+  const event = new CustomEvent('medkitt-load-calculator', {
+    detail: {
+      calculatorId: activeCalculatorId,
+      containerId: 'cw-calculator-container',
+      onResult: (resultOptionId: string) => {
+        selectOptionById(resultOptionId, container);
+        closeCalculatorModal(container);
+      }
+    }
+  });
+  window.dispatchEvent(event);
+}
+
+function closeCalculatorModal(container: HTMLElement): void {
+  calculatorModalOpen = false;
+  activeCalculatorId = null;
+  render(container);
 }
 
 // -------------------------------------------------------------------
@@ -422,6 +689,38 @@ function handleOptionSelect(option: WizardOption, container: HTMLElement): void 
   }
 
   expandedInfo = null;
+  checkedItems = new Set(); // Reset checklist for new step
+  render(container);
+}
+
+function selectOptionById(optionId: string, container: HTMLElement): void {
+  if (!currentConsult) return;
+
+  const currentStep = currentConsult.steps.find(s => s.id === currentStepId);
+  if (!currentStep) return;
+
+  const option = currentStep.options.find(o => o.id === optionId);
+  if (option) {
+    handleOptionSelect(option, container);
+  }
+}
+
+function navigateToStep(targetStepId: string, container: HTMLElement): void {
+  // Find the index in path where this step was visited
+  const pathIndex = path.findIndex(p => p.stepId === targetStepId);
+
+  if (pathIndex === -1) return;
+
+  // Truncate path to that point (remove all entries from that index onward)
+  path = path.slice(0, pathIndex);
+
+  // Navigate to the target step
+  currentStepId = targetStepId;
+  isComplete = false;
+  terminalId = null;
+  expandedInfo = null;
+  checkedItems = new Set();
+
   render(container);
 }
 
@@ -443,6 +742,7 @@ function handleBack(): void {
   isComplete = false;
   terminalId = null;
   expandedInfo = null;
+  checkedItems = new Set();
 
   const container = document.querySelector('.consult-wizard') as HTMLElement;
   if (container) render(container);
@@ -455,6 +755,7 @@ function handleRestart(container: HTMLElement): void {
   isComplete = false;
   terminalId = null;
   expandedInfo = null;
+  checkedItems = new Set();
   render(container);
 }
 

@@ -77,6 +77,7 @@ export const ACUTE_STROKE_WIZARD: ConsultWizardData = {
       question: 'What is the NIH Stroke Scale score?',
       subtitle: 'Quantifies stroke severity',
       info: 'NIHSS ranges 0-42. Higher scores = more severe stroke. NIHSS >=6 suggests LVO.',
+      calculatorLink: { label: 'Calculate NIHSS', id: 'nihss' },
       options: [
         {
           id: 'nihss-mild',
@@ -125,23 +126,56 @@ export const ACUTE_STROKE_WIZARD: ConsultWizardData = {
     {
       id: 'tpa-eligible',
       title: 'tPA Eligibility',
-      question: 'Does the patient have contraindications to IV tPA?',
-      subtitle: 'Review exclusion criteria',
-      info: 'Absolute contraindications: Active bleeding, recent intracranial surgery (<3mo), ICH history, severe uncontrolled HTN (>185/110 despite treatment), platelets <100K, INR >1.7.',
+      question: 'Confirm NO absolute contraindications present:',
+      subtitle: 'Check each item to confirm absence',
+      type: 'checklist',
+      info: 'Per AHA/ASA 2026 guidelines. Checking confirms the contraindication is ABSENT (safe to proceed).',
       options: [
         {
-          id: 'no-contraindications',
-          label: 'No contraindications - Give tPA',
-          shortLabel: 'tPA eligible',
-          variant: 'safe',
-          nextStep: 'tpa-dose',
+          id: 'no-ich',
+          label: 'No intracranial hemorrhage on CT',
+          info: 'Any ICH (intraparenchymal, SAH, subdural) is absolute contraindication.',
         },
         {
-          id: 'has-contraindications',
-          label: 'Has contraindications',
-          shortLabel: 'tPA excluded',
-          variant: 'urgent',
-          nextStep: 'lvo-screen',
+          id: 'no-prior-ich',
+          label: 'No history of prior ICH',
+          info: 'Prior ICH history - consider time elapsed and cause.',
+        },
+        {
+          id: 'bp-controlled',
+          label: 'BP <185/110 (or controlled with meds)',
+          info: 'Must achieve and maintain before tPA.',
+        },
+        {
+          id: 'no-recent-surgery',
+          label: 'No intracranial surgery <3 months',
+          info: 'Recent CNS surgery increases hemorrhage risk.',
+        },
+        {
+          id: 'no-head-trauma',
+          label: 'No severe head trauma <3 months',
+          info: 'Risk of bleeding into contusions.',
+        },
+        {
+          id: 'plt-ok',
+          label: 'Platelets >100,000',
+          info: 'Adequate hemostasis required.',
+        },
+        {
+          id: 'inr-ok',
+          label: 'INR ≤1.7 (if on warfarin)',
+          info: 'INR >1.7 is contraindicated.',
+        },
+        {
+          id: 'no-doac',
+          label: 'No therapeutic DOAC <48h (or coags normal)',
+          info: 'DOAC within 48h excluded unless anti-Xa/thrombin time confirms no effect.',
+        },
+        {
+          id: 'no-ischemic-changes',
+          label: 'No extensive early ischemic changes (>1/3 MCA)',
+          info: 'Large established infarct increases hemorrhage risk.',
+          nextStep: 'tpa-dose',
         },
       ],
     },
