@@ -105,10 +105,30 @@ function handleHome(_params) {
     updateTabBar('home');
     const main = clearMain();
     renderCategoryGrid(main);
-    // Restore scroll after layout completes
-    requestAnimationFrame(() => {
+    // Restore scroll after images load (they determine card heights)
+    const images = main.querySelectorAll('img');
+    if (images.length === 0 || homeScrollTop === 0) {
         main.scrollTop = homeScrollTop;
-    });
+    }
+    else {
+        let loaded = 0;
+        const restore = () => {
+            loaded++;
+            if (loaded >= images.length)
+                main.scrollTop = homeScrollTop;
+        };
+        images.forEach(img => {
+            if (img.complete) {
+                loaded++;
+            }
+            else {
+                img.addEventListener('load', restore);
+                img.addEventListener('error', restore);
+            }
+        });
+        if (loaded >= images.length)
+            main.scrollTop = homeScrollTop;
+    }
 }
 function handleCategory(params) {
     setHomeTheme(false);
