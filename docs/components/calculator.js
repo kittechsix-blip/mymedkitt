@@ -603,73 +603,56 @@ const CORRECTED_NA_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
-// SVG Body Diagram Helpers — Interactive TBSA Calculator
+// TBSA Calculator — Slider-Based Body Diagram
 // -------------------------------------------------------------------
+// Tap a body region → it expands with a slider to select % burned.
+// No 2nd/3rd degree distinction — only 2nd+ burns count toward TBSA.
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const BURN_COLORS = {
-    none: { fill: 'var(--color-surface)', stroke: '#555' },
-    second: { fill: 'rgba(255, 152, 0, 0.65)', stroke: '#FF9800' },
-    third: { fill: 'rgba(211, 47, 47, 0.75)', stroke: '#D32F2F' },
-};
+const BURN_STROKE = '#FF7800';
+const EMPTY_FILL = 'var(--color-surface)';
+const EMPTY_STROKE = '#555';
 function createSvgPath(d) {
     const path = document.createElementNS(SVG_NS, 'path');
     path.setAttribute('d', d);
     return path;
 }
-function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpdate, instructionText) {
-    const state = {};
-    const pctMap = {};
+// Inject slider thumb styles (can't be done inline)
+function injectSliderStyles() {
+    if (document.getElementById('tbsa-slider-styles'))
+        return;
+    const style = document.createElement('style');
+    style.id = 'tbsa-slider-styles';
+    style.textContent = `
+    input.tbsa-slider { -webkit-appearance:none; width:100%; height:10px; border-radius:5px; outline:none; margin:16px 0; }
+    input.tbsa-slider::-webkit-slider-thumb { -webkit-appearance:none; width:36px; height:36px; border-radius:50%; background:#FF7800; cursor:pointer; border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,0.3); }
+  `;
+    document.head.appendChild(style);
+}
+function buildSliderDiagram(container, frontRegions, backRegions, perineum, onUpdate) {
+    injectSliderStyles();
     const allRegions = [...frontRegions, ...backRegions];
     if (perineum)
         allRegions.push(perineum);
-    for (const r of allRegions) {
-        state[r.id] = 'none';
-        pctMap[r.id] = r.pct;
-    }
-    let selectedDegree = 'second';
-    let isPainting = false;
-    // Instruction text
+    // State: burn percentage per region (0-100% of that region)
+    const burnState = {};
+    for (const r of allRegions)
+        burnState[r.id] = 0;
+    let selectedRegionId = null;
+    // --- Warning: 1st degree excluded ---
+    const warning = document.createElement('div');
+    warning.style.cssText = 'font-size:13px;color:#FF9800;margin-bottom:12px;line-height:1.4;padding:10px 12px;background:rgba(255,152,0,0.1);border-radius:8px;border-left:3px solid #FF9800;';
+    warning.textContent = 'Do NOT include 1st degree (superficial) burns. Only 2nd degree (partial thickness) and 3rd degree (full thickness) burns count toward TBSA.';
+    container.appendChild(warning);
+    // --- Instruction ---
     const instrEl = document.createElement('div');
-    instrEl.style.cssText = 'font-size:13px;color:var(--color-text-muted);margin-bottom:12px;line-height:1.4;padding:8px 12px;background:var(--color-surface);border-radius:8px;border-left:3px solid var(--color-warning);';
-    instrEl.textContent = instructionText;
+    instrEl.style.cssText = 'font-size:13px;color:var(--color-text-muted);margin-bottom:12px;line-height:1.4;';
+    instrEl.textContent = 'Tap a body region to expand it, then use the slider to set what percentage of that region is burned.';
     container.appendChild(instrEl);
-    // --- Burn degree selector ---
-    const degreeRow = document.createElement('div');
-    degreeRow.style.cssText = 'display:flex;gap:8px;margin-bottom:14px;';
-    function makeDegreeBtn(label, degree, color) {
-        const btn = document.createElement('button');
-        btn.style.cssText = `flex:1;padding:10px 6px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;min-height:44px;border:2px solid ${color};transition:all 0.15s;`;
-        btn.textContent = label;
-        btn.setAttribute('data-degree', degree);
-        return btn;
-    }
-    const btn2nd = makeDegreeBtn('2nd\u00B0 Partial', 'second', '#FF9800');
-    const btn3rd = makeDegreeBtn('3rd\u00B0 Full', 'third', '#D32F2F');
-    function updateDegreeBtns() {
-        if (selectedDegree === 'second') {
-            btn2nd.style.background = 'rgba(255, 152, 0, 0.25)';
-            btn2nd.style.color = '#FF9800';
-            btn3rd.style.background = 'var(--color-surface)';
-            btn3rd.style.color = 'var(--color-text-muted)';
-        }
-        else {
-            btn2nd.style.background = 'var(--color-surface)';
-            btn2nd.style.color = 'var(--color-text-muted)';
-            btn3rd.style.background = 'rgba(211, 47, 47, 0.25)';
-            btn3rd.style.color = '#D32F2F';
-        }
-    }
-    btn2nd.addEventListener('click', () => { selectedDegree = 'second'; updateDegreeBtns(); });
-    btn3rd.addEventListener('click', () => { selectedDegree = 'third'; updateDegreeBtns(); });
-    degreeRow.appendChild(btn2nd);
-    degreeRow.appendChild(btn3rd);
-    container.appendChild(degreeRow);
-    updateDegreeBtns();
     // --- Total display + Clear ---
     const topRow = document.createElement('div');
-    topRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;';
+    topRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;';
     const totalEl = document.createElement('div');
-    totalEl.style.cssText = 'font-size:22px;font-weight:700;color:var(--color-primary);';
+    totalEl.style.cssText = 'font-size:24px;font-weight:700;color:var(--color-primary);';
     totalEl.textContent = 'TBSA: 0%';
     const clearBtn = document.createElement('button');
     clearBtn.style.cssText = 'padding:8px 16px;border-radius:8px;background:var(--color-surface);color:var(--color-text-muted);border:1px solid var(--color-text-muted);font-size:13px;cursor:pointer;min-height:44px;';
@@ -677,74 +660,15 @@ function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpda
     topRow.appendChild(totalEl);
     topRow.appendChild(clearBtn);
     container.appendChild(topRow);
-    // --- Degree breakdown display ---
-    const breakdownEl = document.createElement('div');
-    breakdownEl.style.cssText = 'font-size:13px;color:var(--color-text-muted);margin-bottom:14px;min-height:18px;';
-    container.appendChild(breakdownEl);
     // --- SVG wrapper ---
     const svgWrap = document.createElement('div');
-    svgWrap.style.cssText = 'display:flex;justify-content:center;gap:16px;margin-bottom:12px;';
-    // Helper: find the region group element from a point
-    function findRegionFromPoint(x, y) {
-        const el = document.elementFromPoint(x, y);
-        if (!el)
-            return null;
-        const g = el.closest?.('g[data-region]');
-        if (g)
-            return g.getAttribute('data-region');
-        return null;
-    }
-    // Apply degree to a region and update visuals
-    function applyDegreeToRegion(regionId) {
-        if (!pctMap[regionId] && regionId !== 'perineum')
-            return;
-        // Toggle: if same degree, clear it; otherwise set to selected degree
-        if (state[regionId] === selectedDegree) {
-            state[regionId] = 'none';
-        }
-        else {
-            state[regionId] = selectedDegree;
-        }
-        updateRegionVisual(regionId);
-        recalc();
-    }
-    // Paint a region without toggle (for drag — always applies selected degree)
-    function paintRegion(regionId) {
-        if (!pctMap[regionId] && regionId !== 'perineum')
-            return;
-        if (state[regionId] === selectedDegree)
-            return; // already painted
-        state[regionId] = selectedDegree;
-        updateRegionVisual(regionId);
-        recalc();
-    }
-    // Update visual appearance of a region
-    function updateRegionVisual(regionId) {
-        const degree = state[regionId];
-        const colors = BURN_COLORS[degree];
-        // SVG region groups
-        svgWrap.querySelectorAll(`g[data-region="${regionId}"] path`).forEach(p => {
-            p.setAttribute('fill', colors.fill);
-            p.setAttribute('stroke', colors.stroke);
-            p.setAttribute('stroke-width', degree === 'none' ? '0.8' : '1.5');
-        });
-        // Perineum button
-        if (regionId === 'perineum') {
-            const periBtn = container.querySelector('[data-perineum-btn]');
-            if (periBtn) {
-                periBtn.style.background = colors.fill;
-                periBtn.style.borderColor = colors.stroke;
-                periBtn.style.color = degree === 'none' ? 'var(--color-text)' : '#fff';
-            }
-        }
-    }
+    svgWrap.style.cssText = 'display:flex;justify-content:center;gap:16px;margin-bottom:6px;';
     function buildSilhouette(regions, viewLabel) {
         const svg = document.createElementNS(SVG_NS, 'svg');
         svg.setAttribute('viewBox', '0 0 130 310');
         svg.setAttribute('width', '145');
         svg.setAttribute('height', '345');
-        svg.style.cssText = 'touch-action:none;user-select:none;-webkit-user-select:none;';
-        // View label
+        svg.style.cssText = 'touch-action:manipulation;user-select:none;-webkit-user-select:none;';
         const text = document.createElementNS(SVG_NS, 'text');
         text.setAttribute('x', '65');
         text.setAttribute('y', '308');
@@ -759,8 +683,8 @@ function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpda
             group.style.cursor = 'pointer';
             for (const d of region.paths) {
                 const path = createSvgPath(d);
-                path.setAttribute('fill', 'var(--color-surface)');
-                path.setAttribute('stroke', '#555');
+                path.setAttribute('fill', EMPTY_FILL);
+                path.setAttribute('stroke', EMPTY_STROKE);
                 path.setAttribute('stroke-width', '0.8');
                 path.setAttribute('stroke-linejoin', 'round');
                 group.appendChild(path);
@@ -773,89 +697,201 @@ function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpda
             pctLabel.setAttribute('pointer-events', 'none');
             pctLabel.textContent = `${region.pct}%`;
             group.appendChild(pctLabel);
+            group.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                selectRegion(region.id);
+            });
             svg.appendChild(group);
         }
-        // --- Touch/mouse drag handlers ---
-        svg.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            isPainting = true;
-            const regionId = findRegionFromPoint(e.clientX, e.clientY);
-            if (regionId)
-                applyDegreeToRegion(regionId);
-        });
-        svg.addEventListener('mousemove', (e) => {
-            if (!isPainting)
-                return;
-            e.preventDefault();
-            const regionId = findRegionFromPoint(e.clientX, e.clientY);
-            if (regionId)
-                paintRegion(regionId);
-        });
-        svg.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            isPainting = true;
-            const touch = e.touches[0];
-            const regionId = findRegionFromPoint(touch.clientX, touch.clientY);
-            if (regionId)
-                applyDegreeToRegion(regionId);
-        }, { passive: false });
-        svg.addEventListener('touchmove', (e) => {
-            if (!isPainting)
-                return;
-            e.preventDefault();
-            const touch = e.touches[0];
-            const regionId = findRegionFromPoint(touch.clientX, touch.clientY);
-            if (regionId)
-                paintRegion(regionId);
-        }, { passive: false });
         return svg;
     }
-    // Stop painting on mouseup/touchend (global)
-    const stopPaint = () => { isPainting = false; };
-    document.addEventListener('mouseup', stopPaint);
-    document.addEventListener('touchend', stopPaint);
-    function recalc() {
-        let total2nd = 0;
-        let total3rd = 0;
-        const vals = {};
-        for (const r of allRegions) {
-            if (state[r.id] === 'second') {
-                total2nd += r.pct;
-                vals[r.id] = r.pct;
-            }
-            else if (state[r.id] === 'third') {
-                total3rd += r.pct;
-                vals[r.id] = r.pct;
+    // --- Region fill based on burn percentage ---
+    function updateRegionFill(regionId) {
+        const pct = burnState[regionId];
+        const opacity = 0.3 + (pct / 100) * 0.5;
+        const isSelected = regionId === selectedRegionId;
+        svgWrap.querySelectorAll(`g[data-region="${regionId}"] path`).forEach(p => {
+            if (pct > 0) {
+                p.setAttribute('fill', `rgba(255, 120, 0, ${opacity})`);
+                p.setAttribute('stroke', BURN_STROKE);
+                p.setAttribute('stroke-width', isSelected ? '2.5' : '1.5');
             }
             else {
-                vals[r.id] = 0;
+                p.setAttribute('fill', EMPTY_FILL);
+                p.setAttribute('stroke', isSelected ? '#fff' : EMPTY_STROKE);
+                p.setAttribute('stroke-width', isSelected ? '2.5' : '0.8');
+            }
+        });
+        // Perineum button
+        if (regionId === 'perineum') {
+            const periBtn = container.querySelector('[data-perineum-btn]');
+            if (periBtn) {
+                if (pct > 0) {
+                    periBtn.style.background = `rgba(255, 120, 0, ${opacity})`;
+                    periBtn.style.borderColor = BURN_STROKE;
+                    periBtn.style.color = '#fff';
+                }
+                else {
+                    periBtn.style.background = 'var(--color-surface)';
+                    periBtn.style.borderColor = isSelected ? '#fff' : '#555';
+                    periBtn.style.color = 'var(--color-text)';
+                }
             }
         }
-        const totalPct = Math.round((total2nd + total3rd) * 10) / 10;
-        total2nd = Math.round(total2nd * 10) / 10;
-        total3rd = Math.round(total3rd * 10) / 10;
-        vals['__tbsa'] = totalPct;
-        vals['__tbsa_2nd'] = total2nd;
-        vals['__tbsa_3rd'] = total3rd;
-        totalEl.textContent = `TBSA: ${totalPct}%`;
-        if (totalPct > 0) {
-            const parts = [];
-            if (total2nd > 0)
-                parts.push(`2nd\u00B0: ${total2nd}%`);
-            if (total3rd > 0)
-                parts.push(`3rd\u00B0: ${total3rd}%`);
-            breakdownEl.textContent = parts.join('  \u2022  ');
+    }
+    // --- Detail panel (appears below SVGs when region selected) ---
+    const detailPanel = document.createElement('div');
+    detailPanel.style.cssText = 'display:none;padding:16px;background:var(--color-surface);border-radius:12px;border:2px solid #FF7800;margin-bottom:14px;';
+    function selectRegion(regionId) {
+        if (selectedRegionId === regionId) {
+            selectedRegionId = null;
+            detailPanel.style.display = 'none';
+            updateAllHighlights();
+            return;
         }
-        else {
-            breakdownEl.textContent = '';
+        selectedRegionId = regionId;
+        showDetailPanel(regionId);
+        updateAllHighlights();
+    }
+    function updateAllHighlights() {
+        for (const r of allRegions)
+            updateRegionFill(r.id);
+    }
+    function showDetailPanel(regionId) {
+        const region = allRegions.find(r => r.id === regionId);
+        detailPanel.innerHTML = '';
+        detailPanel.style.display = 'block';
+        // Title row
+        const titleRow = document.createElement('div');
+        titleRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;';
+        const titleEl = document.createElement('div');
+        titleEl.style.cssText = 'font-size:16px;font-weight:700;color:var(--color-text);';
+        titleEl.textContent = region.label;
+        const maxEl = document.createElement('div');
+        maxEl.style.cssText = 'font-size:14px;color:var(--color-text-muted);';
+        maxEl.textContent = `Max: ${region.pct}% TBSA`;
+        titleRow.appendChild(titleEl);
+        titleRow.appendChild(maxEl);
+        detailPanel.appendChild(titleRow);
+        // Zoomed SVG of the region
+        const zoomWrap = document.createElement('div');
+        zoomWrap.style.cssText = 'display:flex;justify-content:center;margin:8px 0;';
+        if (region.paths.length > 0) {
+            const zoomSvg = document.createElementNS(SVG_NS, 'svg');
+            zoomSvg.setAttribute('width', '140');
+            zoomSvg.setAttribute('height', '120');
+            zoomSvg.style.cssText = 'pointer-events:none;';
+            for (const d of region.paths) {
+                const path = createSvgPath(d);
+                const bp = burnState[regionId];
+                const op = bp > 0 ? 0.3 + (bp / 100) * 0.5 : 0;
+                path.setAttribute('fill', bp > 0 ? `rgba(255, 120, 0, ${op})` : 'var(--color-surface)');
+                path.setAttribute('stroke', bp > 0 ? BURN_STROKE : '#888');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('stroke-linejoin', 'round');
+                zoomSvg.appendChild(path);
+            }
+            zoomWrap.appendChild(zoomSvg);
+            detailPanel.appendChild(zoomWrap);
+            // Set viewBox to bounding box after rendering
+            requestAnimationFrame(() => {
+                const paths = zoomSvg.querySelectorAll('path');
+                if (paths.length > 0) {
+                    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                    paths.forEach(p => {
+                        const bbox = p.getBBox();
+                        minX = Math.min(minX, bbox.x);
+                        minY = Math.min(minY, bbox.y);
+                        maxX = Math.max(maxX, bbox.x + bbox.width);
+                        maxY = Math.max(maxY, bbox.y + bbox.height);
+                    });
+                    const pad = 6;
+                    zoomSvg.setAttribute('viewBox', `${minX - pad} ${minY - pad} ${maxX - minX + pad * 2} ${maxY - minY + pad * 2}`);
+                }
+            });
         }
+        // Slider
+        const currentPct = burnState[regionId];
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.min = '0';
+        slider.max = '100';
+        slider.step = '5';
+        slider.value = String(currentPct);
+        slider.className = 'tbsa-slider';
+        slider.style.background = sliderGradient(currentPct);
+        // Value display
+        const valueEl = document.createElement('div');
+        valueEl.style.cssText = 'text-align:center;font-size:18px;font-weight:600;color:var(--color-text);margin-top:4px;';
+        const contribution = Math.round(region.pct * currentPct / 100 * 10) / 10;
+        valueEl.textContent = currentPct > 0 ? `${currentPct}% burned = ${contribution}% TBSA` : 'No burn';
+        // Quick-set buttons row
+        const quickRow = document.createElement('div');
+        quickRow.style.cssText = 'display:flex;gap:6px;margin-top:10px;justify-content:center;flex-wrap:wrap;';
+        for (const qv of [0, 25, 50, 75, 100]) {
+            const qBtn = document.createElement('button');
+            qBtn.style.cssText = `padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;min-height:38px;border:1px solid ${qv === currentPct ? '#FF7800' : '#555'};background:${qv === currentPct ? 'rgba(255,120,0,0.2)' : 'var(--color-surface)'};color:${qv === currentPct ? '#FF7800' : 'var(--color-text-muted)'};`;
+            qBtn.textContent = qv === 0 ? 'None' : `${qv}%`;
+            qBtn.addEventListener('click', () => {
+                slider.value = String(qv);
+                slider.dispatchEvent(new Event('input'));
+            });
+            quickRow.appendChild(qBtn);
+        }
+        slider.addEventListener('input', () => {
+            const val = parseInt(slider.value, 10);
+            burnState[regionId] = val;
+            slider.style.background = sliderGradient(val);
+            const contrib = Math.round(region.pct * val / 100 * 10) / 10;
+            valueEl.textContent = val > 0 ? `${val}% burned = ${contrib}% TBSA` : 'No burn';
+            // Update zoomed SVG fill
+            zoomWrap.querySelectorAll('path').forEach(p => {
+                const op = val > 0 ? 0.3 + (val / 100) * 0.5 : 0;
+                p.setAttribute('fill', val > 0 ? `rgba(255, 120, 0, ${op})` : 'var(--color-surface)');
+                p.setAttribute('stroke', val > 0 ? BURN_STROKE : '#888');
+            });
+            // Update quick-set button highlights
+            quickRow.querySelectorAll('button').forEach((b, i) => {
+                const qv = [0, 25, 50, 75, 100][i];
+                b.style.borderColor = qv === val ? '#FF7800' : '#555';
+                b.style.background = qv === val ? 'rgba(255,120,0,0.2)' : 'var(--color-surface)';
+                b.style.color = qv === val ? '#FF7800' : 'var(--color-text-muted)';
+            });
+            updateRegionFill(regionId);
+            recalc();
+        });
+        detailPanel.appendChild(slider);
+        detailPanel.appendChild(valueEl);
+        detailPanel.appendChild(quickRow);
+        // Scroll detail into view
+        requestAnimationFrame(() => {
+            detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    }
+    function sliderGradient(val) {
+        return `linear-gradient(to right, #FF7800 0%, #FF7800 ${val}%, #333 ${val}%, #333 100%)`;
+    }
+    function recalc() {
+        let total = 0;
+        const vals = {};
+        for (const r of allRegions) {
+            const contribution = Math.round(r.pct * burnState[r.id] / 100 * 10) / 10;
+            vals[r.id] = contribution;
+            total += contribution;
+        }
+        total = Math.round(total * 10) / 10;
+        vals['__tbsa'] = total;
+        totalEl.textContent = `TBSA: ${total}%`;
         onUpdate(vals);
     }
+    // --- Build and append SVGs ---
     const frontSvg = buildSilhouette(frontRegions, 'FRONT');
     const backSvg = buildSilhouette(backRegions, 'BACK');
     svgWrap.appendChild(frontSvg);
     svgWrap.appendChild(backSvg);
-    // Perineum button below SVGs
+    container.appendChild(svgWrap);
+    // Perineum button
     if (perineum) {
         const periWrap = document.createElement('div');
         periWrap.style.cssText = 'display:flex;justify-content:center;margin-bottom:10px;';
@@ -863,24 +899,24 @@ function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpda
         periBtn.style.cssText = 'padding:10px 20px;border-radius:8px;background:var(--color-surface);color:var(--color-text);border:1px solid #555;font-size:13px;cursor:pointer;min-height:44px;';
         periBtn.textContent = `Perineum (${perineum.pct}%)`;
         periBtn.setAttribute('data-perineum-btn', '');
-        periBtn.addEventListener('click', () => {
-            applyDegreeToRegion(perineum.id);
-        });
+        periBtn.addEventListener('click', () => selectRegion(perineum.id));
         periWrap.appendChild(periBtn);
         container.appendChild(periWrap);
     }
-    container.appendChild(svgWrap);
-    // --- Legend ---
+    // Detail panel below SVGs
+    container.appendChild(detailPanel);
+    // Legend
     const legendEl = document.createElement('div');
     legendEl.style.cssText = 'display:flex;gap:16px;justify-content:center;font-size:12px;color:var(--color-text-muted);margin-bottom:8px;';
-    legendEl.innerHTML = '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(255,152,0,0.65);border:1px solid #FF9800;"></span>2nd\u00B0</span>' +
-        '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(211,47,47,0.75);border:1px solid #D32F2F;"></span>3rd\u00B0</span>';
+    legendEl.innerHTML = '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(255,120,0,0.75);border:1px solid #FF7800;"></span>Burned (2nd\u00B0/3rd\u00B0)</span>';
     container.appendChild(legendEl);
     clearBtn.addEventListener('click', () => {
         for (const r of allRegions) {
-            state[r.id] = 'none';
-            updateRegionVisual(r.id);
+            burnState[r.id] = 0;
+            updateRegionFill(r.id);
         }
+        selectedRegionId = null;
+        detailPanel.style.display = 'none';
         recalc();
     });
     // Position percentage labels after SVG is in DOM
@@ -899,9 +935,9 @@ function buildBodyDiagram(container, frontRegions, backRegions, perineum, onUpda
     });
 }
 // -------------------------------------------------------------------
-// TBSA Adult — Rule of 9's Calculator
+// TBSA Adult — Rule of 9's (Slider)
 // -------------------------------------------------------------------
-// Anatomically-shaped SVG body regions in viewBox 0 0 130 310
+// Arms merged into single regions (4.5% each side)
 const ADULT_FRONT_REGIONS = [
     { id: 'head-front', label: 'Head (front)', pct: 4.5, paths: [
             'M65,4 C52,4 43,12 43,23 C43,33 50,40 58,42 L58,48 L72,48 L72,42 C80,40 87,33 87,23 C87,12 78,4 65,4 Z'
@@ -912,17 +948,13 @@ const ADULT_FRONT_REGIONS = [
     { id: 'abdomen', label: 'Abdomen', pct: 9, paths: [
             'M40,100 L90,100 L86,168 L44,168 Z'
         ] },
-    { id: 'left-upper-arm-front', label: 'L Upper Arm', pct: 2.25, paths: [
-            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z'
+    { id: 'left-arm-front', label: 'L Arm (front)', pct: 4.5, paths: [
+            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z',
+            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z',
         ] },
-    { id: 'left-forearm-front', label: 'L Forearm/Hand', pct: 2.25, paths: [
-            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z'
-        ] },
-    { id: 'right-upper-arm-front', label: 'R Upper Arm', pct: 2.25, paths: [
-            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z'
-        ] },
-    { id: 'right-forearm-front', label: 'R Forearm/Hand', pct: 2.25, paths: [
-            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z'
+    { id: 'right-arm-front', label: 'R Arm (front)', pct: 4.5, paths: [
+            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z',
+            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z',
         ] },
     { id: 'left-thigh-front', label: 'L Thigh', pct: 4.5, paths: [
             'M44,170 L63,170 C63,170 62,200 61,220 L60,238 L46,238 C46,238 45,210 44,170 Z'
@@ -947,17 +979,13 @@ const ADULT_BACK_REGIONS = [
     { id: 'lower-back', label: 'Lower Back/Buttocks', pct: 9, paths: [
             'M40,100 L90,100 L86,168 L44,168 Z'
         ] },
-    { id: 'left-upper-arm-back', label: 'L Upper Arm (back)', pct: 2.25, paths: [
-            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z'
+    { id: 'left-arm-back', label: 'L Arm (back)', pct: 4.5, paths: [
+            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z',
+            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z',
         ] },
-    { id: 'left-forearm-back', label: 'L Forearm/Hand (back)', pct: 2.25, paths: [
-            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z'
-        ] },
-    { id: 'right-upper-arm-back', label: 'R Upper Arm (back)', pct: 2.25, paths: [
-            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z'
-        ] },
-    { id: 'right-forearm-back', label: 'R Forearm/Hand (back)', pct: 2.25, paths: [
-            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z'
+    { id: 'right-arm-back', label: 'R Arm (back)', pct: 4.5, paths: [
+            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z',
+            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z',
         ] },
     { id: 'left-thigh-back', label: 'L Thigh (back)', pct: 4.5, paths: [
             'M44,170 L63,170 C63,170 62,200 61,220 L60,238 L46,238 C46,238 45,210 44,170 Z'
@@ -975,36 +1003,32 @@ const ADULT_BACK_REGIONS = [
 const ADULT_PERINEUM = { id: 'perineum', label: 'Perineum', pct: 1, paths: [] };
 function tbsaComputeResult(values, isPeds) {
     const tbsa = values['__tbsa'] || 0;
-    const t2 = values['__tbsa_2nd'] || 0;
-    const t3 = values['__tbsa_3rd'] || 0;
     if (tbsa === 0) {
-        const hint = isPeds ? 'Select age group, choose burn degree, and tap body regions.' : 'Choose burn degree (2nd\u00B0/3rd\u00B0), then tap or drag across burned regions.';
-        return { value: '0%', label: 'No Burn Selected', description: hint, colorVar: '--color-text-muted' };
+        return { value: '0%', label: 'No Burn Selected', description: 'Tap a body region and use the slider to set burn percentage.', colorVar: '--color-text-muted' };
     }
     let label;
     let colorVar;
     let desc;
-    const degreeBreak = (t2 > 0 && t3 > 0) ? ` (2nd\u00B0: ${t2}%, 3rd\u00B0: ${t3}%)` : (t3 > 0 ? ' (full thickness)' : ' (partial thickness)');
     const parklandMult = isPeds ? '3-4' : '4';
     if (tbsa < 10) {
         label = 'Minor Burn';
         colorVar = '--color-primary';
-        desc = `${tbsa}% TBSA${degreeBreak}. Minor burn \u2014 outpatient management may be appropriate if no other criteria.`;
+        desc = `${tbsa}% TBSA. Minor burn \u2014 outpatient management may be appropriate if no other criteria.`;
     }
     else if (tbsa < 20) {
         label = 'Moderate Burn';
         colorVar = '--color-warning';
-        desc = `${tbsa}% TBSA${degreeBreak}. Moderate burn \u2014 consider burn center referral. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h.`;
+        desc = `${tbsa}% TBSA. Moderate burn \u2014 consider burn center referral. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h.`;
     }
     else if (tbsa < 40) {
         label = 'Major Burn';
         colorVar = '--color-warning';
-        desc = `${tbsa}% TBSA${degreeBreak}. Major burn \u2014 fluid resuscitation required. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h (half in first 8h).`;
+        desc = `${tbsa}% TBSA. Major burn \u2014 fluid resuscitation required. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h (half in first 8h).`;
     }
     else {
         label = 'Critical Burn';
         colorVar = '--color-danger';
-        desc = `${tbsa}% TBSA${degreeBreak}. Critical burn \u2014 immediate aggressive resuscitation. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h (half in first 8h).`;
+        desc = `${tbsa}% TBSA. Critical burn \u2014 immediate aggressive resuscitation. Parkland: ${parklandMult} mL x kg x ${tbsa}% over 24h (half in first 8h).`;
     }
     return { value: `${tbsa}%`, label, description: desc, colorVar };
 }
@@ -1012,7 +1036,7 @@ const TBSA_ADULT_CALCULATOR = {
     id: 'tbsa-adult',
     title: 'TBSA \u2014 Rule of 9s',
     subtitle: 'Adult Total Body Surface Area',
-    description: 'Interactive body diagram for estimating burn TBSA in adults using the Rule of 9s. Select burn degree, then tap or drag across burned regions.',
+    description: 'Interactive body diagram for estimating burn TBSA in adults using the Rule of 9s. Tap a region, then slide to set the percentage burned.',
     fields: [],
     results: [],
     thresholdNote: 'ABA Burn Center referral criteria: partial thickness >10% TBSA, full thickness any size, burns to face/hands/feet/genitalia/perineum/major joints, electrical/chemical/inhalation, circumferential burns.',
@@ -1022,7 +1046,7 @@ const TBSA_ADULT_CALCULATOR = {
     ],
     computeResult: (values) => tbsaComputeResult(values, false),
     customRender: (container, onUpdate) => {
-        buildBodyDiagram(container, ADULT_FRONT_REGIONS, ADULT_BACK_REGIONS, ADULT_PERINEUM, onUpdate, 'Select burn degree, then tap or drag across burned areas. Only 2nd\u00B0 (partial) and 3rd\u00B0 (full thickness) burns count toward TBSA.');
+        buildSliderDiagram(container, ADULT_FRONT_REGIONS, ADULT_BACK_REGIONS, ADULT_PERINEUM, onUpdate);
     },
 };
 const LUND_BROWDER_AGES = [
@@ -1032,20 +1056,15 @@ const LUND_BROWDER_AGES = [
     { label: '10-14 years', headHalf: 5.5, thighHalf: 4.25, lowerLegHalf: 3 },
     { label: '>14 years', headHalf: 3.5, thighHalf: 4.75, lowerLegHalf: 3.5 },
 ];
-// Fixed Lund-Browder values per side
 const LB_NECK = 1;
 const LB_TRUNK_ANT = 13;
 const LB_TRUNK_POST = 13;
-const LB_UPPER_ARM = 2;
-const LB_FOREARM = 1.5;
-const LB_HAND = 1.25;
+const LB_ARM = 4; // Upper arm (2) + forearm (1.5) + hand (0.5) combined
 const LB_BUTTOCK = 2.5;
 const LB_FOOT = 1.75;
 const LB_PERINEUM = 1;
 function buildPedsRegions(ageIdx) {
     const age = LUND_BROWDER_AGES[ageIdx];
-    // Pediatric body — proportionally larger head, shorter limbs
-    // viewBox 0 0 130 310
     const front = [
         { id: 'head-front', label: 'Head (front)', pct: age.headHalf, paths: [
                 'M65,4 C50,4 40,14 40,28 C40,40 48,50 58,52 L58,56 L72,56 L72,52 C82,50 90,40 90,28 C90,14 80,4 65,4 Z'
@@ -1056,23 +1075,15 @@ function buildPedsRegions(ageIdx) {
         { id: 'trunk-ant', label: 'Trunk (anterior)', pct: LB_TRUNK_ANT, paths: [
                 'M38,66 C38,64 48,62 56,62 L74,62 C82,62 92,64 92,66 L90,130 L40,130 Z'
             ] },
-        { id: 'left-upper-arm-front', label: 'L Upper Arm', pct: LB_UPPER_ARM, paths: [
-                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z'
+        { id: 'left-arm-front', label: 'L Arm (front)', pct: LB_ARM, paths: [
+                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z',
+                'M16,102 L34,102 L30,132 L12,128 Z',
+                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z',
             ] },
-        { id: 'left-forearm-front', label: 'L Forearm', pct: LB_FOREARM, paths: [
-                'M16,102 L34,102 L30,132 L12,128 Z'
-            ] },
-        { id: 'left-hand-front', label: 'L Hand', pct: LB_HAND, paths: [
-                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z'
-            ] },
-        { id: 'right-upper-arm-front', label: 'R Upper Arm', pct: LB_UPPER_ARM, paths: [
-                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z'
-            ] },
-        { id: 'right-forearm-front', label: 'R Forearm', pct: LB_FOREARM, paths: [
-                'M96,102 L114,102 L118,128 L100,132 Z'
-            ] },
-        { id: 'right-hand-front', label: 'R Hand', pct: LB_HAND, paths: [
-                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z'
+        { id: 'right-arm-front', label: 'R Arm (front)', pct: LB_ARM, paths: [
+                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z',
+                'M96,102 L114,102 L118,128 L100,132 Z',
+                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z',
             ] },
         { id: 'left-thigh-front', label: 'L Thigh', pct: age.thighHalf, paths: [
                 'M40,132 L62,132 L60,210 L42,210 Z'
@@ -1109,23 +1120,15 @@ function buildPedsRegions(ageIdx) {
         { id: 'right-buttock', label: 'R Buttock', pct: LB_BUTTOCK, paths: [
                 'M66,118 L90,118 L90,130 L68,130 Z'
             ] },
-        { id: 'left-upper-arm-back', label: 'L Upper Arm (back)', pct: LB_UPPER_ARM, paths: [
-                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z'
+        { id: 'left-arm-back', label: 'L Arm (back)', pct: LB_ARM, paths: [
+                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z',
+                'M16,102 L34,102 L30,132 L12,128 Z',
+                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z',
             ] },
-        { id: 'left-forearm-back', label: 'L Forearm (back)', pct: LB_FOREARM, paths: [
-                'M16,102 L34,102 L30,132 L12,128 Z'
-            ] },
-        { id: 'left-hand-back', label: 'L Hand (back)', pct: LB_HAND, paths: [
-                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z'
-            ] },
-        { id: 'right-upper-arm-back', label: 'R Upper Arm (back)', pct: LB_UPPER_ARM, paths: [
-                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z'
-            ] },
-        { id: 'right-forearm-back', label: 'R Forearm (back)', pct: LB_FOREARM, paths: [
-                'M96,102 L114,102 L118,128 L100,132 Z'
-            ] },
-        { id: 'right-hand-back', label: 'R Hand (back)', pct: LB_HAND, paths: [
-                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z'
+        { id: 'right-arm-back', label: 'R Arm (back)', pct: LB_ARM, paths: [
+                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z',
+                'M96,102 L114,102 L118,128 L100,132 Z',
+                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z',
             ] },
         { id: 'left-thigh-back', label: 'L Thigh (back)', pct: age.thighHalf, paths: [
                 'M40,132 L62,132 L60,210 L42,210 Z'
@@ -1153,7 +1156,7 @@ const TBSA_PEDS_CALCULATOR = {
     id: 'tbsa-peds',
     title: 'TBSA \u2014 Lund-Browder',
     subtitle: 'Pediatric Total Body Surface Area',
-    description: 'Age-adjusted Lund-Browder chart for pediatric burn TBSA estimation. Select age group and burn degree, then tap or drag burned regions.',
+    description: 'Age-adjusted Lund-Browder chart for pediatric burn TBSA. Tap a region, then slide to set burn percentage.',
     fields: [],
     results: [],
     thresholdNote: 'Pediatric burn center referral: >10% TBSA partial thickness, any full thickness, burns to face/hands/feet/genitalia/perineum/joints, electrical/chemical/inhalation, circumferential burns, suspected abuse.',
@@ -1164,7 +1167,6 @@ const TBSA_PEDS_CALCULATOR = {
     computeResult: (values) => tbsaComputeResult(values, true),
     customRender: (container, onUpdate) => {
         let currentAgeIdx = 0;
-        // Age selector
         const ageRow = document.createElement('div');
         ageRow.style.cssText = 'margin-bottom:12px;';
         const ageLabel = document.createElement('label');
@@ -1181,18 +1183,17 @@ const TBSA_PEDS_CALCULATOR = {
         }
         ageRow.appendChild(ageSelect);
         container.appendChild(ageRow);
-        // Diagram container (will be rebuilt on age change)
         const diagramContainer = document.createElement('div');
         container.appendChild(diagramContainer);
         function buildDiagram() {
             diagramContainer.innerHTML = '';
             const regions = buildPedsRegions(currentAgeIdx);
-            buildBodyDiagram(diagramContainer, regions.front, regions.back, regions.perineum, onUpdate, 'Select burn degree, then tap or drag across burned areas. Only 2nd\u00B0 (partial) and 3rd\u00B0 (full thickness) burns count toward TBSA.');
+            buildSliderDiagram(diagramContainer, regions.front, regions.back, regions.perineum, onUpdate);
         }
         ageSelect.addEventListener('change', () => {
             currentAgeIdx = parseInt(ageSelect.value, 10);
             buildDiagram();
-            onUpdate({ '__tbsa': 0, '__tbsa_2nd': 0, '__tbsa_3rd': 0 });
+            onUpdate({ '__tbsa': 0 });
         });
         buildDiagram();
     },
