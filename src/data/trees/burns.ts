@@ -725,7 +725,7 @@ export const BURNS_CITATIONS: Citation[] = [
   { num: 15, text: 'Rizzo JA et al. Higher Initial Formula for Resuscitation After Severe Burn Injury Means Higher 24-Hour Volumes. J Burn Care Res. 2023;44(5):1017-1022.' },
   { num: 16, text: 'Hewett Brumberg EK et al. AHA and ARC Guidelines for First Aid. Circulation. 2024;150(24):e519-e579.' },
   { num: 17, text: 'Wasiak J et al. Dressings for Superficial and Partial Thickness Burns. Cochrane. 2013;(3):CD002106.' },
-  { num: 18, text: 'Dell-Seton (DSMC-UT) Institutional Burn Resuscitation Protocol.' },
+  { num: 18, text: 'Aydelotte JD. Dell-Seton (DSMC-UT) Institutional Burn Resuscitation Protocol. Dr. Jayson D. Aydelotte MD FACS, Burn Medical Director, The University of Texas at Austin Dell Medical School.' },
   { num: 19, text: 'Akelma H et al. Rare Chemical Burns: Review of the Literature. Int Wound J. 2019;16(6):1330-1338.' },
   { num: 20, text: 'Colson CD et al. EasyTBSA as a Method for Calculating TBSA Burned. Emerg Med J. 2023;40(4):279-284.' },
   { num: 21, text: 'Pegg SP. Escharotomy in Burns. Ann Acad Med Singapore. 1992;21(5):682-4.' },

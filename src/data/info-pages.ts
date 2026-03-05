@@ -2316,7 +2316,7 @@ const BURNS_DSMC_PROTOCOL: InfoPage = {
     },
   ],
   citations: [
-    { num: 1, text: 'Dell-Seton (DSMC-UT) Institutional Burn Resuscitation Protocol.' },
+    { num: 1, text: 'Aydelotte JD. Dell-Seton (DSMC-UT) Institutional Burn Resuscitation Protocol. Dr. Jayson D. Aydelotte MD FACS, Burn Medical Director, The University of Texas at Austin Dell Medical School.' },
     { num: 2, text: 'Rizzo JA et al. Higher Initial Formula for Resuscitation After Severe Burn Injury Means Higher 24-Hour Volumes. J Burn Care Res. 2023;44(5):1017-1022.' },
   ],
 };
