@@ -31,7 +31,13 @@
 
         // Delete IndexedDB (stale Supabase/category data)
         try {
-          indexedDB.deleteDatabase('medkitt-cache');
+          await new Promise(function(resolve, reject) {
+            var req = indexedDB.deleteDatabase('medkitt-cache');
+            req.onsuccess = resolve;
+            req.onerror = reject;
+            req.onblocked = resolve;
+            setTimeout(resolve, 3000); // fallback timeout
+          });
           status.textContent = 'IndexedDB cleared...';
         } catch(e2) { /* IndexedDB may not be available */ }
 
