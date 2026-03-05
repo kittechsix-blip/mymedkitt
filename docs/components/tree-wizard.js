@@ -342,6 +342,19 @@ function renderInfoNode(content, node, container) {
     content.appendChild(body);
     // Images (e.g., ultrasound reference images)
     renderNodeImages(content, node);
+    // Calculator links (e.g., burn fluid calculators)
+    if (node.calculatorLinks?.length) {
+        const linkRow = document.createElement('div');
+        linkRow.className = 'wizard-calc-links';
+        for (const link of node.calculatorLinks) {
+            const btn = document.createElement('button');
+            btn.className = 'btn-secondary wizard-calc-link';
+            btn.textContent = link.label;
+            btn.addEventListener('click', () => router.navigate(`/calculator/${link.id}`));
+            linkRow.appendChild(btn);
+        }
+        content.appendChild(linkRow);
+    }
     if (node.citation?.length && currentConfig) {
         renderInlineCitations(content, node.citation, currentConfig.citations);
     }
