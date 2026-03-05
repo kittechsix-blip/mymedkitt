@@ -132,6 +132,20 @@ Every consult involving an **emergent procedure, resuscitation, or time-critical
 
 **Existing examples:** Precipitous Delivery (`precip-delivery-summary`), Shoulder Dystocia (`sd-summary`)
 
+## Expandable Citations on All Node Types (MANDATORY)
+
+Every node type (question, info, result) with a `citation` array MUST render expandable citation references using `renderInlineCitations()` from `reference-table.ts`. This shows a collapsible "References (N)" section that expands to show the full citation text with clickable URLs.
+
+**Implementation:**
+- `renderInlineCitations(content, node.citation, currentConfig.citations)` — already wired in `tree-wizard.ts` for all three node types
+- Citations come from the tree's `TreeConfig.citations` array (loaded via `tree-service.ts`)
+- Each citation shows its number badge + full text, with URLs auto-linked
+
+**Rules for every new consult:**
+1. Every node that references evidence MUST include a `citation: [N]` array pointing to the tree's citation list
+2. Never render citations as plain text — always use `renderInlineCitations()` for the expandable `<details>` widget
+3. The tree's `citations` array in its data file must include all referenced citation numbers with full bibliographic text
+
 ## Clinical Content
 
 - All decision tree logic is in `PRD.md` — the source of truth
