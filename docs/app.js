@@ -15401,32 +15401,54 @@ var CORRECTED_NA_CALCULATOR = {
     };
   }
 };
-var SVG_NS = "http://www.w3.org/2000/svg";
-var BURN_STROKE = "#FF7800";
-var EMPTY_FILL = "var(--color-surface)";
-var EMPTY_STROKE = "#666";
-function createSvgPath(d) {
-  const path2 = document.createElementNS(SVG_NS, "path");
-  path2.setAttribute("d", d);
-  return path2;
-}
-function buildTapToggleDiagram(container, frontRegions, backRegions, perineum, onUpdate) {
+var BURN_COLOR = "#FF7800";
+var BODY_FILL = "#3a3a3a";
+var BODY_STROKE = "#555";
+function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpdate) {
+  const CANVAS_WIDTH = 150;
+  const CANVAS_HEIGHT = 340;
+  const SVG_VIEWBOX_WIDTH = 130;
+  const SVG_VIEWBOX_HEIGHT = 310;
+  const SCALE_X = CANVAS_WIDTH / SVG_VIEWBOX_WIDTH;
+  const SCALE_Y = CANVAS_HEIGHT / SVG_VIEWBOX_HEIGHT;
   const allRegions = [...frontRegions, ...backRegions];
   if (perineum) allRegions.push(perineum);
-  const burnState = {};
-  for (const r of allRegions) burnState[r.id] = 0;
+  const state = {
+    frontCanvas: document.createElement("canvas"),
+    backCanvas: document.createElement("canvas"),
+    frontMask: document.createElement("canvas"),
+    backMask: document.createElement("canvas"),
+    frontCtx: null,
+    backCtx: null,
+    frontMaskCtx: null,
+    backMaskCtx: null,
+    isDrawing: false,
+    isErasing: false,
+    brushSize: 18,
+    lastX: 0,
+    lastY: 0,
+    perineumPct: 0
+  };
+  [state.frontCanvas, state.backCanvas, state.frontMask, state.backMask].forEach((c) => {
+    c.width = CANVAS_WIDTH;
+    c.height = CANVAS_HEIGHT;
+  });
+  state.frontCtx = state.frontCanvas.getContext("2d", { willReadFrequently: true });
+  state.backCtx = state.backCanvas.getContext("2d", { willReadFrequently: true });
+  state.frontMaskCtx = state.frontMask.getContext("2d");
+  state.backMaskCtx = state.backMask.getContext("2d");
   const warning = document.createElement("div");
   warning.style.cssText = "font-size:12px;color:#FF9800;margin-bottom:10px;line-height:1.4;padding:8px 10px;background:rgba(255,152,0,0.1);border-radius:8px;border-left:3px solid #FF9800;";
   warning.textContent = "2nd/3rd degree burns only. Do NOT include 1st degree (superficial) burns.";
   container.appendChild(warning);
   const instrEl = document.createElement("div");
   instrEl.style.cssText = "font-size:13px;color:var(--color-text-muted);margin-bottom:10px;line-height:1.3;text-align:center;";
-  instrEl.innerHTML = "<strong>Tap</strong> to cycle: None \u2192 Half \u2192 Full \u2192 None";
+  instrEl.innerHTML = "<strong>Draw</strong> on the body to paint burn areas";
   container.appendChild(instrEl);
   const totalWrap = document.createElement("div");
   totalWrap.style.cssText = "text-align:center;margin-bottom:12px;";
   const totalEl = document.createElement("div");
-  totalEl.style.cssText = "font-size:42px;font-weight:800;color:#FF7800;line-height:1;";
+  totalEl.style.cssText = "font-size:48px;font-weight:800;color:var(--color-text-muted);line-height:1;";
   totalEl.textContent = "0%";
   const totalLabel = document.createElement("div");
   totalLabel.style.cssText = "font-size:14px;color:var(--color-text-muted);margin-top:2px;";
@@ -15434,160 +15456,342 @@ function buildTapToggleDiagram(container, frontRegions, backRegions, perineum, o
   totalWrap.appendChild(totalEl);
   totalWrap.appendChild(totalLabel);
   container.appendChild(totalWrap);
-  const svgWrap = document.createElement("div");
-  svgWrap.style.cssText = "display:flex;justify-content:center;gap:8px;margin-bottom:8px;";
-  function buildSilhouette(regions, viewLabel) {
-    const svg = document.createElementNS(SVG_NS, "svg");
-    svg.setAttribute("viewBox", "0 0 130 310");
-    svg.setAttribute("width", "155");
-    svg.setAttribute("height", "370");
-    svg.style.cssText = "touch-action:manipulation;user-select:none;-webkit-user-select:none;";
-    const text = document.createElementNS(SVG_NS, "text");
-    text.setAttribute("x", "65");
-    text.setAttribute("y", "306");
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("fill", "var(--color-text-muted)");
-    text.setAttribute("font-size", "10");
-    text.setAttribute("font-weight", "600");
-    text.textContent = viewLabel;
-    svg.appendChild(text);
-    for (const region of regions) {
-      const group = document.createElementNS(SVG_NS, "g");
-      group.setAttribute("data-region", region.id);
-      group.style.cursor = "pointer";
-      for (const d of region.paths) {
-        const path2 = createSvgPath(d);
-        path2.setAttribute("fill", EMPTY_FILL);
-        path2.setAttribute("stroke", EMPTY_STROKE);
-        path2.setAttribute("stroke-width", "1");
-        path2.setAttribute("stroke-linejoin", "round");
-        group.appendChild(path2);
-      }
-      group.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        cycleBurn(region.id);
-      });
-      svg.appendChild(group);
-    }
-    return svg;
-  }
-  function cycleBurn(regionId) {
-    const current = burnState[regionId];
-    if (current === 0) burnState[regionId] = 50;
-    else if (current === 50) burnState[regionId] = 100;
-    else burnState[regionId] = 0;
-    updateRegionFill(regionId);
-    recalc();
-    if (navigator.vibrate) navigator.vibrate(10);
-  }
-  function updateRegionFill(regionId) {
-    const pct = burnState[regionId];
-    let fill;
-    let stroke;
-    let strokeWidth;
-    if (pct === 0) {
-      fill = EMPTY_FILL;
-      stroke = EMPTY_STROKE;
-      strokeWidth = "1";
-    } else if (pct === 50) {
-      fill = "rgba(255, 120, 0, 0.5)";
-      stroke = BURN_STROKE;
-      strokeWidth = "1.5";
+  const modeWrap = document.createElement("div");
+  modeWrap.style.cssText = "display:flex;gap:8px;justify-content:center;margin-bottom:12px;";
+  const drawBtn = document.createElement("button");
+  drawBtn.style.cssText = "padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;border:2px solid #FF7800;background:#FF7800;color:#fff;";
+  drawBtn.innerHTML = '<span style="font-size:18px;">\u270F\uFE0F</span> Draw';
+  const eraseBtn = document.createElement("button");
+  eraseBtn.style.cssText = "padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);";
+  eraseBtn.innerHTML = '<span style="font-size:18px;">\u{1F9F9}</span> Erase';
+  function setMode(erasing) {
+    state.isErasing = erasing;
+    if (erasing) {
+      eraseBtn.style.background = "#666";
+      eraseBtn.style.borderColor = "#888";
+      eraseBtn.style.color = "#fff";
+      drawBtn.style.background = "var(--color-surface)";
+      drawBtn.style.borderColor = "#666";
+      drawBtn.style.color = "var(--color-text)";
     } else {
-      fill = "rgba(255, 120, 0, 0.85)";
-      stroke = BURN_STROKE;
-      strokeWidth = "2";
+      drawBtn.style.background = "#FF7800";
+      drawBtn.style.borderColor = "#FF7800";
+      drawBtn.style.color = "#fff";
+      eraseBtn.style.background = "var(--color-surface)";
+      eraseBtn.style.borderColor = "#666";
+      eraseBtn.style.color = "var(--color-text)";
     }
-    svgWrap.querySelectorAll(`g[data-region="${regionId}"] path`).forEach((p) => {
-      p.setAttribute("fill", fill);
-      p.setAttribute("stroke", stroke);
-      p.setAttribute("stroke-width", strokeWidth);
-    });
-    if (regionId === "perineum") {
-      const periBtn = container.querySelector("[data-perineum-btn]");
-      if (periBtn) {
-        if (pct === 0) {
-          periBtn.style.background = "var(--color-surface)";
-          periBtn.style.borderColor = "#666";
-          periBtn.style.color = "var(--color-text)";
-        } else if (pct === 50) {
-          periBtn.style.background = "rgba(255, 120, 0, 0.5)";
-          periBtn.style.borderColor = BURN_STROKE;
-          periBtn.style.color = "#fff";
-        } else {
-          periBtn.style.background = "rgba(255, 120, 0, 0.85)";
-          periBtn.style.borderColor = BURN_STROKE;
-          periBtn.style.color = "#fff";
+  }
+  drawBtn.addEventListener("click", () => setMode(false));
+  eraseBtn.addEventListener("click", () => setMode(true));
+  modeWrap.appendChild(drawBtn);
+  modeWrap.appendChild(eraseBtn);
+  container.appendChild(modeWrap);
+  const brushWrap = document.createElement("div");
+  brushWrap.style.cssText = "display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:12px;padding:0 16px;";
+  const brushLabel = document.createElement("span");
+  brushLabel.style.cssText = "font-size:12px;color:var(--color-text-muted);white-space:nowrap;";
+  brushLabel.textContent = "Brush:";
+  const brushSlider = document.createElement("input");
+  brushSlider.type = "range";
+  brushSlider.min = "8";
+  brushSlider.max = "36";
+  brushSlider.value = "18";
+  brushSlider.style.cssText = "flex:1;max-width:120px;height:24px;";
+  brushSlider.addEventListener("input", () => {
+    state.brushSize = parseInt(brushSlider.value, 10);
+  });
+  const brushPreview = document.createElement("div");
+  brushPreview.style.cssText = "width:36px;height:36px;display:flex;align-items:center;justify-content:center;";
+  const brushDot = document.createElement("div");
+  brushDot.style.cssText = `width:18px;height:18px;border-radius:50%;background:${BURN_COLOR};`;
+  brushPreview.appendChild(brushDot);
+  brushSlider.addEventListener("input", () => {
+    const size = Math.min(32, parseInt(brushSlider.value, 10));
+    brushDot.style.width = `${size}px`;
+    brushDot.style.height = `${size}px`;
+  });
+  brushWrap.appendChild(brushLabel);
+  brushWrap.appendChild(brushSlider);
+  brushWrap.appendChild(brushPreview);
+  container.appendChild(brushWrap);
+  const canvasWrap = document.createElement("div");
+  canvasWrap.style.cssText = "display:flex;justify-content:center;gap:12px;margin-bottom:8px;";
+  function createBodyMask(ctx, regions) {
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.fillStyle = "#000";
+    ctx.scale(SCALE_X, SCALE_Y);
+    for (const region of regions) {
+      for (const pathStr of region.paths) {
+        const path2 = new Path2D(pathStr);
+        ctx.fill(path2);
+      }
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  }
+  function drawBodyOutline(ctx, regions) {
+    ctx.save();
+    ctx.scale(SCALE_X, SCALE_Y);
+    ctx.fillStyle = BODY_FILL;
+    ctx.strokeStyle = BODY_STROKE;
+    ctx.lineWidth = 1 / SCALE_X;
+    ctx.lineJoin = "round";
+    for (const region of regions) {
+      for (const pathStr of region.paths) {
+        const path2 = new Path2D(pathStr);
+        ctx.fill(path2);
+        ctx.stroke(path2);
+      }
+    }
+    ctx.restore();
+  }
+  createBodyMask(state.frontMaskCtx, frontRegions);
+  createBodyMask(state.backMaskCtx, backRegions);
+  drawBodyOutline(state.frontCtx, frontRegions);
+  drawBodyOutline(state.backCtx, backRegions);
+  function createBodyDisplay(canvas, label) {
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "display:flex;flex-direction:column;align-items:center;";
+    const canvasContainer = document.createElement("div");
+    canvasContainer.style.cssText = "position:relative;touch-action:none;";
+    canvas.style.cssText = "touch-action:none;user-select:none;-webkit-user-select:none;border-radius:8px;";
+    canvasContainer.appendChild(canvas);
+    const labelEl = document.createElement("div");
+    labelEl.style.cssText = "font-size:11px;color:var(--color-text-muted);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;";
+    labelEl.textContent = label;
+    wrap.appendChild(canvasContainer);
+    wrap.appendChild(labelEl);
+    return wrap;
+  }
+  function paint(ctx, maskCtx, regions, x, y, fromX, fromY) {
+    const maskData = maskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
+    const checkInBody = (px, py) => {
+      const ix = Math.floor(px);
+      const iy = Math.floor(py);
+      if (ix < 0 || ix >= CANVAS_WIDTH || iy < 0 || iy >= CANVAS_HEIGHT) return false;
+      const idx = (iy * CANVAS_WIDTH + ix) * 4;
+      return maskData[idx] === 0;
+    };
+    ctx.save();
+    if (state.isErasing) {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0,0,0,1)";
+    } else {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = BURN_COLOR;
+    }
+    const radius = state.brushSize / 2;
+    if (fromX !== void 0 && fromY !== void 0) {
+      const dist = Math.sqrt((x - fromX) ** 2 + (y - fromY) ** 2);
+      const steps = Math.max(1, Math.ceil(dist / (radius / 2)));
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const px = fromX + (x - fromX) * t;
+        const py = fromY + (y - fromY) * t;
+        if (checkInBody(px, py)) {
+          ctx.beginPath();
+          ctx.arc(px, py, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    } else if (checkInBody(x, y)) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+    if (state.isErasing) {
+      drawBodyOutline(ctx, regions);
+    }
+  }
+  function calculateTbsa() {
+    const frontData = state.frontCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
+    const backData = state.backCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
+    const frontMaskData = state.frontMaskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
+    const backMaskData = state.backMaskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
+    let totalFrontBody = 0;
+    let totalBackBody = 0;
+    let paintedFront = 0;
+    let paintedBack = 0;
+    for (let i = 0; i < frontMaskData.length; i += 4) {
+      if (frontMaskData[i] === 0) {
+        totalFrontBody++;
+        const r = frontData[i];
+        const g = frontData[i + 1];
+        const b = frontData[i + 2];
+        if (r > 200 && g > 80 && g < 160 && b < 50) {
+          paintedFront++;
+        }
+      }
+      if (backMaskData[i] === 0) {
+        totalBackBody++;
+        const r = backData[i];
+        const g = backData[i + 1];
+        const b = backData[i + 2];
+        if (r > 200 && g > 80 && g < 160 && b < 50) {
+          paintedBack++;
         }
       }
     }
+    const frontRegionTbsa = frontRegions.reduce((sum, r) => sum + r.pct, 0);
+    const backRegionTbsa = backRegions.reduce((sum, r) => sum + r.pct, 0);
+    const frontPct = totalFrontBody > 0 ? paintedFront / totalFrontBody : 0;
+    const backPct = totalBackBody > 0 ? paintedBack / totalBackBody : 0;
+    const tbsaFromFront = frontPct * frontRegionTbsa;
+    const tbsaFromBack = backPct * backRegionTbsa;
+    const perineumContrib = state.perineumPct > 0 && perineum ? state.perineumPct / 100 * perineum.pct : 0;
+    return Math.round((tbsaFromFront + tbsaFromBack + perineumContrib) * 10) / 10;
   }
-  function recalc() {
-    let total = 0;
-    const vals = {};
-    for (const r of allRegions) {
-      const contribution = Math.round(r.pct * burnState[r.id] / 100 * 10) / 10;
-      vals[r.id] = contribution;
-      total += contribution;
-    }
-    total = Math.round(total * 10) / 10;
-    vals["__tbsa"] = total;
-    totalEl.textContent = `${total}%`;
-    if (total === 0) {
+  function updateTbsaDisplay() {
+    const tbsa = calculateTbsa();
+    totalEl.textContent = `${tbsa}%`;
+    if (tbsa === 0) {
       totalEl.style.color = "var(--color-text-muted)";
-    } else if (total < 10) {
+    } else if (tbsa < 10) {
       totalEl.style.color = "var(--color-primary)";
-    } else if (total < 20) {
+    } else if (tbsa < 20) {
       totalEl.style.color = "#FF9800";
-    } else if (total < 40) {
+    } else if (tbsa < 40) {
       totalEl.style.color = "#FF7800";
     } else {
       totalEl.style.color = "#E53935";
     }
-    onUpdate(vals);
+    onUpdate({ "__tbsa": tbsa });
   }
-  const frontSvg = buildSilhouette(frontRegions, "FRONT");
-  const backSvg = buildSilhouette(backRegions, "BACK");
-  svgWrap.appendChild(frontSvg);
-  svgWrap.appendChild(backSvg);
-  container.appendChild(svgWrap);
+  function getCanvasPoint(e, canvas) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    if ("touches" in e) {
+      const touch = e.touches[0] || e.changedTouches[0];
+      return {
+        x: (touch.clientX - rect.left) * scaleX,
+        y: (touch.clientY - rect.top) * scaleY
+      };
+    } else {
+      return {
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY
+      };
+    }
+  }
+  function setupCanvasEvents(canvas, ctx, maskCtx, regions) {
+    let activeCanvas = false;
+    const startDraw = (e) => {
+      e.preventDefault();
+      state.isDrawing = true;
+      activeCanvas = true;
+      const pt = getCanvasPoint(e, canvas);
+      state.lastX = pt.x;
+      state.lastY = pt.y;
+      paint(ctx, maskCtx, regions, pt.x, pt.y);
+      updateTbsaDisplay();
+    };
+    const moveDraw = (e) => {
+      if (!state.isDrawing || !activeCanvas) return;
+      e.preventDefault();
+      const pt = getCanvasPoint(e, canvas);
+      paint(ctx, maskCtx, regions, pt.x, pt.y, state.lastX, state.lastY);
+      state.lastX = pt.x;
+      state.lastY = pt.y;
+      updateTbsaDisplay();
+    };
+    const endDraw = () => {
+      state.isDrawing = false;
+      activeCanvas = false;
+    };
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", moveDraw);
+    canvas.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("mouseleave", endDraw);
+    canvas.addEventListener("touchstart", startDraw, { passive: false });
+    canvas.addEventListener("touchmove", moveDraw, { passive: false });
+    canvas.addEventListener("touchend", endDraw);
+    canvas.addEventListener("touchcancel", endDraw);
+  }
+  setupCanvasEvents(state.frontCanvas, state.frontCtx, state.frontMaskCtx, frontRegions);
+  setupCanvasEvents(state.backCanvas, state.backCtx, state.backMaskCtx, backRegions);
+  canvasWrap.appendChild(createBodyDisplay(state.frontCanvas, "Front"));
+  canvasWrap.appendChild(createBodyDisplay(state.backCanvas, "Back"));
+  container.appendChild(canvasWrap);
   if (perineum) {
+    let updatePerineumBtns2 = function() {
+      [periNone, periHalf, periFull].forEach((btn) => {
+        btn.style.background = "var(--color-surface)";
+        btn.style.borderColor = "#666";
+        btn.style.color = "var(--color-text)";
+      });
+      if (state.perineumPct === 0) {
+        periNone.style.background = "#FF7800";
+        periNone.style.borderColor = "#FF7800";
+        periNone.style.color = "#fff";
+      } else if (state.perineumPct === 50) {
+        periHalf.style.background = "rgba(255, 120, 0, 0.6)";
+        periHalf.style.borderColor = "#FF7800";
+        periHalf.style.color = "#fff";
+      } else {
+        periFull.style.background = "#FF7800";
+        periFull.style.borderColor = "#FF7800";
+        periFull.style.color = "#fff";
+      }
+    };
+    var updatePerineumBtns = updatePerineumBtns2;
     const periWrap = document.createElement("div");
-    periWrap.style.cssText = "display:flex;justify-content:center;margin-bottom:8px;";
-    const periBtn = document.createElement("button");
-    periBtn.style.cssText = "padding:10px 24px;border-radius:8px;background:var(--color-surface);color:var(--color-text);border:2px solid #666;font-size:14px;font-weight:600;cursor:pointer;min-height:44px;";
-    periBtn.textContent = `Perineum (${perineum.pct}%)`;
-    periBtn.setAttribute("data-perineum-btn", "");
-    periBtn.addEventListener("click", () => cycleBurn(perineum.id));
-    periWrap.appendChild(periBtn);
+    periWrap.style.cssText = "display:flex;justify-content:center;gap:8px;margin-bottom:10px;";
+    const periLabel = document.createElement("span");
+    periLabel.style.cssText = "font-size:13px;color:var(--color-text);display:flex;align-items:center;";
+    periLabel.textContent = `Perineum (${perineum.pct}%):`;
+    const periNone = document.createElement("button");
+    periNone.style.cssText = "padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:36px;border:2px solid #FF7800;background:#FF7800;color:#fff;";
+    periNone.textContent = "None";
+    const periHalf = document.createElement("button");
+    periHalf.style.cssText = "padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:36px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);";
+    periHalf.textContent = "Half";
+    const periFull = document.createElement("button");
+    periFull.style.cssText = "padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:36px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);";
+    periFull.textContent = "Full";
+    periNone.addEventListener("click", () => {
+      state.perineumPct = 0;
+      updatePerineumBtns2();
+      updateTbsaDisplay();
+    });
+    periHalf.addEventListener("click", () => {
+      state.perineumPct = 50;
+      updatePerineumBtns2();
+      updateTbsaDisplay();
+    });
+    periFull.addEventListener("click", () => {
+      state.perineumPct = 100;
+      updatePerineumBtns2();
+      updateTbsaDisplay();
+    });
+    periWrap.appendChild(periLabel);
+    periWrap.appendChild(periNone);
+    periWrap.appendChild(periHalf);
+    periWrap.appendChild(periFull);
     container.appendChild(periWrap);
   }
-  const legendEl = document.createElement("div");
-  legendEl.style.cssText = "display:flex;gap:12px;justify-content:center;font-size:11px;color:var(--color-text-muted);margin-bottom:10px;flex-wrap:wrap;";
-  legendEl.innerHTML = `
-    <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--color-surface);border:1px solid #666;"></span>None</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:rgba(255,120,0,0.5);border:1px solid #FF7800;"></span>Half</span>
-    <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:rgba(255,120,0,0.85);border:1px solid #FF7800;"></span>Full</span>
-  `;
-  container.appendChild(legendEl);
   const clearWrap = document.createElement("div");
-  clearWrap.style.cssText = "display:flex;justify-content:center;margin-bottom:6px;";
+  clearWrap.style.cssText = "display:flex;justify-content:center;margin-bottom:10px;";
   const clearBtn = document.createElement("button");
   clearBtn.style.cssText = "padding:10px 24px;border-radius:8px;background:transparent;color:var(--color-text-muted);border:1px solid var(--color-text-muted);font-size:13px;cursor:pointer;min-height:44px;";
   clearBtn.textContent = "Clear All";
   clearBtn.addEventListener("click", () => {
-    for (const r of allRegions) {
-      burnState[r.id] = 0;
-      updateRegionFill(r.id);
-    }
-    recalc();
+    state.frontCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    state.backCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    drawBodyOutline(state.frontCtx, frontRegions);
+    drawBodyOutline(state.backCtx, backRegions);
+    state.perineumPct = 0;
+    const periNone = container.querySelector("button:nth-child(2)");
+    if (periNone) periNone.click();
+    updateTbsaDisplay();
   });
   clearWrap.appendChild(clearBtn);
   container.appendChild(clearWrap);
 }
 function buildSliderDiagram(container, frontRegions, backRegions, perineum, onUpdate) {
-  buildTapToggleDiagram(container, frontRegions, backRegions, perineum, onUpdate);
+  buildEburnPainter(container, frontRegions, backRegions, perineum, onUpdate);
 }
 var ADULT_FRONT_REGIONS = [
   { id: "head-front", label: "Head (front)", pct: 4.5, paths: [
@@ -15655,7 +15859,7 @@ var ADULT_PERINEUM = { id: "perineum", label: "Perineum", pct: 1, paths: [] };
 function tbsaComputeResult(values, isPeds) {
   const tbsa = values["__tbsa"] || 0;
   if (tbsa === 0) {
-    return { value: "0%", label: "No Burn Selected", description: "Tap body regions to mark burned areas. Each tap cycles: None \u2192 Half \u2192 Full.", colorVar: "--color-text-muted" };
+    return { value: "0%", label: "No Burn Selected", description: "Draw on the body to paint burn areas. Use the eraser to correct.", colorVar: "--color-text-muted" };
   }
   let label;
   let colorVar;
@@ -15684,7 +15888,7 @@ var TBSA_ADULT_CALCULATOR = {
   id: "tbsa-adult",
   title: "TBSA \u2014 Rule of 9s",
   subtitle: "Adult Total Body Surface Area",
-  description: "Tap-to-toggle body diagram for fast TBSA estimation. Each tap cycles: None \u2192 Half \u2192 Full. Rule of 9s for adults.",
+  description: "Draw burn areas directly on the body diagram. Finger-paint interface for precise TBSA estimation. Rule of 9s for adults.",
   fields: [],
   results: [],
   thresholdNote: "ABA Burn Center referral criteria: partial thickness >10% TBSA, full thickness any size, burns to face/hands/feet/genitalia/perineum/major joints, electrical/chemical/inhalation, circumferential burns.",
@@ -15804,7 +16008,7 @@ var TBSA_PEDS_CALCULATOR = {
   id: "tbsa-peds",
   title: "TBSA \u2014 Lund-Browder",
   subtitle: "Pediatric Total Body Surface Area",
-  description: "Tap-to-toggle Lund-Browder chart for pediatric burn TBSA. Each tap cycles: None \u2192 Half \u2192 Full. Age-adjusted percentages.",
+  description: "Draw burn areas on the Lund-Browder chart. Finger-paint interface with age-adjusted percentages for pediatric burns.",
   fields: [],
   results: [],
   thresholdNote: "Pediatric burn center referral: >10% TBSA partial thickness, any full thickness, burns to face/hands/feet/genitalia/perineum/joints, electrical/chemical/inhalation, circumferential burns, suspected abuse.",
