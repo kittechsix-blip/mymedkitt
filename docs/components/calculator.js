@@ -875,12 +875,19 @@ function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpd
         ctx.stroke(path);
         ctx.restore();
     }
+    // Zone labels will be shown as HTML below the canvas instead of on the canvas
+    // This avoids issues with text visibility on white body fill
+    function drawZoneLabels(_ctx, _isFront) {
+        // Intentionally empty - labels shown via HTML legend below
+    }
     // Create masks
     createBodyMaskFromPath(state.frontMaskCtx, frontBodyPath);
     createBodyMaskFromPath(state.backMaskCtx, backBodyPath);
-    // Draw initial body outlines
+    // Draw initial body outlines with zone labels
     drawBodyOutlineFromPath(state.frontCtx, frontBodyPath);
+    drawZoneLabels(state.frontCtx, true);
     drawBodyOutlineFromPath(state.backCtx, backBodyPath);
+    drawZoneLabels(state.backCtx, false);
     // Flip handler
     function flipView() {
         state.showingFront = !state.showingFront;
@@ -942,6 +949,9 @@ function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpd
         // Redraw body outline on top if erasing
         if (state.isErasing) {
             drawBodyOutlineFromPath(ctx, bodyPath);
+            // Re-add zone labels after redraw
+            const isFront = ctx === state.frontCtx;
+            drawZoneLabels(ctx, isFront);
         }
     }
     // Count painted pixels
@@ -1069,7 +1079,9 @@ function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpd
         state.frontCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         state.backCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         drawBodyOutlineFromPath(state.frontCtx, frontBodyPath);
+        drawZoneLabels(state.frontCtx, true);
         drawBodyOutlineFromPath(state.backCtx, backBodyPath);
+        drawZoneLabels(state.backCtx, false);
         state.perineumPct = 0;
         updateTbsaDisplay();
     });
@@ -1120,6 +1132,31 @@ function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpd
         periWrap.appendChild(periFull);
         container.appendChild(periWrap);
     }
+    // --- Rule of 9s Zone Legend ---
+    const zoneLegend = document.createElement('div');
+    zoneLegend.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px;padding:8px;background:rgba(50,50,50,0.8);border:1px solid #555;border-radius:8px;font-size:11px;';
+    if (calculatorType === 'adult') {
+        zoneLegend.innerHTML = `
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Head</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Trunk (each side)</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Each Arm</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Each Leg</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">1%</span><br><span style="color:var(--color-text-muted);">Perineum</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:var(--color-text-muted);">100%</span><br><span style="color:var(--color-text-muted);">Total</span></div>
+    `;
+    }
+    else {
+        // Pediatric percentages vary by age - simplified
+        zoneLegend.innerHTML = `
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Head (infant)</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Trunk (each side)</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Each Arm</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">14%</span><br><span style="color:var(--color-text-muted);">Each Leg (infant)</span></div>
+      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">1%</span><br><span style="color:var(--color-text-muted);">Perineum</span></div>
+      <div style="text-align:center;color:var(--color-text-muted);font-size:10px;">Use Lund-Browder for age-adjusted %</div>
+    `;
+    }
+    container.appendChild(zoneLegend);
     // --- Warning at bottom ---
     const warning = document.createElement('div');
     warning.style.cssText = 'font-size:11px;color:#FF9800;margin-top:8px;line-height:1.4;padding:6px 10px;background:rgba(255,152,0,0.1);border-radius:6px;text-align:center;';
