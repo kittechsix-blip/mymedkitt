@@ -5,16 +5,43 @@
 const DB_NAME = 'medkitt-cache';
 const DB_VERSION = 4;
 
+// Bump this to force-clear all cached data on next app load.
+// Use when tree structure, drug data, or info pages change.
+const DATA_VERSION = 1;
+const DATA_VERSION_KEY = 'medkitt-data-version';
+
 export type StoreName = 'drugs' | 'categories' | 'category_trees' | 'decision_nodes' | 'tree_citations' | 'sync_meta' | 'info_pages';
 
 let dbPromise: Promise<IDBDatabase> | null = null;
+
+/** Check if cached data is outdated and wipe if so */
+async function checkDataVersion(db: IDBDatabase): Promise<void> {
+  const stored = localStorage.getItem(DATA_VERSION_KEY);
+  if (stored === String(DATA_VERSION)) return;
+
+  // Wipe all object stores
+  const storeNames: StoreName[] = ['drugs', 'categories', 'category_trees', 'decision_nodes', 'tree_citations', 'sync_meta', 'info_pages'];
+  const tx = db.transaction(storeNames, 'readwrite');
+  for (const name of storeNames) {
+    tx.objectStore(name).clear();
+  }
+  await new Promise<void>((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+
+  localStorage.setItem(DATA_VERSION_KEY, String(DATA_VERSION));
+}
 
 function openDB(): Promise<IDBDatabase> {
   if (dbPromise) return dbPromise;
   dbPromise = new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
     request.onerror = () => reject(request.error);
-    request.onsuccess = () => resolve(request.result);
+    request.onsuccess = async () => {
+      await checkDataVersion(request.result);
+      resolve(request.result);
+    };
     request.onupgradeneeded = (event) => {
       const db = (event.target as IDBOpenDBRequest).result;
       if (!db.objectStoreNames.contains('drugs')) {
