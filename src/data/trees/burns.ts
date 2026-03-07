@@ -112,7 +112,7 @@ export const BURNS_NODES: DecisionNode[] = [
   {
     id: 'burn-tbsa-age',
     type: 'question',
-    module: 1,
+    module: 2,
     title: 'Patient Age for TBSA',
     body: 'Select the appropriate TBSA estimation method based on patient age.\n\n**Only count partial thickness (2nd degree) and full thickness (3rd/4th degree) burns in TBSA.** Epidermal/superficial burns (e.g., sunburn) are NOT included in TBSA calculations.\n\nAccurate TBSA estimation is critical — it drives fluid resuscitation volumes, burn center transfer decisions, and prognosis.',
     options: [

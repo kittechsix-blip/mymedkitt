@@ -602,642 +602,358 @@ const CORRECTED_NA_CALCULATOR = {
         };
     },
 };
-const BURN_COLOR = '#FF7800';
-const BODY_FILL = '#ffffff';
-const BODY_STROKE = '#333333';
-// Human body silhouette - Adult FRONT view
-// FULLY CONTINUOUS path - traces entire body outline without lifting pen
-// Start at top of head, go left around entire body, back to start
-// Viewbox: 0 0 100 280
-const ADULT_BODY_FRONT_PATH = `
-M 50 5
-C 42 5, 36 11, 36 20
-C 36 29, 40 35, 45 38
-L 45 42
-C 38 44, 30 50, 26 62
-C 22 74, 18 90, 16 108
-C 14 126, 14 140, 18 150
-L 20 156
-L 20 195
-L 18 230
-C 18 248, 22 260, 30 266
-L 40 268
-L 42 240
-L 44 200
-L 46 178
-L 46 200
-L 46 252
-C 46 262, 48 270, 50 270
-C 52 270, 54 262, 54 252
-L 54 200
-L 54 178
-L 56 200
-L 58 240
-L 60 268
-L 70 266
-C 78 260, 82 248, 82 230
-L 80 195
-L 80 156
-L 82 150
-C 86 140, 86 126, 84 108
-C 82 90, 78 74, 74 62
-C 70 50, 62 44, 55 42
-L 55 38
-C 60 35, 64 29, 64 20
-C 64 11, 58 5, 50 5
-Z
-`;
-// Adult BACK view (same silhouette)
-const ADULT_BODY_BACK_PATH = ADULT_BODY_FRONT_PATH;
-// Human body silhouette - Pediatric FRONT view
-// Larger head, shorter body proportions
-// Viewbox: 0 0 100 280
-const PEDS_BODY_FRONT_PATH = `
-M 50 4
-C 40 4, 32 12, 32 24
-C 32 36, 38 44, 45 48
-L 45 54
-C 36 56, 28 64, 24 78
-C 20 92, 16 110, 14 130
-C 12 150, 12 166, 16 178
-L 18 186
-L 18 220
-L 16 252
-C 16 266, 22 276, 32 280
-L 42 280
-L 44 252
-L 46 215
-L 47 192
-L 47 215
-L 47 260
-C 47 270, 48 276, 50 276
-C 52 276, 53 270, 53 260
-L 53 215
-L 53 192
-L 54 215
-L 56 252
-L 58 280
-L 68 280
-C 78 276, 84 266, 84 252
-L 82 220
-L 82 186
-L 84 178
-C 88 166, 88 150, 86 130
-C 84 110, 80 92, 76 78
-C 72 64, 64 56, 55 54
-L 55 48
-C 62 44, 68 36, 68 24
-C 68 12, 60 4, 50 4
-Z
-`;
-const PEDS_BODY_BACK_PATH = PEDS_BODY_FRONT_PATH;
-function buildEburnPainter(container, frontRegions, backRegions, perineum, onUpdate, calculatorType = 'adult') {
-    // Canvas sized to fit on mobile without scrolling
-    // Body paths use 100x280 viewbox (both adult and peds)
-    const CANVAS_WIDTH = 220;
-    const CANVAS_HEIGHT = 280;
-    const SVG_VIEWBOX_WIDTH = 100;
-    const SVG_VIEWBOX_HEIGHT = 280;
-    const SCALE_X = CANVAS_WIDTH / SVG_VIEWBOX_WIDTH;
-    const SCALE_Y = CANVAS_HEIGHT / SVG_VIEWBOX_HEIGHT;
-    // Use anatomical body paths
-    const frontBodyPath = calculatorType === 'peds' ? PEDS_BODY_FRONT_PATH : ADULT_BODY_FRONT_PATH;
-    const backBodyPath = calculatorType === 'peds' ? PEDS_BODY_BACK_PATH : ADULT_BODY_BACK_PATH;
-    // Collect all regions for perineum tracking
-    const allRegions = [...frontRegions, ...backRegions];
-    if (perineum)
-        allRegions.push(perineum);
-    // State
-    const state = {
-        frontCanvas: document.createElement('canvas'),
-        backCanvas: document.createElement('canvas'),
-        frontMask: document.createElement('canvas'),
-        backMask: document.createElement('canvas'),
-        frontCtx: null,
-        backCtx: null,
-        frontMaskCtx: null,
-        backMaskCtx: null,
-        isDrawing: false,
-        isErasing: false,
-        brushSize: 28,
-        lastX: 0,
-        lastY: 0,
-        perineumPct: 0,
-        showingFront: true,
+// -------------------------------------------------------------------
+// TBSA Calculator — E-burn Style Finger-Paint
+// -------------------------------------------------------------------
+// Draw/paint burn areas directly on body silhouette.
+// Single view at a time with flip button (like E-burn app).
+// Pixel counting for precise TBSA calculation.
+// ===================================================================
+// TBSA Freehand Paint Calculator — Medical Illustration SVG Paths
+// Canvas-based finger painting with proportional region TBSA
+// ===================================================================
+// Adult front view SVG paths — medical illustration standard
+// Head: cranium only. Neck is part of chest (trunk 18%)
+const TBSA_ADULT_FRONT = {
+    'head-front': 'M 100 10 C 80 10, 72 24, 72 38 C 72 48, 76 56, 82 60 C 86 64, 92 66, 100 67 C 108 66, 114 64, 118 60 C 124 56, 128 48, 128 38 C 128 24, 120 10, 100 10 Z',
+    'chest': 'M 90 67 C 88 68, 88 70, 88 74 L 88 80 C 80 80, 70 78, 64 80 C 58 82, 56 86, 56 92 C 56 110, 58 130, 60 152 L 140 152 C 142 130, 144 110, 144 92 C 144 86, 142 82, 136 80 C 130 78, 120 80, 112 80 L 112 74 C 112 70, 112 68, 110 67 C 108 66, 104 66, 100 67 C 96 66, 92 66, 90 67 Z',
+    'abdomen': 'M 60 152 L 140 152 C 140 168, 138 182, 136 196 C 134 208, 130 216, 126 222 C 118 228, 110 230, 100 230 C 90 230, 82 228, 74 222 C 70 216, 66 208, 64 196 C 62 182, 60 168, 60 152 Z',
+    'perineum': 'M 92 230 C 96 234, 100 237, 100 237 C 100 237, 104 234, 108 230 C 104 230, 100 231, 100 231 C 100 231, 96 230, 92 230 Z',
+    'right-upper-arm-front': 'M 136 80 C 142 80, 148 82, 152 86 C 156 92, 158 100, 160 112 L 162 136 C 162 142, 160 148, 158 152 L 144 152 C 144 130, 144 110, 144 92 Z',
+    'right-forearm-front': 'M 144 152 L 158 152 C 160 168, 162 184, 164 200 L 164 210 L 150 214 C 148 200, 146 184, 144 168 Z',
+    'right-hand': 'M 150 214 L 164 210 C 166 218, 168 226, 168 234 C 168 240, 166 246, 162 250 C 160 254, 156 256, 152 254 C 148 250, 148 244, 148 238 C 148 230, 148 222, 150 214 Z',
+    'left-upper-arm-front': 'M 64 80 C 58 80, 52 82, 48 86 C 44 92, 42 100, 40 112 L 38 136 C 38 142, 40 148, 42 152 L 56 152 C 56 130, 56 110, 56 92 Z',
+    'left-forearm-front': 'M 56 152 L 42 152 C 40 168, 38 184, 36 200 L 36 210 L 50 214 C 52 200, 54 184, 56 168 Z',
+    'left-hand': 'M 50 214 L 36 210 C 34 218, 32 226, 32 234 C 32 240, 34 246, 38 250 C 40 254, 44 256, 48 254 C 52 250, 52 244, 52 238 C 52 230, 52 222, 50 214 Z',
+    'right-thigh-front': 'M 108 230 L 126 222 C 130 236, 132 256, 132 276 C 132 296, 130 316, 128 330 L 124 336 L 106 336 C 106 316, 106 296, 106 276 C 106 256, 106 244, 108 230 Z',
+    'right-lower-leg-front': 'M 106 336 L 124 336 C 126 356, 126 376, 124 400 C 122 418, 120 432, 118 442 L 110 442 C 108 432, 106 418, 106 400 C 104 376, 104 356, 106 336 Z',
+    'right-foot': 'M 110 442 L 118 442 C 120 450, 122 456, 124 462 C 126 470, 124 476, 118 480 C 114 482, 110 480, 108 476 C 104 468, 106 456, 110 442 Z',
+    'left-thigh-front': 'M 92 230 L 74 222 C 70 236, 68 256, 68 276 C 68 296, 70 316, 72 330 L 76 336 L 94 336 C 94 316, 94 296, 94 276 C 94 256, 94 244, 92 230 Z',
+    'left-lower-leg-front': 'M 94 336 L 76 336 C 74 356, 74 376, 76 400 C 78 418, 80 432, 82 442 L 90 442 C 92 432, 94 418, 94 400 C 96 376, 96 356, 94 336 Z',
+    'left-foot': 'M 90 442 L 82 442 C 80 450, 78 456, 76 462 C 74 470, 76 476, 82 480 C 86 482, 90 480, 92 476 C 96 468, 94 456, 90 442 Z',
+};
+const TBSA_ADULT_BACK = {
+    'head-back': TBSA_ADULT_FRONT['head-front'],
+    'upper-back': 'M 90 67 C 88 68, 88 70, 88 74 L 88 80 C 80 80, 70 78, 64 80 C 58 82, 56 86, 56 92 C 56 110, 58 130, 60 152 L 140 152 C 142 130, 144 110, 144 92 C 144 86, 142 82, 136 80 C 130 78, 120 80, 112 80 L 112 74 C 112 70, 112 68, 110 67 C 108 66, 104 66, 100 67 C 96 66, 92 66, 90 67 Z',
+    'lower-back': 'M 60 152 L 140 152 C 140 168, 138 182, 136 196 C 134 208, 130 214, 126 218 L 74 218 C 70 214, 66 208, 64 196 C 62 182, 60 168, 60 152 Z',
+    'right-buttock': 'M 100 218 L 126 218 C 130 224, 130 230, 126 234 C 120 240, 110 242, 100 242 Z',
+    'left-buttock': 'M 100 218 L 74 218 C 70 224, 70 230, 74 234 C 80 240, 90 242, 100 242 Z',
+    'right-upper-arm-back': TBSA_ADULT_FRONT['right-upper-arm-front'],
+    'right-forearm-back': TBSA_ADULT_FRONT['right-forearm-front'],
+    'left-upper-arm-back': TBSA_ADULT_FRONT['left-upper-arm-front'],
+    'left-forearm-back': TBSA_ADULT_FRONT['left-forearm-front'],
+    'right-thigh-back': 'M 100 242 L 126 234 C 130 250, 132 270, 132 290 C 132 310, 130 324, 128 330 L 124 336 L 106 336 C 106 316, 106 296, 106 276 C 106 256, 106 248, 100 242 Z',
+    'right-lower-leg-back': TBSA_ADULT_FRONT['right-lower-leg-front'],
+    'left-thigh-back': 'M 100 242 L 74 234 C 70 250, 68 270, 68 290 C 68 310, 70 324, 72 330 L 76 336 L 94 336 C 94 316, 94 296, 94 276 C 94 256, 94 248, 100 242 Z',
+    'left-lower-leg-back': TBSA_ADULT_FRONT['left-lower-leg-front'],
+};
+// Pediatric front view — larger head proportionally
+const TBSA_PEDS_FRONT = {
+    'head-front': 'M 100 8 C 72 8, 58 28, 58 50 C 58 66, 66 80, 76 86 C 84 90, 92 93, 100 94 C 108 93, 116 90, 124 86 C 134 80, 142 66, 142 50 C 142 28, 128 8, 100 8 Z',
+    'chest': 'M 92 94 C 90 95, 88 98, 88 102 L 88 108 C 80 108, 70 106, 64 108 C 58 110, 56 114, 56 120 C 56 135, 58 148, 60 162 L 140 162 C 142 148, 144 135, 144 120 C 144 114, 142 110, 136 108 C 130 106, 120 108, 112 108 L 112 102 C 112 98, 110 95, 108 94 C 106 93, 102 93, 100 94 C 98 93, 94 93, 92 94 Z',
+    'abdomen': 'M 60 162 L 140 162 C 140 178, 138 192, 136 204 C 134 214, 130 220, 126 226 C 118 232, 110 234, 100 234 C 90 234, 82 232, 74 226 C 70 220, 66 214, 64 204 C 62 192, 60 178, 60 162 Z',
+    'perineum': 'M 92 234 C 96 238, 100 240, 100 240 C 100 240, 104 238, 108 234 C 104 234, 100 235, 100 235 C 100 235, 96 234, 92 234 Z',
+    'right-upper-arm-front': 'M 136 108 C 142 108, 148 110, 152 114 C 156 120, 158 128, 160 140 L 160 152 C 160 156, 158 160, 156 162 L 144 162 C 144 148, 144 135, 144 120 Z',
+    'right-forearm-front': 'M 144 162 L 156 162 C 158 176, 160 190, 162 204 L 162 212 L 150 216 C 148 204, 146 190, 144 176 Z',
+    'right-hand': 'M 150 216 L 162 212 C 164 220, 166 228, 164 236 C 162 240, 158 244, 154 242 C 150 240, 150 234, 150 228 C 150 224, 150 220, 150 216 Z',
+    'left-upper-arm-front': 'M 64 108 C 58 108, 52 110, 48 114 C 44 120, 42 128, 40 140 L 40 152 C 40 156, 42 160, 44 162 L 56 162 C 56 148, 56 135, 56 120 Z',
+    'left-forearm-front': 'M 56 162 L 44 162 C 42 176, 40 190, 38 204 L 38 212 L 50 216 C 52 204, 54 190, 56 176 Z',
+    'left-hand': 'M 50 216 L 38 212 C 36 220, 34 228, 36 236 C 38 240, 42 244, 46 242 C 50 240, 50 234, 50 228 C 50 224, 50 220, 50 216 Z',
+    'right-thigh-front': 'M 108 234 L 126 226 C 130 240, 132 260, 132 280 C 132 300, 130 314, 128 324 L 124 330 L 106 330 C 106 314, 106 298, 106 280 C 106 260, 106 248, 108 234 Z',
+    'right-lower-leg-front': 'M 106 330 L 124 330 C 126 348, 126 366, 124 388 C 122 404, 120 416, 118 426 L 110 426 C 108 416, 106 404, 106 388 C 104 366, 104 348, 106 330 Z',
+    'right-foot': 'M 110 426 L 118 426 C 120 434, 122 440, 124 446 C 126 454, 124 460, 118 464 C 114 466, 110 464, 108 460 C 104 452, 106 440, 110 426 Z',
+    'left-thigh-front': 'M 92 234 L 74 226 C 70 240, 68 260, 68 280 C 68 300, 70 314, 72 324 L 76 330 L 94 330 C 94 314, 94 298, 94 280 C 94 260, 94 248, 92 234 Z',
+    'left-lower-leg-front': 'M 94 330 L 76 330 C 74 348, 74 366, 76 388 C 78 404, 80 416, 82 426 L 90 426 C 92 416, 94 404, 94 388 C 96 366, 96 348, 94 330 Z',
+    'left-foot': 'M 90 426 L 82 426 C 80 434, 78 440, 76 446 C 74 454, 76 460, 82 464 C 86 466, 90 464, 92 460 C 96 452, 94 440, 90 426 Z',
+};
+const TBSA_PEDS_BACK = {
+    'head-back': TBSA_PEDS_FRONT['head-front'],
+    'upper-back': TBSA_PEDS_FRONT['chest'],
+    'lower-back': 'M 60 162 L 140 162 C 140 178, 138 192, 136 204 C 134 214, 130 218, 126 222 L 74 222 C 70 218, 66 214, 64 204 C 62 192, 60 178, 60 162 Z',
+    'right-buttock': 'M 100 222 L 126 222 C 130 228, 130 234, 126 238 C 120 244, 110 246, 100 246 Z',
+    'left-buttock': 'M 100 222 L 74 222 C 70 228, 70 234, 74 238 C 80 244, 90 246, 100 246 Z',
+    'right-upper-arm-back': TBSA_PEDS_FRONT['right-upper-arm-front'],
+    'right-forearm-back': TBSA_PEDS_FRONT['right-forearm-front'],
+    'left-upper-arm-back': TBSA_PEDS_FRONT['left-upper-arm-front'],
+    'left-forearm-back': TBSA_PEDS_FRONT['left-forearm-front'],
+    'right-thigh-back': 'M 100 246 L 126 238 C 130 254, 132 274, 132 294 C 132 314, 130 324, 128 330 L 124 336 L 106 336 C 106 320, 106 304, 106 288 C 106 268, 106 254, 100 246 Z',
+    'right-lower-leg-back': TBSA_PEDS_FRONT['right-lower-leg-front'],
+    'left-thigh-back': 'M 100 246 L 74 238 C 70 254, 68 274, 68 294 C 68 314, 70 324, 72 330 L 76 336 L 94 336 C 94 320, 94 304, 94 288 C 94 268, 94 254, 100 246 Z',
+    'left-lower-leg-back': TBSA_PEDS_FRONT['left-lower-leg-front'],
+};
+// Adult Rule of 9s percentages per region
+const TBSA_ADULT_PCT = {
+    'head-front': 4.5, 'head-back': 4.5,
+    'chest': 9, 'abdomen': 9,
+    'upper-back': 9, 'lower-back': 9,
+    'right-upper-arm-front': 2, 'right-upper-arm-back': 2,
+    'right-forearm-front': 1.5, 'right-forearm-back': 1.5, 'right-hand': 1,
+    'left-upper-arm-front': 2, 'left-upper-arm-back': 2,
+    'left-forearm-front': 1.5, 'left-forearm-back': 1.5, 'left-hand': 1,
+    'right-thigh-front': 4.5, 'right-thigh-back': 4.5,
+    'right-lower-leg-front': 3.5, 'right-lower-leg-back': 3.5, 'right-foot': 1,
+    'left-thigh-front': 4.5, 'left-thigh-back': 4.5,
+    'left-lower-leg-front': 3.5, 'left-lower-leg-back': 3.5, 'left-foot': 1,
+    'right-buttock': 2.5, 'left-buttock': 2.5, 'perineum': 1,
+};
+const LB_AGES = [
+    { label: '0-1 year', headTotal: 19, eachThighTotal: 5.5, eachLowerLegTotal: 5 },
+    { label: '1-4 years', headTotal: 17, eachThighTotal: 6.5, eachLowerLegTotal: 5 },
+    { label: '5-9 years', headTotal: 13, eachThighTotal: 8, eachLowerLegTotal: 5.5 },
+    { label: '10-14 years', headTotal: 11, eachThighTotal: 8.5, eachLowerLegTotal: 6 },
+];
+function buildPedsPct(ageIdx) {
+    const a = LB_AGES[ageIdx];
+    return {
+        'head-front': a.headTotal / 2, 'head-back': a.headTotal / 2,
+        'chest': 6.5, 'abdomen': 6.5, 'upper-back': 6.5, 'lower-back': 6.5,
+        'right-upper-arm-front': 2, 'right-upper-arm-back': 2,
+        'right-forearm-front': 1.5, 'right-forearm-back': 1.5, 'right-hand': 1.25,
+        'left-upper-arm-front': 2, 'left-upper-arm-back': 2,
+        'left-forearm-front': 1.5, 'left-forearm-back': 1.5, 'left-hand': 1.25,
+        'right-thigh-front': a.eachThighTotal / 2, 'right-thigh-back': a.eachThighTotal / 2,
+        'right-lower-leg-front': a.eachLowerLegTotal / 2, 'right-lower-leg-back': a.eachLowerLegTotal / 2,
+        'right-foot': 1.75, 'left-foot': 1.75,
+        'left-thigh-front': a.eachThighTotal / 2, 'left-thigh-back': a.eachThighTotal / 2,
+        'left-lower-leg-front': a.eachLowerLegTotal / 2, 'left-lower-leg-back': a.eachLowerLegTotal / 2,
+        'right-buttock': 2.5, 'left-buttock': 2.5, 'perineum': 1,
     };
-    // Initialize canvases
-    [state.frontCanvas, state.backCanvas, state.frontMask, state.backMask].forEach(c => {
-        c.width = CANVAS_WIDTH;
-        c.height = CANVAS_HEIGHT;
-    });
-    state.frontCtx = state.frontCanvas.getContext('2d', { willReadFrequently: true });
-    state.backCtx = state.backCanvas.getContext('2d', { willReadFrequently: true });
-    state.frontMaskCtx = state.frontMask.getContext('2d');
-    state.backMaskCtx = state.backMask.getContext('2d');
-    // --- Calculator switcher (Adult / Peds) ---
-    const switcherWrap = document.createElement('div');
-    switcherWrap.style.cssText = 'display:flex;gap:8px;justify-content:center;margin-bottom:12px;';
-    const adultLink = document.createElement('a');
-    adultLink.href = '#/calculator/tbsa-adult';
-    adultLink.style.cssText = `padding:12px 24px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center;${calculatorType === 'adult' ? 'background:#FF7800;color:#fff;border:2px solid #FF7800;' : 'background:var(--color-surface);color:var(--color-text);border:2px solid #666;'}`;
-    adultLink.textContent = 'Adult';
-    const pedsLink = document.createElement('a');
-    pedsLink.href = '#/calculator/tbsa-peds';
-    pedsLink.style.cssText = `padding:12px 24px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center;${calculatorType === 'peds' ? 'background:#FF7800;color:#fff;border:2px solid #FF7800;' : 'background:var(--color-surface);color:var(--color-text);border:2px solid #666;'}`;
-    pedsLink.textContent = 'Pediatric';
-    switcherWrap.appendChild(adultLink);
-    switcherWrap.appendChild(pedsLink);
-    container.appendChild(switcherWrap);
-    // --- Large TBSA display ---
-    const totalWrap = document.createElement('div');
-    totalWrap.style.cssText = 'text-align:center;margin-bottom:8px;';
-    const totalEl = document.createElement('div');
-    totalEl.style.cssText = 'font-size:56px;font-weight:800;color:var(--color-text-muted);line-height:1;';
-    totalEl.textContent = '0%';
-    const totalLabel = document.createElement('div');
-    totalLabel.style.cssText = 'font-size:14px;color:var(--color-text-muted);margin-top:2px;';
-    totalLabel.textContent = 'TBSA';
-    totalWrap.appendChild(totalEl);
-    totalWrap.appendChild(totalLabel);
-    container.appendChild(totalWrap);
-    // --- Toolbar: Flip + Draw/Erase + Reset ---
-    const toolbarWrap = document.createElement('div');
-    toolbarWrap.style.cssText = 'display:flex;gap:6px;justify-content:center;margin-bottom:8px;flex-wrap:wrap;';
-    // Flip button
-    const flipBtn = document.createElement('button');
-    flipBtn.style.cssText = 'padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:6px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);';
-    flipBtn.innerHTML = '↻ Flip';
-    const drawBtn = document.createElement('button');
-    drawBtn.style.cssText = 'padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:6px;border:2px solid #FF7800;background:#FF7800;color:#fff;';
-    drawBtn.innerHTML = '✏️ Draw';
-    const eraseBtn = document.createElement('button');
-    eraseBtn.style.cssText = 'padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:6px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);';
-    eraseBtn.innerHTML = '🧹 Erase';
-    const resetBtn = document.createElement('button');
-    resetBtn.style.cssText = 'padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;min-height:48px;display:flex;align-items:center;gap:6px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);';
-    resetBtn.innerHTML = 'Reset';
-    function setMode(erasing) {
-        state.isErasing = erasing;
-        if (erasing) {
-            eraseBtn.style.background = '#666';
-            eraseBtn.style.borderColor = '#888';
-            eraseBtn.style.color = '#fff';
-            drawBtn.style.background = 'var(--color-surface)';
-            drawBtn.style.borderColor = '#666';
-            drawBtn.style.color = 'var(--color-text)';
-        }
-        else {
-            drawBtn.style.background = '#FF7800';
-            drawBtn.style.borderColor = '#FF7800';
-            drawBtn.style.color = '#fff';
-            eraseBtn.style.background = 'var(--color-surface)';
-            eraseBtn.style.borderColor = '#666';
-            eraseBtn.style.color = 'var(--color-text)';
-        }
-    }
-    drawBtn.addEventListener('click', () => setMode(false));
-    eraseBtn.addEventListener('click', () => setMode(true));
-    toolbarWrap.appendChild(flipBtn);
-    toolbarWrap.appendChild(drawBtn);
-    toolbarWrap.appendChild(eraseBtn);
-    toolbarWrap.appendChild(resetBtn);
-    container.appendChild(toolbarWrap);
-    // --- Brush size slider ---
-    const brushWrap = document.createElement('div');
-    brushWrap.style.cssText = 'display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;padding:0 16px;';
-    const brushLabel = document.createElement('span');
-    brushLabel.style.cssText = 'font-size:12px;color:var(--color-text-muted);white-space:nowrap;';
-    brushLabel.textContent = 'Brush:';
-    const brushSlider = document.createElement('input');
-    brushSlider.type = 'range';
-    brushSlider.min = '16';
-    brushSlider.max = '60';
-    brushSlider.value = '28';
-    brushSlider.style.cssText = 'flex:1;max-width:150px;height:28px;';
-    brushSlider.addEventListener('input', () => {
-        state.brushSize = parseInt(brushSlider.value, 10);
-    });
-    const brushPreview = document.createElement('div');
-    brushPreview.style.cssText = 'width:44px;height:44px;display:flex;align-items:center;justify-content:center;';
-    const brushDot = document.createElement('div');
-    brushDot.style.cssText = `width:28px;height:28px;border-radius:50%;background:${BURN_COLOR};`;
-    brushPreview.appendChild(brushDot);
-    brushSlider.addEventListener('input', () => {
-        const size = Math.min(44, parseInt(brushSlider.value, 10));
-        brushDot.style.width = `${size}px`;
-        brushDot.style.height = `${size}px`;
-    });
-    brushWrap.appendChild(brushLabel);
-    brushWrap.appendChild(brushSlider);
-    brushWrap.appendChild(brushPreview);
-    container.appendChild(brushWrap);
-    // --- View label (FRONT / BACK) ---
+}
+// Freehand paint TBSA calculator — canvas-based
+function buildTbsaPainter(container, frontPaths, backPaths, pctMap, onUpdate) {
+    const CW = 400, CH = 1000, SVG_W = 200;
+    const SCALE = CW / SVG_W;
+    const BRUSH = 18;
+    const BURN_RGBA = [232, 71, 42, 200];
+    const BODY_CLR = '#c8b8a8';
+    const STROKE_CLR = '#8a7a6a';
+    let currentView = 'front';
+    let regionMap = new Int16Array(0);
+    let regionList = [];
+    const history = [];
+    let isPainting = false;
+    let lastPt = null;
+    // Wrapper
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:10px;';
+    // View toggle + controls
+    const toolbar = document.createElement('div');
+    toolbar.style.cssText = 'display:flex;gap:8px;justify-content:center;flex-wrap:wrap;';
+    const btnStyle = 'padding:8px 16px;border-radius:8px;background:var(--color-surface);color:var(--color-text);border:1px solid #444;font-size:14px;min-height:44px;cursor:pointer;';
+    const viewBtn = document.createElement('button');
+    viewBtn.style.cssText = btnStyle;
+    viewBtn.textContent = 'Show Back';
+    const undoBtn = document.createElement('button');
+    undoBtn.style.cssText = btnStyle;
+    undoBtn.textContent = 'Undo';
+    const clearBtn = document.createElement('button');
+    clearBtn.style.cssText = btnStyle;
+    clearBtn.textContent = 'Clear All';
+    toolbar.appendChild(viewBtn);
+    toolbar.appendChild(undoBtn);
+    toolbar.appendChild(clearBtn);
+    wrap.appendChild(toolbar);
+    // View label
     const viewLabel = document.createElement('div');
-    viewLabel.style.cssText = 'text-align:center;font-size:14px;font-weight:700;color:var(--color-text);margin-bottom:4px;letter-spacing:1px;';
-    viewLabel.textContent = 'FRONT';
-    container.appendChild(viewLabel);
-    // --- Single Canvas container ---
+    viewLabel.style.cssText = 'font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;text-align:center;';
+    viewLabel.textContent = 'Anterior (Front)';
+    wrap.appendChild(viewLabel);
+    // Canvas container
     const canvasWrap = document.createElement('div');
-    canvasWrap.style.cssText = 'display:flex;justify-content:center;margin-bottom:10px;';
-    const canvasContainer = document.createElement('div');
-    canvasContainer.style.cssText = 'position:relative;touch-action:none;background:#1a1a1a;border-radius:12px;padding:8px;';
-    // Style canvases
-    state.frontCanvas.style.cssText = 'touch-action:none;user-select:none;-webkit-user-select:none;border-radius:8px;display:block;max-width:100%;';
-    state.backCanvas.style.cssText = 'touch-action:none;user-select:none;-webkit-user-select:none;border-radius:8px;display:none;max-width:100%;';
-    canvasContainer.appendChild(state.frontCanvas);
-    canvasContainer.appendChild(state.backCanvas);
-    canvasWrap.appendChild(canvasContainer);
-    container.appendChild(canvasWrap);
-    // Create body mask from single path
-    function createBodyMaskFromPath(ctx, pathStr) {
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        ctx.fillStyle = '#000';
-        ctx.save();
-        ctx.scale(SCALE_X, SCALE_Y);
-        const path = new Path2D(pathStr);
-        ctx.fill(path);
-        ctx.restore();
+    canvasWrap.style.cssText = 'position:relative;width:100%;max-width:300px;aspect-ratio:200/500;touch-action:none;user-select:none;-webkit-user-select:none;';
+    const bodyCanvas = document.createElement('canvas');
+    bodyCanvas.width = CW;
+    bodyCanvas.height = CH;
+    bodyCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+    const paintCanvas = document.createElement('canvas');
+    paintCanvas.width = CW;
+    paintCanvas.height = CH;
+    paintCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+    canvasWrap.appendChild(bodyCanvas);
+    canvasWrap.appendChild(paintCanvas);
+    wrap.appendChild(canvasWrap);
+    // Disclaimer
+    const disc = document.createElement('div');
+    disc.style.cssText = 'font-size:11px;color:#c8a032;background:rgba(200,160,50,0.1);border-radius:8px;padding:10px;text-align:center;max-width:300px;';
+    disc.textContent = 'Exclude 1st-degree (superficial) burns. Only count partial thickness (2nd degree) and full thickness (3rd/4th degree).';
+    wrap.appendChild(disc);
+    container.appendChild(wrap);
+    function getPaths() {
+        return currentView === 'front' ? frontPaths : backPaths;
     }
-    // Draw body outline on canvas with anatomical appearance
-    function drawBodyOutlineFromPath(ctx, pathStr) {
-        ctx.save();
-        ctx.scale(SCALE_X, SCALE_Y);
-        // Fill with light color
-        ctx.fillStyle = BODY_FILL;
-        const path = new Path2D(pathStr);
-        ctx.fill(path);
-        // Clean dark stroke outline (like E-burn)
-        ctx.strokeStyle = BODY_STROKE;
-        ctx.lineWidth = 1 / SCALE_X;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.stroke(path);
-        ctx.restore();
-    }
-    // Zone labels will be shown as HTML below the canvas instead of on the canvas
-    // This avoids issues with text visibility on white body fill
-    function drawZoneLabels(_ctx, _isFront) {
-        // Intentionally empty - labels shown via HTML legend below
-    }
-    // Create masks
-    createBodyMaskFromPath(state.frontMaskCtx, frontBodyPath);
-    createBodyMaskFromPath(state.backMaskCtx, backBodyPath);
-    // Draw initial body outlines with zone labels
-    drawBodyOutlineFromPath(state.frontCtx, frontBodyPath);
-    drawZoneLabels(state.frontCtx, true);
-    drawBodyOutlineFromPath(state.backCtx, backBodyPath);
-    drawZoneLabels(state.backCtx, false);
-    // Flip handler
-    function flipView() {
-        state.showingFront = !state.showingFront;
-        if (state.showingFront) {
-            state.frontCanvas.style.display = 'block';
-            state.backCanvas.style.display = 'none';
-            viewLabel.textContent = 'FRONT';
-        }
-        else {
-            state.frontCanvas.style.display = 'none';
-            state.backCanvas.style.display = 'block';
-            viewLabel.textContent = 'BACK';
-        }
-    }
-    flipBtn.addEventListener('click', flipView);
-    // Paint function
-    function paint(ctx, maskCtx, bodyPath, x, y, fromX, fromY) {
-        const maskData = maskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
-        // Check if point is inside body mask
-        const checkInBody = (px, py) => {
-            const ix = Math.floor(px);
-            const iy = Math.floor(py);
-            if (ix < 0 || ix >= CANVAS_WIDTH || iy < 0 || iy >= CANVAS_HEIGHT)
-                return false;
-            const idx = (iy * CANVAS_WIDTH + ix) * 4;
-            return maskData[idx] === 0; // Black pixels are inside body
-        };
-        ctx.save();
-        if (state.isErasing) {
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillStyle = 'rgba(0,0,0,1)';
-        }
-        else {
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = BURN_COLOR;
-        }
-        const radius = state.brushSize / 2;
-        // Draw line from last point to current point
-        if (fromX !== undefined && fromY !== undefined) {
-            const dist = Math.sqrt((x - fromX) ** 2 + (y - fromY) ** 2);
-            const steps = Math.max(1, Math.ceil(dist / (radius / 2)));
-            for (let i = 0; i <= steps; i++) {
-                const t = i / steps;
-                const px = fromX + (x - fromX) * t;
-                const py = fromY + (y - fromY) * t;
-                if (checkInBody(px, py)) {
-                    ctx.beginPath();
-                    ctx.arc(px, py, radius, 0, Math.PI * 2);
-                    ctx.fill();
+    function buildRegionMap() {
+        const paths = getPaths();
+        const entries = Object.entries(paths);
+        regionList = entries.map(([id, d]) => ({ id, path: new Path2D(d), totalPx: 0 }));
+        const map = new Int16Array(CW * CH).fill(-1);
+        const tc = document.createElement('canvas');
+        tc.width = CW;
+        tc.height = CH;
+        const tctx = tc.getContext('2d');
+        tctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+        for (let ri = 0; ri < regionList.length; ri++) {
+            tctx.clearRect(0, 0, CW, CH);
+            tctx.fillStyle = '#fff';
+            tctx.fill(regionList[ri].path);
+            const d = tctx.getImageData(0, 0, CW, CH).data;
+            let count = 0;
+            for (let i = 0; i < CW * CH; i++) {
+                if (d[i * 4 + 3] > 128) {
+                    if (map[i] === -1)
+                        map[i] = ri;
+                    count++;
                 }
             }
+            regionList[ri].totalPx = count;
         }
-        else if (checkInBody(x, y)) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill();
-        }
-        ctx.restore();
-        // Redraw body outline on top if erasing
-        if (state.isErasing) {
-            drawBodyOutlineFromPath(ctx, bodyPath);
-            // Re-add zone labels after redraw
-            const isFront = ctx === state.frontCtx;
-            drawZoneLabels(ctx, isFront);
-        }
+        regionMap = map;
     }
-    // Count painted pixels
-    function calculateTbsa() {
-        const frontData = state.frontCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
-        const backData = state.backCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
-        const frontMaskData = state.frontMaskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
-        const backMaskData = state.backMaskCtx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT).data;
-        let totalFrontBody = 0;
-        let totalBackBody = 0;
-        let paintedFront = 0;
-        let paintedBack = 0;
-        // Count pixels
-        for (let i = 0; i < frontMaskData.length; i += 4) {
-            // Front
-            if (frontMaskData[i] === 0) {
-                totalFrontBody++;
-                const r = frontData[i];
-                const g = frontData[i + 1];
-                const b = frontData[i + 2];
-                if (r > 200 && g > 80 && g < 160 && b < 50) {
-                    paintedFront++;
-                }
-            }
-            // Back
-            if (backMaskData[i] === 0) {
-                totalBackBody++;
-                const r = backData[i];
-                const g = backData[i + 1];
-                const b = backData[i + 2];
-                if (r > 200 && g > 80 && g < 160 && b < 50) {
-                    paintedBack++;
-                }
+    function drawBody() {
+        const ctx = bodyCanvas.getContext('2d');
+        ctx.clearRect(0, 0, CW, CH);
+        ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+        const paths = getPaths();
+        for (const d of Object.values(paths)) {
+            const p = new Path2D(d);
+            ctx.fillStyle = BODY_CLR;
+            ctx.fill(p);
+            ctx.strokeStyle = STROKE_CLR;
+            ctx.lineWidth = 0.5;
+            ctx.stroke(p);
+        }
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+    function clearPaint() {
+        paintCanvas.getContext('2d').clearRect(0, 0, CW, CH);
+        history.length = 0;
+    }
+    function calcTbsa() {
+        const ctx = paintCanvas.getContext('2d');
+        const d = ctx.getImageData(0, 0, CW, CH).data;
+        const counts = new Array(regionList.length).fill(0);
+        for (let i = 0; i < CW * CH; i++) {
+            if (d[i * 4 + 3] > 50) {
+                const ri = regionMap[i];
+                if (ri >= 0)
+                    counts[ri]++;
             }
         }
-        // Front = ~50%, Back = ~49%, Perineum = ~1%
-        const frontRegionTbsa = frontRegions.reduce((sum, r) => sum + r.pct, 0);
-        const backRegionTbsa = backRegions.reduce((sum, r) => sum + r.pct, 0);
-        const frontPct = totalFrontBody > 0 ? paintedFront / totalFrontBody : 0;
-        const backPct = totalBackBody > 0 ? paintedBack / totalBackBody : 0;
-        const tbsaFromFront = frontPct * frontRegionTbsa;
-        const tbsaFromBack = backPct * backRegionTbsa;
-        const perineumContrib = state.perineumPct > 0 && perineum ? (state.perineumPct / 100) * perineum.pct : 0;
-        return Math.round((tbsaFromFront + tbsaFromBack + perineumContrib) * 10) / 10;
+        let total = 0;
+        for (let ri = 0; ri < regionList.length; ri++) {
+            if (counts[ri] > 0 && regionList[ri].totalPx > 0) {
+                const frac = Math.min(counts[ri] / regionList[ri].totalPx, 1);
+                total += frac * (pctMap[regionList[ri].id] || 0);
+            }
+        }
+        total = Math.min(Math.round(total * 10) / 10, 100);
+        onUpdate({ '__tbsa': total });
     }
-    // Update display
-    function updateTbsaDisplay() {
-        const tbsa = calculateTbsa();
-        totalEl.textContent = `${tbsa}%`;
-        if (tbsa === 0) {
-            totalEl.style.color = 'var(--color-text-muted)';
-        }
-        else if (tbsa < 10) {
-            totalEl.style.color = 'var(--color-primary)';
-        }
-        else if (tbsa < 20) {
-            totalEl.style.color = '#FF9800';
-        }
-        else if (tbsa < 40) {
-            totalEl.style.color = '#FF7800';
-        }
-        else {
-            totalEl.style.color = '#E53935';
-        }
-        onUpdate({ '__tbsa': tbsa });
+    function saveSnap() {
+        const snap = paintCanvas.getContext('2d').getImageData(0, 0, CW, CH);
+        history.push(snap);
+        if (history.length > 30)
+            history.shift();
     }
-    // Touch/mouse event handlers
-    function getCanvasPoint(e, canvas) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        if ('touches' in e) {
-            const touch = e.touches[0] || e.changedTouches[0];
-            return {
-                x: (touch.clientX - rect.left) * scaleX,
-                y: (touch.clientY - rect.top) * scaleY,
-            };
-        }
-        else {
-            return {
-                x: (e.clientX - rect.left) * scaleX,
-                y: (e.clientY - rect.top) * scaleY,
-            };
+    function paintAt(cx, cy) {
+        const ctx = paintCanvas.getContext('2d');
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = `rgba(${BURN_RGBA[0]},${BURN_RGBA[1]},${BURN_RGBA[2]},0.85)`;
+        ctx.beginPath();
+        ctx.arc(cx, cy, BRUSH, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    function paintLine(x1, y1, x2, y2) {
+        const dx = x2 - x1, dy = y2 - y1;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const steps = Math.max(Math.ceil(dist / (BRUSH * 0.4)), 1);
+        for (let i = 0; i <= steps; i++) {
+            const t = i / steps;
+            paintAt(x1 + dx * t, y1 + dy * t);
         }
     }
-    function setupCanvasEvents(canvas, ctx, maskCtx, bodyPath) {
-        let activeCanvas = false;
-        const startDraw = (e) => {
-            e.preventDefault();
-            state.isDrawing = true;
-            activeCanvas = true;
-            const pt = getCanvasPoint(e, canvas);
-            state.lastX = pt.x;
-            state.lastY = pt.y;
-            paint(ctx, maskCtx, bodyPath, pt.x, pt.y);
-            updateTbsaDisplay();
-        };
-        const moveDraw = (e) => {
-            if (!state.isDrawing || !activeCanvas)
-                return;
-            e.preventDefault();
-            const pt = getCanvasPoint(e, canvas);
-            paint(ctx, maskCtx, bodyPath, pt.x, pt.y, state.lastX, state.lastY);
-            state.lastX = pt.x;
-            state.lastY = pt.y;
-            updateTbsaDisplay();
-        };
-        const endDraw = () => {
-            state.isDrawing = false;
-            activeCanvas = false;
-        };
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', moveDraw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mouseleave', endDraw);
-        canvas.addEventListener('touchstart', startDraw, { passive: false });
-        canvas.addEventListener('touchmove', moveDraw, { passive: false });
-        canvas.addEventListener('touchend', endDraw);
-        canvas.addEventListener('touchcancel', endDraw);
+    function clientToCanvas(e) {
+        const rect = canvasWrap.getBoundingClientRect();
+        return { x: ((e.clientX - rect.left) / rect.width) * CW, y: ((e.clientY - rect.top) / rect.height) * CH };
     }
-    setupCanvasEvents(state.frontCanvas, state.frontCtx, state.frontMaskCtx, frontBodyPath);
-    setupCanvasEvents(state.backCanvas, state.backCtx, state.backMaskCtx, backBodyPath);
-    // Reset handler
-    resetBtn.addEventListener('click', () => {
-        state.frontCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        state.backCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        drawBodyOutlineFromPath(state.frontCtx, frontBodyPath);
-        drawZoneLabels(state.frontCtx, true);
-        drawBodyOutlineFromPath(state.backCtx, backBodyPath);
-        drawZoneLabels(state.backCtx, false);
-        state.perineumPct = 0;
-        updateTbsaDisplay();
+    function onPointerDown(e) {
+        e.preventDefault();
+        isPainting = true;
+        saveSnap();
+        const pt = clientToCanvas(e);
+        if (pt) {
+            paintAt(pt.x, pt.y);
+            lastPt = pt;
+        }
+    }
+    function onPointerMove(e) {
+        if (!isPainting)
+            return;
+        e.preventDefault();
+        const pt = clientToCanvas(e);
+        if (pt) {
+            if (lastPt)
+                paintLine(lastPt.x, lastPt.y, pt.x, pt.y);
+            else
+                paintAt(pt.x, pt.y);
+            lastPt = pt;
+        }
+    }
+    function onPointerUp() {
+        if (!isPainting)
+            return;
+        isPainting = false;
+        lastPt = null;
+        calcTbsa();
+    }
+    paintCanvas.addEventListener('pointerdown', onPointerDown);
+    paintCanvas.addEventListener('pointermove', onPointerMove);
+    paintCanvas.addEventListener('pointerup', onPointerUp);
+    paintCanvas.addEventListener('pointerleave', onPointerUp);
+    paintCanvas.addEventListener('pointercancel', onPointerUp);
+    // Prevent pointer capture so move events keep firing
+    paintCanvas.addEventListener('gotpointercapture', (e) => {
+        e.target?.releasePointerCapture(e.pointerId);
     });
-    // --- Perineum toggle ---
-    if (perineum) {
-        const periWrap = document.createElement('div');
-        periWrap.style.cssText = 'display:flex;justify-content:center;gap:8px;margin-bottom:10px;align-items:center;';
-        const periLabel = document.createElement('span');
-        periLabel.style.cssText = 'font-size:13px;color:var(--color-text);';
-        periLabel.textContent = `Perineum (${perineum.pct}%):`;
-        const periNone = document.createElement('button');
-        periNone.style.cssText = 'padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:40px;border:2px solid #FF7800;background:#FF7800;color:#fff;';
-        periNone.textContent = 'None';
-        const periHalf = document.createElement('button');
-        periHalf.style.cssText = 'padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:40px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);';
-        periHalf.textContent = 'Half';
-        const periFull = document.createElement('button');
-        periFull.style.cssText = 'padding:8px 14px;border-radius:6px;font-size:12px;cursor:pointer;min-height:40px;border:2px solid #666;background:var(--color-surface);color:var(--color-text);';
-        periFull.textContent = 'Full';
-        function updatePerineumBtns() {
-            [periNone, periHalf, periFull].forEach(btn => {
-                btn.style.background = 'var(--color-surface)';
-                btn.style.borderColor = '#666';
-                btn.style.color = 'var(--color-text)';
-            });
-            if (state.perineumPct === 0) {
-                periNone.style.background = '#FF7800';
-                periNone.style.borderColor = '#FF7800';
-                periNone.style.color = '#fff';
-            }
-            else if (state.perineumPct === 50) {
-                periHalf.style.background = 'rgba(255, 120, 0, 0.6)';
-                periHalf.style.borderColor = '#FF7800';
-                periHalf.style.color = '#fff';
-            }
-            else {
-                periFull.style.background = '#FF7800';
-                periFull.style.borderColor = '#FF7800';
-                periFull.style.color = '#fff';
-            }
-        }
-        periNone.addEventListener('click', () => { state.perineumPct = 0; updatePerineumBtns(); updateTbsaDisplay(); });
-        periHalf.addEventListener('click', () => { state.perineumPct = 50; updatePerineumBtns(); updateTbsaDisplay(); });
-        periFull.addEventListener('click', () => { state.perineumPct = 100; updatePerineumBtns(); updateTbsaDisplay(); });
-        periWrap.appendChild(periLabel);
-        periWrap.appendChild(periNone);
-        periWrap.appendChild(periHalf);
-        periWrap.appendChild(periFull);
-        container.appendChild(periWrap);
-    }
-    // --- Rule of 9s Zone Legend ---
-    const zoneLegend = document.createElement('div');
-    zoneLegend.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px;padding:8px;background:rgba(50,50,50,0.8);border:1px solid #555;border-radius:8px;font-size:11px;';
-    if (calculatorType === 'adult') {
-        zoneLegend.innerHTML = `
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Head</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Trunk (each side)</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Each Arm</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Each Leg</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">1%</span><br><span style="color:var(--color-text-muted);">Perineum</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:var(--color-text-muted);">100%</span><br><span style="color:var(--color-text-muted);">Total</span></div>
-    `;
-    }
-    else {
-        // Pediatric percentages vary by age - simplified
-        zoneLegend.innerHTML = `
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Head (infant)</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">18%</span><br><span style="color:var(--color-text-muted);">Trunk (each side)</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">9%</span><br><span style="color:var(--color-text-muted);">Each Arm</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">14%</span><br><span style="color:var(--color-text-muted);">Each Leg (infant)</span></div>
-      <div style="text-align:center;"><span style="font-weight:700;color:#FF7800;">1%</span><br><span style="color:var(--color-text-muted);">Perineum</span></div>
-      <div style="text-align:center;color:var(--color-text-muted);font-size:10px;">Use Lund-Browder for age-adjusted %</div>
-    `;
-    }
-    container.appendChild(zoneLegend);
-    // --- Warning at bottom ---
-    const warning = document.createElement('div');
-    warning.style.cssText = 'font-size:11px;color:#FF9800;margin-top:8px;line-height:1.4;padding:6px 10px;background:rgba(255,152,0,0.1);border-radius:6px;text-align:center;';
-    warning.textContent = '2nd/3rd degree burns only. Do NOT include superficial burns.';
-    container.appendChild(warning);
+    viewBtn.addEventListener('click', () => {
+        currentView = currentView === 'front' ? 'back' : 'front';
+        viewBtn.textContent = currentView === 'front' ? 'Show Back' : 'Show Front';
+        viewLabel.textContent = currentView === 'front' ? 'Anterior (Front)' : 'Posterior (Back)';
+        clearPaint();
+        buildRegionMap();
+        drawBody();
+        onUpdate({ '__tbsa': 0 });
+    });
+    undoBtn.addEventListener('click', () => {
+        if (history.length === 0)
+            return;
+        const snap = history.pop();
+        paintCanvas.getContext('2d').putImageData(snap, 0, 0);
+        calcTbsa();
+    });
+    clearBtn.addEventListener('click', () => {
+        if (!confirm('Clear all burns?'))
+            return;
+        saveSnap();
+        paintCanvas.getContext('2d').clearRect(0, 0, CW, CH);
+        calcTbsa();
+    });
+    // Initialize
+    buildRegionMap();
+    drawBody();
+    return {
+        destroy: () => {
+            paintCanvas.removeEventListener('pointerdown', onPointerDown);
+            paintCanvas.removeEventListener('pointermove', onPointerMove);
+            paintCanvas.removeEventListener('pointerup', onPointerUp);
+            paintCanvas.removeEventListener('pointerleave', onPointerUp);
+            paintCanvas.removeEventListener('pointercancel', onPointerUp);
+        },
+    };
 }
-// Alias for backward compatibility
-function buildSliderDiagram(container, frontRegions, backRegions, perineum, onUpdate, calculatorType = 'adult') {
-    buildEburnPainter(container, frontRegions, backRegions, perineum, onUpdate, calculatorType);
-}
-// -------------------------------------------------------------------
-// TBSA Adult — Rule of 9's (Slider)
-// -------------------------------------------------------------------
-// Arms merged into single regions (4.5% each side)
-const ADULT_FRONT_REGIONS = [
-    { id: 'head-front', label: 'Head (front)', pct: 4.5, paths: [
-            'M65,4 C52,4 43,12 43,23 C43,33 50,40 58,42 L58,48 L72,48 L72,42 C80,40 87,33 87,23 C87,12 78,4 65,4 Z'
-        ] },
-    { id: 'chest', label: 'Chest', pct: 9, paths: [
-            'M42,54 C42,50 50,48 58,48 L72,48 C80,48 88,50 88,54 L90,98 L40,98 Z'
-        ] },
-    { id: 'abdomen', label: 'Abdomen', pct: 9, paths: [
-            'M40,100 L90,100 L86,168 L44,168 Z'
-        ] },
-    { id: 'left-arm-front', label: 'L Arm (front)', pct: 4.5, paths: [
-            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z',
-            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z',
-        ] },
-    { id: 'right-arm-front', label: 'R Arm (front)', pct: 4.5, paths: [
-            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z',
-            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z',
-        ] },
-    { id: 'left-thigh-front', label: 'L Thigh', pct: 4.5, paths: [
-            'M44,170 L63,170 C63,170 62,200 61,220 L60,238 L46,238 C46,238 45,210 44,170 Z'
-        ] },
-    { id: 'left-lower-leg-front', label: 'L Lower Leg/Foot', pct: 4.5, paths: [
-            'M46,240 L60,240 L58,288 C58,292 56,296 54,298 L50,298 C48,296 47,292 47,288 Z'
-        ] },
-    { id: 'right-thigh-front', label: 'R Thigh', pct: 4.5, paths: [
-            'M67,170 L86,170 C86,170 85,210 84,238 L70,238 C69,220 68,200 67,170 Z'
-        ] },
-    { id: 'right-lower-leg-front', label: 'R Lower Leg/Foot', pct: 4.5, paths: [
-            'M70,240 L84,240 L83,288 C83,292 82,296 80,298 L76,298 C74,296 72,292 72,288 Z'
-        ] },
-];
-const ADULT_BACK_REGIONS = [
-    { id: 'head-back', label: 'Head (back)', pct: 4.5, paths: [
-            'M65,4 C52,4 43,12 43,23 C43,33 50,40 58,42 L58,48 L72,48 L72,42 C80,40 87,33 87,23 C87,12 78,4 65,4 Z'
-        ] },
-    { id: 'upper-back', label: 'Upper Back', pct: 9, paths: [
-            'M42,54 C42,50 50,48 58,48 L72,48 C80,48 88,50 88,54 L90,98 L40,98 Z'
-        ] },
-    { id: 'lower-back', label: 'Lower Back/Buttocks', pct: 9, paths: [
-            'M40,100 L90,100 L86,168 L44,168 Z'
-        ] },
-    { id: 'left-arm-back', label: 'L Arm (back)', pct: 4.5, paths: [
-            'M38,52 L20,58 C18,59 16,60 16,62 L16,96 C16,98 17,100 19,100 L38,100 Z',
-            'M19,102 L38,102 L34,156 C34,158 32,160 30,160 L8,154 C6,153 5,151 5,149 Z',
-        ] },
-    { id: 'right-arm-back', label: 'R Arm (back)', pct: 4.5, paths: [
-            'M92,52 L110,58 C112,59 114,60 114,62 L114,96 C114,98 113,100 111,100 L92,100 Z',
-            'M92,102 L111,102 L125,149 C125,151 124,153 122,154 L100,160 C98,160 96,158 96,156 Z',
-        ] },
-    { id: 'left-thigh-back', label: 'L Thigh (back)', pct: 4.5, paths: [
-            'M44,170 L63,170 C63,170 62,200 61,220 L60,238 L46,238 C46,238 45,210 44,170 Z'
-        ] },
-    { id: 'left-lower-leg-back', label: 'L Lower Leg/Foot (back)', pct: 4.5, paths: [
-            'M46,240 L60,240 L58,288 C58,292 56,296 54,298 L50,298 C48,296 47,292 47,288 Z'
-        ] },
-    { id: 'right-thigh-back', label: 'R Thigh (back)', pct: 4.5, paths: [
-            'M67,170 L86,170 C86,170 85,210 84,238 L70,238 C69,220 68,200 67,170 Z'
-        ] },
-    { id: 'right-lower-leg-back', label: 'R Lower Leg/Foot (back)', pct: 4.5, paths: [
-            'M70,240 L84,240 L83,288 C83,292 82,296 80,298 L76,298 C74,296 72,292 72,288 Z'
-        ] },
-];
-const ADULT_PERINEUM = { id: 'perineum', label: 'Perineum', pct: 1, paths: [] };
 function tbsaComputeResult(values, isPeds) {
     const tbsa = values['__tbsa'] || 0;
     if (tbsa === 0) {
-        return { value: '0%', label: 'No Burn Selected', description: 'Draw on the body to paint burn areas. Use the eraser to correct.', colorVar: '--color-text-muted' };
+        return { value: '0%', label: 'No Burn Selected', description: 'Draw on the body to paint burn areas.', colorVar: '--color-text-muted' };
     }
     let label;
     let colorVar;
@@ -1279,112 +995,9 @@ const TBSA_ADULT_CALCULATOR = {
     ],
     computeResult: (values) => tbsaComputeResult(values, false),
     customRender: (container, onUpdate) => {
-        buildSliderDiagram(container, ADULT_FRONT_REGIONS, ADULT_BACK_REGIONS, ADULT_PERINEUM, onUpdate, 'adult');
+        buildTbsaPainter(container, TBSA_ADULT_FRONT, TBSA_ADULT_BACK, TBSA_ADULT_PCT, onUpdate);
     },
 };
-const LUND_BROWDER_AGES = [
-    { label: '0-1 year', headHalf: 9.5, thighHalf: 2.75, lowerLegHalf: 2.5 },
-    { label: '1-4 years', headHalf: 8.5, thighHalf: 3.25, lowerLegHalf: 2.5 },
-    { label: '5-9 years', headHalf: 6.5, thighHalf: 4, lowerLegHalf: 2.75 },
-    { label: '10-14 years', headHalf: 5.5, thighHalf: 4.25, lowerLegHalf: 3 },
-    { label: '>14 years', headHalf: 3.5, thighHalf: 4.75, lowerLegHalf: 3.5 },
-];
-const LB_NECK = 1;
-const LB_TRUNK_ANT = 13;
-const LB_TRUNK_POST = 13;
-const LB_ARM = 4; // Upper arm (2) + forearm (1.5) + hand (0.5) combined
-const LB_BUTTOCK = 2.5;
-const LB_FOOT = 1.75;
-const LB_PERINEUM = 1;
-function buildPedsRegions(ageIdx) {
-    const age = LUND_BROWDER_AGES[ageIdx];
-    const front = [
-        { id: 'head-front', label: 'Head (front)', pct: age.headHalf, paths: [
-                'M65,4 C50,4 40,14 40,28 C40,40 48,50 58,52 L58,56 L72,56 L72,52 C82,50 90,40 90,28 C90,14 80,4 65,4 Z'
-            ] },
-        { id: 'neck-front', label: 'Neck (front)', pct: LB_NECK, paths: [
-                'M56,57 L74,57 L74,64 L56,64 Z'
-            ] },
-        { id: 'trunk-ant', label: 'Trunk (anterior)', pct: LB_TRUNK_ANT, paths: [
-                'M38,66 C38,64 48,62 56,62 L74,62 C82,62 92,64 92,66 L90,130 L40,130 Z'
-            ] },
-        { id: 'left-arm-front', label: 'L Arm (front)', pct: LB_ARM, paths: [
-                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z',
-                'M16,102 L34,102 L30,132 L12,128 Z',
-                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z',
-            ] },
-        { id: 'right-arm-front', label: 'R Arm (front)', pct: LB_ARM, paths: [
-                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z',
-                'M96,102 L114,102 L118,128 L100,132 Z',
-                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z',
-            ] },
-        { id: 'left-thigh-front', label: 'L Thigh', pct: age.thighHalf, paths: [
-                'M40,132 L62,132 L60,210 L42,210 Z'
-            ] },
-        { id: 'left-lower-leg-front', label: 'L Lower Leg', pct: age.lowerLegHalf, paths: [
-                'M42,212 L60,212 L58,272 L44,272 Z'
-            ] },
-        { id: 'left-foot-front', label: 'L Foot', pct: LB_FOOT, paths: [
-                'M43,274 L59,274 L58,290 C58,293 56,296 53,296 L48,296 C46,296 44,293 44,290 Z'
-            ] },
-        { id: 'right-thigh-front', label: 'R Thigh', pct: age.thighHalf, paths: [
-                'M68,132 L90,132 L88,210 L70,210 Z'
-            ] },
-        { id: 'right-lower-leg-front', label: 'R Lower Leg', pct: age.lowerLegHalf, paths: [
-                'M70,212 L88,212 L86,272 L72,272 Z'
-            ] },
-        { id: 'right-foot-front', label: 'R Foot', pct: LB_FOOT, paths: [
-                'M71,274 L87,274 L86,290 C86,293 84,296 82,296 L77,296 C74,296 72,293 72,290 Z'
-            ] },
-    ];
-    const back = [
-        { id: 'head-back', label: 'Head (back)', pct: age.headHalf, paths: [
-                'M65,4 C50,4 40,14 40,28 C40,40 48,50 58,52 L58,56 L72,56 L72,52 C82,50 90,40 90,28 C90,14 80,4 65,4 Z'
-            ] },
-        { id: 'neck-back', label: 'Neck (back)', pct: LB_NECK, paths: [
-                'M56,57 L74,57 L74,64 L56,64 Z'
-            ] },
-        { id: 'trunk-post', label: 'Trunk (posterior)', pct: LB_TRUNK_POST, paths: [
-                'M38,66 C38,64 48,62 56,62 L74,62 C82,62 92,64 92,66 L90,116 L40,116 Z'
-            ] },
-        { id: 'left-buttock', label: 'L Buttock', pct: LB_BUTTOCK, paths: [
-                'M40,118 L64,118 L62,130 L40,130 Z'
-            ] },
-        { id: 'right-buttock', label: 'R Buttock', pct: LB_BUTTOCK, paths: [
-                'M66,118 L90,118 L90,130 L68,130 Z'
-            ] },
-        { id: 'left-arm-back', label: 'L Arm (back)', pct: LB_ARM, paths: [
-                'M36,66 L20,70 C18,71 16,72 16,74 L16,100 L34,100 Z',
-                'M16,102 L34,102 L30,132 L12,128 Z',
-                'M10,130 L30,134 L26,148 C26,150 24,152 22,152 L8,148 C6,147 5,145 5,143 Z',
-            ] },
-        { id: 'right-arm-back', label: 'R Arm (back)', pct: LB_ARM, paths: [
-                'M94,66 L110,70 C112,71 114,72 114,74 L114,100 L96,100 Z',
-                'M96,102 L114,102 L118,128 L100,132 Z',
-                'M100,134 L120,130 L125,143 C125,145 124,147 122,148 L108,152 C106,152 104,150 104,148 Z',
-            ] },
-        { id: 'left-thigh-back', label: 'L Thigh (back)', pct: age.thighHalf, paths: [
-                'M40,132 L62,132 L60,210 L42,210 Z'
-            ] },
-        { id: 'left-lower-leg-back', label: 'L Lower Leg (back)', pct: age.lowerLegHalf, paths: [
-                'M42,212 L60,212 L58,272 L44,272 Z'
-            ] },
-        { id: 'left-foot-back', label: 'L Foot (back)', pct: LB_FOOT, paths: [
-                'M43,274 L59,274 L58,290 C58,293 56,296 53,296 L48,296 C46,296 44,293 44,290 Z'
-            ] },
-        { id: 'right-thigh-back', label: 'R Thigh (back)', pct: age.thighHalf, paths: [
-                'M68,132 L90,132 L88,210 L70,210 Z'
-            ] },
-        { id: 'right-lower-leg-back', label: 'R Lower Leg (back)', pct: age.lowerLegHalf, paths: [
-                'M70,212 L88,212 L86,272 L72,272 Z'
-            ] },
-        { id: 'right-foot-back', label: 'R Foot (back)', pct: LB_FOOT, paths: [
-                'M71,274 L87,274 L86,290 C86,293 84,296 82,296 L77,296 C74,296 72,293 72,290 Z'
-            ] },
-    ];
-    const perineum = { id: 'perineum', label: 'Perineum', pct: LB_PERINEUM, paths: [] };
-    return { front, back, perineum };
-}
 const TBSA_PEDS_CALCULATOR = {
     id: 'tbsa-peds',
     title: 'TBSA \u2014 Lund-Browder',
@@ -1400,6 +1013,7 @@ const TBSA_PEDS_CALCULATOR = {
     computeResult: (values) => tbsaComputeResult(values, true),
     customRender: (container, onUpdate) => {
         let currentAgeIdx = 0;
+        let painter = null;
         const ageRow = document.createElement('div');
         ageRow.style.cssText = 'margin-bottom:12px;';
         const ageLabel = document.createElement('label');
@@ -1408,10 +1022,10 @@ const TBSA_PEDS_CALCULATOR = {
         ageRow.appendChild(ageLabel);
         const ageSelect = document.createElement('select');
         ageSelect.style.cssText = 'width:100%;padding:12px;border-radius:8px;background:var(--color-surface);color:var(--color-text);border:1px solid #666;font-size:16px;min-height:44px;';
-        for (let i = 0; i < LUND_BROWDER_AGES.length; i++) {
+        for (let i = 0; i < LB_AGES.length; i++) {
             const opt = document.createElement('option');
             opt.value = String(i);
-            opt.textContent = LUND_BROWDER_AGES[i].label;
+            opt.textContent = LB_AGES[i].label;
             ageSelect.appendChild(opt);
         }
         ageRow.appendChild(ageSelect);
@@ -1419,9 +1033,11 @@ const TBSA_PEDS_CALCULATOR = {
         const diagramContainer = document.createElement('div');
         container.appendChild(diagramContainer);
         function buildDiagram() {
+            if (painter)
+                painter.destroy();
             diagramContainer.innerHTML = '';
-            const regions = buildPedsRegions(currentAgeIdx);
-            buildSliderDiagram(diagramContainer, regions.front, regions.back, regions.perineum, onUpdate, 'peds');
+            const pct = buildPedsPct(currentAgeIdx);
+            painter = buildTbsaPainter(diagramContainer, TBSA_PEDS_FRONT, TBSA_PEDS_BACK, pct, onUpdate);
         }
         ageSelect.addEventListener('change', () => {
             currentAgeIdx = parseInt(ageSelect.value, 10);
