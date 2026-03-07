@@ -873,7 +873,7 @@ function buildTbsaPainter(
 
   // Canvas container
   const canvasWrap = document.createElement('div');
-  canvasWrap.style.cssText = 'position:relative;width:100%;max-width:300px;aspect-ratio:200/500;touch-action:none;user-select:none;-webkit-user-select:none;';
+  canvasWrap.style.cssText = 'position:relative;width:100%;max-width:300px;aspect-ratio:200/500;user-select:none;-webkit-user-select:none;';
 
   const bodyCanvas = document.createElement('canvas');
   bodyCanvas.width = CW; bodyCanvas.height = CH;
@@ -1018,6 +1018,23 @@ function buildTbsaPainter(
     const rect = canvasWrap.getBoundingClientRect();
     return { x: ((e.clientX - rect.left) / rect.width) * CW, y: ((e.clientY - rect.top) / rect.height) * CH };
   }
+
+  // Dynamically block scrolling only when touching inside the body
+  canvasWrap.addEventListener('touchstart', (e: TouchEvent) => {
+    const touch = e.touches[0];
+    const rect = canvasWrap.getBoundingClientRect();
+    const cx = ((touch.clientX - rect.left) / rect.width) * CW;
+    const cy = ((touch.clientY - rect.top) / rect.height) * CH;
+    if (isInBody(cx, cy)) {
+      canvasWrap.style.touchAction = 'none';
+    } else {
+      canvasWrap.style.touchAction = 'auto';
+    }
+  }, { passive: true });
+
+  canvasWrap.addEventListener('touchend', () => {
+    canvasWrap.style.touchAction = 'auto';
+  }, { passive: true });
 
   function onPointerDown(e: PointerEvent): void {
     const pt = clientToCanvas(e);
