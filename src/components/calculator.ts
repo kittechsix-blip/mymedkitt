@@ -877,11 +877,11 @@ function buildTbsaPainter(
 
   const bodyCanvas = document.createElement('canvas');
   bodyCanvas.width = CW; bodyCanvas.height = CH;
-  bodyCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+  bodyCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;touch-action:none;';
 
   const paintCanvas = document.createElement('canvas');
   paintCanvas.width = CW; paintCanvas.height = CH;
-  paintCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+  paintCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;touch-action:none;';
 
   canvasWrap.appendChild(bodyCanvas);
   canvasWrap.appendChild(paintCanvas);
