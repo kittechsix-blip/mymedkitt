@@ -2475,6 +2475,150 @@ const BURNS_CHEMICAL_DETAIL: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// ICH Info Pages
+// -------------------------------------------------------------------
+
+const ICH_SUMMARY: InfoPage = {
+  id: 'ich-summary',
+  title: 'ICH Steps Summary',
+  subtitle: 'Time-critical hemorrhage management pathway',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Non-contrast CT head \u2014 confirm ICH, estimate volume (ABC/2)](#/node/ich-start)\n• [Labs: CBC, BMP, INR/PTT/fibrinogen, anti-Xa level if on DOAC](#/node/ich-labs)\n• [CTA for nearly all patients (mandatory if lobar <70y or deep <45y)](#/node/ich-labs)',
+    },
+    {
+      heading: '2. Coagulation Optimization',
+      body: '• [Identify anticoagulant \u2014 do NOT wait for labs before reversing](#/node/ich-anticoag)\n• [Warfarin \u2192 4-Factor PCC + Vitamin K 10 mg IV](#/node/ich-warfarin-rev)\n• [Dabigatran \u2192 Idarucizumab 5 g IV](#/node/ich-dabi-rev)\n• [Xa inhibitor \u2192 4-Factor PCC 50 IU/kg or andexanet alfa](#/node/ich-xa-rev)\n• [Heparin/LMWH \u2192 Protamine sulfate](#/node/ich-heparin-rev)',
+    },
+    {
+      heading: '3. Blood Pressure Control',
+      body: '• [Treat pain/anxiety FIRST](#/node/ich-bp)\n• [SBP 150\u2013220 \u2192 target 130\u2013150 mmHg](#/node/ich-bp)\n• [SBP >220 \u2192 target 140\u2013180 mmHg](#/node/ich-bp)\n• [Avoid SBP <130 and drops >70 mmHg in first hour](#/node/ich-bp)',
+    },
+    {
+      heading: '4. Surgical Considerations',
+      body: '• [Supratentorial: limited evidence for early evacuation \u2014 consult neurosurgery](#/node/ich-supra-surg)\n• [Cerebellar >15 mL with brainstem compression \u2192 IMMEDIATE surgical evacuation](#/node/ich-cerebellar-surg)\n• [IVH with hydrocephalus \u2192 EVD placement](#/node/ich-ivh-evd)',
+    },
+    {
+      heading: '5. ICU Management',
+      body: '• [Seizure prophylaxis NOT recommended \u2014 treat if witnessed/EEG-confirmed](#/node/ich-seizures)\n• [ICP management, sodium monitoring, fever treatment](#/node/ich-icp-fever)\n• [DVT prophylaxis: IPC immediately, chemical ppx after 24\u201348h if stable](#/node/ich-dvt)',
+    },
+    {
+      heading: '6. Disposition',
+      body: '• [ICU admission for all ICH patients](#/node/ich-disposition)\n• [Serial CT at 6h and 24h](#/node/ich-disposition)\n• [Early goals-of-care discussion](#/node/ich-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Greenberg SM, et al. 2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage. Stroke. 2022;53(7):e282-e361.' },
+    { num: 2, text: 'Steiner T, et al. ESO/EANS guideline on stroke due to spontaneous intracerebral haemorrhage. Eur Stroke J. 2025;10(4):1007-1086.' },
+  ],
+};
+
+const ICH_CT_MARKERS: InfoPage = {
+  id: 'ich-ct-markers',
+  title: 'CT Markers of Hemorrhage Expansion',
+  subtitle: 'Non-contrast CT and CTA signs predicting hematoma growth',
+  sections: [
+    {
+      heading: 'Non-contrast CT Signs',
+      body: '**Swirl sign** \u2014 Areas of varying density within the hematoma. Fresh unclotted blood is hypodense relative to clotted blood. Indicates active hemorrhage.\n\n**Black hole sign** \u2014 Relatively dark area within the hematoma not connected to adjacent brain tissue. Predicts hematoma growth (32% sensitivity, 94% specificity).\n\n**Blend sign** \u2014 Hematoma contains both hyperdense and hypodense regions.\n\n**Fluid-fluid level** \u2014 Highly specific for coagulopathy or anticoagulant use. If present and no anticoagulant identified, search aggressively for occult coagulopathy.\n\n**Island sign** \u2014 \u22653 small hemorrhages separated from the main hematoma.\n\n**Isodense/hypodense blood** \u2014 On initial CT, may indicate coagulopathy (clotting retarded by anticoagulant effect).',
+    },
+    {
+      heading: 'CT Angiography: Spot Sign',
+      body: '**Spot sign** \u2014 Leakage of contrast into the hematoma. 51% sensitivity, 85% specificity for predicting expansion. Must NOT be in anatomic continuity with adjacent blood vessels.\n\nThe spot sign is a key indicator for early hematoma expansion risk and may influence aggressiveness of BP management and reversal strategy.',
+    },
+    {
+      heading: 'Edema',
+      body: 'Edema takes several hours to develop \u2014 usually not seen on initial CT.\n\n**Unusually extensive or irregular edema** raises suspicion for:\n• Cerebral venous thrombosis (CVT) with secondary hemorrhage\n• Ischemic stroke with hemorrhagic transformation\n• Tumor with intratumoral hemorrhage\n\nPerihematomal edema peaks at ~5\u20136 days. This is cytotoxic edema \u2014 does NOT respond to steroids.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Boulouis G, et al. Noncontrast CT Markers of Intracerebral Hemorrhage Expansion. Stroke. 2017;48(4):1120-1125.' },
+    { num: 2, text: 'Menon BK. Neuroimaging in Acute Stroke. Continuum (Minneap Minn). 2020;26(2):287-309.' },
+  ],
+};
+
+const ICH_CAUSES: InfoPage = {
+  id: 'ich-causes',
+  title: 'Causes of ICH',
+  subtitle: 'Etiologic classification of spontaneous intracerebral hemorrhage',
+  sections: [
+    {
+      heading: 'Small Vessel Disease (\u201cPrimary ICH\u201d) \u2014 ~80%',
+      body: '**Hypertensive ICH** \u2014 most common cause. Same arterial lipohyalinization that causes lacunar strokes.\n\u2022 Basal ganglia / external capsule (60\u201365%)\n\u2022 Thalamus (15\u201320%)\n\u2022 Pons or deep cerebellar nuclei (10%)\n\n**Cerebral amyloid angiopathy (CAA)** \u2014 ~15% of all spontaneous ICH. Most common cause of lobar hemorrhage in normotensive elderly patients. Beta-amyloid deposition in cortical and leptomeningeal vessels. Associated with Alzheimer disease. [See CAA details](#/info/ich-caa)',
+    },
+    {
+      heading: 'Macrovascular Etiologies',
+      body: 'Most common cause of ICH in young adults. Often require surgical or endovascular intervention.\n\n\u2022 **Aneurysmal rupture** \u2014 usually has subarachnoid component; frontal (ACA/AComm) or temporal (MCA) location\n\u2022 **Arteriovenous malformation (AVM)** \u2014 key in young patients\n\u2022 **Cerebral venous thrombosis (CVT)** \u2014 consider if younger patient, hypercoagulable state, bilateral hemorrhages, or excess edema\n\u2022 **Cavernous malformation** \u2014 popcorn-like appearance on T2 MRI\n\u2022 **Dural arteriovenous fistula (dAVF)**\n\u2022 **Mycotic aneurysm** \u2014 endocarditis/bacteremia\n\u2022 **Moyamoya disease**',
+    },
+    {
+      heading: 'Other Etiologies',
+      body: '\u2022 **Malignancy** \u2014 primary brain tumor or hemorrhagic metastasis\n\u2022 **Ischemic stroke with hemorrhagic conversion**\n\u2022 **RCVS** (reversible cerebral vasospasm syndrome)\n\u2022 **Coagulopathy** \u2014 warfarin, DOACs, liver disease, DIC\n\u2022 **Sympathomimetic drug use** \u2014 cocaine, amphetamines\n\u2022 **Vasculitis** \u2014 PAN, lupus, ANCA vasculitis, drug-induced',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Nobleza COS. Intracerebral Hemorrhage. Continuum (Minneap Minn). 2021;27(5):1246-1277.' },
+    { num: 2, text: 'McGurgan IJ, et al. Acute intracerebral haemorrhage: diagnosis and management. Pract Neurol. 2021;21(2):128-136.' },
+  ],
+};
+
+const ICH_CAA: InfoPage = {
+  id: 'ich-caa',
+  title: 'Cerebral Amyloid Angiopathy (CAA)',
+  subtitle: 'Beta-amyloid vasculopathy causing lobar ICH in the elderly',
+  sections: [
+    {
+      heading: 'Overview',
+      body: 'Cerebrovascular disorder caused by beta-amyloid deposition in small-to-medium cortical and leptomeningeal arteries. Prevalence ~5% in people >65 years. Accounts for ~15% of all spontaneous ICH. Associated with Alzheimer disease.\n\nMost common cause of **lobar hemorrhage in normotensive elderly** patients. However, half of lobar ICH in the elderly is NOT due to CAA.',
+    },
+    {
+      heading: 'Imaging Features',
+      body: '\u2022 **Location:** Lobar hemorrhage (occipital and parietal lobes most common)\n\u2022 **Finger-like projections** extending from the hemorrhage\n\u2022 Extension may involve subarachnoid, subdural, or intraventricular spaces\n\u2022 **MRI GRE/SWI:** Multiple microhemorrhages at grey-white junction and/or convexity, with hemosiderosis\n\n**Clinical hint:** Elderly patient + cognitive decline + lobar hemorrhage + small amount of cortical subarachnoid hemorrhage = likely amyloid angiopathy.',
+    },
+    {
+      heading: 'Prognosis & Implications',
+      body: 'Short-term prognosis is often favorable, but **high recurrence risk (~7.5%/year)** and progressive cognitive decline.\n\n**Critical:** Patients diagnosed with CAA should generally **NOT be restarted on anticoagulation** due to very high risk of recurrent hemorrhage. This is a key management decision that differs from non-CAA ICH.\n\nAntiplatelet monotherapy may be considered with careful risk-benefit analysis.',
+    },
+    {
+      heading: 'Inflammatory CAA (CAA-ri)',
+      body: 'Rare variant where perivascular beta-amyloid triggers inflammation. Mean onset in 70s.\n\n**Presentation:** Acute/subacute headache, reduced consciousness, behavioral change, focal neurologic signs, seizures.\n\n**MRI:** Vasogenic edema in subcortical white matter with mass effect + underlying CAA features (microhemorrhages).\n\n**Treatment:** May respond to steroids followed by cyclophosphamide.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Schrag M, Kirshner H. Management of Intracerebral Hemorrhage: JACC Focus Seminar. J Am Coll Cardiol. 2020;75(15):1819-1831.' },
+    { num: 2, text: 'Nobleza COS. Intracerebral Hemorrhage. Continuum (Minneap Minn). 2021;27(5):1246-1277.' },
+  ],
+};
+
+const ICH_PROGNOSTICATION: InfoPage = {
+  id: 'ich-prognostication',
+  title: 'ICH Prognostication',
+  subtitle: 'ICH Score and FUNC Score for risk stratification',
+  sections: [
+    {
+      heading: 'Overall Prognosis',
+      body: '30-day mortality: ~40%\n1-year survival: ~50%\n5-year survival: ~30%\nFunctional independence at 1 year: ~20%\n\n**Predictors of poor outcome:**\n\u2022 Hematoma volume >60 mL\n\u2022 GCS <8\n\u2022 Deep or infratentorial location\n\u2022 Intraventricular extension\n\u2022 Increasing age',
+    },
+    {
+      heading: 'ICH Score (30-Day Mortality)',
+      body: '**Components (0\u20136 points):**\n\u2022 GCS 3\u20134: +2 pts | GCS 5\u201312: +1 pt | GCS 13\u201315: 0 pts\n\u2022 Hematoma volume \u226530 mL: +1 pt\n\u2022 Intraventricular hemorrhage: +1 pt\n\u2022 Infratentorial origin: +1 pt\n\u2022 Age \u226580: +1 pt\n\n**Mortality by score:**\n\u2022 ICH 0: ~0%\n\u2022 ICH 1: ~13%\n\u2022 ICH 2: ~26%\n\u2022 ICH 3: ~72%\n\u2022 ICH 4: ~97%\n\u2022 ICH 5\u20136: ~100%',
+    },
+    {
+      heading: 'ICH Score Limitations',
+      body: '\u2022 Transient impairment (sedation, hypercapnia) may inflate the score\n\u2022 Hydrocephalus may cause reversible consciousness impairment \u2014 treatable with EVD\n\u2022 No distinction between tiny vs massive IVH\n\u2022 No distinction between pontine (poor) vs cerebellar (treatable) infratentorial bleeds\n\u2022 No distinction between age 18 and 79\n\u2022 Does not account for pre-existing functional status/frailty\n\n**Caution:** These scores should NOT be used to justify withdrawal of care. Self-fulfilling prophecy bias is a known limitation \u2014 aggressive early treatment may improve outcomes beyond what the scores predict.',
+    },
+    {
+      heading: 'FUNC Score (90-Day Functional Independence)',
+      body: '**Components (0\u201311 points):**\n\u2022 ICH volume: <30 mL (+4) | 30\u201359 mL (+2) | \u226560 mL (0)\n\u2022 Age: <70 (+2) | 70\u201379 (+1) | \u226580 (0)\n\u2022 Location: Lobar (+2) | Deep (+1) | Infratentorial (0)\n\u2022 GCS: \u22659 (+2) | <9 (0)\n\u2022 Pre-ICH cognitive impairment: No (+1) | Yes (0)\n\n**Probability of functional independence at 90 days:**\n\u2022 FUNC 0\u20134: 0\u20132%\n\u2022 FUNC 5\u20137: 6\u201329%\n\u2022 FUNC 8: 42%\n\u2022 FUNC 9\u201310: 55\u201366%\n\u2022 FUNC 11: 80%',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hemphill JC 3rd, et al. The ICH Score: A Simple, Reliable Grading Scale for Intracerebral Hemorrhage. Stroke. 2001;32(4):891-897.' },
+    { num: 2, text: 'Rost NS, et al. Prediction of Functional Outcome in Patients With Primary Intracerebral Hemorrhage: The FUNC Score. Stroke. 2008;39(8):2304-2309.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -2543,6 +2687,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'burns-dressing-guide': BURNS_DRESSING_GUIDE,
   'burns-co-cyanide': BURNS_CO_CYANIDE,
   'burns-chemical-detail': BURNS_CHEMICAL_DETAIL,
+  'ich-summary': ICH_SUMMARY,
+  'ich-ct-markers': ICH_CT_MARKERS,
+  'ich-causes': ICH_CAUSES,
+  'ich-caa': ICH_CAA,
+  'ich-prognostication': ICH_PROGNOSTICATION,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

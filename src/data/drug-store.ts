@@ -897,6 +897,10 @@ const CLEVIDIPINE: DrugEntry = {
       indication: 'Acute stroke BP management',
       regimen: 'Start 1\u20132 mg/hr IV. Double dose every 90 seconds until target BP achieved. Usual maintenance: 4\u20136 mg/hr. Max 21 mg/hr (or 1000 mL per 24h due to lipid load).',
     },
+    {
+      indication: 'ICH blood pressure control (target SBP 130\u2013150)',
+      regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Max 21 mg/hr. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
+    },
   ],
   contraindications: [
     'Severe aortic stenosis',
@@ -1561,6 +1565,10 @@ const LABETALOL: DrugEntry = {
       indication: 'Post-thrombolysis BP (target <180/105 \u00D7 24h)',
       regimen: '10 mg IV bolus, then 2\u20138 mg/min continuous infusion. Titrate to maintain BP <180/105. Max 300 mg/24h.',
     },
+    {
+      indication: 'ICH blood pressure control (target SBP 130\u2013150)',
+      regimen: '10\u201320 mg IV bolus over 1\u20132 min. May repeat every 10\u201315 min. If repeated boluses needed, start infusion at 2\u20138 mg/min. Target SBP 130\u2013150. Avoid SBP <130 or drops >70 mmHg in first hour. Max 300 mg/24h.',
+    },
   ],
   contraindications: [
     'Severe bradycardia (HR <60)',
@@ -1747,6 +1755,10 @@ const NICARDIPINE: DrugEntry = {
     {
       indication: 'Post-thrombolysis BP (target <180/105 \u00D7 24h)',
       regimen: '5 mg/hr IV infusion, titrate by 2.5 mg/hr every 5\u201315 min to maintain BP <180/105. Max 15 mg/hr.',
+    },
+    {
+      indication: 'ICH blood pressure control (target SBP 130\u2013150)',
+      regimen: '5 mg/hr IV infusion. Titrate by 2.5 mg/hr every 5\u201315 min. Target SBP 130\u2013150. More widely available and less expensive than clevidipine. Monitor closely \u2014 overshoot hypotension possible. Avoid SBP <130 or drops >70 mmHg in first hour. Max 15 mg/hr.',
     },
   ],
   contraindications: [
@@ -2920,6 +2932,204 @@ const SILVER_SULFADIAZINE: DrugEntry = {
 };
 
 // -------------------------------------------------------------------
+// ICH Drugs
+// -------------------------------------------------------------------
+
+const IDARUCIZUMAB: DrugEntry = {
+  id: 'idarucizumab',
+  name: 'Idarucizumab (Praxbind)',
+  genericName: 'Idarucizumab',
+  drugClass: 'Monoclonal antibody fragment (dabigatran-specific reversal)',
+  route: 'IV',
+  indications: ['Dabigatran reversal in life-threatening bleeding or urgent surgery'],
+  dosing: [
+    {
+      indication: 'Dabigatran reversal — ICH or life-threatening bleeding',
+      regimen: '5 g IV total: two consecutive 2.5 g bolus doses (each infused over 5\u201310 min or as bolus). Complete reversal within minutes. Specific for dabigatran only \u2014 does not reverse other DOACs.',
+    },
+  ],
+  contraindications: [
+    'None absolute in life-threatening hemorrhage',
+  ],
+  cautions: [
+    'Thrombotic events reported post-reversal \u2014 reflects underlying prothrombotic state of the patient',
+    'No redosing has been formally studied',
+    'Hereditary fructose intolerance (contains sorbitol)',
+  ],
+  monitoring: 'Diluted thrombin time (dTT) or ecarin clotting time (ECT) to confirm reversal. Clinical hemostasis assessment.',
+  notes: 'Humanized monoclonal antibody fragment that binds dabigatran with 350\u00D7 higher affinity than thrombin. RE-VERSE AD trial: 100% reversal of anticoagulant effect within minutes in 88% of patients. Only effective for dabigatran \u2014 no activity against Xa inhibitors or warfarin.',
+  citations: [
+    'Pollack CV, et al. Idarucizumab for Dabigatran Reversal \u2014 Full Cohort Analysis (RE-VERSE AD). N Engl J Med. 2017;377(5):431-441.',
+    'Frontera JA, et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Crit Care Med. 2016;44(12):2251-2257.',
+  ],
+};
+
+const LEVETIRACETAM: DrugEntry = {
+  id: 'levetiracetam',
+  name: 'Levetiracetam (Keppra)',
+  genericName: 'Levetiracetam',
+  drugClass: 'Antiepileptic (SV2A ligand)',
+  route: 'IV / PO',
+  indications: ['Seizure treatment in ICH', 'Status epilepticus (adjunct)', 'Seizure disorders'],
+  dosing: [
+    {
+      indication: 'ICH seizure treatment',
+      regimen: '20 mg/kg IV (max 3000 mg) as loading dose over 15 min. Maintenance: 500\u20131500 mg IV/PO q12h. Preferred over phenytoin in ICH \u2014 fewer side effects and drug interactions.',
+      weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 3000, label: 'Loading dose' },
+    },
+  ],
+  contraindications: [
+    'Hypersensitivity to levetiracetam',
+  ],
+  cautions: [
+    'Behavioral changes (irritability, agitation) \u2014 more common at higher doses',
+    'Reduce dose in renal impairment (CrCl <80 mL/min)',
+    'Suicidal ideation risk \u2014 FDA black box warning for all antiepileptics',
+  ],
+  monitoring: 'Seizure frequency, mental status, renal function. Drug levels not routinely needed (poor correlation with efficacy).',
+  notes: 'Preferred first-line antiepileptic in neurocritical care. No hepatic metabolism, no drug interactions with warfarin/DOACs, no cardiac effects. Phenytoin should be avoided in ICH \u2014 associated with worse outcomes, numerous drug interactions, and cardiac toxicity.',
+  citations: [
+    'Greenberg SM, et al. 2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage. Stroke. 2022;53(7):e282-e361.',
+    'Naidech AM, et al. Anticonvulsant Use and Outcomes After Intracerebral Hemorrhage. Stroke. 2009;40(12):3810-3815.',
+  ],
+};
+
+const PCC_4FACTOR: DrugEntry = {
+  id: 'pcc-4factor',
+  name: '4-Factor PCC (Kcentra)',
+  genericName: 'Prothrombin complex concentrate (human)',
+  drugClass: 'Coagulation factor replacement (Factors II, VII, IX, X, Protein C & S)',
+  route: 'IV',
+  indications: ['Warfarin reversal in life-threatening bleeding', 'DOAC reversal (off-label)', 'Coagulopathy reversal for urgent surgery'],
+  dosing: [
+    {
+      indication: 'Warfarin reversal — ICH (goal INR <1.4)',
+      regimen: 'INR-based dosing: INR 2\u20133.9 \u2192 25 IU/kg; INR 4\u20136 \u2192 35 IU/kg; INR >6 \u2192 50 IU/kg. Max single dose 5000 IU. Infuse at 0.12 mL/kg/min (max 8.4 mL/min). Onset: 10\u201315 min. Always co-administer Vitamin K 10 mg IV to prevent INR rebound.',
+      weightCalc: [
+        { dosePerKg: 25, unit: 'IU', maxDose: 2500, label: 'INR 2\u20133.9' },
+        { dosePerKg: 35, unit: 'IU', maxDose: 3500, label: 'INR 4\u20136' },
+        { dosePerKg: 50, unit: 'IU', maxDose: 5000, label: 'INR >6' },
+      ],
+    },
+    {
+      indication: 'DOAC reversal — ICH (Xa inhibitor, off-label)',
+      regimen: '50 IU/kg IV (fixed dose regardless of anti-Xa level). Use when andexanet alfa unavailable. Less targeted than specific reversal but widely available.',
+      weightCalc: { dosePerKg: 50, unit: 'IU', maxDose: 5000 },
+    },
+  ],
+  contraindications: [
+    'Known anaphylaxis to PCC components',
+    'Disseminated intravascular coagulation (DIC) \u2014 relative',
+    'Heparin-induced thrombocytopenia (contains heparin) \u2014 use aPCC (FEIBA) instead',
+  ],
+  cautions: [
+    'Thrombotic risk \u2014 contains prothrombotic factors; use lowest effective dose',
+    'Contains heparin \u2014 contraindicated in HIT',
+    'Volume overload less likely than FFP but still possible in CHF',
+    'Shorter duration of effect (~6\u20138h) than Vitamin K \u2014 always co-administer Vitamin K for warfarin reversal',
+  ],
+  monitoring: 'INR at 15\u201330 min post-infusion, then at 6h and 24h. Anti-Xa level if reversing Xa inhibitor. Watch for thrombotic complications.',
+  notes: 'Superior to FFP for warfarin reversal: faster INR correction (minutes vs hours), smaller volume (avoids TACO), and reduced hematoma expansion (INCH trial: 18.3% vs 27.1%). 4-factor contains all vitamin K-dependent factors (II, VII, IX, X) plus Protein C and S. 3-factor PCC (Profilnine) lacks Factor VII and is inferior for warfarin reversal.',
+  citations: [
+    'Sarode R, et al. Efficacy and Safety of a 4-Factor PCC vs Plasma for Urgent Vitamin K Antagonist Reversal (INCH). Lancet. 2013;382(9899):1251-1256.',
+    'Tomaselli GF, et al. 2020 ACC Expert Consensus: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+  ],
+};
+
+const PROTAMINE: DrugEntry = {
+  id: 'protamine',
+  name: 'Protamine Sulfate',
+  genericName: 'Protamine sulfate',
+  drugClass: 'Heparin antagonist',
+  route: 'IV',
+  indications: ['Heparin reversal', 'LMWH reversal (partial)'],
+  dosing: [
+    {
+      indication: 'Heparin reversal — ICH or life-threatening bleeding',
+      regimen: '1 mg per 100 units UFH given in prior 2\u20133 hours. Infuse slowly over 10 min. Max single dose: 50 mg. Onset: 5 minutes. Check PTT 15 min after.',
+    },
+    {
+      indication: 'LMWH (enoxaparin) reversal',
+      regimen: 'If enoxaparin given within 8h: 1 mg protamine per 1 mg enoxaparin. If 8\u201312h since dose: 0.5 mg per 1 mg enoxaparin. If >12h: likely no benefit. Only ~60% reversal of LMWH anti-Xa activity.',
+    },
+  ],
+  contraindications: [
+    'Allergy to protamine, fish, or fish-derived products',
+  ],
+  cautions: [
+    'Anaphylaxis/anaphylactoid reactions \u2014 higher risk in patients with fish allergy, prior protamine exposure, or NPH insulin use',
+    'Hypotension \u2014 infuse slowly (max 5 mg/min); rapid infusion causes cardiovascular collapse',
+    'Protamine excess can paradoxically cause anticoagulation \u2014 do not overdose',
+    'Heparin rebound may occur 8\u201318h later (protamine has shorter t\u00BD than UFH)',
+  ],
+  monitoring: 'PTT or ACT 15 min post-dose. Repeat if incomplete reversal. Monitor for anaphylaxis during infusion.',
+  notes: 'Derived from salmon sperm. Binds heparin electrostatically to form inactive complex. Complete reversal of UFH, but only partial reversal of LMWH (~60% of anti-Xa activity neutralized). Does NOT reverse fondaparinux.',
+  citations: [
+    'Frontera JA, et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Crit Care Med. 2016;44(12):2251-2257.',
+  ],
+};
+
+const TRANEXAMIC_ACID: DrugEntry = {
+  id: 'tranexamic-acid',
+  name: 'Tranexamic Acid (TXA)',
+  genericName: 'Tranexamic acid',
+  drugClass: 'Antifibrinolytic (lysine analog)',
+  route: 'IV',
+  indications: ['ICH hemostasis (adjunct)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)'],
+  dosing: [
+    {
+      indication: 'ICH hemostasis (adjunct \u2014 within 3h of onset)',
+      regimen: '1 g IV over 10 min. Reduced hematoma expansion (OR 0.82, TICH-2) but no improvement in mortality or functional outcome. Consider as adjunct.',
+    },
+  ],
+  contraindications: [
+    'Active thromboembolic disease (DVT, PE, stroke)',
+    'Subarachnoid hemorrhage (risk of vasospasm)',
+  ],
+  cautions: [
+    'Seizure risk at high doses (>2 g)',
+    'Renal impairment \u2014 dose reduce if CrCl <50 mL/min',
+    'Thrombotic risk \u2014 avoid in patients with active DVT/PE',
+  ],
+  monitoring: 'Repeat CT at 6h to assess hematoma stability. Watch for thrombotic complications.',
+  notes: 'Competitively inhibits plasminogen activation, stabilizing clots. TICH-2 trial (2,325 patients): significant reduction in hematoma expansion but no functional outcome benefit. TICH-3 trial underway. Most beneficial when given within 3h of onset, before clot stabilization.',
+  citations: [
+    'Sprigg N, et al. Tranexamic acid for hyperacute primary IntraCerebral Haemorrhage (TICH-2). Lancet. 2018;391(10135):2107-2115.',
+    'Steiner T, et al. ESO/EANS guideline on stroke due to spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086.',
+  ],
+};
+
+const VITAMIN_K: DrugEntry = {
+  id: 'vitamin-k',
+  name: 'Vitamin K (Phytonadione)',
+  genericName: 'Phytonadione (Vitamin K1)',
+  drugClass: 'Vitamin K (coagulation cofactor)',
+  route: 'IV',
+  indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency'],
+  dosing: [
+    {
+      indication: 'Warfarin reversal — ICH (always with PCC)',
+      regimen: '10 mg IV slow push over 15\u201330 min. IV route preferred \u2014 oral takes 12\u201324h. Prevents INR rebound after PCC wears off (6\u20138h). Must co-administer with PCC for immediate reversal; Vitamin K alone is too slow.',
+    },
+  ],
+  contraindications: [
+    'Hypersensitivity to phytonadione (rare)',
+  ],
+  cautions: [
+    'Anaphylactoid reaction risk with IV administration \u2014 infuse slowly',
+    'IV route can rarely cause cardiovascular collapse if given too rapidly',
+    'SC route has erratic absorption \u2014 avoid in emergencies',
+    'Renders patient warfarin-resistant for 1\u20132 weeks (relevant for re-anticoagulation)',
+  ],
+  monitoring: 'INR at 6h and 24h post-administration. Confirm sustained correction (not just PCC effect).',
+  notes: 'Essential adjunct to PCC for warfarin reversal in ICH. PCC provides immediate but temporary factor replacement (~6\u20138h), while Vitamin K stimulates hepatic synthesis of factors II, VII, IX, X over 12\u201324h. Without Vitamin K, INR will rebound when PCC effect wears off, risking hematoma re-expansion.',
+  citations: [
+    'Greenberg SM, et al. 2022 Guideline for Management of Spontaneous ICH. Stroke. 2022;53(7):e282-e361.',
+    'Tomaselli GF, et al. 2020 ACC: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+  ],
+};
+
+// -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 
@@ -2970,8 +3180,10 @@ export const ALL_DRUGS: DrugEntry[] = [
   GENTAMICIN,
   HYPERTONIC_SALINE,
   HYDROXOCOBALAMIN,
+  IDARUCIZUMAB,
   KETAMINE,
   LABETALOL,
+  LEVETIRACETAM,
   LIDOCAINE,
   SODIUM_ZIRCONIUM_CYCLOSILICATE,
   MAGNESIUM_SULFATE,
@@ -2986,12 +3198,14 @@ export const ALL_DRUGS: DrugEntry[] = [
   OXYTOCIN,
   PENICILLIN_G_IV,
   PHENYLEPHRINE,
+  PCC_4FACTOR,
   POTASSIUM_CHLORIDE_IV,
   POTASSIUM_CHLORIDE_ORAL,
   PRASUGREL,
   PREDNISOLONE,
   PROCAINAMIDE,
   PROCAINE_PENICILLIN,
+  PROTAMINE,
   RABIES_IMMUNE_GLOBULIN,
   RABIES_VACCINE,
   RACEMIC_EPINEPHRINE,
@@ -3004,9 +3218,11 @@ export const ALL_DRUGS: DrugEntry[] = [
   TERBUTALINE,
   THIAMINE,
   TICAGRELOR,
+  TRANEXAMIC_ACID,
   UFH,
   VANCOMYCIN,
   VERAPAMIL,
+  VITAMIN_K,
 ];
 
 const DRUG_MAP: Record<string, DrugEntry> = {};
@@ -3072,8 +3288,10 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/gentamicin|garamycin/i, 'gentamicin'],
   [/hypertonic.*saline|3%.*saline|3%.*nacl/i, 'hypertonic-saline'],
   [/hydroxocobalamin|cyanokit/i, 'hydroxocobalamin'],
+  [/idarucizumab|praxbind/i, 'idarucizumab'],
   [/ketamine|ketalar/i, 'ketamine'],
   [/labetalol/i, 'labetalol'],
+  [/levetiracetam|keppra/i, 'levetiracetam'],
   [/lidocaine/i, 'lidocaine'],
   [/lokelma|sodium\s*zirconium|szc/i, 'sodium-zirconium-cyclosilicate'],
   [/magnesium sulfate|mag sulfate|MgSO4/i, 'magnesium-sulfate'],
@@ -3087,11 +3305,13 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/oxytocin|pitocin/i, 'oxytocin'],
   [/oral.*urea|ure-na/i, 'oral-urea'],
   [/aqueous.*penicillin|penicillin G.*IV|crystalline.*penicillin/i, 'penicillin-g-iv'],
+  [/4.factor.*pcc|pcc.*4.factor|kcentra|prothrombin.*complex/i, 'pcc-4factor'],
   [/phenylephrine/i, 'phenylephrine'],
   [/kcl\s*iv|potassium\s*chloride.*iv|iv\s*potassium/i, 'potassium-chloride-iv'],
   [/kcl\s*oral|potassium\s*chloride.*oral|oral\s*potassium|k-dur|klor-con/i, 'potassium-chloride-oral'],
   [/procainamide|pronestyl/i, 'procainamide'],
   [/procaine.*penicillin/i, 'procaine-penicillin'],
+  [/protamine/i, 'protamine'],
   [/prasugrel|effient/i, 'prasugrel'],
   [/prednisolone|prelone|orapred/i, 'prednisolone'],
   [/racemic.*epinephrine|neb.*epinephrine|vaponefrin/i, 'racemic-epinephrine'],
@@ -3104,9 +3324,11 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/terbutaline|brethine/i, 'terbutaline'],
   [/thiamine|vitamin\s*b1/i, 'thiamine'],
   [/ticagrelor|brilinta/i, 'ticagrelor'],
+  [/tranexamic.*acid|TXA/i, 'tranexamic-acid'],
   [/unfractionated heparin|^UFH$|heparin sodium/i, 'ufh'],
   [/vancomycin|vancocin/i, 'vancomycin'],
   [/verapamil|calan|isoptin/i, 'verapamil'],
+  [/vitamin\s*k|phytonadione/i, 'vitamin-k'],
 ];
 
 /** Try to find a drug store ID from a drug name string. Returns undefined if no match. */

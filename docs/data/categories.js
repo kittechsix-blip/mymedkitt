@@ -230,6 +230,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 20,
                 entryNodeId: 'stroke-start',
+            },
+            {
+                id: 'ich',
+                title: 'Intracerebral Hemorrhage',
+                subtitle: 'Assessment \u2192 Reversal \u2192 BP Control \u2192 Surgery \u2192 ICU',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 17,
+                entryNodeId: 'ich-start',
             }
         ],
         isCustom: false,

@@ -8,6 +8,7 @@ export { PE_TREATMENT_NODES, PE_TREATMENT_MODULE_LABELS, PE_TREATMENT_CITATIONS 
 export { PNEUMOTHORAX_NODES, PNEUMOTHORAX_MODULE_LABELS, PNEUMOTHORAX_CITATIONS } from './pneumothorax';
 export { RABIES_NODES, RABIES_MODULE_LABELS, RABIES_CITATIONS } from './rabies';
 export { echoViewsConsult } from './echo-views';
+export { ICH_NODES, ICH_MODULE_LABELS, ICH_CITATIONS } from './ich';
 
 // Export type for registry
 import type { ConsultTree } from '../../types/consult-tree';
