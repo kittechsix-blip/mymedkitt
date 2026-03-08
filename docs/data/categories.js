@@ -144,10 +144,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'psych-assessment',
                 title: 'Psychiatric Assessment',
-                subtitle: 'History → MSE → Thought/Cognition → Safety → Disposition',
+                subtitle: 'History → MSE (10 Components) → Safety → Disposition',
                 categoryId: 'emergency-medicine',
                 version: '1.0',
-                nodeCount: 16,
+                nodeCount: 19,
                 entryNodeId: 'psych-start',
             }
         ],
