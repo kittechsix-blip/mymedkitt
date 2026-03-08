@@ -143,6 +143,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 28,
         entryNodeId: 'na-start',
+      },
+      {
+        id: 'psych-assessment',
+        title: 'Psychiatric Assessment',
+        subtitle: 'History → MSE → Thought/Cognition → Safety → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 16,
+        entryNodeId: 'psych-start',
       }
     ],
     isCustom: false,
