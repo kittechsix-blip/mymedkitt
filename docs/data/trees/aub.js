@@ -77,7 +77,7 @@ export const AUB_NODES = [
         type: 'result',
         module: 1,
         title: 'Pregnancy Confirmed — Consult Does Not Apply',
-        body: 'This AUB consult covers **nonpregnant reproductive-aged women** only.\n\nFor vaginal bleeding in pregnancy, evaluate per trimester:\n• **1st trimester:** Ectopic pregnancy, threatened/missed abortion, molar pregnancy\n• **2nd/3rd trimester:** Placenta previa, placental abruption, preterm labor\n\nObtain **OB consultation**. Consider Rh status (RhoGAM if Rh-negative).',
+        body: 'This AUB consult covers **nonpregnant reproductive-aged women** only.\n\nFor vaginal bleeding in pregnancy, evaluate per trimester:\n• **1st trimester:** Ectopic pregnancy, threatened/missed abortion, molar pregnancy\n• **2nd/3rd trimester:** Placenta previa, placental abruption, preterm labor\n\nSee [Pregnancy Bleeding](#/tree/pregnancy-bleeding) consult (coming soon).\n\nObtain **OB consultation**. Consider Rh status (RhoGAM if Rh-negative).',
         recommendation: 'Evaluate pregnancy-related vaginal bleeding per trimester-specific differential. OB consult.',
         confidence: 'definitive',
         citation: [1, 3],
