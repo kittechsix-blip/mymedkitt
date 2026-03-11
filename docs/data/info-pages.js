@@ -3281,6 +3281,217 @@ const FT_MISCARRIAGE_DISCHARGE = {
     shareable: true,
 };
 // -------------------------------------------------------------------
+// HIV ED Management
+// -------------------------------------------------------------------
+const HIV_STEPS_SUMMARY = {
+    id: 'hiv-steps-summary',
+    title: 'HIV ED Management Steps Summary',
+    subtitle: 'Quick-Reference Checklist',
+    sections: [
+        {
+            body: 'Quick-reference checklist for managing HIV-related presentations in the ED. Tap any step to jump directly to that decision point in the consult.',
+        },
+        {
+            heading: 'Initial Assessment',
+            body: '• [Determine HIV status — CD4 count, viral load, current ART regimen](#/node/hiv-status-assess)\n• Route to appropriate pathway based on immune status and presentation',
+        },
+        {
+            heading: 'Acute Seroconversion',
+            body: '• [Recognize acute retroviral syndrome: fever + rash + lymphadenopathy + NO respiratory symptoms](#/node/hiv-seroconversion)\n• 4th generation Ag/Ab test (2-week window period)\n• Send HIV RNA viral load if 4th gen negative but clinical suspicion remains high\n• Never rely on antibody-only test in the acute setting',
+        },
+        {
+            heading: 'Well-Controlled HIV',
+            body: '• [Treat like immunocompetent patient for most acute complaints](#/node/hiv-well-controlled)\n• Watch for chronic inflammatory complications (CAD, COPD, osteoporosis)\n• Screen for ARV medication side effects and drug interactions\n• Verify ART adherence and recent viral load',
+        },
+        {
+            heading: 'Immunocompromised (CD4 <200)',
+            body: '• [High risk for opportunistic infections — low threshold for imaging and admission](#/node/hiv-immunocompromised)\n• PJP (CD4 <200): dyspnea, dry cough, bilateral GGOs, elevated LDH\n• Toxoplasmosis (CD4 <100): ring-enhancing lesions, focal neuro deficits\n• Cryptococcal meningitis (CD4 <100): headache, altered mental status, elevated opening pressure\n• CMV (CD4 <50): retinitis, colitis, esophagitis\n• TB: any CD4 — atypical presentations with low CD4',
+        },
+        {
+            heading: 'Medication Effects',
+            body: '• [Know ARV drug classes and their signature toxicities](#/node/hiv-med-overview)\n• NRTI: TDF → Fanconi syndrome, renal tubular acidosis, bone loss\n• NNRTI: efavirenz → neuropsychiatric effects, vivid dreams, SJS\n• PI: atazanavir → jaundice, radiolucent kidney stones, CYP3A4 drug interactions\n• INSTI: generally well-tolerated, fewest interactions',
+        },
+        {
+            heading: 'Prevention',
+            body: '• [PEP: post-exposure prophylaxis within 72 hours of exposure](#/tree/pep)\n• [PrEP: refer high-risk patients for pre-exposure prophylaxis](#/node/hiv-prep-referral)\n• Document exposure time, source HIV status, and risk level',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Saag MS, Gandhi RT, Hoy JF, et al. Antiretroviral Drugs for Treatment and Prevention of HIV Infection in Adults: 2020 Recommendations of the International Antiviral Society\u2013USA Panel. JAMA. 2020;324(16):1651-1669.' },
+        { num: 2, text: 'Panel on Antiretroviral Guidelines for Adults and Adolescents. Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents with HIV. HHS. 2024.' },
+    ],
+};
+const HIV_SEROCONVERSION_FEATURES = {
+    id: 'hiv-seroconversion-features',
+    title: 'Acute Retroviral Syndrome',
+    subtitle: 'Clinical Features & Testing Approach',
+    sections: [
+        {
+            body: 'Acute HIV seroconversion presents 2\u20134 weeks after exposure and is frequently misdiagnosed as mononucleosis, influenza, or strep pharyngitis. Recognizing the pattern prevents missed diagnosis and ongoing transmission.',
+        },
+        {
+            heading: 'Characteristic Presentation',
+            body: '• **Fever** \u2014 present in 80\u201390% of cases, often high-grade\n• **Sore throat** \u2014 pharyngitis WITHOUT exudate (unlike strep or EBV)\n• **Macular rash** \u2014 erythematous, non-pruritic; face, trunk, and upper extremities; appears day 2\u20133 of illness\n• **Lymphadenopathy** \u2014 diffuse, non-tender, symmetric\n• **Mucocutaneous ulcers** \u2014 oral and/or genital; shallow, painful\n• **Myalgia / arthralgia** \u2014 widespread, non-specific\n• **Headache** \u2014 may be severe; consider aseptic meningitis if meningismus present\n• **Weight loss / diarrhea** \u2014 in some cases',
+        },
+        {
+            heading: 'Key Distinguishing Features',
+            body: '• **NO respiratory symptoms** \u2014 absence of cough, rhinorrhea, and congestion distinguishes ARS from influenza and URI\n• **NO exudative pharyngitis** \u2014 unlike strep and mononucleosis\n• **Mucocutaneous ulcers** \u2014 highly specific; rare in other viral syndromes\n• **Rash + fever + lymphadenopathy + sore throat** without respiratory symptoms should trigger HIV testing\n• Ask about sexual exposure or needle sharing in the preceding 2\u20136 weeks',
+        },
+        {
+            heading: 'Laboratory Findings',
+            body: '• **Lymphopenia** initially (transient CD4 drop), followed by lymphocytosis with atypical lymphocytes\n• **Thrombocytopenia** \u2014 mild, self-limited\n• **Elevated transaminases** \u2014 hepatitis in 20\u201350% of cases\n• **Elevated ESR/CRP** \u2014 non-specific but supports viral syndrome',
+        },
+        {
+            heading: 'Testing Approach',
+            body: '• **4th generation Ag/Ab test** (preferred) \u2014 detects p24 antigen + HIV-1/2 antibodies; window period ~2 weeks [1]\n• **If 4th gen negative but clinical suspicion high** \u2014 send HIV RNA viral load (detectable within 10\u201312 days of infection)\n• **Never rely on antibody-only (3rd gen) test alone** \u2014 window period 3\u20134 weeks; will miss acute seroconversion\n• **Rapid point-of-care tests** are antibody-only \u2014 useful for screening but CANNOT rule out acute infection\n• If ARS confirmed: refer for immediate ART initiation (reduces reservoir size and transmission risk)',
+        },
+        {
+            heading: 'Differential Diagnosis',
+            body: '• Infectious mononucleosis (EBV) \u2014 exudative pharyngitis, splenomegaly, positive heterophile\n• Influenza \u2014 respiratory symptoms predominate\n• Secondary syphilis \u2014 palmar rash, condylomata lata, positive RPR\n• Strep pharyngitis \u2014 exudate, anterior cervical LAD, positive rapid strep\n• CMV mononucleosis \u2014 heterophile-negative, less pharyngitis\n• Drug reaction \u2014 medication exposure history',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Branson BM, Handsfield HH, Lampe MA, et al. Revised Recommendations for HIV Testing of Adults, Adolescents, and Pregnant Women in Health-Care Settings. MMWR Recomm Rep. 2006;55(RR-14):1-17.' },
+        { num: 2, text: 'Cohen MS, Shaw GM, McMichael AJ, Haynes BF. Acute HIV-1 Infection. N Engl J Med. 2011;364(20):1943-1954.' },
+        { num: 3, text: 'Daar ES, Little S, Pitt J, et al. Diagnosis of Primary HIV-1 Infection. Ann Intern Med. 2001;134(1):25-29.' },
+    ],
+};
+const HIV_ARV_CLASSES = {
+    id: 'hiv-arv-classes',
+    title: 'Antiretroviral Drug Classes & Side Effects',
+    subtitle: 'ED-Relevant Toxicities & Interactions',
+    sections: [
+        {
+            body: 'Overview of the five major antiretroviral drug classes, their signature toxicities relevant to ED presentations, and critical drug interactions. Most patients on modern ART take a two- or three-drug combination (often as a single pill). [1][2]',
+        },
+        {
+            heading: 'NRTIs / NtRTIs (Nucleoside/Nucleotide Reverse Transcriptase Inhibitors)',
+            body: '• **Tenofovir disoproxil fumarate (TDF)** \u2014 Fanconi syndrome (proximal renal tubular acidosis, glycosuria, phosphaturia, proteinuria), decreased bone mineral density\n• **Tenofovir alafenamide (TAF)** \u2014 less renal and bone toxicity than TDF; preferred in renal impairment\n• **Abacavir (ABC)** \u2014 HLA-B*5701 hypersensitivity reaction (fever, rash, GI symptoms \u2014 can be fatal on rechallenge); associated with increased MI risk in some studies\n• **Lamivudine (3TC) / Emtricitabine (FTC)** \u2014 well-tolerated; active against hepatitis B (HBV flare risk if discontinued in co-infected patients)\n• **Zidovudine (AZT)** \u2014 macrocytic anemia, neutropenia, myopathy (legacy drug, rarely used)\n• **Class effect:** lactic acidosis with hepatic steatosis (rare but life-threatening, primarily with older NRTIs)',
+        },
+        {
+            heading: 'NNRTIs (Non-Nucleoside Reverse Transcriptase Inhibitors)',
+            body: '• **Efavirenz (EFV)** \u2014 neuropsychiatric effects (vivid dreams, depression, psychosis, suicidality), dizziness, Stevens-Johnson syndrome\n• **Nevirapine (NVP)** \u2014 severe hepatotoxicity (fulminant hepatitis, especially in women with CD4 >250 or men with CD4 >400), SJS/TEN\n• **Doravirine (DOR)** \u2014 fewer CNS side effects than efavirenz; better tolerated\n• **Rilpivirine (RPV)** \u2014 requires food and gastric acid for absorption; avoid PPIs (reduced efficacy)\n• **Class effect:** rash (usually mild, self-limited); low barrier to resistance',
+        },
+        {
+            heading: 'PIs (Protease Inhibitors)',
+            body: '• **Atazanavir (ATV)** \u2014 indirect hyperbilirubinemia (jaundice without hepatotoxicity), radiolucent kidney stones (invisible on plain film, visible on CT), cholelithiasis, nephrolithiasis\n• **Darunavir (DRV)** \u2014 rash (contains sulfonamide moiety), GI intolerance; requires pharmacokinetic booster\n• **Ritonavir / Cobicistat** \u2014 used as pharmacokinetic boosters (not for antiviral effect); potent CYP3A4 inhibitors causing major drug interactions\n• **Critical interactions:** Contraindicated with simvastatin, lovastatin, ergot alkaloids, oral midazolam, triazolam, rifampin, St. John\u2019s wort. Significant interactions with calcium channel blockers, warfarin, direct oral anticoagulants, immunosuppressants.\n• **Class effect:** metabolic syndrome (dyslipidemia, insulin resistance, lipodystrophy), GI intolerance (nausea, diarrhea)',
+        },
+        {
+            heading: 'INSTIs (Integrase Strand Transfer Inhibitors)',
+            body: '• **Bictegravir (BIC)** \u2014 available only as co-formulated Biktarvy (BIC/TAF/FTC); well-tolerated, high barrier to resistance\n• **Dolutegravir (DTG)** \u2014 neural tube defect concern in periconception period (risk ~0.3%); insomnia, weight gain; rare hypersensitivity\n• **Raltegravir (RAL)** \u2014 fewest drug interactions of any ARV class; CK elevation, myopathy (rare)\n• **Elvitegravir (EVG)** \u2014 requires cobicistat boosting (carries CYP3A4 interaction liability)\n• **Class effect:** generally the best-tolerated ARV class; weight gain (especially with DTG); insomnia and headache',
+        },
+        {
+            heading: 'Entry / Attachment Inhibitors',
+            body: '• **Enfuvirtide (T-20)** \u2014 subcutaneous injection-site reactions (nearly universal); used only in heavily treatment-experienced patients\n• **Maraviroc (MVC)** \u2014 CCR5 antagonist; hepatotoxicity (with allergic features), postural hypotension; requires tropism testing before use\n• **Ibalizumab (IBA)** \u2014 monoclonal antibody; IV infusion; hypersensitivity reactions; reserved for multidrug-resistant HIV\n• **Fostemsavir (FTR)** \u2014 attachment inhibitor; QTc prolongation; reserved for multidrug-resistant HIV\n• **Lenacapavir** \u2014 first-in-class capsid inhibitor; subcutaneous q6 months; injection-site reactions',
+        },
+        {
+            heading: 'ED Pearls',
+            body: '• **Do not stop ART** in the ED unless directed by HIV specialist \u2014 interruptions promote resistance\n• **Check drug interactions** before prescribing any new medication to a patient on ART (especially PIs and cobicistat-boosted regimens)\n• **Radiolucent stones**: if patient on atazanavir presents with renal colic and negative plain film, order CT\n• **Lactic acidosis**: consider in any HIV patient with unexplained metabolic acidosis, especially on older NRTIs\n• **Immune reconstitution inflammatory syndrome (IRIS)**: paradoxical worsening within weeks of ART initiation \u2014 unmasking of latent OIs',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Saag MS, Gandhi RT, Hoy JF, et al. Antiretroviral Drugs for Treatment and Prevention of HIV Infection in Adults: 2020 Recommendations of the International Antiviral Society\u2013USA Panel. JAMA. 2020;324(16):1651-1669.' },
+        { num: 2, text: 'Panel on Antiretroviral Guidelines for Adults and Adolescents. Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents with HIV. HHS. 2024.' },
+        { num: 3, text: 'Tseng A, Seet J, Phillips EJ. The Evolution of Three Decades of Antiretroviral Therapy: Challenges, Triumphs and the Promise of the Future. Br J Clin Pharmacol. 2015;79(2):182-194.' },
+    ],
+};
+const HIV_TESTING_GUIDE = {
+    id: 'hiv-testing-guide',
+    title: 'HIV Testing & Screening Guide',
+    subtitle: 'Universal Screening, Technologies & Window Periods',
+    sections: [
+        {
+            body: 'HIV testing in the ED is a critical public health intervention. An estimated 13% of people living with HIV in the US are unaware of their status. ED-based screening programs have identified new diagnoses in 0.1\u20130.7% of tested patients. [1][2]',
+        },
+        {
+            heading: 'Universal Screening Recommendations',
+            body: '• **CDC (2006):** Opt-out HIV screening for all patients aged 13\u201364 in healthcare settings, including EDs; repeat at least annually for high-risk patients [1]\n• **USPSTF (2019):** Grade A recommendation for screening all adolescents and adults aged 15\u201365; younger and older if at increased risk [2]\n• **ACEP (2022):** Supports routine opt-out ED-based HIV screening as a public health strategy\n• **Separate written consent is NOT required** in most states \u2014 general medical consent covers HIV testing\n• Pre-test counseling requirements have been eliminated in most jurisdictions to reduce barriers',
+        },
+        {
+            heading: 'Risk-Based Screening Indications',
+            body: '• Men who have sex with men (MSM)\n• Injection drug use (IDU) or needle sharing\n• Transactional sex or sex work\n• Sexual contact with known HIV-positive partner\n• Diagnosis of another sexually transmitted infection\n• Diagnosis of tuberculosis or hepatitis B/C\n• Occupational exposure (needlestick, mucous membrane splash)\n• Sexual assault\n• Pregnancy (all trimesters \u2014 opt-out)\n• Patients requesting PEP or PrEP\n• Incarcerated populations\n• Homeless individuals',
+        },
+        {
+            heading: 'Testing Technologies',
+            body: '• **4th generation Ag/Ab combination immunoassay** (preferred)\n  \u2014 Detects HIV-1 p24 antigen + HIV-1/2 antibodies simultaneously\n  \u2014 Window period: ~2 weeks (14\u201318 days)\n  \u2014 Sensitivity 99.7%, specificity 99.5%\n  \u2014 Laboratory-based; turnaround time typically 1\u20132 hours\n\n• **3rd generation antibody-only immunoassay**\n  \u2014 Detects HIV-1/2 antibodies (IgM and IgG)\n  \u2014 Window period: 3\u20134 weeks (21\u201328 days)\n  \u2014 Will MISS acute seroconversion during the window period\n\n• **Rapid point-of-care tests** (e.g., OraQuick, INSTI)\n  \u2014 Antibody-only (most are 3rd generation equivalent)\n  \u2014 Results in 1\u201320 minutes\n  \u2014 Useful for screening but CANNOT rule out acute HIV infection\n  \u2014 All reactive rapid tests require confirmatory laboratory testing\n\n• **HIV RNA viral load (PCR/NAAT)**\n  \u2014 Detects viral RNA directly; earliest marker (detectable 10\u201312 days post-infection)\n  \u2014 NOT a screening test \u2014 use when acute seroconversion suspected with negative/indeterminate Ag/Ab\n  \u2014 Quantitative result also useful for monitoring treatment response',
+        },
+        {
+            heading: 'Window Periods Summary',
+            body: '• **HIV RNA (NAAT):** 10\u201312 days\n• **4th gen Ag/Ab:** 14\u201318 days (p24 antigen appears first)\n• **3rd gen Ab-only:** 21\u201328 days\n• **Rapid POC tests:** 21\u201390 days (depending on test)\n• **Self-test (OraQuick Home):** ~90 days\n\nA negative test within the window period does NOT exclude infection. Counsel patients with recent high-risk exposure to retest at appropriate intervals.',
+        },
+        {
+            heading: 'Confirmatory Testing Algorithm (CDC)',
+            body: '• Reactive 4th gen Ag/Ab \u2192 HIV-1/HIV-2 antibody differentiation immunoassay\n• If differentiation assay is negative or indeterminate \u2192 HIV-1 RNA NAAT\n• Positive NAAT = acute HIV-1 infection (antibodies not yet developed)\n• Negative NAAT + negative differentiation = false-positive initial screen\n• Never diagnose HIV on a single reactive screening test \u2014 always confirm',
+        },
+        {
+            heading: 'ED Pearls',
+            body: '• **Opt-out > opt-in:** ED programs using opt-out achieve 2\u20133\u00D7 higher testing rates\n• **Link to care** is essential: a positive result without a warm handoff to HIV care is a missed opportunity\n• **PEP window:** if exposure was <72 hours ago, initiate PEP while confirmatory results are pending\n• **Acute seroconversion:** the highest-transmission-risk period \u2014 viral loads can exceed 10 million copies/mL\n• **Document** exposure history and risk assessment in the chart for all tested patients',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Branson BM, Handsfield HH, Lampe MA, et al. Revised Recommendations for HIV Testing of Adults, Adolescents, and Pregnant Women in Health-Care Settings. MMWR Recomm Rep. 2006;55(RR-14):1-17.' },
+        { num: 2, text: 'US Preventive Services Task Force. Screening for HIV Infection: US Preventive Services Task Force Recommendation Statement. JAMA. 2019;321(23):2326-2336.' },
+        { num: 3, text: 'Rothman RE, Lyons MS, Haukoos JS. Optimal HIV Testing Strategies for Emergency Departments. Ann Emerg Med. 2018;72(5):533-545.' },
+        { num: 4, text: 'Centers for Disease Control and Prevention. Laboratory Testing for the Diagnosis of HIV Infection: Updated Recommendations. CDC. 2014.' },
+    ],
+};
+const HIV_SYSTEM_COMPLICATIONS = {
+    id: 'hiv-system-complications',
+    title: 'HIV System-Based Complications',
+    subtitle: 'Comprehensive Organ-System Reference',
+    sections: [
+        {
+            body: 'People living with HIV face a dual burden: opportunistic infections (primarily when immunocompromised) and chronic inflammatory/metabolic complications (even when virally suppressed). This reference covers ED-relevant complications organized by organ system. [1][2]',
+        },
+        {
+            heading: 'Cardiovascular',
+            body: '• **Coronary artery disease** \u2014 1.5\u20132\u00D7 increased risk vs. general population; chronic inflammation, ART metabolic effects (PIs), and traditional risk factors. Treat per standard ACS guidelines. [1]\n• **Heart failure** \u2014 HIV-associated cardiomyopathy (dilated, often subclinical); myocarditis from HIV itself or OIs\n• **Venous thromboembolism** \u2014 2\u201310\u00D7 increased VTE risk; chronic inflammation, endothelial dysfunction, immobility, OIs\n• **Pulmonary hypertension** \u2014 HIV-associated PAH; dyspnea, RV failure; occurs independent of CD4 count\n• **Pericardial disease** \u2014 effusion (TB, lymphoma), pericarditis',
+        },
+        {
+            heading: 'Pulmonary',
+            body: '• **PJP (Pneumocystis jirovecii pneumonia)** \u2014 CD4 <200; insidious dyspnea, dry cough, bilateral ground-glass opacities on CT, elevated LDH; diagnose with induced sputum or BAL\n• **COPD** \u2014 accelerated lung aging; increased prevalence even in non-smokers\n• **Pulmonary embolism** \u2014 elevated VTE risk (see Cardiovascular)\n• **Tuberculosis** \u2014 any CD4 count; atypical presentations with low CD4 (lower lobe, miliary, extrapulmonary); always isolate and test\n• **Bacterial pneumonia** \u2014 most common pulmonary infection at any CD4; S. pneumoniae, H. influenzae; recurrent pneumonia is an AIDS-defining illness\n• **Kaposi sarcoma** \u2014 pulmonary KS with bilateral nodular infiltrates, pleural effusions; CD4 typically <100',
+        },
+        {
+            heading: 'Renal',
+            body: '• **HIV-associated nephropathy (HIVAN)** \u2014 collapsing FSGS; proteinuria, renal failure; more common in Black patients; improves with ART\n• **Fanconi syndrome** \u2014 TDF-induced proximal renal tubular acidosis; glycosuria, phosphaturia, proteinuria, non-anion gap metabolic acidosis\n• **Radiolucent kidney stones** \u2014 atazanavir (PI); invisible on plain film; CT required for diagnosis\n• **Acute kidney injury** \u2014 multifactorial: medications (TDF, NSAIDs, TMP-SMX), dehydration, sepsis, rhabdomyolysis\n• **Chronic kidney disease** \u2014 prevalence 5\u201330%; TDF, diabetes, hypertension, HIVAN all contribute',
+        },
+        {
+            heading: 'Neurologic',
+            body: '• **Stroke** \u2014 increased risk across all age groups; vasculopathy, accelerated atherosclerosis, cardioembolism, opportunistic vasculitis\n• **HIV-associated neurocognitive disorder (HAND)** \u2014 spectrum from asymptomatic to HIV-associated dementia; occurs even with viral suppression\n• **CNS opportunistic infections:**\n  \u2014 Toxoplasmosis (CD4 <100): ring-enhancing lesions, seizures, focal deficits\n  \u2014 Cryptococcal meningitis (CD4 <100): headache, altered mental status, elevated opening pressure >20 cmH\u2082O\n  \u2014 PML/JC virus (CD4 <200): progressive white matter demyelination, no enhancement, no mass effect\n  \u2014 CMV encephalitis (CD4 <50): periventricular enhancement\n• **Primary CNS lymphoma** \u2014 CD4 <50; single ring-enhancing lesion (vs. multiple in toxo); EBV-driven\n• **Peripheral neuropathy** \u2014 distal symmetric polyneuropathy (HIV itself or didanosine/stavudine)',
+        },
+        {
+            heading: 'Gastrointestinal',
+            body: '• **Medication-induced diarrhea** \u2014 PIs (especially ritonavir), nelfinavir; common reason for ED visit\n• **C. difficile** \u2014 higher incidence and recurrence rates in HIV patients\n• **Hepatitis C co-infection** \u2014 present in ~25% of HIV patients; accelerated fibrosis; check HCV status\n• **Hepatitis B co-infection** \u2014 TDF/TAF and FTC/3TC treat both; HBV flare if these agents stopped\n• **Esophageal disease** \u2014 Candida esophagitis (CD4 <200; odynophagia, white plaques), CMV esophagitis (CD4 <50; deep ulcers), HSV esophagitis\n• **CMV colitis** \u2014 CD4 <50; bloody diarrhea, abdominal pain; biopsy for diagnosis\n• **HIV enteropathy** \u2014 chronic diarrhea, malabsorption without identifiable pathogen; diagnosis of exclusion',
+        },
+        {
+            heading: 'Hematologic',
+            body: '• **Cytopenias** \u2014 anemia (HIV marrow suppression, AZT, parvovirus B19), neutropenia (HIV, AZT, TMP-SMX), thrombocytopenia (immune-mediated, resembles ITP)\n• **Venous thromboembolism** \u2014 2\u201310\u00D7 increased risk; consider in any HIV patient with dyspnea or leg swelling\n• **Thrombotic thrombocytopenic purpura (TTP)** \u2014 rare but classic association; pentad of thrombocytopenia, MAHA, neuro changes, renal failure, fever\n• **Lymphoma** \u2014 non-Hodgkin (Burkitt, DLBCL, primary CNS), Hodgkin lymphoma (not AIDS-defining but increased); B symptoms, lymphadenopathy, cytopenias',
+        },
+        {
+            heading: 'Endocrine & Metabolic',
+            body: '• **Metabolic syndrome** \u2014 PI-associated dyslipidemia (elevated TG, LDL), insulin resistance, central lipodystrophy\n• **IRIS thyrotoxicosis** \u2014 Graves disease unmasked by immune reconstitution after ART initiation; presents weeks to months into treatment\n• **Diabetes mellitus** \u2014 PI-associated insulin resistance; increased prevalence\n• **Adrenal insufficiency** \u2014 CMV adrenalitis, ketoconazole use, infiltrative disease; consider in critically ill HIV patient with refractory hypotension\n• **Hypogonadism** \u2014 testosterone deficiency; fatigue, weight loss, decreased bone density\n• **Lactic acidosis** \u2014 NRTI-induced mitochondrial toxicity; unexplained AG metabolic acidosis with hepatic steatosis',
+        },
+        {
+            heading: 'Musculoskeletal',
+            body: '• **Osteoporosis / fractures** \u2014 TDF bone loss, chronic inflammation, hypogonadism; 2\u20134\u00D7 increased fracture risk\n• **Avascular necrosis (AVN)** \u2014 corticosteroid use, PI-associated dyslipidemia; hip most common; bilateral in 40\u201380%\n• **Myopathy** \u2014 AZT-associated mitochondrial myopathy; proximal weakness, elevated CK\n• **Septic arthritis / osteomyelitis** \u2014 increased risk when immunocompromised; atypical organisms possible',
+        },
+        {
+            heading: 'Psychiatric',
+            body: '• **Depression** \u2014 2\u20133\u00D7 prevalence vs. general population; screen all patients; major barrier to ART adherence\n• **Demoralization / adjustment disorder** \u2014 common at diagnosis and during disease complications\n• **Mania / psychosis** \u2014 efavirenz-induced neuropsychiatric effects; CNS OIs (toxo, PML); HIV-associated mania (late-stage)\n• **Suicidality** \u2014 increased risk, especially at diagnosis and during efavirenz therapy\n• **Substance use disorders** \u2014 high co-occurrence; IDU, methamphetamine, alcohol; critical to address for ART adherence',
+        },
+        {
+            heading: 'Dermatologic',
+            body: '• **Drug rashes** \u2014 NNRTIs (SJS/TEN risk with nevirapine, efavirenz), abacavir hypersensitivity, TMP-SMX (10\u00D7 more common in HIV), dapsone\n• **Eosinophilic folliculitis** \u2014 pruritic papules on face, trunk; CD4 <250; improves with ART\n• **Kaposi sarcoma** \u2014 HHV-8\u2013driven; violaceous papules/plaques/nodules; skin, oral mucosa, visceral involvement; AIDS-defining\n• **Molluscum contagiosum** \u2014 giant or widespread lesions when CD4 <200\n• **Herpes zoster** \u2014 multidermatomal or disseminated; may be first sign of immunocompromise\n• **Seborrheic dermatitis** \u2014 severe, widespread; common early indicator\n• **Prurigo nodularis** \u2014 chronic pruritic nodules; associated with advanced immunosuppression',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Feinstein MJ, Hsue PY, Benjamin LA, et al. Characteristics, Prevention, and Management of Cardiovascular Disease in People Living With HIV: A Scientific Statement From the American Heart Association. Circulation. 2019;140(2):e98-e124.' },
+        { num: 2, text: 'Saag MS, Gandhi RT, Hoy JF, et al. Antiretroviral Drugs for Treatment and Prevention of HIV Infection in Adults: 2020 Recommendations of the International Antiviral Society\u2013USA Panel. JAMA. 2020;324(16):1651-1669.' },
+        { num: 3, text: 'Panel on Antiretroviral Guidelines for Adults and Adolescents. Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents with HIV. HHS. 2024.' },
+        { num: 4, text: 'Kaplan JE, Benson C, Holmes KK, et al. Guidelines for Prevention and Treatment of Opportunistic Infections in HIV-Infected Adults and Adolescents. MMWR Recomm Rep. 2009;58(RR-4):1-207.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -3379,6 +3590,11 @@ export const INFO_PAGES = {
     'ft-imaging-safety': FT_IMAGING_SAFETY,
     'ft-abx-safety': FT_ABX_SAFETY,
     'ft-miscarriage-discharge': FT_MISCARRIAGE_DISCHARGE,
+    'hiv-steps-summary': HIV_STEPS_SUMMARY,
+    'hiv-seroconversion-features': HIV_SEROCONVERSION_FEATURES,
+    'hiv-arv-classes': HIV_ARV_CLASSES,
+    'hiv-testing-guide': HIV_TESTING_GUIDE,
+    'hiv-system-complications': HIV_SYSTEM_COMPLICATIONS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

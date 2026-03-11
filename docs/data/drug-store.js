@@ -55,6 +55,11 @@ const ACYCLOVIR = {
             indication: 'Neonatal HSV (0-3 months)',
             regimen: '20 mg/kg IV q8h. Duration: minimum 5 doses or until HSV PCR results negative. If PCR not resulted after 5 doses, contact ID.',
         },
+        {
+            indication: 'Adult/Adolescent Encephalitis (HSV, VZV)',
+            regimen: '10 mg/kg IV q8h. Infuse over 1 hour. Continue pending HSV/VZV PCR results. If PCR negative but high clinical suspicion, continue and repeat PCR at 3-7 days. Duration: 14-21 days for confirmed HSV encephalitis.',
+            weightCalc: { dosePerKg: 10, unit: 'mg' },
+        },
     ],
     cautions: [
         'Crystalline nephropathy — ensure adequate hydration',
@@ -184,6 +189,10 @@ const AMPICILLIN = {
             indication: 'Meningitic (>28 days, added to Ceftriaxone)',
             regimen: '75 mg/kg IV q6h.',
         },
+        {
+            indication: 'Adult Meningitis (Listeria coverage)',
+            regimen: '2 g IV q4h. Add to ceftriaxone + vancomycin for patients age ≥50, pregnant, or immunocompromised. Active against L. monocytogenes, which is not covered by cephalosporins. Mortality from listerial meningitis: 17-30%.',
+        },
     ],
     contraindications: [
         'IgE-mediated penicillin allergy',
@@ -309,6 +318,38 @@ const ASPIRIN = {
         'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.',
     ],
 };
+const ATAZANAVIR = {
+    id: 'atazanavir',
+    name: 'Atazanavir (Reyataz)',
+    genericName: 'Atazanavir',
+    drugClass: 'Protease inhibitor (PI)',
+    route: 'PO',
+    indications: ['HIV treatment', 'HIV — ED management'],
+    dosing: [
+        {
+            indication: 'HIV Treatment (boosted)',
+            regimen: '300 mg PO once daily + ritonavir 100 mg PO once daily. Must take with food. Requires acidic environment for absorption — avoid PPIs, separate H2 blockers by 12h.',
+        },
+        {
+            indication: 'HIV — Nephrolithiasis / Jaundice',
+            regimen: 'Atazanavir causes RADIOLUCENT kidney stones (drug metabolite stones not visible on standard noncontrast CT — look for secondary signs: hydroureter, perinephric stranding). Also causes benign indirect hyperbilirubinemia via UDP-glucuronosyltransferase inhibition → jaundice (resolves on discontinuation). Discuss with HIV provider regarding dose adjustment or alternative.',
+        },
+    ],
+    contraindications: ['Severe hepatic impairment'],
+    cautions: [
+        'Radiolucent kidney stones — CT may be falsely negative',
+        'Indirect hyperbilirubinemia/jaundice (benign)',
+        'CYP3A4 substrate — multiple drug interactions',
+        'Requires acidic gastric pH for absorption — PPIs contraindicated',
+        'QTc prolongation reported',
+    ],
+    monitoring: 'Serum bilirubin (expected elevation), renal function, urinalysis if flank pain',
+    notes: 'Most commonly used PI alongside darunavir. Stones from PIs are radiolucent if composed purely of concentrated drug metabolites. In patients with ongoing renal colic symptoms, consult urology for ureteroscopy.',
+    citations: [
+        'Saag MS, Gandhi RT, Hoy JF, et al. Antiretroviral drugs for treatment and prevention of HIV infection in adults: 2020 recommendations of the International Antiviral Society-USA panel. JAMA. 2020;324(16):1651-1669.',
+        'Izzedine H, Lescure FX, Bonnet F. HIV medication-based urolithiasis. Clin Kidney J. 2014;7(2):121-126.',
+    ],
+};
 const ATORVASTATIN = {
     id: 'atorvastatin',
     name: 'Atorvastatin (Lipitor)',
@@ -411,6 +452,10 @@ const BIKTARVY = {
         {
             indication: 'HIV PEP',
             regimen: '1 tablet (50/200/25 mg) PO once daily x 28 days. Take with or without food. Start as soon as possible, within 72 hours of exposure.',
+        },
+        {
+            indication: 'HIV Treatment (ongoing therapy)',
+            regimen: '1 tablet (50/200/25 mg) PO once daily. Preferred INSTI-based single-tablet regimen per HHS and IAS-USA guidelines. ~90% of patients attain undetectable VL through 96 weeks.',
         },
     ],
     contraindications: [
@@ -716,6 +761,10 @@ const CEFEPIME = {
             indication: 'Meningitis (>28 days)',
             regimen: '50 mg/kg IV q8h.',
         },
+        {
+            indication: 'Adult Nosocomial/Healthcare-Associated Meningitis',
+            regimen: '2 g IV q8h. Alternative to meropenem for Pseudomonas coverage in post-neurosurgical or healthcare-associated meningitis. Combine with vancomycin for MRSA coverage.',
+        },
     ],
     contraindications: [
         'Severe cephalosporin allergy',
@@ -764,6 +813,10 @@ const CEFTRIAXONE = {
         {
             indication: 'Pyelonephritis in pregnancy',
             regimen: '1 g IV daily. Continue until afebrile 48 hours, then transition to oral cephalexin guided by culture sensitivities. Admit all pregnant patients with pyelonephritis.',
+        },
+        {
+            indication: 'Adult Bacterial Meningitis',
+            regimen: '2 g IV q12h. Higher dose required for consistent CNS penetration. Combine with vancomycin (\u00b1 ampicillin if age \u226550, pregnant, or immunocompromised). Administer with dexamethasone 0.15 mg/kg IV q6h.',
         },
     ],
     contraindications: [
@@ -865,6 +918,11 @@ const DEXAMETHASONE = {
             indication: 'Airway edema / post-extubation stridor',
             regimen: '0.5 mg/kg IV q6h x 4 doses, starting 12-24 hours before planned extubation.',
             weightCalc: { dosePerKg: 0.5, unit: 'mg' },
+        },
+        {
+            indication: 'Bacterial Meningitis (adjunctive)',
+            regimen: '0.15 mg/kg IV q6h × 2-4 days. Give WITH or up to 15-20 min BEFORE first antibiotic dose. Reduces mortality in pneumococcal meningitis (Cochrane 2015). STOP if Listeria or Cryptococcus identified — worsened outcomes.',
+            weightCalc: { dosePerKg: 0.15, unit: 'mg', dailyDivided: 4 },
         },
     ],
     contraindications: [
@@ -1012,6 +1070,10 @@ const CIPROFLOXACIN = {
         {
             indication: 'Traveler diarrhea',
             regimen: '500 mg PO BID × 3 days. First-line for most regions. For Southeast Asia: use azithromycin instead (>80% fluoroquinolone-resistant Campylobacter).',
+        },
+        {
+            indication: 'Meningococcal Postexposure Prophylaxis',
+            regimen: '500 mg PO × 1 dose. Single-dose alternative to ceftriaxone IM or rifampin for close contacts of confirmed N. meningitidis cases.',
         },
     ],
     contraindications: [
@@ -3982,7 +4044,7 @@ const TMP_SMX = {
     genericName: 'Trimethoprim-sulfamethoxazole',
     drugClass: 'Sulfonamide antibiotic combination',
     route: 'PO',
-    indications: ['Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea'],
+    indications: ['Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea', 'PJP prophylaxis (HIV, CD4 <200)'],
     dosing: [
         {
             indication: 'Acute diarrhea',
@@ -3996,6 +4058,10 @@ const TMP_SMX = {
             indication: 'Pediatric diarrhea',
             regimen: '8 mg/kg/day (TMP component) divided BID × 3-5 days. Max 320 mg TMP per day.',
             weightCalc: { dosePerKg: 8, unit: 'mg TMP', maxDose: 320, dailyDivided: 2 },
+        },
+        {
+            indication: 'PJP Prophylaxis (CD4 <200)',
+            regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for ≥3 months on ART.',
         },
     ],
     contraindications: [
@@ -4090,6 +4156,168 @@ const VALPROATE = {
     ],
 };
 // -------------------------------------------------------------------
+// Meningitis / Encephalitis — New Drug Entries
+// -------------------------------------------------------------------
+const AMPHOTERICIN_B = {
+    id: 'amphotericin-b',
+    name: 'Amphotericin B Liposomal (AmBisome)',
+    genericName: 'Amphotericin B liposomal',
+    drugClass: 'Polyene Antifungal',
+    route: 'IV',
+    indications: ['Cryptococcal meningitis (induction)', 'Invasive fungal infections'],
+    dosing: [
+        {
+            indication: 'Cryptococcal Meningitis (induction)',
+            regimen: '3-4 mg/kg/day IV × 1 week (induction phase). Combine with flucytosine 25 mg/kg PO q6h. Follow with fluconazole 400-800 mg/day for consolidation. Initiate ONLY after ID consultation.',
+            weightCalc: { dosePerKg: 4, unit: 'mg' },
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to amphotericin B or any component',
+    ],
+    cautions: [
+        'Nephrotoxicity — monitor renal function daily; prehydrate with NS',
+        'Infusion-related reactions (fever, rigors, hypotension) — premedicate with acetaminophen ± diphenhydramine',
+        'Hypokalemia and hypomagnesemia — monitor and replace electrolytes',
+        'Liposomal formulation has significantly less nephrotoxicity than conventional amphotericin B deoxycholate',
+    ],
+    monitoring: 'Daily: BMP (creatinine, potassium, magnesium). Twice weekly: CBC, LFTs. Monitor for infusion reactions.',
+    notes: 'Liposomal formulation (AmBisome) is strongly preferred over conventional amphotericin B deoxycholate due to reduced nephrotoxicity. Cochrane review (13 studies, 2426 participants) found 1 week of amphotericin B + flucytosine followed by fluconazole was most effective for HIV-associated cryptococcal meningitis. Do NOT co-administer corticosteroids — worsened outcomes in cryptococcal disease.',
+    citations: [
+        'Tenforde MW, et al. Treatment for HIV-associated cryptococcal meningitis. Cochrane Database Syst Rev. 2018;7:CD005647.',
+        'Perfect JR, et al. Clinical practice guidelines for the management of cryptococcal disease: 2010 update by IDSA. Clin Infect Dis. 2010;50(3):291-322.',
+    ],
+};
+const FLUCONAZOLE = {
+    id: 'fluconazole',
+    name: 'Fluconazole (Diflucan)',
+    genericName: 'Fluconazole',
+    drugClass: 'Triazole Antifungal',
+    route: 'PO/IV',
+    indications: ['Cryptococcal meningitis (consolidation/maintenance)', 'Invasive candidiasis'],
+    dosing: [
+        {
+            indication: 'Cryptococcal Meningitis (consolidation)',
+            regimen: '400-800 mg PO/IV daily. Begin after 1-week induction with amphotericin B + flucytosine. Continue for minimum 8 weeks consolidation, then 200 mg/day maintenance until immune reconstitution (CD4 >200 for ≥6 months on ART).',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to fluconazole or other azole antifungals',
+        'Co-administration with terfenadine (when fluconazole ≥400 mg/day)',
+    ],
+    cautions: [
+        'QT prolongation — avoid with other QT-prolonging agents',
+        'Hepatotoxicity — monitor LFTs',
+        'Multiple CYP2C9/CYP3A4 drug interactions — review medication list',
+        'Dose adjust for renal impairment (CrCl <50 mL/min)',
+    ],
+    monitoring: 'LFTs at baseline and periodically. Renal function. ECG if concurrent QT-prolonging medications. Repeat CSF CrAg to document clearance.',
+    notes: 'Used for consolidation and maintenance phases of cryptococcal meningitis treatment after induction with amphotericin B + flucytosine. NOT adequate as monotherapy for induction — associated with higher mortality. Maintenance therapy continues until immune reconstitution on ART.',
+    citations: [
+        'Perfect JR, et al. Clinical practice guidelines for the management of cryptococcal disease: 2010 update by IDSA. Clin Infect Dis. 2010;50(3):291-322.',
+        'Tenforde MW, et al. Treatment for HIV-associated cryptococcal meningitis. Cochrane Database Syst Rev. 2018;7:CD005647.',
+    ],
+};
+const FLUCYTOSINE = {
+    id: 'flucytosine',
+    name: 'Flucytosine (Ancobon)',
+    genericName: 'Flucytosine (5-fluorocytosine)',
+    drugClass: 'Antifungal (Pyrimidine Analog)',
+    route: 'PO',
+    indications: ['Cryptococcal meningitis (induction, with amphotericin B)'],
+    dosing: [
+        {
+            indication: 'Cryptococcal Meningitis (induction)',
+            regimen: '25 mg/kg PO q6h × 1 week (induction phase). Always combine with amphotericin B liposomal. Dose adjust for renal impairment. Initiate ONLY after ID consultation.',
+            weightCalc: { dosePerKg: 25, unit: 'mg', dailyDivided: 4 },
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to flucytosine',
+        'Severe renal impairment without dose adjustment',
+    ],
+    cautions: [
+        'Myelosuppression (leukopenia, thrombocytopenia) — dose-related, monitor CBC',
+        'Hepatotoxicity — monitor LFTs',
+        'GI toxicity (nausea, vomiting, diarrhea)',
+        'Renal impairment — dose reduction required; amphotericin B may worsen renal function and increase flucytosine toxicity',
+        'Therapeutic drug monitoring recommended when available (target peak 30-80 mcg/mL)',
+    ],
+    monitoring: 'CBC twice weekly (myelosuppression). LFTs weekly. Renal function daily (dose adjust if creatinine rises). Flucytosine levels if available (peak 30-80 mcg/mL).',
+    notes: 'Synergistic with amphotericin B for cryptococcal meningitis — combination reduces mortality vs amphotericin B alone. Never used as monotherapy (rapid resistance development). Limited availability and high cost in some settings. Cochrane evidence supports 1 week of amphotericin B + flucytosine as optimal induction.',
+    citations: [
+        'Tenforde MW, et al. Treatment for HIV-associated cryptococcal meningitis. Cochrane Database Syst Rev. 2018;7:CD005647.',
+        'Perfect JR, et al. Clinical practice guidelines for the management of cryptococcal disease: 2010 update by IDSA. Clin Infect Dis. 2010;50(3):291-322.',
+    ],
+};
+const MEROPENEM = {
+    id: 'meropenem',
+    name: 'Meropenem (Merrem)',
+    genericName: 'Meropenem',
+    drugClass: 'Carbapenem',
+    route: 'IV',
+    indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis'],
+    dosing: [
+        {
+            indication: 'Bacterial Meningitis',
+            regimen: '2 g IV q8h. Can replace ceftriaxone for cephalosporin-allergic patients or when multidrug-resistant organisms are suspected. Has activity against L. monocytogenes — if used, ampicillin may be omitted. Combine with vancomycin.',
+        },
+        {
+            indication: 'Healthcare-Associated/Nosocomial Meningitis',
+            regimen: '2 g IV q8h. Covers Pseudomonas aeruginosa, Acinetobacter, and other resistant gram-negative organisms. Combine with vancomycin for MRSA coverage. Use for post-neurosurgical, shunt-related, or basilar skull fracture-associated infections.',
+        },
+    ],
+    contraindications: [
+        'Severe hypersensitivity to carbapenems',
+        'History of anaphylaxis to beta-lactams (use with extreme caution — ~1% cross-reactivity)',
+    ],
+    cautions: [
+        'Seizure risk — lower than imipenem but still possible, especially with renal impairment or CNS pathology',
+        'Dose adjust for renal impairment (CrCl <50 mL/min)',
+        'Clostridioides difficile-associated diarrhea risk with prolonged use',
+    ],
+    monitoring: 'Renal function (BMP). CBC. Monitor for seizures. C. difficile if diarrhea develops.',
+    notes: 'Broadest-spectrum beta-lactam for CNS infections. Preferred carbapenem for meningitis (lower seizure risk than imipenem). Covers Listeria monocytogenes, unlike cephalosporins. Key role in healthcare-associated meningitis where resistant gram-negative organisms (P. aeruginosa, A. baumannii) are common pathogens. Mortality in healthcare-associated meningitis: 16-41%.',
+    citations: [
+        'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.',
+        'Bardak-Ozcem S, Sipahi OR. An updated approach to healthcare-associated meningitis. Expert Rev Anti Infect Ther. 2014;12(3):333-342.',
+    ],
+};
+const RIFAMPIN = {
+    id: 'rifampin',
+    name: 'Rifampin (Rifadin)',
+    genericName: 'Rifampin',
+    drugClass: 'Rifamycin Antibiotic',
+    route: 'PO',
+    indications: ['Meningococcal postexposure prophylaxis', 'H. influenzae postexposure prophylaxis'],
+    dosing: [
+        {
+            indication: 'Meningococcal Postexposure Prophylaxis',
+            regimen: '600 mg PO q12h × 2 days (4 doses total). For close contacts of confirmed N. meningitidis cases. Alternatives: ceftriaxone 250 mg IM × 1 or ciprofloxacin 500 mg PO × 1.',
+        },
+        {
+            indication: 'H. influenzae Postexposure Prophylaxis',
+            regimen: '600 mg PO daily × 4 days. For household contacts with incompletely vaccinated children <4 years or immunocompromised children <18 years.',
+        },
+    ],
+    contraindications: [
+        'Concurrent use of protease inhibitors or certain antiretrovirals (major CYP3A4 inducer)',
+        'Active hepatic disease or jaundice',
+    ],
+    cautions: [
+        'Potent CYP inducer — reduces levels of oral contraceptives, warfarin, HIV medications, and many other drugs',
+        'Hepatotoxicity — monitor LFTs if used beyond prophylaxis duration',
+        'Colors body fluids orange-red (urine, tears, sweat) — counsel patients',
+        'Contact lens staining',
+    ],
+    monitoring: 'No monitoring needed for short-course PEP. For prolonged use: LFTs, CBC.',
+    notes: 'Used for chemoprophylaxis of close contacts in meningococcal and H. influenzae meningitis. Single-dose alternatives (ceftriaxone IM, ciprofloxacin PO) are often preferred due to simpler regimen and fewer drug interactions. Rifampin should NOT be given to HIV patients on antiretroviral therapy due to severe drug interactions.',
+    citations: [
+        'Cohn AC, et al. Prevention and control of meningococcal disease: ACIP recommendations. MMWR Recomm Rep. 2013;62(RR-2):1-28.',
+        'Briere EC, et al. Prevention and control of H. influenzae type b disease: ACIP recommendations. MMWR Recomm Rep. 2014;63(Rr-01):1-14.',
+    ],
+};
+// -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 export const ALL_DRUGS = [
@@ -4101,8 +4329,10 @@ export const ALL_DRUGS = [
     AMOXICILLIN,
     AMOXICILLIN_CLAVULANATE,
     AMPICILLIN,
+    AMPHOTERICIN_B,
     APIXABAN,
     ASPIRIN,
+    ATAZANAVIR,
     ATORVASTATIN,
     AZITHROMYCIN,
     BACITRACIN,
@@ -4142,6 +4372,8 @@ export const ALL_DRUGS = [
     ESMOLOL,
     FENTANYL,
     FLUDROCORTISONE,
+    FLUCONAZOLE,
+    FLUCYTOSINE,
     FONDAPARINUX,
     FOSPHENYTOIN,
     FUROSEMIDE,
@@ -4159,6 +4391,7 @@ export const ALL_DRUGS = [
     SODIUM_ZIRCONIUM_CYCLOSILICATE,
     MAGNESIUM_SULFATE,
     MEDROXYPROGESTERONE,
+    MEROPENEM,
     METHOTREXATE,
     METOCLOPRAMIDE,
     METOLAZONE,
@@ -4194,6 +4427,7 @@ export const ALL_DRUGS = [
     RABIES_VACCINE,
     RACEMIC_EPINEPHRINE,
     REGULAR_INSULIN,
+    RIFAMPIN,
     RITONAVIR,
     RIVAROXABAN,
     RH_IMMUNE_GLOBULIN,
@@ -4234,8 +4468,10 @@ const NAME_TO_ID = [
     [/amoxicillin.clavulanate|augmentin|amox.clav/i, 'amoxicillin-clavulanate'],
     [/amoxicillin(?!.*clav)/i, 'amoxicillin'],
     [/ampicillin/i, 'ampicillin'],
+    [/amphotericin|ambisome/i, 'amphotericin-b'],
     [/apixaban/i, 'apixaban'],
     [/aspirin|ASA|acetylsalicylic/i, 'aspirin'],
+    [/atazanavir|reyataz/i, 'atazanavir'],
     [/atorvastatin|lipitor/i, 'atorvastatin'],
     [/azithromycin|zithromax|z-?pack/i, 'azithromycin'],
     [/bacitracin/i, 'bacitracin'],
@@ -4275,6 +4511,8 @@ const NAME_TO_ID = [
     [/esmolol|brevibloc/i, 'esmolol'],
     [/fentanyl|sublimaze/i, 'fentanyl'],
     [/fludrocortisone|florinef/i, 'fludrocortisone'],
+    [/fluconazole|diflucan/i, 'fluconazole'],
+    [/flucytosine|5-?fc|ancobon/i, 'flucytosine'],
     [/fondaparinux|arixtra/i, 'fondaparinux'],
     [/fosphenytoin|cerebyx|phenytoin.*equiv/i, 'fosphenytoin'],
     [/furosemide|lasix/i, 'furosemide'],
@@ -4292,6 +4530,7 @@ const NAME_TO_ID = [
     [/lokelma|sodium\s*zirconium|szc/i, 'sodium-zirconium-cyclosilicate'],
     [/magnesium sulfate|mag sulfate|MgSO4/i, 'magnesium-sulfate'],
     [/medroxyprogesterone|MPA|provera|depo.provera/i, 'medroxyprogesterone'],
+    [/meropenem|merrem/i, 'meropenem'],
     [/methotrexate|MTX|trexall/i, 'methotrexate'],
     [/metoclopramide|reglan/i, 'metoclopramide'],
     [/metolazone|zaroxolyn/i, 'metolazone'],
@@ -4325,6 +4564,7 @@ const NAME_TO_ID = [
     [/pyridoxine|vitamin.?b6/i, 'pyridoxine'],
     [/racemic.*epinephrine|neb.*epinephrine|vaponefrin/i, 'racemic-epinephrine'],
     [/regular\s*insulin|insulin\s*regular|humulin/i, 'regular-insulin'],
+    [/rifampin|rifadin|rifampicin/i, 'rifampin'],
     [/ritonavir|norvir/i, 'ritonavir'],
     [/rivaroxaban/i, 'rivaroxaban'],
     [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],

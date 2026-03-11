@@ -11,6 +11,8 @@ export { echoViewsConsult } from './echo-views';
 export { ICH_NODES, ICH_MODULE_LABELS, ICH_CITATIONS } from './ich';
 export { STATUS_EPILEPTICUS_NODES, STATUS_EPILEPTICUS_MODULE_LABELS, STATUS_EPILEPTICUS_CITATIONS } from './status-epilepticus';
 export { FIRST_TRIMESTER_NODES, FIRST_TRIMESTER_MODULE_LABELS, FIRST_TRIMESTER_CITATIONS } from './first-trimester';
+export { HIV_NODES, HIV_MODULE_LABELS, HIV_CITATIONS } from './hiv';
+export { MENINGITIS_NODES, MENINGITIS_MODULE_LABELS, MENINGITIS_CITATIONS } from './meningitis';
 
 // Export type for registry
 import type { ConsultTree } from '../../types/consult-tree';

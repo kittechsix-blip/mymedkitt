@@ -213,6 +213,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/diarrhea.js');
             return { nodes: m.DIARRHEA_NODES, entryNodeId: 'diarrhea-start', categoryId: 'gastroenterology', moduleLabels: m.DIARRHEA_MODULE_LABELS, citations: m.DIARRHEA_CITATIONS };
         },
+        'hiv': async () => {
+            const m = await import('../data/trees/hiv.js');
+            return { nodes: m.HIV_NODES, entryNodeId: 'hiv-start', categoryId: 'infectious-disease', moduleLabels: m.HIV_MODULE_LABELS, citations: m.HIV_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

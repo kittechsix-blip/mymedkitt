@@ -170,6 +170,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 24,
         entryNodeId: 'diarrhea-start',
+      },
+      {
+        id: 'hiv',
+        title: 'HIV ED Management',
+        subtitle: 'Assessment → Seroconversion → Complications → OI → Meds → Prevention',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 33,
+        entryNodeId: 'hiv-start',
       }
     ],
     isCustom: false,
@@ -214,6 +223,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 15,
         entryNodeId: 'pep-start',
+      },
+      {
+        id: 'hiv',
+        title: 'HIV ED Management',
+        subtitle: 'Assessment → Seroconversion → Complications → OI → Meds → Prevention',
+        categoryId: 'infectious-disease',
+        version: '1.0',
+        nodeCount: 34,
+        entryNodeId: 'hiv-start',
       },
       {
         id: 'rabies',
