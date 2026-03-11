@@ -158,11 +158,36 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 33,
                 entryNodeId: 'ft-start',
+            },
+            {
+                id: 'diarrhea',
+                title: 'Acute Diarrhea',
+                subtitle: 'Assessment → Red Flags → Diagnostics → Treatment → Disposition',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 24,
+                entryNodeId: 'diarrhea-start',
             }
         ],
         isCustom: false,
     },
-    { id: 'gastroenterology', name: 'GI (Gastroenterology)', icon: 'gi.png', decisionTrees: [], isCustom: false },
+    {
+        id: 'gastroenterology',
+        name: 'GI (Gastroenterology)',
+        icon: 'gi.png',
+        decisionTrees: [
+            {
+                id: 'diarrhea',
+                title: 'Acute Diarrhea',
+                subtitle: 'Assessment → Red Flags → Diagnostics → Treatment → Disposition',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 24,
+                entryNodeId: 'diarrhea-start',
+            },
+        ],
+        isCustom: false,
+    },
     { id: 'heme-onc', name: 'Heme/Onc', icon: 'heme-onc.png', decisionTrees: [], isCustom: false },
     {
         id: 'infectious-disease',

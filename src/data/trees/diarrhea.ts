@@ -1,0 +1,400 @@
+// MedKitt — Acute Diarrhea
+// Based on Burg & Hovanessian EMP 2004, IDSA 2017, ACG 2016, CDC Yellow Book
+// Initial Assessment → Risk Stratification → Diagnostics → Treatment → Special Populations & Disposition
+// 5 modules, 24 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const DIARRHEA_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'diarrhea-start',
+    type: 'question',
+    module: 1,
+    title: 'Acute Diarrhea',
+    body: '[Acute Diarrhea Steps Summary](#/info/diarrhea-summary)\n\nEmergency evaluation of acute diarrhea — identifying serious illness and guiding treatment.\n\nDiarrhea is a change in bowel movements characterized by increased water content, volume, or frequency (>200 g/day or >3 stools/day). Most cases are self-limited, but **serious disease processes can present with diarrhea as the chief complaint**.\n\n**Definitions:**\n• **Acute** — ≤14 days\n• **Persistent** — 14-30 days\n• **Chronic** — >30 days\n\n**Classification:**\n• **Secretory** — abnormal electrolyte transport, does NOT stop with fasting (e.g., cholera)\n• **Osmotic** — non-absorbable solute, stops with fasting (e.g., sorbitol)\n• **Inflammatory** — bloody, fever, cramps (invasive bacteria, IBD)\n• **Non-inflammatory** — watery, nausea, vomiting (viral, toxin-mediated)',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'Hemodynamically unstable',
+        next: 'diarrhea-resuscitate',
+        urgency: 'critical',
+      },
+      {
+        label: 'Hemodynamically stable',
+        next: 'diarrhea-history',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-resuscitate',
+    type: 'info',
+    module: 1,
+    title: 'Resuscitation',
+    body: '**Immediate interventions:**\n• **ABCs** — secure airway if altered mental status\n• **2 large-bore IVs** — NS or LR bolus 20 mL/kg\n• **Cardiac monitor** — assess for arrhythmia from electrolyte derangement\n• **POC glucose** — hypoglycemia common in pediatric patients\n\n**Assess for sepsis:**\n• Fever + tachycardia + hypotension → septic diarrhea until proven otherwise\n• **Lactate**, **blood cultures** if sepsis suspected\n• Broad-spectrum antibiotics per sepsis protocol if indicated\n\n**Labs:** CBC, BMP (electrolytes, renal function, glucose), lactate, blood cultures, type & screen if severe anemia suspected\n\nOnce stabilized, proceed with targeted history.',
+    citation: [1],
+    next: 'diarrhea-history',
+  },
+
+  {
+    id: 'diarrhea-history',
+    type: 'question',
+    module: 1,
+    title: 'Targeted History & Red Flag Assessment',
+    body: '**Key history elements:**\n• **Stool character:** frequency, volume, blood, mucus, melena (patients may not recognize black stool as blood — ask specifically)\n• **Duration:** <48h likely viral; >48h raises suspicion for bacterial cause\n• **Associated symptoms:** nausea/vomiting (suggests viral), fever >38.5°C (suggests invasive bacteria), tenesmus\n• **Travel:** recent foreign travel, lake/stream exposure\n• **Diet:** raw/undercooked meat, seafood, eggs, unpasteurized milk/juice\n• **Medications:** antibiotics in past 3 months (C. difficile risk), laxatives, antacids, new medications\n• **Contacts:** ill contacts, day care, nursing home, food handlers\n• **PMH:** immunocompromised (HIV, transplant, chemo), IBD, diabetes\n\n**Red flags:**\n• Severe dehydration or hemodynamic instability\n• Bloody diarrhea or dysentery\n• Fever >38.5°C (101.3°F) with systemic illness\n• Immunocompromised patient\n• Severe abdominal pain (concern for surgical etiology)\n• Elderly with comorbidities\n• Neurologic involvement (paresthesias, weakness)',
+    citation: [1, 2, 4],
+    options: [
+      {
+        label: 'Red flags present',
+        next: 'diarrhea-red-flag-eval',
+        urgency: 'urgent',
+      },
+      {
+        label: 'No red flags — mild, self-limited presentation',
+        next: 'diarrhea-mild',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-red-flag-eval',
+    type: 'question',
+    module: 1,
+    title: 'Red Flag Category',
+    body: 'Identify the **primary concern** to guide workup and management. Multiple red flags may be present — address the most critical first.',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'Bloody diarrhea / dysentery',
+        next: 'diarrhea-bloody',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Fever >38.5°C + systemic illness',
+        next: 'diarrhea-febrile',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Severe dehydration',
+        next: 'diarrhea-dehydration',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Immunocompromised',
+        next: 'diarrhea-immunocompromised',
+      },
+      {
+        label: 'Concern for surgical abdomen',
+        next: 'diarrhea-surgical-ddx',
+        urgency: 'critical',
+      },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: RISK STRATIFICATION
+  // =====================================================================
+
+  {
+    id: 'diarrhea-bloody',
+    type: 'info',
+    module: 2,
+    title: 'Bloody Diarrhea / Dysentery',
+    body: '**Differential diagnosis:**\n• **Shigella** — fever, bloody mucoid stool, tenesmus\n• **Salmonella** — fever, cramping, may be bloody\n• **Campylobacter** — fever, headache, bloody diarrhea 2-5 days after exposure\n• **E. coli O157:H7 (EHEC/STEC)** — bloody diarrhea, often afebrile, undercooked beef or unpasteurized products\n• **C. difficile** — recent antibiotic use, can be bloody\n• **IBD** — chronic/recurrent, family history\n• **Ischemic colitis** — elderly, vascular disease, severe pain\n\n[Differential Diagnosis Pitfalls](#/info/diarrhea-ddx-pitfalls)\n\n⚠️ **CRITICAL — Shiga toxin-producing E. coli (STEC):**\n• Do **NOT** give antibiotics if STEC suspected — increases risk of **hemolytic uremic syndrome (HUS)**\n• Do **NOT** give antimotility agents — delays pathogen clearance\n• Suspect STEC: bloody diarrhea + afebrile + history of undercooked beef or unpasteurized products\n\n**Mandatory workup:** stool culture, CBC with platelets (screen for HUS), BMP',
+    citation: [1, 2, 5],
+    next: 'diarrhea-labs',
+  },
+
+  {
+    id: 'diarrhea-febrile',
+    type: 'info',
+    module: 2,
+    title: 'Febrile Diarrhea',
+    body: 'Temperature **>38.5°C (101.3°F)** usually indicates intestinal inflammation from **invasive bacteria** (Shigella, Salmonella, Campylobacter) or toxin-producing organisms (C. difficile, Entamoeba histolytica).\n\n**Workup:**\n• **Fecal leukocytes or fecal lactoferrin** — screens for inflammatory diarrhea\n• **Stool culture** — indicated when fever + positive fecal markers\n• **C. difficile toxin** — if antibiotic use in past 3 months\n• **CBC, BMP** — assess for leukocytosis, electrolyte derangement, renal function\n\n[Empiric Antibiotic Criteria](#/info/diarrhea-abx-criteria)\n\nFecal lactoferrin is **more sensitive** than fecal leukocytes for detecting invasive pathogens and does not require a fresh specimen.',
+    citation: [1, 2, 4],
+    next: 'diarrhea-labs',
+  },
+
+  {
+    id: 'diarrhea-dehydration',
+    type: 'info',
+    module: 2,
+    title: 'Severe Dehydration Assessment',
+    body: '[Dehydration Assessment Guide](#/info/diarrhea-dehydration-assessment)\n\n**Adults:**\n• **Dry axilla** — supports hypovolemia diagnosis\n• **Moist mucous membranes + tongue without furrows** — argues against hypovolemia\n• Capillary refill and skin turgor have **no proven diagnostic value** in adults\n• Orthostatic vitals, BUN/Cr ratio\n\n**Children:**\n• **Acute body weight change** — best measure of dehydration\n• Mucous membrane hydration, capillary refill >2 sec, absence of tears, altered mental status — next best measures\n• Sunken anterior fontanelle in infants\n\n**IV rehydration:**\n• NS or LR bolus 20 mL/kg, repeat as needed\n• Monitor urine output as marker of volume status\n• BMP for electrolyte correction\n• Reassess after each bolus',
+    citation: [1, 3],
+    next: 'diarrhea-labs',
+  },
+
+  {
+    id: 'diarrhea-immunocompromised',
+    type: 'info',
+    module: 2,
+    title: 'Immunocompromised Patient',
+    body: 'HIV/AIDS, transplant recipients, chemotherapy, chronic steroids, and other immunocompromised patients have a **broader differential** and require **more aggressive workup**.\n\n**Additional pathogens to consider:**\n• Cryptosporidium, Microsporidium, Isospora — profuse watery diarrhea, weight loss\n• CMV — bloody diarrhea in advanced disease\n• Mycobacterium avium complex (MAC) — chronic diarrhea, advanced HIV\n• GI malignancies — lymphoma, Kaposi sarcoma\n\n**Workup:**\n• Stool culture (standard pathogens)\n• C. difficile toxin assay\n• **Ova and parasites** — indicated in this population\n• CBC, BMP, lactate\n• Consider CD4 count if HIV status unknown\n\n**Disposition:** Lower threshold for admission. Consider early GI or infectious disease consultation. If stool studies negative, endoscopy referral may be needed for definitive diagnosis.',
+    citation: [1, 4, 5],
+    next: 'diarrhea-labs',
+  },
+
+  {
+    id: 'diarrhea-surgical-ddx',
+    type: 'info',
+    module: 2,
+    title: 'Surgical Differential',
+    body: 'Diarrhea can be a presenting feature of several **surgical emergencies**. Maintain high suspicion in patients with severe abdominal pain.\n\n[Differential Diagnosis Pitfalls](#/info/diarrhea-ddx-pitfalls)\n\n**Appendicitis:**\n• Vomiting typically **follows** pain (in gastroenteritis, vomiting **precedes** pain)\n• 1-2 loose stools (not voluminous like gastroenteritis)\n• 15% of appendices are in atypical locations\n• 27% of children initially misdiagnosed — diarrhea is a common confounding symptom\n• Serial exams improve diagnostic accuracy\n\n**Ischemic bowel:**\n• Consider in adults **>50 years** or with peripheral vascular disease\n• Severe pain out of proportion to exam\n• Voluminous diarrhea (small bowel ischemia) or bloody diarrhea (ischemic colitis)\n• Risk factors: arrhythmias, CHF, vasoconstrictors, cocaine\n• Occult blood in up to 75% of patients\n\n**Other surgical causes:** bowel obstruction, toxic megacolon, diverticulitis, intussusception (pediatric)\n\n**CT abdomen/pelvis** indicated for surgical concern. If surgical etiology identified → surgical consult.',
+    citation: [1, 2],
+    next: 'diarrhea-labs',
+  },
+
+  // =====================================================================
+  // MODULE 3: DIAGNOSTICS
+  // =====================================================================
+
+  {
+    id: 'diarrhea-labs',
+    type: 'question',
+    module: 3,
+    title: 'Diagnostic Evaluation',
+    body: '[Empiric Antibiotic Criteria](#/info/diarrhea-abx-criteria)\n\n**Selective testing — routine labs are NOT indicated for most patients:**\n\n**Fecal leukocytes / lactoferrin:** community-acquired, traveler\'s, nosocomial, or diarrhea >7 days\n\n**Stool culture:** bloody stool, fever >38.5°C + positive fecal markers, immunocompromised, severe/persistent illness. Yield is low (1.5-5.6%) but identifies public health threats. Routine labs identify Shigella, Campylobacter, Salmonella.\n\n**C. difficile toxin:** antibiotic use in past 3 months, recent hospitalization, nursing home\n\n**Ova & parasites:** rarely indicated in acute diarrhea. Consider if >14 days, immunocompromised, no response to antibiotics, travel to endemic area\n\n**CBC/BMP:** severe illness, bloody diarrhea (screen for HUS — platelets), elderly, immunocompromised, significant dehydration\n\n**What is the suspected etiology?**',
+    citation: [1, 2, 5],
+    options: [
+      {
+        label: 'C. difficile suspected',
+        description: 'Antibiotic use in past 3 months, recent hospitalization',
+        next: 'diarrhea-cdiff',
+      },
+      {
+        label: 'Traveler\'s diarrhea',
+        description: 'Recent foreign travel to endemic area',
+        next: 'diarrhea-travelers',
+      },
+      {
+        label: 'Community-acquired / other',
+        description: 'No specific risk factors identified, or multiple possible etiologies',
+        next: 'diarrhea-treatment',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-cdiff',
+    type: 'info',
+    module: 3,
+    title: 'C. difficile Evaluation',
+    body: '**Suspect C. difficile if:**\n• Antibiotic use in past **3 months** (especially clindamycin, fluoroquinolones, cephalosporins)\n• Recent hospitalization or nursing home residence\n• Diarrhea developing **≥3 days after hospitalization** (C. diff testing has 15-20% yield in nosocomial diarrhea vs <5% for standard stool cultures)\n\n**Testing:**\n• **C. difficile toxin assay** — preferred: NAAT (PCR) or GDH + toxin two-step algorithm\n• Toxin A/B immunoassay alone has lower sensitivity\n\n**Key management:**\n• **STOP the offending antibiotic** if possible\n• Start empiric treatment if strong clinical suspicion — stop if toxin assay returns negative\n\n**Severity classification:**\n• **Non-severe:** WBC ≤15K, Cr <1.5\n• **Severe:** WBC >15K, Cr >1.5, albumin <3\n• **Fulminant:** hypotension, ileus, megacolon → surgical consult',
+    citation: [1, 5, 6],
+    next: 'diarrhea-cdiff-treatment',
+  },
+
+  {
+    id: 'diarrhea-cdiff-treatment',
+    type: 'result',
+    module: 3,
+    title: 'C. difficile Treatment',
+    body: '**Non-severe (first episode):**\n• [Vancomycin](#/drug/vancomycin/c difficile) 125 mg PO QID × 10-14 days (preferred)\n• Alternative: [Metronidazole](#/drug/metronidazole/c difficile) 500 mg PO TID × 10-14 days\n\n**Severe (WBC >15K, Cr >1.5):**\n• [Vancomycin](#/drug/vancomycin/c difficile) 125 mg PO QID × 10-14 days\n• Do NOT use metronidazole alone for severe disease\n\n**Fulminant (hypotension, ileus, megacolon):**\n• [Vancomycin](#/drug/vancomycin/c difficile) 500 mg PO/NG QID\n• PLUS [Metronidazole](#/drug/metronidazole/c difficile) 500 mg IV q8h\n• Consider rectal vancomycin enema if ileus present\n• **Surgical consult** — colectomy may be lifesaving\n\n**Disposition:** Admit severe and fulminant cases. Non-severe may be discharged with close follow-up.\n\n[Special Populations](#/node/diarrhea-special-pops)',
+    recommendation: 'Stop offending antibiotic. Oral vancomycin is first-line for all C. difficile. Admit severe and fulminant cases.',
+    confidence: 'definitive',
+    citation: [5, 6],
+  },
+
+  // =====================================================================
+  // MODULE 4: TREATMENT
+  // =====================================================================
+
+  {
+    id: 'diarrhea-travelers',
+    type: 'question',
+    module: 4,
+    title: 'Traveler\'s Diarrhea',
+    body: 'Recent travel to endemic area (Latin America, Africa, South/Southeast Asia). Most common cause is enterotoxigenic E. coli.\n\n**Key considerations:**\n• **Southeast Asia** — >80% fluoroquinolone-resistant Campylobacter; use azithromycin instead\n• Combination therapy (antibiotic + loperamide) is most efficacious\n• Prevention counseling: carbonated/hot beverages, avoid buffets, leafy vegetables, ice',
+    citation: [1, 4, 9],
+    options: [
+      {
+        label: 'Mild (tolerable, non-distressing)',
+        next: 'diarrhea-travelers-mild',
+      },
+      {
+        label: 'Moderate-Severe (incapacitating, bloody, or febrile)',
+        next: 'diarrhea-travelers-severe',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-travelers-mild',
+    type: 'result',
+    module: 4,
+    title: 'Mild Traveler\'s Diarrhea',
+    body: '**Symptomatic therapy:**\n• [Loperamide](#/drug/loperamide/traveler diarrhea) 4 mg PO initially, then 2 mg after each loose stool (max 16 mg/day)\n• [Bismuth Subsalicylate](#/drug/bismuth-subsalicylate/traveler diarrhea) 524 mg PO q30-60 min PRN (max 8 doses/day) — also helps nausea\n\nLoperamide and bismuth subsalicylate have similar efficacy, but loperamide reduces stool frequency faster. Bismuth subsalicylate has additional antiemetic properties.\n\n**Antibiotics not typically needed** for mild traveler\'s diarrhea.\n\nDischarge with return precautions. [Diarrhea Discharge Instructions](#/info/diarrhea-discharge)\n\n[Special Populations](#/node/diarrhea-special-pops)',
+    recommendation: 'Symptomatic treatment with loperamide or bismuth subsalicylate. Discharge with return precautions.',
+    confidence: 'recommended',
+    citation: [1, 4, 9],
+  },
+
+  {
+    id: 'diarrhea-travelers-severe',
+    type: 'result',
+    module: 4,
+    title: 'Moderate-Severe Traveler\'s Diarrhea',
+    body: '**Empiric antibiotics indicated:**\n• [Ciprofloxacin](#/drug/ciprofloxacin/traveler diarrhea) 500 mg PO BID × 3 days (first-line for most regions)\n• **Southeast Asia:** [Azithromycin](#/drug/azithromycin/traveler diarrhea) 1000 mg PO × 1 dose or 500 mg PO daily × 3 days (fluoroquinolone-resistant Campylobacter >80%)\n• **Children:** [TMP-SMX](#/drug/tmp-smx/traveler diarrhea)\n\n**Adjunct therapy:**\n• [Loperamide](#/drug/loperamide/traveler diarrhea) with antibiotic — combination therapy reduces diarrhea duration by 1 additional day\n• IV rehydration if unable to tolerate oral fluids\n\n**Avoid loperamide** if bloody diarrhea or high fever.\n\n[Special Populations](#/node/diarrhea-special-pops)',
+    recommendation: 'Empiric fluoroquinolone (or azithromycin for SE Asia) plus adjunct loperamide. Reassess for admission if not improving.',
+    confidence: 'recommended',
+    citation: [1, 4, 5, 9],
+  },
+
+  {
+    id: 'diarrhea-treatment',
+    type: 'question',
+    module: 4,
+    title: 'Treatment Approach',
+    body: '**Rehydration is the cornerstone** of diarrhea management.\n\n[Antimotility Contraindications](#/info/diarrhea-antimotility-ci)\n\nOral rehydration is preferred when tolerated — it is effective, low-cost, and an indicator of discharge readiness. Solutions should contain sodium, potassium, and glucose. Commercial ORS (Pedialyte) preferred over sports drinks (inadequate sodium replacement).\n\n**BRAT diet** (bananas, rice, applesauce, toast) has no proven advantage over resuming the patient\'s normal diet.',
+    citation: [1, 2, 4],
+    options: [
+      {
+        label: 'Mild — oral rehydration + symptomatic',
+        next: 'diarrhea-mild',
+      },
+      {
+        label: 'Moderate — IV fluids + symptomatic',
+        next: 'diarrhea-moderate-rx',
+      },
+      {
+        label: 'Severe or empiric antibiotics indicated',
+        description: 'Fever >38.5°C + positive fecal markers, dysentery, or duration >48h',
+        next: 'diarrhea-empiric-abx',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-mild',
+    type: 'result',
+    module: 4,
+    title: 'Mild / Self-Limited Diarrhea',
+    body: '**Rehydration:**\n• Oral rehydration solution (ORS) with sodium, potassium, glucose\n• Commercial options: Pedialyte, Lytren, Rehydrolyte\n• Resume normal diet at earliest opportunity — early refeeding improves recovery\n\n**Symptomatic relief:**\n• [Loperamide](#/drug/loperamide/acute diarrhea) 4 mg PO initially, then 2 mg after each loose stool (max 16 mg/day) — preferred antimotility agent (no CNS effects, not habit-forming)\n• [Bismuth Subsalicylate](#/drug/bismuth-subsalicylate/acute diarrhea) 524 mg PO q30-60 min PRN — preferred when nausea/vomiting is prominent\n• [Ondansetron](#/drug/ondansetron/acute diarrhea) 4 mg IV or ODT for vomiting preventing oral intake\n\n[Antimotility Contraindications](#/info/diarrhea-antimotility-ci) — **AVOID** antimotility agents with bloody diarrhea, high fever, suspected inflammatory cause, or immunocompromised patients.\n\n[Diarrhea Discharge Instructions](#/info/diarrhea-discharge)\n\n[Special Populations](#/node/diarrhea-special-pops)',
+    recommendation: 'Oral rehydration, symptomatic relief, discharge with return precautions.',
+    confidence: 'definitive',
+    citation: [1, 2, 4],
+  },
+
+  {
+    id: 'diarrhea-moderate-rx',
+    type: 'info',
+    module: 4,
+    title: 'Moderate Diarrhea Treatment',
+    body: '**IV rehydration:**\n• NS or LR bolus, reassess after each liter\n• Target: urine output, improved vitals, ability to tolerate oral fluids\n\n**Antiemetics:**\n• [Ondansetron](#/drug/ondansetron/acute diarrhea) 4 mg IV q4-6h PRN for vomiting preventing oral intake\n\n**Antimotility (if no contraindications):**\n• [Loperamide](#/drug/loperamide/acute diarrhea) 4 mg PO then 2 mg PRN (max 16 mg/day)\n\n**Assess for empiric antibiotic criteria:**\n• Diarrhea >48 hours (higher probability non-viral)\n• Fever >38.5°C + fecal leukocytes/lactoferrin positive or heme-positive stools\n• Acute dysentery\n\nIf meets criteria → proceed to empiric antibiotics.',
+    citation: [1, 2, 4],
+    next: 'diarrhea-empiric-abx',
+  },
+
+  {
+    id: 'diarrhea-empiric-abx',
+    type: 'result',
+    module: 4,
+    title: 'Empiric Antibiotic Therapy',
+    body: '[Empiric Antibiotic Criteria](#/info/diarrhea-abx-criteria)\n\n**Adults (fever >38.5°C + positive fecal markers, dysentery, or >48h):**\n• [Ciprofloxacin](#/drug/ciprofloxacin/acute diarrhea) 500 mg PO BID × 3-5 days\n\n**Children:**\n• [TMP-SMX](#/drug/tmp-smx/acute diarrhea) (dose by weight) × 3-5 days\n\n**Persistent diarrhea (2-4 weeks) without systemic symptoms:**\n• [Metronidazole](#/drug/metronidazole/persistent diarrhea) 250 mg PO TID × 7-10 days (covers Giardia)\n\n**Elderly considerations:** fluoroquinolones can increase theophylline and warfarin levels, and can alter phenytoin levels. Metronidazole can cause nausea/vomiting and has disulfiram-like reaction with alcohol.\n\n⚠️ **Do NOT give antibiotics if STEC (E. coli O157:H7) suspected** — increases HUS risk.\n\n[Diarrhea Discharge Instructions](#/info/diarrhea-discharge)\n\n[Special Populations](#/node/diarrhea-special-pops)',
+    recommendation: 'Empiric fluoroquinolone for adults, TMP-SMX for children. Duration 3-5 days. Avoid antibiotics if STEC suspected.',
+    confidence: 'recommended',
+    citation: [1, 2, 4, 5],
+  },
+
+  // =====================================================================
+  // MODULE 5: SPECIAL POPULATIONS & DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'diarrhea-special-pops',
+    type: 'question',
+    module: 5,
+    title: 'Special Population Considerations',
+    body: 'Certain populations require modified workup, treatment, and disposition decisions.',
+    options: [
+      {
+        label: 'Pregnant patient',
+        next: 'diarrhea-pregnant',
+      },
+      {
+        label: 'Pediatric patient',
+        next: 'diarrhea-pediatric',
+      },
+      {
+        label: 'Elderly with comorbidities',
+        next: 'diarrhea-elderly',
+      },
+      {
+        label: 'None — proceed to disposition',
+        next: 'diarrhea-disposition',
+      },
+    ],
+  },
+
+  {
+    id: 'diarrhea-pregnant',
+    type: 'result',
+    module: 5,
+    title: 'Diarrhea in Pregnancy',
+    body: '**Dehydration is dangerous for both mother and fetus** — aggressive rehydration is top priority.\n\n**Safest antimotility:**\n• [Loperamide](#/drug/loperamide/pregnancy) — acts peripherally (FDA Category B), safest option\n• **AVOID** diphenoxylate (CNS effects) and bismuth subsalicylate (contains salicylates)\n\n**Antibiotics:**\n• [Metronidazole](#/drug/metronidazole/pregnancy) — Category B after first trimester, can be used if benefits outweigh risks\n• **AVOID fluoroquinolones** — cartilage toxicity risk\n• **AVOID TMP-SMX** — folate antagonism, teratogenic risk (especially first trimester and near term)\n\nIf doubts about antibiotic safety, coordinate treatment with the patient\'s OB/GYN.\n\nLow threshold for admission if unable to maintain oral hydration.',
+    recommendation: 'Aggressive rehydration. Loperamide is safest antimotility. Metronidazole (Cat B) after first trimester if needed. Avoid fluoroquinolones and TMP-SMX.',
+    confidence: 'recommended',
+    citation: [1, 7],
+  },
+
+  {
+    id: 'diarrhea-pediatric',
+    type: 'result',
+    module: 5,
+    title: 'Pediatric Diarrhea',
+    body: '**Key differences from adults:**\n• **Rotavirus** is the most common cause in children\n• **ORS is preferred** over IV — evidence-based and WHO-endorsed. Use commercial ORS (Pedialyte), NOT sports drinks or plain water\n• **No antimotility agents** — not recommended in children with acute gastroenteritis\n• **No routine antiemetics** in children with acute gastroenteritis, except:\n  [Ondansetron](#/drug/ondansetron/pediatric diarrhea) 0.15 mg/kg IV/ODT (max 4 mg) — facilitates oral rehydration in vomiting children\n\n⚠️ **E. coli O157:H7 and HUS:**\n• Most common cause of acute kidney failure in children\n• Do **NOT** give antibiotics if STEC suspected — increases HUS risk\n• Monitor: platelet count, hemolytic anemia, renal function\n• Signs: pallor, bruising, petechiae, decreased urine output\n\n**Admit if:** severe dehydration, altered mental status, inability to maintain oral hydration, suspected HUS, very young (<3 months)\n\nExcessive consumption of sugary clear liquids can itself cause watery stools — ask about intake.',
+    recommendation: 'ORS rehydration. No antimotility agents. Ondansetron to facilitate oral intake in vomiting children. Admit if severe dehydration or suspected HUS.',
+    confidence: 'recommended',
+    citation: [1, 3, 5, 8],
+  },
+
+  {
+    id: 'diarrhea-elderly',
+    type: 'result',
+    module: 5,
+    title: 'Diarrhea in the Elderly',
+    body: '**Higher risk of serious etiologies:**\n• **Ischemic colitis** — consider in any elderly patient with diarrhea + abdominal pain\n• **C. difficile** — more common and more lethal in the elderly\n• **Diverticulitis** — can present with diarrhea\n• **Colonic malignancy** — occult in presentation\n• **E. coli O157:H7** — more common in elderly\n\n**Dehydration risks:** age-related disordered thirst mechanism, medications (diuretics), diabetes, limited fluid access (infirmity). Profound dehydration is common.\n\n**IV rehydration caution:** cardiovascular disease and renal dysfunction may limit rapid large-volume fluid administration.\n\n**Drug interactions with fluoroquinolones:**\n• Increases theophylline and warfarin levels\n• Can increase or decrease phenytoin levels\n• Antacids reduce fluoroquinolone absorption\n\n**Lower threshold for:** CT abdomen, admission, surgical consultation.\n\n[Diarrhea Discharge Instructions](#/info/diarrhea-discharge)',
+    recommendation: 'Higher suspicion for serious etiologies. Lower threshold for CT, admission, and surgical consult. Careful rehydration in those with cardiac/renal disease.',
+    confidence: 'recommended',
+    citation: [1, 2, 7],
+  },
+
+  {
+    id: 'diarrhea-disposition',
+    type: 'result',
+    module: 5,
+    title: 'Disposition',
+    body: '[Diarrhea Discharge Instructions](#/info/diarrhea-discharge)\n\n**Discharge if:**\n• Hemodynamically stable\n• Benign abdominal examination\n• Tolerating oral fluids without vomiting\n• Adequate urine output\n• Low risk for complications\n• Reliable follow-up and understanding of return precautions\n\n**Admit or observe if:**\n• Failed ED rehydration or unable to tolerate oral fluids\n• Severe or persistent dehydration\n• Diagnostic dilemma (atypical presentation, unclear etiology)\n• Extremes of age (very young, elderly) with comorbidities\n• Immunocompromised\n• Possible surgical etiology\n• Significant electrolyte derangement\n\n**Chronic diarrhea (>30 days):** usually exceeds ED scope. Exclude serious illness, ensure stability, begin infectious workup, refer to gastroenterology.\n\n**Before discharge:** Reassess vitals, repeat abdominal exam, confirm oral tolerance, provide written discharge instructions.',
+    recommendation: 'Discharge stable patients who tolerate oral fluids with clear return precautions. Admit those failing ED treatment, immunocompromised, or with diagnostic uncertainty.',
+    confidence: 'definitive',
+    citation: [1, 2],
+  },
+
+];
+
+export const DIARRHEA_MODULE_LABELS = [
+  'Initial Assessment',
+  'Risk Stratification',
+  'Diagnostics',
+  'Treatment',
+  'Special Populations & Disposition',
+];
+
+export const DIARRHEA_CITATIONS: Citation[] = [
+  { num: 1, text: 'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.' },
+  { num: 2, text: 'Guerrant RL, Van Gilder T, Steiner TS, et al. Practice Guidelines for the Management of Infectious Diarrhea. Clin Infect Dis. 2001;32(3):331-351.' },
+  { num: 3, text: 'Cincinnati Children\'s Hospital Medical Center. Evidence Based Clinical Practice Guideline for Children with Acute Gastroenteritis (AGE). 2001.' },
+  { num: 4, text: 'Riddle MS, DuPont HL, Connor BA. ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol. 2016;111(5):602-622.' },
+  { num: 5, text: 'Shane AL, Mody RK, Crump JA, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.' },
+  { num: 6, text: 'McDonald LC, Gerding DN, Johnson S, et al. Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by IDSA and SHEA. Clin Infect Dis. 2018;66(7):987-994.' },
+  { num: 7, text: 'DuPont HL. Guidelines on Acute Infectious Diarrhea in Adults. The Practice Parameters Committee of the American College of Gastroenterology. Am J Gastroenterol. 1997;92(11):1962-1975.' },
+  { num: 8, text: 'Freedman SB, Adler M, Laptook AR, et al. Oral Ondansetron for Gastroenteritis in a Pediatric Emergency Department. N Engl J Med. 2006;354(16):1698-1705.' },
+  { num: 9, text: 'Centers for Disease Control and Prevention. Travelers\' Diarrhea. CDC Yellow Book 2024.' },
+];

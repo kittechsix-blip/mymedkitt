@@ -263,6 +263,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/first-trimester.js');
       return { nodes: m.FIRST_TRIMESTER_NODES, entryNodeId: 'ft-start', categoryId: 'ob-gyn', moduleLabels: m.FIRST_TRIMESTER_MODULE_LABELS, citations: m.FIRST_TRIMESTER_CITATIONS };
     },
+    'diarrhea': async () => {
+      const m = await import('../data/trees/diarrhea.js');
+      return { nodes: m.DIARRHEA_NODES, entryNodeId: 'diarrhea-start', categoryId: 'gastroenterology', moduleLabels: m.DIARRHEA_MODULE_LABELS, citations: m.DIARRHEA_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];
