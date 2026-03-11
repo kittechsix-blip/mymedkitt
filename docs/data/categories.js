@@ -176,6 +176,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 33,
                 entryNodeId: 'hiv-start',
+            },
+            {
+                id: 'sah',
+                title: 'Subarachnoid Hemorrhage',
+                subtitle: 'Recognition → Diagnostics → Severity → ED Management → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 25,
+                entryNodeId: 'sah-start',
             }
         ],
         isCustom: false,
@@ -238,6 +247,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 35,
                 entryNodeId: 'rabies-start',
+            },
+            {
+                id: 'meningitis',
+                title: 'Acute Meningitis/Encephalitis',
+                subtitle: 'Recognition \u2192 Workup \u2192 Empiric Treatment \u2192 CSF & Tailored Therapy \u2192 Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'mening-start',
             }
         ],
         isCustom: false,
@@ -300,6 +318,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 26,
                 entryNodeId: 'se-start',
+            },
+            {
+                id: 'sah',
+                title: 'Subarachnoid Hemorrhage',
+                subtitle: 'Recognition → Diagnostics → Severity → ED Management → Disposition',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 25,
+                entryNodeId: 'sah-start',
             }
         ],
         isCustom: false,

@@ -1552,6 +1552,192 @@ const FUNC_SCORE_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// CSF Traumatic Tap Correction Calculator
+// -------------------------------------------------------------------
+
+const CSF_CORRECTION_CALCULATOR: CalculatorDefinition = {
+  id: 'csf-correction',
+  title: 'CSF Tap Correction',
+  subtitle: 'Traumatic Lumbar Puncture WBC Correction',
+  description: 'Corrects CSF WBC count when a traumatic lumbar puncture introduces peripheral blood into the sample. Formula: Predicted CSF WBCs = CSF RBCs \u00d7 (Blood WBCs / Blood RBCs). Subtract predicted from observed CSF WBCs to get the true CSF WBC count.',
+  fields: [
+    {
+      name: 'csf-wbc',
+      label: 'Observed CSF WBCs',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'cells/mcL',
+      description: 'Total WBC count in CSF sample',
+    },
+    {
+      name: 'csf-rbc',
+      label: 'CSF RBCs',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'cells/mcL',
+      description: 'RBC count in CSF sample (from traumatic tap)',
+    },
+    {
+      name: 'blood-wbc',
+      label: 'Peripheral Blood WBCs',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: '\u00d710\u00b3/mcL',
+      description: 'Serum WBC count (e.g., 10.5)',
+    },
+    {
+      name: 'blood-rbc',
+      label: 'Peripheral Blood RBCs',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: '\u00d710\u2076/mcL',
+      description: 'Serum RBC count (e.g., 4.8)',
+    },
+  ],
+  results: [],
+  thresholdNote: 'More accurate than the traditional rule of subtracting 1 WBC per 500\u20131500 RBCs. Compare Tube 1 and Tube 4 cell counts \u2014 decreasing RBCs suggest traumatic tap rather than SAH. Normal CSF: <5 WBCs, 0 RBCs.',
+  citations: [
+    'Costerus JM, et al. Community-acquired bacterial meningitis. Curr Opin Infect Dis. 2017;30(1):135-141.',
+    'Mazor SS, et al. Interpretation of traumatic lumbar punctures: who can go home? Pediatrics. 2003;111(3):525-528.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const csfWbc = values['csf-wbc'] || 0;
+    const csfRbc = values['csf-rbc'] || 0;
+    const bloodWbc = values['blood-wbc'] || 0;
+    const bloodRbc = values['blood-rbc'] || 0;
+
+    if (csfWbc <= 0 || csfRbc <= 0 || bloodWbc <= 0 || bloodRbc <= 0) {
+      return {
+        value: '--',
+        label: 'Enter values',
+        description: 'Enter all four values to calculate corrected CSF WBC count. Use peripheral blood WBC in \u00d710\u00b3/mcL and RBC in \u00d710\u2076/mcL as reported by the lab.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Convert to same units: blood WBC is ×10³, blood RBC is ×10⁶
+    // Ratio blood WBC/RBC = (WBC × 10³) / (RBC × 10⁶) = WBC / (RBC × 1000)
+    const ratio = bloodWbc / (bloodRbc * 1000);
+    const predictedWbc = csfRbc * ratio;
+    const correctedWbc = Math.max(0, csfWbc - predictedWbc);
+    const correctedRounded = Math.round(correctedWbc * 10) / 10;
+    const predictedRounded = Math.round(predictedWbc * 10) / 10;
+
+    if (correctedRounded < 5) {
+      return {
+        value: `${correctedRounded} WBCs/mcL`,
+        label: 'Normal Corrected Count',
+        description: `Predicted contamination WBCs: ${predictedRounded}\nObserved CSF WBCs: ${csfWbc}\nCorrected (true) CSF WBCs: ${correctedRounded}\n\nCorrected count is within normal limits (<5 WBCs/mcL). Elevated observed WBCs likely due to traumatic tap contamination.`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (correctedRounded < 100) {
+      return {
+        value: `${correctedRounded} WBCs/mcL`,
+        label: 'Mild Pleocytosis',
+        description: `Predicted contamination WBCs: ${predictedRounded}\nObserved CSF WBCs: ${csfWbc}\nCorrected (true) CSF WBCs: ${correctedRounded}\n\nMild pleocytosis after correction. Consider viral meningitis (typical: 5\u20131000 WBCs, lymphocyte predominance). Clinical correlation required.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: `${correctedRounded} WBCs/mcL`,
+      label: 'Significant Pleocytosis',
+      description: `Predicted contamination WBCs: ${predictedRounded}\nObserved CSF WBCs: ${csfWbc}\nCorrected (true) CSF WBCs: ${correctedRounded}\n\nSignificant pleocytosis persists after correction. Bacterial meningitis typically >100 WBCs. Continue empiric antibiotics and pursue definitive diagnostics.`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const OTTAWA_SAH_CALCULATOR: CalculatorDefinition = {
+  id: 'ottawa-sah',
+  title: 'Ottawa SAH Rule',
+  subtitle: 'Ottawa Subarachnoid Hemorrhage Rule',
+  description: 'Clinical decision rule for patients with acute nontraumatic headache reaching maximal intensity within 1 hour and a normal neurologic examination. If ALL criteria are absent, SAH can be excluded with 100% sensitivity.',
+  fields: [
+    { name: 'age', label: 'Age ≥40 years', type: 'toggle', points: 1 },
+    { name: 'neck-pain', label: 'Neck pain or stiffness', type: 'toggle', points: 1 },
+    { name: 'loc', label: 'Witnessed loss of consciousness', type: 'toggle', points: 1 },
+    { name: 'exertion', label: 'Onset during exertion', type: 'toggle', points: 1 },
+    { name: 'thunderclap', label: 'Thunderclap headache (peak within 1 minute)', type: 'toggle', points: 1 },
+    { name: 'neck-flexion', label: 'Limited neck flexion on examination', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: 0, max: 0, label: 'Rule Negative — Low Risk', risk: 'No Ottawa SAH Rule criteria present', mortality: 'May not require imaging per ACEP 2019. Sensitivity 100%, specificity 27.5%.', colorVar: '--color-primary' },
+    { min: 1, max: 6, label: 'Rule Positive — Workup Required', risk: '≥1 Ottawa SAH Rule criteria present', mortality: 'Obtain noncontrast head CT. If negative, consider LP based on timing and clinical suspicion.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Applies only to alert patients with acute nontraumatic headache reaching maximal intensity within 1 hour and normal neurologic examination. Does not apply to patients with focal neurologic deficits, papilledema, or history of aneurysm/SAH.',
+  citations: ['Perry JJ, Stiell IG, Sivilotti ML, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255.', 'Perry JJ, Sivilotti MLA, Émond M, et al. Prospective Implementation of the Ottawa Subarachnoid Hemorrhage Rule and 6-Hour Computed Tomography Rule. Stroke. 2020;51(2):424-430.'],
+};
+
+const HUNT_HESS_CALCULATOR: CalculatorDefinition = {
+  id: 'hunt-hess',
+  title: 'Hunt & Hess Scale',
+  subtitle: 'Hunt and Hess Classification of Subarachnoid Hemorrhage',
+  description: 'Grading scale for clinical severity of subarachnoid hemorrhage. Higher grade correlates with higher inpatient mortality. Most widely used clinical SAH grading scale.',
+  fields: [
+    {
+      name: 'grade',
+      label: 'Clinical Presentation',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Grade 1 — Asymptomatic or mild headache, slight nuchal rigidity', points: 1 },
+        { label: 'Grade 2 — Moderate-severe headache, nuchal rigidity, no focal deficit (except CN palsy)', points: 2 },
+        { label: 'Grade 3 — Drowsy, confused, or mild focal deficit', points: 3 },
+        { label: 'Grade 4 — Stupor, moderate-severe hemiparesis, possible decerebrate rigidity', points: 4 },
+        { label: 'Grade 5 — Deep coma, decerebrate posturing, moribund appearance', points: 5 },
+      ],
+    },
+  ],
+  results: [
+    { min: 1, max: 1, label: 'Grade 1 — Low Risk', risk: 'Minimal symptoms', mortality: '~1% surgical mortality', colorVar: '--color-primary' },
+    { min: 2, max: 2, label: 'Grade 2 — Low-Moderate Risk', risk: 'Severe headache, no focal deficits', mortality: '~5% surgical mortality', colorVar: '--color-info' },
+    { min: 3, max: 3, label: 'Grade 3 — Moderate Risk', risk: 'Drowsy with mild deficit', mortality: '~19% surgical mortality', colorVar: '--color-warning' },
+    { min: 4, max: 4, label: 'Grade 4 — High Risk', risk: 'Stupor, hemiparesis', mortality: '~42% surgical mortality', colorVar: '--color-danger' },
+    { min: 5, max: 5, label: 'Grade 5 — Very High Risk', risk: 'Coma, decerebrate', mortality: '~77% surgical mortality', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Grade at time of initial assessment. Higher grades (4-5) historically had 70-90% mortality, but modern neurocritical care has significantly improved outcomes. Aggressive treatment may still be warranted.',
+  citations: ['Hunt WE, Hess RM. Surgical risk as related to time of intervention in the repair of intracranial aneurysms. J Neurosurg. 1968;28(1):14-20.'],
+};
+
+const MODIFIED_FISHER_CALCULATOR: CalculatorDefinition = {
+  id: 'modified-fisher',
+  title: 'Modified Fisher Scale',
+  subtitle: 'Modified Fisher Scale for SAH Vasospasm Risk',
+  description: 'Predicts risk of symptomatic cerebral vasospasm after subarachnoid hemorrhage based on CT findings. Accounts for both subarachnoid blood thickness and intraventricular hemorrhage.',
+  fields: [
+    {
+      name: 'grade',
+      label: 'CT Findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Grade 0 — No subarachnoid hemorrhage or intraventricular hemorrhage', points: 0 },
+        { label: 'Grade 1 — Thin SAH, no intraventricular hemorrhage (IVH)', points: 1 },
+        { label: 'Grade 2 — Thin SAH with intraventricular hemorrhage', points: 2 },
+        { label: 'Grade 3 — Thick SAH, no intraventricular hemorrhage', points: 3 },
+        { label: 'Grade 4 — Thick SAH with intraventricular hemorrhage', points: 4 },
+      ],
+    },
+  ],
+  results: [
+    { min: 0, max: 0, label: 'Grade 0 — No Hemorrhage', risk: 'No SAH or IVH identified', mortality: '0% symptomatic vasospasm', colorVar: '--color-primary' },
+    { min: 1, max: 1, label: 'Grade 1 — Low Vasospasm Risk', risk: 'Thin SAH without IVH', mortality: '24% symptomatic vasospasm', colorVar: '--color-info' },
+    { min: 2, max: 2, label: 'Grade 2 — Moderate Risk', risk: 'Thin SAH with IVH', mortality: '33% symptomatic vasospasm', colorVar: '--color-warning' },
+    { min: 3, max: 3, label: 'Grade 3 — High Risk', risk: 'Thick SAH without IVH', mortality: '33% symptomatic vasospasm', colorVar: '--color-warning' },
+    { min: 4, max: 4, label: 'Grade 4 — Highest Risk', risk: 'Thick SAH with IVH', mortality: '40% symptomatic vasospasm', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Thick SAH = clots >1mm in thickness or complete filling of any cistern. Thin SAH = less than 1mm thick. Vasospasm peak incidence is 7-10 days post-SAH. All confirmed SAH patients should receive nimodipine 60 mg PO q4h regardless of Fisher grade.',
+  citations: ['Frontera JA, Claassen J, Schmidt JM, et al. Prediction of symptomatic vasospasm after subarachnoid hemorrhage: the modified Fisher scale. Neurosurgery. 2006;59(1):21-27.'],
+};
+
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
@@ -1571,6 +1757,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'burn-dell-seton': DELL_SETON_CALCULATOR,
   'ich-score': ICH_SCORE_CALCULATOR,
   'func-score': FUNC_SCORE_CALCULATOR,
+  'csf-correction': CSF_CORRECTION_CALCULATOR,
+  'ottawa-sah': OTTAWA_SAH_CALCULATOR,
+  'hunt-hess': HUNT_HESS_CALCULATOR,
+  'modified-fisher': MODIFIED_FISHER_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

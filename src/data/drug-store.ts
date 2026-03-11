@@ -76,6 +76,31 @@ const ACETAZOLAMIDE: DrugEntry = {
   ],
 };
 
+const ACETAMINOPHEN: DrugEntry = {
+  id: 'acetaminophen',
+  name: 'Acetaminophen (Tylenol)',
+  genericName: 'Acetaminophen',
+  drugClass: 'Non-opioid analgesic / Antipyretic',
+  route: 'PO / IV',
+  indications: ['Headache / Analgesia', 'Fever', 'Pediatric fever / pain'],
+  dosing: [
+    {
+      indication: 'Headache / Analgesia',
+      regimen: '1000 mg PO or IV every 6 hours. Max 4000 mg/24h (2000 mg/24h in hepatic impairment or chronic alcohol use). IV administered over 15 minutes.',
+    },
+    {
+      indication: 'Pediatric fever / pain',
+      regimen: '15 mg/kg PO/PR every 4-6 hours. Max 75 mg/kg/day (not to exceed 4000 mg/day).',
+      weightCalc: { dosePerKg: 15, unit: 'mg', maxDose: 1000 },
+    },
+  ],
+  contraindications: ['Severe hepatic impairment or active liver disease', 'Known hypersensitivity'],
+  cautions: ['Hepatotoxicity at supratherapeutic doses (>4 g/day)', 'Reduce max dose to 2 g/day in chronic alcohol use or hepatic impairment', 'IV formulation: weight-based dosing for patients <50 kg (15 mg/kg, max 750 mg/dose)'],
+  monitoring: 'LFTs if prolonged use or hepatic risk factors. Serum level if overdose suspected.',
+  notes: 'First-line analgesic for SAH-associated headache. Preferred over NSAIDs (impair platelet function) and opioids (confound neurologic examination). IV onset 5-10 min vs PO 30-60 min.',
+  citations: ['Connolly ES Jr, et al. AHA/ASA Guidelines for management of aneurysmal subarachnoid hemorrhage. Stroke. 2012;43(6):1711-1737.'],
+};
+
 const ACYCLOVIR: DrugEntry = {
   id: 'acyclovir',
   name: 'Acyclovir',
@@ -1063,6 +1088,10 @@ const CLEVIDIPINE: DrugEntry = {
       indication: 'ICH blood pressure control (target SBP 130\u2013150)',
       regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Max 21 mg/hr. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
     },
+    {
+      indication: 'SAH blood pressure control (target SBP <160)',
+      regimen: 'Start 1-2 mg/hr IV. Double every 90 sec until SBP <160 mmHg. Usual maintenance 4-6 mg/hr. Max 21 mg/hr. Ultra-short t\u00BD (~1 min) allows precise titration.',
+    },
   ],
   contraindications: [
     'Severe aortic stenosis',
@@ -1915,6 +1944,10 @@ const LABETALOL: DrugEntry = {
       indication: 'ICH blood pressure control (target SBP 130\u2013150)',
       regimen: '10\u201320 mg IV bolus over 1\u20132 min. May repeat every 10\u201315 min. If repeated boluses needed, start infusion at 2\u20138 mg/min. Target SBP 130\u2013150. Avoid SBP <130 or drops >70 mmHg in first hour. Max 300 mg/24h.',
     },
+    {
+      indication: 'SAH blood pressure control (target SBP <160)',
+      regimen: '10-20 mg IV bolus over 1-2 min. May repeat every 10-15 min. If repeated boluses needed, start infusion at 2-8 mg/min. Target SBP <160 mmHg until aneurysm is secured. Max 300 mg/24h. Avoid nitroprusside (increases ICP).',
+    },
   ],
   contraindications: [
     'Severe bradycardia (HR <60)',
@@ -2267,6 +2300,10 @@ const NICARDIPINE: DrugEntry = {
       indication: 'ICH blood pressure control (target SBP 130\u2013150)',
       regimen: '5 mg/hr IV infusion. Titrate by 2.5 mg/hr every 5\u201315 min. Target SBP 130\u2013150. More widely available and less expensive than clevidipine. Monitor closely \u2014 overshoot hypotension possible. Avoid SBP <130 or drops >70 mmHg in first hour. Max 15 mg/hr.',
     },
+    {
+      indication: 'SAH blood pressure control (target SBP <160)',
+      regimen: '5 mg/hr IV infusion. Titrate by 2.5 mg/hr every 5-15 min. Target SBP <160 mmHg. Max 15 mg/hr. Preferred when beta-blocker contraindicated.',
+    },
   ],
   contraindications: [
     'Advanced aortic stenosis',
@@ -2284,6 +2321,26 @@ const NICARDIPINE: DrugEntry = {
     'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
     'Liu-Deryke X, et al. Management of Hypertension in Acute Ischemic Stroke. Ann Pharmacother. 2006;40(12):2234-46.',
   ],
+};
+
+const NIMODIPINE: DrugEntry = {
+  id: 'nimodipine',
+  name: 'Nimodipine (Nymalize)',
+  genericName: 'Nimodipine',
+  drugClass: 'Dihydropyridine calcium channel blocker',
+  route: 'PO',
+  indications: ['SAH vasospasm prevention'],
+  dosing: [
+    {
+      indication: 'SAH vasospasm prevention',
+      regimen: '60 mg PO every 4 hours × 21 days. If unable to swallow, crush and administer via nasogastric tube. No evidence for IV administration. Give to hemodynamically stable patients. Hold for hypotension (SBP <90).',
+    },
+  ],
+  contraindications: ['Hypotension (SBP <90)', 'Severe hepatic impairment', 'Strong CYP3A4 inhibitors'],
+  cautions: ['Monitor blood pressure closely — can cause hypotension', 'Administer at least 1 hour before or 2 hours after meals', 'Do NOT administer IV — severe hypotension and cardiac arrest reported with inadvertent IV administration of oral capsules', 'Hepatic impairment — reduce dose or increase interval'],
+  monitoring: 'Blood pressure every 1-2 hours during initiation. Watch for hypotension, especially when combined with other antihypertensives.',
+  notes: 'Only calcium channel blocker proven to improve outcomes after SAH. Cochrane review (16 trials): RR 0.67 for secondary ischemia. Does not directly prevent vasospasm but reduces ischemic injury. Landmark British Aneurysm Nimodipine Trial (554 patients) established the 60 mg q4h regimen.',
+  citations: ['Pickard JD, et al. Effect of oral nimodipine on cerebral infarction and outcome after subarachnoid haemorrhage. BMJ. 1989;298(6674):636-642.', 'Dorhout Mees SM, et al. Calcium antagonists for aneurysmal subarachnoid haemorrhage. Cochrane Database Syst Rev. 2007(3):CD000277.'],
 };
 
 const NITROFURANTOIN: DrugEntry = {
@@ -3671,6 +3728,10 @@ const LEVETIRACETAM: DrugEntry = {
       regimen: '60 mg/kg IV (max 4500 mg) over 10-15 min. ESETT trial: 47% seizure termination (equivalent to fosphenytoin and valproate). Fewest drug interactions, no cardiac effects, safe in pregnancy. Preferred 2nd-line in pregnant patients (89% of neurologists).',
       weightCalc: { dosePerKg: 60, unit: 'mg', maxDose: 4500, label: 'SE loading dose (ESETT)' },
     },
+    {
+      indication: 'SAH seizure prophylaxis',
+      regimen: '500 mg PO/IV BID. Short course (<3 days) preferred. Phenytoin should be avoided in SAH — associated with worse outcomes, functional decline, and cognitive disability. Reasonable to defer to inpatient team if patient has not seized.',
+    },
   ],
   contraindications: [
     'Hypersensitivity to levetiracetam',
@@ -4481,6 +4542,7 @@ const RIFAMPIN: DrugEntry = {
 // -------------------------------------------------------------------
 
 export const ALL_DRUGS: DrugEntry[] = [
+  ACETAMINOPHEN,
   ACETAZOLAMIDE,
   ACYCLOVIR,
   ALBUTEROL_NEB,
@@ -4562,6 +4624,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MISOPROSTOL,
   NACL_TABLETS,
   NICARDIPINE,
+  NIMODIPINE,
   NITROFURANTOIN,
   NITROGLYCERIN,
   ONDANSETRON,
@@ -4624,6 +4687,7 @@ export function getAllDrugs(): DrugEntry[] {
 
 /** Lookup table: maps common drug name fragments to drug store IDs */
 const NAME_TO_ID: [RegExp, string][] = [
+  [/acetaminophen|tylenol|apap/i, 'acetaminophen'],
   [/acetazolamide|diamox/i, 'acetazolamide'],
   [/acyclovir|zovirax/i, 'acyclovir'],
   [/albuterol|proventil|ventolin/i, 'albuterol-neb'],
@@ -4705,6 +4769,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/morphine/i, 'morphine'],
   [/nacl.*tab|salt.*tab|sodium\s*chloride.*tab/i, 'nacl-tablets'],
   [/nicardipine|cardene/i, 'nicardipine'],
+  [/nimodipine|nymalize|nimotop/i, 'nimodipine'],
   [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],
   [/nitroglycerin|nitro|glyceryl trinitrate|NTG/i, 'nitroglycerin'],
   [/ondansetron|zofran/i, 'ondansetron'],

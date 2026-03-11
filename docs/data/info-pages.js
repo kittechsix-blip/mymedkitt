@@ -3492,6 +3492,380 @@ const HIV_SYSTEM_COMPLICATIONS = {
     ],
 };
 // -------------------------------------------------------------------
+// Meningitis / Encephalitis Info Pages
+// -------------------------------------------------------------------
+const MENING_STEPS_SUMMARY = {
+    id: 'mening-steps-summary',
+    title: 'Meningitis/Encephalitis Steps Summary',
+    subtitle: 'Quick Reference \u2014 Time-Critical ED Management',
+    sections: [
+        {
+            heading: 'Recognition',
+            body: '\u2022 [Suspect CNS infection: \u22652 of 4 symptoms (headache, fever, neck stiffness, AMS) present in 95% of cases](#/node/mening-clinical)\n\u2022 [Assess for focal deficits \u2192 encephalitis vs meningitis](#/node/mening-focal-deficits)\n\u2022 Kernig/Brudzinski signs: only 2% sensitive \u2014 do NOT rely on for ruling out',
+        },
+        {
+            heading: 'Workup',
+            body: '\u2022 [CT before LP? Only if: GCS \u226412, focal deficits, papilledema, uncontrolled seizures](#/node/mening-ct-decision)\n\u2022 [LP technique: 4 tubes, up to 15 mL safe, opening pressure in lateral decubitus](#/node/mening-lp-technique)\n\u2022 **NEVER delay antibiotics for imaging or LP**',
+        },
+        {
+            heading: 'Empiric Treatment (\u22641 Hour)',
+            body: '\u2022 [Immunocompetent <50y: Ceftriaxone 2g IV q12h + Vancomycin + Dexamethasone](#/node/mening-tx-standard)\n\u2022 [Age \u226550 / pregnant / immunocompromised: ADD Ampicillin 2g IV q4h (Listeria coverage)](#/node/mening-tx-expanded)\n\u2022 [Healthcare-associated: Vancomycin + Meropenem 2g IV q8h](#/node/mening-tx-nosocomial)\n\u2022 [Suspected cryptococcal: Amphotericin B + Flucytosine (ID consult)](#/node/mening-tx-crypto)\n\u2022 **Add Acyclovir 10 mg/kg IV q8h if ANY encephalitis features**',
+        },
+        {
+            heading: 'CSF Interpretation',
+            body: '\u2022 [Interpret CSF pattern: bacterial vs viral vs fungal vs equivocal](#/node/mening-csf-pattern)\n\u2022 CSF lactate >35 mg/dL: 93% sensitive for bacterial meningitis\n\u2022 Serum PCT >0.25-0.5 ng/mL: 90-95% sensitive for bacterial etiology\n\u2022 6% of culture-proven ABM has NO elevated WBC \u2014 when in doubt, treat as bacterial',
+        },
+        {
+            heading: 'Adjunctive Therapy',
+            body: '\u2022 [Dexamethasone 0.15 mg/kg IV q6h \u00d7 2-4 days \u2014 give with or before first antibiotics](#/node/mening-steroids)\n\u2022 STOP steroids if Listeria or Cryptococcus identified\n\u2022 Contact prophylaxis for N. meningitidis exposures',
+        },
+        {
+            heading: 'Disposition',
+            body: '\u2022 [Discharge: low-risk viral meningitis with controlled symptoms and reliable follow-up](#/node/mening-discharge)\n\u2022 [Ward: stable, awaiting CSF results, continued IV antibiotics](#/node/mening-ward)\n\u2022 [ICU: GCS \u22648, hemodynamic instability, seizures, severe encephalitis](#/node/mening-icu)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.' },
+        { num: 2, text: 'Aronin SI, et al. Community-acquired bacterial meningitis: risk stratification for adverse clinical outcome and effect of antibiotic timing. Ann Intern Med. 1998;129(11):862-869.' },
+    ],
+};
+const MENING_CSF_GUIDE = {
+    id: 'mening-csf-guide',
+    title: 'CSF Interpretation Guide',
+    subtitle: 'Cerebrospinal Fluid Analysis for CNS Infections',
+    sections: [
+        {
+            heading: 'Normal CSF Values',
+            body: '\u2022 Red blood cells: 0\n\u2022 White blood cells: <5 cells/mcL\n\u2022 CSF:serum glucose ratio: >0.67\n\u2022 Protein: <50 mg/dL\n\u2022 Lactate: <35 mg/dL\n\u2022 Gram stain: no visible organisms\n\u2022 Opening pressure: <20 cm H\u2082O [1]',
+        },
+        {
+            heading: 'Bacterial Meningitis Pattern',
+            body: '\u2022 WBC: 10\u201310,000 cells/mcL (usually >100), **neutrophil predominance** [1,2]\n\u2022 CSF:serum glucose ratio: decreased (cutoff <0.36 \u2192 93% sensitivity/specificity) [1]\n\u2022 Protein: elevated, mean ~135 mg/dL [2]\n\u2022 Lactate: >35.1 mg/dL (93% sensitivity, 97% specificity pre-antibiotics) [3]\n\u2022 Opening pressure: often elevated; >40 cm H\u2082O in 39% [1]\n\u2022 Gram stain: 60\u201399% sensitive, 97\u2013100% specific [1]\n\n**Caveats:**\n\u2022 6% of culture-proven ABM lacks elevated WBC [2]\n\u2022 10% have lymphocyte-predominant differentials [2]\n\u2022 25% of L. monocytogenes cases have normal/near-normal CSF [1]\n\u2022 Early disease or prior antibiotics may mask typical pattern',
+        },
+        {
+            heading: 'Viral Meningitis Pattern',
+            body: '\u2022 WBC: generally <250 (range 5\u20131000), **lymphocyte predominance** [1,4]\n\u2022 CSF:serum glucose ratio: normal to mildly decreased [2]\n\u2022 Protein: normal to mildly elevated, mean ~56 mg/dL [2]\n\u2022 Lactate: usually normal\n\u2022 Opening pressure: usually normal (<20 cm H\u2082O) [1]\n\u2022 Gram stain: negative',
+        },
+        {
+            heading: 'Fungal Meningitis Pattern',
+            body: '\u2022 WBC: variable, lymphocyte predominance\n\u2022 CSF:serum glucose ratio: often very low\n\u2022 Protein: elevated\n\u2022 Opening pressure: often significantly elevated\n\u2022 Subacute presentation (weeks of evolving symptoms)\n\u2022 CSF CrAg: highly sensitive for cryptococcal meningitis\n\u2022 CSF lactate may be elevated [3]',
+        },
+        {
+            heading: 'Traumatic Tap Correction',
+            body: 'When RBCs contaminate CSF from traumatic LP:\n\n**Predicted CSF WBCs = CSF RBCs \u00d7 (Blood WBCs / Blood RBCs)**\n\nThis formula is more accurate than the traditional rule of subtracting 1 WBC per 500\u20131500 RBCs. [1]\n\nCompare Tube 1 and Tube 4 cell counts \u2014 decreasing RBCs suggest traumatic tap rather than subarachnoid hemorrhage.',
+        },
+        {
+            heading: 'Key Diagnostic Biomarkers',
+            body: '**CSF Lactate:** Independent of serum level (crosses BBB slowly). >35.1 mg/dL strongly favors bacterial cause. Particularly useful in healthcare-associated infections where postoperative inflammation alters conventional markers. [3]\n\n**CSF PCR:** Detects bacterial DNA even days after antibiotics (87\u2013100% sensitive, 98\u2013100% specific). Gold standard for viral pathogen identification. [5]\n\n**Serum PCT:** >0.25\u20130.5 ng/mL has 90\u201395% sensitivity, 98\u2013100% specificity for distinguishing bacterial from viral meningitis. More sensitive than any CSF marker for this purpose. [6]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Costerus JM, et al. Community-acquired bacterial meningitis. Curr Opin Infect Dis. 2017;30(1):135-141.' },
+        { num: 2, text: 'Juli\u00e1n-Jim\u00e9nez A, et al. Usefulness of blood and cerebrospinal fluid laboratory testing to predict bacterial meningitis. Neurologia. 2019;34(2):105-113.' },
+        { num: 3, text: 'Sakushima K, et al. Diagnostic accuracy of CSF lactate for differentiating bacterial meningitis from aseptic meningitis: a meta-analysis. J Infect. 2011;62(4):255-262.' },
+        { num: 4, text: 'Wright WF, et al. Viral (aseptic) meningitis: a review. J Neurol Sci. 2019;398:176-183.' },
+        { num: 5, text: 'McGill F, et al. UK joint specialist societies guideline on acute meningitis. J Infect. 2016;72(4):405-438.' },
+        { num: 6, text: 'Vikse J, et al. Serum procalcitonin in the diagnosis of bacterial meningitis: systematic review and meta-analysis. Int J Infect Dis. 2015;38:68-76.' },
+    ],
+};
+const MENING_CT_CRITERIA = {
+    id: 'mening-ct-criteria',
+    title: 'CT Before Lumbar Puncture',
+    subtitle: 'International Guideline Comparison',
+    sections: [
+        {
+            heading: 'Key Principle',
+            body: 'CT is NOT sensitive for detecting meningitis or encephalitis. Its purpose is to exclude mass lesions that could cause herniation with LP. **Most patients do NOT need CT before LP.** [1]\n\nHerniation after LP is rare: only 0.1% of patients deteriorated within 1 hour of LP. Of those who deteriorated, 91% had a prior normal CT. [2]',
+        },
+        {
+            heading: 'IDSA 2004 Criteria (United States)',
+            body: 'CT before LP recommended if ANY of:\n\u2022 Immunocompromised state\n\u2022 History of CNS disease (mass, stroke, focal infection)\n\u2022 New-onset seizure (within 1 week)\n\u2022 Papilledema\n\u2022 Altered consciousness\n\u2022 Focal neurologic deficit [3]',
+        },
+        {
+            heading: 'Swedish 2009 Criteria (More Permissive)',
+            body: 'CT before LP recommended if ANY of:\n\u2022 Focal neurologic signs\n\u2022 Papilledema\n\u2022 GCS <10\n\u2022 Continuous or uncontrolled seizures\n\n**Notably excludes:** altered mental status and self-limited seizures \u2014 evidence suggests these are NOT independent risk factors for herniation. [4]',
+        },
+        {
+            heading: 'UK Joint Specialist Societies 2016 Criteria',
+            body: 'CT before LP recommended if ANY of:\n\u2022 Focal neurologic signs\n\u2022 Papilledema\n\u2022 Continuous or uncontrolled seizures\n\u2022 GCS \u226412\n\u2022 Rapidly declining level of consciousness [1]\n\n**Key difference from IDSA:** Does not include immunocompromised state or simple new-onset seizures as indications.',
+        },
+        {
+            heading: 'Practical Approach',
+            body: '**ALWAYS start empiric antibiotics before CT if CT is indicated.**\n\nIf NO indications for CT:\n\u2022 Proceed directly to LP\n\u2022 Start antibiotics within 1 hour of suspicion\n\nIf CT IS indicated:\n\u2022 Start empiric antibiotics + dexamethasone IMMEDIATELY\n\u2022 Draw blood cultures before antibiotics if possible\n\u2022 Obtain CT\n\u2022 Perform LP after CT if no contraindication found\n\u2022 Antibiotics given >4 hours before LP reduce culture sensitivity >30% [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McGill F, et al. UK joint specialist societies guideline on the diagnosis and management of acute meningitis. J Infect. 2016;72(4):405-438.' },
+        { num: 2, text: 'Costerus JM, et al. Cranial CT, LP, and clinical deterioration in bacterial meningitis: a nationwide cohort study. Clin Infect Dis. 2018;67(6):920-926.' },
+        { num: 3, text: 'Tunkel AR, et al. Practice guidelines for the management of bacterial meningitis. Clin Infect Dis. 2004;39(9):1267-1284.' },
+        { num: 4, text: 'Glim\u00e5ker M, et al. Early lumbar puncture in adult bacterial meningitis\u2014rationale for revised guidelines. Scand J Infect Dis. 2013;45(9):657-663.' },
+    ],
+};
+const MENING_ABX_TABLE = {
+    id: 'mening-abx-table',
+    title: 'Empiric Antimicrobial Regimens',
+    subtitle: 'By Patient Risk Category',
+    sections: [
+        {
+            heading: 'Immunocompetent Adult <50 Years',
+            body: '**Targets:** S. pneumoniae, N. meningitidis [1]',
+            drugTable: [
+                { drug: 'Ceftriaxone', regimen: '2 g IV q12h' },
+                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: 'Dexamethasone', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
+            ],
+        },
+        {
+            heading: 'Age \u226550, Pregnant, or Immunocompromised',
+            body: '**Additional target:** L. monocytogenes (not covered by cephalosporins) [1,2]',
+            drugTable: [
+                { drug: 'Ceftriaxone', regimen: '2 g IV q12h' },
+                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: 'Ampicillin', regimen: '2 g IV q4h (Listeria coverage)' },
+                { drug: 'Dexamethasone', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
+            ],
+        },
+        {
+            heading: 'Healthcare-Associated / Post-Neurosurgical',
+            body: '**Targets:** MRSA, Pseudomonas, resistant gram-negatives [3]',
+            drugTable: [
+                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: 'Meropenem', regimen: '2 g IV q8h (or Cefepime 2 g IV q8h)' },
+            ],
+        },
+        {
+            heading: 'Suspected Cryptococcal (HIV/AIDS)',
+            body: '**Requires ID consultation before initiation** [4]',
+            drugTable: [
+                { drug: 'Amphotericin B liposomal', regimen: '3-4 mg/kg/day IV (induction)' },
+                { drug: 'Flucytosine', regimen: '25 mg/kg PO q6h (induction)' },
+                { drug: 'Fluconazole', regimen: '400-800 mg/day (consolidation)' },
+            ],
+        },
+        {
+            heading: 'Suspected Encephalitis (Any Risk Category)',
+            body: '**Add to ANY regimen above if encephalitis features present:** [5]',
+            drugTable: [
+                { drug: 'Acyclovir', regimen: '10 mg/kg IV q8h (continue pending PCR)' },
+            ],
+        },
+        {
+            heading: 'Key Timing Principles',
+            body: '\u2022 **Antibiotics within 1 HOUR of suspicion** \u2014 delayed abx = increased mortality [6,7]\n\u2022 **Dexamethasone** given WITH or up to 15-20 min BEFORE first antibiotic dose [1]\n\u2022 **Do NOT delay antibiotics** for CT or LP\n\u2022 **Meropenem** covers L. monocytogenes \u2014 if used, ampicillin may be omitted [1]\n\u2022 **Do NOT give corticosteroids** if cryptococcal or listerial meningitis strongly suspected [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.' },
+        { num: 2, text: 'Hasbun R. Update and advances in community acquired bacterial meningitis. Curr Opin Infect Dis. 2019;32(3):233-238.' },
+        { num: 3, text: 'Bardak-Ozcem S, Sipahi OR. An updated approach to healthcare-associated meningitis. Expert Rev Anti Infect Ther. 2014;12(3):333-342.' },
+        { num: 4, text: 'Tenforde MW, et al. Treatment for HIV-associated cryptococcal meningitis. Cochrane Database Syst Rev. 2018;7:CD005647.' },
+        { num: 5, text: 'Whitley RJ, et al. Vidarabine versus acyclovir therapy in herpes simplex encephalitis. N Engl J Med. 1986;314(3):144-149.' },
+        { num: 6, text: 'Aronin SI, et al. Community-acquired bacterial meningitis: risk stratification and effect of antibiotic timing. Ann Intern Med. 1998;129(11):862-869.' },
+        { num: 7, text: 'Proulx N, et al. Delays in the administration of antibiotics are associated with mortality from adult ABM. QJM. 2005;98(4):291-298.' },
+    ],
+};
+const MENING_STEROID_GUIDE = {
+    id: 'mening-steroid-guide',
+    title: 'Corticosteroid Guide',
+    subtitle: 'Adjunctive Dexamethasone in Meningitis',
+    sections: [
+        {
+            heading: 'Regimen',
+            body: '**Dexamethasone 0.15 mg/kg IV q6h \u00d7 2-4 days**\n\nGive WITH or up to **15-20 minutes BEFORE** first antibiotic dose. [1]',
+        },
+        {
+            heading: 'Evidence Summary',
+            body: '**Cochrane 2015** (25 studies, 4121 participants): [2]\n\u2022 Overall ABM: nonsignificant mortality reduction (17.8% vs 19.9%)\n\u2022 **Pneumococcal meningitis in high-income countries:** significant mortality reduction\n\u2022 Significant reduction in **hearing loss** and other neurological sequelae\n\n**TB meningitis** (Cochrane, 9 trials, 1337 patients): [3]\n\u2022 Corticosteroids reduced mortality by ~25% at 18 months\n\n**Mechanism:** Bactericidal antibiotics cause vigorous subarachnoid inflammatory response. Corticosteroids attenuate this inflammation, reducing secondary neurological injury.',
+        },
+        {
+            heading: 'When to CONTINUE',
+            body: '\u2022 *Streptococcus pneumoniae* meningitis (strongest evidence) [2]\n\u2022 *Mycobacterium tuberculosis* meningitis [3]\n\u2022 Unknown pathogen (empiric \u2014 pneumococcus is most common cause of ABM)',
+        },
+        {
+            heading: 'When to STOP Immediately',
+            body: '\u2022 ***Listeria monocytogenes*** identified \u2014 nonsignificant trend toward WORSE outcomes (Swedish registry, 1746 patients, 19 years) [4]\n\u2022 ***Cryptococcus neoformans*** identified \u2014 associated with WORSENED outcomes [1]\n\u2022 Pathogen identified is NOT S. pneumoniae or M. tuberculosis [1]\n\n**Caution:** Patients receiving steroids for pneumococcal disease who initially recover face increased risk for **delayed cerebral thrombosis** over subsequent weeks. [1]',
+        },
+        {
+            heading: 'Practical Decision',
+            body: 'Because pathogen identification is essentially impossible within the first hour of presentation:\n\u2022 Give dexamethasone empirically to most patients with suspected bacterial meningitis [1]\n\u2022 The likelihood of appropriately treating pneumococcal meningitis outweighs the chance of harming a patient with listerial or cryptococcal disease\n\u2022 If clinical evidence STRONGLY favors Listeria or Cryptococcus, consider withholding\n\u2022 Discontinue immediately once these pathogens are confirmed',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.' },
+        { num: 2, text: 'Brouwer MC, et al. Corticosteroids for acute bacterial meningitis. Cochrane Database Syst Rev. 2015(9):CD004405.' },
+        { num: 3, text: 'Prasad K, et al. Corticosteroids for managing tuberculous meningitis. Cochrane Database Syst Rev. 2016;4:CD002244.' },
+        { num: 4, text: 'Glim\u00e5ker M, et al. Betamethasone and dexamethasone in adult community-acquired bacterial meningitis: a quality registry study from 1995 to 2014. Clin Microbiol Infect. 2016;22(9):814.e811-e814.' },
+    ],
+};
+const MENING_DISPO_CRITERIA = {
+    id: 'mening-dispo-criteria',
+    title: 'Disposition Criteria',
+    subtitle: 'Discharge vs Ward vs ICU Admission',
+    sections: [
+        {
+            heading: 'Discharge Criteria (Low-Risk Viral Meningitis)',
+            body: 'Absolute criteria for discharge have NOT been validated in adults. The following are extrapolated from pediatric data and should not replace clinical judgment: [1]\n\n\u2022 Nontoxic clinical appearance\n\u2022 Normal serum WBC count\n\u2022 Mild CSF pleocytosis only\n\u2022 Negative CSF Gram stain\n\u2022 Adequate symptom control (headache, nausea, vomiting)\n\u2022 Reliable support system and follow-up capability\n\u2022 Understands return precautions\n\n**Follow-up:** Primary care within **3 days** for reassessment [1]',
+        },
+        {
+            heading: 'Return Precautions',
+            body: 'Discuss thoroughly before any discharge:\n\u2022 Worsening headache\n\u2022 Vomiting\n\u2022 Confusion or behavioral changes\n\u2022 Seizures\n\u2022 High fever (>38.5\u00b0C)\n\u2022 Worsening neck stiffness',
+        },
+        {
+            heading: 'Medical Ward Admission',
+            body: '\u2022 Alert enough to maintain airway\n\u2022 Stable vital signs, not requiring titratable medications\n\u2022 Does not require close neurological monitoring\n\u2022 Can receive IV antibiotics while awaiting CSF results\n\u2022 Patients with viral meningitis and severe symptoms (refractory headache, persistent vomiting)',
+        },
+        {
+            heading: 'ICU Admission',
+            body: '\u2022 GCS score \u22648\n\u2022 Hemodynamic instability requiring vasopressors\n\u2022 Seizure activity or focal neurological deficits\n\u2022 All cases of **severe encephalitis**\n\u2022 Rapidly declining level of consciousness\n\u2022 Need for continuous EEG monitoring\n\u2022 Need for ICP monitoring\n\u2022 Possible need for advanced airway management [2]',
+        },
+        {
+            heading: 'Therapies NOT Recommended',
+            body: '\u2022 **Osmotic agents** for ICP reduction: Cochrane review stopped early due to increased mortality in treatment groups [3]\n\u2022 **Therapeutic hypothermia**: RCT (98 patients) stopped early due to increased mortality in treatment group [3]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nigrovic LE, et al. Clinical prediction rule for identifying children with CSF pleocytosis at very low risk of bacterial meningitis. JAMA. 2007;297(1):52-60.' },
+        { num: 2, text: 'Venkatesan A, et al. Case definitions, diagnostic algorithms, and priorities in encephalitis: consensus statement of the International Encephalitis Consortium. Clin Infect Dis. 2013;57(8):1114-1128.' },
+        { num: 3, text: 'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.' },
+    ],
+};
+const MENING_PEP_GUIDE = {
+    id: 'mening-pep-guide',
+    title: 'Postexposure Prophylaxis',
+    subtitle: 'Chemoprophylaxis for Meningococcal and H. influenzae Contacts',
+    sections: [
+        {
+            heading: 'N. meningitidis Postexposure Prophylaxis',
+            body: 'Indicated for **close contacts** of confirmed N. meningitidis cases (household members, intimate contacts, healthcare workers with unprotected exposure to respiratory secretions). [1]\n\n**Options (any one):**',
+            drugTable: [
+                { drug: 'Ceftriaxone', regimen: '250 mg IM \u00d7 1 dose (preferred in pregnancy)' },
+                { drug: 'Ciprofloxacin', regimen: '500 mg PO \u00d7 1 dose' },
+                { drug: 'Rifampin', regimen: '600 mg PO q12h \u00d7 2 days (4 doses total)' },
+            ],
+        },
+        {
+            heading: 'H. influenzae Postexposure Prophylaxis',
+            body: 'Indicated for household contacts with **incompletely vaccinated children aged <4 years** or immunocompromised children aged <18 years, regardless of vaccination status. [2]',
+            drugTable: [
+                { drug: 'Rifampin', regimen: '600 mg PO daily \u00d7 4 days (adults)' },
+            ],
+        },
+        {
+            heading: 'Varicella Zoster Virus (VZV)',
+            body: 'Consider varicella zoster immunoglobulin for **high-risk individuals** without evidence of immunity who have unprotected exposure to VZV: [3]\n\u2022 Immunocompromised patients\n\u2022 Pregnant women\n\u2022 Neonates\n\n**Administer in consultation with an infectious disease specialist.**',
+        },
+        {
+            heading: 'Prehospital Provider Prophylaxis',
+            body: 'EMS professionals with unanticipated exposure to N. meningitidis or H. influenzae should receive appropriate chemoprophylaxis using the regimens above.\n\n**Standard precautions** apply for most CNS infections. **Particulate respirators** should be worn for potentially airborne pathogens (VZV, tuberculosis). [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cohn AC, et al. Prevention and control of meningococcal disease: ACIP recommendations. MMWR Recomm Rep. 2013;62(RR-2):1-28.' },
+        { num: 2, text: 'Briere EC, et al. Prevention and control of H. influenzae type b disease: ACIP recommendations. MMWR Recomm Rep. 2014;63(Rr-01):1-14.' },
+        { num: 3, text: 'U.S. CDC. Updated recommendations for use of VariZIG. MMWR Recomm Rep. 2013;62(28):574-576.' },
+    ],
+};
+// -------------------------------------------------------------------
+// SAH (Subarachnoid Hemorrhage)
+// -------------------------------------------------------------------
+const SAH_SUMMARY = {
+    id: 'sah-summary',
+    title: 'SAH Steps Summary',
+    subtitle: 'Subarachnoid Hemorrhage — Quick Reference',
+    sections: [
+        {
+            heading: 'Recognition',
+            body: '• [Identify thunderclap headache and risk factors](#/node/sah-presentation)\n• [Apply Ottawa SAH Rule — screen for low-risk patients](#/node/sah-ottawa)',
+        },
+        {
+            heading: 'Diagnostic Workup',
+            body: '• [Obtain noncontrast CT head — sensitivity is time-dependent](#/node/sah-ct)\n• [If CT negative ≤6h: may rule out SAH if criteria met](#/node/sah-early-neg)\n• [If CT negative >6h: proceed to lumbar puncture](#/node/sah-lp)\n• [Interpret LP — xanthochromia, RBC analysis](#/node/sah-lp-results)',
+        },
+        {
+            heading: 'Severity Grading',
+            body: '• [Confirm SAH — order CTA, consult neurosurgery](#/node/sah-confirmed)\n• [Grade with Hunt & Hess and Modified Fisher scales](#/node/sah-grading)',
+        },
+        {
+            heading: 'ED Management',
+            body: '• [Initial care — bed rest, HOB 30°, NPO, cardiac monitoring](#/node/sah-initial-mgmt)\n• [BP control — target SBP <160 with titratable IV agents](#/node/sah-bp-control)\n• [Start nimodipine 60 mg PO q4h for vasospasm prevention](#/node/sah-vasospasm-prev)\n• [Seizure precautions — levetiracetam if needed, avoid phenytoin](#/node/sah-seizure-mgmt)\n• [Monitor for rebleeding — highest risk in first 6 hours](#/node/sah-rebleed-prev)\n• [Watch for cardiac complications — ECG changes, troponin, Takotsubo](#/node/sah-cardiac-comp)',
+        },
+        {
+            heading: 'Disposition',
+            body: '• [Definitive repair — coiling vs clipping within 72 hours](#/node/sah-definitive)\n• [Transfer to high-volume center or admit to neuro ICU](#/node/sah-dispo)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Connolly ES Jr, et al. AHA/ASA Guidelines for management of aneurysmal subarachnoid hemorrhage. Stroke. 2012;43(6):1711-1737.' },
+        { num: 2, text: 'Diringer MN, et al. NCS Critical care management after aSAH. Neurocrit Care. 2011;15(2):211-240.' },
+    ],
+};
+const SAH_LP_GUIDE = {
+    id: 'sah-lp-guide',
+    title: 'LP Interpretation Guide',
+    subtitle: 'CSF Analysis for Subarachnoid Hemorrhage',
+    sections: [
+        {
+            heading: 'Technique',
+            body: '• Patient in **lateral recumbent position** for accurate opening pressure\n• Measure **opening pressure** — elevated (>20 cm H₂O) in 60% of SAH patients\n• Collect **4 serial tubes** of CSF\n• Send last tube for cell count AND xanthochromia assessment\n• Traumatic tap rate: 10-15% of all LPs',
+        },
+        {
+            heading: 'RBC Analysis',
+            body: '• **Zero RBCs in final tube** = traumatic tap (not SAH)\n• **Persistent RBCs constant across tubes 1-4** (usually thousands) = likely SAH\n• **Partial clearing** (e.g., 3,000→400) = equivocal — may be traumatic tap OR SAH\n• **>10,000 RBCs in final tube** = 6× more likely to be SAH than <100 RBCs [1]\n• RBC count is time-dependent — may clear within 48 hours as CSF circulates\n• No absolute cutoff threshold exists; aneurysm rupture reported with only a few hundred cells',
+        },
+        {
+            heading: 'Xanthochromia',
+            body: '• Yellow color from hemoglobin breakdown (oxyhemoglobin → methemoglobin → bilirubin)\n• Bilirubin formation is **enzyme-dependent and only occurs in vivo** — highly suggestive of SAH\n• Takes **up to 12 hours** to develop; lasts at least 2 weeks\n• Only 20% have visual xanthochromia if tapped within 6 hours\n• **All patients tapped 12h–2 weeks** after SAH will have xanthochromia [2]\n\n**Visual detection method:**\n• Rapidly centrifuge the last tube of CSF\n• Compare against identical tube of water on a white background\n• Yellowish hue = positive\n• Sensitivity 93%, specificity 95%, NPV 99%',
+        },
+        {
+            heading: 'False Positives for Xanthochromia',
+            body: '• Elevated CSF protein (>150 mg/dL)\n• Hyperbilirubinemia (serum bilirubin >10-15 mg/dL)\n• Traumatic tap with delayed processing (in vitro hemolysis)\n• Prior SAH (up to 2-4 weeks)\n• Carotenoids, rifampin, melanoma',
+        },
+        {
+            heading: 'Timing Considerations',
+            body: '• **<12 hours from onset:** Xanthochromia may not yet be present — accept RBCs as positive finding\n• **12 hours to 2 weeks:** Both RBCs and xanthochromia should be present if SAH\n• **>2 weeks:** Xanthochromia may no longer be present\n• Finding **normal CSF at any time point** successfully excludes SAH\n• Some authors recommend waiting 12 hours for LP, but early LP with either RBCs or xanthochromia as positive is also acceptable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Czuczman AD, et al. Interpreting red blood cells in lumbar puncture: distinguishing true subarachnoid hemorrhage from traumatic tap. Acad Emerg Med. 2013;20(3):247-256.' },
+        { num: 2, text: 'Vermeulen M, et al. Xanthochromia after subarachnoid haemorrhage needs no revisitation. J Neurol Neurosurg Psychiatry. 1989;52(7):826-828.' },
+    ],
+};
+const SAH_ECG_CHANGES = {
+    id: 'sah-ecg-changes',
+    title: 'ECG Changes in SAH',
+    subtitle: 'Cardiac Manifestations of Subarachnoid Hemorrhage',
+    sections: [
+        {
+            heading: 'Mechanism',
+            body: '• **Catecholamine surge** from autonomic stimulation causes subendocardial ischemia\n• Neurocardiogenic mechanism — distinct from coronary thrombosis\n• Coronary angiography is typically normal despite ischemic ECG changes',
+        },
+        {
+            heading: 'Common ECG Findings (50-100% of patients)',
+            body: '• Nonspecific **ST-segment and T-wave changes** (most common)\n• **Prolonged QT interval**\n• Prolonged QRS complexes\n• **U waves**\n• ST elevations **mimicking acute MI**\n• Deep T-wave inversions ("cerebral T waves")\n• These changes are usually **benign and transient**',
+        },
+        {
+            heading: 'Arrhythmias',
+            body: '• Serious arrhythmias in **<5% of patients**\n• Associated with worse outcomes when present\n• Sinus bradycardia, atrial fibrillation, ventricular tachycardia reported\n• Continuous cardiac monitoring is essential',
+        },
+        {
+            heading: 'Troponin',
+            body: '• Elevated in **20-40%** of acute SAH cases\n• Indicates cardiopulmonary complications\n• Associated with worse outcomes\n• Does NOT necessarily indicate acute coronary syndrome',
+        },
+        {
+            heading: 'Neurogenic Stunned Myocardium (Takotsubo)',
+            body: '• Also called **stress-induced cardiomyopathy**\n• Acutely depressed ejection fraction (can be **as low as 20%**)\n• Left ventricular **apical akinesis or ballooning**\n• Occurs with **normal coronary arteries**\n• **Transient** — most patients recover function over several weeks\n• May present with pulmonary edema and symptoms mimicking ACS\n• Management: support cardiac dysfunction while focusing on primary neurologic insult',
+        },
+        {
+            heading: 'Key Management Points',
+            body: '• SAH is a **contraindication to thrombolytics and anticoagulants**\n• Treat suspected myocardial ischemia conventionally (except thrombolytics/anticoagulation)\n• Focus management on the primary neurologic insult\n• Cardiac dysfunction is usually transient and supportive care is sufficient',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Frontera JA, et al. Cardiac arrhythmias after subarachnoid hemorrhage: risk factors and impact on outcome. Cerebrovasc Dis. 2008;26(1):71-78.' },
+        { num: 2, text: 'Naidech AM, et al. Cardiac troponin elevation, cardiovascular morbidity, and outcome after subarachnoid hemorrhage. Circulation. 2005;112(18):2851-2856.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -3595,6 +3969,16 @@ export const INFO_PAGES = {
     'hiv-arv-classes': HIV_ARV_CLASSES,
     'hiv-testing-guide': HIV_TESTING_GUIDE,
     'hiv-system-complications': HIV_SYSTEM_COMPLICATIONS,
+    'mening-steps-summary': MENING_STEPS_SUMMARY,
+    'mening-csf-guide': MENING_CSF_GUIDE,
+    'mening-ct-criteria': MENING_CT_CRITERIA,
+    'mening-abx-table': MENING_ABX_TABLE,
+    'mening-steroid-guide': MENING_STEROID_GUIDE,
+    'mening-dispo-criteria': MENING_DISPO_CRITERIA,
+    'mening-pep-guide': MENING_PEP_GUIDE,
+    'sah-summary': SAH_SUMMARY,
+    'sah-lp-guide': SAH_LP_GUIDE,
+    'sah-ecg-changes': SAH_ECG_CHANGES,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
