@@ -95,6 +95,10 @@ const TREE_REGISTRY = {
   'neurosyphilis':    { prefix: 'NEUROSYPHILIS',       entryNodeId: 'ns-start',           categoryId: 'infectious-disease' },
   'rabies':           { prefix: 'RABIES',              entryNodeId: 'rabies-start',       categoryId: 'infectious-disease' },
   'burns':            { prefix: 'BURNS',               entryNodeId: 'burn-start',         categoryId: 'trauma-surg' },
+  'ich':              { prefix: 'ICH',                 entryNodeId: 'ich-start',          categoryId: 'neurology' },
+  'aub':              { prefix: 'AUB',                 entryNodeId: 'aub-start',          categoryId: 'ob-gyn' },
+  'status-epilepticus': { prefix: 'STATUS_EPILEPTICUS', entryNodeId: 'se-start',           categoryId: 'neurology' },
+  'first-trimester':  { prefix: 'FIRST_TRIMESTER',    entryNodeId: 'ft-start',           categoryId: 'ob-gyn' },
 };
 
 // Cross-listing: which consults appear in multiple categories

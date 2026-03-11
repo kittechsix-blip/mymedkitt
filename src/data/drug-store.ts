@@ -134,6 +134,35 @@ const ALBUTEROL_NEB: DrugEntry = {
   ],
 };
 
+const AMOXICILLIN: DrugEntry = {
+  id: 'amoxicillin',
+  name: 'Amoxicillin',
+  genericName: 'Amoxicillin',
+  drugClass: 'Aminopenicillin',
+  route: 'PO',
+  indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy'],
+  dosing: [
+    {
+      indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
+      regimen: '875 mg PO BID × 7 days. First-line option for UTI in pregnancy. Guided by local resistance patterns and culture sensitivities.',
+    },
+  ],
+  contraindications: [
+    'Penicillin allergy',
+    'History of amoxicillin-associated cholestatic jaundice/hepatic dysfunction',
+  ],
+  cautions: [
+    'High local E. coli resistance may limit empiric use — check antibiogram',
+    'Mononucleosis — rash risk with aminopenicillins',
+  ],
+  monitoring: 'Urine culture to confirm sensitivity. Repeat culture after treatment to confirm eradication.',
+  notes: 'Generally considered safe in all trimesters of pregnancy. Local resistance patterns should guide empiric therapy — discuss with OB and ID if uncertain.',
+  citations: [
+    'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.',
+    'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.',
+  ],
+};
+
 const AMOXICILLIN_CLAVULANATE: DrugEntry = {
   id: 'amoxicillin-clavulanate',
   name: 'Amoxicillin-Clavulanate (Augmentin)',
@@ -352,6 +381,40 @@ const ATORVASTATIN: DrugEntry = {
   ],
 };
 
+const AZITHROMYCIN: DrugEntry = {
+  id: 'azithromycin',
+  name: 'Azithromycin (Zithromax)',
+  genericName: 'Azithromycin',
+  drugClass: 'Macrolide antibiotic',
+  route: 'PO/IV',
+  indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea'],
+  dosing: [
+    {
+      indication: 'Traveler diarrhea',
+      regimen: '1000 mg PO × 1 dose, or 500 mg PO daily × 3 days. Preferred for Southeast Asia travel (>80% fluoroquinolone-resistant Campylobacter).',
+    },
+    {
+      indication: 'Pediatric diarrhea',
+      regimen: '10 mg/kg PO daily × 3 days. Max 500 mg/dose.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 500 },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to azithromycin or macrolides',
+    'History of cholestatic jaundice/hepatic dysfunction with prior azithromycin use',
+  ],
+  cautions: [
+    'QT prolongation risk \u2014 avoid with other QT-prolonging agents',
+    'Hepatotoxicity \u2014 monitor for signs of liver injury',
+  ],
+  monitoring: 'QTc if concurrent QT-prolonging agents. LFTs if prolonged use or hepatic disease.',
+  notes: 'First-line for traveler\'s diarrhea from Southeast Asia due to high rates of fluoroquinolone-resistant Campylobacter (>80%). Also effective for Shigella and non-typhoidal Salmonella.',
+  citations: [
+    'Riddle MS, et al. ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol. 2016;111(5):602-622.',
+    'CDC. Travelers\' Diarrhea. Yellow Book 2024.',
+  ],
+};
+
 const APIXABAN: DrugEntry = {
   id: 'apixaban',
   name: 'Apixaban',
@@ -441,6 +504,42 @@ const BIVALIRUDIN: DrugEntry = {
   citations: [
     'Amsterdam EA, et al. 2014 AHA/ACC Guideline for Management of NSTE-ACS. J Am Coll Cardiol. 2014;64(24):e189-e228.',
     'Stone GW, et al. Bivalirudin during Primary PCI (HORIZONS-AMI). N Engl J Med. 2008;358(21):2218-2230.',
+  ],
+};
+
+const BISMUTH_SUBSALICYLATE: DrugEntry = {
+  id: 'bismuth-subsalicylate',
+  name: 'Bismuth Subsalicylate (Pepto-Bismol)',
+  genericName: 'Bismuth subsalicylate',
+  drugClass: 'Antisecretory / antimicrobial',
+  route: 'PO',
+  indications: ['Acute diarrhea (symptomatic relief)', 'Traveler\'s diarrhea (treatment and prevention)', 'Nausea/dyspepsia with diarrhea'],
+  dosing: [
+    {
+      indication: 'Acute diarrhea',
+      regimen: '524 mg (2 tablets or 30 mL) PO every 30-60 minutes PRN. Max 8 doses per day (4.2 g/day).',
+    },
+    {
+      indication: 'Traveler diarrhea',
+      regimen: '524 mg PO every 30-60 minutes PRN. Max 8 doses per day. For prevention: 524 mg QID during travel.',
+    },
+  ],
+  contraindications: [
+    'Aspirin/salicylate allergy',
+    'Children or teenagers recovering from chickenpox or flu (Reye syndrome risk)',
+    'Concurrent anticoagulant therapy (contains salicylate)',
+  ],
+  cautions: [
+    'Contains salicylate \u2014 avoid in pregnancy',
+    'May cause black tongue and black stools (benign)',
+    'Avoid in patients taking aspirin or other salicylates (additive toxicity)',
+    'Not recommended for children under 12',
+  ],
+  monitoring: 'Salicylate levels if overdose suspected. Inform patients that black stools are expected and benign.',
+  notes: 'Anti-diarrheal effects via antisecretory mechanism, bacterial toxin binding, and inherent antimicrobial activity. Also alleviates nausea/vomiting by topical effect on gastric mucosa \u2014 preferred when nausea is a prominent complaint. In prevention trials, reduced traveler\'s diarrhea from 61% to 23%.',
+  citations: [
+    'DuPont HL, et al. Prevention of Traveler\'s Diarrhea: Prophylactic Administration of Subsalicylate Bismuth. JAMA. 1980;243(3):237-241.',
+    'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.',
   ],
 };
 
@@ -692,7 +791,7 @@ const CEFTRIAXONE: DrugEntry = {
   genericName: 'Ceftriaxone',
   drugClass: 'Third-generation cephalosporin',
   route: 'IV',
-  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI'],
+  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy'],
   dosing: [
     {
       indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -715,6 +814,10 @@ const CEFTRIAXONE: DrugEntry = {
       indication: 'Pediatric UTI (inpatient/pre-discharge)',
       regimen: '75 mg/kg IV or IM prior to discharge. Max 2 g/dose.',
       weightCalc: { dosePerKg: 75, unit: 'mg', maxDose: 2000 },
+    },
+    {
+      indication: 'Pyelonephritis in pregnancy',
+      regimen: '1 g IV daily. Continue until afebrile 48 hours, then transition to oral cephalexin guided by culture sensitivities. Admit all pregnant patients with pyelonephritis.',
     },
   ],
   contraindications: [
@@ -956,12 +1059,20 @@ const CIPROFLOXACIN: DrugEntry = {
   genericName: 'Ciprofloxacin',
   drugClass: 'Fluoroquinolone',
   route: 'PO/IV',
-  indications: ['Pediatric UTI (IgE-mediated allergy to penicillins AND cephalosporins)', 'Complicated UTI'],
+  indications: ['Pediatric UTI (IgE-mediated allergy to penicillins AND cephalosporins)', 'Complicated UTI', 'Acute infectious diarrhea (adults)', 'Traveler\'s diarrhea (adults)'],
   dosing: [
     {
       indication: 'Pediatric UTI',
       regimen: '20 mg/kg/day divided BID. Max 750 mg/dose (oral).',
       weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 750, dailyDivided: 2 },
+    },
+    {
+      indication: 'Acute diarrhea',
+      regimen: '500 mg PO BID × 3-5 days. First-line empiric antibiotic for adults with fever >38.5°C + positive fecal markers, acute dysentery, or diarrhea >48 hours.',
+    },
+    {
+      indication: 'Traveler diarrhea',
+      regimen: '500 mg PO BID × 3 days. First-line for most regions. For Southeast Asia: use azithromycin instead (>80% fluoroquinolone-resistant Campylobacter).',
     },
   ],
   contraindications: [
@@ -1119,6 +1230,67 @@ const DIGOXIN: DrugEntry = {
   ],
 };
 
+const DIMENHYDRINATE: DrugEntry = {
+  id: 'dimenhydrinate',
+  name: 'Dimenhydrinate',
+  genericName: 'Dimenhydrinate',
+  drugClass: 'Antihistamine / Antiemetic',
+  route: 'IV/PO',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum'],
+  dosing: [
+    {
+      indication: 'NVP — oral',
+      regimen: '50 mg PO QID as needed. Max 200 mg/day if also taking doxylamine. Second-line oral agent per ACOG stepwise pathway.',
+    },
+    {
+      indication: 'NVP — IV',
+      regimen: '50 mg IV in 50 mL normal saline over 20 min, every 6 hours. For patients unable to tolerate oral medications.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Sedation — warn about drowsiness',
+    'Max 200 mg/day when combined with doxylamine (both antihistamines)',
+    'Anticholinergic effects — dry mouth, urinary retention, constipation',
+  ],
+  monitoring: 'Symptom improvement. Sedation level.',
+  notes: 'Second-line oral antiemetic in the ACOG stepwise NVP pathway. Contains diphenhydramine + 8-chlorotheophylline. Can be used orally or IV. Reduce maximum daily dose when combined with doxylamine to avoid excessive antihistamine effects.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+  ],
+};
+
+const DIPHENHYDRAMINE: DrugEntry = {
+  id: 'diphenhydramine',
+  name: 'Diphenhydramine',
+  genericName: 'Diphenhydramine hydrochloride',
+  drugClass: 'Antihistamine / Antiemetic',
+  route: 'PO/IV',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia'],
+  dosing: [
+    {
+      indication: 'NVP — oral',
+      regimen: '25-50 mg PO every 6 hours as needed. Second-line oral agent per ACOG stepwise pathway. Alternative to dimenhydrinate.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'Neonates/premature infants (not applicable in this context)',
+  ],
+  cautions: [
+    'Significant sedation — warn about drowsiness',
+    'Anticholinergic effects',
+    'Avoid combination with other CNS depressants',
+  ],
+  monitoring: 'Symptom improvement. Sedation level.',
+  notes: 'Alternative second-line antiemetic for NVP. Generally considered safe in pregnancy. The active antihistamine component of dimenhydrinate.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+  ],
+};
+
 const DOLUTEGRAVIR: DrugEntry = {
   id: 'dolutegravir',
   name: 'Dolutegravir (Tivicay)',
@@ -1217,6 +1389,40 @@ const DOXYCYCLINE: DrugEntry = {
   notes: 'Alternative for non-pregnant PCN-allergic patients with early syphilis. Evidence is weaker than for penicillin G.',
   citations: [
     'CDC. Sexually Transmitted Infections Treatment Guidelines. 2021.',
+  ],
+};
+
+const DOXYLAMINE: DrugEntry = {
+  id: 'doxylamine',
+  name: 'Doxylamine',
+  genericName: 'Doxylamine succinate',
+  drugClass: 'Antihistamine / Antiemetic',
+  route: 'PO',
+  indications: ['Nausea and vomiting of pregnancy (NVP)'],
+  dosing: [
+    {
+      indication: 'NVP — combination with pyridoxine (first-line)',
+      regimen: '12.5 mg PO TID (with pyridoxine 10-25 mg PO TID). Adjust schedule per symptom severity. ACOG Level A recommendation as first-line pharmacologic therapy for NVP. Superior to pyridoxine alone.',
+    },
+    {
+      indication: 'NVP — delayed-release combination product (Diclegis/Bonjesta)',
+      regimen: 'Diclegis: pyridoxine 10 mg / doxylamine 10 mg — 2 tabs at bedtime initially, up to 4 tabs/day (1 AM + 1 midafternoon + 2 bedtime). Bonjesta: pyridoxine 20 mg / doxylamine 20 mg — 1 tab at bedtime, up to 2 tabs/day. Consider generic pyridoxine + doxylamine for significant cost savings.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'MAO inhibitor use (within 14 days)',
+  ],
+  cautions: [
+    'Sedation — take bedtime dose first',
+    'Anticholinergic effects',
+    'Available OTC as sleep aid (Unisom SleepTabs) — can be split for NVP dosing',
+  ],
+  monitoring: 'Symptom improvement. Ensure patient is tolerating combination.',
+  notes: 'First-line pharmacologic therapy for NVP when combined with pyridoxine (ACOG Level A). The delayed-release combination product (Diclegis) is FDA-approved but expensive. Generic pyridoxine + OTC doxylamine (Unisom SleepTabs, NOT SleepGels which contain diphenhydramine) is a cost-effective alternative.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    'McParlin C, O\'Donnell A, Robson SC, et al. Treatments for hyperemesis gravidarum and nausea and vomiting in pregnancy: a systematic review. JAMA. 2016;316(13):1392-1401.',
   ],
 };
 
@@ -1403,6 +1609,48 @@ const LIDOCAINE: DrugEntry = {
   notes: 'For penile block, NEVER use formulations containing epinephrine. The penis is supplied by end-arteries \u2014 epinephrine can cause ischemic necrosis.',
   citations: [
     'Burnett AL, Sharlip ID. Standard Operating Procedures for Priapism. J Sex Med. 2013;10(1):180-94.',
+  ],
+};
+
+const LOPERAMIDE: DrugEntry = {
+  id: 'loperamide',
+  name: 'Loperamide (Imodium)',
+  genericName: 'Loperamide hydrochloride',
+  drugClass: 'Opioid receptor agonist (peripheral)',
+  route: 'PO',
+  indications: ['Acute diarrhea (symptomatic relief)', 'Traveler\'s diarrhea (adjunct)', 'Diarrhea in pregnancy'],
+  dosing: [
+    {
+      indication: 'Acute diarrhea',
+      regimen: '4 mg PO initially, then 2 mg after each loose stool. Max 16 mg per day.',
+    },
+    {
+      indication: 'Traveler diarrhea',
+      regimen: '4 mg PO initially, then 2 mg after each loose stool. Max 16 mg per day. Use as adjunct with antibiotics \u2014 combination reduces duration by 1 additional day.',
+    },
+    {
+      indication: 'Pregnancy',
+      regimen: '4 mg PO initially, then 2 mg after each loose stool. Max 16 mg per day. FDA Category B \u2014 safest antimotility option in pregnancy.',
+    },
+  ],
+  contraindications: [
+    'Bloody diarrhea or dysentery',
+    'Suspected Shiga toxin-producing E. coli (STEC) \u2014 increases HUS risk',
+    'High fever (>38.5\u00b0C) with suspected invasive bacterial pathogen',
+    'Children under 2 years',
+  ],
+  cautions: [
+    'Avoid in immunocompromised patients with suspected infectious diarrhea',
+    'Avoid with suspected inflammatory diarrhea (positive fecal leukocytes)',
+    'Risk of toxic megacolon with C. difficile or IBD',
+    'Not recommended in children for acute gastroenteritis',
+    'Overdose can cause cardiac arrhythmias \u2014 do not exceed recommended dose',
+  ],
+  monitoring: 'Clinical response. Discontinue if symptoms worsen, fever develops, or abdominal distension occurs.',
+  notes: 'Preferred antimotility agent \u2014 slows intraluminal flow by inhibiting peristalsis, increasing intestinal absorption of fluid and electrolytes. Peripheral opioid that does NOT penetrate the CNS: no central side effects or addiction potential. When combined with antibiotics in traveler\'s diarrhea, reduces illness duration by 1 additional day.',
+  citations: [
+    'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.',
+    'Riddle MS, et al. ACG Clinical Guideline: Diagnosis, Treatment, and Prevention of Acute Diarrheal Infections in Adults. Am J Gastroenterol. 2016;111(5):602-622.',
   ],
 };
 
@@ -1708,6 +1956,125 @@ const MEDROXYPROGESTERONE: DrugEntry = {
   ],
 };
 
+const METHOTREXATE: DrugEntry = {
+  id: 'methotrexate',
+  name: 'Methotrexate',
+  genericName: 'Methotrexate',
+  drugClass: 'Antimetabolite / Folic acid antagonist',
+  route: 'IM',
+  indications: ['Ectopic pregnancy (medical management)'],
+  dosing: [
+    {
+      indication: 'Ectopic pregnancy — single-dose regimen',
+      regimen: '50 mg/m² IM single dose. Administered in consultation with OB. Follow-up beta-hCG on day 4 and day 7. If <15% decline between day 4-7, repeat dose. Success rate >90% when beta-hCG <5000 mIU/mL.',
+    },
+  ],
+  contraindications: [
+    'Immunodeficiency',
+    'Cytopenia (anemia, leukopenia, thrombocytopenia)',
+    'Active pulmonary disease',
+    'Active peptic ulcer disease',
+    'Hepatic dysfunction',
+    'Renal dysfunction (creatinine >1.5 mg/dL)',
+    'Breastfeeding',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Beta-hCG >5000 mIU/mL — OR 5.45 for treatment failure',
+    'Fetal cardiac activity present — OR 9.1 for failure',
+    'Patient must be reliable for follow-up (serial beta-hCG monitoring)',
+    'Avoid NSAIDs, folate supplements during treatment (reduce efficacy)',
+    'Avoid alcohol, sun exposure',
+  ],
+  monitoring: 'Beta-hCG on day 4 and day 7 post-injection. CBC, BMP, LFTs prior to administration. Weekly beta-hCG until undetectable.',
+  notes: 'Medical management of stable, unruptured tubal ectopic pregnancy. Single-dose regimen is most common in ED/OB setting. Multi-dose regimens (MTX on days 1, 3, 5, 7 with leucovorin rescue) have higher success rates but more side effects. Patients should avoid conception for 3 months after treatment. Always coordinate with OB — this is not typically initiated independently by the ED.',
+  citations: [
+    'ACOG Practice Bulletin No. 193; Summary: Tubal Ectopic Pregnancy. Obstet Gynecol. 2018;131(3):613-615.',
+    'Menon S, Colins J, Barnhart KT. Establishing a human chorionic gonadotropin cutoff to guide methotrexate treatment of ectopic pregnancy: a systematic review. Fertil Steril. 2007;87(3):481-484.',
+    'Barnhart KT, Gosman G, Ashby R, et al. The medical management of ectopic pregnancy: a meta-analysis comparing "single dose" and "multidose" regimens. Obstet Gynecol. 2003;101(4):778-784.',
+  ],
+};
+
+const METOCLOPRAMIDE: DrugEntry = {
+  id: 'metoclopramide',
+  name: 'Metoclopramide',
+  genericName: 'Metoclopramide hydrochloride',
+  drugClass: 'Dopamine antagonist / Prokinetic antiemetic',
+  route: 'IV/PO',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum'],
+  dosing: [
+    {
+      indication: 'NVP / Hyperemesis — IV',
+      regimen: '10 mg IV every 8 hours. Reasonable first-line IV antiemetic in pregnancy — no association with fetal malformations.',
+    },
+    {
+      indication: 'NVP — oral',
+      regimen: '10 mg PO every 8 hours, 30 minutes before meals. For patients tolerating oral medications who have failed pyridoxine/doxylamine.',
+    },
+  ],
+  contraindications: [
+    'GI obstruction, perforation, or hemorrhage',
+    'Pheochromocytoma',
+    'Seizure disorder (lowers seizure threshold)',
+    'Known hypersensitivity',
+    'Concurrent use of other dopamine antagonists',
+  ],
+  cautions: [
+    'Extrapyramidal symptoms (dystonia, akathisia) — more common in young women',
+    'Tardive dyskinesia with prolonged use (>12 weeks)',
+    'Treat acute dystonia with diphenhydramine 50 mg IV',
+    'QT prolongation risk — avoid in patients with baseline QT prolongation',
+  ],
+  monitoring: 'Symptom improvement. Watch for extrapyramidal symptoms (especially acute dystonia).',
+  notes: 'Preferred IV antiemetic for pregnancy-related nausea because it has not been associated with fetal malformations, unlike ondansetron which has a possible small risk of fetal cardiac abnormalities. Promotes gastric emptying in addition to central antiemetic effects.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.',
+  ],
+};
+
+const METRONIDAZOLE: DrugEntry = {
+  id: 'metronidazole',
+  name: 'Metronidazole (Flagyl)',
+  genericName: 'Metronidazole',
+  drugClass: 'Nitroimidazole antibiotic / antiprotozoal',
+  route: 'PO/IV',
+  indications: ['C. difficile infection (alternative)', 'Persistent diarrhea (Giardia coverage)', 'Diarrhea in pregnancy (after first trimester)'],
+  dosing: [
+    {
+      indication: 'C difficile',
+      regimen: 'Non-severe: 500 mg PO TID × 10-14 days. Alternative to vancomycin (vancomycin preferred per 2017 IDSA). Fulminant: 500 mg IV q8h (combined with PO/rectal vancomycin).',
+    },
+    {
+      indication: 'Persistent diarrhea',
+      regimen: '250 mg PO TID × 7-10 days. Empiric coverage for Giardia in diarrhea lasting 2-4 weeks without systemic symptoms or dysentery.',
+    },
+    {
+      indication: 'Pregnancy',
+      regimen: '500 mg PO TID × 10 days. FDA Category B \u2014 use after first trimester when benefits outweigh risks. Coordinate with OB/GYN.',
+    },
+  ],
+  contraindications: [
+    'First trimester of pregnancy (relative)',
+    'Concurrent alcohol use \u2014 disulfiram-like reaction',
+    'Concurrent disulfiram use within past 2 weeks',
+    'Known hypersensitivity to nitroimidazoles',
+  ],
+  cautions: [
+    'Disulfiram-like reaction with alcohol \u2014 strictly avoid alcohol during treatment and for 3 days after',
+    'Can cause nausea and vomiting \u2014 problematic in GI illness',
+    'Increases warfarin, phenytoin, and phenobarbital levels',
+    'Peripheral neuropathy with prolonged use',
+    'Metallic taste common',
+  ],
+  monitoring: 'CBC with prolonged use. LFTs if hepatic disease. INR if on warfarin. Monitor for peripheral neuropathy.',
+  notes: 'Alternative to vancomycin for non-severe C. difficile infection. First-line empiric therapy for persistent diarrhea (2-4 weeks) targeting Giardia. For fulminant C. difficile, used IV in combination with oral/rectal vancomycin. No longer recommended as sole first-line for C. difficile per 2017 IDSA/SHEA guidelines.',
+  citations: [
+    'McDonald LC, et al. Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by IDSA and SHEA. Clin Infect Dis. 2018;66(7):987-994.',
+    'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.',
+  ],
+};
+
 const METOPROLOL: DrugEntry = {
   id: 'metoprolol',
   name: 'Metoprolol',
@@ -1856,6 +2223,44 @@ const NICARDIPINE: DrugEntry = {
   ],
 };
 
+const NITROFURANTOIN: DrugEntry = {
+  id: 'nitrofurantoin',
+  name: 'Nitrofurantoin',
+  genericName: 'Nitrofurantoin monohydrate/macrocrystals',
+  drugClass: 'Nitrofuran antibiotic',
+  route: 'PO',
+  indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy', 'Uncomplicated cystitis'],
+  dosing: [
+    {
+      indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
+      regimen: '100 mg (macrobid) PO BID × 7 days. ACOG: appropriate in first trimester only "when no other suitable alternative antibiotics are available." Safe in second and third trimesters.',
+    },
+    {
+      indication: 'Uncomplicated cystitis (non-pregnant)',
+      regimen: '100 mg (macrobid) PO BID × 5 days.',
+    },
+  ],
+  contraindications: [
+    'CrCl <30 mL/min (inadequate urinary concentration)',
+    'G6PD deficiency (hemolytic anemia risk)',
+    'Term pregnancy (38-42 weeks) — risk of neonatal hemolytic anemia',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'First trimester use: ACOG advises only when no suitable alternatives available',
+    'Pulmonary toxicity (rare, with chronic use)',
+    'Peripheral neuropathy (rare)',
+    'GI upset — take with food',
+    'Colors urine brown/rust — warn patient',
+  ],
+  monitoring: 'Urine culture to confirm eradication. Watch for pulmonary symptoms with prolonged use.',
+  notes: 'Concentrated in urine — effective for lower UTI but NOT for pyelonephritis (does not achieve adequate serum/tissue levels). ACOG 2017 review found the association between nitrofurantoin and birth defects is uncertain, but recommends caution in the first trimester as a precaution. Safe and effective in second/third trimesters. Good option when local E. coli resistance to amoxicillin/ampicillin is high.',
+  citations: [
+    'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.',
+    'Kazemier BM, et al. Maternal and neonatal consequences of treated and untreated asymptomatic bacteriuria in pregnancy. Lancet Infect Dis. 2015;15(11):1324-1333.',
+  ],
+};
+
 const NITROGLYCERIN: DrugEntry = {
   id: 'nitroglycerin',
   name: 'Nitroglycerin',
@@ -1892,6 +2297,56 @@ const NITROGLYCERIN: DrugEntry = {
   citations: [
     'Amsterdam EA, et al. 2014 AHA/ACC Guideline for Management of NSTE-ACS. J Am Coll Cardiol. 2014;64(24):e189-e228.',
     'Thadani U. Nitrate Therapy and Nitrate Tolerance in Patients with Coronary Artery Disease. Curr Pharm Des. 2014;20(25):3966-79.',
+  ],
+};
+
+const ONDANSETRON: DrugEntry = {
+  id: 'ondansetron',
+  name: 'Ondansetron (Zofran)',
+  genericName: 'Ondansetron hydrochloride',
+  drugClass: '5-HT3 receptor antagonist / Antiemetic',
+  route: 'IV/PO (ODT)',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Postoperative nausea/vomiting', 'Acute diarrhea with nausea/vomiting', 'Pediatric gastroenteritis (facilitates oral rehydration)'],
+  dosing: [
+    {
+      indication: 'NVP / Hyperemesis — IV',
+      regimen: '4-8 mg IV over 15 min every 12 hours. Effective for all severities. Reserve as second-line IV agent — exhaust metoclopramide first given possible small risk of fetal cardiac abnormalities.',
+    },
+    {
+      indication: 'NVP — oral',
+      regimen: '4-8 mg PO every 8-12 hours as needed. Consider only after pyridoxine/doxylamine and other agents have been tried.',
+    },
+    {
+      indication: 'Acute diarrhea',
+      regimen: '4 mg IV or 4 mg ODT (orally disintegrating tablet) every 4-6 hours PRN. Max 16 mg per day.',
+    },
+    {
+      indication: 'Pediatric diarrhea',
+      regimen: '0.15 mg/kg IV or ODT. Max 4 mg/dose. Single dose often sufficient to facilitate oral rehydration.',
+      weightCalc: { dosePerKg: 0.15, unit: 'mg', maxDose: 4 },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'Congenital long QT syndrome',
+    'Concurrent use of apomorphine',
+  ],
+  cautions: [
+    'Possible small increased risk of fetal cardiac abnormalities (cleft palate, cardiac septal defects) — 2016 systematic review',
+    'QT prolongation — avoid in patients with baseline prolongation or electrolyte abnormalities',
+    'Serotonin syndrome risk when combined with serotonergic agents',
+    'May mask progressive ileus — monitor for abdominal distension',
+    'Use lowest effective dose in hepatic impairment (max 8 mg/day)',
+    'Constipation (common side effect)',
+    'Headache',
+  ],
+  monitoring: 'Symptom improvement. ECG if concurrent QT-prolonging medications or QT prolongation risk factors. Consider baseline ECG in patients with cardiac history.',
+  notes: 'Highly effective antiemetic but ACOG recommends exhausting other options first in pregnancy due to a possible small risk of fetal cardiac abnormalities. Key role in pediatric gastroenteritis: a single dose significantly reduces vomiting and facilitates oral rehydration, decreasing the need for IV fluids and hospital admission. In adults with diarrheal illness, useful when vomiting prevents adequate oral fluid intake.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    'Danielsson B, Noor AH, Hoog A, et al. Association of ondansetron use in early pregnancy with congenital malformations. JAMA. 2018;320(23):2429-2437.',
+    'Freedman SB, et al. Oral Ondansetron for Gastroenteritis in a Pediatric Emergency Department. N Engl J Med. 2006;354(16):1698-1705.',
+    'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.',
   ],
 };
 
@@ -2438,6 +2893,43 @@ const RIVAROXABAN: DrugEntry = {
   ],
 };
 
+const RH_IMMUNE_GLOBULIN: DrugEntry = {
+  id: 'rh-immune-globulin',
+  name: 'Rh(D) Immune Globulin (RhoGAM)',
+  genericName: 'Rh(D) immune globulin',
+  drugClass: 'Immune globulin',
+  route: 'IM',
+  indications: ['Prevention of Rh D alloimmunization', 'First trimester vaginal bleeding (Rh-negative patients)', 'Miscarriage in Rh-negative patients'],
+  dosing: [
+    {
+      indication: 'First trimester — vaginal bleeding or miscarriage',
+      regimen: '50 mcg (MICRhoGAM) IM within 72 hours. If 50 mcg unavailable, 300 mcg (standard RhoGAM) dose may be substituted. Only for Rh(D)-negative AND unsensitized patients.',
+    },
+    {
+      indication: 'Second/third trimester or significant hemorrhage',
+      regimen: '300 mcg (standard RhoGAM) IM within 72 hours of sensitizing event. Kleihauer-Betke test if large fetomaternal hemorrhage suspected — additional doses may be needed.',
+    },
+  ],
+  contraindications: [
+    'Rh(D)-positive patient',
+    'Patient already sensitized to anti-D antibodies',
+    'Known hypersensitivity to human immune globulin',
+    'IgA deficiency with anti-IgA antibodies (anaphylaxis risk)',
+  ],
+  cautions: [
+    'First trimester use is controversial — ACOG 2017 states no evidence-based recommendation can be made for use at or before 12 weeks',
+    'Reasonable to withhold in minimal early first trimester bleeding',
+    'Consider administration for heavy bleeding or near 12 weeks gestation',
+    'Discuss institutional policy with OB department',
+  ],
+  monitoring: 'Confirm Rh status and antibody screen prior to administration. Type and screen.',
+  notes: 'Prevents maternal alloimmunization to Rh(D) antigen which can cause hemolytic disease of the fetus in subsequent pregnancies. ACOG 2017 specifically states that administration in threatened miscarriage at or before 12 weeks is controversial — the decision should be individualized and discussed with OB. The 50 mcg dose (MICRhoGAM) is sufficient for first trimester events but may not be stocked at all facilities.',
+  citations: [
+    'ACOG Practice Bulletin No. 181: Prevention of Rh D Alloimmunization. Obstet Gynecol. 2017;130(2):e57-e70.',
+    'Hannafin B, Lovecchio F, Blackburn P. Do Rh-negative women with first trimester spontaneous abortions need Rh immune globulin? Am J Emerg Med. 2006;24(4):487-489.',
+  ],
+};
+
 const SODIUM_ZIRCONIUM_CYCLOSILICATE: DrugEntry = {
   id: 'sodium-zirconium-cyclosilicate',
   name: 'Lokelma (Sodium Zirconium Cyclosilicate)',
@@ -2590,7 +3082,7 @@ const THIAMINE: DrugEntry = {
   genericName: 'Thiamine hydrochloride',
   drugClass: 'Vitamin',
   route: 'IV / PO',
-  indications: ['Hyponatremia (ODS prevention)', 'Wernicke encephalopathy'],
+  indications: ['Hyponatremia (ODS prevention)', 'Wernicke encephalopathy', 'Hyperemesis gravidarum prevention'],
   dosing: [
     {
       indication: 'Hyponatremia (ODS prevention)',
@@ -2599,6 +3091,10 @@ const THIAMINE: DrugEntry = {
     {
       indication: 'Wernicke encephalopathy',
       regimen: '500 mg IV TID x 3 days, then 250 mg IV daily x 3-5 days. Give BEFORE glucose in alcoholic patients — glucose metabolism consumes remaining thiamine stores.',
+    },
+    {
+      indication: 'Hyperemesis gravidarum — Wernicke prevention',
+      regimen: '100 mg IV once, prior to glucose-containing fluids. ACOG recommends thiamine for patients with protracted vomiting receiving dextrose-containing IV fluids. Prevents Wernicke encephalopathy.',
     },
   ],
   contraindications: [],
@@ -2694,8 +3190,8 @@ const VANCOMYCIN: DrugEntry = {
   name: 'Vancomycin',
   genericName: 'Vancomycin hydrochloride',
   drugClass: 'Glycopeptide',
-  route: 'IV',
-  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)'],
+  route: 'IV/PO',
+  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)'],
   dosing: [
     {
       indication: 'Meningitic',
@@ -2704,6 +3200,10 @@ const VANCOMYCIN: DrugEntry = {
     {
       indication: 'Non-meningitic',
       regimen: '15 mg/kg IV q8h.',
+    },
+    {
+      indication: 'C difficile',
+      regimen: 'Non-severe and severe: 125 mg PO QID × 10-14 days. Fulminant: 500 mg PO/NG QID + IV metronidazole 500 mg q8h ± rectal vancomycin enema. NOTE: This is ORAL vancomycin \u2014 not systemically absorbed.',
     },
   ],
   contraindications: [
@@ -2987,6 +3487,40 @@ const MORPHINE: DrugEntry = {
   citations: [
     'Greenhalgh DG. Management of Burns. NEJM. 2019;380(24):2349-2359.',
     'Bitter CC et al. WMS Clinical Practice Guideline on Care of Burns in the Wilderness. Wilderness Environ Med. 2025;36(4):549-558.',
+  ],
+};
+
+const MISOPROSTOL: DrugEntry = {
+  id: 'misoprostol',
+  name: 'Misoprostol',
+  genericName: 'Misoprostol',
+  drugClass: 'Prostaglandin E1 analog',
+  route: 'Intravaginal/PO/SL',
+  indications: ['Incomplete miscarriage (medical management)', 'Missed miscarriage', 'Cervical ripening'],
+  dosing: [
+    {
+      indication: 'Miscarriage — medical management',
+      regimen: '800 mcg intravaginally, single dose. 91% effective within 7 days. May repeat once if incomplete passage. Expect significant cramping and bleeding. Premedicate with ibuprofen 600 mg PO for pain.',
+    },
+  ],
+  contraindications: [
+    'Confirmed ectopic pregnancy',
+    'Hemodynamic instability (needs surgical evacuation)',
+    'Septic abortion',
+    'Known hypersensitivity to prostaglandins',
+    'IUD in place',
+  ],
+  cautions: [
+    'Significant cramping and bleeding expected — counsel patient',
+    'Up to 40% may ultimately require unplanned surgical management',
+    'Fever and chills are common side effects (not necessarily infection)',
+    'Diarrhea may occur',
+  ],
+  monitoring: 'Follow-up ultrasound in 1-2 weeks to confirm complete passage. Return to ED for heavy bleeding, fever >100.4°F, or foul-smelling discharge.',
+  notes: 'Medical management of nonviable pregnancy as an alternative to expectant management or D&C. High patient satisfaction rates comparable to surgical management. Intravaginal route preferred for miscarriage management (higher efficacy than oral). Always in consultation with OB.',
+  citations: [
+    'Bique C, Usta M, Debora B, et al. Comparison of misoprostol and manual vacuum aspiration for the treatment of incomplete abortion. Int J Gynaecol Obstet. 2007;98(3):222-226.',
+    'Kim C, Barnard S, Neilson JP, et al. Medical treatments for incomplete miscarriage. Cochrane Database Syst Rev. 2017;1:CD007223.',
   ],
 };
 
@@ -3448,6 +3982,79 @@ const PHENOBARBITAL: DrugEntry = {
   ],
 };
 
+const PROCHLORPERAZINE: DrugEntry = {
+  id: 'prochlorperazine',
+  name: 'Prochlorperazine',
+  genericName: 'Prochlorperazine',
+  drugClass: 'Phenothiazine / Dopamine antagonist antiemetic',
+  route: 'PR/IM',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Nausea/vomiting (general)'],
+  dosing: [
+    {
+      indication: 'NVP — rectal',
+      regimen: '25 mg PR every 12 hours. Second-line agent in ACOG stepwise NVP pathway. Useful when patient cannot tolerate oral medications.',
+    },
+    {
+      indication: 'Nausea/vomiting — IM',
+      regimen: '5-10 mg IM every 6-8 hours (max 40 mg/day).',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to phenothiazines',
+    'CNS depression / comatose states',
+    'Bone marrow suppression',
+  ],
+  cautions: [
+    'Extrapyramidal symptoms (dystonia, akathisia) — treat with diphenhydramine',
+    'Neuroleptic malignant syndrome (rare)',
+    'Orthostatic hypotension',
+    'Sedation',
+    'QT prolongation',
+  ],
+  monitoring: 'Symptom improvement. Watch for extrapyramidal symptoms.',
+  notes: 'Second-line antiemetic for NVP. Rectal route is preferred in the ACOG stepwise pathway for patients who cannot tolerate oral medications. Effective but carries risk of extrapyramidal effects, particularly in young women.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+  ],
+};
+
+const PROMETHAZINE: DrugEntry = {
+  id: 'promethazine',
+  name: 'Promethazine',
+  genericName: 'Promethazine hydrochloride',
+  drugClass: 'Phenothiazine / Antihistamine antiemetic',
+  route: 'IV/PO/PR',
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Nausea/vomiting (general)'],
+  dosing: [
+    {
+      indication: 'NVP — oral/rectal',
+      regimen: '12.5 mg PO or PR every 6 hours. Second-line agent in ACOG stepwise NVP pathway.',
+    },
+    {
+      indication: 'NVP / Hyperemesis — IV',
+      regimen: '12.5 mg IV every 6 hours. MUST dilute and administer slowly. NEVER give IV push undiluted — severe tissue necrosis risk.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to phenothiazines',
+    'CNS depression / comatose states',
+    'Intra-arterial injection (gangrene risk)',
+    'Subcutaneous injection (tissue necrosis)',
+  ],
+  cautions: [
+    'SEVERE tissue necrosis if extravasation or intra-arterial injection — black box warning',
+    'Preferred route is deep IM or well-running IV, diluted, slow push',
+    'Significant sedation',
+    'Respiratory depression (especially combined with opioids)',
+    'Extrapyramidal symptoms',
+  ],
+  monitoring: 'IV site integrity (extravasation risk). Sedation and respiratory status. Symptom improvement.',
+  notes: 'Available in oral, rectal, and parenteral formulations. IV administration carries a BLACK BOX WARNING for severe tissue injury — must be diluted and given through a well-running IV line. IM injection should be deep into large muscle. Despite risks, widely used and effective antiemetic in pregnancy.',
+  citations: [
+    'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+  ],
+};
+
 const PROPOFOL: DrugEntry = {
   id: 'propofol',
   name: 'Propofol (Diprivan)',
@@ -3488,8 +4095,8 @@ const PYRIDOXINE: DrugEntry = {
   name: 'Pyridoxine (Vitamin B6)',
   genericName: 'Pyridoxine hydrochloride',
   drugClass: 'Vitamin / Antidote',
-  route: 'IV',
-  indications: ['Isoniazid (INH) toxicity — seizures', 'Pyridoxine-dependent epilepsy (neonatal)'],
+  route: 'IV/PO',
+  indications: ['Isoniazid (INH) toxicity — seizures', 'Pyridoxine-dependent epilepsy (neonatal)', 'Nausea and vomiting of pregnancy (NVP)'],
   dosing: [
     {
       indication: 'INH toxicity — seizure antidote',
@@ -3498,6 +4105,10 @@ const PYRIDOXINE: DrugEntry = {
     {
       indication: 'Pyridoxine-dependent epilepsy (neonatal/infant)',
       regimen: '100 mg IV single dose. Consider in neonates/infants with unexplained refractory seizures. May be both diagnostic and therapeutic. If seizures stop, confirms diagnosis.',
+    },
+    {
+      indication: 'NVP — first-line antiemetic (ACOG Level A)',
+      regimen: '10-25 mg PO TID, alone or in combination with doxylamine 12.5 mg PO TID. First-line pharmacologic therapy per ACOG. Superior efficacy when combined with doxylamine.',
     },
   ],
   contraindications: [
@@ -3511,6 +4122,51 @@ const PYRIDOXINE: DrugEntry = {
   notes: 'Critical antidote for INH-induced seizures. INH inhibits pyridoxal kinase, depleting active pyridoxine (pyridoxal 5\'-phosphate), which is an essential cofactor for glutamic acid decarboxylase — the enzyme that converts glutamate to GABA. Without GABA synthesis, seizures are refractory to all standard anticonvulsants. Always give pyridoxine when INH toxicity is suspected — benzodiazepines alone will not terminate the seizures.',
   citations: [
     'Betjemann JP, et al. Status Epilepticus. Emergency Medicine Practice. 2025;27(9).',
+  ],
+};
+
+const TMP_SMX: DrugEntry = {
+  id: 'tmp-smx',
+  name: 'TMP-SMX (Bactrim)',
+  genericName: 'Trimethoprim-sulfamethoxazole',
+  drugClass: 'Sulfonamide antibiotic combination',
+  route: 'PO',
+  indications: ['Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea'],
+  dosing: [
+    {
+      indication: 'Acute diarrhea',
+      regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID × 3-5 days.',
+    },
+    {
+      indication: 'Traveler diarrhea',
+      regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID × 3-5 days. Combination with loperamide is most efficacious regimen.',
+    },
+    {
+      indication: 'Pediatric diarrhea',
+      regimen: '8 mg/kg/day (TMP component) divided BID × 3-5 days. Max 320 mg TMP per day.',
+      weightCalc: { dosePerKg: 8, unit: 'mg TMP', maxDose: 320, dailyDivided: 2 },
+    },
+  ],
+  contraindications: [
+    'Sulfonamide allergy',
+    'Pregnancy (especially first trimester and near term) \u2014 folate antagonism',
+    'Severe hepatic or renal insufficiency',
+    'Megaloblastic anemia due to folate deficiency',
+    'Infants under 2 months',
+  ],
+  cautions: [
+    'Photosensitivity \u2014 advise sun protection',
+    'Can cause hyperkalemia \u2014 monitor potassium in renal impairment',
+    'Increases warfarin effect \u2014 monitor INR',
+    'Increases phenytoin levels',
+    'Stevens-Johnson syndrome risk (rare)',
+    'G6PD deficiency \u2014 risk of hemolytic anemia',
+  ],
+  monitoring: 'CBC, renal function, potassium. INR if on warfarin. Watch for rash (discontinue immediately).',
+  notes: 'First-line empiric antibiotic for children with acute infectious diarrhea. In adults, used as alternative to fluoroquinolones. Only 71% susceptibility among E. coli isolates limits utility in some settings. Combination with loperamide is the most efficacious regimen for traveler\'s diarrhea.',
+  citations: [
+    'Ericsson CD, et al. Treatment of Traveler\'s Diarrhea with Sulfamethoxazole and Trimethoprim and Loperamide. JAMA. 1990;263(2):257-261.',
+    'Shane AL, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.',
   ],
 };
 
@@ -3595,15 +4251,18 @@ export const ALL_DRUGS: DrugEntry[] = [
   ALBUTEROL_NEB,
   ALTEPLASE,
   AMIODARONE,
+  AMOXICILLIN,
   AMOXICILLIN_CLAVULANATE,
   AMPICILLIN,
   APIXABAN,
   ASPIRIN,
   ATORVASTATIN,
+  AZITHROMYCIN,
   BACITRACIN,
   BENZATHINE_PENICILLIN,
   BIKTARVY,
   BIVALIRUDIN,
+  BISMUTH_SUBSALICYLATE,
   BUDESONIDE_NEB,
   BUMETANIDE,
   CALCIUM_CHLORIDE,
@@ -3625,8 +4284,11 @@ export const ALL_DRUGS: DrugEntry[] = [
   DIAZEPAM,
   DIGOXIN,
   DILTIAZEM,
+  DIMENHYDRINATE,
+  DIPHENHYDRAMINE,
   DOLUTEGRAVIR,
   DOXYCYCLINE,
+  DOXYLAMINE,
   EDOXABAN,
   ENOXAPARIN,
   EPINEPHRINE,
@@ -3645,17 +4307,24 @@ export const ALL_DRUGS: DrugEntry[] = [
   LACOSAMIDE,
   LEVETIRACETAM,
   LIDOCAINE,
+  LOPERAMIDE,
   LORAZEPAM,
   SODIUM_ZIRCONIUM_CYCLOSILICATE,
   MAGNESIUM_SULFATE,
   MEDROXYPROGESTERONE,
+  METHOTREXATE,
+  METOCLOPRAMIDE,
   METOLAZONE,
+  METRONIDAZOLE,
   METOPROLOL,
   MIDAZOLAM,
   MORPHINE,
+  MISOPROSTOL,
   NACL_TABLETS,
   NICARDIPINE,
+  NITROFURANTOIN,
   NITROGLYCERIN,
+  ONDANSETRON,
   ORAL_UREA,
   OXYTOCIN,
   PENICILLIN_G_IV,
@@ -3669,6 +4338,8 @@ export const ALL_DRUGS: DrugEntry[] = [
   PREDNISOLONE,
   PROCAINAMIDE,
   PROCAINE_PENICILLIN,
+  PROCHLORPERAZINE,
+  PROMETHAZINE,
   PROPOFOL,
   PROTAMINE,
   PYRIDOXINE,
@@ -3678,11 +4349,13 @@ export const ALL_DRUGS: DrugEntry[] = [
   REGULAR_INSULIN,
   RITONAVIR,
   RIVAROXABAN,
+  RH_IMMUNE_GLOBULIN,
   SILVER_SULFADIAZINE,
   TENECTEPLASE,
   TDF_FTC,
   TERBUTALINE,
   THIAMINE,
+  TMP_SMX,
   THIOPENTAL,
   TICAGRELOR,
   TRANEXAMIC_ACID,
@@ -3716,13 +4389,16 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/alteplase|tPA/i, 'alteplase'],
   [/amiodarone|cordarone/i, 'amiodarone'],
   [/amoxicillin.clavulanate|augmentin|amox.clav/i, 'amoxicillin-clavulanate'],
+  [/amoxicillin(?!.*clav)/i, 'amoxicillin'],
   [/ampicillin/i, 'ampicillin'],
   [/apixaban/i, 'apixaban'],
   [/aspirin|ASA|acetylsalicylic/i, 'aspirin'],
   [/atorvastatin|lipitor/i, 'atorvastatin'],
+  [/azithromycin|zithromax|z-?pack/i, 'azithromycin'],
   [/bacitracin/i, 'bacitracin'],
   [/biktarvy|BIC\/FTC\/TAF/i, 'biktarvy'],
   [/bivalirudin|angiomax/i, 'bivalirudin'],
+  [/bismuth|pepto/i, 'bismuth-subsalicylate'],
   [/budesonide|pulmicort/i, 'budesonide-neb'],
   [/bumetanide|bumex/i, 'bumetanide'],
   [/benzathine.*penicillin/i, 'benzathine-penicillin'],
@@ -3745,8 +4421,11 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/diazepam|valium/i, 'diazepam'],
   [/digoxin|digitalis|lanoxin/i, 'digoxin'],
   [/diltiazem|cardizem/i, 'diltiazem'],
+  [/dimenhydrinate|dramamine|gravol/i, 'dimenhydrinate'],
+  [/diphenhydramine|benadryl/i, 'diphenhydramine'],
   [/dolutegravir|tivicay/i, 'dolutegravir'],
   [/doxycycline/i, 'doxycycline'],
+  [/doxylamine|unisom.*sleep.*tab|diclegis|bonjesta/i, 'doxylamine'],
   [/edoxaban/i, 'edoxaban'],
   [/enoxaparin|LMWH|low.molecular/i, 'enoxaparin'],
   [/epinephrine|adrenaline/i, 'epinephrine'],
@@ -3765,17 +4444,24 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/lacosamide|vimpat/i, 'lacosamide'],
   [/levetiracetam|keppra/i, 'levetiracetam'],
   [/lidocaine/i, 'lidocaine'],
+  [/loperamide|imodium/i, 'loperamide'],
   [/lorazepam|ativan/i, 'lorazepam'],
   [/lokelma|sodium\s*zirconium|szc/i, 'sodium-zirconium-cyclosilicate'],
   [/magnesium sulfate|mag sulfate|MgSO4/i, 'magnesium-sulfate'],
   [/medroxyprogesterone|MPA|provera|depo.provera/i, 'medroxyprogesterone'],
+  [/methotrexate|MTX|trexall/i, 'methotrexate'],
+  [/metoclopramide|reglan/i, 'metoclopramide'],
   [/metolazone|zaroxolyn/i, 'metolazone'],
+  [/metronidazole|flagyl/i, 'metronidazole'],
   [/metoprolol|lopressor|toprol/i, 'metoprolol'],
   [/midazolam|versed/i, 'midazolam'],
+  [/misoprostol|cytotec/i, 'misoprostol'],
   [/morphine/i, 'morphine'],
   [/nacl.*tab|salt.*tab|sodium\s*chloride.*tab/i, 'nacl-tablets'],
   [/nicardipine|cardene/i, 'nicardipine'],
+  [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],
   [/nitroglycerin|nitro|glyceryl trinitrate|NTG/i, 'nitroglycerin'],
+  [/ondansetron|zofran/i, 'ondansetron'],
   [/oxytocin|pitocin/i, 'oxytocin'],
   [/oral.*urea|ure-na/i, 'oral-urea'],
   [/aqueous.*penicillin|penicillin G.*IV|crystalline.*penicillin/i, 'penicillin-g-iv'],
@@ -3787,6 +4473,8 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/kcl\s*oral|potassium\s*chloride.*oral|oral\s*potassium|k-dur|klor-con/i, 'potassium-chloride-oral'],
   [/procainamide|pronestyl/i, 'procainamide'],
   [/procaine.*penicillin/i, 'procaine-penicillin'],
+  [/prochlorperazine|compazine/i, 'prochlorperazine'],
+  [/promethazine|phenergan/i, 'promethazine'],
   [/propofol|diprivan/i, 'propofol'],
   [/protamine/i, 'protamine'],
   [/prasugrel|effient/i, 'prasugrel'],
@@ -3796,11 +4484,13 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/regular\s*insulin|insulin\s*regular|humulin/i, 'regular-insulin'],
   [/ritonavir|norvir/i, 'ritonavir'],
   [/rivaroxaban/i, 'rivaroxaban'],
+  [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
   [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
   [/tenecteplase|TNKase/i, 'tenecteplase'],
   [/tenofovir.*emtricitabine|truvada|TDF\/FTC/i, 'tdf-ftc'],
   [/terbutaline|brethine/i, 'terbutaline'],
   [/thiamine|vitamin\s*b1/i, 'thiamine'],
+  [/tmp-?smx|bactrim|sulfamethoxazole|trimethoprim/i, 'tmp-smx'],
   [/thiopental|pentothal/i, 'thiopental'],
   [/ticagrelor|brilinta/i, 'ticagrelor'],
   [/tranexamic.*acid|TXA/i, 'tranexamic-acid'],

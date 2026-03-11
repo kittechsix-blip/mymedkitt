@@ -149,6 +149,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 19,
                 entryNodeId: 'psych-start',
+            },
+            {
+                id: 'first-trimester',
+                title: 'First Trimester Emergencies',
+                subtitle: 'Assessment \u2192 Ectopic \u2192 Miscarriage \u2192 NVP/Hyperemesis \u2192 Nonobstetric \u2192 Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 33,
+                entryNodeId: 'ft-start',
             }
         ],
         isCustom: false,
@@ -283,6 +292,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 21,
                 entryNodeId: 'aub-start',
+            },
+            {
+                id: 'first-trimester',
+                title: 'First Trimester Emergencies',
+                subtitle: 'Assessment \u2192 Ectopic \u2192 Miscarriage \u2192 NVP/Hyperemesis \u2192 Nonobstetric \u2192 Disposition',
+                categoryId: 'ob-gyn',
+                version: '1.0',
+                nodeCount: 33,
+                entryNodeId: 'ft-start',
             }
         ],
         isCustom: false,

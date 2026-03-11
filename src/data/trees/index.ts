@@ -10,6 +10,7 @@ export { RABIES_NODES, RABIES_MODULE_LABELS, RABIES_CITATIONS } from './rabies';
 export { echoViewsConsult } from './echo-views';
 export { ICH_NODES, ICH_MODULE_LABELS, ICH_CITATIONS } from './ich';
 export { STATUS_EPILEPTICUS_NODES, STATUS_EPILEPTICUS_MODULE_LABELS, STATUS_EPILEPTICUS_CITATIONS } from './status-epilepticus';
+export { FIRST_TRIMESTER_NODES, FIRST_TRIMESTER_MODULE_LABELS, FIRST_TRIMESTER_CITATIONS } from './first-trimester';
 
 // Export type for registry
 import type { ConsultTree } from '../../types/consult-tree';

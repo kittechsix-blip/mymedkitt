@@ -3054,6 +3054,437 @@ const SE_NCSE_CRITERIA: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Acute Diarrhea
+// -------------------------------------------------------------------
+
+const DIARRHEA_SUMMARY: InfoPage = {
+  id: 'diarrhea-summary',
+  title: 'Acute Diarrhea Steps Summary',
+  subtitle: 'Quick-reference checklist for ED evaluation of acute diarrhea',
+  sections: [
+    {
+      heading: 'Initial Assessment',
+      body: '• [Assess hemodynamic stability — ABCs if unstable](#/node/diarrhea-start)\n• [Resuscitate: 2 large-bore IVs, NS/LR 20 mL/kg, cardiac monitor](#/node/diarrhea-resuscitate)\n• [Targeted history: stool character, duration, travel, meds, contacts](#/node/diarrhea-history)',
+    },
+    {
+      heading: 'Red Flag Evaluation',
+      body: '• [Bloody diarrhea — stool culture, avoid antimotility, avoid abx if STEC](#/node/diarrhea-bloody)\n• [Febrile (>38.5°C) — fecal leukocytes/lactoferrin, stool culture](#/node/diarrhea-febrile)\n• [Severe dehydration — IV rehydration, monitor urine output](#/node/diarrhea-dehydration)\n• [Immunocompromised — broader workup, O&P, lower admission threshold](#/node/diarrhea-immunocompromised)\n• [Surgical concern — appendicitis, ischemic bowel, CT abdomen](#/node/diarrhea-surgical-ddx)',
+    },
+    {
+      heading: 'Diagnostics & Treatment',
+      body: '• [Selective lab testing — fecal markers, stool culture, C. diff toxin](#/node/diarrhea-labs)\n• [C. difficile — stop offending abx, oral vancomycin first-line](#/node/diarrhea-cdiff)\n• [Traveler\'s diarrhea — fluoroquinolone or azithromycin ± loperamide](#/node/diarrhea-travelers)\n• [Mild/self-limited — ORS, loperamide, ondansetron PRN](#/node/diarrhea-mild)\n• [Empiric antibiotics — ciprofloxacin (adults), TMP-SMX (children)](#/node/diarrhea-empiric-abx)',
+    },
+    {
+      heading: 'Special Populations & Disposition',
+      body: '• [Pregnant — loperamide safest, avoid fluoroquinolones](#/node/diarrhea-pregnant)\n• [Pediatric — ORS, ondansetron, no antimotility, watch for HUS](#/node/diarrhea-pediatric)\n• [Elderly — higher risk etiologies, drug interactions, lower admit threshold](#/node/diarrhea-elderly)\n• [Disposition — discharge criteria, admit criteria, follow-up](#/node/diarrhea-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.' },
+  ],
+};
+
+const DIARRHEA_DISCHARGE: InfoPage = {
+  id: 'diarrhea-discharge',
+  title: 'Diarrhea Discharge Instructions',
+  shareable: true,
+  subtitle: 'Patient information for managing diarrhea at home',
+  sections: [
+    {
+      heading: 'Return to the ED Immediately If',
+      body: '• You are very thirsty, weak, dizzy, or feel faint\n• You have a fever over 101.5°F (38.6°C)\n• You have blood, pus, or mucus in your stool\n• You have black or wine-colored stool\n• You have severe pain in your stomach or abdomen\n• You are vomiting and cannot eat or drink for more than 24 hours\n• Your diarrhea lasts more than 7 days\n• You are not getting better or you are getting worse\n• Your skin is dry, loose, or you feel confused',
+    },
+    {
+      heading: 'How to Stay Hydrated (Adults)',
+      body: '**First 1-2 days:**\n• Drink lots of fluids — caffeine-free sodas, oral rehydration solutions (available at pharmacy), or flavored mineral water\n• Nibble on salted crackers or pretzels (your body needs the salt)\n• Drink orange juice or eat bananas for potassium\n• You are drinking enough if you are not thirsty and your urine is pale yellow\n\n**After the first 1-2 days:**\n• Try plain potatoes, noodles, rice, bread, and other bland foods\n• Return to your regular diet as your diarrhea improves\n\n**Avoid:**\n• Milk and dairy products for 2-3 days\n• Caffeine (tea, cola, coffee)\n• Alcohol\n• Fruit juices like prune, apple, or grape juice (these can worsen diarrhea)',
+    },
+    {
+      heading: 'How to Stay Hydrated (Children)',
+      body: '• Use an oral rehydration solution (such as Pedialyte) from the pharmacy or supermarket\n• Let your child eat a regular diet as soon as possible\n• If your child is vomiting, try very small, frequent sips of liquid until the vomiting stops\n\n**Do NOT:**\n• Do not use plain water or sports drinks to rehydrate your child — use oral rehydration solution instead\n• Do not withhold dairy products from your child\n• Do not give fruit juices (prune, apple, grape) — these can worsen diarrhea',
+    },
+    {
+      heading: 'Medications',
+      body: '• Take all medications exactly as your doctor prescribed\n• Anti-diarrheal medicine (like Imodium) can help adults — take as directed\n• Do NOT use anti-diarrheal medicine if you have a high fever, bloody diarrhea, or if your doctor told you not to\n• Do NOT give anti-diarrheal medicine to children unless prescribed by a doctor',
+    },
+    {
+      heading: 'Preventing Spread',
+      body: '• Wash your hands thoroughly with soap and water after using the bathroom and before eating\n• Do not prepare food for others while you are sick\n• Clean and disinfect bathroom surfaces frequently\n• Do not return to work or school until you have been diarrhea-free for at least 24 hours\n• Keep sick children home from day care',
+    },
+    {
+      heading: 'Follow-Up',
+      body: '• See your own doctor in 2-3 days if you are not improving\n• See your doctor sooner if you are getting worse\n• If you were prescribed antibiotics, finish the entire course even if you feel better',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.' },
+  ],
+};
+
+const DIARRHEA_DDX_PITFALLS: InfoPage = {
+  id: 'diarrhea-ddx-pitfalls',
+  title: 'Differential Diagnosis Pitfalls',
+  subtitle: 'Common diagnostic traps in diarrheal illness',
+  sections: [
+    {
+      heading: 'Appendicitis Mimicking Gastroenteritis',
+      body: '• Vomiting typically **follows** abdominal pain in appendicitis (precedes pain in gastroenteritis)\n• Appendicitis: 1-2 loose stools, NOT voluminous\n• 15% of appendices are in atypical locations\n• **27% of children** with appendicitis are initially misdiagnosed — diarrhea is a common confounding symptom [1]\n• 57% of children under 3 with appendicitis are initially misdiagnosed [1]\n• **Serial abdominal exams** are key — gastroenteritis improves with fluids, appendicitis does not\n• Gastroenteritis can cause higher fevers (>103°F) than appendicitis',
+    },
+    {
+      heading: 'Ischemic Bowel Disease',
+      body: '• Consider in adults **>50 years** or with peripheral vascular disease\n• Severe pain **out of proportion** to physical findings — classic presentation\n• Voluminous diarrhea (small bowel ischemia) or bloody diarrhea (ischemic colitis)\n• Occult blood in up to 75% of patients\n• Risk factors: arrhythmias, CHF, hypovolemia, sepsis, vasoconstrictors (digitalis, pseudoephedrine, cocaine, amphetamines) [2]\n• May progress to **infarction** unless detected early',
+    },
+    {
+      heading: 'Medication-Induced Diarrhea',
+      body: '• **Antibiotics** — especially C. difficile risk within past 3 months\n• **Magnesium/calcium antacids**\n• **Colchicine**\n• **Alpha-glucosidase inhibitors** (acarbose, miglitol) — abdominal pain, bloating, diarrhea\n• **Sorbitol/mannitol** (artificial sweeteners) — osmotic diarrhea\n• **Laxative abuse** — consider in patients with eating disorders or weight loss attempts\n• **Enteral tube feedings**\n• Herbal preparations may also cause diarrhea',
+    },
+    {
+      heading: 'Melena Misidentified as Diarrhea',
+      body: '• Melanotic stools are usually liquid — patients may describe as "diarrhea"\n• Always ask specifically about **black or tarry stools**\n• Rectal exam can determine stool characteristics\n• GI bleed requires completely different management — see GI Bleeding consult',
+    },
+    {
+      heading: 'Other Diagnostic Traps',
+      body: '• **Fecal impaction** — chronic constipation followed by watery diarrhea (overflow)\n• **IBD first presentation** — chronic/recurrent bloody diarrhea, family history, young patient\n• **Hyperthyroidism** — diarrhea as part of thyrotoxicosis\n• **Intussusception** (pediatric) — currant jelly stool, episodic crying\n• **DKA, pneumonia** — extra-abdominal conditions that can present with abdominal complaints',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rothrock SG, et al. Clinical Features of Misdiagnosed Appendicitis in Children. Ann Emerg Med. 1991;20(1):45-50.' },
+    { num: 2, text: 'Burns BJ, Brandt LJ. Intestinal Ischemia. Gastroenterol Clin North Am. 2003;32(4):1127-1143.' },
+  ],
+};
+
+const DIARRHEA_ABX_CRITERIA: InfoPage = {
+  id: 'diarrhea-abx-criteria',
+  title: 'Empiric Antibiotic Criteria',
+  subtitle: 'When to start antibiotics for acute diarrhea',
+  sections: [
+    {
+      heading: 'When to Give Empiric Antibiotics',
+      body: '**1. Fever >38.5°C (101.3°F)** PLUS one of:\n• Guaiac-positive stools\n• Fecal leukocytes or fecal lactoferrin positive\n\n**2. Acute dysentery** (bloody diarrhea with fever and cramping)\n\n**3. Moderate-to-severe traveler\'s diarrhea**\n\n**4. Diarrhea lasting >48 hours** (higher probability of non-viral cause)\n\n**5. Nosocomial diarrhea** with suspected C. difficile — stop offending antibiotic, start metronidazole or vancomycin',
+    },
+    {
+      heading: 'When NOT to Give Antibiotics',
+      body: '• **Suspected STEC (E. coli O157:H7)** — antibiotics increase HUS risk. Suspect if: bloody diarrhea + afebrile + exposure to undercooked beef or unpasteurized products\n• **Vomiting as prominent symptom** — viral etiology more likely, antibiotics will have low yield\n• **Mild, self-limited diarrhea** in healthy patient\n• **Salmonellosis** (non-typhoidal) — antibiotics can prolong carrier state and increase relapse rate',
+    },
+    {
+      heading: 'Drug Selection',
+      body: '',
+      drugTable: [
+        { drug: 'Ciprofloxacin 500 mg PO BID × 3-5d', regimen: 'Adults — first-line for most community-acquired and traveler\'s diarrhea' },
+        { drug: 'Azithromycin 1g PO ×1 or 500 mg daily ×3d', regimen: 'SE Asia travel (fluoroquinolone-resistant Campylobacter >80%)' },
+        { drug: 'TMP-SMX (Bactrim DS) BID × 3-5d', regimen: 'Children — first-line empiric therapy' },
+        { drug: 'Metronidazole 250 mg PO TID × 7-10d', regimen: 'Persistent diarrhea 2-4 weeks (covers Giardia)' },
+        { drug: 'Vancomycin 125 mg PO QID × 10-14d', regimen: 'C. difficile — first-line (preferred over metronidazole)' },
+        { drug: 'Metronidazole 500 mg PO TID × 10-14d', regimen: 'C. difficile — alternative for non-severe cases' },
+      ],
+    },
+    {
+      heading: 'Patient Expectations',
+      body: 'Antibiotics shorten illness duration by **1-2 days** when effective. This benefit must be weighed against drug side effects, expense, and antibiotic resistance concerns.\n\nStudies show that patient satisfaction with diarrheal illness care correlates **poorly** with receiving antibiotics — physicians are not adept at identifying which patients expect them [1].',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Karras DJ, et al. Antibiotic Use for ED Patients with Acute Diarrhea: Prescribing Practices, Patient Expectations, and Patient Satisfaction. Ann Emerg Med. 2003;42(6):835-842.' },
+    { num: 2, text: 'Shane AL, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.' },
+  ],
+};
+
+const DIARRHEA_ANTIMOTILITY_CI: InfoPage = {
+  id: 'diarrhea-antimotility-ci',
+  title: 'Antimotility Agent Contraindications',
+  subtitle: 'When to avoid loperamide, diphenoxylate, and similar agents',
+  sections: [
+    {
+      heading: 'Avoid Antimotility Agents When',
+      body: '• **High fever** (>38.5°C / 101.3°F)\n• **Bloody diarrhea** or suspected dysentery\n• **Suspected inflammatory diarrhea** (positive fecal leukocytes/lactoferrin)\n• **Suspected Shiga toxin-producing E. coli (STEC/EHEC)** — can worsen HUS\n• **Sepsis** or severe systemic illness\n• **Immunocompromised patients**\n• **Pediatric patients** — not recommended for children with acute gastroenteritis',
+    },
+    {
+      heading: 'Why Avoid?',
+      body: '• **Delayed clearance** of enteric pathogens\n• **Prolonged fever** in invasive bacterial diarrhea\n• **Toxic megacolon** risk — especially with C. difficile and inflammatory bowel disease\n• **Increased HUS risk** with STEC infection\n\nSome authorities argue antimotility agents may be used in **non-dysenteric** forms of diarrhea caused by enteroinvasive pathogens **as long as antibiotics are also prescribed** — but this remains controversial.',
+    },
+    {
+      heading: 'Safe Use',
+      body: '• **Afebrile patients** with non-bloody, non-inflammatory diarrhea\n• **Chronic diarrhea** associated with inflammatory bowel disease (with appropriate IBD treatment)\n• **Traveler\'s diarrhea** — loperamide as adjunct WITH antibiotics reduces duration by 1 additional day\n• **Preferred agent:** Loperamide (Imodium) — peripheral opioid, no CNS effects, not habit-forming\n• **Alternative:** Bismuth subsalicylate (Pepto-Bismol) — also has antimicrobial and antiemetic properties',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Thielman NM, Guerrant RL. Acute Infectious Diarrhea. N Engl J Med. 2004;350(1):38-47.' },
+    { num: 2, text: 'Gore JI, Surawicz C. Severe Acute Diarrhea. Gastroenterol Clin North Am. 2003;32(4):1249-1267.' },
+  ],
+};
+
+const DIARRHEA_DEHYDRATION_ASSESSMENT: InfoPage = {
+  id: 'diarrhea-dehydration-assessment',
+  title: 'Dehydration Assessment Guide',
+  subtitle: 'Clinical assessment of volume status in diarrheal illness',
+  sections: [
+    {
+      heading: 'Adult Assessment',
+      body: '**Most reliable findings:**\n• **Dry axilla** — supports hypovolemia diagnosis\n• **Moist mucous membranes + tongue without furrows** — argues against hypovolemia\n\n**Unreliable in adults:**\n• Capillary refill time — no proven diagnostic value\n• Skin turgor — no proven diagnostic value\n\n**Other indicators:**\n• Orthostatic vital signs (SBP drop >20 or HR rise >20)\n• Urine output and color\n• BUN/Creatinine ratio >20:1 suggests dehydration\n• Thirst, dizziness, syncope',
+    },
+    {
+      heading: 'Pediatric Assessment',
+      body: '**Gold standard:** Acute body weight change (compare to recent known weight)\n\n**Next best measures:**\n• Mucous membrane hydration\n• Capillary refill time (>2 seconds)\n• Absence of tears when crying\n• Altered mental status (lethargy, irritability)\n\n**Also assess:**\n• Sunken anterior fontanelle (infants)\n• Sunken eyes\n• Skin turgor (tenting)\n• Urine output (fewer wet diapers)\n\n**Severity:**\n• **Mild (3-5%):** slightly dry mucous membranes, mildly decreased urine\n• **Moderate (6-9%):** dry mucous membranes, decreased tears, tachycardia, oliguria\n• **Severe (≥10%):** absent tears, sunken eyes, very delayed capillary refill, altered mental status, anuria',
+    },
+    {
+      heading: 'Oral Rehydration Solutions',
+      body: '**WHO ORS composition:**\n• Sodium 75 mmol/L\n• Potassium 20 mmol/L\n• Glucose 75 mmol/L\n• Total osmolarity 245 mOsm/L\n\n**Commercial options:** Pedialyte, Lytren, Rehydrolyte\n\n**Sports drinks** (Gatorade, etc.) have inadequate sodium for diarrheal losses. Can supplement with salted crackers or pretzels.\n\n**Plain water** is NOT appropriate for rehydration in children — risk of hyponatremia.\n\n**IV rehydration:** NS or LR 20 mL/kg bolus, repeat as needed. Consider in moderate-severe dehydration or when vomiting prevents oral intake.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'McGee S, Abernethy WB, Simel DL. Is This Patient Hypovolemic? JAMA. 1999;281(11):1022-1029.' },
+    { num: 2, text: 'Cincinnati Children\'s Hospital Medical Center. Evidence Based Clinical Practice Guideline for Children with Acute Gastroenteritis (AGE). 2001.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// First Trimester Emergencies
+// -------------------------------------------------------------------
+
+const FT_SUMMARY: InfoPage = {
+  id: 'ft-summary',
+  title: 'First Trimester Emergency Steps',
+  subtitle: 'Quick Reference — Key Decision Points',
+  sections: [
+    {
+      heading: 'Initial Assessment',
+      body: '• [Pregnancy test in ALL reproductive-age women with abdominal pain/bleeding](#/node/ft-start)\n• [Hemodynamic stability assessment](#/node/ft-stability)\n• [Unstable → assume ruptured ectopic until proven otherwise](#/node/ft-unstable-ectopic)',
+    },
+    {
+      heading: 'Ectopic Pregnancy',
+      body: '• [Bedside US + quantitative beta-hCG](#/node/ft-us-eval)\n• [IUP confirmed → rules out ectopic (except ART patients)](#/node/ft-iup-confirmed)\n• [Pregnancy of unknown location → 48h beta-hCG recheck](#/node/ft-pul)\n• [Ectopic confirmed → methotrexate vs surgery](#/node/ft-ectopic-confirmed)',
+    },
+    {
+      heading: 'Miscarriage',
+      body: '• [Classify type: threatened, complete, missed, inevitable, incomplete, septic](#/node/ft-miscarriage-type)\n• [Nonviable → expectant vs medical (misoprostol) vs surgical (D&C)](#/node/ft-nonviable-mgmt)\n• [Rh status → consider RhoGAM if Rh-negative](#/node/ft-rh-rhogam)',
+    },
+    {
+      heading: 'Nausea & Vomiting',
+      body: '• [Severity assessment — tolerating PO?](#/node/ft-nvp-assess)\n• [Mild: pyridoxine ± doxylamine (ACOG first-line)](#/node/ft-nvp-oral)\n• [Moderate: add dimenhydrinate, diphenhydramine, or promethazine](#/node/ft-nvp-oral-step2)\n• [Severe/IV: metoclopramide or ondansetron + D5NS + thiamine](#/node/ft-nvp-iv)\n• [Hyperemesis gravidarum → OB consult, admit](#/node/ft-hg-admit)',
+    },
+    {
+      heading: 'Nonobstetric Emergencies',
+      body: '• [UTI / bacteriuria — MUST treat in pregnancy](#/node/ft-uti-eval)\n• [Pyelonephritis — admit ALL for IV ceftriaxone](#/node/ft-pyelo)\n• [Appendicitis — surgical, imaging: US → MRI → CT](#/node/ft-appendicitis)',
+    },
+    {
+      heading: 'Disposition',
+      body: '• [PUL → discharge with 48h beta-hCG recheck](#/node/ft-dispo-pul)\n• [Miscarriage → discharge with management plan + grief resources](#/node/ft-dispo-miscarriage)\n• [NVP → discharge with prescriptions if tolerating PO](#/node/ft-dispo-nvp)\n• [Admit: ruptured ectopic, pyelonephritis, appendicitis, hyperemesis, septic abortion](#/node/ft-dispo-general)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Pedigo R. First Trimester Pregnancy Emergencies: Recognition and Management. Emergency Medicine Practice. 2019;21(1):1-28.' },
+  ],
+};
+
+const FT_ECTOPIC_RISK: InfoPage = {
+  id: 'ft-ectopic-risk',
+  title: 'Ectopic Pregnancy Sites & Risk Factors',
+  subtitle: 'Location Distribution & Clinical Risk Assessment',
+  sections: [
+    {
+      heading: 'Implantation Sites',
+      body: '**98% of ectopic pregnancies are tubal** [1]\n\n• **Distal third (ampullary):** most common (~40%)\n• **Middle third (isthmic):** ~37%\n• **Proximal third:** ~12%\n• **Fimbrial:** ~5%\n• **Fimbrial-ovarian:** ~1.5%\n• **Interstitial (cornual):** ~1.2% — high rupture morbidity due to increased vascularity\n• **Abdominal:** ~1.4%\n• **Cervical:** ~0.15%\n• **Ovarian:** ~0.15%',
+    },
+    {
+      heading: 'Major Risk Factors',
+      body: '• **Prior ectopic pregnancy** — strongest predictor of recurrence\n• **History of salpingitis / PID** — tubal damage\n• **History of sexually transmitted infections** — chlamydia, gonorrhea\n• **Prior tubal surgery** — sterilization, reversal, salpingostomy\n• **Smoking** — dose-response relationship (>1 pack/day: OR 4) — ciliary dysmotility impairs ovum transport [2]\n• **IUD in situ** — if pregnancy occurs despite IUD, >50% are ectopic [3]\n• **Assisted reproductive technology (ART)** — also increases heterotopic risk to 1 in 100\n• **DES exposure in utero**\n• **Endometriosis**',
+    },
+    {
+      heading: 'Important Caveats',
+      body: '**Nearly half of patients with ectopic pregnancy will have NO identifiable risk factors.** [1]\n\nPresence or absence of risk factors should NOT alter the standard diagnostic approach.\n\nNo historical or physical exam features can reliably rule in or rule out ectopic pregnancy. [4]',
+    },
+    {
+      heading: 'Heterotopic Pregnancy',
+      body: 'Coexistence of IUP + ectopic pregnancy:\n• **General population:** 1 in 4,000 to 1 in 30,000\n• **ART patients:** ~1 in 100 [5]\n\nConfirming an IUP does NOT exclude ectopic in ART patients. Maintain clinical suspicion if IUP + lateral pain/adnexal mass.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.' },
+    { num: 2, text: 'Handler A, Davis F, Ferre C, et al. The relationship of smoking and ectopic pregnancy. Am J Public Health. 1989;79(9):1239-1242.' },
+    { num: 3, text: 'Backman T, Rauramo I, Huhtala S, et al. Pregnancy during the use of levonorgestrel intrauterine system. Am J Obstet Gynecol. 2004;190(1):50-54.' },
+    { num: 4, text: 'Dart RG, Kaplan B, Varaklis K. Predictive value of history and physical examination in patients with suspected ectopic pregnancy. Ann Emerg Med. 1999;33(3):283-290.' },
+    { num: 5, text: 'Tal J, Haddad S, Gordon N, et al. Heterotopic pregnancy after ovulation induction and assisted reproductive technologies. Fertil Steril. 1996;66(1):1-12.' },
+  ],
+};
+
+const FT_MISCARRIAGE_TYPES: InfoPage = {
+  id: 'ft-miscarriage-types',
+  title: 'Miscarriage Classification',
+  subtitle: 'Types, Physical Exam & Ultrasound Findings',
+  sections: [
+    {
+      heading: 'Threatened Miscarriage',
+      body: '**Cervical os:** Closed\n**Ultrasound:** Viable IUP (fetal cardiac activity present)\n**Presentation:** Vaginal bleeding with viable pregnancy\n**Prognosis:** If FCA present, only 3.4% progress to miscarriage. Heavy bleeding → 11-18% miscarriage rate. [1]',
+    },
+    {
+      heading: 'Complete Miscarriage',
+      body: '**Cervical os:** Closed\n**Ultrasound:** No IUP (previously confirmed)\n**Presentation:** Passage of all products of conception\n**Management:** Confirm with US. Serial beta-hCG to zero. OB follow-up.',
+    },
+    {
+      heading: 'Missed Miscarriage',
+      body: '**Cervical os:** Closed\n**Ultrasound:** CRL ≥7 mm without cardiac motion; OR gestational sac ≥25 mm without embryo [2]\n**Presentation:** Nonviable uterine gestation — often discovered incidentally\n**Management:** Expectant, medical (misoprostol), or surgical (D&C)',
+    },
+    {
+      heading: 'Inevitable Miscarriage',
+      body: '**Cervical os:** Open\n**Ultrasound:** IUP present, no passage of products yet\n**Presentation:** Open os indicates process will proceed\n**Management:** Expectant, medical, or surgical — consult OB',
+    },
+    {
+      heading: 'Incomplete Miscarriage',
+      body: '**Cervical os:** Open\n**Ultrasound:** Partially expelled products of conception\n**Presentation:** Some tissue has passed, but retained products remain\n**Management:** If tissue visible in cervix — remove with ring forceps at bedside. Medical or surgical management for retained products.',
+    },
+    {
+      heading: 'Septic Abortion',
+      body: '**Cervical os:** Any (open or closed)\n**Ultrasound:** Any finding possible\n**Presentation:** Intrauterine infection — **fever, uterine tenderness, purulent discharge**\n**Management:** EMERGENT — IV broad-spectrum antibiotics + surgical evacuation. May progress rapidly to sepsis/septic shock. [3]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hasan R, Baird DD, Herring AH, et al. Association between first-trimester vaginal bleeding and miscarriage. Obstet Gynecol. 2009;114(4):860-867.' },
+    { num: 2, text: 'ACOG Practice Bulletin No. 150. Early Pregnancy Loss. Obstet Gynecol. 2015;125(5):1258-1267.' },
+    { num: 3, text: 'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.' },
+  ],
+};
+
+const FT_NVP_PATHWAY: InfoPage = {
+  id: 'ft-nvp-pathway',
+  title: 'NVP Stepwise Treatment Pathway',
+  subtitle: 'ACOG 2018 Recommended Approach',
+  sections: [
+    {
+      heading: 'Step 1 — First-Line Oral (Level A)',
+      body: '**Pyridoxine (B6)** 10-25 mg PO TID\n± **Doxylamine** 12.5 mg PO TID\n\nAdjuncts:\n• **Ginger** 250 mg PO QID\n• **P6 acupressure** wristband\n• Convert prenatal vitamin to **folic acid only**\n\n💊 Generic pyridoxine + OTC doxylamine (Unisom SleepTabs) is significantly cheaper than Diclegis/Bonjesta.',
+    },
+    {
+      heading: 'Step 2 — Second-Line Oral',
+      body: 'Add one of:\n• **Dimenhydrinate** 50 mg PO QID (max 200 mg/day if taking doxylamine)\n• **Diphenhydramine** 25-50 mg PO QID\n• **Prochlorperazine** 25 mg PR q12h\n• **Promethazine** 12.5 mg PO or PR q6h',
+    },
+    {
+      heading: 'Step 3 — IV Therapy',
+      body: '**Rehydration:** D5NS preferred (slightly better than NS for nausea)\n**Thiamine** 100 mg IV before dextrose if protracted vomiting\n\nIV antiemetics — choose one:\n• **Metoclopramide** 10 mg IV q8h — preferred (no fetal malformation risk)\n• **Ondansetron** 4-8 mg IV over 15 min q12h — effective but exhaust other options first\n• **Dimenhydrinate** 50 mg IV in 50 mL NS over 20 min q6h\n• **Promethazine** 12.5 mg IV q6h (dilute, slow push — tissue necrosis risk)',
+    },
+    {
+      heading: 'Step 4 — Admit (Hyperemesis Gravidarum)',
+      body: 'If no improvement after IV therapy:\n• **OB consultation**\n• Admit for continued IV rehydration\n• Electrolyte monitoring\n• Daily thiamine\n• Parenteral antiemetic regimen\n• Nutritional assessment\n\n**Definition:** ≥5% loss of prepregnancy body weight + persistent nausea/vomiting + ketonuria',
+    },
+    {
+      heading: 'Key Evidence Notes',
+      body: '• No high-quality evidence supports one specific drug over another for NVP [1]\n• Pyridoxine + doxylamine is superior to pyridoxine alone [2]\n• Ondansetron: possible small risk of fetal cardiac abnormalities — use after exhausting alternatives [3]\n• Metoclopramide: no association with fetal malformations — reasonable first-line IV agent [2]\n• NVP is actually protective against pregnancy loss (HR 0.20 for nausea + vomiting) [4]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Matthews A, Haas DM, O\'Mathuna DP, et al. Interventions for nausea and vomiting in early pregnancy. Cochrane Database Syst Rev. 2015;(9):CD007575.' },
+    { num: 2, text: 'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.' },
+    { num: 3, text: 'Danielsson B, Noor AH, Hoog A, et al. Association of ondansetron use in early pregnancy with congenital malformations. JAMA. 2018;320(23):2429-2437.' },
+    { num: 4, text: 'Hinkle SN, Mumford SL, Grantz KL, et al. Association of nausea and vomiting during pregnancy with pregnancy loss. JAMA Intern Med. 2016;176(11):1621-1627.' },
+  ],
+};
+
+const FT_IMAGING_SAFETY: InfoPage = {
+  id: 'ft-imaging-safety',
+  title: 'Imaging Safety in Pregnancy',
+  subtitle: 'Radiation Doses, Modality Selection & Contrast Considerations',
+  sections: [
+    {
+      heading: 'Key Principles',
+      body: '• **Do not withhold indicated imaging** for fear of radiation — missed/delayed diagnosis may cause worse fetal outcomes [1]\n• **Ultrasound and MRI (without gadolinium)** are preferred first-line modalities\n• **Single CT study** does not exceed threshold dose for fetal harm\n• **Document risks/benefits discussion** with patient for studies involving direct fetal radiation',
+    },
+    {
+      heading: 'No Pregnancy Testing Needed (ACR)',
+      body: 'These produce negligible fetal exposure: [2]\n• Head or neck imaging (any modality)\n• Extremity radiography or CT (except possibly hip)\n• Chest radiography (first and second trimesters)',
+    },
+    {
+      heading: 'Fetal Radiation Doses',
+      body: '**Very low (<0.1 mGy):**\n• C-spine XR: <0.001 mGy\n• Extremity XR: <0.001 mGy\n• Chest XR (2 views): 0.0005-0.01 mGy\n\n**Low to moderate (0.1-10 mGy):**\n• Abdominal XR: 0.1-3.0 mGy\n• Chest CT / CTPA: 0.01-0.66 mGy\n• Head/neck CT: 1.0-10 mGy\n• Bone scan: 4-5 mGy\n\n**Higher (10-50 mGy):**\n• Abdominal CT: 1.3-35 mGy\n• Pelvic CT: 10-50 mGy\n\n**Reference:** Annual background radiation = 1.1-2.5 mGy [3]',
+    },
+    {
+      heading: 'Contrast Media',
+      body: '**Iodinated contrast (CT):**\n• Crosses placenta but no known harm in limited data\n• ACOG: use only if "absolutely required" — precautionary, not evidence-based [1]\n\n**Gadolinium (MRI):**\n• **AVOID unless absolutely necessary**\n• Associated with increased stillbirth, neonatal death, and rheumatologic/inflammatory skin conditions [4]\n• MRI for appendicitis should always be ordered WITHOUT contrast\n\n**MRI without gadolinium** is safe — no fetal risk demonstrated through age 4 years in >1.4 million pregnancies [4]',
+    },
+    {
+      heading: 'Appendicitis Imaging Algorithm',
+      body: '1. **Ultrasound first** — but visualization rate as low as 7%, sensitivity only 18% in pregnancy [5]\n2. **MRI without contrast** — sensitivity 94%, specificity 97%. Preferred if available. [6]\n3. **CT abdomen/pelvis** — if US indeterminate and MRI unavailable. High sensitivity/specificity. Single study does not exceed threshold. [1]\n\nBoth US and MRI have high specificity (97-99%) — a positive result can be relied upon.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACOG Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation. Obstet Gynecol. 2017;130(4):e210-e216.' },
+    { num: 2, text: 'American College of Radiology. ACR-SPR Practice Parameter for Imaging Pregnant or Potentially Pregnant Adolescents and Women with Ionizing Radiation. 2013.' },
+    { num: 3, text: 'Tremblay E, Therasse E, Thomassin-Naggara I, Trop I. Quality initiatives: guidelines for use of medical imaging during pregnancy and lactation. RadioGraphics. 2012;32:897-911.' },
+    { num: 4, text: 'Ray JG, Vermeulen MJ, Bharatha A, et al. Association between MRI exposure during pregnancy and fetal and childhood outcomes. JAMA. 2016;316(9):952-961.' },
+    { num: 5, text: 'Konrad J, Grand D, Lourenco A. MRI: first-line imaging modality for pregnant patients with suspected appendicitis. Abdom Imaging. 2015;40(8):3359-3364.' },
+    { num: 6, text: 'Duke E, Kalb B, Arif-Tiwari H, et al. A systematic review and meta-analysis of diagnostic performance of MRI for evaluation of acute appendicitis. AJR Am J Roentgenol. 2016;206(3):508-517.' },
+  ],
+};
+
+const FT_ABX_SAFETY: InfoPage = {
+  id: 'ft-abx-safety',
+  title: 'Antibiotic Safety in Pregnancy',
+  subtitle: 'First Trimester Considerations for Common Antibiotics',
+  sections: [
+    {
+      heading: 'Generally Safe in All Trimesters',
+      body: '• **Amoxicillin** — first-line for UTI in pregnancy\n• **Cephalosporins** (cephalexin, ceftriaxone, cefazolin) — widely used, well-studied\n• **Penicillins** — extensive safety record\n• **Azithromycin** — safe for atypical coverage',
+    },
+    {
+      heading: 'Use with Caution in First Trimester',
+      body: '• **Nitrofurantoin** — ACOG 2017: safe in 2nd/3rd trimester but use in 1st trimester only "when no other suitable alternative antibiotics are available" [1]\n• **Sulfonamides (TMP-SMX)** — same ACOG caveat as nitrofurantoin. Theoretical risk of folate antagonism. [1]',
+    },
+    {
+      heading: 'Avoid in Pregnancy',
+      body: '• **Fluoroquinolones** (ciprofloxacin, levofloxacin) — cartilage damage in animal studies; avoid if alternatives exist\n• **Tetracyclines** (doxycycline, minocycline) — tooth discoloration and bone growth effects after first trimester\n• **Aminoglycosides** (gentamicin) — ototoxicity risk; use only when benefits clearly outweigh risks (e.g., septic abortion)\n• **Metronidazole** — generally avoided in first trimester (conflicting data, likely safe but alternatives preferred)',
+    },
+    {
+      heading: 'UTI Treatment in Pregnancy',
+      body: '**Preferred regimens (7-day course):**\n• Amoxicillin 875 mg PO BID\n• Cephalexin 500 mg PO q6h\n• Nitrofurantoin 100 mg PO BID (if no alternatives — 1st trimester only)\n\n**Key points:**\n• **ALWAYS send urine culture** — negative UA does not exclude bacteriuria [2]\n• **Treat asymptomatic bacteriuria** when found — reduces pyelonephritis risk from 2.4% to 0.6% [3]\n• Shorter courses may be less effective than 7-day regimens [4]\n• Local antibiograms should guide empiric therapy',
+    },
+    {
+      heading: 'Pyelonephritis',
+      body: '**Admit ALL pregnant patients** for initial IV antibiotics:\n• Ceftriaxone 1 g IV daily\n• Continue until afebrile 48 hours\n• Transition to oral agent guided by sensitivities\n\nInsufficient evidence for outpatient management in pregnancy. [5]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.' },
+    { num: 2, text: 'Angelescu K, Nussbaumer-Streit B, Sieben W, et al. Benefits and harms of screening for and treatment of asymptomatic bacteriuria in pregnancy. BMC Pregnancy Childbirth. 2016;16(1):336.' },
+    { num: 3, text: 'Kazemier BM, et al. Maternal and neonatal consequences of treated and untreated asymptomatic bacteriuria in pregnancy. Lancet Infect Dis. 2015;15(11):1324-1333.' },
+    { num: 4, text: 'Guinto VT, De Guia B, Festin MR, et al. Different antibiotic regimens for treating asymptomatic bacteriuria in pregnancy. Cochrane Database Syst Rev. 2010;(9):CD007855.' },
+    { num: 5, text: 'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.' },
+  ],
+};
+
+const FT_MISCARRIAGE_DISCHARGE: InfoPage = {
+  id: 'ft-miscarriage-discharge',
+  title: 'Miscarriage Discharge Instructions',
+  subtitle: 'Patient Information & Return Precautions',
+  sections: [
+    {
+      heading: 'What Has Happened',
+      body: 'You have experienced a miscarriage (also called early pregnancy loss). This is unfortunately common — it occurs in up to 1 in 4 pregnancies. Most miscarriages are caused by genetic abnormalities in the pregnancy and are not caused by anything you did or did not do.',
+    },
+    {
+      heading: 'What to Expect',
+      body: '• **Bleeding:** You may have vaginal bleeding and cramping for 1-2 weeks. This is normal.\n• **Pain:** Cramping is expected. Take ibuprofen (Advil/Motrin) 600 mg every 6 hours as needed for pain.\n• **Passing tissue:** You may pass blood clots or tissue. This is part of the natural process.\n• **Bleeding should gradually decrease** over the next 1-2 weeks.',
+    },
+    {
+      heading: 'Activity & Self-Care',
+      body: '• **Rest** as needed — there is no strict bed rest requirement\n• **Avoid** placing anything in the vagina (tampons, douching, intercourse) for **2 weeks** or until bleeding stops\n• **Hydrate** well and eat as tolerated\n• You may shower and bathe normally',
+    },
+    {
+      heading: 'Return to the Emergency Department If',
+      body: '• **Heavy bleeding** — soaking more than 1 pad per hour for 2 or more hours in a row\n• **Fever** greater than 100.4°F (38°C)\n• **Foul-smelling vaginal discharge**\n• **Severe abdominal pain** not relieved by ibuprofen\n• **Dizziness, lightheadedness, or fainting**\n• **Persistent heavy bleeding** beyond 2 weeks',
+    },
+    {
+      heading: 'Follow-Up',
+      body: '• See your OB/GYN within **1-2 weeks**\n• Your doctor may check a blood test (beta-hCG) to confirm the miscarriage is complete\n• Discuss future pregnancy planning with your OB/GYN when you are ready\n• Most women who have a miscarriage go on to have healthy pregnancies in the future',
+    },
+    {
+      heading: 'Emotional Support',
+      body: '• A miscarriage is a loss, and it is normal to grieve\n• Everyone experiences grief differently — there is no "right way" to feel\n• Talk to your partner, family, or a trusted friend\n• Your doctor can refer you to a grief counselor or pregnancy loss support group\n• **National support:** Share Pregnancy & Infant Loss Support — www.nationalshare.org',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Catlin A. Interdisciplinary guidelines for care of women presenting to the emergency department with pregnancy loss. MCN Am J Matern Child Nurs. 2018;43(1):13-18.' },
+  ],
+  shareable: true,
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -3140,6 +3571,19 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'se-infusion-comparison': SE_INFUSION_COMPARISON,
   'se-rse-principles': SE_RSE_PRINCIPLES,
   'se-ncse-criteria': SE_NCSE_CRITERIA,
+  'diarrhea-summary': DIARRHEA_SUMMARY,
+  'diarrhea-discharge': DIARRHEA_DISCHARGE,
+  'diarrhea-ddx-pitfalls': DIARRHEA_DDX_PITFALLS,
+  'diarrhea-abx-criteria': DIARRHEA_ABX_CRITERIA,
+  'diarrhea-antimotility-ci': DIARRHEA_ANTIMOTILITY_CI,
+  'diarrhea-dehydration-assessment': DIARRHEA_DEHYDRATION_ASSESSMENT,
+  'ft-summary': FT_SUMMARY,
+  'ft-ectopic-risk': FT_ECTOPIC_RISK,
+  'ft-miscarriage-types': FT_MISCARRIAGE_TYPES,
+  'ft-nvp-pathway': FT_NVP_PATHWAY,
+  'ft-imaging-safety': FT_IMAGING_SAFETY,
+  'ft-abx-safety': FT_ABX_SAFETY,
+  'ft-miscarriage-discharge': FT_MISCARRIAGE_DISCHARGE,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */
