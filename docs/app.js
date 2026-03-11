@@ -12,6 +12,7 @@ import { ACUTE_STROKE_WIZARD } from './data/wizard-consults/acute-stroke.js';
 import { initDrugs } from './services/drug-service.js';
 import { initCategories } from './services/category-service.js';
 import { initInfoPages } from './services/info-service.js';
+import { addSharedConsult, markOrganicVisit, hasFullAccess, isSharedMode } from './services/shared-mode.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -194,6 +195,14 @@ function handleWizard(params) {
         renderPlaceholder(`Wizard: ${id}`, 'Consult wizard data not found.', '\u{1F50D}');
     }
 }
+function handleShare(params) {
+    const treeId = params['treeId'] ?? '';
+    if (treeId) {
+        addSharedConsult(treeId);
+    }
+    // Redirect to the actual tree — replace hash so back button doesn't loop
+    window.location.replace('#/tree/' + treeId);
+}
 function handleNotFound() {
     setHomeTheme(false);
     updateTabBar('');
@@ -213,6 +222,18 @@ async function init() {
     registerServiceWorker();
     // Initialize data services (loads from IndexedDB/Supabase/hardcoded fallback)
     await Promise.all([initDrugs(), initCategories(), initInfoPages()]);
+    // Hide Pharmacy/Med-Calc tabs in shared mode
+    if (isSharedMode()) {
+        const tabBar = document.getElementById('bottom-tab-bar');
+        if (tabBar) {
+            const pharmacyTab = tabBar.querySelector('[data-tab="pharmacy"]');
+            const medCalcTab = tabBar.querySelector('[data-tab="med-calc"]');
+            if (pharmacyTab)
+                pharmacyTab.style.display = 'none';
+            if (medCalcTab)
+                medCalcTab.style.display = 'none';
+        }
+    }
     // Tab bar click delegation
     const tabBar = document.getElementById('bottom-tab-bar');
     if (tabBar) {
@@ -228,8 +249,15 @@ async function init() {
             }
         });
     }
+    // Detect organic visit (user found the app directly, not via share link)
+    // Must happen before routing so the home screen knows to show full access
+    const initialHash = window.location.hash;
+    if (!initialHash.startsWith('#/share/') && !hasFullAccess()) {
+        markOrganicVisit();
+    }
     // Register routes
     router.on('/', handleHome);
+    router.on('/share/:treeId', handleShare);
     router.on('/category/:id', handleCategory);
     router.on('/tree/:id', handleTree);
     router.on('/tree/:id/node/:nodeId', handleTreeNode);

@@ -2,6 +2,7 @@
 // Shows available decision trees within a selected category.
 
 import { getAllCategories } from '../services/category-service.js';
+import { isSharedMode, getSharedTreeIds } from '../services/shared-mode.js';
 import { router } from '../services/router.js';
 
 /** Render the category view (tree list) into the given container */
@@ -50,11 +51,18 @@ export function renderCategoryView(container: HTMLElement, categoryId: string): 
   header.appendChild(name);
   container.appendChild(header);
 
+  // In shared mode, filter to only shared consults
+  let trees = category.decisionTrees;
+  if (isSharedMode()) {
+    const sharedIds = new Set(getSharedTreeIds());
+    trees = trees.filter(t => sharedIds.has(t.id));
+  }
+
   // Tree list or empty state — always alphabetical
-  if (category.decisionTrees.length === 0) {
+  if (trees.length === 0) {
     renderEmptyState(container);
   } else {
-    const sorted = [...category.decisionTrees].sort((a, b) => a.title.localeCompare(b.title));
+    const sorted = [...trees].sort((a, b) => a.title.localeCompare(b.title));
     renderTreeList(container, sorted, categoryId);
   }
 }

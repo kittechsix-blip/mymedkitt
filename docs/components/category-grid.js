@@ -5,6 +5,7 @@ import { getAllCalculators } from './calculator.js';
 import { getAllDrugs } from '../services/drug-service.js';
 import { showDrugModal } from './drug-store.js';
 import { router } from '../services/router.js';
+import { isSharedMode, getSharedTreeIds, grantFullAccess } from '../services/shared-mode.js';
 /** Tool categories route to special pages instead of /category/{id} */
 const TOOL_ROUTES = {
     'pharmacy': { route: '/drugs', getCount: () => getAllDrugs().length, unit: 'drug' },
@@ -51,13 +52,31 @@ export function renderCategoryGrid(container) {
     // Rolodex container
     const rolodex = document.createElement('div');
     rolodex.className = 'rolodex';
-    const categories = getAllCategories();
+    const allCategories = getAllCategories();
+    const sharedMode = isSharedMode();
+    const sharedIds = sharedMode ? new Set(getSharedTreeIds()) : null;
+    // In shared mode, filter categories to only those containing shared consults
+    const categories = sharedMode
+        ? allCategories
+            .map(cat => {
+            if (cat.id === 'pharmacy' || cat.id === 'med-calc')
+                return null;
+            const filtered = cat.decisionTrees.filter(t => sharedIds.has(t.id));
+            if (filtered.length === 0)
+                return null;
+            return { ...cat, decisionTrees: filtered };
+        })
+            .filter((c) => c !== null)
+        : allCategories;
     for (const cat of categories) {
         // Skip pharmacy and med-calc — they're in the bottom tab bar
         if (cat.id === 'pharmacy' || cat.id === 'med-calc')
             continue;
         const toolInfo = TOOL_ROUTES[cat.id];
         if (toolInfo) {
+            // Hide tool categories in shared mode
+            if (sharedMode)
+                continue;
             const count = toolInfo.getCount();
             rolodex.appendChild(createRolodexCard(cat, count, toolInfo.route, toolInfo.unit));
         }
@@ -65,9 +84,23 @@ export function renderCategoryGrid(container) {
             rolodex.appendChild(createRolodexCard(cat, cat.decisionTrees.length));
         }
     }
-    // Add button
-    rolodex.appendChild(createAddCard());
+    // Add button — only in full mode
+    if (!sharedMode) {
+        rolodex.appendChild(createAddCard());
+    }
     container.appendChild(rolodex);
+    // Unlock All button — shared mode only
+    if (sharedMode) {
+        const unlockBtn = document.createElement('button');
+        unlockBtn.className = 'btn-primary unlock-all-btn';
+        unlockBtn.textContent = 'Unlock All Consults';
+        unlockBtn.style.cssText = 'display:block;margin:20px auto 0;padding:12px 32px;font-size:15px;';
+        unlockBtn.addEventListener('click', () => {
+            grantFullAccess();
+            renderCategoryGrid(container);
+        });
+        container.appendChild(unlockBtn);
+    }
     // Disclaimer
     const disclaimer = document.createElement('p');
     disclaimer.className = 'home-disclaimer';

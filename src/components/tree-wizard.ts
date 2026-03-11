@@ -10,6 +10,7 @@ import { renderInlineCitations } from './reference-table.js';
 import { showInfoModal } from './info-page.js';
 import { showDrugModal } from './drug-store.js';
 import { findDrugIdByName } from '../data/drug-store.js';
+import { getAllCategories } from '../services/category-service.js';
 import type { DecisionNode, TreatmentRegimen } from '../models/types.js';
 
 let engine: TreeEngine | null = null;
@@ -218,9 +219,15 @@ function renderHeader(node: DecisionNode): HTMLElement {
   shareBtn.addEventListener('click', () => {
     if (!currentConfig) return;
     const treeId = currentTreeId ?? '';
-    const url = `${window.location.origin}${window.location.pathname}#/tree/${treeId}`;
+    const url = `${window.location.origin}${window.location.pathname}#/share/${treeId}`;
+    // Find the category name for context
+    const categories = getAllCategories();
+    const cat = categories.find(c => c.decisionTrees.some(t => t.id === treeId));
+    const catName = cat ? cat.name : '';
+    const shareTitle = `MedKitt: ${node.title}`;
+    const shareText = catName ? `${catName} \u2014 ${node.title}` : node.title;
     if (navigator.share) {
-      navigator.share({ title: `MedKitt: ${node.title}`, url }).catch(() => {});
+      navigator.share({ title: shareTitle, text: shareText, url }).catch(() => {});
     } else {
       navigator.clipboard.writeText(url).then(() => {
         shareBtn.textContent = '\u2713';
