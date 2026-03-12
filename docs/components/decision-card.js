@@ -54,16 +54,13 @@ function renderAnsweredCard(card, node, opts) {
             const isSelected = i === opts.selectedOptionIndex;
             let variant;
             if (!isSelected) {
-                variant = 'dimmed';
+                variant = 'no';
             }
             else if (opt.urgency === 'critical') {
                 variant = 'critical';
             }
             else if (opt.urgency === 'urgent') {
                 variant = 'urgent';
-            }
-            else if (node.options.length === 2) {
-                variant = i === 0 ? 'yes' : 'no';
             }
             else {
                 variant = 'yes';

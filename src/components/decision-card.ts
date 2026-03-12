@@ -75,15 +75,13 @@ function renderAnsweredCard(card: HTMLElement, node: DecisionNode, opts: CardOpt
       const opt = node.options[i];
       const isSelected = i === opts.selectedOptionIndex;
 
-      let variant: 'yes' | 'no' | 'dimmed' | 'critical' | 'urgent';
+      let variant: 'yes' | 'no' | 'critical' | 'urgent';
       if (!isSelected) {
-        variant = 'dimmed';
+        variant = 'no';
       } else if (opt.urgency === 'critical') {
         variant = 'critical';
       } else if (opt.urgency === 'urgent') {
         variant = 'urgent';
-      } else if (node.options.length === 2) {
-        variant = i === 0 ? 'yes' : 'no';
       } else {
         variant = 'yes';
       }
