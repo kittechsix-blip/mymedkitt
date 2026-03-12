@@ -30,6 +30,34 @@ const TOOLBAR_CONFIGS = {
         { id: 'medical-rx', label: 'Medical Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'aub-treatment-medical' },
         { id: 'classify', label: 'Classify', icon: '\uD83E\uDE78', action: 'jump', target: 'aub-classify' },
     ],
+    'distal-radius': [
+        { id: 'analgesia', label: 'Analgesia', icon: '\uD83D\uDC89', action: 'jump', target: 'dr-analgesia' },
+        { id: 'tramp', label: 'TRAMP', icon: '\uD83E\uDDB4', action: 'jump', target: 'dr-traction' },
+        { id: 'post-xr', label: 'Post-XR', icon: '\uD83D\uDCCB', action: 'jump', target: 'dr-post-xray' },
+    ],
+    'splinting': [
+        { id: 'arm', label: 'Arm', icon: '\uD83D\uDCAA', action: 'jump', target: 'splint-humerus' },
+        { id: 'hand', label: 'Hand', icon: '\u270B', action: 'jump', target: 'splint-wrist-hand' },
+        { id: 'leg', label: 'Leg', icon: '\uD83E\uDDB5', action: 'jump', target: 'splint-lower-ext' },
+    ],
+    'croup': [
+        { id: 'severity', label: 'Severity', icon: '\uD83D\uDCCA', action: 'jump', target: 'croup-severity' },
+        { id: 'epi-obs', label: 'Epi Obs', icon: '\uD83D\uDCA8', action: 'jump', target: 'croup-epi-obs' },
+    ],
+    'neonatal-resus': [
+        { id: 'ppv', label: 'PPV', icon: '\uD83E\uDEC1', action: 'jump', target: 'nrp-ppv' },
+        { id: 'cpr', label: 'CPR', icon: '\uD83D\uDC93', action: 'jump', target: 'nrp-cpr' },
+        { id: 'epi', label: 'Epi', icon: '\uD83D\uDC89', action: 'jump', target: 'nrp-epinephrine' },
+    ],
+    'peds-fever': [
+        { id: 'neonatal', label: '0-21d', icon: '\uD83D\uDC76', action: 'jump', target: 'pf-neo-screen' },
+        { id: 'markers', label: 'Labs', icon: '\uD83E\uDDEA', action: 'jump', target: 'pf-22-im' },
+    ],
+    'uti-peds': [
+        { id: 'ua', label: 'UA', icon: '\uD83E\uDDEA', action: 'jump', target: 'uti-ua-cath' },
+        { id: 'abx', label: 'Abx', icon: '\uD83D\uDC8A', action: 'jump', target: 'uti-ed-abx' },
+        { id: 'imaging', label: 'Imaging', icon: '\uD83D\uDCF7', action: 'jump', target: 'uti-imaging' },
+    ],
     'burns': [
         { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa' },
         { id: 'fluid', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'calculator', target: 'parkland' },
