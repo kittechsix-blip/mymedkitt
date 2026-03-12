@@ -710,8 +710,10 @@ body {
   justify-content: flex-end;
   min-height: 86px;
   padding: 16px 14px 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-bottom-color: rgba(0,0,0,0.15);
+  /* 3D luminous border — bright top/left edges, dark bottom/right */
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-right-color: rgba(0,0,0,0.18);
+  border-bottom-color: rgba(0,0,0,0.25);
   border-radius: 14px;
   cursor: pointer;
   font-family: var(--font-sans);
@@ -719,12 +721,12 @@ body {
   text-align: left;
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
   overflow: hidden;
-  /* Premium 3D depth */
+  /* Premium 3D depth — outer shadow + inset lighting */
   box-shadow:
-    0 8px 20px rgba(0,0,0,0.3),
-    0 3px 8px rgba(0,0,0,0.15),
-    inset 0 2px 1px rgba(255,255,255,0.25),
-    inset 0 -2px 4px rgba(0,0,0,0.25);
+    0 8px 20px rgba(0,0,0,0.32),
+    0 3px 8px rgba(0,0,0,0.18),
+    inset 0 2px 1px rgba(255,255,255,0.30),
+    inset 0 -3px 6px rgba(0,0,0,0.30);
   transition: all 0.1s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -737,13 +739,13 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 50%;
+  height: 48%;
   background: linear-gradient(180deg,
-    rgba(255,255,255,0.38) 0%,
-    rgba(255,255,255,0.18) 35%,
-    rgba(255,255,255,0.05) 65%,
+    rgba(255,255,255,0.42) 0%,
+    rgba(255,255,255,0.22) 30%,
+    rgba(255,255,255,0.06) 60%,
     transparent 100%);
-  border-radius: 13px 13px 0 0;
+  border-radius: 12px 12px 0 0;
   pointer-events: none;
 }
 
@@ -754,9 +756,9 @@ body {
   top: 10px;
   right: 12px;
   font-size: 10px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.70);
   pointer-events: none;
-  text-shadow: 0 0 4px rgba(255,255,255,0.4);
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
 }
 
 .dashboard-card:active {
@@ -780,14 +782,20 @@ body {
 }
 
 .dashboard-card__count {
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.85;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   align-self: flex-end;
   position: relative;
   z-index: 1;
+  /* Highlighted recessed badge */
+  background: rgba(255,255,255,0.12);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+  color: rgba(255,255,255,0.9);
 }
 
 /* ---- Disclaimer ---- */
@@ -2043,9 +2051,9 @@ body {
 }
 
 .tab-item svg {
-  width: 26px;
-  height: 26px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 .tab-item.active {
@@ -2053,7 +2061,7 @@ body {
 }
 
 .tab-item.active svg {
-  filter: drop-shadow(0 1px 3px rgba(60,179,113,0.25));
+  filter: drop-shadow(0 2px 5px rgba(60,179,113,0.35));
 }
 
 .tab-item-label {
