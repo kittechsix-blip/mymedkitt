@@ -1,6 +1,6 @@
 // myMedKitt — Contextual Toolbar
 // Per-consult bottom bar replacing the global tab bar when inside a consult.
-// Configurable tools per consult + Home + ••• overflow.
+// Configurable tools per consult + ••• overflow.
 
 import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
@@ -61,25 +61,6 @@ export function renderContextualToolbar(
 
     toolbar.appendChild(btn);
   }
-
-  // Home button
-  const homeBtn = document.createElement('button');
-  homeBtn.className = 'contextual-toolbar__item';
-
-  const homeIcon = document.createElement('span');
-  homeIcon.className = 'contextual-toolbar__icon';
-  homeIcon.textContent = '\uD83C\uDFE0';
-  const homeLabel = document.createElement('span');
-  homeLabel.textContent = 'Home';
-
-  homeBtn.appendChild(homeIcon);
-  homeBtn.appendChild(homeLabel);
-  homeBtn.addEventListener('click', () => {
-    controller.fullReset();
-    removeContextualToolbar();
-    router.navigate('/');
-  });
-  toolbar.appendChild(homeBtn);
 
   // Overflow (•••) button
   const overflowBtn = document.createElement('button');
