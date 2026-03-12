@@ -36,6 +36,23 @@ const TOOLBAR_CONFIGS = {
     ],
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
+        { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
+        { id: 'evt', label: 'EVT', icon: '\u23F0', action: 'jump', target: 'stroke-evt-window' },
+    ],
+    'ich': [
+        { id: 'reversal', label: 'Reversal', icon: '\uD83E\uDE78', action: 'jump', target: 'ich-anticoag' },
+        { id: 'cerebellar', label: 'Cerebellar', icon: '\uD83D\uDEA8', action: 'jump', target: 'ich-cerebellar-surg' },
+        { id: 'bp', label: 'BP Mgmt', icon: '\uD83E\uDE7A', action: 'jump', target: 'ich-bp' },
+    ],
+    'status-epilepticus': [
+        { id: 'bzd', label: 'BZD Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'se-iv-bzd' },
+        { id: 'second-line', label: '2nd Line', icon: '\u26A1', action: 'jump', target: 'se-2nd-line-choice' },
+        { id: 'special', label: 'Special Pop', icon: '\uD83E\uDD30', action: 'jump', target: 'se-special-pop' },
+    ],
+    'sah': [
+        { id: 'ottawa', label: 'Ottawa Rule', icon: '\uD83D\uDCCB', action: 'jump', target: 'sah-ottawa' },
+        { id: 'confirmed', label: 'SAH Mgmt', icon: '\uD83D\uDEA8', action: 'jump', target: 'sah-confirmed' },
+        { id: 'vasospasm', label: 'Vasospasm', icon: '\uD83D\uDC8A', action: 'jump', target: 'sah-vasospasm-prev' },
     ],
     'nstemi': [
         { id: 'timi', label: 'TIMI', icon: '\u2764\uFE0F', action: 'calculator', target: 'timi' },
@@ -69,6 +86,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'wound-care', label: 'Wound Care', icon: '\uD83E\uDE79', action: 'jump', target: 'rabies-wound' },
         { id: 'full-pep', label: 'PEP Protocol', icon: '\uD83D\uDC89', action: 'jump', target: 'rabies-full-pep' },
         { id: 'bat', label: 'Bat Rules', icon: '\uD83E\uDD87', action: 'jump', target: 'rabies-bat' },
+    ],
+    'priapism': [
+        { id: 'block', label: 'Block', icon: '\uD83D\uDC89', action: 'jump', target: 'priapism-penile-block-intro' },
+        { id: 'aspirate', label: 'Aspirate', icon: '\uD83E\uDE78', action: 'jump', target: 'priapism-aspiration-intro' },
+        { id: 'phenyl', label: 'Phenyl', icon: '\uD83D\uDC8A', action: 'jump', target: 'priapism-phenylephrine-intro' },
+    ],
+    'chest-tube': [
+        { id: 'anatomy', label: 'Anatomy', icon: '\uD83D\uDCCD', action: 'jump', target: 'ctube-anatomy' },
+        { id: 'insert', label: 'Insert', icon: '\uD83E\uDE7A', action: 'jump', target: 'ctube-cut' },
+        { id: 'tube-size', label: 'Tube Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'ctube-tube-size' },
     ],
     'pe': [
         { id: 'thrombolysis', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'pe-massive-tx' },
