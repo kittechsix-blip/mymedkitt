@@ -1771,6 +1771,8 @@ body {
    CALCULATOR STYLES
    =================================================================== */
 
+/* ---- Calculator Search ---- */
+
 .calculator-search-wrap {
   margin: 8px 0 16px;
 }
@@ -1788,6 +1790,301 @@ body {
 .calculator-search-input:focus {
   outline: none;
   border-color: var(--color-primary);
+}
+
+/* ---- Calculator Header ---- */
+
+.calculator-header {
+  text-align: center;
+  padding: 16px 0 8px;
+}
+
+.calculator-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.calculator-subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.calculator-description {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: 0 16px 16px;
+  line-height: 1.5;
+}
+
+/* ---- Score Display — 3D Glassmorphism Umber ---- */
+
+.calculator-score-display {
+  margin: 16px auto 20px;
+  padding: 20px 24px;
+  max-width: 320px;
+  text-align: center;
+  border-radius: 16px;
+  /* Glassmorphism: frosted glass + umber tones */
+  background: linear-gradient(135deg,
+    rgba(184, 115, 51, 0.15) 0%,
+    rgba(184, 115, 51, 0.08) 50%,
+    rgba(184, 115, 51, 0.12) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(184, 115, 51, 0.3);
+  box-shadow:
+    0 8px 24px rgba(184, 115, 51, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(184, 115, 51, 0.15);
+}
+
+.calculator-score-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--color-umber);
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(184, 115, 51, 0.25);
+  letter-spacing: -1px;
+}
+
+.calculator-result-label {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calculator-result-risk {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.calculator-risk-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 20px;
+  margin-top: 8px;
+  border: 2px solid;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.calculator-risk-class {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calculator-risk-level {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.calculator-mortality {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 8px;
+}
+
+/* ---- Calculator Form — Field Cards ---- */
+
+.calculator-form {
+  padding: 0 4px;
+}
+
+.calculator-field {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.calculator-field-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.calculator-field-desc {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.calculator-field-points {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-umber);
+  background: rgba(184, 115, 51, 0.1);
+  padding: 2px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* ---- Toggle Switch (checkbox replacement) ---- */
+
+.calculator-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calculator-toggle-label-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.calculator-toggle {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 32px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.calculator-toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.calculator-toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #C8C8CA;
+  border-radius: 32px;
+  transition: background 0.2s;
+}
+
+.calculator-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 3px;
+  bottom: 3px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-toggle-input:checked + .calculator-toggle-slider {
+  background: var(--color-umber);
+}
+
+.calculator-toggle-input:checked + .calculator-toggle-slider::before {
+  transform: translateX(24px);
+}
+
+/* ---- Number Input ---- */
+
+.calculator-number-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.calculator-number-input {
+  width: 80px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.calculator-number-input:focus {
+  outline: none;
+  border-color: var(--color-umber);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.15);
+}
+
+.calculator-number-unit {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* ---- Select Dropdown ---- */
+
+.calculator-select-row {
+  margin-bottom: 4px;
+}
+
+.calculator-select-input-row {
+  margin-top: 8px;
+}
+
+.calculator-select-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235A5A5A' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.calculator-select-input:focus {
+  outline: none;
+  border-color: var(--color-umber);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.15);
+}
+
+/* ---- Threshold Note & Citations ---- */
+
+.calculator-threshold {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding: 16px 16px 8px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.calculator-citations {
+  margin: 12px 0 24px;
+  padding: 0 4px;
+}
+
+.calculator-citations summary {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 8px 0;
 }
 
 .calculator-citation-list {
