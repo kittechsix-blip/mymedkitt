@@ -14,6 +14,10 @@
 **Deploy:** GitHub Pages from `docs/` directory.
 **Build:** `bunx tsc` (TypeScript compilation via Bun)
 
+### Auto-Deploy Rule (MANDATORY)
+
+**After every code change**, automatically run `/deploy` before asking Andy to review. Never ask Andy to test without deploying first — the app runs from GitHub Pages, not localhost. The deploy skill handles: compile TS, restore `docs/sw.js` (tsc empties it), bump SW cache version, commit, and push.
+
 ### Core Design Philosophy
 
 > **"All information accessible, but hidden by default."**
