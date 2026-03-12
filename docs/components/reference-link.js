@@ -65,7 +65,7 @@ export class ReferenceLink {
      * Style the citation button
      */
     styleCitationButton(btn) {
-        const { accent, text } = this.options.theme;
+        const { accent } = this.options.theme;
         btn.style.cssText = `
       display: inline-flex;
       align-items: center;
