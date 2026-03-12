@@ -93,6 +93,10 @@ export class TreeEngine {
         const node = this.getCurrentNode();
         return node?.module ?? null;
     }
+    /** Get all nodes in the tree (for full-tree scanning) */
+    getAllNodes() {
+        return Array.from(this.nodes.values());
+    }
     /** Get how many modules the tree has (max module number) */
     getTotalModules() {
         let max = 0;

@@ -120,6 +120,11 @@ export class TreeEngine {
     return node?.module ?? null;
   }
 
+  /** Get all nodes in the tree (for full-tree scanning) */
+  getAllNodes(): DecisionNode[] {
+    return Array.from(this.nodes.values());
+  }
+
   /** Get how many modules the tree has (max module number) */
   getTotalModules(): number {
     let max = 0;

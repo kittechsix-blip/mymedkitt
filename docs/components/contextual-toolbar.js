@@ -78,6 +78,28 @@ export function renderContextualToolbar(consultId, controller, entryNodeId) {
     document.body.appendChild(toolbar);
     toolbarEl = toolbar;
 }
+/** Build an ordered list of all major branch points in the tree.
+ *  A "major branch point" is any question node with 2+ options.
+ *  Sorted by module number, then by first-reachable order within module. */
+function collectAllBranchPoints(controller, entryNodeId) {
+    const engine = controller.getEngine();
+    const allNodes = engine.getAllNodes();
+    // Collect question nodes with 2+ options
+    const branchNodes = allNodes.filter(n => n.type === 'question' && n.options && n.options.length >= 2);
+    // Always include entry node at the top even if it's info type
+    const entryNode = engine.getNode(entryNodeId);
+    const hasEntry = branchNodes.some(n => n.id === entryNodeId);
+    const points = [];
+    if (entryNode && !hasEntry) {
+        points.push({ nodeId: entryNodeId, title: entryNode.title, module: entryNode.module });
+    }
+    // Sort by module, then alphabetically by title within module
+    branchNodes.sort((a, b) => a.module - b.module || a.title.localeCompare(b.title));
+    for (const node of branchNodes) {
+        points.push({ nodeId: node.id, title: node.title, module: node.module });
+    }
+    return points;
+}
 /** Toggle the branch point overflow list */
 function toggleBranchPointList(controller, entryNodeId) {
     if (branchListEl) {
@@ -86,61 +108,51 @@ function toggleBranchPointList(controller, entryNodeId) {
         return;
     }
     const engine = controller.getEngine();
-    const branchPoints = [];
-    // Scan all nodes for question nodes with 2+ options (major branch points)
-    // We iterate through all nodes available via the engine
     const session = engine.getSession();
     if (!session)
         return;
-    // Get all visited nodes + look ahead for branch points
-    const allNodeIds = new Set();
-    // Add history
-    for (const id of session.history)
-        allNodeIds.add(id);
-    allNodeIds.add(session.currentNodeId);
-    // Also scan all nodes in the tree for branch points
-    // We need to iterate the engine's node map — but it's private.
-    // Instead, we'll use the answer history and current path.
-    // For now, show history branch points.
-    for (const id of session.history) {
-        const node = engine.getNode(id);
-        if (node && node.type === 'question' && node.options && node.options.length >= 2) {
-            branchPoints.push({ nodeId: id, title: node.title });
-        }
-    }
-    // Also add entry point
-    const entryNode = engine.getNode(entryNodeId);
-    if (entryNode) {
-        branchPoints.unshift({ nodeId: entryNodeId, title: 'Start: ' + entryNode.title });
-    }
+    const currentNodeId = session.currentNodeId;
+    const visitedIds = new Set(session.history);
+    visitedIds.add(currentNodeId);
+    const branchPoints = collectAllBranchPoints(controller, entryNodeId);
     const list = document.createElement('div');
     list.className = 'branch-point-list';
-    const title = document.createElement('div');
-    title.className = 'branch-point-list__title';
-    title.textContent = 'Branch Points';
-    list.appendChild(title);
-    if (branchPoints.length === 0) {
-        const empty = document.createElement('div');
-        empty.style.padding = '12px';
-        empty.style.color = 'var(--color-text-muted)';
-        empty.textContent = 'No branch points visited yet.';
-        list.appendChild(empty);
-    }
-    else {
-        for (const bp of branchPoints) {
-            const item = document.createElement('button');
-            item.className = 'branch-point-list__item';
-            item.textContent = bp.title;
-            item.addEventListener('click', () => {
-                controller.jumpToNode(bp.nodeId);
-                branchListEl?.remove();
-                branchListEl = null;
-                // Trigger re-render via custom event
-                window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: bp.nodeId }));
-            });
-            list.appendChild(item);
+    // Header
+    const header = document.createElement('div');
+    header.className = 'branch-point-list__header';
+    header.textContent = 'Decision Map';
+    list.appendChild(header);
+    // Scrollable container
+    const scroller = document.createElement('div');
+    scroller.className = 'branch-point-list__scroller';
+    let lastModule = -1;
+    for (const bp of branchPoints) {
+        // Module divider
+        if (bp.module !== lastModule) {
+            const divider = document.createElement('div');
+            divider.className = 'branch-point-list__module';
+            divider.textContent = `Module ${bp.module}`;
+            scroller.appendChild(divider);
+            lastModule = bp.module;
         }
+        const item = document.createElement('button');
+        const isCurrent = bp.nodeId === currentNodeId;
+        const isVisited = visitedIds.has(bp.nodeId);
+        item.className = 'branch-point-list__item';
+        if (isCurrent)
+            item.classList.add('branch-point-list__item--current');
+        else if (isVisited)
+            item.classList.add('branch-point-list__item--visited');
+        item.textContent = bp.title;
+        item.addEventListener('click', () => {
+            controller.jumpToNode(bp.nodeId);
+            branchListEl?.remove();
+            branchListEl = null;
+            window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: bp.nodeId }));
+        });
+        scroller.appendChild(item);
     }
+    list.appendChild(scroller);
     // Close on outside click
     const closeHandler = (e) => {
         if (branchListEl && !branchListEl.contains(e.target)) {
@@ -152,4 +164,9 @@ function toggleBranchPointList(controller, entryNodeId) {
     setTimeout(() => document.addEventListener('click', closeHandler), 0);
     document.body.appendChild(list);
     branchListEl = list;
+    // Scroll the current item into view
+    const currentItem = list.querySelector('.branch-point-list__item--current');
+    if (currentItem) {
+        currentItem.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
 }
