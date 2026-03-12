@@ -1,11 +1,12 @@
-// MedKitt — App Entry Point
+// myMedKitt — App Entry Point
 // Registers service worker, sets up routes, renders views.
+// Pearl white theme — no dark/light toggle needed.
 
 import { router } from './services/router.js';
 import type { RouteParams } from './services/router.js';
-import { renderCategoryGrid } from './components/category-grid.js';
-import { renderCategoryView } from './components/category-view.js';
-import { renderTreeWizard } from './components/tree-wizard.js';
+import { renderDashboard } from './components/dashboard.js';
+import { renderSpecialtyView } from './components/specialty-view.js';
+import { renderConsultFlow } from './components/consult-flow.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
@@ -14,7 +15,9 @@ import { ACUTE_STROKE_WIZARD } from './data/wizard-consults/acute-stroke.js';
 import { initDrugs } from './services/drug-service.js';
 import { initCategories } from './services/category-service.js';
 import { initInfoPages } from './services/info-service.js';
-import { addSharedConsult, markOrganicVisit, hasFullAccess, isSharedMode } from './services/shared-mode.js';
+import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
+import { showSplashScreen } from './components/splash-screen.js';
+import { removeContextualToolbar } from './components/contextual-toolbar.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -24,14 +27,11 @@ function registerServiceWorker(): void {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((reg) => {
       console.log('Service worker registered:', reg.scope);
-      // Force update check on every page load
       reg.update();
     }).catch((err) => {
       console.error('Service worker registration failed:', err);
     });
 
-    // Auto-reload when a new service worker takes control
-    // This ensures updates are visible immediately without manual cache clearing
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       window.location.reload();
     });
@@ -42,44 +42,37 @@ function registerServiceWorker(): void {
 // View Rendering Helpers
 // -------------------------------------------------------------------
 
-/** Get the main content container */
 function getMain(): HTMLElement {
   const el = document.getElementById('main-content');
   if (!el) throw new Error('Missing #main-content element');
   return el;
 }
 
-/** Saved scroll position for the home screen */
 let homeScrollTop = 0;
 
-/** Clear main content and return the container */
 function clearMain(): HTMLElement {
   const main = getMain();
-  // Save home scroll position before clearing
-  if (main.querySelector('.rolodex')) {
+  if (main.querySelector('.dashboard') || main.querySelector('.rolodex')) {
     homeScrollTop = main.scrollTop;
   }
   main.innerHTML = '';
+  // Restore app header (dashboard hides it)
+  const appHeader = document.querySelector('.app-header') as HTMLElement | null;
+  if (appHeader) appHeader.style.display = '';
   return main;
 }
 
-/** Render a placeholder screen (will be replaced by real components in later tasks) */
 function renderPlaceholder(title: string, subtitle: string, icon: string): void {
   const main = clearMain();
-
   const container = document.createElement('div');
   container.className = 'empty-state';
-
   const iconEl = document.createElement('div');
   iconEl.className = 'empty-state-icon';
   iconEl.textContent = icon;
-
   const titleEl = document.createElement('h3');
   titleEl.textContent = title;
-
   const subtitleEl = document.createElement('p');
   subtitleEl.textContent = subtitle;
-
   container.appendChild(iconEl);
   container.appendChild(titleEl);
   container.appendChild(subtitleEl);
@@ -87,24 +80,15 @@ function renderPlaceholder(title: string, subtitle: string, icon: string): void 
 }
 
 // -------------------------------------------------------------------
-// Theme & Tab Bar Management
+// Tab Bar Management
 // -------------------------------------------------------------------
 
-/** Toggle home-light theme on body */
-function setHomeTheme(isHome: boolean): void {
-  if (isHome) {
-    document.body.classList.add('home-light');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#F5F5F7');
-  } else {
-    document.body.classList.remove('home-light');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0f0f1a');
-  }
-}
-
-/** Update bottom tab bar active state and shared-mode visibility */
-function updateTabBar(activeTab: string): void {
-  const tabs = document.querySelectorAll('.tab-item');
-  const shared = isSharedMode();
+/** Show/hide the global tab bar and set active state */
+function showGlobalTabBar(activeTab: string): void {
+  const tabBar = document.getElementById('bottom-tab-bar');
+  if (!tabBar) return;
+  tabBar.style.display = '';
+  const tabs = tabBar.querySelectorAll('.tab-item');
   tabs.forEach(tab => {
     const tabId = tab.getAttribute('data-tab');
     if (tabId === activeTab) {
@@ -112,13 +96,12 @@ function updateTabBar(activeTab: string): void {
     } else {
       tab.classList.remove('active');
     }
-    // Hide Pharmacy/Med-Calc tabs in shared mode
-    if (shared && (tabId === 'pharmacy' || tabId === 'med-calc')) {
-      (tab as HTMLElement).style.display = 'none';
-    } else {
-      (tab as HTMLElement).style.display = '';
-    }
   });
+}
+
+function hideGlobalTabBar(): void {
+  const tabBar = document.getElementById('bottom-tab-bar');
+  if (tabBar) tabBar.style.display = 'none';
 }
 
 // -------------------------------------------------------------------
@@ -126,113 +109,84 @@ function updateTabBar(activeTab: string): void {
 // -------------------------------------------------------------------
 
 function handleHome(_params: RouteParams): void {
-  // Grant full access to organic visitors (found the app directly, not via share link).
-  // Placed here instead of init() so it only fires when the user actually reaches
-  // the home screen — avoids race conditions with SW reloads and hash-based detection.
   if (!hasFullAccess()) {
     markOrganicVisit();
   }
-
-  setHomeTheme(true);
-  updateTabBar('home');
+  removeContextualToolbar();
+  showGlobalTabBar('home');
   const main = clearMain();
-  renderCategoryGrid(main);
-  // Restore scroll after images load (they determine card heights)
-  const images = main.querySelectorAll('img');
-  if (images.length === 0 || homeScrollTop === 0) {
+  renderDashboard(main);
+  // Restore scroll after render
+  requestAnimationFrame(() => {
     main.scrollTop = homeScrollTop;
-  } else {
-    let loaded = 0;
-    const restore = () => {
-      loaded++;
-      if (loaded >= images.length) main.scrollTop = homeScrollTop;
-    };
-    images.forEach(img => {
-      if (img.complete) { loaded++; }
-      else { img.addEventListener('load', restore); img.addEventListener('error', restore); }
-    });
-    if (loaded >= images.length) main.scrollTop = homeScrollTop;
-  }
+  });
 }
 
 function handleCategory(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('');
+  removeContextualToolbar();
+  hideGlobalTabBar();
   const id = params['id'] ?? 'unknown';
   const main = clearMain();
-  renderCategoryView(main, id);
+  renderSpecialtyView(main, id);
 }
 
 function handleTree(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('');
+  hideGlobalTabBar();
   const id = params['id'] ?? 'unknown';
   const main = clearMain();
-  void renderTreeWizard(main, id);
+  void renderConsultFlow(main, id);
 }
 
 function handleTreeNode(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('');
+  hideGlobalTabBar();
   const treeId = params['id'] ?? 'unknown';
   const nodeId = params['nodeId'] ?? 'unknown';
-  renderPlaceholder(
-    `Node: ${nodeId}`,
-    `In tree: ${treeId}. Node rendering coming in Task 8.`,
-    '\uD83D\uDD35'
-  );
+  renderPlaceholder(`Node: ${nodeId}`, `In tree: ${treeId}.`, '\uD83D\uDD35');
 }
 
 function handleReference(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('');
+  removeContextualToolbar();
+  showGlobalTabBar('');
   const main = clearMain();
   const treeId = params['treeId'];
   void renderReferencePanel(main, treeId);
 }
 
 function handleDrugList(_params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('pharmacy');
+  removeContextualToolbar();
+  showGlobalTabBar('pharmacy');
   const main = clearMain();
   renderDrugList(main);
 }
 
 function handleCalculatorList(_params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('med-calc');
+  removeContextualToolbar();
+  showGlobalTabBar('med-calc');
   const main = clearMain();
   renderCalculatorList(main);
 }
 
 function handleCalculator(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('med-calc');
+  removeContextualToolbar();
+  showGlobalTabBar('med-calc');
   const id = params['id'] ?? 'unknown';
   const main = clearMain();
   renderCalculator(main, id);
 }
 
 function handleWizard(params: RouteParams): void {
-  setHomeTheme(false);
-  updateTabBar('');
+  removeContextualToolbar();
+  hideGlobalTabBar();
   const id = params['id'] ?? 'unknown';
   const main = clearMain();
-
-  // Map wizard IDs to data
   const wizardData: Record<string, typeof ACUTE_STROKE_WIZARD> = {
     'acute-stroke': ACUTE_STROKE_WIZARD,
   };
-
   const consult = wizardData[id];
   if (consult) {
     renderConsultWizard(main, consult);
   } else {
-    renderPlaceholder(
-      `Wizard: ${id}`,
-      'Consult wizard data not found.',
-      '\u{1F50D}'
-    );
+    renderPlaceholder(`Wizard: ${id}`, 'Consult wizard data not found.', '\u{1F50D}');
   }
 }
 
@@ -241,19 +195,13 @@ function handleShare(params: RouteParams): void {
   if (treeId) {
     addSharedConsult(treeId);
   }
-  // Redirect to the actual tree — replace hash so back button doesn't loop
   window.location.replace('#/tree/' + treeId);
 }
 
 function handleNotFound(): void {
-  setHomeTheme(false);
-  updateTabBar('');
-  renderPlaceholder(
-    'Page Not Found',
-    'This route doesn\u2019t exist. Tap back or go home.',
-    '\u2753'
-  );
-
+  removeContextualToolbar();
+  showGlobalTabBar('');
+  renderPlaceholder('Page Not Found', 'This route doesn\u2019t exist. Tap back or go home.', '\u2753');
   const main = getMain();
   const homeBtn = document.createElement('button');
   homeBtn.className = 'btn-primary';
@@ -270,8 +218,14 @@ function handleNotFound(): void {
 async function init(): Promise<void> {
   registerServiceWorker();
 
-  // Initialize data services (loads from IndexedDB/Supabase/hardcoded fallback)
+  // Show splash screen while data loads
+  const splashPromise = showSplashScreen();
+
+  // Initialize data services
   await Promise.all([initDrugs(), initCategories(), initInfoPages()]);
+
+  // Wait for splash to finish
+  await splashPromise;
 
   // Tab bar click delegation
   const tabBar = document.getElementById('bottom-tab-bar');
@@ -299,7 +253,7 @@ async function init(): Promise<void> {
   router.on('/drugs', handleDrugList);
   router.on('/calculators', handleCalculatorList);
   router.on('/calculator/:id', handleCalculator);
-  router.on('/wizard/:id', handleWizard); // New wizard route
+  router.on('/wizard/:id', handleWizard);
   router.onNotFound(handleNotFound);
 
   // Start routing

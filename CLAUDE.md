@@ -1,43 +1,209 @@
-# MedKitt — Project Instructions
+# myMedKitt — Project Instructions
 
 > Read this file at the start of every session working on this project.
+> The PRD (`myMedKitt-PRD.md`) is the **single source of truth** for all UI/UX decisions.
 
 ---
 
 ## Project Overview
 
-**What:** Mobile-first PWA for EM clinical decision trees. First tree: Neurosyphilis workup.
+**What:** Complete UI/UX redesign of MedKitt — a mobile-first PWA for EM clinical decision trees. Pure frontend overhaul; backend, clinical content, and data models are unchanged.
 **Who:** Andy, EM physician at Dell Seton Medical Center.
-**Where:** `~/Desktop/em-medkitt/`
+**Where:** `~/Desktop/myMedKitt/` (fork of MedKitt v1.36)
+**Origin:** MedKitt v1.36 — 28 consults, 119 drugs, 7+ calculators
 **Deploy:** GitHub Pages from `docs/` directory.
-**Status:** Foundation docs complete. Building from IMPLEMENTATION_PLAN.md.
+**Build:** `bunx tsc` (TypeScript compilation via Bun)
+
+### Core Design Philosophy
+
+> **"All information accessible, but hidden by default."**
+> Experienced physicians fly through decisions; residents can expand everything to learn. Same app, serves both.
+
+### The Problem Being Solved
+- Current MedKitt dumps all information on screen at once
+- Module progress bubbles create visual noise
+- Too much scrolling through content that isn't needed in the moment
+- Users report the app "doesn't flow well for quick reference"
+
+---
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `PRD.md` | Full clinical spec — decision tree logic, evidence, data model |
-| `TECH_STACK.md` | Architecture decisions, file structure, PWA requirements |
-| `FRONTEND_GUIDELINES.md` | Design system, color palette, component patterns, security rules |
-| `IMPLEMENTATION_PLAN.md` | Numbered task list — build from the next incomplete task |
-| `progress.txt` | Session-by-session progress log |
-| `docs/` | GitHub Pages deployment directory (built app lives here) |
+| `myMedKitt-PRD.md` | **Source of truth** — full UX spec, color system, component architecture, deploy checklist |
 | `src/` | TypeScript source code |
+| `docs/` | GitHub Pages deployment directory (compiled app) |
+| `src/views/style.css` | Design system CSS (custom properties, 3D buttons, layout) |
+| `src/services/tree-engine.ts` | Decision tree state machine (**unchanged from MedKitt**) |
+| `src/data/` | All clinical content (**unchanged from MedKitt**) |
 
-## Build Workflow
+---
 
-Each session:
-1. Read this file + `progress.txt` + `IMPLEMENTATION_PLAN.md`
-2. Find the next incomplete task
-3. Tell the user what you're implementing and why
-4. Implement it following patterns in `FRONTEND_GUIDELINES.md`
-5. Test it works
-6. Check for security issues
-7. Update `CLAUDE.md` status and `progress.txt`
-8. STOP — one task per session
+## Design System — Pearl White + 3D Metallic
+
+### Color Tokens (CSS Custom Properties)
+
+#### Backgrounds & Surfaces
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--color-bg` | `#FAFAF5` | Pearl white — ALL content backgrounds |
+| `--color-surface-card` | `#FFFFFF` | Decision cards (raised, with shadow) |
+| `--color-text-primary` | `#1A1A1A` | Crisp black — all body text on white |
+| `--color-text-secondary` | `#5A5A5A` | Secondary labels and captions |
+
+#### Accents
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--color-umber` | `#B87333` | Copper/bronze — splash screen, premium accents |
+| `--color-decision-active` | `#3CB371` | Green — active decision, bottom tab highlight |
+| `--color-danger` | `#ff4757` | Red — urgent/critical alerts |
+| `--color-warning` | `#ffa502` | Orange — caution states |
+
+#### Specialty Colors (for dashboard buttons AND consult headers)
+| Specialty | Hex |
+|-----------|-----|
+| Anesthesia/Airway | `#3D4F5F` |
+| Cardiology | `#C62828` |
+| Critical Care | `#37474F` |
+| Emergency Medicine | `#1565C0` |
+| Gastroenterology | `#6D4C41` |
+| Heme/Onc | `#AD1457` |
+| Infectious Disease | `#2E7D32` |
+| Nephro/Rheum/Endo | `#4E342E` |
+| Neurology | `#00695C` |
+| OB/GYN | `#880E4F` |
+| Ophthalmology | `#00838F` |
+| Orthopedics | `#455A64` |
+| Pediatrics | `#1B5E20` |
+| Procedures | `#283593` |
+| Toxicology | `#9E9D24` |
+| Trauma/Surg | `#E65100` |
+| U/S-Rads | `#1A237E` |
+| Urology | `#F57F17` |
+
+### Typography
+| Element | Font | Size | Weight | Color |
+|---------|------|------|--------|-------|
+| Body text | System sans-serif | 16px | 400 | `--color-text-primary` |
+| Card question text | System sans-serif | 18px | 600 | `--color-text-primary` |
+| Button text | System sans-serif | 16px | 600 | White (on colored buttons) |
+| Dose highlights | SF Mono, Monaco, monospace | 14px | 400 | `--color-decision-active` |
+| Expanded info text | System sans-serif | 15px | 400 | `--color-text-primary` |
+
+### 3D Button Aesthetic (MANDATORY — Pure CSS, No Image Assets)
+- **Premium, skeuomorphic** — glossy metallic buttons, raised cards, tactile feel
+- **NOT flat/material design** — intentionally premium and physical-feeling
+- **Techniques:** Linear gradients (metallic sheen), box-shadow (depth), border-radius (pill shape), text-shadow (embossed), `:active` press-down effect
+- **States:** Charcoal grey (default/unchosen), Green (yes/affirmative), Black (no/negative), Muted grey flat (disabled)
+- **Specialty buttons:** Each uses its specialty color as the gradient base
+- Full CSS specs in PRD Section 7
+
+---
+
+## App Flow & Screen Architecture
+
+### Splash Screen
+- Fade in (0.5s) → Hold (1.5s) → Fade out (0.5s) → Dashboard
+- myMedKitt logo centered on dark background
+- Total duration: ~2.5 seconds
+
+### Dashboard (Home Screen)
+- myMedKitt logo centered at top
+- Search icon (🔍) in subheader — taps to expand to full search bar
+- 2-column grid of **3D glossy specialty buttons** in **alphabetical order**
+- Each button: specialty color, category name, consult count badge
+- **Bottom toolbar (dashboard only):** 🔬 Lab, ⚗️ Pharmacy, 🧮 Med-Calc
+
+### Specialty View (Category Consult List)
+- Header in **specialty color**: ← Back, title, 🏠 Home
+- 🔍 Search icon (scope: this specialty)
+- 3D consult buttons in specialty color, **alphabetical order**
+- Consults sorted at render time (no need to maintain order in data)
+- Categories with 3+ consults show search/filter input
+
+### Consult View — Decision Card Flow (THE CORE UX)
+- **Specialty-colored header:** ← Back (scroll up one card), ↺ Reset (first card), Title, 🏠 Home
+- 🔍 Search icon (scope: this consult)
+- **Pearl white background** with stacked **raised white decision cards**
+- **Progressive disclosure:** one decision at a time, answered cards stack above
+- **No module bubble bar** — removed (was visual noise)
+
+#### Decision Card Behavior
+1. First card centered on screen — bold black question text, charcoal 3D buttons
+2. User taps option → selected button turns **GREEN** (yes/affirmative) or **BLACK** (no/negative)
+3. Next card **instantly appears below**, screen auto-scrolls to center new card
+4. Scroll up to review answered cards — color trail gives visual summary of path
+5. Expandable inline content: "▸ Hemodynamic Criteria" expands below the link within the card
+6. Dense reference material: sliding **pearl white overlay panel** with X dismiss
+7. Calculators: **pop-up overlay**, stays open until user dismisses
+
+#### Button Color Logic
+- 2 options: first selected = green, second selected = black
+- 3+ options: selected = green, others stay charcoal
+- `urgency: 'critical'` overrides with red; `urgency: 'urgent'` with orange
+
+### Contextual Bottom Toolbar (Per-Consult)
+- Replaces global tab bar when inside a consult
+- Configurable tools per consult + 🏠 Home + ••• (branch points overflow)
+- "•••" opens scrollable list of major branch points (table of contents)
+
+| Consult | Bottom Toolbar Items |
+|---------|---------------------|
+| Burns | TBSA Calc, Fluid Calc, 🏠 Home, ••• |
+| Stroke | NIHSS, tPA Dosing, 🏠 Home, ••• |
+| A-Fib RVR | Cardioversion, Anticoag, 🏠 Home, ••• |
+| (default) | 🏠 Home, ••• |
+
+### Lab / Pharmacy / Med-Calc Views
+- Aggregated views from dashboard bottom toolbar
+- 3D buttons, alphabetical, search-scoped to section
+- Calculators/drugs open as standalone overlays
+
+### Search Behavior
+- **Icon** (magnifying glass) in subheader of every screen — taps to expand
+- Context-aware scoping:
+
+| Screen | Search Scope |
+|--------|-------------|
+| Dashboard | **Master search** — entire app |
+| Specialty view | Scoped to that specialty's consults |
+| Consult view | Scoped to that consult's content and branch points |
+| Med-Calc / Lab / Pharmacy | Scoped to that section's tools |
+
+### Navigation Rules
+- All navigation is **instant** — no confirmation dialogs
+- Home → dashboard directly
+- Back → scroll up one card (in consult) or back one screen
+- Reset → first card of current consult
+- Zero friction, fast, decisive
+
+---
+
+## Information Architecture — Two Levels of Expandable Content
+
+### Level 1: Inline Expandable (Within Cards)
+- Clickable text link: "▸ Differential Diagnosis"
+- Tapping expands section **below the link** within the same card
+- Tapping again collapses it
+- Use case: Quick supplementary info clinicians already know
+
+### Level 2: Pop-up Overlay (Sliding Panel)
+- Full sliding panel covering decision flow
+- Pearl white background, crisp black text, **X button** to dismiss
+- **Stays open until user dismisses** — no auto-close
+- Use case: Dense reference material (dosing tables, contraindication lists)
+
+### Calculators
+- Always **pop-up overlays** on top of flow
+- **Stay open until dismissed** — user is actively calculating
+- Critical calculators also in contextual bottom toolbar
+
+---
 
 ## Technical Rules
 
+### Carried from MedKitt (MANDATORY)
 - **Vanilla TypeScript** — no frameworks, no npm runtime dependencies
 - **CSS custom properties** — all colors from design tokens, never hardcode hex values
 - **Mobile-first** — 44px minimum touch targets, safe areas, portrait orientation
@@ -48,135 +214,276 @@ Each session:
 - **No patient data stored** — decision inputs are ephemeral per session
 - **CSP enforced** — via meta tag in index.html
 
-## Design System
+### New Rules for myMedKitt
+- **Portrait-only orientation** (enforced via manifest + CSS)
+- **Pearl white content backgrounds** — never dark backgrounds in content areas
+- **3D button aesthetic via CSS only** — no image assets for buttons
+- **All overlays must have explicit dismiss** (X button) — no auto-close
+- **Search indexed for instant results**
+- **Contextual toolbar configurable per-consult** from data layer
+- **Inline links use `<button>` with event delegation** (data-link-type/data-link-id), NOT `<a href="#">` — hash-routing conflicts on iOS Safari
 
-- Dark theme: `--color-bg: #0f0f1a`, `--color-surface: #1a1a2e`
-- Primary action: `--color-primary: #3CB371` (forest green)
-- Accent: `--color-umber-light: #B87333` (copper/bronze)
-- Urgency: `--color-danger: #ff4757` (red), `--color-warning: #ffa502` (orange)
-- Decisions: `--color-info: #3498db` (blue)
-- Dosing values: `.dose-highlight` class (monospace green pill)
-- Full palette in `FRONTEND_GUIDELINES.md`
+---
 
-## Weight-Based Dose Calculator (MANDATORY)
+## Component Architecture
 
-Every drug with mg/kg dosing MUST include a `weightCalc` field on its `DrugDose` entry. This powers an inline calculator in the Pharmacy modal that lets clinicians enter patient weight (or estimate it from age) to get the exact dose.
+```
+src/
+├── app.ts                     # App entry + splash screen
+├── components/
+│   ├── splash-screen.ts       # Fade-in/hold/fade-out logo animation
+│   ├── dashboard.ts           # Home screen with specialty grid + bottom toolbar
+│   ├── specialty-view.ts      # List of consults within a specialty
+│   ├── consult-flow.ts        # THE CORE — vertical decision card flow
+│   ├── decision-card.ts       # Individual decision card component
+│   ├── expandable-section.ts  # Inline expand/collapse within cards
+│   ├── overlay-panel.ts       # Sliding overlay for dense info + calculators
+│   ├── search-bar.ts          # Expandable search with context-aware scoping
+│   ├── contextual-toolbar.ts  # Per-consult bottom toolbar
+│   ├── branch-point-list.ts   # "..." overflow scrollable branch menu
+│   ├── button-3d.ts           # Reusable 3D glossy button component
+│   ├── text-renderer.ts       # Shared renderBodyText + appendBoldAware
+│   ├── calculator.ts          # Calculator overlay (carried from MedKitt)
+│   ├── drug-store.ts          # Pharmacy modal (carried from MedKitt)
+│   ├── info-page.ts           # Info page overlays (carried from MedKitt)
+│   ├── reference-table.ts     # Citation rendering (carried from MedKitt)
+│   └── reference-link.ts      # Inline reference links (carried from MedKitt)
+├── data/                      # ALL unchanged from MedKitt
+│   ├── categories.ts
+│   ├── drug-store.ts
+│   ├── info-pages.ts
+│   ├── toolbar-configs.ts     # NEW — per-consult toolbar definitions
+│   └── trees/                 # All 28 decision trees
+├── models/
+│   └── types.ts               # Type definitions (extended for new UX)
+├── services/
+│   ├── router.ts              # Hash-based SPA routing
+│   ├── tree-engine.ts         # Tree traversal state machine (UNCHANGED)
+│   ├── consult-flow-controller.ts  # NEW — TreeEngine wrapper for card stack
+│   ├── search-service.ts      # NEW — centralized search indexing
+│   ├── tree-service.ts        # Tree loading (3-tier fallback)
+│   ├── drug-service.ts        # Drug lookup
+│   ├── info-service.ts        # Info page management
+│   ├── category-service.ts    # Category loading
+│   ├── storage.ts             # LocalStorage abstraction
+│   ├── cache-db.ts            # IndexedDB cache
+│   ├── supabase.ts            # Supabase client
+│   └── shared-mode.ts         # Shared consult mode
+└── types/
+    └── consult-tree.ts        # Consult tree types
+```
 
-**Interface:**
+### New Type Definitions
+
+```typescript
+/** Per-consult contextual toolbar configuration */
+interface ConsultToolbar {
+  consultId: string;
+  tools: ToolbarItem[];
+}
+
+interface ToolbarItem {
+  id: string;
+  label: string;
+  icon: string;
+  action: 'calculator' | 'overlay' | 'jump';
+  target?: string;
+}
+
+/** Branch point for overflow menu */
+interface BranchPoint {
+  nodeId: string;
+  label: string;
+  module?: string;
+}
+
+/** Search result */
+interface SearchResult {
+  type: 'consult' | 'drug' | 'calculator' | 'branch-point' | 'info-page';
+  title: string;
+  subtitle?: string;
+  navigationTarget: string;
+  specialty?: string;
+}
+```
+
+---
+
+## Clinical Content Rules (ALL MANDATORY — Carried from MedKitt)
+
+### Weight-Based Dose Calculator (MANDATORY)
+
+Every drug with mg/kg dosing MUST include a `weightCalc` field on its `DrugDose` entry. This powers an inline calculator in the Pharmacy modal.
+
 ```typescript
 interface WeightCalc {
   dosePerKg: number;       // dose per kg (e.g., 0.6 for 0.6 mg/kg)
   unit: string;            // "mg", "mcg", "units", etc.
   maxDose?: number;        // max single dose cap
-  dailyDivided?: number;   // if /day dose, number of divisions (e.g., 3 for q8h)
+  dailyDivided?: number;   // if /day dose, divisions (3=q8h, 4=q6h, 2=BID)
   label?: string;          // optional label (e.g., "Low-dose alternative")
 }
 ```
 
 **Rules:**
 - Single calc: `weightCalc: { dosePerKg: 0.6, unit: 'mg', maxDose: 16 }`
-- Multiple calcs (array): `weightCalc: [{ dosePerKg: 0.25, unit: 'mg', label: 'Initial bolus' }, { dosePerKg: 0.35, unit: 'mg', label: 'Second bolus' }]`
-- For `/day` regimens: set `dailyDivided` (e.g., `3` for q8h, `4` for q6h, `2` for BID). The calculator divides daily total by this number and applies `maxDose` to the per-dose result.
-- Always set `maxDose` when the regimen specifies one.
-- Use `label` when there are multiple calculations or when the calc only covers part of a complex regimen (e.g., "Bolus" vs "Infusion").
-- Skip drugs where mg/kg is a max ceiling for a rate-titrated infusion (e.g., Procainamide 17 mg/kg max).
-
-## Indication-Aware Drug Links (MANDATORY)
-
-Every drug hyperlink in a consult tree MUST include an indication hint so the Pharmacy modal scrolls to the correct dosing subcategory. This prevents clinicians from seeing irrelevant dosing (e.g., opening Ceftriaxone from Peds Fever and seeing neurosyphilis dosing).
-
-**Link syntax:** `[DrugName](#/drug/drug-id/indication-hint)`
-
-**Examples:**
-- `[Ceftriaxone](#/drug/ceftriaxone/pediatric fever)` — scrolls to "Pediatric Fever / Neonatal Sepsis" dosing
-- `[Ceftriaxone](#/drug/ceftriaxone/pediatric meningitis)` — scrolls to "Pediatric Meningitis" dosing
-- `[Clopidogrel](#/drug/clopidogrel/acs)` — scrolls to "ACS / NSTEMI" dosing
-- `[Apixaban](#/drug/apixaban/atrial fibrillation)` — scrolls to AF stroke prevention dosing
-
-**Rules for every new consult:**
-1. Every drug referenced in a tree MUST have a dosing entry in `drug-store.ts` that matches the consult's use case (indication, dose, frequency).
-2. Every mg/kg dose in that entry MUST have a `weightCalc` field.
-3. Every `[Drug](#/drug/id)` link in the tree MUST include an `/indication-hint` suffix that matches the dosing card's indication text.
-4. The hint uses space-separated keywords that are matched against the dosing card's `data-indication` attribute (case-insensitive, all words must appear).
-5. If a drug is used the same way as an existing entry (e.g., first entry in the drug store), the hint can be omitted — but prefer always including it for clarity.
-
-**When building a new consult, always audit:**
-- Does each referenced drug have a dosing entry for THIS consult's clinical context?
-- Does each mg/kg entry have `weightCalc`?
-- Does each drug link include the right indication hint?
+- Multiple calcs (array): `weightCalc: [{ dosePerKg: 0.25, unit: 'mg', label: 'Initial bolus' }, ...]`
+- For `/day` regimens: set `dailyDivided` — calculator divides daily total by this number
+- Always set `maxDose` when the regimen specifies one
+- Use `label` for multiple calcs or partial regimens
+- Skip drugs where mg/kg is a max ceiling for rate-titrated infusions
 
 **Pediatric weight estimation (built into calculator UI):**
 - < 1 year: (months × 0.5) + 3.5 kg
 - 1–10 years: (years × 2) + 10 kg
 - > 10 years: (years × 2) + 20 kg
 
-## Steps Summary Info Page (MANDATORY for Emergent/Resuscitation Consults)
+### Indication-Aware Drug Links (MANDATORY)
 
-Every consult involving an **emergent procedure, resuscitation, or time-critical protocol** MUST include a Steps Summary info page. This gives clinicians a one-page quick-reference checklist they can review immediately before performing the procedure.
+Every drug hyperlink in a consult tree MUST include an indication hint so the Pharmacy modal scrolls to the correct dosing subcategory.
 
-**When to include:** Emergent deliveries, resuscitations (NRP, cardiac arrest), hemorrhage protocols (PPH), emergency procedures, any consult where a clinician needs to mentally rehearse steps under time pressure.
+**Syntax:** `[DrugName](#/drug/drug-id/indication-hint)`
 
-**Implementation pattern:**
-1. Create an `InfoPage` in `info-page.ts` with:
-   - Sectioned bullet points covering each major phase of the protocol
-   - Each bullet is a `[one-line step description](#/node/node-id)` link
-   - Links close the modal and jump directly to the detailed node in the tree
-   - Cross-consult links use `[text](#/tree/tree-id)` format
-2. Register in `INFO_PAGES` map
-3. Add as **first line** of the start node's body: `[Consult Title Steps Summary](#/info/page-id) — brief description.`
-
-**Technical details:**
-- `#/node/node-id` links dispatch `medkitt-jump-node` custom event → `TreeEngine.jumpToNode()`
-- `#/tree/tree-id` links use `window.location.hash` navigation
-- Info modal closes automatically before navigation
-
-**Existing examples:** Precipitous Delivery (`precip-delivery-summary`), Shoulder Dystocia (`sd-summary`)
-
-## Expandable Citations on All Node Types (MANDATORY)
-
-Every node type (question, info, result) with a `citation` array MUST render expandable citation references using `renderInlineCitations()` from `reference-table.ts`. This shows a collapsible "References (N)" section that expands to show the full citation text with clickable URLs.
-
-**Implementation:**
-- `renderInlineCitations(content, node.citation, currentConfig.citations)` — already wired in `tree-wizard.ts` for all three node types
-- Citations come from the tree's `TreeConfig.citations` array (loaded via `tree-service.ts`)
-- Each citation shows its number badge + full text, with URLs auto-linked
+**Examples:**
+- `[Ceftriaxone](#/drug/ceftriaxone/pediatric fever)` → "Pediatric Fever / Neonatal Sepsis" dosing
+- `[Clopidogrel](#/drug/clopidogrel/acs)` → "ACS / NSTEMI" dosing
+- `[Apixaban](#/drug/apixaban/atrial fibrillation)` → AF stroke prevention dosing
 
 **Rules for every new consult:**
-1. Every node that references evidence MUST include a `citation: [N]` array pointing to the tree's citation list
-2. Never render citations as plain text — always use `renderInlineCitations()` for the expandable `<details>` widget
-3. The tree's `citations` array in its data file must include all referenced citation numbers with full bibliographic text
+1. Every referenced drug MUST have a dosing entry in `drug-store.ts` matching the consult's use case
+2. Every mg/kg dose MUST have a `weightCalc` field
+3. Every `[Drug](#/drug/id)` link MUST include `/indication-hint` suffix
+4. Hints are space-separated keywords matched case-insensitively against `data-indication`
 
-## Clinical Content
+**Audit checklist for new consults:**
+- Does each referenced drug have a dosing entry for THIS clinical context?
+- Does each mg/kg entry have `weightCalc`?
+- Does each drug link include the right indication hint?
 
-- All decision tree logic is in `PRD.md` — the source of truth
-- 17 evidence citations — never invent clinical content
-- Neurosyphilis tree has 6 modules: Serology → Stage → Symptoms → LP Decision → CSF Interpreter → Treatment
-- Treatment includes full drug/dose/duration + PCN allergy alternatives
+### Steps Summary Info Page (MANDATORY for Emergent/Resuscitation Consults)
 
-## Category System
+Every consult involving an emergent procedure, resuscitation, or time-critical protocol MUST include a Steps Summary info page.
 
-19 EM categories (alphabetical) + custom "Add" option + 2 tool categories (Pharmacy, Med-Calc).
+**When to include:** Emergent deliveries, resuscitations (NRP, cardiac arrest), hemorrhage protocols, emergency procedures, any consult where clinicians need to mentally rehearse steps under time pressure.
 
-**Category view conventions (ALWAYS follow):**
-- Consults within each category are **sorted alphabetically** by title (`category-view.ts` sorts at render time)
-- Categories with **3+ consults** show a search/filter input at the top
-- When adding a new consult to `categories.ts`, no need to maintain alphabetical order in the data array — the view handles sorting automatically
+**Implementation:**
+1. Create `InfoPage` with sectioned bullet points, each bullet a `[step description](#/node/node-id)` link
+2. Cross-consult links use `[text](#/tree/tree-id)` format
+3. Register in `INFO_PAGES` map
+4. Add as **first line** of start node body: `[Consult Title Steps Summary](#/info/page-id)`
+
+**Technical:**
+- `#/node/node-id` dispatches `medkitt-jump-node` custom event → `TreeEngine.jumpToNode()`
+- `#/tree/tree-id` uses `window.location.hash` navigation
+- Overlay closes automatically before navigation
+
+### Expandable Citations on All Node Types (MANDATORY)
+
+Every node type (question, info, result) with a `citation` array MUST render expandable citation references using `renderInlineCitations()` from `reference-table.ts`.
+
+**Rules:**
+1. Every node referencing evidence MUST include `citation: [N]` array
+2. Never render citations as plain text — always use expandable `<details>` widget
+3. Tree's `citations` array must include all referenced numbers with full bibliographic text
+4. URLs in citations are auto-linked and tappable
+
+---
+
+## Data Layer (ALL UNCHANGED from MedKitt)
+
+### Three-Tier Fallback Architecture
+All data services follow: **Supabase → IndexedDB → Hardcoded Fallback**
+- `tree-service.ts` — loads tree nodes on-demand by tree ID
+- `drug-service.ts` — synchronous drug lookup with in-memory cache
+- `info-service.ts` — info page loading by ID
+- `category-service.ts` — category + tree associations, `mergeHardcodedConsults()` for new consults
+
+### Category System
+- 18 specialties + 2 tool categories (Pharmacy, Med-Calc)
+- Tool categories route to `/drugs` and `/calculators` instead of category view
+- `CATEGORY_COLORS` map: `{ card, iconBg }` for each category
+- Consults sorted alphabetically at render time — no need to maintain order in data
+
+### Tree Engine (UNCHANGED)
+- State machine: `startTree()`, `selectOption()`, `continueToNext()`, `goBack()`, `jumpToNode()`, `goToEntry()`
+- Session persistence: LocalStorage key `em-tree-session`
+- `getAnswerHistory()` returns `{ nodeId, nodeTitle, answer }[]`
+- `getSession()` exposes `history[]` (ordered node IDs) + `answers{}` (nodeId → optionLabel)
+
+### ConsultFlowController (NEW — wraps TreeEngine)
+- Maintains `cardStack[]` array for rendering all answered + current cards
+- Reconstructs card stack from engine session on restore
+- Does NOT modify TreeEngine — pure rendering adapter
+
+---
+
+## Service Worker Strategy
+
+- **Network-first** for JS/HTML/CSS (always fresh when online)
+- **Cache-first** for images (large, rarely change)
+- `controllerchange` listener auto-reloads page when new SW activates
+- **Bump `CACHE_NAME` version on every deploy** — user never needs to clear cache manually
+- `client.navigate(client.url)` in activate handler force-reloads open tabs
+
+---
+
+## Deploy Checklist (Run Before Every Deploy)
+
+- [ ] `bunx tsc` compiles clean
+- [ ] `git status docs/` — compiled output matches source (no stale files)
+- [ ] All 28 consults load and render correctly in card flow
+- [ ] Decision card buttons change color correctly (green = yes, black = no)
+- [ ] Auto-scroll-to-center works on new card appearance
+- [ ] Scroll-up reveals answered cards with correct color states
+- [ ] All expandable sections expand/collapse correctly
+- [ ] All overlay panels slide in and dismiss with X
+- [ ] All calculators open as overlays and stay open until dismissed
+- [ ] Contextual bottom toolbar shows correct tools per consult
+- [ ] "•••" overflow shows correct branch points per consult
+- [ ] Search works at all scope levels
+- [ ] Splash screen plays correctly on app launch
+- [ ] Dashboard shows all specialties alphabetically with correct 3D colors
+- [ ] Specialty headers change color per specialty
+- [ ] Lab / Pharmacy / Med-Calc views render correctly
+- [ ] All drug links include indication hints and navigate correctly
+- [ ] Weight-based calculator works in Pharmacy modal
+- [ ] All citations render with expandable references
+- [ ] Portrait-only orientation enforced
+- [ ] Service worker caches all new assets, `CACHE_NAME` bumped
+- [ ] Offline mode works (airplane mode test)
+- [ ] 44px minimum touch targets on all interactive elements
+- [ ] Safe area insets applied (iPhone notch/home indicator)
+- [ ] No console errors in production build
+- [ ] CSP meta tag is present and correct
+- [ ] PWA manifest updated with pearl white theme colors
+
+---
+
+## Shared Mode
+
+- `src/services/shared-mode.ts` — share individual consults via `#/share/{treeId}` URLs
+- Recipients see only received consults, accumulating over time
+- Full-access users see all
+- localStorage keys: `medkitt-shared-consults`, `medkitt-full-access`
+- "Unlock All Consults" button on dashboard
+- Dashboard and specialty views filter to shared consults in shared mode
+
+---
 
 ## Current Status
 
-v1.36 — 28 consults, Pharmacy (119 drugs), Med-Calc (PESI/sPESI/CHA₂DS₂-VASc/NIHSS/TIMI/BAS/FWD + 5 burns calcs)
+**myMedKitt v0.1** — Fork of MedKitt v1.36. UI/UX redesign in progress.
 
-Core build tasks (all complete):
-- [x] Tasks 0-12: Foundation → PWA shell → TypeScript → Router → Categories → Wizard → Results → References → Deploy
+Content carried from MedKitt (all unchanged):
+- 28 consults across 18 specialties
+- 119 drugs with indication-aware dosing
+- 7+ calculators (PESI, sPESI, CHA₂DS₂-VASc, NIHSS, TIMI, BAS, FWD, 5 burns calcs, CSF Correction)
+- 20 category icons (duotone PNGs)
 
-Post-v1.0 additions:
-- [x] Pneumothorax POCUS consult (Ultrasound) — 12 nodes, 4 modules
-- [x] PE Treatment consult (Pulmonology) — 29 nodes, 5 modules
-- [x] Drug Reference category — 12 drugs, searchable list + detail modals
-- [x] Medical Calculators category — PESI + sPESI with real-time scoring
-- [x] Modal overlay system — drug and info references as slide-up modals
-- [x] Inline drug hyperlinks — auto-linked across all trees
-- [x] DOAC info modal — oral anticoagulation reference with dosing table
-- [x] Flowchart removed — user found it useless on mobile
-- [x] Basic Echo Views consult (Ultrasound) — 8 nodes, 6 modules, 10 images, teaching reference
-- [x] Clickable header logo — navigates to home from any page
+Implementation phases:
+- [ ] Phase 0: CSS design system migration (dark → pearl white + 3D buttons)
+- [ ] Phase 1: Foundation components (button-3d, splash, overlay-panel, expandable-section, text-renderer)
+- [ ] Phase 2: Core decision flow (consult-flow-controller, decision-card, consult-flow)
+- [ ] Phase 3: Dashboard & navigation (dashboard, specialty-view, contextual-toolbar, search)
+- [ ] Phase 4: Integration & wiring (app.ts routes, reused component adaptation)
+- [ ] Phase 5: Polish & cleanup (remove dead code, CSS cleanup, SW update, deploy)

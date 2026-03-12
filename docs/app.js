@@ -1,19 +1,21 @@
-// MedKitt — App Entry Point
+// myMedKitt — App Entry Point
 // Registers service worker, sets up routes, renders views.
+// Pearl white theme — no dark/light toggle needed.
 import { router } from './services/router.js';
-import { renderCategoryGrid } from './components/category-grid.js';
-import { renderCategoryView } from './components/category-view.js';
-import { renderTreeWizard } from './components/tree-wizard.js';
+import { renderDashboard } from './components/dashboard.js';
+import { renderSpecialtyView } from './components/specialty-view.js';
+import { renderConsultFlow } from './components/consult-flow.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
 import { renderConsultWizard } from './components/consult-wizard.js';
 import { ACUTE_STROKE_WIZARD } from './data/wizard-consults/acute-stroke.js';
-import { renderLabInterpreter } from './components/lab-interpreter.js';
 import { initDrugs } from './services/drug-service.js';
 import { initCategories } from './services/category-service.js';
 import { initInfoPages } from './services/info-service.js';
-import { addSharedConsult, markOrganicVisit, hasFullAccess, isSharedMode } from './services/shared-mode.js';
+import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
+import { showSplashScreen } from './components/splash-screen.js';
+import { removeContextualToolbar } from './components/contextual-toolbar.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -21,13 +23,10 @@ function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((reg) => {
             console.log('Service worker registered:', reg.scope);
-            // Force update check on every page load
             reg.update();
         }).catch((err) => {
             console.error('Service worker registration failed:', err);
         });
-        // Auto-reload when a new service worker takes control
-        // This ensures updates are visible immediately without manual cache clearing
         navigator.serviceWorker.addEventListener('controllerchange', () => {
             window.location.reload();
         });
@@ -36,26 +35,25 @@ function registerServiceWorker() {
 // -------------------------------------------------------------------
 // View Rendering Helpers
 // -------------------------------------------------------------------
-/** Get the main content container */
 function getMain() {
     const el = document.getElementById('main-content');
     if (!el)
         throw new Error('Missing #main-content element');
     return el;
 }
-/** Saved scroll position for the home screen */
 let homeScrollTop = 0;
-/** Clear main content and return the container */
 function clearMain() {
     const main = getMain();
-    // Save home scroll position before clearing
-    if (main.querySelector('.rolodex')) {
+    if (main.querySelector('.dashboard') || main.querySelector('.rolodex')) {
         homeScrollTop = main.scrollTop;
     }
     main.innerHTML = '';
+    // Restore app header (dashboard hides it)
+    const appHeader = document.querySelector('.app-header');
+    if (appHeader)
+        appHeader.style.display = '';
     return main;
 }
-/** Render a placeholder screen (will be replaced by real components in later tasks) */
 function renderPlaceholder(title, subtitle, icon) {
     const main = clearMain();
     const container = document.createElement('div');
@@ -73,23 +71,15 @@ function renderPlaceholder(title, subtitle, icon) {
     main.appendChild(container);
 }
 // -------------------------------------------------------------------
-// Theme & Tab Bar Management
+// Tab Bar Management
 // -------------------------------------------------------------------
-/** Toggle home-light theme on body */
-function setHomeTheme(isHome) {
-    if (isHome) {
-        document.body.classList.add('home-light');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#F5F5F7');
-    }
-    else {
-        document.body.classList.remove('home-light');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0f0f1a');
-    }
-}
-/** Update bottom tab bar active state and shared-mode visibility */
-function updateTabBar(activeTab) {
-    const tabs = document.querySelectorAll('.tab-item');
-    const shared = isSharedMode();
+/** Show/hide the global tab bar and set active state */
+function showGlobalTabBar(activeTab) {
+    const tabBar = document.getElementById('bottom-tab-bar');
+    if (!tabBar)
+        return;
+    tabBar.style.display = '';
+    const tabs = tabBar.querySelectorAll('.tab-item');
     tabs.forEach(tab => {
         const tabId = tab.getAttribute('data-tab');
         if (tabId === activeTab) {
@@ -98,107 +88,79 @@ function updateTabBar(activeTab) {
         else {
             tab.classList.remove('active');
         }
-        // Hide Pharmacy/Med-Calc tabs in shared mode
-        if (shared && (tabId === 'pharmacy' || tabId === 'med-calc')) {
-            tab.style.display = 'none';
-        }
-        else {
-            tab.style.display = '';
-        }
     });
+}
+function hideGlobalTabBar() {
+    const tabBar = document.getElementById('bottom-tab-bar');
+    if (tabBar)
+        tabBar.style.display = 'none';
 }
 // -------------------------------------------------------------------
 // Route Handlers
 // -------------------------------------------------------------------
 function handleHome(_params) {
-    // Grant full access to organic visitors (found the app directly, not via share link).
-    // Placed here instead of init() so it only fires when the user actually reaches
-    // the home screen — avoids race conditions with SW reloads and hash-based detection.
     if (!hasFullAccess()) {
         markOrganicVisit();
     }
-    setHomeTheme(true);
-    updateTabBar('home');
+    removeContextualToolbar();
+    showGlobalTabBar('home');
     const main = clearMain();
-    renderCategoryGrid(main);
-    // Restore scroll after images load (they determine card heights)
-    const images = main.querySelectorAll('img');
-    if (images.length === 0 || homeScrollTop === 0) {
+    renderDashboard(main);
+    // Restore scroll after render
+    requestAnimationFrame(() => {
         main.scrollTop = homeScrollTop;
-    }
-    else {
-        let loaded = 0;
-        const restore = () => {
-            loaded++;
-            if (loaded >= images.length)
-                main.scrollTop = homeScrollTop;
-        };
-        images.forEach(img => {
-            if (img.complete) {
-                loaded++;
-            }
-            else {
-                img.addEventListener('load', restore);
-                img.addEventListener('error', restore);
-            }
-        });
-        if (loaded >= images.length)
-            main.scrollTop = homeScrollTop;
-    }
+    });
 }
 function handleCategory(params) {
-    setHomeTheme(false);
-    updateTabBar('');
+    removeContextualToolbar();
+    hideGlobalTabBar();
     const id = params['id'] ?? 'unknown';
     const main = clearMain();
-    renderCategoryView(main, id);
+    renderSpecialtyView(main, id);
 }
 function handleTree(params) {
-    setHomeTheme(false);
-    updateTabBar('');
+    hideGlobalTabBar();
     const id = params['id'] ?? 'unknown';
     const main = clearMain();
-    void renderTreeWizard(main, id);
+    void renderConsultFlow(main, id);
 }
 function handleTreeNode(params) {
-    setHomeTheme(false);
-    updateTabBar('');
+    hideGlobalTabBar();
     const treeId = params['id'] ?? 'unknown';
     const nodeId = params['nodeId'] ?? 'unknown';
-    renderPlaceholder(`Node: ${nodeId}`, `In tree: ${treeId}. Node rendering coming in Task 8.`, '\uD83D\uDD35');
+    renderPlaceholder(`Node: ${nodeId}`, `In tree: ${treeId}.`, '\uD83D\uDD35');
 }
 function handleReference(params) {
-    setHomeTheme(false);
-    updateTabBar('');
+    removeContextualToolbar();
+    showGlobalTabBar('');
     const main = clearMain();
     const treeId = params['treeId'];
     void renderReferencePanel(main, treeId);
 }
 function handleDrugList(_params) {
-    setHomeTheme(false);
-    updateTabBar('pharmacy');
+    removeContextualToolbar();
+    showGlobalTabBar('pharmacy');
     const main = clearMain();
     renderDrugList(main);
 }
 function handleCalculatorList(_params) {
-    setHomeTheme(false);
-    updateTabBar('med-calc');
+    removeContextualToolbar();
+    showGlobalTabBar('med-calc');
     const main = clearMain();
     renderCalculatorList(main);
 }
 function handleCalculator(params) {
-    setHomeTheme(false);
-    updateTabBar('med-calc');
+    removeContextualToolbar();
+    showGlobalTabBar('med-calc');
     const id = params['id'] ?? 'unknown';
     const main = clearMain();
     renderCalculator(main, id);
 }
 function handleWizard(params) {
-    setHomeTheme(false);
-    updateTabBar('');
+    removeContextualToolbar();
+    hideGlobalTabBar();
     const id = params['id'] ?? 'unknown';
     const main = clearMain();
-    // Map wizard IDs to data
     const wizardData = {
         'acute-stroke': ACUTE_STROKE_WIZARD,
     };
@@ -215,18 +177,11 @@ function handleShare(params) {
     if (treeId) {
         addSharedConsult(treeId);
     }
-    // Redirect to the actual tree — replace hash so back button doesn't loop
     window.location.replace('#/tree/' + treeId);
 }
-function handleLabInterpreter(_params) {
-    setHomeTheme(false);
-    updateTabBar('');
-    const main = clearMain();
-    renderLabInterpreter(main);
-}
 function handleNotFound() {
-    setHomeTheme(false);
-    updateTabBar('');
+    removeContextualToolbar();
+    showGlobalTabBar('');
     renderPlaceholder('Page Not Found', 'This route doesn\u2019t exist. Tap back or go home.', '\u2753');
     const main = getMain();
     const homeBtn = document.createElement('button');
@@ -241,8 +196,12 @@ function handleNotFound() {
 // -------------------------------------------------------------------
 async function init() {
     registerServiceWorker();
-    // Initialize data services (loads from IndexedDB/Supabase/hardcoded fallback)
+    // Show splash screen while data loads
+    const splashPromise = showSplashScreen();
+    // Initialize data services
     await Promise.all([initDrugs(), initCategories(), initInfoPages()]);
+    // Wait for splash to finish
+    await splashPromise;
     // Tab bar click delegation
     const tabBar = document.getElementById('bottom-tab-bar');
     if (tabBar) {
@@ -269,8 +228,7 @@ async function init() {
     router.on('/drugs', handleDrugList);
     router.on('/calculators', handleCalculatorList);
     router.on('/calculator/:id', handleCalculator);
-    router.on('/wizard/:id', handleWizard); // New wizard route
-    router.on('/lab-interpreter', handleLabInterpreter); // Lab Interpreter
+    router.on('/wizard/:id', handleWizard);
     router.onNotFound(handleNotFound);
     // Start routing
     router.start();

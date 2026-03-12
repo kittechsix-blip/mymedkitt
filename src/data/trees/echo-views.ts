@@ -3,7 +3,7 @@
  * Based on ASE Guidelines and ACEP Emergency Echocardiography Guidelines
  */
 
-import type { ConsultTree } from '../types/consult-tree';
+import type { ConsultTree } from '../../types/consult-tree';
 
 export const echoViewsConsult: ConsultTree = {
   id: 'basic-echo-views',

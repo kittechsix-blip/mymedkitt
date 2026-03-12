@@ -1,0 +1,148 @@
+// myMedKitt — Consult Flow Controller
+// Thin wrapper around TreeEngine that maintains a cardStack[] for rendering
+// all answered + current cards simultaneously. TreeEngine is UNCHANGED.
+
+import { TreeEngine } from './tree-engine.js';
+import type { DecisionNode } from '../models/types.js';
+
+export interface CardEntry {
+  nodeId: string;
+  node: DecisionNode;
+  selectedOptionIndex?: number;
+  selectedLabel?: string;
+}
+
+export class ConsultFlowController {
+  private engine: TreeEngine;
+  private cardStack: CardEntry[] = [];
+
+  constructor(nodes: DecisionNode[]) {
+    this.engine = new TreeEngine(nodes);
+  }
+
+  /** Start a new consult from the given entry node */
+  startConsult(treeId: string, entryNodeId: string): void {
+    this.engine.startTree(treeId, entryNodeId);
+    this.cardStack = [];
+    // Don't add current node to stack — it's rendered separately as the active card
+  }
+
+  /** Restore session: rebuild card stack from engine history + answers */
+  restoreSession(treeId: string): boolean {
+    const restored = this.engine.restoreSession(treeId);
+    if (!restored) return false;
+
+    this.cardStack = [];
+    const session = this.engine.getSession();
+    if (!session) return false;
+
+    // Reconstruct stack from history
+    for (const nodeId of session.history) {
+      const node = this.engine.getNode(nodeId);
+      if (!node) continue;
+
+      const answerLabel = session.answers[nodeId];
+      let selectedIndex: number | undefined;
+
+      if (answerLabel !== undefined && node.options) {
+        // Find matching option index
+        const labelStr = String(answerLabel);
+        selectedIndex = node.options.findIndex(o => o.label === labelStr);
+        if (selectedIndex === -1) selectedIndex = undefined;
+      }
+
+      this.cardStack.push({
+        nodeId,
+        node,
+        selectedOptionIndex: selectedIndex,
+        selectedLabel: answerLabel !== undefined ? String(answerLabel) : undefined,
+      });
+    }
+
+    return true;
+  }
+
+  /** Select an option on the current (active) card */
+  selectOption(optionIndex: number): DecisionNode | null {
+    const currentNode = this.engine.getCurrentNode();
+    if (!currentNode) return null;
+
+    const selectedLabel = currentNode.options?.[optionIndex]?.label;
+
+    // Push current card to answered stack
+    this.cardStack.push({
+      nodeId: currentNode.id,
+      node: currentNode,
+      selectedOptionIndex: optionIndex,
+      selectedLabel,
+    });
+
+    // Navigate engine
+    return this.engine.selectOption(optionIndex);
+  }
+
+  /** Continue to next node (info nodes) */
+  continueToNext(): DecisionNode | null {
+    const currentNode = this.engine.getCurrentNode();
+    if (!currentNode) return null;
+
+    // Push info card to answered stack (no selection)
+    this.cardStack.push({
+      nodeId: currentNode.id,
+      node: currentNode,
+    });
+
+    return this.engine.continueToNext();
+  }
+
+  /** Go back one step */
+  goBack(): DecisionNode | null {
+    if (this.cardStack.length > 0) {
+      this.cardStack.pop();
+    }
+    return this.engine.goBack();
+  }
+
+  /** Reset to beginning */
+  reset(entryNodeId: string): DecisionNode | null {
+    this.cardStack = [];
+    return this.engine.goToEntry(entryNodeId);
+  }
+
+  /** Jump to a specific node (clears history) */
+  jumpToNode(nodeId: string): DecisionNode | null {
+    this.cardStack = [];
+    return this.engine.jumpToNode(nodeId);
+  }
+
+  /** Get the full card stack (answered cards only) */
+  getCardStack(): CardEntry[] {
+    return this.cardStack;
+  }
+
+  /** Get the current active node */
+  getCurrentNode(): DecisionNode | null {
+    return this.engine.getCurrentNode();
+  }
+
+  /** Get the underlying engine (for session access, answer history, etc.) */
+  getEngine(): TreeEngine {
+    return this.engine;
+  }
+
+  /** Check if we can go back */
+  canGoBack(): boolean {
+    return this.engine.canGoBack();
+  }
+
+  /** Get a node by ID */
+  getNode(nodeId: string): DecisionNode | null {
+    return this.engine.getNode(nodeId);
+  }
+
+  /** Full reset — clear session */
+  fullReset(): void {
+    this.cardStack = [];
+    this.engine.reset();
+  }
+}
