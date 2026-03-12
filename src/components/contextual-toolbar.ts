@@ -8,13 +8,13 @@ import type { ConsultFlowController } from '../services/consult-flow-controller.
 
 let toolbarEl: HTMLElement | null = null;
 let branchListEl: HTMLElement | null = null;
+let branchListCloseHandler: ((e: Event) => void) | null = null;
 
 /** Remove the contextual toolbar from the DOM */
 export function removeContextualToolbar(): void {
   toolbarEl?.remove();
   toolbarEl = null;
-  branchListEl?.remove();
-  branchListEl = null;
+  closeBranchList();
 }
 
 /** Render the contextual toolbar for a consult */
@@ -118,11 +118,22 @@ function collectAllBranchPoints(
   return points;
 }
 
-/** Toggle the branch point overflow list */
-function toggleBranchPointList(controller: ConsultFlowController, entryNodeId: string): void {
+/** Clean up branch list and its close handler */
+function closeBranchList(): void {
+  if (branchListCloseHandler) {
+    document.removeEventListener('click', branchListCloseHandler);
+    branchListCloseHandler = null;
+  }
   if (branchListEl) {
     branchListEl.remove();
     branchListEl = null;
+  }
+}
+
+/** Toggle the branch point overflow list */
+function toggleBranchPointList(controller: ConsultFlowController, entryNodeId: string): void {
+  if (branchListEl) {
+    closeBranchList();
     return;
   }
 
@@ -172,9 +183,8 @@ function toggleBranchPointList(controller: ConsultFlowController, entryNodeId: s
     item.textContent = bp.title;
 
     item.addEventListener('click', () => {
+      closeBranchList();
       controller.jumpToNode(bp.nodeId);
-      branchListEl?.remove();
-      branchListEl = null;
       window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: bp.nodeId }));
     });
 
@@ -184,14 +194,16 @@ function toggleBranchPointList(controller: ConsultFlowController, entryNodeId: s
   list.appendChild(scroller);
 
   // Close on outside click
-  const closeHandler = (e: Event) => {
+  branchListCloseHandler = (e: Event) => {
     if (branchListEl && !branchListEl.contains(e.target as Node)) {
-      branchListEl.remove();
-      branchListEl = null;
-      document.removeEventListener('click', closeHandler);
+      closeBranchList();
     }
   };
-  setTimeout(() => document.addEventListener('click', closeHandler), 0);
+  setTimeout(() => {
+    if (branchListCloseHandler) {
+      document.addEventListener('click', branchListCloseHandler);
+    }
+  }, 0);
 
   document.body.appendChild(list);
   branchListEl = list;

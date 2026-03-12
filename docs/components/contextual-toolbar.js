@@ -5,12 +5,12 @@ import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
 let toolbarEl = null;
 let branchListEl = null;
+let branchListCloseHandler = null;
 /** Remove the contextual toolbar from the DOM */
 export function removeContextualToolbar() {
     toolbarEl?.remove();
     toolbarEl = null;
-    branchListEl?.remove();
-    branchListEl = null;
+    closeBranchList();
 }
 /** Render the contextual toolbar for a consult */
 export function renderContextualToolbar(consultId, controller, entryNodeId) {
@@ -84,11 +84,21 @@ function collectAllBranchPoints(controller, entryNodeId) {
     }
     return points;
 }
-/** Toggle the branch point overflow list */
-function toggleBranchPointList(controller, entryNodeId) {
+/** Clean up branch list and its close handler */
+function closeBranchList() {
+    if (branchListCloseHandler) {
+        document.removeEventListener('click', branchListCloseHandler);
+        branchListCloseHandler = null;
+    }
     if (branchListEl) {
         branchListEl.remove();
         branchListEl = null;
+    }
+}
+/** Toggle the branch point overflow list */
+function toggleBranchPointList(controller, entryNodeId) {
+    if (branchListEl) {
+        closeBranchList();
         return;
     }
     const engine = controller.getEngine();
@@ -129,23 +139,24 @@ function toggleBranchPointList(controller, entryNodeId) {
             item.classList.add('branch-point-list__item--visited');
         item.textContent = bp.title;
         item.addEventListener('click', () => {
+            closeBranchList();
             controller.jumpToNode(bp.nodeId);
-            branchListEl?.remove();
-            branchListEl = null;
             window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: bp.nodeId }));
         });
         scroller.appendChild(item);
     }
     list.appendChild(scroller);
     // Close on outside click
-    const closeHandler = (e) => {
+    branchListCloseHandler = (e) => {
         if (branchListEl && !branchListEl.contains(e.target)) {
-            branchListEl.remove();
-            branchListEl = null;
-            document.removeEventListener('click', closeHandler);
+            closeBranchList();
         }
     };
-    setTimeout(() => document.addEventListener('click', closeHandler), 0);
+    setTimeout(() => {
+        if (branchListCloseHandler) {
+            document.addEventListener('click', branchListCloseHandler);
+        }
+    }, 0);
     document.body.appendChild(list);
     branchListEl = list;
     // Scroll the current item into view
