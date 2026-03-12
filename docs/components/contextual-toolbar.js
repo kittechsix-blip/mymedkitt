@@ -6,6 +6,10 @@ import { router } from '../services/router.js';
 let toolbarEl = null;
 let branchListEl = null;
 let branchListCloseHandler = null;
+/** Check if a consult toolbar is currently active */
+export function hasContextualToolbar() {
+    return toolbarEl !== null;
+}
 /** Remove the contextual toolbar from the DOM */
 export function removeContextualToolbar() {
     toolbarEl?.remove();

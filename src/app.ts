@@ -17,7 +17,7 @@ import { initCategories } from './services/category-service.js';
 import { initInfoPages } from './services/info-service.js';
 import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
 import { showSplashScreen } from './components/splash-screen.js';
-import { removeContextualToolbar } from './components/contextual-toolbar.js';
+import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -167,9 +167,18 @@ function handleCalculatorList(_params: RouteParams): void {
 }
 
 function handleCalculator(params: RouteParams): void {
-  removeContextualToolbar();
-  showGlobalTabBar('med-calc');
   const id = params['id'] ?? 'unknown';
+
+  // If opened from a consult toolbar, keep consult context (no global tab bar)
+  const fromConsult = hasContextualToolbar();
+  if (fromConsult) {
+    // Keep contextual toolbar visible, hide global tab bar
+    hideGlobalTabBar();
+  } else {
+    removeContextualToolbar();
+    showGlobalTabBar('med-calc');
+  }
+
   const main = clearMain();
   renderCalculator(main, id);
 }

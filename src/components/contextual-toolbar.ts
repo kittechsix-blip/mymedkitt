@@ -10,6 +10,11 @@ let toolbarEl: HTMLElement | null = null;
 let branchListEl: HTMLElement | null = null;
 let branchListCloseHandler: ((e: Event) => void) | null = null;
 
+/** Check if a consult toolbar is currently active */
+export function hasContextualToolbar(): boolean {
+  return toolbarEl !== null;
+}
+
 /** Remove the contextual toolbar from the DOM */
 export function removeContextualToolbar(): void {
   toolbarEl?.remove();

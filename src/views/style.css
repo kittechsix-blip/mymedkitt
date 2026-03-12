@@ -2552,11 +2552,11 @@ body {
 
 /* Custom scroll indicator — always visible, works on iOS */
 .calc-scroll-track {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 2px;
+  bottom: 60px; /* above contextual toolbar */
   width: 8px;
-  height: 100%;
   background: rgba(0, 0, 0, 0.06);
   border-radius: 4px;
   z-index: 50;

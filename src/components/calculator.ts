@@ -1881,7 +1881,9 @@ export function renderCalculatorList(container: HTMLElement): void {
 // -------------------------------------------------------------------
 
 /** Render a clinical calculator into a container */
-/** Add a persistent custom scroll indicator for iOS (which hides native scrollbars) */
+/** Add a persistent custom scroll indicator for iOS (which hides native scrollbars).
+ *  The track is appended inside the scrollable container so it gets cleaned up
+ *  automatically when the container's innerHTML is cleared on route change. */
 function addScrollIndicator(scrollParent: HTMLElement): void {
   const track = document.createElement('div');
   track.className = 'calc-scroll-track';
@@ -1889,15 +1891,8 @@ function addScrollIndicator(scrollParent: HTMLElement): void {
   thumb.className = 'calc-scroll-thumb';
   track.appendChild(thumb);
 
-  // Insert into the scrollable parent's parent so it's positioned over the scroll area
-  const wrapper = scrollParent.parentElement;
-  if (wrapper) {
-    wrapper.style.position = 'relative';
-    wrapper.appendChild(track);
-  } else {
-    scrollParent.style.position = 'relative';
-    scrollParent.appendChild(track);
-  }
+  // Append inside the scroll container — cleared automatically on route change
+  scrollParent.appendChild(track);
 
   function update(): void {
     const el = scrollParent;
