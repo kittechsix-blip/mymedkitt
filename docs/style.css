@@ -2521,6 +2521,59 @@ body {
   background: var(--color-text-muted);
 }
 
+/* Calculator views — always-visible bold scrollbar */
+.calculator-form {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(60, 179, 113, 0.6) rgba(0, 0, 0, 0.1);
+}
+
+.main-content:has(.calculator-form)::-webkit-scrollbar,
+.main-content:has(.calculator-header)::-webkit-scrollbar {
+  width: 10px;
+}
+
+.main-content:has(.calculator-form)::-webkit-scrollbar-track,
+.main-content:has(.calculator-header)::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+}
+
+.main-content:has(.calculator-form)::-webkit-scrollbar-thumb,
+.main-content:has(.calculator-header)::-webkit-scrollbar-thumb {
+  background: rgba(60, 179, 113, 0.5);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main-content:has(.calculator-form)::-webkit-scrollbar-thumb:hover,
+.main-content:has(.calculator-header)::-webkit-scrollbar-thumb:hover {
+  background: rgba(60, 179, 113, 0.75);
+}
+
+/* Custom scroll indicator — always visible, works on iOS */
+.calc-scroll-track {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 8px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.calc-scroll-thumb {
+  position: absolute;
+  right: 0;
+  width: 8px;
+  min-height: 40px;
+  background: rgba(60, 179, 113, 0.5);
+  border-radius: 4px;
+  border: 1px solid rgba(60, 179, 113, 0.3);
+  transition: top 0.1s ease-out;
+}
+
 /* ===================================================================
    EMPTY STATE
    =================================================================== */

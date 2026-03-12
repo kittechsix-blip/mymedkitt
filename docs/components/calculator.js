@@ -1699,6 +1699,45 @@ export function renderCalculatorList(container) {
 // Render: Calculator
 // -------------------------------------------------------------------
 /** Render a clinical calculator into a container */
+/** Add a persistent custom scroll indicator for iOS (which hides native scrollbars) */
+function addScrollIndicator(scrollParent) {
+    const track = document.createElement('div');
+    track.className = 'calc-scroll-track';
+    const thumb = document.createElement('div');
+    thumb.className = 'calc-scroll-thumb';
+    track.appendChild(thumb);
+    // Insert into the scrollable parent's parent so it's positioned over the scroll area
+    const wrapper = scrollParent.parentElement;
+    if (wrapper) {
+        wrapper.style.position = 'relative';
+        wrapper.appendChild(track);
+    }
+    else {
+        scrollParent.style.position = 'relative';
+        scrollParent.appendChild(track);
+    }
+    function update() {
+        const el = scrollParent;
+        const scrollH = el.scrollHeight;
+        const clientH = el.clientHeight;
+        if (scrollH <= clientH) {
+            track.style.display = 'none';
+            return;
+        }
+        track.style.display = 'block';
+        const ratio = clientH / scrollH;
+        const thumbH = Math.max(ratio * clientH, 40);
+        const maxScroll = scrollH - clientH;
+        const scrollPct = el.scrollTop / maxScroll;
+        const maxTop = clientH - thumbH;
+        thumb.style.height = `${thumbH}px`;
+        thumb.style.top = `${scrollPct * maxTop}px`;
+    }
+    scrollParent.addEventListener('scroll', update, { passive: true });
+    // Initial check after content renders
+    setTimeout(update, 200);
+    setTimeout(update, 800);
+}
 export function renderCalculator(container, calculatorId) {
     const calc = CALCULATORS[calculatorId];
     if (!calc) {
@@ -1706,6 +1745,10 @@ export function renderCalculator(container, calculatorId) {
         return;
     }
     container.innerHTML = '';
+    // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
+    if (calculatorId.startsWith('tbsa')) {
+        addScrollIndicator(container);
+    }
     // Back button
     const backBtn = document.createElement('button');
     backBtn.className = 'btn-text';
