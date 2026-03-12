@@ -10,7 +10,7 @@ export function showSplashScreen() {
         content.className = 'splash-content';
         const logo = document.createElement('img');
         logo.className = 'splash-logo';
-        logo.src = 'assets/medkitt-bag-logo.png';
+        logo.src = 'assets/mymedkitt-bag-transparent.png';
         logo.alt = 'myMedKitt';
         const title = document.createElement('div');
         title.className = 'splash-title';

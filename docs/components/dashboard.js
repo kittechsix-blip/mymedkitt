@@ -25,11 +25,11 @@ export function renderDashboard(container) {
     logoHeader.className = 'dashboard-header';
     const logoImg = document.createElement('img');
     logoImg.className = 'dashboard-header__logo';
-    logoImg.src = 'assets/medkitt-bag-logo.png';
-    logoImg.alt = 'MedKitt';
+    logoImg.src = 'assets/mymedkitt-bag-transparent.png';
+    logoImg.alt = 'myMedKitt';
     const logoText = document.createElement('span');
     logoText.className = 'dashboard-header__title';
-    logoText.textContent = 'MedKitt';
+    logoText.textContent = 'myMedKitt';
     logoHeader.appendChild(logoImg);
     logoHeader.appendChild(logoText);
     dashboard.appendChild(logoHeader);

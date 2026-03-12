@@ -621,11 +621,18 @@ body {
 }
 
 .dashboard-header__title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: #3A3A3A;
   text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* Italic "my" prefix styling */
+.dashboard-header__title-my {
+  font-style: italic;
+  font-weight: 400;
+  color: #2E7D32;
 }
 
 /* ---- Search ---- */

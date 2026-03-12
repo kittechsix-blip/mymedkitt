@@ -13,7 +13,7 @@ export function showSplashScreen(): Promise<void> {
 
     const logo = document.createElement('img');
     logo.className = 'splash-logo';
-    logo.src = 'assets/medkitt-bag-logo.png';
+    logo.src = 'assets/mymedkitt-bag-transparent.png';
     logo.alt = 'myMedKitt';
 
     const title = document.createElement('div');
