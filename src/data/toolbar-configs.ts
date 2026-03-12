@@ -139,6 +139,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'insert', label: 'Insert', icon: '\uD83E\uDE7A', action: 'jump', target: 'ctube-cut' },
     { id: 'tube-size', label: 'Tube Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'ctube-tube-size' },
   ],
+  'pneumothorax': [
+    { id: 'lung-point', label: 'Lung Point', icon: '\uD83D\uDCCD', action: 'jump', target: 'lung-point' },
+    { id: 'tension', label: 'Tension?', icon: '\uD83D\uDEA8', action: 'jump', target: 'tension-assessment' },
+    { id: 'size', label: 'Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'stable-ptx-management' },
+  ],
+  'echo-views': [
+    { id: 'effusion', label: 'Effusion', icon: '\uD83E\uDEC0', action: 'jump', target: 'pericardial-effusion' },
+    { id: 'rv-strain', label: 'RV Strain', icon: '\uD83E\uDEC1', action: 'jump', target: 'rv-strain' },
+    { id: 'ivc', label: 'IVC', icon: '\uD83D\uDCA7', action: 'jump', target: 'ivc-assessment' },
+  ],
+  'echo-epss': [
+    { id: 'interpret', label: 'Interpret', icon: '\uD83D\uDCCA', action: 'jump', target: 'epss-interpret' },
+    { id: 'grey-zone', label: 'Grey Zone', icon: '\uD83D\uDFE1', action: 'jump', target: 'epss-grey' },
+  ],
   'pe': [
     { id: 'thrombolysis', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'pe-massive-tx' },
     { id: 'pesi', label: 'PESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'pesi' },
