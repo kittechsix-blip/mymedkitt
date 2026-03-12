@@ -24,6 +24,26 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'arv-effects', label: 'ARV Effects', icon: '\uD83D\uDC8A', action: 'jump', target: 'hiv-med-overview' },
     { id: 'pep-prep', label: 'PEP/PrEP', icon: '\uD83D\uDEE1\uFE0F', action: 'jump', target: 'hiv-prevention' },
   ],
+  'precip-delivery': [
+    { id: 'deliver', label: 'Deliver', icon: '\uD83D\uDC76', action: 'jump', target: 'precip-head' },
+    { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },
+    { id: 'oxytocin', label: 'Oxytocin', icon: '\uD83D\uDC89', action: 'jump', target: 'precip-oxytocin' },
+  ],
+  'shoulder-dystocia': [
+    { id: 'mcroberts', label: 'McRoberts', icon: '\uD83E\uDDB5', action: 'jump', target: 'sd-mcroberts' },
+    { id: 'rotational', label: 'Rotational', icon: '\uD83D\uDD04', action: 'jump', target: 'sd-rotational' },
+    { id: 'post-arm', label: 'Post Arm', icon: '\uD83D\uDCAA', action: 'jump', target: 'sd-posterior-arm' },
+  ],
+  'first-trimester': [
+    { id: 'ectopic', label: 'Ectopic', icon: '\uD83D\uDCCD', action: 'jump', target: 'ft-ectopic-confirmed' },
+    { id: 'nvp', label: 'NVP Rx', icon: '\uD83E\uDD22', action: 'jump', target: 'ft-nvp-assess' },
+    { id: 'miscarriage', label: 'Miscarriage', icon: '\uD83E\uDE78', action: 'jump', target: 'ft-miscarriage-type' },
+  ],
+  'aub': [
+    { id: 'unstable', label: 'Unstable', icon: '\uD83D\uDEA8', action: 'jump', target: 'aub-unstable' },
+    { id: 'medical-rx', label: 'Medical Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'aub-treatment-medical' },
+    { id: 'classify', label: 'Classify', icon: '\uD83E\uDE78', action: 'jump', target: 'aub-classify' },
+  ],
   'burns': [
     { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa' },
     { id: 'fluid', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'calculator', target: 'parkland' },
