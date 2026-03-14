@@ -103,6 +103,7 @@ const TREE_REGISTRY = {
   'hiv':              { prefix: 'HIV',                 entryNodeId: 'hiv-start',          categoryId: 'infectious-disease' },
   'meningitis':       { prefix: 'MENINGITIS',          entryNodeId: 'mening-start',       categoryId: 'infectious-disease' },
   'sah':              { prefix: 'SAH',                 entryNodeId: 'sah-start',          categoryId: 'neurology' },
+  'syncope':          { prefix: 'SYNCOPE',             entryNodeId: 'sync-start',         categoryId: 'cardiology' },
 };
 
 // Cross-listing: which consults appear in multiple categories

@@ -4,6 +4,7 @@
 
 import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
+import { showInfoModal } from './info-page.js';
 import type { ConsultFlowController } from '../services/consult-flow-controller.js';
 
 let toolbarEl: HTMLElement | null = null;
@@ -57,6 +58,8 @@ export function renderContextualToolbar(
     btn.addEventListener('click', () => {
       if (item.action === 'calculator' && item.target) {
         router.navigate(`/calculator/${item.target}`);
+      } else if (item.action === 'overlay' && item.target) {
+        showInfoModal(item.target);
       } else if (item.action === 'jump' && item.target) {
         controller.jumpToNode(item.target);
         // Re-render is handled by the consult-flow listener

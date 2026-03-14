@@ -3,6 +3,7 @@
 // Configurable tools per consult + ••• overflow.
 import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
+import { showInfoModal } from './info-page.js';
 let toolbarEl = null;
 let branchListEl = null;
 let branchListCloseHandler = null;
@@ -40,6 +41,9 @@ export function renderContextualToolbar(consultId, controller, entryNodeId) {
         btn.addEventListener('click', () => {
             if (item.action === 'calculator' && item.target) {
                 router.navigate(`/calculator/${item.target}`);
+            }
+            else if (item.action === 'overlay' && item.target) {
+                showInfoModal(item.target);
             }
             else if (item.action === 'jump' && item.target) {
                 controller.jumpToNode(item.target);
