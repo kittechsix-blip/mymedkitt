@@ -36,6 +36,39 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    bunx tsc --skipLibCheck --noUnusedLocals false
    ```
 
+   **CRITICAL — Verify UPDATE SQL was generated:**
+   If the deploy-cache-sync output shows `⚠ Unknown tree` warnings or says "No node-level changes detected" but you KNOW tree node content changed (body, recommendation, options, etc.), the script failed to parse the git diff. **Supabase will serve stale data that overrides the hardcoded fix** (three-tier fallback: Supabase → IndexedDB → hardcoded).
+
+   In this case, **manually generate UPDATE SQL** for every changed node:
+   ```javascript
+   // Run in node — reads compiled JS, outputs UPDATE statements
+   node -e "
+   const treeId = '<TREE_ID>';
+   const nodeIds = ['<NODE_ID_1>', '<NODE_ID_2>'];
+   async function run() {
+     const m = await import('./docs/data/trees/' + treeId + '.js');
+     const prefix = Object.keys(m).find(k => k.endsWith('_NODES'));
+     const nodes = m[prefix];
+     const lines = ['BEGIN;', ''];
+     for (const nid of nodeIds) {
+       const node = nodes.find(n => n.id === nid);
+       if (!node) { console.error('NOT FOUND:', nid); continue; }
+       const body = JSON.stringify(node.body).slice(1,-1).replace(/'/g, \"''\");
+       const rec = node.recommendation ? JSON.stringify(node.recommendation).slice(1,-1).replace(/'/g, \"''\") : null;
+       lines.push('UPDATE decision_nodes SET body = \\'' + body + '\\'' + (rec ? \", recommendation = '\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
+       lines.push('');
+     }
+     lines.push('COMMIT;');
+     require('fs').writeFileSync('supabase-hotfix-update.sql', lines.join('\\n'));
+     console.log('Written: supabase-hotfix-update.sql');
+   }
+   run();
+   "
+   ```
+   Then open in TextEdit and walk user through Supabase paste (step 9).
+
+   **Never skip this check.** Stale Supabase data has caused production bugs where deployed fixes were invisible to users.
+
 4. **Generate Supabase SQL (for NEW consult deploys only):**
    **Only for NEW consults.** The cache-sync script in step 3 handles UPDATE SQL for existing consults automatically.
    **Wait until all testing and iteration is complete.** The app runs from compiled JS, not Supabase — syncing mid-iteration means re-syncing after every change.
