@@ -185,6 +185,7 @@ export function renderInlineCitations(container: HTMLElement, citationNums: numb
 
     const item = document.createElement('div');
     item.className = 'reference-citation-item';
+    item.setAttribute('data-cite-num', String(cite.num));
 
     const numEl = document.createElement('span');
     numEl.className = 'reference-citation-num';

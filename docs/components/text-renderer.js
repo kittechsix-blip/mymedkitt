@@ -25,57 +25,92 @@ export function appendBoldAware(parent, text) {
     }
 }
 /** Render body text with line breaks preserved. Supports [text](#/info/id), [text](#/drug/id),
- *  [text](#/calculator/id), [text](#/tree/id), and [text](https://url) links. */
+ *  [text](#/calculator/id), [text](#/tree/id), [text](https://url) links, and [N] citation refs. */
 export function renderBodyText(container, text) {
-    const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
     const lines = text.split('\n');
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         if (line.trim() === '') {
             container.appendChild(document.createElement('br'));
         }
-        else if (linkPattern.test(line)) {
-            linkPattern.lastIndex = 0;
-            const p = document.createElement('p');
-            let lastIndex = 0;
-            let match;
-            while ((match = linkPattern.exec(line)) !== null) {
-                const linkLabel = match[1];
-                const linkUrl = match[2];
-                if (match.index > lastIndex) {
-                    appendBoldAware(p, line.slice(lastIndex, match.index));
-                }
-                if (linkUrl.startsWith('http://') || linkUrl.startsWith('https://')) {
-                    const link = document.createElement('a');
-                    link.className = 'body-inline-link';
-                    link.href = linkUrl;
-                    link.textContent = linkLabel;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    p.appendChild(link);
-                }
-                else {
-                    const parts = linkUrl.replace(/^#\//, '').split('/');
-                    const linkType = parts[0];
-                    const linkId = parts.slice(1).join('/');
-                    const link = document.createElement('button');
-                    link.className = 'body-inline-link';
-                    link.textContent = linkLabel;
-                    link.setAttribute('data-link-type', linkType);
-                    link.setAttribute('data-link-id', linkId);
-                    p.appendChild(link);
-                }
-                lastIndex = match.index + match[0].length;
-            }
-            if (lastIndex < line.length) {
-                appendBoldAware(p, line.slice(lastIndex));
-            }
-            container.appendChild(p);
-        }
         else {
             const p = document.createElement('p');
-            appendBoldAware(p, line);
+            renderLineWithLinksAndCitations(p, line);
             container.appendChild(p);
+        }
+    }
+}
+/** Parse a single line for markdown links [text](url) and citation refs [N], rendering both. */
+function renderLineWithLinksAndCitations(container, line) {
+    // Combined pattern: markdown links OR citation references [N] (one or more digits)
+    const combinedPattern = /\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])/g;
+    let lastIndex = 0;
+    let match;
+    let hasMatch = false;
+    while ((match = combinedPattern.exec(line)) !== null) {
+        hasMatch = true;
+        // Text before match
+        if (match.index > lastIndex) {
+            appendBoldAware(container, line.slice(lastIndex, match.index));
+        }
+        if (match[1] !== undefined && match[2] !== undefined) {
+            // Markdown link: [text](url)
+            const linkLabel = match[1];
+            const linkUrl = match[2];
+            if (linkUrl.startsWith('http://') || linkUrl.startsWith('https://')) {
+                const link = document.createElement('a');
+                link.className = 'body-inline-link';
+                link.href = linkUrl;
+                link.textContent = linkLabel;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                container.appendChild(link);
+            }
+            else {
+                const parts = linkUrl.replace(/^#\//, '').split('/');
+                const linkType = parts[0];
+                const linkId = parts.slice(1).join('/');
+                const link = document.createElement('button');
+                link.className = 'body-inline-link';
+                link.textContent = linkLabel;
+                link.setAttribute('data-link-type', linkType);
+                link.setAttribute('data-link-id', linkId);
+                container.appendChild(link);
+            }
+        }
+        else if (match[4] !== undefined) {
+            // Citation ref: [N]
+            const num = match[4];
+            const btn = document.createElement('button');
+            btn.className = 'cite-link';
+            btn.textContent = `[${num}]`;
+            btn.addEventListener('click', () => scrollToCardCitation(num));
+            container.appendChild(btn);
+        }
+        lastIndex = match.index + match[0].length;
+    }
+    // Remaining text
+    if (lastIndex < line.length) {
+        appendBoldAware(container, line.slice(lastIndex));
+    }
+    // If no matches, render with bold support
+    if (!hasMatch) {
+        appendBoldAware(container, line);
+    }
+}
+/** Scroll to a citation in the nearest card's inline citations panel. */
+function scrollToCardCitation(num) {
+    // Find the closest <details> with inline citations (within the card or globally)
+    const allDetails = document.querySelectorAll('.reference-citations-inline');
+    for (const details of allDetails) {
+        const target = details.querySelector(`[data-cite-num="${num}"]`);
+        if (target) {
+            if (!details.open)
+                details.open = true;
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('cite-highlight');
+            setTimeout(() => target.classList.remove('cite-highlight'), 1500);
+            return;
         }
     }
 }
