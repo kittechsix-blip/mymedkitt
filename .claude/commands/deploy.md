@@ -63,10 +63,11 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
        for (const nid of nodeIds) {
          const node = nodes.find(n => n.id === nid);
          if (!node) { console.error('NOT FOUND:', nid); continue; }
-         const body = JSON.stringify(node.body).slice(1,-1).replace(/'/g, \"''\");
-         const rec = node.recommendation ? JSON.stringify(node.recommendation).slice(1,-1).replace(/'/g, \"''\") : null;
+         // Use E'' escape strings so \\n becomes actual newlines in PostgreSQL
+         const body = node.body.replace(/'/g, \"''\").replace(/\\n/g, '\\\\n');
+         const rec = node.recommendation ? node.recommendation.replace(/'/g, \"''\").replace(/\\n/g, '\\\\n') : null;
          lines.push('-- ' + treeId + ': ' + nid);
-         lines.push('UPDATE decision_nodes SET body = \'' + body + '\'' + (rec ? \", recommendation = '\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
+         lines.push(\"UPDATE decision_nodes SET body = E'\" + body + \"'\" + (rec ? \", recommendation = E'\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
          lines.push('');
        }
      }
