@@ -18,6 +18,10 @@ const TREE_REF_META = {
         title: 'NSTEMI Management Reference',
         loadExtra: async () => { const m = await import('../data/trees/nstemi.js'); return { clinicalNotes: m.NSTEMI_CLINICAL_NOTES }; },
     },
+    'stemi': {
+        title: 'STEMI Management Reference',
+        loadExtra: async () => { const m = await import('../data/trees/stemi.js'); return { clinicalNotes: m.STEMI_CLINICAL_NOTES }; },
+    },
     'echo-views': { title: 'Basic Echo Views Reference' },
     'priapism': {
         title: 'Priapism Management Reference',

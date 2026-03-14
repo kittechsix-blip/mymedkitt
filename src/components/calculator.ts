@@ -1829,6 +1829,52 @@ const CSRS_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Sgarbossa Criteria Calculator Definition
+// -------------------------------------------------------------------
+
+const SGARBOSSA_CALCULATOR: CalculatorDefinition = {
+  id: 'sgarbossa',
+  title: 'Sgarbossa Criteria',
+  subtitle: 'STEMI Diagnosis in LBBB / Paced Rhythm',
+  description: 'The Sgarbossa criteria identify STEMI in the presence of LBBB or ventricular paced rhythm, where standard STEMI criteria cannot be applied. A score \u22653 has 98% specificity for STEMI. The modified Sgarbossa (Smith) rule replaces the 3rd criterion with an ST/S ratio for improved accuracy.',
+  fields: [
+    {
+      name: 'concordant-ste',
+      label: 'Concordant STE \u22651 mm in leads with positive QRS',
+      type: 'toggle',
+      points: 5,
+      description: 'ST elevation in the same direction as the QRS complex (both positive)',
+    },
+    {
+      name: 'concordant-std',
+      label: 'Concordant ST depression \u22651 mm in V1-V3',
+      type: 'toggle',
+      points: 3,
+      description: 'ST depression in anterior leads where QRS is negative (concordant)',
+    },
+    {
+      name: 'discordant-ste',
+      label: 'Excessive discordant STE \u22655 mm',
+      type: 'toggle',
+      points: 2,
+      description: 'ST elevation >5 mm opposite to QRS direction. Consider modified rule: ST/S ratio < -0.25 is more accurate.',
+    },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Score 0-2', risk: 'Negative', mortality: 'Does not meet Sgarbossa criteria for STEMI. Consider clinical context and serial ECGs.', colorVar: '--color-primary' },
+    { min: 3, max: 5, label: 'Score 3', risk: 'Positive \u2014 STEMI Likely', mortality: 'Score \u22653: 98% specificity for STEMI. Activate cath lab.', colorVar: '--color-danger' },
+    { min: 5, max: 8, label: 'Score 5+', risk: 'Positive \u2014 STEMI', mortality: 'Concordant STE present. 98% specificity, high sensitivity. Activate cath lab immediately.', colorVar: '--color-danger' },
+    { min: 8, max: Infinity, label: 'Score 8+', risk: 'Positive \u2014 STEMI', mortality: 'Multiple Sgarbossa criteria met. Activate cath lab immediately.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score \u22653 = 98% specificity, 20% sensitivity for STEMI in LBBB. Score \u22655 = 100% specificity, 14% sensitivity. Modified Sgarbossa (ST/S ratio < -0.25) significantly improves accuracy of 3rd criterion. If Sgarbossa negative but high clinical suspicion, manage as STEMI per ESC 2017 guidelines.',
+  citations: [
+    'Sgarbossa EB, et al. Electrocardiographic Diagnosis of Evolving Acute MI in the Presence of Left Bundle-Branch Block. N Engl J Med. 1996;334(8):481-487.',
+    'Smith SW, et al. Diagnosis of STEMI in the Presence of LBBB with the ST-Elevation to S-Wave Ratio in a Modified Sgarbossa Rule. Ann Emerg Med. 2012;60(6):766-776.',
+    'Tabas JA, et al. ECG Criteria for Detecting Acute MI in Patients with LBBB: A Meta-Analysis. Ann Emerg Med. 2008;52(4):329-336.',
+  ],
+};
+
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
@@ -1854,6 +1900,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'modified-fisher': MODIFIED_FISHER_CALCULATOR,
   'sfsr': SFSR_CALCULATOR,
   'csrs': CSRS_CALCULATOR,
+  'sgarbossa': SGARBOSSA_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

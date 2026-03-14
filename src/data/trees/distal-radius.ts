@@ -276,7 +276,7 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     module: 4,
     title: 'Disposition & Follow-Up',
     body: '**DISCHARGE INSTRUCTIONS:**\n• **Elevation** — keep hand above heart for 48 hours to minimize swelling\n• **Ice** — 20 min on / 20 min off over cast padding\n• **Finger exercises** — wiggle fingers frequently to prevent stiffness\n• **Neurovascular checks** — ensure fingers remain pink, warm, with normal sensation\n\n**RETURN IMMEDIATELY IF:**\n• Increasing pain not relieved by elevation and medication\n• Numbness, tingling, or inability to move fingers\n• Fingers turn blue, white, or cold\n• Cast feels too tight or causes pressure sores\n\n**COMPARTMENT SYNDROME WARNING:**\nAny of the above symptoms could indicate compartment syndrome — a surgical emergency.\n\n**FOLLOW-UP:**\n• **Ortho clinic in 5–7 days** for repeat films\n• 1-week x-ray checks for re-displacement (especially first 2 weeks)\n• Cast duration: typically 4–6 weeks for adults, 3–4 weeks for children',
-    recommendation: 'Successful reduction. Discharge with elevation, ice, finger exercises, neurovascular check instructions, and ortho follow-up in 5–7 days.',
+    recommendation: 'Successful reduction. Discharge with elevation, ice, finger exercises, neurovascular check instructions, and ortho follow-up in 5\u20137 days. Review [Discharge Instructions](#/info/distal-radius-discharge) with patient.',
     confidence: 'recommended',
     citation: [1],
   },

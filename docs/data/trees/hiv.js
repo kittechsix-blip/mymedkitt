@@ -488,7 +488,7 @@ export const HIV_NODES = [
         module: 6,
         title: 'Discharge with Follow-Up',
         body: '**Discharge criteria:**\n• Stable vital signs, able to tolerate PO\n• No suspected OI requiring inpatient treatment\n• Well-controlled HIV with manageable complaint\n• Reliable follow-up available\n\n**Discharge instructions:**\n• Continue all HIV medications as prescribed — **do NOT stop HAART**\n• Follow up with HIV provider within 1-2 weeks (or sooner per complaint)\n• Return for worsening symptoms, new fever, inability to take medications\n\n**Linkage to care opportunities:**\n• If not engaged in HIV care → provide contact information for local HIV clinic\n• If PEP started → arrange follow-up in 3-7 days for adherence check\n• If PrEP candidate identified → refer to PrEP provider\n• If newly diagnosed → urgent HIV specialist referral (same day if possible)\n• If untested → offer HIV testing before discharge or provide referral\n\n**The ED visit is a critical touchpoint** — 80% of new transmissions come from those not diagnosed or not in care. Identifying and linking these patients is one of the highest-impact interventions the ED can provide. [1]',
-        recommendation: 'Discharge with continued HAART. Follow up with HIV provider. Link to care if not engaged. Offer HIV testing if untested. Refer for PEP/PrEP as indicated.',
+        recommendation: 'Discharge with continued HAART. Follow up with HIV provider. Link to care if not engaged. Offer HIV testing if untested. Refer for PEP/PrEP as indicated. Review [Discharge Instructions](#/info/hiv-ed-discharge) with patient.',
         confidence: 'recommended',
         citation: [1],
     },

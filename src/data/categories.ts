@@ -30,6 +30,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'nstemi-start',
       },
       {
+        id: 'stemi',
+        title: 'STEMI Management',
+        subtitle: 'Recognition → ECG Pattern → Reperfusion → Complications → Disposition',
+        categoryId: 'cardiology',
+        version: '1.0',
+        nodeCount: 21,
+        entryNodeId: 'stemi-start',
+      },
+      {
         id: 'syncope',
         title: 'Syncope Evaluation',
         subtitle: 'Life-Threat Screen → Etiology → Risk Stratification → Disposition',

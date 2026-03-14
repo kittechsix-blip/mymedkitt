@@ -590,7 +590,7 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     module: 4,
     title: 'Disposition & Follow-Up',
     body: 'AFTER SUCCESSFUL TUBE REMOVAL\n\u2022 Confirm lung remains expanded on post-removal CXR\n\u2022 If recurrent pneumothorax on post-removal film: small and asymptomatic may observe; large or symptomatic requires new tube\n\nDISCHARGE PLANNING\n\u2022 Wound care: keep dressing clean and dry, remove in 48 hours\n\u2022 Activity: avoid heavy lifting or straining for 1-2 weeks\n\u2022 No air travel until confirmed resolution (minimum 2 weeks post)\n\u2022 No scuba diving until pulmonology clearance\n\u2022 Smoking cessation counseling\n\nRECURRENCE\n\u2022 PSP: ~30% at 1 year, ~50% lifetime\n\u2022 SSP: ~40-50% recurrence\n\u2022 After 2nd ipsilateral episode: strongly recommend pleurodesis (VATS with mechanical pleurodesis or stapled bullectomy)\n\nFOLLOW-UP\n\u2022 Outpatient CXR in 2-4 weeks\n\u2022 Pulmonology referral for: SSP, recurrent PSP, pleurodesis discussion',
-    recommendation: 'Discharge with follow-up CXR in 2-4 weeks. Smoking cessation and activity restrictions. Pulmonology referral if recurrent or SSP.',
+    recommendation: 'Discharge with follow-up CXR in 2-4 weeks. Smoking cessation and activity restrictions. Pulmonology referral if recurrent or SSP. Review [Discharge Instructions](#/info/chest-tube-discharge) with patient.',
     confidence: 'definitive',
     citation: [1, 22],
   },

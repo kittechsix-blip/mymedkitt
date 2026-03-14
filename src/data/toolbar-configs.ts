@@ -99,6 +99,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'nstemi': [
     { id: 'timi', label: 'TIMI', icon: '\u2764\uFE0F', action: 'calculator', target: 'timi' },
   ],
+  'stemi': [
+    { id: 'territories', label: 'Territories', icon: '\uD83D\uDCC8', action: 'overlay', target: 'stemi-vascular-territories' },
+    { id: 'sgarbossa', label: 'Sgarbossa', icon: '\uD83E\uDDE0', action: 'calculator', target: 'sgarbossa' },
+    { id: 'reperfusion', label: 'Reperfusion', icon: '\u23F1\uFE0F', action: 'overlay', target: 'stemi-reperfusion-pathway' },
+  ],
   'afib-rvr': [
     { id: 'cardioversion', label: 'Cardiovert', icon: '\u26A1', action: 'jump', target: 'afib-cardioversion-protocol' },
     { id: 'rate-control', label: 'Rate Ctrl', icon: '\uD83D\uDC93', action: 'jump', target: 'afib-stable-drugs' },

@@ -129,6 +129,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/nstemi.js');
             return { nodes: m.NSTEMI_NODES, entryNodeId: 'nstemi-start', categoryId: 'cardiology', moduleLabels: m.NSTEMI_MODULE_LABELS, citations: m.NSTEMI_CITATIONS };
         },
+        'stemi': async () => {
+            const m = await import('../data/trees/stemi.js');
+            return { nodes: m.STEMI_NODES, entryNodeId: 'stemi-start', categoryId: 'cardiology', moduleLabels: m.STEMI_MODULE_LABELS, citations: m.STEMI_CITATIONS };
+        },
         'syncope': async () => {
             const m = await import('../data/trees/syncope.js');
             return { nodes: m.SYNCOPE_NODES, entryNodeId: 'sync-start', categoryId: 'cardiology', moduleLabels: m.SYNCOPE_MODULE_LABELS, citations: m.SYNCOPE_CITATIONS };

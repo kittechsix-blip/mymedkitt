@@ -4088,6 +4088,231 @@ const SAH_ECG_CHANGES: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Syncope — Discharge Instructions
+// -------------------------------------------------------------------
+
+const SYNCOPE_DISCHARGE: InfoPage = {
+  id: 'syncope-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 Syncope (Fainting)',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You were evaluated in the emergency department for syncope (fainting) \u2014 a temporary loss of consciousness caused by a brief drop in blood flow to the brain. Based on your evaluation, including your history, physical exam, and heart tracing (ECG), your fainting episode appears to be low risk.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '\u2022 Fainting again, especially during exercise or while lying down\n\u2022 Chest pain or pressure\n\u2022 Rapid or irregular heartbeat (palpitations)\n\u2022 Shortness of breath\n\u2022 Sudden severe headache\n\u2022 Weakness, numbness, or difficulty speaking\n\u2022 Fainting without any warning signs beforehand',
+    },
+    {
+      heading: 'What to Do at Home',
+      body: '**Avoid known triggers:**\n\u2022 Prolonged standing in hot environments\n\u2022 Dehydration \u2014 drink plenty of fluids daily\n\u2022 Skipping meals\n\u2022 Sudden position changes \u2014 sit up slowly, pause before standing\n\n**If you feel faint (warning signs like lightheadedness, sweating, nausea):**\n\u2022 Sit or lie down immediately\n\u2022 Cross your legs and squeeze your thigh muscles\n\u2022 Grip your hands together tightly\n\u2022 These "counterpressure" maneuvers can prevent fainting\n\n**General health:**\n\u2022 Increase fluid and salt intake (unless your doctor has restricted salt)\n\u2022 Avoid alcohol and excessive caffeine\n\u2022 Take all medications as prescribed',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 See your primary care doctor within 1\u20132 weeks\n\u2022 Bring a list of all your medications to your appointment\n\u2022 If fainting happens again, try to note what you were doing, how you felt before, and how long it lasted\n\u2022 Your doctor may recommend additional heart monitoring or testing',
+    },
+    {
+      heading: 'Driving',
+      body: 'After a fainting episode, you should not drive until you have been evaluated by your doctor. Some states have specific laws about driving after syncope. Ask your doctor when it is safe to drive again, especially if you drive for work.',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '\u2022 Most fainting episodes are not dangerous and do not indicate a serious heart problem\n\u2022 About 1 in 10 people who faint will faint again within 6 months\n\u2022 Avoiding triggers and staying hydrated are the best ways to prevent future episodes\n\u2022 If you have a history of heart disease, follow up with your cardiologist',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Shen WK, et al. 2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients with Syncope. J Am Coll Cardiol. 2017;70(5):e39-e110.' },
+    { num: 2, text: 'Brignole M, et al. 2018 ESC Guidelines for the Diagnosis and Management of Syncope. Eur Heart J. 2018;39(21):1883-1948.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Burns — Discharge Instructions
+// -------------------------------------------------------------------
+
+const BURNS_DISCHARGE: InfoPage = {
+  id: 'burns-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 Burn Wound Care',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You were treated in the emergency department for a burn injury. Your burn has been cleaned, treated, and bandaged. Follow these instructions to help your burn heal properly and prevent infection.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '\u2022 Increasing redness spreading away from the burn\n\u2022 Pus or foul-smelling drainage from the wound\n\u2022 Fever (temperature above 100.4\u00B0F / 38\u00B0C)\n\u2022 Increasing pain not controlled by your medication\n\u2022 Numbness or tingling near the burn\n\u2022 Burns on the face, hands, feet, or genitals that worsen',
+    },
+    {
+      heading: 'Wound Care at Home',
+      body: '**Daily dressing changes:**\n\u2022 Wash your hands before and after touching the wound\n\u2022 Gently remove the old dressing\n\u2022 Clean the wound with mild soap and water\n\u2022 Pat dry with a clean towel\n\u2022 Apply prescribed ointment and a fresh sterile non-stick dressing\n\u2022 Secure with medical tape or wrap\n\n**Pain management:**\n\u2022 Take pain medication 30 minutes before dressing changes\n\u2022 Cool water (not ice) can help with pain\n\u2022 Keep the burned area elevated when possible',
+    },
+    {
+      heading: 'Healing & Activity',
+      body: '\u2022 Partial-thickness (second-degree) burns typically heal in 1\u20133 weeks\n\u2022 Do NOT pop blisters \u2014 they protect healing skin\n\u2022 Do NOT pick at peeling or healing skin\n\u2022 Minimize friction on the healing area\n\u2022 Protect healed skin from sun exposure for at least 1 year (use SPF 30+)',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 Return to your doctor or burn clinic in 3\u20135 days for a wound check\n\u2022 Return sooner if you notice any signs of infection\n\u2022 If your burn is not healing after 2 weeks, you may need a referral to a burn specialist\n\u2022 Once healed, ask about scar prevention options',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Burn Association. Practice guidelines for burn care. J Burn Care Res. 2016.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Chest Tube — Discharge Instructions
+// -------------------------------------------------------------------
+
+const CHEST_TUBE_DISCHARGE: InfoPage = {
+  id: 'chest-tube-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 After Chest Tube Removal',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You had a chest tube placed to treat a collapsed lung (pneumothorax) or fluid around your lung. The tube has been removed and your lung is re-expanded on x-ray.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '\u2022 Sudden chest pain or worsening shortness of breath\n\u2022 Difficulty breathing or feeling like you cannot get enough air\n\u2022 Rapid heartbeat\n\u2022 Dizziness or lightheadedness\n\u2022 Fever (temperature above 100.4\u00B0F / 38\u00B0C)\n\u2022 Redness, swelling, or drainage from the tube site',
+    },
+    {
+      heading: 'Wound Care',
+      body: '\u2022 Keep the dressing clean and dry for 48 hours\n\u2022 After 48 hours, remove the dressing and gently clean with soap and water\n\u2022 Apply a clean bandage until the site is fully healed\n\u2022 Do not submerge in water (no baths, pools, or hot tubs) until healed',
+    },
+    {
+      heading: 'Activity Restrictions',
+      body: '\u2022 **No heavy lifting or straining** for 1\u20132 weeks\n\u2022 **No air travel** until cleared by your doctor (minimum 2 weeks)\n\u2022 **No scuba diving** until cleared by a lung specialist\n\u2022 Gradually return to normal activities as tolerated\n\u2022 Avoid contact sports until cleared by your doctor',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 Follow-up chest x-ray in 2\u20134 weeks to confirm your lung remains fully expanded\n\u2022 See a lung specialist (pulmonologist) if your doctor recommends it\n\u2022 **If you smoke:** This is the most important time to quit \u2014 smoking greatly increases the risk of another collapsed lung',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '\u2022 A collapsed lung can happen again \u2014 about 30% chance within the first year\n\u2022 Seek immediate care if you develop sudden chest pain or shortness of breath in the future\n\u2022 Tall, thin individuals and smokers are at higher risk for recurrence',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'MacDuff A, et al. Management of Spontaneous Pneumothorax: British Thoracic Society Pleural Disease Guideline. Thorax. 2010;65(Suppl 2):ii18-ii31.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Distal Radius — Discharge Instructions
+// -------------------------------------------------------------------
+
+const DISTAL_RADIUS_DISCHARGE: InfoPage = {
+  id: 'distal-radius-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 Wrist Fracture',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You were treated in the emergency department for a broken wrist (distal radius fracture). Your wrist has been set and placed in a splint or cast to hold the bones in the correct position while they heal.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '**These could be signs of a serious complication (compartment syndrome):**\n\u2022 Increasing pain that is not relieved by elevation and medication\n\u2022 Numbness, tingling, or loss of feeling in your fingers\n\u2022 Inability to move your fingers\n\u2022 Fingers turning blue, white, or cold\n\u2022 The cast or splint feels too tight',
+    },
+    {
+      heading: 'What to Do at Home',
+      body: '**First 48 hours are most important:**\n\u2022 **Elevate** \u2014 keep your hand above the level of your heart as much as possible\n\u2022 **Ice** \u2014 apply ice over the cast padding for 20 minutes on, 20 minutes off\n\u2022 **Finger exercises** \u2014 wiggle and bend your fingers frequently to prevent stiffness\n\u2022 **Check circulation** \u2014 make sure your fingers stay pink, warm, and have normal feeling\n\n**Cast/splint care:**\n\u2022 Keep the cast or splint dry\n\u2022 Do not stick anything inside the cast to scratch\n\u2022 Do not remove or modify the splint yourself',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 **See an orthopedic doctor (bone specialist) in 5\u20137 days** for repeat x-rays\n\u2022 X-rays in the first 2 weeks are important to make sure the bones stay aligned\n\u2022 Bring your discharge paperwork and x-ray images to the appointment\n\u2022 Cast duration is typically 4\u20136 weeks for adults, 3\u20134 weeks for children',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '\u2022 Take pain medication as prescribed \u2014 staying ahead of pain helps recovery\n\u2022 Do not drive while in a cast or splint on your dominant hand\n\u2022 Avoid using the injured arm for lifting or carrying\n\u2022 Physical therapy may be recommended after the cast is removed',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Handoll HHG, et al. Interventions for treating distal radial fractures in adults. Cochrane Database Syst Rev. 2003.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// HIV — Discharge Instructions
+// -------------------------------------------------------------------
+
+const HIV_DISCHARGE_INFO: InfoPage = {
+  id: 'hiv-ed-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 HIV Follow-Up Care',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You were evaluated in the emergency department. Your HIV-related concern has been addressed and you are being discharged home. It is very important that you continue your medications and follow up with your HIV care provider.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '\u2022 Fever above 100.4\u00B0F (38\u00B0C) that does not go away\n\u2022 New confusion, severe headache, or vision changes\n\u2022 Difficulty breathing or worsening cough\n\u2022 Inability to keep food or medications down for more than 24 hours\n\u2022 New rash that is spreading or blistering\n\u2022 Severe abdominal pain or bloody diarrhea',
+    },
+    {
+      heading: 'Medications',
+      body: '**Do NOT stop your HIV medications unless your doctor tells you to.** Stopping medications can cause the virus to become harder to treat.\n\n\u2022 Take all medications exactly as prescribed\n\u2022 If you miss a dose, take it as soon as you remember (unless it is almost time for your next dose)\n\u2022 Tell your doctor about ALL other medications, vitamins, and supplements you take\n\u2022 If you are having side effects, talk to your HIV provider before making changes',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 See your HIV care provider within 1\u20132 weeks (or sooner if directed)\n\u2022 If you do not have an HIV provider, ask the ED staff for a referral\n\u2022 Keep all lab appointments \u2014 regular blood work monitors your treatment\n\u2022 If you were started on PEP, follow up in 3\u20137 days',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '\u2022 Consistent medication use is the single most important thing you can do for your health\n\u2022 When HIV is well-controlled (undetectable viral load), you cannot transmit HIV to sexual partners\n\u2022 Stay up to date on vaccinations \u2014 ask your provider about flu, pneumonia, and hepatitis vaccines\n\u2022 Seek care promptly for any new symptoms \u2014 do not wait for your next scheduled appointment',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Panel on Antiretroviral Guidelines for Adults and Adolescents. Guidelines for the Use of Antiretroviral Agents in Adults and Adolescents with HIV. DHHS. 2024.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Meningitis — Discharge Instructions (Viral)
+// -------------------------------------------------------------------
+
+const MENINGITIS_DISCHARGE_INFO: InfoPage = {
+  id: 'meningitis-discharge',
+  title: 'Discharge Instructions',
+  subtitle: 'Patient Information \u2014 Viral Meningitis',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You were evaluated for meningitis (inflammation of the lining around the brain and spinal cord). Based on your test results, your meningitis appears to be caused by a virus. Viral meningitis is usually much less serious than bacterial meningitis and typically gets better on its own within 7\u201310 days.',
+    },
+    {
+      heading: 'Return to the Emergency Department Immediately If',
+      body: '\u2022 **Worsening headache** that is not relieved by medication\n\u2022 **Fever** above 101.3\u00B0F (38.5\u00B0C) or fever that returns after improving\n\u2022 **Confusion**, unusual behavior, or difficulty staying awake\n\u2022 **Seizures** or jerking movements\n\u2022 **Stiff neck** that is getting worse\n\u2022 **Vomiting** that prevents you from keeping down fluids or medications\n\u2022 **Rash** \u2014 especially one that does not fade when you press on it\n\u2022 **Sensitivity to light** that is worsening',
+    },
+    {
+      heading: 'What to Do at Home',
+      body: '\u2022 Rest in a quiet, dimly lit room\n\u2022 Drink plenty of fluids to stay hydrated\n\u2022 Take over-the-counter pain relievers (acetaminophen or ibuprofen) for headache and fever\n\u2022 You may feel fatigued for several weeks \u2014 this is normal\n\u2022 Viral meningitis can be mildly contagious \u2014 wash hands frequently and avoid close contact for the first few days',
+    },
+    {
+      heading: 'Follow-Up Care',
+      body: '\u2022 **See your primary care doctor within 3 days** for reassessment\n\u2022 If your spinal fluid test results are still pending, your doctor will contact you\n\u2022 If symptoms are not improving after 1 week, follow up sooner',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '\u2022 Most people with viral meningitis recover completely\n\u2022 Recovery can take 1\u20132 weeks, sometimes longer for fatigue\n\u2022 If any warning signs develop, do not wait for your follow-up \u2014 go to the emergency department immediately',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clin Infect Dis. 2004;39(9):1267-1284.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Syncope Evaluation — Steps Summary
 // -------------------------------------------------------------------
 
@@ -4241,6 +4466,298 @@ const SYNCOPE_HISTORY_FEATURES: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// STEMI
+// -------------------------------------------------------------------
+
+const STEMI_SUMMARY: InfoPage = {
+  id: 'stemi-summary',
+  title: 'STEMI Management Steps',
+  subtitle: 'Quick Reference — Recognition Through Disposition',
+  sections: [
+    {
+      heading: 'Recognition & ECG',
+      body: '• [Obtain ECG within 10 minutes of first medical contact](#/node/stemi-start)\n• [Identify ECG pattern — standard STEMI, posterior, LBBB, aVR](#/node/stemi-ecg-pattern)',
+    },
+    {
+      heading: 'ECG Patterns',
+      body: '• [Clear STEMI — activate cath lab immediately](#/node/stemi-confirmed)\n• [Posterior MI — obtain V7-V9 leads](#/node/stemi-posterior)\n• [LBBB/Paced — apply Sgarbossa criteria](#/node/stemi-lbbb)\n• [aVR elevation — assess hemodynamic stability](#/node/stemi-avr)\n• [Nondiagnostic — serial ECGs q15-30 min](#/node/stemi-serial)',
+    },
+    {
+      heading: 'Initial Therapies',
+      body: '• [Aspirin 162-325 mg chewed + P2Y12 loading](#/node/stemi-initial-tx)\n• [P2Y12 selection — prasugrel vs ticagrelor vs clopidogrel](#/node/stemi-p2y12)\n• [Anticoagulation — UFH or bivalirudin for PCI](#/node/stemi-anticoag)',
+    },
+    {
+      heading: 'Reperfusion',
+      body: '• [PCI available ≤90 min → primary PCI](#/node/stemi-pci)\n• [Transfer achievable ≤120 min → transfer for PCI](#/node/stemi-transfer)\n• [PCI not available → fibrinolytic therapy](#/node/stemi-lytics)\n• [Post-fibrinolysis — transfer for angiography 3-24h](#/node/stemi-post-lytics)',
+    },
+    {
+      heading: 'Complications',
+      body: '• [Cardiogenic shock — emergent PCI regardless of time](#/node/stemi-shock)\n• [RV involvement — right-sided leads, avoid nitrates](#/node/stemi-rv)\n• [Reperfusion arrhythmias — AIVR is benign](#/node/stemi-arrhythmia)\n• [Special populations — women, elderly, cocaine, post-arrest](#/node/stemi-special)',
+    },
+    {
+      heading: 'Disposition',
+      body: '• [All STEMI patients admitted ICU/CCU](#/node/stemi-dispo)',
+    },
+  ],
+  citations: [],
+};
+
+const STEMI_VASCULAR_TERRITORIES: InfoPage = {
+  id: 'stemi-vascular-territories',
+  title: 'ECG Vascular Territories',
+  subtitle: 'Lead Distribution by Coronary Artery',
+  sections: [
+    {
+      heading: 'Anterior Wall — LAD',
+      body: '**Leads:** V1, V2, V3, V4\n**Artery:** Left anterior descending (LAD)\n**Reciprocal changes:** ST depression in inferior leads (II, III, aVF)\n\nLargest territory. Anterior STEMI carries highest mortality risk.',
+    },
+    {
+      heading: 'Inferior Wall — RCA (or LCx)',
+      body: '**Leads:** II, III, aVF\n**Artery:** Right coronary artery (85%) or left circumflex (15%)\n**Reciprocal changes:** ST depression in aVL (most sensitive early sign), lead I\n\n33-50% involve the right ventricle — get right-sided leads (V4R). [1]',
+    },
+    {
+      heading: 'Lateral Wall — LCx',
+      body: '**Leads:** I, aVL (high lateral) and V5, V6 (low lateral)\n**Artery:** Left circumflex (LCx)\n**Reciprocal changes:** ST depression in inferior leads (III, aVF)',
+    },
+    {
+      heading: 'Posterior Wall — LCx (or RCA)',
+      body: '**Standard ECG clue:** ST depression in V1-V3 with upright T waves and prominent R wave\n**Posterior leads (V7-V9):** STE ≥0.5 mm diagnostic\n**Artery:** Left circumflex, occasionally RCA\n\nAccounts for ~3% of acute MIs. Frequently missed because posterior leads are not routinely obtained. [2]',
+    },
+    {
+      heading: 'Left Main — LMCA',
+      body: '**Pattern:** STE in aVR with diffuse ST depression in multiple leads\n**Note:** Only 10% have acute thrombotic occlusion — pattern also seen in triple vessel disease, diffuse subendocardial ischemia, and tachycardia. [3]\n\nHemodynamic instability strongly favors emergent catheterization.',
+    },
+    {
+      heading: 'PAILS Mnemonic — Reciprocal Changes',
+      body: '**P**osterior → **A**nterior (V1-V3 depression)\n**A**nterior → **I**nferior (II, III, aVF depression)\n**I**nferior → **L**ateral (I, aVL depression)\n**L**ateral → **I**nferior + **S**eptal (II, III, aVF + V1 depression)\n\nReciprocal changes help differentiate true STEMI from mimics (e.g., pericarditis has NO reciprocal changes). Presence indicates larger myocardial territory at risk. [4]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kinch JW, Ryan TJ. Right Ventricular Infarction. N Engl J Med. 1994;330(17):1211-1217.' },
+    { num: 2, text: 'Wong C-K, White HD. Patients with Circumflex Occlusions Miss Out on Reperfusion. Curr Opin Cardiol. 2012;27(4):327-330.' },
+    { num: 3, text: 'Harhash AA, et al. aVR ST Segment Elevation: Acute STEMI or Not? Am J Med. 2019;132(5):622-630.' },
+    { num: 4, text: 'Kidambi A, et al. Reciprocal ECG Change in Reperfused STEMI Is Associated with Myocardial Salvage and Area at Risk. Heart. 2013;99(22):1658-1662.' },
+  ],
+};
+
+const STEMI_PERICARDITIS_DIFF: InfoPage = {
+  id: 'stemi-pericarditis-diff',
+  title: 'Pericarditis vs STEMI',
+  subtitle: 'ECG Differentiation',
+  sections: [
+    {
+      body: 'Acute pericarditis can mimic STEMI with ST-segment elevation. Distinguishing features help avoid unnecessary cath lab activation. [1]',
+    },
+    {
+      heading: 'Favors STEMI',
+      body: '• **Regional** ST elevation following arterial distribution\n• **Convex (dome-shaped)** ST morphology\n• **Reciprocal ST depression** present\n• Hyperacute T waves\n• Q waves developing\n• Dynamic ECG changes over minutes to hours',
+    },
+    {
+      heading: 'Favors Pericarditis',
+      body: '• **Diffuse** ST elevation (not following arterial distribution)\n• **Concave (scooped)** ST morphology\n• **No reciprocal changes** (except aVR)\n• **PR depression** (highly specific, seen in >80% of pericarditis) [2]\n• ST elevation in II > III (suggestive but not reliable alone) [3]\n• Pain worse supine, improved sitting forward\n• Pericardial friction rub on exam',
+    },
+    {
+      heading: 'ECG Evolution in Pericarditis',
+      body: '**Phase I:** Diffuse STE + PR depression (>80% of cases)\n**Phase II:** ST and PR normalize\n**Phase III:** T-wave inversion\n**Phase IV:** T-wave normalization\n\nPhase I changes must be differentiated from AMI. [2]',
+    },
+    {
+      heading: 'When in Doubt',
+      body: 'If the clinical picture is ambiguous, consider bedside echocardiography to assess for wall motion abnormalities (93% sensitive for AMI) or pericardial effusion. Discuss with cardiology before cath lab activation.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Lange RA, Hillis LD. Acute Pericarditis. N Engl J Med. 2004;351(21):2195-2202.' },
+    { num: 2, text: 'Khandaker MH, et al. Pericardial Disease: Diagnosis and Management. Mayo Clin Proc. 2010;85(6):572-593.' },
+    { num: 3, text: 'Henning D, et al. Evaluating the Utility of ST Elevation in Lead II > Lead III in Differentiating Pericardial Disease from STEMI. Scand J Trauma Resus Emerg Med. 2012;20(Suppl 2):P20.' },
+  ],
+};
+
+const STEMI_LYTIC_CONTRAINDICATIONS: InfoPage = {
+  id: 'stemi-lytic-contraindications',
+  title: 'Fibrinolytic Contraindications',
+  subtitle: 'Absolute and Relative — STEMI',
+  sections: [
+    {
+      heading: 'Absolute Contraindications',
+      body: '• Any prior intracranial hemorrhage\n• Known structural cerebrovascular lesion (AVM, aneurysm)\n• Known malignant intracranial neoplasm\n• Ischemic stroke within 3 months\n• Suspected aortic dissection\n• Active bleeding or bleeding diathesis (excluding menses)\n• Significant closed-head or facial trauma within 3 months\n• Intracranial or intraspinal surgery within 2 months\n• Severe uncontrolled hypertension (SBP >180 or DBP >110) unresponsive to therapy [1]',
+    },
+    {
+      heading: 'Relative Contraindications',
+      body: '• Chronic severe poorly controlled hypertension\n• Significant hypertension on presentation (SBP >180 or DBP >110)\n• Prior ischemic stroke >3 months ago\n• Dementia or known intracranial pathology not covered in absolute CI\n• Traumatic or prolonged CPR (>10 minutes)\n• Major surgery within 3 weeks\n• Recent internal bleeding (2-4 weeks)\n• Noncompressible vascular punctures\n• Pregnancy\n• Active peptic ulcer\n• Current use of anticoagulants (higher INR = higher bleeding risk) [1]',
+    },
+    {
+      heading: 'If Absolute Contraindication Exists',
+      body: 'Patient MUST be transferred for PCI regardless of anticipated time delay. Fibrinolysis cannot be given.\n\nIf relative contraindication exists, weigh bleeding risk against benefit of reperfusion. Consider PCI transfer as alternative.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'O\u2019Gara PT, et al. 2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction. Circulation. 2013;127(4):e362-e425.' },
+  ],
+};
+
+const STEMI_LYTIC_AGENTS: InfoPage = {
+  id: 'stemi-lytic-agents',
+  title: 'Fibrinolytic Agents',
+  subtitle: 'Dosing and Patency Rates — STEMI',
+  sections: [
+    {
+      body: 'Fibrin-specific agents are preferred. All require concomitant anticoagulation for minimum 48 hours. [1]',
+    },
+    {
+      heading: 'Dosing Regimens',
+      body: '',
+      drugTable: [
+        {
+          drug: 'Tenecteplase (PREFERRED)',
+          regimen: 'Single IV bolus over 5 sec:\n<60 kg: 30 mg | 60-69 kg: 35 mg | 70-79 kg: 40 mg | 80-89 kg: 45 mg | ≥90 kg: 50 mg\nAge >75y: consider HALF dose.\nPatency: 63% TIMI-3 flow.',
+        },
+        {
+          drug: 'Alteplase (tPA)',
+          regimen: 'Accelerated 90-min regimen:\n15 mg IV bolus → 0.75 mg/kg (max 50 mg) over 30 min → 0.5 mg/kg (max 35 mg) over 60 min.\nTotal max: 100 mg.\nPatency: 54% TIMI-3 flow.',
+        },
+        {
+          drug: 'Reteplase',
+          regimen: '10 units IV bolus over 2 min, then repeat 10 units IV bolus 30 min later.\nPatency: 60% TIMI-3 flow.',
+        },
+      ],
+    },
+    {
+      heading: 'Key Points',
+      body: '• Tenecteplase preferred for ease of single-bolus dosing\n• Fibrin-specific agents have significant mortality reduction vs streptokinase (GUSTO trial) [2]\n• Streptokinase is no longer available in the United States\n• Maximum benefit when given within 120 minutes of symptom onset\n• After fibrinolysis: transfer to PCI center for angiography within 3-24 hours (NOT within first 2-3 hours)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'O\u2019Gara PT, et al. 2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction. Circulation. 2013;127(4):e362-e425.' },
+    { num: 2, text: 'GUSTO Investigators. An International Randomized Trial Comparing Four Thrombolytic Strategies for Acute MI. N Engl J Med. 1993;329(10):673-682.' },
+  ],
+};
+
+const STEMI_REPERFUSION_PATHWAY: InfoPage = {
+  id: 'stemi-reperfusion-pathway',
+  title: 'Reperfusion Decision Pathway',
+  subtitle: 'PCI vs Fibrinolysis — Time-Based Algorithm',
+  sections: [
+    {
+      heading: 'Step 1: Confirm STEMI',
+      body: 'ECG diagnosis of STEMI (or STEMI equivalent) + ischemic symptoms.\nActivate cath lab and start initial therapies simultaneously.',
+    },
+    {
+      heading: 'Step 2: Assess PCI Availability',
+      body: '**At PCI-capable hospital?**\n• YES → Primary PCI. Goal: FMC-to-device ≤90 min.\n• NO → Can transfer achieve FMC-to-device ≤120 min?\n  - YES → Transfer for PCI. DIDO ≤30 min.\n  - NO → Fibrinolytic therapy. Door-to-needle ≤30 min.',
+    },
+    {
+      heading: 'Step 3: Time from Symptom Onset',
+      body: '**<12 hours:** PCI or fibrinolysis indicated\n**12-24 hours:** PCI reasonable if ongoing ischemia or hemodynamic instability\n**>24 hours, stable, asymptomatic:** PCI NOT recommended (no benefit)\n\n**Exception:** Cardiogenic shock or severe HF → PCI regardless of time from onset [1]',
+    },
+    {
+      heading: 'Step 4: After Fibrinolysis',
+      body: '• Transfer to PCI-capable center\n• Angiography within 3-24 hours (pharmaco-invasive approach)\n• NOT within first 2-3 hours after fibrinolytic administration\n• Rescue PCI if fibrinolysis fails (persistent symptoms or STE) [1]',
+    },
+    {
+      heading: 'Special Situations',
+      body: '• **Cardiogenic shock:** Immediate PCI regardless of time delay or facility\n• **Absolute lytic CI:** Must transfer for PCI regardless of time\n• **Age >75y:** Half-dose tenecteplase if lytics indicated\n• **Cocaine-associated:** PCI strongly preferred (higher ICH risk with lytics)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'O\u2019Gara PT, et al. 2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction. Circulation. 2013;127(4):e362-e425.' },
+  ],
+};
+
+const STEMI_RECIPROCAL: InfoPage = {
+  id: 'stemi-reciprocal',
+  title: 'PAILS Mnemonic',
+  subtitle: 'Reciprocal Changes in STEMI',
+  sections: [
+    {
+      body: 'Reciprocal changes are ST-segment depression that mirrors the ST-segment elevation. Their presence helps confirm STEMI and differentiate from mimics (pericarditis has NO reciprocal changes). [1]',
+    },
+    {
+      heading: 'PAILS Mnemonic',
+      body: '**P**osterior → look for reciprocal changes in **A**nterior leads (V1-V3)\n**A**nterior → look for reciprocal changes in **I**nferior leads (II, III, aVF)\n**I**nferior → look for reciprocal changes in **L**ateral leads (I, aVL)\n**L**ateral → look for reciprocal changes in **I**nferior + **S**eptal leads',
+    },
+    {
+      heading: 'Clinical Significance',
+      body: '• aVL is almost completely opposite lead III — reciprocal changes in aVL are the most sensitive early sign of inferior STEMI [2]\n• Reciprocal changes indicate a significantly larger myocardial territory at risk [3]\n• May identify patients with greater potential for salvage with revascularization\n• Early ST depression or T-wave inversion in aVL may appear before STE develops in inferior leads',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Birnbaum Y, et al. ST Segment Depression in aVL: A Sensitive Marker for Acute Inferior Myocardial Infarction. Eur Heart J. 1993;14(1):4-7.' },
+    { num: 2, text: 'Hassen GW, et al. Lead aVL on ECG: Emerging as Important Lead in Early Diagnosis of MI. Am J Emerg Med. 2014;32(7):785-788.' },
+    { num: 3, text: 'Kidambi A, et al. Reciprocal ECG Change in Reperfused STEMI. Heart. 2013;99(22):1658-1662.' },
+  ],
+};
+
+const STEMI_MIMICS: InfoPage = {
+  id: 'stemi-mimics',
+  title: 'STEMI Mimics',
+  subtitle: 'Differential Diagnosis of ST-Segment Elevation',
+  sections: [
+    {
+      body: 'ST-segment elevation has many causes beyond acute coronary occlusion. Clinical context, ECG pattern, and serial ECGs help differentiate. [1]',
+    },
+    {
+      heading: 'Benign / Non-Emergency',
+      body: '• **Benign early repolarization** — concave STE, young healthy patients, stable\n• **Normal variant** — persistent juvenile pattern, athlete\'s heart\n• **Left ventricular hypertrophy** — strain pattern in lateral leads',
+    },
+    {
+      heading: 'Potentially Life-Threatening',
+      body: '• **Pericarditis** — diffuse concave STE, PR depression, no reciprocal changes\n• **Myocarditis** — focal or diffuse STE, may mimic STEMI closely\n• **Takotsubo (stress) cardiomyopathy** — anterior STE, apical ballooning on echo\n• **Aortic dissection** — may cause STEMI if dissection involves coronary ostium\n• **Pulmonary embolism** — right heart strain, STE in V1, S1Q3T3\n• **Hyperkalemia** — peaked T waves, widened QRS, pseudo-STEMI pattern',
+    },
+    {
+      heading: 'Key Differentiating Features',
+      body: '• **Reciprocal changes** strongly favor true STEMI (absent in pericarditis)\n• **Regional vs diffuse** STE — regional follows arterial distribution (STEMI)\n• **Convex vs concave** ST morphology — convex more concerning for STEMI\n• **Dynamic changes** on serial ECGs — evolving pattern favors STEMI\n• **Point-of-care echo** — RWMA in 93% of AMI (but also 43% of non-AMI) [2]\n• **Check serum potassium** if hyperkalemia suspected — rapid POC testing',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Thygesen K, et al. Fourth Universal Definition of Myocardial Infarction (2018). Eur Heart J. 2019;40(3):237-269.' },
+    { num: 2, text: 'Sabia P, et al. Value of Regional Wall Motion Abnormality in the ER Diagnosis of Acute MI. Circulation. 1991;84(3 Suppl):I85-I92.' },
+  ],
+};
+
+const STEMI_ANTICOAG_DETAIL: InfoPage = {
+  id: 'stemi-anticoag-detail',
+  title: 'Anticoagulation for STEMI',
+  subtitle: 'PCI and Fibrinolysis Regimens',
+  sections: [
+    {
+      heading: 'For Primary PCI',
+      body: '',
+      drugTable: [
+        {
+          drug: 'UFH (standard)',
+          regimen: 'Without GP IIb/IIIa: 70-100 units/kg IV bolus\nWith GP IIb/IIIa: 50-70 units/kg IV bolus\nAdditional boluses PRN for therapeutic ACT',
+        },
+        {
+          drug: 'Bivalirudin (high bleed risk)',
+          regimen: '0.75 mg/kg IV bolus, then 1.75 mg/kg/hr infusion\nWith or without prior UFH',
+        },
+      ],
+    },
+    {
+      heading: 'For Fibrinolytic Therapy (minimum 48 hours)',
+      body: '',
+      drugTable: [
+        {
+          drug: 'UFH',
+          regimen: '60 units/kg bolus (max 4,000 units)\n12 units/kg/hr infusion (max 1,000 units/hr)\nTarget aPTT 1.5-2× control',
+        },
+        {
+          drug: 'Enoxaparin',
+          regimen: 'Age <75: 30 mg IV bolus then 1 mg/kg SC q12h\nAge ≥75: No bolus, 0.75 mg/kg SC q12h\nCrCl <30: 1 mg/kg SC q24h',
+        },
+        {
+          drug: 'Fondaparinux',
+          regimen: '2.5 mg IV with first fibrinolytic dose\nThen 2.5 mg SC daily\nAvoid if CrCl <30. Supplement UFH if PCI needed.',
+        },
+      ],
+    },
+  ],
+  citations: [
+    { num: 1, text: 'O\u2019Gara PT, et al. 2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction. Circulation. 2013;127(4):e362-e425.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -4355,10 +4872,25 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'sah-summary': SAH_SUMMARY,
   'sah-lp-guide': SAH_LP_GUIDE,
   'sah-ecg-changes': SAH_ECG_CHANGES,
+  'syncope-discharge': SYNCOPE_DISCHARGE,
+  'burns-discharge': BURNS_DISCHARGE,
+  'chest-tube-discharge': CHEST_TUBE_DISCHARGE,
+  'distal-radius-discharge': DISTAL_RADIUS_DISCHARGE,
+  'hiv-ed-discharge': HIV_DISCHARGE_INFO,
+  'meningitis-discharge': MENINGITIS_DISCHARGE_INFO,
   'syncope-summary': SYNCOPE_SUMMARY,
   'syncope-ddx': SYNCOPE_DDX,
   'syncope-ecg': SYNCOPE_ECG,
   'syncope-history-features': SYNCOPE_HISTORY_FEATURES,
+  'stemi-summary': STEMI_SUMMARY,
+  'stemi-vascular-territories': STEMI_VASCULAR_TERRITORIES,
+  'stemi-pericarditis-diff': STEMI_PERICARDITIS_DIFF,
+  'stemi-lytic-contraindications': STEMI_LYTIC_CONTRAINDICATIONS,
+  'stemi-lytic-agents': STEMI_LYTIC_AGENTS,
+  'stemi-reperfusion-pathway': STEMI_REPERFUSION_PATHWAY,
+  'stemi-reciprocal': STEMI_RECIPROCAL,
+  'stemi-mimics': STEMI_MIMICS,
+  'stemi-anticoag-detail': STEMI_ANTICOAG_DETAIL,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

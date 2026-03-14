@@ -371,7 +371,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     module: 5,
     title: 'Discharge \u2014 Low-Risk Viral Meningitis',
     body: '**Discharge criteria (extrapolated from pediatric data, use clinical judgment):** [23]\n\u2022 Nontoxic clinical appearance\n\u2022 Normal serum WBC count\n\u2022 Mild CSF pleocytosis only\n\u2022 Negative CSF Gram stain\n\u2022 Adequate symptom control (headache, nausea, vomiting)\n\u2022 Reliable support system and follow-up capability\n\n**Return precautions \u2014 discuss thoroughly:**\n\u2022 Worsening headache\n\u2022 Vomiting\n\u2022 Confusion or behavioral changes\n\u2022 Seizures\n\u2022 Fever >38.5\u00b0C\n\u2022 Neck stiffness worsening\n\n**Follow-up:** Primary care within **3 days** for reassessment. [23]',
-    recommendation: 'Outpatient management of low-risk viral meningitis with strict return precautions and 3-day follow-up',
+    recommendation: 'Outpatient management of low-risk viral meningitis with strict return precautions and 3-day follow-up. Review [Discharge Instructions](#/info/meningitis-discharge) with patient.',
     confidence: 'consider',
     citation: [23],
   },

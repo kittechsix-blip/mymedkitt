@@ -249,6 +249,14 @@ const ALTEPLASE = {
             regimen: '0.9 mg/kg IV (max 90 mg): Give 10% as IV bolus over 1 min, remaining 90% infused over 60 min. BP must be <185/110 before and <180/105 for 24h after. No antithrombotics \u00D7 24h post-infusion.',
             weightCalc: { dosePerKg: 0.9, unit: 'mg', maxDose: 90 },
         },
+        {
+            indication: 'STEMI / Fibrinolysis',
+            regimen: 'Accelerated 90-minute regimen:\n\u2022 15 mg IV bolus\n\u2022 Then 0.75 mg/kg (max 50 mg) IV over 30 minutes\n\u2022 Then 0.5 mg/kg (max 35 mg) IV over 60 minutes\n\u2022 Total max dose: 100 mg\n\nPatency rate: 54% (TIMI grade 3 flow at 90 min).',
+            weightCalc: [
+                { dosePerKg: 0.75, unit: 'mg', maxDose: 50, label: '30-min infusion' },
+                { dosePerKg: 0.5, unit: 'mg', maxDose: 35, label: '60-min infusion' },
+            ],
+        },
     ],
     contraindications: [
         'Absolute: Haemorrhagic stroke or stroke of unknown origin, Ischaemic stroke within 6 months, CNS neoplasm, Major trauma/surgery/head injury within 3 weeks, Bleeding diathesis, Active bleeding',
@@ -1541,6 +1549,14 @@ const ENOXAPARIN = {
             regimen: '1 mg/kg SC every 12 hours. Duration: until invasive strategy or up to 8 days. CrCl <30 mL/min: 1 mg/kg SC once daily. If PCI >8h after last SC dose: supplemental 0.3 mg/kg IV bolus in cath lab.',
             weightCalc: { dosePerKg: 1, unit: 'mg' },
         },
+        {
+            indication: 'STEMI / Fibrinolysis',
+            regimen: 'Age <75 years: 30 mg IV bolus, then 1 mg/kg SC q12h (max 100 mg for first 2 doses).\nAge \u226575 years: No IV bolus, 0.75 mg/kg SC q12h (max 75 mg for first 2 doses).\nCrCl <30: 1 mg/kg SC q24h.\n\nContinue for duration of hospitalization or until revascularization.',
+            weightCalc: [
+                { dosePerKg: 1, unit: 'mg', maxDose: 100, label: 'Age <75 SC dose' },
+                { dosePerKg: 0.75, unit: 'mg', maxDose: 75, label: 'Age \u226575 SC dose' },
+            ],
+        },
     ],
     contraindications: [
         'Heparin-induced thrombocytopenia (HIT) \u2014 absolute contraindication due to cross-reactivity with HIT antibodies',
@@ -1677,6 +1693,10 @@ const FONDAPARINUX = {
         {
             indication: 'NSTEMI (conservative / ischemia-guided strategy)',
             regimen: '2.5 mg SC once daily. Start on presentation, continue until discharge or up to 8 days. If patient goes to PCI: supplement with UFH 60 units/kg bolus (catheter thrombosis risk).',
+        },
+        {
+            indication: 'STEMI / Fibrinolysis',
+            regimen: '2.5 mg IV bolus with first dose of fibrinolytic, then 2.5 mg SC daily.\n\nAvoid if CrCl <30 mL/min.\n\nIf proceeding to PCI: supplement with UFH (catheter thrombosis risk with fondaparinux alone).',
         },
     ],
     contraindications: [
@@ -1862,6 +1882,10 @@ const LABETALOL = {
         {
             indication: 'SAH blood pressure control (target SBP <160)',
             regimen: '10-20 mg IV bolus over 1-2 min. May repeat every 10-15 min. If repeated boluses needed, start infusion at 2-8 mg/min. Target SBP <160 mmHg until aneurysm is secured. Max 300 mg/24h. Avoid nitroprusside (increases ICP).',
+        },
+        {
+            indication: 'ACS / Cocaine-Associated',
+            regimen: '10-20 mg IV over 2 minutes. May repeat or double dose q10 min (max 300 mg total).\n\nPreferred beta-blocker in cocaine-associated STEMI due to combined alpha/beta blockade (avoids unopposed alpha stimulation).\n\nAvoid pure beta-blockers (metoprolol, atenolol) in acute cocaine-associated ACS.',
         },
     ],
     contraindications: [
@@ -2869,6 +2893,22 @@ const REGULAR_INSULIN = {
         'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
     ],
 };
+const RETEPLASE = {
+    id: 'reteplase',
+    name: 'Reteplase',
+    genericName: 'Reteplase',
+    drugClass: 'Thrombolytic (tissue plasminogen activator)',
+    route: 'IV',
+    indications: ['Acute STEMI'],
+    dosing: [
+        {
+            indication: 'STEMI / Fibrinolysis',
+            regimen: '10 units IV bolus over 2 minutes, then repeat 10 units IV bolus 30 minutes later.\n\nPatency rate: 60% (TIMI grade 3 flow at 90 min).\n\nMust be given with anticoagulation (UFH or enoxaparin) for minimum 48 hours.\n\nFibrin-specific agent. Contraindicated within 6 months of streptokinase exposure.',
+        },
+    ],
+    notes: 'Double-bolus fibrinolytic for STEMI when PCI not available within 120 minutes. Administer with concomitant anticoagulation. Less commonly used than tenecteplase (single bolus) but acceptable alternative.',
+    citations: [],
+};
 const RIVAROXABAN = {
     id: 'rivaroxaban',
     name: 'Rivaroxaban',
@@ -3052,6 +3092,10 @@ const TENECTEPLASE = {
             regimen: '0.25 mg/kg IV bolus (max 25 mg) given over 5 seconds. Single dose \u2014 no infusion required. BP must be <185/110 before administration and <180/105 for 24h after.',
             weightCalc: { dosePerKg: 0.25, unit: 'mg', maxDose: 25 },
         },
+        {
+            indication: 'STEMI / Fibrinolysis',
+            regimen: 'Single IV bolus over 5 seconds, weight-based:\n\u2022 <60 kg: 30 mg\n\u2022 60-69 kg: 35 mg\n\u2022 70-79 kg: 40 mg\n\u2022 80-89 kg: 45 mg\n\u2022 \u226590 kg: 50 mg\n\nAge >75 years: Consider HALF dose (reduced ICH risk).\n\nPatency rate: 63% (TIMI grade 3 flow at 90 min).\nPreferred fibrinolytic due to single-bolus dosing.',
+        },
     ],
     contraindications: [
         'Active internal bleeding or ICH',
@@ -3163,6 +3207,15 @@ const UFH = {
         {
             indication: 'ACS / NSTEMI',
             regimen: 'Bolus: 60 units/kg IV (max 4,000 units). Infusion: 12 units/kg/hr (max 1,000 units/hr). Target aPTT: 50-70 seconds (1.5-2.0× control). Lower doses than PE due to concurrent dual antiplatelet therapy. Adjust per institutional nomogram.',
+        },
+        {
+            indication: 'STEMI / PCI',
+            regimen: 'PCI without GP IIb/IIIa: 70-100 units/kg IV bolus.\nPCI with GP IIb/IIIa: 50-70 units/kg IV bolus.\nAdditional boluses to maintain therapeutic ACT.\n\nWith fibrinolysis: 60 units/kg bolus (max 4,000 units), then 12 units/kg/hr (max 1,000 units/hr) infusion for minimum 48 hours. Target aPTT 1.5-2× control.',
+            weightCalc: [
+                { dosePerKg: 70, unit: 'units', label: 'PCI bolus (without GP IIb/IIIa)' },
+                { dosePerKg: 50, unit: 'units', label: 'PCI bolus (with GP IIb/IIIa)' },
+                { dosePerKg: 60, unit: 'units', maxDose: 4000, label: 'Fibrinolysis bolus' },
+            ],
         },
     ],
     contraindications: [
@@ -3462,6 +3515,10 @@ const MORPHINE = {
             indication: 'Burns — pediatric',
             regimen: '0.05-0.1 mg/kg IV q2-4h PRN. Max initial dose 5 mg. Consider intranasal fentanyl as alternative for initial dosing.',
             weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 5, label: 'Pediatric' },
+        },
+        {
+            indication: 'ACS / Refractory Pain',
+            regimen: '4-8 mg IV initially (lower doses for elderly). Repeat 2-4 mg IV q5-15 min PRN.\n\nUse only for pain refractory to nitroglycerin. Morphine may delay P2Y12 inhibitor absorption and was associated with higher mortality in ACS (CRUSADE trial). Clinical judgment recommended.',
         },
     ],
     contraindications: ['Severe respiratory depression without ventilatory support', 'Paralytic ileus'],
@@ -4488,6 +4545,7 @@ export const ALL_DRUGS = [
     RABIES_VACCINE,
     RACEMIC_EPINEPHRINE,
     REGULAR_INSULIN,
+    RETEPLASE,
     RIFAMPIN,
     RITONAVIR,
     RIVAROXABAN,
