@@ -2,6 +2,8 @@
 
 Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
+**RULE: Users must NEVER need to manually clear cache.** The deploy process must handle all three data layers (Supabase, IndexedDB, SW cache) so content updates are automatic.
+
 ## Steps
 
 1. **Compile TypeScript:**
@@ -36,27 +38,37 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    bunx tsc --skipLibCheck --noUnusedLocals false
    ```
 
-   **CRITICAL — Verify UPDATE SQL was generated:**
-   If the deploy-cache-sync output shows `⚠ Unknown tree` warnings or says "No node-level changes detected" but you KNOW tree node content changed (body, recommendation, options, etc.), the script failed to parse the git diff. **Supabase will serve stale data that overrides the hardcoded fix** (three-tier fallback: Supabase → IndexedDB → hardcoded).
+4. **MANDATORY — Supabase sync for changed tree/node data:**
+   **The app loads from Supabase FIRST. If Supabase has stale data, users see stale content regardless of hardcoded fixes or cache bumps.** This step is NOT optional when any tree node content changes.
 
-   In this case, **manually generate UPDATE SQL** for every changed node:
-   ```javascript
-   // Run in node — reads compiled JS, outputs UPDATE statements
+   **4a. Check if deploy-cache-sync generated UPDATE SQL:**
+   - If `supabase-hotfix-update.sql` was generated → use it (step 9)
+   - If it shows `⚠ Unknown tree` warnings or "No node-level changes detected" but you changed tree nodes → the script failed. Proceed to 4b.
+
+   **4b. If cache-sync failed to generate SQL, manually generate it:**
+   Identify ALL tree IDs and node IDs that were modified in this deploy. Then generate UPDATE SQL:
+   ```bash
    node -e "
-   const treeId = '<TREE_ID>';
-   const nodeIds = ['<NODE_ID_1>', '<NODE_ID_2>'];
+   // List ALL changed trees and their modified node IDs
+   const changes = {
+     '<tree-id>': ['<node-id-1>', '<node-id-2>'],
+     // Add more trees as needed
+   };
    async function run() {
-     const m = await import('./docs/data/trees/' + treeId + '.js');
-     const prefix = Object.keys(m).find(k => k.endsWith('_NODES'));
-     const nodes = m[prefix];
      const lines = ['BEGIN;', ''];
-     for (const nid of nodeIds) {
-       const node = nodes.find(n => n.id === nid);
-       if (!node) { console.error('NOT FOUND:', nid); continue; }
-       const body = JSON.stringify(node.body).slice(1,-1).replace(/'/g, \"''\");
-       const rec = node.recommendation ? JSON.stringify(node.recommendation).slice(1,-1).replace(/'/g, \"''\") : null;
-       lines.push('UPDATE decision_nodes SET body = \\'' + body + '\\'' + (rec ? \", recommendation = '\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
-       lines.push('');
+     for (const [treeId, nodeIds] of Object.entries(changes)) {
+       const m = await import('./docs/data/trees/' + treeId + '.js');
+       const prefix = Object.keys(m).find(k => k.endsWith('_NODES'));
+       const nodes = m[prefix];
+       for (const nid of nodeIds) {
+         const node = nodes.find(n => n.id === nid);
+         if (!node) { console.error('NOT FOUND:', nid); continue; }
+         const body = JSON.stringify(node.body).slice(1,-1).replace(/'/g, \"''\");
+         const rec = node.recommendation ? JSON.stringify(node.recommendation).slice(1,-1).replace(/'/g, \"''\") : null;
+         lines.push('-- ' + treeId + ': ' + nid);
+         lines.push('UPDATE decision_nodes SET body = \'' + body + '\'' + (rec ? \", recommendation = '\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
+         lines.push('');
+       }
      }
      lines.push('COMMIT;');
      require('fs').writeFileSync('supabase-hotfix-update.sql', lines.join('\\n'));
@@ -65,106 +77,80 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    run();
    "
    ```
-   Then open in TextEdit and walk user through Supabase paste (step 9).
 
-   **Never skip this check.** Stale Supabase data has caused production bugs where deployed fixes were invisible to users.
+   **4c. Open and walk user through paste:**
+   ```bash
+   open -a TextEdit supabase-hotfix-update.sql
+   ```
+   User: Cmd+A, Cmd+C, Supabase → New Query, Cmd+V, Run.
+   If "destructive operation" warning appears: click "Run this query" — it's safe.
 
-4. **Generate Supabase SQL (for NEW consult deploys only):**
-   **Only for NEW consults.** The cache-sync script in step 3 handles UPDATE SQL for existing consults automatically.
-   **Wait until all testing and iteration is complete.** The app runs from compiled JS, not Supabase — syncing mid-iteration means re-syncing after every change.
+   **Skip step 4 ONLY if the deploy touches zero tree/node data** (e.g., CSS-only, calculator-only, new skill file).
+
+5. **Generate Supabase INSERT SQL (for NEW consults only):**
+   **Only for NEW consults.** Step 4 handles updates to existing consults.
+   **Wait until all testing and iteration is complete.**
 
    ```bash
-   # Usage: node scripts/generate-supabase-sql.mjs <tree-id> [--drugs id1,id2,...] [--info-pages id1,id2,...]
    node scripts/generate-supabase-sql.mjs <tree-id> \
      --drugs <comma-separated new drug IDs> \
      --info-pages <comma-separated new info page IDs>
    ```
 
    - The script reads compiled JS from `docs/` and outputs `supabase-<tree-id>-insert.sql`
-   - Include `--drugs` for any NEW drugs added in this consult (not existing drugs that were updated)
+   - Include `--drugs` for any NEW drugs added in this consult
    - Include `--info-pages` for any NEW info pages added
-   - The generated SQL uses `ON CONFLICT DO UPDATE` (safe to re-run)
-   - **Skip this step** if the deploy is only a bug fix or update to existing consults (no new tree)
 
    **Then split for Supabase paste:**
    ```bash
-   # Split into 3 paste-sized files in supabase/<tree-id>/
    mkdir -p supabase/<tree-id>
-   # File 1: tree metadata + category mapping + citations (small)
-   sed -n '1,/^-- 4\./{ /^-- 4\./!p }' supabase-<tree-id>-insert.sql > supabase/<tree-id>/01-tree-metadata.sql && echo "COMMIT;" >> supabase/<tree-id>/01-tree-metadata.sql
-   # File 2: decision nodes (largest — one INSERT per node)
-   echo "BEGIN;" > supabase/<tree-id>/02-nodes.sql && sed -n '/^-- 4\./,/^-- 5\./{ /^-- 5\./!p }' supabase-<tree-id>-insert.sql >> supabase/<tree-id>/02-nodes.sql && echo "COMMIT;" >> supabase/<tree-id>/02-nodes.sql
-   # File 3: drugs + info pages
-   echo "BEGIN;" > supabase/<tree-id>/03-drugs-infopages.sql && sed -n '/^-- 5\./,$ p' supabase-<tree-id>-insert.sql >> supabase/<tree-id>/03-drugs-infopages.sql
+   python3 -c "
+   import re
+   with open('supabase-<tree-id>-insert.sql') as f:
+       content = f.read()
+   parts = re.split(r'(^-- [4-9]\..*$)', content, flags=re.MULTILINE)
+   file1, file2, file3 = [], [], []
+   current = 1
+   for part in parts:
+       if re.match(r'^-- 4\.', part): current = 2
+       elif re.match(r'^-- [56]\.', part) and current == 2: current = 3
+       [file1, file2, file3][current-1].append(part)
+   with open('supabase/<tree-id>/01-tree-metadata.sql', 'w') as f:
+       f.write(''.join(file1).rstrip() + '\nCOMMIT;\n')
+   with open('supabase/<tree-id>/02-nodes.sql', 'w') as f:
+       f.write('BEGIN;\n' + ''.join(file2).rstrip() + '\nCOMMIT;\n')
+   with open('supabase/<tree-id>/03-drugs-infopages.sql', 'w') as f:
+       f.write('BEGIN;\n' + ''.join(file3).rstrip() + '\n')
+   print('Done')
+   "
    ```
 
-5. **Verify docs/sw.js has content:**
+   Walk user through 3 pastes (open each in TextEdit → Cmd+A → Cmd+C → Supabase New Query → Cmd+V → Run).
+
+   **Skip this step** if no new consult was added.
+
+6. **Verify docs/sw.js has content:**
    ```bash
    wc -l docs/sw.js
    ```
    If it's 0 lines, restore from git: `git show HEAD:docs/sw.js > docs/sw.js` and re-run step 3.
 
-6. **Verify ALL compiled files are staged:**
+7. **Verify ALL compiled files are staged:**
    Run `git status docs/` and check for ANY unstaged changes. Every modified file in `docs/` MUST be committed.
 
-7. **Stage, commit, and push:**
+8. **Stage, commit, and push:**
    Stage all changed files in BOTH `src/` and `docs/`, commit with a descriptive message, and push to `main`.
 
-8. **Verify deployment:**
+9. **Verify deployment:**
    Run `gh api repos/kittechsix-blip/mymedkitt/pages/builds --jq '.[0] | {status, created_at}'` to confirm GitHub Pages built successfully. Wait for `status: "built"`.
-
-9. **Sync Supabase — hotfix UPDATEs (EVERY deploy that modifies tree data):**
-   **CRITICAL:** The app loads trees from Supabase → IndexedDB → hardcoded (in that order). If you change ANY field on an existing node, the hardcoded fix is INVISIBLE to users until Supabase is also updated.
-
-   The cache-sync script (step 3) auto-generated `supabase-hotfix-update.sql` with all the UPDATE statements. Walk the user through pasting it:
-
-   **IMPORTANT:** Use `open -a TextEdit supabase-hotfix-update.sql` to open, then Cmd+A → Cmd+C to copy. Never paste SQL from the terminal — long lines wrap and break JSON.
-
-   1. Open the SQL file in TextEdit
-   2. User: Cmd+A, Cmd+C, Supabase → New Query, Cmd+V, Run
-   3. If "destructive operation" warning appears (DELETE on citations): click "Run this query" — it's safe
-   4. Verify with a SELECT query for the affected tree
-
-   **Remind the user to clear local cache** — visit `clear.html` to wipe IndexedDB so the app re-fetches fresh data from Supabase.
-
-   - **Skip this step** ONLY if the deploy touches no tree/node data (e.g., CSS-only, calculator-only changes)
-   - **Skip this step** if no `supabase-hotfix-update.sql` was generated (script will tell you)
-
-10. **Sync Supabase — full INSERT (FINAL deploy of NEW consult only):**
-    Only after all testing is complete and the consult is finalized. The app doesn't need Supabase to function — this is for data completeness and future native app migration. Sync one file at a time.
-    **IMPORTANT:** Use `open -a TextEdit <file>` to open each SQL file, then Cmd+A → Cmd+C to copy. Never paste SQL from the terminal — long lines wrap and break JSON.
-
-    Walk the user through these exact steps, one at a time:
-
-    **Paste 1:** Open `supabase/<tree-id>/01-tree-metadata.sql` in TextEdit.
-    User: Cmd+A, Cmd+C, Supabase → New Query, Cmd+V, Run.
-    Creates: tree record, category mapping, citations.
-    If "destructive operation" warning appears (DELETE on citations): click "Run this query" — it's safe.
-
-    **Paste 2:** Open `supabase/<tree-id>/02-nodes.sql` in TextEdit.
-    User: Cmd+A, Cmd+C, Supabase → New Query, Cmd+V, Run.
-    Creates: all decision nodes. Will warn about DELETE — click "Run this query".
-
-    **Paste 3:** Open `supabase/<tree-id>/03-drugs-infopages.sql` in TextEdit.
-    User: Cmd+A, Cmd+C, Supabase → New Query, Cmd+V, Run.
-    Creates: new drugs and info pages.
-
-    **Verify:** Copy this to clipboard via pbcopy and have user paste in New Query:
-    ```sql
-    SELECT 'decision_nodes' as tbl, COUNT(*) as cnt FROM decision_nodes WHERE tree_id = '<tree-id>'
-    UNION ALL SELECT 'tree_citations', COUNT(*) FROM tree_citations WHERE tree_id = '<tree-id>'
-    UNION ALL SELECT 'drugs', COUNT(*) FROM drugs WHERE id IN (<drug-ids>)
-    UNION ALL SELECT 'info_pages', COUNT(*) FROM info_pages WHERE id LIKE '<tree-id>%';
-    ```
-
-    - **Skip this step** if no new SQL was generated in step 4
 
 ## Important Notes
 
+- **Users must NEVER need to manually clear cache.** If they do, the deploy process failed.
+- The three-tier fallback is Supabase → IndexedDB → hardcoded. Supabase WINS. If Supabase is stale, users see stale content.
 - NEVER push without checking `git status docs/` first — forgotten compiled files are silent production bugs
-- ALWAYS run `deploy-cache-sync.mjs` — it automates SW bump, DATA_VERSION bump, and Supabase UPDATE SQL
-- ALWAYS check if Supabase needs updating when tree/node data changes — stale Supabase data overrides hardcoded fixes (three-tier fallback: Supabase → IndexedDB → hardcoded)
+- ALWAYS sync Supabase when tree/node data changes — this is the #1 cause of "my changes aren't showing" bugs
 - The SW uses network-first for JS/HTML/CSS + auto-reload via `client.navigate()` on upgrade
-- If a user reports stale content, send them to: `https://kittechsix-blip.github.io/mymedkitt/clear.html`
+- If a user reports stale content despite proper deploy, send them to: `https://kittechsix-blip.github.io/mymedkitt/clear.html`
 - This is the **project-level** deploy skill — it takes priority over the global `/deploy` skill
 - myMedKitt and MedKitt share the same Supabase instance — SQL updates affect both apps
