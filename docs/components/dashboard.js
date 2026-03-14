@@ -54,6 +54,24 @@ export function renderDashboard(container) {
         if (isOpen)
             searchInput.focus();
     });
+    // Share app button — sends full app URL
+    const shareAppBtn = document.createElement('button');
+    shareAppBtn.className = 'dashboard-subheader__share';
+    shareAppBtn.textContent = '\u{1F517}';
+    shareAppBtn.setAttribute('aria-label', 'Share app');
+    shareAppBtn.addEventListener('click', () => {
+        const url = `${window.location.origin}${window.location.pathname}`;
+        if (navigator.share) {
+            navigator.share({ title: 'myMedKitt', text: 'Clinical decision support for emergency medicine', url }).catch(() => { });
+        }
+        else {
+            navigator.clipboard.writeText(url).then(() => {
+                shareAppBtn.textContent = '\u2713';
+                setTimeout(() => { shareAppBtn.textContent = '\u{1F517}'; }, 1500);
+            }).catch(() => { });
+        }
+    });
+    subheader.appendChild(shareAppBtn);
     subheader.appendChild(searchIcon);
     dashboard.appendChild(subheader);
     dashboard.appendChild(searchBar);

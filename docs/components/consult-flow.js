@@ -192,6 +192,32 @@ function renderFlowHeader(container, categoryId) {
     const title = document.createElement('div');
     title.className = 'consult-flow-header__title';
     title.textContent = getConsultTitle(currentTreeId ?? '');
+    // Share button
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'consult-flow-header__share';
+    shareBtn.textContent = '\u{1F517}';
+    shareBtn.setAttribute('aria-label', 'Share consult link');
+    shareBtn.addEventListener('click', () => {
+        const treeId = currentTreeId ?? '';
+        if (!treeId)
+            return;
+        const url = `${window.location.origin}${window.location.pathname}#/share/${treeId}`;
+        const consultTitle = getConsultTitle(treeId);
+        const categories = getAllCategories();
+        const cat = categories.find(c => c.decisionTrees.some(t => t.id === treeId));
+        const catName = cat ? cat.name : '';
+        const shareTitle = `myMedKitt: ${consultTitle}`;
+        const shareText = catName ? `${catName} — ${consultTitle}` : consultTitle;
+        if (navigator.share) {
+            navigator.share({ title: shareTitle, text: shareText, url }).catch(() => { });
+        }
+        else {
+            navigator.clipboard.writeText(url).then(() => {
+                shareBtn.textContent = '\u2713';
+                setTimeout(() => { shareBtn.textContent = '\u{1F517}'; }, 1500);
+            }).catch(() => { });
+        }
+    });
     // Home button
     const homeBtn = document.createElement('button');
     homeBtn.className = 'consult-flow-header__home';
@@ -206,6 +232,7 @@ function renderFlowHeader(container, categoryId) {
     header.appendChild(backBtn);
     header.appendChild(resetBtn);
     header.appendChild(title);
+    header.appendChild(shareBtn);
     header.appendChild(homeBtn);
     container.appendChild(header);
 }
