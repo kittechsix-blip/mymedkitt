@@ -28,6 +28,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 17,
         entryNodeId: 'nstemi-start',
+      },
+      {
+        id: 'syncope',
+        title: 'Syncope Evaluation',
+        subtitle: 'Life-Threat Screen → Etiology → Risk Stratification → Disposition',
+        categoryId: 'cardiology',
+        version: '1.0',
+        nodeCount: 28,
+        entryNodeId: 'sync-start',
       }
     ],
     isCustom: false,

@@ -183,6 +183,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/nstemi.js');
       return { nodes: m.NSTEMI_NODES, entryNodeId: 'nstemi-start', categoryId: 'cardiology', moduleLabels: m.NSTEMI_MODULE_LABELS, citations: m.NSTEMI_CITATIONS };
     },
+    'syncope': async () => {
+      const m = await import('../data/trees/syncope.js');
+      return { nodes: m.SYNCOPE_NODES, entryNodeId: 'sync-start', categoryId: 'cardiology', moduleLabels: m.SYNCOPE_MODULE_LABELS, citations: m.SYNCOPE_CITATIONS };
+    },
     'potassium': async () => {
       const m = await import('../data/trees/potassium.js');
       return { nodes: m.POTASSIUM_NODES, entryNodeId: 'k-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.POTASSIUM_MODULE_LABELS, citations: m.POTASSIUM_CITATIONS };

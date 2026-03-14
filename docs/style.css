@@ -660,6 +660,25 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+.dashboard-subheader__share {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 20px;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dashboard-subheader__share:hover {
+  background: var(--color-surface-hover);
+}
+
 .dashboard-subheader__search:hover {
   background: var(--color-surface-hover);
 }
@@ -945,6 +964,21 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.consult-flow-header__share {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .consult-flow-header__home {

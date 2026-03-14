@@ -4088,6 +4088,159 @@ const SAH_ECG_CHANGES: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Syncope Evaluation — Steps Summary
+// -------------------------------------------------------------------
+
+const SYNCOPE_SUMMARY: InfoPage = {
+  id: 'syncope-summary',
+  title: 'Syncope Evaluation Steps Summary',
+  subtitle: 'Systematic ED Approach to Transient Loss of Consciousness',
+  sections: [
+    {
+      heading: 'Step 1: Exclude Life-Threatening Conditions',
+      body: '• [Screen for persistent abnormal vital signs, neuro deficit, chest pain, abdominal pain, hemorrhage](#/node/sync-start)\n• Any positive finding → evaluate for specific life-threatening etiology\n• [Syncope is a diagnosis of exclusion when red flags present](#/node/sync-life-threat)',
+    },
+    {
+      heading: 'Step 2: Seizure vs. Syncope',
+      body: '• [Differentiate based on postictal state, tongue laceration, movement pattern, and prodrome](#/node/sync-true-syncope)\n• Myoclonic jerks are common in syncope — do not assume seizure\n• Serum lactate within 2 hours aids differentiation (LR+ 5.8)',
+    },
+    {
+      heading: 'Step 3: ECG (Mandatory for All Patients)',
+      body: '• [Obtain 12-lead ECG and place on telemetry](#/node/sync-ecg)\n• Review for conduction disease, ischemia, prolonged QTc, Brugada, HCM\n• 50% of arrhythmic causes detected within 2 hours (low-risk)',
+    },
+    {
+      heading: 'Step 4: Focused History',
+      body: '• [Assess triggers, prodrome, position, duration, cardiac history, medications, family history](#/node/sync-history)\n• History is the single most important tool\n• Classic vasovagal or situational → low risk',
+    },
+    {
+      heading: 'Step 5: Classify Etiology',
+      body: '• [Neurally mediated (reflex)](#/node/sync-vasovagal) — most common, benign prognosis\n• [Orthostatic hypotension](#/node/sync-orthostatic) — medication-related ~40%\n• [Cardiac syncope](#/node/sync-cardiac-suspect) — highest morbidity',
+    },
+    {
+      heading: 'Step 6: Risk Stratify & Dispose',
+      body: '• [Apply CSRS or SFSR for unexplained syncope](#/node/sync-risk-stratify)\n• [High risk → admit to monitored bed](#/node/sync-disposition-high)\n• [Intermediate → observation vs. outpatient with close follow-up](#/node/sync-disposition-intermediate)\n• [Low risk → discharge with reassurance](#/node/sync-disposition-low)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Shen WK, et al. 2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients with Syncope. J Am Coll Cardiol. 2017;70(5):e39-e110.' },
+    { num: 2, text: 'Brignole M, et al. 2018 ESC Guidelines for the Diagnosis and Management of Syncope. Eur Heart J. 2018;39(21):1883-1948.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Syncope — Differential Diagnosis / Mimics
+// -------------------------------------------------------------------
+
+const SYNCOPE_DDX: InfoPage = {
+  id: 'syncope-ddx',
+  title: 'Syncope Differential Diagnosis',
+  subtitle: 'Mimics, Life-Threatening Conditions & Classifications',
+  sections: [
+    {
+      heading: 'Classifications of Syncope',
+      body: '**Neurally Mediated (Reflex)**\n• Vasovagal — pain, emotions, blood, medical procedures\n• Situational — Valsalva, post-exercise, coughing, swallowing, defecation\n• Carotid sinus — head-turning, shaving (age >40)\n\n**Orthostatic Hypotension**\n• Drug-induced (most common cause)\n• Volume depletion\n• Autonomic failure (diabetes, Parkinson, MSA)\n\n**Cardiac**\n• Arrhythmia — bradycardia, tachycardia, channelopathies\n• Structural — aortic stenosis, HCM, PE, aortic dissection, tamponade',
+    },
+    {
+      heading: 'Life-Threatening Conditions That Present with TLOC',
+      body: '• **Subarachnoid hemorrhage** — thunderclap headache, neuro deficit\n• **Pulmonary embolism** — dyspnea, tachycardia, hypoxia, recent surgery/immobilization\n• **Aortic dissection** — tearing chest/back pain, BP differential between arms\n• **Ruptured AAA** — abdominal/back pain, pulsatile mass, hypotension\n• **Acute MI** — chest pain, ST changes, elevated troponin\n• **Tension pneumothorax** — unilateral absent breath sounds, hypotension\n• **Ectopic pregnancy** — abdominal pain, vaginal bleeding, positive βhCG\n• **GI hemorrhage** — melena, hematemesis, rectal bleeding\n• **Cardiac tamponade** — JVD, muffled heart sounds, hypotension\n• **High-grade AV block** — persistent bradycardia, syncope without warning',
+    },
+    {
+      heading: 'Syncope Mimics (Non-Syncopal TLOC)',
+      body: '• **Seizure** — postictal confusion >few seconds, tongue laceration, rhythmic jerks >20\n• **Psychogenic pseudosyncope** — prolonged duration, eyes closed, no injury, psychiatric history\n• **Hypoglycemia** — diabetic medications, altered mentation, rarely resolves spontaneously\n• **Posterior circulation TIA** — vertigo, diplopia, dysarthria, ataxia (rare cause of TLOC)\n• **Toxicologic** — overdose, poisoning (uncommonly resolves spontaneously)\n• **Metabolic** — severe electrolyte derangement, hypoxia',
+    },
+    {
+      heading: 'Key Differentiating Features',
+      body: '**Seizure vs. Syncope:**\n• Postictal disorientation >few seconds → seizure\n• Prodrome (lightheadedness, diaphoresis) → syncope\n• Tongue laceration → seizure\n• <10 jerks → syncope; >20 jerks → seizure [1]\n• Urinary incontinence → does NOT differentiate [2]\n• Serum lactate within 2h: elevated → seizure (LR+ 5.8) [3]\n\n**45% of unexplained syncope** patients may have past or current substance abuse history. [4]\nMen with psychiatric illness are more likely to have unexplained syncope. [5]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Shmuely S, et al. Differentiating Motor Phenomena in Tilt-Induced Syncope and Convulsive Seizures. Neurology. 2018;90(15):e1339-e1346.' },
+    { num: 2, text: 'Brigo F, et al. The Diagnostic Value of Urinary Incontinence in the Differential Diagnosis of Seizures. Seizure. 2013;22(2):85-90.' },
+    { num: 3, text: 'Matz O, et al. Early Postictal Serum Lactate Concentrations Are Superior to CK in Distinguishing Generalized Tonic-Clonic Seizures from Syncopes. Intern Emerg Med. 2018;13(5):749-755.' },
+    { num: 4, text: 'Wiener Z, et al. Substance Abuse in ED Patients with Unexplained Syncope. Intern Emerg Med. 2014;9(3):331-334.' },
+    { num: 5, text: 'Wiener Z, et al. The Prevalence of Psychiatric Disease in ED Patients with Unexplained Syncope. Intern Emerg Med. 2013;8(5):427-430.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Syncope — High-Risk ECG Findings
+// -------------------------------------------------------------------
+
+const SYNCOPE_ECG: InfoPage = {
+  id: 'syncope-ecg',
+  title: 'High-Risk ECG Findings in Syncope',
+  subtitle: 'Brugada, HCM, Long QT, Pre-Excitation & Other Patterns',
+  sections: [
+    {
+      heading: 'ECG Findings Associated with Serious Arrhythmias Within 30 Days',
+      body: '• **Nonsinus rhythm** (atrial fibrillation, atrial flutter)\n• **Mobitz II or third-degree AV block**\n• **Bundle branch block** (especially new LBBB)\n• **QTc > 460 ms** (concerning); **> 500 ms** (high risk in elderly — predicts 30-day and 1-year mortality) [1]\n• **Pre-excitation** (delta wave, short PR = WPW)\n• **ST depression or T-wave inversions** (ischemia)\n• **Ventricular ectopy** (frequent PVCs, NSVT)\n\nAtrial fibrillation, IVCD, LVH, and ventricular pacing are **independent predictors of mortality**. [2]\n\nThe ECG is more likely to be diagnostic in patients **>40 years**. [3]',
+    },
+    {
+      heading: 'Brugada Syndrome',
+      body: '**Type 1 Brugada pattern** is the only diagnostic pattern — characterized by coved ST-segment elevation ≥2mm in V1-V3 followed by negative T wave. Types 2 and 3 (saddleback morphology) are suggestive but not diagnostic. [4]\n\nPatients with spontaneous type 1 Brugada morphology + syncope are at **high risk for ventricular fibrillation** and may need ICD evaluation. Family history is NOT an independent predictor for future arrhythmic events in the setting of a diagnostic type 1 Brugada pattern. [5]',
+    },
+    {
+      heading: 'Hypertrophic Cardiomyopathy (HCM)',
+      body: '**"Dagger" Q waves** — narrow, deep Q waves in leads I, aVL, and/or V4-V6 with associated LVH voltage criteria suggest HCM. [6]\n\nExertional syncope in a young patient with HCM features on ECG is a **high-risk presentation** requiring urgent echocardiography and cardiology evaluation.\n\nFamily history of sudden cardiac death in young relatives (including those classified as drowning or unexplained MVC) may indicate undiagnosed inheritable arrhythmogenic conditions.',
+    },
+    {
+      heading: 'Long QT Syndrome',
+      body: '**QTc > 460 ms** on multiple ECGs is concerning for inherited long QT syndrome, especially with family history of sudden cardiac death. [7]\n\nIn pediatric patients, syncope associated with a **loud noise** should prompt evaluation for long QT syndrome (LQTS type 2). [8]\n\n**QTc > 500 ms** in elderly patients predicts both 30-day and 1-year mortality. [1]\n\n25% of elderly patients may have QTc prolongation — age-related and medication-related causes are common.',
+    },
+    {
+      heading: 'Other High-Risk Patterns',
+      body: '• **Epsilon waves** — small positive deflections at the end of QRS in V1-V3, pathognomonic for arrhythmogenic right ventricular cardiomyopathy (ARVC)\n• **Early repolarization** — previously considered benign, but inferior or lateral early repolarization with horizontal/descending ST segment may be associated with increased risk\n• **Ventricular pacing** — may mask underlying conduction disease or ischemia\n• **Short QT interval** (QTc < 340 ms) — rare but associated with SCD risk',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'White JL, et al. QTc Prolongation as a Marker of 30-Day Serious Outcomes in Older Patients with Syncope. Am J Emerg Med. 2019;37(4):685-689.' },
+    { num: 2, text: 'Pérez-Rodon J, et al. Prognostic Value of the ECG in Patients with Syncope: Data from GESINUR. Heart Rhythm. 2014;11(11):2035-2044.' },
+    { num: 3, text: 'Sun BC, et al. Low Diagnostic Yield of ECG Testing in Younger Patients with Syncope. Ann Emerg Med. 2008;51(3):240-246.' },
+    { num: 4, text: 'Wu W, et al. Risk Factors for Cardiac Events in Patients with Brugada Syndrome: A PRISMA-Compliant Meta-Analysis. Medicine. 2016;95(30):e4214.' },
+    { num: 5, text: 'Sarkozy A, et al. The Value of Family History of Sudden Death in Patients with Diagnostic Type I Brugada ECG Pattern. Eur Heart J. 2011;32(17):2153-2160.' },
+    { num: 6, text: 'Gatzoulis KA, et al. Correlation of Noninvasive ECG with Invasive Electrophysiology in Syncope of Unknown Origin. Ann Noninvasive Electrocardiol. 2009;14(2):119-127.' },
+    { num: 7, text: 'Okamura H, et al. Risk Stratification in Patients with Brugada Syndrome Without Previous Cardiac Arrest. Circ J. 2015;79(2):310-317.' },
+    { num: 8, text: 'Sanatani S, et al. Canadian Cardiovascular Society Position Statement on the Approach to Syncope in the Pediatric Patient. Can J Cardiol. 2017;33(2):189-198.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Syncope — Historical Features by Etiology
+// -------------------------------------------------------------------
+
+const SYNCOPE_HISTORY_FEATURES: InfoPage = {
+  id: 'syncope-history-features',
+  title: 'Historical Features Suggesting Etiology',
+  subtitle: 'Pattern Recognition for Syncope Classification',
+  sections: [
+    {
+      heading: 'Neurally Mediated (Reflex) Syncope',
+      body: '• Triggered by pain, blood, emotional distress, medical procedures\n• Prolonged standing (especially in warm environments)\n• **Prodrome present:** nausea, sweating, warmth, lightheadedness, tunnel vision\n• Younger patient (< 40 years)\n• Recurrent episodes with similar triggers\n• Rapid return to baseline\n• Occurs during or after meals (postprandial)',
+    },
+    {
+      heading: 'Situational Syncope',
+      body: '• During or immediately after coughing, sneezing, laughing\n• During or after micturition (especially nocturnal)\n• During defecation or straining\n• During swallowing\n• Post-exercise (not during exertion)\n• After prolonged standing at attention (military, choir)',
+    },
+    {
+      heading: 'Orthostatic Hypotension',
+      body: '• Occurs on standing from sitting or lying position\n• After prolonged recumbency\n• Temporal relationship with starting or increasing antihypertensives, diuretics, vasodilators\n• History of autonomic neuropathy (diabetes, Parkinson disease)\n• Dehydration, hot weather, alcohol\n• Post-prandial in elderly',
+    },
+    {
+      heading: 'Cardiac Syncope — Arrhythmic',
+      body: '• **No prodrome** — abrupt onset, no warning\n• Syncope during exertion\n• Syncope while **supine or sitting** (rules out orthostatic)\n• **Palpitations** immediately preceding syncope\n• History of structural heart disease, prior arrhythmia\n• Family history of sudden cardiac death at young age\n• Family history of drowning, unexplained MVCs, or SIDS',
+    },
+    {
+      heading: 'Cardiac Syncope — Structural',
+      body: '• Syncope **during** exertion (HCM, aortic stenosis)\n• Known valvular disease or murmur\n• Recent surgery or immobilization (PE)\n• Dyspnea + chest pain + syncope (PE, aortic dissection)\n• History of heart failure\n• Audible murmur on exam',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Brignole M, et al. 2018 ESC Guidelines for the Diagnosis and Management of Syncope. Eur Heart J. 2018;39(21):1883-1948.' },
+    { num: 2, text: 'Shen WK, et al. 2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients with Syncope. J Am Coll Cardiol. 2017;70(5):e39-e110.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -4202,6 +4355,10 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'sah-summary': SAH_SUMMARY,
   'sah-lp-guide': SAH_LP_GUIDE,
   'sah-ecg-changes': SAH_ECG_CHANGES,
+  'syncope-summary': SYNCOPE_SUMMARY,
+  'syncope-ddx': SYNCOPE_DDX,
+  'syncope-ecg': SYNCOPE_ECG,
+  'syncope-history-features': SYNCOPE_HISTORY_FEATURES,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

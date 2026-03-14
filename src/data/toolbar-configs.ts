@@ -153,6 +153,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'interpret', label: 'Interpret', icon: '\uD83D\uDCCA', action: 'jump', target: 'epss-interpret' },
     { id: 'grey-zone', label: 'Grey Zone', icon: '\uD83D\uDFE1', action: 'jump', target: 'epss-grey' },
   ],
+  'syncope': [
+    { id: 'csrs', label: 'CSRS', icon: '📊', action: 'calculator', target: 'csrs' },
+    { id: 'sfsr', label: 'SFSR', icon: '📋', action: 'calculator', target: 'sfsr' },
+    { id: 'ddx', label: 'DDx', icon: '🔍', action: 'overlay', target: 'syncope-ddx' },
+    { id: 'ecg', label: 'ECG', icon: '📈', action: 'overlay', target: 'syncope-ecg' },
+  ],
   'pe-treatment': [
     { id: 'thrombolysis', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'pe-massive-tx' },
     { id: 'pesi', label: 'PESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'pesi' },

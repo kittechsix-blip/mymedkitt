@@ -1590,6 +1590,93 @@ const MODIFIED_FISHER_CALCULATOR = {
     citations: ['Frontera JA, Claassen J, Schmidt JM, et al. Prediction of symptomatic vasospasm after subarachnoid hemorrhage: the modified Fisher scale. Neurosurgery. 2006;59(1):21-27.'],
 };
 // -------------------------------------------------------------------
+// SFSR (San Francisco Syncope Rule) Calculator Definition
+// -------------------------------------------------------------------
+const SFSR_CALCULATOR = {
+    id: 'sfsr',
+    title: 'San Francisco Syncope Rule',
+    subtitle: 'SFSR — 7-Day Serious Outcome Prediction',
+    description: 'The San Francisco Syncope Rule is a binary screening tool: ANY one positive criterion indicates HIGH RISK for serious outcomes within 7 days. Originally reported 96% sensitive; external validation found sensitivity as low as 76%.',
+    fields: [
+        { name: 'chf', label: 'History of congestive heart failure', type: 'toggle', points: 1 },
+        { name: 'hematocrit', label: 'Hematocrit < 30%', type: 'toggle', points: 1 },
+        { name: 'ecg', label: 'Abnormal ECG', type: 'toggle', points: 1, description: 'New changes or non-sinus rhythm' },
+        { name: 'sob', label: 'Complaint of shortness of breath', type: 'toggle', points: 1 },
+        { name: 'sbp', label: 'Systolic BP < 90 mmHg at triage', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: -Infinity, max: 1, label: 'Score 0', risk: 'Low Risk', mortality: 'No high-risk criteria met. 7-day serious outcome risk: ~2%', colorVar: '--color-primary' },
+        { min: 1, max: Infinity, label: 'Score ≥1', risk: 'High Risk', mortality: 'One or more criteria positive. Sensitivity 76–98% for 7-day serious outcomes. Consider admission or observation.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Any single positive criterion = HIGH RISK. Mnemonic: C-H-E-S-S (CHF, Hematocrit, ECG, Shortness of breath, Systolic BP). External validation found sensitivity 76–98%, specificity 52–62%.',
+    citations: [
+        'Quinn JV, et al. Derivation of the San Francisco Syncope Rule to Predict Patients with Short-Term Serious Outcomes. Ann Emerg Med. 2004;43(2):224-232.',
+        'Sun BC, et al. External Validation of the San Francisco Syncope Rule. Ann Emerg Med. 2007;49(4):420-427.',
+        'Saccilotto RT, et al. San Francisco Syncope Rule to Predict Short-Term Serious Outcomes: A Systematic Review. CMAJ. 2011;183(15):E1116-E1126.',
+    ],
+};
+// -------------------------------------------------------------------
+// CSRS (Canadian Syncope Risk Score) Calculator Definition
+// -------------------------------------------------------------------
+const CSRS_CALCULATOR = {
+    id: 'csrs',
+    title: 'Canadian Syncope Risk Score',
+    subtitle: 'CSRS — 30-Day Serious Adverse Event Prediction',
+    description: 'The Canadian Syncope Risk Score is a validated 9-variable tool that predicts 30-day serious adverse events after ED assessment of syncope. Validated in a multicenter study of 3,819 patients with AUC 0.91. Variables include clinical, ECG, and diagnostic predictors.',
+    fields: [
+        {
+            name: 'vasovagal',
+            label: 'Predisposition to vasovagal symptoms',
+            type: 'select',
+            points: 0,
+            description: 'Triggered by prolonged standing, heat, emotion, pain, or medical procedure',
+            selectOptions: [
+                { label: 'No vasovagal predisposition', points: 0 },
+                { label: 'Yes — vasovagal predisposition', points: -1 },
+            ],
+        },
+        { name: 'heart-disease', label: 'Heart disease history or elevated BNP', type: 'toggle', points: 1, description: 'CAD, atrial fibrillation/flutter, CHF, or valvular heart disease; or elevated BNP/NT-proBNP' },
+        {
+            name: 'sbp-abnormal',
+            label: 'Any ED systolic BP reading',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'SBP 90–180 mmHg (normal)', points: 0 },
+                { label: 'SBP < 90 or > 180 mmHg', points: 2 },
+            ],
+        },
+        { name: 'troponin', label: 'Elevated troponin (> 99th percentile)', type: 'toggle', points: 2 },
+        { name: 'qrs-axis', label: 'Abnormal QRS axis', type: 'toggle', points: 1, description: '< −30° or > 100°' },
+        { name: 'qrs-duration', label: 'QRS duration > 130 ms', type: 'toggle', points: 1 },
+        { name: 'qtc', label: 'QTc > 480 ms', type: 'toggle', points: 2 },
+        {
+            name: 'ed-diagnosis',
+            label: 'ED diagnosis',
+            type: 'select',
+            points: 0,
+            description: 'Clinical impression after evaluation',
+            selectOptions: [
+                { label: 'Other / Unclear', points: 0 },
+                { label: 'Vasovagal syncope', points: -2 },
+                { label: 'Cardiac syncope', points: 2 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: -2, label: 'Very Low Risk', risk: 'Score ≤ −2', mortality: '30-day serious adverse event rate: 0.3%', colorVar: '--color-primary' },
+        { min: -2, max: 1, label: 'Low Risk', risk: 'Score −1 to 0', mortality: '30-day serious adverse event rate: 0.7%', colorVar: '--color-primary' },
+        { min: 1, max: 4, label: 'Medium Risk', risk: 'Score 1 to 3', mortality: '30-day serious adverse event rate: 4.7%', colorVar: '--color-warning' },
+        { min: 4, max: 6, label: 'High Risk', risk: 'Score 4 to 5', mortality: '30-day serious adverse event rate: 12.7%', colorVar: '--color-danger' },
+        { min: 6, max: Infinity, label: 'Very High Risk', risk: 'Score ≥ 6', mortality: '30-day serious adverse event rate: 51.3%', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score ≤ −2 is very low risk (0.3%). Score ≥ −1 is 97.8% sensitive for 30-day serious outcomes (sensitivity 97.8%, specificity 44.3%). Validated in 3,819 patients across 9 Canadian EDs (AUC 0.91).',
+    citations: [
+        'Thiruganasambandamoorthy V, et al. Development of the Canadian Syncope Risk Score to Predict Serious Adverse Events After ED Assessment of Syncope. CMAJ. 2016;188(12):E289-E298.',
+        'Thiruganasambandamoorthy V, et al. Multicenter ED Validation of the Canadian Syncope Risk Score. JAMA Intern Med. 2020;180(5):737-744.',
+    ],
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -1612,6 +1699,8 @@ const CALCULATORS = {
     'ottawa-sah': OTTAWA_SAH_CALCULATOR,
     'hunt-hess': HUNT_HESS_CALCULATOR,
     'modified-fisher': MODIFIED_FISHER_CALCULATOR,
+    'sfsr': SFSR_CALCULATOR,
+    'csrs': CSRS_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
