@@ -16,7 +16,13 @@
 
 ### Auto-Deploy Rule (MANDATORY)
 
-**After every code change**, automatically run `/deploy` before asking Andy to review. Never ask Andy to test without deploying first — the app runs from GitHub Pages, not localhost. The deploy skill handles: compile TS, restore `docs/sw.js` (tsc empties it), bump SW cache version, commit, and push.
+**After every code change**, automatically run `/deploy` before asking Andy to review. Never ask Andy to test without deploying first — the app runs from GitHub Pages, not localhost.
+
+The project-level deploy skill (`.claude/commands/deploy.md`) uses `deploy-cache-sync.mjs` which:
+- Auto-detects changed data files via git diff
+- Bumps `DATA_VERSION` in `src/services/cache-db.ts` + `docs/services/cache-db.js` → forces IndexedDB wipe
+- Bumps `CACHE_NAME` in `docs/sw.js` → triggers service worker update
+- Users get fresh content automatically — no manual cache clearing needed
 
 ### Core Design Philosophy
 
