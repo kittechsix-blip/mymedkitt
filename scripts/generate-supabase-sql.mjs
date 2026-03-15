@@ -106,6 +106,7 @@ const TREE_REGISTRY = {
   'syncope':          { prefix: 'SYNCOPE',             entryNodeId: 'sync-start',         categoryId: 'cardiology' },
   'stemi':            { prefix: 'STEMI',               entryNodeId: 'stemi-start',        categoryId: 'cardiology' },
   'delirium':         { prefix: 'DELIRIUM',            entryNodeId: 'delirium-start',     categoryId: 'neurology' },
+  'acid-base':        { prefix: 'ACID_BASE',           entryNodeId: 'ab-start',           categoryId: 'nephro-rheum-endo' },
 };
 
 // Cross-listing: which consults appear in multiple categories
