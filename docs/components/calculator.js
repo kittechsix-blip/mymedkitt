@@ -1721,6 +1721,282 @@ const SGARBOSSA_CALCULATOR = {
     ],
 };
 // -------------------------------------------------------------------
+// Acid-Base Calculator Definitions
+// -------------------------------------------------------------------
+const ANION_GAP_CALCULATOR = {
+    id: 'anion-gap',
+    title: 'Anion Gap + Corrected AG',
+    subtitle: 'Metabolic Acidosis Classification',
+    description: 'Calculates the serum anion gap and albumin-corrected anion gap. AG = Na − (Cl + HCO3). Corrected AG = AG + 2.5 × (4.2 − Albumin). Albumin correction prevents false-negative AG in hypoalbuminemia.',
+    fields: [
+        { name: 'sodium', label: 'Sodium (Na+)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'chloride', label: 'Chloride (Cl−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'bicarb', label: 'Bicarbonate (HCO3−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'albumin', label: 'Albumin (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL', description: 'Leave at 0 to skip correction (assumes normal 4.2 g/dL)' },
+    ],
+    results: [],
+    thresholdNote: 'Normal AG: 8-12 mEq/L. Modern analyzers may yield values as low as 6 ± 3. Always correct for albumin in critically ill patients.',
+    citations: [
+        'Emmett M, Narins RG. Clinical use of the anion gap. Medicine. 1977;56(1):38-54.',
+        'Figge J et al. Anion gap and hypoalbuminemia. Crit Care Med. 1998;26(11):1807-1810.',
+    ],
+    computeResult: (values) => {
+        const na = values['sodium'] || 0;
+        const cl = values['chloride'] || 0;
+        const hco3 = values['bicarb'] || 0;
+        const albumin = values['albumin'] || 0;
+        if (na <= 0 || cl <= 0 || hco3 <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter Na, Cl, and HCO3 to calculate anion gap.', colorVar: '--color-text-muted' };
+        }
+        const ag = na - (cl + hco3);
+        const hasAlbumin = albumin > 0 && albumin < 10;
+        const correctedAg = hasAlbumin ? Math.round((ag + 2.5 * (4.2 - albumin)) * 10) / 10 : ag;
+        const displayAg = hasAlbumin ? correctedAg : ag;
+        let label;
+        let colorVar;
+        if (displayAg <= 12) {
+            label = 'Normal AG';
+            colorVar = '--color-primary';
+        }
+        else if (displayAg <= 20) {
+            label = 'Mild Elevation';
+            colorVar = '--color-warning';
+        }
+        else {
+            label = 'Significant Elevation';
+            colorVar = '--color-danger';
+        }
+        const desc = hasAlbumin
+            ? `AG = ${na} − (${cl} + ${hco3}) = ${ag} mEq/L\nCorrected AG = ${ag} + 2.5 × (4.2 − ${albumin}) = ${correctedAg} mEq/L\n\nAlbumin correction accounts for lost unmeasured anion buffer.`
+            : `AG = ${na} − (${cl} + ${hco3}) = ${ag} mEq/L\n\nEnter albumin for corrected AG (important in critically ill patients).`;
+        return { value: `${displayAg} mEq/L`, label, description: desc, colorVar };
+    },
+};
+const DELTA_GAP_CALCULATOR = {
+    id: 'delta-gap',
+    title: 'Delta Gap (Delta-Delta)',
+    subtitle: 'Mixed Metabolic Disorder Detection',
+    description: 'Evaluates the proportionality of anion gap increase to bicarbonate decrease. Delta Ratio = (AG − 12) / (24 − HCO3). Detects concurrent non-AG acidosis or metabolic alkalosis.',
+    fields: [
+        { name: 'ag', label: 'Anion Gap', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'hco3', label: 'Bicarbonate (HCO3−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+    ],
+    results: [],
+    thresholdNote: 'Delta < 1: concurrent non-AG acidosis. Delta 1-2: pure AG acidosis. Delta > 2: concurrent metabolic alkalosis.',
+    citations: [
+        'Emmett M, Narins RG. Clinical use of the anion gap. Medicine. 1977;56(1):38-54.',
+    ],
+    computeResult: (values) => {
+        const ag = values['ag'] || 0;
+        const hco3 = values['hco3'] || 0;
+        if (ag <= 0 || hco3 <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter anion gap and bicarbonate.', colorVar: '--color-text-muted' };
+        }
+        if (hco3 >= 24) {
+            return { value: 'N/A', label: 'No Metabolic Acidosis', description: 'HCO3 is ≥ 24 mEq/L — no metabolic acidosis to assess. The delta gap is only meaningful when HCO3 is below normal.', colorVar: '--color-primary' };
+        }
+        if (ag <= 12) {
+            return { value: 'N/A', label: 'No AG Elevation', description: 'Anion gap is ≤ 12 mEq/L (normal). The delta gap assesses mixed disorders in the setting of an elevated AG acidosis.', colorVar: '--color-primary' };
+        }
+        const deltaAg = ag - 12;
+        const deltaHco3 = 24 - hco3;
+        const ratio = Math.round((deltaAg / deltaHco3) * 100) / 100;
+        let label;
+        let colorVar;
+        let interpretation;
+        if (ratio < 1) {
+            label = 'Concurrent Non-AG Acidosis';
+            colorVar = '--color-danger';
+            interpretation = 'HCO3 fell MORE than the AG rose. A concurrent hyperchloremic (non-AG) acidosis is present alongside the AG acidosis. Check for diarrhea, RTA, or saline resuscitation.';
+        }
+        else if (ratio <= 2) {
+            label = 'Pure AG Acidosis';
+            colorVar = '--color-primary';
+            interpretation = 'AG rise is proportional to HCO3 drop. This is a pure anion gap metabolic acidosis without evidence of a concurrent metabolic process.';
+        }
+        else {
+            label = 'Concurrent Metabolic Alkalosis';
+            colorVar = '--color-warning';
+            interpretation = 'AG rose MORE than HCO3 fell. A concurrent metabolic alkalosis is partially offsetting the acidosis. Look for vomiting, NG suction, or diuretic use.';
+        }
+        return {
+            value: ratio.toFixed(2),
+            label,
+            description: `ΔAG = ${ag} − 12 = ${deltaAg}\nΔHCO3 = 24 − ${hco3} = ${deltaHco3}\nDelta Ratio = ${deltaAg} / ${deltaHco3} = ${ratio.toFixed(2)}\n\n${interpretation}`,
+            colorVar,
+        };
+    },
+};
+const WINTERS_FORMULA_CALCULATOR = {
+    id: 'winters-formula',
+    title: "Winter's Formula",
+    subtitle: 'Respiratory Compensation for Metabolic Acidosis',
+    description: "Predicts the expected pCO2 for a given bicarbonate level in metabolic acidosis. Expected pCO2 = 1.5 × [HCO3] + 8 ± 2. Compares actual pCO2 to detect concurrent respiratory disturbances.",
+    fields: [
+        { name: 'hco3', label: 'Bicarbonate (HCO3−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'pco2', label: 'Actual pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    ],
+    results: [],
+    thresholdNote: "If actual pCO2 is within the expected range, respiratory compensation is appropriate. If higher → concurrent respiratory acidosis. If lower → concurrent respiratory alkalosis.",
+    citations: [
+        'Schwartz WB, Relman AS. A critique of the parameters used in the evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.',
+    ],
+    computeResult: (values) => {
+        const hco3 = values['hco3'] || 0;
+        const pco2 = values['pco2'] || 0;
+        if (hco3 <= 0 || pco2 <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter bicarbonate and actual pCO2.', colorVar: '--color-text-muted' };
+        }
+        const expectedPco2 = 1.5 * hco3 + 8;
+        const low = Math.round((expectedPco2 - 2) * 10) / 10;
+        const high = Math.round((expectedPco2 + 2) * 10) / 10;
+        let label;
+        let colorVar;
+        let interpretation;
+        if (pco2 >= low && pco2 <= high) {
+            label = 'Appropriately Compensated';
+            colorVar = '--color-primary';
+            interpretation = 'Actual pCO2 is within the expected range. This is a pure metabolic acidosis with appropriate respiratory compensation.';
+        }
+        else if (pco2 > high) {
+            label = 'Concurrent Respiratory Acidosis';
+            colorVar = '--color-danger';
+            interpretation = 'Actual pCO2 is HIGHER than expected. The patient is not hyperventilating enough — a concurrent respiratory acidosis is present. This is dangerous: both processes worsen the acidemia.';
+        }
+        else {
+            label = 'Concurrent Respiratory Alkalosis';
+            colorVar = '--color-warning';
+            interpretation = 'Actual pCO2 is LOWER than expected. The patient is hyperventilating beyond metabolic compensation. Consider salicylate toxicity, PE, or early sepsis.';
+        }
+        return {
+            value: `${low}–${high} mmHg`,
+            label,
+            description: `Expected pCO2 = 1.5 × ${hco3} + 8 = ${Math.round(expectedPco2 * 10) / 10} mmHg\nExpected range: ${low}–${high} mmHg\nActual pCO2: ${pco2} mmHg\n\n${interpretation}`,
+            colorVar,
+        };
+    },
+};
+const OSMOLAR_GAP_CALCULATOR = {
+    id: 'osmolar-gap',
+    title: 'Osmolar Gap',
+    subtitle: 'Toxic Alcohol Screening',
+    description: 'Calculates the difference between measured and calculated serum osmolality. Elevated gap suggests unmeasured osmoles (toxic alcohols, mannitol). Calculated Osm = 2×Na + Glucose/18 + BUN/2.8 + EtOH/3.7.',
+    fields: [
+        { name: 'measured-osm', label: 'Measured Osmolality', type: 'number', points: 0, valueIsPoints: true, unit: 'mOsm/kg' },
+        { name: 'sodium', label: 'Sodium (Na+)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'glucose', label: 'Glucose', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL' },
+        { name: 'bun', label: 'BUN', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL' },
+        { name: 'etoh', label: 'Ethanol Level (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Enter 0 if not measured — unmeasured EtOH will falsely elevate the gap' },
+    ],
+    results: [],
+    thresholdNote: 'Gap > 10: elevated — consider toxic alcohol. Gap > 50: almost certainly toxic ingestion. Include EtOH if available to avoid false positive.',
+    citations: [
+        'Emmett M, Narins RG. Clinical use of the anion gap. Medicine. 1977;56(1):38-54.',
+    ],
+    computeResult: (values) => {
+        const measuredOsm = values['measured-osm'] || 0;
+        const na = values['sodium'] || 0;
+        const glucose = values['glucose'] || 0;
+        const bun = values['bun'] || 0;
+        const etoh = values['etoh'] || 0;
+        if (measuredOsm <= 0 || na <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter measured osmolality and sodium at minimum.', colorVar: '--color-text-muted' };
+        }
+        let calcOsm = 2 * na + glucose / 18 + bun / 2.8;
+        let formula = `2×${na} + ${glucose}/18 + ${bun}/2.8`;
+        if (etoh > 0) {
+            calcOsm += etoh / 3.7;
+            formula += ` + ${etoh}/3.7`;
+        }
+        calcOsm = Math.round(calcOsm * 10) / 10;
+        const gap = Math.round((measuredOsm - calcOsm) * 10) / 10;
+        let label;
+        let colorVar;
+        let interpretation;
+        if (gap <= 10) {
+            label = 'Normal';
+            colorVar = '--color-primary';
+            interpretation = 'No significant osmolar gap. Toxic alcohol ingestion is unlikely (though late presentations after metabolism may have a closed gap with persistent AG acidosis).';
+        }
+        else if (gap <= 50) {
+            label = 'Elevated';
+            colorVar = '--color-warning';
+            interpretation = 'Elevated osmolar gap. Consider: methanol, ethylene glycol, isopropanol, propylene glycol (lorazepam/diazepam/phenytoin infusions), mannitol, lithium.';
+        }
+        else {
+            label = 'Highly Elevated';
+            colorVar = '--color-danger';
+            interpretation = 'Osmolar gap > 50 — almost certainly toxic alcohol ingestion. Initiate fomepizole. Consult toxicology and nephrology.';
+        }
+        return {
+            value: `${gap} mOsm/kg`,
+            label,
+            description: `Calculated Osm = ${formula} = ${calcOsm} mOsm/kg\nMeasured Osm: ${measuredOsm} mOsm/kg\nOsmolar Gap: ${measuredOsm} − ${calcOsm} = ${gap}\n\n${interpretation}`,
+            colorVar,
+        };
+    },
+};
+const STEWART_SIG_CALCULATOR = {
+    id: 'stewart-sig',
+    title: 'Stewart SID/SIG Analysis',
+    subtitle: 'Simplified Stewart Approach (Story Method)',
+    description: 'Quantitative acid-base analysis using strong ion difference (SID), lactate, albumin, and base excess. Decomposes the base excess into its component causes. BE = (Na−Cl−35) + (1−Lactate) + 2.5×(4.2−Albumin) + Other Ions.',
+    fields: [
+        { name: 'sodium', label: 'Sodium (Na+)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'chloride', label: 'Chloride (Cl−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        { name: 'lactate', label: 'Lactate', type: 'number', points: 0, valueIsPoints: true, unit: 'mmol/L' },
+        { name: 'albumin', label: 'Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL' },
+        { name: 'be', label: 'Base Excess (or enter 0)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', description: 'Standard base excess from ABG. If unavailable, calculate as 24.2 − HCO3' },
+    ],
+    results: [],
+    thresholdNote: 'SIG (Other Ions) > 2: unmeasured anions present. SIG ≤ 2: disturbance explained by Na-Cl, lactate, and albumin. If BE unavailable: use 24.2 − HCO3 as approximate base deficit (enter as negative number).',
+    citations: [
+        'Story DA. Stewart acid-base: a simplified bedside approach. Anesth Analg. 2016;123(2):511-515.',
+        'Stewart PA. Independent and dependent variables of acid-base control. Respir Physiol. 1978;33(1):9-26.',
+    ],
+    computeResult: (values) => {
+        const na = values['sodium'] || 0;
+        const cl = values['chloride'] || 0;
+        const lactate = values['lactate'] || 0;
+        const albumin = values['albumin'] || 0;
+        const be = values['be'] || 0;
+        if (na <= 0 || cl <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter at minimum Na and Cl to begin analysis.', colorVar: '--color-text-muted' };
+        }
+        const naClEffect = na - cl - 35;
+        const lactateEffect = 1 - lactate;
+        const albuminEffect = albumin > 0 ? Math.round(2.5 * (4.2 - albumin) * 10) / 10 : 0;
+        const sig = Math.round((be - naClEffect - lactateEffect - albuminEffect) * 10) / 10;
+        let label;
+        let colorVar;
+        let sigInterpretation;
+        if (Math.abs(sig) <= 2) {
+            label = 'No Significant Unmeasured Ions';
+            colorVar = '--color-primary';
+            sigInterpretation = 'Disturbance is fully explained by Na-Cl, lactate, and albumin.';
+        }
+        else if (sig > 2) {
+            label = 'Unmeasured Anions Present';
+            colorVar = '--color-danger';
+            sigInterpretation = 'SIG > 2: unmeasured anions (ketoacids, uremia, toxic alcohols, salicylates, D-lactate). Check BHB and osmolar gap.';
+        }
+        else {
+            label = 'Unmeasured Cations';
+            colorVar = '--color-warning';
+            sigInterpretation = 'SIG < −2: unmeasured cations (hypercalcemia, hyperMg, myeloma proteins, lithium, bromide interference).';
+        }
+        const naClLabel = naClEffect < 0 ? 'acidosis' : naClEffect > 0 ? 'alkalosis' : 'neutral';
+        const lacLabel = lactateEffect < 0 ? 'acidosis' : 'neutral';
+        const albLabel = albuminEffect > 0 ? 'alkalosis (hypoalbuminemia)' : albuminEffect < 0 ? 'acidosis (hyperalbuminemia)' : 'neutral';
+        return {
+            value: `SIG: ${sig}`,
+            label,
+            description: `Na−Cl effect: ${na}−${cl}−35 = ${naClEffect > 0 ? '+' : ''}${naClEffect} (${naClLabel})\nLactate effect: 1−${lactate} = ${lactateEffect > 0 ? '+' : ''}${lactateEffect} (${lacLabel})\nAlbumin effect: 2.5×(4.2−${albumin}) = ${albuminEffect > 0 ? '+' : ''}${albuminEffect} (${albLabel})\nBase Excess: ${be > 0 ? '+' : ''}${be}\n\nSIG (Other Ions) = ${be} − (${naClEffect > 0 ? '+' : ''}${naClEffect}) − (${lactateEffect > 0 ? '+' : ''}${lactateEffect}) − (${albuminEffect > 0 ? '+' : ''}${albuminEffect}) = ${sig}\n\n${sigInterpretation}`,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -1746,6 +2022,11 @@ const CALCULATORS = {
     'sfsr': SFSR_CALCULATOR,
     'csrs': CSRS_CALCULATOR,
     'sgarbossa': SGARBOSSA_CALCULATOR,
+    'anion-gap': ANION_GAP_CALCULATOR,
+    'delta-gap': DELTA_GAP_CALCULATOR,
+    'winters-formula': WINTERS_FORMULA_CALCULATOR,
+    'osmolar-gap': OSMOLAR_GAP_CALCULATOR,
+    'stewart-sig': STEWART_SIG_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

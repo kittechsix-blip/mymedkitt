@@ -145,6 +145,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/sodium.js');
             return { nodes: m.SODIUM_NODES, entryNodeId: 'na-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.SODIUM_MODULE_LABELS, citations: m.SODIUM_CITATIONS };
         },
+        'acid-base': async () => {
+            const m = await import('../data/trees/acid-base.js');
+            return { nodes: m.ACID_BASE_NODES, entryNodeId: 'ab-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.ACID_BASE_MODULE_LABELS, citations: m.ACID_BASE_CITATIONS };
+        },
         'croup': async () => {
             const m = await import('../data/trees/croup.js');
             return { nodes: m.CROUP_NODES, entryNodeId: 'croup-start', categoryId: 'pediatrics', moduleLabels: m.CROUP_MODULE_LABELS, citations: m.CROUP_CITATIONS };

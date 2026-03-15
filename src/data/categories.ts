@@ -304,6 +304,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 28,
         entryNodeId: 'na-start',
+      },
+      {
+        id: 'acid-base',
+        title: 'Acid-Base Disturbances',
+        subtitle: 'Traditional vs Stewart \u2192 AG \u2192 Delta \u2192 SID/SIG \u2192 Treatment',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 34,
+        entryNodeId: 'ab-start',
       }
     ],
     isCustom: false,

@@ -3702,6 +3702,55 @@ const MISOPROSTOL: DrugEntry = {
   ],
 };
 
+const SODIUM_BICARBONATE: DrugEntry = {
+  id: 'sodium-bicarbonate',
+  name: 'Sodium Bicarbonate',
+  genericName: 'Sodium bicarbonate',
+  drugClass: 'Alkalinizing agent',
+  route: 'IV',
+  indications: ['Severe metabolic acidosis (pH < 6.9)', 'Hyperkalemia', 'TCA overdose', 'Salicylate toxicity', 'Urinary alkalinization'],
+  dosing: [
+    {
+      indication: 'Severe Metabolic Acidosis (pH < 6.9)',
+      regimen: '8.4% solution: 100 mEq (100 mL) in 400 mL sterile water IV over 2 hours. Alternatively, isotonic 4.2%: 500 mL IV over 4 hours. Recheck ABG after infusion. Repeat if pH remains < 6.9. BICAR-ICU trial: NNT 6 for survival benefit in patients with severe acidemia AND acute kidney injury.',
+    },
+    {
+      indication: 'Hyperkalemia',
+      regimen: '50 mEq (50 mL of 8.4%) IV over 5 minutes. Temporizing measure — drives K+ intracellularly via raising pH. Most effective when patient is acidotic (pH < 7.2). Limited benefit in non-acidotic hyperkalemia.',
+    },
+    {
+      indication: 'TCA Overdose — Sodium Channel Blockade',
+      regimen: '1-2 mEq/kg IV bolus over 1-2 minutes. Target serum pH 7.45-7.55. Follow with continuous infusion: 150 mEq (3 amps) in 1L D5W at 150-250 mL/hr. Titrate to QRS narrowing. May repeat boluses q5-10 min for persistent QRS widening > 100 ms.',
+      weightCalc: { dosePerKg: 1.5, unit: 'mEq', maxDose: 150, label: 'Bolus (midpoint dose)' },
+    },
+    {
+      indication: 'Salicylate Toxicity — Urinary Alkalinization',
+      regimen: '150 mEq (3 amps of 8.4%) in 1L D5W, infuse at 150-200 mL/hr. Target urine pH 7.5-8.0. MUST add KCl 20-40 mEq per liter — hypokalemia blocks urinary alkalinization. Monitor urine pH hourly. Increases salicylate renal elimination 10-fold.',
+    },
+    {
+      indication: 'Urinary Alkalinization (non-salicylate)',
+      regimen: '150 mEq (3 amps) in 1L D5W IV. Target urine pH > 6.5. Used for rhabdomyolysis (prevents myoglobin precipitation in renal tubules) and methotrexate toxicity.',
+    },
+  ],
+  contraindications: ['Metabolic alkalosis', 'Severe pulmonary edema / volume overload (significant sodium load)', 'Hypochloremia'],
+  cautions: [
+    'NOT recommended for routine cardiac arrest or CPR (AHA/ERC guidelines) — unless confirmed hyperkalemia or TCA overdose',
+    'NOT recommended for routine DKA — insulin and fluids are definitive therapy. Use only if pH < 6.9',
+    'Causes acute hypokalemia — K+ shifts intracellularly with alkalinization. Monitor K+ closely',
+    'Ionized calcium drops with alkalinization — can precipitate tetany or seizures in hypocalcemic patients',
+    'Paradoxical CNS acidosis possible with rapid bolus — CO2 crosses the blood-brain barrier faster than HCO3',
+    '8.4% solution (1 mEq/mL) = 1000 mOsm/L — extremely hypertonic. Preferably via central line for large volumes',
+    'May increase lactatemia and shift hemoglobin-oxygen dissociation curve leftward (decreased O2 delivery)',
+  ],
+  monitoring: 'Serial ABGs q1-2h during infusion. Serum K+ and ionized Ca2+ before and during treatment. Urine pH hourly if alkalinization is the goal. QRS width q15-30 min in TCA overdose.',
+  notes: 'BICAR-ICU trial (Jaber et al., Lancet 2018): 4.2% bicarb vs no bicarb in 389 ICU patients with severe metabolic acidemia (pH ≤ 7.20). No overall mortality benefit, BUT significant benefit in predefined AKI subgroup (NNT 6 for composite of death + organ failure at day 28). Sodium bicarbonate 8.4% = 1 mEq/mL = 1000 mOsm/L. Each 50 mEq amp contains 50 mEq of sodium — a significant volume/sodium load. From a Stewart perspective, sodium bicarbonate can be viewed as chloride-free sodium that increases the strong ion difference (SID), thereby alkalinizing.',
+  citations: [
+    'Jaber S et al. Sodium Bicarbonate Therapy for Patients with Severe Metabolic Acidaemia (BICAR-ICU). Lancet. 2018;392(10141):31-40.',
+    'Forsythe SM, Schmidt GA. Sodium Bicarbonate for the Treatment of Lactic Acidosis. Chest. 2000;117(1):260-267.',
+    'Soar J et al. ERC Guidelines 2015: Adult Advanced Life Support. Resuscitation. 2015;95:100-147.',
+  ],
+};
+
 const SILVER_SULFADIAZINE: DrugEntry = {
   id: 'silver-sulfadiazine',
   name: 'Silver Sulfadiazine 1% (Silvadene)',
@@ -4714,6 +4763,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   RIVAROXABAN,
   RH_IMMUNE_GLOBULIN,
   SILVER_SULFADIAZINE,
+  SODIUM_BICARBONATE,
   TENECTEPLASE,
   TDF_FTC,
   TERBUTALINE,
@@ -4857,6 +4907,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/rivaroxaban/i, 'rivaroxaban'],
   [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
   [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
+  [/sodium\s*bicarbonate|sodium\s*bicarb|nahco3|bicarb(?!onate)/i, 'sodium-bicarbonate'],
   [/tenecteplase|TNKase/i, 'tenecteplase'],
   [/tenofovir.*emtricitabine|truvada|TDF\/FTC/i, 'tdf-ftc'],
   [/terbutaline|brethine/i, 'terbutaline'],

@@ -14,6 +14,7 @@ export { FIRST_TRIMESTER_NODES, FIRST_TRIMESTER_MODULE_LABELS, FIRST_TRIMESTER_C
 export { HIV_NODES, HIV_MODULE_LABELS, HIV_CITATIONS } from './hiv';
 export { MENINGITIS_NODES, MENINGITIS_MODULE_LABELS, MENINGITIS_CITATIONS } from './meningitis';
 export { SAH_NODES, SAH_MODULE_LABELS, SAH_CITATIONS } from './sah';
+export { ACID_BASE_NODES, ACID_BASE_MODULE_LABELS, ACID_BASE_CITATIONS } from './acid-base';
 
 // Export type for registry
 import type { ConsultTree } from '../../types/consult-tree';

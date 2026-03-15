@@ -4506,6 +4506,228 @@ const STEMI_ANTICOAG_DETAIL = {
     ],
 };
 // -------------------------------------------------------------------
+// Acid-Base Info Pages
+// -------------------------------------------------------------------
+const AB_SUMMARY = {
+    id: 'ab-summary',
+    title: 'Acid-Base Steps Summary',
+    subtitle: 'Quick Reference — Traditional & Stewart Approaches',
+    sections: [
+        {
+            heading: 'Initial Labs',
+            body: '[Order labs and choose approach](#/node/ab-start)\n• ABG or VBG, BMP (Na, Cl, HCO3, BUN, Cr, Glucose)\n• Lactate, albumin, beta-hydroxybutyrate, serum osmolality',
+        },
+        {
+            heading: 'Traditional Pathway',
+            body: '[Assess pH](#/node/ab-trad-ph) — acidemia / alkalemia / normal\n[Determine pCO2](#/node/ab-acid-co2) — respiratory vs metabolic primary\n[Calculate Anion Gap](#/node/ab-met-acid) — AG = Na − (Cl + HCO3), correct for albumin\n[Apply Delta Gap](#/node/ab-delta) — detect mixed metabolic disorders\n[Winter\'s Formula](#/node/ab-winters) — check respiratory compensation\n[Treatment & Disposition](#/node/ab-treatment)',
+        },
+        {
+            heading: 'Stewart Pathway',
+            body: '[Assess pH & CO2](#/node/ab-stew-assess) — respiratory component\n[Calculate SID (Na − Cl)](#/node/ab-stew-sid) — strong ion difference\n[Evaluate Lactate](#/node/ab-stew-lactate) — lactate contribution\n[Calculate SIG](#/node/ab-stew-sig) — unmeasured anions\n[Check Osmolar Gap](#/node/ab-stew-osm) — if SIG elevated and source unclear\n[Treatment & Disposition](#/node/ab-treatment)',
+        },
+        {
+            heading: 'Key Decision Points',
+            body: '• **AG > 12** with normal pH → mixed AG acidosis + metabolic alkalosis\n• **Delta < 1** → concurrent non-AG acidosis\n• **Delta > 2** → concurrent metabolic alkalosis\n• **Actual pCO2 > Winter\'s** → concurrent respiratory acidosis\n• **SIG > 2** → unmeasured anions (ketones, uremia, toxins)\n• **Osm gap > 10** → consider toxic alcohol',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hamm LL et al. Acid-base homeostasis. Clin J Am Soc Nephrol. 2015;10(12):2232-2242.' },
+        { num: 2, text: 'Story DA. Stewart acid-base: a simplified bedside approach. Anesth Analg. 2016;123(2):511-515.' },
+    ],
+};
+const AB_COMPENSATION = {
+    id: 'ab-compensation',
+    title: '6 Rules for Expected Compensation',
+    subtitle: 'Predicted Responses to Primary Acid-Base Disturbances',
+    sections: [
+        {
+            heading: 'Respiratory Acidosis',
+            body: '**Rule 1 — Acute Respiratory Acidosis:**\nExpected HCO3 = 24 + 1 × (pCO2 − 40)/10\nHCO3 rises ~1 mEq/L for each 10 mmHg rise in pCO2\n\n**Rule 2 — Chronic Respiratory Acidosis (> 3-5 days):**\nExpected HCO3 = 24 + 3.5 × (pCO2 − 40)/10\nHCO3 rises ~3.5 mEq/L for each 10 mmHg rise in pCO2',
+        },
+        {
+            heading: 'Respiratory Alkalosis',
+            body: '**Rule 3 — Acute Respiratory Alkalosis:**\nExpected HCO3 = 24 − 2 × (40 − pCO2)/10\nHCO3 drops ~2 mEq/L for each 10 mmHg drop in pCO2\n\n**Rule 4 — Chronic Respiratory Alkalosis (> 3-5 days):**\nExpected HCO3 = 24 − 5 × (40 − pCO2)/10\nHCO3 drops ~5 mEq/L for each 10 mmHg drop in pCO2',
+        },
+        {
+            heading: 'Metabolic Acidosis',
+            body: "**Rule 5 — Winter's Formula:**\nExpected pCO2 = 1.5 × [HCO3] + 8 ± 2\n\nVentilatory compensation begins within minutes but takes up to 24 hours for maximal effect. A more robust response is observed in acidemia than in alkalemia.",
+        },
+        {
+            heading: 'Metabolic Alkalosis',
+            body: '**Rule 6 — Metabolic Alkalosis:**\nExpected pCO2 = 40 + 0.7 × (HCO3 − 24)\npCO2 rises ~0.7 mmHg per 1 mEq/L increase in HCO3\nMaximum compensatory pCO2 is approximately 55 mmHg',
+        },
+        {
+            heading: 'Base Excess Compensation Rules',
+            body: 'For base excess users, expected pCO2 changes can also be estimated: [9]\n\n**Metabolic disturbance:** Expected pCO2 ≈ 40 + Base Excess\n**Chronic respiratory disturbance:** Expected Δ BE ≈ 0.4 × (Chronic change in pCO2)\n\nIf measured values differ from expected → a mixed disturbance is present.',
+        },
+        {
+            heading: 'Interpretation',
+            body: 'If the observed compensation **matches** the expected range → **pure** disturbance.\nIf the observed compensation is **more** than expected → an additional process in the same direction.\nIf the observed compensation is **less** than expected → an opposing disturbance is also present.\n\nThese rules apply to simple, single disturbances. Complex patients often have multiple overlapping processes.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Schwartz WB, Relman AS. A critique of the parameters used in the evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.' },
+        { num: 2, text: 'Hamm LL et al. Acid-base homeostasis. Clin J Am Soc Nephrol. 2015;10(12):2232-2242.' },
+        { num: 3, text: 'Berend K. Diagnostic use of base excess in acid-base disorders. NEJM. 2018;378(15):1419-1428.' },
+    ],
+};
+const AB_DIFFERENTIAL = {
+    id: 'ab-differential',
+    title: 'Acid-Base Differential Diagnosis',
+    subtitle: 'Comprehensive Etiologies by Disturbance Type',
+    sections: [
+        {
+            heading: 'Anion Gap Metabolic Acidosis (MUDPILES)',
+            body: '• **M**ethanol\n• **U**remia (renal failure — phosphate, sulfate, hippurate)\n• **D**iabetic ketoacidosis (also SGLT2 inhibitor-induced euglycemic DKA)\n• **P**araldehyde / Phenformin\n• **I**ron / INH (isoniazid) — both also cause lactic acidosis\n• **L**actic acidosis (Type A: hypoperfusion; Type B: aerobic glycolysis)\n• **E**thylene glycol\n• **S**alicylates (also causes concurrent respiratory alkalosis)\n\n**Most HAGMA is ultimately attributable to lactate, ketone bodies, or renal acids.** [1]',
+        },
+        {
+            heading: 'Non-Anion Gap (Hyperchloremic) Metabolic Acidosis',
+            body: '**GI losses (negative urine AG):**\n• Diarrhea (most common)\n• Pancreatic/biliary fistula\n• Ureteroenterostomy\n\n**Renal (positive urine AG — RTA):**\n• Type I (Distal): urine pH > 5.5 — autoimmune, sickle cell, cirrhosis, idiopathic\n• Type II (Proximal): urine pH < 5.5 — myeloma, Wilson\'s, Vit D deficiency, heavy metals\n• Type IV (Hyperkalemic): urine pH < 5.5 — aldosterone deficiency, diabetes\n\n**Iatrogenic:**\n• Normal saline resuscitation (>2L in <24h)\n• Acetazolamide',
+        },
+        {
+            heading: 'Metabolic Alkalosis',
+            body: '**Chloride-responsive (UCl < 20):**\n• Vomiting / NG suction\n• Diuretic use (after effect)\n• Post-hypercapnia\n• Laxative abuse\n\n**Chloride-resistant (UCl > 20):**\n• Primary hyperaldosteronism\n• Cushing syndrome\n• Bartter / Gitelman syndrome\n• Severe hypokalemia\n• Licorice ingestion',
+        },
+        {
+            heading: 'Respiratory Acidosis',
+            body: '**Acute:** Airway obstruction, CNS depression (opioids, sedatives, stroke), neuromuscular disease (GBS, myasthenia), pneumothorax, massive PE, acute chest wall trauma\n\n**Chronic:** COPD, obesity hypoventilation, kyphoscoliosis, chronic neuromuscular disease',
+        },
+        {
+            heading: 'Respiratory Alkalosis',
+            body: '**Acute:** Anxiety, pain, PE, early sepsis, salicylates, pregnancy, hepatic failure\n\n**Chronic:** High altitude, chronic liver disease, pregnancy',
+        },
+        {
+            heading: 'Narrow / Negative Anion Gap (Uncommon)',
+            body: '• Hypoalbuminemia (most common — correct AG for albumin)\n• Bromide intoxication (displaces Cl in lab assays)\n• Multiple myeloma (paraproteins exist as cations)\n• Hypercalcemia, hypermagnesemia\n• Lithium intoxication\n• Free water excess (dilutional)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Emmett M, Narins RG. Clinical use of the anion gap. Medicine. 1977;56(1):38-54.' },
+        { num: 2, text: 'Hamm LL et al. Acid-base homeostasis. Clin J Am Soc Nephrol. 2015;10(12):2232-2242.' },
+    ],
+};
+const AB_ABG_VBG = {
+    id: 'ab-abg-vbg',
+    title: 'ABG vs VBG Evidence',
+    subtitle: 'When Is Venous Blood Gas Sufficient?',
+    sections: [
+        {
+            heading: 'Key Studies',
+            body: '**Gokel et al. (2000)** — 152 patients with uremia or DKA: mean pH difference between ABG and VBG was only up to 0.05. [1]\n\n**Malatesha et al. (2007)** — 95 heterogeneous ED patients: excellent agreement between arterial and venous pH, pCO2, and bicarbonate. [2]\n\n**McKeever et al. (2016)** — 234 patients with COPD: good agreement between arterial and venous pH and bicarbonate. In the absence of hypercapnia, differences in pH are negligible. [3]',
+        },
+        {
+            heading: 'Clinical Recommendations',
+            body: '**VBG is sufficient for most ED acid-base assessment:**\n• pH difference typically ≤ 0.03-0.05\n• HCO3 correlates well between arterial and venous samples\n• pCO2 correlates less well but adequate for screening\n\n**ABG is still useful when:**\n• Precise pCO2 is needed for ventilatory management decisions\n• A-a gradient is required to differentiate causes of hypoxemia\n• PaO2/FiO2 ratio needed for ARDS classification or lung injury assessment\n• Oxygenation index calculation for respiratory failure management\n\nDKA guidelines (ADA) recommend VBG for serial monitoring after initial ABG.',
+        },
+        {
+            heading: 'Cost-Effective Strategy',
+            body: 'A VBG with pulse oximetry can replace ABG in most clinical scenarios. This avoids arterial puncture discomfort and complications while providing adequate acid-base data.\n\nConsider end-tidal capnography for rapid noninvasive estimation of pCO2 when significant pulmonary disease is absent.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gokel Y et al. Comparison of blood gas and acid-base measurements in arterial and venous blood samples in patients with uremic acidosis and diabetic ketoacidosis. Am J Nephrol. 2000;20(4):319-323.' },
+        { num: 2, text: 'Malatesha G et al. Comparison of arterial and venous pH, bicarbonate, PCO2 and PO2 in initial emergency department assessment. Emerg Med J. 2007;24(8):569-571.' },
+        { num: 3, text: 'McKeever TM et al. Using venous blood gas analysis in the assessment of COPD exacerbations. Thorax. 2016;71(3):210-215.' },
+    ],
+};
+const AB_LACTATE_KETONES = {
+    id: 'ab-lactate-ketones',
+    title: 'Lactate & Ketone Pathophysiology',
+    subtitle: 'Mechanisms of Lactic Acidosis and Ketoacidosis',
+    sections: [
+        {
+            heading: 'Lactate Metabolism',
+            body: 'Lactate serves as a fuel for cellular metabolism, including brain and myocardium. It is the conjugate base of lactic acid. Accumulation does not necessarily result in acidosis as long as buffer systems compensate. Mortality is associated with lactic acidosis (buffer failure), not simple hyperlactatemia. [1]\n\nThe liver clears ~70% of lactate via the Cori cycle (gluconeogenesis). The kidneys clear the remainder via gluconeogenesis and urinary excretion.',
+        },
+        {
+            heading: 'Type A Lactic Acidosis — Tissue Hypoxia',
+            body: 'Poor perfusion and acute tissue hypoxia drive anaerobic glycolysis.\n\n**Causes:** Septic shock, cardiogenic shock, hemorrhagic shock, mesenteric ischemia, seizures, cardiac arrest, severe hypoxemia.\n\n44% of ICU patients with acidosis have a lactic acidosis — this subgroup has the highest mortality (56%). [1]',
+        },
+        {
+            heading: 'Type B Lactic Acidosis — Aerobic Glycolysis',
+            body: 'Lactate generated WITHOUT overt hypoperfusion or hypoxia.\n\n**Mechanisms:**\n• Hyperadrenergic states (sepsis hyperdynamic phase, pheochromocytoma) — beta-2 receptor activation increases glycolysis, overwhelms TCA cycle\n• Exogenous epinephrine/vasopressors — same mechanism\n• Metformin — reduces hepatic gluconeogenesis, impairs lactate clearance\n• Hepatic failure — reduced Cori cycle capacity\n• Malignancy (Warburg effect)\n• Thiamine deficiency — impaired pyruvate dehydrogenase\n\n**D-lactic acidosis:** Seen in short-gut syndrome/jejunoileal bypass. Colonic bacteria metabolize carbohydrates to D-lactate, which standard L-lactate assays do NOT measure. Presents as AG acidosis with normal serum lactate.',
+        },
+        {
+            heading: 'Ketone Metabolism',
+            body: 'Ketone bodies (acetoacetate, beta-hydroxybutyrate, acetone) are produced via beta-oxidation of fatty acids in the liver when carbohydrates are scarce.\n\nIn healthy fed states, ketone levels rarely exceed 0.1-2 mmol/L. Fasting raises levels ~20× normal. Ketoacidosis occurs when levels exceed ~70× normal, overwhelming buffer capacity.\n\nKetosis (elevated ketones) ≠ ketoacidosis (ketones + acidemia).',
+        },
+        {
+            heading: 'Diabetic Ketoacidosis (DKA)',
+            body: 'Severe acidemia in DKA is NOT solely from ketone bodies. Concomitant hypovolemia, renal failure, and lactic acidosis compound the acidemia. [2]\n\nNet bicarbonate loss occurs via both buffering AND renal excretion of ketone body salts (sodium/potassium ketonuria). This indirect bicarbonate loss may not be reflected in the AG and often becomes apparent only after volume re-expansion with saline.\n\n**Euglycemic DKA:** Can occur with SGLT2 inhibitors — severe ketoacidosis with near-normal glucose. Maintain high suspicion in patients on empagliflozin, dapagliflozin, canagliflozin.\n\n**Pitfall:** Check K+ before starting insulin — patients with K+ < 3.3 should receive potassium supplementation FIRST.',
+        },
+        {
+            heading: 'Alcoholic Ketoacidosis (AKA)',
+            body: 'Complex but often rapidly reversible. Chronic alcohol consumers have depleted glycogen stores. Without adequate glycogenolysis, starvation and hormonal cascades → increased lipolysis → fatty acid oxidation → ketogenesis → acidemia.\n\nPatients may present with absent serum ethanol levels. Shares the parallel insults of profound hypovolemia and lactic acidosis seen in DKA.\n\n**Treatment:** Dextrose-containing IV fluids (D5NS or D5LR) + thiamine 100mg IV + volume repletion. Most patients improve rapidly (3-4 hours). Insulin is NOT indicated.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gunnerson KJ et al. Lactate versus non-lactate metabolic acidosis: a retrospective outcome evaluation of critically ill patients. Crit Care. 2006;10(1):R22.' },
+        { num: 2, text: 'Kamel KS, Halperin ML. Acid-base problems in diabetic ketoacidosis. NEJM. 2015;372(6):546-554.' },
+    ],
+};
+const AB_STEWART_EXPLAINED = {
+    id: 'ab-stewart-explained',
+    title: 'Stewart Approach Explained',
+    subtitle: 'Strong Ion Difference, Weak Acids, and Quantitative Acid-Base Analysis',
+    sections: [
+        {
+            heading: 'Core Concept',
+            body: 'Peter Stewart (1978) argued that it is NOT the gain or loss of HCO3 or H+ that determines pH, but rather three independent variables that influence water dissociation: [1]\n\n1. **Dissolved CO2** (pCO2) — respiratory component\n2. **Strong Ion Difference (SID)** — the gap between strong cations and anions\n3. **Total Weak Acids (ATOT)** — primarily albumin and phosphate\n\nBicarbonate and H+ are DEPENDENT variables — their concentrations are consequences of changes in the independent variables, not causes.',
+        },
+        {
+            heading: 'Strong Ion Difference (SID)',
+            body: 'Strong ions dissociate completely in solution at physiologic pH.\n\n**SID = (Na + K + Ca + Mg) − (Cl + Lactate + other strong anions)**\n\nSimplified: **SID ≈ Na − Cl** (normal ~35 mEq/L)\n\nThe excess positive charge (SID) is balanced by buffer anions (primarily HCO3 and albumin). A decreased SID forces bicarbonate down → acidosis. An increased SID allows bicarbonate to rise → alkalosis.\n\n**The Gamblegram** — A visual tool (developed by James Gamble) showing paired columns of cations and anions. Strong anions (Cl, lactate) \"squeeze out\" bicarbonate to maintain electroneutrality.',
+        },
+        {
+            heading: 'Weak Acids — Albumin',
+            body: 'Albumin is the most important weak acid in plasma. It has an overall negative charge from histidine residue dissociation.\n\n**Albumin effect ≈ 2.5 × (4.2 − measured albumin g/dL)**\n\nFor every 1 g/dL decrease in albumin → base excess increases by 2.5 mEq/L (alkalosis).\n\nHypoalbuminemia is the most common weak acid change in critically ill and surgical patients. It causes a metabolic alkalosis that can mask a concurrent acidosis. This is why albumin-corrected AG is essential. [2]',
+        },
+        {
+            heading: 'Story Simplified Method',
+            body: 'The simplified Stewart approach combines routine plasma chemistry with acid-base analysis using simple arithmetic: [2]\n\n**Base Excess = (Na−Cl−35) + (1−Lactate) + 2.5×(4.2−Albumin) + Other Ions**\n\nRearranged to find unmeasured ions:\n**Other Ions (SIG) = BE − (Na−Cl−35) − (1−Lactate) − 2.5×(4.2−Albumin)**\n\nThis tells you quantitatively HOW MUCH each component contributes to the metabolic disturbance.',
+        },
+        {
+            heading: 'Advantages Over Traditional Approach',
+            body: '• **Identifies hyperchloremic component quantitatively** — traditional AG misses relative hyperchloremia in hyponatremic patients\n• **Better in hypoalbuminemia** — traditional AG is falsely normal; Stewart automatically accounts for albumin\n• **Predicts fluid therapy effects** — switching from NS (SID 0) to PlasmaLyte (SID 50) will widen Na-Cl and improve acidosis\n• **From a Stewart perspective:** sodium bicarbonate is chloride-free sodium that increases the SID\n• **Integrates with base excess** — routine blood gas machines already calculate BE via the Van Slyke equation',
+        },
+        {
+            heading: 'Clinical Application Example',
+            body: 'Patient with cirrhosis, sepsis, saline resuscitation:\nNa 133, Cl 110, Albumin 2.2 g/dL, Lactate 5, BE −11.5\n\n• Na-Cl effect = 133−110−35 = **−12** (acidosis from relative hyperchloremia)\n• Lactate effect = 1−5 = **−4** (lactic acidosis)\n• Albumin effect = 2.5×(4.2−2.2) = **+5** (alkalosis from hypoalbuminemia)\n• Other Ions = −11.5 − (−12) − (−4) − (+5) = **−0.5** (minimal unmeasured anions)\n\nThis tells us the acidosis is primarily from hyperchloremia (saline resuscitation) and lactic acidosis, partially offset by hypoalbuminemic alkalosis. Unmeasured anions are not significant. Switching to PlasmaLyte would improve the Na-Cl component.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stewart PA. Independent and dependent variables of acid-base control. Respir Physiol. 1978;33(1):9-26.' },
+        { num: 2, text: 'Story DA. Stewart acid-base: a simplified bedside approach. Anesth Analg. 2016;123(2):511-515.' },
+    ],
+};
+const AB_FLUIDS_GUIDE = {
+    id: 'ab-fluids-guide',
+    title: 'Fluid Selection Guide',
+    subtitle: 'Normal Saline vs Balanced Crystalloids — Acid-Base Implications',
+    sections: [
+        {
+            heading: 'Fluid Compositions',
+            body: '**Normal Saline (0.9% NaCl):**\nNa 154, Cl 154 mEq/L | SID = 0 | pH 5.5 | 308 mOsm/L\n\n**Lactated Ringer\'s (Hartmann\'s):**\nNa 130, Cl 109, K 4, Ca 3, Lactate 28 mEq/L | Effective SID ≈ 28 | pH 6.5 | 273 mOsm/L\n\n**PlasmaLyte (Plasma-Lyte A):**\nNa 140, Cl 98, K 5, Mg 3, Acetate 27, Gluconate 23 mEq/L | SID ≈ 50 | pH 7.4 | 294 mOsm/L\n\nPlasma: Na ~140, Cl ~105 | SID ≈ 35-42 | pH 7.40 | ~290 mOsm/L',
+        },
+        {
+            heading: 'How NS Causes Acidosis',
+            body: 'Normal saline has equal concentrations of Na and Cl (154 mEq/L each) — a SID of 0. The disproportionately greater rise in plasma chloride vs sodium narrows the strong ion difference, \"squeezing out\" bicarbonate and causing a hyperchloremic metabolic acidosis.\n\nThis also impairs renal perfusion and alters bicarbonate resorption from the kidneys, potentially contributing to acute kidney injury.',
+        },
+        {
+            heading: 'Evidence',
+            body: '**SMART Trial (Semler et al., NEJM 2018)** [1] — 15,802 critically ill ICU patients. Balanced crystalloids reduced the composite of death, new renal replacement therapy, or persistent renal dysfunction (MAKE-30) compared to NS: 14.3% vs 15.4% (p = 0.04).\n\n**Self et al. (NEJM 2018)** [2] — 13,347 non-critically ill patients. Benefits of balanced crystalloids were less robust in non-critically ill patients.\n\n**Cochrane Review (Bampoe et al., 2017)** — Perioperative patients receiving < 2L of NS for trauma, burns, sepsis, or surgery are unlikely to suffer lasting consequences.\n\nThe clinical significance of saline-induced acidosis remains debated and is an area of active research.',
+        },
+        {
+            heading: 'Clinical Recommendations',
+            body: '**Prefer balanced crystalloids (LR or PlasmaLyte) when:**\n• Large-volume resuscitation anticipated (> 2L)\n• Critically ill / ICU patients\n• Known metabolic acidosis (avoid worsening with NS)\n• Liver disease (already acidotic, low albumin)\n\n**Prefer NS when:**\n• Hyperkalemia (LR contains 4 mEq/L K+)\n• Traumatic brain injury / neurocritical care (LR is hypotonic — 273 mOsm/L — may worsen cerebral edema)\n• Mixing with blood products (Ca in LR can cause clotting in the tubing)\n\n**Avoid expensive resuscitation fluids** — gelatin, starch colloids, and albumin products should not routinely replace inexpensive crystalloids.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Semler MW et al. Balanced crystalloids versus saline in critically ill adults (SMART). NEJM. 2018;378(9):829-839.' },
+        { num: 2, text: 'Self WH et al. Balanced crystalloids versus saline in noncritically ill adults. NEJM. 2018;378(9):819-828.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -4638,6 +4860,13 @@ export const INFO_PAGES = {
     'stemi-reciprocal': STEMI_RECIPROCAL,
     'stemi-mimics': STEMI_MIMICS,
     'stemi-anticoag-detail': STEMI_ANTICOAG_DETAIL,
+    'ab-summary': AB_SUMMARY,
+    'ab-compensation': AB_COMPENSATION,
+    'ab-differential': AB_DIFFERENTIAL,
+    'ab-abg-vbg': AB_ABG_VBG,
+    'ab-lactate-ketones': AB_LACTATE_KETONES,
+    'ab-stewart-explained': AB_STEWART_EXPLAINED,
+    'ab-fluids-guide': AB_FLUIDS_GUIDE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
