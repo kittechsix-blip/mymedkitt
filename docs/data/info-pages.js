@@ -4728,6 +4728,232 @@ const AB_FLUIDS_GUIDE = {
     ],
 };
 // -------------------------------------------------------------------
+// Delirium
+// -------------------------------------------------------------------
+const DELIRIUM_SUMMARY = {
+    id: 'delirium-summary',
+    title: 'Delirium Steps Summary',
+    subtitle: 'Quick Reference — ED Delirium Management',
+    sections: [
+        {
+            heading: 'Initial Assessment',
+            body: '• [Ensure scene safety — team preparation, security if needed](#/node/del-safety)\n• [Fingerstick glucose, SpO2, temperature — correct immediately](#/node/del-rapid-reversible)\n• [RASS score — determine delirium subtype (hypoactive vs hyperactive)](#/node/del-screening)\n• [CAM screening — acute onset + inattention + altered consciousness OR disorganized thinking](#/node/del-screening)',
+        },
+        {
+            heading: 'Etiology Search',
+            body: '• [Infection: UTI, pneumonia, skin/soft tissue, bacteremia](#/node/del-infection)\n• [Metabolic: Na, Ca, glucose, hepatic/renal, thyroid](#/node/del-metabolic)\n• [Intracranial: stroke, SDH, SAH, meningitis, seizure/NCSE](#/node/del-intracranial)\n• [Toxic/Medication: anticholinergics, BZDs, opioids, withdrawal](#/node/del-toxic)\n• [Directed workup: BMP, CBC, UA, VBG, ECG (QTc baseline)](#/node/del-workup)',
+        },
+        {
+            heading: 'Nonpharmacological First',
+            body: '• [Verbal de-escalation — 10 elements (AAEP Project BETA)](#/node/del-nonpharm)\n• [Environmental modification — reduce stimuli, reorient, glasses/hearing aids](#/node/del-nonpharm)\n• [TADA: Tolerate, Anticipate, Don\'t Agitate](#/node/del-nonpharm)\n• [Physical restraints — last resort, proper technique, continuous monitoring](#/node/del-restraints)',
+        },
+        {
+            heading: 'Pharmacological Management',
+            body: '• [Young adult: haloperidol 5-10 mg IM + midazolam, OR droperidol 5 mg, OR olanzapine 10 mg IM](#/node/del-young-adult)\n• [Elderly: half-dose antipsychotic, AVOID benzodiazepines](#/node/del-elderly)\n• [Parkinson\'s/Lewy Body: quetiapine 12.5-25 mg PO (lowest D2 affinity)](#/node/del-parkinsons)\n• [Intoxication/withdrawal: benzodiazepines preferred](#/node/del-intox-withdrawal)\n• [Excited delirium: cool, fluids, midazolam/ketamine, monitor for rhabdo](#/node/del-exds-mgmt)',
+        },
+        {
+            heading: 'Monitoring & Disposition',
+            body: '• [Post-sedation: continuous SpO2, ETCO2, telemetry if antipsychotic, RASS q15 min](#/node/del-monitoring)\n• [QTc monitoring after haloperidol/droperidol — stop if >500 ms or Δ>60 ms](#/node/del-monitoring)\n• [Admit: undifferentiated delirium, persistent AMS, elderly with infection](#/node/del-disposition)\n• [Discharge: clear reversible cause corrected, returned to baseline, safe follow-up](#/node/del-discharge)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+    ],
+};
+const DEL_PRECIPITANTS = {
+    id: 'del-precipitants',
+    title: 'Precipitating Factors for Delirium',
+    subtitle: 'Critical, Emergent, and Iatrogenic Causes',
+    sections: [
+        {
+            heading: 'Critical / Life-Threatening',
+            body: '• Hypoxia / respiratory failure\n• Hypoglycemia\n• Hypertensive encephalopathy\n• Intracranial hemorrhage (SDH, SAH, ICH)\n• Meningitis / encephalitis\n• Status epilepticus / NCSE\n• Sepsis / septic shock\n• Myocardial infarction (delirium is ONLY symptom in up to 5% of elderly STEMI) [1]\n• Poisoning (carbon monoxide, cyanide, ethylene glycol)',
+        },
+        {
+            heading: 'Emergent',
+            body: '• **Infection** (16-67% of cases) — UTI and pneumonia most common [1]\n• Electrolyte disorders — hypo/hypernatremia, hypercalcemia, hypomagnesemia\n• Hepatic encephalopathy\n• Uremia / renal failure\n• Thyroid disorders (myxedema, thyroid storm)\n• Acute stroke (especially posterior circulation)\n• Pulmonary embolism\n• Dehydration / malnutrition\n• Acute urinary retention / fecal impaction\n• Uncontrolled pain',
+        },
+        {
+            heading: 'Medication-Related (Beers Criteria)',
+            body: '**High-risk medications for delirium in elderly:** [1]\n\n• **Anticholinergics** — diphenhydramine, promethazine, scopolamine, oxybutynin, tricyclic antidepressants\n• **Benzodiazepines** — independent risk factor for delirium\n• **Opioids** — especially meperidine (highest delirium risk of all opioids)\n• **Sedative-hypnotics** — zolpidem, eszopiclone\n• **H2-receptor antagonists** — ranitidine, famotidine\n• **Corticosteroids** — especially high-dose pulse therapy\n• **Thioridazine / chlorpromazine** — first-gen antipsychotics with high anticholinergic load\n• **Fluoroquinolones** — CNS effects underrecognized\n\n**ED recommendation:** Avoid meperidine. If opioids necessary, use oxycodone. For other classes, weigh risks vs benefits using clinical judgment. [1]',
+        },
+        {
+            heading: 'Intoxication / Withdrawal',
+            body: '• **Alcohol withdrawal** — tremor → hallucinations → seizures → delirium tremens\n• **Benzodiazepine withdrawal** — similar progression to alcohol\n• **Sympathomimetic intoxication** — cocaine, methamphetamine, synthetic cathinones\n• **Anticholinergic toxidrome** — diphenhydramine, jimsonweed, TCA overdose\n• **Serotonin syndrome** — SSRIs + MAOIs, tramadol, linezolid\n• **Opioid intoxication** — decreased consciousness, not typically "delirious"',
+        },
+        {
+            heading: 'Iatrogenic (Hospital/ED-Acquired)',
+            body: '• Physical restraints\n• Bladder catheterization\n• Addition of ≥3 new medications\n• Sleep disruption\n• Malnutrition / NPO status\n• Immobilization\n• Sensory deprivation (missing glasses/hearing aids)\n\nOften multiple precipitants coexist. In 13% of cases, no precipitating factor is identified. [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+    ],
+};
+const DEL_VULNERABILITY = {
+    id: 'del-vulnerability',
+    title: 'Vulnerability Factors for Delirium',
+    subtitle: 'Patient Risk Factors That Lower the Delirium Threshold',
+    sections: [
+        {
+            heading: 'Major Risk Factors (ACEP Geriatric ED Guidelines)',
+            body: '**Presence of 1-2 factors** increases delirium risk by **2.5×**\n**Presence of 3-4 factors** increases delirium risk by **>9×** [1]\n\n1. **Vision or hearing impairment**\n2. **Decreased cognitive ability** (baseline dementia)\n3. **Severe illness** (high APACHE score)\n4. **Dehydration** (elevated BUN:Cr ratio)',
+        },
+        {
+            heading: 'Patient Factors',
+            body: '• Age ≥65 years\n• **Pre-existing cognitive impairment / dementia** — strongest association with delirium. Two-thirds of geriatric delirium patients have underlying dementia. [1]\n• Visual or hearing impairment\n• Multiple comorbidities\n• Male sex\n• History of prior delirium episodes\n• Functional impairment (Katz ADL Score ≤4)\n• Malnutrition / poor nutritional status\n• Depression',
+        },
+        {
+            heading: 'Acute Illness Factors',
+            body: '• Severity of acute illness\n• Number of medications (polypharmacy ≥5)\n• Presence of infection\n• Dehydration (BUN:Cr >18)\n• Metabolic derangements\n• Surgery or anesthesia\n• Pain (undertreated)\n• Sleep deprivation',
+        },
+        {
+            heading: 'The Vulnerability × Precipitant Model',
+            body: '**Delirium results from the interaction** between vulnerability factors and precipitating factors. [1]\n\n• A **highly vulnerable** patient (elderly, demented, sensory-impaired) may develop delirium from a **minor precipitant** (UTI, single dose of diphenhydramine, Foley catheter)\n• A **low-vulnerability** patient (young, healthy) requires a **major precipitant** to develop delirium (severe sepsis, major intoxication, ICU stay)\n\nThis model explains why delirium is so common in the elderly and why seemingly minor events can trigger it in vulnerable patients.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+        { num: 2, text: 'American College of Emergency Physicians, et al. Geriatric Emergency Department Guidelines. Ann Emerg Med. 2014;63(5):e7-e25.' },
+    ],
+};
+const DEL_VS_DEMENTIA = {
+    id: 'del-vs-dementia',
+    title: 'Delirium vs Dementia',
+    subtitle: 'Key Differentiating Features',
+    sections: [
+        {
+            heading: 'Comparison',
+            body: '**Onset:**\n• Delirium: **Acute** (hours to days)\n• Dementia: **Insidious** (months to years)\n\n**Course:**\n• Delirium: **Fluctuating** — waxes and wanes throughout the day\n• Dementia: **Progressive** — gradual decline, relatively stable day-to-day\n\n**Attention:**\n• Delirium: **Impaired** — this is the HALLMARK feature\n• Dementia: **Preserved** until late stages\n\n**Level of Consciousness:**\n• Delirium: **Altered** — clouded, hyperalert, or obtunded\n• Dementia: **Usually clear** until late stages\n\n**Hallucinations:**\n• Delirium: **Common** — especially visual hallucinations\n• Dementia: **Less common** — except Lewy body dementia\n\n**Psychomotor Activity:**\n• Delirium: **Variable** — hyperactive, hypoactive, or mixed\n• Dementia: **Usually normal** until late stages\n\n**Duration:**\n• Delirium: **Hours to weeks** — usually reversible\n• Dementia: **Months to years** — irreversible\n\n**Reversibility:**\n• Delirium: **Usually reversible** with treatment of underlying cause\n• Dementia: **Irreversible** — progressive decline',
+        },
+        {
+            heading: 'Critical Points',
+            body: '• **Dementia is the single strongest risk factor FOR delirium** — they frequently coexist [1]\n• Without proper history, differentiating acute vs chronic cognitive change may be impossible\n• **Obtaining baseline mental status** from family, caregivers, or prior documentation is ESSENTIAL\n• **Lewy body dementia** is particularly challenging — fluctuating cognition and hallucinations are baseline features, mimicking delirium\n• When in doubt, **assume delirium** and search for a medical precipitant — delirium is treatable, and missing it carries significant mortality risk\n• **Document current cognitive findings** — this becomes the baseline for future clinicians',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+        { num: 2, text: 'Inouye SK, Westendorp RGJ, Saczynski JS. Delirium in Elderly People. Lancet. 2014;383(9920):911-922.' },
+    ],
+};
+const DEL_MEDS_TABLE = {
+    id: 'del-meds-table',
+    title: 'Medications for Acute Agitation',
+    subtitle: 'Drug Comparison — Dosing, Onset, Route, and Side Effects',
+    sections: [
+        {
+            heading: 'Typical Antipsychotics (Butyrophenones)',
+            body: '**[Haloperidol](#/drug/haloperidol/agitation)** — 5-10 mg IM/IV (elderly: 0.5-2 mg)\n• Onset: 10-20 min IM, 3-5 min IV\n• Most studied ED agent. High D2 selectivity.\n• Side effects: QTc prolongation, EPS/dystonia, akathisia\n• Contraindicated: Parkinson\'s, Lewy body, QTc >500 ms\n\n**[Droperidol](#/drug/droperidol/agitation)** — 2.5-5 mg IM/IV\n• Onset: 3-10 min (faster than haloperidol)\n• More sedating. ~2-3× more potent than haloperidol.\n• FDA black box for QTc (2001) — but real-world risk appears very low [1]\n• May be preferred when rapid sedation is the goal',
+        },
+        {
+            heading: 'Atypical Antipsychotics',
+            body: '**[Olanzapine](#/drug/olanzapine/agitation)** — 10 mg IM (elderly: 2.5-5 mg)\n• Onset: 15-45 min IM\n• **No QTc prolongation. No dystonia.**\n• ⚠️ **DO NOT combine with parenteral BZDs** — fatal respiratory depression risk\n• Use when QTc is borderline/prolonged\n\n**[Quetiapine](#/drug/quetiapine/delirium)** — 25-100 mg PO\n• Onset: 30-60 min (PO only)\n• Lowest D2 affinity — **safest for Parkinson\'s / Lewy body**\n• Primarily sedating at low doses (H1 blockade)\n• Not useful for acute severe agitation\n\n**[Risperidone](#/drug/risperidone/delirium)** — 1-2 mg PO\n• Onset: 30-60 min (PO only)\n• Less sedating than quetiapine/olanzapine\n• Available as orally disintegrating tablet',
+        },
+        {
+            heading: 'Benzodiazepines',
+            body: '**[Midazolam](#/drug/midazolam/agitation)** — 2.5-5 mg IM\n• Onset: 5 min IM. Shortest acting BZD.\n• **Preferred for intoxication/withdrawal syndromes**\n• More rapid and adequate sedation than droperidol or haloperidol in one RCT [1]\n\n**[Lorazepam](#/drug/lorazepam/agitation)** — 1-2 mg IV\n• Onset: 2-3 min IV. Duration 10-20 hours.\n• **Preferred IV BZD for alcohol withdrawal**\n• Unpredictable IM absorption — IV preferred\n• Independent risk factor for delirium in elderly — AVOID',
+        },
+        {
+            heading: 'Dissociative',
+            body: '**[Ketamine](#/drug/ketamine/agitation)** — 4 mg/kg IM or 1-2 mg/kg IV\n• Onset: 5 min IM\n• **For refractory agitation** only — when antipsychotics and BZDs fail\n• Reliable, rapid sedation\n• Prepare for intubation (29% rate in one prehospital study)\n• Avoid in elderly, heart disease, schizophrenia',
+        },
+        {
+            heading: 'Combination Therapy',
+            body: '**Combination therapy is superior** to either class alone for rapid resolution of acute agitation. [1]\n\n• **Haloperidol + Lorazepam** — classic combination. More rapid symptom resolution than either agent alone.\n• **Haloperidol + Midazolam** — "B52" variant (+ diphenhydramine). Effective for undifferentiated severe agitation.\n• **Droperidol or Olanzapine + Midazolam** — adjunctive midazolam achieves more rapid sedation than midazolam alone.\n\n⚠️ **Do NOT combine olanzapine with parenteral BZDs** — use haloperidol instead if both classes needed.\n\nLow-dose combinations minimize side effects of both classes while maximizing efficacy.',
+        },
+        {
+            heading: 'Key Principles',
+            body: '• **"Start low and go slow"** — especially in elderly [1]\n• **Treat the underlying etiology first** — pharmacological treatment is for behavioral symptom management\n• **Wait ≥20 min** before redosing antipsychotics\n• **If 10 mg cumulative** of an agent is ineffective, reconsider diagnosis — try a different class\n• **QTc >500 ms?** Use olanzapine or BZDs (no QTc effect)\n• **Parkinson\'s/Lewy body?** Use quetiapine PO\n• **Intoxication/withdrawal?** Use BZDs\n• **Antipsychotics are NOT beneficial** for hypoactive delirium [2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+        { num: 2, text: 'Girard TD, et al. Haloperidol and Ziprasidone for Treatment of Delirium in Critical Illness (MIND-USA). N Engl J Med. 2018;379(26):2506-2516.' },
+        { num: 3, text: 'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.' },
+    ],
+};
+const DEL_DEESCALATION = {
+    id: 'del-deescalation',
+    title: 'Verbal De-escalation: 10 Elements',
+    subtitle: 'AAEP Project BETA De-escalation Workgroup Guidelines',
+    sections: [
+        {
+            heading: 'Overview',
+            body: 'Verbal de-escalation is a **first-line intervention** for agitated patients. The American Association for Emergency Psychiatry (AAEP) recommends a 3-step approach: [1]\n\n1. **Verbally engage** the agitated patient\n2. **Establish a collaborative relationship** with the patient\n3. **Verbally de-escalate** the patient out of agitation\n\nA show of force (security presence) avoided sedation in **27%** of cases in one study. One-to-one observation had a **perceived efficacy of 48%** among surveyed EDs. [1]',
+        },
+        {
+            heading: 'The 10 Elements',
+            body: '**1. Respect the patient\'s personal space**\n   Maintain ≥2 arm lengths distance. Do not tower over the patient. Get at eye level if safe.\n\n**2. Do not be provocative**\n   Use a calm, even tone. Avoid authoritative posture or commands. Uncross arms. Hands visible.\n\n**3. Establish verbal contact**\n   One person speaks to the patient. Introduce yourself by name. Use the patient\'s name.\n\n**4. Be concise**\n   Use short, simple sentences. Avoid jargon. Repeat key messages if needed.\n\n**5. Identify the patient\'s wants and feelings**\n   "What brought you here today?" "What do you need right now?" Validate emotions.\n\n**6. Listen closely to what the patient is saying**\n   Active listening. Paraphrase to demonstrate understanding. Do not interrupt.\n\n**7. Agree or agree to disagree**\n   Find common ground. "I can see you\'re frustrated." Avoid arguing about delusions.\n\n**8. Lay down the law and set clear limits**\n   "I want to help you, but I need you to [specific request]." State consequences clearly but without threat.\n\n**9. Offer choices and optimism**\n   "Would you prefer to sit in this chair or that one?" Empower with small decisions. "We\'re going to figure this out."\n\n**10. Debrief the patient and staff**\n   After de-escalation, review what happened. Allow patient to express remaining concerns. Support staff who were involved.',
+        },
+        {
+            heading: 'When De-escalation Is Not Enough',
+            body: 'If verbal de-escalation fails or if the patient presents with **severe agitation posing immediate danger** to self or staff:\n\n• **Show of force** — security activation may de-escalate without physical intervention\n• **Physical restraints** — temporizing measure only. Follow proper technique.\n• **Pharmacological management** — indicated when safety cannot be maintained nonpharmacologically\n\nDe-escalation is an ongoing process — continue verbal engagement even after pharmacological or physical interventions.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Richmond JS, et al. Verbal De-escalation of the Agitated Patient: Consensus Statement of the AAEP Project BETA. West J Emerg Med. 2012;13(1):17-25.' },
+        { num: 2, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+    ],
+};
+const DEL_EXDS_INFO = {
+    id: 'del-exds-info',
+    title: 'Excited Delirium Syndrome',
+    subtitle: 'Recognition, Pathophysiology, and Emergency Management',
+    sections: [
+        {
+            heading: 'Recognition — 6 of 10 Criteria = Probable ExDS',
+            body: '1. **Pain tolerance** — unresponsive to painful stimuli\n2. **Tachypnea** — rapid, labored breathing\n3. **Sweating / tactile hyperthermia** — temperature >104°F (40°C) is the **single best predictor of death**\n4. **Agitation** with **unusual strength**\n5. **Noncompliance** with police / first responders\n6. **Lack of tiring** despite prolonged physical struggle\n7. **Inappropriate clothing** — often undressing or naked\n8. **Mirror / glass attraction** — drawn to reflective surfaces\n9. **Bizarre behavior**\n10. **Male sex**\n\nCase fatality rate: **~10%**. Most deaths are from cardiac arrhythmia (PEA, asystole). [1]',
+        },
+        {
+            heading: 'Pathophysiology',
+            body: '• Proposed mechanism: **excess dopamine** in the central nervous system\n• Associated with sympathomimetic intoxication (cocaine, methamphetamine) and/or underlying psychiatric illness with medication noncompliance\n• Results in dangerous hyperthermia, severe metabolic acidosis, and autonomic instability\n• Rhabdomyolysis and hyperkalemia are common complications\n• Sudden unexpected death can occur even AFTER apparent clinical stabilization [1]',
+        },
+        {
+            heading: 'Immediate Management',
+            body: '**1. Remove from prone position** — positional asphyxia is a major cause of death during restraint\n\n**2. Aggressive cooling** — target temperature <101°F (38.3°C)\n   • Ice packs to axillae, groin, neck\n   • Cold IV fluids\n   • Mist and fan evaporative cooling\n   • Consider cold water immersion if available\n\n**3. IV access and fluids**\n   • Large-bore IV × 2\n   • Aggressive normal saline (goal: prevent renal failure from rhabdomyolysis)\n\n**4. Sedation**\n   • First-line: [Midazolam](#/drug/midazolam/agitation) 5 mg IM, repeat as needed\n   • Refractory: [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM\n   • Avoid prolonged physical struggle — it worsens hyperthermia and acidosis\n\n**5. Cardiac monitoring** — continuous telemetry. Anticipate PEA/asystole arrest.',
+        },
+        {
+            heading: 'Monitoring & Workup',
+            body: '• **CK** — rhabdomyolysis (often massive: >10,000 IU/L). Aggressive IV hydration, target UOP >200 mL/hr.\n• **Potassium** — hyperkalemia from rhabdomyolysis. Treat aggressively (calcium, insulin/glucose, bicarbonate if acidotic).\n• **VBG with lactate** — metabolic acidosis\n• **Core temperature** q15 min — continue cooling until <101°F\n• **Creatinine** — acute kidney injury from rhabdomyolysis\n• **Continuous telemetry** — monitor for arrhythmia\n• **Urine drug screen** — identify causative substance',
+        },
+        {
+            heading: 'Disposition',
+            body: '**ICU admission is MANDATORY** — ExDS carries risk of sudden death even after apparent stabilization.\n\n• Cardiac monitoring minimum 24 hours\n• Continue aggressive IV hydration for rhabdomyolysis\n• Serial CK, electrolytes, creatinine\n• Temperature management\n• Psychiatric evaluation when medically stable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Vilke GM, DeBard ML, Chan TC, et al. Excited Delirium Syndrome (ExDS): Defining Based on a Review of the Literature. J Emerg Med. 2012;43(5):897-905.' },
+        { num: 2, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
+    ],
+};
+const DEL_CAM_GUIDE = {
+    id: 'del-cam-guide',
+    title: 'CAM & bCAM Screening Guide',
+    subtitle: '2-Tier Delirium Screening Protocol for the Emergency Department',
+    sections: [
+        {
+            heading: 'Step 1: Delirium Triage Screen (DTS)',
+            body: '**Quick initial screen** — can be performed by trained nonclinicians with similar performance to clinicians. [1]\n\n**RASS Assessment:**\n• If RASS is anything other than **0 (alert and calm)** → DTS is **POSITIVE** → proceed to Step 2\n• If RASS is **0** → assess for inattention: ask patient to recite months of the year backward from December to July\n• If unable to do so correctly → DTS is **POSITIVE** → proceed to Step 2\n• If RASS 0 and passes attention screen → DTS is **NEGATIVE** — delirium unlikely',
+        },
+        {
+            heading: 'Step 2: Brief CAM (bCAM)',
+            body: '**Confirmatory test** — takes ~2 minutes. Administer when DTS is positive. [1]\n\n**Feature 1: Acute Onset or Fluctuating Course** ✓ required\n• Is there an acute change in mental status from baseline? OR\n• Has the mental status fluctuated in the past 24 hours?\n\n**Feature 2: Inattention** ✓ required\n• "Squeeze my hand when I say the letter A" then recite: S-A-V-E-A-H-A-A-R-T\n• ≥2 errors (failed to squeeze on A, or squeezed on non-A) = inattention present\n\n**Feature 3: Altered Level of Consciousness**\n• RASS ≠ 0\n\n**Feature 4: Disorganized Thinking**\n• Ask: "Will a stone float on water?" "Are there fish in the sea?" "Does 1 pound weigh more than 2 pounds?" "Can you use a hammer to pound a nail?"\n• ≥1 incorrect answer + unable to hold up same number of fingers as examiner = disorganized thinking\n\n**DELIRIUM PRESENT** = Feature 1 + Feature 2 + EITHER Feature 3 OR Feature 4',
+        },
+        {
+            heading: 'Performance Characteristics',
+            body: '**2-Tier DTS + bCAM approach:** [1]\n• Sensitivity: **82%** (95% CI: 69-90%)\n• Specificity: **95.8%** (95% CI: 93-97%)\n• Comparable performance when administered by trained nonclinician raters\n• Feasibility: 76.5% adherence rate in pilot study\n\n**CAM alone** (all clinical settings): [2]\n• Sensitivity: 94% (range 46-100%)\n• Specificity: 89% (range 63-100%)\n• Performance is better when formal cognitive testing is incorporated\n\n**CAM-ICU** (validated for ED use): [1]\n• Sensitivity: 72%\n• Specificity: 98.6%',
+        },
+        {
+            heading: 'Key Points',
+            body: '• The **2-tier approach** (DTS → bCAM) is the current recommended screening strategy [1]\n• Low recognition rates (54-89% missed) are attributed to **lack of education** and **heavy ED workflow** — not inadequacy of available tools\n• **Fluctuating course** means some patients may screen negative initially but positive on re-evaluation\n• **Baseline cognitive status is critical** — obtain from family, caregivers, or prior documentation\n• Altered mental status as chief complaint, when documented, has been noted to be **specific** for delirium\n• If unable to determine baseline, **assume acute change** and screen',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Han JH, et al. Diagnosing Delirium in Older ED Patients: Validity and Reliability of the DTS and bCAM. Ann Emerg Med. 2013;62(5):457-465.' },
+        { num: 2, text: 'Wei L, et al. The Confusion Assessment Method: A Systematic Review. J Am Geriatr Soc. 2008;56(5):823-830.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -4867,6 +5093,14 @@ export const INFO_PAGES = {
     'ab-lactate-ketones': AB_LACTATE_KETONES,
     'ab-stewart-explained': AB_STEWART_EXPLAINED,
     'ab-fluids-guide': AB_FLUIDS_GUIDE,
+    'delirium-summary': DELIRIUM_SUMMARY,
+    'del-precipitants': DEL_PRECIPITANTS,
+    'del-vulnerability': DEL_VULNERABILITY,
+    'del-vs-dementia': DEL_VS_DEMENTIA,
+    'del-meds-table': DEL_MEDS_TABLE,
+    'del-deescalation': DEL_DEESCALATION,
+    'del-exds-info': DEL_EXDS_INFO,
+    'del-cam-guide': DEL_CAM_GUIDE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

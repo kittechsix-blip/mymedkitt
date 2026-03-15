@@ -14,6 +14,7 @@ export { HIV_NODES, HIV_MODULE_LABELS, HIV_CITATIONS } from './hiv';
 export { MENINGITIS_NODES, MENINGITIS_MODULE_LABELS, MENINGITIS_CITATIONS } from './meningitis';
 export { SAH_NODES, SAH_MODULE_LABELS, SAH_CITATIONS } from './sah';
 export { ACID_BASE_NODES, ACID_BASE_MODULE_LABELS, ACID_BASE_CITATIONS } from './acid-base';
+export { DELIRIUM_NODES, DELIRIUM_MODULE_LABELS, DELIRIUM_CITATIONS } from './delirium';
 /**
  * Registry of all available consult trees
  */

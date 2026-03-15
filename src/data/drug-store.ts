@@ -3547,7 +3547,7 @@ const KETAMINE: DrugEntry = {
   genericName: 'Ketamine hydrochloride',
   drugClass: 'Dissociative anesthetic / NMDA antagonist',
   route: 'IV/IM',
-  indications: ['Burns analgesia', 'Burns procedural sedation', 'RSI induction', 'Refractory SE'],
+  indications: ['Burns analgesia', 'Burns procedural sedation', 'RSI induction', 'Refractory SE', 'Acute agitation (refractory)'],
   dosing: [
     {
       indication: 'Burns — sub-dissociative analgesia',
@@ -3572,6 +3572,14 @@ const KETAMINE: DrugEntry = {
       regimen: 'Load 0.5-3 mg/kg IV bolus, then infuse 0.1-5 mg/kg/hr. NMDA receptor antagonist — different mechanism from GABAergic agents. Consider when midazolam and propofol fail. Some case reports suggest trial of ketamine before other IV anesthetics to potentially avoid intubation. Requires continuous EEG monitoring.',
       weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Loading bolus' },
     },
+    {
+      indication: 'Acute agitation (refractory)',
+      regimen: '4 mg/kg IM (onset 5 min, reliable sedation) or 1-2 mg/kg IV over 1 min. For refractory agitation not responding to antipsychotics and benzodiazepines. Rapid, reliable onset. Prepare for possible intubation — 29% intubation rate in one prehospital study. Avoid in elderly patients and patients with heart disease or schizophrenia.',
+      weightCalc: [
+        { dosePerKg: 4, unit: 'mg', label: 'IM agitation dose' },
+        { dosePerKg: 1.5, unit: 'mg', label: 'IV agitation dose' },
+      ],
+    },
   ],
   contraindications: ['Age <3 months (relative)', 'Known psychotic disorder (relative)'],
   cautions: [
@@ -3594,7 +3602,7 @@ const MIDAZOLAM: DrugEntry = {
   genericName: 'Midazolam hydrochloride',
   drugClass: 'Benzodiazepine (short-acting)',
   route: 'IV/IN/IM',
-  indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE'],
+  indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE', 'Acute agitation / delirium'],
   dosing: [
     {
       indication: 'Burns — anxiolysis',
@@ -3615,6 +3623,11 @@ const MIDAZOLAM: DrugEntry = {
       indication: 'Refractory SE — continuous infusion',
       regimen: 'Load 0.2 mg/kg IV bolus, then infuse 0.05-2 mg/kg/hr. Repeat bolus 0.1-0.2 mg/kg for breakthrough seizures. Titrate to EEG seizure suppression or burst suppression. Requires intubation and continuous EEG monitoring.',
       weightCalc: { dosePerKg: 0.2, unit: 'mg', label: 'Loading bolus' },
+    },
+    {
+      indication: 'Acute agitation / delirium',
+      regimen: '2.5-5 mg IM (onset 5 min) or 2.5 mg IV push. May repeat q5-10 min to effect. Preferred for intoxication/withdrawal-related agitation. For excited delirium: 5 mg IM, repeat as needed. DO NOT combine with IM/IV olanzapine (respiratory depression risk).',
+      weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
     },
   ],
   contraindications: ['Acute narrow-angle glaucoma', 'Known hypersensitivity to benzodiazepines'],
@@ -4114,13 +4127,18 @@ const LORAZEPAM: DrugEntry = {
   name: 'Lorazepam (Ativan)',
   genericName: 'Lorazepam',
   drugClass: 'Benzodiazepine (intermediate-acting)',
-  route: 'IV',
-  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders'],
+  route: 'IV/IM',
+  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)'],
   dosing: [
     {
       indication: 'Status Epilepticus — IV (first-line)',
       regimen: '0.1 mg/kg IV push over 2 min (max 4 mg/dose). May repeat once in 5-10 min if seizure persists. Total max 8 mg. Preferred IV benzodiazepine — higher seizure termination rate than diazepam (65% vs 56%) and longer anticonvulsant duration.',
       weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 4 },
+    },
+    {
+      indication: 'Acute agitation (intoxication/withdrawal)',
+      regimen: '1-2 mg IV push over 1-2 min, or IM. May repeat q10-15 min PRN. Preferred for alcohol/sedative withdrawal-related agitation. Avoid in elderly delirium (independent risk factor for delirium, falls, respiratory depression). Unpredictable IM absorption — IV preferred when available.',
+      weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 2 },
     },
   ],
   contraindications: [
@@ -4644,6 +4662,194 @@ const RIFAMPIN: DrugEntry = {
   ],
 };
 
+const DROPERIDOL: DrugEntry = {
+  id: 'droperidol',
+  name: 'Droperidol (Inapsine)',
+  genericName: 'Droperidol',
+  drugClass: 'Typical antipsychotic (butyrophenone)',
+  route: 'IV/IM',
+  indications: ['Acute agitation / delirium'],
+  dosing: [
+    {
+      indication: 'Acute agitation / delirium',
+      regimen: '2.5-5 mg IM or IV. Onset 3-10 min (faster than haloperidol). More sedating than haloperidol due to greater H1 and 5-HT2A activity. May repeat once at 15-20 min. Max 10 mg in 24h. ~2-3× more potent than haloperidol.',
+      weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
+    },
+  ],
+  contraindications: [
+    'QTc >500 ms or history of torsades de pointes',
+    'Parkinson disease or Lewy body dementia',
+    'Known or suspected QT-prolonging medications (relative)',
+  ],
+  cautions: [
+    'FDA black box (2001) for QT prolongation — but real-world risk appears very low. Retrospective study of 2,468 patients found no causal relationship between droperidol and serious adverse cardiac events.',
+    'QTc effect is comparable to haloperidol, ondansetron, and many common ED medications',
+    'Hypotension (alpha-1 blockade) — more common than with haloperidol. Have IV fluids available.',
+    'More sedating than haloperidol — may be preferred when sedation is the goal',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis',
+  ],
+  monitoring: 'ECG before and after dosing (per black box). Telemetry monitoring. Blood pressure. Reassess RASS q15 min.',
+  notes: 'Fell out of favor after 2001 FDA black box warning, but multiple studies and the AAEP have called for re-evaluation. May be superior to haloperidol for acute agitation: faster onset, greater sedation, and similar QTc profile. Greater 5-HT2A blockade may reduce extrapyramidal side effects compared to haloperidol. Consider as first-line for undifferentiated severe agitation when rapid sedation is needed.',
+  citations: [
+    'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).',
+    'Chase PB, Biros MH. A Retrospective Review of the Use and Safety of Droperidol. Acad Emerg Med. 2002;9(12):1402-1410.',
+    'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+  ],
+};
+
+const HALOPERIDOL: DrugEntry = {
+  id: 'haloperidol',
+  name: 'Haloperidol (Haldol)',
+  genericName: 'Haloperidol',
+  drugClass: 'Typical antipsychotic (butyrophenone)',
+  route: 'IV/IM',
+  indications: ['Acute agitation / delirium', 'Elderly agitation'],
+  dosing: [
+    {
+      indication: 'Acute agitation / delirium',
+      regimen: '5-10 mg IM (onset 10-20 min) or IV push over 5 min (onset 3-5 min). May repeat q20-30 min PRN. Max 20 mg in 24h. Often combined with midazolam 2.5-5 mg IM and diphenhydramine 50 mg IM for dystonia prophylaxis ("B52" variant).',
+      weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 10 },
+    },
+    {
+      indication: 'Elderly agitation',
+      regimen: '0.5-2 mg IM or IV push. Start with lowest effective dose (0.5-1 mg). May repeat q30-60 min. Max 5 mg in 24h. Higher risk of EPS and oversedation in elderly. All antipsychotics carry FDA black box for increased mortality in elderly with dementia-related psychosis.',
+    },
+  ],
+  contraindications: [
+    'QTc >500 ms or history of torsades de pointes',
+    'Parkinson disease or Lewy body dementia (worsens motor symptoms, risk of neuroleptic sensitivity)',
+    'CNS depression / coma',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'QTc prolongation — obtain baseline ECG before and repeat after dosing',
+    'Extrapyramidal symptoms (EPS): acute dystonia treated with diphenhydramine 50 mg IV/IM or benztropine 1-2 mg IV',
+    'Akathisia (restlessness) — can be misdiagnosed as worsening agitation. Do NOT escalate dose.',
+    'Neuroleptic malignant syndrome (rare): rigidity, hyperthermia, autonomic instability, elevated CK',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis (1.6-1.7×)',
+    'Lowers seizure threshold',
+    'IV route carries higher QTc risk than IM',
+  ],
+  monitoring: 'Continuous telemetry (QTc monitoring). ECG before and after dosing. Reassess RASS q15 min. Monitor temperature. Watch for EPS/dystonia/akathisia.',
+  notes: 'Most studied antipsychotic for ED agitation. High D2 receptor selectivity — effective for psychosis and agitation but higher EPS risk than atypical antipsychotics. Consider droperidol for faster onset and more sedation, or olanzapine for no QTc risk and no dystonia. If patient not responding to 10 mg cumulative, reconsider etiology — try a different drug class rather than escalating dose.',
+  citations: [
+    'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).',
+    'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+  ],
+};
+
+const OLANZAPINE: DrugEntry = {
+  id: 'olanzapine',
+  name: 'Olanzapine (Zyprexa)',
+  genericName: 'Olanzapine',
+  drugClass: 'Atypical antipsychotic (thienobenzodiazepine)',
+  route: 'IM/PO',
+  indications: ['Acute agitation / delirium', 'Elderly agitation', 'Parkinson\'s — low-dose alternative'],
+  dosing: [
+    {
+      indication: 'Acute agitation / delirium',
+      regimen: '10 mg IM (onset 15-45 min). May repeat 5-10 mg after ≥2 hours. Max 30 mg/24h. PO: 5-10 mg (onset 30-60 min, requires cooperation). Orally disintegrating tablet (Zyprexa Zydis) dissolves on tongue — reduces hiding/cheeking risk.',
+    },
+    {
+      indication: 'Elderly agitation',
+      regimen: '2.5-5 mg IM. Lower dose due to increased sensitivity. May repeat once after ≥2 hours. Max 15 mg/24h.',
+    },
+    {
+      indication: 'Parkinson\'s — low-dose alternative',
+      regimen: '2.5 mg IM. Moderate D2 affinity — less motor worsening than typical antipsychotics but use with caution. Quetiapine PO preferred if patient can take oral medications.',
+    },
+  ],
+  contraindications: [
+    'Co-administration with parenteral (IM/IV) benzodiazepines — risk of fatal respiratory depression and hypotension',
+    'Severe hemodynamic instability / hypotension',
+  ],
+  cautions: [
+    '\u26A0\uFE0F DO NOT give with IM or IV benzodiazepines — multiple case reports of respiratory arrest and death. PO olanzapine + PO lorazepam is acceptable (different pharmacokinetics).',
+    'No significant QTc prolongation — major advantage over haloperidol and droperidol',
+    'No dystonia risk — advantage over typical antipsychotics',
+    'Orthostatic hypotension — keep patient supine after IM injection',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis',
+    'Hyperglycemia risk with repeated/chronic dosing (not relevant to single ED dose)',
+  ],
+  monitoring: 'Blood pressure, SpO2, respiratory rate closely after IM. No telemetry required (no QTc effect). Reassess RASS q15 min.',
+  notes: 'Equally effective as haloperidol for acute agitation with fewer side effects. Key advantages: NO QTc prolongation (use when QTc is borderline/prolonged), NO dystonia. Key limitation: CANNOT combine with parenteral benzodiazepines. If patient needs both antipsychotic and benzodiazepine, use haloperidol + midazolam instead. The TREC trial showed IM olanzapine was as effective as IM haloperidol + promethazine for acute agitation.',
+  citations: [
+    'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).',
+    'Chan EW, et al. IV Droperidol or IM Olanzapine as Adjunct to Midazolam for Acutely Agitated Patient. Ann Emerg Med. 2013;61(1):72-81.',
+    'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+  ],
+};
+
+const QUETIAPINE: DrugEntry = {
+  id: 'quetiapine',
+  name: 'Quetiapine (Seroquel)',
+  genericName: 'Quetiapine fumarate',
+  drugClass: 'Atypical antipsychotic (dibenzothiazepine)',
+  route: 'PO',
+  indications: ['Mild agitation / delirium (PO)', 'Parkinson\'s / Lewy body delirium'],
+  dosing: [
+    {
+      indication: 'Mild agitation / delirium',
+      regimen: '25-100 mg PO. Onset 30-60 min. Significant sedation at low doses (25-50 mg) due to H1 histamine blockade — functions primarily as a sedative at these doses, not an antipsychotic. May repeat q4-6h. Max 200 mg/24h in acute setting.',
+    },
+    {
+      indication: 'Parkinson\'s / Lewy body delirium',
+      regimen: '12.5-25 mg PO. Lowest D2 receptor affinity of ALL antipsychotics — least likely to worsen motor symptoms. Has been shown NOT to affect motor symptoms of Parkinson disease. Start 12.5 mg, titrate cautiously.',
+    },
+  ],
+  contraindications: [
+    'Severe hepatic impairment',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'PO only — no parenteral formulation. Limits utility for severe ED agitation.',
+    'Orthostatic hypotension (alpha-1 blockade) — significant in elderly. Monitor BP after first dose.',
+    'At low doses (<150 mg), acts primarily as H1 antihistamine and alpha-1 blocker — sedation without significant antipsychotic effect',
+    'Mild QTc prolongation — generally less than haloperidol. Real risk of torsades appears extremely low (4 reported cases in literature, all with multiple confounders).',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis',
+  ],
+  monitoring: 'Blood pressure (orthostatic risk — check sitting and standing). SpO2. Reassess sedation level q30 min.',
+  notes: 'Safest antipsychotic for Parkinson disease and Lewy body dementia due to lowest D2 receptor occupancy. At low doses (25-50 mg), it functions like a non-deliriogenic sedative: H1 blockade (sedation) + 5-HT2A blockade (sleep maintenance) without significant dopamine antagonism. Best for mild-moderate delirium in cooperative patients, ICU delirium management, or as a step-down after parenteral sedation. Not useful for acute severe agitation due to PO-only limitation and slow onset.',
+  citations: [
+    'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+    'Devlin JW, et al. Efficacy and Safety of Quetiapine in Critically Ill Patients with Delirium. Crit Care Med. 2010;38(2):419-427.',
+  ],
+};
+
+const RISPERIDONE: DrugEntry = {
+  id: 'risperidone',
+  name: 'Risperidone (Risperdal)',
+  genericName: 'Risperidone',
+  drugClass: 'Atypical antipsychotic (benzisoxazole)',
+  route: 'PO',
+  indications: ['Mild agitation / delirium (PO)'],
+  dosing: [
+    {
+      indication: 'Mild agitation / delirium',
+      regimen: '1-2 mg PO. Onset 30-60 min. Less sedating than quetiapine or olanzapine — may be useful when mild antipsychotic effect is desired without heavy sedation. Available as orally disintegrating tablet (Risperdal M-Tab). May repeat q4-6h. Max 4 mg/24h.',
+    },
+  ],
+  contraindications: [
+    'Parkinson disease or Lewy body dementia (moderate D2 affinity — higher EPS risk than quetiapine or olanzapine)',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'PO only — no parenteral formulation for acute ED use',
+    'Higher D2 affinity than quetiapine or olanzapine — moderate EPS risk',
+    'Mild-moderate QTc prolongation',
+    'Orthostatic hypotension',
+    'Hyperprolactinemia (highest risk among atypical antipsychotics)',
+    'Lacks anticholinergic effects — theoretically less deliriogenic but may increase EPS',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis',
+  ],
+  monitoring: 'Blood pressure, ECG if combined with other QTc-prolonging agents. Watch for EPS.',
+  notes: 'Less commonly used in the ED than haloperidol or olanzapine due to PO-only limitation and slower onset. May be useful as a step-down agent or for semi-cooperative patients needing mild-moderate antipsychotic effect without heavy sedation. The orally disintegrating tablet dissolves on the tongue, reducing hiding/cheeking risk. For acute agitation with psychotic features, oral risperidone + oral lorazepam has shown similar efficacy to IM haloperidol + lorazepam.',
+  citations: [
+    'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+    'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
@@ -4693,6 +4899,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   DIMENHYDRINATE,
   DIPHENHYDRAMINE,
   DOLUTEGRAVIR,
+  DROPERIDOL,
   DOXYCYCLINE,
   DOXYLAMINE,
   EDOXABAN,
@@ -4707,6 +4914,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   FOSPHENYTOIN,
   FUROSEMIDE,
   GENTAMICIN,
+  HALOPERIDOL,
   HYPERTONIC_SALINE,
   HYDROXOCOBALAMIN,
   IDARUCIZUMAB,
@@ -4734,6 +4942,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   NIMODIPINE,
   NITROFURANTOIN,
   NITROGLYCERIN,
+  OLANZAPINE,
   ONDANSETRON,
   ORAL_UREA,
   OXYTOCIN,
@@ -4752,6 +4961,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   PROMETHAZINE,
   PROPOFOL,
   PROTAMINE,
+  QUETIAPINE,
   PYRIDOXINE,
   RABIES_IMMUNE_GLOBULIN,
   RABIES_VACCINE,
@@ -4759,6 +4969,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   REGULAR_INSULIN,
   RETEPLASE,
   RIFAMPIN,
+  RISPERIDONE,
   RITONAVIR,
   RIVAROXABAN,
   RH_IMMUNE_GLOBULIN,

@@ -105,6 +105,7 @@ const TREE_REGISTRY = {
   'sah':              { prefix: 'SAH',                 entryNodeId: 'sah-start',          categoryId: 'neurology' },
   'syncope':          { prefix: 'SYNCOPE',             entryNodeId: 'sync-start',         categoryId: 'cardiology' },
   'stemi':            { prefix: 'STEMI',               entryNodeId: 'stemi-start',        categoryId: 'cardiology' },
+  'delirium':         { prefix: 'DELIRIUM',            entryNodeId: 'delirium-start',     categoryId: 'neurology' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -126,6 +127,7 @@ const CROSS_LISTINGS = {
   'diarrhea':         [{ categoryId: 'emergency-medicine' }],
   'hiv':              [{ categoryId: 'emergency-medicine' }],
   'sah':              [{ categoryId: 'emergency-medicine' }],
+  'delirium':         [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

@@ -2174,11 +2174,52 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+const RASS_CALCULATOR: CalculatorDefinition = {
+  id: 'rass',
+  title: 'RASS',
+  subtitle: 'Richmond Agitation-Sedation Scale',
+  description: 'The RASS is a 10-point scale (-5 to +4) used to assess the level of agitation or sedation in clinical patients. It classifies delirium subtypes (hypoactive vs hyperactive) and guides pharmacological management decisions.',
+  fields: [
+    {
+      name: 'rass-observation',
+      label: 'Observed Behavior',
+      type: 'select',
+      points: 0,
+      description: 'Assess the patient\'s current level of agitation or sedation',
+      selectOptions: [
+        { label: '+4 Combative — violent, immediate danger to staff', points: 9 },
+        { label: '+3 Very agitated — pulls/removes tubes, aggressive', points: 8 },
+        { label: '+2 Agitated — frequent non-purposeful movement', points: 7 },
+        { label: '+1 Restless — anxious, apprehensive, not aggressive', points: 6 },
+        { label: '0 Alert and calm', points: 5 },
+        { label: '-1 Drowsy — not fully alert, sustained awakening to voice (>10s)', points: 4 },
+        { label: '-2 Light sedation — briefly awakens to voice, eye contact <10s', points: 3 },
+        { label: '-3 Moderate sedation — movement or eye opening to voice, no eye contact', points: 2 },
+        { label: '-4 Deep sedation — no response to voice, movement to physical stimulation', points: 1 },
+        { label: '-5 Unarousable — no response to voice or physical stimulation', points: 0 },
+      ],
+    },
+  ],
+  results: [
+    { min: 7, max: Infinity, label: 'RASS +2 to +4', risk: 'Hyperactive Delirium', mortality: 'Agitated — pharmacological sedation likely needed. Screen for excited delirium syndrome if RASS +3 or +4.', colorVar: '--color-danger' },
+    { min: 6, max: 7, label: 'RASS +1', risk: 'Mild Agitation', mortality: 'Restless — attempt nonpharmacological interventions first (verbal de-escalation, environmental modification).', colorVar: '--color-warning' },
+    { min: 5, max: 6, label: 'RASS 0', risk: 'Alert & Calm', mortality: 'Target level. Patient may still have delirium (inattention) — screen with CAM if clinically suspected.', colorVar: '--color-primary' },
+    { min: 2, max: 5, label: 'RASS -1 to -3', risk: 'Hypoactive Delirium', mortality: 'Most commonly missed subtype (32-67% undiagnosed). Higher mortality than hyperactive. Focus on identifying and treating underlying cause — antipsychotics are NOT beneficial.', colorVar: '--color-info' },
+    { min: 0, max: 2, label: 'RASS -4 to -5', risk: 'Deep Sedation / Unarousable', mortality: 'Cannot assess for delirium at this level. Evaluate for structural, toxic, or metabolic cause of obtundation. Consider intubation for airway protection.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'RASS ≠ 0 warrants CAM screening for delirium. RASS -4 to -5: cannot assess — prioritize treating underlying cause.',
+  citations: [
+    'Sessler CN, et al. The Richmond Agitation-Sedation Scale: Validity and Reliability in Adult ICU Patients. Am J Respir Crit Care Med. 2002;166(10):1338-1344.',
+    'Ely EW, et al. Monitoring Sedation Status Over Time in ICU Patients: Reliability and Validity of the RASS. JAMA. 2003;289(22):2983-2991.',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  'rass': RASS_CALCULATOR,
   'pesi': PESI_CALCULATOR,
   'spesi': SPESI_CALCULATOR,
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,

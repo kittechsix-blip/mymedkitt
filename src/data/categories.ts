@@ -206,6 +206,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 25,
         entryNodeId: 'sah-start',
+      },
+      {
+        id: 'delirium',
+        title: 'Delirium Management',
+        subtitle: 'Safety → Screening → Etiology → De-escalation → Pharmacology → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 30,
+        entryNodeId: 'delirium-start',
       }
     ],
     isCustom: false,
@@ -357,6 +366,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 25,
         entryNodeId: 'sah-start',
+      },
+      {
+        id: 'delirium',
+        title: 'Delirium Management',
+        subtitle: 'Safety → Screening → Etiology → De-escalation → Pharmacology → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 30,
+        entryNodeId: 'delirium-start',
       }
     ],
     isCustom: false,
