@@ -102,7 +102,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hypoactive Delirium',
-    body: 'RASS -1 to -3. The **most commonly missed** delirium subtype — 32-67% undiagnosed in the ED.\n\n**Presentation:** Quiet, withdrawn, inattentive, decreased psychomotor activity, apathetic, drowsy but arousable.\n\n**Higher mortality** than hyperactive subtype — patients are often dismissed as "tired," "depressed," or confused from baseline dementia.\n\n**Common causes:** Metabolic derangements (hepatic/renal encephalopathy), medication effects (opioids, sedatives, anticholinergics), infection (especially UTI/pneumonia in elderly), dehydration.\n\n**Key principle:** Hypoactive delirium is NOT benign — it requires the same urgent etiology search as hyperactive delirium. Do not attribute to "baseline" without verifying with family or prior documentation.\n\nAntipsychotics are generally NOT beneficial for hypoactive delirium — focus on identifying and treating the underlying cause.',
+    body: 'RASS -1 to -3. The **most commonly missed** subtype — 32-67% undiagnosed in the ED. **Higher mortality** than hyperactive.\n\nPatients are often dismissed as "tired" or "baseline dementia." Verify with family/prior documentation before attributing to baseline.\n\n**Common causes:** Metabolic derangements, medication effects (opioids, sedatives, anticholinergics), infection (UTI/pneumonia in elderly), dehydration.\n\nAntipsychotics are NOT beneficial — focus on treating the underlying cause.',
     citation: [1, 3, 4],
     next: 'del-etiology',
   },
@@ -112,7 +112,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hyperactive / Mixed Delirium',
-    body: 'RASS +1 to +4. Agitation, combativeness, psychomotor hyperactivity, hallucinations, delusions.\n\n**Higher recognition rate** than hypoactive subtype — these patients are obvious. Immediate safety concern for patient and staff.\n\n**Mixed delirium** fluctuates between hyperactive and hypoactive states — most persistent course.\n\n**Distinguish from primary psychiatric disorder:**\n• Delirium: acute onset, fluctuating, inattention, known medical precipitant, altered consciousness\n• Primary psychosis: chronic/subacute, organized delusions, intact attention, stable vital signs\n• Key: new-onset "psychiatric" symptoms in a patient without psychiatric history should be assumed medical until proven otherwise\n\n**Common causes:** Drug intoxication/withdrawal, pain, infection/sepsis, metabolic crisis, CNS pathology.\n\nMay require immediate pharmacological management to ensure safety — but always search for underlying etiology concurrently.',
+    body: 'RASS +1 to +4. Agitation, combativeness, hyperactivity, hallucinations. **Mixed delirium** fluctuates between subtypes — most persistent course.\n\n**Distinguish from primary psychiatric disorder:**\n• Delirium: acute onset, fluctuating, inattention, altered consciousness\n• Primary psychosis: chronic/subacute, organized delusions, intact attention, stable vitals\n• New-onset "psychiatric" symptoms without psychiatric history → assume medical until proven otherwise\n\nMay require immediate pharmacological management — but always search for underlying etiology concurrently.',
     citation: [1, 4],
     next: 'del-etiology',
   },
@@ -122,7 +122,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Excited Delirium Syndrome',
-    body: '[Excited Delirium Syndrome](#/info/del-exds-info) — full recognition criteria and management.\n\n**Medical emergency** with ~10% case fatality rate. Most deaths from cardiac arrhythmia (PEA, asystole).\n\n**Recognition — 6 of 10 criteria = probable ExDS:**\n1. Pain tolerance\n2. Tachypnea\n3. Sweating / tactile hyperthermia\n4. Agitation with unusual strength\n5. Noncompliance with police/first responders\n6. Lack of tiring despite prolonged struggle\n7. Inappropriate clothing (often undressing)\n8. Mirror/glass attraction\n9. Bizarre behavior\n10. Male sex\n\n**Underlying etiologies:** Sympathomimetic intoxication (cocaine, methamphetamine), psychiatric illness with medication noncompliance, or combination.\n\n**Metabolic derangements:** Rhabdomyolysis, hyperkalemia, acidosis, dehydration. Temperature >104°F is the single best predictor of death.\n\n**IMMEDIATE:** Remove from prone position (positional asphyxia risk), begin active cooling, establish IV access → proceed to ExDS management.',
+    body: '[Excited Delirium Syndrome](#/info/del-exds-info) — full recognition criteria, pathophysiology, and management.\n\n**Medical emergency** — ~10% case fatality rate. Most deaths from cardiac arrhythmia (PEA, asystole). **6 of 10 criteria = probable ExDS.**\n\nTemperature >104°F is the **single best predictor of death.**\n\n**IMMEDIATE:** Remove from prone position → aggressive cooling → IV access → proceed to ExDS management.',
     citation: [1, 12],
     next: 'del-exds-mgmt',
   },
@@ -132,7 +132,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Etiology Assessment',
-    body: 'Delirium is a SYMPTOM — always search for the underlying precipitant. Multiple causes often coexist. In 13% of cases, no precipitant is identified.\n\n[Precipitating Factors for Delirium](#/info/del-precipitants) — comprehensive list of critical, emergent, and iatrogenic causes.\n[Vulnerability Factors](#/info/del-vulnerability) — patient risk factors that lower the threshold for delirium.\n\n**Most common precipitants:**\n• **Infection** (16-67% of cases) — UTI and pneumonia predominate\n• **Medications** — anticholinergics, sedatives, opioids, polypharmacy\n• **Metabolic** — Na, Ca, glucose, hepatic/renal failure\n• **Intracranial** — stroke, hemorrhage, seizure\n• **Intoxication/withdrawal** — alcohol, benzodiazepines, stimulants\n\nWhich category is most likely based on your clinical assessment?',
+    body: 'Multiple causes often coexist. In 13% of cases, no precipitant is identified.\n\n[Precipitating Factors](#/info/del-precipitants) — comprehensive list by category.\n[Vulnerability Factors](#/info/del-vulnerability) — patient risk factors that lower the delirium threshold.\n\nWhich category is most likely based on your clinical assessment?',
     citation: [1, 3],
     options: [
       {
@@ -218,7 +218,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Medication Review',
-    body: '**Systematic medication review is essential** — medications are one of the most common and most easily correctable precipitants.\n\n**Check for:**\n• New medications started within past 2 weeks\n• Recent dose changes (up or down)\n• Drug-drug interactions (especially CYP inhibitors/inducers)\n• Polypharmacy (≥5 medications independently increases delirium risk)\n• Anticholinergic burden — cumulative effect of multiple low-anticholinergic drugs\n• Recent discontinuation of chronic medications (withdrawal risk)\n\n**High-risk medication classes (Beers Criteria):**\n• Anticholinergics (diphenhydramine, oxybutynin, TCAs)\n• Benzodiazepines (alprazolam, lorazepam, diazepam)\n• Opioids (especially meperidine — highest delirium risk)\n• Sedative-hypnotics (zolpidem)\n• First-generation antihistamines\n• H2 blockers (ranitidine, famotidine)\n• Corticosteroids\n• Muscle relaxants (cyclobenzaprine, methocarbamol)\n\n**ED recommendation:** Avoid meperidine — prescribe oxycodone if opioids are necessary. For other classes, weigh risks vs benefits using clinical judgment. Document medication review in chart.\n\n**Iatrogenic precipitants in ED/hospital:** Physical restraints, bladder catheter, addition of ≥3 new medications, sleep disruption, malnutrition.',
+    body: '**Systematic medication reconciliation** — one of the most easily correctable precipitants.\n\n**Check for:**\n• New medications within past 2 weeks\n• Recent dose changes\n• Drug-drug interactions (CYP inhibitors/inducers)\n• Polypharmacy (≥5 meds independently increases risk)\n• Anticholinergic burden — cumulative effect of multiple low-anticholinergic drugs\n• Recent discontinuation (withdrawal risk)\n\nSee [Precipitating Factors](#/info/del-precipitants) for high-risk medication classes (Beers Criteria).\n\n**Iatrogenic ED/hospital precipitants:** Physical restraints, bladder catheter, ≥3 new medications, sleep disruption, malnutrition.',
     citation: [1, 3],
     next: 'del-nonpharm',
   },
@@ -253,7 +253,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     module: 3,
     title: 'Pharmacological Treatment Needed?',
     calculatorLinks: [{ id: 'rass', label: 'RASS Score' }],
-    body: '**Pharmacological treatment is second-line** — used when nonpharmacological interventions are ineffective and patient/staff safety is at risk.\n\n**Consider pharmacological management when:**\n• Severe agitation threatening patient or staff safety\n• Physical restraints required to facilitate medical evaluation\n• Patient unable to cooperate with essential diagnostic workup\n• Agitation interfering with critical medical care (preventing IV access, ET tube, etc.)\n\n**Do NOT routinely sedate hypoactive delirium** — antipsychotics are not beneficial in hypoactive delirium (MIND-USA trial: haloperidol was ineffective when 89% of patients had hypoactive delirium). Focus on treating the underlying cause.\n\n[Medications for Acute Agitation](#/info/del-meds-table) — drug comparison table with dosing, onset, and side effects.',
+    body: '**Pharmacological treatment is second-line** — only when nonpharmacological interventions fail and safety is at risk.\n\n**Indications:**\n• Severe agitation threatening patient or staff safety\n• Unable to cooperate with essential workup or critical care\n• Physical restraints needed to facilitate evaluation\n\n**Do NOT sedate hypoactive delirium** — treat the underlying cause instead.',
     citation: [1, 2, 11],
     options: [
       {
@@ -279,7 +279,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Patient Population',
-    body: '**Pharmacological management should be tailored** to the patient\'s age, comorbidities, and suspected etiology. The ideal agent targets the underlying etiology, has rapid onset, and minimal side effects.\n\n**Key principle:** "Start low and go slow" — especially in elderly patients. Use the minimum effective dose.\n\n[Medications for Acute Agitation](#/info/del-meds-table) — dosing, onset, contraindications by agent.\n\nWhich population best describes this patient?',
+    body: 'Tailor to patient age, comorbidities, and suspected etiology.\n\n[Medications for Acute Agitation](#/info/del-meds-table) — dosing, onset, and contraindications by agent.\n\nWhich population best describes this patient?',
     citation: [1, 2],
     options: [
       {
@@ -356,7 +356,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Excited Delirium Syndrome — Management',
-    body: '**Medical emergency — high mortality.** Most deaths from cardiac arrhythmia (PEA, asystole). Sudden unexpected death can occur even after apparent stabilization.\n\n**IMMEDIATE actions:**\n• **Remove from prone position** — positional asphyxia risk\n• **Aggressive cooling** — target temperature <101°F (38.3°C). Ice packs to axillae/groin, cold IV fluids, mist + fan\n• **Large-bore IV access** — establish early. Aggressive IV normal saline\n• **Continuous cardiac monitoring** — anticipate arrhythmia\n\n**Sedation:**\n• [Midazolam](#/drug/midazolam/agitation) 5 mg IM — first-line. Repeat as needed q5-10 min.\n• For **refractory agitation:** [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM (onset 5 min, reliable sedation). Prepare for possible intubation (29% intubation rate in one study).\n\n**Monitoring and workup:**\n• CK (rhabdomyolysis) — aggressive IV fluids if elevated\n• K+ (hyperkalemia from rhabdomyolysis) — treat aggressively\n• VBG with lactate (acidosis)\n• Creatinine (renal failure)\n• Core temperature q15 min\n• Continuous telemetry — monitor for arrhythmia\n\n**Disposition:** ICU admission mandatory. Cardiac monitoring minimum 24 hours. Continue aggressive hydration and temperature management.',
+    body: '**Sedation:**\n• [Midazolam](#/drug/midazolam/agitation) 5 mg IM — first-line. Repeat q5-10 min as needed.\n• **Refractory:** [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM. Prepare for intubation (29% rate in one study).\n\n**Concurrent management:**\n• Aggressive cooling → target <101°F\n• Large-bore IV × 2, aggressive NS\n• Continuous telemetry — anticipate PEA/asystole\n\n**Labs:** CK, K+, VBG/lactate, creatinine. Core temp q15 min.\n\n**Disposition:** ICU mandatory. See [Excited Delirium Syndrome](#/info/del-exds-info) for full protocol.',
     citation: [1, 2, 12],
     next: 'del-response',
   },
