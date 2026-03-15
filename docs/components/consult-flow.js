@@ -145,7 +145,7 @@ function renderFlow(container) {
     }
     container.appendChild(stackContainer);
     // Contextual toolbar
-    renderContextualToolbar(currentTreeId ?? '', controller, currentEntryNodeId ?? '');
+    renderContextualToolbar(currentTreeId ?? '', controller, currentEntryNodeId ?? '', currentConfig?.moduleLabels);
     // Auto-scroll to active card on session restore
     if (cardStack.length > 0) {
         requestAnimationFrame(() => {

@@ -1216,92 +1216,193 @@ body {
    DECISION MAP — Branch Point List (Overflow menu from ••• button)
    =================================================================== */
 
-.branch-point-list {
+/* -------------------------------------------------------------------
+   DECISION MAP — Full-screen table of contents overlay
+   ------------------------------------------------------------------- */
+
+.decision-map-overlay {
   position: fixed;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-  max-height: 60vh;
-  background: var(--color-surface-card);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
+  inset: 0;
+  z-index: 300;
+  background: var(--color-bg);
   animation: overlay-slide-up 0.3s ease-out;
 }
 
-.branch-point-list__header {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-  padding: 14px 16px 10px;
+.decision-map {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.decision-map__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
-.branch-point-list__scroller {
+.decision-map__close {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 50%;
+}
+
+.decision-map__close:active {
+  background: rgba(0,0,0,0.06);
+}
+
+.decision-map__scroller {
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 8px 12px 16px;
   overscroll-behavior: contain;
+  padding: 4px 0 24px;
 }
 
-.branch-point-list__module {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-  padding: 10px 4px 4px;
-  margin-top: 4px;
-  opacity: 0.7;
+/* Module sections */
+.decision-map__section {
+  margin-bottom: 2px;
 }
 
-.branch-point-list__item {
-  display: block;
+.decision-map__section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
-  padding: 11px 10px;
+  padding: 14px 20px;
   border: none;
   background: transparent;
   cursor: pointer;
   text-align: left;
-  font-family: var(--font-sans);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.decision-map__section-header:active {
+  background: rgba(0,0,0,0.03);
+}
+
+.decision-map__chevron {
+  font-size: 12px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.decision-map__section-label {
+  flex: 1;
+}
+
+.decision-map__section-count {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+/* Collapsed state */
+.decision-map__section--collapsed .decision-map__section-body {
+  display: none;
+}
+
+/* Section body */
+.decision-map__section-body {
+  padding: 0 0 4px;
+}
+
+/* Node items */
+.decision-map__node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 20px 10px 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
   font-size: 15px;
   color: var(--color-text-primary);
-  border-radius: var(--radius-sm);
-  border-left: 3px solid transparent;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s ease;
 }
 
-/* Current node — burnt umber highlight */
-.branch-point-list__item--current {
-  background: rgba(184, 115, 51, 0.12);
-  border-left-color: var(--color-umber);
-  color: var(--color-umber);
-  font-weight: 600;
-}
-
-/* Visited nodes — subtle green left accent */
-.branch-point-list__item--visited {
-  border-left-color: var(--color-decision-active);
-  color: var(--color-text-primary);
-}
-
-.branch-point-list__item:active {
+.decision-map__node:active {
   background: rgba(0,0,0,0.06);
 }
 
-.branch-point-list__item:hover {
-  background: var(--color-surface-hover);
+/* Current node highlight */
+.decision-map__node--current {
+  background: rgba(184, 115, 51, 0.10);
+  font-weight: 600;
+  color: var(--color-umber);
 }
 
-.branch-point-list__item--current:hover,
-.branch-point-list__item--current:active {
+.decision-map__node--current:active {
   background: rgba(184, 115, 51, 0.18);
+}
+
+/* State indicators */
+.decision-map__indicator {
+  flex-shrink: 0;
+  font-size: 10px;
+  width: 16px;
+  text-align: center;
+  line-height: 1;
+}
+
+.decision-map__indicator--current {
+  color: var(--color-umber);
+}
+
+.decision-map__indicator--visited {
+  color: var(--color-decision-active);
+}
+
+.decision-map__indicator--unvisited {
+  color: var(--color-text-secondary);
+  opacity: 0.35;
+}
+
+/* Node title */
+.decision-map__node-title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Node type badge */
+.decision-map__node-type {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.05);
+  color: var(--color-text-secondary);
 }
 
 /* ===================================================================
