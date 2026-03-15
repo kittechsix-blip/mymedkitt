@@ -169,6 +169,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pesi', label: 'PESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'pesi' },
     { id: 'anticoag', label: 'Anticoag', icon: '\uD83D\uDC8A', action: 'jump', target: 'pe-anticoag-selection' },
   ],
+  'acid-base': [
+    { id: 'anion-gap', label: 'AG', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
+    { id: 'delta-gap', label: 'Delta', icon: '\u0394', action: 'calculator', target: 'delta-gap' },
+    { id: 'winters', label: "Winter's", icon: '\uD83C\uDF21\uFE0F', action: 'calculator', target: 'winters-formula' },
+    { id: 'stewart', label: 'Stewart', icon: '\u2696\uFE0F', action: 'calculator', target: 'stewart-sig' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */
