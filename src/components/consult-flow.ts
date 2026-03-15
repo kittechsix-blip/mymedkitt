@@ -18,6 +18,7 @@ let currentEntryNodeId: string | null = null;
 let currentTreeId: string | null = null;
 let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
+let searchOpen = false;
 
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container: HTMLElement, treeId: string): Promise<void> {
@@ -79,6 +80,9 @@ function renderFlow(container: HTMLElement): void {
   // Specialty-colored header
   const categoryId = currentConfig.categoryId || findCategoryId(currentTreeId ?? '');
   renderFlowHeader(container, categoryId);
+
+  // Consult search bar
+  renderConsultSearch(container);
 
   // Card stack container
   const stackContainer = document.createElement('div');
@@ -166,6 +170,187 @@ function renderFlow(container: HTMLElement): void {
         last.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
+  }
+}
+
+/** Render the consult search bar below the header */
+function renderConsultSearch(container: HTMLElement): void {
+  if (!controller) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'consult-search';
+  if (searchOpen) wrapper.classList.add('consult-search--open');
+
+  // Toggle button (magnifying glass)
+  const toggleBtn = document.createElement('button');
+  toggleBtn.className = 'consult-search__toggle';
+  toggleBtn.innerHTML = '&#x1F50D;';
+  toggleBtn.setAttribute('aria-label', 'Search this consult');
+  toggleBtn.addEventListener('click', () => {
+    searchOpen = !searchOpen;
+    wrapper.classList.toggle('consult-search--open', searchOpen);
+    if (searchOpen) {
+      const input = wrapper.querySelector('.consult-search__input') as HTMLInputElement;
+      if (input) { input.value = ''; input.focus(); }
+      clearResults();
+    } else {
+      clearResults();
+    }
+  });
+
+  // Input
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'consult-search__input';
+  input.placeholder = 'Search this consult\u2026';
+  input.setAttribute('autocomplete', 'off');
+  input.setAttribute('autocorrect', 'off');
+  input.setAttribute('spellcheck', 'false');
+
+  // Results dropdown
+  const results = document.createElement('div');
+  results.className = 'consult-search__results';
+
+  function clearResults(): void {
+    results.innerHTML = '';
+    results.style.display = 'none';
+  }
+
+  // Search logic
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  input.addEventListener('input', () => {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const query = input.value.trim().toLowerCase();
+      if (query.length < 2) { clearResults(); return; }
+      const matches = searchNodes(query);
+      renderResults(matches, results, container);
+    }, 150);
+  });
+
+  // Close on escape
+  input.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      searchOpen = false;
+      wrapper.classList.remove('consult-search--open');
+      clearResults();
+      input.blur();
+    }
+  });
+
+  wrapper.appendChild(toggleBtn);
+  wrapper.appendChild(input);
+  wrapper.appendChild(results);
+  container.appendChild(wrapper);
+}
+
+/** Search all nodes in the current tree for a query */
+function searchNodes(query: string): { node: import('../models/types.js').DecisionNode; matchContext: string }[] {
+  if (!controller) return [];
+  const engine = controller.getEngine();
+  const allNodes = engine.getAllNodes();
+  const results: { node: import('../models/types.js').DecisionNode; matchContext: string }[] = [];
+  const terms = query.split(/\s+/).filter(t => t.length > 0);
+
+  for (const node of allNodes) {
+    // Build searchable text from all node fields
+    const fields = [
+      node.title,
+      node.body,
+      node.recommendation || '',
+      (node.options || []).map(o => `${o.label} ${o.description || ''}`).join(' '),
+    ];
+    const fullText = fields.join(' ').toLowerCase();
+
+    // All terms must match somewhere in the node
+    if (terms.every(t => fullText.includes(t))) {
+      // Find the best matching context snippet
+      const matchContext = getMatchContext(fullText, terms);
+      results.push({ node, matchContext });
+    }
+  }
+
+  return results;
+}
+
+/** Extract a short context snippet around the first match */
+function getMatchContext(text: string, terms: string[]): string {
+  // Find position of first term match
+  let earliest = text.length;
+  for (const t of terms) {
+    const idx = text.indexOf(t);
+    if (idx >= 0 && idx < earliest) earliest = idx;
+  }
+
+  // Extract ~80 chars around the match
+  const start = Math.max(0, earliest - 20);
+  const end = Math.min(text.length, earliest + 60);
+  let snippet = text.slice(start, end).replace(/\s+/g, ' ').trim();
+  if (start > 0) snippet = '\u2026' + snippet;
+  if (end < text.length) snippet = snippet + '\u2026';
+  return snippet;
+}
+
+/** Render search results dropdown */
+function renderResults(
+  matches: { node: import('../models/types.js').DecisionNode; matchContext: string }[],
+  resultsEl: HTMLElement,
+  container: HTMLElement,
+): void {
+  resultsEl.innerHTML = '';
+  if (matches.length === 0) {
+    resultsEl.style.display = 'block';
+    const empty = document.createElement('div');
+    empty.className = 'consult-search__empty';
+    empty.textContent = 'No matching nodes';
+    resultsEl.appendChild(empty);
+    return;
+  }
+
+  resultsEl.style.display = 'block';
+
+  // Limit to 10 results
+  const shown = matches.slice(0, 10);
+  for (const { node, matchContext } of shown) {
+    const item = document.createElement('button');
+    item.className = 'consult-search__result-item';
+
+    const title = document.createElement('div');
+    title.className = 'consult-search__result-title';
+    title.textContent = node.title;
+
+    const context = document.createElement('div');
+    context.className = 'consult-search__result-context';
+    context.textContent = matchContext;
+
+    const badge = document.createElement('span');
+    badge.className = 'consult-search__result-badge';
+    badge.textContent = node.type;
+
+    title.appendChild(badge);
+    item.appendChild(title);
+    item.appendChild(context);
+
+    item.addEventListener('click', () => {
+      if (!controller) return;
+      controller.jumpToNode(node.id);
+      searchOpen = false;
+      renderFlow(container);
+      // Scroll active card into view
+      requestAnimationFrame(() => {
+        const active = container.querySelector('.decision-card--active');
+        if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    resultsEl.appendChild(item);
+  }
+
+  if (matches.length > 10) {
+    const more = document.createElement('div');
+    more.className = 'consult-search__empty';
+    more.textContent = `+ ${matches.length - 10} more results`;
+    resultsEl.appendChild(more);
   }
 }
 
