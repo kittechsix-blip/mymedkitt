@@ -2215,6 +2215,216 @@ const RASS_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Compensation Rule Calculators (ABG Acid-Base)
+// -------------------------------------------------------------------
+
+const COMP_RULE_1_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-1',
+  title: 'Rule 1: Acute Resp Acidosis',
+  subtitle: 'Expected HCO3 Compensation',
+  description: 'For acute respiratory acidosis (< 48h): HCO3 rises ~1 mEq/L for each 10 mmHg rise in pCO2. Expected HCO3 = 24 + 1 × (pCO2 − 40)/10.',
+  fields: [
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+  ],
+  results: [],
+  thresholdNote: 'If measured HCO3 exceeds expected → concurrent metabolic alkalosis. If below → concurrent metabolic acidosis.',
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const pco2 = values['pco2'] || 0;
+    const hco3 = values['hco3'] || 0;
+    if (pco2 <= 0 || hco3 <= 0) return { value: '--', label: 'Enter values', description: 'Enter pCO2 and HCO3.', colorVar: '--color-text-muted' };
+    const expected = 24 + 1 * (pco2 - 40) / 10;
+    const expLow = Math.round((expected - 2) * 10) / 10;
+    const expHigh = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (hco3 >= expLow && hco3 <= expHigh) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Measured HCO3 is within expected range. Pure acute respiratory acidosis.';
+    } else if (hco3 > expHigh) {
+      label = 'Concurrent Metabolic Alkalosis'; colorVar = '--color-warning';
+      interp = 'HCO3 is HIGHER than expected for acute compensation. A concurrent metabolic alkalosis is present.';
+    } else {
+      label = 'Concurrent Metabolic Acidosis'; colorVar = '--color-danger';
+      interp = 'HCO3 is LOWER than expected. A concurrent metabolic acidosis is worsening the acidemia.';
+    }
+    return { value: `${expLow}–${expHigh} mEq/L`, label, description: `Expected HCO3 = 24 + 1×(${pco2}−40)/10 = ${Math.round(expected * 10) / 10}\nExpected range: ${expLow}–${expHigh} mEq/L\nMeasured HCO3: ${hco3} mEq/L\n\n${interp}`, colorVar };
+  },
+};
+
+const COMP_RULE_2_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-2',
+  title: 'Rule 2: Chronic Resp Acidosis',
+  subtitle: 'Expected HCO3 Compensation',
+  description: 'For chronic respiratory acidosis (> 3-5 days): HCO3 rises ~3.5 mEq/L for each 10 mmHg rise in pCO2. Expected HCO3 = 24 + 3.5 × (pCO2 − 40)/10.',
+  fields: [
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+  ],
+  results: [],
+  thresholdNote: 'Full renal compensation takes 3-5 days. If measured HCO3 exceeds expected → concurrent metabolic alkalosis.',
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const pco2 = values['pco2'] || 0;
+    const hco3 = values['hco3'] || 0;
+    if (pco2 <= 0 || hco3 <= 0) return { value: '--', label: 'Enter values', description: 'Enter pCO2 and HCO3.', colorVar: '--color-text-muted' };
+    const expected = 24 + 3.5 * (pco2 - 40) / 10;
+    const expLow = Math.round((expected - 2) * 10) / 10;
+    const expHigh = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (hco3 >= expLow && hco3 <= expHigh) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Measured HCO3 is within expected range. Pure chronic respiratory acidosis with full renal compensation.';
+    } else if (hco3 > expHigh) {
+      label = 'Concurrent Metabolic Alkalosis'; colorVar = '--color-warning';
+      interp = 'HCO3 is HIGHER than expected. A concurrent metabolic alkalosis is present (e.g., diuretics, vomiting).';
+    } else {
+      label = 'Concurrent Metabolic Acidosis'; colorVar = '--color-danger';
+      interp = 'HCO3 is LOWER than expected. A concurrent metabolic acidosis is present, OR compensation is not yet complete (< 3-5 days).';
+    }
+    return { value: `${expLow}–${expHigh} mEq/L`, label, description: `Expected HCO3 = 24 + 3.5×(${pco2}−40)/10 = ${Math.round(expected * 10) / 10}\nExpected range: ${expLow}–${expHigh} mEq/L\nMeasured HCO3: ${hco3} mEq/L\n\n${interp}`, colorVar };
+  },
+};
+
+const COMP_RULE_3_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-3',
+  title: 'Rule 3: Acute Resp Alkalosis',
+  subtitle: 'Expected HCO3 Compensation',
+  description: 'For acute respiratory alkalosis: HCO3 drops ~2 mEq/L for each 10 mmHg drop in pCO2. Expected HCO3 = 24 − 2 × (40 − pCO2)/10.',
+  fields: [
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+  ],
+  results: [],
+  thresholdNote: 'If measured HCO3 is lower than expected → concurrent metabolic acidosis. If higher → concurrent metabolic alkalosis.',
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const pco2 = values['pco2'] || 0;
+    const hco3 = values['hco3'] || 0;
+    if (pco2 <= 0 || hco3 <= 0) return { value: '--', label: 'Enter values', description: 'Enter pCO2 and HCO3.', colorVar: '--color-text-muted' };
+    const expected = 24 - 2 * (40 - pco2) / 10;
+    const expLow = Math.round((expected - 2) * 10) / 10;
+    const expHigh = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (hco3 >= expLow && hco3 <= expHigh) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Measured HCO3 is within expected range. Pure acute respiratory alkalosis.';
+    } else if (hco3 < expLow) {
+      label = 'Concurrent Metabolic Acidosis'; colorVar = '--color-danger';
+      interp = 'HCO3 is LOWER than expected. A concurrent metabolic acidosis is present.';
+    } else {
+      label = 'Concurrent Metabolic Alkalosis'; colorVar = '--color-warning';
+      interp = 'HCO3 is HIGHER than expected. A concurrent metabolic alkalosis is present, OR compensation is incomplete.';
+    }
+    return { value: `${expLow}–${expHigh} mEq/L`, label, description: `Expected HCO3 = 24 − 2×(40−${pco2})/10 = ${Math.round(expected * 10) / 10}\nExpected range: ${expLow}–${expHigh} mEq/L\nMeasured HCO3: ${hco3} mEq/L\n\n${interp}`, colorVar };
+  },
+};
+
+const COMP_RULE_4_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-4',
+  title: 'Rule 4: Chronic Resp Alkalosis',
+  subtitle: 'Expected HCO3 Compensation',
+  description: 'For chronic respiratory alkalosis (> 3-5 days): HCO3 drops ~5 mEq/L for each 10 mmHg drop in pCO2. Expected HCO3 = 24 − 5 × (40 − pCO2)/10.',
+  fields: [
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+  ],
+  results: [],
+  thresholdNote: 'Full renal compensation takes 3-5 days. Chronic resp alkalosis can lower HCO3 to ~12-15 mEq/L.',
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const pco2 = values['pco2'] || 0;
+    const hco3 = values['hco3'] || 0;
+    if (pco2 <= 0 || hco3 <= 0) return { value: '--', label: 'Enter values', description: 'Enter pCO2 and HCO3.', colorVar: '--color-text-muted' };
+    const expected = 24 - 5 * (40 - pco2) / 10;
+    const expLow = Math.round((expected - 2) * 10) / 10;
+    const expHigh = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (hco3 >= expLow && hco3 <= expHigh) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Measured HCO3 is within expected range. Pure chronic respiratory alkalosis with full renal compensation.';
+    } else if (hco3 < expLow) {
+      label = 'Concurrent Metabolic Acidosis'; colorVar = '--color-danger';
+      interp = 'HCO3 is LOWER than expected. A concurrent metabolic acidosis is present.';
+    } else {
+      label = 'Concurrent Metabolic Alkalosis'; colorVar = '--color-warning';
+      interp = 'HCO3 is HIGHER than expected. Compensation may not yet be complete (< 3-5 days), or a concurrent metabolic alkalosis is present.';
+    }
+    return { value: `${expLow}–${expHigh} mEq/L`, label, description: `Expected HCO3 = 24 − 5×(40−${pco2})/10 = ${Math.round(expected * 10) / 10}\nExpected range: ${expLow}–${expHigh} mEq/L\nMeasured HCO3: ${hco3} mEq/L\n\n${interp}`, colorVar };
+  },
+};
+
+const COMP_RULE_5_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-5',
+  title: "Rule 5: Winter's Formula",
+  subtitle: 'Expected pCO2 for Metabolic Acidosis',
+  description: "Expected pCO2 = 1.5 × [HCO3] + 8 ± 2. Checks if respiratory compensation is appropriate for a primary metabolic acidosis.",
+  fields: [
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+  ],
+  results: [],
+  thresholdNote: "If actual pCO2 is within expected range → appropriate compensation. Higher → concurrent resp acidosis. Lower → concurrent resp alkalosis.",
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const hco3 = values['hco3'] || 0;
+    const pco2 = values['pco2'] || 0;
+    if (hco3 <= 0 || pco2 <= 0) return { value: '--', label: 'Enter values', description: 'Enter HCO3 and pCO2.', colorVar: '--color-text-muted' };
+    const expected = 1.5 * hco3 + 8;
+    const low = Math.round((expected - 2) * 10) / 10;
+    const high = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (pco2 >= low && pco2 <= high) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Actual pCO2 is within expected range. Pure metabolic acidosis with appropriate respiratory compensation.';
+    } else if (pco2 > high) {
+      label = 'Concurrent Respiratory Acidosis'; colorVar = '--color-danger';
+      interp = 'pCO2 is HIGHER than expected. Patient is not hyperventilating enough — a concurrent respiratory acidosis is present.';
+    } else {
+      label = 'Concurrent Respiratory Alkalosis'; colorVar = '--color-warning';
+      interp = 'pCO2 is LOWER than expected. Patient is hyperventilating beyond compensation — consider salicylate, PE, or early sepsis.';
+    }
+    return { value: `${low}–${high} mmHg`, label, description: `Expected pCO2 = 1.5×${hco3} + 8 = ${Math.round(expected * 10) / 10}\nExpected range: ${low}–${high} mmHg\nActual pCO2: ${pco2} mmHg\n\n${interp}`, colorVar };
+  },
+};
+
+const COMP_RULE_6_CALCULATOR: CalculatorDefinition = {
+  id: 'comp-rule-6',
+  title: 'Rule 6: Metabolic Alkalosis',
+  subtitle: 'Expected pCO2 Compensation',
+  description: 'For metabolic alkalosis: pCO2 rises ~0.7 mmHg per 1 mEq/L increase in HCO3. Expected pCO2 = 40 + 0.7 × (HCO3 − 24). Max compensatory pCO2 ≈ 55 mmHg.',
+  fields: [
+    { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+  ],
+  results: [],
+  thresholdNote: 'Maximum compensatory pCO2 is ~55 mmHg. If pCO2 exceeds this, suspect concurrent respiratory acidosis.',
+  citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
+  computeResult: (values: Record<string, number>) => {
+    const hco3 = values['hco3'] || 0;
+    const pco2 = values['pco2'] || 0;
+    if (hco3 <= 0 || pco2 <= 0) return { value: '--', label: 'Enter values', description: 'Enter HCO3 and pCO2.', colorVar: '--color-text-muted' };
+    let expected = 40 + 0.7 * (hco3 - 24);
+    const cappedNote = expected > 55 ? ' (capped at physiological max ~55)' : '';
+    if (expected > 55) expected = 55;
+    const low = Math.round((expected - 2) * 10) / 10;
+    const high = Math.round((expected + 2) * 10) / 10;
+    let label: string; let colorVar: string; let interp: string;
+    if (pco2 >= low && pco2 <= high) {
+      label = 'Appropriate Compensation'; colorVar = '--color-primary';
+      interp = 'Actual pCO2 is within expected range. Pure metabolic alkalosis with appropriate respiratory compensation.';
+    } else if (pco2 > high) {
+      label = 'Concurrent Respiratory Acidosis'; colorVar = '--color-danger';
+      interp = 'pCO2 is HIGHER than expected. A concurrent respiratory acidosis is present (e.g., COPD, sedation).';
+    } else {
+      label = 'Concurrent Respiratory Alkalosis'; colorVar = '--color-warning';
+      interp = 'pCO2 is LOWER than expected. A concurrent respiratory alkalosis is present.';
+    }
+    return { value: `${low}–${high} mmHg`, label, description: `Expected pCO2 = 40 + 0.7×(${hco3}−24) = ${Math.round((40 + 0.7 * (hco3 - 24)) * 10) / 10}${cappedNote}\nExpected range: ${low}–${high} mmHg\nActual pCO2: ${pco2} mmHg\n\n${interp}`, colorVar };
+  },
+};
+
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
@@ -2247,6 +2457,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'winters-formula': WINTERS_FORMULA_CALCULATOR,
   'osmolar-gap': OSMOLAR_GAP_CALCULATOR,
   'stewart-sig': STEWART_SIG_CALCULATOR,
+  'comp-rule-1': COMP_RULE_1_CALCULATOR,
+  'comp-rule-2': COMP_RULE_2_CALCULATOR,
+  'comp-rule-3': COMP_RULE_3_CALCULATOR,
+  'comp-rule-4': COMP_RULE_4_CALCULATOR,
+  'comp-rule-5': COMP_RULE_5_CALCULATOR,
+  'comp-rule-6': COMP_RULE_6_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

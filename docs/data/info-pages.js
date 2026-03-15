@@ -4542,19 +4542,19 @@ const AB_COMPENSATION = {
     sections: [
         {
             heading: 'Respiratory Acidosis',
-            body: '**Rule 1 — Acute Respiratory Acidosis:**\nExpected HCO3 = 24 + 1 × (pCO2 − 40)/10\nHCO3 rises ~1 mEq/L for each 10 mmHg rise in pCO2\n\n**Rule 2 — Chronic Respiratory Acidosis (> 3-5 days):**\nExpected HCO3 = 24 + 3.5 × (pCO2 − 40)/10\nHCO3 rises ~3.5 mEq/L for each 10 mmHg rise in pCO2',
+            body: '**Rule 1 — Acute Respiratory Acidosis:**\nExpected HCO3 = 24 + 1 × (pCO2 − 40)/10\nHCO3 rises ~1 mEq/L for each 10 mmHg rise in pCO2\n[Calculate Rule 1](#/calculator/comp-rule-1)\n\n**Rule 2 — Chronic Respiratory Acidosis (> 3-5 days):**\nExpected HCO3 = 24 + 3.5 × (pCO2 − 40)/10\nHCO3 rises ~3.5 mEq/L for each 10 mmHg rise in pCO2\n[Calculate Rule 2](#/calculator/comp-rule-2)',
         },
         {
             heading: 'Respiratory Alkalosis',
-            body: '**Rule 3 — Acute Respiratory Alkalosis:**\nExpected HCO3 = 24 − 2 × (40 − pCO2)/10\nHCO3 drops ~2 mEq/L for each 10 mmHg drop in pCO2\n\n**Rule 4 — Chronic Respiratory Alkalosis (> 3-5 days):**\nExpected HCO3 = 24 − 5 × (40 − pCO2)/10\nHCO3 drops ~5 mEq/L for each 10 mmHg drop in pCO2',
+            body: '**Rule 3 — Acute Respiratory Alkalosis:**\nExpected HCO3 = 24 − 2 × (40 − pCO2)/10\nHCO3 drops ~2 mEq/L for each 10 mmHg drop in pCO2\n[Calculate Rule 3](#/calculator/comp-rule-3)\n\n**Rule 4 — Chronic Respiratory Alkalosis (> 3-5 days):**\nExpected HCO3 = 24 − 5 × (40 − pCO2)/10\nHCO3 drops ~5 mEq/L for each 10 mmHg drop in pCO2\n[Calculate Rule 4](#/calculator/comp-rule-4)',
         },
         {
             heading: 'Metabolic Acidosis',
-            body: "**Rule 5 — Winter's Formula:**\nExpected pCO2 = 1.5 × [HCO3] + 8 ± 2\n\nVentilatory compensation begins within minutes but takes up to 24 hours for maximal effect. A more robust response is observed in acidemia than in alkalemia.",
+            body: "**Rule 5 — Winter's Formula:**\nExpected pCO2 = 1.5 × [HCO3] + 8 ± 2\n\nVentilatory compensation begins within minutes but takes up to 24 hours for maximal effect. A more robust response is observed in acidemia than in alkalemia.\n[Calculate Rule 5](#/calculator/comp-rule-5)",
         },
         {
             heading: 'Metabolic Alkalosis',
-            body: '**Rule 6 — Metabolic Alkalosis:**\nExpected pCO2 = 40 + 0.7 × (HCO3 − 24)\npCO2 rises ~0.7 mmHg per 1 mEq/L increase in HCO3\nMaximum compensatory pCO2 is approximately 55 mmHg',
+            body: '**Rule 6 — Metabolic Alkalosis:**\nExpected pCO2 = 40 + 0.7 × (HCO3 − 24)\npCO2 rises ~0.7 mmHg per 1 mEq/L increase in HCO3\nMaximum compensatory pCO2 is approximately 55 mmHg\n[Calculate Rule 6](#/calculator/comp-rule-6)',
         },
         {
             heading: 'Base Excess Compensation Rules',

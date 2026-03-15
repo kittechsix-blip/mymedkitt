@@ -160,6 +160,8 @@ const TOOLBAR_CONFIGS = {
         { id: 'delta-gap', label: 'Delta', icon: '\u0394', action: 'calculator', target: 'delta-gap' },
         { id: 'winters', label: "Winter's", icon: '\uD83C\uDF21\uFE0F', action: 'calculator', target: 'winters-formula' },
         { id: 'stewart', label: 'Stewart', icon: '\u2696\uFE0F', action: 'calculator', target: 'stewart-sig' },
+        { id: 'osm-gap', label: 'Osm Gap', icon: '\uD83E\uDDF4', action: 'calculator', target: 'osmolar-gap' },
+        { id: 'comp-rules', label: 'Rules', icon: '\uD83D\uDCCF', action: 'overlay', target: 'ab-compensation' },
     ],
 };
 /** Get the toolbar config for a consult, or an empty default */
