@@ -18,9 +18,6 @@ let jumpNodeListenerRegistered = false;
 let searchOpen = false;
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container, treeId) {
-    // Show loading skeleton while fetching
-    renderLoadingSkeleton(container);
-
     const config = await getTreeConfig(treeId);
     if (!config) {
         renderUnavailable(container, treeId);
@@ -44,6 +41,15 @@ export async function renderConsultFlow(container, treeId) {
             if (controller && delegatedContainer) {
                 controller.jumpToNode(e.detail);
                 renderFlow(delegatedContainer);
+                // Scroll to the active card after jump
+                requestAnimationFrame(() => {
+                    if (!delegatedContainer)
+                        return;
+                    const activeCard = delegatedContainer.querySelector('.decision-card--active');
+                    if (activeCard) {
+                        activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
             }
         }));
     }
@@ -333,38 +339,24 @@ function renderFlowHeader(container, categoryId) {
     const header = document.createElement('div');
     header.className = 'consult-flow-header';
     header.style.background = getSpecialtyGradient(categoryId);
-
-    // Exit button (X) — always exits consult
-    const exitBtn = document.createElement('button');
-    exitBtn.className = 'consult-flow-header__exit';
-    exitBtn.textContent = '\u2715';
-    exitBtn.setAttribute('aria-label', 'Exit consult');
-    exitBtn.addEventListener('click', () => {
-        if (navigator.vibrate) navigator.vibrate(10);
-        if (controller) controller.fullReset();
-        removeContextualToolbar();
-        const sourceCategory = sessionStorage.getItem('medkitt-source-category') || categoryId;
-        router.navigate(sourceCategory ? `/category/${sourceCategory}` : '/');
-    });
-
-    // Back button — go back one step
+    // Back button — scroll up or exit
     const backBtn = document.createElement('button');
     backBtn.className = 'consult-flow-header__back';
     backBtn.textContent = '\u2190';
-    backBtn.setAttribute('aria-label', 'Back one step');
+    backBtn.setAttribute('aria-label', 'Back');
     backBtn.addEventListener('click', () => {
         if (controller?.canGoBack()) {
-            if (navigator.vibrate) navigator.vibrate(10);
             controller.goBack();
             renderFlow(container);
         }
+        else {
+            if (controller)
+                controller.fullReset();
+            removeContextualToolbar();
+            const sourceCategory = sessionStorage.getItem('medkitt-source-category') || categoryId;
+            router.navigate(sourceCategory ? `/category/${sourceCategory}` : '/');
+        }
     });
-    // Disable if can't go back
-    if (!controller?.canGoBack()) {
-        backBtn.disabled = true;
-        backBtn.style.opacity = '0.4';
-    }
-
     // Reset button
     const resetBtn = document.createElement('button');
     resetBtn.className = 'consult-flow-header__reset';
@@ -372,7 +364,6 @@ function renderFlowHeader(container, categoryId) {
     resetBtn.setAttribute('aria-label', 'Reset to start');
     resetBtn.addEventListener('click', () => {
         if (controller && currentEntryNodeId) {
-            if (navigator.vibrate) navigator.vibrate(10);
             controller.reset(currentEntryNodeId);
             renderFlow(container);
         }
@@ -407,43 +398,23 @@ function renderFlowHeader(container, categoryId) {
             }).catch(() => { });
         }
     });
-    // Append header buttons: Exit | Back | Title | Share
-    header.appendChild(exitBtn);
+    // Home button
+    const homeBtn = document.createElement('button');
+    homeBtn.className = 'consult-flow-header__home';
+    homeBtn.textContent = '\uD83C\uDFE0';
+    homeBtn.setAttribute('aria-label', 'Home');
+    homeBtn.addEventListener('click', () => {
+        if (controller)
+            controller.fullReset();
+        removeContextualToolbar();
+        router.navigate('/');
+    });
     header.appendChild(backBtn);
     header.appendChild(resetBtn);
     header.appendChild(title);
     header.appendChild(shareBtn);
+    header.appendChild(homeBtn);
     container.appendChild(header);
-
-    // Breadcrumb below header
-    const categories = getAllCategories();
-    const cat = categories.find(c => c.decisionTrees.some(t => t.id === currentTreeId));
-    if (cat) {
-        const breadcrumb = document.createElement('div');
-        breadcrumb.className = 'consult-breadcrumb';
-
-        const catLink = document.createElement('button');
-        catLink.className = 'consult-breadcrumb__link';
-        catLink.textContent = cat.name;
-        catLink.addEventListener('click', () => {
-            if (controller) controller.fullReset();
-            removeContextualToolbar();
-            router.navigate(`/category/${cat.id}`);
-        });
-
-        const separator = document.createElement('span');
-        separator.className = 'consult-breadcrumb__sep';
-        separator.textContent = ' › ';
-
-        const current = document.createElement('span');
-        current.className = 'consult-breadcrumb__current';
-        current.textContent = getConsultTitle(currentTreeId ?? '');
-
-        breadcrumb.appendChild(catLink);
-        breadcrumb.appendChild(separator);
-        breadcrumb.appendChild(current);
-        container.appendChild(breadcrumb);
-    }
 }
 /** Find category ID for a tree */
 function findCategoryId(treeId) {
@@ -495,42 +466,4 @@ function renderUnavailable(container, treeId) {
     empty.appendChild(title);
     empty.appendChild(body);
     container.appendChild(empty);
-}
-
-/** Render loading skeleton while consult loads */
-function renderLoadingSkeleton(container) {
-    container.innerHTML = '';
-
-    // Skeleton header
-    const header = document.createElement('div');
-    header.className = 'consult-skeleton-header';
-    container.appendChild(header);
-
-    // Skeleton breadcrumb
-    const breadcrumb = document.createElement('div');
-    breadcrumb.className = 'consult-skeleton-breadcrumb';
-    container.appendChild(breadcrumb);
-
-    // Skeleton card
-    const card = document.createElement('div');
-    card.className = 'consult-skeleton-card';
-
-    const cardTitle = document.createElement('div');
-    cardTitle.className = 'consult-skeleton-card__title';
-    card.appendChild(cardTitle);
-
-    const cardBody = document.createElement('div');
-    cardBody.className = 'consult-skeleton-card__body';
-    card.appendChild(cardBody);
-
-    const cardOptions = document.createElement('div');
-    cardOptions.className = 'consult-skeleton-card__options';
-    for (let i = 0; i < 3; i++) {
-        const opt = document.createElement('div');
-        opt.className = 'consult-skeleton-card__option';
-        cardOptions.appendChild(opt);
-    }
-    card.appendChild(cardOptions);
-
-    container.appendChild(card);
 }

@@ -190,7 +190,7 @@ function toggleDecisionMap(controller, moduleLabels) {
             nodeBtn.appendChild(typeBadge);
             nodeBtn.addEventListener('click', () => {
                 closeDecisionMap();
-                controller.jumpToNode(node.nodeId);
+                // Dispatch event — consult-flow listener handles jumpToNode + renderFlow + scroll
                 window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: node.nodeId }));
             });
             sectionBody.appendChild(nodeBtn);

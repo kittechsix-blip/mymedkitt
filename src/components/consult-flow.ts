@@ -48,6 +48,14 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
       if (controller && delegatedContainer) {
         controller.jumpToNode(e.detail);
         renderFlow(delegatedContainer);
+        // Scroll to the active card after jump
+        requestAnimationFrame(() => {
+          if (!delegatedContainer) return;
+          const activeCard = delegatedContainer.querySelector('.decision-card--active');
+          if (activeCard) {
+            activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
       }
     }) as EventListener);
   }

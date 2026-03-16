@@ -2,10 +2,10 @@
 // Stores Supabase data locally for offline access.
 // Each data type gets its own object store with version tracking.
 const DB_NAME = 'medkitt-cache';
-const DB_VERSION = 5;
+const DB_VERSION = 4;
 // Bump this to force-clear all cached data on next app load.
 // Use when tree structure, drug data, or info pages change.
-const DATA_VERSION = 24;
+const DATA_VERSION = 23;
 const DATA_VERSION_KEY = 'medkitt-data-version';
 let dbPromise = null;
 /** Check if cached data is outdated and wipe if so */
