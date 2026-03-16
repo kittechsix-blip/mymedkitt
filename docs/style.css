@@ -782,56 +782,13 @@ body {
 
 /* Sparkle glint — removed (looked like Gemini logo) */
 
-/* Desktop hover — subtle lift */
-@media (hover: hover) {
-  .dashboard-card:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 12px 28px rgba(0,0,0,0.38),
-      0 5px 12px rgba(0,0,0,0.22),
-      inset 0 2px 1px rgba(255,255,255,0.35),
-      inset 0 -3px 6px rgba(0,0,0,0.30);
-  }
-}
-
-/* Touch/click — press down with bounce back */
 .dashboard-card:active {
-  transform: translateY(2px) scale(0.97);
+  transform: translateY(2px) scale(0.98);
   box-shadow:
     0 2px 6px rgba(0,0,0,0.2),
     0 1px 3px rgba(0,0,0,0.1),
     inset 0 1px 0 rgba(255,255,255,0.15),
     inset 0 -1px 2px rgba(0,0,0,0.15);
-  transition: all 0.05s ease;
-}
-
-/* Staggered fade-in on load */
-.dashboard-card {
-  animation: cardFadeIn 0.4s ease backwards;
-}
-
-.dashboard-grid .dashboard-card:nth-child(1) { animation-delay: 0.05s; }
-.dashboard-grid .dashboard-card:nth-child(2) { animation-delay: 0.08s; }
-.dashboard-grid .dashboard-card:nth-child(3) { animation-delay: 0.11s; }
-.dashboard-grid .dashboard-card:nth-child(4) { animation-delay: 0.14s; }
-.dashboard-grid .dashboard-card:nth-child(5) { animation-delay: 0.17s; }
-.dashboard-grid .dashboard-card:nth-child(6) { animation-delay: 0.20s; }
-.dashboard-grid .dashboard-card:nth-child(7) { animation-delay: 0.23s; }
-.dashboard-grid .dashboard-card:nth-child(8) { animation-delay: 0.26s; }
-.dashboard-grid .dashboard-card:nth-child(9) { animation-delay: 0.29s; }
-.dashboard-grid .dashboard-card:nth-child(10) { animation-delay: 0.32s; }
-.dashboard-grid .dashboard-card:nth-child(11) { animation-delay: 0.35s; }
-.dashboard-grid .dashboard-card:nth-child(12) { animation-delay: 0.38s; }
-
-@keyframes cardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .dashboard-card__name {
@@ -1047,6 +1004,133 @@ body {
   color: #FFFFFF;
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Exit button (X) */
+.consult-flow-header__exit {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(239,68,68,0.25);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.consult-flow-header__exit:active {
+  background: rgba(239,68,68,0.5);
+  transform: scale(0.95);
+}
+
+/* Breadcrumb navigation */
+.consult-breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--color-surface);
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.consult-breadcrumb__link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.consult-breadcrumb__link:active {
+  opacity: 0.7;
+}
+
+.consult-breadcrumb__sep {
+  color: var(--color-text-muted);
+  margin: 0 4px;
+}
+
+.consult-breadcrumb__current {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Loading skeleton */
+.consult-skeleton-header {
+  height: 60px;
+  background: linear-gradient(90deg, var(--color-surface-elevated) 25%, var(--color-surface) 50%, var(--color-surface-elevated) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+.consult-skeleton-breadcrumb {
+  height: 36px;
+  margin: 12px 16px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  animation: skeleton-shimmer 1.5s infinite;
+  background-size: 200% 100%;
+}
+
+.consult-skeleton-card {
+  margin: 0 16px;
+  padding: 20px;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.consult-skeleton-card__title {
+  height: 24px;
+  width: 60%;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  animation: skeleton-shimmer 1.5s infinite;
+  background-size: 200% 100%;
+}
+
+.consult-skeleton-card__body {
+  height: 60px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+  animation: skeleton-shimmer 1.5s infinite;
+  background-size: 200% 100%;
+}
+
+.consult-skeleton-card__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.consult-skeleton-card__option {
+  height: 44px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-md);
+  animation: skeleton-shimmer 1.5s infinite;
+  background-size: 200% 100%;
+}
+
+.consult-skeleton-card__option:nth-child(1) { animation-delay: 0s; }
+.consult-skeleton-card__option:nth-child(2) { animation-delay: 0.15s; }
+.consult-skeleton-card__option:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* ===================================================================
@@ -2258,49 +2342,6 @@ body {
   font-size: 13px;
   color: var(--color-text-secondary);
   margin-top: 8px;
-}
-
-/* ---- Critical Value Alert ---- */
-
-.calculator-critical-alert {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
-  border: 1px solid var(--color-danger);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  animation: critical-pulse 2s ease-in-out infinite;
-}
-
-@keyframes critical-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
-  50% { box-shadow: 0 0 16px 2px rgba(239, 68, 68, 0.2); }
-}
-
-.critical-alert-icon {
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-
-.critical-alert-text {
-  flex: 1;
-}
-
-.critical-alert-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-danger);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.critical-alert-desc {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  margin-top: 2px;
 }
 
 /* ---- Calculator Form — Field Cards ---- */

@@ -2722,12 +2722,6 @@ function updateScore(calc, values, display) {
     if (calc.computeResult) {
         const result = calc.computeResult(values);
         display.innerHTML = '';
-
-        // Critical value alert for formula-based calculators
-        if (result.colorVar === '--color-danger') {
-            renderCriticalAlert(display, calc, result);
-        }
-
         const scoreNum = document.createElement('div');
         scoreNum.className = 'calculator-score-number';
         scoreNum.textContent = result.value;
@@ -2763,12 +2757,6 @@ function updateScore(calc, values, display) {
     }
     // Render score display
     display.innerHTML = '';
-
-    // Critical value alert for standard calculators
-    if (result && result.colorVar === '--color-danger') {
-        renderCriticalAlert(display, calc, result);
-    }
-
     const scoreNum = document.createElement('div');
     scoreNum.className = 'calculator-score-number';
     scoreNum.textContent = String(score);
@@ -2792,33 +2780,6 @@ function updateScore(calc, values, display) {
         mortality.textContent = result.mortality;
         display.appendChild(mortality);
     }
-}
-
-/** Render critical value alert banner */
-function renderCriticalAlert(container, calc, result) {
-    const alert = document.createElement('div');
-    alert.className = 'calculator-critical-alert';
-
-    const icon = document.createElement('span');
-    icon.className = 'critical-alert-icon';
-    icon.textContent = '⚠️';
-    alert.appendChild(icon);
-
-    const text = document.createElement('div');
-    text.className = 'critical-alert-text';
-
-    const title = document.createElement('div');
-    title.className = 'critical-alert-title';
-    title.textContent = 'Critical Value';
-    text.appendChild(title);
-
-    const desc = document.createElement('div');
-    desc.className = 'critical-alert-desc';
-    desc.textContent = result.risk || result.label;
-    text.appendChild(desc);
-
-    alert.appendChild(text);
-    container.appendChild(alert);
 }
 // -------------------------------------------------------------------
 // Not Found

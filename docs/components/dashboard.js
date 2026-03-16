@@ -112,8 +112,6 @@ export function renderDashboard(container) {
         btn.style.background = getSpecialtyGradient(cat.id);
         btn.setAttribute('aria-label', `${cat.name} \u2014 ${cat.decisionTrees.length} consults`);
         btn.addEventListener('click', () => {
-            // Haptic feedback on mobile
-            if (navigator.vibrate) navigator.vibrate(10);
             router.navigate(`/category/${cat.id}`);
         });
         // Category name
