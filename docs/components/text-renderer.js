@@ -89,13 +89,9 @@ function renderLineWithLinksAndCitations(container, line) {
         }
         lastIndex = match.index + match[0].length;
     }
-    // Remaining text
+    // Remaining text (or entire line if no matches)
     if (lastIndex < line.length) {
         appendBoldAware(container, line.slice(lastIndex));
-    }
-    // If no matches, render with bold support
-    if (!hasMatch) {
-        appendBoldAware(container, line);
     }
 }
 /** Scroll to a citation in the nearest card's inline citations panel. */

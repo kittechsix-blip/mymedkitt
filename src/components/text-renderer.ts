@@ -93,14 +93,9 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
     lastIndex = match.index + match[0].length;
   }
 
-  // Remaining text
+  // Remaining text (or entire line if no matches)
   if (lastIndex < line.length) {
     appendBoldAware(container, line.slice(lastIndex));
-  }
-
-  // If no matches, render with bold support
-  if (!hasMatch) {
-    appendBoldAware(container, line);
   }
 }
 
