@@ -994,7 +994,7 @@ const DEXAMETHASONE: DrugEntry = {
   genericName: 'Dexamethasone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO/IM/IV',
-  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema'],
+  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)'],
   dosing: [
     {
       indication: 'Croup',
@@ -1014,6 +1014,14 @@ const DEXAMETHASONE: DrugEntry = {
       indication: 'Bacterial Meningitis (adjunctive)',
       regimen: '0.15 mg/kg IV q6h × 2-4 days. Give WITH or up to 15-20 min BEFORE first antibiotic dose. Reduces mortality in pneumococcal meningitis (Cochrane 2015). STOP if Listeria or Cryptococcus identified — worsened outcomes.',
       weightCalc: { dosePerKg: 0.15, unit: 'mg', dailyDivided: 4 },
+    },
+    {
+      indication: 'Adrenal crisis (alternative)',
+      regimen: '4 mg IV every 24 hours. Use when hydrocortisone is unavailable OR when cosyntropin stimulation test is planned — dexamethasone does NOT cross-react with cortisol assays, allowing meaningful cortisol measurement during treatment. Zero mineralocorticoid activity — add fludrocortisone for primary AI once on maintenance.',
+    },
+    {
+      indication: 'Adrenal maintenance (alternative)',
+      regimen: '0.25-0.5 mg PO once daily. Long half-life (~36 hours) allows once-daily dosing. No mineralocorticoid activity — must add fludrocortisone for primary AI. Higher growth suppression risk in children compared to hydrocortisone.',
     },
   ],
   contraindications: [
@@ -1805,11 +1813,20 @@ const FLUDROCORTISONE: DrugEntry = {
   genericName: 'Fludrocortisone acetate',
   drugClass: 'Mineralocorticoid',
   route: 'PO',
-  indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension'],
+  indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension', 'Adrenal insufficiency maintenance (PAI only)', 'Pediatric AI maintenance'],
   dosing: [
     {
       indication: 'Hyperkalemia adjunct',
       regimen: '0.2 mg PO once. Especially useful in patients on ACEi/ARB, tacrolimus, or with suspected type IV RTA.',
+    },
+    {
+      indication: 'Adrenal insufficiency maintenance (PAI only)',
+      regimen: '50-200 μg (0.05-0.2 mg) PO once daily. For PRIMARY adrenal insufficiency only — NOT needed in secondary or tertiary AI (renin-angiotensin-aldosterone axis intact). Starting dose: 50-100 μg. Titrate based on plasma renin activity (target normal range), blood pressure, and serum potassium.',
+    },
+    {
+      indication: 'Pediatric AI maintenance',
+      regimen: '50-200 μg PO daily. Higher doses may be needed in infants with salt-wasting congenital adrenal hyperplasia. Salt supplementation 1-2 g/day may be needed in infants. Monitor blood pressure, serum potassium, and plasma renin activity.',
+      weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 0.2, label: 'Starting dose — titrate to renin' },
     },
   ],
   contraindications: [
@@ -2073,6 +2090,35 @@ const MEDROXYPROGESTERONE: DrugEntry = {
   citations: [
     'ACOG Committee Opinion No. 557. Management of Acute AUB in Nonpregnant Reproductive-Aged Women. Obstet Gynecol. 2013;121(4):891-896.',
     'Munro MG, et al. Oral MPA and combination OCPs for acute uterine bleeding: RCT. Obstet Gynecol. 2006;108:924-929.',
+  ],
+};
+
+const METHYLPREDNISOLONE: DrugEntry = {
+  id: 'methylprednisolone',
+  name: 'Methylprednisolone (Solu-Medrol)',
+  genericName: 'Methylprednisolone sodium succinate',
+  drugClass: 'Corticosteroid (glucocorticoid)',
+  route: 'IV / PO',
+  indications: ['Adrenal crisis (alternative to hydrocortisone)'],
+  dosing: [
+    {
+      indication: 'Adrenal crisis (alternative)',
+      regimen: '40 mg IV every 24 hours. Use ONLY when hydrocortisone is unavailable. Minimal mineralocorticoid activity — consider adding fludrocortisone once transitioned to maintenance doses in patients with primary adrenal insufficiency.',
+    },
+  ],
+  contraindications: [
+    'Systemic fungal infections (relative — do NOT withhold in adrenal crisis)',
+  ],
+  cautions: [
+    'Minimal mineralocorticoid activity — inferior to hydrocortisone for adrenal crisis where both glucocorticoid and mineralocorticoid replacement are needed',
+    'Hyperglycemia',
+    'Immunosuppression with prolonged use',
+  ],
+  monitoring: 'Blood glucose, electrolytes (Na, K), blood pressure, fluid status.',
+  notes: 'Second-line alternative for adrenal crisis when hydrocortisone is unavailable. Glucocorticoid potency is ~5× hydrocortisone (4 mg methylprednisolone = 20 mg hydrocortisone), but has minimal mineralocorticoid effect. Preferred over dexamethasone when some mineralocorticoid activity is desired.',
+  citations: [
+    'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
+    'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
   ],
 };
 
@@ -2623,7 +2669,7 @@ const PREDNISOLONE: DrugEntry = {
   genericName: 'Prednisolone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO',
-  indications: ['Croup (alternative to dexamethasone)', 'Asthma exacerbation', 'Inflammatory conditions'],
+  indications: ['Croup (alternative to dexamethasone)', 'Asthma exacerbation', 'Inflammatory conditions', 'Adrenal maintenance (alternative)'],
   dosing: [
     {
       indication: 'Croup',
@@ -2634,6 +2680,10 @@ const PREDNISOLONE: DrugEntry = {
       indication: 'Asthma exacerbation',
       regimen: '1-2 mg/kg/day PO (max 60 mg) for 3-5 days.',
       weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 60 },
+    },
+    {
+      indication: 'Adrenal maintenance (alternative)',
+      regimen: '3-5 mg PO once daily. Alternative to hydrocortisone for adrenal insufficiency maintenance. Advantage: once-daily dosing improves adherence. Available as liquid formulation for children. No mineralocorticoid activity — must add fludrocortisone for primary AI.',
     },
   ],
   contraindications: [
@@ -3538,6 +3588,59 @@ const HYDROXOCOBALAMIN: DrugEntry = {
   citations: [
     'Lavonas EJ et al. AHA Focused Update on Management of Patients with Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning. Circulation. 2023;148(16):e149-e184.',
     'Baud FJ et al. Elevated Blood Cyanide Concentrations in Victims of Smoke Inhalation. NEJM. 1991;325(25):1761-6.',
+  ],
+};
+
+const HYDROCORTISONE: DrugEntry = {
+  id: 'hydrocortisone',
+  name: 'Hydrocortisone (Solu-Cortef)',
+  genericName: 'Hydrocortisone sodium succinate',
+  drugClass: 'Corticosteroid (glucocorticoid + mineralocorticoid)',
+  route: 'IV / IM / PO',
+  indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection'],
+  dosing: [
+    {
+      indication: 'Adrenal crisis (adult)',
+      regimen: '100 mg IV or IM bolus immediately. Then 200 mg/24h as continuous infusion (preferred) or 50 mg IV every 6 hours. Taper to oral maintenance over 1-3 days as hemodynamics stabilize. At doses ≥50 mg/day, fludrocortisone is NOT needed.',
+    },
+    {
+      indication: 'Stress dose (moderate illness/surgery)',
+      regimen: '50 mg IV or PO every 8 hours for the duration of physiologic stress. Taper to maintenance dose over 2-3 days after resolution. For major surgery: 100 mg IV preop, then 200 mg/24h, taper as above.',
+    },
+    {
+      indication: 'Maintenance (adult)',
+      regimen: '15-25 mg PO daily, divided BID or TID. Give 2/3 dose upon waking, 1/3 in early afternoon (last dose >6 hours before bedtime). Typical regimen: 15 mg AM + 5 mg at 2 PM. Use lowest effective dose to avoid Cushingoid features.',
+    },
+    {
+      indication: 'Pediatric adrenal crisis',
+      regimen: '50 mg/m² IV bolus (max 100 mg). Then 50-100 mg/m²/day as continuous infusion or divided every 6-8 hours. Requires BSA calculation — use BSA Calculator. Weight-based approximation: ~2 mg/kg IV bolus.',
+      weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 100, label: 'Approximation (~50 mg/m²)' },
+    },
+    {
+      indication: 'Pediatric maintenance',
+      regimen: '6-10 mg/m²/day PO divided TID. Monitor growth velocity — overtreatment suppresses linear growth. Use BSA Calculator for precise dosing.',
+    },
+    {
+      indication: 'Emergency IM self-injection',
+      regimen: '100 mg IM into lateral thigh. For patients unable to take oral steroids due to vomiting or altered mental status. Must present to ED immediately after injection for evaluation and IV steroids.',
+    },
+  ],
+  contraindications: [
+    'Systemic fungal infections (relative — do NOT withhold in adrenal crisis)',
+  ],
+  cautions: [
+    'Hyperglycemia with stress dosing — monitor glucose frequently',
+    'Sodium retention and fluid overload at high doses',
+    'At doses ≥50 mg/day, provides sufficient mineralocorticoid effect — fludrocortisone not needed',
+    'Immunosuppression with prolonged supraphysiologic dosing',
+    'Adrenal suppression if used chronically at supraphysiologic doses — taper slowly',
+  ],
+  monitoring: 'Blood glucose (especially during stress dosing). Electrolytes (Na, K). Blood pressure. Growth velocity in children. Plasma renin activity for fludrocortisone titration.',
+  notes: 'First-line corticosteroid for adrenal crisis and maintenance replacement. Preferred because it is structurally identical to endogenous cortisol, provides both glucocorticoid AND mineralocorticoid activity, and has a short half-life (~90 minutes) allowing physiologic diurnal dosing. Cortisol half-life of 90 minutes means systemic effects of deficiency may develop within hours. Continuous infusion may provide more stable cortisol levels than intermittent boluses.',
+  citations: [
+    'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.',
+    'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
+    'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.',
   ],
 };
 
@@ -4915,6 +5018,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   FUROSEMIDE,
   GENTAMICIN,
   HALOPERIDOL,
+  HYDROCORTISONE,
   HYPERTONIC_SALINE,
   HYDROXOCOBALAMIN,
   IDARUCIZUMAB,
@@ -4930,6 +5034,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MEDROXYPROGESTERONE,
   MEROPENEM,
   METHOTREXATE,
+  METHYLPREDNISOLONE,
   METOCLOPRAMIDE,
   METOLAZONE,
   METRONIDAZOLE,
@@ -5066,6 +5171,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/furosemide|lasix/i, 'furosemide'],
   [/gentamicin|garamycin/i, 'gentamicin'],
   [/hypertonic.*saline|3%.*saline|3%.*nacl/i, 'hypertonic-saline'],
+  [/hydrocortisone|solu-?cortef|cortef/i, 'hydrocortisone'],
   [/hydroxocobalamin|cyanokit/i, 'hydroxocobalamin'],
   [/idarucizumab|praxbind/i, 'idarucizumab'],
   [/ketamine|ketalar/i, 'ketamine'],
@@ -5083,6 +5189,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/metoclopramide|reglan/i, 'metoclopramide'],
   [/metolazone|zaroxolyn/i, 'metolazone'],
   [/metronidazole|flagyl/i, 'metronidazole'],
+  [/methylprednisolone|solu-?medrol|medrol|depo-?medrol/i, 'methylprednisolone'],
   [/metoprolol|lopressor|toprol/i, 'metoprolol'],
   [/midazolam|versed/i, 'midazolam'],
   [/misoprostol|cytotec/i, 'misoprostol'],

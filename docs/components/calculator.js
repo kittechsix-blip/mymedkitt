@@ -2287,6 +2287,63 @@ const COMP_RULE_6_CALCULATOR = {
         return { value: `${low}–${high} mmHg`, label, description: `Expected pCO2 = 40 + 0.7×(${hco3}−24) = ${Math.round((40 + 0.7 * (hco3 - 24)) * 10) / 10}${cappedNote}\nExpected range: ${low}–${high} mmHg\nActual pCO2: ${pco2} mmHg\n\n${interp}`, colorVar };
     },
 };
+const BSA_CALCULATOR = {
+    id: 'bsa',
+    title: 'Body Surface Area (BSA)',
+    subtitle: 'Mosteller Formula',
+    description: 'Calculates body surface area using the Mosteller formula. Used for pediatric hydrocortisone dosing in adrenal insufficiency, chemotherapy dosing, and other BSA-based calculations.',
+    fields: [
+        {
+            name: 'height',
+            label: 'Height',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'cm',
+            description: 'Patient height in centimeters',
+        },
+        {
+            name: 'weight',
+            label: 'Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+            description: 'Patient weight in kilograms',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Pediatric HC dosing: Crisis = 50 mg/m² IV bolus. Maintenance = 6-10 mg/m²/day divided TID. Stress = 50-100 mg/m²/day.',
+    citations: [
+        'Mosteller RD. Simplified Calculation of Body-Surface Area. N Engl J Med. 1987;317(17):1098.',
+        'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
+    ],
+    computeResult: (values) => {
+        const height = values['height'] || 0;
+        const weight = values['weight'] || 0;
+        if (height <= 0 || weight <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter height (cm) and weight (kg) to calculate BSA.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const bsa = Math.sqrt((height * weight) / 3600);
+        const bsaRounded = Math.round(bsa * 100) / 100;
+        const crisisDose = Math.round(bsaRounded * 50);
+        const maintLow = Math.round(bsaRounded * 6);
+        const maintHigh = Math.round(bsaRounded * 10);
+        const stressLow = Math.round(bsaRounded * 50);
+        const stressHigh = Math.round(bsaRounded * 100);
+        return {
+            value: bsaRounded + ' m\u00B2',
+            label: 'Body Surface Area',
+            description: 'BSA = \u221A(' + height + ' \u00D7 ' + weight + ' / 3600) = ' + bsaRounded + ' m\u00B2\n\nHydrocortisone Dosing:\n\u2022 Crisis: 50 mg/m\u00B2 = ' + crisisDose + ' mg IV bolus\n\u2022 Maintenance: 6-10 mg/m\u00B2/day = ' + maintLow + '-' + maintHigh + ' mg/day divided TID\n\u2022 Stress dose: 50-100 mg/m\u00B2/day = ' + stressLow + '-' + stressHigh + ' mg/day',
+            colorVar: '--color-primary',
+        };
+    },
+};
 // -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
@@ -2325,6 +2382,7 @@ const CALCULATORS = {
     'comp-rule-4': COMP_RULE_4_CALCULATOR,
     'comp-rule-5': COMP_RULE_5_CALCULATOR,
     'comp-rule-6': COMP_RULE_6_CALCULATOR,
+    'bsa': BSA_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

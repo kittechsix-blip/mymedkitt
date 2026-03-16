@@ -319,6 +319,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 34,
                 entryNodeId: 'ab-start',
+            },
+            {
+                id: 'adrenal-insufficiency',
+                title: 'Adrenal Insufficiency',
+                subtitle: 'Crisis Recognition \u2192 Treatment \u2192 Classification \u2192 Maintenance \u2192 Disposition',
+                categoryId: 'nephro-rheum-endo',
+                version: '1.0',
+                nodeCount: 27,
+                entryNodeId: 'ai-start',
             }
         ],
         isCustom: false,

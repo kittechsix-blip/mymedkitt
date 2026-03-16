@@ -5222,6 +5222,199 @@ const DEL_CAM_GUIDE: InfoPage = {
   ],
 };
 
+const AI_SUMMARY: InfoPage = {
+  id: 'ai-summary',
+  title: 'Adrenal Insufficiency Steps Summary',
+  subtitle: 'Stepwise management of adrenal crisis and chronic AI',
+  sections: [
+    {
+      heading: '1. Crisis Recognition & Resuscitation',
+      body: '• [Assess clinical presentation](#/node/ai-start)\n• [Confirm crisis features — SBP ≤100 or ≥20 below baseline](#/node/ai-crisis-confirm)\n• [Immediate IV fluids — 1L NS (peds: 20 mL/kg)](#/node/ai-crisis-fluids)\n• [Emergency steroids — Hydrocortisone 100 mg IV](#/node/ai-crisis-steroid)',
+    },
+    {
+      heading: '2. Crisis Treatment',
+      body: '• [Ongoing management — HC 200 mg/24h](#/node/ai-crisis-ongoing)\n• [Response assessment at 1-2 hours](#/node/ai-crisis-response)\n• [Identify and treat precipitant](#/node/ai-precipitant-workup)\n• [Refractory shock — broaden differential](#/node/ai-crisis-refractory)',
+    },
+    {
+      heading: '3. Type Classification',
+      body: '• [PAI vs SAI vs TAI](#/node/ai-type-classify)\n• [Primary AI — Addison\'s disease](#/node/ai-pai-workup)\n• [Secondary AI — pituitary](#/node/ai-sai-workup)\n• [Tertiary AI — steroid-induced](#/node/ai-tai-workup)',
+    },
+    {
+      heading: '4. Diagnostic Workup',
+      body: '• [Morning cortisol + ACTH](#/node/ai-diagnostic-labs)\n• [Cosyntropin stimulation test](#/node/ai-cosyntropin)',
+    },
+    {
+      heading: '5. Maintenance & Stress Dosing',
+      body: '• [Maintenance therapy — HC 15-25 mg PO daily](#/node/ai-maintenance)\n• [Sick-day rules — double/triple dose](#/node/ai-stress-dose)\n• [Medication-related triggers](#/node/ai-med-related)\n• [Crisis prevention & patient education](#/node/ai-prevention)',
+    },
+    {
+      heading: '6. Disposition',
+      body: '• [ICU — active crisis / hemodynamic instability](#/node/ai-dispo-icu)\n• [Floor — acute illness / new diagnosis](#/node/ai-dispo-admit)\n• [Discharge — stable with follow-up](#/node/ai-dispo-discharge)',
+    },
+  ],
+  citations: [],
+};
+
+const AI_PRECIPITANTS: InfoPage = {
+  id: 'ai-precipitants',
+  title: 'Precipitating Factors & Differential Diagnosis',
+  subtitle: 'Common triggers for adrenal crisis and diagnostic mimics',
+  sections: [
+    {
+      heading: 'Crisis Precipitants',
+      body: '**Infection** — #1 trigger overall (viral in children, bacterial in adults) [1]\n**GI illness** — vomiting prevents oral steroid absorption\n**Surgery / trauma** — inadequate stress dosing perioperatively\n**Steroid withdrawal** — abrupt cessation of chronic glucocorticoids\n**CYP3A4 inducers** — rifampin, phenytoin, carbamazepine, phenobarbital accelerate cortisol metabolism\n**Adrenal hemorrhage** — anticoagulation, meningococcemia (Waterhouse-Friderichsen), antiphospholipid syndrome\n**Emotional stress** — significant psychological stressors\n**Temperature extremes** — heat or cold exposure\n**No identifiable trigger** — ~10% of cases [2]',
+    },
+    {
+      heading: 'Differential Diagnosis',
+      body: '**Shock** — septic, hypovolemic, cardiogenic, obstructive\n**Endocrine emergencies** — thyroid storm, myxedema coma, DKA, HHS\n**GI** — acute abdomen, gastroenteritis, dehydration\n**Cardiac** — acute MI, Takotsubo cardiomyopathy\n**Other** — anorexia nervosa, TCA overdose (can mimic adrenal crisis)',
+    },
+    {
+      heading: 'Clinical Clues Favoring Adrenal Crisis',
+      body: '• Shock refractory to fluids AND vasopressors\n• Hyperpigmentation (palmar creases, buccal mucosa)\n• Hyponatremia + hyperkalemia (PAI)\n• Hypoglycemia without diabetes or insulin use\n• Known chronic steroid use with missed doses\n• History of autoimmune disease\n• Rapid improvement after parenteral hydrocortisone (1-2 hours)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.' },
+    { num: 2, text: 'Hahner S, et al. High Incidence of Adrenal Crisis in Educated Patients. JCEM. 2015;100(2):407-416.' },
+    { num: 3, text: 'Lentz S, et al. Diagnosis and Management of Adrenal Insufficiency in the ED. J Emerg Med. 2022;63(2):212-220.' },
+  ],
+};
+
+const AI_LAB_FINDINGS: InfoPage = {
+  id: 'ai-lab-findings',
+  title: 'Lab Findings by AI Type',
+  subtitle: 'Distinguishing primary, secondary, and tertiary adrenal insufficiency',
+  sections: [
+    {
+      heading: 'Laboratory Comparison',
+      body: '',
+      drugTable: [
+        { drug: 'Cortisol', regimen: 'LOW in all types. AM cortisol <3 μg/dL virtually confirms AI. >15 μg/dL makes AI unlikely. 3-15 μg/dL requires stimulation test.' },
+        { drug: 'ACTH', regimen: 'PAI: HIGH (>2× upper limit — compensatory). SAI/TAI: LOW or normal (pituitary/hypothalamic failure).' },
+        { drug: 'Sodium', regimen: 'LOW in all types (84% of crisis patients). PAI: aldosterone deficiency + cortisol-related ADH excess. SAI/TAI: cortisol-related ADH excess only.' },
+        { drug: 'Potassium', regimen: 'PAI: HIGH (aldosterone deficiency — unique to PAI). SAI/TAI: NORMAL (aldosterone preserved).' },
+        { drug: 'Aldosterone', regimen: 'PAI: LOW (adrenal destruction). SAI/TAI: NORMAL (RAAS intact).' },
+        { drug: 'Renin', regimen: 'PAI: HIGH (compensatory for low aldosterone). SAI/TAI: NORMAL.' },
+        { drug: 'Glucose', regimen: 'LOW in all types. Worse in SAI (combined GH + cortisol deficiency). Especially common in children.' },
+        { drug: 'Calcium', regimen: 'May be ELEVATED in PAI (decreased cortisol-mediated suppression of intestinal absorption, hypovolemia).' },
+        { drug: 'CBC', regimen: 'Normocytic anemia, lymphocytosis, eosinophilia (loss of cortisol-mediated eosinophil suppression).' },
+        { drug: 'TSH', regimen: 'May be elevated — either from loss of cortisol suppression of TSH, or concomitant autoimmune hypothyroidism (polyglandular syndrome).' },
+      ],
+    },
+    {
+      heading: 'Key Distinguishing Features',
+      body: '**Only in PAI:** Hyperkalemia, hyperpigmentation, elevated ACTH, elevated renin, low aldosterone\n**Only in SAI:** Other pituitary deficits (TSH, LH/FSH, GH, prolactin abnormalities), visual field defects\n**Suggests TAI:** History of chronic exogenous steroid use (oral, inhaled, topical, intra-articular, opioids)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bornstein SR, et al. Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.' },
+    { num: 2, text: 'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.' },
+  ],
+};
+
+const AI_SICK_DAY_RULES: InfoPage = {
+  id: 'ai-sick-day-rules',
+  title: 'Sick-Day Rules for Adrenal Insufficiency',
+  subtitle: 'When and how to increase your steroid dose',
+  shareable: true,
+  sections: [
+    {
+      heading: 'When to Increase Your Steroid Dose',
+      body: 'Your body needs MORE cortisol when you are sick, injured, or under stress. You must increase your steroid dose to prevent a dangerous drop in cortisol called an adrenal crisis.',
+    },
+    {
+      heading: 'Minor Illness (Cold, Mild Stomach Bug)',
+      body: '• Fever over 100.4°F (38°C): DOUBLE your daily dose\n• Fever over 102.2°F (39°C): TRIPLE your daily dose\n• Continue the increased dose for 2-3 days until you feel better\n• Then return to your normal dose',
+    },
+    {
+      heading: 'Moderate Illness or Injury',
+      body: '• TRIPLE your daily dose or take hydrocortisone 50 mg by mouth twice a day\n• Seek medical attention\n• Continue increased dose until illness resolves, then taper back to normal over 2-3 days',
+    },
+    {
+      heading: 'Unable to Keep Medicine Down (Vomiting)',
+      body: '• If you vomit within 30 minutes of taking your steroid pill, you need your EMERGENCY INJECTION\n• Give yourself hydrocortisone 100 mg into your outer thigh muscle (IM injection)\n• GO TO THE EMERGENCY ROOM IMMEDIATELY after the injection\n• You will need IV steroids and fluids',
+    },
+    {
+      heading: 'Surgery or Major Procedure',
+      body: '• Tell your surgeon and anesthesiologist that you have adrenal insufficiency\n• You will need extra steroids before, during, and after the procedure\n• Your endocrinologist or surgeon should provide specific dosing instructions',
+    },
+    {
+      heading: 'What to Always Carry',
+      body: '• Medical alert bracelet or necklace\n• Steroid emergency card with your diagnosis and medications\n• Emergency hydrocortisone injection kit\n• Written copy of these sick-day rules\n• Extra supply of your oral steroid medication',
+    },
+    {
+      heading: 'When to Go to the Emergency Room',
+      body: '• Vomiting and unable to keep your steroid pills down\n• Fever not improving despite increased steroid dose\n• Dizziness, lightheadedness, or fainting\n• Confusion or difficulty staying awake\n• Severe abdominal pain\n• After using your emergency injection',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bornstein SR, et al. Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.' },
+    { num: 2, text: 'Burger-Stritt S, et al. Standardised Patient Education in Adrenal Insufficiency. Eur J Endocrinol. 2020;183(2):119-127.' },
+  ],
+};
+
+const AI_SPECIAL_POPULATIONS: InfoPage = {
+  id: 'ai-special-populations',
+  title: 'Special Populations in Adrenal Insufficiency',
+  subtitle: 'Pregnancy, pediatric CAH, chronic opioid users, checkpoint inhibitors',
+  sections: [
+    {
+      heading: 'Pregnancy',
+      body: '**Hydrocortisone is the glucocorticoid of choice** — inactivated by placental 11β-HSD2 (minimal fetal exposure). [1]\n\n• Increase HC by 20-40% in third trimester (physiologic cortisol rises in late pregnancy)\n• Morning sickness/hyperemesis may prevent oral absorption — use IM HC if vomiting\n• **Labor/delivery:** Stress-dose HC 100 mg IV at onset of labor, then 50 mg IV q8h until 24-48h postpartum\n• Cesarean section: treat as major surgery\n• Fludrocortisone may need increase (progesterone competes for mineralocorticoid receptor)\n• Interpret cortisol levels with caution — total cortisol rises in pregnancy due to increased cortisol-binding globulin',
+    },
+    {
+      heading: 'Pediatric Congenital Adrenal Hyperplasia (CAH)',
+      body: '**Most common cause of PAI in children** — 21-hydroxylase deficiency (>90% of cases). [2]\n\n• Maintenance: HC 6-10 mg/m²/day divided TID (lowest effective dose)\n• Fludrocortisone 50-200 μg/day for salt-wasting forms\n• Salt supplementation 1-2 g/day in infants\n• Monitor growth velocity — overtreatment suppresses linear growth\n• Newborn screening available in all US states (but can be missed)\n• Stress dosing: 30-50 mg/m²/day for illness, 50-100 mg/m² IV bolus for surgery\n• Parents must be trained in emergency IM injection technique\n• Sick-day rules education at every visit',
+    },
+    {
+      heading: 'Chronic Opioid-Induced AI',
+      body: '**Mechanism:** Opioids suppress hypothalamic CRH release → tertiary AI. [3]\n\n• Prevalence: ~15% of chronic opioid users\n• Higher risk with higher doses (>20 MME/day) and longer duration\n• No patient on <20 morphine milligram equivalents/day developed opioid-induced AI\n• Symptoms overlap with opioid side effects (fatigue, nausea) — easy to miss\n• Screen with AM cortisol in chronic opioid patients with fatigue or hypotension\n• May recover weeks to months after opioid cessation\n• Stress dosing needed until HPA recovery confirmed (AM cortisol >18 μg/dL off replacement)',
+    },
+    {
+      heading: 'Immune Checkpoint Inhibitor-Induced',
+      body: '**Ipilimumab (anti-CTLA-4):** Hypophysitis → secondary AI (highest risk, ~10% incidence). [4]\n**Pembrolizumab/nivolumab (anti-PD-1):** Primary adrenalitis → primary AI (less common).\n**Combined checkpoint therapy:** Highest overall endocrine toxicity risk.\n\n• Usually irreversible — lifelong hormone replacement needed\n• Do NOT hold cancer therapy — manage with hormone replacement and oncology co-management\n• Screen with AM cortisol + ACTH if new fatigue, hypotension, hyponatremia\n• MRI pituitary for suspected hypophysitis\n• Full anterior pituitary panel if SAI confirmed',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Lebbe M, Arlt W. What Is the Best Management Strategy for an Addison Patient During Pregnancy? Clin Endocrinol (Oxf). 2013;78(4):497-502.' },
+    { num: 2, text: 'Bornstein SR, et al. Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.' },
+    { num: 3, text: 'de Vries F, et al. Opioids and Their Endocrine Effects: Systematic Review and Meta-Analysis. JCEM. 2020;105(3):1020-1029.' },
+    { num: 4, text: 'Hahner S, et al. Adrenal Insufficiency. Nat Rev Dis Primers. 2021;7(1):19.' },
+  ],
+};
+
+const AI_STEROID_EQUIVALENCY: InfoPage = {
+  id: 'ai-steroid-equivalency',
+  title: 'Corticosteroid Equivalency & Alternatives',
+  subtitle: 'Glucocorticoid and mineralocorticoid potency comparison',
+  sections: [
+    {
+      heading: 'Glucocorticoid Equivalency Table',
+      body: '',
+      drugTable: [
+        { drug: 'Hydrocortisone', regimen: '20 mg = 1× glucocorticoid potency. Duration: 8-12h. Mineralocorticoid: 1×. Preferred for replacement.' },
+        { drug: 'Cortisone', regimen: '25 mg equivalent. Duration: 8-12h. Mineralocorticoid: 0.8×. Requires hepatic conversion to cortisol (less reliable).' },
+        { drug: 'Prednis(ol)one', regimen: '5 mg equivalent. Duration: 12-36h. Mineralocorticoid: 0.8×. Once-daily option; liquid available for children.' },
+        { drug: 'Methylprednisolone', regimen: '4 mg equivalent. Duration: 12-36h. Mineralocorticoid: 0.5×. IV alternative when HC unavailable.' },
+        { drug: 'Dexamethasone', regimen: '0.75 mg equivalent. Duration: 36-54h. Mineralocorticoid: 0×. Once-daily; does not interfere with cortisol assay.' },
+        { drug: 'Fludrocortisone', regimen: '— (not used for glucocorticoid replacement). Mineralocorticoid: 125×. Used for mineralocorticoid replacement in PAI only.' },
+      ],
+    },
+    {
+      heading: 'Why Hydrocortisone Is Preferred',
+      body: '• **Physiologic** — structurally identical to endogenous cortisol\n• **Dual activity** — provides both glucocorticoid AND mineralocorticoid effect\n• **Short half-life** (~8-12h) — allows physiologic diurnal dosing (high AM, low PM)\n• **Lower growth suppression** in children vs longer-acting steroids\n• **Crisis doses (≥50 mg/day)** provide sufficient mineralocorticoid effect — no fludrocortisone needed',
+    },
+    {
+      heading: 'When Alternatives Are Appropriate',
+      body: '**Dexamethasone:** When cosyntropin stimulation test is planned (no cortisol assay interference). Once-daily dosing for adherence. Avoid in children long-term (growth suppression).\n\n**Prednisolone:** Once-daily dosing improves adherence. Liquid formulation for young children. Widely available.\n\n**Methylprednisolone:** IV alternative when hydrocortisone is unavailable in crisis setting.\n\n**NOTE:** All non-hydrocortisone alternatives lack adequate mineralocorticoid activity — patients with PAI on these agents MUST also take fludrocortisone.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bornstein SR, et al. Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.' },
+    { num: 2, text: 'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.' },
+  ],
+};
+
 // -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
@@ -5371,6 +5564,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'del-deescalation': DEL_DEESCALATION,
   'del-exds-info': DEL_EXDS_INFO,
   'del-cam-guide': DEL_CAM_GUIDE,
+  'ai-summary': AI_SUMMARY,
+  'ai-precipitants': AI_PRECIPITANTS,
+  'ai-lab-findings': AI_LAB_FINDINGS,
+  'ai-sick-day-rules': AI_SICK_DAY_RULES,
+  'ai-special-populations': AI_SPECIAL_POPULATIONS,
+  'ai-steroid-equivalency': AI_STEROID_EQUIVALENCY,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

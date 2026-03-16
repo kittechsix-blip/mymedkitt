@@ -177,6 +177,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'osm-gap', label: 'Osm Gap', icon: '\uD83E\uDDF4', action: 'calculator', target: 'osmolar-gap' },
     { id: 'comp-rules', label: 'Rules', icon: '\uD83D\uDCCF', action: 'overlay', target: 'ab-compensation' },
   ],
+  'adrenal-insufficiency': [
+    { id: 'bsa', label: 'BSA', icon: '\uD83D\uDCD0', action: 'calculator', target: 'bsa' },
+    { id: 'crisis-rx', label: 'Crisis Rx', icon: '\uD83D\uDEA8', action: 'jump', target: 'ai-crisis-steroid' },
+    { id: 'stress-dose', label: 'Stress Dose', icon: '\uD83D\uDC8A', action: 'jump', target: 'ai-stress-dose' },
+    { id: 'sick-day', label: 'Sick-Day', icon: '\uD83D\uDCCB', action: 'overlay', target: 'ai-sick-day-rules' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */
