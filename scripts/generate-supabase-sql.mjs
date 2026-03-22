@@ -107,6 +107,7 @@ const TREE_REGISTRY = {
   'stemi':            { prefix: 'STEMI',               entryNodeId: 'stemi-start',        categoryId: 'cardiology' },
   'delirium':         { prefix: 'DELIRIUM',            entryNodeId: 'delirium-start',     categoryId: 'neurology' },
   'acid-base':        { prefix: 'ACID_BASE',           entryNodeId: 'ab-start',           categoryId: 'nephro-rheum-endo' },
+  'adrenal-insufficiency': { prefix: 'ADRENAL_INSUFFICIENCY', entryNodeId: 'ai-start',      categoryId: 'nephro-rheum-endo' },
 };
 
 // Cross-listing: which consults appear in multiple categories
