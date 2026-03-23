@@ -269,7 +269,23 @@ body {
 }
 
 .decision-card--answered {
-  opacity: 0.85;
+  opacity: 0.9;
+  padding: 12px 16px;
+}
+
+/* Answered card: Question + Answer layout */
+.answered-card__question {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.answered-card__answer {
+  display: inline-block;
+  width: auto;
 }
 
 .decision-card--active {

@@ -35,47 +35,35 @@ export function createDecisionCard(node, opts) {
     return card;
 }
 // -------------------------------------------------------------------
-// Answered card (compact)
+// Answered card (compact) - shows Question + Answer for context
 // -------------------------------------------------------------------
 function renderAnsweredCard(card, node, opts) {
-    // Title
-    const title = document.createElement('div');
-    title.className = 'decision-card__title';
-    title.textContent = node.title;
-    title.style.fontSize = '15px';
-    title.style.marginBottom = '8px';
-    card.appendChild(title);
-    // Show buttons in compact form
+    // Question + Answer format for better context
     if (node.options && opts.selectedOptionIndex !== undefined) {
-        const btnRow = document.createElement('div');
-        btnRow.className = 'decision-card__options';
-        for (let i = 0; i < node.options.length; i++) {
-            const opt = node.options[i];
-            const isSelected = i === opts.selectedOptionIndex;
-            let variant;
-            if (!isSelected) {
-                variant = 'no';
-            }
-            else if (opt.urgency === 'critical') {
-                variant = 'critical';
-            }
-            else if (opt.urgency === 'urgent') {
-                variant = 'urgent';
-            }
-            else {
-                variant = 'yes';
-            }
-            const btn = create3DButton(opt.label, { variant });
-            btn.style.minHeight = '40px';
-            btn.style.padding = '8px 16px';
-            btn.style.fontSize = '14px';
-            if (!isSelected) {
-                btn.style.maxHeight = '36px';
-                btn.style.overflow = 'hidden';
-            }
-            btnRow.appendChild(btn);
+        const selectedOpt = node.options[opts.selectedOptionIndex];
+        // Question label (small, muted)
+        const questionLabel = document.createElement('div');
+        questionLabel.className = 'answered-card__question';
+        questionLabel.textContent = node.title;
+        card.appendChild(questionLabel);
+        // Selected answer (prominent)
+        let variant;
+        if (selectedOpt.urgency === 'critical') {
+            variant = 'critical';
         }
-        card.appendChild(btnRow);
+        else if (selectedOpt.urgency === 'urgent') {
+            variant = 'urgent';
+        }
+        else {
+            variant = 'yes';
+        }
+        const answerBtn = create3DButton(selectedOpt.label, { variant });
+        answerBtn.className += ' answered-card__answer';
+        answerBtn.style.minHeight = '36px';
+        answerBtn.style.padding = '6px 14px';
+        answerBtn.style.fontSize = '14px';
+        answerBtn.style.pointerEvents = 'none';
+        card.appendChild(answerBtn);
     }
     else if (node.type === 'info') {
         // Info nodes show "Continued →" indicator
