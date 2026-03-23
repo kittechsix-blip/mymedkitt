@@ -4,6 +4,7 @@
 
 import type { Citation } from '../services/tree-service.js';
 import { getTreeConfig } from '../services/tree-service.js';
+import { renderBodyText } from './text-renderer.js';
 
 // TestRow for diagnostic test performance tables
 interface TestRow {
@@ -283,7 +284,7 @@ function renderClinicalNotes(container: HTMLElement, notes: string[]): void {
   for (const note of notes) {
     const noteEl = document.createElement('div');
     noteEl.className = 'reference-note-card';
-    noteEl.textContent = note;
+    renderBodyText(noteEl, note);
     section.appendChild(noteEl);
   }
 

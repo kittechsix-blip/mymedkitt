@@ -111,7 +111,7 @@ export const DISTAL_RADIUS_NODES = [
         type: 'info',
         module: 2,
         title: 'Procedural Sedation',
-        body: '**Procedural sedation** provides excellent analgesia and amnesia but requires more resources and time.\n\n**COMMON AGENTS:**\n• **Ketamine** 1–2 mg/kg IV — dissociative, maintains airway reflexes\n• **Propofol** 0.5–1 mg/kg IV — rapid onset/offset, no analgesia (add fentanyl)\n• **Etomidate** 0.1–0.15 mg/kg IV — hemodynamically stable\n\n**REQUIREMENTS:**\n• NPO assessment (ideally 2+ hours for clear liquids)\n• Dedicated monitoring nurse\n• Capnography, pulse oximetry, cardiac monitor\n• Resuscitation equipment at bedside\n• Longer ED stay (mean 4.6 hours vs 1.5 hours for hematoma block) [4]\n\n**BEST FOR:** Complex reductions, highly anxious patients, pediatric patients who cannot cooperate with hematoma block.',
+        body: '**Procedural sedation** provides excellent analgesia and amnesia but requires more resources and time.\n\n**COMMON AGENTS:**\n• [Ketamine](#/drug/ketamine/procedural sedation) 1–2 mg/kg IV — dissociative, maintains airway reflexes\n• [Propofol](#/drug/propofol/procedural sedation) 0.5–1 mg/kg IV — rapid onset/offset, no analgesia (add fentanyl)\n• **Etomidate** 0.1–0.15 mg/kg IV — hemodynamically stable\n\n**REQUIREMENTS:**\n• NPO assessment (ideally 2+ hours for clear liquids)\n• Dedicated monitoring nurse\n• Capnography, pulse oximetry, cardiac monitor\n• Resuscitation equipment at bedside\n• Longer ED stay (mean 4.6 hours vs 1.5 hours for hematoma block) [4]\n\n**BEST FOR:** Complex reductions, highly anxious patients, pediatric patients who cannot cooperate with hematoma block.',
         citation: [4],
         next: 'dr-traction',
     },

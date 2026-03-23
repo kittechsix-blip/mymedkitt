@@ -402,7 +402,7 @@ export const STROKE_CITATIONS: Citation[] = [
 // -------------------------------------------------------------------
 
 export const STROKE_CLINICAL_NOTES: string[] = [
-  'Tenecteplase 0.25 mg/kg single IV bolus is now preferred over alteplase 60-min infusion per 2024 AcT trial evidence — equivalent efficacy with simpler administration.',
+  '[Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg single IV bolus is now preferred over alteplase 60-min infusion per 2024 AcT trial evidence — equivalent efficacy with simpler administration.',
   'Door-to-needle time goal: <45 minutes. Every 15-minute reduction in onset-to-treatment time saves ~4 weeks of disability-free life.',
   'CTA should be obtained alongside initial NCCT but should NOT delay thrombolysis — start tPA/TNK first, then review CTA.',
   'EVT extends the treatment window to 24 hours for select patients with LVO and favorable perfusion imaging. HERMES meta-analysis: NNT ~5 for functional independence.',

@@ -2,6 +2,7 @@
 // Diagnostic test performance, monitoring schedules, and evidence citations.
 // Multi-tree aware: data is passed in from tree data files.
 import { getTreeConfig } from '../services/tree-service.js';
+import { renderBodyText } from './text-renderer.js';
 const TREE_REF_META = {
     'neurosyphilis': { title: 'Neurosyphilis Reference', testTableTitle: 'CSF Diagnostic Test Performance' },
     'pneumothorax': { title: 'Pneumothorax POCUS Reference', testTableTitle: 'Ultrasound vs CXR for Pneumothorax' },
@@ -216,7 +217,7 @@ function renderClinicalNotes(container, notes) {
     for (const note of notes) {
         const noteEl = document.createElement('div');
         noteEl.className = 'reference-note-card';
-        noteEl.textContent = note;
+        renderBodyText(noteEl, note);
         section.appendChild(noteEl);
     }
     container.appendChild(section);

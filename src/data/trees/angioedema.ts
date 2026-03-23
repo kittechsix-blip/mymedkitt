@@ -326,7 +326,7 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     title: 'Pregnancy & Lactation',
     body: 'Physiologic changes in pregnancy can **mitigate, aggravate, or have no effect** on underlying HAE — variable and unpredictable. [5]\n\n**Preferred acute treatment:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV — plasma-derived C1-INH, considered safest option [5]\n\n**If Berinert unavailable:**\n• [Ruconest](#/drug/ruconest/hereditary angioedema) (recombinant C1-INH) — recommended if plasma-derived C1-INH not available and no rabbit allergy [5]\n• [Icatibant](#/drug/icatibant/hereditary angioedema) — for life-threatening attacks only when C1-INH unavailable. Recent small studies suggest safety in pregnancy. [5]\n\n**Estrogens can exacerbate bradykinin signaling** — estrogen-containing products may worsen HAE.',
     citation: [5],
-    recommendation: 'Berinert 20 units/kg IV is preferred in pregnancy. Ruconest or icatibant only if C1-INH unavailable.',
+    recommendation: '[Berinert](#/drug/berinert/hae pregnancy) 20 units/kg IV is preferred in pregnancy. [Ruconest](#/drug/ruconest/hereditary angioedema) or [Icatibant](#/drug/icatibant/hereditary angioedema) only if C1-INH unavailable.',
     next: 'angio-dispo',
   },
 

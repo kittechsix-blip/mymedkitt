@@ -1516,7 +1516,7 @@ const DR_HEMA_EVIDENCE = {
         },
         {
             heading: 'Dosing & Safety',
-            body: '**Max dose:** 4.5 mg/kg without epinephrine (1% lidocaine = 10 mg/mL).\n\n**Critical safety point:** The fracture hematoma is contiguous with the medullary canal — lidocaine is absorbed directly into marrow vasculature. Systemic absorption is rapid, similar to intraosseous (IO) administration. Respect weight-based dosing limits strictly. [3][5]\n\n**Signs of toxicity:** Perioral numbness, metallic taste, tinnitus → seizures → cardiac arrest. Have lipid emulsion available for LAST (local anesthetic systemic toxicity).',
+            body: '**Max dose:** [Lidocaine](#/drug/lidocaine/hematoma block) 4.5 mg/kg without epinephrine (1% lidocaine = 10 mg/mL).\n\n**Critical safety point:** The fracture hematoma is contiguous with the medullary canal — lidocaine is absorbed directly into marrow vasculature. Systemic absorption is rapid, similar to intraosseous (IO) administration. Respect weight-based dosing limits strictly. [3][5]\n\n**Signs of toxicity:** Perioral numbness, metallic taste, tinnitus → seizures → cardiac arrest. Have lipid emulsion available for LAST (local anesthetic systemic toxicity).',
         },
         {
             heading: 'Efficacy vs Procedural Sedation',
@@ -2575,7 +2575,7 @@ const AUB_TREATMENT_TABLE = {
         },
         {
             heading: 'Tranexamic Acid (TXA)',
-            body: '**Dose:** 1.3 g PO TID \u00d7 5 days OR 10 mg/kg IV (max 600 mg) q8h\n**Efficacy:** Reduces menstrual blood loss 30\u201355%\n**Key CI:** Active thrombosis, impaired color vision\n**Notes:** Antifibrinolytic \u2014 can use alone or as adjunct. Does not affect fertility. Caution with concurrent OCPs (additive thrombotic risk).',
+            body: '**Dose:** [Tranexamic Acid](#/drug/tranexamic-acid/aub) 1.3 g PO TID \u00d7 5 days OR 10 mg/kg IV (max 600 mg) q8h\n**Efficacy:** Reduces menstrual blood loss 30\u201355%\n**Key CI:** Active thrombosis, impaired color vision\n**Notes:** Antifibrinolytic \u2014 can use alone or as adjunct. Does not affect fertility. Caution with concurrent OCPs (additive thrombotic risk).',
         },
         {
             heading: 'Intrauterine Tamponade (Procedural)',
@@ -2780,10 +2780,10 @@ const SE_ASM_COMPARISON = {
             heading: 'Efficacy (ESETT)',
             body: '',
             drugTable: [
-                { drug: 'Levetiracetam', regimen: '60 mg/kg IV (max 4500 mg) over 10-15 min. **47% seizure cessation at 60 min.** Onset: 5-10 min. [1]' },
-                { drug: 'Valproate Sodium', regimen: '40 mg/kg IV (max 3000 mg) over 10 min. **46% seizure cessation at 60 min.** Onset: 5-10 min. [1]' },
-                { drug: 'Fosphenytoin', regimen: '20 mg PE/kg IV (max 1500 mg PE) at 150 mg PE/min. **45% seizure cessation at 60 min.** Onset: 10-20 min. [1]' },
-                { drug: 'Phenobarbital', regimen: '15-20 mg/kg IV at 50-100 mg/min (max 2000 mg). Not in ESETT. Use if above unavailable. [2]' },
+                { drug: '[Levetiracetam](#/drug/levetiracetam/status epilepticus)', regimen: '60 mg/kg IV (max 4500 mg) over 10-15 min. **47% seizure cessation at 60 min.** Onset: 5-10 min. [1]' },
+                { drug: '[Valproate Sodium](#/drug/valproate/status epilepticus)', regimen: '40 mg/kg IV (max 3000 mg) over 10 min. **46% seizure cessation at 60 min.** Onset: 5-10 min. [1]' },
+                { drug: '[Fosphenytoin](#/drug/fosphenytoin/status epilepticus)', regimen: '20 mg PE/kg IV (max 1500 mg PE) at 150 mg PE/min. **45% seizure cessation at 60 min.** Onset: 10-20 min. [1]' },
+                { drug: '[Phenobarbital](#/drug/phenobarbital/status epilepticus)', regimen: '15-20 mg/kg IV at 50-100 mg/min (max 2000 mg). Not in ESETT. Use if above unavailable. [2]' },
             ],
         },
         {
@@ -2813,10 +2813,10 @@ const SE_INFUSION_COMPARISON = {
             heading: 'Agent Comparison',
             body: '',
             drugTable: [
-                { drug: 'Midazolam', regimen: 'Load 0.2 mg/kg IV, infuse 0.05-2 mg/kg/hr. Repeat bolus 0.1-0.2 mg/kg for breakthrough. **Lowest hemodynamic impact.** Easiest to wean. Tachyphylaxis may require dose escalation. [1]' },
-                { drug: 'Propofol', regimen: 'Load 1-2 mg/kg IV, infuse 30-200 mcg/kg/min. Rapid onset/offset. **Watch for PRIS** (propofol infusion syndrome) with doses >80 mcg/kg/min for >48h — rhabdomyolysis, metabolic acidosis, cardiac failure. Check triglycerides q24-48h. [1]' },
-                { drug: 'Pentobarbital', regimen: 'Load 5-15 mg/kg IV over 1h, infuse 0.5-5 mg/kg/hr. **Deepest cerebral suppression.** Most hemodynamic compromise — vasopressors almost always required. Very long half-life (15-50h). [1]' },
-                { drug: 'Ketamine', regimen: 'Load 0.5-3 mg/kg IV, infuse 0.1-5 mg/kg/hr. **NMDA antagonist** — different mechanism from GABAergic agents. May be tried when midazolam and propofol fail. Some reports suggest trial before other anesthetics to potentially avoid intubation. [2]' },
+                { drug: '[Midazolam](#/drug/midazolam/refractory status epilepticus)', regimen: 'Load 0.2 mg/kg IV, infuse 0.05-2 mg/kg/hr. Repeat bolus 0.1-0.2 mg/kg for breakthrough. **Lowest hemodynamic impact.** Easiest to wean. Tachyphylaxis may require dose escalation. [1]' },
+                { drug: '[Propofol](#/drug/propofol/refractory status epilepticus)', regimen: 'Load 1-2 mg/kg IV, infuse 30-200 mcg/kg/min. Rapid onset/offset. **Watch for PRIS** (propofol infusion syndrome) with doses >80 mcg/kg/min for >48h — rhabdomyolysis, metabolic acidosis, cardiac failure. Check triglycerides q24-48h. [1]' },
+                { drug: '[Pentobarbital](#/drug/pentobarbital/refractory status epilepticus)', regimen: 'Load 5-15 mg/kg IV over 1h, infuse 0.5-5 mg/kg/hr. **Deepest cerebral suppression.** Most hemodynamic compromise — vasopressors almost always required. Very long half-life (15-50h). [1]' },
+                { drug: '[Ketamine](#/drug/ketamine/refractory status epilepticus)', regimen: 'Load 0.5-3 mg/kg IV, infuse 0.1-5 mg/kg/hr. **NMDA antagonist** — different mechanism from GABAergic agents. May be tried when midazolam and propofol fail. Some reports suggest trial before other anesthetics to potentially avoid intubation. [2]' },
             ],
         },
         {
@@ -3542,7 +3542,7 @@ const MENING_STEPS_SUMMARY = {
         },
         {
             heading: 'Empiric Treatment (\u22641 Hour)',
-            body: '\u2022 [Immunocompetent <50y: Ceftriaxone 2g IV q12h + Vancomycin + Dexamethasone](#/node/mening-tx-standard)\n\u2022 [Age \u226550 / pregnant / immunocompromised: ADD Ampicillin 2g IV q4h (Listeria coverage)](#/node/mening-tx-expanded)\n\u2022 [Healthcare-associated: Vancomycin + Meropenem 2g IV q8h](#/node/mening-tx-nosocomial)\n\u2022 [Suspected cryptococcal: Amphotericin B + Flucytosine (ID consult)](#/node/mening-tx-crypto)\n\u2022 **Add Acyclovir 10 mg/kg IV q8h if ANY encephalitis features**',
+            body: '\u2022 [Immunocompetent <50y: Ceftriaxone 2g IV q12h + Vancomycin + Dexamethasone](#/node/mening-tx-standard)\n\u2022 [Age \u226550 / pregnant / immunocompromised: ADD Ampicillin 2g IV q4h (Listeria coverage)](#/node/mening-tx-expanded)\n\u2022 [Healthcare-associated: Vancomycin + Meropenem 2g IV q8h](#/node/mening-tx-nosocomial)\n\u2022 [Suspected cryptococcal: Amphotericin B + Flucytosine (ID consult)](#/node/mening-tx-crypto)\n\u2022 **Add [Acyclovir](#/drug/acyclovir/encephalitis) 10 mg/kg IV q8h if ANY encephalitis features**',
         },
         {
             heading: 'CSF Interpretation',
@@ -3643,26 +3643,26 @@ const MENING_ABX_TABLE = {
             heading: 'Immunocompetent Adult <50 Years',
             body: '**Targets:** S. pneumoniae, N. meningitidis [1]',
             drugTable: [
-                { drug: 'Ceftriaxone', regimen: '2 g IV q12h' },
-                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
-                { drug: 'Dexamethasone', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
+                { drug: '[Ceftriaxone](#/drug/ceftriaxone/meningitis)', regimen: '2 g IV q12h' },
+                { drug: '[Vancomycin](#/drug/vancomycin/meningitis)', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: '[Dexamethasone](#/drug/dexamethasone/meningitis)', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
             ],
         },
         {
             heading: 'Age \u226550, Pregnant, or Immunocompromised',
             body: '**Additional target:** L. monocytogenes (not covered by cephalosporins) [1,2]',
             drugTable: [
-                { drug: 'Ceftriaxone', regimen: '2 g IV q12h' },
-                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
-                { drug: 'Ampicillin', regimen: '2 g IV q4h (Listeria coverage)' },
-                { drug: 'Dexamethasone', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
+                { drug: '[Ceftriaxone](#/drug/ceftriaxone/meningitis)', regimen: '2 g IV q12h' },
+                { drug: '[Vancomycin](#/drug/vancomycin/meningitis)', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: '[Ampicillin](#/drug/ampicillin/meningitis)', regimen: '2 g IV q4h (Listeria coverage)' },
+                { drug: '[Dexamethasone](#/drug/dexamethasone/meningitis)', regimen: '0.15 mg/kg IV q6h \u00d7 2-4 days' },
             ],
         },
         {
             heading: 'Healthcare-Associated / Post-Neurosurgical',
             body: '**Targets:** MRSA, Pseudomonas, resistant gram-negatives [3]',
             drugTable: [
-                { drug: 'Vancomycin', regimen: '15-20 mg/kg IV q8-12h' },
+                { drug: '[Vancomycin](#/drug/vancomycin/meningitis)', regimen: '15-20 mg/kg IV q8-12h' },
                 { drug: 'Meropenem', regimen: '2 g IV q8h (or Cefepime 2 g IV q8h)' },
             ],
         },
@@ -3670,8 +3670,8 @@ const MENING_ABX_TABLE = {
             heading: 'Suspected Cryptococcal (HIV/AIDS)',
             body: '**Requires ID consultation before initiation** [4]',
             drugTable: [
-                { drug: 'Amphotericin B liposomal', regimen: '3-4 mg/kg/day IV (induction)' },
-                { drug: 'Flucytosine', regimen: '25 mg/kg PO q6h (induction)' },
+                { drug: '[Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis)', regimen: '3-4 mg/kg/day IV (induction)' },
+                { drug: '[Flucytosine](#/drug/flucytosine/cryptococcal meningitis)', regimen: '25 mg/kg PO q6h (induction)' },
                 { drug: 'Fluconazole', regimen: '400-800 mg/day (consolidation)' },
             ],
         },
@@ -3679,7 +3679,7 @@ const MENING_ABX_TABLE = {
             heading: 'Suspected Encephalitis (Any Risk Category)',
             body: '**Add to ANY regimen above if encephalitis features present:** [5]',
             drugTable: [
-                { drug: 'Acyclovir', regimen: '10 mg/kg IV q8h (continue pending PCR)' },
+                { drug: '[Acyclovir](#/drug/acyclovir/encephalitis)', regimen: '10 mg/kg IV q8h (continue pending PCR)' },
             ],
         },
         {
@@ -3704,7 +3704,7 @@ const MENING_STEROID_GUIDE = {
     sections: [
         {
             heading: 'Regimen',
-            body: '**Dexamethasone 0.15 mg/kg IV q6h \u00d7 2-4 days**\n\nGive WITH or up to **15-20 minutes BEFORE** first antibiotic dose. [1]',
+            body: '**[Dexamethasone](#/drug/dexamethasone/meningitis) 0.15 mg/kg IV q6h \u00d7 2-4 days**\n\nGive WITH or up to **15-20 minutes BEFORE** first antibiotic dose. [1]',
         },
         {
             heading: 'Evidence Summary',
@@ -4394,15 +4394,15 @@ const STEMI_LYTIC_AGENTS = {
             body: '',
             drugTable: [
                 {
-                    drug: 'Tenecteplase (PREFERRED)',
+                    drug: '[Tenecteplase](#/drug/tenecteplase/stemi) (PREFERRED)',
                     regimen: 'Single IV bolus over 5 sec:\n<60 kg: 30 mg | 60-69 kg: 35 mg | 70-79 kg: 40 mg | 80-89 kg: 45 mg | ≥90 kg: 50 mg\nAge >75y: consider HALF dose.\nPatency: 63% TIMI-3 flow.',
                 },
                 {
-                    drug: 'Alteplase (tPA)',
+                    drug: '[Alteplase](#/drug/alteplase/stemi) (tPA)',
                     regimen: 'Accelerated 90-min regimen:\n15 mg IV bolus → 0.75 mg/kg (max 50 mg) over 30 min → 0.5 mg/kg (max 35 mg) over 60 min.\nTotal max: 100 mg.\nPatency: 54% TIMI-3 flow.',
                 },
                 {
-                    drug: 'Reteplase',
+                    drug: '[Reteplase](#/drug/reteplase/stemi)',
                     regimen: '10 units IV bolus over 2 min, then repeat 10 units IV bolus 30 min later.\nPatency: 60% TIMI-3 flow.',
                 },
             ],
@@ -4506,11 +4506,11 @@ const STEMI_ANTICOAG_DETAIL = {
             body: '',
             drugTable: [
                 {
-                    drug: 'UFH (standard)',
+                    drug: '[UFH](#/drug/ufh/stemi) (standard)',
                     regimen: 'Without GP IIb/IIIa: 70-100 units/kg IV bolus\nWith GP IIb/IIIa: 50-70 units/kg IV bolus\nAdditional boluses PRN for therapeutic ACT',
                 },
                 {
-                    drug: 'Bivalirudin (high bleed risk)',
+                    drug: '[Bivalirudin](#/drug/bivalirudin/acs) (high bleed risk)',
                     regimen: '0.75 mg/kg IV bolus, then 1.75 mg/kg/hr infusion\nWith or without prior UFH',
                 },
             ],
@@ -4520,15 +4520,15 @@ const STEMI_ANTICOAG_DETAIL = {
             body: '',
             drugTable: [
                 {
-                    drug: 'UFH',
+                    drug: '[UFH](#/drug/ufh/stemi)',
                     regimen: '60 units/kg bolus (max 4,000 units)\n12 units/kg/hr infusion (max 1,000 units/hr)\nTarget aPTT 1.5-2× control',
                 },
                 {
-                    drug: 'Enoxaparin',
+                    drug: '[Enoxaparin](#/drug/enoxaparin/stemi)',
                     regimen: 'Age <75: 30 mg IV bolus then 1 mg/kg SC q12h\nAge ≥75: No bolus, 0.75 mg/kg SC q12h\nCrCl <30: 1 mg/kg SC q24h',
                 },
                 {
-                    drug: 'Fondaparinux',
+                    drug: '[Fondaparinux](#/drug/fondaparinux/stemi)',
                     regimen: '2.5 mg IV with first fibrinolytic dose\nThen 2.5 mg SC daily\nAvoid if CrCl <30. Supplement UFH if PCI needed.',
                 },
             ],
@@ -5350,11 +5350,11 @@ const THYROID_SPECIAL_POPS = {
         },
         {
             heading: 'Pediatric Thyroid Storm',
-            body: 'Thyroid storm is rare in children. Most pediatric hyperthyroidism is Graves disease (onset usually during puberty, ~80% after age 11). [2]\n\n**Presentation:** Fever, tachycardia, failure to gain weight, chronic diarrhea, altered mental status. Febrile seizures reported.\n\n**Treatment:** Based on adult literature + expert opinion. No standard pediatric recommendations exist.\n\u2022 Sepsis workup + resuscitation\n\u2022 Consult pediatric endocrinology\n\u2022 Thionamide dosing: methimazole 0.25-1 mg/kg/day divided q8-12h\n\u2022 PTU if methimazole not tolerated: 5-10 mg/kg/day divided q8h\n\u2022 Propranolol: 0.5-2 mg/kg/day divided q6-12h',
+            body: 'Thyroid storm is rare in children. Most pediatric hyperthyroidism is Graves disease (onset usually during puberty, ~80% after age 11). [2]\n\n**Presentation:** Fever, tachycardia, failure to gain weight, chronic diarrhea, altered mental status. Febrile seizures reported.\n\n**Treatment:** Based on adult literature + expert opinion. No standard pediatric recommendations exist.\n\u2022 Sepsis workup + resuscitation\n\u2022 Consult pediatric endocrinology\n\u2022 Thionamide dosing: [Methimazole](#/drug/methimazole/thyroid storm) 0.25-1 mg/kg/day divided q8-12h\n\u2022 [PTU](#/drug/ptu/thyroid storm) if methimazole not tolerated: 5-10 mg/kg/day divided q8h\n\u2022 [Propranolol](#/drug/propranolol/thyroid storm) 0.5-2 mg/kg/day divided q6-12h',
         },
         {
             heading: 'Neonatal',
-            body: '**Congenital hypothyroidism:** 1 in 2000-4000 newborns. Part of standard newborn screening. Often asymptomatic at birth (maternal T4 present). If symptomatic: lethargy, feeding difficulty, macroglossia, hypothermia, jaundice. Treatment: oral levothyroxine 10-15 mcg/kg daily. [1]\n\n**Neonatal thyrotoxicosis:** Rare. Seen in babies born to mothers with Graves disease (maternal TRAb crosses placenta). May present at end of first week (after maternal antithyroid drugs clear). Signs: failure to thrive, persistent tachycardia, heart failure. Treatment: PTU 5-10 mg/kg/day divided q8h, or methimazole 0.25-1 mg/kg/day.',
+            body: '**Congenital hypothyroidism:** 1 in 2000-4000 newborns. Part of standard newborn screening. Often asymptomatic at birth (maternal T4 present). If symptomatic: lethargy, feeding difficulty, macroglossia, hypothermia, jaundice. Treatment: oral [Levothyroxine](#/drug/levothyroxine/congenital hypothyroidism) 10-15 mcg/kg daily. [1]\n\n**Neonatal thyrotoxicosis:** Rare. Seen in babies born to mothers with Graves disease (maternal TRAb crosses placenta). May present at end of first week (after maternal antithyroid drugs clear). Signs: failure to thrive, persistent tachycardia, heart failure. Treatment: [PTU](#/drug/ptu/thyroid storm) 5-10 mg/kg/day divided q8h, or [Methimazole](#/drug/methimazole/thyroid storm) 0.25-1 mg/kg/day.',
         },
         {
             heading: 'Elderly',

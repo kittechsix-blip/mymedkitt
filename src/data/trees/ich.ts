@@ -121,7 +121,7 @@ export const ICH_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hemostatic Adjuncts',
-    body: '**Not on anticoagulation — consider adjunct measures:**\n\n**Tranexamic acid (TXA):**\n• [TXA](#/drug/tranexamic-acid/ich hemostasis) 1 g IV over 10 min (within 3h of onset)\n• Significant reduction in hematoma expansion (OR 0.82)\n• Did NOT improve mortality or functional outcomes in TICH-2\n• May be considered — TICH-3 trial underway\n\n**Antiplatelet agents:**\n• Platelet transfusion is **NOT recommended** (PATCH trial — worse outcomes)\n• DDAVP 0.3 mcg/kg IV may be considered (limited evidence, DASH pilot)\n\n**Thrombocytopenia:**\n• Target platelets >100,000 if possible\n• Transfuse platelets if count <100,000\n\n**Coagulation factors:**\n• Check fibrinogen — supplement with cryoprecipitate if <200 mg/dL\n• Correct any identified coagulopathy',
+    body: '**Not on anticoagulation — consider adjunct measures:**\n\n**Tranexamic acid (TXA):**\n• [TXA](#/drug/tranexamic-acid/ich hemostasis) 1 g IV over 10 min (within 3h of onset)\n• Significant reduction in hematoma expansion (OR 0.82)\n• Did NOT improve mortality or functional outcomes in TICH-2\n• May be considered — TICH-3 trial underway\n\n**Antiplatelet agents:**\n• Platelet transfusion is **NOT recommended** (PATCH trial — worse outcomes)\n• [Desmopressin (DDAVP)](#/drug/desmopressin/ich hemostasis) 0.3 mcg/kg IV may be considered (limited evidence, DASH pilot)\n\n**Thrombocytopenia:**\n• Target platelets >100,000 if possible\n• Transfuse platelets if count <100,000\n\n**Coagulation factors:**\n• Check fibrinogen — supplement with cryoprecipitate if <200 mg/dL\n• Correct any identified coagulopathy',
     citation: [1, 2, 6],
     next: 'ich-bp',
   },

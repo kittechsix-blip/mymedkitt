@@ -335,12 +335,12 @@ export function showInfoModal(pageId: string): boolean {
 
         const drugName = document.createElement('div');
         drugName.className = 'info-page-drug-name';
-        drugName.textContent = drug.drug;
+        renderInfoBodyLine(drugName, drug.drug);
         card.appendChild(drugName);
 
         const regimen = document.createElement('div');
         regimen.className = 'info-page-drug-regimen';
-        regimen.textContent = drug.regimen;
+        renderInfoBodyLine(regimen, drug.regimen);
         card.appendChild(regimen);
 
         sectionEl.appendChild(card);

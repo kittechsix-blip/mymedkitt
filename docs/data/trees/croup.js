@@ -188,7 +188,7 @@ export const CROUP_NODES = [
         type: 'result',
         module: 4,
         title: 'ICU Admission / Airway Management',
-        body: '**ICU admission criteria:**\n\u2022 Impending or actual respiratory failure\n\u2022 Requiring intubation\n\u2022 Severe croup unresponsive to maximal medical therapy\n\n**Intubation pearls:**\n\u2022 Use ETT **0.5-1.0 size smaller** than age-predicted\n\u2022 Oral intubation preferred\n\u2022 Have multiple smaller tube sizes available\n\u2022 ENT/anesthesia at bedside for surgical airway backup\n\n**Post-intubation:**\n\u2022 Continue dexamethasone 0.6 mg/kg q6-12h (consider for extubation facilitation)\n\u2022 Sedation to prevent self-extubation\n\u2022 Plan extubation with leak test after 24-72 hours\n\n**<3% of hospitalized croup patients require intubation** \u2014 this is rare.',
+        body: '**ICU admission criteria:**\n\u2022 Impending or actual respiratory failure\n\u2022 Requiring intubation\n\u2022 Severe croup unresponsive to maximal medical therapy\n\n**Intubation pearls:**\n\u2022 Use ETT **0.5-1.0 size smaller** than age-predicted\n\u2022 Oral intubation preferred\n\u2022 Have multiple smaller tube sizes available\n\u2022 ENT/anesthesia at bedside for surgical airway backup\n\n**Post-intubation:**\n\u2022 Continue [Dexamethasone](#/drug/dexamethasone/pediatric croup) 0.6 mg/kg q6-12h (consider for extubation facilitation)\n\u2022 Sedation to prevent self-extubation\n\u2022 Plan extubation with leak test after 24-72 hours\n\n**<3% of hospitalized croup patients require intubation** \u2014 this is rare.',
         recommendation: 'ICU admission with continuous monitoring. ETT 0.5-1.0 size smaller than predicted. Continue dexamethasone. Plan extubation with leak test after 24-72 hours of improvement. Consult ENT if atypical course or concern for structural airway pathology.',
         confidence: 'definitive',
         citation: [2, 4],
@@ -224,8 +224,8 @@ export const CROUP_CITATIONS = [
 // Clinical Notes (for reference table)
 // -------------------------------------------------------------------
 export const CROUP_CLINICAL_NOTES = [
-    'Single-dose dexamethasone 0.6 mg/kg PO is standard of care for ALL severities of croup \u2014 reduces return visits by ~50% (NNT 7).',
-    'Low-dose dexamethasone (0.15 mg/kg) and prednisolone (1 mg/kg) are non-inferior alternatives based on a 1,252-patient RCT.',
+    'Single-dose [Dexamethasone](#/drug/dexamethasone/pediatric croup) 0.6 mg/kg PO is standard of care for ALL severities of croup \u2014 reduces return visits by ~50% (NNT 7).',
+    'Low-dose [Dexamethasone](#/drug/dexamethasone/pediatric croup) (0.15 mg/kg) and [Prednisolone](#/drug/prednisolone/pediatric croup) (1 mg/kg) are non-inferior alternatives based on a 1,252-patient RCT.',
     'Nebulized epinephrine provides rapid but transient relief \u2014 requires minimum 2-hour observation for potential rebound.',
     'Humidified air and cool mist have NO evidence of benefit. However, 30-minute outdoor cold air exposure (<10\u00b0C) showed benefit in one RCT.',
     'Use ETT 0.5-1.0 size smaller than age-predicted if intubation needed \u2014 subglottic narrowing is the hallmark of croup.',
