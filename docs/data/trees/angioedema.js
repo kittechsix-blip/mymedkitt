@@ -1,0 +1,419 @@
+// MedKitt — Angioedema (Initial Assessment → Classification → Histamine Treatment → Bradykinin Treatment → Abdominal Angioedema → Disposition)
+// Airway Assessment → Classify Mechanism → Histamine-Mediated → Bradykinin-Mediated (ACEi/HAE/tPA/AAE) → Abdominal → Disposition
+// 6 modules: Initial Assessment → Classification → Histamine Treatment → Bradykinin Treatment → Abdominal Angioedema → Disposition
+// 25 nodes total.
+export const ANGIOEDEMA_NODES = [
+    // =====================================================================
+    // MODULE 1: INITIAL ASSESSMENT & AIRWAY
+    // =====================================================================
+    {
+        id: 'angio-start',
+        type: 'question',
+        module: 1,
+        title: 'Angioedema — Initial Assessment',
+        body: '[Angioedema Steps Summary](#/info/angio-steps-summary)\n\n~110,000 ED visits/year in the US. Up to 44% of patients with hereditary angioedema (HAE) are initially misdiagnosed. The critical first step is assessment of airway patency. [1][5][7]\n\nAssess for signs of airway compromise: voice change, hoarseness, stridor, dyspnea, inability to handle secretions.',
+        citation: [1, 5, 7],
+        options: [
+            {
+                label: 'Signs of Airway Compromise',
+                description: 'Stridor, voice change, dyspnea, drooling',
+                next: 'angio-airway-secure',
+                urgency: 'critical',
+            },
+            {
+                label: 'Concerning but Stable',
+                description: 'Facial/tongue swelling without airway symptoms',
+                next: 'angio-airway-monitor',
+            },
+            {
+                label: 'No Airway Concern',
+                description: 'Peripheral or mild facial edema only',
+                next: 'angio-classify',
+            },
+        ],
+    },
+    {
+        id: 'angio-airway-secure',
+        type: 'info',
+        module: 1,
+        title: 'Secure the Airway',
+        body: '**DUAL SETUP: Intubation + cricothyrotomy ready simultaneously.** Awake fiberoptic intubation preferred — do NOT paralyze until clear view of airway anatomy obtained. Nasotracheal route may bypass lingual swelling (95% first-attempt success vs 70% orotracheal). Avoid positive-pressure ventilation — barotrauma worsens edema. [9]\n\nFlexible endoscope used in 49% of angioedema intubations. Cricothyrotomy performed in 2% of cases. Topical lidocaine for awake approaches. [9]\n\n**[Awake Intubation](#/tree/awake-intubation)** (see Airway category)\n\n**Extubation:** Wait for visible improvement of edema. Extubate over airway exchange catheter. Video laryngoscopy to confirm laryngeal edema resolution. Cuff leak may provide adjunctive info.',
+        citation: [9],
+        next: 'angio-classify',
+    },
+    {
+        id: 'angio-airway-monitor',
+        type: 'info',
+        module: 1,
+        title: 'Airway Monitoring',
+        body: '**Supplemental O2 and continuous monitoring.** Do NOT use NIPPV (CPAP/BiPAP) — positive pressure/barotrauma can worsen angioedema. [5]\n\nFrequent reassessment is critical — clinical conditions can change rapidly. Low threshold for definitive airway if any signs of compromise.\n\nFlexible laryngoscopy on case-by-case basis for patients with facial edema but no laryngeal symptoms. The true airway threat is the larynx and posterior tongue — not the lips and anterior tongue. [7][8]\n\n**KEY:** Edema localized to the lips alone does NOT have increased intubation risk. [7][8]',
+        citation: [5, 7, 8],
+        next: 'angio-classify',
+    },
+    // =====================================================================
+    // MODULE 2: CLASSIFICATION
+    // =====================================================================
+    {
+        id: 'angio-classify',
+        type: 'question',
+        module: 2,
+        title: 'Classify the Angioedema',
+        body: 'The most important distinction is **histamine-mediated vs bradykinin-mediated** angioedema. Treatment is entirely different for each. [3][5]\n\n[Histamine vs Bradykinin Differentiation](#/info/angio-differentiation)\n\n**Histamine-mediated:** Rapid onset (minutes-hours), urticaria/pruritus, responds to epinephrine/antihistamines. Accounts for 40-70% of ED presentations. [5]\n\n**Bradykinin-mediated:** Slow onset (hours-days), NO urticaria, does NOT respond to epinephrine/antihistamines/steroids. Includes ACEi-induced, HAE, and acquired angioedema. [5]',
+        citation: [3, 5],
+        options: [
+            {
+                label: 'Urticaria, Pruritus, or Flushing Present',
+                description: 'Suggests histamine-mediated (allergic) cause',
+                next: 'angio-histamine-treat',
+            },
+            {
+                label: 'No Urticaria — Isolated Swelling',
+                description: 'Suggests bradykinin-mediated cause',
+                next: 'angio-bradykinin-screen',
+            },
+            {
+                label: 'Unclear / Undifferentiated',
+                description: 'No clear trigger, uncertain mechanism',
+                next: 'angio-empiric',
+            },
+        ],
+    },
+    {
+        id: 'angio-bradykinin-screen',
+        type: 'question',
+        module: 2,
+        title: 'Bradykinin-Mediated — Identify Cause',
+        body: 'Bradykinin-mediated angioedema is NOT an allergic reaction. Epinephrine, antihistamines, and corticosteroids are generally INEFFECTIVE. [3][5][20]\n\n[Lab Interpretation Guide](#/info/angio-labs)\n\n**Key history:** ACEi/ARB use, family history of angioedema, prior similar episodes, recent tPA administration, age of first episode, associated lymphoproliferative disorder.',
+        citation: [3, 5, 20],
+        options: [
+            {
+                label: 'ACEi or ARB Use',
+                description: '30% of all ED angioedema visits in the US',
+                next: 'angio-acei',
+            },
+            {
+                label: 'Known or Suspected HAE',
+                description: 'Family history, recurrent episodes, onset < age 20',
+                next: 'angio-hae',
+            },
+            {
+                label: 'Post-tPA Administration',
+                description: '0.9-7.9% incidence after alteplase',
+                next: 'angio-tpa',
+            },
+            {
+                label: 'Age >40, No Family History',
+                description: 'Acquired C1-INH deficiency, lymphoproliferative disorder',
+                next: 'angio-aae',
+            },
+            {
+                label: 'Recurrent Without Trigger',
+                description: 'No clear cause identified',
+                next: 'angio-idiopathic',
+            },
+            {
+                label: 'Abdominal Pain as Primary Symptom',
+                description: 'GI involvement — mimics acute abdomen',
+                next: 'angio-abdominal',
+            },
+        ],
+    },
+    {
+        id: 'angio-empiric',
+        type: 'question',
+        module: 2,
+        title: 'Undifferentiated Angioedema',
+        body: 'When the etiology is unclear, assume histamine-mediated (the most common cause, 40-70%) and start empiric treatment. [3][5]\n\n**Start:** [Epinephrine](#/drug/epinephrine/anaphylaxis) 0.3-0.5 mg IM + [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg IV. Reassess in 30-60 minutes.\n\nA diagnostic/therapeutic challenge of epinephrine is reasonable — histamine-mediated angioedema will almost always respond rapidly. Failure to respond suggests bradykinin-mediated process. [5]',
+        citation: [3, 5],
+        options: [
+            {
+                label: 'Response to Treatment',
+                description: 'Improvement with epinephrine/antihistamines',
+                next: 'angio-histamine-mild',
+            },
+            {
+                label: 'No Response — Consider Bradykinin',
+                description: 'Refractory to epinephrine and antihistamines',
+                next: 'angio-bradykinin-screen',
+            },
+        ],
+    },
+    // =====================================================================
+    // MODULE 3: HISTAMINE-MEDIATED TREATMENT
+    // =====================================================================
+    {
+        id: 'angio-histamine-treat',
+        type: 'question',
+        module: 3,
+        title: 'Histamine-Mediated — Severity Assessment',
+        body: 'Histamine-mediated angioedema exists along the spectrum of allergic reaction and anaphylaxis. Treatment is the same as for anaphylaxis. [3][5]\n\nAssess for multisystem involvement — this differentiates anaphylaxis from isolated angioedema.',
+        citation: [3, 5],
+        options: [
+            {
+                label: 'Anaphylaxis Features',
+                description: 'Hypotension, wheeze, multisystem involvement (skin + respiratory/GI/cardiovascular)',
+                next: 'angio-anaphy-treat',
+                urgency: 'critical',
+            },
+            {
+                label: 'Isolated Angioedema',
+                description: 'Localized swelling without systemic features',
+                next: 'angio-histamine-mild',
+            },
+        ],
+    },
+    {
+        id: 'angio-anaphy-treat',
+        type: 'result',
+        module: 3,
+        title: 'Anaphylaxis Protocol',
+        body: '**TREAT AS ANAPHYLAXIS — Epinephrine is first-line.** [3][4]\n\n**Epinephrine:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis) 0.3-0.5 mg IM (1 mg/mL) into anterolateral thigh\n• Repeat every 5-20 minutes, up to 3 doses\n• Pediatric: 0.01 mg/kg IM (max 0.3 mg)\n• **Refractory:** IV epinephrine drip 1-4 mcg/min (0.01-0.02 mcg/kg/min)\n• **"Dirty" drip:** 1 mg epinephrine in 1 L NS = 1 mcg/mL, run wide open\n\n**Adjuncts:**\n• **H1 blocker:** [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg IV + [Cetirizine](#/drug/cetirizine/angioedema) 10 mg PO\n• **H2 blocker:** [Famotidine](#/drug/famotidine/angioedema) 20 mg IV\n• **Corticosteroid:** [Methylprednisolone](#/drug/methylprednisolone/angioedema) 125 mg IV (adjunct — limited evidence for angioedema, but commonly given) [4]\n• **IV crystalloid** if hypotensive\n\n**On beta-blocker + refractory hypotension:**\n• [Glucagon](#/drug/glucagon/anaphylaxis) 1-5 mg IV every 5 minutes\n• Increases cAMP independent of adrenergic receptors [3]',
+        citation: [3, 4],
+        recommendation: 'Full anaphylaxis protocol. Observe minimum 4-6 hours. Biphasic reaction risk.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-histamine-mild',
+        type: 'result',
+        module: 3,
+        title: 'Isolated Histamine-Mediated Angioedema',
+        body: '**No anaphylaxis features — localized, self-limited.**\n\n• **H1 blocker:** [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg IV/PO or [Cetirizine](#/drug/cetirizine/angioedema) 10 mg PO\n• **Consider H2 blocker:** [Famotidine](#/drug/famotidine/angioedema) 20 mg IV — limited evidence but favorable safety profile [4]\n• **Consider corticosteroid:** [Methylprednisolone](#/drug/methylprednisolone/angioedema) 125 mg IV — not proven effective in RCTs for angioedema specifically, but commonly given [4]\n• Remove trigger if identified (food, insect sting, NSAID, new medication)\n\n**Observe 4-6 hours** in ED to assess for progression. ~40-60% of angioedema patients are admitted for observation. [5]',
+        citation: [4, 5],
+        recommendation: 'Observe 4-6 hours. Discharge with antihistamines and return precautions if stable.',
+        next: 'angio-dispo',
+    },
+    // =====================================================================
+    // MODULE 4: BRADYKININ-MEDIATED TREATMENT
+    // =====================================================================
+    {
+        id: 'angio-acei',
+        type: 'info',
+        module: 4,
+        title: 'ACEi-Induced Angioedema',
+        body: '**STOP the ACEi immediately.** This is NOT an allergic reaction — it is a side effect (class effect). [5][10][20]\n\n**Key facts:**\n• Up to 30% of all ED angioedema visits in the US [5]\n• ~0.7% of patients develop angioedema within 5 years of ACEi use [10]\n• NOT dose-dependent — can occur hours to 10+ years after starting [5]\n• 5-fold higher risk in Black patients (5% vs 0.5%) [20]\n• Can also occur with ARBs (less common)\n\n**Epinephrine, antihistamines, and corticosteroids are generally INEFFECTIVE** — this is a bradykinin-mediated process, not histamine-mediated. [3][5][20]\n\n**Distinguish from allergic:** Slow onset, no urticaria, often asymmetric, primarily tongue/lip involvement.',
+        citation: [3, 5, 10, 20],
+        next: 'angio-acei-treat',
+    },
+    {
+        id: 'angio-acei-treat',
+        type: 'result',
+        module: 4,
+        title: 'ACEi-Induced — Treatment',
+        body: '**Discontinue ACEi permanently. Observation is the cornerstone.** [5][20][23]\n\n**Targeted therapies (present both evidence perspectives):**\n\n**Antifibrinolytic approach (emerging evidence):**\n• [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) 1 g IV load, then 1 g over 8 hours — blocks plasminogen→plasmin conversion, interrupting the kallikrein amplification spiral. Case series: all 31 non-intubated patients avoided intubation. A single dose may be inadequate — ongoing treatment often required. [21][22]\n• [Aminocaproic Acid](#/drug/aminocaproic-acid/angioedema) 4-5 g IV over 1 hour, then 1 g/hour — alternative antifibrinolytic\n\n**Bradykinin receptor antagonist:**\n• [Icatibant](#/drug/icatibant/acei angioedema) 30 mg SQ — Bas 2015 RCT: faster resolution vs steroids/antihistamines (8h vs 27.1h). However, subsequent RCTs yielded neutral results. Very expensive (~$23,000). [16][17]\n\n**Fresh frozen plasma:**\n• [Fresh Frozen Plasma](#/drug/ffp/angioedema) 2 units — contains ACE enzyme + C1-INH. Retrospective cohort: reduced intubation risk. However, mixed evidence — some reports of worsening. Risk of TRALI, volume overload. [19]\n\n**C1-INH concentrate:**\n• [Berinert](#/drug/berinert/angioedema) 20 units/kg IV — mixed results for ACEi-induced (not FDA-approved for this indication) [20]\n\n[ACEi Alternative Medications](#/info/angio-acei-alternatives)\n\n**Observe minimum 4-6 hours.** Advise patient to stop ACEi permanently and follow up with PCP for alternative antihypertensive.',
+        citation: [5, 16, 17, 19, 20, 21, 22, 23],
+        recommendation: 'Stop ACEi permanently. Consider TXA or icatibant. Observe minimum 4-6 hours. PCP follow-up for medication change.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-hae',
+        type: 'question',
+        module: 4,
+        title: 'Hereditary Angioedema',
+        body: 'HAE subtypes are caused by C1 esterase inhibitor (C1-INH) deficiency or dysfunction. Prevalence: 1:100,000 to 1:150,000. ~25% arise from de novo mutations (no family history). [2][5]\n\n[HAE Classification & Triggers](#/info/angio-hae-types)\n[Lab Interpretation Guide](#/info/angio-labs)\n\n**Type 1 (85%):** Deficient C1-INH level\n**Type 2 (15%):** Normal level but decreased C1-INH function\n**Type 3 (rare):** Normal C1-INH — linked to factor XII mutations',
+        citation: [2, 5],
+        options: [
+            {
+                label: 'Known HAE Type 1 or 2',
+                description: 'Confirmed C1-INH deficiency/dysfunction',
+                next: 'angio-hae-treat',
+            },
+            {
+                label: 'Unknown / First Presentation',
+                description: 'Suspected HAE — not yet confirmed',
+                next: 'angio-hae-new',
+            },
+            {
+                label: 'Pediatric Patient',
+                description: '50-75% have first attack by age 12',
+                next: 'angio-peds',
+            },
+            {
+                label: 'Pregnant or Lactating',
+                description: 'Variable disease course in pregnancy',
+                next: 'angio-pregnancy',
+            },
+        ],
+    },
+    {
+        id: 'angio-hae-treat',
+        type: 'result',
+        module: 4,
+        title: 'HAE — Acute Treatment',
+        body: '**First-line: C1-INH replacement therapy.** [11][12][13]\n\n**C1-INH concentrates:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV push at 4 mL/min — preferred. FDA approved for acute HAE. Median symptom relief: 0.46 hours. 99% attack resolution with single dose. [11]\n• [Ruconest](#/drug/ruconest/hereditary angioedema) 50 units/kg IV (<84 kg) or 4200 units (≥84 kg) — recombinant C1-INH from transgenic rabbits. Contraindicated if rabbit allergy. Median relief: 66 min. [13]\n\n**Alternative targeted therapies:**\n• [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ in abdomen — bradykinin B2 receptor antagonist. Repeat q6h, max 3 doses/24h. [14][15]\n• [Ecallantide](#/drug/ecallantide/hereditary angioedema) 30 mg SQ (3 × 10 mg at separate sites, ≥2.5" apart) — kallikrein inhibitor. ~4% anaphylaxis risk — administer in healthcare setting only. Ages ≥12. [18]\n\n**Adjunctive / if targeted therapy unavailable:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) 1 g IV — antifibrinolytic, interrupts kallikrein amplification spiral. Effective for all HAE types. [25]\n• [Aminocaproic Acid](#/drug/aminocaproic-acid/angioedema) 4-5 g IV — alternative antifibrinolytic\n• [Fresh Frozen Plasma](#/drug/ffp/angioedema) 2-4 units — last resort (contains C1-INH but also kallikrein substrates — theoretical worsening risk) [19]\n\n**HAE with normal C1-INH (Type 3):** C1-INH concentrate efficacy is variable. Icatibant and TXA may be more effective. [25]',
+        citation: [11, 12, 13, 14, 15, 18, 19, 25],
+        recommendation: 'C1-INH concentrate is first-line for HAE Types 1 and 2. Icatibant or ecallantide as alternatives. TXA if targeted therapy unavailable.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-hae-new',
+        type: 'info',
+        module: 4,
+        title: 'First Presentation — Suspected HAE',
+        body: '**Send C4 level — best screening test in the ED.** [5]\n\n• C4 is **96% sensitive during an acute attack** and 81% sensitive between attacks [20]\n• Low C4 + clinical suspicion warrants empiric treatment while awaiting confirmatory testing\n• Outpatient confirmatory workup: C1-INH level, C1-INH function, C1q\n\n**If HAE is strongly suspected, do NOT delay treatment for lab confirmation.** Start C1-INH concentrate if available.\n\n**Family history is suggestive but not definitive** — 25% of HAE cases are from de novo mutations. [5]\n\n[Lab Interpretation Guide](#/info/angio-labs)',
+        citation: [5, 20],
+        next: 'angio-hae-treat',
+    },
+    {
+        id: 'angio-aae',
+        type: 'result',
+        module: 4,
+        title: 'Acquired Angioedema (AAE)',
+        body: '**Very rare (~1.5 per million).** Acquired C1-INH deficiency, typically presents after age 40. [5]\n\n**Associated with:**\n• Lymphoproliferative disorders (CLL, non-Hodgkin lymphoma, Waldenstrom, MGUS)\n• Autoimmune disease (lupus — anti-C1-INH autoantibodies)\n\n**Lab findings:**\n• Low C4 (same as HAE)\n• Low C1-INH level or function (same as HAE)\n• **LOW C1q** — THIS distinguishes AAE from HAE (C1q is normal in HAE) [5][25]\n• Paraprotein often present\n\n**Treatment:** Same as HAE — [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV, [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ, or [Tranexamic Acid](#/drug/tranexamic-acid/angioedema). [25]\n\n**Must screen for underlying malignancy** — refer to hematology/oncology.',
+        citation: [5, 25],
+        recommendation: 'Treat as HAE. Low C1q distinguishes AAE from HAE. Screen for lymphoproliferative disorder.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-tpa',
+        type: 'result',
+        module: 4,
+        title: 'Post-tPA Angioedema',
+        body: '**Incidence: 0.9-7.9% after alteplase administration.** tPA increases kinins in plasma. [5]\n\n**Management:**\n• Consider stopping tPA infusion if airway is threatened — weigh stroke severity vs airway risk\n• [Icatibant](#/drug/icatibant/acei angioedema) 30 mg SQ (case reports of benefit)\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV (case reports)\n• [Fresh Frozen Plasma](#/drug/ffp/angioedema) 2 units if targeted therapy unavailable\n\n**AVOID Tranexamic Acid — contraindicated in acute ischemic stroke** (thrombotic risk in setting of ongoing cerebral ischemia).\n\nContinue standard stroke management. Secure airway if needed.',
+        citation: [5],
+        recommendation: 'Consider stopping tPA. Icatibant or C1-INH if available. AVOID TXA in acute stroke.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-idiopathic',
+        type: 'info',
+        module: 4,
+        title: 'Idiopathic Angioedema',
+        body: 'Idiopathic angioedema is defined as recurrent angioedema without urticaria, with no identified cause despite thorough evaluation. [4][25]\n\n**Two subtypes (differentiated by treatment response):**\n\n**Idiopathic histaminergic:** Responds to high-dose antihistamines (up to 4× standard dose), leukotriene antagonists, and/or steroids.\n\n**Idiopathic non-histaminergic:** Refractory to antihistamines → consider:\n• [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) — often effective, especially as suppressive therapy [25]\n• [Icatibant](#/drug/icatibant/hereditary angioedema) or C1-INH may sometimes be effective\n\n**Trial of high-dose [Cetirizine](#/drug/cetirizine/angioedema) or [Diphenhydramine](#/drug/diphenhydramine/angioedema) first** — response confirms histaminergic subtype.',
+        citation: [4, 25],
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-peds',
+        type: 'result',
+        module: 4,
+        title: 'Pediatric HAE',
+        body: '**50-75% of HAE patients have first attack by age 12.** Mean age of onset: 5-11 years. [5][24]\n\n**Special considerations:**\n• Smaller airway diameter → laryngeal edema leads to asphyxia faster than adults\n• Fiberoptic laryngoscopy more technically difficult (lower compliance)\n• 43.7% of pediatric HAE ED visits present with respiratory distress [24]\n\n**Abdominal presentations common:**\n• Colicky abdominal pain mimicking acute abdomen (appendicitis, intussusception)\n• **Abdominal ultrasound preferred** — radiation-sparing, can identify bowel wall edema and intussusception (which is associated with HAE) [24]\n\n**Treatment:**\n• C1-INH replacement preferred — [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV (FDA approved for pediatric HAE) [24]\n• Limited ecallantide data in patients <12 years old\n• [Icatibant](#/drug/icatibant/hereditary angioedema) — FDA approved for ≥18 years only',
+        citation: [5, 24],
+        recommendation: 'Smaller airway = faster compromise. C1-INH concentrate preferred. US over CT for abdominal symptoms.',
+        next: 'angio-dispo',
+    },
+    {
+        id: 'angio-pregnancy',
+        type: 'result',
+        module: 4,
+        title: 'Pregnancy & Lactation',
+        body: 'Physiologic changes in pregnancy can **mitigate, aggravate, or have no effect** on underlying HAE — variable and unpredictable. [5]\n\n**Preferred acute treatment:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV — plasma-derived C1-INH, considered safest option [5]\n\n**If Berinert unavailable:**\n• [Ruconest](#/drug/ruconest/hereditary angioedema) (recombinant C1-INH) — recommended if plasma-derived C1-INH not available and no rabbit allergy [5]\n• [Icatibant](#/drug/icatibant/hereditary angioedema) — for life-threatening attacks only when C1-INH unavailable. Recent small studies suggest safety in pregnancy. [5]\n\n**Estrogens can exacerbate bradykinin signaling** — estrogen-containing products may worsen HAE.',
+        citation: [5],
+        recommendation: 'Berinert 20 units/kg IV is preferred in pregnancy. Ruconest or icatibant only if C1-INH unavailable.',
+        next: 'angio-dispo',
+    },
+    // =====================================================================
+    // MODULE 5: ABDOMINAL ANGIOEDEMA
+    // =====================================================================
+    {
+        id: 'angio-abdominal',
+        type: 'info',
+        module: 5,
+        title: 'Abdominal Angioedema',
+        body: '**GI involvement occurs in up to 73% of HAE patients.** Abdominal pain is present in 95% of GI cases. [5]\n\n**Presentation:**\n• Severe abdominal pain, diarrhea, nausea, vomiting, ascites\n• Can appear severe enough to mimic acute abdomen → unnecessary imaging and surgical exploration\n• Often recurrent — detailed history is critical\n\n**Imaging findings:**\n• CT: Ascites (most common), segmental bowel wall edema with or without skip segments, straightening of bowel segments [5]\n• Pediatrics: Abdominal ultrasound preferred (radiation-sparing) — can identify bowel wall edema and intussusception\n\n**KEY:** In patients with recurrent abdominal pain + family history of HAE, consider angioedema before proceeding to surgery.',
+        citation: [5],
+        next: 'angio-abdominal-treat',
+    },
+    {
+        id: 'angio-abdominal-treat',
+        type: 'result',
+        module: 5,
+        title: 'Abdominal — Treatment',
+        body: '**Treat the underlying angioedema — symptom improvement confirms the diagnosis.** [5]\n\n**For known/suspected HAE:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV — improvement in symptoms supports the diagnosis\n• Alternative: [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ or [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) 1 g IV\n\n**In patients with known HAE and typical recurrent abdominal episodes:**\n• Reasonable to defer imaging if clinical picture is consistent with prior episodes AND patient improves with targeted therapy [4]\n\n**Avoid unnecessary surgical exploration** — angioedema-related bowel edema resolves with treatment.\n\n**If diagnosis uncertain:** Standard acute abdomen workup remains appropriate. Send C4 level if HAE suspected.',
+        citation: [4, 5],
+        recommendation: 'Treat underlying angioedema. Symptom improvement confirms diagnosis. Avoid unnecessary surgery.',
+        next: 'angio-dispo',
+    },
+    // =====================================================================
+    // MODULE 6: DISPOSITION
+    // =====================================================================
+    {
+        id: 'angio-dispo',
+        type: 'question',
+        module: 6,
+        title: 'Disposition — Ishoo Staging',
+        body: 'Angioedema staging based on anatomic location helps predict need for admission and airway intervention. [7][8]\n\n[Ishoo Staging & Disposition Guide](#/info/angio-ishoo-staging)\n\n**Modified Ishoo Staging:**\n• **Stage 1:** Facial rash, facial edema, lip edema\n• **Stage 2:** Soft palate edema\n• **Stage 3:** Tongue edema, floor of mouth edema\n• **Stage 4:** Laryngeal edema (voice change, stridor)\n\nAll patients need strict return precautions and PCP follow-up. [4]',
+        citation: [4, 7, 8],
+        options: [
+            {
+                label: 'Stage 1-2: Face / Lip / Soft Palate',
+                description: 'Peripheral edema without tongue or laryngeal involvement',
+                next: 'angio-dispo-mild',
+            },
+            {
+                label: 'Stage 3: Tongue / Floor of Mouth',
+                description: 'Higher risk for airway progression',
+                next: 'angio-dispo-admit',
+                urgency: 'urgent',
+            },
+            {
+                label: 'Stage 4: Laryngeal Involvement',
+                description: 'Voice change, stridor, or confirmed laryngeal edema',
+                next: 'angio-dispo-icu',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'angio-dispo-mild',
+        type: 'result',
+        module: 6,
+        title: 'Stage 1-2 — Observation / Discharge',
+        body: '**ED observation 4-6 hours minimum.** [5][7][8]\n\nEdema localized to the lips alone does NOT have increased intubation risk. [7][8] Stage 1: 85% treated and discharged from ED; 0.1% require airway intervention. [8]\n\n**Discharge criteria:**\n• No progression of symptoms during observation\n• No signs of airway compromise\n• Able to tolerate oral intake\n• Reliable patient with understanding of return precautions\n\n**Discharge with:**\n• [Angioedema Discharge Instructions](#/info/angio-discharge)\n• Return precautions: worsening swelling, voice change, difficulty breathing/swallowing\n• PCP follow-up (ideally next day)\n• **If allergic component:** Prescribe epinephrine autoinjector + short course antihistamines\n• **If ACEi-induced:** Stop ACEi permanently, PCP for alternative antihypertensive\n• **If HAE suspected:** Send C4 level, refer to allergist/immunologist\n\n[ACEi Alternative Medications](#/info/angio-acei-alternatives)',
+        citation: [4, 5, 7, 8],
+        recommendation: 'Observe 4-6 hours. Discharge with return precautions, PCP follow-up, and appropriate medication changes.',
+    },
+    {
+        id: 'angio-dispo-admit',
+        type: 'result',
+        module: 6,
+        title: 'Stage 3 — Admit for Monitoring',
+        body: '**Tongue and floor of mouth edema — admit for close airway monitoring.** [7][8]\n\n• Continued medical therapy based on angioedema type\n• Serial airway assessments (including flexible laryngoscopy if available)\n• Dual setup at bedside (intubation equipment + cric tray)\n• **Escalate to ICU if any progression** of laryngeal symptoms\n\nStage 3 has significantly higher risk of ICU admission and airway intervention compared to Stage 1-2. [8]',
+        citation: [7, 8],
+        recommendation: 'Admit for close airway monitoring. Serial airway assessments. Low threshold for ICU escalation.',
+    },
+    {
+        id: 'angio-dispo-icu',
+        type: 'result',
+        module: 6,
+        title: 'Stage 4 — ICU Admission',
+        body: '**Laryngeal involvement — ICU admission required.** [7][8]\n\nStage 4 patients: **67% probability of airway intervention**, 17% require ICU without airway intervention, 0% discharged from ED. [8]\n\n• Airway secured or continuous monitoring with dual setup at bedside\n• Ongoing targeted medical therapy\n• Serial laryngoscopy to assess for resolution\n• **Extubation planning:** Wait for visible improvement. Extubate over airway exchange catheter. Video laryngoscopy to confirm resolution. [9]\n\nFor HAE patients: Discharge with targeted therapy (home C1-INH or icatibant) to reduce recurrence risk. Refer to allergist/immunologist for long-term prophylaxis.',
+        citation: [7, 8, 9],
+        recommendation: 'ICU admission. 67% require airway intervention. Refer HAE patients for long-term prophylaxis.',
+    },
+];
+export const ANGIOEDEMA_MODULE_LABELS = [
+    'Initial Assessment',
+    'Classification',
+    'Histamine Treatment',
+    'Bradykinin Treatment',
+    'Abdominal Angioedema',
+    'Disposition',
+];
+export const ANGIOEDEMA_CITATIONS = [
+    { num: 1, text: 'Kelly M, et al. National estimates of emergency department visits for angioedema and allergic reactions in the United States. Allergy Asthma Proc. 2013;34(2):150-154.' },
+    { num: 2, text: 'Zanichelli A, et al. Misdiagnosis trends in patients with hereditary angioedema from the real-world clinical setting. Ann Allergy Asthma Immunol. 2016;117(4):394-398.' },
+    { num: 3, text: 'Long BJ, Koyfman A, Gottlieb M. Evaluation and management of angioedema in the emergency department. West J Emerg Med. 2019;20(4):587-600.' },
+    { num: 4, text: 'Moellman JJ, et al. A consensus parameter for the evaluation and management of angioedema in the emergency department. Acad Emerg Med. 2014;21(4):469-484.' },
+    { num: 5, text: 'Bernstein JA, et al. Angioedema in the emergency department: a practical guide to differential diagnosis and management. Int J Emerg Med. 2017;10(1):15.' },
+    { num: 6, text: 'Depetri F, et al. Angioedema and emergency medicine: from pathophysiology to diagnosis and treatment. Eur J Intern Med. 2019;59:8-13.' },
+    { num: 7, text: 'Ishoo E, et al. Predicting airway risk in angioedema: staging system based on presentation. Otolaryngol Head Neck Surg. 1999;121(3):263-268.' },
+    { num: 8, text: 'Das C, et al. Evaluation of staging criteria for disposition and airway intervention in emergency department angioedema patients. Acute Med Surg. 2021;8(1):e704.' },
+    { num: 9, text: 'Sandefur BJ, et al. Emergency department intubations in patients with angioedema: a report from the National Emergency Airway Registry. J Emerg Med. 2021;61(5):481-488.' },
+    { num: 10, text: 'Banerji A, et al. Epidemiology of ACE inhibitor angioedema utilizing a large electronic health record. J Allergy Clin Immunol Pract. 2017;5(3):744-749.' },
+    { num: 11, text: 'Craig TJ, et al. C1 esterase inhibitor concentrate in 1085 hereditary angioedema attacks — final results of the I.M.P.A.C.T.2 study. Allergy. 2011;66(12):1604-1611.' },
+    { num: 12, text: 'Zuraw BL, et al. Nanofiltered C1 inhibitor concentrate for treatment of hereditary angioedema. N Engl J Med. 2010;363(6):513-522.' },
+    { num: 13, text: 'Zuraw B, et al. Recombinant human C1-inhibitor for the treatment of acute angioedema attacks in patients with hereditary angioedema. J Allergy Clin Immunol. 2010;126(4):821-827.' },
+    { num: 14, text: 'Lumry WR, et al. Randomized placebo-controlled trial of the bradykinin B2 receptor antagonist icatibant for the treatment of acute attacks of hereditary angioedema: the FAST-3 trial. Ann Allergy Asthma Immunol. 2011;107(6):529-537.' },
+    { num: 15, text: 'Cicardi M, et al. Icatibant, a new bradykinin-receptor antagonist, in hereditary angioedema. N Engl J Med. 2010;363(6):532-541.' },
+    { num: 16, text: 'Bas M, et al. A randomized trial of icatibant in ACE-inhibitor-induced angioedema. N Engl J Med. 2015;372(5):418-425.' },
+    { num: 17, text: 'Straka BT, et al. Effect of bradykinin receptor antagonism on ACE inhibitor-associated angioedema. J Allergy Clin Immunol. 2017;140(1):242-248.' },
+    { num: 18, text: 'Cicardi M, et al. Ecallantide for the treatment of acute attacks in hereditary angioedema. N Engl J Med. 2010;363(6):523-531.' },
+    { num: 19, text: 'Saeb A, et al. Using fresh frozen plasma for acute airway angioedema to prevent intubation in the emergency department: a retrospective cohort study. Emerg Med Int. 2016;2016:6091510.' },
+    { num: 20, text: 'Wilkerson RG, Winters ME. Angiotensin-converting enzyme inhibitor-induced angioedema. Immunol Allergy Clin North Am. 2023;43(3):513-532.' },
+    { num: 21, text: 'Beauchêne C, et al. Tranexamic acid as first-line emergency treatment for episodes of bradykinin-mediated angioedema induced by ACE inhibitors. Rev Med Interne. 2018;39(10):772-776.' },
+    { num: 22, text: 'Wang K, et al. Tranexamic acid for ACE inhibitor induced angioedema. Am J Emerg Med. 2021;43:292.e5-e7.' },
+    { num: 23, text: 'Rosenbaum S, et al. Clinical practice statement: what is the emergency department management of patients with angioedema secondary to an ACE-inhibitor? J Emerg Med. 2021;61(1):105-112.' },
+    { num: 24, text: 'Lacuesta G, et al. Angioedema. Allergy Asthma Clin Immunol. 2024;20(Suppl 3):65.' },
+    { num: 25, text: 'Kesh S, Bernstein JA. Isolated angioedema: a review of classification and update on management. Ann Allergy Asthma Immunol. 2022;129(6):692-702.' },
+];
