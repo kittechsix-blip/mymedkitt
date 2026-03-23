@@ -20,6 +20,7 @@ export { ADRENAL_INSUFFICIENCY_NODES, ADRENAL_INSUFFICIENCY_MODULE_LABELS, ADREN
 export { ANAPHYLAXIS_NODES, ANAPHYLAXIS_MODULE_LABELS, ANAPHYLAXIS_CITATIONS } from './anaphylaxis';
 export { ANGIOEDEMA_NODES, ANGIOEDEMA_MODULE_LABELS, ANGIOEDEMA_CITATIONS } from './angioedema';
 export { THYROID_NODES, THYROID_MODULE_LABELS, THYROID_CITATIONS } from './thyroid';
+export { SYPHILIS_NODES, SYPHILIS_MODULE_LABELS, SYPHILIS_CITATIONS } from './syphilis';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

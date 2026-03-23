@@ -6157,6 +6157,240 @@ const ANGIO_ACEI_ALTERNATIVES: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Syphilis
+// -------------------------------------------------------------------
+
+const SYPH_STEPS_SUMMARY: InfoPage = {
+  id: 'syph-steps-summary',
+  title: 'Syphilis ED Evaluation \u2014 Steps Summary',
+  subtitle: 'Quick Reference Flowchart',
+  sections: [
+    {
+      heading: 'Initial Assessment',
+      body: '\u2022 [Identify presentation and chief complaint](#/node/syph-start)\n\u2022 [Screen for neurologic, ocular, or otic symptoms](#/node/syph-neuro-screen)\n\u2022 [Assess for pregnancy and congenital risk](#/node/syph-pregnancy)',
+    },
+    {
+      heading: 'Stage Classification',
+      body: '\u2022 [Classify by stage: primary, secondary, early latent, late latent, tertiary](#/node/syph-stage-classify)\n\u2022 [Primary: painless chancre, 10-90 days after exposure](#/node/syph-primary-exam)\n\u2022 [Secondary: rash (palms/soles), condylomata lata, systemic symptoms](#/node/syph-secondary-exam)\n\u2022 [Tertiary: gummatous, cardiovascular \u2014 rule out neurosyphilis](#/node/syph-tertiary)',
+    },
+    {
+      heading: 'Testing',
+      body: '\u2022 [Risk factor assessment and co-testing (HIV, GC/CT, Hep B/C)](#/node/syph-risk-factors)\n\u2022 [Order RPR (quantitative) + treponemal test](#/node/syph-ed-orders)\n\u2022 [Interpret NTT/TT combination in clinical context](#/node/syph-test-interpret)',
+    },
+    {
+      heading: 'Treatment',
+      body: '\u2022 [Early syphilis: Benzathine PCN-G 2.4M IM \u00D7 1](#/node/syph-treat-early)\n\u2022 [Late syphilis: Benzathine PCN-G 2.4M IM weekly \u00D7 3](#/node/syph-treat-late)\n\u2022 [Neurosyphilis: IV Penicillin G \u00D7 10-14 days](#/tree/neurosyphilis)\n\u2022 [PCN allergy: Doxycycline or Ceftriaxone alternatives](#/node/syph-pcn-allergy)\n\u2022 [Pregnancy: PCN ONLY \u2014 desensitize if allergic](#/node/syph-treat-pregnancy)',
+    },
+    {
+      heading: 'Disposition',
+      body: '\u2022 [Discharge: mandatory reporting, partner notification, RPR follow-up](#/node/syph-discharge)\n\u2022 [Admit: neurosyphilis, ocular/otic, desensitization, pregnancy complications](#/node/syph-admit)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hazra A, et al. CDC STI Treatment Guidelines, 2021. JAMA. 2022;327(9):870-871.' },
+  ],
+};
+
+const SYPH_STAGES: InfoPage = {
+  id: 'syph-stages',
+  title: 'Syphilis Stage Classification',
+  subtitle: 'Clinical Features by Stage',
+  sections: [
+    {
+      heading: 'Primary Syphilis',
+      body: '**Incubation:** 10-90 days (average 21 days)\n\n**Classic presentation:** Single, painless, firm, round, indurated ulcer (chancre) at the site of inoculation. Clean base, raised edges.\n\n**Key features:**\n\u2022 Usually single \u2014 multiple chancres possible (especially HIV+)\n\u2022 Sites: penis, vulva, cervix, anus, mouth, fingers\n\u2022 Bilateral painless inguinal lymphadenopathy in ~70%\n\u2022 Heals spontaneously in 3-6 weeks even without treatment\n\u2022 Often unnoticed by patient (painless, may be in non-visible location)\n\n**Atypical:** Painful, multiple, or atypical-appearing lesions can occur',
+    },
+    {
+      heading: 'Secondary Syphilis',
+      body: '**Timing:** 4-10 weeks after chancre (which may still be present)\n\n**Rash:** Diffuse, symmetric, maculopapular. Red to red-brown, flat, scaly. Classically involves **palms and soles** (50-80%). Non-pruritic. Can be difficult to identify on darker skin.\n\n**Other findings:**\n\u2022 **Condylomata lata:** moist, flat, broad-based lesions in warm/moist areas \u2014 highly infectious\n\u2022 **Mucous patches:** painless, silvery-gray oral/genital erosions\n\u2022 **Moth-eaten alopecia:** patchy, non-scarring hair loss\n\u2022 **Malignant syphilis (lues maligna):** rare \u2014 cutaneous ulcers with central necrosis\n\n**Systemic:** fever, malaise, weight loss, lymphadenopathy, arthralgias, hepatitis, uveitis\n\nResolves in 3-12 weeks untreated \u2192 enters latent phase',
+    },
+    {
+      heading: 'Latent Syphilis',
+      body: '**Asymptomatic** \u2014 diagnosed by serologic testing only.\n\n**Early latent (< 1 year):** Documented seroconversion or exposure within 12 months. Still sexually transmissible \u2014 ~25% may relapse to secondary.\n\n**Late latent (> 1 year or unknown):** Not sexually transmissible (except vertical in pregnancy). Can progress to tertiary in ~30% untreated. If timing unknown \u2192 classified as late latent (conservative treatment).',
+    },
+    {
+      heading: 'Tertiary Syphilis',
+      body: '**Timing:** 3-15+ years after initial infection. Rare in developed countries.\n\n**Gummatous (~15%):** Granulomatous nodular lesions \u2014 skin, bone, liver, testes. Destructive but treatable.\n\n**Cardiovascular (~10%):** Aortitis, ascending aortic aneurysm, aortic regurgitation, coronary ostial stenosis. Typically 15-30 years post-infection.\n\n**Neurosyphilis:** Can occur at any stage. See [Neurosyphilis Evaluation](#/tree/neurosyphilis).',
+    },
+    {
+      heading: 'Congenital Syphilis',
+      body: 'Vertical transmission from infected mother to fetus. Higher risk with primary/secondary syphilis in pregnancy but can occur at any stage.\n\n**Early congenital (< 2 years):** hepatosplenomegaly, rash, rhinitis (\'snuffles\'), pseudoparalysis, osteochondritis, anemia, low birthweight\n\n**Late congenital (> 2 years):** Hutchinson teeth, interstitial keratitis, eighth nerve deafness (Hutchinson triad), saber shins, saddle nose, frontal bossing\n\n12% higher risk for miscarriage, preterm labor, or stillbirth. ~40% of infected newborns are symptomatic at birth. [3]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'NYC DOHMH. Diagnosis, management, and prevention of syphilis. 2019.' },
+    { num: 3, text: 'Eppes CS, et al. Syphilis in pregnancy. Am J Obstet Gynecol. 2022;227(6):822-838.' },
+  ],
+};
+
+const SYPH_TESTING_ALGORITHM: InfoPage = {
+  id: 'syph-testing-algorithm',
+  title: 'Syphilis Testing Algorithms',
+  subtitle: 'Traditional vs Reverse Sequence',
+  sections: [
+    {
+      heading: 'Traditional Algorithm (NTT First)',
+      body: '1. **Screen with NTT** (RPR or VDRL)\n2. If reactive \u2192 **confirm with TT** (TP-PA, FTA-ABS)\n3. Both reactive \u2192 **active or past syphilis** \u2014 quantitative RPR for staging\n4. NTT reactive + TT nonreactive \u2192 **biologic false positive**\n\n**Advantages:** NTT provides quantitative titers for monitoring. Cost-effective screening.\n**Limitations:** May miss early primary (NTT not yet reactive) and late latent (NTT may revert).',
+    },
+    {
+      heading: 'Reverse Sequence Algorithm (TT First)',
+      body: '1. **Screen with TT** (EIA or CIA \u2014 automated, high-throughput)\n2. If reactive \u2192 **reflex NTT** (RPR)\n3. Both reactive \u2192 **active or past syphilis**\n4. TT reactive + NTT nonreactive \u2192 **confirm with second, different TT**\n   \u2022 Second TT reactive \u2192 prior treated or late latent\n   \u2022 Second TT nonreactive \u2192 likely false-positive initial TT\n\n**Advantages:** Higher sensitivity for early primary and late latent. Automated testing.\n**Limitations:** Cannot distinguish active from past infection with TT alone.',
+    },
+    {
+      heading: 'Serologic Timeline',
+      body: '**Nontreponemal tests (RPR/VDRL):**\n\u2022 Become reactive 3-4 weeks after infection (1-2 weeks after chancre)\n\u2022 Peak during secondary syphilis\n\u2022 Decline after treatment (4-fold drop = cure)\n\u2022 May decline even without treatment in late disease\n\u2022 ~10% remain low-titer positive for life (serofast state)\n\n**Treponemal tests (TP-PA/FTA-ABS):**\n\u2022 Seroconvert slightly earlier than NTTs\n\u2022 Remain positive for **life** regardless of treatment\n\u2022 Cannot monitor treatment response\n\n**Window period:** Both tests may be nonreactive in up to **30%** of primary syphilis. If clinical suspicion is high and both negative \u2192 treat empirically and repeat in 2-4 weeks.',
+    },
+    {
+      heading: 'Key Pitfalls',
+      body: '\u2022 **Prozone phenomenon:** Very high NTT titers in secondary syphilis can saturate the assay \u2192 false negative. Request diluted RPR if clinically suspected.\n\u2022 **BFP (biologic false positive):** NTT reactive + TT nonreactive. Causes: pregnancy, SLE, IVDU, HIV, vaccination, liver disease.\n\u2022 **Serofast state:** ~10% of treated patients maintain persistently low NTT titers despite adequate treatment.\n\u2022 **RPR vs VDRL:** Not interchangeable. RPR titers run slightly higher. Always compare same test type. [6]',
+    },
+  ],
+  citations: [
+    { num: 6, text: 'Papp JR, et al. CDC Laboratory Recommendations for Syphilis Testing, 2024. MMWR. 2024;73(1):1-32.' },
+  ],
+};
+
+const SYPH_TREATMENT_TABLE: InfoPage = {
+  id: 'syph-treatment-table',
+  title: 'Syphilis Treatment Summary',
+  subtitle: 'By Stage With Drug Links',
+  sections: [
+    {
+      heading: 'Primary / Secondary / Early Latent',
+      body: '**First-line:** [Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) 2.4 million units IM \u00D7 **1 dose**\n\n**PCN allergy (non-pregnant):**\n\u2022 [Doxycycline](#/drug/doxycycline/primary) 100 mg PO BID \u00D7 14 days\n\u2022 [Ceftriaxone](#/drug/ceftriaxone/neurosyphilis) 1-2g IM/IV daily \u00D7 10-14 days (limited data)\n\n**Follow-up:** RPR at 6 and 12 months. Expect 4-fold titer decline.',
+    },
+    {
+      heading: 'Late Latent / Tertiary (Non-Neurologic)',
+      body: '**First-line:** [Benzathine Penicillin G](#/drug/benzathine-penicillin/late latent) 2.4 million units IM weekly \u00D7 **3 weeks** (total 7.2M units)\n\n\u2022 Missed dose > 14 days \u2192 restart 3-dose series\n\u2022 Rule out neurosyphilis before treating (especially if RPR \u2265 1:32 or HIV+)\n\n**PCN allergy (non-pregnant):**\n\u2022 [Doxycycline](#/drug/doxycycline/late latent) 100 mg PO BID \u00D7 28 days\n\u2022 Must exclude neurosyphilis first (doxycycline has poor CSF penetration)\n\n**Follow-up:** RPR at 6, 12, and 24 months.',
+    },
+    {
+      heading: 'Neurosyphilis / Ocular / Otic',
+      body: '**First-line:** [Penicillin G IV](#/drug/penicillin-g-iv/neurosyphilis) 18-24 million units/day (3-4M units q4h) \u00D7 10-14 days\n\n**Alternative:** [Procaine Penicillin](#/drug/procaine-penicillin/neurosyphilis) 2.4M units IM daily + Probenecid 500mg PO QID \u00D7 10-14 days\n\n**PCN allergy:** [Ceftriaxone](#/drug/ceftriaxone/neurosyphilis) 2g IV daily \u00D7 10-14 days (limited data)\n\nSee [Neurosyphilis Evaluation](#/tree/neurosyphilis) for full workup.\n\n**Follow-up:** CSF re-examination at 6 months.',
+    },
+    {
+      heading: 'Pregnancy (Any Stage)',
+      body: '**Penicillin is the ONLY acceptable treatment.**\n\nSame dosing as non-pregnant by stage. If PCN-allergic \u2192 **desensitization is mandatory** (no alternatives proven for congenital syphilis prevention).\n\nMonitor for Jarisch-Herxheimer reaction with fetal monitoring \u00D7 24h if viable gestational age.\n\nInadequate for preventing congenital syphilis:\n\u2022 Non-penicillin regimen used\n\u2022 Treatment < 30 days before delivery\n\u2022 No documented 4-fold titer decline',
+    },
+    {
+      heading: 'Doxycycline Post-Exposure Prophylaxis (DoxyPEP)',
+      body: '**Emerging evidence (not yet standard practice):**\n\nSingle 200mg oral doxycycline dose within 72 hours (preferably 24 hours) of unprotected intercourse reduced syphilis by 87% in the DoxyPEP trial (MSM and transgender women). [42][43]\n\nFurther research needed before becoming standard recommendation.',
+    },
+  ],
+  citations: [
+    { num: 5, text: 'Hazra A, et al. CDC STI Treatment Guidelines, 2021. JAMA. 2022;327(9):870-871.' },
+    { num: 42, text: 'Luetkemeyer AF, et al. Postexposure doxycycline to prevent bacterial STIs. N Engl J Med. 2023;388(14):1296-1306.' },
+    { num: 43, text: 'Molina JM, et al. Doxycycline PEP in MSM. Lancet Infect Dis. 2018;18(3):308-317.' },
+  ],
+};
+
+const SYPH_JARISCH_HERXHEIMER: InfoPage = {
+  id: 'syph-jarisch-herxheimer',
+  title: 'Jarisch-Herxheimer Reaction',
+  subtitle: 'Treatment-Related Immune Response',
+  sections: [
+    {
+      heading: 'Mechanism',
+      body: 'Acute febrile reaction caused by **cytokine release from dying spirochetes** after treatment initiation. This is NOT an allergic reaction \u2014 it is an inflammatory immune response to treatment.\n\nDo NOT withhold future doses of treatment.',
+    },
+    {
+      heading: 'Incidence by Stage',
+      body: '\u2022 **Primary syphilis:** 10-35%\n\u2022 **Secondary syphilis:** 75-90%\n\u2022 **Late/latent syphilis:** uncommon but possible\n\nMore common with higher spirochete burden.',
+    },
+    {
+      heading: 'Clinical Features',
+      body: '**Timing:** Onset 2-8 hours after treatment, resolves within 24 hours.\n\n**Symptoms:**\n\u2022 Fever, rigors, chills\n\u2022 Headache, myalgias, arthralgias\n\u2022 Tachycardia, mild hypotension\n\u2022 Flushing, worsening of existing rash\n\n**Treatment:** Supportive care only\n\u2022 Antipyretics (acetaminophen, NSAIDs)\n\u2022 Oral fluids\n\u2022 Rest\n\u2022 Reassurance \u2014 self-limited',
+    },
+    {
+      heading: 'Pregnancy Considerations',
+      body: 'Jarisch-Herxheimer reaction can precipitate:\n\u2022 **Preterm contractions** and labor\n\u2022 **Fetal distress** (variable decelerations)\n\u2022 Rarely, fetal demise\n\n**Management:**\n\u2022 Continuous fetal monitoring \u00D7 24 hours if viable gestational age\n\u2022 OB consultation before or immediately after treatment\n\u2022 **Should NOT prevent or delay treatment** \u2014 untreated syphilis poses greater risk to fetus\n\nTreatment earlier in pregnancy (especially first trimester) is associated with better fetal outcomes and lower Jarisch-Herxheimer severity.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'NYC DOHMH. Diagnosis, management, and prevention of syphilis. 2019.' },
+  ],
+};
+
+const SYPH_PARTNER_NOTIFICATION: InfoPage = {
+  id: 'syph-partner-notification',
+  title: 'Partner Notification & Reporting',
+  subtitle: 'Public Health Requirements',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Mandatory Reporting',
+      body: 'Syphilis is a **reportable sexually transmitted infection in all 50 US states**.\n\nAll positive cases must be reported to the state or local public health department.\n\nProvide accurate patient contact information \u2014 public health agencies conduct partner notification and facilitate treatment.',
+    },
+    {
+      heading: 'Contact Tracing Windows',
+      body: 'Evaluate and test sexual partners within these exposure windows:\n\n\u2022 **Primary syphilis:** 3 months + symptom duration\n\u2022 **Secondary syphilis:** 6 months + symptom duration\n\u2022 **Early latent:** 1 year\n\n**Presumptive treatment:** Partners exposed within 90 days should be treated presumptively, even if seronegative (may be in window period).\n\n**Partners exposed > 90 days ago:** Test and treat based on results.',
+    },
+    {
+      heading: 'Patient Counseling',
+      body: '**During treatment:**\n\u2022 Avoid all sexual contact until **7 days after treatment** AND until all lesions have fully resolved\n\u2022 Syphilis lesions are infectious \u2014 any skin contact can spread the disease\n\n**Prevention:**\n\u2022 Consistent condom use reduces transmission risk (but does not eliminate it \u2014 lesions outside the condom area can transmit)\n\u2022 Regular STI screening for high-risk individuals\n\u2022 Monogamous sexual relationships lower risk\n\u2022 If on PrEP for HIV: test for syphilis at least every 6 months\n\n**Follow-up:**\n\u2022 Return for RPR testing at 6, 12, and 24 months\n\u2022 Return immediately if new symptoms develop (vision changes, hearing changes, neurologic symptoms, new rash or lesion)\n\n**Jarisch-Herxheimer reaction:** Fever, body aches, and worsening rash may occur within 24 hours of treatment. This is expected and self-limited. Take acetaminophen for comfort. Seek care if symptoms are severe.',
+    },
+  ],
+  citations: [
+    { num: 5, text: 'Hazra A, et al. CDC STI Treatment Guidelines, 2021. JAMA. 2022;327(9):870-871.' },
+  ],
+};
+
+const SYPH_CONGENITAL: InfoPage = {
+  id: 'syph-congenital',
+  title: 'Congenital Syphilis',
+  subtitle: 'Prevention, Recognition, and Consequences',
+  sections: [
+    {
+      heading: 'Epidemiology',
+      body: 'Congenital syphilis cases in the US have increased **755% from 2012 to 2022** (from ~335 to 3,761 cases), with **282 stillbirths and infant deaths** in 2022 alone. [3][4]\n\nThis increase mirrors rising syphilis rates among reproductive-age women and reflects gaps in prenatal screening and treatment.',
+    },
+    {
+      heading: 'Risk of Transmission',
+      body: '\u2022 **Primary/secondary syphilis in pregnancy:** highest vertical transmission risk (60-100%)\n\u2022 **Early latent:** moderate risk (40%)\n\u2022 **Late latent:** lower but still present (10%)\n\nRisk is reduced by:\n\u2022 Treatment before or early in pregnancy (ideally first trimester \u2014 0% congenital syphilis if treated in first trimester in a Chinese cohort of 682 patients) [11]\n\u2022 Treatment \u2265 30 days before delivery\n\u2022 Documented 4-fold titer decline after treatment',
+    },
+    {
+      heading: 'Early Congenital Syphilis (< 2 years)',
+      body: 'Approximately **40% of infected newborns are symptomatic at birth.**\n\n**Clinical findings:**\n\u2022 Hepatosplenomegaly\n\u2022 Diffuse rash, desquamation\n\u2022 Rhinitis (\'snuffles\') \u2014 bloody/mucoid nasal discharge\n\u2022 Pseudoparalysis of Parrot (painful limb immobility from osteochondritis)\n\u2022 Anemia, thrombocytopenia\n\u2022 Low birthweight, failure to thrive\n\u2022 Jaundice, nephrotic syndrome\n\n**Neurologic:** Seizures, cranial nerve deficits, hearing loss, blindness',
+    },
+    {
+      heading: 'Late Congenital Syphilis (> 2 years)',
+      body: '**Hutchinson Triad:**\n1. **Hutchinson teeth** \u2014 smaller, widely spaced teeth with notching along biting surface\n2. **Interstitial keratitis** \u2014 corneal inflammation causing pain, photophobia, vision loss\n3. **Eighth nerve deafness** \u2014 sensorineural hearing loss\n\n**Other findings:**\n\u2022 **Saber shins** \u2014 anterior tibial bowing from periostitis\n\u2022 **Saddle nose** \u2014 nasal bridge collapse from cartilage destruction\n\u2022 **Frontal bossing** \u2014 prominent forehead\n\u2022 **Clutton joints** \u2014 painless bilateral knee effusions\n\u2022 **Mulberry molars** \u2014 defective first molars',
+    },
+    {
+      heading: 'Prevention',
+      body: '**Screen ALL pregnant women:**\n\u2022 First prenatal visit\n\u2022 Third trimester (28 weeks)\n\u2022 At delivery (in high-prevalence areas)\n\n**Treatment:** Penicillin is the ONLY acceptable treatment in pregnancy. Desensitize if allergic.\n\n**Inadequate treatment (infant at risk):**\n\u2022 Mother received non-penicillin regimen\n\u2022 Treatment completed < 30 days before delivery\n\u2022 No documented 4-fold titer decline\n\u2022 No treatment during pregnancy\n\n**Newborn treatment:** Aqueous crystalline penicillin G 50,000 units/kg IV q12h (< 7 days old) or q8h (> 7 days) \u00D7 10 days.',
+    },
+  ],
+  citations: [
+    { num: 3, text: 'Eppes CS, et al. Syphilis in pregnancy. Am J Obstet Gynecol. 2022;227(6):822-838.' },
+    { num: 4, text: 'CDC. STI Surveillance, 2024 (provisional). 2025.' },
+    { num: 11, text: 'Wan Z, et al. Maternal syphilis treatment and pregnancy outcomes. BMC Pregnancy Childbirth. 2020;20(1):648.' },
+  ],
+};
+
+const SYPH_GENITAL_DDX: InfoPage = {
+  id: 'syph-genital-ddx',
+  title: 'Differential Diagnosis of Genital Lesions',
+  subtitle: 'Syphilis vs Other Causes',
+  sections: [
+    {
+      heading: 'Infectious Causes',
+      body: '**Syphilis (T. pallidum):**\n\u2022 Painless, firm, indurated ulcer (chancre)\n\u2022 Usually single, clean base\n\u2022 Bilateral painless lymphadenopathy\n\u2022 Heals in 3-6 weeks\n\n**Herpes Simplex (HSV-1/2):**\n\u2022 **Painful**, grouped vesicles on erythematous base\n\u2022 May coalesce into shallow ulcers\n\u2022 Recurrent episodes common\n\u2022 Tender inguinal lymphadenopathy\n\n**Chancroid (H. ducreyi):**\n\u2022 **Painful**, ragged, undermined ulcer with purulent base\n\u2022 Soft, non-indurated edges\n\u2022 Unilateral tender inguinal bubo (may suppurate)\n\u2022 Rare in US\n\n**Lymphogranuloma Venereum (Chlamydia L1-L3):**\n\u2022 Small painless papule/ulcer (often unnoticed) \u2192 heals\n\u2022 Followed by painful unilateral inguinal/femoral lymphadenopathy (2-6 weeks later)\n\u2022 \'Groove sign\' \u2014 enlarged nodes above and below inguinal ligament\n\n**Granuloma Inguinale (Donovanosis):**\n\u2022 Painless, progressive, beefy-red granulomatous ulcer\n\u2022 Bleeds easily on contact\n\u2022 Rare in US',
+    },
+    {
+      heading: 'Non-Infectious Causes',
+      body: '**Fixed drug eruption:**\n\u2022 Recurrent, well-demarcated round lesion in same location\n\u2022 Often related to NSAIDs, tetracyclines, sulfonamides\n\n**Beh\u00E7et disease:**\n\u2022 Recurrent painful oral AND genital ulcers\n\u2022 Associated with uveitis, skin lesions, pathergy\n\n**Traumatic ulcer:**\n\u2022 History of trauma, friction, or sexual activity\n\u2022 Irregular borders, painful\n\n**Squamous cell carcinoma:**\n\u2022 Persistent, non-healing ulcer or nodule\n\u2022 Irregular borders, induration\n\u2022 Risk factors: HPV, immunosuppression\n\u2022 Biopsy indicated for non-healing lesions > 4 weeks',
+    },
+    {
+      heading: 'Clinical Pearl',
+      body: '**When in doubt, test for syphilis.** The chancre of primary syphilis is painless and often missed. Consider syphilis testing in ANY sexually active patient with a genital lesion, especially in high-risk populations (MSM, HIV+, PrEP users).\n\nMultiple STIs can coexist \u2014 always test for HIV, GC/CT, and syphilis together.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'NYC DOHMH. Diagnosis, management, and prevention of syphilis. 2019.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -6332,6 +6566,14 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'angio-hae-types': ANGIO_HAE_TYPES,
   'angio-discharge': ANGIO_DISCHARGE,
   'angio-acei-alternatives': ANGIO_ACEI_ALTERNATIVES,
+  'syph-steps-summary': SYPH_STEPS_SUMMARY,
+  'syph-stages': SYPH_STAGES,
+  'syph-testing-algorithm': SYPH_TESTING_ALGORITHM,
+  'syph-treatment-table': SYPH_TREATMENT_TABLE,
+  'syph-jarisch-herxheimer': SYPH_JARISCH_HERXHEIMER,
+  'syph-partner-notification': SYPH_PARTNER_NOTIFICATION,
+  'syph-congenital': SYPH_CONGENITAL,
+  'syph-genital-ddx': SYPH_GENITAL_DDX,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

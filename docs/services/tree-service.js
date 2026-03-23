@@ -205,6 +205,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/neurosyphilis.js');
             return { nodes: m.NEUROSYPHILIS_NODES, entryNodeId: 'ns-start', categoryId: 'infectious-disease', moduleLabels: m.NEUROSYPHILIS_MODULE_LABELS, citations: m.NEUROSYPHILIS_CITATIONS };
         },
+        'syphilis': async () => {
+            const m = await import('../data/trees/syphilis.js');
+            return { nodes: m.SYPHILIS_NODES, entryNodeId: 'syph-start', categoryId: 'infectious-disease', moduleLabels: m.SYPHILIS_MODULE_LABELS, citations: m.SYPHILIS_CITATIONS };
+        },
         'rabies': async () => {
             const m = await import('../data/trees/rabies.js');
             return { nodes: m.RABIES_NODES, entryNodeId: 'rabies-start', categoryId: 'infectious-disease', moduleLabels: m.RABIES_MODULE_LABELS, citations: m.RABIES_CITATIONS };

@@ -230,6 +230,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 25,
                 entryNodeId: 'angio-start',
+            },
+            {
+                id: 'syphilis',
+                title: 'Syphilis ED Evaluation',
+                subtitle: 'Staging → Testing → Interpretation → Treatment → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 32,
+                entryNodeId: 'syph-start',
             }
         ],
         isCustom: false,
@@ -301,6 +310,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'mening-start',
+            },
+            {
+                id: 'syphilis',
+                title: 'Syphilis ED Evaluation',
+                subtitle: 'Staging → Testing → Interpretation → Treatment → Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 32,
+                entryNodeId: 'syph-start',
             }
         ],
         isCustom: false,

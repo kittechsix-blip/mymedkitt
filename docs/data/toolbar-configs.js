@@ -116,6 +116,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'csf-vdrl', label: 'CSF-VDRL', icon: '\uD83E\uDDEA', action: 'jump', target: 'ns-csf-result' },
         { id: 'ocular-otic', label: 'Ocular/Otic', icon: '\uD83D\uDC41\uFE0F', action: 'jump', target: 'ns-ocular-otic' },
     ],
+    'syphilis': [
+        { id: 'serology', label: 'Serology', icon: '\uD83E\uDDEA', action: 'calculator', target: 'syphilis-serology' },
+        { id: 'treatment', label: 'Treatment', icon: '\uD83D\uDC8A', action: 'overlay', target: 'syph-treatment-table' },
+        { id: 'neuro', label: 'Neuro Syph', icon: '\uD83E\uDDE0', action: 'jump', target: 'syph-neuro-route' },
+        { id: 'pregnancy', label: 'Pregnancy', icon: '\uD83E\uDD30', action: 'jump', target: 'syph-pregnancy' },
+    ],
     'pep': [
         { id: 'regimen', label: 'PEP Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'pep-regimen' },
         { id: 'start-pep', label: 'Start PEP', icon: '\u23F1\uFE0F', action: 'jump', target: 'pep-workup' },

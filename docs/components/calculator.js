@@ -2677,6 +2677,208 @@ const STEROID_EQUIVALENCY_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// Syphilis Serology Interpreter
+// -------------------------------------------------------------------
+const SYPHILIS_SEROLOGY_CALCULATOR = {
+    id: 'syphilis-serology',
+    title: 'Syphilis Serology Interpreter',
+    subtitle: 'NTT/TT Result Interpretation',
+    description: 'Interprets syphilis serologic test results based on nontreponemal test (RPR/VDRL), treponemal test (TP-PA/FTA-ABS/EIA), prior history, clinical presentation, and pregnancy status. Based on CDC 2021 STI Treatment Guidelines and 2024 Laboratory Recommendations.',
+    fields: [
+        {
+            name: 'ntt-result',
+            label: 'Nontreponemal Test (RPR/VDRL)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Nonreactive', points: 0 },
+                { label: 'Reactive', points: 1 },
+            ],
+        },
+        {
+            name: 'tt-result',
+            label: 'Treponemal Test (TP-PA/FTA-ABS/EIA)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not performed', points: 0 },
+                { label: 'Nonreactive', points: 1 },
+                { label: 'Reactive', points: 2 },
+            ],
+        },
+        {
+            name: 'prior-history',
+            label: 'Prior Syphilis History',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None / Unknown', points: 0 },
+                { label: 'Previously treated', points: 1 },
+            ],
+        },
+        {
+            name: 'clinical-presentation',
+            label: 'Clinical Presentation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Asymptomatic (screening)', points: 0 },
+                { label: 'Primary (chancre)', points: 1 },
+                { label: 'Secondary (rash/systemic)', points: 2 },
+                { label: 'Tertiary signs', points: 3 },
+                { label: 'Neurologic/ocular/otic symptoms', points: 4 },
+            ],
+        },
+        {
+            name: 'pregnancy-status',
+            label: 'Pregnancy Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not pregnant', points: 0 },
+                { label: 'Pregnant', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Based on CDC 2021 STI Treatment Guidelines and CDC 2024 Laboratory Recommendations for Syphilis Testing.',
+    citations: [
+        'Hazra A, et al. CDC STI Treatment Guidelines, 2021. JAMA. 2022;327(9):870-871.',
+        'Papp JR, et al. CDC Laboratory Recommendations for Syphilis Testing, 2024. MMWR. 2024;73(1):1-32.',
+        'Tuddenham S, et al. Diagnosis and Treatment of STIs: A Review. JAMA. 2022;327(2):161-172.',
+    ],
+    computeResult: (values) => {
+        const ntt = values['ntt-result'] || 0;
+        const tt = values['tt-result'] || 0;
+        const history = values['prior-history'] || 0;
+        const presentation = values['clinical-presentation'] || 0;
+        const pregnant = values['pregnancy-status'] || 0;
+        // If TT not performed, guide based on NTT alone
+        if (tt === 0) {
+            if (ntt === 1) {
+                return {
+                    value: 'NTT Reactive — Confirm',
+                    label: 'Treponemal test needed for confirmation',
+                    description: 'A reactive nontreponemal test (RPR/VDRL) requires confirmatory treponemal testing (TP-PA, FTA-ABS, or EIA).\n\nDo not treat based on NTT alone unless clinical suspicion is very high (classic chancre, high-risk exposure < 90 days).\n\nFalse-positive NTTs occur with: pregnancy, autoimmune disease, HIV, IVDU, acute febrile illness, vaccination, chronic liver disease.',
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'Incomplete Testing',
+                label: 'Order both NTT and treponemal test',
+                description: 'Complete serologic evaluation requires BOTH a nontreponemal test (RPR or VDRL) AND a treponemal test (TP-PA, FTA-ABS, or EIA).\n\nNeither test alone is sufficient for diagnosis.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        // Neurologic presentation always recommends neurosyphilis workup
+        if (presentation === 4 && (ntt === 1 || tt === 2)) {
+            const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Penicillin is the ONLY acceptable treatment. Desensitize if PCN-allergic.' : '';
+            return {
+                value: 'NEUROSYPHILIS EVALUATION',
+                label: 'Neurologic symptoms with positive serology — LP recommended',
+                description: 'Neurologic, ocular, or otic symptoms with positive syphilis serology require neurosyphilis evaluation.\n\nPerform LP for CSF-VDRL, cell count, protein.\n\nTreatment: IV aqueous crystalline penicillin G 18-24 million units/day (3-4M units q4h) × 10-14 days.\n\nOcular/otosyphilis: Treat as neurosyphilis REGARDLESS of CSF findings — do not delay treatment for LP results.' + pregNote,
+                colorVar: '--color-danger',
+            };
+        }
+        // Both reactive
+        if (ntt === 1 && tt === 2) {
+            if (history === 1) {
+                const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Must use penicillin. Desensitize if allergic. Monitor for Jarisch-Herxheimer reaction with fetal monitoring.' : '';
+                return {
+                    value: 'Possible Reinfection',
+                    label: 'Compare current RPR titer to prior documented titer',
+                    description: 'Both tests reactive in a previously treated patient. Compare quantitative RPR to prior post-treatment titer.\n\n• 4-fold titer rise (e.g., 1:4 → 1:16) = REINFECTION — re-treat per stage\n• Stable low titer = serofast state (~10% of treated patients) — may not need re-treatment\n\nTreponemal tests remain positive for life and cannot distinguish active from past infection.\n\nEvaluate for neurosyphilis if RPR ≥ 1:32 or neurologic symptoms present.' + pregNote,
+                    colorVar: '--color-warning',
+                };
+            }
+            let stageNote = '';
+            if (presentation === 1)
+                stageNote = '\n\nPrimary syphilis (chancre present): Benzathine PCN-G 2.4M units IM × 1 dose.';
+            else if (presentation === 2)
+                stageNote = '\n\nSecondary syphilis (rash/systemic): Benzathine PCN-G 2.4M units IM × 1 dose. Jarisch-Herxheimer reaction occurs in 75-90%.';
+            else if (presentation === 3)
+                stageNote = '\n\nTertiary syphilis: Rule out neurosyphilis first. Benzathine PCN-G 2.4M units IM weekly × 3 weeks.';
+            else
+                stageNote = '\n\nClassify stage based on clinical findings and time since acquisition to determine treatment regimen.';
+            const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Must use penicillin. Desensitize if allergic. Risk of congenital syphilis — urgent treatment required.' : '';
+            return {
+                value: 'ACTIVE SYPHILIS',
+                label: 'Confirmed infection — treat per stage',
+                description: 'Both nontreponemal and treponemal tests reactive in a patient without prior treatment history confirms active syphilis infection.' + stageNote + '\n\nCo-test for HIV, gonorrhea, chlamydia, hepatitis B/C.\nReport to public health. Notify and treat sexual partners.' + pregNote,
+                colorVar: '--color-danger',
+            };
+        }
+        // NTT nonreactive, TT reactive
+        if (ntt === 0 && tt === 2) {
+            if (history === 1) {
+                return {
+                    value: 'Previously Treated',
+                    label: 'No treatment needed — treponemal tests remain positive for life',
+                    description: 'Nonreactive NTT with reactive TT in a previously treated patient is the expected serologic pattern after successful treatment.\n\nTreponemal antibodies persist for life. The nonreactive NTT confirms adequate treatment response.\n\nNo further treatment needed unless new symptoms develop or new exposure occurs.',
+                    colorVar: '--color-primary',
+                };
+            }
+            if (presentation === 1) {
+                const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Treat empirically now. Must use penicillin.' : '';
+                return {
+                    value: 'Possible Early Primary',
+                    label: 'TT seroconverts before NTT — treat if chancre present',
+                    description: 'Reactive treponemal test with nonreactive NTT and a chancre present suggests very early primary syphilis (TT seroconverts 1-2 weeks before NTT).\n\nTreat empirically: Benzathine PCN-G 2.4M units IM × 1.\nRepeat RPR in 2-4 weeks to confirm seroconversion.\n\nAlternatively, dark-field microscopy of the lesion can provide immediate diagnosis if available.' + pregNote,
+                    colorVar: '--color-warning',
+                };
+            }
+            const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Consider treatment for late latent syphilis to prevent congenital transmission. Must use penicillin.' : '';
+            return {
+                value: 'Prior Treated or Late Latent',
+                label: 'Confirm with second treponemal test (different assay)',
+                description: 'Reactive treponemal test with nonreactive NTT has several interpretations:\n\n• Previously treated syphilis (most common if prior history unknown)\n• Very late latent syphilis (NTT reverts in up to 25% of untreated late latent)\n• Very early primary syphilis (TT seroconverts before NTT)\n• False-positive TT (confirm with second, different treponemal test)\n\nIf reverse algorithm: confirm with TP-PA (if EIA/CIA was screening) or vice versa.\nIf second TT reactive + no prior treatment documented → consider late latent treatment (Benzathine PCN-G 2.4M IM weekly × 3).\nIf second TT nonreactive → likely false-positive (no treatment if low risk).' + pregNote,
+                colorVar: '--color-warning',
+            };
+        }
+        // NTT reactive, TT nonreactive
+        if (ntt === 1 && tt === 1) {
+            if (presentation === 2) {
+                return {
+                    value: 'Check for Prozone',
+                    label: 'Request diluted/prozone-checked RPR',
+                    description: 'Reactive NTT with nonreactive TT in a patient with secondary syphilis features (rash) raises concern for the PROZONE PHENOMENON.\n\nIn secondary syphilis, very high antibody titers can saturate the assay and paradoxically produce a false-negative or weakly reactive NTT.\n\nRequest a diluted/prozone-checked RPR from the laboratory.\n\nIf clinical suspicion remains high, treat empirically and repeat serologies.',
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'Biologic False Positive',
+                label: 'No syphilis treatment indicated',
+                description: 'Reactive NTT (RPR/VDRL) with nonreactive treponemal test most likely represents a biologic false-positive (BFP).\n\nCommon causes:\n• Pregnancy, autoimmune disease (SLE, antiphospholipid syndrome)\n• Acute febrile illness, recent vaccination\n• IV drug use, chronic liver disease, advanced age, malignancy, HIV\n\n• Acute BFP (< 6 months): usually low titer (≤ 1:8), transient\n• Chronic BFP (> 6 months): consider autoimmune workup (ANA, anti-dsDNA, anticardiolipin Ab)\n\nNo syphilis treatment needed. Consider repeating TT with different assay. Evaluate for underlying cause.',
+                colorVar: '--color-primary',
+            };
+        }
+        // Both nonreactive
+        if (ntt === 0 && tt === 1) {
+            if (presentation === 1) {
+                const pregNote = pregnant === 1 ? '\n\n⚠️ PREGNANT: Treat empirically if chancre suspicious. Must use penicillin.' : '';
+                return {
+                    value: 'Possible Incubating',
+                    label: 'Chancre present but seronegative — may be in window period',
+                    description: 'Both tests nonreactive but chancre present suggests possible incubating syphilis (pre-seroconversion window).\n\nNTTs become reactive 1-4 weeks after chancre appears. Up to 30% of primary syphilis is seronegative.\n\nDark-field microscopy of the lesion if available (definitive).\nTreat empirically: Benzathine PCN-G 2.4M units IM × 1.\nRepeat serologies in 2-4 weeks.' + pregNote,
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'No Evidence of Syphilis',
+                label: 'Syphilis excluded (or very early incubating)',
+                description: 'Both nontreponemal and treponemal tests nonreactive. No serologic evidence of syphilis.\n\nIf recent exposure (< 90 days): may be within window period. Treat presumptively per partner notification protocol and repeat serologies in 2-4 weeks.\n\nIf no risk factors or exposure: syphilis excluded.\n\nConsider alternative diagnoses for presenting symptoms.',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select all fields',
+            description: 'Complete all fields to generate interpretation.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -2719,6 +2921,7 @@ const CALCULATORS = {
     'anaphylaxis-criteria': ANAPHYLAXIS_CRITERIA_CALCULATOR,
     'burch-wartofsky': BURCH_WARTOFSKY_CALCULATOR,
     'steroid-equivalency': STEROID_EQUIVALENCY_CALCULATOR,
+    'syphilis-serology': SYPHILIS_SEROLOGY_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
