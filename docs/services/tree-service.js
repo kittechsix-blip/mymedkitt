@@ -249,6 +249,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/delirium.js');
             return { nodes: m.DELIRIUM_NODES, entryNodeId: 'delirium-start', categoryId: 'neurology', moduleLabels: m.DELIRIUM_MODULE_LABELS, citations: m.DELIRIUM_CITATIONS };
         },
+        'anaphylaxis': async () => {
+            const m = await import('../data/trees/anaphylaxis.js');
+            return { nodes: m.ANAPHYLAXIS_NODES, entryNodeId: 'anaph-start', categoryId: 'emergency-medicine', moduleLabels: m.ANAPHYLAXIS_MODULE_LABELS, citations: m.ANAPHYLAXIS_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
