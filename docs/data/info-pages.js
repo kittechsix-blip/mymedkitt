@@ -476,6 +476,39 @@ const NSTEMI_POCUS_PAGE = {
     ],
 };
 // -------------------------------------------------------------------
+// EPSS Measurement Quick Reference
+// -------------------------------------------------------------------
+const EPSS_MEASUREMENT_PAGE = {
+    id: 'epss-measurement',
+    title: 'EPSS Measurement',
+    subtitle: 'E-Point Septal Separation for LV Function',
+    sections: [
+        {
+            body: '**EPSS (E-Point Septal Separation)** is a rapid, quantitative method for assessing left ventricular systolic function at the bedside. An EPSS >7 mm suggests reduced ejection fraction.',
+        },
+        {
+            heading: 'How to Measure',
+            body: '1. **Obtain PLAX view** — Parasternal long axis at 3rd-4th ICS\n2. **Activate M-mode** — Place cursor through mitral valve leaflet tips\n3. **Identify E-point** — The peak of the anterior mitral leaflet during early diastole\n4. **Measure** — Distance from E-point to the interventricular septum',
+        },
+        {
+            heading: 'Interpretation',
+            body: '• **EPSS < 7 mm** — Normal systolic function likely\n• **EPSS 7–10 mm** — Grey zone (add B-lines/IVC assessment)\n• **EPSS > 10 mm** — Reduced EF likely (LVEF ≤30%)\n\n**100% sensitivity** for detecting LVEF ≤30% when EPSS >7 mm. Specificity is moderate (52%).',
+        },
+        {
+            heading: 'Limitations',
+            body: '**EPSS may be inaccurate in:**\n• Aortic regurgitation\n• Mitral stenosis\n• Hypertrophic cardiomyopathy\n• Non-sinus rhythms (A-Fib)\n\n**Pediatric thresholds:** 6.0 mm for children, 4.9 mm for ages 0–3 years.',
+        },
+        {
+            heading: 'Full Consult',
+            body: 'For a complete step-by-step guide with images, see the [Echo-EPSS Consult](#/consult/echo-epss).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McKaigney CJ, et al. E-Point Septal Separation: A Bedside Tool for Emergency Physician Assessment of LVEF. Am J Emerg Med. 2014;32(6):493-7.' },
+        { num: 2, text: 'Prats MI, Bahner DP. Application of Focused Cardiac Ultrasound in Emergency Medicine. ACEP. 2020.' },
+    ],
+};
+// -------------------------------------------------------------------
 // MINOCA Workup & Management
 // -------------------------------------------------------------------
 const NSTEMI_MINOCA_PAGE = {
@@ -5294,6 +5327,7 @@ export const INFO_PAGES = {
     'ai-sick-day-rules': AI_SICK_DAY_RULES,
     'ai-special-populations': AI_SPECIAL_POPULATIONS,
     'ai-steroid-equivalency': AI_STEROID_EQUIVALENCY,
+    'epss-measurement': EPSS_MEASUREMENT_PAGE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

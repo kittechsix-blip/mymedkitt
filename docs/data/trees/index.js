@@ -6,7 +6,7 @@ export { NEUROSYPHILIS_NODES, NEUROSYPHILIS_MODULE_LABELS, NEUROSYPHILIS_CITATIO
 export { PE_TREATMENT_NODES, PE_TREATMENT_MODULE_LABELS, PE_TREATMENT_CITATIONS } from './pe-treatment';
 export { PNEUMOTHORAX_NODES, PNEUMOTHORAX_MODULE_LABELS, PNEUMOTHORAX_CITATIONS } from './pneumothorax';
 export { RABIES_NODES, RABIES_MODULE_LABELS, RABIES_CITATIONS } from './rabies';
-export { echoViewsConsult } from './echo-views';
+export { ECHO_VIEWS_NODES, ECHO_VIEWS_MODULE_LABELS, ECHO_VIEWS_CITATIONS } from './echo-views';
 export { ICH_NODES, ICH_MODULE_LABELS, ICH_CITATIONS } from './ich';
 export { STATUS_EPILEPTICUS_NODES, STATUS_EPILEPTICUS_MODULE_LABELS, STATUS_EPILEPTICUS_CITATIONS } from './status-epilepticus';
 export { FIRST_TRIMESTER_NODES, FIRST_TRIMESTER_MODULE_LABELS, FIRST_TRIMESTER_CITATIONS } from './first-trimester';
@@ -16,29 +16,8 @@ export { SAH_NODES, SAH_MODULE_LABELS, SAH_CITATIONS } from './sah';
 export { ACID_BASE_NODES, ACID_BASE_MODULE_LABELS, ACID_BASE_CITATIONS } from './acid-base';
 export { DELIRIUM_NODES, DELIRIUM_MODULE_LABELS, DELIRIUM_CITATIONS } from './delirium';
 export { ADRENAL_INSUFFICIENCY_NODES, ADRENAL_INSUFFICIENCY_MODULE_LABELS, ADRENAL_INSUFFICIENCY_CITATIONS } from './adrenal-insufficiency';
-/**
- * Registry of all available consult trees
- */
-export const consultRegistry = {
-    // pneumothorax now uses new flat DecisionNode[] format — loaded via tree-service.ts
-    'echo-views': () => import('./echo-views'),
-};
-/**
- * Get a consult tree by ID
- */
-export async function getConsult(consultId) {
-    const loader = consultRegistry[consultId];
-    if (!loader)
-        return null;
-    try {
-        const module = await loader();
-        return module.default;
-    }
-    catch (error) {
-        console.error(`Failed to load consult: ${consultId}`, error);
-        return null;
-    }
-}
+// Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
+// The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**
  * List all available consults
  */

@@ -227,6 +227,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/echo-epss.js');
       return { nodes: m.ECHO_EPSS_NODES, entryNodeId: 'epss-start', categoryId: 'us-rads', moduleLabels: m.ECHO_EPSS_MODULE_LABELS, citations: m.ECHO_EPSS_CITATIONS };
     },
+    'echo-views': async () => {
+      const m = await import('../data/trees/echo-views.js');
+      return { nodes: m.ECHO_VIEWS_NODES, entryNodeId: 'echo-views-start', categoryId: 'us-rads', moduleLabels: m.ECHO_VIEWS_MODULE_LABELS, citations: m.ECHO_VIEWS_CITATIONS };
+    },
     'shoulder-dystocia': async () => {
       const m = await import('../data/trees/shoulder-dystocia.js');
       return { nodes: m.SHOULDER_DYSTOCIA_NODES, entryNodeId: 'sd-start', categoryId: 'ob-gyn', moduleLabels: m.SHOULDER_DYSTOCIA_MODULE_LABELS, citations: m.SHOULDER_DYSTOCIA_CITATIONS };
