@@ -108,6 +108,9 @@ const TREE_REGISTRY = {
   'delirium':         { prefix: 'DELIRIUM',            entryNodeId: 'delirium-start',     categoryId: 'neurology' },
   'acid-base':        { prefix: 'ACID_BASE',           entryNodeId: 'ab-start',           categoryId: 'nephro-rheum-endo' },
   'adrenal-insufficiency': { prefix: 'ADRENAL_INSUFFICIENCY', entryNodeId: 'ai-start',      categoryId: 'nephro-rheum-endo' },
+  'thyroid':              { prefix: 'THYROID',               entryNodeId: 'thyroid-start',  categoryId: 'nephro-rheum-endo' },
+  'anaphylaxis':          { prefix: 'ANAPHYLAXIS',           entryNodeId: 'anaph-start',    categoryId: 'emergency-medicine' },
+  'angioedema':           { prefix: 'ANGIOEDEMA',            entryNodeId: 'angio-start',    categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
