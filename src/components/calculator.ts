@@ -2557,6 +2557,116 @@ const EPI_INFUSION_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Anaphylaxis Criteria (WAO 2020)
+// -------------------------------------------------------------------
+
+const ANAPHYLAXIS_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'anaphylaxis-criteria',
+  title: 'Anaphylaxis Criteria',
+  subtitle: 'WAO 2020 — Rapid Yes/No Assessment',
+  description: 'Rapidly determine if presentation meets World Allergy Organization 2020 diagnostic criteria for anaphylaxis. Toggle findings that are present.',
+  fields: [
+    {
+      name: 'skin',
+      label: 'Skin / Mucosal',
+      description: 'Urticaria, flushing, angioedema, pruritus',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'respiratory',
+      label: 'Respiratory',
+      description: 'Dyspnea, wheeze, stridor, hypoxemia',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'hypotension',
+      label: 'Hypotension / End-Organ',
+      description: 'Low BP, syncope, collapse, incontinence',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'gi',
+      label: 'Severe GI Symptoms',
+      description: 'Crampy abdominal pain, repetitive vomiting',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'allergen',
+      label: 'Known / Likely Allergen Exposure',
+      description: 'Recent exposure to a known or probable allergen',
+      type: 'toggle',
+      points: 1,
+    },
+  ],
+  results: [],
+  thresholdNote: 'WAO 2020: Criterion 1 = Skin + (Respiratory OR Hypotension OR Severe GI). Criterion 2 = Known allergen + any 2 organ systems.',
+  citations: [
+    'Golden DBK, et al. Anaphylaxis: A 2023 Practice Parameter Update. Ann Allergy Asthma Immunol. 2024;132(2):124-176.',
+    'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const skin = values['skin'] || 0;
+    const resp = values['respiratory'] || 0;
+    const hypo = values['hypotension'] || 0;
+    const gi = values['gi'] || 0;
+    const allergen = values['allergen'] || 0;
+
+    const organCount = skin + resp + hypo + gi;
+
+    // No findings toggled
+    if (organCount === 0) {
+      return {
+        value: '--',
+        label: 'Toggle findings above',
+        description: 'Select all clinical findings that are present to assess anaphylaxis criteria.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Criterion 1: Skin + at least one of (respiratory, hypotension, severe GI)
+    const criterion1 = skin === 1 && (resp === 1 || hypo === 1 || gi === 1);
+
+    // Criterion 2: Known allergen + 2 or more organ systems
+    const criterion2 = allergen === 1 && organCount >= 2;
+
+    if (criterion1 || criterion2) {
+      const metCriteria = [];
+      if (criterion1) metCriteria.push('Criterion 1: Skin/mucosal + respiratory/hypotension/GI');
+      if (criterion2) metCriteria.push('Criterion 2: Known allergen + ' + organCount + ' organ systems');
+      return {
+        value: 'ANAPHYLAXIS',
+        label: 'Give Epinephrine NOW',
+        description: metCriteria.join('\n') + '\n\nEpinephrine 0.5 mg IM anterolateral thigh immediately.\nPediatric: 0.01 mg/kg IM (max 0.5 mg).\nNo absolute contraindications.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Does not meet criteria
+    let reason = '';
+    if (skin === 1 && organCount === 1) {
+      reason = 'Skin involvement alone without respiratory, hypotension, or GI does not meet criteria.';
+    } else if (allergen === 1 && organCount === 1) {
+      reason = 'Known allergen + only 1 organ system. Need 2+ organ systems for Criterion 2.';
+    } else if (organCount >= 2 && allergen === 0) {
+      reason = '2+ organ systems but no skin involvement (Criterion 1 requires skin) and no known allergen (Criterion 2 requires allergen).';
+    } else {
+      reason = 'Current findings do not meet WAO 2020 anaphylaxis criteria.';
+    }
+
+    return {
+      value: 'NOT MET',
+      label: 'Criteria not met',
+      description: reason + '\n\nMonitor closely \u2014 anaphylaxis can evolve rapidly. Low threshold to give epinephrine if clinical suspicion is high.',
+      colorVar: '--color-decision-active',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
 // Burch-Wartofsky Score (Thyroid Storm Diagnostic Criteria)
 // -------------------------------------------------------------------
 
@@ -2762,6 +2872,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'comp-rule-6': COMP_RULE_6_CALCULATOR,
   'bsa': BSA_CALCULATOR,
   'epi-infusion': EPI_INFUSION_CALCULATOR,
+  'anaphylaxis-criteria': ANAPHYLAXIS_CRITERIA_CALCULATOR,
   'burch-wartofsky': BURCH_WARTOFSKY_CALCULATOR,
   'steroid-equivalency': STEROID_EQUIVALENCY_CALCULATOR,
 };

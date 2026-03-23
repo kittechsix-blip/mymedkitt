@@ -19,6 +19,10 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     title: 'Anaphylaxis Management',
     body: '[Anaphylaxis Steps Summary](#/info/anaph-summary)\n\n**Epinephrine is the ONLY first-line treatment for anaphylaxis.** There are NO absolute contraindications to epinephrine in anaphylaxis — the risk of NOT giving it always exceeds the risk of giving it.\n\n**Causes of anaphylaxis:**\n• Medications — 34%\n• Food — 31%\n• Insect stings — 20%\n• Environmental — 7.5%\n• Exercise — 1.2%\n• Idiopathic — 11% [1][3]',
     citation: [1, 3],
+    calculatorLinks: [
+      { id: 'anaphylaxis-criteria', label: 'Anaphylaxis Criteria' },
+      { id: 'epi-infusion', label: 'Epi Infusion Calculator' },
+    ],
     next: 'anaph-diagnosis',
   },
 

@@ -2,10 +2,10 @@
 // Maps consult IDs to their contextual toolbar items.
 const TOOLBAR_CONFIGS = {
     'anaphylaxis': [
+        { id: 'criteria', label: 'Criteria', icon: '\u2705', action: 'calculator', target: 'anaphylaxis-criteria' },
         { id: 'epi-calc', label: 'Epi Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'epi-infusion' },
         { id: 'epi-im', label: 'IM Epi', icon: '\uD83D\uDC89', action: 'jump', target: 'anaph-source-control' },
         { id: 'iv-epi', label: 'IV Epi', icon: '\uD83D\uDD34', action: 'jump', target: 'anaph-epi-infusion' },
-        { id: 'dispo', label: 'Dispo', icon: '\uD83D\uDCCB', action: 'jump', target: 'anaph-disposition-assess' },
     ],
     'diarrhea': [
         { id: 'red-flags', label: 'Red Flags', icon: '\uD83D\uDEA9', action: 'jump', target: 'diarrhea-red-flag-eval' },
