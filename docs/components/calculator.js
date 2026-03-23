@@ -2345,6 +2345,232 @@ const BSA_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// Epi Infusion Calculator (Anaphylaxis)
+// -------------------------------------------------------------------
+const EPI_INFUSION_CALCULATOR = {
+    id: 'epi-infusion',
+    title: 'Epi Infusion Calculator',
+    subtitle: 'IV Epinephrine Infusion Rate for Anaphylaxis',
+    description: 'Calculates epinephrine infusion rate (mL/hr) based on desired dose (mcg/min) and concentration. Protocol: Loading 20 mcg/min \u00D7 2 min \u2192 Maintenance 10 mcg/min \u2192 Titrate \u2192 AGGRESSIVELY WEAN.',
+    fields: [
+        {
+            name: 'concentration',
+            label: 'Concentration (mcg/mL)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '10 mcg/mL (1 mg in 100 mL NS)', points: 10 },
+                { label: '4 mcg/mL (1 mg in 250 mL NS)', points: 4 },
+            ],
+        },
+        {
+            name: 'dose',
+            label: 'Desired Dose (mcg/min)',
+            type: 'number',
+            points: 0,
+        },
+    ],
+    results: [],
+    thresholdNote: 'Protocol: Loading 20 mcg/min \u00D7 2 min \u2192 Maintenance 10 mcg/min \u2192 Titrate \u2192 AGGRESSIVELY WEAN after resolution.\nDo NOT give 1 mg IV push to patients with a pulse.',
+    citations: [
+        'Farkas J. PulmCrit \u2014 How to use IV epinephrine for anaphylaxis. EMCrit/PulmCrit. 2019.',
+        'Brown SGA, et al. Insect sting anaphylaxis; prospective evaluation of treatment with IV adrenaline. Emerg Med J. 2004;21(2):149-154.',
+    ],
+    computeResult: (values) => {
+        const conc = values['concentration'] || 10;
+        const dose = values['dose'] || 0;
+        if (dose <= 0) {
+            return {
+                value: '--',
+                label: 'Enter desired dose',
+                description: 'Enter desired mcg/min to calculate infusion rate.\n\nTypical ranges:\n\u2022 Loading: 20 mcg/min\n\u2022 Maintenance: 5-15 mcg/min\n\u2022 Peri-arrest bolus: 20-50 mcg IV push',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const mlPerHr = Math.round((dose / conc) * 60 * 10) / 10;
+        const mlPerMin = Math.round((dose / conc) * 10) / 10;
+        let label;
+        let colorVar;
+        if (dose <= 5) {
+            label = 'Low Dose (weaning range)';
+            colorVar = '--color-decision-active';
+        }
+        else if (dose <= 15) {
+            label = 'Standard Maintenance';
+            colorVar = '--color-warning';
+        }
+        else {
+            label = 'High / Loading Dose';
+            colorVar = '--color-danger';
+        }
+        return {
+            value: mlPerHr + ' mL/hr',
+            label: label,
+            description: dose + ' mcg/min at ' + conc + ' mcg/mL = ' + mlPerMin + ' mL/min = ' + mlPerHr + ' mL/hr\n\nProtocol reminder:\n\u2022 Loading: 20 mcg/min \u00D7 2 min (~40 mcg)\n\u2022 Maintenance: 10 mcg/min\n\u2022 Peri-arrest: 20-50 mcg IV push\n\u2022 AGGRESSIVELY WEAN after resolution',
+            colorVar: colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Burch-Wartofsky Score (Thyroid Storm Diagnostic Criteria)
+// -------------------------------------------------------------------
+const BURCH_WARTOFSKY_CALCULATOR = {
+    id: 'burch-wartofsky',
+    title: 'Burch-Wartofsky Score',
+    subtitle: 'Thyroid Storm Diagnostic Criteria',
+    description: 'Grades severity of thyrotoxicosis symptoms to assess likelihood of thyroid storm. Score \u226545 is highly suggestive but NOT diagnostic \u2014 clinical judgment supersedes. Originally developed by Burch & Wartofsky (1993).',
+    fields: [
+        {
+            name: 'temperature',
+            label: 'Temperature',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 99\u00B0F (37.2\u00B0C)', points: 0 },
+                { label: '99-99.9\u00B0F (37.2-37.7\u00B0C)', points: 5 },
+                { label: '100-100.9\u00B0F (37.8-38.2\u00B0C)', points: 10 },
+                { label: '101-101.9\u00B0F (38.3-38.8\u00B0C)', points: 15 },
+                { label: '102-102.9\u00B0F (38.9-39.4\u00B0C)', points: 20 },
+                { label: '103-103.9\u00B0F (39.5-39.9\u00B0C)', points: 25 },
+                { label: '\u2265 104\u00B0F (40\u00B0C)', points: 30 },
+            ],
+        },
+        {
+            name: 'cns-effects',
+            label: 'CNS Effects',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Mild agitation', points: 10 },
+                { label: 'Delirium, psychosis, extreme lethargy', points: 20 },
+                { label: 'Seizure or coma', points: 30 },
+            ],
+        },
+        {
+            name: 'gi-hepatic',
+            label: 'GI-Hepatic Dysfunction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Diarrhea, nausea/vomiting, abdominal pain', points: 10 },
+                { label: 'Unexplained jaundice', points: 20 },
+            ],
+        },
+        {
+            name: 'heart-rate',
+            label: 'Heart Rate (bpm)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 100', points: 0 },
+                { label: '100-109', points: 5 },
+                { label: '110-119', points: 10 },
+                { label: '120-129', points: 15 },
+                { label: '130-139', points: 20 },
+                { label: '\u2265 140', points: 25 },
+            ],
+        },
+        {
+            name: 'chf',
+            label: 'Congestive Heart Failure',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Mild \u2014 pedal edema', points: 5 },
+                { label: 'Moderate \u2014 bibasilar rales', points: 10 },
+                { label: 'Severe \u2014 pulmonary edema', points: 15 },
+            ],
+        },
+        {
+            name: 'afib',
+            label: 'Atrial Fibrillation',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'precipitant',
+            label: 'Precipitant History',
+            type: 'toggle',
+            points: 10,
+            description: 'Identifiable precipitant (infection, surgery, trauma, iodine load, medication change)',
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 25, label: 'Score < 25', risk: 'Thyroid Storm Unlikely', mortality: 'Low likelihood of thyroid storm. Consider alternative diagnoses.', colorVar: '--color-primary' },
+        { min: 25, max: 45, label: 'Score 25-44', risk: 'Impending Storm', mortality: 'Suggestive of impending thyroid storm. Consider initiating treatment.', colorVar: '--color-warning' },
+        { min: 45, max: Infinity, label: 'Score \u226545', risk: 'Thyroid Storm', mortality: 'Highly suggestive of thyroid storm. Initiate aggressive multimodal treatment immediately.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'The Burch-Wartofsky Score was developed in 1993 and has NOT been prospectively validated. It is sensitive but not specific \u2014 a high score does not prove thyroid storm (sepsis can score \u226545), and a low score does not exclude it. Use as a clinical framework, not a definitive diagnostic tool.',
+    citations: [
+        'Burch HB, Wartofsky L. Life-threatening thyrotoxicosis. Thyroid storm. Endocrinol Metab Clin North Am. 1993;22(2):263-277.',
+        'Akamizu T et al. Diagnostic criteria, clinical features, and incidence of thyroid storm. Thyroid. 2012;22(7):661-679.',
+    ],
+};
+// -------------------------------------------------------------------
+// Steroid Equivalency Calculator (Formula-Based)
+// -------------------------------------------------------------------
+const STEROID_EQUIVALENCY_CALCULATOR = {
+    id: 'steroid-equivalency',
+    title: 'Steroid Equivalency Calculator',
+    subtitle: 'Glucocorticoid Dose Conversion',
+    description: 'Converts between equivalent doses of common glucocorticoids based on anti-inflammatory potency. Useful for switching between steroids or comparing dose intensity.',
+    fields: [
+        {
+            name: 'steroid-type',
+            label: 'Current Steroid',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Hydrocortisone (20 mg equiv)', points: 1 },
+                { label: 'Cortisone (25 mg equiv)', points: 2 },
+                { label: 'Prednisone / Prednisolone (5 mg equiv)', points: 3 },
+                { label: 'Methylprednisolone (4 mg equiv)', points: 4 },
+                { label: 'Triamcinolone (4 mg equiv)', points: 5 },
+                { label: 'Dexamethasone (0.75 mg equiv)', points: 6 },
+            ],
+        },
+        {
+            name: 'dose',
+            label: 'Current Dose',
+            type: 'number',
+            points: 0,
+            unit: 'mg',
+            description: 'Enter total daily dose in mg',
+        },
+    ],
+    results: [],
+    thresholdNote: 'These equivalencies are based on anti-inflammatory (glucocorticoid) potency only. Mineralocorticoid activity differs significantly between agents. Hydrocortisone has the highest mineralocorticoid activity; dexamethasone has essentially none.',
+    citations: [
+        'Bornstein SR et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
+    ],
+    computeResult: (values) => {
+        const steroidId = values['steroid-type'] || 1;
+        const dose = values['dose'] || 0;
+        if (dose <= 0) {
+            return { value: '--', label: 'Enter Dose', description: 'Enter a steroid dose above to calculate equivalencies.', colorVar: '--color-primary' };
+        }
+        // Map select index to actual equivalent dose in mg
+        const equivDoses = { 1: 20, 2: 25, 3: 5, 4: 4, 5: 4, 6: 0.75 };
+        const equivNames = { 1: 'Hydrocortisone', 2: 'Cortisone', 3: 'Prednisone/Prednisolone', 4: 'Methylprednisolone', 5: 'Triamcinolone', 6: 'Dexamethasone' };
+        const equivalentDose = equivDoses[steroidId] || 20;
+        const sourceName = equivNames[steroidId] || 'Hydrocortisone';
+        // Calculate ratio: how many "units" of the base steroid
+        const ratio = dose / equivalentDose;
+        // Calculate all equivalents
+        const hc = (ratio * 20).toFixed(1);
+        const cortisone = (ratio * 25).toFixed(1);
+        const pred = (ratio * 5).toFixed(1);
+        const mp = (ratio * 4).toFixed(1);
+        const tri = (ratio * 4).toFixed(1);
+        const dex = (ratio * 0.75).toFixed(1);
+        const desc = sourceName + ' ' + dose + ' mg/day equivalents: HC ' + hc + ' mg | Cortisone ' + cortisone + ' mg | Pred ' + pred + ' mg | MethylPred ' + mp + ' mg | Triam ' + tri + ' mg | Dex ' + dex + ' mg. Mineralocorticoid: High (HC, Cortisone), Low (Pred), None (MethylPred, Dex, Triam).';
+        return { value: pred + ' mg Pred', label: 'Steroid Equivalency', description: desc, colorVar: '--color-primary' };
+    },
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -2383,6 +2609,9 @@ const CALCULATORS = {
     'comp-rule-5': COMP_RULE_5_CALCULATOR,
     'comp-rule-6': COMP_RULE_6_CALCULATOR,
     'bsa': BSA_CALCULATOR,
+    'epi-infusion': EPI_INFUSION_CALCULATOR,
+    'burch-wartofsky': BURCH_WARTOFSKY_CALCULATOR,
+    'steroid-equivalency': STEROID_EQUIVALENCY_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

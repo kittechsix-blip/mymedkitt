@@ -1,6 +1,12 @@
 // myMedKitt — Per-Consult Toolbar Configurations
 // Maps consult IDs to their contextual toolbar items.
 const TOOLBAR_CONFIGS = {
+    'anaphylaxis': [
+        { id: 'epi-calc', label: 'Epi Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'epi-infusion' },
+        { id: 'epi-im', label: 'IM Epi', icon: '\uD83D\uDC89', action: 'jump', target: 'anaph-source-control' },
+        { id: 'iv-epi', label: 'IV Epi', icon: '\uD83D\uDD34', action: 'jump', target: 'anaph-epi-infusion' },
+        { id: 'dispo', label: 'Dispo', icon: '\uD83D\uDCCB', action: 'jump', target: 'anaph-disposition-assess' },
+    ],
     'diarrhea': [
         { id: 'red-flags', label: 'Red Flags', icon: '\uD83D\uDEA9', action: 'jump', target: 'diarrhea-red-flag-eval' },
         { id: 'stec', label: 'STEC', icon: '\uD83E\uDDA0', action: 'jump', target: 'diarrhea-bloody' },
@@ -168,6 +174,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'crisis-rx', label: 'Crisis Rx', icon: '\uD83D\uDEA8', action: 'jump', target: 'ai-crisis-steroid' },
         { id: 'stress-dose', label: 'Stress Dose', icon: '\uD83D\uDC8A', action: 'jump', target: 'ai-stress-dose' },
         { id: 'sick-day', label: 'Sick-Day', icon: '\uD83D\uDCCB', action: 'overlay', target: 'ai-sick-day-rules' },
+    ],
+    'thyroid': [
+        { id: 'bws', label: 'BWS', icon: '\uD83C\uDF21\uFE0F', action: 'calculator', target: 'burch-wartofsky' },
+        { id: 'storm-rx', label: 'Storm Rx', icon: '\u26A1', action: 'jump', target: 'thyroid-storm-steroids' },
+        { id: 'hypo-rx', label: 'Hypo Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'thyroid-hypo-steroids' },
+        { id: 'bb-debate', label: 'BB Debate', icon: '\u2696\uFE0F', action: 'overlay', target: 'thyroid-bb-controversy' },
     ],
 };
 /** Get the toolbar config for a consult, or an empty default */

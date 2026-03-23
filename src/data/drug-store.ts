@@ -97,7 +97,7 @@ const ACETAMINOPHEN: DrugEntry = {
   contraindications: ['Severe hepatic impairment or active liver disease', 'Known hypersensitivity'],
   cautions: ['Hepatotoxicity at supratherapeutic doses (>4 g/day)', 'Reduce max dose to 2 g/day in chronic alcohol use or hepatic impairment', 'IV formulation: weight-based dosing for patients <50 kg (15 mg/kg, max 750 mg/dose)'],
   monitoring: 'LFTs if prolonged use or hepatic risk factors. Serum level if overdose suspected.',
-  notes: 'First-line analgesic for SAH-associated headache. Preferred over NSAIDs (impair platelet function) and opioids (confound neurologic examination). IV onset 5-10 min vs PO 30-60 min.',
+  notes: 'First-line analgesic for SAH-associated headache. Preferred over NSAIDs (impair platelet function) and opioids (confound neurologic examination). IV onset 5-10 min vs PO 30-60 min. In thyroid storm: use for hyperthermia management. AVOID aspirin and NSAIDs — they displace T4 from thyroxine-binding globulin, increasing free (active) thyroid hormone levels.',
   citations: ['Connolly ES Jr, et al. AHA/ASA Guidelines for management of aneurysmal subarachnoid hemorrhage. Stroke. 2012;43(6):1711-1737.'],
 };
 
@@ -137,7 +137,7 @@ const ALBUTEROL_NEB: DrugEntry = {
   genericName: 'Albuterol sulfate',
   drugClass: 'Beta-2 adrenergic agonist',
   route: 'Inhaled (nebulized)',
-  indications: ['Hyperkalemia (potassium shift)', 'Acute bronchospasm'],
+  indications: ['Hyperkalemia (potassium shift)', 'Acute bronchospasm', 'Anaphylaxis bronchospasm'],
   dosing: [
     {
       indication: 'Hyperkalemia',
@@ -146,6 +146,10 @@ const ALBUTEROL_NEB: DrugEntry = {
     {
       indication: 'Bronchospasm',
       regimen: '2.5 mg nebulized q20 min x 3 doses, then q1-4h PRN.',
+    },
+    {
+      indication: 'Anaphylaxis bronchospasm',
+      regimen: '2.5-5 mg nebulized, may give continuous if severe bronchospasm. For persistent wheezing despite adequate epinephrine, especially with asthma overlap. Epinephrine is the primary bronchodilator in anaphylaxis — albuterol is adjunctive only.',
     },
   ],
   contraindications: [
@@ -994,7 +998,7 @@ const DEXAMETHASONE: DrugEntry = {
   genericName: 'Dexamethasone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO/IM/IV',
-  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)'],
+  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)', 'Anaphylaxis (adjunctive)'],
   dosing: [
     {
       indication: 'Croup',
@@ -1022,6 +1026,10 @@ const DEXAMETHASONE: DrugEntry = {
     {
       indication: 'Adrenal maintenance (alternative)',
       regimen: '0.25-0.5 mg PO once daily. Long half-life (~36 hours) allows once-daily dosing. No mineralocorticoid activity — must add fludrocortisone for primary AI. Higher growth suppression risk in children compared to hydrocortisone.',
+    },
+    {
+      indication: 'Anaphylaxis (adjunctive)',
+      regimen: '10 mg IV × 1 dose. Second-line only — controversial, no RCTs demonstrating clear benefit. Consider if refractory to 2+ IM epinephrine doses or asthma overlap. Does NOT prevent biphasic reactions. Not needed for discharge.',
     },
   ],
   contraindications: [
@@ -1376,11 +1384,20 @@ const DIPHENHYDRAMINE: DrugEntry = {
   genericName: 'Diphenhydramine hydrochloride',
   drugClass: 'Antihistamine / Antiemetic',
   route: 'PO/IV',
-  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia'],
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia', 'Anaphylaxis (H1 blocker)', 'Angioedema'],
   dosing: [
     {
       indication: 'NVP — oral',
       regimen: '25-50 mg PO every 6 hours as needed. Second-line oral agent per ACOG stepwise pathway. Alternative to dimenhydrinate.',
+    },
+    {
+      indication: 'Anaphylaxis (H1 blocker)',
+      regimen: '50 mg IV every 6 hours. Second-line adjunct only — give AFTER epinephrine. Combine with H2 blocker (famotidine) — H1+H2 is superior to H1 alone for cutaneous symptoms.\n\nDoes NOT treat hypotension or bronchospasm. Primarily reduces urticaria, flushing, and pruritus. Should never delay or replace epinephrine.',
+    },
+    {
+      indication: 'Angioedema — IV',
+      regimen: '25-50 mg IV. First-generation H1 antagonist. Used as adjunct to epinephrine for histamine-mediated angioedema/anaphylaxis. Relieves cutaneous symptoms (urticaria, itching). Combine with a second-generation antihistamine (cetirizine) and H2 blocker (famotidine) for dual antihistamine therapy. Pediatric: 1 mg/kg IV (max 50 mg).',
+      weightCalc: { dosePerKg: 1, unit: 'mg', maxDose: 50, label: 'Pediatric dose' },
     },
   ],
   contraindications: [
@@ -1563,9 +1580,22 @@ const EPINEPHRINE: DrugEntry = {
   name: 'Epinephrine',
   genericName: 'Epinephrine',
   drugClass: 'Non-selective adrenergic agonist (alpha + beta)',
-  route: 'IV/IO/SQ/ET/Intracavernosal',
-  indications: ['Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)'],
+  route: 'IM/IV/IO/SQ/ET/Intracavernosal',
+  indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)'],
   dosing: [
+    {
+      indication: 'Anaphylaxis — IM (first-line)',
+      regimen: '0.5 mg IM (0.5 mL of 1 mg/mL) into anterolateral thigh. Repeat every 5 minutes up to 3 doses if no response. NO absolute contraindications in anaphylaxis.\n\nPediatric: 0.01 mg/kg IM (max 0.5 mg).\n\nAnterolateral thigh provides faster peak plasma levels than deltoid or subcutaneous injection (Simons 2001). Do NOT delay epinephrine for IV access, antihistamines, or steroids.',
+      weightCalc: { dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, label: 'Pediatric IM' },
+    },
+    {
+      indication: 'Anaphylaxis — IV infusion',
+      regimen: 'Mix 1 mg in 100 mL NS (10 mcg/mL). Loading: 20 mcg/min × 2 minutes. Maintenance: 5-15 mcg/min. Titrate to effect. AGGRESSIVELY WEAN after resolution — reluctance to stop is the greatest weakness of epi infusion.\n\nBrown et al 2014: 19 patients treated at 5-15 mcg/min, all responded within 5 minutes.\n\nOnly with pre-existing IV access and experienced resuscitationist. IM remains first-line for the vast majority of anaphylaxis cases.',
+    },
+    {
+      indication: 'Anaphylaxis — push dose (peri-arrest)',
+      regimen: '20-50 mcg IV push. For peri-arrest / impending cardiovascular collapse ONLY.\n\nFrom infusion bag: 2-5 mL of 10 mcg/mL solution.\nOr dilute: 0.1 mL of 1 mg/mL in 10 mL NS = 10 mcg/mL, give 2-5 mL.\n\nDo NOT give cardiac arrest dose (1 mg IV) to a patient with a pulse — 61-fold overdose risk with IV bolus vs IM.',
+    },
     {
       indication: 'Hyperkalemia with hypotension/bradycardia',
       regimen: 'Epinephrine infusion 2-10 mcg/min IV. Treats both hyperkalemia AND hemodynamic instability simultaneously. Beta-2 effect shifts K+ intracellularly.',
@@ -1659,17 +1689,54 @@ const ENOXAPARIN: DrugEntry = {
   ],
 };
 
+const FAMOTIDINE: DrugEntry = {
+  id: 'famotidine',
+  name: 'Famotidine',
+  genericName: 'Famotidine',
+  drugClass: 'H2 receptor antagonist',
+  route: 'IV/PO',
+  indications: ['Anaphylaxis (H2 blocker)', 'Allergic reactions (adjunctive)'],
+  dosing: [
+    {
+      indication: 'Anaphylaxis (H2 blocker)',
+      regimen: '20 mg IV every 12 hours (inpatient). Second-line adjunct — give AFTER epinephrine. Combine with H1 blocker (diphenhydramine) — H1+H2 combination is superior to H1 alone for cutaneous symptoms.\n\nDoes NOT treat hypotension or bronchospasm. Onset ~30-45 minutes even IV.',
+    },
+    {
+      indication: 'Allergic reactions (discharge)',
+      regimen: '20 mg PO BID × 3-5 days. Optional short-course for discharge. No evidence this prevents biphasic reactions.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to famotidine or other H2 blockers',
+  ],
+  cautions: [
+    'Dose adjust in renal impairment (CrCl <50 mL/min: 20 mg once daily)',
+    'Headache, dizziness uncommon',
+    'Drug interactions with atazanavir (reduced absorption — avoid combination)',
+  ],
+  monitoring: 'Clinical symptom improvement.',
+  notes: 'H2 blockade in anaphylaxis is adjunctive only. Histamine acts on both H1 and H2 receptors to increase vascular permeability and edema. Combined H1+H2 blockade was superior to H1 alone in a prospective randomized trial of 91 adults with acute allergic reactions (Lin et al 2000). However, antihistamines of any type do NOT treat the life-threatening components of anaphylaxis (hypotension, bronchospasm, airway edema).',
+  citations: [
+    'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). 2025.',
+    'Lin RY, et al. Improved outcomes in patients with acute allergic syndromes who are treated with combined H1 and H2 antagonists. Ann Emerg Med. 2000;36(5):462-468.',
+  ],
+};
+
 const ESMOLOL: DrugEntry = {
   id: 'esmolol',
   name: 'Esmolol',
   genericName: 'Esmolol hydrochloride',
   drugClass: 'Ultra-short-acting beta-1 selective blocker',
   route: 'IV',
-  indications: ['A-Fib / A-Flutter rate control', 'Supraventricular tachycardia', 'Perioperative tachycardia/hypertension'],
+  indications: ['A-Fib / A-Flutter rate control', 'Supraventricular tachycardia', 'Perioperative tachycardia/hypertension', 'Thyroid storm (rate control)'],
   dosing: [
     {
       indication: 'A-Fib rate control',
       regimen: 'Loading dose: 500 mcg/kg IV over 1 minute. Infusion: 50-200 mcg/kg/min, titrate by 50 mcg/kg/min every 4 min. May repeat loading dose with each infusion increase.',
+    },
+    {
+      indication: 'Thyroid storm (rate control)',
+      regimen: '250-500 mcg/kg IV loading dose over 1 min, then 50-100 mcg/kg/min infusion. PREFERRED over propranolol in thyroid storm (IBCC): ultra-short acting (half-life 9 min), immediately titratable, can be stopped instantly if hypotension develops. ONLY use with preserved EF on echocardiogram. Cardioselective — safer in reactive airway disease than propranolol.',
     },
   ],
   contraindications: [
@@ -1926,6 +1993,47 @@ const GENTAMICIN: DrugEntry = {
   ],
 };
 
+const GLUCAGON: DrugEntry = {
+  id: 'glucagon',
+  name: 'Glucagon',
+  genericName: 'Glucagon hydrochloride',
+  drugClass: 'Hyperglycemic agent / Beta-blocker reversal',
+  route: 'IV/IM',
+  indications: ['Anaphylaxis in beta-blocked patients (last resort)', 'Beta-blocker overdose', 'Hypoglycemia'],
+  dosing: [
+    {
+      indication: 'Anaphylaxis (beta-blocked patient)',
+      regimen: 'Adults: 1-5 mg IV over 5 minutes, then infusion 5-15 mcg/min if needed.\nPediatric: 20-30 mcg/kg IV (max 1 mg) over 5 minutes.\n\nDISCOURAGED by critical care experts — weak evidence (scattered case reports only), only bypasses beta-1 receptors (NOT beta-2), and HIGH emesis risk which may compromise unsecured airway.\n\nReserve for LAST RESORT when epinephrine, methylene blue, and volume resuscitation have failed.',
+      weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 1, label: 'Pediatric (20 mcg/kg)' },
+    },
+    {
+      indication: 'Beta-blocker overdose',
+      regimen: '3-10 mg IV over 1 minute, then 3-5 mg/hr infusion. Bypasses beta-1 blockade via cAMP pathway independent of beta-adrenergic receptors.',
+    },
+    {
+      indication: 'Hypoglycemia',
+      regimen: '1 mg IM/SQ/IV. If no response in 15 min, may repeat × 1.',
+    },
+  ],
+  contraindications: [
+    'Pheochromocytoma (may provoke catecholamine surge)',
+    'Insulinoma (rebound hypoglycemia)',
+  ],
+  cautions: [
+    'HIGH emesis risk — have suction ready, aspiration precautions',
+    'Only bypasses beta-1 receptors, NOT beta-2 — does not address mast cell stabilization, bronchospasm, or vasodilation',
+    'Transient hyperglycemia',
+    'Hypokalemia',
+    'Very short-acting — may require infusion',
+  ],
+  monitoring: 'Heart rate, blood pressure, blood glucose, emesis.',
+  notes: 'Historically recommended for beta-blocked anaphylaxis but now DISCOURAGED by critical care experts (Farkas/IBCC). The rationale for glucagon is to bypass beta-1 blockade in the heart (improving inotropy and chronotropy via cAMP). However, this does NOT address the core pathophysiology of anaphylaxis — mast cell stabilization and vasodilation are mediated by beta-2 receptors, which glucagon does not affect. The high risk of emesis in a patient with a potentially compromised airway makes glucagon a poor choice. Methylene blue (guanylate cyclase inhibitor) and higher-dose epinephrine are preferred for refractory anaphylaxis in beta-blocked patients.',
+  citations: [
+    'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). 2025.',
+    'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.',
+  ],
+};
+
 const HYPERTONIC_SALINE: DrugEntry = {
   id: 'hypertonic-saline',
   name: 'Hypertonic Saline (3% NaCl)',
@@ -2099,11 +2207,23 @@ const METHYLPREDNISOLONE: DrugEntry = {
   genericName: 'Methylprednisolone sodium succinate',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'IV / PO',
-  indications: ['Adrenal crisis (alternative to hydrocortisone)'],
+  indications: ['Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)'],
   dosing: [
     {
       indication: 'Adrenal crisis (alternative)',
       regimen: '40 mg IV every 24 hours. Use ONLY when hydrocortisone is unavailable. Minimal mineralocorticoid activity — consider adding fludrocortisone once transitioned to maintenance doses in patients with primary adrenal insufficiency.',
+    },
+    {
+      indication: 'Thyroid crisis (alternative)',
+      regimen: '125 mg IV loading dose, then 60 mg IV daily. Alternative when hydrocortisone unavailable. For decompensated hypothyroidism: 40 mg IV as alternative to hydrocortisone.',
+    },
+    {
+      indication: 'Anaphylaxis (adjunctive, alternative)',
+      regimen: '60 mg IV × 1 dose. Alternative to dexamethasone. Controversial — no clear evidence of benefit in anaphylaxis. Consider if refractory to epinephrine or asthma overlap. Not needed for discharge.',
+    },
+    {
+      indication: 'Anaphylaxis / angioedema (adjunct)',
+      regimen: '125 mg IV. Adjunct to epinephrine and antihistamines for histamine-mediated angioedema/anaphylaxis. NOT effective for bradykinin-mediated angioedema. Delayed onset of action — should never be used as monotherapy. Limited RCT evidence for angioedema specifically, but commonly administered. Weigh benefits against hyperglycemia, hypertension, and infection risk.',
     },
   ],
   contraindications: [
@@ -2119,6 +2239,43 @@ const METHYLPREDNISOLONE: DrugEntry = {
   citations: [
     'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
     'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
+  ],
+};
+
+const METHYLENE_BLUE: DrugEntry = {
+  id: 'methylene-blue',
+  name: 'Methylene Blue',
+  genericName: 'Methylthioninium chloride',
+  drugClass: 'Guanylate cyclase inhibitor / Vasopressor adjunct',
+  route: 'IV',
+  indications: ['Refractory anaphylaxis (vasodilatory shock)', 'Vasoplegia (post-cardiopulmonary bypass)'],
+  dosing: [
+    {
+      indication: 'Refractory anaphylaxis',
+      regimen: '1-2 mg/kg IV over 5-10 minutes. May repeat × 1 in 30-60 minutes if partial response.\n\nInhibits guanylate cyclase → blocks nitric oxide-mediated vasodilation (a key contributor to refractory shock in anaphylaxis).\n\nSupported by case reports and small case series only — no RCTs. Consider when epinephrine infusion, volume resuscitation, and standard adjuncts have failed.',
+      weightCalc: [
+        { dosePerKg: 1, unit: 'mg', label: 'Standard dose (1 mg/kg)' },
+        { dosePerKg: 2, unit: 'mg', label: 'High dose (2 mg/kg)' },
+      ],
+    },
+  ],
+  contraindications: [
+    'G6PD deficiency (risk of severe hemolytic anemia)',
+    'Concurrent serotonergic drugs — SSRIs, SNRIs, MAOIs (serotonin syndrome risk)',
+    'Severe renal impairment (relative — renally excreted)',
+  ],
+  cautions: [
+    'Turns urine and skin blue-green — warn patient and staff',
+    'Serotonin syndrome risk with any serotonergic medication',
+    'May interfere with pulse oximetry readings (falsely low SpO2)',
+    'Hypertension possible if vasodilation is overcorrected',
+    'Avoid extravasation — causes tissue necrosis',
+  ],
+  monitoring: 'Blood pressure (hypertension risk), SpO2 (may read falsely low), methemoglobin level, signs of hemolysis in G6PD-unknown patients.',
+  notes: 'Methylene blue inhibits guanylate cyclase, blocking the NO → cGMP → vasodilation pathway that contributes to refractory anaphylactic shock. This is the same mechanism exploited in post-cardiopulmonary bypass vasoplegia. Evidence in anaphylaxis is limited to case reports and small series, but the physiologic rationale is strong for refractory vasodilatory shock that is not responding to catecholamines. Preferred over glucagon for refractory anaphylaxis in beta-blocked patients — addresses vasodilation directly rather than attempting to bypass beta-1 blockade.',
+  citations: [
+    'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). 2025.',
+    'Krishnaswamy G. Critical Care Management of the Patient With Anaphylaxis. Crit Care Med. 2021;49(5):838-857.',
   ],
 };
 
@@ -3214,7 +3371,7 @@ const TERBUTALINE: DrugEntry = {
   genericName: 'Terbutaline sulfate',
   drugClass: 'Beta-2 adrenergic agonist',
   route: 'SQ',
-  indications: ['Hyperkalemia (potassium shift)', 'Acute asthma/bronchospasm', 'Tocolysis (uterine relaxation)'],
+  indications: ['Hyperkalemia (potassium shift)', 'Acute asthma/bronchospasm', 'Tocolysis (uterine relaxation)', 'Anaphylaxis bronchospasm'],
   dosing: [
     {
       indication: 'Hyperkalemia',
@@ -3227,6 +3384,10 @@ const TERBUTALINE: DrugEntry = {
     {
       indication: 'Tocolysis (Shoulder Dystocia / Zavanelli)',
       regimen: '0.25 mg SQ or IM × 1 dose. Provides rapid uterine relaxation to facilitate cephalic replacement (Zavanelli maneuver) prior to emergency cesarean section. Onset: 5 minutes SQ.',
+    },
+    {
+      indication: 'Anaphylaxis bronchospasm',
+      regimen: '0.25 mg SQ × 1. Systemic beta-2 agonist for persistent bronchospasm despite adequate epinephrine. Provides systemic mast cell stabilization via beta-2 stimulation. Consider in beta-blocked patients for additional beta-2 effect.',
     },
   ],
   contraindications: [
@@ -3597,7 +3758,7 @@ const HYDROCORTISONE: DrugEntry = {
   genericName: 'Hydrocortisone sodium succinate',
   drugClass: 'Corticosteroid (glucocorticoid + mineralocorticoid)',
   route: 'IV / IM / PO',
-  indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection'],
+  indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection', 'Thyroid storm', 'Decompensated hypothyroidism (stress dose)'],
   dosing: [
     {
       indication: 'Adrenal crisis (adult)',
@@ -3623,6 +3784,14 @@ const HYDROCORTISONE: DrugEntry = {
     {
       indication: 'Emergency IM self-injection',
       regimen: '100 mg IM into lateral thigh. For patients unable to take oral steroids due to vomiting or altered mental status. Must present to ED immediately after injection for evaluation and IV steroids.',
+    },
+    {
+      indication: 'Thyroid storm',
+      regimen: 'IBCC: 300 mg IV loading dose, then 100 mg IV q8h. ATA: 100 mg IV q8h (no separate load). Blocks peripheral T4\u2192T3 conversion and treats potential concurrent adrenal insufficiency. Continue until clinical improvement, then taper over 3-5 days.',
+    },
+    {
+      indication: 'Decompensated hypothyroidism (stress dose)',
+      regimen: '100 mg IV bolus, then 50 mg IV q8h. CRITICAL: Give BEFORE thyroid hormone replacement \u2014 thyroid hormone accelerates cortisol metabolism, may precipitate adrenal crisis in patients with concurrent AI (~5-10%). Draw random cortisol before dosing if practical. Taper once hemodynamically stable and cortisol results available.',
     },
   ],
   contraindications: [
@@ -4053,7 +4222,7 @@ const TRANEXAMIC_ACID: DrugEntry = {
   genericName: 'Tranexamic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV',
-  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)'],
+  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema'],
   dosing: [
     {
       indication: 'ICH hemostasis (adjunct \u2014 within 3h of onset)',
@@ -4064,11 +4233,16 @@ const TRANEXAMIC_ACID: DrugEntry = {
       regimen: 'Oral: 1.3 g PO TID \u00d7 5 days. IV: 10 mg/kg IV (max 600 mg/dose) q8h. Reduces menstrual blood loss 30\u201355%. Can be used alone if hormonal therapy is contraindicated, or as adjunct to hormonal regimens. Does not affect fertility or cycle regularity.',
       weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600, label: 'IV dosing (q8h)' },
     },
+    {
+      indication: 'Bradykinin-mediated angioedema',
+      regimen: '1 g IV load over 10 minutes, then 1 g IV over 8 hours. Blocks plasminogen\u2192plasmin conversion, interrupting the kallikrein amplification spiral that drives bradykinin production. Case series (31 patients): all non-intubated patients avoided intubation. A single dose is often inadequate \u2014 ongoing treatment required as bradykinin-mediated angioedema evolves over days. AVOID in post-tPA angioedema (contraindicated in acute stroke).',
+    },
   ],
   contraindications: [
     'Active thromboembolic disease (DVT, PE, stroke)',
     'Subarachnoid hemorrhage (risk of vasospasm)',
     'Impaired color vision (acquired defective)',
+    'Post-tPA angioedema (acute ischemic stroke \u2014 thrombotic risk)',
   ],
   cautions: [
     'Seizure risk at high doses (>2 g)',
@@ -4081,6 +4255,8 @@ const TRANEXAMIC_ACID: DrugEntry = {
   citations: [
     'Sprigg N, et al. Tranexamic acid for hyperacute primary IntraCerebral Haemorrhage (TICH-2). Lancet. 2018;391(10135):2107-2115.',
     'Steiner T, et al. ESO/EANS guideline on stroke due to spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086.',
+    'Beauch\u00EAne C, et al. TXA as first-line for ACEi bradykinin angioedema. Rev Med Interne. 2018;39(10):772-776.',
+    'Wang K, et al. TXA for ACEi-induced angioedema. Am J Emerg Med. 2021;43:292.e5-e7.',
   ],
 };
 
@@ -4953,6 +5129,248 @@ const RISPERIDONE: DrugEntry = {
   ],
 };
 
+const CHOLESTYRAMINE: DrugEntry = {
+  id: 'cholestyramine',
+  name: 'Cholestyramine (Questran)',
+  genericName: 'Cholestyramine resin',
+  drugClass: 'Bile acid sequestrant',
+  route: 'PO',
+  indications: ['Thyroid storm (adjunct — blocks enterohepatic recirculation)'],
+  dosing: [
+    {
+      indication: 'Thyroid storm (adjunct — blocks enterohepatic recirculation)',
+      regimen: '4 g PO q6h. Mix with 60-180 mL water or juice. Continue until thyroid storm resolved. Can reduce T4 levels by 20-30% additionally. Effective even in endogenous thyrotoxicosis (Graves, toxic adenoma) — not just exogenous overdose. Available OTC.',
+    },
+  ],
+  contraindications: ['Complete biliary obstruction'],
+  cautions: [
+    'DRUG INTERACTIONS: Binds many oral medications, reducing absorption. Separate ALL oral drugs by \u22651 hour before or 2 hours after cholestyramine. This includes thionamides \u2014 coordinate timing carefully.',
+    'GI side effects: constipation, bloating, nausea (usually mild)',
+    'May reduce absorption of fat-soluble vitamins (A, D, E, K) with prolonged use',
+  ],
+  monitoring: 'Thyroid function tests. Monitor other medication levels if on narrow therapeutic index drugs (warfarin, digoxin, levothyroxine).',
+  notes: 'Often overlooked adjunct in thyroid storm. Binds thyroid hormone in the GI tract, preventing enterohepatic recirculation. Extremely safe \u2014 available over-the-counter. IBCC considers this an important step in the 8-step thyroid storm protocol. Mechanism works even in patients who have not taken exogenous thyroid hormone.',
+  citations: [
+    'Kaykhaei MA et al. Low doses of cholestyramine in the treatment of hyperthyroidism. Endocrine. 2008;34(1-3):52-55.',
+    'Farkas J. Thyroid Storm. IBCC. 2025.',
+  ],
+};
+
+const LEVOTHYROXINE: DrugEntry = {
+  id: 'levothyroxine',
+  name: 'Levothyroxine (Synthroid)',
+  genericName: 'Levothyroxine sodium',
+  drugClass: 'Thyroid Hormone (synthetic T4)',
+  route: 'IV / PO',
+  indications: ['Decompensated hypothyroidism (IV load)', 'Decompensated hypothyroidism (IV maintenance)', 'Hypothyroidism (PO maintenance)', 'Subclinical hypothyroidism'],
+  dosing: [
+    {
+      indication: 'Decompensated hypothyroidism (IV load)',
+      regimen: '200-400 mcg IV push loading dose. Use lower end (200 mcg) for elderly, low body weight, CAD, or arrhythmia history. Safe to give empirically \u2014 T4 is inactive pro-hormone; normal circulating pool is ~1,000 mcg.',
+    },
+    {
+      indication: 'Decompensated hypothyroidism (IV maintenance)',
+      regimen: '50-100 mcg IV daily (or 1.2 mcg/kg/day IV). Continue until GI function restored, then transition to PO. Oral absorption is unreliable in decompensated hypothyroidism.',
+    },
+    {
+      indication: 'Hypothyroidism (PO maintenance)',
+      regimen: '1.6 mcg/kg/day PO (usual range 50-200 mcg daily). Take on empty stomach 30-60 min before breakfast. Elderly: start 25-50 mcg. Dose adjustments by 12.5-25 mcg increments every 4-6 weeks. Separate from calcium, iron, antacids by 4 hours.',
+    },
+    {
+      indication: 'Subclinical hypothyroidism',
+      regimen: '25-50 mcg PO daily. Elderly or cardiac disease: start 12.5-25 mcg. TSH recheck in 6-8 weeks. Target TSH 1-3 mIU/L.',
+    },
+  ],
+  contraindications: [
+    'Untreated adrenal insufficiency (give steroids FIRST \u2014 T4 accelerates cortisol metabolism, may precipitate adrenal crisis)',
+    'Acute MI (relative \u2014 risk-benefit assessment)',
+  ],
+  cautions: [
+    'Oral bioavailability reduced by: calcium, iron, antacids, PPIs, cholestyramine, sucralfate',
+    'Hepatic enzyme inducers (phenytoin, carbamazepine, rifampin) increase metabolism \u2014 may need 20-50% dose increase',
+    'Amiodarone and high-dose propranolol inhibit T4\u2192T3 conversion',
+  ],
+  monitoring: 'TSH + free T4 every 1-2 days in acute phase (trough levels). TSH falls ~50%/week. fT4 should normalize within 4 days. For maintenance: TSH q6-8 weeks until stable, then annually.',
+  notes: 'IV levothyroxine dose is ~75% of PO dose. T4 half-life: ~6-7 days (euthyroid), ~9-10 days (hypothyroid). Clinical effect takes hours to days \u2014 T4 must be converted to active T3 peripherally. In decompensated hypothyroidism, this conversion may be impaired.',
+  citations: [
+    'Jonklaas J et al. ATA Task Force Guidelines for Treatment of Hypothyroidism. Thyroid. 2014;24(12):1670-1751.',
+    'Farkas J. Decompensated Hypothyroidism. IBCC. 2025.',
+  ],
+};
+
+const LIOTHYRONINE: DrugEntry = {
+  id: 'liothyronine',
+  name: 'Liothyronine (Cytomel / Triostat)',
+  genericName: 'Liothyronine sodium',
+  drugClass: 'Thyroid Hormone (synthetic T3)',
+  route: 'IV',
+  indications: ['Decompensated hypothyroidism (adjunct)'],
+  dosing: [
+    {
+      indication: 'Decompensated hypothyroidism (adjunct)',
+      regimen: '5-20 mcg IV loading dose, then 2.5-10 mcg IV q8h. Use lower end for elderly, smaller patients, or those with CAD/arrhythmia. Reserve for critically ill patients (hemodynamic or ventilatory support). Stop when: clinical improvement, T3 levels elevate, or after 48 hours (T4\u2192T3 conversion should resume by then).',
+    },
+  ],
+  contraindications: [
+    'Untreated adrenal insufficiency',
+    'Acute MI (relative \u2014 T3 increases myocardial O\u2082 demand)',
+  ],
+  cautions: [
+    'Higher risk of cardiac arrhythmias than T4 (active hormone with rapid onset)',
+    'Doses >75 mcg/day associated with increased mortality in older studies',
+    'Not first-line \u2014 adjunct to T4 only',
+  ],
+  monitoring: 'Continuous cardiac monitoring. Check T3 levels \u2014 if elevated, discontinue immediately. Heart rate, rhythm, blood pressure.',
+  notes: 'T3 is the biologically active thyroid hormone. 95% absorbed orally within 4 hours \u2014 higher bioavailability than T4. Half-life ~2.5 days. Onset of action within hours (vs days for T4). 1 mcg T3 \u2248 3 mcg T4 in potency. IBCC: not mandatory \u2014 reserve for critically ill patients with no response to T4 at 24-48h.',
+  citations: [
+    'Jonklaas J et al. ATA Task Force Guidelines for Treatment of Hypothyroidism. Thyroid. 2014;24(12):1670-1751.',
+    'Farkas J. Decompensated Hypothyroidism. IBCC. 2025.',
+  ],
+};
+
+const METHIMAZOLE: DrugEntry = {
+  id: 'methimazole',
+  name: 'Methimazole (Tapazole)',
+  genericName: 'Methimazole',
+  drugClass: 'Thionamide (antithyroid agent)',
+  route: 'PO',
+  indications: ['Thyroid storm', 'Hyperthyroidism (maintenance)'],
+  dosing: [
+    {
+      indication: 'Thyroid storm',
+      regimen: '40 mg PO loading dose STAT, then 20 mg PO q6h. Can administer via NG tube or rectally (compounded) if unable to take PO. Once stable (usually after 24h), consider reducing to 20 mg q12h. IBCC prefers methimazole over PTU (safer profile, no clinical evidence that PTU\'s T4\u2192T3 blocking is meaningful).',
+    },
+    {
+      indication: 'Hyperthyroidism (maintenance)',
+      regimen: 'Initial: 20-40 mg/day PO (depending on severity). Maintenance: 5-20 mg/day PO. Dose adjustments every 4-6 weeks based on free T4/T3.',
+    },
+  ],
+  contraindications: [
+    '1st trimester pregnancy (teratogenic: aplasia cutis, choanal/esophageal atresia, cardiac malformations)',
+    'Prior agranulocytosis from thionamide (cross-reactivity between methimazole and PTU)',
+    'Severe hepatic impairment (relative)',
+  ],
+  cautions: [
+    'Agranulocytosis (~0.2%) \u2014 dose-dependent, almost always within 90 days. Presents with high fever + pharyngitis. Check CBC if febrile.',
+    'Hepatotoxicity (cholestatic pattern, less severe than PTU)',
+    'ANCA-associated vasculitis (rare)',
+    'Warfarin interaction (may potentiate anticoagulation)',
+  ],
+  monitoring: 'CBC with differential before starting and if febrile. LFTs baseline and periodic. Free T4/T3 every 4-6 weeks during titration.',
+  notes: 'Methimazole binds irreversibly to thyroperoxidase \u2014 longer duration of action than PTU, allows less frequent dosing. Half-life ~9 hours. Risk of agranulocytosis is strongly dose-dependent \u2014 use lowest effective dose. No IV formulation exists. Rectal administration possible with compounded suppository.',
+  citations: [
+    'Ross DS et al. 2016 ATA Guidelines for Diagnosis and Management of Hyperthyroidism. Thyroid. 2016;26(10):1343-1421.',
+    'Farkas J. Thyroid Storm. IBCC. 2025.',
+  ],
+};
+
+const PROPRANOLOL: DrugEntry = {
+  id: 'propranolol',
+  name: 'Propranolol (Inderal)',
+  genericName: 'Propranolol hydrochloride',
+  drugClass: 'Non-selective beta-adrenergic blocker',
+  route: 'PO / IV',
+  indications: ['Thyroid storm (rate control)', 'Thyroid storm (IV \u2014 acute)', 'Thyrotoxicosis (symptomatic)'],
+  dosing: [
+    {
+      indication: 'Thyroid storm (rate control)',
+      regimen: '20-40 mg PO q4-6h. Start low (20 mg), titrate to HR <110. At high doses (>160 mg/day) also inhibits peripheral T4\u2192T3 conversion. Can administer via NG tube. IBCC caution: use ONLY if preserved EF on echo. Start low, stop if hypotension develops.',
+    },
+    {
+      indication: 'Thyroid storm (IV \u2014 acute)',
+      regimen: '0.5-1 mg IV over 10 min. May repeat q15 min PRN (max 10 mg total). Reserve for acute rate control when oral not feasible. Switch to oral or esmolol infusion as soon as possible. Esmolol is preferred over IV propranolol \u2014 titratable and ultra-short acting.',
+    },
+    {
+      indication: 'Thyrotoxicosis (symptomatic)',
+      regimen: '10-40 mg PO TID-QID. For palpitations, tremor, anxiety in stable thyrotoxicosis. Titrate to symptoms.',
+    },
+  ],
+  contraindications: [
+    'Decompensated heart failure / reduced EF (can precipitate cardiogenic shock)',
+    'Severe bradycardia / heart block',
+    'Cardiogenic shock',
+    'Severe reactive airway disease (non-selective \u2014 blocks beta-2 bronchodilation)',
+  ],
+  cautions: [
+    'IBCC critical view: beta-blockers are NOT mandatory in thyroid storm and may cause cardiac arrest in patients with reduced EF or cardiomyopathy. Echo BEFORE administration.',
+    'Reactive airway disease \u2014 use cardioselective agent (esmolol, metoprolol) or calcium-channel blocker instead',
+    'Hypoglycemia masking in diabetics',
+    'Abrupt discontinuation can cause rebound hypertension/tachycardia',
+  ],
+  monitoring: 'Heart rate, blood pressure, ECG. Continuous telemetry during IV administration. Blood glucose in diabetics.',
+  notes: 'Non-selective beta-blocker with additional benefit in thyrotoxicosis: blocks peripheral T4\u2192T3 conversion at high doses. However, retrospective data show no clinical difference between propranolol and beta-1 selective agents, questioning the clinical relevance of this effect. IBCC notes that beta-blockers have been linked to cardiogenic collapse and cardiac arrest in thyroid storm \u2014 use for standard accepted indications (hypertension, preserved-EF rate control), not reflexively in all thyroid storm.',
+  citations: [
+    'Ross DS et al. 2016 ATA Guidelines. Thyroid. 2016;26(10):1343-1421.',
+    'Farkas J. Thyroid Storm. IBCC. 2025.',
+    'Matsuo Y et al. Clinical efficacy of beta-1 selective beta-blockers versus propranolol in thyroid storm. Crit Care Med. 2024;52(7):1077-1086.',
+  ],
+};
+
+const PTU: DrugEntry = {
+  id: 'ptu',
+  name: 'Propylthiouracil (PTU)',
+  genericName: 'Propylthiouracil',
+  drugClass: 'Thionamide (antithyroid agent)',
+  route: 'PO',
+  indications: ['Thyroid storm', 'Thyroid storm (pregnancy 1st trimester)'],
+  dosing: [
+    {
+      indication: 'Thyroid storm',
+      regimen: '500-1000 mg PO loading dose, then 250 mg PO q4h. Can administer via NG tube or rectally (compounded). ATA favors PTU in acute setting \u2014 additional benefit of blocking peripheral T4\u2192T3 conversion (~45% reduction in 24h vs 10-15% for methimazole). Generally transition to methimazole once improving (safer long-term profile).',
+    },
+    {
+      indication: 'Thyroid storm (pregnancy 1st trimester)',
+      regimen: '200-400 mg PO loading dose, then 100-200 mg PO q8h. PTU is MANDATORY in 1st trimester \u2014 methimazole crosses placenta and is teratogenic. Switch to methimazole after 1st trimester to reduce hepatotoxicity risk. Use lowest effective dose \u2014 both thionamides can cause fetal hypothyroidism.',
+    },
+  ],
+  contraindications: [
+    'Prior agranulocytosis from thionamide',
+    'Severe hepatic dysfunction (PTU carries BLACK BOX warning for hepatotoxicity)',
+  ],
+  cautions: [
+    'HEPATOTOXICITY \u2014 FDA Black Box Warning. Risk ~1/1000 for severe hepatic injury including fulminant liver failure. Median onset ~120 days. Dose-dependent.',
+    'Agranulocytosis (~0.2%) \u2014 higher risk than methimazole at equivalent doses',
+    'ANCA-associated vasculitis (higher risk than methimazole)',
+    'Medication-induced lupus',
+  ],
+  monitoring: 'LFTs baseline and periodic (monthly for first 3 months). CBC if febrile. Discontinue immediately if LFTs > 3x ULN or symptoms of hepatitis (jaundice, dark urine, RUQ pain).',
+  notes: 'PTU binds reversibly to thyroperoxidase \u2014 shorter duration of action than methimazole, requires more frequent dosing. Half-life only 1-2 hours. Bioavailability 50-80% due to first-pass metabolism. 75% protein-bound (lower placental penetration than methimazole). PTU is preferred in 1st trimester pregnancy and is the ATA-recommended agent for acute thyroid storm, but IBCC favors methimazole overall due to better safety profile.',
+  citations: [
+    'Ross DS et al. 2016 ATA Guidelines for Diagnosis and Management of Hyperthyroidism. Thyroid. 2016;26(10):1343-1421.',
+    'Kruithoff ML, Gigliotti BJ. Thyroid Emergencies: A Narrative Review. Endocr Pract. 2025;31(10):1310-1318.',
+  ],
+};
+
+const SSKI: DrugEntry = {
+  id: 'sski',
+  name: 'Potassium Iodide (SSKI / Lugol\'s)',
+  genericName: 'Potassium iodide',
+  drugClass: 'Iodine supplement (thyroid suppressant)',
+  route: 'PO',
+  indications: ['Thyroid storm (hormone release blockade)'],
+  dosing: [
+    {
+      indication: 'Thyroid storm (hormone release blockade)',
+      regimen: 'SSKI: 5 drops (0.25 mL / 250 mg) PO q6h. OR Lugol\'s 5% solution: 8 drops (0.4 mL) PO q6h \u2014 take with food/fluid to avoid gastritis. TIMING IS CRITICAL: Must give \u22651 hour AFTER thionamide (methimazole or PTU). Without thionamide, iodine can fuel new hormone synthesis. May continue up to 10 days (suppressive effect eventually wears off via escape from Wolff-Chaikoff effect).',
+    },
+  ],
+  contraindications: [
+    'Dermatitis herpetiformis (iodine sensitivity)',
+    'Hypocomplementemic vasculitis (rare)',
+  ],
+  cautions: [
+    'Must give AFTER thionamide \u2014 iodine without antithyroid coverage can worsen thyrotoxicosis, especially in toxic multinodular goiter or toxic adenoma',
+    'True iodine allergy does not exist \u2014 iodine is an essential element. Allergies are to carrier molecules (shellfish protein, contrast dye), not iodine itself',
+    'Prolonged use can cause iodine-induced hypothyroidism or paradoxical thyrotoxicosis (Jod-Basedow phenomenon)',
+  ],
+  monitoring: 'Thyroid function tests (free T4, T3) daily during acute phase. Watch for worsening thyrotoxicosis in first 24h.',
+  notes: '1 drop of SSKI = 0.05 mL = 50 mg potassium iodide. Iodine acutely suppresses thyroid hormone release via the Wolff-Chaikoff effect \u2014 temporary inhibition of thyroid hormone synthesis when exposed to high iodide levels. This effect wears off after 10-14 days as the thyroid adapts (escape phenomenon). Alternative if iodine truly not tolerated: lithium carbonate 300 mg PO q8h (blocks hormone release via different mechanism).',
+  citations: [
+    'Ross DS et al. 2016 ATA Guidelines. Thyroid. 2016;26(10):1343-1421.',
+    'Farkas J. Thyroid Storm. IBCC. 2025.',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
@@ -4987,6 +5405,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CEFEPIME,
   CEFTRIAXONE,
   CEPHALEXIN,
+  CHOLESTYRAMINE,
   CHLOROTHIAZIDE,
   CIPROFLOXACIN,
   CLEVIDIPINE,
@@ -5026,7 +5445,9 @@ export const ALL_DRUGS: DrugEntry[] = [
   LABETALOL,
   LACOSAMIDE,
   LEVETIRACETAM,
+  LEVOTHYROXINE,
   LIDOCAINE,
+  LIOTHYRONINE,
   LOPERAMIDE,
   LORAZEPAM,
   SODIUM_ZIRCONIUM_CYCLOSILICATE,
@@ -5034,6 +5455,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MEDROXYPROGESTERONE,
   MEROPENEM,
   METHOTREXATE,
+  METHIMAZOLE,
   METHYLPREDNISOLONE,
   METOCLOPRAMIDE,
   METOLAZONE,
@@ -5065,7 +5487,9 @@ export const ALL_DRUGS: DrugEntry[] = [
   PROCHLORPERAZINE,
   PROMETHAZINE,
   PROPOFOL,
+  PROPRANOLOL,
   PROTAMINE,
+  PTU,
   QUETIAPINE,
   PYRIDOXINE,
   RABIES_IMMUNE_GLOBULIN,
@@ -5080,6 +5504,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   RH_IMMUNE_GLOBULIN,
   SILVER_SULFADIAZINE,
   SODIUM_BICARBONATE,
+  SSKI,
   TENECTEPLASE,
   TDF_FTC,
   TERBUTALINE,
@@ -5141,6 +5566,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/cefepime|maxipime/i, 'cefepime'],
   [/ceftriaxone/i, 'ceftriaxone'],
   [/cephalexin|keflex/i, 'cephalexin'],
+  [/cholestyramine|questran/i, 'cholestyramine'],
   [/chlorothiazide|diuril/i, 'chlorothiazide'],
   [/ciprofloxacin|cipro/i, 'ciprofloxacin'],
   [/clevidipine|cleviprex/i, 'clevidipine'],
@@ -5178,13 +5604,16 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/labetalol/i, 'labetalol'],
   [/lacosamide|vimpat/i, 'lacosamide'],
   [/levetiracetam|keppra/i, 'levetiracetam'],
+  [/levothyroxine|synthroid/i, 'levothyroxine'],
   [/lidocaine/i, 'lidocaine'],
+  [/liothyronine|cytomel|triostat/i, 'liothyronine'],
   [/loperamide|imodium/i, 'loperamide'],
   [/lorazepam|ativan/i, 'lorazepam'],
   [/lokelma|sodium\s*zirconium|szc/i, 'sodium-zirconium-cyclosilicate'],
   [/magnesium sulfate|mag sulfate|MgSO4/i, 'magnesium-sulfate'],
   [/medroxyprogesterone|MPA|provera|depo.provera/i, 'medroxyprogesterone'],
   [/meropenem|merrem/i, 'meropenem'],
+  [/methimazole|tapazole/i, 'methimazole'],
   [/methotrexate|MTX|trexall/i, 'methotrexate'],
   [/metoclopramide|reglan/i, 'metoclopramide'],
   [/metolazone|zaroxolyn/i, 'metolazone'],
@@ -5214,6 +5643,8 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/prochlorperazine|compazine/i, 'prochlorperazine'],
   [/promethazine|phenergan/i, 'promethazine'],
   [/propofol|diprivan/i, 'propofol'],
+  [/propranolol|inderal/i, 'propranolol'],
+  [/propylthiouracil|PTU/i, 'ptu'],
   [/protamine/i, 'protamine'],
   [/prasugrel|effient/i, 'prasugrel'],
   [/prednisolone|prelone|orapred/i, 'prednisolone'],
@@ -5226,6 +5657,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
   [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
   [/sodium\s*bicarbonate|sodium\s*bicarb|nahco3|bicarb(?!onate)/i, 'sodium-bicarbonate'],
+  [/sski|lugol|potassium\s*iodide/i, 'sski'],
   [/tenecteplase|TNKase/i, 'tenecteplase'],
   [/tenofovir.*emtricitabine|truvada|TDF\/FTC/i, 'tdf-ftc'],
   [/terbutaline|brethine/i, 'terbutaline'],

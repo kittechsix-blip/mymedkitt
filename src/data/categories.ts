@@ -73,6 +73,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'em.png',
     decisionTrees: [
       {
+        id: 'anaphylaxis',
+        title: 'Anaphylaxis Management',
+        subtitle: 'Recognition → Epinephrine → Resuscitation → Refractory → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 27,
+        entryNodeId: 'anaph-start',
+      },
+      {
         id: 'pe-treatment',
         title: 'PE Treatment',
         subtitle: 'Risk Stratification → Management',
@@ -331,6 +340,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 27,
         entryNodeId: 'ai-start',
+      },
+      {
+        id: 'thyroid',
+        title: 'Thyroid Disorders',
+        subtitle: 'Storm vs Myxedema \u2192 Recognition \u2192 Multimodal Treatment \u2192 Disposition',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 32,
+        entryNodeId: 'thyroid-start',
       }
     ],
     isCustom: false,

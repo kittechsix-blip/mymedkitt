@@ -5451,6 +5451,463 @@ const AI_STEROID_EQUIVALENCY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Thyroid Disorders — Steps Summary
+// -------------------------------------------------------------------
+
+const THYROID_SUMMARY: InfoPage = {
+  id: 'thyroid-summary',
+  title: 'Thyroid Disorders Steps Summary',
+  subtitle: 'Stepwise approach to thyroid emergencies',
+  sections: [
+    {
+      heading: 'Initial Assessment',
+      body: '[Presentation & Pathway Selection](#/node/thyroid-start)\n[Confirm Decompensated Hypothyroidism](#/node/thyroid-hypo-confirm)\n[Confirm Thyroid Storm](#/node/thyroid-storm-confirm)',
+    },
+    {
+      heading: 'Decompensated Hypothyroidism',
+      body: '[Airway & Supportive Care](#/node/thyroid-hypo-airway) — passive rewarming only, avoid sedatives\n[Step 1: Steroids FIRST](#/node/thyroid-hypo-steroids) — HC 100 mg IV before T4\n[Step 2: IV Levothyroxine](#/node/thyroid-hypo-t4) — 200-400 mcg IV load\n[Step 3: Consider IV Liothyronine](#/node/thyroid-hypo-t3) — for critically ill only\n[Lab Workup & Monitoring](#/node/thyroid-hypo-labs)\n[Disposition](#/node/thyroid-hypo-dispo) — ICU vs monitored floor',
+    },
+    {
+      heading: 'Thyroid Storm — 8-Step Protocol',
+      body: '[Step 1: Evaluation & Sepsis Workup](#/node/thyroid-storm-eval) — echo BEFORE beta-blockers\n[Step 2: Steroids](#/node/thyroid-storm-steroids) — HC 300 mg IV load → 100 mg q8h\n[Step 3: Thionamide](#/node/thyroid-storm-thionamide) — methimazole 40 mg load or PTU 500-1000 mg\n[Step 4: Iodine](#/node/thyroid-storm-iodine) — SSKI 5 drops q6h (≥1hr after thionamide)\n[Step 5: Cholestyramine](#/node/thyroid-storm-cholestyramine) — 4 g q6h\n[Step 6: Hyperthermia](#/node/thyroid-storm-hyperthermia) — acetaminophen, NO aspirin\n[Step 7: Agitation](#/node/thyroid-storm-agitation) — olanzapine preferred\n[Step 8: Cardiovascular](#/node/thyroid-storm-cardiovascular) — echo first, then decide on beta-blocker',
+    },
+    {
+      heading: 'Special Situations',
+      body: '[AFib in Thyroid Storm](#/node/thyroid-storm-afib)\n[Pregnancy](#/node/thyroid-storm-pregnancy) — PTU mandatory in 1st trimester\n[Refractory Storm](#/node/thyroid-storm-refractory) — plasmapheresis, thyroidectomy',
+    },
+    {
+      heading: 'Subclinical Findings',
+      body: '[Incidental Lab Abnormality](#/node/thyroid-subclinical)\n[TSH ≥10 — Start Treatment](#/node/thyroid-subclinical-treat)\n[TSH 4.5-10 — Observation](#/node/thyroid-subclinical-observe)\n[Suppressed TSH — Urgent Referral](#/node/thyroid-subclinical-hyper)',
+    },
+  ],
+  citations: [],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Beta-Blocker Controversy
+// -------------------------------------------------------------------
+
+const THYROID_BB_CONTROVERSY: InfoPage = {
+  id: 'thyroid-bb-controversy',
+  title: 'Beta-Blocker Controversy in Thyroid Storm',
+  subtitle: 'Traditional vs critical care perspective',
+  sections: [
+    {
+      heading: 'Traditional View (ATA/EMP Guidelines)',
+      body: 'Beta-adrenergic blockade is recommended for patients with symptomatic thyrotoxicosis, especially elderly patients and those with resting HR >90 or coexisting cardiovascular disease. [1]\n\n**Propranolol** is preferred — at high doses (>160 mg/day), it also inhibits peripheral T4→T3 conversion. [1]\n\nBeta-blockers are the mainstay of treatment for AFib secondary to hyperthyroidism.\n\nFor critically ill patients, **esmolol** infusion provides titratable, ultra-short-acting rate control.',
+    },
+    {
+      heading: 'Critical View (IBCC / Farkas)',
+      body: '**Beta-blockers can be lethal in thyroid storm.** [2]\n\nSome patients develop severe thyrotoxic cardiomyopathy with reduced EF. In this context, beta-blockade may cause cardiac arrest or cardiogenic shock. In one multi-center study, **38% of thyroid storm patients developed cardiogenic shock**. [3]\n\nJapanese guidelines cite increased mortality with propranolol vs esmolol. Retrospective data show **no difference** between beta-1-selective agents and propranolol — arguing against the clinical relevance of propranolol\'s T4→T3 blocking. [4]\n\nThe concept that beta-blockers are a "cornerstone therapy" needs to be debunked. Beta-blockers are excellent for chronic, compensated hyperthyroidism — but potentially lethal in acute, decompensated hyperthyroidism (just as they are excellent for chronic HF but lethal in acute decompensated HF).',
+    },
+    {
+      heading: 'Balanced Approach',
+      body: '**1. Echo BEFORE beta-blockers** — mandatory. Assess EF and volume status.\n\n**2. If preserved EF + hypertension:** Beta-blockers are reasonable. Esmolol preferred (titratable, ultra-short acting). Start low, titrate carefully.\n\n**3. If reduced EF or decompensated HF:** Do NOT give beta-blockers. Treat the thyroid storm aggressively (steps 2-7). Sinus tachycardia may be compensatory — targeting HR <130 is more realistic than <110.\n\n**4. Do not use beta-blockers to intentionally slow sinus tachycardia** — treat the underlying cause instead.\n\n**5. If patient deteriorates after beta-blocker:** Stop immediately. This is likely iatrogenic cardiogenic shock.',
+    },
+    {
+      heading: 'Key Evidence',
+      body: '\u2022 One meta-analysis concluded that beta-blocker use in thyroid storm was linked to cardiogenic collapse and cardiac arrest [5]\n\u2022 A multi-center French study found 38% of thyroid storm patients developed cardiogenic shock [3]\n\u2022 Retrospective Japanese data: mortality was independently associated with non-use of antithyroid drugs, but NOT with non-use of beta-blockers [6]\n\u2022 No RCTs exist comparing beta-blocker use vs no beta-blocker in thyroid storm',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Ross DS et al. 2016 ATA Guidelines for Diagnosis and Management of Hyperthyroidism. Thyroid. 2016;26(10):1343-1421.' },
+    { num: 2, text: 'Farkas J. Thyroid Storm. Internet Book of Critical Care (IBCC). 2025.' },
+    { num: 3, text: 'Bourcier S et al. Thyroid Storm in the ICU: A Retrospective Multicenter Study. Crit Care Med. 2020;48(1):83-90.' },
+    { num: 4, text: 'Matsuo Y et al. Clinical efficacy of beta-1 selective beta-blockers versus propranolol in thyroid storm. Crit Care Med. 2024;52(7):1077-1086.' },
+    { num: 5, text: 'Farooqi S et al. High risk and low prevalence diseases: Thyroid storm. Am J Emerg Med. 2023;69:127-135.' },
+    { num: 6, text: 'Ono Y et al. Factors associated with mortality of thyroid storm. Medicine. 2016;95(7):e2848.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Thionamide Comparison
+// -------------------------------------------------------------------
+
+const THYROID_THIONAMIDE_COMPARE: InfoPage = {
+  id: 'thyroid-thionamide-compare',
+  title: 'Thionamide Comparison',
+  subtitle: 'Methimazole vs Propylthiouracil (PTU)',
+  sections: [
+    {
+      heading: 'Mechanism',
+      body: '**Both** inhibit thyroid peroxidase, blocking new thyroid hormone synthesis.\n\n**Methimazole:** Binds irreversibly to thyroperoxidase \u2192 longer duration of action, less frequent dosing.\n\n**PTU:** Binds reversibly \u2192 shorter duration, requires q4-8h dosing. **Additional benefit:** Blocks peripheral T4\u2192T3 conversion (~45% reduction in 24h). However, IBCC notes no clinical evidence this additional effect is clinically meaningful. [1]',
+    },
+    {
+      heading: 'Dosing in Thyroid Storm',
+      body: '',
+      drugTable: [
+        { drug: 'Methimazole', regimen: 'Load: 40 mg PO. Maintenance: 20 mg PO q6h. After stabilization: 20 mg q12h.' },
+        { drug: 'PTU', regimen: 'Load: 500-1000 mg PO. Maintenance: 250 mg PO q4h. Higher doses needed due to shorter duration and reversible binding.' },
+      ],
+    },
+    {
+      heading: 'Safety Profile',
+      body: '**Hepatotoxicity:**\n\u2022 **Methimazole:** Lower risk. Cholestatic pattern (less severe). Mean onset ~30 days.\n\u2022 **PTU:** Higher risk (~1/1000 severe injury). **FDA Black Box Warning.** Hepatocellular pattern \u2014 can cause fulminant liver failure. Median onset ~120 days. Dose-dependent.\n\n**Agranulocytosis** (~0.2% for both):\n\u2022 Risk is dose-dependent for both drugs\n\u2022 Higher risk with PTU at equivalent doses\n\u2022 Almost always within 90 days of therapy\n\u2022 Presents with high fever + pharyngitis\n\u2022 Cross-reactivity between agents \u2014 do not switch if agranulocytosis occurs\n\n**ANCA-associated vasculitis:** Higher risk with PTU.\n\n**Overall:** Methimazole is safer for long-term use. Transition from PTU to methimazole once stable.',
+    },
+    {
+      heading: 'Pregnancy',
+      body: '**1st trimester: PTU is MANDATORY**\n\u2022 Methimazole crosses placenta \u2192 teratogenic (aplasia cutis, choanal atresia, esophageal atresia, cardiac malformations)\n\u2022 PTU: lower risk and less severe anomalies (preauricular cysts, urinary tract defects)\n\n**2nd/3rd trimester: Switch to methimazole**\n\u2022 Risk of congenital anomalies decreases after 1st trimester\n\u2022 Methimazole preferred to reduce maternal hepatotoxicity risk\n\n**Both drugs:** Use lowest effective dose \u2014 both cross placenta and can cause fetal hypothyroidism. [2]',
+    },
+    {
+      heading: 'IBCC vs ATA Recommendation',
+      body: '**ATA:** Favors PTU in acute thyroid storm (earlier onset + T4\u2192T3 blocking).\n**IBCC:** Favors methimazole overall (safer, no robust evidence PTU is clinically superior).\n**Japanese Endocrine Society:** No significant outcome benefit of one over the other.\n\n**Pragmatic choice:** Either is acceptable. Use PTU if pregnant (1st trimester) or if specifically preferred by consulting endocrinologist.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Thyroid Storm. IBCC. 2025.' },
+    { num: 2, text: 'Alexander EK et al. 2017 ATA Guidelines for Thyroid Disease During Pregnancy. Thyroid. 2017;27(3):315-389.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Lab Interpretation
+// -------------------------------------------------------------------
+
+const THYROID_LABS: InfoPage = {
+  id: 'thyroid-labs',
+  title: 'Thyroid Lab Interpretation',
+  subtitle: 'TSH, free T4, and T3 patterns in thyroid disease',
+  sections: [
+    {
+      heading: 'Key Principle',
+      body: '**Both decompensated hypothyroidism and thyroid storm are CLINICAL diagnoses.** Lab values reflect the chronic thyroid state, not acute severity. If clinical suspicion is high, initiate treatment regardless of lab availability. [1][2]',
+    },
+    {
+      heading: 'Lab Patterns by Condition',
+      body: '**Primary Hypothyroidism (most common):**\nTSH: \u2191\u2191 High | Free T4: \u2193 Low | T3: \u2193 Low\n\n**Central (Secondary) Hypothyroidism:**\nTSH: Low, normal, or slightly \u2191 | Free T4: \u2193 Low | T3: \u2193 Low\n\u2192 Consider panhypopituitarism, pituitary tumor, or secondary AI\n\n**Overt Hyperthyroidism / Thyroid Storm:**\nTSH: \u2193\u2193 Very low (<0.01 mU/L) | Free T4: \u2191 High | T3: \u2191\u2191 Often disproportionately elevated\n\u2192 T3 may be more elevated than T4 due to preferential T3 secretion by hyperthyroid gland\n\n**Subclinical Hypothyroidism:**\nTSH: \u2191 Mildly elevated (4.5-10+) | Free T4: Normal | T3: Normal\n\n**Subclinical Hyperthyroidism:**\nTSH: \u2193 Low (<0.1) | Free T4: Normal | T3: Normal\n\n**Euthyroid Sick Syndrome (Nonthyroidal Illness):**\nTSH: Low or normal | Free T4: Normal or low | T3: \u2193 Low\n\u2192 Common in acutely ill patients WITHOUT primary thyroid disease. Do NOT treat. Reassess after illness resolves. [1]',
+    },
+    {
+      heading: 'Additional Lab Findings',
+      body: '**Decompensated Hypothyroidism:**\n\u2022 Hyponatremia (~50%) \u2014 SIADH + decreased renal blood flow\n\u2022 Hypoglycemia \u2014 may indicate concurrent adrenal insufficiency\n\u2022 Elevated CK \u2014 rhabdomyolysis from hypothermia/immobility\n\u2022 Hypercapnia on ABG \u2014 depressed respiratory drive\n\u2022 Low voltage ECG, bradycardia, QT prolongation\n\u2022 Elevated cholesterol/LDL\n\u2022 Anemia, leukopenia\n\u2022 Acquired von Willebrand syndrome (coagulopathy)\n\n**Thyroid Storm:**\n\u2022 Hyperglycemia (catecholamine-mediated glycogenolysis)\n\u2022 Hypercalcemia (hemoconcentration + bone resorption)\n\u2022 Hypokalemia (especially in thyrotoxic periodic paralysis)\n\u2022 Abnormal LFTs / jaundice (hepatic congestion or hypoperfusion)\n\u2022 DIC (elevated INR, low fibrinogen, thrombocytopenia)\n\u2022 Metabolic acidosis on ABG (hypermetabolic state)',
+    },
+    {
+      heading: 'Random Cortisol',
+      body: 'Always obtain in suspected decompensated hypothyroidism. Draw BEFORE giving steroids if possible.\n\n\u2022 <10 \u00B5g/dL during crisis: virtually diagnostic of adrenal insufficiency\n\u2022 <18 \u00B5g/dL during acute stress: suggestive of AI\n\u2022 >18 \u00B5g/dL: AI less likely (steroids may be tapered once confirmed)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kruithoff ML, Gigliotti BJ. Thyroid Emergencies: A Narrative Review. Endocr Pract. 2025;31(10):1310-1318.' },
+    { num: 2, text: 'Farkas J. Decompensated Hypothyroidism. IBCC. 2025.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Precipitants & DDx
+// -------------------------------------------------------------------
+
+const THYROID_PRECIPITANTS: InfoPage = {
+  id: 'thyroid-precipitants',
+  title: 'Precipitants & Differential Diagnosis',
+  subtitle: 'Thyroid emergency triggers and mimics',
+  sections: [
+    {
+      heading: 'Decompensated Hypothyroidism Triggers',
+      body: '\u2022 **Levothyroxine noncompliance** (#1 cause \u2014 28% in one series) [1]\n\u2022 **Infection / sepsis** (15%) \u2014 viral in children, bacterial in adults\n\u2022 **Amiodarone-induced hypothyroidism** (11%) [1]\n\u2022 Cold exposure (90% of cases present in winter)\n\u2022 Surgery, trauma, burns\n\u2022 MI, heart failure, stroke, GI bleed\n\u2022 Medications: lithium, immune checkpoint inhibitors (pembrolizumab, nivolumab), IV iohexol contrast\n\u2022 Sedatives, opioids (can trigger decompensation)\n\u2022 Beta-blockers, diuretics, antipsychotics',
+    },
+    {
+      heading: 'Thyroid Storm Triggers',
+      body: '\u2022 **Infection** (#1) [2]\n\u2022 Antithyroid medication noncompliance\n\u2022 Acute iodine load (contrast dye, amiodarone)\n\u2022 Thyroid surgery or radioiodine therapy\n\u2022 Trauma, surgery\n\u2022 DKA, hypoglycemia\n\u2022 Pregnancy, labor, postpartum\n\u2022 PE, MI, stroke\n\u2022 Aspirin intoxication (increases free thyroid hormone)\n\u2022 Checkpoint inhibitors, tyrosine kinase inhibitors\n\u2022 **No identifiable trigger in ~30% of cases** [2]',
+    },
+    {
+      heading: 'Drug-Induced Thyroid Dysfunction',
+      body: '**Amiodarone** (most important):\n\u2022 Can cause BOTH hypothyroidism AND hyperthyroidism\n\u2022 Type 1 amiodarone-induced thyrotoxicosis: excess iodine \u2192 increased hormone synthesis (treat with thionamide)\n\u2022 Type 2: destructive thyroiditis \u2192 hormone release (treat with steroids)\n\u2022 ~30% of thyroid storm cases in some series are amiodarone-related [1]\n\n**Lithium:** Inhibits thyroid hormone release \u2192 hypothyroidism in 20-40% of users\n\n**Checkpoint inhibitors** (pembrolizumab, nivolumab, ipilimumab): Immune-mediated thyroiditis \u2192 can cause both hyper- and hypothyroidism. Myxedema coma has been reported.',
+    },
+    {
+      heading: 'Differential Diagnosis',
+      body: '**Decompensated hypothyroidism mimics:**\n\u2022 Sepsis / septic shock\n\u2022 Stroke\n\u2022 Adrenal crisis\n\u2022 DKA\n\u2022 Drug intoxication (carbon monoxide, beta-blocker, CCB, clonidine, opioid, benzodiazepine)\n\u2022 Environmental hypothermia\n\u2022 Malnutrition\n\u2022 Panhypopituitarism\n\n**Thyroid storm mimics:**\n\u2022 Sepsis / septic shock\n\u2022 Neuroleptic malignant syndrome (NMS)\n\u2022 Serotonin syndrome\n\u2022 Sympathomimetic intoxication (cocaine, amphetamines)\n\u2022 Drug/alcohol withdrawal\n\u2022 Pheochromocytoma\n\u2022 Heat stroke\n\u2022 Malignant hyperthermia\n\u2022 Psychiatric crisis (mania, psychosis)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bourcier S et al. Critically ill severe hypothyroidism: a retrospective multicenter cohort study. Ann Intensive Care. 2023;13(1):15.' },
+    { num: 2, text: 'Farkas J. Thyroid Storm. IBCC. 2025.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Special Populations
+// -------------------------------------------------------------------
+
+const THYROID_SPECIAL_POPS: InfoPage = {
+  id: 'thyroid-special-pops',
+  title: 'Special Populations',
+  subtitle: 'Pregnancy, pediatric, neonatal, and elderly considerations',
+  sections: [
+    {
+      heading: 'Pregnancy',
+      body: '**Thyroid physiology changes in pregnancy:**\n\u2022 TSH reference range decreases in 1st trimester (reduce upper limit by ~0.5 mIU/L)\n\u2022 Total T4/T3 increase 50% after 16 weeks (increased TBG) \u2014 use free levels\n\u2022 Gestational transient hyperthyroidism is common (HCG cross-reacts with TSH receptor) \u2014 usually benign\n\n**Hypothyroidism in pregnancy:** Untreated \u2192 pre-eclampsia, preterm birth, placental abruption, stillbirth. Adequate T4 replacement minimizes risks.\n\n**Thyroid storm in pregnancy:**\n\u2022 Treatment similar to non-pregnant + key modifications\n\u2022 **PTU is mandatory in 1st trimester** (methimazole is teratogenic)\n\u2022 Switch to methimazole after 1st trimester (lower hepatotoxicity)\n\u2022 Iodine: cautious use \u2014 crosses placenta, can cause fetal goiter\n\u2022 Propranolol: lowest effective dose (prolonged use \u2192 IUGR risk)\n\u2022 Thyrotoxic heart failure + cardiomyopathy are MORE common in pregnancy\n\u2022 Beta-agonist tocolytics are CONTRAINDICATED\n\u2022 Coordinate with OB/MFM [1]',
+    },
+    {
+      heading: 'Pediatric Thyroid Storm',
+      body: 'Thyroid storm is rare in children. Most pediatric hyperthyroidism is Graves disease (onset usually during puberty, ~80% after age 11). [2]\n\n**Presentation:** Fever, tachycardia, failure to gain weight, chronic diarrhea, altered mental status. Febrile seizures reported.\n\n**Treatment:** Based on adult literature + expert opinion. No standard pediatric recommendations exist.\n\u2022 Sepsis workup + resuscitation\n\u2022 Consult pediatric endocrinology\n\u2022 Thionamide dosing: methimazole 0.25-1 mg/kg/day divided q8-12h\n\u2022 PTU if methimazole not tolerated: 5-10 mg/kg/day divided q8h\n\u2022 Propranolol: 0.5-2 mg/kg/day divided q6-12h',
+    },
+    {
+      heading: 'Neonatal',
+      body: '**Congenital hypothyroidism:** 1 in 2000-4000 newborns. Part of standard newborn screening. Often asymptomatic at birth (maternal T4 present). If symptomatic: lethargy, feeding difficulty, macroglossia, hypothermia, jaundice. Treatment: oral levothyroxine 10-15 mcg/kg daily. [1]\n\n**Neonatal thyrotoxicosis:** Rare. Seen in babies born to mothers with Graves disease (maternal TRAb crosses placenta). May present at end of first week (after maternal antithyroid drugs clear). Signs: failure to thrive, persistent tachycardia, heart failure. Treatment: PTU 5-10 mg/kg/day divided q8h, or methimazole 0.25-1 mg/kg/day.',
+    },
+    {
+      heading: 'Elderly',
+      body: '**Decompensated hypothyroidism:** Most common in women 60-85 years. Higher mortality with age.\n\u2022 Start T4 at lower doses (200 mcg load, 50 mcg/day maintenance)\n\u2022 Higher risk of arrhythmias during thyroid replacement\n\u2022 Lower threshold for T3 \u2014 may exacerbate cardiac disease\n\n**Thyroid storm in elderly:**\n\u2022 May present atypically \u2014 "apathetic thyrotoxicosis" (lethargy rather than agitation)\n\u2022 Higher prevalence of AFib (35% in older vs younger patients)\n\u2022 Greater cardiac sensitivity to beta-blockers \u2014 start low, monitor closely\n\u2022 Goiters more common in younger patients (94% vs 50%)',
+    },
+    {
+      heading: 'Amiodarone-Induced Thyroid Dysfunction',
+      body: '**Two types (require different treatment):**\n\n**Type 1 (excess iodine \u2192 increased synthesis):**\n\u2022 Occurs in patients with pre-existing thyroid disease (Graves, toxic adenoma)\n\u2022 Treatment: thionamide (methimazole)\n\u2022 May need potassium perchlorate to block iodine uptake\n\n**Type 2 (destructive thyroiditis \u2192 hormone release):**\n\u2022 Occurs in normal thyroid glands\n\u2022 Treatment: corticosteroids (prednisone 40-60 mg/day)\n\u2022 Thionamides are ineffective (not a synthesis problem)\n\n**Mixed/uncertain:** Treat with both thionamide + steroids.\n\nAmiodarone has extremely long half-life (~40-55 days) \u2014 thyroid effects persist for months after discontinuation.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Alexander EK et al. 2017 ATA Guidelines for Thyroid Disease During Pregnancy. Thyroid. 2017;27(3):315-389.' },
+    { num: 2, text: 'Kruithoff ML, Gigliotti BJ. Thyroid Emergencies: A Narrative Review. Endocr Pract. 2025;31(10):1310-1318.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Thyroid Disorders — Airway Management
+// -------------------------------------------------------------------
+
+const THYROID_AIRWAY: InfoPage = {
+  id: 'thyroid-airway',
+  title: 'Airway Management in Thyroid Disease',
+  subtitle: 'Anatomic and physiologic challenges',
+  sections: [
+    {
+      heading: 'Anatomic Difficult Airway',
+      body: '**Decompensated hypothyroidism:**\n\u2022 Macroglossia (myxedema of tongue)\n\u2022 Posterior pharyngeal myxedema / angioedema\n\u2022 Vocal cord edema\n\u2022 Reduced neck mobility\n\n**Goiter (hypo or hyper):**\n\u2022 Tracheal compression and deviation\n\u2022 Laryngeal displacement\n\u2022 Hypopharynx displacement\n\u2022 May make surgical airway technically challenging\n\n**Approach:** Video laryngoscopy as first device. Fiberoptic available as backup. If stable + predicted difficult airway \u2192 awake intubation with ENT/anesthesia standby. In cannot-intubate-cannot-oxygenate \u2192 surgical airway needed (technically challenging with large goiter \u2014 may need urgent tracheostomy in OR). [1]',
+    },
+    {
+      heading: 'Physiologically Difficult Airway',
+      body: '**Decompensated hypothyroidism:**\n\u2022 Severe respiratory muscle weakness\n\u2022 Depressed central ventilatory drive \u2192 CO\u2082 narcosis\n\u2022 Decreased lung elasticity\n\u2022 Pleural effusions \u2192 hypoxemia\n\u2022 Patients may have respiratory alkalosis DESPITE low minute ventilation (due to decreased CO\u2082 production)\n\n**Thyroid storm:**\n\u2022 Significant muscle weakness + high metabolic rate \u2192 progressive respiratory failure\n\u2022 Hemodynamic instability \u2192 peri-intubation arrest risk\n\n**All thyroid emergencies:**\n\u2022 Extreme sensitivity to sedatives and opioids\n\u2022 Use smallest effective doses for RSI medications\n\u2022 Pre-oxygenate aggressively\n\u2022 Have vasopressors ready (anticipate peri-intubation hypotension)',
+    },
+    {
+      heading: 'Post-Intubation Considerations',
+      body: '**Decompensated hypothyroidism:**\n\u2022 Prolonged ventilator weaning expected \u2014 respiratory muscle weakness + impaired central drive improve slowly with thyroid replacement\n\u2022 Address respiratory alkalosis by decreasing tidal volume or rate (CO\u2082 production is low)\n\u2022 Consider increased aspiration risk from neurogenic oropharyngeal dysphagia\n\n**Thyroid storm:**\n\u2022 Increased CO\u2082 production from hypermetabolic state \u2014 may need higher minute ventilation\n\u2022 Temperature management critical \u2014 hyperthermia worsens metabolic demand',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kruithoff ML, Gigliotti BJ. Thyroid Emergencies: A Narrative Review. Endocr Pract. 2025;31(10):1310-1318.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — Steps Summary
+// -------------------------------------------------------------------
+
+const ANAPH_SUMMARY: InfoPage = {
+  id: 'anaph-summary',
+  title: 'Anaphylaxis Steps Summary',
+  subtitle: 'Time-critical epinephrine-first treatment pathway',
+  sections: [
+    {
+      heading: '1. Recognition (0-2 min)',
+      body: '• [Assess presentation — multi-organ involvement?](#/node/anaph-start)\n• [Apply WAO 2020 diagnostic criteria](#/node/anaph-diagnosis)\n• [Differential: vasovagal, scombroid, ACE-I angioedema](#/info/anaph-ddx)',
+    },
+    {
+      heading: '2. IM Epinephrine — FIRST (0-5 min)',
+      body: '• [Source control + IM Epi 0.5 mg anterolateral thigh](#/node/anaph-source-control)\n• Pediatric: 0.01 mg/kg IM (max 0.5 mg)\n• Repeat every 5 min up to 3 doses',
+    },
+    {
+      heading: '3. Reassessment (5-15 min)',
+      body: '• [Assess response to IM epinephrine](#/node/anaph-epi-response)\n• [Good response → adjunctive therapies](#/node/anaph-post-epi-stable)\n• [Poor response → IV epinephrine infusion](#/node/anaph-epi-infusion)\n• [Peri-arrest → push-dose epi 20-50 mcg IV](#/node/anaph-peri-arrest)',
+    },
+    {
+      heading: '4. Resuscitation',
+      body: '• [Aggressive IV fluids — up to 35% plasma extravasates](#/node/anaph-fluids)\n• [Airway assessment — stridor, edema, intubation prep](#/node/anaph-airway)\n• [Critical airway — video laryngoscopy, smaller ETT, neb epi](#/node/anaph-airway-critical)',
+    },
+    {
+      heading: '5. Refractory / Special Populations',
+      body: '• [Beta-blocked patient — methylene blue, higher epi doses](#/node/anaph-beta-blocked)\n• [Refractory anaphylaxis — methylene blue, vasopressin, ECMO](#/node/anaph-refractory)\n• [Persistent bronchospasm — albuterol, terbutaline](#/node/anaph-bronchospasm)',
+    },
+    {
+      heading: '6. Adjuncts & Disposition',
+      body: '• [H1 + H2 antihistamines (second-line only)](#/node/anaph-antihistamines)\n• [Steroids — controversial, single dose if giving](#/node/anaph-steroids)\n• [Tryptase — draw within 3 hours](#/node/anaph-tryptase)\n• [Disposition — 4-6h observe vs admit vs ICU](#/node/anaph-disposition-assess)\n• [Discharge Rx — EpiPen x2 + allergist referral](#/node/anaph-discharge-rx)',
+    },
+  ],
+  citations: [],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — IV Epinephrine PK Rationale
+// -------------------------------------------------------------------
+
+const ANAPH_IV_EPI_PK: InfoPage = {
+  id: 'anaph-iv-epi-pk',
+  title: 'IV Epinephrine — PK Rationale',
+  subtitle: 'PulmCrit approach: Why IV infusion over repeated IM',
+  sections: [
+    {
+      heading: 'IM Epinephrine Pharmacokinetics',
+      body: 'IM epinephrine takes ~10 minutes to reach peak blood levels (Simons 2001). Absorption is erratic with biphasic serum levels. [4]\n\nRepeating IM epi at 5-minute intervals risks **dose-stacking** — the second dose is given before the first takes effect, leading to inappropriately large total doses.\n\nPatients in shock may have poor muscle perfusion, further reducing IM absorption.',
+    },
+    {
+      heading: 'Pharmacokinetic Calculation',
+      body: 'Based on Abboud et al (septic shock PK data): [4]\n• Volume of distribution (Vd) = 8 liters\n• Half-life = ~3.5 minutes\n• Elimination constant (Ke) = 0.2/min\n\n**Loading dose** = Vd × therapeutic concentration = 8000 mL × 0.005 mcg/mL = **~40 mcg**\n**Maintenance** = Vd × concentration × Ke = **~8-10 mcg/min**',
+    },
+    {
+      heading: 'Clinical Evidence',
+      body: 'Brown et al 2014: Prospective study of 19 patients with bee sting anaphylaxis treated with IV epinephrine infusion at 5-15 mcg/min. [10]\n\n• All patients responded rapidly (within 5 minutes)\n• No appreciable adverse effects\n• 9 patients required re-initiation after stopping (recurrence)\n• One patient needed 30 mcg/min (dysfunctional IV line)',
+    },
+    {
+      heading: 'Proposed Protocol',
+      body: '**Peri-arrest:** 20-50 mcg IV bolus (push-dose)\n\n**Loading:** 20 mcg/min × 2 minutes (~40 mcg total = 1 Vd loading dose)\n\n**Maintenance:** 10 mcg/min — titrate based on response\n\n**AGGRESSIVELY WEAN** after resolution (~2 hours). The greatest weakness of IV epi infusion is reluctance to wean. [4]\n\nIf symptoms recur during wean → resume immediately, attempt again in 1-2 hours.',
+    },
+    {
+      heading: 'Safety',
+      body: '**This approach applies ONLY to:**\n• Patients with pre-existing IV access\n• Managed by experienced resuscitationist\n• IM epinephrine remains first-line for the vast majority\n\n**Dosing errors:** IV bolus overdose risk is 61× greater than IM. [2] Never give cardiac arrest dose (1 mg) to a patient with a pulse. The 1 mg/mL concentration must be further diluted before IV use.',
+    },
+  ],
+  citations: [
+    { num: 2, text: 'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.' },
+    { num: 4, text: 'Farkas J. PulmCrit — How to use IV epinephrine for anaphylaxis. EMCrit/PulmCrit. August 26, 2019.' },
+    { num: 10, text: 'Brown SGA, et al. Insect sting anaphylaxis; prospective evaluation of treatment with IV adrenaline and volume resuscitation. Emerg Med J. 2004;21(2):149-154.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — Differential Diagnosis
+// -------------------------------------------------------------------
+
+const ANAPH_DDX: InfoPage = {
+  id: 'anaph-ddx',
+  title: 'Differential Diagnosis',
+  subtitle: 'Distinguishing anaphylaxis from mimics',
+  sections: [
+    {
+      heading: 'Vasovagal Reaction',
+      body: '**Key distinction:** Vasovagal = **bradycardia** with hypotension. Anaphylaxis = **tachycardia** with hypotension (distributive shock). [3]\n\nVasovagal: pallor, diaphoresis, no urticaria/wheezing. Resolves rapidly with supine positioning.',
+    },
+    {
+      heading: 'Scombroid (Histamine Fish Poisoning)',
+      body: 'Caused by histamine in poorly refrigerated fish. Symptoms within minutes to hours: flushing, headache, peppery taste, GI symptoms. [3]\n\n**Clues:** Multiple people affected after same meal. Patient has eaten same fish before without reaction. Responds to antihistamines alone. Not a true allergy — does NOT require EpiPen or allergist referral.',
+    },
+    {
+      heading: 'ACE-Inhibitor Angioedema',
+      body: 'Bradykinin-mediated (not IgE). **Epinephrine is ineffective.** [3]\n\nIsolated angioedema (lips, tongue, oropharynx) WITHOUT urticaria. Can occur at any time during treatment course — weeks to years after starting ACE-I.\n\nManagement: Stop ACE-I permanently. Airway management. Consider icatibant or FFP for severe cases.',
+    },
+    {
+      heading: 'Hereditary Angioedema',
+      body: 'C1-esterase inhibitor deficiency → excess bradykinin. [3]\n\nRecurrent episodes, family history. Lacks pruritus of allergy. High GI involvement (93%). Epinephrine ineffective.\n\nDiagnosis: C4 level (low), C1-INH level and function.',
+    },
+    {
+      heading: 'Mastocytosis / Mast Cell Activation',
+      body: 'Abnormal mast cell proliferation → endogenous histamine release. [1][3]\n\nRecurrent "idiopathic" anaphylaxis, flushing, pruritus, GI symptoms, hypotension. Male predominance. Severe anaphylaxis with hypotension but absence of urticaria.\n\nSuggestive: elevated baseline tryptase (>8 ng/mL). Definitive: bone marrow biopsy.',
+    },
+    {
+      heading: 'Other Mimics',
+      body: '• **Asthma** — wheeze + dyspnea in known asthmatic may mask anaphylaxis [1]\n• **Carcinoid** — flushing syndrome with diarrhea, wheezing\n• **MSG reaction** — nausea, diaphoresis, headache after MSG foods [3]\n• **Panic attack** — dyspnea, tachycardia, but no urticaria/angioedema/hypotension\n• **Vocal cord dysfunction** — stridor without other systemic findings\n• **Pulmonary embolism** — dyspnea + hypotension without skin findings\n• **Sepsis / toxic shock** — distributive shock with skin findings (but different rash)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). September 15, 2025.' },
+    { num: 3, text: 'Singer E, Zodda D. Allergy and Anaphylaxis. Emergency Medicine Practice (EB Medicine). 2015;17(8):1-24.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — Biphasic Reaction Risk Factors
+// -------------------------------------------------------------------
+
+const ANAPH_BIPHASIC: InfoPage = {
+  id: 'anaph-biphasic',
+  title: 'Biphasic Reaction Risk Factors',
+  subtitle: 'Who needs prolonged observation?',
+  sections: [
+    {
+      heading: 'Epidemiology',
+      body: 'Biphasic reactions occur in ~5% of anaphylaxis cases (range 3-20% depending on definition). [1][8]\n\nMajority occur within 8-10 hours of initial reaction resolution. Median time: 10-11 hours. [3]\n\n**No deaths have been reported from biphasic reactions** in published studies. Although the absolute rate is ~5%, clinically significant biphasic reactions may be <2%. [8]',
+    },
+    {
+      heading: 'Risk Factors',
+      body: '• Multiple epinephrine doses required for initial stabilization [2]\n• IV fluid bolus required (initial hypotension) [2]\n• Delayed initial administration of epinephrine [2]\n• Inhaled beta-agonist treatment needed [2]\n• Unknown anaphylaxis trigger [2]\n• Severe initial presentation [2]\n• Wheezing at presentation [1]\n• History of biphasic reactions [1]',
+    },
+    {
+      heading: 'Subtypes of Anaphylaxis',
+      body: '**Uniphasic** — Most common. Resolves within ~1 hour. Usually does not require ICU. [1]\n\n**Biphasic** — Recurrence >1 hour after resolution without re-exposure. ~5% of cases. Usually mild. [1]\n\n**Persistent** — Ongoing anaphylaxis >4 hours. ~4% of cases. [1]\n\n**Refractory** — Ongoing despite appropriate epinephrine + adjuncts. Rare (<0.5%). Associated with drug etiology. [1]',
+    },
+    {
+      heading: 'Observation Duration',
+      body: '**Standard (most patients):** 4-6 hours from peak reaction. [1][2][3]\n\n**Extended (12-24 hours) for:**\n• Multiple risk factors above\n• Severe initial reaction requiring IV epi\n• Late-evening presentation (biphasic would occur overnight)\n• Asthma history (risk factor for fatal anaphylaxis)\n• Unknown trigger\n\n**UK guidelines:** Minimum 6 hours for adults, minimum 6-12 hours for severe or risk factors. [6]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). September 15, 2025.' },
+    { num: 2, text: 'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.' },
+    { num: 3, text: 'Singer E, Zodda D. Allergy and Anaphylaxis. Emergency Medicine Practice (EB Medicine). 2015;17(8):1-24.' },
+    { num: 6, text: 'Dodd A, et al. Evidence update for the treatment of anaphylaxis. Resuscitation. 2021;163:86-96.' },
+    { num: 8, text: 'Gorham NP. Anaphylaxis: After the Emergency Department. Emerg Med Clin North Am. 2022;40(1):33-37.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — Causes of Anaphylaxis
+// -------------------------------------------------------------------
+
+const ANAPH_CAUSES: InfoPage = {
+  id: 'anaph-causes',
+  title: 'Causes of Anaphylaxis',
+  subtitle: 'Trigger identification & epidemiology',
+  sections: [
+    {
+      heading: 'Adult Triggers',
+      body: '• **Medications (34%)** — beta-lactam antibiotics, NSAIDs, muscle relaxants, monoclonal antibodies, radiocontrast, paralytics, protamine, local anesthetics [1][3]\n• **Food (31%)** — peanuts, tree nuts, seafood, shellfish, egg, red meat (alpha-gal) [1][3]\n• **Insect stings (20%)** — Hymenoptera (bees, wasps, hornets, ants) [1][3]\n• **Environmental (7.5%)** — latex, cold/heat exposure [1][3]\n• **Exercise (1.2%)** — food-dependent, within 1-4 hours of eating trigger foods [3]\n• **Idiopathic (11%)** — no identifiable trigger [3]',
+    },
+    {
+      heading: 'Pediatric Triggers',
+      body: 'Food is the most common cause in children (~8% prevalence of food allergy). [2]\n\n**Most common foods:** Peanuts and tree nuts (responsible for 94% of fatal food anaphylaxis). [2]\n\n**Vaccine anaphylaxis:** Very rare (~1.5 per million vaccinations). [2]\n\nAnaphylaxis may be missed in infants — flushing, vomiting, loose stool are nonspecific and easily attributed to other causes. [2]',
+    },
+    {
+      heading: 'Fatal Anaphylaxis Risk Factors',
+      body: 'Death from anaphylaxis is rare (<1% of cases, ~1 death per million people/year). [2]\n\n**Time from exposure to death:** [12]\n• IV medications: ~5 minutes\n• Insect venom: ~15 minutes\n• Food: ~30 minutes\n\n**Risk factors for fatal anaphylaxis:** [2]\n• Asthma (especially uncontrolled)\n• Adolescents/young adults (less likely to carry/use EpiPen)\n• Peanut or tree nut allergen\n• Delayed epinephrine\n• Upright posture during symptoms\n• Known allergen re-exposure\n\nIn fatal cases, <15% had cutaneous symptoms — absence of urticaria should NOT delay treatment. [2]',
+    },
+    {
+      heading: 'Exercise-Induced Anaphylaxis',
+      body: 'Food-dependent exercise-induced anaphylaxis (FDEIA) occurs during exercise within 1-4 hours of eating trigger foods. More common in women. [3]\n\n**Most common triggers:** Wheat, corn, garlic, celery, vegetables, shellfish. [3]\n\nNeither food NOR exercise alone causes symptoms. Prevention: avoid trigger foods within 4-6 hours before exercise. Carry EpiPen during exercise.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). September 15, 2025.' },
+    { num: 2, text: 'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.' },
+    { num: 3, text: 'Singer E, Zodda D. Allergy and Anaphylaxis. Emergency Medicine Practice (EB Medicine). 2015;17(8):1-24.' },
+    { num: 12, text: 'Pumphrey RS. Lessons for management of anaphylaxis from a study of fatal reactions. Clin Exp Allergy. 2000;30(8):1144-50.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Anaphylaxis — Discharge Instructions (shareable)
+// -------------------------------------------------------------------
+
+const ANAPH_DISCHARGE: InfoPage = {
+  id: 'anaph-discharge',
+  title: 'Anaphylaxis Discharge Instructions',
+  subtitle: 'Patient information sheet',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Happened',
+      body: 'You had a severe allergic reaction called **anaphylaxis**. This is a serious, potentially life-threatening condition that requires immediate treatment with epinephrine (EpiPen).',
+    },
+    {
+      heading: 'Your EpiPen',
+      body: 'You have been prescribed **two EpiPen auto-injectors**. Carry both with you at ALL times.\n\n**How to use:**\n• Remove the blue safety cap\n• Hold the orange tip against your outer thigh (through clothing is OK)\n• Press firmly until you hear a click\n• Hold in place for 3-10 seconds\n• Call 911 immediately after using',
+    },
+    {
+      heading: 'When to Use Your EpiPen and Call 911',
+      body: 'Use your EpiPen immediately AND call 911 if you experience ANY of the following:\n\n• Difficulty breathing or wheezing\n• Swelling of lips, tongue, or throat\n• Feeling faint or dizzy\n• Widespread hives or rash\n• Nausea, vomiting, or abdominal pain after exposure to your trigger\n• Any combination of the above\n\n**Do NOT wait to see if symptoms get worse.** Early use of epinephrine saves lives.',
+    },
+    {
+      heading: 'Avoid Your Trigger',
+      body: 'If your allergic trigger was identified, strictly avoid it:\n\n• Read food labels carefully\n• Inform restaurants about your allergy\n• Tell all healthcare providers\n• Avoid areas where your trigger may be present\n• Consider a medical alert bracelet',
+    },
+    {
+      heading: 'Follow-Up',
+      body: '• **Allergist appointment** within 2-4 weeks — for trigger testing and long-term management plan\n• **Primary care** follow-up within 1 week\n• Replace your EpiPen before the expiration date\n• Teach family members how to use your EpiPen',
+    },
+    {
+      heading: 'Important Reminders',
+      body: '• Allergic reactions can recur within 24-72 hours without new exposure (biphasic reaction)\n• Always carry TWO EpiPens — you may need a second dose\n• Never hesitate to use your EpiPen — the risk of not treating is far greater than the risk of the medication\n• If you used your EpiPen, ALWAYS go to the emergency department even if you feel better',
+    },
+  ],
+  citations: [],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -5606,6 +6063,19 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ai-special-populations': AI_SPECIAL_POPULATIONS,
   'ai-steroid-equivalency': AI_STEROID_EQUIVALENCY,
   'epss-measurement': EPSS_MEASUREMENT_PAGE,
+  'thyroid-summary': THYROID_SUMMARY,
+  'thyroid-bb-controversy': THYROID_BB_CONTROVERSY,
+  'thyroid-thionamide-compare': THYROID_THIONAMIDE_COMPARE,
+  'thyroid-labs': THYROID_LABS,
+  'thyroid-precipitants': THYROID_PRECIPITANTS,
+  'thyroid-special-pops': THYROID_SPECIAL_POPS,
+  'thyroid-airway': THYROID_AIRWAY,
+  'anaph-summary': ANAPH_SUMMARY,
+  'anaph-iv-epi-pk': ANAPH_IV_EPI_PK,
+  'anaph-ddx': ANAPH_DDX,
+  'anaph-biphasic': ANAPH_BIPHASIC,
+  'anaph-causes': ANAPH_CAUSES,
+  'anaph-discharge': ANAPH_DISCHARGE,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

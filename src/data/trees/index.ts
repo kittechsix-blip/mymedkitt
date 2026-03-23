@@ -17,6 +17,8 @@ export { SAH_NODES, SAH_MODULE_LABELS, SAH_CITATIONS } from './sah';
 export { ACID_BASE_NODES, ACID_BASE_MODULE_LABELS, ACID_BASE_CITATIONS } from './acid-base';
 export { DELIRIUM_NODES, DELIRIUM_MODULE_LABELS, DELIRIUM_CITATIONS } from './delirium';
 export { ADRENAL_INSUFFICIENCY_NODES, ADRENAL_INSUFFICIENCY_MODULE_LABELS, ADRENAL_INSUFFICIENCY_CITATIONS } from './adrenal-insufficiency';
+export { ANAPHYLAXIS_NODES, ANAPHYLAXIS_MODULE_LABELS, ANAPHYLAXIS_CITATIONS } from './anaphylaxis';
+export { THYROID_NODES, THYROID_MODULE_LABELS, THYROID_CITATIONS } from './thyroid';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
