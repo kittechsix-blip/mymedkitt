@@ -314,9 +314,21 @@ function renderRegimenWithCalcLinks(container, text, calcPanel) {
         container.textContent = text;
     }
 }
-// -------------------------------------------------------------------
-// Weight-Based Dose Calculator
-// -------------------------------------------------------------------
+const BROSELOW_ZONES = [
+    { color: 'Grey', bgHex: '#808080', textHex: '#fff', weightMin: 3, weightMax: 5, midpoint: 4, lengthMin: 50, lengthMax: 67 },
+    { color: 'Pink', bgHex: '#FF69B4', textHex: '#fff', weightMin: 6, weightMax: 7, midpoint: 6.5, lengthMin: 68, lengthMax: 76 },
+    { color: 'Red', bgHex: '#DC3545', textHex: '#fff', weightMin: 8, weightMax: 9, midpoint: 8.5, lengthMin: 77, lengthMax: 87 },
+    { color: 'Purple', bgHex: '#7B2D8E', textHex: '#fff', weightMin: 10, weightMax: 11, midpoint: 10.5, lengthMin: 88, lengthMax: 100 },
+    { color: 'Yellow', bgHex: '#FFD700', textHex: '#000', weightMin: 12, weightMax: 14, midpoint: 13, lengthMin: 101, lengthMax: 114 },
+    { color: 'White', bgHex: '#FFFFFF', textHex: '#000', weightMin: 15, weightMax: 18, midpoint: 16.5, lengthMin: 115, lengthMax: 128 },
+    { color: 'Blue', bgHex: '#007BFF', textHex: '#fff', weightMin: 19, weightMax: 23, midpoint: 21, lengthMin: 129, lengthMax: 141 },
+    { color: 'Orange', bgHex: '#FF8C00', textHex: '#fff', weightMin: 24, weightMax: 29, midpoint: 26.5, lengthMin: 142, lengthMax: 154 },
+    { color: 'Green', bgHex: '#28A745', textHex: '#fff', weightMin: 30, weightMax: 36, midpoint: 33, lengthMin: 155, lengthMax: Infinity },
+];
+/** Find which Broselow zone a patient length (cm) falls into */
+function findBroselowZone(lengthCm) {
+    return BROSELOW_ZONES.find(z => lengthCm >= z.lengthMin && lengthCm <= z.lengthMax) || null;
+}
 /** Estimate pediatric weight from age using standard formulas */
 function estimateWeight(ageValue, bracket) {
     switch (bracket) {
@@ -407,11 +419,15 @@ function buildWeightCalcPanel(calcs) {
     modeRow.className = 'dose-calc-mode-row';
     const btnKnown = document.createElement('button');
     btnKnown.className = 'dose-calc-mode-btn active';
-    btnKnown.textContent = 'Weight Known';
+    btnKnown.textContent = 'Enter Weight';
+    const btnBroselow = document.createElement('button');
+    btnBroselow.className = 'dose-calc-mode-btn';
+    btnBroselow.textContent = 'Broselow Tape';
     const btnUnknown = document.createElement('button');
     btnUnknown.className = 'dose-calc-mode-btn';
-    btnUnknown.textContent = 'Weight Unknown';
+    btnUnknown.textContent = 'Estimate by Age';
     modeRow.appendChild(btnKnown);
+    modeRow.appendChild(btnBroselow);
     modeRow.appendChild(btnUnknown);
     panel.appendChild(modeRow);
     // --- Known Weight Panel ---
@@ -449,6 +465,96 @@ function buildWeightCalcPanel(calcs) {
             knownCalcBtn.click();
     });
     panel.appendChild(knownPanel);
+    // --- Broselow Tape Panel ---
+    const broselowPanel = document.createElement('div');
+    broselowPanel.className = 'dose-calc-input-section';
+    broselowPanel.style.display = 'none';
+    const broselowContainer = document.createElement('div');
+    broselowContainer.className = 'dose-calc-broselow-container';
+    const broselowRows = [];
+    for (const zone of BROSELOW_ZONES) {
+        const row = document.createElement('button');
+        row.className = 'dose-calc-broselow-row';
+        row.style.background = zone.bgHex;
+        row.style.color = zone.textHex;
+        if (zone.color === 'White')
+            row.style.border = '1px solid #ccc';
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'dose-calc-broselow-name';
+        nameSpan.textContent = zone.color;
+        const infoSpan = document.createElement('span');
+        infoSpan.className = 'dose-calc-broselow-info';
+        infoSpan.textContent = `${zone.weightMin}\u2013${zone.weightMax} kg (${fmtNum(zone.midpoint)} kg)`;
+        row.appendChild(nameSpan);
+        row.appendChild(infoSpan);
+        row.addEventListener('click', () => {
+            broselowRows.forEach(r => r.classList.remove('selected'));
+            row.classList.add('selected');
+            renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color}, ${zone.weightMin}\u2013${zone.weightMax} kg)`);
+        });
+        broselowRows.push(row);
+        broselowContainer.appendChild(row);
+    }
+    broselowPanel.appendChild(broselowContainer);
+    // Length input toggle
+    const lengthToggle = document.createElement('button');
+    lengthToggle.className = 'dose-calc-broselow-length-toggle';
+    lengthToggle.textContent = 'Know their length? Enter cm \u2192';
+    const lengthSection = document.createElement('div');
+    lengthSection.className = 'dose-calc-broselow-length-section';
+    lengthSection.style.display = 'none';
+    const lengthRow = document.createElement('div');
+    lengthRow.className = 'dose-calc-input-row';
+    const lengthInput = document.createElement('input');
+    lengthInput.type = 'number';
+    lengthInput.className = 'dose-calc-input';
+    lengthInput.placeholder = 'cm';
+    lengthInput.inputMode = 'decimal';
+    lengthInput.setAttribute('aria-label', 'Patient length in cm');
+    lengthInput.min = '30';
+    lengthInput.max = '200';
+    lengthInput.step = 'any';
+    const lengthUnit = document.createElement('span');
+    lengthUnit.className = 'dose-calc-unit';
+    lengthUnit.textContent = 'cm';
+    lengthRow.appendChild(lengthInput);
+    lengthRow.appendChild(lengthUnit);
+    const lengthMatch = document.createElement('div');
+    lengthMatch.className = 'dose-calc-broselow-match';
+    lengthSection.appendChild(lengthRow);
+    lengthSection.appendChild(lengthMatch);
+    lengthToggle.addEventListener('click', () => {
+        const showing = lengthSection.style.display !== 'none';
+        lengthSection.style.display = showing ? 'none' : 'block';
+        lengthToggle.textContent = showing ? 'Know their length? Enter cm \u2192' : 'Hide length input';
+        if (!showing)
+            lengthInput.focus();
+    });
+    lengthInput.addEventListener('input', () => {
+        const raw = parseFloat(lengthInput.value);
+        if (isNaN(raw) || raw < 1) {
+            lengthMatch.textContent = '';
+            broselowRows.forEach(r => r.classList.remove('selected'));
+            resultsEl.style.display = 'none';
+            return;
+        }
+        const cm = Math.round(raw);
+        const zone = findBroselowZone(cm);
+        broselowRows.forEach(r => r.classList.remove('selected'));
+        if (!zone) {
+            lengthMatch.textContent = cm < 50 ? 'Below Broselow tape range (< 50 cm)' : 'Above Broselow tape range';
+            resultsEl.style.display = 'none';
+            return;
+        }
+        const idx = BROSELOW_ZONES.indexOf(zone);
+        broselowRows[idx].classList.add('selected');
+        lengthMatch.textContent = `\u2192 ${zone.color} zone`;
+        renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color} from ${fmtNum(cm)} cm)`);
+        broselowRows[idx].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+    broselowPanel.appendChild(lengthToggle);
+    broselowPanel.appendChild(lengthSection);
+    panel.appendChild(broselowPanel);
     // --- Unknown Weight (Pediatric) Panel ---
     const unknownPanel = document.createElement('div');
     unknownPanel.className = 'dose-calc-input-section';
@@ -518,21 +624,17 @@ function buildWeightCalcPanel(calcs) {
             calcFromAge();
     });
     panel.appendChild(unknownPanel);
-    // --- Mode toggle logic ---
-    btnKnown.addEventListener('click', () => {
-        btnKnown.classList.add('active');
-        btnUnknown.classList.remove('active');
-        knownPanel.style.display = 'block';
-        unknownPanel.style.display = 'none';
+    // --- Mode toggle logic (3-way) ---
+    function activateTab(active, activePanel) {
+        [btnKnown, btnBroselow, btnUnknown].forEach(b => b.classList.remove('active'));
+        [knownPanel, broselowPanel, unknownPanel].forEach(p => p.style.display = 'none');
+        active.classList.add('active');
+        activePanel.style.display = 'block';
         resultsEl.style.display = 'none';
-    });
-    btnUnknown.addEventListener('click', () => {
-        btnUnknown.classList.add('active');
-        btnKnown.classList.remove('active');
-        unknownPanel.style.display = 'block';
-        knownPanel.style.display = 'none';
-        resultsEl.style.display = 'none';
-    });
+    }
+    btnKnown.addEventListener('click', () => activateTab(btnKnown, knownPanel));
+    btnBroselow.addEventListener('click', () => activateTab(btnBroselow, broselowPanel));
+    btnUnknown.addEventListener('click', () => activateTab(btnUnknown, unknownPanel));
     panel.appendChild(resultsEl);
     return panel;
 }

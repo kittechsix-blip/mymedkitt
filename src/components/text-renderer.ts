@@ -48,10 +48,7 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
   const combinedPattern = /\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
-  let hasMatch = false;
-
   while ((match = combinedPattern.exec(line)) !== null) {
-    hasMatch = true;
     // Text before match
     if (match.index > lastIndex) {
       appendBoldAware(container, line.slice(lastIndex, match.index));

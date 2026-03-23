@@ -2163,6 +2163,71 @@ body {
   padding: 0;
 }
 
+/* Broselow Tape */
+.dose-calc-broselow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.dose-calc-broselow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.15s, opacity 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dose-calc-broselow-row:active {
+  opacity: 0.85;
+}
+
+.dose-calc-broselow-row.selected {
+  border-color: var(--color-text-primary, #1A1A1A);
+  box-shadow: 0 0 0 2px var(--color-text-primary, #1A1A1A);
+}
+
+.dose-calc-broselow-name {
+  font-weight: 700;
+  min-width: 60px;
+}
+
+.dose-calc-broselow-info {
+  text-align: right;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.dose-calc-broselow-length-toggle {
+  background: none;
+  border: none;
+  color: var(--color-primary, #3CB371);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 0;
+  text-align: left;
+}
+
+.dose-calc-broselow-length-section {
+  margin-top: 4px;
+}
+
+.dose-calc-broselow-match {
+  font-size: 12px;
+  color: var(--color-text-secondary, #5A5A5A);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
 /* ===================================================================
    CALCULATOR STYLES
    =================================================================== */
