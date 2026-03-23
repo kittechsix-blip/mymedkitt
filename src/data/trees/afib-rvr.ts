@@ -32,7 +32,7 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
       {
         label: 'Hemodynamically stable',
         description: 'Adequate BP, perfusion, no acute HF or ischemia',
-        next: 'afib-stable-drugs',
+        next: 'afib-ef-screen',
       },
       {
         label: 'Hemodynamically unstable',
@@ -41,6 +41,113 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  },
+
+  {
+    id: 'afib-ef-screen',
+    type: 'question',
+    module: 1,
+    title: 'Ejection Fraction Assessment',
+    body: 'Does the patient have reduced ejection fraction (EF ≤40%)?\n\nThis is critical for rate control agent selection. Calcium channel blockers (diltiazem, verapamil) are **contraindicated** in HFrEF (Class 3: Harm).\n\nCheck:\n• Prior echocardiogram\n• Known history of HFrEF or systolic heart failure\n• Bedside echo if available and EF unknown',
+    options: [
+      {
+        label: 'EF ≤40% or HFrEF',
+        description: 'Known reduced EF, systolic HF, or dilated cardiomyopathy',
+        next: 'afib-hfref-drugs',
+        urgency: 'urgent',
+      },
+      {
+        label: 'EF >40% or preserved',
+        description: 'Normal EF, HFpEF, or no known cardiomyopathy',
+        next: 'afib-stable-drugs',
+      },
+      {
+        label: 'EF unknown',
+        description: 'No recent echo available - will proceed cautiously',
+        next: 'afib-ef-unknown',
+      },
+    ],
+  },
+
+  {
+    id: 'afib-ef-unknown',
+    type: 'info',
+    module: 1,
+    title: 'Unknown EF — Proceed with Caution',
+    body: 'EF IS UNKNOWN — SAFE APPROACH\n\nWhen EF is unknown, avoid calcium channel blockers (diltiazem, verapamil) until EF is confirmed >40%.\n\n**Safe first-line options regardless of EF:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min (use lower doses if concerned for HF)\n• [Esmolol](#/drug/esmolol) — ultra-short-acting, can rapidly titrate off if hemodynamics worsen\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — excellent safety profile\n\n**If possible, obtain bedside echo:**\n• Eyeball EF (normal >55%, mildly reduced 40-55%, reduced ≤40%)\n• [EPSS measurement](#/info/epss-measurement) correlates with EF\n• Look for dilated LV, global hypokinesis\n\nOnce EF is clarified, you can safely add CCBs if EF >40%.',
+    citation: [1, 2],
+    next: 'afib-rate-controlled',
+  },
+
+  {
+    id: 'afib-hfref-drugs',
+    type: 'info',
+    module: 3,
+    title: 'Rate Control in HFrEF (EF ≤40%)',
+    body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EF\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n**FIRST-LINE — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Use lower initial doses in decompensated HF\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
+    citation: [1, 2, 3],
+    next: 'afib-hfref-controlled',
+  },
+
+  {
+    id: 'afib-hfref-controlled',
+    type: 'question',
+    module: 3,
+    title: 'HFrEF Rate Control Assessment',
+    body: 'Is the ventricular rate now controlled?\n\nTarget heart rate in HFrEF:\n• <110 bpm is reasonable initial target\n• Titrate to symptom control — some patients tolerate higher rates\n• Avoid aggressive rate control that worsens cardiac output\n• If hypotensive, prioritize digoxin + amiodarone over beta-blockers',
+    options: [
+      {
+        label: 'Yes — Rate controlled',
+        description: 'Heart rate at target, symptoms improved',
+        next: 'afib-onset-assessment',
+      },
+      {
+        label: 'No — Rate still uncontrolled',
+        description: 'Heart rate remains above target despite first-line agent',
+        next: 'afib-hfref-refractory',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'afib-hfref-refractory',
+    type: 'question',
+    module: 4,
+    title: 'HFrEF — Refractory Rate Control',
+    body: 'Select second-line intervention for refractory rate control in HFrEF.\n\n⚠️ Remember: Calcium channel blockers remain **contraindicated**.\n\nRe-evaluate for underlying causes (volume overload, ischemia, infection). Ensure adequate trial of first-line agent.',
+    options: [
+      {
+        label: 'Add Digoxin',
+        description: 'Positive inotropy may help in HFrEF. Use if beta-blocker causing hypotension.',
+        next: 'afib-refractory-dig',
+      },
+      {
+        label: 'Add IV Magnesium',
+        description: 'Safe adjunct. Blocks slow Ca channels at AV node.',
+        next: 'afib-refractory-mg',
+      },
+      {
+        label: 'Switch to Amiodarone',
+        description: 'Hemodynamically stable. May achieve cardioversion.',
+        next: 'afib-refractory-amio',
+      },
+      {
+        label: 'Consider Cardioversion',
+        description: 'When rate control strategy has failed in decompensated HF.',
+        next: 'afib-hfref-cardioversion',
+      },
+    ],
+  },
+
+  {
+    id: 'afib-hfref-cardioversion',
+    type: 'info',
+    module: 4,
+    title: 'Cardioversion in HFrEF',
+    body: 'RHYTHM CONTROL IN HFrEF\n\nCardioversion may be particularly beneficial in HFrEF:\n• Loss of atrial kick worsens cardiac output\n• Tachycardia-induced cardiomyopathy may be reversible\n• Rhythm control may improve HF symptoms\n\n**Procedure:**\n1. Sedation with [Midazolam](#/drug/midazolam) or ketamine/midazolam\n2. Synchronized cardioversion at 200J biphasic\n3. [Amiodarone](#/drug/amiodarone) infusion post-cardioversion to maintain sinus\n\n**Anticoagulation consideration:**\n• If AF duration >48 hours and not anticoagulated, consider TEE first\n• Or anticoagulate for ≥3 weeks before elective cardioversion\n• Emergent cardioversion if hemodynamically compromised regardless of duration',
+    citation: [1, 2, 3],
+    next: 'afib-refractory-reassess',
   },
 
   // =====================================================================

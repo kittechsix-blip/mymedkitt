@@ -35,7 +35,7 @@ export function createDecisionCard(node, opts) {
     return card;
 }
 // -------------------------------------------------------------------
-// Answered card (compact) - shows Question + Answer for context
+// Answered card (compact)
 // -------------------------------------------------------------------
 function renderAnsweredCard(card, node, opts) {
     // Question + Answer format for better context
