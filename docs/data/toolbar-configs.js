@@ -193,6 +193,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'hae-rx', label: 'HAE Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'angio-hae-treat' },
         { id: 'staging', label: 'Staging', icon: '\uD83D\uDCCA', action: 'overlay', target: 'angio-ishoo-staging' },
     ],
+    'sickle-cell': [
+        { id: 'triage', label: 'Triage', icon: '\uD83C\uDFE5', action: 'calculator', target: 'scd-triage' },
+        { id: 'pain-rx', label: 'Pain Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'scd-voc-iv' },
+        { id: 'acs-rx', label: 'ACS Rx', icon: '\uD83E\uDEC1', action: 'jump', target: 'scd-acs-treatment' },
+        { id: 'transfusion', label: 'Transfuse', icon: '\uD83E\uDE78', action: 'overlay', target: 'scd-transfusion' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

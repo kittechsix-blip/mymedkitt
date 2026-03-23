@@ -261,6 +261,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/angioedema.js');
             return { nodes: m.ANGIOEDEMA_NODES, entryNodeId: 'angio-start', categoryId: 'emergency-medicine', moduleLabels: m.ANGIOEDEMA_MODULE_LABELS, citations: m.ANGIOEDEMA_CITATIONS };
         },
+        'sickle-cell': async () => {
+            const m = await import('../data/trees/sickle-cell.js');
+            return { nodes: m.SICKLE_CELL_NODES, entryNodeId: 'scd-start', categoryId: 'heme-onc', moduleLabels: m.SICKLE_CELL_MODULE_LABELS, citations: m.SICKLE_CELL_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

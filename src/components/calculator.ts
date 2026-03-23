@@ -3039,6 +3039,226 @@ const SYPHILIS_SEROLOGY_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// SCD Complication Triage Calculator
+// -------------------------------------------------------------------
+
+const SCD_TRIAGE_CALCULATOR: CalculatorDefinition = {
+  id: 'scd-triage',
+  title: 'SCD Complication Triage',
+  subtitle: 'Rapid complication classifier for sickle cell disease',
+  description: 'Classifies the acute SCD presentation based on chief complaint, vitals, and exam findings to identify the most likely complication and recommended pathway. Based on EB Medicine Pediatric Emergency Medicine Practice, Nov 2024.',
+  fields: [
+    {
+      name: 'chief-complaint',
+      label: 'Chief Complaint',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Pain only', points: 0 },
+        { label: 'Fever', points: 1 },
+        { label: 'Chest pain / SOB / Cough', points: 2 },
+        { label: 'Neurologic symptoms', points: 3 },
+        { label: 'Abdominal distension / Pallor', points: 4 },
+        { label: 'Priapism', points: 5 },
+      ],
+    },
+    {
+      name: 'temperature',
+      label: 'Temperature \u2265 38.5\u00b0C (101.3\u00b0F)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'spo2',
+      label: 'SpO2',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '\u2265 95%', points: 0 },
+        { label: '90\u201394%', points: 1 },
+        { label: '< 90%', points: 2 },
+      ],
+    },
+    {
+      name: 'spleen',
+      label: 'Spleen Palpable / Enlarged',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'neuro-deficit',
+      label: 'Focal Neurologic Deficit',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'cxr',
+      label: 'CXR Finding',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not obtained', points: 0 },
+        { label: 'No infiltrate', points: 1 },
+        { label: 'New infiltrate', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Decision-logic triage based on clinical findings. Priority: Stroke > Splenic Sequestration > ACS > Febrile Illness > Hypoxia > VOC > Priapism.',
+  citations: [
+    'Jackson KM, et al. Emergency Department Management of Acute Pediatric Sickle Cell Disease Complications. Pediatr Emerg Med Pract. 2024;21(11):1-28.',
+    'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const complaint = values['chief-complaint'] || 0;
+    const temp = values['temperature'] || 0;
+    const spo2 = values['spo2'] || 0;
+    const spleen = values['spleen'] || 0;
+    const neuro = values['neuro-deficit'] || 0;
+    const cxr = values['cxr'] || 0;
+
+    // Priority 1: Focal neuro deficit → STROKE
+    if (neuro === 1) {
+      return {
+        value: 'STROKE',
+        label: 'Critical \u2014 Stroke Alert',
+        description: 'Focal neurologic deficit in SCD patient. Activate stroke alert, notify hematology STAT. Emergent CT head to rule out hemorrhage. Exchange transfusion preferred over simple \u2014 target HbS <30%. tPA NOT recommended for children <18 years.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Priority 2: Splenic sequestration
+    if (spleen === 1 && complaint === 4) {
+      return {
+        value: 'SPLENIC SEQUESTRATION',
+        label: 'Critical \u2014 Splenic Sequestration',
+        description: 'Enlarged spleen with abdominal distension/pallor. Life-threatening emergency. Two large-bore IVs. Emergent CBC, retic, T&C. pRBC 5 mL/kg aliquots. CRITICAL: Do NOT transfuse past Hgb 8 g/dL (reverse sequestration \u2192 hyperviscosity, HTN, CHF, ICH). Admit all.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Priority 3: ACS (new infiltrate + fever or resp symptoms)
+    if (cxr === 2 && (temp === 1 || complaint === 2)) {
+      return {
+        value: 'ACUTE CHEST SYNDROME',
+        label: 'Critical \u2014 ACS',
+        description: 'New CXR infiltrate with fever or respiratory symptoms = acute chest syndrome. Ceftriaxone 50 mg/kg + Azithromycin 10 mg/kg IV. O2 only for SpO2 <90%. Incentive spirometry q2h. Simple transfusion if Hgb drops >1 g/dL from baseline. Exchange transfusion if worsening. AVOID corticosteroids. Admit all.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Priority 4: Fever (medical emergency in SCD)
+    if (temp === 1) {
+      return {
+        value: 'ACUTE FEBRILE ILLNESS',
+        label: 'Urgent \u2014 Fever Emergency',
+        description: 'Fever \u2265 38.5\u00b0C is a medical emergency in SCD due to functional asplenia. Blood cultures BEFORE antibiotics. Ceftriaxone 50 mg/kg IV (max 2g) IMMEDIATELY. CXR if any respiratory symptoms (r/o ACS). Add Vancomycin 20 mg/kg if meningitis concern.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Priority 5: Severe hypoxia without infiltrate
+    if (spo2 === 2) {
+      return {
+        value: 'EVALUATE ACS / PULMONARY',
+        label: 'Urgent \u2014 Hypoxia',
+        description: 'SpO2 <90% without CXR infiltrate. Obtain CXR if not done. Consider evolving ACS (CXR may lag symptoms), pulmonary embolism (hypercoagulable state), or pulmonary hypertension. Supplemental O2. Repeat imaging in 12\u201324h if high suspicion.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Priority 6: Spleen palpable but different chief complaint
+    if (spleen === 1) {
+      return {
+        value: 'SPLENIC CONCERN',
+        label: 'Urgent \u2014 Evaluate Spleen',
+        description: 'Palpable spleen in SCD patient. Emergent CBC, retic, bilirubin, T&C. Compare Hgb to baseline \u2014 drop \u22652 g/dL suggests sequestration. Monitor for rapid progression. Even if stable, strongly consider admission for observation.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // New infiltrate without fever or resp symptoms
+    if (cxr === 2) {
+      return {
+        value: 'POSSIBLE ACS',
+        label: 'Urgent \u2014 New Infiltrate',
+        description: 'New CXR infiltrate without typical ACS features. Treat empirically with antibiotics (Ceftriaxone + Azithromycin). Monitor closely for ACS development. Incentive spirometry. Admit for observation.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Respiratory symptoms without CXR
+    if (complaint === 2 && cxr === 0) {
+      return {
+        value: 'OBTAIN CXR',
+        label: 'Action Needed',
+        description: 'Chest pain/SOB/cough in SCD patient without CXR. Obtain CXR immediately to evaluate for ACS. A new infiltrate with these symptoms = ACS. If CXR clear, consider PE, pulmonary hypertension, rib/sternal infarct, or pleural effusion.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Pain only
+    if (complaint === 0) {
+      return {
+        value: 'VASO-OCCLUSIVE CRISIS',
+        label: 'Urgent \u2014 VOC',
+        description: 'Pain crisis without fever, hypoxia, or other red flags. IN Fentanyl 1\u20131.5 mcg/kg at triage. IV access + labs. Ketorolac 0.5 mg/kg IV + opioid. NS bolus 10 mL/kg. Reassess q30 min \u00d7 3 doses. Incentive spirometry. Discharge if pain controlled with PO meds.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Priapism
+    if (complaint === 5) {
+      return {
+        value: 'PRIAPISM',
+        label: 'Urgent \u2014 Priapism',
+        description: 'Priapism in SCD patient. Urologic emergency \u2014 intervene within 4 hours. IV hydration, analgesia, O2. Consider pseudoephedrine 30\u201360 mg PO. Ketamine may assist detumescence. Urology consult for aspiration/phenylephrine if >4 hours.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Mild hypoxia
+    if (spo2 === 1) {
+      return {
+        value: 'MONITOR \u2014 MILD HYPOXIA',
+        label: 'Monitor',
+        description: 'SpO2 90\u201394%. Obtain CXR if not done. May represent baseline for this patient, early ACS, or dehydration. O2 supplementation only if SpO2 <90%. Reassess frequently for clinical deterioration.',
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    // Respiratory symptoms with clear CXR
+    if (complaint === 2 && cxr === 1) {
+      return {
+        value: 'MONITOR \u2014 CHEST SYMPTOMS',
+        label: 'Monitor',
+        description: 'Respiratory symptoms with clear CXR. ACS unlikely but CXR can lag behind clinical symptoms. Consider: rib/sternal VOC, asthma exacerbation, PE, pulmonary hypertension. Repeat CXR if symptoms persist or worsen. Incentive spirometry.',
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    return {
+      value: 'ASSESS',
+      label: 'Further Assessment Needed',
+      description: 'Complete the clinical assessment. Select the findings that best match the patient presentation to generate a triage recommendation.',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
@@ -3083,6 +3303,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'burch-wartofsky': BURCH_WARTOFSKY_CALCULATOR,
   'steroid-equivalency': STEROID_EQUIVALENCY_CALCULATOR,
   'syphilis-serology': SYPHILIS_SEROLOGY_CALCULATOR,
+  'scd-triage': SCD_TRIAGE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

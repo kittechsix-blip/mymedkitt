@@ -422,7 +422,7 @@ const AZITHROMYCIN = {
     genericName: 'Azithromycin',
     drugClass: 'Macrolide antibiotic',
     route: 'PO/IV',
-    indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea'],
+    indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea', 'SCD acute chest syndrome'],
     dosing: [
         {
             indication: 'Traveler diarrhea',
@@ -432,6 +432,11 @@ const AZITHROMYCIN = {
             indication: 'Pediatric diarrhea',
             regimen: '10 mg/kg PO daily × 3 days. Max 500 mg/dose.',
             weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 500 },
+        },
+        {
+            indication: 'SCD acute chest syndrome',
+            regimen: '10 mg/kg IV. Max 500 mg/dose. Covers atypical organisms (Mycoplasma, Chlamydia). Combine with Ceftriaxone for ACS.',
+            weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 500, label: 'SCD ACS' },
         },
     ],
     contraindications: [
@@ -822,7 +827,7 @@ const CEFTRIAXONE = {
     genericName: 'Ceftriaxone',
     drugClass: 'Third-generation cephalosporin',
     route: 'IV',
-    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy'],
+    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis'],
     dosing: [
         {
             indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -853,6 +858,16 @@ const CEFTRIAXONE = {
         {
             indication: 'Adult Bacterial Meningitis',
             regimen: '2 g IV q12h. Higher dose required for consistent CNS penetration. Combine with vancomycin (\u00b1 ampicillin if age \u226550, pregnant, or immunocompromised). Administer with dexamethasone 0.15 mg/kg IV q6h.',
+        },
+        {
+            indication: 'SCD febrile illness',
+            regimen: '50 mg/kg IV. Max 2 g/dose. Administer IMMEDIATELY after blood cultures. Covers encapsulated organisms (S. pneumoniae, H. influenzae, N. meningitidis). NHLBI recommends within 1 hour of presentation.',
+            weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'SCD fever' },
+        },
+        {
+            indication: 'SCD meningitis',
+            regimen: '100 mg/kg IV. Max 2 g/dose. Meningitic dosing for SCD patients with meningeal signs, AMS, or ill appearance. Combine with Vancomycin 20 mg/kg IV.',
+            weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 2000, label: 'SCD meningitis' },
         },
     ],
     contraindications: [
@@ -3556,7 +3571,7 @@ const VANCOMYCIN = {
     genericName: 'Vancomycin hydrochloride',
     drugClass: 'Glycopeptide',
     route: 'IV/PO',
-    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)'],
+    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis'],
     dosing: [
         {
             indication: 'Meningitic',
@@ -3569,6 +3584,11 @@ const VANCOMYCIN = {
         {
             indication: 'C difficile',
             regimen: 'Non-severe and severe: 125 mg PO QID × 10-14 days. Fulminant: 500 mg PO/NG QID + IV metronidazole 500 mg q8h ± rectal vancomycin enema. NOTE: This is ORAL vancomycin \u2014 not systemically absorbed.',
+        },
+        {
+            indication: 'SCD meningitis',
+            regimen: '20 mg/kg IV over 60 min. Max 1500 mg. Combined with Ceftriaxone 100 mg/kg IV for suspected meningitis in SCD patients with meningeal signs, altered mental status, or ill appearance.',
+            weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 1500, label: 'SCD meningitis' },
         },
     ],
     contraindications: [
@@ -3672,7 +3692,7 @@ const FENTANYL = {
     genericName: 'Fentanyl citrate',
     drugClass: 'Opioid analgesic (synthetic)',
     route: 'IV/IN',
-    indications: ['Burns pain', 'Acute severe pain', 'Pediatric analgesia (intranasal)'],
+    indications: ['Burns pain', 'Acute severe pain', 'Pediatric analgesia (intranasal)', 'SCD pain crisis'],
     dosing: [
         {
             indication: 'Burns — IV analgesia',
@@ -3683,6 +3703,16 @@ const FENTANYL = {
             indication: 'Burns — pediatric intranasal',
             regimen: '1.5 mcg/kg IN via atomizer (MAD device). Max 100 mcg per nare. Onset 5-10 min. May repeat ×1 after 10-15 min if needed.',
             weightCalc: { dosePerKg: 1.5, unit: 'mcg', maxDose: 100 },
+        },
+        {
+            indication: 'SCD pain triage (intranasal)',
+            regimen: '1-1.5 mcg/kg IN via MAD atomizer. Max 100 mcg per nare. Administer at TRIAGE before IV access. Onset 5-10 min. May repeat ×1 after 10-15 min. Shortens ED length of stay for VOC.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mcg', maxDose: 100, label: 'Intranasal (triage)' },
+        },
+        {
+            indication: 'SCD pain crisis IV',
+            regimen: '2 mcg/kg IV over 1-2 minutes. Max 100 mcg. Onset 2-3 min. Duration 30-60 min. ED-only option for patients who prefer fentanyl over morphine/hydromorphone.',
+            weightCalc: { dosePerKg: 2, unit: 'mcg', maxDose: 100, label: 'IV' },
         },
     ],
     contraindications: ['MAO inhibitor use within 14 days', 'Severe respiratory depression without ventilatory support'],
@@ -3724,6 +3754,34 @@ const HYDROXOCOBALAMIN = {
     citations: [
         'Lavonas EJ et al. AHA Focused Update on Management of Patients with Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning. Circulation. 2023;148(16):e149-e184.',
         'Baud FJ et al. Elevated Blood Cyanide Concentrations in Victims of Smoke Inhalation. NEJM. 1991;325(25):1761-6.',
+    ],
+};
+const HYDROMORPHONE = {
+    id: 'hydromorphone',
+    name: 'Hydromorphone (Dilaudid)',
+    genericName: 'Hydromorphone hydrochloride',
+    drugClass: 'Opioid analgesic',
+    route: 'IV',
+    indications: ['SCD pain crisis', 'Severe acute pain'],
+    dosing: [
+        {
+            indication: 'SCD pain crisis',
+            regimen: '0.015-0.02 mg/kg IV over 2-3 minutes. Max initial dose 1 mg. Reassess q30 min. May repeat up to 3 doses. 5-7\u00d7 more potent than morphine mg-for-mg.',
+            weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 1 },
+        },
+    ],
+    contraindications: ['Severe respiratory depression without ventilatory support', 'Paralytic ileus'],
+    cautions: [
+        'More potent than morphine \u2014 dose carefully',
+        'Less histamine release than morphine (fewer hypotensive episodes)',
+        'Respiratory depression potentiated by benzodiazepines',
+        'Reduce dose 25-50% in elderly or hepatic/renal impairment',
+    ],
+    monitoring: 'Continuous SpO2, respiratory rate, pain scores, sedation level. Have naloxone available.',
+    notes: 'Alternative to morphine for SCD pain crisis. 5-7\u00d7 more potent mg-for-mg. Less histamine release \u2192 less hypotension and pruritus than morphine. Preferred by some patients based on individualized pain plans.',
+    citations: [
+        'Brandow AM, et al. ASH 2020 guidelines for sickle cell disease: management of acute and chronic pain. Blood Adv. 2020;4(12):2656-2701.',
+        'Jackson KM, et al. Emergency Department Management of Acute Pediatric Sickle Cell Disease Complications. Pediatr Emerg Med Pract. 2024;21(11):1-28.',
     ],
 };
 const HYDROCORTISONE = {
@@ -3786,13 +3844,52 @@ const HYDROCORTISONE = {
         'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.',
     ],
 };
+const KETOROLAC = {
+    id: 'ketorolac',
+    name: 'Ketorolac (Toradol)',
+    genericName: 'Ketorolac tromethamine',
+    drugClass: 'NSAID (nonsteroidal anti-inflammatory)',
+    route: 'IV/IM',
+    indications: ['SCD pain crisis', 'Acute moderate-severe pain'],
+    dosing: [
+        {
+            indication: 'SCD pain crisis',
+            regimen: '0.5 mg/kg IV. Max 15 mg if <16 years, max 30 mg if \u226516 years. Onset 10-15 min. Duration 4-6 hours. Administer with first opioid dose for multimodal analgesia. Limit to 5 days total NSAID therapy.',
+            weightCalc: [
+                { dosePerKg: 0.5, unit: 'mg', maxDose: 15, label: 'Pediatric (<16 yr)' },
+                { dosePerKg: 0.5, unit: 'mg', maxDose: 30, label: 'Adult (\u226516 yr)' },
+            ],
+        },
+    ],
+    contraindications: [
+        'Active GI bleeding or peptic ulcer disease',
+        'Renal impairment (CrCl <30 mL/min) or history of SCD nephropathy',
+        'Coagulopathy or active bleeding',
+        'Third trimester pregnancy',
+        'Prior NSAID hypersensitivity or aspirin-exacerbated respiratory disease',
+        'Ketorolac use within previous 5 days',
+        'Ibuprofen use within 6 hours',
+    ],
+    cautions: [
+        'Limit total NSAID duration to 5 days',
+        'Use with caution in dehydrated patients',
+        'Monitor renal function \u2014 SCD patients have baseline nephropathy risk',
+        'GI bleeding risk increases with concurrent anticoagulants or steroids',
+    ],
+    monitoring: 'BMP (renal function), bleeding signs. Limit to 5-day max course.',
+    notes: 'First-line NSAID for SCD pain crisis. Reduces opioid requirements when used as part of multimodal analgesia. NHLBI and ASH guidelines recommend NSAIDs for VOC pain management. Administer early alongside opioids. Avoid in patients with known SCD nephropathy or renal impairment.',
+    citations: [
+        'Brandow AM, et al. ASH 2020 guidelines for sickle cell disease: management of acute and chronic pain. Blood Adv. 2020;4(12):2656-2701.',
+        'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.',
+    ],
+};
 const KETAMINE = {
     id: 'ketamine',
     name: 'Ketamine',
     genericName: 'Ketamine hydrochloride',
     drugClass: 'Dissociative anesthetic / NMDA antagonist',
     route: 'IV/IM',
-    indications: ['Burns analgesia', 'Burns procedural sedation', 'RSI induction', 'Refractory SE', 'Acute agitation (refractory)'],
+    indications: ['Burns analgesia', 'Burns procedural sedation', 'RSI induction', 'Refractory SE', 'Acute agitation (refractory)', 'SCD adjunct analgesia'],
     dosing: [
         {
             indication: 'Burns — sub-dissociative analgesia',
@@ -3824,6 +3921,11 @@ const KETAMINE = {
                 { dosePerKg: 4, unit: 'mg', label: 'IM agitation dose' },
                 { dosePerKg: 1.5, unit: 'mg', label: 'IV agitation dose' },
             ],
+        },
+        {
+            indication: 'SCD adjunct analgesia',
+            regimen: '0.1-0.3 mg/kg IV over 10-15 min as adjunct for opioid-refractory VOC pain. May repeat q15-20 min PRN. ASH 2020 guidelines recommend sub-dissociative ketamine for SCD pain refractory to opioids. ACEP supports use in SCD.',
+            weightCalc: { dosePerKg: 0.3, unit: 'mg', label: 'Sub-dissociative (SCD)' },
         },
     ],
     contraindications: ['Age <3 months (relative)', 'Known psychotic disorder (relative)'],
@@ -3892,7 +3994,7 @@ const MORPHINE = {
     genericName: 'Morphine sulfate',
     drugClass: 'Opioid analgesic',
     route: 'IV',
-    indications: ['Burns pain', 'Severe acute pain'],
+    indications: ['Burns pain', 'Severe acute pain', 'SCD pain crisis'],
     dosing: [
         {
             indication: 'Burns — adult',
@@ -3907,6 +4009,11 @@ const MORPHINE = {
         {
             indication: 'ACS / Refractory Pain',
             regimen: '4-8 mg IV initially (lower doses for elderly). Repeat 2-4 mg IV q5-15 min PRN.\n\nUse only for pain refractory to nitroglycerin. Morphine may delay P2Y12 inhibitor absorption and was associated with higher mortality in ACS (CRUSADE trial). Clinical judgment recommended.',
+        },
+        {
+            indication: 'SCD pain crisis',
+            regimen: '0.1-0.2 mg/kg IV over 5 min. Max initial dose 8 mg. Reassess pain q30 min. May repeat up to 3 doses. Transition to PCA if admitting. NHLBI recommends analgesia within 30 min of triage.',
+            weightCalc: { dosePerKg: 0.2, unit: 'mg', maxDose: 8 },
         },
     ],
     contraindications: ['Severe respiratory depression without ventilatory support', 'Paralytic ileus'],
@@ -5586,11 +5693,13 @@ export const ALL_DRUGS = [
     GLUCAGON,
     HALOPERIDOL,
     HYDROCORTISONE,
+    HYDROMORPHONE,
     HYPERTONIC_SALINE,
     HYDROXOCOBALAMIN,
     IDARUCIZUMAB,
     ICATIBANT,
     KETAMINE,
+    KETOROLAC,
     LABETALOL,
     LACOSAMIDE,
     LEVETIRACETAM,

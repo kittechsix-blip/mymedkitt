@@ -137,7 +137,23 @@ export const DEFAULT_CATEGORIES: Category[] = [
     ],
     isCustom: false,
   },
-  { id: 'heme-onc',             name: 'Heme/Onc',              icon: 'heme-onc.png',          decisionTrees: [], isCustom: false },
+  {
+    id: 'heme-onc',
+    name: 'Heme/Onc',
+    icon: 'heme-onc.png',
+    decisionTrees: [
+      {
+        id: 'sickle-cell',
+        title: 'Sickle Cell Disease',
+        subtitle: 'VOC Pain \u2192 Fever \u2192 ACS \u2192 Stroke \u2192 Splenic Sequestration \u2192 SCT',
+        categoryId: 'heme-onc',
+        version: '1.0',
+        nodeCount: 33,
+        entryNodeId: 'scd-start',
+      },
+    ],
+    isCustom: false,
+  },
   {
     id: 'infectious-disease',
     name: 'Infectious Disease',
@@ -427,7 +443,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 25,
         entryNodeId: 'nrp-start',
-      }
+      },
+      {
+        id: 'sickle-cell',
+        title: 'Sickle Cell Disease',
+        subtitle: 'VOC Pain \u2192 Fever \u2192 ACS \u2192 Stroke \u2192 Splenic Sequestration \u2192 SCT',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 33,
+        entryNodeId: 'scd-start',
+      },
     ],
     isCustom: false,
   },

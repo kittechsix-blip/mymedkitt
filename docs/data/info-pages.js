@@ -6065,6 +6065,249 @@ const SYPH_GENITAL_DDX = {
     ],
 };
 // -------------------------------------------------------------------
+// Sickle Cell Disease
+// -------------------------------------------------------------------
+const SCD_STEPS_SUMMARY = {
+    id: 'scd-steps-summary',
+    title: 'SCD Management Steps Summary',
+    subtitle: 'Quick-reference — jump to any pathway',
+    sections: [
+        {
+            heading: 'Initial Assessment',
+            body: '• [Identify SCD genotype, baseline Hgb, prior complications](#/node/scd-start)\n• Check for individualized pain plan from hematology\n• Use SCD Triage Calculator to classify presentation',
+        },
+        {
+            heading: 'VOC Pain Crisis',
+            body: '• [IN Fentanyl at triage BEFORE IV access](#/node/scd-voc-triage)\n• [IV Ketorolac + opioid (Morphine, Hydromorphone, or Fentanyl)](#/node/scd-voc-iv)\n• [NS bolus 10 mL/kg + incentive spirometry (prevents ACS)](#/node/scd-voc-iv)\n• [Reassess q30 min × 3 doses → PO transition or admit](#/node/scd-voc-reassess)',
+        },
+        {
+            heading: 'Fever (Emergency)',
+            body: '• [Blood culture BEFORE antibiotics — always](#/node/scd-fever-workup)\n• [Ceftriaxone 50 mg/kg IV IMMEDIATELY](#/node/scd-fever-abx)\n• [Add Vancomycin if meningitis concern](#/node/scd-fever-meningitis)\n• [CXR if any respiratory symptoms (r/o ACS)](#/node/scd-fever-workup)',
+        },
+        {
+            heading: 'Acute Chest Syndrome',
+            body: '• [Ceftriaxone + Azithromycin — cover typical + atypical](#/node/scd-acs-treatment)\n• [O2 only for SpO2 <90% — higher O2 blunts marrow response](#/node/scd-acs-treatment)\n• [Simple transfusion if Hgb drops >1 from baseline](#/node/scd-acs-transfusion)\n• [Exchange transfusion if worsening — AVOID steroids](#/node/scd-acs-exchange)',
+        },
+        {
+            heading: 'Stroke (Critical)',
+            body: '• [Activate stroke alert + notify hematology STAT](#/node/scd-stroke-start)\n• [Emergent CT head → MRI/MRA if no hemorrhage](#/node/scd-stroke-workup)\n• [Exchange transfusion — target HbS <30%](#/node/scd-stroke-treatment)\n• [tPA NOT recommended <18 years](#/node/scd-stroke-treatment)',
+        },
+        {
+            heading: 'Splenic Sequestration (Critical)',
+            body: '• [Emergent CBC, retic, T&C — 2 large-bore IVs](#/node/scd-splenic-start)\n• [pRBC 5 mL/kg aliquots — do NOT exceed Hgb 8 g/dL](#/node/scd-splenic-treatment)\n• [Admit all — 50–78% recurrence rate](#/node/scd-splenic-treatment)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jackson KM, et al. Pediatric Sickle Cell Disease: ED Evaluation and Management. Pediatr Emerg Med Pract. 2024;21(11):1-28.' },
+        { num: 2, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.' },
+    ],
+};
+const SCD_GENOTYPES = {
+    id: 'scd-genotypes',
+    title: 'SCD Genotypes & Disease Severity',
+    subtitle: 'Genotype determines baseline severity and complication risk',
+    sections: [
+        {
+            heading: 'HbSS (Sickle Cell Anemia)',
+            body: '**Most severe phenotype.** Both β-globin genes carry HbS mutation. No HbA produced.\n\n• Baseline Hgb: 6–8 g/dL\n• Highest risk for all complications (ACS, stroke, splenic sequestration)\n• Functional asplenia by 3 months of age\n• Most common genotype\n• Reticulocyte count chronically elevated (10–14 day RBC lifespan vs 120 days normal)',
+        },
+        {
+            heading: 'HbSβ0-Thalassemia',
+            body: '**Severe phenotype** (similar to HbSS). No β-globin protein produced.\n\n• Baseline Hgb: 6–8 g/dL\n• Similar complication profile to HbSS\n• Diagnosed by hemoglobin electrophoresis (no HbA present)',
+        },
+        {
+            heading: 'HbSC Disease',
+            body: '**Moderate severity.** One HbS gene + one HbC gene.\n\n• Baseline Hgb: 10–15 g/dL\n• Less frequent VOC than HbSS\n• Splenic sequestration can occur later in life (spleen not autoinfarcts as early)\n• Higher risk for retinopathy and avascular necrosis\n• ~50% HbS + ~50% HbC on electrophoresis',
+        },
+        {
+            heading: 'HbSβ+-Thalassemia',
+            body: '**Moderate severity** (similar to HbSC). Small amount of β-globin produced.\n\n• Baseline Hgb: 9–12 g/dL\n• Similar morbidity/mortality as HbSC\n• 10–25% HbA present on electrophoresis\n• Splenic sequestration can present later in life',
+        },
+        {
+            heading: 'HbAS (Sickle Cell Trait)',
+            body: '**Generally benign carrier state.** One HbS gene + one normal gene.\n\n• Normal hemoglobin levels\n• ~8% of African Americans\n• NOT sickle cell disease — different complications (ECAST, renal)\n• Red blood cells function normally under typical conditions\n• Sickling possible under extreme physiologic stress (altitude, dehydration, intense exertion)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ware RE, et al. Sickle cell disease. Lancet. 2017;390(10091):311-323.' },
+        { num: 2, text: 'Jackson KM, et al. Pediatric Sickle Cell Disease. Pediatr Emerg Med Pract. 2024;21(11):1-28.' },
+    ],
+};
+const SCD_DIFFERENTIAL = {
+    id: 'scd-differential',
+    title: 'SCD Differential Diagnosis',
+    subtitle: 'DDx by presenting complaint',
+    sections: [
+        {
+            heading: 'Pain',
+            body: '• **Vaso-occlusive crisis** — typical pattern, no focal findings\n• **Osteomyelitis** — Salmonella (most common in SCD), S. aureus; focal tenderness, fever\n• **Avascular necrosis** — femoral head (most common), humeral head; point tenderness, pain with ROM\n• **Septic arthritis** — joint effusion, inability to bear weight\n• **Dactylitis (hand-foot syndrome)** — swelling of fingers/toes, age <2 years\n• **Non-SCD trauma** — fracture, sprain (assess for atypical pain location)',
+        },
+        {
+            heading: 'Fever',
+            body: '• **Bacteremia/sepsis** — encapsulated organisms (S. pneumoniae #1)\n• **Viral illness** — does NOT exclude bacteremia in SCD\n• **Parvovirus B19** — aplastic crisis (retic <1%, profound anemia)\n• **ACS** — fever + respiratory symptoms + infiltrate\n• **Osteomyelitis** — fever + focal bone pain\n• **UTI** — consider in all febrile SCD patients',
+        },
+        {
+            heading: 'Respiratory / Chest Pain',
+            body: '• **Acute chest syndrome** — new infiltrate + fever/resp symptoms; up to 25% of SCD deaths\n• **Pneumonia** — clinically and radiographically similar to ACS\n• **Asthma exacerbation** — common comorbidity; does NOT exclude ACS\n• **Pulmonary embolism** — hypercoagulable state in SCD\n• **Rib/sternal VOC** — chest wall pain without infiltrate\n• **Myocardial infarction** — consider in older teens',
+        },
+        {
+            heading: 'Neurologic',
+            body: '• **Ischemic stroke** — 33× increased risk; peak age 2–9 years\n• **Hemorrhagic stroke** — more common in adult SCD\n• **Meningitis** — encapsulated organisms, functional asplenia\n• **Seizure** — may be presenting sign of stroke\n• **Posterior reversible encephalopathy (PRES)** — hypertension + seizures\n• **Transient ischemic attack** — consider even if symptoms resolve',
+        },
+        {
+            heading: 'Abdominal',
+            body: '• **Splenic sequestration** — rapid splenomegaly + anemia; age 6mo–5yr for HbSS\n• **Hepatic sequestration** — similar mechanism in liver; RUQ pain + hepatomegaly\n• **Aplastic crisis** — parvovirus B19; profound anemia but LOW reticulocyte count\n• **Cholelithiasis/cholecystitis** — pigment gallstones from chronic hemolysis\n• **Appendicitis** — always consider in abdominal pain',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jackson KM, et al. Pediatric Sickle Cell Disease. Pediatr Emerg Med Pract. 2024;21(11):1-28.' },
+    ],
+};
+const SCD_VOC_ALGORITHM = {
+    id: 'scd-voc-algorithm',
+    title: 'VOC Pain Management Algorithm',
+    subtitle: 'Based on Dell Children\u2019s EBOC + ASH/NHLBI Guidelines',
+    sections: [
+        {
+            heading: 'Triage (Goal: 0–30 Minutes)',
+            body: '• Triage Level 2 (Emergency)\n• Administer Fentanyl 1–1.5 mcg/kg intranasal (max 100 mcg/dose)\n• Place PIV / Access Port\n• Obtain labs: CBC, retic, CMP, urine HCG (females >10 years)\n• If ill-appearing: T&S, Hgb electrophoresis (STAT)\n• If febrile: Use SCD Fever pathway concurrently\n• Offer heat packs to painful sites\n• Continuous pulse oximetry\n\n**Triage Questions:**\n• History of acute chest syndrome?\n• Last pain crisis?\n• Current fever, cough, chest pain?\n• Does patient have an individualized pain plan?',
+        },
+        {
+            heading: 'Initial Analgesia (Goal: 31–60 Minutes)',
+            body: '**Opioid (choose one):**\n• Morphine 0.1–0.2 mg/kg IV (max 8 mg)\n• Hydromorphone 0.015–0.02 mg/kg IV (max 1 mg)\n• Fentanyl 2 mcg/kg IV (max 100 mcg) — ED only\n\n**PLUS NSAID:**\n• Ketorolac 0.5 mg/kg IV (<16yo max 15mg, ≥16yo max 30mg) × 1 dose\n\n**PLUS Fluids:**\n• NS 10 mL/kg bolus (max 1L) over 60 min\n• If dehydration concern: 20 mL/kg bolus (max 1L)\n• Then start 1× maintenance IVF\n\nIf unable to obtain IV: Oxycodone 0.1 mg/kg PO (max 10 mg)',
+        },
+        {
+            heading: 'Ketorolac Contraindications',
+            body: '• Pregnancy\n• Renal impairment or SCD nephropathy\n• Last dose of ketorolac within 5 days\n• Last dose of ibuprofen within 6 hours\n• Active bleeding or coagulopathy\n• History of peptic ulcer disease',
+        },
+        {
+            heading: 'Reassessment (q30 Minutes)',
+            body: 'RN reassess pain 30 minutes after each opioid administration.\n\n• If patient asleep, wake to reassess\n• May give 2nd and 3rd opioid doses\n• Notify provider before each additional dose\n• Start incentive spirometry (prevents ACS development)\n\n**AVOID corticosteroids** — risk of rebound pain, stroke, and other complications [4][5]',
+        },
+        {
+            heading: 'Disposition',
+            body: '**Pain Improved → Discharge:**\n• Observe 1 hour post last opioid\n• Encourage PO intake\n• Discharge with home pain regimen (2–3 day opioid supply)\n• Hematology follow-up within 24–48 hours\n\n**Pain Not Improved After 3 Doses → Admit:**\n• Contact hematology for further management\n• Consider sub-dissociative ketamine 0.1–0.3 mg/kg IV\n• PCA morphine or hydromorphone\n• Monitor for ACS development (first 3–4 days)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Dell Children\u2019s Medical Center EBOC. Pain Management Algorithm for SCD VOC. Updated April 2023.' },
+        { num: 2, text: 'Brandow AM, et al. ASH 2020 guidelines for sickle cell disease: management of acute and chronic pain. Blood Adv. 2020;4(12):2656-2701.' },
+        { num: 3, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.' },
+    ],
+};
+const SCD_ACS_GUIDE = {
+    id: 'scd-acs-guide',
+    title: 'ACS Recognition & Management',
+    subtitle: 'Acute chest syndrome — up to 25% of SCD deaths',
+    sections: [
+        {
+            heading: 'Diagnostic Criteria',
+            body: '**New radiodensity on chest imaging** PLUS any of:\n• Fever\n• Respiratory symptoms (cough, chest pain, dyspnea, tachypnea)\n• Hypoxemia\n\nNote: CXR infiltrate may lag behind clinical symptoms. Consider repeat imaging if high suspicion with initially clear CXR.',
+        },
+        {
+            heading: 'Triggers & Etiology',
+            body: '• **Infection** (most common in children) — S. pneumoniae, Mycoplasma, Chlamydia, viral\n• **Fat embolism** — from bone marrow infarction during VOC\n• **In situ sickling** — V/Q mismatch from local hypoxia\n• **Pulmonary infarction** — vaso-occlusion in pulmonary vasculature\n\n**Key:** ACS often develops during days 1–4 of hospitalization for VOC.',
+        },
+        {
+            heading: 'Treatment Algorithm',
+            body: '**1. Antibiotics** (cover typical + atypical):\n• Ceftriaxone 50 mg/kg IV (max 2g)\n• Azithromycin 10 mg/kg IV (max 500mg)\n\n**2. Oxygen:**\n• Supplement ONLY for SpO2 <90%\n• Why? Higher O2 in non-hypoxic patients blunts erythropoietic drive — reduces bone marrow response to RBC breakdown\n\n**3. Incentive spirometry** q2h while awake\n\n**4. Bronchodilators** PRN for wheezing\n\n**5. Pain management** per VOC pathway\n\n**6. AVOID corticosteroids** — rebound pain, stroke risk',
+        },
+        {
+            heading: 'Transfusion Strategy',
+            body: '**Simple Transfusion:**\n• If Hgb drops >1 g/dL from baseline\n• Target: Hgb ~10 g/dL, HbS <30%\n• Do NOT exceed Hgb 11 g/dL (hyperviscosity)\n\n**Exchange Transfusion Indications:**\n• Worsening respiratory distress on O2\n• Worsening hypoxia despite supplemental O2\n• Progressive pulmonary infiltrates\n• Worsening anemia post-simple transfusion\n• Multilobar disease\n• Rapid clinical deterioration\n\n**Blood Bank:** Extended antigen matching (anti-C, E, Kell), sickle-negative units. Notify early — exchange is resource-intensive.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jackson KM, et al. Pediatric Sickle Cell Disease. Pediatr Emerg Med Pract. 2024;21(11):1-28.' },
+        { num: 2, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease. 2014.' },
+        { num: 3, text: 'Dolatkhah R, et al. Blood transfusions for ACS in SCD. Cochrane Database Syst Rev. 2020;1(1):CD007843.' },
+    ],
+};
+const SCD_TRANSFUSION = {
+    id: 'scd-transfusion',
+    title: 'SCD Transfusion Guidelines',
+    subtitle: 'Simple vs exchange transfusion thresholds',
+    sections: [
+        {
+            heading: 'Simple Transfusion',
+            body: '**Mechanism:** Donor blood given without removing patient\u2019s blood.\n\n**Indications:**\n• Hgb drops >1 g/dL below baseline (ACS)\n• Symptomatic anemia\n• Splenic sequestration (in 5 mL/kg aliquots)\n• Aplastic crisis (parvovirus B19)\n\n**Targets:**\n• Hgb ~10 g/dL\n• Do NOT exceed Hgb 11 g/dL',
+        },
+        {
+            heading: 'Exchange Transfusion',
+            body: '**Mechanism:** Patient\u2019s blood removed and replaced with donor blood simultaneously.\n\n**Indications:**\n• Acute ischemic stroke (preferred over simple)\n• Severe/worsening ACS\n• Multiorgan failure\n• Pre-operative (goal HbS <30%)\n\n**Targets:**\n• HbS <30%\n• HbA >70%\n• Hgb ~10 g/dL',
+        },
+        {
+            heading: 'Critical Thresholds (Do NOT Exceed)',
+            body: '**Splenic sequestration:** Do NOT transfuse past Hgb **8 g/dL** — sequestered cells re-enter circulation (\u201creverse sequestration\u201d) → hyperviscosity, HTN, CHF, ICH [1]\n\n**Stroke:** Simple transfusion NOT indicated if Hgb >**8.5 g/dL** (hyperviscosity risk). Use exchange transfusion instead. [2]\n\n**All scenarios:** Do NOT exceed Hgb **11 g/dL** — hyperviscosity syndrome [1]\n\n**Stroke with HbS <50%:** Exchange transfusion may not be indicated [2]',
+        },
+        {
+            heading: 'Blood Bank Considerations',
+            body: '• **Extended antigen matching** required (anti-C, anti-E, anti-Kell) — reduces alloimmunization\n• **Sickle-negative units** — verify HbS-negative donor blood\n• **Notify blood bank EARLY** — exchange transfusion is resource-intensive\n• **Monitor for delayed hemolytic transfusion reaction** up to 28 days post-transfusion\n• **Hemoglobin electrophoresis** can track HbS% response to transfusion',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.' },
+        { num: 2, text: 'DeBaun MR, et al. ASH 2020 guidelines: cerebrovascular disease in SCD. Blood Adv. 2020;4(8):1554-1588.' },
+        { num: 3, text: 'Dolatkhah R, et al. Blood transfusions for ACS in SCD. Cochrane Database Syst Rev. 2020.' },
+    ],
+};
+const SCD_FEVER_EVAL = {
+    id: 'scd-fever-eval',
+    title: 'SCD Fever Evaluation',
+    subtitle: 'Fever ≥ 38.5°C is a medical emergency in SCD',
+    sections: [
+        {
+            heading: 'Why Fever Is Dangerous',
+            body: '**Functional asplenia** develops by 3 months of age in HbSS disease.\n\n• Impaired clearance of encapsulated bacteria\n• S. pneumoniae is the #1 pathogen\n• H. influenzae, N. meningitidis, Salmonella also high risk\n• Pre-PCV bacteremia risk: 15–20%\n• Post-PCV + penicillin prophylaxis: ~1.1% [1]\n\n**Even with low bacteremia rates, the consequences of missed infection are catastrophic.**',
+        },
+        {
+            heading: 'Antibiotic Algorithm',
+            body: '**ALL febrile SCD patients:**\n• Blood culture × 2 BEFORE antibiotics (ALWAYS)\n• Ceftriaxone 50 mg/kg IV (max 2g) — IMMEDIATELY\n\n**If meningitis concern** (meningeal signs, AMS, ill-appearing):\n• Ceftriaxone 100 mg/kg IV (max 2g) — meningitic dose\n• PLUS Vancomycin 20 mg/kg IV (max 1500 mg)\n\n**Timing:** NHLBI recommends antibiotics within 1 hour of presentation [2]\n\n**Caution:** Scheduled acetaminophen/ibuprofen can mask fever. If on scheduled antipyretics with infectious symptoms, evaluate as if febrile.',
+        },
+        {
+            heading: 'Disposition Criteria',
+            body: '**Safe to Discharge:**\n• Well-appearing after observation\n• Reliable caregivers\n• Hematology follow-up within 24 hours (confirmed)\n• Completed pneumococcal vaccine series\n• Parenteral antibiotics given in ED\n\n**Must Admit:**\n• Ill-appearing\n• WBC >30,000 or <5,000 /mcL\n• Hypotensive for age\n• Continued fever\n• CXR infiltrate (→ ACS pathway)\n• Age <60 days\n• Unable to ensure 24-hour follow-up\n• Unvaccinated\n\n**Always page hematology before discharge.**',
+        },
+        {
+            heading: 'Parvovirus B19 (Aplastic Crisis)',
+            body: '**Transient Red Cell Aplasia (TRCA):**\n• 80% of SCD patients infected with parvovirus B19 develop TRCA\n• Reticulocyte count **<1%** (key diagnostic finding)\n• Hemoglobin drops **>30%** from baseline\n• WBC and platelets may also decline\n• Self-limited: 7–10 days\n\n**Management:**\n• Simple blood transfusion for symptomatic anemia\n• IVIG may be considered\n• Isolation precautions (contagious to other SCD patients and pregnant women)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Rineer S, et al. Risk of bacteremia in febrile children with SCD. JAMA Netw Open. 2023;6(6):e2318904.' },
+        { num: 2, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease. 2014.' },
+        { num: 3, text: 'Baskin MN, et al. Bacteremia risk in febrile patients with SCD. Pediatrics. 2013;131(6):1035-1041.' },
+    ],
+};
+const SCD_SCT_COMPLICATIONS = {
+    id: 'scd-sct-complications',
+    title: 'Sickle Cell Trait Complications',
+    subtitle: 'SCT is NOT SCD — but has specific risks',
+    sections: [
+        {
+            heading: 'ECAST (Exercise Collapse)',
+            body: '**Exercise Collapse Associated with Sickle Cell Trait**\n\n• Associated with competitive athletics and military training\n• 28× increased risk of exercise-related death (Kark 1987) [1]\n• Metabolic crisis: dehydration + acidosis + hypoxia + hyperthermia → sickling\n\n**Progression:** Extremity pain → rhabdomyolysis → AKI → AMS → shock → arrhythmias → DIC\n\n**Management:**\n• STOP exercise immediately\n• Cool the patient\n• Aggressive IV fluids (target UO 200–300 mL/hr)\n• Continuous cardiac monitoring\n• Serial: BMP, CK, blood gas, coagulation studies\n\n**Note:** 2016 study of ~48,000 Black US Army soldiers found mortality similar to those without SCT when risk mitigation employed. [2]',
+        },
+        {
+            heading: 'Renal Papillary Necrosis',
+            body: '**Most common cause of hematuria in SCT.**\n\n• Painless gross hematuria\n• Microinfarctions in renal medulla — hypoxic, acidotic environment of vasa recta promotes sickling\n\n**Workup:** UA, urine culture, BMP, renal ultrasound with bladder\n\n**Management:**\n• Mild: outpatient — bed rest, oral hydration, urine alkalinization\n• Severe: inpatient — desmopressin infusion, ureteroscopic tamponade, or epsilon aminocaproic acid',
+        },
+        {
+            heading: 'Renal Medullary Carcinoma',
+            body: '**Rare but highly aggressive malignancy.**\n\n• Almost exclusively in SCT carriers\n• Predominantly young adults\n• Median survival: **15 weeks** (usually disseminated at diagnosis)\n\n**Red Flag:** Flank pain + hematuria in SCT patient\n→ **CT urography** to evaluate\n\nDo not assume hematuria is benign renal papillary necrosis if flank pain is present.',
+        },
+        {
+            heading: 'Other SCT Complications',
+            body: '• **Hyposthenuria** — inability to concentrate urine → chronic dehydration risk. Counsel on increased fluid intake.\n• **Splenic infarction at altitude** — can occur at >8,000 feet; presents with LUQ pain\n• **Exertional rhabdomyolysis** — even without full ECAST, can develop isolated rhabdomyolysis during intense exercise\n\n**Prevention Counseling:**\n• Gradual acclimatization to altitude and heat\n• Adequate hydration before, during, and after exercise\n• Avoid extreme exertion without preparation\n• Routine physical activity IS safe and beneficial',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kark JA, et al. Sickle-cell trait as a risk factor for sudden death in physical training. NEJM. 1987;317(13):781-787.' },
+        { num: 2, text: 'Nelson DA, et al. Sickle cell trait, rhabdomyolysis, and mortality among US Army soldiers. NEJM. 2016;375(5):435-442.' },
+        { num: 3, text: 'Alappan N, et al. Renal medullary cancer in a patient with sickle cell trait. Case Rep Oncol Med. 2013.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -6178,6 +6421,14 @@ export const INFO_PAGES = {
     'sah-summary': SAH_SUMMARY,
     'sah-lp-guide': SAH_LP_GUIDE,
     'sah-ecg-changes': SAH_ECG_CHANGES,
+    'scd-steps-summary': SCD_STEPS_SUMMARY,
+    'scd-genotypes': SCD_GENOTYPES,
+    'scd-differential': SCD_DIFFERENTIAL,
+    'scd-voc-algorithm': SCD_VOC_ALGORITHM,
+    'scd-acs-guide': SCD_ACS_GUIDE,
+    'scd-transfusion': SCD_TRANSFUSION,
+    'scd-fever-eval': SCD_FEVER_EVAL,
+    'scd-sct-complications': SCD_SCT_COMPLICATIONS,
     'syncope-discharge': SYNCOPE_DISCHARGE,
     'burns-discharge': BURNS_DISCHARGE,
     'chest-tube-discharge': CHEST_TUBE_DISCHARGE,
