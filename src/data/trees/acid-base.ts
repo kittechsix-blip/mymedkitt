@@ -519,7 +519,7 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     module: 5,
     title: 'Osmolar Gap Assessment',
     body: '**Osmolar Gap = Measured Osm − Calculated Osm**\n\nCalculated Osm = 2×Na + Glucose/18 + BUN/2.8 + EtOH/3.7\n\n(Include EtOH term only if ethanol level is available — unmeasured ethanol falsely elevates the gap.)\n\n**Interpretation:**\n• **Gap ≤ 10:** Normal. Unmeasured anions are endogenous (uremia, ketoacids).\n• **Gap 10-50:** Elevated. Consider methanol, ethylene glycol, propylene glycol (lorazepam/diazepam/phenytoin infusions), isopropanol, mannitol, lithium.\n• **Gap > 50:** Almost certainly toxic alcohol ingestion.',
-    recommendation: 'For suspected toxic alcohol: fomepizole 15 mg/kg IV loading dose. Consult toxicology and nephrology. Dialysis indicated for methanol/ethylene glycol with end-organ damage, severe acidosis, or renal failure.',
+    recommendation: 'For suspected toxic alcohol: [Fomepizole](#/drug/fomepizole/toxic alcohol) 15 mg/kg IV loading dose. Consult toxicology and nephrology. Dialysis indicated for methanol/ethylene glycol with end-organ damage, severe acidosis, or renal failure.',
     confidence: 'recommended',
     calculatorLinks: [{ id: 'osmolar-gap', label: 'Osmolar Gap Calculator' }],
     citation: [7],

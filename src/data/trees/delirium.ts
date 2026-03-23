@@ -58,7 +58,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Correct Reversible Cause',
-    body: 'Treat the identified cause with standard emergency care:\n\n• **Hypoglycemia:** D50W 25g IV (adults) or D10W 2-5 mL/kg (peds). Recheck glucose in 15 min.\n• **Hypoxia:** Supplemental O2 to SpO2 >94%. Evaluate for pneumonia, PE, CHF.\n• **Opioid toxicity:** Naloxone 0.4-2 mg IV/IN. May repeat q2-3 min. Consider infusion if recurrent (2/3 of effective dose per hour).\n• **Hypothermia:** Active warming. Evaluate for underlying cause.\n• **Hypotension:** IV fluid bolus. Evaluate for sepsis, hemorrhage, cardiac cause.\n\nIf mental status does not improve after correction, proceed with full delirium evaluation — multiple precipitants often coexist.',
+    body: 'Treat the identified cause with standard emergency care:\n\n• **Hypoglycemia:** D50W 25g IV (adults) or D10W 2-5 mL/kg (peds). Recheck glucose in 15 min.\n• **Hypoxia:** Supplemental O2 to SpO2 >94%. Evaluate for pneumonia, PE, CHF.\n• **Opioid toxicity:** [Naloxone](#/drug/naloxone/opioid toxicity) 0.4-2 mg IV/IN. May repeat q2-3 min. Consider infusion if recurrent (2/3 of effective dose per hour).\n• **Hypothermia:** Active warming. Evaluate for underlying cause.\n• **Hypotension:** IV fluid bolus. Evaluate for sepsis, hemorrhage, cardiac cause.\n\nIf mental status does not improve after correction, proceed with full delirium evaluation — multiple precipitants often coexist.',
     citation: [1],
     next: 'del-screening',
   },

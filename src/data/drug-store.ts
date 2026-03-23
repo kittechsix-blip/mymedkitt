@@ -1726,6 +1726,44 @@ const FAMOTIDINE: DrugEntry = {
   ],
 };
 
+const ETOMIDATE: DrugEntry = {
+  id: 'etomidate',
+  name: 'Etomidate (Amidate)',
+  genericName: 'Etomidate',
+  drugClass: 'Imidazole derivative / Non-barbiturate sedative-hypnotic',
+  route: 'IV',
+  indications: ['Procedural sedation', 'RSI induction'],
+  dosing: [
+    {
+      indication: 'Procedural sedation',
+      regimen: '0.1-0.15 mg/kg IV over 30-60 seconds. Onset 15-45 seconds. Duration 5-15 minutes. May repeat 0.05 mg/kg PRN for prolonged procedures. Administer fentanyl 1-2 mcg/kg IV 2-3 minutes before etomidate for analgesia (etomidate has NO analgesic properties).',
+      weightCalc: { dosePerKg: 0.15, unit: 'mg' },
+    },
+    {
+      indication: 'RSI induction',
+      regimen: '0.3 mg/kg IV push. Onset 15-45 seconds. Hemodynamically neutral — ideal for patients with hypotension or cardiac disease. Single dose does not cause clinically significant adrenal suppression.',
+      weightCalc: { dosePerKg: 0.3, unit: 'mg' },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to etomidate',
+    'Sepsis or septic shock (relative — adrenal suppression concern)',
+  ],
+  cautions: [
+    'NO analgesic properties — must pair with opioid for painful procedures',
+    'Myoclonus in 20-40% of patients (involuntary muscle movements) — can be mistaken for seizure activity',
+    'Single-dose adrenal suppression lasts 4-8 hours — clinically insignificant for procedural sedation',
+    'Do NOT use repeated doses or infusions (prolonged adrenal suppression)',
+    'Nausea/vomiting on emergence — consider ondansetron prophylaxis',
+    'Pain on injection (use large vein, consider lidocaine flush)',
+  ],
+  monitoring: 'Continuous SpO2, capnography, cardiac monitor, blood pressure. Suction and BVM at bedside.',
+  notes: 'Etomidate is the most hemodynamically stable induction agent — minimal effect on heart rate, blood pressure, and cardiac output. This makes it ideal for fracture reduction in patients with cardiovascular disease, hypotension, or hemodynamic instability. However, it provides ZERO analgesia, so painful procedures require concurrent opioid administration. The brief duration (5-15 minutes) is well-suited for short procedures like fracture reduction. Myoclonus can interfere with reduction — if problematic, consider ketamine instead.',
+  citations: [
+    'Green SM, Roback MG, et al. Clinical Practice Guideline for Emergency Department Procedural Sedation and Analgesia: A Systematic Review. Ann Emerg Med. 2019;73(5):e51-e65.',
+  ],
+};
+
 const ESMOLOL: DrugEntry = {
   id: 'esmolol',
   name: 'Esmolol',
@@ -1875,6 +1913,38 @@ const FONDAPARINUX: DrugEntry = {
   citations: [
     'Yusuf S, et al. Comparison of Fondaparinux and Enoxaparin in Acute Coronary Syndromes (OASIS-5). N Engl J Med. 2006;354(14):1464-1476.',
     'Amsterdam EA, et al. 2014 AHA/ACC Guideline for Management of NSTE-ACS. J Am Coll Cardiol. 2014;64(24):e189-e228.',
+  ],
+};
+
+const FOMEPIZOLE: DrugEntry = {
+  id: 'fomepizole',
+  name: 'Fomepizole (Antizol)',
+  genericName: 'Fomepizole',
+  drugClass: 'Alcohol dehydrogenase inhibitor / Antidote',
+  route: 'IV',
+  indications: ['Toxic alcohol ingestion (methanol, ethylene glycol)'],
+  dosing: [
+    {
+      indication: 'Toxic alcohol ingestion',
+      regimen: '**Loading dose:** 15 mg/kg IV over 30 minutes.\n**Maintenance:** 10 mg/kg IV q12h × 4 doses.\n**Then:** 15 mg/kg IV q12h until ethylene glycol/methanol level <20 mg/dL and patient is asymptomatic.\n\n**During hemodialysis:** Dose q4h (fomepizole is dialyzable). Give dose at START of dialysis if >6h since last dose.\n\n**Mechanism:** Competitively inhibits alcohol dehydrogenase, blocking conversion of methanol → formate and ethylene glycol → glycolate/oxalate (the toxic metabolites).',
+      weightCalc: { dosePerKg: 15, unit: 'mg', label: 'Loading dose' },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to fomepizole or pyrazoles',
+  ],
+  cautions: [
+    'Must coordinate with nephrology — dialysis indicated for severe acidosis, renal failure, visual symptoms (methanol), or level >50 mg/dL',
+    'Fomepizole is dialyzable — increase dosing frequency during hemodialysis',
+    'Headache, nausea, dizziness are common but mild',
+    'Transient transaminase elevation in ~20% of patients',
+    'Expensive — but clearly superior to ethanol infusion (no intoxication, no ICU monitoring for ethanol levels)',
+  ],
+  monitoring: 'Serum methanol/ethylene glycol levels q12h. BMP (anion gap, bicarbonate, creatinine). Osmolar gap trending. Urinalysis for calcium oxalate crystals (ethylene glycol). Visual acuity if methanol suspected.',
+  notes: 'Fomepizole is the preferred antidote for toxic alcohol ingestion — it has replaced ethanol infusion due to easier dosing, no intoxicating effects, and no need for continuous serum ethanol monitoring. Start empirically when toxic alcohol is suspected (elevated osmolar gap + anion gap metabolic acidosis) — do NOT wait for confirmatory levels. Draw all labs BEFORE initiating treatment. Consult toxicology and nephrology early. An osmolar gap >50 mOsm/kg is almost certainly toxic alcohol until proven otherwise.',
+  citations: [
+    'Brent J. Fomepizole for Ethylene Glycol and Methanol Poisoning. N Engl J Med. 2009;360(21):2216-2223.',
+    'Kraut JA, Kurtz I. Toxic Alcohol Ingestions: Clinical Features, Diagnosis, and Management. Clin J Am Soc Nephrol. 2008;3(1):208-225.',
   ],
 };
 
@@ -2508,6 +2578,43 @@ const NACL_TABLETS: DrugEntry = {
   notes: 'Salt tablets work by increasing solute load delivered to the kidney, which when combined with a loop diuretic, promotes excretion of free water. This is a second-line strategy for SIAD after fluid restriction. Less palatable than oral urea but more widely available. The combination with furosemide generates an electrolyte-free water clearance.',
   citations: [
     'Verbalis JG et al. Hyponatremia: Expert Panel Recommendations. Am J Med. 2013;126(10S1):S1-42.',
+  ],
+};
+
+const NALOXONE: DrugEntry = {
+  id: 'naloxone',
+  name: 'Naloxone (Narcan)',
+  genericName: 'Naloxone hydrochloride',
+  drugClass: 'Opioid antagonist',
+  route: 'IV/IN/IM',
+  indications: ['Opioid toxicity / overdose', 'Opioid-induced respiratory depression'],
+  dosing: [
+    {
+      indication: 'Opioid toxicity / overdose',
+      regimen: '**IV/IM/SQ:** 0.4-2 mg. May repeat every 2-3 minutes up to 10 mg total.\n**Intranasal:** 4 mg (one spray in one nostril). May repeat in alternate nostril q2-3 min.\n\n**Titration strategy:** Start with 0.04-0.4 mg IV to restore respiratory drive WITHOUT precipitating full withdrawal. Goal is adequate ventilation (RR >12), NOT full consciousness.\n\n**High-dose opioids (fentanyl analogs):** May require 10+ mg. If no response after 10 mg, reconsider diagnosis.\n\n**Pediatric:** 0.1 mg/kg IV/IM (max 2 mg). If <5 years or <20 kg: 0.1 mg/kg. If >5 years or >20 kg: 2 mg.',
+      weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 2, label: 'Pediatric dose' },
+    },
+    {
+      indication: 'Opioid-induced respiratory depression (post-procedural)',
+      regimen: '**Titrate cautiously:** 0.04-0.2 mg IV every 2-3 minutes to effect.\n\nGoal: Restore respiratory rate >12/min while preserving analgesia. Do NOT give full reversal dose (0.4-2 mg) — will precipitate severe pain and withdrawal.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to naloxone',
+  ],
+  cautions: [
+    'Precipitates acute opioid withdrawal in dependent patients — agitation, vomiting, diarrhea, piloerection, diaphoresis, tachycardia',
+    'Duration shorter than most opioids (30-90 min IV) — re-sedation risk after naloxone wears off',
+    'Consider naloxone infusion for long-acting opioid ingestion: 2/3 of effective bolus dose per hour',
+    'Pulmonary edema (rare but serious) — mechanism unclear, may be related to catecholamine surge',
+    'Acute coronary events reported after rapid reversal (sympathetic surge)',
+    'Vomiting is common — aspiration risk in obtunded patients (position laterally)',
+  ],
+  monitoring: 'Continuous SpO2, respiratory rate, level of consciousness. Monitor for at least 2 hours after last dose (4-6 hours for long-acting opioids). Observe for re-sedation as naloxone wears off.',
+  notes: 'Naloxone is a competitive mu-opioid receptor antagonist. The key clinical principle is TITRATION — the goal is to restore adequate ventilation, not full reversal. Over-reversal precipitates severe withdrawal, pain crisis, and sympathetic surge. For known chronic opioid users, start with 0.04 mg IV and titrate. For unknown patients with respiratory depression, 0.4 mg IV is a reasonable starting dose. For suspected fentanyl analogs (xylazine-laced street drugs), higher doses may be needed. Duration of action (30-90 min) is shorter than most opioids — observation and possible infusion required. Intranasal route (Narcan nasal spray 4 mg) is standard for bystander/EMS use.',
+  citations: [
+    'Boyer EW. Management of Opioid Analgesic Overdose. N Engl J Med. 2012;367(2):146-155.',
+    'Rzasa Lynn R, Galinkin JL. Naloxone Dosage for Opioid Reversal: Current Evidence and Clinical Implications. Ther Adv Drug Saf. 2018;9(1):63-88.',
   ],
 };
 
@@ -5660,11 +5767,13 @@ export const ALL_DRUGS: DrugEntry[] = [
   ENOXAPARIN,
   EPINEPHRINE,
   ESMOLOL,
+  ETOMIDATE,
   FAMOTIDINE,
   FENTANYL,
   FLUDROCORTISONE,
   FLUCONAZOLE,
   FLUCYTOSINE,
+  FOMEPIZOLE,
   FONDAPARINUX,
   FFP,
   FOSPHENYTOIN,
@@ -5702,6 +5811,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MORPHINE,
   MISOPROSTOL,
   NACL_TABLETS,
+  NALOXONE,
   NICARDIPINE,
   NIMODIPINE,
   NITROFURANTOIN,
@@ -5830,11 +5940,13 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/enoxaparin|LMWH|low.molecular/i, 'enoxaparin'],
   [/epinephrine|adrenaline/i, 'epinephrine'],
   [/esmolol|brevibloc/i, 'esmolol'],
+  [/etomidate|amidate/i, 'etomidate'],
   [/famotidine|pepcid/i, 'famotidine'],
   [/fentanyl|sublimaze/i, 'fentanyl'],
   [/fludrocortisone|florinef/i, 'fludrocortisone'],
   [/fluconazole|diflucan/i, 'fluconazole'],
   [/flucytosine|5-?fc|ancobon/i, 'flucytosine'],
+  [/fomepizole|antizol/i, 'fomepizole'],
   [/fondaparinux|arixtra/i, 'fondaparinux'],
   [/fresh.*frozen.*plasma|\bFFP\b/i, 'ffp'],
   [/fosphenytoin|cerebyx|phenytoin.*equiv/i, 'fosphenytoin'],
@@ -5871,6 +5983,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/misoprostol|cytotec/i, 'misoprostol'],
   [/morphine/i, 'morphine'],
   [/nacl.*tab|salt.*tab|sodium\s*chloride.*tab/i, 'nacl-tablets'],
+  [/naloxone|narcan/i, 'naloxone'],
   [/nicardipine|cardene/i, 'nicardipine'],
   [/nimodipine|nymalize|nimotop/i, 'nimodipine'],
   [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],
