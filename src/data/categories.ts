@@ -224,6 +224,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 30,
         entryNodeId: 'delirium-start',
+      },
+      {
+        id: 'angioedema',
+        title: 'Angioedema',
+        subtitle: 'Airway → Classification → Histamine vs Bradykinin → Treatment → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 25,
+        entryNodeId: 'angio-start',
       }
     ],
     isCustom: false,

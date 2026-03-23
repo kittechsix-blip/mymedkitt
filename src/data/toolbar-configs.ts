@@ -195,6 +195,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hypo-rx', label: 'Hypo Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'thyroid-hypo-steroids' },
     { id: 'bb-debate', label: 'BB Debate', icon: '\u2696\uFE0F', action: 'overlay', target: 'thyroid-bb-controversy' },
   ],
+  'angioedema': [
+    { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'angio-airway-secure' },
+    { id: 'acei-rx', label: 'ACEi Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'angio-acei-treat' },
+    { id: 'hae-rx', label: 'HAE Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'angio-hae-treat' },
+    { id: 'staging', label: 'Staging', icon: '\uD83D\uDCCA', action: 'overlay', target: 'angio-ishoo-staging' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

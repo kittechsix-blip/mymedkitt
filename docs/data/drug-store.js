@@ -1618,7 +1618,7 @@ const FAMOTIDINE = {
     genericName: 'Famotidine',
     drugClass: 'H2 receptor antagonist',
     route: 'IV/PO',
-    indications: ['Anaphylaxis (H2 blocker)', 'Allergic reactions (adjunctive)'],
+    indications: ['Anaphylaxis (H2 blocker)', 'Allergic reactions (adjunctive)', 'Angioedema / anaphylaxis (adjunct)', 'GERD / peptic ulcer disease'],
     dosing: [
         {
             indication: 'Anaphylaxis (H2 blocker)',
@@ -1627,6 +1627,10 @@ const FAMOTIDINE = {
         {
             indication: 'Allergic reactions (discharge)',
             regimen: '20 mg PO BID × 3-5 days. Optional short-course for discharge. No evidence this prevents biphasic reactions.',
+        },
+        {
+            indication: 'Angioedema / anaphylaxis (adjunct)',
+            regimen: '20 mg IV push. H2 blocker adjunct to H1 antihistamines. May help prevent hypotension and urticaria from histamine release. No large validated studies support H2 blockers for allergic emergencies, but favorable safety profile supports empiric use.',
         },
     ],
     contraindications: [
@@ -1914,7 +1918,7 @@ const GLUCAGON = {
     genericName: 'Glucagon hydrochloride',
     drugClass: 'Hyperglycemic agent / Beta-blocker reversal',
     route: 'IV/IM',
-    indications: ['Anaphylaxis in beta-blocked patients (last resort)', 'Beta-blocker overdose', 'Hypoglycemia'],
+    indications: ['Anaphylaxis refractory to epinephrine (beta-blocker patients)', 'Beta-blocker overdose', 'Hypoglycemia'],
     dosing: [
         {
             indication: 'Anaphylaxis (beta-blocked patient)',
@@ -5192,6 +5196,218 @@ const SSKI = {
     ],
 };
 // -------------------------------------------------------------------
+// Angioedema Drugs
+// -------------------------------------------------------------------
+const AMINOCAPROIC_ACID = {
+    id: 'aminocaproic-acid',
+    name: 'Aminocaproic Acid (Amicar)',
+    genericName: 'Aminocaproic acid',
+    drugClass: 'Antifibrinolytic (lysine analog)',
+    route: 'IV / PO',
+    indications: ['Bradykinin-mediated angioedema (adjunct)'],
+    dosing: [
+        {
+            indication: 'Bradykinin-mediated angioedema',
+            regimen: '4-5 g IV over 1 hour loading dose, then 1 g/hour continuous infusion. Alternative to tranexamic acid for bradykinin-mediated angioedema. Inhibits plasminogen activation, interrupting the kallikrein amplification spiral. May require ongoing treatment \u2014 bradykinin-mediated angioedema evolves over days.',
+        },
+    ],
+    contraindications: ['Active intravascular clotting (DIC)', 'Upper urinary tract bleeding (risk of ureteral clot obstruction)'],
+    cautions: [
+        'Thrombotic risk \u2014 avoid in patients with active DVT/PE or recent thromboembolic events',
+        'Renal impairment \u2014 dose reduce',
+        'Myopathy with prolonged use',
+        'Concurrent use with factor IX concentrates or anti-inhibitor coagulant complexes increases thrombotic risk',
+    ],
+    monitoring: 'Thrombotic complications, renal function, CPK with prolonged use.',
+    notes: 'Alternative antifibrinolytic to TXA for bradykinin-mediated angioedema. Blocks conversion of plasminogen to plasmin, a critical step in the kallikrein amplification spiral that drives bradykinin-mediated angioedema. Available in most hospitals. Less widely studied than TXA for angioedema but shares the same mechanism of action.',
+    citations: [
+        'Kesh S, Bernstein JA. Isolated angioedema: a review of classification and update on management. Ann Allergy Asthma Immunol. 2022;129(6):692-702.',
+    ],
+};
+const BERINERT = {
+    id: 'berinert',
+    name: 'Berinert',
+    genericName: 'C1 esterase inhibitor (human), pasteurized',
+    drugClass: 'C1-INH Concentrate (plasma-derived)',
+    route: 'IV',
+    indications: ['Hereditary angioedema (acute attack)', 'Acquired angioedema', 'ACEi-induced angioedema (off-label)'],
+    dosing: [
+        {
+            indication: 'Hereditary angioedema (acute attack)',
+            regimen: '20 units/kg IV push at 4 mL/min. Round to nearest 500-unit vial (typical adult dose ~1500 units). Warm to room temperature before administration. FDA approved for acute abdominal, facial, or laryngeal HAE attacks in adults and adolescents. Median time to symptom relief: 0.46 hours. Single dose resolves 99% of HAE attacks (IMPACT-2).',
+            weightCalc: { dosePerKg: 20, unit: 'units' },
+        },
+        {
+            indication: 'Acquired angioedema',
+            regimen: '20 units/kg IV push at 4 mL/min. Same dosing as HAE. Low C1q level distinguishes AAE from HAE.',
+            weightCalc: { dosePerKg: 20, unit: 'units' },
+        },
+        {
+            indication: 'ACEi-induced angioedema (off-label)',
+            regimen: '20 units/kg IV push at 4 mL/min. Mixed results for ACEi-induced angioedema \u2014 not FDA-approved for this indication. Consider if targeted therapies (TXA, icatibant) unavailable or ineffective.',
+            weightCalc: { dosePerKg: 20, unit: 'units' },
+        },
+    ],
+    contraindications: ['Known hypersensitivity to C1-INH or any component', 'Life-threatening hypersensitivity reactions to blood products'],
+    cautions: [
+        'Derived from pooled human plasma \u2014 theoretical risk of infectious transmission',
+        'Thrombotic events reported rarely',
+        'Cost: ~$10,000 per 1500 units',
+        'May not be available in smaller hospitals',
+    ],
+    monitoring: 'Clinical response (symptom relief). Vital signs during infusion. Watch for hypersensitivity reactions.',
+    notes: 'Plasma-derived C1-INH concentrate. First-line therapy for acute HAE attacks. Restores C1-INH activity, inhibiting kallikrein and preventing further bradykinin production. FDA approved 2009 based on IMPACT-1/2 trials. Preferred over recombinant C1-INH in pregnancy.',
+    citations: [
+        'Craig TJ, et al. C1 esterase inhibitor concentrate in 1085 hereditary angioedema attacks \u2014 final results of the I.M.P.A.C.T.2 study. Allergy. 2011;66(12):1604-1611.',
+        'Bernstein JA, et al. Angioedema in the emergency department: a practical guide. Int J Emerg Med. 2017;10(1):15.',
+    ],
+};
+const CETIRIZINE = {
+    id: 'cetirizine',
+    name: 'Cetirizine (Zyrtec)',
+    genericName: 'Cetirizine hydrochloride',
+    drugClass: '2nd-Generation H1 Antihistamine',
+    route: 'PO',
+    indications: ['Angioedema / anaphylaxis (adjunct)', 'Urticaria', 'Allergic rhinitis'],
+    dosing: [
+        {
+            indication: 'Angioedema / anaphylaxis (adjunct)',
+            regimen: '10 mg PO. Second-generation H1 antagonist \u2014 less sedating than diphenhydramine. Used as adjunct to epinephrine, not as monotherapy for anaphylaxis. May not be feasible in patients intolerant of oral formulation.',
+        },
+        {
+            indication: 'Urticaria',
+            regimen: '10 mg PO daily. Can increase up to 40 mg/day (4\u00d7 standard dose) for refractory urticaria/idiopathic angioedema. Pediatric \u22656 years: 5-10 mg PO daily.',
+        },
+    ],
+    contraindications: ['Known hypersensitivity to cetirizine or hydroxyzine'],
+    cautions: [
+        'Mild drowsiness possible (less than first-generation antihistamines)',
+        'Reduce dose in renal impairment',
+        'Not available in IV formulation \u2014 patients unable to take PO will need diphenhydramine IV',
+    ],
+    monitoring: 'Symptom improvement. Sedation level.',
+    notes: 'Second-generation H1 antihistamine with less sedation than diphenhydramine. Preferred for outpatient management and mild presentations. For acute ED management of angioedema, IV diphenhydramine may be more practical. High-dose (up to 4\u00d7 standard) can be trialed for idiopathic histaminergic angioedema.',
+    citations: [
+        'Moellman JJ, et al. A consensus parameter for the evaluation and management of angioedema in the emergency department. Acad Emerg Med. 2014;21(4):469-484.',
+    ],
+};
+const ECALLANTIDE = {
+    id: 'ecallantide',
+    name: 'Ecallantide (Kalbitor)',
+    genericName: 'Ecallantide',
+    drugClass: 'Kallikrein Inhibitor',
+    route: 'SQ',
+    indications: ['Hereditary angioedema (acute attack)'],
+    dosing: [
+        {
+            indication: 'Hereditary angioedema (acute attack)',
+            regimen: '30 mg SQ administered as 3 separate 10 mg injections. Inject at 3 separate sites (abdomen, upper arm, or thigh), each at least 2.5 inches apart. Inject away from site of angioedema. FDA approved for patients \u226512 years. Can repeat if attack persists \u2014 limited data on re-dosing.',
+        },
+    ],
+    contraindications: ['Known hypersensitivity to ecallantide'],
+    cautions: [
+        '~4% risk of anaphylaxis \u2014 administer ONLY in healthcare setting with capacity to manage anaphylaxis',
+        'Not for self-administration at home due to anaphylaxis risk',
+        'Limited data in patients <12 years old',
+        'Not recommended for ACEi-induced angioedema (RCTs showed minimal efficacy)',
+    ],
+    monitoring: 'Monitor for anaphylaxis for at least 30 minutes after administration. Clinical response.',
+    notes: '60-amino-acid polypeptide that specifically and reversibly inhibits plasma kallikrein. Kallikrein cleaves high-molecular-weight kininogen to release bradykinin. FDA approved 2009 (ages \u226516), expanded to \u226512 in 2014. EDEMA trials established efficacy. ~4% anaphylaxis risk limits home use. Not effective for ACEi-induced angioedema per RCTs (Bernstein 2014, Lewis 2015).',
+    citations: [
+        'Cicardi M, et al. Ecallantide for the treatment of acute attacks in hereditary angioedema. N Engl J Med. 2010;363(6):523-531.',
+        'Bernstein JA, et al. Effectiveness of ecallantide in treating ACE inhibitor-induced angioedema. Ann Allergy Asthma Immunol. 2015;114(3):245-249.',
+    ],
+};
+const FFP = {
+    id: 'ffp',
+    name: 'Fresh Frozen Plasma (FFP)',
+    genericName: 'Fresh frozen plasma',
+    drugClass: 'Blood Product',
+    route: 'IV',
+    indications: ['Bradykinin-mediated angioedema (second-line)', 'Coagulopathy reversal'],
+    dosing: [
+        {
+            indication: 'Angioedema (second-line)',
+            regimen: '2 units IV initially. May give additional 2 units if no response. Each unit is 200-250 mL. Contains C1-INH, ACE, and other bradykinin-metabolizing enzymes. Use only if targeted therapies (C1-INH concentrate, icatibant, TXA) are unavailable. Retrospective cohort: FFP reduced intubation risk in non-HAE angioedema patients.',
+        },
+    ],
+    contraindications: ['IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)', 'Volume overload (relative \u2014 consider volume of 2-4 units)'],
+    cautions: [
+        'TRALI (transfusion-related acute lung injury) \u2014 rare but serious',
+        'Volume overload \u2014 2-4 units = 400-1000 mL; use caution in heart failure',
+        'Infectious transmission risk (low with modern screening)',
+        'Contains kallikrein substrates (high-molecular-weight kininogen) \u2014 theoretical risk of paradoxical worsening, though little evidence supports this',
+        'Some case reports describe worsening of ACEi-induced angioedema with FFP',
+        'Type and screen required before administration',
+    ],
+    monitoring: 'Clinical response. Vital signs during transfusion. Watch for TRALI (dyspnea, hypoxia within 6 hours).',
+    notes: 'Second-line therapy for bradykinin-mediated angioedema when targeted therapies are unavailable. Contains the enzymes that metabolize bradykinin (including ACE and C1-INH), addressing the underlying deficit. Multiple case reports and one retrospective cohort study support efficacy, but no RCTs exist. FFP is universally available and relatively inexpensive. The theoretical concern for paradoxical worsening (from kallikrein substrates) has little clinical evidence.',
+    citations: [
+        'Saeb A, et al. Using fresh frozen plasma for acute airway angioedema to prevent intubation. Emerg Med Int. 2016;2016:6091510.',
+        'Bernstein JA, et al. Angioedema in the emergency department: a practical guide. Int J Emerg Med. 2017;10(1):15.',
+    ],
+};
+const ICATIBANT = {
+    id: 'icatibant',
+    name: 'Icatibant (Firazyr)',
+    genericName: 'Icatibant acetate',
+    drugClass: 'Bradykinin B2 Receptor Antagonist',
+    route: 'SQ',
+    indications: ['Hereditary angioedema (acute attack)', 'ACEi-induced angioedema (off-label)'],
+    dosing: [
+        {
+            indication: 'Hereditary angioedema (acute attack)',
+            regimen: '30 mg SQ injection in the abdominal area. May repeat every 6 hours if needed, maximum 3 doses in 24 hours. FDA approved for acute HAE attacks in adults \u226518 years. FAST-3 trial: statistically significant improvement in time to clinically significant relief vs placebo.',
+        },
+        {
+            indication: 'ACEi-induced angioedema (off-label)',
+            regimen: '30 mg SQ injection in the abdominal area. Bas 2015 RCT: median time to complete resolution 8 hours (vs 27.1 hours for steroid/antihistamine). No recurrence in the trial. However, subsequent RCTs (Straka 2017) yielded neutral results. 2019 meta-analysis of 3 RCTs found no statistically significant benefit.',
+        },
+    ],
+    contraindications: ['Known hypersensitivity to icatibant'],
+    cautions: [
+        'Extremely expensive (~$23,000 per dose)',
+        'Not widely available in all EDs',
+        'Injection site reactions common (97% in clinical trials \u2014 erythema, swelling, burning)',
+        'Functions downstream of the kallikrein amplification spiral \u2014 cannot break the vicious cycle driving bradykinin production',
+        'Mixed evidence for ACEi-induced angioedema',
+    ],
+    monitoring: 'Clinical response \u2014 time to symptom relief. Injection site reactions. Vital signs.',
+    notes: 'Synthetic peptide structurally similar to bradykinin that specifically blocks the B2 receptor. Works downstream of the kallikrein-bradykinin spiral (blocks the receptor rather than interrupting bradykinin production). FDA approved 2011 for HAE in adults \u226518. FAST-1 was negative, FAST-2 showed superiority over TXA, FAST-3 was positive vs placebo. For ACEi-induced: Bas 2015 (NEJM) was positive but later studies neutral. May be less effective than agents that interrupt the upstream vicious spiral (C1-INH, TXA).',
+    citations: [
+        'Lumry WR, et al. Icatibant for acute HAE (FAST-3). Ann Allergy Asthma Immunol. 2011;107(6):529-537.',
+        'Bas M, et al. A randomized trial of icatibant in ACE-inhibitor-induced angioedema. N Engl J Med. 2015;372(5):418-425.',
+        'Straka BT, et al. Effect of bradykinin receptor antagonism on ACEi-associated angioedema. J Allergy Clin Immunol. 2017;140(1):242-248.',
+    ],
+};
+const RUCONEST = {
+    id: 'ruconest',
+    name: 'Ruconest',
+    genericName: 'Conestat alfa (recombinant C1 esterase inhibitor)',
+    drugClass: 'C1-INH Concentrate (recombinant)',
+    route: 'IV',
+    indications: ['Hereditary angioedema (acute attack)'],
+    dosing: [
+        {
+            indication: 'Hereditary angioedema (acute attack)',
+            regimen: '50 units/kg IV for patients weighing <84 kg. 4200 units IV for patients \u226584 kg. Administer as slow IV injection. FDA approved for treatment of acute attacks in adults and adolescents with HAE. Median time to beginning of relief: 66 minutes (vs 495 minutes for placebo).',
+            weightCalc: { dosePerKg: 50, unit: 'units', maxDose: 4200 },
+        },
+    ],
+    contraindications: ['Known or suspected rabbit allergy (produced from milk of transgenic rabbits)', 'Known hypersensitivity to conestat alfa'],
+    cautions: [
+        'Produced from transgenic rabbit milk \u2014 unique allergy concern',
+        'Not preferred over Berinert in pregnancy (plasma-derived C1-INH preferred)',
+        'Cost approximately $10,000 per dose',
+        'Less commonly stocked than Berinert',
+    ],
+    monitoring: 'Clinical response. Vital signs during infusion. Watch for hypersensitivity reactions (especially in patients not previously screened for rabbit allergy).',
+    notes: 'Recombinant human C1-INH produced from the milk of transgenic rabbits. Amino acid sequence identical to human C1-INH. Advantage: eliminates concern for infectious transmission from human plasma donors. Zuraw et al. conducted two independent RCTs showing significant reduction in time to symptom relief. FDA approved 2014.',
+    citations: [
+        'Zuraw B, et al. Recombinant human C1-inhibitor for the treatment of acute angioedema attacks in patients with hereditary angioedema. J Allergy Clin Immunol. 2010;126(4):821-827.',
+    ],
+};
+// -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 export const ALL_DRUGS = [
@@ -5201,6 +5417,7 @@ export const ALL_DRUGS = [
     ALBUTEROL_NEB,
     ALTEPLASE,
     AMIODARONE,
+    AMINOCAPROIC_ACID,
     AMOXICILLIN,
     AMOXICILLIN_CLAVULANATE,
     AMPICILLIN,
@@ -5215,6 +5432,7 @@ export const ALL_DRUGS = [
     BIKTARVY,
     BIVALIRUDIN,
     BISMUTH_SUBSALICYLATE,
+    BERINERT,
     BUDESONIDE_NEB,
     BUMETANIDE,
     CALCIUM_CHLORIDE,
@@ -5224,6 +5442,7 @@ export const ALL_DRUGS = [
     CEFEPIME,
     CEFTRIAXONE,
     CEPHALEXIN,
+    CETIRIZINE,
     CHOLESTYRAMINE,
     CHLOROTHIAZIDE,
     CIPROFLOXACIN,
@@ -5244,6 +5463,7 @@ export const ALL_DRUGS = [
     DOXYCYCLINE,
     DOXYLAMINE,
     EDOXABAN,
+    ECALLANTIDE,
     ENOXAPARIN,
     EPINEPHRINE,
     ESMOLOL,
@@ -5253,6 +5473,7 @@ export const ALL_DRUGS = [
     FLUCONAZOLE,
     FLUCYTOSINE,
     FONDAPARINUX,
+    FFP,
     FOSPHENYTOIN,
     FUROSEMIDE,
     GENTAMICIN,
@@ -5262,6 +5483,7 @@ export const ALL_DRUGS = [
     HYPERTONIC_SALINE,
     HYDROXOCOBALAMIN,
     IDARUCIZUMAB,
+    ICATIBANT,
     KETAMINE,
     LABETALOL,
     LACOSAMIDE,
@@ -5323,6 +5545,7 @@ export const ALL_DRUGS = [
     RISPERIDONE,
     RITONAVIR,
     RIVAROXABAN,
+    RUCONEST,
     RH_IMMUNE_GLOBULIN,
     SILVER_SULFADIAZINE,
     SODIUM_BICARBONATE,
@@ -5363,6 +5586,7 @@ const NAME_TO_ID = [
     [/amiodarone|cordarone/i, 'amiodarone'],
     [/amoxicillin.clavulanate|augmentin|amox.clav/i, 'amoxicillin-clavulanate'],
     [/amoxicillin(?!.*clav)/i, 'amoxicillin'],
+    [/aminocaproic.*acid|amicar/i, 'aminocaproic-acid'],
     [/ampicillin/i, 'ampicillin'],
     [/amphotericin|ambisome/i, 'amphotericin-b'],
     [/apixaban/i, 'apixaban'],
@@ -5374,6 +5598,7 @@ const NAME_TO_ID = [
     [/biktarvy|BIC\/FTC\/TAF/i, 'biktarvy'],
     [/bivalirudin|angiomax/i, 'bivalirudin'],
     [/bismuth|pepto/i, 'bismuth-subsalicylate'],
+    [/berinert|c1.*esterase.*inhibitor.*human/i, 'berinert'],
     [/budesonide|pulmicort/i, 'budesonide-neb'],
     [/bumetanide|bumex/i, 'bumetanide'],
     [/benzathine.*penicillin/i, 'benzathine-penicillin'],
@@ -5384,6 +5609,7 @@ const NAME_TO_ID = [
     [/cefepime|maxipime/i, 'cefepime'],
     [/ceftriaxone/i, 'ceftriaxone'],
     [/cephalexin|keflex/i, 'cephalexin'],
+    [/cetirizine|zyrtec/i, 'cetirizine'],
     [/cholestyramine|questran/i, 'cholestyramine'],
     [/chlorothiazide|diuril/i, 'chlorothiazide'],
     [/ciprofloxacin|cipro/i, 'ciprofloxacin'],
@@ -5403,6 +5629,7 @@ const NAME_TO_ID = [
     [/doxycycline/i, 'doxycycline'],
     [/doxylamine|unisom.*sleep.*tab|diclegis|bonjesta/i, 'doxylamine'],
     [/edoxaban/i, 'edoxaban'],
+    [/ecallantide|kalbitor/i, 'ecallantide'],
     [/enoxaparin|LMWH|low.molecular/i, 'enoxaparin'],
     [/epinephrine|adrenaline/i, 'epinephrine'],
     [/esmolol|brevibloc/i, 'esmolol'],
@@ -5412,6 +5639,7 @@ const NAME_TO_ID = [
     [/fluconazole|diflucan/i, 'fluconazole'],
     [/flucytosine|5-?fc|ancobon/i, 'flucytosine'],
     [/fondaparinux|arixtra/i, 'fondaparinux'],
+    [/fresh.*frozen.*plasma|\bFFP\b/i, 'ffp'],
     [/fosphenytoin|cerebyx|phenytoin.*equiv/i, 'fosphenytoin'],
     [/furosemide|lasix/i, 'furosemide'],
     [/gentamicin|garamycin/i, 'gentamicin'],
@@ -5420,6 +5648,7 @@ const NAME_TO_ID = [
     [/hydrocortisone|solu-?cortef|cortef/i, 'hydrocortisone'],
     [/hydroxocobalamin|cyanokit/i, 'hydroxocobalamin'],
     [/idarucizumab|praxbind/i, 'idarucizumab'],
+    [/icatibant|firazyr/i, 'icatibant'],
     [/ketamine|ketalar/i, 'ketamine'],
     [/labetalol/i, 'labetalol'],
     [/lacosamide|vimpat/i, 'lacosamide'],
@@ -5475,6 +5704,7 @@ const NAME_TO_ID = [
     [/rifampin|rifadin|rifampicin/i, 'rifampin'],
     [/ritonavir|norvir/i, 'ritonavir'],
     [/rivaroxaban/i, 'rivaroxaban'],
+    [/ruconest|conestat/i, 'ruconest'],
     [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
     [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
     [/sodium\s*bicarbonate|sodium\s*bicarb|nahco3|bicarb(?!onate)/i, 'sodium-bicarbonate'],
