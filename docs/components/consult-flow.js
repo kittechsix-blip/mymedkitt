@@ -372,6 +372,18 @@ function renderFlowHeader(container, categoryId) {
     const title = document.createElement('div');
     title.className = 'consult-flow-header__title';
     title.textContent = getConsultTitle(currentTreeId ?? '');
+    // Module progress indicator
+    const progress = document.createElement('div');
+    progress.className = 'consult-flow-header__progress';
+    if (controller) {
+        const engine = controller.getEngine();
+        const currentModule = engine.getCurrentModule();
+        const totalModules = engine.getTotalModules();
+        if (currentModule !== null && totalModules > 0) {
+            progress.textContent = `${currentModule}/${totalModules}`;
+            progress.setAttribute('aria-label', `Module ${currentModule} of ${totalModules}`);
+        }
+    }
     // Share button
     const shareBtn = document.createElement('button');
     shareBtn.className = 'consult-flow-header__share';
@@ -412,6 +424,7 @@ function renderFlowHeader(container, categoryId) {
     header.appendChild(backBtn);
     header.appendChild(resetBtn);
     header.appendChild(title);
+    header.appendChild(progress);
     header.appendChild(shareBtn);
     header.appendChild(homeBtn);
     container.appendChild(header);

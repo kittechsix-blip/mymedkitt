@@ -1,0 +1,28 @@
+{
+  "name": "mymedkitt-optimization-loop",
+  "version": "1.0.0",
+  "description": "Autonomous optimization loop for myMedKitt PWA",
+  "type": "module",
+  "scripts": {
+    "optimize": "bun run runner.ts",
+    "optimize:ux": "bun run runner.ts --type ux",
+    "optimize:content": "bun run runner.ts --type content",
+    "optimize:search": "bun run runner.ts --type search",
+    "optimize:all": "bun run runner.ts --all",
+    "optimize:overnight": "bun run runner.ts --all --duration 8h",
+    "winners:review": "bun run scripts/review-winners.ts",
+    "winners:apply": "bun run scripts/apply-winners.ts",
+    "dry-run": "bun run runner.ts --dry-run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "lighthouse": "^12.0.0",
+    "puppeteer": "^23.0.0",
+    "fuse.js": "^7.0.0",
+    "text-readability": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
+  }
+}

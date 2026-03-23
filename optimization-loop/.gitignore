@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Results (large, regenerable)
+results/
+
+# Keep winners for review
+# winners/
+
+# Bun lockfile
+bun.lockb
