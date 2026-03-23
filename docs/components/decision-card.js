@@ -276,6 +276,26 @@ function renderTreatment(container, treatment) {
     heading.className = 'treatment-heading';
     heading.textContent = 'Treatment';
     section.appendChild(heading);
+    // Dosing Summary Bar - quick glance at key doses
+    const summary = document.createElement('div');
+    summary.className = 'dosing-summary';
+    const firstLineRow = document.createElement('div');
+    firstLineRow.className = 'dosing-summary-row';
+    firstLineRow.innerHTML = `<span class="dosing-label">1st:</span> <span class="dosing-value">${treatment.firstLine.drug} ${treatment.firstLine.dose} ${treatment.firstLine.route}</span>`;
+    summary.appendChild(firstLineRow);
+    if (treatment.alternative) {
+        const altRow = document.createElement('div');
+        altRow.className = 'dosing-summary-row';
+        altRow.innerHTML = `<span class="dosing-label">Alt:</span> <span class="dosing-value">${treatment.alternative.drug} ${treatment.alternative.dose} ${treatment.alternative.route}</span>`;
+        summary.appendChild(altRow);
+    }
+    if (treatment.pcnAllergy) {
+        const pcnRow = document.createElement('div');
+        pcnRow.className = 'dosing-summary-row dosing-pcn';
+        pcnRow.innerHTML = `<span class="dosing-label">PCN\u2205:</span> <span class="dosing-value">${treatment.pcnAllergy.drug} ${treatment.pcnAllergy.dose}</span>`;
+        summary.appendChild(pcnRow);
+    }
+    section.appendChild(summary);
     section.appendChild(renderDrugCard(treatment.firstLine));
     if (treatment.alternative) {
         const altDetails = document.createElement('details');
