@@ -10,6 +10,7 @@ import type { Category } from '../models/types.js';
 import { getAllDrugs } from '../services/drug-service.js';
 import { getAllCalculators } from './calculator.js';
 import { showDrugModal } from './drug-store.js';
+import { search, buildSearchIndex, type SearchResult } from '../services/search-service.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -172,6 +173,9 @@ export function renderDashboard(container: HTMLElement): void {
 
   container.appendChild(dashboard);
 
+  // ---- Build search index (deferred to avoid blocking render) ----
+  requestIdleCallback(() => buildSearchIndex(), { timeout: 1000 });
+
   // ---- Hide global app header (dashboard has its own logo) ----
   const appHeader = document.querySelector('.app-header') as HTMLElement | null;
   if (appHeader) appHeader.style.display = 'none';
@@ -180,9 +184,9 @@ export function renderDashboard(container: HTMLElement): void {
   const globalTabBar = document.getElementById('bottom-tab-bar');
   if (globalTabBar) globalTabBar.style.display = '';
 
-  // ---- Search Logic ----
+  // ---- Search Logic (Fuse.js fuzzy search) ----
   searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim().toLowerCase();
+    const query = searchInput.value.trim();
     if (query.length === 0) {
       grid.style.display = '';
       searchResults.style.display = 'none';
@@ -192,56 +196,14 @@ export function renderDashboard(container: HTMLElement): void {
     grid.style.display = 'none';
     searchResults.style.display = 'block';
     searchResults.innerHTML = '';
-    const results = buildSearchResults(query);
+    const results = search(query);
     searchResults.appendChild(renderSearchResultsList(results));
   });
 }
 
 // ===================================================================
-// Search
+// Search (powered by SearchService with Fuse.js fuzzy matching)
 // ===================================================================
-
-interface SearchResult {
-  type: 'category' | 'consult' | 'drug' | 'calculator';
-  label: string;
-  sublabel: string;
-  route: string;
-  drugId?: string;
-}
-
-function buildSearchResults(query: string): SearchResult[] {
-  const results: SearchResult[] = [];
-  const categories = getAllCategories();
-  const seenTreeIds = new Set<string>();
-
-  for (const cat of categories) {
-    if (cat.name.toLowerCase().includes(query)) {
-      const route = TOOL_ROUTES[cat.id]?.route || `/category/${cat.id}`;
-      results.push({ type: 'category', label: cat.name, sublabel: `${cat.decisionTrees.length} consults`, route });
-    }
-    for (const tree of cat.decisionTrees) {
-      if (seenTreeIds.has(tree.id)) continue;
-      if (tree.title.toLowerCase().includes(query) || tree.subtitle.toLowerCase().includes(query)) {
-        seenTreeIds.add(tree.id);
-        results.push({ type: 'consult', label: tree.title, sublabel: tree.subtitle, route: `/tree/${tree.id}` });
-      }
-    }
-  }
-
-  for (const drug of getAllDrugs()) {
-    if (drug.name.toLowerCase().includes(query) || drug.genericName.toLowerCase().includes(query) || drug.drugClass.toLowerCase().includes(query)) {
-      results.push({ type: 'drug', label: drug.name, sublabel: drug.drugClass, route: '/drugs', drugId: drug.id });
-    }
-  }
-
-  for (const calc of getAllCalculators()) {
-    if (calc.title.toLowerCase().includes(query) || calc.subtitle.toLowerCase().includes(query)) {
-      results.push({ type: 'calculator', label: calc.title, sublabel: calc.subtitle, route: `/calculator/${calc.id}` });
-    }
-  }
-
-  return results;
-}
 
 const TYPE_LABELS: Record<string, string> = {
   category: 'Categories',

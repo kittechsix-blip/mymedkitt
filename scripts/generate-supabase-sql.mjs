@@ -93,6 +93,7 @@ const TREE_REGISTRY = {
   'distal-radius':    { prefix: 'DISTAL_RADIUS',       entryNodeId: 'dr-start',           categoryId: 'orthopedics' },
   'splinting':        { prefix: 'SPLINTING',           entryNodeId: 'splint-start',       categoryId: 'orthopedics' },
   'neurosyphilis':    { prefix: 'NEUROSYPHILIS',       entryNodeId: 'ns-start',           categoryId: 'infectious-disease' },
+  'syphilis':         { prefix: 'SYPHILIS',            entryNodeId: 'syph-start',         categoryId: 'infectious-disease' },
   'rabies':           { prefix: 'RABIES',              entryNodeId: 'rabies-start',       categoryId: 'infectious-disease' },
   'burns':            { prefix: 'BURNS',               entryNodeId: 'burn-start',         categoryId: 'trauma-surg' },
   'ich':              { prefix: 'ICH',                 entryNodeId: 'ich-start',          categoryId: 'neurology' },
@@ -111,6 +112,7 @@ const TREE_REGISTRY = {
   'thyroid':              { prefix: 'THYROID',               entryNodeId: 'thyroid-start',  categoryId: 'nephro-rheum-endo' },
   'anaphylaxis':          { prefix: 'ANAPHYLAXIS',           entryNodeId: 'anaph-start',    categoryId: 'emergency-medicine' },
   'angioedema':           { prefix: 'ANGIOEDEMA',            entryNodeId: 'angio-start',    categoryId: 'emergency-medicine' },
+  'sickle-cell':          { prefix: 'SICKLE_CELL',           entryNodeId: 'scd-start',      categoryId: 'heme-onc' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -133,6 +135,7 @@ const CROSS_LISTINGS = {
   'hiv':              [{ categoryId: 'emergency-medicine' }],
   'sah':              [{ categoryId: 'emergency-medicine' }],
   'delirium':         [{ categoryId: 'emergency-medicine' }],
+  'sickle-cell':      [{ categoryId: 'pediatrics' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
