@@ -237,6 +237,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'vp-rx', label: 'VP Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'sepsis-vp-init' },
     { id: 'abx', label: 'Abx Table', icon: '\uD83D\uDC8A', action: 'overlay', target: 'sepsis-abx-table' },
   ],
+  'dka': [
+    { id: 'anion-gap', label: 'Anion Gap', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
+    { id: 'insulin-drip', label: 'Insulin Drip', icon: '\uD83D\uDC89', action: 'jump', target: 'dka-insulin-start' },
+    { id: 'k-repletion', label: 'K Repletion', icon: '\u26A1', action: 'jump', target: 'dka-potassium-check' },
+    { id: 'fluid-deficit', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'jump', target: 'dka-fluid-management' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

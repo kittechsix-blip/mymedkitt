@@ -338,12 +338,52 @@ async function main() {
       // Search mode: find article URL first
       const query = args[2];
       if (source === 'ebmedicine') {
-        await page.goto(`https://www.ebmedicine.net/search?q=${encodeURIComponent(query)}`, { waitUntil: 'networkidle', timeout: 30000 });
+        // Login to EBMedicine first, then use their internal search form via JS
+        await page.goto('https://www.ebmedicine.net/login', { waitUntil: 'networkidle', timeout: 30000 });
+        await dismissCookieBanner(page);
+        const hasLoginForm = await page.$('#username');
+        if (hasLoginForm) {
+          console.error('  Logging into EBMedicine for search...');
+          await page.fill('#username', env.EBMEDICINE_EMAIL);
+          await page.fill('#password', env.EBMEDICINE_PASSWORD);
+          await page.check('#rememberMe').catch(() => {});
+          await page.click('#login');
+          await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 15000 }).catch(() => {});
+        }
+
+        // Navigate to homepage and submit search via JavaScript (form is hidden in CSS)
+        await page.goto('https://www.ebmedicine.net', { waitUntil: 'networkidle', timeout: 30000 });
+        await dismissCookieBanner(page);
+        console.error('  Submitting search for: ' + query);
+        await page.evaluate((q) => {
+          // Find the search form and submit it directly
+          const forms = document.querySelectorAll('form');
+          for (const form of forms) {
+            const input = form.querySelector('input[name="search_string"]');
+            if (input) {
+              input.value = q;
+              form.submit();
+              return;
+            }
+          }
+        }, query);
+        await page.waitForNavigation({ waitUntil: 'networkidle', timeout: 15000 }).catch(() => {});
+        console.error('  Search results URL:', page.url());
+
+        // Find first topic link in results
         const firstResult = await page.evaluate(() => {
-          const link = document.querySelector('a[href*="/topics/"]');
-          return link ? link.href : null;
+          const links = Array.from(document.querySelectorAll('a'));
+          for (const link of links) {
+            const href = link.href;
+            if (href && href.includes('/topics/') && !href.includes('login')) {
+              return href;
+            }
+          }
+          return null;
         });
         if (!firstResult) {
+          const pageText = await page.evaluate(() => document.body.innerText.slice(0, 500));
+          console.error('  Page content preview:', pageText);
           console.error('No EBMedicine results found for: ' + query);
           process.exit(1);
         }

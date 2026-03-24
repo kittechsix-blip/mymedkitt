@@ -45,41 +45,18 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    - If `supabase-hotfix-update.sql` was generated → use it (step 9)
    - If it shows `⚠ Unknown tree` warnings or "No node-level changes detected" but you changed tree nodes → the script failed. Proceed to 4b.
 
-   **4b. If cache-sync failed to generate SQL, manually generate it:**
-   Identify ALL tree IDs and node IDs that were modified in this deploy. Then generate UPDATE SQL:
+   **4b. Push directly via REST API (preferred — no copy-paste):**
    ```bash
-   node -e "
-   // List ALL changed trees and their modified node IDs
-   const changes = {
-     '<tree-id>': ['<node-id-1>', '<node-id-2>'],
-     // Add more trees as needed
-   };
-   async function run() {
-     const lines = ['BEGIN;', ''];
-     for (const [treeId, nodeIds] of Object.entries(changes)) {
-       const m = await import('./docs/data/trees/' + treeId + '.js');
-       const prefix = Object.keys(m).find(k => k.endsWith('_NODES'));
-       const nodes = m[prefix];
-       for (const nid of nodeIds) {
-         const node = nodes.find(n => n.id === nid);
-         if (!node) { console.error('NOT FOUND:', nid); continue; }
-         // Use E'' escape strings so \\n becomes actual newlines in PostgreSQL
-         const body = node.body.replace(/'/g, \"''\").replace(/\\n/g, '\\\\n');
-         const rec = node.recommendation ? node.recommendation.replace(/'/g, \"''\").replace(/\\n/g, '\\\\n') : null;
-         lines.push('-- ' + treeId + ': ' + nid);
-         lines.push(\"UPDATE decision_nodes SET body = E'\" + body + \"'\" + (rec ? \", recommendation = E'\" + rec + \"'\" : '') + \" WHERE id = '\" + nid + \"' AND tree_id = '\" + treeId + \"';\");
-         lines.push('');
-       }
-     }
-     lines.push('COMMIT;');
-     require('fs').writeFileSync('supabase-hotfix-update.sql', lines.join('\\n'));
-     console.log('Written: supabase-hotfix-update.sql');
-   }
-   run();
-   "
+   node scripts/supabase-push.mjs <tree-id> --update
+   ```
+   This reads compiled JS from `docs/` and pushes nodes + citations + metadata directly to Supabase via REST API. No SQL editor needed.
+
+   For new consults, omit `--update`:
+   ```bash
+   node scripts/supabase-push.mjs <tree-id>
    ```
 
-   **4c. Open and walk user through paste:**
+   **4c. Fallback — manual SQL paste (only if REST push fails):**
    ```bash
    open -a TextEdit supabase-hotfix-update.sql
    ```
@@ -102,31 +79,11 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    - Include `--drugs` for any NEW drugs added in this consult
    - Include `--info-pages` for any NEW info pages added
 
-   **Then split for Supabase paste:**
+   **Then push directly via REST API (preferred):**
    ```bash
-   mkdir -p supabase/<tree-id>
-   python3 -c "
-   import re
-   with open('supabase-<tree-id>-insert.sql') as f:
-       content = f.read()
-   parts = re.split(r'(^-- [4-9]\..*$)', content, flags=re.MULTILINE)
-   file1, file2, file3 = [], [], []
-   current = 1
-   for part in parts:
-       if re.match(r'^-- 4\.', part): current = 2
-       elif re.match(r'^-- [56]\.', part) and current == 2: current = 3
-       [file1, file2, file3][current-1].append(part)
-   with open('supabase/<tree-id>/01-tree-metadata.sql', 'w') as f:
-       f.write(''.join(file1).rstrip() + '\nCOMMIT;\n')
-   with open('supabase/<tree-id>/02-nodes.sql', 'w') as f:
-       f.write('BEGIN;\n' + ''.join(file2).rstrip() + '\nCOMMIT;\n')
-   with open('supabase/<tree-id>/03-drugs-infopages.sql', 'w') as f:
-       f.write('BEGIN;\n' + ''.join(file3).rstrip() + '\n')
-   print('Done')
-   "
+   node scripts/supabase-push.mjs <tree-id>
    ```
-
-   Walk user through 3 pastes (open each in TextEdit → Cmd+A → Cmd+C → Supabase New Query → Cmd+V → Run).
+   Add `--drugs id1,id2` and `--info-pages id1,id2` flags for any new drugs/info pages.
 
    **Skip this step** if no new consult was added.
 
