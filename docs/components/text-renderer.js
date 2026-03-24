@@ -29,8 +29,8 @@ export function appendBoldAware(parent, text) {
  *  [text](#/calculator/id), [text](#/tree/id), [text](https://url) links, and [N] citation refs. */
 export function renderBodyText(container, text) {
     const lines = text.split('\n');
-    // Quick Fire grouping only applies when mode is ON and we're inside an active decision card
-    const useQuickFire = isQuickFireMode() && !!container.closest('.decision-card--active');
+    // Quick Fire grouping only applies when mode is ON
+    const useQuickFire = isQuickFireMode();
     if (!useQuickFire) {
         // Normal mode: plain paragraphs, no qf wrappers
         for (const line of lines) {

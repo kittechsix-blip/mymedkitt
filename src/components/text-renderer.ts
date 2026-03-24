@@ -32,8 +32,8 @@ export function appendBoldAware(parent: HTMLElement, text: string): void {
 export function renderBodyText(container: HTMLElement, text: string): void {
   const lines = text.split('\n');
 
-  // Quick Fire grouping only applies when mode is ON and we're inside an active decision card
-  const useQuickFire = isQuickFireMode() && !!container.closest('.decision-card--active');
+  // Quick Fire grouping only applies when mode is ON
+  const useQuickFire = isQuickFireMode();
 
   if (!useQuickFire) {
     // Normal mode: plain paragraphs, no qf wrappers
