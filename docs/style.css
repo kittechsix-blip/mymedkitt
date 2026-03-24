@@ -3123,7 +3123,80 @@ body {
 }
 
 .dosing-banner__pill--copied::after {
-  content: ' ✓';
+  content: ' Copied';
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.dosing-banner__pill-text {
+  cursor: pointer;
+}
+
+.dosing-banner__pill-remove {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0 0 0 6px;
+  margin-left: 2px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.dosing-banner__pill-remove:hover {
+  color: #ff6b6b;
+}
+
+.dosing-banner__clear {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: all 0.15s ease;
+}
+
+.dosing-banner__clear:hover {
+  background: rgba(255, 107, 107, 0.3);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: #fff;
+}
+
+/* Add to Doses button in drug calculator */
+.dose-calc-add-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dose-calc-add-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 71, 42, 0.3);
+}
+
+.dose-calc-add-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.dose-calc-add-btn:disabled {
+  background: #4CAF50;
+  cursor: default;
+  opacity: 0.9;
 }
 
 /* ===================================================================

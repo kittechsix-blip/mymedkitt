@@ -11,9 +11,8 @@ import { renderContextualToolbar, removeContextualToolbar } from './contextual-t
 import { getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
-// REMOVED: Dosing banner was extracting doses via regex from free text,
-// which caused dangerous errors (e.g., showing max/toxic doses as recommendations).
-// import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
+// SAFE: Dosing banner now only shows doses the user explicitly adds (no regex extraction)
+import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 
 let controller: ConsultFlowController | null = null;
@@ -106,6 +105,9 @@ function renderFlow(container: HTMLElement): void {
   // Specialty-colored header
   const categoryId = currentConfig.categoryId || findCategoryId(currentTreeId ?? '');
   renderFlowHeader(container, categoryId);
+
+  // Dosing banner (shows user-added doses, safe - no regex extraction)
+  renderDosingBanner(container);
 
   // Consult search bar
   renderConsultSearch(container);

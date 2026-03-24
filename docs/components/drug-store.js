@@ -3,6 +3,7 @@
 // Drug names in tree body text use [name](#/drug/id) to open the modal.
 import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
+import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 // -------------------------------------------------------------------
 // Drug List View (Medical Drug Reference category page)
 // -------------------------------------------------------------------
@@ -158,7 +159,12 @@ export function showDrugModal(drugId, indicationHint) {
             let calcPanel = null;
             if (dose.weightCalc) {
                 const calcs = Array.isArray(dose.weightCalc) ? dose.weightCalc : [dose.weightCalc];
-                calcPanel = buildWeightCalcPanel(calcs);
+                const drugCtx = {
+                    name: drug.name,
+                    route: drug.route,
+                    indication: dose.indication,
+                };
+                calcPanel = buildWeightCalcPanel(calcs, drugCtx);
                 calcPanel.style.display = 'none';
             }
             const regimen = document.createElement('div');
@@ -355,7 +361,7 @@ function fmtNum(n) {
     return n % 1 === 0 ? String(n) : n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
 }
 /** Build the dose result display for all WeightCalc entries */
-function renderDoseResults(resultsEl, calcs, weightKg, weightSource) {
+function renderDoseResults(resultsEl, calcs, weightKg, weightSource, drugCtx) {
     resultsEl.innerHTML = '';
     resultsEl.style.display = 'block';
     const header = document.createElement('div');
@@ -366,6 +372,7 @@ function renderDoseResults(resultsEl, calcs, weightKg, weightSource) {
         const row = document.createElement('div');
         row.className = 'dose-calc-result-row';
         const { dose, capped, rawDose } = calcDose(wc, weightKg);
+        const doseStr = `${fmtNum(dose)} ${wc.unit}`;
         // Label (if multiple calcs)
         if (wc.label) {
             const label = document.createElement('div');
@@ -403,11 +410,31 @@ function renderDoseResults(resultsEl, calcs, weightKg, weightSource) {
             detail.textContent = detailText;
             row.appendChild(detail);
         }
+        // Add to doses button (if drug context provided)
+        if (drugCtx) {
+            const addBtn = document.createElement('button');
+            addBtn.className = 'dose-calc-add-btn';
+            const alreadyAdded = isDoseInList(drugCtx.name, doseStr);
+            addBtn.textContent = alreadyAdded ? '\u2713 Added' : '+ Add to Doses';
+            addBtn.disabled = alreadyAdded;
+            addBtn.addEventListener('click', () => {
+                addToDosingList({
+                    drug: drugCtx.name,
+                    dose: doseStr,
+                    route: drugCtx.route,
+                    indication: wc.label || drugCtx.indication,
+                    weight: weightKg,
+                });
+                addBtn.textContent = '\u2713 Added';
+                addBtn.disabled = true;
+            });
+            row.appendChild(addBtn);
+        }
         resultsEl.appendChild(row);
     }
 }
 /** Build the full weight-based dose calculator panel */
-function buildWeightCalcPanel(calcs) {
+function buildWeightCalcPanel(calcs, drugCtx) {
     const panel = document.createElement('div');
     panel.className = 'dose-calc-panel';
     // Results area (shared by both pathways)
@@ -458,7 +485,7 @@ function buildWeightCalcPanel(calcs) {
         const w = parseFloat(knownInput.value);
         if (!w || w <= 0)
             return;
-        renderDoseResults(resultsEl, calcs, w, '');
+        renderDoseResults(resultsEl, calcs, w, '', drugCtx);
     });
     knownInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter')
@@ -490,7 +517,7 @@ function buildWeightCalcPanel(calcs) {
         row.addEventListener('click', () => {
             broselowRows.forEach(r => r.classList.remove('selected'));
             row.classList.add('selected');
-            renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color}, ${zone.weightMin}\u2013${zone.weightMax} kg)`);
+            renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color}, ${zone.weightMin}\u2013${zone.weightMax} kg)`, drugCtx);
         });
         broselowRows.push(row);
         broselowContainer.appendChild(row);
@@ -549,7 +576,7 @@ function buildWeightCalcPanel(calcs) {
         const idx = BROSELOW_ZONES.indexOf(zone);
         broselowRows[idx].classList.add('selected');
         lengthMatch.textContent = `\u2192 ${zone.color} zone`;
-        renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color} from ${fmtNum(cm)} cm)`);
+        renderDoseResults(resultsEl, calcs, zone.midpoint, `(Broselow ${zone.color} from ${fmtNum(cm)} cm)`, drugCtx);
         broselowRows[idx].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     });
     broselowPanel.appendChild(lengthToggle);
@@ -616,7 +643,7 @@ function buildWeightCalcPanel(calcs) {
             return;
         const weightKg = estimateWeight(age, activeBracket);
         const unitLabel = activeBracket === 'infant' ? 'mo' : 'yo';
-        renderDoseResults(resultsEl, calcs, weightKg, `(estimated from ${fmtNum(age)} ${unitLabel})`);
+        renderDoseResults(resultsEl, calcs, weightKg, `(estimated from ${fmtNum(age)} ${unitLabel})`, drugCtx);
     }
     ageCalcBtn.addEventListener('click', calcFromAge);
     ageInput.addEventListener('keydown', (e) => {

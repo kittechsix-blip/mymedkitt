@@ -1,155 +1,73 @@
 /**
- * Dosing Banner — Sticky summary of key dosing info
- * Shows extracted doses from current consult for quick reference.
- * Persists at top of card stack so user never loses the dose.
+ * Dosing Banner — Sticky summary of user-selected doses
+ * SAFE: Only displays doses the user explicitly adds (no regex extraction).
+ * Drugs are added via:
+ *   1. Completing a weight-based calculator
+ *   2. Clicking "Add to list" on a drug card
  */
 
-import type { DecisionNode } from '../models/types.js';
+import {
+  getDosingList,
+  removeFromDosingList,
+  clearDosingList,
+  subscribeToDosingList,
+  type DosingEntry,
+} from '../services/dosing-list.js';
 
 let bannerEl: HTMLElement | null = null;
+let unsubscribe: (() => void) | null = null;
 
-/** Regex patterns to extract dosing info */
-const DOSE_PATTERNS = [
-  // mg/kg patterns
-  /(\d+(?:\.\d+)?(?:\s*[-–]\s*\d+(?:\.\d+)?)?)\s*mg\/kg/gi,
-  // mcg/kg patterns
-  /(\d+(?:\.\d+)?(?:\s*[-–]\s*\d+(?:\.\d+)?)?)\s*mcg\/kg/gi,
-  // Fixed dose patterns (e.g., "5 mg IV", "100 mg PO")
-  /(\d+(?:\.\d+)?)\s*mg\s+(IV|IM|PO|SQ|SC|IN|PR)/gi,
-  // Drip rates
-  /(\d+(?:\.\d+)?(?:\s*[-–]\s*\d+(?:\.\d+)?)?)\s*(mcg|mg)\/min/gi,
-  /(\d+(?:\.\d+)?(?:\s*[-–]\s*\d+(?:\.\d+)?)?)\s*(mcg|mg)\/kg\/min/gi,
-];
-
-/** Drug name patterns to associate with doses */
-const DRUG_KEYWORDS = [
-  'metoprolol', 'diltiazem', 'amiodarone', 'adenosine', 'epinephrine', 'norepinephrine',
-  'fentanyl', 'morphine', 'ketamine', 'propofol', 'etomidate', 'rocuronium', 'succinylcholine',
-  'heparin', 'enoxaparin', 'tpa', 'alteplase', 'tenecteplase', 'ceftriaxone', 'vancomycin',
-  'hydrocortisone', 'dexamethasone', 'methylprednisolone', 'magnesium', 'calcium', 'bicarb',
-  'lovenox', 'levophed', 'lopressor', 'cardizem', 'narcan', 'naloxone',
-];
-
-export interface DosingEntry {
-  drug: string;
-  dose: string;
-  route?: string;
-}
-
-/** Extract dosing info from a node's text content */
-export function extractDosing(node: DecisionNode): DosingEntry[] {
-  const entries: DosingEntry[] = [];
-  const text = [node.body, node.recommendation, node.title].filter(Boolean).join(' ');
-  if (!text) return entries;
-
-  const textLower = text.toLowerCase();
-  const seen = new Set<string>();
-
-  // Look for drug names near dose patterns
-  for (const drugName of DRUG_KEYWORDS) {
-    if (textLower.includes(drugName)) {
-      // Find dose patterns near this drug mention
-      for (const pattern of DOSE_PATTERNS) {
-        pattern.lastIndex = 0;
-        let match;
-        while ((match = pattern.exec(text)) !== null) {
-          // Check if drug name is within ~100 chars of this dose
-          const dosePos = match.index;
-          const drugPos = textLower.indexOf(drugName);
-          if (Math.abs(dosePos - drugPos) < 100) {
-            const key = `${drugName}-${match[0]}`;
-            if (!seen.has(key)) {
-              seen.add(key);
-              entries.push({
-                drug: drugName.charAt(0).toUpperCase() + drugName.slice(1),
-                dose: match[0],
-                route: extractRoute(text, match.index),
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // If no drug-associated doses found, extract standalone doses
-  if (entries.length === 0) {
-    for (const pattern of DOSE_PATTERNS) {
-      pattern.lastIndex = 0;
-      let match;
-      while ((match = pattern.exec(text)) !== null) {
-        const key = match[0];
-        if (!seen.has(key)) {
-          seen.add(key);
-          entries.push({
-            drug: '',
-            dose: match[0],
-            route: extractRoute(text, match.index),
-          });
-        }
-        if (entries.length >= 3) break;
-      }
-      if (entries.length >= 3) break;
-    }
-  }
-
-  return entries.slice(0, 3); // Max 3 entries
-}
-
-/** Extract route (IV, IM, PO, etc.) near a dose */
-function extractRoute(text: string, nearIndex: number): string | undefined {
-  const nearby = text.slice(Math.max(0, nearIndex - 30), nearIndex + 50);
-  const routeMatch = nearby.match(/\b(IV|IM|PO|SQ|SC|IN|PR|IO|ETT)\b/i);
-  return routeMatch ? routeMatch[1].toUpperCase() : undefined;
-}
-
-/** Render the sticky dosing banner */
-export function renderDosingBanner(container: HTMLElement, nodes: DecisionNode[]): void {
+/** Render the sticky dosing banner from the explicit list */
+export function renderDosingBanner(container: HTMLElement): void {
   removeDosingBanner();
 
-  // Collect dosing from all provided nodes
-  const allEntries: DosingEntry[] = [];
-  for (const node of nodes) {
-    const entries = extractDosing(node);
-    allEntries.push(...entries);
-  }
+  const list = getDosingList();
 
-  // Dedupe and limit
-  const unique: DosingEntry[] = [];
-  const seen = new Set<string>();
-  for (const entry of allEntries) {
-    const key = `${entry.drug}-${entry.dose}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      unique.push(entry);
-    }
-    if (unique.length >= 4) break;
-  }
+  // Subscribe to updates
+  unsubscribe = subscribeToDosingList(() => {
+    renderDosingBanner(container);
+  });
 
-  if (unique.length === 0) return; // No dosing to show
+  if (list.length === 0) return; // Nothing to show
 
   const banner = document.createElement('div');
   banner.className = 'dosing-banner';
 
   const label = document.createElement('span');
   label.className = 'dosing-banner__label';
-  label.textContent = 'Dosing:';
+  label.textContent = 'Doses:';
   banner.appendChild(label);
 
   const pills = document.createElement('div');
   pills.className = 'dosing-banner__pills';
 
-  for (const entry of unique) {
-    const pill = document.createElement('button');
+  for (const entry of list) {
+    const pill = document.createElement('div');
     pill.className = 'dosing-banner__pill';
 
-    let text = entry.dose;
-    if (entry.drug) text = `${entry.drug} ${text}`;
+    // Build display text
+    let text = entry.drug;
+    if (entry.dose) text += ` ${entry.dose}`;
     if (entry.route) text += ` ${entry.route}`;
-    pill.textContent = text;
 
-    // Copy to clipboard on tap
-    pill.addEventListener('click', () => {
+    const textSpan = document.createElement('span');
+    textSpan.className = 'dosing-banner__pill-text';
+    textSpan.textContent = text;
+    pill.appendChild(textSpan);
+
+    // Remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'dosing-banner__pill-remove';
+    removeBtn.textContent = '\u00D7';
+    removeBtn.setAttribute('aria-label', `Remove ${entry.drug}`);
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeFromDosingList(entry.id);
+    });
+    pill.appendChild(removeBtn);
+
+    // Copy to clipboard on tap (not on remove button)
+    textSpan.addEventListener('click', () => {
       navigator.clipboard.writeText(text).then(() => {
         pill.classList.add('dosing-banner__pill--copied');
         setTimeout(() => pill.classList.remove('dosing-banner__pill--copied'), 1000);
@@ -160,6 +78,17 @@ export function renderDosingBanner(container: HTMLElement, nodes: DecisionNode[]
   }
 
   banner.appendChild(pills);
+
+  // Clear all button (if 2+ items)
+  if (list.length >= 2) {
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'dosing-banner__clear';
+    clearBtn.textContent = 'Clear';
+    clearBtn.addEventListener('click', () => {
+      clearDosingList();
+    });
+    banner.appendChild(clearBtn);
+  }
 
   // Insert after the header
   const header = container.querySelector('.consult-flow-header');
@@ -174,6 +103,10 @@ export function renderDosingBanner(container: HTMLElement, nodes: DecisionNode[]
 
 /** Remove the dosing banner */
 export function removeDosingBanner(): void {
+  if (unsubscribe) {
+    unsubscribe();
+    unsubscribe = null;
+  }
   bannerEl?.remove();
   bannerEl = null;
 }
