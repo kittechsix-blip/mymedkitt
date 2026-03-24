@@ -11,7 +11,9 @@ import { renderContextualToolbar, removeContextualToolbar } from './contextual-t
 import { getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
-import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
+// REMOVED: Dosing banner was extracting doses via regex from free text,
+// which caused dangerous errors (e.g., showing max/toxic doses as recommendations).
+// import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 
 let controller: ConsultFlowController | null = null;
@@ -100,7 +102,6 @@ function renderFlow(container: HTMLElement): void {
   if (!controller || !currentConfig) return;
 
   container.innerHTML = '';
-  removeDosingBanner();
 
   // Specialty-colored header
   const categoryId = currentConfig.categoryId || findCategoryId(currentTreeId ?? '');
@@ -189,12 +190,6 @@ function renderFlow(container: HTMLElement): void {
   }
 
   container.appendChild(stackContainer);
-
-  // Sticky dosing banner — extract doses from answered cards + current card
-  const allNodesForDosing = cardStack.map(e => e.node);
-  const activeNodeForDosing = controller.getCurrentNode();
-  if (activeNodeForDosing) allNodesForDosing.push(activeNodeForDosing);
-  renderDosingBanner(container, allNodesForDosing);
 
   // Contextual toolbar
   renderContextualToolbar(currentTreeId ?? '', controller, currentEntryNodeId ?? '', currentConfig?.moduleLabels);
