@@ -10,7 +10,7 @@
 **What:** Complete UI/UX redesign of MedKitt — a mobile-first PWA for EM clinical decision trees. Pure frontend overhaul; backend, clinical content, and data models are unchanged.
 **Who:** Andy, EM physician at Dell Seton Medical Center.
 **Where:** `~/Desktop/myMedKitt/` (fork of MedKitt v1.36)
-**Origin:** MedKitt v1.36 — 28 consults, 119 drugs, 7+ calculators
+**Origin:** MedKitt v1.36 — 46 consults, 119 drugs, 7+ calculators
 **Deploy:** GitHub Pages from `docs/` directory.
 **Build:** `bunx tsc` (TypeScript compilation via Bun)
 

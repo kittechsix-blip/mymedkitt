@@ -266,6 +266,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 32,
         entryNodeId: 'thyroid-start',
+      },
+      {
+        id: 'dka',
+        title: 'Diabetic Ketoacidosis',
+        subtitle: 'Diagnosis \u2192 Severity \u2192 Fluids \u2192 Insulin \u2192 Electrolytes \u2192 Special Scenarios',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 45,
+        entryNodeId: 'dka-start',
       }
     ],
     isCustom: false,

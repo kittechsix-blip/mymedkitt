@@ -277,6 +277,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/acetaminophen.js');
             return { nodes: m.ACETAMINOPHEN_OD_NODES, entryNodeId: 'apap-start', categoryId: 'toxicology', moduleLabels: m.ACETAMINOPHEN_OD_MODULE_LABELS, citations: m.ACETAMINOPHEN_OD_CITATIONS };
         },
+        'dka': async () => {
+            const m = await import('../data/trees/dka.js');
+            return { nodes: m.DKA_NODES, entryNodeId: 'dka-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DKA_MODULE_LABELS, citations: m.DKA_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
