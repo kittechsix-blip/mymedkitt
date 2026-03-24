@@ -76,11 +76,21 @@ export function renderSpecialtyView(container: HTMLElement, categoryId: string):
     searchInput.addEventListener('input', () => {
       const q = searchInput.value.trim().toLowerCase();
       const buttons = list.querySelectorAll('.btn-3d') as NodeListOf<HTMLElement>;
+      if (!q) {
+        buttons.forEach(btn => { btn.style.display = ''; btn.style.order = ''; });
+        return;
+      }
       buttons.forEach((btn, i) => {
-        const match = !q ||
-          sorted[i].title.toLowerCase().includes(q) ||
-          sorted[i].subtitle.toLowerCase().includes(q);
-        btn.style.display = match ? '' : 'none';
+        const t = sorted[i].title.toLowerCase();
+        const s = sorted[i].subtitle.toLowerCase();
+        // Rank: 0=exact, 1=title starts with, 2=word starts with, 3=contains, -1=no match
+        let rank = -1;
+        if (t === q) rank = 0;
+        else if (t.startsWith(q)) rank = 1;
+        else if (`${t} ${s}`.split(/[\s/(),\-]+/).some(w => w.startsWith(q))) rank = 2;
+        else if (t.includes(q) || s.includes(q)) rank = 3;
+        btn.style.display = rank >= 0 ? '' : 'none';
+        btn.style.order = rank >= 0 ? String(rank) : '';
       });
     });
 

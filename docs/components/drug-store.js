@@ -5,6 +5,54 @@ import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 // -------------------------------------------------------------------
+// Ranked Search Helper
+// -------------------------------------------------------------------
+/**
+ * Rank score for matching: lower = better match.
+ * 0 = exact name match, 1 = name starts with query,
+ * 2 = word in any field starts with query, 3 = substring match anywhere.
+ * Returns -1 for no match.
+ */
+function rankMatch(fields, query) {
+    const primary = fields[0]; // primary field (name) gets prefix boost
+    if (primary === query)
+        return 0; // exact match
+    if (primary.startsWith(query))
+        return 1; // name starts with query
+    // Check if any word in any field starts with query
+    for (const field of fields) {
+        const words = field.split(/[\s/(),\-]+/);
+        for (const word of words) {
+            if (word.startsWith(query))
+                return 2;
+        }
+    }
+    // Substring match anywhere in any field
+    for (const field of fields) {
+        if (field.includes(query))
+            return 3;
+    }
+    return -1; // no match
+}
+/** Search drugs with ranked results — prefix matches first */
+function rankedDrugSearch(drugs, query) {
+    const scored = [];
+    for (const drug of drugs) {
+        const fields = [
+            drug.name.toLowerCase(),
+            drug.genericName.toLowerCase(),
+            drug.drugClass.toLowerCase(),
+            ...drug.indications.map(i => i.toLowerCase()),
+        ];
+        const rank = rankMatch(fields, query);
+        if (rank >= 0) {
+            scored.push({ drug, rank });
+        }
+    }
+    scored.sort((a, b) => a.rank - b.rank || a.drug.name.localeCompare(b.drug.name));
+    return scored.map(s => s.drug);
+}
+// -------------------------------------------------------------------
 // Drug List View (Medical Drug Reference category page)
 // -------------------------------------------------------------------
 /** Render the drug reference list with search */
@@ -48,10 +96,7 @@ export function renderDrugList(container) {
         list.innerHTML = '';
         const query = filter.toLowerCase().trim();
         const filtered = query
-            ? allDrugs.filter(d => d.name.toLowerCase().includes(query) ||
-                d.genericName.toLowerCase().includes(query) ||
-                d.drugClass.toLowerCase().includes(query) ||
-                d.indications.some(ind => ind.toLowerCase().includes(query)))
+            ? rankedDrugSearch(allDrugs, query)
             : allDrugs;
         if (filtered.length === 0) {
             const empty = document.createElement('div');

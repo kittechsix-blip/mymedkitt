@@ -180,6 +180,11 @@ export function buildSearchIndex(): void {
 export function search(query: string): SearchResult[] {
   if (!query || query.trim().length === 0) return [];
 
+  // Safety: rebuild index if it's empty (race condition guard)
+  if (indexedDocs.length === 0) {
+    buildSearchIndex();
+  }
+
   const q = query.trim().toLowerCase();
 
   // Use Fuse.js if available

@@ -428,7 +428,7 @@ const AZITHROMYCIN = {
     genericName: 'Azithromycin',
     drugClass: 'Macrolide antibiotic',
     route: 'PO/IV',
-    indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea', 'SCD acute chest syndrome'],
+    indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea', 'SCD acute chest syndrome', 'Community-acquired pneumonia atypical coverage'],
     dosing: [
         {
             indication: 'Traveler diarrhea',
@@ -443,6 +443,10 @@ const AZITHROMYCIN = {
             indication: 'SCD acute chest syndrome',
             regimen: '10 mg/kg IV. Max 500 mg/dose. Covers atypical organisms (Mycoplasma, Chlamydia). Combine with Ceftriaxone for ACS.',
             weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 500, label: 'SCD ACS' },
+        },
+        {
+            indication: 'CAP atypical coverage',
+            regimen: '500 mg IV on day 1, then 250 mg PO daily for 4 additional days (total 5 days). Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila). Add to beta-lactam backbone when pneumonia is suspected source of sepsis. QTc prolongation risk — monitor ECG.',
         },
     ],
     contraindications: [
@@ -798,7 +802,7 @@ const CEFEPIME = {
     genericName: 'Cefepime hydrochloride',
     drugClass: '4th-Generation Cephalosporin',
     route: 'IV',
-    indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)'],
+    indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)'],
     dosing: [
         {
             indication: 'Sepsis/meningitis (0-28 days)',
@@ -813,6 +817,10 @@ const CEFEPIME = {
         {
             indication: 'Adult Nosocomial/Healthcare-Associated Meningitis',
             regimen: '2 g IV q8h. Alternative to meropenem for Pseudomonas coverage in post-neurosurgical or healthcare-associated meningitis. Combine with vancomycin for MRSA coverage.',
+        },
+        {
+            indication: 'Sepsis empiric coverage',
+            regimen: 'Adult: 2g IV q8h (consider extended infusion over 3-4 hours for maintenance doses). Antipseudomonal cephalosporin — less anaerobic coverage than piperacillin-tazobactam. ACORN trial: comparable to pip-tazo but slightly more neurologic dysfunction (small absolute difference). Adjust for renal impairment.',
         },
     ],
     contraindications: [
@@ -835,7 +843,7 @@ const CEFTRIAXONE = {
     genericName: 'Ceftriaxone',
     drugClass: 'Third-generation cephalosporin',
     route: 'IV',
-    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis'],
+    indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)'],
     dosing: [
         {
             indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -876,6 +884,10 @@ const CEFTRIAXONE = {
             indication: 'SCD meningitis',
             regimen: '100 mg/kg IV. Max 2 g/dose. Meningitic dosing for SCD patients with meningeal signs, AMS, or ill appearance. Combine with Vancomycin 20 mg/kg IV.',
             weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 2000, label: 'SCD meningitis' },
+        },
+        {
+            indication: 'Community sepsis',
+            regimen: 'Adult: 2g IV q24h. Third-generation cephalosporin — covers common community-acquired pathogens (E. coli, K. pneumoniae, S. pneumoniae). Does NOT cover Pseudomonas. For non-severe sepsis without Pseudomonas risk factors. Combine with atypical coverage (doxycycline or azithromycin) if pneumonia suspected.',
         },
     ],
     contraindications: [
@@ -1482,7 +1494,7 @@ const DOXYCYCLINE = {
     genericName: 'Doxycycline',
     drugClass: 'Tetracycline antibiotic',
     route: 'PO',
-    indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis'],
+    indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage'],
     dosing: [
         {
             indication: 'Primary / Secondary / Early latent syphilis (PCN allergy)',
@@ -1491,6 +1503,10 @@ const DOXYCYCLINE = {
         {
             indication: 'Late latent / Tertiary syphilis (PCN allergy)',
             regimen: '100 mg PO BID \u00D7 28 days.',
+        },
+        {
+            indication: 'CAP atypical coverage',
+            regimen: '100 mg IV or PO q12h. Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila) and tick-borne illnesses (Rickettsiae, Anaplasma, Ehrlichia). Preferred over azithromycin per IBCC for atypical coverage in sepsis. Add to beta-lactam backbone when CAP is suspected source.',
         },
     ],
     contraindications: [
@@ -1570,7 +1586,7 @@ const EPINEPHRINE = {
     genericName: 'Epinephrine',
     drugClass: 'Non-selective adrenergic agonist (alpha + beta)',
     route: 'IM/IV/IO/SQ/ET/Intracavernosal',
-    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor'],
+    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor', 'Septic shock (vasopressor infusion)'],
     dosing: [
         {
             indication: 'Anaphylaxis — IM (first-line)',
@@ -1612,6 +1628,10 @@ const EPINEPHRINE = {
                 { dosePerKg: 0.05, unit: 'mg', label: 'Low dose ET (0.05 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
                 { dosePerKg: 0.1, unit: 'mg', label: 'High dose ET (0.1 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
             ],
+        },
+        {
+            indication: 'Septic shock infusion',
+            regimen: '0.01-0.5 mcg/kg/min IV continuous infusion. Alternative first-line vasopressor for patients with bradycardia or cardiac dysfunction. CAT trial: outcomes similar to norepinephrine. Note: Increases lactate — rising lactate on epinephrine is expected and often a positive prognostic sign. Avoid if lactate >5 mM (may worsen acidosis — use dobutamine instead).',
         },
     ],
     contraindications: [
@@ -1951,7 +1971,7 @@ const FLUDROCORTISONE = {
     genericName: 'Fludrocortisone acetate',
     drugClass: 'Mineralocorticoid',
     route: 'PO',
-    indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension', 'Adrenal insufficiency maintenance (PAI only)', 'Pediatric AI maintenance'],
+    indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension', 'Adrenal insufficiency maintenance (PAI only)', 'Pediatric AI maintenance', 'Septic shock adjunct (with hydrocortisone)'],
     dosing: [
         {
             indication: 'Hyperkalemia adjunct',
@@ -1965,6 +1985,10 @@ const FLUDROCORTISONE = {
             indication: 'Pediatric AI maintenance',
             regimen: '50-200 μg PO daily. Higher doses may be needed in infants with salt-wasting congenital adrenal hyperplasia. Salt supplementation 1-2 g/day may be needed in infants. Monitor blood pressure, serum potassium, and plasma renin activity.',
             weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 0.2, label: 'Starting dose — titrate to renin' },
+        },
+        {
+            indication: 'Septic shock adjunct',
+            regimen: '50 mcg PO daily for 7 days, given with hydrocortisone. APROCCHSS trial: hydrocortisone + fludrocortisone reduced 90-day mortality (43% vs 49.1%) in septic shock. Mineralocorticoid action supplements glucocorticoid replacement.',
         },
     ],
     contraindications: [
@@ -2316,7 +2340,7 @@ const METHYLENE_BLUE = {
     genericName: 'Methylthioninium chloride',
     drugClass: 'Guanylate cyclase inhibitor / Vasopressor adjunct',
     route: 'IV',
-    indications: ['Refractory anaphylaxis (vasodilatory shock)', 'Vasoplegia (post-cardiopulmonary bypass)'],
+    indications: ['Refractory anaphylaxis (vasodilatory shock)', 'Vasoplegia (post-cardiopulmonary bypass)', 'Refractory septic shock (vasoplegic rescue)'],
     dosing: [
         {
             indication: 'Refractory anaphylaxis',
@@ -2325,6 +2349,11 @@ const METHYLENE_BLUE = {
                 { dosePerKg: 1, unit: 'mg', label: 'Standard dose (1 mg/kg)' },
                 { dosePerKg: 2, unit: 'mg', label: 'High dose (2 mg/kg)' },
             ],
+        },
+        {
+            indication: 'Refractory septic shock',
+            regimen: '1-2 mg/kg IV bolus over 15-30 minutes, then 0.5 mg/kg/h continuous infusion. Ibarra-Estrada 2023 RCT: earlier methylene blue → shorter time to vasopressor discontinuation, more vasopressor-free days, shorter ICU/hospital LOS. Consider when on multiple vasopressors + glucocorticoids. Inhibits inducible NO synthase → restores vascular tone.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'IV bolus dose (give 1-2 mg/kg)' },
         },
     ],
     contraindications: [
@@ -3144,11 +3173,11 @@ const POTASSIUM_CHLORIDE_ORAL = {
 };
 const PHENYLEPHRINE = {
     id: 'phenylephrine',
-    name: 'Phenylephrine (Intracavernosal)',
+    name: 'Phenylephrine',
     genericName: 'Phenylephrine',
     drugClass: 'Selective alpha-1 adrenergic agonist',
-    route: 'Intracavernosal',
-    indications: ['Ischemic priapism (first-line)', 'Post-ICI prolonged erection'],
+    route: 'Intracavernosal / IV',
+    indications: ['Ischemic priapism (first-line)', 'Post-ICI prolonged erection', 'Sepsis push-dose vasopressor (temporizing)'],
     dosing: [
         {
             indication: 'Ischemic priapism',
@@ -3157,6 +3186,10 @@ const PHENYLEPHRINE = {
         {
             indication: 'Pediatric / Sickle cell',
             regimen: '100 mcg (1 mL of 100 mcg/mL) per injection. Lower dose recommended.',
+        },
+        {
+            indication: 'Sepsis push dose vasopressor',
+            regimen: '100-200 mcg IV push every 2-5 minutes as needed (temporizing measure). Can also run as infusion: 40-200 mcg/min IV. Pure alpha-1 agonist — vasoconstriction only, no inotropy. Use while preparing norepinephrine infusion, or in severe tachycardia/tachyarrhythmia where beta-adrenergic stimulation is undesirable. NOT recommended as primary vasopressor for septic shock.',
         },
     ],
     contraindications: [
@@ -3704,7 +3737,7 @@ const VANCOMYCIN = {
     genericName: 'Vancomycin hydrochloride',
     drugClass: 'Glycopeptide',
     route: 'IV/PO',
-    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis'],
+    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage'],
     dosing: [
         {
             indication: 'Meningitic',
@@ -3724,6 +3757,11 @@ const VANCOMYCIN = {
             indication: 'SCD meningitis',
             regimen: '20 mg/kg IV over 60 min. Max 1500 mg. Combined with Ceftriaxone 100 mg/kg IV for suspected meningitis in SCD patients with meningeal signs, altered mental status, or ill appearance.',
             weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 1500, label: 'SCD meningitis' },
+        },
+        {
+            indication: 'Sepsis / MRSA coverage',
+            regimen: 'Loading dose: 25-30 mg/kg IV (based on actual body weight). Maintenance: 15-20 mg/kg IV q8-12h (adjust for renal function). Target trough 15-20 mcg/mL or AUC/MIC 400-600. Administer AFTER beta-lactam when giving both (beta-lactam first improves survival). Discontinue if no MRSA cultured within 48 hours.',
+            weightCalc: { dosePerKg: 25, unit: 'mg', label: 'Loading dose (actual body weight)' },
         },
     ],
     contraindications: [
@@ -3925,7 +3963,7 @@ const HYDROCORTISONE = {
     genericName: 'Hydrocortisone sodium succinate',
     drugClass: 'Corticosteroid (glucocorticoid + mineralocorticoid)',
     route: 'IV / IM / PO',
-    indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection', 'Thyroid storm', 'Decompensated hypothyroidism (stress dose)'],
+    indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection', 'Thyroid storm', 'Decompensated hypothyroidism (stress dose)', 'Septic shock (stress dose corticosteroid)'],
     dosing: [
         {
             indication: 'Adrenal crisis (adult)',
@@ -3959,6 +3997,10 @@ const HYDROCORTISONE = {
         {
             indication: 'Decompensated hypothyroidism (stress dose)',
             regimen: '100 mg IV bolus, then 50 mg IV q8h. CRITICAL: Give BEFORE thyroid hormone replacement \u2014 thyroid hormone accelerates cortisol metabolism, may precipitate adrenal crisis in patients with concurrent AI (~5-10%). Draw random cortisol before dosing if practical. Taper once hemodynamically stable and cortisol results available.',
+        },
+        {
+            indication: 'Septic shock',
+            regimen: '50 mg IV q6h OR 200 mg/day continuous infusion for vasopressor-dependent septic shock. ADRENAL trial: reduced time on vasopressors, ICU LOS, intubation duration. No increased superinfection risk. Consider adding fludrocortisone 50 mcg PO daily (APROCCHSS). Taper over 2-3 days when vasopressors discontinued.',
         },
     ],
     contraindications: [
@@ -5092,7 +5134,7 @@ const MEROPENEM = {
     genericName: 'Meropenem',
     drugClass: 'Carbapenem',
     route: 'IV',
-    indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis'],
+    indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis', 'Sepsis empiric / MDR coverage'],
     dosing: [
         {
             indication: 'Bacterial Meningitis',
@@ -5101,6 +5143,10 @@ const MEROPENEM = {
         {
             indication: 'Healthcare-Associated/Nosocomial Meningitis',
             regimen: '2 g IV q8h. Covers Pseudomonas aeruginosa, Acinetobacter, and other resistant gram-negative organisms. Combine with vancomycin for MRSA coverage. Use for post-neurosurgical, shunt-related, or basilar skull fracture-associated infections.',
+        },
+        {
+            indication: 'Sepsis empiric / MDR',
+            regimen: 'Adult: 1g IV q8h (standard) or 2g IV q8h (severe/CNS involvement). Extended infusion over 3 hours for maintenance dosing. Broadest gram-negative coverage including ESBL and AmpC producers. Reserve for high MDR risk: recent broad-spectrum antibiotics, known resistant organisms, healthcare-associated infections. Adjust for renal impairment.',
         },
     ],
     contraindications: [

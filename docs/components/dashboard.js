@@ -146,8 +146,8 @@ export function renderDashboard(container) {
     disclaimer.textContent = 'This tool is for educational and clinical decision support purposes only. It does not replace clinical judgment.';
     dashboard.appendChild(disclaimer);
     container.appendChild(dashboard);
-    // ---- Build search index (deferred to avoid blocking render) ----
-    requestIdleCallback(() => buildSearchIndex(), { timeout: 1000 });
+    // ---- Build search index eagerly so first keystroke always has results ----
+    buildSearchIndex();
     // ---- Hide global app header (dashboard has its own logo) ----
     const appHeader = document.querySelector('.app-header');
     if (appHeader)

@@ -173,8 +173,8 @@ export function renderDashboard(container: HTMLElement): void {
 
   container.appendChild(dashboard);
 
-  // ---- Build search index (deferred to avoid blocking render) ----
-  requestIdleCallback(() => buildSearchIndex(), { timeout: 1000 });
+  // ---- Build search index eagerly so first keystroke always has results ----
+  buildSearchIndex();
 
   // ---- Hide global app header (dashboard has its own logo) ----
   const appHeader = document.querySelector('.app-header') as HTMLElement | null;
