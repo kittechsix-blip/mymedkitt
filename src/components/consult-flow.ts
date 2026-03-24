@@ -12,7 +12,7 @@ import { getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 // SAFE: Dosing banner now only shows doses the user explicitly adds (no regex extraction)
-import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
+import { renderDosingBanner } from './dosing-banner.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 
 let controller: ConsultFlowController | null = null;

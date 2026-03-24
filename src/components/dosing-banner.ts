@@ -11,7 +11,6 @@ import {
   removeFromDosingList,
   clearDosingList,
   subscribeToDosingList,
-  type DosingEntry,
 } from '../services/dosing-list.js';
 
 let bannerEl: HTMLElement | null = null;
