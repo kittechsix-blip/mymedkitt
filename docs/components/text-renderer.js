@@ -51,8 +51,11 @@ export function renderBodyText(container, text) {
         if (!trimmed)
             continue;
         const isBoldHeading = /\*\*.+?\*\*/.test(trimmed);
+        // ALL CAPS lines (3+ chars, letters/spaces/punctuation) are also headings
+        const isAllCapsHeading = !isBoldHeading && /^[A-Z][A-Z \/'&(),+\u2013-]{2,}$/.test(trimmed);
+        const isHeading = isBoldHeading || isAllCapsHeading;
         const hasLink = /\[.+?\]\(.+?\)/.test(trimmed);
-        if (isBoldHeading) {
+        if (isHeading) {
             if (currentSection) {
                 sections.push({ type: 'heading-section', ...currentSection });
             }
