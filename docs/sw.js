@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v258';
+const CACHE_NAME = 'medkitt-v259';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -20,16 +20,17 @@ const ASSETS_TO_CACHE = [
   './components/calculator.js',
   './components/consult-flow.js',
   './components/consult-navigator.js',
-  './components/consult-wizard.css',
   './components/consult-wizard.js',
   './components/contextual-toolbar.js',
   './components/dashboard.js',
   './components/decision-card.js',
+  './components/dosing-banner.js',
   './components/drug-store.js',
   './components/expandable-section.js',
   './components/info-page.js',
   './components/lab-interpreter.js',
   './components/overlay-panel.js',
+  './components/quick-fire-mode.js',
   './components/reference-link.js',
   './components/reference-table.js',
   './components/specialty-view.js',
@@ -40,10 +41,12 @@ const ASSETS_TO_CACHE = [
   './services/cache-db.js',
   './services/category-service.js',
   './services/consult-flow-controller.js',
+  './services/dosing-list.js',
   './services/drug-service.js',
   './services/info-service.js',
   './services/lab-parser.js',
   './services/router.js',
+  './services/search-service.js',
   './services/shared-mode.js',
   './services/storage.js',
   './services/supabase.js',
@@ -59,12 +62,18 @@ const ASSETS_TO_CACHE = [
 
   // Decision trees
   './data/trees/index.js',
+  './data/trees/acetaminophen.js',
+  './data/trees/acid-base.js',
+  './data/trees/adrenal-insufficiency.js',
   './data/trees/afib-rvr.js',
+  './data/trees/anaphylaxis.js',
+  './data/trees/angioedema.js',
   './data/trees/aub.js',
   './data/trees/bronchiolitis.js',
   './data/trees/burns.js',
   './data/trees/chest-tube.js',
   './data/trees/croup.js',
+  './data/trees/delirium.js',
   './data/trees/diarrhea.js',
   './data/trees/dka.js',
   './data/trees/distal-radius.js',
@@ -87,11 +96,18 @@ const ASSETS_TO_CACHE = [
   './data/trees/psych-assessment.js',
   './data/trees/rabies.js',
   './data/trees/sah.js',
+  './data/trees/salicylate.js',
   './data/trees/shoulder-dystocia.js',
+  './data/trees/sickle-cell.js',
   './data/trees/sodium.js',
   './data/trees/splinting.js',
   './data/trees/status-epilepticus.js',
+  './data/trees/stemi.js',
   './data/trees/stroke.js',
+  './data/trees/syncope.js',
+  './data/trees/syphilis.js',
+  './data/trees/tca-toxidrome.js',
+  './data/trees/thyroid.js',
   './data/trees/uti-peds.js',
   './data/wizard-consults/acute-stroke.js',
 

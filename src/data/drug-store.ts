@@ -112,6 +112,7 @@ const ACYCLOVIR: DrugEntry = {
     {
       indication: 'Neonatal HSV (0-3 months)',
       regimen: '20 mg/kg IV q8h. Duration: minimum 5 doses or until HSV PCR results negative. If PCR not resulted after 5 doses, contact ID.',
+      weightCalc: { dosePerKg: 20, unit: 'mg', dailyDivided: 3 },
     },
     {
       indication: 'Adult/Adolescent Encephalitis (HSV, VZV)',
@@ -238,22 +239,27 @@ const AMPICILLIN: DrugEntry = {
     {
       indication: 'Non-meningitic (0-7 days)',
       regimen: '50 mg/kg IV q8h.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 3 },
     },
     {
       indication: 'Non-meningitic (8-28 days)',
       regimen: '50 mg/kg IV q6h.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 4 },
     },
     {
       indication: 'Meningitic (0-7 days)',
       regimen: '100 mg/kg IV q8h.',
+      weightCalc: { dosePerKg: 100, unit: 'mg', dailyDivided: 3 },
     },
     {
       indication: 'Meningitic (8-28 days)',
       regimen: '75 mg/kg IV q6h.',
+      weightCalc: { dosePerKg: 75, unit: 'mg', dailyDivided: 4 },
     },
     {
       indication: 'Meningitic (>28 days, added to Ceftriaxone)',
       regimen: '75 mg/kg IV q6h.',
+      weightCalc: { dosePerKg: 75, unit: 'mg', dailyDivided: 4 },
     },
     {
       indication: 'Adult Meningitis (Listeria coverage)',
@@ -852,10 +858,12 @@ const CEFEPIME: DrugEntry = {
     {
       indication: 'Sepsis/meningitis (0-28 days)',
       regimen: '50 mg/kg IV q12h.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 2 },
     },
     {
       indication: 'Meningitis (>28 days)',
       regimen: '50 mg/kg IV q8h.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 3 },
     },
     {
       indication: 'Adult Nosocomial/Healthcare-Associated Meningitis',
@@ -2119,10 +2127,12 @@ const GENTAMICIN: DrugEntry = {
     {
       indication: 'Neonatal sepsis (0-7 days)',
       regimen: '4 mg/kg IV q24h.',
+      weightCalc: { dosePerKg: 4, unit: 'mg' },
     },
     {
       indication: 'Neonatal sepsis (8-28 days, if extended use)',
       regimen: '5 mg/kg IV q24h.',
+      weightCalc: { dosePerKg: 5, unit: 'mg' },
     },
   ],
   contraindications: [
@@ -3832,10 +3842,12 @@ const VANCOMYCIN: DrugEntry = {
     {
       indication: 'Meningitic',
       regimen: '15 mg/kg IV q6h.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', dailyDivided: 4 },
     },
     {
       indication: 'Non-meningitic',
       regimen: '15 mg/kg IV q8h.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', dailyDivided: 3 },
     },
     {
       indication: 'C difficile',
