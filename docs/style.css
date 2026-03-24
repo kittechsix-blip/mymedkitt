@@ -3205,24 +3205,27 @@ body {
 
 .quick-fire-toggle {
   background: rgba(255, 255, 255, 0.15);
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.15s ease;
-  color: rgba(255, 255, 255, 0.6);
-  margin-right: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 6px;
 }
 
 .quick-fire-toggle:hover {
   background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 215, 0, 0.5);
 }
 
 .quick-fire-toggle--active {
   background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   color: #1a1a1a;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  border-color: #FFD700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  transform: scale(1.1);
 }
 
 /* Quick fire mode answered cards */
@@ -3320,12 +3323,84 @@ body.quick-fire-mode .card-stack-container {
   margin-top: 16px;
 }
 
-/* Quick Fire: Hide redundant content, keep essentials */
-body.quick-fire-mode .decision-card--active .decision-card-body p:not(:first-child) {
+/* Quick Fire: Collapse non-essential content, tap to expand */
+body.quick-fire-mode .qf-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Show collapsed indicator - tappable bar */
+body.quick-fire-mode .qf-collapsible::before {
+  content: '';
+  display: block;
+  max-height: 24px;
+  height: 24px;
+  margin: 4px 0;
+  background: linear-gradient(90deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(255, 215, 0, 0.05) 100%);
+  border-left: 3px solid rgba(255, 215, 0, 0.4);
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+/* Expanded state */
+body.quick-fire-mode .qf-collapsible.qf-expanded,
+body.quick-fire-mode .qf-collapsible:focus {
+  max-height: 500px;
+  opacity: 1;
+  margin: 0.5em 0;
+  padding: 8px 12px;
+  background: rgba(255, 215, 0, 0.08);
+  border-left: 3px solid rgba(255, 215, 0, 0.5);
+  border-radius: 0 4px 4px 0;
+}
+
+body.quick-fire-mode .qf-collapsible.qf-expanded::before {
   display: none;
 }
 
+/* Essential content always visible */
+body.quick-fire-mode .qf-essential {
+  display: block !important;
+}
+
+/* Hide references/details in Quick Fire - tappable */
 body.quick-fire-mode .decision-card--active details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin: 4px 0;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+body.quick-fire-mode .decision-card--active details::before {
+  content: '\25B8 References (tap)';
+  display: block;
+  padding: 8px 12px;
+  background: linear-gradient(90deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(255, 215, 0, 0.05) 100%);
+  border-left: 3px solid rgba(255, 215, 0, 0.4);
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+body.quick-fire-mode .decision-card--active details[open] {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 8px 0;
+}
+
+body.quick-fire-mode .decision-card--active details[open]::before {
   display: none;
 }
 

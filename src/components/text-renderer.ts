@@ -37,6 +37,23 @@ export function renderBodyText(container: HTMLElement, text: string): void {
     } else {
       const p = document.createElement('p');
       renderLineWithLinksAndCitations(p, line);
+
+      // Quick Fire: Check if line has "essential" content (bold, links, or bullets)
+      const hasEssential = /\*\*.+?\*\*/.test(line) ||
+                          /\[.+?\]\(.+?\)/.test(line) ||
+                          line.trim().startsWith('\u2022') ||
+                          line.trim().startsWith('-');
+
+      if (hasEssential) {
+        p.classList.add('qf-essential');
+      } else {
+        p.classList.add('qf-collapsible');
+        // Make tappable to expand in Quick Fire mode
+        p.addEventListener('click', () => {
+          p.classList.toggle('qf-expanded');
+        });
+      }
+
       container.appendChild(p);
     }
   }
