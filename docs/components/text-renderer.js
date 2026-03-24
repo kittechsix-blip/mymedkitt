@@ -28,45 +28,103 @@ export function appendBoldAware(parent, text) {
  *  [text](#/calculator/id), [text](#/tree/id), [text](https://url) links, and [N] citation refs. */
 export function renderBodyText(container, text) {
     const lines = text.split('\n');
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        if (line.trim() === '') {
-            container.appendChild(document.createElement('br'));
+    // Group lines: bold headings become collapsible sections containing following content
+    let currentSection = null;
+    const sections = [];
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed)
+            continue;
+        const isBoldHeading = /^\*\*.+?\*\*:?$/.test(trimmed) || /^\*\*.+?\*\*\s*$/.test(trimmed);
+        const hasLink = /\[.+?\]\(.+?\)/.test(trimmed);
+        const isOnlyLink = hasLink && !isBoldHeading;
+        if (isBoldHeading) {
+            // Save previous section
+            if (currentSection) {
+                sections.push({ type: 'heading-section', ...currentSection });
+            }
+            // Start new section with this bold heading
+            currentSection = { heading: trimmed, content: [] };
+        }
+        else if (currentSection) {
+            // Add to current section's content
+            currentSection.content.push(trimmed);
+        }
+        else if (isOnlyLink) {
+            // Standalone link line - always visible
+            sections.push({ type: 'link-line', line: trimmed });
         }
         else {
+            // Plain content before any heading - collapsible on its own
+            sections.push({ type: 'plain', line: trimmed });
+        }
+    }
+    // Don't forget the last section
+    if (currentSection) {
+        sections.push({ type: 'heading-section', ...currentSection });
+    }
+    // Render sections
+    for (const section of sections) {
+        if (section.type === 'link-line') {
+            // Links always visible
             const p = document.createElement('p');
-            renderLineWithLinksAndCitations(p, line);
-            // Quick Fire: Check if line has "essential" content (bold, links, or bullets)
-            const hasEssential = /\*\*.+?\*\*/.test(line) ||
-                /\[.+?\]\(.+?\)/.test(line) ||
-                line.trim().startsWith('\u2022') ||
-                line.trim().startsWith('-');
-            if (hasEssential) {
-                p.classList.add('qf-essential');
-                container.appendChild(p);
-            }
-            else {
-                // Wrap collapsible content in a tappable container
-                const wrapper = document.createElement('div');
-                wrapper.className = 'qf-section';
-                const tapBar = document.createElement('div');
-                tapBar.className = 'qf-tap-bar';
-                tapBar.innerHTML = '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
-                const content = document.createElement('div');
-                content.className = 'qf-content';
+            p.classList.add('qf-essential');
+            renderLineWithLinksAndCitations(p, section.line);
+            container.appendChild(p);
+        }
+        else if (section.type === 'heading-section') {
+            // Bold heading with collapsible content below
+            const wrapper = document.createElement('div');
+            wrapper.className = 'qf-section';
+            // The heading acts as the tap bar
+            const tapBar = document.createElement('div');
+            tapBar.className = 'qf-tap-bar';
+            const headingText = section.heading.replace(/\*\*/g, '');
+            tapBar.innerHTML = `<span class="qf-tap-icon">+</span> <strong>${headingText}</strong>`;
+            // Content below the heading
+            const content = document.createElement('div');
+            content.className = 'qf-content';
+            for (const contentLine of section.content) {
+                const p = document.createElement('p');
+                renderLineWithLinksAndCitations(p, contentLine);
                 content.appendChild(p);
-                wrapper.appendChild(tapBar);
-                wrapper.appendChild(content);
-                // Toggle on tap
-                wrapper.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    wrapper.classList.toggle('qf-expanded');
-                    tapBar.innerHTML = wrapper.classList.contains('qf-expanded')
-                        ? '<span class="qf-tap-icon">−</span> <span class="qf-tap-hint">tap to collapse</span>'
-                        : '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
-                });
-                container.appendChild(wrapper);
             }
+            wrapper.appendChild(tapBar);
+            if (section.content.length > 0) {
+                wrapper.appendChild(content);
+            }
+            // Toggle on tap
+            wrapper.addEventListener('click', (e) => {
+                e.stopPropagation();
+                wrapper.classList.toggle('qf-expanded');
+                const icon = wrapper.querySelector('.qf-tap-icon');
+                if (icon)
+                    icon.textContent = wrapper.classList.contains('qf-expanded') ? '−' : '+';
+            });
+            container.appendChild(wrapper);
+        }
+        else {
+            // Plain text - collapsible
+            const wrapper = document.createElement('div');
+            wrapper.className = 'qf-section';
+            const tapBar = document.createElement('div');
+            tapBar.className = 'qf-tap-bar';
+            tapBar.innerHTML = '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
+            const content = document.createElement('div');
+            content.className = 'qf-content';
+            const p = document.createElement('p');
+            renderLineWithLinksAndCitations(p, section.line);
+            content.appendChild(p);
+            wrapper.appendChild(tapBar);
+            wrapper.appendChild(content);
+            wrapper.addEventListener('click', (e) => {
+                e.stopPropagation();
+                wrapper.classList.toggle('qf-expanded');
+                const icon = wrapper.querySelector('.qf-tap-icon');
+                if (icon)
+                    icon.textContent = wrapper.classList.contains('qf-expanded') ? '−' : '+';
+            });
+            container.appendChild(wrapper);
         }
     }
 }
