@@ -6,6 +6,7 @@ import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import type { WeightCalc } from '../data/drug-store.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
+import { renderDosingBanner } from './dosing-banner.js';
 
 /** Context for dose calculations - passed to buildWeightCalcPanel */
 interface DrugContext {
@@ -117,6 +118,9 @@ export function renderDrugList(container: HTMLElement): void {
 
   searchWrap.appendChild(searchInput);
   container.appendChild(searchWrap);
+
+  // Dosing banner (shows user-pinned doses)
+  renderDosingBanner(container);
 
   // Drug list
   const list = document.createElement('div');
@@ -285,7 +289,7 @@ export function showDrugModal(drugId: string, indicationHint?: string): boolean 
       // Pin-to-banner button — available on every dosing card
       const pinBtn = document.createElement('button');
       pinBtn.className = 'dose-pin-btn';
-      const pinDoseText = dose.regimen.split('.')[0].replace(/\\n.*/s, '').trim();
+      const pinDoseText = dose.regimen.split('\n')[0].split('.')[0].trim();
       const alreadyPinned = isDoseInList(drug.name, pinDoseText);
       pinBtn.textContent = alreadyPinned ? '\u2713 Pinned' : '+ Pin Dose';
       pinBtn.disabled = alreadyPinned;

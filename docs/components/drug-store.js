@@ -4,6 +4,7 @@
 import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
+import { renderDosingBanner } from './dosing-banner.js';
 // -------------------------------------------------------------------
 // Ranked Search Helper
 // -------------------------------------------------------------------
@@ -87,6 +88,8 @@ export function renderDrugList(container) {
     searchInput.setAttribute('aria-label', 'Search drugs');
     searchWrap.appendChild(searchInput);
     container.appendChild(searchWrap);
+    // Dosing banner (shows user-pinned doses)
+    renderDosingBanner(container);
     // Drug list
     const list = document.createElement('div');
     list.className = 'tree-list';
@@ -222,7 +225,7 @@ export function showDrugModal(drugId, indicationHint) {
             // Pin-to-banner button — available on every dosing card
             const pinBtn = document.createElement('button');
             pinBtn.className = 'dose-pin-btn';
-            const pinDoseText = dose.regimen.split('.')[0].replace(/\\n.*/s, '').trim();
+            const pinDoseText = dose.regimen.split('\n')[0].split('.')[0].trim();
             const alreadyPinned = isDoseInList(drug.name, pinDoseText);
             pinBtn.textContent = alreadyPinned ? '\u2713 Pinned' : '+ Pin Dose';
             pinBtn.disabled = alreadyPinned;

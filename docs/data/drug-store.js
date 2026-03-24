@@ -1256,6 +1256,40 @@ const CIPROFLOXACIN = {
         'Roberts KB. Urinary tract infection: clinical practice guideline for febrile infants and children 2 to 24 months. Pediatrics. 2011;128(3):595-610.',
     ],
 };
+const CLINDAMYCIN = {
+    id: 'clindamycin',
+    name: 'Clindamycin',
+    genericName: 'Clindamycin',
+    drugClass: 'Lincosamide antibiotic',
+    route: 'IV/PO',
+    indications: ['Anaerobic coverage', 'Aspiration pneumonia', 'Skin/soft tissue infection', 'Streptococcal toxic shock'],
+    dosing: [
+        {
+            indication: 'Anaerobic coverage (DKA infection, aspiration)',
+            regimen: '600-900 mg IV q6-8h.\n\nExcellent anaerobic coverage including Bacteroides fragilis.\nGood lung penetration — preferred for aspiration pneumonia.\n\nPediatric: 25-40 mg/kg/day IV divided q6-8h (max 4.8 g/day).',
+            weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 900, dailyDivided: 3, label: 'IV q8h' },
+        },
+        {
+            indication: 'Skin/soft tissue infection',
+            regimen: '300-450 mg PO q6-8h × 7-10 days.\n\nAlternative MRSA coverage for uncomplicated SSTIs when TMP-SMX or doxycycline not appropriate.',
+        },
+    ],
+    contraindications: [
+        'History of C. difficile colitis',
+        'History of antibiotic-associated colitis',
+    ],
+    cautions: [
+        'C. difficile risk — highest among common antibiotics',
+        'Monitor for diarrhea (discontinue if >3 watery stools/day)',
+        'Neuromuscular blocking effect — caution with myasthenia gravis',
+        'Rapid IV infusion can cause hypotension — infuse over 10-60 min',
+    ],
+    monitoring: 'Monitor for diarrhea (C. difficile). LFTs if prolonged course.',
+    notes: 'Lincosamide with excellent anaerobic and gram-positive coverage. Key role in aspiration pneumonia and toxin-mediated diseases (strep TSS — suppresses toxin production). C. difficile risk limits routine use.',
+    citations: [
+        'Brook I. Treatment of anaerobic infection. Expert Rev Anti Infect Ther. 2007;5(6):991-1006.',
+    ],
+};
 const CONJUGATED_ESTROGEN = {
     id: 'conjugated-estrogen',
     name: 'Conjugated Estrogen (Premarin)',
@@ -3234,14 +3268,56 @@ const PIPERACILLIN_TAZOBACTAM = {
         'Chanderraj R, et al. Mortality of Patients With Sepsis Administered Piperacillin-Tazobactam vs Cefepime. JAMA Intern Med. 2024;184(7):769.',
     ],
 };
+const POTASSIUM_ACETATE = {
+    id: 'potassium-acetate',
+    name: 'Potassium Acetate (IV)',
+    genericName: 'Potassium acetate',
+    drugClass: 'Electrolyte supplement',
+    route: 'IV',
+    indications: ['DKA potassium repletion (preferred)', 'Hyperchloremic acidosis risk reduction', 'Hemodialysis patient K repletion'],
+    dosing: [
+        {
+            indication: 'DKA — preferred potassium salt',
+            regimen: '20-40 mEq/hr IV with continuous cardiac monitoring.\n\nPreferred over KCl in DKA to reduce chloride load and prevent hyperchloremic non-anion gap metabolic acidosis (NAGMA).\n\nGoal: Maintain K >5 mEq/L during acute DKA.\nCheck K q1-2h × 6 hours, then q4h minimum.\n\nIf K <3.3: 40 mEq/hr — HOLD insulin until K >3.3.',
+        },
+        {
+            indication: 'DKA — hemodialysis patient',
+            regimen: 'Very restrictive — supplement only if K <3.0 (rare in HD patients).\n\nUse low-potassium dialysate bath (1-2 mEq/L) to manage K during DKA.\nCoordinate with nephrology.',
+        },
+    ],
+    contraindications: [
+        'Hyperkalemia (K+ >5.5 mEq/L)',
+        'Severe renal failure with anuria',
+        'Untreated Addison disease',
+    ],
+    cautions: [
+        'Rates >10 mEq/hr require cardiac monitoring',
+        'Central line preferred for concentrated solutions',
+        'Always check and correct magnesium first',
+        'Acetate metabolized to bicarbonate — provides mild buffer effect',
+    ],
+    monitoring: 'Continuous cardiac monitoring during infusion. Recheck K+ every 1-2 hours in DKA. Monitor Mg concurrently.',
+    notes: 'Acetate salt preferred over chloride salt in DKA because aggressive NaCl + KCl administration causes hyperchloremic NAGMA, confounding AG-based DKA resolution assessment. Acetate is metabolized to bicarbonate, providing mild alkalinizing effect. Same potassium content per mEq as KCl.',
+    citations: [
+        'Kitabchi AE, et al. Hyperglycemic Crises in Adult Patients With Diabetes. Diabetes Care. 2009;32(7):1335-43.',
+    ],
+};
 const POTASSIUM_CHLORIDE_IV = {
     id: 'potassium-chloride-iv',
     name: 'Potassium Chloride (IV)',
     genericName: 'Potassium chloride',
     drugClass: 'Electrolyte supplement',
     route: 'IV',
-    indications: ['Severe hypokalemia (K+ ≤2.5 mEq/L)', 'Hypokalemia with arrhythmia or paralysis'],
+    indications: ['Severe hypokalemia (K+ ≤2.5 mEq/L)', 'Hypokalemia with arrhythmia or paralysis', 'DKA potassium repletion'],
     dosing: [
+        {
+            indication: 'DKA — K+ <3.3 (HOLD insulin)',
+            regimen: '40 mEq/hr IV with continuous cardiac monitoring. HOLD insulin until K+ >3.3 — fatal arrhythmias if K falls further with insulin.\n\nGoal: Bring K to 3.3-3.5 before starting insulin.\nCheck K q1-2h during repletion — often need 40-80 mEq to raise K by 0.5-1 mEq/L.\n\nAlternative: Potassium acetate preferred to reduce chloride load and NAGMA risk.',
+        },
+        {
+            indication: 'DKA — K+ 3.3-5.3 (concurrent with insulin)',
+            regimen: '20-40 mEq/hr IV. Goal: Maintain K >5 mEq/L during acute DKA.\n\nGive concurrently with insulin drip — insulin rapidly shifts K intracellularly.\nCheck K q1-2h × 6 hours, then q4h minimum.',
+        },
         {
             indication: 'Severe hypokalemia (life-threatening)',
             regimen: '5-10 mEq IV over 15-30 minutes with continuous cardiac monitoring. Repeat until K+ >3 mEq/L and hemodynamically stable.',
@@ -3494,8 +3570,17 @@ const REGULAR_INSULIN = {
     genericName: 'Insulin regular (human)',
     drugClass: 'Hormone / potassium-shifting agent',
     route: 'IV',
-    indications: ['Hyperkalemia (potassium shift)'],
+    indications: ['Hyperkalemia (potassium shift)', 'Diabetic ketoacidosis (DKA)'],
     dosing: [
+        {
+            indication: 'DKA — IV infusion',
+            regimen: '0.1 U/kg/hr IV infusion (max 15 U/hr). Prepare: 100 units in 100 mL NS = 1 U/mL.\n\nTitration:\n• Goal glucose drop: 50-70 mg/dL/hr\n• If dropping too slowly (<50/hr): increase to 0.15 U/kg/hr\n• If dropping too fast (>100/hr): decrease rate, increase dextrose\n• When glucose ~250: reduce to 0.05 U/kg/hr (holding rate)\n\nCRITICAL: NEVER stop insulin even if glucose <100 — give more dextrose instead. Continue until acidosis resolved (AG <12, HCO3 >18, pH >7.3).',
+            weightCalc: { dosePerKg: 0.1, unit: 'units', label: 'DKA drip (per hour)' },
+        },
+        {
+            indication: 'DKA — optional IV bolus',
+            regimen: '10 units IV bolus. Consider if: severe hyperkalemia (K >6.5), severe acidosis (pH <6.9, BOHB >15), or significant delay to drip. Not required if drip starting immediately.',
+        },
         {
             indication: 'Hyperkalemia',
             regimen: '5 units regular insulin IV bolus (NOT subcutaneous). Must give with dextrose unless glucose >250 mg/dL.',
@@ -3520,6 +3605,42 @@ const REGULAR_INSULIN = {
         'Moussavi K, et al. Management of Hyperkalemia With Insulin and Glucose. J Emerg Med. 2019;57(1):36-42.',
         'Harel Z, Kamel KS. Optimal Dose of Intravenous Insulin for Hyperkalemia. PLoS One. 2016;11(5):e0154963.',
         'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
+    ],
+};
+const INSULIN_GLARGINE = {
+    id: 'insulin-glargine',
+    name: 'Insulin Glargine (Lantus)',
+    genericName: 'Insulin glargine',
+    drugClass: 'Long-acting basal insulin',
+    route: 'SC',
+    indications: ['DKA basal insulin', 'Type 1 diabetes maintenance', 'Type 2 diabetes maintenance'],
+    dosing: [
+        {
+            indication: 'DKA — early basal (CRITICAL)',
+            regimen: 'Give within first 6-12 hours of DKA presentation. Do NOT wait until glucose normalized or acidosis resolved.\n\n• Known diabetic on insulin: Use home glargine dose (or home total daily insulin × 0.5)\n• New diagnosis or dose unknown: 0.25 U/kg SC once daily\n• Some experts use 0.3 U/kg for new diagnosis\n\nSeparate from IV insulin drip — not calculated from drip rate. Can overlap with IV drip. Prevents DKA recurrence once drip stops.',
+            weightCalc: { dosePerKg: 0.25, unit: 'units', label: 'New diagnosis / dose unknown' },
+        },
+        {
+            indication: 'DKA — discharge maintenance',
+            regimen: 'Continue dose established during hospitalization. Typically 0.25-0.5 U/kg/day SC once daily (evening or morning).\n\nRecurrent DKA may need 0.4-0.5 U/kg/day. Add rapid-acting meal-time insulin for basal-bolus regimen.',
+            weightCalc: { dosePerKg: 0.25, unit: 'units', label: 'Standard maintenance' },
+        },
+    ],
+    contraindications: [
+        'Hypoglycemia (glucose <70 mg/dL)',
+        'Do NOT give IV — SC only',
+    ],
+    cautions: [
+        'Hypoglycemia risk increases with renal impairment',
+        'Do NOT mix with other insulins in same syringe',
+        'Onset 1-2 hours, no peak, duration ~24 hours',
+        'Store unopened vials refrigerated; opened vials room temp × 28 days',
+    ],
+    monitoring: 'Fingerstick glucose q4-6h while hospitalized. Fasting glucose daily. HbA1c at discharge if not recent.',
+    notes: 'Long-acting peakless insulin providing 24-hour basal coverage. Critical in DKA to prevent recurrence — IV drip stops once acidosis resolves but patient still needs basal insulin. Starting glargine early (within 6-12h) is the standard of care. Biosimilars: Basaglar, Semglee.',
+    citations: [
+        'Kitabchi AE, et al. Hyperglycemic Crises in Adult Patients With Diabetes. Diabetes Care. 2009;32(7):1335-43.',
+        'Hsia E, et al. Subcutaneous Administration of Glargine to Diabetic Patients Receiving Insulin Infusion Prevents Rebound Hyperglycemia. J Clin Endocrinol Metab. 2012;97(9):3132-7.',
     ],
 };
 const RETEPLASE = {
@@ -6166,6 +6287,7 @@ export const ALL_DRUGS = [
     CHOLESTYRAMINE,
     CHLOROTHIAZIDE,
     CIPROFLOXACIN,
+    CLINDAMYCIN,
     CLEVIDIPINE,
     CLOPIDOGREL,
     CONJUGATED_ESTROGEN,
@@ -6255,6 +6377,7 @@ export const ALL_DRUGS = [
     PENTOBARBITAL,
     PHENOBARBITAL,
     PIPERACILLIN_TAZOBACTAM,
+    POTASSIUM_ACETATE,
     POTASSIUM_CHLORIDE_IV,
     POTASSIUM_CHLORIDE_ORAL,
     PRASUGREL,
@@ -6273,6 +6396,7 @@ export const ALL_DRUGS = [
     RABIES_VACCINE,
     RACEMIC_EPINEPHRINE,
     REGULAR_INSULIN,
+    INSULIN_GLARGINE,
     RETEPLASE,
     RIFAMPIN,
     RISPERIDONE,
