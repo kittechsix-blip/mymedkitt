@@ -3319,3 +3319,16 @@ body.quick-fire-mode .card-stack-container {
   position: relative;
   margin-top: 16px;
 }
+
+/* Quick Fire: Hide redundant content, keep essentials */
+body.quick-fire-mode .decision-card--active .decision-card-body p:not(:first-child) {
+  display: none;
+}
+
+body.quick-fire-mode .decision-card--active details {
+  display: none;
+}
+
+body.quick-fire-mode .wizard-disclaimer {
+  display: none;
+}
