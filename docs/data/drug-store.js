@@ -2449,7 +2449,11 @@ const METHYLENE_BLUE = {
         {
             indication: 'Refractory septic shock',
             regimen: '1-2 mg/kg IV bolus over 15-30 minutes, then 0.5 mg/kg/h continuous infusion. Ibarra-Estrada 2023 RCT: earlier methylene blue → shorter time to vasopressor discontinuation, more vasopressor-free days, shorter ICU/hospital LOS. Consider when on multiple vasopressors + glucocorticoids. Inhibits inducible NO synthase → restores vascular tone.',
-            weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'IV bolus dose (give 1-2 mg/kg)' },
+            weightCalc: [
+                { dosePerKg: 1, unit: 'mg', label: 'Bolus low (1 mg/kg)' },
+                { dosePerKg: 2, unit: 'mg', label: 'Bolus high (2 mg/kg)' },
+                { dosePerKg: 0.5, unit: 'mg', label: 'Infusion (0.5 mg/kg/h)' },
+            ],
         },
     ],
     contraindications: [
@@ -3927,7 +3931,11 @@ const VANCOMYCIN = {
         {
             indication: 'Sepsis / MRSA coverage',
             regimen: 'Loading dose: 25-30 mg/kg IV (based on actual body weight). Maintenance: 15-20 mg/kg IV q8-12h (adjust for renal function). Target trough 15-20 mcg/mL or AUC/MIC 400-600. Administer AFTER beta-lactam when giving both (beta-lactam first improves survival). Discontinue if no MRSA cultured within 48 hours.',
-            weightCalc: { dosePerKg: 25, unit: 'mg', label: 'Loading dose (actual body weight)' },
+            weightCalc: [
+                { dosePerKg: 25, unit: 'mg', label: 'Loading dose (25 mg/kg)' },
+                { dosePerKg: 30, unit: 'mg', label: 'Loading dose (30 mg/kg)' },
+                { dosePerKg: 15, unit: 'mg', label: 'Maintenance (15 mg/kg/dose)' },
+            ],
         },
     ],
     contraindications: [

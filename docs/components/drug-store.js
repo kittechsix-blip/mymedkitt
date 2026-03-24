@@ -219,6 +219,24 @@ export function showDrugModal(drugId, indicationHint) {
             if (calcPanel) {
                 card.appendChild(calcPanel);
             }
+            // Pin-to-banner button — available on every dosing card
+            const pinBtn = document.createElement('button');
+            pinBtn.className = 'dose-pin-btn';
+            const pinDoseText = dose.regimen.split('.')[0].replace(/\\n.*/s, '').trim();
+            const alreadyPinned = isDoseInList(drug.name, pinDoseText);
+            pinBtn.textContent = alreadyPinned ? '\u2713 Pinned' : '+ Pin Dose';
+            pinBtn.disabled = alreadyPinned;
+            pinBtn.addEventListener('click', () => {
+                addToDosingList({
+                    drug: drug.name,
+                    dose: pinDoseText,
+                    route: drug.route,
+                    indication: dose.indication,
+                });
+                pinBtn.textContent = '\u2713 Pinned';
+                pinBtn.disabled = true;
+            });
+            card.appendChild(pinBtn);
             dosingSection.appendChild(card);
         }
         body.appendChild(dosingSection);

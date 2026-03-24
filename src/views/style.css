@@ -2162,6 +2162,31 @@ body {
   border-radius: 2px;
 }
 
+/* Pin dose to sticky banner — appears on every dosing card */
+.dose-pin-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dose-pin-btn:active {
+  transform: scale(0.96);
+}
+
+.dose-pin-btn:disabled {
+  background: #888;
+  opacity: 0.6;
+  cursor: default;
+}
+
 .dose-calc-link {
   background: none;
   border: none;
