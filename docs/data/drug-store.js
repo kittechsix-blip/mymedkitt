@@ -948,6 +948,47 @@ const DARUNAVIR = {
         'Gandhi RT, et al. Antiretroviral Drugs for Treatment and Prevention of HIV. JAMA. 2023;329(1):63-84.',
     ],
 };
+const DEXTROSE = {
+    id: 'dextrose',
+    name: 'Dextrose (D50W / D10W)',
+    genericName: 'Dextrose',
+    drugClass: 'Glucose supplement',
+    route: 'IV',
+    indications: ['Neuroglycopenia — salicylate toxicity', 'Hypoglycemia — adult', 'Hypoglycemia — pediatric', 'Hyperkalemia — with insulin'],
+    dosing: [
+        {
+            indication: 'Neuroglycopenia — Salicylate Toxicity',
+            regimen: 'D50W 50 mL (25g) IV bolus for altered mental status or declining GCS — even with NORMAL serum glucose. CNS glucose depletion occurs before serum hypoglycemia due to uncoupled oxidative phosphorylation. Repeat PRN. Add D5W to all maintenance IV fluids. Check fingerstick glucose hourly. Target moderate hyperglycemia (~150-200 mg/dL) in severe toxicity.',
+        },
+        {
+            indication: 'Hypoglycemia — Adult',
+            regimen: 'D50W 50 mL (25g) IV push. Recheck glucose at 15 min. Repeat if glucose < 70 mg/dL. Follow with D10W infusion if recurrent or oral intake not possible.',
+        },
+        {
+            indication: 'Hypoglycemia — Pediatric',
+            regimen: 'D10W 5 mL/kg IV (0.5 g/kg). Neonates: D10W 2 mL/kg. AVOID D50W in children — hyperosmolar, causes venous sclerosis. Max concentration via peripheral IV: D12.5%.',
+            weightCalc: [
+                { dosePerKg: 5, unit: 'mL of D10W', label: 'Pediatric (D10W)' },
+                { dosePerKg: 2, unit: 'mL of D10W', label: 'Neonate (D10W)' },
+            ],
+        },
+        {
+            indication: 'Hyperkalemia — With Insulin',
+            regimen: 'D50W 50 mL (25g) IV with 10 units regular insulin IV. Dextrose prevents insulin-induced hypoglycemia. Monitor glucose q30min for 4 hours. Some protocols give D50W first, then insulin.',
+        },
+    ],
+    cautions: [
+        'D50W is hypertonic (2,525 mOsm/L) — causes venous irritation. Central line preferred for repeated dosing.',
+        'Hyperglycemia may worsen outcomes in stroke/TBI — monitor closely in those settings',
+        'Thiamine deficiency: give thiamine BEFORE or WITH dextrose in alcoholics/malnourished (Wernicke prevention)',
+    ],
+    monitoring: 'Fingerstick glucose q15-30 min after bolus. Hourly during D5W/D10W infusion. Serum glucose and electrolytes q4h.',
+    notes: 'In salicylate toxicity, uncoupled oxidative phosphorylation in CNS mitochondria causes massive local glucose consumption. CSF glucose can be critically low despite normal serum glucose. This "neuroglycopenia" causes altered mental status and seizures that respond to dextrose even when serum glucose is normal.',
+    citations: [
+        'Farkas J. Salicylate Intoxication. Internet Book of Critical Care (IBCC). EMCrit. 2025.',
+        'Thurston JH, et al. Reduced brain glucose with normal plasma glucose in salicylate poisoning. J Clin Invest. 1970;49(11):2139-45.',
+    ],
+};
 const DEXAMETHASONE = {
     id: 'dexamethasone',
     name: 'Dexamethasone',
@@ -5900,6 +5941,7 @@ export const ALL_DRUGS = [
     DARUNAVIR,
     DESMOPRESSIN,
     DEXAMETHASONE,
+    DEXTROSE,
     DIAZEPAM,
     DIGOXIN,
     DILTIAZEM,
@@ -6076,6 +6118,7 @@ const NAME_TO_ID = [
     [/darunavir|prezista/i, 'darunavir'],
     [/dexamethasone|decadron/i, 'dexamethasone'],
     [/desmopressin|ddavp/i, 'desmopressin'],
+    [/dextrose|d50|d50w|d10|d10w|d5w/i, 'dextrose'],
     [/diazepam|valium/i, 'diazepam'],
     [/digoxin|digitalis|lanoxin/i, 'digoxin'],
     [/diltiazem|cardizem/i, 'diltiazem'],

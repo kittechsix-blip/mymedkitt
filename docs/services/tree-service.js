@@ -269,6 +269,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/tca-toxidrome.js');
             return { nodes: m.TCA_TOXIDROME_NODES, entryNodeId: 'tca-start', categoryId: 'toxicology', moduleLabels: m.TCA_TOXIDROME_MODULE_LABELS, citations: m.TCA_TOXIDROME_CITATIONS };
         },
+        'salicylate': async () => {
+            const m = await import('../data/trees/salicylate.js');
+            return { nodes: m.SALICYLATE_NODES, entryNodeId: 'sal-start', categoryId: 'toxicology', moduleLabels: m.SALICYLATE_MODULE_LABELS, citations: m.SALICYLATE_CITATIONS };
+        },
+        'acetaminophen': async () => {
+            const m = await import('../data/trees/acetaminophen.js');
+            return { nodes: m.ACETAMINOPHEN_OD_NODES, entryNodeId: 'apap-start', categoryId: 'toxicology', moduleLabels: m.ACETAMINOPHEN_OD_MODULE_LABELS, citations: m.ACETAMINOPHEN_OD_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

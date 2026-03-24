@@ -2879,6 +2879,137 @@ const SYPHILIS_SEROLOGY_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// Salicylate Toxicity Management Guide
+// -------------------------------------------------------------------
+const SAL_TOX_GUIDE_CALCULATOR = {
+    id: 'sal-tox-guide',
+    title: 'Salicylate Toxicity Management Guide',
+    subtitle: 'Treatment tier based on EXTRIP guidelines + clinical severity',
+    description: 'Integrates salicylate level, pH, clinical status, chronicity, and renal function to recommend treatment tier (observation \u2192 alkalinization \u2192 hemodialysis). Based on EXTRIP workgroup guidelines and IBCC/LITFL clinical frameworks.',
+    fields: [
+        {
+            name: 'sal-level',
+            label: 'Salicylate Level (mg/dL)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not yet available', points: 0 },
+                { label: '< 30 mg/dL (subtherapeutic/therapeutic)', points: 1 },
+                { label: '30-50 mg/dL (mild toxicity)', points: 2 },
+                { label: '50-80 mg/dL (moderate toxicity)', points: 3 },
+                { label: '80-100 mg/dL (severe toxicity)', points: 4 },
+                { label: '> 100 mg/dL (potentially lethal)', points: 5 },
+            ],
+        },
+        {
+            name: 'serum-ph',
+            label: 'Serum pH',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '> 7.45 (alkalemic)', points: 0 },
+                { label: '7.35-7.45 (normal)', points: 1 },
+                { label: '7.20-7.34 (mild acidemia)', points: 2 },
+                { label: '< 7.20 (severe acidemia)', points: 3 },
+            ],
+        },
+        {
+            name: 'mental-status',
+            label: 'Mental Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Alert and oriented', points: 0 },
+                { label: 'Confused or agitated', points: 1 },
+                { label: 'Obtunded, seizures, or coma', points: 2 },
+            ],
+        },
+        {
+            name: 'respiratory',
+            label: 'Respiratory Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal or tachypneic (compensating)', points: 0 },
+                { label: 'Tiring or losing tachypnea', points: 1 },
+                { label: 'Pulmonary edema or respiratory failure', points: 2 },
+            ],
+        },
+        {
+            name: 'chronicity',
+            label: 'Exposure Type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Acute (single ingestion)', points: 0 },
+                { label: 'Chronic (repeated dosing)', points: 1 },
+            ],
+        },
+        {
+            name: 'renal-function',
+            label: 'Renal Function',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal', points: 0 },
+                { label: 'Impaired (Cr > 1.5 or oliguria)', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Decision-logic tool based on EXTRIP guidelines + clinical severity. Priority: HD indications > alkalinization > observation.',
+    citations: [
+        'Juurlink DN, et al. EXTRIP Workgroup. Ann Emerg Med. 2015;66(2):165-181.',
+        'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.',
+        'Long N. Salicylate Toxicity. LITFL. 2020.',
+        'Palmer BF, Clegg DJ. Salicylate Toxicity. NEJM. 2020;382(26):2544-2555.',
+    ],
+    computeResult: (values) => {
+        const level = values['sal-level'] || 0;
+        const ph = values['serum-ph'] || 0;
+        const ms = values['mental-status'] || 0;
+        const resp = values['respiratory'] || 0;
+        const chronic = values['chronicity'] || 0;
+        const renal = values['renal-function'] || 0;
+        // --- EMERGENT HD tier ---
+        if (level >= 5) {
+            return { value: 'EMERGENT HD', label: 'Level > 100 mg/dL \u2014 emergent hemodialysis', description: 'EXTRIP: Strongly recommended. Level > 100 mg/dL (7.2 mmol/L) in acute ingestion.\nCall nephrology STAT. Continue NaHCO3 during and after HD.\nAnticipate post-HD rebound from tissue redistribution.', colorVar: '--color-danger' };
+        }
+        if (ph >= 3) {
+            return { value: 'EMERGENT HD', label: 'Severe acidemia (pH < 7.20) \u2014 emergent hemodialysis', description: 'EXTRIP: Strongly recommended for pH \u2264 7.20 despite resuscitation.\nContinue NaHCO3. HD corrects acidosis AND removes salicylate simultaneously.\nDo NOT delay \u2014 acidemia drives CNS salicylate penetration (death spiral).', colorVar: '--color-danger' };
+        }
+        if (ms >= 2) {
+            return { value: 'EMERGENT HD', label: 'Obtundation / seizures \u2014 emergent hemodialysis', description: 'Severe CNS toxicity. BZDs for seizures. D50W for neuroglycopenia.\nContinue NaHCO3. Call nephrology STAT.\nAVOID intubation if possible \u2014 death spiral risk.\nIf must intubate: pre-bolus bicarb, RR 30-35, target pH not pCO2.', colorVar: '--color-danger' };
+        }
+        if (resp >= 2) {
+            return { value: 'EMERGENT HD', label: 'Pulmonary edema / respiratory failure \u2014 emergent hemodialysis', description: 'Non-cardiogenic pulmonary edema from direct capillary injury.\nVolume-restrict. BiPAP may temporize. HD is definitive treatment.\nAVOID intubation if possible \u2014 death spiral risk.', colorVar: '--color-danger' };
+        }
+        // --- HD RECOMMENDED tier ---
+        if (level >= 4 && renal >= 1) {
+            return { value: 'HD RECOMMENDED', label: 'Level 80-100 + renal impairment \u2014 HD recommended', description: 'EXTRIP: Recommended. Impaired renal clearance means alkalinization alone may be insufficient.\nEarly nephrology consult. Continue NaHCO3 while arranging HD.', colorVar: '--color-danger' };
+        }
+        if (level >= 4 && ms >= 1) {
+            return { value: 'HD RECOMMENDED', label: 'Level 80-100 + altered mental status \u2014 HD recommended', description: 'EXTRIP: Recommended when elevated level with clinical toxicity.\nCall nephrology early. Continue alkalinization while arranging HD.', colorVar: '--color-danger' };
+        }
+        if (chronic === 1 && level >= 2 && (ms >= 1 || ph >= 2)) {
+            return { value: 'HD RECOMMENDED', label: 'Chronic toxicity with clinical deterioration \u2014 HD recommended', description: 'Chronic salicylate toxicity is lethal at LOWER levels than acute.\nAMS or acidemia in chronic toxicity = severe poisoning.\nDo NOT rely on level alone. Early HD is safer than watching deterioration.', colorVar: '--color-danger' };
+        }
+        if (resp >= 1) {
+            return { value: 'HD RECOMMENDED', label: 'Respiratory fatigue \u2014 losing compensatory tachypnea', description: 'CRITICAL: A patient who stops hyperventilating is DECOMPENSATING.\nThis is the beginning of the death spiral.\nConsider emergent HD. Push NaHCO3 boluses.\nPrepare for possible intubation with extreme caution.', colorVar: '--color-warning' };
+        }
+        // --- ALKALINIZE tier ---
+        if (level >= 2) {
+            return { value: 'ALKALINIZE', label: 'Start urinary alkalinization with NaHCO3', description: 'NaHCO3 150 mEq in 1L D5W at 150-200 mL/hr.\nTarget urine pH 7.5-8.0. Serum pH 7.45-7.55.\nMUST replete K+ (\u2265 4.0 mEq/L) or alkalinization will fail.\nAdd D5W to all fluids. Monitor urine pH hourly, ABG/BMP q2h, sal levels q2h.', colorVar: '--color-warning' };
+        }
+        // --- OBSERVATION tier ---
+        if (level === 1) {
+            return { value: 'OBSERVE', label: 'Observation with serial levels', description: 'Level < 30 mg/dL and asymptomatic.\nRepeat salicylate level at 2h and 4h.\nEnteric-coated: observe 12h minimum (delayed absorption).\nIf levels declining and asymptomatic, may discharge with precautions.\nPsychiatric evaluation if intentional ingestion.', colorVar: '--color-decision-active' };
+        }
+        // --- Default ---
+        return { value: '\u2014', label: 'Select all fields', description: 'Complete all fields to generate a treatment recommendation.', colorVar: '--color-text-muted' };
+    },
+};
+// -------------------------------------------------------------------
 // SCD Complication Triage Calculator
 // -------------------------------------------------------------------
 const SCD_TRIAGE_CALCULATOR = {
@@ -3565,6 +3696,7 @@ const CALCULATORS = {
     'nac-dosing': NAC_DOSING_CALCULATOR,
     'kings-college': KINGS_COLLEGE_CALCULATOR,
     'alt-apap-product': ALT_APAP_PRODUCT_CALCULATOR,
+    'sal-tox-guide': SAL_TOX_GUIDE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

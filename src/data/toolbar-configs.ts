@@ -225,6 +225,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'kings', label: "King's College", icon: '\uD83C\uDFE5', action: 'calculator', target: 'kings-college' },
     { id: 'stages', label: 'Tox Stages', icon: '\uD83D\uDCCB', action: 'overlay', target: 'apap-stages' },
   ],
+  'salicylate': [
+    { id: 'sal-calc', label: 'Sal Guide', icon: '\uD83E\uDDEA', action: 'calculator', target: 'sal-tox-guide' },
+    { id: 'bicarb', label: 'NaHCO\u2083', icon: '\uD83D\uDC89', action: 'jump', target: 'sal-bicarb-bolus' },
+    { id: 'hd', label: 'HD', icon: '\uD83D\uDEA8', action: 'jump', target: 'sal-hd-indications' },
+    { id: 'airway', label: 'Airway \u26A0', icon: '\u26A0\uFE0F', action: 'overlay', target: 'sal-death-spiral' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

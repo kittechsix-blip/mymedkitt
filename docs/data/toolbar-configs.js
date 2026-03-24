@@ -205,6 +205,18 @@ const TOOLBAR_CONFIGS = {
         { id: 'bicarb', label: 'NaHCO\u2083', icon: '\uD83D\uDC89', action: 'calculator', target: 'bicarb-dose' },
         { id: 'protocol', label: 'Bicarb Rx', icon: '\uD83D\uDCCB', action: 'overlay', target: 'tca-bicarb-protocol' },
     ],
+    'acetaminophen': [
+        { id: 'rumack', label: 'Rumack-Matthew', icon: '\uD83D\uDCCA', action: 'calculator', target: 'rumack-matthew' },
+        { id: 'nac-calc', label: 'NAC Dosing', icon: '\uD83D\uDC8A', action: 'calculator', target: 'nac-dosing' },
+        { id: 'kings', label: "King's College", icon: '\uD83C\uDFE5', action: 'calculator', target: 'kings-college' },
+        { id: 'stages', label: 'Tox Stages', icon: '\uD83D\uDCCB', action: 'overlay', target: 'apap-stages' },
+    ],
+    'salicylate': [
+        { id: 'sal-calc', label: 'Sal Guide', icon: '\uD83E\uDDEA', action: 'calculator', target: 'sal-tox-guide' },
+        { id: 'bicarb', label: 'NaHCO\u2083', icon: '\uD83D\uDC89', action: 'jump', target: 'sal-bicarb-bolus' },
+        { id: 'hd', label: 'HD', icon: '\uD83D\uDEA8', action: 'jump', target: 'sal-hd-indications' },
+        { id: 'airway', label: 'Airway \u26A0', icon: '\u26A0\uFE0F', action: 'overlay', target: 'sal-death-spiral' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
