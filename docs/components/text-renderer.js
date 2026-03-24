@@ -43,15 +43,30 @@ export function renderBodyText(container, text) {
                 line.trim().startsWith('-');
             if (hasEssential) {
                 p.classList.add('qf-essential');
+                container.appendChild(p);
             }
             else {
-                p.classList.add('qf-collapsible');
-                // Make tappable to expand in Quick Fire mode
-                p.addEventListener('click', () => {
-                    p.classList.toggle('qf-expanded');
+                // Wrap collapsible content in a tappable container
+                const wrapper = document.createElement('div');
+                wrapper.className = 'qf-section';
+                const tapBar = document.createElement('div');
+                tapBar.className = 'qf-tap-bar';
+                tapBar.innerHTML = '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
+                const content = document.createElement('div');
+                content.className = 'qf-content';
+                content.appendChild(p);
+                wrapper.appendChild(tapBar);
+                wrapper.appendChild(content);
+                // Toggle on tap
+                wrapper.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    wrapper.classList.toggle('qf-expanded');
+                    tapBar.innerHTML = wrapper.classList.contains('qf-expanded')
+                        ? '<span class="qf-tap-icon">−</span> <span class="qf-tap-hint">tap to collapse</span>'
+                        : '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
                 });
+                container.appendChild(wrapper);
             }
-            container.appendChild(p);
         }
     }
 }

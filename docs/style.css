@@ -3217,14 +3217,14 @@ body {
 
 .quick-fire-toggle:hover {
   background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 215, 0, 0.5);
+  border-color: rgba(139, 69, 19, 0.6);
 }
 
 .quick-fire-toggle--active {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #1a1a1a;
-  border-color: #FFD700;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: #fff;
+  border-color: #8B4513;
+  box-shadow: 0 0 12px rgba(139, 69, 19, 0.6);
   transform: scale(1.1);
 }
 
@@ -3278,44 +3278,45 @@ body.quick-fire-mode .decision-card--answered:not(.decision-card--quick-fire) {
 
 body.quick-fire-mode .card-stack-container {
   background: linear-gradient(135deg,
-    rgba(255, 215, 0, 0.08) 0%,
-    rgba(255, 165, 0, 0.05) 100%);
-  border: 2px solid rgba(255, 215, 0, 0.3);
+    rgba(139, 69, 19, 0.06) 0%,
+    rgba(139, 69, 19, 0.03) 100%);
+  border: 3px solid #8B4513;
   border-radius: 12px;
-  padding: 8px;
+  padding: 12px;
   margin: 0 -8px;
   box-shadow:
-    inset 0 0 20px rgba(255, 215, 0, 0.1),
-    0 0 15px rgba(255, 215, 0, 0.15);
+    inset 0 0 20px rgba(139, 69, 19, 0.08),
+    0 0 20px rgba(139, 69, 19, 0.2);
 }
 
 body.quick-fire-mode .consult-flow-header {
-  box-shadow: 0 2px 12px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.3);
+  border-bottom: 2px solid rgba(139, 69, 19, 0.3);
 }
 
 body.quick-fire-mode .quick-fire-toggle--active {
-  animation: pulse-glow 1.5s ease-in-out infinite;
+  animation: pulse-glow-umber 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
-  50% { box-shadow: 0 0 16px rgba(255, 215, 0, 0.8); }
+@keyframes pulse-glow-umber {
+  0%, 100% { box-shadow: 0 0 8px rgba(139, 69, 19, 0.5); }
+  50% { box-shadow: 0 0 18px rgba(139, 69, 19, 0.8); }
 }
 
-/* Quick fire mode label badge */
+/* Quick fire mode label badge on card stack */
 body.quick-fire-mode .card-stack-container::before {
-  content: '⚡ QUICK FIRE';
+  content: '\26A1 QUICK FIRE MODE';
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 16px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #1a1a1a;
-  font-size: 10px;
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: #fff;
+  font-size: 11px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 4px 12px;
   border-radius: 4px;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(255, 165, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.5);
 }
 
 body.quick-fire-mode .card-stack-container {
@@ -3323,46 +3324,112 @@ body.quick-fire-mode .card-stack-container {
   margin-top: 16px;
 }
 
-/* Quick Fire: Collapse non-essential content, tap to expand */
-body.quick-fire-mode .qf-collapsible {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  margin: 0;
-  padding: 0;
-  transition: all 0.2s ease;
+/* ===================================================================
+   QUICK FIRE MODE — Burnt Umber Theme with Tap-to-Expand
+   Burnt Umber: #8B4513 (primary), rgba(139, 69, 19, X) for variations
+   =================================================================== */
+
+/* Frame around the entire active card in Quick Fire */
+body.quick-fire-mode .decision-card--active {
+  border: 3px solid #8B4513 !important;
+  box-shadow: 0 0 0 1px rgba(139, 69, 19, 0.3),
+              0 4px 20px rgba(139, 69, 19, 0.25) !important;
   position: relative;
 }
 
-/* Show collapsed indicator - tappable bar */
-body.quick-fire-mode .qf-collapsible::before {
-  content: '';
-  display: block;
-  max-height: 24px;
-  height: 24px;
-  margin: 4px 0;
-  background: linear-gradient(90deg,
-    rgba(255, 215, 0, 0.15) 0%,
-    rgba(255, 215, 0, 0.05) 100%);
-  border-left: 3px solid rgba(255, 215, 0, 0.4);
-  border-radius: 0 4px 4px 0;
+body.quick-fire-mode .decision-card--active::before {
+  content: '\26A1 QUICK FIRE';
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(139, 69, 19, 0.4);
+  z-index: 10;
+}
+
+/* Collapsible section wrapper */
+.qf-section {
+  margin: 8px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+/* Tap bar - always visible in Quick Fire mode */
+.qf-tap-bar {
+  display: none;
+}
+
+body.quick-fire-mode .qf-tap-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.15) 0%, rgba(139, 69, 19, 0.08) 100%);
+  border: 2px dashed rgba(139, 69, 19, 0.4);
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+body.quick-fire-mode .qf-tap-bar:hover {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.25) 0%, rgba(139, 69, 19, 0.15) 100%);
+  border-color: rgba(139, 69, 19, 0.6);
+}
+
+body.quick-fire-mode .qf-tap-bar:active {
+  transform: scale(0.98);
+}
+
+.qf-tap-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #8B4513;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.qf-tap-hint {
+  font-size: 12px;
+  color: #8B4513;
+  font-weight: 500;
+}
+
+/* Content - hidden by default in Quick Fire */
+body.quick-fire-mode .qf-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.25s ease;
 }
 
 /* Expanded state */
-body.quick-fire-mode .qf-collapsible.qf-expanded,
-body.quick-fire-mode .qf-collapsible:focus {
+body.quick-fire-mode .qf-section.qf-expanded .qf-content {
   max-height: 500px;
   opacity: 1;
-  margin: 0.5em 0;
-  padding: 8px 12px;
-  background: rgba(255, 215, 0, 0.08);
-  border-left: 3px solid rgba(255, 215, 0, 0.5);
-  border-radius: 0 4px 4px 0;
+  padding: 12px 14px;
+  background: rgba(139, 69, 19, 0.06);
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
 }
 
-body.quick-fire-mode .qf-collapsible.qf-expanded::before {
-  display: none;
+body.quick-fire-mode .qf-section.qf-expanded .qf-tap-bar {
+  border-radius: 6px 6px 0 0;
+  border-bottom: none;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.2) 0%, rgba(139, 69, 19, 0.12) 100%);
 }
 
 /* Essential content always visible */
@@ -3375,29 +3442,33 @@ body.quick-fire-mode .decision-card--active details {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  margin: 4px 0;
+  margin: 8px 0;
   padding: 0;
   transition: all 0.2s ease;
 }
 
 body.quick-fire-mode .decision-card--active details::before {
-  content: '\25B8 References (tap)';
-  display: block;
-  padding: 8px 12px;
-  background: linear-gradient(90deg,
-    rgba(255, 215, 0, 0.15) 0%,
-    rgba(255, 215, 0, 0.05) 100%);
-  border-left: 3px solid rgba(255, 215, 0, 0.4);
-  border-radius: 0 4px 4px 0;
+  content: '\25B8 References (tap to show)';
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.15) 0%, rgba(139, 69, 19, 0.08) 100%);
+  border: 2px dashed rgba(139, 69, 19, 0.4);
+  border-radius: 6px;
   font-size: 12px;
-  color: var(--color-text-muted);
+  font-weight: 500;
+  color: #8B4513;
   cursor: pointer;
 }
 
 body.quick-fire-mode .decision-card--active details[open] {
   max-height: 1000px;
   opacity: 1;
-  padding: 8px 0;
+  padding: 12px 14px;
+  background: rgba(139, 69, 19, 0.06);
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  border-radius: 6px;
 }
 
 body.quick-fire-mode .decision-card--active details[open]::before {
