@@ -4,6 +4,7 @@
 import { showInfoModal } from './info-page.js';
 import { showDrugModal } from './drug-store.js';
 import { router } from '../services/router.js';
+import { isQuickFireMode } from './quick-fire-mode.js';
 
 /** Append text to a parent element, converting **bold** markers to <strong> elements. */
 export function appendBoldAware(parent: HTMLElement, text: string): void {
@@ -31,7 +32,22 @@ export function appendBoldAware(parent: HTMLElement, text: string): void {
 export function renderBodyText(container: HTMLElement, text: string): void {
   const lines = text.split('\n');
 
-  // Group lines: bold headings have collapsible content below them
+  // Quick Fire grouping only applies when mode is ON and we're inside an active decision card
+  const useQuickFire = isQuickFireMode() && !!container.closest('.decision-card--active');
+
+  if (!useQuickFire) {
+    // Normal mode: plain paragraphs, no qf wrappers
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      const p = document.createElement('p');
+      renderLineWithLinksAndCitations(p, trimmed);
+      container.appendChild(p);
+    }
+    return;
+  }
+
+  // Quick Fire mode: group by bold headings with collapsible content
   let currentSection: { heading: string; content: string[] } | null = null;
   const sections: Array<{ type: 'heading-section'; heading: string; content: string[] } |
                         { type: 'link-line'; line: string } |
@@ -45,30 +61,23 @@ export function renderBodyText(container: HTMLElement, text: string): void {
     const hasLink = /\[.+?\]\(.+?\)/.test(trimmed);
 
     if (isBoldHeading) {
-      // Save previous section
       if (currentSection) {
         sections.push({ type: 'heading-section', ...currentSection });
       }
-      // Start new section
       currentSection = { heading: trimmed, content: [] };
     } else if (currentSection) {
-      // Add to current section's content
       currentSection.content.push(trimmed);
     } else if (hasLink) {
-      // Standalone link - always visible
       sections.push({ type: 'link-line', line: trimmed });
     } else {
-      // Plain content before any heading
       sections.push({ type: 'plain', line: trimmed });
     }
   }
 
-  // Don't forget the last section
   if (currentSection) {
     sections.push({ type: 'heading-section', ...currentSection });
   }
 
-  // Render sections
   for (const section of sections) {
     if (section.type === 'link-line') {
       // Links always visible
@@ -78,7 +87,6 @@ export function renderBodyText(container: HTMLElement, text: string): void {
       container.appendChild(p);
 
     } else if (section.type === 'heading-section') {
-      // Bold heading visible + small tappable card below for content
       const wrapper = document.createElement('div');
       wrapper.className = 'qf-section';
 
@@ -113,28 +121,10 @@ export function renderBodyText(container: HTMLElement, text: string): void {
       container.appendChild(wrapper);
 
     } else {
-      // Plain text - small expandable card
-      const wrapper = document.createElement('div');
-      wrapper.className = 'qf-section qf-plain-section';
-
-      const expandCard = document.createElement('div');
-      expandCard.className = 'qf-expand-card';
-
-      const content = document.createElement('div');
-      content.className = 'qf-content';
+      // Plain text before any heading — stays visible (no collapse)
       const p = document.createElement('p');
       renderLineWithLinksAndCitations(p, section.line);
-      content.appendChild(p);
-
-      wrapper.appendChild(expandCard);
-      wrapper.appendChild(content);
-
-      expandCard.addEventListener('click', (e) => {
-        e.stopPropagation();
-        wrapper.classList.toggle('qf-expanded');
-      });
-
-      container.appendChild(wrapper);
+      container.appendChild(p);
     }
   }
 }

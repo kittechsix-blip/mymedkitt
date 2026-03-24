@@ -41,7 +41,7 @@ export function renderQuickFireToggle(): HTMLElement {
 
   const updateButton = () => {
     const enabled = isQuickFireMode();
-    btn.innerHTML = enabled ? '&#x26A1;' : '&#x26A1;'; // Lightning bolt
+    btn.innerHTML = '&#x26A1;';
     btn.classList.toggle('quick-fire-toggle--active', enabled);
   };
 
