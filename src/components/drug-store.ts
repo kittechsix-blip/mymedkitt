@@ -516,6 +516,15 @@ function renderDoseResults(
       dailyNote.className = 'dose-calc-result-detail';
       dailyNote.textContent = `Daily total: ${fmtNum(dailyTotal)} ${wc.unit}/day`;
       row.appendChild(dailyNote);
+
+      // Volume line for concentration-based drugs
+      if (wc.concentration) {
+        const volPerDose = dose / wc.concentration.amount;
+        const volLine = document.createElement('div');
+        volLine.className = 'dose-calc-result-volume';
+        volLine.textContent = `\u2192 Draw up ${fmtNum(volPerDose)} mL of ${wc.concentration.displayName}`;
+        row.appendChild(volLine);
+      }
     } else {
       doseEl.textContent = `Give ${fmtNum(dose)} ${wc.unit}`;
       row.appendChild(doseEl);
@@ -526,6 +535,15 @@ function renderDoseResults(
       if (capped) detailText += ` \u2192 max ${fmtNum(wc.maxDose!)} ${wc.unit}`;
       detail.textContent = detailText;
       row.appendChild(detail);
+
+      // Volume line for concentration-based drugs
+      if (wc.concentration) {
+        const vol = dose / wc.concentration.amount;
+        const volLine = document.createElement('div');
+        volLine.className = 'dose-calc-result-volume';
+        volLine.textContent = `\u2192 Draw up ${fmtNum(vol)} mL of ${wc.concentration.displayName}`;
+        row.appendChild(volLine);
+      }
     }
 
     // Add to doses button (if drug context provided)

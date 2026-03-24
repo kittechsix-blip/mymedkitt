@@ -1575,7 +1575,7 @@ const EPINEPHRINE = {
         {
             indication: 'Anaphylaxis — IM (first-line)',
             regimen: '0.5 mg IM (0.5 mL of 1 mg/mL) into anterolateral thigh. Repeat every 5 minutes up to 3 doses if no response. NO absolute contraindications in anaphylaxis.\n\nPediatric: 0.01 mg/kg IM (max 0.5 mg).\n\nAnterolateral thigh provides faster peak plasma levels than deltoid or subcutaneous injection (Simons 2001). Do NOT delay epinephrine for IV access, antihistamines, or steroids.',
-            weightCalc: { dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, label: 'Pediatric IM' },
+            weightCalc: { dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, label: 'Pediatric IM', concentration: { amount: 1, perMl: 1, displayName: '1:1,000 (1 mg/mL)' } },
         },
         {
             indication: 'Anaphylaxis — IV infusion',
@@ -1601,16 +1601,16 @@ const EPINEPHRINE = {
             indication: 'Neonatal resuscitation (NRP) — IV/IO',
             regimen: '0.01-0.03 mg/kg of 1:10,000 (0.1-0.3 mL/kg) IV/IO. Repeat every 3-5 minutes. Flush with 1-3 mL NS. IV/IO preferred over ET route.',
             weightCalc: [
-                { dosePerKg: 0.01, unit: 'mg', label: 'Low dose (0.01 mg/kg)' },
-                { dosePerKg: 0.03, unit: 'mg', label: 'High dose (0.03 mg/kg)' },
+                { dosePerKg: 0.01, unit: 'mg', label: 'Low dose (0.01 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
+                { dosePerKg: 0.03, unit: 'mg', label: 'High dose (0.03 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
             ],
         },
         {
             indication: 'Neonatal resuscitation (NRP) — ET',
             regimen: '0.05-0.1 mg/kg of 1:10,000 (0.5-1 mL/kg) via endotracheal tube. Use only if IV/IO access not available. Higher dose needed — absorption is unpredictable via ET route.',
             weightCalc: [
-                { dosePerKg: 0.05, unit: 'mg', label: 'Low dose ET (0.05 mg/kg)' },
-                { dosePerKg: 0.1, unit: 'mg', label: 'High dose ET (0.1 mg/kg)' },
+                { dosePerKg: 0.05, unit: 'mg', label: 'Low dose ET (0.05 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
+                { dosePerKg: 0.1, unit: 'mg', label: 'High dose ET (0.1 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
             ],
         },
     ],
