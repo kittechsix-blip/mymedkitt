@@ -117,6 +117,7 @@ const TREE_REGISTRY = {
   'acetaminophen':        { prefix: 'ACETAMINOPHEN_OD',      entryNodeId: 'apap-start',     categoryId: 'toxicology' },
   'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
   'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
+  'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -140,6 +141,7 @@ const CROSS_LISTINGS = {
   'sah':              [{ categoryId: 'emergency-medicine' }],
   'delirium':         [{ categoryId: 'emergency-medicine' }],
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
+  'sepsis':           [{ categoryId: 'critical-care' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
