@@ -22,3 +22,9 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+# Browser profile (Playwright persistent login sessions)
+.browser-profile/
+
+# Generated Supabase SQL (regenerated from source via generate-supabase-sql.mjs)
+supabase-*-insert.sql

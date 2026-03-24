@@ -9,7 +9,8 @@
     "dev": "electrobun dev"
   },
   "dependencies": {
-    "electrobun": "latest"
+    "electrobun": "latest",
+    "playwright": "^1.58.2"
   },
   "devDependencies": {
     "@types/bun": "latest",

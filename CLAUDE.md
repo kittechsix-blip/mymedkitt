@@ -24,6 +24,18 @@ The project-level deploy skill (`.claude/commands/deploy.md`) uses `deploy-cache
 - Bumps `CACHE_NAME` in `docs/sw.js` → triggers service worker update
 - Users get fresh content automatically — no manual cache clearing needed
 
+### New Consult Build Pipeline (Autonomous)
+1. Create tree file: `src/data/trees/<id>.ts` (use `CONSULT_TEMPLATE.md`)
+2. Register in: `categories.ts`, `tree-service.ts`, `trees/index.ts`
+3. Register in SQL generator: `scripts/generate-supabase-sql.mjs`
+4. Compile: `bunx tsc --skipLibCheck --noUnusedLocals false`
+5. Copy CSS: `cp src/views/style.css docs/style.css`
+6. Cache sync: `node scripts/deploy-cache-sync.mjs` → recompile after
+7. Add to SW cache: `docs/sw.js` ASSETS_TO_CACHE (alphabetical)
+8. Generate SQL: `node scripts/generate-supabase-sql.mjs <id>`
+9. Push to Supabase via REST API (see "Supabase API Deploy" section below)
+10. Commit and push to GitHub
+
 ### Core Design Philosophy
 
 > **"All information accessible, but hidden by default."**
@@ -407,6 +419,19 @@ All data services follow: **Supabase → IndexedDB → Hardcoded Fallback**
 - `drug-service.ts` — synchronous drug lookup with in-memory cache
 - `info-service.ts` — info page loading by ID
 - `category-service.ts` — category + tree associations, `mergeHardcodedConsults()` for new consults
+
+### Supabase API Deploy (Autonomous — No Browser Needed)
+Service role key stored in `.env` (gitignored). Use REST API to insert/update data directly:
+```bash
+SERVICE_KEY=$(grep SUPABASE_SERVICE_ROLE_KEY .env | cut -d= -f2)
+BASE="https://kzzqloklnxlqbccxbxgr.supabase.co/rest/v1"
+# Insert: curl -s -X POST "$BASE/<table>" -H "apikey: $SERVICE_KEY" -H "Authorization: Bearer $SERVICE_KEY" -H "Content-Type: application/json" -H "Prefer: return=minimal" -d '<json>'
+# Delete: curl -s -X DELETE "$BASE/<table>?tree_id=eq.<id>" -H "apikey: $SERVICE_KEY" -H "Authorization: Bearer $SERVICE_KEY"
+```
+Tables: `decision_trees` (metadata), `category_trees` (category mapping), `tree_citations`, `decision_nodes`.
+For new consults: generate JSON from compiled JS via `node -e "import('./docs/data/trees/<id>.js').then(m => ...)"` and POST to each table.
+For updates: use `generate-supabase-sql.mjs` or directly PATCH individual nodes via REST.
+**This replaces the manual TextEdit → Cmd+A → Cmd+C → Supabase paste workflow for autonomous builds.**
 
 ### Category System
 - 18 specialties + 2 tool categories (Pharmacy, Med-Calc)
