@@ -113,6 +113,9 @@ const TREE_REGISTRY = {
   'anaphylaxis':          { prefix: 'ANAPHYLAXIS',           entryNodeId: 'anaph-start',    categoryId: 'emergency-medicine' },
   'angioedema':           { prefix: 'ANGIOEDEMA',            entryNodeId: 'angio-start',    categoryId: 'emergency-medicine' },
   'sickle-cell':          { prefix: 'SICKLE_CELL',           entryNodeId: 'scd-start',      categoryId: 'heme-onc' },
+  'tca-toxidrome':        { prefix: 'TCA_TOXIDROME',         entryNodeId: 'tca-start',      categoryId: 'toxicology' },
+  'acetaminophen':        { prefix: 'ACETAMINOPHEN_OD',      entryNodeId: 'apap-start',     categoryId: 'toxicology' },
+  'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
 };
 
 // Cross-listing: which consults appear in multiple categories
