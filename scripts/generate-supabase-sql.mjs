@@ -116,6 +116,7 @@ const TREE_REGISTRY = {
   'tca-toxidrome':        { prefix: 'TCA_TOXIDROME',         entryNodeId: 'tca-start',      categoryId: 'toxicology' },
   'acetaminophen':        { prefix: 'ACETAMINOPHEN_OD',      entryNodeId: 'apap-start',     categoryId: 'toxicology' },
   'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
+  'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
 };
 
 // Cross-listing: which consults appear in multiple categories
