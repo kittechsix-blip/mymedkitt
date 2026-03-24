@@ -1068,6 +1068,42 @@ const DEXAMETHASONE = {
         'Gates A, Johnson DW, Klassen TP. Glucocorticoids for Croup in Children. JAMA Pediatrics. 2019;173(6):595-596.',
     ],
 };
+const DAPTOMYCIN = {
+    id: 'daptomycin',
+    name: 'Daptomycin (Cubicin)',
+    genericName: 'Daptomycin',
+    drugClass: 'Lipopeptide antibiotic',
+    route: 'IV',
+    indications: ['MRSA bacteremia', 'MRSA endocarditis', 'MRSA sepsis (non-pulmonary)'],
+    dosing: [
+        {
+            indication: 'MRSA bacteremia / sepsis',
+            regimen: '6 mg/kg IV q24h. For complicated bacteremia or endocarditis: 8-10 mg/kg IV q24h.',
+            weightCalc: { dosePerKg: 6, unit: 'mg', label: 'Standard bacteremia dose' },
+        },
+        {
+            indication: 'MRSA endocarditis / complicated',
+            regimen: '8-10 mg/kg IV q24h for endocarditis or complicated bacteremia.',
+            weightCalc: { dosePerKg: 10, unit: 'mg', label: 'Endocarditis / complicated dose' },
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity',
+        'MUST NOT be used for pneumonia \u2014 inactivated by pulmonary surfactant',
+    ],
+    cautions: [
+        'CPK elevation and rhabdomyolysis \u2014 monitor CPK weekly',
+        'Eosinophilic pneumonia (rare)',
+        'Peripheral neuropathy',
+        'Renal dose adjustment: q48h if CrCl <30 mL/min or hemodialysis',
+    ],
+    monitoring: 'CPK weekly (discontinue if CPK >10\u00d7 ULN with symptoms). Renal function. Signs of myopathy.',
+    notes: 'CRITICAL: Do NOT use for pneumonia \u2014 daptomycin is inactivated by pulmonary surfactant and will fail. Use linezolid or vancomycin for MRSA pneumonia instead. Excellent for MRSA bacteremia and endocarditis. Higher doses (8-10 mg/kg) increasingly used for complicated infections.',
+    citations: [
+        'Liu C, et al. Clinical Practice Guidelines by IDSA for Treatment of MRSA Infections. Clin Infect Dis. 2011;52(3):e18-e55.',
+        'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+    ],
+};
 const DESMOPRESSIN = {
     id: 'desmopressin',
     name: 'Desmopressin (DDAVP)',
@@ -1420,6 +1456,35 @@ const DIPHENHYDRAMINE = {
     notes: 'Alternative second-line antiemetic for NVP. Generally considered safe in pregnancy. The active antihistamine component of dimenhydrinate.',
     citations: [
         'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    ],
+};
+const DOBUTAMINE = {
+    id: 'dobutamine',
+    name: 'Dobutamine',
+    genericName: 'Dobutamine',
+    drugClass: 'Inotrope (beta-1 adrenergic agonist)',
+    route: 'IV infusion',
+    indications: ['Septic shock with low cardiac output', 'Septic cardiomyopathy (inotropic support)'],
+    dosing: [
+        {
+            indication: 'Septic shock inotrope',
+            regimen: 'Start 2-5 mcg/kg/min IV continuous infusion, titrate to max 20 mcg/kg/min. May cause reflex hypotension \u2014 up-titrate norepinephrine if BP drops. Discontinue if no improvement or hypotension worsens.',
+        },
+    ],
+    contraindications: [
+        'Idiopathic hypertrophic subaortic stenosis (IHSS)',
+        'Known hypersensitivity',
+    ],
+    cautions: [
+        'May cause tachycardia and tachyarrhythmias',
+        'Reflex hypotension from peripheral vasodilation',
+        'Do NOT use to increase cardiac index to supranormal levels',
+    ],
+    monitoring: 'Continuous hemodynamic and cardiac monitoring. Assess perfusion response (CRT, urine output, MAP) within 1 hour of initiation.',
+    notes: 'Primarily beta-1 agonist \u2014 increases contractility with some beta-2 vasodilation. NOT a vasopressor. Use when POCUS shows reduced LVEF or signs of low cardiac output (cool extremities, narrow pulse pressure, inappropriately low HR). Stable or improving BP suggests positive response; precipitous BP drop suggests poor response \u2014 discontinue.',
+    citations: [
+        'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+        'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
     ],
 };
 const DOLUTEGRAVIR = {
@@ -1847,6 +1912,37 @@ const LIDOCAINE = {
     notes: 'For penile block, NEVER use formulations containing epinephrine. The penis is supplied by end-arteries \u2014 epinephrine can cause ischemic necrosis.',
     citations: [
         'Burnett AL, Sharlip ID. Standard Operating Procedures for Priapism. J Sex Med. 2013;10(1):180-94.',
+    ],
+};
+const LINEZOLID = {
+    id: 'linezolid',
+    name: 'Linezolid (Zyvox)',
+    genericName: 'Linezolid',
+    drugClass: 'Oxazolidinone antibiotic',
+    route: 'IV / PO',
+    indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection'],
+    dosing: [
+        {
+            indication: 'MRSA sepsis / pneumonia',
+            regimen: '600 mg IV or PO q12h. No renal dose adjustment required. 100% oral bioavailability \u2014 IV-to-PO switch straightforward.',
+        },
+    ],
+    contraindications: [
+        'Concurrent MAOI use or within 14 days',
+        'Uncontrolled hypertension, pheochromocytoma, thyrotoxicosis, carcinoid syndrome',
+    ],
+    cautions: [
+        'Serotonin syndrome risk with SSRIs, SNRIs, triptans, meperidine',
+        'Thrombocytopenia (monitor weekly if >14 days)',
+        'Lactic acidosis with prolonged use (>28 days)',
+        'Peripheral and optic neuropathy with prolonged use',
+        'Tyramine-rich food interaction (mild \u2014 less than traditional MAOIs)',
+    ],
+    monitoring: 'CBC weekly (thrombocytopenia). Peripheral neuropathy symptoms. Visual acuity if prolonged use (>28 days).',
+    notes: 'Covers MRSA pneumonia (unlike daptomycin which is inactivated by surfactant). Excellent tissue penetration. Use when vancomycin is contraindicated or for MRSA pneumonia when daptomycin cannot be used. 100% oral bioavailability allows early IV-to-PO transition.',
+    citations: [
+        'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+        'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
     ],
 };
 const LOPERAMIDE = {
@@ -3097,6 +3193,43 @@ const PROCAINE_PENICILLIN = {
         'Dunaway SB, et al. Procaine Penicillin G vs Aqueous Crystalline Penicillin G for Neurosyphilis. Clin Infect Dis. 2020.',
     ],
 };
+const PIPERACILLIN_TAZOBACTAM = {
+    id: 'piperacillin-tazobactam',
+    name: 'Piperacillin-Tazobactam (Zosyn)',
+    genericName: 'Piperacillin-Tazobactam',
+    drugClass: 'Beta-lactam / Beta-lactamase inhibitor (antipseudomonal penicillin)',
+    route: 'IV',
+    indications: ['Sepsis empiric coverage', 'Intra-abdominal sepsis', 'Healthcare-associated infection', 'Nosocomial pneumonia'],
+    dosing: [
+        {
+            indication: 'Sepsis empiric coverage',
+            regimen: 'Adult: 4.5g IV q6h (extended infusion over 4 hours for maintenance doses). Loading dose: 4.5g IV over 30 min. Extended infusion improves pharmacodynamics for beta-lactams.',
+        },
+        {
+            indication: 'Pediatric sepsis',
+            regimen: '100 mg/kg (piperacillin component) IV q6-8h. Max 4.5g/dose.',
+            weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 4000, dailyDivided: 4, label: 'Piperacillin component q6h' },
+        },
+    ],
+    contraindications: [
+        'Severe penicillin allergy (anaphylaxis, angioedema)',
+        'Known hypersensitivity to piperacillin, tazobactam, or other penicillins',
+    ],
+    cautions: [
+        'Cross-reactivity with cephalosporins is low (~1-2%) but possible',
+        'Hypokalemia',
+        'Seizures at high doses (especially in renal failure)',
+        'May cause false-positive galactomannan assay',
+        'Empiric antianaerobic coverage in sepsis may be harmful when not specifically indicated (Chanderraj 2024)',
+    ],
+    monitoring: 'Renal function. Potassium levels. Adjust interval for renal impairment (CrCl <40: q8h; CrCl <20: q8h at reduced dose).',
+    notes: 'Broadest Gram-negative AND anaerobic coverage among standard sepsis empiric agents. Extended infusion (4h) recommended for maintenance dosing to optimize time above MIC. ACORN trial: similar outcomes to cefepime with fewer neurologic side effects but comparable AKI rates. Administer beta-lactam BEFORE vancomycin when both are ordered.',
+    citations: [
+        'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+        'Qian ET, et al. Cefepime vs Piperacillin-Tazobactam in Adults Hospitalized With Acute Infection (ACORN). JAMA. 2023;330(16):1557.',
+        'Chanderraj R, et al. Mortality of Patients With Sepsis Administered Piperacillin-Tazobactam vs Cefepime. JAMA Intern Med. 2024;184(7):769.',
+    ],
+};
 const POTASSIUM_CHLORIDE_IV = {
     id: 'potassium-chloride-iv',
     name: 'Potassium Chloride (IV)',
@@ -3729,6 +3862,39 @@ const UFH = {
     citations: [
         'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020.',
         'Garcia DA, et al. Parenteral Anticoagulants: ACCP Evidence-Based Clinical Practice Guidelines. Chest. 2012.',
+    ],
+};
+const VASOPRESSIN = {
+    id: 'vasopressin',
+    name: 'Vasopressin (ADH)',
+    genericName: 'Vasopressin',
+    drugClass: 'Non-adrenergic vasopressor (V1 receptor agonist)',
+    route: 'IV infusion',
+    indications: ['Septic shock (second-line vasopressor)', 'Vasodilatory shock (catecholamine-refractory)'],
+    dosing: [
+        {
+            indication: 'Septic shock (second-line)',
+            regimen: '0.03-0.04 units/min IV continuous infusion (fixed dose, non-titratable). Add to norepinephrine \u2014 do NOT use as sole first-line agent. May reduce norepinephrine requirement and lower risk of atrial fibrillation.',
+        },
+        {
+            indication: 'Vasodilatory / refractory shock',
+            regimen: '0.03-0.04 units/min IV continuous infusion. Consider early addition at lower norepinephrine doses rather than escalating NE to high doses. VASST trial: no mortality benefit but NE-sparing. VANISH trial: no improvement in renal outcomes.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity',
+    ],
+    cautions: [
+        'Coronary vasoconstriction \u2014 use with caution in active coronary ischemia',
+        'Splanchnic vasoconstriction \u2014 monitor for bowel ischemia',
+        'Hyponatremia may occur (V2 receptor effects)',
+    ],
+    monitoring: 'Continuous hemodynamic monitoring. Monitor for digital, mesenteric, or cardiac ischemia. Follow sodium levels.',
+    notes: 'Non-titratable fixed-dose agent \u2014 mechanism complements catecholamines via V1 receptors on vascular smooth muscle. Does NOT have inotropic or chronotropic effects. SOAP-II meta-analysis: vasopressin + catecholamine associated with lower AF risk (RR 0.77).',
+    citations: [
+        'Russell JA, et al. Vasopressin versus Norepinephrine Infusion in Patients with Septic Shock (VASST). NEJM. 2008;358(9):877-887.',
+        'Gordon AC, et al. Effect of Early Vasopressin vs Norepinephrine on Kidney Failure in Patients with Septic Shock (VANISH). JAMA. 2016;316(5):509-518.',
+        'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
     ],
 };
 const VANCOMYCIN = {
@@ -5997,6 +6163,7 @@ export const ALL_DRUGS = [
     CONJUGATED_ESTROGEN,
     DABIGATRAN,
     DARUNAVIR,
+    DAPTOMYCIN,
     DESMOPRESSIN,
     DEXAMETHASONE,
     DEXTROSE,
@@ -6005,6 +6172,7 @@ export const ALL_DRUGS = [
     DILTIAZEM,
     DIMENHYDRINATE,
     DIPHENHYDRAMINE,
+    DOBUTAMINE,
     DOLUTEGRAVIR,
     DROPERIDOL,
     DOXYCYCLINE,
@@ -6041,6 +6209,7 @@ export const ALL_DRUGS = [
     LEVETIRACETAM,
     LEVOTHYROXINE,
     LIDOCAINE,
+    LINEZOLID,
     LIPID_EMULSION,
     LIOTHYRONINE,
     LOPERAMIDE,
@@ -6077,6 +6246,7 @@ export const ALL_DRUGS = [
     PCC_4FACTOR,
     PENTOBARBITAL,
     PHENOBARBITAL,
+    PIPERACILLIN_TAZOBACTAM,
     POTASSIUM_CHLORIDE_IV,
     POTASSIUM_CHLORIDE_ORAL,
     PRASUGREL,
@@ -6116,6 +6286,7 @@ export const ALL_DRUGS = [
     UFH,
     VANCOMYCIN,
     VALPROATE,
+    VASOPRESSIN,
     VERAPAMIL,
     VITAMIN_K,
 ];

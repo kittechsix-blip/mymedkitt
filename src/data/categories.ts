@@ -63,6 +63,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 14,
         entryNodeId: 'pe-start',
+      },
+      {
+        id: 'sepsis',
+        title: 'Sepsis Management',
+        subtitle: 'Recognition \u2192 Resuscitation \u2192 Vasopressors \u2192 Steroids \u2192 Monitoring \u2192 Disposition',
+        categoryId: 'critical-care',
+        version: '1.0',
+        nodeCount: 31,
+        entryNodeId: 'sepsis-start',
       }
     ],
     isCustom: false,
@@ -212,6 +221,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 32,
         entryNodeId: 'syph-start',
+      },
+      {
+        id: 'sepsis',
+        title: 'Sepsis Management',
+        subtitle: 'Recognition \u2192 Resuscitation \u2192 Vasopressors \u2192 Steroids \u2192 Monitoring \u2192 Disposition',
+        categoryId: 'infectious-disease',
+        version: '1.0',
+        nodeCount: 31,
+        entryNodeId: 'sepsis-start',
       }
     ],
     isCustom: false,

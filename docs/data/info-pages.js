@@ -7022,6 +7022,267 @@ const APAP_CHRONIC_INGESTION = {
     ],
 };
 // -------------------------------------------------------------------
+// Sepsis Info Pages
+// -------------------------------------------------------------------
+const SEPSIS_SUMMARY = {
+    id: 'sepsis-summary',
+    title: 'Sepsis Steps Summary',
+    subtitle: 'Quick Reference — Recognition → Resuscitation → Monitoring → Disposition',
+    sections: [
+        {
+            heading: 'Recognition & Assessment',
+            body: '[Assess hemodynamic status and severity](#/node/sepsis-start)\n• Sepsis-3: infection + organ dysfunction (SOFA ≥2)\n• Septic shock: vasopressor-dependent + lactate >2\n[Source evaluation by organ system](#/node/sepsis-eval)\n[Order labs, cultures, imaging](#/node/sepsis-labs)\n[Identify suspected infectious source](#/node/sepsis-source-id)',
+        },
+        {
+            heading: 'Resuscitation Bundle (First 1-3 Hours)',
+            body: '[Airway & breathing stabilization](#/node/sepsis-airway)\n[30 mL/kg IV crystalloid (LR preferred)](#/node/sepsis-fluids)\n[Empiric antibiotics within 1 hour](#/node/sepsis-abx-empiric)\n• Beta-lactam FIRST when also giving vancomycin\n[MRSA coverage if risk factors present](#/node/sepsis-mrsa)\n[Source control within 6-12 hours](#/node/sepsis-source-ctrl)\n[Reassess at 1-3 hours](#/node/sepsis-reassess)',
+        },
+        {
+            heading: 'Hemodynamic Management',
+            body: '[Norepinephrine — first-line vasopressor](#/node/sepsis-vp-init)\n• Can start peripherally for <6 hours\n[Second-line: vasopressin or epinephrine](#/node/sepsis-vp-second)\n[MAP targets & personalization](#/node/sepsis-map-target)\n[Fluid responsiveness assessment](#/node/sepsis-fluid-assess)\n[Inotrope for low cardiac output](#/node/sepsis-inotrope)\n[Refractory shock management](#/node/sepsis-refractory)',
+        },
+        {
+            heading: 'Advanced Therapies',
+            body: '[Stress-dose hydrocortisone for vasopressor-dependent shock](#/node/sepsis-steroids)\n[Septic cardiomyopathy recognition](#/node/sepsis-cardiomyop)\n[Transfusion threshold: Hgb ≤7 g/dL](#/node/sepsis-transfusion)\n[Sepsis mimics & differential](#/node/sepsis-mimics-node)',
+        },
+        {
+            heading: 'Monitoring & Disposition',
+            body: '[Resuscitation endpoints — MAP, CRT, UOP, lactate](#/node/sepsis-monitor)\n[Antibiotic de-escalation at 48-72h](#/node/sepsis-deesc-abx)\n[Fluid & vasopressor weaning](#/node/sepsis-deesc-fluid)\n[ICU admission criteria](#/node/sepsis-dispo-icu)\n[Floor admission criteria](#/node/sepsis-dispo-floor)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.' },
+        { num: 2, text: 'Farkas J. Septic Shock. IBCC. Nov 2025.' },
+    ],
+};
+const SEPSIS_ABX_TABLE = {
+    id: 'sepsis-abx-table',
+    title: 'Empiric Antibiotic Selection',
+    subtitle: 'By Suspected Source — Sepsis & Septic Shock',
+    sections: [
+        {
+            heading: 'General Principles',
+            body: '• Administer **within 1 hour** of sepsis recognition [1]\n• **Beta-lactam FIRST** when also giving vancomycin (improved survival)\n• Full loading dose regardless of renal function\n• Extended infusion for beta-lactam maintenance doses',
+        },
+        {
+            heading: 'Unknown Source / Undifferentiated',
+            body: '**Beta-lactam backbone** (choose one):\n• Piperacillin-tazobactam 4.5g IV q6h (broadest anaerobic coverage)\n• Cefepime 2g IV q8h (antipseudomonal, less anaerobic)\n• Meropenem 1g IV q8h (reserve for MDR risk)\n\n**Add MRSA coverage** if risk factors: Vancomycin 25-30 mg/kg IV load',
+        },
+        {
+            heading: 'Pneumonia (Community-Acquired)',
+            body: '**Beta-lactam** (ceftriaxone 2g IV or ampicillin-sulbactam)\n**PLUS atypical coverage:**\n• Doxycycline 100 mg IV q12h (preferred) OR\n• Azithromycin 500 mg IV\n\n**If Pseudomonas risk** (structural lung disease, recent abx, immunocompromised): Use antipseudomonal beta-lactam instead',
+        },
+        {
+            heading: 'Urinary Source',
+            body: '**Uncomplicated:** Ceftriaxone 2g IV\n**Complicated / Pseudomonas risk:** Piperacillin-tazobactam or cefepime\n**ESBL risk:** Meropenem 1g IV q8h\n\nReview prior urine cultures for resistance patterns',
+        },
+        {
+            heading: 'Intra-Abdominal',
+            body: '**Piperacillin-tazobactam 4.5g IV q6h** (covers anaerobes)\nOR **Meropenem 1g IV q8h** (if ESBL/MDR concern)\nOR **Cefepime + Metronidazole** (alternative combination)\n\n**C. difficile:** Oral vancomycin 125 mg QID +/- IV metronidazole 500 mg q8h',
+        },
+        {
+            heading: 'Skin & Soft Tissue',
+            body: '**Non-necrotizing:** Vancomycin + piperacillin-tazobactam\n**Necrotizing fasciitis:** Vancomycin + piperacillin-tazobactam + clindamycin (toxin suppression)\n**IVDU / line infection:** Vancomycin + antipseudomonal beta-lactam',
+        },
+        {
+            heading: 'Endovascular / Line Infection',
+            body: '**Vancomycin** (MRSA coverage) **+ antipseudomonal beta-lactam**\n• Remove suspected infected catheter after establishing alternative access\n• Draw cultures through line AND peripherally before removal\n\n**Endocarditis suspected:** Add gentamicin for synergy (consult ID)',
+        },
+        {
+            heading: 'MRSA Risk Factors',
+            body: '• Prior MRSA infection or colonization\n• Recent hospitalization or long-term care\n• Hemodialysis\n• IV drug use\n• Central line or indwelling device\n• Soft tissue infection with purulence\n• Nosocomial / surgical site infection',
+        },
+        {
+            heading: 'Pseudomonas Risk Factors',
+            body: '• Structural lung disease (bronchiectasis, CF)\n• Recent broad-spectrum antibiotic exposure\n• Prolonged hospitalization or ICU stay\n• Neutropenia or immunosuppression\n• Known prior Pseudomonas cultures',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.' },
+        { num: 2, text: 'Hwang et al. Updates in Early Management of Sepsis. EB Medicine. Aug 2025.' },
+        { num: 3, text: 'Farkas J. Septic Shock. IBCC. Nov 2025.' },
+    ],
+};
+const SEPSIS_SOURCE_CONTROL = {
+    id: 'sepsis-source-control',
+    title: 'Source Control Guide',
+    subtitle: 'Interventions by Infection Source',
+    sections: [
+        {
+            heading: 'Principles',
+            body: '**Source control within 6-12 hours** when feasible. Undrained foci may not respond to antibiotics alone. [1]\n\nBalance: risk of intervention vs. patient stability. Decisions should consider diagnostic uncertainty regarding the source.',
+        },
+        {
+            heading: 'Interventions by Source',
+            body: '• **Intravascular catheter infection:** Remove catheter after establishing alternative access\n• **Abscess (any site):** Percutaneous or surgical drainage (thoracic empyema, peritoneal, joint, perirectal)\n• **Ascending cholangitis:** ERCP or percutaneous transhepatic cholangiography\n• **Obstructing nephrolithiasis with infection:** Percutaneous nephrostomy or ureteral stent\n• **Bowel perforation/obstruction:** Surgical repair\n• **Necrotizing fasciitis:** Emergent surgical debridement (do not delay)\n• **Fulminant C. difficile colitis:** Colectomy\n• **Infected implantable device/hardware:** Removal when feasible\n• **Toxic shock syndrome:** Drain or excise any toxin-producing focus, even minor',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.' },
+    ],
+};
+const SEPSIS_VP_COMPARISON = {
+    id: 'sepsis-vp-comparison',
+    title: 'Vasopressor Comparison',
+    subtitle: 'Agent Selection for Septic Shock',
+    sections: [
+        {
+            heading: 'Norepinephrine (First-Line)',
+            body: '**Receptors:** Alpha-1 >> Beta-1\n**Effect:** Vasoconstriction + mild inotropy\n**Dose:** 0.01-3 mcg/kg/min\n**Evidence:** Multiple meta-analyses favor NE over dopamine. Standard of care.\n**Pros:** Reliable, well-studied, improves MAP without excessive tachycardia\n**Cons:** Digital/splanchnic ischemia at high doses',
+        },
+        {
+            heading: 'Vasopressin (Second-Line)',
+            body: '**Receptors:** V1 (vascular smooth muscle), V2 (renal)\n**Effect:** Non-adrenergic vasoconstriction\n**Dose:** 0.03-0.04 units/min (FIXED, non-titratable)\n**Evidence:** VASST — NE-sparing, no mortality benefit. VANISH — no renal benefit. Meta-analysis: lower AF risk (RR 0.77)\n**Pros:** NE-sparing, lower AF risk, no tachycardia\n**Cons:** No inotropy, splanchnic ischemia risk',
+        },
+        {
+            heading: 'Epinephrine (Alternative First-Line)',
+            body: '**Receptors:** Alpha-1, Beta-1, Beta-2\n**Effect:** Vasoconstriction + inotropy + chronotropy\n**Dose:** 0.01-0.5 mcg/kg/min\n**Evidence:** CAT trial — outcomes similar to NE\n**Pros:** Combines vasopressor + inotrope. Good for bradycardia/cardiac dysfunction\n**Cons:** Increases lactate (aerobic), tachyarrhythmia risk, worsens acidosis if lactate >5',
+        },
+        {
+            heading: 'Phenylephrine (Temporizing / Select Use)',
+            body: '**Receptors:** Pure Alpha-1\n**Effect:** Vasoconstriction only — no inotropy, no chronotropy\n**Dose:** 100-200 mcg IV push; infusion 40-200 mcg/min\n**Evidence:** Limited. NOT recommended as primary vasopressor\n**Use:** Push-dose temporizer while preparing NE infusion. Consider for severe tachyarrhythmia (e.g., rapid AF) where beta stimulation is undesirable',
+        },
+        {
+            heading: 'Dopamine (NOT Recommended)',
+            body: '**DO NOT USE for septic shock**\n**Evidence:** SOAP-II trial (n=1679) — dopamine associated with **increased arrhythmias and mortality** vs norepinephrine [1]\n**Reason:** Dose-dependent receptor profile (dopaminergic → beta-1 → alpha-1) is unreliable. Higher rates of tachyarrhythmia. No role in modern sepsis management.',
+        },
+        {
+            heading: 'Dobutamine (Inotrope, Not Vasopressor)',
+            body: '**Receptors:** Beta-1 >> Beta-2\n**Effect:** Inotropy + mild vasodilation\n**Dose:** 2-20 mcg/kg/min\n**Use:** Low cardiac output despite adequate vasopressors (septic cardiomyopathy)\n**Caution:** May cause hypotension — up-titrate NE if BP drops. Not for supranormal cardiac index.',
+        },
+        {
+            heading: 'Methylene Blue (Salvage)',
+            body: '**Mechanism:** iNOS/eNOS inhibition → restores vascular tone\n**Dose:** 1-2 mg/kg IV bolus, then 0.5 mg/kg/h infusion\n**Evidence:** Ibarra-Estrada 2023 RCT — shorter time to vasopressor discontinuation, more pressor-free days\n**Use:** Refractory shock on multiple vasopressors + glucocorticoids',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'De Backer D, et al. Comparison of Dopamine and Norepinephrine (SOAP-II). NEJM. 2010;362(9):779-789.' },
+        { num: 2, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.' },
+        { num: 3, text: 'Farkas J. Septic Shock. IBCC. Nov 2025.' },
+    ],
+};
+const SEPSIS_FLUID_GUIDE = {
+    id: 'sepsis-fluid-guide',
+    title: 'Fluid Resuscitation Guide',
+    subtitle: 'Volume, Type, and Special Populations',
+    sections: [
+        {
+            heading: 'Initial Volume',
+            body: '**30 mL/kg IV crystalloid** within first 3 hours [1]\n• Administer in 500 mL boluses, reassess between each\n• Stop if pulmonary edema develops or no further response\n• CLOVERS trial: restrictive vs liberal — similar mortality [2]\n• CLASSIC trial: restrictive approach safe, trend toward less intubation [3]',
+        },
+        {
+            heading: 'Fluid Choice',
+            body: '**Balanced crystalloid preferred** (Lactated Ringer\'s)\n• SMART trial: lower composite of death/RRT/persistent renal dysfunction vs 0.9% NaCl\n• **AVOID HES** — 6S trial: increased mortality (51 vs 43%) and RRT\n• **No benefit to albumin** vs crystalloid (SAFE trial)\n• **No role for hypertonic saline**\n• If bicarb indicated: isotonic bicarbonate (150 mEq NaHCO₃ in 1L D5W)',
+        },
+        {
+            heading: 'Special Populations',
+            body: '• **Obesity (BMI >30):** Use ideal body weight for 30 mL/kg calculation\n• **Heart failure:** Smaller initial bolus acceptable — document rationale for CMS\n• **ESRD:** Same initial bolus recommended despite dialysis status\n• **Pneumonia with mild hypotension:** Fluid-conservative + early vasopressors\n• CMS SEP-1 allows <30 mL/kg if clinician documents reasoning',
+        },
+        {
+            heading: 'After Initial Resuscitation',
+            body: '**RESTRICT further fluids** — most crystalloid extravasates (~95% leaves vasculature)\n• ICU patients receive ~1.5L/day from infusions + antibiotics alone\n• Track net fluid balance — avoid >4-5L net positive\n• Use dynamic measures for fluid responsiveness (PLR, IVC, PPV)\n• Fluid responsiveness is NORMAL — it does NOT mean give more fluid\n• Absence of fluid responsiveness suggests volume overload',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.' },
+        { num: 2, text: 'CLOVERS Investigators. NEJM. 2023;388(6):499-510.' },
+        { num: 3, text: 'CLASSIC Investigators. NEJM. 2022;386(26):2459-2470.' },
+    ],
+};
+const SEPSIS_MIMICS = {
+    id: 'sepsis-mimics',
+    title: 'Sepsis Mimics & Differential Diagnosis',
+    subtitle: 'Consider When Treatment Fails or Source Is Unclear',
+    sections: [
+        {
+            heading: 'When to Suspect a Mimic',
+            body: '• No clear infectious source identified\n• Procalcitonin unexpectedly low\n• Atypical clinical course\n• Not responding to appropriate antibiotics and resuscitation',
+        },
+        {
+            heading: 'Infectious Mimics',
+            body: '• **Endocarditis** causing valve failure → cardiogenic shock (not distributive)\n• **Tick-borne illness** — anaplasmosis, babesiosis (exposure, thrombocytopenia, hemolysis)\n• **Invasive candidiasis** — ongoing critical illness, central line, colonization, TPN\n• **Invasive aspergillosis** — prolonged neutropenia, heme malignancy, steroids\n• **PJP pneumonia** — diffuse infiltrates, HIV, chronic steroids, immunosuppression',
+        },
+        {
+            heading: 'Endocrine Mimics',
+            body: '• **[Adrenal crisis](#/tree/adrenal-insufficiency)** — recent steroid d/c, vasopressor-refractory, eosinophilia, abdominal pain\n• **[Thyroid storm](#/tree/thyroid)** — tremors, thyromegaly, tachycardia, encephalopathy\n• **DKA** — hyperglycemia, anion gap (may coexist with sepsis!)',
+        },
+        {
+            heading: 'GI Mimics',
+            body: '• **Acute mesenteric ischemia** — AF, vasculopathy, pain out of proportion → CTA\n• **Bowel obstruction** → CT abdomen\n• **Pancreatitis** — epigastric pain, elevated lipase\n• **Fulminant hepatic failure** — LFTs\n• **Decompensated cirrhosis** — does not exclude concurrent sepsis',
+        },
+        {
+            heading: 'Toxicological Mimics',
+            body: '• **Salicylate intoxication** — tachypnea, delirium, elevated AG → check salicylate level\n• **Beta-blocker/CCB overdose** — disproportionate bradycardia\n• **Carbon monoxide** — exposure history → carboxyhemoglobin\n• **Metformin toxicity** — disproportionate lactate elevation',
+        },
+        {
+            heading: 'Other Mimics',
+            body: '• **Anaphylaxis** — rapid onset, hives, bronchospasm (treat both if uncertain)\n• **HLH** — cytopenias, hepatosplenomegaly, very high fevers → ferritin\n• **DRESS/AGEP** — skin exam, medication review\n• **Aspiration pneumonitis** — rapid onset AND often rapid recovery',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Septic Shock — Sepsis Mimics. IBCC. Nov 2025.' },
+        { num: 2, text: 'Long B, Koyfman A. Clinical Mimics: An EM-Focused Review of Sepsis Mimics. J Emerg Med. 2017;52(1):34-42.' },
+    ],
+};
+const SEPSIS_CARDIOMYOPATHY_PAGE = {
+    id: 'sepsis-cardiomyopathy',
+    title: 'Septic Cardiomyopathy',
+    subtitle: 'Recognition, Diagnosis & Management',
+    sections: [
+        {
+            heading: 'Overview',
+            body: 'Occurs in **up to 50%** of septic shock patients. Acute, biventricular myocardial dysfunction that is **reversible within 7-10 days**. Often under-recognized because systemic vasodilation may mask low EF (pseudo-normal LVEF).',
+        },
+        {
+            heading: 'Clinical Clues',
+            body: '• Low cardiac output (cool extremities) despite adequate MAP\n• Vasopressor-refractory shock\n• Preload unresponsiveness (not fluid responsive)\n• Narrow pulse pressure (<40 mmHg)\n• Profound systemic inflammation (toxic shock, gram-negative sepsis)\n• Prior history of heart failure\n• Abrupt vasopressor escalation without clear clinical trigger',
+        },
+        {
+            heading: 'Echocardiographic Findings',
+            body: '**LV Systolic:**\n• LVEF <45% (may be pseudo-normal from vasodilation)\n• Reduced global longitudinal strain (GLS <-17%)\n• Reduced MAPSE\n\n**LV Diastolic:**\n• Lateral e\' <8 cm/s (strongly predicts mortality)\n• Lateral E/e\' >13 cm/s (suggests elevated LVEDP)\n\n**RV Dysfunction:**\n• TAPSE <16 mm\n• RV/LV ratio >0.6\n• TDI S\' <10 cm/s',
+        },
+        {
+            heading: 'Management',
+            body: '• **Avoid excessive vasoconstrictors** — NE + vasopressin without inotropy is suboptimal\n• **Inotrope:** Dobutamine (first choice) or epinephrine\n• **Stress-dose steroids** (inflammatory cytokines worsen cardiomyopathy)\n• Treat fever, agitation, shivering (reduce O₂ demand)\n• **Thiamine** if deficiency possible\n• Fluid removal if significant congestion\n• Consider ECMO for pure cardiogenic failure phenotype\n• Do NOT discontinue dexmedetomidine without considering its sympatholytic effects on HR',
+        },
+        {
+            heading: 'Differential Diagnosis',
+            body: '• Acute MI (check ECG, troponin trend)\n• Myocarditis\n• Stress (Takotsubo) cardiomyopathy (usually no RV involvement)\n• LVOTO (LV outflow tract obstruction)\n• RV failure from PE\n• Chronic HF with superimposed septic cardiomyopathy',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Septic Cardiomyopathy. IBCC. Nov 2025.' },
+        { num: 2, text: 'L\'Heureux M, et al. Sepsis-Induced Cardiomyopathy: a Comprehensive Review. Curr Cardiol Rep. 2020;22(5):35.' },
+    ],
+};
+const SEPSIS_SEP1_BUNDLE = {
+    id: 'sepsis-sep1-bundle',
+    title: 'CMS SEP-1 Bundle Requirements',
+    subtitle: 'Quality Measure Compliance',
+    sections: [
+        {
+            heading: 'Important Context',
+            body: 'CMS SEP-1 uses **Sepsis-2 definitions** (not Sepsis-3). "Severe sepsis" = infection + organ dysfunction or lactate >2. "Septic shock" = SBP <90 not responsive to fluids, OR lactate ≥4 (regardless of hypotension). SEP-1 is currently pay-for-reporting, becoming pay-for-performance in 2026.',
+        },
+        {
+            heading: '3-Hour Bundle (from time zero)',
+            body: '1. **Measure serum lactate**\n2. **Obtain 2 sets of blood cultures** prior to antibiotic administration\n3. **Administer broad-spectrum IV antibiotics** (within 1 hour when possible)\n4. **If hypotensive OR lactate ≥4 mmol/L:** Administer 30 mL/kg IV crystalloid\n\n**Notes:**\n• Ideal body weight acceptable for BMI >30\n• <30 mL/kg acceptable if clinician documents reasoning (e.g., CHF concern)\n• Blood cultures should not delay antibiotics in critically ill patients',
+        },
+        {
+            heading: '6-Hour Bundle (from time zero)',
+            body: '1. **Remeasure lactate** if initial >2 mmol/L\n2. **If hypotensive OR lactate ≥4 in first 6 hours:**\n   • Administer IV vasopressors to achieve MAP ≥65 mmHg\n   • Reassess intravascular volume status and tissue perfusion\n\n**Reassessment options:**\n• Repeat focused exam (vitals, cardiopulmonary, CRT, skin, UOP)\n• Any two of: CVP, ScvO2, bedside echo, PLR, or fluid challenge',
+        },
+        {
+            heading: 'Key Differences from Sepsis-3',
+            body: '• SEP-1 does NOT require vasopressor dependence for "septic shock"\n• SEP-1 uses lactate ≥4 as standalone shock criterion\n• Sepsis-3 requires both vasopressor need + lactate >2\n• SSC 2021 guidelines largely align with Sepsis-3, not CMS criteria',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hwang et al. Updates and Controversies in Early Management of Sepsis. EB Medicine. Aug 2025.' },
+        { num: 2, text: 'Rhee C, et al. Improving Sepsis Outcomes in the Era of Pay-for-Performance (IDSA/ACEP/PIDS/SHEA/SHM/SIDP Position Paper). Clin Infect Dis. 2024;78(3):505-513.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -7234,6 +7495,14 @@ export const INFO_PAGES = {
     'apap-massive-od': APAP_MASSIVE_OD,
     'apap-risk-factors': APAP_RISK_FACTORS,
     'apap-chronic-ingestion': APAP_CHRONIC_INGESTION,
+    'sepsis-summary': SEPSIS_SUMMARY,
+    'sepsis-abx-table': SEPSIS_ABX_TABLE,
+    'sepsis-source-control': SEPSIS_SOURCE_CONTROL,
+    'sepsis-vp-comparison': SEPSIS_VP_COMPARISON,
+    'sepsis-fluid-guide': SEPSIS_FLUID_GUIDE,
+    'sepsis-mimics': SEPSIS_MIMICS,
+    'sepsis-cardiomyopathy': SEPSIS_CARDIOMYOPATHY_PAGE,
+    'sepsis-sep1-bundle': SEPSIS_SEP1_BUNDLE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

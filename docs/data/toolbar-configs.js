@@ -217,6 +217,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'hd', label: 'HD', icon: '\uD83D\uDEA8', action: 'jump', target: 'sal-hd-indications' },
         { id: 'airway', label: 'Airway \u26A0', icon: '\u26A0\uFE0F', action: 'overlay', target: 'sal-death-spiral' },
     ],
+    'sepsis': [
+        { id: 'qsofa', label: 'qSOFA', icon: '\uD83D\uDCCA', action: 'calculator', target: 'qsofa' },
+        { id: 'map', label: 'MAP', icon: '\uD83E\uDE7A', action: 'calculator', target: 'map-calculator' },
+        { id: 'vp-rx', label: 'VP Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'sepsis-vp-init' },
+        { id: 'abx', label: 'Abx Table', icon: '\uD83D\uDC8A', action: 'overlay', target: 'sepsis-abx-table' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

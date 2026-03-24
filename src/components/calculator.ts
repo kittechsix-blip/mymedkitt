@@ -3857,6 +3857,99 @@ const ALT_APAP_PRODUCT_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// qSOFA Score
+// -------------------------------------------------------------------
+
+const QSOFA_CALCULATOR: CalculatorDefinition = {
+  id: 'qsofa',
+  title: 'qSOFA Score',
+  subtitle: 'Quick Sequential Organ Failure Assessment',
+  description: 'The qSOFA identifies patients with suspected infection at high risk for in-hospital mortality. Score ≥2 associated with poor outcomes. Note: SSC 2021 recommends AGAINST qSOFA as sole screening tool due to low sensitivity.',
+  fields: [
+    { name: 'ams', label: 'Altered mental status (GCS <15)', type: 'toggle', points: 1 },
+    { name: 'sbp', label: 'Systolic BP ≤ 100 mmHg', type: 'toggle', points: 1 },
+    { name: 'rr', label: 'Respiratory rate ≥ 22/min', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Score 0-1', risk: 'Low Risk', mortality: 'Low risk of in-hospital mortality. Does NOT exclude sepsis — qSOFA has low sensitivity.', colorVar: '--color-primary' },
+    { min: 2, max: Infinity, label: 'Score ≥ 2', risk: 'High Risk', mortality: '3-14x increased risk of in-hospital mortality. Evaluate for organ dysfunction (full SOFA) and initiate sepsis workup.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'qSOFA ≥ 2 associated with poor outcomes. Low sensitivity for sepsis screening — do NOT use as sole screening tool (SSC 2021).',
+  citations: [
+    'Seymour CW, et al. Assessment of Clinical Criteria for Sepsis: For the Third International Consensus Definitions (Sepsis-3). JAMA. 2016;315(8):762-774.',
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// MAP Calculator
+// -------------------------------------------------------------------
+
+const MAP_CALCULATOR: CalculatorDefinition = {
+  id: 'map-calculator',
+  title: 'Mean Arterial Pressure (MAP)',
+  subtitle: 'Perfusion Pressure Target',
+  description: 'Calculates MAP from systolic and diastolic blood pressure. MAP = (SBP + 2×DBP) / 3. Target MAP ≥65 mmHg in septic shock (SSC 2021). Individualize within 60-70 mmHg range based on patient factors.',
+  fields: [
+    { name: 'sbp', label: 'Systolic BP', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'dbp', label: 'Diastolic BP', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+  ],
+  results: [],
+  thresholdNote: 'Target MAP ≥65 mmHg for septic shock. Consider 60-65 in elderly (65-Trial) or 80-85 for chronic HTN (SEPSISPAM). DBP <40 suggests vasoplegia.',
+  citations: [
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+    'Lamontagne F, et al. Effect of Reduced Exposure to Vasopressors on 90-Day Mortality (65-Trial). JAMA. 2020;323(10):938-949.',
+    'Asfar P, et al. High versus Low BP Target in Septic Shock (SEPSISPAM). NEJM. 2014;370(17):1583-1593.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sbp = values['sbp'] || 0;
+    const dbp = values['dbp'] || 0;
+
+    if (sbp <= 0 || dbp <= 0) {
+      return { value: '--', label: 'Enter values', description: 'Enter systolic and diastolic blood pressure to calculate MAP.', colorVar: '--color-text-muted' };
+    }
+
+    if (dbp >= sbp) {
+      return { value: '--', label: 'Invalid', description: 'Diastolic BP must be less than systolic BP.', colorVar: '--color-text-muted' };
+    }
+
+    const map = Math.round(((sbp + 2 * dbp) / 3) * 10) / 10;
+    const pp = sbp - dbp;
+
+    let label: string;
+    let colorVar: string;
+    let desc: string;
+
+    if (map < 60) {
+      label = 'Critical Hypotension';
+      colorVar = '--color-danger';
+      desc = `MAP = (${sbp} + 2×${dbp}) / 3 = ${map} mmHg\nPulse pressure: ${pp} mmHg\n\n⚠️ MAP <60 mmHg — severe hypoperfusion risk. Initiate or escalate vasopressors immediately.`;
+    } else if (map < 65) {
+      label = 'Below Target';
+      colorVar = '--color-warning';
+      desc = `MAP = (${sbp} + 2×${dbp}) / 3 = ${map} mmHg\nPulse pressure: ${pp} mmHg\n\nBelow standard sepsis target (≥65). May be acceptable in select patients (65-Trial).`;
+    } else if (map <= 70) {
+      label = 'At Target';
+      colorVar = '--color-primary';
+      desc = `MAP = (${sbp} + 2×${dbp}) / 3 = ${map} mmHg\nPulse pressure: ${pp} mmHg\n\nWithin target range for septic shock resuscitation (65-70 mmHg).`;
+    } else {
+      label = 'Above Target';
+      colorVar = '--color-primary';
+      desc = `MAP = (${sbp} + 2×${dbp}) / 3 = ${map} mmHg\nPulse pressure: ${pp} mmHg\n\nAbove standard target. Consider vasopressor reduction if on pressors. Higher targets (80-85) may benefit chronic HTN patients.`;
+    }
+
+    if (dbp < 40) {
+      desc += '\n\n⚠️ DBP <40 mmHg strongly suggests vasoplegia — initiate vasopressor if not already started.';
+    }
+    if (pp < 40) {
+      desc += `\n\n⚠️ Narrow pulse pressure (${pp} mmHg) may suggest low stroke volume — consider POCUS and inotrope assessment.`;
+    }
+
+    return { value: `${map} mmHg`, label, description: desc, colorVar };
+  },
+};
+
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 
@@ -3909,6 +4002,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'kings-college': KINGS_COLLEGE_CALCULATOR,
   'alt-apap-product': ALT_APAP_PRODUCT_CALCULATOR,
   'sal-tox-guide': SAL_TOX_GUIDE_CALCULATOR,
+  'qsofa': QSOFA_CALCULATOR,
+  'map-calculator': MAP_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

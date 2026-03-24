@@ -477,7 +477,7 @@ const AZITHROMYCIN: DrugEntry = {
   genericName: 'Azithromycin',
   drugClass: 'Macrolide antibiotic',
   route: 'PO/IV',
-  indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea', 'SCD acute chest syndrome'],
+  indications: ['Traveler\'s diarrhea (fluoroquinolone-resistant regions)', 'Acute infectious diarrhea', 'SCD acute chest syndrome', 'Community-acquired pneumonia atypical coverage'],
   dosing: [
     {
       indication: 'Traveler diarrhea',
@@ -492,6 +492,10 @@ const AZITHROMYCIN: DrugEntry = {
       indication: 'SCD acute chest syndrome',
       regimen: '10 mg/kg IV. Max 500 mg/dose. Covers atypical organisms (Mycoplasma, Chlamydia). Combine with Ceftriaxone for ACS.',
       weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 500, label: 'SCD ACS' },
+    },
+    {
+      indication: 'CAP atypical coverage',
+      regimen: '500 mg IV on day 1, then 250 mg PO daily for 4 additional days (total 5 days). Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila). Add to beta-lactam backbone when pneumonia is suspected source of sepsis. QTc prolongation risk — monitor ECG.',
     },
   ],
   contraindications: [
@@ -858,7 +862,7 @@ const CEFEPIME: DrugEntry = {
   genericName: 'Cefepime hydrochloride',
   drugClass: '4th-Generation Cephalosporin',
   route: 'IV',
-  indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)'],
+  indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)'],
   dosing: [
     {
       indication: 'Sepsis/meningitis (0-28 days)',
@@ -873,6 +877,10 @@ const CEFEPIME: DrugEntry = {
     {
       indication: 'Adult Nosocomial/Healthcare-Associated Meningitis',
       regimen: '2 g IV q8h. Alternative to meropenem for Pseudomonas coverage in post-neurosurgical or healthcare-associated meningitis. Combine with vancomycin for MRSA coverage.',
+    },
+    {
+      indication: 'Sepsis empiric coverage',
+      regimen: 'Adult: 2g IV q8h (consider extended infusion over 3-4 hours for maintenance doses). Antipseudomonal cephalosporin — less anaerobic coverage than piperacillin-tazobactam. ACORN trial: comparable to pip-tazo but slightly more neurologic dysfunction (small absolute difference). Adjust for renal impairment.',
     },
   ],
   contraindications: [
@@ -896,7 +904,7 @@ const CEFTRIAXONE: DrugEntry = {
   genericName: 'Ceftriaxone',
   drugClass: 'Third-generation cephalosporin',
   route: 'IV',
-  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis'],
+  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)'],
   dosing: [
     {
       indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -937,6 +945,10 @@ const CEFTRIAXONE: DrugEntry = {
       indication: 'SCD meningitis',
       regimen: '100 mg/kg IV. Max 2 g/dose. Meningitic dosing for SCD patients with meningeal signs, AMS, or ill appearance. Combine with Vancomycin 20 mg/kg IV.',
       weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 2000, label: 'SCD meningitis' },
+    },
+    {
+      indication: 'Community sepsis',
+      regimen: 'Adult: 2g IV q24h. Third-generation cephalosporin — covers common community-acquired pathogens (E. coli, K. pneumoniae, S. pneumoniae). Does NOT cover Pseudomonas. For non-severe sepsis without Pseudomonas risk factors. Combine with atypical coverage (doxycycline or azithromycin) if pneumonia suspected.',
     },
   ],
   contraindications: [
@@ -1119,6 +1131,43 @@ const DEXAMETHASONE: DrugEntry = {
     'Bjornson CL, et al. A Randomized Trial of a Single Dose of Oral Dexamethasone for Mild Croup. N Engl J Med. 2004;351(13):1306-13.',
     'Parker CM, Cooper MN. Prednisolone Versus Dexamethasone for Croup: A Randomized Controlled Trial. Pediatrics. 2019;144(3):e20183772.',
     'Gates A, Johnson DW, Klassen TP. Glucocorticoids for Croup in Children. JAMA Pediatrics. 2019;173(6):595-596.',
+  ],
+};
+
+const DAPTOMYCIN: DrugEntry = {
+  id: 'daptomycin',
+  name: 'Daptomycin (Cubicin)',
+  genericName: 'Daptomycin',
+  drugClass: 'Lipopeptide antibiotic',
+  route: 'IV',
+  indications: ['MRSA bacteremia', 'MRSA endocarditis', 'MRSA sepsis (non-pulmonary)'],
+  dosing: [
+    {
+      indication: 'MRSA bacteremia / sepsis',
+      regimen: '6 mg/kg IV q24h. For complicated bacteremia or endocarditis: 8-10 mg/kg IV q24h.',
+      weightCalc: { dosePerKg: 6, unit: 'mg', label: 'Standard bacteremia dose' },
+    },
+    {
+      indication: 'MRSA endocarditis / complicated',
+      regimen: '8-10 mg/kg IV q24h for endocarditis or complicated bacteremia.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', label: 'Endocarditis / complicated dose' },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'MUST NOT be used for pneumonia \u2014 inactivated by pulmonary surfactant',
+  ],
+  cautions: [
+    'CPK elevation and rhabdomyolysis \u2014 monitor CPK weekly',
+    'Eosinophilic pneumonia (rare)',
+    'Peripheral neuropathy',
+    'Renal dose adjustment: q48h if CrCl <30 mL/min or hemodialysis',
+  ],
+  monitoring: 'CPK weekly (discontinue if CPK >10\u00d7 ULN with symptoms). Renal function. Signs of myopathy.',
+  notes: 'CRITICAL: Do NOT use for pneumonia \u2014 daptomycin is inactivated by pulmonary surfactant and will fail. Use linezolid or vancomycin for MRSA pneumonia instead. Excellent for MRSA bacteremia and endocarditis. Higher doses (8-10 mg/kg) increasingly used for complicated infections.',
+  citations: [
+    'Liu C, et al. Clinical Practice Guidelines by IDSA for Treatment of MRSA Infections. Clin Infect Dis. 2011;52(3):e18-e55.',
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
   ],
 };
 
@@ -1486,6 +1535,36 @@ const DIPHENHYDRAMINE: DrugEntry = {
   ],
 };
 
+const DOBUTAMINE: DrugEntry = {
+  id: 'dobutamine',
+  name: 'Dobutamine',
+  genericName: 'Dobutamine',
+  drugClass: 'Inotrope (beta-1 adrenergic agonist)',
+  route: 'IV infusion',
+  indications: ['Septic shock with low cardiac output', 'Septic cardiomyopathy (inotropic support)'],
+  dosing: [
+    {
+      indication: 'Septic shock inotrope',
+      regimen: 'Start 2-5 mcg/kg/min IV continuous infusion, titrate to max 20 mcg/kg/min. May cause reflex hypotension \u2014 up-titrate norepinephrine if BP drops. Discontinue if no improvement or hypotension worsens.',
+    },
+  ],
+  contraindications: [
+    'Idiopathic hypertrophic subaortic stenosis (IHSS)',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'May cause tachycardia and tachyarrhythmias',
+    'Reflex hypotension from peripheral vasodilation',
+    'Do NOT use to increase cardiac index to supranormal levels',
+  ],
+  monitoring: 'Continuous hemodynamic and cardiac monitoring. Assess perfusion response (CRT, urine output, MAP) within 1 hour of initiation.',
+  notes: 'Primarily beta-1 agonist \u2014 increases contractility with some beta-2 vasodilation. NOT a vasopressor. Use when POCUS shows reduced LVEF or signs of low cardiac output (cool extremities, narrow pulse pressure, inappropriately low HR). Stable or improving BP suggests positive response; precipitous BP drop suggests poor response \u2014 discontinue.',
+  citations: [
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+    'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
+  ],
+};
+
 const DOLUTEGRAVIR: DrugEntry = {
   id: 'dolutegravir',
   name: 'Dolutegravir (Tivicay)',
@@ -1560,7 +1639,7 @@ const DOXYCYCLINE: DrugEntry = {
   genericName: 'Doxycycline',
   drugClass: 'Tetracycline antibiotic',
   route: 'PO',
-  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis'],
+  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage'],
   dosing: [
     {
       indication: 'Primary / Secondary / Early latent syphilis (PCN allergy)',
@@ -1569,6 +1648,10 @@ const DOXYCYCLINE: DrugEntry = {
     {
       indication: 'Late latent / Tertiary syphilis (PCN allergy)',
       regimen: '100 mg PO BID \u00D7 28 days.',
+    },
+    {
+      indication: 'CAP atypical coverage',
+      regimen: '100 mg IV or PO q12h. Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila) and tick-borne illnesses (Rickettsiae, Anaplasma, Ehrlichia). Preferred over azithromycin per IBCC for atypical coverage in sepsis. Add to beta-lactam backbone when CAP is suspected source.',
     },
   ],
   contraindications: [
@@ -1651,7 +1734,7 @@ const EPINEPHRINE: DrugEntry = {
   genericName: 'Epinephrine',
   drugClass: 'Non-selective adrenergic agonist (alpha + beta)',
   route: 'IM/IV/IO/SQ/ET/Intracavernosal',
-  indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor'],
+  indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor', 'Septic shock (vasopressor infusion)'],
   dosing: [
     {
       indication: 'Anaphylaxis — IM (first-line)',
@@ -1693,6 +1776,10 @@ const EPINEPHRINE: DrugEntry = {
         { dosePerKg: 0.05, unit: 'mg', label: 'Low dose ET (0.05 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
         { dosePerKg: 0.1, unit: 'mg', label: 'High dose ET (0.1 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
       ],
+    },
+    {
+      indication: 'Septic shock infusion',
+      regimen: '0.01-0.5 mcg/kg/min IV continuous infusion. Alternative first-line vasopressor for patients with bradycardia or cardiac dysfunction. CAT trial: outcomes similar to norepinephrine. Note: Increases lactate — rising lactate on epinephrine is expected and often a positive prognostic sign. Avoid if lactate >5 mM (may worsen acidosis — use dobutamine instead).',
     },
   ],
   contraindications: [
@@ -1916,6 +2003,38 @@ const LIDOCAINE: DrugEntry = {
   ],
 };
 
+const LINEZOLID: DrugEntry = {
+  id: 'linezolid',
+  name: 'Linezolid (Zyvox)',
+  genericName: 'Linezolid',
+  drugClass: 'Oxazolidinone antibiotic',
+  route: 'IV / PO',
+  indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection'],
+  dosing: [
+    {
+      indication: 'MRSA sepsis / pneumonia',
+      regimen: '600 mg IV or PO q12h. No renal dose adjustment required. 100% oral bioavailability \u2014 IV-to-PO switch straightforward.',
+    },
+  ],
+  contraindications: [
+    'Concurrent MAOI use or within 14 days',
+    'Uncontrolled hypertension, pheochromocytoma, thyrotoxicosis, carcinoid syndrome',
+  ],
+  cautions: [
+    'Serotonin syndrome risk with SSRIs, SNRIs, triptans, meperidine',
+    'Thrombocytopenia (monitor weekly if >14 days)',
+    'Lactic acidosis with prolonged use (>28 days)',
+    'Peripheral and optic neuropathy with prolonged use',
+    'Tyramine-rich food interaction (mild \u2014 less than traditional MAOIs)',
+  ],
+  monitoring: 'CBC weekly (thrombocytopenia). Peripheral neuropathy symptoms. Visual acuity if prolonged use (>28 days).',
+  notes: 'Covers MRSA pneumonia (unlike daptomycin which is inactivated by surfactant). Excellent tissue penetration. Use when vancomycin is contraindicated or for MRSA pneumonia when daptomycin cannot be used. 100% oral bioavailability allows early IV-to-PO transition.',
+  citations: [
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+    'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
+  ],
+};
+
 const LOPERAMIDE: DrugEntry = {
   id: 'loperamide',
   name: 'Loperamide (Imodium)',
@@ -2041,7 +2160,7 @@ const FLUDROCORTISONE: DrugEntry = {
   genericName: 'Fludrocortisone acetate',
   drugClass: 'Mineralocorticoid',
   route: 'PO',
-  indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension', 'Adrenal insufficiency maintenance (PAI only)', 'Pediatric AI maintenance'],
+  indications: ['Hyperkalemia (adjunct — stimulates renal K+ excretion)', 'Adrenal insufficiency', 'Orthostatic hypotension', 'Adrenal insufficiency maintenance (PAI only)', 'Pediatric AI maintenance', 'Septic shock adjunct (with hydrocortisone)'],
   dosing: [
     {
       indication: 'Hyperkalemia adjunct',
@@ -2055,6 +2174,10 @@ const FLUDROCORTISONE: DrugEntry = {
       indication: 'Pediatric AI maintenance',
       regimen: '50-200 μg PO daily. Higher doses may be needed in infants with salt-wasting congenital adrenal hyperplasia. Salt supplementation 1-2 g/day may be needed in infants. Monitor blood pressure, serum potassium, and plasma renin activity.',
       weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 0.2, label: 'Starting dose — titrate to renin' },
+    },
+    {
+      indication: 'Septic shock adjunct',
+      regimen: '50 mcg PO daily for 7 days, given with hydrocortisone. APROCCHSS trial: hydrocortisone + fludrocortisone reduced 90-day mortality (43% vs 49.1%) in septic shock. Mineralocorticoid action supplements glucocorticoid replacement.',
     },
   ],
   contraindications: [
@@ -2415,7 +2538,7 @@ const METHYLENE_BLUE: DrugEntry = {
   genericName: 'Methylthioninium chloride',
   drugClass: 'Guanylate cyclase inhibitor / Vasopressor adjunct',
   route: 'IV',
-  indications: ['Refractory anaphylaxis (vasodilatory shock)', 'Vasoplegia (post-cardiopulmonary bypass)'],
+  indications: ['Refractory anaphylaxis (vasodilatory shock)', 'Vasoplegia (post-cardiopulmonary bypass)', 'Refractory septic shock (vasoplegic rescue)'],
   dosing: [
     {
       indication: 'Refractory anaphylaxis',
@@ -2424,6 +2547,11 @@ const METHYLENE_BLUE: DrugEntry = {
         { dosePerKg: 1, unit: 'mg', label: 'Standard dose (1 mg/kg)' },
         { dosePerKg: 2, unit: 'mg', label: 'High dose (2 mg/kg)' },
       ],
+    },
+    {
+      indication: 'Refractory septic shock',
+      regimen: '1-2 mg/kg IV bolus over 15-30 minutes, then 0.5 mg/kg/h continuous infusion. Ibarra-Estrada 2023 RCT: earlier methylene blue → shorter time to vasopressor discontinuation, more vasopressor-free days, shorter ICU/hospital LOS. Consider when on multiple vasopressors + glucocorticoids. Inhibits inducible NO synthase → restores vascular tone.',
+      weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'IV bolus dose (give 1-2 mg/kg)' },
     },
   ],
   contraindications: [
@@ -3188,6 +3316,44 @@ const PROCAINE_PENICILLIN: DrugEntry = {
   ],
 };
 
+const PIPERACILLIN_TAZOBACTAM: DrugEntry = {
+  id: 'piperacillin-tazobactam',
+  name: 'Piperacillin-Tazobactam (Zosyn)',
+  genericName: 'Piperacillin-Tazobactam',
+  drugClass: 'Beta-lactam / Beta-lactamase inhibitor (antipseudomonal penicillin)',
+  route: 'IV',
+  indications: ['Sepsis empiric coverage', 'Intra-abdominal sepsis', 'Healthcare-associated infection', 'Nosocomial pneumonia'],
+  dosing: [
+    {
+      indication: 'Sepsis empiric coverage',
+      regimen: 'Adult: 4.5g IV q6h (extended infusion over 4 hours for maintenance doses). Loading dose: 4.5g IV over 30 min. Extended infusion improves pharmacodynamics for beta-lactams.',
+    },
+    {
+      indication: 'Pediatric sepsis',
+      regimen: '100 mg/kg (piperacillin component) IV q6-8h. Max 4.5g/dose.',
+      weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 4000, dailyDivided: 4, label: 'Piperacillin component q6h' },
+    },
+  ],
+  contraindications: [
+    'Severe penicillin allergy (anaphylaxis, angioedema)',
+    'Known hypersensitivity to piperacillin, tazobactam, or other penicillins',
+  ],
+  cautions: [
+    'Cross-reactivity with cephalosporins is low (~1-2%) but possible',
+    'Hypokalemia',
+    'Seizures at high doses (especially in renal failure)',
+    'May cause false-positive galactomannan assay',
+    'Empiric antianaerobic coverage in sepsis may be harmful when not specifically indicated (Chanderraj 2024)',
+  ],
+  monitoring: 'Renal function. Potassium levels. Adjust interval for renal impairment (CrCl <40: q8h; CrCl <20: q8h at reduced dose).',
+  notes: 'Broadest Gram-negative AND anaerobic coverage among standard sepsis empiric agents. Extended infusion (4h) recommended for maintenance dosing to optimize time above MIC. ACORN trial: similar outcomes to cefepime with fewer neurologic side effects but comparable AKI rates. Administer beta-lactam BEFORE vancomycin when both are ordered.',
+  citations: [
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+    'Qian ET, et al. Cefepime vs Piperacillin-Tazobactam in Adults Hospitalized With Acute Infection (ACORN). JAMA. 2023;330(16):1557.',
+    'Chanderraj R, et al. Mortality of Patients With Sepsis Administered Piperacillin-Tazobactam vs Cefepime. JAMA Intern Med. 2024;184(7):769.',
+  ],
+};
+
 const POTASSIUM_CHLORIDE_IV: DrugEntry = {
   id: 'potassium-chloride-iv',
   name: 'Potassium Chloride (IV)',
@@ -3266,11 +3432,11 @@ const POTASSIUM_CHLORIDE_ORAL: DrugEntry = {
 
 const PHENYLEPHRINE: DrugEntry = {
   id: 'phenylephrine',
-  name: 'Phenylephrine (Intracavernosal)',
+  name: 'Phenylephrine',
   genericName: 'Phenylephrine',
   drugClass: 'Selective alpha-1 adrenergic agonist',
-  route: 'Intracavernosal',
-  indications: ['Ischemic priapism (first-line)', 'Post-ICI prolonged erection'],
+  route: 'Intracavernosal / IV',
+  indications: ['Ischemic priapism (first-line)', 'Post-ICI prolonged erection', 'Sepsis push-dose vasopressor (temporizing)'],
   dosing: [
     {
       indication: 'Ischemic priapism',
@@ -3279,6 +3445,10 @@ const PHENYLEPHRINE: DrugEntry = {
     {
       indication: 'Pediatric / Sickle cell',
       regimen: '100 mcg (1 mL of 100 mcg/mL) per injection. Lower dose recommended.',
+    },
+    {
+      indication: 'Sepsis push dose vasopressor',
+      regimen: '100-200 mcg IV push every 2-5 minutes as needed (temporizing measure). Can also run as infusion: 40-200 mcg/min IV. Pure alpha-1 agonist — vasoconstriction only, no inotropy. Use while preparing norepinephrine infusion, or in severe tachycardia/tachyarrhythmia where beta-adrenergic stimulation is undesirable. NOT recommended as primary vasopressor for septic shock.',
     },
   ],
   contraindications: [
@@ -3836,13 +4006,48 @@ const UFH: DrugEntry = {
   ],
 };
 
+
+const VASOPRESSIN: DrugEntry = {
+  id: 'vasopressin',
+  name: 'Vasopressin (ADH)',
+  genericName: 'Vasopressin',
+  drugClass: 'Non-adrenergic vasopressor (V1 receptor agonist)',
+  route: 'IV infusion',
+  indications: ['Septic shock (second-line vasopressor)', 'Vasodilatory shock (catecholamine-refractory)'],
+  dosing: [
+    {
+      indication: 'Septic shock (second-line)',
+      regimen: '0.03-0.04 units/min IV continuous infusion (fixed dose, non-titratable). Add to norepinephrine \u2014 do NOT use as sole first-line agent. May reduce norepinephrine requirement and lower risk of atrial fibrillation.',
+    },
+    {
+      indication: 'Vasodilatory / refractory shock',
+      regimen: '0.03-0.04 units/min IV continuous infusion. Consider early addition at lower norepinephrine doses rather than escalating NE to high doses. VASST trial: no mortality benefit but NE-sparing. VANISH trial: no improvement in renal outcomes.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Coronary vasoconstriction \u2014 use with caution in active coronary ischemia',
+    'Splanchnic vasoconstriction \u2014 monitor for bowel ischemia',
+    'Hyponatremia may occur (V2 receptor effects)',
+  ],
+  monitoring: 'Continuous hemodynamic monitoring. Monitor for digital, mesenteric, or cardiac ischemia. Follow sodium levels.',
+  notes: 'Non-titratable fixed-dose agent \u2014 mechanism complements catecholamines via V1 receptors on vascular smooth muscle. Does NOT have inotropic or chronotropic effects. SOAP-II meta-analysis: vasopressin + catecholamine associated with lower AF risk (RR 0.77).',
+  citations: [
+    'Russell JA, et al. Vasopressin versus Norepinephrine Infusion in Patients with Septic Shock (VASST). NEJM. 2008;358(9):877-887.',
+    'Gordon AC, et al. Effect of Early Vasopressin vs Norepinephrine on Kidney Failure in Patients with Septic Shock (VANISH). JAMA. 2016;316(5):509-518.',
+    'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
+  ],
+};
+
 const VANCOMYCIN: DrugEntry = {
   id: 'vancomycin',
   name: 'Vancomycin',
   genericName: 'Vancomycin hydrochloride',
   drugClass: 'Glycopeptide',
   route: 'IV/PO',
-  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis'],
+  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage'],
   dosing: [
     {
       indication: 'Meningitic',
@@ -3862,6 +4067,11 @@ const VANCOMYCIN: DrugEntry = {
       indication: 'SCD meningitis',
       regimen: '20 mg/kg IV over 60 min. Max 1500 mg. Combined with Ceftriaxone 100 mg/kg IV for suspected meningitis in SCD patients with meningeal signs, altered mental status, or ill appearance.',
       weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 1500, label: 'SCD meningitis' },
+    },
+    {
+      indication: 'Sepsis / MRSA coverage',
+      regimen: 'Loading dose: 25-30 mg/kg IV (based on actual body weight). Maintenance: 15-20 mg/kg IV q8-12h (adjust for renal function). Target trough 15-20 mcg/mL or AUC/MIC 400-600. Administer AFTER beta-lactam when giving both (beta-lactam first improves survival). Discontinue if no MRSA cultured within 48 hours.',
+      weightCalc: { dosePerKg: 25, unit: 'mg', label: 'Loading dose (actual body weight)' },
     },
   ],
   contraindications: [
@@ -4070,7 +4280,7 @@ const HYDROCORTISONE: DrugEntry = {
   genericName: 'Hydrocortisone sodium succinate',
   drugClass: 'Corticosteroid (glucocorticoid + mineralocorticoid)',
   route: 'IV / IM / PO',
-  indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection', 'Thyroid storm', 'Decompensated hypothyroidism (stress dose)'],
+  indications: ['Adrenal crisis (adult)', 'Adrenal crisis (pediatric)', 'Stress dose (moderate illness/surgery)', 'Maintenance (adult)', 'Maintenance (pediatric)', 'Emergency IM self-injection', 'Thyroid storm', 'Decompensated hypothyroidism (stress dose)', 'Septic shock (stress dose corticosteroid)'],
   dosing: [
     {
       indication: 'Adrenal crisis (adult)',
@@ -4104,6 +4314,10 @@ const HYDROCORTISONE: DrugEntry = {
     {
       indication: 'Decompensated hypothyroidism (stress dose)',
       regimen: '100 mg IV bolus, then 50 mg IV q8h. CRITICAL: Give BEFORE thyroid hormone replacement \u2014 thyroid hormone accelerates cortisol metabolism, may precipitate adrenal crisis in patients with concurrent AI (~5-10%). Draw random cortisol before dosing if practical. Taper once hemodynamically stable and cortisol results available.',
+    },
+    {
+      indication: 'Septic shock',
+      regimen: '50 mg IV q6h OR 200 mg/day continuous infusion for vasopressor-dependent septic shock. ADRENAL trial: reduced time on vasopressors, ICU LOS, intubation duration. No increased superinfection risk. Consider adding fludrocortisone 50 mcg PO daily (APROCCHSS). Taper over 2-3 days when vasopressors discontinued.',
     },
   ],
   contraindications: [
@@ -5270,7 +5484,7 @@ const MEROPENEM: DrugEntry = {
   genericName: 'Meropenem',
   drugClass: 'Carbapenem',
   route: 'IV',
-  indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis'],
+  indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis', 'Sepsis empiric / MDR coverage'],
   dosing: [
     {
       indication: 'Bacterial Meningitis',
@@ -5279,6 +5493,10 @@ const MEROPENEM: DrugEntry = {
     {
       indication: 'Healthcare-Associated/Nosocomial Meningitis',
       regimen: '2 g IV q8h. Covers Pseudomonas aeruginosa, Acinetobacter, and other resistant gram-negative organisms. Combine with vancomycin for MRSA coverage. Use for post-neurosurgical, shunt-related, or basilar skull fracture-associated infections.',
+    },
+    {
+      indication: 'Sepsis empiric / MDR',
+      regimen: 'Adult: 1g IV q8h (standard) or 2g IV q8h (severe/CNS involvement). Extended infusion over 3 hours for maintenance dosing. Broadest gram-negative coverage including ESBL and AmpC producers. Reserve for high MDR risk: recent broad-spectrum antibiotics, known resistant organisms, healthcare-associated infections. Adjust for renal impairment.',
     },
   ],
   contraindications: [
@@ -6159,6 +6377,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CONJUGATED_ESTROGEN,
   DABIGATRAN,
   DARUNAVIR,
+  DAPTOMYCIN,
   DESMOPRESSIN,
   DEXAMETHASONE,
   DEXTROSE,
@@ -6167,6 +6386,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   DILTIAZEM,
   DIMENHYDRINATE,
   DIPHENHYDRAMINE,
+  DOBUTAMINE,
   DOLUTEGRAVIR,
   DROPERIDOL,
   DOXYCYCLINE,
@@ -6203,6 +6423,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   LEVETIRACETAM,
   LEVOTHYROXINE,
   LIDOCAINE,
+  LINEZOLID,
   LIPID_EMULSION,
   LIOTHYRONINE,
   LOPERAMIDE,
@@ -6239,6 +6460,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   PCC_4FACTOR,
   PENTOBARBITAL,
   PHENOBARBITAL,
+  PIPERACILLIN_TAZOBACTAM,
   POTASSIUM_CHLORIDE_IV,
   POTASSIUM_CHLORIDE_ORAL,
   PRASUGREL,
@@ -6278,6 +6500,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   UFH,
   VANCOMYCIN,
   VALPROATE,
+  VASOPRESSIN,
   VERAPAMIL,
   VITAMIN_K,
 ];
