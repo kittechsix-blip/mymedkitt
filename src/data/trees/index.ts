@@ -23,6 +23,7 @@ export { THYROID_NODES, THYROID_MODULE_LABELS, THYROID_CITATIONS } from './thyro
 export { SYPHILIS_NODES, SYPHILIS_MODULE_LABELS, SYPHILIS_CITATIONS } from './syphilis';
 export { SICKLE_CELL_NODES, SICKLE_CELL_MODULE_LABELS, SICKLE_CELL_CITATIONS } from './sickle-cell';
 export { TCA_TOXIDROME_NODES, TCA_TOXIDROME_MODULE_LABELS, TCA_TOXIDROME_CITATIONS } from './tca-toxidrome';
+export { ACETAMINOPHEN_OD_NODES, ACETAMINOPHEN_OD_MODULE_LABELS, ACETAMINOPHEN_OD_CITATIONS } from './acetaminophen';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

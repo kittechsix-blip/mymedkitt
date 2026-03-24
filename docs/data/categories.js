@@ -500,7 +500,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'Recognition → ECG → Bicarbonate → Seizures → Hemodynamics → Disposition',
                 categoryId: 'toxicology',
                 version: '1.0',
-                nodeCount: 32,
+                nodeCount: 29,
                 entryNodeId: 'tca-start',
             },
         ],

@@ -213,6 +213,18 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'acs-rx', label: 'ACS Rx', icon: '\uD83E\uDEC1', action: 'jump', target: 'scd-acs-treatment' },
     { id: 'transfusion', label: 'Transfuse', icon: '\uD83E\uDE78', action: 'overlay', target: 'scd-transfusion' },
   ],
+  'tca-toxidrome': [
+    { id: 'ecg', label: 'ECG', icon: '\uD83D\uDCC8', action: 'overlay', target: 'tca-ecg-findings' },
+    { id: 'qrs', label: 'QRS Risk', icon: '\uD83E\uDDEE', action: 'calculator', target: 'qrs-risk' },
+    { id: 'bicarb', label: 'NaHCO\u2083', icon: '\uD83D\uDC89', action: 'calculator', target: 'bicarb-dose' },
+    { id: 'protocol', label: 'Bicarb Rx', icon: '\uD83D\uDCCB', action: 'overlay', target: 'tca-bicarb-protocol' },
+  ],
+  'acetaminophen': [
+    { id: 'rumack', label: 'Rumack-Matthew', icon: '\uD83D\uDCCA', action: 'calculator', target: 'rumack-matthew' },
+    { id: 'nac-calc', label: 'NAC Dosing', icon: '\uD83D\uDC8A', action: 'calculator', target: 'nac-dosing' },
+    { id: 'kings', label: "King's College", icon: '\uD83C\uDFE5', action: 'calculator', target: 'kings-college' },
+    { id: 'stages', label: 'Tox Stages', icon: '\uD83D\uDCCB', action: 'overlay', target: 'apap-stages' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

@@ -7133,6 +7133,255 @@ const TCA_DISPOSITION_CRITERIA: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Acetaminophen Overdose Info Pages
+// -------------------------------------------------------------------
+
+const APAP_SUMMARY: InfoPage = {
+  id: 'apap-summary',
+  title: 'APAP Overdose — Steps Summary',
+  subtitle: 'Quick-reference pathway for acetaminophen toxicity management',
+  sections: [
+    {
+      heading: 'Initial Assessment',
+      body: '• [Classify ingestion pattern: acute vs chronic vs unknown](#/node/apap-start)\n• [Gather history: dose, timing, formulation, coingestants, risk factors](#/node/apap-acute-hx)\n• [Repeated supratherapeutic ingestion — nomogram does NOT apply](#/node/apap-chronic-hx)',
+    },
+    {
+      heading: 'Risk Stratification',
+      body: '• [Draw APAP level at 4h post-ingestion — plot on Rumack-Matthew nomogram](#/node/apap-acute-strat)\n• [Extended-release / coingestant — serial levels if >10 mcg/mL](#/node/apap-er-coingest)\n• [Chronic ingestion — use (ALT)(APAP) product, treat if ALT elevated or APAP detectable](#/node/apap-chronic-eval)\n• [GI decontamination — activated charcoal within 4 hours](#/node/apap-gi-decon)',
+    },
+    {
+      heading: 'NAC Protocol',
+      body: '• [IV NAC 21-hour 3-bag protocol (preferred)](#/node/apap-nac-iv)\n• [Oral NAC 72-hour protocol (alternative)](#/node/apap-nac-oral)\n• [Anaphylactoid reaction management — slow rate, antihistamines, NEVER stop permanently](#/node/apap-nac-anaphylactoid)\n• [Stopping criteria: APAP <10 + INR <2 + AST/ALT improving + clinically well](#/node/apap-nac-stop)',
+    },
+    {
+      heading: 'Massive Overdose (>30g or above 300 line)',
+      body: '• [High-dose NAC — Hendrickson protocol (2-4× standard Bag 3 rate)](#/node/apap-high-nac)\n• [Fomepizole — CYP2E1 inhibitor, blocks NAPQI formation](#/node/apap-fomepizole)\n• [Hemodialysis — EXTRIP indications, removes APAP and NAPQI](#/node/apap-dialysis)',
+    },
+    {
+      heading: 'Hepatic Failure & Disposition',
+      body: '• [Established hepatic failure — continue NAC indefinitely](#/node/apap-hepatic-failure)\n• [King\'s College Criteria — transplant referral](#/node/apap-kings)\n• [Supportive care — coagulopathy, cerebral edema, hypoglycemia, renal failure](#/node/apap-hepatic-support)\n• [Disposition — admit vs ICU vs discharge criteria](#/node/apap-dispo-discharge)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484' },
+  ],
+};
+
+const APAP_STAGES: InfoPage = {
+  id: 'apap-stages',
+  title: 'Four Stages of Acetaminophen Toxicity',
+  subtitle: 'Clinical timeline and laboratory evolution',
+  sections: [
+    {
+      heading: 'Stage 1: Incubation (0–24 hours)',
+      body: 'Often **asymptomatic** or nonspecific: nausea, vomiting, anorexia, diaphoresis.\nLabs generally **normal** during this period.\n\n⚠️ Symptoms during this period (altered mental status, lactic acidosis) suggest **massive ingestion** (>30g) or coingestant — evaluate for high-risk protocol. [1]',
+    },
+    {
+      heading: 'Stage 2: Latent Period (24–72 hours)',
+      body: 'Stage 1 symptoms **resolve or improve** — patient may appear well (the "treacherous calm").\nRight upper quadrant pain can develop.\n\n**Labs:** AST elevation nearly universal by 36 hours. AST is the most sensitive early marker. ALT:AST ratio typically 1:1 initially. Nephrotoxicity may begin. [2]',
+    },
+    {
+      heading: 'Stage 3: Peak Hepatotoxicity (72–96 hours)',
+      body: 'Systemic symptoms reappear: nausea/vomiting, malaise, jaundice.\n**Hepatic failure emerges:** encephalopathy, coagulopathy (INR elevation), hypoglycemia, lactic acidosis.\n\nAST/ALT may exceed **10,000 IU/L**. Peak occurs 3-4 days post-ingestion.\nGreatest risk of death — usually from **cerebral edema**, multi-organ failure, or sepsis.\n\n**Key pearl:** Patients with peak AST/ALT <1,000 usually do NOT develop clinically significant hepatic dysfunction. [2, 3]\n\n**AST:ALT ratio pearl:** An AST:ALT ratio <0.4 suggests aminotransferases have peaked and are falling — a reassuring sign.',
+    },
+    {
+      heading: 'Stage 4: Recovery (4 days – 2 weeks)',
+      body: 'Patients who survive make a **complete recovery** — the liver regenerates fully without chronic sequelae.\nTransaminases normalize over 1-2 weeks.\nNo increased risk of chronic liver disease. [2]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Fisher ES, Curry SC. Evaluation and treatment of acetaminophen toxicity. Adv Pharmacol. 2019;85:263-272. PMID 31307590' },
+    { num: 2, text: 'Chiew AL, Buckley NA. Acetaminophen Poisoning. Crit Care Clin. 2021;37(3):543-561. PMID 34053705' },
+    { num: 3, text: 'Chidiac AS, et al. Paracetamol (acetaminophen) overdose and hepatotoxicity. Expert Opin Drug Metab Toxicol. 2023;19(5):297-317. PMID 37436926' },
+  ],
+};
+
+const APAP_NOMOGRAM: InfoPage = {
+  id: 'apap-nomogram',
+  title: 'Rumack-Matthew Nomogram',
+  subtitle: 'Prerequisites, interpretation, and confounders',
+  sections: [
+    {
+      heading: 'Prerequisites',
+      body: 'The nomogram is valid ONLY when ALL of the following are true:\n• **Acute ingestion** — ingestion within a period of <24 hours\n• **Reliable history** — dose, time, and formulation are known\n• **Time since ingestion** is defined as time since the **end** of the ingestion period\n• APAP level drawn at **≥4 hours** post-ingestion [1]',
+    },
+    {
+      heading: 'Interpretation',
+      body: '**Treatment Line (150 mcg/mL at 4h):** Levels above this line indicate risk of hepatic failure — start NAC.\n**High-Risk Line (300 mcg/mL at 4h):** Levels above this line indicate massive overdose — high-dose NAC protocol, consider fomepizole and hemodialysis.\n\nBoth lines follow exponential decay with an approximate 4-hour half-life. The US uses the 150-line (lowered from the original 200-line for added safety margin). [1, 2]',
+    },
+    {
+      heading: 'When the Nomogram Does NOT Apply',
+      body: '• **Chronic/repeated supratherapeutic ingestion** (ingestions spanning >24 hours) — use (ALT)(APAP) product instead\n• **Unreliable history** — conflicting statements, insufficient detail, symptoms inconsistent with history\n• **Late presentation** (>24 hours post-ingestion)\n• **Unknown timing** of ingestion\n• **Extended-release formulations** — may have delayed peak; if below treatment line but >10 mcg/mL, redraw in 4-6 hours [2]',
+    },
+    {
+      heading: 'Confounders That Increase Risk',
+      body: '**CYP2E1 inducers** (increase toxic NAPQI production):\n• Isoniazid, rifampin, phenobarbital, carbamazepine, phenytoin\n• Chronic alcohol ingestion\n\n**Glutathione depletion:**\n• Chronic alcohol use, chronic APAP use, chronic liver disease\n• Malnutrition, fasting\n\n**Decreased glucuronidation:**\n• Gilbert disease, zidovudine, TMP-SMX\n\n⚠️ Lower treatment thresholds in these patients — consider treating below the line if risk factors present. [1, 3]',
+    },
+    {
+      heading: 'Special Situations',
+      body: '**Extended-release tablets:** If level at 4-12h is below treatment line but >10 mcg/mL → redraw in 4-6 hours.\n**Opioid/anticholinergic coingestants:** Delay gastric emptying → delayed absorption peak. Same redraw logic if >10 mcg/mL.\n**Level <4h post-ingestion:** Undetectable level after >2h typically excludes significant ingestion. If detectable, redraw at ≥4h. [2]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rumack BH. Acetaminophen hepatotoxicity: the first 35 years. J Toxicol Clin Toxicol. 2002;40(1):3-20. PMID 11990202' },
+    { num: 2, text: 'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484' },
+    { num: 3, text: 'Bunchorntavakul C, Reddy KR. Acetaminophen and Acute Liver Failure. Clin Liver Dis. 2018;22(2):325-346. PMID 29605069' },
+  ],
+};
+
+const APAP_NAC_COMPARISON: InfoPage = {
+  id: 'apap-nac-comparison',
+  title: 'NAC Protocol Comparison',
+  subtitle: 'IV 21-Hour vs Oral 72-Hour vs Two-Bag Modified Prescott',
+  sections: [
+    {
+      heading: 'IV 21-Hour Protocol (Preferred)',
+      body: '**Bag 1:** 150 mg/kg in 200 mL D5W over 60 min\n**Bag 2:** 50 mg/kg in 500 mL D5W over 4 hours\n**Bag 3:** 100 mg/kg in 1000 mL D5W over 16 hours\n**Total:** 300 mg/kg over 21 hours\n\n**Advantages:** 100% bioavailability, faster completion, avoids vomiting, preferred in pregnancy.\n**Disadvantage:** Anaphylactoid reactions (~10-20%, usually mild, during loading dose). [1]',
+    },
+    {
+      heading: 'Oral 72-Hour Protocol',
+      body: '**Loading:** 140 mg/kg PO\n**Maintenance:** 70 mg/kg PO q4h × 17 additional doses\n**Total:** 1,330 mg/kg over 72 hours\n\n**Advantages:** No IV access needed, no anaphylactoid risk, higher hepatic first-pass delivery.\n**Disadvantages:** 72-hour duration, vomiting common (mix with cola), terrible smell/taste, lower systemic bioavailability (4-10%). Repeat dose if vomiting within 1 hour. [1, 2]',
+    },
+    {
+      heading: 'Two-Bag Modified Prescott Protocol',
+      body: '**Bag 1:** 200 mg/kg in D5W over 4 hours\n**Bag 2:** 100 mg/kg in D5W over 16 hours\n**Total:** 300 mg/kg over 20 hours\n\nUsed in Australia/New Zealand. **Lower rate of anaphylactoid reactions** than the standard 3-bag protocol (slower initial infusion rate). [3]',
+    },
+    {
+      heading: 'Pregnancy',
+      body: 'Pregnancy is **NOT a contraindication** to NAC.\n\n• Acetaminophen poses risk of hepatic failure to **both** mother and fetus\n• NAC is safe and beneficial in pregnancy\n• **IV route preferred** — achieves higher serum levels and avoids vomiting\n• Delayed treatment associated with increased miscarriage and fetal death [4]',
+    },
+    {
+      heading: 'Morbid Obesity',
+      body: '**Cap the dose at 100 kg body weight** per consensus guidelines.\n\nUsing actual weight in morbidly obese patients leads to unnecessarily high doses with increased risk of fluid overload and anaphylactoid reactions. [1]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484' },
+    { num: 2, text: 'Smilkstein MJ, et al. Efficacy of oral N-acetylcysteine in the treatment of acetaminophen overdose. N Engl J Med. 1988;319(24):1557-1562. PMID 3059186' },
+    { num: 3, text: 'Wong A, et al. Comparison of two- versus three-bag IV acetylcysteine protocols. Clin Toxicol. 2013;51(7):676-679.' },
+    { num: 4, text: 'Riggs BS, et al. Acute acetaminophen overdose during pregnancy. Obstet Gynecol. 1989;74(2):247-253. PMID 2748061' },
+  ],
+};
+
+const APAP_ANAPHYLACTOID: InfoPage = {
+  id: 'apap-anaphylactoid',
+  title: 'NAC Anaphylactoid Reaction Management',
+  subtitle: 'Graded response protocol — NOT a true allergy',
+  sections: [
+    {
+      heading: 'Key Principle',
+      body: 'NAC anaphylactoid reactions are **histamine-mediated** (direct drug effect), NOT IgE-mediated allergic reactions. They are **NOT a contraindication** to continuing NAC. Liver failure from inappropriately stopping NAC is far more dangerous than the anaphylactoid reaction itself.\n\nIn a study of **6,455 treatment courses**, no deaths were attributed to anaphylactoid reactions. [1]',
+    },
+    {
+      heading: 'Timing',
+      body: 'Usually occur during the **loading dose** (first 60 minutes). Almost always within the first **2 hours**, and invariably within **6 hours** of initiation. [1]',
+    },
+    {
+      heading: 'Graded Response Protocol',
+      body: '**Flushing only:**\n→ Continue NAC at same rate. Monitor closely.\n\n**Urticaria:**\n→ Diphenhydramine 1 mg/kg IV (max 50 mg). Consider a corticosteroid. **Continue NAC.**\n\n**Angioedema:**\n→ Diphenhydramine 1 mg/kg IV + corticosteroid. **Hold NAC for 1 hour**, then resume at slower rate.\n\n**Respiratory symptoms or hypotension:**\n→ Diphenhydramine 1 mg/kg IV + corticosteroid + **epinephrine** (IM bolus or infusion). Hold NAC for 1 hour, then resume at slower rate. [1, 2]',
+    },
+    {
+      heading: 'After the Reaction',
+      body: '• **ALWAYS resume NAC** — this is NOT a true allergy\n• Resume at a **lower initial rate**, then titrate up\n• Previous anaphylactoid reaction does NOT preclude future NAC use — can pre-treat with antihistamines\n• Document as "anaphylactoid reaction to NAC" — NOT as an allergy [2]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Yarema M, et al. Anaphylactoid Reactions to Intravenous N-Acetylcysteine during Treatment for Acetaminophen Poisoning. J Med Toxicol. 2018;14(2):120-127. PMID 29423816' },
+    { num: 2, text: 'Pizon AF, Lovecchio F. Adverse reaction from use of intravenous N-acetylcysteine. J Emerg Med. 2006;31(4):434-435. PMID 17046490' },
+  ],
+};
+
+const APAP_MASSIVE_OD: InfoPage = {
+  id: 'apap-massive-od',
+  title: 'High-Dose NAC & Massive Overdose',
+  subtitle: 'Hendrickson dosing, fomepizole, and hemodialysis',
+  sections: [
+    {
+      heading: 'Definition of Massive Overdose',
+      body: '• >30 grams ingested (or >0.5 g/kg if <60 kg)\n• APAP level above the **300 line** on the Rumack-Matthew nomogram\n\nThese patients may present with **early lactic acidosis** and **altered mental status** within 12 hours — due to mitochondrial dysfunction, BEFORE liver damage occurs. [1]',
+    },
+    {
+      heading: 'High-Dose NAC — Hendrickson Protocol (2019)',
+      body: 'Standard NAC may be inadequate — NAC neutralizes NAPQI in a **1:1 molar ratio**, so the dose must scale with the amount of acetaminophen.\n\nKeep Bag 1 + Bag 2 standard. **Increase Bag 3 infusion rate** based on severity:\n\n• **Above 300 line:** 12.5 mg/kg/hr (2× standard)\n• **Above 450 line:** 18.75 mg/kg/hr (3× standard)\n• **Above 600 line:** 25 mg/kg/hr (4× standard)\n\n**During hemodialysis:** Double the rate you would otherwise use (HD removes ~50% of NAC). Maximum rate: 25 mg/kg/hr.\n\nDoubling the rate is increasingly accepted; tripling/quadrupling is more controversial — consult toxicology. [2, 3]',
+    },
+    {
+      heading: 'Fomepizole — CYP2E1 Inhibition',
+      body: 'Fomepizole inhibits CYP2E1, which prevents the conversion of acetaminophen to toxic NAPQI. Complementary mechanism to NAC (which detoxifies NAPQI after it forms).\n\n**Dosing:** 15 mg/kg IV over 30 min loading → 10 mg/kg IV q12h × 48h or until APAP undetectable.\n\nGenerally safe. Main drawback is cost. Use for established high-risk ingestions alongside high-dose NAC. [4, 5]',
+    },
+    {
+      heading: 'Hemodialysis — EXTRIP Guidelines',
+      body: '**EXTRIP indications for extracorporeal treatment:**\n• APAP level >900 mcg/mL\n• Altered mental status + lactate >3 + pH <7.1\n• Clinical deterioration despite adequate NAC\n\nDialysis removes both APAP and toxic NAPQI metabolites. **NOT a substitute for NAC** — patients on dialysis require HIGHER NAC doses (at minimum 12.5 mg/kg/hr). [6]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Fisher ES, Curry SC. Evaluation and treatment of acetaminophen toxicity. Adv Pharmacol. 2019;85:263-272. PMID 31307590' },
+    { num: 2, text: 'Hendrickson RG. What is the most appropriate dose of N-acetylcysteine after massive acetaminophen overdose? Clin Toxicol. 2019;57(8):686-691. PMID 30777470' },
+    { num: 3, text: 'Chiew AL, Buckley NA. Acetaminophen Poisoning. Crit Care Clin. 2021;37(3):543-561. PMID 34053705' },
+    { num: 4, text: 'Kang AM, et al. The effect of 4-methylpyrazole on oxidative metabolism of acetaminophen in human volunteers. J Med Toxicol. 2020;16(2):169-176. PMID 31768936' },
+    { num: 5, text: 'Shah KR, Beuhler MC. Fomepizole as an adjunctive treatment in severe acetaminophen toxicity. Am J Emerg Med. 2020;38(2):410.e5-410.e6. PMID 31785979' },
+    { num: 6, text: 'Gosselin S, et al. Extracorporeal treatment for acetaminophen poisoning: recommendations from the EXTRIP workgroup. Clin Toxicol. 2014;52(8):856-867. PMID 25133498' },
+  ],
+};
+
+const APAP_RISK_FACTORS: InfoPage = {
+  id: 'apap-risk-factors',
+  title: 'Risk Factors for Enhanced Toxicity',
+  subtitle: 'CYP2E1 induction, glutathione depletion, and decreased conjugation',
+  sections: [
+    {
+      heading: 'CYP2E1 Inducers (Increase Toxic NAPQI Production)',
+      body: '• **Isoniazid (INH)** — most clinically significant\n• **Rifampin**\n• **Phenobarbital**\n• **Carbamazepine**\n• **Phenytoin**\n• **Chronic alcohol ingestion** (NOT acute intoxication — acute alcohol actually competes with APAP for CYP2E1 and may be protective)\n\nThese patients produce more NAPQI per dose of acetaminophen, overwhelming glutathione stores faster. [1, 2]',
+    },
+    {
+      heading: 'Glutathione Depletion',
+      body: '• **Chronic alcohol use** (double risk: CYP2E1 induction + glutathione depletion)\n• **Chronic acetaminophen use** (subacute glutathione depletion)\n• **Chronic liver disease**\n• **Malnutrition / fasting** — even brief fasting reduces hepatic glutathione\n\nDepleted glutathione stores cannot neutralize NAPQI, leading to hepatocellular necrosis at lower APAP doses. [1, 3]',
+    },
+    {
+      heading: 'Decreased Hepatic Glucuronidation',
+      body: '• **Gilbert\'s disease** (genetic decrease in UDP-glucuronosyltransferase)\n• **Zidovudine**\n• **Trimethoprim-sulfamethoxazole (TMP-SMX)**\n\nReduced glucuronidation shifts more acetaminophen through the CYP2E1 pathway → more NAPQI production. [1]',
+    },
+    {
+      heading: 'Clinical Implications',
+      body: '**Lower threshold for NAC treatment** in patients with any of these risk factors.\n\n• Consider treating even if APAP level is below the nomogram treatment line\n• The "150 line" was already lowered from the original "200 line" to add a safety margin — but high-risk patients may need treatment even below 150\n• Chronic alcohol + chronic APAP = "alcohol-tylenol syndrome" — hepatotoxicity at doses generally considered safe [3]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bunchorntavakul C, Reddy KR. Acetaminophen and Acute Liver Failure. Clin Liver Dis. 2018;22(2):325-346. PMID 29605069' },
+    { num: 2, text: 'Internet Book of Critical Care: Acetaminophen Toxicity. Josh Farkas, PulmCrit/IBCC. Updated August 2025.' },
+    { num: 3, text: 'Chidiac AS, et al. Paracetamol (acetaminophen) overdose and hepatotoxicity. Expert Opin Drug Metab Toxicol. 2023;19(5):297-317. PMID 37436926' },
+  ],
+};
+
+const APAP_CHRONIC_INGESTION: InfoPage = {
+  id: 'apap-chronic-ingestion',
+  title: 'Chronic/Repeated Supratherapeutic Ingestion',
+  subtitle: 'When the Rumack-Matthew nomogram does not apply',
+  sections: [
+    {
+      heading: 'Definition',
+      body: 'Repeated supratherapeutic ingestion = **multiple ingestions spanning >24 hours**. This includes acute-on-chronic acetaminophen use.\n\nMore common than acute overdose in clinical practice. Often more dangerous than appreciated due to subacute depletion of hepatic glutathione stores. [1]',
+    },
+    {
+      heading: 'The "Alcohol-Tylenol Syndrome"',
+      body: 'Chronic alcohol use + chronic acetaminophen ingestion can cause hepatotoxicity at doses that are **generally considered safe** (<4 g/day).\n\nMechanism: chronic alcohol induces CYP2E1 (more NAPQI) + depletes glutathione (less NAPQI neutralization) — a "double hit." [2]',
+    },
+    {
+      heading: 'Why the Nomogram Does Not Apply',
+      body: 'The Rumack-Matthew nomogram was validated for a **single acute ingestion** with known timing. In repeated ingestions:\n• There is no single "time of ingestion" to plot\n• Glutathione stores may already be depleted\n• APAP levels may be deceptively low despite significant hepatic injury\n\nUse the **(ALT)(APAP) product** instead: >10,000 strongly predicts hepatotoxicity, <1,500 makes it very unlikely. [1, 3]',
+    },
+    {
+      heading: 'Treatment Approach',
+      body: '**Start NAC if:**\n• APAP level is detectable AND ALT is elevated\n• (ALT)(APAP) product >10,000\n• Clinical concern despite normal initial labs (consider risk factors)\n\n**Consult toxicology/poison control** — these cases are often complex.\n\n**Monitor:** Serial APAP levels, AST/ALT, INR q6h. The (ALT)(APAP) product can be recalculated with each set of labs to track trajectory. [1]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484' },
+    { num: 2, text: 'Chidiac AS, et al. Paracetamol (acetaminophen) overdose and hepatotoxicity. Expert Opin Drug Metab Toxicol. 2023;19(5):297-317. PMID 37436926' },
+    { num: 3, text: 'Internet Book of Critical Care: Acetaminophen Toxicity. Josh Farkas, PulmCrit/IBCC. Updated August 2025.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -7338,6 +7587,14 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'tca-differential': TCA_DIFFERENTIAL,
   'tca-seizure-guide': TCA_SEIZURE_GUIDE,
   'tca-disposition-criteria': TCA_DISPOSITION_CRITERIA,
+  'apap-summary': APAP_SUMMARY,
+  'apap-stages': APAP_STAGES,
+  'apap-nomogram': APAP_NOMOGRAM,
+  'apap-nac-comparison': APAP_NAC_COMPARISON,
+  'apap-anaphylactoid': APAP_ANAPHYLACTOID,
+  'apap-massive-od': APAP_MASSIVE_OD,
+  'apap-risk-factors': APAP_RISK_FACTORS,
+  'apap-chronic-ingestion': APAP_CHRONIC_INGESTION,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */
