@@ -6308,6 +6308,480 @@ const SCD_SCT_COMPLICATIONS = {
     ],
 };
 // -------------------------------------------------------------------
+// Salicylate Toxicity
+// -------------------------------------------------------------------
+const SAL_STEPS_SUMMARY = {
+    id: 'sal-steps-summary',
+    title: 'Salicylate Toxicity Steps Summary',
+    subtitle: 'Quick-reference pathway through the Salicylate Toxicity consult',
+    sections: [
+        {
+            heading: 'Module 1 \u2014 Recognition',
+            body: '\u2022 [Identify exposure: acute ingestion, chronic toxicity, or unknown timing](#/node/sal-start)\n\u2022 [Estimate dose: <150 mg/kg minimal, 150-300 moderate, >300 severe](#/node/sal-acute-dose)\n\u2022 [Chronic toxicity: lower levels can kill \u2014 clinical status > level](#/node/sal-chronic)',
+        },
+        {
+            heading: 'Module 2 \u2014 Resuscitation',
+            body: '\u2022 [Volume resuscitate with D5W or LR \u2014 NEVER normal saline](#/node/sal-resus-assess)\n\u2022 [Seizures: benzodiazepines + empiric dextrose for neuroglycopenia](#/node/sal-seizure)\n\u2022 [CRITICAL: The dangerous airway \u2014 avoid intubation if possible](#/node/sal-airway-warning)\n\u2022 [If must intubate: pre-bolus bicarb, RR 30-35, call for emergent HD](#/node/sal-intubation)',
+        },
+        {
+            heading: 'Module 3 \u2014 Decontamination',
+            body: '\u2022 [Activated charcoal 1 g/kg if within 1-2 hours](#/node/sal-charcoal)\n\u2022 [MDAC or WBI for enteric-coated or massive ingestion](#/node/sal-mdac)',
+        },
+        {
+            heading: 'Module 4 \u2014 Alkalinization',
+            body: '\u2022 [NaHCO3 bolus 1-2 mEq/kg then infusion in D5W (CORNERSTONE)](#/node/sal-bicarb-bolus)\n\u2022 [CRITICAL: Replete K+ \u2265 4.0 or alkalinization fails](#/node/sal-k-critical)\n\u2022 [Dextrose D50W for neuroglycopenia even with normal glucose](#/node/sal-dextrose)\n\u2022 [Monitor: urine pH hourly, ABG/BMP q2h, salicylate level q2h](#/node/sal-alkalinize-monitor)',
+        },
+        {
+            heading: 'Module 5 \u2014 Hemodialysis',
+            body: '\u2022 [EXTRIP indications: level >100, pH <7.2, AMS, pulm edema, renal failure](#/node/sal-hd-indications)\n\u2022 [Continue NaHCO3 during and after HD \u2014 rebound is expected](#/node/sal-hd-rebound)\n\u2022 [Consult nephrology EARLY \u2014 HD takes time to arrange](#/node/sal-hd-consult)',
+        },
+        {
+            heading: 'Module 6 \u2014 Disposition',
+            body: '\u2022 [Serial levels q2h until declining, then q4h](#/node/sal-monitor)\n\u2022 [ICU: any HD, intubation, seizures, ongoing alkalinization](#/node/sal-dispo-icu)\n\u2022 [Psychiatric evaluation mandatory for all intentional ingestions](#/node/sal-dispo)',
+        },
+    ],
+    citations: [],
+};
+const SAL_ACID_BASE = {
+    id: 'sal-acid-base',
+    title: 'Acid-Base Patterns in Salicylate Toxicity',
+    subtitle: 'Classic mixed disorder and its clinical significance',
+    sections: [
+        {
+            heading: 'Classic Pattern',
+            body: '**Early:** Primary respiratory alkalosis from direct medullary stimulation \u2014 one of the first signs of toxicity. [1][2]\n\n**Late:** Anion gap metabolic acidosis develops from uncoupled oxidative phosphorylation \u2192 lactic acidosis + ketoacidosis. Most of the AG elevation is NOT from salicylate itself (<5 mEq/L contribution). [5]\n\n**Typical presentation:** Mixed respiratory alkalosis + AG metabolic acidosis with a nearly normal pH.',
+        },
+        {
+            heading: 'Why Bicarb Still Works in Alkalosis',
+            body: 'Even when the serum pH is already alkalemic (7.45-7.55) from respiratory alkalosis, sodium bicarbonate is still beneficial. The goal is **urinary alkalinization**, not serum. [2]\n\nAlkaline urine traps ionized salicylate in the renal tubules. This works regardless of the serum pH, as long as the kidneys are producing alkaline urine.',
+        },
+        {
+            heading: 'The pH Trap',
+            body: 'A \'normal\' pH of 7.40 may mask severe poisoning if respiratory alkalosis is offsetting metabolic acidosis. **Always check the anion gap and HCO3 independently.** [2][4]\n\nA patient with pH 7.40, pCO2 20, HCO3 12, AG 22 is severely poisoned \u2014 the normal pH is misleading.',
+        },
+        {
+            heading: 'When pH Drops Below 7.35',
+            body: '**Acidemia in salicylate toxicity is a DANGER sign indicating imminent demise without intervention.** [1]\n\nAt lower pH, more salicylic acid exists in its non-ionized form \u2192 freely crosses the blood-brain barrier \u2192 worsens CNS toxicity \u2192 further respiratory depression \u2192 more acidosis. This is the **death spiral.** [2]\n\nChildren and severe/late presentations may present with pure metabolic acidosis (worse prognosis). [1]',
+        },
+        {
+            heading: 'Children vs Adults',
+            body: '**Adults:** Classic mixed picture (respiratory alkalosis + metabolic acidosis).\n**Children:** Metabolic acidosis may predominate \u2014 may not develop the initial respiratory alkalosis phase. [1][3]\n\nChildren are at higher risk for rapid deterioration.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Long N. Salicylate Toxicity. LITFL. 2020.' },
+        { num: 2, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+        { num: 3, text: 'Salicylate Toxicity. WikEM. 2026.' },
+        { num: 4, text: 'Swaminathan A. Salicylate Toxicity. REBEL EM. 2018.' },
+        { num: 5, text: 'Palmer BF, Clegg DJ. Salicylate Toxicity. NEJM. 2020;382(26):2544-2555.' },
+    ],
+};
+const SAL_ALKALINIZE_PROTOCOL = {
+    id: 'sal-alkalinize-protocol',
+    title: 'Alkalinization Protocol Detail',
+    subtitle: 'NaHCO3 preparation, targets, and troubleshooting',
+    sections: [
+        {
+            heading: 'Mechanism \u2014 Ion Trapping',
+            body: 'Salicylic acid is a weak acid (pKa 3.0). At alkaline pH, it exists primarily in its ionized form, which cannot cross cell membranes or be reabsorbed by renal tubules. [2][6]\n\nUrinary alkalinization to pH 8.0 increases renal salicylate clearance approximately **10-fold** compared to pH 6.0. [2]',
+        },
+        {
+            heading: 'Recipe',
+            body: '**Bolus:** 1-2 mEq/kg IV (2-3 amps of 8.4% NaHCO3).\n\n**Infusion:** 150 mEq NaHCO3 (3 amps of 8.4%) in 1L D5W. Run at 150-200 mL/hr. [2]\n\n**Add KCl:** 20-40 mEq per liter of infusion. [2]\n\nD5W carrier provides dual benefit: vehicle for bicarb AND CNS glucose support.',
+        },
+        {
+            heading: 'Monitoring Targets',
+            body: '\u2022 **Urine pH:** 7.5-8.0 (check hourly via Foley catheter) [2]\n\u2022 **Serum pH:** 7.45-7.55 (check q2h, do NOT exceed 7.60) [2]\n\u2022 **Potassium:** \u2265 4.0-4.5 mEq/L (check q2h) [2]\n\u2022 **Salicylate level:** q2h until peaked and declining [1]\n\u2022 **Glucose:** Fingerstick q1h if AMS',
+        },
+        {
+            heading: 'Why K+ Is the Key',
+            body: '**This is the #1 reason alkalinization fails.** [2]\n\nWhen K+ is low, the distal collecting duct reabsorbs K+ in exchange for H+ secretion \u2014 producing acidic urine regardless of how much bicarbonate you infuse.\n\nTwo simultaneous measures are required for urinary alkalinization: [2]\n1. Adequate bicarbonate delivery\n2. Aggressive K+ repletion (target \u2265 4.0-4.5 mEq/L)\n\nBicarbonate infusion itself tends to drop K+ further \u2014 preemptive repletion is essential.',
+        },
+        {
+            heading: 'CONTRAINDICATED Agents',
+            body: '**Acetazolamide:** ABSOLUTELY CONTRAINDICATED. Causes systemic metabolic acidosis (promotes bicarb excretion from the wrong side) AND displaces salicylate from albumin binding sites, increasing free (toxic) salicylate levels. [2][5]\n\n**Normal saline (0.9% NaCl):** Acidifying solution (strong ion difference = 0). Use D5W or LR for volume resuscitation. Do NOT use NS as carrier for bicarb infusion. [2]',
+        },
+        {
+            heading: 'When to Stop',
+            body: 'Discontinue alkalinization when: [2]\n\u2022 Two consecutive salicylate levels showing decline\n\u2022 Level < 30 mg/dL (< 2.2 mmol/L)\n\u2022 Patient asymptomatic with normal respiratory rate\n\n**Taper slowly** \u2014 abrupt discontinuation can cause rebound acidosis.\n\nAfter stopping, follow labs for 2-4 additional hours to ensure no rebound (especially important in chronic toxicity). [2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Long N. Salicylate Toxicity. LITFL. 2020.' },
+        { num: 2, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+        { num: 5, text: 'Palmer BF, Clegg DJ. Salicylate Toxicity. NEJM. 2020;382(26):2544-2555.' },
+        { num: 6, text: 'Proudfoot AT, et al. Position Paper on Urine Alkalinization. J Toxicol Clin Toxicol. 2004;42(1):1-26.' },
+    ],
+};
+const SAL_EXTRIP_HD = {
+    id: 'sal-extrip-hd',
+    title: 'EXTRIP Hemodialysis Indications',
+    subtitle: 'When to dialyze \u2014 EXTRIP workgroup recommendations',
+    sections: [
+        {
+            heading: 'Strongly Recommended',
+            body: 'Hemodialysis is **strongly recommended** for: [1]\n\n\u2022 Salicylate level **> 100 mg/dL** (7.2 mmol/L) in acute ingestion\n\u2022 Salicylate level **> 90 mg/dL** (6.5 mmol/L) with impaired renal function\n\u2022 **Altered mental status** attributable to salicylate (including need for intubation)\n\u2022 **pH \u2264 7.20** despite adequate resuscitation and bicarbonate\n\u2022 New **hypoxemia requiring supplemental O2** (non-cardiogenic pulmonary edema)\n\u2022 **Progressive clinical deterioration** despite aggressive treatment',
+        },
+        {
+            heading: 'Suggested',
+            body: 'Hemodialysis is **suggested** for: [1]\n\n\u2022 Salicylate level **> 80 mg/dL** (5.8 mmol/L) in acute ingestion\n\u2022 Salicylate level **> 60 mg/dL** (4.4 mmol/L) in chronic or elderly patients\n\u2022 Renal failure limiting salicylate clearance\n\u2022 Volume overload preventing adequate alkalinization\n\u2022 Clinical deterioration despite appropriate treatment',
+        },
+        {
+            heading: 'Why HD Works',
+            body: 'Salicylate is an ideal dialysis candidate: [2]\n\u2022 **Small molecule** (MW 138 Da) \u2014 easily crosses dialysis membrane\n\u2022 **Low volume of distribution** (0.1-0.3 L/kg) \u2014 accessible in blood compartment\n\u2022 **Protein binding saturated in overdose** (90% \u2192 50%) \u2014 more free drug available for removal\n\u2022 **Water-soluble** \u2014 efficiently removed by aqueous dialysate\n\nHD simultaneously **removes salicylate AND corrects metabolic acidosis**.',
+        },
+        {
+            heading: 'Practical Points',
+            body: '\u2022 **Standard intermittent HD preferred** over CRRT \u2014 much more efficient clearance [1][2]\n\u2022 HD is safe even in hypotensive patients (no fluid removal, so no hemodynamic compromise) [2]\n\u2022 **Continue NaHCO3** during and after HD \u2014 tissue redistribution continues\n\u2022 Typical session duration: **4-6 hours**\n\u2022 **Expect rebound** \u2014 recheck level 2h post-HD\n\u2022 Some patients need **2-3 sessions** for massive ingestions',
+        },
+        {
+            heading: 'Endpoint',
+            body: 'Stop HD when: [1]\n\u2022 Salicylate level **< 30 mg/dL** with no rebound at 2h post-HD\n\u2022 **AND** clinical improvement (resolving AMS, normalizing acid-base)\n\nContinue alkalinization between/after HD sessions.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Juurlink DN, et al. EXTRIP Workgroup. Ann Emerg Med. 2015;66(2):165-181.' },
+        { num: 2, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+    ],
+};
+const SAL_DEATH_SPIRAL = {
+    id: 'sal-death-spiral',
+    title: 'The Dangerous Airway \u2014 Salicylate Death Spiral',
+    subtitle: 'Why intubation in salicylate toxicity is extremely dangerous',
+    sections: [
+        {
+            heading: 'The Concept',
+            body: 'A salicylate-poisoned patient\'s compensatory hyperventilation (often RR 30-40) is the **ONLY thing maintaining their pH.** The respiratory alkalosis offsets the metabolic acidosis, keeping the patient alive. [1][2]',
+        },
+        {
+            heading: 'The Death Spiral Sequence',
+            body: '1. Apneic period during RSI \u2192 **CO2 rises rapidly**\n2. pH crashes \u2192 more salicylic acid shifts to non-ionized form\n3. Non-ionized salicylate **crosses the blood-brain barrier** freely\n4. CNS salicylate concentration rises \u2192 **brainstem depression**\n5. Further loss of respiratory drive \u2192 more CO2 retention\n6. Worsening acidosis \u2192 more CNS penetration \u2192 **cardiac arrest** [1][2][3]\n\nThis cascade can happen within **minutes** of losing respiratory compensation.',
+        },
+        {
+            heading: 'Why Ventilators Can\'t Compensate',
+            body: 'Even with aggressive ventilator settings (RR 30-35), matching a patient\'s own hyperventilatory response is extremely difficult: [1][2]\n\n\u2022 Mechanical dead space reduces effective alveolar ventilation\n\u2022 Circuit compliance absorbs tidal volume\n\u2022 Sedation/paralysis eliminates any spontaneous respiratory effort\n\u2022 Auto-PEEP limits achievable respiratory rate\n\nThe result: post-intubation pH is almost always lower than pre-intubation pH.',
+        },
+        {
+            heading: 'If You MUST Intubate',
+            body: '**Pre-intubation:** [1][2]\n\u2022 Bolus NaHCO3 1-2 mEq/kg IV \u2014 give **5-10 minutes before paralysis** so the patient can blow off the CO2 generated by bicarbonate\n\u2022 Pre-oxygenate with BVM at high rate\n\n**Intubation:** [2]\n\u2022 Most experienced operator available\n\u2022 Ketamine preferred (maintains respiratory drive longest)\n\u2022 Minimize apneic time \u2014 this is the critical window\n\n**Post-intubation:** [2]\n\u2022 Immediately connect ventilator: TV 8 mL/kg, **RR 30-35**\n\u2022 Target **pH, NOT pCO2** \u2014 get ABG within 10 minutes\n\u2022 Continue NaHCO3 boluses\n\u2022 Switch to spontaneous mode (pressure support) ASAP\n\u2022 Call for **EMERGENT hemodialysis**',
+        },
+        {
+            heading: 'The Bottom Line',
+            body: '**Intubation in salicylate toxicity should be a last resort.** [2]\n\nHemodialysis is almost always a better option than intubation for deteriorating patients. A patient who needs intubation almost certainly needs HD too \u2014 and HD without intubation is far safer than intubation without HD.\n\nHFNC may help support breathing without the risks of intubation. [2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+        { num: 2, text: 'Swaminathan A. Salicylate Toxicity. REBEL EM. 2018.' },
+        { num: 3, text: 'Stolbach AI, et al. Mechanical Ventilation Was Associated with Acidemia in Salicylate-Poisoned Patients. Acad Emerg Med. 2008;15:866-869.' },
+    ],
+};
+const SAL_CHRONIC_RECOGNITION = {
+    id: 'sal-chronic-recognition',
+    title: 'Chronic Toxicity Recognition',
+    subtitle: 'The underrecognized killer \u2014 especially in elderly patients',
+    sections: [
+        {
+            heading: 'Who Gets It',
+            body: 'Elderly patients on chronic aspirin therapy are most commonly affected. Often unintentional \u2014 gradual accumulation from renal impairment, dehydration, or drug interactions. [1][2]\n\nAlso seen with chronic use of: [1]\n\u2022 Bismuth subsalicylate (Pepto-Bismol)\n\u2022 Topical salicylate products (Ben-Gay, Icy Hot)\n\u2022 Combination cold medicines containing aspirin\n\u2022 Oil of wintergreen preparations',
+        },
+        {
+            heading: 'Why It\'s More Deadly Than Acute',
+            body: '**Chronic toxicity has HIGHER mortality than acute toxicity** despite LOWER serum levels. [1][2]\n\nReasons:\n\u2022 Greater tissue accumulation \u2014 salicylate has had time to distribute into brain and other compartments\n\u2022 Cerebral and pulmonary edema are more common than in acute toxicity [1]\n\u2022 Diagnosis is frequently delayed (misidentified as sepsis, CHF, dementia)\n\u2022 Underlying comorbidities compound the toxicity\n\n**The Done nomogram does NOT apply** to chronic toxicity. [2]',
+        },
+        {
+            heading: 'Classic Misdiagnoses',
+            body: 'Chronic salicylate toxicity is frequently confused with: [1][2]\n\n\u2022 **Sepsis** (tachypnea, tachycardia, metabolic acidosis, AMS)\n\u2022 **CHF exacerbation** (pulmonary edema, dyspnea)\n\u2022 **Dementia/delirium** (confusion, agitation)\n\u2022 **Simple UTI** (elderly with AMS \u2014 don\'t stop at the UA)\n\n**Include salicylate level in your AMS/delirium workup**, especially in elderly patients.',
+        },
+        {
+            heading: 'Red Flags for Chronic Toxicity',
+            body: '\u2022 Unexplained anion gap metabolic acidosis in elderly [1]\n\u2022 Tachypnea out of proportion to clinical picture\n\u2022 Non-cardiogenic pulmonary edema without clear cause\n\u2022 AMS + tinnitus (or new hearing loss in elderly) [1]\n\u2022 Metabolic acidosis in a patient taking chronic aspirin\n\u2022 Confusion that doesn\'t fit other diagnoses\n\n**Ask about ALL medications** \u2014 including OTC products.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Long N. Salicylate Toxicity. LITFL. 2020.' },
+        { num: 2, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+    ],
+};
+const SAL_LEVEL_INTERPRETATION = {
+    id: 'sal-level-interpretation',
+    title: 'Level Interpretation & Monitoring',
+    subtitle: 'Salicylate levels, limitations, and serial monitoring strategy',
+    sections: [
+        {
+            heading: 'Therapeutic & Toxic Ranges',
+            body: '\u2022 **Analgesic/antiplatelet:** 5-15 mg/dL\n\u2022 **Anti-inflammatory (therapeutic):** 15-30 mg/dL (1.1-2.2 mmol/L)\n\u2022 **Mild toxicity:** 30-50 mg/dL\n\u2022 **Moderate toxicity:** 50-80 mg/dL\n\u2022 **Severe toxicity:** 80-100 mg/dL\n\u2022 **Potentially lethal:** > 100 mg/dL (> 7.2 mmol/L) [1][2]\n\n**Unit conversion:** mg/dL \u00D7 0.0724 = mmol/L. Some labs report in mg/L (= mg/dL \u00D7 10).',
+        },
+        {
+            heading: 'Why Single Levels Are Unreliable',
+            body: '**A single salicylate level can be dangerously misleading:** [2]\n\n\u2022 **Timing:** Peak levels may not occur until 6+ hours (standard) or 12-24 hours (enteric-coated) after ingestion\n\u2022 **Chronic toxicity:** Levels may be only mildly elevated while tissue toxicity is severe\n\u2022 **pH dependence:** The same total level produces different tissue penetration at different pH values \u2014 a level of 46 mg/dL at pH 7.2 has the same CNS penetration as 100 mg/dL at pH 7.55 [2]\n\u2022 **Bezoar formation:** Levels may continue to rise for 12+ hours',
+        },
+        {
+            heading: 'Serial Level Strategy',
+            body: '**Serial levels are essential \u2014 check q2h until peaked and clearly declining:** [1][2]\n\n\u2022 Rising levels \u2192 ongoing absorption (bezoar, enteric-coated, large ingestion)\n\u2022 Plateau \u2192 approaching peak, continue monitoring\n\u2022 Declining levels \u00D7 2 \u2192 absorption complete, switch to q4h\n\u2022 After stopping treatment \u2192 follow 2-4 additional hours for rebound',
+        },
+        {
+            heading: 'Done Nomogram Limitations',
+            body: 'The Done nomogram plots salicylate level vs time after ingestion. [4]\n\n**Limitations \u2014 NOT valid for:** [2]\n\u2022 Chronic toxicity (tissue stores far exceed blood level)\n\u2022 Enteric-coated or sustained-release formulations\n\u2022 Unknown time of ingestion\n\u2022 Co-ingestions\n\u2022 Renal impairment\n\n**Clinical assessment always takes priority over nomogram predictions.**',
+        },
+        {
+            heading: 'The Declining-Level Trap',
+            body: '**WARNING:** A declining serum level with WORSENING clinical status suggests tissue redistribution \u2014 salicylate is moving from blood into cells (especially brain) where it causes damage. [2]\n\nThis patient needs hemodialysis, not reassurance. The falling level is false comfort \u2014 the salicylate is in a worse place, not a better one.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Long N. Salicylate Toxicity. LITFL. 2020.' },
+        { num: 2, text: 'Farkas J. Salicylate Intoxication. IBCC/EMCrit. 2025.' },
+        { num: 3, text: 'Salicylate Toxicity. WikEM. 2026.' },
+        { num: 4, text: 'Done AK. Salicylate Intoxication. Pediatrics. 1960;26:800-807.' },
+    ],
+};
+// -------------------------------------------------------------------
+// TCA Overdose Info Pages
+// -------------------------------------------------------------------
+const TCA_STEPS_SUMMARY = {
+    id: 'tca-steps-summary',
+    title: 'TCA Overdose Steps Summary',
+    subtitle: 'Quick reference — tap any step to jump directly',
+    sections: [
+        {
+            heading: 'Module 1: Recognition & Stabilization',
+            body: '• [Assess clinical severity — mild vs moderate vs severe](#/node/tca-start)\n• [Anticholinergic toxidrome features](#/node/tca-mild)\n• [Immediate resuscitation for critical patients](#/node/tca-critical)\n• [GI decontamination — activated charcoal decision](#/node/tca-decon)\n• [Intubation considerations — avoid hypoventilation](#/node/tca-intubation)',
+        },
+        {
+            heading: 'Module 2: ECG & Risk Stratification',
+            body: '• [12-lead ECG assessment — QRS duration](#/node/tca-ecg)\n• [Normal QRS — monitoring plan](#/node/tca-ecg-low)\n• [R wave in aVR — sensitive marker](#/node/tca-avr)\n• [Serial ECG monitoring protocol](#/node/tca-ecg-monitor)',
+        },
+        {
+            heading: 'Module 3: Sodium Bicarbonate Protocol',
+            body: '• [NaHCO₃ bolus — cornerstone of treatment](#/node/tca-bicarb)\n• [Aggressive bicarb for QRS >160 ms](#/node/tca-bicarb-aggressive)\n• [Treatment goals and monitoring](#/node/tca-bicarb-goals)\n• [Maintenance infusion](#/node/tca-bicarb-infusion)\n• [Bicarbonate-refractory management](#/node/tca-bicarb-refractory)',
+        },
+        {
+            heading: 'Module 4: Seizure Management',
+            body: '• [Seizure assessment — lethal feedback loop](#/node/tca-seizure)\n• [First-line BZD treatment](#/node/tca-seizure-bzd)\n• [Refractory seizure escalation](#/node/tca-seizure-refractory)\n• [Contraindicated antiepileptics](#/node/tca-seizure-avoid)',
+        },
+        {
+            heading: 'Module 5: Hemodynamic Management',
+            body: '• [Hypotension assessment — 3 mechanisms](#/node/tca-hypotension)\n• [Volume resuscitation](#/node/tca-fluids)\n• [Vasopressor selection by heart rate](#/node/tca-vasopressors)\n• [Wide-complex tachycardia management](#/node/tca-vtach)\n• [Lipid emulsion — rescue therapy](#/node/tca-lipid)\n• [ECMO — final rescue](#/node/tca-ecmo)',
+        },
+        {
+            heading: 'Module 6: Disposition',
+            body: '• [Disposition decision — ICU vs monitor vs discharge](#/node/tca-disposition)\n• [ICU admission criteria](#/node/tca-icu)\n• [Discharge criteria + psychiatric clearance](#/node/tca-discharge)',
+        },
+    ],
+    citations: [],
+};
+const TCA_ECG_FINDINGS = {
+    id: 'tca-ecg-findings',
+    title: 'ECG Findings in TCA Toxicity',
+    subtitle: 'Critical markers of sodium channel blockade',
+    sections: [
+        {
+            heading: 'QRS Duration Thresholds',
+            body: '• **QRS <100 ms** — Low risk. Monitor with serial ECGs [1]\n• **QRS 100-120 ms** — Increased seizure risk (~10-33%). Give sodium bicarbonate [1]\n• **QRS 120-160 ms** — Significant sodium channel blockade. Seizure risk ~30%. Aggressive bicarb [1]\n• **QRS >160 ms** — High risk of ventricular arrhythmias (~50%). Immediate aggressive treatment [1]\n\n⚠️ In toxicology, "wide QRS" = anything >100 ms (not the standard >120 ms)',
+        },
+        {
+            heading: 'R Wave in aVR',
+            body: '• **R wave >3 mm in aVR** — sensitive marker of sodium channel blockade [2]\n• **R/S ratio >0.7 in aVR** — additional marker\n• aVR may be more sensitive than QRS duration for predicting seizures and arrhythmias (sensitivity 81%) [2]\n• Can be positive even when QRS is <100 ms\n• Reflects preferential right bundle branch blockade by sodium channel blockers',
+        },
+        {
+            heading: 'Terminal 40 ms QRS Axis',
+            body: '• **Rightward axis deviation of terminal 40 ms of QRS** — characteristic finding\n• Sodium channel blockade preferentially affects the right bundle branch\n• Results in terminal rightward forces visible in leads I and aVR\n• May be the earliest ECG sign of sodium channel blockade',
+        },
+        {
+            heading: 'Brugada-Like Pattern',
+            body: '• Coved ST elevation in V1-V3 with RBBB morphology\n• Important NOT to confuse with true Brugada syndrome\n• TCA-induced pattern **resolves with treatment** (unlike genetic Brugada)\n• Present in up to 15% of significant TCA overdoses',
+        },
+        {
+            heading: 'QT Prolongation',
+            body: '• Present due to **potassium channel blockade** (separate from sodium channel effects)\n• Less prognostically significant than QRS widening for TCA toxicity\n• Risk of torsades de pointes, but uncommon as long as patient remains tachycardic [3]\n• Treat with magnesium 2g IV if polymorphic VT develops',
+        },
+        {
+            heading: 'Monitoring Protocol',
+            body: '• **Serial 12-lead ECGs** every 15-30 min for first 2 hours [4]\n• Then q2h for minimum 6 total hours\n• Continuous telemetry throughout observation period\n• Check ECG after each bicarbonate bolus\n• Check ECG after any clinical change (seizure, hypotension, arrhythmia)\n• Minimum 6 hours after LAST ECG abnormality resolves before considering discharge [5]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Boehnert MT, Lovejoy FH Jr. Value of the QRS duration versus the serum drug level in predicting seizures and ventricular arrhythmias after an acute overdose of tricyclic antidepressants. N Engl J Med. 1985;313(8):474-479.' },
+        { num: 2, text: 'Liebelt EL, et al. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201.' },
+        { num: 3, text: 'Weingart S. EMCrit 98 — Cyclic (Tricyclic) Antidepressant Overdose. EMCrit Blog. 2013.' },
+        { num: 4, text: 'Kerr GW, et al. TCA overdose: a review. Emerg Med J. 2001;18(4):236-241.' },
+        { num: 5, text: 'Body R, et al. GEMNet guideline for TCA overdose management. Emerg Med J. 2011;28(4):347-368.' },
+    ],
+};
+const TCA_BICARB_PROTOCOL = {
+    id: 'tca-bicarb-protocol',
+    title: 'Sodium Bicarbonate Protocol',
+    subtitle: 'Detailed dosing, goals, and troubleshooting',
+    sections: [
+        {
+            heading: 'Mechanism of Action (Dual)',
+            body: '1. **Sodium loading** — hypertonic NaHCO₃ (1000 mOsm/L) increases extracellular sodium, which competes for cardiac sodium channels blocked by TCA [1]\n2. **Alkalosis** — increasing serum pH shifts TCA to its protein-bound (non-toxic) form, reducing free drug concentration [1][2]\n\nBoth mechanisms are clinically important — neither alone is sufficient',
+        },
+        {
+            heading: 'Bolus Dosing',
+            body: '• **1-2 mEq/kg IV push** over 1-2 minutes\n• Repeat every 3-5 minutes until QRS narrows\n• 1 amp = 50 mEq/50 mL of 8.4% solution\n• Most patients need 1-3 boluses; severe cases may need 5-10+ [3]\n• Case report: 2650 mEq (53 amps) total in severe case with survival [3]',
+        },
+        {
+            heading: 'Maintenance Infusion',
+            body: '• **150 mEq (3 amps) in 1L D5W** at 150-250 mL/hr [1][2]\n• This is isotonic bicarbonate — less effective than hypertonic boluses for acute QRS widening\n• Use for maintenance AFTER initial boluses have narrowed the QRS\n• Continue until QRS normal × ≥6 hours, then wean while monitoring ECG\n• Central line preferred for large volumes (8.4% is extremely hypertonic)',
+        },
+        {
+            heading: 'Treatment Goals',
+            body: '• **QRS < 100 ms** (may not be achievable if severely/chronically prolonged)\n• **pH 7.50-7.55** — achieve via bicarb ± hyperventilation (if intubated) [1]\n• **Serum Na ≤ 155 mEq/L** — excessive hypernatremia is dangerous [4]\n• **Avoid excessive alkalinization** — pH >7.55 may paradoxically increase arrhythmia or seizure risk [2]',
+        },
+        {
+            heading: 'When Bicarbonate Fails ("Beyond Bicarbonate")',
+            body: '**If QRS not narrowing despite adequate bicarb** [1][4]:\n\n1. **Hyperventilation** (if intubated) — fastest way to alkalinize. Target ETCO₂ ~25-30 mmHg [1]\n2. **Hypertonic saline 3%** — additional sodium loading if Na <155 mEq/L [4]\n3. **Lidocaine** 1-1.5 mg/kg IV — Class IB antiarrhythmic that competes for Na channel binding sites [5]\n4. **Lipid emulsion** — rescue for cardiac arrest (see separate protocol)\n5. **ECMO** — final rescue for refractory cardiac arrest\n\n⚠️ If QRS doesn\'t respond despite 100-200 mEq, question the diagnosis [1]',
+        },
+        {
+            heading: 'Complications of Bicarbonate Therapy',
+            body: '• **Hypokalemia** — alkalosis shifts K⁺ intracellularly. Replete K⁺ simultaneously [6]\n• **Hypocalcemia** — ionized Ca²⁺ drops with alkalosis. Monitor and replete\n• **Hypernatremia** — each 50 mEq amp delivers 50 mEq sodium. Monitor Na closely\n• **Volume overload** — significant fluid load with multiple boluses\n• **Paradoxical CNS acidosis** — CO₂ crosses BBB faster than HCO₃⁻ [1]\n• **Metabolic alkalosis** — if pH >7.55, hold further bicarb and rely on hyperventilation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.' },
+        { num: 2, text: 'Murray BP, Carpenter J. Medical Toxicology. Oxford University Press. 2024.' },
+        { num: 3, text: 'Amiri H, et al. TCA cardiotoxicity treated by 2650 mEq sodium bicarbonate. JRSM Cardiovasc Dis. 2016.' },
+        { num: 4, text: 'Isoardi KZ, Chiew AL. Bicarbonate toxicity in Na channel blocker OD. EMA. 2022.' },
+        { num: 5, text: 'Foianini A, et al. Role of lidocaine or phenytoin in TCA cardiotoxicity. Clin Toxicol. 2010;48(4):325-330.' },
+        { num: 6, text: 'Swaminathan A. REBEL Core Cast 109.0 — Na Channel Blocker Poisoning. REBEL EM. 2023.' },
+    ],
+};
+const TCA_NA_BLOCKERS = {
+    id: 'tca-na-blockers',
+    title: 'Agents That Block Sodium Channels',
+    subtitle: 'Comprehensive list — all can produce TCA-like ECG findings',
+    sections: [
+        {
+            heading: 'Tricyclic Antidepressants',
+            body: '• Amitriptyline, Nortriptyline, Imipramine, Desipramine\n• Doxepin, Clomipramine, Trimipramine, Protriptyline\n• Most commonly discussed sodium channel blockers\n• Often dominate the clinical picture with combined Na channel + anticholinergic + alpha blockade',
+        },
+        {
+            heading: 'Other Antidepressants',
+            body: '• Bupropion, Citalopram, Fluoxetine\n• Maprotiline, Paroxetine, Venlafaxine\n• Generally less cardiotoxic than TCAs but can cause sodium channel blockade in overdose',
+        },
+        {
+            heading: 'Antiarrhythmics',
+            body: '• **Type Ia:** Procainamide, Quinidine, Disopyramide\n• **Type Ic:** Flecainide, Propafenone\n• These are CONTRAINDICATED in TCA overdose — worsen sodium channel blockade\n• Amiodarone also avoided (QTc prolongation)',
+        },
+        {
+            heading: 'Antihistamines',
+            body: '• **Diphenhydramine** — common, can cause TCA-like toxicity in overdose\n• Chlorpheniramine, Dimenhydrinate\n• Doxepin (also classified as TCA)\n• Combined anticholinergic + sodium channel effects',
+        },
+        {
+            heading: 'Other Agents',
+            body: '• **Cocaine** — Na channel blockade + sympathomimetic effects\n• **Beta-blockers:** Propranolol, Acebutolol (membrane-stabilizing activity)\n• **Antimalarials:** Chloroquine, Hydroxychloroquine, Quinine\n• **Antiepileptics:** Carbamazepine, Lamotrigine, Phenytoin, Lacosamide\n• **Antipsychotics:** Thioridazine, Loxapine\n• **Muscle relaxants:** Cyclobenzaprine (TCA analogue), Orphenadrine\n• **Miscellaneous:** Amantadine, Tramadol, Topiramate, some insecticides [1]',
+        },
+        {
+            heading: 'Key Clinical Point',
+            body: '⚠️ Combinations of multiple sodium channel blockers potentiate toxicity. A "subclinical" dose of diphenhydramine + cyclobenzaprine may produce significant blockade together [1].\n\nWith decreased TCA prescribing, **most patients presenting with Na channel blockade today do NOT have TCA overdose** — diphenhydramine, cocaine, and antiarrhythmics are more common causes [1].\n\nThe management principles (bicarbonate, lidocaine, avoid Class IA/IC) apply to ALL sodium channel blockers.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.' },
+    ],
+};
+const TCA_DIFFERENTIAL = {
+    id: 'tca-differential',
+    title: 'Differential Diagnosis',
+    subtitle: 'Other causes of wide QRS and anticholinergic toxidrome',
+    sections: [
+        {
+            heading: 'Other Sodium Channel Blockers',
+            body: '• Class IA/IC antiarrhythmics (procainamide, flecainide)\n• Cocaine\n• Diphenhydramine (common — false positive on TCA screen)\n• Carbamazepine\n• Cyclobenzaprine (structural TCA analogue — usually mild cardiac effects)\n• See [Agents That Block Sodium Channels](#/info/tca-na-blockers) for complete list',
+        },
+        {
+            heading: 'Anticholinergic Toxidrome DDx',
+            body: '• Antihistamines (diphenhydramine, hydroxyzine)\n• Antipsychotics (quetiapine, olanzapine)\n• Antiparkinsonian agents (benztropine, trihexyphenidyl)\n• Mydriatics (atropine, cyclopentolate)\n• Plants (jimsonweed / Datura, deadly nightshade)\n• Mushrooms (Amanita muscaria)',
+        },
+        {
+            heading: 'Wide-Complex Tachycardia DDx',
+            body: '• **Hyperkalemia** — peaked T waves, sine wave (give calcium + bicarb empirically if unsure)\n• **True Brugada syndrome** — genetic, does NOT resolve with bicarbonate\n• **Pre-excitation** (WPW with atrial fibrillation)\n• **Ventricular tachycardia** (ischemic, structural heart disease)\n• **Bundle branch block** with SVT\n• **Drug-induced:** digoxin, theophylline',
+        },
+        {
+            heading: 'Serotonin Syndrome (if Combined Ingestion)',
+            body: '• TCA + SSRI/SNRI coingestion can cause serotonin syndrome\n• Key differentiator: **clonus, hyperreflexia, diaphoresis** (wet, not dry like anticholinergic)\n• Mydriasis present in both\n• Treat with cyproheptadine and benzodiazepines',
+        },
+        {
+            heading: 'False Positive TCA Screens',
+            body: '⚠️ **Urine drug screen for TCA has many false positives** [1]:\n• Diphenhydramine\n• Cyclobenzaprine\n• Carbamazepine\n• Phenothiazines (chlorpromazine, thioridazine)\n• Quetiapine\n\nTCA levels are NOT useful for acute management — do not correlate with toxicity [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kerr GW, et al. TCA overdose: a review. Emerg Med J. 2001;18(4):236-241.' },
+    ],
+};
+const TCA_SEIZURE_GUIDE = {
+    id: 'tca-seizure-guide',
+    title: 'Seizure Management in TCA Overdose',
+    subtitle: 'Why seizures are lethal + treatment escalation',
+    sections: [
+        {
+            heading: 'Why Seizures Are Extremely Dangerous',
+            body: '🛑 **The acidosis death spiral:**\n\n1. TCA blocks sodium channels → QRS widens\n2. Seizure → lactic acidosis → pH drops\n3. Acidosis increases free (unbound) TCA → more sodium channel blockade\n4. More blockade → wider QRS → arrhythmias → more seizures\n5. Vicious cycle → cardiac arrest\n\n**Seizures must be treated aggressively** — every minute of ongoing seizure worsens cardiac toxicity [1][2]',
+        },
+        {
+            heading: 'First-Line: Benzodiazepines',
+            body: '**Choose one:**',
+            drugTable: [
+                { drug: 'Lorazepam (IV)', regimen: '0.1 mg/kg IV (max 4 mg). Repeat q5 min. Preferred IV BZD.' },
+                { drug: 'Midazolam (IM)', regimen: '0.2 mg/kg IM (max 10 mg). When IV access unavailable.' },
+                { drug: 'Diazepam (IV)', regimen: '0.15-0.2 mg/kg IV (max 10 mg). Alternative to lorazepam.' },
+            ],
+        },
+        {
+            heading: 'Simultaneous Bicarbonate',
+            body: '• Give sodium bicarbonate WITH benzodiazepines — not instead of\n• Alkalinization reduces free TCA crossing the blood-brain barrier\n• Counteracts seizure-induced lactic acidosis\n• Do not wait for seizure to stop before giving bicarb',
+        },
+        {
+            heading: 'Second-Line: Refractory Seizures',
+            body: '**If BZDs fail after 2-3 doses:**',
+            drugTable: [
+                { drug: 'Propofol', regimen: '1-2 mg/kg IV bolus → 30-200 mcg/kg/min. Requires intubation. May worsen hypotension.' },
+                { drug: 'Phenobarbital', regimen: '15-20 mg/kg IV at ≤50 mg/min. Acts on GABA-A differently than BZDs. Prepare for intubation.' },
+                { drug: 'Levetiracetam', regimen: '20 mg/kg IV (max 3000 mg). Maintenance antiepileptic. No sodium channel effects.' },
+            ],
+        },
+        {
+            heading: '🚫 Contraindicated Agents',
+            body: '**Do NOT use these — they worsen sodium channel blockade:**\n• **Phenytoin / Fosphenytoin** — may precipitate cardiac arrest\n• **Carbamazepine** — sodium channel blocker\n• **Lamotrigine** — sodium channel blocker\n• **Lacosamide** — enhances slow inactivation of sodium channels\n\n**Phenytoin contraindication is ABSOLUTE in TCA overdose** — this is a universally agreed-upon principle across all toxicology guidelines [1][2][3]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.' },
+        { num: 2, text: 'Long N. TCA Toxicity. LITFL. 2022.' },
+        { num: 3, text: 'Woolf AD, et al. TCA poisoning consensus guideline. Clin Toxicol. 2007;45(3):203-233.' },
+    ],
+};
+const TCA_DISPOSITION_CRITERIA = {
+    id: 'tca-disposition-criteria',
+    title: 'Disposition Criteria',
+    subtitle: 'ICU, monitored bed, and discharge guidelines',
+    sections: [
+        {
+            heading: 'ICU Admission',
+            body: '**Any of the following** [1][2]:\n• QRS widening (current or resolved within last 6h)\n• Ventricular arrhythmias (current or resolved)\n• Seizures (current or resolved)\n• Hypotension requiring vasopressors\n• Altered mental status\n• Requiring sodium bicarbonate infusion\n• Required intubation\n\n**In the ICU:**\n• Continuous telemetry minimum 6h after last ECG abnormality\n• Serial ABGs and electrolytes to guide bicarbonate therapy\n• Wean bicarb slowly while monitoring ECG',
+        },
+        {
+            heading: 'Monitored Bed (Telemetry)',
+            body: '**Criteria** [1]:\n• Asymptomatic or mild anticholinergic features only\n• Normal ECG (QRS <100 ms) at presentation\n• Reported significant ingestion requiring observation\n\n**Protocol:**\n• Serial ECGs q2h for minimum 6 hours\n• Continuous telemetry\n• If ANY QRS widening → escalate to bicarb protocol and ICU',
+        },
+        {
+            heading: 'Discharge Criteria',
+            body: '**ALL criteria must be met** [1][2]:\n• Asymptomatic for ≥6 hours of observation\n• QRS persistently <100 ms on serial ECGs\n• Normal mental status\n• Normal hemodynamics (no hypotension, stable HR)\n• **Psychiatric clearance obtained** (MANDATORY for intentional ingestions)\n\n**Before discharge:**\n• Document lethal means counseling\n• Counsel family to remove access to TCAs and other toxic medications\n• Consider safer antidepressant alternatives (SSRIs, SNRIs)\n• Ensure psychiatric follow-up is arranged\n• Provide safety plan',
+        },
+        {
+            heading: 'Poison Control',
+            body: '**National Poison Control Center: 1-800-222-1222**\n\nAvailable 24/7 for consultation on any suspected poisoning.\nConsider toxicology consultation for all severe cases.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kerr GW, et al. TCA overdose: a review. Emerg Med J. 2001;18(4):236-241.' },
+        { num: 2, text: 'Body R, et al. GEMNet guideline for TCA overdose management. Emerg Med J. 2011;28(4):347-368.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -6498,6 +6972,20 @@ export const INFO_PAGES = {
     'syph-partner-notification': SYPH_PARTNER_NOTIFICATION,
     'syph-congenital': SYPH_CONGENITAL,
     'syph-genital-ddx': SYPH_GENITAL_DDX,
+    'sal-steps-summary': SAL_STEPS_SUMMARY,
+    'sal-acid-base': SAL_ACID_BASE,
+    'sal-alkalinize-protocol': SAL_ALKALINIZE_PROTOCOL,
+    'sal-extrip-hd': SAL_EXTRIP_HD,
+    'sal-death-spiral': SAL_DEATH_SPIRAL,
+    'sal-chronic-recognition': SAL_CHRONIC_RECOGNITION,
+    'sal-level-interpretation': SAL_LEVEL_INTERPRETATION,
+    'tca-steps-summary': TCA_STEPS_SUMMARY,
+    'tca-ecg-findings': TCA_ECG_FINDINGS,
+    'tca-bicarb-protocol': TCA_BICARB_PROTOCOL,
+    'tca-na-blockers': TCA_NA_BLOCKERS,
+    'tca-differential': TCA_DIFFERENTIAL,
+    'tca-seizure-guide': TCA_SEIZURE_GUIDE,
+    'tca-disposition-criteria': TCA_DISPOSITION_CRITERIA,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

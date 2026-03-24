@@ -3084,6 +3084,437 @@ const SCD_TRIAGE_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// QRS Risk Stratifier (TCA Overdose)
+// -------------------------------------------------------------------
+const QRS_RISK_CALCULATOR = {
+    id: 'qrs-risk',
+    title: 'QRS Risk Stratifier',
+    subtitle: 'TCA Overdose ECG Risk Assessment',
+    description: 'Stratifies risk of seizures and ventricular arrhythmias in TCA overdose based on QRS duration and R wave in aVR. Based on Boehnert & Lovejoy 1985 (NEJM) and Liebelt et al 1995 (Ann Emerg Med).',
+    fields: [
+        {
+            name: 'qrs',
+            label: 'QRS Duration',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'ms',
+            description: 'Measured from 12-lead ECG',
+        },
+        {
+            name: 'avr',
+            label: 'R wave in aVR > 3 mm',
+            type: 'toggle',
+            points: 0,
+            description: 'Terminal R wave amplitude in lead aVR (Liebelt 1995)',
+        },
+    ],
+    results: [],
+    thresholdNote: 'In the context of poisoning, "wide QRS" is anything >100 ms (not >120 ms)',
+    citations: [
+        'Boehnert MT, Lovejoy FH Jr. Value of the QRS duration versus the serum drug level in predicting seizures and ventricular arrhythmias after an acute overdose of tricyclic antidepressants. N Engl J Med. 1985;313(8):474-479.',
+        'Liebelt EL, et al. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201.',
+    ],
+    computeResult: (values) => {
+        const qrs = values['qrs'] || 0;
+        const avr = values['avr'] || 0;
+        if (qrs === 0) {
+            return {
+                value: '—',
+                label: 'Enter QRS Duration',
+                description: 'Measure QRS duration from 12-lead ECG to assess risk.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        if (qrs < 100 && avr === 0) {
+            return {
+                value: qrs + ' ms',
+                label: 'Low Risk',
+                description: 'Normal QRS, no aVR findings.\n\n• Monitor with serial ECGs q15-30 min for first 2 hours\n• Continuous telemetry × 6 hours minimum\n• Toxicity can still develop rapidly — do not be reassured\n• If QRS widens at any point → immediate sodium bicarbonate',
+                colorVar: '--color-decision-active',
+            };
+        }
+        if (qrs < 100 && avr === 1) {
+            return {
+                value: qrs + ' ms + aVR+',
+                label: 'Moderate Risk',
+                description: 'QRS normal but R wave in aVR >3 mm suggests subclinical sodium channel blockade.\n\n• Consider prophylactic sodium bicarbonate\n• Serial ECGs q15-30 min\n• Lower threshold for treatment\n• aVR may be more sensitive than QRS alone (Liebelt 1995)',
+                colorVar: '--color-warning',
+            };
+        }
+        if (qrs >= 100 && qrs < 120) {
+            return {
+                value: qrs + ' ms',
+                label: 'Moderate Risk — Seizure Risk ~10%',
+                description: 'QRS 100-120 ms indicates sodium channel blockade.\n\n• Administer sodium bicarbonate 1-2 mEq/kg IV push\n• Target serum pH 7.50-7.55\n• Serial ECGs q15 min to assess response\n• ~33% chance of seizures at QRS >100 ms (Boehnert 1985)',
+                colorVar: '--color-warning',
+            };
+        }
+        if (qrs >= 120 && qrs <= 160) {
+            return {
+                value: qrs + ' ms',
+                label: 'High Risk — Seizure Risk ~30%',
+                description: 'Significant sodium channel blockade.\n\n• Aggressive sodium bicarbonate therapy — repeat boluses q3-5 min\n• Continuous infusion after QRS narrows\n• Prepare for seizures and ventricular arrhythmias\n• Consider early lidocaine if QRS not responding to bicarb\n• ICU admission mandatory',
+                colorVar: '--color-danger',
+            };
+        }
+        // qrs > 160
+        return {
+            value: qrs + ' ms',
+            label: 'Critical Risk — High VT/VF Risk',
+            description: '~50% risk of ventricular arrhythmias at QRS >160 ms.\n\n• Immediate sodium bicarbonate bolus + infusion\n• If intubated: hyperventilate simultaneously\n• Consider lidocaine 1-1.5 mg/kg IV for refractory widening\n• Prepare for cardiovascular collapse\n• Have lipid emulsion and ECMO consultation available\n• Massive bicarb doses may be needed (case report: 2650 mEq)',
+            colorVar: '--color-danger',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// NaHCO₃ Dose Calculator (TCA Overdose)
+// -------------------------------------------------------------------
+const BICARB_DOSE_CALCULATOR = {
+    id: 'bicarb-dose',
+    title: 'NaHCO₃ Dose Calculator',
+    subtitle: 'Sodium Bicarbonate Dosing for TCA Overdose',
+    description: 'Calculates bolus and infusion dosing of 8.4% sodium bicarbonate for sodium channel blockade in TCA overdose.',
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+        },
+    ],
+    results: [],
+    thresholdNote: '1 amp = 50 mEq/50 mL of 8.4% NaHCO₃ (1 mEq/mL, 1000 mOsm/L)',
+    citations: [
+        'Woolf AD, et al. Tricyclic antidepressant poisoning: an evidence-based consensus guideline. Clin Toxicol. 2007;45(3):203-233.',
+        'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        if (weight === 0) {
+            return {
+                value: '—',
+                label: 'Enter Patient Weight',
+                description: 'Enter weight in kg to calculate bicarbonate dosing.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        const lowDose = Math.round(weight * 1);
+        const highDose = Math.round(weight * 2);
+        const lowAmps = Math.ceil(lowDose / 50);
+        const highAmps = Math.ceil(highDose / 50);
+        return {
+            value: lowDose + '–' + highDose + ' mEq',
+            label: 'Bolus + Infusion Dosing',
+            description: '▸ BOLUS: ' + lowDose + '–' + highDose + ' mEq IV push (~' + lowAmps + '–' + highAmps + ' amps)\n' +
+                '   Repeat q3-5 min until QRS narrows\n\n' +
+                '▸ INFUSION: 150 mEq (3 amps) in 1L D5W\n' +
+                '   Rate: 150-250 mL/hr\n\n' +
+                '▸ GOALS:\n' +
+                '   • Serum pH 7.50-7.55\n' +
+                '   • QRS < 100 ms\n' +
+                '   • Serum Na ≤ 155 mEq/L\n\n' +
+                '▸ MONITOR:\n' +
+                '   • ABG/VBG q30-60 min\n' +
+                '   • K+ (hypokalemia from alkalosis — replete simultaneously)\n' +
+                '   • Ionized Ca²⁺ (drops with alkalosis)\n' +
+                '   • Serial ECGs q15-30 min',
+            colorVar: '--color-decision-active',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Rumack-Matthew Nomogram Interpreter
+// -------------------------------------------------------------------
+const RUMACK_MATTHEW_CALCULATOR = {
+    id: 'rumack-matthew',
+    title: 'Rumack-Matthew Nomogram',
+    subtitle: 'Acetaminophen Toxicity Risk Stratification',
+    description: 'Determines need for NAC treatment based on serum APAP level and time since acute single ingestion. Valid ONLY for acute ingestion (<24h) with reliable history.',
+    fields: [
+        {
+            name: 'hours',
+            label: 'Hours Since Ingestion',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'hours',
+            description: 'Time since end of ingestion (must be ≥4 hours)',
+        },
+        {
+            name: 'apap-level',
+            label: 'Serum APAP Level',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mcg/mL',
+        },
+    ],
+    results: [],
+    thresholdNote: 'The Rumack-Matthew nomogram is valid ONLY for acute single ingestions with reliable history. It does NOT apply to: chronic/repeated ingestion, extended-release formulations (may need serial levels), unknown timing, or unreliable history. For chronic ingestions, use the (ALT)(APAP) Product calculator instead.',
+    citations: [
+        'Rumack BH. Acetaminophen hepatotoxicity: the first 35 years. J Toxicol Clin Toxicol. 2002;40(1):3-20. PMID 11990202',
+        'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484',
+    ],
+    computeResult: (values) => {
+        const hours = values['hours'];
+        const apapLevel = values['apap-level'];
+        if (!hours || !apapLevel)
+            return { value: '--', label: 'Enter values', description: 'Enter hours post-ingestion and APAP level', colorVar: '--color-text-muted' };
+        if (hours < 4)
+            return { value: 'Too Early', label: 'Cannot interpret', description: 'APAP level drawn before 4 hours post-ingestion cannot be reliably plotted on the nomogram. Redraw at ≥4 hours. If >2 hours post-ingestion and undetectable, significant ingestion is unlikely — but confirm with toxicology if concerned.', colorVar: '--color-warning' };
+        if (hours > 24)
+            return { value: 'Not Applicable', label: 'Beyond nomogram range', description: 'The Rumack-Matthew nomogram is only validated for 4-24 hours post-ingestion. At >24 hours, treat based on clinical status, transaminases, and INR. If any concern, start NAC empirically.', colorVar: '--color-warning' };
+        // Treatment line: 150 mcg/mL at 4h, exponential decay
+        // Half-life of the line is ~4 hours: ln(2)/4 ≈ 0.173
+        const k = 0.173;
+        const treatmentLine = 150 * Math.exp(-k * (hours - 4));
+        const highRiskLine = 300 * Math.exp(-k * (hours - 4));
+        const treatmentRounded = Math.round(treatmentLine);
+        const highRiskRounded = Math.round(highRiskLine);
+        if (apapLevel >= highRiskLine) {
+            return {
+                value: `${apapLevel} mcg/mL at ${hours}h`,
+                label: 'ABOVE HIGH-RISK LINE (300)',
+                description: `Level ${apapLevel} is above the high-risk line (${highRiskRounded} mcg/mL at ${hours}h). This is a MASSIVE overdose.\n\n• Start HIGH-DOSE NAC (Hendrickson protocol)\n• Strongly consider fomepizole (CYP2E1 inhibitor)\n• Activated charcoal even if >4 hours\n• Evaluate for hemodialysis (EXTRIP criteria)\n• Consult toxicology/poison control immediately`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (apapLevel >= treatmentLine) {
+            return {
+                value: `${apapLevel} mcg/mL at ${hours}h`,
+                label: 'ABOVE TREATMENT LINE — Start NAC',
+                description: `Level ${apapLevel} is above the treatment line (${treatmentRounded} mcg/mL at ${hours}h).\n\n• Start IV NAC immediately (21-hour 3-bag protocol)\n• GI decontamination with activated charcoal if within 4 hours\n• Recheck APAP level, AST/ALT, INR q6h\n• NAC is nearly 100% effective within 8 hours of ingestion`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `${apapLevel} mcg/mL at ${hours}h`,
+            label: 'Below Treatment Line — Low Risk',
+            description: `Level ${apapLevel} is below the treatment line (${treatmentRounded} mcg/mL at ${hours}h).\n\n• Low risk of hepatotoxicity if this is an acute single ingestion with reliable history\n• Observe 4-6 hours with repeat labs before discharge\n• Special cases requiring serial levels: extended-release formulations, opioid/anticholinergic coingestants (redraw in 4-6h if >10 mcg/mL)\n• If any doubt, start NAC — it is extremely safe`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// NAC IV Dosing Calculator
+// -------------------------------------------------------------------
+const NAC_DOSING_CALCULATOR = {
+    id: 'nac-dosing',
+    title: 'NAC IV Dosing Calculator',
+    subtitle: 'N-Acetylcysteine 21-Hour Protocol',
+    description: 'Calculates weight-based IV NAC doses for the standard 3-bag protocol. Doses are capped at 100 kg body weight per consensus guidelines.',
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Standard 21-hour IV protocol. For massive overdose (above 300 line), increase Bag 3 infusion rate per Hendrickson protocol: 2× for >300, 3× for >450, 4× for >600 line. During hemodialysis, double the rate (max 25 mg/kg/hr). Cap weight at 100 kg for morbid obesity.',
+    citations: [
+        'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484',
+        'Heard KJ. Acetylcysteine for acetaminophen poisoning. N Engl J Med. 2008;359(3):285-292. PMID 18635433',
+    ],
+    computeResult: (values) => {
+        const rawWeight = values['weight'];
+        if (!rawWeight || rawWeight <= 0)
+            return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg', colorVar: '--color-text-muted' };
+        const weight = Math.min(rawWeight, 100); // Cap at 100 kg
+        const capped = rawWeight > 100;
+        const bag1Mg = Math.round(weight * 150);
+        const bag2Mg = Math.round(weight * 50);
+        const bag3Mg = Math.round(weight * 100);
+        const totalMg = bag1Mg + bag2Mg + bag3Mg;
+        const bag2Rate = Math.round(bag2Mg / 4);
+        const bag3Rate = Math.round(bag3Mg / 16);
+        let desc = `**Bag 1 (Loading):** ${bag1Mg} mg in 200 mL D5W over 60 min\n`;
+        desc += `**Bag 2:** ${bag2Mg} mg in 500 mL D5W over 4 hours (${bag2Rate} mg/hr)\n`;
+        desc += `**Bag 3:** ${bag3Mg} mg in 1000 mL D5W over 16 hours (${bag3Rate} mg/hr)\n\n`;
+        desc += `**Total: ${totalMg} mg (${Math.round(totalMg / 1000 * 10) / 10} g) over 21 hours**`;
+        if (capped)
+            desc += `\n\n⚠️ Dose capped at 100 kg (actual weight: ${rawWeight} kg)`;
+        desc += `\n\n**Stopping criteria:** APAP <10 mcg/mL + INR <2 + AST/ALT improving (>25-50% from peak) + clinically well. If not met, repeat Bag 3 indefinitely.`;
+        return {
+            value: `${totalMg} mg total`,
+            label: `Standard 3-Bag Protocol (${weight} kg)`,
+            description: desc,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// King's College Criteria
+// -------------------------------------------------------------------
+const KINGS_COLLEGE_CALCULATOR = {
+    id: 'kings-college',
+    title: "King's College Criteria",
+    subtitle: 'Acetaminophen-Induced Acute Liver Failure',
+    description: "Determines need for liver transplant referral in acetaminophen-induced acute hepatic failure. Meeting criteria warrants immediate transfer to a transplant center.",
+    fields: [
+        {
+            name: 'ph',
+            label: 'Arterial pH (after adequate fluid resuscitation)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '≥ 7.30', points: 0 },
+                { label: '< 7.30', points: 1 },
+            ],
+        },
+        {
+            name: 'inr',
+            label: 'INR (Prothrombin Time)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 6.5', points: 0 },
+                { label: '≥ 6.5 (PT > 100 sec)', points: 1 },
+            ],
+        },
+        {
+            name: 'creatinine',
+            label: 'Serum Creatinine',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 3.4 mg/dL', points: 0 },
+                { label: '≥ 3.4 mg/dL', points: 1 },
+            ],
+        },
+        {
+            name: 'encephalopathy',
+            label: 'Hepatic Encephalopathy Grade',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None or Grade I-II', points: 0 },
+                { label: 'Grade III-IV', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: "King's College Criteria for APAP-induced ALF: pH <7.30 alone (after resuscitation) OR all three: INR ≥6.5 + Creatinine ≥3.4 + Grade III-IV encephalopathy. Additional poor prognostic markers include lactate >3.5 mmol/L after resuscitation and phosphate >3.75 mg/dL at 48-96h.",
+    citations: [
+        "O'Grady JG, et al. Early indicators of prognosis in fulminant hepatic failure. Gastroenterology. 1989;97(2):439-445. PMID 2490426",
+        'Bernal W, et al. Lessons from look-back in acute liver failure? A single centre experience of 3300 patients. J Hepatol. 2013;59(1):74-80.',
+    ],
+    computeResult: (values) => {
+        const ph = values['ph'] || 0;
+        const inr = values['inr'] || 0;
+        const creatinine = values['creatinine'] || 0;
+        const encephalopathy = values['encephalopathy'] || 0;
+        // pH <7.30 alone = criteria met
+        if (ph === 1) {
+            return {
+                value: 'CRITERIA MET',
+                label: 'Transplant Referral — pH Criterion',
+                description: "**King's College Criteria MET** (pH <7.30 after adequate resuscitation alone is sufficient).\n\n• **Transfer to liver transplant center immediately**\n• Continue IV NAC indefinitely\n• Aggressive supportive care: coagulopathy management, cerebral edema prevention, glucose monitoring\n• Contact transplant surgery EARLY — do not wait for further deterioration\n• Patients with acute hepatic failure CAN be transplant candidates even after recent suicidal ingestion",
+                colorVar: '--color-danger',
+            };
+        }
+        // All three: INR ≥6.5 + Cr ≥3.4 + Grade III-IV encephalopathy
+        if (inr === 1 && creatinine === 1 && encephalopathy === 1) {
+            return {
+                value: 'CRITERIA MET',
+                label: 'Transplant Referral — INR/Cr/Encephalopathy',
+                description: "**King's College Criteria MET** (INR ≥6.5 + Creatinine ≥3.4 + Grade III-IV encephalopathy).\n\n• **Transfer to liver transplant center immediately**\n• Continue IV NAC indefinitely\n• Manage cerebral edema: elevate HOB 30°, hypertonic saline, mannitol\n• FFP only if active bleeding (preserves INR as prognostic marker)\n• D10W infusion for hypoglycemia\n• Low threshold for broad-spectrum antibiotics",
+                colorVar: '--color-danger',
+            };
+        }
+        // Partial criteria — concerning but not met
+        const concerning = inr === 1 || creatinine === 1 || encephalopathy === 1;
+        if (concerning) {
+            return {
+                value: 'NOT MET (Partial)',
+                label: 'Criteria Not Met — Monitor Closely',
+                description: "King's College Criteria not fully met, but one or more concerning features present.\n\n• Continue IV NAC and aggressive supportive care\n• Serial labs q6h (INR is the most important prognostic marker)\n• **Consider early discussion with transplant center** — don't wait for full criteria to be met\n• Additional poor prognostic markers: lactate >3.5 mmol/L (after resuscitation), phosphate >3.75 mg/dL (48-96h)",
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'NOT MET',
+            label: 'Criteria Not Met',
+            description: "King's College Criteria not met. Continue supportive care and NAC per protocol.\n\n• Reassess if clinical deterioration\n• Serial labs q6h — INR trending is the best prognostic marker\n• Most patients who don't develop severe hepatotoxicity (AST/ALT <1000) will recover completely",
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// (ALT)(APAP) Product
+// -------------------------------------------------------------------
+const ALT_APAP_PRODUCT_CALCULATOR = {
+    id: 'alt-apap-product',
+    title: '(ALT)(APAP) Product',
+    subtitle: 'Hepatotoxicity Prediction',
+    description: 'Predicts hepatotoxicity risk using the product of ALT and APAP concentration. Most useful for chronic/repeated supratherapeutic ingestion or delayed presentation where the Rumack-Matthew nomogram does not apply.',
+    fields: [
+        {
+            name: 'alt',
+            label: 'ALT (Alanine Aminotransferase)',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'IU/L',
+        },
+        {
+            name: 'apap',
+            label: 'APAP Concentration',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mcg/mL',
+        },
+    ],
+    results: [],
+    thresholdNote: 'The (ALT)(APAP) product is particularly useful when the Rumack-Matthew nomogram cannot be applied: chronic/repeated ingestion, unknown timing, delayed presentation, or unreliable history. A product >10,000 is strongly associated with hepatotoxicity. A product <1,500 makes significant hepatotoxicity very unlikely.',
+    citations: [
+        'Chidiac AS, et al. Paracetamol (acetaminophen) overdose and hepatotoxicity: mechanism, treatment, prevention measures, and estimates of burden of disease. Expert Opin Drug Metab Toxicol. 2023;19(5):297-317. PMID 37436926',
+        'Internet Book of Critical Care: Acetaminophen Toxicity. Josh Farkas, PulmCrit/IBCC. Updated August 2025.',
+    ],
+    computeResult: (values) => {
+        const alt = values['alt'];
+        const apap = values['apap'];
+        if (!alt && alt !== 0 || !apap && apap !== 0)
+            return { value: '--', label: 'Enter values', description: 'Enter ALT and APAP concentration', colorVar: '--color-text-muted' };
+        if (alt === 0 || apap === 0) {
+            if (alt === 0 && apap === 0)
+                return { value: '0', label: 'Both values are zero', description: 'If APAP is undetectable and ALT is normal, hepatotoxicity from acetaminophen is very unlikely. Consider other diagnoses if clinical concern persists.', colorVar: '--color-primary' };
+            return { value: '0', label: 'Product is zero', description: alt === 0 ? 'ALT is normal. If APAP is detectable, monitor with serial labs q6h.' : 'APAP is undetectable. If ALT is elevated, consider other causes of hepatitis. NAC may still be indicated if recent APAP history.', colorVar: '--color-primary' };
+        }
+        const product = alt * apap;
+        const formatted = product.toLocaleString();
+        if (product > 10000) {
+            return {
+                value: formatted,
+                label: 'HIGH RISK — Hepatotoxicity Likely',
+                description: `(ALT)(APAP) product = ${formatted} (>10,000)\n\n**Strongly associated with hepatotoxicity.**\n• Start NAC immediately if not already initiated\n• Serial labs q6h (APAP, AST/ALT, INR, BMP)\n• If massive ingestion: high-dose NAC, consider fomepizole\n• Monitor for progression to hepatic failure`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (product >= 1500) {
+            return {
+                value: formatted,
+                label: 'INTERMEDIATE RISK',
+                description: `(ALT)(APAP) product = ${formatted} (1,500–10,000)\n\n**Intermediate risk — clinical correlation required.**\n• Consider starting NAC (when in doubt, treat)\n• Serial labs q6h\n• Consult toxicology/poison control\n• Reassess with repeat (ALT)(APAP) product in 4-6 hours`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: formatted,
+            label: 'LOW RISK — Hepatotoxicity Unlikely',
+            description: `(ALT)(APAP) product = ${formatted} (<1,500)\n\n**Hepatotoxicity very unlikely.**\n• Continue monitoring with serial labs\n• Consider discharge if APAP trending down, normal INR, and clinically well\n• If chronic ingestion with risk factors (alcoholism, CYP2E1 inducers), maintain lower threshold for treatment`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -3128,6 +3559,12 @@ const CALCULATORS = {
     'steroid-equivalency': STEROID_EQUIVALENCY_CALCULATOR,
     'syphilis-serology': SYPHILIS_SEROLOGY_CALCULATOR,
     'scd-triage': SCD_TRIAGE_CALCULATOR,
+    'qrs-risk': QRS_RISK_CALCULATOR,
+    'bicarb-dose': BICARB_DOSE_CALCULATOR,
+    'rumack-matthew': RUMACK_MATTHEW_CALCULATOR,
+    'nac-dosing': NAC_DOSING_CALCULATOR,
+    'kings-college': KINGS_COLLEGE_CALCULATOR,
+    'alt-apap-product': ALT_APAP_PRODUCT_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

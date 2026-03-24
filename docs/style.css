@@ -3361,7 +3361,53 @@ body.quick-fire-mode .decision-card--active::before {
   transition: all 0.2s ease;
 }
 
-/* Tap bar - always visible in Quick Fire mode */
+/* Plain text section (no bold heading) */
+.qf-plain-section {
+  margin: 4px 0;
+}
+
+/* Bold heading - always visible */
+.qf-heading {
+  margin: 0;
+  padding: 4px 0;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Small expand card - faint burnt umber, no text */
+.qf-expand-card {
+  display: none;
+}
+
+body.quick-fire-mode .qf-expand-card {
+  display: block;
+  height: 10px;
+  margin: 4px 0 0 0;
+  background: rgba(139, 69, 19, 0.12);
+  border: 1px solid rgba(139, 69, 19, 0.25);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+body.quick-fire-mode .qf-expand-card:hover {
+  background: rgba(139, 69, 19, 0.2);
+  border-color: rgba(139, 69, 19, 0.4);
+}
+
+body.quick-fire-mode .qf-expand-card:active {
+  transform: scale(0.98);
+}
+
+/* Expanded state - card gets subtle indicator */
+body.quick-fire-mode .qf-section.qf-expanded .qf-expand-card {
+  background: rgba(139, 69, 19, 0.25);
+  border-color: rgba(139, 69, 19, 0.5);
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+}
+
+/* Legacy tap bar (keeping for compatibility) */
 .qf-tap-bar {
   display: none;
 }
@@ -3417,19 +3463,29 @@ body.quick-fire-mode .qf-content {
 
 /* Expanded state */
 body.quick-fire-mode .qf-section.qf-expanded .qf-content {
-  max-height: 500px;
+  max-height: 800px;
   opacity: 1;
-  padding: 12px 14px;
+  padding: 10px 12px;
   background: rgba(139, 69, 19, 0.06);
   border: 1px solid rgba(139, 69, 19, 0.2);
   border-top: none;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 4px 4px;
 }
 
 body.quick-fire-mode .qf-section.qf-expanded .qf-tap-bar {
   border-radius: 6px 6px 0 0;
   border-bottom: none;
   background: linear-gradient(135deg, rgba(139, 69, 19, 0.2) 0%, rgba(139, 69, 19, 0.12) 100%);
+}
+
+/* In normal mode, content is always visible */
+.qf-content {
+  display: block;
+}
+
+/* In normal mode, qf-heading is still visible as regular bold text */
+.qf-section:not(.qf-expanded) .qf-content p {
+  margin: 4px 0;
 }
 
 /* Essential content always visible */

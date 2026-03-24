@@ -1521,7 +1521,7 @@ const EPINEPHRINE = {
     genericName: 'Epinephrine',
     drugClass: 'Non-selective adrenergic agonist (alpha + beta)',
     route: 'IM/IV/IO/SQ/ET/Intracavernosal',
-    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)'],
+    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor'],
     dosing: [
         {
             indication: 'Anaphylaxis — IM (first-line)',
@@ -1543,6 +1543,10 @@ const EPINEPHRINE = {
         {
             indication: 'Ischemic priapism',
             regimen: '20 mcg (2 mL of 10 mcg/mL solution) intracavernosal every 5 minutes, up to 5 doses total (100 mcg max). Mix: 1 mL epi from cardiac amp (100 mcg/mL) + 9 mL NS = 10 mcg/mL.',
+        },
+        {
+            indication: 'TCA Overdose — Refractory Hypotension',
+            regimen: '0.01-0.1 mcg/kg/min IV infusion. Use when norepinephrine alone is insufficient or patient is bradycardic. Combined alpha + beta agonism. Caution: beta-1 agonism may worsen tachycardia in TCA overdose — norepinephrine is preferred first-line. Standard mix: 1 mg in 250 mL NS (4 mcg/mL).',
         },
         {
             indication: 'Neonatal resuscitation (NRP) — IV/IO',
@@ -1741,9 +1745,9 @@ const LIDOCAINE = {
     id: 'lidocaine',
     name: 'Lidocaine 1% (Without Epinephrine)',
     genericName: 'Lidocaine',
-    drugClass: 'Amide local anesthetic',
-    route: 'Local injection',
-    indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks'],
+    drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
+    route: 'Local injection / IV',
+    indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia'],
     dosing: [
         {
             indication: 'Dorsal penile nerve block',
@@ -1753,6 +1757,11 @@ const LIDOCAINE = {
             indication: 'Hematoma block',
             regimen: '5–10 mL of 1% plain lidocaine (10 mg/mL) injected directly into fracture hematoma via 20-gauge needle. Aspirate dark blood to confirm placement. US-guided for improved accuracy. Wait 5–10 min for full effect. For combined radius + ulna fractures, second injection into ulnar hematoma.',
             weightCalc: { dosePerKg: 4.5, unit: 'mg', label: 'Max dose (1% = 10 mg/mL)' },
+        },
+        {
+            indication: 'TCA Overdose — Ventricular Arrhythmia',
+            regimen: '1-1.5 mg/kg IV push over 2 min. May repeat 0.5-0.75 mg/kg q5-10 min (max total 3 mg/kg). If effective, start infusion 1-4 mg/min. Second-line after sodium bicarbonate. Class IB antiarrhythmic that competes for sodium channel binding sites — paradoxically IMPROVES sodium channel function by displacing more toxic agents (e.g., amitriptyline). May be more effective against agents that bind sodium channels for prolonged periods.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mg', maxDose: 100, label: 'IV push (high end)' },
         },
     ],
     contraindications: [
@@ -1854,12 +1863,20 @@ const FOMEPIZOLE = {
     genericName: 'Fomepizole',
     drugClass: 'Alcohol dehydrogenase inhibitor / Antidote',
     route: 'IV',
-    indications: ['Toxic alcohol ingestion (methanol, ethylene glycol)'],
+    indications: ['Toxic alcohol ingestion (methanol, ethylene glycol)', 'Massive acetaminophen overdose (CYP2E1 inhibitor)'],
     dosing: [
         {
             indication: 'Toxic alcohol ingestion',
             regimen: '**Loading dose:** 15 mg/kg IV over 30 minutes.\n**Maintenance:** 10 mg/kg IV q12h × 4 doses.\n**Then:** 15 mg/kg IV q12h until ethylene glycol/methanol level <20 mg/dL and patient is asymptomatic.\n\n**During hemodialysis:** Dose q4h (fomepizole is dialyzable). Give dose at START of dialysis if >6h since last dose.\n\n**Mechanism:** Competitively inhibits alcohol dehydrogenase, blocking conversion of methanol → formate and ethylene glycol → glycolate/oxalate (the toxic metabolites).',
             weightCalc: { dosePerKg: 15, unit: 'mg', label: 'Loading dose' },
+        },
+        {
+            indication: 'Massive acetaminophen overdose',
+            regimen: '**Loading:** 15 mg/kg IV over 30 minutes\n**Maintenance:** 10 mg/kg IV q12h for 48 hours or until APAP level undetectable\n\n**Mechanism:** CYP2E1 inhibitor — blocks conversion of acetaminophen to toxic NAPQI metabolite. Complementary to NAC (which replenishes glutathione to detoxify NAPQI that has already formed).\n\n**Indications:** Massive ingestion (>30g, above 300 line on nomogram), or established high-risk poisoning. Use alongside high-dose NAC. Generally safe; main drawback is cost. Consult toxicology/poison control.',
+            weightCalc: [
+                { dosePerKg: 15, unit: 'mg', label: 'Loading dose (30 min)' },
+                { dosePerKg: 10, unit: 'mg', label: 'Maintenance (q12h)' },
+            ],
         },
     ],
     contraindications: [
@@ -2124,7 +2141,7 @@ const MAGNESIUM_SULFATE = {
     genericName: 'Magnesium sulfate',
     drugClass: 'Electrolyte / Antiarrhythmic adjunct',
     route: 'IV',
-    indications: ['A-Fib / A-Flutter adjunctive rate and rhythm control', 'Torsades de pointes', 'Hypomagnesemia', 'Eclampsia / Pre-eclampsia seizure prophylaxis', 'Hypomagnesemia / Hypokalemia adjunct'],
+    indications: ['A-Fib / A-Flutter adjunctive rate and rhythm control', 'Torsades de pointes', 'Hypomagnesemia', 'Eclampsia / Pre-eclampsia seizure prophylaxis', 'Hypomagnesemia / Hypokalemia adjunct', 'TCA arrhythmia'],
     dosing: [
         {
             indication: 'A-Fib (adjunctive)',
@@ -2133,6 +2150,10 @@ const MAGNESIUM_SULFATE = {
         {
             indication: 'Torsades de pointes',
             regimen: '1-2 g IV over 5-60 min (faster for unstable patients).',
+        },
+        {
+            indication: 'TCA Overdose — Ventricular Arrhythmia',
+            regimen: '2 g IV over 2-5 minutes. For torsades de pointes, polymorphic VT, or bicarbonate-resistant arrhythmias in TCA overdose. TCA toxicity causes QT prolongation (K+ channel blockade) in addition to sodium channel blockade. Magnesium stabilizes myocardial membrane and may be successful when bicarbonate alone is insufficient.',
         },
         {
             indication: 'Hypomagnesemia / Hypokalemia (adjunct)',
@@ -2464,6 +2485,67 @@ const METOLAZONE = {
     notes: 'Oral alternative to IV chlorothiazide for sequential nephron blockade. Effective even in severe renal impairment (unlike hydrochlorothiazide). Give 30 min before loop diuretic for optimal timing of sequential blockade.',
     citations: [
         'Weisberg LS. Management of severe hyperkalemia. Crit Care Med. 2008;36(12):3246-51.',
+    ],
+};
+const N_ACETYLCYSTEINE = {
+    id: 'n-acetylcysteine',
+    name: 'N-Acetylcysteine (NAC, Mucomyst)',
+    genericName: 'Acetylcysteine',
+    drugClass: 'Antidote / Glutathione precursor',
+    route: 'IV / PO',
+    indications: ['Acetaminophen toxicity (IV — preferred)', 'Acetaminophen toxicity (oral)', 'Massive acetaminophen overdose', 'Established hepatic failure'],
+    dosing: [
+        {
+            indication: 'Acetaminophen toxicity (IV — 21-hour protocol)',
+            regimen: '**3-Bag IV Protocol (Preferred):**\n**Bag 1:** 150 mg/kg IV in 200 mL D5W over **60 minutes**\n**Bag 2:** 50 mg/kg IV in 500 mL D5W over **4 hours** (12.5 mg/kg/hr)\n**Bag 3:** 100 mg/kg IV in 1000 mL D5W over **16 hours** (6.25 mg/kg/hr)\n**Total:** 300 mg/kg over 21 hours\n\n**Cap dose at 100 kg** for morbid obesity.\n\nAnaphylactoid reactions (flushing, urticaria, bronchospasm) most common during Bag 1. Slow or pause infusion; treat with antihistamines. Do NOT permanently stop NAC.',
+            weightCalc: [
+                { dosePerKg: 150, unit: 'mg', label: 'Bag 1 — Loading (60 min)' },
+                { dosePerKg: 50, unit: 'mg', label: 'Bag 2 — (4 hours)' },
+                { dosePerKg: 100, unit: 'mg', label: 'Bag 3 — (16 hours)' },
+            ],
+        },
+        {
+            indication: 'Acetaminophen toxicity (oral — 72-hour protocol)',
+            regimen: '**Oral NAC Protocol:**\n**Loading:** 140 mg/kg PO\n**Maintenance:** 70 mg/kg PO every 4 hours × 17 additional doses\n**Total:** 1,330 mg/kg over 72 hours\n\nMix with cola or juice to improve palatability. If patient vomits within 1 hour of dose, repeat the dose. Consider antiemetics (ondansetron) 30 minutes prior.',
+            weightCalc: [
+                { dosePerKg: 140, unit: 'mg', label: 'Loading dose' },
+                { dosePerKg: 70, unit: 'mg', label: 'Maintenance (q4h × 17)' },
+            ],
+        },
+        {
+            indication: 'Massive acetaminophen overdose (high-dose NAC)',
+            regimen: '**High-Dose NAC (Hendrickson 2019):**\nStandard Bag 1 + Bag 2, then INCREASE Bag 3 infusion rate based on severity:\n\n**Above 300 line:** 12.5 mg/kg/hr (2× standard)\n**Above 450 line:** 18.75 mg/kg/hr (3× standard)\n**Above 600 line:** 25 mg/kg/hr (4× standard)\n\n**During hemodialysis:** Double the infusion rate (max 25 mg/kg/hr). HD removes ~50% of NAC.\n\nConsult toxicology/poison control for all massive overdoses.',
+            weightCalc: [
+                { dosePerKg: 150, unit: 'mg', label: 'Bag 1 — Loading (standard)' },
+                { dosePerKg: 50, unit: 'mg', label: 'Bag 2 — (standard)' },
+                { dosePerKg: 12.5, unit: 'mg', label: 'Bag 3 — 2× rate (per hour)' },
+            ],
+        },
+        {
+            indication: 'Established hepatic failure',
+            regimen: '**Continue IV NAC indefinitely** — repeat Bag 3 (100 mg/kg over 16 hours) until liver is clearly improving AND APAP level is zero.\n\nProven 28% mortality benefit even in established liver failure (Keays 1991 RCT). Also beneficial in non-acetaminophen acute liver failure.\n\nDo NOT allow NAC infusion to stop until recovery or death.',
+            weightCalc: { dosePerKg: 100, unit: 'mg', label: 'Bag 3 repeat (16 hours)' },
+        },
+    ],
+    contraindications: [
+        'No absolute contraindications for acetaminophen toxicity',
+    ],
+    cautions: [
+        'Anaphylactoid reactions (histamine-mediated, NOT IgE) — most common during loading dose. Slow rate, treat with antihistamines, do NOT permanently stop NAC',
+        'Previous anaphylactoid reaction is NOT a contraindication — can pre-treat with antihistamines and use slower initial rate',
+        'Pregnancy is NOT a contraindication — NAC is safe and beneficial; delayed treatment increases risk of miscarriage and fetal death',
+        'Fluid overload and hyponatremia with large-volume IV administration — monitor in small patients and those with heart failure',
+        'NAC itself may cause mild INR prolongation — do not confuse with hepatic synthetic failure',
+        'Impaired platelet aggregation — may promote bleeding',
+    ],
+    monitoring: 'APAP level (repeat q4-6h until undetectable). AST/ALT (trending — look for >25-50% decrease from peak). INR (best prognostic marker). BMP (creatinine, glucose, bicarbonate). Lactate. Watch for anaphylactoid signs during first 2 hours of infusion.',
+    notes: 'NAC is the definitive antidote for acetaminophen poisoning — nearly 100% effective when given within 8 hours of ingestion. Mechanism: NAC is a glutathione precursor; glutathione detoxifies NAPQI (the toxic acetaminophen metabolite). In overdose, normal conjugation pathways (glucuronidation/sulfation) become saturated → excess NAPQI production → glutathione depletion → hepatocellular necrosis. NAC replenishes glutathione stores to neutralize NAPQI. IV route preferred: 100% bioavailability, avoids emesis, faster completion (21h vs 72h). Oral NAC has 4-10% bioavailability but undergoes extensive first-pass hepatic metabolism — this is actually beneficial since the liver is the target organ. Two-bag modified Prescott protocol (200 mg/kg over 4h, then 100 mg/kg over 16h) has lower anaphylactoid reaction rate. When in doubt, GIVE NAC — minimal side effects, potentially life-saving. Stopping criteria: APAP <10 mcg/mL + INR <2 + AST/ALT normalizing or >25-50% decrease from peak + clinically well.',
+    citations: [
+        'Smilkstein MJ, et al. Efficacy of oral N-acetylcysteine in the treatment of acetaminophen overdose. N Engl J Med. 1988;319(24):1557-1562. PMID 3059186',
+        'Heard KJ. Acetylcysteine for acetaminophen poisoning. N Engl J Med. 2008;359(3):285-292. PMID 18635433',
+        'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484',
+        'Hendrickson RG. What is the most appropriate dose of N-acetylcysteine after massive acetaminophen overdose? Clin Toxicol. 2019;57(8):686-691. PMID 30777470',
+        'Keays R, et al. Intravenous acetylcysteine in paracetamol induced fulminant hepatic failure: a prospective controlled trial. BMJ. 1991;303(6809):1026-1029. PMID 1954453',
     ],
 };
 const NACL_TABLETS = {
@@ -3948,8 +4030,13 @@ const MIDAZOLAM = {
     genericName: 'Midazolam hydrochloride',
     drugClass: 'Benzodiazepine (short-acting)',
     route: 'IV/IN/IM',
-    indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE', 'Acute agitation / delirium'],
+    indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE', 'Acute agitation / delirium', 'TCA overdose seizure'],
     dosing: [
+        {
+            indication: 'TCA Overdose — Seizure (no IV access)',
+            regimen: '0.2 mg/kg IM (max 10 mg). Adults ≥40 kg: 10 mg IM. Alternative when IV access is unavailable. IM midazolam has predictable absorption (unlike lorazepam IM). Give sodium bicarbonate simultaneously if IV access obtained.',
+            weightCalc: { dosePerKg: 0.2, unit: 'mg', maxDose: 10 },
+        },
         {
             indication: 'Burns — anxiolysis',
             regimen: '0.02-0.05 mg/kg IV over 2 min. Max 2 mg initial dose. May repeat q5-10 min to effect. Total max ~0.1 mg/kg.',
@@ -4180,7 +4267,7 @@ const LEVETIRACETAM = {
     genericName: 'Levetiracetam',
     drugClass: 'Antiepileptic (SV2A ligand)',
     route: 'IV / PO',
-    indications: ['Seizure treatment in ICH', 'Status epilepticus (adjunct)', 'Seizure disorders', 'Status epilepticus (ESETT 2nd-line)'],
+    indications: ['Seizure treatment in ICH', 'Status epilepticus (adjunct)', 'Seizure disorders', 'Status epilepticus (ESETT 2nd-line)', 'TCA seizure maintenance'],
     dosing: [
         {
             indication: 'ICH seizure treatment',
@@ -4191,6 +4278,11 @@ const LEVETIRACETAM = {
             indication: 'Status Epilepticus — 2nd line (ESETT)',
             regimen: '60 mg/kg IV (max 4500 mg) over 10-15 min. ESETT trial: 47% seizure termination (equivalent to fosphenytoin and valproate). Fewest drug interactions, no cardiac effects, safe in pregnancy. Preferred 2nd-line in pregnant patients (89% of neurologists).',
             weightCalc: { dosePerKg: 60, unit: 'mg', maxDose: 4500, label: 'SE loading dose (ESETT)' },
+        },
+        {
+            indication: 'TCA Overdose — Seizure Maintenance',
+            regimen: '20 mg/kg IV (max 3000 mg) loading dose over 15 min. Then 500-1500 mg IV/PO q12h maintenance. Preferred maintenance antiepileptic for recurrent TCA seizures — no sodium channel activity, no drug interactions, no cardiac effects. Do NOT use phenytoin (worsens sodium channel blockade).',
+            weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 3000, label: 'Loading dose' },
         },
         {
             indication: 'SAH seizure prophylaxis',
@@ -4366,8 +4458,13 @@ const DIAZEPAM = {
     genericName: 'Diazepam',
     drugClass: 'Benzodiazepine (long-acting)',
     route: 'IV/PR',
-    indications: ['Status epilepticus (alternative)', 'Seizure disorders'],
+    indications: ['Status epilepticus (alternative)', 'Seizure disorders', 'TCA overdose seizure'],
     dosing: [
+        {
+            indication: 'TCA Overdose — Seizure',
+            regimen: '0.15-0.2 mg/kg IV (max 10 mg per dose). Push slowly over 2 min. Repeat q5 min. Alternative to lorazepam. Faster onset but shorter anticonvulsant duration — seizures more likely to recur, may require follow-up dosing or maintenance agent.',
+            weightCalc: { dosePerKg: 0.2, unit: 'mg', maxDose: 10 },
+        },
         {
             indication: 'Status Epilepticus — IV',
             regimen: '0.15-0.2 mg/kg IV (max 10 mg), may repeat once. Push slowly over 2 min. Alternative to lorazepam when lorazepam unavailable. Lower seizure termination rate than lorazepam (56% vs 65%). Shorter duration of anticonvulsant effect — seizures more likely to recur.',
@@ -4470,8 +4567,13 @@ const LORAZEPAM = {
     genericName: 'Lorazepam',
     drugClass: 'Benzodiazepine (intermediate-acting)',
     route: 'IV/IM',
-    indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)'],
+    indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)', 'TCA overdose seizure'],
     dosing: [
+        {
+            indication: 'TCA Overdose — Seizure',
+            regimen: '0.1 mg/kg IV push over 2 min (max 4 mg/dose). Repeat every 5 minutes if seizure persists. First-line for TCA-induced seizures. TCA seizures cause lactic acidosis → worsens cardiac toxicity in a lethal positive feedback loop. Treat aggressively. Give sodium bicarbonate simultaneously to counteract seizure-induced acidosis.',
+            weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 4 },
+        },
         {
             indication: 'Status Epilepticus — IV (first-line)',
             regimen: '0.1 mg/kg IV push over 2 min (max 4 mg/dose). May repeat once in 5-10 min if seizure persists. Total max 8 mg. Preferred IV benzodiazepine — higher seizure termination rate than diazepam (65% vs 56%) and longer anticonvulsant duration.',
@@ -4543,8 +4645,13 @@ const PHENOBARBITAL = {
     genericName: 'Phenobarbital sodium',
     drugClass: 'Barbiturate anticonvulsant',
     route: 'IV',
-    indications: ['Status epilepticus (2nd-line alternative)', 'Neonatal seizures', 'Alcohol withdrawal seizures'],
+    indications: ['Status epilepticus (2nd-line alternative)', 'Neonatal seizures', 'Alcohol withdrawal seizures', 'TCA refractory seizure'],
     dosing: [
+        {
+            indication: 'TCA Overdose — Refractory Seizure',
+            regimen: '15-20 mg/kg IV at max rate 50 mg/min (adults) or 30 mg/min (peds). Alternative to propofol for BZD-refractory TCA seizures. Acts on GABA-A receptors differently than BZDs (increases duration of chloride channel opening) — effective even when BZDs fail. Does NOT worsen sodium channel blockade (unlike phenytoin). Respiratory depression + hypotension expected — prepare for intubation.',
+            weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 2000, label: 'Loading dose (high end)' },
+        },
         {
             indication: 'Status Epilepticus — 2nd line',
             regimen: '15-20 mg/kg IV at max rate 50-100 mg/min. Max single dose 2000 mg. Use when levetiracetam, valproate, and fosphenytoin are unavailable or contraindicated. Also effective as adjunct for alcohol withdrawal seizures. May be used as first-line emergent therapy when benzodiazepines are unavailable.',
@@ -4647,8 +4754,13 @@ const PROPOFOL = {
     genericName: 'Propofol',
     drugClass: 'Sedative-hypnotic / IV anesthetic',
     route: 'IV',
-    indications: ['Refractory status epilepticus', 'Procedural sedation', 'RSI induction'],
+    indications: ['Refractory status epilepticus', 'Procedural sedation', 'RSI induction', 'TCA refractory seizure'],
     dosing: [
+        {
+            indication: 'TCA Overdose — Refractory Seizure / Post-Intubation Sedation',
+            regimen: '1-2 mg/kg IV bolus, then 20-80 mcg/kg/min infusion. For BZD-refractory seizures OR post-intubation sedation in hemodynamically stable patients. Provides dual benefit: sedation + seizure prophylaxis. Caution: may worsen hypotension — use with vasopressor support if needed.',
+            weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Loading bolus (high end)' },
+        },
         {
             indication: 'Refractory SE — continuous infusion',
             regimen: 'Load 1-2 mg/kg IV bolus, then infuse 30-200 mcg/kg/min (1.8-12 mg/kg/hr). Titrate to EEG burst suppression. Maintain 24-48h before wean attempt. Rapid onset and offset — easier to titrate than barbiturates.',
@@ -5618,12 +5730,136 @@ const RUCONEST = {
         'Zuraw B, et al. Recombinant human C1-inhibitor for the treatment of acute angioedema attacks in patients with hereditary angioedema. J Allergy Clin Immunol. 2010;126(4):821-827.',
     ],
 };
+const ACTIVATED_CHARCOAL = {
+    id: 'activated-charcoal',
+    name: 'Activated Charcoal',
+    genericName: 'Activated charcoal',
+    drugClass: 'GI Decontaminant / Adsorbent',
+    route: 'PO',
+    indications: ['GI decontamination (acetaminophen overdose)', 'GI decontamination (general toxicology)', 'GI decontamination — salicylate toxicity', 'TCA overdose', 'Drug overdose / poisoning'],
+    dosing: [
+        {
+            indication: 'Salicylate Toxicity',
+            regimen: '1 g/kg PO or via NG tube (max 50g adult). Most effective within 1 hour of ingestion, but consider up to 2-4 hours for salicylates (delayed gastric emptying in overdose). Multi-dose AC: 25g q2-4h for 3-4 additional doses for enteric-coated or massive ingestions.',
+            weightCalc: { dosePerKg: 1, unit: 'g', maxDose: 50, label: 'Single dose' },
+        },
+        {
+            indication: 'Acetaminophen toxicity',
+            regimen: '**1 g/kg PO** (max 50 g). Administer as aqueous slurry.\n\n**Timing:** Within 4 hours of ingestion (2023 US/Canada consensus extends window from traditional 1-2 hours).\n**Massive ingestion:** Consider even >4 hours post-ingestion — greatest benefit in massive poisoning where standard NAC may be inadequate.\n**Extended-release formulations:** May benefit beyond 4 hours if evidence of ongoing absorption (rising APAP levels).\n\nDo NOT delay NAC administration for charcoal.',
+            weightCalc: { dosePerKg: 1, unit: 'g', maxDose: 50 },
+        },
+        {
+            indication: 'General GI decontamination',
+            regimen: '**Adults:** 50 g PO as aqueous slurry (1 g/kg if <50 kg)\n**Pediatric:** 1 g/kg PO (max 50 g)\n\nMost effective within 1-2 hours of ingestion. Single-dose activated charcoal (SDAC). Consider for most toxic ingestions when patient has protected airway and is within the treatment window.\n\nDoes NOT adsorb: alcohols (ethanol, methanol, ethylene glycol), metals (iron, lithium, potassium), acids/alkalis, hydrocarbons.',
+            weightCalc: { dosePerKg: 1, unit: 'g', maxDose: 50 },
+        },
+        {
+            indication: 'TCA Overdose — GI Decontamination',
+            regimen: '1 g/kg PO or via NG tube (max 50g adult, 25g pediatric). Administer within 1-2 hours of ingestion if airway is protected. Anticholinergic effects of TCAs delay gastric emptying — may be beneficial even at 2-4 hours post-ingestion. Mix with water or sorbitol to improve palatability. Do NOT induce emesis.',
+            weightCalc: { dosePerKg: 1, unit: 'g', maxDose: 50 },
+        },
+    ],
+    contraindications: [
+        'Unprotected airway or altered mental status (aspiration risk)',
+        'Caustic ingestion (acids, alkalis) — may obscure endoscopy',
+        'GI perforation or obstruction',
+        'Substances not adsorbed by charcoal (metals, alcohols, hydrocarbons)',
+    ],
+    cautions: [
+        'Aspiration pneumonitis is the most serious complication — ensure airway is protected',
+        'Vomiting is common — antiemetics (ondansetron) may help',
+        'Will NOT adsorb: alcohols, metals (Fe, Li, K), acids/bases, hydrocarbons',
+        'May decrease absorption of oral NAC if given simultaneously — IV NAC preferred when charcoal indicated',
+        'Black stool expected — inform patient',
+    ],
+    monitoring: 'Monitor for vomiting and aspiration. If given with oral NAC, repeat NAC dose if patient vomits within 1 hour.',
+    notes: 'Activated charcoal is the primary GI decontamination strategy in toxicology. Acts by adsorbing ingested toxins in the GI tract, preventing systemic absorption. The 2023 US/Canada consensus statement on acetaminophen poisoning recommends a 4-hour window (expanded from traditional 1-2 hours). For massive acetaminophen ingestion (>30 g), charcoal provides the greatest benefit because these cases may not respond adequately to standard NAC dosing alone. Ipecac syrup and gastric lavage are no longer recommended for routine poisoning management. Whole bowel irrigation with polyethylene glycol is reserved for specific scenarios (sustained-release tablets, body packers, iron/lithium).',
+    citations: [
+        'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484',
+        'Gosselin S, et al. Extracorporeal treatment for acetaminophen poisoning: recommendations from the EXTRIP workgroup. Clin Toxicol. 2014;52(8):856-867. PMID 25133498',
+        'Woolf AD, et al. Tricyclic antidepressant poisoning: an evidence-based consensus guideline. Clin Toxicol. 2007;45(3):203-233.',
+        'Position paper: Single-dose activated charcoal. Clin Toxicol. 2005;43(2):61-87.',
+    ],
+};
+const NOREPINEPHRINE = {
+    id: 'norepinephrine',
+    name: 'Norepinephrine (Levophed)',
+    genericName: 'Norepinephrine bitartrate',
+    drugClass: 'Vasopressor / Catecholamine (alpha > beta)',
+    route: 'IV infusion',
+    indications: ['TCA overdose hypotension', 'Septic shock', 'Vasodilatory shock'],
+    dosing: [
+        {
+            indication: 'TCA Overdose — Hypotension',
+            regimen: '0.1-0.5 mcg/kg/min IV infusion. First-line vasopressor for TCA hypotension — alpha-adrenergic agonism directly counters TCA alpha-receptor blockade. Titrate to MAP ≥65 mmHg. Standard mix: 4 mg in 250 mL D5W (16 mcg/mL) or 8 mg in 250 mL (32 mcg/mL) for fluid restriction.',
+        },
+        {
+            indication: 'Septic / Vasodilatory Shock',
+            regimen: '0.01-3 mcg/kg/min IV infusion. First-line vasopressor per Surviving Sepsis Campaign 2021. Titrate to MAP ≥65 mmHg. Central line preferred but peripheral administration acceptable for initial resuscitation (max 12h via large-bore antecubital or external jugular).',
+        },
+    ],
+    contraindications: [
+        'Hypovolemia (correct volume deficit first)',
+        'Mesenteric or peripheral vascular thrombosis (relative — may worsen ischemia)',
+    ],
+    cautions: [
+        'Tissue necrosis with extravasation — phentolamine 5-10 mg in 10-15 mL NS infiltrated locally is the antidote',
+        'Primarily alpha-1 agonist with some beta-1 activity — less tachycardia than epinephrine',
+        'Monitor lactate and peripheral perfusion as indicators of tissue ischemia',
+        'Taper gradually — abrupt discontinuation may cause rebound hypotension',
+    ],
+    monitoring: 'Continuous arterial blood pressure (arterial line preferred). MAP target ≥65 mmHg. Urine output. Lactate. Peripheral perfusion assessment. Check IV site frequently for extravasation.',
+    notes: 'First-line vasopressor for most shock states. Predominantly alpha-1 agonist with modest beta-1 activity — increases SVR and MAP with minimal change in heart rate. In TCA overdose, alpha agonism specifically counters the peripheral vasodilation caused by TCA alpha-receptor blockade, making it the ideal first-line vasopressor.',
+    citations: [
+        'Evans L, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143.',
+        'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.',
+    ],
+};
+const LIPID_EMULSION = {
+    id: 'lipid-emulsion',
+    name: 'Lipid Emulsion 20% (Intralipid)',
+    genericName: 'Intravenous fat emulsion 20%',
+    drugClass: 'Rescue antidote / Lipid sink',
+    route: 'IV',
+    indications: ['TCA cardiac arrest / refractory toxicity', 'Local anesthetic systemic toxicity (LAST)', 'Lipophilic drug toxicity'],
+    dosing: [
+        {
+            indication: 'TCA Overdose — Cardiac Arrest / Refractory Toxicity',
+            regimen: '1.5 mL/kg IV bolus over 1 minute. Then 0.25 mL/kg/min continuous infusion × 30-60 min. May repeat bolus ×2 at 5 min intervals if no ROSC. Maximum total dose ~10 mL/kg in first 30 minutes. Reserve for cardiac arrest or hemodynamic collapse refractory to bicarbonate + vasopressors.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mL', label: 'IV bolus dose' },
+        },
+        {
+            indication: 'Local Anesthetic Systemic Toxicity (LAST)',
+            regimen: '1.5 mL/kg IV bolus over 1 minute. Then 0.25 mL/kg/min infusion × 30-60 min. Standard of care for bupivacaine cardiac arrest — administer immediately alongside CPR.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mL', label: 'IV bolus dose' },
+        },
+    ],
+    contraindications: [
+        'Known allergy to egg or soy (theoretical — NOT a contraindication in cardiac arrest)',
+        'Severe hyperlipidemia (triglycerides >400 mg/dL — relative)',
+    ],
+    cautions: [
+        'No high-quality evidence for efficacy in TCA overdose — reserve as rescue therapy',
+        'Hypertriglyceridemia — may cause pancreatitis',
+        'Lipemia interferes with laboratory assays (electrolytes, troponin, liver enzymes)',
+        'May interfere with propofol (also a lipid emulsion) — coordination needed',
+        'Risk of fat overload syndrome with excessive dosing',
+    ],
+    monitoring: 'Hemodynamics, ROSC in arrest. Triglycerides if continued >1 hour. Laboratory values may be unreliable due to lipemia.',
+    notes: 'Mechanism of action remains debated: "lipid sink" theory (absorbs lipophilic drugs from tissues), direct cardiotonic effect, and enhanced fatty acid metabolism in myocardium. More rational for lipophilic agents (TCAs, bupivacaine) than hydrophilic agents. One swine model showed equivalent efficacy to bicarbonate for TCA toxicity (Varney 2014). Should ideally be given in conjunction with toxicology consultation.',
+    citations: [
+        'Varney SM, et al. ILE therapy does not improve hypotension compared to sodium bicarbonate for TCA toxicity. Acad Emerg Med. 2014;21(11):1212-1219.',
+        'Harvey M, Cave G. Intralipid outperforms sodium bicarbonate in a rabbit model of clomipramine toxicity. Ann Emerg Med. 2007;49(2):178-185.',
+        'Neal JM, et al. ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2020;45(2):111-132.',
+    ],
+};
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 export const ALL_DRUGS = [
     ACETAMINOPHEN,
     ACETAZOLAMIDE,
+    ACTIVATED_CHARCOAL,
     ACYCLOVIR,
     ALBUTEROL_NEB,
     ALTEPLASE,
@@ -5705,6 +5941,7 @@ export const ALL_DRUGS = [
     LEVETIRACETAM,
     LEVOTHYROXINE,
     LIDOCAINE,
+    LIPID_EMULSION,
     LIOTHYRONINE,
     LOPERAMIDE,
     LORAZEPAM,
@@ -5723,11 +5960,13 @@ export const ALL_DRUGS = [
     MIDAZOLAM,
     MORPHINE,
     MISOPROSTOL,
+    N_ACETYLCYSTEINE,
     NACL_TABLETS,
     NALOXONE,
     NICARDIPINE,
     NIMODIPINE,
     NITROFURANTOIN,
+    NOREPINEPHRINE,
     NITROGLYCERIN,
     OLANZAPINE,
     ONDANSETRON,
@@ -5796,6 +6035,7 @@ export function getAllDrugs() {
 const NAME_TO_ID = [
     [/acetaminophen|tylenol|apap/i, 'acetaminophen'],
     [/acetazolamide|diamox/i, 'acetazolamide'],
+    [/activated\s*charcoal|charcoal/i, 'activated-charcoal'],
     [/acyclovir|zovirax/i, 'acyclovir'],
     [/albuterol|proventil|ventolin/i, 'albuterol-neb'],
     [/alteplase|tPA/i, 'alteplase'],
@@ -5873,6 +6113,7 @@ const NAME_TO_ID = [
     [/levetiracetam|keppra/i, 'levetiracetam'],
     [/levothyroxine|synthroid/i, 'levothyroxine'],
     [/lidocaine/i, 'lidocaine'],
+    [/lipid\s*emulsion|intralipid|ILE\b/i, 'lipid-emulsion'],
     [/liothyronine|cytomel|triostat/i, 'liothyronine'],
     [/loperamide|imodium/i, 'loperamide'],
     [/lorazepam|ativan/i, 'lorazepam'],
@@ -5891,8 +6132,10 @@ const NAME_TO_ID = [
     [/midazolam|versed/i, 'midazolam'],
     [/misoprostol|cytotec/i, 'misoprostol'],
     [/morphine/i, 'morphine'],
+    [/n-?acetylcysteine|nac(?!l)|mucomyst|acetylcysteine/i, 'n-acetylcysteine'],
     [/nacl.*tab|salt.*tab|sodium\s*chloride.*tab/i, 'nacl-tablets'],
     [/naloxone|narcan/i, 'naloxone'],
+    [/norepinephrine|levophed/i, 'norepinephrine'],
     [/nicardipine|cardene/i, 'nicardipine'],
     [/nimodipine|nymalize|nimotop/i, 'nimodipine'],
     [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],

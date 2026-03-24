@@ -31,7 +31,7 @@ export function appendBoldAware(parent: HTMLElement, text: string): void {
 export function renderBodyText(container: HTMLElement, text: string): void {
   const lines = text.split('\n');
 
-  // Group lines: bold headings become collapsible sections containing following content
+  // Group lines: bold headings have collapsible content below them
   let currentSection: { heading: string; content: string[] } | null = null;
   const sections: Array<{ type: 'heading-section'; heading: string; content: string[] } |
                         { type: 'link-line'; line: string } |
@@ -41,25 +41,24 @@ export function renderBodyText(container: HTMLElement, text: string): void {
     const trimmed = line.trim();
     if (!trimmed) continue;
 
-    const isBoldHeading = /^\*\*.+?\*\*:?$/.test(trimmed) || /^\*\*.+?\*\*\s*$/.test(trimmed);
+    const isBoldHeading = /\*\*.+?\*\*/.test(trimmed);
     const hasLink = /\[.+?\]\(.+?\)/.test(trimmed);
-    const isOnlyLink = hasLink && !isBoldHeading;
 
     if (isBoldHeading) {
       // Save previous section
       if (currentSection) {
         sections.push({ type: 'heading-section', ...currentSection });
       }
-      // Start new section with this bold heading
+      // Start new section
       currentSection = { heading: trimmed, content: [] };
     } else if (currentSection) {
       // Add to current section's content
       currentSection.content.push(trimmed);
-    } else if (isOnlyLink) {
-      // Standalone link line - always visible
+    } else if (hasLink) {
+      // Standalone link - always visible
       sections.push({ type: 'link-line', line: trimmed });
     } else {
-      // Plain content before any heading - collapsible on its own
+      // Plain content before any heading
       sections.push({ type: 'plain', line: trimmed });
     }
   }
@@ -79,48 +78,47 @@ export function renderBodyText(container: HTMLElement, text: string): void {
       container.appendChild(p);
 
     } else if (section.type === 'heading-section') {
-      // Bold heading with collapsible content below
+      // Bold heading visible + small tappable card below for content
       const wrapper = document.createElement('div');
       wrapper.className = 'qf-section';
 
-      // The heading acts as the tap bar
-      const tapBar = document.createElement('div');
-      tapBar.className = 'qf-tap-bar';
-      const headingText = section.heading.replace(/\*\*/g, '');
-      tapBar.innerHTML = `<span class="qf-tap-icon">+</span> <strong>${headingText}</strong>`;
+      // Bold heading - always visible
+      const heading = document.createElement('p');
+      heading.className = 'qf-heading';
+      renderLineWithLinksAndCitations(heading, section.heading);
+      wrapper.appendChild(heading);
 
-      // Content below the heading
-      const content = document.createElement('div');
-      content.className = 'qf-content';
-      for (const contentLine of section.content) {
-        const p = document.createElement('p');
-        renderLineWithLinksAndCitations(p, contentLine);
-        content.appendChild(p);
-      }
-
-      wrapper.appendChild(tapBar);
+      // Small expandable card + hidden content
       if (section.content.length > 0) {
-        wrapper.appendChild(content);
-      }
+        const expandCard = document.createElement('div');
+        expandCard.className = 'qf-expand-card';
 
-      // Toggle on tap
-      wrapper.addEventListener('click', (e) => {
-        e.stopPropagation();
-        wrapper.classList.toggle('qf-expanded');
-        const icon = wrapper.querySelector('.qf-tap-icon');
-        if (icon) icon.textContent = wrapper.classList.contains('qf-expanded') ? '−' : '+';
-      });
+        const content = document.createElement('div');
+        content.className = 'qf-content';
+        for (const contentLine of section.content) {
+          const p = document.createElement('p');
+          renderLineWithLinksAndCitations(p, contentLine);
+          content.appendChild(p);
+        }
+
+        wrapper.appendChild(expandCard);
+        wrapper.appendChild(content);
+
+        expandCard.addEventListener('click', (e) => {
+          e.stopPropagation();
+          wrapper.classList.toggle('qf-expanded');
+        });
+      }
 
       container.appendChild(wrapper);
 
     } else {
-      // Plain text - collapsible
+      // Plain text - small expandable card
       const wrapper = document.createElement('div');
-      wrapper.className = 'qf-section';
+      wrapper.className = 'qf-section qf-plain-section';
 
-      const tapBar = document.createElement('div');
-      tapBar.className = 'qf-tap-bar';
-      tapBar.innerHTML = '<span class="qf-tap-icon">+</span> <span class="qf-tap-hint">tap for details</span>';
+      const expandCard = document.createElement('div');
+      expandCard.className = 'qf-expand-card';
 
       const content = document.createElement('div');
       content.className = 'qf-content';
@@ -128,14 +126,12 @@ export function renderBodyText(container: HTMLElement, text: string): void {
       renderLineWithLinksAndCitations(p, section.line);
       content.appendChild(p);
 
-      wrapper.appendChild(tapBar);
+      wrapper.appendChild(expandCard);
       wrapper.appendChild(content);
 
-      wrapper.addEventListener('click', (e) => {
+      expandCard.addEventListener('click', (e) => {
         e.stopPropagation();
         wrapper.classList.toggle('qf-expanded');
-        const icon = wrapper.querySelector('.qf-tap-icon');
-        if (icon) icon.textContent = wrapper.classList.contains('qf-expanded') ? '−' : '+';
       });
 
       container.appendChild(wrapper);

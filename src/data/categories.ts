@@ -492,7 +492,23 @@ export const DEFAULT_CATEGORIES: Category[] = [
     ],
     isCustom: false,
   },
-  { id: 'toxicology',           name: 'Toxicology',            icon: 'toxicology.png',        decisionTrees: [], isCustom: false },
+  {
+    id: 'toxicology',
+    name: 'Toxicology',
+    icon: 'toxicology.png',
+    decisionTrees: [
+      {
+        id: 'tca-toxidrome',
+        title: 'TCA Overdose',
+        subtitle: 'Recognition → ECG → Bicarbonate → Seizures → Hemodynamics → Disposition',
+        categoryId: 'toxicology',
+        version: '1.0',
+        nodeCount: 32,
+        entryNodeId: 'tca-start',
+      },
+    ],
+    isCustom: false,
+  },
   {
     id: 'trauma-surg',
     name: 'Trauma/Surg',
