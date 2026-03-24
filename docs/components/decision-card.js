@@ -38,7 +38,26 @@ export function createDecisionCard(node, opts) {
 // Answered card (compact)
 // -------------------------------------------------------------------
 function renderAnsweredCard(card, node, opts) {
-    // Question + Answer format for better context
+    // Quick fire mode: ultra-compact pill format
+    if (opts.quickFireMode) {
+        card.classList.add('decision-card--quick-fire');
+        if (node.options && opts.selectedOptionIndex !== undefined) {
+            const selectedOpt = node.options[opts.selectedOptionIndex];
+            // Single line: Question → Answer
+            const pill = document.createElement('div');
+            pill.className = 'quick-fire-pill';
+            pill.innerHTML = `<span class="quick-fire-pill__q">${node.title}</span> <span class="quick-fire-pill__arrow">&rarr;</span> <span class="quick-fire-pill__a">${selectedOpt.label}</span>`;
+            card.appendChild(pill);
+        }
+        else if (node.type === 'info') {
+            const pill = document.createElement('div');
+            pill.className = 'quick-fire-pill quick-fire-pill--info';
+            pill.innerHTML = `<span class="quick-fire-pill__q">${node.title}</span> <span class="quick-fire-pill__arrow">&check;</span>`;
+            card.appendChild(pill);
+        }
+        return;
+    }
+    // Standard answered card: Question + Answer format for better context
     if (node.options && opts.selectedOptionIndex !== undefined) {
         const selectedOpt = node.options[opts.selectedOptionIndex];
         // Question label (small, muted)

@@ -11,6 +11,8 @@ import { renderContextualToolbar, removeContextualToolbar } from './contextual-t
 import { getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
+import { renderDosingBanner, removeDosingBanner } from './dosing-banner.js';
+import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -19,6 +21,10 @@ let currentTreeId: string | null = null;
 let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
+let quickFireListenerRegistered = false;
+
+// Initialize quick fire mode state on module load
+initQuickFireMode();
 
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container: HTMLElement, treeId: string): Promise<void> {
@@ -60,6 +66,16 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
     }) as EventListener);
   }
 
+  // Listen for quick fire mode toggle
+  if (!quickFireListenerRegistered) {
+    quickFireListenerRegistered = true;
+    window.addEventListener('medkitt-quick-fire-toggle', () => {
+      if (delegatedContainer) {
+        renderFlow(delegatedContainer);
+      }
+    });
+  }
+
   // Check for category-specific entry point override
   const entryOverride = sessionStorage.getItem('medkitt-tree-entry');
   sessionStorage.removeItem('medkitt-tree-entry');
@@ -84,6 +100,7 @@ function renderFlow(container: HTMLElement): void {
   if (!controller || !currentConfig) return;
 
   container.innerHTML = '';
+  removeDosingBanner();
 
   // Specialty-colored header
   const categoryId = currentConfig.categoryId || findCategoryId(currentTreeId ?? '');
@@ -95,6 +112,12 @@ function renderFlow(container: HTMLElement): void {
   // Card stack container
   const stackContainer = document.createElement('div');
   stackContainer.className = 'card-stack-container';
+
+  // Add quick fire mode class if enabled
+  const quickFire = isQuickFireMode();
+  if (quickFire) {
+    stackContainer.classList.add('card-stack-container--quick-fire');
+  }
 
   // Disclaimer on first render (no answered cards)
   const cardStack = controller.getCardStack();
@@ -113,6 +136,7 @@ function renderFlow(container: HTMLElement): void {
       selectedLabel: entry.selectedLabel,
       config: currentConfig,
       treeId: currentTreeId ?? undefined,
+      quickFireMode: quickFire,
     });
     stackContainer.appendChild(card);
   }
@@ -165,6 +189,12 @@ function renderFlow(container: HTMLElement): void {
   }
 
   container.appendChild(stackContainer);
+
+  // Sticky dosing banner — extract doses from answered cards + current card
+  const allNodesForDosing = cardStack.map(e => e.node);
+  const activeNodeForDosing = controller.getCurrentNode();
+  if (activeNodeForDosing) allNodesForDosing.push(activeNodeForDosing);
+  renderDosingBanner(container, allNodesForDosing);
 
   // Contextual toolbar
   renderContextualToolbar(currentTreeId ?? '', controller, currentEntryNodeId ?? '', currentConfig?.moduleLabels);
@@ -452,10 +482,14 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
     router.navigate('/');
   });
 
+  // Quick fire toggle
+  const quickFireBtn = renderQuickFireToggle();
+
   header.appendChild(backBtn);
   header.appendChild(resetBtn);
   header.appendChild(title);
   header.appendChild(progress);
+  header.appendChild(quickFireBtn);
   header.appendChild(shareBtn);
   header.appendChild(homeBtn);
   container.appendChild(header);
