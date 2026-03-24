@@ -3204,15 +3204,15 @@ body.quick-fire-mode .decision-card--answered:not(.decision-card--quick-fire) {
 
 body.quick-fire-mode .card-stack-container {
   background: linear-gradient(135deg,
-    rgba(139, 69, 19, 0.06) 0%,
-    rgba(139, 69, 19, 0.03) 100%);
-  border: 3px solid #8B4513;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 0 -8px;
+    rgba(139, 69, 19, 0.04) 0%,
+    rgba(139, 69, 19, 0.02) 100%);
+  border: 4px solid #8B4513;
+  border-radius: 14px;
+  padding: 10px 6px;
+  margin: 0 4px;
   box-shadow:
-    inset 0 0 20px rgba(139, 69, 19, 0.08),
-    0 0 20px rgba(139, 69, 19, 0.25);
+    inset 0 0 12px rgba(139, 69, 19, 0.06),
+    0 0 12px rgba(139, 69, 19, 0.2);
 }
 
 body.quick-fire-mode .consult-flow-header {
@@ -3265,19 +3265,21 @@ body.quick-fire-mode .qf-heading {
   line-height: 1.4;
 }
 
-/* Expand bar — small tappable burnt umber strip */
+/* Expand bar — tappable burnt umber strip, not full width */
 body.quick-fire-mode .qf-expand-card {
-  height: 10px;
+  height: 18px;
+  width: 60%;
+  margin: 4px auto;
   background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-  border-radius: 3px;
+  border-radius: 6px;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.4;
   transition: opacity 0.15s ease, height 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 body.quick-fire-mode .qf-expand-card:active {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 /* Content — hidden by default */
@@ -3296,8 +3298,8 @@ body.quick-fire-mode .qf-expanded .qf-content {
 
 /* Expand bar visual change when expanded */
 body.quick-fire-mode .qf-expanded .qf-expand-card {
-  opacity: 0.3;
-  height: 6px;
+  opacity: 0.25;
+  height: 8px;
 }
 
 /* Essential links — always visible regardless of collapse state */
