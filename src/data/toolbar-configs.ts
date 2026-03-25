@@ -81,6 +81,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'burns': [
     { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa-adult' },
     { id: 'fluid', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'calculator', target: 'burn-parkland' },
+    { id: 'hf-protocol', label: 'HF Protocol', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment' },
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },

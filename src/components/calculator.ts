@@ -5015,6 +5015,166 @@ const PE_TREATMENT_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// HF Acid Burns Treatment Protocol
+// -------------------------------------------------------------------
+
+const HF_TREATMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'hf-treatment',
+  title: 'HF Acid Burns: Treatment Protocol',
+  subtitle: 'Step-by-step calcium gluconate dosing & mixing',
+  description: 'Hydrofluoric acid burn treatment ladder with exact calcium gluconate dosing, mixing instructions, and systemic monitoring requirements.',
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'CDC NIOSH. Hydrogen Fluoride/Hydrofluoric Acid: Systemic Agent. Emergency Response Card 29750030.',
+    'NPIS. Emergency treatment of hydrofluoric acid (HF) burns and injury. 2021.',
+    'Bertolini JC. Hydrofluoric acid: a review of toxicity. J Emerg Med. 1992;10(2):163-8.',
+  ],
+  fields: [
+    {
+      name: 'burn-size',
+      label: 'Burn surface area',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Small (<25 cm²)', points: 1 },
+        { label: 'Large (≥25 cm²)', points: 2 },
+      ],
+    },
+    {
+      name: 'hf-concentration',
+      label: 'HF concentration',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '>50% (immediate pain)', points: 3 },
+        { label: '20-50% (delayed 1-8h)', points: 2 },
+        { label: '<20% (delayed up to 24h)', points: 1 },
+      ],
+    },
+    {
+      name: 'systemic-risk',
+      label: 'Systemic toxicity risk',
+      type: 'toggle',
+      points: 1,
+      description: 'Burns >25 cm² OR >50% HF concentration',
+    },
+  ],
+  computeResult: (values) => {
+    const burnSize = values['burn-size'] || 1;
+    const concentration = values['hf-concentration'] || 1;
+    const systemicRisk = values['systemic-risk'] || 0;
+
+    // Treatment protocol - all patients get the same ladder, but systemic monitoring varies
+    const protocol = [
+      '**STEP 1: Immediate Decontamination**',
+      '• Remove all contaminated clothing',
+      '• Irrigate with copious water or saline × 15-30 minutes',
+      '• Continue irrigation until calcium therapy available',
+      '',
+      '**STEP 2: Topical Calcium Gluconate 2.5% Gel**',
+      '• Apply liberally to burn and surrounding area',
+      '• Massage into skin with gloved hand × 15-30 minutes',
+      '• Reapply every 15-30 minutes until pain relief',
+      '',
+      '**Mixing Instructions for 2.5% Gel:**',
+      '• Option A: 3.5g calcium gluconate powder + 150 mL water-soluble lubricant (K-Y Jelly)',
+      '• Option B: 1 ampule 10% calcium gluconate (10 mL) + 30 mL K-Y Jelly',
+      '',
+      '**STEP 3: Subcutaneous/Intradermal Injection**',
+      '• Indication: Pain persists despite topical therapy',
+      '• **Dose: 0.5 mL per cm² of affected skin**',
+      '• Dilute 10% calcium gluconate to 5% with sterile saline (1:1)',
+      '• Use 27-30 gauge needle',
+      '• Maximum 0.5 mL per injection site',
+      '• May repeat if pain recurs',
+      '',
+      '**STEP 4: Intra-Arterial Calcium (Hand/Digit Burns)**',
+      '• Indication: Unresponsive to topical + subcutaneous',
+      '• **Dose: 10 mL of 10% calcium gluconate in 40 mL NS**',
+      '• Infuse via radial artery catheter over 4 hours',
+      '• Requires vascular surgery or interventional radiology',
+      '• Monitor for arterial spasm, compartment syndrome',
+      '',
+      '**STEP 5: Surgical Debridement**',
+      '• Indication: All above measures fail',
+      '• Excision of necrotic tissue',
+      '• Burn surgery consultation',
+    ];
+
+    const systemicMonitoring = systemicRisk === 1 ? [
+      '',
+      '⚠️ **SYSTEMIC TOXICITY MONITORING REQUIRED**',
+      '',
+      '**Indications for systemic monitoring:**',
+      '• Burns >25 cm² (size of patient\'s palm)',
+      '• HF concentration >50%',
+      '• Any signs of systemic toxicity',
+      '',
+      '**Monitoring protocol:**',
+      '• Continuous cardiac telemetry',
+      '• Serial ECG — watch for QT prolongation, widened QRS, bradycardia',
+      '• Labs q2-4h: Ca, Mg, K, iCa',
+      '• Treat hypocalcemia: calcium gluconate 10% IV 10-20 mL over 10 min',
+      '• Treat hypomagnesemia: magnesium sulfate 2g IV',
+      '• Treat hyperkalemia per standard protocol',
+      '',
+      '**Cardiac arrest risk:** Fluoride binds calcium/magnesium → severe electrolyte disturbances. Cardiac arrest from hypocalcemia, hyperkalemia, or dysrhythmia is the most common cause of death.',
+    ] : [
+      '',
+      '✓ **Small burn, low systemic risk**',
+      '• Outpatient management possible if pain controlled with topical therapy',
+      '• Return precautions: worsening pain, paresthesias, weakness',
+      '• Recheck in 24-48h to assess burn depth progression',
+    ];
+
+    const eyeProtocol = [
+      '',
+      '**EYE EXPOSURE (if applicable):**',
+      '• Immediate irrigation with water or saline × 30 minutes',
+      '• Follow with 1% calcium gluconate solution via Morgan lens × 20 min',
+      '• **Mixing 1% solution:** 10 mL of 10% calcium gluconate + 90 mL sterile saline',
+      '• Ophthalmology consult for slit lamp exam',
+    ];
+
+    const inhalationProtocol = [
+      '',
+      '**INHALATION EXPOSURE (if applicable):**',
+      '• 100% O₂ via non-rebreather',
+      '• Nebulized 2.5% calcium gluconate solution',
+      '• **Mixing nebulizer solution:** 10 mL of 10% calcium gluconate + 30 mL sterile saline',
+      '• Continuous monitoring for airway edema',
+      '• Early intubation if stridor or respiratory distress',
+    ];
+
+    const fullProtocol = [
+      ...protocol,
+      ...systemicMonitoring,
+      ...eyeProtocol,
+      ...inhalationProtocol,
+    ].join('\n');
+
+    let colorVar = '--color-moderate';
+    let riskLabel = 'Local Burn';
+
+    if (systemicRisk === 1 || concentration === 3) {
+      colorVar = '--color-critical';
+      riskLabel = 'High Systemic Risk';
+    } else if (burnSize === 2 || concentration === 2) {
+      colorVar = '--color-severe';
+      riskLabel = 'Moderate Risk';
+    }
+
+    return {
+      value: riskLabel,
+      label: 'HF Burn Protocol',
+      description: fullProtocol,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'rass': RASS_CALCULATOR,
@@ -5071,6 +5231,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'lp-interp': LP_INTERP_CALCULATOR,
   'aub-treatment': AUB_TREATMENT_CALCULATOR,
   'pe-treatment': PE_TREATMENT_CALCULATOR,
+  'hf-treatment': HF_TREATMENT_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
