@@ -15,17 +15,57 @@ import {
 
 let bannerEl: HTMLElement | null = null;
 let unsubscribe: (() => void) | null = null;
+let currentContainer: HTMLElement | null = null;
+let renderScheduled = false;
 
-/** Render the sticky dosing banner from the explicit list */
+/**
+ * Schedule a banner update (debounced to prevent infinite loops)
+ */
+function scheduleUpdate(): void {
+  if (!currentContainer || renderScheduled) return;
+  renderScheduled = true;
+  requestAnimationFrame(() => {
+    if (currentContainer) {
+      updateBannerDisplay(currentContainer);
+    }
+    renderScheduled = false;
+  });
+}
+
+/**
+ * Initialize dosing banner subscription (call once per container)
+ */
 export function renderDosingBanner(container: HTMLElement): void {
+  // If already initialized for this container, just update display
+  if (currentContainer === container && unsubscribe) {
+    updateBannerDisplay(container);
+    return;
+  }
+
+  // Clean up old subscription
   removeDosingBanner();
 
-  const list = getDosingList();
+  // Set new container
+  currentContainer = container;
 
-  // Subscribe to updates
+  // Subscribe to dosing list updates (once per container)
   unsubscribe = subscribeToDosingList(() => {
-    renderDosingBanner(container);
+    scheduleUpdate();
   });
+
+  // Initial render
+  updateBannerDisplay(container);
+}
+
+/**
+ * Update the banner display (internal use only)
+ */
+function updateBannerDisplay(container: HTMLElement): void {
+  // Remove old banner DOM
+  bannerEl?.remove();
+  bannerEl = null;
+
+  const list = getDosingList();
 
   if (list.length === 0) return; // Nothing to show
 
@@ -100,7 +140,7 @@ export function renderDosingBanner(container: HTMLElement): void {
   bannerEl = banner;
 }
 
-/** Remove the dosing banner */
+/** Remove the dosing banner and clean up subscription */
 export function removeDosingBanner(): void {
   if (unsubscribe) {
     unsubscribe();
@@ -108,6 +148,8 @@ export function removeDosingBanner(): void {
   }
   bannerEl?.remove();
   bannerEl = null;
+  currentContainer = null;
+  renderScheduled = false;
 }
 
 /** Check if banner is currently visible */

@@ -8,14 +8,50 @@
 import { getDosingList, removeFromDosingList, clearDosingList, subscribeToDosingList, } from '../services/dosing-list.js';
 let bannerEl = null;
 let unsubscribe = null;
-/** Render the sticky dosing banner from the explicit list */
-export function renderDosingBanner(container) {
-    removeDosingBanner();
-    const list = getDosingList();
-    // Subscribe to updates
-    unsubscribe = subscribeToDosingList(() => {
-        renderDosingBanner(container);
+let currentContainer = null;
+let renderScheduled = false;
+/**
+ * Schedule a banner update (debounced to prevent infinite loops)
+ */
+function scheduleUpdate() {
+    if (!currentContainer || renderScheduled)
+        return;
+    renderScheduled = true;
+    requestAnimationFrame(() => {
+        if (currentContainer) {
+            updateBannerDisplay(currentContainer);
+        }
+        renderScheduled = false;
     });
+}
+/**
+ * Initialize dosing banner subscription (call once per container)
+ */
+export function renderDosingBanner(container) {
+    // If already initialized for this container, just update display
+    if (currentContainer === container && unsubscribe) {
+        updateBannerDisplay(container);
+        return;
+    }
+    // Clean up old subscription
+    removeDosingBanner();
+    // Set new container
+    currentContainer = container;
+    // Subscribe to dosing list updates (once per container)
+    unsubscribe = subscribeToDosingList(() => {
+        scheduleUpdate();
+    });
+    // Initial render
+    updateBannerDisplay(container);
+}
+/**
+ * Update the banner display (internal use only)
+ */
+function updateBannerDisplay(container) {
+    // Remove old banner DOM
+    bannerEl?.remove();
+    bannerEl = null;
+    const list = getDosingList();
     if (list.length === 0)
         return; // Nothing to show
     const banner = document.createElement('div');
@@ -79,7 +115,7 @@ export function renderDosingBanner(container) {
     }
     bannerEl = banner;
 }
-/** Remove the dosing banner */
+/** Remove the dosing banner and clean up subscription */
 export function removeDosingBanner() {
     if (unsubscribe) {
         unsubscribe();
@@ -87,6 +123,8 @@ export function removeDosingBanner() {
     }
     bannerEl?.remove();
     bannerEl = null;
+    currentContainer = null;
+    renderScheduled = false;
 }
 /** Check if banner is currently visible */
 export function hasDosingBanner() {
