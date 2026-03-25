@@ -499,6 +499,10 @@ function renderDoseResults(resultsEl, calcs, weightKg, weightSource, drugCtx) {
             const alreadyAdded = isDoseInList(drugCtx.name, doseStr);
             addBtn.textContent = alreadyAdded ? '\u2713 Added' : '+ Add to Doses';
             addBtn.disabled = alreadyAdded;
+            // Mark row as pinned if already in list
+            if (alreadyAdded) {
+                row.classList.add('dose-calc-result-row--pinned');
+            }
             addBtn.addEventListener('click', () => {
                 addToDosingList({
                     drug: drugCtx.name,
@@ -509,6 +513,7 @@ function renderDoseResults(resultsEl, calcs, weightKg, weightSource, drugCtx) {
                 });
                 addBtn.textContent = '\u2713 Added';
                 addBtn.disabled = true;
+                row.classList.add('dose-calc-result-row--pinned');
             });
             row.appendChild(addBtn);
         }

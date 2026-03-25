@@ -16,6 +16,7 @@ import { initInfoPages } from './services/info-service.js';
 import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
 import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
+import { setupExitIntent } from './init-exit-intent.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -210,6 +211,8 @@ async function init() {
     await Promise.all([initDrugs(), initCategories(), initInfoPages()]);
     // Wait for splash to finish
     await splashPromise;
+    // Initialize exit intent modal
+    setupExitIntent();
     // Tab bar click delegation
     const tabBar = document.getElementById('bottom-tab-bar');
     if (tabBar) {

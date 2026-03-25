@@ -2129,6 +2129,23 @@ body {
 
 .dose-calc-result-row {
   margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.dose-calc-result-row--pinned {
+  background-color: rgba(52, 199, 89, 0.1);
+  border: 1px solid rgba(52, 199, 89, 0.3);
+  position: relative;
+}
+
+.dose-calc-result-row--pinned::before {
+  content: '📌';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
 }
 
 .dose-calc-result-label {
