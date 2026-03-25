@@ -146,7 +146,7 @@ export const NEUROSYPHILIS_NODES = [
         type: 'result',
         module: 4,
         title: 'Late Latent Syphilis Treatment',
-        body: '**First-line:**\nBenzathine penicillin G 2.4 million units IM weekly × 3 weeks\n(Total: 7.2 million units)\n\n**PCN allergy:**\nDesensitization preferred.\nAlternative: Doxycycline 100 mg PO BID × 28 days\n\n**Follow-up:**\n• Quantitative nontreponemal titers at 6, 12, and 24 months\n• 4-fold decline expected\n• If titers do not decline → evaluate for treatment failure, consider CSF exam',
+        body: '**First-line:**\nBenzathine penicillin G 2.4 million units IM weekly × 3 weeks\n(Total: 7.2 million units)\n\n**PCN allergy:**\nDesensitization preferred.\nAlternative: [Doxycycline](#/drug/doxycycline/neurosyphilis) 100 mg PO BID × 28 days\n\n**Follow-up:**\n• Quantitative nontreponemal titers at 6, 12, and 24 months\n• 4-fold decline expected\n• If titers do not decline → evaluate for treatment failure, consider CSF exam',
         citation: [1],
         recommendation: 'Benzathine PCN G IM weekly × 3 weeks. Follow titers.',
     },

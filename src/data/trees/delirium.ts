@@ -37,7 +37,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Rapid Reversible Causes',
-    body: 'Primary survey: ABCs, vital signs, fingerstick glucose. Check for immediately correctable causes before proceeding with delirium workup.\n\n**Fingerstick glucose** — hypoglycemia is common and immediately reversible. D50W 25g IV if <60 mg/dL.\n\n**SpO2** — supplement O2 if hypoxic. Hypoxia causes direct brain insult.\n\n**Temperature** — fever suggests infection; >104°F (40°C) raises concern for excited delirium syndrome or CNS infection.\n\n**Naloxone** — consider if opioid features present (miosis, respiratory depression, decreased consciousness). 0.4-2 mg IV/IN.\n\n**Thiamine** — give before dextrose in suspected alcohol use disorder to prevent Wernicke encephalopathy.',
+    body: 'Primary survey: ABCs, vital signs, fingerstick glucose. Check for immediately correctable causes before proceeding with delirium workup.\n\n**Fingerstick glucose** — hypoglycemia is common and immediately reversible. D50W 25g IV if <60 mg/dL.\n\n**SpO2** — supplement O2 if hypoxic. Hypoxia causes direct brain insult.\n\n**Temperature** — fever suggests infection; >104°F (40°C) raises concern for excited delirium syndrome or CNS infection.\n\n**[Naloxone](#/drug/naloxone/opioid toxicity)** — consider if opioid features present (miosis, respiratory depression, decreased consciousness). 0.4-2 mg IV/IN.\n\n**[Thiamine](#/drug/thiamine/wernicke)** — give before dextrose in suspected alcohol use disorder to prevent Wernicke encephalopathy.',
     citation: [1, 4],
     options: [
       {

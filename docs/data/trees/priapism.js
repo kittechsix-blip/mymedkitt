@@ -403,7 +403,7 @@ export const PRIAPISM_NODES = [
         type: 'info',
         module: 5,
         title: 'Intracavernosal Phenylephrine',
-        body: 'Phenylephrine = first-line sympathomimetic (AUA/SMSNA 2022).\n\nWhy phenylephrine?\n\u2022 Pure alpha-1 agonist \u2192 no intrinsic inotropy, no increase in heart rate\n\u2022 Causes smooth muscle contraction \u2192 venous outflow\n\u2022 74% success rate (vs 25% terbutaline)\n\u2022 Combined with aspiration: 70\u2013100% success\n\nOnset: 1 minute | Duration: 10\u201320 minutes\n\nTap for mixing instructions:\n\u2022 [Phenylephrine](#/drug/phenylephrine) \u2014 first-line\n\u2022 [Epinephrine](#/drug/epinephrine) \u2014 alternative if no phenylephrine',
+        body: 'Phenylephrine = first-line sympathomimetic (AUA/SMSNA 2022).\n\nWhy phenylephrine?\n\u2022 Pure alpha-1 agonist \u2192 no intrinsic inotropy, no increase in heart rate\n\u2022 Causes smooth muscle contraction \u2192 venous outflow\n\u2022 74% success rate (vs 25% terbutaline)\n\u2022 Combined with aspiration: 70\u2013100% success\n\nOnset: 1 minute | Duration: 10\u201320 minutes\n\nTap for mixing instructions:\n\u2022 [Phenylephrine](#/drug/phenylephrine/priapism) \u2014 first-line\n\u2022 [Epinephrine](#/drug/epinephrine/priapism) \u2014 alternative if no phenylephrine',
         citation: [1, 3, 4, 5],
         images: [
             {

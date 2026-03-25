@@ -17,7 +17,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'NSTEMI Confirmed',
-    body: 'Establish diagnosis: [troponin rise](#/info/nstemi-troponin-sensitivity) AND at least one of ischemic symptoms, new ST depression/T-wave inversion, or wall motion abnormality.\n\n**Immediate actions:**\n\u2022 [Aspirin](#/drug/aspirin) 162\u2013325 mg chewed\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) 0.4 mg SL q5min \u00D7 3 \u2014 rule out RV infarction first\n\u2022 Morphine ONLY for refractory pain (may increase mortality)\n\u2022 Supplemental O\u2082 only if SpO\u2082 <90%\n\u2022 12-lead ECG within 10 minutes\n\u2022 Serial troponins q3\u20136h',
+    body: 'Establish diagnosis: [troponin rise](#/info/nstemi-troponin-sensitivity) AND at least one of ischemic symptoms, new ST depression/T-wave inversion, or wall motion abnormality.\n\n**Immediate actions:**\n\u2022 [Aspirin](#/drug/aspirin/acs) 162\u2013325 mg chewed\n\u2022 [Nitroglycerin](#/drug/nitroglycerin/acs) 0.4 mg SL q5min \u00D7 3 \u2014 rule out RV infarction first\n\u2022 Morphine ONLY for refractory pain (may increase mortality)\n\u2022 Supplemental O\u2082 only if SpO\u2082 <90%\n\u2022 12-lead ECG within 10 minutes\n\u2022 Serial troponins q3\u20136h',
     citation: [1, 2],
     next: 'nstemi-initial-anticoag',
   },
@@ -27,7 +27,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Anticoagulation Selection',
-    body: 'Choose ONE anticoagulation strategy:\n\u2022 [Enoxaparin](#/drug/enoxaparin) 1 mg/kg SC q12h \u2014 preferred for most patients\n\u2022 [UFH](#/drug/ufh) 60 units/kg bolus (max 4,000), 12 units/kg/hr (max 1,000) \u2014 preferred if CrCl <30 or PCI within 24h\n\u2022 [Fondaparinux](#/drug/fondaparinux) 2.5 mg SC daily \u2014 preferred for conservative strategy (lowest bleeding risk per OASIS-5)\n\nDo NOT switch between anticoagulants (increases bleeding risk).',
+    body: 'Choose ONE anticoagulation strategy:\n\u2022 [Enoxaparin](#/drug/enoxaparin/nstemi) 1 mg/kg SC q12h \u2014 preferred for most patients\n\u2022 [UFH](#/drug/ufh/nstemi) 60 units/kg bolus (max 4,000), 12 units/kg/hr (max 1,000) \u2014 preferred if CrCl <30 or PCI within 24h\n\u2022 [Fondaparinux](#/drug/fondaparinux/nstemi) 2.5 mg SC daily \u2014 preferred for conservative strategy (lowest bleeding risk per OASIS-5)\n\nDo NOT switch between anticoagulants (increases bleeding risk).',
     citation: [1, 3],
     options: [
       {
@@ -112,7 +112,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Conservative (Ischemia-Guided) Strategy',
-    body: 'Low TIMI risk. Conservative management appropriate.\nSee [Conservative Management Details](#/info/nstemi-conservative)\n\nMedical therapy:\n\u2022 Continue anticoagulation (fondaparinux preferred \u2014 lowest bleeding)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) PRN chest pain\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO (start immediately)\n\u2022 Clopidogrel 300 mg loading if no P2Y12 yet (ticagrelor also acceptable)\n\nStress test before discharge.',
+    body: 'Low TIMI risk. Conservative management appropriate.\nSee [Conservative Management Details](#/info/nstemi-conservative)\n\nMedical therapy:\n\u2022 Continue anticoagulation (fondaparinux preferred \u2014 lowest bleeding)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) PRN chest pain\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO (start immediately)\n\u2022 [Clopidogrel](#/drug/clopidogrel/acs) 300 mg loading if no P2Y12 yet (ticagrelor also acceptable)\n\nStress test before discharge.',
     citation: [1, 5],
     options: [
       {
@@ -267,7 +267,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'result',
     module: 5,
     title: 'Triple Therapy \u2014 AF + ACS + Stent',
-    body: 'Patient requires both anticoagulation (AF) and DAPT (stent).\n\n**Triple therapy (OAC + aspirin + P2Y12) for SHORTEST possible duration:**\n\u2022 1 week (if high bleeding risk) to 1 month maximum\n\u2022 Then dual therapy: OAC + [Clopidogrel](#/drug/clopidogrel/acs) 75 mg daily (preferred P2Y12 for triple/dual)\n\u2022 At 12 months: OAC alone (discontinue P2Y12)\n\n**Preferred DOAC:** Rivaroxaban 15 mg daily (PIONEER AF-PCI) or Apixaban 5 mg BID (AUGUSTUS)\n\u2022 Avoid warfarin if possible (more bleeding than DOAC-based regimens)\n\u2022 Avoid prasugrel in triple therapy (excess bleeding)\n\u2022 Avoid ticagrelor in triple therapy (limited data)',
+    body: 'Patient requires both anticoagulation (AF) and DAPT (stent).\n\n**Triple therapy (OAC + aspirin + P2Y12) for SHORTEST possible duration:**\n\u2022 1 week (if high bleeding risk) to 1 month maximum\n\u2022 Then dual therapy: OAC + [Clopidogrel](#/drug/clopidogrel/acs) 75 mg daily (preferred P2Y12 for triple/dual)\n\u2022 At 12 months: OAC alone (discontinue P2Y12)\n\n**Preferred DOAC:** [Rivaroxaban](#/drug/rivaroxaban/atrial fibrillation) 15 mg daily (PIONEER AF-PCI) or [Apixaban](#/drug/apixaban/atrial fibrillation) 5 mg BID (AUGUSTUS)\n\u2022 Avoid warfarin if possible (more bleeding than DOAC-based regimens)\n\u2022 Avoid prasugrel in triple therapy (excess bleeding)\n\u2022 Avoid ticagrelor in triple therapy (limited data)',
     recommendation: 'Minimize triple therapy duration (\u22641 month). DOAC + clopidogrel preferred for dual therapy phase. Discontinue antiplatelet at 12 months.',
     confidence: 'definitive',
     citation: [1, 10],

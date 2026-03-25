@@ -160,7 +160,7 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Bicarbonate-Refractory QRS Widening',
-    body: 'QRS not narrowing despite adequate bicarbonate dosing?\n\n**Three additional strategies** [12][16][18]:\n\n1. **Hypertonic saline 3%** — additional sodium loading if Na <155 mEq/L [18]\n2. **Hyperventilation** — if intubated, fastest way to achieve alkalosis. Target ETCO₂ ~25-30 mmHg [16]\n3. **Lidocaine** — Class IB antiarrhythmic that competes for sodium channel binding sites. Paradoxically IMPROVES sodium channel function in the context of TCA blockade [6][16]\n\n⚠️ If QRS doesn\'t respond despite all measures, consider whether the diagnosis is correct [16].\n\nWhich pathway next?',
+    body: 'QRS not narrowing despite adequate bicarbonate dosing?\n\n**Three additional strategies** [12][16][18]:\n\n1. **[Hypertonic saline](#/drug/hypertonic-saline/TCA) 3%** — additional sodium loading if Na <155 mEq/L [18]\n2. **Hyperventilation** — if intubated, fastest way to achieve alkalosis. Target ETCO₂ ~25-30 mmHg [16]\n3. **[Lidocaine](#/drug/lidocaine/TCA antiarrhythmic)** — Class IB antiarrhythmic that competes for sodium channel binding sites. Paradoxically IMPROVES sodium channel function in the context of TCA blockade [6][16]\n\n⚠️ If QRS doesn\'t respond despite all measures, consider whether the diagnosis is correct [16].\n\nWhich pathway next?',
     citation: [6, 12, 16, 18],
     options: [
       { label: 'Seizure present or imminent', description: 'Active seizure activity', next: 'tca-seizure', urgency: 'critical' },
@@ -218,7 +218,7 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Contraindicated Antiepileptics',
-    body: '🚫 **Do NOT use these agents in TCA overdose:**\n\n• **Phenytoin / Fosphenytoin** — blocks sodium channels (Class IB), may worsen cardiac toxicity and precipitate arrhythmias [3][4][6]\n• **Carbamazepine** — sodium channel blocker\n• **Lamotrigine** — sodium channel blocker\n• **Lacosamide** — enhances slow inactivation of sodium channels\n\n**Safe antiepileptics in TCA overdose:**\n• Benzodiazepines (GABA-A agonists — directly counter TCA mechanism)\n• Phenobarbital (GABA-A — different binding site than BZDs)\n• Propofol (GABA-A + NMDA)\n• Levetiracetam (SV2A — no sodium channel activity)\n• Valproate (multiple mechanisms but minimal sodium channel effect)',
+    body: '🚫 **Do NOT use these agents in TCA overdose:**\n\n• **Phenytoin / Fosphenytoin** — blocks sodium channels (Class IB), may worsen cardiac toxicity and precipitate arrhythmias [3][4][6]\n• **Carbamazepine** — sodium channel blocker\n• **Lamotrigine** — sodium channel blocker\n• **Lacosamide** — enhances slow inactivation of sodium channels\n\n**Safe antiepileptics in TCA overdose:**\n• Benzodiazepines (GABA-A agonists — directly counter TCA mechanism)\n• [Phenobarbital](#/drug/phenobarbital/TCA seizure) (GABA-A — different binding site than BZDs)\n• [Propofol](#/drug/propofol/TCA seizure) (GABA-A + NMDA)\n• [Levetiracetam](#/drug/levetiracetam/TCA seizure) (SV2A — no sodium channel activity)\n• [Valproate](#/drug/valproate/TCA seizure) (multiple mechanisms but minimal sodium channel effect)',
     citation: [3, 4, 6],
     next: 'tca-hypotension',
   },
@@ -253,7 +253,7 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Vasopressor Selection',
-    body: '**Choose vasopressor based on heart rate** [16][17]:\n\n• **[Norepinephrine](#/drug/norepinephrine/tca hypotension)** — first-line. Alpha agonism directly counters TCA alpha-receptor blockade [3][16].\n• **[Epinephrine](#/drug/epinephrine/tca vasopressor)** — if bradycardic or NE-refractory. Combined alpha + beta agonism [16].\n• **Phenylephrine** — if markedly tachycardic (pure alpha, no beta stimulation) [16].\n• **Vasopressin** — for refractory cases. Bypasses the alpha-adrenergic receptor entirely [16].\n\n🚫 **Avoid pure beta-agonists** (dobutamine, low-dose dopamine) — may worsen tachycardia without adequate vasoconstriction [3].\n\nWhat is the clinical trajectory?',
+    body: '**Choose vasopressor based on heart rate** [16][17]:\n\n• **[Norepinephrine](#/drug/norepinephrine/tca hypotension)** — first-line. Alpha agonism directly counters TCA alpha-receptor blockade [3][16].\n• **[Epinephrine](#/drug/epinephrine/tca vasopressor)** — if bradycardic or NE-refractory. Combined alpha + beta agonism [16].\n• **Phenylephrine** — if markedly tachycardic (pure alpha, no beta stimulation) [16].\n• **[Vasopressin](#/drug/vasopressin/TCA)** — for refractory cases. Bypasses the alpha-adrenergic receptor entirely [16].\n\n🚫 **Avoid pure beta-agonists** (dobutamine, low-dose dopamine) — may worsen tachycardia without adequate vasoconstriction [3].\n\nWhat is the clinical trajectory?',
     citation: [3, 16, 17],
     options: [
       { label: 'Responding to pressors', description: 'Hemodynamics improving', next: 'tca-disposition' },
