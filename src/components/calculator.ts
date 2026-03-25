@@ -5593,6 +5593,11 @@ function renderSelectField(
     onChange();
   });
 
+  // Initialize value with first option
+  if (field.selectOptions && field.selectOptions.length > 0) {
+    values[field.name] = field.selectOptions[0].points;
+  }
+
   selectRow.appendChild(select);
   container.appendChild(selectRow);
 }
