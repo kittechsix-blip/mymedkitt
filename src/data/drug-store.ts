@@ -81,6 +81,38 @@ const ACETAZOLAMIDE: DrugEntry = {
   ],
 };
 
+const ACAMPROSATE: DrugEntry = {
+  id: 'acamprosate',
+  name: 'Acamprosate (Campral)',
+  genericName: 'Acamprosate calcium',
+  drugClass: 'Glutamate modulator (NMDA receptor)',
+  route: 'PO',
+  indications: ['Alcohol use disorder (second-line)'],
+  dosing: [
+    {
+      indication: 'Alcohol Use Disorder — Maintenance',
+      regimen: 'Start 333 mg PO TID (to reduce GI side effects). Maintenance: 666 mg PO TID (1998 mg/day). Take on empty stomach (food reduces absorption). For weight <60 kg: lower starting dose. Renal dosing: GFR 30-50 → 333 mg TID; GFR <30 → contraindicated. NNT 9-12 to prevent return to any drinking. Duration: at least 6 months. Best for patients pursuing abstinence strategy.',
+    },
+  ],
+  contraindications: [
+    'GFR <30 mL/min',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'TID dosing challenging for adherence — counsel patient',
+    'Diarrhea (~25%) — usually resolves within days',
+    'Depression and suicidality — monitor and report promptly',
+    'Not effective if patient is not pursuing abstinence',
+  ],
+  monitoring: 'No routine labs required. Monitor adherence (TID dosing is challenging). Follow renal function if concern for declining GFR.',
+  notes: 'Second-line AUD medication after naltrexone. Key advantage: not metabolized by the liver — safe in advanced cirrhosis. Modulates glutamatergic neurotransmission via NMDA receptors, helping restore excitatory/inhibitory balance disrupted by chronic alcohol. May improve sleep architecture and reduce sleep deprivation-induced cravings. Eliminated unchanged in urine.',
+  citations: [
+    'Wood E, et al. Canadian guideline for clinical management of high-risk drinking and AUD. CMAJ. 2023;195(40):E1364-E1379.',
+    'Borgundvaag B, et al. GRACE-4: AUD management in the ED. Acad Emerg Med. 2024;31(5):425-455.',
+    'Fairbanks J, et al. Evidence-Based Pharmacotherapies for AUD. Mayo Clin Proc. 2020;95(9):1964-1977.',
+  ],
+};
+
 const ACETAMINOPHEN: DrugEntry = {
   id: 'acetaminophen',
   name: 'Acetaminophen (Tylenol)',
@@ -6782,6 +6814,7 @@ const LIPID_EMULSION: DrugEntry = {
 // -------------------------------------------------------------------
 
 export const ALL_DRUGS: DrugEntry[] = [
+  ACAMPROSATE,
   ACETAMINOPHEN,
   ACETAZOLAMIDE,
   ACTIVATED_CHARCOAL,
@@ -6816,6 +6849,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CEFTRIAXONE,
   CEPHALEXIN,
   CETIRIZINE,
+  CHLORDIAZEPOXIDE,
   CHOLESTYRAMINE,
   CHLOROTHIAZIDE,
   CIPROFLOXACIN,

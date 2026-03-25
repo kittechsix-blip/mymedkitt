@@ -7561,6 +7561,223 @@ const OW_DISCHARGE = {
     ],
 };
 // -------------------------------------------------------------------
+// Alcohol Withdrawal
+// -------------------------------------------------------------------
+const AW_SUMMARY = {
+    id: 'aw-summary',
+    title: 'Alcohol Withdrawal Steps Summary',
+    subtitle: 'Quick Reference — Assessment → Treatment → Disposition',
+    sections: [
+        {
+            heading: 'Assessment',
+            body: '• [Verify alcohol history](#/node/aw-history) — pattern, timing, prior withdrawal/seizures/DT\n• Fingerstick glucose, electrolytes (Ca/Mg/Phos), CBC, INR, LFTs\n• CXR, consider CT head (exclude SDH)\n• Thiamine 100-500 mg IV\n• [Exclude alternatives](#/node/aw-diagnosis) — infection, trauma, hepatic encephalopathy, drug OD',
+        },
+        {
+            heading: 'Severity & Triage',
+            body: '• [PAWSS score](#/calculator/pawss) ≥4 predicts clinically significant withdrawal\n• [Assess severity](#/node/aw-severity) — minor vs moderate-severe vs seizure vs DT\n• Minor → outpatient with oral chlordiazepoxide or phenobarbital taper\n• Asymptomatic at-risk → [prophylactic phenobarbital](#/node/aw-prophylaxis) 10-15 mg/kg',
+        },
+        {
+            heading: 'Treatment — Phenobarbital Pathway',
+            body: '• [Screen contraindications](#/node/aw-pb-screen)\n• Loading: 10 mg/kg IV over 30 min (ideal body weight)\n• Titration: [130 mg IV q30 min](#/node/aw-pb-protocol) PRN, target RASS 0 to -1\n• Soft stop: 20 mg/kg — re-evaluate diagnosis\n• Hard stop: 30 mg/kg — symptoms likely NOT withdrawal\n• Auto-tapers over ~3-4 days — minimal additional therapy needed',
+        },
+        {
+            heading: 'Treatment — Benzodiazepine Pathway',
+            body: '• [Select agent](#/node/aw-bz-select): diazepam (most) or lorazepam (cirrhosis)\n• [Symptom-triggered](#/node/aw-bz-dosing): diazepam 5-10 mg IV q5-10 min when CIWA-Ar ≥8\n• Front-loading for high-risk patients\n• [Refractory DT](#/node/aw-refractory): add phenobarbital 130-260 mg IV q15-20 min\n• If still refractory: propofol infusion (requires intubation)',
+        },
+        {
+            heading: 'Seizures',
+            body: '• [Phenobarbital 15-20 mg/kg IV](#/node/aw-seizure) — treats seizure AND withdrawal\n• Phenytoin is NOT effective for withdrawal seizures\n• Consider pyridoxine 100 mg IV/PO\n• Seizures tend to recur — up to 1/3 progress to DT if untreated',
+        },
+        {
+            heading: 'Supportive Care',
+            body: '• Thiamine: 500 mg IV q8h if altered (Wernicke), 100 mg IV daily if normal\n• Magnesium: aggressively replete (often severely depleted)\n• Potassium and phosphate repletion\n• IV fluids until euvolemic\n• Monitor glucose — risk of hypoglycemia\n• Watch for refeeding syndrome in malnourished patients',
+        },
+        {
+            heading: 'Disposition & AUD Medications',
+            body: '• [ICU](#/node/aw-icu-admit): DT, refractory withdrawal, intubated, significant comorbidities\n• [Floor](#/node/aw-floor): controlled withdrawal needing monitoring/taper\n• [Discharge](#/node/aw-discharge): resolved, tolerating PO, safe disposition\n• Consider initiating [AUD medication](#/node/aw-aud-screen) before discharge\n• Naltrexone (first-line) or acamprosate (cirrhosis-safe)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+    ],
+};
+const AW_PHENOBARB_GUIDE = {
+    id: 'aw-phenobarb-guide',
+    title: 'Phenobarbital Dosing Guide',
+    subtitle: 'Pharmacology & Dosing for Alcohol Withdrawal',
+    sections: [
+        {
+            heading: 'Pharmacokinetics',
+            body: '• **Half-life:** ~3-4 days — allows gradual auto-taper\n• **Volume of distribution:** ~0.65 L/kg [1]\n• **Bioavailability:** ~100% by all routes (IV, PO, IM)\n• **IV onset:** <30 minutes for full distribution\n• **PO onset:** Slower, risk of dose stacking if doses given <60 min apart\n• **Serum level = cumulative dose ÷ (0.65 × weight in kg)**',
+        },
+        {
+            heading: 'Dose-Level Relationships',
+            body: '• **10 mg/kg** → ~15 μg/mL (low therapeutic — minimal sedation)\n• **15 mg/kg** → ~23 μg/mL (mid therapeutic)\n• **20 mg/kg** → ~30 μg/mL (high therapeutic — SOFT STOP)\n• **25 mg/kg** → ~38 μg/mL (near upper limit)\n• **30 mg/kg** → ~46 μg/mL (HARD STOP)\n\n**Therapeutic range (epilepsy):** 15-40 μg/mL\n**Mild toxicity (ataxia, nystagmus):** ~50 μg/mL\n**Stupor/coma:** >65 μg/mL [1]',
+        },
+        {
+            heading: 'Why Phenobarbital Over Benzodiazepines?',
+            body: '**1. Dual mechanism:** ↑ GABA (duration of channel opening) + ↓ glutamate (AMPA/kainate receptors) — well matched to withdrawal pathophysiology\n**2. Uniform efficacy:** No patient is truly phenobarbital-refractory (unlike benzos, which fail in ~5-10%)\n**3. No paradoxical agitation:** Benzos can cause paradoxical reactions (~2% in alcoholics)\n**4. Predictable pharmacokinetics:** Linear dose-level relationship, measurable levels\n**5. Greater therapeutic index:** Toxic dose (>40 mg/kg) is far above therapeutic dose (10-25 mg/kg)\n**6. Auto-taper:** Long half-life provides days of ongoing protection\n**7. Superior seizure prophylaxis:** More potent anti-epileptic activity than benzos\n**8. Levels can be checked:** If lost, check a phenobarbital level to know where you are\n**9. No propylene glycol toxicity:** Low cumulative volume needed\n**10. Widely available and inexpensive:** WHO essential medication list [1]',
+        },
+        {
+            heading: 'Cautions',
+            body: '• **Synergistic with benzodiazepines** — never titrate both simultaneously\n• After large phenobarbital load (>15 mg/kg), patients are sensitive to ANY benzodiazepine\n• Communicate total dose to all subsequent providers\n• Use ideal body weight for dosing (water-soluble drug) [2]\n• Induces hepatic CYP enzymes with prolonged use — affects methadone, other drug metabolism',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Ives TJ, et al. Pharmacokinetic dosing of phenobarbital in the treatment of alcohol withdrawal syndrome. South Med J. 1991;84(1):18-21.' },
+    ],
+};
+const AW_NARD_GUIDE = {
+    id: 'aw-nard-guide',
+    title: 'NARD Recognition',
+    subtitle: 'Non-Alcohol-Related Delirium — When to Stop GABAergics',
+    sections: [
+        {
+            heading: 'What is NARD?',
+            body: 'Some patients with alcohol withdrawal evolve into a non-alcohol-related delirium (NARD). This is well-described with benzodiazepines (benzodiazepine-induced delirium) and can also occur with phenobarbital.\n\n**The critical danger:** Continuing GABAergic medications for NARD creates a vicious cycle of over-medication → worsening delirium → more medication → stupor/coma. [1]',
+        },
+        {
+            heading: 'Clues to NARD',
+            body: '• Patient remains agitated/belligerent but **NO other signs of withdrawal** (no tremor, normal BP, no tachycardia)\n• Symptoms persist **>2-3 days** after admission — increasingly likely to be nonspecific delirium\n• Already received **>20 mg/kg phenobarbital** (or equivalent high-dose benzodiazepines) without improvement\n• Delirium without hyperadrenergic signs\n• Patient becomes somnolent after moderate-low doses of benzodiazepine [2]',
+        },
+        {
+            heading: 'Management of NARD',
+            body: '**1. STOP** escalating GABAergic medications (phenobarbital AND benzodiazepines)\n**2. Evaluate** for other causes of delirium:\n• Infection (pneumonia, UTI, meningitis)\n• Metabolic (hepatic encephalopathy, electrolyte derangements, hypoglycemia)\n• Medication-induced (propylene glycol toxicity from IV lorazepam, anticholinergics)\n• Structural (subdural hematoma, stroke)\n**3. Treat symptomatically:**\n• Haloperidol 2-5 mg IV PRN for agitation\n• Dexmedetomidine for overnight sedation — stop in morning and reassess\n• Address contributing factors (sleep deprivation, pain, constipation)\n**4. Consider flumazenil** if benzodiazepines were used — 84% of patients improved in one case series [3]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+        { num: 3, text: 'Moore PW, et al. Safety and efficacy of flumazenil for reversal of iatrogenic benzodiazepine-associated delirium toxicity. J Med Toxicol. 2014;10(2):126-132.' },
+    ],
+};
+const AW_AUD_COMPARISON = {
+    id: 'aw-aud-comparison',
+    title: 'AUD Medication Selection',
+    subtitle: 'Choosing the Right Medication for Alcohol Use Disorder',
+    sections: [
+        {
+            heading: 'Naltrexone — First-Line',
+            body: '• **NNT:** 12 (prevent return to heavy drinking), 20 (prevent any drinking)\n• **Dosing:** 25 mg PO daily × 3-7 days → 50 mg PO daily\n• **Strengths:** Once daily, reduces cravings, supports abstinence OR reduced consumption\n• **Limitations:** Requires LFT monitoring q6 months\n• **Contraindications:** Current opioid use, LFTs >5× normal, Child-Pugh C cirrhosis, GFR <45 [1][2]',
+        },
+        {
+            heading: 'Acamprosate — Second-Line',
+            body: '• **NNT:** 9-12 (prevent return to any drinking)\n• **Dosing:** 666 mg PO TID (1998 mg/day)\n• **Strengths:** Not hepatically metabolized — safe in cirrhosis. May improve sleep\n• **Limitations:** TID dosing challenging for adherence. Best for abstinence goal only\n• **Contraindications:** GFR <30 mL/min [1][2]',
+        },
+        {
+            heading: 'Gabapentin — Third-Line',
+            body: '• **Evidence:** Weakest among AUD medications. One large RCT failed to find benefit\n• **Dosing:** Variable (typically 300-1800 mg/day in divided doses)\n• **Strengths:** Safe in cirrhosis (renally cleared). May help with residual withdrawal, neuropathy\n• **Limitations:** ~1% misuse/abuse risk in general population\n• **Contraindications:** Renal failure, concurrent opioid use [2][3]',
+        },
+        {
+            heading: 'Topiramate — Third-Line',
+            body: '• **Evidence:** OR 1.88 for maintaining abstinence, decreased heavy drinking days by 9%\n• **Dosing:** Slow titration required to minimize side effects\n• **Strengths:** May help comorbid seizure disorder\n• **Limitations:** Hard to tolerate (metabolic acidosis, somnolence, paresthesia). Hepatically cleared\n• **Contraindications:** Moderate-advanced cirrhosis, nephrolithiasis, narrow-angle glaucoma [2]',
+        },
+        {
+            heading: 'Disulfiram — Last Resort',
+            body: '• **Mechanism:** Aversion therapy — blocks aldehyde dehydrogenase → severe reaction with alcohol\n• **Dosing:** 250 mg PO daily (supervised)\n• **Strengths:** Effective with supervised administration\n• **Limitations:** Most toxic agent. Hepatotoxicity, disulfiram reactions (flushing, chest pain, hypotension). Multiple contraindications\n• **Contraindications:** Cirrhosis, renal dysfunction, seizure disorder, CAD, psychosis, impulsivity [2][3]',
+        },
+        {
+            heading: 'General Principles',
+            body: '• If one agent fails, **stop and try another** — combination therapy has not been shown superior [3]\n• Optimal duration: **at least 6 months** [2]\n• Medical therapy should be combined with **psychosocial interventions**\n• Hospitalization provides a useful opportunity to initiate MAUD — associated with reduced ED visits and readmissions [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Borgundvaag B, et al. GRACE-4: AUD management in the emergency department. Acad Emerg Med. 2024;31(5):425-455.' },
+        { num: 2, text: 'Wood E, et al. Canadian guideline for clinical management of high-risk drinking and AUD. CMAJ. 2023;195(40):E1364-E1379.' },
+        { num: 3, text: 'Fairbanks J, et al. Evidence-Based Pharmacotherapies for AUD. Mayo Clin Proc. 2020;95(9):1964-1977.' },
+    ],
+};
+const AW_SUPPORTIVE_CARE = {
+    id: 'aw-supportive-care',
+    title: 'Supportive Care',
+    subtitle: 'Thiamine, Electrolytes, Nutrition in Alcohol Withdrawal',
+    sections: [
+        {
+            heading: 'Thiamine (Vitamin B1)',
+            body: '• **If altered mental status or Wernicke possible:** 500 mg IV q8h × 2-3 days [1][2]\n• **If normal mental status:** 100 mg IV daily to prevent Wernicke encephalopathy\n• Always give thiamine **BEFORE or WITH** glucose — glucose metabolism consumes thiamine\n• Transition to PO (100 mg daily) at discharge\n• Wernicke encephalopathy can mimic alcohol withdrawal — when in doubt, treat with high-dose thiamine',
+        },
+        {
+            heading: 'Electrolyte Repletion',
+            body: '**Magnesium:**\n• Alcoholics often have severe total-body magnesium deficit\n• May require multiple IV doses or continuous infusion\n• Hypomagnesemia predisposes to dysrhythmias and seizures, inhibits thiamine response\n\n**Potassium:**\n• Hypokalemia common from renal/extrarenal losses and aldosterone changes\n• Correct Mg first — hypokalemia is refractory if Mg is low\n\n**Phosphate:**\n• Monitor closely — risk of refeeding syndrome in malnourished patients\n• Severe hypophosphatemia can cause cardiac failure and rhabdomyolysis [2]',
+        },
+        {
+            heading: 'Fluids & Glucose',
+            body: '• **IV fluids:** Isotonic saline until clinically euvolemic. Nearly all patients are hypovolemic from diaphoresis, vomiting, decreased intake\n• **Glucose:** Monitor fingerstick intermittently. Patients with cirrhosis have impaired glycogen reserves — higher hypoglycemia risk\n• **Do NOT use "banana bags"** — may not meet individual patient needs for specific substrates [2]',
+        },
+        {
+            heading: 'Nutrition & Refeeding',
+            body: '• Patients with chronic alcoholism are frequently **malnourished** with high metabolic needs\n• Initially NPO if aspiration risk is present\n• Parenteral glucose initially, but plan enteral nutrition within 1-2 days\n• **Refeeding syndrome risk:** Monitor phosphate, potassium, magnesium. Start feeds slowly in severely malnourished patients\n• Folate and multivitamin supplementation [2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+    ],
+};
+const AW_WITHDRAWAL_TIMING = {
+    id: 'aw-withdrawal-timing',
+    title: 'Timing of Withdrawal Syndromes',
+    subtitle: 'Timeline After Last Drink',
+    sections: [
+        {
+            heading: 'Timeline',
+            body: '**6+ hours — Minor withdrawal:**\n• Tremulousness, anxiety, insomnia\n• GI upset, anorexia, headache\n• Diaphoresis, palpitations\n• Can begin while BAL is still elevated\n• Resolves within 24-48 hours if withdrawal does not progress\n\n**8-12 hours — Alcoholic hallucinosis:**\n• Visual hallucinations (most common), auditory, tactile\n• Patient is AWARE they are hallucinating and often distressed\n• Clear sensorium — NOT the same as delirium tremens\n• Vital signs usually normal\n• Resolves within 24-48 hours\n\n**12-48 hours — Withdrawal seizures:**\n• Generalized tonic-clonic, usually brief, self-limiting\n• Peak risk at 12-24 hours\n• Tend to cluster (2-6 seizures)\n• Up to 1/3 progress to DT if untreated\n• Recurrent or prolonged → investigate structural/infectious causes\n\n**48-96 hours — Delirium tremens (DT):**\n• Hallucinations + disorientation + autonomic instability\n• Tachycardia, hypertension, hyperthermia, diaphoresis\n• Lasts 1-5 days\n• Mortality <5% with treatment (37% historically without treatment)\n• Virtually ALL patients with DT had prior minor withdrawal symptoms [1][2]',
+        },
+        {
+            heading: 'Risk Factors for DT',
+            body: '• Age >65\n• Concurrent illness or comorbid conditions (especially TBI)\n• Physiologic dependence on GABAergic agents (benzodiazepines)\n• Long duration of heavy, regular consumption\n• Multiple prior withdrawal episodes\n• History of withdrawal seizures, DT, or intubation\n• Elevated BAL on admission with active withdrawal symptoms\n• Longer time since last drink at presentation\n• Marked autonomic hyperactivity on presentation\n• PAWSS score ≥4 [1][2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wolf C, et al. Management of Alcohol Withdrawal in the ED. Open Access Emerg Med. 2020;12:53-65.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+    ],
+};
+const AW_ICU_CRITERIA = {
+    id: 'aw-icu-criteria',
+    title: 'ICU Admission Criteria',
+    subtitle: 'When to Admit to Intensive Care',
+    sections: [
+        {
+            heading: 'ICU Admission Indications',
+            body: '• Delirium tremens\n• Refractory withdrawal requiring phenobarbital + benzodiazepine combination\n• Need for or anticipated need for intubation/mechanical ventilation\n• Significant comorbidities that could be exacerbated by withdrawal (cardiovascular disease, sepsis)\n• Recurrent seizures or status epilepticus\n• Temperature >40°C (104°F)\n• Cumulative phenobarbital >15 mg/kg with concurrent benzodiazepines\n• Hemodynamic instability requiring vasopressor support\n• Concurrent medical/surgical emergency [1][2]',
+        },
+        {
+            heading: 'ICU Monitoring',
+            body: '• Continuous: vitals, SpO2, cardiac rhythm\n• Frequent: neurologic assessment, fluid balance, urine output\n• Use **RASS** (not CIWA-Ar) for intubated patients — target RASS 0 to -2 [1]\n• Reassess medication regimen daily — wean sedation and reassess\n• Monitor for complications: aspiration pneumonia, rhabdomyolysis, cardiac dysrhythmias',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+    ],
+};
+const AW_PB_CONTRAINDICATIONS = {
+    id: 'aw-pb-contraindications',
+    title: 'Phenobarbital Contraindications',
+    subtitle: 'When NOT to Use Phenobarbital',
+    sections: [
+        {
+            heading: 'Absolute Contraindications',
+            body: '• **Hepatic encephalopathy** — patients have excess GABA stimulation, extremely sensitive to GABAergics. Risk of prolonged coma [1]\n• **Severe respiratory depression** without ventilatory support\n• **Porphyria**\n• **Wrong diagnosis** — if diagnostic uncertainty exists, phenobarbital\'s long half-life means side effects will also be long-lasting',
+        },
+        {
+            heading: 'Relative Contraindications / Use Caution',
+            body: '• Already received **large dose of benzodiazepines** — synergistic sedation risk. Reduce or omit loading dose\n• **Advanced cirrhosis** (without encephalopathy) — reduced metabolism\n• **Age >65** — increased sensitivity\n• **Cardiovascular disease** — monitor closely\n• **COPD** — respiratory depression risk\n• **Volume depletion** — correct before loading\n• **Morbid obesity** — use ideal body weight for dosing\n• **Complex neurologic problems** — may need close attention with ongoing dose titration; consider benzodiazepines for more flexible management [1][2]',
+        },
+        {
+            heading: 'When Benzodiazepines Are Preferred',
+            body: '• Diagnostic uncertainty (use short-acting midazolam test dose first)\n• Hepatic encephalopathy risk\n• Advanced cirrhosis (use lorazepam — no active metabolites)\n• Already committed to benzodiazepine regimen with significant doses given\n• Complex patient with multiple fluctuating neurologic issues [2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Alcohol withdrawal & alcohol use disorder. IBCC. EMCrit. Updated March 2023.' },
+        { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -7788,6 +8005,14 @@ export const INFO_PAGES = {
     'ow-bup-guide': OW_BUP_GUIDE,
     'ow-ddx': OW_DDX,
     'ow-discharge': OW_DISCHARGE,
+    'aw-summary': AW_SUMMARY,
+    'aw-phenobarb-guide': AW_PHENOBARB_GUIDE,
+    'aw-nard-guide': AW_NARD_GUIDE,
+    'aw-aud-comparison': AW_AUD_COMPARISON,
+    'aw-supportive-care': AW_SUPPORTIVE_CARE,
+    'aw-withdrawal-timing': AW_WITHDRAWAL_TIMING,
+    'aw-icu-criteria': AW_ICU_CRITERIA,
+    'aw-pb-contraindications': AW_PB_CONTRAINDICATIONS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

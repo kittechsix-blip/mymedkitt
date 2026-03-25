@@ -43,6 +43,37 @@ const ACETAZOLAMIDE = {
         'Statland JM, et al. Review of the Diagnosis and Treatment of Periodic Paralysis. Muscle Nerve. 2018;57(4):522-530.',
     ],
 };
+const ACAMPROSATE = {
+    id: 'acamprosate',
+    name: 'Acamprosate (Campral)',
+    genericName: 'Acamprosate calcium',
+    drugClass: 'Glutamate modulator (NMDA receptor)',
+    route: 'PO',
+    indications: ['Alcohol use disorder (second-line)'],
+    dosing: [
+        {
+            indication: 'Alcohol Use Disorder — Maintenance',
+            regimen: 'Start 333 mg PO TID (to reduce GI side effects). Maintenance: 666 mg PO TID (1998 mg/day). Take on empty stomach (food reduces absorption). For weight <60 kg: lower starting dose. Renal dosing: GFR 30-50 → 333 mg TID; GFR <30 → contraindicated. NNT 9-12 to prevent return to any drinking. Duration: at least 6 months. Best for patients pursuing abstinence strategy.',
+        },
+    ],
+    contraindications: [
+        'GFR <30 mL/min',
+        'Known hypersensitivity',
+    ],
+    cautions: [
+        'TID dosing challenging for adherence — counsel patient',
+        'Diarrhea (~25%) — usually resolves within days',
+        'Depression and suicidality — monitor and report promptly',
+        'Not effective if patient is not pursuing abstinence',
+    ],
+    monitoring: 'No routine labs required. Monitor adherence (TID dosing is challenging). Follow renal function if concern for declining GFR.',
+    notes: 'Second-line AUD medication after naltrexone. Key advantage: not metabolized by the liver — safe in advanced cirrhosis. Modulates glutamatergic neurotransmission via NMDA receptors, helping restore excitatory/inhibitory balance disrupted by chronic alcohol. May improve sleep architecture and reduce sleep deprivation-induced cravings. Eliminated unchanged in urine.',
+    citations: [
+        'Wood E, et al. Canadian guideline for clinical management of high-risk drinking and AUD. CMAJ. 2023;195(40):E1364-E1379.',
+        'Borgundvaag B, et al. GRACE-4: AUD management in the ED. Acad Emerg Med. 2024;31(5):425-455.',
+        'Fairbanks J, et al. Evidence-Based Pharmacotherapies for AUD. Mayo Clin Proc. 2020;95(9):1964-1977.',
+    ],
+};
 const ACETAMINOPHEN = {
     id: 'acetaminophen',
     name: 'Acetaminophen (Tylenol)',
@@ -1229,6 +1260,41 @@ const CLEVIDIPINE = {
     citations: [
         'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
         'Pollack CV, et al. Clevidipine for Acute Hypertension: A Systematic Review and Meta-Analysis. Crit Care Med. 2019.',
+    ],
+};
+const CHLORDIAZEPOXIDE = {
+    id: 'chlordiazepoxide',
+    name: 'Chlordiazepoxide (Librium)',
+    genericName: 'Chlordiazepoxide hydrochloride',
+    drugClass: 'Benzodiazepine (long-acting)',
+    route: 'PO',
+    indications: ['Alcohol withdrawal (mild-moderate)', 'Alcohol withdrawal prophylaxis'],
+    dosing: [
+        {
+            indication: 'Alcohol Withdrawal — Symptom-triggered (oral)',
+            regimen: '25-100 mg PO q1h PRN when CIWA-Ar ≥8. Long-acting with active metabolites — provides smoother clinical course than short-acting benzodiazepines. Convert from IV benzodiazepine to oral chlordiazepoxide when patient can take PO. Reduce dose in elderly.',
+        },
+        {
+            indication: 'Alcohol Withdrawal — Prophylaxis',
+            regimen: '25-100 mg PO q6h × 1 day, then 25-50 mg PO q6h × 2 additional days. For at-risk patients who are asymptomatic or minimally symptomatic. If CIWA-Ar reaches ≥8, prophylaxis has failed — treat for active withdrawal.',
+        },
+    ],
+    contraindications: [
+        'Severe hepatic insufficiency (use oxazepam or lorazepam)',
+        'Severe respiratory depression',
+        'Acute narrow-angle glaucoma',
+    ],
+    cautions: [
+        'Long half-life — accumulation risk in liver disease and elderly',
+        'Not available as IV formulation — use diazepam or lorazepam for IV therapy',
+        'Respiratory depression risk increases with concomitant opioids or other CNS depressants',
+        'Paradoxical agitation possible (~2% in alcoholics)',
+    ],
+    monitoring: 'CIWA-Ar q4-6h for stable patients, q1h for active withdrawal. Respiratory rate, level of consciousness.',
+    notes: 'Traditional oral benzodiazepine for alcohol withdrawal management. Long-acting with multiple active metabolites (desmethylchlordiazepoxide, demoxepam, desmethyldiazepam). Provides self-tapering effect due to long half-life. Preferred over lorazepam for most patients without severe liver disease — smoother withdrawal course with less risk of rebound.',
+    citations: [
+        'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.',
+        'Saitz R, et al. Individualized treatment for alcohol withdrawal. JAMA. 1994;272(7):519-523.',
     ],
 };
 const CHLOROTHIAZIDE = {
@@ -6523,6 +6589,7 @@ const LIPID_EMULSION = {
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 export const ALL_DRUGS = [
+    ACAMPROSATE,
     ACETAMINOPHEN,
     ACETAZOLAMIDE,
     ACTIVATED_CHARCOAL,
@@ -6557,6 +6624,7 @@ export const ALL_DRUGS = [
     CEFTRIAXONE,
     CEPHALEXIN,
     CETIRIZINE,
+    CHLORDIAZEPOXIDE,
     CHOLESTYRAMINE,
     CHLOROTHIAZIDE,
     CIPROFLOXACIN,

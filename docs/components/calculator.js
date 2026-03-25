@@ -5097,6 +5097,184 @@ const COWS_CALCULATOR = {
         'Herring AA, Vosooghi AA, Luftig J, et al. High-Dose Buprenorphine Induction in the Emergency Department for Treatment of Opioid Use Disorder. JAMA Netw Open. 2021;4(7):e2117128.',
     ],
 };
+// -------------------------------------------------------------------
+// PAWSS (Prediction of Alcohol Withdrawal Severity Scale)
+// -------------------------------------------------------------------
+const PAWSS_CALCULATOR = {
+    id: 'pawss',
+    title: 'PAWSS',
+    subtitle: 'Prediction of Alcohol Withdrawal Severity Scale',
+    description: 'The PAWSS is a 10-item screening tool validated to predict clinically significant alcohol withdrawal in hospitalized patients. A score ≥4 has high sensitivity and specificity for predicting complicated withdrawal (seizures, DT, ICU admission).',
+    fields: [
+        { name: 'bac-pos', label: 'Blood alcohol level >200 mg/dL OR positive breathalyzer on admission', type: 'toggle', points: 1 },
+        { name: 'alcohol-smell', label: 'Evidence of increased autonomic activity (HR >120, tremor, agitation, diaphoresis, nausea)', type: 'toggle', points: 1 },
+        { name: 'heavy-use', label: 'Patient reports heavy alcohol use (daily or near-daily use)', type: 'toggle', points: 1 },
+        { name: 'prior-withdrawal', label: 'History of prior alcohol withdrawal symptoms', type: 'toggle', points: 1 },
+        { name: 'prior-seizure', label: 'History of alcohol withdrawal seizures', type: 'toggle', points: 1 },
+        { name: 'prior-dt', label: 'History of delirium tremens', type: 'toggle', points: 1 },
+        { name: 'prior-detox', label: 'History of prior alcohol detoxification or rehab', type: 'toggle', points: 1 },
+        { name: 'concurrent-drug', label: 'Concurrent use of benzodiazepines, barbiturates, or other sedatives', type: 'toggle', points: 1 },
+        { name: 'recent-binge', label: 'Recent binge drinking (≥5 drinks/day for men, ≥4 for women)', type: 'toggle', points: 1 },
+        { name: 'last-drink', label: 'Last drink within 24 hours of assessment', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'Score 0-3', risk: 'Low Risk', mortality: 'Low probability of clinically significant alcohol withdrawal. Standard monitoring may be sufficient.', colorVar: '--color-primary' },
+        { min: 4, max: 7, label: 'Score 4-6', risk: 'Moderate Risk', mortality: 'Moderate probability of clinically significant withdrawal. Prophylactic treatment and close monitoring recommended.', colorVar: '--color-warning' },
+        { min: 7, max: Infinity, label: 'Score 7-10', risk: 'High Risk', mortality: 'High probability of severe withdrawal (seizures, DT). Aggressive prophylaxis and monitoring. Consider ICU-level care.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'PAWSS ≥4 is the validated threshold for predicting clinically significant alcohol withdrawal (sensitivity 93%, specificity 99%). Use to guide prophylactic treatment decisions in at-risk hospitalized patients.',
+    citations: [
+        'Maldonado JR, Sher Y, Das S, et al. Prospective Validation Study of the Prediction of Alcohol Withdrawal Severity Scale (PAWSS) in Medically Ill Inpatients. Alcohol Alcohol. 2015;50(5):509-518.',
+        'Wood E, Albarqouni L, Tkachuk S, et al. Will This Hospitalized Patient Develop Severe Alcohol Withdrawal Syndrome? The Rational Clinical Examination Systematic Review. JAMA. 2018;320(8):825-833.',
+    ],
+};
+// -------------------------------------------------------------------
+// CIWA-Ar (Clinical Institute Withdrawal Assessment for Alcohol, Revised)
+// -------------------------------------------------------------------
+const CIWA_AR_CALCULATOR = {
+    id: 'ciwa-ar',
+    title: 'CIWA-Ar',
+    subtitle: 'Clinical Institute Withdrawal Assessment for Alcohol — Revised',
+    description: 'The CIWA-Ar is a 10-item validated scale used to quantify the severity of alcohol withdrawal and guide symptom-triggered therapy. Score ranges from 0 to 67. Widely used for medication titration in alcohol withdrawal management.',
+    fields: [
+        {
+            name: 'nausea',
+            label: 'Nausea/Vomiting',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No nausea or vomiting (0)', points: 0 },
+                { label: 'Mild nausea, no vomiting (1)', points: 1 },
+                { label: 'Intermittent nausea (2-3)', points: 3 },
+                { label: 'Constant nausea, frequent dry heaves/vomiting (4-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'tremor',
+            label: 'Tremor (arms extended, fingers spread)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No tremor (0)', points: 0 },
+                { label: 'Not visible, can be felt fingertip to fingertip (1)', points: 1 },
+                { label: 'Moderate, with arms extended (2-3)', points: 3 },
+                { label: 'Severe, even with arms not extended (4-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'sweating',
+            label: 'Paroxysmal Sweats',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No sweat visible (0)', points: 0 },
+                { label: 'Barely perceptible sweating, palms moist (1)', points: 1 },
+                { label: 'Beads of sweat on forehead (2-3)', points: 3 },
+                { label: 'Drenching sweats (4-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'anxiety',
+            label: 'Anxiety',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No anxiety, at ease (0)', points: 0 },
+                { label: 'Mildly anxious (1)', points: 1 },
+                { label: 'Moderately anxious, or guarded (2-3)', points: 3 },
+                { label: 'Equivalent to acute panic states, severe (4-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'agitation',
+            label: 'Agitation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal activity (0)', points: 0 },
+                { label: 'Somewhat more than normal activity (1)', points: 1 },
+                { label: 'Moderately fidgety and restless (2-3)', points: 3 },
+                { label: 'Paces back and forth, or constantly thrashes about (4-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'tactile',
+            label: 'Tactile Disturbances',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None (0)', points: 0 },
+                { label: 'Mild itching, pins and needles, burning, numbness (1)', points: 1 },
+                { label: 'Moderate itching, burning, numbness (2-3)', points: 3 },
+                { label: 'Hallucinations or severe burning/numbness (4-5)', points: 5 },
+                { label: 'Continuous hallucinations (6-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'auditory',
+            label: 'Auditory Disturbances',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not present (0)', points: 0 },
+                { label: 'Very mild harshness or ability to frighten (1)', points: 1 },
+                { label: 'Mild harshness or frightening (2-3)', points: 3 },
+                { label: 'Moderate hallucinations (4-5)', points: 5 },
+                { label: 'Continuous hallucinations (6-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'visual',
+            label: 'Visual Disturbances',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not present (0)', points: 0 },
+                { label: 'Mild sensitivity to light (1)', points: 1 },
+                { label: 'Moderate sensitivity (2-3)', points: 3 },
+                { label: 'Moderate hallucinations (4-5)', points: 5 },
+                { label: 'Continuous hallucinations (6-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'headache',
+            label: 'Headache, Fullness in Head',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not present (0)', points: 0 },
+                { label: 'Very mild (1)', points: 1 },
+                { label: 'Mild-moderate headache (2-3)', points: 3 },
+                { label: 'Moderately severe (4-5)', points: 5 },
+                { label: 'Extremely severe (6-7)', points: 7 },
+            ],
+        },
+        {
+            name: 'orientation',
+            label: 'Orientation and Clouding of Sensorium',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Oriented, can do serial additions (0)', points: 0 },
+                { label: 'Cannot do serial additions, uncertain about date (1)', points: 1 },
+                { label: 'Date uncertain by more than 2 days (2)', points: 2 },
+                { label: 'Disoriented in date by >2 days (3)', points: 3 },
+                { label: 'Disoriented in place and/or person (4)', points: 4 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 8, label: 'Score 0-7', risk: 'Minimal Withdrawal', mortality: 'No medication indicated in most cases. Continue monitoring q4-6h.', colorVar: '--color-primary' },
+        { min: 8, max: 16, label: 'Score 8-15', risk: 'Mild Withdrawal', mortality: 'Consider medical management. Symptom-triggered dosing when score ≥8. Monitor q2-4h.', colorVar: '--color-primary' },
+        { min: 16, max: 21, label: 'Score 16-20', risk: 'Moderate Withdrawal', mortality: 'Medical management recommended. Symptom-triggered dosing. Monitor q1-2h. Consider ICU for comorbidities.', colorVar: '--color-warning' },
+        { min: 21, max: Infinity, label: 'Score ≥21', risk: 'Severe Withdrawal', mortality: 'Aggressive treatment required. High risk for seizures and DT. ICU monitoring recommended. Frequent reassessment (q10-15 min during active treatment).', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'CIWA-Ar ≥8: Medicate (symptom-triggered therapy). CIWA-Ar <8: Withhold medication, continue monitoring. For intubated patients, use RASS instead — CIWA-Ar requires patient cooperation. Max possible score: 67.',
+    citations: [
+        'Sullivan JT, Sykora K, Schneiderman J, et al. Assessment of alcohol withdrawal: the revised clinical institute withdrawal assessment for alcohol scale (CIWA-Ar). Br J Addict. 1989;84(11):1353-1357.',
+        'Saitz R, et al. Individualized treatment for alcohol withdrawal: A randomized double-blind controlled trial. JAMA. 1994;272(7):519-523.',
+    ],
+};
 const CALCULATORS = {
     'cows': COWS_CALCULATOR,
     'rass': RASS_CALCULATOR,
@@ -5154,6 +5332,8 @@ const CALCULATORS = {
     'aub-treatment': AUB_TREATMENT_CALCULATOR,
     'pe-treatment': PE_TREATMENT_CALCULATOR,
     'hf-treatment': HF_TREATMENT_CALCULATOR,
+    'pawss': PAWSS_CALCULATOR,
+    'ciwa-ar': CIWA_AR_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

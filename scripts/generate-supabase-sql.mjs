@@ -119,6 +119,7 @@ const TREE_REGISTRY = {
   'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',    entryNodeId: 'ow-start',       categoryId: 'emergency-medicine' },
+  'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',   entryNodeId: 'aw-start',       categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories

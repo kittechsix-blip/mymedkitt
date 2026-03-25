@@ -237,6 +237,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/opioid-withdrawal.js');
             return { nodes: m.OPIOID_WITHDRAWAL_NODES, entryNodeId: 'ow-start', categoryId: 'emergency-medicine', moduleLabels: m.OPIOID_WITHDRAWAL_MODULE_LABELS, citations: m.OPIOID_WITHDRAWAL_CITATIONS };
         },
+        'alcohol-withdrawal': async () => {
+            const m = await import('../data/trees/alcohol-withdrawal.js');
+            return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'emergency-medicine', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS };
+        },
         'first-trimester': async () => {
             const m = await import('../data/trees/first-trimester.js');
             return { nodes: m.FIRST_TRIMESTER_NODES, entryNodeId: 'ft-start', categoryId: 'ob-gyn', moduleLabels: m.FIRST_TRIMESTER_MODULE_LABELS, citations: m.FIRST_TRIMESTER_CITATIONS };
