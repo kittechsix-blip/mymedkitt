@@ -207,9 +207,13 @@ export function showDrugModal(drugId, indicationHint) {
             let calcPanel = null;
             if (dose.weightCalc) {
                 const calcs = Array.isArray(dose.weightCalc) ? dose.weightCalc : [dose.weightCalc];
+                // Extract route from indication (e.g., "Anaphylaxis — IM (first-line)" → "IM")
+                // Look for common route patterns: IM, IV, IO, SC, SQ, PO, PR, ET, nebulized, topical
+                const routeMatch = dose.indication.match(/\b(IM|IV|IO|SC|SQ|PO|PR|ET|nebulized|topical|IV\/IO|IM\/IV)\b/i);
+                const specificRoute = routeMatch ? routeMatch[1].toUpperCase() : drug.route.split('/')[0];
                 const drugCtx = {
                     name: drug.name,
-                    route: drug.route,
+                    route: specificRoute,
                     indication: dose.indication,
                 };
                 calcPanel = buildWeightCalcPanel(calcs, drugCtx);
