@@ -1,0 +1,410 @@
+// MedKitt — Opioid Withdrawal
+// ED management of opioid withdrawal: recognition, COWS scoring,
+// opioid agonist therapy (buprenorphine/methadone), non-opioid adjuncts,
+// precipitated withdrawal, and disposition with MOUD referral.
+// 6 modules: Recognition → DDx/Workup → Agonist Therapy → Adjuncts → Precipitated WD → Disposition
+// 27 nodes total.
+export const OPIOID_WITHDRAWAL_NODES = [
+    // ===================================================================
+    // MODULE 1 — Recognition & Assessment (5 nodes)
+    // ===================================================================
+    {
+        id: 'ow-start',
+        type: 'info',
+        module: 1,
+        title: 'Opioid Withdrawal',
+        body: '[Opioid Withdrawal Steps Summary](#/info/ow-summary)\n\nOpioid withdrawal is rarely life-threatening on its own — but it is profoundly uncomfortable, drives patients back to opioid use, and the resulting loss of tolerance makes subsequent overdose frequently fatal. **5.5% of patients surviving an opioid overdose die within 1 year.** [1][2]\n\nThe ED may be the only healthcare touchpoint for patients with opioid use disorder (OUD). ED-initiated medication for OUD (MOUD) significantly improves engagement in treatment and reduces mortality. [3]',
+        citation: [1, 2, 3],
+        next: 'ow-recognize',
+    },
+    {
+        id: 'ow-recognize',
+        type: 'info',
+        module: 1,
+        title: 'Clinical Recognition',
+        body: '**History** — symptoms begin 4–12 hours after last dose of short-acting opioids, 24–48 hours after methadone cessation:\n• Craving for opioids\n• Dysphoria and restlessness\n• Rhinorrhea and lacrimation\n• Myalgias and arthralgias\n• Nausea, vomiting, abdominal cramping, diarrhea\n\n**Physical Examination:**\n• Mydriasis (pupillary dilation)\n• Yawning\n• Diaphoresis\n• Piloerection ("gooseflesh")\n• Increased bowel sounds\n• Rhinorrhea\n\nVital signs often **normal** — tachycardia if present reflects agitation or hypovolemia. Temperature is normal. Mental status preserved except in severe cases. [4]\n\nUse the **COWS score** to quantify severity and guide treatment:\n\n[COWS Interpretation Guide](#/info/ow-cows-guide)',
+        citation: [4, 5],
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        next: 'ow-cows-result',
+    },
+    {
+        id: 'ow-cows-result',
+        type: 'question',
+        module: 1,
+        title: 'COWS Score Result',
+        body: 'What is the COWS score?',
+        citation: [5],
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        options: [
+            {
+                label: 'No Withdrawal (0–4)',
+                description: 'Observe, reassess in 1–2 hours',
+                next: 'ow-no-wd',
+            },
+            {
+                label: 'Mild (5–12)',
+                description: 'Consider MOUD or symptomatic treatment',
+                next: 'ow-mild',
+            },
+            {
+                label: 'Moderate (13–24)',
+                description: 'Initiate opioid agonist therapy',
+                next: 'ow-workup',
+                urgency: 'urgent',
+            },
+            {
+                label: 'Mod-Severe / Severe (25+)',
+                description: 'Aggressive treatment',
+                next: 'ow-workup',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'ow-no-wd',
+        type: 'result',
+        module: 1,
+        title: 'No Active Withdrawal',
+        body: 'COWS 0–4 — no objective signs of withdrawal.\n\n• Observe and reassess in 1–2 hours if concern for evolving withdrawal\n• **Do not initiate buprenorphine** — risk of precipitated withdrawal if full agonist still active\n• Screen for OUD and assess readiness for MOUD\n• If patient reports recent opioid use, withdrawal may evolve as the drug clears',
+        recommendation: 'Observe. Reassess COWS in 1–2 hours. Do not start buprenorphine until COWS ≥ 8.',
+        confidence: 'recommended',
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+    },
+    {
+        id: 'ow-mild',
+        type: 'question',
+        module: 1,
+        title: 'Mild Withdrawal (COWS 5–12)',
+        body: 'Mild withdrawal — symptomatic treatment may suffice, but opioid agonist therapy can be initiated if COWS ≥ 8 and patient is interested in MOUD.',
+        options: [
+            {
+                label: 'Patient desires MOUD',
+                description: 'Proceed to opioid agonist therapy',
+                next: 'ow-workup',
+            },
+            {
+                label: 'Symptomatic treatment only',
+                description: 'Non-opioid adjuncts',
+                next: 'ow-adjuncts',
+            },
+        ],
+    },
+    // ===================================================================
+    // MODULE 2 — Differential & Workup (4 nodes)
+    // ===================================================================
+    {
+        id: 'ow-workup',
+        type: 'info',
+        module: 2,
+        title: 'Initial Workup',
+        body: '**Laboratory Studies:**\n• Most patients can be managed without labs\n• **BMP** if significant vomiting or diarrhea — check for hypokalemia and hypomagnesemia (QT risk with methadone/ondansetron)\n• Urine drug screen: low utility in acute management (many synthetic opioids not detected on standard 5-panel) [6]\n\n**ECG:**\n• If methadone use (current or planned)\n• If combining QT-prolonging medications\n• If electrolyte derangements suspected\n\n[Differential Diagnosis](#/info/ow-ddx)\n[QT Prolongation Risk](#/info/ow-qt-risk)',
+        citation: [6],
+        next: 'ow-ddx-screen',
+    },
+    {
+        id: 'ow-ddx-screen',
+        type: 'question',
+        module: 2,
+        title: 'Is This Opioid Withdrawal?',
+        body: 'Key differentiators: piloerection, yawning, and lacrimation are **highly specific** for opioid withdrawal. Seizures and hyperthermia are **never** seen in uncomplicated opioid withdrawal. [4]',
+        citation: [4],
+        options: [
+            {
+                label: 'Clear opioid withdrawal',
+                description: 'Classic history + findings',
+                next: 'ow-cause',
+            },
+            {
+                label: 'Possible ethanol / sedative withdrawal',
+                description: 'Life-threatening — treat first',
+                next: 'ow-ddx-etoh',
+                urgency: 'critical',
+            },
+            {
+                label: 'Sympathomimetic or other toxidrome',
+                description: 'Cocaine, amphetamines, organophosphates',
+                next: 'ow-ddx-other',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'ow-ddx-etoh',
+        type: 'result',
+        module: 2,
+        title: 'Consider Ethanol / Sedative Withdrawal',
+        body: '**Ethanol and sedative-hypnotic withdrawal can be life-threatening** — seizures, delirium tremens, and hyperthermia are possible. Opioid withdrawal does not cause seizures or hyperthermia.\n\n**Key distinguishing features:**\n• Significant hypertension AND tachycardia (both together) → ethanol/sedative WD\n• Seizures → ethanol/sedative WD (never opioid WD)\n• Hyperthermia → ethanol/sedative WD or sympathomimetic\n• Piloerection, yawning, lacrimation → opioid WD (not ethanol/sedative)\n\n**If uncertain, treat the more dangerous condition first.** Many patients use multiple substances.\n\n[Status Epilepticus Protocol](#/tree/status-epilepticus)',
+        recommendation: 'If ethanol/sedative withdrawal is suspected, prioritize its management — it carries higher immediate mortality risk than opioid withdrawal.',
+        confidence: 'definitive',
+        citation: [4],
+    },
+    {
+        id: 'ow-ddx-other',
+        type: 'result',
+        module: 2,
+        title: 'Other Toxidromes',
+        body: '**Sympathomimetic Toxicity** (cocaine, amphetamines):\n• Mydriasis, agitation, diaphoresis, tachycardia, hypertension\n• Much more severe than opioid WD\n• Hyperthermia present\n• **No yawning, piloerection, or lacrimation**\n\n**Cholinergic (Muscarinic) Toxicity** (organophosphates, carbamates):\n• SLUDGE: Salivation, Lacrimation, Urination, Defecation, GI distress, Emesis\n• **Miosis** (not mydriasis), **bradycardia**, altered LOC\n• Nicotinic signs: weakness, fasciculations, paralysis\n\nIf uncertain, treat supportively and reassess. A thorough history is usually diagnostic.',
+        recommendation: 'Differentiate by pupil size (mydriasis = OW/sympathomimetic, miosis = cholinergic), presence of yawning/piloerection (specific to OW), and vital sign severity.',
+        confidence: 'recommended',
+        citation: [4],
+    },
+    // ===================================================================
+    // MODULE 3 — Opioid Agonist Therapy (7 nodes)
+    // ===================================================================
+    {
+        id: 'ow-cause',
+        type: 'question',
+        module: 3,
+        title: 'Cause of Withdrawal',
+        body: 'What triggered the opioid withdrawal?',
+        options: [
+            {
+                label: 'Interruption in opioid use',
+                description: 'Ran out, incarcerated, hospitalized, voluntary cessation',
+                next: 'ow-agonist-choice',
+            },
+            {
+                label: 'Precipitated by antagonist',
+                description: 'Naloxone, naltrexone, or nalmefene',
+                next: 'ow-precip-entry',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'ow-agonist-choice',
+        type: 'question',
+        module: 3,
+        title: 'Treatment Pathway',
+        body: 'Opioid agonist therapy is preferred over non-opioid adjuncts. **Buprenorphine is the first-line choice** for most patients. [3][7]\n\n[Medications for Opioid Withdrawal](#/info/ow-meds-compare)',
+        citation: [3, 7],
+        options: [
+            {
+                label: 'Buprenorphine (preferred)',
+                description: 'Partial agonist — safe, effective, no QT risk',
+                next: 'ow-bup-protocol',
+            },
+            {
+                label: 'Methadone',
+                description: 'Full agonist — for high tolerance or current methadone patients',
+                next: 'ow-methadone',
+            },
+            {
+                label: 'Patient declines agonist therapy',
+                description: 'Non-opioid adjuncts only',
+                next: 'ow-adjuncts',
+            },
+        ],
+    },
+    {
+        id: 'ow-bup-protocol',
+        type: 'question',
+        module: 3,
+        title: 'Buprenorphine Initiation',
+        body: 'Choose the induction strategy based on the clinical scenario.\n\n[Buprenorphine Initiation Guide](#/info/ow-bup-guide)',
+        citation: [8, 9, 10],
+        options: [
+            {
+                label: 'COWS ≥ 8 — Standard induction',
+                description: '8 mg SL → reassess → max 32 mg',
+                next: 'ow-bup-standard',
+            },
+            {
+                label: 'On full agonist / fentanyl — Microdosing',
+                description: '0.5–2 mg SL, avoid precipitated WD',
+                next: 'ow-bup-micro',
+            },
+            {
+                label: 'COWS < 8 — Wait and reassess',
+                description: 'Too early for standard induction',
+                next: 'ow-bup-wait',
+            },
+        ],
+    },
+    {
+        id: 'ow-bup-standard',
+        type: 'result',
+        module: 3,
+        title: 'Standard Buprenorphine Induction',
+        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal standard) **8 mg SL** initially\n\n1. Reassess COWS in **30–60 minutes**\n2. If symptoms persist: give additional **4–8 mg SL**\n3. Repeat until symptom control or COWS < 8\n4. Maximum Day 1 total: **32 mg**\n\n**High-dose induction** (starting at 12–16 mg) is safe and increasingly preferred in the fentanyl era — 579-patient case series showed no respiratory depression. [8][9]\n\n**If buprenorphine precipitates withdrawal:** Give **more buprenorphine** (not less) — up to 16–32 mg total. This overcomes the partial agonist displacement and transitions the patient to buprenorphine maintenance. [11]\n\n**IV alternative** for severe GI distress: 0.3–0.9 mg IV over 20–30 min. [4]',
+        recommendation: 'Buprenorphine 8 mg SL → reassess 30–60 min → repeat 4–8 mg PRN → max 32 mg Day 1. Discharge with bridge Rx + MOUD referral.',
+        confidence: 'definitive',
+        citation: [4, 8, 9, 11],
+    },
+    {
+        id: 'ow-bup-micro',
+        type: 'result',
+        module: 3,
+        title: 'Buprenorphine Microdosing',
+        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal microdose) **0.5–2 mg SL**\n\nCan administer while patient is **still on a full agonist** (methadone, heroin, fentanyl).\n\n• Gradually increase buprenorphine dose over hours to days\n• Frequency guided by COWS score\n• Avoids precipitated withdrawal entirely\n• Feasibility confirmed in ED setting [10]\n\n**Best candidates:**\n• Fentanyl-dependent (lipophilic, slow clearance makes traditional induction risky)\n• Currently on methadone maintenance\n• Early or mild withdrawal (COWS < 8)\n• Cannot abstain long enough for standard induction',
+        recommendation: 'Buprenorphine 0.5–2 mg SL while patient continues opioid use. Increase gradually. Avoids precipitated withdrawal.',
+        confidence: 'recommended',
+        citation: [10, 12],
+    },
+    {
+        id: 'ow-bup-wait',
+        type: 'info',
+        module: 3,
+        title: 'Wait for Adequate Withdrawal',
+        body: 'COWS < 8 — starting buprenorphine too early risks **precipitated withdrawal**, especially with fentanyl (highly lipophilic, slow tissue clearance).\n\n• Reassess COWS every 1–2 hours\n• Many experts now recommend **COWS ≥ 13** for fentanyl-dependent patients [13]\n• Consider **microdosing** as an alternative that avoids this waiting period\n• Supportive care (IV fluids, antiemetics) while waiting\n\n**Signs withdrawal is progressing:** increasing mydriasis, onset of piloerection, worsening GI symptoms, rising pulse.',
+        citation: [13],
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        next: 'ow-bup-protocol',
+    },
+    {
+        id: 'ow-methadone',
+        type: 'result',
+        module: 3,
+        title: 'Methadone',
+        body: '[Methadone](#/drug/methadone/opioid withdrawal) **20 mg PO** or **10 mg IM** (preferred if nauseated)\n\nOnset: 30–60 min PO, 10–20 min IM. Duration of symptom relief: ~24 hours. [14]\n\n**Cautions:**\n• **Do NOT give full maintenance dose** to unfamiliar patients — risk of respiratory depression\n• If patient reports missing a clinic dose, give **only 20 mg** unless clinic confirms the dose\n• **QT prolongation** — dose-dependent. ECG if > 40 mg or combining with other QT-prolonging drugs\n• Full mu agonist: no ceiling on respiratory depression\n\n[QT Prolongation Risk](#/info/ow-qt-risk)\n\n**When to choose methadone over buprenorphine:**\n• Patient already on methadone maintenance\n• Very high opioid tolerance\n• Patient preference / prior success with methadone',
+        recommendation: 'Methadone 20 mg PO or 10 mg IM. Monitor for respiratory depression and QT prolongation. Arrange clinic follow-up.',
+        confidence: 'recommended',
+        citation: [14, 15],
+    },
+    // ===================================================================
+    // MODULE 4 — Non-Opioid Adjuncts (3 nodes)
+    // ===================================================================
+    {
+        id: 'ow-adjuncts',
+        type: 'info',
+        module: 4,
+        title: 'Non-Opioid Adjunctive Therapy',
+        body: 'For patients who **decline opioid agonist therapy** or as **add-on** to buprenorphine/methadone for residual symptoms.\n\nTarget specific symptom clusters with the agents below. Can combine multiple adjuncts safely, but monitor for QT prolongation if using ondansetron + loperamide + methadone together.',
+        next: 'ow-adjuncts-rx',
+    },
+    {
+        id: 'ow-adjuncts-rx',
+        type: 'result',
+        module: 4,
+        title: 'Symptom-Targeted Management',
+        body: '**Autonomic Symptoms** (tachycardia, diaphoresis, anxiety):\n• [Clonidine](#/drug/clonidine/opioid withdrawal) 0.1–0.3 mg PO q1h, max 0.8 mg/day — check BP before each dose [16]\n• [Lofexidine](#/drug/lofexidine/opioid withdrawal) 0.54 mg PO q5–6h, max 2.88 mg/day — FDA-approved for OW [17]\n\n**Anxiety / Insomnia / Muscle Cramping:**\n• [Diazepam](#/drug/diazepam/opioid withdrawal) 5–10 mg IV q5–10 min until sedation\n• [Lorazepam](#/drug/lorazepam/opioid withdrawal) 1–2 mg IV q10 min\n\n**Nausea / Vomiting:**\n• [Ondansetron](#/drug/ondansetron/opioid withdrawal) 4 mg IV/PO q6–8h PRN\n\n**Diarrhea:**\n• [Loperamide](#/drug/loperamide/opioid withdrawal) 4 mg PO, then 2 mg per loose stool (max 16 mg/day)\n• [Octreotide](#/drug/octreotide/opioid withdrawal) 50 mcg SQ for refractory diarrhea\n\n**Body Aches:** NSAIDs or acetaminophen\n**Abdominal Cramping:** Dicyclomine 10 mg PO\n\n**⚠ QT Risk:** Monitor ECG if combining methadone + ondansetron + loperamide, especially with hypoK/hypoMg from vomiting/diarrhea.',
+        recommendation: 'Clonidine for autonomic symptoms, BZDs for anxiety, ondansetron for nausea, loperamide for diarrhea. Monitor QT if combining QT-prolonging agents.',
+        confidence: 'recommended',
+        citation: [4, 16, 17],
+        next: 'ow-adjuncts-combo',
+    },
+    {
+        id: 'ow-adjuncts-combo',
+        type: 'info',
+        module: 4,
+        title: 'Reassess After Treatment',
+        body: '**Combination approach is often optimal:** Opioid agonist therapy (buprenorphine or methadone) addresses the core withdrawal, while adjuncts target residual GI, autonomic, and musculoskeletal symptoms.\n\nReassess COWS after treatment to gauge therapeutic response and guide disposition.',
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        next: 'ow-disposition',
+    },
+    // ===================================================================
+    // MODULE 5 — Precipitated Withdrawal (3 nodes)
+    // ===================================================================
+    {
+        id: 'ow-precip-entry',
+        type: 'question',
+        module: 5,
+        title: 'Precipitating Agent',
+        body: 'Withdrawal was precipitated by an opioid antagonist. Management depends on the half-life of the precipitating agent.\n\nIatrogenic (precipitated) withdrawal can produce sudden **catecholamine surges and hemodynamic instability** that may be life-threatening — unlike naturally occurring opioid withdrawal. [4]',
+        citation: [4],
+        options: [
+            {
+                label: 'Naloxone (short-acting)',
+                description: 'Half-life 30–90 min',
+                next: 'ow-precip-naloxone',
+            },
+            {
+                label: 'Naltrexone (long-acting)',
+                description: 'PO half-life 5–10 days, IM depot up to 30 days',
+                next: 'ow-precip-naltrexone',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'ow-precip-naloxone',
+        type: 'result',
+        module: 5,
+        title: 'Naloxone-Precipitated Withdrawal',
+        body: '**Short-acting** — naloxone half-life 30–90 min. Withdrawal typically resolves within 1–2 hours as naloxone clears.\n\n**Preferred treatment:** [Buprenorphine](#/drug/buprenorphine/precipitated withdrawal) **16–32 mg SL**\n• Buprenorphine dose should match the naloxone dose that precipitated withdrawal\n• If naloxone 2–4 mg caused WD → give buprenorphine 16 mg\n• Escalate to 32 mg if symptoms persist [11]\n• This essentially functions as a rapid induction protocol for long-term buprenorphine therapy\n\n**Non-opioid adjuncts** as supplement or alternative:\n• [Clonidine](#/drug/clonidine/precipitated withdrawal) 0.1–0.3 mg PO\n• Benzodiazepines for hemodynamic instability\n• IV fluids if dehydrated\n\n**Monitor for rebound opioid intoxication** after naloxone wears off (re-narcotization) — residual opioid may re-exert effects.',
+        recommendation: 'Buprenorphine 16–32 mg SL for naloxone-precipitated withdrawal. Short-acting — resolves as naloxone clears. Monitor for re-narcotization.',
+        confidence: 'recommended',
+        citation: [4, 11],
+    },
+    {
+        id: 'ow-precip-naltrexone',
+        type: 'result',
+        module: 5,
+        title: 'Naltrexone-Precipitated Withdrawal',
+        body: '**Long-acting, severe, and prolonged.** Oral naltrexone: 24–72 hours. IM depot (Vivitrol): effects may last up to 30 days.\n\n**Buprenorphine may be less effective** — naltrexone blocks the mu receptor. However, buprenorphine\'s high receptor affinity may partially overcome naltrexone at high doses.\n\n**Primary treatment — aggressive non-opioid adjuncts:**\n• [Clonidine](#/drug/clonidine/precipitated withdrawal) 0.1–0.3 mg PO q1h — critical for hemodynamic control\n• [Diazepam](#/drug/diazepam/precipitated withdrawal) 5–10 mg IV q5–10 min for severe agitation and hemodynamic instability\n• IV fluids aggressively for dehydration from vomiting/diarrhea\n• Antiemetics, antidiarrheals as needed\n\n**Hemodynamic instability from naltrexone** (unlike short-acting naloxone) **requires pharmacologic management.** Older patients and those with cardiovascular disease should not remain hypertensive and tachycardic. [4]\n\n**Consider ICU admission** for IM depot naltrexone-precipitated WD — prolonged course, hemodynamic monitoring needed.',
+        recommendation: 'Aggressive non-opioid adjuncts: clonidine + benzodiazepines + IV fluids. Consider ICU for depot naltrexone. Buprenorphine may have limited efficacy due to receptor blockade.',
+        confidence: 'recommended',
+        citation: [4],
+    },
+    // ===================================================================
+    // MODULE 6 — Disposition & Harm Reduction (3 nodes)
+    // ===================================================================
+    {
+        id: 'ow-disposition',
+        type: 'question',
+        module: 6,
+        title: 'Disposition',
+        body: 'Most patients with opioid withdrawal can be discharged after symptoms are managed. Assess for ongoing treatment needs.',
+        options: [
+            {
+                label: 'Symptoms controlled, stable vitals',
+                description: 'Discharge with MOUD referral',
+                next: 'ow-discharge',
+            },
+            {
+                label: 'Refractory symptoms / hemodynamic instability',
+                description: 'Admission',
+                next: 'ow-admit',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'ow-discharge',
+        type: 'result',
+        module: 6,
+        title: 'Discharge with MOUD Referral',
+        body: '[Opioid Withdrawal Discharge Instructions](#/info/ow-discharge)\n\n**MOUD Continuity:**\n• Bridge prescription of buprenorphine/naloxone — **3–7 day supply** minimum (longer if barriers to follow-up)\n• Arrange follow-up with addiction medicine / opioid treatment program within **72 hours**\n• No X-waiver required since December 2022 — any clinician with DEA Schedule III authority can prescribe\n• SAMHSA Helpline: 1-800-662-4357\n\n**Harm Reduction:**\n• **Naloxone kit** — prescribe or provide directly\n• **Fentanyl test strips** if available\n• **Overdose risk counseling:** Tolerance drops rapidly during abstinence — using the same dose after withdrawal can be fatal [2]\n• Safe injection education if patient uses IV\n\n**Return precautions:** Intractable vomiting, inability to tolerate PO, chest pain, seizures, fever.',
+        recommendation: 'Discharge with buprenorphine bridge Rx (3–7 days), MOUD follow-up within 72h, naloxone kit, and overdose risk counseling.',
+        confidence: 'definitive',
+        citation: [2, 3, 7],
+    },
+    {
+        id: 'ow-admit',
+        type: 'result',
+        module: 6,
+        title: 'Admission Criteria',
+        body: '**Consider admission if:**\n• Hemodynamic instability (especially from naltrexone-precipitated WD)\n• Intractable vomiting / diarrhea unresponsive to treatment\n• Significant dehydration with acute kidney injury\n• Naltrexone depot (Vivitrol)-precipitated withdrawal — may last days\n• Concurrent medical illness requiring inpatient care\n• Pregnancy with opioid withdrawal (risk of fetal distress) — obstetric consult\n• Psychiatric emergency (suicidal ideation)\n\n**Inpatient management:**\n• Continue opioid agonist therapy + adjuncts\n• IV fluid resuscitation\n• Electrolyte monitoring and replacement (K+, Mg2+)\n• Cardiac monitoring if on QT-prolonging medications\n• Addiction medicine and/or psychiatry consultation',
+        recommendation: 'Admit for hemodynamic instability, intractable GI losses, naltrexone depot WD, pregnancy, or concurrent illness. Continue MOUD + adjuncts.',
+        confidence: 'recommended',
+        citation: [4],
+    },
+];
+export const OPIOID_WITHDRAWAL_NODE_COUNT = OPIOID_WITHDRAWAL_NODES.length;
+export const OPIOID_WITHDRAWAL_MODULE_LABELS = [
+    'Recognition & Assessment',
+    'Differential & Workup',
+    'Opioid Agonist Therapy',
+    'Non-Opioid Adjuncts',
+    'Precipitated Withdrawal',
+    'Disposition & Harm Reduction',
+];
+export const OPIOID_WITHDRAWAL_CITATIONS = [
+    { num: 1, text: 'Weiner SG, Baker O, Bernson D, Schuur JD. One-Year Mortality of Patients After Emergency Department Treatment for Nonfatal Opioid Overdose. Ann Emerg Med. 2020;75(1):13-17.' },
+    { num: 2, text: 'Krawczyk N, Eisenberg M, Schneider KE, et al. Predictors of Overdose Death Among High-Risk Emergency Department Patients With Substance-Related Encounters: A Data Linkage Cohort Study. Ann Emerg Med. 2020;75(1):1-12.' },
+    { num: 3, text: 'D\u2019Onofrio G, O\u2019Connor PG, Pantalon MV, et al. Emergency Department-Initiated Buprenorphine/Naloxone Treatment for Opioid Dependence: A Randomized Clinical Trial. JAMA. 2015;313(16):1636-1644.' },
+    { num: 4, text: 'Stolbach A, Hoffman RS. Opioid Withdrawal in Adults in the Emergency Setting. UpToDate. Updated Aug 2025.' },
+    { num: 5, text: 'Wesson DR, Ling W. The Clinical Opiate Withdrawal Scale (COWS). J Psychoactive Drugs. 2003;35(2):253-259.' },
+    { num: 6, text: 'Moeller KE, Kissack JC, Atayee RS, et al. Clinical Interpretation of Urine Drug Tests: What Clinicians Need to Know About Urine Drug Screens. Mayo Clin Proc. 2017;92(5):774-796.' },
+    { num: 7, text: 'Hawk K, Hoppe J, Ketcham E, et al. Consensus Recommendations on the Treatment of Opioid Use Disorder in the Emergency Department. Ann Emerg Med. 2021;78(3):434-442.' },
+    { num: 8, text: 'Herring AA, Vosooghi AA, Luftig J, et al. High-Dose Buprenorphine Induction in the Emergency Department for Treatment of Opioid Use Disorder. JAMA Netw Open. 2021;4(7):e2117128.' },
+    { num: 9, text: 'Snyder H, Chau B, Kalmin MM, et al. High-Dose Buprenorphine Initiation in the Emergency Department Among Patients Using Fentanyl and Other Opioids. JAMA Netw Open. 2023;6(3):e231572.' },
+    { num: 10, text: 'Moe J, Badke K, Pratt M, et al. Microdosing and Standard-Dosing Take-Home Buprenorphine from the Emergency Department: A Feasibility Study. J Am Coll Emerg Physicians Open. 2020;1(6):1712-1722.' },
+    { num: 11, text: 'Oakley B, Wilson H, Hayes V, Lintzeris N. Managing Opioid Withdrawal Precipitated by Buprenorphine with Buprenorphine. Drug Alcohol Rev. 2021;40(4):567-571.' },
+    { num: 12, text: 'H\u00E4mmig R, Kemter A, Strasser J, et al. Use of Microdoses for Induction of Buprenorphine Treatment with Overlapping Full Opioid Agonist Use: The Bernese Method. Subst Abuse Rehabil. 2016;7:99-105.' },
+    { num: 13, text: 'Greenwald MK, Herring AA, Perrone J, et al. A Neuropharmacological Model to Explain Buprenorphine Induction Challenges. Ann Emerg Med. 2022;80(6):509-524.' },
+    { num: 14, text: 'Su MK, Lopez JH, Crossa A, Hoffman RS. Low Dose Intramuscular Methadone for Acute Mild to Moderate Opioid Withdrawal Syndrome. Am J Emerg Med. 2018;36(11):1951-1956.' },
+    { num: 15, text: 'Krantz MJ, Martin J, Stimmel B, et al. QTc Interval Screening in Methadone Treatment. Ann Intern Med. 2009;150(6):387-395.' },
+    { num: 16, text: 'Gowing L, Farrell MF, Ali R, White JM. Alpha-2 Adrenergic Agonists for the Management of Opioid Withdrawal. Cochrane Database Syst Rev. 2016;(5):CD002024.' },
+    { num: 17, text: 'Yu E, Miotto K, Akerele E, et al. A Phase 3 Placebo-Controlled, Double-Blind, Multi-Site Trial of the Alpha-2-Adrenergic Agonist Lofexidine for Opioid Withdrawal. Drug Alcohol Depend. 2008;97(1-2):158-168.' },
+];

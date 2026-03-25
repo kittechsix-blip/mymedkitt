@@ -115,6 +115,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'pep-start',
             },
             {
+                id: 'opioid-withdrawal',
+                title: 'Opioid Withdrawal',
+                subtitle: 'Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 25,
+                entryNodeId: 'ow-start',
+            },
+            {
                 id: 'psych-assessment',
                 title: 'Psychiatric Assessment',
                 subtitle: 'History → MSE (10 Components) → Safety → Disposition',
@@ -521,6 +530,15 @@ export const DEFAULT_CATEGORIES = [
         name: 'Toxicology',
         icon: 'toxicology.png',
         decisionTrees: [
+            {
+                id: 'opioid-withdrawal',
+                title: 'Opioid Withdrawal',
+                subtitle: 'Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition',
+                categoryId: 'toxicology',
+                version: '1.0',
+                nodeCount: 25,
+                entryNodeId: 'ow-start',
+            },
             {
                 id: 'tca-toxidrome',
                 title: 'TCA Overdose',

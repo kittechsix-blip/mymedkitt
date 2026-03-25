@@ -27,6 +27,7 @@ export { ACETAMINOPHEN_OD_NODES, ACETAMINOPHEN_OD_MODULE_LABELS, ACETAMINOPHEN_O
 export { SALICYLATE_NODES, SALICYLATE_MODULE_LABELS, SALICYLATE_CITATIONS } from './salicylate';
 export { DKA_NODES, DKA_MODULE_LABELS, DKA_CITATIONS } from './dka';
 export { SEPSIS_NODES, SEPSIS_MODULE_LABELS, SEPSIS_CITATIONS } from './sepsis';
+export { OPIOID_WITHDRAWAL_NODES, OPIOID_WITHDRAWAL_MODULE_LABELS, OPIOID_WITHDRAWAL_CITATIONS } from './opioid-withdrawal';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

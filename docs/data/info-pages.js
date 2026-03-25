@@ -7283,6 +7283,284 @@ const SEPSIS_SEP1_BUNDLE = {
     ],
 };
 // -------------------------------------------------------------------
+// Opioid Withdrawal
+// -------------------------------------------------------------------
+const OW_SUMMARY = {
+    id: 'ow-summary',
+    title: 'Opioid Withdrawal Steps Summary',
+    subtitle: 'Quick Reference — ED Management Pathway',
+    sections: [
+        {
+            heading: '1. Recognition & Assessment',
+            body: '\u2022 [Assess for classic signs: mydriasis, yawning, diaphoresis, piloerection, rhinorrhea, lacrimation](#/node/ow-recognize)\n\u2022 History: craving, dysphoria, myalgias, GI symptoms (nausea, vomiting, diarrhea, cramping)\n\u2022 [Calculate COWS score to grade severity](#/node/ow-cows-result)',
+        },
+        {
+            heading: '2. Differential & Workup',
+            body: '\u2022 [Rule out ethanol/sedative withdrawal (seizures, hyperthermia = NOT opioid WD)](#/node/ow-ddx-screen)\n\u2022 Labs: BMP if significant vomiting/diarrhea (hypoK, hypoMg \u2192 QT risk)\n\u2022 ECG if methadone use or combining QT-prolonging meds',
+        },
+        {
+            heading: '3. Opioid Agonist Therapy (Preferred)',
+            body: '\u2022 [Buprenorphine: 8 mg SL \u2192 reassess 30\u201360 min \u2192 repeat to max 32 mg](#/node/ow-bup-standard)\n\u2022 [Microdosing: 0.5\u20132 mg if on full agonist or fentanyl-dependent](#/node/ow-bup-micro)\n\u2022 [Methadone: 20 mg PO or 10 mg IM (QT risk, not preferred)](#/node/ow-methadone)',
+        },
+        {
+            heading: '4. Non-Opioid Adjuncts',
+            body: '\u2022 [Clonidine 0.1\u20130.3 mg PO q1h (max 0.8 mg/day) for autonomic symptoms](#/node/ow-adjuncts-rx)\n\u2022 Lofexidine 0.54 mg PO q5\u20136h (FDA-approved for OW)\n\u2022 Diazepam 5\u201310 mg IV or lorazepam 1\u20132 mg IV for anxiety\n\u2022 Ondansetron 4 mg for nausea; loperamide 4 mg for diarrhea\n\u2022 NSAIDs/acetaminophen for body aches',
+        },
+        {
+            heading: '5. Precipitated Withdrawal',
+            body: '\u2022 [Naloxone-precipitated: buprenorphine 16\u201332 mg SL (short-acting, resolves 1\u20132h)](#/node/ow-precip-naloxone)\n\u2022 [Naltrexone-precipitated: aggressive non-opioid adjuncts, IV fluids, consider ICU](#/node/ow-precip-naltrexone)',
+        },
+        {
+            heading: '6. Disposition',
+            body: '\u2022 [Discharge with bridge Rx (3\u20137 day buprenorphine) + MOUD referral within 72h](#/node/ow-discharge)\n\u2022 Harm reduction: naloxone kit, fentanyl test strips, overdose risk counseling\n\u2022 [Admit if: hemodynamic instability, intractable vomiting, naltrexone depot WD, pregnancy](#/node/ow-admit)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stolbach A, Hoffman RS. Opioid Withdrawal in Adults in the Emergency Setting. UpToDate. Updated Aug 2025.' },
+        { num: 2, text: 'Hazekamp CS, Sacco D. Managing Emergency Department Patients With Opioid Use Disorder. Emergency Medicine Practice. 2024;26(6).' },
+    ],
+};
+const OW_COWS_GUIDE = {
+    id: 'ow-cows-guide',
+    title: 'COWS Score Interpretation',
+    subtitle: 'Clinical Opioid Withdrawal Scale \u2014 Scoring Guide',
+    sections: [
+        {
+            body: 'The COWS is an 11-item clinician-administered instrument that rates common signs and symptoms of opioid withdrawal. Designed to be completed within 2 minutes with high interrater reliability (\u03BA > 0.75 for all items). [1][2]',
+        },
+        {
+            heading: 'Score Interpretation',
+            body: '**0\u20134: No Withdrawal** \u2014 Observe. Do not initiate buprenorphine (risk of precipitated withdrawal if full agonist still active). Reassess in 1\u20132 hours.\n\n**5\u201312: Mild Withdrawal** \u2014 May initiate buprenorphine if COWS \u2265 8 (traditional threshold). Consider symptomatic treatment alone if patient prefers.\n\n**13\u201324: Moderate Withdrawal** \u2014 Initiate opioid agonist therapy. This is the recommended threshold for fentanyl-dependent patients to reduce BPOW risk. [3]\n\n**25\u201336: Moderately Severe** \u2014 Aggressive treatment. High-dose buprenorphine (up to 32 mg) or methadone + adjunctive medications.\n\n**37\u201347: Severe Withdrawal** \u2014 Emergent treatment. IV fluids for dehydration. Close monitoring for hemodynamic instability.',
+        },
+        {
+            heading: 'Fentanyl-Era Considerations',
+            body: 'Fentanyl is highly lipophilic with slow tissue clearance. Traditional COWS \u2265 8 threshold carries higher risk of buprenorphine-precipitated withdrawal (BPOW) in fentanyl-dependent patients. Many experts now recommend:\n\n\u2022 Wait for COWS \u2265 13 before standard buprenorphine induction\n\u2022 Consider microdosing (0.5\u20132 mg) as alternative to avoid BPOW entirely\n\u2022 BPOW rate remains < 1% even in fentanyl-era studies with standard dosing [4]\n\u2022 If BPOW occurs: treat with MORE buprenorphine (up to 16\u201332 mg), not less',
+        },
+        {
+            heading: 'High Interrater Reliability Items',
+            body: 'Most reliable signs for clinical assessment (interrater \u03BA):\n\u2022 Piloerection: 0.94\n\u2022 Yawning: 0.93\n\u2022 Mydriasis: 0.90\n\u2022 Perspiration: 0.88\n\u2022 Rhinorrhea: 0.87',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wesson DR, Ling W. The Clinical Opiate Withdrawal Scale (COWS). J Psychoactive Drugs. 2003;35(2):253-259.' },
+        { num: 2, text: 'Handelsman L, Cochrane KJ, Aronson MJ, et al. Two New Rating Scales for Opiate Withdrawal. Am J Drug Alcohol Abuse. 1987;13(3):293-308.' },
+        { num: 3, text: 'Greenwald MK, Herring AA, Perrone J, et al. A Neuropharmacological Model to Explain Buprenorphine Induction Challenges. Ann Emerg Med. 2022;80(6):509-524.' },
+        { num: 4, text: 'D\u2019Onofrio G, Hawk KF, Perrone J, et al. Incidence of Precipitated Withdrawal During a Multisite Emergency Department-Initiated Buprenorphine Clinical Trial in the Era of Fentanyl. JAMA Netw Open. 2023;6(3):e236108.' },
+    ],
+};
+const OW_MEDS_COMPARE = {
+    id: 'ow-meds-compare',
+    title: 'Medications for Opioid Withdrawal',
+    subtitle: 'Comparison of ED Treatment Options',
+    sections: [
+        {
+            body: 'Opioid agonist therapy (buprenorphine or methadone) is preferred over non-opioid adjuncts for treating opioid withdrawal. Most experts agree buprenorphine is the first-line choice for most patients. [1][2]',
+        },
+        {
+            heading: 'Opioid Agonist Therapy',
+            body: '',
+            drugTable: [
+                {
+                    drug: 'Buprenorphine (Preferred)',
+                    regimen: '**Partial mu agonist.** 8 mg SL \u2192 reassess 30\u201360 min \u2192 max 32 mg/day. Ceiling effect on respiratory depression. No significant QT prolongation. ED initiation increases 30-day treatment engagement (78% vs 37%). No X-waiver needed since Dec 2022.',
+                },
+                {
+                    drug: 'Methadone',
+                    regimen: '**Full mu agonist.** 20 mg PO or 10 mg IM. Better for patients with very high tolerance or already on methadone. **QT prolongation risk.** Respiratory depression without ceiling. Long half-life (24\u201336h) provides extended relief.',
+                },
+            ],
+        },
+        {
+            heading: 'Non-Opioid Adjuncts',
+            body: '',
+            drugTable: [
+                {
+                    drug: 'Clonidine',
+                    regimen: '**Alpha-2 agonist.** 0.1\u20130.3 mg PO q1h, max 0.8 mg/day. Targets autonomic symptoms (tachycardia, diaphoresis, anxiety). Check BP before each dose. Off-label but widely used.',
+                },
+                {
+                    drug: 'Lofexidine (Lucemyra)',
+                    regimen: '**Alpha-2 agonist.** 0.54 mg PO q5\u20136h, max 2.88 mg/day. First FDA-approved non-opioid for OW (2018). More selective than clonidine, potentially fewer hemodynamic effects.',
+                },
+                {
+                    drug: 'Benzodiazepines',
+                    regimen: 'Diazepam 5\u201310 mg IV q5\u201310 min or lorazepam 1\u20132 mg IV q10 min. Good supplement to clonidine. Targets anxiety, muscle cramping, and hemodynamic instability from precipitated WD.',
+                },
+            ],
+        },
+        {
+            heading: 'Symptomatic Agents',
+            body: '',
+            drugTable: [
+                {
+                    drug: 'Ondansetron',
+                    regimen: '4 mg IV/PO q6\u20138h PRN nausea. **QT risk** when combined with methadone/loperamide.',
+                },
+                {
+                    drug: 'Loperamide',
+                    regimen: '4 mg PO initial, then 2 mg per loose stool (max 16 mg/day). **QT risk** at supratherapeutic doses.',
+                },
+                {
+                    drug: 'Octreotide',
+                    regimen: '50 mcg SQ for refractory diarrhea. Second-line when loperamide insufficient.',
+                },
+                {
+                    drug: 'NSAIDs / Acetaminophen',
+                    regimen: 'Standard doses for diffuse body aches and arthralgias.',
+                },
+            ],
+        },
+    ],
+    citations: [
+        { num: 1, text: 'D\u2019Onofrio G, O\u2019Connor PG, Pantalon MV, et al. Emergency Department-Initiated Buprenorphine/Naloxone Treatment for Opioid Dependence: A Randomized Clinical Trial. JAMA. 2015;313(16):1636-1644.' },
+        { num: 2, text: 'Hawk K, Hoppe J, Ketcham E, et al. Consensus Recommendations on the Treatment of Opioid Use Disorder in the Emergency Department. Ann Emerg Med. 2021;78(3):434-442.' },
+    ],
+};
+const OW_QT_RISK = {
+    id: 'ow-qt-risk',
+    title: 'QT Prolongation Risk in Opioid Withdrawal',
+    subtitle: 'Drug Interactions & Monitoring',
+    sections: [
+        {
+            body: 'Multiple medications used in opioid withdrawal management can prolong the QT interval. Combined use with electrolyte derangements from vomiting/diarrhea creates a high-risk scenario for Torsades de Pointes. [1]',
+        },
+        {
+            heading: 'QT-Prolonging Drugs in OW Management',
+            body: '\u2022 **Methadone** \u2014 dose-dependent QT prolongation. Highest risk among OW medications. ECG recommended at doses > 100 mg/day. [2]\n\u2022 **Ondansetron** \u2014 dose-dependent QT prolongation, particularly IV route\n\u2022 **Loperamide** \u2014 QT prolongation at supratherapeutic doses (used recreationally as \u201cpoor man\u2019s methadone\u201d at high doses)\n\u2022 **Lofexidine** \u2014 mild QT prolongation; ECG monitoring recommended',
+        },
+        {
+            heading: 'Electrolyte Risk Factors',
+            body: '\u2022 **Hypokalemia** \u2014 from vomiting, diarrhea. Directly prolongs QT.\n\u2022 **Hypomagnesemia** \u2014 from GI losses. Prevents correction of hypokalemia.\n\u2022 Both exacerbate drug-induced QT prolongation\n\u2022 BMP with Mg level recommended before starting methadone',
+        },
+        {
+            heading: 'When to Obtain ECG',
+            body: '\u2022 All patients receiving methadone (especially > 40 mg)\n\u2022 When combining 2+ QT-prolonging medications\n\u2022 Significant vomiting or diarrhea (electrolyte depletion)\n\u2022 History of cardiac disease, syncope, or known long QT\n\u2022 QTc > 450 ms: discuss risks/benefits of QT-prolonging agents\n\u2022 QTc > 500 ms: avoid or discontinue QT-prolonging agents',
+        },
+        {
+            heading: 'Safer Alternatives',
+            body: '\u2022 **Buprenorphine** does NOT significantly prolong QT \u2014 preferred opioid agonist\n\u2022 **Clonidine** does NOT prolong QT\n\u2022 **Benzodiazepines** do NOT prolong QT\n\u2022 **NSAIDs/acetaminophen** do NOT prolong QT',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stolbach A, Hoffman RS. Opioid Withdrawal in Adults in the Emergency Setting. UpToDate. Updated Aug 2025.' },
+        { num: 2, text: 'Krantz MJ, Martin J, Stimmel B, et al. QTc Interval Screening in Methadone Treatment. Ann Intern Med. 2009;150(6):387-395.' },
+    ],
+};
+const OW_BUP_GUIDE = {
+    id: 'ow-bup-guide',
+    title: 'Buprenorphine Initiation Guide',
+    subtitle: 'Standard, High-Dose & Microdosing Protocols',
+    sections: [
+        {
+            body: 'Three approaches to buprenorphine induction, each suited to different clinical scenarios. All approaches are supported by evidence and endorsed by emergency medicine societies. [1][2]',
+        },
+        {
+            heading: 'Standard Induction',
+            body: '**When:** COWS \u2265 8\u201312, short-acting opioid use (heroin, oxycodone)\n\n1. Administer **8 mg SL** buprenorphine\n2. Observe 30\u201360 minutes\n3. If withdrawal persists: give additional **4\u20138 mg SL**\n4. Repeat until symptom control or COWS < 8\n5. Maximum Day 1 total: **32 mg**\n6. Discharge with 3\u20137 day bridge prescription + follow-up\n\n**Key:** If buprenorphine precipitates withdrawal, treat with MORE buprenorphine (not less) \u2014 up to 16\u201332 mg total. [3]',
+        },
+        {
+            heading: 'High-Dose Induction',
+            body: '**When:** Fentanyl-dependent patients, severe withdrawal (COWS \u2265 13)\n\n\u2022 Starting dose up to **16 mg SL** (vs traditional 4\u20138 mg)\n\u2022 Total Day 1 dose up to **32 mg SL**\n\u2022 579-patient case series: no respiratory depression at \u2265 12 mg starting doses [4]\n\u2022 439-patient study: safe and effective in confirmed fentanyl exposure [5]\n\u2022 High-dose approach increasingly preferred in the fentanyl era\n\u2022 BPOW rate < 0.5% with 7-day extended-release SQ buprenorphine 24 mg [6]',
+        },
+        {
+            heading: 'Microdosing (Low-Dose Induction)',
+            body: '**When:** Patient still on full agonist, early/mild withdrawal, cannot abstain long enough for standard induction\n\n\u2022 Start **0.5\u20132 mg SL** while patient continues opioid use\n\u2022 Gradually increase buprenorphine while tapering full agonist\n\u2022 Dosing frequency based on COWS score\n\u2022 Avoids precipitated withdrawal entirely\n\u2022 Feasibility confirmed in ED setting [7]\n\u2022 Outpatient protocols typically span 6\u201310 days\n\u2022 Particularly valuable for methadone-to-buprenorphine transitions',
+        },
+        {
+            heading: 'Post-Induction',
+            body: '\u2022 Prescribe buprenorphine/naloxone (Suboxone) for outpatient use\n\u2022 Bridge supply: 3\u20137 days minimum (longer if follow-up barriers exist)\n\u2022 Typical maintenance: 16 mg/day SL\n\u2022 Follow-up with addiction medicine within 72 hours\n\u2022 No X-waiver required since December 2022\n\u2022 Any clinician with DEA Schedule III authority can prescribe',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hawk K, Hoppe J, Ketcham E, et al. Consensus Recommendations on the Treatment of Opioid Use Disorder in the Emergency Department. Ann Emerg Med. 2021;78(3):434-442.' },
+        { num: 2, text: 'Wax PM, Stolbach AI, Schwarz ES, et al. ACMT Position Statement: Buprenorphine Administration in the Emergency Department. J Med Toxicol. 2019;15(3):215-216.' },
+        { num: 3, text: 'Oakley B, Wilson H, Hayes V, Lintzeris N. Managing Opioid Withdrawal Precipitated by Buprenorphine with Buprenorphine. Drug Alcohol Rev. 2021;40(4):567-571.' },
+        { num: 4, text: 'Herring AA, Vosooghi AA, Luftig J, et al. High-Dose Buprenorphine Induction in the Emergency Department for Treatment of Opioid Use Disorder. JAMA Netw Open. 2021;4(7):e2117128.' },
+        { num: 5, text: 'Snyder H, Chau B, Kalmin MM, et al. High-Dose Buprenorphine Initiation in the Emergency Department Among Patients Using Fentanyl and Other Opioids. JAMA Netw Open. 2023;6(3):e231572.' },
+        { num: 6, text: 'D\u2019Onofrio G, Perrone J, Hawk KF, et al. Early Emergency Department Experience with 7-Day Extended-Release Injectable Buprenorphine for Opioid Use Disorder. Acad Emerg Med. 2023;30(12):1264-1271.' },
+        { num: 7, text: 'Moe J, Badke K, Pratt M, et al. Microdosing and Standard-Dosing Take-Home Buprenorphine from the Emergency Department: A Feasibility Study. J Am Coll Emerg Physicians Open. 2020;1(6):1712-1722.' },
+    ],
+};
+const OW_DDX = {
+    id: 'ow-ddx',
+    title: 'Differential Diagnosis of Opioid Withdrawal',
+    subtitle: 'Distinguishing OW from Mimics',
+    sections: [
+        {
+            body: 'Opioid withdrawal may mimic other withdrawal syndromes or intoxication states. Most patients have good insight into their condition, so the diagnosis is usually established by history alone. When present, yawning, lacrimation, and piloerection are highly specific for opioid withdrawal. [1]',
+        },
+        {
+            heading: 'Key Differentiators',
+            body: '',
+            drugTable: [
+                {
+                    drug: 'Opioid Withdrawal',
+                    regimen: '**Mydriasis, yawning, piloerection, lacrimation, rhinorrhea.** Normal temperature. Normal mental status (except severe cases). Vital signs often normal \u2014 tachycardia if present reflects agitation/hypovolemia. **No seizures.** Diarrhea, nausea, myalgias prominent.',
+                },
+                {
+                    drug: 'Ethanol/Sedative WD',
+                    regimen: '**Life-threatening.** Significant hypertension AND tachycardia (not just one). **Seizures, hyperthermia** \u2014 never seen in opioid WD alone. Tremor, diaphoresis, agitation. Hallucinations in DT. Normal or mildly dilated pupils.',
+                },
+                {
+                    drug: 'Sympathomimetic Toxicity',
+                    regimen: 'Cocaine, amphetamines. Mydriasis, agitation, diaphoresis, tachycardia, hypertension \u2014 but usually **much more severe** than opioid WD. **Hyperthermia.** No yawning, piloerection, or lacrimation.',
+                },
+                {
+                    drug: 'Cholinergic (Muscarinic) Toxicity',
+                    regimen: 'Organophosphates, carbamates. SLUDGE: Salivation, Lacrimation, Urination, Defecation, GI distress, Emesis. **Miosis (not mydriasis), bradycardia, altered LOC.** Nicotinic: weakness, fasciculations, paralysis.',
+                },
+            ],
+        },
+        {
+            heading: 'Clinical Pearl',
+            body: 'Many patients in opioid withdrawal have a pulse and blood pressure within normal limits. Only a small minority manifest both hypertension AND tachycardia, and when present, these are almost always from iatrogenically precipitated withdrawal (naloxone/naltrexone). In contrast, normal vital signs in ethanol or sedative withdrawal are the exception rather than the rule.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stolbach A, Hoffman RS. Opioid Withdrawal in Adults in the Emergency Setting. UpToDate. Updated Aug 2025.' },
+    ],
+};
+const OW_DISCHARGE = {
+    id: 'ow-discharge',
+    title: 'Opioid Withdrawal Discharge Instructions',
+    subtitle: 'Patient Discharge Instructions \u2014 Opioid Withdrawal',
+    shareable: true,
+    sections: [
+        {
+            heading: 'What Happened',
+            body: 'You were treated in the emergency department for opioid withdrawal. Your symptoms have improved, and you are being discharged with a plan for follow-up care.',
+        },
+        {
+            heading: 'Your Medications',
+            body: 'If you were started on buprenorphine (Suboxone/Subutex):\n\u2022 Take your medication exactly as prescribed\n\u2022 Place the tablet/film under your tongue and let it dissolve completely\n\u2022 Do not swallow, chew, or cut the tablet\n\u2022 Wait at least 30 minutes before eating or drinking\n\u2022 Do NOT use other opioids, benzodiazepines, or alcohol while on this medication \u2014 this can cause life-threatening breathing problems',
+        },
+        {
+            heading: 'Follow-Up Care',
+            body: '\u2022 Keep your follow-up appointment with addiction medicine / opioid treatment program\n\u2022 If you were given a bridge prescription, you have a limited supply \u2014 attend your follow-up before it runs out\n\u2022 If you cannot reach your follow-up provider, call the SAMHSA National Helpline: **1-800-662-4357** (free, 24/7)',
+        },
+        {
+            heading: 'Overdose Prevention',
+            body: '**Your risk of overdose is highest right now.**\n\nWhen you go through withdrawal, your body loses its tolerance to opioids. If you use the same amount you were using before, it can cause a fatal overdose.\n\n\u2022 If you use again, start with a much smaller amount\n\u2022 Never use alone\n\u2022 Keep your naloxone (Narcan) kit nearby at all times\n\u2022 Teach someone close to you how to use naloxone',
+        },
+        {
+            heading: 'How to Use Naloxone (Narcan)',
+            body: '**Nasal spray:**\n1. Lay the person on their back\n2. Insert the nozzle into one nostril\n3. Press the plunger firmly to release the dose\n4. If no response in 2\u20133 minutes, give a second dose in the other nostril\n5. Call 911 immediately\n6. Stay with the person \u2014 naloxone wears off in 30\u201390 minutes and overdose symptoms may return',
+        },
+        {
+            heading: 'Return to the Emergency Department If',
+            body: '\u2022 You cannot keep any food or liquids down\n\u2022 You feel dizzy, weak, or faint when standing\n\u2022 You develop chest pain or difficulty breathing\n\u2022 You develop a fever (temperature > 100.4\u00B0F / 38\u00B0C)\n\u2022 You have a seizure\n\u2022 You feel you may harm yourself',
+        },
+        {
+            heading: 'Resources',
+            body: '\u2022 **SAMHSA National Helpline:** 1-800-662-4357 (free, 24/7, English/Spanish)\n\u2022 **988 Suicide & Crisis Lifeline:** Call or text 988\n\u2022 **Poison Control:** 1-800-222-1222\n\u2022 Ask your provider about fentanyl test strips and safe use supplies',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'SAMHSA TIP 63: Medications for Opioid Use Disorder. Substance Abuse and Mental Health Services Administration. 2021.' },
+        { num: 2, text: 'Larochelle MR, Bernson D, Land T, et al. Medication for Opioid Use Disorder After Nonfatal Opioid Overdose and Association With Mortality. Ann Intern Med. 2018;169(3):137-145.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -7503,6 +7781,13 @@ export const INFO_PAGES = {
     'sepsis-mimics': SEPSIS_MIMICS,
     'sepsis-cardiomyopathy': SEPSIS_CARDIOMYOPATHY_PAGE,
     'sepsis-sep1-bundle': SEPSIS_SEP1_BUNDLE,
+    'ow-summary': OW_SUMMARY,
+    'ow-cows-guide': OW_COWS_GUIDE,
+    'ow-meds-compare': OW_MEDS_COMPARE,
+    'ow-qt-risk': OW_QT_RISK,
+    'ow-bup-guide': OW_BUP_GUIDE,
+    'ow-ddx': OW_DDX,
+    'ow-discharge': OW_DISCHARGE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

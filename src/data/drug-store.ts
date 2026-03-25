@@ -714,6 +714,52 @@ const BUMETANIDE: DrugEntry = {
   ],
 };
 
+const BUPRENORPHINE: DrugEntry = {
+  id: 'buprenorphine',
+  name: 'Buprenorphine (Subutex / Suboxone)',
+  genericName: 'Buprenorphine hydrochloride',
+  drugClass: 'Partial opioid agonist (mu receptor)',
+  route: 'SL/IV/IM',
+  indications: ['Opioid withdrawal — standard induction', 'Opioid withdrawal — microdosing', 'Precipitated withdrawal', 'Opioid use disorder maintenance'],
+  dosing: [
+    {
+      indication: 'Opioid withdrawal — standard induction',
+      regimen: '**SL:** 8 mg initially. Reassess COWS in 30\u201360 min. If symptoms persist, give additional 4\u20138 mg. Max **32 mg** on Day 1. Requires COWS \u2265 8 (consider \u2265 13 for fentanyl-dependent patients). High-dose induction (up to 32 mg) is safe and increasingly preferred in the fentanyl era.',
+    },
+    {
+      indication: 'Opioid withdrawal — microdosing',
+      regimen: '**SL:** 0.5\u20132 mg. Can give while patient is still on full agonist (methadone, heroin, fentanyl). Gradually increase dose over hours to days. Avoids precipitated withdrawal. Frequency based on COWS score. Particularly useful for fentanyl-dependent patients where traditional induction carries higher BPOW risk.',
+    },
+    {
+      indication: 'Precipitated withdrawal',
+      regimen: '**SL:** 16\u201332 mg. For withdrawal precipitated by naloxone (2\u20134 mg): give buprenorphine 16 mg SL. Escalate to 32 mg if symptoms persist. Evidence from case reports and prehospital studies supports safety of high-dose buprenorphine in this setting.',
+    },
+    {
+      indication: 'Opioid use disorder — maintenance',
+      regimen: '**SL:** 8\u201324 mg/day (as buprenorphine/naloxone combination). Typical maintenance: 16 mg/day. Available as daily sublingual, weekly, or monthly formulations. Extended-release SQ (7-day): 24 mg — well-tolerated in ED initiation studies.',
+    },
+  ],
+  contraindications: [
+    'Hypersensitivity to buprenorphine',
+  ],
+  cautions: [
+    'Precipitated withdrawal: As a partial agonist, buprenorphine can precipitate withdrawal in patients with recent full agonist use if given before sufficient withdrawal develops',
+    'Respiratory depression: Ceiling effect makes clinically significant respiratory depression rare, but possible with IV misuse or combination with benzodiazepines/alcohol',
+    'Hepatotoxicity: Rare, primarily with IV misuse; monitor LFTs if concern',
+    'QT interval: Does NOT significantly prolong QT (advantage over methadone)',
+    'High receptor affinity: May require large doses of naloxone (10\u201320 mg) to reverse if needed',
+    'Combining with benzodiazepines or alcohol increases risk of respiratory depression and death',
+  ],
+  monitoring: 'COWS score before and after administration. Respiratory rate, SpO2, and level of consciousness for 30\u201360 min after each dose. Blood pressure and heart rate.',
+  notes: 'Partial mu-opioid agonist with high receptor affinity and long half-life (~24\u201342 hours SL). Ceiling effect on respiratory depression makes it safer than full agonists in overdose. ED-initiated buprenorphine increases engagement in addiction treatment (78% vs 37% referral-only at 30 days). No X-waiver required since December 2022 \u2014 any clinician with DEA Schedule III authority can prescribe. Buprenorphine/naloxone combination (Suboxone) discourages IV misuse; naloxone component is poorly absorbed sublingually.',
+  citations: [
+    'D\u2019Onofrio G, O\u2019Connor PG, Pantalon MV, et al. Emergency Department-Initiated Buprenorphine/Naloxone Treatment for Opioid Dependence: A Randomized Clinical Trial. JAMA. 2015;313(16):1636-1644.',
+    'Herring AA, Vosooghi AA, Luftig J, et al. High-Dose Buprenorphine Induction in the Emergency Department for Treatment of Opioid Use Disorder. JAMA Netw Open. 2021;4(7):e2117128.',
+    'Snyder H, Chau B, Kalmin MM, et al. High-Dose Buprenorphine Initiation in the Emergency Department Among Patients Using Fentanyl and Other Opioids. JAMA Netw Open. 2023;6(3):e231572.',
+    'Dahan A, Yassen A, Romberg R, et al. Buprenorphine Induces Ceiling in Respiratory Depression but Not in Analgesia. Br J Anaesth. 2006;96(5):627-632.',
+  ],
+};
+
 const BENZATHINE_PENICILLIN: DrugEntry = {
   id: 'benzathine-penicillin',
   name: 'Benzathine Penicillin G',
@@ -1255,6 +1301,42 @@ const CLEVIDIPINE: DrugEntry = {
   ],
 };
 
+const CHLORDIAZEPOXIDE: DrugEntry = {
+  id: 'chlordiazepoxide',
+  name: 'Chlordiazepoxide (Librium)',
+  genericName: 'Chlordiazepoxide hydrochloride',
+  drugClass: 'Benzodiazepine (long-acting)',
+  route: 'PO',
+  indications: ['Alcohol withdrawal (mild-moderate)', 'Alcohol withdrawal prophylaxis'],
+  dosing: [
+    {
+      indication: 'Alcohol Withdrawal — Symptom-triggered (oral)',
+      regimen: '25-100 mg PO q1h PRN when CIWA-Ar ≥8. Long-acting with active metabolites — provides smoother clinical course than short-acting benzodiazepines. Convert from IV benzodiazepine to oral chlordiazepoxide when patient can take PO. Reduce dose in elderly.',
+    },
+    {
+      indication: 'Alcohol Withdrawal — Prophylaxis',
+      regimen: '25-100 mg PO q6h × 1 day, then 25-50 mg PO q6h × 2 additional days. For at-risk patients who are asymptomatic or minimally symptomatic. If CIWA-Ar reaches ≥8, prophylaxis has failed — treat for active withdrawal.',
+    },
+  ],
+  contraindications: [
+    'Severe hepatic insufficiency (use oxazepam or lorazepam)',
+    'Severe respiratory depression',
+    'Acute narrow-angle glaucoma',
+  ],
+  cautions: [
+    'Long half-life — accumulation risk in liver disease and elderly',
+    'Not available as IV formulation — use diazepam or lorazepam for IV therapy',
+    'Respiratory depression risk increases with concomitant opioids or other CNS depressants',
+    'Paradoxical agitation possible (~2% in alcoholics)',
+  ],
+  monitoring: 'CIWA-Ar q4-6h for stable patients, q1h for active withdrawal. Respiratory rate, level of consciousness.',
+  notes: 'Traditional oral benzodiazepine for alcohol withdrawal management. Long-acting with multiple active metabolites (desmethylchlordiazepoxide, demoxepam, desmethyldiazepam). Provides self-tapering effect due to long half-life. Preferred over lorazepam for most patients without severe liver disease — smoother withdrawal course with less risk of rebound.',
+  citations: [
+    'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.',
+    'Saitz R, et al. Individualized treatment for alcohol withdrawal. JAMA. 1994;272(7):519-523.',
+  ],
+};
+
 const CHLOROTHIAZIDE: DrugEntry = {
   id: 'chlorothiazide',
   name: 'Chlorothiazide',
@@ -1394,6 +1476,43 @@ const CONJUGATED_ESTROGEN: DrugEntry = {
   citations: [
     'ACOG Committee Opinion No. 557. Management of Acute AUB in Nonpregnant Reproductive-Aged Women. Obstet Gynecol. 2013;121(4):891-896.',
     'DeVore GR, et al. IV Premarin for dysfunctional uterine bleeding. Obstet Gynecol. 1982;59(3):285-291.',
+  ],
+};
+
+const CLONIDINE: DrugEntry = {
+  id: 'clonidine',
+  name: 'Clonidine',
+  genericName: 'Clonidine hydrochloride',
+  drugClass: 'Alpha-2 adrenergic agonist (central)',
+  route: 'PO',
+  indications: ['Opioid withdrawal — autonomic symptoms', 'Precipitated withdrawal — adjunct'],
+  dosing: [
+    {
+      indication: 'Opioid withdrawal — autonomic symptoms',
+      regimen: '**PO:** 0.1\u20130.3 mg every hour until symptoms resolve. Max **0.8 mg/day** (some experts allow up to 1.2 mg/day). Check blood pressure before each dose \u2014 hold if hypotensive. Targets sympathetic hyperactivity: tachycardia, diaphoresis, anxiety, restlessness.',
+    },
+    {
+      indication: 'Precipitated withdrawal — adjunct',
+      regimen: '**PO:** 0.1\u20130.3 mg every hour. Same dosing as standard withdrawal. Particularly important for naltrexone-precipitated withdrawal where opioid agonists may be ineffective.',
+    },
+  ],
+  contraindications: [
+    'Hypotension (SBP < 90 mmHg)',
+    'Hemodynamic instability',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Hypotension and bradycardia \u2014 check BP before each dose',
+    'Sedation and drowsiness',
+    'Rebound hypertension with abrupt discontinuation after prolonged use',
+    'Use with caution in patients on beta-blockers (additive bradycardia)',
+    'Dry mouth is common',
+  ],
+  monitoring: 'Blood pressure and heart rate before each dose. Hold if SBP < 90 mmHg or HR < 60 bpm.',
+  notes: 'Binds to central alpha-2 adrenergic receptors that share potassium channels with opioid receptors in the locus coeruleus, blunting the noradrenergic surge of opioid withdrawal. Not FDA-approved for opioid withdrawal but widely used off-label. Cochrane review confirms efficacy similar to tapered methadone for managing withdrawal symptoms, though does not address the underlying opioid use disorder.',
+  citations: [
+    'Gold MS, Redmond DE Jr, Kleber HD. Clonidine Blocks Acute Opiate-Withdrawal Symptoms. Lancet. 1978;2(8090):599-602.',
+    'Gowing L, Farrell MF, Ali R, White JM. Alpha-2 Adrenergic Agonists for the Management of Opioid Withdrawal. Cochrane Database Syst Rev. 2016;(5):CD002024.',
   ],
 };
 
@@ -2070,6 +2189,37 @@ const LINEZOLID: DrugEntry = {
   ],
 };
 
+const LOFEXIDINE: DrugEntry = {
+  id: 'lofexidine',
+  name: 'Lofexidine (Lucemyra)',
+  genericName: 'Lofexidine hydrochloride',
+  drugClass: 'Alpha-2 adrenergic agonist (central)',
+  route: 'PO',
+  indications: ['Opioid withdrawal — symptom management'],
+  dosing: [
+    {
+      indication: 'Opioid withdrawal — symptom management',
+      regimen: '**PO:** 0.54 mg (three 0.18 mg tablets) every 5\u20136 hours during peak withdrawal. Max **2.88 mg/day** (sixteen 0.18 mg tablets). Treatment duration: up to 14 days. Taper gradually over 2\u20134 days to minimize rebound symptoms.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Hypotension, bradycardia, and syncope \u2014 monitor vitals',
+    'QT prolongation: ECG monitoring recommended, especially with other QT-prolonging drugs',
+    'Hepatic impairment: reduce dose',
+    'Renal impairment (eGFR < 30): reduce dose',
+    'Rebound hypertension with abrupt discontinuation',
+    'Somnolence \u2014 caution with CNS depressants',
+  ],
+  monitoring: 'Blood pressure, heart rate, and ECG (QT interval). Hold if SBP < 90 mmHg, HR < 55 bpm, or QTc > 500 ms.',
+  notes: 'First FDA-approved (2018) non-opioid medication specifically indicated for mitigation of opioid withdrawal symptoms. More selective for alpha-2A receptors than clonidine, potentially causing less hypotension. Mechanism same as clonidine: reduces noradrenergic output from the locus coeruleus. Does not treat underlying opioid use disorder \u2014 should be combined with psychosocial support and referral to long-term MOUD.',
+  citations: [
+    'Yu E, Miotto K, Akerele E, et al. A Phase 3 Placebo-Controlled, Double-Blind, Multi-Site Trial of the Alpha-2-Adrenergic Agonist Lofexidine for Opioid Withdrawal. Drug Alcohol Depend. 2008;97(1-2):158-168.',
+  ],
+};
+
 const LOPERAMIDE: DrugEntry = {
   id: 'loperamide',
   name: 'Loperamide (Imodium)',
@@ -2089,6 +2239,10 @@ const LOPERAMIDE: DrugEntry = {
     {
       indication: 'Pregnancy',
       regimen: '4 mg PO initially, then 2 mg after each loose stool. Max 16 mg per day. FDA Category B \u2014 safest antimotility option in pregnancy.',
+    },
+    {
+      indication: 'Opioid withdrawal — diarrhea',
+      regimen: '**PO:** 4 mg initially, then 2 mg after each loose stool. Max **16 mg/day**. Peripheral mu-opioid agonist \u2014 does not cross BBB at therapeutic doses. **QT risk at supratherapeutic doses** \u2014 avoid exceeding recommended maximum, especially when combined with other QT-prolonging agents (methadone, ondansetron).',
     },
   ],
   contraindications: [
@@ -2613,6 +2767,44 @@ const METHYLENE_BLUE: DrugEntry = {
   ],
 };
 
+const METHADONE: DrugEntry = {
+  id: 'methadone',
+  name: 'Methadone',
+  genericName: 'Methadone hydrochloride',
+  drugClass: 'Full opioid agonist (mu receptor)',
+  route: 'PO/IM',
+  indications: ['Opioid withdrawal — acute management', 'Opioid use disorder — maintenance'],
+  dosing: [
+    {
+      indication: 'Opioid withdrawal — acute management',
+      regimen: '**PO:** 20 mg. **IM:** 10 mg (preferred if nauseated/vomiting). Onset: 30\u201360 min PO, 10\u201320 min IM. Duration of symptom relief: ~24 hours. **Do NOT give full maintenance dose to unfamiliar patients** \u2014 risk of respiratory depression. If patient claims to miss a daily dose from a clinic, give only 20 mg unless clinic confirms dose.',
+    },
+    {
+      indication: 'Opioid use disorder — maintenance',
+      regimen: 'Administered by certified opioid treatment programs (OTPs). Typical maintenance: 60\u2013120 mg/day PO. Must be dispensed daily initially; take-home doses earned over time. ED role is bridging, not maintenance initiation.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'Significant respiratory depression',
+    'Acute or severe bronchial asthma (unmonitored setting)',
+    'Known or suspected GI obstruction',
+  ],
+  cautions: [
+    '**QT prolongation**: Dose-dependent risk. ECG recommended at doses > 100 mg/day. Discuss risks/benefits if QTc > 450 ms; consider stopping if QTc > 500 ms',
+    'Respiratory depression: Full agonist \u2014 no ceiling effect. Additive with benzodiazepines, alcohol, other CNS depressants',
+    'Long half-life (8\u201359 hours): Delayed toxicity possible, especially in opioid-naive patients',
+    'Drug interactions via CYP3A4 and CYP2B6: Rifampin, phenytoin, and some ARVs accelerate metabolism',
+    'Risk of diversion: Some patients intentionally take reduced doses to save and sell',
+  ],
+  monitoring: 'ECG (QTc interval), respiratory rate, SpO2, level of consciousness. BMP if vomiting/diarrhea (electrolyte abnormalities worsen QT risk).',
+  notes: 'Long-acting full mu-opioid agonist. Decades of clinical experience validate its use in withdrawal management. Single 20 mg dose provides ~24 hours of symptom relief without significant intoxication in tolerant patients. In the ED setting, buprenorphine is generally preferred over methadone because of superior safety profile (partial agonist ceiling, no QT prolongation) and evidence for better long-term treatment engagement. Methadone is better for patients with very high tolerance or those already stable on methadone.',
+  citations: [
+    'Su MK, Lopez JH, Crossa A, et al. Low Dose Intramuscular Methadone for Acute Mild to Moderate Opioid Withdrawal Syndrome. Am J Emerg Med. 2018;36(11):1951-1956.',
+    'Krantz MJ, Martin J, Stimmel B, et al. QTc Interval Screening in Methadone Treatment. Ann Intern Med. 2009;150(6):387-395.',
+  ],
+};
+
 const METHOTREXATE: DrugEntry = {
   id: 'methotrexate',
   name: 'Methotrexate',
@@ -2940,6 +3132,50 @@ const NALOXONE: DrugEntry = {
   ],
 };
 
+const NALTREXONE: DrugEntry = {
+  id: 'naltrexone',
+  name: 'Naltrexone (Vivitrol)',
+  genericName: 'Naltrexone hydrochloride',
+  drugClass: 'Opioid antagonist (mu, kappa, delta receptors)',
+  route: 'PO/IM',
+  indications: ['Opioid use disorder — maintenance (reference)', 'Precipitated withdrawal — causative agent (reference)', 'Alcohol use disorder (first-line)'],
+  dosing: [
+    {
+      indication: 'Opioid use disorder — maintenance',
+      regimen: '**PO:** 50 mg daily. **IM depot (Vivitrol):** 380 mg every 4 weeks. Requires complete opioid detoxification (7\u201310 days opioid-free) before initiation \u2014 otherwise precipitates severe withdrawal. Patient must pass naloxone challenge first.',
+    },
+    {
+      indication: 'Precipitated withdrawal — causative agent',
+      regimen: '**Not a treatment for withdrawal** \u2014 naltrexone **causes** withdrawal. Half-life: 5\u201310 days PO; IM depot lasts up to 30 days. Withdrawal from naltrexone is severe and prolonged. Treat with non-opioid adjuncts (clonidine, benzodiazepines). Buprenorphine may be less effective due to receptor blockade.',
+    },
+    {
+      indication: 'Alcohol Use Disorder — First-line',
+      regimen: 'Start 25 mg PO daily × 3-7 days (reduces GI side effects). Maintenance: 50 mg PO daily. Take with food. May increase to 100 mg daily if needed. NNT 12 to prevent return to heavy drinking. Supports both abstinence and reduced-consumption goals. Duration: at least 6 months. Stop 48-72h before surgery. Contraindicated with current opioid use, LFTs >5× normal, Child-Pugh C cirrhosis, or GFR <45 mL/min. Monitor LFTs q6 months.',
+    },
+  ],
+  contraindications: [
+    'Current opioid use or positive urine drug screen for opioids',
+    'Acute opioid withdrawal',
+    'Failed naloxone challenge',
+    'Acute hepatitis or hepatic failure',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Precipitates severe, prolonged withdrawal if given to opioid-dependent patients',
+    'Hepatotoxicity at high doses \u2014 monitor LFTs',
+    'Opioid antagonism can be overcome with high-dose opioids, risking fatal overdose',
+    'Loss of opioid tolerance during treatment increases overdose risk if patient relapses after stopping naltrexone',
+    'Injection site reactions with IM formulation',
+    'Increased mortality seen with oral naltrexone in some studies (possibly from loss of tolerance)',
+  ],
+  monitoring: 'LFTs at baseline and periodically. Ensure patient is opioid-free for 7\u201310 days before initiation. Monitor for depression and suicidal ideation.',
+  notes: 'Competitive opioid antagonist used for maintenance therapy in OUD. Unlike buprenorphine and methadone, naltrexone has no abuse potential or diversion risk. However, studies show inferior treatment retention compared to buprenorphine/methadone, and mortality may increase after oral naltrexone discontinuation due to lost tolerance. In the ED, naltrexone is primarily encountered as a cause of precipitated withdrawal (especially IM depot) rather than a drug to be initiated.',
+  citations: [
+    'Bradley ES, Liss D, Carreiro SP, et al. Potential Uses of Naltrexone in Emergency Department Patients With Opioid Use Disorder. Clin Toxicol (Phila). 2019;57(9):753-759.',
+    'Pearce LA, Min JE, Piske M, et al. Opioid Agonist Treatment and Risk of Mortality During Opioid Overdose Public Health Emergency. BMJ. 2020;368:m772.',
+  ],
+};
+
 const NICARDIPINE: DrugEntry = {
   id: 'nicardipine',
   name: 'Nicardipine (Cardene)',
@@ -3080,6 +3316,40 @@ const NITROGLYCERIN: DrugEntry = {
   ],
 };
 
+const OCTREOTIDE: DrugEntry = {
+  id: 'octreotide',
+  name: 'Octreotide (Sandostatin)',
+  genericName: 'Octreotide acetate',
+  drugClass: 'Somatostatin analog',
+  route: 'SQ/IV',
+  indications: ['Opioid withdrawal — refractory diarrhea', 'Sulfonylurea-induced hypoglycemia'],
+  dosing: [
+    {
+      indication: 'Opioid withdrawal — refractory diarrhea',
+      regimen: '**SQ:** 50 mcg. May repeat every 8\u201312 hours if diarrhea persists. For severe secretory diarrhea unresponsive to loperamide. Inhibits GI secretions and motility via somatostatin receptor agonism.',
+    },
+    {
+      indication: 'Sulfonylurea-induced hypoglycemia',
+      regimen: '**SQ/IV:** 50\u2013100 mcg every 6\u20138 hours. Inhibits insulin secretion. Duration of therapy guided by half-life of sulfonylurea ingested.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Bradycardia and conduction abnormalities',
+    'Gallbladder sludge and cholelithiasis (long-term use)',
+    'Hypo- or hyperglycemia (alters insulin and glucagon secretion)',
+    'Nausea, abdominal pain, and flatulence',
+    'Hypothyroidism (long-term use)',
+  ],
+  monitoring: 'Heart rate. Blood glucose if given for hypoglycemia. Stool output to assess response.',
+  notes: 'Synthetic somatostatin analog that inhibits GI peptide secretion, reduces splanchnic blood flow, and decreases intestinal motility. In opioid withdrawal, used as a second-line agent for refractory diarrhea when loperamide is insufficient. Also valuable in sulfonylurea overdose to suppress insulin secretion.',
+  citations: [
+    'Stolbach A, Hoffman RS. Opioid Withdrawal in Adults in the Emergency Setting. UpToDate. Updated Aug 2025.',
+  ],
+};
+
 const ONDANSETRON: DrugEntry = {
   id: 'ondansetron',
   name: 'Ondansetron (Zofran)',
@@ -3104,6 +3374,10 @@ const ONDANSETRON: DrugEntry = {
       indication: 'Pediatric diarrhea',
       regimen: '0.15 mg/kg IV or ODT. Max 4 mg/dose. Single dose often sufficient to facilitate oral rehydration.',
       weightCalc: { dosePerKg: 0.15, unit: 'mg', maxDose: 4 },
+    },
+    {
+      indication: 'Opioid withdrawal — nausea/vomiting',
+      regimen: '**IV/PO:** 4 mg every 6\u20138 hours PRN nausea. ODT (orally disintegrating tablet) preferred if patient is actively vomiting. **QT risk:** Use caution when combining with methadone and loperamide \u2014 all prolong QT interval. Check ECG and electrolytes (hypoK, hypoMg from vomiting/diarrhea worsen QT risk).',
     },
   ],
   contraindications: [
@@ -5018,7 +5292,7 @@ const DIAZEPAM: DrugEntry = {
   genericName: 'Diazepam',
   drugClass: 'Benzodiazepine (long-acting)',
   route: 'IV/PR',
-  indications: ['Status epilepticus (alternative)', 'Seizure disorders', 'TCA overdose seizure'],
+  indications: ['Status epilepticus (alternative)', 'Seizure disorders', 'TCA overdose seizure', 'Alcohol withdrawal'],
   dosing: [
     {
       indication: 'TCA Overdose — Seizure',
@@ -5034,6 +5308,14 @@ const DIAZEPAM: DrugEntry = {
       indication: 'Status Epilepticus — Rectal',
       regimen: '0.2-0.5 mg/kg PR (max 20 mg), one time. Used when IV/IM not available. No longer recommended as first-line — IM midazolam is preferred. Rectal route historically used in pediatric and prehospital settings.',
       weightCalc: { dosePerKg: 0.5, unit: 'mg', maxDose: 20, label: 'Rectal (max dose)' },
+    },
+    {
+      indication: 'Opioid withdrawal — anxiety/hemodynamic instability',
+      regimen: '**IV:** 5\u201310 mg every 5\u201310 minutes until adequate sedation and hemodynamic stability achieved. Good supplement to clonidine therapy. Also helps suppress muscle cramping. Use clinical judgment for total dose based on patient response.',
+    },
+    {
+      indication: 'Alcohol Withdrawal — Symptom-triggered/Front-loading',
+      regimen: '**Symptom-triggered:** 5-10 mg IV q5-10 min when CIWA-Ar ≥8. **Front-loading (high-risk patients):** 5-10 mg IV q5-10 min until symptoms controlled. Preferred benzodiazepine — rapid onset (2-5 min), long-acting with active metabolites, smoother clinical course. Avoid IM route (variable absorption). Select patients may require >500 mg for initial DT control. Convert to oral as soon as possible.',
     },
   ],
   contraindications: [
@@ -5130,7 +5412,7 @@ const LORAZEPAM: DrugEntry = {
   genericName: 'Lorazepam',
   drugClass: 'Benzodiazepine (intermediate-acting)',
   route: 'IV/IM',
-  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)', 'TCA overdose seizure'],
+  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)', 'TCA overdose seizure', 'Alcohol withdrawal (severe cirrhosis)'],
   dosing: [
     {
       indication: 'TCA Overdose — Seizure',
@@ -5146,6 +5428,14 @@ const LORAZEPAM: DrugEntry = {
       indication: 'Acute agitation (intoxication/withdrawal)',
       regimen: '1-2 mg IV push over 1-2 min, or IM. May repeat q10-15 min PRN. Preferred for alcohol/sedative withdrawal-related agitation. Avoid in elderly delirium (independent risk factor for delirium, falls, respiratory depression). Unpredictable IM absorption — IV preferred when available.',
       weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 2 },
+    },
+    {
+      indication: 'Opioid withdrawal — anxiety',
+      regimen: '**IV:** 1\u20132 mg every 10 minutes PRN until anxiety controlled. **PO:** 1 mg PRN for mild-moderate anxiety. Alternative to diazepam, preferred in hepatic impairment (no active metabolites). Adjust dose for elderly patients.',
+    },
+    {
+      indication: 'Alcohol Withdrawal — Severe cirrhosis',
+      regimen: '2-4 mg IV q15-20 min when CIWA-Ar ≥8. Preferred over diazepam in severe liver disease — shorter half-life, no active metabolites, less risk of accumulation. High doses may cause propylene glycol toxicity — monitor osmol gap, consider switching to diazepam or phenobarbital if cumulative dose is high.',
     },
   ],
   contraindications: [
@@ -5210,7 +5500,7 @@ const PHENOBARBITAL: DrugEntry = {
   genericName: 'Phenobarbital sodium',
   drugClass: 'Barbiturate anticonvulsant',
   route: 'IV',
-  indications: ['Status epilepticus (2nd-line alternative)', 'Neonatal seizures', 'Alcohol withdrawal seizures', 'TCA refractory seizure'],
+  indications: ['Status epilepticus (2nd-line alternative)', 'Neonatal seizures', 'Alcohol withdrawal', 'TCA refractory seizure'],
   dosing: [
     {
       indication: 'TCA Overdose — Refractory Seizure',
@@ -5221,6 +5511,30 @@ const PHENOBARBITAL: DrugEntry = {
       indication: 'Status Epilepticus — 2nd line',
       regimen: '15-20 mg/kg IV at max rate 50-100 mg/min. Max single dose 2000 mg. Use when levetiracetam, valproate, and fosphenytoin are unavailable or contraindicated. Also effective as adjunct for alcohol withdrawal seizures. May be used as first-line emergent therapy when benzodiazepines are unavailable.',
       weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 2000 },
+    },
+    {
+      indication: 'Alcohol Withdrawal — Loading dose',
+      regimen: '10 mg/kg IV over 30 min. Use ideal body weight (phenobarbital is water-soluble). Achieves serum level ~15 μg/mL — well below toxic range. Safe for uncomplicated withdrawal. Omit or reduce if patient has received significant benzodiazepines.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 1000, label: 'Loading dose' },
+    },
+    {
+      indication: 'Alcohol Withdrawal — Titration',
+      regimen: '130 mg IV q30 min PRN. Target RASS 0 to -1 (calm, cooperative). Each dose adds ~2 μg/mL to serum level. Soft stop at cumulative 20 mg/kg (~30 μg/mL). Hard stop at 30 mg/kg (~40 μg/mL). If symptoms persist beyond 20 mg/kg, re-evaluate diagnosis (likely NOT alcohol withdrawal). Can also give 130 mg PO/IM for breakthrough on ward.',
+    },
+    {
+      indication: 'Alcohol Withdrawal — Refractory (adjunct to benzos)',
+      regimen: '130-260 mg IV q15-20 min. Use when benzodiazepines alone have failed. Max cumulative 15 mg/kg in 24h when combined with benzodiazepines. Synergistic respiratory depression — intubation frequently required. Smaller incremental doses with close monitoring.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', maxDose: 1500, label: 'Max with benzos (24h)' },
+    },
+    {
+      indication: 'Alcohol Withdrawal Seizure',
+      regimen: '15-20 mg/kg IV at 50-100 mg/min. Provides both anti-seizure activity AND treats underlying withdrawal. Superior to benzodiazepines for alcohol withdrawal seizures. Long half-life (~3-4 days) provides ongoing seizure prophylaxis via auto-taper. Phenytoin is NOT effective for withdrawal seizures.',
+      weightCalc: { dosePerKg: 20, unit: 'mg', maxDose: 2000, label: 'Seizure loading dose' },
+    },
+    {
+      indication: 'Alcohol Withdrawal — Prophylaxis',
+      regimen: '10-15 mg/kg total in divided doses (e.g., 5-7.5 mg/kg × 2 doses). IV or PO. For asymptomatic at-risk patients with definite heavy alcohol history. 10 mg/kg achieves ~15 μg/mL — minimal sedation, excellent seizure prophylaxis. Normal mental status required.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 1000, label: 'Prophylaxis' },
     },
   ],
   contraindications: [
@@ -6493,6 +6807,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   BERINERT,
   BUDESONIDE_NEB,
   BUMETANIDE,
+  BUPRENORPHINE,
   CALCIUM_CHLORIDE,
   CALCIUM_GLUCONATE,
   CALCIUM_GLUCONATE_GEL,
@@ -6506,6 +6821,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CIPROFLOXACIN,
   CLINDAMYCIN,
   CLEVIDIPINE,
+  CLONIDINE,
   CLOPIDOGREL,
   CONJUGATED_ESTROGEN,
   DABIGATRAN,
@@ -6557,6 +6873,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   LEVOTHYROXINE,
   LIDOCAINE,
   LINEZOLID,
+  LOFEXIDINE,
   LIPID_EMULSION,
   LIOTHYRONINE,
   LOPERAMIDE,
@@ -6565,6 +6882,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MAGNESIUM_SULFATE,
   MEDROXYPROGESTERONE,
   MEROPENEM,
+  METHADONE,
   METHOTREXATE,
   METHIMAZOLE,
   METHYLPREDNISOLONE,
@@ -6579,11 +6897,13 @@ export const ALL_DRUGS: DrugEntry[] = [
   N_ACETYLCYSTEINE,
   NACL_TABLETS,
   NALOXONE,
+  NALTREXONE,
   NICARDIPINE,
   NIMODIPINE,
   NITROFURANTOIN,
   NOREPINEPHRINE,
   NITROGLYCERIN,
+  OCTREOTIDE,
   OLANZAPINE,
   ONDANSETRON,
   ORAL_UREA,

@@ -235,6 +235,11 @@ const TOOLBAR_CONFIGS = {
         { id: 'lp-interp', label: 'LP Interp', icon: '\uD83E\uDDEA', action: 'calculator', target: 'lp-interp' },
         { id: 'csf-correct', label: 'CSF Correct', icon: '\uD83E\uDE78', action: 'calculator', target: 'csf-correction' },
     ],
+    'opioid-withdrawal': [
+        { id: 'cows', label: 'COWS', icon: '\uD83D\uDCCB', action: 'calculator', target: 'cows' },
+        { id: 'bup-guide', label: 'Bup Guide', icon: '\uD83D\uDC8A', action: 'overlay', target: 'ow-bup-guide' },
+        { id: 'precip-wd', label: 'Precip WD', icon: '\u26A0\uFE0F', action: 'jump', target: 'ow-precip-entry' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

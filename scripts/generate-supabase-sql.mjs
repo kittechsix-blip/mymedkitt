@@ -118,6 +118,7 @@ const TREE_REGISTRY = {
   'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
   'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
+  'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',    entryNodeId: 'ow-start',       categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -142,6 +143,7 @@ const CROSS_LISTINGS = {
   'delirium':         [{ categoryId: 'emergency-medicine' }],
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
   'sepsis':           [{ categoryId: 'critical-care' }],
+  'opioid-withdrawal': [{ categoryId: 'toxicology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
