@@ -4490,6 +4490,279 @@ const AUB_TREATMENT_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// PE TREATMENT CALCULATOR
+// -------------------------------------------------------------------
+const PE_TREATMENT_CALCULATOR = {
+    id: 'pe-treatment',
+    title: 'PE Treatment Selector',
+    subtitle: 'Risk-Stratified Anticoagulation for Acute Pulmonary Embolism',
+    description: 'Recommends optimal anticoagulation regimen for acute PE based on hemodynamic status, RV dysfunction, biomarkers, renal function, and patient-specific factors. Follows 2019 ESC Guidelines and 2021 CHEST Guidelines.',
+    fields: [
+        {
+            name: 'hemodynamic',
+            label: 'Hemodynamic Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Massive PE — hypotension/shock/arrest', points: 3 },
+                { label: 'Submassive PE — normotensive with RV strain/biomarkers', points: 2 },
+                { label: 'Low-Risk PE — normal hemodynamics, no RV dysfunction', points: 1 },
+            ],
+        },
+        {
+            name: 'rv-dysfunction',
+            label: 'RV Dysfunction on Echo/CT',
+            type: 'toggle',
+            points: 0,
+            description: 'RV/LV ratio >0.9, McConnell sign, TAPSE <16mm',
+        },
+        {
+            name: 'elevated-biomarkers',
+            label: 'Elevated Troponin or BNP',
+            type: 'toggle',
+            points: 0,
+            description: 'Elevated troponin AND/OR BNP/NT-proBNP',
+        },
+        {
+            name: 'pesi',
+            label: 'PESI/sPESI Score',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not calculated', points: 0 },
+                { label: 'PESI Class I-II or sPESI = 0 (Low-Risk)', points: 1 },
+                { label: 'PESI Class III-V or sPESI ≥1 (Higher-Risk)', points: 2 },
+            ],
+            description: 'Use PESI or sPESI calculator for low-risk patients',
+        },
+        {
+            name: 'crcl',
+            label: 'Creatinine Clearance',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mL/min',
+            description: 'For anticoagulant dosing selection',
+        },
+        {
+            name: 'bleeding-risk',
+            label: 'High Bleeding Risk',
+            type: 'toggle',
+            points: 0,
+            description: 'Active bleeding, recent surgery, or high bleeding risk',
+        },
+        {
+            name: 'pregnancy',
+            label: 'Pregnant',
+            type: 'toggle',
+            points: 0,
+            description: 'DOACs contraindicated — LMWH only',
+        },
+        {
+            name: 'cancer',
+            label: 'Cancer-Associated VTE',
+            type: 'toggle',
+            points: 0,
+            description: 'Active malignancy',
+        },
+        {
+            name: 'outpatient-eligible',
+            label: 'Outpatient Eligible (Hestia)',
+            type: 'toggle',
+            points: 0,
+            description: 'Stable, no O₂ need, good support, CrCl >30',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Risk stratification: Massive (mortality >15%), Submassive-High (3-15%), Submassive-Low (<3%), Low-Risk (<1%). Minimum 3 months anticoagulation.',
+    citations: [
+        'Konstantinides SV, Meyer G, et al. 2019 ESC Guidelines for the Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.',
+        'Stevens SM, Woller SC, et al. Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline. CHEST. 2021;160(6):e545-e608.',
+        'Jaff MR, McMurtry MS, et al. Management of Massive and Submassive Pulmonary Embolism. Circulation. 2011;123(16):1788-830.',
+    ],
+    computeResult: (values) => {
+        const hemodynamic = values['hemodynamic'] || 0;
+        const rvDysfunction = values['rv-dysfunction'] || 0;
+        const biomarkers = values['elevated-biomarkers'] || 0;
+        const pesi = values['pesi'] || 0;
+        const crcl = values['crcl'] || 0;
+        const bleedingRisk = values['bleeding-risk'] || 0;
+        const pregnancy = values['pregnancy'] || 0;
+        const cancer = values['cancer'] || 0;
+        const outpatient = values['outpatient-eligible'] || 0;
+        if (hemodynamic === 0) {
+            return {
+                value: '—',
+                label: 'Select Hemodynamic Status',
+                description: 'Select hemodynamic status to generate treatment recommendation.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        let riskCategory = '';
+        let regimen = '';
+        let dosing = '';
+        let notes = [];
+        let colorVar = '--color-text-secondary';
+        let disposition = '';
+        // ========== MASSIVE PE (HIGH-RISK) ==========
+        if (hemodynamic === 3) {
+            riskCategory = 'MASSIVE PE (High-Risk)';
+            colorVar = '--color-critical';
+            disposition = 'ADMIT ICU — IMMEDIATE INTERVENTION';
+            if (bleedingRisk === 1) {
+                regimen = 'UFH + Catheter-Directed Therapy (NO THROMBOLYSIS)';
+                dosing = '• UFH: 80 units/kg IV bolus → 18 units/kg/hr infusion\n• EMERGENT INTERVENTIONAL CARDIOLOGY/IR CONSULT\n• Catheter-directed therapy or surgical embolectomy\n• Consider ECMO as bridge in refractory shock';
+                notes.push('🚫 HIGH BLEEDING RISK — thrombolysis contraindicated');
+                notes.push('⚠️ MORTALITY >15% — immediate intervention required');
+                notes.push('Vasopressor support: Norepinephrine preferred');
+                notes.push('Cautious fluids: >500 mL can worsen RV failure');
+            }
+            else {
+                regimen = 'UFH + SYSTEMIC THROMBOLYSIS';
+                dosing = '• UFH: 80 units/kg IV bolus → 18 units/kg/hr infusion\n• ALTEPLASE: 100 mg IV over 2 hours\n• Accelerated (cardiac arrest): 0.6 mg/kg (max 50 mg) over 15 min';
+                notes.push('⚠️ MASSIVE PE — thrombolysis INDICATED');
+                notes.push('Mortality >15% without immediate reperfusion therapy');
+                notes.push('If thrombolysis fails → catheter-directed therapy or embolectomy');
+                notes.push('Vasopressor support: Norepinephrine preferred');
+                notes.push('Cautious fluids: >500 mL can worsen RV failure');
+            }
+            notes.push('🏥 Disposition: ICU admission with continuous monitoring');
+            notes.push('ICD-10: I26.02 (saddle embolus with acute cor pulmonale)');
+        }
+        // ========== SUBMASSIVE PE (INTERMEDIATE-RISK) ==========
+        else if (hemodynamic === 2) {
+            // Determine if intermediate-high or intermediate-low
+            const intermHigh = rvDysfunction === 1 && biomarkers === 1;
+            if (intermHigh) {
+                riskCategory = 'SUBMASSIVE PE — Intermediate-High Risk';
+                colorVar = '--color-critical';
+                disposition = 'ADMIT ICU — CLOSE MONITORING';
+                if (pregnancy === 1) {
+                    regimen = 'Enoxaparin (LMWH) — Pregnancy-Safe';
+                    dosing = '• Enoxaparin: 1 mg/kg SC q12h\n• DO NOT use DOACs (teratogenic)\n• Weight-based dosing throughout pregnancy';
+                    notes.push('🤰 PREGNANCY — LMWH is ONLY safe option');
+                    notes.push('Continue throughout pregnancy and 6 weeks postpartum');
+                }
+                else if (crcl > 0 && crcl < 30) {
+                    regimen = 'UFH (Renal Impairment)';
+                    dosing = '• UFH: 80 units/kg IV bolus → 18 units/kg/hr infusion\n• Adjust based on aPTT (goal 1.5-2.5× control)\n• Renally independent clearance';
+                    notes.push('🫘 RENAL IMPAIRMENT (CrCl <30) — UFH preferred');
+                }
+                else {
+                    regimen = 'Enoxaparin or UFH + RESCUE THROMBOLYSIS READY';
+                    dosing = '• Enoxaparin: 1 mg/kg SC q12h, OR\n• UFH: 80 units/kg IV bolus → 18 units/kg/hr (if considering thrombolysis)\n• RESCUE THROMBOLYSIS if deterioration: Alteplase 100 mg IV over 2h';
+                    notes.push('⚠️ BOTH RV dysfunction AND elevated biomarkers — HIGH-RISK');
+                    notes.push('Mortality 3-15% — watch closely for hemodynamic decompensation');
+                    notes.push('Consider half-dose alteplase (50 mg) to reduce bleeding risk');
+                }
+                notes.push('🏥 Disposition: ICU monitoring — high risk of deterioration');
+                notes.push('Reassess q4-6h for progression to massive PE');
+            }
+            else {
+                riskCategory = 'SUBMASSIVE PE — Intermediate-Low Risk';
+                colorVar = '--color-urgent';
+                disposition = 'ADMIT (Step-Down Unit)';
+                if (pregnancy === 1) {
+                    regimen = 'Enoxaparin (LMWH) — Pregnancy-Safe';
+                    dosing = '• Enoxaparin: 1 mg/kg SC q12h\n• DO NOT use DOACs (teratogenic)\n• Weight-based dosing throughout pregnancy';
+                    notes.push('🤰 PREGNANCY — LMWH is ONLY safe option');
+                }
+                else if (crcl > 0 && crcl < 30) {
+                    regimen = 'UFH (Renal Impairment)';
+                    dosing = '• UFH: 80 units/kg IV bolus → 18 units/kg/hr infusion\n• Adjust based on aPTT (goal 1.5-2.5× control)';
+                    notes.push('🫘 RENAL IMPAIRMENT (CrCl <30) — UFH preferred');
+                }
+                else {
+                    regimen = 'Enoxaparin (LMWH) or UFH';
+                    dosing = '• Enoxaparin: 1 mg/kg SC q12h, OR\n• UFH: 80 units/kg IV bolus → 18 units/kg/hr if concern for escalation';
+                    notes.push('Either RV dysfunction OR biomarkers — not both');
+                }
+                notes.push('🏥 Disposition: Step-down unit for monitoring');
+                notes.push('Thrombolysis NOT indicated unless deterioration');
+                notes.push('Reassess if clinical worsening → escalate to intermediate-high');
+            }
+        }
+        // ========== LOW-RISK PE ==========
+        else if (hemodynamic === 1) {
+            riskCategory = 'LOW-RISK PE';
+            colorVar = '--color-warning';
+            // Check PESI if provided
+            if (pesi === 2) {
+                notes.push('⚠️ PESI III-V or sPESI ≥1 — consider admission despite normal hemodynamics');
+                disposition = 'ADMIT for 24-48h observation';
+            }
+            else if (pesi === 1 && outpatient === 1) {
+                disposition = 'OUTPATIENT MANAGEMENT';
+            }
+            else {
+                disposition = 'ADMIT for 24-48h observation';
+            }
+            // Pregnancy check first
+            if (pregnancy === 1) {
+                regimen = 'Enoxaparin (LMWH) — Pregnancy-Safe';
+                dosing = '• Enoxaparin: 1 mg/kg SC q12h\n• DO NOT use DOACs (teratogenic)\n• Continue throughout pregnancy and 6 weeks postpartum';
+                notes.push('🤰 PREGNANCY — LMWH is ONLY safe option');
+                notes.push('🏥 Disposition: Brief admission for initiation and education');
+            }
+            // Renal impairment
+            else if (crcl > 0 && crcl < 30) {
+                if (crcl >= 15) {
+                    regimen = 'Enoxaparin (Dose-Adjusted) or UFH';
+                    dosing = '• Enoxaparin: 1 mg/kg SC DAILY (not q12h) for CrCl 15-30\n• Alternative: UFH with aPTT monitoring\n• Alternative: Apixaban (least renal elimination of DOACs)';
+                    notes.push('🫘 RENAL IMPAIRMENT (CrCl 15-30) — adjust LMWH to once daily');
+                    notes.push('Apixaban may be used cautiously (28% renal excretion)');
+                }
+                else {
+                    regimen = 'UFH (Severe Renal Impairment)';
+                    dosing = '• UFH: 80 units/kg IV bolus → 18 units/kg/hr infusion\n• Adjust based on aPTT (goal 1.5-2.5× control)\n• Renally independent clearance';
+                    notes.push('🫘 SEVERE RENAL IMPAIRMENT (CrCl <15) — UFH only');
+                }
+                notes.push('🏥 Disposition: Admit for monitoring and dose adjustment');
+            }
+            // Cancer-associated VTE
+            else if (cancer === 1) {
+                regimen = 'DOAC (Apixaban or Rivaroxaban Preferred for Cancer)';
+                dosing = '• Apixaban: 10 mg BID × 7 days → 5 mg BID, OR\n• Rivaroxaban: 15 mg BID × 21 days → 20 mg daily (with food)\n• Alternative: LMWH (enoxaparin 1 mg/kg SC q12h) if GI malignancy or high bleeding risk';
+                notes.push('🎗️ CANCER-ASSOCIATED VTE — DOACs now preferred over LMWH');
+                notes.push('Apixaban/rivaroxaban have lower GI bleeding than edoxaban');
+                notes.push('Duration: Continue anticoagulation as long as cancer is active');
+            }
+            // Standard outpatient-eligible low-risk
+            else if (outpatient === 1 && pesi === 1) {
+                regimen = 'DOAC (Outpatient)';
+                dosing = '• Apixaban: 10 mg BID × 7 days → 5 mg BID, OR\n• Rivaroxaban: 15 mg BID × 21 days → 20 mg daily (with food)';
+                notes.push('✅ OUTPATIENT ELIGIBLE — Hestia criteria met');
+                notes.push('No parenteral bridge needed with apixaban/rivaroxaban');
+                notes.push('Follow-up: 3-7 days with primary care or hematology');
+                notes.push('⚠️ Return precautions: worsening dyspnea, chest pain, hemoptysis, syncope');
+            }
+            // Brief admission
+            else {
+                regimen = 'DOAC (Brief Admission)';
+                dosing = '• Apixaban: 10 mg BID × 7 days → 5 mg BID, OR\n• Rivaroxaban: 15 mg BID × 21 days → 20 mg daily (with food)';
+                notes.push('🏥 Brief admission (24-48h) for initiation and observation');
+                notes.push('Transition to outpatient when clinically stable');
+            }
+            // Add low-risk mortality note
+            notes.push('Mortality <1% with appropriate anticoagulation');
+        }
+        // General notes for all categories
+        if (pregnancy !== 1) {
+            notes.push('📅 Duration: Minimum 3 months — extend for unprovoked PE or recurrent VTE');
+        }
+        if (cancer === 1 && pregnancy !== 1) {
+            notes.push('🎗️ Cancer VTE: Continue anticoagulation as long as malignancy is active');
+        }
+        const fullDescription = `**Risk Category:** ${riskCategory}\n\n**Recommended Regimen:**\n\n${dosing}\n\n**Clinical Guidance:**\n${notes.map(n => `• ${n}`).join('\n')}\n\n**Disposition:** ${disposition}`;
+        return {
+            value: riskCategory,
+            label: regimen,
+            description: fullDescription,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
 const CALCULATORS = {
     'rass': RASS_CALCULATOR,
     'pesi': PESI_CALCULATOR,
@@ -4544,6 +4817,7 @@ const CALCULATORS = {
     'mening-abx': MENING_ABX_CALCULATOR,
     'lp-interp': LP_INTERP_CALCULATOR,
     'aub-treatment': AUB_TREATMENT_CALCULATOR,
+    'pe-treatment': PE_TREATMENT_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

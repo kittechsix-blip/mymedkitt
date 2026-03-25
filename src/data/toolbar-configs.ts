@@ -177,9 +177,9 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ecg', label: 'ECG', icon: '📈', action: 'overlay', target: 'syncope-ecg' },
   ],
   'pe-treatment': [
+    { id: 'pe-treatment', label: 'Treatment', icon: '\uD83D\uDC8A', action: 'calculator', target: 'pe-treatment' },
     { id: 'thrombolysis', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'pe-massive-tx' },
     { id: 'pesi', label: 'PESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'pesi' },
-    { id: 'anticoag', label: 'Anticoag', icon: '\uD83D\uDC8A', action: 'jump', target: 'pe-anticoag-selection' },
   ],
   'acid-base': [
     { id: 'anion-gap', label: 'AG', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
