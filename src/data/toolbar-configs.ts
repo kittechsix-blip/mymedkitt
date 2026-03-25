@@ -243,6 +243,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'k-repletion', label: 'K Repletion', icon: '\u26A1', action: 'jump', target: 'dka-potassium-check' },
     { id: 'fluid-deficit', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'jump', target: 'dka-fluid-management' },
   ],
+  'meningitis': [
+    { id: 'mening-abx', label: 'Empiric Abx', icon: '\uD83D\uDC8A', action: 'calculator', target: 'mening-abx' },
+    { id: 'lp-interp', label: 'LP Interp', icon: '\uD83E\uDDEA', action: 'calculator', target: 'lp-interp' },
+    { id: 'csf-correct', label: 'CSF Correct', icon: '\uD83E\uDE78', action: 'calculator', target: 'csf-correction' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

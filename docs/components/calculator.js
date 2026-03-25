@@ -3731,6 +3731,530 @@ const MAP_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// Meningitis Empiric Antibiotics Calculator
+// -------------------------------------------------------------------
+const MENING_ABX_CALCULATOR = {
+    id: 'mening-abx',
+    title: 'Meningitis Empiric Abx',
+    subtitle: 'Age & Risk-Based Antimicrobial Regimens',
+    description: 'Provides exact empiric antibiotic dosing for suspected bacterial meningitis based on age, risk factors, and comorbidities. Includes pediatric regimens.',
+    fields: [
+        {
+            name: 'age-group',
+            label: 'Age Group',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Neonate (0-28 days)', points: 1 },
+                { label: 'Infant (1-23 months)', points: 2 },
+                { label: 'Child (2-17 years)', points: 3 },
+                { label: 'Adult 18-49 years', points: 4 },
+                { label: 'Adult ≥50 years', points: 5 },
+            ],
+        },
+        {
+            name: 'weight',
+            label: 'Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+            description: 'For weight-based dosing',
+        },
+        {
+            name: 'immunocompromised',
+            label: 'Immunocompromised?',
+            type: 'toggle',
+            points: 0,
+            description: 'HIV, transplant, immunosuppressants, cancer',
+        },
+        {
+            name: 'pregnant',
+            label: 'Pregnant?',
+            type: 'toggle',
+            points: 0,
+            description: '10-20× increased Listeria risk',
+        },
+        {
+            name: 'healthcare-associated',
+            label: 'Healthcare-Associated?',
+            type: 'toggle',
+            points: 0,
+            description: 'Recent neurosurgery, shunts, CSF leak, basilar skull fx',
+        },
+        {
+            name: 'encephalitis',
+            label: 'Encephalitis Features?',
+            type: 'toggle',
+            points: 0,
+            description: 'Focal deficits, seizures, personality changes',
+        },
+        {
+            name: 'pcn-allergy',
+            label: 'Penicillin Allergy?',
+            type: 'toggle',
+            points: 0,
+            description: 'Severe/anaphylactic reaction',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Give antibiotics within 1 HOUR of suspicion. Give dexamethasone WITH or up to 15-20 min BEFORE first antibiotic dose.',
+    citations: [
+        'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.',
+        'Tunkel AR, et al. Practice guidelines for the management of bacterial meningitis. Clin Infect Dis. 2004;39(9):1267-1284.',
+        'AAP Red Book 2024.',
+    ],
+    computeResult: (values) => {
+        const ageGroup = values['age-group'] || 0;
+        const weight = values['weight'] || 0;
+        const immuno = values['immunocompromised'] || 0;
+        const pregnant = values['pregnant'] || 0;
+        const hcAssoc = values['healthcare-associated'] || 0;
+        const enceph = values['encephalitis'] || 0;
+        const pcnAllergy = values['pcn-allergy'] || 0;
+        if (ageGroup === 0) {
+            return {
+                value: '—',
+                label: 'Select Age Group',
+                description: 'Select patient age group to generate empiric regimen.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        let drugs = [];
+        let targets = '';
+        let notes = [];
+        const needsListeria = ageGroup === 1 || ageGroup === 5 || immuno === 1 || pregnant === 1;
+        // Healthcare-associated takes priority
+        if (hcAssoc === 1) {
+            targets = 'MRSA, Pseudomonas, gram-negatives';
+            if (weight > 0) {
+                const vancDose = Math.round(weight * 17.5);
+                drugs.push(`Vancomycin ${vancDose} mg IV q8-12h (15-20 mg/kg)`);
+            }
+            else {
+                drugs.push('Vancomycin 15-20 mg/kg IV q8-12h');
+            }
+            drugs.push('Meropenem 2 g IV q8h (or Cefepime 2 g IV q8h)');
+            notes.push('Covers MRSA + Pseudomonas + resistant gram-negatives');
+            notes.push('CSF lactate is particularly useful — postop inflammation does NOT affect lactate');
+        }
+        // Neonates (0-28 days)
+        else if (ageGroup === 1) {
+            targets = 'GBS, E. coli, Listeria, HSV';
+            if (weight > 0) {
+                const ampDose = Math.round(weight * 100);
+                const cefoDose = Math.round(weight * 50);
+                const acycDose = Math.round(weight * 20);
+                drugs.push(`Ampicillin ${ampDose} mg IV q6h (100 mg/kg/dose)`);
+                drugs.push(`Cefotaxime ${cefoDose} mg IV q6h (50 mg/kg/dose) OR Gentamicin 4-5 mg/kg IV q24h`);
+                drugs.push(`Acyclovir ${acycDose} mg IV q8h (20 mg/kg/dose) — HSV coverage`);
+            }
+            else {
+                drugs.push('Ampicillin 100 mg/kg IV q6h');
+                drugs.push('Cefotaxime 50 mg/kg IV q6h OR Gentamicin 4-5 mg/kg IV q24h');
+                drugs.push('Acyclovir 20 mg/kg IV q8h — HSV coverage');
+            }
+            notes.push('⚠️ Use CEFOTAXIME, not ceftriaxone, in neonates (bilirubin displacement)');
+            notes.push('HSV encephalitis is common in neonates — always cover');
+        }
+        // Infants (1-23 months)
+        else if (ageGroup === 2) {
+            targets = 'S. pneumoniae, N. meningitidis, H. influenzae, Listeria (if <3 mo)';
+            if (weight > 0) {
+                const ctrxDose = Math.round(weight * 50);
+                const vancDose = Math.round(weight * 15);
+                drugs.push(`Ceftriaxone ${ctrxDose} mg IV q12h (50 mg/kg/dose, max 2g)`);
+                drugs.push(`Vancomycin ${vancDose} mg IV q6h (15 mg/kg/dose)`);
+                if (ageGroup === 2 && weight < 10) { // <3 months proxy
+                    const ampDose = Math.round(weight * 75);
+                    drugs.push(`Ampicillin ${ampDose} mg IV q6h (75 mg/kg/dose) — Listeria coverage if <3 months`);
+                }
+            }
+            else {
+                drugs.push('Ceftriaxone 50 mg/kg IV q12h (max 2 g/dose)');
+                drugs.push('Vancomycin 15 mg/kg IV q6h');
+                drugs.push('Consider Ampicillin 75 mg/kg IV q6h if <3 months (Listeria)');
+            }
+            notes.push('Dexamethasone 0.15 mg/kg IV q6h × 2-4 days — give BEFORE or WITH antibiotics');
+        }
+        // Children (2-17 years)
+        else if (ageGroup === 3) {
+            targets = 'S. pneumoniae, N. meningitidis';
+            if (weight > 0) {
+                const ctrxDose = Math.min(Math.round(weight * 50), 2000);
+                const vancDose = Math.round(weight * 15);
+                const dexDose = Math.round(weight * 0.15 * 10) / 10;
+                drugs.push(`Ceftriaxone ${ctrxDose} mg IV q12h (50 mg/kg, max 2g)`);
+                drugs.push(`Vancomycin ${vancDose} mg IV q6h (15 mg/kg)`);
+                drugs.push(`Dexamethasone ${dexDose} mg IV q6h × 2-4 days`);
+            }
+            else {
+                drugs.push('Ceftriaxone 50 mg/kg IV q12h (max 2 g/dose)');
+                drugs.push('Vancomycin 15 mg/kg IV q6h');
+                drugs.push('Dexamethasone 0.15 mg/kg IV q6h × 2-4 days');
+            }
+        }
+        // Adult 18-49
+        else if (ageGroup === 4 && !needsListeria) {
+            targets = 'S. pneumoniae, N. meningitidis';
+            drugs.push('Ceftriaxone 2 g IV q12h');
+            if (weight > 0) {
+                const vancDose = Math.round(weight * 17.5);
+                drugs.push(`Vancomycin ${vancDose} mg IV q8-12h (15-20 mg/kg)`);
+                const dexDose = Math.round(weight * 0.15 * 10) / 10;
+                drugs.push(`Dexamethasone ${dexDose} mg IV q6h × 2-4 days`);
+            }
+            else {
+                drugs.push('Vancomycin 15-20 mg/kg IV q8-12h');
+                drugs.push('Dexamethasone 0.15 mg/kg IV q6h × 2-4 days');
+            }
+        }
+        // Adult ≥50 or Listeria risk
+        else {
+            targets = 'S. pneumoniae, N. meningitidis, L. monocytogenes';
+            drugs.push('Ceftriaxone 2 g IV q12h');
+            if (weight > 0) {
+                const vancDose = Math.round(weight * 17.5);
+                drugs.push(`Vancomycin ${vancDose} mg IV q8-12h (15-20 mg/kg)`);
+                const dexDose = Math.round(weight * 0.15 * 10) / 10;
+                drugs.push(`Dexamethasone ${dexDose} mg IV q6h × 2-4 days`);
+            }
+            else {
+                drugs.push('Vancomycin 15-20 mg/kg IV q8-12h');
+                drugs.push('Dexamethasone 0.15 mg/kg IV q6h × 2-4 days');
+            }
+            if (pcnAllergy === 1) {
+                drugs.push('Meropenem 2 g IV q8h (replaces ceftriaxone + covers Listeria)');
+                notes.push('Meropenem covers Listeria — ampicillin not needed');
+            }
+            else {
+                drugs.push('Ampicillin 2 g IV q4h — Listeria coverage');
+            }
+            if (pregnant === 1) {
+                notes.push('⚠️ Pregnant: 10-20× increased Listeria risk');
+            }
+            if (immuno === 1) {
+                notes.push('⚠️ Immunocompromised: expanded pathogen coverage essential');
+            }
+        }
+        // Add acyclovir for encephalitis
+        if (enceph === 1) {
+            if (weight > 0) {
+                const acycDose = Math.round(weight * 10);
+                drugs.push(`Acyclovir ${acycDose} mg IV q8h (10 mg/kg) — HSV encephalitis`);
+            }
+            else {
+                drugs.push('Acyclovir 10 mg/kg IV q8h — HSV encephalitis');
+            }
+            notes.push('HSV encephalitis mortality: 70% untreated → 9% with acyclovir');
+        }
+        // PCN allergy notes
+        if (pcnAllergy === 1 && ageGroup !== 5 && !needsListeria && hcAssoc !== 1) {
+            notes.push('For severe PCN allergy: Meropenem 2 g IV q8h can replace ceftriaxone');
+        }
+        let desc = `**Targets:** ${targets}\n\n**REGIMEN:**\n`;
+        drugs.forEach(d => { desc += `• ${d}\n`; });
+        if (notes.length > 0) {
+            desc += '\n**NOTES:**\n';
+            notes.forEach(n => { desc += `• ${n}\n`; });
+        }
+        desc += '\n⏱️ Give antibiotics within 1 HOUR of suspicion — delays increase mortality.';
+        return {
+            value: drugs.length + ' drugs',
+            label: 'Empiric Regimen',
+            description: desc,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// LP Interpretation Calculator
+// -------------------------------------------------------------------
+const LP_INTERP_CALCULATOR = {
+    id: 'lp-interp',
+    title: 'LP Interpretation',
+    subtitle: 'CSF Pattern Analysis for CNS Infections',
+    description: 'Analyzes CSF values to determine bacterial vs viral vs fungal meningitis pattern. Includes key biomarkers and diagnostic guidance.',
+    fields: [
+        {
+            name: 'wbc',
+            label: 'CSF WBC Count',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'cells/μL',
+            description: 'Normal: <5 cells/μL',
+        },
+        {
+            name: 'neutrophils',
+            label: 'Neutrophil %',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: '%',
+            description: 'Predominant cell type',
+        },
+        {
+            name: 'csf-glucose',
+            label: 'CSF Glucose',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mg/dL',
+            description: 'Normal: 40-70 mg/dL',
+        },
+        {
+            name: 'serum-glucose',
+            label: 'Serum Glucose',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mg/dL',
+            description: 'For CSF:serum ratio',
+        },
+        {
+            name: 'protein',
+            label: 'CSF Protein',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mg/dL',
+            description: 'Normal: <50 mg/dL',
+        },
+        {
+            name: 'lactate',
+            label: 'CSF Lactate',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mg/dL',
+            description: 'Normal: <35 mg/dL. Key discriminator.',
+        },
+        {
+            name: 'opening-pressure',
+            label: 'Opening Pressure',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'cm H₂O',
+            description: 'Normal: <20 cm H₂O',
+        },
+        {
+            name: 'gram-stain',
+            label: 'Gram Stain Result',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not yet available', points: 0 },
+                { label: 'Negative', points: 1 },
+                { label: 'Gram-positive cocci', points: 2 },
+                { label: 'Gram-negative diplococci', points: 3 },
+                { label: 'Gram-positive rods', points: 4 },
+                { label: 'Gram-negative rods', points: 5 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '6% of culture-proven bacterial meningitis cases have NO elevated WBC. 10% have lymphocyte-predominant CSF. When in doubt, treat as bacterial.',
+    citations: [
+        'Costerus JM, et al. Community-acquired bacterial meningitis. Curr Opin Infect Dis. 2017;30(1):135-141.',
+        'Sakushima K, et al. CSF lactate for differentiating bacterial from aseptic meningitis: meta-analysis. J Infect. 2011;62(4):255-262.',
+        'van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. NEJM. 2004;351(18):1849-1859.',
+    ],
+    computeResult: (values) => {
+        const wbc = values['wbc'] ?? -1;
+        const neut = values['neutrophils'] ?? -1;
+        const csfGluc = values['csf-glucose'] ?? -1;
+        const serumGluc = values['serum-glucose'] ?? -1;
+        const protein = values['protein'] ?? -1;
+        const lactate = values['lactate'] ?? -1;
+        const op = values['opening-pressure'] ?? -1;
+        const gram = values['gram-stain'] || 0;
+        // Need at least WBC to interpret
+        if (wbc < 0) {
+            return {
+                value: '—',
+                label: 'Enter CSF Values',
+                description: 'Enter CSF WBC count and other values for pattern analysis.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        // Calculate CSF:serum glucose ratio
+        let glucRatio = -1;
+        if (csfGluc > 0 && serumGluc > 0) {
+            glucRatio = Math.round((csfGluc / serumGluc) * 100) / 100;
+        }
+        // Scoring for bacterial likelihood
+        let bacterialPoints = 0;
+        let viralPoints = 0;
+        let fungalPoints = 0;
+        const findings = [];
+        // WBC analysis
+        if (wbc < 5) {
+            findings.push(`WBC: ${wbc} cells/μL — NORMAL`);
+            viralPoints += 1;
+        }
+        else if (wbc >= 5 && wbc < 100) {
+            findings.push(`WBC: ${wbc} cells/μL — mildly elevated (5-100)`);
+            viralPoints += 1;
+        }
+        else if (wbc >= 100 && wbc < 1000) {
+            findings.push(`WBC: ${wbc} cells/μL — moderately elevated`);
+            bacterialPoints += 1;
+        }
+        else if (wbc >= 1000) {
+            findings.push(`WBC: ${wbc} cells/μL — highly elevated (bacterial typical: 1000-5000)`);
+            bacterialPoints += 2;
+        }
+        // Neutrophil predominance
+        if (neut >= 0) {
+            if (neut >= 80) {
+                findings.push(`Neutrophils: ${neut}% — NEUTROPHIL predominant (bacterial pattern)`);
+                bacterialPoints += 2;
+            }
+            else if (neut >= 50) {
+                findings.push(`Neutrophils: ${neut}% — mixed cellularity`);
+                bacterialPoints += 1;
+            }
+            else {
+                findings.push(`Neutrophils: ${neut}% — LYMPHOCYTE predominant (viral/fungal pattern)`);
+                viralPoints += 1;
+                fungalPoints += 1;
+            }
+        }
+        // CSF:serum glucose ratio
+        if (glucRatio > 0) {
+            if (glucRatio > 0.67) {
+                findings.push(`CSF:serum glucose ratio: ${glucRatio} — NORMAL (>0.67)`);
+                viralPoints += 1;
+            }
+            else if (glucRatio >= 0.36 && glucRatio <= 0.67) {
+                findings.push(`CSF:serum glucose ratio: ${glucRatio} — mildly decreased`);
+                bacterialPoints += 1;
+            }
+            else if (glucRatio < 0.36) {
+                findings.push(`CSF:serum glucose ratio: ${glucRatio} — SIGNIFICANTLY LOW (<0.36, bacterial/fungal)`);
+                bacterialPoints += 2;
+                fungalPoints += 2;
+            }
+        }
+        else if (csfGluc > 0) {
+            if (csfGluc < 40) {
+                findings.push(`CSF glucose: ${csfGluc} mg/dL — LOW (bacterial/fungal pattern)`);
+                bacterialPoints += 1;
+                fungalPoints += 1;
+            }
+            else {
+                findings.push(`CSF glucose: ${csfGluc} mg/dL — normal range`);
+            }
+        }
+        // Protein
+        if (protein >= 0) {
+            if (protein < 50) {
+                findings.push(`CSF protein: ${protein} mg/dL — NORMAL (<50)`);
+            }
+            else if (protein >= 50 && protein < 135) {
+                findings.push(`CSF protein: ${protein} mg/dL — mildly elevated`);
+                viralPoints += 1;
+            }
+            else if (protein >= 135) {
+                findings.push(`CSF protein: ${protein} mg/dL — ELEVATED (>135, bacterial pattern)`);
+                bacterialPoints += 2;
+            }
+        }
+        // Lactate — best discriminator
+        if (lactate >= 0) {
+            if (lactate < 35) {
+                findings.push(`CSF lactate: ${lactate} mg/dL — NORMAL (<35, favors viral)`);
+                viralPoints += 2;
+            }
+            else if (lactate >= 35) {
+                findings.push(`CSF lactate: ${lactate} mg/dL — ELEVATED (≥35, 93% sens / 97% spec for BACTERIAL)`);
+                bacterialPoints += 3;
+            }
+        }
+        // Opening pressure
+        if (op >= 0) {
+            if (op < 20) {
+                findings.push(`Opening pressure: ${op} cm H₂O — NORMAL (<20)`);
+            }
+            else if (op >= 20 && op < 40) {
+                findings.push(`Opening pressure: ${op} cm H₂O — elevated`);
+                bacterialPoints += 1;
+            }
+            else if (op >= 40) {
+                findings.push(`Opening pressure: ${op} cm H₂O — MARKEDLY ELEVATED (39% of bacterial meningitis)`);
+                bacterialPoints += 2;
+                fungalPoints += 2;
+            }
+        }
+        // Gram stain
+        if (gram >= 2) {
+            bacterialPoints += 5; // Definitive
+            const organisms = {
+                2: 'Gram-positive cocci (S. pneumoniae, S. aureus)',
+                3: 'Gram-negative diplococci (N. meningitidis)',
+                4: 'Gram-positive rods (L. monocytogenes)',
+                5: 'Gram-negative rods (E. coli, Klebsiella, Pseudomonas)',
+            };
+            findings.push(`Gram stain: ${organisms[gram]} — BACTERIAL CONFIRMED`);
+        }
+        else if (gram === 1) {
+            findings.push('Gram stain: Negative (does NOT exclude bacterial — 60-99% sensitivity)');
+        }
+        // Determine pattern
+        let pattern;
+        let label;
+        let colorVar;
+        let guidance;
+        if (gram >= 2) {
+            pattern = 'BACTERIAL — CONFIRMED';
+            label = 'Bacterial Meningitis';
+            colorVar = '--color-danger';
+            guidance = 'Continue empiric antibiotics. Tailor based on sensitivities. Continue dexamethasone if S. pneumoniae.';
+        }
+        else if (bacterialPoints >= 5) {
+            pattern = 'HIGH PROBABILITY BACTERIAL';
+            label = 'Bacterial Pattern';
+            colorVar = '--color-danger';
+            guidance = 'Continue empiric antibiotics pending cultures/PCR. Continue dexamethasone. Admit to ICU or monitored bed.';
+        }
+        else if (bacterialPoints >= 3 && bacterialPoints > viralPoints) {
+            pattern = 'CONCERNING FOR BACTERIAL';
+            label = 'Indeterminate — Treat as Bacterial';
+            colorVar = '--color-warning';
+            guidance = '6% of bacterial meningitis has normal WBC. 10% has lymphocyte predominance. TREAT AS BACTERIAL until cultures negative. Continue dexamethasone.';
+        }
+        else if (fungalPoints >= 4) {
+            pattern = 'FUNGAL PATTERN';
+            label = 'Suspect Fungal';
+            colorVar = '--color-warning';
+            guidance = 'Lymphocyte predominant + very low glucose + elevated OP = fungal pattern. Send CSF CrAg. ID consultation for antifungal therapy. Do NOT give corticosteroids.';
+        }
+        else if (viralPoints >= 3 && bacterialPoints < 2) {
+            pattern = 'VIRAL PATTERN';
+            label = 'Probable Viral';
+            colorVar = '--color-primary';
+            guidance = 'Lymphocyte predominant, normal/mild glucose decrease, normal lactate = viral pattern. Add acyclovir if ANY encephalitis features. May be appropriate for discharge if nontoxic and symptoms controlled.';
+        }
+        else {
+            pattern = 'EQUIVOCAL';
+            label = 'Equivocal — Treat as Bacterial';
+            colorVar = '--color-warning';
+            guidance = 'Pattern does not clearly fit one category. TREAT AS BACTERIAL until cultures negative. Early bacterial meningitis may mimic viral patterns.';
+        }
+        let desc = `**PATTERN:** ${pattern}\n\n**FINDINGS:**\n`;
+        findings.forEach(f => { desc += `• ${f}\n`; });
+        desc += `\n**GUIDANCE:** ${guidance}`;
+        return {
+            value: pattern,
+            label,
+            description: desc,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
 const CALCULATORS = {
@@ -3784,6 +4308,8 @@ const CALCULATORS = {
     'sal-tox-guide': SAL_TOX_GUIDE_CALCULATOR,
     'qsofa': QSOFA_CALCULATOR,
     'map-calculator': MAP_CALCULATOR,
+    'mening-abx': MENING_ABX_CALCULATOR,
+    'lp-interp': LP_INTERP_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
