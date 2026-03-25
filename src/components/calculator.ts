@@ -4592,11 +4592,11 @@ const AUB_TREATMENT_CALCULATOR: CalculatorDefinition = {
     // Check estrogen contraindications
     const estrogenContraindicated = vte === 1 || migraine === 1 || smoker === 1 || liver === 1 || breastCa === 1;
 
-    let regimen: string;
-    let dosing: string;
-    let efficacy: string;
+    let regimen: string = '';
+    let dosing: string = '';
+    let efficacy: string = '';
     let notes: string[] = [];
-    let colorVar: string;
+    let colorVar: string = '--color-text-secondary';
 
     // UNSTABLE → IV Conjugated Estrogen (Premarin)
     if (hemodynamic === 2) {

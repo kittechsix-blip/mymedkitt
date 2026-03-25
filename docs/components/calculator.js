@@ -3765,35 +3765,35 @@ const MENING_ABX_CALCULATOR = {
             name: 'immunocompromised',
             label: 'Immunocompromised?',
             type: 'toggle',
-            points: 0,
+            points: 1,
             description: 'HIV, transplant, immunosuppressants, cancer',
         },
         {
             name: 'pregnant',
             label: 'Pregnant?',
             type: 'toggle',
-            points: 0,
+            points: 1,
             description: '10-20× increased Listeria risk',
         },
         {
             name: 'healthcare-associated',
             label: 'Healthcare-Associated?',
             type: 'toggle',
-            points: 0,
+            points: 1,
             description: 'Recent neurosurgery, shunts, CSF leak, basilar skull fx',
         },
         {
             name: 'encephalitis',
             label: 'Encephalitis Features?',
             type: 'toggle',
-            points: 0,
+            points: 1,
             description: 'Focal deficits, seizures, personality changes',
         },
         {
             name: 'pcn-allergy',
             label: 'Penicillin Allergy?',
             type: 'toggle',
-            points: 0,
+            points: 1,
             description: 'Severe/anaphylactic reaction',
         },
     ],
@@ -4372,11 +4372,11 @@ const AUB_TREATMENT_CALCULATOR = {
         }
         // Check estrogen contraindications
         const estrogenContraindicated = vte === 1 || migraine === 1 || smoker === 1 || liver === 1 || breastCa === 1;
-        let regimen;
-        let dosing;
-        let efficacy;
+        let regimen = '';
+        let dosing = '';
+        let efficacy = '';
         let notes = [];
-        let colorVar;
+        let colorVar = '--color-text-secondary';
         // UNSTABLE → IV Conjugated Estrogen (Premarin)
         if (hemodynamic === 2) {
             if (estrogenContraindicated) {
