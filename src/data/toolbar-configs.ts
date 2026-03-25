@@ -255,7 +255,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'precip-wd', label: 'Precip WD', icon: '\u26A0\uFE0F', action: 'jump', target: 'ow-precip-entry' },
   ],
   'alcohol-withdrawal': [
-    { id: 'pawss', label: 'PAWSS', icon: '\uD83D\uDCCB', action: 'calculator', target: 'pawss' },
+    { id: 'ciwa', label: 'CIWA', icon: '\uD83D\uDCCB', action: 'calculator', target: 'ciwa-ar' },
     { id: 'phenobarb', label: 'Phenobarb', icon: '\uD83D\uDC89', action: 'jump', target: 'aw-pb-protocol' },
     { id: 'seizure', label: 'Seizure', icon: '\u26A1', action: 'jump', target: 'aw-seizure' },
     { id: 'aud', label: 'AUD Meds', icon: '\uD83D\uDC8A', action: 'jump', target: 'aw-aud-screen' },
