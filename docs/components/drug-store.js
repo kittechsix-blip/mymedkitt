@@ -230,6 +230,9 @@ export function showDrugModal(drugId, indicationHint) {
             const pinBtn = document.createElement('button');
             pinBtn.className = 'dose-pin-btn';
             const pinDoseText = dose.regimen.split('\n')[0].split('.')[0].trim();
+            // Extract route from indication (same logic as calculator)
+            const pinRouteMatch = dose.indication.match(/\b(IM|IV|IO|SC|SQ|PO|PR|ET|nebulized|topical|IV\/IO|IM\/IV)\b/i);
+            const pinRoute = pinRouteMatch ? pinRouteMatch[1].toUpperCase() : drug.route.split('/')[0];
             const alreadyPinned = isDoseInList(drug.name, pinDoseText);
             pinBtn.textContent = alreadyPinned ? '\u2713 Pinned' : '+ Pin Dose';
             pinBtn.disabled = alreadyPinned;
@@ -237,7 +240,7 @@ export function showDrugModal(drugId, indicationHint) {
                 addToDosingList({
                     drug: drug.name,
                     dose: pinDoseText,
-                    route: drug.route,
+                    route: pinRoute,
                     indication: dose.indication,
                 });
                 pinBtn.textContent = '\u2713 Pinned';
