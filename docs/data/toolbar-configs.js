@@ -240,6 +240,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'bup-guide', label: 'Bup Guide', icon: '\uD83D\uDC8A', action: 'overlay', target: 'ow-bup-guide' },
         { id: 'precip-wd', label: 'Precip WD', icon: '\u26A0\uFE0F', action: 'jump', target: 'ow-precip-entry' },
     ],
+    'alcohol-withdrawal': [
+        { id: 'pawss', label: 'PAWSS', icon: '\uD83D\uDCCB', action: 'calculator', target: 'pawss' },
+        { id: 'phenobarb', label: 'Phenobarb', icon: '\uD83D\uDC89', action: 'jump', target: 'aw-pb-protocol' },
+        { id: 'seizure', label: 'Seizure', icon: '\u26A1', action: 'jump', target: 'aw-seizure' },
+        { id: 'aud', label: 'AUD Meds', icon: '\uD83D\uDC8A', action: 'jump', target: 'aw-aud-screen' },
+        { id: 'timing', label: 'Timing', icon: '\u23F0', action: 'overlay', target: 'aw-withdrawal-timing' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
