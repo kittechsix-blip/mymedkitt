@@ -4257,6 +4257,239 @@ const LP_INTERP_CALCULATOR = {
 // -------------------------------------------------------------------
 // Calculator Registry
 // -------------------------------------------------------------------
+// AUB TREATMENT CALCULATOR
+// -------------------------------------------------------------------
+const AUB_TREATMENT_CALCULATOR = {
+    id: 'aub-treatment',
+    title: 'AUB Treatment Selector',
+    subtitle: 'Evidence-Based Medical Management for Acute Uterine Bleeding',
+    description: 'Recommends optimal medical therapy for acute abnormal uterine bleeding based on hemodynamic status, bleeding severity, age, comorbidities, and contraindications. All regimens require pregnancy exclusion.',
+    fields: [
+        {
+            name: 'hemodynamic',
+            label: 'Hemodynamic Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable — normal vitals', points: 1 },
+                { label: 'Unstable — tachycardia, hypotension, or orthostasis', points: 2 },
+            ],
+        },
+        {
+            name: 'bleeding-severity',
+            label: 'Bleeding Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Moderate — concerning but not heavy/active', points: 1 },
+                { label: 'Heavy/Active — soaking pads rapidly', points: 2 },
+            ],
+        },
+        {
+            name: 'age',
+            label: 'Age',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'years',
+            description: 'For endometrial cancer risk assessment',
+        },
+        {
+            name: 'obesity',
+            label: 'Obesity / PCOS',
+            type: 'toggle',
+            points: 0,
+            description: 'Anovulation likely — progesterone-based therapy preferred',
+        },
+        {
+            name: 'vte-history',
+            label: 'VTE/PE History',
+            type: 'toggle',
+            points: 0,
+            description: 'History of DVT, PE, or known thrombophilia',
+        },
+        {
+            name: 'migraine-aura',
+            label: 'Migraine with Aura',
+            type: 'toggle',
+            points: 0,
+            description: 'Estrogen contraindicated',
+        },
+        {
+            name: 'smoker',
+            label: 'Smoker Age ≥35',
+            type: 'toggle',
+            points: 0,
+            description: 'Estrogen contraindicated in smoker ≥35',
+        },
+        {
+            name: 'liver-disease',
+            label: 'Active Liver Disease',
+            type: 'toggle',
+            points: 0,
+            description: 'Severe hepatic dysfunction',
+        },
+        {
+            name: 'breast-cancer',
+            label: 'Current/Past Breast Cancer',
+            type: 'toggle',
+            points: 0,
+            description: 'Estrogen contraindicated',
+        },
+        {
+            name: 'coagulopathy',
+            label: 'Known Coagulopathy',
+            type: 'toggle',
+            points: 0,
+            description: 'vWD or other bleeding disorder — TXA beneficial',
+        },
+    ],
+    results: [],
+    thresholdNote: 'All hormonal therapies require pregnancy exclusion (hCG negative). Consult ACOG Committee Opinion 557.',
+    citations: [
+        'ACOG Committee Opinion No. 557. Management of Acute Abnormal Uterine Bleeding in Nonpregnant Reproductive-Aged Women. Obstet Gynecol. 2013;121(4):891-896.',
+        'Munro MG, Mainor N, Basu R. Oral medroxyprogesterone acetate and combination oral contraceptives for acute uterine bleeding: a randomized controlled trial. Obstet Gynecol. 2006;108:924-929.',
+        'DeVore GR, Owens O, Kase N. Use of intravenous Premarin in the treatment of dysfunctional uterine bleeding. Obstet Gynecol. 1982;59(3):285-291.',
+    ],
+    computeResult: (values) => {
+        const hemodynamic = values['hemodynamic'] || 0;
+        const severity = values['bleeding-severity'] || 0;
+        const age = values['age'] || 0;
+        const obesity = values['obesity'] || 0;
+        const vte = values['vte-history'] || 0;
+        const migraine = values['migraine-aura'] || 0;
+        const smoker = values['smoker'] || 0;
+        const liver = values['liver-disease'] || 0;
+        const breastCa = values['breast-cancer'] || 0;
+        const coag = values['coagulopathy'] || 0;
+        if (hemodynamic === 0 || severity === 0) {
+            return {
+                value: '—',
+                label: 'Complete Required Fields',
+                description: 'Select hemodynamic status and bleeding severity to generate treatment recommendation.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        // Check estrogen contraindications
+        const estrogenContraindicated = vte === 1 || migraine === 1 || smoker === 1 || liver === 1 || breastCa === 1;
+        let regimen;
+        let dosing;
+        let efficacy;
+        let notes = [];
+        let colorVar;
+        // UNSTABLE → IV Conjugated Estrogen (Premarin)
+        if (hemodynamic === 2) {
+            if (estrogenContraindicated) {
+                regimen = 'Tranexamic Acid + Medroxyprogesterone + GYN Consult';
+                dosing = '• TXA: 10 mg/kg IV (max 600 mg) q8h\n• MPA: 20 mg PO TID × 7 days (when able to tolerate PO)\n• EMERGENT GYN CONSULT — consider intrauterine tamponade';
+                efficacy = 'TXA reduces bleeding 30-55%; MPA 76% efficacy when stable';
+                colorVar = '--color-critical';
+                notes.push('⚠️ UNSTABLE + ESTROGEN CONTRAINDICATED — limited options');
+                notes.push('2 large-bore IVs, crystalloid bolus, type & crossmatch');
+                notes.push('Intrauterine tamponade: 26F Foley with 30 mL saline in uterine cavity');
+                notes.push('May need procedural intervention (D&C, embolization)');
+            }
+            else {
+                regimen = 'IV Conjugated Estrogen (Premarin)';
+                dosing = '• Premarin 25 mg IV q4-6h × max 24h (max 6 doses)\n• Ondansetron 4-8 mg IV prophylactically (significant nausea)\n• MUST follow with MPA 10 mg PO daily × 10 days after bleeding controlled';
+                efficacy = '72% stop bleeding within 8 hours — ONLY FDA-approved therapy for acute AUB';
+                colorVar = '--color-critical';
+                notes.push('⚠️ HEMODYNAMICALLY UNSTABLE');
+                notes.push('2 large-bore IVs, crystalloid bolus, type & crossmatch');
+                notes.push('Emergent GYN consult');
+                notes.push('Unopposed estrogen risks endometrial hyperplasia — progestin follow-up mandatory');
+                if (coag === 1) {
+                    notes.push('🧪 COAGULOPATHY: Add TXA 10 mg/kg IV q8h as adjunct');
+                }
+            }
+        }
+        // STABLE + HEAVY ACTIVE BLEEDING
+        else if (severity === 2) {
+            if (estrogenContraindicated) {
+                regimen = 'Medroxyprogesterone Acetate (MPA)';
+                dosing = '• MPA 20 mg PO TID × 7 days\n• Add TXA 1.3 g PO TID × 5 days for more rapid hemostasis';
+                efficacy = '76% stop bleeding within median 3 days';
+                colorVar = '--color-urgent';
+                notes.push('🚫 Estrogen contraindicated — progestin-only regimen');
+                if (obesity === 1) {
+                    notes.push('💡 EXCELLENT choice for obesity/PCOS — anovulation is likely mechanism');
+                }
+                if (coag === 1) {
+                    notes.push('🧪 COAGULOPATHY: TXA is ESSENTIAL adjunct (reduces bleeding 30-55%)');
+                }
+                notes.push('Iron supplementation: Ferrous sulfate 325 mg PO daily');
+            }
+            else {
+                // Heavy bleeding + no estrogen contraindications → OCPs preferred over IV estrogen if stable
+                regimen = 'Combined Oral Contraceptive (High-Dose Taper)';
+                dosing = '• Monophasic OCP (35 mcg ethinyl estradiol): 1 tablet TID × 7 days\n• Then taper to 1 tablet daily for cycle regulation\n• Add TXA 1.3 g PO TID × 5 days for more rapid control';
+                efficacy = '88% stop bleeding within median 3 days';
+                colorVar = '--color-urgent';
+                notes.push('Preferred for ovulatory dysfunction AUB (most common cause)');
+                notes.push('Provides both acute control and long-term cycle regulation');
+                if (coag === 1) {
+                    notes.push('🧪 COAGULOPATHY: TXA adjunct reduces bleeding 30-55%');
+                    notes.push('⚠️ Caution: Additive thrombotic risk with OCP + TXA (use clinical judgment)');
+                }
+                if (obesity === 1) {
+                    notes.push('💡 PCOS/Obesity: OCPs reduce endometrial hyperplasia risk long-term');
+                }
+                notes.push('Iron supplementation if anemic');
+            }
+        }
+        // STABLE + MODERATE BLEEDING
+        else {
+            if (estrogenContraindicated) {
+                regimen = 'Medroxyprogesterone Acetate (MPA) ± TXA';
+                dosing = '• MPA 20 mg PO TID × 7 days\n• Optional: TXA 1.3 g PO TID × 5 days if more rapid control needed';
+                efficacy = '76% stop bleeding within median 3 days';
+                colorVar = '--color-warning';
+                notes.push('🚫 Estrogen contraindicated — progestin-only regimen');
+                if (obesity === 1) {
+                    notes.push('💡 EXCELLENT choice for obesity/PCOS');
+                }
+                if (coag === 1) {
+                    notes.push('🧪 COAGULOPATHY: Add TXA (reduces bleeding 30-55%)');
+                }
+            }
+            else {
+                regimen = 'Combined Oral Contraceptive (Standard Taper)';
+                dosing = '• Monophasic OCP (35 mcg ethinyl estradiol): 1 tablet TID × 7 days\n• Then taper to 1 tablet daily for cycle regulation';
+                efficacy = '88% stop bleeding within median 3 days';
+                colorVar = '--color-warning';
+                notes.push('First-line for moderate AUB with no estrogen contraindications');
+                notes.push('Provides cycle regulation as well as acute control');
+                if (coag === 1) {
+                    notes.push('🧪 COAGULOPATHY: Consider adding TXA 1.3 g PO TID × 5 days');
+                }
+                if (obesity === 1) {
+                    notes.push('💡 PCOS/Obesity: Long-term OCPs reduce endometrial cancer risk');
+                }
+            }
+        }
+        // Age-based endometrial biopsy guidance
+        if (age >= 45) {
+            notes.push(`🔬 AGE ≥45: Endometrial biopsy INDICATED per ACOG (rule out hyperplasia/malignancy)`);
+            notes.push('Arrange urgent GYN follow-up for biopsy within 1-2 weeks');
+        }
+        else if (age > 0 && age < 45 && (obesity === 1 || severity === 2)) {
+            notes.push('🔬 Consider endometrial biopsy: Age <45 with obesity/PCOS or persistent AUB');
+        }
+        // Disposition guidance
+        const disposition = hemodynamic === 2 ? 'ADMIT' : (severity === 2 ? 'Consider admission vs close GYN follow-up' : 'Discharge with GYN follow-up in 1-2 weeks');
+        notes.push(`📋 Disposition: ${disposition}`);
+        // Return precautions
+        notes.push('⚠️ Return if: soaking >1 pad/hour × 2+ hours, lightheadedness, syncope, fever');
+        const fullDescription = `**Recommended Regimen:**\n\n${dosing}\n\n**Efficacy:** ${efficacy}\n\n**Clinical Guidance:**\n${notes.map(n => `• ${n}`).join('\n')}`;
+        return {
+            value: regimen,
+            label: regimen,
+            description: fullDescription,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
 const CALCULATORS = {
     'rass': RASS_CALCULATOR,
     'pesi': PESI_CALCULATOR,
@@ -4310,6 +4543,7 @@ const CALCULATORS = {
     'map-calculator': MAP_CALCULATOR,
     'mening-abx': MENING_ABX_CALCULATOR,
     'lp-interp': LP_INTERP_CALCULATOR,
+    'aub-treatment': AUB_TREATMENT_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

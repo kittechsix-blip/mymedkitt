@@ -46,8 +46,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'miscarriage', label: 'Miscarriage', icon: '\uD83E\uDE78', action: 'jump', target: 'ft-miscarriage-type' },
   ],
   'aub': [
+    { id: 'aub-treatment', label: 'Treatment', icon: '\uD83D\uDC8A', action: 'calculator', target: 'aub-treatment' },
     { id: 'unstable', label: 'Unstable', icon: '\uD83D\uDEA8', action: 'jump', target: 'aub-unstable' },
-    { id: 'medical-rx', label: 'Medical Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'aub-treatment-medical' },
     { id: 'classify', label: 'Classify', icon: '\uD83E\uDE78', action: 'jump', target: 'aub-classify' },
   ],
   'distal-radius': [
