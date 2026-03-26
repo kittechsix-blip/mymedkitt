@@ -131,7 +131,8 @@ function renderFlow(container) {
     // Render active card
     const currentNode = controller.getCurrentNode();
     // Update sticky dosing header based on current node's treatment
-    if (currentNode && currentNode.type === 'result' && currentNode.treatment) {
+    // Show for any node with treatment property (result or info with dosing recommendations)
+    if (currentNode && currentNode.treatment) {
         updateStickyDosingHeader(currentNode.treatment);
     }
     else {
