@@ -121,6 +121,7 @@ const TREE_REGISTRY = {
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',    entryNodeId: 'ow-start',       categoryId: 'emergency-medicine' },
   'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',   entryNodeId: 'aw-start',       categoryId: 'emergency-medicine' },
   'tuberculosis':         { prefix: 'TUBERCULOSIS',          entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },
+  'hemophilia':           { prefix: 'HEMOPHILIA',            entryNodeId: 'hemo-start',     categoryId: 'heme-onc' },
 };
 
 // Cross-listing: which consults appear in multiple categories
