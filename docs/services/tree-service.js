@@ -317,6 +317,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/migraine.js');
             return { nodes: m.MIGRAINE_NODES, entryNodeId: 'migraine-start', categoryId: 'neurology', moduleLabels: m.MIGRAINE_MODULE_LABELS, citations: m.MIGRAINE_CITATIONS };
         },
+        'snake-envenomation': async () => {
+            const m = await import('../data/trees/snake-envenomation.js');
+            return { nodes: m.SNAKE_ENVENOMATION_NODES, entryNodeId: 'snake-start', categoryId: 'emergency-medicine', moduleLabels: m.SNAKE_ENVENOMATION_MODULE_LABELS, citations: m.SNAKE_ENVENOMATION_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -6749,6 +6749,459 @@ ${contraindications.map(c => `• ${c}`).join('\n')}
         };
     },
 };
+// ---------------------------------------------------------------------------
+// Snakebite Severity Score Calculator
+// ---------------------------------------------------------------------------
+const SNAKE_SEVERITY_CALCULATOR = {
+    id: 'snake-severity',
+    title: 'Snakebite Severity Score',
+    subtitle: 'Pit Viper Envenomation Assessment',
+    description: 'Assesses severity of pit viper envenomation. Change of 1 point = clinically significant.',
+    fields: [
+        {
+            name: 'pulmonary',
+            label: 'Pulmonary',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Dyspnea, mild bronchospasm', points: 1 },
+                { label: 'Respiratory distress, stridor, accessory muscle use', points: 2 },
+                { label: 'Cyanosis, respiratory failure, intubated', points: 3 },
+            ],
+        },
+        {
+            name: 'cardiovascular',
+            label: 'Cardiovascular',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Tachycardia (HR 100-120), mild hypotension (SBP 80-100)', points: 1 },
+                { label: 'HR 120-180, SBP 70-80', points: 2 },
+                { label: 'HR >180 or <40, SBP <70, cardiac arrest', points: 3 },
+            ],
+        },
+        {
+            name: 'local',
+            label: 'Local Wound',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None or minimal swelling', points: 0 },
+                { label: 'Swelling confined to bite area', points: 1 },
+                { label: 'Swelling crosses major joint', points: 2 },
+                { label: 'Swelling entire limb, significant necrosis', points: 3 },
+            ],
+        },
+        {
+            name: 'gi',
+            label: 'GI',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Pain, nausea, vomiting, diarrhea', points: 1 },
+                { label: 'Repeated vomiting/diarrhea', points: 2 },
+            ],
+        },
+        {
+            name: 'heme',
+            label: 'Hematologic',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal', points: 0 },
+                { label: 'Slight coag abnormalities, no bleeding', points: 1 },
+                { label: 'Abnormal PT/INR, PTT >50, fibrinogen <100, platelets <50k', points: 2 },
+                { label: 'Uncontrollable bleeding, severe coagulopathy', points: 3 },
+            ],
+        },
+        {
+            name: 'neuro',
+            label: 'Neurologic',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Apprehension, paresthesias, headache', points: 1 },
+                { label: 'Confusion, fasciculations, mild weakness', points: 2 },
+                { label: 'Seizures, coma, paralysis', points: 3 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 1, label: 'Score 0', risk: 'Dry Bite / No Envenomation', mortality: 'Observe 8-12h, repeat labs', colorVar: '--color-primary' },
+        { min: 1, max: 4, label: 'Score 1-3', risk: 'Mild Envenomation', mortality: 'Consider observation vs antivenom', colorVar: '--color-primary' },
+        { min: 4, max: 8, label: 'Score 4-7', risk: 'Moderate Envenomation', mortality: 'Antivenom indicated', colorVar: '--color-warning' },
+        { min: 8, max: Infinity, label: 'Score 8+', risk: 'Severe Envenomation', mortality: 'Aggressive antivenom + ICU', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Change of 1 point = clinically significant worsening',
+    citations: [
+        'Dart RC, et al. A prospective study of Crotalidae polyvalent immune Fab antivenom. Ann Emerg Med. 2001.',
+        'EB Medicine. Evidence-Based Management of Snake Envenomations. 2023.',
+    ],
+};
+// ---------------------------------------------------------------------------
+// Snake Antivenom Dosing Calculator
+// ---------------------------------------------------------------------------
+const SNAKE_ANTIVENOM_CALCULATOR = {
+    id: 'snake-antivenom',
+    title: 'Antivenom Dosing',
+    subtitle: 'CroFab / Anavip for Pit Viper Bites',
+    description: 'Calculates antivenom dosing with reconstitution instructions. Pediatric dose = adult dose.',
+    fields: [
+        {
+            name: 'antivenom',
+            label: 'Antivenom Available',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'CroFab (Ovine Fab)', points: 1 },
+                { label: 'Anavip (Equine F(ab\')2)', points: 2 },
+            ],
+        },
+        {
+            name: 'severity',
+            label: 'Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Moderate (progression, systemic sx, lab abnl)', points: 1 },
+                { label: 'Severe (shock, airway, active bleeding)', points: 2 },
+            ],
+        },
+        { name: 'pediatric', label: 'Pediatric patient', type: 'toggle', points: 0, description: 'Same dose as adults - based on venom amount' },
+        { name: 'allergicRisk', label: 'Papain/papaya/bromelain allergy (CroFab risk)', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'CroFab Prescribing Information. BTG International.',
+        'Anavip Prescribing Information. Instituto Bioclon.',
+    ],
+    computeResult: (values) => {
+        const antivenom = values.antivenom || 1;
+        const severity = values.severity || 1;
+        const pediatric = values.pediatric || 0;
+        const allergicRisk = values.allergicRisk || 0;
+        const pedsNote = pediatric ? '\n\n**Pediatric Note:** Same dose as adults. Adjust dilution volume for small children (100-150 mL for infants).' : '';
+        const allergyNote = allergicRisk ? '\n\n**⚠️ Allergy Risk:** Higher reaction risk with papain/papaya/bromelain allergies. Have epinephrine ready. Benefits usually outweigh risks.' : '';
+        if (antivenom === 1) {
+            // CroFab
+            const initialDose = severity === 2 ? '8-12 vials' : '4-6 vials';
+            return {
+                value: initialDose,
+                label: 'CroFab Initial Dose',
+                description: `**CroFab Protocol:**
+
+**Reconstitution:**
+1. Reconstitute each vial with 18 mL NS
+2. Mix by continuous inversion (1-2/sec) — **DO NOT SHAKE**
+3. Should take < 7 minutes
+4. Dilute total to 250 mL NS
+5. Use within 4 hours
+
+**Initial Dose:** ${initialDose} IV
+
+**Administration:**
+• Start slow: 25-50 mL/hr × 10 min
+• If no reaction: increase to 250 mL/hr
+• Total infusion ~60 min
+
+**Maintenance (Controversial):**
+• 2 vials at 6, 12, and 18 hours
+• Consult Poison Control
+
+**Reassess** 30-60 min post-infusion. Repeat if inadequate.${pedsNote}${allergyNote}`,
+                colorVar: severity === 2 ? '--color-danger' : '--color-warning',
+            };
+        }
+        else {
+            // Anavip
+            return {
+                value: '10 vials',
+                label: 'Anavip Initial Dose',
+                description: `**Anavip Protocol:**
+
+**Reconstitution:**
+1. Reconstitute each vial with 10 mL NS
+2. Dilute total to 250 mL NS
+
+**Initial Dose:** 10 vials IV over 60 min
+
+**Administration:**
+• Infuse over 60 minutes
+• Monitor for anaphylaxis
+
+**Repeat Dosing:**
+• Repeat 10 vials every hour until control
+• No scheduled maintenance required
+• For recurrence: 4 vials as needed
+
+**Advantages:**
+• Longer half-life
+• Lower recurrence rates
+• No maintenance schedule${pedsNote}${allergyNote}`,
+                colorVar: severity === 2 ? '--color-danger' : '--color-warning',
+            };
+        }
+    },
+};
+// ---------------------------------------------------------------------------
+// Snakebite Recurrence Monitor Calculator
+// ---------------------------------------------------------------------------
+const SNAKE_RECURRENCE_CALCULATOR = {
+    id: 'snake-recurrence',
+    title: 'Recurrence Monitor',
+    subtitle: 'Late Coagulopathy After Antivenom',
+    description: 'Identifies lab thresholds requiring retreatment. CroFab has 32-50% recurrence rate.',
+    fields: [
+        { name: 'inr', label: 'INR', type: 'number', points: 0 },
+        { name: 'ptt', label: 'PTT (seconds)', type: 'number', points: 0 },
+        { name: 'platelets', label: 'Platelets (thousands)', type: 'number', points: 0, description: 'e.g., enter 25 for 25,000' },
+        { name: 'fibrinogen', label: 'Fibrinogen (mg/dL)', type: 'number', points: 0 },
+        { name: 'daysPost', label: 'Days since antivenom', type: 'number', points: 0 },
+        { name: 'bleeding', label: 'Any clinical bleeding', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Boyer LV, et al. Recurrence phenomena after immunoglobulin therapy. Ann Emerg Med. 2001.',
+        'EB Medicine. Snake Envenomation Management. 2023.',
+    ],
+    computeResult: (values) => {
+        const inr = values.inr || 0;
+        const ptt = values.ptt || 0;
+        const platelets = values.platelets || 999;
+        const fibrinogen = values.fibrinogen || 999;
+        const daysPost = values.daysPost || 0;
+        const bleeding = values.bleeding || 0;
+        const thresholds = [];
+        let needsRetreat = false;
+        if (inr > 3.0) {
+            thresholds.push('INR > 3.0');
+            needsRetreat = true;
+        }
+        if (ptt > 50) {
+            thresholds.push('PTT > 50 sec');
+            needsRetreat = true;
+        }
+        if (platelets < 25) {
+            thresholds.push('Platelets < 25,000');
+            needsRetreat = true;
+        }
+        if (fibrinogen < 50) {
+            thresholds.push('Fibrinogen < 50 mg/dL');
+            needsRetreat = true;
+        }
+        const multiComponent = thresholds.length >= 2;
+        if (multiComponent)
+            needsRetreat = true;
+        const peakRisk = daysPost >= 2 && daysPost <= 7;
+        if (bleeding && needsRetreat) {
+            return {
+                value: 'URGENT RETREAT',
+                label: 'Active Bleeding + Coagulopathy',
+                description: `**⛔ RETREATMENT INDICATED — ACTIVE BLEEDING**
+
+**Abnormal parameters:**
+${thresholds.map(t => `• ${t}`).join('\n')}
+
+**Management:**
+1. **Repeat antivenom** (CroFab 2-4 vials or Anavip 4 vials)
+2. Blood products for SIGNIFICANT bleeding:
+   • FFP for INR
+   • Platelets if < 50k
+   • Cryoprecipitate for fibrinogen < 100
+3. Serial labs q4-6h
+4. Consider admission/readmission
+
+**Blood products alone only temporarily correct coagulopathy** — antivenom addresses underlying cause.
+
+**Poison Control:** 1-800-222-1222`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (needsRetreat) {
+            return {
+                value: 'RETREAT INDICATED',
+                label: 'Lab Thresholds Met',
+                description: `**RETREATMENT INDICATED**
+
+**Abnormal parameters:**
+${thresholds.map(t => `• ${t}`).join('\n')}
+${multiComponent ? '\n**Multi-component coagulopathy present.**' : ''}
+
+**No active bleeding — antivenom only:**
+• CroFab: 2-4 vials
+• Anavip: 4 vials
+
+**Timeline:** ${peakRisk ? '**Peak risk period (days 2-7)**' : `Day ${daysPost} post-antivenom`}
+
+**Follow-up labs:**
+• Repeat in 6-12 hours
+• Continue monitoring until stable
+
+**Poison Control:** 1-800-222-1222`,
+                colorVar: '--color-warning',
+            };
+        }
+        // No retreatment needed
+        const followUp = daysPost < 2 ? 'Schedule labs for days 2-3 and days 5-7.' :
+            daysPost < 5 ? 'Repeat labs at days 5-7.' :
+                daysPost < 7 ? 'One more check recommended around day 7.' :
+                    'Past peak risk period. Clinical follow-up as needed.';
+        return {
+            value: 'MONITOR',
+            label: 'Labs Acceptable',
+            description: `**No retreatment currently indicated.**
+
+**Current values within acceptable range.**
+
+**Retreatment thresholds:**
+• INR > 3.0
+• PTT > 50 seconds
+• Platelets < 25,000
+• Fibrinogen < 50 mg/dL
+• Multi-component coagulopathy
+
+**Timing:** ${peakRisk ? '**Currently in peak risk period (days 2-7)**' : `Day ${daysPost} post-antivenom`}
+
+**Follow-up:** ${followUp}
+
+**Return precautions:** Bleeding, easy bruising, hematuria`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// ---------------------------------------------------------------------------
+// Coral Snake Protocol Calculator
+// ---------------------------------------------------------------------------
+const CORAL_SNAKE_CALCULATOR = {
+    id: 'coral-snake',
+    title: 'Coral Snake Protocol',
+    subtitle: 'Elapidae Envenomation Management',
+    description: 'Coral snake evaluation and antivenom guidance. All patients require ICU admission.',
+    fields: [
+        { name: 'confirmed', label: 'Confirmed/suspected coral snake bite', type: 'toggle', points: 0 },
+        { name: 'hoursPost', label: 'Hours since bite', type: 'number', points: 0 },
+        {
+            name: 'neuroSx',
+            label: 'Neurotoxicity Signs',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Ptosis, diplopia (early)', points: 1 },
+                { label: 'Dysarthria, dysphagia, weakness', points: 2 },
+                { label: 'Respiratory depression/failure', points: 3 },
+            ],
+        },
+        { name: 'antivenomAvailable', label: 'Antivenom available at facility', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'FDA. Coral Snake Antivenin Lot Extension. 2024.',
+        'StatPearls. Coral Snake Toxicity. 2024.',
+    ],
+    computeResult: (values) => {
+        const neuroSx = values.neuroSx || 0;
+        const hoursPost = values.hoursPost || 0;
+        const antivenomAvailable = values.antivenomAvailable || 0;
+        if (neuroSx >= 3) {
+            return {
+                value: 'RESPIRATORY FAILURE',
+                label: 'Critical — Airway Emergency',
+                description: `**⛔ RESPIRATORY FAILURE / IMPENDING**
+
+**IMMEDIATE ACTIONS:**
+1. **Intubate now** — do NOT wait
+2. Prepare for prolonged mechanical ventilation (may be weeks)
+3. Antivenom if available (may not reverse established toxicity)
+
+**Antivenom (if available):**
+• North American Coral Snake Antivenin (NACSA)
+• 3-5 vials IV
+• May not reverse established neurotoxicity (presynaptic toxin)
+
+**Supportive care:**
+• Full ICU support
+• Paralysis may be prolonged
+• Recovery possible with supportive care
+
+**Poison Control:** 1-800-222-1222
+• Coordinate antivenom acquisition
+• Guidance on Coralmyn (Mexican alternative)`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (neuroSx >= 1) {
+            return {
+                value: 'NEUROTOXICITY',
+                label: 'Early Neurotoxicity — Give Antivenom',
+                description: `**NEUROTOXICITY DEVELOPING — ANTIVENOM NOW**
+
+**Signs present:** ${neuroSx === 1 ? 'Ptosis, diplopia (early signs)' : 'Dysarthria, dysphagia, weakness'}
+
+**Antivenom:**
+${antivenomAvailable ?
+                    `• NACSA 3-5 vials IV
+• Give at FIRST sign of neurotoxicity
+• Earlier = better (presynaptic toxin may be irreversible once established)` :
+                    `**⚠️ ANTIVENOM NOT AVAILABLE AT FACILITY**
+• Contact Poison Control IMMEDIATELY: 1-800-222-1222
+• Coordinate transfer or antivenom acquisition
+• Coralmyn (Mexican) available through FDA investigational protocol`}
+
+**Monitoring:**
+• Neuro checks q1h
+• Prepare for intubation
+• ICU admission mandatory
+
+**Once neurotoxicity develops, it may not fully reverse** — presynaptic toxin.`,
+                colorVar: '--color-warning',
+            };
+        }
+        // No symptoms yet
+        const delayedRisk = hoursPost < 12 ? '**⚠️ Neurotoxicity may be delayed up to 12+ hours.** Patient is still at risk.' :
+            hoursPost < 24 ? 'Approaching 24-hour mark. If no symptoms, good prognosis.' :
+                'Past 24 hours without symptoms — low risk for delayed toxicity.';
+        return {
+            value: 'OBSERVE ICU',
+            label: 'No Neurotoxicity — ICU Observation',
+            description: `**ALL CORAL SNAKE BITES REQUIRE ICU ADMISSION**
+
+**Current status:** No neurotoxicity yet (${hoursPost}h post-bite)
+
+**Key Points:**
+• Do NOT give antivenom prophylactically
+• Give at FIRST sign of neurotoxicity
+• Once symptoms start, progression can be rapid
+
+${delayedRisk}
+
+**ICU Monitoring:**
+• Neuro checks q1-2h
+• Respiratory monitoring
+• Bedside spirometry if available
+• Low threshold for intubation
+
+**Watch for:**
+• Ptosis (earliest sign)
+• Diplopia
+• Dysarthria, dysphagia
+• Limb weakness
+• Respiratory decline
+
+**Minimum observation:** 24 hours ICU
+
+**Poison Control:** 1-800-222-1222`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     'cows': COWS_CALCULATOR,
     'rass': RASS_CALCULATOR,
@@ -6823,6 +7276,10 @@ const CALCULATORS = {
     'migraine-criteria': MIGRAINE_CRITERIA_CALCULATOR,
     'migraine-tx-algo': MIGRAINE_TX_ALGO_CALCULATOR,
     'dhe-protocol': DHE_PROTOCOL_CALCULATOR,
+    'snake-severity': SNAKE_SEVERITY_CALCULATOR,
+    'snake-antivenom': SNAKE_ANTIVENOM_CALCULATOR,
+    'snake-recurrence': SNAKE_RECURRENCE_CALCULATOR,
+    'coral-snake': CORAL_SNAKE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

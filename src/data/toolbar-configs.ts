@@ -299,6 +299,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'migraine-tx', label: 'Tx Algo', icon: '💊', action: 'calculator', target: 'migraine-tx-algo' },
     { id: 'migraine-dhe', label: 'DHE', icon: '💉', action: 'calculator', target: 'dhe-protocol' },
   ],
+  'snake-envenomation': [
+    { id: 'snake-severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'snake-severity' },
+    { id: 'snake-antivenom', label: 'Antivenom', icon: '💉', action: 'calculator', target: 'snake-antivenom' },
+    { id: 'snake-recurrence', label: 'Recurrence', icon: '🔄', action: 'calculator', target: 'snake-recurrence' },
+    { id: 'snake-coral', label: 'Coral Snake', icon: '🐍', action: 'calculator', target: 'coral-snake' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

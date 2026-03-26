@@ -129,6 +129,7 @@ const TREE_REGISTRY = {
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
   'chf-exacerbation':     { prefix: 'CHF_EXACERBATION',      entryNodeId: 'chf-start',      categoryId: 'cardiology' },
   'migraine':             { prefix: 'MIGRAINE',              entryNodeId: 'migraine-start', categoryId: 'neurology' },
+  'snake-envenomation':   { prefix: 'SNAKE_ENVENOMATION',    entryNodeId: 'snake-start',    categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {
