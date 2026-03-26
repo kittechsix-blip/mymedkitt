@@ -132,6 +132,7 @@ const TREE_REGISTRY = {
   'snake-envenomation':   { prefix: 'SNAKE_ENVENOMATION',    entryNodeId: 'snake-start',    categoryId: 'emergency-medicine' },
   'aacg':                 { prefix: 'AACG',                  entryNodeId: 'aacg-start',     categoryId: 'ophthalmology' },
   'chemical-burn':        { prefix: 'CHEMICAL_BURN',         entryNodeId: 'chemburn-start', categoryId: 'ophthalmology' },
+  'orbital-cellulitis':   { prefix: 'ORBITAL_CELLULITIS',    entryNodeId: 'orbital-start',  categoryId: 'ophthalmology' },
 };
 
 const CROSS_LISTINGS = {

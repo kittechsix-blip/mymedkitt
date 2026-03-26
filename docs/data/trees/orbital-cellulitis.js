@@ -1,0 +1,370 @@
+// MedKitt — Orbital vs Preseptal Cellulitis
+// Sources: OpenEvidence, EB Medicine, UpToDate, StatPearls, EyeWiki
+// 5 modules: Recognition → Differentiation → Imaging → Treatment → Disposition
+// Ophthalmology consult #3
+export const ORBITAL_CELLULITIS_NODES = [
+    // =====================================================================
+    // MODULE 1: RECOGNITION
+    // =====================================================================
+    {
+        id: 'orbital-start',
+        type: 'info',
+        module: 1,
+        title: 'Orbital vs Preseptal Cellulitis',
+        body: '**Critical Distinction: Orbital Septum is the Key Boundary**\n\n| Type | Location | Severity |\n|------|----------|----------|\n| **Preseptal** | ANTERIOR to septum (eyelid/periorbital) | Lower risk |\n| **Orbital** | POSTERIOR to septum (orbit contents) | **Vision-threatening** |\n\n**The orbital septum** is a thin fibrous membrane that acts as a barrier preventing superficial infections from spreading to deeper orbital structures.\n\n**Chandler Classification (Stages I-V):**\n\n| Stage | Name |\n|-------|------|\n| I | Preseptal cellulitis |\n| II | Orbital cellulitis |\n| III | Subperiosteal abscess |\n| IV | Orbital abscess |\n| V | **Cavernous sinus thrombosis** |\n\n**Primary Etiology:** Sinusitis (86-98% of orbital cases)\n- Ethmoid sinusitis most common (especially pediatrics)\n\n[Chandler Classification Tool](#/calculator/orbital-chandler) [1][2]',
+        citation: [1, 2],
+        calculatorLinks: [
+            { id: 'orbital-chandler', label: 'Chandler Classification' },
+        ],
+        next: 'orbital-exam',
+    },
+    {
+        id: 'orbital-exam',
+        type: 'info',
+        module: 1,
+        title: 'Clinical Examination',
+        body: '**Key Exam Components:**\n\n**1. Visual Acuity:**\n- Document in each eye (Snellen or near card)\n- Decreased acuity = orbital involvement\n\n**2. Pupil Exam:**\n- Check for APD (afferent pupillary defect)\n- APD = optic nerve compromise = **emergent**\n\n**3. Extraocular Movements:**\n- Pain with movement = orbital involvement\n- Restricted movement (ophthalmoplegia) = orbital\n- Diplopia = orbital\n\n**4. Globe Position:**\n- Proptosis = orbital involvement\n- Measure with Hertel exophthalmometer if available\n- >2mm asymmetry is significant\n\n**5. Lids/Periorbital:**\n- Erythema, edema, warmth\n- Present in both preseptal AND orbital\n\n**6. Conjunctiva:**\n- Chemosis (conjunctival edema) = orbital\n\n**7. Fundoscopy:**\n- Papilledema = concern for CST or elevated IOP\n\n[Chandler Classification Tool](#/calculator/orbital-chandler) [1][2][3]',
+        citation: [1, 2, 3],
+        calculatorLinks: [
+            { id: 'orbital-chandler', label: 'Chandler Classification' },
+        ],
+        next: 'orbital-differentiate',
+    },
+    // =====================================================================
+    // MODULE 2: DIFFERENTIATION
+    // =====================================================================
+    {
+        id: 'orbital-differentiate',
+        type: 'info',
+        module: 2,
+        title: 'Preseptal vs Orbital: Key Findings',
+        body: '**Clinical Features Comparison:**\n\n| Finding | Preseptal | Orbital |\n|---------|-----------|----------|\n| Lid erythema/edema | ✓ | ✓ |\n| **Vision changes** | ✗ | **✓** |\n| **Pain with EOM** | ✗/minimal | **✓** |\n| **Ophthalmoplegia** | ✗ | **✓** |\n| **Proptosis** | ✗ | **✓** |\n| **Chemosis** | ✗ | **✓** |\n| Fever | Uncommon | Common |\n| Pupil abnormality | ✗ | Possible (APD) |\n\n**Clinical Pearl:**\n\nIf **ANY** orbital sign present:\n- Proptosis\n- Ophthalmoplegia\n- Vision change\n- Pain with EOM\n\n→ **Treat as orbital cellulitis until proven otherwise.**\n\n**DO NOT delay imaging or antibiotics.** [1][2][3]',
+        citation: [1, 2, 3],
+        next: 'orbital-findings-decision',
+    },
+    {
+        id: 'orbital-findings-decision',
+        type: 'question',
+        module: 2,
+        title: 'Clinical Assessment',
+        body: '**Does the patient have ANY orbital signs?**\n\n- Decreased visual acuity\n- Proptosis\n- Pain with eye movement\n- Ophthalmoplegia (restricted EOM)\n- Diplopia\n- Chemosis\n- APD',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Yes - Orbital Signs Present',
+                description: 'Any of the above findings',
+                next: 'orbital-suspected',
+                urgency: 'critical',
+            },
+            {
+                label: 'No - Only Lid Findings',
+                description: 'Erythema/edema but normal vision, EOM, no proptosis',
+                next: 'preseptal-pathway',
+            },
+            {
+                label: 'Bilateral Signs',
+                description: 'Concerning for cavernous sinus thrombosis',
+                next: 'orbital-cst',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'preseptal-pathway',
+        type: 'info',
+        module: 2,
+        title: 'Preseptal Cellulitis (Chandler I)',
+        body: '**Preseptal Cellulitis — Lower Risk**\n\n**Typical Presentation:**\n- Eyelid erythema and edema\n- Warmth, tenderness\n- May have low-grade fever\n- **Normal vision, normal EOM, no proptosis**\n\n**Common Causes:**\n- Local skin trauma (laceration, insect bite, abrasion)\n- Upper respiratory infection\n- Chalazion/hordeolum\n- Impetigo, dacryocystitis\n\n**Microbiology:**\n- *Staphylococcus aureus* (including MRSA)\n- *Streptococcus* species\n- *Haemophilus influenzae* (declining with vaccination)\n\n**Key Point:** Preseptal cellulitis does NOT progress to orbital cellulitis due to the protective orbital septum barrier.\n\n**However:** If uncertain, image to rule out orbital involvement. [1][3]',
+        citation: [1, 3],
+        next: 'preseptal-age-decision',
+    },
+    {
+        id: 'preseptal-age-decision',
+        type: 'question',
+        module: 2,
+        title: 'Preseptal: Age & Risk Factors',
+        body: '**Assess age and risk factors:**',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Age <1 Year',
+                description: 'Mandatory admission',
+                next: 'preseptal-admit',
+                urgency: 'critical',
+            },
+            {
+                label: 'Age 1-5 Years',
+                description: 'Higher risk, consider admission',
+                next: 'preseptal-peds',
+            },
+            {
+                label: 'Age >5 Years or Adult, Well-Appearing',
+                description: 'May consider outpatient if reliable',
+                next: 'preseptal-outpatient',
+            },
+            {
+                label: 'Any Age with Systemic Symptoms',
+                description: 'Toxic-appearing, high fever, vomiting',
+                next: 'preseptal-admit',
+            },
+        ],
+    },
+    {
+        id: 'preseptal-peds',
+        type: 'info',
+        module: 2,
+        title: 'Pediatric Preseptal',
+        body: '**Age 1-5 Years — Borderline for Admission:**\n\n**Consider Admission if:**\n- Significant edema (unable to examine eye)\n- Fever >38.5°C\n- Immunocompromised\n- Concern for orbital involvement (can\'t rule out)\n- Unable to tolerate PO\n- Unreliable follow-up\n- Failed outpatient antibiotics\n\n**May Discharge if ALL met:**\n- Mild edema (can examine eye)\n- Afebrile or low-grade fever\n- Tolerating PO\n- No systemic toxicity\n- Reliable caregiver\n- 24-hour follow-up confirmed\n\n**Outpatient Antibiotics:**\n- Amoxicillin-clavulanate 45 mg/kg/day divided BID × 10 days\n- If MRSA concern: Add TMP-SMX or clindamycin [1][3]',
+        citation: [1, 3],
+        next: 'preseptal-dispo',
+    },
+    {
+        id: 'preseptal-outpatient',
+        type: 'info',
+        module: 2,
+        title: 'Preseptal: Outpatient Management',
+        body: '**Outpatient Treatment — Older Child/Adult:**\n\n**Inclusion Criteria:**\n- Age >1 year (some say >5 years)\n- No orbital signs\n- Able to tolerate PO\n- Not toxic-appearing\n- Reliable follow-up in 24-48 hours\n\n**Antibiotic Options:**\n\n| Drug | Dose | Duration |\n|------|------|----------|\n| **Amoxicillin-clavulanate** | 875/125 mg PO BID (adults) | 10 days |\n| **Augmentin ES** (peds) | 90 mg/kg/day div BID | 10 days |\n\n**If MRSA Concern:**\n- TMP-SMX DS 1 tab PO BID + Amoxicillin-clavulanate\n- OR Clindamycin 300mg PO TID (adults)\n\n**Warm Compresses** — QID for comfort\n\n**Return Precautions:**\n- Worsening swelling\n- New vision changes\n- Pain with eye movement\n- Fever not improving\n- Unable to tolerate PO [1][3]',
+        citation: [1, 3],
+        next: 'preseptal-dispo',
+    },
+    {
+        id: 'preseptal-admit',
+        type: 'info',
+        module: 2,
+        title: 'Preseptal: Admission Criteria',
+        body: '**Admit for IV Antibiotics:**\n\n**Absolute Indications:**\n- Age <1 year\n- Unable to exclude orbital involvement\n- Failed outpatient therapy (24-48h)\n- Immunocompromised\n- Toxic-appearing\n\n**Relative Indications:**\n- Age 1-5 with significant findings\n- Unable to tolerate PO\n- Unreliable follow-up\n- Extensive periorbital cellulitis\n\n**IV Antibiotics:**\n- Ampicillin-sulbactam 50 mg/kg IV q6h (peds)\n- Ampicillin-sulbactam 3g IV q6h (adults)\n\n**OR:**\n- Ceftriaxone 50-100 mg/kg IV q24h\n- + Vancomycin 15 mg/kg IV q6-8h (if MRSA concern)\n\n**Get CT if unable to adequately examine eye.** [1][2][3]',
+        citation: [1, 2, 3],
+        next: 'preseptal-dispo',
+    },
+    // =====================================================================
+    // MODULE 3: IMAGING
+    // =====================================================================
+    {
+        id: 'orbital-suspected',
+        type: 'info',
+        module: 3,
+        title: 'Orbital Cellulitis Suspected',
+        body: '**Orbital signs present → CT imaging indicated.**\n\n**CT Orbits with IV Contrast:**\n\n**Indications:**\n- Proptosis, ophthalmoplegia, diplopia, vision loss\n- Pain with eye movement\n- ANC >10,000/μL\n- Age <1 year with any periorbital infection\n- No improvement 24-48h on antibiotics\n- CNS signs\n- Unable to adequately examine eye\n\n**CT Protocol:**\n- Thin-cut (2-3mm) axial and coronal\n- IV contrast essential\n- Include sinuses\n\n**While awaiting CT:**\n1. Start IV antibiotics\n2. Ophthalmology consult\n3. ENT consult (sinus source likely)\n\n[Antibiotic Calculator](#/calculator/orbital-abx) [1][2][4]',
+        citation: [1, 2, 4],
+        calculatorLinks: [
+            { id: 'orbital-abx', label: 'Antibiotic Calculator' },
+        ],
+        next: 'orbital-ct-findings',
+    },
+    {
+        id: 'orbital-ct-findings',
+        type: 'question',
+        module: 3,
+        title: 'CT Findings',
+        body: '**What does CT show?**',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Preseptal Only',
+                description: 'Soft tissue swelling anterior to septum',
+                next: 'preseptal-pathway',
+            },
+            {
+                label: 'Orbital Cellulitis (Chandler II)',
+                description: 'Post-septal fat stranding, muscle edema, no abscess',
+                next: 'orbital-chandler2',
+            },
+            {
+                label: 'Subperiosteal Abscess (Chandler III)',
+                description: 'Rim-enhancing collection along medial wall',
+                next: 'orbital-spa',
+                urgency: 'critical',
+            },
+            {
+                label: 'Orbital Abscess (Chandler IV)',
+                description: 'Intraconal ring-enhancing collection',
+                next: 'orbital-abscess',
+                urgency: 'critical',
+            },
+            {
+                label: 'Cavernous Sinus Filling Defect',
+                description: 'Suggestive of Chandler V (CST)',
+                next: 'orbital-cst',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'orbital-chandler2',
+        type: 'info',
+        module: 3,
+        title: 'Chandler II: Orbital Cellulitis',
+        body: '**Orbital Cellulitis (No Abscess):**\n\n**CT Findings:**\n- Fat stranding posterior to orbital septum\n- Extraocular muscle edema/enhancement\n- Axial proptosis\n- ± Sinus opacification\n- **NO discrete fluid collection**\n\n**Management:**\n1. Admit to hospital\n2. IV antibiotics\n3. Ophthalmology consult\n4. ENT consult\n5. Serial exams q4-6h\n\n**Monitor for:**\n- Vision deterioration\n- Worsening proptosis\n- New ophthalmoplegia\n- Abscess formation\n\n**Repeat CT if no improvement in 24-48 hours.**\n\n[Antibiotic Calculator](#/calculator/orbital-abx) [1][2]',
+        citation: [1, 2],
+        calculatorLinks: [
+            { id: 'orbital-abx', label: 'Antibiotic Calculator' },
+        ],
+        next: 'orbital-treatment',
+    },
+    {
+        id: 'orbital-spa',
+        type: 'info',
+        module: 3,
+        title: 'Chandler III: Subperiosteal Abscess',
+        body: '**Subperiosteal Abscess (SPA):**\n\n**CT Findings:**\n- Lenticular rim-enhancing collection\n- Located along medial orbital wall (lamina papyracea)\n- May contain gas\n- Non-axial globe displacement\n\n**Key Decision: Medical vs Surgical?**\n\n**May Trial Medical Management if ALL:**\n- Age <9 years\n- Small abscess (<0.5-1.0 mL or <10mm)\n- Medial location\n- No vision compromise\n- No frontal sinusitis source\n- Not dental origin\n\n**Surgical Drainage Indicated if ANY:**\n- Vision deterioration or APD\n- Abscess >1.0-1.2 mL (some say >0.5 mL)\n- Non-medial location\n- No improvement 24-48h on IV abx\n- CT size not reducing at 48-72h\n- Age >9 with large abscess\n- Frontal sinusitis or dental origin\n\n[Surgical Decision Tool](#/calculator/orbital-surgery) [1][2][4]',
+        citation: [1, 2, 4],
+        calculatorLinks: [
+            { id: 'orbital-surgery', label: 'Surgical Decision Tool' },
+        ],
+        next: 'orbital-treatment',
+    },
+    {
+        id: 'orbital-abscess',
+        type: 'info',
+        module: 3,
+        title: 'Chandler IV: Orbital Abscess',
+        body: '**Orbital (Intraconal) Abscess — Surgical Emergency:**\n\n**CT Findings:**\n- Ring-enhancing intraconal collection\n- Marked proptosis\n- May have air-fluid level\n- Severe mass effect\n\n**Management:**\n1. **Emergent ophthalmology + ENT consultation**\n2. IV antibiotics (broad-spectrum)\n3. **Surgical drainage indicated**\n4. Consider neurosurgery if intracranial extension\n\n**Surgical Approach:**\n- Medial abscess: Endoscopic drainage\n- Lateral/intraconal: Open orbitotomy\n\n**Complications:**\n- Vision loss (optic nerve compression)\n- Cavernous sinus thrombosis\n- Intracranial extension\n- Sepsis\n\n**This is a surgical emergency.** [1][2][4]',
+        citation: [1, 2, 4],
+        next: 'orbital-treatment',
+    },
+    {
+        id: 'orbital-cst',
+        type: 'info',
+        module: 3,
+        title: 'Chandler V: Cavernous Sinus Thrombosis',
+        body: '**⚠️ LIFE-THREATENING EMERGENCY ⚠️**\n\n**Pathognomonic Finding:**\n- Unilateral signs → **BILATERAL within 24-48 hours**\n\n**Clinical Red Flags:**\n- Bilateral proptosis/chemosis\n- **CN VI palsy** (earliest, most common) — limited abduction\n- Complete ophthalmoplegia (CN III, IV, VI)\n- V1/V2 sensory loss (periorbital numbness)\n- Decreased corneal reflex\n- Severe retro-orbital/frontal headache\n- High fever, sepsis\n- Altered mental status, meningismus\n- Papilledema\n\n**Imaging:**\n- **MRI with MR venography** = gold standard\n- CT may show cavernous sinus filling defect\n\n**Mortality: 20-30%** even with treatment\n\n**Management:**\n1. ICU admission\n2. IV antibiotics + anticoagulation consideration\n3. Neurosurgery consultation\n4. Ophthalmology + ENT\n\n[Antibiotic Calculator](#/calculator/orbital-abx) [1][2][5]',
+        citation: [1, 2, 5],
+        calculatorLinks: [
+            { id: 'orbital-abx', label: 'Antibiotic Calculator' },
+        ],
+        next: 'orbital-cst-treatment',
+    },
+    {
+        id: 'orbital-cst-treatment',
+        type: 'info',
+        module: 3,
+        title: 'CST Treatment',
+        body: '**Cavernous Sinus Thrombosis Management:**\n\n**Antibiotics (High-Dose, Broad-Spectrum):**\n- Vancomycin 15-20 mg/kg IV q8-12h\n- Ceftriaxone 2g IV q12h\n- Metronidazole 500mg IV q8h\n\n**Consider:**\n- Amphotericin B if fungal suspected (immunocompromised)\n- Higher doses for CNS penetration\n\n**Anticoagulation:**\n- Controversial\n- May reduce thrombus propagation\n- Consider heparin if no contraindication\n- Risk of hemorrhagic complications\n\n**Steroids:**\n- Consider dexamethasone for cerebral edema\n- Controversial — may worsen infection\n\n**Surgical:**\n- Drainage of primary source (sinuses)\n- Orbital decompression if needed\n\n**Duration:**\n- Prolonged IV therapy (4-6+ weeks)\n- Guided by infectious disease [1][2][5]',
+        citation: [1, 2, 5],
+        next: 'orbital-dispo',
+    },
+    // =====================================================================
+    // MODULE 4: TREATMENT
+    // =====================================================================
+    {
+        id: 'orbital-treatment',
+        type: 'info',
+        module: 4,
+        title: 'IV Antibiotic Regimen',
+        body: '**Empiric IV Antibiotics for Orbital Cellulitis:**\n\n**Standard Regimen:**\n\n| Drug | Pediatric Dose | Adult Dose |\n|------|----------------|------------|\n| **Vancomycin** | 40-60 mg/kg/day IV div q6-8h | 15-20 mg/kg IV q8-12h |\n| **Ceftriaxone** | 50-100 mg/kg/day IV q12-24h | 2g IV q24h |\n| **+ Metronidazole*** | 30 mg/kg/day IV div q6-8h | 500mg IV q8h |\n\n*Add metronidazole if dental source, sinusitis, or intracranial extension.\n\n**Alternative Monotherapy:**\n- Ampicillin-sulbactam: Peds 300 mg/kg/day IV div q6h; Adult 3g IV q6h\n- Piperacillin-tazobactam: Peds 240 mg/kg/day IV div q6-8h; Adult 4.5g IV q6h\n\n**PCN Allergy:**\n- Vancomycin + Ciprofloxacin 750mg PO q12h (or levofloxacin)\n\n[Antibiotic Calculator](#/calculator/orbital-abx) [1][2][4]',
+        citation: [1, 2, 4],
+        calculatorLinks: [
+            { id: 'orbital-abx', label: 'Antibiotic Calculator' },
+        ],
+        next: 'orbital-duration',
+    },
+    {
+        id: 'orbital-duration',
+        type: 'info',
+        module: 4,
+        title: 'Treatment Duration',
+        body: '**Antibiotic Duration:**\n\n**IV Therapy:**\n- Continue until afebrile 48 hours AND improving\n- Typically 1-2 weeks IV\n\n**Oral Step-Down:**\n- When: afebrile, improving, tolerating PO\n- Additional 2-3 weeks oral\n- **Total: 3-4 weeks minimum**\n\n**Oral Options:**\n- Amoxicillin-clavulanate 875/125mg PO BID\n- Clindamycin 300-450mg PO TID (if MRSA)\n- Fluoroquinolone if culture-guided\n\n**Severe Ethmoid Sinusitis with Bone Destruction:**\n- 4+ weeks total\n\n**Monitoring:**\n- Serial exams q4-6h initially\n- Daily CBC, CRP\n- Repeat CT if no improvement 48h\n- Ophthalmology follow-up [1][2][4]',
+        citation: [1, 2, 4],
+        next: 'orbital-adjuncts',
+    },
+    {
+        id: 'orbital-adjuncts',
+        type: 'info',
+        module: 4,
+        title: 'Adjunctive Management',
+        body: '**Additional Management:**\n\n**Nasal Decongestants:**\n- Oxymetazoline 0.05% spray BID × 3 days\n- Promotes sinus drainage\n\n**Nasal Saline:**\n- Normal saline irrigation\n- Helps clear sinuses\n\n**Head Elevation:**\n- 30-45 degrees\n- Reduces orbital edema\n\n**Pain Control:**\n- Acetaminophen/ibuprofen\n- Consider opioids for severe pain\n\n**Warm Compresses:**\n- May provide comfort\n- Avoid if abscess (may promote spread)\n\n**ENT Consultation:**\n- Sinus source in >90% of cases\n- May need endoscopic sinus surgery\n- Especially if frontal sinusitis\n\n**Ophthalmology:**\n- Serial vision and IOP checks\n- Surgical drainage if abscess [1][2]',
+        citation: [1, 2],
+        next: 'orbital-dispo',
+    },
+    // =====================================================================
+    // MODULE 5: DISPOSITION
+    // =====================================================================
+    {
+        id: 'orbital-dispo',
+        type: 'question',
+        module: 5,
+        title: 'Disposition',
+        body: '**Determine appropriate disposition:**',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Orbital Cellulitis/Abscess',
+                description: 'Chandler II-IV — admit',
+                next: 'orbital-admit',
+                urgency: 'critical',
+            },
+            {
+                label: 'Cavernous Sinus Thrombosis',
+                description: 'Chandler V — ICU',
+                next: 'orbital-icu',
+                urgency: 'critical',
+            },
+            {
+                label: 'Preseptal - Admit',
+                description: 'Age <1, toxic, failed outpatient',
+                next: 'preseptal-admit',
+            },
+            {
+                label: 'Preseptal - Discharge',
+                description: 'Well-appearing, reliable follow-up',
+                next: 'preseptal-dispo',
+            },
+        ],
+    },
+    {
+        id: 'orbital-admit',
+        type: 'info',
+        module: 5,
+        title: 'Orbital Cellulitis: Admission',
+        body: '**Admit to Hospital:**\n\n**Orders:**\n1. IV antibiotics (vanc + ceftriaxone ± metronidazole)\n2. Ophthalmology consult\n3. ENT consult\n4. Serial exams q4-6h (vision, EOM, proptosis)\n5. CBC, CRP q24h\n6. Head elevation 30-45°\n7. Nasal saline, decongestant\n\n**Watch for deterioration:**\n- Vision loss\n- New APD\n- Increasing proptosis\n- New ophthalmoplegia\n- Bilateral signs (CST)\n\n**If Subperiosteal Abscess (Chandler III):**\n- Apply surgical criteria\n- Repeat CT if no improvement 48h\n- Low threshold for drainage\n\n**If Orbital Abscess (Chandler IV):**\n- Urgent surgical drainage [1][2][4]',
+        citation: [1, 2, 4],
+        options: [
+            {
+                label: 'Complete — Return to Start',
+                next: 'orbital-start',
+            },
+        ],
+    },
+    {
+        id: 'orbital-icu',
+        type: 'info',
+        module: 5,
+        title: 'ICU Admission',
+        body: '**ICU Admission for:**\n\n**Cavernous Sinus Thrombosis (Chandler V):**\n- High mortality (20-30%)\n- Aggressive antibiotic therapy\n- Consider anticoagulation\n- Neurosurgery involvement\n\n**Other ICU Indications:**\n- Sepsis\n- Altered mental status\n- Intracranial extension (meningitis, brain abscess)\n- Orbital compartment syndrome\n- Hemodynamic instability\n\n**Consults:**\n- Neurosurgery\n- Ophthalmology\n- ENT\n- Infectious disease\n\n**Monitoring:**\n- Continuous cardiac monitor\n- Serial neuro exams\n- Repeat imaging as indicated [1][2][5]',
+        citation: [1, 2, 5],
+        options: [
+            {
+                label: 'Complete — Return to Start',
+                next: 'orbital-start',
+            },
+        ],
+    },
+    {
+        id: 'preseptal-dispo',
+        type: 'info',
+        module: 5,
+        title: 'Preseptal: Discharge',
+        body: '**Discharge Criteria:**\n- No orbital signs\n- Able to tolerate PO\n- Age >1 year (some say >5)\n- Not toxic-appearing\n- Reliable follow-up in 24-48 hours\n\n**Discharge Medications:**\n\n| Drug | Dose | Duration |\n|------|------|----------|\n| **Amoxicillin-clavulanate** | 875/125mg PO BID | 10 days |\n| If MRSA: **TMP-SMX DS** | 1 tab PO BID | Add to above |\n| Alt: **Clindamycin** | 300mg PO TID | 10 days |\n\n**Pediatric:**\n- Augmentin 45 mg/kg/day div BID\n- Augmentin ES 90 mg/kg/day div BID (resistant strains)\n\n**Return Precautions:**\n- Worsening swelling despite antibiotics\n- New vision changes\n- Pain with eye movement\n- Increasing fever\n- Unable to open eye\n- Nausea/vomiting\n\n**Follow-up:** 24-48 hours mandatory [1][3]',
+        citation: [1, 3],
+        options: [
+            {
+                label: 'Complete — Return to Start',
+                next: 'orbital-start',
+            },
+        ],
+    },
+];
+export const ORBITAL_CELLULITIS_MODULE_LABELS = [
+    'Recognition',
+    'Differentiation',
+    'Imaging',
+    'Treatment',
+    'Disposition',
+];
+export const ORBITAL_CELLULITIS_CITATIONS = [
+    { num: 1, text: 'EB Medicine. Pediatric Ophthalmologic Emergencies. 2024.' },
+    { num: 2, text: 'StatPearls. Orbital Cellulitis. 2024.' },
+    { num: 3, text: 'StatPearls. Periorbital Cellulitis. 2024.' },
+    { num: 4, text: 'OpenEvidence. Orbital Cellulitis ED Management. 2024.' },
+    { num: 5, text: 'StatPearls. Cavernous Sinus Thrombosis. 2024.' },
+];

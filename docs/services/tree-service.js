@@ -329,6 +329,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/chemical-burn.js');
             return { nodes: m.CHEMICAL_BURN_NODES, entryNodeId: 'chemburn-start', categoryId: 'ophthalmology', moduleLabels: m.CHEMICAL_BURN_MODULE_LABELS, citations: m.CHEMICAL_BURN_CITATIONS };
         },
+        'orbital-cellulitis': async () => {
+            const m = await import('../data/trees/orbital-cellulitis.js');
+            return { nodes: m.ORBITAL_CELLULITIS_NODES, entryNodeId: 'orbital-start', categoryId: 'ophthalmology', moduleLabels: m.ORBITAL_CELLULITIS_MODULE_LABELS, citations: m.ORBITAL_CELLULITIS_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

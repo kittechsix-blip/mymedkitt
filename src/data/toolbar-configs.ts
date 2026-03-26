@@ -315,6 +315,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'chemburn-grade', label: 'Roper-Hall', icon: '📊', action: 'calculator', target: 'chemburn-grade' },
     { id: 'chemburn-tx', label: 'Treatment', icon: '💊', action: 'calculator', target: 'chemburn-treatment' },
   ],
+  'orbital-cellulitis': [
+    { id: 'orbital-chandler', label: 'Chandler', icon: '📊', action: 'calculator', target: 'orbital-chandler' },
+    { id: 'orbital-abx', label: 'Antibiotics', icon: '💊', action: 'calculator', target: 'orbital-abx' },
+    { id: 'orbital-surgery', label: 'Surgery?', icon: '🔪', action: 'calculator', target: 'orbital-surgery' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

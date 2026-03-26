@@ -8517,6 +8517,549 @@ Consider surgical options (AMT, tarsorrhaphy)`;
   },
 };
 
+// -------------------------------------------------------------------
+// Orbital Cellulitis — Chandler Classification Calculator
+// -------------------------------------------------------------------
+
+const ORBITAL_CHANDLER_CALCULATOR: CalculatorDefinition = {
+  id: 'orbital-chandler',
+  title: 'Chandler Classification',
+  subtitle: 'Orbital Infection Staging',
+  description: 'Classify orbital infections using the Chandler staging system (I-V) based on clinical and imaging findings.',
+  fields: [
+    {
+      name: 'proptosis',
+      label: 'Proptosis present',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'ophthalmoplegia',
+      label: 'Ophthalmoplegia (restricted EOM)',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'vision-loss',
+      label: 'Vision loss or APD',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'eom-pain',
+      label: 'Pain with eye movement',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'chemosis',
+      label: 'Chemosis present',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'ct-abscess',
+      label: 'CT: Abscess present',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No CT yet / No abscess', points: 0 },
+        { label: 'Subperiosteal abscess (medial wall)', points: 1 },
+        { label: 'Intraconal/orbital abscess', points: 2 },
+      ],
+    },
+    {
+      name: 'bilateral',
+      label: 'Bilateral involvement',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'cn-palsy',
+      label: 'Cranial nerve palsy (III, IV, or VI)',
+      type: 'toggle',
+      points: 0,
+    },
+  ],
+  results: [],
+  thresholdNote: 'Chandler I = preseptal, II-V = postseptal orbital involvement.',
+  citations: [
+    'Chandler JR, et al. The pathogenesis of orbital complications in acute sinusitis. Laryngoscope. 1970.',
+    'StatPearls. Orbital Cellulitis. 2024.',
+  ],
+  computeResult: (values) => {
+    const proptosis = values['proptosis'] || 0;
+    const ophthalmoplegia = values['ophthalmoplegia'] || 0;
+    const visionLoss = values['vision-loss'] || 0;
+    const eomPain = values['eom-pain'] || 0;
+    const chemosis = values['chemosis'] || 0;
+    const ctAbscess = values['ct-abscess'] || 0;
+    const bilateral = values['bilateral'] || 0;
+    const cnPalsy = values['cn-palsy'] || 0;
+
+    // Chandler V: Cavernous Sinus Thrombosis
+    if (bilateral || (cnPalsy && (proptosis || ophthalmoplegia))) {
+      return {
+        value: 'CHANDLER V',
+        label: 'Cavernous Sinus Thrombosis',
+        description: `**⚠️ LIFE-THREATENING EMERGENCY ⚠️**
+
+**Chandler V — Cavernous Sinus Thrombosis**
+
+**Clinical Signs:**
+• Bilateral involvement (pathognomonic)
+• CN VI palsy (earliest) — limited abduction
+• Complete ophthalmoplegia
+• V1/V2 sensory loss
+• Severe headache, high fever
+
+**Mortality: 20-30%**
+
+**Management:**
+1. **ICU admission**
+2. IV vancomycin + ceftriaxone + metronidazole
+3. MRI/MRV for confirmation
+4. Neurosurgery consultation
+5. Consider anticoagulation
+
+**Imaging:** MRI with MR venography is gold standard.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Chandler IV: Orbital Abscess
+    if (ctAbscess === 2) {
+      return {
+        value: 'CHANDLER IV',
+        label: 'Orbital Abscess',
+        description: `**Chandler IV — Intraconal Orbital Abscess**
+
+**CT Findings:**
+• Ring-enhancing intraconal collection
+• Marked proptosis
+• Severe mass effect
+
+**This is a SURGICAL EMERGENCY.**
+
+**Management:**
+1. Emergent ophthalmology + ENT
+2. IV antibiotics (broad-spectrum)
+3. **Surgical drainage indicated**
+4. Neurosurgery if intracranial extension
+
+**Complications:**
+• Vision loss (optic nerve compression)
+• Cavernous sinus thrombosis
+• Intracranial extension`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Chandler III: Subperiosteal Abscess
+    if (ctAbscess === 1) {
+      return {
+        value: 'CHANDLER III',
+        label: 'Subperiosteal Abscess',
+        description: `**Chandler III — Subperiosteal Abscess**
+
+**CT Findings:**
+• Rim-enhancing lenticular collection
+• Along medial wall (lamina papyracea)
+• May contain gas
+
+**Medical vs Surgical Decision:**
+
+**May trial medical management if:**
+• Age <9 years
+• Small abscess (<0.5-1.0 mL)
+• Medial location
+• No vision compromise
+
+**Surgery indicated if:**
+• Vision deterioration/APD
+• Abscess >1.0 mL
+• Non-medial location
+• No improvement 24-48h on IV abx
+• Age >9 with large abscess
+
+**Consult ophthalmology and ENT.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Chandler II: Orbital Cellulitis
+    const orbitalSigns = proptosis + ophthalmoplegia + visionLoss + eomPain + chemosis;
+    if (orbitalSigns >= 1) {
+      return {
+        value: 'CHANDLER II',
+        label: 'Orbital Cellulitis',
+        description: `**Chandler II — Orbital Cellulitis (No Abscess)**
+
+**Clinical Signs Present:**
+${proptosis ? '• Proptosis\n' : ''}${ophthalmoplegia ? '• Ophthalmoplegia\n' : ''}${visionLoss ? '• Vision loss/APD\n' : ''}${eomPain ? '• Pain with eye movement\n' : ''}${chemosis ? '• Chemosis\n' : ''}
+**CT shows:** Post-septal fat stranding, no discrete abscess
+
+**Management:**
+1. Admit to hospital
+2. IV antibiotics (vanc + ceftriaxone ± metronidazole)
+3. Ophthalmology + ENT consult
+4. Serial exams q4-6h
+5. Repeat CT if no improvement 48h
+
+**Watch for progression to abscess.**`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Chandler I: Preseptal
+    return {
+      value: 'CHANDLER I',
+      label: 'Preseptal Cellulitis',
+      description: `**Chandler I — Preseptal (Periorbital) Cellulitis**
+
+**Clinical Signs:**
+• Eyelid erythema and edema
+• Warmth, tenderness
+• **NO orbital signs** (normal vision, EOM, no proptosis)
+
+**Location:** Anterior to orbital septum only
+
+**Etiology:**
+• Local skin trauma (insect bite, laceration)
+• Upper respiratory infection
+• Sinusitis (less common)
+
+**Management:**
+• May be outpatient if age >1, well-appearing
+• Oral amoxicillin-clavulanate × 10 days
+• Follow-up 24-48 hours
+• Admit if age <1, toxic, failed outpatient
+
+**Key Point:** Preseptal does NOT progress to orbital (septum = barrier).`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Orbital Cellulitis — Antibiotic Calculator
+// -------------------------------------------------------------------
+
+const ORBITAL_ABX_CALCULATOR: CalculatorDefinition = {
+  id: 'orbital-abx',
+  title: 'Antibiotic Calculator',
+  subtitle: 'Orbital Cellulitis IV Regimen',
+  description: 'Calculate IV antibiotic dosing for orbital cellulitis based on age, weight, and clinical scenario.',
+  fields: [
+    {
+      name: 'age',
+      label: 'Patient Age',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Pediatric (<18 years)', points: 1 },
+        { label: 'Adult (≥18 years)', points: 2 },
+      ],
+    },
+    {
+      name: 'weight',
+      label: 'Weight (kg)',
+      type: 'number',
+      points: 0,
+      unit: 'kg',
+    },
+    {
+      name: 'source',
+      label: 'Suspected Source',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Sinusitis (most common)', points: 0 },
+        { label: 'Dental infection', points: 1 },
+        { label: 'Trauma/skin wound', points: 2 },
+        { label: 'Intracranial extension suspected', points: 3 },
+      ],
+    },
+    { name: 'mrsa', label: 'MRSA risk factors', type: 'toggle', points: 0, description: 'Recent hospitalization, IVDU, prior MRSA' },
+    { name: 'pcn-allergy', label: 'PCN allergy', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Duration: 1-2 weeks IV until afebrile 48h, then oral step-down for total 3-4 weeks.',
+  citations: [
+    'EB Medicine. Pediatric Ophthalmologic Emergencies. 2024.',
+    'StatPearls. Orbital Cellulitis. 2024.',
+  ],
+  computeResult: (values) => {
+    const age = values['age'] || 0;
+    const weight = values['weight'] || 0;
+    const source = values['source'] || 0;
+    const mrsa = values['mrsa'] || 0;
+    const pcnAllergy = values['pcn-allergy'] || 0;
+
+    if (age === 0 || weight === 0) {
+      return {
+        value: '--',
+        label: 'Enter Age and Weight',
+        description: 'Select patient age category and enter weight to calculate dosing.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const isPeds = age === 1;
+    const needsAnaerobic = source === 1 || source === 3; // dental or intracranial
+    const traumaSource = source === 2;
+
+    // Calculate doses
+    const vancPedsDose = Math.min(Math.round(60 * weight / 4), 1000); // 60 mg/kg/day div q6h, max 1g/dose
+    const ceftriaxonePedsDose = Math.min(Math.round(100 * weight), 4000); // 100 mg/kg/day, max 4g
+    const metroPedsDose = Math.min(Math.round(30 * weight / 3), 500); // 30 mg/kg/day div q8h, max 500mg/dose
+
+    let regimen = '';
+
+    if (pcnAllergy) {
+      regimen = isPeds
+        ? `**PCN Allergy Regimen (Pediatric):**
+
+| Drug | Dose | Frequency |
+|------|------|-----------|
+| **Vancomycin** | ${vancPedsDose} mg IV | q6h |
+| **Ciprofloxacin** | ${Math.round(15 * weight)} mg PO/IV | q12h |
+${needsAnaerobic ? `| **Metronidazole** | ${metroPedsDose} mg IV | q8h |` : ''}
+
+*Note: Fluoroquinolones in pediatrics only for serious infections.*`
+        : `**PCN Allergy Regimen (Adult):**
+
+| Drug | Dose | Frequency |
+|------|------|-----------|
+| **Vancomycin** | ${Math.round(weight * 15)} mg IV | q8-12h |
+| **Levofloxacin** | 750 mg IV/PO | q24h |
+${needsAnaerobic ? '| **Metronidazole** | 500 mg IV | q8h |' : ''}`;
+    } else {
+      regimen = isPeds
+        ? `**Standard Regimen (Pediatric, ${weight} kg):**
+
+| Drug | Dose | Frequency |
+|------|------|-----------|
+| **Vancomycin** | ${vancPedsDose} mg IV | q6h |
+| **Ceftriaxone** | ${Math.round(ceftriaxonePedsDose / 2)} mg IV | q12h |
+${needsAnaerobic ? `| **Metronidazole** | ${metroPedsDose} mg IV | q8h |` : ''}
+
+**Alternative Monotherapy:**
+• Ampicillin-sulbactam ${Math.round(300 * weight / 4)} mg IV q6h`
+        : `**Standard Regimen (Adult):**
+
+| Drug | Dose | Frequency |
+|------|------|-----------|
+| **Vancomycin** | ${Math.round(weight * 15)} mg IV | q8-12h |
+| **Ceftriaxone** | 2000 mg IV | q24h |
+${needsAnaerobic ? '| **Metronidazole** | 500 mg IV | q8h |' : ''}
+
+**Alternative Monotherapy:**
+• Ampicillin-sulbactam 3g IV q6h
+• Piperacillin-tazobactam 4.5g IV q6h`;
+    }
+
+    let notes = '';
+    if (needsAnaerobic) {
+      notes += '\n\n⚠️ **Anaerobic coverage included** (dental source or intracranial extension).';
+    }
+    if (traumaSource) {
+      notes += '\n\n**Trauma source:** S. aureus predominates. Ensure MRSA coverage with vancomycin.';
+    }
+    if (mrsa && !pcnAllergy) {
+      notes += '\n\n⚠️ **MRSA risk factors present** — vancomycin included for coverage.';
+    }
+
+    notes += `\n\n**Duration:**
+• IV: 1-2 weeks until afebrile 48h + improving
+• Oral step-down: 2-3 weeks additional
+• **Total: 3-4 weeks**`;
+
+    return {
+      value: isPeds ? 'PEDS' : 'ADULT',
+      label: 'IV Antibiotic Regimen',
+      description: regimen + notes,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Orbital Cellulitis — Surgical Decision Tool
+// -------------------------------------------------------------------
+
+const ORBITAL_SURGERY_CALCULATOR: CalculatorDefinition = {
+  id: 'orbital-surgery',
+  title: 'Surgical Decision Tool',
+  subtitle: 'SPA Drainage Criteria',
+  description: 'Determine if subperiosteal abscess requires surgical drainage vs medical management.',
+  fields: [
+    {
+      name: 'age',
+      label: 'Patient Age',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '< 9 years', points: 0 },
+        { label: '≥ 9 years', points: 1 },
+      ],
+    },
+    {
+      name: 'abscess-size',
+      label: 'Abscess Size',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Small (< 0.5 mL or < 10mm)', points: 0 },
+        { label: 'Medium (0.5-1.0 mL)', points: 1 },
+        { label: 'Large (> 1.0 mL or > 10mm)', points: 2 },
+      ],
+    },
+    {
+      name: 'location',
+      label: 'Abscess Location',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Medial (along lamina papyracea)', points: 0 },
+        { label: 'Superior', points: 1 },
+        { label: 'Lateral or inferior', points: 2 },
+      ],
+    },
+    { name: 'vision-loss', label: 'Vision loss or APD present', type: 'toggle', points: 0 },
+    { name: 'no-improvement', label: 'No improvement on IV abx 24-48h', type: 'toggle', points: 0 },
+    { name: 'frontal', label: 'Frontal sinusitis as source', type: 'toggle', points: 0 },
+    { name: 'dental', label: 'Dental origin', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Garcia-Harris criteria: Age <9, small medial SPA, no vision compromise may trial medical management.',
+  citations: [
+    'Garcia GH, Harris GJ. Criteria for nonsurgical management of subperiosteal abscess of the orbit. Ophthalmology. 2000.',
+    'PMC. Pediatric Subperiosteal Orbital Abscess. 2021.',
+  ],
+  computeResult: (values) => {
+    const age = values['age'] || 0;
+    const size = values['abscess-size'] || 0;
+    const location = values['location'] || 0;
+    const visionLoss = values['vision-loss'] || 0;
+    const noImprovement = values['no-improvement'] || 0;
+    const frontal = values['frontal'] || 0;
+    const dental = values['dental'] || 0;
+
+    // Absolute surgical indications
+    if (visionLoss) {
+      return {
+        value: 'SURGERY',
+        label: 'Urgent Surgical Drainage',
+        description: `**⚠️ VISION LOSS/APD = ABSOLUTE SURGICAL INDICATION**
+
+**Immediate surgical drainage required.**
+
+Vision deterioration indicates optic nerve compromise.
+
+**Contact:**
+1. Ophthalmology — STAT
+2. ENT — for sinus drainage
+3. OR notification
+
+**Do NOT delay for further medical trial.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Count surgical indications
+    let surgicalScore = 0;
+    const factors: string[] = [];
+
+    if (age === 1) { surgicalScore += 1; factors.push('Age ≥9 years'); }
+    if (size === 2) { surgicalScore += 2; factors.push('Large abscess (>1.0 mL)'); }
+    else if (size === 1) { surgicalScore += 1; factors.push('Medium abscess (0.5-1.0 mL)'); }
+    if (location >= 1) { surgicalScore += 2; factors.push('Non-medial location'); }
+    if (noImprovement) { surgicalScore += 2; factors.push('No improvement on IV abx 24-48h'); }
+    if (frontal) { surgicalScore += 1; factors.push('Frontal sinusitis source'); }
+    if (dental) { surgicalScore += 2; factors.push('Dental origin'); }
+
+    if (surgicalScore >= 3 || noImprovement) {
+      return {
+        value: 'SURGERY',
+        label: 'Surgical Drainage Recommended',
+        description: `**Surgical drainage indicated.**
+
+**Factors favoring surgery:**
+${factors.map(f => `• ${f}`).join('\n')}
+
+**Surgical approach:**
+• Medial abscess: Endoscopic drainage (ENT)
+• Lateral/intraconal: Open orbitotomy (ophthalmology)
+
+**Consult:**
+• Ophthalmology
+• ENT
+
+**Continue IV antibiotics perioperatively.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (surgicalScore >= 1) {
+      return {
+        value: 'BORDERLINE',
+        label: 'Close Monitoring Required',
+        description: `**May trial medical management with close monitoring.**
+
+**Factors present:**
+${factors.length > 0 ? factors.map(f => `• ${f}`).join('\n') : '• None — favorable for medical trial'}
+
+**Medical trial criteria (Garcia-Harris):**
+✓ Age <9 years
+✓ Small medial abscess
+✓ No vision compromise
+✓ No frontal sinusitis
+✓ Not dental origin
+
+**If medical trial:**
+• Serial exams q4-6h
+• Repeat CT in 48-72h
+• Low threshold for surgery if no improvement
+
+**Proceed to surgery if:**
+• Vision deteriorates
+• Abscess size increases
+• No improvement by 48h`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Good candidate for medical management
+    return {
+      value: 'MEDICAL',
+      label: 'Medical Management Appropriate',
+      description: `**Good candidate for medical management trial.**
+
+**Favorable factors:**
+• Age <9 years
+• Small medial abscess
+• No vision compromise
+• No frontal sinusitis
+• Not dental origin
+
+**Medical Management:**
+• IV antibiotics (vanc + ceftriaxone ± metro)
+• Serial exams q4-6h
+• Repeat CT in 48-72h
+
+**Proceed to surgery if:**
+• Vision deteriorates
+• New APD
+• Abscess size increases on repeat CT
+• No improvement by 48 hours
+
+**Success rate:** High in young children with small medial SPAs.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -8601,6 +9144,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'chemburn-ph': CHEMBURN_PH_CALCULATOR,
   'chemburn-grade': CHEMBURN_GRADE_CALCULATOR,
   'chemburn-treatment': CHEMBURN_TREATMENT_CALCULATOR,
+  'orbital-chandler': ORBITAL_CHANDLER_CALCULATOR,
+  'orbital-abx': ORBITAL_ABX_CALCULATOR,
+  'orbital-surgery': ORBITAL_SURGERY_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
