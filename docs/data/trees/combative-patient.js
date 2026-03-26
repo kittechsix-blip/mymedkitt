@@ -1,0 +1,526 @@
+// MedKitt — Combative Patient
+// ED management of acute agitation: assessment, de-escalation, sedation, restraints, post-sedation care
+// 5 modules: Assessment → Mild-Moderate Agitation → Severe Agitation → Restraints → Post-Sedation Care
+// 35 nodes total.
+export const COMBATIVE_PATIENT_NODES = [
+    // ===================================================================
+    // MODULE 1: Assessment
+    // ===================================================================
+    {
+        id: 'comb-start',
+        type: 'info',
+        module: 1,
+        title: 'Combative Patient',
+        body: '[Combative Patient Steps Summary](#/info/comb-summary)\n\n**Scene Safety First**\n\n• Remove sharps and potential weapons from reach\n• Ensure adequate staffing — minimum 5 people for physical restraint\n• Activate security — show of force avoids need for sedation in up to 27% of cases\n• Position yourself near the exit\n• One person communicates — everyone else listens\n• ABCs, vitals, fingerstick glucose when safe to obtain\n\n[De-escalation Checklist](#/info/comb-deescalation)',
+        citation: [1, 2],
+        next: 'comb-redirectable',
+    },
+    {
+        id: 'comb-redirectable',
+        type: 'question',
+        module: 1,
+        title: 'Is the Patient Redirectable?',
+        body: 'Assess agitation severity to guide treatment intensity.\n\n**RASS +1 to +2** — Mild-moderate agitation. Patient may respond to verbal redirection and oral medications.\n\n**RASS +3 to +4** — Severe agitation. Not redirectable. Immediate parenteral sedation needed.',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Yes — mild/moderate (RASS +1 to +2)',
+                next: 'comb-oral-willing',
+            },
+            {
+                label: 'No — severe agitation (RASS +3 to +4)',
+                next: 'comb-severe-etiology',
+                urgency: 'urgent',
+            },
+            {
+                label: 'Immediate threat to life',
+                next: 'comb-immediate-threat',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'comb-immediate-threat',
+        type: 'info',
+        module: 1,
+        title: 'Immediate Life Threat',
+        body: 'Patient is an **immediate danger** — actively violent, weapon, or excited delirium features.\n\n**Restrain + Sedate simultaneously:**\n\n• Physical restraint per [Restraint Protocol](#/info/comb-restraint-protocol) while administering IM sedation\n• [Ketamine](#/drug/ketamine/acute agitation) 4 mg/kg IM — fastest reliable sedation (onset 3–5 min)\n• OR [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM + [Haloperidol](#/drug/haloperidol/acute agitation) 10 mg IM\n• Prepare for intubation — have RSI equipment at bedside\n• Once controlled, proceed to assessment and etiology workup',
+        citation: [1, 4, 5],
+        next: 'comb-severe-response',
+    },
+    {
+        id: 'comb-oral-willing',
+        type: 'question',
+        module: 1,
+        title: 'Will Patient Accept Oral Medication?',
+        body: 'Verbal de-escalation is **always first-line**. If patient is cooperative enough for PO meds, oral route is preferred — faster to administer, less traumatic, promotes therapeutic alliance.\n\nOffer choice: "I can give you something to help you feel calmer."\n\n[De-escalation Checklist](#/info/comb-deescalation)',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Yes — will take PO meds',
+                next: 'comb-special-pop',
+            },
+            {
+                label: 'No — refusing PO, needs IM',
+                next: 'comb-special-pop',
+            },
+            {
+                label: 'Escalating — now severe',
+                next: 'comb-severe-etiology',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'comb-special-pop',
+        type: 'question',
+        module: 1,
+        title: 'Special Population?',
+        body: 'Before selecting medications, identify any special population that changes the approach.\n\n[Special Populations Guide](#/info/comb-special-pops)',
+        citation: [2, 6],
+        options: [
+            {
+                label: 'Standard adult (18–64)',
+                next: 'comb-mild-etiology',
+            },
+            {
+                label: 'Elderly (age ≥65)',
+                next: 'comb-elderly',
+            },
+            {
+                label: 'Pregnant',
+                next: 'comb-pregnant',
+            },
+            {
+                label: "Parkinson's / Lewy body",
+                next: 'comb-parkinsons',
+            },
+        ],
+    },
+    {
+        id: 'comb-elderly',
+        type: 'info',
+        module: 1,
+        title: 'Elderly Patient (Age ≥65)',
+        body: '**Half-dose ALL agents.** Avoid benzodiazepines — paradoxical agitation, fall risk, respiratory depression.\n\n**First-line IM:**\n• [Haloperidol](#/drug/haloperidol/elderly agitation) 0.5–2 mg IM/IV\n• [Olanzapine](#/drug/olanzapine/elderly agitation) 2.5–5 mg IM\n\n**First-line PO (mild agitation):**\n• [Quetiapine](#/drug/quetiapine/mild agitation) 25–50 mg PO\n• [Risperidone](#/drug/risperidone/mild agitation) 0.5–1 mg PO\n\n**All antipsychotics carry FDA black box** for increased mortality in elderly with dementia-related psychosis (1.6–1.7×). Document risk-benefit discussion.',
+        citation: [2, 6],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-pregnant',
+        type: 'info',
+        module: 1,
+        title: 'Pregnant Patient',
+        body: '**Benzodiazepines preferred** for acute agitation in pregnancy.\n\n• [Lorazepam](#/drug/lorazepam/acute agitation) 1–2 mg IM/IV — most pregnancy safety data among benzos\n• [Midazolam](#/drug/midazolam/acute agitation) 2.5–5 mg IM\n\n**If antipsychotic required:**\n• [Haloperidol](#/drug/haloperidol/acute agitation) has the most safety data in pregnancy (FDA category C)\n• Avoid [Droperidol](#/drug/droperidol/acute agitation)\n\n**After sedation:**\n• Fetal monitoring\n• OB consult\n• Left lateral tilt positioning to prevent aortocaval compression',
+        citation: [2, 6],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-parkinsons',
+        type: 'info',
+        module: 1,
+        title: "Parkinson's / Lewy Body Dementia",
+        body: "**AVOID typical antipsychotics** (haloperidol, droperidol) — high D2 blockade worsens motor symptoms. Lewy body dementia: extreme neuroleptic sensitivity — even \"safe\" agents can trigger life-threatening reactions.\n\n**First-line:**\n• [Quetiapine](#/drug/quetiapine/parkinsons) 12.5–25 mg PO (lowest D2 affinity)\n\n**If IM needed:**\n• Low-dose [Midazolam](#/drug/midazolam/acute agitation) 1–2 mg IM\n• Low-dose [Olanzapine](#/drug/olanzapine/elderly agitation) 2.5 mg IM (moderate D2 affinity, safer than typicals)\n\nConsult neurology early.",
+        citation: [2, 6],
+        next: 'comb-response-mild',
+    },
+    // ===================================================================
+    // MODULE 2: Mild-Moderate Agitation
+    // ===================================================================
+    {
+        id: 'comb-mild-etiology',
+        type: 'question',
+        module: 2,
+        title: 'Likely Etiology?',
+        body: 'Etiology guides medication selection. Assess for: known psychiatric history, substance use, toxidrome features, vital sign pattern.\n\n[Sedation Dosing Table](#/info/comb-sedation-table)\n[Special Populations Guide](#/info/comb-special-pops)',
+        citation: [1, 2, 3],
+        options: [
+            {
+                label: 'Known psychiatric disorder',
+                description: 'Schizophrenia, bipolar, psychotic features',
+                next: 'comb-mild-psych',
+            },
+            {
+                label: 'Alcohol intoxication',
+                description: 'EtOH on board, not in withdrawal',
+                next: 'comb-mild-etoh',
+            },
+            {
+                label: 'Alcohol / sedative withdrawal',
+                description: 'Tremor, tachycardia, cessation history',
+                next: 'comb-mild-etoh-wd',
+            },
+            {
+                label: 'Drug intoxication / undifferentiated',
+                description: 'Stimulants, anticholinergic, unknown cause',
+                next: 'comb-mild-undiff',
+            },
+        ],
+    },
+    {
+        id: 'comb-mild-psych',
+        type: 'info',
+        module: 2,
+        title: 'Psychiatric Disorder — Mild/Moderate',
+        body: '**Antipsychotics preferred** — treat the underlying psychosis.\n\n**PO (if cooperative):**\n• [Olanzapine](#/drug/olanzapine/acute agitation) 5–10 mg PO (ODT available — dissolves on tongue)\n• [Risperidone](#/drug/risperidone/mild agitation) 1–2 mg PO\n• [Haloperidol](#/drug/haloperidol/acute agitation) 5 mg PO\n\n**IM (if refusing PO):**\n• [Olanzapine](#/drug/olanzapine/acute agitation) 10 mg IM\n• [Ziprasidone](#/drug/ziprasidone/acute agitation) 10–20 mg IM\n• [Haloperidol](#/drug/haloperidol/acute agitation) 5 mg IM\n• [Droperidol](#/drug/droperidol/acute agitation) 2.5–5 mg IM\n\n**⚠️ DO NOT combine IM olanzapine with parenteral benzos** — risk of excess sedation and respiratory depression. Wait ≥60 min between these agents.',
+        citation: [1, 2, 3],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-mild-etoh',
+        type: 'info',
+        module: 2,
+        title: 'Alcohol Intoxication — Mild/Moderate',
+        body: '**Butyrophenones preferred** for alcohol-related agitation.\n\n• [Droperidol](#/drug/droperidol/acute agitation) 2.5–5 mg IM — fastest onset (3–10 min), more sedating\n• [Haloperidol](#/drug/haloperidol/acute agitation) 5 mg IM — slower onset (10–20 min)\n\n**Avoid benzos** in simple intoxication — potentiates CNS/respiratory depression with alcohol.\n\n**PO option:** [Olanzapine](#/drug/olanzapine/acute agitation) 5–10 mg PO\n\n**Key distinction:** If patient is **withdrawing** (not just intoxicated), use the withdrawal pathway — benzos are required.',
+        citation: [1, 2, 7],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-mild-etoh-wd',
+        type: 'info',
+        module: 2,
+        title: 'Alcohol / Sedative Withdrawal',
+        body: '**Benzodiazepines first-line** — treat the underlying GABA deficit.\n\n• [Lorazepam](#/drug/lorazepam/alcohol withdrawal) 1–2 mg IV q15–20 min\n• [Midazolam](#/drug/midazolam/acute agitation) 2.5–5 mg IM if no IV access\n• [Diazepam](#/drug/diazepam/alcohol withdrawal) 5–10 mg IV q5–10 min\n\nFor established withdrawal, phenobarbital protocol may be superior — see [Alcohol Withdrawal](#/tree/alcohol-withdrawal) consult.\n\n**Antipsychotics alone are NOT adequate** — they do not treat the GABA receptor dysfunction and lower seizure threshold.\n\nGive [Thiamine](#/drug/thiamine/wernicke) 100–500 mg IV before glucose.',
+        citation: [2, 7, 8],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-mild-undiff',
+        type: 'question',
+        module: 2,
+        title: 'Drug Intoxication / Undifferentiated',
+        body: 'Assess for **anticholinergic toxidrome** — requires a different approach.\n\n**Anticholinergic signs:** Dry skin, flushed, mydriasis, urinary retention, absent bowel sounds, hyperthermia, delirium\n\n"Red as a beet, dry as a bone, hot as a hare, blind as a bat, mad as a hatter"',
+        citation: [1, 2, 9],
+        options: [
+            {
+                label: 'Anticholinergic toxidrome present',
+                next: 'comb-mild-anticholinergic',
+            },
+            {
+                label: 'Sympathomimetic / other / unclear',
+                next: 'comb-mild-stimulant',
+            },
+        ],
+    },
+    {
+        id: 'comb-mild-anticholinergic',
+        type: 'info',
+        module: 2,
+        title: 'Anticholinergic Delirium',
+        body: '**Benzos or physostigmine. AVOID antipsychotics** — additional anticholinergic burden.\n\n**Sedation:**\n• [Midazolam](#/drug/midazolam/acute agitation) 2.5–5 mg IM/IV\n• [Lorazepam](#/drug/lorazepam/acute agitation) 1–2 mg IV\n\n**Definitive antidote:**\n• [Physostigmine](#/drug/physostigmine/anticholinergic delirium) 0.5–2 mg IV slow push over 5 min\n• Reverses both central and peripheral anticholinergic effects\n\n**Contraindications to physostigmine:**\n• QRS >120 ms (risk of asystole — suspect TCA)\n• Known TCA ingestion\n• Reactive airway disease\n\nPre-treat with glycopyrrolate 0.2 mg IV to prevent cholinergic excess.',
+        citation: [2, 9],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-mild-stimulant',
+        type: 'info',
+        module: 2,
+        title: 'Sympathomimetic / Undifferentiated Agitation',
+        body: '**Benzodiazepines first-line** when etiology is unclear or involves stimulant/polysubstance intoxication.\n\n• [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM — fastest onset, reliable IM absorption\n• [Lorazepam](#/drug/lorazepam/acute agitation) 2 mg IV (if access available)\n\nBenzos treat the widest range of etiologies safely: sympathomimetic toxicity, withdrawal states, undifferentiated agitation.\n\n**Avoid antipsychotics in stimulant intoxication** — lower seizure threshold, impair thermoregulation.\n\nIf no IV access: midazolam IM is preferred (lorazepam IM has erratic absorption).',
+        citation: [1, 2, 3],
+        next: 'comb-response-mild',
+    },
+    {
+        id: 'comb-response-mild',
+        type: 'question',
+        module: 2,
+        title: 'Response to Initial Treatment?',
+        body: 'Reassess **15–20 minutes** after medication.\n\nTarget: **RASS 0 to −1** (calm, cooperative).\n\nMonitor SpO₂, BP, RR.',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Adequate — patient calm',
+                description: 'RASS 0 to −1, cooperative',
+                next: 'comb-post-monitoring',
+            },
+            {
+                label: 'Partial — still agitated',
+                description: 'RASS +1 to +2, improved but not calm',
+                next: 'comb-mild-redose',
+            },
+            {
+                label: 'Failed — escalating',
+                description: 'RASS +3 to +4, worsening',
+                next: 'comb-severe-etiology',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'comb-mild-redose',
+        type: 'info',
+        module: 2,
+        title: 'Redose or Add Second Agent',
+        body: '**Redose** same agent at equal or slightly higher dose after appropriate interval:\n• Antipsychotics: ≥20 min between doses\n• Benzodiazepines: ≥10 min between doses\n\n**OR add a second class:**\n• If antipsychotic alone failed → add a benzodiazepine\n• If benzo alone failed → add an antipsychotic\n\n**⚠️ Exception:** If olanzapine IM was given, do NOT add parenteral benzo — switch to haloperidol first, then add benzo.\n\nCombination therapy is more effective than monotherapy. If still no response after 2 redoses, escalate to severe agitation pathway.',
+        citation: [1, 2, 3],
+        next: 'comb-response-mild',
+    },
+    // ===================================================================
+    // MODULE 3: Severe Agitation
+    // ===================================================================
+    {
+        id: 'comb-severe-etiology',
+        type: 'question',
+        module: 3,
+        title: 'Severe Agitation — Etiology',
+        body: '**RASS +3 to +4** — requires rapid parenteral sedation. Combination therapy (antipsychotic + benzo) is recommended — more effective and faster than either alone.\n\n[Sedation Dosing Table](#/info/comb-sedation-table)\n[Special Populations Guide](#/info/comb-special-pops)',
+        citation: [1, 2, 3, 4],
+        options: [
+            {
+                label: 'Psychosis / undifferentiated',
+                description: 'Combination antipsychotic + benzo',
+                next: 'comb-severe-combo',
+            },
+            {
+                label: 'Alcohol intoxication',
+                description: 'Droperidol/haloperidol preferred',
+                next: 'comb-severe-etoh',
+            },
+            {
+                label: 'Alcohol / sedative withdrawal',
+                description: 'Benzos mandatory',
+                next: 'comb-severe-withdrawal',
+            },
+            {
+                label: 'Anticholinergic toxidrome',
+                description: 'Benzos only, avoid antipsychotics',
+                next: 'comb-severe-anticholinergic',
+            },
+        ],
+    },
+    {
+        id: 'comb-severe-combo',
+        type: 'info',
+        module: 3,
+        title: 'Combination Therapy — Severe Agitation',
+        body: '**Droperidol + Midazolam (preferred):**\n• [Droperidol](#/drug/droperidol/acute agitation) 5 mg IM + [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM\n• Onset 3–10 min. Can draw in same syringe.\n\n**Haloperidol + Midazolam ("B52"):**\n• [Haloperidol](#/drug/haloperidol/acute agitation) 5 mg IM + [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM ± [Diphenhydramine](#/drug/diphenhydramine/acute dystonia) 50 mg IM\n• All 3 compatible in same syringe. Onset 10–15 min.\n\n**If QTc concern (>500 ms):**\n• [Olanzapine](#/drug/olanzapine/acute agitation) 10 mg IM alone (no QTc effect)\n• Do NOT combine IM olanzapine with parenteral benzos\n\nRepeat combination in 15 min if not calm. **Get ECG** after antipsychotic dose to assess QTc.',
+        citation: [1, 2, 3, 4],
+        next: 'comb-severe-response',
+    },
+    {
+        id: 'comb-severe-etoh',
+        type: 'info',
+        module: 3,
+        title: 'Severe Agitation — Alcohol Intoxication',
+        body: '**Butyrophenones preferred:**\n• [Droperidol](#/drug/droperidol/acute agitation) 5 mg IM — fastest onset\n• [Haloperidol](#/drug/haloperidol/acute agitation) 10 mg IM\n\nFor severe agitation, add [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM.\n\n**⚠️ Monitor closely** for respiratory depression — benzos potentiate CNS depression with alcohol. Avoid large benzo doses.\n\nIf patient is **withdrawing** (not intoxicated), switch to withdrawal pathway — benzos are mandatory.',
+        citation: [1, 2, 7],
+        next: 'comb-severe-response',
+    },
+    {
+        id: 'comb-severe-withdrawal',
+        type: 'info',
+        module: 3,
+        title: 'Severe Agitation — Withdrawal',
+        body: '**Benzos are mandatory** — treat the underlying GABA deficit.\n\n• [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM if no IV access\n• [Lorazepam](#/drug/lorazepam/alcohol withdrawal) 2–4 mg IV\n• [Diazepam](#/drug/diazepam/alcohol withdrawal) 10–20 mg IV q5–10 min\n\nWithdrawal patients may need very large cumulative benzo doses.\n\n[Phenobarbital](#/drug/phenobarbital/alcohol withdrawal) is an excellent adjunct — longer duration, more reliable serum levels. See [Alcohol Withdrawal](#/tree/alcohol-withdrawal) consult.\n\n**Antipsychotics are NOT adequate as monotherapy** — they do not address the GABA deficit and lower seizure threshold.',
+        citation: [2, 7, 8],
+        next: 'comb-severe-response',
+    },
+    {
+        id: 'comb-severe-anticholinergic',
+        type: 'info',
+        module: 3,
+        title: 'Severe Anticholinergic Agitation',
+        body: '**Benzodiazepines only — NO antipsychotics** (worsen anticholinergic toxicity).\n\n• [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM, repeat q5–10 min PRN\n• May need large cumulative doses\n\n**Definitive antidote:**\n• [Physostigmine](#/drug/physostigmine/anticholinergic delirium) 1–2 mg IV slow push over 5 min\n• Contraindicated if QRS >120 ms or TCA ingestion\n\nMonitor for seizures. Active cooling if hyperthermic.',
+        citation: [2, 9],
+        next: 'comb-severe-response',
+    },
+    {
+        id: 'comb-severe-response',
+        type: 'question',
+        module: 3,
+        title: 'Response to Treatment?',
+        body: 'Reassess **15–20 minutes** after parenteral sedation.\n\nTarget: **RASS 0 to −2**.\n\nMonitor respiratory status closely — combination therapy increases respiratory depression risk. Pulse oximetry, capnography if available.',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Adequate sedation achieved',
+                description: 'RASS 0 to −2, safe for evaluation',
+                next: 'comb-restraint-needed',
+            },
+            {
+                label: 'Refractory — still severely agitated',
+                description: 'Not responding to combination therapy',
+                next: 'comb-refractory',
+                urgency: 'urgent',
+            },
+        ],
+    },
+    {
+        id: 'comb-refractory',
+        type: 'info',
+        module: 3,
+        title: 'Refractory Agitation',
+        body: 'Patient not responding to standard combination therapy.\n\n**Reconsider diagnosis** — is there an untreated medical cause? Hypoglycemia, hypoxia, head injury, sepsis?\n\n**Escalation options:**\n\n**1. [Ketamine](#/drug/ketamine/acute agitation)** 4 mg/kg IM or 1–2 mg/kg IV\n• Fastest, most reliable. Onset 3–5 min IM.\n• Prepare for intubation. Avoid in elderly and known schizophrenia.\n• If given after other sedatives, reduce dose by 50%.\n\n**2. [Dexmedetomidine](#/drug/dexmedetomidine/refractory agitation)** IV infusion 0.2–1.5 mcg/kg/hr\n• Alpha-2 agonist — no respiratory depression\n• Slower onset. Requires cardiac monitoring (bradycardia risk).\n\n**3. RSI and intubation** if unable to protect airway or need definitive control\n• This is a management endpoint, not a failure.',
+        citation: [1, 4, 5, 10],
+        next: 'comb-restraint-needed',
+    },
+    // ===================================================================
+    // MODULE 4: Restraints
+    // ===================================================================
+    {
+        id: 'comb-restraint-needed',
+        type: 'question',
+        module: 4,
+        title: 'Physical Restraints Needed?',
+        body: 'Physical restraints are a **last resort** but may be necessary for immediate safety while medications take effect. Restraints are NOT a substitute for chemical sedation — always administer medications concurrently.\n\n[Restraint Protocol](#/info/comb-restraint-protocol)',
+        citation: [2, 11],
+        options: [
+            {
+                label: 'Yes — apply restraints',
+                description: 'Patient danger to self/staff, meds not yet effective',
+                next: 'comb-restraint-type',
+            },
+            {
+                label: 'No — sedation sufficient',
+                description: 'Chemical sedation controlling agitation',
+                next: 'comb-post-monitoring',
+            },
+            {
+                label: 'Restraints already in place',
+                description: 'Reassessing need',
+                next: 'comb-restraint-monitoring',
+            },
+        ],
+    },
+    {
+        id: 'comb-restraint-type',
+        type: 'info',
+        module: 4,
+        title: 'Restraint Type Selection',
+        body: 'Select the **least restrictive** option that ensures safety:\n\n• **Soft limb restraints (4-point)** — Standard for acute agitation. Allows IV access, monitoring.\n• **Mittens / hand covers** — Supplement limb restraints when patient removing IVs/tubes.\n• **Vest / torso restraints** — Prevents sitting up. ⚠️ Asphyxiation risk — monitor closely.\n• **Hard restraints (leather)** — Extreme agitation. Increased injury risk. Reserve for refractory cases.\n• **Spit mask / hood** — Spitting/biting (biosafety). Must allow adequate ventilation.\n\n[Restraint Protocol](#/info/comb-restraint-protocol)',
+        citation: [11],
+        next: 'comb-restraint-apply',
+    },
+    {
+        id: 'comb-restraint-apply',
+        type: 'info',
+        module: 4,
+        title: 'Restraint Application',
+        body: '**Team approach — minimum 5 people** (1 per limb + 1 team leader).\n\nTeam leader does NOT touch patient — directs and monitors.\n\n**Application order:**\n1. Arms first (greatest threat)\n2. Then legs\n3. Each limb secured to **bed frame** (not side rails)\n\n**Positioning:**\n• Patient **supine** — NEVER prone (asphyxiation risk)\n• Diagonal pattern: R wrist → R upper rail, L wrist → L lower rail\n• Head of bed elevated\n\n**NEVER:**\n• Hogtie (wrists/ankles bound together behind back)\n• Stack mattresses on patient\n• Place knee on chest or back\n• Leave restrained patient unmonitored\n\nRemove watches, glasses, potential weapons from reach. **Always administer chemical sedation concurrently.**',
+        citation: [2, 11],
+        next: 'comb-restraint-monitoring',
+    },
+    {
+        id: 'comb-restraint-monitoring',
+        type: 'info',
+        module: 4,
+        title: 'Restraint Monitoring & Documentation',
+        body: '**Every 15 minutes:**\n• Circulation checks — distal pulses, capillary refill\n• Sensation and skin integrity under restraints\n• Respiratory status\n• Offer food, water, toileting\n\n**Every 1–2 hours:**\n• Physician reassessment — document ongoing need\n• Attempt to release one limb at a time as patient calms\n\n**Order time limits:**\n• Adults (≥18): 4 hours maximum per order\n• Adolescents (9–17): 2 hours\n• Children (<9): 1 hour\n\n**Face-to-face evaluation** by physician within 1 hour of restraint initiation.\n\n**Remove restraints** as soon as patient is calm enough to be safe. Partial release (1 limb at a time) to test tolerance.',
+        citation: [2, 11],
+        next: 'comb-restraint-result',
+    },
+    {
+        id: 'comb-restraint-result',
+        type: 'result',
+        module: 4,
+        title: 'Restraint Documentation Checklist',
+        body: '**Required documentation (Joint Commission):**\n\n1. Behavior necessitating restraints\n2. Less restrictive alternatives attempted (verbal de-escalation, PO meds)\n3. Type of restraint applied\n4. Time applied\n5. Names of all staff involved\n6. Neurovascular checks q15 min (documented)\n7. Physician face-to-face evaluation within 1 hour\n8. Physician reassessment q1–2h (documented)\n9. Ongoing need assessment at each check\n10. Patient notification of behavior criteria for discontinuation\n11. Family notification (if applicable)\n12. Time of removal and total duration\n13. Post-restraint debriefing with patient and staff\n14. Revisions to care plan\n\n**Most common regulatory citations** relate to incomplete restraint documentation.',
+        citation: [11],
+        next: 'comb-post-monitoring',
+    },
+    // ===================================================================
+    // MODULE 5: Post-Sedation Care
+    // ===================================================================
+    {
+        id: 'comb-post-monitoring',
+        type: 'info',
+        module: 5,
+        title: 'Post-Sedation Monitoring',
+        body: '**ALL patients receiving pharmacological sedation require:**\n\n**Respiratory:**\n• Continuous pulse oximetry\n• Capnography (ETCO₂) if available — detects hypoventilation before SpO₂ drops\n• BVM and suction at bedside\n• Head of bed elevated\n\n**Cardiac:**\n• Continuous telemetry if antipsychotic given\n• **ECG** — obtain after haloperidol or droperidol for QTc\n• QTc >500 ms or increase >60 ms → discontinue agent, correct K⁺ and Mg²⁺\n\n**Neurologic:**\n• Watch for **dystonia** — treat with [Diphenhydramine](#/drug/diphenhydramine/acute dystonia) 50 mg IV/IM or [Benztropine](#/drug/benztropine/acute dystonia) 1–2 mg IV\n• Watch for **akathisia** (restlessness mistaken for worsening agitation) — do NOT escalate antipsychotic, give benzo\n\n**Labs:** CK if prolonged agitation or restraints (rhabdomyolysis). Temperature — rectal/core if concern for hyperthermia.',
+        citation: [1, 2, 5],
+        next: 'comb-eval-workup',
+    },
+    {
+        id: 'comb-eval-workup',
+        type: 'info',
+        module: 5,
+        title: 'Medical Evaluation',
+        body: 'Once safely sedated, complete the diagnostic workup. **Do not attribute agitation to "psych" until medical causes are excluded.**\n\n**All patients:**\n• Fingerstick glucose (recheck)\n• BMP, CBC, VBG with lactate\n• ECG\n• Urine drug screen (interpret cautiously)\n\n**Consider based on presentation:**\n• CT head — trauma, anticoagulation, focal deficits\n• CXR — aspiration, pneumonia\n• Blood cultures — if febrile\n• Ammonia — liver disease\n• TSH\n• CK, renal function — rhabdomyolysis from prolonged agitation\n• Serum EtOH\n• Acetaminophen / salicylate levels — if intentional ingestion\n• LP — meningeal signs, immunocompromised',
+        citation: [1, 2],
+        next: 'comb-disposition',
+    },
+    {
+        id: 'comb-disposition',
+        type: 'question',
+        module: 5,
+        title: 'Disposition',
+        body: 'Disposition depends on etiology, treatment response, and ongoing safety.\n\n• Has the underlying cause been identified and treated?\n• Is the patient at baseline mental status?\n• Can the patient be safely monitored at the destination?',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'ICU admission',
+                description: 'Intubated, refractory, hemodynamically unstable, rhabdomyolysis',
+                next: 'comb-dispo-icu',
+                urgency: 'critical',
+            },
+            {
+                label: 'Floor / observation',
+                description: 'Ongoing sedation needs, workup pending, withdrawal management',
+                next: 'comb-dispo-admit',
+            },
+            {
+                label: 'Psychiatric evaluation',
+                description: 'Medically cleared, psychiatric cause, safety assessment',
+                next: 'comb-dispo-psych',
+            },
+            {
+                label: 'Discharge',
+                description: 'Resolved, at baseline, safe plan',
+                next: 'comb-dispo-discharge',
+            },
+        ],
+    },
+    {
+        id: 'comb-dispo-icu',
+        type: 'result',
+        module: 5,
+        title: 'ICU Admission',
+        body: '**Indications:**\n• Intubation/RSI for airway protection\n• Refractory agitation requiring continuous sedation infusion\n• Hemodynamic instability\n• Rhabdomyolysis (CK >5000)\n• Excited delirium features — hyperthermia, metabolic acidosis\n• QTc >500 ms with arrhythmia risk\n\n**Handoff:**\n• Medications given (drug, dose, time, response)\n• Current drips\n• Restraint status and monitoring schedule\n• Pending workup results',
+        citation: [1, 4],
+    },
+    {
+        id: 'comb-dispo-admit',
+        type: 'result',
+        module: 5,
+        title: 'Floor / Observation Admission',
+        body: '**Indications:**\n• Ongoing alcohol withdrawal requiring serial benzo dosing\n• Active medical workup — imaging, labs pending\n• Need for continued restraints or q1–2h reassessment\n• Unclear etiology requiring monitoring\n\n**Handoff:**\n• Last sedation dose and time\n• Restraint status and next check time\n• Monitoring requirements (telemetry, pulse ox)\n• Pending studies',
+        citation: [1, 2],
+    },
+    {
+        id: 'comb-dispo-psych',
+        type: 'result',
+        module: 5,
+        title: 'Psychiatric Evaluation',
+        body: '**Only after medical causes excluded.**\n\n**Required before psych eval:**\n• Vitals normal\n• Labs unremarkable (or explained)\n• Patient at baseline mental status from medical standpoint\n\n**Refer for:**\n• Suicidal ideation\n• Psychotic decompensation\n• Grave disability\n\nIf patient is medically cleared but still requires chemical restraint, they are NOT ready for psychiatric evaluation — continue medical management.\n\nDocument medical clearance checklist.',
+        citation: [1, 2],
+    },
+    {
+        id: 'comb-dispo-discharge',
+        type: 'result',
+        module: 5,
+        title: 'Discharge',
+        body: '**Criteria:**\n• Agitation resolved, at baseline mental status\n• Vitals stable\n• No medical cause requiring admission\n• Safe disposition — not intoxicated, has support\n\n**Minimum 1 hour observation** after last sedation dose.\n\nEnsure patient can ambulate safely.\n\n**Provide:**\n• If EtOH-related: substance use resources, discuss AUD treatment\n• If psychiatric: safety plan, outpatient follow-up\n\nDocument: medications given, duration of observation, mental status at discharge, disposition plan.',
+        citation: [1, 2],
+    },
+];
+export const COMBATIVE_PATIENT_NODE_COUNT = COMBATIVE_PATIENT_NODES.length;
+export const COMBATIVE_PATIENT_MODULE_LABELS = [
+    'Assessment',
+    'Mild-Moderate Agitation',
+    'Severe Agitation',
+    'Restraints',
+    'Post-Sedation Care',
+];
+export const COMBATIVE_PATIENT_CITATIONS = [
+    { num: 1, text: 'Thiessen MEW, Godwin SA, et al. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or Emergency Department Patients Presenting With Severe Agitation. ACEP. Ann Emerg Med. 2024;83:e1.' },
+    { num: 2, text: 'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. Updated Oct 10, 2025.' },
+    { num: 3, text: 'Wilson MP, Pepper D, Currier GW, et al. The Psychopharmacology of Agitation: Consensus Statement of the AAEP Project BETA Psychopharmacology Workgroup. West J Emerg Med. 2012;13(1):26-34.' },
+    { num: 4, text: 'Barbic D, Andolfatto G, Grunau B, et al. Rapid Agitation Control With Ketamine in the Emergency Department: A Blinded, Randomized Controlled Trial. Ann Emerg Med. 2021;78(6):788-795.' },
+    { num: 5, text: 'Klein LR, Driver BE, Miner JR, et al. Intramuscular Midazolam, Olanzapine, Ziprasidone, or Haloperidol for Treating Acute Agitation in the Emergency Department. Ann Emerg Med. 2018;72(4):374-385.' },
+    { num: 6, text: 'Casey MF, Elder NM, Fenn A, et al. Comparative Safety of Medications for Severe Agitation: A Geriatric Emergency Department Guidelines 2.0 Systematic Review. J Am Geriatr Soc. 2025;73:2893.' },
+    { num: 7, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. 2026.' },
+    { num: 8, text: 'Wolf C, Curry A, Nacht J, Simpson SA. Management of Alcohol Withdrawal in the Emergency Department: Current Perspectives. Open Access Emerg Med. 2020;12:53-65.' },
+    { num: 9, text: 'Burns MJ, et al. A comparison of physostigmine and benzodiazepines for the treatment of anticholinergic poisoning. Ann Emerg Med. 2000;35(4):374-381.' },
+    { num: 10, text: 'Preskorn SH, Zeller S, Citrome L, et al. Effect of Sublingual Dexmedetomidine vs Placebo on Acute Agitation Associated With Bipolar Disorder. JAMA. 2022;327:727.' },
+    { num: 11, text: 'Knox DK, Holloman GH. Use and Avoidance of Seclusion and Restraint: Consensus Statement of the AAEP Project BETA Seclusion and Restraint Workgroup. West J Emerg Med. 2012;13(1):35-40.' },
+];

@@ -267,6 +267,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'acr-inr', label: 'INR Guide', icon: '📊', action: 'overlay', target: 'acr-inr-guide' },
         { id: 'acr-labs', label: 'Coag Labs', icon: '🔬', action: 'overlay', target: 'acr-coag-labs' },
     ],
+    'combative-patient': [
+        { id: 'comb-deesc', label: 'De-escalate', icon: '🗣️', action: 'overlay', target: 'comb-deescalation' },
+        { id: 'comb-dosing', label: 'Dosing', icon: '💊', action: 'overlay', target: 'comb-sedation-table' },
+        { id: 'comb-restrain', label: 'Restraints', icon: '🔒', action: 'overlay', target: 'comb-restraint-protocol' },
+        { id: 'comb-pops', label: 'Spec Pops', icon: '👥', action: 'overlay', target: 'comb-special-pops' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

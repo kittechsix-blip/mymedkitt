@@ -32,6 +32,7 @@ export { ALCOHOL_WITHDRAWAL_NODES, ALCOHOL_WITHDRAWAL_MODULE_LABELS, ALCOHOL_WIT
 export { TUBERCULOSIS_NODES, TUBERCULOSIS_MODULE_LABELS, TUBERCULOSIS_CITATIONS } from './tuberculosis';
 export { HEMOPHILIA_NODES, HEMOPHILIA_MODULE_LABELS, HEMOPHILIA_CITATIONS } from './hemophilia';
 export { ANTICOAG_REVERSAL_NODES, ANTICOAG_REVERSAL_MODULE_LABELS, ANTICOAG_REVERSAL_CITATIONS } from './anticoag-reversal';
+export { COMBATIVE_PATIENT_NODES, COMBATIVE_PATIENT_MODULE_LABELS, COMBATIVE_PATIENT_CITATIONS } from './combative-patient';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

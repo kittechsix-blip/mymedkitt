@@ -8810,6 +8810,199 @@ const ACR_COAG_LABS: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Combative Patient
+// -------------------------------------------------------------------
+
+const COMB_SUMMARY: InfoPage = {
+  id: 'comb-summary',
+  title: 'Combative Patient Steps Summary',
+  subtitle: 'Quick Reference — Agitation Management',
+  sections: [
+    {
+      heading: 'Assessment',
+      body: '• Scene safety, ABCs, fingerstick glucose, security\n• Severity: Is patient redirectable?\n• Immediate threat → restrain + sedate simultaneously',
+    },
+    {
+      heading: 'Mild-Moderate (RASS +1 to +2)',
+      body: '• Verbal de-escalation first\n• Etiology-based drug selection:\n  – Psych: antipsychotics preferred\n  – EtOH intoxication: butyrophenones (droperidol/haloperidol)\n  – Withdrawal: benzos mandatory\n  – Anticholinergic: benzos + physostigmine, NO antipsychotics\n  – Undifferentiated: benzos first-line',
+    },
+    {
+      heading: 'Severe (RASS +3 to +4)',
+      body: '• Combination therapy: antipsychotic + benzo\n• Droperidol 5 mg + Midazolam 5 mg IM (preferred)\n• OR Haloperidol 5 mg + Midazolam 5 mg ± Diphenhydramine 50 mg IM ("B52")\n• Refractory → Ketamine 4 mg/kg IM / Dexmedetomidine / RSI',
+    },
+    {
+      heading: 'Restraints',
+      body: '• Last resort — bridge while meds take effect\n• 5-person team, arms first, supine only\n• Monitoring: q15 min circulation, q1-2h physician reassess\n• Order limits: 4h adults, 2h teens, 1h children',
+    },
+    {
+      heading: 'Post-Sedation',
+      body: '• SpO₂, ECG (QTc after antipsychotics)\n• Watch for dystonia and akathisia\n• Complete medical workup — do NOT attribute to "psych" prematurely\n• Disposition: ICU / floor / psych eval / discharge',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Thiessen MEW, et al. ACEP Clinical Policy: Severe Agitation. Ann Emerg Med. 2024;83:e1.' },
+    { num: 2, text: 'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.' },
+  ],
+};
+
+const COMB_DEESCALATION: InfoPage = {
+  id: 'comb-deescalation',
+  title: 'Verbal De-escalation',
+  subtitle: 'First-Line for ALL Levels of Agitation',
+  sections: [
+    {
+      heading: 'ERASER Framework',
+      body: 'E — Empathy: "I can see you are upset"\nR — Respect: "I want to help you"\nA — Active listening: nod, reflect, do not interrupt\nS — Safety: "You are safe here"\nE — Environment: reduce stimulation, lower lights\nR — Rapport: "What can I do for you right now?"',
+    },
+    {
+      heading: 'AAEP 10 Domains (Project BETA)',
+      body: '1. Respect personal space (≥2 arm lengths)\n2. Do not be provocative\n3. Establish verbal contact — one person speaks\n4. Be concise, use simple language\n5. Identify wants and feelings\n6. Listen actively\n7. Agree or agree to disagree\n8. Lay down the law and set clear limits\n9. Offer choices and optimism\n10. Debrief the patient and staff afterward',
+    },
+    {
+      heading: 'Environmental Interventions',
+      body: '• Reduce stimulation: dim lights, reduce noise, single room\n• Remove potential weapons and sharps\n• Offer food, drink, blanket, phone charger\n• Allow one trusted person present if safe\n• Show of force (security presence) — nonverbal limit-setting, avoids sedation in up to 27% of cases',
+    },
+    {
+      heading: 'When to Escalate',
+      body: '• De-escalation failing after 5-10 minutes of active attempt\n• Patient is escalating despite verbal engagement\n• Patient has made a direct physical threat or assault\n• Patient is at risk for self-harm\n• Environmental safety compromised (weapons, barricading)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Wilson MP, et al. AAEP Project BETA Psychopharmacology Workgroup. West J Emerg Med. 2012;13(1):26-34.' },
+    { num: 2, text: 'Richmond JS, et al. AAEP Project BETA De-escalation Workgroup. West J Emerg Med. 2012;13(1):17-25.' },
+  ],
+};
+
+const COMB_SEDATION_TABLE: InfoPage = {
+  id: 'comb-sedation-table',
+  title: 'Sedation Dosing Quick Reference',
+  subtitle: 'Acute Agitation — Drug Selection & Dosing',
+  sections: [
+    {
+      heading: 'First-Generation Antipsychotics',
+      body: '',
+      drugTable: [
+        { drug: 'Droperidol', regimen: '2.5-5 mg IM/IV. Onset 3-10 min. Duration 2-4h. QTc monitoring. Fastest antipsychotic.' },
+        { drug: 'Haloperidol', regimen: '5-10 mg IM/IV. Onset 10-20 min IM, 3-20 min IV. Duration up to 24h. QTc monitoring. Elderly: 0.5-2 mg.' },
+      ],
+    },
+    {
+      heading: 'Second-Generation Antipsychotics',
+      body: '',
+      drugTable: [
+        { drug: 'Olanzapine', regimen: '10 mg IM or 5-10 mg PO/ODT. Onset 15-45 min IM. No QTc. ⚠️ Do NOT combine with parenteral benzos.' },
+        { drug: 'Ziprasidone', regimen: '10-20 mg IM. Onset 15-30 min. QTc monitoring. CAN combine with benzos. Max 40 mg/24h IM.' },
+        { drug: 'Risperidone', regimen: '1-2 mg PO. Onset 30-60 min. PO only. ODT available.' },
+        { drug: 'Quetiapine', regimen: '25-100 mg PO. Best for elderly, Parkinson\'s/Lewy body (12.5-25 mg). PO only.' },
+      ],
+    },
+    {
+      heading: 'Benzodiazepines',
+      body: '',
+      drugTable: [
+        { drug: 'Midazolam', regimen: '2.5-5 mg IM/IV. Onset 2-5 min. Duration 1-2h. Best IM absorption. Repeat q3-5 min IV.' },
+        { drug: 'Lorazepam', regimen: '1-2 mg IV or 2-4 mg IM. Onset 2-5 min IV. Duration 6-8h. IM absorption erratic — prefer IV.' },
+        { drug: 'Diazepam', regimen: '10-20 mg PO/IV. Onset within minutes IV. Do NOT give IM. Duration >20h with repeated doses.' },
+      ],
+    },
+    {
+      heading: 'Combination Regimens',
+      body: '"B52": Haloperidol 5 mg + Midazolam 5 mg + Diphenhydramine 50 mg — all compatible in one syringe IM\n\nDroperidol 5 mg + Midazolam 5 mg IM — fastest combination\n\n⚠️ Do NOT combine IM olanzapine with parenteral benzos — respiratory depression risk',
+    },
+    {
+      heading: 'Rescue / Refractory',
+      body: '',
+      drugTable: [
+        { drug: 'Ketamine', regimen: '4 mg/kg IM (onset 3-5 min) or 1-2 mg/kg IV. Max 400 mg IM. Prepare for intubation. Avoid in schizophrenia, elderly.' },
+        { drug: 'Dexmedetomidine', regimen: 'SL film 120-180 mcg or IV infusion 0.2-1.5 mcg/kg/hr. No respiratory depression. Bradycardia risk.' },
+        { drug: 'Physostigmine', regimen: '0.5-2 mg IV over 5 min. Anticholinergic delirium ONLY. Check QRS <120 ms first. Not for TCA.' },
+      ],
+    },
+    {
+      heading: 'Elderly Dose Adjustments',
+      body: 'Half-dose ALL agents. Avoid benzos (paradoxical agitation, falls). Max haloperidol 5 mg/24h. Max olanzapine 15 mg/24h. Quetiapine 12.5-25 mg preferred for Parkinson\'s/Lewy body.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.' },
+    { num: 2, text: 'Klein LR, et al. IM Midazolam, Olanzapine, Ziprasidone, or Haloperidol for Acute Agitation. Ann Emerg Med. 2018;72(4):374-385.' },
+    { num: 3, text: 'Isoardi KZ, et al. Best Approach for Parenteral Sedation for Acute Behavioral Disturbance in the ED. Clin Toxicol. 2026;64(2):79-85.' },
+  ],
+};
+
+const COMB_RESTRAINT_PROTOCOL: InfoPage = {
+  id: 'comb-restraint-protocol',
+  title: 'Restraint Protocol & Documentation',
+  subtitle: 'Physical Restraint Application, Monitoring & Requirements',
+  sections: [
+    {
+      heading: 'Indications',
+      body: '• Patient is immediate danger to self or staff\n• Verbal de-escalation failed\n• Chemical sedation not yet effective or insufficient\n• Restraints are a BRIDGE — always administer medications concurrently',
+    },
+    {
+      heading: 'Restraint Type Selection',
+      body: '• Soft limb restraints (4-point): Standard for acute agitation — allows IV access, monitoring\n• Mittens / hand covers: Supplement when pulling IVs/tubes\n• Vest / torso: Prevent sitting up — ⚠️ asphyxiation risk, monitor closely\n• Hard restraints (leather): Extreme agitation — increased injury risk, reserve for refractory\n• Spit mask / hood: Spitting/biting biosafety — must allow adequate ventilation',
+    },
+    {
+      heading: 'Team & Technique',
+      body: '• Minimum 5 people (1 per limb + 1 team leader)\n• Team leader does NOT touch patient — directs and monitors\n• Arms first (greatest threat), then legs\n• Each limb secured to BED FRAME (not side rails)\n• Patient SUPINE — NEVER prone (asphyxiation risk)\n• Diagonal pattern: R wrist → R upper rail, L wrist → L lower rail\n• Remove watches, glasses, potential weapons from reach',
+    },
+    {
+      heading: 'NEVER',
+      body: '• Hogtie (wrists/ankles bound behind back)\n• Prone restraint\n• Stack mattresses on patient\n• Place knee on chest or back\n• Restrain without concurrent chemical sedation\n• Leave restrained patient unmonitored',
+    },
+    {
+      heading: 'Monitoring Schedule',
+      body: 'Every 15 min:\n• Circulation — distal pulses, capillary refill\n• Sensation and skin integrity under restraints\n• Respiratory status\n• Offer food, water, toileting\n\nEvery 1-2 hours:\n• Physician reassessment — document ongoing need\n• Attempt partial release (1 limb) as patient calms',
+    },
+    {
+      heading: 'Order Time Limits',
+      body: '• Adults (≥18 years): 4 hours maximum per order\n• Adolescents (9-17 years): 2 hours\n• Children (<9 years): 1 hour\n• Face-to-face physician evaluation within 1 hour of initiation\n• New order required before each expiration\n• Physician must see patient in person before each renewal',
+    },
+    {
+      heading: 'Required Documentation (Joint Commission)',
+      body: '1. Behavior necessitating restraints\n2. Less restrictive alternatives attempted\n3. Type of restraint applied\n4. Time applied\n5. Names of all staff involved\n6. Neurovascular checks q15 min (each documented)\n7. Physician face-to-face evaluation within 1 hour\n8. Physician reassessment q1-2h (each documented)\n9. Ongoing need assessment at each check\n10. Patient informed of behavior criteria for discontinuation\n11. Family notification (if applicable, mandatory for minors)\n12. Time of removal and total duration\n13. Post-restraint debriefing with patient and staff\n14. Revisions to care plan',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Knox DK, Holloman GH. Use and Avoidance of Seclusion and Restraint: AAEP Project BETA. West J Emerg Med. 2012;13(1):35-40.' },
+    { num: 2, text: 'R3 Report Issue 44: New and Revised Restraint and Seclusion Requirements. The Joint Commission. 2024.' },
+  ],
+};
+
+const COMB_SPECIAL_POPS: InfoPage = {
+  id: 'comb-special-pops',
+  title: 'Special Populations Guide',
+  subtitle: 'Dose & Drug Modifications for Agitation',
+  sections: [
+    {
+      heading: 'Elderly (Age ≥65)',
+      body: '• Half-dose ALL agents\n• Avoid benzodiazepines — paradoxical agitation, falls, respiratory depression\n• First-line IM: Haloperidol 0.5-2 mg or Olanzapine 2.5-5 mg\n• First-line PO: Quetiapine 25-50 mg or Risperidone 0.5-1 mg\n• FDA black box: all antipsychotics increase mortality in dementia-related psychosis (1.6-1.7×)\n• Max haloperidol 5 mg/24h, olanzapine 15 mg/24h\n• Midazolam: highest adverse event rate in elderly (53%, OR 5.25 vs haloperidol)',
+    },
+    {
+      heading: 'Parkinson\'s Disease / Lewy Body Dementia',
+      body: '• AVOID typical antipsychotics (haloperidol, droperidol) — worsen motor symptoms\n• Lewy body: extreme neuroleptic sensitivity — even "safe" agents can trigger life-threatening reactions\n• First-line: Quetiapine 12.5-25 mg PO (lowest D2 affinity)\n• If IM needed: Low-dose midazolam 1-2 mg or olanzapine 2.5 mg\n• Consult neurology early',
+    },
+    {
+      heading: 'Pregnancy',
+      body: '• Benzodiazepines preferred for acute agitation\n• Lorazepam 1-2 mg IM/IV — most pregnancy safety data among benzos, no active metabolites\n• Midazolam 2.5-5 mg IM if rapid onset needed\n• If antipsychotic required: Haloperidol has most safety data (FDA category C)\n• Avoid droperidol\n• Fetal monitoring after sedation\n• OB consult\n• Left lateral tilt positioning to prevent aortocaval compression',
+    },
+    {
+      heading: 'Anticholinergic Delirium',
+      body: '• Benzodiazepines only — NO antipsychotics (worsen anticholinergic toxicity)\n• Physostigmine 0.5-2 mg IV is definitive antidote\n• Contraindications: QRS >120 ms, TCA ingestion, reactive airway disease\n• Pre-treat with glycopyrrolate 0.2 mg IV\n• May need large cumulative benzo doses',
+    },
+    {
+      heading: 'Renal / Hepatic Impairment',
+      body: '• Lorazepam preferred benzo — no active metabolites, glucuronidation (not hepatic CYP)\n• Reduce antipsychotic doses in hepatic impairment\n• Avoid diazepam in liver disease — long-acting active metabolites (desmethyldiazepam)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Casey MF, et al. Comparative Safety of Medications for Severe Agitation: Geriatric ED Guidelines 2.0. J Am Geriatr Soc. 2025;73:2893.' },
+    { num: 2, text: 'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -9063,6 +9256,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'acr-reversal-summary': ACR_REVERSAL_SUMMARY,
   'acr-inr-guide': ACR_INR_GUIDE,
   'acr-coag-labs': ACR_COAG_LABS,
+  'comb-summary': COMB_SUMMARY,
+  'comb-deescalation': COMB_DEESCALATION,
+  'comb-sedation-table': COMB_SEDATION_TABLE,
+  'comb-restraint-protocol': COMB_RESTRAINT_PROTOCOL,
+  'comb-special-pops': COMB_SPECIAL_POPS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

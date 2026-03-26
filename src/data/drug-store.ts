@@ -1719,6 +1719,10 @@ const DIPHENHYDRAMINE: DrugEntry = {
       regimen: '25-50 mg IV. First-generation H1 antagonist. Used as adjunct to epinephrine for histamine-mediated angioedema/anaphylaxis. Relieves cutaneous symptoms (urticaria, itching). Combine with a second-generation antihistamine (cetirizine) and H2 blocker (famotidine) for dual antihistamine therapy. Pediatric: 1 mg/kg IV (max 50 mg).',
       weightCalc: { dosePerKg: 1, unit: 'mg', maxDose: 50, label: 'Pediatric dose' },
     },
+    {
+      indication: 'Acute dystonia (antipsychotic-induced)',
+      regimen: '50 mg IM or IV. Part of "B52" combination (Benadryl 50 + Haloperidol 5 + Midazolam 5 mg IM). Onset 5-15 min. Duration 4-6 hours. Treats and prevents acute dystonic reactions from antipsychotics.',
+    },
   ],
   contraindications: [
     'Known hypersensitivity',
@@ -5585,6 +5589,10 @@ const DIAZEPAM: DrugEntry = {
       indication: 'Alcohol Withdrawal — Symptom-triggered/Front-loading',
       regimen: '**Symptom-triggered:** 5-10 mg IV q5-10 min when CIWA-Ar ≥8. **Front-loading (high-risk patients):** 5-10 mg IV q5-10 min until symptoms controlled. Preferred benzodiazepine — rapid onset (2-5 min), long-acting with active metabolites, smoother clinical course. Avoid IM route (variable absorption). Select patients may require >500 mg for initial DT control. Convert to oral as soon as possible.',
     },
+    {
+      indication: 'Acute agitation (undifferentiated)',
+      regimen: '10-20 mg PO or IV. IV onset within minutes. Single IV dose duration 1-2 hours. Following multiple doses, duration prolonged >20 hours due to active metabolites. Preferred when prolonged agitation anticipated. Do NOT give IM — erratic absorption.',
+    },
   ],
   contraindications: [
     'Acute narrow-angle glaucoma',
@@ -5915,6 +5923,10 @@ const PROPOFOL: DrugEntry = {
       indication: 'Refractory SE — continuous infusion',
       regimen: 'Load 1-2 mg/kg IV bolus, then infuse 30-200 mcg/kg/min (1.8-12 mg/kg/hr). Titrate to EEG burst suppression. Maintain 24-48h before wean attempt. Rapid onset and offset — easier to titrate than barbiturates.',
       weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Loading bolus' },
+    },
+    {
+      indication: 'Refractory agitation (post-intubation)',
+      regimen: 'After RSI: infusion 5-50 mcg/kg/min IV, titrate to RASS -2 to -3. For patients requiring intubation due to refractory agitation. Continuous monitoring required.',
     },
   ],
   contraindications: [
@@ -7358,6 +7370,145 @@ const PRETOMANID: DrugEntry = {
   ],
 };
 
+const BENZTROPINE: DrugEntry = {
+  id: 'benztropine',
+  name: 'Benztropine (Cogentin)',
+  genericName: 'Benztropine mesylate',
+  drugClass: 'Anticholinergic / antiparkinson',
+  route: 'IM/IV',
+  indications: ['Acute dystonia (antipsychotic-induced)'],
+  dosing: [
+    {
+      indication: 'Acute dystonia',
+      regimen: '1-2 mg IM or IV. Onset 15 min (IM), 5 min (IV). May repeat once after 30 min. Treats torticollis, oculogyric crisis, jaw clenching, laryngospasm. Duration 6-8 hours (longer than diphenhydramine).',
+    },
+  ],
+  contraindications: [
+    'Angle-closure glaucoma',
+    'GI obstruction or paralytic ileus',
+    'Children under 3 years',
+    'Tardive dyskinesia (may worsen)',
+  ],
+  cautions: [
+    'Anticholinergic effects: tachycardia, urinary retention, dry mouth, confusion',
+    'Use with caution in elderly',
+  ],
+  monitoring: 'Heart rate, mental status, urinary retention.',
+  notes: 'Longer duration than diphenhydramine (6-8h vs 4-6h). Alternative to diphenhydramine for acute dystonia.',
+  citations: [
+    'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.',
+  ],
+};
+
+const DEXMEDETOMIDINE: DrugEntry = {
+  id: 'dexmedetomidine',
+  name: 'Dexmedetomidine (Precedex)',
+  genericName: 'Dexmedetomidine hydrochloride',
+  drugClass: 'Alpha-2 adrenergic agonist',
+  route: 'IV/SL',
+  indications: ['Refractory agitation', 'ICU sedation'],
+  dosing: [
+    {
+      indication: 'Acute agitation — sublingual film (Igalmi)',
+      regimen: '120 mcg sublingual (mild-moderate) or 180 mcg (severe). Place film under tongue — do not swallow, chew, or spit for 15 min. Onset 20-40 min. Single dose. FDA-approved for agitation in schizophrenia and bipolar disorder.',
+    },
+    {
+      indication: 'Refractory agitation — IV infusion',
+      regimen: 'Infusion 0.2-1.5 mcg/kg/hr. Titrate q15 min. Optional loading: 0.5-1 mcg/kg IV over 10 min (may cause transient hypertension). No respiratory depression — major advantage.',
+      weightCalc: { dosePerKg: 1, unit: 'mcg', maxDose: 200, label: 'IV loading dose' },
+    },
+  ],
+  contraindications: [
+    'Advanced heart block (2nd/3rd degree) without pacemaker',
+    'Severe bradycardia (HR <50)',
+    'Severe hypotension',
+  ],
+  cautions: [
+    'Bradycardia — most common adverse effect, have atropine available',
+    'Hypotension — avoid loading dose if hemodynamically borderline',
+    'Transient hypertension during loading dose',
+    'No respiratory depression — unique advantage for non-intubated patients',
+    'Slower onset than benzos or ketamine — not for immediate control',
+  ],
+  monitoring: 'Continuous cardiac monitor (bradycardia). BP q5 min during loading, q15 min during infusion. SpO2.',
+  notes: 'Produces "cooperative sedation" — arousable, follows commands. No respiratory depression. Ideal for patients who failed first-line agents but do not need intubation. Sublingual film (Igalmi) approved 2022.',
+  citations: [
+    'Preskorn SH, Zeller S, et al. Sublingual Dexmedetomidine vs Placebo for Acute Agitation in Bipolar Disorder. JAMA. 2022;327:727.',
+    'Carrasco G, et al. Dexmedetomidine for Hyperactive Delirium Refractory to Haloperidol in Nonintubated ICU Patients. Crit Care Med. 2016;44:1295.',
+  ],
+};
+
+const PHYSOSTIGMINE: DrugEntry = {
+  id: 'physostigmine',
+  name: 'Physostigmine (Antilirium)',
+  genericName: 'Physostigmine salicylate',
+  drugClass: 'Cholinesterase inhibitor',
+  route: 'IV',
+  indications: ['Anticholinergic delirium'],
+  dosing: [
+    {
+      indication: 'Anticholinergic delirium',
+      regimen: '0.5-2 mg IV slow push over 5 min (max 1 mg/min). Start 0.5-1 mg, may repeat q10-20 min. Max 2 mg/dose. Duration 20-60 min — may need redosing. Pre-treat with glycopyrrolate 0.2 mg IV to prevent cholinergic excess.',
+      weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 2 },
+    },
+  ],
+  contraindications: [
+    'QRS >120 ms — risk of asystole with TCA poisoning',
+    'Known or suspected TCA ingestion',
+    'Reactive airway disease / asthma',
+    'GI or GU obstruction',
+  ],
+  cautions: [
+    'MUST administer slowly — rapid push can cause seizures, bradycardia, asystole',
+    'Short duration (20-60 min) — symptoms may recur',
+    'Have atropine at bedside as reversal',
+    'Check ECG before administering — QRS must be narrow',
+  ],
+  monitoring: 'Continuous cardiac monitor. HR, BP q5 min during infusion. Watch for cholinergic excess (bradycardia, bronchospasm, SLUDGE).',
+  notes: 'Definitive antidote for anticholinergic toxicity — crosses blood-brain barrier (unlike neostigmine). Classic toxidrome: "red as a beet, dry as a bone, hot as a hare, blind as a bat, mad as a hatter."',
+  citations: [
+    'Burns MJ, et al. Physostigmine vs benzodiazepines for anticholinergic poisoning. Ann Emerg Med. 2000;35(4):374-381.',
+    'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.',
+  ],
+};
+
+const ZIPRASIDONE: DrugEntry = {
+  id: 'ziprasidone',
+  name: 'Ziprasidone (Geodon)',
+  genericName: 'Ziprasidone mesylate',
+  drugClass: 'Atypical antipsychotic',
+  route: 'IM/PO',
+  indications: ['Acute agitation', 'Psychosis'],
+  dosing: [
+    {
+      indication: 'Acute agitation — IM',
+      regimen: '10-20 mg IM. Onset 15-30 min. May repeat 10 mg q2h or 20 mg q4h. Max 40 mg/24h IM.',
+    },
+    {
+      indication: 'Acute agitation — PO',
+      regimen: '20 mg PO with food (absorption doubles with food). Onset 30-60 min. Max 80 mg/24h.',
+    },
+  ],
+  contraindications: [
+    'QTc >500 ms or history of torsades de pointes',
+    'Recent MI or decompensated heart failure',
+    'Concurrent use of QT-prolonging drugs (Class IA/III antiarrhythmics)',
+  ],
+  cautions: [
+    'QTc prolongation — obtain ECG before and after',
+    'Less sedating than olanzapine',
+    'Lower EPS risk than haloperidol',
+    'Must take PO with food (>500 cal) for adequate absorption',
+    'FDA black box: increased mortality in elderly with dementia-related psychosis',
+  ],
+  monitoring: 'ECG before and after dosing. Blood pressure. RASS q15 min.',
+  notes: 'CAN combine with parenteral benzodiazepines (unlike olanzapine). Lower EPS risk than haloperidol. QTc prolongation requires monitoring.',
+  citations: [
+    'Wilson MP, et al. The Psychopharmacology of Agitation: Consensus Statement of the AAEP Project BETA. West J Emerg Med. 2012;13(1):26-34.',
+    'Klein LR, Driver BE, et al. Intramuscular Midazolam, Olanzapine, Ziprasidone, or Haloperidol for Treating Acute Agitation in the ED. Ann Emerg Med. 2018;72(4):374-385.',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
@@ -7384,6 +7535,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   BACITRACIN,
   BEDAQUILINE,
   BENZATHINE_PENICILLIN,
+  BENZTROPINE,
   BIKTARVY,
   BIVALIRUDIN,
   BISMUTH_SUBSALICYLATE,
@@ -7413,6 +7565,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   DAPTOMYCIN,
   DESMOPRESSIN,
   DEXAMETHASONE,
+  DEXMEDETOMIDINE,
   DEXTROSE,
   DIAZEPAM,
   DIGOXIN,
@@ -7503,6 +7656,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   PCC_4FACTOR,
   PENTOBARBITAL,
   PHENOBARBITAL,
+  PHYSOSTIGMINE,
   PIPERACILLIN_TAZOBACTAM,
   POTASSIUM_ACETATE,
   POTASSIUM_CHLORIDE_IV,
@@ -7553,6 +7707,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   VERAPAMIL,
   VITAMIN_K,
   VWF_CONCENTRATE,
+  ZIPRASIDONE,
 ];
 
 const DRUG_MAP: Record<string, DrugEntry> = {};
@@ -7597,6 +7752,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/budesonide|pulmicort/i, 'budesonide-neb'],
   [/bumetanide|bumex/i, 'bumetanide'],
   [/benzathine.*penicillin/i, 'benzathine-penicillin'],
+  [/benztropine|cogentin/i, 'benztropine'],
   [/calcium\s*chloride/i, 'calcium-chloride'],
   [/calcium\s*gluconate\s*gel/i, 'calcium-gluconate-gel'],
   [/calcium\s*gluconate/i, 'calcium-gluconate'],
@@ -7614,6 +7770,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/dabigatran/i, 'dabigatran'],
   [/darunavir|prezista/i, 'darunavir'],
   [/dexamethasone|decadron/i, 'dexamethasone'],
+  [/dexmedetomidine|precedex|igalmi/i, 'dexmedetomidine'],
   [/desmopressin|ddavp/i, 'desmopressin'],
   [/dextrose|d50|d50w|d10|d10w|d5w/i, 'dextrose'],
   [/diazepam|valium/i, 'diazepam'],
@@ -7688,6 +7845,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/pentobarbital|nembutal/i, 'pentobarbital'],
   [/phenobarbital|luminal/i, 'phenobarbital'],
   [/phenylephrine/i, 'phenylephrine'],
+  [/physostigmine|antilirium/i, 'physostigmine'],
   [/kcl\s*iv|potassium\s*chloride.*iv|iv\s*potassium/i, 'potassium-chloride-iv'],
   [/kcl\s*oral|potassium\s*chloride.*oral|oral\s*potassium|k-dur|klor-con/i, 'potassium-chloride-oral'],
   [/procainamide|pronestyl/i, 'procainamide'],
@@ -7724,6 +7882,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/vancomycin|vancocin/i, 'vancomycin'],
   [/verapamil|calan|isoptin/i, 'verapamil'],
   [/vitamin\s*k|phytonadione/i, 'vitamin-k'],
+  [/ziprasidone|geodon/i, 'ziprasidone'],
 ];
 
 /** Try to find a drug store ID from a drug name string. Returns undefined if no match. */

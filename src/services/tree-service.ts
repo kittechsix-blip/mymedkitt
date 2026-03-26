@@ -359,6 +359,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/tuberculosis.js');
       return { nodes: m.TUBERCULOSIS_NODES, entryNodeId: 'tb-start', categoryId: 'infectious-disease', moduleLabels: m.TUBERCULOSIS_MODULE_LABELS, citations: m.TUBERCULOSIS_CITATIONS };
     },
+    'combative-patient': async () => {
+      const m = await import('../data/trees/combative-patient.js');
+      return { nodes: m.COMBATIVE_PATIENT_NODES, entryNodeId: 'comb-start', categoryId: 'emergency-medicine', moduleLabels: m.COMBATIVE_PATIENT_MODULE_LABELS, citations: m.COMBATIVE_PATIENT_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

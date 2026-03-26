@@ -123,6 +123,7 @@ const TREE_REGISTRY = {
   'tuberculosis':         { prefix: 'TUBERCULOSIS',          entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },
   'hemophilia':           { prefix: 'HEMOPHILIA',            entryNodeId: 'hemo-start',     categoryId: 'heme-onc' },
   'anticoag-reversal':    { prefix: 'ANTICOAG_REVERSAL',     entryNodeId: 'acr-start',      categoryId: 'heme-onc' },
+  'combative-patient':    { prefix: 'COMBATIVE_PATIENT',     entryNodeId: 'comb-start',     categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
