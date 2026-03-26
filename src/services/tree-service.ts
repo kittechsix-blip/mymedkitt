@@ -391,6 +391,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/crao.js');
       return { nodes: m.CRAO_NODES, entryNodeId: 'crao-start', categoryId: 'ophthalmology', moduleLabels: m.CRAO_MODULE_LABELS, citations: m.CRAO_CITATIONS };
     },
+    'globe-rupture': async () => {
+      const m = await import('../data/trees/globe-rupture.js');
+      return { nodes: m.GLOBE_RUPTURE_NODES, entryNodeId: 'globe-start', categoryId: 'ophthalmology', moduleLabels: m.GLOBE_RUPTURE_MODULE_LABELS, citations: m.GLOBE_RUPTURE_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

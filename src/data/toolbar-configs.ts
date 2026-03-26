@@ -325,6 +325,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'crao-fundus', label: 'Fundus', icon: '👁️', action: 'calculator', target: 'crao-fundus' },
     { id: 'crao-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'crao-dispo' },
   ],
+  'globe-rupture': [
+    { id: 'globe-ots', label: 'OTS', icon: '📊', action: 'calculator', target: 'globe-ots' },
+    { id: 'globe-exam', label: 'Exam', icon: '👁️', action: 'calculator', target: 'globe-exam' },
+    { id: 'globe-dispo', label: 'Checklist', icon: '✅', action: 'calculator', target: 'globe-dispo' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

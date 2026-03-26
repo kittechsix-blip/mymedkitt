@@ -134,6 +134,7 @@ const TREE_REGISTRY = {
   'chemical-burn':        { prefix: 'CHEMICAL_BURN',         entryNodeId: 'chemburn-start', categoryId: 'ophthalmology' },
   'orbital-cellulitis':   { prefix: 'ORBITAL_CELLULITIS',    entryNodeId: 'orbital-start',  categoryId: 'ophthalmology' },
   'crao':                 { prefix: 'CRAO',                   entryNodeId: 'crao-start',     categoryId: 'ophthalmology' },
+  'globe-rupture':        { prefix: 'GLOBE_RUPTURE',          entryNodeId: 'globe-start',    categoryId: 'ophthalmology' },
 };
 
 const CROSS_LISTINGS = {

@@ -9537,6 +9537,220 @@ const CRAO_DISPO_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Globe Rupture Calculators
+// -------------------------------------------------------------------
+
+const GLOBE_OTS_CALCULATOR: CalculatorDefinition = {
+  id: 'globe-ots',
+  title: 'Ocular Trauma Score',
+  subtitle: 'Predicting Visual Outcome',
+  description: 'The OTS predicts 6-month visual prognosis after open globe injury with ~80% accuracy.',
+  fields: [
+    {
+      name: 'va',
+      label: 'Initial Visual Acuity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'NLP (No Light Perception)', points: 60 },
+        { label: 'LP/HM (Light Perception/Hand Motion)', points: 70 },
+        { label: '1/200 to 19/200', points: 80 },
+        { label: '20/200 to 20/50', points: 90 },
+        { label: '≥20/40', points: 100 },
+      ],
+    },
+    { name: 'rupture', label: 'Globe rupture (vs penetrating)', type: 'toggle', points: -23 },
+    { name: 'endophthalmitis', label: 'Endophthalmitis', type: 'toggle', points: -17 },
+    { name: 'perforating', label: 'Perforating injury', type: 'toggle', points: -14 },
+    { name: 'rd', label: 'Retinal detachment', type: 'toggle', points: -11 },
+    { name: 'rapd', label: 'RAPD (Relative Afferent Pupillary Defect)', type: 'toggle', points: -10 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Kuhn F, et al. The Ocular Trauma Score (OTS). Ophthalmol Clin North Am. 2002;15(2):163-165.',
+    'EyeWiki. Ocular Trauma Score. 2024.',
+  ],
+  computeResult: (values) => {
+    const va = values['va'] || 60;
+    const rupture = values['rupture'] === 1 ? -23 : 0;
+    const endoph = values['endophthalmitis'] === 1 ? -17 : 0;
+    const perf = values['perforating'] === 1 ? -14 : 0;
+    const rd = values['rd'] === 1 ? -11 : 0;
+    const rapd = values['rapd'] === 1 ? -10 : 0;
+
+    const raw = va + rupture + endoph + perf + rd + rapd;
+
+    let ots: number;
+    let outcomes: string;
+
+    if (raw <= 44) {
+      ots = 1;
+      outcomes = 'NLP 73%, LP/HM 17%, 1/200-19/200 7%, 20/200-20/50 2%, ≥20/40 1%';
+    } else if (raw <= 65) {
+      ots = 2;
+      outcomes = 'NLP 28%, LP/HM 26%, 1/200-19/200 18%, 20/200-20/50 13%, ≥20/40 15%';
+    } else if (raw <= 80) {
+      ots = 3;
+      outcomes = 'NLP 2%, LP/HM 11%, 1/200-19/200 15%, 20/200-20/50 28%, ≥20/40 44%';
+    } else if (raw <= 91) {
+      ots = 4;
+      outcomes = 'NLP 1%, LP/HM 2%, 1/200-19/200 2%, 20/200-20/50 21%, ≥20/40 74%';
+    } else {
+      ots = 5;
+      outcomes = 'NLP 0%, LP/HM 1%, 1/200-19/200 2%, 20/200-20/50 5%, ≥20/40 92%';
+    }
+
+    const colorVar = ots >= 4 ? '--color-primary' : ots === 3 ? '--color-warning' : '--color-danger';
+
+    return {
+      value: `OTS ${ots}`,
+      label: `Raw Score: ${raw}`,
+      description: `**6-Month Visual Outcome Probabilities:**\n${outcomes}\n\n**Interpretation:**\nOTS 1 = worst prognosis (73% NLP)\nOTS 5 = best prognosis (92% ≥20/40)\n\n**Note:** OTS guides counseling but should NOT drive enucleation decisions. Even OTS 1 has some chance of functional vision.`,
+      colorVar,
+    };
+  },
+};
+
+const GLOBE_EXAM_CALCULATOR: CalculatorDefinition = {
+  id: 'globe-exam',
+  title: 'Open Globe Exam Findings',
+  subtitle: 'Clinical Signs Checklist',
+  description: 'Key examination findings suggestive of open globe injury.',
+  fields: [
+    { name: 'teardrop', label: 'Teardrop pupil (pathognomonic)', type: 'toggle', points: 0 },
+    { name: 'irregular', label: 'Irregular pupil', type: 'toggle', points: 0 },
+    { name: 'shallow-ac', label: 'Shallow anterior chamber', type: 'toggle', points: 0 },
+    { name: 'deep-ac', label: 'Deep anterior chamber', type: 'toggle', points: 0 },
+    { name: 'hyphema', label: 'Hyphema', type: 'toggle', points: 0 },
+    { name: 'schem', label: 'Subconjunctival hemorrhage (may mask rupture)', type: 'toggle', points: 0 },
+    { name: 'seidel', label: 'Positive Seidel test', type: 'toggle', points: 0 },
+    { name: 'uveal', label: 'Uveal/vitreous prolapse', type: 'toggle', points: 0 },
+    { name: 'rapd', label: 'RAPD present', type: 'toggle', points: 0 },
+    { name: 'va-loss', label: 'Significant VA loss', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'StatPearls. Globe Rupture. 2024.',
+    'WikEM. Globe Rupture. 2024.',
+  ],
+  computeResult: (values) => {
+    const teardrop = values['teardrop'] === 1;
+    const irregular = values['irregular'] === 1;
+    const shallowAC = values['shallow-ac'] === 1;
+    const deepAC = values['deep-ac'] === 1;
+    const hyphema = values['hyphema'] === 1;
+    const schem = values['schem'] === 1;
+    const seidel = values['seidel'] === 1;
+    const uveal = values['uveal'] === 1;
+    const rapd = values['rapd'] === 1;
+    const vaLoss = values['va-loss'] === 1;
+
+    const definitive = teardrop || seidel || uveal;
+    const suggestive = irregular || shallowAC || deepAC || hyphema || schem || rapd || vaLoss;
+
+    let interpretation = '';
+    let colorVar = '--color-primary';
+
+    if (definitive) {
+      interpretation = `**⚠️ DEFINITIVE OPEN GLOBE FINDINGS**\n\n`;
+      if (teardrop) interpretation += '• **Teardrop pupil** — pathognomonic, iris drawn to wound\n';
+      if (seidel) interpretation += '• **Positive Seidel** — confirmed aqueous leak\n';
+      if (uveal) interpretation += '• **Uveal/vitreous prolapse** — contents herniated\n';
+      interpretation += '\n**STOP EXAM. SHIELD IMMEDIATELY. CALL OPHTHALMOLOGY.**';
+      colorVar = '--color-danger';
+    } else if (suggestive) {
+      interpretation = `**HIGH SUSPICION — Suggestive Findings:**\n\n`;
+      if (irregular) interpretation += '• Irregular pupil\n';
+      if (shallowAC) interpretation += '• Shallow anterior chamber (anterior leak)\n';
+      if (deepAC) interpretation += '• Deep anterior chamber (posterior rupture)\n';
+      if (hyphema) interpretation += '• Hyphema\n';
+      if (schem) interpretation += '• Subconjunctival hemorrhage (may mask scleral rupture)\n';
+      if (rapd) interpretation += '• RAPD (poor prognostic sign)\n';
+      if (vaLoss) interpretation += '• Significant vision loss\n';
+      interpretation += '\n**Treat as open globe until proven otherwise.**\nProtect eye, CT orbits, emergent ophthalmology consult.';
+      colorVar = '--color-warning';
+    } else {
+      interpretation = '**No definitive or suggestive findings selected.**\n\nIf mechanism is high-risk (metal-on-metal, penetrating object), maintain suspicion.\n\nConsider CT orbits if any uncertainty.';
+      colorVar = '--color-primary';
+    }
+
+    return {
+      value: definitive ? 'OPEN GLOBE' : suggestive ? 'HIGH SUSPICION' : 'LOW SUSPICION',
+      label: definitive ? 'Definitive Findings' : suggestive ? 'Suggestive Findings' : 'No Findings',
+      description: interpretation,
+      colorVar,
+    };
+  },
+};
+
+const GLOBE_DISPO_CALCULATOR: CalculatorDefinition = {
+  id: 'globe-dispo',
+  title: 'Disposition Tool',
+  subtitle: 'Open Globe ED Checklist',
+  description: 'ED management checklist and disposition for open globe injury.',
+  fields: [
+    { name: 'shield', label: 'Rigid eye shield placed (NO pressure patch)', type: 'toggle', points: 0 },
+    { name: 'hob', label: 'HOB elevated 30°', type: 'toggle', points: 0 },
+    { name: 'antiemetic', label: 'Antiemetics given (ondansetron)', type: 'toggle', points: 0 },
+    { name: 'npo', label: 'NPO for OR', type: 'toggle', points: 0 },
+    { name: 'abx', label: 'IV Vancomycin + Ceftazidime given', type: 'toggle', points: 0 },
+    { name: 'tetanus', label: 'Tetanus updated', type: 'toggle', points: 0 },
+    { name: 'ct', label: 'CT orbits obtained', type: 'toggle', points: 0 },
+    { name: 'ophtho', label: 'Ophthalmology consulted', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'StatPearls. Globe Rupture. 2024.',
+    'EB Medicine. Evaluation and Management of Ocular Injuries. 2024.',
+  ],
+  computeResult: (values) => {
+    const items = [
+      { key: 'shield', done: values['shield'] === 1, text: 'Rigid eye shield (NO pressure patch)' },
+      { key: 'hob', done: values['hob'] === 1, text: 'HOB 30°' },
+      { key: 'antiemetic', done: values['antiemetic'] === 1, text: 'Antiemetics (prevent vomiting/IOP spike)' },
+      { key: 'npo', done: values['npo'] === 1, text: 'NPO for OR' },
+      { key: 'abx', done: values['abx'] === 1, text: 'IV Vanc + Ceftazidime' },
+      { key: 'tetanus', done: values['tetanus'] === 1, text: 'Tetanus prophylaxis' },
+      { key: 'ct', done: values['ct'] === 1, text: 'CT orbits (rule out IOFB)' },
+      { key: 'ophtho', done: values['ophtho'] === 1, text: 'Ophthalmology consulted' },
+    ];
+
+    const done = items.filter(i => i.done).length;
+    const total = items.length;
+    const pending = items.filter(i => !i.done);
+
+    let status = '**ED Management Checklist:**\n\n';
+    items.forEach(i => {
+      status += i.done ? `✅ ${i.text}\n` : `⬜ ${i.text}\n`;
+    });
+
+    if (done === total) {
+      status += '\n**✓ ALL COMPLETE — Ready for OR**';
+    } else {
+      status += `\n**${total - done} items pending**\n\n`;
+      status += '**Pending:**\n';
+      pending.forEach(i => {
+        status += `• ${i.text}\n`;
+      });
+    }
+
+    status += '\n---\n\n**Disposition:** ALL open globe injuries are **ADMITTED** for surgical repair.\n\n**Goal:** Primary repair within 12-24 hours';
+
+    const colorVar = done === total ? '--color-primary' : '--color-warning';
+
+    return {
+      value: `${done}/${total}`,
+      label: 'Checklist Complete',
+      description: status,
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -9627,6 +9841,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'crao-window': CRAO_WINDOW_CALCULATOR,
   'crao-fundus': CRAO_FUNDUS_CALCULATOR,
   'crao-dispo': CRAO_DISPO_CALCULATOR,
+  'globe-ots': GLOBE_OTS_CALCULATOR,
+  'globe-exam': GLOBE_EXAM_CALCULATOR,
+  'globe-dispo': GLOBE_DISPO_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
