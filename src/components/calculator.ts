@@ -9751,6 +9751,149 @@ const GLOBE_DISPO_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Caustic Ingestion Calculators
+// -------------------------------------------------------------------
+
+const ZARGAR_CALCULATOR: CalculatorDefinition = {
+  id: 'zargar',
+  title: 'Zargar Classification',
+  subtitle: 'Endoscopic Grading of Caustic Injury',
+  description: 'Zargar classification grades endoscopic findings after caustic ingestion to predict stricture risk, guide management, and estimate prognosis.',
+  fields: [
+    {
+      name: 'grade',
+      label: 'Endoscopic Findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Grade 0: Normal mucosa', points: 0 },
+        { label: 'Grade 1: Edema and hyperemia only', points: 1 },
+        { label: 'Grade 2a: Friability, hemorrhages, superficial ulcers, blisters', points: 2 },
+        { label: 'Grade 2b: Deep or circumferential ulceration', points: 3 },
+        { label: 'Grade 3a: Focal areas of necrosis', points: 4 },
+        { label: 'Grade 3b: Extensive necrosis', points: 5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Zargar SA, et al. The role of fiberoptic endoscopy in the management of corrosive ingestion. Gastrointest Endosc. 1991;37(2):165-169.',
+    'Contini S, Scarpignato C. Caustic injury of the upper gastrointestinal tract: a comprehensive review. World J Gastroenterol. 2013;19(25):3918-3930.',
+  ],
+  computeResult: (values) => {
+    const grade = values['grade'] || 0;
+
+    const grades: Record<number, { label: string; stricture: string; mortality: string; disposition: string; colorVar: string }> = {
+      0: {
+        label: 'Grade 0 — Normal',
+        stricture: 'Stricture risk: 0%',
+        mortality: 'Mortality: Minimal',
+        disposition: '**Disposition:** Discharge after observation. Advance diet as tolerated.',
+        colorVar: '--color-primary',
+      },
+      1: {
+        label: 'Grade 1 — Superficial',
+        stricture: 'Stricture risk: 0%',
+        mortality: 'Mortality: Minimal',
+        disposition: '**Disposition:** Discharge with PPI. Liquid diet 24-48h, advance as tolerated. Follow-up in 1-2 weeks.',
+        colorVar: '--color-primary',
+      },
+      2: {
+        label: 'Grade 2a — Transmucosal',
+        stricture: 'Stricture risk: <1%',
+        mortality: 'Mortality: Low',
+        disposition: '**Disposition:** Admit for observation. NPO initially, advance slowly. PPI + sucralfate. No routine steroids.',
+        colorVar: '--color-warning',
+      },
+      3: {
+        label: 'Grade 2b — Circumferential',
+        stricture: 'Stricture risk: 70-100%',
+        mortality: 'Mortality: Moderate (up to 12%)',
+        disposition: '**Disposition:** ICU admission. NPO, TPN consideration. High stricture risk — early GI/surgery consult. Esophageal stent may be considered.',
+        colorVar: '--color-danger',
+      },
+      4: {
+        label: 'Grade 3a — Focal Necrosis',
+        stricture: 'Stricture risk: High',
+        mortality: 'Mortality: High (up to 65%)',
+        disposition: '**Disposition:** ICU admission. Surgical consultation mandatory. Monitor for perforation. Consider emergent laparotomy if peritonitis.',
+        colorVar: '--color-danger',
+      },
+      5: {
+        label: 'Grade 3b — Extensive Necrosis',
+        stricture: 'Stricture risk: Near 100% (if survival)',
+        mortality: 'Mortality: Very High (>65%)',
+        disposition: '**Disposition:** ICU admission. EMERGENT surgical exploration. Esophagectomy/gastrectomy may be required. High mortality without intervention.',
+        colorVar: '--color-danger',
+      },
+    };
+
+    const result = grades[grade];
+    const description = `${result.stricture}\n\n${result.mortality}\n\n---\n\n${result.disposition}\n\n---\n\n**EGD Timing:**\n• Perform within 12-24 hours of ingestion\n• AVOID days 5-15 (perforation risk highest)\n• Repeat at 3 weeks if Grade 2b+ to assess stricture`;
+
+    return {
+      value: `Grade ${grade === 0 ? '0' : grade === 1 ? '1' : grade === 2 ? '2a' : grade === 3 ? '2b' : grade === 4 ? '3a' : '3b'}`,
+      label: result.label,
+      description,
+      colorVar: result.colorVar,
+    };
+  },
+};
+
+const CAUSTIC_AGENT_CALCULATOR: CalculatorDefinition = {
+  id: 'caustic-agent',
+  title: 'Caustic Agent Identifier',
+  subtitle: 'Acid vs Alkali Characteristics',
+  description: 'Identify the caustic agent type based on exposure history and expected injury pattern.',
+  fields: [
+    {
+      name: 'agent',
+      label: 'Agent Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Alkali (e.g., drain cleaner, lye, ammonia, bleach)', points: 1 },
+        { label: 'Acid (e.g., toilet bowl cleaner, battery acid, muriatic acid)', points: 2 },
+        { label: 'Unknown', points: 3 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Contini S, Scarpignato C. Caustic injury of the upper gastrointestinal tract. World J Gastroenterol. 2013;19(25):3918-3930.',
+    'Hoffman RS, et al. Caustics. In: Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw-Hill; 2019.',
+  ],
+  computeResult: (values) => {
+    const agent = values['agent'] || 3;
+
+    if (agent === 1) {
+      return {
+        value: 'Alkali',
+        label: 'Alkali (Base) Ingestion',
+        description: `**Mechanism:** Liquefactive necrosis\n• Penetrates DEEP into tissues\n• Saponifies fats, dissolves proteins\n• Damage continues until diluted\n\n**Injury Pattern:**\n• Esophagus > stomach (alkali is slippery, passes quickly)\n• Often WORSE than appearance suggests\n• Perforation risk higher\n\n**Common Agents:**\n• Drain cleaners (Drano, Liquid-Plumr)\n• Oven cleaners\n• Lye/caustic soda (NaOH)\n• Ammonia\n• Bleach (NaOCl)\n• Dishwasher detergent pods\n\n**Key Point:** Alkali injuries are typically MORE SEVERE than acid`,
+        colorVar: '--color-danger',
+      };
+    } else if (agent === 2) {
+      return {
+        value: 'Acid',
+        label: 'Acid Ingestion',
+        description: `**Mechanism:** Coagulative necrosis\n• Forms protective eschar\n• Limits depth of penetration\n• Damage somewhat self-limiting\n\n**Injury Pattern:**\n• Stomach > esophagus (acid pools in stomach)\n• Gastric antrum/pylorus most affected\n• Eschar may hide underlying injury\n\n**Common Agents:**\n• Toilet bowl cleaners (HCl, H₂SO₄)\n• Battery acid (H₂SO₄)\n• Muriatic acid (HCl)\n• Rust removers\n• Pool chemicals\n\n**Key Point:** Coagulum formation provides some protection, but gastric injury may be severe`,
+        colorVar: '--color-warning',
+      };
+    } else {
+      return {
+        value: 'Unknown',
+        label: 'Unknown Agent',
+        description: `**Management Approach:**\n• Treat as ALKALI (assume worst case)\n• Attempt to identify agent:\n  - Product container/label\n  - Poison Control: 1-800-222-1222\n  - Material Safety Data Sheet (MSDS)\n\n**Do NOT attempt to neutralize:**\n• No acids for alkali ingestion\n• No bases for acid ingestion\n• Exothermic reaction causes additional thermal injury\n\n**EGD is diagnostic** — will reveal injury pattern`,
+        colorVar: '--color-warning',
+      };
+    }
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -9844,6 +9987,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'globe-ots': GLOBE_OTS_CALCULATOR,
   'globe-exam': GLOBE_EXAM_CALCULATOR,
   'globe-dispo': GLOBE_DISPO_CALCULATOR,
+  'zargar': ZARGAR_CALCULATOR,
+  'caustic-agent': CAUSTIC_AGENT_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

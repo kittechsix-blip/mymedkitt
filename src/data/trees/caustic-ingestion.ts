@@ -33,6 +33,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     title: 'Substance Type',
     body: 'Identify the caustic agent. Mechanism of injury differs between acids and alkalis.\n\n**Alkalis (pH >11):** Liquefactive necrosis - saponification of fats and proteins leads to deep penetrating injury. More esophageal injury, higher perforation risk.\n\n**Acids (pH <3):** Coagulative necrosis - eschar formation limits tissue penetration. More gastric injury, may cause "skip lesions."\n\n**Common alkalis:** Drain cleaners (NaOH), oven cleaners, industrial bleach, ammonia, button batteries\n**Common acids:** Toilet bowl cleaners (HCl), rust removers, pool chemicals (H2SO4)',
     citation: [1, 3],
+    calculatorLinks: [
+      { id: 'caustic-agent', label: 'Acid vs Alkali Guide' },
+    ],
     options: [
       {
         label: 'Alkali (base)',
@@ -236,6 +239,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     title: 'Zargar Classification',
     body: '**Endoscopic grading of caustic injury:**\n\n[Zargar Classification Detail](#/info/caustic-zargar)\n\n**Grade 0:** Normal mucosa\n**Grade 1:** Edema and hyperemia only\n**Grade 2a:** Friability, hemorrhages, superficial ulcers, blisters\n**Grade 2b:** Deep or circumferential ulceration\n**Grade 3a:** Focal areas of necrosis\n**Grade 3b:** Extensive necrosis\n\n**Clinical significance:**\n- Grade 0-2a: Excellent prognosis, no strictures\n- Grade 2b: 70-100% stricture rate\n- Grade 3a-3b: High mortality, surgery often required',
     citation: [4, 5],
+    calculatorLinks: [
+      { id: 'zargar', label: 'Zargar Classification Tool' },
+    ],
     options: [
       {
         label: 'Grade 0-1 (minimal)',
