@@ -313,6 +313,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/chf-exacerbation.js');
             return { nodes: m.CHF_EXACERBATION_NODES, entryNodeId: 'chf-start', categoryId: 'cardiology', moduleLabels: m.CHF_EXACERBATION_MODULE_LABELS, citations: m.CHF_EXACERBATION_CITATIONS };
         },
+        'migraine': async () => {
+            const m = await import('../data/trees/migraine.js');
+            return { nodes: m.MIGRAINE_NODES, entryNodeId: 'migraine-start', categoryId: 'neurology', moduleLabels: m.MIGRAINE_MODULE_LABELS, citations: m.MIGRAINE_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -6311,6 +6311,252 @@ Unable to definitively stratify risk.
         };
     },
 };
+// -------------------------------------------------------------------
+// MIGRAINE CALCULATORS
+// -------------------------------------------------------------------
+// ICHD-3 Migraine Criteria Calculator
+const MIGRAINE_CRITERIA_CALCULATOR = {
+    id: 'migraine-criteria',
+    title: 'ICHD-3 Migraine Criteria',
+    subtitle: 'Rule-In Migraine Diagnosis',
+    description: 'International Classification of Headache Disorders (ICHD-3) criteria for migraine without aura. Use to confirm migraine diagnosis before treatment.',
+    fields: [
+        { name: 'attacks', label: '≥5 lifetime attacks meeting criteria', type: 'toggle', points: 1 },
+        { name: 'duration', label: 'Duration 4-72 hours (untreated)', type: 'toggle', points: 1 },
+        // Criterion C - need 2 of 4
+        { name: 'unilateral', label: 'Unilateral location', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+        { name: 'pulsating', label: 'Pulsating quality', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+        { name: 'moderate', label: 'Moderate-severe intensity', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+        { name: 'activity', label: 'Aggravated by routine physical activity', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+        // Criterion D - need 1 of 2
+        { name: 'nausea', label: 'Nausea and/or vomiting', type: 'toggle', points: 1, description: 'Criterion D (need ≥1)' },
+        { name: 'photophono', label: 'Photophobia AND phonophobia', type: 'toggle', points: 1, description: 'Criterion D (need ≥1)' },
+        // Aura features
+        { name: 'aura', label: 'Visual, sensory, or speech aura (5-60 min)', type: 'toggle', points: 0, description: 'If present = migraine WITH aura' },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Headache Classification Committee of IHS. ICHD-3. Cephalalgia. 2018;38(1):1-211.',
+        'EB Medicine. Evidence-Based Management of Migraine in the ED. 2024.',
+    ],
+    computeResult: (values) => {
+        const attacks = values.attacks || 0;
+        const duration = values.duration || 0;
+        // Criterion C: need ≥2 of 4
+        const criterionC = (values.unilateral || 0) + (values.pulsating || 0) +
+            (values.moderate || 0) + (values.activity || 0);
+        const meetsCriterionC = criterionC >= 2;
+        // Criterion D: need ≥1 of 2
+        const meetsCriterionD = (values.nausea || 0) >= 1 || (values.photophono || 0) >= 1;
+        const hasAura = values.aura || 0;
+        // Full migraine diagnosis
+        const meetsAllCriteria = attacks && duration && meetsCriterionC && meetsCriterionD;
+        // Probable migraine (missing 1 criterion)
+        const missingCount = (attacks ? 0 : 1) + (duration ? 0 : 1) +
+            (meetsCriterionC ? 0 : 1) + (meetsCriterionD ? 0 : 1);
+        const probableMigraine = missingCount === 1;
+        if (meetsAllCriteria) {
+            const type = hasAura ? 'Migraine WITH Aura' : 'Migraine WITHOUT Aura';
+            return {
+                value: 'Criteria Met',
+                label: type,
+                description: `**ICHD-3 Criteria Satisfied**
+
+✅ A: ≥5 attacks (lifetime)
+✅ B: Duration 4-72 hours
+✅ C: ${criterionC}/4 headache features (need ≥2)
+${values.unilateral ? '  • Unilateral\n' : ''}${values.pulsating ? '  • Pulsating\n' : ''}${values.moderate ? '  • Moderate-severe\n' : ''}${values.activity ? '  • Activity-aggravated\n' : ''}✅ D: Associated symptoms present
+${values.nausea ? '  • Nausea/vomiting\n' : ''}${values.photophono ? '  • Photophobia + phonophobia\n' : ''}
+${hasAura ? '**Aura present** — Visual, sensory, or speech symptoms 5-60 min\n\n' : ''}**Diagnosis confirmed** — proceed to treatment pathway.`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (probableMigraine) {
+            return {
+                value: 'Probable Migraine',
+                label: 'Missing 1 Criterion',
+                description: `**ICHD-3 Criteria Partially Met**
+
+${attacks ? '✅' : '❌'} A: ≥5 attacks (lifetime)
+${duration ? '✅' : '❌'} B: Duration 4-72 hours
+${meetsCriterionC ? '✅' : '❌'} C: ${criterionC}/4 headache features (need ≥2)
+${meetsCriterionD ? '✅' : '❌'} D: Associated symptoms
+
+**Probable migraine** — treat as migraine but consider alternative diagnoses.
+
+First presentation or atypical features warrant closer evaluation.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'Does Not Meet Criteria',
+            label: 'Not Migraine',
+            description: `**ICHD-3 Criteria NOT Met**
+
+${attacks ? '✅' : '❌'} A: ≥5 attacks
+${duration ? '✅' : '❌'} B: Duration 4-72 hours
+${meetsCriterionC ? '✅' : '❌'} C: ${criterionC}/4 headache features
+${meetsCriterionD ? '✅' : '❌'} D: Associated symptoms
+
+**Consider alternative diagnoses:**
+• Tension-type headache
+• Cluster headache / TACs
+• Secondary headache (evaluate for red flags)
+• Medication overuse headache`,
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+// Migraine Treatment Algorithm
+const MIGRAINE_TX_ALGO_CALCULATOR = {
+    id: 'migraine-tx-algo',
+    title: 'Migraine Treatment Algorithm',
+    subtitle: 'ED Abortive Therapy Protocol',
+    description: 'Evidence-based treatment algorithm for acute migraine in ED. Based on 2025 AHS guidelines and EB Medicine.',
+    fields: [
+        {
+            name: 'severity',
+            label: 'Current Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Mild (1-3/10, functional)', points: 1 },
+                { label: 'Moderate (4-6/10, impaired)', points: 2 },
+                { label: 'Severe (7-10/10, debilitated)', points: 3 },
+                { label: 'Status migrainosus (>72h)', points: 4 },
+            ],
+        },
+        { name: 'vomiting', label: 'Active vomiting / cannot take PO', type: 'toggle', points: 0 },
+        { name: 'cad', label: 'CAD, prior MI/stroke, or uncontrolled HTN', type: 'toggle', points: 0, description: 'Triptan contraindication' },
+        { name: 'failedOral', label: 'Already failed oral therapy today', type: 'toggle', points: 0 },
+        { name: 'pregnant', label: 'Pregnant', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Marmura MJ, et al. 2025 AHS Guideline Update: ED Management of Acute Migraine.',
+        'EB Medicine. Evidence-Based ED Management of Migraine. 2024.',
+    ],
+    computeResult: (values) => {
+        const severity = values.severity || 2;
+        const vomiting = values.vomiting || 0;
+        const cad = values.cad || 0;
+        const failedOral = values.failedOral || 0;
+        const pregnant = values.pregnant || 0;
+        // Mild + can take PO + hasn't failed oral
+        if (severity === 1 && !vomiting && !failedOral) {
+            return {
+                value: 'Oral Therapy',
+                label: 'Mild Migraine Protocol',
+                description: `**ORAL FIRST-LINE:**
+
+**Option 1 — Triptan + NSAID (most effective):**
+• Sumatriptan 50-100 mg PO + Naproxen 500 mg PO
+${cad ? '⚠️ TRIPTAN CONTRAINDICATED — use NSAID alone' : ''}
+
+**Option 2 — NSAID alone:**
+• Ibuprofen 400-800 mg PO, OR
+• Naproxen 500 mg PO, OR
+• Ketorolac 10 mg PO
+
+**Option 3 — Triptan alone:**
+• Sumatriptan 50-100 mg PO
+• Rizatriptan 10 mg ODT
+• Eletriptan 40 mg PO
+
+**Add if nausea:**
+• Ondansetron 4-8 mg ODT
+• Metoclopramide 10 mg PO
+
+**Reassess in 1-2 hours** — if no improvement, escalate to IV cocktail.`,
+                colorVar: '--color-primary',
+            };
+        }
+        // Moderate-severe or failed oral or vomiting
+        let cocktailRx = `**ED MIGRAINE COCKTAIL (give all together):**
+
+| Order | Medication | Dose |
+|-------|-----------|------|
+| 1st | **Diphenhydramine** | 25-50 mg IV |
+| 2nd | **Prochlorperazine** | 10 mg IV over 15 min |
+| 3rd | **Ketorolac** | 15-30 mg IV |
+| 4th | **NS Bolus** | 500-1000 mL |
+
+**Why this order:**
+• Diphenhydramine FIRST prevents akathisia
+• Slow infusion (15 min) reduces akathisia 61%
+• Darken room, minimize stimulation
+
+**Before discharge:**
+• **Dexamethasone 10 mg IV** — prevents 48-72h recurrence (NNT=9)`;
+        if (pregnant) {
+            cocktailRx = `**PREGNANCY MODIFICATIONS:**
+
+**Safe medications:**
+• Metoclopramide 10 mg IV (preferred antiemetic)
+• Acetaminophen 1000 mg IV/PO
+• Diphenhydramine 25-50 mg IV
+• Magnesium sulfate 1-2 g IV
+
+**Avoid/use with caution:**
+• NSAIDs — avoid especially in 3rd trimester
+• Triptans — limited data, consider if severe and refractory
+• Prochlorperazine — relatively safe but metoclopramide preferred
+• Dexamethasone — use if refractory, short course OK`;
+        }
+        // Status migrainosus
+        if (severity === 4) {
+            return {
+                value: 'Status Protocol',
+                label: 'Status Migrainosus (>72h)',
+                description: `**STATUS MIGRAINOSUS PROTOCOL:**
+
+**Step 1 — Aggressive hydration:**
+• NS 1-2 L bolus
+
+**Step 2 — Standard cocktail:**
+${cocktailRx}
+
+**Step 3 — If refractory, add:**
+• **Valproate** 500-1000 mg IV over 30 min, OR
+• **Magnesium sulfate** 1-2 g IV over 20 min
+
+**Step 4 — DHE Protocol (consider admission):**
+• Metoclopramide 10 mg IV (30 min before)
+• DHE 1 mg IV over 3 min
+• Can repeat DHE 0.5-1 mg q8h × 24-48h
+⚠️ DHE contraindicated if CAD, HTN, pregnancy, recent triptan
+
+**Admission criteria:**
+• Refractory to ≥3 treatments
+• Severe dehydration
+• DHE protocol needed`,
+                colorVar: '--color-danger',
+            };
+        }
+        // Standard moderate-severe
+        let rescueSection = `
+
+**IF NO RESPONSE (30-60 min):**
+
+**Rescue Option 1 — GON Block (Level A):**
+• 2% lidocaine 2-3 mL at greater occipital nerve
+• Bilateral if bilateral symptoms
+
+**Rescue Option 2 — Triptan:**
+${cad ? '⚠️ TRIPTAN CONTRAINDICATED' : '• Sumatriptan 6 mg SC'}
+
+**Rescue Option 3 — Valproate:**
+• 500-1000 mg IV over 30 min`;
+        return {
+            value: 'IV Cocktail',
+            label: severity === 3 ? 'Severe Migraine Protocol' : 'Moderate Migraine Protocol',
+            description: cocktailRx + rescueSection,
+            colorVar: severity === 3 ? '--color-warning' : '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     'cows': COWS_CALCULATOR,
     'rass': RASS_CALCULATOR,
@@ -6382,6 +6628,8 @@ const CALCULATORS = {
     'chf-lasix-calc': CHF_LASIX_CALCULATOR,
     'chf-ehmrg': CHF_EHMRG_CALCULATOR,
     'chf-dispo': CHF_DISPO_CALCULATOR,
+    'migraine-criteria': MIGRAINE_CRITERIA_CALCULATOR,
+    'migraine-tx-algo': MIGRAINE_TX_ALGO_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

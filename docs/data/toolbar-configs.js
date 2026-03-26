@@ -280,6 +280,10 @@ const TOOLBAR_CONFIGS = {
         { id: 'chf-risk', label: 'EHMRG', icon: '📊', action: 'calculator', target: 'chf-ehmrg' },
         { id: 'chf-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'chf-dispo' },
     ],
+    'migraine': [
+        { id: 'migraine-dx', label: 'ICHD-3', icon: '✅', action: 'calculator', target: 'migraine-criteria' },
+        { id: 'migraine-tx', label: 'Tx Algo', icon: '💊', action: 'calculator', target: 'migraine-tx-algo' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

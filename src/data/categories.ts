@@ -418,6 +418,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 30,
         entryNodeId: 'delirium-start',
+      },
+      {
+        id: 'migraine',
+        title: 'Migraine',
+        subtitle: 'Red Flags → ICHD-3 Diagnosis → Treatment → Rescue → Nerve Blocks → Dispo',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'migraine-start',
       }
     ],
     isCustom: false,
