@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Exit button
     var exitBtn = document.getElementById('splash-exit');
     if (exitBtn) exitBtn.addEventListener('click', function() {
-      window.location.href = 'https://www.google.com';
+      window.history.back();
     });
   }
 

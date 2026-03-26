@@ -254,6 +254,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'tb-duration', label: 'Duration', icon: '⏱️', action: 'calculator', target: 'tb-duration' },
         { id: 'tb-regimens', label: 'Regimens', icon: '📋', action: 'overlay', target: 'tb-treatment-regimens' },
     ],
+    'hemophilia': [
+        { id: 'dose-card', label: 'Dose Card', icon: '🩸', action: 'overlay', target: 'hemo-emergent-dosing' },
+        { id: 'factor-calc', label: 'Factor Calc', icon: '🧮', action: 'calculator', target: 'factor-dosing' },
+        { id: 'inhibitors', label: 'Inhibitors', icon: '⚠️', action: 'overlay', target: 'hemo-inhibitor-guide' },
+        { id: 'vwd', label: 'vWD', icon: '🔀', action: 'jump', target: 'hemo-vwd' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

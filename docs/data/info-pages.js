@@ -7931,6 +7931,65 @@ const HEMO_VWF_DOSING = {
         { num: 3, text: 'Rodeghiero F, Castaman G, Tosetto A. How I treat von Willebrand disease. Blood. 2009;114(6):1158-1165.' },
     ],
 };
+const HEMO_EMERGENT_DOSING = {
+    id: 'hemo-emergent-dosing',
+    title: 'Emergent Bleeding — Rapid Dose Card',
+    subtitle: 'Factor replacement dosing at a glance',
+    sections: [
+        {
+            heading: 'FACTOR VIII (Hemophilia A) — 1 U/kg = +2%',
+            body: '',
+            drugTable: [
+                { drug: 'ICH / Major Trauma', regimen: '50 U/kg IV STAT → target 100%. Factor BEFORE imaging. Maintain 100% × 7d, then 50% × 7d.' },
+                { drug: 'Iliopsoas Hemorrhage', regimen: '40–50 U/kg IV → target 80% × 3d, then >50%. Admit, strict bed rest, 7–14d treatment.' },
+                { drug: 'GI Hemorrhage', regimen: '40–50 U/kg IV → target 80–100% × 1–6d, then 50% × 7–14d. GI consult.' },
+                { drug: 'Hemarthrosis', regimen: '25–30 U/kg IV → target 40–60%. Single dose often sufficient. Repeat q12h PRN.' },
+                { drug: 'Muscle / Soft Tissue', regimen: '25–30 U/kg IV → target 40–60%. Repeat q12–24h × 2–3d.' },
+                { drug: 'Mucosal Bleeding', regimen: '15–25 U/kg IV → target 30–50%. ADD antifibrinolytic.' },
+                { drug: 'Hematuria', regimen: '25 U/kg IV → target 50% × 3–5d. Hydration 1.5×. NO antifibrinolytics.' },
+            ],
+        },
+        {
+            heading: 'FACTOR IX (Hemophilia B) — 1 U/kg = +1%',
+            body: '',
+            drugTable: [
+                { drug: 'ICH / Major Trauma', regimen: '100 U/kg IV STAT → target 100%. Factor BEFORE imaging.' },
+                { drug: 'Iliopsoas Hemorrhage', regimen: '80–100 U/kg IV → target 80%.' },
+                { drug: 'GI Hemorrhage', regimen: '80–100 U/kg IV → target 80–100%.' },
+                { drug: 'Hemarthrosis', regimen: '40–60 U/kg IV → target 40–60%.' },
+                { drug: 'Muscle / Soft Tissue', regimen: '40–60 U/kg IV → target 40–60%.' },
+                { drug: 'Mucosal Bleeding', regimen: '30–50 U/kg IV → target 30–50%. ADD antifibrinolytic.' },
+                { drug: 'Hematuria', regimen: '50 U/kg IV → target 50%. Hydration 1.5×. NO antifibrinolytics.' },
+            ],
+        },
+        {
+            heading: 'BYPASSING AGENTS (Inhibitor ≥5 BU)',
+            body: '',
+            drugTable: [
+                { drug: 'FEIBA — Joint Bleed', regimen: '50–75 U/kg IV. Repeat q12h. Max 200 U/kg/day.' },
+                { drug: 'FEIBA — Life-Threatening', regimen: '100 U/kg IV. Repeat q12h. Max 200 U/kg/day.' },
+                { drug: 'rFVIIa (NovoSeven) — Standard', regimen: '90 mcg/kg IV q2–3h × 3 doses.' },
+                { drug: 'rFVIIa — Single High Dose', regimen: '270 mcg/kg IV × 1. Subsequent doses 90 mcg/kg, ≥6h apart.' },
+            ],
+        },
+        {
+            heading: 'ANTIFIBRINOLYTICS (Mucosal Bleeding Adjunct)',
+            body: '',
+            drugTable: [
+                { drug: 'Aminocaproic Acid', regimen: '50–60 mg/kg PO/IV q6h (max 5 g/dose) × 5–7 days' },
+                { drug: 'Tranexamic Acid (TXA)', regimen: '10–15 mg/kg PO/IV q8–12h' },
+            ],
+        },
+        {
+            heading: 'Key Reminders',
+            body: '• **Factor BEFORE imaging** for ICH/trauma — do NOT delay\n• **Assume severe** if baseline factor level unknown\n• **Antifibrinolytics CONTRAINDICATED** with hematuria\n• **Check post-infusion levels** at 30–60 min for major bleeds\n• **Poor factor response** → suspect inhibitor → switch to bypassing agent\n• **Round dose UP** to nearest whole vial\n• **FVIII half-life:** 8–12h (redose q8–12h)\n• **FIX half-life:** 18–24h (redose q18–24h)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.' },
+        { num: 2, text: 'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.' },
+    ],
+};
 // -------------------------------------------------------------------
 // TB Evaluation
 // -------------------------------------------------------------------
@@ -8459,6 +8518,7 @@ export const INFO_PAGES = {
     'hemo-factor-products': HEMO_FACTOR_PRODUCTS,
     'hemo-inhibitor-guide': HEMO_INHIBITOR_GUIDE,
     'hemo-vwf-dosing': HEMO_VWF_DOSING,
+    'hemo-emergent-dosing': HEMO_EMERGENT_DOSING,
     'tb-steps-summary': TB_STEPS_SUMMARY,
     'tb-afb-naa-algorithm': TB_AFB_NAA_ALGORITHM,
     'tb-treatment-regimens': TB_TREATMENT_REGIMENS,
