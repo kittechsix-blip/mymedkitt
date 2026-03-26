@@ -13,6 +13,7 @@ import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 // SAFE: Dosing banner now only shows doses the user explicitly adds (no regex extraction)
 import { renderDosingBanner } from './dosing-banner.js';
+import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHeader } from './sticky-dosing-header.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 
 let controller: ConsultFlowController | null = null;
@@ -109,6 +110,9 @@ function renderFlow(container: HTMLElement): void {
   // Dosing banner (shows user-added doses, safe - no regex extraction)
   renderDosingBanner(container);
 
+  // Sticky dosing header (auto-shows treatment from current result node)
+  renderStickyDosingHeader(container);
+
   // Consult search bar
   renderConsultSearch(container);
 
@@ -146,6 +150,14 @@ function renderFlow(container: HTMLElement): void {
 
   // Render active card
   const currentNode = controller.getCurrentNode();
+
+  // Update sticky dosing header based on current node's treatment
+  if (currentNode && currentNode.type === 'result' && currentNode.treatment) {
+    updateStickyDosingHeader(currentNode.treatment);
+  } else {
+    updateStickyDosingHeader(null);
+  }
+
   if (currentNode) {
     const activeCard = createDecisionCard(currentNode, {
       state: 'active',
@@ -184,6 +196,7 @@ function renderFlow(container: HTMLElement): void {
       },
       onHome: () => {
         if (controller) controller.fullReset();
+        clearStickyDosingHeader();
         removeContextualToolbar();
         router.navigate('/');
       },
