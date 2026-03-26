@@ -420,18 +420,36 @@ All data services follow: **Supabase → IndexedDB → Hardcoded Fallback**
 - `info-service.ts` — info page loading by ID
 - `category-service.ts` — category + tree associations, `mergeHardcodedConsults()` for new consults
 
-### Supabase API Deploy (Autonomous — No Browser Needed)
-Service role key stored in `.env` (gitignored). Use REST API to insert/update data directly:
+### Supabase Push (No Copy-Paste)
+Use `scripts/supabase-push.mjs` to push data directly via REST API. No SQL editor needed.
 ```bash
-SERVICE_KEY=$(grep SUPABASE_SERVICE_ROLE_KEY .env | cut -d= -f2)
-BASE="https://kzzqloklnxlqbccxbxgr.supabase.co/rest/v1"
-# Insert: curl -s -X POST "$BASE/<table>" -H "apikey: $SERVICE_KEY" -H "Authorization: Bearer $SERVICE_KEY" -H "Content-Type: application/json" -H "Prefer: return=minimal" -d '<json>'
-# Delete: curl -s -X DELETE "$BASE/<table>?tree_id=eq.<id>" -H "apikey: $SERVICE_KEY" -H "Authorization: Bearer $SERVICE_KEY"
+node scripts/supabase-push.mjs <tree-id>           # New consult (full insert)
+node scripts/supabase-push.mjs <tree-id> --update   # Update existing nodes
+node scripts/supabase-push.mjs <tree-id> --dry-run  # Preview without pushing
+node scripts/supabase-push.mjs <tree-id> --drugs insulin-regular,kcl  # Include new drugs
 ```
-Tables: `decision_trees` (metadata), `category_trees` (category mapping), `tree_citations`, `decision_nodes`.
-For new consults: generate JSON from compiled JS via `node -e "import('./docs/data/trees/<id>.js').then(m => ...)"` and POST to each table.
-For updates: use `generate-supabase-sql.mjs` or directly PATCH individual nodes via REST.
-**This replaces the manual TextEdit → Cmd+A → Cmd+C → Supabase paste workflow for autonomous builds.**
+Service role key in `.env` (gitignored). Tables: `decision_trees`, `category_trees`, `tree_citations`, `decision_nodes`.
+New consults must be added to `TREE_REGISTRY` in both `generate-supabase-sql.mjs` AND `supabase-push.mjs`.
+**This replaces the manual TextEdit → Cmd+A → Cmd+C → Supabase paste workflow.**
+
+### Medical Source Research
+Two paths depending on context:
+
+**Cowork / Claude in Chrome (interactive sessions with Andy):**
+Navigate directly to paywalled sources in Chrome — Andy's login sessions are shared. No scripts needed.
+- EBMedicine: `https://www.ebmedicine.net/topics/<category>/<topic>`
+- UpToDate: `https://www.uptodate.com/contents/<topic-slug>`
+- EMCrit/IBCC: `https://emcrit.org/ibcc/<topic>/`
+Use `javascript_tool` or `get_page_text` to extract content. 80K+ chars of full article content available.
+
+**ClaudeClaw / headless autonomous builds:**
+Use `scripts/fetch-medical-source.mjs` (Playwright with persistent browser profile + credentials in `.env`):
+```bash
+node scripts/fetch-medical-source.mjs "https://emcrit.org/ibcc/dka/"
+node scripts/fetch-medical-source.mjs "https://www.ebmedicine.net/topics/endocrine/diabetes"
+node scripts/fetch-medical-source.mjs "https://www.uptodate.com/contents/diabetic-ketoacidosis-in-adults-treatment"
+```
+First run logs in and caches session. Subsequent runs use persistent profile.
 
 ### Category System
 - 18 specialties + 2 tool categories (Pharmacy, Med-Calc)
