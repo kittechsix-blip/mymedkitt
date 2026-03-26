@@ -273,6 +273,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'comb-restrain', label: 'Restraints', icon: '🔒', action: 'overlay', target: 'comb-restraint-protocol' },
         { id: 'comb-pops', label: 'Spec Pops', icon: '👥', action: 'overlay', target: 'comb-special-pops' },
     ],
+    'chf-exacerbation': [
+        { id: 'chf-ntg', label: 'SCAPE NTG', icon: '💉', action: 'calculator', target: 'chf-ntg-calc' },
+        { id: 'chf-bipap', label: 'BiPAP', icon: '🫁', action: 'calculator', target: 'chf-bipap' },
+        { id: 'chf-lasix', label: 'Lasix', icon: '💊', action: 'calculator', target: 'chf-lasix-calc' },
+        { id: 'chf-risk', label: 'EHMRG', icon: '📊', action: 'calculator', target: 'chf-ehmrg' },
+        { id: 'chf-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'chf-dispo' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

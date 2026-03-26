@@ -363,6 +363,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/combative-patient.js');
       return { nodes: m.COMBATIVE_PATIENT_NODES, entryNodeId: 'comb-start', categoryId: 'emergency-medicine', moduleLabels: m.COMBATIVE_PATIENT_MODULE_LABELS, citations: m.COMBATIVE_PATIENT_CITATIONS };
     },
+    'chf-exacerbation': async () => {
+      const m = await import('../data/trees/chf-exacerbation.js');
+      return { nodes: m.CHF_EXACERBATION_NODES, entryNodeId: 'chf-start', categoryId: 'cardiology', moduleLabels: m.CHF_EXACERBATION_MODULE_LABELS, citations: m.CHF_EXACERBATION_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

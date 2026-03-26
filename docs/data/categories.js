@@ -43,6 +43,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'sync-start',
+            },
+            {
+                id: 'chf-exacerbation',
+                title: 'CHF Exacerbation',
+                subtitle: 'SCAPE vs FOPE → Diuretics → Inotropes → Disposition',
+                categoryId: 'cardiology',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'chf-start',
             }
         ],
         isCustom: false,

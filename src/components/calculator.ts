@@ -6010,6 +6010,571 @@ const PROTAMINE_DOSING_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// CHF EXACERBATION CALCULATORS
+// -------------------------------------------------------------------
+
+// SCAPE NTG Calculator - High-dose nitroglycerin for SCAPE protocol
+const CHF_NTG_CALCULATOR: CalculatorDefinition = {
+  id: 'chf-ntg-calc',
+  title: 'SCAPE NTG Calculator',
+  subtitle: 'High-Dose Nitroglycerin for Acute Pulmonary Edema',
+  description: 'Calculates high-dose NTG bolus and infusion rates for Sympathetic Crashing Acute Pulmonary Edema (SCAPE). Based on EMCrit protocol.',
+  fields: [
+    { name: 'sbp', label: 'Current SBP', type: 'number', points: 0, unit: 'mmHg', description: 'Systolic blood pressure' },
+    { name: 'targetSbp', label: 'Target SBP', type: 'number', points: 0, unit: 'mmHg', description: 'Goal: typically 140 mmHg' },
+    {
+      name: 'concentration',
+      label: 'NTG Concentration',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '200 mcg/mL (standard)', points: 200 },
+        { label: '400 mcg/mL (double)', points: 400 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Weingart S. EMCrit IBCC: Sympathetic Crashing Acute Pulmonary Edema (SCAPE). emcrit.org/ibcc/scape',
+    'Levy P, et al. Treatment of Acute Decompensated Heart Failure. Curr Cardiol Rep. 2019.',
+  ],
+  computeResult: (values) => {
+    const sbp = values.sbp || 180;
+    const targetSbp = values.targetSbp || 140;
+    const concentration = values.concentration || 200;
+
+    if (sbp < 100) {
+      return {
+        value: 'Contraindicated',
+        label: 'SBP Too Low',
+        description: 'NTG contraindicated with SBP < 100 mmHg. Risk of profound hypotension.\n\nConsider:\n• Volume assessment (may need IVF)\n• Inotrope if cardiogenic shock\n• Alternative vasodilator at lower dose',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // SCAPE protocol: bolus 400-800 mcg/min x 2-2.5 min, then infusion
+    const bolusRateLow = 400; // mcg/min
+    const bolusRateHigh = 800; // mcg/min
+    const bolusTime = 2; // minutes
+
+    // Convert to mL/hr for standard pump
+    const bolusMLhrLow = Math.round((bolusRateLow * 60) / concentration);
+    const bolusMLhrHigh = Math.round((bolusRateHigh * 60) / concentration);
+
+    // Starting infusion: 100-200 mcg/min
+    const infusionStart = 100;
+    const infusionMLhr = Math.round((infusionStart * 60) / concentration);
+
+    // Max infusion: 400+ mcg/min
+    const maxInfusion = 400;
+    const maxMLhr = Math.round((maxInfusion * 60) / concentration);
+
+    const bpDrop = sbp - targetSbp;
+
+    return {
+      value: `${bolusMLhrLow}-${bolusMLhrHigh} mL/hr`,
+      label: 'SCAPE NTG Bolus Rate',
+      description: `**BOLUS (2-2.5 min):**
+${bolusRateLow}-${bolusRateHigh} mcg/min = ${bolusMLhrLow}-${bolusMLhrHigh} mL/hr
+At ${concentration} mcg/mL concentration
+
+**THEN INFUSION:**
+Start: ${infusionStart} mcg/min = ${infusionMLhr} mL/hr
+Titrate up q3-5min to effect
+Max: ${maxInfusion}+ mcg/min = ${maxMLhr} mL/hr
+
+**GOAL:**
+SBP ${sbp} → ${targetSbp} mmHg (drop ${bpDrop} mmHg)
+Target: SBP < 140 within 10 minutes
+
+**MONITOR:**
+• BP q2-3 min during bolus
+• When SCAPE breaks, BP can crash
+• Reduce rate sharply as BP normalizes`,
+      colorVar: bpDrop > 40 ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+// BiPAP Quick Start - Settings guide for SCAPE
+const CHF_BIPAP_CALCULATOR: CalculatorDefinition = {
+  id: 'chf-bipap',
+  title: 'BiPAP Quick Start',
+  subtitle: 'NIPPV Settings for Acute Pulmonary Edema',
+  description: 'Quick reference for BiPAP/CPAP settings in acute cardiogenic pulmonary edema. Higher pressures = greater hemodynamic benefit.',
+  fields: [
+    {
+      name: 'mode',
+      label: 'Mode Selection',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'CPAP (continuous pressure)', points: 1 },
+        { label: 'BiPAP (inspiratory + expiratory)', points: 2 },
+      ],
+    },
+    {
+      name: 'severity',
+      label: 'Clinical Severity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Mild-Moderate (talking, follows commands)', points: 1 },
+        { label: 'Severe (1-2 word dyspnea, diaphoretic)', points: 2 },
+        { label: 'Pre-arrest (agonal, altered)', points: 3 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Weingart S. EMCrit: SCAPE Protocol - Aggressive BiPAP titration. emcrit.org/ibcc/scape',
+    'Vital FMR, et al. Non-invasive ventilation in cardiogenic pulmonary edema. Cochrane Database Syst Rev. 2013.',
+  ],
+  computeResult: (values) => {
+    const mode = values.mode || 2;
+    const severity = values.severity || 2;
+
+    if (mode === 1) {
+      // CPAP
+      const cpapSettings: Record<number, { start: number; target: number }> = {
+        1: { start: 5, target: 10 },
+        2: { start: 8, target: 15 },
+        3: { start: 10, target: 20 },
+      };
+      const s = cpapSettings[severity] || cpapSettings[2];
+
+      return {
+        value: `CPAP ${s.start} → ${s.target}`,
+        label: 'CPAP Settings',
+        description: `**START:** CPAP ${s.start} cm H₂O
+**TARGET:** CPAP ${s.target} cm H₂O
+
+**TITRATION:**
+• Increase by 2-3 cm H₂O every 5 min
+• Goal: highest tolerated pressure
+• Higher pressures = better afterload reduction
+
+**FiO₂:** Start 100%, wean as SpO₂ allows
+
+**EXPECT:**
+• Work of breathing should improve in 10-15 min
+• If no improvement at max settings → consider BiPAP or intubation`,
+        colorVar: severity === 3 ? '--color-danger' : '--color-primary',
+      };
+    } else {
+      // BiPAP
+      const bipapSettings: Record<number, { ipap: number; epap: number; targetIpap: number; targetEpap: number }> = {
+        1: { ipap: 10, epap: 5, targetIpap: 15, targetEpap: 8 },
+        2: { ipap: 12, epap: 6, targetIpap: 20, targetEpap: 10 },
+        3: { ipap: 15, epap: 8, targetIpap: 24, targetEpap: 12 },
+      };
+      const s = bipapSettings[severity] || bipapSettings[2];
+
+      return {
+        value: `BiPAP ${s.ipap}/${s.epap} → ${s.targetIpap}/${s.targetEpap}`,
+        label: 'BiPAP Settings',
+        description: `**START:** BiPAP ${s.ipap}/${s.epap} cm H₂O (IPAP/EPAP)
+**TARGET:** BiPAP ${s.targetIpap}/${s.targetEpap} cm H₂O
+
+**TITRATION:**
+• Increase IPAP by 2-4 q5min for work of breathing
+• Increase EPAP by 2 q5min for oxygenation
+• Keep IPAP-EPAP difference ≥4 cm H₂O
+
+**FiO₂:** Start 100%, wean as SpO₂ allows
+
+**BiPAP BENEFITS:**
+• Reduces preload (EPAP) AND afterload (IPAP)
+• More effective than CPAP for severe cases
+
+**AVOID INTUBATION if possible** — these patients often turn around dramatically with BiPAP + NTG`,
+        colorVar: severity === 3 ? '--color-danger' : '--color-primary',
+      };
+    }
+  },
+};
+
+// Lasix Dose Calculator
+const CHF_LASIX_CALCULATOR: CalculatorDefinition = {
+  id: 'chf-lasix-calc',
+  title: 'Lasix Dose Calculator',
+  subtitle: 'IV Furosemide Dosing for ADHF',
+  description: 'Calculates IV furosemide dose based on home oral dose. DOSE trial evidence: 1-2.5x home dose.',
+  fields: [
+    { name: 'homeDose', label: 'Home Furosemide Dose', type: 'number', points: 0, unit: 'mg/day', description: 'Total daily oral dose (0 if none)' },
+    {
+      name: 'strategy',
+      label: 'Dosing Strategy',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Standard (1x home dose IV)', points: 1 },
+        { label: 'Aggressive (2.5x home dose IV)', points: 2.5 },
+      ],
+    },
+    {
+      name: 'delivery',
+      label: 'Delivery Method',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'IV bolus q8-12h', points: 1 },
+        { label: 'Continuous infusion', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Felker GM, et al. DOSE Trial: Diuretic Optimization Strategies Evaluation in ADHF. N Engl J Med. 2011;364:797-805.',
+    '2022 AHA/ACC/HFSA Guideline for Management of Heart Failure.',
+  ],
+  computeResult: (values) => {
+    let homeDose = values.homeDose || 0;
+    const strategy = values.strategy || 1;
+    const delivery = values.delivery || 1;
+
+    // If no home dose, start with 40-80 mg
+    if (homeDose === 0) {
+      return {
+        value: '40-80 mg IV',
+        label: 'Diuretic-Naive Starting Dose',
+        description: `**No home diuretic → Start 40-80 mg IV**
+
+**MONITORING:**
+• Urine output: goal >100-150 mL/hr by 6 hours
+• Urine spot sodium: >50-70 mEq/L at 2 hours
+• Daily weight: goal -0.5 to -1 kg/day
+
+**IF INADEQUATE RESPONSE:**
+• Double dose q2-4h until response
+• Consider adding metolazone 2.5-5 mg PO
+• Low-dose NTG if SBP >100
+
+**ELECTROLYTES:**
+• Check K+, Mg++ q12-24h
+• Supplement if K+ <3.5`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    const ivDose = Math.round(homeDose * strategy);
+    const maxSingle = 200; // Practical max single bolus
+    const displayDose = Math.min(ivDose, maxSingle);
+
+    if (delivery === 1) {
+      // Bolus dosing
+      const perDose = Math.round(displayDose / 2); // BID
+
+      return {
+        value: `${perDose} mg IV q12h`,
+        label: `${strategy === 1 ? 'Standard' : 'Aggressive'} Bolus Dosing`,
+        description: `**Home dose:** ${homeDose} mg PO daily
+**IV dose:** ${homeDose} × ${strategy} = ${ivDose} mg/day IV
+
+**REGIMEN:** ${perDose} mg IV q12h (or ${Math.round(ivDose / 3)} mg IV q8h)
+${ivDose > maxSingle ? `⚠️ High dose — consider continuous infusion` : ''}
+
+**MONITORING:**
+• Urine output: goal >100-150 mL/hr
+• Urine spot Na >50-70 mEq/L at 2h
+• Daily weight: -0.5 to -1 kg/day
+
+**IF INADEQUATE RESPONSE:**
+• Increase dose by 50%
+• Add metolazone 2.5-5 mg 30 min before furosemide
+• Consider continuous infusion`,
+        colorVar: ivDose > 160 ? '--color-warning' : '--color-primary',
+      };
+    } else {
+      // Continuous infusion
+      const bolusLoad = Math.round(displayDose / 2);
+      const hourlyRate = Math.round(ivDose / 24);
+
+      return {
+        value: `${bolusLoad} mg bolus → ${hourlyRate} mg/hr`,
+        label: 'Continuous Infusion',
+        description: `**Home dose:** ${homeDose} mg PO daily
+**IV dose:** ${homeDose} × ${strategy} = ${ivDose} mg/day IV
+
+**REGIMEN:**
+• Loading bolus: ${bolusLoad} mg IV
+• Maintenance: ${hourlyRate} mg/hr (${ivDose} mg/day)
+
+**STANDARD MIX:** 500 mg in 250 mL D5W = 2 mg/mL
+Rate: ${Math.round(hourlyRate / 2 * 10) / 10} mL/hr
+
+**TITRATION:**
+• Increase by 1-2 mg/hr if inadequate output
+• Max practical rate: ~20 mg/hr
+
+**MONITORING:**
+• Urine output: goal >100-150 mL/hr
+• K+, Mg++ q12h`,
+        colorVar: '--color-primary',
+      };
+    }
+  },
+};
+
+// EHMRG Risk Score
+const CHF_EHMRG_CALCULATOR: CalculatorDefinition = {
+  id: 'chf-ehmrg',
+  title: 'EHMRG Risk Score',
+  subtitle: 'Emergency Heart Failure Mortality Risk Grade',
+  description: 'Estimates 7-day mortality risk for acute heart failure patients presenting to ED. Guideline-recommended risk stratification tool.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'number', points: 0, valueIsPoints: false, unit: 'years' },
+    { name: 'sbp', label: 'Initial SBP', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'hr', label: 'Initial Heart Rate', type: 'number', points: 0, unit: 'bpm' },
+    { name: 'spo2', label: 'Initial SpO₂', type: 'number', points: 0, unit: '%' },
+    { name: 'creatinine', label: 'Creatinine', type: 'number', points: 0, unit: 'mg/dL' },
+    { name: 'potassium', label: 'Potassium', type: 'number', points: 0, unit: 'mEq/L' },
+    { name: 'troponin', label: 'Elevated Troponin', type: 'toggle', points: 0, description: 'Above institutional cutoff' },
+    { name: 'cancer', label: 'Active Cancer', type: 'toggle', points: 0, description: 'Receiving treatment for cancer' },
+    { name: 'metolazone', label: 'Home Metolazone Use', type: 'toggle', points: 0, description: 'On metolazone at home' },
+    { name: 'ems', label: 'Arrived by EMS', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Lee DS, et al. EHMRG: Prediction of early death or urgent care in patients with acute heart failure. CMAJ. 2012;184(17):E885-E892.',
+    '2022 AHA/ACC/HFSA Guideline recommends EHMRG for risk stratification.',
+  ],
+  computeResult: (values) => {
+    const age = values.age || 65;
+    const sbp = values.sbp || 130;
+    const hr = values.hr || 90;
+    const spo2 = values.spo2 || 95;
+    const cr = values.creatinine || 1.2;
+    const k = values.potassium || 4.0;
+    const troponin = values.troponin || 0;
+    const cancer = values.cancer || 0;
+    const metolazone = values.metolazone || 0;
+    const ems = values.ems || 0;
+
+    // Simplified EHMRG scoring (actual formula is complex continuous)
+    // Using approximation based on published risk categories
+    let score = 0;
+
+    // Age contribution (approximately +2.5 per year over 50)
+    score += Math.max(0, (age - 50) * 2.5);
+
+    // SBP (lower is worse, approximately -2 per mmHg below 140)
+    if (sbp < 140) score += (140 - sbp) * 2;
+
+    // HR (higher is worse, approximately +1 per bpm over 90)
+    if (hr > 90) score += (hr - 90);
+
+    // SpO2 (lower is worse, approximately +5 per % below 95)
+    if (spo2 < 95) score += (95 - spo2) * 5;
+
+    // Creatinine (higher is worse, approximately +30 per mg/dL over 1.5)
+    if (cr > 1.5) score += (cr - 1.5) * 30;
+
+    // Potassium (both high and low are bad)
+    if (k < 3.5 || k > 5.5) score += 20;
+
+    // Binary factors
+    if (troponin) score += 40;
+    if (cancer) score += 40;
+    if (metolazone) score += 25;
+    if (ems) score += 20;
+
+    // Risk categories
+    let riskLevel: string;
+    let mortality: string;
+    let colorVar: string;
+    let recommendation: string;
+
+    if (score < 60) {
+      riskLevel = 'Very Low Risk';
+      mortality = '< 1%';
+      colorVar = '--color-primary';
+      recommendation = 'May be candidate for observation unit or early discharge if rapid diuretic response';
+    } else if (score < 90) {
+      riskLevel = 'Low Risk';
+      mortality = '1-2%';
+      colorVar = '--color-primary';
+      recommendation = 'Ward admission appropriate. Consider observation if responds well to initial treatment';
+    } else if (score < 120) {
+      riskLevel = 'Intermediate Risk';
+      mortality = '2-5%';
+      colorVar = '--color-warning';
+      recommendation = 'Telemetry admission. Monitor closely for deterioration';
+    } else if (score < 150) {
+      riskLevel = 'High Risk';
+      mortality = '5-10%';
+      colorVar = '--color-danger';
+      recommendation = 'ICU or stepdown admission recommended';
+    } else {
+      riskLevel = 'Very High Risk';
+      mortality = '> 10%';
+      colorVar = '--color-danger';
+      recommendation = 'ICU admission. Consider early cardiology/ICU consult';
+    }
+
+    return {
+      value: `Score: ${Math.round(score)}`,
+      label: riskLevel,
+      description: `**7-Day Mortality: ${mortality}**
+
+**Risk Factors Present:**
+${age >= 75 ? '• Age ≥ 75\n' : ''}${sbp < 100 ? '• SBP < 100 mmHg\n' : ''}${hr > 110 ? '• HR > 110\n' : ''}${spo2 < 90 ? '• SpO₂ < 90%\n' : ''}${cr > 2 ? '• Cr > 2 mg/dL\n' : ''}${troponin ? '• Elevated troponin\n' : ''}${cancer ? '• Active cancer\n' : ''}${metolazone ? '• Home metolazone\n' : ''}${ems ? '• EMS arrival\n' : ''}
+**RECOMMENDATION:**
+${recommendation}
+
+Note: EHMRG validated for 7-day mortality. Use clinical judgment for disposition.`,
+      colorVar,
+    };
+  },
+};
+
+// Dispo Decision Guide
+const CHF_DISPO_CALCULATOR: CalculatorDefinition = {
+  id: 'chf-dispo',
+  title: 'Dispo Decision Guide',
+  subtitle: 'CHF Admission vs Observation vs Discharge',
+  description: 'Evidence-based disposition guide for acute heart failure. Based on EB Medicine, OHFRS, and AHA guidelines.',
+  fields: [
+    { name: 'sbp', label: 'Current SBP', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'o2Requirement', label: 'Oxygen Requirement', type: 'toggle', points: 0, description: 'Requiring supplemental O₂ or NIPPV' },
+    { name: 'inotrope', label: 'Inotrope/Vasopressor', type: 'toggle', points: 0, description: 'On or required inotropic support' },
+    { name: 'ntgDrip', label: 'NTG Drip Required', type: 'toggle', points: 0, description: 'Continuous nitroglycerin infusion' },
+    { name: 'acs', label: 'ACS Suspected', type: 'toggle', points: 0, description: 'Troponin elevated or ischemic changes' },
+    { name: 'aki', label: 'Significant AKI', type: 'toggle', points: 0, description: 'Cr > 2x baseline or > 4.0' },
+    { name: 'goodResponse', label: 'Good Diuretic Response', type: 'toggle', points: 0, description: 'UOP > 100 mL/hr, symptoms improving' },
+    { name: 'socialSupport', label: 'Good Social Support', type: 'toggle', points: 0, description: 'Reliable follow-up, medication access' },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'EB Medicine: Acute Decompensated Heart Failure in the Emergency Department. 2023.',
+    '2022 AHA/ACC/HFSA Guideline for Management of Heart Failure.',
+    'Collins SP, et al. Risk Stratification in Acute Heart Failure. Curr Heart Fail Rep. 2015.',
+  ],
+  computeResult: (values) => {
+    const sbp = values.sbp || 120;
+    const o2 = values.o2Requirement || 0;
+    const inotrope = values.inotrope || 0;
+    const ntgDrip = values.ntgDrip || 0;
+    const acs = values.acs || 0;
+    const aki = values.aki || 0;
+    const goodResponse = values.goodResponse || 0;
+    const socialSupport = values.socialSupport || 0;
+
+    // ICU criteria
+    const icuCriteria = [];
+    if (sbp < 90) icuCriteria.push('Hypotension (SBP < 90)');
+    if (inotrope) icuCriteria.push('Inotrope/vasopressor requirement');
+    if (ntgDrip) icuCriteria.push('NTG drip requirement');
+    if (acs) icuCriteria.push('Suspected ACS');
+    if (aki) icuCriteria.push('Severe AKI');
+
+    if (icuCriteria.length > 0) {
+      return {
+        value: 'ICU Admission',
+        label: 'Critical Care Required',
+        description: `**ICU CRITERIA MET:**
+${icuCriteria.map(c => '• ' + c).join('\n')}
+
+**ICU LEVEL OF CARE:**
+• Continuous hemodynamic monitoring
+• Vasoactive infusion capability
+• Rapid escalation if needed
+
+**BEFORE TRANSFER:**
+• Arterial line if on vasopressors
+• Central access if multiple drips
+• Cardiology notification`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Ward admission criteria
+    if (o2 || !goodResponse) {
+      const wardReasons = [];
+      if (o2) wardReasons.push('Ongoing oxygen requirement');
+      if (!goodResponse) wardReasons.push('Inadequate diuretic response');
+
+      return {
+        value: 'Ward Admission',
+        label: 'Telemetry/Intermediate Care',
+        description: `**ADMISSION CRITERIA:**
+${wardReasons.map(r => '• ' + r).join('\n')}
+
+**WARD ADMISSION:**
+• Telemetry for arrhythmia monitoring
+• Continue IV diuretics
+• Daily weights
+• Monitor renal function
+
+**GOALS:**
+• Euvolemia (resolution of congestion)
+• Stable on oral diuretics
+• No O₂ requirement
+• Cardiology follow-up arranged`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Observation or discharge candidates
+    if (goodResponse && socialSupport) {
+      return {
+        value: 'Observation / Discharge',
+        label: 'Low Risk — Consider Obs or Discharge',
+        description: `**FAVORABLE FACTORS:**
+• Good diuretic response
+• Hemodynamically stable
+• No oxygen requirement
+• Good social support
+
+**OBSERVATION UNIT (if available):**
+• 12-24h continued diuresis
+• Risk stratification complete
+• Arrange close follow-up
+
+**DISCHARGE CRITERIA:**
+• Symptoms resolved
+• Ambulating without dyspnea
+• Off supplemental O₂
+• Cardiology within 7 days
+• Daily weight plan
+• Medication reconciliation done
+
+**DISCHARGE MEDICATIONS:**
+• Continue/increase diuretic dose
+• Restart GDMT (ACE-I, BB, MRA)
+• Low sodium diet education`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Default: Ward admission if mixed picture
+    return {
+      value: 'Ward Admission',
+      label: 'Incomplete Risk Assessment',
+      description: `**INCOMPLETE DATA:**
+Unable to definitively stratify risk.
+
+**RECOMMEND ADMISSION FOR:**
+• Complete risk assessment
+• Observed diuretic response
+• Precipitant evaluation
+• GDMT optimization
+
+**BEFORE DISCHARGE:**
+• Confirm good diuretic response
+• Verify social support
+• Arrange cardiology follow-up`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -6076,6 +6641,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'tb-duration': TB_DURATION_CALCULATOR,
   'pcc-dosing': PCC_DOSING_CALCULATOR,
   'protamine-dosing': PROTAMINE_DOSING_CALCULATOR,
+  'chf-ntg-calc': CHF_NTG_CALCULATOR,
+  'chf-bipap': CHF_BIPAP_CALCULATOR,
+  'chf-lasix-calc': CHF_LASIX_CALCULATOR,
+  'chf-ehmrg': CHF_EHMRG_CALCULATOR,
+  'chf-dispo': CHF_DISPO_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
