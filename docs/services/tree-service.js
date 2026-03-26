@@ -341,6 +341,18 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/globe-rupture.js');
             return { nodes: m.GLOBE_RUPTURE_NODES, entryNodeId: 'globe-start', categoryId: 'ophthalmology', moduleLabels: m.GLOBE_RUPTURE_MODULE_LABELS, citations: m.GLOBE_RUPTURE_CITATIONS };
         },
+        'urinary-retention': async () => {
+            const m = await import('../data/trees/urinary-retention.js');
+            return { nodes: m.URINARY_RETENTION_NODES, entryNodeId: 'aur-start', categoryId: 'urology', moduleLabels: m.URINARY_RETENTION_MODULE_LABELS, citations: m.URINARY_RETENTION_CITATIONS };
+        },
+        'caustic-ingestion': async () => {
+            const m = await import('../data/trees/caustic-ingestion.js');
+            return { nodes: m.CAUSTIC_INGESTION_NODES, entryNodeId: 'caustic-start', categoryId: 'toxicology', moduleLabels: m.CAUSTIC_INGESTION_MODULE_LABELS, citations: m.CAUSTIC_INGESTION_CITATIONS };
+        },
+        'epistaxis': async () => {
+            const m = await import('../data/trees/epistaxis.js');
+            return { nodes: m.EPISTAXIS_NODES, entryNodeId: 'epi-start', categoryId: 'emergency-medicine', moduleLabels: m.EPISTAXIS_MODULE_LABELS, citations: m.EPISTAXIS_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -2341,12 +2341,16 @@ const LIDOCAINE: DrugEntry = {
   name: 'Lidocaine 1% (Without Epinephrine)',
   genericName: 'Lidocaine',
   drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
-  route: 'Local injection / IV',
-  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia'],
+  route: 'Local injection / IV / Topical',
+  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)'],
   dosing: [
     {
+      indication: 'Epistaxis (topical anesthesia)',
+      regimen: 'Lidocaine 4% topical solution: apply to cotton pledget and insert into nose for 5-10 minutes. Provides anesthesia for visualization, cautery, and packing. Often combined with oxymetazoline for vasoconstriction + anesthesia.',
+    },
+    {
       indication: 'Dorsal penile nerve block',
-      regimen: '10 mL total of 1% lidocaine WITHOUT epinephrine: 5 mL injected at 10 o\u2019clock and 5 mL at 2 o\u2019clock at penile base, under Buck\u2019s fascia.',
+      regimen: '10 mL total of 1% lidocaine WITHOUT epinephrine: 5 mL injected at 10 o\'clock and 5 mL at 2 o\'clock at penile base, under Buck\'s fascia.',
     },
     {
       indication: 'Hematoma block',
@@ -2909,7 +2913,7 @@ const METHYLPREDNISOLONE: DrugEntry = {
   genericName: 'Methylprednisolone sodium succinate',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'IV / PO',
-  indications: ['Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)'],
+  indications: ['Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)', 'Caustic ingestion (stricture prevention)'],
   dosing: [
     {
       indication: 'Adrenal crisis (alternative)',
@@ -2926,6 +2930,11 @@ const METHYLPREDNISOLONE: DrugEntry = {
     {
       indication: 'Anaphylaxis / angioedema (adjunct)',
       regimen: '125 mg IV. Adjunct to epinephrine and antihistamines for histamine-mediated angioedema/anaphylaxis. NOT effective for bradykinin-mediated angioedema. Delayed onset of action — should never be used as monotherapy. Limited RCT evidence for angioedema specifically, but commonly administered. Weigh benefits against hyperglycemia, hypertension, and infection risk.',
+    },
+    {
+      indication: 'Caustic ingestion (stricture prevention)',
+      regimen: '1-2 mg/kg/day IV for 3 weeks, then taper over 1-2 weeks. **CONTROVERSIAL** — evidence is mixed. May reduce stricture formation specifically for Zargar grade 2b injuries. NOT indicated for grade 0-2a (no benefit) or grade 3 (necrotic tissue). GI consultation should guide decision. If used, add prophylactic antibiotics.',
+      weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Caustic ingestion (max dose)' },
     },
   ],
   contraindications: [
@@ -3573,6 +3582,49 @@ const OCTREOTIDE: DrugEntry = {
   ],
 };
 
+const PANTOPRAZOLE: DrugEntry = {
+  id: 'pantoprazole',
+  name: 'Pantoprazole (Protonix)',
+  genericName: 'Pantoprazole sodium',
+  drugClass: 'Proton pump inhibitor (PPI)',
+  route: 'IV/PO',
+  indications: ['GERD / erosive esophagitis', 'GI bleeding prophylaxis', 'Caustic ingestion (supportive care)', 'Stress ulcer prophylaxis'],
+  dosing: [
+    {
+      indication: 'GERD / erosive esophagitis',
+      regimen: '**PO:** 40 mg once daily for 4-8 weeks. May increase to 40 mg twice daily for severe erosive esophagitis.\n**IV:** 40 mg IV once daily if unable to take PO.',
+    },
+    {
+      indication: 'GI bleeding prophylaxis',
+      regimen: '**IV:** 80 mg IV bolus, then 8 mg/hour continuous infusion for 72 hours post-successful hemostasis. Alternatively: 40 mg IV twice daily.\n**Transition to PO:** 40 mg twice daily after 72h IV, then once daily maintenance.',
+    },
+    {
+      indication: 'Caustic ingestion',
+      regimen: '**IV:** 40 mg IV every 12 hours while NPO. Transition to 40 mg PO daily when tolerating oral intake. Continue for 2-4 weeks. NOTE: Does NOT prevent stricture formation — provides symptomatic relief and reduces secondary acid injury to damaged mucosa.',
+    },
+    {
+      indication: 'Stress ulcer prophylaxis',
+      regimen: '**IV:** 40 mg IV once daily in critically ill patients. Consider in patients with coagulopathy, mechanical ventilation >48h, or history of GI ulcer/bleeding.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to pantoprazole or other PPIs',
+    'Concurrent rilpivirine (contraindicated — reduced absorption)',
+  ],
+  cautions: [
+    'CYP2C19 inhibitor — weaker interaction with clopidogrel compared to omeprazole/esomeprazole',
+    'Long-term use: increased risk of C. difficile, bone fractures, hypomagnesemia, vitamin B12 deficiency',
+    'May mask symptoms of gastric malignancy',
+    'Acute interstitial nephritis (rare)',
+  ],
+  monitoring: 'Symptom improvement. Magnesium levels with long-term use. Monitor for rebound hypersecretion when discontinuing after prolonged use.',
+  notes: 'Preferred PPI when clopidogrel is also indicated due to minimal CYP2C19 inhibition compared to omeprazole. In caustic ingestion, provides symptom relief but has no proven role in stricture prevention — corticosteroids are the controversial intervention for that purpose.',
+  citations: [
+    'Barkun AN, et al. Management of Nonvariceal Upper Gastrointestinal Bleeding: Guideline Recommendations From the International Consensus Group. Ann Intern Med. 2019;171(11):805-822.',
+    'Chirica M, et al. Caustic ingestion. Lancet. 2017;389(10083):2041-2052.',
+  ],
+};
+
 const ONDANSETRON: DrugEntry = {
   id: 'ondansetron',
   name: 'Ondansetron (Zofran)',
@@ -3624,6 +3676,41 @@ const ONDANSETRON: DrugEntry = {
     'Danielsson B, Noor AH, Hoog A, et al. Association of ondansetron use in early pregnancy with congenital malformations. JAMA. 2018;320(23):2429-2437.',
     'Freedman SB, et al. Oral Ondansetron for Gastroenteritis in a Pediatric Emergency Department. N Engl J Med. 2006;354(16):1698-1705.',
     'Burg MD, Hovanessian HC. Diarrhea: Identifying Serious Illness and Providing Relief. Emergency Medicine Practice. 2004;6(7):1-24.',
+  ],
+};
+
+const OXYMETAZOLINE: DrugEntry = {
+  id: 'oxymetazoline',
+  name: 'Oxymetazoline (Afrin)',
+  genericName: 'Oxymetazoline hydrochloride',
+  drugClass: 'Topical alpha-1 adrenergic agonist / Nasal decongestant',
+  route: 'Intranasal',
+  indications: ['Epistaxis (topical vasoconstriction)', 'Nasal congestion'],
+  dosing: [
+    {
+      indication: 'Epistaxis',
+      regimen: '0.05% spray: 2-3 sprays per nostril. May also apply via pledget soaked in oxymetazoline and inserted for 10-15 minutes. Causes local vasoconstriction to slow bleeding and improve visualization. First-line topical vasoconstrictor for nosebleeds.',
+    },
+    {
+      indication: 'Nasal congestion',
+      regimen: '0.05% spray: 2-3 sprays per nostril every 10-12 hours. Max 3 days continuous use to avoid rhinitis medicamentosa (rebound congestion).',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'MAO inhibitor use within 14 days',
+  ],
+  cautions: [
+    'Use cautiously in severe hypertension - systemic absorption can occur',
+    'Avoid prolonged use (>3 days) - rebound nasal congestion (rhinitis medicamentosa)',
+    'Use with caution in patients with coronary artery disease, arrhythmias, or thyroid disorders',
+    'Pregnancy category C',
+  ],
+  monitoring: 'Monitor blood pressure in hypertensive patients. Assess for continued bleeding after application.',
+  notes: 'Selective alpha-1 adrenergic agonist with minimal beta activity - provides effective local vasoconstriction with lower cardiovascular risk than non-selective agents (epinephrine, phenylephrine). First-line topical treatment for epistaxis. Can be applied as spray or on a cotton pledget. Duration of action 6-12 hours.',
+  citations: [
+    'Tunkel DE, et al. Clinical Practice Guideline: Nosebleed (Epistaxis). Otolaryngol Head Neck Surg. 2020;162(1_suppl):S1-S38.',
+    'ALiEM. Epistaxis Management in the Emergency Department. aliem.com. 2024.',
   ],
 };
 
@@ -4469,6 +4556,45 @@ const TERBUTALINE: DrugEntry = {
   citations: [
     'Sowinski KM, et al. Subcutaneous terbutaline use in CKD to reduce potassium concentrations. Am J Kidney Dis. 2005;45(6):1040-5.',
     'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
+  ],
+};
+
+const TAMSULOSIN: DrugEntry = {
+  id: 'tamsulosin',
+  name: 'Tamsulosin (Flomax)',
+  genericName: 'Tamsulosin',
+  drugClass: 'Alpha-1A adrenergic receptor antagonist',
+  route: 'PO',
+  indications: ['Acute urinary retention', 'Benign prostatic hyperplasia (BPH)', 'Ureteral stone passage'],
+  dosing: [
+    {
+      indication: 'Acute Urinary Retention / BPH',
+      regimen: '0.4 mg PO once daily. Take 30 minutes after the same meal each day for consistent absorption. Start at time of catheter placement - improves TWOC success from 26% to 48% (NNT ~5).',
+    },
+    {
+      indication: 'Medical expulsive therapy (ureteral stones)',
+      regimen: '0.4 mg PO once daily until stone passes or 4 weeks. Most effective for distal ureteral stones 5-10 mm.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to tamsulosin or sulfonamides',
+    'Concurrent use of strong CYP3A4 inhibitors (ketoconazole, itraconazole)',
+    'History of orthostatic hypotension',
+  ],
+  cautions: [
+    'First-dose syncope: advise to take at bedtime initially',
+    'Orthostatic hypotension - rise slowly from sitting/lying',
+    'Intraoperative floppy iris syndrome (IFIS) - inform ophthalmologist before cataract surgery',
+    'Retrograde ejaculation (up to 10%)',
+    'Less orthostatic effect than non-selective alpha-blockers (prazosin, terazosin)',
+    'Do not crush, chew, or open capsule',
+  ],
+  monitoring: 'Blood pressure, especially first few doses. Symptom improvement (usually within 4-8 hours for partial effect, 2-4 weeks for full effect).',
+  notes: 'Alpha-1A selective = less cardiovascular effects than non-selective agents. Onset of partial effect within hours, but full benefit takes days. Start in ED for AUR - increases trial without catheter (TWOC) success rate significantly. Equivalent efficacy to alfuzosin for BPH symptoms.',
+  citations: [
+    'McNeill SA, et al. Alfuzosin once daily facilitates return to voiding in patients in acute urinary retention. J Urol. 2004;171(6 Pt 1):2316-2320.',
+    'Fitzpatrick JM, et al. Management of acute urinary retention: a worldwide survey of 6074 men with BPH. BJU Int. 2012;109(1):88-95.',
+    'Parsons JK, et al. Treatment of acute urinary retention. Nat Rev Urol. 2018;15(5):276-284.',
   ],
 };
 
@@ -5437,11 +5563,15 @@ const TRANEXAMIC_ACID: DrugEntry = {
   name: 'Tranexamic Acid (TXA)',
   genericName: 'Tranexamic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
-  route: 'IV',
-  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal', 'Antiplatelet reversal (adjunct)'],
+  route: 'IV / Topical',
+  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal', 'Antiplatelet reversal (adjunct)', 'Epistaxis (topical)'],
   dosing: [
     {
-      indication: 'ICH hemostasis (adjunct \u2014 within 3h of onset)',
+      indication: 'Epistaxis (topical)',
+      regimen: '500 mg in 5 mL solution applied via cotton pledget/dental roll to bleeding nostril for 10-20 minutes. One RCT (124 patients on antiplatelets): faster hemostasis vs anterior packing, less rebleeding, shorter ED stay, higher patient satisfaction. NoPAC trial (larger, unselected) showed no difference vs placebo. Most useful in anticoagulated/antiplatelet patients or as adjunct to packing.',
+    },
+    {
+      indication: 'ICH hemostasis (adjunct — within 3h of onset)',
       regimen: '1 g IV over 10 min. Reduced hematoma expansion (OR 0.82, TICH-2) but no improvement in mortality or functional outcome. Consider as adjunct.',
     },
     {
@@ -6140,6 +6270,40 @@ const AMPHOTERICIN_B: DrugEntry = {
   citations: [
     'Tenforde MW, et al. Treatment for HIV-associated cryptococcal meningitis. Cochrane Database Syst Rev. 2018;7:CD005647.',
     'Perfect JR, et al. Clinical practice guidelines for the management of cryptococcal disease: 2010 update by IDSA. Clin Infect Dis. 2010;50(3):291-322.',
+  ],
+};
+
+const FINASTERIDE: DrugEntry = {
+  id: 'finasteride',
+  name: 'Finasteride (Proscar)',
+  genericName: 'Finasteride',
+  drugClass: '5-alpha reductase inhibitor',
+  route: 'PO',
+  indications: ['Benign prostatic hyperplasia (BPH)', 'Androgenetic alopecia (lower dose)'],
+  dosing: [
+    {
+      indication: 'BPH',
+      regimen: '5 mg PO once daily. Effect on prostate size takes 3-6 months. Reduces prostate volume by approximately 20-25%. Reduces risk of AUR and need for surgery over time.',
+    },
+  ],
+  contraindications: [
+    'Women who are or may become pregnant (teratogenic - can cause male fetal genital abnormalities)',
+    'Pediatric patients',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'PSA reduction: lowers PSA by approximately 50% after 6 months - DOUBLE the PSA reading for accurate interpretation',
+    'Sexual dysfunction: decreased libido, erectile dysfunction, reduced ejaculate volume (2-10%)',
+    'May take 6-12 months for symptom improvement',
+    'Post-finasteride syndrome reported (persistent sexual side effects after discontinuation)',
+    'Women should not handle crushed or broken tablets (absorbed through skin)',
+    'Blood donation: wait 1 month after last dose',
+  ],
+  monitoring: 'Digital rectal exam and PSA at baseline. Annual PSA (remember to double the value for interpretation). Monitor for sexual side effects.',
+  notes: 'NOT useful acutely for AUR - effect takes 3-6 months. Inhibits type II 5-alpha reductase which converts testosterone to DHT (dihydrotestosterone). Long-term use reduces risk of AUR and need for TURP. Often combined with alpha-blocker for synergistic effect (MTOPS study). Generally started by urology for long-term BPH management, not in ED.',
+  citations: [
+    'McConnell JD, et al. The long-term effect of doxazosin, finasteride, and combination therapy on clinical progression of BPH (MTOPS). N Engl J Med. 2003;349(25):2387-2398.',
+    'Roehrborn CG. Current medical therapies for men with lower urinary tract symptoms and BPH. Rev Urol. 2009;11(1):1-10.',
   ],
 };
 
@@ -7598,6 +7762,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   FACTOR_VIII,
   FACTOR_IX,
   FEIBA,
+  FINASTERIDE,
   FENTANYL,
   FLUDROCORTISONE,
   FLUCONAZOLE,
@@ -7660,7 +7825,9 @@ export const ALL_DRUGS: DrugEntry[] = [
   OLANZAPINE,
   ONDANSETRON,
   ORAL_UREA,
+  OXYMETAZOLINE,
   OXYTOCIN,
+  PANTOPRAZOLE,
   PENICILLIN_G_IV,
   PHENYLEPHRINE,
   PCC_4FACTOR,
@@ -7702,6 +7869,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   SILVER_SULFADIAZINE,
   SODIUM_BICARBONATE,
   SSKI,
+  TAMSULOSIN,
   TENECTEPLASE,
   TDF_FTC,
   TERBUTALINE,
@@ -7848,7 +8016,9 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],
   [/nitroglycerin|nitro|glyceryl trinitrate|NTG/i, 'nitroglycerin'],
   [/ondansetron|zofran/i, 'ondansetron'],
+  [/oxymetazoline|afrin/i, 'oxymetazoline'],
   [/oxytocin|pitocin/i, 'oxytocin'],
+  [/pantoprazole|protonix/i, 'pantoprazole'],
   [/oral.*urea|ure-na/i, 'oral-urea'],
   [/aqueous.*penicillin|penicillin G.*IV|crystalline.*penicillin/i, 'penicillin-g-iv'],
   [/4.factor.*pcc|pcc.*4.factor|kcentra|prothrombin.*complex/i, 'pcc-4factor'],

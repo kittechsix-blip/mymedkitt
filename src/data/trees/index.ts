@@ -33,6 +33,9 @@ export { TUBERCULOSIS_NODES, TUBERCULOSIS_MODULE_LABELS, TUBERCULOSIS_CITATIONS 
 export { HEMOPHILIA_NODES, HEMOPHILIA_MODULE_LABELS, HEMOPHILIA_CITATIONS } from './hemophilia';
 export { ANTICOAG_REVERSAL_NODES, ANTICOAG_REVERSAL_MODULE_LABELS, ANTICOAG_REVERSAL_CITATIONS } from './anticoag-reversal';
 export { COMBATIVE_PATIENT_NODES, COMBATIVE_PATIENT_MODULE_LABELS, COMBATIVE_PATIENT_CITATIONS } from './combative-patient';
+export { URINARY_RETENTION_NODES, URINARY_RETENTION_MODULE_LABELS, URINARY_RETENTION_CITATIONS } from './urinary-retention';
+export { CAUSTIC_INGESTION_NODES, CAUSTIC_INGESTION_MODULE_LABELS, CAUSTIC_INGESTION_CITATIONS } from './caustic-ingestion';
+export { EPISTAXIS_NODES, EPISTAXIS_MODULE_LABELS, EPISTAXIS_CITATIONS } from './epistaxis';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

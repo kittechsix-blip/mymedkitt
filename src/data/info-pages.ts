@@ -9003,10 +9003,162 @@ const COMB_SPECIAL_POPS: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Caustic Ingestion Info Pages
+// -------------------------------------------------------------------
+
+const CAUSTIC_SUMMARY: InfoPage = {
+  id: 'caustic-summary',
+  title: 'Caustic Ingestion Steps Summary',
+  subtitle: 'Time-critical airway and GI pathway',
+  sections: [
+    {
+      heading: '1. Immediate Assessment',
+      body: '[Establish 5 Ws: Who, What, When, Where, Why](#/node/caustic-start)\n- Identify substance (acid vs alkali)\n- Determine volume, concentration, intentionality\n- **NEVER:** emesis, activated charcoal, neutralization, blind NG tube, dilution',
+    },
+    {
+      heading: '2. Airway Management',
+      body: '[Assess airway immediately](#/node/caustic-airway-assess)\n- Red flags: stridor, drooling, edema, voice changes\n- **50% of large ingestions require intubation**\n- Use fiberoptic/video laryngoscopy - avoid bougie\n- Have surgical airway backup ready',
+    },
+    {
+      heading: '3. Laboratory Workup',
+      body: '[Order comprehensive labs](#/node/caustic-labs)\n- CBC, BMP, LFTs, coags, lactate, CRP\n- Type and screen\n- Transmural necrosis predictors: leukocytosis, thrombocytopenia, elevated CRP, acidosis',
+    },
+    {
+      heading: '4. Imaging',
+      body: '[CXR and CT chest/abdomen](#/node/caustic-imaging)\n- Evaluate for pneumomediastinum, pneumoperitoneum\n- CT high specificity but does NOT replace EGD\n- Free air = surgical emergency',
+    },
+    {
+      heading: '5. Endoscopy (EGD)',
+      body: '[Perform within 12-24 hours](#/node/caustic-egd-timing)\n- Grade injury with [Zargar Classification](#/info/caustic-zargar)\n- AVOID days 5-15 (tissue most friable)\n- Skip EGD if perforation confirmed - proceed to OR',
+    },
+    {
+      heading: '6. Treatment by Grade',
+      body: '- [Grade 0-1](#/node/caustic-grade-mild): Supportive care, discharge with PPI\n- [Grade 2a](#/node/caustic-grade-2a): Observation 24-48h, NPO then diet trial\n- [Grade 2b](#/node/caustic-grade-2b): ICU, consider steroids (controversial)\n- [Grade 3](#/node/caustic-grade-3): Surgical consult, likely OR',
+    },
+    {
+      heading: '7. Disposition',
+      body: '- Asymptomatic, small accidental ingestion: [Observe 4-6h then discharge](#/node/caustic-discharge)\n- Symptomatic or intentional: Admit, EGD\n- Grade 2b-3: ICU\n- **All intentional ingestions: Psychiatric evaluation mandatory**',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Taming the SRU. Caustic Ingestions in the ED. 2024.' },
+    { num: 2, text: 'Chirica M, et al. Caustic ingestion. Lancet. 2017;389(10083):2041-2052.' },
+  ],
+};
+
+const CAUSTIC_ZARGAR: InfoPage = {
+  id: 'caustic-zargar',
+  title: 'Zargar Classification',
+  subtitle: 'Endoscopic grading of caustic esophageal/gastric injury',
+  sections: [
+    {
+      heading: 'Grading System',
+      body: '**Grade 0** - Normal mucosa\n\n**Grade 1** - Mucosal edema and hyperemia only\n\n**Grade 2a** - Friability, hemorrhages, erosions, blisters, whitish membranes, superficial ulcerations\n\n**Grade 2b** - Deep discrete or circumferential ulceration (in addition to 2a findings)\n\n**Grade 3a** - Small, scattered areas of necrosis\n\n**Grade 3b** - Extensive necrosis',
+    },
+    {
+      heading: 'Clinical Significance',
+      body: '**Mild Injuries (Grade 0-2a):**\n- Excellent prognosis\n- No stricture formation\n- Recover without sequelae\n\n**Severe Injuries (Grade 2b-3):**\n- Grade 2b: 70-100% develop strictures\n- Grade 3: Near-universal stricture in survivors\n- Grade 3: Associated with high mortality (9-fold increased morbidity/mortality per grade increase)',
+    },
+    {
+      heading: 'Management by Grade',
+      body: '**Grade 0-1:**\n- Clear liquid diet trial\n- PPI for symptoms\n- Outpatient follow-up\n\n**Grade 2a:**\n- Observation 24-48 hours\n- NPO then diet advancement\n- No antibiotics or steroids\n\n**Grade 2b:**\n- ICU admission\n- NPO, TPN consideration\n- Steroids controversial (may reduce stricture formation)\n- Close monitoring for perforation\n\n**Grade 3a-3b:**\n- ICU admission\n- Surgical consultation\n- High likelihood of surgical intervention\n- Broad-spectrum antibiotics',
+    },
+    {
+      heading: 'Stricture Prevention',
+      body: '**Corticosteroids:**\n- Some evidence for grade 2b injuries specifically\n- Methylprednisolone 1-2 mg/kg/day x 3 weeks then taper\n- Evidence is mixed; GI should guide decision\n- Not indicated for grade 0-2a (no benefit)\n- Not indicated for grade 3 (tissue necrosis)\n\n**Early Dilation:**\n- May begin after acute phase (week 3+)\n- Requires careful technique due to friable tissue\n- Multiple sessions often required',
+    },
+    {
+      heading: 'Long-term Complications',
+      body: '- **Stricture formation:** 3-8 weeks post-ingestion\n- **Upper GI hemorrhage:** 2-4 weeks as necrotic tissue sloughs\n- **Esophageal cancer:** 1000x increased risk (squamous cell), latency 15-40 years\n- **Tracheoesophageal fistula**\n- **Gastric outlet obstruction**\n\nAll grade 2b-3 survivors require lifelong surveillance endoscopy.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Zargar SA, et al. The role of fiberoptic endoscopy in management of corrosive ingestion and modified endoscopic classification of burns. Gastrointest Endosc. 1991;37(2):165-169.' },
+    { num: 2, text: 'Contini S, Scarpignato C. Caustic injury of the upper GI tract: A comprehensive review. World J Gastroenterol. 2013;19(25):3918-3930.' },
+  ],
+};
+
+const CAUSTIC_CONTRAINDICATIONS: InfoPage = {
+  id: 'caustic-contraindications',
+  title: 'Caustic Ingestion Contraindications',
+  subtitle: 'What NOT to do - critical safety information',
+  sections: [
+    {
+      heading: 'Absolutely Contraindicated Interventions',
+      body: '**1. Induced Emesis**\nRe-exposes esophagus to caustic agent. Increases aspiration risk. May cause additional burns.\n\n**2. Activated Charcoal**\nDoes not bind caustic agents. May obscure endoscopic view. Aspiration risk. May cause vomiting.\n\n**3. pH Neutralization**\nExothermic reaction generates heat, causing thermal injury on top of chemical injury. No human evidence of benefit despite animal studies.\n\n**4. Dilution with Water or Milk**\nLimited benefit. May induce vomiting. May cause gastric distention and increase perforation risk. Not routinely recommended.',
+    },
+    {
+      heading: 'Procedural Contraindications',
+      body: '**Blind NG Tube Placement**\n- Risk of esophageal perforation\n- Risk of bacterial contamination\n- If enteral access needed, place fluoroscopically or during EGD\n\n**Blind Intubation**\n- Tissue too friable\n- Risk of airway disruption\n- Use fiberoptic or video laryngoscopy only\n\n**Bougie Use**\n- Risk of perforation\n- Use direct visualization only\n\n**Laryngeal Mask Airways (LMA)**\n- May not protect against aspiration\n- May cause additional oropharyngeal trauma',
+    },
+    {
+      heading: 'Timing Considerations',
+      body: '**Avoid EGD on Days 5-15 Post-Ingestion**\n- Tissue is most friable during this period\n- Highest perforation risk\n- Optimal timing: 12-24 hours\n- Acceptable: Up to 48-96 hours with gentle technique',
+    },
+    {
+      heading: 'Medication Considerations',
+      body: '**NSAIDs:**\n- Avoid due to GI irritation\n- Use acetaminophen for pain\n\n**Corticosteroids:**\n- NOT indicated for grade 0-2a (no benefit)\n- NOT indicated for grade 3 (necrotic tissue, may mask perforation)\n- Controversial for grade 2b only\n\n**Antibiotics:**\n- Not routinely indicated unless perforation suspected\n- Add if corticosteroids used',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hoffman RS, et al. Goldfrank\'s Toxicologic Emergencies. 11th ed. 2023.' },
+    { num: 2, text: 'Taming the SRU. Caustic Ingestions in the ED. 2024.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Epistaxis
+// -------------------------------------------------------------------
+
+const EPISTAXIS_SUMMARY: InfoPage = {
+  id: 'epistaxis-summary',
+  title: 'Epistaxis Steps Summary',
+  subtitle: 'Time-critical management of nosebleed',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Assess hemodynamic stability (HR, BP)](#/node/epi-stability)\n• Estimate blood loss (usually overestimated)\n• History: duration, anticoagulation, prior episodes\n• IV access if significant bleeding',
+    },
+    {
+      heading: '2. Initial Hemostasis',
+      body: '• [Compression: pinch fleshy part of nose x 15-20 min](#/node/epi-initial-measures)\n• Patient upright, leaning forward\n• Topical vasoconstrictor: [Oxymetazoline](#/drug/oxymetazoline/epistaxis) 0.05% spray\n• Allow 10-15 min, then visualize with nasal speculum',
+    },
+    {
+      heading: '3. Localize Bleeding Site',
+      body: '• [Anterior (90%): visible on Kiesselbach plexus](#/node/epi-localize)\n• [Posterior (10%): blood in oropharynx, no anterior source](#/node/epi-posterior)\n• Clear clots gently, suction if needed',
+    },
+    {
+      heading: '4. Anterior Bleed Treatment',
+      body: '• [Silver nitrate cautery if site visible](#/node/epi-anterior-cautery) - do NOT cauterize both septum sides\n• [Topical TXA 500 mg in 5 mL on pledget x 10-20 min](#/node/epi-topical-txa)\n• [Anterior packing: Rapid Rhino, Merocel, or gauze](#/node/epi-anterior-pack)',
+    },
+    {
+      heading: '5. Posterior Bleed Treatment',
+      body: '• [Dual-balloon device or Foley catheter technique](#/node/epi-posterior-pack)\n• All posterior packs require admission and ENT consult\n• Continuous SpO2 monitoring (hypoxia risk)',
+    },
+    {
+      heading: '6. Anticoagulation',
+      body: '• [Warfarin: check INR, Vitamin K if supratherapeutic](#/node/epi-warfarin)\n• [DOAC: local hemostasis first, hold 1-2 doses if severe](#/node/epi-doac)\n• [Antiplatelet: topical TXA helpful, rarely hold unless severe](#/node/epi-antiplatelet)\n• Do NOT routinely reverse for epistaxis',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [No pack: discharge with prevention instructions](#/node/epi-discharge-no-pack)\n• [Anterior pack: ENT follow-up 24-48h, prophylactic antibiotics](#/node/epi-discharge-with-pack)\n• [Posterior pack: admit to monitored bed](#/node/epi-posterior-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Tunkel DE, et al. Clinical Practice Guideline: Nosebleed (Epistaxis). Otolaryngol Head Neck Surg. 2020;162(1_suppl):S1-S38.' },
+    { num: 2, text: 'EB Medicine. Management of Epistaxis in the Urgent Care Setting. 2024.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
 export const INFO_PAGES: Record<string, InfoPage> = {
+  'epistaxis-summary': EPISTAXIS_SUMMARY,
+  'caustic-summary': CAUSTIC_SUMMARY,
+  'caustic-zargar': CAUSTIC_ZARGAR,
+  'caustic-contraindications': CAUSTIC_CONTRAINDICATIONS,
   'doac-pe': DOAC_PE_PAGE,
   'priapism-return-precautions': PRIAPISM_RETURN_PRECAUTIONS,
   'cardioversion-afib': CARDIOVERSION_AFIB_PAGE,

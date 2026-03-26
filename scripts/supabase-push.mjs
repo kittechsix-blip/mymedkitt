@@ -141,6 +141,9 @@ const TREE_REGISTRY = {
   'tuberculosis':         { prefix: 'TUBERCULOSIS',           entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },
   'combative-patient':    { prefix: 'COMBATIVE_PATIENT',      entryNodeId: 'cp-start',       categoryId: 'emergency-medicine' },
   'hemophilia':           { prefix: 'HEMOPHILIA',             entryNodeId: 'hemo-start',     categoryId: 'heme-onc' },
+  'epistaxis':            { prefix: 'EPISTAXIS',              entryNodeId: 'epi-start',      categoryId: 'emergency-medicine' },
+  'urinary-retention':    { prefix: 'URINARY_RETENTION',      entryNodeId: 'aur-start',      categoryId: 'urology' },
+  'caustic-ingestion':    { prefix: 'CAUSTIC_INGESTION',      entryNodeId: 'caustic-start',  categoryId: 'toxicology' },
 };
 
 const CROSS_LISTINGS = {
