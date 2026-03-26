@@ -2307,10 +2307,12 @@ const ESMOLOL: DrugEntry = {
     {
       indication: 'A-Fib rate control',
       regimen: 'Loading dose: 500 mcg/kg IV over 1 minute. Infusion: 50-200 mcg/kg/min, titrate by 50 mcg/kg/min every 4 min. May repeat loading dose with each infusion increase.',
+      weightCalc: { dosePerKg: 500, unit: 'mcg', label: 'Loading dose' },
     },
     {
       indication: 'Thyroid storm (rate control)',
       regimen: '250-500 mcg/kg IV loading dose over 1 min, then 50-100 mcg/kg/min infusion. PREFERRED over propranolol in thyroid storm (IBCC): ultra-short acting (half-life 9 min), immediately titratable, can be stopped instantly if hypotension develops. ONLY use with preserved EF on echocardiogram. Cardioselective — safer in reactive airway disease than propranolol.',
+      weightCalc: { dosePerKg: 500, unit: 'mcg', label: 'Loading dose (max)' },
     },
   ],
   contraindications: [
@@ -4167,6 +4169,7 @@ const RACEMIC_EPINEPHRINE: DrugEntry = {
     {
       indication: 'Croup',
       regimen: '0.5 mL of 2.25% racemic epinephrine diluted in 4.5 mL normal saline, nebulized. May repeat as needed. Alternative: L-epinephrine 0.5 mL/kg of 1:1000 (max 5 mL) nebulized.',
+      weightCalc: { dosePerKg: 0.5, unit: 'mL', maxDose: 5, label: 'L-epi 1:1000 alternative' },
     },
     {
       indication: 'Post-extubation stridor',
@@ -6557,10 +6560,12 @@ const LEVOTHYROXINE: DrugEntry = {
     {
       indication: 'Decompensated hypothyroidism (IV maintenance)',
       regimen: '50-100 mcg IV daily (or 1.2 mcg/kg/day IV). Continue until GI function restored, then transition to PO. Oral absorption is unreliable in decompensated hypothyroidism.',
+      weightCalc: { dosePerKg: 1.2, unit: 'mcg', maxDose: 100, label: 'IV daily' },
     },
     {
       indication: 'Hypothyroidism (PO maintenance)',
       regimen: '1.6 mcg/kg/day PO (usual range 50-200 mcg daily). Take on empty stomach 30-60 min before breakfast. Elderly: start 25-50 mcg. Dose adjustments by 12.5-25 mcg increments every 4-6 weeks. Separate from calcium, iron, antacids by 4 hours.',
+      weightCalc: { dosePerKg: 1.6, unit: 'mcg', maxDose: 200, label: 'PO daily' },
     },
     {
       indication: 'Subclinical hypothyroidism',
@@ -6911,6 +6916,11 @@ const FFP: DrugEntry = {
     {
       indication: 'Warfarin reversal (if PCC unavailable)',
       regimen: 'INR 2-3.9: 10 mL/kg. INR 4-6: 12-15 mL/kg. INR >6: 15-20 mL/kg. Each unit ~250 mL. 4 units increase clotting factors ~10%. PCC is strongly preferred over FFP (faster, smaller volume, no TRALI). FFP contains factors at normal plasma concentration — impossible to achieve INR below ~1.7 (would require infinite volume). Do NOT give FFP to patients with INR ≤1.7. Always co-administer Vitamin K 10 mg IV.',
+      weightCalc: [
+        { dosePerKg: 10, unit: 'mL', label: 'INR 2-3.9' },
+        { dosePerKg: 15, unit: 'mL', label: 'INR 4-6' },
+        { dosePerKg: 20, unit: 'mL', label: 'INR >6' },
+      ],
     },
   ],
   contraindications: ['IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)', 'Volume overload (relative \u2014 consider volume of 2-4 units)'],
