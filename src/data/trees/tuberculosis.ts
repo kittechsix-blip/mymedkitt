@@ -220,6 +220,25 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     title: 'RIPE Regimen — Standard Treatment',
     body: '[TB Treatment Regimens](#/info/tb-treatment-regimens) — full dosing tables.\n\nThe ATS/CDC/IDSA standard regimen for drug-susceptible pulmonary TB: [2,8]\n\n**Intensive Phase (2 months — daily):**\n• [Isoniazid](#/drug/isoniazid/tuberculosis) **5 mg/kg** PO daily (max 300 mg)\n• [Rifampin](#/drug/rifampin/tuberculosis) **10 mg/kg** PO daily (max 600 mg)\n• [Pyrazinamide](#/drug/pyrazinamide/tuberculosis) **25 mg/kg** PO daily (max 2000 mg)\n• [Ethambutol](#/drug/ethambutol/tuberculosis) **15–20 mg/kg** PO daily (max 1600 mg)\n\n**Continuation Phase (4 months — daily or 3×/week):**\n• Isoniazid + Rifampin only\n• Daily: INH 5 mg/kg + RIF 10 mg/kg\n• 3×/week (DOT only): INH 15 mg/kg + RIF 10 mg/kg [2]\n\n**Pyridoxine (B6):** 25–50 mg PO daily with INH to prevent peripheral neuropathy [2]\n\n**Total duration: ≥6 months** (may extend to 9 months if cavitary disease + positive 2-month culture)',
     citation: [2, 8],
+    treatment: {
+      firstLine: {
+        drug: 'RIPE: Isoniazid + Rifampin + Pyrazinamide + Ethambutol',
+        dose: 'INH 5 mg/kg (max 300 mg) + RIF 10 mg/kg (max 600 mg) + PZA 25 mg/kg (max 2000 mg) + EMB 15-20 mg/kg (max 1600 mg)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '2 months intensive (RIPE), then 4 months continuation (INH + RIF)',
+        notes: 'Add pyridoxine (B6) 25-50 mg daily with INH. Total duration ≥6 months.',
+      },
+      alternative: {
+        drug: 'RIPE 3x/week (DOT only)',
+        dose: 'INH 15 mg/kg (max 900 mg) + RIF 10 mg/kg (max 600 mg) + PZA 50 mg/kg (max 3000 mg) + EMB 30 mg/kg (max 2400 mg)',
+        route: 'PO',
+        frequency: '3x/week',
+        duration: '2 months intensive, then 4 months INH + RIF 3x/week',
+        notes: 'Directly observed therapy required for intermittent dosing.',
+      },
+      monitoring: 'Monthly sputum cultures until conversion. LFTs at baseline; monthly if risk factors. Visual acuity baseline and monthly (ethambutol). 2-month culture determines continuation phase duration.',
+    },
     next: 'tb-2month-check',
   },
   {
@@ -284,6 +303,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     title: '4-Month Rifapentine-Moxifloxacin Regimen',
     body: '[TB Treatment Regimens](#/info/tb-treatment-regimens) — comparative dosing table.\n\nCDC 2022 interim guidance introduced a shortened **4-month regimen** for selected patients: [2,9]\n\n**Regimen (daily throughout):**\n• [Isoniazid](#/drug/isoniazid/tuberculosis) 300 mg PO daily\n• [Rifapentine](#/drug/rifapentine/tuberculosis) 1200 mg PO daily\n• [Moxifloxacin](#/drug/moxifloxacin/tuberculosis) 400 mg PO daily\n• [Pyrazinamide](#/drug/pyrazinamide/tuberculosis) (weight-based, 2 months only)\n\n**Patient selection (ALL criteria must be met):** [2,9]\n• Age ≥12 years\n• Drug-susceptible, non-cavitary pulmonary TB\n• HIV-negative (or HIV+ with CD4 >100 and not on certain ARVs)\n• Not pregnant or breastfeeding\n• No fluoroquinolone resistance\n• Sputum AFB smear grade ≤2+\n\n**QTc monitoring required** — both moxifloxacin and bedaquiline can prolong QTc. [2]',
     citation: [2, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Isoniazid + Rifapentine + Moxifloxacin + Pyrazinamide',
+        dose: 'INH 300 mg + RPT 1200 mg + MOX 400 mg + PZA weight-based',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '4 months total (PZA for first 2 months only)',
+        notes: 'Pyridoxine 25-50 mg daily. Strict patient selection criteria required.',
+      },
+      monitoring: 'Baseline ECG then monthly QTc monitoring (moxifloxacin prolongs QTc). Monthly sputum cultures. LFTs at baseline and monthly.',
+    },
     next: 'tb-hepatotox',
     calculatorLinks: [{ id: 'tb-duration', label: 'Treatment Duration Guide' }],
   },
@@ -317,6 +347,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Hold hepatotoxic TB drugs. Stepwise rechallenge: RIF → INH → PZA, one week apart. If PZA omitted permanently, extend to 9 months total.',
     confidence: 'recommended',
     citation: [2],
+    treatment: {
+      firstLine: {
+        drug: 'Ethambutol + Moxifloxacin (bridge therapy)',
+        dose: 'EMB 15-20 mg/kg (max 1600 mg) + MOX 400 mg',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Until hepatotoxicity resolves and rechallenge complete',
+        notes: 'Bridge therapy while holding hepatotoxic drugs. Stepwise rechallenge: RIF first, then INH, then PZA (1 week apart each).',
+      },
+      monitoring: 'Weekly LFTs until AST/ALT <2x ULN. Recheck LFTs 1 week after each drug rechallenge. If PZA omitted permanently, extend total duration to 9 months.',
+    },
   },
 
   // ===================================================================
@@ -379,6 +420,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Start 3HP regimen (12 weekly doses of INH + rifapentine by DOT). Complete within 16 weeks. Pyridoxine with each dose.',
     confidence: 'definitive',
     citation: [3],
+    treatment: {
+      firstLine: {
+        drug: 'Isoniazid + Rifapentine (3HP)',
+        dose: 'INH 15 mg/kg (max 900 mg) + RPT 900 mg (if >50 kg)',
+        route: 'PO',
+        frequency: 'Once weekly',
+        duration: '12 weeks (12 doses total)',
+        notes: 'Pyridoxine (B6) 50 mg with each dose. Must complete within 16 weeks. DOT recommended.',
+      },
+      monitoring: 'LFTs at baseline if risk factors (age >35, hepatitis, HIV, alcohol use). Monthly clinical assessment for hepatotoxicity symptoms.',
+    },
   },
   {
     id: 'tb-latent-4r',
@@ -389,6 +441,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Start rifampin 600 mg PO daily × 4 months. Monthly clinical assessment. Counsel about drug interactions and orange body fluids.',
     confidence: 'definitive',
     citation: [3],
+    treatment: {
+      firstLine: {
+        drug: 'Rifampin (4R)',
+        dose: '10 mg/kg (max 600 mg)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '4 months',
+        notes: 'Self-administered. Counsel: orange body fluids, extensive drug interactions (CYP3A4 inducer).',
+      },
+      monitoring: 'Baseline LFTs if risk factors. Monthly clinical assessment for hepatotoxicity.',
+    },
   },
   {
     id: 'tb-latent-3hr',
@@ -399,6 +462,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Start 3HR regimen (daily INH + rifampin × 3 months). Pyridoxine supplementation. Monthly clinical assessment.',
     confidence: 'recommended',
     citation: [3],
+    treatment: {
+      firstLine: {
+        drug: 'Isoniazid + Rifampin (3HR)',
+        dose: 'INH 5 mg/kg (max 300 mg) + RIF 10 mg/kg (max 600 mg)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '3 months',
+        notes: 'Pyridoxine (B6) 25-50 mg daily. Same drug interaction profile as rifampin monotherapy.',
+      },
+      monitoring: 'Baseline LFTs if risk factors. Monthly clinical assessment for hepatotoxicity.',
+    },
   },
   {
     id: 'tb-latent-9h',
@@ -409,6 +483,25 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Start isoniazid 300 mg PO daily × 9 months with pyridoxine. Monthly LFTs if age >35. Monitor adherence closely.',
     confidence: 'recommended',
     citation: [3],
+    treatment: {
+      firstLine: {
+        drug: 'Isoniazid (9H)',
+        dose: '5 mg/kg (max 300 mg)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '9 months (270 doses)',
+        notes: 'Pyridoxine (B6) 25-50 mg daily. Must complete within 12 months. Lowest completion rates (~50%).',
+      },
+      alternative: {
+        drug: 'Isoniazid twice weekly (DOT)',
+        dose: '15 mg/kg (max 900 mg)',
+        route: 'PO',
+        frequency: 'Twice weekly',
+        duration: '9 months',
+        notes: 'Directly observed therapy required for intermittent dosing.',
+      },
+      monitoring: 'Monthly LFTs if age >35, hepatitis, HIV, alcohol use. Monthly clinical assessment for hepatotoxicity symptoms.',
+    },
   },
 
   // ===================================================================
@@ -450,6 +543,17 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     recommendation: 'Discontinue INH. Continue RIF + PZA + EMB + add moxifloxacin. Minimum 6 months. Monthly sputum cultures.',
     confidence: 'recommended',
     citation: [4],
+    treatment: {
+      firstLine: {
+        drug: 'Rifampin + Pyrazinamide + Ethambutol + Moxifloxacin',
+        dose: 'RIF 10 mg/kg (max 600 mg) + PZA 25 mg/kg (max 2000 mg) + EMB 15-20 mg/kg (max 1600 mg) + MOX 400 mg',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: '6 months minimum (9 months if PZA not tolerated)',
+        notes: 'Discontinue isoniazid. Add fluoroquinolone to compensate for INH loss.',
+      },
+      monitoring: 'Monthly sputum cultures. DST to confirm no additional resistance. Monthly LFTs. ECG monitoring for QTc (moxifloxacin).',
+    },
   },
   {
     id: 'tb-mdr-approach',
@@ -467,6 +571,25 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     title: 'BPaL / BPaLM Regimens',
     body: '[MDR-TB Drug Guide](#/info/tb-mdr-guide) — detailed drug dosing and monitoring.\n\n**BPaL Regimen (Bedaquiline + Pretomanid + Linezolid):** [4]\n• [Bedaquiline](#/drug/bedaquiline/mdr-tb) 400 mg daily × 2 weeks, then 200 mg 3×/week × 24 weeks\n• [Pretomanid](#/drug/pretomanid/mdr-tb) 200 mg daily × 26 weeks\n• [Linezolid](#/drug/linezolid/mdr-tb) 1200 mg daily × 26 weeks (reduce to 600 mg if toxicity)\n• **Total duration: 26 weeks (6 months)**\n\n**BPaLM Regimen (add Moxifloxacin):** [4]\n• Same as BPaL PLUS [Moxifloxacin](#/drug/moxifloxacin/mdr-tb) 400 mg daily\n• Use when fluoroquinolone susceptibility is confirmed\n• May improve outcomes and allow linezolid dose reduction\n\n**Key monitoring:** [4]\n• **QTc** — bedaquiline AND moxifloxacin both prolong QTc\n  → Baseline ECG, then at least monthly\n  → Hold if QTc >500 ms\n• **CBC weekly** — linezolid causes thrombocytopenia and anemia\n• **Visual acuity + neuropathy assessment** monthly — linezolid toxicity\n• **LFTs** monthly — hepatotoxicity from bedaquiline/pretomanid',
     citation: [4],
+    treatment: {
+      firstLine: {
+        drug: 'BPaL: Bedaquiline + Pretomanid + Linezolid',
+        dose: 'BDQ 400 mg daily (2 wk) then 200 mg 3x/wk + Pa 200 mg daily + LZD 1200 mg daily',
+        route: 'PO',
+        frequency: 'Daily (BDQ 3x/wk after week 2)',
+        duration: '26 weeks (6 months)',
+        notes: 'Reduce linezolid to 600 mg if toxicity occurs. For MDR-TB and pre-XDR/XDR-TB.',
+      },
+      alternative: {
+        drug: 'BPaLM: Bedaquiline + Pretomanid + Linezolid + Moxifloxacin',
+        dose: 'BDQ 400 mg (2 wk) then 200 mg 3x/wk + Pa 200 mg + LZD 1200 mg + MOX 400 mg daily',
+        route: 'PO',
+        frequency: 'Daily (BDQ 3x/wk after week 2)',
+        duration: '26 weeks (6 months)',
+        notes: 'Use when fluoroquinolone susceptibility confirmed. May allow LZD dose reduction.',
+      },
+      monitoring: 'ECG baseline then monthly (QTc - hold if >500 ms). Weekly CBC (linezolid). Monthly visual acuity and neuropathy assessment. Monthly LFTs.',
+    },
     next: 'tb-mdr-result',
     calculatorLinks: [{ id: 'tb-interaction', label: 'Drug Interaction Checker' }],
   },

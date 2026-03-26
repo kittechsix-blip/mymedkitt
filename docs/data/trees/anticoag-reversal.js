@@ -100,6 +100,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'Urgent Warfarin (Coumadin) Reversal',
         body: '**Two simultaneous therapies — BOTH required:**\n\n**[1] [Vitamin K (Mephyton)](#/drug/vitamin-k/warfarin reversal)** 10 mg IV over 30 minutes\n• Takes 6-12h to work, but prevents INR rebound when PCC wears off (6-8h)\n• **IV only** — SC has erratic absorption, IM causes hematoma\n\n**[2] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/warfarin reversal)** — INR-based dosing:\n• INR 1.3-2: 15 units/kg (max 1,500 units)\n• INR 2-4: 25 units/kg (max 2,500 units)\n• INR 4-6: 35 units/kg (max 3,500 units)\n• INR >6: 50 units/kg (max 5,000 units)\n• **Alternative if PCC unavailable:** 4 units [FFP](#/drug/ffp/warfarin reversal)\n\n**For ICH:** PCC immediately without waiting for INR. Follow INR q3-6h. [1,2,15]\n\n**Fixed-dose PCC** (non-CNS, non-life-threatening): 1,500 units (or 2,000 if >95 kg or INR >7.5). Repeat INR at 30 min; give more PCC if INR >1.4. [15]',
         citation: [1, 2, 7, 15],
+        treatment: {
+            firstLine: {
+                drug: '4-Factor PCC (Kcentra)',
+                dose: 'INR 2-4: 25 units/kg (max 2,500 units) | INR 4-6: 35 units/kg (max 3,500 units) | INR >6: 50 units/kg (max 5,000 units)',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose (effect lasts 6-8 hours)',
+                notes: 'MUST give with Vitamin K. For ICH: give immediately without waiting for INR.',
+            },
+            alternative: {
+                drug: 'Vitamin K (Phytonadione)',
+                dose: '10 mg',
+                route: 'IV over 30 minutes',
+                frequency: 'Once',
+                duration: 'Single dose (takes 6-12h to work)',
+                notes: 'ALWAYS give with PCC. IV only - SC has erratic absorption, IM causes hematoma.',
+            },
+            monitoring: 'INR at 30 min post-PCC, then q3-6h. Watch for INR rebound when PCC wears off (6-8h).',
+        },
     },
     {
         id: 'acr-dabigatran-critical',
@@ -108,6 +127,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'Dabigatran (Pradaxa) Reversal',
         body: '**[1] [Idarucizumab (Praxbind)](#/drug/idarucizumab/dabigatran reversal)** — specific reversal agent\n• 5 g IV total: two 2.5 g doses, no more than 15 min apart\n• Monoclonal antibody Fab fragment that binds and inactivates dabigatran\n• Onset: within minutes. Consider if last dose <12-24h (normal renal function)\n• For ICH: consider if dose within past 2-4 days [2]\n\n**[2] If unavailable:** [4-Factor PCC](#/drug/pcc-4factor/doac reversal) [6]\n\n**[3] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[4] Hemodialysis** if idarucizumab unavailable — dabigatran is 80% renally cleared, low protein binding (~35%), ~65% removed by dialysis [3]\n\n**Monitoring:** PTT (or thrombin time if available) at baseline, 2-4h after idarucizumab, and q12h\n• Normal TT excludes clinically significant dabigatran effect [3,4]\n• Watch for rebound >12h due to drug redistribution from adipose tissue',
         citation: [2, 3, 4, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Idarucizumab (Praxbind)',
+                dose: '5 g total (two 2.5 g vials)',
+                route: 'IV',
+                frequency: 'Two doses no more than 15 min apart',
+                duration: 'Single administration',
+                notes: 'Onset within minutes. Consider if last dabigatran dose <12-24h (normal renal function) or within 2-4 days for ICH.',
+            },
+            alternative: {
+                drug: '4-Factor PCC (Kcentra)',
+                dose: '50 units/kg (max 5,000 units)',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Use if idarucizumab unavailable. Consider hemodialysis as adjunct (removes ~65% of dabigatran).',
+            },
+            monitoring: 'PTT (or thrombin time) at baseline, 2-4h post-idarucizumab, then q12h. Watch for rebound >12h due to adipose redistribution.',
+        },
     },
     {
         id: 'acr-xa-critical',
@@ -116,6 +154,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'Factor Xa Inhibitor Reversal',
         body: '**Apixaban (Eliquis), Rivaroxaban (Xarelto), Edoxaban (Savaysa), Fondaparinux (Arixtra)**\n\n**[1] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/doac reversal)**\n• CNS bleeding: 50 units/kg (max 5,000 units) [5,6]\n• Non-CNS: 25 units/kg (max 2,500) or **fixed 2,000 units** (simplest, best evidence) [5]\n• ⚠️ PCC will NOT change the anti-Xa level (anti-Xa measures DOAC in the body, not clotting factor levels)\n\n**[2] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[3] If INR elevated:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV — exclude concurrent vitamin K deficiency\n\n**NOT dialyzable:** Apixaban/Eliquis (~90% protein bound), Rivaroxaban/Xarelto (~95%). Edoxaban/Savaysa (~50% bound) is somewhat dialyzable.\n\n**Monitoring:**\n• Normal INR argues against significant Xa inhibitor level but doesn\'t exclude it [4]\n• Anti-Xa level correlates well with drug level; normal anti-Xa excludes clinically relevant Xa inhibitors\n• Follow INR after PCC, then q6h (rebounding INR may indicate waning PCC effect) [5]',
         citation: [3, 4, 5, 6],
+        treatment: {
+            firstLine: {
+                drug: '4-Factor PCC (Kcentra)',
+                dose: 'CNS bleeding: 50 units/kg (max 5,000 units) | Non-CNS: 25 units/kg (max 2,500) or fixed 2,000 units',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Fixed 2,000 units has best evidence for non-CNS. PCC will NOT change anti-Xa level.',
+            },
+            alternative: {
+                drug: 'Activated Charcoal',
+                dose: '50 g',
+                route: 'PO/NG',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Only if ingested <2 hours ago. Consider Vitamin K 10 mg IV if INR elevated (concurrent vitamin K deficiency).',
+            },
+            monitoring: 'INR after PCC, then q6h. Anti-Xa level if available. Rebounding INR may indicate waning PCC effect.',
+        },
     },
     {
         id: 'acr-heparin-critical',
@@ -146,6 +203,17 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'UFH Reversal — Protamine',
         body: '**[Protamine](#/drug/protamine/heparin reversal)** dosing by time since heparin:\n\n**If given as bolus:**\n• <30 min ago: **1 mg per 100 units** heparin (max 50 mg)\n• 30-60 min: 0.5-0.75 mg per 100 units\n• 1-2h: 0.375-0.5 mg per 100 units\n• 2-6h: 0.25-0.375 mg per 100 units\n\n**If given as infusion:**\n• Calculate heparin given over last 2 hours (rate × 2)\n• Give **1 mg protamine per 100 units** infused in last 2h\n\n**Administration:**\n• Give slowly over **15 minutes** — rapid infusion → hypotension, bradycardia, anaphylactoid reaction\n• **Max 50 mg** single dose — excess causes paradoxical anticoagulation [2]\n\n**Monitoring:**\n• PTT (or anti-Xa) at 10-15 min after dose\n• Recheck at 2h (protamine lasts ~2h)\n• Then q4h × 24h — watch for **heparin rebound** [16]',
         citation: [2, 12, 13, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Protamine Sulfate',
+                dose: '1 mg per 100 units heparin (time-adjusted: 0.5-0.75 mg/100u if 30-60min, 0.375-0.5 mg/100u if 1-2h)',
+                route: 'IV over 15 minutes',
+                frequency: 'Once (may repeat)',
+                duration: 'Single dose (effect lasts ~2 hours)',
+                notes: 'Max 50 mg single dose. Rapid infusion causes hypotension, bradycardia, anaphylactoid reaction. Excess protamine causes paradoxical anticoagulation.',
+            },
+            monitoring: 'PTT (or anti-Xa) at 10-15 min post-dose, 2h (protamine wears off), then q4h x 24h. Watch for heparin rebound.',
+        },
     },
     {
         id: 'acr-lmwh-reversal',
@@ -154,6 +222,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'LMWH Reversal — Protamine (Partial)',
         body: '**Protamine only neutralizes ~50% of enoxaparin (Lovenox) anti-Xa activity.**\n\n**[Protamine](#/drug/protamine/lmwh reversal)** dosing for enoxaparin (Lovenox):\n• **<8h** since dose: 1 mg protamine per 1 mg enoxaparin (max 50 mg)\n• **8-12h** since dose: 0.5 mg per 1 mg enoxaparin\n• **>12h** since dose: Protamine unlikely to help\n• May re-dose at 0.5 mg per 1 mg enoxaparin if bleeding persists (max 25 mg)\n\n**Dalteparin (Fragmin) or tinzaparin (Innohep):**\n• <4h: 1 mg protamine per 100 units (repeat half dose at 4h)\n• 4-8h: 0.5 mg per 100 units\n\n**Fondaparinux (Arixtra):** Protamine is **NOT effective**. Consider [PCC](#/drug/pcc-4factor/doac reversal).\n\n**Monitoring:** Anti-Xa level (or PTT) at 10-15 min, then 2h, then q4h × 24h. Don\'t expect normalization of anti-Xa level. [2,14]',
         citation: [2, 12, 14],
+        treatment: {
+            firstLine: {
+                drug: 'Protamine Sulfate',
+                dose: 'Enoxaparin <8h: 1 mg per 1 mg enoxaparin (max 50 mg) | 8-12h: 0.5 mg per 1 mg | >12h: unlikely to help',
+                route: 'IV over 15 minutes',
+                frequency: 'Once (may repeat at 0.5 mg/mg if bleeding persists, max 25 mg)',
+                duration: 'Single dose',
+                notes: 'Only neutralizes ~50% of LMWH anti-Xa activity. For fondaparinux: protamine NOT effective - use PCC.',
+            },
+            alternative: {
+                drug: '4-Factor PCC (Kcentra)',
+                dose: '25-50 units/kg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'For fondaparinux (Arixtra) since protamine is ineffective.',
+            },
+            monitoring: 'Anti-Xa level (or PTT) at 10-15 min, 2h, then q4h x 24h. Do not expect full normalization of anti-Xa.',
+        },
     },
     // =====================================================================
     // MODULE 3 — Other Reversal Scenarios
@@ -165,6 +252,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'tPA / Thrombolytic Reversal',
         body: '**Act immediately — don\'t wait for labs in an actively bleeding patient.**\n\n**Essential interventions:**\n**[1]** Antifibrinolytic — choose whichever is faster to obtain:\n• [Tranexamic acid (Cyklokapron)](#/drug/tranexamic-acid/tpa reversal) 1 g IV over 10 min, then 1 g over next hour\n• [Aminocaproic acid (Amicar)](#/drug/aminocaproic-acid/tpa reversal) 4-5 g IV load, then 1 g/hour\n\n**[2]** Cryoprecipitate 10 units initially (two 5-unit pools)\n• Target fibrinogen **>150-200 mg/dL** (>200 for ICH) [8]\n• Each 10 units raises fibrinogen ~50 mg/dL\n\n**Optional:**\n• FFP ~2 units (may help with fibrinogen degradation product coagulopathy)\n• Platelet transfusion if thrombocytopenic or on antiplatelet agents\n\n**Follow-up labs:** CBC, INR, PTT, fibrinogen (± TEG). Repeat and treat deficiencies.\n• If TEG shows ongoing hyperfibrinolysis → additional antifibrinolytic\n• If INR >1.6 → FFP\n\n**Key:** tPA has very short half-life (gone in minutes) but clotting factor depletion (especially fibrinogen) persists much longer. [16]',
         citation: [8, 14, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Tranexamic Acid (TXA)',
+                dose: '1 g IV over 10 min, then 1 g over next hour',
+                route: 'IV',
+                frequency: 'Load then infusion',
+                duration: 'Total 2 g over ~70 minutes',
+                notes: 'Give whichever antifibrinolytic is faster to obtain. Act immediately - do not wait for labs.',
+            },
+            alternative: {
+                drug: 'Aminocaproic Acid (Amicar)',
+                dose: '4-5 g IV load, then 1 g/hour',
+                route: 'IV',
+                frequency: 'Load then infusion',
+                duration: 'Continue until bleeding controlled',
+                notes: 'Alternative to TXA. Also give Cryoprecipitate 10 units (target fibrinogen >150-200 mg/dL, >200 for ICH).',
+            },
+            monitoring: 'CBC, INR, PTT, fibrinogen (and TEG if available). Repeat labs and treat deficiencies. If TEG shows hyperfibrinolysis, additional antifibrinolytic. If INR >1.6, FFP.',
+        },
     },
     {
         id: 'acr-antiplatelet',
@@ -173,6 +279,25 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'Antiplatelet Agent Reversal',
         body: '**Rx #1 (front-line): [DDAVP](#/drug/desmopressin/antiplatelet reversal)** 0.3-0.4 mcg/kg IV over 20-30 min\n• Improves platelet function including P2Y12 inhibitors [10,11]\n• AHA 2022: level 2B recommendation for ICH on antiplatelets [1]\n• Usually single dose (tachyphylaxis with repeated dosing — depletes vWF stores)\n\n**Rx #2:** Consider **higher fibrinogen target** (>200 mg/dL)\n• Platelets cooperate with fibrinogen — increased fibrinogen may compensate [16]\n\n**Rx #3: Generally AVOID platelet transfusion**\n• **PATCH trial:** No benefit in ICH on antiplatelets — worse neurologic outcomes, trend toward more bleeding [16]\n• Exception conditions (ALL must be met): permanent platelet inhibitor + >3 half-lives since last dose + laboratory evidence of inhibition + active bleeding + low platelets\n• **Ticagrelor (Brilinta) is reversible** → platelet transfusion will NOT work (new platelets get inhibited) [14]\n\n**Rx #4 (desperate): [TXA (Cyklokapron)](#/drug/tranexamic-acid/antiplatelet reversal)** — inhibits plasmin-mediated platelet GPIb degradation [16]',
         citation: [1, 10, 11, 14, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Desmopressin (DDAVP)',
+                dose: '0.3-0.4 mcg/kg',
+                route: 'IV over 20-30 minutes',
+                frequency: 'Once (tachyphylaxis with repeated dosing)',
+                duration: 'Single dose',
+                notes: 'AHA 2022 level 2B recommendation for ICH on antiplatelets. Improves platelet function including P2Y12 inhibitors. Depletes vWF stores with repeated dosing.',
+            },
+            alternative: {
+                drug: 'Tranexamic Acid (TXA)',
+                dose: '1 g',
+                route: 'IV over 10 minutes',
+                frequency: 'Once',
+                duration: 'Single dose (can repeat)',
+                notes: 'Desperate measure. Inhibits plasmin-mediated platelet GPIb degradation. AVOID platelet transfusion (PATCH trial showed harm).',
+            },
+            monitoring: 'Clinical reassessment. PFA or TEG with platelet mapping if available. Consider higher fibrinogen target (>200 mg/dL).',
+        },
     },
     {
         id: 'acr-agent-minor',
@@ -212,6 +337,17 @@ export const ANTICOAG_REVERSAL_NODES = [
         title: 'Supratherapeutic INR — Warfarin',
         body: '[Elevated INR Quick Guide](#/info/acr-inr-guide) — detailed reference\n\n**INR 3-5, no bleeding:**\n• Hold warfarin\n• Resume at lower dose when INR is therapeutic\n\n**INR 5-9, no bleeding:**\n• Hold 1-2 doses of warfarin\n• [Vitamin K](#/drug/vitamin-k/supratherapeutic inr) 1-2.5 mg PO/IV if risk for bleeding\n• Resume at lower dose when INR is therapeutic\n\n**INR >9, no bleeding:**\n• Hold 1-2 doses of warfarin\n• [Vitamin K](#/drug/vitamin-k/supratherapeutic inr) 2.5-5 mg PO/IV\n• Repeat Vitamin K in 24h if INR remains elevated\n• Resume at lower dose when INR is therapeutic\n\n**Cirrhosis:** IV Vitamin K may be tried to exclude vitamin K deficiency, but dubious benefit in most patients. [7,16]',
         citation: [7, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Vitamin K (Phytonadione)',
+                dose: 'INR 5-9: 1-2.5 mg | INR >9: 2.5-5 mg',
+                route: 'PO preferred (IV if rapid correction needed)',
+                frequency: 'Once (repeat in 24h if INR still elevated)',
+                duration: 'Single dose',
+                notes: 'INR 3-5: hold warfarin only, no Vitamin K needed. Resume warfarin at lower dose when therapeutic.',
+            },
+            monitoring: 'Recheck INR in 24 hours. Repeat Vitamin K if INR remains elevated. Resume warfarin at reduced dose when INR therapeutic.',
+        },
     },
     {
         id: 'acr-doac-supra',

@@ -128,6 +128,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Airway & Breathing Stabilization',
     body: '**Supplemental O₂** for all patients with hypoxia. Target SpO₂ 90-96%. [24]\n\n**Intubation indications:**\n• Airway protection (encephalopathy, depressed consciousness)\n• Refractory hypoxemia despite high-flow O₂\n• Respiratory failure / increased work of breathing\n• Facilitating procedures (source control)\n\n**Peri-intubation risks in sepsis:**\n• Hemodynamic collapse is common — **optimize MAP before intubation**\n• Push-dose [Phenylephrine](#/drug/phenylephrine/sepsis push dose) 100-200 mcg IV or start [Norepinephrine](#/drug/norepinephrine/septic shock) infusion first\n• Avoid prolonged apnea — use RSI with preoxygenation\n• Consider ketamine for induction (hemodynamically stable)\n\n**Note:** Pulse oximetry may overestimate SpO₂ in patients with darker skin pigmentation. [24]',
     citation: [24],
+    treatment: {
+      firstLine: {
+        drug: 'Phenylephrine',
+        dose: '100-200 mcg',
+        route: 'IV push',
+        frequency: 'q2-5 min PRN',
+        duration: 'bridge to infusion',
+        notes: 'Push-dose for peri-intubation hypotension',
+      },
+      alternative: {
+        drug: 'Norepinephrine',
+        dose: '0.05 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate to MAP ≥65',
+        notes: 'Start infusion before intubation if time permits',
+      },
+      monitoring: 'MAP target ≥65 mmHg before and during intubation. Have push-dose pressors drawn and ready.',
+    },
     next: 'sepsis-fluids',
   },
 
@@ -138,6 +157,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'IV Fluid Resuscitation',
     body: '**30 mL/kg IV crystalloid** — start within 1 hour, complete within 3 hours [2][24]\n\n**Fluid choice:** Balanced crystalloid preferred (Lactated Ringer\'s) [24]\n• SMART trial: lower composite of death, new RRT, and persistent renal dysfunction vs 0.9% NaCl [24]\n• **Avoid HES** — 6S trial: increased mortality (51 vs 43%) and RRT (22 vs 16%) [10]\n• **No benefit to albumin** vs crystalloid (SAFE trial) [24]\n\n**Administration:** Boluses of 500 mL, reassess between each [24]\n• Stop if pulmonary edema develops or no further response\n\n**Special populations:**\n• **Obesity (BMI >30):** Use ideal body weight for calculation [24]\n• **Heart failure / ESRD:** Smaller initial bolus acceptable — CMS allows <30 mL/kg if documented [24]\n• **Pneumonia with mild hypotension:** Fluid-conservative approach + early vasopressors may be better [23]\n\n**After initial resuscitation:** Restrict further fluids — most IV crystalloid extravasates (~95% leaves vasculature). [23]\n\n[Fluid Resuscitation Guide](#/info/sepsis-fluid-guide)',
     citation: [2, 8, 9, 10, 23, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Lactated Ringer\'s',
+        dose: '30 mL/kg',
+        route: 'IV',
+        frequency: '500 mL boluses',
+        duration: 'within 3 hours',
+        notes: 'Balanced crystalloid preferred per SMART trial',
+      },
+      alternative: {
+        drug: '0.9% NaCl',
+        dose: '30 mL/kg',
+        route: 'IV',
+        frequency: '500 mL boluses',
+        duration: 'within 3 hours',
+        notes: 'Use if LR unavailable. Avoid HES (increased mortality).',
+      },
+      monitoring: 'Reassess between boluses. Stop if pulmonary edema develops. Use IBW for obese patients.',
+    },
     next: 'sepsis-abx-empiric',
   },
 
@@ -169,6 +207,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'MRSA Coverage',
     body: '**MRSA risk factors:** [24]\n• Soft tissue infection (especially abscesses)\n• Central line infection / hemodialysis\n• Recent hospitalization or long-term care\n• IV drug use\n• Known MRSA colonization\n• Nosocomial / surgical site infection\n\n**First-line:** [Vancomycin](#/drug/vancomycin/sepsis MRSA) 25-30 mg/kg IV loading dose, then 15-20 mg/kg q8-12h [24]\n• Administer AFTER beta-lactam (beta-lactam first improves survival) [24]\n\n**Alternatives if vancomycin contraindicated:**\n• [Linezolid](#/drug/linezolid/MRSA sepsis) 600 mg IV q12h — covers MRSA pneumonia (unlike daptomycin)\n• [Daptomycin](#/drug/daptomycin/MRSA bacteremia) 6-10 mg/kg IV q24h — for bacteremia/endocarditis, **NOT for pneumonia** (inactivated by pulmonary surfactant) [24]\n\n**De-escalate:** Discontinue vancomycin if no MRSA cultured within 48 hours [24]',
     citation: [24],
+    treatment: {
+      firstLine: {
+        drug: 'Vancomycin',
+        dose: '25-30 mg/kg load, then 15-20 mg/kg',
+        route: 'IV',
+        frequency: 'q8-12h',
+        duration: 'D/C if no MRSA at 48h',
+        notes: 'Give AFTER beta-lactam',
+      },
+      alternative: {
+        drug: 'Linezolid',
+        dose: '600 mg',
+        route: 'IV',
+        frequency: 'q12h',
+        duration: 'per culture',
+        notes: 'For MRSA pneumonia if vancomycin contraindicated',
+      },
+      monitoring: 'Vancomycin trough 15-20 mcg/mL. D/C if no MRSA cultured within 48h.',
+    },
     next: 'sepsis-source-ctrl',
   },
 
@@ -215,6 +272,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Vasopressor Initiation — Norepinephrine',
     body: '**[Norepinephrine](#/drug/norepinephrine/septic shock)** is the **first-line vasopressor** for septic shock. [2][11][24]\n\n**Dosing:** Start 0.05 mcg/kg/min (4-6 mcg/min), titrate by 0.02-0.05 mcg/kg/min to MAP ≥65 mmHg [24]\n\n**Mechanism:** Predominantly alpha-1 agonist (vasoconstriction) with some beta-1 (supports cardiac function). Reduces endothelial permeability. [23]\n\n**Can start peripherally** for <6 hours while obtaining central access (SSC 2021). [2][24]\n\n**Why NOT dopamine?** SOAP-II trial (n=1679): dopamine associated with **increased arrhythmias and mortality** vs norepinephrine. [11]\n\n**MAP target:** ≥65 mmHg initially. [2]\n• 65-Trial: MAP goal >60 mmHg safe in elderly patients [18]\n• SEPSISPAM: MAP 80-85 improved renal outcomes in chronic HTN but increased AF [19]\n\n**Diastolic BP <40 mmHg** strongly suggests vasoplegia — start vasopressor immediately. [23]\n\n[Vasopressor Comparison](#/info/sepsis-vp-comparison)',
     citation: [2, 11, 18, 19, 23, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Norepinephrine',
+        dose: '0.05 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate to MAP ≥65',
+        notes: 'Start 4-6 mcg/min, titrate by 0.02-0.05 mcg/kg/min',
+      },
+      alternative: {
+        drug: 'Epinephrine',
+        dose: '0.01-0.5 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate to MAP ≥65',
+        notes: 'Alternative first-line for bradycardia or cardiac dysfunction',
+      },
+      monitoring: 'MAP target ≥65 mmHg. Can start peripherally for <6 hours while obtaining central access.',
+    },
     next: 'sepsis-vp-second',
   },
 
@@ -225,6 +301,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Second-Line Vasopressor Selection',
     body: '**If norepinephrine alone is insufficient**, add a second agent: [2][24]\n\n**[Vasopressin](#/drug/vasopressin/septic shock)** 0.03-0.04 units/min (fixed dose, non-titratable)\n• Reduces NE requirement, **lower AF risk** (RR 0.77) [24]\n• VASST + VANISH trials: no mortality benefit but NE-sparing [12][13]\n• Best as early second agent — add before escalating NE to high doses [23]\n\n**[Epinephrine](#/drug/epinephrine/septic shock infusion)** 0.01-0.5 mcg/kg/min\n• Alternative first-line for bradycardia or cardiac dysfunction [23]\n• CAT trial: outcomes similar to norepinephrine [23]\n• **Increases lactate** — rising lactate on epi is expected and often a positive prognostic sign [23]\n\nWhat is the clinical scenario?',
     citation: [2, 12, 13, 23, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Vasopressin',
+        dose: '0.03-0.04 units/min',
+        route: 'IV',
+        frequency: 'continuous (fixed)',
+        duration: 'non-titratable',
+        notes: 'Add early before escalating NE to high doses. Reduces AF risk.',
+      },
+      alternative: {
+        drug: 'Epinephrine',
+        dose: '0.01-0.5 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate to MAP ≥65',
+        notes: 'Preferred for bradycardia or cardiac dysfunction. Increases lactate (expected).',
+      },
+      monitoring: 'MAP target ≥65 mmHg. Vasopressin is NE-sparing but no mortality benefit (VASST, VANISH).',
+    },
     options: [
       {
         label: 'Vasodilatory Shock — Add Vasopressin',
@@ -272,6 +367,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Inotrope Consideration',
     body: '**Consider inotropes for septic cardiomyopathy or low cardiac output despite adequate vasopressors.** [24]\n\n**POCUS assessment:** Reduced LVEF, global hypokinesis, elevated E/e\'. [23]\n\n**Clues suggesting need for inotropy:** [23]\n• Pulse pressure <40 mmHg (suggests low stroke volume)\n• Cool extremities despite adequate MAP\n• Heart rate inappropriately low (<80 bpm) for shock\n• Inappropriately normal lactate (suggests low endogenous epinephrine)\n\n**[Dobutamine](#/drug/dobutamine/septic shock inotrope)** 2-5 mcg/kg/min, titrate to max 20 mcg/kg/min [24]\n• First-choice inotrope\n• Beta-1 agonist — increases contractility\n• May cause hypotension (reflex vasodilation) — up-titrate NE if BP drops [23]\n\n**Epinephrine challenge** (alternative): [23]\n• Start 4-5 mcg/min, down-titrate NE if BP rises\n• Preferred when BP is low or lactate is low (<4 mM)\n• Avoid if lactate >5 mM (worsens acidosis)\n\n**Do NOT use inotropes to increase cardiac index to supranormal levels.** [24]\n\n[Septic Cardiomyopathy](#/info/sepsis-cardiomyopathy)',
     citation: [23, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Dobutamine',
+        dose: '2-5 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate to max 20 mcg/kg/min',
+        notes: 'First-choice inotrope. May cause hypotension; up-titrate NE if BP drops.',
+      },
+      alternative: {
+        drug: 'Epinephrine',
+        dose: '4-5 mcg/min',
+        route: 'IV',
+        frequency: 'continuous',
+        duration: 'titrate, down-titrate NE if BP rises',
+        notes: 'Preferred when BP is low or lactate <4 mM. Avoid if lactate >5 mM.',
+      },
+      monitoring: 'Do NOT use inotropes to increase cardiac index to supranormal levels. POCUS to assess response.',
+    },
     next: 'sepsis-refractory',
   },
 
@@ -282,6 +396,17 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Refractory Shock',
     body: '**If shock persists despite fluids + norepinephrine + vasopressin +/- inotrope:** [23]\n\n**Reassess for:**\n• Missed or inadequately treated source of infection\n• Incorrect diagnosis (sepsis mimics — adrenal crisis, thyroid storm, PE, hemorrhage)\n• Inadequate antibiotic coverage\n• Undrained abscess or infected hardware\n• Pneumothorax from central line placement\n• Septic cardiomyopathy\n\n**[Methylene Blue](#/drug/methylene-blue/refractory septic shock)** — salvage vasopressor [21][23]\n• 1-2 mg/kg IV bolus, then 0.5 mg/kg/h infusion\n• Ibarra-Estrada 2023 RCT: shorter time to vasopressor discontinuation, more vasopressor-free days [21]\n• Inhibits NO synthase → restores vascular tone\n• Consider when on multiple vasopressors + glucocorticoids [23]\n\n**Corticosteroids** if not yet started → [24]\n\nIs the patient on stress-dose steroids?',
     citation: [21, 23, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Methylene Blue',
+        dose: '1-2 mg/kg bolus, then 0.5 mg/kg/h',
+        route: 'IV',
+        frequency: 'bolus then continuous',
+        duration: 'until vasopressor weaned',
+        notes: 'Salvage vasopressor. Inhibits NO synthase to restore vascular tone.',
+      },
+      monitoring: 'Consider when on multiple vasopressors + glucocorticoids. Ibarra-Estrada 2023: shorter time to vasopressor discontinuation.',
+    },
     options: [
       {
         label: 'No — Start Corticosteroids',
@@ -307,6 +432,25 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Corticosteroid Therapy',
     body: '**For patients on vasopressors for septic shock:** [2][14][15]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3658): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Timing:** Consider early initiation — antibiotics can trigger Jarisch-Herxheimer reaction; front-loaded steroids may blunt this. [23]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).',
     citation: [2, 14, 15, 23],
+    treatment: {
+      firstLine: {
+        drug: 'Hydrocortisone',
+        dose: '50 mg',
+        route: 'IV',
+        frequency: 'q6h',
+        duration: 'until off vasopressors, then taper',
+        notes: 'OR 200 mg/day continuous infusion',
+      },
+      alternative: {
+        drug: 'Fludrocortisone',
+        dose: '50 mcg',
+        route: 'PO',
+        frequency: 'daily',
+        duration: '7 days',
+        notes: 'Add to hydrocortisone per APROCCHSS protocol',
+      },
+      monitoring: 'Monitor glucose. Taper over 2-3 days when vasopressors discontinued.',
+    },
     next: 'sepsis-cardiomyop',
   },
 

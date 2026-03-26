@@ -135,6 +135,12 @@ const TREE_REGISTRY = {
   'orbital-cellulitis':   { prefix: 'ORBITAL_CELLULITIS',    entryNodeId: 'orbital-start',  categoryId: 'ophthalmology' },
   'crao':                 { prefix: 'CRAO',                   entryNodeId: 'crao-start',     categoryId: 'ophthalmology' },
   'globe-rupture':        { prefix: 'GLOBE_RUPTURE',          entryNodeId: 'globe-start',    categoryId: 'ophthalmology' },
+  'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',      entryNodeId: 'ow-start',       categoryId: 'toxicology' },
+  'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',     entryNodeId: 'aws-start',      categoryId: 'toxicology' },
+  'anticoag-reversal':    { prefix: 'ANTICOAG_REVERSAL',      entryNodeId: 'acr-start',      categoryId: 'heme-onc' },
+  'tuberculosis':         { prefix: 'TUBERCULOSIS',           entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },
+  'combative-patient':    { prefix: 'COMBATIVE_PATIENT',      entryNodeId: 'cp-start',       categoryId: 'emergency-medicine' },
+  'hemophilia':           { prefix: 'HEMOPHILIA',             entryNodeId: 'hemo-start',     categoryId: 'heme-onc' },
 };
 
 const CROSS_LISTINGS = {

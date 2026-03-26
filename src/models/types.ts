@@ -88,6 +88,8 @@ export interface TreatmentRegimen {
   firstLine: DrugRegimen;
   alternative?: DrugRegimen;
   pcnAllergy?: DrugRegimen;
+  /** Additional context-specific regimens (e.g., nsaidAllergy, vascularContraindication, adjunct, dischargeMeds) */
+  [key: string]: DrugRegimen | string | undefined;
   /** Follow-up monitoring instructions */
   monitoring: string;
 }

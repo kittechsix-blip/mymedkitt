@@ -211,6 +211,25 @@ export const CHEMICAL_BURN_NODES = [
         title: 'Grade I Treatment',
         body: '**Grade I — Mild Injury:**\n\n**Immediate:**\n- Ensure pH normalized and stable\n- Cycloplegic: Cyclopentolate 1% TID\n- Antibiotic: Erythromycin ointment QID\n- Steroid: Prednisolone 1% QID × 7 days\n\n**Supportive:**\n- Preservative-free tears q1-2h\n- Oral analgesics PRN\n- Cool compresses\n\n**Disposition:**\n- May discharge home\n- Ophthalmology follow-up in 24-48 hours\n- Return precautions: worsening pain, vision changes\n\n**Expected Course:**\n- Epithelial healing in 1-3 days\n- Excellent visual prognosis\n- No long-term sequelae expected [1][2]',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Cyclopentolate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'TID',
+                duration: 'Until ophthalmology follow-up',
+                notes: 'Cycloplegic for pain relief and ciliary spasm',
+            },
+            alternative: {
+                drug: 'Erythromycin 0.5% ointment',
+                dose: '0.5 inch ribbon',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'Until epithelial healing (1-3 days)',
+                notes: 'Prophylactic antibiotic coverage',
+            },
+            monitoring: 'Ophthalmology follow-up in 24-48 hours. Return for worsening pain, decreased vision, or increasing redness.',
+        },
         next: 'chemburn-discharge',
     },
     {
@@ -223,6 +242,25 @@ export const CHEMICAL_BURN_NODES = [
         calculatorLinks: [
             { id: 'chemburn-treatment', label: 'Treatment Protocol' },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Prednisolone acetate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q1-2H while awake',
+                duration: '7-10 days then taper (MUST taper by day 10-14)',
+                notes: 'Critical: Begin taper by day 10-14 to avoid corneal melting',
+            },
+            alternative: {
+                drug: 'Moxifloxacin 0.5%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'Until epithelial healing',
+                notes: 'Prophylactic fluoroquinolone coverage',
+            },
+            monitoring: 'Ophthalmology follow-up within 24 hours mandatory. Daily IOP checks. Monitor for corneal melting after day 10.',
+        },
         next: 'chemburn-ophtho-consult',
     },
     {
@@ -235,6 +273,25 @@ export const CHEMICAL_BURN_NODES = [
         calculatorLinks: [
             { id: 'chemburn-treatment', label: 'Treatment Protocol' },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Prednisolone acetate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q1H around the clock',
+                duration: '7-10 days then RAPID taper',
+                notes: 'CRITICAL: Must taper by day 10-14. Risk of corneal perforation if continued. Switch to medroxyprogesterone after day 14 if anti-inflammatory still needed.',
+            },
+            alternative: {
+                drug: 'Ascorbic acid 10%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q1H while awake',
+                duration: 'Until epithelial healing',
+                notes: 'Promotes collagen synthesis. Give with oral vitamin C 2g PO QID and sodium citrate 10% drops Q1H.',
+            },
+            monitoring: 'STAT ophthalmology consult. Admission required. Daily slit lamp exam. IOP monitoring. Watch for corneal melting especially after day 10.',
+        },
         next: 'chemburn-ophtho-consult',
     },
     {
@@ -253,6 +310,25 @@ export const CHEMICAL_BURN_NODES = [
         title: 'Steroid Timing Caution',
         body: '**⚠️ STEROID TIMING IS CRITICAL ⚠️**\n\n**Days 0-10:**\n- Steroids BENEFICIAL\n- Reduce inflammation\n- Limit scarring\n- Use aggressively (hourly for severe)\n\n**Days 10-14:**\n- Begin RAPID TAPER\n- Risk of corneal melting increases\n- Collagen synthesis impaired by steroids\n\n**After Day 14:**\n- **AVOID steroids** (or use minimal)\n- Switch to medroxyprogesterone if anti-inflammatory needed\n- Some experts use low-dose steroids carefully\n\n**Corneal Perforation Risk:**\n- Steroids inhibit collagen synthesis\n- Damaged cornea + steroids = perforation risk\n- This is why ophthalmology follow-up is mandatory\n\n**Document steroid start date and plan for taper.** [1][4]',
         citation: [1, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Prednisolone acetate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q1H (severe) to QID (mild)',
+                duration: 'Days 0-10 beneficial, TAPER days 10-14',
+                notes: 'CRITICAL: Document start date. Risk of corneal perforation if continued >14 days. Steroids inhibit collagen synthesis in damaged cornea.',
+            },
+            alternative: {
+                drug: 'Medroxyprogesterone 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'After day 14 if anti-inflammatory still needed',
+                notes: 'Alternative to steroids after day 14. Does not inhibit collagen synthesis like corticosteroids.',
+            },
+            monitoring: 'Mandatory ophthalmology follow-up. Document steroid start date. Begin taper by day 10-14. Monitor for corneal thinning/melting.',
+        },
         next: 'chemburn-dispo',
     },
     // =====================================================================
@@ -291,6 +367,25 @@ export const CHEMICAL_BURN_NODES = [
         title: 'Admission Criteria',
         body: '**Admit for:**\n- Grade III-IV injury\n- Need for hourly medication administration\n- Bilateral severe burns\n- Unable to comply with outpatient regimen\n- Pediatric patients (consider)\n- Concurrent facial/respiratory burns\n- Non-compliant or unreliable patients\n\n**Admission Orders:**\n- Prednisolone 1% Q1H around the clock\n- Ascorbate 10% drops Q1H while awake\n- Citrate 10% drops Q2H while awake\n- Fluoroquinolone QID\n- Atropine 1% daily\n- Preservative-free tears Q1-2H\n- Vitamin C 2g PO QID\n- Doxycycline 100mg PO BID\n- IOP-lowering agents if needed\n- Ophthalmology to see daily [1][2]',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Prednisolone acetate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q1H around the clock',
+                duration: '7-10 days then taper',
+                notes: 'Inpatient administration for severe burns. Taper by day 10-14.',
+            },
+            alternative: {
+                drug: 'Doxycycline',
+                dose: '100 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: 'Until epithelial healing',
+                notes: 'MMP inhibitor to reduce corneal melting. Also give Vitamin C 2g PO QID.',
+            },
+            monitoring: 'Ophthalmology daily. IOP checks. Slit lamp exam for corneal status. Monitor for perforation risk after day 10 of steroids.',
+        },
         options: [
             {
                 label: 'Complete — Return to Start',
@@ -305,6 +400,25 @@ export const CHEMICAL_BURN_NODES = [
         title: 'Grade II Disposition',
         body: '**Grade II may go either way:**\n\n**Consider Admission if:**\n- Significant limbal ischemia (approaching 1/3)\n- High-risk agent (strong alkali)\n- Poor social situation\n- Unable to afford/obtain medications\n- Pediatric patient\n\n**May Discharge if:**\n- Reliable adult patient\n- Can obtain all medications\n- Confirmed ophthalmology follow-up within 24 hours\n- Clear understanding of medication regimen\n- Able to return immediately if worsening\n\n**Discharge Medications:**\n- Prednisolone 1% Q2H while awake\n- Fluoroquinolone QID\n- Cycloplegic daily\n- Preservative-free tears hourly\n- Vitamin C 2g PO QID\n- Doxycycline 100mg PO BID [1][2]',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Prednisolone acetate 1%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'Q2H while awake',
+                duration: '7-10 days then taper',
+                notes: 'Outpatient regimen for Grade II. Must taper by day 10-14.',
+            },
+            alternative: {
+                drug: 'Moxifloxacin 0.5%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'Until epithelial healing',
+                notes: 'Prophylactic fluoroquinolone. Also prescribe: cycloplegic daily, Vitamin C 2g PO QID, Doxycycline 100mg PO BID.',
+            },
+            monitoring: 'Ophthalmology follow-up within 24 hours mandatory. Return immediately for worsening pain, vision changes, or increasing redness.',
+        },
         next: 'chemburn-discharge',
     },
     {
@@ -314,6 +428,25 @@ export const CHEMICAL_BURN_NODES = [
         title: 'Discharge Instructions',
         body: '**Discharge Criteria (Grade I-II):**\n- pH normalized and stable (×2 readings)\n- Ophthalmology follow-up confirmed\n- Medications provided/prescribed\n- Patient understands regimen\n\n**Medications:**\n- Antibiotic drops or ointment QID\n- Steroid drops (per grade)\n- Cycloplegic (per grade)\n- Preservative-free tears q1-2h\n- ± Oral vitamin C\n- ± Oral doxycycline\n\n**Return Precautions:**\n- Worsening pain\n- Decreased vision\n- Increasing redness\n- Discharge or crusting\n- Photophobia worsening\n\n**Follow-Up:**\n- Grade I: 24-48 hours\n- Grade II: 24 hours (mandatory)\n\n**Work/Activity:**\n- No eye rubbing\n- Protective eyewear\n- Avoid irritants [1][2]',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Erythromycin 0.5% ointment',
+                dose: '0.5 inch ribbon',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'Until epithelial healing',
+                notes: 'Or fluoroquinolone drops QID for Grade II. Grade-specific steroid and cycloplegic dosing applies.',
+            },
+            alternative: {
+                drug: 'Moxifloxacin 0.5%',
+                dose: '1 drop',
+                route: 'Ophthalmic',
+                frequency: 'QID',
+                duration: 'Until epithelial healing',
+                notes: 'Preferred for Grade II. Also give preservative-free tears q1-2h.',
+            },
+            monitoring: 'Ophthalmology follow-up: Grade I in 24-48h, Grade II in 24h (mandatory). Return for worsening pain, decreased vision, increasing redness, discharge, or worsening photophobia.',
+        },
         options: [
             {
                 label: 'Complete — Return to Start',

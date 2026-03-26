@@ -50,6 +50,25 @@ export const AUB_NODES = [
                 caption: 'Intrauterine balloon tamponade — Foley catheter inserted through cervical os and inflated in uterine cavity',
             },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Tranexamic Acid',
+                dose: '1 g',
+                route: 'IV',
+                frequency: 'Once, over 10 minutes',
+                duration: 'Single dose',
+                notes: 'Antifibrinolytic for acute hemostasis',
+            },
+            alternative: {
+                drug: 'Conjugated Estrogen (Premarin)',
+                dose: '25 mg',
+                route: 'IV',
+                frequency: 'Every 4-6 hours',
+                duration: 'Up to 24 hours (max 6 doses)',
+                notes: 'Give concurrently with TXA. Must follow with progestin.',
+            },
+            monitoring: 'Serial vitals, CBC q4-6h, urine output. Activate MTP if ongoing hemorrhage.',
+        },
         next: 'aub-treatment-unstable',
     },
     {
@@ -186,6 +205,25 @@ export const AUB_NODES = [
         title: 'Coagulopathy-Related AUB',
         body: 'Up to **20% of women** with heavy menstrual bleeding have an underlying bleeding disorder. **von Willebrand disease** is most common (up to 13%).\n\n**Testing:**\n• vWF antigen, ristocetin cofactor activity, Factor VIII\n• Consult hematology for interpretation\n\n**Treatment of AUB with coagulopathy:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/aub) — first-line adjunct, reduces bleeding 30-55%\n• [Desmopressin (DDAVP)](#/drug/desmopressin/vwd aub) 0.3 mcg/kg IV — for known vWD responders. Use with caution: risk of fluid retention and hyponatremia. Do NOT give with massive hemorrhage + IV fluid resuscitation.\n• Recombinant factor VIII and vWF concentrate for severe vWD\n• Hormonal therapy (OCPs, progestins) also effective\n• **Avoid NSAIDs** — impair platelet aggregation\n\n**Hematology consult** recommended for all confirmed coagulopathies.',
         citation: [2, 5, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Tranexamic Acid',
+                dose: '1.3 g',
+                route: 'PO',
+                frequency: 'TID (three times daily)',
+                duration: '5 days',
+                notes: 'First-line adjunct. Reduces bleeding 30-55%.',
+            },
+            alternative: {
+                drug: 'Desmopressin (DDAVP)',
+                dose: '0.3 mcg/kg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'For known vWD responders only. Caution: fluid retention, hyponatremia. Avoid with massive hemorrhage + IV fluids.',
+            },
+            monitoring: 'Serial CBC, vWF levels, sodium (if DDAVP given). Hematology consult for all confirmed coagulopathies.',
+        },
         next: 'aub-treatment-medical',
     },
     // =====================================================================
@@ -250,6 +288,25 @@ export const AUB_NODES = [
         title: 'IV Conjugated Estrogen (Premarin)',
         body: '[Conjugated Estrogen](#/drug/conjugated-estrogen/unstable aub) **25 mg IV** q4-6h for up to **24 hours** (max 6 doses).\n\n**Efficacy:** 72% stop bleeding within 8 hours.\n\nOnly FDA-approved treatment for acute AUB.\n\n**MUST follow with progestin** — [Medroxyprogesterone](#/drug/medroxyprogesterone/post-estrogen stabilization) 10 mg PO daily × 10 days after bleeding controlled. Unopposed estrogen risks endometrial hyperplasia and rebound bleeding.\n\n**Start antiemetic prophylactically** (ondansetron) — IV estrogen causes significant nausea.\n\n**Contraindications:**\n• Active or past VTE/PE\n• Breast cancer (estrogen-receptor positive)\n• Active hepatic disease\n• Known thrombophilia\n\nUse with **caution** in patients with cardiovascular or thromboembolic risk factors.',
         citation: [2, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Conjugated Estrogen (Premarin)',
+                dose: '25 mg',
+                route: 'IV',
+                frequency: 'Every 4-6 hours',
+                duration: 'Up to 24 hours (max 6 doses)',
+                notes: 'Only FDA-approved treatment for acute AUB. 72% efficacy within 8 hours. Give antiemetic prophylaxis.',
+            },
+            alternative: {
+                drug: 'Medroxyprogesterone Acetate',
+                dose: '10 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: '10 days',
+                notes: 'REQUIRED follow-up after IV estrogen to prevent endometrial hyperplasia and rebound bleeding.',
+            },
+            monitoring: 'Serial vitals, CBC. Monitor for nausea, VTE symptoms. Reassess hemostasis q4-6h.',
+        },
         next: 'aub-disposition',
     },
     {
@@ -259,6 +316,17 @@ export const AUB_NODES = [
         title: 'Combined OCP Regimen',
         body: 'Monophasic OCP containing **35 mcg ethinyl estradiol** — **1 tablet TID × 7 days**, then taper to 1 tablet daily.\n\n**Efficacy:** 88% stop bleeding within median 3 days.\n\nPreferred for **ovulatory dysfunction AUB** — provides cycle regulation as well as acute control. Can transition directly to daily OCP use for long-term maintenance.\n\n**Contraindications (CDC MEC):**\n• Age >35 + cigarette smoking\n• Uncontrolled hypertension\n• History of DVT/PE or known thrombophilia\n• Migraine with aura\n• Current or past breast cancer\n• Severe liver disease\n• Major surgery with prolonged immobilization\n\nConsult CDC Medical Eligibility Criteria (MEC) for comprehensive list.',
         citation: [2, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Monophasic Combined OCP (35 mcg ethinyl estradiol)',
+                dose: '1 tablet',
+                route: 'PO',
+                frequency: 'TID (three times daily)',
+                duration: '7 days, then taper to 1 tablet daily',
+                notes: '88% efficacy within median 3 days. Preferred for ovulatory dysfunction. Can continue daily for maintenance.',
+            },
+            monitoring: 'Assess bleeding response at 48-72h. Monitor for VTE symptoms. Check contraindications per CDC MEC.',
+        },
         next: 'aub-disposition',
     },
     {
@@ -268,6 +336,25 @@ export const AUB_NODES = [
         title: 'Medroxyprogesterone Acetate (MPA)',
         body: '[Medroxyprogesterone](#/drug/medroxyprogesterone/aub) **20 mg PO TID × 7 days**.\n\n**Efficacy:** 76% stop bleeding within median 3 days.\n\n**Preferred when estrogen is contraindicated:**\n• History of VTE/PE\n• Migraine with aura\n• Smoker age >35\n• Known thrombophilia\n\n**Especially appropriate for obese/PCOS patients** — anovulation is the mechanism, and progesterone withdrawal stabilizes the endometrium.\n\n**Contraindications:**\n• Active VTE/PE\n• Current or past breast cancer\n• Severe hepatic disease\n• Known or suspected pregnancy\n\nOther progestins (norethindrone acetate) may also be effective.',
         citation: [2, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Medroxyprogesterone Acetate (MPA)',
+                dose: '20 mg',
+                route: 'PO',
+                frequency: 'TID (three times daily)',
+                duration: '7 days',
+                notes: '76% efficacy within median 3 days. Preferred when estrogen contraindicated (VTE, migraine with aura, smoker >35).',
+            },
+            alternative: {
+                drug: 'Norethindrone Acetate',
+                dose: '5-10 mg',
+                route: 'PO',
+                frequency: 'TID',
+                duration: '7 days',
+                notes: 'Alternative progestin if MPA unavailable.',
+            },
+            monitoring: 'Assess bleeding response at 48-72h. Follow up for long-term cycle management.',
+        },
         next: 'aub-disposition',
     },
     {
@@ -277,6 +364,25 @@ export const AUB_NODES = [
         title: 'Tranexamic Acid (TXA)',
         body: '[Tranexamic Acid](#/drug/tranexamic-acid/aub) — antifibrinolytic that prevents fibrin degradation.\n\n**Dosing:**\n• **Oral:** 1.3 g PO TID × 5 days\n• **IV:** 10 mg/kg IV (max 600 mg/dose) q8h\n\n**Efficacy:** Reduces menstrual blood loss **30-55%**.\n\nCan be used **alone** if hormonal therapy is contraindicated, or as **adjunct** to hormonal regimens for more rapid hemostasis.\n\nDoes not affect fertility or cycle regularity.\n\n**Contraindications:**\n• Active thromboembolic disease (DVT, PE)\n• Impaired color vision\n• Subarachnoid hemorrhage\n\n**Caution:** Uncertain thrombotic risk — use carefully in patients with thrombosis history. Concurrent OCP use requires careful consideration of additive thrombotic risk.',
         citation: [2, 9],
+        treatment: {
+            firstLine: {
+                drug: 'Tranexamic Acid (Lysteda)',
+                dose: '1.3 g (two 650 mg tablets)',
+                route: 'PO',
+                frequency: 'TID (three times daily)',
+                duration: '5 days (during menses)',
+                notes: 'Reduces bleeding 30-55%. Can use alone or as adjunct to hormonal therapy.',
+            },
+            alternative: {
+                drug: 'Tranexamic Acid',
+                dose: '10 mg/kg (max 600 mg/dose)',
+                route: 'IV',
+                frequency: 'Every 8 hours',
+                duration: 'Until bleeding controlled',
+                notes: 'IV route for acute severe bleeding or when PO not tolerated.',
+            },
+            monitoring: 'Monitor for VTE symptoms. Caution with concurrent OCP use (additive thrombotic risk).',
+        },
         next: 'aub-disposition',
     },
     {
@@ -322,6 +428,25 @@ export const AUB_NODES = [
         recommendation: 'Admit to GYN or Medicine. Continue IV hormonal therapy. Serial Hgb monitoring.',
         confidence: 'recommended',
         citation: [1],
+        treatment: {
+            firstLine: {
+                drug: 'Conjugated Estrogen (Premarin)',
+                dose: '25 mg',
+                route: 'IV',
+                frequency: 'Every 4-6 hours',
+                duration: 'Until bleeding controlled (max 24h)',
+                notes: 'Continue IV estrogen until stable. Transition to oral therapy when controlled.',
+            },
+            alternative: {
+                drug: 'Tranexamic Acid',
+                dose: '1 g',
+                route: 'IV',
+                frequency: 'Every 8 hours',
+                duration: 'Until bleeding controlled',
+                notes: 'Can be used as adjunct to hormonal therapy.',
+            },
+            monitoring: 'Serial CBC q6-8h. Keep type & crossmatch active. Transfuse PRBCs if Hgb <7 or symptomatic. VTE prophylaxis once hemostasis achieved.',
+        },
     },
     {
         id: 'aub-discharge',
@@ -332,6 +457,25 @@ export const AUB_NODES = [
         recommendation: 'Discharge with oral hormonal regimen, iron supplementation, and GYN follow-up in 1-2 weeks.',
         confidence: 'recommended',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Medroxyprogesterone Acetate OR Combined OCP',
+                dose: 'MPA 20 mg TID or OCP 1 tab TID',
+                route: 'PO',
+                frequency: 'Three times daily',
+                duration: '7 days',
+                notes: 'Complete full 7-day course. OCP preferred for ovulatory dysfunction; MPA if estrogen contraindicated.',
+            },
+            alternative: {
+                drug: 'Ferrous Sulfate',
+                dose: '325 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Until iron stores replete',
+                notes: 'Start in all patients with significant anemia. Take with vitamin C for absorption.',
+            },
+            monitoring: 'GYN follow-up in 1-2 weeks. Return if soaking >1 pad/hr for 2+ hours, lightheadedness, syncope, or fever.',
+        },
     },
 ];
 export const AUB_MODULE_LABELS = [

@@ -61,6 +61,33 @@ export const DISTAL_RADIUS_NODES = [
         recommendation: 'Surgical consult required. Irrigate, splint, antibiotics if open, and consult orthopedics.',
         confidence: 'definitive',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Cefazolin',
+                dose: '2 g (3 g if >120 kg)',
+                route: 'IV',
+                frequency: 'Once, then q8h if prolonged time to OR',
+                duration: 'Until wound closure or 24h post-op',
+                notes: 'For open fractures. Give within 1 hour of injury if possible.',
+            },
+            alternative: {
+                drug: 'Cefazolin + Gentamicin',
+                dose: 'Cefazolin 2 g IV + Gentamicin 5 mg/kg IV',
+                route: 'IV',
+                frequency: 'Cefazolin q8h, Gentamicin daily',
+                duration: 'Until wound closure or per ortho',
+                notes: 'Add gentamicin for Gustilo grade III open fractures or gross contamination.',
+            },
+            pcnAllergy: {
+                drug: 'Clindamycin + Gentamicin',
+                dose: 'Clindamycin 900 mg IV + Gentamicin 5 mg/kg IV',
+                route: 'IV',
+                frequency: 'Clindamycin q8h, Gentamicin daily',
+                duration: 'Until wound closure or per ortho',
+                notes: 'For severe PCN allergy. Consider aztreonam if gentamicin contraindicated.',
+            },
+            monitoring: 'Assess renal function before gentamicin. Update tetanus if indicated. Serial neurovascular exams.',
+        },
     },
     // =====================================================================
     // MODULE 2: ANALGESIA
@@ -104,6 +131,17 @@ export const DISTAL_RADIUS_NODES = [
                 caption: 'Hematoma block: Insert needle at dorsal fracture line, aspirate dark blood to confirm, inject 5–10 mL 1% lidocaine.',
             },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Lidocaine 1% (plain)',
+                dose: '5-10 mL',
+                route: 'Local injection into fracture hematoma',
+                frequency: 'Once',
+                duration: 'Single procedure',
+                notes: 'Max dose 4.5 mg/kg without epinephrine. Aspirate dark blood to confirm placement before injecting.',
+            },
+            monitoring: 'Wait 5-10 minutes for full anesthetic effect before reduction. Monitor for signs of local anesthetic systemic toxicity (LAST).',
+        },
         next: 'dr-traction',
     },
     {
@@ -113,6 +151,25 @@ export const DISTAL_RADIUS_NODES = [
         title: 'Procedural Sedation',
         body: '**Procedural sedation** provides excellent analgesia and amnesia but requires more resources and time.\n\n**COMMON AGENTS:**\n• [Ketamine](#/drug/ketamine/procedural sedation) 1–2 mg/kg IV — dissociative, maintains airway reflexes\n• [Propofol](#/drug/propofol/procedural sedation) 0.5–1 mg/kg IV — rapid onset/offset, no analgesia (add fentanyl)\n• [Etomidate](#/drug/etomidate/procedural sedation) 0.1–0.15 mg/kg IV — hemodynamically stable\n\n**REQUIREMENTS:**\n• NPO assessment (ideally 2+ hours for clear liquids)\n• Dedicated monitoring nurse\n• Capnography, pulse oximetry, cardiac monitor\n• Resuscitation equipment at bedside\n• Longer ED stay (mean 4.6 hours vs 1.5 hours for hematoma block) [4]\n\n**BEST FOR:** Complex reductions, highly anxious patients, pediatric patients who cannot cooperate with hematoma block.',
         citation: [4],
+        treatment: {
+            firstLine: {
+                drug: 'Ketamine',
+                dose: '1-2 mg/kg',
+                route: 'IV',
+                frequency: 'Once, may repeat 0.5-1 mg/kg PRN',
+                duration: 'Single procedure',
+                notes: 'Dissociative sedation. Maintains airway reflexes. Emergence reactions possible.',
+            },
+            alternative: {
+                drug: 'Propofol',
+                dose: '0.5-1 mg/kg',
+                route: 'IV',
+                frequency: 'Titrate to effect, bolus 0.25-0.5 mg/kg PRN',
+                duration: 'Single procedure',
+                notes: 'Rapid onset/offset. No analgesia - add fentanyl 0.5-1 mcg/kg. Causes apnea and hypotension.',
+            },
+            monitoring: 'Continuous capnography, pulse oximetry, cardiac monitoring. Dedicated monitoring nurse required. Resuscitation equipment at bedside.',
+        },
         next: 'dr-traction',
     },
     {
@@ -122,6 +179,25 @@ export const DISTAL_RADIUS_NODES = [
         title: 'Regional Anesthesia',
         body: '**BIER BLOCK (IV Regional)**\n• Double-cuff tourniquet on affected arm\n• Exsanguinate, inflate proximal cuff to 100 mmHg above SBP\n• Inject 40–50 mL 0.5% lidocaine IV into dorsal hand vein\n• Switch to distal cuff after 5 min\n• Maintain tourniquet minimum 20 min to prevent systemic toxicity\n• Comparable efficacy to hematoma block with better patient satisfaction in some studies [10]\n\n**US-GUIDED NERVE BLOCKS**\n• Median + radial nerve blocks at wrist or forearm\n• Axillary brachial plexus block for complete coverage\n• Superior analgesia and longer duration than hematoma block [12][13]\n• Higher success rate for closed reduction (94% vs 74%) [12]\n• Requires ultrasound proficiency and additional setup time [9][11]\n\n**EVIDENCE:** Cochrane review found insufficient evidence to recommend one technique over another. Choice depends on clinician skill and patient factors. [9]',
         citation: [9, 10, 11, 12, 13],
+        treatment: {
+            firstLine: {
+                drug: 'Lidocaine 0.5% (plain)',
+                dose: '40-50 mL',
+                route: 'IV (Bier block) into dorsal hand vein',
+                frequency: 'Once',
+                duration: 'Single procedure',
+                notes: 'Bier block: Maintain tourniquet minimum 20 min to prevent systemic toxicity. Max 3 mg/kg.',
+            },
+            alternative: {
+                drug: 'Lidocaine 1-2% or Bupivacaine 0.25-0.5%',
+                dose: '10-20 mL total volume',
+                route: 'Perineural injection (US-guided nerve blocks)',
+                frequency: 'Once',
+                duration: 'Single procedure',
+                notes: 'US-guided median + radial nerve blocks or axillary brachial plexus block. Superior analgesia and longer duration than hematoma block.',
+            },
+            monitoring: 'Monitor for local anesthetic systemic toxicity (LAST). For Bier block: do not release tourniquet before 20 min. Have lipid emulsion available.',
+        },
         next: 'dr-traction',
     },
     // =====================================================================

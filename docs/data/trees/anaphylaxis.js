@@ -51,6 +51,25 @@ export const ANAPHYLAXIS_NODES = [
         recommendation: 'Mild allergic reaction. Treat with antihistamines, observe 2-4 hours. Reclassify if symptoms progress.',
         confidence: 'recommended',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Diphenhydramine',
+                dose: '25-50 mg',
+                route: 'PO or IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'H1 blocker for urticaria/pruritus',
+            },
+            alternative: {
+                drug: 'Famotidine',
+                dose: '20 mg',
+                route: 'PO or IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'H2 blocker, use in combination with H1 blocker',
+            },
+            monitoring: 'Observe 2-4 hours for progression to anaphylaxis',
+        },
     },
     {
         id: 'anaph-uncertain',
@@ -72,6 +91,17 @@ export const ANAPHYLAXIS_NODES = [
         body: '**SIMULTANEOUS actions:**\n\n**Source control:**\n• Stop all infusions/transfusions\n• Remove insect stinger (scrape, do not squeeze)\n• Sugammadex 16 mg/kg for rocuronium-induced\n\n**IM Epinephrine — FIRST LINE:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis im) **0.5 mg IM** (0.5 mL of 1 mg/mL) into **anterolateral thigh**\n• Pediatric: **0.01 mg/kg IM** (max 0.5 mg)\n• Repeat every 5 minutes, up to 3 doses\n\n**Do NOT delay for:**\n• IV access\n• Antihistamines\n• Steroids\n\nAnterolateral thigh achieves faster peak levels than deltoid or subcutaneous injection (Simons 2001). [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'anaph-epi-response',
+        treatment: {
+            firstLine: {
+                drug: 'Epinephrine',
+                dose: '0.5 mg (0.5 mL of 1 mg/mL)',
+                route: 'IM anterolateral thigh',
+                frequency: 'Every 5 minutes',
+                duration: 'Up to 3 doses',
+                notes: 'Pediatric: 0.01 mg/kg IM (max 0.5 mg). Do NOT delay for IV access.',
+            },
+            monitoring: 'Assess response 5 minutes after each dose. Monitor BP, respiratory status, skin perfusion.',
+        },
     },
     {
         id: 'anaph-epi-response',
@@ -142,6 +172,25 @@ export const ANAPHYLAXIS_NODES = [
             { id: 'epi-infusion', label: 'Epi Infusion Calculator' },
         ],
         next: 'anaph-fluids',
+        treatment: {
+            firstLine: {
+                drug: 'Epinephrine IV infusion',
+                dose: '1 mg in 100 mL NS (10 mcg/mL)',
+                route: 'IV infusion',
+                frequency: 'Loading: 20 mcg/min x 2 min, then 10 mcg/min maintenance',
+                duration: 'Until symptom resolution, then wean over ~30 minutes',
+                notes: 'Titrate based on clinical response. Aggressively wean after resolution.',
+            },
+            alternative: {
+                drug: 'Epinephrine push-dose',
+                dose: '20-50 mcg IV push',
+                route: 'IV push',
+                frequency: 'Every 1-2 minutes PRN',
+                duration: 'Until infusion started or patient stabilized',
+                notes: 'For peri-arrest only. Bridge to infusion.',
+            },
+            monitoring: 'Continuous cardiac monitoring, BP every 2-5 minutes during titration',
+        },
     },
     // =====================================================================
     // MODULE 3: RESUSCITATION
@@ -154,6 +203,25 @@ export const ANAPHYLAXIS_NODES = [
         body: '[Epinephrine](#/drug/epinephrine/anaphylaxis push dose) **20-50 mcg IV push**, repeat every 1-2 minutes.\n\nIf no IV access: IM 0.5 mg every 5 minutes + emergent IO access.\n\n**Position:** Lay flat, elevate legs — up to **35% of plasma volume** extravasates within minutes during anaphylaxis. [1]\n\n**If cardiac arrest:**\n• Standard ACLS with epinephrine 1 mg IV every 3-5 minutes\n• **Prolonged resuscitation** — this is a reversible pathology\n• Consider VA-ECMO if available [1][2]',
         citation: [1, 2, 4],
         next: 'anaph-fluids',
+        treatment: {
+            firstLine: {
+                drug: 'Epinephrine push-dose',
+                dose: '20-50 mcg IV push',
+                route: 'IV push',
+                frequency: 'Every 1-2 minutes',
+                duration: 'Until hemodynamic stability',
+                notes: 'If no IV: IM 0.5 mg every 5 minutes + emergent IO access',
+            },
+            alternative: {
+                drug: 'Epinephrine (cardiac arrest dose)',
+                dose: '1 mg IV push',
+                route: 'IV/IO',
+                frequency: 'Every 3-5 minutes',
+                duration: 'Standard ACLS',
+                notes: 'ONLY if pulseless. Prolonged resuscitation warranted - reversible pathology.',
+            },
+            monitoring: 'Continuous cardiac monitoring, consider VA-ECMO if available',
+        },
     },
     {
         id: 'anaph-fluids',
@@ -163,6 +231,17 @@ export const ANAPHYLAXIS_NODES = [
         body: '**Distributive shock** — up to 35% of intravascular volume extravasates within minutes. [1]\n\n**Adults:**\n• 500-1000 mL NS/LR bolus, repeat aggressively\n• May need several liters in first hour [3]\n\n**Pediatrics:**\n• 20-30 mL/kg bolus, repeat to 60 mL/kg+\n• IO access if no IV [2]\n\n**POCUS-guided fluid management:**\n• IVC collapse = volume responsive → more fluid\n• Hyperdynamic + empty chambers = more fluid\n• Adequate filling + persistent hypotension = uptitrate epinephrine\n\nLR preferred for large-volume resuscitation. [1]',
         citation: [1, 2, 3],
         next: 'anaph-airway',
+        treatment: {
+            firstLine: {
+                drug: 'Normal saline or Lactated Ringer',
+                dose: '500-1000 mL bolus (adult) / 20-30 mL/kg (pediatric)',
+                route: 'IV/IO',
+                frequency: 'Repeat aggressively',
+                duration: 'May need several liters in first hour',
+                notes: 'LR preferred for large-volume resuscitation. Pediatric: repeat to 60 mL/kg+',
+            },
+            monitoring: 'POCUS-guided: IVC collapse = more fluid; adequate filling + persistent hypotension = uptitrate epinephrine',
+        },
     },
     {
         id: 'anaph-airway',
@@ -196,6 +275,25 @@ export const ANAPHYLAXIS_NODES = [
         body: '**Prepare for difficult airway** — call anesthesia/ENT early.\n\n**Equipment:**\n• Video laryngoscopy (first attempt)\n• Smaller ETT than usual (edema narrows the airway)\n• Surgical airway kit at bedside\n\n**Temporizing:** Nebulized epinephrine — [racemic epinephrine](#/drug/racemic-epinephrine/anaphylaxis) 0.5 mL of 2.25% in 4.5 mL NS OR L-epinephrine 5 mL of 1:1000 (1 mg/mL). [1]\n\n**Do NOT delay intubation** if patient is deteriorating — airway edema worsens rapidly.\n\n**Post-intubation:** Continue epinephrine infusion, IV fluids, and adjunctive therapies. [1]',
         citation: [1],
         next: 'anaph-adjunctive-start',
+        treatment: {
+            firstLine: {
+                drug: 'Racemic epinephrine nebulized',
+                dose: '0.5 mL of 2.25% in 4.5 mL NS',
+                route: 'Nebulized',
+                frequency: 'PRN',
+                duration: 'Temporizing measure until definitive airway',
+                notes: 'Temporizing only. Do NOT delay intubation if deteriorating.',
+            },
+            alternative: {
+                drug: 'L-epinephrine nebulized',
+                dose: '5 mL of 1:1000 (1 mg/mL)',
+                route: 'Nebulized',
+                frequency: 'PRN',
+                duration: 'Temporizing measure until definitive airway',
+                notes: 'Alternative to racemic epinephrine',
+            },
+            monitoring: 'Continuous SpO2, prepare for surgical airway if intubation fails',
+        },
     },
     // =====================================================================
     // MODULE 4: REFRACTORY & SPECIAL POPULATIONS
@@ -237,6 +335,25 @@ export const ANAPHYLAXIS_NODES = [
         body: 'Blunted epinephrine response due to beta-adrenergic blockade. [1][3]\n\n**Management:**\n• Higher epinephrine doses (may need more frequent/larger IM doses)\n• Additional beta-2 agonism: [Albuterol](#/drug/albuterol-neb/anaphylaxis) nebulizer + [Terbutaline](#/drug/terbutaline/anaphylaxis) 0.25 mg SQ\n• [Methylene Blue](#/drug/methylene-blue/anaphylaxis) 1-2 mg/kg IV over 5-10 min (guanylate cyclase inhibitor — blocks NO-mediated vasodilation) [1]\n\n**Glucagon — DISCOURAGED by Farkas:**\n• Weak evidence, only bypasses beta-1 (not beta-2 — does not help bronchospasm)\n• Causes emesis (aspiration risk)\n• [Glucagon](#/drug/glucagon/anaphylaxis) — last resort only [1][2]',
         citation: [1, 2, 3],
         next: 'anaph-antihistamines',
+        treatment: {
+            firstLine: {
+                drug: 'Methylene blue',
+                dose: '1-2 mg/kg IV',
+                route: 'IV over 5-10 minutes',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Guanylate cyclase inhibitor - blocks NO-mediated vasodilation. Use with higher epi doses.',
+            },
+            alternative: {
+                drug: 'Glucagon',
+                dose: '1-5 mg IV',
+                route: 'IV over 5 minutes',
+                frequency: 'May repeat in 5 minutes',
+                duration: 'PRN',
+                notes: 'DISCOURAGED - weak evidence, only bypasses beta-1 (not beta-2), causes emesis. Last resort only.',
+            },
+            monitoring: 'Continuous cardiac monitoring. Watch for emesis/aspiration risk with glucagon.',
+        },
     },
     {
         id: 'anaph-refractory',
@@ -246,6 +363,25 @@ export const ANAPHYLAXIS_NODES = [
         body: 'Persistent despite adequate epinephrine + IV fluids (<0.5% of cases). [1]\n\n**Escalation ladder:**\n1. Maximize epinephrine infusion rate\n2. Aggressive POCUS-guided volume resuscitation\n3. [Methylene Blue](#/drug/methylene-blue/anaphylaxis) 1-2 mg/kg IV (blocks NO-mediated vasodilation — case reports only) [1]\n4. Vasopressin infusion\n5. VA-ECMO\n\n**Re-evaluate the diagnosis:**\n• Is this truly anaphylaxis? [Differential Diagnosis](#/info/anaph-ddx)\n• Missed ongoing exposure?\n• Underlying mastocytosis?\n• Serum tryptase level (peak ~90 min, draw within 3 hours) [3]',
         citation: [1, 3],
         next: 'anaph-antihistamines',
+        treatment: {
+            firstLine: {
+                drug: 'Methylene blue',
+                dose: '1-2 mg/kg IV',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Blocks NO-mediated vasodilation. Case reports only. Use after maximizing epi + fluids.',
+            },
+            alternative: {
+                drug: 'Vasopressin',
+                dose: '0.01-0.04 units/min infusion',
+                route: 'IV infusion',
+                frequency: 'Continuous',
+                duration: 'Until hemodynamic stability',
+                notes: 'Escalation option after methylene blue. Consider VA-ECMO if available.',
+            },
+            monitoring: 'Continuous cardiac monitoring, POCUS-guided resuscitation, serum tryptase',
+        },
     },
     {
         id: 'anaph-bronchospasm',
@@ -255,6 +391,25 @@ export const ANAPHYLAXIS_NODES = [
         body: 'Persistent wheezing despite adequate epinephrine — especially in patients with asthma overlap. [1]\n\n• [Albuterol](#/drug/albuterol-neb/anaphylaxis) 2.5-5 mg nebulizer, continuous if severe\n• [Terbutaline](#/drug/terbutaline/anaphylaxis) 0.25 mg SQ (systemic beta-2 agonist)\n• Nebulized epinephrine for combined upper + lower airway symptoms\n• Ensure adequate epinephrine infusion (epinephrine is a bronchodilator via beta-2 receptors) [1][2]',
         citation: [1, 2],
         next: 'anaph-antihistamines',
+        treatment: {
+            firstLine: {
+                drug: 'Albuterol',
+                dose: '2.5-5 mg nebulizer',
+                route: 'Nebulized',
+                frequency: 'Every 20 minutes or continuous if severe',
+                duration: 'Until bronchospasm resolves',
+                notes: 'First-line for persistent wheezing despite adequate epinephrine',
+            },
+            alternative: {
+                drug: 'Terbutaline',
+                dose: '0.25 mg',
+                route: 'Subcutaneous',
+                frequency: 'May repeat in 15-30 minutes',
+                duration: 'PRN',
+                notes: 'Systemic beta-2 agonist for severe/refractory bronchospasm',
+            },
+            monitoring: 'SpO2, respiratory status, peak flow if able',
+        },
     },
     {
         id: 'anaph-exercise',
@@ -276,6 +431,25 @@ export const ANAPHYLAXIS_NODES = [
         body: '**Second-line only — NEVER delay epinephrine for antihistamines.** [1][3]\n\n**H1 blocker:** [Diphenhydramine](#/drug/diphenhydramine/anaphylaxis) 50 mg IV every 6 hours\n**H2 blocker:** [Famotidine](#/drug/famotidine/anaphylaxis) 20 mg IV every 12 hours\n\nH1 + H2 combination is superior to H1 alone for cutaneous symptoms. [2][3]\n\n**What antihistamines DO:**\n• Reduce urticaria, flushing, pruritus\n• May reduce mucosal edema\n\n**What antihistamines do NOT do:**\n• Treat hypotension\n• Treat bronchospasm\n• Prevent biphasic reactions\n\nAntihistamines are primarily cosmetic. [1]',
         citation: [1, 2, 3],
         next: 'anaph-steroids',
+        treatment: {
+            firstLine: {
+                drug: 'Diphenhydramine',
+                dose: '50 mg',
+                route: 'IV',
+                frequency: 'Every 6 hours',
+                duration: 'While hospitalized',
+                notes: 'H1 blocker. Second-line only - NEVER delay epinephrine. Primarily cosmetic.',
+            },
+            alternative: {
+                drug: 'Famotidine',
+                dose: '20 mg',
+                route: 'IV',
+                frequency: 'Every 12 hours',
+                duration: 'While hospitalized',
+                notes: 'H2 blocker. H1 + H2 combination superior to H1 alone for cutaneous symptoms.',
+            },
+            monitoring: 'Monitor for sedation with diphenhydramine',
+        },
     },
     {
         id: 'anaph-steroids',
@@ -285,6 +459,25 @@ export const ANAPHYLAXIS_NODES = [
         body: '**Controversial — no randomized controlled trials.** [1][2][3]\n\n**If giving (pick one):**\n• [Dexamethasone](#/drug/dexamethasone/anaphylaxis) 10 mg IV x1\n• [Methylprednisolone](#/drug/methylprednisolone/anaphylaxis) 60 mg IV x1\n\n**Consider if:**\n• Refractory to 2+ IM epinephrine doses\n• Known asthma\n• History of biphasic reactions [1]\n\n**Evidence:**\n• Do NOT prevent biphasic reactions [2]\n• May reduce length of stay in hospitalized patients [2]\n• No benefit on acute symptoms (onset 4-6 hours)\n• **NOT needed for discharge** [1]',
         citation: [1, 2, 3],
         next: 'anaph-tryptase',
+        treatment: {
+            firstLine: {
+                drug: 'Dexamethasone',
+                dose: '10 mg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Controversial - no RCTs. Consider if refractory to 2+ IM epi, asthma, or history of biphasic reactions.',
+            },
+            alternative: {
+                drug: 'Methylprednisolone',
+                dose: '60 mg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Alternative to dexamethasone. Does NOT prevent biphasic reactions. NOT needed for discharge.',
+            },
+            monitoring: 'Blood glucose if diabetic',
+        },
     },
     {
         id: 'anaph-tryptase',
@@ -368,6 +561,25 @@ export const ANAPHYLAXIS_NODES = [
         title: 'Discharge Prescriptions & Education',
         body: '[Discharge Instructions](#/info/anaph-discharge)\n\n**Mandatory:**\n• **EpiPen x2** (prescribe — ensure patient demonstrates use)\n• Allergist referral within 2-4 weeks [2][3]\n• Allergen avoidance education\n• Medical ID bracelet recommended\n\n**Optional short-course (symptomatic relief):**\n• [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg PO every 6 hours PRN x 3-5 days\n• [Famotidine](#/drug/famotidine/angioedema) 20 mg PO BID x 3-5 days\n\n**Steroids NOT needed for discharge** — no evidence supports outpatient steroid taper. [1] EB Medicine adult review notes optional 3-5 day course, no taper needed. [3]\n\n**Return precautions:** Any symptom recurrence → use EpiPen immediately + call 911. [2][3]',
         citation: [1, 2, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Epinephrine auto-injector (EpiPen)',
+                dose: '0.3 mg per injection',
+                route: 'IM auto-injector',
+                frequency: 'PRN for symptom recurrence',
+                duration: 'Carry at all times',
+                notes: 'Prescribe x2. Ensure patient demonstrates proper use before discharge.',
+            },
+            alternative: {
+                drug: 'Diphenhydramine',
+                dose: '25-50 mg',
+                route: 'PO',
+                frequency: 'Every 6 hours PRN',
+                duration: '3-5 days',
+                notes: 'Optional for symptomatic relief. Add Famotidine 20 mg PO BID x 3-5 days.',
+            },
+            monitoring: 'Return immediately if any symptom recurrence. Allergist referral within 2-4 weeks.',
+        },
     },
 ];
 export const ANAPHYLAXIS_MODULE_LABELS = [

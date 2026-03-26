@@ -53,6 +53,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Initiate IV hydration, analgesia, and O2. If >4 hours duration, proceed to corporal aspiration per Priapism consult. Emergent urology consultation.',
     confidence: 'recommended',
     citation: [1, 21],
+    treatment: {
+      firstLine: {
+        drug: 'Pseudoephedrine',
+        dose: '30-60 mg',
+        route: 'PO',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'May assist with detumescence; use while preparing for procedural intervention',
+      },
+      alternative: {
+        drug: 'Ketamine',
+        dose: '1-2 mg/kg',
+        route: 'IV',
+        frequency: 'Once',
+        duration: 'Procedural sedation dose',
+        notes: 'Has been shown to assist with corporal detumescence',
+      },
+      monitoring: 'Monitor for resolution of erection; if >4 hours, proceed to corporal aspiration with phenylephrine',
+    },
   },
 
   // ============================================================
@@ -121,6 +140,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Discharge with oral pain regimen. Hematology follow-up within 24–48 hours. Return for fever, worsening pain, SOB, or chest pain.',
     confidence: 'recommended',
     citation: [1, 4, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Ibuprofen',
+        dose: '10 mg/kg (max 600 mg)',
+        route: 'PO',
+        frequency: 'q6-8h scheduled',
+        duration: '2-3 days',
+        notes: 'Scheduled NSAID for anti-inflammatory effect; avoid if renal impairment',
+      },
+      alternative: {
+        drug: 'Oxycodone',
+        dose: '0.1 mg/kg (max 10 mg)',
+        route: 'PO',
+        frequency: 'q4-6h PRN',
+        duration: '2-3 day supply',
+        notes: 'PRN for breakthrough pain; use per individualized pain plan if available',
+      },
+      monitoring: 'Return for fever ≥38.5°C, worsening pain, SOB, chest pain, pallor, or abdominal swelling',
+    },
   },
 
   {
@@ -132,6 +170,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Admit for IV PCA, multimodal analgesia, incentive spirometry. Hematology consult. Monitor for ACS development.',
     confidence: 'recommended',
     citation: [1, 4, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Morphine PCA',
+        dose: 'Demand: 0.02 mg/kg (max 2 mg); Basal: 0.01 mg/kg/hr (optional)',
+        route: 'IV PCA',
+        frequency: 'Lockout interval 6-10 min',
+        duration: 'Until pain controlled on oral medications',
+        notes: 'Titrate to pain control; consider basal rate for severe pain or nighttime',
+      },
+      alternative: {
+        drug: 'Hydromorphone PCA',
+        dose: 'Demand: 0.003-0.004 mg/kg (max 0.3 mg); Basal: 0.002 mg/kg/hr (optional)',
+        route: 'IV PCA',
+        frequency: 'Lockout interval 6-10 min',
+        duration: 'Until pain controlled on oral medications',
+        notes: 'Alternative for morphine intolerance; ~5x potency of morphine',
+      },
+      monitoring: 'Continuous SpO2, respiratory rate q1-2h, sedation scale, daily assessment for ACS (fever, cough, hypoxia, chest pain)',
+    },
   },
 
   // ============================================================
@@ -190,6 +247,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Well-appearing, vaccinated patients may be discharged after parenteral antibiotics with confirmed 24-hour hematology follow-up. Admit ill-appearing patients, those with abnormal WBC, hemodynamic instability, or CXR infiltrate.',
     confidence: 'recommended',
     citation: [1, 4, 12, 13],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '50 mg/kg (max 2 g)',
+        route: 'IV/IM',
+        frequency: 'Once in ED',
+        duration: 'Single dose (must be given before discharge)',
+        notes: 'Covers S. pneumoniae, H. influenzae, N. meningitidis; blood cultures BEFORE administration',
+      },
+      pcnAllergy: {
+        drug: 'Clindamycin + Ciprofloxacin',
+        dose: 'Clindamycin 10 mg/kg (max 600 mg) + Ciprofloxacin 10 mg/kg (max 400 mg)',
+        route: 'IV',
+        frequency: 'Once in ED',
+        duration: 'Single dose',
+        notes: 'For severe penicillin/cephalosporin allergy; consult hematology for preferred alternative',
+      },
+      monitoring: 'Blood culture follow-up within 24 hours; return immediately for fever, worsening symptoms, or positive culture callback',
+    },
   },
 
   // ============================================================
@@ -248,6 +324,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Admit all ACS patients. ICU if exchange transfusion, FiO2 >40%, worsening status, or hemodynamic instability. Continue antibiotics + incentive spirometry.',
     confidence: 'definitive',
     citation: [1, 4, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '50 mg/kg (max 2 g)',
+        route: 'IV',
+        frequency: 'q24h',
+        duration: '7-10 days (per clinical response)',
+        notes: 'Covers typical bacterial pathogens; continue until afebrile 24-48h and clinically improving',
+      },
+      alternative: {
+        drug: 'Azithromycin',
+        dose: '10 mg/kg (max 500 mg) Day 1, then 5 mg/kg (max 250 mg) Days 2-5',
+        route: 'IV/PO',
+        frequency: 'q24h',
+        duration: '5 days total',
+        notes: 'Covers atypical pathogens (Mycoplasma, Chlamydia); give WITH ceftriaxone, not as alternative',
+      },
+      monitoring: 'Continuous SpO2, serial CXR if worsening, daily CBC/retic, Hgb electrophoresis to track HbS%; watch for multi-organ failure',
+    },
   },
 
   // ============================================================
@@ -293,6 +388,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Admit ICU. Exchange transfusion targeting HbS <30%. Neurology + hematology co-management. Chronic transfusion program for secondary prevention.',
     confidence: 'definitive',
     citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Exchange Transfusion (pRBC)',
+        dose: 'Calculate volume to achieve HbS <30%, HbA >70%, Hgb ~10 g/dL',
+        route: 'IV (via apheresis or manual exchange)',
+        frequency: 'Emergent, then monthly for secondary prevention',
+        duration: 'Acute: within 2 hours of symptom onset; Chronic: ongoing program',
+        notes: 'Do NOT exceed Hgb 11 g/dL (hyperviscosity risk); extended antigen matching required (C, E, Kell)',
+      },
+      alternative: {
+        drug: 'Simple Transfusion (pRBC)',
+        dose: '10-15 mL/kg',
+        route: 'IV',
+        frequency: 'If exchange not immediately available',
+        duration: 'Bridge to exchange transfusion',
+        notes: 'Only if Hgb <8.5 g/dL; do not delay exchange transfusion; do not exceed Hgb 11 g/dL',
+      },
+      monitoring: 'Serial neurologic exams, Hgb/HbS% q4-6h during acute phase, continuous cardiac monitoring, TCD velocities for long-term follow-up',
+    },
   },
 
   {
@@ -314,6 +428,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'Emergent pRBC transfusion in 5 mL/kg aliquots. Do NOT exceed Hgb 8 g/dL. Admit all. Hematology consult. High recurrence rate — consider splenectomy.',
     confidence: 'definitive',
     citation: [1, 4, 18],
+    treatment: {
+      firstLine: {
+        drug: 'Packed Red Blood Cells (pRBC)',
+        dose: '5 mL/kg aliquots',
+        route: 'IV',
+        frequency: 'Repeat aliquots until hemodynamically stable',
+        duration: 'STOP when Hgb reaches 8 g/dL',
+        notes: 'CRITICAL: Do NOT exceed Hgb 8 g/dL due to risk of reverse sequestration causing hyperviscosity',
+      },
+      alternative: {
+        drug: 'Normal Saline',
+        dose: '20 mL/kg bolus',
+        route: 'IV',
+        frequency: 'Repeat PRN for shock',
+        duration: 'Until blood products available',
+        notes: 'Bridge resuscitation while preparing blood; maintain hemodynamic stability',
+      },
+      monitoring: 'Serial Hgb after each 5 mL/kg aliquot, serial abdominal exams q1-2h (spleen size), continuous cardiac monitoring, watch for signs of hyperviscosity (HTN, AMS, seizure)',
+    },
   },
 
   // ============================================================
@@ -359,6 +492,25 @@ export const SICKLE_CELL_NODES: DecisionNode[] = [
     recommendation: 'ECAST: admit ICU with aggressive fluids and monitoring. Hematuria: urology referral, CT urography if flank pain. Counsel on exertional risks and hydration.',
     confidence: 'recommended',
     citation: [1, 19, 20, 21],
+    treatment: {
+      firstLine: {
+        drug: 'Normal Saline',
+        dose: '20 mL/kg bolus, then continuous infusion',
+        route: 'IV',
+        frequency: 'Target urine output 200-300 mL/hr',
+        duration: 'Until CK trending down and urine output maintained',
+        notes: 'Aggressive fluid resuscitation is cornerstone of ECAST treatment; cool patient and stop all exertion',
+      },
+      alternative: {
+        drug: 'Sodium Bicarbonate',
+        dose: '1-2 mEq/kg bolus, then 150 mEq/L in D5W',
+        route: 'IV',
+        frequency: 'Continuous infusion to maintain urine pH >6.5',
+        duration: 'Until myoglobinuria resolves',
+        notes: 'Consider for rhabdomyolysis with significant myoglobinuria; alkalinization prevents myoglobin precipitation in renal tubules',
+      },
+      monitoring: 'Serial CK q6h, BMP q4-6h (K+, Cr, BUN), blood gas, urine output hourly, continuous cardiac monitoring, watch for compartment syndrome',
+    },
   },
 
   {

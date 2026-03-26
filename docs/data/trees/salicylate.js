@@ -138,6 +138,25 @@ export const SALICYLATE_NODES = [
         title: 'Resuscitation Assessment',
         body: '**Volume resuscitate** — patients are often 4-6L depleted (diaphoresis, tachypnea, vomiting, diarrhea). [2]\n• Use **isotonic bicarbonate** (if pH < 7.5) or **LR/Plasmalyte** (if at target pH). **NEVER normal saline.** [2]\n• Check fingerstick glucose — give [Dextrose](#/drug/dextrose/neuroglycopenia) D50W empirically for any AMS, even with normal serum glucose (neuroglycopenia). [2][4]\n\nAssess for immediate threats:',
         citation: [1, 2, 3, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Isotonic Sodium Bicarbonate',
+                dose: '150 mEq NaHCO3 in 1L D5W',
+                route: 'IV',
+                frequency: 'Bolus then 150-200 mL/hr',
+                duration: 'Ongoing resuscitation',
+                notes: 'Use isotonic bicarb if pH < 7.5. NEVER use normal saline (acidifying).',
+            },
+            alternative: {
+                drug: 'Lactated Ringer or Plasmalyte',
+                dose: '500-1000 mL bolus',
+                route: 'IV',
+                frequency: 'Bolus, then maintenance',
+                duration: 'Until euvolemic',
+                notes: 'Use balanced crystalloid if already at target pH (7.45-7.55). NEVER normal saline.',
+            },
+            monitoring: 'Fingerstick glucose (give D50W for AMS). Volume status. Urine output. Serial pH and salicylate levels.',
+        },
         options: [
             {
                 label: 'Seizures or Declining GCS',
@@ -162,6 +181,25 @@ export const SALICYLATE_NODES = [
         title: 'Seizures / Severe Altered Mental Status',
         body: '**Benzodiazepines first-line for seizures:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n• [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IM (max 10 mg) if no IV access\n\n**Empiric dextrose:** [Dextrose](#/drug/dextrose/neuroglycopenia) D50W 50 mL IV — even with NORMAL serum glucose. Salicylate uncouples oxidative phosphorylation, causing massive CNS glucose consumption (**neuroglycopenia**). CSF glucose drops before serum glucose. [2][4]\n\n**Seizures in salicylate toxicity = severe poisoning.** This patient almost certainly needs hemodialysis.',
         citation: [1, 2, 3, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Lorazepam',
+                dose: '0.1 mg/kg IV (max 4 mg)',
+                route: 'IV push',
+                frequency: 'May repeat once in 5-10 min',
+                duration: 'Single dose for seizure termination',
+                notes: 'Push over 2 min. Have airway equipment ready. Seizures indicate severe toxicity requiring HD.',
+            },
+            alternative: {
+                drug: 'Midazolam',
+                dose: '0.2 mg/kg IM (max 10 mg)',
+                route: 'IM',
+                frequency: 'Single dose',
+                duration: 'One-time if no IV access',
+                notes: 'Use if no IV access. IM onset 5 min. Also give empiric D50W for neuroglycopenia.',
+            },
+            monitoring: 'Respiratory status. Mental status. Fingerstick glucose. This patient needs emergent nephrology consult for hemodialysis.',
+        },
         next: 'sal-airway-warning',
     },
     {
@@ -191,6 +229,25 @@ export const SALICYLATE_NODES = [
         body: '**If intubation is unavoidable:** [2][3][4]\n\n• **Pre-intubation:** Bolus [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) 1-2 mEq/kg IV. Give >5-10 minutes before paralysis to allow CO2 blow-off from infused bicarb.\n• **Intubation:** Most experienced operator. Rapid sequence. Consider ketamine (maintains respiratory drive longest).\n• **Post-intubation ventilator settings:** TV 8 mL/kg, **RR 30-35** (match pre-intubation minute ventilation). Target **pH, NOT pCO2.** ABG within 10 minutes.\n• Continue NaHCO3 boluses. Switch to spontaneous mode ASAP.\n\n**This patient REQUIRES EMERGENT HEMODIALYSIS.** A patient who needs intubation for salicylate toxicity almost certainly needs HD too. Intubation without HD has very high mortality.',
         recommendation: 'EMERGENT: Call nephrology STAT for hemodialysis. Continue NaHCO3 infusion. Vent settings: TV 8 mL/kg, RR 30-35, target pH not pCO2. ABG q15min initially.',
         citation: [2, 3, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Sodium Bicarbonate 8.4%',
+                dose: '1-2 mEq/kg bolus pre-intubation',
+                route: 'IV push',
+                frequency: 'Bolus 5-10 min before paralysis, then continue infusion',
+                duration: 'Pre-intubation and ongoing',
+                notes: 'Allow CO2 blow-off before paralysis. Continue boluses post-intubation. Target pH, not pCO2.',
+            },
+            alternative: {
+                drug: 'Ketamine',
+                dose: '1-2 mg/kg IV',
+                route: 'IV push',
+                frequency: 'Single induction dose',
+                duration: 'Induction only',
+                notes: 'Preferred induction agent. Maintains respiratory drive longest. Most experienced operator should intubate.',
+            },
+            monitoring: 'ABG q15min initially, then q1-2h. Target pH 7.45-7.55. Vent settings: TV 8 mL/kg, RR 30-35. Switch to spontaneous mode ASAP. EMERGENT HD required.',
+        },
     },
     {
         id: 'sal-pulm-edema',
@@ -233,6 +290,17 @@ export const SALICYLATE_NODES = [
         title: 'Single-Dose Activated Charcoal',
         body: '[Activated Charcoal](#/drug/activated-charcoal/salicylate) 1 g/kg PO (max 50g). [7]\n\nMost effective within 1 hour, but consider up to **2-4 hours** for salicylates (delayed gastric emptying in overdose, bezoar formation). [1]\n\n**Contraindications:** Unprotected airway, bowel obstruction/perforation, caustic co-ingestion.\n\nA second dose of charcoal may be given 4 hours later if salicylate levels continue to rise. [1]',
         citation: [1, 3, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Activated Charcoal',
+                dose: '1 g/kg PO (max 50 g)',
+                route: 'PO',
+                frequency: 'Single dose',
+                duration: 'One-time administration',
+                notes: 'Extended window (2-4 hours) for salicylates due to delayed gastric emptying. May repeat in 4 hours if levels rising.',
+            },
+            monitoring: 'Serial salicylate levels q2h. Watch for obstipation if repeat doses given.',
+        },
         next: 'sal-alkalinize-start',
     },
     {
@@ -242,6 +310,25 @@ export const SALICYLATE_NODES = [
         title: 'Multi-Dose Charcoal / Whole Bowel Irrigation',
         body: 'For enteric-coated formulations or massive ingestions with suspected bezoar: [1][3]\n\n**Multi-dose activated charcoal (MDAC):** [Activated Charcoal](#/drug/activated-charcoal/salicylate) 25g q2-4h for 3-4 additional doses. Monitor for obstipation.\n\n**Whole bowel irrigation (WBI):** PEG-electrolyte solution (GoLYTELY) via NG at 1.5-2 L/hr (adults). Consider for confirmed bezoar on imaging or persistently rising levels despite charcoal. May require intubation for airway protection (use extreme caution — see airway warning).',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Activated Charcoal (MDAC)',
+                dose: '25 g',
+                route: 'PO or NG',
+                frequency: 'q2-4h',
+                duration: '3-4 additional doses after initial dose',
+                notes: 'For enteric-coated tablets or suspected bezoar. Monitor for obstipation.',
+            },
+            alternative: {
+                drug: 'PEG-electrolyte solution (GoLYTELY)',
+                dose: '1.5-2 L/hr',
+                route: 'NG tube',
+                frequency: 'Continuous',
+                duration: 'Until clear rectal effluent',
+                notes: 'Whole bowel irrigation for confirmed bezoar. May require intubation for airway protection.',
+            },
+            monitoring: 'Serial salicylate levels q2h. Bowel sounds. Abdominal distension. Watch for obstipation.',
+        },
         next: 'sal-alkalinize-start',
     },
     // =====================================================================
@@ -276,6 +363,17 @@ export const SALICYLATE_NODES = [
         title: 'NaHCO3 — Bolus + Infusion',
         body: '[Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity)\n\n**Bolus:** 1-2 mEq/kg IV (typically 2-3 amps of 8.4% NaHCO3). [2][3]\n\n**Infusion:** 150 mEq (3 amps 8.4%) in 1L **D5W** at 150-200 mL/hr. [2]\n• D5W carrier provides CNS glucose support\n• **NEVER use normal saline** as carrier — acidifying (SID = 0) [2]\n\n**Targets:** [2]\n• Serum pH: 7.45-7.55 (check q2h)\n• Urine pH: 7.5-8.0 (check hourly via Foley)\n• Do NOT exceed serum pH > 7.60\n\n**CONTRAINDICATED:** Acetazolamide — lowers serum pH AND displaces salicylate from albumin, increasing free (toxic) levels. [2][13]',
         citation: [2, 3, 6, 13],
+        treatment: {
+            firstLine: {
+                drug: 'Sodium Bicarbonate 8.4%',
+                dose: '1-2 mEq/kg bolus, then 150 mEq in 1L D5W',
+                route: 'IV',
+                frequency: 'Continuous infusion at 150-200 mL/hr',
+                duration: 'Until salicylate level < 30 mg/dL and clinical improvement',
+                notes: 'D5W carrier required. NEVER use normal saline. Add 20-40 mEq KCl per liter.',
+            },
+            monitoring: 'Serum pH q2h (target 7.45-7.55). Urine pH hourly (target 7.5-8.0). BMP q4h for K+ and HCO3.',
+        },
         next: 'sal-k-critical',
     },
     {
@@ -285,6 +383,25 @@ export const SALICYLATE_NODES = [
         title: 'CRITICAL — Potassium Repletion',
         body: '**Hypokalemia BLOCKS urinary alkalinization. You CANNOT achieve alkaline urine without adequate K+.** [1][2][3]\n\nWhen K+ is low, the distal tubule reabsorbs K+ and excretes H+ instead — producing **acidic urine** despite systemic alkalosis. No amount of bicarbonate will overcome this.\n\n[KCl IV](#/drug/potassium-chloride-iv/severe) 20-40 mEq/hr IV (with cardiac monitoring for rates > 20 mEq/hr). [2]\n\n**Add 20-40 mEq KCl per liter** of bicarbonate infusion. [2]\n\n**Target K+ ≥ 4.0-4.5 mEq/L.** [2]\n\nBicarbonate infusion tends to drop K+ further — preemptive repletion is essential.',
         citation: [1, 2, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Potassium Chloride (KCl)',
+                dose: '20-40 mEq/hr IV',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until K+ ≥ 4.0-4.5 mEq/L',
+                notes: 'Cardiac monitoring required for rates > 20 mEq/hr. Add 20-40 mEq per liter of bicarb infusion.',
+            },
+            alternative: {
+                drug: 'Potassium Chloride (KCl) Oral',
+                dose: '40 mEq PO',
+                route: 'PO',
+                frequency: 'q2-4h',
+                duration: 'Until K+ ≥ 4.0-4.5 mEq/L',
+                notes: 'Use oral if tolerating PO and not severely hypokalemic.',
+            },
+            monitoring: 'K+ level q2-4h during active repletion. Continuous cardiac monitoring if infusion > 20 mEq/hr.',
+        },
         next: 'sal-dextrose',
     },
     {
@@ -294,6 +411,25 @@ export const SALICYLATE_NODES = [
         title: 'Dextrose for Neuroglycopenia',
         body: '[Dextrose](#/drug/dextrose/neuroglycopenia) **D50W 50 mL IV** for any AMS or declining mental status — even with **NORMAL serum glucose.** [2][4]\n\nSalicylate uncouples oxidative phosphorylation in CNS mitochondria → massive local glucose consumption → CSF glucose drops critically low while serum glucose remains normal. This **neuroglycopenia** causes altered mental status and seizures that may respond to dextrose. [4]\n\n• Add D5W to all maintenance IV fluids (bicarb infusion already uses D5W carrier)\n• Check fingerstick glucose q1h\n• Target moderate hyperglycemia (~150-200 mg/dL) in severe toxicity [2]',
         citation: [2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Dextrose 50% (D50W)',
+                dose: '50 mL (25 g)',
+                route: 'IV push',
+                frequency: 'Once, repeat PRN for AMS',
+                duration: 'Single dose then D5W maintenance',
+                notes: 'Give empirically for AMS even with normal serum glucose. Target glucose 150-200 mg/dL in severe toxicity.',
+            },
+            alternative: {
+                drug: 'Dextrose 10% (D10W)',
+                dose: '250 mL bolus',
+                route: 'IV',
+                frequency: 'PRN',
+                duration: 'As maintenance fluid',
+                notes: 'Use as maintenance fluid or when peripheral IV only. D5W in bicarb infusion provides baseline dextrose.',
+            },
+            monitoring: 'Fingerstick glucose q1h. Mental status. Target moderate hyperglycemia (~150-200 mg/dL) in severe toxicity.',
+        },
         next: 'sal-alkalinize-monitor',
     },
     {
@@ -377,6 +513,25 @@ export const SALICYLATE_NODES = [
         title: 'Hemodialysis Protocol',
         body: '**Standard intermittent HD preferred** over CRRT — much higher clearance rate. Even in hypotension (since fluid isn\'t being removed, HD doesn\'t worsen hemodynamics). [2][5]\n\n• Continue [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) infusion **DURING and AFTER** HD\n• HD removes salicylate from blood but tissue stores redistribute after HD\n• Typical duration: 4-6 hours\n• Continue K+ repletion\n• Continue glucose monitoring and D5W infusion',
         citation: [2, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Hemodialysis (Intermittent HD)',
+                dose: 'Standard blood flow 300-400 mL/min',
+                route: 'Dialysis catheter',
+                frequency: '4-6 hour session',
+                duration: 'Single session; repeat if rebound > 30 mg/dL',
+                notes: 'Preferred over CRRT for higher clearance. Continue NaHCO3 infusion during and after HD.',
+            },
+            alternative: {
+                drug: 'CRRT (if HD unavailable)',
+                dose: 'CVVHDF at maximum blood flow',
+                route: 'Dialysis catheter',
+                frequency: 'Continuous',
+                duration: 'Until salicylate cleared',
+                notes: 'Lower clearance than intermittent HD. Use only if standard HD not available.',
+            },
+            monitoring: 'Salicylate level 2 hours post-HD (expect rebound). Continue K+ repletion. Glucose monitoring with D5W infusion. May need 2-3 HD sessions.',
+        },
         next: 'sal-hd-rebound',
     },
     {

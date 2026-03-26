@@ -204,6 +204,25 @@ export const CRAO_NODES: DecisionNode[] = [
     title: 'Arteritic CRAO (GCA)',
     body: '**⚠️ GCA-CRAO: START STEROIDS IMMEDIATELY ⚠️**\n\n**Do NOT give tPA for arteritic CRAO.**\n\n**High-Dose IV Methylprednisolone:**\n- 1000 mg IV daily × 3-5 days\n- Then transition to oral prednisone 1 mg/kg/day\n\n**Why Immediate Treatment?**\n- Fellow eye at risk (25-50% bilateral within days-weeks)\n- Steroids prevent fellow eye involvement\n- DO NOT wait for biopsy to start treatment\n\n**Temporal Artery Biopsy:**\n- Should be done within 2 weeks of starting steroids\n- Steroids don\'t affect biopsy for 2+ weeks\n- Arrange as inpatient\n\n**Consults:**\n- Rheumatology\n- Ophthalmology\n\n**Admission:** Required for steroid initiation and monitoring. [1][4]',
     citation: [1, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Methylprednisolone',
+        dose: '1000 mg',
+        route: 'IV',
+        frequency: 'Daily',
+        duration: '3-5 days',
+        notes: 'Start immediately. Do NOT wait for biopsy. Transition to oral prednisone 1 mg/kg/day after IV course.',
+      },
+      alternative: {
+        drug: 'Prednisone',
+        dose: '1 mg/kg',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Months (rheumatology-guided taper)',
+        notes: 'Oral maintenance after IV pulse. Typical starting dose 60-80 mg daily.',
+      },
+      monitoring: 'Blood glucose, blood pressure, electrolytes. Watch for steroid-induced hyperglycemia. Rheumatology follow-up for taper guidance.',
+    },
     next: 'crao-dispo',
   },
 
@@ -214,6 +233,17 @@ export const CRAO_NODES: DecisionNode[] = [
     title: 'GCA Uncertain',
     body: '**If uncertain about GCA:**\n\n**Labs to Send:**\n- ESR (stat)\n- CRP (stat)\n- CBC with platelets\n\n**Consider starting steroids if:**\n- ESR significantly elevated (>50)\n- Clinical features suggestive\n- Risk of fellow eye involvement high\n\n**Can give steroids AND tPA?**\n- Controversial\n- If GCA ruled out, tPA is appropriate\n- If GCA confirmed, tPA not indicated (inflammatory, not embolic)\n\n**When in doubt:**\n- Start IV methylprednisolone\n- Consult ophthalmology urgently\n- Rheumatology consultation\n\n**Document reasoning clearly.** [1][4]',
     citation: [1, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Methylprednisolone',
+        dose: '1000 mg',
+        route: 'IV',
+        frequency: 'Daily',
+        duration: '3-5 days',
+        notes: 'Start empirically if GCA suspicion moderate-high. Risk of fellow eye loss outweighs steroid risks.',
+      },
+      monitoring: 'ESR, CRP trending. Blood glucose. Arrange temporal artery biopsy within 2 weeks.',
+    },
     next: 'crao-stroke-protocol',
   },
 
@@ -268,6 +298,25 @@ export const CRAO_NODES: DecisionNode[] = [
     title: 'IV tPA for CRAO',
     body: '**IV Alteplase (tPA) for Non-Arteritic CRAO:**\n\n**Dose:** Same as stroke protocol\n- 0.9 mg/kg (max 90 mg)\n- 10% as bolus over 1 minute\n- 90% as infusion over 60 minutes\n\n**Evidence:**\n- NNT = 4 for functional visual recovery\n- 50% recovery rate within 4.5h window\n- No increased ICH risk in studies\n- No benefit if given >4.5 hours\n\n**Post-tPA Monitoring:**\n- Neuro checks q15min × 2h, then q30min × 6h, then q1h × 16h\n- BP monitoring (goal <180/105)\n- No antiplatelet/anticoagulant × 24h\n\n**IA tPA (Interventional):**\n- Some centers offer intra-arterial approach\n- Extended window (up to 6 hours)\n- Not widely available [1][2]',
     citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Alteplase (tPA)',
+        dose: '0.9 mg/kg (max 90 mg)',
+        route: 'IV',
+        frequency: 'Once (10% bolus over 1 min, 90% infusion over 60 min)',
+        duration: 'Single dose',
+        notes: 'Must be within 4.5 hours of symptom onset. Same contraindications as stroke tPA. GCA must be ruled out.',
+      },
+      alternative: {
+        drug: 'Tenecteplase',
+        dose: '0.25 mg/kg (max 25 mg)',
+        route: 'IV bolus',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Some centers use tenecteplase as alternative. Single bolus administration. Check institutional protocol.',
+      },
+      monitoring: 'Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. BP goal <180/105. No antiplatelet/anticoagulant x 24h. Monitor for signs of ICH.',
+    },
     next: 'crao-workup',
   },
 
@@ -315,6 +364,25 @@ export const CRAO_NODES: DecisionNode[] = [
     title: 'Secondary Prevention',
     body: '**Initiate During Admission:**\n\n**Antithrombotic:**\n- Aspirin 81-325 mg daily (if not on anticoagulation)\n- Anticoagulation if AFib confirmed\n\n**Statin:**\n- High-intensity statin (atorvastatin 40-80 mg)\n- Regardless of baseline LDL\n\n**Blood Pressure:**\n- Goal <130/80 mmHg\n- Avoid aggressive lowering acutely\n\n**Glycemic Control:**\n- HbA1c goal <7% (individualized)\n\n**Carotid Stenosis:**\n- If >70% stenosis → vascular surgery consult\n- CEA/stenting consideration\n\n**Lifestyle:**\n- Smoking cessation\n- Diet modification\n- Exercise counseling [1][2]',
     citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Aspirin',
+        dose: '81-325 mg',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Indefinite',
+        notes: 'Unless on anticoagulation for AFib. Start after tPA window (24h post-tPA if given).',
+      },
+      alternative: {
+        drug: 'Atorvastatin',
+        dose: '40-80 mg',
+        route: 'PO',
+        frequency: 'Daily (at bedtime)',
+        duration: 'Indefinite',
+        notes: 'High-intensity statin regardless of baseline LDL. For statin intolerance, consider rosuvastatin 20-40 mg or ezetimibe.',
+      },
+      monitoring: 'LDL goal <70 mg/dL. Check LFTs at baseline and 4-12 weeks. Monitor for myalgias. BP goal <130/80.',
+    },
     next: 'crao-prognosis',
   },
 

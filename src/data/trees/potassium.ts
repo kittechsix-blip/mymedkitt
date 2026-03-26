@@ -86,6 +86,17 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Moderate Hyperkalemia Management',
     body: '**[1] Treat definable causes:**\n\u2022 Discontinue offending medications and nephrotoxins\n\u2022 Establish euvolemia with adequate perfusion\n\u2022 Consider renal diet with limited K+ intake\n\n**[2] Gentle kaliuresis:**\n\u2022 [Furosemide](#/drug/furosemide) 40-80 mg IV \u2014 may be sufficient as sole diuretic\n\u2022 Replace urine volume with Lactated Ringers to maintain even fluid balance\n\nIf single diuretic fails \u2192 escalate to aggressive kaliuresis strategy.',
     citation: [1],
+    treatment: {
+      firstLine: {
+        drug: 'Furosemide',
+        dose: '40-80 mg',
+        route: 'IV',
+        frequency: 'Once, may repeat',
+        duration: 'Until K+ normalizes',
+        notes: 'May be sufficient as sole diuretic in moderate hyperkalemia with normal renal function',
+      },
+      monitoring: 'Monitor urine output, replace urine losses with LR to maintain euvolemia. Recheck K+ in 2-4 hours.',
+    },
     next: 'k-hyper-step3',
   },
 
@@ -110,6 +121,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'IV Calcium \u2014 Membrane Stabilization',
     body: '**Indications:** ECG changes (especially bradycardia, QRS widening, conduction delays). Controversial for isolated peaked T-waves.\n\n**Dosing:**\n\u2022 Peripheral access: [Calcium Gluconate](#/drug/calcium-gluconate) **3 grams IV over 10 minutes**\n\u2022 Central access: [Calcium Chloride](#/drug/calcium-chloride) **1 gram IV over 10 minutes**\n\n**Duration:** 30-60 minutes only \u2014 may need to repeat 1-2 times.\n\nRapid IV calcium may cause flushing, nausea, abdominal discomfort.\n\n**Hyperkalemia is generally more dangerous than hypercalcemia** \u2014 err on the side of treating. Avoid pushing ionized calcium >3 mM.',
     citation: [1, 2, 11],
+    treatment: {
+      firstLine: {
+        drug: 'Calcium Gluconate',
+        dose: '3 grams',
+        route: 'IV over 10 minutes',
+        frequency: 'May repeat 1-2 times',
+        duration: '30-60 minutes effect',
+        notes: 'Peripheral access. For central access use Calcium Chloride 1g IV.',
+      },
+      alternative: {
+        drug: 'Calcium Chloride',
+        dose: '1 gram',
+        route: 'IV over 10 minutes (central line)',
+        frequency: 'May repeat 1-2 times',
+        duration: '30-60 minutes effect',
+        notes: 'Requires central access due to extravasation risk',
+      },
+      monitoring: 'Repeat ECG. Avoid ionized calcium >3 mM. Watch for flushing, nausea, abdominal discomfort.',
+    },
     next: 'k-hyper-insulin',
   },
 
@@ -120,6 +150,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Insulin + Dextrose \u2014 K+ Shift',
     body: '**[Regular Insulin](#/drug/regular-insulin) 5 units IV bolus** (must be IV, NOT subcutaneous).\n\n**Dextrose co-administration:**\n\u2022 Glucose < 250 mg/dL \u2192 **D50W 2 ampules** (100 mL total) OR **D10W 500 mL over 4 hours** (preferred \u2014 less rebound hypoglycemia)\n\u2022 Glucose 180-250 \u2192 half-dose dextrose (25g)\n\u2022 Glucose > 250 \u2192 no dextrose needed\n\n**Monitor fingerstick glucose q1h for 4-6 hours.** If glucose < 70 \u2192 give additional dextrose.\n\n**Effect:** Onset 15-30 min. K+ reduction: 0.5-1.2 mEq/L. Duration: ~4 hours \u2014 plan for redosing or definitive therapy.',
     citation: [1, 3, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Regular Insulin + Dextrose',
+        dose: '5 units Regular Insulin + D10W 500 mL',
+        route: 'IV bolus (insulin) + IV infusion (D10W)',
+        frequency: 'Once, may redose in 4 hours',
+        duration: '4 hours effect',
+        notes: 'D10W over 4 hours preferred over D50W (less rebound hypoglycemia). Skip dextrose if glucose >250.',
+      },
+      alternative: {
+        drug: 'Regular Insulin + D50W',
+        dose: '5 units Regular Insulin + 2 ampules D50W (50g)',
+        route: 'IV bolus (both)',
+        frequency: 'Once, may redose in 4 hours',
+        duration: '4 hours effect',
+        notes: 'Higher risk of rebound hypoglycemia. Half-dose dextrose if glucose 180-250.',
+      },
+      monitoring: 'Fingerstick glucose q1h for 4-6 hours. Give additional dextrose if glucose <70.',
+    },
     next: 'k-hyper-beta2',
   },
 
@@ -130,6 +179,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Beta-2 Agonist \u2014 K+ Shift',
     body: '**Preferred:** [Terbutaline](#/drug/terbutaline) **0.5 mg SQ** \u2014 single injection, logistically superior.\n\n**Alternative:** [Albuterol](#/drug/albuterol-neb) **10-20 mg nebulized** (4-8 standard nebs back-to-back). Nearly always underdosed in practice \u2014 a single 2.5 mg neb is inadequate.\n\n**If hypotensive/bradycardic:** [Epinephrine](#/drug/epinephrine) infusion \u2014 treats both hyperkalemia AND hemodynamic instability simultaneously.\n\n**Effect:** Onset 5-30 min. K+ reduction: 0.5-1 mEq/L. Duration: 2-4 hours. Efficacy ~50% lower in ESRD.',
     citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Terbutaline',
+        dose: '0.5 mg',
+        route: 'Subcutaneous',
+        frequency: 'Once',
+        duration: '2-4 hours effect',
+        notes: 'Single injection, logistically superior to nebulized albuterol',
+      },
+      alternative: {
+        drug: 'Albuterol',
+        dose: '10-20 mg (4-8 standard nebs)',
+        route: 'Nebulized back-to-back',
+        frequency: 'Once',
+        duration: '2-4 hours effect',
+        notes: 'A single 2.5 mg neb is inadequate. Efficacy ~50% lower in ESRD.',
+      },
+      monitoring: 'Monitor heart rate. Watch for tremor, tachycardia. Onset 5-30 min.',
+    },
     next: 'k-hyper-step2',
   },
 
@@ -161,6 +229,17 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Isotonic Bicarbonate Resuscitation',
     body: '**Preparation:** 3 ampules NaHCO\u2083 in 1 liter D5W = **150 mM isotonic bicarbonate solution**.\n\n**Dosing:** 500-1000 mL/hour if severely hypovolemic. Target serum bicarb 24-28 mEq/L.\n\n**Isotonic bicarb lowers K+ three ways:**\n1. Dilution\n2. Shifting K+ into muscle cells\n3. Alkalosis promotes renal K+ excretion\n\n**Common mistake:** Giving isotonic bicarb at 100-150 mL/hr alongside another crystalloid. This prevents achieving the full benefit \u2014 use isotonic bicarb AS the resuscitative fluid.\n\n**AVOID hypertonic bicarbonate** (ampules alone) \u2014 proven ineffective in multiple RCTs. Osmotic shifts counteract the K-lowering effect.\n\nOnce bicarb > 24 and still hypovolemic \u2192 switch to LR for remaining volume.',
     citation: [1, 8, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Isotonic Sodium Bicarbonate',
+        dose: '3 ampules NaHCO3 in 1 L D5W (150 mM solution)',
+        route: 'IV infusion',
+        frequency: '500-1000 mL/hour if severely hypovolemic',
+        duration: 'Until serum bicarb 24-28 mEq/L',
+        notes: 'Use AS the resuscitative fluid, not alongside other crystalloids. Switch to LR once bicarb >24.',
+      },
+      monitoring: 'Serum bicarbonate, K+, volume status. Avoid hypertonic bicarb ampules alone (proven ineffective).',
+    },
     next: 'k-hyper-step3',
   },
 
@@ -171,6 +250,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Step 3: Kaliuresis (Diuretic Strategy)',
     body: 'Scale diuretic intensity to severity of hyperkalemia and renal function.\n\n**Normal renal function:**\n\u2022 [Furosemide](#/drug/furosemide) 60-160 mg IV alone may suffice\n\n**Moderate-severe renal dysfunction ("nephron bomb"):**\n\u2022 [Furosemide](#/drug/furosemide) 160-250 mg IV (or [Bumetanide](#/drug/bumetanide) 4-5 mg IV)\n\u2022 + [Chlorothiazide](#/drug/chlorothiazide) 500-1000 mg IV (or [Metolazone](#/drug/metolazone) 5-10 mg PO)\n\u2022 +/- [Acetazolamide](#/drug/acetazolamide) 250-1000 mg IV/PO\n\u2022 +/- [Fludrocortisone](#/drug/fludrocortisone) 0.2 mg PO (esp. patients on ACEi/ARB, tacrolimus)\n\n**Replace urine losses** with crystalloid:\n\u2022 Bicarb < 22 \u2192 isotonic bicarbonate\n\u2022 Bicarb \u2265 22 \u2192 Lactated Ringers\n\nIn life-threatening hyperK, **err on the side of excessive diuretic**. Large-volume diuresis is easily corrected with crystalloid.',
     citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Furosemide + Chlorothiazide (Nephron Bomb)',
+        dose: 'Furosemide 160-250 mg IV + Chlorothiazide 500-1000 mg IV',
+        route: 'IV',
+        frequency: 'Once, may repeat',
+        duration: 'Until adequate urine output and K+ improving',
+        notes: 'For moderate-severe renal dysfunction. Add Acetazolamide 250-1000 mg and/or Fludrocortisone 0.2 mg PO PRN.',
+      },
+      alternative: {
+        drug: 'Furosemide (monotherapy)',
+        dose: '60-160 mg',
+        route: 'IV',
+        frequency: 'Once, may repeat',
+        duration: 'Until adequate urine output and K+ improving',
+        notes: 'May suffice alone with normal renal function',
+      },
+      monitoring: 'Urine output, replace losses with LR (bicarb >22) or isotonic bicarb (bicarb <22). Check K+, Mg frequently.',
+    },
     next: 'k-hyper-step3-response',
   },
 
@@ -206,6 +304,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Step 4: Potassium Binders',
     body: '[Lokelma (SZC)](#/drug/sodium-zirconium-cyclosilicate) **10 grams PO q8h**\n\nOnly **mildly effective** (~0.2 mM reduction at 4 hours, ~0.4 mM at 24 hours). Should NOT be relied upon as sole treatment.\n\nMay help **avoid or delay dialysis** in borderline cases.\n\n**Avoid Kayexalate** \u2014 antiquated, probably ineffective for acute hyperK, and can cause **colonic necrosis**.\n\nPatiromer is less effective than SZC (~0.23 mM at 7 hours). Only use if SZC unavailable.',
     citation: [1, 12, 13],
+    treatment: {
+      firstLine: {
+        drug: 'Sodium Zirconium Cyclosilicate (Lokelma)',
+        dose: '10 grams',
+        route: 'PO',
+        frequency: 'Every 8 hours',
+        duration: 'Until K+ normalized or dialysis initiated',
+        notes: 'Mildly effective (~0.2-0.4 mM reduction). Do NOT rely on as sole treatment. May delay dialysis.',
+      },
+      alternative: {
+        drug: 'Patiromer',
+        dose: '8.4 grams',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Until K+ normalized',
+        notes: 'Less effective than SZC. Only use if SZC unavailable. Avoid Kayexalate (colonic necrosis risk).',
+      },
+      monitoring: 'Recheck K+ in 4-6 hours. Do NOT delay dialysis if indicated.',
+    },
     next: 'k-hyper-monitor',
   },
 
@@ -266,6 +383,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Severe Hypokalemia \u2014 IV Replacement',
     body: '[Potassium Chloride IV](#/drug/potassium-chloride-iv) **5-10 mEq over 15-30 minutes** with continuous cardiac monitoring.\n\nRepeat until hemodynamically stable, ECG changes resolve, and K+ > 3 mEq/L. Then:\n\u2022 20-40 mEq IV at up to 10 mEq/hr (peripheral)\n\u2022 Up to 20 mEq/hr (central line + cardiac monitoring)\n\n**Use glucose-free fluids** \u2014 glucose stimulates insulin and worsens intracellular K+ shift.\n\n**Always check and correct magnesium** \u2014 up to 50% of hypokalemic patients have concurrent hypoMg, which makes K+ repletion refractory.\n\nIf Mg < 2.0 \u2192 [Magnesium Sulfate](#/drug/magnesium-sulfate/hypomagnesemia) 2g IV over 1 hour.',
     citation: [14, 15, 16],
+    treatment: {
+      firstLine: {
+        drug: 'Potassium Chloride IV',
+        dose: '5-10 mEq',
+        route: 'IV over 15-30 minutes',
+        frequency: 'Repeat until K+ >3 mEq/L, then 20-40 mEq at 10 mEq/hr',
+        duration: 'Until hemodynamically stable and ECG normalized',
+        notes: 'Use glucose-free fluids. Up to 20 mEq/hr with central line. Peripheral max 10 mEq/hr.',
+      },
+      alternative: {
+        drug: 'Magnesium Sulfate',
+        dose: '2 grams',
+        route: 'IV over 1 hour',
+        frequency: 'Once',
+        duration: 'If Mg <2.0',
+        notes: 'Up to 50% of hypoK have concurrent hypoMg. Correct Mg for effective K+ repletion.',
+      },
+      monitoring: 'Continuous cardiac monitoring. Recheck K+ frequently. Always check and correct magnesium.',
+    },
     next: 'k-hypo-workup',
   },
 
@@ -276,6 +412,17 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'Mild-Moderate Hypokalemia \u2014 Oral Replacement',
     body: '[Potassium Chloride Oral](#/drug/potassium-chloride-oral) **20-40 mEq PO**\n\nEach 20 mEq raises serum K+ ~0.2 mEq/L. KCl is the **preferred salt** (most causes of hypoK involve concurrent chloride losses).\n\nRecheck K+ in 2-4 hours.\n\n**Target K+ \u2265 4.0 mEq/L** \u2014 especially in heart failure and arrhythmia-prone patients.\n\n**Dietary potassium alone is INSUFFICIENT** \u2014 food K+ is coupled with phosphate, not chloride, and ineffective for replacing chloride-associated losses.\n\n**Always check magnesium** \u2014 hypoMg causes refractory hypokalemia via ROMK channel dysfunction.',
     citation: [14, 15, 16],
+    treatment: {
+      firstLine: {
+        drug: 'Potassium Chloride Oral',
+        dose: '20-40 mEq',
+        route: 'PO',
+        frequency: 'Once, may repeat',
+        duration: 'Until K+ at target',
+        notes: 'Each 20 mEq raises K+ ~0.2 mEq/L. KCl preferred over other potassium salts.',
+      },
+      monitoring: 'Recheck K+ in 2-4 hours. Target K+ >=4.0 mEq/L. Always check magnesium.',
+    },
     next: 'k-hypo-workup',
   },
 
@@ -331,6 +478,25 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     title: 'HypoPP: Acute Attack Management',
     body: '**CRITICAL: This is NOT true K+ depletion \u2014 aggressive replacement causes dangerous rebound hyperkalemia.**\n\n[Potassium Chloride Oral](#/drug/potassium-chloride-oral) **1 mEq/kg oral** (~60 mEq for 60 kg patient)\n\u2022 Use **immediate-release or liquid** formulation ONLY\n\u2022 **AVOID slow-release** KCl \u2014 too slow and unpredictable\n\u2022 If no improvement in 30 min \u2192 0.3 mEq/kg additional dose\n\u2022 Monitor K+ every 30 minutes\n\n**For severe attacks requiring IV:**\n\u2022 Max rate 0.3 mEq/kg/hr with continuous cardiac monitoring\n\n**AVOID:**\n\u2022 Glucose-containing fluids (worsens intracellular shift)\n\u2022 Corticosteroids (known trigger)\n\u2022 Aggressive IV KCl (rebound hyperkalemia)\n\n**Resolution of weakness may lag behind K+ normalization.**',
     citation: [17, 18],
+    treatment: {
+      firstLine: {
+        drug: 'Potassium Chloride Oral (immediate-release)',
+        dose: '1 mEq/kg (~60 mEq for 60 kg patient)',
+        route: 'PO (immediate-release or liquid only)',
+        frequency: 'Once, may add 0.3 mEq/kg if no improvement in 30 min',
+        duration: 'Until weakness resolves',
+        notes: 'AVOID slow-release KCl. This is transcellular shift, NOT true depletion.',
+      },
+      alternative: {
+        drug: 'Potassium Chloride IV (severe attacks)',
+        dose: 'Max 0.3 mEq/kg/hr',
+        route: 'IV with continuous cardiac monitoring',
+        frequency: 'Continuous infusion',
+        duration: 'Until clinical improvement',
+        notes: 'Avoid aggressive IV replacement - risk of rebound hyperkalemia.',
+      },
+      monitoring: 'K+ every 30 minutes. Avoid glucose-containing fluids and corticosteroids. Weakness may lag K+ normalization.',
+    },
     next: 'k-hypopp-prevent',
   },
 

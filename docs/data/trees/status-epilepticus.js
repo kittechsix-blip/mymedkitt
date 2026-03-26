@@ -92,6 +92,25 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'IV Lorazepam (First-Line)',
         body: '[Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg/dose), push over 2 min.\n\n**May repeat once** in 5-10 minutes if seizure persists. Total max: 8 mg.\n\n**Alternative if lorazepam unavailable:**\n• [Diazepam](#/drug/diazepam/status epilepticus iv) 0.15-0.2 mg/kg IV (max 10 mg), repeat once\n\nLorazepam is preferred over diazepam — higher seizure termination rate (65% vs 56%) and longer duration of action.\n\n**Monitor for respiratory depression** — have bag-valve mask and suction at bedside. Patients who received multiple BZD doses from EMS are at higher risk.',
         citation: [1, 2, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Lorazepam',
+                dose: '0.1 mg/kg IV (max 4 mg/dose)',
+                route: 'IV push',
+                frequency: 'May repeat once in 5-10 min',
+                duration: 'Total max 8 mg',
+                notes: 'Push over 2 min. Monitor for respiratory depression.',
+            },
+            alternative: {
+                drug: 'Diazepam',
+                dose: '0.15-0.2 mg/kg IV (max 10 mg)',
+                route: 'IV',
+                frequency: 'Repeat once if needed',
+                duration: 'Single dose or repeat x1',
+                notes: 'Use if lorazepam unavailable. Lower seizure termination rate (56% vs 65%).',
+            },
+            monitoring: 'Continuous pulse oximetry, respiratory monitoring. Have BVM and suction at bedside.',
+        },
         next: 'se-bzd-response',
     },
     {
@@ -101,6 +120,25 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'IM Midazolam (No IV Access)',
         body: '[Midazolam](#/drug/midazolam/status epilepticus im) 0.2 mg/kg IM (max 10 mg) into deltoid or vastus lateralis.\n\n**RAMPART trial:** IM midazolam terminated seizures in 73% vs 63% for IV lorazepam (p<.001). Faster time to treatment offset the slightly slower IM onset.\n\n**Weight-based dosing:**\n• ≥40 kg: 10 mg IM\n• 13-40 kg: 5 mg IM\n\n**Alternative routes:**\n• Intranasal midazolam: 0.2 mg/kg via mucosal atomizer (less effective than IM per Guterman et al)\n• [Diazepam](#/drug/diazepam/status epilepticus rectal) 0.2-0.5 mg/kg PR (max 20 mg) — no longer recommended as first-line\n\n**Continue attempting IV access** — will be needed for 2nd-line agents if BZD fails.',
         citation: [1, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Midazolam',
+                dose: '0.2 mg/kg IM (max 10 mg)',
+                route: 'IM (deltoid or vastus lateralis)',
+                frequency: 'Single dose',
+                duration: 'Once',
+                notes: 'Weight-based: >=40 kg give 10 mg, 13-40 kg give 5 mg. RAMPART showed 73% seizure termination.',
+            },
+            alternative: {
+                drug: 'Diazepam',
+                dose: '0.2-0.5 mg/kg PR (max 20 mg)',
+                route: 'PR',
+                frequency: 'Single dose',
+                duration: 'Once',
+                notes: 'No longer recommended as first-line. Use if midazolam unavailable.',
+            },
+            monitoring: 'Continue attempting IV access. Monitor respiratory status.',
+        },
         next: 'se-bzd-response',
     },
     {
@@ -208,6 +246,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Levetiracetam (Keppra)',
         body: '[Levetiracetam](#/drug/levetiracetam/status epilepticus) 60 mg/kg IV (max 4500 mg) over 10-15 min.\n\n**ESETT:** 47% seizure termination at 60 min (equivalent to fosphenytoin and valproate).\n\n**Advantages:**\n• No cardiac effects — no telemetry requirement during infusion\n• No hepatic metabolism — no drug interactions\n• Safe in renal impairment (dose adjust if CrCl <50)\n• Safe in pregnancy (Category C, low teratogenicity — preferred 2nd line in pregnant patients)\n• Minimal drug-drug interactions\n\n**Side effects:** Psychiatric symptoms (irritability, agitation), drowsiness. Use with caution in patients with mood disorders.',
         citation: [1, 6, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Levetiracetam (Keppra)',
+                dose: '60 mg/kg IV (max 4500 mg)',
+                route: 'IV infusion',
+                frequency: 'Single loading dose',
+                duration: 'Infuse over 10-15 min',
+                notes: 'No cardiac monitoring required. Safe in pregnancy. Dose adjust if CrCl <50.',
+            },
+            monitoring: 'No telemetry required during infusion. Monitor for psychiatric symptoms. Renal function for maintenance dosing.',
+        },
         next: 'se-2nd-line-response',
     },
     {
@@ -217,6 +266,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Valproate Sodium (Depacon)',
         body: '[Valproate](#/drug/valproate/status epilepticus) 40 mg/kg IV (max 3000 mg) over 10 min.\n\n**ESETT:** 46% seizure termination at 60 min.\n\n**Contraindicated in:**\n• Pregnancy (teratogenic — neural tube defects, Category X)\n• Hepatic disease / liver failure\n• Mitochondrial disorders (Alpers syndrome — fatal hepatotoxicity)\n• Known or suspected urea cycle disorders\n• Pancreatitis\n\n**Cautions:**\n• Thrombocytopenia / coagulopathy — check platelets\n• May cause hyperammonemia — check ammonia if altered mental status persists after seizure cessation\n• Well-tolerated even with larger doses and faster rates of infusion',
         citation: [1, 6, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Valproate Sodium (Depacon)',
+                dose: '40 mg/kg IV (max 3000 mg)',
+                route: 'IV infusion',
+                frequency: 'Single loading dose',
+                duration: 'Infuse over 10 min',
+                notes: 'Contraindicated in pregnancy (Category X), hepatic disease, mitochondrial disorders, urea cycle disorders.',
+            },
+            monitoring: 'Check platelets before administration. Monitor ammonia if AMS persists post-seizure. LFTs.',
+        },
         next: 'se-2nd-line-response',
     },
     {
@@ -226,6 +286,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Fosphenytoin (Cerebyx)',
         body: '[Fosphenytoin](#/drug/fosphenytoin/status epilepticus) 20 mg PE/kg IV (max 1500 mg PE) at max rate 150 mg PE/min.\n\n**ESETT:** 45% seizure termination at 60 min.\n\n**Requires cardiac monitoring** during and for 20 min after infusion — risk of:\n• Hypotension\n• Cardiac arrhythmia (bradycardia, QT prolongation)\n• AV block\n\n**INEFFECTIVE** for drug/alcohol-induced seizures — phenytoin\'s selective action on voltage-gated sodium channels is insufficient for diffuse CNS toxicity.\n\n**Contraindicated in:**\n• Sinus bradycardia, SA/AV block, Adams-Stokes syndrome\n• Decompensated heart failure\n\n**Note:** Fosphenytoin (water-soluble prodrug) is preferred over phenytoin — no risk of purple glove syndrome, can be given IM. Dosed in **PE (phenytoin equivalents)**.',
         citation: [1, 6, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Fosphenytoin (Cerebyx)',
+                dose: '20 mg PE/kg IV (max 1500 mg PE)',
+                route: 'IV infusion',
+                frequency: 'Single loading dose',
+                duration: 'Max rate 150 mg PE/min',
+                notes: 'Dosed in PE (phenytoin equivalents). Ineffective for drug/alcohol-induced seizures. Contraindicated in bradycardia, heart block, decompensated HF.',
+            },
+            monitoring: 'Continuous cardiac monitoring during infusion and for 20 min after. Monitor for hypotension, bradycardia, QT prolongation.',
+        },
         next: 'se-2nd-line-response',
     },
     {
@@ -259,6 +330,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Phenobarbital',
         body: '[Phenobarbital](#/drug/phenobarbital/status epilepticus) 15-20 mg/kg IV at max rate 50-100 mg/min. Max single dose: 2000 mg.\n\n**Use when ESETT agents (levetiracetam, valproate, fosphenytoin) are unavailable** or contraindicated.\n\n**Significant risks:**\n• Respiratory depression — may precipitate need for intubation\n• Hypotension\n• Excessive sedation\n\n**Have intubation supplies ready** before administration.\n\n**Also first-line for:**\n• Neonatal seizures\n• Benzodiazepine-resistant alcohol withdrawal seizures\n\nWhen benzodiazepines are completely unavailable, [phenobarbital](#/drug/phenobarbital/status epilepticus) IV 15-20 mg/kg may be used as first-line emergent therapy.',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Phenobarbital',
+                dose: '15-20 mg/kg IV (max 2000 mg)',
+                route: 'IV infusion',
+                frequency: 'Single loading dose',
+                duration: 'Max rate 50-100 mg/min',
+                notes: 'Use when ESETT agents unavailable. Also first-line for neonatal seizures and BZD-resistant alcohol withdrawal.',
+            },
+            monitoring: 'Have intubation supplies ready. Monitor respiratory status, BP. High risk of respiratory depression and hypotension.',
+        },
         next: 'se-2nd-line-response',
     },
     {
@@ -278,6 +360,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Refractory SE — Intubation & Preparation',
         body: '**Refractory SE (RSE)** = failure of first-line BZD AND adequate second-line ASM.\n\nOccurs in ~30-40% of SE presentations.\n\n**Immediate actions:**\n• Secure airway with rapid sequence intubation\n• Avoid prolonged paralysis — use short-acting agent (succinylcholine preferred over rocuronium) to allow clinical seizure assessment\n• Arterial line for continuous BP monitoring\n• Central venous access for vasopressors if needed\n• **Continuous EEG monitoring — MANDATORY** (cannot assess seizure activity in paralyzed/sedated patient)\n\n[RSE Management Principles](#/info/se-rse-principles) — intubation considerations, EEG targets, weaning protocol.\n\n**Consider adding another 2nd-line ASM** (e.g., [Lacosamide](#/drug/lacosamide/status epilepticus) 200-400 mg IV) as adjunct before or concurrent with anesthetic infusion.',
         citation: [1, 2, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Lacosamide (adjunct)',
+                dose: '200-400 mg IV',
+                route: 'IV',
+                frequency: 'Single dose',
+                duration: 'As adjunct to anesthetic infusion',
+                notes: 'Consider adding as adjunct before or concurrent with anesthetic infusion.',
+            },
+            monitoring: 'Continuous EEG monitoring mandatory. Arterial line for BP. Central venous access for vasopressors.',
+        },
         next: 'se-rse-infusion',
     },
     {
@@ -317,6 +410,25 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'RSE/SRSE Monitoring & Weaning',
         body: '**Continuous EEG targets:**\n• Burst suppression (3-10 sec bursts, <50% suppression ratio)\n• OR complete seizure suppression (depending on clinical scenario)\n\n**Maintenance:** 24-48 hours of seizure suppression before first wean attempt.\n\n**Weaning protocol:**\n• Reduce infusion by 25% every 4-6 hours with continuous EEG\n• If seizures recur on wean → restart at effective dose, extend 24h, retry\n\n**Super-refractory SE (SRSE):** SE persists or recurs despite 24 hours of anesthetic therapy.\n\n**SRSE options:**\n• Switch to different anesthetic agent\n• [Lacosamide](#/drug/lacosamide/status epilepticus) as adjunct\n• Immunotherapy if autoimmune etiology suspected (IVIG, steroids, plasmapheresis)\n• Therapeutic hypothermia (32-35°C)\n• Ketogenic diet\n• Neurology and neurointensive care consultation essential\n\n**NORSE (new-onset refractory SE):** No prior seizure history, no identifiable cause. ~50% remain cryptogenic. Consider autoimmune/paraneoplastic encephalitis panel.',
         citation: [1, 2, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Midazolam infusion',
+                dose: 'Load 0.2 mg/kg, then 0.05-2 mg/kg/hr',
+                route: 'IV continuous infusion',
+                frequency: 'Continuous',
+                duration: '24-48 hr of burst suppression before wean',
+                notes: 'Lowest hemodynamic impact, easier to wean. Wean by 25% every 4-6 hours.',
+            },
+            alternative: {
+                drug: 'Propofol infusion',
+                dose: 'Load 1-2 mg/kg, then 30-200 mcg/kg/min',
+                route: 'IV continuous infusion',
+                frequency: 'Continuous',
+                duration: '24-48 hr then wean',
+                notes: 'Watch for propofol infusion syndrome (PRIS). Max 5 mg/kg/hr, max 48 hours at high dose.',
+            },
+            monitoring: 'Continuous EEG mandatory. Target burst suppression or seizure suppression. Wean 25% every 4-6 hr. If seizures recur, restart effective dose and extend 24h.',
+        },
         next: 'se-disposition',
     },
     {
@@ -339,6 +451,25 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Pregnancy / Eclampsia',
         body: '**First question: Is this eclampsia or epilepsy?**\n\n**Eclampsia** if: hypertension, proteinuria, edema, >20 weeks gestation, or new-onset seizure in pregnancy without prior seizure history.\n\n**Eclampsia treatment:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/eclampsia) 4-6 g IV over 15-20 min, then 1-2 g/hr infusion\n• If seizures persist despite magnesium → benzodiazepines (lorazepam)\n• **OB consultation STAT** — consider emergent delivery\n• Fetal monitoring\n\n**Epilepsy in pregnancy (breakthrough SE):**\n• Standard BZD first-line\n• For 2nd-line: **prefer [Levetiracetam](#/drug/levetiracetam/status epilepticus)** — 89% of neurologists chose it as first-line after BZD in pregnancy\n• **AVOID [Valproate](#/drug/valproate/status epilepticus)** — teratogenic (neural tube defects), Category X\n• Fosphenytoin acceptable if needed (teratogenic risk mainly with chronic exposure, less concern for acute SE)\n• Refractory SE: midazolam or propofol infusion + consider early delivery\n\n**All pregnant patients with new seizure** should receive empiric magnesium while further workup obtained.',
         citation: [1, 9, 10],
+        treatment: {
+            firstLine: {
+                drug: 'Magnesium Sulfate',
+                dose: '4-6 g IV load, then 1-2 g/hr infusion',
+                route: 'IV',
+                frequency: 'Load then continuous infusion',
+                duration: 'Until seizures controlled and delivery',
+                notes: 'First-line for eclampsia. Give empirically to all pregnant patients with new seizure.',
+            },
+            alternative: {
+                drug: 'Levetiracetam',
+                dose: '60 mg/kg IV (max 4500 mg)',
+                route: 'IV',
+                frequency: 'Single loading dose',
+                duration: 'Over 10-15 min',
+                notes: 'Preferred 2nd-line ASM in pregnancy. AVOID valproate (Category X).',
+            },
+            monitoring: 'Fetal monitoring. OB consultation STAT. Consider emergent delivery. Monitor Mg levels (therapeutic 4-7 mEq/L), reflexes, respiratory status.',
+        },
         next: 'se-2nd-line-choice',
     },
     {
@@ -348,6 +479,25 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Substance-Induced SE',
         body: '**9% of SE cases are substance-induced.**\n\n**Isoniazid (INH) toxicity:**\n• [Pyridoxine (Vitamin B6)](#/drug/pyridoxine/inh toxicity) is the specific antidote\n• Dose: gram-for-gram to amount ingested, OR 5 g IV empiric if amount unknown\n• INH depletes pyridoxine → GABA synthesis fails → refractory seizures\n• Standard ASMs are ineffective without pyridoxine\n\n**Alcohol withdrawal:**\n• Benzodiazepines are first-line (high-dose may be needed)\n• [Phenobarbital](#/drug/phenobarbital/status epilepticus) is effective adjunct\n• Fosphenytoin/phenytoin INEFFECTIVE for alcohol withdrawal seizures\n\n**Sympathomimetic toxicity** (cocaine, methamphetamine, MDMA):\n• BZDs first-line\n• Avoid phenytoin\n\n**General principle:** Phenytoin/fosphenytoin is often **ineffective** for drug-induced seizures — phenytoin\'s selective action on voltage-gated sodium channels cannot overcome diffuse CNS toxicity from other drug mechanisms.\n\n**Treat the underlying toxidrome** alongside seizure management.',
         citation: [1, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Pyridoxine (Vitamin B6)',
+                dose: 'Gram-for-gram to INH ingested, or 5 g IV empiric',
+                route: 'IV',
+                frequency: 'Single dose',
+                duration: 'Immediate',
+                notes: 'Specific antidote for INH toxicity. Standard ASMs ineffective without pyridoxine.',
+            },
+            alternative: {
+                drug: 'Phenobarbital',
+                dose: '15-20 mg/kg IV',
+                route: 'IV',
+                frequency: 'Single loading dose',
+                duration: 'Max rate 50-100 mg/min',
+                notes: 'Effective adjunct for alcohol withdrawal seizures. Phenytoin/fosphenytoin ineffective for drug-induced SE.',
+            },
+            monitoring: 'Treat underlying toxidrome. Avoid phenytoin in drug/alcohol-induced SE. High-dose BZD may be needed.',
+        },
         next: 'se-2nd-line-choice',
     },
     {
@@ -357,6 +507,33 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Pediatric Considerations',
         body: '**Same treatment algorithm as adults** — BZD first-line, then 2nd-line ASM, then anesthetic infusions.\n\n**BZD dosing (weight-based):**\n• IV [Lorazepam](#/drug/lorazepam/status epilepticus): 0.1 mg/kg (max 4 mg), repeat × 1\n• IM [Midazolam](#/drug/midazolam/status epilepticus): 13-40 kg → 5 mg; ≥40 kg → 10 mg (0.2 mg/kg, max 10 mg)\n• Rectal [Diazepam](#/drug/diazepam/status epilepticus): 0.2-0.5 mg/kg (max 20 mg)\n\n**2nd-line ASM:** Same agents and weight-based dosing as adults (per ESETT, which included pediatric patients).\n• EcLiPSE and ConSEPT trials confirmed levetiracetam and phenytoin are equivalent in pediatric convulsive SE\n\n**Pediatric-specific considerations:**\n• **Pyridoxine-dependent epilepsy** (age <2 yr): Give [Pyridoxine](#/drug/pyridoxine/pyridoxine dependent epilepsy) 100 mg IV if SE is refractory and no clear etiology — especially neonates with refractory seizures\n• **Febrile SE:** Most common etiology in children — workup directed at fever source\n• **Inborn errors of metabolism:** Consider in neonates/infants with unexplained SE\n• **Phenobarbital** remains first-line for neonatal seizures\n\n**Weight estimation:** <1 yr: (months × 0.5) + 3.5 kg | 1-10 yr: (years × 2) + 10 kg | >10 yr: (years × 2) + 20 kg',
         citation: [1, 2, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Lorazepam (pediatric)',
+                dose: '0.1 mg/kg IV (max 4 mg)',
+                route: 'IV',
+                frequency: 'May repeat once',
+                duration: 'Push over 2 min',
+                notes: 'Same algorithm as adults. Weight-based dosing.',
+            },
+            alternative: {
+                drug: 'Midazolam (pediatric)',
+                dose: '0.2 mg/kg IM (max 10 mg); 13-40 kg: 5 mg, >=40 kg: 10 mg',
+                route: 'IM',
+                frequency: 'Single dose',
+                duration: 'Immediate',
+                notes: 'Use when no IV access. Rectal diazepam 0.2-0.5 mg/kg (max 20 mg) also acceptable.',
+            },
+            pcnAllergy: {
+                drug: 'Pyridoxine (neonates/infants)',
+                dose: '100 mg IV',
+                route: 'IV',
+                frequency: 'Single dose',
+                duration: 'Immediate',
+                notes: 'Consider in refractory SE age <2 yr with no clear etiology. Rule out pyridoxine-dependent epilepsy.',
+            },
+            monitoring: 'Weight estimation formulas provided. Febrile SE most common in children. Phenobarbital first-line for neonatal seizures.',
+        },
         next: 'se-2nd-line-choice',
     },
     // =====================================================================
@@ -369,6 +546,17 @@ export const STATUS_EPILEPTICUS_NODES = [
         title: 'Nonconvulsive Status Epilepticus (NCSE)',
         body: 'NCSE accounts for up to **48% of patients with altered consciousness post-SE** (ESETT data).\n\n**Suspect NCSE if:**\n• Unexplained altered mental status after convulsive SE\n• Subtle motor signs: eye deviation, nystagmus, lip smacking, eyelid fluttering, myoclonus\n• Failure to return to baseline after initial seizure treatment\n• Acutely ill ICU patients (especially on neurotoxic medications: cephalosporins, methotrexate, baclofen, lithium, opioids)\n\n**Diagnosis:** Requires **EEG** — cannot diagnose clinically.\n\n[NCSE Diagnostic Criteria](#/info/se-ncse-criteria) — Salzburg criteria and BZD trial protocol.\n\n**BZD trial (diagnostic + therapeutic):**\n• Administer [lorazepam](#/drug/lorazepam/status epilepticus) 1-2 mg IV while monitoring EEG\n• Clinical AND EEG improvement → confirms NCSE diagnosis\n\n**Treatment:** Same escalating algorithm as convulsive SE (BZD → 2nd-line → anesthetic infusions), but **urgency of aggressive treatment is debated** — weigh risks of anesthetic agents and intubation against ongoing nonconvulsive seizure activity.\n\nNCSE generally has lower mortality than convulsive SE, but delay in diagnosis worsens outcomes.',
         citation: [1, 2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Lorazepam (BZD trial)',
+                dose: '1-2 mg IV',
+                route: 'IV',
+                frequency: 'Single dose during EEG',
+                duration: 'Diagnostic trial',
+                notes: 'BZD trial is both diagnostic and therapeutic. Clinical AND EEG improvement confirms NCSE.',
+            },
+            monitoring: 'EEG required for diagnosis. Clinical + EEG improvement confirms NCSE. Weigh risks of aggressive treatment against ongoing nonconvulsive activity.',
+        },
         next: 'se-iv-access',
     },
     {

@@ -102,6 +102,33 @@ export const NEUROSYPHILIS_NODES: DecisionNode[] = [
     body: 'A reactive CSF-VDRL is **diagnostic** of neurosyphilis.\n\n**First-line treatment:**\nAqueous crystalline penicillin G **18–24 million units/day** IV\n• 3–4 million units IV q4h, OR\n• Continuous infusion\n• Duration: **10–14 days**\n\n**Alternative (if IV not feasible):**\nProcaine penicillin 2.4 million units IM daily\nPLUS probenecid 500 mg PO QID\n× 10–14 days\n\n**PCN allergy:**\nDesensitization preferred. If not possible:\nCeftriaxone 2g IV/IM daily × 10–14 days (limited data)\n\n**Follow-up:**\n• Repeat CSF at 6 months\n• CSF pleocytosis should normalize first\n• Re-treat if CSF not improved at 6 months',
     citation: [1, 2],
     recommendation: 'Admit for IV Penicillin G. ID consult recommended.',
+    treatment: {
+      firstLine: {
+        drug: 'Aqueous crystalline penicillin G',
+        dose: '18-24 million units/day (3-4 million units per dose)',
+        route: 'IV',
+        frequency: 'q4h or continuous infusion',
+        duration: '10-14 days',
+        notes: 'Preferred regimen. Requires hospitalization.',
+      },
+      alternative: {
+        drug: 'Procaine penicillin G + Probenecid',
+        dose: 'Procaine PCN 2.4 million units + Probenecid 500 mg',
+        route: 'IM + PO',
+        frequency: 'Daily (PCN) + QID (probenecid)',
+        duration: '10-14 days',
+        notes: 'Use if IV access not feasible. Requires daily injections.',
+      },
+      pcnAllergy: {
+        drug: 'Ceftriaxone',
+        dose: '2 g',
+        route: 'IV or IM',
+        frequency: 'Daily',
+        duration: '10-14 days',
+        notes: 'Limited data. Desensitization to PCN preferred if possible.',
+      },
+      monitoring: 'Repeat CSF at 6 months. CSF pleocytosis should normalize first. Re-treat if CSF not improved at 6 months.',
+    },
   },
 
   {
@@ -112,6 +139,33 @@ export const NEUROSYPHILIS_NODES: DecisionNode[] = [
     body: 'CSF-VDRL negative but CSF pleocytosis (>5 WBC/µL) or elevated protein with neurological symptoms → **treat as neurosyphilis**.\n\n**Treatment** (same as confirmed):\nAqueous crystalline penicillin G **18–24 million units/day** IV\n• 3–4 million units IV q4h × 10–14 days\n\n**Follow-up:**\n• Repeat CSF at 6 months\n• If CSF not improving, re-treat',
     citation: [1, 2],
     recommendation: 'Treat as neurosyphilis. Repeat CSF at 6 months.',
+    treatment: {
+      firstLine: {
+        drug: 'Aqueous crystalline penicillin G',
+        dose: '18-24 million units/day (3-4 million units per dose)',
+        route: 'IV',
+        frequency: 'q4h or continuous infusion',
+        duration: '10-14 days',
+        notes: 'Same regimen as confirmed neurosyphilis.',
+      },
+      alternative: {
+        drug: 'Procaine penicillin G + Probenecid',
+        dose: 'Procaine PCN 2.4 million units + Probenecid 500 mg',
+        route: 'IM + PO',
+        frequency: 'Daily (PCN) + QID (probenecid)',
+        duration: '10-14 days',
+        notes: 'Use if IV access not feasible.',
+      },
+      pcnAllergy: {
+        drug: 'Ceftriaxone',
+        dose: '2 g',
+        route: 'IV or IM',
+        frequency: 'Daily',
+        duration: '10-14 days',
+        notes: 'Limited data. Desensitization to PCN preferred.',
+      },
+      monitoring: 'Repeat CSF at 6 months. Re-treat if CSF not improving.',
+    },
   },
 
   {
@@ -122,6 +176,25 @@ export const NEUROSYPHILIS_NODES: DecisionNode[] = [
     body: 'Normal CSF with non-reactive CSF-VDRL makes neurosyphilis unlikely.\n\n**Consider alternative diagnoses** for neurological symptoms.\n\n**Treat underlying syphilis stage:**\n• Early (primary/secondary/early latent): Benzathine PCN G 2.4M units IM × 1\n• Late latent: Benzathine PCN G 2.4M units IM weekly × 3 weeks\n\n**Re-evaluate** if symptoms progress or new neuro symptoms develop.',
     citation: [1],
     recommendation: 'Treat syphilis per stage. Neuro follow-up if symptoms persist.',
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'Once (early) or weekly x3 (late latent)',
+        duration: 'Single dose for early syphilis; 3 weeks for late latent',
+        notes: 'Treat underlying syphilis stage. Early = primary/secondary/early latent. Late latent = weekly x3 weeks.',
+      },
+      pcnAllergy: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '14 days (early) or 28 days (late latent)',
+        notes: 'Desensitization to PCN preferred. Duration depends on syphilis stage.',
+      },
+      monitoring: 'Quantitative nontreponemal titers at 6 and 12 months (early) or 6, 12, and 24 months (late latent). Re-evaluate if neurological symptoms progress.',
+    },
   },
 
   // =====================================================================
@@ -136,6 +209,33 @@ export const NEUROSYPHILIS_NODES: DecisionNode[] = [
     body: 'Ocular and otosyphilis can occur at **any stage** of syphilis and require treatment as neurosyphilis **regardless of CSF findings**.\n\n**Ocular manifestations:**\n• Uveitis (most common), optic neuritis\n• Retinitis, papillitis\n• Vision loss\n\n**Otic manifestations:**\n• Sensorineural hearing loss\n• Tinnitus, vertigo\n\n**Treatment:**\nAqueous crystalline penicillin G **18–24 million units/day** IV\n• 3–4 million units IV q4h × 10–14 days\n\n**Consults:**\n• Ophthalmology (ocular involvement)\n• ENT/Audiology (otic involvement)\n• Infectious Disease\n\nCSF examination is recommended but treatment should NOT be delayed.',
     citation: [1, 4],
     recommendation: 'Treat as neurosyphilis. Ophthalmology/ENT consult. ID consult.',
+    treatment: {
+      firstLine: {
+        drug: 'Aqueous crystalline penicillin G',
+        dose: '18-24 million units/day (3-4 million units per dose)',
+        route: 'IV',
+        frequency: 'q4h or continuous infusion',
+        duration: '10-14 days',
+        notes: 'Treat regardless of CSF findings. Do not delay for LP.',
+      },
+      alternative: {
+        drug: 'Procaine penicillin G + Probenecid',
+        dose: 'Procaine PCN 2.4 million units + Probenecid 500 mg',
+        route: 'IM + PO',
+        frequency: 'Daily (PCN) + QID (probenecid)',
+        duration: '10-14 days',
+        notes: 'Use if IV access not feasible.',
+      },
+      pcnAllergy: {
+        drug: 'Ceftriaxone',
+        dose: '2 g',
+        route: 'IV or IM',
+        frequency: 'Daily',
+        duration: '10-14 days',
+        notes: 'Limited data. Desensitization to PCN preferred.',
+      },
+      monitoring: 'Ophthalmology or ENT follow-up as appropriate. Repeat CSF at 6 months if LP performed.',
+    },
   },
 
   {
@@ -168,6 +268,25 @@ export const NEUROSYPHILIS_NODES: DecisionNode[] = [
     body: '**First-line:**\nBenzathine penicillin G 2.4 million units IM weekly × 3 weeks\n(Total: 7.2 million units)\n\n**PCN allergy:**\nDesensitization preferred.\nAlternative: [Doxycycline](#/drug/doxycycline/neurosyphilis) 100 mg PO BID × 28 days\n\n**Follow-up:**\n• Quantitative nontreponemal titers at 6, 12, and 24 months\n• 4-fold decline expected\n• If titers do not decline → evaluate for treatment failure, consider CSF exam',
     citation: [1],
     recommendation: 'Benzathine PCN G IM weekly × 3 weeks. Follow titers.',
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'Weekly',
+        duration: '3 weeks (total 7.2 million units)',
+        notes: 'Standard treatment for late latent syphilis without neurological involvement.',
+      },
+      pcnAllergy: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '28 days',
+        notes: 'Desensitization to PCN preferred. Doxycycline is alternative.',
+      },
+      monitoring: 'Quantitative nontreponemal titers at 6, 12, and 24 months. Expect 4-fold decline. If titers do not decline, evaluate for treatment failure and consider CSF exam.',
+    },
   },
 ];
 

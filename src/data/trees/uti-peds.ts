@@ -186,6 +186,33 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: '**First Line:** [Cephalexin](#/drug/cephalexin) 50 mg/kg/day divided TID–QID | Max 1 g/dose\n\n**Alternative:** [Amoxicillin-Clavulanate](#/drug/amoxicillin-clavulanate) 20–40 mg/kg/day divided BID | Max 875 mg/dose\n\n**If IgE-mediated allergy to penicillins AND cephalosporins:** [Ciprofloxacin](#/drug/ciprofloxacin) 20 mg/kg/day divided BID | Max 750 mg/dose\n\n**Medication intolerant, concern for compliance, or age <6 months:** Consider single dose [Ceftriaxone](#/drug/ceftriaxone/pediatric uti) 75 mg/kg IV or IM prior to discharge | Max 2 g/dose\n\n**Total duration:**\n• <6 months: IV + PO = **10 days**\n• ≥6 months: IV + PO = **7 days**\n\nTMP-SMX should be used with caution — only 71% susceptible among E. coli isolates.',
     citation: [1, 3],
     next: 'uti-ed-followup',
+    treatment: {
+      firstLine: {
+        drug: 'Cephalexin',
+        dose: '50 mg/kg/day',
+        route: 'PO',
+        frequency: 'TID-QID',
+        duration: '7 days (age ≥6 months) or 10 days (age <6 months)',
+        notes: 'Max 1 g/dose',
+      },
+      alternative: {
+        drug: 'Amoxicillin-Clavulanate',
+        dose: '20-40 mg/kg/day',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '7 days (age ≥6 months) or 10 days (age <6 months)',
+        notes: 'Max 875 mg/dose',
+      },
+      pcnAllergy: {
+        drug: 'Ciprofloxacin',
+        dose: '20 mg/kg/day',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '7 days (age ≥6 months) or 10 days (age <6 months)',
+        notes: 'Max 750 mg/dose. Use only for IgE-mediated allergy to penicillins AND cephalosporins.',
+      },
+      monitoring: 'Culture follow-up in 24-48 hours. Adjust antibiotics based on susceptibility results.',
+    },
   },
 
   {
@@ -196,6 +223,33 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: '**First Line:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h | Max 2 g/dose\n\n**If IgE-mediated allergy to penicillins AND cephalosporins:** Aztreonam 90 mg/kg/day divided q8h | Max 2 g/dose, plus Gentamicin 5–7 mg/kg/day q24h\n\n**If concern for CNS involvement:** [Ceftriaxone](#/drug/ceftriaxone/pediatric uti) 100 mg/kg/day divided q12h | Max 2 g/dose\n\n**Transition criteria:** 24–48 hours of IV therapy with clinical improvement. Assess susceptibility and narrow spectrum.\n\n**Total IV + PO = 7 days.**',
     citation: [1, 3, 4],
     next: 'uti-inpatient-dc',
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin',
+        dose: '50 mg/kg/day',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: '7 days total (IV + PO)',
+        notes: 'Max 2 g/dose. Transition to PO after 24-48 hours with clinical improvement.',
+      },
+      alternative: {
+        drug: 'Ceftriaxone',
+        dose: '100 mg/kg/day',
+        route: 'IV',
+        frequency: 'q12h',
+        duration: '7 days total (IV + PO)',
+        notes: 'Max 2 g/dose. Use if concern for CNS involvement.',
+      },
+      pcnAllergy: {
+        drug: 'Aztreonam + Gentamicin',
+        dose: 'Aztreonam 90 mg/kg/day + Gentamicin 5-7 mg/kg/day',
+        route: 'IV',
+        frequency: 'Aztreonam q8h, Gentamicin q24h',
+        duration: '7 days total (IV + PO)',
+        notes: 'Aztreonam max 2 g/dose. Use for IgE-mediated allergy to penicillins AND cephalosporins.',
+      },
+      monitoring: 'Clinical response at 24-48 hours. Culture susceptibility to guide de-escalation. Transition to PO when tolerating oral intake.',
+    },
   },
 
   {
@@ -225,6 +279,17 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: '**IV:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h\n\n**Transition to PO** if term (by PMA), once sensitivities completed:\n[Cephalexin](#/drug/cephalexin)\n• ≤28 days of life: 75 mg/kg/day divided q8h\n• ≥29 days of life: 100 mg/kg/day divided q6h\n\n**Duration: 7 days**\n\nAlter therapy based on culture susceptibility.\n\n**DO NOT repeat urine culture for test of cure unless Candida or ESBL.**',
     citation: [2],
     next: 'uti-neo-imaging',
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin then Cephalexin',
+        dose: 'Cefazolin 50 mg/kg/day IV, then Cephalexin 75 mg/kg/day (≤28 days) or 100 mg/kg/day (≥29 days) PO',
+        route: 'IV then PO',
+        frequency: 'Cefazolin q8h IV, Cephalexin q8h (≤28 days) or q6h (≥29 days) PO',
+        duration: '7 days total',
+        notes: 'Transition to PO once sensitivities completed and patient is term by PMA.',
+      },
+      monitoring: 'Culture susceptibility to guide therapy. Do NOT repeat urine culture for test of cure unless Candida or ESBL.',
+    },
   },
 
   {
@@ -235,6 +300,17 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: 'Same antibiotic regimen as uncomplicated but **Duration: 10 days**.\n\n**IV:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h\n\n**Transition to PO:**\n[Cephalexin](#/drug/cephalexin)\n• ≤28 days of life: 75 mg/kg/day divided q8h\n• ≥29 days of life: 100 mg/kg/day divided q6h\n\nAlter therapy based on culture susceptibility.\n\n**DO NOT repeat urine culture unless Candida or ESBL.**',
     citation: [2],
     next: 'uti-neo-imaging',
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin then Cephalexin',
+        dose: 'Cefazolin 50 mg/kg/day IV, then Cephalexin 75 mg/kg/day (≤28 days) or 100 mg/kg/day (≥29 days) PO',
+        route: 'IV then PO',
+        frequency: 'Cefazolin q8h IV, Cephalexin q8h (≤28 days) or q6h (≥29 days) PO',
+        duration: '10 days total',
+        notes: 'Extended duration for complicated UTI. Transition to PO once sensitivities completed and patient is term by PMA.',
+      },
+      monitoring: 'Culture susceptibility to guide therapy. Do NOT repeat urine culture for test of cure unless Candida or ESBL.',
+    },
   },
 
   // =====================================================================

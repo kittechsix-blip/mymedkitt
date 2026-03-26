@@ -256,6 +256,17 @@ const SAH_INITIAL_MGMT: DecisionNode = {
   title: 'Initial ED Management',
   body: '**Prioritize:** Airway management, hemodynamic monitoring, supportive care, and prevention of complications.\n\n**General measures:**\n• **Bed rest** with head of bed at 30° (facilitates venous drainage)\n• **NPO** until surgical/endovascular treatment plan is decided\n• **Continuous cardiac monitoring** — ECG changes in 50-100% of patients\n• **Serial neurologic examinations** — monitor for deterioration\n• **Adequate analgesia** — [Acetaminophen](#/drug/acetaminophen/headache) 1 g PO/IV q6h. Avoid NSAIDs (platelet dysfunction). Use opioids cautiously (interfere with neuro exam).\n• **Antiemetics** as needed for comfort\n\n**Outcomes are best** when care is provided by multidisciplinary teams at specialized high-volume centers (OR 0.77 for in-hospital mortality).',
   citation: [2, 3, 12],
+  treatment: {
+    firstLine: {
+      drug: 'Acetaminophen',
+      dose: '1 g',
+      route: 'PO or IV',
+      frequency: 'Every 6 hours',
+      duration: 'As needed for pain control',
+      notes: 'Avoid NSAIDs (platelet dysfunction). Use opioids cautiously (interfere with neuro exam).',
+    },
+    monitoring: 'Serial neurologic examinations. Continuous cardiac monitoring. Monitor for pain control adequacy.',
+  },
   next: 'sah-bp-control',
 };
 
@@ -266,6 +277,25 @@ const SAH_BP_CONTROL: DecisionNode = {
   title: 'Blood Pressure Management',
   body: '**Target: SBP <160 mmHg** until aneurysm is secured (AHA/ASA 2012).\n\nHigher pressures may increase rebleeding risk, but aggressive lowering may compromise cerebral perfusion.\n\n**Titratable IV agents:**\n• [Labetalol](#/drug/labetalol/sah blood pressure) — 10-20 mg IV bolus over 1-2 min. Repeat or start infusion 2-8 mg/min. Max 300 mg/24h.\n• [Nicardipine](#/drug/nicardipine/sah blood pressure) — 5 mg/hr IV, titrate by 2.5 mg/hr q5-15 min. Max 15 mg/hr.\n• [Clevidipine](#/drug/clevidipine/sah blood pressure) — 1-2 mg/hr IV, double q90 sec to target. Ultra-short t½ (~1 min).\n\n**Avoid nitroprusside** — increases intracranial pressure and risk of toxicity with prolonged infusion.\n\n**Arterial line** recommended for continuous BP monitoring if extended ED stay anticipated.',
   citation: [2, 3],
+  treatment: {
+    firstLine: {
+      drug: 'Labetalol',
+      dose: '10-20 mg IV bolus, then 2-8 mg/min infusion',
+      route: 'IV',
+      frequency: 'Bolus over 1-2 min, repeat PRN or continuous infusion',
+      duration: 'Until SBP <160 mmHg sustained',
+      notes: 'Max 300 mg/24h. Avoid in bradycardia, heart block, severe asthma.',
+    },
+    alternative: {
+      drug: 'Nicardipine',
+      dose: '5 mg/hr, titrate by 2.5 mg/hr q5-15 min',
+      route: 'IV infusion',
+      frequency: 'Continuous',
+      duration: 'Until SBP <160 mmHg sustained',
+      notes: 'Max 15 mg/hr. Preferred if beta-blocker contraindicated. Clevidipine (1-2 mg/hr, double q90 sec) is an alternative with ultra-short half-life.',
+    },
+    monitoring: 'Arterial line for continuous BP monitoring. Target SBP <160 mmHg. Avoid nitroprusside (increases ICP).',
+  },
   next: 'sah-vasospasm-prev',
 };
 
@@ -276,6 +306,17 @@ const SAH_VASOSPASM_PREV: DecisionNode = {
   title: 'Vasospasm Prevention — Nimodipine',
   body: '[Nimodipine](#/drug/nimodipine/vasospasm prevention) is the **only proven pharmacologic intervention** to reduce morbidity from vasospasm-related ischemia.\n\n**Dosing:** 60 mg PO every 4 hours × 21 days\n• If unable to swallow: crush and administer via nasogastric tube\n• **No evidence for IV nimodipine** — oral route only\n• Give to hemodynamically stable patients\n• Part of comprehensive stroke center measures\n\n**Evidence:** Cochrane review of 16 trials — risk ratio 0.67 (95% CI 0.55-0.81) for secondary ischemia. Landmark RCT (554 patients) established the standard regimen.\n\n**Not effective for vasospasm prevention:**\n• IV magnesium sulfate\n• Statins (no benefit in recent large RCTs despite early promise)\n\n**Note:** Can be initiated in the ED but does not necessarily need to start before transfer. Discuss with specialist team.',
   citation: [9, 10],
+  treatment: {
+    firstLine: {
+      drug: 'Nimodipine',
+      dose: '60 mg',
+      route: 'PO (or via NG tube if unable to swallow)',
+      frequency: 'Every 4 hours',
+      duration: '21 days',
+      notes: 'Only proven pharmacologic intervention for vasospasm prevention. Oral route only (no evidence for IV). Give to hemodynamically stable patients.',
+    },
+    monitoring: 'Monitor BP (may cause hypotension). Peak vasospasm risk days 7-10. IV magnesium and statins NOT effective for prevention.',
+  },
   next: 'sah-seizure-mgmt',
 };
 
@@ -286,6 +327,17 @@ const SAH_SEIZURE_MGMT: DecisionNode = {
   title: 'Seizure Management',
   body: 'Up to **20% of patients** have a seizure during or soon after aSAH. Seizures can cause rebleeding from an unsecured aneurysm.\n\n**Key points:**\n• **No RCTs** on prophylactic antiepileptic drugs (AEDs) in SAH\n• **Phenytoin should be avoided** — associated with worse outcomes, functional decline, and cognitive disability\n• If prophylaxis is used, prefer a **short course (<3 days)** — same benefit as longer courses without cumulative adverse effects\n\n**If prophylaxis is initiated:**\n• [Levetiracetam](#/drug/levetiracetam/sah seizure) 500 mg PO/IV BID — preferred due to better side-effect profile\n• No hepatic metabolism, no drug interactions, no cardiac effects\n\n**Reasonable to defer AED initiation** to the inpatient management service in patients who have not already seized. Use in accordance with local institutional protocols.',
   citation: [2, 3],
+  treatment: {
+    firstLine: {
+      drug: 'Levetiracetam',
+      dose: '500 mg',
+      route: 'PO or IV',
+      frequency: 'Twice daily (BID)',
+      duration: '<3 days if used prophylactically',
+      notes: 'Preferred AED due to better side-effect profile. No hepatic metabolism, no drug interactions, no cardiac effects. Avoid phenytoin (worse outcomes).',
+    },
+    monitoring: 'Monitor for seizure activity. Seizures can cause rebleeding from unsecured aneurysm. Reasonable to defer AED initiation to inpatient service if no seizures.',
+  },
   next: 'sah-rebleed-prev',
 };
 
@@ -365,6 +417,17 @@ const SAH_TRANSFER: DecisionNode = {
   recommendation: 'Emergent transfer to high-volume neurosurgical center for definitive aneurysm repair and neurointensive care',
   confidence: 'definitive',
   citation: [2, 12],
+  treatment: {
+    firstLine: {
+      drug: 'Nimodipine',
+      dose: '60 mg',
+      route: 'PO (or via NG tube)',
+      frequency: 'Every 4 hours',
+      duration: '21 days total',
+      notes: 'Start if hemodynamically stable. Continue during and after transfer.',
+    },
+    monitoring: 'BP management (SBP <160). Secure airway if GCS ≤8. Continuous cardiac monitoring during transfer.',
+  },
 };
 
 const SAH_ICU: DecisionNode = {
@@ -376,6 +439,25 @@ const SAH_ICU: DecisionNode = {
   recommendation: 'Neurointensive care admission with definitive aneurysm repair within 72 hours and vasospasm monitoring for 14 days',
   confidence: 'definitive',
   citation: [2, 3, 12],
+  treatment: {
+    firstLine: {
+      drug: 'Nimodipine',
+      dose: '60 mg',
+      route: 'PO (or via NG tube)',
+      frequency: 'Every 4 hours',
+      duration: '21 days total',
+      notes: 'Continue for vasospasm prevention. Peak risk days 7-10.',
+    },
+    alternative: {
+      drug: 'Labetalol or Nicardipine',
+      dose: 'Labetalol 2-8 mg/min or Nicardipine 5-15 mg/hr',
+      route: 'IV infusion',
+      frequency: 'Continuous',
+      duration: 'Until SBP <160 mmHg sustained',
+      notes: 'Titratable IV agents for BP control while awaiting ICU bed.',
+    },
+    monitoring: 'Serial neuro checks q1h. BP target SBP <160. Watch for clinical deterioration and repeat CT immediately if decline.',
+  },
 };
 
 // ───────────────────────────────────────────────

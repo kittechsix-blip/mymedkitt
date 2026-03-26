@@ -79,6 +79,25 @@ export const STROKE_NODES = [
         title: 'IVT Eligibility',
         body: 'Review [Thrombolysis Contraindications](#/info/stroke-contraindications) before proceeding.\n\n**BP requirement:** Must be <185/110 mmHg\n\u2022 [Labetalol](#/drug/labetalol/stroke) 10\u201320 mg IV bolus (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) 5 mg/hr IV infusion (second-line)\n\nIf BP cannot be controlled to <185/110, thrombolysis is contraindicated.\n\n**Labs:** Do NOT wait for coags unless patient is on anticoagulants or has known coagulopathy. Fingerstick glucose is the only required pre-treatment lab.',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Labetalol',
+                dose: '10-20 mg',
+                route: 'IV bolus',
+                frequency: 'May repeat every 10-20 min',
+                duration: 'Until BP <185/110',
+                notes: 'Max cumulative dose 300 mg',
+            },
+            alternative: {
+                drug: 'Nicardipine',
+                dose: '5 mg/hr',
+                route: 'IV infusion',
+                frequency: 'Continuous',
+                duration: 'Until BP <185/110',
+                notes: 'Titrate by 2.5 mg/hr every 5-15 min; max 15 mg/hr',
+            },
+            monitoring: 'Continuous BP monitoring. Recheck BP every 5 min until stable <185/110.',
+        },
         options: [
             {
                 label: 'Eligible for IVT',
@@ -100,6 +119,25 @@ export const STROKE_NODES = [
         title: 'Administer Thrombolysis',
         body: '**Preferred:** [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus (max 25 mg) \u2014 single dose over 5 seconds.\n\n**Alternative:** [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV (max 90 mg) \u2014 10% bolus over 1 min, remainder over 60 min.\n\nTenecteplase is preferred per current guidelines due to equivalent efficacy, single bolus administration, and simpler dosing.\n\n[Patient Consent Info](#/info/stroke-consent)\n\n**Post-thrombolysis orders:**\n\u2022 BP <180/105 \u00D7 24h ([Labetalol](#/drug/labetalol/stroke) or [Nicardipine](#/drug/nicardipine/stroke))\n\u2022 Neuro checks q15min \u00D7 2h, then q30min \u00D7 6h, then q1h \u00D7 16h\n\u2022 No antithrombotics \u00D7 24h\n\u2022 No arterial/central lines, NG tube, or Foley \u00D7 24h if possible\n\u2022 Any neuro decline \u2192 emergent NCCT',
         citation: [1, 4, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Tenecteplase',
+                dose: '0.25 mg/kg',
+                route: 'IV bolus',
+                frequency: 'Once',
+                duration: 'Single dose over 5 seconds',
+                notes: 'Max 25 mg',
+            },
+            alternative: {
+                drug: 'Alteplase',
+                dose: '0.9 mg/kg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: '10% bolus over 1 min, remainder over 60 min',
+                notes: 'Max 90 mg',
+            },
+            monitoring: 'BP <180/105 x 24h. Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. Any decline = emergent NCCT.',
+        },
         next: 'stroke-lvo-check',
     },
     {
@@ -198,6 +236,25 @@ export const STROKE_NODES = [
         recommendation: 'Activate neurointerventional team immediately. Administer bridging IVT if within window and no contraindications. Target door-to-puncture <60 min.',
         confidence: 'definitive',
         citation: [6, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Tenecteplase (bridging)',
+                dose: '0.25 mg/kg',
+                route: 'IV bolus',
+                frequency: 'Once',
+                duration: 'Single dose before/during transfer',
+                notes: 'Max 25 mg. Do NOT delay EVT for thrombolytic to complete.',
+            },
+            alternative: {
+                drug: 'Alteplase (bridging)',
+                dose: '0.9 mg/kg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: '10% bolus, start remainder during transfer',
+                notes: 'Max 90 mg. Can stop infusion once in angio suite.',
+            },
+            monitoring: 'Goal BP post-recanalization <180/105. Continuous arterial line monitoring. NPO for sedation/GA.',
+        },
     },
     {
         id: 'stroke-late',
@@ -246,6 +303,25 @@ export const STROKE_NODES = [
         recommendation: 'Start DAPT immediately. Limit duration to 21 days. Add high-intensity statin. Complete stroke etiology workup.',
         confidence: 'definitive',
         citation: [3, 9, 10],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin + Clopidogrel',
+                dose: 'Load: Aspirin 325 mg + Clopidogrel 300 mg; Maintenance: Aspirin 81 mg + Clopidogrel 75 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: '21 days, then single antiplatelet',
+                notes: 'Do NOT extend DAPT beyond 21 days (increases bleeding without benefit)',
+            },
+            alternative: {
+                drug: 'Ticagrelor + Aspirin',
+                dose: 'Load: Ticagrelor 180 mg + Aspirin 325 mg; Maintenance: Ticagrelor 90 mg + Aspirin 81 mg',
+                route: 'PO',
+                frequency: 'Ticagrelor BID, Aspirin daily',
+                duration: '30 days',
+                notes: 'For CYP2C19 poor metabolizers who cannot activate clopidogrel',
+            },
+            monitoring: 'Monitor for bleeding (GI, intracranial). Complete stroke etiology workup. Add high-intensity statin.',
+        },
     },
     {
         id: 'stroke-single-antiplatelet',
@@ -256,6 +332,17 @@ export const STROKE_NODES = [
         recommendation: 'Start aspirin. Complete stroke etiology workup. Initiate statin therapy.',
         confidence: 'recommended',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin',
+                dose: '160-325 mg loading, then 81 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite (secondary prevention)',
+                notes: 'Give loading dose within 24-48h of symptom onset',
+            },
+            monitoring: 'Complete stroke workup: telemetry x 24h, echo, lipid panel, HbA1c. Add high-intensity statin.',
+        },
     },
     // =====================================================================
     // MODULE 5: POST-TREATMENT & PREVENTION
@@ -267,6 +354,25 @@ export const STROKE_NODES = [
         title: 'Post-Thrombolysis Management',
         body: '**BP management \u00D7 24h:**\n\u2022 Target <180/105 mmHg\n\u2022 [Labetalol](#/drug/labetalol/stroke) bolus \u00B1 infusion (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) infusion (alternative)\n\u2022 [Clevidipine](#/drug/clevidipine/stroke) (if faster titration needed)\n\n**Neuro checks protocol:**\n\u2022 Every 15 min \u00D7 2h\n\u2022 Then every 30 min \u00D7 6h\n\u2022 Then hourly \u00D7 16h\n\u2022 Any decline \u2192 emergent NCCT\n\n**Antithrombotics:**\n\u2022 NO aspirin, heparin, or anticoagulants \u00D7 24h post-thrombolysis\n\u2022 Repeat NCCT at 24h\n\u2022 If no hemorrhage: start antiplatelets',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Labetalol',
+                dose: '10-20 mg IV bolus; may infuse 2-8 mg/min',
+                route: 'IV',
+                frequency: 'Bolus every 10-20 min PRN; or continuous infusion',
+                duration: '24 hours post-thrombolysis',
+                notes: 'Max cumulative bolus 300 mg',
+            },
+            alternative: {
+                drug: 'Nicardipine',
+                dose: '5 mg/hr',
+                route: 'IV infusion',
+                frequency: 'Continuous',
+                duration: '24 hours post-thrombolysis',
+                notes: 'Titrate by 2.5 mg/hr every 5-15 min; max 15 mg/hr. Clevidipine if faster titration needed.',
+            },
+            monitoring: 'BP <180/105 x 24h. Neuro checks q15min x 2h, q30min x 6h, q1h x 16h. No antithrombotics x 24h. NCCT at 24h before starting antiplatelets.',
+        },
         next: 'stroke-etiology',
     },
     {
@@ -276,6 +382,25 @@ export const STROKE_NODES = [
         title: 'Antiplatelet Initiation',
         body: '**If no IVT given:**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 160\u2013325 mg within 24\u201348h of onset\n\n**If post-IVT:**\n\u2022 Wait 24h, obtain NCCT first\n\u2022 If no hemorrhage: start aspirin 81\u2013325 mg\n\nConsider DAPT (aspirin + [clopidogrel](#/drug/clopidogrel/stroke)) for minor stroke with high-risk features (see minor stroke pathway).',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin',
+                dose: '160-325 mg loading, then 81-325 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite',
+                notes: 'If no IVT: give within 24-48h. If post-IVT: wait 24h and obtain NCCT first.',
+            },
+            alternative: {
+                drug: 'Aspirin + Clopidogrel (DAPT)',
+                dose: 'Aspirin 325 mg + Clopidogrel 300 mg load; then 81 mg + 75 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: '21 days, then single agent',
+                notes: 'Consider for minor stroke with high-risk features',
+            },
+            monitoring: 'If post-IVT: NCCT at 24h to rule out hemorrhage before starting antiplatelets.',
+        },
         next: 'stroke-etiology',
     },
     {
@@ -312,6 +437,25 @@ export const STROKE_NODES = [
         recommendation: 'Start DOAC based on stroke severity timing. Do not bridge with heparin. Ensure rate/rhythm control of AF.',
         confidence: 'definitive',
         citation: [1, 2, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Apixaban',
+                dose: '5 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: 'Indefinite',
+                notes: 'Preferred DOAC for stroke prevention (ARISTOTLE). Reduce to 2.5 mg BID if 2+ of: age >=80, weight <=60 kg, Cr >=1.5',
+            },
+            alternative: {
+                drug: 'Rivaroxaban',
+                dose: '20 mg',
+                route: 'PO',
+                frequency: 'Daily with food',
+                duration: 'Indefinite',
+                notes: 'Reduce to 15 mg daily if CrCl 15-50 mL/min',
+            },
+            monitoring: 'Timing based on severity: TIA 1-3d, minor (NIHSS<8) 4-7d, moderate (NIHSS 8-15) 7-14d, severe (NIHSS>15) >=14d. Do NOT bridge with heparin. D/C antiplatelet when DOAC started unless concurrent ACS/stent.',
+        },
     },
     {
         id: 'stroke-atherosclerotic',
@@ -322,6 +466,25 @@ export const STROKE_NODES = [
         recommendation: 'Aspirin + high-intensity statin. Refer for CEA within 2 weeks if symptomatic carotid stenosis 70\u201399%. DAPT \u00D7 90d for intracranial stenosis.',
         confidence: 'definitive',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin + Atorvastatin',
+                dose: 'Aspirin 325 mg; Atorvastatin 40-80 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite',
+                notes: 'Target LDL <70 mg/dL. Rosuvastatin 20-40 mg is alternative statin.',
+            },
+            alternative: {
+                drug: 'DAPT (Aspirin + Clopidogrel) + Statin',
+                dose: 'Aspirin 81 mg + Clopidogrel 75 mg; Atorvastatin 40-80 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'DAPT x 90 days for intracranial stenosis 70-99%, then single antiplatelet',
+                notes: 'Use DAPT for intracranial stenosis. Aggressive risk factor management: BP <140/90, LDL <70.',
+            },
+            monitoring: 'Lipid panel at 4-12 weeks. Refer for CEA within 2 weeks if symptomatic carotid stenosis 70-99%.',
+        },
     },
     {
         id: 'stroke-other-prevention',
@@ -332,6 +495,17 @@ export const STROKE_NODES = [
         recommendation: 'Aspirin 81 mg + high-intensity statin. BP target <130/80. Extended cardiac monitoring for cryptogenic. PFO closure if criteria met.',
         confidence: 'recommended',
         citation: [1, 2, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin + High-intensity Statin',
+                dose: 'Aspirin 81 mg; Atorvastatin 40-80 mg (or Rosuvastatin 20-40 mg)',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite',
+                notes: 'BP target <130/80 after acute phase',
+            },
+            monitoring: 'Extended cardiac monitoring (14-30 day ambulatory monitor) if cryptogenic. AF detection rate ~12%. Transition to anticoagulation if AF detected. Consider PFO closure if age <60 with ASA or large shunt.',
+        },
     },
 ];
 export const STROKE_NODE_COUNT = STROKE_NODES.length;

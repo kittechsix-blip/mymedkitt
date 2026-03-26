@@ -200,6 +200,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Stop offending antibiotic. Oral vancomycin is first-line for all C. difficile. Admit severe and fulminant cases.',
     confidence: 'definitive',
     citation: [5, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Vancomycin',
+        dose: '125 mg',
+        route: 'PO',
+        frequency: 'QID',
+        duration: '10-14 days',
+        notes: 'Preferred for all severities. Increase to 500 mg PO/NG QID for fulminant disease.',
+      },
+      alternative: {
+        drug: 'Metronidazole',
+        dose: '500 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '10-14 days',
+        notes: 'Non-severe only. Do NOT use alone for severe disease.',
+      },
+      monitoring: 'WBC, creatinine, clinical response. Surgical consult for fulminant cases (hypotension, ileus, megacolon).',
+    },
   },
 
   // =====================================================================
@@ -234,6 +253,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Symptomatic treatment with loperamide or bismuth subsalicylate. Discharge with return precautions.',
     confidence: 'recommended',
     citation: [1, 4, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Loperamide',
+        dose: '4 mg initially, then 2 mg PRN',
+        route: 'PO',
+        frequency: 'After each loose stool',
+        duration: 'Until symptoms resolve',
+        notes: 'Max 16 mg/day. Faster stool frequency reduction than bismuth.',
+      },
+      alternative: {
+        drug: 'Bismuth Subsalicylate',
+        dose: '524 mg',
+        route: 'PO',
+        frequency: 'q30-60 min PRN',
+        duration: 'Until symptoms resolve',
+        notes: 'Max 8 doses/day. Has additional antiemetic properties.',
+      },
+      monitoring: 'Symptom resolution, hydration status. Return if bloody diarrhea, fever, or symptoms worsen.',
+    },
   },
 
   {
@@ -245,6 +283,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Empiric fluoroquinolone (or azithromycin for SE Asia) plus adjunct loperamide. Reassess for admission if not improving.',
     confidence: 'recommended',
     citation: [1, 4, 5, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Ciprofloxacin',
+        dose: '500 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '3 days',
+        notes: 'First-line for most regions. Add loperamide as adjunct (reduces duration by 1 day).',
+      },
+      alternative: {
+        drug: 'Azithromycin',
+        dose: '1000 mg x1 or 500 mg daily',
+        route: 'PO',
+        frequency: 'Once daily',
+        duration: '1-3 days',
+        notes: 'Use for Southeast Asia travel (>80% fluoroquinolone-resistant Campylobacter).',
+      },
+      monitoring: 'Clinical response, hydration status. Avoid loperamide if bloody diarrhea or high fever.',
+    },
   },
 
   {
@@ -280,6 +337,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Oral rehydration, symptomatic relief, discharge with return precautions.',
     confidence: 'definitive',
     citation: [1, 2, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Loperamide',
+        dose: '4 mg initially, then 2 mg PRN',
+        route: 'PO',
+        frequency: 'After each loose stool',
+        duration: 'Until symptoms resolve',
+        notes: 'Max 16 mg/day. Preferred antimotility (no CNS effects, not habit-forming). AVOID with bloody diarrhea, high fever, or inflammatory cause.',
+      },
+      alternative: {
+        drug: 'Bismuth Subsalicylate',
+        dose: '524 mg',
+        route: 'PO',
+        frequency: 'q30-60 min PRN',
+        duration: 'Until symptoms resolve',
+        notes: 'Max 8 doses/day. Preferred when nausea/vomiting is prominent.',
+      },
+      monitoring: 'Hydration status, symptom resolution. Return precautions for bloody stool, high fever, worsening symptoms.',
+    },
   },
 
   {
@@ -290,6 +366,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: '**IV rehydration:**\n• NS or LR bolus, reassess after each liter\n• Target: urine output, improved vitals, ability to tolerate oral fluids\n\n**Antiemetics:**\n• [Ondansetron](#/drug/ondansetron/acute diarrhea) 4 mg IV q4-6h PRN for vomiting preventing oral intake\n\n**Antimotility (if no contraindications):**\n• [Loperamide](#/drug/loperamide/acute diarrhea) 4 mg PO then 2 mg PRN (max 16 mg/day)\n\n**Assess for empiric antibiotic criteria:**\n• Diarrhea >48 hours (higher probability non-viral)\n• Fever >38.5°C + fecal leukocytes/lactoferrin positive or heme-positive stools\n• Acute dysentery\n\nIf meets criteria → proceed to empiric antibiotics.',
     citation: [1, 2, 4],
     next: 'diarrhea-empiric-abx',
+    treatment: {
+      firstLine: {
+        drug: 'Ondansetron',
+        dose: '4 mg',
+        route: 'IV',
+        frequency: 'q4-6h PRN',
+        duration: 'Until tolerating oral fluids',
+        notes: 'For vomiting preventing oral intake.',
+      },
+      alternative: {
+        drug: 'Loperamide',
+        dose: '4 mg initially, then 2 mg PRN',
+        route: 'PO',
+        frequency: 'After each loose stool',
+        duration: 'Until symptoms resolve',
+        notes: 'Max 16 mg/day. AVOID if bloody diarrhea, high fever, or suspected inflammatory cause.',
+      },
+      monitoring: 'Urine output, vitals, oral tolerance. Assess for empiric antibiotic criteria.',
+    },
   },
 
   {
@@ -301,6 +396,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Empiric fluoroquinolone for adults, TMP-SMX for children. Duration 3-5 days. Avoid antibiotics if STEC suspected.',
     confidence: 'recommended',
     citation: [1, 2, 4, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Ciprofloxacin',
+        dose: '500 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '3-5 days',
+        notes: 'Adults only. Elderly: monitor theophylline/warfarin/phenytoin interactions. Do NOT use if STEC suspected.',
+      },
+      alternative: {
+        drug: 'Metronidazole',
+        dose: '250 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '7-10 days',
+        notes: 'For persistent diarrhea (2-4 weeks) without systemic symptoms. Covers Giardia. Disulfiram-like reaction with alcohol.',
+      },
+      monitoring: 'Clinical response, stool culture results. Do NOT give antibiotics if STEC (E. coli O157:H7) suspected.',
+    },
   },
 
   // =====================================================================
@@ -342,6 +456,25 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Aggressive rehydration. Loperamide is safest antimotility. Metronidazole (Cat B) after first trimester if needed. Avoid fluoroquinolones and TMP-SMX.',
     confidence: 'recommended',
     citation: [1, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Loperamide',
+        dose: '4 mg initially, then 2 mg PRN',
+        route: 'PO',
+        frequency: 'After each loose stool',
+        duration: 'Until symptoms resolve',
+        notes: 'FDA Category B. Safest antimotility in pregnancy. Max 16 mg/day. AVOID diphenoxylate and bismuth subsalicylate.',
+      },
+      alternative: {
+        drug: 'Metronidazole',
+        dose: '500 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '7-10 days',
+        notes: 'Category B after first trimester. Use only if benefits outweigh risks. Coordinate with OB/GYN if uncertain.',
+      },
+      monitoring: 'Hydration status, fetal well-being. Low threshold for admission if unable to maintain oral hydration. AVOID fluoroquinolones and TMP-SMX.',
+    },
   },
 
   {
@@ -353,6 +486,17 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'ORS rehydration. No antimotility agents. Ondansetron to facilitate oral intake in vomiting children. Admit if severe dehydration or suspected HUS.',
     confidence: 'recommended',
     citation: [1, 3, 5, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Ondansetron',
+        dose: '0.15 mg/kg',
+        route: 'IV or ODT',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Max 4 mg. Facilitates oral rehydration in vomiting children. No routine antiemetics otherwise.',
+      },
+      monitoring: 'Oral rehydration tolerance, hydration status, urine output. If STEC suspected: platelet count, hemolytic anemia, renal function. Do NOT give antimotility agents or antibiotics if STEC suspected.',
+    },
   },
 
   {

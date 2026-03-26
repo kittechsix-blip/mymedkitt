@@ -201,6 +201,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'GI Decontamination — Activated Charcoal',
         body: '[Activated Charcoal](#/drug/activated-charcoal/acetaminophen toxicity) **1 g/kg PO (max 50g)**\n\n**Timing:** Within **4 hours** of ingestion (2023 US/Canada consensus extends traditional 1-2h window). [6]\n\n**Massive ingestion (>30g):** Consider activated charcoal even **>4 hours** post-ingestion — greatest benefit in massive poisoning where standard NAC may be inadequate. [9]\n\n**Extended-release formulations:** May benefit beyond 4h if evidence of ongoing absorption (rising APAP levels). [6]\n\n**Contraindications:**\n• Unprotected airway or altered mental status (aspiration risk)\n• Caustic coingestant\n• GI perforation or obstruction\n\n⚠️ **Do NOT delay NAC** for charcoal administration. Give charcoal and start NAC concurrently if indicated. [6]',
         citation: [6, 9],
+        treatment: {
+            firstLine: {
+                drug: 'Activated Charcoal',
+                dose: '1 g/kg (max 50g)',
+                route: 'PO',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Within 4 hours of ingestion. Consider beyond 4h for massive ingestion (>30g). Requires protected airway.',
+            },
+            monitoring: 'Monitor for vomiting and aspiration. Do NOT delay NAC for charcoal administration.',
+        },
         next: 'apap-nac-choice',
     },
     {
@@ -238,6 +249,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'IV NAC — 21-Hour Protocol (Preferred)',
         body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen iv)\n\n**Standard 3-Bag IV Protocol:**\n\n**Bag 1 (Loading):** 150 mg/kg IV in 200 mL D5W over **60 minutes**\n**Bag 2:** 50 mg/kg IV in 500 mL D5W over **4 hours** (12.5 mg/kg/hr)\n**Bag 3:** 100 mg/kg IV in 1000 mL D5W over **16 hours** (6.25 mg/kg/hr)\n\n**Total: 300 mg/kg over 21 hours** [3][6]\n\n**Cap dose at 100 kg** for morbid obesity. [6]\n\n**Anaphylactoid reactions** (flushing, urticaria, bronchospasm) most common during Bag 1. These are histamine-mediated (NOT IgE allergy). Slow or pause infusion; treat with antihistamines. **Do NOT permanently stop NAC.** [11]\n\nNAC itself may cause mild INR prolongation — do not confuse with hepatic synthetic failure.',
         citation: [3, 6, 11],
+        treatment: {
+            firstLine: {
+                drug: 'N-Acetylcysteine (NAC)',
+                dose: 'Bag 1: 150 mg/kg in 200 mL D5W; Bag 2: 50 mg/kg in 500 mL D5W; Bag 3: 100 mg/kg in 1000 mL D5W',
+                route: 'IV',
+                frequency: 'Bag 1 over 60 min, Bag 2 over 4h, Bag 3 over 16h',
+                duration: '21 hours total (300 mg/kg)',
+                notes: 'Cap dose at 100 kg for morbid obesity. Continue Bag 3 indefinitely if stopping criteria not met.',
+            },
+            monitoring: 'APAP level q4-6h, AST/ALT, INR, BMP. Watch for anaphylactoid reactions during Bag 1. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
+        },
         next: 'apap-nac-anaphylactoid',
     },
     {
@@ -247,6 +269,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'Oral NAC — 72-Hour Protocol',
         body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen oral)\n\n**Oral NAC Protocol:** [2]\n\n**Loading:** 140 mg/kg PO\n**Maintenance:** 70 mg/kg PO every 4 hours × 17 additional doses\n**Total: 1,330 mg/kg over 72 hours**\n\nMix with **cola or juice** to improve palatability (oral NAC has a terrible smell and taste).\nIf patient **vomits within 1 hour** of dose → repeat the dose.\nConsider [Ondansetron](#/drug/ondansetron/nausea) 30 minutes prior to reduce vomiting. [2]\n\n**Advantages:** No IV access needed, no anaphylactoid risk, higher hepatic first-pass delivery.\n**Disadvantages:** 72-hour duration, vomiting, low systemic bioavailability (4-10%). Activated charcoal may reduce oral NAC absorption — IV preferred when both are given.',
         citation: [2],
+        treatment: {
+            firstLine: {
+                drug: 'N-Acetylcysteine (NAC)',
+                dose: 'Loading: 140 mg/kg; Maintenance: 70 mg/kg × 17 doses',
+                route: 'PO',
+                frequency: 'Loading once, then q4h × 17 doses',
+                duration: '72 hours total (1,330 mg/kg)',
+                notes: 'Mix with cola or juice. Repeat dose if vomiting within 1 hour. Consider ondansetron 30 min prior.',
+            },
+            monitoring: 'APAP level, AST/ALT, INR, BMP q6-12h. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
+        },
         next: 'apap-nac-stop',
     },
     {
@@ -256,6 +289,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'Two-Bag Modified Prescott Protocol',
         body: '**Simplified 2-bag regimen** (used in Australia/New Zealand): [7][13]\n\n**Bag 1:** 200 mg/kg IV in D5W over **4 hours**\n**Bag 2:** 100 mg/kg IV in D5W over **16 hours**\n**Total: 300 mg/kg over 20 hours**\n\n**Lower rate of anaphylactoid reactions** compared to the standard 3-bag protocol — the slower initial infusion rate reduces histamine release. [7]\n\nSame total dose as the standard protocol. To avoid dosing errors, use the protocol your pharmacy is familiar with.\n\n[NAC Protocol Comparison](#/info/apap-nac-comparison)',
         citation: [7, 13],
+        treatment: {
+            firstLine: {
+                drug: 'N-Acetylcysteine (NAC)',
+                dose: 'Bag 1: 200 mg/kg in D5W; Bag 2: 100 mg/kg in D5W',
+                route: 'IV',
+                frequency: 'Bag 1 over 4h, Bag 2 over 16h',
+                duration: '20 hours total (300 mg/kg)',
+                notes: 'Lower anaphylactoid rate than 3-bag protocol. Use protocol your pharmacy is familiar with.',
+            },
+            monitoring: 'APAP level, AST/ALT, INR, BMP q6-12h. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
+        },
         next: 'apap-nac-stop',
     },
     {
@@ -265,6 +309,25 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'Anaphylactoid Reaction Management',
         body: '[NAC Anaphylactoid Reaction Management](#/info/apap-anaphylactoid)\n\n**NOT a true allergy** — histamine-mediated, not IgE. Usually within first 2 hours, almost always within 6 hours. In a study of **6,455 NAC treatment courses**, no deaths were attributed to anaphylactoid reactions. [11]\n\n**Graded response:**\n\n**Flushing only** → Continue NAC, monitor closely\n\n**Urticaria** → [Diphenhydramine](#/drug/diphenhydramine/angioedema) 1 mg/kg IV (max 50 mg). Consider steroid. **Continue NAC.**\n\n**Angioedema** → Diphenhydramine + steroid. **Hold NAC for 1 hour**, then resume at slower rate.\n\n**Respiratory symptoms or hypotension** → Diphenhydramine + steroid + [Epinephrine](#/drug/epinephrine/anaphylaxis) IM. Hold NAC for 1 hour, then resume.\n\n⚠️ **NEVER permanently discontinue NAC.** Liver failure from stopping NAC is far more dangerous than the anaphylactoid reaction. Previous reaction is NOT a contraindication to future use — can pre-treat with antihistamines. [11]',
         citation: [11],
+        treatment: {
+            firstLine: {
+                drug: 'Diphenhydramine',
+                dose: '1 mg/kg (max 50 mg)',
+                route: 'IV',
+                frequency: 'Once, may repeat',
+                duration: 'PRN for urticaria/angioedema',
+                notes: 'For urticaria or angioedema during NAC infusion. Continue NAC - do NOT permanently discontinue.',
+            },
+            alternative: {
+                drug: 'Epinephrine',
+                dose: '0.3-0.5 mg (1:1000)',
+                route: 'IM',
+                frequency: 'Once, may repeat q5-15 min',
+                duration: 'PRN for respiratory symptoms or hypotension',
+                notes: 'Add to diphenhydramine for severe reaction. Hold NAC 1 hour, then resume at slower rate.',
+            },
+            monitoring: 'Vitals q5 min during reaction. Resume NAC after 1 hour hold. NEVER permanently stop NAC.',
+        },
         next: 'apap-nac-stop',
     },
     {
@@ -335,6 +398,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'High-Dose NAC — Hendrickson Protocol',
         body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/massive acetaminophen)\n\n**Hendrickson 2019:** Keep Bag 1 + Bag 2 standard. **INCREASE Bag 3 infusion rate** based on severity: [8]\n\n• **Above 300 line:** 12.5 mg/kg/hr (**2× standard**)\n• **Above 450 line:** 18.75 mg/kg/hr (**3× standard**)\n• **Above 600 line:** 25 mg/kg/hr (**4× standard**)\n\n**During hemodialysis:** Double whatever rate you would otherwise use. HD removes ~50% of NAC. Minimum rate during HD: 12.5 mg/kg/hr. Maximum: 25 mg/kg/hr. [6][9]\n\n⚠️ **Doubling the rate** is increasingly accepted. Tripling/quadrupling remains more controversial — **consult toxicology/poison control.** [14]\n\n**Activated charcoal:** Give even if >4 hours post-ingestion for massive overdose. [6][9]\n\n**Also give:** Activated charcoal (even >4h) + fomepizole + evaluate for hemodialysis.',
         citation: [6, 8, 9, 14],
+        treatment: {
+            firstLine: {
+                drug: 'N-Acetylcysteine (NAC) - High Dose',
+                dose: 'Bag 1-2 standard; Bag 3: 12.5-25 mg/kg/hr based on level (2-4× standard rate)',
+                route: 'IV',
+                frequency: '>300 line: 12.5 mg/kg/hr; >450 line: 18.75 mg/kg/hr; >600 line: 25 mg/kg/hr',
+                duration: 'Continue until APAP undetectable and stopping criteria met',
+                notes: 'Double rate during hemodialysis (HD removes 50% of NAC). Consult toxicology for 3-4× dosing.',
+            },
+            monitoring: 'APAP level q4h, AST/ALT, INR, lactate, pH. Serial reassessment for HD criteria. Stop: APAP <10, INR <2, ALT improving.',
+        },
         next: 'apap-fomepizole',
     },
     {
@@ -344,6 +418,17 @@ export const ACETAMINOPHEN_OD_NODES = [
         title: 'Fomepizole — CYP2E1 Inhibition',
         body: '[Fomepizole](#/drug/fomepizole/massive acetaminophen)\n\n**Mechanism:** Inhibits CYP2E1 → **prevents conversion of acetaminophen to toxic NAPQI**. Complementary to NAC (which detoxifies NAPQI after it forms). [15]\n\n**Dosing:** 15 mg/kg IV over 30 minutes (loading) → 10 mg/kg IV q12h for 48 hours or until APAP level is undetectable. [15]\n\nFomepizole has shown benefit in animal models, primary human hepatocytes, and a human volunteer study (reduced toxic metabolite generation). [15]\n\n**Generally safe.** Main drawback is cost. Headache, nausea, dizziness are common but mild. Transient transaminase elevation in ~20%.\n\n**Indications:** Established high-risk/massive acetaminophen ingestion. Use alongside high-dose NAC. [14][15]\n\nConsult toxicology/poison control for all massive ingestions.',
         citation: [14, 15],
+        treatment: {
+            firstLine: {
+                drug: 'Fomepizole',
+                dose: 'Loading: 15 mg/kg; Maintenance: 10 mg/kg',
+                route: 'IV',
+                frequency: 'Loading over 30 min, then q12h',
+                duration: '48 hours or until APAP undetectable',
+                notes: 'CYP2E1 inhibitor. Use alongside high-dose NAC for massive ingestion. Expensive but safe.',
+            },
+            monitoring: 'APAP level, AST/ALT. Mild transaminase elevation in ~20% is expected. Continue until APAP undetectable.',
+        },
         next: 'apap-dialysis',
     },
     {

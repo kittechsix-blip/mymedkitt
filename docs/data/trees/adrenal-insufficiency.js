@@ -70,6 +70,25 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         title: 'Emergency Steroid Replacement',
         body: '**Hydrocortisone — first-line for adrenal crisis:**\n\n**Adults:**\n• [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV/IM bolus immediately\n• Then 200 mg/24h as continuous infusion (preferred) or 50 mg IV q6h\n• Taper to oral over 1-3 days as hemodynamics stabilize\n\n**Pediatrics:**\n• [Hydrocortisone](#/drug/hydrocortisone/pediatric adrenal crisis) 50 mg/m² IV bolus (max 100 mg)\n• Then 50-100 mg/m²/day divided q6-8h\n• BSA required → use toolbar BSA calculator\n\n**If hydrocortisone unavailable:**\n• [Dexamethasone](#/drug/dexamethasone/adrenal crisis) 4 mg IV — does NOT interfere with cortisol assay (advantage if diagnosis uncertain)\n• [Methylprednisolone](#/drug/methylprednisolone/adrenal crisis) 40 mg IV\n\n**KEY:** At hydrocortisone doses ≥50 mg/day, mineralocorticoid activity is sufficient — [fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) is NOT needed during acute crisis management. [1][2]',
         citation: [1, 2, 5, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '100 mg',
+                route: 'IV or IM',
+                frequency: 'Bolus, then 200 mg/24h (continuous infusion or 50 mg q6h)',
+                duration: 'Until hemodynamically stable, then taper over 1-3 days',
+                notes: 'Pediatrics: 50 mg/m² IV bolus (max 100 mg), then 50-100 mg/m²/day divided q6-8h',
+            },
+            alternative: {
+                drug: 'Dexamethasone',
+                dose: '4 mg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Single dose if hydrocortisone unavailable',
+                notes: 'Does NOT interfere with cortisol assay. Alternative: Methylprednisolone 40 mg IV',
+            },
+            monitoring: 'Hemodynamics q15-30 min until stable. Glucose q1-2h. Electrolytes q4-6h. Expected BP improvement within 1-2 hours.',
+        },
         next: 'ai-crisis-response',
     },
     {
@@ -100,6 +119,17 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         title: 'Ongoing Crisis Management',
         body: '**Continue first 24-48 hours:**\n• [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 200 mg/24h (continuous infusion preferred, or 50 mg IV q6h) [5]\n• Aggressive IV fluids — NS ± dextrose\n• Monitor glucose q1-2h (hypoglycemia common)\n• Treat precipitating cause aggressively\n\n**Tapering (day 2-3):**\n• Once hemodynamically stable, halve hydrocortisone dose daily\n• Transition to oral when tolerating PO\n• Resume maintenance dose + fludrocortisone (if PAI) once at baseline\n\n**Electrolytes:**\n• Na and K normalize with hydrocortisone at stress doses (mineralocorticoid effect adequate at ≥50 mg/day)\n• Avoid aggressive potassium correction in PAI — K will drop with steroid replacement [2][6]',
         citation: [2, 5, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '200 mg/24h',
+                route: 'IV',
+                frequency: 'Continuous infusion (preferred) or 50 mg q6h',
+                duration: '24-48 hours, then halve dose daily until at maintenance',
+                notes: 'Transition to oral when tolerating PO. Resume fludrocortisone (if PAI) once at maintenance.',
+            },
+            monitoring: 'Glucose q1-2h. Electrolytes (Na, K) q4-6h. Hemodynamics. Avoid aggressive K correction in PAI.',
+        },
         next: 'ai-precipitant-workup',
     },
     {
@@ -262,6 +292,25 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         title: 'Maintenance Replacement Therapy',
         body: '[Corticosteroid Equivalency & Alternatives](#/info/ai-steroid-equivalency)\n\n**Glucocorticoid replacement (ALL types):**\n• [Hydrocortisone](#/drug/hydrocortisone/maintenance) 15-25 mg PO daily, divided BID or TID\n• Give 2/3 of dose AM upon waking, 1/3 early afternoon\n• Last dose >6 hours before bedtime to avoid insomnia\n• Typical regimen: 15 mg AM + 5 mg at 2 PM [1]\n• Alternatives: [Prednisolone](#/drug/prednisolone/adrenal maintenance) 3-5 mg PO daily, [Dexamethasone](#/drug/dexamethasone/adrenal maintenance) 0.25-0.5 mg PO daily\n\n**Pediatrics:**\n• [Hydrocortisone](#/drug/hydrocortisone/pediatric maintenance) 6-10 mg/m²/day divided TID (preferred — shortest half-life, least growth suppression)\n\n**Mineralocorticoid (PAI ONLY):**\n• [Fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) 50-200 μg PO daily\n• NOT needed in SAI or TAI (RAAS axis intact)\n• Monitor BP, K+, and plasma renin activity to guide dosing\n\n**Dose adjustment clues:**\n• Underdosing: fatigue, hypotension, nausea, salt craving, hyponatremia\n• Overdosing: weight gain, hyperglycemia, osteoporosis, Cushingoid features [1][5][6]',
         citation: [1, 5, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '15-25 mg/day',
+                route: 'PO',
+                frequency: 'Divided BID or TID (2/3 AM, 1/3 early afternoon)',
+                duration: 'Lifelong replacement',
+                notes: 'Typical: 15 mg AM + 5 mg at 2 PM. Last dose >6 hours before bedtime. Pediatrics: 6-10 mg/m²/day divided TID.',
+            },
+            alternative: {
+                drug: 'Prednisolone',
+                dose: '3-5 mg/day',
+                route: 'PO',
+                frequency: 'Daily (AM)',
+                duration: 'Lifelong replacement',
+                notes: 'Alternative: Dexamethasone 0.25-0.5 mg PO daily. PAI requires fludrocortisone 50-200 mcg PO daily in addition.',
+            },
+            monitoring: 'BP, K+, plasma renin activity for fludrocortisone dosing. Watch for under/overdosing signs. Endocrine follow-up q3-6 months.',
+        },
         next: 'ai-stress-dose',
     },
     {
@@ -271,6 +320,17 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         title: 'Sick-Day Rules & Stress Dosing',
         body: '**The #1 cause of adrenal crisis is failure to increase steroids during physiologic stress.** [3]\n\n[Sick-Day Rules & Stress Dosing Guide](#/info/ai-sick-day-rules)\n\n**Minor illness (cold, mild gastroenteritis):**\n• **Double** oral hydrocortisone dose if fever >38°C (100.4°F)\n• **Triple** oral hydrocortisone dose if fever >39°C (102.2°F)\n• Continue increased dose until recovery, then resume baseline\n\n**Moderate illness/injury:**\n• [Hydrocortisone](#/drug/hydrocortisone/stress dose) 50 mg PO BID (or equivalent)\n• Taper over 2-3 days as illness resolves\n\n**Major surgery / critical illness:**\n• [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV preop → 200 mg/24h → taper to maintenance over 2-3 days\n\n**Vomiting / unable to take PO:**\n• Emergency IM injection — [Hydrocortisone](#/drug/hydrocortisone/emergency IM) 100 mg IM → come to ED immediately\n• All AI patients must carry an emergency injection kit\n\n**Pediatric stress dosing:**\n• Illness: 30-50 mg/m²/day divided q6-8h\n• Major surgery: 50-100 mg/m² IV bolus → 50-100 mg/m²/day [1][15]',
         citation: [1, 2, 3, 15],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '50 mg BID (moderate illness) or 100 mg IV bolus (major surgery/critical illness)',
+                route: 'PO or IV',
+                frequency: 'BID for moderate illness; preop bolus then 200 mg/24h for major surgery',
+                duration: 'Until illness resolves, then taper over 2-3 days',
+                notes: 'Minor illness: double dose if fever >38C, triple if >39C. If vomiting: 100 mg IM then ED. Pediatrics: 30-50 mg/m²/day (illness), 50-100 mg/m² bolus (surgery).',
+            },
+            monitoring: 'Clinical status, hemodynamics, glucose. Resume maintenance dose once illness resolved and patient stable.',
+        },
         next: 'ai-prevention',
     },
     {
@@ -327,6 +387,17 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         body: '**ICU admission criteria:**\n• Active adrenal crisis requiring IV hydrocortisone and vasopressors\n• Persistent hemodynamic instability despite fluid resuscitation\n• Altered mental status\n• Precipitating illness requiring ICU-level care (sepsis, major surgery)\n\n**ICU orders:**\n• [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 200 mg/24h — continuous infusion preferred or 50 mg IV q6h\n• Aggressive IV fluids — NS ± D5\n• Glucose monitoring q1-2h (hypoglycemia common)\n• Electrolyte monitoring q4-6h (Na, K)\n• Treat precipitating cause\n• Endocrine consultation\n\nIn-hospital adrenal crisis mortality is <1% with prompt treatment, but rises significantly with delayed recognition. [2][4]',
         recommendation: 'Admit to ICU. Hydrocortisone 200 mg/24h continuous or 50 mg IV q6h. Treat precipitant. Endocrine consultation. Taper steroids as hemodynamics stabilize.',
         citation: [2, 4, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '200 mg/24h',
+                route: 'IV',
+                frequency: 'Continuous infusion (preferred) or 50 mg q6h',
+                duration: 'Until hemodynamically stable, then taper to maintenance over 2-3 days',
+                notes: 'Add aggressive IV fluids (NS +/- D5). Treat precipitating cause. Endocrine consultation.',
+            },
+            monitoring: 'Glucose q1-2h. Electrolytes (Na, K) q4-6h. Hemodynamics continuously. Taper steroids as patient stabilizes.',
+        },
     },
     {
         id: 'ai-dispo-admit',
@@ -336,6 +407,17 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         body: '**Floor admission criteria:**\n• Known AI with acute illness preventing oral intake\n• New AI diagnosis requiring inpatient workup\n• Stress-dose steroids needed but hemodynamically stable\n\n**Floor orders:**\n• [Hydrocortisone](#/drug/hydrocortisone/stress dose) 50 mg IV/PO q8h, taper to maintenance over 2-3 days\n• IV fluids until tolerating PO\n• Treat precipitating illness\n• Endocrine consultation for all new diagnoses\n• Education before discharge: sick-day rules, emergency injection kit, MedicAlert identification [1][2]',
         recommendation: 'Admit to floor. Stress-dose hydrocortisone with taper to maintenance. Endocrine consultation if new diagnosis. Ensure patient education and crisis prevention kit before discharge.',
         citation: [1, 2, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '50 mg',
+                route: 'IV or PO',
+                frequency: 'q8h',
+                duration: 'Taper to maintenance over 2-3 days',
+                notes: 'IV fluids until tolerating PO. Endocrine consultation for new diagnoses. Discharge education required.',
+            },
+            monitoring: 'Clinical improvement, ability to tolerate PO. Electrolytes, glucose. Ensure sick-day rules, emergency kit, MedicAlert before discharge.',
+        },
     },
     {
         id: 'ai-dispo-discharge',
@@ -345,6 +427,25 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         body: '**ALL criteria must be met for discharge:**\n• Hemodynamically stable\n• Tolerating oral medications and fluids\n• Precipitating illness resolved or stable\n• Adequate steroid supply at home\n• Emergency injection kit available (or prescribed)\n• Patient understands sick-day rules\n\n**Discharge plan:**\n• Resume [Hydrocortisone](#/drug/hydrocortisone/maintenance) at maintenance dose (or increase to stress dose if illness ongoing)\n• [Fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) if PAI (continue home dose)\n• Written sick-day action plan — [Sick-Day Rules & Stress Dosing Guide](#/info/ai-sick-day-rules)\n• Endocrine follow-up within 1-2 weeks\n• MedicAlert bracelet ordered if not already worn\n• Emergency hydrocortisone injection kit prescribed\n\n**Return precautions:**\n• Fever not responding to sick-day dosing\n• Persistent vomiting (>2 episodes — cannot take oral steroids)\n• Dizziness or lightheadedness despite increased steroid dose\n• Confusion or altered mental status\n• Inability to take oral steroids for any reason [1][15]',
         recommendation: 'Discharge on maintenance steroids with sick-day rules handout. Ensure emergency injection kit. Endocrine follow-up in 1-2 weeks.',
         citation: [1, 15, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '15-25 mg/day (maintenance) or stress dose if illness ongoing',
+                route: 'PO',
+                frequency: 'Divided BID or TID (2/3 AM, 1/3 early afternoon)',
+                duration: 'Lifelong replacement',
+                notes: 'PAI: add fludrocortisone 50-200 mcg PO daily. Prescribe emergency IM hydrocortisone 100 mg kit.',
+            },
+            alternative: {
+                drug: 'Fludrocortisone',
+                dose: '50-200 mcg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Lifelong (PAI only)',
+                notes: 'Not needed in SAI or TAI. Monitor BP, K+, plasma renin activity.',
+            },
+            monitoring: 'Endocrine follow-up in 1-2 weeks. Ensure MedicAlert bracelet, emergency injection kit, written sick-day action plan.',
+        },
     },
     {
         id: 'ai-adrenal-hemorrhage',
@@ -353,6 +454,17 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         title: 'Adrenal Hemorrhage',
         body: '**Waterhouse-Friderichsen syndrome:**\n• Bilateral adrenal hemorrhage, classically with meningococcal sepsis\n• Also seen with DIC, antiphospholipid syndrome, heparin-induced thrombocytopenia\n• CT abdomen: enlarged adrenals with hemorrhage (high-density on non-contrast CT)\n• Irreversible PAI — lifelong glucocorticoid + mineralocorticoid replacement\n\n**Anticoagulation-associated adrenal hemorrhage:**\n• Risk factors: heparin (including LMWH), HIT, warfarin, DOACs + critical illness\n• Presents as unexplained hemodynamic instability, flank/abdominal/back pain\n• CT abdomen is diagnostic\n• Management: hold or reverse anticoagulation if possible\n• Immediate [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV\n• Often bilateral → permanent PAI requiring lifelong replacement [2][4]',
         citation: [2, 4, 7],
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '100 mg',
+                route: 'IV',
+                frequency: 'Bolus immediately, then 200 mg/24h',
+                duration: 'Crisis dosing, then transition to lifelong maintenance',
+                notes: 'Hold/reverse anticoagulation if possible. Bilateral hemorrhage = permanent PAI requiring lifelong glucocorticoid + mineralocorticoid.',
+            },
+            monitoring: 'Hemodynamics, coagulation status. CT abdomen diagnostic. Lifelong endocrine follow-up required.',
+        },
         next: 'ai-disposition',
     },
     {

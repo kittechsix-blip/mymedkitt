@@ -198,6 +198,25 @@ export const STEMI_NODES = [
         title: 'Initial Medical Therapy',
         body: 'Start simultaneously with cath lab activation:\n\n**Antiplatelet:**\n\u2022 [Aspirin](#/drug/aspirin/acs) 162\u2013325 mg chewed (if not given prehospital)\n\u2022 P2Y12 inhibitor loading \u2014 select agent next\n\n**Pain / Symptom management:**\n\u2022 [Nitroglycerin](#/drug/nitroglycerin/acs) 0.4 mg SL q5min \u00D7 3 (avoid if SBP <90, suspected RV infarct, or PDE-5 inhibitor use within 24\u201348h)\n\u2022 O\u2082 only if SpO\u2082 <90% \u2014 routine O\u2082 may INCREASE infarct size [15]\n\u2022 [Morphine](#/drug/morphine/acs) 4\u20138 mg IV only if refractory pain \u2014 may delay P2Y12 absorption and increase mortality [16][17]\n\n**Beta blocker:**\n\u2022 [Metoprolol](#/drug/metoprolol/acs) within 24h if no contraindications (do not need to start in ED)',
         citation: [5, 15, 16, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin',
+                dose: '162-325 mg',
+                route: 'PO',
+                frequency: 'Once (chewed)',
+                duration: 'Single dose, then 81 mg daily',
+                notes: 'Give immediately if not given prehospital',
+            },
+            alternative: {
+                drug: 'Nitroglycerin',
+                dose: '0.4 mg',
+                route: 'Sublingual',
+                frequency: 'q5min x 3 doses',
+                duration: 'PRN chest pain',
+                notes: 'Avoid if SBP <90, RV infarct, or PDE-5 inhibitor use within 24-48h',
+            },
+            monitoring: 'Continuous cardiac monitoring. BP before each nitroglycerin dose. Avoid morphine unless refractory pain.',
+        },
         next: 'stemi-p2y12',
     },
     {
@@ -207,6 +226,33 @@ export const STEMI_NODES = [
         title: 'P2Y12 Inhibitor Selection',
         body: 'Load with ONE P2Y12 inhibitor before or at time of PCI. Discuss with interventional cardiologist.\n\n**[Prasugrel](#/drug/prasugrel/acs)** 60 mg loading \u2192 10 mg daily\n\u2022 More potent platelet inhibition, lower 30-day and 1-year mortality vs clopidogrel/ticagrelor [18]\n\u2022 **CONTRAINDICATED:** prior stroke/TIA\n\u2022 **No benefit:** age >75y, weight <60 kg\n\n**[Ticagrelor](#/drug/ticagrelor/acs)** 180 mg loading \u2192 90 mg BID\n\u2022 Fewer stent thromboses and lower death rate vs clopidogrel [19]\n\u2022 Higher stroke/ICH risk vs clopidogrel\n\n**[Clopidogrel](#/drug/clopidogrel/acs)** 600 mg loading \u2192 75 mg daily\n\u2022 Variable metabolism (CYP2C19)\n\u2022 Use if CI to prasugrel AND ticagrelor, or high bleeding risk\n\nAll three are Class I, Level B recommendations. [5]',
         citation: [5, 18, 19, 20],
+        treatment: {
+            firstLine: {
+                drug: 'Prasugrel',
+                dose: '60 mg loading, then 10 mg',
+                route: 'PO',
+                frequency: 'Once for loading, then daily',
+                duration: '12 months DAPT',
+                notes: 'CONTRAINDICATED if prior stroke/TIA. No benefit if age >75y or weight <60 kg.',
+            },
+            alternative: {
+                drug: 'Ticagrelor',
+                dose: '180 mg loading, then 90 mg',
+                route: 'PO',
+                frequency: 'Once for loading, then BID',
+                duration: '12 months DAPT',
+                notes: 'Higher stroke/ICH risk vs clopidogrel. Fewer stent thromboses than clopidogrel.',
+            },
+            pcnAllergy: {
+                drug: 'Clopidogrel',
+                dose: '600 mg loading, then 75 mg',
+                route: 'PO',
+                frequency: 'Once for loading, then daily',
+                duration: '12 months DAPT',
+                notes: 'Variable metabolism (CYP2C19). Use if CI to prasugrel AND ticagrelor, or high bleeding risk.',
+            },
+            monitoring: 'Monitor for bleeding complications. DAPT for 12 months post-PCI. Discuss with interventional cardiologist.',
+        },
         options: [
             {
                 label: 'Prasugrel (preferred if no CI)',
@@ -229,6 +275,25 @@ export const STEMI_NODES = [
         title: 'Anticoagulation',
         body: '**For primary PCI:**\n\u2022 [UFH](#/drug/ufh/stemi) 70\u2013100 units/kg IV bolus (without GP IIb/IIIa) OR 50\u201370 units/kg (with GP IIb/IIIa)\n\u2022 [Bivalirudin](#/drug/bivalirudin/acs) 0.75 mg/kg IV bolus then 1.75 mg/kg/hr \u2014 preferred if high bleeding risk\n\n**For fibrinolytic therapy** (minimum 48 hours):\n\u2022 [UFH](#/drug/ufh/stemi) weight-based bolus + infusion\n\u2022 [Enoxaparin](#/drug/enoxaparin/stemi) \u2014 alternative (age-adjusted dosing)\n\u2022 [Fondaparinux](#/drug/fondaparinux/stemi) 2.5 mg SC daily \u2014 alternative\n\nSee [Anticoagulation Details](#/info/stemi-anticoag-detail)',
         citation: [5, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Unfractionated Heparin (UFH)',
+                dose: '70-100 units/kg IV bolus (without GP IIb/IIIa) OR 50-70 units/kg (with GP IIb/IIIa)',
+                route: 'IV',
+                frequency: 'Bolus for PCI',
+                duration: 'During PCI procedure',
+                notes: 'For primary PCI. ACT-guided dosing in cath lab.',
+            },
+            alternative: {
+                drug: 'Bivalirudin',
+                dose: '0.75 mg/kg IV bolus, then 1.75 mg/kg/hr',
+                route: 'IV',
+                frequency: 'Bolus then infusion',
+                duration: 'During and post-PCI',
+                notes: 'Preferred if high bleeding risk. Direct thrombin inhibitor.',
+            },
+            monitoring: 'ACT during PCI. Monitor for bleeding. For fibrinolysis: anticoagulation minimum 48 hours.',
+        },
         next: 'stemi-reperfusion-q',
     },
     // =====================================================================
@@ -290,6 +355,25 @@ export const STEMI_NODES = [
         title: 'Fibrinolytic Therapy',
         body: '**Door-to-needle \u226430 minutes.** Fibrin-specific agents preferred.\n\nCheck [Fibrinolytic Contraindications](#/info/stemi-lytic-contraindications)\n\n**Agents** (see [Fibrinolytic Dosing](#/info/stemi-lytic-agents)):\n\u2022 [Tenecteplase](#/drug/tenecteplase/stemi) \u2014 single weight-based IV bolus (preferred)\n\u2022 [Alteplase](#/drug/alteplase/stemi) \u2014 accelerated 90-min regimen\n\u2022 [Reteplase](#/drug/reteplase/stemi) \u2014 10 + 10 unit double bolus\n\n**Age >75 years:** Consider half-dose tenecteplase (reduced ICH risk) [23]\n\n**After fibrinolysis:** Transfer to PCI center. Angiography within 3\u201324 hours (NOT within first 2\u20133 hours). [5]\n\nAny contraindications to fibrinolysis?',
         citation: [5, 8, 23],
+        treatment: {
+            firstLine: {
+                drug: 'Tenecteplase',
+                dose: 'Weight-based: <60kg: 30mg | 60-69kg: 35mg | 70-79kg: 40mg | 80-89kg: 45mg | >=90kg: 50mg',
+                route: 'IV bolus',
+                frequency: 'Single dose',
+                duration: 'One-time administration',
+                notes: 'Preferred fibrinolytic. Consider half-dose if age >75 years (reduced ICH risk).',
+            },
+            alternative: {
+                drug: 'Alteplase',
+                dose: '15 mg IV bolus, then 0.75 mg/kg over 30 min (max 50 mg), then 0.5 mg/kg over 60 min (max 35 mg)',
+                route: 'IV',
+                frequency: 'Accelerated 90-min regimen',
+                duration: 'Total 90 minutes',
+                notes: 'Total dose not to exceed 100 mg.',
+            },
+            monitoring: 'Continuous cardiac monitoring. Monitor for reperfusion signs: pain resolution, >50% ST resolution within 60-90 min, reperfusion arrhythmias. Watch for bleeding complications.',
+        },
         options: [
             {
                 label: 'No contraindications \u2014 give fibrinolytic',
@@ -316,6 +400,25 @@ export const STEMI_NODES = [
         title: 'Post-Fibrinolysis Management',
         body: '**After administering fibrinolytic:**\n\n**1. Anticoagulation** (minimum 48 hours):\n\u2022 [UFH](#/drug/ufh/stemi) weight-based bolus + infusion, OR\n\u2022 [Enoxaparin](#/drug/enoxaparin/stemi) (age-adjusted), OR\n\u2022 [Fondaparinux](#/drug/fondaparinux/stemi) 2.5 mg SC daily\n\n**2. Transfer** to PCI-capable center for angiography:\n\u2022 Within 3\u201324 hours (NOT within first 2\u20133 hours after lytics)\n\u2022 Rescue PCI if fibrinolysis fails (persistent symptoms/STE)\n\n**3. Monitor for reperfusion signs:**\n\u2022 Pain resolution\n\u2022 \u226550% ST-segment resolution within 60\u201390 min\n\u2022 Reperfusion arrhythmias (PVCs, AIVR)\n\n**AIVR** (accelerated idioventricular rhythm) \u2014 well-tolerated, self-limited. Do NOT treat with antidysrhythmics (may cause hemodynamic collapse). [24]',
         citation: [5, 24],
+        treatment: {
+            firstLine: {
+                drug: 'Enoxaparin',
+                dose: '<75y: 30 mg IV bolus + 1 mg/kg SC q12h | >=75y: NO bolus, 0.75 mg/kg SC q12h | CrCl <30: 1 mg/kg SC q24h',
+                route: 'IV bolus then SC',
+                frequency: 'q12h (age-adjusted)',
+                duration: 'Minimum 48 hours or until PCI',
+                notes: 'Age-adjusted dosing critical. Alternative to UFH post-fibrinolysis.',
+            },
+            alternative: {
+                drug: 'UFH',
+                dose: '60 units/kg IV bolus (max 4000 units), then 12 units/kg/hr (max 1000 units/hr)',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Minimum 48 hours or until PCI',
+                notes: 'Target aPTT 1.5-2x control (50-70 seconds). Check aPTT at 3, 6, 12, 24h.',
+            },
+            monitoring: 'Anticoagulation minimum 48h. Transfer to PCI center within 3-24h (NOT within first 2-3h). Monitor reperfusion signs: pain resolution, >50% ST resolution, reperfusion arrhythmias.',
+        },
         next: 'stemi-complications',
     },
     // =====================================================================
@@ -398,6 +501,25 @@ export const STEMI_NODES = [
         title: 'Disposition \u2014 Admit ICU/CCU',
         body: '**All STEMI patients are admitted** after reperfusion (PCI or fibrinolysis).\n\n**In-hospital management:**\n\u2022 Continuous cardiac monitoring for reperfusion arrhythmias\n\u2022 [Metoprolol](#/drug/metoprolol/acs) within 24h if no CI (HR, BP permitting)\n\u2022 [Atorvastatin](#/drug/atorvastatin/acs) 80 mg (start immediately)\n\u2022 ACE inhibitor/ARB within 24h if EF \u226440%, HTN, or diabetes\n\u2022 DAPT: [Aspirin](#/drug/aspirin/acs) 81 mg + P2Y12 inhibitor \u00D7 12 months\n\n**Goals of care discussions** should be held for elderly patients and those with severe comorbidities. DNR/POLST/advance directives do NOT necessarily preclude intervention. [29]\n\n**Cardiac rehabilitation** referral before discharge (25% reduction in CV mortality). [5]',
         recommendation: 'Admit ICU/CCU. Start GDMT: beta-blocker, high-intensity statin, ACEi/ARB. Continue DAPT \u00D712 months. Cardiac rehab referral.',
+        treatment: {
+            firstLine: {
+                drug: 'Atorvastatin',
+                dose: '80 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite',
+                notes: 'High-intensity statin. Start immediately. No need to wait for lipid panel.',
+            },
+            alternative: {
+                drug: 'Metoprolol succinate',
+                dose: '25-50 mg',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Indefinite',
+                notes: 'Start within 24h if HR and BP permit. Contraindications: HR <60, SBP <100, decompensated HF, AV block, severe reactive airway disease.',
+            },
+            monitoring: 'Continuous cardiac monitoring. Echo for EF assessment. DAPT (aspirin 81 mg + P2Y12 inhibitor) x 12 months. ACEi/ARB if EF <=40%, HTN, or DM. Cardiac rehab referral before discharge.',
+        },
         confidence: 'definitive',
         citation: [5, 29],
     },

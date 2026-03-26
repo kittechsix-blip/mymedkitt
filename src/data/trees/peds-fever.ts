@@ -63,6 +63,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'ADMIT to inpatient or PICU. Full sepsis workup with age-appropriate empiric antibiotics. Add [Acyclovir](#/drug/acyclovir) if <21 days or HSV risk factors.',
     confidence: 'definitive',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Vancomycin',
+        dose: 'Ceftriaxone 50 mg/kg (max 2g); Vancomycin 15 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q24h; Vancomycin q6h',
+        duration: 'Pending culture results (typically 7-14 days)',
+        notes: 'For age >28 days. See body for age-specific regimens.',
+      },
+      alternative: {
+        drug: 'Ampicillin + Gentamicin',
+        dose: 'Ampicillin 50 mg/kg; Gentamicin 4 mg/kg',
+        route: 'IV',
+        frequency: 'Ampicillin q8h; Gentamicin q24h',
+        duration: 'Pending culture results',
+        notes: 'For age 0-7 days',
+      },
+      monitoring: 'Blood cultures at 24-36h. Vancomycin trough before 4th dose (goal 15-20 mcg/mL). Renal function with aminoglycosides.',
+    },
   },
 
   // =====================================================================
@@ -193,6 +212,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Admit to inpatient. Continue age-appropriate empiric antibiotics. If cultures negative at 24\u201336h and infant is well-appearing, discontinue antibiotics.',
     confidence: 'definitive',
     citation: [1, 5, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Ampicillin',
+        dose: 'Ceftriaxone 50 mg/kg (max 2g); Ampicillin 50 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q24h; Ampicillin q8h',
+        duration: 'Until cultures negative at 24-36h, then discontinue',
+        notes: 'For age 8-21 days. Age 0-7 days: Ampicillin + Gentamicin instead.',
+      },
+      alternative: {
+        drug: 'Cefepime + Ampicillin',
+        dose: 'Cefepime 50 mg/kg; Ampicillin 50 mg/kg',
+        route: 'IV',
+        frequency: 'Cefepime q12h; Ampicillin q8h',
+        duration: 'Until cultures negative at 24-36h',
+        notes: 'Use if ceftriaxone contraindicated (jaundice, hyperbilirubinemia)',
+      },
+      monitoring: 'Blood cultures finalized at 24-36h. CSF cultures at 48-72h. Daily clinical assessment.',
+    }
   },
 
   // =====================================================================
@@ -287,6 +325,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'ADMIT. Start meningitic-dose antibiotics immediately. Consider HSV coverage. Repeat LP in 24\u201348h if organism identified to document sterilization.',
     confidence: 'definitive',
     citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Ampicillin',
+        dose: 'Ceftriaxone 50 mg/kg (max 2g); Ampicillin 75 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12h (meningitic); Ampicillin q6h (meningitic)',
+        duration: 'Minimum 14-21 days depending on organism',
+        notes: 'Meningitic dosing with increased frequency',
+      },
+      pcnAllergy: {
+        drug: 'Ceftriaxone + Vancomycin',
+        dose: 'Ceftriaxone 50 mg/kg; Vancomycin 15 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12h; Vancomycin q6h',
+        duration: 'Minimum 14-21 days',
+        notes: 'For penicillin allergy; add Acyclovir if HSV risk',
+      },
+      monitoring: 'Repeat LP in 24-48h if organism identified. Vancomycin trough goal 15-20 mcg/mL if used.',
+    },
   },
 
   {
@@ -319,6 +376,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'ADMIT. Start IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Step down to oral [Cephalexin](#/drug/cephalexin/pediatric UTI) when tolerating PO and clinically improving. Total 10-day course.',
     confidence: 'definitive',
     citation: [1, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin',
+        dose: '17 mg/kg (33 mg/kg if bacteremia)',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: '10 days total (IV + oral combined)',
+        notes: 'Step down to oral Cephalexin when tolerating PO',
+      },
+      alternative: {
+        drug: 'Cephalexin',
+        dose: '17 mg/kg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '10 days total',
+        notes: 'Oral step-down from IV Cefazolin',
+      },
+      monitoring: 'Urine culture results. Clinical improvement within 48-72h. Renal function.',
+    }
   },
 
   {
@@ -351,6 +427,17 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Disposition based on inflammatory marker status and shared decision-making. Ensure 24-hour follow-up regardless of disposition. Culture callback system in place.',
     confidence: 'recommended',
     citation: [1, 4, 7, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '50 mg/kg (max 2g)',
+        route: 'IM/IV',
+        frequency: 'x1 dose (if discharging with abnormal inflammatory markers)',
+        duration: 'Single dose',
+        notes: 'Give before discharge if inflammatory markers abnormal. May give q24h if admitted.',
+      },
+      monitoring: 'Culture callback at 24-36h. Mandatory 24-hour follow-up.',
+    }
   },
 
   // =====================================================================
@@ -440,6 +527,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'ADMIT. Start meningitic-dose [Ceftriaxone](#/drug/ceftriaxone/pediatric meningitis) + [Vancomycin](#/drug/vancomycin/pediatric meningitis). Consider HSV coverage. Obtain Vancomycin trough before 4th dose (goal 15\u201320 mcg/mL).',
     confidence: 'definitive',
     citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Vancomycin',
+        dose: 'Ceftriaxone 50 mg/kg (max 2g); Vancomycin 15 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12h (meningitic); Vancomycin q6h',
+        duration: 'Minimum 14-21 days depending on organism',
+        notes: 'Vancomycin replaces Ampicillin to cover MRSA and resistant organisms',
+      },
+      pcnAllergy: {
+        drug: 'Meropenem + Vancomycin',
+        dose: 'Meropenem 40 mg/kg; Vancomycin 15 mg/kg',
+        route: 'IV',
+        frequency: 'Meropenem q8h; Vancomycin q6h',
+        duration: 'Minimum 14-21 days',
+        notes: 'For severe beta-lactam allergy; ID consult recommended',
+      },
+      monitoring: 'Vancomycin trough before 4th dose (goal 15-20 mcg/mL). Repeat LP in 24-48h if organism identified.',
+    },
   },
 
   {
@@ -472,6 +578,25 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'ADMIT. Start IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Step down to oral [Cephalexin](#/drug/cephalexin/pediatric UTI) when tolerating PO and clinically improving. Total 10-day course.',
     confidence: 'definitive',
     citation: [1, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin',
+        dose: '17 mg/kg (33 mg/kg if bacteremia)',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: '10 days total (IV + oral combined)',
+        notes: 'Step down to oral Cephalexin when tolerating PO',
+      },
+      alternative: {
+        drug: 'Cephalexin',
+        dose: '17 mg/kg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '10 days total',
+        notes: 'Oral step-down from IV Cefazolin',
+      },
+      monitoring: 'Urine culture results. Clinical improvement within 48-72h. Renal function.',
+    }
   },
 
   {
@@ -504,6 +629,17 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Disposition based on shared decision-making. Give [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) x1 if discharging. Ensure 24-hour follow-up and culture callback system.',
     confidence: 'recommended',
     citation: [1, 4, 7, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '50 mg/kg (max 2g)',
+        route: 'IM/IV',
+        frequency: 'x1 dose before discharge; q24h if admitted',
+        duration: 'Single dose if discharged; continue until cultures at 24-36h if admitted',
+        notes: 'Required before discharge for high-risk patients',
+      },
+      monitoring: 'Culture callback at 24-36h. Mandatory 24-hour follow-up. Monitor for clinical deterioration.',
+    }
   },
 
   {
@@ -515,6 +651,17 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Low risk for SBI. If UTI: oral Cephalexin and home. If no UTI: no antibiotics, home observation with 24-hour follow-up.',
     confidence: 'recommended',
     citation: [1, 4, 7, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Cephalexin',
+        dose: '17 mg/kg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '10 days',
+        notes: 'Only if UA positive (UTI). No antibiotics if UA negative.',
+      },
+      monitoring: 'Urine culture results if UA positive. Culture callback at 24-36h. 24-hour follow-up.',
+    }
   },
 
   // =====================================================================
@@ -620,6 +767,17 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Assess WBC count. If abnormal, give empiric [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) x1 and ensure 24-hour follow-up. Culture callback system in place.',
     confidence: 'recommended',
     citation: [1, 5, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '50 mg/kg (max 2g)',
+        route: 'IM/IV',
+        frequency: 'x1 dose',
+        duration: 'Single dose',
+        notes: 'Only if WBC >15,000 or <5,000. If WBC 5,000-15,000: observe without antibiotics.',
+      },
+      monitoring: 'Culture callback at 24-36h. Mandatory 24-hour follow-up if Ceftriaxone given.',
+    }
   },
 
   {
@@ -631,6 +789,33 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     recommendation: 'Treat UTI based on clinical status. Well-appearing: oral [Cephalexin](#/drug/cephalexin/pediatric UTI) or [Ceftriaxone](#/drug/ceftriaxone/pediatric UTI) x1 + oral. Ill: IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Total 10-day course. Follow up urine culture.',
     confidence: 'definitive',
     citation: [1, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Cephalexin',
+        dose: '17 mg/kg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '10 days',
+        notes: 'For well-appearing infants tolerating PO',
+      },
+      alternative: {
+        drug: 'Ceftriaxone then Cephalexin',
+        dose: 'Ceftriaxone 50 mg/kg x1, then Cephalexin 17 mg/kg',
+        route: 'IM/IV then PO',
+        frequency: 'Ceftriaxone x1; Cephalexin TID',
+        duration: '10 days total',
+        notes: 'Alternative for well-appearing: IM dose then oral step-down',
+      },
+      pcnAllergy: {
+        drug: 'Cefazolin then Cephalexin',
+        dose: 'Cefazolin 17 mg/kg (33 mg/kg if bacteremia); Cephalexin 17 mg/kg',
+        route: 'IV then PO',
+        frequency: 'Cefazolin q8h; Cephalexin TID',
+        duration: '10 days total',
+        notes: 'For ill-appearing or not tolerating PO. Step down when improving.',
+      },
+      monitoring: 'Urine culture results. Clinical improvement within 48-72h.',
+    },
   },
 
   {

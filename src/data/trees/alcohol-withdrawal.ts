@@ -130,6 +130,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Outpatient management with oral benzodiazepine or phenobarbital taper. Close follow-up within 24-48 hours. Return precautions for seizure, hallucinations, or worsening symptoms.',
     confidence: 'recommended',
     citation: [2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Chlordiazepoxide',
+        dose: '25-50 mg PO',
+        route: 'PO',
+        frequency: 'q6-8h',
+        duration: 'Taper over 3-5 days',
+        notes: 'Day 1-2: 25-50 mg q6-8h, Day 3-4: 25 mg q8h, Day 5: 25 mg once then stop.',
+      },
+      alternative: {
+        drug: 'Phenobarbital',
+        dose: '130 mg PO',
+        route: 'PO',
+        frequency: 'q8h',
+        duration: '1-2 days',
+        notes: 'Long half-life provides auto-taper. Preferred in patients with benzodiazepine history.',
+      },
+      monitoring: 'Follow-up within 24-48 hours. Return precautions: seizure, hallucinations, worsening tremor, confusion.',
+    },
   },
 
   {
@@ -141,6 +160,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Prophylactic phenobarbital 10-15 mg/kg (divided doses) for at-risk asymptomatic patients. Alternative: oral chlordiazepoxide taper. Monitor closely for breakthrough symptoms.',
     confidence: 'recommended',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '10-15 mg/kg total (use ideal body weight)',
+        route: 'IV or PO',
+        frequency: 'Divided into 2 doses (5-7.5 mg/kg each)',
+        duration: 'Single day loading, auto-taper over 3-4 days',
+        notes: '10 mg/kg achieves level ~15 mcg/mL. Give second dose 2-4 hours after first.',
+      },
+      alternative: {
+        drug: 'Chlordiazepoxide',
+        dose: '25-100 mg PO',
+        route: 'PO',
+        frequency: 'q6h',
+        duration: '3-day taper',
+        notes: 'Day 1: 25-100 mg q6h, Day 2-3: 25-50 mg q6h, then stop.',
+      },
+      monitoring: 'CIWA-Ar q4-6h. If CIWA-Ar >= 8, prophylaxis has failed. Escalate to active treatment.',
+    },
   },
 
   // =====================================================================
@@ -154,6 +192,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Withdrawal Seizure Management',
     body: '⚠️ **Withdrawal seizures tend to recur** — up to one-third progress to DT if untreated [3].\n\n**Characteristics:**\n• Usually generalized tonic-clonic, brief, self-limiting\n• Peak risk 12-48 hours after last drink\n• Tend to cluster (2-6 seizures)\n• Recurrent or prolonged seizures → investigate structural/infectious causes\n\n**Treatment:**\n• [Phenobarbital](#/drug/phenobarbital/alcohol withdrawal seizure) **15-20 mg/kg IV** at 50-100 mg/min — excellent choice for withdrawal seizures [1][6]\n• Provides both anti-seizure activity AND treats underlying withdrawal\n• Consider [Pyridoxine](#/drug/pyridoxine/seizure) 100 mg IV/PO — pyridoxine deficiency in alcoholics may contribute to seizures [7][8]\n\n**Phenytoin is NOT effective** for alcohol withdrawal seizures — do not use [2][3].\n\n**Alternative if phenobarbital unavailable:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 4 mg IV or [Diazepam](#/drug/diazepam/status epilepticus) 10 mg IV\n• Benzodiazepines have lower anti-seizure efficacy in alcohol withdrawal due to tolerance [3]',
     citation: [1, 2, 3, 6, 7, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '15-20 mg/kg IV (use ideal body weight)',
+        route: 'IV infusion',
+        frequency: 'Single loading dose',
+        duration: 'Max rate 50-100 mg/min',
+        notes: 'Both treats seizure AND underlying withdrawal. Long half-life provides ongoing prophylaxis.',
+      },
+      alternative: {
+        drug: 'Lorazepam',
+        dose: '4 mg IV',
+        route: 'IV push',
+        frequency: 'May repeat once in 5-10 min',
+        duration: 'Total max 8 mg',
+        notes: 'Use if phenobarbital unavailable. Lower efficacy due to tolerance. Alternative: diazepam 10 mg IV.',
+      },
+      monitoring: 'Continuous pulse oximetry, respiratory monitoring. Have airway equipment ready. Monitor for recurrent seizures.',
+    },
     next: 'aw-post-seizure',
   },
 
@@ -241,6 +298,17 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Phenobarbital Protocol',
     body: '**Step 1 — Loading dose (most patients):**\n• [Phenobarbital](#/drug/phenobarbital/alcohol withdrawal loading) **10 mg/kg IV** over 30 min\n• Achieves serum level ~15 μg/mL — well below toxic range\n• Use **ideal body weight** (phenobarbital is water-soluble) [11]\n• Omit loading if patient has received significant benzodiazepines\n\n**Step 2 — Titration:**\n• [Phenobarbital](#/drug/phenobarbital/alcohol withdrawal titration) **130 mg IV q30 min** PRN\n• Target: **RASS 0 to -1** (calm, cooperative) [10]\n• Each dose provides predictable, incremental improvement\n• Be patient — may take several hours to reach therapeutic level\n\n**Step 3 — Dose limits:**\n• **20 mg/kg = SOFT STOP** — vast majority controlled by this dose [9]\n• Before exceeding 20 mg/kg: carefully re-evaluate diagnosis\n• **30 mg/kg = HARD STOP** — serum level ~40 μg/mL (top of therapeutic range)\n• Symptoms persisting beyond 30 mg/kg are unlikely due to alcohol withdrawal [1]\n\n**Once controlled:** Phenobarbital auto-tapers over days due to long half-life (~3-4 days). Little additional therapy typically needed.',
     citation: [1, 9, 10, 11],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '10 mg/kg IV loading (use ideal body weight)',
+        route: 'IV infusion',
+        frequency: 'Then 130 mg IV q30 min PRN',
+        duration: 'Until RASS 0 to -1 achieved',
+        notes: 'Max rate 50-100 mg/min. 20 mg/kg = soft stop, 30 mg/kg = hard stop. Auto-tapers over 3-4 days.',
+      },
+      monitoring: 'RASS q15-30 min during titration. Target RASS 0 to -1. Check phenobarbital level if uncertain of total dose or if approaching 20 mg/kg.',
+    },
     next: 'aw-pb-response',
   },
 
@@ -279,6 +347,17 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Phenobarbital — Controlled',
     body: '**Symptoms controlled with phenobarbital monotherapy.**\n\n**Key points for ongoing management:**\n• Phenobarbital will **auto-taper** over ~3-4 days due to long half-life\n• Little additional GABAergic therapy should be needed\n• **Do NOT add benzodiazepines** — synergistic sedation risk, especially after large cumulative phenobarbital doses [1]\n• Communicate total phenobarbital dose to ALL providers caring for the patient\n\n**If breakthrough symptoms occur:**\n• Additional [Phenobarbital](#/drug/phenobarbital/alcohol withdrawal titration) 130 mg IV/PO/IM PRN\n• Oral or IM phenobarbital is acceptable for mild-moderate breakthrough on the ward [12]\n\n[Supportive Care](#/info/aw-supportive-care) — thiamine, electrolytes, refeeding risk',
     citation: [1, 9, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '130 mg IV/PO/IM',
+        route: 'IV, PO, or IM',
+        frequency: 'PRN for breakthrough symptoms',
+        duration: 'Auto-taper over 3-4 days due to long half-life',
+        notes: 'Oral or IM acceptable on ward for mild-moderate breakthrough. Avoid benzodiazepines on top of phenobarbital load.',
+      },
+      monitoring: 'Monitor for oversedation. Communicate total phenobarbital dose to all providers. Check level if uncertain.',
+    },
     next: 'aw-disposition',
   },
 
@@ -323,6 +402,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Benzodiazepine Dosing Strategy',
     body: '**Symptom-triggered therapy (recommended for most)** [2][14]:\n• Assess with [CIWA-Ar](#/calculator/ciwa-ar) every 1-4 hours (severe: q10-15 min)\n• Medicate when CIWA-Ar ≥8\n• [Diazepam](#/drug/diazepam/alcohol withdrawal) 5-10 mg IV q5-10 min, OR\n• [Lorazepam](#/drug/lorazepam/alcohol withdrawal) 2-4 mg IV q15-20 min (cirrhosis)\n• Reduces total medication and length of stay vs fixed-dose [14]\n\n**Front-loading (high-risk patients):**\n• Appropriate for patients at risk of dangerous complications (older, cardiac disease, prior DT)\n• [Diazepam](#/drug/diazepam/alcohol withdrawal) 5-10 mg IV q5-10 min until calm\n• Some patients may require massive doses (>500 mg diazepam) [2]\n\n**Oral alternative (less severe):**\n• [Chlordiazepoxide](#/drug/chlordiazepoxide/alcohol withdrawal) 25-100 mg PO q1h PRN\n\n**Convert to oral** as soon as clinical response allows.\n\n**RASS target:** 0 to -1 (calm, alert to drowsy) [10]',
     citation: [2, 10, 14],
+    treatment: {
+      firstLine: {
+        drug: 'Diazepam',
+        dose: '5-10 mg IV',
+        route: 'IV push',
+        frequency: 'q5-10 min PRN',
+        duration: 'Until RASS 0 to -1 achieved',
+        notes: 'Preferred for most patients. Rapid onset, long-acting. Some patients may need >500 mg total.',
+      },
+      alternative: {
+        drug: 'Lorazepam',
+        dose: '2-4 mg IV',
+        route: 'IV push',
+        frequency: 'q15-20 min PRN',
+        duration: 'Until RASS 0 to -1 achieved',
+        notes: 'Use in severe cirrhosis (no active metabolites, shorter half-life). Slower onset than diazepam.',
+      },
+      monitoring: 'CIWA-Ar q1-4h (severe: q10-15 min). Target RASS 0 to -1. Continuous pulse oximetry. Monitor for respiratory depression.',
+    },
     next: 'aw-bz-response',
   },
 
@@ -355,6 +453,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Refractory DT — Escalation',
     body: '**Add phenobarbital to benzodiazepine regimen** [1][2]:\n\n• [Phenobarbital](#/drug/phenobarbital/alcohol withdrawal refractory) **130-260 mg IV q15-20 min** until symptoms controlled\n• Do NOT exceed cumulative 15 mg/kg in 24 hours when given WITH benzodiazepines [2]\n• **Intubation is frequently necessary** due to synergistic respiratory depression\n\n⚠️ **Phenobarbital + benzodiazepines are synergistic** — the combination is more dangerous than either alone. Use smaller incremental doses and monitor closely.\n\n**If still refractory:**\n• [Propofol](#/drug/propofol/refractory se) infusion — opens chloride channels independently of GABA, also antagonizes excitatory amino acids [2]\n• Requires intubation and ICU\n\n**Consider dissociative [Ketamine](#/drug/ketamine/acute agitation)** for immediate behavioral control while phenobarbital takes effect [1]:\n• 1.5-2 mg/kg IV — achieves control for ~30 minutes\n• Start phenobarbital during dissociation period',
     citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '130-260 mg IV',
+        route: 'IV infusion',
+        frequency: 'q15-20 min',
+        duration: 'Until symptoms controlled (max 15 mg/kg/24h with benzos)',
+        notes: 'Use smaller incremental doses due to synergy with benzodiazepines. Intubation frequently required.',
+      },
+      alternative: {
+        drug: 'Ketamine',
+        dose: '1.5-2 mg/kg IV',
+        route: 'IV push',
+        frequency: 'Single dose for immediate control',
+        duration: '~30 min dissociation',
+        notes: 'Bridges while phenobarbital takes effect. Useful for immediate behavioral control in severely agitated patient.',
+      },
+      monitoring: 'Prepare for intubation. Synergistic respiratory depression with phenobarbital + benzodiazepines. ICU admission required.',
+    },
     next: 'aw-refractory-result',
   },
 
@@ -376,6 +493,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     title: 'Withdrawal Controlled — Supportive Care',
     body: 'Acute withdrawal symptoms are controlled. Address supportive care and plan disposition.\n\n[Supportive Care Reference](#/info/aw-supportive-care)\n\n**Thiamine (Wernicke prophylaxis):**\n• If altered mental status: [Thiamine](#/drug/thiamine/wernicke) **500 mg IV q8h** × 2-3 days [2][3]\n• If normal mental status: [Thiamine](#/drug/thiamine/wernicke) **100 mg IV daily** [2]\n• Always give thiamine BEFORE or WITH glucose [2]\n\n**Electrolyte repletion:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/hypomagnesemia) — alcoholics often severely depleted, may require multiple IV doses\n• Potassium — hypokalemia common from renal/extrarenal losses\n• Phosphate — monitor for refeeding syndrome in malnourished patients\n\n**Fluids:** Isotonic IV fluid until clinically euvolemic\n**Glucose:** Monitor fingerstick — risk of hypoglycemia with depleted glycogen stores\n**Nutrition:** Most patients are malnourished with high metabolic needs',
     citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Thiamine',
+        dose: '500 mg IV (if AMS) or 100 mg IV (normal mental status)',
+        route: 'IV',
+        frequency: 'q8h (if AMS) or daily (normal mental status)',
+        duration: '2-3 days IV, then oral',
+        notes: 'Always give BEFORE or WITH glucose. Prevents Wernicke encephalopathy.',
+      },
+      alternative: {
+        drug: 'Magnesium Sulfate',
+        dose: '2-4 g IV',
+        route: 'IV infusion',
+        frequency: 'May repeat based on levels',
+        duration: 'Until magnesium repleted',
+        notes: 'Alcoholics often severely depleted. Also replace potassium and phosphate as needed.',
+      },
+      monitoring: 'Electrolytes daily (Mg, K, Phos). Fingerstick glucose q4-6h. Monitor for refeeding syndrome in malnourished patients.',
+    },
     next: 'aw-disposition',
   },
 
@@ -419,6 +555,17 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'ICU with continuous monitoring. Target RASS 0 to -1. Aggressive supportive care. Plan early transition to floor when stable.',
     confidence: 'definitive',
     citation: [1, 2, 10, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Thiamine',
+        dose: '500 mg IV',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: 'Until alert and tolerating PO',
+        notes: 'Higher dose for ICU patients with AMS. Continue aggressive supplementation.',
+      },
+      monitoring: 'Continuous vitals, SpO2, neuro checks. RASS q2-4h (preferred over CIWA-Ar if intubated). Electrolytes daily. Monitor for aspiration, rhabdo, dysrhythmias, hyperthermia.',
+    },
   },
 
   {
@@ -430,6 +577,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Floor admission with oral medication transition. Monitor with CIWA-Ar q4-6h. Communicate total phenobarbital dose to receiving team. Plan AUD medication initiation before discharge.',
     confidence: 'recommended',
     citation: [1, 2, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '130 mg PO/IM',
+        route: 'PO or IM',
+        frequency: 'PRN for breakthrough symptoms',
+        duration: 'As needed during admission (auto-tapers)',
+        notes: 'Phenobarbital auto-tapers due to long half-life. Additional doses may not be needed.',
+      },
+      alternative: {
+        drug: 'Chlordiazepoxide',
+        dose: '25-50 mg PO',
+        route: 'PO',
+        frequency: 'q6h',
+        duration: 'Taper over 3-5 days',
+        notes: 'Use if patient did NOT receive phenobarbital loading. Do not combine with large phenobarbital load.',
+      },
+      monitoring: 'CIWA-Ar q4-6h. Continue thiamine and electrolyte repletion. Communicate total phenobarbital dose to floor team.',
+    },
   },
 
   {
@@ -488,6 +654,17 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Naltrexone 25 mg daily × 3-7 days, then 50 mg daily. Monitor LFTs q6 months. Arrange outpatient follow-up for ongoing management.',
     confidence: 'recommended',
     citation: [15, 16, 17],
+    treatment: {
+      firstLine: {
+        drug: 'Naltrexone',
+        dose: '25 mg PO daily (start), then 50 mg PO daily (maintenance)',
+        route: 'PO',
+        frequency: 'Once daily',
+        duration: 'Minimum 6 months, continue indefinitely if beneficial',
+        notes: 'Take with food to reduce nausea. Start low to minimize GI side effects. May increase to 100 mg daily if needed.',
+      },
+      monitoring: 'LFTs at baseline, then q6 months. Monitor for depression/suicidality. NNT 12 for preventing return to heavy drinking.',
+    },
   },
 
   {
@@ -499,6 +676,17 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Acamprosate 333 mg TID initially, titrate to 666 mg TID. No hepatic monitoring needed. Best for abstinence goal in patients with liver disease.',
     confidence: 'recommended',
     citation: [15, 16, 17],
+    treatment: {
+      firstLine: {
+        drug: 'Acamprosate',
+        dose: '333 mg PO TID (start), then 666 mg PO TID (maintenance)',
+        route: 'PO',
+        frequency: 'TID (three times daily)',
+        duration: 'Minimum 6 months, continue indefinitely if beneficial',
+        notes: 'Take on empty stomach. Safe in cirrhosis (not hepatically metabolized). GFR 30-50: 333 mg TID. Contraindicated if GFR <30.',
+      },
+      monitoring: 'No routine labs required. Monitor adherence (TID dosing is challenging). NNT 9-12 for preventing return to drinking.',
+    },
   },
 
   {
@@ -521,6 +709,25 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     recommendation: 'Discharge with thiamine, folate, multivitamin. AUD medication if appropriate. Follow-up within 1 week. Addiction medicine and psychosocial referrals.',
     confidence: 'recommended',
     citation: [1, 2, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Thiamine',
+        dose: '100 mg PO daily',
+        route: 'PO',
+        frequency: 'Once daily',
+        duration: '5 days minimum',
+        notes: 'Replenish depleted stores. Continue indefinitely if continued alcohol use expected.',
+      },
+      alternative: {
+        drug: 'Folic Acid',
+        dose: '1 mg PO daily',
+        route: 'PO',
+        frequency: 'Once daily',
+        duration: 'Ongoing',
+        notes: 'Addresses folate deficiency common in alcoholism. Also prescribe daily multivitamin.',
+      },
+      monitoring: 'Follow-up within 1 week. Return precautions: seizure, confusion, hallucinations. Kindling increases risk of future withdrawal episodes.',
+    },
   },
 
 ];

@@ -258,6 +258,33 @@ export const PRECIP_DELIVERY_NODES = [
         title: 'Oxytocin & Uterine Massage',
         body: 'OXYTOCIN — POSTPARTUM UTEROTONIC\n\n[Oxytocin](#/drug/oxytocin/precipitous delivery) 20 units in 1L NS (or LR) at 250 mL/hr.\n\n**Do NOT give IV push** — can cause profound hypotension. [8]\n\n**Timing:** Start after the placenta is delivered. Do not wait to assess bleeding — **empiric oxytocin decreases postpartum hemorrhage risk.** [8]\n\nBIMANUAL UTERINE MASSAGE\n• Place one hand on the uterine fundus abdominally\n• Massage firmly until the uterus contracts and feels firm ("boggy" uterus = atony = hemorrhage risk)\n• Continue massage intermittently until uterine tone is maintained\n\n**Uterine atony is the #1 cause of postpartum hemorrhage.** Oxytocin + massage addresses this directly. [8]',
         citation: [8],
+        treatment: {
+            firstLine: {
+                drug: 'Oxytocin',
+                dose: '20 units in 1L NS or LR',
+                route: 'IV infusion',
+                frequency: '250 mL/hr (83 mL/hr = 10 mU/min)',
+                duration: 'until uterine tone maintained',
+                notes: 'Do NOT give IV push - causes profound hypotension. Start after placenta delivered.',
+            },
+            alternative: {
+                drug: 'Methylergonovine (Methergine)',
+                dose: '0.2 mg',
+                route: 'IM',
+                frequency: 'q2-4h PRN',
+                duration: 'max 5 doses',
+                notes: 'CONTRAINDICATED in hypertension or preeclampsia. Second-line if oxytocin fails.',
+            },
+            pcnAllergy: {
+                drug: 'Misoprostol (Cytotec)',
+                dose: '800-1000 mcg',
+                route: 'PR or SL',
+                frequency: 'once',
+                duration: 'single dose',
+                notes: 'Alternative uterotonic. Causes fever, shivering, diarrhea. No contraindication in HTN.',
+            },
+            monitoring: 'Uterine tone (firm vs boggy), vaginal bleeding, vital signs q15 min x1 hour post-placenta.',
+        },
         next: 'precip-lacerations',
     },
     {

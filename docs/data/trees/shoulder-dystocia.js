@@ -140,6 +140,25 @@ export const SHOULDER_DYSTOCIA_NODES = [
         title: 'Last Resort Maneuvers',
         body: '**If all standard maneuvers have failed, consider these last-resort options. Each carries significant maternal and/or fetal risk.**\n\nZAVANELLI MANEUVER (Cephalic Replacement)\nFirst described by Dr. Zavanelli (1977, Pleasanton, CA).\n• Set up for **emergency cesarean section** first\n• Rotate fetal head to occiput anterior position\n• Flex the head and apply constant firm pressure to push it back into the vagina\n• Administer tocolytics to relax the uterus: [Terbutaline](#/drug/terbutaline/tocolysis) 0.25 mg SQ or [Nitroglycerin](#/drug/nitroglycerin/tocolysis) 0.4 mg SL\n• Perform immediate cesarean section after head replacement\n• O\'Leary (1993): 53 of 59 heads replaced; 5-min Apgar <6 in 61%; 2 deaths [14]\n• Sanberg (1999): 77.3% success in 84 cases; complications included fractures, Erb palsy, brain damage [15]\n\nALL-FOURS MANEUVER (Gaskin)\n• Place mother on hands and knees\n• May change the angle of the symphysis relative to the stuck shoulder\n• Bruner (1998): resolved 82% of 82 cases (2–3 min to reposition) [16]\n• Practicality limited: exhausted patient, epidural in place, requires repositioning\n\nDELIBERATE CLAVICLE FRACTURE\n• Theoretically decreases bisacromial diameter\n• In practice the clavicle is difficult to fracture intentionally\n• Risk of great vessel injury, lung damage\n• Most reports involve deceased fetuses\n\nSYMPHYSIOTOMY\n• Transection of symphyseal ligaments gains 2–3 cm pelvic circumference\n• Performed under local analgesia in ~5 minutes\n• Major risk: bladder and urethral injury\n• Reserved for settings remote from cesarean capability [17]\n\nABDOMINAL RESCUE (O\'Shaughnessy 1998)\n• Laparotomy + hysterotomy → manually rotate fetal shoulders → complete vaginal delivery\n• Absolute last resort',
         citation: [14, 15, 16, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Terbutaline',
+                dose: '0.25 mg',
+                route: 'Subcutaneous',
+                frequency: 'Once',
+                duration: 'Single dose for acute tocolysis',
+                notes: 'Beta-2 agonist for uterine relaxation prior to Zavanelli maneuver. Onset 5-15 min SQ. Contraindicated in maternal cardiac disease.',
+            },
+            alternative: {
+                drug: 'Nitroglycerin',
+                dose: '0.4 mg (400 mcg)',
+                route: 'Sublingual',
+                frequency: 'Once',
+                duration: 'Single dose for acute tocolysis',
+                notes: 'Nitric oxide donor for rapid uterine relaxation. Onset 1-2 min SL. May cause maternal hypotension. Can repeat x1 if needed.',
+            },
+            monitoring: 'Monitor maternal BP and HR. Ensure IV access. Prepare for emergency cesarean section immediately after successful cephalic replacement.',
+        },
         next: 'sd-protocols',
     },
     {

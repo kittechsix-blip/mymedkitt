@@ -279,6 +279,25 @@ export const NEONATAL_RESUS_NODES = [
         body: 'EPINEPHRINE — Neonatal Resuscitation [1][2][3]\n\n[Epinephrine](#/drug/epinephrine/neonatal resuscitation)\n\n**IV/IO (preferred):**\n• **0.01–0.03 mg/kg** of 1:10,000 (= 0.1–0.3 mL/kg)\n• Repeat every **3–5 minutes** as needed\n\n**ET (if no IV/IO access):**\n• **0.05–0.1 mg/kg** of 1:10,000 (= 0.5–1 mL/kg)\n• Higher dose needed via ET — absorption is unpredictable\n• Switch to IV/IO route as soon as access established\n\n**IV/IO is ALWAYS preferred over ET.** Establish UVC access as quickly as possible.\n\n**Preparation:**\n• Use **1:10,000 concentration** (0.1 mg/mL)\n• Pre-draw doses in labeled syringes\n• Flush with 1–3 mL NS after IV administration\n\n**Continue CPR between doses.** Do not stop compressions to give epinephrine. [1][2]',
         citation: [1, 2, 3],
         next: 'nrp-uvc',
+        treatment: {
+            firstLine: {
+                drug: 'Epinephrine',
+                dose: '0.01-0.03 mg/kg (0.1-0.3 mL/kg of 1:10,000)',
+                route: 'IV/IO (preferred)',
+                frequency: 'Every 3-5 minutes',
+                duration: 'Until HR >60 bpm',
+                notes: 'Use 1:10,000 concentration (0.1 mg/mL). Flush with 1-3 mL NS after administration.',
+            },
+            alternative: {
+                drug: 'Epinephrine',
+                dose: '0.05-0.1 mg/kg (0.5-1 mL/kg of 1:10,000)',
+                route: 'ET (endotracheal)',
+                frequency: 'Every 3-5 minutes',
+                duration: 'Until IV/IO access established',
+                notes: 'Higher dose needed via ET due to unpredictable absorption. Switch to IV/IO ASAP.',
+            },
+            monitoring: 'Heart rate via cardiac monitor. Goal HR >60 bpm. Continue CPR between doses.',
+        },
     },
     {
         id: 'nrp-uvc',
@@ -332,6 +351,25 @@ export const NEONATAL_RESUS_NODES = [
         body: 'VOLUME & GLUCOSE RESUSCITATION [1][2]\n\n**Hypovolemia — clinical signs:**\n• Pallor despite adequate oxygenation\n• Weak pulses\n• Poor response to resuscitation\n• Known maternal hemorrhage or placental abruption\n\n**Normal saline:**\n• **10 mL/kg** IV/IO — infuse over 5–10 minutes\n• May repeat if needed\n\n**O-negative pRBCs:**\n• **10 mL/kg** — for acute blood loss (abruption, cord avulsion)\n• Uncrossmatched O-negative\n\n**D10W (10% Dextrose):**\n• **2 mL/kg** IV — for hypoglycemia (glucose <40 mg/dL)\n• Neonates have limited glycogen stores — check glucose early\n\n**Naloxone:**\n• **No longer routinely recommended** in neonatal resuscitation\n• PPV is the treatment for respiratory depression, regardless of cause [1]\n\nReassess after volume — if HR improving → continue PPV → post-resuscitation care.',
         citation: [1, 2],
         next: 'nrp-postresus',
+        treatment: {
+            firstLine: {
+                drug: 'Normal Saline (0.9% NaCl)',
+                dose: '10 mL/kg',
+                route: 'IV/IO',
+                frequency: 'Once, may repeat',
+                duration: 'Infuse over 5-10 minutes',
+                notes: 'For suspected hypovolemia (pallor, weak pulses, poor response to resuscitation).',
+            },
+            alternative: {
+                drug: 'O-negative pRBCs',
+                dose: '10 mL/kg',
+                route: 'IV/IO',
+                frequency: 'Once, may repeat',
+                duration: 'Infuse over 5-10 minutes',
+                notes: 'For acute blood loss (placental abruption, cord avulsion). Use uncrossmatched O-negative.',
+            },
+            monitoring: 'Heart rate, skin perfusion, pulses. Reassess after each bolus. Check glucose early.',
+        },
     },
     {
         id: 'nrp-discontinuation',
@@ -355,6 +393,17 @@ export const NEONATAL_RESUS_NODES = [
         recommendation: 'Post-resuscitation: APGAR at 1/5/10 min, maintain normothermia (36.5-37.5°C), check glucose, NICU transfer for any neonate requiring PPV or more. Therapeutic hypothermia eligibility: ≥36 wk, mod-severe HIE, within 6 hours. Team debrief.',
         confidence: 'definitive',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'D10W (10% Dextrose)',
+                dose: '2 mL/kg',
+                route: 'IV',
+                frequency: 'Once, repeat PRN',
+                duration: 'Single bolus',
+                notes: 'For hypoglycemia (glucose <40 mg/dL). Check glucose within 30-60 min of stabilization.',
+            },
+            monitoring: 'Temperature (target 36.5-37.5°C), glucose, APGAR at 1/5/10 min, continuous cardiorespiratory monitoring.',
+        },
     },
     // =====================================================================
     // QUICK REFERENCE IMAGE NODES (accessible via links on start page)

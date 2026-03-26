@@ -102,6 +102,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Patient has neurological, ocular, or otic symptoms with known or suspected syphilis. This requires the **neurosyphilis evaluation pathway**.\n\n[Neurosyphilis Evaluation & Treatment](#/tree/neurosyphilis) — full CSF workup and IV Penicillin G protocol.\n\n**Key principles:**\n• Ocular/otosyphilis is treated as neurosyphilis **regardless of CSF findings** — do NOT delay treatment for LP results\n• [Penicillin G (IV)](#/drug/penicillin-g-iv/neurosyphilis) 18-24 million units/day (3-4M units q4h) × 10-14 days\n• [Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) does NOT achieve treponemicidal CSF levels — inadequate for neurosyphilis\n• Emergent ophthalmology consult for ocular syphilis, ENT/audiology for otosyphilis',
     recommendation: 'Route to Neurosyphilis consult for CSF evaluation and IV Penicillin G protocol.',
     citation: [1, 6, 7, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Aqueous Crystalline Penicillin G',
+        dose: '18-24 million units/day (3-4 million units)',
+        route: 'IV',
+        frequency: 'q4h',
+        duration: '10-14 days',
+        notes: 'Do NOT delay for LP results if ocular/otic symptoms; benzathine PCN does NOT achieve CSF levels',
+      },
+      pcnAllergy: {
+        drug: 'Ceftriaxone',
+        dose: '2g',
+        route: 'IV',
+        frequency: 'daily',
+        duration: '10-14 days',
+        notes: 'Limited data; desensitization strongly preferred if true PCN allergy',
+      },
+      monitoring: 'Repeat CSF at 6 months; if CSF not improving, re-treat; ophthalmology/ENT follow-up as indicated',
+    },
   },
 
   {
@@ -402,6 +421,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Primary / Secondary / Early Latent (< 1 year):** [1][5][31]\n\n[Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) **2.4 million units IM × 1 dose**\n\nAdminister as a single injection (can split into two gluteal sites for comfort).\n\n**Jarisch-Herxheimer reaction:** [32]\n• Occurs in 10-35% of primary, 75-90% of secondary syphilis\n• Onset 2-8 hours after treatment, resolves within 24 hours\n• Fever, rigors, myalgias, headache, tachycardia, flushing, worsening of rash\n• **NOT an allergic reaction** — caused by immune response to dying spirochetes\n• Treat supportively (antipyretics, fluids). Do NOT withhold future treatment.\n\n[Jarisch-Herxheimer Reaction](#/info/syph-jarisch-herxheimer)\n\n**Follow-up:** Quantitative RPR at 6 and 12 months. Expect **4-fold titer decline** by 6-12 months (e.g., 1:64 → 1:16).',
     recommendation: 'Benzathine PCN-G 2.4M units IM × 1. Counsel regarding Jarisch-Herxheimer. RPR at 6 and 12 months.',
     citation: [1, 5, 31, 32],
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine Penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'single dose',
+        duration: '1 dose',
+        notes: 'Can split into two gluteal sites for comfort; counsel on Jarisch-Herxheimer reaction',
+      },
+      pcnAllergy: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '14 days',
+        notes: 'Contraindicated in pregnancy; 82-100% serological cure rate',
+      },
+      monitoring: 'Quantitative RPR at 6 and 12 months; expect 4-fold titer decline by 6-12 months',
+    },
     next: 'syph-disposition',
   },
 
@@ -413,6 +451,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Late Latent / Tertiary (non-neurologic):** [1][5][31]\n\n[Benzathine Penicillin G](#/drug/benzathine-penicillin/late latent) **2.4 million units IM weekly × 3 weeks** (total 7.2 million units)\n\n**Missed dose:** If > 14 days between doses, restart the 3-dose series.\n\n**Before treating:**\n• Must rule out neurosyphilis (neurologic exam; consider LP if RPR ≥ 1:32, HIV+, or any neurologic symptoms)\n• Gummatous disease: responds well to treatment, lesions resolve\n• Cardiovascular: treatment addresses active infection but does **not** reverse existing aortic damage\n\n**Follow-up:** Quantitative RPR at 6, 12, and 24 months. If no 4-fold decline → evaluate for treatment failure or neurosyphilis.',
     recommendation: 'Benzathine PCN-G 2.4M units IM weekly × 3 weeks. Rule out neurosyphilis. RPR at 6, 12, 24 months.',
     citation: [1, 5, 31],
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine Penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'weekly',
+        duration: '3 weeks (total 7.2 million units)',
+        notes: 'If >14 days between doses, restart series; rule out neurosyphilis before treating',
+      },
+      pcnAllergy: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '28 days',
+        notes: 'Must rule out neurosyphilis first (doxy does NOT achieve CSF levels); contraindicated in pregnancy',
+      },
+      monitoring: 'Quantitative RPR at 6, 12, and 24 months; if no 4-fold decline, evaluate for treatment failure or neurosyphilis',
+    },
     next: 'syph-disposition',
   },
 
@@ -456,6 +513,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Non-pregnant, Primary / Secondary / Early Latent:** [1][5][31]\n\n**First alternative:**\n[Doxycycline](#/drug/doxycycline/primary) **100 mg PO BID × 14 days**\n• Well-tolerated, 82-100% serological cure rate\n• Contraindicated in pregnancy and children < 8 years\n\n**Second alternative:**\n[Ceftriaxone](#/drug/ceftriaxone/neurosyphilis) **1-2g IM/IV daily × 10-14 days**\n• Limited data, CDC-recommended alternative\n• Cross-reactivity with penicillin allergy is ~2-5% (lower than historically believed)\n\n**NOT recommended:** Azithromycin — documented macrolide resistance and treatment failures. [34][35][36]',
     recommendation: 'Doxycycline 100mg PO BID × 14 days. RPR at 6 and 12 months.',
     citation: [1, 5, 31, 34, 35, 36],
+    treatment: {
+      firstLine: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '14 days',
+        notes: 'Contraindicated in pregnancy and children <8 years; 82-100% serological cure rate',
+      },
+      alternative: {
+        drug: 'Ceftriaxone',
+        dose: '1-2g',
+        route: 'IM/IV',
+        frequency: 'daily',
+        duration: '10-14 days',
+        notes: 'Limited data; PCN cross-reactivity ~2-5%; CDC-recommended alternative',
+      },
+      monitoring: 'Quantitative RPR at 6 and 12 months; expect 4-fold titer decline',
+    },
     next: 'syph-disposition',
   },
 
@@ -467,6 +543,17 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Non-pregnant, Late Latent / Tertiary:** [1][5][31]\n\n**Preferred alternative:**\n[Doxycycline](#/drug/doxycycline/late latent) **100 mg PO BID × 28 days**\n\n**Critical:** Must rule out neurosyphilis **before** using doxycycline — it does **NOT** achieve adequate CSF levels.\n\nEvidence is weaker than for early syphilis. Close follow-up with Infectious Disease is essential.\n\nIf neurosyphilis cannot be excluded → [Neurosyphilis PCN Allergy pathway](#/node/syph-alt-neuro)',
     recommendation: 'Doxycycline 100mg PO BID × 28 days. Rule out neurosyphilis first. RPR at 6, 12, 24 months.',
     citation: [1, 5, 31],
+    treatment: {
+      firstLine: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '28 days',
+        notes: 'Must rule out neurosyphilis first (doxy does NOT achieve CSF levels); contraindicated in pregnancy',
+      },
+      monitoring: 'Quantitative RPR at 6, 12, and 24 months; ID follow-up essential; if no 4-fold decline, evaluate for neurosyphilis',
+    },
     next: 'syph-disposition',
   },
 
@@ -482,6 +569,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Penicillin is the ONLY acceptable treatment in pregnancy.** No alternatives have been proven adequate for preventing congenital syphilis. [3][10][11][12]\n\n**If PCN-allergic:** Desensitization is **MANDATORY** (oral desensitization protocol preferred, can be done in ED/L&D with monitoring). This is not optional.\n\n**Treatment by stage:** Same regimen as non-pregnant:\n• Early: [Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) 2.4M units IM × 1\n• Late: [Benzathine Penicillin G](#/drug/benzathine-penicillin/late latent) 2.4M units IM weekly × 3\n\n**Jarisch-Herxheimer reaction in pregnancy:**\n• Can precipitate preterm labor and fetal distress\n• Monitor with continuous fetal monitoring × 24h if viable gestational age\n• Should NOT prevent or delay treatment\n\n[Jarisch-Herxheimer Reaction](#/info/syph-jarisch-herxheimer)\n[Congenital Syphilis](#/info/syph-congenital)\n\n**Inadequate treatment for congenital prevention:**\n• Non-penicillin regimen used\n• Treatment completed < 30 days before delivery\n• No documented 4-fold titer decline',
     recommendation: 'PCN per stage. If PCN-allergic: desensitize. Monitor for Jarisch-Herxheimer. OB involvement mandatory.',
     citation: [3, 10, 11, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine Penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'Per stage: single dose (early) or weekly (late)',
+        duration: 'Early: 1 dose; Late: 3 weekly doses',
+        notes: 'ONLY penicillin is acceptable in pregnancy; NO alternatives proven adequate for preventing congenital syphilis',
+      },
+      pcnAllergy: {
+        drug: 'Penicillin desensitization',
+        dose: 'Per desensitization protocol',
+        route: 'Oral (preferred) or IV',
+        frequency: 'Single procedure',
+        duration: 'Then treat with benzathine PCN per stage',
+        notes: 'Desensitization is MANDATORY if PCN-allergic; can be done in ED/L&D with monitoring',
+      },
+      monitoring: 'Continuous fetal monitoring x24h if viable GA (Jarisch-Herxheimer risk); monthly RPR until delivery; ensure treatment >30 days before delivery',
+    },
     next: 'syph-disposition',
   },
 
@@ -493,6 +599,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Cross-reference with neurosyphilis consult for full workup: [Neurosyphilis Evaluation](#/tree/neurosyphilis) [1][7][8]\n\n**If not true IgE-mediated allergy:**\nDesensitization strongly preferred — penicillin is the only proven therapy for neurosyphilis.\n\n**Alternative:**\n[Ceftriaxone](#/drug/ceftriaxone/neurosyphilis) **2g IV daily × 10-14 days**\n• CDC-recommended alternative with limited data\n• Cross-reactivity between PCN and 3rd-gen cephalosporins is ~2-5% (lower than historically believed)\n\n[Procaine Penicillin + Probenecid](#/drug/procaine-penicillin/neurosyphilis) — requires desensitization (still penicillin-based).\n\nIf true IgE-mediated PCN anaphylaxis: desensitization under allergist supervision is the safest approach.',
     recommendation: 'Desensitize if possible. Alternative: Ceftriaxone 2g IV daily × 10-14 days.',
     citation: [1, 7, 8, 33],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone',
+        dose: '2g',
+        route: 'IV',
+        frequency: 'daily',
+        duration: '10-14 days',
+        notes: 'CDC-recommended alternative; PCN cross-reactivity ~2-5%; desensitization strongly preferred if feasible',
+      },
+      alternative: {
+        drug: 'Penicillin desensitization + Aqueous Crystalline Penicillin G',
+        dose: '18-24 million units/day (3-4 million units q4h)',
+        route: 'IV',
+        frequency: 'q4h (after desensitization)',
+        duration: '10-14 days',
+        notes: 'Desensitization under allergist supervision is safest approach for true IgE-mediated allergy',
+      },
+      monitoring: 'Repeat CSF at 6 months; if CSF not improving, re-treat; close ID follow-up essential',
+    },
     next: 'syph-disposition',
   },
 
@@ -504,6 +629,25 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'When clinical suspicion is high and results are pending: [1][5]\n\n**Indications for empiric treatment:**\n• Partner notification with exposure < 90 days\n• Classic chancre consistent with primary syphilis\n• Classic secondary rash (palms/soles involvement)\n• High-risk patient with concerning lesion\n\n[Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) **2.4 million units IM × 1**\n\n**IMPORTANT:** Draw serologic testing (RPR + treponemal test) **BEFORE** administering treatment. This establishes baseline titers for monitoring.\n\nFollow up results and determine if stage-specific treatment adjustments are needed (e.g., if late latent → needs 2 additional weekly doses).',
     recommendation: 'Draw RPR + TT first, then Benzathine PCN-G 2.4M IM × 1. Follow up results.',
     citation: [1, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Benzathine Penicillin G',
+        dose: '2.4 million units',
+        route: 'IM',
+        frequency: 'single dose',
+        duration: '1 dose (may need additional doses if late latent confirmed)',
+        notes: 'Draw RPR + treponemal test BEFORE treatment to establish baseline; follow up results to adjust regimen if needed',
+      },
+      pcnAllergy: {
+        drug: 'Doxycycline',
+        dose: '100 mg',
+        route: 'PO',
+        frequency: 'BID',
+        duration: '14 days (may need 28 days if late latent)',
+        notes: 'Contraindicated in pregnancy; must rule out neurosyphilis if late latent suspected',
+      },
+      monitoring: 'Follow up serology results; if late latent confirmed, complete 3-dose series; RPR at 6 and 12 months',
+    },
     next: 'syph-disposition',
   },
 

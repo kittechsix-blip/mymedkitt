@@ -462,6 +462,25 @@ export const PRIAPISM_NODES = [
         recommendation: 'Observe 60 minutes. Monitor BP/HR. Discharge with urology follow-up in 1\u20132 days. Return immediately for recurrence > 4 hours.',
         confidence: 'definitive',
         citation: [1, 3, 4, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Phenylephrine',
+                dose: '200 mcg (2 mL of 100 mcg/mL solution)',
+                route: 'Intracavernosal injection',
+                frequency: 'Every 5 minutes',
+                duration: 'Up to 5 doses total (1 mg max)',
+                notes: 'Corpora communicate freely - only ONE side needs injection. Hold if SBP > 160 or HR > 110.',
+            },
+            alternative: {
+                drug: 'Epinephrine',
+                dose: '20 mcg (2 mL of 10 mcg/mL solution)',
+                route: 'Intracavernosal injection',
+                frequency: 'Every 5 minutes',
+                duration: 'Up to 5 doses total (100 mcg max)',
+                notes: 'Use only if phenylephrine unavailable. Higher cardiovascular risk than phenylephrine.',
+            },
+            monitoring: 'Check BP and HR every 5 minutes between injections. Hold if SBP > 160 or HR > 110. Contraindicated in uncontrolled HTN or MAO inhibitor use.',
+        },
     },
     // =====================================================================
     // MODULE 6: REASSESSMENT
@@ -634,6 +653,25 @@ export const PRIAPISM_NODES = [
         recommendation: 'Observe. Urology follow-up within 48 hours. High probability of ED given prolonged duration. Early erectile rehabilitation counseling. PDE5i trial at 4\u20136 weeks.',
         confidence: 'recommended',
         citation: [1, 2, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Phenylephrine',
+                dose: '200 mcg (2 mL of 100 mcg/mL solution)',
+                route: 'Intracavernosal injection',
+                frequency: 'Every 5 minutes',
+                duration: 'Up to 5 doses total (1 mg max)',
+                notes: 'Corpora communicate freely - only ONE side needs injection. Hold if SBP > 160 or HR > 110.',
+            },
+            alternative: {
+                drug: 'Epinephrine',
+                dose: '20 mcg (2 mL of 10 mcg/mL solution)',
+                route: 'Intracavernosal injection',
+                frequency: 'Every 5 minutes',
+                duration: 'Up to 5 doses total (100 mcg max)',
+                notes: 'Use only if phenylephrine unavailable. Higher cardiovascular risk than phenylephrine.',
+            },
+            monitoring: 'Check BP and HR every 5 minutes between injections. Hold if SBP > 160 or HR > 110. Contraindicated in uncontrolled HTN or MAO inhibitor use.',
+        },
     },
     {
         id: 'priapism-prosthesis-result',

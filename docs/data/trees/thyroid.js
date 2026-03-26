@@ -91,6 +91,17 @@ export const THYROID_NODES = [
         body: 'No features of thyroid storm or end-organ dysfunction.\n\n**ED Workup:** TSH, free T4, free T3\n\n**Symptomatic relief:** [Propranolol](#/drug/propranolol/thyrotoxicosis) 10-40 mg PO TID for palpitations, tremor, anxiety (if no contraindications)\n\n**Disposition:**\n• Urgent endocrinology referral (1-2 weeks)\n• Return precautions: fever >38.5°C, confusion, persistent vomiting, palpitations at rest, inability to take fluids',
         recommendation: 'Endocrinology referral within 1-2 weeks. Return for worsening symptoms.',
         citation: [4, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Propranolol',
+                dose: '10-40 mg',
+                route: 'PO',
+                frequency: 'TID',
+                duration: 'Until endocrinology follow-up',
+                notes: 'For symptomatic relief of palpitations, tremor, anxiety. Contraindicated in asthma, decompensated HF.',
+            },
+            monitoring: 'Heart rate, blood pressure. Return precautions for worsening symptoms.',
+        },
     },
     // =====================================================================
     // MODULE 2: DECOMPENSATED HYPOTHYROIDISM — EVALUATION
@@ -112,6 +123,25 @@ export const THYROID_NODES = [
         body: '**CRITICAL SEQUENCE: Give steroids BEFORE thyroid hormone replacement.**\n\nConcomitant adrenal insufficiency is present in ~5-10% of patients (autoimmune polyglandular syndrome or pituitary disease). Thyroid hormone accelerates cortisol metabolism — giving T4 without cortisol can **precipitate adrenal crisis**. [1][5][14]\n\n**Adults:**\n• [Hydrocortisone](#/drug/hydrocortisone/decompensated hypothyroidism) 100 mg IV bolus, then 50 mg IV q8h\n• IBCC protocol: 50 mg IV q6h\n\n**If hydrocortisone unavailable:**\n• [Methylprednisolone](#/drug/methylprednisolone/thyroid crisis) 40 mg IV\n\n**Draw random cortisol BEFORE steroids if practical — but do NOT delay treatment.** A cortisol <18 μg/dL during acute stress is suggestive of AI. [5]\n\n**Taper:** Wean steroids over 2-3 days once hemodynamically stable and cortisol results available. If cortisol was adequate (>18 μg/dL), steroids may be discontinued.',
         citation: [1, 3, 5, 14],
         next: 'thyroid-hypo-t4',
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '100 mg IV load, then 50 mg',
+                route: 'IV',
+                frequency: 'q8h (or q6h per IBCC)',
+                duration: 'Taper over 2-3 days once stable',
+                notes: 'Give BEFORE thyroid hormone. Draw random cortisol first if practical.',
+            },
+            alternative: {
+                drug: 'Methylprednisolone',
+                dose: '40 mg',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Bridge if hydrocortisone unavailable',
+                notes: 'Use if hydrocortisone not available.',
+            },
+            monitoring: 'Cortisol level, hemodynamics, glucose. Taper when cortisol >18 μg/dL confirmed.',
+        },
     },
     {
         id: 'thyroid-hypo-t4',
@@ -121,6 +151,17 @@ export const THYROID_NODES = [
         body: '**[Levothyroxine](#/drug/levothyroxine/decompensated hypothyroidism) — mainstay of thyroid replacement:**\n\n**Loading dose:** 200-400 mcg IV\n• IBCC: 200 mcg for most patients (lower end preferred)\n• ATA guidelines: 200-400 mcg based on severity, age, body weight, cardiac history [5]\n• Use lower end (200 mcg) for: elderly, low body weight, coronary artery disease, arrhythmias\n\n**Maintenance:** 50-100 mcg IV daily (or 1.2 mcg/kg/day IV) [5]\n\n**Why IV?** GI absorption is unreliable in decompensated hypothyroidism (ileus, mucosal edema). Oral levothyroxine should NOT be used for initial treatment. Transition to PO (1.6 mcg/kg/day) once GI function restored. [3][5]\n\n**Safety note:** IV levothyroxine is safe to give empirically. T4 is the inactive pro-hormone — the normal circulating pool is ~1,000 mcg, so even if the diagnosis is wrong, 200-400 mcg won\'t cause harm. [3]',
         citation: [3, 5, 14],
         next: 'thyroid-hypo-t3',
+        treatment: {
+            firstLine: {
+                drug: 'Levothyroxine',
+                dose: '200-400 mcg IV load, then 50-100 mcg/day (or 1.2 mcg/kg/day)',
+                route: 'IV',
+                frequency: 'Daily',
+                duration: 'Until GI function restored, then transition to PO',
+                notes: 'Use lower end (200 mcg) for elderly, low body weight, CAD, arrhythmias. Transition to PO 1.6 mcg/kg/day when tolerating oral intake.',
+            },
+            monitoring: 'TSH + fT4 every 1-2 days. TSH falls ~50%/week. fT4 should normalize within 4 days.',
+        },
     },
     {
         id: 'thyroid-hypo-t3',
@@ -139,6 +180,17 @@ export const THYROID_NODES = [
                 next: 'thyroid-hypo-labs',
             },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Liothyronine (T3)',
+                dose: '5-20 mcg IV load, then 2.5-10 mcg',
+                route: 'IV',
+                frequency: 'q8h',
+                duration: 'Stop at 48h or with clinical improvement',
+                notes: 'Reserve for critically ill requiring hemodynamic/ventilatory support. Use lower end for elderly, cardiac disease.',
+            },
+            monitoring: 'T3 levels, clinical response (consciousness, hemodynamics). Stop if T3 elevated or after 48h.',
+        },
     },
     // =====================================================================
     // MODULE 3: DECOMPENSATED HYPOTHYROIDISM — MONITORING
@@ -219,6 +271,25 @@ export const THYROID_NODES = [
         body: '**Give early — dual benefit:**\n1. Blocks peripheral T4→T3 conversion (reduces active hormone)\n2. Treats potential concurrent adrenal insufficiency\n\n**IBCC protocol (preferred):**\n• [Hydrocortisone](#/drug/hydrocortisone/thyroid storm) 300 mg IV loading dose, then 100 mg IV q8h [2]\n\n**ATA protocol:**\n• [Hydrocortisone](#/drug/hydrocortisone/thyroid storm) 100 mg IV q8h (no separate load) [8]\n\n**Alternative if HC unavailable:**\n• [Methylprednisolone](#/drug/methylprednisolone/thyroid crisis) 125 mg IV load, then 60 mg IV daily\n\n**Duration:** Continue until clinical improvement (usually 3-5 days), then rapid taper.\n\n**Note:** Data is limited — one retrospective study of 811 patients found no mortality difference with early glucocorticoids in thyroid storm. [2] However, the theoretical benefit + low risk profile supports routine use.',
         citation: [2, 7, 8, 14],
         next: 'thyroid-storm-thionamide',
+        treatment: {
+            firstLine: {
+                drug: 'Hydrocortisone',
+                dose: '300 mg IV load, then 100 mg',
+                route: 'IV',
+                frequency: 'q8h',
+                duration: '3-5 days, then rapid taper',
+                notes: 'IBCC protocol preferred. Blocks T4→T3 conversion and treats potential adrenal insufficiency.',
+            },
+            alternative: {
+                drug: 'Methylprednisolone',
+                dose: '125 mg IV load, then 60 mg',
+                route: 'IV',
+                frequency: 'Daily',
+                duration: '3-5 days, then rapid taper',
+                notes: 'Use if hydrocortisone unavailable.',
+            },
+            monitoring: 'Clinical improvement, hemodynamics. Taper once storm resolving.',
+        },
     },
     {
         id: 'thyroid-storm-thionamide',
@@ -237,6 +308,25 @@ export const THYROID_NODES = [
                 next: 'thyroid-storm-iodine',
             },
         ],
+        treatment: {
+            firstLine: {
+                drug: 'Methimazole',
+                dose: '40 mg PO load, then 20 mg',
+                route: 'PO (or NG/rectal)',
+                frequency: 'q6h',
+                duration: 'Continue until storm resolved, then transition to maintenance',
+                notes: 'IBCC preferred. Safer long-term profile. Give BEFORE iodine. No IV formulation.',
+            },
+            alternative: {
+                drug: 'PTU (Propylthiouracil)',
+                dose: '500-1000 mg PO load, then 250 mg',
+                route: 'PO (or NG/rectal)',
+                frequency: 'q4h',
+                duration: 'Until storm resolved',
+                notes: 'MANDATORY in 1st trimester pregnancy. Also blocks T4→T3 conversion. Higher hepatotoxicity risk.',
+            },
+            monitoring: 'LFTs, CBC (agranulocytosis risk). Monitor for rash, fever, sore throat.',
+        },
     },
     {
         id: 'thyroid-storm-iodine',
@@ -246,6 +336,25 @@ export const THYROID_NODES = [
         body: '**Iodine immediately suppresses thyroid hormone release** via the Wolff-Chaikoff effect. [2]\n\n**TIMING: Give ≥1 hour after thionamide.** Without thionamide on board, iodine can be used as substrate for NEW hormone synthesis — potentially worsening thyrotoxicosis (especially with toxic multinodular goiter or toxic adenoma). [2][8]\n\n**Dosing options:**\n• [SSKI](#/drug/sski/thyroid storm) 5 drops (250 mg) PO q6h\n• Lugol\'s 5% solution 8 drops (0.4 mL) PO q6h — take with food/fluid to avoid gastritis\n\n**Duration:** Up to 10 days (suppressive effect eventually wears off). [2]\n\n**Alternative (if iodine "allergy" claimed):**\n• Lithium carbonate 300 mg PO q8h — blocks thyroid hormone release\n• Note: true iodine allergy does not exist — iodine is an essential element. Allergies are to carrier molecules (shellfish, contrast dye), not iodine itself. [2]',
         citation: [2, 8],
         next: 'thyroid-storm-cholestyramine',
+        treatment: {
+            firstLine: {
+                drug: 'SSKI (Saturated Solution of Potassium Iodide)',
+                dose: '5 drops (250 mg)',
+                route: 'PO',
+                frequency: 'q6h',
+                duration: 'Up to 10 days',
+                notes: 'Give at least 1 hour AFTER thionamide. Suppressive effect wears off after ~10 days.',
+            },
+            alternative: {
+                drug: 'Lugol\'s Iodine 5%',
+                dose: '8 drops (0.4 mL)',
+                route: 'PO',
+                frequency: 'q6h',
+                duration: 'Up to 10 days',
+                notes: 'Take with food/fluid to avoid gastritis. Or use lithium 300 mg PO q8h if claimed iodine allergy.',
+            },
+            monitoring: 'Clinical response. Discontinue after 10 days (Wolff-Chaikoff escape).',
+        },
     },
     {
         id: 'thyroid-storm-cholestyramine',
@@ -255,6 +364,17 @@ export const THYROID_NODES = [
         body: '**[Cholestyramine](#/drug/cholestyramine/thyroid storm) 4 g PO q6h**\n\nBinds thyroid hormone in the gut, preventing enterohepatic recirculation. Effective even in endogenous thyrotoxicosis (Graves, toxic adenoma) — not just exogenous overdose. Can reduce T4 levels by an additional 20-30%. [2][16]\n\nIBCC considers this an important adjunct that is often overlooked. Extremely safe (available OTC for diarrhea). [2]\n\n**Drug interaction warning:** Cholestyramine binds many oral medications, reducing their absorption. Separate ALL oral drugs by ≥1 hour before or 2 hours after cholestyramine. This includes the thionamide — coordinate timing carefully. [14]',
         citation: [2, 14, 16],
         next: 'thyroid-storm-hyperthermia',
+        treatment: {
+            firstLine: {
+                drug: 'Cholestyramine',
+                dose: '4 g',
+                route: 'PO',
+                frequency: 'q6h',
+                duration: 'Until storm resolved',
+                notes: 'Reduces T4 by 20-30% via blocking enterohepatic recirculation. Separate from other oral meds by 1h before or 2h after.',
+            },
+            monitoring: 'T4 levels. Coordinate timing with thionamide administration.',
+        },
     },
     {
         id: 'thyroid-storm-hyperthermia',
@@ -264,6 +384,17 @@ export const THYROID_NODES = [
         body: '**[Acetaminophen](#/drug/acetaminophen/fever) 650-1000 mg PO/IV q6h** (max 4g/day)\n\n**Active cooling** for temp >40°C: cooling blankets, ice packs to axillae/groin [2][12]\n\n**AVOID aspirin and NSAIDs** — they displace T4 from thyroxine-binding globulin, increasing free (active) T4 and T3 levels. This can worsen thyrotoxicosis. [14]\n\nHyperthermia is harmful: increases myocardial oxygen demand and can cause rhabdomyolysis, delirium, and organ damage. However, avoid inducing shivering (also increases cardiac workload). [2]',
         citation: [2, 12, 14],
         next: 'thyroid-storm-agitation',
+        treatment: {
+            firstLine: {
+                drug: 'Acetaminophen',
+                dose: '650-1000 mg',
+                route: 'PO or IV',
+                frequency: 'q6h',
+                duration: 'Until normothermic',
+                notes: 'Max 4g/day. AVOID aspirin/NSAIDs (worsen thyrotoxicosis). Add active cooling if temp >40C.',
+            },
+            monitoring: 'Temperature. Avoid inducing shivering (increases cardiac workload).',
+        },
     },
     {
         id: 'thyroid-storm-agitation',
@@ -273,6 +404,25 @@ export const THYROID_NODES = [
         body: 'Agitation worsens hyperthermia and impedes care.\n\n**IBCC preferred: [Olanzapine](#/drug/olanzapine/agitation)** 5-10 mg IM/PO [2]\n• Provides sedation without respiratory depression\n• May have direct antithyroid properties\n\n**Alternatives:**\n• Benzodiazepines (midazolam 2-5 mg IM) — avoid in elderly\n• Dexmedetomidine (ICU setting) — alpha-2 agonist, no respiratory depression\n• Phenobarbital — historical agent, enhances T4 hepatic metabolism\n\n**Avoid haloperidol** — QT prolongation risk is elevated in thyrotoxicosis. Case reports of haloperidol precipitating thyroid storm (dubious but concerning). [2]\n\n**Avoid ketamine** if possible — sympathomimetic properties may worsen tachycardia/hypertension.',
         citation: [2, 18],
         next: 'thyroid-storm-cardiovascular',
+        treatment: {
+            firstLine: {
+                drug: 'Olanzapine',
+                dose: '5-10 mg',
+                route: 'IM or PO',
+                frequency: 'PRN',
+                duration: 'Until agitation controlled',
+                notes: 'IBCC preferred. No respiratory depression. May have direct antithyroid properties. Avoid haloperidol (QT risk).',
+            },
+            alternative: {
+                drug: 'Midazolam',
+                dose: '2-5 mg',
+                route: 'IM',
+                frequency: 'PRN',
+                duration: 'Until agitation controlled',
+                notes: 'Alternative if olanzapine unavailable. Avoid in elderly. Dexmedetomidine preferred in ICU setting.',
+            },
+            monitoring: 'Sedation level, respiratory status, QTc.',
+        },
     },
     {
         id: 'thyroid-storm-cardiovascular',
@@ -305,6 +455,25 @@ export const THYROID_NODES = [
         body: '**ONLY if echo confirms preserved ejection fraction and no decompensated heart failure.**\n\n**Traditional ATA/EMP view:** Beta-blockers are first-line for rate/symptom control. Propranolol preferred (also blocks T4→T3 conversion at high doses). [8][14]\n\n**IBCC critical view:** Beta-blockers may be harmful — use for standard accepted indications (hypertension, preserved-EF rate control) rather than reflexively in all thyroid storm. One meta-analysis linked beta-blockers to cardiogenic collapse and cardiac arrest in thyroid storm. [2]\n\n**If using beta-blocker:**\n• [Propranolol](#/drug/propranolol/thyroid storm) 20-40 mg PO q4-6h — start low, titrate to HR <110\n• [Esmolol](#/drug/esmolol/thyroid storm) 250-500 mcg/kg IV load → 50-100 mcg/kg/min infusion — **preferred in unstable patients** (ultra-short acting, immediately titratable, can be stopped if hypotension develops) [2][8]\n\n**Reactive airway disease:** Use cardioselective agent (esmolol, metoprolol) with caution, or calcium-channel blocker (diltiazem, verapamil) for rate control [8]\n\n**KEY: Start low, monitor closely, stop immediately if hypotension develops.**',
         citation: [2, 8, 14],
         next: 'thyroid-storm-dispo',
+        treatment: {
+            firstLine: {
+                drug: 'Esmolol',
+                dose: '250-500 mcg/kg IV load, then 50-100 mcg/kg/min',
+                route: 'IV infusion',
+                frequency: 'Continuous',
+                duration: 'Until rate controlled or hypotension',
+                notes: 'Preferred in unstable patients (ultra-short acting, immediately titratable). Stop if hypotension develops.',
+            },
+            alternative: {
+                drug: 'Propranolol',
+                dose: '20-40 mg',
+                route: 'PO',
+                frequency: 'q4-6h',
+                duration: 'Titrate to HR <110',
+                notes: 'Also blocks T4→T3 conversion at high doses. Start low. Use only with confirmed preserved EF.',
+            },
+            monitoring: 'Continuous HR, BP. ECHO before starting. Stop immediately if hypotension.',
+        },
     },
     {
         id: 'thyroid-storm-no-bb',
@@ -314,6 +483,17 @@ export const THYROID_NODES = [
         body: '**If EF is reduced or clinical signs of decompensated heart failure: do NOT give beta-blockers.** [2]\n\n**Manage tachycardia by treating the storm:**\n1. Aggressive multimodal thyroid storm treatment (steps 2-7) will reduce heart rate as thyroid hormone levels fall\n2. **[Digoxin](#/drug/digoxin/thyroid)** 0.25-0.5 mg IV — lacks negative inotropic properties. However, thyrotoxicosis increases renal clearance and Vd, so higher doses may be needed and response may be blunted [2]\n3. **Diltiazem** with extreme caution ONLY if rate control is desperate — still carries negative inotropic risk\n4. **Vasopressor selection:** Phenylephrine (pure alpha — no beta stimulation) or vasopressin. Avoid catecholamines that worsen tachycardia (norepinephrine, epinephrine)\n\n**Permissive tachycardia:** Targeting HR <130 may be more realistic and safer than aggressive rate control in decompensated HF + thyroid storm. [2]\n\n**Cardiogenic pulmonary edema:** NIV (BiPAP) for respiratory support. These patients are often intravascularly depleted despite pulmonary edema — diuretics may worsen hemodynamics. [14]',
         citation: [2, 14],
         next: 'thyroid-storm-dispo',
+        treatment: {
+            firstLine: {
+                drug: 'Digoxin',
+                dose: '0.25-0.5 mg',
+                route: 'IV',
+                frequency: 'Load, then per digoxin protocol',
+                duration: 'Until rate controlled',
+                notes: 'No negative inotropy. May need higher doses in thyrotoxicosis (increased Vd, renal clearance). Response may be blunted.',
+            },
+            monitoring: 'HR target <130 (permissive). Digoxin level. Avoid beta-blockers with reduced EF.',
+        },
     },
     // =====================================================================
     // MODULE 5: THYROID STORM — SPECIAL SITUATIONS
@@ -410,6 +590,17 @@ export const THYROID_NODES = [
         body: 'TSH ≥10 mIU/L is associated with progression to overt hypothyroidism, increased risk of coronary heart disease, heart failure, and cardiovascular mortality. Treatment is recommended. [14][17]\n\n**Start:** [Levothyroxine](#/drug/levothyroxine/subclinical hypothyroidism) 25-50 mcg PO daily\n• Elderly or cardiac disease: start 12.5-25 mcg\n• Take on empty stomach, 30-60 min before breakfast\n• Separate from calcium, iron, antacids by 4 hours\n\n**Follow-up:**\n• TSH recheck in 6-8 weeks\n• PCP or endocrinology referral for dose titration\n• Target TSH: 1-3 mIU/L',
         recommendation: 'Start levothyroxine 25-50 mcg daily. PCP/endocrinology follow-up in 6-8 weeks.',
         citation: [5, 14, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Levothyroxine',
+                dose: '25-50 mcg (12.5-25 mcg if elderly/cardiac)',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: 'Lifelong',
+                notes: 'Empty stomach, 30-60 min before breakfast. Separate from calcium, iron, antacids by 4 hours.',
+            },
+            monitoring: 'TSH recheck in 6-8 weeks. Target TSH 1-3 mIU/L. Adjust dose in 12.5-25 mcg increments.',
+        },
     },
     {
         id: 'thyroid-subclinical-observe',

@@ -73,6 +73,17 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Encephalitis Suspected',
     body: '**Immediately start empiric treatment:**\n\u2022 [Acyclovir](#/drug/acyclovir/encephalitis) 10 mg/kg IV q8h (HSV-1 most common endemic cause) [7]\n\u2022 PLUS empiric bacterial meningitis coverage (see next steps) [1]\n\n**CT is indicated** in all patients with focal deficits (mass lesion must be excluded before LP). [12,18]\n\n**MRI** is superior to CT for detecting encephalitis and can distinguish subtypes (e.g., HSV \u2192 temporal lobe involvement), but should not delay treatment. [8]\n\nHerpes simplex encephalitis mortality: **70% untreated \u2192 9% with acyclovir**. [7,15]',
     citation: [1, 7, 8, 12, 15, 18],
+    treatment: {
+      firstLine: {
+        drug: 'Acyclovir',
+        dose: '10 mg/kg',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: '14-21 days',
+        notes: 'HSV-1 empiric coverage; continue pending PCR results',
+      },
+      monitoring: 'Renal function (BUN/Cr) daily; ensure adequate hydration to prevent crystalluria',
+    },
     next: 'mening-abx-then-ct',
   },
   {
@@ -177,6 +188,25 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Immunocompetent <50y',
     body: '**Targets:** *S. pneumoniae* (most common), *N. meningitidis* [2]\n\n**Regimen:**\n\u2022 [Ceftriaxone](#/drug/ceftriaxone/adult meningitis) 2g IV q12h (higher dose for CNS penetration) [1,24]\n\u2022 [Vancomycin](#/drug/vancomycin/meningitis) 15\u201320 mg/kg IV q8\u201312h (for cephalosporin-resistant pneumococci) [1,24]\n\u2022 [Dexamethasone](#/drug/dexamethasone/meningitis) 0.15 mg/kg IV q6h \u00d7 2\u20134 days [1,21]\n\n**Alternative:** [Meropenem](#/drug/meropenem/meningitis) 2g IV q8h if cephalosporin allergy or concern for multidrug-resistant organisms. [25]\n\n**Add [Acyclovir](#/drug/acyclovir/encephalitis)** 10 mg/kg IV q8h if ANY encephalitis features. [7]',
     citation: [1, 2, 7, 21, 24, 25],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Vancomycin + Dexamethasone',
+        dose: 'Ceftriaxone 2g; Vancomycin 15-20 mg/kg; Dexamethasone 0.15 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12h; Vancomycin q8-12h; Dexamethasone q6h',
+        duration: 'Antibiotics 10-14 days; Dexamethasone 2-4 days',
+        notes: 'Give dexamethasone WITH or 15-20 min BEFORE first antibiotic dose',
+      },
+      alternative: {
+        drug: 'Meropenem + Vancomycin + Dexamethasone',
+        dose: 'Meropenem 2g; Vancomycin 15-20 mg/kg; Dexamethasone 0.15 mg/kg',
+        route: 'IV',
+        frequency: 'Meropenem q8h; Vancomycin q8-12h; Dexamethasone q6h',
+        duration: 'Antibiotics 10-14 days; Dexamethasone 2-4 days',
+        notes: 'Use if cephalosporin allergy or MDR concern',
+      },
+      monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; daily neuro checks',
+    },
     next: 'mening-blood-tests',
   },
   {
@@ -186,6 +216,25 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Listeria Coverage',
     body: '**Age \u226550, pregnant, or immunocompromised** patients are at increased risk for *L. monocytogenes* meningitis (mortality **17\u201330%**). [1,24]\n\nPregnant women are **10\u201320\u00d7 more likely** to contract listerial infections. Infection during pregnancy is often devastating for the fetus. [24]\n\n**Regimen:**\n\u2022 [Ceftriaxone](#/drug/ceftriaxone/adult meningitis) 2g IV q12h [1]\n\u2022 [Vancomycin](#/drug/vancomycin/meningitis) 15\u201320 mg/kg IV q8\u201312h [1]\n\u2022 [Ampicillin](#/drug/ampicillin/adult meningitis) 2g IV q4h (Listeria coverage) [1,24]\n\u2022 [Dexamethasone](#/drug/dexamethasone/meningitis) 0.15 mg/kg IV q6h \u00d7 2\u20134 days [21]\n\n**Note:** [Meropenem](#/drug/meropenem/meningitis) has activity against *L. monocytogenes* \u2014 if used, ampicillin may be omitted. [1]\n\n**Add [Acyclovir](#/drug/acyclovir/encephalitis)** if encephalitis features present. [7]',
     citation: [1, 7, 21, 24],
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Vancomycin + Ampicillin + Dexamethasone',
+        dose: 'Ceftriaxone 2g; Vancomycin 15-20 mg/kg; Ampicillin 2g; Dexamethasone 0.15 mg/kg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12h; Vancomycin q8-12h; Ampicillin q4h; Dexamethasone q6h',
+        duration: 'Antibiotics 14-21 days for Listeria; Dexamethasone 2-4 days',
+        notes: 'Ampicillin provides Listeria coverage; discontinue dexamethasone if Listeria confirmed',
+      },
+      alternative: {
+        drug: 'Meropenem + Vancomycin + Dexamethasone',
+        dose: 'Meropenem 2g; Vancomycin 15-20 mg/kg; Dexamethasone 0.15 mg/kg',
+        route: 'IV',
+        frequency: 'Meropenem q8h; Vancomycin q8-12h; Dexamethasone q6h',
+        duration: 'Antibiotics 14-21 days; Dexamethasone 2-4 days',
+        notes: 'Meropenem has Listeria activity; can omit ampicillin if meropenem used',
+      },
+      monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; daily neuro checks',
+    },
     next: 'mening-blood-tests',
   },
   {
@@ -195,6 +244,25 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Healthcare-Associated',
     body: '**Risk factors:** Neurosurgical procedures, shunts/drains, CSF leaks, basilar skull fractures. [25]\n\n**Common pathogens:** Gram-negative bacilli (*P. aeruginosa*, *A. baumannii*), gram-positive skin flora (*Staphylococcus* spp including MRSA). Mortality: **16\u201341%**. [25]\n\n**Regimen:**\n\u2022 [Vancomycin](#/drug/vancomycin/meningitis) 15\u201320 mg/kg IV q8\u201312h (MRSA coverage) [25]\n\u2022 [Meropenem](#/drug/meropenem/meningitis) 2g IV q8h (broad gram-negative + Pseudomonas coverage) [25]\n\u2022 OR [Cefepime](#/drug/cefepime/adult meningitis) 2g IV q8h as alternative to meropenem [25]\n\n**CSF lactate** is particularly useful for diagnosis \u2014 postoperative inflammation alters conventional markers but does NOT affect lactate. [25]\n\nConsider Infectious Disease consultation for second-/third-line agents (linezolid). [25]',
     citation: [25],
+    treatment: {
+      firstLine: {
+        drug: 'Vancomycin + Meropenem',
+        dose: 'Vancomycin 15-20 mg/kg; Meropenem 2g',
+        route: 'IV',
+        frequency: 'Vancomycin q8-12h; Meropenem q8h',
+        duration: '10-21 days depending on source control and clinical response',
+        notes: 'Covers MRSA and Pseudomonas/gram-negatives; consult ID for complex cases',
+      },
+      alternative: {
+        drug: 'Vancomycin + Cefepime',
+        dose: 'Vancomycin 15-20 mg/kg; Cefepime 2g',
+        route: 'IV',
+        frequency: 'Vancomycin q8-12h; Cefepime q8h',
+        duration: '10-21 days depending on source control and clinical response',
+        notes: 'Alternative if meropenem unavailable; good Pseudomonas coverage',
+      },
+      monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; repeat LP if poor response',
+    },
     next: 'mening-blood-tests',
   },
   {
@@ -204,6 +272,17 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Suspected Cryptococcal',
     body: '**Cryptococcal meningitis** is the 2nd highest cause of mortality in HIV/AIDS patients. *C. neoformans* causes ~1 million cases/year in HIV/AIDS, with ~600,000 annual deaths. [17]\n\nTypically subacute: weeks of evolving headache, neck stiffness, malaise.\n\n**Serum cryptococcal antigen (CrAg):** 99.7% sensitive, 94.1% specific \u2014 send immediately. [17]\n\n**Empiric antifungal regimen (after ID consultation):**\n\u2022 [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV [22]\n\u2022 [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22]\n\u2022 Induction \u00d7 1 week, then [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day [22]\n\n**ALSO give empiric bacterial coverage** (Ceftriaxone + Vancomycin + Ampicillin) until CSF results available. [1]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 associated with worsened outcomes in cryptococcal meningitis. [1,21]',
     citation: [1, 17, 21, 22],
+    treatment: {
+      firstLine: {
+        drug: 'Amphotericin B liposomal + Flucytosine',
+        dose: 'Amphotericin B 3-4 mg/kg/day; Flucytosine 25 mg/kg',
+        route: 'Amphotericin B IV; Flucytosine PO',
+        frequency: 'Amphotericin B daily; Flucytosine q6h',
+        duration: 'Induction 1 week, then consolidation with Fluconazole 400-800 mg/day',
+        notes: 'NO corticosteroids - worsened outcomes; ID consultation required',
+      },
+      monitoring: 'Renal function and electrolytes daily (amphotericin nephrotoxicity); flucytosine levels if available; serial LPs for elevated ICP',
+    },
     next: 'mening-blood-tests',
   },
 
@@ -296,6 +375,17 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Viral Encephalitis Treatment',
     body: '**HSV-1 is the most common endemic cause** of viral encephalitis in the Western world. [7]\n\n**[Acyclovir](#/drug/acyclovir/encephalitis) 10 mg/kg IV q8h** \u2014 continue for all suspected encephalitis. [7]\n\u2022 In the landmark RCT (208 patients): acyclovir reduced mortality from **70% to 28%** [7]\n\u2022 Contemporary mortality with acyclovir + ICU care: **~9%** [15]\n\n**If HSV-1 PCR negative but high clinical suspicion:**\n\u2022 Continue acyclovir \u2014 false-negative PCR is possible in the first **72 hours** [7]\n\u2022 Repeat PCR at **3\u20137 days** [7]\n\n**MRI findings:** Temporal lobe involvement is characteristic of HSV encephalitis. [8]\n\n**VZV encephalitis:** More common in immunocompromised patients. Continue acyclovir if VZV identified. [6]\n\n**\u26a0\ufe0f Corticosteroids** are NOT indicated for viral encephalitis (unlike bacterial meningitis). Consider if autoimmune encephalitis suspected (relapse weeks after initial infection \u2014 consult neurology). [1]',
     citation: [1, 6, 7, 8, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Acyclovir',
+        dose: '10 mg/kg',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: '14-21 days',
+        notes: 'Continue even if initial HSV PCR negative - repeat PCR at 3-7 days; NO corticosteroids for viral encephalitis',
+      },
+      monitoring: 'Renal function (BUN/Cr) daily; ensure adequate hydration; serial neuro exams; repeat PCR if negative at 72h',
+    },
     next: 'mening-dispo',
   },
   {
@@ -314,6 +404,17 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Fungal Meningitis Management',
     body: 'Fungal meningitis is primarily a disease of **immunocompromised** populations. Most cases present **subacutely** with weeks of evolving symptoms. [8]\n\n**Most common cause:** *Cryptococcus neoformans* (~1 million cases/year in HIV/AIDS). [17]\n\nOther causes: *Histoplasma*, *Coccidioides*, *Candida* species.\n\n**Treatment (requires ID consultation):**\n\u2022 **Induction (1 week):** [Amphotericin B liposomal](#/drug/amphotericin-b/cryptococcal meningitis) 3\u20134 mg/kg/day IV + [Flucytosine](#/drug/flucytosine/cryptococcal meningitis) 25 mg/kg PO q6h [22]\n\u2022 **Consolidation:** [Fluconazole](#/drug/fluconazole/cryptococcal meningitis) 400\u2013800 mg/day PO [22]\n\u2022 This regimen showed lowest mortality in a Cochrane review of 13 studies (2426 participants) [22]\n\n**\u26a0\ufe0f Do NOT give corticosteroids** \u2014 dexamethasone is associated with **worsened outcomes** in cryptococcal and listerial meningitis. Discontinue immediately if either pathogen identified. [1,21]',
     citation: [1, 8, 17, 21, 22],
+    treatment: {
+      firstLine: {
+        drug: 'Amphotericin B liposomal + Flucytosine',
+        dose: 'Amphotericin B 3-4 mg/kg/day; Flucytosine 25 mg/kg',
+        route: 'Amphotericin B IV; Flucytosine PO',
+        frequency: 'Amphotericin B daily; Flucytosine q6h',
+        duration: 'Induction 1 week, then consolidation with Fluconazole 400-800 mg/day PO',
+        notes: 'ID consultation required; NO corticosteroids - discontinue if started empirically',
+      },
+      monitoring: 'Renal function and electrolytes daily; flucytosine levels if available; serial LPs for elevated ICP management',
+    },
     next: 'mening-dispo',
   },
   {
@@ -336,6 +437,17 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     title: 'Adjunctive Corticosteroids',
     body: '[Corticosteroid Guide](#/info/mening-steroid-guide) \u2014 detailed evidence and dosing.\n\n**[Dexamethasone](#/drug/dexamethasone/meningitis) 0.15 mg/kg IV q6h \u00d7 2\u20134 days** [1,21]\n\nGive WITH or up to **15\u201320 minutes BEFORE** first antibiotic dose. [1]\n\n**Evidence (Cochrane 2015, 25 studies, 4121 patients):**\n\u2022 Overall ABM: nonsignificant mortality reduction (17.8% vs 19.9%) [21]\n\u2022 **Pneumococcal meningitis in high-income countries:** significant mortality reduction [21]\n\u2022 **TB meningitis:** corticosteroids reduced mortality by ~25% at 18 months [21]\n\n**\u26a0\ufe0f STOP corticosteroids if pathogen is NOT *S. pneumoniae* or *M. tuberculosis*:**\n\u2022 *L. monocytogenes:* nonsignificant trend toward **worse outcomes** with corticosteroids [21]\n\u2022 *C. neoformans:* corticosteroids associated with **worsened outcomes** [1]\n\n[Postexposure Prophylaxis Guide](#/info/mening-pep-guide) \u2014 regimens for contacts of *N. meningitidis* and *H. influenzae*.',
     citation: [1, 21],
+    treatment: {
+      firstLine: {
+        drug: 'Dexamethasone',
+        dose: '0.15 mg/kg (max 10 mg)',
+        route: 'IV',
+        frequency: 'q6h',
+        duration: '2-4 days',
+        notes: 'Give WITH or 15-20 min BEFORE first antibiotic; STOP if Listeria or Cryptococcus identified',
+      },
+      monitoring: 'Blood glucose (steroid-induced hyperglycemia); GI bleeding risk; reassess when pathogen identified',
+    },
     next: 'mening-dispo',
   },
   {

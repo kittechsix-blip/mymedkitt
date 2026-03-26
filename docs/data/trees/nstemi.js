@@ -22,6 +22,25 @@ export const NSTEMI_NODES = [
         title: 'Anticoagulation Selection',
         body: 'Choose ONE anticoagulation strategy:\n\u2022 [Enoxaparin](#/drug/enoxaparin/nstemi) 1 mg/kg SC q12h \u2014 preferred for most patients\n\u2022 [UFH](#/drug/ufh/nstemi) 60 units/kg bolus (max 4,000), 12 units/kg/hr (max 1,000) \u2014 preferred if CrCl <30 or PCI within 24h\n\u2022 [Fondaparinux](#/drug/fondaparinux/nstemi) 2.5 mg SC daily \u2014 preferred for conservative strategy (lowest bleeding risk per OASIS-5)\n\nDo NOT switch between anticoagulants (increases bleeding risk).',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Enoxaparin',
+                dose: '1 mg/kg',
+                route: 'SC',
+                frequency: 'Every 12 hours',
+                duration: 'Until PCI or discharge',
+                notes: 'Reduce to 1 mg/kg daily if CrCl 15-30. Avoid if CrCl <15.',
+            },
+            alternative: {
+                drug: 'UFH',
+                dose: '60 units/kg bolus (max 4,000), then 12 units/kg/hr (max 1,000)',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until PCI or 48 hours',
+                notes: 'Preferred if CrCl <30 or PCI anticipated within 24h. Target aPTT 50-70 sec.',
+            },
+            monitoring: 'aPTT q6h for UFH (target 50-70 sec). Anti-Xa for enoxaparin in renal impairment or obesity. Monitor for signs of bleeding.',
+        },
         options: [
             {
                 label: 'Early invasive likely (PCI within 24h)',
@@ -67,6 +86,25 @@ export const NSTEMI_NODES = [
         recommendation: 'Emergent PCI. Activate cath lab immediately. UFH preferred. Load P2Y12 inhibitor.',
         confidence: 'definitive',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Ticagrelor',
+                dose: '180 mg',
+                route: 'PO',
+                frequency: 'Once (loading dose)',
+                duration: 'Single dose, then 90 mg BID maintenance',
+                notes: 'Give as early as possible. Aspirin dose must be ≤100 mg/day with ticagrelor.',
+            },
+            alternative: {
+                drug: 'Prasugrel',
+                dose: '60 mg',
+                route: 'PO',
+                frequency: 'Once (loading dose)',
+                duration: 'Single dose, then 10 mg daily maintenance',
+                notes: 'CONTRAINDICATED if prior stroke/TIA. Avoid if age ≥75 or weight <60 kg.',
+            },
+            monitoring: 'Monitor for bleeding. Assess hemodynamic status continuously. ECG monitoring for arrhythmias.',
+        },
     },
     {
         id: 'nstemi-timi-stratify',
@@ -102,6 +140,25 @@ export const NSTEMI_NODES = [
         title: 'Conservative (Ischemia-Guided) Strategy',
         body: 'Low TIMI risk. Conservative management appropriate.\nSee [Conservative Management Details](#/info/nstemi-conservative)\n\nMedical therapy:\n\u2022 Continue anticoagulation (fondaparinux preferred \u2014 lowest bleeding)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) PRN chest pain\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO (start immediately)\n\u2022 [Clopidogrel](#/drug/clopidogrel/acs) 300 mg loading if no P2Y12 yet (ticagrelor also acceptable)\n\nStress test before discharge.',
         citation: [1, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Atorvastatin',
+                dose: '80 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite (lifelong)',
+                notes: 'Start immediately regardless of baseline LDL. High-intensity statin required for all ACS patients.',
+            },
+            alternative: {
+                drug: 'Rosuvastatin',
+                dose: '20-40 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite (lifelong)',
+                notes: 'Alternative high-intensity statin if atorvastatin not tolerated.',
+            },
+            monitoring: 'Lipid panel at 4-12 weeks. Target LDL <70 mg/dL. Monitor for myalgias, transaminase elevation.',
+        },
         options: [
             {
                 label: 'Positive stress test / recurrent ischemia',
@@ -125,6 +182,25 @@ export const NSTEMI_NODES = [
         title: 'Early Invasive Strategy (<24 hours)',
         body: 'TIMI \u22654 (high risk). Cardiac catheterization within 24 hours.\n\n**Pre-PCI preparation:**\n\u2022 P2Y12 loading: [Ticagrelor](#/drug/ticagrelor) 180 mg preferred (PLATO: NNT 54 for CV death/MI/stroke)\n\u2022 Alternative: [Clopidogrel](#/drug/clopidogrel/acs) 600 mg if ticagrelor not available or on OAC\n\u2022 Continue anticoagulation (do NOT switch agents)\n\u2022 NPO (anticipate catheterization)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70 if tolerated\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO',
         citation: [1, 2, 6],
+        treatment: {
+            firstLine: {
+                drug: 'Ticagrelor',
+                dose: '180 mg',
+                route: 'PO',
+                frequency: 'Once (loading dose)',
+                duration: 'Single dose, then 90 mg BID for 12 months',
+                notes: 'PLATO trial: NNT 54 for CV death/MI/stroke vs clopidogrel. Aspirin must be ≤100 mg/day.',
+            },
+            alternative: {
+                drug: 'Clopidogrel',
+                dose: '600 mg',
+                route: 'PO',
+                frequency: 'Once (loading dose)',
+                duration: 'Single dose, then 75 mg daily for 12 months',
+                notes: 'Use if ticagrelor not available or patient on oral anticoagulant (triple therapy).',
+            },
+            monitoring: 'Monitor for bleeding, dyspnea (ticagrelor side effect). ECG for bradyarrhythmias with ticagrelor.',
+        },
         next: 'nstemi-post-pci',
     },
     {
@@ -134,6 +210,25 @@ export const NSTEMI_NODES = [
         title: 'Delayed Invasive Strategy (25\u201372 hours)',
         body: 'TIMI 3 (intermediate risk) or failed conservative strategy.\n\nCardiac catheterization within 25\u201372 hours.\n\u2022 Allows stabilization with medical therapy\n\u2022 Same pre-PCI preparation as early invasive\n\u2022 P2Y12 loading: [Ticagrelor](#/drug/ticagrelor) 180 mg OR [Clopidogrel](#/drug/clopidogrel/acs) 300\u2013600 mg\n\u2022 If deferring P2Y12 until anatomy known: acceptable strategy per guidelines\n\u2022 Continue beta-blocker, statin, anticoagulation',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Metoprolol succinate',
+                dose: '25-50 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite if EF <40% or hypertension; may discontinue after 1 year if EF preserved',
+                notes: 'Target HR <70 bpm. Titrate to max tolerated dose. Avoid if bradycardia, hypotension, or acute HF.',
+            },
+            alternative: {
+                drug: 'Carvedilol',
+                dose: '3.125-25 mg',
+                route: 'PO',
+                frequency: 'Twice daily',
+                duration: 'Indefinite if EF <40%',
+                notes: 'Preferred if EF reduced. Alpha-blocking properties provide BP benefit.',
+            },
+            monitoring: 'HR goal <70 bpm. Monitor for bradycardia, hypotension, fatigue, bronchospasm.',
+        },
         next: 'nstemi-post-pci',
     },
     {
@@ -143,6 +238,25 @@ export const NSTEMI_NODES = [
         title: 'Post-PCI P2Y12 Selection',
         body: 'Select P2Y12 inhibitor for 12-month DAPT.\nSee [P2Y12 Selection Guide](#/info/nstemi-antiplatelet-cx)\n\n**Preferred:** [Ticagrelor](#/drug/ticagrelor) 90 mg BID\n\u2022 PLATO trial: reduced CV death/MI/stroke vs clopidogrel (NNT 54)\n\u2022 Aspirin \u2264100 mg/day required\n\n**High ischemic risk (diabetes, stent thrombosis):** [Prasugrel](#/drug/prasugrel) 10 mg daily\n\u2022 TRITON-TIMI 38: more potent, but more bleeding\n\u2022 CONTRAINDICATED if prior stroke/TIA\n\u2022 Avoid if age \u226575 or weight <60 kg\n\n**High bleeding risk or on OAC:** [Clopidogrel](#/drug/clopidogrel/acs) 75 mg daily\n\u2022 Preferred for triple therapy (OAC + DAPT)\n\u2022 Least bleeding risk of the three',
         citation: [1, 6, 7, 8],
+        treatment: {
+            firstLine: {
+                drug: 'Ticagrelor',
+                dose: '90 mg',
+                route: 'PO',
+                frequency: 'Twice daily (BID)',
+                duration: '12 months',
+                notes: 'Preferred P2Y12 for most patients (PLATO: NNT 54). Aspirin must be ≤100 mg/day. May cause dyspnea.',
+            },
+            alternative: {
+                drug: 'Clopidogrel',
+                dose: '75 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '12 months',
+                notes: 'Use for high bleeding risk or patients on OAC. Preferred for triple therapy.',
+            },
+            monitoring: 'Monitor for bleeding (GI, bruising, epistaxis). Assess medication adherence. Do NOT discontinue without cardiology guidance.',
+        },
         options: [
             {
                 label: 'Ticagrelor selected (standard)',
@@ -182,6 +296,25 @@ export const NSTEMI_NODES = [
         title: 'DAPT Duration & Special Populations',
         body: 'Standard DAPT: 12 months post-PCI\n\u2022 Aspirin 81 mg + P2Y12 inhibitor daily\n\n**De-escalation options after 1\u20133 months if high bleeding risk:**\n\u2022 Switch from ticagrelor/prasugrel to clopidogrel (HOST-REDUCE trial)\n\u2022 Aspirin monotherapy after 1\u20133 months of DAPT (TWILIGHT trial)\n\n**Extended DAPT beyond 12 months:**\n\u2022 Consider if high ischemic risk (prior MI, diabetes, multivessel disease)\n\u2022 Ticagrelor 60 mg BID (PEGASUS-TIMI 54)\n\nIs this a MINOCA presentation?',
         citation: [1, 9, 10],
+        treatment: {
+            firstLine: {
+                drug: 'Aspirin + P2Y12 inhibitor (DAPT)',
+                dose: 'Aspirin 81 mg + Ticagrelor 90 mg BID (or Clopidogrel 75 mg daily)',
+                route: 'PO',
+                frequency: 'Daily',
+                duration: '12 months standard; may extend to 36 months if high ischemic/low bleeding risk',
+                notes: 'Extended DAPT (ticagrelor 60 mg BID) per PEGASUS-TIMI 54 if prior MI, diabetes, or multivessel disease.',
+            },
+            alternative: {
+                drug: 'Aspirin monotherapy',
+                dose: '81 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Lifelong',
+                notes: 'After 1-3 months DAPT if high bleeding risk (TWILIGHT trial). P2Y12 monotherapy also an option.',
+            },
+            monitoring: 'Bleeding assessment at each visit. Medication adherence counseling. Do NOT stop P2Y12 without cardiology consultation.',
+        },
         options: [
             {
                 label: 'Standard ACS (obstructive CAD)',
@@ -214,6 +347,25 @@ export const NSTEMI_NODES = [
         title: 'Discharge Medications',
         body: '**The 5 pillars of post-ACS pharmacotherapy:**\n\n1. **DAPT:** Aspirin 81 mg + P2Y12 inhibitor \u00D7 12 months\n2. **Statin:** [Atorvastatin](#/drug/atorvastatin) 80 mg (or rosuvastatin 20\u201340 mg) \u2014 target LDL <70\n3. **Beta-blocker:** [Metoprolol](#/drug/metoprolol) succinate \u2014 continue if EF <40% or hypertension; may discontinue after 1 year if EF preserved\n4. **ACE inhibitor/ARB:** Start within 24h if EF \u226440%, hypertension, or diabetes. Consider for all post-ACS patients.\n5. **Aldosterone antagonist:** Add if EF \u226440% + HF symptoms or diabetes (EPHESUS trial)\n\nAlso: PPI if DAPT (GI prophylaxis \u2014 use pantoprazole, NOT omeprazole with clopidogrel)',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Lisinopril (or equivalent ACE inhibitor)',
+                dose: '2.5-5 mg, titrate to 10-40 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite',
+                notes: 'Start within 24h if EF ≤40%, hypertension, or diabetes. Consider for all ACS patients. ARNI (sacubitril/valsartan) if EF ≤40% and stable.',
+            },
+            alternative: {
+                drug: 'Losartan (or equivalent ARB)',
+                dose: '25-50 mg, titrate to 100 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite',
+                notes: 'Use if ACE inhibitor intolerant (cough). VALIANT trial showed equivalence to captopril post-MI.',
+            },
+            monitoring: 'Cr and K+ 1-2 weeks after initiation/titration. Monitor for hypotension, hyperkalemia, cough (ACEi).',
+        },
         next: 'nstemi-risk-factors',
     },
     {
@@ -247,6 +399,25 @@ export const NSTEMI_NODES = [
         recommendation: 'Minimize triple therapy duration (\u22641 month). DOAC + clopidogrel preferred for dual therapy phase. Discontinue antiplatelet at 12 months.',
         confidence: 'definitive',
         citation: [1, 10],
+        treatment: {
+            firstLine: {
+                drug: 'Apixaban + Clopidogrel (dual therapy)',
+                dose: 'Apixaban 5 mg BID + Clopidogrel 75 mg daily',
+                route: 'PO',
+                frequency: 'Daily (clopidogrel), BID (apixaban)',
+                duration: 'Dual therapy 1-12 months, then OAC alone',
+                notes: 'AUGUSTUS trial preferred regimen. Reduce apixaban to 2.5 mg BID if age ≥80, weight ≤60 kg, or Cr ≥1.5.',
+            },
+            alternative: {
+                drug: 'Rivaroxaban + Clopidogrel (dual therapy)',
+                dose: 'Rivaroxaban 15 mg daily + Clopidogrel 75 mg daily',
+                route: 'PO',
+                frequency: 'Once daily each',
+                duration: 'Dual therapy 1-12 months, then OAC alone',
+                notes: 'PIONEER AF-PCI regimen. Reduce rivaroxaban to 10 mg daily if CrCl 15-50.',
+            },
+            monitoring: 'Bleeding assessment (HAS-BLED score). Renal function for DOAC dosing. Avoid triple therapy >1 month if possible.',
+        },
     },
     {
         id: 'nstemi-hf-management',
@@ -257,6 +428,25 @@ export const NSTEMI_NODES = [
         recommendation: 'Initiate 4-pillar GDMT before discharge. Reassess EF at 3 months. Evaluate for ICD if EF \u226435% after 40 days.',
         confidence: 'definitive',
         citation: [1, 2],
+        treatment: {
+            firstLine: {
+                drug: 'Eplerenone (aldosterone antagonist)',
+                dose: '25 mg, titrate to 50 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite',
+                notes: 'EPHESUS trial: 15% mortality reduction post-MI with EF ≤40% + HF symptoms or diabetes. Start 3-14 days post-MI.',
+            },
+            alternative: {
+                drug: 'Spironolactone',
+                dose: '12.5-25 mg, titrate to 50 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Indefinite',
+                notes: 'More gynecomastia than eplerenone. Use if eplerenone unavailable.',
+            },
+            monitoring: 'K+ and Cr at 3 days, 1 week, then monthly for 3 months. Hold if K+ >5.5 or Cr increases >30%. Contraindicated if K+ >5.0 or CrCl <30.',
+        },
     },
     {
         id: 'nstemi-followup',

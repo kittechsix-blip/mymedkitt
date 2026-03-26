@@ -126,6 +126,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**ADH is suppressed \u2014 the kidney is doing its job.** The problem is excessive free water intake or severely low solute intake overwhelming diluting capacity (~20 L/day max).\n\n**Causes:**\n\u2022 **Primary polydipsia** \u2014 psychiatric patients, often on medications that cause dry mouth\n\u2022 **Beer potomania** \u2014 low-solute diet (beer has minimal protein/electrolytes, so minimal obligate solute excretion)\n\u2022 **Tea-and-toast diet** \u2014 elderly with inadequate protein/salt intake\n\u2022 **Marathon/exercise-associated hyponatremia** \u2014 excess hypotonic fluid intake during exercise\n\n**HIGH overcorrection risk.** Once water intake is restricted, the kidney rapidly excretes free water (no ADH to stop it). Na+ can rise dangerously fast.\n\n**Management:**\n\u2022 Restrict free water intake\n\u2022 For beer potomania/low solute: [Oral Urea](#/drug/oral-urea/siad) 15-30g PO daily to increase obligate water excretion\n\u2022 **Proactive DDAVP clamp** strongly recommended: [Desmopressin (DDAVP)](#/drug/desmopressin/ddavp clamp) 2 mcg IV q6-8h to prevent uncontrolled water excretion\n\u2022 [DDAVP Clamp-Bolus Protocol](#/info/na-ddavp-clamp) \u2014 full protocol\n\u2022 Check Na+ every 2 hours \u2014 do NOT allow >8-10 mEq/L rise in 24 hours\n\u2022 [Overcorrection Rescue Protocol](#/info/na-overcorrection) if overcorrecting',
     recommendation: 'High overcorrection risk \u2014 once water restriction begins, the kidney rapidly excretes free water with no ADH to stop it. Restrict free water. Strongly consider proactive DDAVP clamp (2 mcg IV q6-8h) to control correction rate. For beer potomania/low solute: add oral urea 15-30g/day. Check Na+ q2h. Maximum correction 8-10 mEq/L in 24 hours. Have D5W and DDAVP rescue available at bedside.',
     citation: [1, 6, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg',
+        route: 'IV',
+        frequency: 'q6-8h',
+        duration: 'Until Na+ stable and correction controlled',
+        notes: 'Proactive clamp STRONGLY recommended. Prevents uncontrolled water excretion.',
+      },
+      alternative: {
+        drug: 'Oral Urea',
+        dose: '15-30g',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'For beer potomania/low solute diet',
+        notes: 'Increases obligate water excretion. Use with DDAVP clamp.',
+      },
+      monitoring: 'HIGHEST overcorrection risk. Na+ q2h. Max 8-10 mEq/L in 24h. Have D5W and DDAVP rescue at bedside.',
+    },
   },
 
   {
@@ -181,6 +200,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Emergency Hypertonic Saline',
     body: '**Immediate treatment for severe symptomatic hyponatremia** (seizures, coma, respiratory distress).\n\n[3% Hypertonic Saline](#/drug/hypertonic-saline/severe symptomatic) **100-150 mL IV bolus over 10-20 minutes.** Repeat up to 2 additional times (total 3 boluses) if severe symptoms persist.\n\n**Target:** Raise Na+ by **4-6 mEq/L** in the first 1-2 hours \u2014 this is sufficient to reverse cerebral edema and stop seizures. Each 100 mL bolus of 3% NaCl raises Na+ approximately **2 mEq/L** in a 70 kg adult.\n\n**Peripheral access is acceptable for boluses** \u2014 do NOT delay treatment for central line placement. Central access is preferred only for continuous infusions.\n\n**SALSA Trial (2021):** Bolus 3% NaCl was noninferior to continuous infusion for symptomatic hyponatremia, with lower overcorrection rates.\n\n**Give empirically:** [Thiamine](#/drug/thiamine/hyponatremia) **100 mg IV** now if not already given \u2014 thiamine deficiency increases ODS risk.\n\n**After stabilization:** Recheck Na+ at 1 hour. If symptoms improved, proceed to correction limits.',
     citation: [5, 7, 14],
+    treatment: {
+      firstLine: {
+        drug: '3% Hypertonic Saline',
+        dose: '100-150 mL',
+        route: 'IV bolus',
+        frequency: 'Over 10-20 min, repeat x2 PRN',
+        duration: 'Until symptoms improve',
+        notes: 'Each 100 mL raises Na+ ~2 mEq/L. Peripheral access OK for boluses.',
+      },
+      alternative: {
+        drug: 'Thiamine',
+        dose: '100 mg',
+        route: 'IV',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Give empirically to reduce ODS risk',
+      },
+      monitoring: 'Recheck Na+ at 1 hour. Target 4-6 mEq/L rise in first 1-2 hours. Do not exceed 10 mEq/L in 24 hours.',
+    },
     next: 'na-hypo-correction-limits',
   },
 
@@ -191,6 +229,17 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Correction Rate Limits',
     body: '**Overcorrection causes osmotic demyelination syndrome (ODS)** \u2014 a devastating and often irreversible pontine and extrapontine injury.\n\n**Maximum correction rates:**\n\u2022 **Standard risk:** \u226410 mEq/L in first 24 hours, \u226418 mEq/L in 48 hours\n\u2022 **High risk for ODS:** \u22648 mEq/L in first 24 hours\n\n[ODS Risk Factors](#/info/na-ods-risk) \u2014 high-risk populations include: Na+ \u2264105, alcohol use disorder, liver disease, malnutrition, hypokalemia, thiamine deficiency\n\n**Key principle:** The goal is to correct enough to stop symptoms (4-6 mEq/L rise), then **slow down.** The acute danger is cerebral edema; the correction danger is ODS.\n\n**If overcorrecting** (Na+ rising faster than target):\n\u2022 [Overcorrection Rescue Protocol](#/info/na-overcorrection) \u2014 [Desmopressin (DDAVP)](#/drug/desmopressin/overcorrection rescue) 2 mcg IV stat + D5W 3 mL/kg/hr to lower Na+ back to safe trajectory\n\n**Monitor:** Check Na+ every 2 hours during active correction. Use a tracking sheet to plot the correction trajectory.\n\n**Concurrent potassium correction counts toward sodium correction** \u2014 if you give 40 mEq KCl, expect Na+ to rise ~1 mEq/L as K+ enters cells and Na+ exits.',
     citation: [1, 5, 7, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg',
+        route: 'IV',
+        frequency: 'Stat + D5W 3 mL/kg/hr',
+        duration: 'Until Na+ back to target trajectory',
+        notes: 'Use for overcorrection rescue. DDAVP + D5W to lower Na+ back to safe range.',
+      },
+      monitoring: 'Check Na+ q2h during active correction. Track cumulative 24h correction. Max 10 mEq/L in 24h (8 for high-risk).',
+    },
     next: 'na-hypo-ddavp-decision',
   },
 
@@ -222,6 +271,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'DDAVP Clamp-Bolus Protocol',
     body: '**Step 1 \u2014 Lock the kidneys:**\n[Desmopressin (DDAVP)](#/drug/desmopressin/ddavp clamp) **2 mcg IV q6-8h** (schedule doses around the clock). This prevents all renal free water excretion.\n\n**Step 2 \u2014 Controlled bolus correction:**\n[3% Hypertonic Saline](#/drug/hypertonic-saline/ddavp clamp bolus) **100 mL IV bolus** \u2014 each bolus raises Na+ approximately **2 mEq/L** in a 70 kg adult. Give boluses every 4-6 hours as needed to achieve target correction rate.\n\n**Step 3 \u2014 Monitor:**\n\u2022 Check Na+ **every 2 hours** during active clamp\n\u2022 Track cumulative 24-hour correction on a flow sheet\n\u2022 Target: 4-6 mEq/L rise in first 24 hours for high-risk patients, up to 10 mEq/L for standard risk\n\n**Step 4 \u2014 Discontinue clamp:**\n\u2022 Once Na+ >125 mEq/L and underlying cause addressed\n\u2022 Taper: extend DDAVP interval to q12h for 24 hours, then stop\n\u2022 Continue monitoring Na+ q4-6h for 24 hours after stopping DDAVP\n\n**If Na+ rises too fast despite clamp:** Confirm DDAVP dosing is adequate (urine Osm should be >500). Give **D5W 3 mL/kg/hr** to actively lower Na+ back to safe trajectory.\n\n[DDAVP Clamp-Bolus Protocol](#/info/na-ddavp-clamp) \u2014 expanded protocol with discontinuation guidance',
     citation: [1, 7, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg',
+        route: 'IV',
+        frequency: 'q6-8h',
+        duration: 'Until Na+ >125 and cause addressed',
+        notes: 'Locks kidneys in concentrating mode. Na+ rises only from 3% saline boluses.',
+      },
+      alternative: {
+        drug: '3% Hypertonic Saline',
+        dose: '100 mL',
+        route: 'IV bolus',
+        frequency: 'q4-6h PRN',
+        duration: 'Until target correction achieved',
+        notes: 'Each bolus raises Na+ ~2 mEq/L in 70 kg adult.',
+      },
+      monitoring: 'Check Na+ q2h during clamp. Track cumulative 24h correction. Taper DDAVP to q12h x24h before discontinuing.',
+    },
     next: 'na-hypo-etiology',
   },
 
@@ -262,6 +330,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'SIAD Treatment',
     body: '**First-line: Fluid restriction**\n\u2022 Restrict to 800-1000 mL/day total fluid intake\n\u2022 Effective only if urine Osm < 500 AND urine Osm/serum Osm ratio < 1.0\n\u2022 If ratio >1.0, every mL of urine excretes more water than intake replaces \u2014 fluid restriction will fail\n\n**Second-line: Oral urea**\n[Oral Urea](#/drug/oral-urea/siad) **15-30g PO daily** (titrate up to 60g/day). Creates obligate osmotic diuresis. Bitter taste \u2014 mix with orange juice or cola. Ure-Na brand designed for palatability.\n\n**Third-line: Salt tabs + loop diuretic**\n[Sodium Chloride Tablets](#/drug/nacl-tablets/siad) **1-3g PO TID** + [Furosemide](#/drug/furosemide/siad) **20-40 mg PO daily**. The loop diuretic impairs urinary concentration (breaks the medullary gradient), and salt tabs replace renal sodium losses.\n\n**NOT recommended: Vaptans** (tolvaptan, conivaptan). Unpredictable overcorrection risk, hepatotoxicity, expensive, no mortality benefit. European guidelines and IBCC explicitly recommend against.\n\n**Treat the underlying cause:** Discontinue offending medication (SSRIs, carbamazepine, NSAIDs, opioids). Evaluate for occult malignancy if no obvious cause identified. [SIAD Causes & Diagnosis](#/info/na-siad-causes)',
     citation: [6, 8, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Fluid Restriction',
+        dose: '800-1000 mL/day',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Ongoing while SIAD persists',
+        notes: 'Effective only if urine Osm <500 and urine/serum Osm ratio <1.0',
+      },
+      alternative: {
+        drug: 'Oral Urea',
+        dose: '15-30g (up to 60g)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Ongoing',
+        notes: 'Mix with OJ or cola for palatability. Creates obligate osmotic diuresis.',
+      },
+      monitoring: 'Check Na+ daily during titration. Monitor urine Osm to assess response.',
+    },
     next: 'na-hypo-monitoring',
   },
 
@@ -273,6 +360,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Thiazide diuretics are the most common medication cause of hyponatremia.** Typically occurs within 2 weeks of initiation, especially in elderly women with low body mass.\n\n**Mechanism:** Thiazides impair the kidney\u2019s diluting segment (distal convoluted tubule) while preserving the concentrating segment. Loops do the opposite \u2014 they impair concentration, which is why loop diuretics rarely cause severe hyponatremia and are even used to treat SIAD.\n\n**Management:**\n\u2022 **Hold the thiazide immediately** \u2014 never rechallenge\n\u2022 Replace volume deficit with normal saline if hypovolemic\n\u2022 Check and correct potassium and magnesium\n\n**HIGH overcorrection risk.** Once the thiazide is discontinued and volume is restored, the kidney rapidly excretes free water (ADH suppresses, diluting segment recovers). Na+ can rise 15-20 mEq/L in 24 hours without intervention.\n\n\u2022 **If Na+ <120:** Proactive [Desmopressin (DDAVP)](#/drug/desmopressin/ddavp clamp) clamp strongly recommended\n\u2022 Check Na+ every 2 hours for at least 24 hours after holding the diuretic\n\u2022 [Overcorrection Rescue Protocol](#/info/na-overcorrection) if Na+ rising too fast',
     recommendation: 'Hold thiazide immediately and never rechallenge. Replace volume deficit with NS if hypovolemic. Correct K+ and Mg2+. HIGH overcorrection risk once diuretic held \u2014 consider proactive DDAVP clamp if Na+ <120. Monitor Na+ q2h for 24 hours. Have D5W and DDAVP rescue at bedside. Switch to loop diuretic if ongoing diuresis needed.',
     citation: [1, 2, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg',
+        route: 'IV',
+        frequency: 'q6-8h',
+        duration: 'Until Na+ stable >125',
+        notes: 'Proactive clamp if Na+ <120. Prevents uncontrolled water diuresis.',
+      },
+      alternative: {
+        drug: 'Normal Saline',
+        dose: 'Volume-based',
+        route: 'IV',
+        frequency: 'As needed',
+        duration: 'Until euvolemic',
+        notes: 'For volume repletion if hypovolemic. Monitor for rapid Na+ rise.',
+      },
+      monitoring: 'Na+ q2h for 24 hours after holding diuretic. Have D5W and DDAVP rescue at bedside.',
+    },
   },
 
   {
@@ -283,6 +389,17 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Cortisol deficiency causes hyponatremia through two mechanisms:**\n\u2022 Cortisol tonically inhibits ADH \u2014 deficiency leads to unopposed ADH secretion\n\u2022 Reduced cardiac output and GFR \u2192 nonosmotic ADH release\n\n**Diagnosis:**\n\u2022 AM cortisol <3 mcg/dL \u2192 virtually diagnostic\n\u2022 AM cortisol 3-18 mcg/dL \u2192 cosyntropin stimulation test\n\u2022 AM cortisol >18 mcg/dL \u2192 AI unlikely\n\u2022 Check ACTH to distinguish primary (high ACTH) from secondary (low ACTH)\n\n**If hemodynamically unstable:**\n\u2022 **Stress-dose hydrocortisone 100 mg IV** immediately \u2014 do NOT wait for cortisol results\n\u2022 Then 50 mg IV q8h until stable\n\u2022 Normal saline for volume resuscitation\n\n**If stable:**\n\u2022 Draw cortisol/ACTH, then start hydrocortisone 20 mg AM / 10 mg PM\n\u2022 Na+ corrects as cortisol is replaced\n\u2022 Monitor for overcorrection \u2014 ADH suppresses once cortisol is adequate',
     recommendation: 'Check AM cortisol and ACTH. If hemodynamically unstable, give stress-dose hydrocortisone 100 mg IV stat (do not wait for results), then 50 mg IV q8h. If stable, draw labs then start physiologic replacement (20 mg AM / 10 mg PM). Na+ corrects as cortisol is replaced. Monitor for overcorrection once ADH suppresses. Endocrinology consult for all new adrenal insufficiency diagnoses.',
     citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Hydrocortisone',
+        dose: '100 mg (stress dose) or 20 mg AM/10 mg PM (physiologic)',
+        route: 'IV (stress) or PO (physiologic)',
+        frequency: 'Stress: 100 mg stat then 50 mg q8h. Physiologic: BID',
+        duration: 'Until hemodynamically stable, then transition to maintenance',
+        notes: 'Do NOT wait for cortisol results if unstable. Na+ corrects as cortisol is replaced.',
+      },
+      monitoring: 'Monitor for Na+ overcorrection once ADH suppresses. Check cortisol response. Endocrinology consult.',
+    },
   },
 
   {
@@ -293,6 +410,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Volume depletion triggers nonosmotic ADH release** \u2014 the body prioritizes volume over tonicity. ADH retains free water, diluting sodium.\n\n**Common causes:**\n\u2022 GI losses (vomiting, diarrhea, NG suction)\n\u2022 Third-spacing (pancreatitis, burns, bowel obstruction)\n\u2022 Diaphoresis, insensible losses in febrile patients\n\u2022 Cerebral salt wasting (post-neurosurgery)\n\n**Management:**\n\u2022 **Normal saline (0.9% NaCl)** for volume resuscitation \u2014 NS is hypertonic relative to the patient\u2019s serum in severe hyponatremia\n\u2022 Replace ongoing losses (NG output, drain output)\n\u2022 Correct potassium and magnesium\n\n**HIGH overcorrection risk.** Once euvolemia is restored, ADH suppresses abruptly. The kidney suddenly excretes a large volume of dilute urine ("aquaresis"), and Na+ can rise 15-20 mEq/L in hours.\n\n\u2022 **If Na+ <120:** Proactive [Desmopressin (DDAVP)](#/drug/desmopressin/ddavp clamp) clamp before volume resuscitation\n\u2022 Watch for sudden increase in urine output \u2014 this signals ADH suppression and imminent rapid Na+ rise\n\u2022 Check Na+ every 2 hours during resuscitation\n\u2022 [Overcorrection Rescue Protocol](#/info/na-overcorrection) at bedside',
     recommendation: 'Resuscitate with normal saline. HIGH overcorrection risk once euvolemia restored and ADH suppresses. If Na+ <120, start proactive DDAVP clamp before NS resuscitation. Monitor Na+ q2h. Watch for sudden urine output increase (signals ADH suppression). Correct K+ and Mg2+ concurrently. Have D5W and DDAVP rescue at bedside. Maximum correction 8-10 mEq/L in 24 hours.',
     citation: [1, 4, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Normal Saline (0.9% NaCl)',
+        dose: 'Volume-based resuscitation',
+        route: 'IV',
+        frequency: 'As needed for volume repletion',
+        duration: 'Until euvolemic',
+        notes: 'NS is hypertonic relative to severely hyponatremic serum.',
+      },
+      alternative: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg',
+        route: 'IV',
+        frequency: 'q6-8h',
+        duration: 'Until Na+ stable',
+        notes: 'Proactive clamp BEFORE NS if Na+ <120. Prevents overcorrection.',
+      },
+      monitoring: 'Na+ q2h. Watch for sudden urine output increase (signals ADH suppression). Max correction 8-10 mEq/L in 24h.',
+    },
   },
 
   {
@@ -303,6 +439,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Edematous states with reduced effective arterial blood volume** trigger ADH release despite total body water excess.\n\n**Causes:**\n\u2022 **Heart failure** \u2014 poor forward flow \u2192 baroreceptor-mediated ADH release\n\u2022 **Cirrhosis** \u2014 splanchnic vasodilation \u2192 reduced effective arterial volume\n\u2022 **Nephrotic syndrome** \u2014 hypoalbuminemia \u2192 reduced oncotic pressure\n\n**Management:**\n\u2022 **Fluid restriction** 1-1.5 L/day (first-line for all three)\n\u2022 [Furosemide](#/drug/furosemide/hypernatremia) **20-40 mg IV** for diuresis \u2014 loop diuretics produce dilute urine and help correct Na+\n\u2022 Treat the underlying condition (guideline-directed HF therapy, TIPS for cirrhosis)\n\u2022 **Sodium restriction** <2g/day\n\n**Avoid:**\n\u2022 Normal saline \u2014 worsens total body sodium and edema\n\u2022 Hypertonic saline \u2014 only if severe symptoms (seizures/coma), and only as temporizing bolus\n\u2022 Vaptans \u2014 unpredictable overcorrection, hepatotoxicity, no mortality benefit\n\n**Prognosis:** Hyponatremia in HF and cirrhosis is an independent marker of disease severity and mortality.',
     recommendation: 'Fluid restriction 1-1.5 L/day. Loop diuretic (furosemide 20-40 mg IV) for diuresis. Sodium restriction <2g/day. Treat the underlying disease (GDMT for HF, TIPS for cirrhosis). Avoid NS, hypertonic saline (unless seizures/coma), and vaptans. Hyponatremia is a marker of disease severity. Goal Na+ correction is slow and may not normalize until underlying disease improves.',
     citation: [1, 2, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Fluid Restriction',
+        dose: '1-1.5 L/day',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Ongoing',
+        notes: 'First-line for all hypervolemic hyponatremia.',
+      },
+      alternative: {
+        drug: 'Furosemide',
+        dose: '20-40 mg',
+        route: 'IV',
+        frequency: 'Daily or BID',
+        duration: 'Until euvolemic',
+        notes: 'Produces dilute urine, helps correct Na+. Also treat underlying HF/cirrhosis.',
+      },
+      monitoring: 'Slow correction expected. Na+ may not normalize until underlying disease improves.',
+    },
   },
 
   // =====================================================================
@@ -373,6 +528,17 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Central DI Treatment',
     body: '**Replace ADH with DDAVP + replace free water deficit.**\n\n**DDAVP replacement:**\n[Desmopressin (DDAVP)](#/drug/desmopressin/central diabetes insipidus) **2 mcg IV q8-12h** (acute inpatient) OR **10 mcg intranasal BID** (stable/outpatient)\n\n**Free water replacement:** Calculate deficit and replace (see next step).\n\n**Post-neurosurgical DI:**\n\u2022 Often a **triphasic response:**\n  1. DI phase (days 1-5): polyuria, rising Na+\n  2. SIAD phase (days 5-10): oliguria, falling Na+ (uncontrolled ADH release from dying neurons)\n  3. Permanent DI (if >80% of neurons destroyed)\n\u2022 **Critical:** Monitor Na+ closely during transitions \u2014 do NOT continue DDAVP blindly into the SIAD phase (will cause dangerous hyponatremia)\n\u2022 Check urine output and Na+ q4-6h in the first 2 weeks post-surgery\n\n**Brain death evaluation:** Central DI with polyuria is a supportive finding but not diagnostic alone. If urine output >300 mL/hr with urine Osm <200, strongly suggestive.',
     citation: [10, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: '2 mcg IV (acute) or 10 mcg intranasal (stable)',
+        route: 'IV or intranasal',
+        frequency: 'IV q8-12h or intranasal BID',
+        duration: 'Ongoing for permanent DI, short-term for post-surgical',
+        notes: 'Monitor closely post-neurosurgery for triphasic response. Stop DDAVP if SIAD phase begins.',
+      },
+      monitoring: 'Urine output and Na+ q4-6h post-surgery. Watch for triphasic response (DI days 1-5, SIAD days 5-10, then permanent DI).',
+    },
     next: 'na-hyper-fwd',
   },
 
@@ -383,6 +549,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Nephrogenic DI Treatment',
     body: '**The kidney does not respond to ADH \u2014 DDAVP is ineffective.** Treatment relies on reducing solute load and using pharmacologic tricks.\n\n**Step 1 \u2014 Remove the offending agent:**\n\u2022 **Lithium** \u2014 discuss with psychiatry before discontinuing. Amiloride 5-10 mg BID blocks lithium entry into collecting duct cells (partially protective even if lithium continued)\n\u2022 **Hypercalcemia** \u2014 treat aggressively (IV saline, calcitonin, bisphosphonates)\n\u2022 **Hypokalemia** \u2014 correct to >3.5 mEq/L\n\n**Step 2 \u2014 Thiazide paradox:**\n\u2022 Thiazide diuretic (HCTZ 25 mg daily) + amiloride 5 mg BID\n\u2022 **Paradoxical antidiuresis** \u2014 thiazides cause mild volume depletion \u2192 increased proximal tubular reabsorption \u2192 less water delivered to diluting segment \u2192 less urine output\n\u2022 Combined with low-sodium diet (<2g/day) to enhance the effect\n\n**Step 3 \u2014 Large free water volumes:**\n\u2022 Patients may require **10-20 liters/day** of free water intake to keep up with urinary losses\n\u2022 If unable to drink enough: D5W IV to match urine output + ongoing losses\n\u2022 Enteral free water via NG/OG tube if intubated\n\n**NSAIDs** (indomethacin 50 mg TID) can reduce urine output by 25-50% but GI/renal toxicity limits long-term use.',
     citation: [10, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Hydrochlorothiazide + Amiloride',
+        dose: 'HCTZ 25 mg + Amiloride 5 mg',
+        route: 'PO',
+        frequency: 'Daily (HCTZ) + BID (Amiloride)',
+        duration: 'Ongoing',
+        notes: 'Thiazide paradox: causes mild volume depletion reducing urine output. Amiloride blocks lithium entry if lithium-induced.',
+      },
+      alternative: {
+        drug: 'Indomethacin',
+        dose: '50 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: 'Short-term only',
+        notes: 'Reduces urine output 25-50%. GI/renal toxicity limits long-term use.',
+      },
+      monitoring: 'May require 10-20 L/day free water intake. Match D5W IV to urine output if unable to drink.',
+    },
     next: 'na-hyper-fwd',
   },
 
@@ -398,6 +583,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Calculate the free water deficit (FWD) to guide replacement volume.**\n\n**Formula:** FWD (liters) = TBW \u00d7 [(Na/140) - 1]\n\u2022 TBW = weight (kg) \u00d7 0.6 (men) or \u00d7 0.5 (women/elderly)\n\u2022 Example: 70 kg male, Na+ 160 \u2192 TBW = 42L, FWD = 42 \u00d7 (160/140 - 1) = **6.0 liters**\n\n**The FWD formula underestimates true deficit** \u2014 it does not account for ongoing losses (insensible, urinary, GI). Add ~1-1.5 L/day for ongoing losses.\n\n**Fluid choice (order of preference):**\n1. **Enteral free water** (PO or NG/OG tube) \u2014 safest, most physiologic\n2. **D5W IV** \u2014 if NPO or insufficient enteral intake (D5W = free water once glucose is metabolized)\n3. **0.45% NaCl** \u2014 only half is free water; use if concurrent volume depletion\n\n**Correction rate:**\n\u2022 **Acute hypernatremia (<48 hours):** Can correct 1 mEq/L/hr safely\n\u2022 **Chronic hypernatremia (>48 hours or unknown):** Maximum **10-12 mEq/L per 24 hours** \u2014 rapid correction risks cerebral edema\n\u2022 Most hypernatremia in hospitalized patients is chronic \u2192 correct slowly\n\n**Replace the deficit over 48-72 hours** \u2014 not in a single bolus. Divide calculated free water evenly.\n\n**Address the underlying cause simultaneously** \u2014 free water alone does not fix DI, ongoing GI losses, or medication causes.',
     citation: [10, 11, 13],
     calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }],
+    treatment: {
+      firstLine: {
+        drug: 'Enteral Free Water',
+        dose: 'Calculated FWD + 1-1.5 L/day for ongoing losses',
+        route: 'PO or NG/OG',
+        frequency: 'Divided over 48-72 hours',
+        duration: 'Until Na+ normalizes',
+        notes: 'Safest, most physiologic. Use D5W IV if NPO.',
+      },
+      alternative: {
+        drug: 'D5W',
+        dose: 'Calculated FWD + ongoing losses',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until Na+ normalizes',
+        notes: 'D5W = free water once glucose metabolized. Use if unable to take PO.',
+      },
+      monitoring: 'Chronic hypernatremia: max 10-12 mEq/L decrease in 24h. Acute (<48h): can correct 1 mEq/L/hr.',
+    },
     next: 'na-hyper-monitoring',
   },
 
@@ -408,6 +612,25 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Hypernatremia + Volume Overload',
     body: '**Iatrogenic hypernatremia from excessive sodium administration** is increasingly common in ICU patients receiving NS boluses, NaHCO\u2083, and high-sodium medications.\n\n**Causes:**\n\u2022 Large-volume NS resuscitation without free water\n\u2022 NaHCO\u2083 infusions (isotonic bicarb = 150 mEq Na/L)\n\u2022 High-sodium medications (piperacillin-tazobactam = 4.7 mEq Na per gram)\n\u2022 Hypertonic saline overcorrection during hyponatremia treatment\n\n**Management \u2014 natriuretic diuresis + free water:**\n\u2022 [Furosemide](#/drug/furosemide/hypernatremia) **20-40 mg IV** \u2014 produces hypotonic urine (Na+ ~75 mEq/L), removing more sodium than water\n\u2022 Replace urine volume with **D5W or enteral free water** to lower Na+ while diuresing excess sodium\n\u2022 Thiazide + amiloride if loop diuretic insufficient\n\n**Target:** Negative sodium balance (remove more Na+ than you give) while maintaining neutral or positive water balance.\n\n**Switch IV fluids** from NS to D5W or 0.45% NaCl for maintenance. Review all sodium-containing medications and minimize where possible.\n\n**Monitor:** Na+ every 4-6 hours. Strict I&O. Daily weights.',
     citation: [10, 13, 16],
+    treatment: {
+      firstLine: {
+        drug: 'Furosemide',
+        dose: '20-40 mg',
+        route: 'IV',
+        frequency: 'Daily or BID',
+        duration: 'Until sodium balance negative',
+        notes: 'Produces hypotonic urine (Na+ ~75 mEq/L), removing more sodium than water.',
+      },
+      alternative: {
+        drug: 'D5W or Enteral Free Water',
+        dose: 'Replace urine volume',
+        route: 'IV or PO/NG',
+        frequency: 'Match to urine output',
+        duration: 'Until Na+ normalizes',
+        notes: 'Replace urine volume with free water while diuresing excess sodium.',
+      },
+      monitoring: 'Target negative sodium balance while maintaining neutral/positive water balance. Na+ q4-6h. Strict I&O.',
+    },
     next: 'na-hyper-monitoring',
   },
 

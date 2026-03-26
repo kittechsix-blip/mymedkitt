@@ -192,6 +192,25 @@ export const PEP_NODES = [
         title: 'Pregnancy Considerations',
         body: 'PEP is safe and recommended in pregnancy. Use the same preferred regimen.\n\n\u2022 [Biktarvy](#/drug/biktarvy) (BIC/FTC/TAF) \u2014 preferred single-tablet regimen, extensive safety data in pregnancy\n\u2022 Alternative: [TDF/FTC](#/drug/tdf-ftc) + [Dolutegravir](#/drug/dolutegravir)\n\u2022 Avoid efavirenz-based regimens\n\u2022 OB/HIV specialist consultation recommended',
         citation: [1, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Biktarvy (bictegravir/emtricitabine/TAF)',
+                dose: '50/200/25 mg (1 tablet)',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '28 days',
+                notes: 'Preferred single-tablet regimen in pregnancy; extensive safety data',
+            },
+            alternative: {
+                drug: 'TDF/FTC (Truvada) + Dolutegravir (Tivicay)',
+                dose: 'TDF/FTC 300/200 mg + Dolutegravir 50 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '28 days',
+                notes: 'Alternative if Biktarvy unavailable; avoid efavirenz-based regimens',
+            },
+            monitoring: 'HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; renal function at 2 weeks; OB/HIV specialist follow-up',
+        },
         next: 'pep-regimen',
     },
     {
@@ -201,6 +220,25 @@ export const PEP_NODES = [
         title: 'Renal Impairment',
         body: 'Dose adjustment required for CrCl <50 mL/min.\n\n\u2022 Use TAF-based regimen (TAF is preferred over TDF in renal impairment)\n\u2022 [Biktarvy](#/drug/biktarvy) \u2014 do not use if CrCl <30\n\u2022 If CrCl <30: consult ID/pharmacy for alternative regimen\n\u2022 Avoid TDF if CrCl <60 (nephrotoxic)',
         citation: [1, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Biktarvy (bictegravir/emtricitabine/TAF)',
+                dose: '50/200/25 mg (1 tablet)',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '28 days',
+                notes: 'TAF preferred over TDF in renal impairment; do NOT use if CrCl <30',
+            },
+            alternative: {
+                drug: 'Consult ID/Pharmacy',
+                dose: 'Individualized dosing',
+                route: 'PO',
+                frequency: 'Per specialist',
+                duration: '28 days',
+                notes: 'CrCl <30 requires ID/pharmacy consultation for alternative regimen',
+            },
+            monitoring: 'BMP at baseline and 2 weeks; HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; monitor for nephrotoxicity',
+        },
         next: 'pep-regimen',
     },
     {
@@ -210,6 +248,25 @@ export const PEP_NODES = [
         title: '28-Day Regimen',
         body: '**PREFERRED REGIMEN**\n[Biktarvy](#/drug/biktarvy) (bictegravir/emtricitabine/TAF) \u2014 1 tablet PO daily x 28 days\n\n**ALTERNATIVE REGIMEN**\n[TDF/FTC](#/drug/tdf-ftc) (Truvada) 1 tablet PO daily + [Dolutegravir](#/drug/dolutegravir) (Tivicay) 50 mg PO daily x 28 days\n\n**SECOND ALTERNATIVE**\n[TDF/FTC](#/drug/tdf-ftc) + [Darunavir](#/drug/darunavir) 800 mg PO daily + [Ritonavir](#/drug/ritonavir) 100 mg PO daily x 28 days\n\nPrescribe full 28-day course from the ED. Do not dispense starter packs \u2014 patients may not follow up for refills.',
         citation: [1, 2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Biktarvy (bictegravir/emtricitabine/TAF)',
+                dose: '50/200/25 mg (1 tablet)',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '28 days',
+                notes: 'Preferred single-tablet regimen; prescribe full 28-day course from ED',
+            },
+            alternative: {
+                drug: 'TDF/FTC (Truvada) + Dolutegravir (Tivicay)',
+                dose: 'TDF/FTC 300/200 mg + Dolutegravir 50 mg',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: '28 days',
+                notes: 'Second alternative: TDF/FTC + Darunavir 800 mg + Ritonavir 100 mg daily',
+            },
+            monitoring: 'HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; adherence check at 2 weeks; renal function if TDF used',
+        },
         next: 'pep-followup',
     },
     // =====================================================================

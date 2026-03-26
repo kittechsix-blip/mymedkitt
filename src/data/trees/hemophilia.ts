@@ -111,6 +111,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 8, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 25-30 units/kg | Factor IX: 40-60 units/kg',
+        route: 'IV',
+        frequency: 'Once, repeat q12-24h if symptoms persist',
+        duration: 'Single dose often sufficient',
+        notes: 'Target factor level 40-60%. Round dose up to nearest whole vial.',
+      },
+      monitoring: 'Check factor levels 30-60 min post-infusion for major bleeds. Monitor for rebleeding.',
+    },
   },
   {
     id: 'hemo-muscle',
@@ -134,6 +145,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 25-30 units/kg | Factor IX: 40-60 units/kg',
+        route: 'IV',
+        frequency: 'q12-24h',
+        duration: '2-3 days',
+        notes: 'Target factor level 40-60%. Round dose up to nearest whole vial.',
+      },
+      monitoring: 'Monitor for compartment syndrome, nerve compression, hemoglobin. Check factor levels for major bleeds.',
+    },
   },
   {
     id: 'hemo-iliopsoas',
@@ -145,6 +167,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 40-50 units/kg | Factor IX: 80-100 units/kg',
+        route: 'IV',
+        frequency: 'q8-12h (Factor VIII) or q18-24h (Factor IX)',
+        duration: '7-14 days total: 80% target x 3 days, then >50% for remainder',
+        notes: 'Life-threatening bleed. Admit with strict bed rest. MRI preferred for imaging.',
+      },
+      monitoring: 'Check factor levels q12-24h. Monitor hemoglobin for occult blood loss. Daily clinical assessment.',
+    },
   },
   {
     id: 'hemo-ich',
@@ -156,6 +189,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'definitive',
     citation: [2, 7, 10, 11],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 50 units/kg | Factor IX: 100 units/kg',
+        route: 'IV',
+        frequency: 'q8-12h (Factor VIII) or q18-24h (Factor IX) to maintain levels',
+        duration: '100% target x 7 days, then 50% x 7 days',
+        notes: 'ADMINISTER BEFORE IMAGING. Do not delay. 20% mortality rate.',
+      },
+      monitoring: 'Check factor levels 30-60 min post-infusion, then q12-24h. ICU admission. Neurosurgery consult.',
+    },
   },
   {
     id: 'hemo-mucosal',
@@ -167,6 +211,33 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 3, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 15-25 units/kg | Factor IX: 30-50 units/kg',
+        route: 'IV',
+        frequency: 'Once, repeat as needed',
+        duration: 'Until bleeding controlled',
+        notes: 'Target factor level 30-50%. Combine with antifibrinolytic therapy.',
+      },
+      alternative: {
+        drug: 'Aminocaproic Acid',
+        dose: '50-60 mg/kg (max 5 g/dose)',
+        route: 'PO or IV',
+        frequency: 'q6h',
+        duration: '5-7 days',
+        notes: 'Check urinalysis first - contraindicated with hematuria (risk of renal thrombi).',
+      },
+      pcnAllergy: {
+        drug: 'Tranexamic Acid',
+        dose: '10-15 mg/kg',
+        route: 'PO or IV',
+        frequency: 'q8-12h',
+        duration: '5-7 days',
+        notes: 'Alternative antifibrinolytic. Same hematuria contraindication.',
+      },
+      monitoring: 'Monitor for continued bleeding. Check urinalysis before antifibrinolytics.',
+    },
   },
   {
     id: 'hemo-gi',
@@ -178,6 +249,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 40-50 units/kg | Factor IX: 80-100 units/kg',
+        route: 'IV',
+        frequency: 'q8-12h (Factor VIII) or q18-24h (Factor IX) to maintain levels',
+        duration: '80-100% target x 1-6 days, then 50% x 7-14 days',
+        notes: 'Standard GI hemorrhage resuscitation. Type and crossmatch, CBC.',
+      },
+      monitoring: 'Factor levels q12-24h. GI consult for source identification. Monitor hemoglobin.',
+    },
   },
   {
     id: 'hemo-hematuria',
@@ -189,6 +271,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [2, 10],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 25 units/kg | Factor IX: 50 units/kg',
+        route: 'IV',
+        frequency: 'q12-24h as needed',
+        duration: '3-5 days',
+        notes: 'Target factor level 50%. ANTIFIBRINOLYTICS CONTRAINDICATED - risk of renal thrombi.',
+      },
+      monitoring: 'Vigorous hydration 1.5x maintenance x 48h. Urology consult. Monitor urine output and hemoglobin.',
+    },
   },
   {
     id: 'hemo-trauma',
@@ -200,6 +293,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     confidence: 'definitive',
     citation: [2, 10, 11],
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII (Hemophilia A) or Factor IX (Hemophilia B)',
+        dose: 'Factor VIII: 50 units/kg | Factor IX: 100 units/kg',
+        route: 'IV',
+        frequency: 'q8-12h (Factor VIII) or q18-24h (Factor IX) to maintain levels',
+        duration: 'Days 1-7: 80-100% target | Days 8-14: 50% target',
+        notes: 'ADMINISTER BEFORE IMAGING. Standard trauma resuscitation takes precedence.',
+      },
+      monitoring: 'Factor levels 30-60 min post-infusion, then q12-24h. Type and crossmatch, CBC, coags. Hematology + trauma surgery consult.',
+    },
   },
 
   // ===================================================================
@@ -295,6 +399,25 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'Higher-dose factor with loading dose to neutralize inhibitor. Check post-infusion levels. Hematology consult.',
     confidence: 'recommended',
     citation: [2, 10],
+    treatment: {
+      firstLine: {
+        drug: 'Factor VIII or Factor IX (higher dose)',
+        dose: '[Weight(kg) x 80 x (1-Hct) x titer(BU/mL)] + 50 units/kg',
+        route: 'IV',
+        frequency: 'Per clinical need',
+        duration: 'Until bleeding controlled',
+        notes: 'Loading dose to neutralize inhibitor. If inadequate response, switch to bypassing agents.',
+      },
+      alternative: {
+        drug: 'FEIBA or rFVIIa',
+        dose: 'FEIBA 50-100 units/kg | rFVIIa 90 mcg/kg',
+        route: 'IV',
+        frequency: 'FEIBA q12h | rFVIIa q2-3h',
+        duration: 'Until bleeding controlled',
+        notes: 'Use if factor does not achieve adequate response.',
+      },
+      monitoring: 'Check post-infusion factor level at 30-60 min. Hematology consult mandatory.',
+    },
   },
   {
     id: 'hemo-high-inhibitor',
@@ -305,6 +428,25 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'FEIBA or rFVIIa. Equally efficacious. Do not exceed FEIBA 200 u/kg/day. Hematology consult mandatory.',
     confidence: 'recommended',
     citation: [2, 9, 10, 11],
+    treatment: {
+      firstLine: {
+        drug: 'FEIBA (Factor Eight Inhibitor Bypassing Activity)',
+        dose: 'Joint bleeds: 50-75 units/kg | Life-threatening: 100 units/kg',
+        route: 'IV',
+        frequency: 'q12h as needed',
+        duration: 'Until bleeding controlled',
+        notes: 'MAX 200 units/kg/day (thrombotic risk). Administer within 1h of bleed onset.',
+      },
+      alternative: {
+        drug: 'Recombinant Factor VIIa (NovoSeven)',
+        dose: '90 mcg/kg x 3 doses OR single dose 270 mcg/kg',
+        route: 'IV',
+        frequency: 'q2-3h (standard) OR q6h+ (if 270 mcg/kg used)',
+        duration: 'Until bleeding controlled',
+        notes: 'Preferred for Factor IX inhibitors (allergic risk to FIX). Equally efficacious to FEIBA (FENOC trial).',
+      },
+      monitoring: 'Clinical response. Hematology consult mandatory. For refractory bleeds, sequential alternating FEIBA + rFVIIa q6h.',
+    },
   },
   {
     id: 'hemo-mild-a',
@@ -315,6 +457,25 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'DDAVP 0.3 mcg/kg IV or intranasal. Requires prior documented response. Max 2–3 doses. Not for hemophilia B.',
     confidence: 'recommended',
     citation: [3, 10, 11],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: 'IV: 0.3 mcg/kg | Intranasal: 150 mcg (<50kg) or 300 mcg (>=50kg)',
+        route: 'IV (dilute in 50mL NS, infuse over 20-30 min) or Intranasal',
+        frequency: 'Once, may repeat up to 2-3 doses total',
+        duration: 'Single dose often sufficient',
+        notes: 'Use HIGH-CONCENTRATION nasal spray (Stimate 150mcg/spray). Raises FVIII 2-6 fold. NOT for hemophilia B.',
+      },
+      alternative: {
+        drug: 'Factor VIII concentrate',
+        dose: 'Per target level and bleed severity',
+        route: 'IV',
+        frequency: 'Per clinical need',
+        duration: 'Per bleed severity',
+        notes: 'Use if DDAVP response inadequate or not previously documented.',
+      },
+      monitoring: 'Restrict fluids to maintenance x24h (water retention risk). Monitor electrolytes with multiple doses. Use NS if IV fluids needed.',
+    },
   },
   {
     id: 'hemo-neonates',
@@ -374,6 +535,25 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'DDAVP 0.3 mcg/kg IV or 150/300 mcg intranasal. Max 2–3 doses. Restrict fluids. Contraindicated in Type 2B.',
     confidence: 'recommended',
     citation: [3, 4, 10],
+    treatment: {
+      firstLine: {
+        drug: 'Desmopressin (DDAVP)',
+        dose: 'IV: 0.3 mcg/kg | Intranasal: 150 mcg (<50kg) or 300 mcg (>=50kg)',
+        route: 'IV (dilute in 50mL NS, infuse over 20-30 min) or Intranasal',
+        frequency: 'Once, may repeat up to 2-3 doses total',
+        duration: 'Until bleeding controlled',
+        notes: 'Use HIGH-CONCENTRATION spray (Stimate 150mcg/spray). CONTRAINDICATED in Type 2B vWD.',
+      },
+      alternative: {
+        drug: 'vWF/FVIII Concentrate (Humate-P)',
+        dose: '30-60 RCo units/kg loading, then 20-40 RCo units/kg',
+        route: 'IV',
+        frequency: 'q12-48h',
+        duration: 'Maintain levels >50 IU/dL x 3-5 days',
+        notes: 'Use if DDAVP response inadequate.',
+      },
+      monitoring: 'Restrict fluids to maintenance x24h. Monitor serum electrolytes with multiple doses. Use NS if IV fluids needed.',
+    },
   },
   {
     id: 'hemo-vwd-concentrate-minor',
@@ -384,6 +564,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'vWF concentrate 30–60 RCo U/kg loading, then 20–40 U/kg maintenance. Maintain levels >50 IU/dL × 3–5 days.',
     confidence: 'recommended',
     citation: [3, 4],
+    treatment: {
+      firstLine: {
+        drug: 'vWF/FVIII Concentrate (Humate-P)',
+        dose: 'Loading: 30-60 RCo units/kg | Maintenance: 20-40 RCo units/kg',
+        route: 'IV',
+        frequency: 'Loading once, then q12-48h maintenance',
+        duration: '3-5 days (maintain vWF:RCo and FVIII >50 IU/dL)',
+        notes: 'Watch for FVIII accumulation over multiple days - thrombotic risk.',
+      },
+      monitoring: 'Daily trough vWF:RCo and factor VIII levels. Monitor for thrombotic complications with prolonged therapy.',
+    },
   },
   {
     id: 'hemo-vwd-major',
@@ -394,6 +585,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'vWF concentrate 40–60 RCo U/kg loading, then 20–40 U/kg maintenance. Maintain >50 IU/dL × 7+ days. Admit.',
     confidence: 'recommended',
     citation: [3, 4],
+    treatment: {
+      firstLine: {
+        drug: 'vWF/FVIII Concentrate (Humate-P)',
+        dose: 'Loading: 40-60 RCo units/kg | Maintenance: 20-40 RCo units/kg',
+        route: 'IV',
+        frequency: 'Loading once, then q8-24h maintenance',
+        duration: 'At least 7 days (maintain vWF:RCo and FVIII >50 IU/dL)',
+        notes: 'Admit for level monitoring. Avoid excessively high FVIII levels - thrombotic risk.',
+      },
+      monitoring: 'Daily trough vWF:RCo and factor VIII levels. Monitor for thrombotic complications. Admission required.',
+    },
   },
   {
     id: 'hemo-vwd-menorrhagia',
@@ -404,6 +606,33 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'Hormonal contraceptives first-line. Add DDAVP and/or antifibrinolytics as adjuncts. Screen family members.',
     confidence: 'recommended',
     citation: [1, 3, 4, 10],
+    treatment: {
+      firstLine: {
+        drug: 'Hormonal Contraceptives (OCPs)',
+        dose: 'Standard oral contraceptive regimen',
+        route: 'PO',
+        frequency: 'Daily (per OCP regimen)',
+        duration: 'Ongoing',
+        notes: 'First-line therapy for vWD menorrhagia. May be only sign of vWD in adolescent females.',
+      },
+      alternative: {
+        drug: 'Aminocaproic Acid',
+        dose: '50-60 mg/kg (max 5 g/dose)',
+        route: 'PO',
+        frequency: 'q6h',
+        duration: '5-7 days during menses',
+        notes: 'Check urinalysis first - contraindicated with hematuria.',
+      },
+      pcnAllergy: {
+        drug: 'Tranexamic Acid',
+        dose: '10-15 mg/kg',
+        route: 'PO',
+        frequency: 'q8-12h',
+        duration: '5-7 days during menses',
+        notes: 'Alternative antifibrinolytic. Same hematuria contraindication.',
+      },
+      monitoring: 'Check urinalysis before antifibrinolytics. Consider DDAVP if documented responder. Screen family members.',
+    },
   },
 
   // ===================================================================
@@ -451,6 +680,17 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'Rare bleeding disorder — hematology consult. FFP as empiric therapy. Specific factor assays.',
     confidence: 'consider',
     citation: [10],
+    treatment: {
+      firstLine: {
+        drug: 'Fresh Frozen Plasma (FFP)',
+        dose: '15 mL/kg',
+        route: 'IV',
+        frequency: 'Once, repeat as needed based on bleeding',
+        duration: 'Until specific factor identified and targeted therapy started',
+        notes: 'Empiric therapy for active bleeding. Contains all clotting factors.',
+      },
+      monitoring: 'Hematology consult urgently. Specific factor assays. Type and crossmatch. Monitor PT/PTT response.',
+    },
   },
 ];
 

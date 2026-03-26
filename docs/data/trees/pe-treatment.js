@@ -56,6 +56,25 @@ export const PE_TREATMENT_NODES = [
         title: 'Immediate Interventions',
         body: '**1. Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) 80 units/kg bolus → 18 units/kg/hr infusion\n• Preferred over LMWH if thrombolysis anticipated\n\n**2. Systemic thrombolysis** (if no contraindications):\n• [Alteplase](#/drug/alteplase/pulmonary) 100 mg IV over 2 hours\n• OR accelerated regimen: 0.6 mg/kg (max 50 mg) over 15 min in cardiac arrest\n\n**3. If thrombolysis contraindicated:**\n• Catheter-directed therapy (CDT)\n• Surgical embolectomy\n• Consider ECMO as bridge in refractory shock\n\n**Volume resuscitation:** Cautious — >500 mL can worsen RV failure. Use vasopressors (norepinephrine preferred) for hemodynamic support.',
         citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Alteplase',
+                dose: '100 mg',
+                route: 'IV',
+                frequency: 'Over 2 hours',
+                duration: 'Single dose',
+                notes: 'Accelerated regimen in cardiac arrest: 0.6 mg/kg (max 50 mg) over 15 min',
+            },
+            alternative: {
+                drug: 'Unfractionated Heparin (UFH)',
+                dose: '80 units/kg bolus, then 18 units/kg/hr',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until transition to oral anticoagulation',
+                notes: 'Preferred if thrombolysis anticipated; start immediately',
+            },
+            monitoring: 'aPTT q6h until stable (target 1.5-2.5x control); CBC, signs of bleeding; hemodynamic status',
+        },
         next: 'pe-anticoag-selection',
     },
     // =====================================================================
@@ -89,6 +108,24 @@ export const PE_TREATMENT_NODES = [
         title: 'Intermediate-High Risk Management',
         body: '**Anticoagulation** — start immediately:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h, OR\n• [UFH](#/drug/ufh/pe) if considering escalation to thrombolysis, OR\n• [Fondaparinux](#/drug/fondaparinux/pe) 5–10 mg SC daily (weight-based)\n\n**ICU monitoring recommended.** Watch closely for clinical deterioration.\n\n**Rescue thrombolysis** if hemodynamic decompensation:\n• [Alteplase](#/drug/alteplase/pulmonary) 100 mg IV over 2h\n• Half-dose alteplase (50 mg) may reduce bleeding risk — emerging evidence\n\n**Consider catheter-directed therapy** if thrombolysis contraindicated but patient deteriorating.',
         citation: [1, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Enoxaparin',
+                dose: '1 mg/kg',
+                route: 'SC',
+                frequency: 'Every 12 hours',
+                duration: 'Until transition to oral anticoagulation',
+            },
+            alternative: {
+                drug: 'Fondaparinux',
+                dose: '5-10 mg (weight-based)',
+                route: 'SC',
+                frequency: 'Once daily',
+                duration: 'Until transition to oral anticoagulation',
+                notes: '<50 kg: 5 mg; 50-100 kg: 7.5 mg; >100 kg: 10 mg',
+            },
+            monitoring: 'CBC, Cr, signs of bleeding; hemodynamic status for escalation to thrombolysis',
+        },
         next: 'pe-anticoag-selection',
     },
     {
@@ -98,6 +135,24 @@ export const PE_TREATMENT_NODES = [
         title: 'Intermediate-Low Risk Management',
         body: 'Either RV dysfunction OR elevated biomarkers, but **not both**.\n\n**Anticoagulation alone** — thrombolysis not indicated:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h, OR\n• [UFH](#/drug/ufh/pe) if CrCl <30 or concern for rapid escalation\n\n**Hospital admission** for monitoring (typically step-down unit).\n\nReassess if clinical deterioration → escalate to intermediate-high risk pathway.',
         citation: [1],
+        treatment: {
+            firstLine: {
+                drug: 'Enoxaparin',
+                dose: '1 mg/kg',
+                route: 'SC',
+                frequency: 'Every 12 hours',
+                duration: 'Until transition to oral anticoagulation',
+            },
+            alternative: {
+                drug: 'Unfractionated Heparin (UFH)',
+                dose: '80 units/kg bolus, then 18 units/kg/hr',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until transition to oral anticoagulation',
+                notes: 'Preferred if CrCl <30 mL/min or concern for rapid escalation',
+            },
+            monitoring: 'CBC, Cr; monitor for clinical deterioration requiring escalation',
+        },
         next: 'pe-anticoag-selection',
     },
     // =====================================================================
@@ -143,6 +198,25 @@ export const PE_TREATMENT_NODES = [
         title: 'Outpatient Anticoagulation',
         body: '**DOACs preferred** (no parenteral bridge needed):\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily with food\n\n**Follow-up:** Within 3–7 days with primary care or hematology.\n\n**Patient education:**\n• Return for worsening dyspnea, chest pain, hemoptysis, syncope\n• Adherence to anticoagulation is critical\n• Minimum 3 months of therapy; reassess for extended treatment',
         citation: [1, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Apixaban',
+                dose: '10 mg x 7 days, then 5 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: 'Minimum 3 months',
+                notes: 'No parenteral bridge required',
+            },
+            alternative: {
+                drug: 'Rivaroxaban',
+                dose: '15 mg BID x 21 days, then 20 mg daily',
+                route: 'PO',
+                frequency: 'BID then daily',
+                duration: 'Minimum 3 months',
+                notes: 'Take with food; no parenteral bridge required',
+            },
+            monitoring: 'Follow-up within 3-7 days; reassess at 3 months for extended therapy',
+        },
         next: 'pe-anticoag-selection',
     },
     {
@@ -152,6 +226,24 @@ export const PE_TREATMENT_NODES = [
         title: 'Brief Inpatient Stay',
         body: 'Admit for **24–48h observation** with initiation of anticoagulation.\n\nStart oral DOAC therapy:\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID, OR\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily\n\nTransition to outpatient when clinically stable and oral intake confirmed.',
         citation: [1],
+        treatment: {
+            firstLine: {
+                drug: 'Apixaban',
+                dose: '10 mg x 7 days, then 5 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: 'Minimum 3 months',
+            },
+            alternative: {
+                drug: 'Rivaroxaban',
+                dose: '15 mg BID x 21 days, then 20 mg daily',
+                route: 'PO',
+                frequency: 'BID then daily',
+                duration: 'Minimum 3 months',
+                notes: 'Take with food',
+            },
+            monitoring: 'Observe 24-48h; confirm oral intake before discharge',
+        },
         next: 'pe-anticoag-selection',
     },
     // =====================================================================
@@ -189,6 +281,25 @@ export const PE_TREATMENT_NODES = [
         title: 'DOAC Regimens (Preferred)',
         body: '**Single-drug approach (no parenteral lead-in):**\n• [Apixaban](#/drug/apixaban/pe) 10 mg BID × 7 days → 5 mg BID\n• [Rivaroxaban](#/drug/rivaroxaban/pe) 15 mg BID × 21 days → 20 mg daily (with food)\n\n**Parenteral lead-in required (5–10 days LMWH/UFH first):**\n• [Edoxaban](#/drug/edoxaban/pe) 60 mg daily (30 mg if CrCl 15–50, weight ≤60 kg, or P-gp inhibitor)\n• [Dabigatran](#/drug/dabigatran/pe) 150 mg BID\n\n**Duration:** Minimum 3 months. Extended treatment for unprovoked PE, recurrent VTE, or persistent risk factors.',
         citation: [4],
+        treatment: {
+            firstLine: {
+                drug: 'Apixaban',
+                dose: '10 mg x 7 days, then 5 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: 'Minimum 3 months',
+                notes: 'No parenteral lead-in required',
+            },
+            alternative: {
+                drug: 'Rivaroxaban',
+                dose: '15 mg BID x 21 days, then 20 mg daily',
+                route: 'PO',
+                frequency: 'BID then daily',
+                duration: 'Minimum 3 months',
+                notes: 'Take with food; no parenteral lead-in required',
+            },
+            monitoring: 'Cr at baseline; reassess at 3 months for extended therapy decision',
+        },
     },
     {
         id: 'pe-lmwh-warfarin',
@@ -197,6 +308,25 @@ export const PE_TREATMENT_NODES = [
         title: 'LMWH Bridge to Warfarin',
         body: '• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h (or 1.5 mg/kg daily)\n• Start warfarin on day 1 — overlap until INR 2.0–3.0 for ≥24 hours\n• Discontinue LMWH after INR therapeutic × 2 consecutive days\n• Target INR: 2.0–3.0\n\n**Duration:** Minimum 3 months. Extended for unprovoked or recurrent VTE.\n\n**Monitoring:** INR weekly until stable, then monthly.',
         citation: [4],
+        treatment: {
+            firstLine: {
+                drug: 'Enoxaparin',
+                dose: '1 mg/kg (or 1.5 mg/kg daily)',
+                route: 'SC',
+                frequency: 'Every 12 hours (or daily)',
+                duration: 'Until INR 2.0-3.0 x 2 consecutive days',
+                notes: 'Start warfarin on day 1; overlap required',
+            },
+            alternative: {
+                drug: 'Warfarin',
+                dose: 'Variable (typically 5 mg start)',
+                route: 'PO',
+                frequency: 'Once daily',
+                duration: 'Minimum 3 months',
+                notes: 'Target INR 2.0-3.0',
+            },
+            monitoring: 'INR weekly until stable, then monthly; CBC',
+        },
     },
     {
         id: 'pe-renal-hepatic',
@@ -205,6 +335,33 @@ export const PE_TREATMENT_NODES = [
         title: 'Renal or Hepatic Impairment',
         body: '**CrCl <30 mL/min:**\n• [UFH](#/drug/ufh/pe) preferred — renally independent clearance\n• Adjust LMWH dose for CrCl 15–30 (enoxaparin 1 mg/kg SC daily)\n• Apixaban may be used cautiously (least renal elimination of DOACs)\n\n**Severe hepatic disease (Child-Pugh C):**\n• UFH preferred\n• DOACs contraindicated in severe hepatic impairment\n\n**HIT (heparin-induced thrombocytopenia):**\n• Discontinue ALL heparin products immediately\n• [Fondaparinux](#/drug/fondaparinux/pe) or argatroban as alternatives\n• Bridge to warfarin only after platelet recovery (>150k)',
         citation: [4, 5],
+        treatment: {
+            firstLine: {
+                drug: 'Unfractionated Heparin (UFH)',
+                dose: '80 units/kg bolus, then 18 units/kg/hr',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until transition to oral anticoagulation',
+                notes: 'Preferred for CrCl <30 mL/min and severe hepatic disease',
+            },
+            alternative: {
+                drug: 'Enoxaparin (dose-adjusted)',
+                dose: '1 mg/kg daily',
+                route: 'SC',
+                frequency: 'Once daily',
+                duration: 'Until transition to oral anticoagulation',
+                notes: 'For CrCl 15-30 mL/min; avoid if CrCl <15',
+            },
+            pcnAllergy: {
+                drug: 'Fondaparinux',
+                dose: '5-10 mg (weight-based)',
+                route: 'SC',
+                frequency: 'Once daily',
+                duration: 'Until transition to oral anticoagulation',
+                notes: 'Alternative for HIT; use with caution if CrCl <30',
+            },
+            monitoring: 'aPTT q6h (UFH); anti-Xa levels for LMWH in renal impairment; platelets for HIT',
+        },
     },
 ];
 export const PE_TREATMENT_NODE_COUNT = PE_TREATMENT_NODES.length;

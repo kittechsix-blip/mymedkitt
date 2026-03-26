@@ -149,6 +149,25 @@ export const RABIES_NODES = [
         recommendation: 'Modified Milwaukee Protocol: ketamine + midazolam + nimodipine + ICU support. Outcomes remain extremely poor. ID and neuro consults. Standard + contact precautions. Report to public health.',
         confidence: 'consider',
         citation: [2, 3, 12, 14],
+        treatment: {
+            firstLine: {
+                drug: 'Ketamine + Midazolam',
+                dose: 'Ketamine: titrate for sedation; Midazolam: titrate for dysautonomia control',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Throughout ICU course',
+                notes: 'Modified Milwaukee Protocol. Therapeutic coma with burst suppression is NO LONGER recommended. Outcomes remain extremely poor.',
+            },
+            alternative: {
+                drug: 'Nimodipine',
+                dose: '60 mg PO/NG q4h (use with caution)',
+                route: 'PO or NG',
+                frequency: 'Every 4 hours',
+                duration: 'Throughout ICU course',
+                notes: 'Use with caution due to hypotension risk. Monitor BP closely.',
+            },
+            monitoring: 'ICU-level monitoring. ID and neurology consultation. Standard + contact precautions. Report to public health. Monitor for hypotension with nimodipine.',
+        },
     },
     // =====================================================================
     // MODULE 4: EXPOSURE ASSESSMENT
@@ -313,6 +332,25 @@ export const RABIES_NODES = [
         title: 'Wound Management',
         body: '**Wound care is the single most effective rabies prevention measure** — reduces risk by up to 90% in animal studies.\n\n**Immediate wound care:**\n1. **Wash wound with soap and water for at least 15 minutes** — vigorous flushing\n2. Irrigate with **povidone-iodine** (Betadine) or virucidal agent if available\n3. Do NOT apply caustic agents (bleach, acid)\n\n**Suturing guidance:**\n• **Delay primary closure if possible** — leaving wounds open reduces infection risk\n• If suturing required for cosmetic/hemostatic reasons: **infiltrate RIG into wound bed first**, then suture loosely\n• Approximate wound edges rather than tight closure\n\n**Tetanus:** Update tetanus prophylaxis per standard wound guidelines if not current.',
         citation: [1, 15, 18],
+        treatment: {
+            firstLine: {
+                drug: 'Povidone-iodine (Betadine)',
+                dose: 'Topical irrigation after soap and water wash',
+                route: 'Topical',
+                frequency: 'Once (at initial wound care)',
+                duration: 'Single application',
+                notes: 'Wash wound with soap and water for at least 15 minutes FIRST, then irrigate with povidone-iodine. Do NOT apply caustic agents (bleach, acid).',
+            },
+            alternative: {
+                drug: 'Soap and water only',
+                dose: 'Vigorous flushing for at least 15 minutes',
+                route: 'Topical',
+                frequency: 'Once',
+                duration: 'Single application',
+                notes: 'If povidone-iodine unavailable, thorough soap and water irrigation alone is effective.',
+            },
+            monitoring: 'Watch for signs of wound infection. Update tetanus prophylaxis if not current. Delay primary closure if possible.',
+        },
         next: 'rabies-pep-decision',
     },
     // =====================================================================
@@ -385,6 +423,17 @@ export const RABIES_NODES = [
         title: 'Full PEP — RIG + 4-Dose Vaccine',
         body: '**RABIES IMMUNE GLOBULIN (RIG)**\n• [Rabies Immune Globulin (HRIG)](#/drug/rabies-rig/rabies pep) **20 IU/kg**\n• **Infiltrate as much as anatomically feasible into and around the wound(s)**\n• Inject remainder IM at a site **distant from the vaccine injection site**\n• Give with the first vaccine dose ONLY — **do NOT give RIG after day 7** of the vaccine series\n• Do NOT exceed 20 IU/kg (may interfere with active antibody production)\n\n**RABIES VACCINE**\n• [Rabies Vaccine (HDCV or PCECV)](#/drug/rabies-vaccine/rabies pep unvaccinated) **1.0 mL IM** deltoid (adults) or anterolateral thigh (children)\n• **4-dose series: Days 0, 3, 7, 14**\n• Day 0 = today (give vaccine at a different site than RIG)\n\n**PREGNANCY** is NOT a contraindication to rabies PEP.',
         citation: [1, 18, 19, 20],
+        treatment: {
+            firstLine: {
+                drug: 'Rabies Immune Globulin (HRIG) + Rabies Vaccine (HDCV or PCECV)',
+                dose: 'HRIG 20 IU/kg (infiltrate wound, remainder IM) + Vaccine 1.0 mL IM',
+                route: 'IM (deltoid for adults, anterolateral thigh for children)',
+                frequency: 'HRIG: Day 0 only; Vaccine: Days 0, 3, 7, 14',
+                duration: '4-dose vaccine series over 14 days',
+                notes: 'Infiltrate as much HRIG as anatomically feasible into wound. Give vaccine at different site than RIG. Do NOT give RIG after day 7.',
+            },
+            monitoring: 'Schedule vaccine doses per protocol. Watch wound for infection. Vaccine side effects: injection site pain (up to 74%), headache, nausea.',
+        },
         next: 'rabies-schedule',
     },
     {
@@ -394,6 +443,17 @@ export const RABIES_NODES = [
         title: 'Immunocompromised PEP — RIG + 5-Dose Vaccine',
         body: '**Immunocompromised patients require a modified protocol:**\n\n**RIG** — Give **even if previously vaccinated:**\n• [Rabies Immune Globulin (HRIG)](#/drug/rabies-rig/rabies pep) **20 IU/kg** — infiltrate wound, remainder IM distant from vaccine\n\n**VACCINE — 5-dose series:**\n• [Rabies Vaccine (HDCV or PCECV)](#/drug/rabies-vaccine/rabies pep immunocompromised) **1.0 mL IM**\n• **Days 0, 3, 7, 14, and 28** (additional day 28 dose)\n\n**POST-VACCINATION SEROLOGY:**\n• Check rabies virus neutralizing antibody (RVNA) titer **7-14 days after last dose**\n• Adequate response: ≥0.5 IU/mL\n• If inadequate: administer additional vaccine dose and recheck\n\n**ID/infectious disease consultation recommended** for all immunocompromised patients.',
         citation: [1, 19],
+        treatment: {
+            firstLine: {
+                drug: 'Rabies Immune Globulin (HRIG) + Rabies Vaccine (HDCV or PCECV)',
+                dose: 'HRIG 20 IU/kg (infiltrate wound, remainder IM) + Vaccine 1.0 mL IM',
+                route: 'IM (deltoid for adults, anterolateral thigh for children)',
+                frequency: 'HRIG: Day 0 only; Vaccine: Days 0, 3, 7, 14, 28',
+                duration: '5-dose vaccine series over 28 days',
+                notes: 'Give RIG even if previously vaccinated. ID consultation recommended. Additional day 28 dose for immunocompromised.',
+            },
+            monitoring: 'Check RVNA titer 7-14 days after last dose. Adequate response: ≥0.5 IU/mL. If inadequate, give additional dose and recheck.',
+        },
         next: 'rabies-schedule',
     },
     {
@@ -403,6 +463,17 @@ export const RABIES_NODES = [
         title: 'Previously Vaccinated — 2-Dose Booster',
         body: '**No RIG needed** — previously vaccinated, immunocompetent patients already have memory B cells.\n\n**VACCINE — 2-dose series:**\n• [Rabies Vaccine (HDCV or PCECV)](#/drug/rabies-vaccine/rabies pep previously vaccinated) **1.0 mL IM** deltoid (adults) or anterolateral thigh (children)\n• **Days 0 and 3** only\n\n**Applies to patients who have received:**\n• Prior complete PEP series\n• Pre-exposure prophylaxis (2- or 3-dose series)\n• Prior series with documented adequate antibody titer',
         citation: [1, 18],
+        treatment: {
+            firstLine: {
+                drug: 'Rabies Vaccine (HDCV or PCECV)',
+                dose: '1.0 mL IM',
+                route: 'IM (deltoid for adults, anterolateral thigh for children)',
+                frequency: 'Days 0 and 3',
+                duration: '2-dose booster series over 3 days',
+                notes: 'No RIG needed for previously vaccinated immunocompetent patients. Applies to prior complete PEP, pre-exposure prophylaxis, or documented adequate antibody titer.',
+            },
+            monitoring: 'Schedule Day 3 vaccine dose. Watch wound for infection. Routine serology not needed for immunocompetent patients.',
+        },
         next: 'rabies-schedule',
     },
     // =====================================================================

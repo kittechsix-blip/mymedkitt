@@ -236,6 +236,17 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'burn-rule-of-10', label: "Rule of 10's Calculator" }],
         citation: [2, 15],
         next: 'burn-fluids-monitoring',
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: '%TBSA x 10 = mL/hr (add 100 mL/hr per 10 kg over 80 kg)',
+                route: 'IV',
+                frequency: 'Continuous infusion, titrate q1-2h',
+                duration: 'First 24 hours from time of burn',
+                notes: 'Simplest formula. Example: 30% TBSA, 80 kg = 300 mL/hr. If 100 kg = 500 mL/hr.',
+            },
+            monitoring: 'UOP target 0.5-1 mL/kg/hr. Adjust by 20% up or down based on UOP. Foley catheter required.',
+        },
     },
     {
         id: 'burn-parkland',
@@ -246,6 +257,25 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'burn-parkland', label: 'Parkland Calculator' }],
         citation: [2, 15],
         next: 'burn-fluids-monitoring',
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: '4 mL x %TBSA x weight (kg) = total 24h volume',
+                route: 'IV',
+                frequency: 'Half in first 8h (from burn time), half in next 16h',
+                duration: 'First 24 hours from time of burn',
+                notes: 'Example: 80 kg, 40% TBSA = 12,800 mL/24h. First 8h: 800 mL/hr. Next 16h: 400 mL/hr.',
+            },
+            alternative: {
+                drug: '5% Albumin',
+                dose: '0.5-1 mL x %TBSA x weight (kg)',
+                route: 'IV',
+                frequency: 'Starting at 8-12h post-burn',
+                duration: 'Infuse over 8-16h',
+                notes: 'Consider if crystalloid requirements exceeding predicted volumes. Reduces total fluid needs.',
+            },
+            monitoring: 'UOP target 0.5-1 mL/kg/hr (adults), 1-1.5 mL/kg/hr (peds). Titrate by 20%. Foley catheter required.',
+        },
     },
     {
         id: 'burn-dsmc-moderate',
@@ -256,6 +286,25 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'burn-dell-seton', label: 'Dell-Seton Calculator' }],
         citation: [18],
         next: 'burn-fluids-monitoring',
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: '2 mL x %TBSA x weight (kg) over first 8h',
+                route: 'IV',
+                frequency: 'Continuous infusion, titrate q1h to UOP',
+                duration: 'First 8 hours from time of burn',
+                notes: 'Lower initial crystalloid than Parkland. Reduces fluid creep risk.',
+            },
+            alternative: {
+                drug: '5% Albumin',
+                dose: '0.5-1 mL x %TBSA x weight (kg)',
+                route: 'IV',
+                frequency: 'Starting at hour 8',
+                duration: 'Hours 8-24',
+                notes: 'Begin if crystalloid requirements remain high. Reduces total 24h fluid volume.',
+            },
+            monitoring: 'UOP target 0.5-1.0 mL/kg/hr. Mandatory q1h nursing documentation. Adjust rate by 20% based on UOP.',
+        },
     },
     {
         id: 'burn-dsmc-severe',
@@ -266,6 +315,25 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'burn-dell-seton', label: 'Dell-Seton Calculator' }],
         citation: [18],
         next: 'burn-fluids-monitoring',
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: '2 mL x %TBSA x weight (kg) over first 8h',
+                route: 'IV',
+                frequency: 'Continuous infusion, titrate q1h to UOP',
+                duration: 'First 8 hours from time of burn',
+                notes: 'Run concurrently with FFP for severe burns.',
+            },
+            alternative: {
+                drug: 'Fresh Frozen Plasma (FFP)',
+                dose: '0.5-1.0 mL x %TBSA x weight (kg)',
+                route: 'IV',
+                frequency: 'Initiated simultaneously with crystalloid',
+                duration: 'First 8 hours from time of burn',
+                notes: 'Notify blood bank early (30-45 min thaw time). Type-specific preferred; AB if emergent. Maintains oncotic pressure.',
+            },
+            monitoring: 'UOP target 0.5-1.0 mL/kg/hr. Aggressive q1h titration. Watch for fluid creep signs (abdominal/orbital compartment).',
+        },
     },
     {
         id: 'burn-fluids-monitoring',
@@ -284,6 +352,25 @@ export const BURNS_NODES = [
         body: '**Children <30 kg require BOTH maintenance fluids AND resuscitation fluids** — they have limited glycogen stores and are at high risk for hypoglycemia during large-volume crystalloid resuscitation.\n\n**Maintenance fluids (in addition to resuscitation):**\n• Use **D5 ½NS** (dextrose-containing) at standard 4-2-1 maintenance rate:\n  - First 10 kg: 4 mL/kg/hr\n  - 10-20 kg: add 2 mL/kg/hr\n  - >20 kg: add 1 mL/kg/hr\n• Run maintenance through a separate line from resuscitation LR\n\n**Resuscitation:**\n• Parkland formula applies: 4 mL × %TBSA × weight (kg)\n• Use LR for resuscitation (no dextrose in resuscitation fluid)\n• Target UOP: **1.0-1.5 mL/kg/hr** (higher than adults)\n\n**Glucose monitoring:**\n• Check glucose on arrival and q2-4h during resuscitation\n• Infants and toddlers are especially vulnerable to hypoglycemia\n• [Dextrose](#/drug/dextrose/hypoglycemia) D10 bolus (2-4 mL/kg) for glucose <60 mg/dL\n\n**Non-accidental trauma (NAT) screening:**\n• **Mandatory consideration in all pediatric burns**, especially:\n  - Scald burns with stocking/glove distribution\n  - Burns with sharp lines of demarcation\n  - Bilateral symmetric burns\n  - Delay in presentation (>2 hours)\n  - Story inconsistent with burn pattern or developmental age\n  - Prior injuries or ED visits\n• Document skin exam, photo-document burns, involve social work',
         citation: [2, 23],
         next: 'burn-wound-care',
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers (Resuscitation)',
+                dose: '4 mL x %TBSA x weight (kg) over 24h (Parkland)',
+                route: 'IV',
+                frequency: 'Half in first 8h, half in next 16h',
+                duration: 'First 24 hours from time of burn',
+                notes: 'UOP target 1.0-1.5 mL/kg/hr (higher than adults). No dextrose in resuscitation fluid.',
+            },
+            alternative: {
+                drug: 'D5 1/2NS (Maintenance)',
+                dose: '4-2-1 rule: 4 mL/kg/hr first 10kg, +2 mL/kg/hr 10-20kg, +1 mL/kg/hr >20kg',
+                route: 'IV (separate line)',
+                frequency: 'Continuous',
+                duration: 'Throughout resuscitation',
+                notes: 'Required for children <30 kg. Prevents hypoglycemia. Check glucose q2-4h.',
+            },
+            monitoring: 'UOP 1.0-1.5 mL/kg/hr. Glucose on arrival and q2-4h. D10 bolus 2-4 mL/kg if glucose <60.',
+        },
     },
     // =====================================================================
     // MODULE 4: AIRWAY & INHALATION INJURY
@@ -315,6 +402,25 @@ export const BURNS_NODES = [
         body: '**Use the largest ETT that will pass** — expect significant secretions and potential for mucosal sloughing. A larger tube facilitates suctioning and bronchoscopy.\n\n**Preparation:**\n• Video laryngoscopy preferred (edematous landmarks)\n• Have **surgical airway kit at bedside** — can\'t-intubate-can\'t-oxygenate is a real risk\n• Suction ready — expect copious carbonaceous secretions\n• Bougie available\n\n**Induction:** [Ketamine](#/drug/ketamine/burns) 1-2 mg/kg IV is preferred — maintains hemodynamic stability and provides bronchodilation. Avoid agents that drop blood pressure in patients who are already volume-depleted.\n\n**Paralytic:** Succinylcholine is safe in the **first 24 hours** after burn. **After 24 hours, succinylcholine is CONTRAINDICATED** — upregulation of extrajunctional acetylcholine receptors causes massive potassium release and cardiac arrest. Use rocuronium instead.\n\n**Securing the tube:** Secure with **cloth ties or commercial tube holders** — tape will not adhere to burned or edematous skin. Mark ETT depth. Document and verify position with end-tidal CO2 and CXR.\n\n**Post-intubation:**\n• Expect to increase fluid resuscitation by **30-50%** over predicted volumes\n• Early bronchoscopy for diagnosis and therapeutic lavage\n• HOB 30° to reduce facial/airway edema\n• Low tidal volume ventilation (6-8 mL/kg IBW) — inhalation injury causes ARDS',
         citation: [1, 8],
         next: 'burn-co-assess',
+        treatment: {
+            firstLine: {
+                drug: 'Ketamine',
+                dose: '1-2 mg/kg',
+                route: 'IV',
+                frequency: 'Once (induction)',
+                duration: 'Single dose',
+                notes: 'Preferred induction agent for burn patients — maintains hemodynamic stability and provides bronchodilation',
+            },
+            alternative: {
+                drug: 'Rocuronium',
+                dose: '1-1.2 mg/kg',
+                route: 'IV',
+                frequency: 'Once (paralytic)',
+                duration: 'Single dose',
+                notes: 'Use for paralysis if >24h post-burn. Succinylcholine contraindicated after 24h due to hyperkalemia risk',
+            },
+            monitoring: 'End-tidal CO2, pulse oximetry, blood pressure. Verify ETT position with CXR.',
+        },
     },
     {
         id: 'burn-airway-soft',
@@ -356,6 +462,25 @@ export const BURNS_NODES = [
         body: '**Immediate treatment: 100% FiO2 via NRB mask or ventilator.**\n\n**CO half-life by oxygen delivery:**\n• Room air (21% O2): ~320 minutes (5+ hours)\n• 100% O2 NRB: ~90 minutes\n• Hyperbaric oxygen (HBO) at 3 ATA: ~23 minutes\n\n**Hyperbaric oxygen (HBO) criteria** — consider if available within reasonable transport time:\n• COHb >25% (>15% in pregnancy)\n• Loss of consciousness at any point\n• Neurologic deficit (confusion, ataxia, seizure)\n• Cardiac ischemia or arrhythmia\n• Persistent symptoms despite 4h of 100% O2\n• Pregnancy with COHb >15% or any fetal distress\n\n**HBO controversy:** Evidence is mixed. The Weaver trial showed reduced cognitive sequelae at 6 weeks and 12 months with HBO. However, HBO requires transport, is not universally available, and is impractical for critically ill burn patients who need ongoing resuscitation.\n\n**Delayed neuropsychiatric syndrome (DNS):**\n• Occurs in 15-40% of significant CO poisonings\n• Onset: 2-40 days after exposure\n• Symptoms: cognitive impairment, personality changes, movement disorders, focal deficits\n• HBO may reduce risk — strongest indication for HBO referral\n\n**Cardiac monitoring:** CO causes direct myocardial toxicity. Troponin, ECG, and telemetry for all patients with COHb >15% or cardiac symptoms.',
         citation: [5, 6, 7],
         next: 'burn-cyanide',
+        treatment: {
+            firstLine: {
+                drug: 'Oxygen',
+                dose: '100% FiO2',
+                route: 'NRB mask or ventilator',
+                frequency: 'Continuous',
+                duration: 'Until COHb normalizes (<3% non-smoker, <10% smoker)',
+                notes: 'CO half-life: ~90 min on 100% O2 vs ~320 min on room air',
+            },
+            alternative: {
+                drug: 'Hyperbaric Oxygen (HBO)',
+                dose: '2.5-3 ATA',
+                route: 'Hyperbaric chamber',
+                frequency: '1-3 treatments',
+                duration: '60-120 min per session',
+                notes: 'Consider for COHb >25%, LOC, neurologic deficit, cardiac ischemia, pregnancy with COHb >15%',
+            },
+            monitoring: 'Serial co-oximetry q2h until normalized. Continuous cardiac monitoring. Troponin, ECG.',
+        },
     },
     {
         id: 'burn-co-mild',
@@ -365,6 +490,17 @@ export const BURNS_NODES = [
         body: '**Treatment: 100% O2 via non-rebreather mask for at least 6 hours** or until COHb normalizes (<3% non-smoker, <10% smoker).\n\n**Monitoring:**\n• Repeat co-oximetry every 2 hours until normalized\n• Continuous cardiac monitoring\n• Serial neurologic exams — assess orientation, cognition, gait\n\n**Expected symptom resolution timeline:**\n• Headache: usually resolves within 4-6h of O2 therapy\n• Nausea/dizziness: resolves within 2-4h\n• Confusion: if present, should clear within 4-6h — persistent confusion warrants reassessment\n\n**Disposition considerations:**\n• If symptoms resolve and COHb normalizes: can be managed as part of overall burn disposition\n• If symptoms persist despite 4-6h of 100% O2: consider HBO referral\n• Counsel all patients about delayed neuropsychiatric syndrome (DNS) — return for cognitive changes, personality changes, or new neurologic symptoms over the next 2-6 weeks',
         citation: [5],
         next: 'burn-cyanide',
+        treatment: {
+            firstLine: {
+                drug: 'Oxygen',
+                dose: '100% FiO2',
+                route: 'Non-rebreather mask',
+                frequency: 'Continuous',
+                duration: 'Minimum 6 hours or until COHb normalizes',
+                notes: 'Target COHb <3% (non-smoker) or <10% (smoker)',
+            },
+            monitoring: 'Co-oximetry q2h until normalized. Continuous cardiac monitoring. Serial neuro exams (orientation, cognition, gait).',
+        },
     },
     {
         id: 'burn-cyanide',
@@ -393,6 +529,25 @@ export const BURNS_NODES = [
         body: '**First-line antidote: [Hydroxocobalamin](#/drug/hydroxocobalamin/cyanide) (Cyanokit)**\n• Adult dose: **5 g IV over 15 minutes**\n• May repeat × 1 if clinical response is inadequate\n• Pediatric dose: **70 mg/kg IV** (max 5 g)\n\n**Mechanism:** Hydroxocobalamin (vitamin B12a) binds cyanide directly to form cyanocobalamin (vitamin B12), which is renally excreted. Does not affect oxygen-carrying capacity — safe to use with concurrent CO poisoning.\n\n**Side effects:**\n• Turns skin and urine **deep RED** for 2-5 days — warn the patient and staff\n• Interferes with colorimetric lab assays (total bilirubin, creatinine, glucose) — **draw labs BEFORE administration** when possible\n• Hypertension (usually transient)\n\n**Alternative: Sodium thiosulfate**\n• 12.5 g (50 mL of 25% solution) IV over 10-20 min\n• Slower onset than hydroxocobalamin\n• Use as adjunct or when hydroxocobalamin unavailable\n\n**AVOID sodium nitrite in concurrent CO poisoning** — nitrite induces methemoglobinemia, which combined with COHb critically reduces oxygen delivery. Hydroxocobalamin is the preferred agent specifically because it does not form methemoglobin.',
         citation: [7, 10],
         next: 'burn-depth',
+        treatment: {
+            firstLine: {
+                drug: 'Hydroxocobalamin (Cyanokit)',
+                dose: '5 g (adult) | 70 mg/kg (peds, max 5 g)',
+                route: 'IV',
+                frequency: 'Once, may repeat x1 if inadequate response',
+                duration: 'Infuse over 15 minutes',
+                notes: 'Draw labs BEFORE administration (interferes with colorimetric assays). Turns skin/urine deep red for 2-5 days.',
+            },
+            alternative: {
+                drug: 'Sodium Thiosulfate',
+                dose: '12.5 g (50 mL of 25% solution)',
+                route: 'IV',
+                frequency: 'Once',
+                duration: 'Infuse over 10-20 minutes',
+                notes: 'Slower onset. Use as adjunct or when hydroxocobalamin unavailable. AVOID sodium nitrite if concurrent CO poisoning.',
+            },
+            monitoring: 'Lactate (should decrease with successful treatment). Hemodynamic status. Mental status improvement.',
+        },
     },
     // =====================================================================
     // MODULE 5: ESCHAROTOMY
@@ -517,6 +672,25 @@ export const BURNS_NODES = [
         body: '**HF acid is uniquely dangerous** — the fluoride ion penetrates tissue and binds calcium and magnesium, causing both deep tissue destruction and potentially fatal systemic toxicity (hypocalcemia, hypomagnesemia, hyperkalemia → cardiac arrest).\n\n**Concentration determines presentation:**\n• >50% HF: immediate pain and tissue destruction\n• 20-50% HF: delayed 1-8 hours\n• <20% HF: may be delayed up to 24 hours — patients may not seek care until significant damage has occurred\n\n**Treatment ladder:**\n\n**Step 1 — Immediate irrigation:** Copious water for 15-30 minutes\n\n**Step 2 — Topical calcium gluconate:** [Calcium Gluconate 2.5% Gel](#/drug/calcium-gluconate-gel/hf burn) applied liberally to the burn and surrounding area, massaged in with a gloved hand. Reapply every 15-30 min. Can be made by mixing 3.5g calcium gluconate powder in 150mL water-soluble lubricant (e.g., KY jelly).\n\n**Step 3 — Subcutaneous/intradermal injection:** If pain persists despite topical therapy: 5% calcium gluconate (dilute 10% to 5%) injected **0.5 mL per cm²** of affected skin using a 27-30g needle. Maximum 0.5 mL per injection site.\n\n**Step 4 — Intra-arterial calcium:** For hand/digit burns unresponsive to above: [Calcium Gluconate](#/drug/calcium-gluconate/hf burn) 10 mL of 10% in 40 mL NS infused via radial artery catheter over 4 hours. Requires vascular access and monitoring.\n\n**Step 5 — Surgical:** Excision of necrotic tissue if all above measures fail.\n\n**Systemic monitoring (MANDATORY for burns >25 cm² or >50% HF):**\n• Continuous cardiac monitoring — watch for QT prolongation, widened QRS, bradycardia\n• Serial calcium, magnesium, potassium q2-4h\n• Replace calcium aggressively: calcium gluconate 10% IV if serum Ca <8 or symptomatic\n• Replace magnesium\n• Treat hyperkalemia per standard protocol → [Potassium Disorders](#/tree/potassium)',
         citation: [9, 19],
         next: 'burn-chem-wound-care',
+        treatment: {
+            firstLine: {
+                drug: 'Calcium Gluconate 2.5% Gel',
+                dose: 'Apply liberally to burn and surrounding area',
+                route: 'Topical',
+                frequency: 'Reapply q15-30 min',
+                duration: 'Until pain resolves',
+                notes: 'Make by mixing 3.5g calcium gluconate powder in 150mL water-soluble lubricant (KY jelly). Massage with gloved hand.',
+            },
+            alternative: {
+                drug: 'Calcium Gluconate 5%',
+                dose: '0.5 mL per cm² of affected skin',
+                route: 'Subcutaneous/intradermal injection',
+                frequency: 'Once, may repeat if pain persists',
+                duration: 'Single treatment session',
+                notes: 'Use 27-30g needle, max 0.5 mL per injection site. Dilute 10% to 5%. Use if topical therapy fails.',
+            },
+            monitoring: 'Continuous cardiac monitoring (QT, QRS, bradycardia). Serial Ca, Mg, K q2-4h. Give IV calcium gluconate 10% if serum Ca <8 or symptomatic.',
+        },
     },
     {
         id: 'burn-chem-metals',
@@ -565,6 +739,25 @@ export const BURNS_NODES = [
         body: '[Burn Dressing Guide](#/info/burns-dressing-guide)\n\n**Dressing selection by burn depth:**\n\n**Epidermal (superficial):** No dressing needed. Moisturizing lotion (aloe vera is reasonable). Will heal in 3-5 days.\n\n**Superficial partial thickness:** Topical antimicrobial + nonadherent dressing. Options:\n• [Bacitracin](#/drug/bacitracin/burns) ointment + nonadherent gauze (Adaptic/Xeroform) — simple, inexpensive, preferred for face and small burns\n• Biosynthetic dressings (Biobrane, Suprathel) — reduce pain and dressing changes, good for pediatric scalds\n• Honey-based dressings (Medihoney) — antimicrobial properties, evidence for superficial partial burns\n\n**Deep partial thickness:** Requires more protective dressing. Options:\n• [Silver Sulfadiazine](#/drug/silver-sulfadiazine/burns) (SSD) 1% cream — broad-spectrum antimicrobial, easy to apply. **Avoid on the face** (cosmetic staining) and **avoid on superficial burns** (may impair healing). Requires daily dressing changes.\n• Silver-containing foam dressings (Mepilex Ag, Aquacel Ag) — can stay in place 3-7 days, reduce dressing changes, good for outpatient management\n• Referral for surgical consultation (may need excision and grafting)\n\n**Full thickness:** Clean dry dressings pending surgical management. SSD or antimicrobial dressing. These burns require excision and grafting — wound care is bridging to definitive surgery.\n\n**Tetanus:** Update if >5 years or unknown. Burns are tetanus-prone wounds.',
         citation: [3, 4, 17],
         next: 'burn-pain',
+        treatment: {
+            firstLine: {
+                drug: 'Bacitracin Ointment',
+                dose: 'Thin layer to wound',
+                route: 'Topical',
+                frequency: 'Daily with dressing changes',
+                duration: 'Until healed (7-14 days for superficial partial)',
+                notes: 'Preferred for face and small burns. Use with nonadherent gauze (Adaptic/Xeroform).',
+            },
+            alternative: {
+                drug: 'Silver Sulfadiazine 1% Cream',
+                dose: 'Thick layer (1/16 inch) to wound',
+                route: 'Topical',
+                frequency: 'Daily with dressing changes',
+                duration: 'Until healed or surgical management',
+                notes: 'For deep partial/full thickness. Avoid on face (staining) and superficial burns (impairs healing). Sulfa allergy caution.',
+            },
+            monitoring: 'Daily wound assessment. Watch for signs of infection (increasing erythema, purulence, fever).',
+        },
     },
     {
         id: 'burn-pain',
@@ -574,6 +767,25 @@ export const BURNS_NODES = [
         body: '**Burns are among the most painful injuries encountered in the ED.** Adequate pain control is not optional — undertreated pain impairs wound care, increases anxiety, and worsens outcomes.\n\n**Mild burns (superficial, small partial):**\n• **Ibuprofen** 400-800 mg PO q6-8h + **Acetaminophen** 1000 mg PO q6-8h\n• Cooling, elevation, and appropriate dressings significantly reduce pain\n• Topical lidocaine preparations for small areas\n\n**Moderate-severe burns:**\n• [Morphine](#/drug/morphine/burns) 0.1 mg/kg IV q2-4h PRN — titrate to effect\n• [Ketamine](#/drug/ketamine/burns) 0.1-0.3 mg/kg IV (sub-dissociative) — excellent for burns, reduces opioid requirements, does not cause respiratory depression at sub-dissociative doses\n• Combine opioid + ketamine for synergistic effect with lower total doses of each\n\n**Procedural pain (dressing changes, debridement):**\n• [Ketamine](#/drug/ketamine/burns) 1-2 mg/kg IV for dissociative sedation\n• Procedural sedation for major debridement\n\n**Anxiolysis:**\n• [Midazolam](#/drug/midazolam/burns) 0.5-2 mg IV — for procedure-related anxiety\n• Burns cause intense psychological distress — address anxiety alongside pain\n\n**Pediatric pain management:**\n• [Fentanyl](#/drug/fentanyl/burns) IN (intranasal) 1.5 mcg/kg — needle-free, rapid onset (5-10 min), ideal for initial pain control in children\n• Oral sucrose for infants during dressing changes\n• Distraction techniques (tablets, videos) as adjunct\n\n**Key principle:** Treat pain aggressively early. It is much easier to maintain comfort than to regain it once pain is out of control.',
         citation: [2, 4],
         next: 'burn-eschar-screen',
+        treatment: {
+            firstLine: {
+                drug: 'Ibuprofen + Acetaminophen',
+                dose: 'Ibuprofen 400-800 mg + Acetaminophen 1000 mg',
+                route: 'PO',
+                frequency: 'q6-8h (staggered or together)',
+                duration: 'First 48-72h, then PRN',
+                notes: 'For mild burns. Multimodal analgesia more effective than either alone.',
+            },
+            alternative: {
+                drug: 'Morphine',
+                dose: '0.1 mg/kg',
+                route: 'IV',
+                frequency: 'q2-4h PRN',
+                duration: 'Titrate to effect',
+                notes: 'For moderate-severe burns. Consider adding sub-dissociative ketamine 0.1-0.3 mg/kg IV for synergistic effect.',
+            },
+            monitoring: 'Pain scores. Respiratory rate and sedation level with opioids. Consider ketamine 1-2 mg/kg IV for procedural sedation.',
+        },
     },
     {
         id: 'burn-transfer',
@@ -614,6 +826,25 @@ export const BURNS_NODES = [
         recommendation: 'Initiate burn center transfer. Continue IV resuscitation. Clean dry dressings (no wet dressings during transport — hypothermia). Warming measures. Analgesia. Send all documentation.',
         confidence: 'recommended',
         citation: [2, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: 'Per resuscitation formula (continue current rate)',
+                route: 'IV',
+                frequency: 'Continuous infusion during transport',
+                duration: 'Until arrival at burn center',
+                notes: 'Document total volume given and current rate. Warm IV fluids to prevent hypothermia.',
+            },
+            alternative: {
+                drug: 'Morphine or Fentanyl',
+                dose: 'Morphine 0.1 mg/kg IV or Fentanyl 1-2 mcg/kg IV',
+                route: 'IV',
+                frequency: 'PRN for transport',
+                duration: 'As needed during transfer',
+                notes: 'Ensure adequate analgesia before transport. Ketamine 0.1-0.3 mg/kg IV sub-dissociative is an alternative.',
+            },
+            monitoring: 'Continuous SpO2, HR, BP. UOP if Foley in place. Document all medications and fluids for receiving team.',
+        },
     },
     {
         id: 'burn-admit-result',
@@ -624,6 +855,25 @@ export const BURNS_NODES = [
         recommendation: 'Admit for: continued resuscitation/UOP monitoring, serial wound assessment (depth may worsen 24-72h), IV pain management, inhalation injury observation, circumferential burns, social concerns (NAT). Surgical consult for deep partial/full thickness. Nutrition consult (hypermetabolic).',
         confidence: 'recommended',
         citation: [2, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Lactated Ringers',
+                dose: 'Per resuscitation formula (Parkland: 4 mL x %TBSA x kg)',
+                route: 'IV',
+                frequency: 'Continuous infusion, titrate q1h to UOP',
+                duration: 'First 24h from time of burn, then reassess',
+                notes: 'UOP target: 0.5-1 mL/kg/hr (adults), 1-1.5 mL/kg/hr (peds). Adjust rate by 20% if above/below target.',
+            },
+            alternative: {
+                drug: 'Morphine',
+                dose: '0.1 mg/kg',
+                route: 'IV',
+                frequency: 'q2-4h PRN',
+                duration: 'As needed for pain control',
+                notes: 'Combine with scheduled ibuprofen/acetaminophen. Consider sub-dissociative ketamine for opioid-sparing.',
+            },
+            monitoring: 'UOP q1h (Foley catheter). Serial neurovascular checks if circumferential. Daily wound assessment. Pain scores.',
+        },
     },
     {
         id: 'burn-discharge-result',
@@ -634,6 +884,25 @@ export const BURNS_NODES = [
         recommendation: 'Superficial or small partial thickness <5% TBSA. Adequate oral pain control. Daily dressing changes (bacitracin + nonadherent). Keep elevated. Return if increasing pain/redness/drainage/fever. Follow-up 24-48h. Tetanus if >5y or unknown. Review [Discharge Instructions](#/info/burns-discharge) with patient.',
         confidence: 'recommended',
         citation: [3, 4, 23],
+        treatment: {
+            firstLine: {
+                drug: 'Ibuprofen + Acetaminophen',
+                dose: 'Ibuprofen 400-800 mg + Acetaminophen 1000 mg',
+                route: 'PO',
+                frequency: 'q6-8h around the clock',
+                duration: 'First 48-72h, then PRN',
+                notes: 'Multimodal analgesia. Take with food for ibuprofen. Max acetaminophen 4g/day (3g if liver disease).',
+            },
+            alternative: {
+                drug: 'Bacitracin Ointment',
+                dose: 'Thin layer to wound',
+                route: 'Topical',
+                frequency: 'Daily with dressing changes',
+                duration: 'Until healed (7-14 days typical)',
+                notes: 'Cover with nonadherent dressing (Adaptic/Xeroform) and gauze wrap.',
+            },
+            monitoring: 'Self-monitor for signs of infection (increasing pain, redness, swelling, purulence, fever). Return precautions given. Follow-up 24-48h.',
+        },
     },
 ];
 export const BURNS_MODULE_LABELS = [

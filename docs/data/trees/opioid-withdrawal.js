@@ -230,6 +230,25 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Buprenorphine 8 mg SL → reassess 30–60 min → repeat 4–8 mg PRN → max 32 mg Day 1. Discharge with bridge Rx + MOUD referral.',
         confidence: 'definitive',
         citation: [4, 8, 9, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Buprenorphine',
+                dose: '8 mg',
+                route: 'SL',
+                frequency: 'Initially, then 4-8 mg q30-60min PRN',
+                duration: 'Max 32 mg Day 1',
+                notes: 'High-dose induction (12-16 mg) increasingly preferred in fentanyl era',
+            },
+            alternative: {
+                drug: 'Buprenorphine',
+                dose: '0.3-0.9 mg',
+                route: 'IV',
+                frequency: 'Over 20-30 min',
+                duration: 'Single dose',
+                notes: 'For severe GI distress preventing SL absorption',
+            },
+            monitoring: 'Reassess COWS every 30-60 min. Target COWS < 8. Discharge with 3-7 day bridge Rx and MOUD referral within 72h.',
+        },
     },
     {
         id: 'ow-bup-micro',
@@ -240,6 +259,17 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Buprenorphine 0.5–2 mg SL while patient continues opioid use. Increase gradually. Avoids precipitated withdrawal.',
         confidence: 'recommended',
         citation: [10, 12],
+        treatment: {
+            firstLine: {
+                drug: 'Buprenorphine',
+                dose: '0.5-2 mg',
+                route: 'SL',
+                frequency: 'q2-4h, increase gradually',
+                duration: 'Over hours to days',
+                notes: 'Can give while patient still on full agonist (Bernese method)',
+            },
+            monitoring: 'Monitor COWS. Gradually increase dose as tolerated. Avoids precipitated withdrawal. Arrange MOUD follow-up.',
+        },
     },
     {
         id: 'ow-bup-wait',
@@ -260,6 +290,25 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Methadone 20 mg PO or 10 mg IM. Monitor for respiratory depression and QT prolongation. Arrange clinic follow-up.',
         confidence: 'recommended',
         citation: [14, 15],
+        treatment: {
+            firstLine: {
+                drug: 'Methadone',
+                dose: '20 mg',
+                route: 'PO',
+                frequency: 'Once',
+                duration: 'Single dose (relief ~24h)',
+                notes: 'Do NOT give full maintenance dose to unfamiliar patients',
+            },
+            alternative: {
+                drug: 'Methadone',
+                dose: '10 mg',
+                route: 'IM',
+                frequency: 'Once',
+                duration: 'Single dose',
+                notes: 'Preferred if nauseated. Onset 10-20 min (faster than PO)',
+            },
+            monitoring: 'Monitor for respiratory depression. ECG if > 40 mg or combining QT-prolonging drugs. Arrange OTP clinic follow-up.',
+        },
     },
     // ===================================================================
     // MODULE 4 — Non-Opioid Adjuncts (3 nodes)
@@ -281,6 +330,25 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Clonidine for autonomic symptoms, BZDs for anxiety, ondansetron for nausea, loperamide for diarrhea. Monitor QT if combining QT-prolonging agents.',
         confidence: 'recommended',
         citation: [4, 16, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Clonidine',
+                dose: '0.1-0.3 mg',
+                route: 'PO',
+                frequency: 'q1h PRN',
+                duration: 'Max 0.8 mg/day',
+                notes: 'Check BP before each dose. Primary agent for autonomic symptoms',
+            },
+            alternative: {
+                drug: 'Lofexidine',
+                dose: '0.54 mg',
+                route: 'PO',
+                frequency: 'q5-6h',
+                duration: 'Max 2.88 mg/day',
+                notes: 'FDA-approved for opioid withdrawal. Less hypotension than clonidine',
+            },
+            monitoring: 'Monitor BP with clonidine. ECG if combining QT-prolonging agents (methadone + ondansetron + loperamide). Check K/Mg if significant vomiting/diarrhea.',
+        },
         next: 'ow-adjuncts-combo',
     },
     {
@@ -325,6 +393,25 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Buprenorphine 16–32 mg SL for naloxone-precipitated withdrawal. Short-acting — resolves as naloxone clears. Monitor for re-narcotization.',
         confidence: 'recommended',
         citation: [4, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Buprenorphine',
+                dose: '16-32 mg',
+                route: 'SL',
+                frequency: 'Once, escalate if symptoms persist',
+                duration: 'Single high-dose induction',
+                notes: 'Match dose to naloxone dose that precipitated WD. Functions as rapid induction.',
+            },
+            alternative: {
+                drug: 'Clonidine',
+                dose: '0.1-0.3 mg',
+                route: 'PO',
+                frequency: 'q1h PRN',
+                duration: 'Until symptoms resolve',
+                notes: 'Supplement with BZDs for hemodynamic instability, IV fluids PRN',
+            },
+            monitoring: 'Withdrawal resolves in 1-2h as naloxone clears. Monitor for re-narcotization (rebound opioid intoxication) as residual opioid re-exerts effects.',
+        },
     },
     {
         id: 'ow-precip-naltrexone',
@@ -335,6 +422,25 @@ export const OPIOID_WITHDRAWAL_NODES = [
         recommendation: 'Aggressive non-opioid adjuncts: clonidine + benzodiazepines + IV fluids. Consider ICU for depot naltrexone. Buprenorphine may have limited efficacy due to receptor blockade.',
         confidence: 'recommended',
         citation: [4],
+        treatment: {
+            firstLine: {
+                drug: 'Clonidine',
+                dose: '0.1-0.3 mg',
+                route: 'PO',
+                frequency: 'q1h',
+                duration: 'Until hemodynamically stable',
+                notes: 'Critical for hemodynamic control. Check BP before each dose.',
+            },
+            alternative: {
+                drug: 'Diazepam',
+                dose: '5-10 mg',
+                route: 'IV',
+                frequency: 'q5-10 min PRN',
+                duration: 'Until sedation achieved',
+                notes: 'For severe agitation and hemodynamic instability. Add IV fluids aggressively.',
+            },
+            monitoring: 'Prolonged course: PO 24-72h, IM depot up to 30 days. Hemodynamic monitoring required. Consider ICU for depot naltrexone-precipitated WD.',
+        },
     },
     // ===================================================================
     // MODULE 6 — Disposition & Harm Reduction (3 nodes)

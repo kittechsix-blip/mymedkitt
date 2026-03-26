@@ -203,6 +203,17 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     title: 'Needle Aspiration',
     body: 'NEEDLE ASPIRATION \u2014 first-line for symptomatic PSP per BTS/ERS guidelines.\n\nPROCEDURE\n1. Position: sitting upright or supine with head elevated 45\u00b0\n2. Site: 2nd intercostal space, midclavicular line (preferred) or safe triangle\n3. Prep, drape, local anesthesia with 1% lidocaine\n4. Insert 16-18 gauge IV catheter over superior rib edge\n5. Connect to 3-way stopcock + 60 mL syringe\n6. Aspirate until resistance (lung re-expansion) or 2.5 L aspirated\n7. Post-aspiration CXR\n\nSuccess = lung re-expansion + symptom improvement.',
     citation: [1, 20],
+    treatment: {
+      firstLine: {
+        drug: 'Lidocaine 1%',
+        dose: '5-10 mL (max 4.5 mg/kg without epinephrine)',
+        route: 'Local infiltration',
+        frequency: 'Once',
+        duration: 'Procedure',
+        notes: 'Infiltrate skin, subcutaneous tissue, and intercostal muscles at the insertion site. Use 2nd ICS midclavicular line or safe triangle.',
+      },
+      monitoring: 'Monitor for local anesthetic systemic toxicity (LAST): perioral numbness, tinnitus, altered mental status, seizures.',
+    },
     next: 'ctube-aspiration-result',
   },
 
@@ -381,6 +392,25 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     title: 'Anesthesia',
     body: 'LOCAL ANESTHESIA \u2014 FIELD BLOCK\nInadequate anesthesia is the most common reason for procedural difficulty.\n\nTECHNIQUE\n1. Skin wheal: 22-gauge needle, raise a wheal at the incision site with 2% lidocaine with epinephrine\n2. Subcutaneous tissue: infiltrate generously along the planned dissection tract\n3. Intercostal muscles: fan lidocaine through the muscle layers\n4. Periosteum: anesthetize the rib periosteum above AND below \u2014 this is extremely painful if missed\n5. Parietal pleura: advance needle over the superior rib edge while aspirating. When air is aspirated (confirming pleural space), inject 5-10 mL along the parietal pleura \u2014 this is the most sensitive layer\n\nTotal: up to 30 mL of 2% [Lidocaine](#/drug/lidocaine/chest tube) with epinephrine (max 7 mg/kg with epi).\n\nPROCEDURAL SEDATION\nConsider sedation ([Ketamine](#/drug/ketamine/procedural sedation), propofol, etomidate) for awake patients if clinical situation allows.',
     citation: [22],
+    treatment: {
+      firstLine: {
+        drug: 'Lidocaine 2% with Epinephrine',
+        dose: 'Up to 30 mL (max 7 mg/kg with epinephrine)',
+        route: 'Local infiltration',
+        frequency: 'Once',
+        duration: 'Procedure',
+        notes: 'Field block technique: skin wheal, subcutaneous tissue, intercostal muscles, rib periosteum (above AND below), parietal pleura. Parietal pleura is the most sensitive layer.',
+      },
+      alternative: {
+        drug: 'Ketamine',
+        dose: '1-2 mg/kg IV or 4-5 mg/kg IM',
+        route: 'IV or IM',
+        frequency: 'Once, may repeat 0.5-1 mg/kg IV PRN',
+        duration: 'Procedure',
+        notes: 'For procedural sedation in awake patients when clinical situation allows. Dissociative dose provides analgesia and sedation.',
+      },
+      monitoring: 'Monitor for local anesthetic systemic toxicity (LAST): perioral numbness, tinnitus, altered mental status, seizures. Have lipid emulsion available. For procedural sedation: continuous pulse oximetry, ETCO2, and BP monitoring.',
+    },
     next: 'ctube-ppe',
   },
 
@@ -561,6 +591,25 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     title: 'Antibiotics & Ongoing Care',
     body: 'PROPHYLACTIC ANTIBIOTICS\nProbably beneficial for trauma thoracostomies. The EAST 2022 practice management guideline conditionally recommends antibiotic prophylaxis for tube thoracostomy placed for trauma [17].\n\nNot routinely indicated for non-traumatic chest tubes.\n\nONGOING MANAGEMENT\n\u2022 Record output (volume, color, character) each nursing shift\n\u2022 Monitor for signs of infection at insertion site\n\u2022 Chest tube site care: keep dressing clean and dry, change if soiled\n\u2022 Daily reassessment: air leak, tidaling, output trend, CXR as indicated',
     citation: [17, 22],
+    treatment: {
+      firstLine: {
+        drug: 'Cefazolin',
+        dose: '2 g IV (3 g if >120 kg)',
+        route: 'IV',
+        frequency: 'Once pre-procedure, then q8h',
+        duration: '24 hours (single dose may be sufficient)',
+        notes: 'For trauma thoracostomies only. EAST 2022 guideline conditionally recommends prophylaxis. Not routinely indicated for non-traumatic chest tubes.',
+      },
+      pcnAllergy: {
+        drug: 'Clindamycin',
+        dose: '900 mg IV',
+        route: 'IV',
+        frequency: 'Once pre-procedure, then q8h',
+        duration: '24 hours',
+        notes: 'Use for PCN/cephalosporin allergy. Alternative: vancomycin 15 mg/kg IV.',
+      },
+      monitoring: 'Monitor for signs of surgical site infection: erythema, purulent drainage, fever. Daily reassessment of tube site.',
+    },
     next: 'ctube-removal-criteria',
   },
 
@@ -581,6 +630,25 @@ export const CHEST_TUBE_NODES: DecisionNode[] = [
     title: 'Removal Technique',
     body: 'REMOVAL PROCEDURE\n1. Pre-medicate with analgesia\n2. Remove dressing and cut securing suture (leave stay suture intact)\n3. Have petroleum gauze ready at bedside\n4. Instruct patient: take a deep breath and bear down (Valsalva) \u2014 creates positive intrathoracic pressure, preventing air entry\n5. Pull tube out in one smooth, swift motion\n6. IMMEDIATELY apply petroleum gauze + occlusive dressing\n7. Close the stay suture\n8. Obtain CXR 1-2 hours post-removal',
     citation: [15, 22],
+    treatment: {
+      firstLine: {
+        drug: 'Morphine',
+        dose: '0.1 mg/kg IV (typical adult: 4-8 mg)',
+        route: 'IV',
+        frequency: 'Once, 10-15 min prior to removal',
+        duration: 'Single dose',
+        notes: 'Administer 10-15 minutes before tube removal for adequate analgesia.',
+      },
+      alternative: {
+        drug: 'Fentanyl',
+        dose: '1-2 mcg/kg IV (typical adult: 50-100 mcg)',
+        route: 'IV',
+        frequency: 'Once, 5-10 min prior to removal',
+        duration: 'Single dose',
+        notes: 'Faster onset than morphine. May repeat half dose if needed.',
+      },
+      monitoring: 'Monitor respiratory status and sedation level. Have naloxone available.',
+    },
     next: 'ctube-disposition',
   },
 

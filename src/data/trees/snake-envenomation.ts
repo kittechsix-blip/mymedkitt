@@ -151,6 +151,25 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'snake-antivenom', label: 'Antivenom Dosing' },
     ],
+    treatment: {
+      firstLine: {
+        drug: 'CroFab or Anavip (high-dose)',
+        dose: 'CroFab 8-12 vials or Anavip 10+ vials',
+        route: 'IV',
+        frequency: 'Repeat until control achieved',
+        duration: 'Until initial control, then maintenance per protocol',
+        notes: 'No maximum dose. Treat coagulopathy with antivenom first, not blood products. Blood products only for active significant bleeding.',
+      },
+      alternative: {
+        drug: 'Blood products (for active bleeding only)',
+        dose: 'FFP 2-4 units, Platelets 1 apheresis unit, Cryoprecipitate 10 units',
+        route: 'IV',
+        frequency: 'PRN for active bleeding',
+        duration: 'Until bleeding controlled',
+        notes: 'Only use WITH antivenom for active significant bleeding. Blood products alone only temporarily correct coagulopathy.',
+      },
+      monitoring: 'Continuous hemodynamic monitoring. Serial labs q4-6h. Airway reassessment for head/neck bites. Watch for progression despite treatment.',
+    },
     next: 'snake-antivenom-decision',
   },
 
@@ -189,6 +208,17 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'snake-antivenom', label: 'Antivenom Dosing' },
     ],
+    treatment: {
+      firstLine: {
+        drug: 'CroFab (Crotalidae Polyvalent Immune Fab)',
+        dose: '4-6 vials (standard) or 8-12 vials (severe)',
+        route: 'IV',
+        frequency: 'Initial dose, then reassess; maintenance 2 vials at 6, 12, 18h if needed',
+        duration: 'Until initial control achieved',
+        notes: 'Reconstitute each vial with 18 mL NS, dilute total dose to 250 mL NS. Start infusion at 25-50 mL/hr x 10 min, then increase to 250 mL/hr if no reaction. Pediatric dose = adult dose.',
+      },
+      monitoring: 'Monitor for anaphylaxis during infusion. Serial exams q30-60 min post-infusion. Repeat labs at 6, 12, 24 hours. Watch for recurrence phenomenon days 2-7.',
+    },
     next: 'snake-response-assess',
   },
 
@@ -202,6 +232,17 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'snake-antivenom', label: 'Antivenom Dosing' },
     ],
+    treatment: {
+      firstLine: {
+        drug: 'Anavip (Crotalidae Immune F(ab\')2)',
+        dose: '10 vials',
+        route: 'IV',
+        frequency: 'Repeat 10 vials every hour until initial control; 4 vials PRN for recurrence',
+        duration: 'Until initial control achieved',
+        notes: 'Reconstitute each vial with 10 mL NS, dilute total dose to 250 mL NS. Infuse over 60 minutes. No scheduled maintenance required. Pediatric dose = adult dose.',
+      },
+      monitoring: 'Monitor for anaphylaxis during infusion. Serial exams q30-60 min post-infusion. Repeat labs at 6, 12, 24 hours. Lower recurrence risk than CroFab due to longer half-life.',
+    },
     next: 'snake-response-assess',
   },
 
@@ -241,6 +282,25 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'snake-recurrence', label: 'Recurrence Monitor' },
     ],
+    treatment: {
+      firstLine: {
+        drug: 'CroFab (maintenance)',
+        dose: '2 vials',
+        route: 'IV',
+        frequency: 'At 6, 12, and 18 hours post-initial control',
+        duration: '3 maintenance doses total',
+        notes: 'Maintenance dosing is controversial. Consult poison center for guidance. Higher recurrence risk (32-50%) due to shorter half-life.',
+      },
+      alternative: {
+        drug: 'Anavip (no scheduled maintenance)',
+        dose: '4 vials PRN',
+        route: 'IV',
+        frequency: 'Only for recurrence',
+        duration: 'As needed',
+        notes: 'No scheduled maintenance required due to longer half-life. Lower recurrence rates than CroFab.',
+      },
+      monitoring: 'Serial exams q2-4h. Repeat labs at 6, 12, 24 hours. Watch for recurrence phenomenon - peak risk days 2-7. Follow-up labs days 2-3 and 5-7 if rattlesnake or antivenom given.',
+    },
     next: 'snake-special-pops',
   },
 
@@ -251,6 +311,25 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     title: 'Inadequate Response',
     body: '**Continued progression despite antivenom:**\n\n**Repeat antivenom:**\n- CroFab: Repeat 4-6 vials\n- Anavip: Repeat 10 vials\n- Continue hourly until control\n\n**No maximum dose** — give what is needed.\n\n**Persistent coagulopathy without bleeding:**\n- More antivenom (NOT blood products)\n- Antivenom addresses underlying cause\n- Blood products only temporarily effective\n\n**Persistent coagulopathy WITH significant bleeding:**\n- Antivenom PLUS blood products\n- FFP, platelets, cryo as needed\n\n**Consult Poison Center:** 1-800-222-1222\n\n**Tissue swelling:**\n- Antivenom is the treatment\n- True compartment syndrome is RARE\n- Fasciotomy is historical/last resort only [3][4]',
     citation: [3, 4],
+    treatment: {
+      firstLine: {
+        drug: 'CroFab or Anavip (repeat dosing)',
+        dose: 'CroFab 4-6 vials or Anavip 10 vials',
+        route: 'IV',
+        frequency: 'Continue hourly until control achieved',
+        duration: 'No maximum dose - give what is needed',
+        notes: 'Treat persistent coagulopathy with more antivenom, NOT blood products. Antivenom addresses underlying cause.',
+      },
+      alternative: {
+        drug: 'Blood products (for active bleeding WITH antivenom)',
+        dose: 'FFP 2-4 units, Platelets 1 apheresis unit, Cryoprecipitate 10 units',
+        route: 'IV',
+        frequency: 'PRN for active significant bleeding',
+        duration: 'Until bleeding controlled',
+        notes: 'Only use WITH antivenom for active significant bleeding. Consult Poison Center: 1-800-222-1222.',
+      },
+      monitoring: 'Serial exams q30-60 min. Repeat labs after each antivenom dose. Monitor for control: swelling halted, systemic symptoms improving, labs stabilizing.',
+    },
     next: 'snake-response-assess',
   },
 
@@ -261,6 +340,25 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     title: 'Antivenom Allergic Reaction',
     body: '**Anaphylaxis/Hypersensitivity Management:**\n\n**Immediate:**\n1. STOP infusion\n2. **Epinephrine 0.3-0.5 mg IM** (preferred over SC)\n3. IVF bolus\n4. Supportive care\n\n**When stable:**\n- Restart infusion at SLOWER rate\n- Antivenom benefit usually outweighs reaction risk\n- Premedicate if restarting (diphenhydramine, steroids)\n\n**Risk factors for CroFab reaction:**\n- Papain, chymopapain, papaya extract allergy\n- Bromelain (pineapple enzyme) allergy\n- Dust mite allergies (share papain antigens)\n- Latex allergies\n\n**Delayed Reactions (Serum Sickness):**\n- 5-14 days post-antivenom\n- Rash, fever, myalgia, arthralgia\n- Incidence: 5-10%\n- Counsel all patients on return precautions [3][4]',
     citation: [3, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Epinephrine',
+        dose: '0.3-0.5 mg (adult); 0.01 mg/kg (peds, max 0.3 mg)',
+        route: 'IM (anterolateral thigh preferred)',
+        frequency: 'May repeat every 5-15 minutes PRN',
+        duration: 'Until anaphylaxis resolved',
+        notes: 'IM preferred over SC for faster absorption. Stop antivenom infusion immediately.',
+      },
+      alternative: {
+        drug: 'Diphenhydramine + Methylprednisolone (premedication for restart)',
+        dose: 'Diphenhydramine 25-50 mg IV; Methylprednisolone 125 mg IV',
+        route: 'IV',
+        frequency: 'Once before restarting antivenom',
+        duration: 'Single dose',
+        notes: 'Give before restarting antivenom at slower rate. Antivenom benefit usually outweighs reaction risk.',
+      },
+      monitoring: 'Continuous monitoring during and after epinephrine administration. When stable, restart antivenom at slower rate with premedication.',
+    },
     next: 'snake-special-pops',
   },
 
@@ -364,6 +462,25 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     title: 'Coral Snake Antivenom',
     body: '**North American Coral Snake Antivenin (NACSA):**\n\n**⚠️ AVAILABILITY CRISIS:**\n- Production stopped 2003\n- FDA extending expiration on existing lots\n- Current lot (CL6814) extended through June 30, 2025\n- No FDA-approved alternative in US\n\n**Dosing:**\n- 3-5 vials IV for adults/adolescents\n- **Do NOT give empirically before symptoms**\n- Give at first sign of neurotoxicity\n\n**Alternative (Investigational):**\n- Coralmyn (Mexican antivenom)\n- Available through Poison Control/FDA\n- 1-800-222-1222\n\n**If Antivenom Unavailable:**\n- Supportive care\n- Early intubation for respiratory failure\n- May require prolonged mechanical ventilation (weeks)\n- Recovery possible with support [6]',
     citation: [6],
+    treatment: {
+      firstLine: {
+        drug: 'North American Coral Snake Antivenin (NACSA)',
+        dose: '3-5 vials',
+        route: 'IV',
+        frequency: 'May repeat 3-5 vials if symptoms progress',
+        duration: 'Until neurotoxicity stabilized',
+        notes: 'Do NOT give empirically before symptoms. Give at first sign of neurotoxicity. Limited availability - contact Poison Control 1-800-222-1222.',
+      },
+      alternative: {
+        drug: 'Coralmyn (Mexican coral snake antivenom)',
+        dose: 'Per Poison Control guidance',
+        route: 'IV',
+        frequency: 'Per protocol',
+        duration: 'Per protocol',
+        notes: 'Investigational in US. Available through Poison Control/FDA when NACSA unavailable. Contact 1-800-222-1222.',
+      },
+      monitoring: 'ICU monitoring for minimum 24 hours. Neuro checks q1-2h for ptosis, diplopia, dysarthria, dysphagia, limb weakness, respiratory depression. Early intubation for bulbar weakness or declining respiratory effort.',
+    },
     next: 'snake-coral-monitor',
   },
 

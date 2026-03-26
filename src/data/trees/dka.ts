@@ -111,6 +111,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**If BOHB 1-3 mmol/L with glucose <150 and AG acidosis:**\n\n**Likely diagnoses:**\n• **Alcoholic ketoacidosis:** Heavy alcohol use, recent cessation, minimal hyperglycemia, often hypoglycemic. Treatment: dextrose + fluids, NOT insulin. [5]\n• **Starvation ketosis:** Prolonged fasting, minimal hyperglycemia, normal lactate. Resolves with oral intake/dextrose.\n• **Lactic acidosis:** Check lactate level (>2-4 mmol/L). Elevated lactate + AG acidosis. Different treatment paradigm.\n\n**Management:**\n• Hold insulin — may worsen hypoglycemia in alcoholic ketoacidosis\n• Start [D5W or D50 bolus](#/drug/dextrose/hypoglycemia) — glucose correction is primary therapy\n• IV fluids: NS ± dextrose, thiamine 100 mg IV (25% of patients are thiamine deficient)\n• Address underlying cause\n• Do NOT treat as DKA — insulin protocol inappropriate\n\n**Lactate check essential:** Lactate >4 mmol/L suggests lactic acidosis requiring different management.',
     recommendation: 'Do not initiate DKA insulin protocol. Give dextrose, IV fluids, thiamine. Hold insulin if hypoglycemic. Treat underlying cause. Lactate level determines lactic acidosis diagnosis.',
     citation: [5, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Dextrose 50% (D50)',
+        dose: '25-50 mL (12.5-25 g)',
+        route: 'IV push',
+        frequency: 'Once, then D5W or D10W infusion',
+        duration: 'Until glucose stable >100 mg/dL',
+        notes: 'Primary therapy for alcoholic ketoacidosis. Do NOT give insulin.',
+      },
+      alternative: {
+        drug: 'Thiamine (Vitamin B1)',
+        dose: '100 mg',
+        route: 'IV',
+        frequency: 'Once on admission',
+        duration: 'Single dose',
+        notes: 'Give BEFORE or WITH dextrose to prevent Wernicke encephalopathy. 25% of patients are deficient.',
+      },
+      monitoring: 'Glucose q1-2h. Lactate q4h. Mental status assessment. Hold insulin if hypoglycemic.',
+    },
   },
 
   {
@@ -185,6 +204,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Severe DKA (pH <7.0, HCO3 <10) requires aggressive, immediate intervention:**\n\n**Immediate actions (parallel, do NOT delay):**\n• **IV access:** Two large-bore IVs, continuous cardiac monitor\n• **Labs:** VBG, CBC, BMP, lactate, BOHB, cultures, UA, EKG\n• **Fluids:** **Normal saline** 500-1000 mL IV bolus over 30-60 min. Reassess HR, BP, perfusion.\n• **Insulin:** Consider 10 U IV bolus IF: serum K <5.3 AND pH <6.9 AND delay to insulin drip. Otherwise start drip immediately (see Module 5). [1]\n• **Potassium:** Check K level STAT. If <3.3, HOLD insulin and replete K first (critical). If 3.3-5.3, start K repletion concurrent with insulin. [1]\n• **Bicarbonate:** Consider IV bicarbonate if pH <6.9 and BOHB >15 — risk of cardiovascular collapse. Hypertonic 8.4% bicarb: 100 mL IV over 5-10 min, recheck pH in 2-4 hrs. [2]\n\n**Disposition:** ICU admission mandatory.\n**Monitoring:** Reassess labs q1-2h initially.',
     citation: [1, 2, 5],
     next: 'dka-precipitant-screen',
+    treatment: {
+      firstLine: {
+        drug: 'Normal saline',
+        dose: '500-1000 mL',
+        route: 'IV',
+        frequency: 'Bolus over 30-60 min',
+        duration: 'Initial resuscitation',
+        notes: 'Reassess HR, BP, perfusion after bolus. Repeat if needed.',
+      },
+      alternative: {
+        drug: 'Sodium bicarbonate 8.4%',
+        dose: '100 mL (100 mEq)',
+        route: 'IV',
+        frequency: 'Over 5-10 min',
+        duration: 'Single dose, recheck pH in 2-4 hrs',
+        notes: 'Only if pH <6.9 and BOHB >15. Risk of cardiovascular collapse without treatment.',
+      },
+      monitoring: 'Continuous cardiac monitor. Labs q1-2h. ICU admission mandatory.',
+    },
   },
 
   {
@@ -241,6 +279,33 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Infection in DKA requires aggressive treatment — high mortality if missed.**\n\n**Empiric antibiotics:**\n• Do NOT wait for culture results — start empiric coverage immediately\n• **Community-acquired:** [Ceftriaxone](#/drug/ceftriaxone/community-acquired) 1-2 g IV q12h + [azithromycin](#/drug/azithromycin/atypical-coverage) 500 mg IV/PO q24h (covers S. pneumoniae, atypicals, H. influenzae)\n• **Hospital-acquired or immunocompromised:** Add [vancomycin](#/drug/vancomycin/gram-positive) 15-20 mg/kg IV q8-12h (MRSA coverage)\n• **Aspiration concern:** Add [clindamycin](#/drug/clindamycin/anaerobic) 600 mg IV q6h or [metronidazole](#/drug/metronidazole/anaerobic) 500 mg IV q8h\n• **Urinary symptoms:** [Fluoroquinolone](#/drug/ciprofloxacin/UTI) preferred if creatinine normal\n\n**Sepsis management:**\n• Aggressive fluids (may exceed typical DKA fluid targets in sepsis)\n• Consider vasopressors if shock refractory to fluids (norepinephrine first-line)\n• Source control: catheterize for UTI, possible imaging for source\n• Repeat lactate in 2-4 hrs\n\n**ICU admission criterion met.** Coordinate infectious disease consultation if not already involved.',
     citation: [1, 2, 5],
     next: 'dka-fluid-management',
+    treatment: {
+      firstLine: {
+        drug: 'Ceftriaxone + Azithromycin',
+        dose: 'Ceftriaxone 1-2 g + Azithromycin 500 mg',
+        route: 'IV',
+        frequency: 'Ceftriaxone q12-24h, Azithromycin q24h',
+        duration: '5-7 days (adjust per culture)',
+        notes: 'Community-acquired coverage. Start immediately, do not wait for cultures.',
+      },
+      alternative: {
+        drug: 'Vancomycin',
+        dose: '15-20 mg/kg',
+        route: 'IV',
+        frequency: 'q8-12h (adjust for renal function)',
+        duration: 'Per culture results',
+        notes: 'Add for hospital-acquired, immunocompromised, or MRSA risk. Trough goal 15-20 mcg/mL.',
+      },
+      pcnAllergy: {
+        drug: 'Levofloxacin + Vancomycin',
+        dose: 'Levofloxacin 750 mg + Vancomycin 15-20 mg/kg',
+        route: 'IV',
+        frequency: 'Levofloxacin q24h, Vancomycin q8-12h',
+        duration: 'Per culture results',
+        notes: 'Fluoroquinolone for beta-lactam allergy. Covers atypicals and gram-negatives.',
+      },
+      monitoring: 'WBC, procalcitonin, lactate q4-6h. Blood cultures before antibiotics. Repeat lactate in 2-4 hrs. Vancomycin troughs.',
+    },
   },
 
   {
@@ -317,6 +382,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Aggressive but careful IV fluid therapy is cornerstone of DKA management.** [1][2][8]\n\n**Overall strategy:**\n• Correct dehydration: Most DKA patients are 5-8L depleted (sometimes >10L in severe DKA)\n• Target: Replace half deficit in first 8-12 hours, remainder over next 24 hours\n• Monitor: Reassess HR, BP, urine output, perfusion q1-2h\n• Adjust based on clinical response\n\n**Fluid choice:**\n• ****Normal saline (0.9%)** — FIRST-LINE:** Preferred in initial resuscitation and ongoing therapy. No dextrose initially.\n• Alternative: **Balanced crystalloid (LR, Plasmalyte)** if available — may reduce hyperchloremic acidosis and NAGMA risk [8]\n\n**Initial bolus:**\n• For volume depletion/shock: 500 mL-1 L NS IV bolus over 30-60 min\n• Reassess hemodynamics, urine output\n• Repeat bolus if needed to achieve HR <100-110, SBP >90-100\n• Caution in heart failure, ESRD, pregnancy — use POCUS to assess intravascular volume vs edema\n\n**Ongoing fluids after bolus:**\n• Depends on glucose level — see next decision point',
     citation: [1, 2, 8],
     next: 'dka-glucose-threshold',
+    treatment: {
+      firstLine: {
+        drug: 'Normal saline 0.9%',
+        dose: '500 mL-1 L bolus, then 150-200 mL/hr',
+        route: 'IV',
+        frequency: 'Bolus over 30-60 min, then continuous',
+        duration: 'Replace half deficit in 8-12 hrs, rest over 24 hrs',
+        notes: 'Most patients 5-8L depleted. Goal HR <100-110, SBP >90-100. Caution in HF/ESRD.',
+      },
+      alternative: {
+        drug: 'Lactated Ringers or Plasmalyte',
+        dose: '500 mL-1 L bolus, then 150-200 mL/hr',
+        route: 'IV',
+        frequency: 'Same as NS',
+        duration: 'Same protocol',
+        notes: 'May reduce hyperchloremic acidosis (NAGMA) risk. Consider if available.',
+      },
+      monitoring: 'HR, BP, UOP q1-2h. POCUS if HF/ESRD/pregnancy. Switch to "drop and split" when glucose <300.',
+    },
   },
 
   {
@@ -358,6 +442,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**At glucose ≤300, implement the critical "Drop and Split" strategy:**\n\n**Action:**\n• CUT **normal saline** rate IN HALF\n• ADD [D10W](#/drug/dextrose/D10W) at EQUAL rate to dropped NS rate\n• Example: 200 mL/hr NS → becomes 100 mL/hr NS + 100 mL/hr D10W\n\n**Why this works:**\n• Continues deficit replacement with dextrose to prevent hypoglycemia\n• Glucose typically drops 5-10 mg/dL/min once acidosis improving and glucose clearance increases\n• Allows insulin infusion to continue (CRITICAL) — stopping insulin can paradoxically worsen acidosis even if glucose normalized\n• Once dextrose running, hypoglycemia risk minimal\n\n**D10W peripheral IV safety:**\n• D10W is NON-vesicant — safe for peripheral IV\n• Can Y-site with NS in same line (preferred — fewer IVs)\n• Do NOT use for CVL extravasation concern\n\n**Reassessment every 1-2 hours:**\n• If glucose <150 → increase D10W rate or decrease NS further\n• If glucose >300 again → switch back to full-rate NS without dextrose\n\n**Critical point:** This transition is where most iatrogenic hypoglycemia in DKA occurs. Earlier switch = safer.',
     citation: [1, 5],
     next: 'dka-potassium-check',
+    treatment: {
+      firstLine: {
+        drug: 'Dextrose 10% (D10W) + Normal saline (reduced)',
+        dose: 'Cut NS rate in half + add D10W at equal rate',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until DKA resolved and tolerating PO',
+        notes: 'Example: 200 mL/hr NS becomes 100 mL/hr NS + 100 mL/hr D10W. D10W safe for peripheral IV.',
+      },
+      alternative: {
+        drug: 'Dextrose 5% (D5W)',
+        dose: 'Same "drop and split" protocol',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until resolved',
+        notes: 'Lower dextrose concentration. Use if glucose still trending high despite D10W.',
+      },
+      monitoring: 'Glucose q1-2h. If glucose <150, increase D10W rate. If glucose >300, switch back to full NS. NEVER stop insulin for low glucose.',
+    },
   },
 
   {
@@ -368,6 +471,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Hemodialysis patients often euvolemic or hypervolemic — aggressive fluids cause harm:**\n\n**Assessment:**\n• POCUS or clinical exam: JVD, edema, crackles?\n• Weight compared to dry weight\n• Recent dialysis: When was last session? Any fluid removal?\n\n**Modified fluid strategy:**\n• Very cautious initial bolus: 250-500 mL NS only if hypotensive\n• Maintenance: Minimal — often 50-100 mL/hr NS (smaller total than non-HD DKA)\n• Often can omit separate fluids if on scheduled HD during DKA treatment\n\n**Insulin + dextrose approach:**\n• Start insulin drip per standard protocol (0.1 U/kg/hr)\n• Add [D10W or D5W](#/drug/dextrose/) to provide calories/glucose without volume burden\n• Minimal or no NS — insulin + dextrose often sufficient\n\n**Potassium management:**\n• Very restricted — DO NOT supplement even if K normal (paradoxically rises with acidosis correction)\n• Use [potassium acetate](#/drug/potassium-acetate/DKA) if any supplementation necessary (preferred over KCl to reduce Cl load)\n\n**Dialysis timing:**\n• Consider dialysis during severe DKA (pH <6.9, K >6.5, bicarb <5) for acid/K removal and hemodynamic support\n• Coordinate with nephrology\n\n**Resolution:** Use BOHB <1 mmol/L (not AG normalization) as stopping point.',
     recommendation: 'Minimal fluid resuscitation in HD patient. Insulin + dextrose protocol. Restricted K. Consider dialysis for severe DKA. Coordinate with nephrology.',
     citation: [1, 2, 14],
+    treatment: {
+      firstLine: {
+        drug: 'Regular insulin IV drip + Dextrose 10%',
+        dose: 'Insulin 0.1 U/kg/hr + D10W 50-100 mL/hr',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until BOHB <1 mmol/L',
+        notes: 'Minimal NS. D10W provides glucose without volume burden. Primary therapy is insulin + dextrose.',
+      },
+      alternative: {
+        drug: 'Normal saline (cautious)',
+        dose: '250-500 mL bolus, then 50-100 mL/hr',
+        route: 'IV',
+        frequency: 'Only if hypotensive',
+        duration: 'Minimal total volume',
+        notes: 'AVOID aggressive fluids. Risk of pulmonary edema. May omit if on scheduled HD.',
+      },
+      monitoring: 'BOHB for resolution (not AG). K very restricted. Coordinate dialysis STAT if pH <6.9 or K >6.5. POCUS for volume status.',
+    },
   },
 
   // =====================================================================
@@ -409,6 +531,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**CRITICAL: Do NOT start insulin until K >3.3 — fatal arrhythmias if K falls further.**\n\n**Aggressive potassium repletion:**\n• **[Potassium chloride (KCl)](#/drug/potassium-chloride-iv/DKA) IV:** 40 mEq/hr maximum (or potassium acetate if preferring to avoid Cl load)\n• Goal: Bring K to 3.3-3.5 before insulin starts\n• Check K q1-2h during repletion — often need 40-80 mEq to raise K by 0.5-1 mEq/L\n• Do NOT trust estimates — must recheck lab\n\n**Oral potassium (if tolerating PO):**\n• [Potassium chloride solution or salt substitute](#/drug/potassium-chloride-oral/DKA) 60 mEq q2-4h\n• Much slower but useful adjunct if GI tolerant\n\n**Cardiac monitoring:**\n• Continuous monitor if possible\n• Watch for peaked T-waves, prolonged PR\n• Do NOT rely on EKG — renal or acid-base factors affect threshold\n\n**When insulin becomes safe:**\n• Once K >3.3, proceed to insulin protocol\n• But continue aggressive K repletion SIMULTANEOUSLY\n• Insulin lowers K rapidly once given — need replacement drip running during insulin infusion\n\n**Time consideration:** May delay insulin 1-2 hours to replete K — this is appropriate and safer than rushing insulin with low K.',
     citation: [1, 5, 12],
     next: 'dka-k-repleted',
+    treatment: {
+      firstLine: {
+        drug: 'Potassium chloride (KCl)',
+        dose: '20-40 mEq/hr',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until K >3.3 mEq/L',
+        notes: 'Maximum 40 mEq/hr via central line, 10-20 mEq/hr peripheral. HOLD insulin until K >3.3.',
+      },
+      alternative: {
+        drug: 'Potassium chloride oral',
+        dose: '40-60 mEq',
+        route: 'PO',
+        frequency: 'q2-4h',
+        duration: 'Adjunct to IV if tolerating PO',
+        notes: 'Slower absorption. Use as supplement to IV if patient tolerating oral intake.',
+      },
+      monitoring: 'Continuous cardiac monitor. K level q1-2h during aggressive repletion. EKG for peaked T-waves, prolonged PR. Do NOT start insulin until K >3.3.',
+    },
   },
 
   {
@@ -429,6 +570,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Standard DKA insulin regimen:**\n\n**Dosing:**\n• [Regular insulin](#/drug/regular-insulin/DKA) IV infusion: **0.1 U/kg/hr** (starting dose, max 15 U/hr for safety)\n• Example: 70 kg patient → 7 U/hr. 100 kg patient → 10 U/hr.\n• Prepare: 100 units insulin in 100 mL normal saline = 1 U/mL solution. Use dedicated insulin drip IV (separate from fluid lines if possible to avoid delays in rate adjustment)\n\n**Bolus insulin (optional, consider if):**\n• 10 U IV bolus of regular insulin IF any of:\n  - Severe hyperkalemia (K >6.5) — insulin helps drive K into cells\n  - Severe acidosis (pH <6.9 or BOHB >15)\n  - Significant delay to drip establishment\n• Bolus is NOT required if drip starting immediately\n\n**Titration:**\n• Goal: Glucose drop 50-70 mg/dL per hour [1]\n• Reassess glucose q1-2h\n• If glucose dropping too slowly (<50 mg/dL/hr): Increase drip to 0.15 U/kg/hr or 15-20 U/hr\n• If glucose dropping too fast (>100 mg/dL/hr): Decrease drip; increase dextrose rate\n\n**When glucose reaches ~250 mg/dL:**\n• Reduce insulin to 0.05 U/kg/hr (holding rate, roughly 5 U/hr for 100 kg patient)\n• Continue until acidosis resolved (see stopping criteria)\n\n**Critical rule:** NEVER stop insulin even if glucose <100 — give MORE DEXTROSE instead. Continue insulin until acid-base normalized.',
     citation: [1, 2, 5],
     next: 'dka-basal-insulin',
+    treatment: {
+      firstLine: {
+        drug: 'Regular insulin',
+        dose: '0.1 U/kg/hr',
+        route: 'IV continuous infusion',
+        frequency: 'Continuous drip',
+        duration: 'Until DKA resolved (AG <12, HCO3 >18)',
+        notes: 'Mix 100 U in 100 mL NS (1 U/mL). Max 15 U/hr. Reduce to 0.05 U/kg/hr when glucose <250.',
+      },
+      alternative: {
+        drug: 'Regular insulin bolus',
+        dose: '10 units',
+        route: 'IV push',
+        frequency: 'Once (optional)',
+        duration: 'Single dose before drip',
+        notes: 'Consider if K >6.5, pH <6.9, or delay to drip. Not required if drip starts immediately.',
+      },
+      monitoring: 'Glucose q1-2h. Goal drop 50-70 mg/dL/hr. K level q2h. NEVER stop insulin for low glucose. Give dextrose instead.',
+    },
   },
 
   {
@@ -439,6 +599,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Give basal insulin on admission — this is critical to prevent recurrent DKA.**\n\n**Timing:** Administer [insulin glargine](#/drug/insulin-glargine/DKA basal) within first 6-12 hours of DKA presentation. Do NOT wait until glucose normalized or acidosis resolved.\n\n**Dosing:**\n• **Known diabetes on insulin:** Use home insulin glargine dose if known (or home total daily insulin × 0.5 if not on glargine)\n• **New diagnosis or dose unknown:** 0.25 U/kg once daily (example: 70 kg → 17-18 units once daily)\n• Some experts use 0.3 U/kg for new diagnosis\n• Starting glargine is SEPARATE from IV insulin drip — not calculated from drip rate\n\n**Why so early?**\n• IV insulin drip stops once acidosis resolves, but patient still has insulin requirement\n• Basal insulin prevents relapse (DKA recurrence common if basal not given)\n• Provides 24-hour coverage while transitioning from drip\n\n**Administration:**\n• [Insulin glargine (Lantus, Basagam)](#/drug/insulin-glargine/) SC daily (preferred: evening, or AM if long-acting preferred)\n• Can overlap with IV drip — no problem\n\n**Transition planning (later, see Module 6):** Transition from drip to basal + bolus SC insulin once patient eating and stable.',
     citation: [1, 5, 14],
     next: 'dka-electrolytes-monitor',
+    treatment: {
+      firstLine: {
+        drug: 'Insulin glargine (Lantus)',
+        dose: '0.25 U/kg',
+        route: 'Subcutaneous',
+        frequency: 'Once daily',
+        duration: 'Ongoing (discharge on this)',
+        notes: 'Give within 6-12 hrs of admission. Use home dose if known. Can overlap with IV drip.',
+      },
+      alternative: {
+        drug: 'Insulin detemir (Levemir)',
+        dose: '0.25-0.3 U/kg',
+        route: 'Subcutaneous',
+        frequency: 'Once or twice daily',
+        duration: 'Ongoing',
+        notes: 'Alternative long-acting. May require BID dosing. Less preferred in acute DKA.',
+      },
+      monitoring: 'Continue IV drip until DKA resolved. Give basal at least 2 hrs before stopping drip. Glucose q4-6h once on SC insulin only.',
+    },
   },
 
   // =====================================================================
@@ -453,6 +632,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Aggressive potassium and phosphate/magnesium repletion is essential to prevent complications.**\n\n**Potassium Target:**\n• Goal: Maintain K >5 mEq/L during acute DKA (normal renal function) [1]\n• Aggressive repletion: [Potassium acetate](#/drug/potassium-acetate/DKA) IV (preferred over KCl to reduce chloride load and NAGMA risk) or [potassium chloride](#/drug/potassium-chloride-iv/DKA)\n• IV: 40 mEq/hr maximum, or oral potassium citrate 60 mEq q2-4h [1]\n• Can give up to 40 mEq/hr IV with continuous cardiac monitoring if aggressive repletion needed\n• Check K q1-2h × 6 hours, then q4h minimum\n\n**Magnesium & Phosphate:**\n• Check both on admission and q4-6h during acute phase\n• Repletion needed: Mg <1.5 mg/dL or Phos <1.5 mg/dL\n• [Magnesium sulfate](#/drug/magnesium-sulfate/DKA): 1-2 g IV over 10-15 min (recheck after 2-4 hrs) [1]\n• Phosphate repletion: Often done PO if tolerating (K2PO4 salt, 30 mmol q2-4h) or IV if severe\n• Both common in DKA — 25-50% of patients are Mg/Phos depleted\n\n**Thiamine (Vitamin B1):**\n• Give [thiamine](#/drug/thiamine/DKA) 100 mg IV on admission — 25% of DKA patients are thiamine deficient [1]\n• Prevents Wernicke encephalopathy if alcohol history\n\n**Monitoring Schedule:**\n• Glucose: q1-2h × 4h, then q2-4h\n• BMP (Na, K, Cl, HCO3): q2-4h until improving, then q4-6h\n• Mg, Phos, Ca: admission + q4-6h\n• Lactate: q4h if elevated initially\n• VBG: q2-4h to assess pH, HCO3 progress\n• EKG: admission, and if K abnormal\n• BOHB or serum ketones: q4-6h (optional but useful)\n\n**Trend interpretation:**\n• AG should decrease as insulin works (ketones being metabolized)\n• HCO3 should rise gradually\n• Glucose should drop 50-70 mg/dL/hr',
     citation: [1, 2, 5],
     next: 'dka-nagma-screen',
+    treatment: {
+      firstLine: {
+        drug: 'Potassium chloride or acetate',
+        dose: '20-40 mEq/hr',
+        route: 'IV',
+        frequency: 'Continuous per K level',
+        duration: 'Throughout DKA treatment',
+        notes: 'Goal K >5 mEq/L. Acetate preferred to reduce chloride load. Max 40 mEq/hr with cardiac monitor.',
+      },
+      alternative: {
+        drug: 'Magnesium sulfate',
+        dose: '1-2 g',
+        route: 'IV',
+        frequency: 'Over 10-15 min, repeat PRN',
+        duration: 'Until Mg >1.5 mg/dL',
+        notes: 'Give if Mg <1.5 mg/dL. Recheck in 2-4 hrs. 25-50% of DKA patients are depleted.',
+      },
+      monitoring: 'K q1-2h x6h then q4h. Mg/Phos q4-6h. Glucose q1-2h. VBG q2-4h. EKG if K abnormal.',
+    },
   },
 
   {
@@ -484,6 +682,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**If NAGMA present (Cl >110 or predicted final HCO3 <20), consider IV bicarbonate to speed resolution.**\n\n**Timing:**\n• Usually appears when initial acidosis improving (AG closing) and pH 7.15-7.30 range\n• Can start IV bicarb once AG <12 and HCO3 rising\n• Goal: Raise bicarb to >18-20\n\n**Bicarbonate Dosing Options:**\n\n**Option 1: Isotonic bicarbonate (preferred)**\n• [Sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) 250 mL of isotonic solution (150 mEq/L bicarb in 250 mL D5W) IV at 250 mL/hr\n• Infuse until HCO3 >18-20\n• Gentler, lower hypernatremia risk\n\n**Option 2: Hypertonic bicarbonate (for urgent correction)**\n• [Sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) ampules: 50 mEq in 50 mL (8.4%) IV over 5-10 min\n• Can repeat q2-4h if HCO3 still <18\n• Higher hypernatremia risk — use cautiously\n\n**Monitoring:**\n• Check BMP q2-4h to assess HCO3 rise\n• Watch sodium (risk of hypernatremia from bicarbonate)\n• Continue insulin, K repletion, fluids\n• Often can transition off drip once HCO3 >18\n\n**Controversial:** Some experts avoid routine bicarb unless pH <7.0; others use when HCO3 <10. Use clinical judgment.',
     citation: [1, 2, 5, 9],
     next: 'dka-stopping-criteria',
+    treatment: {
+      firstLine: {
+        drug: 'Sodium bicarbonate isotonic',
+        dose: '150 mEq in 250 mL D5W',
+        route: 'IV',
+        frequency: '250 mL/hr',
+        duration: 'Until HCO3 >18-20',
+        notes: 'Preferred for NAGMA. Lower hypernatremia risk than hypertonic.',
+      },
+      alternative: {
+        drug: 'Sodium bicarbonate 8.4% (hypertonic)',
+        dose: '50 mEq (50 mL ampule)',
+        route: 'IV',
+        frequency: 'Over 5-10 min, repeat q2-4h PRN',
+        duration: 'Until HCO3 >18',
+        notes: 'For urgent correction. Higher hypernatremia risk. Use cautiously.',
+      },
+      monitoring: 'BMP q2-4h. Watch sodium for hypernatremia. Continue insulin and K repletion. Goal HCO3 >18-20.',
+    },
   },
 
   {
@@ -508,6 +725,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Euglycemic DKA: glucose 150-250 + BOHB >3 + pH <7.3, often with SGLT2i use.**\n\n**Presentation:**\n• Minimal hyperglycemia (may be euglycemic or only mildly elevated) — easily missed!\n• Nausea, vomiting, dyspnea, abdominal pain\n• Risk factors: SGLT2 inhibitors (primary), insulin pump with reduced basal dose, GLP-1 use, illness with reduced eating\n• Diagnosis: BOHB >3, pH <7.3, low-normal glucose\n\n**Unique management:**\n\n**Fluids:**\n• Start [D10W or D5W](#/drug/dextrose/) immediately — do NOT wait for glucose to drop\n• Euglycemic DKA requires dextrose infusion from the START (unlike classic DKA which waits for glucose 200-300)\n• **Normal saline** at 100-150 mL/hr PLUS [D10W](#/drug/dextrose/) at 100-150 mL/hr\n• Goal: Prevent further glucose drop while treating acidosis\n\n**Insulin:**\n• 0.1 U/kg/hr IV drip (same as classic DKA)\n• Titrate to pH/HCO3 improvement, not glucose\n• Glucose may actually decrease during early treatment (insulin + dextrose in parallel manages this)\n\n**Potassium & Electrolytes:**\n• Same aggressive approach as classic DKA\n• Check K early and often\n\n**Basal insulin:**\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25 U/kg on admission\n\n**CRITICAL: Discontinue SGLT2i permanently** — very high recurrence risk. Document as contraindication. [10][11]\n\n**Disposition:** ICU admission if pH <7.15 or altered mental status. Many cases can be managed on monitored floor bed with closer monitoring.',
     recommendation: 'Start D10W immediately. IV insulin 0.1 U/kg/hr. Aggressive K repletion. Discontinue SGLT2i permanently. Monitor closely for late hypoglycemia.',
     citation: [10, 11, 13],
+    treatment: {
+      firstLine: {
+        drug: 'Dextrose 10% (D10W) + Normal saline',
+        dose: 'D10W 100-150 mL/hr + NS 100-150 mL/hr',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until acidosis resolved',
+        notes: 'Start D10W IMMEDIATELY in euglycemic DKA. Do NOT wait for glucose drop. Run in parallel with NS.',
+      },
+      alternative: {
+        drug: 'Regular insulin IV drip',
+        dose: '0.1 U/kg/hr',
+        route: 'IV continuous',
+        frequency: 'Continuous',
+        duration: 'Until DKA resolved',
+        notes: 'Same protocol as classic DKA. Titrate to pH/HCO3, not glucose. Give with D10W.',
+      },
+      monitoring: 'Glucose q1-2h (risk of hypoglycemia). K q2h. BOHB q4-6h. Discontinue SGLT2i permanently.',
+    },
   },
 
   {
@@ -518,6 +754,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Intubation in DKA is HIGH RISK and generally avoided unless absolutely necessary.** [5]\n\n**Why avoid intubation:**\n• Removal of spontaneous hyperventilation → paradoxical CO2 retention and acidosis worsening\n• Positive pressure ventilation increases PEEP → worse acidosis\n• Risk of post-intubation hypotension despite fluids (loss of sympathetic tone)\n• Aspiration risk if altered MS or vomiting\n• Prolongs ICU stay\n\n**Indications for intubation (rare in pure DKA):**\n• Loss of airway protective reflexes + inability to protect\n• Respiratory failure (RR >35-40 with fatigue, inadequate gas exchange on ABG)\n• Severe altered mental status with risk of aspiration\n• Aspiration event already occurred\n• Septic shock requiring pressors (not DKA alone)\n\n**If intubation unavoidable:**\n\n**Preoperative management:**\n• AGGRESSIVE pre-intubation resuscitation — 1-2L fluid bolus if not already given\n• [Intravenous bicarbonate](#/drug/sodium-bicarbonate/DKA): Consider if pH <6.9 prior to intubation\n• Correct severe hyperkalemia (K >6.5) with insulin bolus\n\n**Drug selection:**\n• Induction: [Ketamine](#/drug/ketamine/induction) preferred (maintains BP, does not worsen acidosis)\n• Avoid propofol (myocardial depression), avoid theophylline derivatives\n\n**Ventilation post-intubation:**\n• High minute ventilation (MV): 12-18 L/min to maintain hyperventilation \n• Large ETT: ≥7.5 to allow high tidal volumes without excessive pressure\n• Mode: Assist-control (not pressure-limited)\n• PEEP: Minimize (0-5 cm H2O)\n\n**Monitoring:** Frequent ABGs (q30min × 2h, then q1-2h), K monitoring, sedation adequate to allow hyperventilation',
     citation: [1, 2, 5],
     next: 'dka-disposition-plan',
+    treatment: {
+      firstLine: {
+        drug: 'Ketamine',
+        dose: '1-2 mg/kg',
+        route: 'IV push',
+        frequency: 'Single induction dose',
+        duration: 'Induction only',
+        notes: 'Preferred induction agent. Maintains BP and does not worsen acidosis. AVOID propofol.',
+      },
+      alternative: {
+        drug: 'Sodium bicarbonate (pre-intubation)',
+        dose: '50-100 mEq',
+        route: 'IV',
+        frequency: 'Prior to intubation',
+        duration: 'Single dose',
+        notes: 'Consider if pH <6.9. Helps buffer acidosis worsening from loss of hyperventilation.',
+      },
+      monitoring: 'ABG q30min x2h then q1-2h. High MV (12-18 L/min). Minimize PEEP (0-5 cm H2O). Large ETT (>=7.5).',
+    },
   },
 
   {
@@ -538,6 +793,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**HD patients with DKA have unique needs: euvolemia/hypervolemia, limited K tolerance, accelerated correction possible via dialysis.**\n\n**Pathophysiology:**\n• Usually euvolemic or hypervolemic — aggressive fluids cause pulmonary edema, hypertensive crisis\n• K does NOT drain into dialysate if K concentration in bath = patient K (thus K may rise despite dialysis if not on low-K bath)\n• Acidosis can be corrected rapidly via hemodialysis (HCO3 diffusion and lactate clearance)\n\n**Fluid management:**\n• MINIMAL: 250-500 mL NS bolus only if hypotensive (SBP <90)\n• Maintenance: 50-100 mL/hr NS at most, often no separate NS infusion\n• Primary therapy: Insulin + dextrose\n\n**Insulin:**\n• 0.1 U/kg/hr IV drip (standard)\n• Once glucose <300 → switch to D10W (minimal NS)\n• Do NOT restrict insulin based on glucose alone — titrate to acid-base improvement\n\n**Potassium:**\n• VERY restrictive — do NOT supplement potassium even if K 4.5-5.5 (high end normal)\n• May only need [potassium acetate](#/drug/potassium-acetate/DKA) if K <3.0 (rare)\n• Use LOW-potassium dialysate bath (usually 1-2 mEq/L)\n• Coordinate dialysis K bath with nephrology\n\n**Dialysis integration:**\n• Schedule dialysis within first 4-6 hours of DKA diagnosis if available\n• Hemodialysis rapidly corrects K, H+, and metabolic acidosis (much faster than IV therapy alone) [1]\n• Dialysate composition: Low K bath (1 mEq/L) + bicarb bath 35-40 mEq/L\n• May need higher blood flow (300-400 mL/min) during DKA\n\n**Resolution criteria (differ from non-HD):**\n• Use **BOHB <1 mmol/L** as resolution marker (not AG normalization — AG may not close with renal disease)\n• May discharge when BOHB <1, able to eat, K stable, prior bicarb level achieved\n• pH <7.30 acceptable if trending up and BOHB very low\n\n**Disposition:** Monitored bed (ICU if severe). Nephrology co-management. Dialysis as first-line for severe DKA (pH <6.9, K >6.5).',
     recommendation: 'Minimal fluid resuscitation. Insulin + dextrose protocol. Restrict K. Coordinate dialysis STAT for K/acid removal. Use BOHB <1 for resolution. Nephrology co-management.',
     citation: [1, 2, 14],
+    treatment: {
+      firstLine: {
+        drug: 'Regular insulin IV + Dextrose 10%',
+        dose: 'Insulin 0.1 U/kg/hr + D10W when glucose <300',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until BOHB <1 mmol/L',
+        notes: 'Primary therapy. Minimal fluids. Titrate insulin to pH/HCO3, not glucose.',
+      },
+      alternative: {
+        drug: 'Hemodialysis (urgent)',
+        dose: 'Low K bath (1-2 mEq/L) + bicarb bath 35-40 mEq/L',
+        route: 'HD circuit',
+        frequency: 'Single session, may extend',
+        duration: '3-4 hours or until stable',
+        notes: 'First-line for severe DKA (pH <6.9, K >6.5). Blood flow 300-400 mL/min. Coordinate with nephrology.',
+      },
+      monitoring: 'BOHB for resolution (not AG). Very restricted K supplementation. POCUS for volume. Nephrology co-management.',
+    },
   },
 
   {
@@ -575,6 +849,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**ICU-level DKA management:**\n\n**Monitoring:**\n• Continuous cardiac monitor, pulse oximetry, capnography if intubated\n• Arterial line if shock or severe acidosis (pH <6.9)\n• Hourly vitals, UOP q1h, neuro q1h\n• Labs: VBG/ABG q1-2h × 4h, then q2-4h. BMP q2h × 6h then q4h. Lactate q4h. BOHB q4-6h\n\n**Medications:**\n• [Regular insulin IV drip](#/drug/regular-insulin/DKA): 0.1 U/kg/hr (adjust per protocol)\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25-0.3 U/kg SC daily (given on admission)\n• [Potassium chloride or acetate IV](#/drug/potassium-chloride-iv/DKA): Aggressive repletion (40 mEq/hr if K <3.3, then maintenance per K level)\n• **Normal saline or balanced crystalloid**: IV bolus then maintenance (or switch to D10W once glucose <300)\n• [Magnesium sulfate](#/drug/magnesium-sulfate/DKA): 1-2 g IV once if Mg <1.5\n• [Thiamine](#/drug/thiamine/DKA): 100 mg IV on admission\n• Consider [sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) if pH <6.9 (250 mL isotonic or ampules)\n\n**Consultations:**\n• Endocrinology (mandatory)\n• Nephrology if ESRD/HD or worsening Cr\n• Cardiology if troponin elevated or EKG abnormal\n• Infectious disease if sepsis confirmed\n• Psychiatry if recurrent DKA or suicidal ideation\n\n**Disposition trigger:** When stable (pH >7.25, HCO3 >15, glucose controlled, tolerating PO), stepdown to monitored floor; discharge when all stopping criteria met.',
     recommendation: 'ICU admission. Hourly reassessment. Insulin + aggressive electrolyte repletion. Endocrinology, and specialist consultations as indicated. Serial labs q1-4h.',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Regular insulin IV drip',
+        dose: '0.1 U/kg/hr',
+        route: 'IV continuous',
+        frequency: 'Continuous, adjust per glucose',
+        duration: 'Until DKA resolved',
+        notes: 'Reduce to 0.05 U/kg/hr when glucose <250. Never stop for hypoglycemia, give D10W instead.',
+      },
+      alternative: {
+        drug: 'Insulin glargine (basal)',
+        dose: '0.25-0.3 U/kg',
+        route: 'Subcutaneous',
+        frequency: 'Once daily',
+        duration: 'Give on admission, continue at discharge',
+        notes: 'Give within 6-12 hrs. Must overlap with IV drip by 2+ hrs before stopping drip.',
+      },
+      monitoring: 'Continuous cardiac monitor. VBG/ABG q1-2h x4h then q2-4h. BMP q2h x6h then q4h. K q1-2h. Glucose q1-2h. UOP q1h.',
+    },
   },
 
   {
@@ -585,6 +878,25 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Moderate DKA on monitored medical floor:**\n\n**Monitoring:**\n• Continuous cardiac monitor + continuous pulse oximetry\n• Vitals q2h, UOP q1h\n• Labs: VBG/ABG q2-4h initially, then q4-6h. BMP q2-4h × 6h then q6h. Lactate q4-6h initially.\n• Neuro checks q2-4h (watch for cerebral edema — rare but catastrophic)\n\n**Medications:**\n• [Regular insulin IV drip](#/drug/regular-insulin/DKA): 0.1 U/kg/hr IV (adjust per glucose response)\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25 U/kg SC daily (given on admission)\n• [Potassium chloride or acetate IV](#/drug/potassium-chloride-iv/DKA): 20-40 mEq/hr per K level (goal K >5)\n• **Normal saline** then [D10W](#/drug/dextrose/) per \"drop and split\" protocol\n• [Magnesium sulfate](#/drug/magnesium-sulfate/DKA): 1-2 g IV if Mg low\n• [Thiamine](#/drug/thiamine/DKA): 100 mg IV on admission\n\n**Consultations:**\n• Endocrinology (routine, can consult next business day if needed)\n• Case management/social work (address precipitants, discharge planning)\n• Psychiatry if recurrent DKA or mental health concern\n\n**Diet/Activity:**\n• NPO until tolerating PO and glucose <250\n• Once able to eat: start meal-associated insulin (regular or rapid-acting 2-4U with meals)\n• Add sliding scale (2-4 U per 50 mg/dL glucose >150)\n\n**Discharge criteria:**\n• All DKA stopping criteria met (AG <12, HCO3 >18, basal insulin given 2+ hrs ago, glucose <250, tolerating PO)\n• Stable glucose on SC insulin ×2-4 doses\n• Patient education completed\n• Follow-up arranged (endocrinology within 1-2 weeks, PCP within 1 week)\n• Discharge medications and sick-day rules provided',
     recommendation: 'Admit to monitored floor. Insulin + electrolyte protocol. Endocrinology and case management consults. Discharge when stopping criteria met + patient stable on SC insulin.',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Regular insulin IV drip',
+        dose: '0.1 U/kg/hr',
+        route: 'IV continuous',
+        frequency: 'Continuous',
+        duration: 'Until DKA resolved',
+        notes: 'Reduce to 0.05 U/kg/hr when glucose <250. Switch to D10W per drop-and-split protocol.',
+      },
+      alternative: {
+        drug: 'Potassium chloride or acetate',
+        dose: '20-40 mEq/hr',
+        route: 'IV',
+        frequency: 'Continuous per K level',
+        duration: 'Goal K >5 throughout treatment',
+        notes: 'Aggressive repletion essential. Acetate preferred to reduce chloride load.',
+      },
+      monitoring: 'Continuous cardiac monitor. VBG q2-4h then q4-6h. BMP q2-4h x6h then q6h. Glucose q1-2h. Neuro q2-4h.',
+    },
   },
 
   {

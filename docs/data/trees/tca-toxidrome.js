@@ -115,6 +115,17 @@ export const TCA_TOXIDROME_NODES = [
         body: '[NaHCO₃ Protocol](#/info/tca-bicarb-protocol) — detailed reference.\n\n**Indications for bicarbonate** [4][16]:\n• QRS >100 ms\n• Ventricular arrhythmias\n• Hypotension refractory to fluids\n• Seizures (adjunct)\n\n**Bolus:** [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) 1-2 mEq/kg IV push. Repeat every 3-5 minutes until QRS narrows [4][16].\n\n**Mechanism (dual action)** [16]:\n1. **Sodium loading** — high sodium content competes for cardiac sodium channels\n2. **Alkalosis** — increases protein binding of TCA (less free/toxic drug)\n\n⚠️ Severe cases may require massive doses — one case report used 2650 mEq total [8].\n\nIf QRS doesn\'t respond despite 100-200 mEq, question the diagnosis — but do not give up prematurely [16].',
         citation: [4, 8, 16],
         calculatorLinks: [{ id: 'bicarb-dose', label: 'NaHCO₃ Dose Calculator' }],
+        treatment: {
+            firstLine: {
+                drug: 'Sodium Bicarbonate 8.4%',
+                dose: '1-2 mEq/kg',
+                route: 'IV push',
+                frequency: 'Repeat q3-5 min until QRS narrows',
+                duration: 'Until QRS <100 ms',
+                notes: 'Max single bolus ~150 mEq. 1 amp = 50 mEq. Target pH 7.50-7.55.',
+            },
+            monitoring: 'Serial ECG q15-30 min. ABG/VBG q30-60 min. Monitor Na (keep ≤155), K+ (replete aggressively), iCa.',
+        },
         next: 'tca-bicarb-goals',
     },
     {
@@ -125,6 +136,25 @@ export const TCA_TOXIDROME_NODES = [
         body: '⚠️ **QRS >160 ms = high risk of ventricular arrhythmias** [1].\n\n**Immediate actions:**\n• [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) 1-2 mEq/kg IV push — repeat q3-5 min until QRS narrows [4]\n• If intubated: **hyperventilate** simultaneously (fastest way to alkalinize) [16]\n• Consider early [Lidocaine](#/drug/lidocaine/tca arrhythmia) 1-1.5 mg/kg IV if QRS not responding [6][16]\n• Prepare for cardiovascular collapse — have vasopressors ready\n\nSevere cases may require massive doses. Case report: patient received 2650 mEq (53 amps) of sodium bicarbonate and survived [8].\n\n⚠️ Monitor sodium closely — avoid Na >155 mEq/L [12][18].',
         citation: [1, 4, 6, 8, 12, 16, 18],
         calculatorLinks: [{ id: 'bicarb-dose', label: 'NaHCO₃ Dose Calculator' }],
+        treatment: {
+            firstLine: {
+                drug: 'Sodium Bicarbonate 8.4%',
+                dose: '1-2 mEq/kg',
+                route: 'IV push',
+                frequency: 'Repeat q3-5 min until QRS narrows',
+                duration: 'Until QRS <100 ms or pH 7.55',
+                notes: 'No ceiling dose. Case reports: up to 2650 mEq (53 amps) successfully used.',
+            },
+            alternative: {
+                drug: 'Lidocaine',
+                dose: '1-1.5 mg/kg',
+                route: 'IV push',
+                frequency: 'Once, then 1-4 mg/min infusion if effective',
+                duration: 'Until QRS normalizes',
+                notes: 'Add if bicarb not working. Paradoxically improves Na channel function in TCA.',
+            },
+            monitoring: 'Continuous ECG. ABG q30 min. Na ≤155 mEq/L. K+ (replete). Hyperventilate to ETCO2 25-30 if intubated.',
+        },
         next: 'tca-bicarb-goals',
     },
     {
@@ -143,6 +173,17 @@ export const TCA_TOXIDROME_NODES = [
         title: 'Bicarbonate Infusion',
         body: '**After initial boluses narrow QRS:**\n\nMaintenance infusion: 150 mEq (3 amps) in 1L D5W at 150-250 mL/hr [4][16].\n\n**Isotonic bicarbonate** is inferior to hypertonic boluses for acute QRS widening — it lacks the sodium-loading effect on cardiac channels. Use it for maintenance only [16].\n\n**Duration:**\n• Continue until QRS normalizes AND remains <100 ms for ≥6 hours\n• Wean slowly while monitoring ECG — QRS widening may recur\n• TCA half-life is 24-36 hours — toxicity can be prolonged [3]\n\n**Central line preferred** for large-volume 8.4% NaHCO₃ (1000 mOsm/L) — extremely hypertonic [16].',
         citation: [3, 4, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Sodium Bicarbonate infusion',
+                dose: '150 mEq (3 amps) in 1L D5W',
+                route: 'IV infusion',
+                frequency: '150-250 mL/hr',
+                duration: 'Until QRS <100 ms for ≥6 hours',
+                notes: 'Isotonic bicarb for maintenance only. Use boluses for acute QRS widening.',
+            },
+            monitoring: 'Serial ECG q2h. ABG q4-6h. Wean slowly. Watch for rebound QRS widening (TCA t1/2 = 24-36h).',
+        },
         next: 'tca-bicarb-refractory',
     },
     {
@@ -180,6 +221,25 @@ export const TCA_TOXIDROME_NODES = [
         title: 'First-Line: Benzodiazepines',
         body: '**First-line — choose one:**\n• [Lorazepam](#/drug/lorazepam/tca seizure) 0.1 mg/kg IV (max 4 mg) — repeat q5 min [4][18]\n• [Midazolam](#/drug/midazolam/tca seizure) 0.2 mg/kg IM (max 10 mg) — when IV access unavailable [4]\n• [Diazepam](#/drug/diazepam/tca seizure) 0.15-0.2 mg/kg IV (max 10 mg) — alternative [18]\n\n**Simultaneously give [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose)** — alkalinize to prevent TCA crossing the BBB and to counteract seizure-induced acidosis [16][18].\n\nTCAs cause seizures via **GABA-A receptor antagonism** → benzodiazepines (GABA-A agonists) are especially effective in this context [16].',
         citation: [4, 16, 18],
+        treatment: {
+            firstLine: {
+                drug: 'Lorazepam',
+                dose: '0.1 mg/kg (max 4 mg)',
+                route: 'IV',
+                frequency: 'Repeat q5 min PRN',
+                duration: 'Until seizure controlled',
+                notes: 'GABA-A agonist directly counters TCA mechanism. Give bicarb simultaneously.',
+            },
+            alternative: {
+                drug: 'Midazolam',
+                dose: '0.2 mg/kg (max 10 mg)',
+                route: 'IM',
+                frequency: 'Once, may repeat',
+                duration: 'Until seizure controlled',
+                notes: 'Use when IV access unavailable.',
+            },
+            monitoring: 'Continuous ECG. Respiratory status. Give bicarb to counter seizure-induced acidosis.',
+        },
         next: 'tca-seizure-refractory-q',
     },
     {
@@ -200,6 +260,25 @@ export const TCA_TOXIDROME_NODES = [
         title: 'Refractory Seizures',
         body: '**Second-line options:**\n• [Propofol](#/drug/propofol/tca refractory seizure) — 1-2 mg/kg bolus, then 30-200 mcg/kg/min. Requires intubation. Caution: may worsen hypotension [16].\n• [Phenobarbital](#/drug/phenobarbital/tca refractory seizure) — 15-20 mg/kg IV at ≤50 mg/min. Acts on GABA-A differently than BZDs — effective when BZDs fail [16].\n\n**Maintenance antiepileptic:**\n• [Levetiracetam](#/drug/levetiracetam/tca seizure maintenance) — preferred for recurrent seizures. No sodium channel effects, no drug interactions [16].\n\n🚫 **Do NOT use phenytoin/fosphenytoin** — also blocks sodium channels and may precipitate cardiac arrest [3][4][6][16][18].\n\n**Neuromuscular blockade** may be needed to terminate motor activity, but does NOT stop electrical seizures — requires continuous EEG monitoring [16].\n\nFor ongoing seizure management: [Status Epilepticus Protocol](#/tree/status-epilepticus)',
         citation: [3, 4, 6, 16, 18],
+        treatment: {
+            firstLine: {
+                drug: 'Propofol',
+                dose: '1-2 mg/kg bolus, then 30-200 mcg/kg/min',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until seizure controlled',
+                notes: 'Requires intubation. Caution: may worsen hypotension.',
+            },
+            alternative: {
+                drug: 'Phenobarbital',
+                dose: '15-20 mg/kg',
+                route: 'IV at ≤50 mg/min',
+                frequency: 'Once',
+                duration: 'Until seizure controlled',
+                notes: 'Acts on GABA-A at different site than BZDs. Effective when BZDs fail.',
+            },
+            monitoring: 'Continuous EEG if paralyzed. BP closely (propofol). Respiratory status. Serum phenobarbital level.',
+        },
         next: 'tca-hypotension',
     },
     {
@@ -243,6 +322,25 @@ export const TCA_TOXIDROME_NODES = [
         title: 'Vasopressor Selection',
         body: '**Choose vasopressor based on heart rate** [16][17]:\n\n• **[Norepinephrine](#/drug/norepinephrine/tca hypotension)** — first-line. Alpha agonism directly counters TCA alpha-receptor blockade [3][16].\n• **[Epinephrine](#/drug/epinephrine/tca vasopressor)** — if bradycardic or NE-refractory. Combined alpha + beta agonism [16].\n• **Phenylephrine** — if markedly tachycardic (pure alpha, no beta stimulation) [16].\n• **[Vasopressin](#/drug/vasopressin/TCA)** — for refractory cases. Bypasses the alpha-adrenergic receptor entirely [16].\n\n🚫 **Avoid pure beta-agonists** (dobutamine, low-dose dopamine) — may worsen tachycardia without adequate vasoconstriction [3].\n\nWhat is the clinical trajectory?',
         citation: [3, 16, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Norepinephrine',
+                dose: '0.1-0.5 mcg/kg/min, titrate to MAP ≥65',
+                route: 'IV infusion (central line preferred)',
+                frequency: 'Continuous',
+                duration: 'Until hemodynamically stable',
+                notes: 'First-line. Alpha agonism directly counters TCA alpha-blockade.',
+            },
+            alternative: {
+                drug: 'Epinephrine',
+                dose: '0.1-0.5 mcg/kg/min',
+                route: 'IV infusion',
+                frequency: 'Continuous',
+                duration: 'Until hemodynamically stable',
+                notes: 'If bradycardic or NE-refractory. Combined alpha + beta agonism.',
+            },
+            monitoring: 'Continuous BP (arterial line). MAP target ≥65. Urine output. Lactate clearance.',
+        },
         options: [
             { label: 'Responding to pressors', description: 'Hemodynamics improving', next: 'tca-disposition' },
             { label: 'Wide-complex tachycardia', description: 'Arrhythmia management needed', next: 'tca-vtach', urgency: 'critical' },
@@ -256,6 +354,25 @@ export const TCA_TOXIDROME_NODES = [
         title: 'Wide-Complex Tachycardia Management',
         body: '⚠️ **Wide-complex tachycardia in TCA often represents sinus tachycardia with a widened QRS** from delayed conduction — NOT true ventricular tachycardia [16].\n\n**Treatment:**\n1. **[Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose)** — first-line for ALL wide-complex rhythms in TCA [3][16]\n2. **[Lidocaine](#/drug/lidocaine/tca arrhythmia)** — 1-1.5 mg/kg IV push, then 1-4 mg/min infusion. Class IB antiarrhythmic that **competes for sodium channel binding** — paradoxically improves channel function [6][16]\n3. **[Magnesium Sulfate](#/drug/magnesium-sulfate/tca arrhythmia)** — 2g IV for torsades de pointes or polymorphic VT [7]\n4. **Cardioversion** if unstable — may fail initially because it doesn\'t address the underlying toxicological cause. Give bicarb and try again [16].\n\n🚫 **AVOID:** amiodarone (further QTc prolongation), procainamide, flecainide, and ALL Class IA/IC agents — worsen sodium channel blockade [3][16][17].',
         citation: [3, 6, 7, 16, 17],
+        treatment: {
+            firstLine: {
+                drug: 'Lidocaine',
+                dose: '1-1.5 mg/kg IV push, then 1-4 mg/min infusion',
+                route: 'IV',
+                frequency: 'Bolus then continuous',
+                duration: 'Until arrhythmia controlled',
+                notes: 'Class IB. Paradoxically improves Na channel function. Use with bicarb.',
+            },
+            alternative: {
+                drug: 'Magnesium Sulfate',
+                dose: '2g',
+                route: 'IV over 2-5 min',
+                frequency: 'Once, may repeat',
+                duration: 'PRN',
+                notes: 'For torsades de pointes or polymorphic VT. AVOID amiodarone, procainamide, Class IA/IC.',
+            },
+            monitoring: 'Continuous ECG. QRS width. Give bicarb first/simultaneously. Cardiovert if unstable.',
+        },
         next: 'tca-lipid',
     },
     {
@@ -265,6 +382,17 @@ export const TCA_TOXIDROME_NODES = [
         title: 'Lipid Emulsion Therapy',
         body: '[Lipid Emulsion 20%](#/drug/lipid-emulsion/tca cardiac arrest) — **rescue therapy for cardiac arrest or refractory toxicity** [14][16].\n\n**Dosing:**\n• 1.5 mL/kg IV bolus over 1 minute\n• Then 0.25 mL/kg/min infusion × 30-60 min\n• May repeat bolus ×2 at 5 min intervals if no ROSC [3]\n\n**Evidence:**\n• No high-quality human evidence [11][16]\n• Animal models show mixed results — one study showed ILE superior to bicarb in guinea pigs [14], another showed equivalent efficacy in swine [11]\n• More rational for **lipophilic agents** (TCAs, local anesthetics) [16]\n\n⚠️ Should be reserved for life-threatening toxicity unresponsive to other treatments. Ideally in conjunction with toxicology consultation [16].\n\n**Side effects:** Hypertriglyceridemia, pancreatitis, lipemia interfering with lab assays.',
         citation: [3, 11, 14, 16],
+        treatment: {
+            firstLine: {
+                drug: 'Lipid Emulsion 20% (Intralipid)',
+                dose: '1.5 mL/kg bolus, then 0.25 mL/kg/min infusion',
+                route: 'IV',
+                frequency: 'Bolus over 1 min, may repeat bolus x2 at 5 min intervals',
+                duration: '30-60 min infusion',
+                notes: 'Rescue therapy for cardiac arrest or refractory toxicity. Reserve for life-threatening cases.',
+            },
+            monitoring: 'ROSC. Hemodynamics. Triglycerides (lipemia may interfere with labs). Consult toxicology.',
+        },
         next: 'tca-ecmo',
     },
     {

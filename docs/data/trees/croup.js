@@ -182,6 +182,17 @@ export const CROUP_NODES = [
         body: '**Admission criteria:**\n\u2022 Persistent stridor at rest despite dexamethasone + epinephrine\n\u2022 Requiring multiple doses of nebulized epinephrine\n\u2022 Significant respiratory distress\n\u2022 Unable to tolerate oral fluids\n\u2022 Young infant (<6 months) with moderate-severe croup\n\u2022 Unreliable follow-up or social concerns\n\n**Inpatient management:**\n\u2022 Continuous pulse oximetry\n\u2022 PRN nebulized epinephrine\n\u2022 Minimize agitation \u2014 keep parent at bedside\n\u2022 Reassess for alternative diagnoses if not improving: **bacterial tracheitis** (progressive toxicity, purulent secretions, radiographic findings) [4]\n\u2022 **Antibiotics only for suspected bacterial complications** \u2014 not routine for croup',
         recommendation: 'Admit for continued monitoring and PRN nebulized epinephrine. Minimize agitation. Continuous pulse oximetry. Reassess if failing to improve \u2014 consider bacterial tracheitis or other causes. Most admitted children improve within 24-48 hours.',
         citation: [2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Racemic Epinephrine',
+                dose: '0.5 mL of 2.25% solution in 4.5 mL NS',
+                route: 'Nebulized',
+                frequency: 'PRN for stridor at rest',
+                duration: 'Until clinically improved',
+                notes: 'Alternative: L-epinephrine 0.5 mL/kg of 1:1000 (max 5 mL) nebulized. Observe 2 hours after each dose for rebound.',
+            },
+            monitoring: 'Continuous pulse oximetry. Reassess respiratory status after each epinephrine dose. Most children improve within 24-48 hours.',
+        },
     },
     {
         id: 'croup-icu',
@@ -192,6 +203,25 @@ export const CROUP_NODES = [
         recommendation: 'ICU admission with continuous monitoring. ETT 0.5-1.0 size smaller than predicted. Continue dexamethasone. Plan extubation with leak test after 24-72 hours of improvement. Consult ENT if atypical course or concern for structural airway pathology.',
         confidence: 'definitive',
         citation: [2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Dexamethasone',
+                dose: '0.6 mg/kg',
+                route: 'IV/IM',
+                frequency: 'Every 6-12 hours',
+                duration: 'Until extubation (typically 24-72 hours)',
+                notes: 'Continued steroids facilitate extubation. Max 16 mg per dose.',
+            },
+            alternative: {
+                drug: 'Racemic Epinephrine',
+                dose: '0.5 mL of 2.25% solution in 4.5 mL NS',
+                route: 'Nebulized (via ETT or mask if extubated)',
+                frequency: 'PRN for stridor',
+                duration: 'As needed',
+                notes: 'May be used pre-extubation or post-extubation for recurrent stridor.',
+            },
+            monitoring: 'Continuous cardiorespiratory monitoring. Daily assessment for extubation readiness with cuff leak test. Plan extubation after 24-72 hours of clinical improvement.',
+        },
     },
 ];
 export const CROUP_NODE_COUNT = CROUP_NODES.length;

@@ -76,6 +76,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Unknown EF — Proceed with Caution',
     body: 'EF IS UNKNOWN — SAFE APPROACH\n\nWhen EF is unknown, avoid calcium channel blockers (diltiazem, verapamil) until EF is confirmed >40%.\n\n**Safe first-line options regardless of EF:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min (use lower doses if concerned for HF)\n• [Esmolol](#/drug/esmolol) — ultra-short-acting, can rapidly titrate off if hemodynamics worsen\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — excellent safety profile\n\n**If possible, obtain bedside echo:**\n• Eyeball EF (normal >55%, mildly reduced 40-55%, reduced ≤40%)\n• [EPSS measurement](#/info/epss-measurement) correlates with EF\n• Look for dilated LV, global hypokinesis\n\nOnce EF is clarified, you can safely add CCBs if EF >40%.',
     citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Metoprolol',
+        dose: '2.5-5 mg',
+        route: 'IV',
+        frequency: 'q5min',
+        duration: 'Up to 15 mg total',
+        notes: 'Use lower doses if concerned for HF',
+      },
+      alternative: {
+        drug: 'Esmolol',
+        dose: '500 mcg/kg bolus, then 50-200 mcg/kg/min',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until rate controlled',
+        notes: 'Ultra-short-acting, can rapidly titrate off if hemodynamics worsen',
+      },
+      monitoring: 'Heart rate, blood pressure, signs of decompensation. Obtain bedside echo to clarify EF when possible.',
+    },
     next: 'afib-rate-controlled',
   },
 
@@ -86,6 +105,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Rate Control in HFrEF (EF ≤40%)',
     body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EF\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n**FIRST-LINE — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Use lower initial doses in decompensated HF\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
     citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Metoprolol',
+        dose: '2.5-5 mg',
+        route: 'IV',
+        frequency: 'q5min',
+        duration: 'Up to 15 mg total',
+        notes: 'Use lower initial doses in decompensated HF. Guideline-directed therapy for HFrEF.',
+      },
+      alternative: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Bolus over 10 min, then continuous',
+        duration: 'Until rate controlled or cardioversion achieved',
+        notes: 'Hemodynamically stable, safe in HFrEF. May achieve chemical cardioversion.',
+      },
+      monitoring: 'Heart rate, blood pressure, signs of HF decompensation. Avoid CCBs (Class 3: Harm).',
+    },
     next: 'afib-hfref-controlled',
   },
 
@@ -147,6 +185,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Cardioversion in HFrEF',
     body: 'RHYTHM CONTROL IN HFrEF\n\nCardioversion may be particularly beneficial in HFrEF:\n• Loss of atrial kick worsens cardiac output\n• Tachycardia-induced cardiomyopathy may be reversible\n• Rhythm control may improve HF symptoms\n\n**Procedure:**\n1. Sedation with [Midazolam](#/drug/midazolam) or ketamine/midazolam\n2. Synchronized cardioversion at 200J biphasic\n3. [Amiodarone](#/drug/amiodarone) infusion post-cardioversion to maintain sinus\n\n**Anticoagulation consideration:**\n• If AF duration >48 hours and not anticoagulated, consider TEE first\n• Or anticoagulate for ≥3 weeks before elective cardioversion\n• Emergent cardioversion if hemodynamically compromised regardless of duration',
     citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Midazolam',
+        dose: '3-5 mg',
+        route: 'IV',
+        frequency: 'Bolus, additional 2 mg q2min PRN',
+        duration: 'Until adequate sedation for cardioversion',
+        notes: 'For procedural sedation. Flumazenil 0.5-1 mg IV available for reversal.',
+      },
+      alternative: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Bolus over 10 min, then continuous',
+        duration: 'Continue until critical illness resolves',
+        notes: 'Post-cardioversion to maintain sinus rhythm.',
+      },
+      monitoring: 'Rhythm, blood pressure, respiratory status during sedation. Monitor for AF recurrence post-cardioversion.',
+    },
     next: 'afib-refractory-reassess',
   },
 
@@ -184,6 +241,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     recommendation: 'Immediate [synchronized cardioversion](#/info/cardioversion-afib) (200J biphasic). If cardioversion is not immediately available, [Procainamide](#/drug/procainamide) may be used as a temporizing measure.',
     confidence: 'definitive',
     citation: [2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Synchronized Cardioversion',
+        dose: '200J biphasic',
+        route: 'External defibrillator',
+        frequency: 'Once, escalate energy if unsuccessful',
+        duration: 'Immediate',
+        notes: 'First-line treatment for WPW + A-Fib. AV nodal blockers are contraindicated.',
+      },
+      alternative: {
+        drug: 'Procainamide',
+        dose: '20-50 mg/min',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until arrhythmia resolves, max 17 mg/kg',
+        notes: 'Use only if cardioversion not immediately available. Hold if QRS widens >50% or hypotension.',
+      },
+      monitoring: 'Continuous cardiac monitoring. Watch for conversion to VF. Have defibrillator ready.',
+    },
   },
 
   {
@@ -193,6 +269,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Synchronized Cardioversion Protocol',
     body: 'SYNCHRONIZED CARDIOVERSION PROTOCOL\n\n1. PREPARATION\n\u2022 Confirm synchronization is enabled on defibrillator\n\u2022 Apply pads: anterior/lateral placement preferred (EPIC trial)\n\u2022 Hyperinflation may impair conduction \u2014 cardiovert at end-expiration if possible\n\n2. SEDATION\n\u2022 Midazolam 3\u20135 mg IV bolus, additional 2 mg q2min PRN to adequate sedation\n\u2022 Alternative: MidaKet for patients resistant to midazolam\n\u2022 Flumazenil 0.5\u20131 mg IV available for reversal\n\n3. CARDIOVERSION\n\u2022 Start at 200J biphasic (use maximal energy available)\n\u2022 Escalate energy if initial attempt unsuccessful\n\n4. POST-CARDIOVERSION\n\u2022 Consider [Amiodarone](#/drug/amiodarone) to maintain sinus rhythm (150mg IV bolus, then 1 mg/min infusion)\n\u2022 Consider IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2\u20134g to enhance cardioversion success\n\u2022 If cardioversion not immediately feasible, IV [Amiodarone](#/drug/amiodarone) may be used as temporizing measure',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Midazolam',
+        dose: '3-5 mg',
+        route: 'IV',
+        frequency: 'Bolus, additional 2 mg q2min PRN',
+        duration: 'Until adequate sedation',
+        notes: 'For procedural sedation. Flumazenil 0.5-1 mg IV available for reversal.',
+      },
+      alternative: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Bolus over 10 min, then continuous',
+        duration: 'Continue post-cardioversion to maintain sinus',
+        notes: 'IV Magnesium 2-4g may enhance cardioversion success.',
+      },
+      monitoring: 'Respiratory status during sedation. Cardiac rhythm post-cardioversion. Watch for AF recurrence.',
+    },
     next: 'afib-cardioversion-result',
   },
 
@@ -205,6 +300,17 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     recommendation: 'Continue [Amiodarone](#/drug/amiodarone) infusion to prevent recurrence. Monitor for reversion to A-Fib. Treat underlying precipitants (sepsis, PE, electrolyte abnormalities). Consider anticoagulation assessment once stabilized.',
     confidence: 'recommended',
     citation: [1],
+    treatment: {
+      firstLine: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until critical illness resolves',
+        notes: 'Continue infusion to prevent AF recurrence. May re-bolus 150 mg PRN.',
+      },
+      monitoring: 'Continuous cardiac monitoring for AF recurrence. Treat underlying precipitants (sepsis, PE, electrolyte abnormalities).',
+    },
   },
 
   // =====================================================================
@@ -218,6 +324,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'First-Line Rate Control Agents',
     body: 'FIRST-LINE AGENTS FOR RATE CONTROL\n\nBeta-Blockers (Class 1 recommendation):\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 2.5\u20135 mg IV q5min, up to 15 mg total\n\u2022 [Esmolol](#/drug/esmolol) \u2014 Ultra-short-acting, ideal when rapid titration needed\n\u2022 Safe in COPD (multiple studies confirm no adverse respiratory effects)\n\u2022 Preferred in CAD or compensated HFrEF\n\u2022 Use cautiously in decompensated heart failure\n\nCalcium Channel Blockers:\n\u2022 [Diltiazem](#/drug/diltiazem) \u2014 0.25 mg/kg IV bolus, onset within minutes\n\u2022 [Verapamil](#/drug/verapamil) \u2014 Alternative CCB, less commonly used\n\u2022 90% rate control vs 74% with amiodarone or digoxin\n\u2022 \u26a0\ufe0f CONTRAINDICATED if EF \u226440% or decompensated HF (Class 3: Harm)\n\u2022 Obtain echo or check history for EF if unknown\n\nAdjunctive:\n\u2022 IV [Magnesium Sulfate](#/drug/magnesium-sulfate) \u2014 Reasonable to add (Class 2a). Blocks slow Ca channels at AV node with minimal toxicity.\n\n\u26a0\ufe0f Do NOT combine beta-blockers with calcium channel blockers \u2014 risk of synergistic hypotension.',
     citation: [1, 2, 4],
+    treatment: {
+      firstLine: {
+        drug: 'Diltiazem',
+        dose: '0.25 mg/kg',
+        route: 'IV',
+        frequency: 'Bolus, may repeat in 15 min',
+        duration: 'Until rate controlled',
+        notes: 'Onset within minutes. 90% rate control. Contraindicated if EF ≤40% or decompensated HF.',
+      },
+      alternative: {
+        drug: 'Metoprolol',
+        dose: '2.5-5 mg',
+        route: 'IV',
+        frequency: 'q5min',
+        duration: 'Up to 15 mg total',
+        notes: 'Safe in COPD. Preferred in CAD or compensated HFrEF. Use cautiously in decompensated HF.',
+      },
+      monitoring: 'Heart rate, blood pressure. Do NOT combine beta-blockers with CCBs (synergistic hypotension). IV Magnesium 2-4g may be added as adjunct.',
+    },
     next: 'afib-rate-controlled',
   },
 
@@ -283,6 +408,17 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Add IV Magnesium',
     body: 'IV [Magnesium Sulfate](#/drug/magnesium-sulfate)\n\n\u2022 2\u20134 grams IV bolus, may follow with continuous infusion\n\u2022 Blocks slow calcium channels in SA and AV nodes\n\u2022 Minimal toxicity \u2014 one meta-analysis detected no adverse events\n\u2022 Even if cardioversion doesn\u2019t occur, magnesium reduces heart rate and augments efficacy of other antiarrhythmics\n\u2022 Contraindicated if GFR <30 mL/min or oliguria \u2014 use intermittent boluses instead\n\u2022 Target serum level ~3\u20134 mg/dL for optimal antiarrhythmic effect',
     citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Magnesium Sulfate',
+        dose: '2-4 grams',
+        route: 'IV',
+        frequency: 'Bolus, may follow with continuous infusion',
+        duration: 'Target serum level 3-4 mg/dL',
+        notes: 'Blocks slow Ca channels at SA/AV nodes. Minimal toxicity. Augments efficacy of other antiarrhythmics.',
+      },
+      monitoring: 'Serum magnesium level (target 3-4 mg/dL). Contraindicated if GFR <30 mL/min or oliguria - use intermittent boluses instead.',
+    },
     next: 'afib-refractory-reassess',
   },
 
@@ -293,6 +429,17 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Add Digoxin',
     body: '[Digoxin](#/drug/digoxin)\n\n\u2022 Useful when hypotension limits further titration of beta-blockers or CCBs\n\u2022 Slow onset: ~3 hours to achieve rate control (vs 5 min for diltiazem)\n\u2022 Limited efficacy during exertion \u2014 slows primarily resting heart rate\n\u2022 \u26a0\ufe0f Post hoc analyses associate digoxin with increased mortality in A-Fib\n\u2022 Use at low doses, typically in combination with other AV nodal agents\n\u2022 May be particularly useful in patients with concurrent heart failure',
     citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Digoxin',
+        dose: '0.25-0.5 mg',
+        route: 'IV',
+        frequency: 'Once',
+        duration: 'Onset ~3 hours',
+        notes: 'Useful when hypotension limits BB/CCB titration. Use low doses. Slows primarily resting HR.',
+      },
+      monitoring: 'Heart rate, digoxin level (if continued). Caution: post hoc analyses associate with increased mortality in A-Fib. Use in combination with other AV nodal agents.',
+    },
     next: 'afib-refractory-reassess',
   },
 
@@ -303,6 +450,17 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Switch to Amiodarone',
     body: '[Amiodarone](#/drug/amiodarone)\n\n\u2022 Load with 150 mg IV bolus over 10 min, then 1 mg/min infusion\n\u2022 May need to re-bolus 150 mg x2\u20133 (total 150\u2013450 mg in boluses)\n\u2022 More hemodynamically stable than beta-blockers or CCBs\n\u2022 May achieve chemical cardioversion \u2014 beneficial if rhythm control desired\n\u2022 74% rate control achieved in clinical trials\n\u2022 \u26a0\ufe0f Do not conclude amiodarone has failed without adequate re-bolusing\n\u2022 If cardioversion occurs, continue infusion until critical illness resolves',
     citation: [1, 2, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Bolus over 10 min, then continuous',
+        duration: 'Continue until rate controlled or critical illness resolves',
+        notes: 'May need to re-bolus 150 mg x2-3 (total 150-450 mg in boluses). Do not conclude failure without adequate re-bolusing.',
+      },
+      monitoring: '74% rate control in trials. More hemodynamically stable than BBs or CCBs. May achieve chemical cardioversion.',
+    },
     next: 'afib-refractory-reassess',
   },
 
@@ -313,6 +471,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     title: 'Consider Rhythm Control',
     body: 'RHYTHM CONTROL STRATEGY\n\nConsider when rate control strategy has failed or in new-onset AF where conversion is desirable.\n\nStepwise approach:\n1. IV [Magnesium Sulfate](#/drug/magnesium-sulfate) infusion (front-line, excellent safety)\n2. [Amiodarone](#/drug/amiodarone) if magnesium alone insufficient\n3. DC cardioversion (especially in intubated patients)\n\nFactors favoring rhythm control:\n\u2022 New-onset AF (NOAF) \u2014 likely to revert\n\u2022 Pulmonary hypertension, mitral stenosis, diastolic dysfunction\n\u2022 Heart failure with reduced EF\n\u2022 Failure of rate control\n\nFactors favoring rate control:\n\u2022 Chronic/longstanding AF\n\u2022 Onset >48 hours without anticoagulation\n\u2022 Ongoing severe physiological stress',
     citation: [1, 3, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Magnesium Sulfate',
+        dose: '2-4 grams',
+        route: 'IV',
+        frequency: 'Bolus, then continuous infusion',
+        duration: 'Target serum 3-4 mg/dL',
+        notes: 'Front-line for rhythm control. Excellent safety profile.',
+      },
+      alternative: {
+        drug: 'Amiodarone',
+        dose: '150 mg bolus, then 1 mg/min infusion',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Until cardioversion or rate control',
+        notes: 'Add if magnesium alone insufficient. DC cardioversion if both fail (especially in intubated patients).',
+      },
+      monitoring: 'Rhythm for conversion. Factors favoring rhythm control: NOAF, pulmonary HTN, mitral stenosis, HFrEF, rate control failure.',
+    },
     next: 'afib-refractory-reassess',
   },
 
@@ -381,6 +558,25 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
       { id: 'cha2ds2vasc', label: 'Calculate CHA\u2082DS\u2082-VASc' },
     ],
     citation: [1, 3, 10],
+    treatment: {
+      firstLine: {
+        drug: 'Apixaban',
+        dose: '5 mg (2.5 mg if ≥2 of: age ≥80, weight ≤60 kg, Cr ≥1.5)',
+        route: 'PO',
+        frequency: 'BID',
+        duration: 'Long-term',
+        notes: 'Preferred DOAC for AF anticoagulation. Consider CHA₂DS₂-VASc score for indication.',
+      },
+      alternative: {
+        drug: 'Rivaroxaban',
+        dose: '20 mg (15 mg if CrCl 15-50)',
+        route: 'PO',
+        frequency: 'Daily with evening meal',
+        duration: 'Long-term',
+        notes: 'Alternative DOAC. Take with food for optimal absorption.',
+      },
+      monitoring: 'Renal function, bleeding signs. If AF >48h and not anticoagulated, consider TEE before cardioversion or anticoagulate ≥3 weeks before elective cardioversion.',
+    },
     next: 'afib-disposition',
   },
 
