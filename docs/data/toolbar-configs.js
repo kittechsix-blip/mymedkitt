@@ -283,6 +283,7 @@ const TOOLBAR_CONFIGS = {
     'migraine': [
         { id: 'migraine-dx', label: 'ICHD-3', icon: '✅', action: 'calculator', target: 'migraine-criteria' },
         { id: 'migraine-tx', label: 'Tx Algo', icon: '💊', action: 'calculator', target: 'migraine-tx-algo' },
+        { id: 'migraine-dhe', label: 'DHE', icon: '💉', action: 'calculator', target: 'dhe-protocol' },
     ],
 };
 /** Get the toolbar config for a consult, or an empty default */

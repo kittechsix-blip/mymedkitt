@@ -297,6 +297,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'migraine': [
     { id: 'migraine-dx', label: 'ICHD-3', icon: '✅', action: 'calculator', target: 'migraine-criteria' },
     { id: 'migraine-tx', label: 'Tx Algo', icon: '💊', action: 'calculator', target: 'migraine-tx-algo' },
+    { id: 'migraine-dhe', label: 'DHE', icon: '💉', action: 'calculator', target: 'dhe-protocol' },
   ],
 };
 

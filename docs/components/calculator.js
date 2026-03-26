@@ -6557,6 +6557,198 @@ ${cad ? '⚠️ TRIPTAN CONTRAINDICATED' : '• Sumatriptan 6 mg SC'}
         };
     },
 };
+// ---------------------------------------------------------------------------
+// DHE Protocol Calculator (Migraine)
+// ---------------------------------------------------------------------------
+const DHE_PROTOCOL_CALCULATOR = {
+    id: 'dhe-protocol',
+    title: 'DHE Protocol',
+    subtitle: 'Dihydroergotamine for Refractory Migraine',
+    description: 'DHE dosing protocols for refractory migraine. Checks contraindications and provides setting-specific guidance.',
+    fields: [
+        {
+            name: 'setting',
+            label: 'Treatment Setting',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'ED — Single Dose', points: 1 },
+                { label: 'Observation — Repetitive Dosing', points: 2 },
+                { label: 'Inpatient — Raskin Protocol', points: 3 },
+            ],
+        },
+        { name: 'weight', label: 'Weight (kg)', type: 'number', points: 0 },
+        { name: 'premedGiven', label: 'Antiemetic premedication given', type: 'toggle', points: 0, description: 'Metoclopramide 10 mg IV 30 min before DHE' },
+        { name: 'cad', label: 'CAD, uncontrolled HTN, or PVD', type: 'toggle', points: 0 },
+        { name: 'triptan', label: 'Triptan within 24 hours', type: 'toggle', points: 0 },
+        { name: 'pregnant', label: 'Pregnant or breastfeeding', type: 'toggle', points: 0 },
+        { name: 'ergot', label: 'Ergot within 24 hours', type: 'toggle', points: 0 },
+        { name: 'cyp3a4', label: 'On strong CYP3A4 inhibitor (azoles, macrolides, protease inhibitors)', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Raskin NH. Repetitive IV DHE for intractable migraine. Neurology 1986.',
+        'AHS 2025 Guidelines: DHE for status migrainosus.',
+        'UpToDate: Dihydroergotamine dosing and administration.',
+    ],
+    computeResult: (values) => {
+        const setting = values.setting || 1;
+        const cad = values.cad || 0;
+        const triptan = values.triptan || 0;
+        const pregnant = values.pregnant || 0;
+        const ergot = values.ergot || 0;
+        const cyp3a4 = values.cyp3a4 || 0;
+        const premedGiven = values.premedGiven || 0;
+        // Check contraindications
+        const contraindications = [];
+        if (cad)
+            contraindications.push('CAD/uncontrolled HTN/PVD');
+        if (triptan)
+            contraindications.push('Triptan within 24h');
+        if (pregnant)
+            contraindications.push('Pregnancy/breastfeeding');
+        if (ergot)
+            contraindications.push('Ergot within 24h');
+        if (cyp3a4)
+            contraindications.push('Strong CYP3A4 inhibitor');
+        if (contraindications.length > 0) {
+            return {
+                value: 'CONTRAINDICATED',
+                label: 'DHE Contraindicated',
+                description: `**⛔ DHE CONTRAINDICATED**
+
+**Reason(s):**
+${contraindications.map(c => `• ${c}`).join('\n')}
+
+**Alternative options:**
+• Greater Occipital Nerve Block
+• Valproate 500-1000 mg IV
+• Magnesium sulfate 1-2 g IV
+• Ketorolac 15-30 mg IV (if not already given)
+• Consider admission for IV hydration + supportive care`,
+                colorVar: '--color-danger',
+            };
+        }
+        // Premedication warning
+        const premedWarning = !premedGiven ? `**⚠️ GIVE ANTIEMETIC FIRST**
+• Metoclopramide 10 mg IV — wait 30 min before DHE
+• DHE causes significant nausea without pretreatment
+
+---
+
+` : '';
+        if (setting === 1) {
+            // ED single dose
+            return {
+                value: 'ED Protocol',
+                label: 'DHE — ED Single Dose',
+                description: `${premedWarning}**ED DHE PROTOCOL**
+
+**Step 1 — Premedication (if not done):**
+• Metoclopramide 10 mg IV
+• Wait 30 minutes
+
+**Step 2 — DHE Administration:**
+• **DHE 1 mg IV** over 2-3 minutes
+• Can give IM if no IV access (1 mg IM)
+
+**Step 3 — Monitor:**
+• Observe 1-2 hours post-dose
+• Watch for chest tightness, paresthesias, nausea
+
+**Expected response:**
+• Relief typically within 30-60 minutes
+• If partial response, can repeat 0.5 mg in 1 hour (max 2 mg/24h)
+
+**Discharge instructions:**
+• Avoid triptans for 24 hours
+• Return if severe chest pain or leg pain`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (setting === 2) {
+            // Observation unit
+            return {
+                value: 'Obs Protocol',
+                label: 'DHE — Observation Repetitive Dosing',
+                description: `${premedWarning}**OBSERVATION UNIT DHE PROTOCOL**
+
+**Admission criteria:**
+• Failed ED cocktail + rescue therapy
+• Status migrainosus (>72h)
+• Severe dehydration requiring IVF
+
+**Protocol:**
+
+| Time | Medication | Dose |
+|------|-----------|------|
+| 0h | Metoclopramide | 10 mg IV |
+| 0.5h | DHE | 0.5-1 mg IV |
+| 8h | Metoclopramide | 10 mg IV |
+| 8.5h | DHE | 0.5-1 mg IV |
+| 16h | Metoclopramide | 10 mg IV |
+| 16.5h | DHE | 0.5-1 mg IV |
+
+**Max DHE:** 3 mg/24h
+
+**Concurrent:**
+• NS at 125-150 mL/h
+• Dexamethasone 10 mg IV × 1
+• Dark, quiet room
+
+**Discharge criteria:**
+• Pain-free or minimal (≤3/10)
+• Tolerating PO
+• Able to ambulate`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Inpatient Raskin Protocol
+        return {
+            value: 'Raskin Protocol',
+            label: 'DHE — Inpatient Raskin Protocol',
+            description: `${premedWarning}**RASKIN PROTOCOL (INPATIENT)**
+
+**Indications:**
+• Intractable migraine failing all outpatient/ED therapy
+• Chronic daily headache requiring detox
+• Medication overuse headache
+
+**Day 1-3 Protocol:**
+
+| Time | Metoclopramide | DHE |
+|------|---------------|-----|
+| 0h | 10 mg IV | — |
+| 0.5h | — | 0.5 mg IV (test dose) |
+| 8h | 10 mg IV | 0.5-1 mg IV |
+| 16h | 10 mg IV | 0.5-1 mg IV |
+
+**Repeat q8h × 2-3 days** (total 9-12 doses)
+
+**Max per 24h:** 3 mg DHE
+
+**Monitoring:**
+• Telemetry (optional but recommended)
+• Daily exam for ergot toxicity signs
+• I/O, orthostatics
+
+**Signs of ergot toxicity (STOP DHE):**
+• Severe leg cramping or claudication
+• Cold/pale extremities
+• Chest pain/pressure
+• Numbness/tingling
+
+**Adjuncts:**
+• Dexamethasone 4 mg IV q8h × 3 days (optional)
+• IVF maintenance
+• PRN rescue: Ketorolac, Compazine
+
+**Success rate:** ~90% for intractable migraine`,
+            colorVar: '--color-danger',
+        };
+    },
+};
 const CALCULATORS = {
     'cows': COWS_CALCULATOR,
     'rass': RASS_CALCULATOR,
@@ -6630,6 +6822,7 @@ const CALCULATORS = {
     'chf-dispo': CHF_DISPO_CALCULATOR,
     'migraine-criteria': MIGRAINE_CRITERIA_CALCULATOR,
     'migraine-tx-algo': MIGRAINE_TX_ALGO_CALCULATOR,
+    'dhe-protocol': DHE_PROTOCOL_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
