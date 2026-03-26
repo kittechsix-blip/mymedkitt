@@ -5733,7 +5733,7 @@ const TB_DURATION_CALCULATOR: CalculatorDefinition = {
   computeResult: (values: Record<string, number>) => {
     const cavitary = values['cavitary'] === 1;
     const pos2mo = values['culture2mo'] === 1;
-    const hiv = values['hiv'] === 1;
+    // Note: hiv field captured for future HIV-specific guidance
     const pzaOmit = values['pza_omit'] === 1;
     const fourMonth = values['fourmonth'] === 1;
 
@@ -6057,7 +6057,7 @@ const CHF_NTG_CALCULATOR: CalculatorDefinition = {
     // SCAPE protocol: bolus 400-800 mcg/min x 2-2.5 min, then infusion
     const bolusRateLow = 400; // mcg/min
     const bolusRateHigh = 800; // mcg/min
-    const bolusTime = 2; // minutes
+    // bolusTime = 2-2.5 minutes (documented in output string below)
 
     // Convert to mL/hr for standard pump
     const bolusMLhrLow = Math.round((bolusRateLow * 60) / concentration);
@@ -7489,6 +7489,1034 @@ ${delayedRisk}
   },
 };
 
+// ---------------------------------------------------------------------------
+// AACG IOP Assessment Calculator
+// ---------------------------------------------------------------------------
+const AACG_IOP_CALCULATOR: CalculatorDefinition = {
+  id: 'aacg-iop',
+  title: 'IOP Assessment',
+  subtitle: 'Acute Angle-Closure Glaucoma',
+  description: 'Interpret IOP measurements and guide treatment urgency.',
+  fields: [
+    {
+      name: 'iop',
+      label: 'IOP (mmHg)',
+      type: 'number',
+      points: 0,
+      description: 'Measured by tonometry. Enter 99 if palpation only.',
+    },
+    {
+      name: 'palpation',
+      label: 'Globe Palpation',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Normal (soft, symmetric)', points: 0 },
+        { label: 'Firm (harder than contralateral)', points: 1 },
+        { label: 'Rock hard', points: 2 },
+      ],
+    },
+    { name: 'midDilated', label: 'Fixed mid-dilated pupil (4-6mm)', type: 'toggle', points: 0 },
+    { name: 'cornealEdema', label: 'Corneal edema/haze', type: 'toggle', points: 0 },
+    { name: 'halos', label: 'Halos around lights', type: 'toggle', points: 0 },
+    { name: 'pain', label: 'Severe eye pain', type: 'toggle', points: 0 },
+    { name: 'nv', label: 'Nausea/vomiting', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'EB Medicine. Ophthalmic Emergencies. 2024.',
+    'UpToDate. Acute angle-closure glaucoma. 2024.',
+  ],
+  computeResult: (values) => {
+    const iop = values.iop || 0;
+    const palpation = values.palpation || 0;
+    const midDilated = values.midDilated || 0;
+    const cornealEdema = values.cornealEdema || 0;
+    const halos = values.halos || 0;
+    const pain = values.pain || 0;
+    const nv = values.nv || 0;
+
+    const clinicalScore = midDilated + cornealEdema + halos + pain + nv;
+
+    // IOP-based assessment
+    if (iop >= 40 || palpation === 2) {
+      return {
+        value: 'CRISIS',
+        label: 'Acute Angle-Closure Crisis',
+        description: `**⛔ IOP ${iop >= 40 ? iop + ' mmHg' : 'Rock hard globe'} — EMERGENT TREATMENT**
+
+**Immediate Actions:**
+1. Position patient SUPINE
+2. Call ophthalmology STAT
+3. Begin treatment cascade
+
+**Phase 1 — Reduce Aqueous Production:**
+• Acetazolamide 500mg IV
+• Timolol 0.5% 1 drop q15min × 3
+• Brimonidine 0.15% 1 drop q15min × 3
+
+**Phase 2 — If IOP still elevated:**
+• Mannitol 1-2 g/kg IV over 20 min
+
+**Phase 3 — Once IOP <40:**
+• Pilocarpine 2% 1 drop q15min × 2
+
+**Do NOT delay treatment for ophthalmology consult.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (iop >= 22 && iop < 40) {
+      return {
+        value: 'ELEVATED',
+        label: 'Elevated IOP — Subacute',
+        description: `**IOP ${iop} mmHg — Elevated but not crisis**
+
+**May be subacute or intermittent angle closure.**
+
+**Management:**
+• Timolol 0.5% 1 drop BID
+• Brimonidine 0.15% 1 drop TID
+• Acetazolamide 250mg PO
+• Monitor closely for progression
+
+**Urgent ophthalmology consult** (not emergent)
+
+**Escalate to full treatment cascade if:**
+• IOP rises to ≥40 mmHg
+• Symptoms worsen
+• Corneal edema develops`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (palpation === 1 || clinicalScore >= 3) {
+      return {
+        value: 'SUSPICIOUS',
+        label: 'Clinical Features Concerning',
+        description: `**IOP ${iop} mmHg but clinical features present**
+
+**Concerning findings:**
+${midDilated ? '• Fixed mid-dilated pupil\n' : ''}${cornealEdema ? '• Corneal edema\n' : ''}${halos ? '• Halos around lights\n' : ''}${pain ? '• Severe eye pain\n' : ''}${nv ? '• Nausea/vomiting\n' : ''}${palpation === 1 ? '• Firm globe on palpation\n' : ''}
+
+**Consider:**
+• Repeat IOP measurement (may have spontaneously reduced)
+• Gonioscopy if available
+• Ophthalmology consult
+• Monitor closely for recurrence
+
+**Intermittent angle closure** can present with normal IOP between episodes.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'NORMAL',
+      label: 'IOP Normal',
+      description: `**IOP ${iop} mmHg — Within normal range**
+
+Normal IOP: 10-21 mmHg
+
+**If clinical suspicion for AACG:**
+• May be between episodes (intermittent)
+• Repeat exam and IOP
+• Consider other diagnoses
+
+**If low clinical suspicion:**
+• Unlikely AACG
+• Consider alternative diagnoses:
+  - Migraine
+  - Iritis/uveitis
+  - Conjunctivitis
+  - Keratitis`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// ---------------------------------------------------------------------------
+// AACG Treatment Cascade Calculator
+// ---------------------------------------------------------------------------
+const AACG_TREATMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'aacg-treatment',
+  title: 'Treatment Cascade',
+  subtitle: 'AACG Medical Management',
+  description: 'Step-by-step IOP-lowering treatment protocol.',
+  fields: [
+    {
+      name: 'currentIOP',
+      label: 'Current IOP (mmHg)',
+      type: 'number',
+      points: 0,
+    },
+    {
+      name: 'phase',
+      label: 'Treatment Phase',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Initial — Starting treatment', points: 1 },
+        { label: 'Phase 2 — After topicals + acetazolamide', points: 2 },
+        { label: 'Phase 3 — After osmotics', points: 3 },
+        { label: 'Controlled — IOP <35', points: 4 },
+      ],
+    },
+    { name: 'chf', label: 'CHF or volume overload', type: 'toggle', points: 0 },
+    { name: 'asthma', label: 'Asthma / severe COPD', type: 'toggle', points: 0 },
+    { name: 'renal', label: 'Renal impairment', type: 'toggle', points: 0 },
+    { name: 'sulfa', label: 'Sulfa allergy', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'EB Medicine. Ophthalmic Emergencies. 2024.',
+    'REBEL EM. AACG Core Cast. 2023.',
+  ],
+  computeResult: (values) => {
+    const iop = values.currentIOP || 50;
+    const phase = values.phase || 1;
+    const chf = values.chf || 0;
+    const asthma = values.asthma || 0;
+    const renal = values.renal || 0;
+    const sulfa = values.sulfa || 0;
+
+    if (phase === 4 || iop < 35) {
+      return {
+        value: 'CONTROLLED',
+        label: 'IOP Controlled',
+        description: `**IOP ${iop} mmHg — Initial control achieved**
+
+**Maintenance Therapy:**
+• Timolol 0.5% BID${asthma ? ' ⚠️ Use with caution (asthma)' : ''}
+• Brimonidine 0.15% TID
+• Prednisolone 1% q1-4h
+• Acetazolamide 250mg PO q6h${sulfa ? ' ⚠️ Sulfa allergy — use with caution or omit' : ''}
+
+**Fellow Eye Prophylaxis:**
+• Pilocarpine 2% 1 drop × 1
+
+**Next Steps:**
+• Continue monitoring q1-2h
+• Ophthalmology for laser iridotomy
+• Usually within 24-48 hours
+
+**Disposition:**
+• Admit if required osmotics
+• May observe/discharge if on drops only with 24h follow-up`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (phase === 1) {
+      let meds = `**PHASE 1 — Reduce Aqueous Production:**
+
+| Drug | Dose | Route | Frequency |
+|------|------|-------|-----------|
+| **Acetazolamide** | 500mg | IV (or PO) | Once |
+| **Timolol 0.5%** | 1 drop | Topical | q15min × 3 |
+| **Brimonidine 0.15%** | 1 drop | Topical | q15min × 3 |`;
+
+      if (sulfa) meds += '\n\n⚠️ **Sulfa allergy:** Acetazolamide cross-reactivity rare but monitor.';
+      if (asthma) meds += '\n\n⚠️ **Asthma/COPD:** Use timolol with caution. Consider brimonidine only.';
+
+      meds += `\n\n**Also:**
+• Position SUPINE
+• Antiemetics (ondansetron 4-8mg IV)
+• IV access
+
+**Recheck IOP in 30-60 minutes.**
+If IOP still ≥40 → proceed to Phase 2 (osmotics).`;
+
+      return {
+        value: 'PHASE 1',
+        label: 'Initial Treatment',
+        description: meds,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (phase === 2) {
+      let osmotics = `**PHASE 2 — Osmotic Agents:**
+
+**IOP still elevated after topicals + acetazolamide.**`;
+
+      if (chf || renal) {
+        osmotics += `\n\n⚠️ **Caution: CHF/renal impairment**
+Use glycerol PO if possible:
+• Glycerol 1 mL/kg PO (mix with cold juice)`;
+      } else {
+        osmotics += `\n\n**Mannitol 20%:**
+• Dose: 1-2 g/kg IV over 20-30 min
+• Example: 70kg → 70-140g (350-700 mL of 20%)
+
+**Alternative (if can take PO):**
+• Glycerol 1 mL/kg PO`;
+      }
+
+      osmotics += `\n\n**Monitoring:**
+• Urine output (Foley if large volume)
+• Electrolytes
+
+**Recheck IOP in 30-60 minutes.**
+If IOP <40 → give pilocarpine.`;
+
+      return {
+        value: 'PHASE 2',
+        label: 'Osmotic Agents',
+        description: osmotics,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (phase === 3) {
+      return {
+        value: 'PILOCARPINE',
+        label: 'Ready for Pilocarpine',
+        description: `**PHASE 3 — Pilocarpine (IOP ${iop} mmHg):**
+
+${iop < 40 ? '✅ IOP <40 — Pilocarpine can be effective' : '⚠️ IOP still ≥40 — pilocarpine may not work (ischemic iris)'}
+
+**Pilocarpine 2% (or 4%):**
+• 1 drop to affected eye
+• Repeat in 15 minutes × 2 doses
+
+**Mechanism:**
+• Constricts pupil (miosis)
+• Pulls iris away from angle
+• Opens drainage
+
+**Fellow Eye:**
+• Pilocarpine 2% 1 drop × 1 (prophylaxis)
+
+**If IOP remains elevated after pilocarpine:**
+• Consult ophthalmology for paracentesis
+• Refractory AACG — may need emergent iridotomy/surgery`,
+        colorVar: iop < 40 ? '--color-primary' : '--color-warning',
+      };
+    }
+
+    return {
+      value: 'ASSESS',
+      label: 'Assess Phase',
+      description: 'Select current treatment phase.',
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// ---------------------------------------------------------------------------
+// AACG Precipitating Medications Calculator
+// ---------------------------------------------------------------------------
+const AACG_MEDS_CALCULATOR: CalculatorDefinition = {
+  id: 'aacg-meds',
+  title: 'Precipitating Meds',
+  subtitle: 'Drug-Induced Angle Closure',
+  description: 'Identify medications that can trigger AACG.',
+  fields: [
+    { name: 'bilateral', label: 'Bilateral presentation', type: 'toggle', points: 0 },
+    { name: 'topiramate', label: 'Taking topiramate', type: 'toggle', points: 0 },
+    { name: 'sulfa', label: 'Started sulfa drug (HCTZ, TMP-SMX) in past 2 weeks', type: 'toggle', points: 0 },
+    { name: 'anticholinergic', label: 'Taking anticholinergic (atropine, scopolamine, ipratropium)', type: 'toggle', points: 0 },
+    { name: 'antihistamine', label: 'Taking antihistamine (diphenhydramine, hydroxyzine)', type: 'toggle', points: 0 },
+    { name: 'decongestant', label: 'Using decongestant (pseudoephedrine, phenylephrine)', type: 'toggle', points: 0 },
+    { name: 'tca', label: 'Taking TCA or SSRI/SNRI', type: 'toggle', points: 0 },
+    { name: 'mydriatic', label: 'Recent eye dilation (tropicamide, cyclopentolate)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Drug-Induced Acute Angle Closure Glaucoma Review. J Curr Glaucoma Pract. 2015.',
+    'UpToDate. Acute angle-closure glaucoma. 2024.',
+  ],
+  computeResult: (values) => {
+    const bilateral = values.bilateral || 0;
+    const topiramate = values.topiramate || 0;
+    const sulfa = values.sulfa || 0;
+    const anticholinergic = values.anticholinergic || 0;
+    const antihistamine = values.antihistamine || 0;
+    const decongestant = values.decongestant || 0;
+    const tca = values.tca || 0;
+    const mydriatic = values.mydriatic || 0;
+
+    if (topiramate || (bilateral && sulfa)) {
+      return {
+        value: 'CILIARY EFFUSION',
+        label: 'Non-Pupillary Block Mechanism',
+        description: `**⚠️ TOPIRAMATE/SULFA-INDUCED AACG**
+
+**Different mechanism — ciliary body effusion (NOT pupillary block)**
+
+**Key Features:**
+• Bilateral presentation
+• Myopic shift (up to -17 diopters)
+• Occurs 1-2 weeks after starting drug
+
+**CRITICAL DIFFERENCES IN MANAGEMENT:**
+
+**❌ Iridotomy NOT effective** (wrong mechanism)
+
+**✅ Correct management:**
+1. **STOP THE OFFENDING DRUG** (coordinate with prescriber)
+2. **Cycloplegics (atropine)** — OPPOSITE of standard AACG!
+3. IOP-lowering agents (acetazolamide, timolol, brimonidine)
+4. Topical steroids
+
+**Drugs implicated:**
+${topiramate ? '• **Topiramate** (most common)\n' : ''}${sulfa ? '• Sulfonamide (HCTZ, TMP-SMX, acetazolamide)\n' : ''}
+
+**Prognosis:** Usually resolves within days of stopping drug.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const triggers: string[] = [];
+    if (anticholinergic) triggers.push('Anticholinergic');
+    if (antihistamine) triggers.push('Antihistamine');
+    if (decongestant) triggers.push('Decongestant/sympathomimetic');
+    if (tca) triggers.push('TCA/SSRI/SNRI');
+    if (mydriatic) triggers.push('Mydriatic eye drops');
+
+    if (triggers.length > 0) {
+      return {
+        value: 'PUPILLARY BLOCK',
+        label: 'Drug-Induced Pupillary Block',
+        description: `**Medication(s) may have precipitated AACG:**
+
+${triggers.map(t => `• ${t}`).join('\n')}
+
+**Mechanism:** These drugs cause mydriasis (pupil dilation) which can trigger pupillary block in susceptible patients.
+
+**Management:**
+• **Standard AACG treatment cascade applies**
+• Discontinue offending agent if possible
+• Pilocarpine to constrict pupil (once IOP <40)
+• Laser iridotomy is definitive treatment
+
+**Prevention:**
+• Patient should avoid these drug classes in future
+• Alert all providers to AACG history
+• MedicAlert bracelet recommended
+
+**Common OTC culprits:**
+• Benadryl (diphenhydramine)
+• Sudafed (pseudoephedrine)
+• Afrin (oxymetazoline)`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'NO TRIGGER',
+      label: 'No Drug Trigger Identified',
+      description: `**No obvious medication trigger identified.**
+
+**AACG can occur spontaneously** in patients with anatomic risk factors:
+• Shallow anterior chamber
+• Hyperopia
+• Age >50
+• Asian ethnicity
+• Family history
+
+**Still ask about:**
+• OTC medications (antihistamines, decongestants)
+• Recent eye exams (mydriatic drops)
+• Herbal supplements
+
+**Prevention counseling:**
+• Avoid anticholinergics, sympathomimetics
+• Alert providers to AACG history
+• Prophylactic iridotomy to fellow eye`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Chemical Eye Burn — pH Monitor Calculator
+// -------------------------------------------------------------------
+
+const CHEMBURN_PH_CALCULATOR: CalculatorDefinition = {
+  id: 'chemburn-ph',
+  title: 'pH Monitor',
+  subtitle: 'Chemical Eye Burn Irrigation',
+  description: 'Track pH during irrigation for chemical eye burns. Target pH 7.0-7.4, must be stable for 30 minutes.',
+  fields: [
+    {
+      name: 'agent',
+      label: 'Agent Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Alkali (drain cleaner, cement, ammonia)', points: 1 },
+        { label: 'Acid (battery, pool chemicals)', points: 2 },
+        { label: 'Hydrofluoric acid', points: 1 },
+        { label: 'Unknown', points: 1 },
+      ],
+    },
+    {
+      name: 'initial-ph',
+      label: 'Initial pH (before irrigation)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not checked', points: 0 },
+        { label: '< 4.0 (severe acid)', points: 10 },
+        { label: '4.0-5.5 (acidic)', points: 5 },
+        { label: '5.5-7.0 (mildly acidic)', points: 2 },
+        { label: '7.0-7.5 (normal)', points: 0 },
+        { label: '7.5-9.0 (mildly alkaline)', points: 2 },
+        { label: '9.0-11.0 (alkaline)', points: 5 },
+        { label: '> 11.0 (severe alkali)', points: 10 },
+      ],
+    },
+    {
+      name: 'current-ph',
+      label: 'Current pH (after irrigation pause)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not checked yet', points: 0 },
+        { label: '< 6.5', points: 10 },
+        { label: '6.5-6.9', points: 5 },
+        { label: '7.0-7.4 (target)', points: 0 },
+        { label: '7.5-8.0', points: 2 },
+        { label: '> 8.0', points: 5 },
+      ],
+    },
+    { name: 'waited', label: 'Waited 5-10 min after stopping irrigation', type: 'toggle', points: 0 },
+    { name: 'stable', label: 'pH stable on recheck (30 min later)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Target pH 7.0-7.4. Must be stable for 30 minutes before stopping irrigation.',
+  citations: [
+    'AAO EyeNet. Treating Acute Chemical Injuries of the Cornea. 2023.',
+    'StatPearls. Ocular Burns. 2024.',
+  ],
+  computeResult: (values) => {
+    const agent = values['agent'] || 0;
+    const currentPh = values['current-ph'] || 0;
+    const waited = values['waited'] || 0;
+    const stable = values['stable'] || 0;
+
+    const isAlkali = agent === 1;
+
+    if (currentPh === 0) {
+      return {
+        value: 'CHECK pH',
+        label: 'pH Not Yet Checked',
+        description: `**Check pH after irrigation pause:**
+
+1. STOP irrigation
+2. Wait **5-10 minutes** (allows chemical release from tissues)
+3. Touch litmus paper to **inferior fornix** (NOT cornea)
+4. Read pH using narrow-range paper (5.0-8.0)
+
+**Target:** 7.0-7.4
+
+${isAlkali ? '⚠️ **Alkali exposure** — may need 30+ min to 2+ hours irrigation' : ''}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (!waited) {
+      return {
+        value: 'WAIT',
+        label: 'Wait Before Checking',
+        description: `**Must wait 5-10 minutes after stopping irrigation.**
+
+Chemical may still be releasing from tissues ("reservoir effect").
+
+If you check immediately after stopping irrigation, pH may falsely appear normal.
+
+**Protocol:**
+1. Stop irrigation
+2. Wait 5-10 minutes
+3. Check pH in inferior fornix
+4. If normal, recheck in 30 minutes to confirm stability`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // pH not in target range
+    if (currentPh !== 0 && (currentPh === 10 || currentPh === 5 || currentPh === 2)) {
+      return {
+        value: 'CONTINUE',
+        label: 'Continue Irrigation',
+        description: `**pH not normalized — continue irrigation.**
+
+**Current status:** pH still abnormal
+
+**Actions:**
+1. Resume irrigation for 15-30 more minutes
+2. Re-sweep fornices for retained particles
+3. Ensure adequate flow rate
+4. Recheck pH after 5-10 min pause
+
+${isAlkali ? '⚠️ **Alkali burns may require 2+ hours of irrigation.**' : ''}
+
+**If pH keeps rising after stopping:**
+Chemical still present — keep irrigating.
+
+**Refractory pH:**
+• May indicate deep penetration (severe alkali)
+• May indicate retained particulate
+• Consult ophthalmology`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // pH in target range (currentPh === 0 points = 7.0-7.4)
+    if (!stable) {
+      return {
+        value: 'RECHECK',
+        label: 'Confirm Stability',
+        description: `**pH appears normalized (7.0-7.4).**
+
+**CRITICAL: Must confirm stability.**
+
+1. Wait 30 minutes
+2. Recheck pH
+3. If pH remains 7.0-7.4 → proceed to exam
+4. If pH rises → resume irrigation
+
+**Why stability matters:**
+Chemical can continue releasing from deep tissues.
+"Reservoir effect" causes delayed pH rise.
+
+**Do NOT stop monitoring until 2 consecutive normal readings 30 min apart.**`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // pH normalized AND stable
+    return {
+      value: 'NORMALIZED',
+      label: 'pH Stable — Proceed to Exam',
+      description: `**pH normalized and stable.**
+
+✅ pH 7.0-7.4
+✅ Stable on 30-minute recheck
+
+**Now perform complete eye exam:**
+1. Visual acuity
+2. Fluorescein staining
+3. Limbal ischemia (clock hours)
+4. Corneal clarity
+5. Anterior chamber
+6. IOP
+
+**Grade injury using Roper-Hall or Dua classification.**`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Chemical Eye Burn — Roper-Hall Grading Calculator
+// -------------------------------------------------------------------
+
+const CHEMBURN_GRADE_CALCULATOR: CalculatorDefinition = {
+  id: 'chemburn-grade',
+  title: 'Roper-Hall Grading',
+  subtitle: 'Chemical Eye Burn Severity',
+  description: 'Grade chemical eye burn severity using corneal clarity and limbal ischemia.',
+  fields: [
+    {
+      name: 'cornea',
+      label: 'Corneal Findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Clear cornea, epithelial damage only', points: 1 },
+        { label: 'Hazy cornea, iris details visible', points: 2 },
+        { label: 'Total epithelial loss, stromal haze, iris obscured', points: 3 },
+        { label: 'Opaque cornea, cannot see iris/pupil', points: 4 },
+      ],
+    },
+    {
+      name: 'limbus',
+      label: 'Limbal Ischemia (clock hours)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None (0 hours)', points: 0 },
+        { label: '< 3 hours (<25%)', points: 1 },
+        { label: '3-4 hours (25-33%)', points: 2 },
+        { label: '4-6 hours (33-50%)', points: 3 },
+        { label: '> 6 hours (>50%)', points: 4 },
+      ],
+    },
+    {
+      name: 'agent',
+      label: 'Agent Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Acid', points: 0 },
+        { label: 'Alkali', points: 1 },
+        { label: 'Hydrofluoric acid', points: 1 },
+        { label: 'Unknown', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Limbal ischemia is the key prognostic indicator — more ischemia = worse prognosis.',
+  citations: [
+    'Roper-Hall MJ. Thermal and chemical burns. Trans Ophthalmol Soc UK. 1965;85:631-53.',
+    'AAO EyeNet. Treating Acute Chemical Injuries of the Cornea. 2023.',
+  ],
+  computeResult: (values) => {
+    const cornea = values['cornea'] || 0;
+    const limbus = values['limbus'] || 0;
+    const agent = values['agent'] || 0;
+
+    if (cornea === 0) {
+      return {
+        value: '--',
+        label: 'Select Findings Above',
+        description: 'Select corneal and limbal findings to determine injury grade.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const isAlkali = agent === 1;
+
+    // Grade I: Clear cornea, no ischemia
+    if (cornea === 1 && limbus <= 1) {
+      return {
+        value: 'GRADE I',
+        label: 'Excellent Prognosis',
+        description: `**Grade I — Mild Injury**
+
+| Finding | Status |
+|---------|--------|
+| Cornea | Clear, epithelial damage only |
+| Limbal ischemia | None to minimal |
+| Prognosis | **Excellent** |
+
+**Treatment:**
+• Cyclopentolate 1% TID
+• Erythromycin ointment QID
+• Prednisolone 1% QID × 7 days
+• Preservative-free tears hourly
+• Oral analgesics PRN
+
+**Disposition:**
+• May discharge home
+• Ophthalmology follow-up 24-48 hours
+
+**Expected course:**
+• Epithelial healing in 1-3 days
+• No long-term sequelae expected`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Grade II: Hazy cornea, <1/3 ischemia
+    if (cornea === 2 && limbus <= 2) {
+      return {
+        value: 'GRADE II',
+        label: 'Good Prognosis',
+        description: `**Grade II — Moderate Injury**
+
+| Finding | Status |
+|---------|--------|
+| Cornea | Hazy, iris details visible |
+| Limbal ischemia | <1/3 (33%) |
+| Prognosis | **Good** |
+
+**Treatment:**
+• Atropine 1% or scopolamine daily-BID
+• Fluoroquinolone drops QID
+• Prednisolone 1% Q1-2H while awake
+• **Ascorbate 10% drops Q1H + 2g PO QID**
+• **Citrate 10% drops Q2H**
+• Doxycycline 100mg PO BID
+• Preservative-free tears Q1-2H
+
+**Disposition:**
+• Consider admission if significant ischemia
+• Otherwise: discharge with 24h mandatory follow-up
+
+${isAlkali ? '⚠️ **Alkali burn** — closer monitoring needed.' : ''}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Grade III: Stromal haze, 1/3-1/2 ischemia
+    if ((cornea === 3 || (cornea === 2 && limbus === 3)) && limbus <= 3) {
+      return {
+        value: 'GRADE III',
+        label: 'Guarded Prognosis',
+        description: `**Grade III — Severe Injury**
+
+| Finding | Status |
+|---------|--------|
+| Cornea | Total epithelial loss, stromal haze |
+| Limbal ischemia | 1/3-1/2 (33-50%) |
+| Prognosis | **Guarded** |
+
+**Treatment — Intensive Regimen:**
+• Prednisolone 1% **Q1H around the clock** (days 0-10)
+• **TAPER steroids by day 10-14** (corneal melting risk)
+• Ascorbate 10% drops Q1H + 2g PO QID
+• Citrate 10% drops Q1H
+• Fluoroquinolone QID
+• Atropine 1% daily
+• Doxycycline 100mg PO BID
+• Preservative-free tears Q1-2H
+
+**Disposition:**
+• **ADMIT** for hourly medications
+• Ophthalmology consultation STAT
+• Consider amniotic membrane transplant
+
+⚠️ **Risk of limbal stem cell deficiency (LSCD)**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Grade IV: Opaque cornea, >1/2 ischemia
+    return {
+      value: 'GRADE IV',
+      label: 'Poor Prognosis',
+      description: `**Grade IV — Severe Injury**
+
+| Finding | Status |
+|---------|--------|
+| Cornea | **Opaque**, cannot see iris/pupil |
+| Limbal ischemia | **>1/2 (>50%)** |
+| Prognosis | **Poor** |
+
+**Critical points:**
+• High risk of corneal perforation
+• Limbal stem cell deficiency likely
+• May require multiple surgeries
+
+**Treatment — Maximum Intensity:**
+• Prednisolone 1% Q1H around the clock
+• **TAPER steroids by day 10-14**
+• All Grade III medications
+• **Amniotic membrane transplant likely needed**
+• Consider autologous serum tears
+
+**Disposition:**
+• **ADMIT — mandatory**
+• Ophthalmology at bedside STAT
+• May need OR for debridement/AMT
+
+**Long-term:**
+• Limbal stem cell transplant
+• Corneal transplant (after inflammation controlled)
+• Multiple reconstructive procedures
+
+⚠️ **Vision prognosis poor without aggressive intervention.**`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Chemical Eye Burn — Treatment Protocol Calculator
+// -------------------------------------------------------------------
+
+const CHEMBURN_TREATMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'chemburn-treatment',
+  title: 'Treatment Protocol',
+  subtitle: 'Chemical Eye Burn Medications',
+  description: 'Treatment protocol based on injury grade and timing.',
+  fields: [
+    {
+      name: 'grade',
+      label: 'Injury Grade (Roper-Hall)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Grade I (clear cornea, no ischemia)', points: 1 },
+        { label: 'Grade II (hazy, <1/3 ischemia)', points: 2 },
+        { label: 'Grade III (stromal haze, 1/3-1/2 ischemia)', points: 3 },
+        { label: 'Grade IV (opaque, >1/2 ischemia)', points: 4 },
+      ],
+    },
+    {
+      name: 'day',
+      label: 'Day Since Injury',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Day 0-7 (acute phase)', points: 0 },
+        { label: 'Day 8-10 (transition)', points: 1 },
+        { label: 'Day 11-14 (taper phase)', points: 2 },
+        { label: 'Day 15+ (late phase)', points: 3 },
+      ],
+    },
+    { name: 'iop-elevated', label: 'IOP elevated', type: 'toggle', points: 0 },
+    { name: 'epithelial-defect', label: 'Persistent epithelial defect', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'CRITICAL: Taper steroids by day 10-14 to prevent corneal melting.',
+  citations: [
+    'AAO EyeNet. Treating Acute Chemical Injuries of the Cornea. 2023.',
+    'OpenEvidence. Chemical Eye Injury ED Management. 2024.',
+  ],
+  computeResult: (values) => {
+    const grade = values['grade'] || 0;
+    const day = values['day'] || 0;
+    const iopElevated = values['iop-elevated'] || 0;
+    const epithelialDefect = values['epithelial-defect'] || 0;
+
+    if (grade === 0) {
+      return {
+        value: '--',
+        label: 'Select Grade Above',
+        description: 'Select injury grade to see treatment protocol.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Late phase warning
+    if (day === 3) {
+      let protocol = `**Day 15+ — Late Phase Treatment**
+
+⚠️ **AVOID or minimize steroids** (corneal melting risk)
+
+**If anti-inflammatory needed:**
+• Medroxyprogesterone drops (steroid alternative)
+• Very low-dose prednisolone if must use
+
+**Continue:**
+• Preservative-free tears Q1-2H
+• Fluoroquinolone if epithelial defect present
+• Vitamin C 2g PO QID (ongoing)
+• Doxycycline 100mg PO BID
+
+**If persistent epithelial defect:**
+• Amniotic membrane transplant
+• Prokera device
+• Bandage contact lens
+• Autologous serum tears`;
+
+      if (epithelialDefect) {
+        protocol += `\n\n⚠️ **Persistent epithelial defect present:**
+Consider surgical options (AMT, tarsorrhaphy)`;
+      }
+
+      return {
+        value: 'LATE PHASE',
+        label: 'Minimize Steroids',
+        description: protocol,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Transition/taper phase
+    if (day >= 1) {
+      return {
+        value: 'TAPER',
+        label: 'Steroid Taper Phase',
+        description: `**Day ${day === 1 ? '8-10' : '11-14'} — ${day === 1 ? 'Begin Transition' : 'Active Taper'}**
+
+⚠️ **CRITICAL: ${day === 2 ? 'TAPER STEROIDS NOW' : 'Prepare for steroid taper'}**
+
+**Steroid Taper Protocol:**
+• Day 8-10: Reduce frequency by 25-50%
+• Day 11-14: Rapid taper to QID or less
+• Day 14: Discontinue or switch to medroxyprogesterone
+
+**Why taper matters:**
+• Steroids inhibit collagen synthesis
+• Damaged cornea + prolonged steroids = perforation risk
+• After day 14, risks outweigh benefits
+
+**Continue:**
+• Ascorbate drops (supports collagen)
+• Citrate drops (inhibits MMPs)
+• Vitamin C PO
+• Doxycycline
+• Preservative-free tears
+• Antibiotic if epithelial defect
+
+**Ophthalmology should be managing by this phase.**`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Acute phase (days 0-7)
+    let protocol = '';
+
+    if (grade === 1) {
+      protocol = `**Grade I — Mild Injury (Days 0-7)**
+
+| Medication | Dose | Frequency |
+|------------|------|-----------|
+| **Cyclopentolate 1%** | 1 drop | TID |
+| **Erythromycin oint** | Ribbon | QID |
+| **Prednisolone 1%** | 1 drop | QID |
+| **PF tears** | 1 drop | Q1-2H PRN |
+
+**Oral:** Analgesics PRN
+
+**Duration:** 7 days, then reassess
+
+**Follow-up:** 24-48 hours`;
+    } else if (grade === 2) {
+      protocol = `**Grade II — Moderate Injury (Days 0-7)**
+
+| Medication | Dose | Frequency |
+|------------|------|-----------|
+| **Atropine 1%** | 1 drop | Daily-BID |
+| **Moxifloxacin** | 1 drop | QID |
+| **Prednisolone 1%** | 1 drop | Q1-2H while awake |
+| **Ascorbate 10%** | 1 drop | Q1H while awake |
+| **Citrate 10%** | 1 drop | Q2H |
+| **PF tears** | 1 drop | Q1-2H |
+
+**Oral:**
+• Vitamin C 2g QID
+• Doxycycline 100mg BID`;
+    } else {
+      protocol = `**Grade ${grade === 3 ? 'III' : 'IV'} — Severe Injury (Days 0-7)**
+
+| Medication | Dose | Frequency |
+|------------|------|-----------|
+| **Atropine 1%** | 1 drop | Daily |
+| **Moxifloxacin** | 1 drop | QID |
+| **Prednisolone 1%** | 1 drop | **Q1H AROUND THE CLOCK** |
+| **Ascorbate 10%** | 1 drop | Q1H while awake |
+| **Citrate 10%** | 1 drop | Q1H while awake |
+| **PF tears** | 1 drop | Q1-2H |
+
+**Oral:**
+• Vitamin C 2g QID
+• Doxycycline 100mg BID
+
+**Consider:**
+• Amniotic membrane transplant (AMT)
+• Prokera device
+• Bandage contact lens
+• Autologous serum tears
+
+⚠️ **ADMIT for hourly medications**
+⚠️ **Begin steroid taper by day 10**`;
+    }
+
+    if (iopElevated) {
+      protocol += `\n\n**IOP Management:**
+• Timolol 0.5% BID
+• ± Brimonidine 0.15% TID
+• ± Acetazolamide 250mg PO q6h`;
+    }
+
+    return {
+      value: `GRADE ${grade === 1 ? 'I' : grade === 2 ? 'II' : grade === 3 ? 'III' : 'IV'}`,
+      label: `Acute Phase (Days 0-7)`,
+      description: protocol,
+      colorVar: grade >= 3 ? '--color-danger' : grade === 2 ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -7567,6 +8595,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'snake-antivenom': SNAKE_ANTIVENOM_CALCULATOR,
   'snake-recurrence': SNAKE_RECURRENCE_CALCULATOR,
   'coral-snake': CORAL_SNAKE_CALCULATOR,
+  'aacg-iop': AACG_IOP_CALCULATOR,
+  'aacg-treatment': AACG_TREATMENT_CALCULATOR,
+  'aacg-meds': AACG_MEDS_CALCULATOR,
+  'chemburn-ph': CHEMBURN_PH_CALCULATOR,
+  'chemburn-grade': CHEMBURN_GRADE_CALCULATOR,
+  'chemburn-treatment': CHEMBURN_TREATMENT_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

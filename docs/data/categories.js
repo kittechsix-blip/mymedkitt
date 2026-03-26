@@ -481,7 +481,32 @@ export const DEFAULT_CATEGORIES = [
         ],
         isCustom: false,
     },
-    { id: 'ophthalmology', name: 'Ophthalmology', icon: 'ophthalmology.png', decisionTrees: [], isCustom: false },
+    {
+        id: 'ophthalmology',
+        name: 'Ophthalmology',
+        icon: 'ophthalmology.png',
+        decisionTrees: [
+            {
+                id: 'aacg',
+                title: 'Acute Angle-Closure Glaucoma',
+                subtitle: 'Recognition → IOP Assessment → Treatment Cascade → Precipitating Meds → Disposition',
+                categoryId: 'ophthalmology',
+                version: '1.0',
+                nodeCount: 20,
+                entryNodeId: 'aacg-start',
+            },
+            {
+                id: 'chemical-burn',
+                title: 'Chemical Eye Burn',
+                subtitle: 'Recognition → Irrigation Protocol → Classification → Treatment Cascade → Disposition',
+                categoryId: 'ophthalmology',
+                version: '1.0',
+                nodeCount: 23,
+                entryNodeId: 'chemburn-start',
+            },
+        ],
+        isCustom: false,
+    },
     {
         id: 'orthopedics',
         name: 'Ortho',

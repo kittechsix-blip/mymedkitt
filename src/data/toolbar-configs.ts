@@ -305,6 +305,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'snake-recurrence', label: 'Recurrence', icon: '🔄', action: 'calculator', target: 'snake-recurrence' },
     { id: 'snake-coral', label: 'Coral Snake', icon: '🐍', action: 'calculator', target: 'coral-snake' },
   ],
+  'aacg': [
+    { id: 'aacg-iop', label: 'IOP', icon: '👁️', action: 'calculator', target: 'aacg-iop' },
+    { id: 'aacg-tx', label: 'Tx Cascade', icon: '💊', action: 'calculator', target: 'aacg-treatment' },
+    { id: 'aacg-meds', label: 'Drug Causes', icon: '💉', action: 'calculator', target: 'aacg-meds' },
+  ],
+  'chemical-burn': [
+    { id: 'chemburn-ph', label: 'pH Monitor', icon: '🧪', action: 'calculator', target: 'chemburn-ph' },
+    { id: 'chemburn-grade', label: 'Roper-Hall', icon: '📊', action: 'calculator', target: 'chemburn-grade' },
+    { id: 'chemburn-tx', label: 'Treatment', icon: '💊', action: 'calculator', target: 'chemburn-treatment' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */
