@@ -8679,6 +8679,137 @@ const TB_RISK_FACTORS: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Anticoagulant Reversal Info Pages
+// -------------------------------------------------------------------
+
+const ACR_REVERSAL_SUMMARY: InfoPage = {
+  id: 'acr-reversal-summary',
+  title: 'Anticoagulant Reversal Quick Reference',
+  subtitle: 'One-glance reversal guide by agent — Farkas IBCC 2025, AHA/ASA 2022',
+  sections: [
+    {
+      heading: 'Warfarin',
+      body: '**Reversal:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV over 30 min + [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal)\n**PCC dose:** INR 2-4 → 25 u/kg | INR 4-6 → 35 u/kg | INR >6 → 50 u/kg (max 5,000 u)\n**Alt:** 4 units FFP if PCC unavailable\n**Monitor:** INR at 30 min, 6h, 24h\n**Pearl:** PCC + FFP wear off in 6-8h. ALWAYS give Vitamin K simultaneously or INR rebounds.',
+    },
+    {
+      heading: 'Dabigatran (Pradaxa)',
+      body: '**Reversal:** [Idarucizumab](#/drug/idarucizumab/dabigatran reversal) 5 g IV (2 × 2.5 g, ≤15 min apart)\n**Alt:** 4-Factor PCC | Hemodialysis (80% renal, low protein binding)\n**If <2h ingestion:** Activated Charcoal 50 g\n**Monitor:** PTT or Thrombin Time at baseline, 2-4h, q12h\n**Pearl:** Normal thrombin time excludes clinically significant dabigatran effect.',
+    },
+    {
+      heading: 'Factor Xa Inhibitors (Apixaban, Rivaroxaban, Edoxaban)',
+      body: '**Reversal:** [4-Factor PCC](#/drug/pcc-4factor/doac reversal)\n**Dose:** CNS bleed → 50 u/kg (max 5,000) | Non-CNS → 25 u/kg or fixed 2,000 u\n**If <2h ingestion:** Activated Charcoal 50 g\n**Monitor:** Anti-Xa level (best); INR after PCC, then q6h\n**Pearl:** PCC does NOT change anti-Xa level. These agents are NOT dialyzable (>90% protein bound).',
+    },
+    {
+      heading: 'Heparin (UFH)',
+      body: '**Reversal:** [Protamine](#/drug/protamine/heparin reversal) — most cases, just stop the infusion\n**Dose:** 1 mg per 100 units UFH given in last 2h (max 50 mg). Give slowly over 15 min.\n**Monitor:** PTT at 10-15 min, 2h, then q4h × 24h\n**Pearl:** Excess protamine causes paradoxical anticoagulation. Never >50 mg at once.',
+    },
+    {
+      heading: 'LMWH (Enoxaparin)',
+      body: '**Reversal:** [Protamine](#/drug/protamine/lmwh reversal) — only ~50% reversal\n**Dose:** <8h → 1 mg per 1 mg enoxaparin | 8-12h → 0.5 mg per mg | >12h → unlikely to help\n**Fondaparinux:** Protamine NOT effective → consider PCC\n**Pearl:** Don\'t expect normalization of anti-Xa level with protamine.',
+    },
+    {
+      heading: 'tPA / Thrombolytics',
+      body: '**Reversal:** [TXA](#/drug/tranexamic-acid/tpa reversal) 1 g IV load + 1 g/hr OR [Aminocaproic acid](#/drug/aminocaproic-acid/tpa reversal) 4-5 g IV + 1 g/hr\n**Plus:** Cryoprecipitate 10 units (target fibrinogen >150-200 mg/dL)\n**Optional:** FFP ~2 units | Platelets if thrombocytopenic\n**Pearl:** tPA is gone in minutes, but clotting factor depletion persists. Target fibrinogen >200 for ICH.',
+    },
+    {
+      heading: 'Antiplatelet Agents',
+      body: '**First-line:** [DDAVP](#/drug/desmopressin/antiplatelet reversal) 0.3-0.4 mcg/kg IV over 20-30 min\n**Consider:** Higher fibrinogen target (>200 mg/dL)\n**AVOID:** Platelet transfusion (PATCH trial: no benefit, possible harm)\n**Desperate:** TXA as adjunct\n**Pearl:** Ticagrelor is reversible — platelet transfusion won\'t work (new platelets get inhibited too).',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Greenberg SM, et al. 2022 AHA/ASA Guideline for Spontaneous ICH. Stroke. 2022;53(7):e282-e361.' },
+    { num: 2, text: 'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.' },
+    { num: 3, text: 'Cuker A, et al. Reversal of DOACs: Anticoagulation Forum Guidance. Am J Hematol. 2019;94(6):697-709.' },
+  ],
+};
+
+const ACR_INR_GUIDE: InfoPage = {
+  id: 'acr-inr-guide',
+  title: 'Elevated INR Quick Guide',
+  subtitle: 'Supratherapeutic warfarin management — tiered by INR level',
+  sections: [
+    {
+      heading: 'INR 3-5, No Bleeding',
+      body: '• **Hold warfarin**\n• Resume at **lower dose** when INR is therapeutic\n• No Vitamin K needed in most cases',
+    },
+    {
+      heading: 'INR 5-9, No Bleeding',
+      body: '• **Hold 1-2 doses** of warfarin\n• [Vitamin K](#/drug/vitamin-k/supratherapeutic inr) **1-2.5 mg PO or IV** if risk for bleeding\n• Resume at lower dose when INR is therapeutic\n• Small titrated doses are compatible with ongoing warfarin use',
+    },
+    {
+      heading: 'INR >9, No Bleeding',
+      body: '• **Hold 1-2 doses** of warfarin\n• [Vitamin K](#/drug/vitamin-k/supratherapeutic inr) **2.5-5 mg PO or IV**\n• **Repeat** Vitamin K in 24h if INR remains elevated\n• Resume at lower dose when INR is therapeutic',
+    },
+    {
+      heading: 'Urgent/Life-Threatening Bleeding (Any INR)',
+      body: '• [Vitamin K](#/drug/vitamin-k/warfarin reversal) **10 mg IV over 30 minutes** — ONE dose, ONE route\n• [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal) simultaneously (INR-based dosing)\n• For ICH: give PCC immediately WITHOUT waiting for INR\n• Follow INR q3-6h for ICH\n• **FFP cannot achieve INR <1.7** — don\'t try',
+    },
+    {
+      heading: 'Vitamin K Route Matters',
+      body: '**IV:** Preferred for emergent reversal. Infuse over 30 min. Anaphylactoid risk ~1/30,000 (rate-related — infuse slowly to minimize). This is NOT a true allergy (anaphylactoid, not anaphylactic). Fear of this reaction should NEVER delay treatment.\n\n**PO:** Acceptable for non-urgent supratherapeutic INR. Slower onset (12-24h). Variable bioavailability (~15%).\n\n**Subcutaneous:** AVOID — erratic absorption.\n**Intramuscular:** AVOID — hematoma risk in anticoagulated patient.',
+    },
+    {
+      heading: 'Cirrhosis + Elevated INR',
+      body: 'INR in cirrhosis does NOT reliably reflect bleeding risk — reflects rebalanced hemostasis.\n• A single dose of Vitamin K 10 mg IV may be tried to exclude concurrent vitamin K deficiency\n• No benefit to repeated dosing — studies show no difference between single and multiple doses\n• TEG is more accurate than INR for assessing coagulation in cirrhosis\n• Do NOT give FFP to "correct" the INR in cirrhosis — it improves the number but not clinical hemostasis',
+    },
+    {
+      heading: '10 mg IV Vitamin K — Consequences',
+      body: 'A full 10 mg IV dose will make the patient **warfarin-resistant for 1-2 weeks**.\n• Hepatic vitamin K reserves are small and turn over rapidly\n• Appropriate for emergent reversal where re-anticoagulation is not immediately planned\n• For patients who need to resume warfarin soon, use smaller PO doses (1-2.5 mg)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Holbrook A, et al. ACCP Evidence-based Anticoagulant Therapy Guidelines, 9th ed. Chest. 2012;141(2 Suppl):e152S-e184S.' },
+    { num: 2, text: 'Bekka E, Liakoni E. Anticoagulation reversal. Br J Clin Pharmacol. 2025;91(3):604-614.' },
+    { num: 3, text: 'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.' },
+  ],
+};
+
+const ACR_COAG_LABS: InfoPage = {
+  id: 'acr-coag-labs',
+  title: 'Coag Lab Interpreter',
+  subtitle: 'Which labs to order per anticoagulant agent — sensitivity and interpretation',
+  sections: [
+    {
+      heading: 'Warfarin',
+      body: '**Order:** INR\n**Interpretation:** INR directly reflects warfarin effect. Standard monitoring test.\n**Goal for reversal:** INR <1.4 (ICH per AHA/ASA 2022) or <1.5 (per ESO/EANS 2025 for INR ≥1.3)',
+    },
+    {
+      heading: 'Dabigatran (Direct Thrombin Inhibitor)',
+      body: '**Crude assay:** PTT\n• Normal PTT argues against clinically significant dabigatran effect, but doesn\'t completely exclude it\n\n**Better assay:** Thrombin Time (TT)\n• Excellent correlation with dabigatran levels\n• May be unmeasurably elevated at therapeutic concentrations\n• **Normal TT excludes clinically significant dabigatran effect** — this is the key test\n• TT >25 seconds: suggests significant dabigatran level\n• Availability varies — often not available STAT\n\n**Best assay:** Diluted thrombin time (dTT) or Ecarin clotting time (ECT) — quantitative',
+    },
+    {
+      heading: 'Factor Xa Inhibitors (Apixaban, Rivaroxaban, Edoxaban)',
+      body: '**Crude assay:** INR\n• Normal INR argues against significant drug level but doesn\'t entirely exclude it\n\n**Better assay:** Anti-Factor Xa level\n• Correlates well with DOAC drug level\n• **Normal anti-Xa excludes clinically relevant Xa inhibitors**\n• The anti-Xa assay optimized for LMWH detection may be more sensitive, but any anti-Xa assay is probably fine\n\n**Best assay:** Drug-specific level (apixaban level, rivaroxaban level) — most accurate but availability limited',
+    },
+    {
+      heading: 'Heparin (UFH)',
+      body: '**Order:** PTT or Anti-Xa level\n• PTT: traditional monitoring, widely available\n• Anti-Xa: more accurate, especially if PTT is unreliable (lupus anticoagulant, factor deficiencies)\n**After protamine:** Check PTT at 10-15 min to confirm reversal\n**Watch for:** Heparin rebound at 8-18h (protamine has shorter half-life than UFH)',
+    },
+    {
+      heading: 'LMWH (Enoxaparin)',
+      body: '**Order:** Anti-Xa level (calibrated for LMWH)\n• PTT is unreliable for LMWH monitoring\n• After protamine, don\'t expect normalization — protamine only neutralizes ~50% of anti-Xa activity\n**Peak levels:** 3-5h after subcutaneous injection',
+    },
+    {
+      heading: 'tPA / Thrombolytics',
+      body: '**Order:** INR, PTT, Fibrinogen, CBC\n• Don\'t wait for results before giving reversal to actively bleeding patients\n• Fibrinogen is the critical lab — target >150-200 mg/dL (>200 for ICH)\n• Consider TEG for comprehensive hemostasis assessment\n• Each 10 units cryoprecipitate raises fibrinogen ~50 mg/dL',
+    },
+    {
+      heading: 'Antiplatelet Agents',
+      body: '**Platelet Functional Assay (PFA):** More widely available, useful for aspirin effect\n**TEG with platelet mapping:** Superior for P2Y12 inhibitors (clopidogrel, prasugrel, ticagrelor)\n**In practice:** Decisions are often based on clinical history (which drug, when was last dose) rather than lab results, due to poor availability and turnaround times\n\n**Reversible vs irreversible:**\n• Irreversible (aspirin, clopidogrel, prasugrel): platelet function recovers when new platelets are made (~1 week)\n• Reversible (ticagrelor): platelet function recovers after 3-5 half-lives',
+    },
+    {
+      heading: 'Key Pitfall: INR Context Matters',
+      body: '**INR 2.5 on warfarin** = expected therapeutic anticoagulation\n**INR 2.5 on apixaban** = suggests HIGH bleeding risk (apixaban doesn\'t typically elevate INR this much)\n**INR 2.5 in cirrhosis** = likely rebalanced hemostasis, NOT necessarily increased bleeding risk\n\nThe same INR number means completely different things depending on the clinical context. Any study or guideline based predominantly on INR values is fundamentally flawed when applied across these different populations.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gosselin RC, Cuker A. Assessing DOACs in the Clinical Laboratory. Clin Lab Med. 2024;44(3):551-562.' },
+    { num: 2, text: 'Levy JH, et al. Reversal of DOACs: ISTH SSC Guidance. J Thromb Haemost. 2024;22(10):2889-2899.' },
+    { num: 3, text: 'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -8929,6 +9060,9 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'tb-hepatotox-guide': TB_HEPATOTOX_GUIDE,
   'tb-patient-info': TB_PATIENT_INFO,
   'tb-risk-factors': TB_RISK_FACTORS,
+  'acr-reversal-summary': ACR_REVERSAL_SUMMARY,
+  'acr-inr-guide': ACR_INR_GUIDE,
+  'acr-coag-labs': ACR_COAG_LABS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

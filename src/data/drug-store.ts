@@ -1255,7 +1255,7 @@ const DESMOPRESSIN: DrugEntry = {
   genericName: 'Desmopressin acetate',
   drugClass: 'Synthetic vasopressin analog (V2 agonist)',
   route: 'IV / Intranasal',
-  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release'],
+  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release', 'Antiplatelet reversal'],
   dosing: [
     {
       indication: 'DDAVP clamp (hyponatremia)',
@@ -1282,6 +1282,11 @@ const DESMOPRESSIN: DrugEntry = {
       indication: 'von Willebrand Disease — Desmopressin Responder',
       regimen: '0.3 mcg/kg IV (dilute in 50 mL NS, infuse over 20–30 min) OR intranasal 150 mcg (<50 kg) / 300 mcg (≥50 kg). Documented prior desmopressin response REQUIRED. Max 2–3 doses. Restrict fluids × 24h. CONTRAINDICATED in Type 2B vWD (worsens thrombocytopenia). Monitor electrolytes if repeated.',
       weightCalc: { dosePerKg: 0.3, unit: 'mcg', label: 'IV dose (vWD)' },
+    },
+    {
+      indication: 'Antiplatelet reversal — ICH or major bleeding',
+      regimen: '0.3-0.4 mcg/kg IV over 20-30 min. Front-line agent to improve platelet function in patients on antiplatelet agents (including P2Y12 inhibitors). AHA 2022: level 2B recommendation for ICH on antiplatelets. Stimulates vWF and factor VIII release from endothelium. Usually single dose — tachyphylaxis occurs (vWF stores deplete). Restrict fluids × 24h. Uremic platelet dysfunction: use 0.4 mcg/kg.',
+      weightCalc: { dosePerKg: 0.4, unit: 'mcg', label: 'Antiplatelet reversal' },
     },
   ],
   contraindications: [
@@ -5426,7 +5431,7 @@ const TRANEXAMIC_ACID: DrugEntry = {
   genericName: 'Tranexamic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV',
-  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct'],
+  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal', 'Antiplatelet reversal (adjunct)'],
   dosing: [
     {
       indication: 'ICH hemostasis (adjunct \u2014 within 3h of onset)',
@@ -5445,6 +5450,14 @@ const TRANEXAMIC_ACID: DrugEntry = {
       indication: 'Hemophilia/vWD — Mucosal Bleeding Adjunct',
       regimen: '10–15 mg/kg IV or PO q8–12h. Adjunct to factor replacement for mucosal bleeding (oral, epistaxis, post-dental). High oral fibrinolytic activity makes antifibrinolytics particularly useful here. CONTRAINDICATED with hematuria (risk of renal thrombi). Check UA before starting.',
       weightCalc: { dosePerKg: 15, unit: 'mg', label: 'Hemophilia mucosal (q8–12h)' },
+    },
+    {
+      indication: 'tPA / thrombolytic reversal — major bleeding',
+      regimen: '1 g IV load over 10 min, then 1 g IV infused over next 8 hours (125 mg/hr). Inhibits plasminogen→plasmin conversion, countering tPA-induced hyperfibrinolysis. Give immediately — do not wait for labs. Pair with cryoprecipitate (10 units) targeting fibrinogen >150-200 mg/dL. GFR 10-20 mL/min: reduce maintenance by 50%. Must infuse slowly — rapid bolus causes hypotension.',
+    },
+    {
+      indication: 'Antiplatelet reversal — adjunct (ICH or major bleeding)',
+      regimen: '1 g IV load over 10 min, then consider 1 g over 8 hours. By inhibiting plasmin, TXA may protect platelet GPIb receptors from degradation, potentially improving platelet function. Several CABG studies showed improved platelet function and reduced blood loss in patients on antiplatelet agents. Use as adjunct to DDAVP in refractory cases.',
     },
   ],
   contraindications: [
@@ -5475,11 +5488,15 @@ const VITAMIN_K: DrugEntry = {
   genericName: 'Phytonadione (Vitamin K1)',
   drugClass: 'Vitamin K (coagulation cofactor)',
   route: 'IV',
-  indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency'],
+  indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency', 'Supratherapeutic INR management'],
   dosing: [
     {
       indication: 'Warfarin reversal — ICH (always with PCC)',
       regimen: '10 mg IV slow push over 15\u201330 min. IV route preferred \u2014 oral takes 12\u201324h. Prevents INR rebound after PCC wears off (6\u20138h). Must co-administer with PCC for immediate reversal; Vitamin K alone is too slow.',
+    },
+    {
+      indication: 'Supratherapeutic INR — non-urgent (no active bleeding)',
+      regimen: 'INR 5-9 without bleeding: 1-2.5 mg PO or IV if risk for bleeding. INR >9 without bleeding: 2.5-5 mg PO or IV; repeat in 24h if INR remains elevated. Resume warfarin at lower dose when INR is therapeutic. Small titrated doses are compatible with ongoing warfarin use. A 10 mg IV dose will make resuming warfarin difficult for 1-2 weeks. Anaphylactoid reaction risk with IV is exceedingly rare (~1/30,000) and can be avoided by slow infusion.',
     },
   ],
   contraindications: [
@@ -6738,7 +6755,7 @@ const AMINOCAPROIC_ACID: DrugEntry = {
   genericName: 'Aminocaproic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV / PO',
-  indications: ['Bradykinin-mediated angioedema (adjunct)', 'Hemophilia/vWD — mucosal bleeding adjunct'],
+  indications: ['Bradykinin-mediated angioedema (adjunct)', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal (alternative to TXA)'],
   dosing: [
     {
       indication: 'Bradykinin-mediated angioedema',
@@ -6748,6 +6765,10 @@ const AMINOCAPROIC_ACID: DrugEntry = {
       indication: 'Hemophilia/vWD — Mucosal Bleeding Adjunct',
       regimen: '50–60 mg/kg IV or PO q6h (max 5 g/dose) × 5–7 days. Adjunct to factor replacement for mucosal bleeding. Particularly useful for oral bleeding and after oral surgery (high fibrinolytic activity in oral cavity). CONTRAINDICATED with hematuria (risk of renal thrombi). Check UA before starting.',
       weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 5000, label: 'Hemophilia mucosal (q6h)' },
+    },
+    {
+      indication: 'tPA / thrombolytic reversal — alternative to TXA',
+      regimen: '4-5 g IV load over 1 hour, then 1 g/hour continuous infusion. Alternative to TXA for post-thrombolytic bleeding — choose whichever agent is faster to obtain. Same mechanism (plasminogen inhibition) but TXA is 10× more potent. Pair with cryoprecipitate targeting fibrinogen >150-200 mg/dL. Reduce maintenance in severe renal failure (no published scheme).',
     },
   ],
   contraindications: ['Active intravascular clotting (DIC)', 'Upper urinary tract bleeding (risk of ureteral clot obstruction)'],
@@ -6869,11 +6890,15 @@ const FFP: DrugEntry = {
   genericName: 'Fresh frozen plasma',
   drugClass: 'Blood Product',
   route: 'IV',
-  indications: ['Bradykinin-mediated angioedema (second-line)', 'Coagulopathy reversal'],
+  indications: ['Bradykinin-mediated angioedema (second-line)', 'Coagulopathy reversal', 'Warfarin reversal (if PCC unavailable)'],
   dosing: [
     {
       indication: 'Angioedema (second-line)',
       regimen: '2 units IV initially. May give additional 2 units if no response. Each unit is 200-250 mL. Contains C1-INH, ACE, and other bradykinin-metabolizing enzymes. Use only if targeted therapies (C1-INH concentrate, icatibant, TXA) are unavailable. Retrospective cohort: FFP reduced intubation risk in non-HAE angioedema patients.',
+    },
+    {
+      indication: 'Warfarin reversal (if PCC unavailable)',
+      regimen: 'INR 2-3.9: 10 mL/kg. INR 4-6: 12-15 mL/kg. INR >6: 15-20 mL/kg. Each unit ~250 mL. 4 units increase clotting factors ~10%. PCC is strongly preferred over FFP (faster, smaller volume, no TRALI). FFP contains factors at normal plasma concentration — impossible to achieve INR below ~1.7 (would require infinite volume). Do NOT give FFP to patients with INR ≤1.7. Always co-administer Vitamin K 10 mg IV.',
     },
   ],
   contraindications: ['IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)', 'Volume overload (relative \u2014 consider volume of 2-4 units)'],
@@ -6963,7 +6988,7 @@ const ACTIVATED_CHARCOAL: DrugEntry = {
   genericName: 'Activated charcoal',
   drugClass: 'GI Decontaminant / Adsorbent',
   route: 'PO',
-  indications: ['GI decontamination (acetaminophen overdose)', 'GI decontamination (general toxicology)', 'GI decontamination — salicylate toxicity', 'TCA overdose', 'Drug overdose / poisoning'],
+  indications: ['GI decontamination (acetaminophen overdose)', 'GI decontamination (general toxicology)', 'GI decontamination — salicylate toxicity', 'TCA overdose', 'Drug overdose / poisoning', 'DOAC decontamination'],
   dosing: [
     {
       indication: 'Salicylate Toxicity',
@@ -6984,6 +7009,10 @@ const ACTIVATED_CHARCOAL: DrugEntry = {
       indication: 'TCA Overdose — GI Decontamination',
       regimen: '1 g/kg PO or via NG tube (max 50g adult, 25g pediatric). Administer within 1-2 hours of ingestion if airway is protected. Anticholinergic effects of TCAs delay gastric emptying — may be beneficial even at 2-4 hours post-ingestion. Mix with water or sorbitol to improve palatability. Do NOT induce emesis.',
       weightCalc: { dosePerKg: 1, unit: 'g', maxDose: 50 },
+    },
+    {
+      indication: 'DOAC decontamination',
+      regimen: '50 g PO if DOAC ingested within <2 hours. May reduce absorption of dabigatran, apixaban, rivaroxaban, and edoxaban. Ensure airway is protected. Most useful for recent intentional overdose or accidental extra dose.',
     },
   ],
   contraindications: [

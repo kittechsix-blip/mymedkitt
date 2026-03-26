@@ -5782,6 +5782,234 @@ const TB_DURATION_CALCULATOR: CalculatorDefinition = {
   citations: ['Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.', 'CDC. Interim guidance: 4-month rifapentine-moxifloxacin regimen. MMWR. 2022.'],
 };
 
+// -------------------------------------------------------------------
+// Anticoagulant Reversal Calculators
+// -------------------------------------------------------------------
+
+const PCC_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'pcc-dosing',
+  title: 'PCC Dosing Calculator',
+  subtitle: 'INR-based 4-Factor PCC dosing for warfarin and Xa inhibitor reversal',
+  description: 'Calculates weight-based PCC (Kcentra) dose by INR tier for warfarin reversal, or fixed/weight-based dosing for factor Xa inhibitor reversal. Source: AHA/ASA 2022, ESO/EANS 2025, IBCC 2025.',
+  fields: [
+    {
+      name: 'weight',
+      label: 'Weight',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'kg',
+    },
+    {
+      name: 'indication',
+      label: 'Indication',
+      type: 'select',
+      points: 0,
+      valueIsPoints: true,
+      selectOptions: [
+        { label: 'Warfarin reversal', points: 1 },
+        { label: 'Xa inhibitor reversal (CNS bleeding)', points: 2 },
+        { label: 'Xa inhibitor reversal (non-CNS)', points: 3 },
+      ],
+    },
+    {
+      name: 'inr',
+      label: 'INR (for warfarin)',
+      type: 'select',
+      points: 0,
+      valueIsPoints: true,
+      selectOptions: [
+        { label: 'INR 1.3-2', points: 15 },
+        { label: 'INR 2-4', points: 25 },
+        { label: 'INR 4-6', points: 35 },
+        { label: 'INR >6', points: 50 },
+        { label: 'Unknown / Not applicable', points: 0 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Always co-administer Vitamin K 10 mg IV for warfarin reversal. PCC effect lasts only 6-8 hours.',
+  citations: [
+    'Greenberg SM, et al. 2022 AHA/ASA Guideline for Spontaneous ICH. Stroke. 2022;53(7):e282-e361.',
+    'ESO/EANS 2025 Guideline on Stroke due to Spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086.',
+    'Cuker A, et al. Reversal of DOACs: Anticoagulation Forum Guidance. Am J Hematol. 2019;94(6):697-709.',
+    'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const indication = values['indication'] || 0;
+    const inrTier = values['inr'] || 0;
+
+    if (weight <= 0) {
+      return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg to calculate PCC dose.', colorVar: '--color-text-muted' };
+    }
+    if (indication === 0) {
+      return { value: '--', label: 'Select indication', description: 'Select warfarin or Xa inhibitor reversal.', colorVar: '--color-text-muted' };
+    }
+
+    let dose = 0;
+    let maxDose = 5000;
+    let label = '';
+    let description = '';
+
+    if (indication === 1) {
+      // Warfarin reversal — INR-based
+      if (inrTier === 0) {
+        return { value: '--', label: 'Select INR', description: 'Select INR tier for warfarin reversal dosing.', colorVar: '--color-text-muted' };
+      }
+      const unitsPerKg = inrTier; // 15, 25, 35, or 50
+      dose = Math.round(weight * unitsPerKg);
+      const maxByTier: Record<number, number> = { 15: 1500, 25: 2500, 35: 3500, 50: 5000 };
+      maxDose = maxByTier[unitsPerKg] || 5000;
+      if (dose > maxDose) dose = maxDose;
+      const tierLabel: Record<number, string> = { 15: 'INR 1.3-2', 25: 'INR 2-4', 35: 'INR 4-6', 50: 'INR >6' };
+      label = `Warfarin Reversal (${tierLabel[unitsPerKg]})`;
+      description = `${unitsPerKg} units/kg × ${weight} kg = ${Math.round(weight * unitsPerKg)} units${dose < Math.round(weight * unitsPerKg) ? ` (capped at ${maxDose})` : ''}\n\nCo-administer: Vitamin K 10 mg IV over 30 min\nOnset: 10-15 min | Duration: 6-8h\nMonitor INR at 30 min, 6h, 24h`;
+    } else if (indication === 2) {
+      // Xa inhibitor — CNS bleeding
+      dose = Math.round(weight * 50);
+      if (dose > 5000) dose = 5000;
+      label = 'Xa Inhibitor Reversal (CNS)';
+      description = `50 units/kg × ${weight} kg = ${Math.round(weight * 50)} units${dose < Math.round(weight * 50) ? ' (capped at 5,000)' : ''}\n\nPCC will NOT change anti-Xa level\nMonitor: INR after PCC, then q6h\nThese DOACs are NOT dialyzable`;
+    } else {
+      // Xa inhibitor — non-CNS
+      const weightBased = Math.round(weight * 25);
+      const capped = weightBased > 2500 ? 2500 : weightBased;
+      dose = 2000; // fixed dose has best evidence
+      label = 'Xa Inhibitor Reversal (Non-CNS)';
+      description = `Fixed dose: 2,000 units (simplest, best evidence)\nOR weight-based: 25 u/kg × ${weight} kg = ${weightBased} units${capped < weightBased ? ' (max 2,500)' : ''}\n\nMay repeat if hemostasis not achieved\nPCC will NOT change anti-Xa level`;
+    }
+
+    return {
+      value: `${dose.toLocaleString()} units`,
+      label,
+      description,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const PROTAMINE_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'protamine-dosing',
+  title: 'Protamine Dosing Calculator',
+  subtitle: 'Time-based protamine dosing for UFH and LMWH reversal',
+  description: 'Calculates protamine dose based on heparin type, dose given, and time elapsed since last administration. Source: IBCC 2025, NCC 2016, Wallisch 2023.',
+  fields: [
+    {
+      name: 'heparin-type',
+      label: 'Heparin Type',
+      type: 'select',
+      points: 0,
+      valueIsPoints: true,
+      selectOptions: [
+        { label: 'UFH — Bolus', points: 1 },
+        { label: 'UFH — Infusion', points: 2 },
+        { label: 'Enoxaparin (LMWH)', points: 3 },
+      ],
+    },
+    {
+      name: 'heparin-dose',
+      label: 'Heparin dose given',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'units (UFH) or mg (enoxaparin)',
+    },
+    {
+      name: 'time-since',
+      label: 'Time since last dose',
+      type: 'select',
+      points: 0,
+      valueIsPoints: true,
+      selectOptions: [
+        { label: '< 30 minutes', points: 100 },
+        { label: '30-60 minutes', points: 63 },
+        { label: '1-2 hours', points: 44 },
+        { label: '2-6 hours', points: 31 },
+        { label: '6-8 hours', points: 50 },
+        { label: '8-12 hours', points: 50 },
+        { label: '> 12 hours', points: 0 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Max single dose: 50 mg. Give slowly over 15 minutes. Excess protamine causes paradoxical anticoagulation.',
+  citations: [
+    'Frontera JA, et al. Guideline for Reversal of Antithrombotics in ICH. Neurocrit Care. 2016;24(1):6-46.',
+    'Wallisch WJ, et al. Coagulopathy and Emergent Reversal. Anesthesiol Clin. 2023;41(1):249-261.',
+    'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hType = values['heparin-type'] || 0;
+    const hDose = values['heparin-dose'] || 0;
+    const timeSince = values['time-since'] || 0;
+
+    if (hType === 0) {
+      return { value: '--', label: 'Select heparin type', description: 'Choose UFH bolus, UFH infusion, or enoxaparin.', colorVar: '--color-text-muted' };
+    }
+    if (hDose <= 0) {
+      return { value: '--', label: 'Enter dose', description: 'Enter the heparin dose given (units for UFH, mg for enoxaparin).', colorVar: '--color-text-muted' };
+    }
+    if (timeSince === 0 && hType !== 2) {
+      return { value: '0 mg', label: 'Protamine unlikely to help', description: '>12 hours since last dose. Drug has likely been cleared. Protamine is unlikely to provide benefit.', colorVar: '--color-text-muted' };
+    }
+
+    let dose = 0;
+    let label = '';
+    let description = '';
+
+    if (hType === 1) {
+      // UFH bolus — ratio depends on time
+      const ratioMap: Record<number, { ratio: number; desc: string }> = {
+        100: { ratio: 1.0, desc: '<30 min: 1 mg per 100 units' },
+        63: { ratio: 0.625, desc: '30-60 min: 0.5-0.75 mg per 100 units' },
+        44: { ratio: 0.4375, desc: '1-2h: 0.375-0.5 mg per 100 units' },
+        31: { ratio: 0.3125, desc: '2-6h: 0.25-0.375 mg per 100 units' },
+      };
+      const entry = ratioMap[timeSince];
+      if (!entry) {
+        return { value: '0 mg', label: 'Consider clinical reassessment', description: '>6 hours since bolus. Heparin effect has largely dissipated. Reassess clinically.', colorVar: '--color-text-muted' };
+      }
+      dose = Math.round((hDose / 100) * entry.ratio * 10) / 10;
+      if (dose > 50) dose = 50;
+      label = 'UFH Bolus Reversal';
+      description = `${entry.desc}\n${hDose} units heparin × ${entry.ratio} mg/100u = ${Math.round((hDose / 100) * entry.ratio * 10) / 10} mg${dose === 50 ? ' → capped at 50 mg' : ''}`;
+    } else if (hType === 2) {
+      // UFH infusion — use last 2 hours of infusion
+      dose = Math.round((hDose / 100) * 10) / 10;
+      if (dose > 50) dose = 50;
+      label = 'UFH Infusion Reversal';
+      description = `Enter the total UFH given over last 2 hours (rate × 2).\n1 mg protamine per 100 units = ${Math.round((hDose / 100) * 10) / 10} mg${dose === 50 ? ' → capped at 50 mg' : ''}`;
+    } else {
+      // Enoxaparin
+      const timeMap: Record<number, { ratio: number; desc: string }> = {
+        100: { ratio: 1.0, desc: '<8h: 1 mg per 1 mg enoxaparin' },
+        63: { ratio: 1.0, desc: '<8h: 1 mg per 1 mg enoxaparin' },
+        44: { ratio: 1.0, desc: '<8h: 1 mg per 1 mg enoxaparin' },
+        31: { ratio: 1.0, desc: '<8h: 1 mg per 1 mg enoxaparin' },
+        50: { ratio: 0.5, desc: '8-12h: 0.5 mg per 1 mg enoxaparin' },
+      };
+      const entry = timeMap[timeSince];
+      if (!entry) {
+        return { value: '0 mg', label: 'Protamine unlikely to help', description: '>12 hours since enoxaparin dose. Drug has largely been cleared. Protamine is unlikely to provide meaningful reversal.', colorVar: '--color-text-muted' };
+      }
+      dose = Math.round(hDose * entry.ratio * 10) / 10;
+      if (dose > 50) dose = 50;
+      label = 'Enoxaparin Reversal (Partial)';
+      description = `${entry.desc}\n${hDose} mg enoxaparin × ${entry.ratio} = ${Math.round(hDose * entry.ratio * 10) / 10} mg${dose === 50 ? ' → capped at 50 mg' : ''}\n\nProtamine only reverses ~50% of enoxaparin.\nMay re-dose 0.5 mg/mg if bleeding persists (max 25 mg).`;
+    }
+
+    description += '\n\nGive slowly over 15 min. Monitor PTT at 10-15 min, 2h, q4h × 24h.';
+
+    return {
+      value: `${dose} mg`,
+      label,
+      description,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -5846,6 +6074,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'tb-drug-card': TB_DRUG_CARD_CALCULATOR,
   'tb-interaction': TB_INTERACTION_CALCULATOR,
   'tb-duration': TB_DURATION_CALCULATOR,
+  'pcc-dosing': PCC_DOSING_CALCULATOR,
+  'protamine-dosing': PROTAMINE_DOSING_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

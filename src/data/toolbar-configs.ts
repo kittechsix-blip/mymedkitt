@@ -274,6 +274,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'inhibitors', label: 'Inhibitors', icon: '⚠️', action: 'overlay', target: 'hemo-inhibitor-guide' },
     { id: 'vwd', label: 'vWD', icon: '🔀', action: 'jump', target: 'hemo-vwd' },
   ],
+  'anticoag-reversal': [
+    { id: 'acr-pcc', label: 'PCC Dose', icon: '🧮', action: 'calculator', target: 'pcc-dosing' },
+    { id: 'acr-protamine', label: 'Protamine', icon: '🧮', action: 'calculator', target: 'protamine-dosing' },
+    { id: 'acr-quick-ref', label: 'Quick Ref', icon: '📋', action: 'overlay', target: 'acr-reversal-summary' },
+    { id: 'acr-inr', label: 'INR Guide', icon: '📊', action: 'overlay', target: 'acr-inr-guide' },
+    { id: 'acr-labs', label: 'Coag Labs', icon: '🔬', action: 'overlay', target: 'acr-coag-labs' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

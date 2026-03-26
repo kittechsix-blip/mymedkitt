@@ -331,6 +331,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hemophilia.js');
       return { nodes: m.HEMOPHILIA_NODES, entryNodeId: 'hemo-start', categoryId: 'heme-onc', moduleLabels: m.HEMOPHILIA_MODULE_LABELS, citations: m.HEMOPHILIA_CITATIONS };
     },
+    'anticoag-reversal': async () => {
+      const m = await import('../data/trees/anticoag-reversal.js');
+      return { nodes: m.ANTICOAG_REVERSAL_NODES, entryNodeId: 'acr-start', categoryId: 'heme-onc', moduleLabels: m.ANTICOAG_REVERSAL_MODULE_LABELS, citations: m.ANTICOAG_REVERSAL_CITATIONS };
+    },
     'tca-toxidrome': async () => {
       const m = await import('../data/trees/tca-toxidrome.js');
       return { nodes: m.TCA_TOXIDROME_NODES, entryNodeId: 'tca-start', categoryId: 'toxicology', moduleLabels: m.TCA_TOXIDROME_MODULE_LABELS, citations: m.TCA_TOXIDROME_CITATIONS };
