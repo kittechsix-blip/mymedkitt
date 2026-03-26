@@ -8730,6 +8730,464 @@ ${factors.length > 0 ? factors.map(f => `• ${f}`).join('\n') : '• None — f
         };
     },
 };
+// -------------------------------------------------------------------
+// CRAO — Treatment Window Calculator
+// -------------------------------------------------------------------
+const CRAO_WINDOW_CALCULATOR = {
+    id: 'crao-window',
+    title: 'tPA Window',
+    subtitle: 'CRAO Treatment Timeline',
+    description: 'Assess treatment window for CRAO based on symptom onset time.',
+    fields: [
+        {
+            name: 'onset-time',
+            label: 'Time Since Symptom Onset',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 90 minutes', points: 0 },
+                { label: '90 min - 4.5 hours', points: 1 },
+                { label: '4.5 - 6 hours', points: 2 },
+                { label: '6 - 12 hours', points: 3 },
+                { label: '> 12 hours', points: 4 },
+                { label: 'Unknown / Wake-up', points: 5 },
+            ],
+        },
+        { name: 'gca-suspected', label: 'GCA suspected (age ≥50 with symptoms)', type: 'toggle', points: 0 },
+        { name: 'tpa-contraindication', label: 'tPA contraindication present', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Irreversible retinal damage begins at 90-100 minutes. IV tPA window is 4.5 hours (same as stroke).',
+    citations: [
+        'AHA Scientific Statement. Management of CRAO. Stroke. 2021.',
+        'StatPearls. Central Retinal Artery Occlusion. 2024.',
+    ],
+    computeResult: (values) => {
+        const onset = values['onset-time'] || 0;
+        const gca = values['gca-suspected'] || 0;
+        const contraindicated = values['tpa-contraindication'] || 0;
+        if (gca) {
+            return {
+                value: 'STEROIDS',
+                label: 'GCA Suspected - Give Steroids',
+                description: `**⚠️ GCA-CRAO: Do NOT give tPA**
+
+**Arteritic CRAO requires steroids, not thrombolytics.**
+
+**Treatment:**
+• IV Methylprednisolone 1000 mg daily × 3-5 days
+• Then oral prednisone 1 mg/kg/day
+
+**Why urgent?**
+• Fellow eye at risk (25-50% bilateral)
+• Steroids prevent fellow eye involvement
+• Do NOT wait for biopsy
+
+**Consults:** Rheumatology, Ophthalmology`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (onset === 0) {
+            return {
+                value: '< 90 MIN',
+                label: 'Optimal Treatment Window',
+                description: `**Best chance for visual recovery.**
+
+**Irreversible damage begins at 90-100 minutes.**
+
+**Actions:**
+1. Activate stroke protocol NOW
+2. CT head to rule out hemorrhage
+3. Labs including GCA screen if ≥50
+4. IV tPA if no contraindications
+
+**IV tPA:**
+• 0.9 mg/kg (max 90 mg)
+• 10% bolus, 90% over 1 hour
+
+**NNT = 4** for functional visual recovery.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (onset === 1) {
+            if (contraindicated) {
+                return {
+                    value: 'NO tPA',
+                    label: 'Within Window But Contraindicated',
+                    description: `**Within tPA window but contraindicated.**
+
+**Alternative considerations:**
+• HBO if available (may help within 12h)
+• IA tPA at interventional center (extended window)
+
+**Still required:**
+• Admit for stroke workup
+• GCA evaluation if ≥50
+• Embolic source workup
+• Secondary prevention
+
+**Do NOT use traditional treatments:**
+• Ocular massage - no benefit
+• Paracentesis - no benefit
+• IOP drops - no benefit`,
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: '4.5 HR',
+                label: 'Within tPA Treatment Window',
+                description: `**Within IV tPA window (≤4.5 hours).**
+
+**Actions:**
+1. Activate stroke protocol
+2. CT head (rule out hemorrhage)
+3. Confirm GCA ruled out
+4. Administer IV tPA
+
+**IV tPA Dosing:**
+• 0.9 mg/kg (max 90 mg)
+• 10% as bolus over 1 min
+• 90% as infusion over 60 min
+
+**Expected outcome:**
+• 50% recovery rate
+• NNT = 4 for functional improvement
+
+**Post-tPA:** Standard stroke monitoring.`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (onset === 2) {
+            return {
+                value: '4.5-6 HR',
+                label: 'Extended Window',
+                description: `**Outside IV tPA window (>4.5 hours).**
+
+**IV tPA NOT indicated** - no benefit shown >4.5 hours.
+
+**Possible options:**
+• **IA tPA** at interventional center (some extend to 6h)
+• **HBO** if available and <12 hours
+
+**Primary focus:**
+1. Admit for stroke workup
+2. GCA evaluation if ≥50
+3. Embolic source workup
+4. Secondary prevention
+
+**Do NOT use:** ocular massage, paracentesis, IOP drops (no benefit).`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (onset === 3) {
+            return {
+                value: '6-12 HR',
+                label: 'Late Presentation',
+                description: `**Late presentation (6-12 hours).**
+
+**Reperfusion therapy unlikely to help.**
+
+**Consider:**
+• HBO if available (mixed evidence, some benefit <12h)
+
+**Focus on:**
+1. Admit for stroke workup
+2. 20-32% have concurrent brain infarcts
+3. High stroke/MI risk in coming days
+4. Secondary prevention critical
+
+**Required workup:**
+• MRI brain with DWI
+• Carotid imaging
+• Echocardiogram
+• Telemetry/Holter`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (onset === 4) {
+            return {
+                value: '> 12 HR',
+                label: 'Beyond Treatment Window',
+                description: `**Presentation >12 hours.**
+
+**No reperfusion benefit expected.**
+
+**Focus entirely on:**
+
+**1. Stroke Prevention:**
+• 30%+ have concurrent cerebral ischemia
+• Stroke risk highest days 1-7
+
+**2. Required Workup:**
+• MRI brain (20-32% have infarcts)
+• Carotid ultrasound/MRA
+• Echocardiogram
+• Telemetry
+
+**3. Secondary Prevention:**
+• Aspirin or anticoagulation (if AFib)
+• High-intensity statin
+• BP control
+• Risk factor modification
+
+**Admit all patients.**`,
+                colorVar: '--color-primary',
+            };
+        }
+        // Unknown onset
+        return {
+            value: 'UNKNOWN',
+            label: 'Unknown Onset Time',
+            description: `**Unknown symptom onset (wake-up CRAO).**
+
+**Use "last known well" time.**
+
+**If last known well was:**
+• <4.5 hours ago → Consider tPA candidate
+• >4.5 hours ago → Outside window
+
+**If truly unknown:**
+• tPA generally not given
+• Admit for stroke workup
+• GCA evaluation if ≥50
+• Full embolic source workup
+
+**Some centers:** May use MRI-based selection for extended windows (research only).`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// CRAO — Fundus Findings Calculator
+// -------------------------------------------------------------------
+const CRAO_FUNDUS_CALCULATOR = {
+    id: 'crao-fundus',
+    title: 'Fundus Findings',
+    subtitle: 'CRAO Diagnostic Features',
+    description: 'Assess fundoscopic findings consistent with CRAO.',
+    fields: [
+        { name: 'cherry-red', label: 'Cherry-red spot present', type: 'toggle', points: 0 },
+        { name: 'pale-retina', label: 'Pale/white retina', type: 'toggle', points: 0 },
+        { name: 'boxcarring', label: 'Boxcarring (cattle-trucking) in arteries', type: 'toggle', points: 0 },
+        { name: 'attenuated', label: 'Attenuated arteries (thread-like)', type: 'toggle', points: 0 },
+        { name: 'embolus', label: 'Visible embolus', type: 'toggle', points: 0 },
+        { name: 'apd', label: 'APD (Marcus Gunn pupil) present', type: 'toggle', points: 0 },
+        { name: 'pain', label: 'Eye pain present', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Cherry-red spot present in 90% of acute CRAO. APD is 92-98% sensitive.',
+    citations: [
+        'EyeWiki. Retinal Artery Occlusion. 2024.',
+        'StatPearls. Central Retinal Artery Occlusion. 2024.',
+    ],
+    computeResult: (values) => {
+        const cherryRed = values['cherry-red'] || 0;
+        const paleRetina = values['pale-retina'] || 0;
+        const boxcarring = values['boxcarring'] || 0;
+        const attenuated = values['attenuated'] || 0;
+        const embolus = values['embolus'] || 0;
+        const apd = values['apd'] || 0;
+        const pain = values['pain'] || 0;
+        const findings = [];
+        if (cherryRed)
+            findings.push('Cherry-red spot (90% of CRAO)');
+        if (paleRetina)
+            findings.push('Pale/white retina (58%)');
+        if (boxcarring)
+            findings.push('Boxcarring/cattle-trucking (19%)');
+        if (attenuated)
+            findings.push('Attenuated arteries (32%)');
+        if (embolus)
+            findings.push('Visible embolus');
+        if (apd)
+            findings.push('APD present (92-98% sensitive)');
+        if (pain) {
+            return {
+                value: 'ATYPICAL',
+                label: 'Pain Present - Consider Alternatives',
+                description: `**⚠️ CRAO is typically PAINLESS.**
+
+**Pain suggests alternative diagnosis:**
+
+| Condition | Key Features |
+|-----------|--------------|
+| **GCA/AION** | Age ≥50, headache, jaw claudication |
+| **Optic neuritis** | Young, painful EOM, MS history |
+| **Acute glaucoma** | Rock-hard globe, halos, N/V |
+| **Orbital pathology** | Proptosis, injection |
+
+**If suspecting GCA:**
+• Check ESR, CRP, platelets
+• Consider empiric steroids
+• Temporal artery exam
+
+**Still evaluate for CRAO features but consider broader differential.**`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (apd && cherryRed) {
+            return {
+                value: 'CLASSIC',
+                label: 'Classic CRAO Presentation',
+                description: `**Findings consistent with CRAO:**
+
+${findings.map(f => `✓ ${f}`).join('\n')}
+
+**Cherry-red spot explained:**
+The fovea has no inner retinal layers. You see the red choroid through the thin fovea, surrounded by pale, edematous, ischemic inner retina.
+
+${embolus ? `\n**Visible embolus type:**
+• Orange/refractile = Cholesterol (Hollenhorst) — carotid source
+• White = Calcific — cardiac valve source
+• Dull white = Platelet-fibrin — atherosclerotic plaque` : ''}
+
+**Proceed with:**
+1. Stroke protocol activation
+2. Treatment window assessment
+3. GCA evaluation if ≥50`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (apd && (paleRetina || attenuated || boxcarring)) {
+            return {
+                value: 'LIKELY',
+                label: 'Likely CRAO',
+                description: `**Findings suggestive of CRAO:**
+
+${findings.map(f => `✓ ${f}`).join('\n')}
+
+**Note:** Cherry-red spot may not be visible early or may be subtle.
+
+**APD present = significant asymmetric retinal/optic nerve disease.**
+
+**If clinical picture fits:**
+• Sudden, painless, monocular vision loss
+• APD present
+• +/- other fundus findings
+
+**Proceed with CRAO workup and treatment.**`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (!apd && findings.length > 0) {
+            return {
+                value: 'UNCERTAIN',
+                label: 'APD Absent - Reconsider',
+                description: `**APD absent with "complete" vision loss is atypical.**
+
+**Fundus findings present:**
+${findings.map(f => `• ${f}`).join('\n')}
+
+**If no APD:**
+• Reconsider diagnosis
+• May be incomplete CRAO
+• May be BRAO (branch occlusion)
+• May be non-organic visual loss
+
+**Still possible CRAO if:**
+• Bilateral symmetric disease (rare)
+• Very recent onset (APD may develop)
+• Technical difficulty with pupil exam
+
+**Consider ophthalmology consultation for diagnosis confirmation.**`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Assess Fundus Findings',
+            description: 'Select the fundoscopic findings present to assess diagnostic certainty for CRAO.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// CRAO — Disposition Calculator
+// -------------------------------------------------------------------
+const CRAO_DISPO_CALCULATOR = {
+    id: 'crao-dispo',
+    title: 'Disposition Tool',
+    subtitle: 'CRAO Admission Checklist',
+    description: 'Disposition and required workup for CRAO patients.',
+    fields: [
+        { name: 'gca', label: 'GCA confirmed or highly suspected', type: 'toggle', points: 0 },
+        { name: 'tpa', label: 'Received tPA', type: 'toggle', points: 0 },
+        { name: 'concurrent-stroke', label: 'Concurrent cerebral ischemia on imaging', type: 'toggle', points: 0 },
+        { name: 'afib', label: 'AFib identified', type: 'toggle', points: 0 },
+        { name: 'carotid', label: 'Significant carotid stenosis (>50%)', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'ALL CRAO patients should be admitted for stroke workup. Outpatient management is not appropriate.',
+    citations: [
+        'AHA Scientific Statement. Management of CRAO. Stroke. 2021.',
+        'StatPearls. Central Retinal Artery Occlusion. 2024.',
+    ],
+    computeResult: (values) => {
+        const gca = values['gca'] || 0;
+        const tpa = values['tpa'] || 0;
+        const concurrentStroke = values['concurrent-stroke'] || 0;
+        const afib = values['afib'] || 0;
+        const carotid = values['carotid'] || 0;
+        let disposition = `**ALL CRAO Patients Require Admission.**
+
+**Rationale:**
+• 20-32% have concurrent cerebral infarcts
+• Stroke/MI risk peaks days 1-7
+• Comprehensive embolic workup needed
+
+**Admission Service:** Neurology/Stroke (primary)
+
+**Required Consults:**
+• Ophthalmology (diagnosis, follow-up)`;
+        if (gca) {
+            disposition += `
+• **Rheumatology** (GCA management)`;
+        }
+        if (afib || carotid) {
+            disposition += `
+• **Cardiology** (AFib/source evaluation)`;
+        }
+        if (carotid) {
+            disposition += `
+• **Vascular Surgery** (CEA consideration if >70%)`;
+        }
+        disposition += `\n\n**Required Workup:**`;
+        const workup = [];
+        if (!concurrentStroke)
+            workup.push('☐ MRI brain with DWI');
+        else
+            workup.push('☑ MRI brain - concurrent infarcts found');
+        if (!carotid)
+            workup.push('☐ Carotid ultrasound/MRA');
+        else
+            workup.push('☑ Carotid imaging - stenosis found');
+        workup.push('☐ Echocardiogram (TTE, consider TEE)');
+        if (!afib)
+            workup.push('☐ Telemetry/Holter for AFib');
+        else
+            workup.push('☑ AFib identified');
+        workup.push('☐ Lipid panel, HbA1c');
+        disposition += '\n' + workup.join('\n');
+        disposition += `\n\n**Secondary Prevention:**
+• Aspirin 81-325mg daily (or anticoagulation if AFib)
+• High-intensity statin
+• BP goal <130/80
+• Smoking cessation
+• Diabetes management`;
+        if (tpa) {
+            disposition += `\n\n**Post-tPA Monitoring:**
+• Neuro checks q15min × 2h, q30min × 6h, q1h × 16h
+• BP <180/105
+• No antiplatelet/anticoagulant × 24h`;
+        }
+        return {
+            value: 'ADMIT',
+            label: 'Admission Required',
+            description: disposition,
+            colorVar: '--color-danger',
+        };
+    },
+};
 const CALCULATORS = {
     'cows': COWS_CALCULATOR,
     'rass': RASS_CALCULATOR,
@@ -8817,6 +9275,9 @@ const CALCULATORS = {
     'orbital-chandler': ORBITAL_CHANDLER_CALCULATOR,
     'orbital-abx': ORBITAL_ABX_CALCULATOR,
     'orbital-surgery': ORBITAL_SURGERY_CALCULATOR,
+    'crao-window': CRAO_WINDOW_CALCULATOR,
+    'crao-fundus': CRAO_FUNDUS_CALCULATOR,
+    'crao-dispo': CRAO_DISPO_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

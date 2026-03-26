@@ -306,6 +306,11 @@ const TOOLBAR_CONFIGS = {
         { id: 'orbital-abx', label: 'Antibiotics', icon: '💊', action: 'calculator', target: 'orbital-abx' },
         { id: 'orbital-surgery', label: 'Surgery?', icon: '🔪', action: 'calculator', target: 'orbital-surgery' },
     ],
+    'crao': [
+        { id: 'crao-window', label: 'tPA Window', icon: '⏱️', action: 'calculator', target: 'crao-window' },
+        { id: 'crao-fundus', label: 'Fundus', icon: '👁️', action: 'calculator', target: 'crao-fundus' },
+        { id: 'crao-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'crao-dispo' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

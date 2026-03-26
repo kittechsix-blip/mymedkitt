@@ -387,6 +387,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/orbital-cellulitis.js');
       return { nodes: m.ORBITAL_CELLULITIS_NODES, entryNodeId: 'orbital-start', categoryId: 'ophthalmology', moduleLabels: m.ORBITAL_CELLULITIS_MODULE_LABELS, citations: m.ORBITAL_CELLULITIS_CITATIONS };
     },
+    'crao': async () => {
+      const m = await import('../data/trees/crao.js');
+      return { nodes: m.CRAO_NODES, entryNodeId: 'crao-start', categoryId: 'ophthalmology', moduleLabels: m.CRAO_MODULE_LABELS, citations: m.CRAO_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

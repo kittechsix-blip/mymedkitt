@@ -133,6 +133,7 @@ const TREE_REGISTRY = {
   'aacg':                 { prefix: 'AACG',                  entryNodeId: 'aacg-start',     categoryId: 'ophthalmology' },
   'chemical-burn':        { prefix: 'CHEMICAL_BURN',         entryNodeId: 'chemburn-start', categoryId: 'ophthalmology' },
   'orbital-cellulitis':   { prefix: 'ORBITAL_CELLULITIS',    entryNodeId: 'orbital-start',  categoryId: 'ophthalmology' },
+  'crao':                 { prefix: 'CRAO',                   entryNodeId: 'crao-start',     categoryId: 'ophthalmology' },
 };
 
 const CROSS_LISTINGS = {
