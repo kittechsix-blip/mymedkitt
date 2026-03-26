@@ -261,6 +261,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'aud', label: 'AUD Meds', icon: '\uD83D\uDC8A', action: 'jump', target: 'aw-aud-screen' },
     { id: 'timing', label: 'Timing', icon: '\u23F0', action: 'overlay', target: 'aw-withdrawal-timing' },
   ],
+  'tuberculosis': [
+    { id: 'tb-risk', label: 'R/O TB', icon: '🔍', action: 'calculator', target: 'tb-risk' },
+    { id: 'tb-drugs', label: 'Drug Card', icon: '💊', action: 'calculator', target: 'tb-drug-card' },
+    { id: 'tb-interact', label: 'Interactions', icon: '⚠️', action: 'calculator', target: 'tb-interaction' },
+    { id: 'tb-duration', label: 'Duration', icon: '⏱️', action: 'calculator', target: 'tb-duration' },
+    { id: 'tb-regimens', label: 'Regimens', icon: '📋', action: 'overlay', target: 'tb-treatment-regimens' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */
