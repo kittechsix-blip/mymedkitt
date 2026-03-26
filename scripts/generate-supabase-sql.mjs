@@ -120,6 +120,7 @@ const TREE_REGISTRY = {
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',    entryNodeId: 'ow-start',       categoryId: 'emergency-medicine' },
   'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',   entryNodeId: 'aw-start',       categoryId: 'emergency-medicine' },
+  'tuberculosis':         { prefix: 'TUBERCULOSIS',          entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -145,6 +146,7 @@ const CROSS_LISTINGS = {
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
   'sepsis':           [{ categoryId: 'critical-care' }],
   'opioid-withdrawal': [{ categoryId: 'toxicology' }],
+  'tuberculosis':      [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

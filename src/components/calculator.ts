@@ -5519,6 +5519,269 @@ const CIWA_AR_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+const FACTOR_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'factor-dosing',
+  title: 'Factor Dosing',
+  subtitle: 'Factor VIII / IX Replacement Dosing Calculator',
+  description: 'Calculate clotting factor replacement dose based on hemophilia type, target level, and patient weight. Factor VIII: 1 unit/kg raises level by 2%. Factor IX: 1 unit/kg raises level by 1%.',
+  fields: [
+    {
+      name: 'weight',
+      label: 'Patient Weight (kg)',
+      type: 'number',
+      points: 0,
+    },
+    {
+      name: 'factor-type',
+      label: 'Hemophilia Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Hemophilia A (Factor VIII) — 1 U/kg = +2%', points: 2 },
+        { label: 'Hemophilia B (Factor IX) — 1 U/kg = +1%', points: 1 },
+      ],
+    },
+    {
+      name: 'target-level',
+      label: 'Target Factor Level (%)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '30–50% — Minor mucosal bleed', points: 40 },
+        { label: '40–60% — Hemarthrosis / muscle', points: 50 },
+        { label: '50% — Hematuria', points: 50 },
+        { label: '80% — Iliopsoas / GI bleed', points: 80 },
+        { label: '100% — ICH / major trauma', points: 100 },
+      ],
+    },
+    {
+      name: 'baseline-level',
+      label: 'Baseline Factor Level (%, 0 if severe/unknown)',
+      type: 'number',
+      points: 0,
+    },
+  ],
+  results: [],
+  thresholdNote: 'Round dose UP to nearest whole vial. Check post-infusion levels at 30–60 min for major bleeds.',
+  citations: [
+    'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.',
+    'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const factorIncrement = values['factor-type'] || 2; // 2 for FVIII, 1 for FIX
+    const targetLevel = values['target-level'] || 50;
+    const baselineLevel = values['baseline-level'] || 0;
+
+    if (weight <= 0) {
+      return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg.', colorVar: '--color-text-muted' };
+    }
+
+    const levelNeeded = Math.max(targetLevel - baselineLevel, 0);
+    const dose = Math.ceil((levelNeeded / factorIncrement) * weight);
+    const factorName = factorIncrement === 2 ? 'Factor VIII' : 'Factor IX';
+    const halfLife = factorIncrement === 2 ? '8–12' : '18–24';
+    const redoseInterval = factorIncrement === 2 ? 'q8–12h' : 'q18–24h';
+
+    if (levelNeeded <= 0) {
+      return { value: '0 units', label: 'No replacement needed', description: `Baseline level (${baselineLevel}%) already meets or exceeds target (${targetLevel}%).`, colorVar: '--color-primary' };
+    }
+
+    return {
+      value: `${dose.toLocaleString()} units`,
+      label: `${factorName} dose`,
+      description: `${factorName}: ${dose.toLocaleString()} units IV\nTarget: ${targetLevel}% (from baseline ${baselineLevel}%)\nExpected rise: ${levelNeeded}%\nHalf-life: ${halfLife} hours\nRedose: ${redoseInterval} if ongoing treatment needed\n\nRound up to nearest whole vial.`,
+      colorVar: targetLevel >= 80 ? '--color-danger' : '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// TB Calculators
+// -------------------------------------------------------------------
+
+const TB_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'tb-risk',
+  title: 'R/O TB',
+  subtitle: 'TB Risk Stratification',
+  description: 'Clinical and epidemiologic risk assessment for active pulmonary tuberculosis. Guides testing urgency and isolation decisions.',
+  fields: [
+    { name: 'cough', label: 'Cough >2–3 weeks', type: 'toggle', points: 2 },
+    { name: 'fever', label: 'Fevers or night sweats', type: 'toggle', points: 1 },
+    { name: 'weightloss', label: 'Unexplained weight loss', type: 'toggle', points: 1 },
+    { name: 'hemoptysis', label: 'Hemoptysis', type: 'toggle', points: 2 },
+    { name: 'cxr', label: 'CXR: upper lobe infiltrate or cavitation', type: 'toggle', points: 3 },
+    { name: 'exposure', label: 'Known TB exposure or close contact', type: 'toggle', points: 2 },
+    { name: 'endemic', label: 'Birth/residence/travel in TB-endemic area', type: 'toggle', points: 1 },
+    { name: 'hiv', label: 'HIV infection', type: 'toggle', points: 2 },
+    { name: 'immunosuppressed', label: 'Other immunosuppression (TNF-α inhibitors, transplant, chronic steroids)', type: 'toggle', points: 1 },
+    { name: 'congregate', label: 'Congregate setting (shelter, jail, long-term care)', type: 'toggle', points: 1 },
+    { name: 'prior', label: 'Prior TB infection or incomplete treatment', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'Low Risk', risk: 'TB unlikely', mortality: 'Standard workup, no isolation needed', colorVar: '--color-primary' },
+    { min: 3, max: 5, label: 'Moderate Risk', risk: 'TB possible', mortality: 'Obtain sputum AFB + NAA, consider isolation', colorVar: '--color-warning' },
+    { min: 6, max: 10, label: 'High Risk', risk: 'TB probable', mortality: 'Isolate immediately, urgent AFB + NAA + culture, start empiric treatment if clinical suspicion high', colorVar: '--color-danger' },
+    { min: 11, max: Infinity, label: 'Very High Risk', risk: 'TB very likely', mortality: 'Immediate isolation and empiric RIPE treatment while awaiting confirmatory testing', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'This tool aids clinical decision-making but does not replace clinical judgment. Any patient with concerning symptoms and risk factors should be evaluated with appropriate microbiologic testing.',
+  citations: ['Bernardo J. Diagnosis of pulmonary tuberculosis disease in adults. UpToDate. Updated Jan 30, 2026.'],
+};
+
+const TB_DRUG_CARD_CALCULATOR: CalculatorDefinition = {
+  id: 'tb-drug-card',
+  title: 'TB Drug Card',
+  subtitle: 'Quick Weight-Based TB Dosing',
+  description: 'Enter patient weight to calculate all first-line TB drug doses for the RIPE regimen.',
+  fields: [
+    { name: 'weight', label: 'Patient weight (kg)', type: 'number', points: 0 },
+  ],
+  results: [],
+  computeResult: (values: Record<string, number>) => {
+    const w = values['weight'] || 0;
+    if (w <= 0) return { value: '--', label: 'Enter weight', description: 'Enter patient weight to calculate RIPE doses.', colorVar: '--color-primary' };
+    const inh = Math.min(Math.round(w * 5), 300);
+    const rif = Math.min(Math.round(w * 10), 600);
+    const pza = Math.min(Math.round(w * 25), 2000);
+    const emb = Math.min(Math.round(w * 15), 1600);
+    const inhLatent = Math.min(Math.round(w * 15), 900);
+
+    return {
+      value: `${w} kg`,
+      label: `INH: ${inh} mg daily | RIF: ${rif} mg daily | PZA: ${pza} mg daily | EMB: ${emb} mg daily`,
+      description: `Pyridoxine B6: 25–50 mg daily | INH weekly (3HP): ${inhLatent} mg | Rifapentine: 900 mg weekly`,
+      colorVar: '--color-primary',
+    };
+  },
+  thresholdNote: 'Doses shown are for daily administration. Max doses: INH 300 mg, RIF 600 mg, PZA 2000 mg, EMB 1600 mg. Always co-administer pyridoxine (B6) with isoniazid.',
+  citations: ['Nahid P, et al. ATS/CDC/IDSA: treatment of drug-susceptible tuberculosis. Clin Infect Dis. 2016;63(7):e147-e195.'],
+};
+
+const TB_INTERACTION_CALCULATOR: CalculatorDefinition = {
+  id: 'tb-interaction',
+  title: 'TB Drug Interactions',
+  subtitle: 'Rifamycin / CYP3A4 Interaction Checker',
+  description: 'Check for significant drug interactions between TB medications and concurrent drugs, especially antiretrovirals.',
+  fields: [
+    { name: 'rifampin', label: 'Patient is on RIFAMPIN', type: 'toggle', points: 0 },
+    { name: 'rifabutin', label: 'Patient is on RIFABUTIN (alternative)', type: 'toggle', points: 0 },
+    { name: 'bedaquiline', label: 'Patient is on BEDAQUILINE', type: 'toggle', points: 0 },
+    { name: 'moxifloxacin', label: 'Patient is on MOXIFLOXACIN', type: 'toggle', points: 0 },
+    { name: 'linezolid', label: 'Patient is on LINEZOLID', type: 'toggle', points: 0 },
+    { name: 'pi', label: 'Concurrent: Protease inhibitor (atazanavir, darunavir, lopinavir)', type: 'toggle', points: 0 },
+    { name: 'dtg', label: 'Concurrent: Dolutegravir (DTG)', type: 'toggle', points: 0 },
+    { name: 'efv', label: 'Concurrent: Efavirenz (EFV)', type: 'toggle', points: 0 },
+    { name: 'ral', label: 'Concurrent: Raltegravir (RAL)', type: 'toggle', points: 0 },
+    { name: 'warfarin', label: 'Concurrent: Warfarin', type: 'toggle', points: 0 },
+    { name: 'ocp', label: 'Concurrent: Oral contraceptives', type: 'toggle', points: 0 },
+    { name: 'ssri', label: 'Concurrent: SSRI/SNRI', type: 'toggle', points: 0 },
+    { name: 'methadone', label: 'Concurrent: Methadone', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  computeResult: (values: Record<string, number>) => {
+    const warnings: string[] = [];
+    const rif = values['rifampin'] === 1;
+    const rib = values['rifabutin'] === 1;
+    const bdq = values['bedaquiline'] === 1;
+    const moxi = values['moxifloxacin'] === 1;
+    const lzd = values['linezolid'] === 1;
+
+    if (rif && values['pi'] === 1) warnings.push('⚠️ CONTRAINDICATED: Rifampin + PI — rifampin reduces PI levels by >75%. Use rifabutin instead.');
+    if (rif && values['dtg'] === 1) warnings.push('⚠️ DOSE ADJUST: Rifampin + DTG — increase dolutegravir to 50 mg BID (from daily).');
+    if (rif && values['efv'] === 1) warnings.push('✓ COMPATIBLE: Rifampin + EFV — standard doses, no adjustment needed.');
+    if (rif && values['ral'] === 1) warnings.push('⚠️ DOSE ADJUST: Rifampin + RAL — increase raltegravir to 800 mg BID.');
+    if (rif && values['warfarin'] === 1) warnings.push('⚠️ MAJOR: Rifampin + Warfarin — dramatically reduces warfarin levels. Requires frequent INR monitoring and significant dose increases (2-3×).');
+    if (rif && values['ocp'] === 1) warnings.push('⚠️ MAJOR: Rifampin + OCP — reduces OCP efficacy. Use alternative contraception (barrier method or IUD).');
+    if (rif && values['methadone'] === 1) warnings.push('⚠️ MAJOR: Rifampin + Methadone — reduces methadone levels by 33-68%. Monitor for withdrawal, increase methadone dose.');
+    if (rif && bdq) warnings.push('⚠️ CONTRAINDICATED: Rifampin + Bedaquiline — rifampin reduces bedaquiline levels by 50%. Do NOT combine.');
+
+    if (rib && values['pi'] === 1) warnings.push('⚠️ DOSE ADJUST: Rifabutin + PI — reduce rifabutin to 150 mg daily or 300 mg 3×/week. Monitor.');
+    if (rib && values['dtg'] === 1) warnings.push('✓ COMPATIBLE: Rifabutin + DTG — standard doses.');
+    if (rib && values['efv'] === 1) warnings.push('⚠️ DOSE ADJUST: Rifabutin + EFV — increase rifabutin to 450-600 mg daily.');
+
+    if (bdq && moxi) warnings.push('⚠️ QTc RISK: Bedaquiline + Moxifloxacin — both prolong QTc. Mandatory monthly ECG monitoring. Hold if QTc >500 ms.');
+    if (lzd && values['ssri'] === 1) warnings.push('⚠️ SEROTONIN SYNDROME: Linezolid + SSRI/SNRI — linezolid is a weak MAOI. Risk of serotonin syndrome. Avoid if possible or monitor closely.');
+    if (lzd && values['methadone'] === 1) warnings.push('⚠️ SEROTONIN RISK: Linezolid + Methadone — potential serotonin syndrome risk. Monitor.');
+
+    if (warnings.length === 0) {
+      return { value: '0', label: 'No Interactions Detected', description: 'Select TB drugs and concurrent medications to check for interactions.', colorVar: '--color-primary' };
+    }
+    return {
+      value: `${warnings.length}`,
+      label: `${warnings.length} Interaction(s) Found`,
+      description: warnings.join(' | '),
+      colorVar: warnings.some(w => w.includes('CONTRAINDICATED')) ? '--color-danger' : '--color-warning',
+    };
+  },
+  thresholdNote: 'This checker covers major TB drug interactions. It is NOT comprehensive. Always verify with a pharmacist or drug interaction database for complete assessment.',
+  citations: ['Brust JCM. Treatment of pulmonary TB in adults with HIV infection. UpToDate. Updated Feb 2026.', 'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis. UpToDate. Updated Jan 2026.'],
+};
+
+const TB_DURATION_CALCULATOR: CalculatorDefinition = {
+  id: 'tb-duration',
+  title: 'TB Duration',
+  subtitle: 'Treatment Duration Guide',
+  description: 'Determines recommended treatment duration based on clinical factors: cavitary disease, culture status, and HIV.',
+  fields: [
+    { name: 'cavitary', label: 'Cavitary disease on initial CXR', type: 'toggle', points: 1 },
+    { name: 'culture2mo', label: 'Positive sputum culture at 2 months', type: 'toggle', points: 2 },
+    { name: 'hiv', label: 'HIV co-infection', type: 'toggle', points: 0 },
+    { name: 'pza_omit', label: 'Pyrazinamide omitted (hepatotoxicity or contraindication)', type: 'toggle', points: 2 },
+    { name: 'fourmonth', label: 'Eligible for 4-month rifapentine-moxifloxacin regimen', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  computeResult: (values: Record<string, number>) => {
+    const cavitary = values['cavitary'] === 1;
+    const pos2mo = values['culture2mo'] === 1;
+    const hiv = values['hiv'] === 1;
+    const pzaOmit = values['pza_omit'] === 1;
+    const fourMonth = values['fourmonth'] === 1;
+
+    if (fourMonth && !cavitary && !pos2mo && !pzaOmit) {
+      return {
+        value: '4 mo',
+        label: '4 Months (17 Weeks)',
+        description: 'Eligible for shortened rifapentine-moxifloxacin regimen. Must meet ALL selection criteria: age ≥12, non-cavitary, drug-susceptible, smear ≤2+, HIV-negative or CD4 >100. Regimen: INH + Rifapentine + Moxifloxacin + PZA (2 months) → INH + Rifapentine + Moxifloxacin (2 months)',
+        colorVar: '--color-primary',
+      };
+    }
+    if (pzaOmit) {
+      return {
+        value: '9 mo',
+        label: '9 Months Minimum',
+        description: 'Pyrazinamide omitted — must extend total treatment to 9 months (2-month intensive with INH + RIF + EMB, then 7-month continuation with INH + RIF). Without PZA, the sterilizing effect is reduced and longer treatment is needed to prevent relapse.',
+        colorVar: '--color-warning',
+      };
+    }
+    if (pos2mo) {
+      return {
+        value: '9 mo',
+        label: '9 Months Minimum',
+        description: cavitary
+          ? 'Positive culture at 2 months — extend continuation phase to 7 months (9 months total). Repeat DST. Ensure DOT adherence. Cavitary disease + positive 2-month culture = highest relapse risk. Expert consultation recommended.'
+          : 'Positive culture at 2 months — extend continuation phase to 7 months (9 months total). Repeat DST. Ensure DOT adherence. Reassess adherence, drug interactions, and consider therapeutic drug monitoring.',
+        colorVar: '--color-danger',
+      };
+    }
+    if (cavitary) {
+      return {
+        value: '9 mo',
+        label: '9 Months (Consider)',
+        description: 'Cavitary disease with negative 2-month culture — consider extending to 9 months total (7-month continuation). Cavitary disease increases relapse risk even with negative 2-month cultures. Extension is recommended but not mandatory in all cases.',
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: '6 mo',
+      label: '6 Months (Standard)',
+      description: 'Standard RIPE regimen: 2-month intensive phase (RIPE daily) → 4-month continuation phase (INH + RIF daily or 3×/week by DOT). Completion criteria: ≥6 months total, ≥4 months continuation, and ≥2 negative cultures during continuation.',
+      colorVar: '--color-primary',
+    };
+  },
+  thresholdNote: 'Duration recommendations are based on ATS/CDC/IDSA 2016 guidelines and CDC 2022 interim guidance. HIV patients follow the same durations with ARV interaction management.',
+  citations: ['Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.', 'CDC. Interim guidance: 4-month rifapentine-moxifloxacin regimen. MMWR. 2022.'],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
@@ -5578,6 +5841,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'hf-treatment': HF_TREATMENT_CALCULATOR,
   'pawss': PAWSS_CALCULATOR,
   'ciwa-ar': CIWA_AR_CALCULATOR,
+  'factor-dosing': FACTOR_DOSING_CALCULATOR,
+  'tb-risk': TB_RISK_CALCULATOR,
+  'tb-drug-card': TB_DRUG_CARD_CALCULATOR,
+  'tb-interaction': TB_INTERACTION_CALCULATOR,
+  'tb-duration': TB_DURATION_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

@@ -1255,7 +1255,7 @@ const DESMOPRESSIN: DrugEntry = {
   genericName: 'Desmopressin acetate',
   drugClass: 'Synthetic vasopressin analog (V2 agonist)',
   route: 'IV / Intranasal',
-  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial'],
+  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release'],
   dosing: [
     {
       indication: 'DDAVP clamp (hyponatremia)',
@@ -1272,6 +1272,16 @@ const DESMOPRESSIN: DrugEntry = {
     {
       indication: 'DI diagnostic trial',
       regimen: '2 mcg IV x1. Central DI: urine osmolality rises >50% within 2 hours. Nephrogenic DI: minimal response (<50% rise).',
+    },
+    {
+      indication: 'Mild Hemophilia A — Factor VIII Mobilization',
+      regimen: '0.3 mcg/kg IV (dilute in 50 mL NS, infuse over 20–30 min) OR intranasal 150 mcg (<50 kg) / 300 mcg (≥50 kg). Use HIGH-CONCENTRATION spray (Stimate® 150 mcg/spray). Raises factor VIII 2–6× from baseline. Max 2–3 doses (tachyphylaxis). Restrict fluids to maintenance × 24h. NOT effective for hemophilia B.',
+      weightCalc: { dosePerKg: 0.3, unit: 'mcg', label: 'IV dose (hemophilia A)' },
+    },
+    {
+      indication: 'von Willebrand Disease — Desmopressin Responder',
+      regimen: '0.3 mcg/kg IV (dilute in 50 mL NS, infuse over 20–30 min) OR intranasal 150 mcg (<50 kg) / 300 mcg (≥50 kg). Documented prior desmopressin response REQUIRED. Max 2–3 doses. Restrict fluids × 24h. CONTRAINDICATED in Type 2B vWD (worsens thrombocytopenia). Monitor electrolytes if repeated.',
+      weightCalc: { dosePerKg: 0.3, unit: 'mcg', label: 'IV dose (vWD)' },
     },
   ],
   contraindications: [
@@ -2073,6 +2083,172 @@ const FAMOTIDINE: DrugEntry = {
   ],
 };
 
+const FACTOR_VIII: DrugEntry = {
+  id: 'factor-viii',
+  name: 'Factor VIII Concentrate',
+  genericName: 'Antihemophilic factor (recombinant or plasma-derived)',
+  drugClass: 'Coagulation factor concentrate',
+  route: 'IV',
+  indications: ['Hemophilia A — acute bleeding', 'Hemophilia A — prophylaxis', 'Hemophilia A — perioperative'],
+  dosing: [
+    {
+      indication: 'Hemophilia A — Hemarthrosis',
+      regimen: '25–30 units/kg IV (target factor level 40–60%). 1 unit/kg raises factor VIII by ~2%. Single dose often adequate. Repeat q12h if symptoms persist. Round to nearest whole vial.',
+      weightCalc: { dosePerKg: 25, unit: 'units', label: 'Joint bleed (target 40–60%)' },
+    },
+    {
+      indication: 'Hemophilia A — Muscle Bleed',
+      regimen: '25–30 units/kg IV (target 40–60%). Repeat q12–24h × 2–3 days. Monitor for compartment syndrome.',
+      weightCalc: { dosePerKg: 25, unit: 'units', label: 'Muscle bleed (target 40–60%)' },
+    },
+    {
+      indication: 'Hemophilia A — Iliopsoas Hemorrhage',
+      regimen: '40–50 units/kg IV (target 80% × 3 days, then >50%). Treatment duration 7–14 days. Admit, strict bed rest.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'Iliopsoas (target 80%)' },
+    },
+    {
+      indication: 'Hemophilia A — Intracranial Hemorrhage',
+      regimen: '50 units/kg IV STAT (target 100%). Administer BEFORE imaging. Maintain 100% × 7 days, then 50% × 7 days. Admit ICU.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'ICH (target 100%)' },
+    },
+    {
+      indication: 'Hemophilia A — Mucosal Bleeding',
+      regimen: '15–25 units/kg IV (target 30–50%). Combine with antifibrinolytic (aminocaproic acid or TXA).',
+      weightCalc: { dosePerKg: 20, unit: 'units', label: 'Mucosal (target 30–50%)' },
+    },
+    {
+      indication: 'Hemophilia A — GI Hemorrhage',
+      regimen: '40–50 units/kg IV (target 80–100%). Maintain 80–100% × 1–6 days, then 50% × 7–14 days. GI consult.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'GI bleed (target 80–100%)' },
+    },
+    {
+      indication: 'Hemophilia A — Hematuria',
+      regimen: '25 units/kg IV (target 50% × 3–5 days). Vigorous hydration 1.5× maintenance. Antifibrinolytics CONTRAINDICATED.',
+      weightCalc: { dosePerKg: 25, unit: 'units', label: 'Hematuria (target 50%)' },
+    },
+    {
+      indication: 'Hemophilia A — Major Trauma',
+      regimen: '50 units/kg IV STAT (target 100%). Do NOT delay for imaging. Days 1–7: maintain 80–100%. Days 8–14: maintain 50%.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'Major trauma (target 100%)' },
+    },
+  ],
+  contraindications: ['Known hypersensitivity to specific product or its components (hamster protein for some recombinant products)'],
+  cautions: [
+    'Inhibitor development occurs in ~33% of patients with hemophilia A',
+    'Check post-infusion factor levels at 30–60 min for major bleeds — poor response suggests inhibitor',
+    'Half-life: 8–12 hours (standard products), longer for extended half-life products (Eloctate)',
+    'Switching brands is acceptable in emergencies — no clear evidence of increased inhibitor risk',
+    'Recombinant products preferred over plasma-derived',
+  ],
+  monitoring: 'Post-infusion factor VIII levels at 30–60 min for major bleeds. Inhibitor screen if poor response. Hemoglobin for significant hemorrhage.',
+  notes: 'Formula: Dose (units) = (Target% − Baseline%) ÷ 2 × Weight (kg). Round up to nearest whole vial. Products include recombinant (Advate, Kogenate, Xyntha, Eloctate, Jivi, Adynovate) and plasma-derived (Humate-P, Koate-DVI). Extended half-life products (Eloctate — factor VIII-Fc fusion) have ~1.5× longer half-life. Emicizumab (Hemlibra) is for prophylaxis only — does NOT treat acute bleeds.',
+  citations: [
+    'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.',
+    'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
+    'Lewandowska MD. Acute treatment of bleeding and surgery in hemophilia A and B. UpToDate. 2024.',
+  ],
+};
+
+const FACTOR_IX: DrugEntry = {
+  id: 'factor-ix',
+  name: 'Factor IX Concentrate',
+  genericName: 'Coagulation factor IX (recombinant or plasma-derived)',
+  drugClass: 'Coagulation factor concentrate',
+  route: 'IV',
+  indications: ['Hemophilia B — acute bleeding', 'Hemophilia B — prophylaxis', 'Hemophilia B — perioperative'],
+  dosing: [
+    {
+      indication: 'Hemophilia B — Hemarthrosis',
+      regimen: '40–60 units/kg IV (target factor level 40–60%). 1 unit/kg raises factor IX by ~1%. Repeat q18–24h if symptoms persist.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'Joint bleed (target 40–60%)' },
+    },
+    {
+      indication: 'Hemophilia B — Muscle Bleed',
+      regimen: '40–60 units/kg IV (target 40–60%). Repeat q18–24h × 2–3 days. Monitor for compartment syndrome.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'Muscle bleed (target 40–60%)' },
+    },
+    {
+      indication: 'Hemophilia B — Iliopsoas Hemorrhage',
+      regimen: '80–100 units/kg IV (target 80% × 3 days, then >50%). Treatment duration 7–14 days. Admit, strict bed rest.',
+      weightCalc: { dosePerKg: 80, unit: 'units', label: 'Iliopsoas (target 80%)' },
+    },
+    {
+      indication: 'Hemophilia B — Intracranial Hemorrhage',
+      regimen: '100 units/kg IV STAT (target 100%). Administer BEFORE imaging. Maintain 100% × 7 days, then 50% × 7 days. Admit ICU.',
+      weightCalc: { dosePerKg: 100, unit: 'units', label: 'ICH (target 100%)' },
+    },
+    {
+      indication: 'Hemophilia B — Mucosal Bleeding',
+      regimen: '30–50 units/kg IV (target 30–50%). Combine with antifibrinolytic.',
+      weightCalc: { dosePerKg: 40, unit: 'units', label: 'Mucosal (target 30–50%)' },
+    },
+    {
+      indication: 'Hemophilia B — GI Hemorrhage',
+      regimen: '80–100 units/kg IV (target 80–100%). GI consult. Admit.',
+      weightCalc: { dosePerKg: 100, unit: 'units', label: 'GI bleed (target 80–100%)' },
+    },
+    {
+      indication: 'Hemophilia B — Hematuria',
+      regimen: '50 units/kg IV (target 50% × 3–5 days). Vigorous hydration 1.5× maintenance. Antifibrinolytics CONTRAINDICATED.',
+      weightCalc: { dosePerKg: 50, unit: 'units', label: 'Hematuria (target 50%)' },
+    },
+    {
+      indication: 'Hemophilia B — Major Trauma',
+      regimen: '100 units/kg IV STAT (target 100%). Do NOT delay for imaging.',
+      weightCalc: { dosePerKg: 100, unit: 'units', label: 'Major trauma (target 100%)' },
+    },
+  ],
+  contraindications: ['Known hypersensitivity to specific product or its components'],
+  cautions: [
+    'Inhibitor development occurs in ~6.5% of patients with hemophilia B',
+    'Patients with FIX inhibitors have high incidence of allergic reactions to factor IX exposure',
+    'Half-life: 18–24 hours (standard), longer for extended half-life products (Alprolix)',
+    'Check post-infusion levels at 30–60 min for major bleeds',
+    'Use rFVIIa (not FEIBA) as bypassing agent if patient has FIX inhibitors (allergic reaction risk)',
+  ],
+  monitoring: 'Post-infusion factor IX levels at 30–60 min for major bleeds. Inhibitor screen if poor response.',
+  notes: 'Formula: Dose (units) = (Target% − Baseline%) × Weight (kg). Note factor IX requires TWICE the dose per kg compared to factor VIII for the same percentage increase. Products include recombinant (BeneFIX, Alprolix, Rixubis, Rebinyn, Idelvion) and plasma-derived (AlphaNine SD, Mononine). Extended half-life: Alprolix (factor IX-Fc fusion) has ~3× longer half-life.',
+  citations: [
+    'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.',
+    'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
+  ],
+};
+
+const FEIBA: DrugEntry = {
+  id: 'feiba',
+  name: 'FEIBA (Anti-Inhibitor Coagulant Complex)',
+  genericName: 'Anti-inhibitor coagulant complex (activated)',
+  drugClass: 'Bypassing agent (contains activated vitamin-K-dependent clotting factors)',
+  route: 'IV',
+  indications: ['Hemophilia with high-titer inhibitors — acute bleeding'],
+  dosing: [
+    {
+      indication: 'High-Titer Inhibitor — Joint Bleed',
+      regimen: '50–75 units/kg IV. May repeat q12h as needed. Do NOT exceed 200 units/kg/day (thrombotic risk).',
+      weightCalc: { dosePerKg: 75, unit: 'units', label: 'Joint bleed' },
+    },
+    {
+      indication: 'High-Titer Inhibitor — Life-Threatening Bleed',
+      regimen: '100 units/kg IV. May repeat q12h. Maximum 200 units/kg/day. For refractory bleeds: alternate with rFVIIa q6h (hematology guidance required).',
+      weightCalc: { dosePerKg: 100, unit: 'units', label: 'Life-threatening bleed' },
+    },
+  ],
+  contraindications: ['DIC or signs of fibrinolysis', 'Known hypersensitivity'],
+  cautions: [
+    'Do NOT exceed 200 units/kg/day — thrombotic risk',
+    'Thrombotic and thromboembolic events reported',
+    'Use rFVIIa instead for patients with factor IX inhibitors (allergic reaction risk to FIX in FEIBA)',
+    'Sequential therapy with rFVIIa for refractory bleeds should be reserved for life/limb-threatening situations',
+    'Contains traces of factor VIII and IX — not for patients with factor IX allergy',
+  ],
+  monitoring: 'Clinical response to bleeding. CBC, fibrinogen. Watch for signs of DIC or thrombosis.',
+  notes: 'FEIBA and rFVIIa are equally efficacious for acute bleeds in patients with inhibitors (FENOC trial, Astermark 2007). Some individual patients respond better to one vs the other. FEIBA bypasses the intrinsic pathway via activated clotting factors. Administer within 1 hour of bleeding onset when possible. Home-based treatment may be appropriate for milder bleeds (hemarthroses).',
+  citations: [
+    'Astermark J, et al. FENOC Study: randomized comparison of bypassing agents in hemophilia. Blood. 2007;109(2):546-551.',
+    'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
+  ],
+};
+
 const ETOMIDATE: DrugEntry = {
   id: 'etomidate',
   name: 'Etomidate (Amidate)',
@@ -2195,11 +2371,15 @@ const LINEZOLID: DrugEntry = {
   genericName: 'Linezolid',
   drugClass: 'Oxazolidinone antibiotic',
   route: 'IV / PO',
-  indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection'],
+  indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection', 'MDR-TB'],
   dosing: [
     {
       indication: 'MRSA sepsis / pneumonia',
       regimen: '600 mg IV or PO q12h. No renal dose adjustment required. 100% oral bioavailability \u2014 IV-to-PO switch straightforward.',
+    },
+    {
+      indication: 'MDR-TB — BPaL/BPaLM Regimen',
+      regimen: '1200 mg PO daily × 26 weeks. Reduce to 600 mg daily if myelosuppression or neuropathy develops. WHO Group A agent. Monitor CBC weekly and visual acuity monthly.',
     },
   ],
   contraindications: [
@@ -5246,7 +5426,7 @@ const TRANEXAMIC_ACID: DrugEntry = {
   genericName: 'Tranexamic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV',
-  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema'],
+  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct'],
   dosing: [
     {
       indication: 'ICH hemostasis (adjunct \u2014 within 3h of onset)',
@@ -5260,6 +5440,11 @@ const TRANEXAMIC_ACID: DrugEntry = {
     {
       indication: 'Bradykinin-mediated angioedema',
       regimen: '1 g IV load over 10 minutes, then 1 g IV over 8 hours. Blocks plasminogen\u2192plasmin conversion, interrupting the kallikrein amplification spiral that drives bradykinin production. Case series (31 patients): all non-intubated patients avoided intubation. A single dose is often inadequate \u2014 ongoing treatment required as bradykinin-mediated angioedema evolves over days. AVOID in post-tPA angioedema (contraindicated in acute stroke).',
+    },
+    {
+      indication: 'Hemophilia/vWD — Mucosal Bleeding Adjunct',
+      regimen: '10–15 mg/kg IV or PO q8–12h. Adjunct to factor replacement for mucosal bleeding (oral, epistaxis, post-dental). High oral fibrinolytic activity makes antifibrinolytics particularly useful here. CONTRAINDICATED with hematuria (risk of renal thrombi). Check UA before starting.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', label: 'Hemophilia mucosal (q8–12h)' },
     },
   ],
   contraindications: [
@@ -5311,6 +5496,40 @@ const VITAMIN_K: DrugEntry = {
   citations: [
     'Greenberg SM, et al. 2022 Guideline for Management of Spontaneous ICH. Stroke. 2022;53(7):e282-e361.',
     'Tomaselli GF, et al. 2020 ACC: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+  ],
+};
+
+const VWF_CONCENTRATE: DrugEntry = {
+  id: 'vwf-concentrate',
+  name: 'vWF/Factor VIII Concentrate (Humate-P)',
+  genericName: 'von Willebrand factor/coagulation factor VIII complex (human)',
+  drugClass: 'Plasma-derived von Willebrand factor concentrate',
+  route: 'IV',
+  indications: ['von Willebrand disease — acute bleeding', 'von Willebrand disease — perioperative'],
+  dosing: [
+    {
+      indication: 'vWD — Minor Bleed (DDAVP non-responder)',
+      regimen: 'Loading: 30–60 RCo units/kg IV. Maintenance: 20–40 RCo units/kg q12–48h. Maintain vWF:RCo and FVIII >50 IU/dL × 3–5 days. Monitor daily trough levels.',
+      weightCalc: { dosePerKg: 40, unit: 'RCo units', label: 'Minor bleed loading dose' },
+    },
+    {
+      indication: 'vWD — Major Bleed or Surgery',
+      regimen: 'Loading: 40–60 RCo units/kg IV. Maintenance: 20–40 RCo units/kg q8–24h. Maintain vWF:RCo and FVIII >50 IU/dL × at least 7 days. Watch for excessive FVIII accumulation.',
+      weightCalc: { dosePerKg: 60, unit: 'RCo units', label: 'Major bleed loading dose' },
+    },
+  ],
+  contraindications: ['Known hypersensitivity to product components'],
+  cautions: [
+    'Monitor factor VIII levels — can accumulate to excessively high levels with repeated dosing (thrombotic risk)',
+    'Plasma-derived product — viral transmission risk minimized by current processing but not eliminated',
+    'Available products: Humate-P, Alphanate, Wilate (vWF/FVIII ratio varies by product)',
+    'Vonicog alfa (Vonvendi) is a recombinant vWF option without factor VIII',
+  ],
+  monitoring: 'Daily trough vWF:RCo and factor VIII levels. Watch for thrombotic complications from excessive FVIII.',
+  notes: 'Humate-P contains both vWF and factor VIII. Preferred for patients not responsive to desmopressin, Type 2B, Type 3, or major bleeding/surgery. vWF dosing is based on ristocetin cofactor (RCo) units. Caution: Excessive factor VIII accumulation over multiple days can increase VTE risk — some experts recommend switching to a product with lower FVIII content or using recombinant vWF (Vonvendi) for prolonged treatment.',
+  citations: [
+    'Nichols WL, et al. Diagnosis, evaluation and management of vWD. NHLBI. 2012.',
+    'Mannucci PM. Treatment of von Willebrand\'s disease. NEJM. 2004;351(7):683-694.',
   ],
 };
 
@@ -5999,8 +6218,8 @@ const RIFAMPIN: DrugEntry = {
   name: 'Rifampin (Rifadin)',
   genericName: 'Rifampin',
   drugClass: 'Rifamycin Antibiotic',
-  route: 'PO',
-  indications: ['Meningococcal postexposure prophylaxis', 'H. influenzae postexposure prophylaxis'],
+  route: 'PO / IV',
+  indications: ['Meningococcal postexposure prophylaxis', 'H. influenzae postexposure prophylaxis', 'Active tuberculosis', 'Latent tuberculosis infection'],
   dosing: [
     {
       indication: 'Meningococcal Postexposure Prophylaxis',
@@ -6009,6 +6228,21 @@ const RIFAMPIN: DrugEntry = {
     {
       indication: 'H. influenzae Postexposure Prophylaxis',
       regimen: '600 mg PO daily × 4 days. For household contacts with incompletely vaccinated children <4 years or immunocompromised children <18 years.',
+    },
+    {
+      indication: 'Tuberculosis — Active Disease (Daily)',
+      regimen: '10 mg/kg PO daily (max 600 mg). Core drug of RIPE regimen. Take on empty stomach 1 hour before or 2 hours after meals. Weight-based: 40-55 kg → 450 mg, 56-75 kg → 600 mg.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600 },
+    },
+    {
+      indication: 'Latent TB — 4R Daily',
+      regimen: '10 mg/kg PO daily (max 600 mg) × 4 months. Self-administered. Take on empty stomach.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600 },
+    },
+    {
+      indication: 'Latent TB — 3HR Daily',
+      regimen: '10 mg/kg PO daily (max 600 mg) × 3 months with isoniazid.',
+      weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600 },
     },
   ],
   contraindications: [
@@ -6026,6 +6260,41 @@ const RIFAMPIN: DrugEntry = {
   citations: [
     'Cohn AC, et al. Prevention and control of meningococcal disease: ACIP recommendations. MMWR Recomm Rep. 2013;62(RR-2):1-28.',
     'Briere EC, et al. Prevention and control of H. influenzae type b disease: ACIP recommendations. MMWR Recomm Rep. 2014;63(Rr-01):1-14.',
+  ],
+};
+
+const RFVIIA: DrugEntry = {
+  id: 'rfviia',
+  name: 'Recombinant Factor VIIa (NovoSeven)',
+  genericName: 'Eptacog alfa (activated)',
+  drugClass: 'Bypassing agent (recombinant activated factor VII)',
+  route: 'IV',
+  indications: ['Hemophilia with high-titer inhibitors — acute bleeding'],
+  dosing: [
+    {
+      indication: 'High-Titer Inhibitor — Standard Dosing',
+      regimen: '90 mcg/kg IV q2–3h × 3 doses. If further treatment needed, continue 90 mcg/kg q2–3h.',
+      weightCalc: { dosePerKg: 90, unit: 'mcg', label: 'Standard dose (q2–3h)' },
+    },
+    {
+      indication: 'High-Titer Inhibitor — Single High Dose',
+      regimen: '270 mcg/kg IV × 1 dose. If further doses needed after single high dose, subsequent doses should be 90 mcg/kg separated by ≥6 hours.',
+      weightCalc: { dosePerKg: 270, unit: 'mcg', label: 'Single high dose' },
+    },
+  ],
+  contraindications: ['Known hypersensitivity to NovoSeven, mouse, hamster, or bovine proteins'],
+  cautions: [
+    'Thromboembolic risk — but 2006 review showed only 17 events in hemophilia patients (most events in off-label use)',
+    'Generally considered safe for pediatric and adult hemophilia patients',
+    'Preferred over FEIBA for factor IX deficiency with inhibitors (allergic reaction risk to FIX)',
+    'Preferred for factor VIII deficiency if limiting FIX exposure',
+    'Sequential therapy with FEIBA for refractory bleeds — hematology guidance required',
+  ],
+  monitoring: 'Clinical response. Watch for thrombotic complications (rare in hemophilia patients).',
+  notes: 'Bypasses the intrinsic clotting pathway by directly stimulating clot formation via the tissue factor pathway. FENOC trial demonstrated equivalence with FEIBA. 10–20% of bleeding events in patients with inhibitors will not be controlled by a single bypassing agent. For refractory bleeds: sequential alternating FEIBA and rFVIIa q6h (safe in series of 20 patients — no thrombosis, DIC, or thrombocytopenia).',
+  citations: [
+    'Astermark J, et al. FENOC Study. Blood. 2007;109(2):546-551.',
+    'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
   ],
 };
 
@@ -6469,11 +6738,16 @@ const AMINOCAPROIC_ACID: DrugEntry = {
   genericName: 'Aminocaproic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV / PO',
-  indications: ['Bradykinin-mediated angioedema (adjunct)'],
+  indications: ['Bradykinin-mediated angioedema (adjunct)', 'Hemophilia/vWD — mucosal bleeding adjunct'],
   dosing: [
     {
       indication: 'Bradykinin-mediated angioedema',
       regimen: '4-5 g IV over 1 hour loading dose, then 1 g/hour continuous infusion. Alternative to tranexamic acid for bradykinin-mediated angioedema. Inhibits plasminogen activation, interrupting the kallikrein amplification spiral. May require ongoing treatment \u2014 bradykinin-mediated angioedema evolves over days.',
+    },
+    {
+      indication: 'Hemophilia/vWD — Mucosal Bleeding Adjunct',
+      regimen: '50–60 mg/kg IV or PO q6h (max 5 g/dose) × 5–7 days. Adjunct to factor replacement for mucosal bleeding. Particularly useful for oral bleeding and after oral surgery (high fibrinolytic activity in oral cavity). CONTRAINDICATED with hematuria (risk of renal thrombi). Check UA before starting.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 5000, label: 'Hemophilia mucosal (q6h)' },
     },
   ],
   contraindications: ['Active intravascular clotting (DIC)', 'Upper urinary tract bleeding (risk of ureteral clot obstruction)'],
@@ -6809,6 +7083,252 @@ const LIPID_EMULSION: DrugEntry = {
   ],
 };
 
+const ISONIAZID: DrugEntry = {
+  id: 'isoniazid',
+  name: 'Isoniazid (INH)',
+  genericName: 'Isoniazid',
+  drugClass: 'First-line anti-tuberculous agent (isonicotinic acid hydrazide)',
+  route: 'PO',
+  indications: ['Active tuberculosis', 'Latent tuberculosis infection'],
+  dosing: [
+    {
+      indication: 'Tuberculosis — Active Disease (Daily)',
+      regimen: '5 mg/kg PO daily (max 300 mg). Take on empty stomach. Always co-administer with pyridoxine (B6) 25–50 mg daily to prevent peripheral neuropathy.',
+      weightCalc: { dosePerKg: 5, unit: 'mg', maxDose: 300 },
+    },
+    {
+      indication: 'Latent TB — 3HP Weekly',
+      regimen: '15 mg/kg PO once weekly (max 900 mg) × 12 doses. Round to nearest 50 or 100 mg. Co-administer with rifapentine 900 mg weekly. Pyridoxine 50 mg with each dose. Complete all 12 doses within 16 weeks.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', maxDose: 900 },
+    },
+    {
+      indication: 'Latent TB — 9H Daily',
+      regimen: '5 mg/kg PO daily (max 300 mg) × 9 months. Alternative: 15 mg/kg twice weekly by DOT (max 900 mg). Pyridoxine 25–50 mg daily.',
+      weightCalc: { dosePerKg: 5, unit: 'mg', maxDose: 300 },
+    },
+    {
+      indication: 'Latent TB — 3HR Daily',
+      regimen: '5 mg/kg PO daily (max 300 mg) × 3 months with rifampin. Pyridoxine 25–50 mg daily.',
+      weightCalc: { dosePerKg: 5, unit: 'mg', maxDose: 300 },
+    },
+  ],
+  contraindications: [
+    'Active hepatic disease or acute liver injury',
+    'Prior severe adverse reaction to INH (drug-induced hepatitis, skin reaction)',
+    'Acute hepatitis from any cause',
+  ],
+  cautions: [
+    'Hepatotoxicity — risk increases with age >35, alcohol use, chronic hepatitis, HIV',
+    'Peripheral neuropathy — prevent with pyridoxine (B6)',
+    'Drug interactions: inhibits CYP2E1, increases phenytoin and carbamazepine levels',
+    'Avoid alcohol during treatment',
+    'Monitor LFTs monthly if age >35, liver disease, HIV, or alcohol use',
+  ],
+  monitoring: 'Baseline LFTs. Monthly LFTs if age >35, hepatitis, HIV, alcohol use. Monthly symptom screen for hepatotoxicity (nausea, vomiting, jaundice, dark urine). Visual acuity if symptoms of optic neuritis.',
+  notes: 'Most important drug in TB treatment. Bactericidal against rapidly multiplying organisms. Take on empty stomach for best absorption. Pyridoxine B6 co-administration is mandatory to prevent peripheral neuropathy.',
+  citations: [
+    'Nahid P, et al. ATS/CDC/IDSA clinical practice guideline: treatment of drug-susceptible tuberculosis. Clin Infect Dis. 2016;63(7):e147-e195.',
+    'Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.',
+  ],
+};
+
+const PYRAZINAMIDE: DrugEntry = {
+  id: 'pyrazinamide',
+  name: 'Pyrazinamide (PZA)',
+  genericName: 'Pyrazinamide',
+  drugClass: 'First-line anti-tuberculous agent (pyrazine analogue of nicotinamide)',
+  route: 'PO',
+  indications: ['Active tuberculosis — intensive phase'],
+  dosing: [
+    {
+      indication: 'Tuberculosis — Intensive Phase (Daily)',
+      regimen: '25 mg/kg PO daily (max 2000 mg). Used in RIPE intensive phase (first 2 months only). Weight-based: 40-55 kg → 1000 mg, 56-75 kg → 1500 mg, 76-90 kg → 2000 mg.',
+      weightCalc: { dosePerKg: 25, unit: 'mg', maxDose: 2000 },
+    },
+  ],
+  contraindications: [
+    'Severe hepatic disease',
+    'Acute gout (relative — can be used with urate-lowering therapy)',
+  ],
+  cautions: [
+    'Hepatotoxicity — most hepatotoxic of the first-line agents',
+    'Hyperuricemia — causes asymptomatic uric acid elevation in most patients',
+    'Arthralgias — common, manage with NSAIDs',
+    'Not recommended beyond 2 months (intensive phase only)',
+  ],
+  monitoring: 'Baseline LFTs and uric acid. Monthly LFTs during intensive phase. Uric acid only if symptomatic gout.',
+  notes: 'Sterilizing activity against semi-dormant bacilli in acidic environments. Essential for shortening treatment to 6 months. Most commonly implicated in TB drug hepatotoxicity. If PZA is omitted or discontinued, total treatment must be extended to 9 months.',
+  citations: [
+    'Nahid P, et al. ATS/CDC/IDSA clinical practice guideline: treatment of drug-susceptible tuberculosis. Clin Infect Dis. 2016;63(7):e147-e195.',
+  ],
+};
+
+const ETHAMBUTOL: DrugEntry = {
+  id: 'ethambutol',
+  name: 'Ethambutol (Myambutol)',
+  genericName: 'Ethambutol',
+  drugClass: 'First-line anti-tuberculous agent (ethylenediamine derivative)',
+  route: 'PO',
+  indications: ['Active tuberculosis'],
+  dosing: [
+    {
+      indication: 'Tuberculosis — Daily',
+      regimen: '15–20 mg/kg PO daily (max 1600 mg). Used in intensive phase. Can discontinue once susceptibility to INH and RIF confirmed. Weight-based: 40-55 kg → 800 mg, 56-75 kg → 1200 mg, 76-90 kg → 1600 mg.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', maxDose: 1600 },
+    },
+  ],
+  contraindications: [
+    'Known optic neuritis',
+    'Unable to report visual changes (young children — use with caution)',
+  ],
+  cautions: [
+    'Optic neuritis — dose-related, reversible if caught early',
+    'Renal impairment — dose adjustment required (CrCl <30: extend interval)',
+    'Retrobulbar neuritis — red-green color discrimination affected first',
+  ],
+  monitoring: 'Baseline visual acuity and red-green color discrimination. Monthly visual acuity testing. Dose adjustment for renal impairment.',
+  notes: 'Added to RIPE regimen to prevent emergence of resistance. Can be discontinued once INH and RIF susceptibility confirmed. Primary side effect is optic neuritis — patients must be counseled to report any visual changes immediately.',
+  citations: [
+    'Nahid P, et al. ATS/CDC/IDSA clinical practice guideline: treatment of drug-susceptible tuberculosis. Clin Infect Dis. 2016;63(7):e147-e195.',
+  ],
+};
+
+const RIFAPENTINE: DrugEntry = {
+  id: 'rifapentine',
+  name: 'Rifapentine (Priftin)',
+  genericName: 'Rifapentine',
+  drugClass: 'Rifamycin antibiotic (cyclopentyl rifamycin)',
+  route: 'PO',
+  indications: ['Active tuberculosis — 4-month regimen', 'Latent tuberculosis infection — 3HP'],
+  dosing: [
+    {
+      indication: 'Tuberculosis — 4-Month Regimen',
+      regimen: '1200 mg PO daily (given as 6 × 200 mg tablets). Used with isoniazid, moxifloxacin, and pyrazinamide. Take with food to increase absorption.',
+    },
+    {
+      indication: 'Latent TB — 3HP Weekly',
+      regimen: '900 mg PO once weekly × 12 doses (weight >50 kg). Weight 32-49 kg: 750 mg. Take with food. Co-administer with isoniazid 15 mg/kg weekly. Complete all 12 doses within 16 weeks.',
+    },
+  ],
+  contraindications: [
+    'Concurrent protease inhibitors or certain NNRTIs',
+    'Pregnancy or planning pregnancy during treatment',
+  ],
+  cautions: [
+    'Potent CYP3A4 inducer — extensive drug interactions similar to rifampin',
+    'Colors body fluids orange-red',
+    'Flu-like syndrome (fever, chills, headache) — more common with intermittent dosing',
+    'Contact lens staining',
+  ],
+  monitoring: 'Baseline LFTs. Clinical assessment at each DOT visit. Watch for flu-like reaction.',
+  notes: 'Long half-life allows weekly dosing (for 3HP). In the 4-month TB-PRACTECAL regimen, daily dosing replaces rifampin. Take with food — increases bioavailability by 50%. Not for use with most HIV ARVs.',
+  citations: [
+    'CDC. Interim guidance: 4-month rifapentine-moxifloxacin regimen. MMWR. 2022;71(8):285-289.',
+    'Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.',
+  ],
+};
+
+const MOXIFLOXACIN: DrugEntry = {
+  id: 'moxifloxacin',
+  name: 'Moxifloxacin (Avelox)',
+  genericName: 'Moxifloxacin',
+  drugClass: 'Fluoroquinolone antibiotic (8-methoxyquinolone)',
+  route: 'PO / IV',
+  indications: ['Drug-resistant tuberculosis', 'Tuberculosis — 4-month regimen', 'TB hepatotoxicity bridge therapy'],
+  dosing: [
+    {
+      indication: 'Tuberculosis — 4-Month Regimen',
+      regimen: '400 mg PO daily. Used with isoniazid, rifapentine, and pyrazinamide. No renal dose adjustment.',
+    },
+    {
+      indication: 'MDR-TB / INH-Resistant TB',
+      regimen: '400 mg PO daily. WHO Group A agent for MDR-TB regimens. Duration: per regimen (BPaLM 26 weeks, individualized 15-20 months).',
+    },
+    {
+      indication: 'TB Hepatotoxicity — Bridge Therapy',
+      regimen: '400 mg PO daily as bridge while hepatotoxic TB drugs (INH, RIF, PZA) are held during hepatotoxicity workup.',
+    },
+  ],
+  contraindications: [
+    'Known QTc prolongation or history of torsades de pointes',
+    'Concurrent Class IA or III antiarrhythmics',
+    'Myasthenia gravis',
+  ],
+  cautions: [
+    'QTc prolongation — monitor ECG, especially with bedaquiline',
+    'Tendinopathy and tendon rupture — risk increases with age >60, corticosteroids',
+    'C. difficile risk',
+    'Aortic dissection/aneurysm risk (rare)',
+    'Peripheral neuropathy (additive with INH and linezolid)',
+  ],
+  monitoring: 'Baseline ECG and QTc. Monthly ECG if combined with bedaquiline. No renal dose adjustment needed.',
+  notes: 'Preferred fluoroquinolone for TB due to superior bactericidal activity against M. tuberculosis compared to levofloxacin. Key component of shortened TB regimens (4-month, BPaLM). QTc monitoring essential when combined with other QTc-prolonging agents.',
+  citations: [
+    'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis in adults. UpToDate. Updated Jan 2026.',
+    'CDC. Interim guidance: 4-month rifapentine-moxifloxacin regimen. MMWR. 2022;71(8):285-289.',
+  ],
+};
+
+const BEDAQUILINE: DrugEntry = {
+  id: 'bedaquiline',
+  name: 'Bedaquiline (Sirturo)',
+  genericName: 'Bedaquiline',
+  drugClass: 'Diarylquinoline anti-tuberculous agent (ATP synthase inhibitor)',
+  route: 'PO',
+  indications: ['MDR-TB', 'Pre-XDR-TB', 'XDR-TB'],
+  dosing: [
+    {
+      indication: 'MDR-TB — BPaL/BPaLM Regimen',
+      regimen: '400 mg PO daily × 2 weeks (loading), then 200 mg PO 3×/week × 24 weeks. Take with food. Total duration: 26 weeks. WHO Group A agent.',
+    },
+  ],
+  contraindications: [
+    'QTc >500 ms',
+    'Severe hepatic impairment (Child-Pugh C)',
+  ],
+  cautions: [
+    'QTc prolongation — black box warning',
+    'Hepatotoxicity — monitor LFTs monthly',
+    'Long half-life (~5.5 months) — effects persist after discontinuation',
+    'Phospholipidosis (asymptomatic, detected on liver biopsy)',
+    'Drug interactions: CYP3A4 substrate — rifampin reduces levels by 50% (do not combine)',
+  ],
+  monitoring: 'Baseline ECG + monthly ECG. QTc monitoring — hold if >500 ms. LFTs monthly. Serum electrolytes (K, Mg, Ca) monthly — correct before starting.',
+  notes: 'First novel TB drug in 40 years (FDA approved 2012). Inhibits mycobacterial ATP synthase. Cornerstone of BPaL/BPaLM regimens for MDR-TB. Do NOT combine with rifampin (reduces bedaquiline levels by 50%). Long terminal half-life means QTc effects can persist months after stopping.',
+  citations: [
+    'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis in adults. UpToDate. Updated Jan 2026.',
+    'WHO consolidated guidelines on tuberculosis Module 4: drug-resistant TB treatment. 2022.',
+  ],
+};
+
+const PRETOMANID: DrugEntry = {
+  id: 'pretomanid',
+  name: 'Pretomanid (PA-824)',
+  genericName: 'Pretomanid',
+  drugClass: 'Nitroimidazooxazine anti-tuberculous agent',
+  route: 'PO',
+  indications: ['MDR-TB', 'XDR-TB'],
+  dosing: [
+    {
+      indication: 'MDR-TB — BPaL/BPaLM Regimen',
+      regimen: '200 mg PO daily × 26 weeks. Take with food. Used in combination with bedaquiline and linezolid (± moxifloxacin).',
+    },
+  ],
+  contraindications: [
+    'Severe hepatic impairment',
+  ],
+  cautions: [
+    'Hepatotoxicity — monitor LFTs monthly',
+    'Reproductive toxicity — contraindicated in pregnancy',
+    'Limited long-term safety data (approved 2019)',
+  ],
+  monitoring: 'LFTs monthly. Pregnancy testing before initiation. Effective contraception required during treatment.',
+  notes: 'FDA approved 2019 as part of BPaL regimen for treatment-intolerant or nonresponsive MDR-TB. Dual mechanism: kills both replicating and non-replicating (hypoxic) bacilli. Only available through the TB Alliance Limited Population pathway.',
+  citations: [
+    'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis in adults. UpToDate. Updated Jan 2026.',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
@@ -6833,6 +7353,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ATORVASTATIN,
   AZITHROMYCIN,
   BACITRACIN,
+  BEDAQUILINE,
   BENZATHINE_PENICILLIN,
   BIKTARVY,
   BIVALIRUDIN,
@@ -6879,8 +7400,12 @@ export const ALL_DRUGS: DrugEntry[] = [
   ENOXAPARIN,
   EPINEPHRINE,
   ESMOLOL,
+  ETHAMBUTOL,
   ETOMIDATE,
   FAMOTIDINE,
+  FACTOR_VIII,
+  FACTOR_IX,
+  FEIBA,
   FENTANYL,
   FLUDROCORTISONE,
   FLUCONAZOLE,
@@ -6899,6 +7424,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   HYDROXOCOBALAMIN,
   IDARUCIZUMAB,
   ICATIBANT,
+  ISONIAZID,
   KETAMINE,
   KETOROLAC,
   LABETALOL,
@@ -6928,6 +7454,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   MIDAZOLAM,
   MORPHINE,
   MISOPROSTOL,
+  MOXIFLOXACIN,
   N_ACETYLCYSTEINE,
   NACL_TABLETS,
   NALOXONE,
@@ -6953,6 +7480,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   POTASSIUM_CHLORIDE_ORAL,
   PRASUGREL,
   PREDNISOLONE,
+  PRETOMANID,
   PROCAINAMIDE,
   PROCAINE_PENICILLIN,
   PROCHLORPERAZINE,
@@ -6962,6 +7490,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   PROTAMINE,
   PTU,
   QUETIAPINE,
+  PYRAZINAMIDE,
   PYRIDOXINE,
   RABIES_IMMUNE_GLOBULIN,
   RABIES_VACCINE,
@@ -6969,7 +7498,9 @@ export const ALL_DRUGS: DrugEntry[] = [
   REGULAR_INSULIN,
   INSULIN_GLARGINE,
   RETEPLASE,
+  RFVIIA,
   RIFAMPIN,
+  RIFAPENTINE,
   RISPERIDONE,
   RITONAVIR,
   RIVAROXABAN,
@@ -6992,6 +7523,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   VASOPRESSIN,
   VERAPAMIL,
   VITAMIN_K,
+  VWF_CONCENTRATE,
 ];
 
 const DRUG_MAP: Record<string, DrugEntry> = {};

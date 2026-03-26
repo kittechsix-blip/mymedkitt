@@ -293,6 +293,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/sepsis.js');
             return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS };
         },
+        'tuberculosis': async () => {
+            const m = await import('../data/trees/tuberculosis.js');
+            return { nodes: m.TUBERCULOSIS_NODES, entryNodeId: 'tb-start', categoryId: 'infectious-disease', moduleLabels: m.TUBERCULOSIS_MODULE_LABELS, citations: m.TUBERCULOSIS_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -7777,6 +7777,447 @@ const AW_PB_CONTRAINDICATIONS = {
         { num: 2, text: 'Hoffman RS, Weinhouse GL. Management of moderate and severe alcohol withdrawal syndromes. UpToDate. Updated March 2026.' },
     ],
 };
+const HEMO_SUMMARY = {
+    id: 'hemo-summary',
+    title: 'Hemophilia Steps Summary',
+    subtitle: 'Quick-reference for ED management of inherited bleeding disorders',
+    sections: [
+        {
+            heading: 'Initial Assessment',
+            body: '• [Determine diagnosis status — known hemophilia, known vWD, or suspected](#/node/hemo-dx-status)\n• [If suspected: CBC, PT/PTT, fibrinogen → isolated prolonged PTT suggests hemophilia](#/node/hemo-workup)\n• [Classify severity: Severe <1%, Moderate 1–5%, Mild 5–40%](#/node/hemo-severity)\n• 30% of hemophilia is de novo — no family history',
+        },
+        {
+            heading: 'Bleed-Specific Factor Goals',
+            body: '• [Hemarthrosis: 40–60%](#/node/hemo-hemarthrosis) — single dose often adequate\n• [Muscle/soft tissue: 40–60%](#/node/hemo-muscle-tx) — q12–24h × 2–3 days\n• [Iliopsoas: 80% × 3 days, then >50%](#/node/hemo-iliopsoas) — admit, strict bed rest\n• [ICH: 100% STAT — factor BEFORE imaging](#/node/hemo-ich)\n• [Mucosal: 30–50% + antifibrinolytics](#/node/hemo-mucosal)\n• [GI hemorrhage: 80–100%](#/node/hemo-gi)\n• [Hematuria: 50% + hydration 1.5×, NO antifibrinolytics](#/node/hemo-hematuria)\n• [Major trauma: 100% STAT](#/node/hemo-trauma)',
+        },
+        {
+            heading: 'Factor Dosing Quick Reference',
+            body: '• **FVIII:** 1 unit/kg → +2% level. Dose = (Target% − Baseline%) ÷ 2 × Weight\n• **FIX:** 1 unit/kg → +1% level. Dose = (Target% − Baseline%) × Weight\n• Half-life: FVIII 8–12h, FIX 18–24h\n• Round up to nearest whole vial',
+        },
+        {
+            heading: 'Special Situations',
+            body: '• [Inhibitors: ≥5 BU → bypassing agents (FEIBA or rFVIIa)](#/node/hemo-high-inhibitor)\n• [Mild hemophilia A: DDAVP 0.3 mcg/kg IV may suffice](#/node/hemo-mild-a)\n• [vWD: Desmopressin if documented responder, otherwise vWF concentrate](#/node/hemo-vwd)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.' },
+        { num: 2, text: 'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.' },
+    ],
+};
+const HEMO_COAG_CASCADE = {
+    id: 'hemo-coag-cascade',
+    title: 'Bleeding Disorder Differential by Lab Pattern',
+    subtitle: 'Coagulation screening interpretation for the ED',
+    sections: [
+        {
+            heading: 'Isolated Prolonged PTT (Normal PT, Normal Platelets)',
+            body: '• **Hemophilia A** (factor VIII deficiency)\n• **Hemophilia B** (factor IX deficiency)\n• Factor XI deficiency ("hemophilia C" — rare)\n• Factor XII deficiency (prolonged PTT but NO clinical bleeding)\n• Lupus anticoagulant (prolonged PTT but NO clinical bleeding)\n• Heparin contamination (from IV line or specimen)\n• Laboratory/sampling error',
+        },
+        {
+            heading: 'Isolated Prolonged PT (Normal PTT)',
+            body: '• Factor VII deficiency\n• Early warfarin therapy\n• Early liver disease\n• Vitamin K deficiency (early)',
+        },
+        {
+            heading: 'Prolonged PT and PTT',
+            body: '• Factor V deficiency\n• Factor X deficiency\n• Prothrombin (factor II) deficiency\n• Fibrinogen deficiency\n• Combined factor deficiencies\n• DIC\n• Severe liver disease\n• Supratherapeutic anticoagulation',
+        },
+        {
+            heading: 'Normal PT and PTT with Clinical Bleeding',
+            body: '• **von Willebrand disease** (most types)\n• Qualitative platelet disorders\n• Factor XIII deficiency (not detected by standard PT/PTT)\n• Fibrinolytic disorders\n\n**If vWD suspected:** Send vWF:Ag, vWF:RCo activity, and factor VIII level. Interpret with caution — vWF is an acute phase reactant (false negatives during acute illness).',
+        },
+        {
+            heading: 'Hemostasis Overview',
+            body: '**Primary hemostasis:** Platelet plug formation (vWF mediates platelet adhesion + aggregation)\n**Secondary hemostasis:** Coagulation cascade reinforces platelet plug with fibrin\n• Initiation: Tissue factor + Factor VII → activates Factor X and IX\n• Amplification: Thrombin activates Factors V, VIII, IX (positive feedback)\n• Propagation: Factor X-V complex generates large-scale thrombin → fibrinogen → fibrin\n• Factor XIII crosslinks fibrin strands → stable clot',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.' },
+        { num: 2, text: 'Kumar R, Carcao M. Inherited abnormalities of coagulation. Pediatr Clin North Am. 2013;60(6):1419-1441.' },
+    ],
+};
+const HEMO_FACTOR_PRODUCTS = {
+    id: 'hemo-factor-products',
+    title: 'Factor Replacement Products',
+    subtitle: 'Available factor concentrates and bypassing agents',
+    sections: [
+        {
+            heading: 'Factor VIII Products (Hemophilia A)',
+            body: '**Recombinant (preferred):**\n• Advate (octocog alfa)\n• Kogenate FS / Kovaltry (octocog alfa)\n• Xyntha / Xyntha Solofuse (moroctocog alfa)\n• Nuwiq (simoctocog alfa)\n\n**Extended half-life (~1.5× standard):**\n• Eloctate / Elocta (efmoroctocog alfa — Fc fusion)\n• Adynovate (rurioctocog alfa pegol — PEGylated)\n• Jivi (damoctocog alfa pegol — PEGylated)\n• Esperoct (turoctocog alfa pegol)\n• Altuviiio (efanesoctocog alfa — VWF-XTEN fusion, ~4× half-life)\n\n**Plasma-derived:**\n• Humate-P (also contains vWF — usable for vWD)\n• Koate-DVI\n• Hemofil M',
+        },
+        {
+            heading: 'Factor IX Products (Hemophilia B)',
+            body: '**Recombinant (preferred):**\n• BeneFIX (nonacog alfa)\n• Rixubis (nonacog gamma)\n\n**Extended half-life (~3× standard):**\n• Alprolix (eftrenonacog alfa — Fc fusion)\n• Idelvion (albutrepenonacog alfa — albumin fusion)\n• Rebinyn (nonacog beta pegol — PEGylated)\n\n**Plasma-derived:**\n• AlphaNine SD\n• Mononine',
+        },
+        {
+            heading: 'Bypassing Agents (For Patients with Inhibitors)',
+            body: '**FEIBA** (anti-inhibitor coagulant complex)\n• Contains activated vitamin-K-dependent factors\n• 50–75 U/kg (joints) to 100 U/kg (life-threatening)\n• Max 200 U/kg/day\n\n**rFVIIa — NovoSeven** (eptacog alfa)\n• 90 mcg/kg q2–3h × 3 doses OR 270 mcg/kg × 1\n• Preferred for FIX inhibitors (allergic risk to FIX in FEIBA)\n\n**Equally efficacious** (FENOC trial). Some patients respond better to one.',
+        },
+        {
+            heading: 'Non-Factor Therapies',
+            body: '**Emicizumab (Hemlibra):**\n• Bispecific antibody — bridges FIXa and FX (mimics FVIII function)\n• Hemophilia A prophylaxis only (with or without inhibitors)\n• Does NOT treat acute bleeds — still need factor or bypassing agents\n• Interferes with aPTT-based coagulation assays\n\n**Resource-limited alternatives:**\n• Cryoprecipitate: 1 bag/6 kg (max 10) for hemophilia A or severe vWD\n• FFP: 15 mL/kg for hemophilia B',
+        },
+        {
+            heading: 'Product Switching in Emergencies',
+            body: 'No clear evidence that switching factor brands increases inhibitor risk. In emergencies where the patient\'s specific brand is unavailable:\n• Use an alternative brand of the same factor type\n• Prefer recombinant over plasma-derived when switching\n• Document the switch for the patient\'s hematologist',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.' },
+        { num: 2, text: 'Lewandowska MD. Hemophilia A and B: Routine management including prophylaxis. UpToDate. 2026.' },
+        { num: 3, text: 'Lewandowska MD. Acute treatment of bleeding and surgery in hemophilia A and B. UpToDate. 2024.' },
+    ],
+};
+const HEMO_INHIBITOR_GUIDE = {
+    id: 'hemo-inhibitor-guide',
+    title: 'Inhibitor Management Guide',
+    subtitle: 'Managing bleeding in hemophilia patients with factor inhibitors',
+    sections: [
+        {
+            heading: 'What Are Inhibitors?',
+            body: 'Alloantibodies against infused clotting factor that neutralize its hemostatic activity. Development is the most significant complication of hemophilia treatment.\n\n• **Hemophilia A:** ~33% develop inhibitors\n• **Hemophilia B:** ~6.5% develop inhibitors\n\nRisk factors: specific genotypes, young age at first exposure, early intensive therapy.',
+        },
+        {
+            heading: 'Inhibitor Titer Classification',
+            body: '**Low titer:** <5 Bethesda Units (BU)/mL\n• Can often be overcome with higher-dose factor replacement\n• Loading dose: [Weight × 80 × (1−Hct) × titer BU] + 50 U/kg additional\n• Check post-infusion levels — if poor response, reclassify as high titer\n\n**High titer:** ≥5 BU/mL\n• Factor replacement is INEFFECTIVE\n• Requires bypassing agents (FEIBA or rFVIIa)\n\n**Low-responding:** Inhibitor stays <5 BU despite repeated factor exposure\n**High-responding:** Inhibitor rises ≥5 BU after factor exposure (anamnestic response)',
+        },
+        {
+            heading: 'Bypassing Agent Dosing',
+            body: '**FEIBA:**\n• Joint bleeds: 50–75 U/kg IV\n• Life-threatening: 100 U/kg IV\n• Repeat q12h as needed\n• ⚠️ Maximum 200 U/kg/day (thrombotic risk)\n\n**rFVIIa (NovoSeven):**\n• Standard: 90 mcg/kg IV q2–3h × 3 doses\n• Single high dose: 270 mcg/kg IV × 1\n• After single high dose: subsequent doses 90 mcg/kg, separated by ≥6h\n\nAdminister within 1 hour of bleeding onset when possible.',
+        },
+        {
+            heading: 'Choosing Between FEIBA and rFVIIa',
+            body: '• FENOC trial: **equally efficacious** for joint bleeds\n• Some patients respond better to one vs the other\n• **Prefer rFVIIa for:**\n  — Factor IX deficiency with inhibitors (allergic reaction risk to FIX in FEIBA)\n  — Factor VIII deficiency if limiting FVIII exposure while awaiting inhibitor titer decrease\n• **Refractory bleeds (10–20% of cases):** Sequential alternating FEIBA and rFVIIa q6h\n  — Reserve for life/limb-threatening bleeds\n  — Hematology guidance mandatory\n  — Series of 20 patients: safe (no thrombosis, DIC, or thrombocytopenia)',
+        },
+        {
+            heading: 'Detecting Inhibitors in the ED',
+            body: '• Inhibitor titers are NOT useful acutely (results take days)\n• **Suspect inhibitor if:** Factor infusion produces little-to-no response\n• **Check post-infusion factor levels** at 30–60 min — poor rise suggests inhibitor\n• Patients on emicizumab: aPTT will be falsely normal — NOT reliable for monitoring\n• If inhibitor suspected in previously uninhibited patient: treat the acute bleed, then arrange hematology follow-up for formal Bethesda assay',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Astermark J, et al. FENOC Study. Blood. 2007;109(2):546-551.' },
+        { num: 2, text: 'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.' },
+        { num: 3, text: 'Kempton CL, White GC. How we treat a hemophilia A patient with a factor VIII inhibitor. Blood. 2009;113(1):11-17.' },
+    ],
+};
+const HEMO_VWF_DOSING = {
+    id: 'hemo-vwf-dosing',
+    title: 'vWF Dosing Reference',
+    subtitle: 'von Willebrand factor concentrate dosing for vWD',
+    sections: [
+        {
+            heading: 'Desmopressin (DDAVP) — First-Line for Type 1 vWD',
+            body: '**Requirements:** Documented prior desmopressin challenge response\n**Contraindicated in:** Type 2B vWD (worsens thrombocytopenia)\n\n• IV: 0.3 mcg/kg (dilute in 50 mL NS, infuse over 20–30 min)\n• Intranasal: 150 mcg (<50 kg) or 300 mcg (≥50 kg)\n• Use HIGH-CONCENTRATION spray (Stimate® 150 mcg/spray)\n• Max 2–3 doses (tachyphylaxis)\n• Restrict fluids to maintenance × 24h\n• Use NS if IV fluids needed\n• Monitor electrolytes with repeated doses\n• Side effects: facial swelling, headache, water retention',
+        },
+        {
+            heading: 'vWF Concentrate — Minor Bleeding',
+            body: '**For patients NOT responsive to desmopressin:**\n\n• Loading: 30–60 RCo units/kg IV\n• Maintenance: 20–40 RCo units/kg q12–48h\n• Target: vWF:RCo and FVIII >50 IU/dL\n• Duration: 3–5 days\n• Monitor daily trough levels',
+        },
+        {
+            heading: 'vWF Concentrate — Major Bleeding or Surgery',
+            body: '• Loading: 40–60 RCo units/kg IV\n• Maintenance: 20–40 RCo units/kg q8–24h\n• Target: vWF:RCo and FVIII >50 IU/dL\n• Duration: at least 7 days\n• Monitor daily trough levels\n• ⚠️ Watch for excessive FVIII accumulation (thrombotic risk)',
+        },
+        {
+            heading: 'Adjunctive Therapies',
+            body: '**Antifibrinolytics (for mucosal bleeding):**\n• Aminocaproic acid: 50–60 mg/kg PO/IV q6h (max 5 g) × 5–7 days\n• Tranexamic acid: 10–15 mg/kg PO/IV q8–12h\n• ⚠️ CONTRAINDICATED with hematuria (renal thrombi risk)\n• Check UA before starting\n\n**Menorrhagia:**\n• First-line: Hormonal contraceptives (OCPs)\n• Adjuncts: DDAVP (if responsive) + antifibrinolytics\n\n**Resource-limited settings:**\n• Cryoprecipitate: 1 bag/6 kg (max 10 bags) — contains both vWF and FVIII',
+        },
+        {
+            heading: 'vWD Type Considerations',
+            body: '**Type 1 (80%):** Usually responds to DDAVP. Concentrate if non-responder.\n**Type 2A:** DDAVP may partially work. Concentrate preferred for significant bleeds.\n**Type 2B:** DDAVP CONTRAINDICATED. Use vWF concentrate.\n**Type 2M:** Variable DDAVP response. Test before relying on it.\n**Type 2N:** Mimics hemophilia A (low FVIII). Concentrate required.\n**Type 3:** Undetectable vWF. Severe phenotype. Concentrate always required.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nichols WL, et al. Diagnosis, evaluation and management of vWD. NHLBI. 2012.' },
+        { num: 2, text: 'Mannucci PM. Treatment of von Willebrand\'s disease. NEJM. 2004;351(7):683-694.' },
+        { num: 3, text: 'Rodeghiero F, Castaman G, Tosetto A. How I treat von Willebrand disease. Blood. 2009;114(6):1158-1165.' },
+    ],
+};
+// -------------------------------------------------------------------
+// TB Evaluation
+// -------------------------------------------------------------------
+const TB_STEPS_SUMMARY = {
+    id: 'tb-steps-summary',
+    title: 'TB Evaluation Steps Summary',
+    subtitle: 'Quick Reference — Tuberculosis Consult',
+    sections: [
+        {
+            heading: 'Module 1: ED Evaluation',
+            body: '• [Clinical suspicion — symptoms + risk factors](#/node/tb-suspicion)\n• [Airborne isolation decision](#/node/tb-isolation)\n• [Specimen collection — sputum, bronchoscopy, or tissue](#/node/tb-specimen-type)',
+        },
+        {
+            heading: 'Module 2: Diagnosis',
+            body: '• [Chest radiography interpretation](#/node/tb-cxr)\n• [AFB smear + NAA testing](#/node/tb-afb-naa)\n• [Interpret AFB/NAA results](#/node/tb-afb-naa-result)\n• [Mycobacterial culture + drug susceptibility](#/node/tb-culture)\n• [Diagnosis confirmed — select treatment pathway](#/node/tb-confirmed)',
+        },
+        {
+            heading: 'Module 3: Drug-Susceptible Treatment',
+            body: '• [RIPE regimen — standard 6-month treatment](#/node/tb-ripe)\n• [2-month sputum culture check](#/node/tb-2month-check)\n• [4-month rifapentine-moxifloxacin regimen](#/node/tb-4month-regimen)\n• [Hepatotoxicity assessment](#/node/tb-hepatotox)\n• [Hepatotoxicity management — stepwise rechallenge](#/node/tb-hepatotox-manage)',
+        },
+        {
+            heading: 'Module 4: Latent TB',
+            body: '• [Who to treat for latent TB](#/node/tb-latent-entry)\n• [Exclude active TB disease](#/node/tb-latent-exclude)\n• [Regimen selection: 3HP vs 4R vs 3HR vs 9H](#/node/tb-latent-regimen)',
+        },
+        {
+            heading: 'Module 5: Drug-Resistant TB',
+            body: '• [Resistance classification — mono, MDR, XDR](#/node/tb-resistant-class)\n• [INH monoresistance treatment](#/node/tb-inh-mono)\n• [MDR-TB approach](#/node/tb-mdr-approach)\n• [BPaL / BPaLM regimens](#/node/tb-bpal)',
+        },
+        {
+            heading: 'Module 6: HIV-TB',
+            body: '• [HIV-TB co-infection overview](#/node/tb-hiv-entry)\n• [ARV considerations with rifampin](#/node/tb-hiv-art)\n• [Treatment duration — HIV](#/node/tb-hiv-duration)\n• [IRIS recognition and management](#/node/tb-hiv-iris)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bernardo J. Diagnosis of pulmonary tuberculosis disease in adults. UpToDate. Updated Jan 30, 2026.' },
+    ],
+};
+const TB_AFB_NAA_ALGORITHM = {
+    id: 'tb-afb-naa-algorithm',
+    title: 'AFB/NAA Interpretation Algorithm',
+    subtitle: 'Diagnostic Decision Aid for Pulmonary TB',
+    sections: [
+        {
+            heading: 'AFB (+) / NAA (+)',
+            body: '**Presumptive TB — Initiate Treatment** [1]\n\n• Highest confidence for TB diagnosis\n• Start empiric RIPE regimen immediately\n• Isolate with airborne precautions\n• Await culture for species confirmation and drug susceptibility\n• Notify public health department',
+        },
+        {
+            heading: 'AFB (−) / NAA (+)',
+            body: '**Presumptive TB — NAA sufficient for diagnosis** [1]\n\n• A positive NAA test in a person at risk for TB (with no prior treatment history) is considered sufficient for diagnosis\n• Start empiric RIPE regimen\n• Continue airborne isolation\n• NAA sensitivity in smear-negative specimens: 60–77%\n• Culture confirmation still needed for species ID and DST',
+        },
+        {
+            heading: 'AFB (+) / NAA (−)',
+            body: '**Consider NTM — Repeat NAA** [1]\n\n• Most likely explanation: non-tuberculous mycobacteria (NTM)\n• Repeat NAA on a new specimen — false-negative NAA can occur\n• If TB risk is high, treat empirically while awaiting culture\n• If repeat NAA negative + low clinical suspicion → likely NTM\n• Maintain airborne precautions until TB excluded\n• Culture will definitively distinguish TB from NTM (2–6 weeks)',
+        },
+        {
+            heading: 'AFB (−) / NAA (−)',
+            body: '**TB less likely but NOT excluded** [1]\n\n• Clinical judgment is essential\n• If suspicion remains high:\n  → Continue isolation\n  → Repeat sputum collection\n  → Consider bronchoscopy for BAL\n  → Await culture results (2–6 weeks)\n• If clinical suspicion is low → discontinue isolation\n• In HIV patients: consider urine LAM antigen testing (sensitivity 50–60% with CD4 <200)',
+        },
+        {
+            heading: 'Key Testing Details',
+            body: '**GeneXpert MTB/RIF:** Simultaneously detects M. tuberculosis AND rifampin resistance. Results in 2 hours. WHO-recommended initial diagnostic test. [1]\n\n**AFB Smear Sensitivity:** 50–80% for pulmonary TB (higher with cavitary disease). Fluorochrome staining preferred over Ziehl-Neelsen. [1]\n\n**NAA Sensitivity:** 95–98% in smear-positive specimens, 60–77% in smear-negative. [1]\n\n**Culture:** Gold standard. Liquid media (BACTEC MGIT 960) — 1–3 weeks. Solid media (LJ) — 3–6 weeks. [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bernardo J. Diagnosis of pulmonary tuberculosis disease in adults. UpToDate. Updated Jan 30, 2026.' },
+    ],
+};
+const TB_TREATMENT_REGIMENS = {
+    id: 'tb-treatment-regimens',
+    title: 'TB Treatment Regimens',
+    subtitle: 'Drug-Susceptible & Latent TB Dosing Tables',
+    sections: [
+        {
+            heading: 'Drug-Susceptible Active TB — RIPE Regimen',
+            body: '**Intensive Phase (2 months — daily):**',
+            drugTable: [
+                { drug: 'Isoniazid (INH)', regimen: '5 mg/kg PO daily (max 300 mg)' },
+                { drug: 'Rifampin (RIF)', regimen: '10 mg/kg PO daily (max 600 mg)' },
+                { drug: 'Pyrazinamide (PZA)', regimen: '25 mg/kg PO daily (max 2000 mg)' },
+                { drug: 'Ethambutol (EMB)', regimen: '15–20 mg/kg PO daily (max 1600 mg)' },
+                { drug: 'Pyridoxine (B6)', regimen: '25–50 mg PO daily (neuropathy prevention)' },
+            ],
+        },
+        {
+            heading: 'Continuation Phase (4–7 months)',
+            body: '**Daily:** INH 5 mg/kg + RIF 10 mg/kg\n**3×/week (DOT only):** INH 15 mg/kg + RIF 10 mg/kg\n\n**Duration:**\n• Standard: 4 months (6 months total)\n• Cavitary + negative 2-month culture: consider 7 months (9 total)\n• Cavitary + positive 2-month culture: 7 months minimum (9 total) [1,2]',
+        },
+        {
+            heading: '4-Month Rifapentine-Moxifloxacin Regimen',
+            body: '**All daily × 4 months (17 weeks):** [3]',
+            drugTable: [
+                { drug: 'Isoniazid', regimen: '300 mg PO daily' },
+                { drug: 'Rifapentine', regimen: '1200 mg PO daily (take with food)' },
+                { drug: 'Moxifloxacin', regimen: '400 mg PO daily' },
+                { drug: 'Pyrazinamide', regimen: 'Weight-based, first 2 months only' },
+            ],
+        },
+        {
+            heading: '4-Month Regimen — Patient Selection Criteria',
+            body: '**ALL criteria must be met:** [3]\n• Age ≥12 years\n• Drug-susceptible, non-cavitary pulmonary TB\n• HIV-negative (or HIV+ with CD4 >100 on compatible ARVs)\n• Not pregnant or breastfeeding\n• No fluoroquinolone resistance\n• Sputum AFB smear grade ≤2+\n• QTc monitoring required (moxifloxacin prolongs QTc)',
+        },
+        {
+            heading: 'Latent TB Regimens — Comparison',
+            body: '**Preferred rifamycin-based regimens:** [4]',
+            drugTable: [
+                { drug: '3HP (preferred)', regimen: 'INH 15 mg/kg (max 900 mg) + Rifapentine 900 mg — weekly × 12 doses by DOT' },
+                { drug: '4R (preferred alt)', regimen: 'Rifampin 10 mg/kg (max 600 mg) — daily × 4 months' },
+                { drug: '3HR', regimen: 'INH 5 mg/kg (max 300 mg) + Rifampin 10 mg/kg (max 600 mg) — daily × 3 months' },
+                { drug: '9H (when rifamycins CI)', regimen: 'INH 5 mg/kg (max 300 mg) — daily × 9 months' },
+            ],
+        },
+        {
+            heading: 'Weight-Based Dosing Table — RIPE',
+            body: '| Weight | INH | RIF | PZA | EMB |\n|--------|-----|-----|-----|-----|\n| 40–55 kg | 300 mg | 450 mg | 1000 mg | 800 mg |\n| 56–75 kg | 300 mg | 600 mg | 1500 mg | 1200 mg |\n| 76–90 kg | 300 mg | 600 mg | 2000 mg | 1600 mg |\n\n[1,2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nahid P, et al. ATS/CDC/IDSA: treatment of drug-susceptible tuberculosis. Clin Infect Dis. 2016;63(7):e147-e195.' },
+        { num: 2, text: 'Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.' },
+        { num: 3, text: 'CDC. Interim guidance: 4-month rifapentine-moxifloxacin regimen. MMWR. 2022;71(8):285-289.' },
+        { num: 4, text: 'Horsburgh CR. Treatment of tuberculosis infection (latent tuberculosis). UpToDate. Updated Jan 2026.' },
+    ],
+};
+const TB_MDR_GUIDE = {
+    id: 'tb-mdr-guide',
+    title: 'MDR-TB Drug Guide',
+    subtitle: 'Regimen Building for Drug-Resistant Tuberculosis',
+    sections: [
+        {
+            heading: 'Resistance Definitions',
+            body: '• **Monoresistant:** Resistance to ONE first-line drug only\n• **Polyresistant:** Resistance to >1 first-line drug (but NOT both INH + RIF)\n• **MDR-TB:** Resistance to at least isoniazid AND rifampin\n• **Pre-XDR-TB:** MDR-TB + resistance to any fluoroquinolone\n• **XDR-TB:** MDR-TB + fluoroquinolone resistance + bedaquiline or linezolid resistance [1]',
+        },
+        {
+            heading: 'WHO Drug Grouping for MDR-TB',
+            body: '**Group A — Include ALL (unless contraindicated):** [1,2]\n• Levofloxacin or Moxifloxacin (fluoroquinolone)\n• Bedaquiline\n• Linezolid\n\n**Group B — Add NEXT:** [1,2]\n• Clofazimine\n• Cycloserine or Terizidone\n\n**Group C — Add when Groups A+B insufficient:** [1,2]\n• Ethambutol\n• Delamanid\n• Pyrazinamide\n• Imipenem-cilastatin or Meropenem\n• Amikacin (or Streptomycin)\n• Ethionamide or Prothionamide\n• p-aminosalicylic acid',
+        },
+        {
+            heading: 'BPaL Regimen — 26 Weeks',
+            body: '**Bedaquiline + Pretomanid + Linezolid:** [1]',
+            drugTable: [
+                { drug: 'Bedaquiline', regimen: '400 mg daily × 2 weeks, then 200 mg 3×/week × 24 weeks' },
+                { drug: 'Pretomanid', regimen: '200 mg daily × 26 weeks' },
+                { drug: 'Linezolid', regimen: '1200 mg daily × 26 weeks (reduce to 600 mg if toxicity)' },
+            ],
+        },
+        {
+            heading: 'BPaLM Regimen — 26 Weeks',
+            body: '**Add moxifloxacin when fluoroquinolone susceptibility confirmed:** [1]',
+            drugTable: [
+                { drug: 'Bedaquiline', regimen: '400 mg daily × 2 weeks, then 200 mg 3×/week × 24 weeks' },
+                { drug: 'Pretomanid', regimen: '200 mg daily × 26 weeks' },
+                { drug: 'Linezolid', regimen: '1200 mg daily (may reduce to 600 mg)' },
+                { drug: 'Moxifloxacin', regimen: '400 mg daily × 26 weeks' },
+            ],
+        },
+        {
+            heading: 'Critical Monitoring — BPaL/BPaLM',
+            body: '**QTc (bedaquiline + moxifloxacin):**\n• Baseline ECG before starting\n• At least monthly ECGs throughout treatment\n• Hold if QTc >500 ms\n• Correct electrolytes (K, Mg, Ca) before starting and monthly\n\n**CBC (linezolid):**\n• Weekly CBC — thrombocytopenia and anemia are dose-limiting\n• If platelets <75,000 or Hgb drops >2 g/dL → reduce linezolid to 600 mg\n• If severe → hold linezolid temporarily\n\n**Visual acuity + neuropathy (linezolid):**\n• Monthly visual acuity testing — optic neuritis is irreversible if missed\n• Monthly peripheral neuropathy assessment\n\n**LFTs (all agents):**\n• Monthly hepatic function tests\n• Hold if ALT >5× ULN or >3× ULN with symptoms [1]',
+        },
+        {
+            heading: 'Expert Resources',
+            body: '• CDC Division of Tuberculosis Elimination: 404-639-8120\n• Regional TB Centers of Excellence\n• State/local TB control programs\n• WHO drug-resistant TB resources [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis in adults. UpToDate. Updated Jan 2026.' },
+        { num: 2, text: 'WHO consolidated guidelines on tuberculosis Module 4: drug-resistant TB treatment. 2022.' },
+    ],
+};
+const TB_HIV_CONSIDERATIONS = {
+    id: 'tb-hiv-considerations',
+    title: 'HIV-TB Considerations',
+    subtitle: 'ARV Interactions, IRIS, & Duration Adjustments',
+    sections: [
+        {
+            heading: 'Rifampin-ARV Interactions',
+            body: '**Rifampin is a potent CYP3A4 inducer** — reduces levels of many ARVs: [1]\n\n**Compatible with rifampin:**\n• Efavirenz (EFV) — standard dose, no adjustment\n• Dolutegravir (DTG) — increase to 50 mg BID (from daily)\n• Raltegravir (RAL) — increase to 800 mg BID\n\n**INCOMPATIBLE with rifampin:**\n• All protease inhibitors (boosted or unboosted)\n• Cobicistat-boosted regimens (elvitegravir/c)\n• Most NNRTIs except efavirenz\n• Doravirine\n\n**Alternative:** Rifabutin instead of rifampin — fewer drug interactions, compatible with some PIs at adjusted doses [1]',
+        },
+        {
+            heading: 'ART Timing with TB',
+            body: '**When to start ART after TB diagnosis:** [1]\n\n• **CD4 <50:** Start ART within **2 weeks** of TB treatment\n• **CD4 ≥50:** Start ART within **8 weeks** of TB treatment\n• **CNS TB (TB meningitis):** Delay ART to **8 weeks** regardless of CD4 count (high IRIS risk)\n\n**Key principle:** Never delay TB treatment while waiting for ART. Start TB treatment immediately upon diagnosis.',
+        },
+        {
+            heading: 'IRIS — Immune Reconstitution Inflammatory Syndrome',
+            body: '**Definition:** Paradoxical clinical worsening after starting ART, caused by recovering immune system mounting exaggerated response to TB antigens [1]\n\n**Timing:** 1–4 weeks after ART initiation\n\n**Risk factors for IRIS:**\n• Low baseline CD4 (<50)\n• High TB burden (disseminated, cavitary)\n• Early ART initiation\n• Large drop in HIV viral load\n\n**Features:**\n• New/worsening fever\n• Enlarging lymph nodes\n• Worsening pulmonary infiltrates\n• New pleural/pericardial effusions\n\n**Management:**\n• **Continue BOTH TB treatment AND ART**\n• Mild: NSAIDs\n• Moderate-severe: Prednisone 1.5 mg/kg/day × 2 weeks, then taper over 2–4 weeks\n• Life-threatening: High-dose corticosteroids, consider temporary ART interruption with specialist guidance only [1]',
+        },
+        {
+            heading: 'Duration Adjustments — HIV',
+            body: '**Standard duration:** Same RIPE regimen as HIV-negative patients [1]\n\n**Extend to 9 months total if:**\n• Cavitary disease on initial CXR\n• Positive sputum culture at 2 months\n• Slow clinical response\n\n**4-month regimen in HIV:**\n• May be used if CD4 >100 and on compatible ARVs\n• Not recommended if CD4 ≤100\n\n**Treatment failure (positive cultures at 4+ months):**\n• Repeat drug susceptibility testing\n• Assess adherence + drug interactions\n• Consider therapeutic drug monitoring\n• Consult TB specialist [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Brust JCM. Treatment of pulmonary TB in adults with HIV infection: Follow-up after initiation. UpToDate. Updated Feb 2026.' },
+    ],
+};
+const TB_HEPATOTOX_GUIDE = {
+    id: 'tb-hepatotox-guide',
+    title: 'TB Drug Hepatotoxicity',
+    subtitle: 'Recognition, Management & Stepwise Rechallenge',
+    sections: [
+        {
+            heading: 'Definition',
+            body: '**Drug-induced hepatotoxicity during TB treatment:** [1]\n\n• AST/ALT **>3× ULN WITH symptoms** (nausea, vomiting, abdominal pain, jaundice, dark urine)\n• AST/ALT **>5× ULN WITHOUT symptoms**\n\nMost common cause: **pyrazinamide** > isoniazid > rifampin [1]',
+        },
+        {
+            heading: 'Risk Factors for Hepatotoxicity',
+            body: '• Age >35 years\n• Alcohol use\n• Pre-existing liver disease (hepatitis B/C, cirrhosis)\n• HIV co-infection\n• Pregnancy or immediate postpartum\n• Concurrent hepatotoxic medications\n• INH acetylator status (slow acetylators at higher risk) [1]',
+        },
+        {
+            heading: 'Step 1 — Hold Hepatotoxic Drugs',
+            body: '**Stop ALL hepatotoxic TB drugs:** INH, RIF, PZA [1]\n\n**Continue:** Ethambutol (NOT hepatotoxic)\n\n**Bridge therapy:** Consider adding moxifloxacin 400 mg PO daily to maintain at least 2 active drugs while hepatotoxic agents are held [1]',
+        },
+        {
+            heading: 'Step 2 — Monitor',
+            body: '**Monitor LFTs weekly** until AST/ALT <2× ULN [1]\n\n• Also monitor bilirubin, INR\n• Assess for other causes of hepatotoxicity (viral hepatitis, alcohol, other drugs)\n• If fulminant hepatic failure → discontinue all TB drugs, hepatology consult',
+        },
+        {
+            heading: 'Step 3 — Stepwise Rechallenge',
+            body: '**Reintroduce ONE drug at a time, 1 week apart:** [1]\n\n1. **Rifampin FIRST** — least hepatotoxic of the 3, most important for efficacy\n   → Start at full dose, check LFTs after 1 week\n   → If LFTs stable → add next drug\n\n2. **Isoniazid SECOND** — recheck LFTs after 1 week\n   → If LFTs stable → consider PZA\n\n3. **Pyrazinamide LAST** — most commonly implicated\n   → May choose to **omit permanently** if severe hepatotoxicity occurred\n\n**If PZA permanently discontinued:** Extend total treatment to **9 months** [1]\n\n**If hepatotoxicity recurs on rechallenge:**\n• Use non-hepatotoxic regimen: ethambutol + fluoroquinolone ± injectable\n• Consult TB specialist\n• Consider therapeutic drug monitoring',
+        },
+        {
+            heading: 'Baseline LFT Indications',
+            body: '**Obtain baseline LFTs BEFORE starting TB treatment if:** [1]\n• Age >35 years\n• HIV co-infection\n• Hepatitis B or C\n• Alcohol use\n• Pregnancy or ≤3 months postpartum\n• Concurrent hepatotoxic medications\n• History of liver disease\n\n**Monthly LFTs recommended for these patients throughout treatment**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.' },
+    ],
+};
+const TB_PATIENT_INFO = {
+    id: 'tb-patient-info',
+    title: 'Tuberculosis — Patient Information',
+    subtitle: 'What You Need to Know About Your TB Treatment',
+    shareable: true,
+    sections: [
+        {
+            heading: 'What Is Tuberculosis (TB)?',
+            body: 'TB is a bacterial infection caused by Mycobacterium tuberculosis. It most commonly affects the lungs but can affect other parts of the body. TB spreads through the air when someone with active TB coughs, sneezes, or talks.',
+        },
+        {
+            heading: 'Active TB vs. Latent TB',
+            body: '• **Active TB disease:** You have symptoms (cough, fever, night sweats, weight loss) and can spread TB to others. You need treatment right away.\n• **Latent TB infection:** The TB bacteria are in your body but are not making you sick. You do not have symptoms and cannot spread TB. Treatment prevents it from becoming active.',
+        },
+        {
+            heading: 'Your Treatment',
+            body: '• TB treatment involves taking multiple medications for several months\n• **It is critical to take ALL your medications exactly as prescribed for the full course**\n• Stopping treatment early or missing doses can cause the bacteria to become drug-resistant, which is much harder to treat\n• Your healthcare team may use Directly Observed Therapy (DOT), where a health worker watches you take each dose',
+        },
+        {
+            heading: 'Common Side Effects',
+            body: '• **Orange-colored body fluids** (urine, tears, sweat) — this is NORMAL with rifampin and not harmful\n• Nausea, stomach upset — take medications with a small snack if needed\n• Fatigue, joint aches\n• Skin rash or itching\n\n**Contact your doctor IMMEDIATELY if you experience:**\n• Yellowing of skin or eyes (jaundice)\n• Dark urine or pale stools\n• Persistent nausea, vomiting, or loss of appetite\n• Abdominal pain\n• Numbness or tingling in hands/feet\n• Vision changes or blurred vision\n• Fever lasting more than 3 days\n• Easy bruising or unusual bleeding',
+        },
+        {
+            heading: 'Preventing Spread',
+            body: '• **Cover your mouth and nose** when coughing or sneezing\n• Stay home from work/school until your doctor says you are no longer contagious (usually after 2–3 weeks of treatment with improving symptoms and smears)\n• Open windows for ventilation when possible\n• Wear a mask when around others until cleared by your doctor\n• Close contacts should be tested for TB',
+        },
+        {
+            heading: 'Follow-Up',
+            body: '• Keep ALL scheduled appointments\n• Bring your medications to every visit\n• Monthly sputum tests to check your progress\n• Blood tests to monitor for side effects\n• Contact your doctor or local health department if you have questions or concerns\n\n**Remember:** TB is curable with proper treatment. The most important thing you can do is complete your entire course of treatment.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sterling TR. Treatment of drug-susceptible pulmonary tuberculosis. UpToDate. Updated Nov 2025.' },
+    ],
+};
+const TB_RISK_FACTORS = {
+    id: 'tb-risk-factors',
+    title: 'TB Risk Factor Checklist',
+    subtitle: 'Clinical & Epidemiologic Risk Assessment',
+    sections: [
+        {
+            heading: 'Epidemiologic Risk Factors',
+            body: '• Born in or travel to TB-endemic country (Southeast Asia, Sub-Saharan Africa, Eastern Europe, Central Asia, Latin America)\n• Close contact with active TB case\n• Residence in congregate settings (shelters, correctional facilities, long-term care)\n• Healthcare workers with TB exposure\n• Immigration from high-burden country within 5 years\n• History of prior TB infection or incomplete treatment [1]',
+        },
+        {
+            heading: 'Clinical Risk Factors for Reactivation',
+            body: '• HIV infection (greatest risk factor — 20–30× increased risk)\n• Immunosuppressive therapy (TNF-α inhibitors, chronic corticosteroids ≥15 mg/day prednisone, chemotherapy)\n• Organ transplant recipients\n• End-stage renal disease / hemodialysis\n• Diabetes mellitus\n• Silicosis\n• Malnutrition / low body weight\n• Injection drug use\n• Gastrectomy or jejunoileal bypass\n• Head and neck cancer [1]',
+        },
+        {
+            heading: 'Risk Factors for Drug Resistance',
+            body: '• Prior TB treatment (especially incomplete treatment)\n• Contact with known drug-resistant TB case\n• Birth in or travel to area with high MDR-TB prevalence:\n  → Eastern Europe (Russia, Ukraine, Belarus, Moldova)\n  → Central Asia (Kazakhstan, Uzbekistan)\n  → Parts of Sub-Saharan Africa\n  → India, China, Philippines\n• HIV co-infection\n• Cavitary disease with positive cultures after 2 months of treatment\n• Treatment failure on standard regimen [1,2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bernardo J. Diagnosis of pulmonary tuberculosis disease in adults. UpToDate. Updated Jan 30, 2026.' },
+        { num: 2, text: 'Heysell SK. Treatment of drug-resistant pulmonary tuberculosis in adults. UpToDate. Updated Jan 2026.' },
+    ],
+};
 // -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
@@ -8013,6 +8454,19 @@ export const INFO_PAGES = {
     'aw-withdrawal-timing': AW_WITHDRAWAL_TIMING,
     'aw-icu-criteria': AW_ICU_CRITERIA,
     'aw-pb-contraindications': AW_PB_CONTRAINDICATIONS,
+    'hemo-summary': HEMO_SUMMARY,
+    'hemo-coag-cascade': HEMO_COAG_CASCADE,
+    'hemo-factor-products': HEMO_FACTOR_PRODUCTS,
+    'hemo-inhibitor-guide': HEMO_INHIBITOR_GUIDE,
+    'hemo-vwf-dosing': HEMO_VWF_DOSING,
+    'tb-steps-summary': TB_STEPS_SUMMARY,
+    'tb-afb-naa-algorithm': TB_AFB_NAA_ALGORITHM,
+    'tb-treatment-regimens': TB_TREATMENT_REGIMENS,
+    'tb-mdr-guide': TB_MDR_GUIDE,
+    'tb-hiv-considerations': TB_HIV_CONSIDERATIONS,
+    'tb-hepatotox-guide': TB_HEPATOTOX_GUIDE,
+    'tb-patient-info': TB_PATIENT_INFO,
+    'tb-risk-factors': TB_RISK_FACTORS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
