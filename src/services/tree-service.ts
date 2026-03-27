@@ -419,6 +419,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/massive-transfusion.js');
       return { nodes: m.MASSIVE_TRANSFUSION_NODES, entryNodeId: 'mtp-start', categoryId: 'trauma-surg', moduleLabels: m.MASSIVE_TRANSFUSION_MODULE_LABELS, citations: m.MASSIVE_TRANSFUSION_CITATIONS };
     },
+    'pelvic-fracture': async () => {
+      const m = await import('../data/trees/pelvic-fracture.js');
+      return { nodes: m.PELVIC_FRACTURE_NODES, entryNodeId: 'pf-start', categoryId: 'trauma-surg', moduleLabels: m.PELVIC_FRACTURE_MODULE_LABELS, citations: m.PELVIC_FRACTURE_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

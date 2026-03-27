@@ -112,6 +112,7 @@ function renderActiveQuestion(card, node, opts) {
     // Images
     renderNodeImages(card, node);
     // Calculator links
+    console.log('[DEBUG] renderActiveQuestion node:', node.id, 'calculatorLinks:', node.calculatorLinks);
     renderCalcLinks(card, node);
     // Citations
     if (node.citation?.length && opts.config) {

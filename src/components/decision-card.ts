@@ -139,6 +139,7 @@ function renderActiveQuestion(card: HTMLElement, node: DecisionNode, opts: CardO
   renderNodeImages(card, node);
 
   // Calculator links
+  console.log('[DEBUG] renderActiveQuestion node:', node.id, 'calculatorLinks:', node.calculatorLinks);
   renderCalcLinks(card, node);
 
   // Citations
