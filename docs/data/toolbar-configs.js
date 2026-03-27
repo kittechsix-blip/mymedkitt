@@ -316,6 +316,23 @@ const TOOLBAR_CONFIGS = {
         { id: 'globe-exam', label: 'Exam', icon: '👁️', action: 'calculator', target: 'globe-exam' },
         { id: 'globe-dispo', label: 'Checklist', icon: '✅', action: 'calculator', target: 'globe-dispo' },
     ],
+    'massive-transfusion': [
+        { id: 'mtp-calc', label: 'MTP Calc', icon: '🩸', action: 'calculator', target: 'mtp-component' },
+        { id: 'calcium', label: 'Calcium', icon: '💉', action: 'calculator', target: 'calcium-replacement' },
+        { id: 'teg', label: 'TEG', icon: '📊', action: 'calculator', target: 'teg-interpreter' },
+        { id: 'blood-select', label: 'Blood Type', icon: '🅾️', action: 'calculator', target: 'emergency-blood-selection' },
+    ],
+    'pelvic-fracture': [
+        { id: 'wses', label: 'WSES', icon: '📊', action: 'calculator', target: 'wses-pelvic' },
+        { id: 'urethral', label: 'Urethral', icon: '⚠️', action: 'calculator', target: 'urethral-injury-risk' },
+        { id: 'hemorrhage', label: 'Hemorrhage', icon: '🩸', action: 'calculator', target: 'pelvic-hemorrhage-source' },
+    ],
+    'diabetes-management': [
+        { id: 'hypo-tx', label: 'Hypo Tx', icon: '💉', action: 'calculator', target: 'hypo-treatment' },
+        { id: 'sliding', label: 'Sliding', icon: '📊', action: 'calculator', target: 'sliding-scale-gen' },
+        { id: 'tdd', label: 'TDD', icon: '🧮', action: 'calculator', target: 'tdd-estimator' },
+        { id: 'icr', label: 'ICR', icon: '🍽️', action: 'calculator', target: 'icr-calc' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
