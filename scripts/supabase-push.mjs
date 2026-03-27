@@ -349,6 +349,11 @@ if (!isUpdate) {
     recommendation: n.recommendation || null,
     next: n.next || null,
     options: n.options || null,
+    calculator_links: n.calculatorLinks || null,
+    treatment: n.treatment || null,
+    citation: n.citation || null,
+    confidence: n.confidence || null,
+    images: n.images || null,
   }));
 
   // Batch insert (Supabase has row limits)
@@ -379,6 +384,11 @@ if (!isUpdate) {
     recommendation: n.recommendation || null,
     next: n.next || null,
     options: n.options || null,
+    calculator_links: n.calculatorLinks || null,
+    treatment: n.treatment || null,
+    citation: n.citation || null,
+    confidence: n.confidence || null,
+    images: n.images || null,
   }));
 
   const BATCH_SIZE = 50;
