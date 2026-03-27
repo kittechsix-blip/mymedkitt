@@ -4363,6 +4363,170 @@ const INSULIN_GLARGINE: DrugEntry = {
   ],
 };
 
+const INSULIN_LISPRO: DrugEntry = {
+  id: 'insulin-lispro',
+  name: 'Insulin Lispro (Humalog)',
+  genericName: 'Insulin lispro',
+  drugClass: 'Rapid-acting insulin',
+  route: 'SC',
+  indications: ['Mealtime insulin coverage', 'Inpatient basal-bolus therapy', 'Correction scale insulin', 'Type 1 diabetes', 'Type 2 diabetes'],
+  dosing: [
+    {
+      indication: 'Inpatient - mealtime bolus',
+      regimen: 'Give immediately before meals.\n\nDose = 50% of TDD divided by 3 meals.\n\nExample: TDD 40 U => Bolus 20 U total => ~7 U per meal.\n\nHold if patient NPO or eating <50% of meal.',
+    },
+    {
+      indication: 'Inpatient - correction scale',
+      regimen: 'Add to mealtime dose based on pre-meal glucose:\n\nCorrection Factor (CF) = 1800 / TDD\n\n| Pre-meal Glucose | Extra Dose |\n|-----------------|------------|\n| 150-199 | +1 U |\n| 200-249 | +2 U |\n| 250-299 | +3 U |\n| 300-349 | +4 U |\n| >350 | +5 U, notify MD |\n\nAdjust scale based on CF calculation.',
+    },
+    {
+      indication: 'Outpatient - starting mealtime insulin',
+      regimen: 'Start with largest meal: 4 U OR 10% of basal dose.\n\nTitrate based on 2-hour post-meal glucose (target <180 mg/dL).\n\nCarb counting: Use insulin-to-carb ratio (ICR) = 500 / TDD\nExample: TDD 50 U => ICR = 10 (1 U per 10g carbs)',
+    },
+  ],
+  contraindications: [
+    'Hypoglycemia (glucose <70 mg/dL)',
+    'Do NOT give IV',
+  ],
+  cautions: [
+    'Onset 15-30 min, peak 1-2 hours, duration 3-5 hours',
+    'Do not give if patient NPO or unlikely to eat',
+    'Reduce dose if renal impairment (CKD 4-5)',
+    'Hold if glucose <100 mg/dL',
+  ],
+  monitoring: 'Glucose before meals and at bedtime. Adjust doses based on patterns over 2-3 days.',
+  notes: 'Rapid-acting insulin analog for mealtime coverage. Alternatives: aspart (Novolog), glulisine (Apidra). All have similar onset/duration. Biosimilars available (Admelog, Lyumjev). Best given with meals for prandial coverage or as correction for hyperglycemia.',
+  citations: [
+    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+    'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients in Non-Critical Care Setting. J Clin Endocrinol Metab. 2012;97(1):16-38.',
+  ],
+};
+
+const METFORMIN: DrugEntry = {
+  id: 'metformin',
+  name: 'Metformin (Glucophage)',
+  genericName: 'Metformin hydrochloride',
+  drugClass: 'Biguanide (antihyperglycemic)',
+  route: 'PO',
+  indications: ['Type 2 diabetes - first line', 'Prediabetes', 'PCOS', 'Weight management adjunct'],
+  dosing: [
+    {
+      indication: 'Type 2 Diabetes - initiation',
+      regimen: 'Start 500 mg once daily with dinner.\nIncrease to 500 mg BID after 1 week if tolerated.\nTarget: 1000 mg BID (optimal dose).\nMaximum: 2550 mg/day (850 mg TID or 1000 mg BID + 500 mg).\n\nStart low, go slow to minimize GI side effects.',
+    },
+    {
+      indication: 'Type 2 Diabetes - renal dosing',
+      regimen: 'eGFR >45: No dose adjustment.\neGFR 30-45: Use caution, do not initiate, may continue at reduced dose.\neGFR <30: Contraindicated.\n\nHold 48 hours before and after IV contrast in patients with eGFR <60.',
+    },
+  ],
+  contraindications: [
+    'eGFR <30 mL/min/1.73m2',
+    'Metabolic acidosis (including DKA)',
+    'Acute or chronic conditions increasing lactic acidosis risk',
+    'Severe hepatic impairment',
+    'Heavy alcohol use',
+  ],
+  cautions: [
+    'Hold before IV contrast if eGFR <60 (48h before and after)',
+    'Hold for 48h after surgery or during acute illness',
+    'GI side effects common initially (diarrhea, nausea, abdominal discomfort)',
+    'May cause vitamin B12 deficiency with long-term use',
+    'Lactic acidosis rare but serious (1/30,000 patient-years)',
+  ],
+  monitoring: 'Renal function (eGFR) at baseline, then annually. B12 level if on >4 years. Lactate if suspected lactic acidosis.',
+  notes: 'First-line therapy for Type 2 diabetes per ADA guidelines. Does NOT cause hypoglycemia as monotherapy. Associated with modest weight loss. CV neutral (not harmful, not proven beneficial). Extended-release formulation (Metformin ER) has fewer GI side effects.',
+  citations: [
+    'ElSayed NA, et al. 9. Pharmacologic Approaches to Glycemic Treatment: Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1):S158-S178.',
+    'Inzucchi SE, et al. Management of Hyperglycemia in Type 2 Diabetes, 2015. Diabetes Care. 2015;38(1):140-149.',
+  ],
+};
+
+const EMPAGLIFLOZIN: DrugEntry = {
+  id: 'empagliflozin',
+  name: 'Empagliflozin (Jardiance)',
+  genericName: 'Empagliflozin',
+  drugClass: 'SGLT2 Inhibitor',
+  route: 'PO',
+  indications: ['Type 2 diabetes with ASCVD/HF/CKD', 'Heart failure with reduced EF', 'Chronic kidney disease', 'Type 2 diabetes - second line'],
+  dosing: [
+    {
+      indication: 'Type 2 Diabetes',
+      regimen: '10 mg PO once daily in the morning.\nMay increase to 25 mg daily if additional glycemic control needed.\n\nCan be used with eGFR >20 mL/min for CV/renal benefit (glycemic efficacy reduced at low eGFR).',
+    },
+    {
+      indication: 'Heart Failure (HFrEF)',
+      regimen: '10 mg PO once daily.\nPer EMPEROR-Reduced trial: reduces HF hospitalization and CV death.\nCan use regardless of diabetes status.',
+    },
+    {
+      indication: 'Chronic Kidney Disease',
+      regimen: '10 mg PO once daily.\nContinue until dialysis or transplant.\nReduces progression of kidney disease independent of glycemic effect.',
+    },
+  ],
+  contraindications: [
+    'Type 1 diabetes (high DKA risk)',
+    'Dialysis-dependent ESRD',
+    'History of euglycemic DKA on SGLT2i',
+    'Pregnancy/breastfeeding',
+  ],
+  cautions: [
+    'EUGLYCEMIC DKA: Can occur at glucose 150-250 mg/dL - check ketones if GI symptoms',
+    'Hold 3-4 days before major surgery',
+    'Genital mycotic infections (yeast infections) common',
+    'UTI risk modestly increased',
+    'Hypotension/volume depletion in elderly or on diuretics',
+    'Fournier gangrene (rare but serious)',
+  ],
+  monitoring: 'Renal function, volume status, signs of DKA. Counsel on DKA symptoms.',
+  notes: 'SGLT2 inhibitors have proven CV mortality benefit (EMPA-REG) and renal protection independent of glucose lowering. Preferred add-on in Type 2 DM with HF, CKD, or established ASCVD. Alternatives: dapagliflozin (Farxiga), canagliflozin (Invokana). DO NOT restart after euglycemic DKA episode.',
+  citations: [
+    'Zinman B, et al. Empagliflozin, Cardiovascular Outcomes, and Mortality in Type 2 Diabetes. N Engl J Med. 2015;373(22):2117-2128.',
+    'Packer M, et al. Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure. N Engl J Med. 2020;383(15):1413-1424.',
+  ],
+};
+
+const SEMAGLUTIDE: DrugEntry = {
+  id: 'semaglutide',
+  name: 'Semaglutide (Ozempic/Wegovy/Rybelsus)',
+  genericName: 'Semaglutide',
+  drugClass: 'GLP-1 Receptor Agonist',
+  route: 'SC/PO',
+  indications: ['Type 2 diabetes', 'Weight management', 'Cardiovascular risk reduction in T2DM'],
+  dosing: [
+    {
+      indication: 'Type 2 Diabetes - SC (Ozempic)',
+      regimen: 'Start 0.25 mg SC once weekly x 4 weeks.\nIncrease to 0.5 mg weekly x 4 weeks.\nMay increase to 1 mg weekly if needed.\nMaximum: 2 mg weekly (for additional glycemic control).\n\nInject in abdomen, thigh, or upper arm. Same day each week.',
+    },
+    {
+      indication: 'Type 2 Diabetes - Oral (Rybelsus)',
+      regimen: 'Start 3 mg PO once daily x 30 days.\nIncrease to 7 mg daily x 30 days.\nMay increase to 14 mg daily.\n\nMUST take on empty stomach with <=4 oz water, 30 min before first food/drink/other meds.',
+    },
+    {
+      indication: 'Weight Management (Wegovy)',
+      regimen: 'Escalating dose over 16 weeks:\nWeeks 1-4: 0.25 mg weekly\nWeeks 5-8: 0.5 mg weekly\nWeeks 9-12: 1 mg weekly\nWeeks 13-16: 1.7 mg weekly\nMaintenance: 2.4 mg weekly\n\nAverage weight loss: 15% body weight.',
+    },
+  ],
+  contraindications: [
+    'Personal/family history of medullary thyroid carcinoma (MTC)',
+    'Multiple endocrine neoplasia syndrome type 2 (MEN2)',
+    'Pregnancy',
+    'Type 1 diabetes',
+  ],
+  cautions: [
+    'Nausea, vomiting, diarrhea common initially - start low, increase slowly',
+    'Pancreatitis risk (stop if suspected)',
+    'Gallbladder disease',
+    'Diabetic retinopathy may worsen with rapid glucose improvement',
+    'Delays gastric emptying - hold before surgery/procedures',
+    'Do not use with other GLP-1 agonists',
+  ],
+  monitoring: 'A1c, weight, renal function. Monitor for GI side effects. Screen for thyroid nodules.',
+  notes: 'GLP-1 agonists provide significant A1c reduction and weight loss. CV benefit proven (SUSTAIN-6, SELECT). Preferred second-line agent after metformin, especially if weight loss desired or ASCVD present. Tirzepatide (Mounjaro) is similar (GLP-1/GIP dual agonist). Hold before surgery.',
+  citations: [
+    'Marso SP, et al. Semaglutide and Cardiovascular Outcomes in Patients with Type 2 Diabetes. N Engl J Med. 2016;375(19):1834-1844.',
+    'Wilding JPH, et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity. N Engl J Med. 2021;384(11):989-1002.',
+  ],
+};
+
 const RETEPLASE: DrugEntry = {
   id: 'reteplase',
   name: 'Reteplase',
@@ -5595,6 +5759,10 @@ const TRANEXAMIC_ACID: DrugEntry = {
     {
       indication: 'Antiplatelet reversal — adjunct (ICH or major bleeding)',
       regimen: '1 g IV load over 10 min, then consider 1 g over 8 hours. By inhibiting plasmin, TXA may protect platelet GPIb receptors from degradation, potentially improving platelet function. Several CABG studies showed improved platelet function and reduced blood loss in patients on antiplatelet agents. Use as adjunct to DDAVP in refractory cases.',
+    },
+    {
+      indication: 'Pelvic fracture / trauma hemorrhage',
+      regimen: '1 g IV over 10 minutes as soon as possible (ideally within 3 hours of injury), then 1 g IV infusion over 8 hours. CRASH-2 trial: 20,211 trauma patients — mortality benefit only if given within 3 hours (NNT 67). Given >3 hours: may increase mortality. Do NOT give if >3 hours from injury.',
     },
   ],
   contraindications: [
@@ -7104,7 +7272,150 @@ const FFP: DrugEntry = {
   ],
 };
 
+const CRYOPRECIPITATE: DrugEntry = {
+  id: 'cryoprecipitate',
+  name: 'Cryoprecipitate',
+  genericName: 'Cryoprecipitated antihemophilic factor',
+  drugClass: 'Blood Product',
+  route: 'IV',
+  indications: ['Hypofibrinogenemia (MTP)', 'DIC with bleeding', 'vWF/Factor VIII replacement (if concentrates unavailable)', 'tPA reversal (adjunct)'],
+  dosing: [
+    {
+      indication: 'Massive transfusion protocol',
+      regimen: '10 units (two 5-unit pools) initially. Each 10 units raises fibrinogen ~50 mg/dL. Target fibrinogen >150-200 mg/dL (>200 for CNS injury). Repeat q30-60 min as guided by TEG/ROTEM or fibrinogen level.',
+    },
+    {
+      indication: 'DIC with bleeding',
+      regimen: '10 units initially, then repeat based on fibrinogen level. Target fibrinogen >100-150 mg/dL.',
+    },
+    {
+      indication: 'tPA reversal',
+      regimen: '10 units initially (with TXA). Target fibrinogen >150-200 mg/dL. Each 10 units raises fibrinogen ~50 mg/dL.',
+    },
+  ],
+  contraindications: ['IgA deficiency with anti-IgA antibodies (anaphylaxis risk)'],
+  cautions: [
+    'Contains high concentration of fibrinogen, Factor VIII, vWF, Factor XIII, and fibronectin',
+    'ABO compatibility preferred but not required (small plasma volume)',
+    'Thaw time ~20-30 min if not pre-thawed',
+    'Volume per pool: ~15-20 mL per unit (10 units = 150-200 mL)',
+  ],
+  monitoring: 'Fibrinogen level pre- and post-transfusion. TEG/ROTEM if available (K-time, alpha angle). Watch for transfusion reactions.',
+  notes: 'Concentrated source of fibrinogen, Factor VIII, and vWF. Each unit is derived from one unit of FFP and contains at least 150 mg fibrinogen and 80 IU Factor VIII. Typical pool of 5 units provides ~750 mg fibrinogen. For MTP, fibrinogen is often depleted early. If fibrinogen concentrate (RiaSTAP) is available, it provides more predictable dosing.',
+  citations: [
+    'Holcomb JB, et al. PROPPR: Transfusion of plasma, platelets, and red blood cells in a 1:1:1 ratio. JAMA. 2015;313(5):471-482.',
+    'Levy JH, et al. Fibrinogen and hemostasis: a primary hemostatic target. Anesth Analg. 2012;114(2):261-274.',
+  ],
+};
 
+const PACKED_RBCS: DrugEntry = {
+  id: 'packed-rbcs',
+  name: 'Packed Red Blood Cells (pRBCs)',
+  genericName: 'Packed red blood cells',
+  drugClass: 'Blood Product',
+  route: 'IV',
+  indications: ['Hemorrhagic shock', 'Massive transfusion protocol', 'Symptomatic anemia', 'Acute blood loss'],
+  dosing: [
+    {
+      indication: 'Massive transfusion protocol',
+      regimen: '6 units in initial MTP cooler (1:1:1 ratio with FFP and platelets). O-negative for females <50 or unknown Rh; O-positive acceptable for males and postmenopausal females. Switch to type-specific when ABO/Rh confirmed (~10-15 min).',
+    },
+    {
+      indication: 'Adult transfusion (non-MTP)',
+      regimen: '1 unit raises Hgb ~1 g/dL in 70 kg adult. Transfuse based on clinical need, not arbitrary Hgb threshold. Most stable patients: consider transfusion if Hgb <7 g/dL.',
+    },
+    {
+      indication: 'Pediatric transfusion',
+      regimen: '10-15 mL/kg. Raises Hgb ~2-3 g/dL. Use leukoreduced, irradiated products for neonates and immunocompromised.',
+      weightCalc: { dosePerKg: 15, unit: 'mL' },
+    },
+  ],
+  contraindications: ['Jehovah\'s Witness (document refusal)', 'Known severe prior transfusion reactions (relative)'],
+  cautions: [
+    'Stored blood contains elevated potassium (older units have more K+)',
+    'Citrate anticoagulant chelates calcium (give calcium per 4 units)',
+    'Hypothermia risk (warm products)',
+    'ABO compatibility critical (clerical check at bedside)',
+    'Each unit ~300 mL total volume, ~200 mL RBCs',
+  ],
+  monitoring: 'Vital signs during transfusion. Post-transfusion Hgb. Watch for transfusion reactions. During MTP: iCa, K+, temp, lactate, TEG/ROTEM.',
+  notes: 'Universal donor: Type O (can give to any ABO type). For Rh: O-negative is universal but scarce (~7% population). O-positive is safe for males and postmenopausal females. In MTP: prioritize type-specific blood once available to preserve O-negative supply. Emergency release blood available immediately; type-specific in ~10-15 min; crossmatched in ~45-60 min.',
+  citations: [
+    'Holcomb JB, et al. PROPPR: Transfusion of plasma, platelets, and red blood cells in a 1:1:1 ratio. JAMA. 2015;313(5):471-482.',
+    'AABB Technical Manual. 20th ed. Bethesda, MD: AABB; 2020.',
+  ],
+};
+
+const PLATELETS: DrugEntry = {
+  id: 'platelets',
+  name: 'Platelets (Apheresis or Pooled)',
+  genericName: 'Platelet concentrate',
+  drugClass: 'Blood Product',
+  route: 'IV',
+  indications: ['Massive transfusion protocol', 'Thrombocytopenia with bleeding', 'Prophylaxis for invasive procedures'],
+  dosing: [
+    {
+      indication: 'Massive transfusion protocol',
+      regimen: '1 apheresis unit (equivalent to 6-pack random donor) per MTP cooler. Maintains 1:1:1 ratio. Each apheresis unit raises platelet count ~30-50k in average adult.',
+    },
+    {
+      indication: 'Adult bleeding or procedural',
+      regimen: '1 apheresis unit OR 1 pooled 6-pack. Target platelet count depends on clinical context: >50k for most procedures, >100k for CNS/eye surgery.',
+    },
+    {
+      indication: 'Pediatric',
+      regimen: '5-10 mL/kg. Raises platelet count ~50-100k.',
+      weightCalc: { dosePerKg: 10, unit: 'mL' },
+    },
+  ],
+  contraindications: [
+    'TTP (platelets may worsen thrombosis)',
+    'HIT (heparin-induced thrombocytopenia) — may contain heparin',
+    'ITP (generally unresponsive to platelet transfusion)',
+  ],
+  cautions: [
+    'ABO compatibility preferred but not required',
+    'Rh matching preferred for Rh-negative females of childbearing age (give RhoGAM if Rh-positive platelets given)',
+    'Store at room temperature (NOT refrigerated)',
+    'Short shelf life (5-7 days)',
+    'Each apheresis unit contains ~300 mL',
+  ],
+  monitoring: 'Post-transfusion platelet count. Watch for transfusion reactions (higher rate than RBCs due to leukocytes). During MTP: platelet count, TEG MA/MCF.',
+  notes: 'In MTP, platelet dysfunction from hypothermia and acidosis may be more significant than platelet count. Low MA on TEG suggests platelet dysfunction even with adequate count. PATCH trial (ICH + antiplatelet) showed platelet transfusion may be harmful. For antiplatelet reversal in ICH: DDAVP is first-line, not platelets.',
+  citations: [
+    'Holcomb JB, et al. PROPPR: Transfusion of plasma, platelets, and red blood cells in a 1:1:1 ratio. JAMA. 2015;313(5):471-482.',
+    'Baharoglu MI, et al. PATCH trial: Platelet transfusion in ICH on antiplatelet therapy. Lancet. 2016;387:2605-2613.',
+  ],
+};
+
+const WHOLE_BLOOD: DrugEntry = {
+  id: 'whole-blood',
+  name: 'Whole Blood (Low-Titer O)',
+  genericName: 'Whole blood',
+  drugClass: 'Blood Product',
+  route: 'IV',
+  indications: ['Massive transfusion (where available)', 'Trauma resuscitation', 'Military/prehospital settings'],
+  dosing: [
+    {
+      indication: 'Massive transfusion',
+      regimen: '1 unit (~500 mL) contains RBCs, plasma, and platelets in physiologic ratios. Low-titer O whole blood can be given to any ABO/Rh type. Simpler logistics than component therapy. Emerging evidence suggests may be superior to reconstituted 1:1:1.',
+    },
+  ],
+  contraindications: ['Jehovah\'s Witness', 'Known severe prior transfusion reactions'],
+  cautions: [
+    'Not universally available (check institutional policy)',
+    'Low-titer O (anti-A/anti-B titers <256) required for universal use',
+    'Cold-stored whole blood (4°C) has reduced platelet function',
+    'Warm fresh whole blood (military) has best hemostatic profile',
+    'Contains citrate anticoagulant (calcium replacement still needed)',
+  ],
+  monitoring: 'Standard transfusion monitoring. CBC, coags, iCa post-transfusion.',
+  notes: 'Resurgence of whole blood use based on military data showing improved outcomes. Contains all blood components in physiologic ratios, avoiding dilution from additive solutions. Low-titer O whole blood (LTOWB) can be given universally without ABO matching in emergencies. Check institutional availability. Cold storage reduces platelet function but preserves RBC and coagulation factors.',
+  citations: [
+    'Spinella PC, et al. Warm fresh whole blood is independently associated with improved survival. J Trauma. 2009;66(4 Suppl):S69-76.',
+    'Bahr MP, et al. Low-titer group O whole blood in civilian trauma resuscitation. Transfusion. 2021;61(S1):S53-S60.',
+  ],
+};
 
 const ICATIBANT: DrugEntry = {
   id: 'icatibant',
@@ -7721,6 +8032,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CALCIUM_GLUCONATE,
   CALCIUM_GLUCONATE_GEL,
   CEFAZOLIN,
+  CRYOPRECIPITATE,
   CEFEPIME,
   CEFTRIAXONE,
   CEPHALEXIN,
@@ -7830,6 +8142,8 @@ export const ALL_DRUGS: DrugEntry[] = [
   PANTOPRAZOLE,
   PENICILLIN_G_IV,
   PHENYLEPHRINE,
+  PACKED_RBCS,
+  PLATELETS,
   PCC_4FACTOR,
   PENTOBARBITAL,
   PHENOBARBITAL,
@@ -7857,6 +8171,10 @@ export const ALL_DRUGS: DrugEntry[] = [
   RACEMIC_EPINEPHRINE,
   REGULAR_INSULIN,
   INSULIN_GLARGINE,
+  INSULIN_LISPRO,
+  METFORMIN,
+  EMPAGLIFLOZIN,
+  SEMAGLUTIDE,
   RETEPLASE,
   RFVIIA,
   RIFAMPIN,
@@ -7885,6 +8203,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   VERAPAMIL,
   VITAMIN_K,
   VWF_CONCENTRATE,
+  WHOLE_BLOOD,
   ZIPRASIDONE,
 ];
 
@@ -7934,6 +8253,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/calcium\s*chloride/i, 'calcium-chloride'],
   [/calcium\s*gluconate\s*gel/i, 'calcium-gluconate-gel'],
   [/calcium\s*gluconate/i, 'calcium-gluconate'],
+  [/cryoprecipitate|cryo/i, 'cryoprecipitate'],
   [/cefazolin|ancef/i, 'cefazolin'],
   [/cefepime|maxipime/i, 'cefepime'],
   [/ceftriaxone/i, 'ceftriaxone'],
@@ -8021,6 +8341,8 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/pantoprazole|protonix/i, 'pantoprazole'],
   [/oral.*urea|ure-na/i, 'oral-urea'],
   [/aqueous.*penicillin|penicillin G.*IV|crystalline.*penicillin/i, 'penicillin-g-iv'],
+  [/packed.*red|pRBC|red.*blood.*cell/i, 'packed-rbcs'],
+  [/platelet|plt\s*transfusion/i, 'platelets'],
   [/4.factor.*pcc|pcc.*4.factor|kcentra|prothrombin.*complex/i, 'pcc-4factor'],
   [/pentobarbital|nembutal/i, 'pentobarbital'],
   [/phenobarbital|luminal/i, 'phenobarbital'],
@@ -8041,6 +8363,11 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/pyridoxine|vitamin.?b6/i, 'pyridoxine'],
   [/racemic.*epinephrine|neb.*epinephrine|vaponefrin/i, 'racemic-epinephrine'],
   [/regular\s*insulin|insulin\s*regular|humulin/i, 'regular-insulin'],
+  [/insulin\s*lispro|lispro|humalog|admelog|lyumjev/i, 'insulin-lispro'],
+  [/insulin\s*glargine|glargine|lantus|basaglar|semglee|toujeo/i, 'insulin-glargine'],
+  [/metformin|glucophage|fortamet|glumetza|riomet/i, 'metformin'],
+  [/empagliflozin|jardiance/i, 'empagliflozin'],
+  [/semaglutide|ozempic|wegovy|rybelsus/i, 'semaglutide'],
   [/rifampin|rifadin|rifampicin/i, 'rifampin'],
   [/ritonavir|norvir/i, 'ritonavir'],
   [/rivaroxaban/i, 'rivaroxaban'],
@@ -8062,6 +8389,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/vancomycin|vancocin/i, 'vancomycin'],
   [/verapamil|calan|isoptin/i, 'verapamil'],
   [/vitamin\s*k|phytonadione/i, 'vitamin-k'],
+  [/whole\s*blood|LTOWB/i, 'whole-blood'],
   [/ziprasidone|geodon/i, 'ziprasidone'],
 ];
 

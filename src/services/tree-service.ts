@@ -351,6 +351,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/dka.js');
       return { nodes: m.DKA_NODES, entryNodeId: 'dka-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DKA_MODULE_LABELS, citations: m.DKA_CITATIONS };
     },
+    'diabetes-management': async () => {
+      const m = await import('../data/trees/diabetes-management.js');
+      return { nodes: m.DIABETES_MANAGEMENT_NODES, entryNodeId: 'dm-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DIABETES_MANAGEMENT_MODULE_LABELS, citations: m.DIABETES_MANAGEMENT_CITATIONS };
+    },
     'sepsis': async () => {
       const m = await import('../data/trees/sepsis.js');
       return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS };
@@ -406,6 +410,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'epistaxis': async () => {
       const m = await import('../data/trees/epistaxis.js');
       return { nodes: m.EPISTAXIS_NODES, entryNodeId: 'epi-start', categoryId: 'emergency-medicine', moduleLabels: m.EPISTAXIS_MODULE_LABELS, citations: m.EPISTAXIS_CITATIONS };
+    },
+    'massive-transfusion': async () => {
+      const m = await import('../data/trees/massive-transfusion.js');
+      return { nodes: m.MASSIVE_TRANSFUSION_NODES, entryNodeId: 'mtp-start', categoryId: 'trauma-surg', moduleLabels: m.MASSIVE_TRANSFUSION_MODULE_LABELS, citations: m.MASSIVE_TRANSFUSION_CITATIONS };
     },
   };
 

@@ -9894,7 +9894,1248 @@ const CAUSTIC_AGENT_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Young-Burgess Classification (Pelvic Fracture)
+// -------------------------------------------------------------------
+
+const YOUNG_BURGESS_CALCULATOR: CalculatorDefinition = {
+  id: 'young-burgess',
+  title: 'Young-Burgess Classification',
+  subtitle: 'Pelvic Fracture Mechanism-Based Classification',
+  description: 'Classifies pelvic ring injuries by mechanism to predict hemorrhage risk and guide management. Based on mechanism of injury and fracture pattern.',
+  fields: [
+    {
+      name: 'mechanism',
+      label: 'Injury Mechanism / Pattern',
+      type: 'select',
+      points: 0,
+      description: 'Select based on imaging and mechanism',
+      selectOptions: [
+        { label: 'LC-I: Transverse pubic rami + ipsilateral sacral compression', points: 1 },
+        { label: 'LC-II: LC-I + ipsilateral iliac wing (crescent) fracture', points: 2 },
+        { label: 'LC-III: LC injury ipsilateral + contralateral APC (windswept)', points: 3 },
+        { label: 'APC-I: Symphysis diastasis <2.5 cm, SI ligaments intact', points: 4 },
+        { label: 'APC-II: Symphysis >2.5 cm, anterior SI torn, posterior intact', points: 5 },
+        { label: 'APC-III: Complete SI disruption (both anterior and posterior)', points: 6 },
+        { label: 'VS: Vertical displacement of hemipelvis', points: 7 },
+        { label: 'CM: Combined mechanism (mixed pattern)', points: 8 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Young JW, et al. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.',
+    'Burgess AR, et al. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.',
+  ],
+  computeResult: (values) => {
+    const pattern = values['mechanism'] || 1;
+
+    const results: Record<number, { label: string; stability: string; bleeding: string; management: string; colorVar: string }> = {
+      1: {
+        label: 'LC-I (Lateral Compression Type I)',
+        stability: 'STABLE — Rotationally and vertically stable',
+        bleeding: 'LOW bleeding risk — pelvic volume decreases',
+        management: '**Management:**\n• Usually non-operative\n• Weight-bearing as tolerated\n• Pain control, DVT prophylaxis\n• Pelvic binder: use with CAUTION (may worsen displacement)\n\n**Associated injuries:** Lower GU injury rate vs APC',
+        colorVar: '--color-primary',
+      },
+      2: {
+        label: 'LC-II (Lateral Compression Type II)',
+        stability: 'ROTATIONALLY UNSTABLE — Vertically stable',
+        bleeding: 'MODERATE bleeding risk',
+        management: '**Management:**\n• May require surgical fixation\n• Consider external fixation vs ORIF\n• Pelvic binder: use with CAUTION\n• Ortho consultation required\n\n**Key feature:** Crescent (iliac wing) fracture indicates posterior ring involvement',
+        colorVar: '--color-warning',
+      },
+      3: {
+        label: 'LC-III (Lateral Compression Type III)',
+        stability: 'HIGHLY UNSTABLE — "Windswept pelvis"',
+        bleeding: 'HIGH bleeding risk — bilateral ring disruption',
+        management: '**Management:**\n• Surgical fixation required\n• Emergent hemorrhage control\n• Pelvic binder indicated (contralateral side is open-book)\n• High associated injury rate\n\n**Key feature:** Ipsilateral LC + contralateral APC = most unstable LC pattern',
+        colorVar: '--color-danger',
+      },
+      4: {
+        label: 'APC-I (Anterior-Posterior Compression Type I)',
+        stability: 'STABLE — SI ligaments intact',
+        bleeding: 'LOW bleeding risk',
+        management: '**Management:**\n• Usually non-operative\n• Weight-bearing as tolerated\n• Pain control, DVT prophylaxis\n• Pelvic binder effective if symptomatic\n\n**Key feature:** Symphysis diastasis <2.5 cm',
+        colorVar: '--color-primary',
+      },
+      5: {
+        label: 'APC-II (Anterior-Posterior Compression Type II)',
+        stability: 'ROTATIONALLY UNSTABLE — "Open book"',
+        bleeding: 'HIGH bleeding risk — pelvic volume increases',
+        management: '**Management:**\n• PELVIC BINDER highly effective\n• Surgical fixation typically required\n• High risk of venous plexus bleeding\n• MTP consideration for unstable patients\n\n**Key feature:** Symphysis >2.5 cm, posterior SI ligaments still intact (vertically stable)',
+        colorVar: '--color-danger',
+      },
+      6: {
+        label: 'APC-III (Anterior-Posterior Compression Type III)',
+        stability: 'COMPLETELY UNSTABLE — Rotationally AND vertically',
+        bleeding: 'VERY HIGH bleeding risk',
+        management: '**Management:**\n• EMERGENT hemorrhage control\n• Pelvic binder + MTP\n• Consider PPP, angioembolization, REBOA\n• Definitive surgical fixation required\n\n**Key feature:** Complete SI joint disruption — highest mortality APC subtype',
+        colorVar: '--color-danger',
+      },
+      7: {
+        label: 'Vertical Shear (VS)',
+        stability: 'COMPLETELY UNSTABLE — Highest instability',
+        bleeding: 'HIGHEST bleeding risk of all patterns',
+        management: '**Management:**\n• EMERGENT hemorrhage control\n• Pelvic binder + TRACTION (may need longitudinal)\n• MTP activation\n• PPP/angioembolization likely needed\n• Always requires operative fixation\n\n**Key features:**\n• Vertical hemipelvis displacement\n• Leg length discrepancy\n• L5 transverse process fractures common',
+        colorVar: '--color-danger',
+      },
+      8: {
+        label: 'Combined Mechanism (CM)',
+        stability: 'VARIABLE — Usually unstable',
+        bleeding: 'HIGH bleeding risk — unpredictable pattern',
+        management: '**Management:**\n• Treat as unstable\n• Hemorrhage control based on hemodynamics\n• Individualized surgical approach\n• Early ortho/trauma surgery consultation\n\n**Key feature:** Mixed patterns — requires careful imaging review',
+        colorVar: '--color-danger',
+      },
+    };
+
+    const res = results[pattern];
+    return {
+      value: res.label.split(' (')[0],
+      label: res.label,
+      description: `**Stability:** ${res.stability}\n\n**Hemorrhage:** ${res.bleeding}\n\n---\n\n${res.management}`,
+      colorVar: res.colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Tile Classification (Pelvic Fracture)
+// -------------------------------------------------------------------
+
+const TILE_CLASSIFICATION_CALCULATOR: CalculatorDefinition = {
+  id: 'tile-classification',
+  title: 'Tile Classification',
+  subtitle: 'Pelvic Fracture Stability-Based Classification',
+  description: 'Classifies pelvic ring injuries based on stability to guide surgical decision-making. Type A = stable, Type B = rotationally unstable, Type C = completely unstable.',
+  fields: [
+    {
+      name: 'type',
+      label: 'Fracture Type',
+      type: 'select',
+      points: 0,
+      description: 'Based on imaging findings',
+      selectOptions: [
+        { label: 'A1: Avulsion fractures (ASIS, AIIS, ischial tuberosity)', points: 1 },
+        { label: 'A2: Stable iliac wing or minimally displaced pubic rami', points: 2 },
+        { label: 'A3: Transverse sacral/coccyx fracture', points: 3 },
+        { label: 'B1: Open book (external rotation, unilateral)', points: 4 },
+        { label: 'B2: Lateral compression (internal rotation)', points: 5 },
+        { label: 'B3: Bilateral B-type injuries', points: 6 },
+        { label: 'C1: Unilateral complete SI disruption', points: 7 },
+        { label: 'C2: Bilateral, one side B-type, one side C-type', points: 8 },
+        { label: 'C3: Bilateral complete disruption', points: 9 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Tile M. Pelvic ring fractures: should they be fixed? J Bone Joint Surg Br. 1988;70(1):1-12.',
+    'Tile M. Acute pelvic fractures: I. Causation and classification. J Am Acad Orthop Surg. 1996;4(3):143-151.',
+  ],
+  computeResult: (values) => {
+    const type = values['type'] || 1;
+
+    const results: Record<number, { label: string; category: string; stability: string; surgery: string; colorVar: string }> = {
+      1: {
+        label: 'Type A1: Avulsion Fractures',
+        category: 'Type A (STABLE)',
+        stability: 'Rotationally stable, vertically stable',
+        surgery: '**Management:** Non-operative\n• Weight-bearing as tolerated\n• Pain control\n• Return to activity when comfortable\n\n**Common locations:** ASIS (sartorius), AIIS (rectus femoris), ischial tuberosity (hamstrings)',
+        colorVar: '--color-primary',
+      },
+      2: {
+        label: 'Type A2: Stable Ring Fractures',
+        category: 'Type A (STABLE)',
+        stability: 'Rotationally stable, vertically stable',
+        surgery: '**Management:** Non-operative\n• Weight-bearing as tolerated\n• Pain control, DVT prophylaxis\n• Ortho follow-up in 1-2 weeks\n\n**Includes:** Isolated iliac wing fractures, minimally displaced pubic rami',
+        colorVar: '--color-primary',
+      },
+      3: {
+        label: 'Type A3: Transverse Sacrococcygeal',
+        category: 'Type A (STABLE)',
+        stability: 'Rotationally stable, vertically stable',
+        surgery: '**Management:** Usually non-operative\n• Pain control (may be severe)\n• Donut cushion for sitting\n• Bowel regimen (avoid straining)\n\n**Complications:** Persistent coccydynia in some patients',
+        colorVar: '--color-primary',
+      },
+      4: {
+        label: 'Type B1: Open Book (External Rotation)',
+        category: 'Type B (ROTATIONALLY UNSTABLE)',
+        stability: 'Rotationally unstable, VERTICALLY STABLE',
+        surgery: '**Management:** Operative if symphysis >2.5 cm\n• Pelvic binder effective for stabilization\n• Symphyseal plating for definitive fixation\n• Posterior SI ligaments intact → vertical stability preserved\n\n**Hemorrhage risk:** Moderate-high (venous plexus disruption)',
+        colorVar: '--color-warning',
+      },
+      5: {
+        label: 'Type B2: Lateral Compression (Internal Rotation)',
+        category: 'Type B (ROTATIONALLY UNSTABLE)',
+        stability: 'Rotationally unstable, VERTICALLY STABLE',
+        surgery: '**Management:** Variable\n• Many can be managed non-operatively\n• Consider fixation if significant displacement\n• Pelvic binder: use cautiously (may worsen displacement)\n\n**Hemorrhage risk:** Lower than open-book (pelvic volume decreases)',
+        colorVar: '--color-warning',
+      },
+      6: {
+        label: 'Type B3: Bilateral B-Type',
+        category: 'Type B (ROTATIONALLY UNSTABLE)',
+        stability: 'Rotationally unstable, VERTICALLY STABLE',
+        surgery: '**Management:** Typically operative\n• Bilateral involvement increases complexity\n• Surgical fixation usually required\n• Higher morbidity than unilateral\n\n**Key point:** Both sides have rotational instability but posterior SI ligaments intact bilaterally',
+        colorVar: '--color-warning',
+      },
+      7: {
+        label: 'Type C1: Unilateral Complete Disruption',
+        category: 'Type C (COMPLETELY UNSTABLE)',
+        stability: 'Rotationally AND vertically UNSTABLE',
+        surgery: '**Management:** Operative fixation REQUIRED\n• Emergent hemorrhage control (binder, MTP)\n• Definitive ORIF when patient stable\n• Anterior and posterior ring fixation needed\n\n**Highest risk injuries:** Hemorrhage, neurologic injury, mortality',
+        colorVar: '--color-danger',
+      },
+      8: {
+        label: 'Type C2: Bilateral Mixed (B + C)',
+        category: 'Type C (COMPLETELY UNSTABLE)',
+        stability: 'Rotationally AND vertically UNSTABLE',
+        surgery: '**Management:** Operative fixation REQUIRED\n• Complex injury pattern\n• Staged surgical approach often needed\n• High associated injury rate\n\n**Key point:** One side completely unstable (C) + one side rotationally unstable (B)',
+        colorVar: '--color-danger',
+      },
+      9: {
+        label: 'Type C3: Bilateral Complete Disruption',
+        category: 'Type C (COMPLETELY UNSTABLE)',
+        stability: 'MOST UNSTABLE — Bilateral complete disruption',
+        surgery: '**Management:** EMERGENT intervention\n• Life-threatening hemorrhage risk\n• Damage control resuscitation + stabilization\n• Staged definitive fixation\n• Highest mortality pelvic fracture pattern\n\n**Key point:** Both hemipelves completely unstable',
+        colorVar: '--color-danger',
+      },
+    };
+
+    const res = results[type];
+    return {
+      value: res.category,
+      label: res.label,
+      description: `**Category:** ${res.category}\n\n**Stability:** ${res.stability}\n\n---\n\n${res.surgery}`,
+      colorVar: res.colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// WSES Pelvic Trauma Grade
+// -------------------------------------------------------------------
+
+const WSES_PELVIC_CALCULATOR: CalculatorDefinition = {
+  id: 'wses-pelvic',
+  title: 'WSES Pelvic Trauma Grade',
+  subtitle: 'World Society of Emergency Surgery Classification',
+  description: 'Grades pelvic trauma based on hemodynamic status and mechanical instability to guide management. Combines physiologic and anatomic criteria.',
+  fields: [
+    {
+      name: 'hemodynamics',
+      label: 'Hemodynamic Status',
+      type: 'select',
+      points: 0,
+      description: 'Response to initial resuscitation',
+      selectOptions: [
+        { label: 'Stable (SBP >90, responsive to fluids)', points: 0 },
+        { label: 'Unstable (SBP <90 despite resuscitation OR transient responder)', points: 10 },
+      ],
+    },
+    {
+      name: 'mechanical',
+      label: 'Mechanical Instability',
+      type: 'select',
+      points: 0,
+      description: 'Based on imaging (CT or X-ray)',
+      selectOptions: [
+        { label: 'Stable (Tile A or LC-I/APC-I)', points: 0 },
+        { label: 'Unstable (Tile B/C, APC-II/III, LC-II/III, VS)', points: 1 },
+      ],
+    },
+    {
+      name: 'ctblush',
+      label: 'CT Findings',
+      type: 'select',
+      points: 0,
+      description: 'Arterial contrast extravasation',
+      selectOptions: [
+        { label: 'No contrast blush', points: 0 },
+        { label: 'Arterial contrast blush present', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Coccolini F, et al. Pelvic Trauma: WSES Classification and Guidelines. World J Emerg Surg. 2017;12:5.',
+  ],
+  computeResult: (values) => {
+    const hemo = values['hemodynamics'] || 0;
+    const mech = values['mechanical'] || 0;
+    const blush = values['ctblush'] || 0;
+
+    // WSES Grading:
+    // Grade I: Stable + mechanically stable
+    // Grade II: Stable + mechanically unstable
+    // Grade III: Stable + contrast blush OR unstable + any mechanical
+    // Grade IV: Unstable + contrast blush or massive hemorrhage
+
+    let grade: number;
+    let label: string;
+    let management: string;
+    let colorVar: string;
+
+    if (hemo === 10) {
+      // Hemodynamically unstable
+      if (blush === 2) {
+        grade = 4;
+        label = 'WSES Grade IV (Unstable + Arterial Bleeding)';
+        management = '**IMMEDIATE INTERVENTION REQUIRED**\n\n**Resuscitation:**\n• MTP activation\n• Pelvic binder\n• TXA if <3h from injury\n\n**Hemorrhage control:**\n• Angioembolization for arterial blush\n• Consider preperitoneal packing\n• REBOA as bridge if available\n\n**Sequence depends on resources:**\n• If IR immediately available → angioembolization\n• If OR faster → preperitoneal packing\n• If FAST positive → laparotomy first\n\n**Mortality: 30-50%**';
+        colorVar = '--color-danger';
+      } else {
+        grade = 3;
+        label = 'WSES Grade III (Unstable)';
+        management = '**URGENT INTERVENTION REQUIRED**\n\n**Resuscitation:**\n• MTP activation\n• Pelvic binder\n• TXA if <3h from injury\n\n**Hemorrhage control:**\n• 90% is VENOUS — responds to binder + resuscitation\n• If refractory → preperitoneal packing\n• CT when briefly stable to identify arterial source\n\n**Consider:**\n• External fixation\n• Traction for vertical shear component\n\n**Mortality: 15-30%**';
+        colorVar = '--color-danger';
+      }
+    } else {
+      // Hemodynamically stable
+      if (blush === 2) {
+        grade = 3;
+        label = 'WSES Grade III (Stable + Arterial Blush)';
+        management = '**ANGIOEMBOLIZATION INDICATED**\n\n**Current stability allows time for intervention.**\n\n**Management:**\n• Maintain pelvic binder\n• Angioembolization for contrast blush\n• Monitor closely for deterioration\n• Type and crossmatch\n\n**Post-embolization:**\n• ICU admission\n• Serial Hgb q4h x 24h\n• Ortho consultation for definitive plan\n\n**Mortality: 5-15%**';
+        colorVar = '--color-warning';
+      } else if (mech === 1) {
+        grade = 2;
+        label = 'WSES Grade II (Stable + Mechanically Unstable)';
+        management = '**SURGICAL FIXATION LIKELY NEEDED**\n\n**Management:**\n• Continue pelvic binder\n• Complete CT characterization\n• Ortho consultation for fixation planning\n• DVT prophylaxis when hemostasis assured\n\n**Fixation timing:**\n• Damage control (acute): external fixation\n• Definitive ORIF: day 5-14 when optimized\n\n**Mortality: 2-5%**';
+        colorVar = '--color-warning';
+      } else {
+        grade = 1;
+        label = 'WSES Grade I (Stable)';
+        management = '**NON-OPERATIVE MANAGEMENT**\n\n**Management:**\n• Weight-bearing as tolerated\n• Multimodal analgesia\n• DVT prophylaxis\n• Physical therapy\n\n**Disposition:**\n• May discharge if ambulatory with assist device\n• Ortho follow-up in 1-2 weeks\n\n**Mortality: <1%**';
+        colorVar = '--color-primary';
+      }
+    }
+
+    return {
+      value: `Grade ${grade}`,
+      label,
+      description: management,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Urethral Injury Risk Calculator
+// -------------------------------------------------------------------
+
+const URETHRAL_INJURY_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'urethral-injury-risk',
+  title: 'Urethral Injury Risk Assessment',
+  subtitle: 'Pre-Foley Evaluation in Pelvic Trauma',
+  description: 'Assesses clinical signs to determine risk of urethral injury and guide catheterization approach. Evaluate BEFORE attempting Foley placement.',
+  fields: [
+    { name: 'meatus', label: 'Blood at urethral meatus', type: 'toggle', points: 3, description: 'Visible blood at tip of urethra' },
+    { name: 'prostate', label: 'High-riding or boggy prostate (DRE)', type: 'toggle', points: 3, description: 'Males only — indicates urethral disruption' },
+    { name: 'scrotal', label: 'Scrotal/perineal hematoma or ecchymosis', type: 'toggle', points: 2, description: 'Butterfly pattern suggests urethral injury' },
+    { name: 'void', label: 'Inability to void with full bladder', type: 'toggle', points: 2, description: 'Unable to urinate despite urge' },
+    { name: 'symphysis', label: 'Pubic symphysis diastasis >2.5 cm', type: 'toggle', points: 1, description: 'Open-book injury increases risk' },
+    { name: 'rami', label: 'Bilateral pubic rami fractures', type: 'toggle', points: 1, description: 'Straddle-type injury pattern' },
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'Low Risk', risk: 'Foley placement likely safe', mortality: 'Proceed with gentle single Foley attempt', colorVar: '--color-primary' },
+    { min: 1, max: 3, label: 'Moderate Risk', risk: 'Consider RUG before Foley', mortality: 'RUG recommended if available', colorVar: '--color-warning' },
+    { min: 3, max: Infinity, label: 'High Risk', risk: 'RUG required — do NOT attempt blind Foley', mortality: 'Retrograde urethrogram MANDATORY', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥3 = HIGH RISK: Retrograde urethrogram REQUIRED before any urethral catheterization attempt. Blood at meatus or high-riding prostate alone should prompt RUG.',
+  citations: [
+    'Morey AF, et al. Urotrauma: AUA Guideline. J Urol. 2014;192(2):327-335.',
+    'Kitrey ND, et al. EAU Guidelines on Urological Trauma. Eur Urol. 2020;78(5):725-734.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Pelvic Hemorrhage Source Identifier
+// -------------------------------------------------------------------
+
+const PELVIC_HEMORRHAGE_SOURCE_CALCULATOR: CalculatorDefinition = {
+  id: 'pelvic-hemorrhage-source',
+  title: 'Pelvic Hemorrhage Source Identifier',
+  subtitle: 'Arterial vs Venous Bleeding Assessment',
+  description: 'Identifies likely hemorrhage source based on injury pattern and CT findings to guide intervention (angioembolization vs preperitoneal packing).',
+  fields: [
+    {
+      name: 'ctblush',
+      label: 'CT Arterial Contrast Blush',
+      type: 'select',
+      points: 0,
+      description: 'Active extravasation on CT angiography',
+      selectOptions: [
+        { label: 'No contrast blush on CT', points: 0 },
+        { label: 'Contrast blush present', points: 10 },
+        { label: 'CT not obtained (unstable)', points: 5 },
+      ],
+    },
+    {
+      name: 'pattern',
+      label: 'Fracture Pattern',
+      type: 'select',
+      points: 0,
+      description: 'Young-Burgess classification',
+      selectOptions: [
+        { label: 'LC (Lateral Compression)', points: 0 },
+        { label: 'APC (Anterior-Posterior Compression)', points: 2 },
+        { label: 'VS (Vertical Shear)', points: 3 },
+        { label: 'CM (Combined Mechanism)', points: 2 },
+      ],
+    },
+    {
+      name: 'response',
+      label: 'Response to Binder + Resuscitation',
+      type: 'select',
+      points: 0,
+      description: 'Hemodynamic response',
+      selectOptions: [
+        { label: 'Responds and stabilizes', points: 0 },
+        { label: 'Transient response, then deteriorates', points: 2 },
+        { label: 'No response — refractory shock', points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Costantini TW, et al. EAST Guidelines: Pelvic Fracture Hemorrhage. J Trauma Acute Care Surg. 2016;80(2):384-392.',
+    'Tesoriero RB, et al. Angioembolization for Pelvic Fracture Hemorrhage. J Trauma Acute Care Surg. 2017;82(5):835-842.',
+  ],
+  computeResult: (values) => {
+    const ctblush = values['ctblush'] || 0;
+    const pattern = values['pattern'] || 0;
+    const response = values['response'] || 0;
+
+    // Arterial indicators: contrast blush, VS/APC pattern, refractory shock
+    const arterialScore = ctblush + pattern + response;
+
+    if (ctblush === 10) {
+      // Definite contrast blush = arterial source confirmed
+      return {
+        value: 'ARTERIAL',
+        label: 'Arterial Hemorrhage Confirmed',
+        description: `**CT confirms ARTERIAL bleeding source.**\n\n**Recommended intervention:** ANGIOEMBOLIZATION\n\n**Key points:**\n• 10% of pelvic hemorrhage is arterial\n• Requires angiographic embolization\n• 80-100% success rate\n• Internal iliac branches most common source\n\n**If hemodynamically unstable:**\n• REBOA as bridge if available\n• Do NOT delay IR for unstable patient with blush\n• Consider hybrid OR if available\n\n**Post-embolization:**\n• ICU admission\n• Serial Hgb monitoring\n• Maintain pelvic binder\n• Consider repeat angio if ongoing bleeding`,
+        colorVar: '--color-danger',
+      };
+    } else if (arterialScore >= 7) {
+      // High suspicion for arterial
+      return {
+        value: 'LIKELY ARTERIAL',
+        label: 'High Suspicion for Arterial Source',
+        description: `**Clinical pattern suggests ARTERIAL bleeding likely.**\n\n**Recommended approach:**\n1. Preperitoneal packing first (faster) — OR\n2. Angioembolization if IR immediately available\n\n**Rationale:**\n• VS/APC patterns have higher arterial injury rates\n• Refractory to binder suggests non-venous source\n• Consider CTA if not yet obtained\n\n**If preperitoneal packing fails:**\n• Proceed to angiography\n• ~10-15% will need both PPP and angio\n\n**Consider REBOA as bridge if available.**`,
+        colorVar: '--color-danger',
+      };
+    } else if (response >= 2) {
+      // Ongoing bleeding but likely venous
+      return {
+        value: 'LIKELY VENOUS',
+        label: 'Likely Venous — Ongoing Hemorrhage',
+        description: `**Pattern suggests VENOUS bleeding, but ongoing hemorrhage.**\n\n**90% of pelvic hemorrhage is VENOUS.**\n\n**Recommended intervention:** PREPERITONEAL PACKING\n\n**Key points:**\n• Venous bleeding responds to tamponade\n• PPP achieves hemostasis in 80-90% of venous bleeding\n• Faster than angiography in most centers\n• Can be performed bedside or in OR\n\n**Technique:**\n• Extraperitoneal approach (Pfannenstiel or midline)\n• Pack space of Retzius toward SI joints\n• 3 packs per side\n• Remove packs in 24-48 hours\n\n**If PPP fails:** Proceed to angiography (arterial source)`,
+        colorVar: '--color-warning',
+      };
+    } else {
+      // Responding to conservative measures
+      return {
+        value: 'VENOUS — CONTROLLED',
+        label: 'Venous Hemorrhage — Responding',
+        description: `**VENOUS bleeding responding to conservative measures.**\n\n**Continue current management:**\n• Maintain pelvic binder\n• Continue MTP until targets met\n• Serial Hgb monitoring\n\n**Most pelvic hemorrhage (90%) is venous and self-limiting with:**\n• Pelvic binder (tamponade effect)\n• Damage control resuscitation\n• Correction of coagulopathy\n\n**CT when stable to:**\n• Characterize fracture pattern\n• Rule out occult arterial source\n• Plan definitive fixation\n\n**If deteriorates:** Reassess for arterial source or preperitoneal packing`,
+        colorVar: '--color-primary',
+      };
+    }
+  },
+};
+
+// -------------------------------------------------------------------
+// ABC Score Calculator — MTP Prediction
+// -------------------------------------------------------------------
+
+const ABC_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'abc-score',
+  title: 'ABC Score',
+  subtitle: 'Assessment of Blood Consumption — MTP Prediction',
+  description: 'The ABC Score predicts the need for massive transfusion in trauma patients. Each present variable scores 1 point. Score ≥2 indicates high likelihood of MTP need.',
+  fields: [
+    { name: 'mechanism', label: 'Penetrating mechanism', type: 'toggle', points: 1, description: 'Gunshot, stab, or impalement injury' },
+    { name: 'sbp', label: 'Systolic BP ≤90 mmHg', type: 'toggle', points: 1, description: 'On ED arrival' },
+    { name: 'hr', label: 'Heart rate ≥120 bpm', type: 'toggle', points: 1, description: 'On ED arrival' },
+    { name: 'fast', label: 'Positive FAST exam', type: 'toggle', points: 1, description: 'Free fluid on bedside ultrasound' },
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'Score 0', risk: 'Low Risk', mortality: 'MTP unlikely (<5% probability)', colorVar: '--color-primary' },
+    { min: 1, max: 2, label: 'Score 1', risk: 'Low-Moderate Risk', mortality: 'MTP ~10-15% probability', colorVar: '--color-primary' },
+    { min: 2, max: 3, label: 'Score 2', risk: 'High Risk', mortality: 'MTP ~40-50% probability — Consider activation', colorVar: '--color-warning' },
+    { min: 3, max: 4, label: 'Score 3', risk: 'Very High Risk', mortality: 'MTP ~70% probability — Activate MTP', colorVar: '--color-danger' },
+    { min: 4, max: Infinity, label: 'Score 4', risk: 'Highest Risk', mortality: 'MTP >85% probability — Immediate MTP activation', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'ABC Score ≥2: Sensitivity 75%, Specificity 86% for MTP need. Activate MTP early — do not wait for lab confirmation of coagulopathy.',
+  citations: [
+    'Nunez TC, et al. Early prediction of massive transfusion in trauma: simple as ABC. J Trauma. 2009;66(2):346-352.',
+    'Cotton BA, et al. Multicenter validation of a simplified score to predict massive transfusion. J Trauma. 2010;69 Suppl 1:S33-39.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Shock Index Calculator
+// -------------------------------------------------------------------
+
+const SHOCK_INDEX_CALCULATOR: CalculatorDefinition = {
+  id: 'shock-index',
+  title: 'Shock Index',
+  subtitle: 'HR/SBP Ratio — Hemorrhagic Shock Detection',
+  description: 'Shock Index = Heart Rate / Systolic Blood Pressure. More sensitive than vital signs alone for detecting occult shock. Normal SI is 0.5-0.7.',
+  fields: [
+    {
+      name: 'hr',
+      label: 'Heart Rate',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'bpm',
+      description: 'Beats per minute',
+    },
+    {
+      name: 'sbp',
+      label: 'Systolic Blood Pressure',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'mmHg',
+      description: 'Systolic pressure',
+    },
+  ],
+  results: [],
+  thresholdNote: 'SI >1.0 with evidence of hemorrhage: Strong consideration for MTP activation. SI 0.9-1.0: Concerning, close monitoring. SI <0.7: Normal range.',
+  citations: [
+    'Cannon CM, et al. Utility of the Shock Index in Predicting Mortality in Traumatically Injured Patients. J Trauma. 2009;67(6):1426-1430.',
+    'Rady MY, et al. A Comparison of the Shock Index and Conventional Vital Signs to Identify Acute, Critical Illness in the ED. Ann Emerg Med. 1994;24(4):685-690.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hr = values['hr'] || 0;
+    const sbp = values['sbp'] || 0;
+
+    if (hr <= 0 || sbp <= 0) {
+      return {
+        value: '--',
+        label: 'Enter values',
+        description: 'Enter heart rate and systolic blood pressure to calculate Shock Index.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const si = hr / sbp;
+    const siRounded = Math.round(si * 100) / 100;
+
+    let label: string;
+    let colorVar: string;
+    let description: string;
+
+    if (siRounded < 0.7) {
+      label = 'Normal';
+      colorVar = '--color-primary';
+      description = `Shock Index ${siRounded} is within normal range (0.5-0.7). Low concern for occult shock.`;
+    } else if (siRounded < 0.9) {
+      label = 'Borderline';
+      colorVar = '--color-primary';
+      description = `Shock Index ${siRounded} is at upper limit of normal. Consider clinical context and serial monitoring.`;
+    } else if (siRounded < 1.0) {
+      label = 'Concerning';
+      colorVar = '--color-warning';
+      description = `Shock Index ${siRounded} is elevated (0.9-1.0). Suggests early/compensated shock. Close monitoring, consider resuscitation.`;
+    } else if (siRounded < 1.4) {
+      label = 'Elevated — Consider MTP';
+      colorVar = '--color-danger';
+      description = `Shock Index ${siRounded} is significantly elevated (≥1.0). With active hemorrhage, strongly consider MTP activation. Class III-IV shock.`;
+    } else {
+      label = 'Severely Elevated';
+      colorVar = '--color-danger';
+      description = `Shock Index ${siRounded} indicates severe hemorrhagic shock. Immediate MTP activation and surgical hemorrhage control required.`;
+    }
+
+    return {
+      value: siRounded.toString(),
+      label,
+      description,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// MTP Component Calculator
+// -------------------------------------------------------------------
+
+const MTP_COMPONENT_CALCULATOR: CalculatorDefinition = {
+  id: 'mtp-component',
+  title: 'MTP Component Calculator',
+  subtitle: '1:1:1 Ratio — Blood Product Calculation',
+  description: 'Calculates the corresponding FFP and platelet units needed to maintain 1:1:1 ratio based on pRBC units given. Standard MTP cooler contains 6 pRBC : 6 FFP : 1 apheresis platelet.',
+  fields: [
+    {
+      name: 'prbc-units',
+      label: 'pRBC Units to Transfuse',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'units',
+      description: 'Number of packed red blood cell units',
+    },
+  ],
+  results: [],
+  thresholdNote: 'PROPPR Trial: 1:1:1 ratio improved hemostasis and reduced death from exsanguination vs 1:1:2. Each apheresis platelet = ~6 random donor units.',
+  citations: [
+    'Holcomb JB, et al. PROPPR: Transfusion of plasma, platelets, and red blood cells in a 1:1:1 ratio. JAMA. 2015;313(5):471-482.',
+    'Cannon JW, et al. Damage Control Resuscitation (EAST Guidelines). J Trauma. 2017;82(3):605-617.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const prbc = values['prbc-units'] || 0;
+
+    if (prbc <= 0) {
+      return {
+        value: '--',
+        label: 'Enter pRBC units',
+        description: 'Enter the number of pRBC units to calculate corresponding FFP and platelets for 1:1:1 ratio.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const ffp = prbc; // 1:1 ratio
+    const apheresisPlatelets = Math.ceil(prbc / 6); // 1 apheresis per 6 pRBC
+    const randomDonorPlatelets = prbc; // Alternative: 6-pack per 6 pRBC = 1:1
+
+    const calciumGrams = Math.ceil(prbc / 4); // 1g CaCl per 4 units
+    const caGluconateGrams = calciumGrams * 3; // 3g Ca gluconate = 1g CaCl
+
+    return {
+      value: `${prbc}:${ffp}:${apheresisPlatelets}`,
+      label: 'pRBC : FFP : Apheresis Platelets',
+      description: `**For ${prbc} units pRBCs (1:1:1 ratio):**\n\n• **FFP:** ${ffp} units\n• **Platelets:** ${apheresisPlatelets} apheresis unit(s) OR ${randomDonorPlatelets} random donor units\n\n**Calcium replacement:**\n• CaCl: ${calciumGrams} gram(s) IV (central line)\n• Ca gluconate: ${caGluconateGrams} gram(s) IV (peripheral OK)\n\n**Standard MTP coolers:**\n• ${Math.ceil(prbc / 6)} cooler(s) needed\n• Each cooler: 6 pRBC + 6 FFP + 1 apheresis platelet`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Calcium Replacement Calculator
+// -------------------------------------------------------------------
+
+const CALCIUM_REPLACEMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'calcium-replacement',
+  title: 'Calcium Replacement Calculator',
+  subtitle: 'MTP — Citrate-Induced Hypocalcemia',
+  description: 'Calculates calcium replacement needed during massive transfusion. Blood products contain citrate anticoagulant which chelates ionized calcium.',
+  fields: [
+    {
+      name: 'units-transfused',
+      label: 'Total Blood Product Units',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'units',
+      description: 'Total pRBCs + FFP units transfused',
+    },
+    {
+      name: 'access',
+      label: 'IV Access Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Central line — CaCl preferred', points: 1 },
+        { label: 'Peripheral IV — Ca gluconate only', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Target iCa >1.0 mmol/L (ideally >1.1). Check iCa with each ABG during MTP. CaCl provides 3× more elemental calcium than Ca gluconate.',
+  citations: [
+    'Ho KM, Leonard AD. Concentration-dependent effect of hypocalcaemia on mortality in critical bleeding requiring massive transfusion. Anaesth Intensive Care. 2011;39(1):46-54.',
+    'Giancarelli A, et al. Hypocalcemia in trauma patients receiving massive transfusion. J Surg Res. 2016;202(1):182-187.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const units = values['units-transfused'] || 0;
+    const access = values['access'] || 1;
+
+    if (units <= 0) {
+      return {
+        value: '--',
+        label: 'Enter units transfused',
+        description: 'Enter total blood product units to calculate calcium replacement.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const cacl = Math.ceil(units / 4); // 1g CaCl per 4 units
+    const caGluconate = cacl * 3; // 3g Ca gluconate = 1g CaCl (same elemental Ca)
+
+    if (access === 1) {
+      return {
+        value: `CaCl ${cacl}g`,
+        label: 'Calcium Chloride (Central Line)',
+        description: `**For ${units} blood product units:**\n\n• **Calcium Chloride:** ${cacl} gram(s) IV over 10-20 min\n  - Contains ~270 mg elemental Ca per gram\n  - **CENTRAL LINE REQUIRED** (severe tissue necrosis if extravasation)\n\n**Monitoring:**\n• Check iCa with each ABG\n• Target iCa >1.0 mmol/L (ideally >1.1)\n• Signs of hypocalcemia: QT prolongation, hypotension, tetany\n\n**Alternative:** ${caGluconate}g Ca gluconate IV (peripheral OK)`,
+        colorVar: '--color-primary',
+      };
+    } else {
+      return {
+        value: `Ca Gluc ${caGluconate}g`,
+        label: 'Calcium Gluconate (Peripheral OK)',
+        description: `**For ${units} blood product units:**\n\n• **Calcium Gluconate:** ${caGluconate} gram(s) IV over 10-20 min\n  - Contains ~90 mg elemental Ca per gram\n  - Safe for peripheral IV administration\n  - Each gram = 10 mL of 10% solution\n\n**Why 3× the CaCl dose?**\nCa gluconate provides 1/3 the elemental calcium per gram.\n${caGluconate}g Ca gluconate ≈ ${cacl}g CaCl\n\n**Monitoring:**\n• Check iCa with each ABG\n• Target iCa >1.0 mmol/L (ideally >1.1)\n\n**If central access available:** ${cacl}g CaCl is more efficient`,
+        colorVar: '--color-primary',
+      };
+    }
+  },
+};
+
+// -------------------------------------------------------------------
+// TEG/ROTEM Interpreter Calculator
+// -------------------------------------------------------------------
+
+const TEG_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'teg-interpreter',
+  title: 'TEG/ROTEM Interpreter',
+  subtitle: 'Goal-Directed Transfusion — Viscoelastic Assay',
+  description: 'Interprets TEG (thromboelastography) or ROTEM parameters and recommends specific blood product therapy. Select the abnormalities present.',
+  fields: [
+    { name: 'r-time', label: 'R-time (TEG) or CT (ROTEM) prolonged', type: 'toggle', points: 1, description: 'R >10 min or CT >79 sec — delayed clot initiation' },
+    { name: 'k-time', label: 'K-time/alpha angle abnormal', type: 'toggle', points: 2, description: 'K >3 min or low alpha angle — poor fibrin polymerization' },
+    { name: 'ma-low', label: 'MA (TEG) or MCF (ROTEM) low', type: 'toggle', points: 4, description: 'MA <50 mm or MCF <50 mm — weak clot strength' },
+    { name: 'ly30', label: 'LY30 (TEG) or ML (ROTEM) elevated', type: 'toggle', points: 8, description: 'LY30 >3% or ML >15% — hyperfibrinolysis' },
+  ],
+  results: [],
+  thresholdNote: 'TEG/ROTEM results guide specific component therapy. Multiple abnormalities are common in massive hemorrhage.',
+  citations: [
+    'Gonzalez E, et al. Goal-directed hemostatic resuscitation of trauma-induced coagulopathy. Ann Surg. 2016;263(6):1051-1059.',
+    'Baksaas-Aasen K, et al. ITACTIC: Viscoelastic haemostatic assay augmented protocols for major trauma haemorrhage. Intensive Care Med. 2021;47(1):49-59.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const rProlonged = values['r-time'] === 1;
+    const kAbnormal = values['k-time'] === 2;
+    const maLow = values['ma-low'] === 4;
+    const ly30High = values['ly30'] === 8;
+
+    const recommendations: string[] = [];
+    const abnormalities: string[] = [];
+
+    if (rProlonged) {
+      abnormalities.push('R-time/CT prolonged');
+      recommendations.push('• **FFP 10-15 mL/kg** — factor deficiency impairing clot initiation');
+    }
+
+    if (kAbnormal) {
+      abnormalities.push('K-time/alpha angle abnormal');
+      recommendations.push('• **Cryoprecipitate 10 units** — low fibrinogen (target >150-200 mg/dL)');
+    }
+
+    if (maLow) {
+      abnormalities.push('MA/MCF low');
+      recommendations.push('• **Platelets 1 apheresis unit** — platelet contribution to clot is inadequate');
+    }
+
+    if (ly30High) {
+      abnormalities.push('LY30/ML elevated');
+      recommendations.push('• **TXA 1g IV now** — hyperfibrinolysis, clot is breaking down');
+    }
+
+    if (recommendations.length === 0) {
+      return {
+        value: 'NORMAL',
+        label: 'No TEG/ROTEM Abnormalities Selected',
+        description: '**If all parameters are normal:**\n\nCoagulation cascade is functional. Continue current resuscitation.\n\n**If still bleeding with normal TEG/ROTEM:**\n• Surgical/procedural bleeding source\n• Platelet dysfunction (hypothermia, uremia)\n• Consider DDAVP 0.3 mcg/kg for platelet function\n• Rewarm patient (target >36°C)',
+        colorVar: '--color-primary',
+      };
+    }
+
+    const abnormCount = recommendations.length;
+    const colorVar = abnormCount >= 3 ? '--color-danger' : abnormCount >= 2 ? '--color-warning' : '--color-warning';
+
+    return {
+      value: `${abnormCount} ABNORMAL`,
+      label: abnormalities.join(' | '),
+      description: `**Abnormalities detected:**\n${abnormalities.map(a => `• ${a}`).join('\n')}\n\n**Recommended treatment:**\n${recommendations.join('\n')}\n\n**Repeat TEG/ROTEM:**\n• Every 30-60 min during active MTP\n• After each round of product administration\n• Until bleeding controlled and values normalized`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Emergency Blood Selection Tool
+// -------------------------------------------------------------------
+
+const EMERGENCY_BLOOD_SELECTION_CALCULATOR: CalculatorDefinition = {
+  id: 'emergency-blood-selection',
+  title: 'Emergency Blood Selection',
+  subtitle: 'ABO/Rh Compatibility — Product Selection',
+  description: 'Recommends appropriate emergency release blood products based on patient sex, age, and Rh status. Helps conserve scarce O-negative blood.',
+  fields: [
+    {
+      name: 'sex',
+      label: 'Patient Sex',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Female', points: 1 },
+        { label: 'Male', points: 2 },
+      ],
+    },
+    {
+      name: 'age',
+      label: 'Age Group',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Childbearing potential (<50 years)', points: 10 },
+        { label: 'Post-menopausal / ≥50 years', points: 20 },
+        { label: 'Pediatric (<18 years)', points: 30 },
+      ],
+    },
+    {
+      name: 'rh-known',
+      label: 'Rh Status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Unknown', points: 0 },
+        { label: 'Rh-positive confirmed', points: 100 },
+        { label: 'Rh-negative confirmed', points: 200 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'O-negative blood is scarce (~7% of population). Use judiciously. Switch to type-specific blood when ABO/Rh confirmed (~10-15 min).',
+  citations: [
+    'AABB Technical Manual. 20th ed. Bethesda, MD: AABB; 2020.',
+    'Cid J, Lozano M, Klein HG. Rh immunoglobulin: indications, dosing, and mechanism of action. Transfusion. 2017;57(6):1399-1408.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sex = values['sex'] || 0;
+    const age = values['age'] || 0;
+    const rhKnown = values['rh-known'] || 0;
+
+    if (sex === 0 || age === 0) {
+      return {
+        value: '--',
+        label: 'Enter patient information',
+        description: 'Select sex, age group, and Rh status (if known) to get blood product recommendations.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const isFemale = sex === 1;
+    const isChildbearing = age === 10;
+    const isPediatric = age === 30;
+    const rhPositive = rhKnown === 100;
+    const rhNegative = rhKnown === 200;
+
+    let rbcRec: string;
+    let rbcRationale: string;
+
+    // Decision logic
+    if (rhPositive) {
+      rbcRec = 'O-POSITIVE pRBCs';
+      rbcRationale = 'Rh-positive confirmed — no risk of alloimmunization to D antigen.';
+    } else if (rhNegative) {
+      rbcRec = 'O-NEGATIVE pRBCs';
+      rbcRationale = 'Rh-negative confirmed — must use Rh-negative products.';
+    } else if (isFemale && isChildbearing) {
+      rbcRec = 'O-NEGATIVE pRBCs';
+      rbcRationale = 'Female of childbearing age with unknown Rh — use O-negative to prevent D alloimmunization and hemolytic disease of fetus in future pregnancies.';
+    } else if (isPediatric) {
+      rbcRec = 'O-NEGATIVE pRBCs';
+      rbcRationale = 'Pediatric patient with unknown Rh — use O-negative until typing available.';
+      if (isFemale) {
+        rbcRationale += ' Especially important for females with future pregnancy potential.';
+      }
+    } else {
+      // Male or postmenopausal female with unknown Rh
+      rbcRec = 'O-POSITIVE pRBCs';
+      rbcRationale = isFemale
+        ? 'Post-menopausal female — Rh sensitization not a concern for future pregnancy. O-positive conserves O-negative supply.'
+        : 'Male patient — Rh sensitization has no clinical consequence. O-positive conserves O-negative supply.';
+    }
+
+    // RhoGAM consideration
+    const needsRhogam = isFemale && isChildbearing && !rhNegative && !rhPositive;
+
+    const rhogamNote = needsRhogam
+      ? `\n\n**RhoGAM consideration:**\nIf this patient is later confirmed Rh-negative and received Rh-positive products, give RhoGAM 300 mcg IM per 15 mL Rh-positive RBCs received (within 72 hours).`
+      : '';
+
+    return {
+      value: rbcRec.includes('NEGATIVE') ? 'O-NEG' : 'O-POS',
+      label: rbcRec,
+      description: `**Recommended pRBCs:** ${rbcRec}\n\n**Rationale:** ${rbcRationale}\n\n**Plasma:** AB plasma (universal donor — no anti-A or anti-B antibodies)\n\n**Platelets:** ABO-matched preferred but not required. Rh-match for Rh-negative females of childbearing age.\n\n**Switch to type-specific:** As soon as ABO/Rh typing completed (~10-15 min). Fully crossmatched blood takes ~45-60 min — not practical for MTP.${rhogamNote}`,
+      colorVar: rbcRec.includes('NEGATIVE') ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Diabetes Management Calculators
+// -------------------------------------------------------------------
+
+const INSULIN_CORRECTION_DOSE_CALCULATOR: CalculatorDefinition = {
+  id: 'insulin-correction-dose',
+  title: 'Insulin Correction Dose',
+  subtitle: 'Calculate correction insulin for hyperglycemia',
+  description: 'Calculates correction dose of rapid-acting insulin based on current glucose, target glucose, and correction factor. Uses the 1800 rule for rapid-acting insulin.',
+  fields: [
+    { name: 'current-bg', label: 'Current Blood Glucose', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Point-of-care glucose' },
+    { name: 'target-bg', label: 'Target Blood Glucose', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Goal glucose (typically 150 mg/dL)' },
+    { name: 'correction-factor', label: 'Correction Factor', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL per unit', description: 'How much 1 unit drops glucose (or enter TDD to calculate)' },
+    { name: 'tdd', label: 'OR: Total Daily Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'units', description: 'If CF unknown, enter TDD to calculate (1800 rule)' },
+  ],
+  results: [],
+  thresholdNote: 'Correction Factor = 1800 / TDD for rapid-acting insulin. Example: TDD 60 units -> CF = 30 (1 unit drops glucose 30 mg/dL). For regular insulin, use 1500 rule.',
+  citations: [
+    'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients. J Clin Endocrinol Metab. 2012;97(1):16-38.',
+    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const currentBg = values['current-bg'] || 0;
+    const targetBg = values['target-bg'] || 150;
+    let cf = values['correction-factor'] || 0;
+    const tdd = values['tdd'] || 0;
+
+    if (currentBg <= 0) {
+      return { value: '--', label: 'Enter values', description: 'Enter current blood glucose to calculate correction dose.', colorVar: '--color-text-muted' };
+    }
+
+    // Calculate CF from TDD if not provided directly
+    if (cf <= 0 && tdd > 0) {
+      cf = Math.round(1800 / tdd);
+    }
+
+    if (cf <= 0) {
+      return { value: '--', label: 'Enter CF or TDD', description: 'Enter correction factor directly OR enter total daily dose (TDD) to calculate using 1800 rule.', colorVar: '--color-text-muted' };
+    }
+
+    const bgDiff = currentBg - targetBg;
+    if (bgDiff <= 0) {
+      return { value: '0 units', label: 'No Correction Needed', description: `Current glucose ${currentBg} mg/dL is at or below target ${targetBg} mg/dL. No correction insulin needed.`, colorVar: '--color-primary' };
+    }
+
+    const correctionDose = Math.round((bgDiff / cf) * 2) / 2; // Round to nearest 0.5 unit
+    const cfSource = tdd > 0 ? `(calculated: 1800 / ${tdd} = ${cf})` : '';
+
+    let colorVar = '--color-primary';
+    if (correctionDose >= 6) colorVar = '--color-danger';
+    else if (correctionDose >= 4) colorVar = '--color-warning';
+
+    return {
+      value: `${correctionDose} units`,
+      label: 'Correction Dose',
+      description: `**Calculation:**\n(${currentBg} - ${targetBg}) / ${cf} = ${(bgDiff / cf).toFixed(1)} units\n\n**Rounded:** ${correctionDose} units rapid-acting insulin\n\n**Correction Factor:** ${cf} mg/dL per unit ${cfSource}\n\n**Add to scheduled mealtime dose** if giving before a meal.`,
+      colorVar,
+    };
+  },
+};
+
+const TDD_ESTIMATOR_CALCULATOR: CalculatorDefinition = {
+  id: 'tdd-estimator',
+  title: 'Total Daily Dose (TDD) Estimator',
+  subtitle: 'Estimate insulin requirements',
+  description: 'Estimates total daily insulin dose for initiating or adjusting insulin therapy. Based on weight, diabetes type, and renal function.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Patient weight in kilograms' },
+    {
+      name: 'patient-type',
+      label: 'Patient Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Insulin-naive (standard)', points: 1 },
+        { label: 'Elderly (>65) or renal impairment', points: 2 },
+        { label: 'Insulin-resistant (obese, steroids)', points: 3 },
+        { label: 'High-dose steroids', points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'These are starting estimates. Titrate based on glucose response. Reduce doses for renal impairment (CKD 4-5). Increase for steroid use.',
+  citations: [
+    'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients. J Clin Endocrinol Metab. 2012;97(1):16-38.',
+    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const patientType = values['patient-type'] || 1;
+
+    if (weight <= 0) {
+      return { value: '--', label: 'Enter weight', description: 'Enter patient weight to calculate TDD estimate.', colorVar: '--color-text-muted' };
+    }
+
+    let dosePerKg: number;
+    let typeLabel: string;
+    let notes: string;
+
+    switch (patientType) {
+      case 2: // Elderly/renal
+        dosePerKg = 0.25;
+        typeLabel = 'Elderly/Renal Impairment';
+        notes = 'Reduced starting dose due to decreased insulin clearance and higher hypoglycemia risk. Monitor closely.';
+        break;
+      case 3: // Insulin-resistant
+        dosePerKg = 0.55;
+        typeLabel = 'Insulin-Resistant';
+        notes = 'Higher starting dose for obesity or steroid use. May need further increases.';
+        break;
+      case 4: // High-dose steroids
+        dosePerKg = 0.8;
+        typeLabel = 'High-Dose Steroids';
+        notes = 'May need up to 1 U/kg/day on high-dose steroids. Reduce proportionally as steroids taper.';
+        break;
+      default: // Standard
+        dosePerKg = 0.45;
+        typeLabel = 'Standard (Insulin-Naive)';
+        notes = 'Typical starting dose for most patients. Adjust based on glucose trends.';
+    }
+
+    const tdd = Math.round(weight * dosePerKg);
+    const basalDose = Math.round(tdd * 0.5);
+    const bolusDose = Math.round(tdd * 0.5);
+    const bolusPerMeal = Math.round(bolusDose / 3);
+    const correctionFactor = Math.round(1800 / tdd);
+
+    return {
+      value: `${tdd} units/day`,
+      label: typeLabel,
+      description: `**Estimated TDD:** ${weight} kg x ${dosePerKg} U/kg = ${tdd} units/day\n\n**Distribution (50/50 split):**\n- Basal: ${basalDose} units (glargine once daily)\n- Bolus: ${bolusDose} units total (~${bolusPerMeal} units per meal)\n\n**Derived values:**\n- Correction Factor: 1800 / ${tdd} = ${correctionFactor} mg/dL per unit\n- Carb Ratio: 500 / ${tdd} = ${Math.round(500 / tdd)} g carbs per unit\n\n**Note:** ${notes}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const BASAL_BOLUS_CALCULATOR: CalculatorDefinition = {
+  id: 'basal-bolus-calc',
+  title: 'Basal/Bolus Calculator',
+  subtitle: 'Split TDD into basal and bolus doses',
+  description: 'Calculates basal and bolus insulin distribution from total daily dose using the 50/50 rule.',
+  fields: [
+    { name: 'tdd', label: 'Total Daily Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'units', description: 'Total daily insulin dose' },
+    {
+      name: 'meals',
+      label: 'Number of Meals',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '3 meals per day', points: 3 },
+        { label: '2 meals per day', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Standard split is 50% basal / 50% bolus. Some protocols use 40% basal / 60% bolus for better post-meal coverage.',
+  citations: [
+    'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients. J Clin Endocrinol Metab. 2012;97(1):16-38.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const tdd = values['tdd'] || 0;
+    const meals = values['meals'] || 3;
+
+    if (tdd <= 0) {
+      return { value: '--', label: 'Enter TDD', description: 'Enter total daily dose to calculate basal/bolus distribution.', colorVar: '--color-text-muted' };
+    }
+
+    const basalDose = Math.round(tdd * 0.5);
+    const bolusDose = Math.round(tdd * 0.5);
+    const bolusPerMeal = Math.round(bolusDose / meals);
+    const correctionFactor = Math.round(1800 / tdd);
+
+    return {
+      value: `${basalDose} / ${bolusDose}`,
+      label: 'Basal / Bolus Split',
+      description: `**From TDD of ${tdd} units:**\n\n**Basal Insulin:**\n- ${basalDose} units glargine (or detemir) once daily at bedtime\n\n**Bolus Insulin:**\n- ${bolusDose} units total\n- ${bolusPerMeal} units lispro/aspart with each of ${meals} meals\n\n**Correction Scale:**\n- Correction Factor: ${correctionFactor} mg/dL per unit\n- Add correction to mealtime dose based on pre-meal glucose\n\n**Hold bolus if:**\n- Patient is NPO\n- Eating less than 50% of meal\n- Glucose <100 mg/dL`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const CARB_INSULIN_RATIO_CALCULATOR: CalculatorDefinition = {
+  id: 'icr-calc',
+  title: 'Carb-to-Insulin Ratio (ICR)',
+  subtitle: 'Calculate insulin-to-carbohydrate ratio',
+  description: 'Calculates grams of carbohydrates covered by 1 unit of rapid-acting insulin using the 500 rule.',
+  fields: [
+    { name: 'tdd', label: 'Total Daily Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'units', description: 'Total daily insulin dose' },
+  ],
+  results: [],
+  thresholdNote: '500 Rule: ICR = 500 / TDD. Example: TDD 50 units -> ICR = 10 (1 unit covers 10g carbs). Some use 450 rule for more aggressive coverage.',
+  citations: [
+    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+    'Walsh J, Roberts R. Pumping Insulin. 6th ed. Torrey Pines Press; 2016.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const tdd = values['tdd'] || 0;
+
+    if (tdd <= 0) {
+      return { value: '--', label: 'Enter TDD', description: 'Enter total daily dose to calculate carb ratio.', colorVar: '--color-text-muted' };
+    }
+
+    const icr500 = Math.round(500 / tdd);
+    const icr450 = Math.round(450 / tdd);
+    const correctionFactor = Math.round(1800 / tdd);
+
+    return {
+      value: `1:${icr500}`,
+      label: 'Insulin-to-Carb Ratio',
+      description: `**Using 500 Rule:**\n500 / ${tdd} = ${icr500}\n\n**ICR = 1:${icr500}** (1 unit covers ${icr500}g carbohydrates)\n\n**Alternative (450 rule):** 1:${icr450} for more aggressive coverage\n\n**Related calculation:**\n- Correction Factor: 1800 / ${tdd} = ${correctionFactor} mg/dL per unit\n\n**Example meal calculation:**\n- 60g carb meal\n- 60 / ${icr500} = ${Math.round(60 / icr500)} units bolus\n- Add correction dose if pre-meal glucose elevated`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const HYPO_TREATMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'hypo-treatment',
+  title: 'Hypoglycemia Treatment',
+  subtitle: 'Calculate dextrose dose for hypoglycemia',
+  description: 'Calculates appropriate dextrose dose (D50W or D10W) based on current glucose and patient weight. Includes oral glucose for alert patients.',
+  fields: [
+    { name: 'current-bg', label: 'Current Blood Glucose', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Point-of-care glucose' },
+    { name: 'weight', label: 'Weight (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'For weight-based dosing' },
+    {
+      name: 'mental-status',
+      label: 'Mental Status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Alert - can take oral', points: 1 },
+        { label: 'Altered - needs IV/IM', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Goal: Raise glucose to >100 mg/dL. Recheck in 15 minutes. Rule of 15: 15g glucose raises BG ~50 mg/dL in adults.',
+  citations: [
+    'Cryer PE, et al. Evaluation and Management of Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.',
+    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const currentBg = values['current-bg'] || 0;
+    const mentalStatus = values['mental-status'] || 1;
+
+    if (currentBg <= 0) {
+      return { value: '--', label: 'Enter glucose', description: 'Enter current blood glucose.', colorVar: '--color-text-muted' };
+    }
+
+    if (currentBg >= 70) {
+      return { value: 'Not Hypoglycemic', label: 'Glucose >= 70 mg/dL', description: 'Glucose is not in hypoglycemic range. No treatment indicated unless symptomatic.', colorVar: '--color-primary' };
+    }
+
+    const glucoseDeficit = 100 - currentBg;
+    const severity = currentBg < 54 ? 'Severe (Level 2)' : 'Mild (Level 1)';
+    const colorVar = currentBg < 54 ? '--color-danger' : '--color-warning';
+
+    if (mentalStatus === 1) {
+      // Alert patient - oral treatment
+      const oralGlucoseG = Math.ceil(glucoseDeficit / 3); // Rough: 15g raises ~50 mg/dL
+      const oralDose = Math.max(15, Math.min(30, oralGlucoseG));
+
+      return {
+        value: `${oralDose}g glucose PO`,
+        label: severity,
+        description: `**Current glucose:** ${currentBg} mg/dL\n**Goal:** Raise to >100 mg/dL\n\n**Treatment (alert patient):**\n- ${oralDose}g fast-acting carbohydrate PO\n- 4-5 glucose tablets, OR\n- 4-6 oz juice/regular soda, OR\n- 1 tablespoon honey\n\n**Rule of 15:**\n- Give 15-20g glucose\n- Recheck in 15 minutes\n- Repeat if still <70 mg/dL\n- Follow with snack when >70 mg/dL`,
+        colorVar,
+      };
+    }
+
+    // Altered mental status - IV/IM treatment
+    const glucagonDose = 1; // mg
+
+    return {
+      value: 'D50W 50 mL IV',
+      label: severity,
+      description: `**Current glucose:** ${currentBg} mg/dL\n**Mental Status:** Altered - requires IV/IM treatment\n\n**IV Treatment (first-line):**\n- **D50W** 25-50 mL (12.5-25g dextrose) IV push, OR\n- **D10W** 100-250 mL IV over 10-15 min\n\n**No IV Access:**\n- **Glucagon** ${glucagonDose} mg IM/SC (lateral thigh), OR\n- **Glucagon intranasal** 3 mg (Baqsimi)\n\n**THIAMINE FIRST** if alcoholic/malnourished:\n- Thiamine 100 mg IV before or with dextrose\n\n**Recheck glucose in 15 min.** May need repeat dosing or D10W infusion.\n\n**Sulfonylurea-induced:** Extended monitoring required (12-72h). Consider octreotide.`,
+      colorVar,
+    };
+  },
+};
+
+const SLIDING_SCALE_GENERATOR: CalculatorDefinition = {
+  id: 'sliding-scale-gen',
+  title: 'Sliding Scale Generator',
+  subtitle: 'Generate correction scale from TDD or CF',
+  description: 'Generates a sliding scale (correction scale) table based on correction factor. Designed as supplement to scheduled basal-bolus insulin, NOT as standalone therapy.',
+  fields: [
+    { name: 'tdd', label: 'Total Daily Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'units', description: 'Enter TDD to calculate correction factor' },
+    { name: 'cf-override', label: 'OR: Correction Factor (override)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL per unit', description: 'Directly enter CF to override calculation' },
+    { name: 'target', label: 'Target Glucose', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Target glucose (default 150)' },
+  ],
+  results: [],
+  thresholdNote: 'SLIDING SCALE ALONE IS NOT RECOMMENDED. It is reactive, not proactive, and associated with worse glycemic control. Use as SUPPLEMENT to scheduled basal-bolus regimen.',
+  citations: [
+    'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients. J Clin Endocrinol Metab. 2012;97(1):16-38.',
+    'Umpierrez GE, et al. Randomized Study of Basal-Bolus Insulin Therapy in the Inpatient Management of Type 2 Diabetes (RABBIT 2 Trial). Diabetes Care. 2007;30(9):2181-6.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const tdd = values['tdd'] || 0;
+    const cfOverride = values['cf-override'] || 0;
+    const target = values['target'] || 150;
+
+    let cf: number;
+    let cfSource: string;
+
+    if (cfOverride > 0) {
+      cf = cfOverride;
+      cfSource = 'user-provided';
+    } else if (tdd > 0) {
+      cf = Math.round(1800 / tdd);
+      cfSource = `calculated (1800/${tdd})`;
+    } else {
+      return { value: '--', label: 'Enter TDD or CF', description: 'Enter total daily dose OR correction factor to generate sliding scale.', colorVar: '--color-text-muted' };
+    }
+
+    // Generate scale based on CF
+    // Each "step" is roughly 1 unit
+    const ranges: string[] = [];
+    const doses: number[] = [];
+
+    // Calculate glucose ranges for each dose
+    for (let dose = 0; dose <= 8; dose++) {
+      const low = target + (dose * cf);
+      const high = target + ((dose + 1) * cf) - 1;
+
+      if (dose === 0) {
+        ranges.push(`<${low}`);
+        doses.push(0);
+      } else if (dose <= 6) {
+        ranges.push(`${low}-${high}`);
+        doses.push(dose);
+      } else {
+        ranges.push(`>${low}`);
+        doses.push(dose);
+        break;
+      }
+    }
+
+    let scaleTable = '| Glucose (mg/dL) | Correction Dose |\n|-----------------|----------------|\n';
+    for (let i = 0; i < ranges.length; i++) {
+      const note = doses[i] >= 6 ? ' + notify MD' : '';
+      scaleTable += `| ${ranges[i]} | ${doses[i]} units${note} |\n`;
+    }
+
+    return {
+      value: `CF = ${cf}`,
+      label: 'Correction Scale Generated',
+      description: `**Correction Factor:** ${cf} mg/dL per unit (${cfSource})\n**Target Glucose:** ${target} mg/dL\n\n${scaleTable}\n**Instructions:**\n- Give with mealtime insulin (add to scheduled bolus)\n- Recheck glucose before next meal\n- If consistently needing >4 units correction, increase scheduled doses\n\n**WARNING:** Sliding scale ALONE is NOT recommended therapy. This should supplement scheduled basal-bolus insulin.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  'insulin-correction-dose': INSULIN_CORRECTION_DOSE_CALCULATOR,
+  'tdd-estimator': TDD_ESTIMATOR_CALCULATOR,
+  'basal-bolus-calc': BASAL_BOLUS_CALCULATOR,
+  'icr-calc': CARB_INSULIN_RATIO_CALCULATOR,
+  'hypo-treatment': HYPO_TREATMENT_CALCULATOR,
+  'sliding-scale-gen': SLIDING_SCALE_GENERATOR,
+  'abc-score': ABC_SCORE_CALCULATOR,
+  'shock-index': SHOCK_INDEX_CALCULATOR,
+  'mtp-component': MTP_COMPONENT_CALCULATOR,
+  'calcium-replacement': CALCIUM_REPLACEMENT_CALCULATOR,
+  'teg-interpreter': TEG_INTERPRETER_CALCULATOR,
+  'emergency-blood-selection': EMERGENCY_BLOOD_SELECTION_CALCULATOR,
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
   'pesi': PESI_CALCULATOR,
@@ -9989,6 +11230,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'globe-dispo': GLOBE_DISPO_CALCULATOR,
   'zargar': ZARGAR_CALCULATOR,
   'caustic-agent': CAUSTIC_AGENT_CALCULATOR,
+  'young-burgess': YOUNG_BURGESS_CALCULATOR,
+  'tile-classification': TILE_CLASSIFICATION_CALCULATOR,
+  'wses-pelvic': WSES_PELVIC_CALCULATOR,
+  'urethral-injury-risk': URETHRAL_INJURY_RISK_CALCULATOR,
+  'pelvic-hemorrhage-source': PELVIC_HEMORRHAGE_SOURCE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

@@ -144,6 +144,9 @@ const TREE_REGISTRY = {
   'epistaxis':            { prefix: 'EPISTAXIS',              entryNodeId: 'epi-start',      categoryId: 'emergency-medicine' },
   'urinary-retention':    { prefix: 'URINARY_RETENTION',      entryNodeId: 'aur-start',      categoryId: 'urology' },
   'caustic-ingestion':    { prefix: 'CAUSTIC_INGESTION',      entryNodeId: 'caustic-start',  categoryId: 'toxicology' },
+  'diabetes-management':  { prefix: 'DIABETES_MANAGEMENT',    entryNodeId: 'dm-start',       categoryId: 'nephro-rheum-endo' },
+  'massive-transfusion':  { prefix: 'MASSIVE_TRANSFUSION',    entryNodeId: 'mtp-start',      categoryId: 'trauma-surg' },
+  'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pf-start',       categoryId: 'trauma-surg' },
 };
 
 const CROSS_LISTINGS = {

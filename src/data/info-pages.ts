@@ -9151,10 +9151,190 @@ const EPISTAXIS_SUMMARY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Massive Transfusion Protocol
+// -------------------------------------------------------------------
+
+const MTP_SUMMARY: InfoPage = {
+  id: 'mtp-summary',
+  title: 'MTP Steps Summary',
+  subtitle: 'Massive Transfusion Protocol Quick Reference',
+  sections: [
+    {
+      heading: '1. Activate MTP',
+      body: '• [ABC Score](#/calculator/abc-score) ≥2 OR clinical gestalt\n• [Shock Index](#/calculator/shock-index) >1.0 with hemorrhage\n• SBP <90 mmHg with suspected hemorrhage\n• Penetrating torso trauma with hypotension\n• Call blood bank: "Activate MTP"',
+    },
+    {
+      heading: '2. Initial Resuscitation (First 5 Minutes)',
+      body: '• Large-bore IV access: 2 × 16-18G or IO\n• Type and crossmatch STAT\n• Limit crystalloid: 1-2 L max (dilutional coagulopathy)\n• [Permissive hypotension](#/node/mtp-permissive-hypotension): target SBP 80-90 (except TBI)\n• Warm all fluids',
+    },
+    {
+      heading: '3. Tranexamic Acid (Within 3 Hours!)',
+      body: '• [TXA](#/drug/tranexamic-acid/mtp) 1 g IV over 10 min, then 1 g over 8 hours\n• CRASH-2: Give >3h from injury = HARM\n• Do NOT delay MTP for TXA',
+    },
+    {
+      heading: '4. Blood Products (1:1:1 Ratio)',
+      body: '• Initial cooler: 6 pRBC : 6 FFP : 1 apheresis platelet\n• [MTP Calculator](#/calculator/mtp-component) for component math\n• O-negative RBCs initially (O-pos OK for males/postmenopausal)\n• AB plasma (universal donor)\n• Switch to type-specific when available',
+    },
+    {
+      heading: '5. Calcium Replacement',
+      body: '• [CaCl](#/drug/calcium-chloride/mtp) 1 g IV per 4 units blood products\n• [Calcium Calculator](#/calculator/calcium-replacement)\n• Target iCa >1.0 mmol/L (check with each ABG)\n• Citrate in products chelates calcium',
+    },
+    {
+      heading: '6. TEG/ROTEM-Guided Resuscitation',
+      body: '• [TEG/ROTEM Interpreter](#/calculator/teg-interpreter)\n• R-time prolonged → [FFP](#/drug/ffp/mtp)\n• K-time/alpha angle abnormal → [Cryo](#/drug/cryoprecipitate/mtp)\n• MA low → Platelets\n• LY30 elevated → [TXA](#/drug/tranexamic-acid/mtp)',
+    },
+    {
+      heading: '7. Monitor & Avoid Lethal Triad',
+      body: '• **Hypothermia:** Warm products, active rewarming, target >36°C\n• **Acidosis:** Lactate trending, correct with resuscitation\n• **Coagulopathy:** TEG/ROTEM, fibrinogen >150, plt >50k',
+    },
+    {
+      heading: '8. Terminate MTP When',
+      body: '• Surgical bleeding control achieved\n• Hemodynamic stability (MAP >65, HR <100)\n• Lactate/base deficit improving\n• No clinical evidence of ongoing hemorrhage\n• Notify blood bank to cancel coolers',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Holcomb JB, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio (PROPPR). JAMA. 2015;313(5):471-482.' },
+    { num: 2, text: 'CRASH-2 Collaborators. Effects of tranexamic acid on death in trauma patients with significant haemorrhage. Lancet. 2010;376(9734):23-32.' },
+    { num: 3, text: 'Cannon JW, et al. Damage control resuscitation in patients with severe traumatic hemorrhage (EAST Guidelines). J Trauma. 2017;82(3):605-617.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Pelvic Fracture
+// -------------------------------------------------------------------
+
+const PELVIC_SUMMARY: InfoPage = {
+  id: 'pelvic-summary',
+  title: 'Pelvic Fracture Steps Summary',
+  subtitle: 'Time-critical trauma management',
+  sections: [
+    {
+      heading: '1. Primary Survey (ATLS)',
+      body: '• [Airway, breathing, circulation](#/node/pelvic-start)\n• Establish 2 large-bore IVs (or IO if needed)\n• Type and crossmatch STAT\n• Do NOT rock the pelvis — may dislodge clots',
+    },
+    {
+      heading: '2. Pelvic Binder',
+      body: '• Apply at level of **greater trochanters** (not iliac crests)\n• Indicated for: APC (open book), VS (vertical shear), hemodynamic instability\n• Caution in LC injuries — may worsen displacement\n• Do NOT over-tighten',
+    },
+    {
+      heading: '3. Hemodynamic Assessment',
+      body: '• [Stable (SBP >90, responsive to fluids)](#/node/pelvic-stable-workup) → CT workup\n• [Transient responder](#/node/pelvic-transient) → Close monitoring, prepare for intervention\n• [Unstable (SBP <90 despite MTP)](#/node/pelvic-unstable) → Hemorrhage control\n• [WSES Pelvic Trauma Grade Calculator](#/calculator/wses-pelvic)',
+    },
+    {
+      heading: '4. Hemorrhage Control (Unstable)',
+      body: '• **FAST positive** → OR for laparotomy + PPP\n• **FAST negative** → Pelvic source\n  - 90% venous → Binder + resuscitation ± PPP\n  - 10% arterial (contrast blush) → [Angioembolization](#/node/pelvic-angio)\n• [REBOA](#/node/pelvic-reboa) — bridge to definitive control\n• [Pelvic Hemorrhage Source Calculator](#/calculator/pelvic-hemorrhage-source)',
+    },
+    {
+      heading: '5. Classification',
+      body: '• [Young-Burgess Calculator](#/calculator/young-burgess) — mechanism-based (LC, APC, VS, CM)\n• [Tile Classification Calculator](#/calculator/tile-classification) — stability-based (A, B, C)\n• Guides operative vs conservative management',
+    },
+    {
+      heading: '6. Urogenital Evaluation',
+      body: '• **BEFORE Foley:** Check for blood at meatus, high-riding prostate, scrotal hematoma\n• [Urethral Injury Risk Calculator](#/calculator/urethral-injury-risk)\n• If signs present → [Retrograde Urethrogram (RUG)](#/info/pelvic-rug-procedure)\n• Gross hematuria → CT cystogram',
+    },
+    {
+      heading: '7. Resuscitation Targets',
+      body: '• [TXA](#/drug/tranexamic-acid/pelvic-fracture) 1g IV over 10 min within 3h of injury\n• MTP 1:1:1 ratio (pRBC:FFP:Platelets)\n• Calcium 1g CaCl per 4 units products\n• Permissive hypotension (SBP 80-90) unless TBI',
+    },
+    {
+      heading: '8. Definitive Management',
+      body: '• Tile A (stable): Conservative, WBAT\n• Tile B (rotationally unstable): Consider ORIF\n• Tile C (completely unstable): Operative fixation required\n• Damage control → Definitive ORIF day 5-14',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Coccolini F, et al. Pelvic Trauma: WSES Classification and Guidelines. World J Emerg Surg. 2017;12:5.' },
+    { num: 2, text: 'Costantini TW, et al. EAST Guidelines: Pelvic Fracture Hemorrhage. J Trauma Acute Care Surg. 2016;80(2):384-392.' },
+    { num: 3, text: 'ACS TQIP Best Practices Guidelines: Pelvic Fracture Management. 2020.' },
+  ],
+};
+
+const PELVIC_RUG_PROCEDURE: InfoPage = {
+  id: 'pelvic-rug-procedure',
+  title: 'Retrograde Urethrogram (RUG)',
+  subtitle: 'Procedure for urethral injury evaluation',
+  sections: [
+    {
+      heading: 'Indications',
+      body: '• Blood at urethral meatus\n• High-riding or boggy prostate on DRE (males)\n• Scrotal or perineal hematoma\n• Inability to void with full bladder\n• Pelvic fracture with pubic symphysis diastasis\n\n**Do NOT attempt blind Foley placement if any of these are present.**',
+    },
+    {
+      heading: 'Equipment',
+      body: '• 12-14 Fr Foley catheter OR catheter-tip syringe\n• 30-60 mL water-soluble contrast (Omnipaque, Cysto-Conray)\n• Fluoroscopy OR portable X-ray\n• Sterile drape, gloves\n• 10 mL syringe for balloon (if using Foley)',
+    },
+    {
+      heading: 'Procedure',
+      body: '**Step 1:** Position patient supine with leg externally rotated 30-45 degrees (frog-leg or oblique)\n\n**Step 2:** Cleanse urethral meatus with antiseptic\n\n**Step 3:** Insert catheter tip 2-3 cm into fossa navicularis (just past meatus)\n\n**Step 4:** If using Foley, inflate balloon with 2-3 mL saline to occlude meatus (prevents contrast leak)\n\n**Step 5:** Inject 30-60 mL contrast SLOWLY under fluoroscopy or take X-ray during injection\n\n**Step 6:** Obtain oblique images to visualize entire urethra',
+    },
+    {
+      heading: 'Interpretation',
+      body: '**Normal:**\n• Contrast fills urethra without extravasation\n• Smooth passage into bladder\n• Proceed with gentle Foley attempt\n\n**Partial Tear:**\n• Some extravasation BUT contrast reaches bladder\n• Options: single gentle Foley attempt by experienced provider OR suprapubic catheter\n\n**Complete Disruption:**\n• Contrast extravasates, does NOT reach bladder\n• **Suprapubic catheter required**\n• Do NOT attempt urethral catheterization',
+    },
+    {
+      heading: 'Anatomy',
+      body: '**Male Urethra (from distal to proximal):**\n• Fossa navicularis\n• Penile (spongy) urethra\n• Bulbar urethra\n• **Membranous urethra** ← Most common injury site in pelvic fractures\n• Prostatic urethra\n• Bladder neck\n\n**Pelvic fracture urethral injuries** occur at the membranous urethra where it is fixed at the urogenital diaphragm.',
+    },
+    {
+      heading: 'Pitfalls',
+      body: '• Inadequate balloon inflation → contrast leak, non-diagnostic study\n• Insufficient contrast volume → incomplete visualization\n• AP view only → may miss posterior injury (need oblique)\n• Excessive pressure → may convert partial to complete tear\n• Multiple catheter attempts before RUG → worsens injury',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Morey AF, et al. Urotrauma: AUA Guideline. J Urol. 2014;192(2):327-335.' },
+    { num: 2, text: 'Kitrey ND, et al. EAU Guidelines on Urological Trauma. Eur Urol. 2020;78(5):725-734.' },
+    { num: 3, text: 'Brandes SB. Urethral Injury. In: Wein AJ, ed. Campbell-Walsh Urology. 12th ed. Elsevier; 2020.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Diabetes Management Summary
+// -------------------------------------------------------------------
+
+const DM_SUMMARY: InfoPage = {
+  id: 'dm-summary',
+  title: 'Diabetes Management',
+  subtitle: 'Steps Summary',
+  sections: [
+    {
+      heading: 'Module 1: Initial Assessment',
+      body: '1. **Triage by glucose level:**\n   - <70 mg/dL: Hypoglycemia pathway\n   - 70-300 mg/dL: Assess for DKA/HHS\n   - >300 mg/dL: Evaluate for diabetic emergencies\n\n2. **Screen for DKA/HHS:**\n   - DKA: pH <7.3, AG >12, ketones positive\n   - HHS: Glucose >600, Osm >320, minimal ketones\n   - Euglycemic DKA: SGLT2 inhibitor use\n\n3. **Assess diabetes type and insulin status:**\n   - Type 1 vs Type 2\n   - Pump vs injections\n   - Current regimen and doses',
+    },
+    {
+      heading: 'Module 2: Hypoglycemia',
+      body: '**Alert patient (glucose <70):**\n- 15-20g fast-acting carbs PO\n- Recheck in 15 min, repeat PRN\n\n**Severe/AMS:**\n- IV: D50W 25-50 mL or D10W 100-250 mL\n- No IV: Glucagon 1 mg IM or 3 mg intranasal\n- Thiamine first in alcoholics\n\n**Sulfonylurea-induced:**\n- Prolonged monitoring (12-72h)\n- D10W infusion\n- Consider octreotide 50-100 mcg q6-8h',
+    },
+    {
+      heading: 'Module 3: Inpatient Hyperglycemia',
+      body: '**Target:** 140-180 mg/dL (general and ICU)\n\n**Basal-Bolus Protocol:**\n1. Calculate TDD: 0.4-0.5 U/kg/day (naive), 0.2-0.3 U/kg (elderly/renal)\n2. 50% as basal (glargine daily)\n3. 50% as bolus (divided among 3 meals)\n4. Add correction scale (CF = 1800/TDD)\n\n**IV Insulin:**\n- For NPO, critical illness, perioperative\n- Start 1-4 U/hr based on glucose\n- Add D5W/D10W when glucose <150\n\n**Steroid-induced:** Add NPH or increase TDD 20-50%',
+    },
+    {
+      heading: 'Module 4: Outpatient Management',
+      body: '**First-line:** Metformin 500-1000 mg BID\n\n**Second-line agents:**\n- SGLT2i (empagliflozin) if HF/CKD/ASCVD\n- GLP-1 (semaglutide) if weight loss/ASCVD\n- Avoid sulfonylureas if hypoglycemia risk\n\n**Starting insulin:**\n- Basal: 0.1-0.2 U/kg glargine at bedtime\n- Titrate by 2-4 U every 3 days for fasting goal\n- Add mealtime when basal optimized but A1c elevated',
+    },
+    {
+      heading: 'Module 5: Key Transitions',
+      body: '**IV to SC Transition:**\n- Give basal 2-4 hours BEFORE stopping drip\n- Calculate TDD: (avg hourly rate x 24) x 0.8\n\n**NPO Management:**\n- Type 1: Continue basal, hold bolus\n- Type 2: Basal at 75-100%, hold orals\n\n**Perioperative:**\n- Hold SGLT2i 3-4 days before surgery\n- Hold metformin day of surgery\n- Continue basal, hold bolus if NPO',
+    },
+    {
+      heading: 'Quick Formulas',
+      body: '**TDD Estimator:** 0.4-0.5 U/kg/day\n\n**Basal/Bolus Split:** 50% / 50%\n\n**Correction Factor (1800 rule):** CF = 1800 / TDD\n\n**Carb-to-Insulin Ratio (500 rule):** ICR = 500 / TDD\n\n**Hypoglycemia Treatment:** 15-20g glucose PO or D50 25-50 mL IV',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).' },
+    { num: 2, text: 'Umpierrez GE, et al. Management of Hyperglycemia in Hospitalized Patients. J Clin Endocrinol Metab. 2012.' },
+    { num: 3, text: 'Cryer PE, et al. Evaluation and Management of Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
 export const INFO_PAGES: Record<string, InfoPage> = {
+  'dm-summary': DM_SUMMARY,
+  'pelvic-summary': PELVIC_SUMMARY,
+  'pelvic-rug-procedure': PELVIC_RUG_PROCEDURE,
+  'mtp-summary': MTP_SUMMARY,
   'epistaxis-summary': EPISTAXIS_SUMMARY,
   'caustic-summary': CAUSTIC_SUMMARY,
   'caustic-zargar': CAUSTIC_ZARGAR,

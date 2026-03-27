@@ -1,0 +1,482 @@
+// MedKitt — Massive Transfusion Protocol
+// Life-threatening hemorrhage requiring MTP activation, blood product administration, and goal-directed resuscitation
+// 5 modules: MTP Activation → Blood Products → ABO Compatibility → TEG/ROTEM → Termination & Complications
+// 42 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+export const MASSIVE_TRANSFUSION_NODES: DecisionNode[] = [
+  // =====================================================================
+  // MODULE 1 — MTP Activation
+  // =====================================================================
+  {
+    id: 'mtp-start',
+    type: 'info',
+    module: 1,
+    title: 'Massive Transfusion Protocol',
+    body: '[MTP Steps Summary](#/info/mtp-summary) — quick reference.\n\n**Definition:** Transfusion of ≥10 units pRBCs in 24h, OR ≥4 units pRBCs in 1h with ongoing hemorrhage, OR replacement of >50% blood volume in 3h. [1,2]\n\n**Key principle:** Activate MTP early — waiting for lab confirmation of coagulopathy costs lives. Clinical gestalt + prediction scores guide activation. [1,3]\n\n**Calculators:**\n• [ABC Score](#/calculator/abc-score) — MTP prediction\n• [Shock Index](#/calculator/shock-index) — HR/SBP ratio',
+    citation: [1, 2, 3],
+    next: 'mtp-indications',
+  },
+  {
+    id: 'mtp-indications',
+    type: 'question',
+    module: 1,
+    title: 'What Is the Etiology?',
+    body: '**Common MTP indications:**\n• Trauma (penetrating > blunt)\n• Massive GI hemorrhage\n• Postpartum hemorrhage\n• Ruptured AAA\n• Surgical bleeding\n\n[ABC Score](#/calculator/abc-score) ≥2 predicts need for MTP with ~75% sensitivity. [4]',
+    citation: [4],
+    options: [
+      {
+        label: 'Trauma',
+        description: 'Penetrating or blunt traumatic hemorrhage',
+        next: 'mtp-trauma-assess',
+        urgency: 'critical',
+      },
+      {
+        label: 'GI hemorrhage',
+        description: 'Upper or lower GI bleed with hemodynamic instability',
+        next: 'mtp-gi-bleed',
+        urgency: 'critical',
+      },
+      {
+        label: 'Postpartum hemorrhage',
+        description: 'PPH with ongoing blood loss >1000 mL',
+        next: 'mtp-pph',
+        urgency: 'critical',
+      },
+      {
+        label: 'Ruptured AAA / Vascular emergency',
+        description: 'Aortic rupture or major vascular injury',
+        next: 'mtp-vascular',
+        urgency: 'critical',
+      },
+      {
+        label: 'Other surgical bleeding',
+        description: 'Intraoperative or postoperative hemorrhage',
+        next: 'mtp-surgical',
+      },
+    ],
+  },
+  {
+    id: 'mtp-trauma-assess',
+    type: 'info',
+    module: 1,
+    title: 'Trauma — MTP Activation Criteria',
+    body: '**Activate MTP if ANY of the following:**\n• [ABC Score](#/calculator/abc-score) ≥2\n• [Shock Index](#/calculator/shock-index) >1.0 with evidence of hemorrhage\n• SBP <90 mmHg with suspected hemorrhage\n• Penetrating torso trauma with hypotension\n• Clinical gestalt: "this patient is bleeding out"\n\n**ABC Score components:**\n• Penetrating mechanism (+1)\n• SBP ≤90 mmHg on arrival (+1)\n• HR ≥120 bpm on arrival (+1)\n• Positive FAST exam (+1)\n\n**Score ≥2:** Sensitivity 75%, Specificity 86% for MTP need. [4,5]',
+    citation: [4, 5],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-gi-bleed',
+    type: 'info',
+    module: 1,
+    title: 'GI Hemorrhage — MTP Considerations',
+    body: '**Activate MTP for GI bleed if:**\n• Hemodynamic instability despite initial resuscitation\n• Ongoing transfusion requirement >2 units pRBCs/hour\n• Active hematemesis or hematochezia with shock\n• [Shock Index](#/calculator/shock-index) >1.0\n\n**Key differences from trauma:**\n• Often older patients with comorbidities\n• Anticoagulation is common — may need reversal\n• Endoscopy is definitive treatment\n• Call GI early — intervention stops bleeding\n\n**Glasgow-Blatchford Score** helps risk stratify — score ≥6 indicates high-risk bleed. [6]',
+    citation: [6],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-pph',
+    type: 'info',
+    module: 1,
+    title: 'Postpartum Hemorrhage — MTP',
+    body: '**Definition:** Blood loss ≥1000 mL OR signs of hypovolemia regardless of volume. [7]\n\n**Activate MTP for PPH if:**\n• EBL >1500 mL with ongoing bleeding\n• Hemodynamic instability\n• Coagulopathy developing (oozing from IV sites, mucosa)\n\n**Critical actions in parallel:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/pph) 1 g IV over 10 min (WOMAN trial — give within 3h of delivery) [8]\n• Uterine massage\n• Oxytocin (Pitocin) 40 units in 1L NS at 250 mL/h\n• Methylergonovine (Methergine) 0.2 mg IM (avoid if HTN)\n• Carboprost (Hemabate) 250 mcg IM q15-90min (avoid if asthma)\n• Misoprostol (Cytotec) 800-1000 mcg PR/SL\n• Tamponade: Bakri balloon, uterine packing\n• Surgical: B-Lynch suture, uterine artery ligation, hysterectomy\n\n**Rh considerations:** Give O-negative pRBCs initially if Rh status unknown. [7,8]',
+    citation: [7, 8],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-vascular',
+    type: 'info',
+    module: 1,
+    title: 'Ruptured AAA / Vascular Emergency',
+    body: '**Immediate priorities:**\n• Activate MTP immediately — these patients die from exsanguination\n• Permissive hypotension: target SBP 80-90 mmHg (conscious)\n• Avoid over-resuscitation — "popping the clot"\n• Call vascular surgery STAT\n\n**Blood pressure targets:**\n• Ruptured AAA: SBP 70-90 mmHg until aortic control [9]\n• Balance: too low = end-organ damage; too high = accelerated bleeding\n\n**Blood products:**\n• Start 1:1:1 ratio immediately\n• Keep blood warm — hypothermia worsens coagulopathy\n• Anticipate massive transfusion — have 6+ units ready',
+    citation: [9],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-surgical',
+    type: 'info',
+    module: 1,
+    title: 'Surgical Bleeding — MTP',
+    body: '**Intraoperative MTP activation criteria:**\n• Estimated blood loss >50% of blood volume\n• Ongoing transfusion >4 units pRBCs in 1 hour\n• Unable to achieve surgical hemostasis\n• Developing coagulopathy (microvascular bleeding)\n\n**Communication is critical:**\n• Blood bank notification\n• Anesthesia — maintain normothermia\n• Nursing — prepare MTP cooler workflow\n• Consider cell saver if available\n\n**Damage control surgery:** Abbreviated operation → packing → ICU resuscitation → return to OR',
+    citation: [1, 2],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-initial-resus',
+    type: 'info',
+    module: 1,
+    title: 'Initial Resuscitation While Awaiting Blood',
+    body: '**Immediate actions (first 5 minutes):**\n• Large-bore IV access: 2 × 16-18G peripheral or IO access\n• Type and crossmatch STAT (use rapid sample tube if available)\n• Activate MTP per hospital protocol\n• Crystalloid: 1-2 L LR or NS (avoid excessive crystalloid — dilutional coagulopathy) [10]\n• Consider permissive hypotension (SBP 80-90) in trauma, except TBI [9]\n\n**Adjuncts:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/mtp) 1 g IV over 10 min (if within 3h of injury) [11]\n• [Calcium Chloride](#/drug/calcium-chloride/mtp) 1 g IV if anticipating massive transfusion (citrate chelates calcium)\n• Warm fluids — prevent hypothermia\n\n**Labs to send:**\n• CBC, BMP, coags (PT/INR, PTT, fibrinogen)\n• ABG with lactate\n• TEG/ROTEM if available',
+    citation: [9, 10, 11],
+    next: 'mtp-products',
+  },
+
+  // =====================================================================
+  // MODULE 2 — Blood Product Administration
+  // =====================================================================
+  {
+    id: 'mtp-products',
+    type: 'info',
+    module: 2,
+    title: 'Blood Product Ratios — 1:1:1',
+    body: '**PROPPR Trial:** 1:1:1 ratio (pRBC:FFP:platelets) improved hemostasis and reduced death from exsanguination compared to 1:1:2 at 24h (9.2% vs 14.6%). No difference in 24h or 30d mortality overall. [12]\n\n**Practical 1:1:1:**\n• 6 units pRBCs : 6 units FFP : 1 apheresis platelet (or 6-pack random donor)\n• [MTP Component Calculator](#/calculator/mtp-component) — calculates products needed\n\n**Whole blood option:**\n• Low-titer O whole blood increasingly available\n• Contains all components in physiologic ratios\n• May be superior in military/prehospital settings [13]\n• Check institutional availability',
+    citation: [12, 13],
+    calculatorLinks: [{ id: 'mtp-component', label: 'MTP Component Calculator' }],
+    next: 'mtp-cooler-contents',
+  },
+  {
+    id: 'mtp-cooler-contents',
+    type: 'info',
+    module: 2,
+    title: 'MTP Cooler Contents',
+    body: '**Initial MTP cooler (typical):**\n• 6 units pRBCs (O-negative initially, then type-specific)\n• 6 units FFP (AB plasma is universal donor)\n• 1 apheresis platelet pack (or 6 random donor units)\n\n**Subsequent coolers:**\n• Released q15-30 min as long as MTP active\n• Switch to type-specific blood ASAP (preserves O-negative supply)\n• Communicate ongoing needs to blood bank\n\n**Additional products to consider:**\n• Cryoprecipitate: 10 units if fibrinogen <150 mg/dL\n• Factor VIIa: Not routinely recommended (increased thrombosis, no mortality benefit) [14]',
+    citation: [14],
+    next: 'mtp-calcium',
+  },
+  {
+    id: 'mtp-calcium',
+    type: 'info',
+    module: 2,
+    title: 'Calcium Replacement',
+    body: '**Why calcium matters:**\n• Blood products contain citrate as anticoagulant\n• Citrate chelates ionized calcium → hypocalcemia\n• Low iCa → impaired coagulation + cardiac dysfunction + vasodilation [15]\n\n**Dosing rule of thumb:**\n• [Calcium Chloride](#/drug/calcium-chloride/mtp) 1 g IV per 4 units blood products\n• OR [Calcium Gluconate](#/drug/calcium-gluconate/mtp) 3 g IV per 4 units\n• CaCl provides 3× more elemental calcium than Ca gluconate\n\n**Target:** iCa >1.0 mmol/L (ideally >1.1)\n\n**[Calcium Replacement Calculator](#/calculator/calcium-replacement)** — based on units transfused\n\n**Monitoring:**\n• Check iCa with each ABG during MTP\n• Symptoms of hypocalcemia: QT prolongation, hypotension, tetany',
+    citation: [15],
+    calculatorLinks: [{ id: 'calcium-replacement', label: 'Calcium Replacement Calculator' }],
+    next: 'mtp-txa',
+  },
+  {
+    id: 'mtp-txa',
+    type: 'info',
+    module: 2,
+    title: 'Tranexamic Acid (TXA)',
+    body: '**Critical timing: Give within 3 hours of injury/onset!** [11]\n\n**CRASH-2 Trial:** TXA given within 3h reduced death from bleeding (4.9% vs 5.7%). Given after 3h, TXA INCREASED mortality (4.4% vs 3.1%). [11]\n\n**Dosing:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/mtp) 1 g IV over 10 min, then 1 g IV over 8 hours\n• For PPH: 1 g IV over 10 min (repeat if bleeding continues after 30 min) [8]\n\n**Mechanism:** Inhibits plasmin → prevents clot breakdown (antifibrinolytic)\n\n**Contraindications:**\n• Known hypersensitivity\n• Active thromboembolic disease (relative)\n• DIC with predominant thrombosis (relative)\n\n**Do NOT delay MTP activation to give TXA — give concurrently.**',
+    citation: [8, 11],
+    next: 'mtp-abo-q',
+  },
+
+  // =====================================================================
+  // MODULE 3 — ABO Compatibility & Emergency Release
+  // =====================================================================
+  {
+    id: 'mtp-abo-q',
+    type: 'question',
+    module: 3,
+    title: 'Blood Type Considerations',
+    body: 'Select the topic for detailed guidance.',
+    options: [
+      {
+        label: 'ABO compatibility basics',
+        description: 'Who can receive what?',
+        next: 'mtp-abo-chart',
+      },
+      {
+        label: 'Emergency release blood',
+        description: 'O-negative vs type-specific vs crossmatched',
+        next: 'mtp-emergency-release',
+      },
+      {
+        label: 'Rh considerations',
+        description: 'When to use O-positive vs O-negative',
+        next: 'mtp-rh',
+      },
+      {
+        label: 'RhoGAM indications',
+        description: 'Rh-negative females receiving Rh-positive blood',
+        next: 'mtp-rhogam',
+      },
+    ],
+  },
+  {
+    id: 'mtp-abo-chart',
+    type: 'info',
+    module: 3,
+    title: 'ABO Compatibility',
+    body: '**pRBC Compatibility (based on recipient type):**\n• Type O: Can receive O only (universal donor)\n• Type A: Can receive A, O\n• Type B: Can receive B, O\n• Type AB: Can receive A, B, AB, O (universal recipient)\n\n**Plasma/FFP Compatibility (opposite of RBCs):**\n• Type AB: Universal donor (no anti-A or anti-B antibodies)\n• Type A: Can give to A, AB\n• Type B: Can give to B, AB\n• Type O: Can give to O only (has both anti-A and anti-B)\n\n**Platelet Compatibility:**\n• ABO-identical preferred but not required\n• Minor ABO incompatibility generally tolerated\n• Rh matching preferred for Rh-negative females of childbearing age\n\n[Emergency Blood Selection Tool](#/calculator/emergency-blood-selection)',
+    calculatorLinks: [{ id: 'emergency-blood-selection', label: 'Emergency Blood Selection Tool' }],
+    next: 'mtp-abo-q',
+  },
+  {
+    id: 'mtp-emergency-release',
+    type: 'info',
+    module: 3,
+    title: 'Emergency Release Blood',
+    body: '**Three tiers of blood availability:** [16]\n\n**1. Emergency release (uncrossmatched) — Available immediately:**\n• O-negative pRBCs: Universal for emergencies\n• Low-titer O whole blood (if available): Preferred by some centers\n• AB plasma: Universal donor\n\n**2. Type-specific (ABO-Rh matched) — Available in ~10-15 min:**\n• Once patient ABO/Rh typed (automated, ~5 min)\n• Preferred over O-neg when available (preserves supply)\n• Small risk of alloantibodies if prior transfusions/pregnancy\n\n**3. Fully crossmatched — Available in ~45-60 min:**\n• Screens for alloantibodies\n• Not practical for massive hemorrhage\n• Reserve for non-emergent transfusion\n\n**Bottom line:** Start with O-neg/emergency release → Switch to type-specific ASAP',
+    citation: [16],
+    next: 'mtp-abo-q',
+  },
+  {
+    id: 'mtp-rh',
+    type: 'info',
+    module: 3,
+    title: 'Rh Considerations',
+    body: '**When to use O-negative vs O-positive pRBCs:**\n\n**O-negative (Rh-negative) — Use for:**\n• Females of childbearing potential (age <50) with unknown Rh status\n• Pregnant patients\n• Known Rh-negative patients\n• Children with unknown type\n\n**O-positive (Rh-positive) — Acceptable for:**\n• Males of any age\n• Females >50 years (post-menopausal)\n• Known Rh-positive patients\n\n**Why this matters:**\n• O-negative blood is scarce (~7% of population)\n• Rh sensitization risk is only relevant for future pregnancy\n• A single Rh-positive transfusion can cause alloimmunization\n• Alloimmunization → hemolytic disease of fetus in future pregnancy\n\n[Emergency Blood Selection Tool](#/calculator/emergency-blood-selection)',
+    calculatorLinks: [{ id: 'emergency-blood-selection', label: 'Emergency Blood Selection Tool' }],
+    next: 'mtp-abo-q',
+  },
+  {
+    id: 'mtp-rhogam',
+    type: 'info',
+    module: 3,
+    title: 'RhoGAM Indications',
+    body: '**When to give RhoGAM (Rh Immune Globulin):**\n\nRh-negative female of childbearing age who receives Rh-positive blood products.\n\n**Dosing:**\n• [RhoGAM](#/drug/rhogam/mtp) 300 mcg IM covers ~15 mL of Rh-positive RBCs (~30 mL whole blood)\n• For larger exposures: 300 mcg per 15 mL RBCs transfused\n• Give within 72 hours of exposure (earlier is better)\n\n**Calculating dose for massive transfusion:**\n• If patient received 10 units Rh-positive pRBCs (~2000 mL total, ~1400 mL RBCs)\n• Dose needed: ~1400 mL ÷ 15 mL = ~93 vials (not practical)\n• Consult hematology for large exposures — may need IV Rh immune globulin\n\n**Prevention is better:**\n• Use O-negative blood for Rh-unknown females <50\n• Switch to type-specific once Rh status confirmed\n• If Rh-positive blood given emergently, give RhoGAM afterward [17]',
+    citation: [17],
+    next: 'mtp-teg-q',
+  },
+
+  // =====================================================================
+  // MODULE 4 — TEG/ROTEM Interpretation
+  // =====================================================================
+  {
+    id: 'mtp-teg-q',
+    type: 'question',
+    module: 4,
+    title: 'Goal-Directed Resuscitation',
+    body: 'TEG (thromboelastography) and ROTEM (rotational thromboelastometry) provide real-time assessment of clot formation and breakdown.\n\n**Advantages over standard coags:**\n• Results in 10-15 min (vs 45-60 min for PT/PTT)\n• Tests whole blood clotting (not just plasma)\n• Detects hyperfibrinolysis (TXA indication)\n• Guides specific component therapy [18]',
+    citation: [18],
+    options: [
+      {
+        label: 'TEG/ROTEM normal values',
+        description: 'Reference ranges for interpretation',
+        next: 'mtp-teg-normal',
+      },
+      {
+        label: 'Interpretation algorithm',
+        description: 'What abnormality means what treatment',
+        next: 'mtp-teg-interpret',
+      },
+      {
+        label: 'Goal-directed transfusion',
+        description: 'Using TEG/ROTEM to guide products',
+        next: 'mtp-teg-guided',
+      },
+    ],
+  },
+  {
+    id: 'mtp-teg-normal',
+    type: 'info',
+    module: 4,
+    title: 'TEG/ROTEM Normal Values',
+    body: '**TEG Parameters:**\n• R-time (reaction time): 5-10 min — time to initial fibrin formation\n• K-time (kinetics): 1-3 min — time to achieve certain clot strength (20 mm)\n• Alpha angle: 53-72° — rate of clot strengthening\n• MA (maximum amplitude): 50-70 mm — clot strength (platelet + fibrin)\n• LY30 (lysis at 30 min): 0-3% — clot stability/fibrinolysis\n\n**ROTEM Parameters (approximate equivalents):**\n• CT (clotting time) ≈ R-time: 38-79 sec (EXTEM)\n• CFT (clot formation time) ≈ K-time: 34-159 sec\n• Alpha angle: 63-83°\n• MCF (maximum clot firmness) ≈ MA: 50-72 mm\n• ML (maximum lysis): 0-15%\n\n[TEG/ROTEM Interpreter](#/calculator/teg-interpreter)',
+    calculatorLinks: [{ id: 'teg-interpreter', label: 'TEG/ROTEM Interpreter' }],
+    next: 'mtp-teg-q',
+  },
+  {
+    id: 'mtp-teg-interpret',
+    type: 'result',
+    module: 4,
+    title: 'TEG/ROTEM Interpretation Algorithm',
+    body: '**Prolonged R-time (or CT) → Factor deficiency → Give FFP**\n• R >10 min or CT >79 sec\n• Indicates inadequate factor levels to initiate clot\n• Treatment: [FFP](#/drug/ffp/mtp) 10-15 mL/kg or PCC\n\n**Prolonged K-time (or CFT) / Low alpha angle → Fibrinogen deficiency → Give Cryo**\n• K >3 min or low alpha angle\n• Indicates poor fibrin contribution to clot\n• Treatment: [Cryoprecipitate](#/drug/cryoprecipitate/mtp) 10 units (target fibrinogen >150-200 mg/dL)\n\n**Low MA (or MCF) → Platelet dysfunction → Give Platelets**\n• MA <50 mm or MCF <50 mm\n• Indicates poor platelet contribution\n• Treatment: 1 apheresis platelet or 6-pack random donor\n\n**Elevated LY30 (or ML) → Hyperfibrinolysis → Give TXA**\n• LY30 >3% or ML >15%\n• Indicates clot is breaking down too fast\n• Treatment: [Tranexamic Acid](#/drug/tranexamic-acid/mtp) 1 g IV [18,19]',
+    citation: [18, 19],
+    treatment: {
+      firstLine: {
+        drug: 'Component-Specific Therapy',
+        dose: 'Based on TEG/ROTEM abnormality',
+        route: 'IV',
+        frequency: 'Per protocol',
+        duration: 'Until bleeding controlled',
+        notes: 'R prolonged: FFP. K prolonged/low alpha: Cryo. Low MA: Platelets. High LY30: TXA.',
+      },
+      monitoring: 'Repeat TEG/ROTEM q30-60 min during active MTP. Target MA >50 mm, LY30 <3%, R <10 min.',
+    },
+    calculatorLinks: [{ id: 'teg-interpreter', label: 'TEG/ROTEM Interpreter' }],
+  },
+  {
+    id: 'mtp-teg-guided',
+    type: 'info',
+    module: 4,
+    title: 'Goal-Directed Transfusion',
+    body: '**TEG/ROTEM-guided vs empiric 1:1:1:**\n\n**Empiric 1:1:1 approach:**\n• Simple, fast, no delay waiting for results\n• May over-transfuse some components\n• Standard of care when TEG/ROTEM unavailable\n\n**Goal-directed approach:**\n• Give specific products based on TEG/ROTEM results\n• May reduce total blood product usage\n• Requires trained interpretation and available testing [19]\n\n**Hybrid approach (pragmatic):**\n• Start with 1:1:1 during initial resuscitation\n• Obtain TEG/ROTEM as soon as practical\n• Adjust ongoing transfusion based on results\n• Continue 1:1:1 if TEG/ROTEM not available\n\n**Targets during MTP:**\n• Fibrinogen >150-200 mg/dL (or FIBTEM MCF >10 mm)\n• Platelets >50,000 (>100,000 for CNS or eye injury)\n• PT/INR near normal (or R-time <10 min)\n• No hyperfibrinolysis (LY30 <3%)',
+    citation: [19],
+    next: 'mtp-termination-q',
+  },
+
+  // =====================================================================
+  // MODULE 5 — MTP Termination & Complications
+  // =====================================================================
+  {
+    id: 'mtp-termination-q',
+    type: 'question',
+    module: 5,
+    title: 'MTP Termination & Complications',
+    body: 'Select the topic for detailed guidance.',
+    options: [
+      {
+        label: 'When to terminate MTP',
+        description: 'Criteria for MTP deactivation',
+        next: 'mtp-when-stop',
+      },
+      {
+        label: 'Transition to maintenance',
+        description: 'Post-MTP care and monitoring',
+        next: 'mtp-transition',
+      },
+      {
+        label: 'MTP complications',
+        description: 'Hypothermia, hypocalcemia, hyperkalemia, citrate toxicity, TACO, TRALI',
+        next: 'mtp-complications',
+      },
+      {
+        label: 'Post-MTP labs and monitoring',
+        description: 'What to check after MTP',
+        next: 'mtp-postlabs',
+      },
+    ],
+  },
+  {
+    id: 'mtp-when-stop',
+    type: 'info',
+    module: 5,
+    title: 'When to Terminate MTP',
+    body: '**Criteria for MTP deactivation:**\n• Surgical/procedural bleeding control achieved\n• Hemodynamic stability without ongoing transfusion (MAP >65, HR <100)\n• Lactate trending down\n• Base deficit improving\n• No clinical evidence of ongoing hemorrhage\n• TEG/ROTEM normalizing (if available)\n\n**Communication:**\n• Notify blood bank that MTP is terminated\n• Cancel pending coolers\n• Return unused products to blood bank promptly\n\n**Do NOT stop MTP prematurely:**\n• Patient may appear stable but still be compensating\n• Watch for rebleeding in first 6-12 hours\n• Keep type-specific blood available in blood bank',
+    citation: [1, 2],
+    next: 'mtp-termination-q',
+  },
+  {
+    id: 'mtp-transition',
+    type: 'info',
+    module: 5,
+    title: 'Transition to Maintenance',
+    body: '**Post-MTP management:**\n\n**Hemoglobin target:**\n• Most patients: Hgb 7-8 g/dL\n• Active coronary disease: Hgb 8-9 g/dL\n• Ongoing bleeding: Higher threshold\n\n**Coagulation targets:**\n• INR <1.5\n• Fibrinogen >150-200 mg/dL\n• Platelets >50,000 (>100,000 for CNS injury)\n• iCa >1.0 mmol/L\n\n**Rewarming:**\n• Target core temp >36°C\n• Active warming: Bair Hugger, warm IV fluids, warm blankets\n• Hypothermia impairs coagulation even with normal factor levels\n\n**Reversal of anticoagulation:**\n• If patient was anticoagulated, ensure adequate reversal\n• See [Anticoagulant Reversal](#/tree/anticoag-reversal) consult\n\n**ICU admission:** All MTP patients require ICU-level monitoring',
+    next: 'mtp-termination-q',
+  },
+  {
+    id: 'mtp-complications',
+    type: 'info',
+    module: 5,
+    title: 'MTP Complications',
+    body: '**Lethal triad of trauma:** Hypothermia + Acidosis + Coagulopathy [20]\n\n**Hypothermia:**\n• Core temp <36°C impairs clotting enzymes\n• Warm all products, active rewarming\n\n**Hypocalcemia:**\n• Citrate in blood products chelates calcium\n• Monitor iCa, give CaCl 1 g per 4 units\n• Symptoms: hypotension, arrhythmia, tetany\n\n**Hyperkalemia:**\n• Stored blood has elevated K+ (cell lysis)\n• Older units have more K+\n• Monitor K+, treat if symptomatic or >6.0\n\n**Citrate toxicity:**\n• Liver metabolizes citrate → bicarbonate\n• Overwhelmed liver → citrate accumulation → hypocalcemia + metabolic alkalosis (late)\n\n**TACO (Transfusion-Associated Circulatory Overload):**\n• Pulmonary edema from volume\n• Elderly, cardiac patients at highest risk\n• Treatment: diuresis, slow transfusion rate\n\n**TRALI (Transfusion-Related Acute Lung Injury):**\n• Non-cardiogenic pulmonary edema\n• Occurs within 6h of transfusion\n• Treatment: supportive, may need intubation [21]',
+    citation: [20, 21],
+    next: 'mtp-termination-q',
+  },
+  {
+    id: 'mtp-postlabs',
+    type: 'result',
+    module: 5,
+    title: 'Post-MTP Labs & Monitoring',
+    body: '**Immediate post-MTP labs:**\n• CBC (Hgb, Hct, platelets)\n• Coagulation: PT/INR, PTT, fibrinogen\n• Chemistry: BMP (K+, Ca++, renal function)\n• ABG: pH, lactate, base deficit, iCa\n• TEG/ROTEM if available\n\n**Monitoring schedule:**\n• q1h labs during active resuscitation\n• q4-6h once stable\n• Continuous: ECG, SpO2, BP, urine output\n\n**Target values post-MTP:**\n• Hgb >7 g/dL (>8 if cardiac disease)\n• Platelets >50,000 (>100,000 for CNS)\n• INR <1.5\n• Fibrinogen >150-200 mg/dL\n• iCa >1.0 mmol/L\n• K+ <5.5 mEq/L\n• Lactate trending down\n• Core temp >36°C\n\n**Watch for:**\n• Delayed rebleeding (6-24h post)\n• Acute kidney injury (contrast, hypoperfusion)\n• ARDS/TRALI (6-72h post)\n• Coagulation rebound (as hypothermia corrects)',
+    citation: [1, 2, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Goal-Directed Component Therapy',
+        dose: 'Per lab results',
+        route: 'IV',
+        frequency: 'As needed',
+        duration: 'Until targets achieved',
+        notes: 'Continue component replacement until Hgb >7, plt >50k, INR <1.5, fibrinogen >150, iCa >1.0.',
+      },
+      monitoring: 'CBC, coags, fibrinogen, BMP, ABG q1-4h based on stability. TEG/ROTEM for ongoing coagulopathy.',
+    },
+  },
+
+  // =====================================================================
+  // Additional Decision Support Nodes
+  // =====================================================================
+  {
+    id: 'mtp-permissive-hypotension',
+    type: 'info',
+    module: 1,
+    title: 'Permissive Hypotension',
+    body: '**Concept:** Accept lower-than-normal BP to avoid "popping the clot" with aggressive fluid resuscitation. [9]\n\n**Target SBP:**\n• Trauma without TBI: 80-90 mmHg\n• Ruptured AAA: 70-90 mmHg until aortic control\n• GI bleed: 90-100 mmHg\n\n**EXCEPTIONS — Target higher BP:**\n• Traumatic brain injury: SBP >100-110 mmHg (avoid secondary brain injury)\n• Spinal cord injury: MAP >85 mmHg\n• Elderly with chronic hypertension: individualize\n\n**Evidence:**\n• Multiple RCTs show benefit in trauma\n• Less crystalloid = less dilutional coagulopathy\n• Less mechanical disruption of fresh clot\n\n**Practical approach:**\n• Minimize crystalloid (max 1-2 L)\n• Prioritize blood products over crystalloid\n• Accept altered mental status if no TBI (will improve with resuscitation)',
+    citation: [9, 10],
+    next: 'mtp-initial-resus',
+  },
+  {
+    id: 'mtp-damage-control',
+    type: 'info',
+    module: 2,
+    title: 'Damage Control Resuscitation',
+    body: '**Three pillars of damage control resuscitation:**\n\n**1. Permissive hypotension**\n• Target SBP 80-90 mmHg (except TBI)\n• Minimize crystalloid\n\n**2. Hemostatic resuscitation**\n• 1:1:1 ratio blood products\n• TXA within 3 hours\n• Calcium replacement\n• Warm products\n\n**3. Damage control surgery**\n• Abbreviated initial operation (stop bleeding, limit contamination)\n• Temporary abdominal closure\n• ICU resuscitation (correct coagulopathy, hypothermia, acidosis)\n• Return to OR in 24-48h for definitive repair [22]\n\n**Why this matters:**\nHistorically, long initial operations led to "death spiral" — ongoing blood loss + hypothermia + acidosis + coagulopathy. Damage control approach improved survival in severe trauma.',
+    citation: [22],
+    next: 'mtp-products',
+  },
+  {
+    id: 'mtp-special-pops',
+    type: 'question',
+    module: 5,
+    title: 'Special Populations',
+    body: 'Select the special population for specific considerations.',
+    options: [
+      {
+        label: 'Pediatric MTP',
+        description: 'Weight-based dosing and special considerations',
+        next: 'mtp-peds',
+      },
+      {
+        label: 'Anticoagulated patient',
+        description: 'Reversal during MTP',
+        next: 'mtp-anticoag',
+      },
+      {
+        label: 'Jehovah\'s Witness',
+        description: 'Blood product alternatives',
+        next: 'mtp-jw',
+      },
+    ],
+  },
+  {
+    id: 'mtp-peds',
+    type: 'info',
+    module: 5,
+    title: 'Pediatric MTP',
+    body: '**Weight-based dosing:**\n• pRBCs: 10-20 mL/kg\n• FFP: 10-15 mL/kg\n• Platelets: 5-10 mL/kg\n• Cryoprecipitate: 1-2 units/10 kg\n\n**MTP activation criteria in peds:**\n• Estimated blood loss >40 mL/kg\n• Ongoing transfusion requirement\n• Hemodynamic instability despite resuscitation\n\n**Special considerations:**\n• Use appropriately sized blood tubing\n• Irradiated products for immunocompromised or neonates\n• CMV-negative products for CMV-seronegative neonates\n• Warm all products — children hypothermic faster\n\n**TXA in peds:**\n• 15 mg/kg (max 1 g) IV over 10 min, then 2 mg/kg/hr (max 1 g over 8h)\n• Same 3-hour window as adults',
+    next: 'mtp-special-pops',
+  },
+  {
+    id: 'mtp-anticoag',
+    type: 'info',
+    module: 5,
+    title: 'Anticoagulated Patient in MTP',
+    body: '**Immediate reversal required for massive hemorrhage:**\n\n**Warfarin:**\n• [4-Factor PCC](#/drug/pcc-4factor/mtp) 25-50 units/kg IV\n• [Vitamin K](#/drug/vitamin-k/mtp) 10 mg IV over 30 min\n• Do NOT use FFP alone (volume-inefficient)\n\n**Direct Xa inhibitors (apixaban, rivaroxaban):**\n• [Andexanet alfa](#/drug/andexanet/mtp) if available OR\n• 4-Factor PCC 50 units/kg\n\n**Dabigatran:**\n• [Idarucizumab](#/drug/idarucizumab/mtp) 5 g IV OR\n• 4-Factor PCC 50 units/kg\n• Hemodialysis if idarucizumab unavailable\n\n**Heparin/LMWH:**\n• [Protamine](#/drug/protamine/mtp) 1 mg per 100 units heparin (max 50 mg)\n• For LMWH: Protamine only ~50% effective\n\n**Antiplatelet agents:**\n• DDAVP 0.3 mcg/kg IV (improves platelet function)\n• Platelet transfusion — controversial (PATCH trial showed no benefit in ICH) [23]\n\nSee [Anticoagulant Reversal](#/tree/anticoag-reversal) for complete guidance.',
+    citation: [23],
+    next: 'mtp-special-pops',
+  },
+  {
+    id: 'mtp-jw',
+    type: 'info',
+    module: 5,
+    title: 'Jehovah\'s Witness in MTP',
+    body: '**Immediate priorities:**\n• Establish patient\'s specific wishes (some accept certain fractions)\n• Document clearly in chart\n• Obtain ethics/legal consultation if unclear\n\n**Acceptable to many Jehovah\'s Witnesses:**\n• Albumin\n• Clotting factors (some accept PCC, fibrinogen concentrate)\n• Immunoglobulins\n• Cell saver (if circuit remains connected to patient)\n• EPO (erythropoietin)\n• Iron infusion\n\n**Usually NOT accepted:**\n• Whole blood\n• pRBCs\n• Plasma/FFP\n• Platelets\n• Cryoprecipitate\n\n**Non-blood interventions:**\n• Aggressive surgical hemostasis\n• TXA 1 g IV\n• IV iron (ferric carboxymaltose 1 g)\n• EPO (darbepoetin 500 mcg)\n• Minimize phlebotomy\n• Accept lower Hgb threshold (some tolerate Hgb 3-4 g/dL)\n• Hyperbaric oxygen (limited availability)\n\n**Document everything:** Patient\'s specific wishes and your discussion.',
+    next: 'mtp-special-pops',
+  },
+];
+
+export const MASSIVE_TRANSFUSION_NODE_COUNT = MASSIVE_TRANSFUSION_NODES.length;
+
+export const MASSIVE_TRANSFUSION_MODULE_LABELS = [
+  'MTP Activation',
+  'Blood Products',
+  'ABO Compatibility',
+  'TEG/ROTEM',
+  'Termination',
+];
+
+export const MASSIVE_TRANSFUSION_CITATIONS: Citation[] = [
+  { num: 1, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-482. doi:10.1001/jama.2015.12' },
+  { num: 2, text: 'Cannon JW, Khan MA, Raja AS, et al. Damage control resuscitation in patients with severe traumatic hemorrhage: A practice management guideline from the Eastern Association for the Surgery of Trauma. J Trauma Acute Care Surg. 2017;82(3):605-617. doi:10.1097/TA.0000000000001333' },
+  { num: 3, text: 'Callcut RA, Cripps MW, Nelson MF, et al. The massive transfusion score as a decision aid for resuscitation: Learning when to turn the massive transfusion protocol on and off. J Trauma Acute Care Surg. 2016;80(3):450-456. doi:10.1097/TA.0000000000000914' },
+  { num: 4, text: 'Nunez TC, Voskresensky IV, Dossett LA, et al. Early prediction of massive transfusion in trauma: simple as ABC (assessment of blood consumption)? J Trauma. 2009;66(2):346-352. doi:10.1097/TA.0b013e3181961c35' },
+  { num: 5, text: 'Cotton BA, Dossett LA, Haut ER, et al. Multicenter validation of a simplified score to predict massive transfusion in trauma. J Trauma. 2010;69 Suppl 1:S33-39. doi:10.1097/TA.0b013e3181e42411' },
+  { num: 6, text: 'Laine L, Barkun AN, Saltzman JR, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917. doi:10.14309/ajg.0000000000001245' },
+  { num: 7, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186. doi:10.1097/AOG.0000000000002351' },
+  { num: 8, text: 'WOMAN Trial Collaborators. Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage (WOMAN): an international, randomised, double-blind, placebo-controlled trial. Lancet. 2017;389(10084):2105-2116. doi:10.1016/S0140-6736(17)30638-4' },
+  { num: 9, text: 'Carrick MM, Morrison CA, Taber BR, et al. Intraoperative hypotensive resuscitation for patients undergoing laparotomy or thoracotomy for trauma: Early termination of a randomized prospective clinical trial. J Trauma Acute Care Surg. 2016;80(6):886-896. doi:10.1097/TA.0000000000001044' },
+  { num: 10, text: 'Bickell WH, Wall MJ Jr, Pepe PE, et al. Immediate versus delayed fluid resuscitation for hypotensive patients with penetrating torso injuries. N Engl J Med. 1994;331(17):1105-1109. doi:10.1056/NEJM199410273311701' },
+  { num: 11, text: 'CRASH-2 trial collaborators. Effects of tranexamic acid on death, vascular occlusive events, and blood transfusion in trauma patients with significant haemorrhage (CRASH-2): a randomised, placebo-controlled trial. Lancet. 2010;376(9734):23-32. doi:10.1016/S0140-6736(10)60835-5' },
+  { num: 12, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-82. doi:10.1001/jama.2015.12' },
+  { num: 13, text: 'Spinella PC, Perkins JG, Grathwohl KW, et al. Warm fresh whole blood is independently associated with improved survival for patients with combat-related traumatic injuries. J Trauma. 2009;66(4 Suppl):S69-76. doi:10.1097/TA.0b013e31819d85fb' },
+  { num: 14, text: 'Hauser CJ, Boffard K, Dutton R, et al. Results of the CONTROL trial: efficacy and safety of recombinant activated Factor VII in the management of refractory traumatic hemorrhage. J Trauma. 2010;69(3):489-500. doi:10.1097/TA.0b013e3181edf36e' },
+  { num: 15, text: 'Ho KM, Leonard AD. Concentration-dependent effect of hypocalcaemia on mortality of patients with critical bleeding requiring massive transfusion: a cohort study. Anaesth Intensive Care. 2011;39(1):46-54. doi:10.1177/0310057X1103900107' },
+  { num: 16, text: 'AABB Technical Manual. 20th ed. Bethesda, MD: AABB; 2020.' },
+  { num: 17, text: 'Cid J, Lozano M, Klein HG. Rh immunoglobulin: indications, dosing, and mechanism of action. Transfusion. 2017;57(6):1399-1408. doi:10.1111/trf.14109' },
+  { num: 18, text: 'Gonzalez E, Moore EE, Moore HB, et al. Goal-directed hemostatic resuscitation of trauma-induced coagulopathy: a pragmatic randomized clinical trial comparing a viscoelastic assay to conventional coagulation assays. Ann Surg. 2016;263(6):1051-1059. doi:10.1097/SLA.0000000000001608' },
+  { num: 19, text: 'Baksaas-Aasen K, Gall LS, Stensballe J, et al. Viscoelastic haemostatic assay augmented protocols for major trauma haemorrhage (ITACTIC): a randomized, controlled trial. Intensive Care Med. 2021;47(1):49-59. doi:10.1007/s00134-020-06266-1' },
+  { num: 20, text: 'Mikhail J. The trauma triad of death: hypothermia, acidosis, and coagulopathy. AACN Clin Issues. 1999;10(1):85-94. doi:10.1097/00044067-199902000-00008' },
+  { num: 21, text: 'Toy P, Gajic O, Bacchetti P, et al. Transfusion-related acute lung injury: incidence and risk factors. Blood. 2012;119(7):1757-1767. doi:10.1182/blood-2011-08-370932' },
+  { num: 22, text: 'Rotondo MF, Schwab CW, McGonigal MD, et al. "Damage control": an approach for improved survival in exsanguinating penetrating abdominal injury. J Trauma. 1993;35(3):375-382. doi:10.1097/00005373-199309000-00008' },
+  { num: 23, text: 'Baharoglu MI, Cordonnier C, Al-Shahi Salman R, et al. Platelet transfusion versus standard care after acute stroke due to spontaneous cerebral haemorrhage associated with antiplatelet therapy (PATCH): a randomised, open-label, phase 3 trial. Lancet. 2016;387(10038):2605-2613. doi:10.1016/S0140-6736(16)30392-0' },
+];
