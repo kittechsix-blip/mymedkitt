@@ -222,7 +222,7 @@ export const BOTULISM_NODES: DecisionNode[] = [
     treatment: {
       firstLine: {
         drug: 'BabyBIG (Botulism Immune Globulin)',
-        dose: '50 mg/kg (1 mL/kg)',
+        dose: '50 mg/kg (0.5 mL/kg)',
         route: 'IV infusion',
         frequency: 'Single dose',
         duration: 'Infuse over 1-2 hours',
