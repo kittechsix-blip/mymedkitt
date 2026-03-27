@@ -147,6 +147,7 @@ const TREE_REGISTRY = {
   'diabetes-management':  { prefix: 'DIABETES_MANAGEMENT',    entryNodeId: 'dm-start',       categoryId: 'nephro-rheum-endo' },
   'massive-transfusion':  { prefix: 'MASSIVE_TRANSFUSION',    entryNodeId: 'mtp-start',      categoryId: 'trauma-surg' },
   'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pf-start',       categoryId: 'trauma-surg' },
+  'psychiatry-assessment': { prefix: 'PSYCHIATRY_ASSESSMENT', entryNodeId: 'mse-start',      categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {

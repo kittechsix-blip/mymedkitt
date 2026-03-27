@@ -411,6 +411,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/epistaxis.js');
       return { nodes: m.EPISTAXIS_NODES, entryNodeId: 'epi-start', categoryId: 'emergency-medicine', moduleLabels: m.EPISTAXIS_MODULE_LABELS, citations: m.EPISTAXIS_CITATIONS };
     },
+    'psychiatry-assessment': async () => {
+      const m = await import('../data/trees/psychiatry-assessment.js');
+      return { nodes: m.PSYCHIATRY_ASSESSMENT_NODES, entryNodeId: 'mse-start', categoryId: 'emergency-medicine', moduleLabels: m.PSYCHIATRY_ASSESSMENT_MODULE_LABELS, citations: m.PSYCHIATRY_ASSESSMENT_CITATIONS };
+    },
     'massive-transfusion': async () => {
       const m = await import('../data/trees/massive-transfusion.js');
       return { nodes: m.MASSIVE_TRANSFUSION_NODES, entryNodeId: 'mtp-start', categoryId: 'trauma-surg', moduleLabels: m.MASSIVE_TRANSFUSION_MODULE_LABELS, citations: m.MASSIVE_TRANSFUSION_CITATIONS };
