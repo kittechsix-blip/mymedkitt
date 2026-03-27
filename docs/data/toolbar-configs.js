@@ -8,8 +8,9 @@ const TOOLBAR_CONFIGS = {
         { id: 'iv-epi', label: 'IV Epi', icon: '\uD83D\uDD34', action: 'jump', target: 'anaph-epi-infusion' },
     ],
     'diarrhea': [
-        { id: 'red-flags', label: 'Red Flags', icon: '\uD83D\uDEA9', action: 'jump', target: 'diarrhea-red-flag-eval' },
-        { id: 'stec', label: 'STEC', icon: '\uD83E\uDDA0', action: 'jump', target: 'diarrhea-bloody' },
+        { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'diarrhea-red-flag-eval' },
+        { id: 'stec', label: 'STEC', icon: '🦠', action: 'jump', target: 'diarrhea-bloody' },
+        { id: 'etiology', label: 'Etiology', icon: '🔬', action: 'calculator', target: 'diarrhea-etiology' },
     ],
     'hiv': [
         { id: 'ois', label: 'OIs', icon: '\uD83E\uDDA0', action: 'jump', target: 'hiv-immunocompromised' },

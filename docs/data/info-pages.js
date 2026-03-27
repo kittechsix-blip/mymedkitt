@@ -3073,6 +3073,50 @@ const DIARRHEA_DEHYDRATION_ASSESSMENT = {
         { num: 2, text: 'Cincinnati Children\'s Hospital Medical Center. Evidence Based Clinical Practice Guideline for Children with Acute Gastroenteritis (AGE). 2001.' },
     ],
 };
+const DIARRHEA_ETIOLOGY = {
+    id: 'diarrhea-etiology',
+    title: 'Diarrhea Etiology Guide',
+    subtitle: 'Common pathogens by clinical setting and transmission mode',
+    sections: [
+        {
+            heading: 'Foodborne — Rapid Onset (<6 hours)',
+            body: '**Preformed toxin — vomiting predominates**\n\n**Staphylococcus aureus**\n• Source: Meats, dairy, cream-filled pastries left at room temperature\n• Onset: 1-6 hours\n• Duration: 24-48 hours\n• Key: Vomiting > diarrhea, no fever\n\n**Bacillus cereus (emetic form)**\n• Source: Fried rice, pasta left at room temperature\n• Onset: 1-6 hours\n• Duration: <24 hours\n• Key: "Fried rice syndrome" — vomiting predominant, self-limited',
+        },
+        {
+            heading: 'Foodborne — Moderate Onset (8-16 hours)',
+            body: '**Bacillus cereus (diarrheal form)**\n• Source: Meats, vegetables, sauces\n• Onset: 8-16 hours\n• Duration: 24-48 hours\n• Key: Watery diarrhea, abdominal cramps, minimal vomiting\n\n**Clostridium perfringens**\n• Source: Beef, poultry, gravies kept warm for extended periods\n• Onset: 8-16 hours\n• Duration: 24-48 hours\n• Key: "Cafeteria germ" — watery diarrhea, cramping, rarely vomiting',
+        },
+        {
+            heading: 'Foodborne — Delayed Onset (>16 hours)',
+            body: '**Salmonella (non-typhoidal)**\n• Source: Poultry, eggs, unpasteurized dairy, reptile contact\n• Onset: 12-72 hours\n• Duration: 4-7 days\n• Key: Fever, bloody diarrhea possible. NO antibiotics unless severe (prolongs carriage)\n\n**Campylobacter jejuni**\n• Source: Undercooked poultry, unpasteurized milk, puppies/kittens\n• Onset: 2-5 days\n• Duration: 5-7 days\n• Key: Most common bacterial cause of diarrhea in US. Bloody stools, high fever. Guillain-Barre risk (1:1000)\n\n**STEC (E. coli O157:H7)**\n• Source: Undercooked ground beef, unpasteurized juice/milk, contaminated produce\n• Onset: 3-4 days\n• Duration: 5-10 days\n• Key: Bloody diarrhea + afebrile = suspect STEC. NO ANTIBIOTICS (increases HUS risk). Watch for HUS days 5-10',
+        },
+        {
+            heading: 'Waterborne / Recreational Water',
+            body: '**Cryptosporidium**\n• Source: Swimming pools, lakes, contaminated drinking water\n• Onset: 2-10 days\n• Duration: 1-2 weeks (longer in immunocompromised)\n• Key: Chlorine-resistant. Profuse watery diarrhea, can be prolonged. Nitazoxanide for treatment.\n\n**Giardia lamblia**\n• Source: Streams, lakes ("beaver fever"), day care centers\n• Onset: 1-2 weeks\n• Duration: 2-6 weeks if untreated\n• Key: Foul-smelling, greasy stools, bloating, flatulence. Metronidazole or tinidazole.\n\n**Norovirus**\n• Source: Contaminated water/food, person-to-person, cruise ships\n• Onset: 12-48 hours\n• Duration: 24-72 hours\n• Key: Highly contagious. Vomiting + diarrhea. "Winter vomiting disease." Self-limited.',
+        },
+        {
+            heading: 'Person-to-Person / Institutional',
+            body: '**Shigella**\n• Source: Fecal-oral (low infectious dose ~10 organisms), day care, MSM\n• Onset: 1-3 days\n• Duration: 5-7 days\n• Key: Dysentery (bloody mucoid stools), fever, tenesmus. Treat with azithromycin (resistance to FQ/TMP-SMX)\n\n**Norovirus**\n• Source: Cruise ships, nursing homes, schools, hospitals\n• Onset: 12-48 hours\n• Duration: 24-72 hours\n• Key: Explosive outbreaks. Environmental contamination persists. Supportive care only.\n\n**Rotavirus**\n• Source: Day care centers, pediatric wards\n• Onset: 1-3 days\n• Duration: 3-8 days\n• Key: Leading cause of severe pediatric diarrhea pre-vaccine. Watery diarrhea, vomiting, fever.',
+        },
+        {
+            heading: 'Travel-Associated',
+            body: '**Enterotoxigenic E. coli (ETEC)**\n• Source: Contaminated food/water in developing countries\n• Onset: 1-3 days\n• Duration: 3-5 days\n• Key: "Traveler\'s diarrhea" — watery, no blood. Treat with azithromycin or fluoroquinolone + loperamide\n\n**Cyclospora cayetanensis**\n• Source: Fresh produce (raspberries, basil) from endemic areas\n• Onset: 1-2 weeks\n• Duration: Weeks if untreated\n• Key: Relapsing/remitting watery diarrhea. Treat with TMP-SMX.\n\n**Entamoeba histolytica**\n• Source: Endemic areas (Mexico, Central/South America, South Asia)\n• Onset: 2-4 weeks\n• Duration: Weeks to months\n• Key: Bloody diarrhea, "anchovy paste" liver abscess. Treat with metronidazole + paromomycin.',
+        },
+        {
+            heading: 'Healthcare-Associated',
+            body: '**Clostridioides difficile**\n• Source: Hospital/nursing home, recent antibiotics (especially clindamycin, fluoroquinolones, cephalosporins)\n• Onset: Days to weeks after antibiotic exposure\n• Duration: Variable, can recur\n• Key: Watery diarrhea (rarely bloody), fever, leukocytosis. Stop offending antibiotic. Treat with oral vancomycin or fidaxomicin.\n\n**Risk factors:** Recent hospitalization, PPI use, age >65, immunosuppression, inflammatory bowel disease',
+        },
+        {
+            heading: 'Immunocompromised Hosts',
+            body: '**Additional pathogens to consider:**\n• **Cryptosporidium** — severe, prolonged, can be fatal in AIDS\n• **Microsporidia** — chronic diarrhea, wasting\n• **Isospora belli** — watery diarrhea, treat with TMP-SMX\n• **CMV colitis** — bloody diarrhea, fever, treat with ganciclovir\n• **MAC (Mycobacterium avium complex)** — chronic diarrhea, weight loss, when CD4 <50\n\n**Always check CD4 count in HIV patients with diarrhea**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Shane AL, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.' },
+        { num: 2, text: 'Thielman NM, Guerrant RL. Acute Infectious Diarrhea. N Engl J Med. 2004;350(1):38-47.' },
+        { num: 3, text: 'DuPont HL. Acute Infectious Diarrhea in Immunocompetent Adults. N Engl J Med. 2014;370:1532-1540.' },
+    ],
+};
 // -------------------------------------------------------------------
 // First Trimester Emergencies
 // -------------------------------------------------------------------
@@ -9002,6 +9046,7 @@ export const INFO_PAGES = {
     'diarrhea-abx-criteria': DIARRHEA_ABX_CRITERIA,
     'diarrhea-antimotility-ci': DIARRHEA_ANTIMOTILITY_CI,
     'diarrhea-dehydration-assessment': DIARRHEA_DEHYDRATION_ASSESSMENT,
+    'diarrhea-etiology': DIARRHEA_ETIOLOGY,
     'ft-summary': FT_SUMMARY,
     'ft-ectopic-risk': FT_ECTOPIC_RISK,
     'ft-miscarriage-types': FT_MISCARRIAGE_TYPES,
