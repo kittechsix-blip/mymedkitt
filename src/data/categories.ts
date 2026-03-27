@@ -76,12 +76,21 @@ export const DEFAULT_CATEGORIES: Category[] = [
       {
         id: 'sepsis',
         title: 'Sepsis Management',
-        subtitle: 'Recognition \u2192 Resuscitation \u2192 Vasopressors \u2192 Steroids \u2192 Monitoring \u2192 Disposition',
+        subtitle: 'Recognition → Resuscitation → Vasopressors → Steroids → Monitoring → Disposition',
         categoryId: 'critical-care',
         version: '1.0',
         nodeCount: 31,
         entryNodeId: 'sepsis-start',
-      }
+      },
+      {
+        id: 'ecmo',
+        title: 'ECMO',
+        subtitle: 'VV vs VA → Indications → Cannulation → Complications → Scores → Communication',
+        categoryId: 'critical-care',
+        version: '1.0',
+        nodeCount: 30,
+        entryNodeId: 'ecmo-start',
+      },
     ],
     isCustom: false,
   },

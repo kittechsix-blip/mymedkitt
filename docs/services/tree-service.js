@@ -409,6 +409,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/botulism.js');
             return { nodes: m.BOTULISM_NODES, entryNodeId: 'bot-start', categoryId: 'neurology', moduleLabels: m.BOTULISM_MODULE_LABELS, citations: m.BOTULISM_CITATIONS };
         },
+        'ecmo': async () => {
+            const m = await import('../data/trees/ecmo.js');
+            return { nodes: m.ECMO_NODES, entryNodeId: 'ecmo-start', categoryId: 'critical-care', moduleLabels: m.ECMO_MODULE_LABELS, citations: m.ECMO_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -411,6 +411,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'bot-ivdu', label: 'IVDU', icon: '💊', action: 'calculator', target: 'bot-ivdu' },
         { id: 'bot-infant', label: 'Infant', icon: '👶', action: 'calculator', target: 'bot-infant' },
     ],
+    'ecmo': [
+        { id: 'ecmo-selector', label: 'VV vs VA', icon: '🔀', action: 'calculator', target: 'ecmo-vv-va-selector' },
+        { id: 'ecmo-resp', label: 'RESP', icon: '🫁', action: 'calculator', target: 'ecmo-resp-score' },
+        { id: 'ecmo-save', label: 'SAVE', icon: '❤️', action: 'calculator', target: 'ecmo-save-score' },
+        { id: 'ecmo-murray', label: 'Murray', icon: '📊', action: 'calculator', target: 'ecmo-murray-score' },
+        { id: 'ecmo-cannula', label: 'Cannula', icon: '📏', action: 'calculator', target: 'ecmo-cannula-size' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

@@ -134,6 +134,7 @@ const TREE_REGISTRY = {
   'guillain-barre':       { prefix: 'GUILLAIN_BARRE',        entryNodeId: 'gbs-start',      categoryId: 'neurology' },
   'myasthenia-gravis':    { prefix: 'MYASTHENIA_GRAVIS',     entryNodeId: 'mg-start',       categoryId: 'neurology' },
   'botulism':             { prefix: 'BOTULISM',              entryNodeId: 'bot-start',      categoryId: 'neurology' },
+  'ecmo':                 { prefix: 'ECMO',                  entryNodeId: 'ecmo-start',     categoryId: 'critical-care' },
 };
 
 // Cross-listing: which consults appear in multiple categories

@@ -50,6 +50,7 @@ export { CO_TOXICITY_NODES, CO_TOXICITY_MODULE_LABELS, CO_TOXICITY_CITATIONS } f
 export { BOTULISM_NODES, BOTULISM_MODULE_LABELS, BOTULISM_CITATIONS } from './botulism';
 export { GUILLAIN_BARRE_NODES, GUILLAIN_BARRE_MODULE_LABELS, GUILLAIN_BARRE_CITATIONS } from './guillain-barre';
 export { MYASTHENIA_GRAVIS_NODES, MYASTHENIA_GRAVIS_MODULE_LABELS, MYASTHENIA_GRAVIS_CITATIONS } from './myasthenia-gravis';
+export { ECMO_NODES, ECMO_MODULE_LABELS, ECMO_CITATIONS } from './ecmo';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
