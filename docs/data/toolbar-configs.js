@@ -333,6 +333,10 @@ const TOOLBAR_CONFIGS = {
         { id: 'tdd', label: 'TDD', icon: '🧮', action: 'calculator', target: 'tdd-estimator' },
         { id: 'icr', label: 'ICR', icon: '🍽️', action: 'calculator', target: 'icr-calc' },
     ],
+    'caustic-ingestion': [
+        { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },
+        { id: 'zargar', label: 'Zargar', icon: '📊', action: 'calculator', target: 'zargar-grade' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
