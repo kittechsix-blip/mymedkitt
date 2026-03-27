@@ -47,6 +47,9 @@ export { BETA_BLOCKER_OD_NODES, BETA_BLOCKER_OD_MODULE_LABELS, BETA_BLOCKER_OD_C
 export { CCB_OD_NODES, CCB_OD_MODULE_LABELS, CCB_OD_CITATIONS } from './ccb-od';
 export { IRON_OD_NODES, IRON_OD_MODULE_LABELS, IRON_OD_CITATIONS } from './iron-od';
 export { CO_TOXICITY_NODES, CO_TOXICITY_MODULE_LABELS, CO_TOXICITY_CITATIONS } from './co-toxicity';
+export { BOTULISM_NODES, BOTULISM_MODULE_LABELS, BOTULISM_CITATIONS } from './botulism';
+export { GUILLAIN_BARRE_NODES, GUILLAIN_BARRE_MODULE_LABELS, GUILLAIN_BARRE_CITATIONS } from './guillain-barre';
+export { MYASTHENIA_GRAVIS_NODES, MYASTHENIA_GRAVIS_MODULE_LABELS, MYASTHENIA_GRAVIS_CITATIONS } from './myasthenia-gravis';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

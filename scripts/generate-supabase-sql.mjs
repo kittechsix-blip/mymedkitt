@@ -131,6 +131,9 @@ const TREE_REGISTRY = {
   'ccb-od':               { prefix: 'CCB_OD',                entryNodeId: 'ccb-start',      categoryId: 'toxicology' },
   'iron-od':              { prefix: 'IRON_OD',               entryNodeId: 'iron-start',     categoryId: 'toxicology' },
   'co-toxicity':          { prefix: 'CO_TOXICITY',           entryNodeId: 'co-start',       categoryId: 'toxicology' },
+  'guillain-barre':       { prefix: 'GUILLAIN_BARRE',        entryNodeId: 'gbs-start',      categoryId: 'neurology' },
+  'myasthenia-gravis':    { prefix: 'MYASTHENIA_GRAVIS',     entryNodeId: 'mg-start',       categoryId: 'neurology' },
+  'botulism':             { prefix: 'BOTULISM',              entryNodeId: 'bot-start',      categoryId: 'neurology' },
 };
 
 // Cross-listing: which consults appear in multiple categories

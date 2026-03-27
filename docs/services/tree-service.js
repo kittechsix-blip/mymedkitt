@@ -397,6 +397,18 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/co-toxicity.js');
             return { nodes: m.CO_TOXICITY_NODES, entryNodeId: 'co-start', categoryId: 'toxicology', moduleLabels: m.CO_TOXICITY_MODULE_LABELS, citations: m.CO_TOXICITY_CITATIONS };
         },
+        'guillain-barre': async () => {
+            const m = await import('../data/trees/guillain-barre.js');
+            return { nodes: m.GUILLAIN_BARRE_NODES, entryNodeId: 'gbs-start', categoryId: 'neurology', moduleLabels: m.GUILLAIN_BARRE_MODULE_LABELS, citations: m.GUILLAIN_BARRE_CITATIONS };
+        },
+        'myasthenia-gravis': async () => {
+            const m = await import('../data/trees/myasthenia-gravis.js');
+            return { nodes: m.MYASTHENIA_GRAVIS_NODES, entryNodeId: 'mg-start', categoryId: 'neurology', moduleLabels: m.MYASTHENIA_GRAVIS_MODULE_LABELS, citations: m.MYASTHENIA_GRAVIS_CITATIONS };
+        },
+        'botulism': async () => {
+            const m = await import('../data/trees/botulism.js');
+            return { nodes: m.BOTULISM_NODES, entryNodeId: 'bot-start', categoryId: 'neurology', moduleLabels: m.BOTULISM_MODULE_LABELS, citations: m.BOTULISM_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

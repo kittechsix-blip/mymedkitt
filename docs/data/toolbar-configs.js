@@ -386,6 +386,31 @@ const TOOLBAR_CONFIGS = {
         { id: 'co-pregnancy', label: 'Pregnancy', icon: '🤰', action: 'calculator', target: 'co-pregnancy' },
         { id: 'co-cyanide', label: 'Cyanide', icon: '⚠️', action: 'calculator', target: 'co-cyanide' },
     ],
+    'guillain-barre': [
+        { id: 'gbs-fvc', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'gbs-fvc-nif' },
+        { id: 'gbs-egris', label: 'EGRIS', icon: '📊', action: 'calculator', target: 'gbs-egris' },
+        { id: 'gbs-ivig', label: 'IVIG/PLEX', icon: '💉', action: 'calculator', target: 'gbs-ivig-plex' },
+        { id: 'gbs-lp', label: 'LP Interp', icon: '🧪', action: 'calculator', target: 'gbs-lp-interp' },
+        { id: 'gbs-variants', label: 'Variants', icon: '🔀', action: 'calculator', target: 'gbs-variants' },
+        { id: 'gbs-intubation', label: 'Intubate', icon: '⚠️', action: 'calculator', target: 'gbs-intubation' },
+    ],
+    'myasthenia-gravis': [
+        { id: 'mg-crisis', label: 'Crisis DDx', icon: '🔀', action: 'calculator', target: 'mg-crisis-diff' },
+        { id: 'mg-fvc', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'mg-fvc-nif' },
+        { id: 'mg-drugs', label: 'Drug Avoid', icon: '⛔', action: 'calculator', target: 'mg-drugs-avoid' },
+        { id: 'mg-mgfa', label: 'MGFA', icon: '📊', action: 'calculator', target: 'mg-mgfa' },
+        { id: 'mg-ice', label: 'Ice Test', icon: '🧊', action: 'calculator', target: 'mg-ice-test' },
+        { id: 'mg-pyridostigmine', label: 'Mestinon', icon: '💊', action: 'calculator', target: 'mg-pyridostigmine' },
+        { id: 'mg-ivig', label: 'IVIG/PLEX', icon: '💉', action: 'calculator', target: 'mg-ivig-plex' },
+    ],
+    'botulism': [
+        { id: 'bot-types', label: 'Types', icon: '🔀', action: 'calculator', target: 'bot-types' },
+        { id: 'bot-ddx', label: 'DDx', icon: '📋', action: 'calculator', target: 'bot-ddx' },
+        { id: 'bot-antitoxin', label: 'Antitoxin', icon: '💉', action: 'calculator', target: 'bot-antitoxin' },
+        { id: 'bot-timeline', label: 'Timeline', icon: '⏱️', action: 'calculator', target: 'bot-timeline' },
+        { id: 'bot-ivdu', label: 'IVDU', icon: '💊', action: 'calculator', target: 'bot-ivdu' },
+        { id: 'bot-infant', label: 'Infant', icon: '👶', action: 'calculator', target: 'bot-infant' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
