@@ -346,7 +346,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hypo-tx', label: 'Hypo Tx', icon: '💉', action: 'calculator', target: 'hypo-treatment' },
     { id: 'sliding', label: 'Sliding', icon: '📊', action: 'calculator', target: 'sliding-scale-gen' },
     { id: 'tdd', label: 'TDD', icon: '🧮', action: 'calculator', target: 'tdd-estimator' },
-    { id: 'icr', label: 'ICR', icon: '🍽️', action: 'calculator', target: 'icr-calc' },
+    { id: 'insulin-dc', label: 'Insulin DC', icon: '📄', action: 'calculator', target: 'dm-insulin-discharge' },
+    { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'calculator', target: 'dm-oral-discharge' },
   ],
   'caustic-ingestion': [
     { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },

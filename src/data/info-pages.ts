@@ -9371,12 +9371,102 @@ const DM_SUMMARY: InfoPage = {
   ],
 };
 
+const DM_INSULIN_DISCHARGE: InfoPage = {
+  id: 'dm-insulin-discharge',
+  title: 'New Insulin Instructions',
+  subtitle: 'Patient discharge instructions for starting insulin',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Your Insulin Prescription',
+      body: '**You are starting insulin to help control your blood sugar.** This is a common and effective treatment for diabetes. Many people with diabetes use insulin to stay healthy.\n\n**Your insulin type:** _____________\n**Your dose:** _____________\n**When to take it:** _____________',
+    },
+    {
+      heading: 'How to Inject Insulin',
+      body: '1. **Wash your hands** with soap and water\n2. **Check the insulin** — make sure it is not expired, cloudy (unless it should be), or discolored\n3. **Choose an injection site:**\n   - Belly (2 inches away from belly button) — absorbs fastest\n   - Thighs (front or outer side)\n   - Back of upper arms\n   - Rotate sites to prevent lumps\n4. **Clean the skin** with alcohol wipe and let dry\n5. **Pinch the skin** gently and insert needle at 90-degree angle\n6. **Push the plunger** slowly and count to 10 before removing\n7. **Do not rub** the injection site',
+    },
+    {
+      heading: 'When to Take Your Insulin',
+      body: '**Long-acting insulin (glargine/Lantus, detemir/Levemir, degludec/Tresiba):**\n• Take at the SAME TIME every day\n• Most people take it at bedtime or with breakfast\n• This insulin works for 24 hours\n\n**Rapid-acting insulin (lispro/Humalog, aspart/Novolog, glulisine/Apidra):**\n• Take 15 minutes BEFORE meals\n• Only take if you are going to eat\n• This insulin works within 15 minutes\n\n**Mixed insulin (70/30, 75/25):**\n• Take 30 minutes before breakfast and dinner\n• Do not skip meals after taking this insulin',
+    },
+    {
+      heading: 'Checking Your Blood Sugar',
+      body: '**When to check:**\n• Before breakfast (fasting)\n• Before meals\n• 2 hours after meals (if instructed)\n• Before bed\n• Anytime you feel "off" (shaky, sweaty, confused)\n\n**Target blood sugar:**\n• Before meals: 80-130 mg/dL\n• 2 hours after meals: Less than 180 mg/dL\n\n**Keep a log** of your blood sugar readings to share with your doctor',
+    },
+    {
+      heading: 'Low Blood Sugar (Hypoglycemia)',
+      body: '**Symptoms (blood sugar below 70):**\n• Shaking, sweating, fast heartbeat\n• Hunger, dizziness, confusion\n• Blurry vision, weakness\n\n**What to do:**\n1. **Eat or drink 15 grams of fast sugar:**\n   - 4 glucose tablets\n   - 4 oz (1/2 cup) juice or regular soda\n   - 1 tablespoon honey or sugar\n2. **Wait 15 minutes** and recheck blood sugar\n3. **Repeat** if still below 70\n4. **Eat a snack** with protein after blood sugar is normal\n\n**CALL 911 if:** You cannot swallow, are unconscious, or do not improve after treatment',
+    },
+    {
+      heading: 'Storage and Safety',
+      body: '**Storage:**\n• Unopened insulin: Keep in refrigerator (not freezer)\n• Opened insulin: Room temperature for up to 28 days, then discard\n• Keep away from heat and direct sunlight\n\n**Safety:**\n• Never share insulin pens or needles\n• Use a new needle for each injection\n• Dispose of needles in a sharps container\n• Wear a medical ID bracelet\n• Carry fast-acting sugar with you at all times',
+    },
+    {
+      heading: 'Diet Tips',
+      body: '• **Eat regular meals** — do not skip meals, especially if taking insulin\n• **Limit simple sugars** — candy, soda, juice, white bread, pastries\n• **Choose complex carbs** — whole grains, vegetables, beans\n• **Watch portions** — use the plate method (1/2 vegetables, 1/4 protein, 1/4 carbs)\n• **Limit alcohol** — can cause low blood sugar, especially with insulin\n• **Stay hydrated** — drink water throughout the day',
+    },
+    {
+      heading: 'When to Call Your Doctor',
+      body: '• Blood sugar consistently above 300 or below 70\n• Symptoms of low blood sugar that do not improve with treatment\n• Nausea, vomiting, or stomach pain\n• Signs of infection at injection sites (redness, swelling, warmth)\n• Questions about your insulin dose\n\n**Your follow-up appointment:** _____________',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Diabetes Association. Standards of Care in Diabetes - 2024. Diabetes Care. 2024.' },
+  ],
+};
+
+const DM_ORAL_DISCHARGE: InfoPage = {
+  id: 'dm-oral-discharge',
+  title: 'New Diabetes Medication Instructions',
+  subtitle: 'Patient discharge instructions for oral diabetes medications',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Your Diabetes Medication',
+      body: '**You are starting a new medication to help control your blood sugar.** Taking this medication as prescribed, along with healthy eating and exercise, will help you manage your diabetes.\n\n**Your medication:** _____________\n**Your dose:** _____________\n**When to take it:** _____________',
+    },
+    {
+      heading: 'Metformin (Glucophage)',
+      body: '**When to take:** With meals (breakfast and/or dinner)\n**Why:** Reduces sugar production by the liver\n\n**Important:**\n• Start with a low dose and increase slowly to avoid stomach upset\n• Take WITH food to reduce nausea and diarrhea\n• Drink plenty of water\n• Stop taking for 48 hours before and after any procedure with IV contrast dye\n\n**Side effects:** Nausea, diarrhea, stomach upset (usually improve after 1-2 weeks)\n\n**Call your doctor if:** Severe muscle pain, weakness, difficulty breathing, or unusual fatigue',
+    },
+    {
+      heading: 'Sulfonylureas (Glipizide, Glyburide, Glimepiride)',
+      body: '**When to take:** 30 minutes BEFORE breakfast (or first meal)\n**Why:** Helps your pancreas make more insulin\n\n**Important:**\n• DO NOT skip meals — these medications can cause low blood sugar\n• Avoid alcohol — increases risk of low blood sugar\n• Carry fast-acting sugar with you at all times\n\n**Side effects:** Low blood sugar (hypoglycemia), weight gain\n\n**Warning signs of low blood sugar:** Shaking, sweating, fast heartbeat, hunger, confusion',
+    },
+    {
+      heading: 'SGLT2 Inhibitors (Empagliflozin/Jardiance, Dapagliflozin/Farxiga, Canagliflozin/Invokana)',
+      body: '**When to take:** Once daily in the morning\n**Why:** Helps kidneys remove extra sugar through urine\n\n**Important:**\n• Drink extra water — this medication makes you urinate more\n• May cause genital yeast infections — keep the area clean and dry\n• Stop taking 3-4 days before any surgery\n• Can cause low blood pressure — rise slowly from sitting\n\n**Side effects:** Increased urination, thirst, genital infections, UTIs\n\n**Call your doctor if:** Nausea, vomiting, stomach pain, difficulty breathing, confusion (signs of ketoacidosis — can occur even with normal blood sugar)',
+    },
+    {
+      heading: 'GLP-1 Agonists (Semaglutide/Ozempic, Liraglutide/Victoza, Dulaglutide/Trulicity)',
+      body: '**When to take:** Once weekly (same day each week) OR once daily depending on medication\n**Why:** Helps pancreas release insulin when you eat, slows digestion, reduces appetite\n\n**Important:**\n• Start with low dose and increase gradually to reduce nausea\n• Inject in belly, thigh, or upper arm\n• Rotate injection sites\n• May cause significant weight loss\n\n**Side effects:** Nausea, vomiting, diarrhea, constipation (usually improve over time)\n\n**Call your doctor if:** Severe stomach pain that does not go away, signs of pancreatitis',
+    },
+    {
+      heading: 'Checking Your Blood Sugar',
+      body: '**When to check:**\n• Before breakfast (fasting) — most important\n• Before other meals if instructed\n• Anytime you feel "off"\n\n**Target blood sugar:**\n• Before meals: 80-130 mg/dL\n• 2 hours after meals: Less than 180 mg/dL\n\n**Keep a log** of your readings to share with your doctor. This helps adjust your medication if needed.',
+    },
+    {
+      heading: 'Diet Tips',
+      body: '• **Eat regular meals** at consistent times each day\n• **Limit simple sugars** — candy, soda, juice, white bread, pastries\n• **Choose complex carbs** — whole grains, vegetables, beans, lentils\n• **Watch portions** — use smaller plates, measure servings\n• **Fill half your plate** with non-starchy vegetables\n• **Choose lean proteins** — chicken, fish, beans, tofu\n• **Limit fried foods** and saturated fats\n• **Read nutrition labels** — look at total carbohydrates, not just sugar',
+    },
+    {
+      heading: 'When to Call Your Doctor',
+      body: '• Blood sugar consistently above 300 or below 70\n• Severe nausea, vomiting, or diarrhea\n• Signs of infection (fever, chills)\n• Unusual fatigue, weakness, or muscle pain\n• Questions about your medication\n\n**Your follow-up appointment:** _____________\n\n**Bring to your appointment:**\n• Blood sugar log\n• List of all medications you take\n• Questions you have about your diabetes',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Diabetes Association. Standards of Care in Diabetes - 2024. Diabetes Care. 2024.' },
+  ],
+};
+
 // -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
 export const INFO_PAGES: Record<string, InfoPage> = {
   'dm-summary': DM_SUMMARY,
+  'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
+  'dm-oral-discharge': DM_ORAL_DISCHARGE,
   'pelvic-summary': PELVIC_SUMMARY,
   'pelvic-rug-procedure': PELVIC_RUG_PROCEDURE,
   'mtp-summary': MTP_SUMMARY,
