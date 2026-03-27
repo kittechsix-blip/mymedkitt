@@ -30,8 +30,10 @@ function mapNodeRow(row) {
         node.confidence = row.confidence;
     if (row.images && row.images.length > 0)
         node.images = row.images;
-    if (row.calculator_links && row.calculator_links.length > 0)
+    if (row.calculator_links && row.calculator_links.length > 0) {
         node.calculatorLinks = row.calculator_links;
+        console.log('[MedKitt] mapNodeRow:', row.id, 'has calculatorLinks:', node.calculatorLinks);
+    }
     return node;
 }
 /** Try loading a tree from IndexedDB cache */
@@ -382,11 +384,14 @@ async function loadHardcodedFallback(treeId) {
 export async function getTreeConfig(treeId) {
     // 1. In-memory
     const cached = treeCache.get(treeId);
-    if (cached)
+    if (cached) {
+        console.log('[MedKitt] getTreeConfig:', treeId, 'from IN-MEMORY');
         return cached;
+    }
     // 2. IndexedDB
     const fromCache = await loadFromCache(treeId);
     if (fromCache) {
+        console.log('[MedKitt] getTreeConfig:', treeId, 'from INDEXEDDB, nodes with calcLinks:', fromCache.nodes.filter(n => n.calculatorLinks?.length).length);
         treeCache.set(treeId, fromCache);
         // Background refresh if stale
         refreshIfStale(treeId);
@@ -395,10 +400,12 @@ export async function getTreeConfig(treeId) {
     // 3. Supabase
     const fromSupabase = await fetchFromSupabase(treeId).catch(() => null);
     if (fromSupabase) {
+        console.log('[MedKitt] getTreeConfig:', treeId, 'from SUPABASE, nodes with calcLinks:', fromSupabase.nodes.filter(n => n.calculatorLinks?.length).length);
         treeCache.set(treeId, fromSupabase);
         return fromSupabase;
     }
     // 4. Hardcoded fallback
+    console.log('[MedKitt] getTreeConfig:', treeId, 'from HARDCODED FALLBACK');
     const fallback = await loadHardcodedFallback(treeId);
     if (fallback) {
         treeCache.set(treeId, fallback);
