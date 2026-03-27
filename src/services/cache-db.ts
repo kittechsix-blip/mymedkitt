@@ -7,7 +7,7 @@ const DB_VERSION = 4;
 
 // Bump this to force-clear all cached data on next app load.
 // Use when tree structure, drug data, or info pages change.
-const DATA_VERSION = 75;
+const DATA_VERSION = 76;
 const DATA_VERSION_KEY = 'medkitt-data-version';
 
 export type StoreName = 'drugs' | 'categories' | 'category_trees' | 'decision_nodes' | 'tree_citations' | 'sync_meta' | 'info_pages';
@@ -17,9 +17,7 @@ let dbPromise: Promise<IDBDatabase> | null = null;
 /** Check if cached data is outdated and wipe if so */
 async function checkDataVersion(db: IDBDatabase): Promise<void> {
   const stored = localStorage.getItem(DATA_VERSION_KEY);
-  console.log('[MedKitt] DATA_VERSION check:', { stored, current: DATA_VERSION, match: stored === String(DATA_VERSION) });
   if (stored === String(DATA_VERSION)) return;
-  console.log('[MedKitt] Wiping IndexedDB cache due to version mismatch...');
 
   // Wipe all object stores
   const storeNames: StoreName[] = ['drugs', 'categories', 'category_trees', 'decision_nodes', 'tree_citations', 'sync_meta', 'info_pages'];
