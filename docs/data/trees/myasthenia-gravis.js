@@ -73,9 +73,9 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'question',
         module: 3,
         title: 'Myasthenic or Cholinergic Crisis?',
-        body: '[Crisis Differentiator Tool](#/calc/mg-crisis-diff) — side-by-side comparison.\n\n**This distinction is CRITICAL** — treatment is opposite.\n\n**Myasthenic crisis:** Worsening MG from disease\n• DRY — no excessive secretions\n• Mydriasis (dilated pupils)\n• No fasciculations\n• Weakness improves with more anticholinesterase\n\n**Cholinergic crisis:** EXCESS pyridostigmine (overdose)\n• WET — **SLUDGE/BBB** symptoms\n• Miosis (constricted pupils)\n• Fasciculations present\n• Weakness WORSENS with more anticholinesterase\n\n**SLUDGE/BBB:**\n**S**alivation, **L**acrimation, **U**rination, **D**efecation, **GI** cramping, **E**mesis\n**B**radycardia, **B**ronchorrhea, **B**ronchospasm\n\n**If in doubt:** STOP all anticholinesterase medications, support airway, give atropine for secretions.',
+        body: '[Crisis Differentiator Tool](#/calc/mg-crisis) — side-by-side comparison.\n\n**This distinction is CRITICAL** — treatment is opposite.\n\n**Myasthenic crisis:** Worsening MG from disease\n• DRY — no excessive secretions\n• Mydriasis (dilated pupils)\n• No fasciculations\n• Weakness improves with more anticholinesterase\n\n**Cholinergic crisis:** EXCESS pyridostigmine (overdose)\n• WET — **SLUDGE/BBB** symptoms\n• Miosis (constricted pupils)\n• Fasciculations present\n• Weakness WORSENS with more anticholinesterase\n\n**SLUDGE/BBB:**\n**S**alivation, **L**acrimation, **U**rination, **D**efecation, **GI** cramping, **E**mesis\n**B**radycardia, **B**ronchorrhea, **B**ronchospasm\n\n**If in doubt:** STOP all anticholinesterase medications, support airway, give atropine for secretions.',
         citation: [2, 3],
-        calculatorLinks: [{ id: 'mg-crisis-diff', label: 'Crisis Differentiator' }],
+        calculatorLinks: [{ id: 'mg-crisis', label: 'Crisis Differentiator' }],
         options: [
             {
                 label: 'Myasthenic crisis — DRY, no SLUDGE',

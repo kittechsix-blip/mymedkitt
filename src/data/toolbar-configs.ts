@@ -431,6 +431,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ecmo-save', label: 'SAVE', icon: '❤️', action: 'calculator', target: 'ecmo-save-score' },
     { id: 'ecmo-murray', label: 'Murray', icon: '📊', action: 'calculator', target: 'ecmo-murray-score' },
     { id: 'ecmo-cannula', label: 'Cannula', icon: '📏', action: 'calculator', target: 'ecmo-cannula-size' },
+    { id: 'ecmo-scai', label: 'SCAI', icon: '📈', action: 'calculator', target: 'ecmo-scai-stages' },
+    { id: 'ecmo-ecpr', label: 'ECPR', icon: '⚡', action: 'calculator', target: 'ecmo-ecpr-criteria' },
   ],
 };
 
