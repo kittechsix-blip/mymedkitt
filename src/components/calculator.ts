@@ -11123,7 +11123,2016 @@ const SLIDING_SCALE_GENERATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Digoxin Toxicity Calculators
+// -------------------------------------------------------------------
+
+const DIG_FAB_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'dig-fab-dosing',
+  title: 'DigiFab Dosing',
+  subtitle: 'Digoxin Immune Fab Calculation',
+  description: 'Calculate DigiFab (Digibind) dosing for digoxin toxicity. Use KNOWN level method when available, otherwise estimate from ingested amount.',
+  fields: [
+    { name: 'method', label: 'Calculation Method', type: 'select', points: 0, selectOptions: [
+      { label: 'Known digoxin level', points: 1 },
+      { label: 'Estimated from ingestion', points: 2 },
+      { label: 'Empiric (unknown)', points: 3 },
+    ]},
+    { name: 'level', label: 'Serum Digoxin (ng/mL)', type: 'number', points: 0, unit: 'ng/mL', description: 'If using level method' },
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'ingested', label: 'Amount Ingested (mg)', type: 'number', points: 0, unit: 'mg', description: 'If using ingestion method' },
+  ],
+  results: [],
+  thresholdNote: 'Each vial binds ~0.5 mg digoxin',
+  citations: ['DigiFab prescribing information. BTG International Inc.'],
+  computeResult: (values) => {
+    const method = values['method'] || 1;
+    const weight = values['weight'] || 70;
+    const level = values['level'] || 0;
+    const ingested = values['ingested'] || 0;
+
+    let vials = 0;
+    let calcMethod = '';
+
+    if (method === 1 && level > 0) {
+      // Known level: vials = (level ng/mL × weight kg) / 100
+      vials = Math.ceil((level * weight) / 100);
+      calcMethod = `Level method: (${level} × ${weight}) / 100`;
+    } else if (method === 2 && ingested > 0) {
+      // Ingestion: vials = ingested mg × 0.8 / 0.5, round up
+      vials = Math.ceil((ingested * 0.8) / 0.5);
+      calcMethod = `Ingestion method: (${ingested} × 0.8) / 0.5`;
+    } else {
+      // Empiric: 10-20 vials for life-threatening toxicity
+      vials = 10;
+      calcMethod = 'Empiric: 10 vials (range 10-20 for life-threatening)';
+    }
+
+    return {
+      value: `${vials} vials`,
+      label: 'DigiFab Dose',
+      description: `**Calculation:** ${calcMethod}\n\n**Administration:**\n- Reconstitute each vial with 4 mL sterile water\n- Further dilute in NS to convenient volume\n- Infuse over 30 minutes (can give IV push if cardiac arrest)\n\n**Monitoring:**\n- Free digoxin levels will be FALSELY ELEVATED\n- Follow clinical response, K+, ECG\n- May repeat in 2-4 hours if needed`,
+      colorVar: vials >= 10 ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const DIG_ECG_CALCULATOR: CalculatorDefinition = {
+  id: 'dig-ecg',
+  title: 'Digoxin ECG Findings',
+  subtitle: 'ECG Pattern Recognition Guide',
+  description: 'Interactive guide to digoxin-related ECG changes. Distinguishes therapeutic effect from toxicity.',
+  fields: [
+    { name: 'scooped-st', label: 'Scooped ST segments (Salvador Dali)', type: 'toggle', points: 1, description: 'Downsloping ST depression with characteristic shape' },
+    { name: 'short-qt', label: 'Shortened QTc', type: 'toggle', points: 1 },
+    { name: 'flat-t', label: 'Flattened/Inverted T waves', type: 'toggle', points: 1 },
+    { name: 'pvcs', label: 'Frequent PVCs', type: 'toggle', points: 2, description: 'Especially bigeminy' },
+    { name: 'brady', label: 'Sinus bradycardia', type: 'toggle', points: 2 },
+    { name: 'heart-block', label: 'AV block (any degree)', type: 'toggle', points: 3 },
+    { name: 'junctional', label: 'Junctional rhythm', type: 'toggle', points: 3 },
+    { name: 'bidirectional-vt', label: 'Bidirectional VT', type: 'toggle', points: 5, description: 'PATHOGNOMONIC for dig toxicity' },
+    { name: 'afib-slow', label: 'AFib with slow/regular ventricular response', type: 'toggle', points: 4, description: 'Suggests complete heart block' },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Therapeutic Effect', risk: 'Normal dig effect', mortality: 'Not toxic', colorVar: '--color-primary' },
+    { min: 3, max: 6, label: 'Possible Toxicity', risk: 'Consider toxicity', mortality: 'Check level, symptoms', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'Likely Toxicity', risk: 'High suspicion', mortality: 'Treat empirically', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Bidirectional VT is pathognomonic. "Regularized AFib" = complete heart block.',
+  citations: ['Ma G, et al. Electrocardiographic manifestations: digitalis toxicity. J Emerg Med. 2001;20(2):145-152.'],
+};
+
+const DIG_ACUTE_CHRONIC_CALCULATOR: CalculatorDefinition = {
+  id: 'dig-acute-chronic',
+  title: 'Acute vs Chronic Dig Toxicity',
+  subtitle: 'Distinguish Presentation Patterns',
+  description: 'Key differences between acute ingestion and chronic accumulation guide treatment approach.',
+  fields: [
+    { name: 'timing', label: 'Exposure Type', type: 'select', points: 0, selectOptions: [
+      { label: 'Acute ingestion (single large dose)', points: 1 },
+      { label: 'Chronic accumulation (daily use)', points: 2 },
+    ]},
+    { name: 'hyperkalemia', label: 'Hyperkalemia present', type: 'toggle', points: 1, description: 'K+ > 5.0 mEq/L' },
+    { name: 'hypokalemia', label: 'Hypokalemia present', type: 'toggle', points: 0, description: 'K+ < 3.5 mEq/L' },
+    { name: 'renal', label: 'Renal insufficiency', type: 'toggle', points: 0 },
+    { name: 'gi-symptoms', label: 'Prominent GI symptoms', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Potassium is key: hyperK = acute, hypoK = chronic',
+  citations: ['Hauptman PJ, Kelly RA. Digitalis. Circulation. 1999;99(9):1265-1270.'],
+  computeResult: (values) => {
+    const timing = values['timing'] || 0;
+    const hyperK = values['hyperkalemia'] || 0;
+
+    if (timing === 1 || hyperK) {
+      return {
+        value: 'ACUTE',
+        label: 'Acute Digoxin Toxicity',
+        description: '**Acute Pattern:**\n- Hyperkalemia (Na/K-ATPase blocked)\n- GI symptoms prominent early\n- Level may be very high but timing matters\n- More likely to need DigiFab\n- Activated charcoal if <2 hours\n\n**Key:** Treat hyperkalemia but AVOID calcium (stone heart controversy)',
+        colorVar: '--color-danger',
+      };
+    }
+    return {
+      value: 'CHRONIC',
+      label: 'Chronic Digoxin Toxicity',
+      description: '**Chronic Pattern:**\n- Hypokalemia often present (potentiates toxicity)\n- Subtle symptoms, visual changes common\n- Lower levels may still be toxic\n- Often due to drug interaction or AKI\n- Replete K+ and Mg2+ aggressively\n\n**Key:** Address precipitant (dehydration, new drug, etc)',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const DIG_ARRHYTHMIA_CALCULATOR: CalculatorDefinition = {
+  id: 'dig-arrhythmia',
+  title: 'Dig Toxicity Arrhythmias',
+  subtitle: 'Arrhythmia Management Guide',
+  description: 'Management approach for specific digoxin-related arrhythmias.',
+  fields: [
+    { name: 'rhythm', label: 'Arrhythmia Type', type: 'select', points: 0, selectOptions: [
+      { label: 'Sinus bradycardia', points: 1 },
+      { label: 'AV block (2nd/3rd degree)', points: 2 },
+      { label: 'Atrial tachycardia with block', points: 3 },
+      { label: 'Junctional tachycardia', points: 4 },
+      { label: 'Ventricular ectopy / VT', points: 5 },
+      { label: 'Bidirectional VT', points: 6 },
+    ]},
+    { name: 'unstable', label: 'Hemodynamically unstable', type: 'toggle', points: 5 },
+  ],
+  results: [],
+  thresholdNote: 'DigiFab is first-line for life-threatening arrhythmias',
+  citations: ['Lapostolle F, et al. Dig-specific Fab fragments. Intensive Care Med. 2008;34(6):1092-1098.'],
+  computeResult: (values) => {
+    const rhythm = values['rhythm'] || 0;
+    const unstable = values['unstable'] || 0;
+
+    if (unstable || rhythm >= 5) {
+      return {
+        value: 'DigiFab NOW',
+        label: 'Life-Threatening - Immediate DigiFab',
+        description: '**Immediate Actions:**\n1. DigiFab empiric dosing (10-20 vials)\n2. Treat hyperkalemia (insulin/glucose, bicarb)\n3. Atropine for bradyarrhythmias\n4. Pacing may be needed (but may not capture)\n5. Lidocaine or phenytoin for VT (not amiodarone!)\n\n**AVOID:**\n- Cardioversion if possible\n- Calcium (controversial)\n- Amiodarone\n- Procainamide',
+        colorVar: '--color-danger',
+      };
+    }
+    if (rhythm >= 2) {
+      return {
+        value: 'Consider DigiFab',
+        label: 'Significant Arrhythmia',
+        description: '**Management:**\n- Hold digoxin\n- Check level, electrolytes\n- Replete K+ and Mg2+\n- Atropine for symptomatic bradycardia\n- DigiFab if not improving or worsening\n\n**Monitoring:**\n- Continuous telemetry\n- Repeat ECG frequently\n- Serial potassium levels',
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: 'Supportive',
+      label: 'Mild Arrhythmia',
+      description: '**Management:**\n- Hold digoxin\n- Supportive care\n- Check level, electrolytes\n- Replete K+ and Mg2+\n- Monitor closely\n\n**Disposition:**\n- Telemetry admission\n- Reassess dig indication',
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const DIG_DRUG_INTERACTIONS_CALCULATOR: CalculatorDefinition = {
+  id: 'dig-drug-interactions',
+  title: 'Digoxin Drug Interactions',
+  subtitle: 'Common Precipitants of Toxicity',
+  description: 'Quick reference for drugs that increase digoxin levels or potentiate toxicity.',
+  fields: [
+    { name: 'amiodarone', label: 'Amiodarone', type: 'toggle', points: 2, description: 'Increases dig level 70-100%' },
+    { name: 'verapamil', label: 'Verapamil/Diltiazem', type: 'toggle', points: 2, description: 'Increases dig level 50-75%' },
+    { name: 'quinidine', label: 'Quinidine', type: 'toggle', points: 2, description: 'Doubles dig level' },
+    { name: 'spironolactone', label: 'Spironolactone', type: 'toggle', points: 1, description: 'Increases dig level 25%' },
+    { name: 'clarithromycin', label: 'Clarithromycin/Erythromycin', type: 'toggle', points: 1 },
+    { name: 'diuretics', label: 'Loop/Thiazide diuretics', type: 'toggle', points: 1, description: 'Cause hypokalemia' },
+    { name: 'renal', label: 'Acute kidney injury', type: 'toggle', points: 2, description: 'Reduced clearance' },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Low Risk', risk: 'Minimal interaction', mortality: 'Routine monitoring', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Moderate Risk', risk: 'Significant interaction', mortality: 'Check level, consider dose reduction', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'High Risk', risk: 'Major interaction', mortality: 'Reduce dose 50%, frequent monitoring', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Multiple interactions are additive. Always check recent medication changes.',
+  citations: ['Fromm MF, et al. Inhibition of P-glycoprotein-mediated drug transport. Circulation. 1999;99(4):552-557.'],
+};
+
+// -------------------------------------------------------------------
+// Beta-Blocker Overdose Calculators
+// -------------------------------------------------------------------
+
+const BB_HIET_CALCULATOR: CalculatorDefinition = {
+  id: 'bb-hiet',
+  title: 'High-Dose Insulin (HIET)',
+  subtitle: 'Beta-Blocker/CCB Overdose',
+  description: 'High-dose insulin euglycemic therapy (HIET) dosing for beta-blocker and CCB overdose.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'current-dose', label: 'Current insulin rate (if running)', type: 'number', points: 0, unit: 'units/hr' },
+  ],
+  results: [],
+  thresholdNote: 'Start dextrose before or with insulin. Check glucose q15-30 min initially.',
+  citations: ['Engebretsen KM, et al. High-dose insulin therapy in beta-blocker and calcium channel-blocker poisoning. Clin Toxicol. 2011;49(4):277-283.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const current = values['current-dose'] || 0;
+
+    const bolusDose = weight; // 1 unit/kg
+    const startRate = weight; // 1 unit/kg/hr
+    const maxRate = weight * 10; // up to 10 units/kg/hr in severe cases
+    const dextroseRate = Math.round(weight * 0.5); // 0.5 g/kg/hr D10
+
+    return {
+      value: `${bolusDose} units`,
+      label: 'HIET Protocol',
+      description: `**Initial Bolus:** ${bolusDose} units IV (1 unit/kg)\n\n**Infusion:** Start ${startRate} units/hr (1 unit/kg/hr)\n- Titrate by 1-2 units/kg/hr every 10-15 min\n- Max: ${maxRate} units/hr (10 units/kg/hr) if refractory\n${current > 0 ? `\n**Current rate:** ${current} units/hr - consider increasing` : ''}\n\n**Dextrose:** D10 at ${dextroseRate} g/hr (~${Math.round(dextroseRate * 10)} mL/hr D10)\n- Check glucose q15-30 min initially\n- Target glucose 100-200 mg/dL\n- May need D20 or D25 via central line\n\n**Potassium:** Check q1h initially, replete aggressively\n\n**Duration:** Continue 24-48h, wean slowly`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const BB_GLUCAGON_CALCULATOR: CalculatorDefinition = {
+  id: 'bb-glucagon',
+  title: 'Glucagon Dosing',
+  subtitle: 'Beta-Blocker Overdose',
+  description: 'Glucagon dosing for beta-blocker overdose. Second-line to HIET in severe poisoning.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'severe', label: 'Severe toxicity (SBP <90, HR <50)', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Glucagon effect is transient. HIET is preferred for sustained effect.',
+  citations: ['Bailey B. Glucagon in beta-blocker and calcium channel blocker overdoses. Clin Toxicol. 2003;41(5):595-602.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const severe = values['severe'] || 0;
+
+    const bolusDose = severe ? Math.min(10, Math.round(weight * 0.15)) : Math.min(5, Math.round(weight * 0.05));
+    const infusionRate = bolusDose;
+
+    return {
+      value: `${bolusDose} mg IV`,
+      label: 'Glucagon Protocol',
+      description: `**Bolus:** ${bolusDose} mg IV over 1 minute\n- May repeat in 5-10 min if no response\n- Max single dose: 10 mg\n\n**Infusion:** ${infusionRate} mg/hr (equal to effective bolus dose/hr)\n\n**Preparation:**\n- Reconstitute each 1 mg vial with 1 mL diluent\n- Can dilute in NS for infusion\n- Large volumes needed - anticipate supply issues\n\n**Side Effects:**\n- Nausea/vomiting (common)\n- Hyperglycemia\n- Hypokalemia\n\n**Note:** Effect often transient (minutes). Start HIET for sustained inotropy.`,
+      colorVar: severe ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const BB_INTRALIPID_CALCULATOR: CalculatorDefinition = {
+  id: 'bb-intralipid',
+  title: 'Intralipid (ILE)',
+  subtitle: 'Lipid Emulsion Therapy',
+  description: 'Intravenous lipid emulsion for lipophilic drug toxicity (local anesthetics, beta-blockers, CCBs).',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'cardiac-arrest', label: 'Cardiac arrest', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Use 20% lipid emulsion. Most evidence for local anesthetic toxicity.',
+  citations: ['AACT/ACMT lipid emulsion therapy workgroup. Clin Toxicol. 2016;54(10):1028-1032.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const arrest = values['cardiac-arrest'] || 0;
+
+    const bolusVolume = Math.round(weight * 1.5); // 1.5 mL/kg
+    const infusionRate = Math.round(weight * 0.25 * 60); // 0.25 mL/kg/min in mL/hr
+    const maxDose = Math.round(weight * 12); // 12 mL/kg max
+
+    return {
+      value: `${bolusVolume} mL`,
+      label: 'Intralipid 20% Protocol',
+      description: `**Initial Bolus:** ${bolusVolume} mL IV over 1 min (1.5 mL/kg)\n- May repeat bolus 1-2 times for persistent instability\n\n**Infusion:** ${infusionRate} mL/hr (0.25 mL/kg/min)\n- Continue for at least 10 min after stability achieved\n- Can double rate to 0.5 mL/kg/min if refractory\n\n**Maximum Dose:** ${maxDose} mL (12 mL/kg) in first 30 min\n\n${arrest ? '**CARDIAC ARREST:**\n- Give bolus during CPR\n- Continue ACLS\n- Consider ECMO if refractory\n' : ''}**Monitoring:**\n- Lipemic serum may affect lab values\n- Watch for pancreatitis, ARDS (rare)\n\n**Note:** Continue other resuscitation measures. ILE is rescue, not replacement.`,
+      colorVar: arrest ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const BB_PRESSORS_CALCULATOR: CalculatorDefinition = {
+  id: 'bb-pressors',
+  title: 'Vasopressor Selection',
+  subtitle: 'Beta-Blocker Shock',
+  description: 'Vasopressor choice and dosing for beta-blocker induced shock.',
+  fields: [
+    { name: 'sbp', label: 'Systolic BP', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'hr', label: 'Heart Rate', type: 'number', points: 0, unit: 'bpm' },
+    { name: 'shock-type', label: 'Predominant Shock', type: 'select', points: 0, selectOptions: [
+      { label: 'Cardiogenic (low CO, adequate SVR)', points: 1 },
+      { label: 'Vasodilatory (low SVR, adequate CO)', points: 2 },
+      { label: 'Mixed/Unclear', points: 3 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'HIET provides sustained inotropy. Pressors bridge to HIET effect.',
+  citations: ['Levine M, et al. Critical Care Toxicology. 2017.'],
+  computeResult: (values) => {
+    const shockType = values['shock-type'] || 3;
+    const hr = values['hr'] || 60;
+
+    if (shockType === 1) {
+      // Cardiogenic
+      return {
+        value: 'Epinephrine',
+        label: 'Cardiogenic Shock Protocol',
+        description: `**First-Line: Epinephrine**\n- Start 0.05-0.1 mcg/kg/min\n- Titrate to SBP >90, MAP >65\n- Provides both inotropy and chronotropy\n\n**Alternative: Dobutamine**\n- 5-20 mcg/kg/min\n- Better if SVR adequate\n- May cause hypotension (beta-2 effect)\n\n${hr < 50 ? '**Bradycardia:** Consider isoproterenol 2-10 mcg/min or pacing\n' : ''}\n**Key Point:** Start HIET concurrently - pressors alone often fail in severe poisoning.`,
+        colorVar: '--color-danger',
+      };
+    } else if (shockType === 2) {
+      // Vasodilatory
+      return {
+        value: 'Norepinephrine',
+        label: 'Vasodilatory Shock Protocol',
+        description: '**First-Line: Norepinephrine**\n- Start 0.1 mcg/kg/min\n- Titrate to MAP >65\n- Primarily alpha, some beta\n\n**Add Vasopressin if refractory:**\n- 0.04 units/min fixed dose\n- Catecholamine-sparing\n\n**Note:** If cardiogenic component develops, add epinephrine or dobutamine.\n\n**Key Point:** Pure vasodilatory shock less common in BB OD - reassess if not responding.',
+        colorVar: '--color-warning',
+      };
+    }
+    // Mixed
+    return {
+      value: 'Epinephrine + Norepinephrine',
+      label: 'Mixed Shock Protocol',
+      description: '**Start Both:**\n\n**Epinephrine:** 0.05-0.1 mcg/kg/min\n- Titrate for inotropy/chronotropy\n\n**Norepinephrine:** 0.05-0.1 mcg/kg/min\n- Titrate for SVR\n\n**Add:** Vasopressin 0.04 units/min if refractory\n\n**Key Point:**\n- HIET is cornerstone therapy\n- High-dose pressors often required\n- Consider early ECMO if not responding',
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const BB_AGENT_GUIDE_CALCULATOR: CalculatorDefinition = {
+  id: 'bb-agent-guide',
+  title: 'Beta-Blocker Agent Guide',
+  subtitle: 'Drug-Specific Considerations',
+  description: 'Important pharmacologic differences between beta-blockers affecting toxicity management.',
+  fields: [
+    { name: 'agent', label: 'Beta-Blocker', type: 'select', points: 0, selectOptions: [
+      { label: 'Propranolol', points: 1 },
+      { label: 'Sotalol', points: 2 },
+      { label: 'Metoprolol/Atenolol', points: 3 },
+      { label: 'Carvedilol/Labetalol', points: 4 },
+      { label: 'Other/Unknown', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Propranolol and sotalol are most dangerous in overdose.',
+  citations: ['Love JN, et al. A comparison of combined amitriptyline/propranolol and amitriptyline/atenolol toxicity. J Toxicol Clin Toxicol. 2000;38(4):403-407.'],
+  computeResult: (values) => {
+    const agent = values['agent'] || 5;
+
+    if (agent === 1) {
+      return {
+        value: 'PROPRANOLOL',
+        label: 'High Risk - Membrane Stabilizing',
+        description: '**Propranolol Toxicity:**\n\n**Unique Dangers:**\n- Sodium channel blockade (like TCA)\n- QRS widening, seizures\n- Highly lipophilic - crosses BBB\n- Most lethal beta-blocker in OD\n\n**Treatment Additions:**\n- Sodium bicarbonate for QRS >100ms\n- Seizure precautions, benzos PRN\n- Intralipid may help (lipophilic)\n\n**Standard Treatment + NaHCO3 boluses**',
+        colorVar: '--color-danger',
+      };
+    }
+    if (agent === 2) {
+      return {
+        value: 'SOTALOL',
+        label: 'High Risk - QT Prolongation',
+        description: '**Sotalol Toxicity:**\n\n**Unique Dangers:**\n- Class III antiarrhythmic (blocks K+ channels)\n- QT prolongation, Torsades de Pointes\n- Renally cleared - prolonged in AKI\n\n**Treatment Additions:**\n- Magnesium 2-4g IV\n- Isoproterenol or pacing to overdrive\n- Avoid QT-prolonging drugs\n- Hemodialysis can remove (if refractory)\n\n**Standard Treatment + Mg + Watch for TdP**',
+        colorVar: '--color-danger',
+      };
+    }
+    if (agent === 4) {
+      return {
+        value: 'CARVEDILOL/LABETALOL',
+        label: 'Combined Alpha-Beta Blockade',
+        description: '**Alpha + Beta Blockade:**\n\n**Unique Dangers:**\n- Combined alpha + beta blockade\n- More vasodilation than pure BB\n- Carvedilol highly lipophilic\n\n**Treatment Considerations:**\n- May need more vasopressors (alpha blockade)\n- Glucagon may be less effective\n- Intralipid may help (carvedilol)\n\n**Standard Treatment + Higher Pressor Doses**',
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: 'STANDARD BB',
+      label: 'Typical Beta-Blocker',
+      description: '**Standard Treatment Protocol:**\n\n**1. Supportive Care**\n- IV access, monitoring, fluids\n\n**2. HIET** (First-line for severe)\n- 1 unit/kg bolus, 1 unit/kg/hr infusion\n- Check glucose, K+ frequently\n\n**3. Glucagon** (Bridge while starting HIET)\n- 3-10 mg IV bolus, may repeat\n- Infusion at effective bolus dose/hr\n\n**4. Vasopressors** (Per shock type)\n- Epi for cardiogenic, norepi for vasodilatory\n\n**5. Intralipid** (Consider for lipophilic agents)\n\n**6. Consider ECMO** if refractory',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// CCB Overdose Calculators
+// -------------------------------------------------------------------
+
+const CCB_SHOCK_TYPE_CALCULATOR: CalculatorDefinition = {
+  id: 'ccb-shock-type',
+  title: 'CCB Shock Phenotype',
+  subtitle: 'Vasodilatory vs Cardiogenic',
+  description: 'CCB toxicity can cause vasodilatory or cardiogenic shock. Pattern guides treatment.',
+  fields: [
+    { name: 'agent', label: 'CCB Type', type: 'select', points: 0, selectOptions: [
+      { label: 'Dihydropyridine (amlodipine, nifedipine)', points: 1 },
+      { label: 'Non-DHP (verapamil, diltiazem)', points: 2 },
+      { label: 'Unknown', points: 0 },
+    ]},
+    { name: 'hr', label: 'Heart Rate', type: 'number', points: 0, unit: 'bpm' },
+    { name: 'sbp', label: 'Systolic BP', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'skin', label: 'Warm, flushed skin', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'DHP = vasodilatory; Non-DHP = cardiogenic + vasodilatory',
+  citations: ['St-Onge M, et al. Treatment for calcium channel blocker poisoning: systematic review. Clin Toxicol. 2014;52(9):926-944.'],
+  computeResult: (values) => {
+    const agent = values['agent'] || 0;
+    const hr = values['hr'] || 80;
+
+    if (agent === 1) {
+      return {
+        value: 'VASODILATORY',
+        label: 'Dihydropyridine Pattern',
+        description: '**DHP CCBs (Amlodipine, Nifedipine):**\n\n**Expected Pattern:**\n- Vasodilation (warm, flushed)\n- Reflex tachycardia (usually)\n- Less cardiac depression\n\n**Treatment Focus:**\n- Norepinephrine first-line\n- Vasopressin adjunct\n- HIET still beneficial\n- Calcium may help\n\n**Pearl:** DHPs are vascular-selective at therapeutic doses but lose selectivity in OD.',
+        colorVar: '--color-warning',
+      };
+    }
+    if (agent === 2 || hr < 60) {
+      return {
+        value: 'CARDIOGENIC',
+        label: 'Non-DHP / Mixed Pattern',
+        description: '**Non-DHP CCBs (Verapamil, Diltiazem):**\n\n**Expected Pattern:**\n- Bradycardia (often severe)\n- Conduction block (AV nodal depression)\n- Negative inotropy\n- Vasodilation also present\n\n**Treatment Focus:**\n- HIET is cornerstone therapy\n- Epinephrine for inotropy + chronotropy\n- Calcium chloride 1-3g IV\n- Atropine (usually ineffective)\n- Pacing if refractory bradycardia\n\n**Pearl:** Verapamil more cardiodepressant than diltiazem.',
+        colorVar: '--color-danger',
+      };
+    }
+    return {
+      value: 'ASSESS',
+      label: 'Shock Pattern Unclear',
+      description: '**Assessment:**\n- POCUS for cardiac function\n- Arterial line for waveform\n- PA catheter in severe cases\n\n**Treatment:** Start empiric treatment while assessing:\n- HIET (benefits both patterns)\n- Calcium boluses\n- Vasopressors based on presentation\n\n**DHP:** More vasodilation, reflex tachy\n**Non-DHP:** More cardiodepression, bradycardia',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const CCB_HIET_CALCULATOR: CalculatorDefinition = {
+  id: 'ccb-hiet',
+  title: 'High-Dose Insulin (HIET)',
+  subtitle: 'CCB Overdose Protocol',
+  description: 'HIET is cornerstone therapy for severe CCB toxicity. Same dosing as for BB.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Start early in severe toxicity. Do not wait for hypotension to worsen.',
+  citations: ['Levine M, et al. High-dose insulin for CCB poisoning. Toxicol Rev. 2007;26(3):167-177.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const bolus = weight;
+    const rate = weight;
+    const maxRate = weight * 10;
+    const dex = Math.round(weight * 0.5);
+
+    return {
+      value: `${bolus} units`,
+      label: 'HIET for CCB Toxicity',
+      description: `**Bolus:** ${bolus} units IV (1 unit/kg)\n\n**Infusion:** Start ${rate} units/hr (1 unit/kg/hr)\n- Titrate up aggressively (q10-15 min)\n- Max ${maxRate} units/hr (10 units/kg/hr)\n\n**Dextrose:** D10 at ~${dex} g/hr\n- May need D25-D50 via central line\n- Check glucose q15-30 min initially\n- Target 100-200 mg/dL\n\n**Potassium:** Check q1h, replete to 4.0+\n\n**Mechanism:** Switches myocardium from FFA to glucose metabolism, improves contractility independent of calcium channels.\n\n**Duration:** 24-48h, wean 50%/day`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const CCB_CALCIUM_CALCULATOR: CalculatorDefinition = {
+  id: 'ccb-calcium',
+  title: 'Calcium Dosing',
+  subtitle: 'CCB Toxicity',
+  description: 'Calcium partially overcomes CCB receptor blockade. Use calcium chloride via central line when possible.',
+  fields: [
+    { name: 'access', label: 'IV Access', type: 'select', points: 0, selectOptions: [
+      { label: 'Central line available', points: 1 },
+      { label: 'Peripheral only', points: 2 },
+    ]},
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Calcium chloride: 3x more elemental calcium than gluconate.',
+  citations: ['Graudins A, et al. Calcium channel blocker and beta-blocker overdose: antidotes and adjunct therapies. Br J Clin Pharmacol. 2016;81(3):453-461.'],
+  computeResult: (values) => {
+    const access = values['access'] || 2;
+
+    if (access === 1) {
+      return {
+        value: 'CaCl2',
+        label: 'Calcium Chloride Protocol',
+        description: '**Calcium Chloride 10% (central line):**\n\n**Bolus:** 1-2g (10-20 mL) slow IV push\n- Can repeat every 10-20 min\n- Typical max: 3-4 boluses\n\n**Infusion:** 0.2-0.4 mL/kg/hr (20-40 mg/kg/hr)\n- Titrate to response\n- Monitor ionized calcium\n\n**Target:** iCa 2x normal (~2.0-2.5 mmol/L)\n\n**Monitoring:**\n- Ionized calcium q2-4h\n- Watch for hypercalcemia symptoms\n- Tissue necrosis if extravasates\n\n**Pearl:** 1g CaCl2 = 3g Ca gluconate',
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: 'Ca Gluconate',
+      label: 'Calcium Gluconate Protocol',
+      description: '**Calcium Gluconate 10% (peripheral OK):**\n\n**Bolus:** 3-6g (30-60 mL) slow IV\n- Can repeat every 10-20 min\n- Safer for peripheral lines\n\n**Infusion:** 0.6-1.2 mL/kg/hr\n- Titrate to response\n- Monitor ionized calcium\n\n**Conversion:** 1g CaCl2 ≈ 3g Ca gluconate\n\n**Pearl:** Gluconate safer peripherally but requires 3x volume for same calcium delivery. Switch to chloride via central line when available.',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const CCB_PRESSORS_CALCULATOR: CalculatorDefinition = {
+  id: 'ccb-pressors',
+  title: 'CCB Vasopressor Guide',
+  subtitle: 'Pressor Selection & Dosing',
+  description: 'Vasopressor selection for CCB overdose based on shock phenotype.',
+  fields: [
+    { name: 'pattern', label: 'Shock Pattern', type: 'select', points: 0, selectOptions: [
+      { label: 'Cardiogenic (low CO)', points: 1 },
+      { label: 'Vasodilatory (low SVR)', points: 2 },
+      { label: 'Mixed', points: 3 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'High doses often required. HIET + calcium are primary therapies.',
+  citations: ['St-Onge M, et al. Expert consensus on CCB poisoning. Crit Care Med. 2017;45(3):e306-e315.'],
+  computeResult: (values) => {
+    const pattern = values['pattern'] || 3;
+
+    if (pattern === 1) {
+      return {
+        value: 'Epinephrine',
+        label: 'Cardiogenic - Epinephrine First',
+        description: '**Epinephrine:**\n- Start 0.05-0.1 mcg/kg/min\n- Titrate to effect (may need high doses)\n- Provides inotropy + chronotropy\n\n**Alternative:** Dobutamine 5-20 mcg/kg/min\n- Pure inotrope\n- May cause hypotension (beta-2)\n\n**Add norepinephrine if:**\n- Vasodilatory component\n- Hypotension persists despite adequate CO',
+        colorVar: '--color-danger',
+      };
+    }
+    if (pattern === 2) {
+      return {
+        value: 'Norepinephrine',
+        label: 'Vasodilatory - Norepinephrine First',
+        description: '**Norepinephrine:**\n- Start 0.1-0.2 mcg/kg/min\n- Titrate to MAP >65\n\n**Add Vasopressin:**\n- 0.04 units/min fixed dose\n- Catecholamine-sparing\n\n**Add Phenylephrine if:**\n- Pure alpha needed\n- Refractory vasodilation\n- 100-200 mcg/min',
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: 'Combination',
+      label: 'Mixed - Multi-Agent Approach',
+      description: '**Start Both:**\n\n**Norepinephrine:** 0.1 mcg/kg/min\n- Titrate for SVR\n\n**Epinephrine:** 0.05 mcg/kg/min\n- Titrate for inotropy\n\n**Add Vasopressin:** 0.04 units/min\n\n**Refractory?**\n- Methylene blue 1-2 mg/kg (vasoplegia)\n- ECMO consult\n\n**Remember:** Pressors bridge to HIET. Keep escalating HIET.',
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const CCB_INTRALIPID_CALCULATOR: CalculatorDefinition = {
+  id: 'ccb-intralipid',
+  title: 'Intralipid for CCB',
+  subtitle: 'Lipid Emulsion Rescue',
+  description: 'ILE may benefit lipophilic CCBs (verapamil) in refractory cases. Same protocol as local anesthetic toxicity.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'agent', label: 'CCB Agent', type: 'select', points: 0, selectOptions: [
+      { label: 'Verapamil (lipophilic)', points: 2 },
+      { label: 'Diltiazem (moderate)', points: 1 },
+      { label: 'DHP / Amlodipine (high lipophilicity)', points: 2 },
+      { label: 'Unknown', points: 1 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Consider for refractory cases, especially lipophilic agents.',
+  citations: ['Cave G, Harvey M. Lipid emulsion may augment early blood pressure recovery in CCB poisoning. J Med Toxicol. 2009;5(3):120-125.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const bolus = Math.round(weight * 1.5);
+    const infusion = Math.round(weight * 0.25 * 60);
+    const max = Math.round(weight * 12);
+
+    return {
+      value: `${bolus} mL`,
+      label: 'Intralipid 20% Protocol',
+      description: `**Bolus:** ${bolus} mL IV over 1 min (1.5 mL/kg)\n- May repeat 1-2x if persistent instability\n\n**Infusion:** ${infusion} mL/hr (0.25 mL/kg/min)\n- Continue 10+ min after stabilization\n\n**Max:** ${max} mL in first 30 min\n\n**When to Use:**\n- After HIET, calcium, pressors initiated\n- Refractory shock\n- Especially verapamil or amlodipine\n\n**Caution:**\n- May interfere with labs\n- Pancreatitis risk (rare)`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Iron Overdose Calculators
+// -------------------------------------------------------------------
+
+const IRON_CALC_CALCULATOR: CalculatorDefinition = {
+  id: 'iron-calc',
+  title: 'Elemental Iron Calculator',
+  subtitle: 'Convert to Elemental Iron',
+  description: 'Different iron salts contain different amounts of elemental iron. Calculate total elemental iron ingested.',
+  fields: [
+    { name: 'salt', label: 'Iron Salt', type: 'select', points: 0, selectOptions: [
+      { label: 'Ferrous sulfate (20% elemental)', points: 20 },
+      { label: 'Ferrous gluconate (12% elemental)', points: 12 },
+      { label: 'Ferrous fumarate (33% elemental)', points: 33 },
+      { label: 'Carbonyl iron (100% elemental)', points: 100 },
+    ]},
+    { name: 'amount', label: 'Amount Ingested', type: 'number', points: 0, unit: 'mg' },
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: '>20 mg/kg = GI symptoms; >60 mg/kg = systemic toxicity risk',
+  citations: ['Manoguerra AS, et al. Iron ingestion: AAPCC expert consensus guideline. Clin Toxicol. 2005;43(6):553-570.'],
+  computeResult: (values) => {
+    const saltPct = values['salt'] || 20;
+    const amount = values['amount'] || 0;
+    const weight = values['weight'] || 1;
+
+    const elementalMg = Math.round(amount * saltPct / 100);
+    const mgPerKg = Math.round(elementalMg / weight * 10) / 10;
+
+    let risk = 'Low';
+    let color = '--color-primary';
+    let action = 'Observation at home may be appropriate';
+
+    if (mgPerKg >= 60) {
+      risk = 'Severe';
+      color = '--color-danger';
+      action = 'ED evaluation, likely deferoxamine';
+    } else if (mgPerKg >= 40) {
+      risk = 'Moderate-Severe';
+      color = '--color-danger';
+      action = 'ED evaluation, consider deferoxamine';
+    } else if (mgPerKg >= 20) {
+      risk = 'Mild-Moderate';
+      color = '--color-warning';
+      action = 'ED evaluation recommended';
+    }
+
+    return {
+      value: `${mgPerKg} mg/kg`,
+      label: `Elemental Iron: ${elementalMg} mg total`,
+      description: `**Risk Level:** ${risk}\n\n**Calculation:**\n${amount} mg × ${saltPct}% = ${elementalMg} mg elemental iron\n${elementalMg} mg ÷ ${weight} kg = ${mgPerKg} mg/kg\n\n**Toxicity Thresholds:**\n- <20 mg/kg: Usually non-toxic\n- 20-40 mg/kg: GI symptoms likely\n- 40-60 mg/kg: Moderate toxicity\n- >60 mg/kg: Severe, systemic toxicity\n\n**Recommendation:** ${action}`,
+      colorVar: color,
+    };
+  },
+};
+
+const IRON_LEVEL_CALCULATOR: CalculatorDefinition = {
+  id: 'iron-level',
+  title: 'Serum Iron Interpretation',
+  subtitle: 'Peak Level Guide',
+  description: 'Serum iron levels guide management. Draw 4-6 hours post-ingestion for peak.',
+  fields: [
+    { name: 'level', label: 'Serum Iron', type: 'number', points: 0, unit: 'mcg/dL' },
+    { name: 'tibc', label: 'TIBC (if available)', type: 'number', points: 0, unit: 'mcg/dL' },
+    { name: 'timing', label: 'Hours Post-Ingestion', type: 'number', points: 0, unit: 'hours' },
+  ],
+  results: [],
+  thresholdNote: 'Peak iron at 4-6h. Level >500 mcg/dL = severe toxicity.',
+  citations: ['Tenenbein M. Unit-dose packaging of iron supplements and reduction of iron poisoning. Arch Pediatr Adolesc Med. 2005;159(6):557-560.'],
+  computeResult: (values) => {
+    const level = values['level'] || 0;
+    const timing = values['timing'] || 4;
+
+    let severity = 'Normal';
+    let color = '--color-primary';
+    let rec = 'No chelation needed';
+
+    if (level > 1000) {
+      severity = 'Severe';
+      color = '--color-danger';
+      rec = 'Deferoxamine indicated. ICU admission.';
+    } else if (level > 500) {
+      severity = 'Moderate-Severe';
+      color = '--color-danger';
+      rec = 'Strong indication for deferoxamine';
+    } else if (level > 350) {
+      severity = 'Moderate';
+      color = '--color-warning';
+      rec = 'Consider deferoxamine if symptomatic';
+    } else if (level > 150) {
+      severity = 'Mild';
+      color = '--color-warning';
+      rec = 'Monitor, supportive care';
+    }
+
+    return {
+      value: `${level} mcg/dL`,
+      label: `${severity} Toxicity`,
+      description: `**Interpretation:**\n- Normal: 50-150 mcg/dL\n- Mild toxicity: 150-350 mcg/dL\n- Moderate: 350-500 mcg/dL\n- Severe: >500 mcg/dL\n\n${timing < 4 ? '**⚠️ Level drawn early** - may not reflect peak. Repeat at 4-6h post-ingestion.\n' : ''}\n**Recommendation:** ${rec}\n\n**Note:** TIBC is NOT useful for predicting toxicity. Don\'t wait for iron > TIBC to treat.`,
+      colorVar: color,
+    };
+  },
+};
+
+const IRON_DFO_CALCULATOR: CalculatorDefinition = {
+  id: 'iron-dfo',
+  title: 'Deferoxamine Dosing',
+  subtitle: 'Iron Chelation Protocol',
+  description: 'Deferoxamine chelates free iron. Indicated for severe iron toxicity.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'severity', label: 'Severity', type: 'select', points: 0, selectOptions: [
+      { label: 'Moderate (symptomatic, iron 350-500)', points: 1 },
+      { label: 'Severe (iron >500, shock, AMS)', points: 2 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Max 6g/24h in adults. Vin rosé urine confirms iron binding.',
+  citations: ['Howland MA. Deferoxamine. In: Nelson LS, et al. Goldfrank\'s Toxicologic Emergencies. 11th ed.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const severity = values['severity'] || 1;
+
+    const rate = 15; // mg/kg/hr
+    const hourlyDose = Math.round(weight * rate);
+
+    return {
+      value: `${hourlyDose} mg/hr`,
+      label: 'Deferoxamine Protocol',
+      description: `**Infusion Rate:** ${hourlyDose} mg/hr (15 mg/kg/hr)\n- Start at 5 mg/kg/hr, increase as tolerated\n- Max rate: 15 mg/kg/hr\n- Max daily dose: 6g/24h\n\n**Administration:**\n- IV infusion only (not IM for acute)\n- Dilute in NS or D5W\n- Slow initial rate, watch for hypotension\n\n**Duration:**\n- Continue until:\n  - Vin rosé urine clears\n  - Iron level <150 mcg/dL\n  - Clinically improved\n  - Usually 24-48h\n\n**Monitoring:**\n- BP (hypotension common if too fast)\n- Urine color (vin rosé = working)\n- Pulmonary status if >24h (ARDS risk)\n\n${severity === 2 ? '**Severe toxicity:** Consider continuous infusion, ICU admission' : ''}`,
+      colorVar: severity === 2 ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const IRON_WBI_CALCULATOR: CalculatorDefinition = {
+  id: 'iron-wbi',
+  title: 'Whole Bowel Irrigation',
+  subtitle: 'GI Decontamination for Iron',
+  description: 'WBI with PEG solution for significant iron ingestion. Iron is not adsorbed by activated charcoal.',
+  fields: [
+    { name: 'age', label: 'Patient Age', type: 'select', points: 0, selectOptions: [
+      { label: 'Child (1-5 years)', points: 1 },
+      { label: 'Child (6-12 years)', points: 2 },
+      { label: 'Adolescent/Adult', points: 3 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'WBI indicated for significant ingestion with tablets visible on XR.',
+  citations: ['Position paper: Whole bowel irrigation. J Toxicol Clin Toxicol. 2004;42(6):843-854.'],
+  computeResult: (values) => {
+    const age = values['age'] || 3;
+
+    let rate = '1.5-2 L/hr';
+    if (age === 1) rate = '500 mL/hr';
+    else if (age === 2) rate = '1 L/hr';
+
+    return {
+      value: rate,
+      label: 'WBI Protocol',
+      description: `**Rate:** ${rate} via NG tube\n\n**Solution:** GoLYTELY, CoLyte, or NuLYTELY\n\n**Endpoint:** Clear rectal effluent AND tablets cleared on repeat XR\n\n**Contraindications:**\n- Ileus or obstruction\n- GI hemorrhage\n- Unprotected airway\n- Hemodynamic instability\n\n**Tips:**\n- Elevate HOB 45°\n- Ondansetron for nausea\n- May take 4-6+ hours\n- Confirm iron tablets on initial XR\n\n**Note:** Activated charcoal does NOT bind iron.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const IRON_STAGES_CALCULATOR: CalculatorDefinition = {
+  id: 'iron-stages',
+  title: 'Iron Toxicity Stages',
+  subtitle: 'Clinical Progression',
+  description: 'Classic 5-stage progression of iron poisoning. Guides assessment and prognosis.',
+  fields: [
+    { name: 'timing', label: 'Hours Since Ingestion', type: 'number', points: 0, unit: 'hours' },
+    { name: 'symptoms', label: 'Current Symptoms', type: 'select', points: 0, selectOptions: [
+      { label: 'GI (N/V, diarrhea, abdominal pain)', points: 1 },
+      { label: 'Apparent improvement / latent', points: 2 },
+      { label: 'Shock, metabolic acidosis, AMS', points: 3 },
+      { label: 'Hepatotoxicity (RUQ pain, coagulopathy)', points: 4 },
+      { label: 'GI scarring / obstruction (late)', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Quiescent phase can be misleading. Anticipate stage 3 in serious ingestions.',
+  citations: ['Anderson BD, et al. Iron poisoning. In: Critical Care Toxicology. 2017.'],
+  computeResult: (values) => {
+    const timing = values['timing'] || 0;
+    const symptoms = values['symptoms'] || 1;
+
+    let stage = '1';
+    let desc = '';
+
+    if (symptoms === 5 || timing > 72) {
+      stage = '5';
+      desc = '**Stage 5: GI Scarring (2-8 weeks)**\n- Gastric outlet obstruction\n- Small bowel strictures\n- May require surgical intervention\n- Result of direct mucosal injury';
+    } else if (symptoms === 4 || timing > 48) {
+      stage = '4';
+      desc = '**Stage 4: Hepatotoxicity (2-3 days)**\n- Hepatic necrosis\n- Coagulopathy\n- Hypoglycemia\n- Elevated LFTs\n- May progress to hepatic failure';
+    } else if (symptoms === 3 || (timing > 12 && timing <= 48)) {
+      stage = '3';
+      desc = '**Stage 3: Shock (12-48h)**\n- Cardiovascular collapse\n- Severe metabolic acidosis\n- Coagulopathy\n- Renal failure\n- ARDS\n- This is when deaths occur';
+    } else if (symptoms === 2 || (timing > 6 && timing <= 12)) {
+      stage = '2';
+      desc = '**Stage 2: Quiescent (6-24h)**\n- GI symptoms resolve\n- Appears to improve\n- ⚠️ MISLEADING - free iron redistributing\n- Check iron level, lactate\n- Do NOT discharge during this phase';
+    } else {
+      stage = '1';
+      desc = '**Stage 1: GI (0-6h)**\n- Nausea, vomiting\n- Abdominal pain\n- Diarrhea (may be bloody)\n- Direct corrosive effect\n- Severity predicts systemic toxicity';
+    }
+
+    return {
+      value: `Stage ${stage}`,
+      label: 'Iron Toxicity Stage',
+      description: desc + '\n\n**Management by Stage:**\n- Stage 1-2: GI decon, monitor, check level\n- Stage 3-4: Aggressive DFO, ICU, supportive\n- Stage 5: Surgical consultation',
+      colorVar: parseInt(stage) >= 3 ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// CO Toxicity Calculators
+// -------------------------------------------------------------------
+
+const CO_LEVEL_CALCULATOR: CalculatorDefinition = {
+  id: 'co-level',
+  title: 'COHb Interpretation',
+  subtitle: 'Carboxyhemoglobin Level Guide',
+  description: 'Interpret carboxyhemoglobin levels in context. Symptoms don\'t always correlate with level.',
+  fields: [
+    { name: 'cohb', label: 'COHb Level', type: 'number', points: 0, unit: '%' },
+    { name: 'smoker', label: 'Active smoker', type: 'toggle', points: 0 },
+    { name: 'symptoms', label: 'Severe symptoms (AMS, syncope, chest pain)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Level does NOT predict outcome. Treat based on symptoms + exposure.',
+  citations: ['Hampson NB. U.S. mortality from carbon monoxide poisoning. Ann Emerg Med. 2016;68(1):37-43.'],
+  computeResult: (values) => {
+    const cohb = values['cohb'] || 0;
+    const smoker = values['smoker'] || 0;
+    const symptoms = values['symptoms'] || 0;
+
+    let severity = 'Normal';
+    let color = '--color-primary';
+    let expected = '< 3%';
+
+    if (smoker) expected = '3-10% (smoker baseline)';
+
+    if (cohb > 25 || symptoms) {
+      severity = 'Severe';
+      color = '--color-danger';
+    } else if (cohb > 15) {
+      severity = 'Moderate';
+      color = '--color-warning';
+    } else if (cohb > 10) {
+      severity = 'Mild';
+      color = '--color-warning';
+    } else if (cohb > 3 && !smoker) {
+      severity = 'Elevated';
+      color = '--color-warning';
+    }
+
+    return {
+      value: `${cohb}%`,
+      label: `${severity} COHb`,
+      description: `**Normal Range:** ${expected}\n\n**COHb Correlation:**\n- <10%: Often asymptomatic\n- 10-20%: Headache, nausea\n- 20-30%: Confusion, dizziness\n- 30-40%: Syncope, tachycardia\n- 40-60%: Coma, seizures\n- >60%: Death\n\n**⚠️ Important:**\n- Level may be low if O2 given pre-hospital\n- Symptoms don't always correlate\n- Delayed neuro sequelae possible even with "mild" levels\n- Check lactate (co-ingestion with cyanide)`,
+      colorVar: color,
+    };
+  },
+};
+
+const CO_HBO_CALCULATOR: CalculatorDefinition = {
+  id: 'co-hbo',
+  title: 'HBO Criteria',
+  subtitle: 'Hyperbaric Oxygen Indications',
+  description: 'Indications for hyperbaric oxygen therapy in CO poisoning. Evidence is debated but HBO may reduce delayed neurologic sequelae.',
+  fields: [
+    { name: 'loc', label: 'Loss of consciousness', type: 'toggle', points: 3 },
+    { name: 'neuro', label: 'Neurologic symptoms (confusion, ataxia)', type: 'toggle', points: 2 },
+    { name: 'cardiac', label: 'Cardiac ischemia/arrhythmia', type: 'toggle', points: 3 },
+    { name: 'cohb25', label: 'COHb > 25%', type: 'toggle', points: 2 },
+    { name: 'pregnant', label: 'Pregnant', type: 'toggle', points: 3 },
+    { name: 'metabolic', label: 'Severe metabolic acidosis', type: 'toggle', points: 2 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'NBO2', risk: 'HBO not indicated', mortality: '100% O2 via NRB', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Consider HBO', risk: 'May benefit', mortality: 'Discuss with HBO center', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'HBO Indicated', risk: 'Strong indication', mortality: 'Contact HBO center', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Contact HBO center early. Transport time matters.',
+  citations: ['Weaver LK, et al. Hyperbaric oxygen for acute CO poisoning. N Engl J Med. 2002;347(14):1057-1067.'],
+};
+
+const CO_HALF_LIFE_CALCULATOR: CalculatorDefinition = {
+  id: 'co-half-life',
+  title: 'COHb Half-Life',
+  subtitle: 'Elimination by Oxygen Type',
+  description: 'CO elimination depends on oxygen concentration. Higher FiO2 = faster clearance.',
+  fields: [
+    { name: 'o2type', label: 'Oxygen Therapy', type: 'select', points: 0, selectOptions: [
+      { label: 'Room air (21%)', points: 1 },
+      { label: 'NRB mask (100% at 1 ATA)', points: 2 },
+      { label: 'HBO (100% at 2.5-3 ATA)', points: 3 },
+    ]},
+    { name: 'cohb', label: 'Current COHb', type: 'number', points: 0, unit: '%' },
+  ],
+  results: [],
+  thresholdNote: 'HBO shortens half-life to 20-30 min. NRB is standard treatment.',
+  citations: ['Weaver LK. Carbon monoxide poisoning. N Engl J Med. 2009;360(12):1217-1225.'],
+  computeResult: (values) => {
+    const o2type = values['o2type'] || 2;
+    const cohb = values['cohb'] || 20;
+
+    let halfLife = 320; // room air
+    let o2desc = 'Room Air';
+
+    if (o2type === 2) {
+      halfLife = 74;
+      o2desc = '100% O2 NRB';
+    } else if (o2type === 3) {
+      halfLife = 23;
+      o2desc = 'HBO (2.5-3 ATA)';
+    }
+
+    // Estimate time to reach <5%
+    const timeTo5 = Math.round(Math.log(cohb / 5) / Math.log(2) * halfLife);
+
+    return {
+      value: `${halfLife} min`,
+      label: `Half-Life on ${o2desc}`,
+      description: `**COHb Half-Life by O2 Delivery:**\n- Room air: ~320 min (5-6 hours)\n- 100% NRB: ~74 min (~1.25 hours)\n- HBO: ~23 min\n\n**Estimated Time to COHb <5%:**\nFrom ${cohb}% → ${timeTo5} minutes (~${Math.round(timeTo5/60)} hours)\n\n**Treatment:**\n- Start 100% O2 immediately\n- Continue until symptoms resolve AND COHb <5%\n- Minimum 6 hours O2 even if asymptomatic\n- HBO if indicated (see criteria)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const CO_PREGNANCY_CALCULATOR: CalculatorDefinition = {
+  id: 'co-pregnancy',
+  title: 'CO in Pregnancy',
+  subtitle: 'Fetal Considerations',
+  description: 'Fetal hemoglobin has higher CO affinity. Maternal COHb underestimates fetal exposure.',
+  fields: [
+    { name: 'maternal-cohb', label: 'Maternal COHb', type: 'number', points: 0, unit: '%' },
+    { name: 'ga', label: 'Gestational Age', type: 'number', points: 0, unit: 'weeks' },
+    { name: 'symptoms', label: 'Maternal symptoms present', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Lower threshold for HBO in pregnancy. Fetal COHb peaks later.',
+  citations: ['Elkharrat D, et al. Acute CO intoxication and hyperbaric oxygen in pregnancy. Intensive Care Med. 1991;17(5):289-292.'],
+  computeResult: (values) => {
+    const cohb = values['maternal-cohb'] || 0;
+    const symptoms = values['symptoms'] || 0;
+
+    return {
+      value: 'LOWER THRESHOLD',
+      label: 'Pregnancy CO Exposure',
+      description: `**Maternal COHb:** ${cohb}%\n\n**Key Points:**\n- Fetal Hb has HIGHER CO affinity\n- Fetal COHb may be 10-15% higher than maternal\n- Fetal COHb peaks 4-6h AFTER maternal peak\n- Fetal elimination slower (longer half-life)\n\n**Treatment:**\n- Prolonged high-flow O2 (minimum 5× maternal treatment time)\n- Lower threshold for HBO consideration\n- OB consultation\n- Fetal monitoring\n\n**HBO in Pregnancy:**\n- Generally considered safe\n- Strong indication if any maternal symptoms\n- May prevent fetal demise, preterm labor\n\n${cohb > 15 || symptoms ? '**⚠️ HBO STRONGLY RECOMMENDED** given pregnancy' : '**Continue 100% O2**, consider HBO consultation'}`,
+      colorVar: cohb > 15 || symptoms ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const CO_CYANIDE_CALCULATOR: CalculatorDefinition = {
+  id: 'co-cyanide',
+  title: 'CO + Cyanide',
+  subtitle: 'Smoke Inhalation Coexposure',
+  description: 'Structure fires produce both CO and cyanide. Combined toxicity is synergistic.',
+  fields: [
+    { name: 'fire', label: 'Enclosed space fire', type: 'toggle', points: 2 },
+    { name: 'soot', label: 'Soot in airway/nares', type: 'toggle', points: 2 },
+    { name: 'lactate', label: 'Lactate > 10 mmol/L', type: 'toggle', points: 3 },
+    { name: 'refractory', label: 'Refractory hypotension', type: 'toggle', points: 2 },
+    { name: 'ams', label: 'Coma / profound AMS', type: 'toggle', points: 2 },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Low Suspicion', risk: 'CO likely predominant', mortality: 'Standard CO treatment', colorVar: '--color-primary' },
+    { min: 3, max: 6, label: 'Moderate Suspicion', risk: 'Consider cyanide coexposure', mortality: 'Empiric hydroxocobalamin if severe', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'High Suspicion', risk: 'Likely cyanide toxicity', mortality: 'Give hydroxocobalamin', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Lactate > 10 with smoke inhalation = empiric hydroxocobalamin.',
+  citations: ['Baud FJ, et al. Elevated blood cyanide concentrations in victims of smoke inhalation. N Engl J Med. 1991;325(25):1761-1766.'],
+};
+
+// -------------------------------------------------------------------
+// Guillain-Barré Syndrome Calculators
+// -------------------------------------------------------------------
+
+const GBS_FVC_NIF_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-fvc-nif',
+  title: 'FVC/NIF Monitoring',
+  subtitle: 'Respiratory Failure Prediction',
+  description: 'Serial FVC and NIF measurements predict need for intubation in GBS. Use the 20/30/40 rule.',
+  fields: [
+    { name: 'fvc', label: 'FVC', type: 'number', points: 0, unit: 'mL/kg' },
+    { name: 'nif', label: 'NIF (MIP)', type: 'number', points: 0, unit: 'cmH2O', description: 'Negative inspiratory force (enter as positive number)' },
+    { name: 'decline', label: 'FVC decline >30% from baseline', type: 'toggle', points: 2 },
+  ],
+  results: [],
+  thresholdNote: '20/30/40 Rule: FVC <20, NIF <30, or decline >40% = intubate',
+  citations: ['Lawn ND, et al. Anticipating mechanical ventilation in Guillain-Barré syndrome. Arch Neurol. 2001;58(6):893-898.'],
+  computeResult: (values) => {
+    const fvc = values['fvc'] || 60;
+    const nif = Math.abs(values['nif'] || 60);
+    const decline = values['decline'] || 0;
+
+    let risk = 'Low';
+    let color = '--color-primary';
+    let action = 'Continue q4h monitoring';
+
+    if (fvc < 20 || nif < 30 || decline) {
+      risk = 'HIGH - Intubate';
+      color = '--color-danger';
+      action = 'Intubation indicated. Do not wait for hypoxia.';
+    } else if (fvc < 25 || nif < 40) {
+      risk = 'Moderate';
+      color = '--color-warning';
+      action = 'ICU admission, q2-4h monitoring, prepare for intubation';
+    } else if (fvc < 30 || nif < 50) {
+      risk = 'Borderline';
+      color = '--color-warning';
+      action = 'Close monitoring q4h, trend is key';
+    }
+
+    return {
+      value: risk,
+      label: 'Respiratory Status',
+      description: `**FVC:** ${fvc} mL/kg\n**NIF:** -${nif} cmH2O\n\n**20/30/40 Rule (any triggers intubation):**\n- FVC < 20 mL/kg ✓\n- NIF < -30 cmH2O ✓\n- FVC decline > 30% from baseline ✓\n\n**Recommendation:** ${action}\n\n**Tips:**\n- Trend more important than single value\n- Do NOT use ABG to decide - by the time it's abnormal, too late\n- Intubate electively before crisis\n- Autonomic instability also predicts need`,
+      colorVar: color,
+    };
+  },
+};
+
+const GBS_EGRIS_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-egris',
+  title: 'EGRIS Score',
+  subtitle: 'Erasmus GBS Respiratory Insufficiency Score',
+  description: 'Predicts probability of mechanical ventilation in first week of GBS admission.',
+  fields: [
+    { name: 'days', label: 'Days from weakness onset to admission', type: 'select', points: 0, selectOptions: [
+      { label: '> 7 days', points: 0 },
+      { label: '4-7 days', points: 1 },
+      { label: '≤ 3 days', points: 2 },
+    ]},
+    { name: 'facial', label: 'Facial and/or bulbar weakness', type: 'select', points: 0, selectOptions: [
+      { label: 'Absent', points: 0 },
+      { label: 'Present', points: 1 },
+    ]},
+    { name: 'mrc', label: 'MRC sum score', type: 'select', points: 0, description: 'Sum of 6 muscle groups bilateral (0-60)', selectOptions: [
+      { label: '51-60 (mild)', points: 0 },
+      { label: '41-50', points: 1 },
+      { label: '31-40', points: 2 },
+      { label: '21-30', points: 3 },
+      { label: '≤ 20 (severe)', points: 4 },
+    ]},
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Low Risk', risk: '4% MV probability', mortality: 'Floor bed acceptable', colorVar: '--color-primary' },
+    { min: 3, max: 5, label: 'Intermediate', risk: '24% MV probability', mortality: 'ICU monitoring', colorVar: '--color-warning' },
+    { min: 5, max: Infinity, label: 'High Risk', risk: '65% MV probability', mortality: 'ICU, prepare for intubation', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score 0-7. Higher = higher MV risk. Use with clinical judgment.',
+  citations: ['Walgaard C, et al. Prediction of respiratory insufficiency in Guillain-Barré syndrome. Ann Neurol. 2010;67(6):781-787.'],
+};
+
+const GBS_IVIG_PLEX_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-ivig-plex',
+  title: 'IVIG vs PLEX',
+  subtitle: 'Treatment Selection Guide',
+  description: 'Both IVIG and plasma exchange are effective. Choice depends on patient factors and availability.',
+  fields: [
+    { name: 'severity', label: 'GBS Severity', type: 'select', points: 0, selectOptions: [
+      { label: 'Mild (ambulatory)', points: 1 },
+      { label: 'Moderate (non-ambulatory)', points: 2 },
+      { label: 'Severe (ventilated)', points: 3 },
+    ]},
+    { name: 'renal', label: 'Renal impairment', type: 'toggle', points: 0 },
+    { name: 'access', label: 'Good IV access / no central line', type: 'toggle', points: 0 },
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'IVIG and PLEX equally effective. Do NOT combine.',
+  citations: ['Hughes RA, et al. Immunotherapy for Guillain-Barré syndrome. Cochrane Database Syst Rev. 2014.'],
+  computeResult: (values) => {
+    const severity = values['severity'] || 2;
+    const renal = values['renal'] || 0;
+    const weight = values['weight'] || 70;
+
+    const ivigDose = Math.round(weight * 0.4 * 10) / 10;
+    const ivigTotal = Math.round(weight * 2);
+
+    if (renal) {
+      return {
+        value: 'PLEX Preferred',
+        label: 'Plasma Exchange',
+        description: `**Renal impairment:** IVIG relatively contraindicated (sucrose nephrotoxicity)\n\n**PLEX Protocol:**\n- 5 exchanges over 7-14 days\n- 200-250 mL/kg total exchange\n- Albumin replacement preferred\n\n**Requirements:**\n- Central access (Quinton catheter)\n- Apheresis team\n- Hemodynamic stability`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (severity === 1) {
+      return {
+        value: 'Monitor',
+        label: 'Mild GBS - May Not Need Treatment',
+        description: '**Mild ambulatory GBS:**\n- Treatment benefit less clear\n- Close monitoring for progression\n- Treat if worsening\n\n**If treating, IVIG preferred:**\n- ${ivigDose} g/kg/day × 5 days\n- Total: ${ivigTotal} g\n\nStart early if any clinical worsening.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'IVIG',
+      label: 'IVIG Protocol',
+      description: `**IVIG Dosing:**\n- 0.4 g/kg/day × 5 days = ${ivigDose} g/day\n- Total dose: ${ivigTotal} g (2 g/kg)\n\n**Administration:**\n- Infuse over 4-6 hours daily\n- Premedicate: acetaminophen, diphenhydramine\n- Monitor for anaphylaxis, aseptic meningitis\n\n**Alternative if IVIG unavailable/contraindicated:**\nPLEX × 5 exchanges over 7-14 days\n\n**Do NOT combine IVIG + PLEX** (no added benefit, may wash out IVIG)`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const GBS_LP_INTERP_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-lp-interp',
+  title: 'GBS LP Interpretation',
+  subtitle: 'CSF Findings in GBS',
+  description: 'Classic albuminocytologic dissociation: elevated protein with normal cell count. May be normal early.',
+  fields: [
+    { name: 'protein', label: 'CSF Protein', type: 'number', points: 0, unit: 'mg/dL' },
+    { name: 'wbc', label: 'CSF WBC', type: 'number', points: 0, unit: 'cells/µL' },
+    { name: 'timing', label: 'Days since symptom onset', type: 'number', points: 0, unit: 'days' },
+  ],
+  results: [],
+  thresholdNote: 'CSF may be normal in first week. Clinical diagnosis is key.',
+  citations: ['Fokke C, et al. Diagnosis of Guillain-Barré syndrome and validation of Brighton criteria. Brain. 2014;137(1):33-43.'],
+  computeResult: (values) => {
+    const protein = values['protein'] || 45;
+    const wbc = values['wbc'] || 0;
+    const timing = values['timing'] || 7;
+
+    let interpretation = '';
+    let color = '--color-primary';
+
+    if (protein > 45 && wbc < 10) {
+      interpretation = 'CLASSIC GBS';
+      color = '--color-warning';
+    } else if (protein <= 45 && wbc < 10 && timing < 7) {
+      interpretation = 'May be early - repeat if clinical suspicion high';
+      color = '--color-primary';
+    } else if (wbc > 50) {
+      interpretation = 'Consider alternative diagnosis (infection, HIV, Lyme)';
+      color = '--color-danger';
+    } else if (wbc >= 10 && wbc <= 50) {
+      interpretation = 'Mild pleocytosis - consider HIV-associated GBS';
+      color = '--color-warning';
+    } else {
+      interpretation = 'Non-specific - correlate clinically';
+      color = '--color-primary';
+    }
+
+    return {
+      value: interpretation,
+      label: 'CSF Interpretation',
+      description: `**Results:**\n- Protein: ${protein} mg/dL (normal <45)\n- WBC: ${wbc} cells/µL (normal <5)\n- Days since onset: ${timing}\n\n**Albuminocytologic Dissociation:**\n↑ Protein with normal/low WBC = classic GBS\n\n**Caveats:**\n- CSF normal in 30-50% during week 1\n- Protein peaks at 4-6 weeks\n- >50 WBC suggests HIV, Lyme, CMV, or other\n\n**Remember:** GBS is a clinical diagnosis. Do not delay treatment waiting for LP.`,
+      colorVar: color,
+    };
+  },
+};
+
+const GBS_VARIANTS_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-variants',
+  title: 'GBS Variants',
+  subtitle: 'Clinical Phenotypes',
+  description: 'GBS has multiple clinical variants with different presentations and antibody associations.',
+  fields: [
+    { name: 'variant', label: 'Clinical Presentation', type: 'select', points: 0, selectOptions: [
+      { label: 'Classic ascending weakness', points: 1 },
+      { label: 'Ophthalmoplegia + ataxia + areflexia (Miller Fisher)', points: 2 },
+      { label: 'Pure sensory', points: 3 },
+      { label: 'Pharyngeal-cervical-brachial', points: 4 },
+      { label: 'Bilateral facial weakness (facial diplegia)', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Anti-GQ1b associated with Miller Fisher and PCB variants.',
+  citations: ['Willison HJ, et al. Guillain-Barré syndrome. Lancet. 2016;388(10045):717-727.'],
+  computeResult: (values) => {
+    const variant = values['variant'] || 1;
+
+    const variants: Record<number, { name: string; features: string; antibody: string; prognosis: string }> = {
+      1: { name: 'AIDP (Classic GBS)', features: 'Ascending weakness, areflexia, sensory symptoms\nAutonomic dysfunction common', antibody: 'Variable (anti-GM1, anti-GD1a)', prognosis: 'Most recover, 3-5% mortality' },
+      2: { name: 'Miller Fisher Syndrome', features: 'Triad: Ophthalmoplegia + Ataxia + Areflexia\nMay overlap with GBS (MFS-GBS overlap)', antibody: 'Anti-GQ1b (>90%)', prognosis: 'Excellent - most recover fully without treatment' },
+      3: { name: 'Acute Sensory GBS', features: 'Pure sensory loss, areflexia\nNo weakness', antibody: 'Variable', prognosis: 'Generally good' },
+      4: { name: 'Pharyngeal-Cervical-Brachial (PCB)', features: 'Oropharyngeal + neck + arm weakness\nLegs spared', antibody: 'Anti-GT1a, anti-GQ1b', prognosis: 'May need intubation for bulbar weakness' },
+      5: { name: 'Facial Diplegia with Paresthesias', features: 'Bilateral facial weakness\nDistal paresthesias, areflexia', antibody: 'Variable', prognosis: 'Good' },
+    };
+
+    const v = variants[variant];
+    return {
+      value: v.name,
+      label: 'GBS Variant',
+      description: `**Clinical Features:**\n${v.features}\n\n**Associated Antibody:** ${v.antibody}\n\n**Prognosis:** ${v.prognosis}\n\n**Treatment:**\nAll variants: IVIG or PLEX if non-ambulatory or progressing.\nMiller Fisher: Often recovers without treatment, treat if overlap features.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const GBS_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs-intubation',
+  title: 'GBS Intubation Triggers',
+  subtitle: 'When to Intubate',
+  description: 'Decision aid for elective intubation in GBS. Do not wait for respiratory arrest.',
+  fields: [
+    { name: 'fvc20', label: 'FVC < 20 mL/kg', type: 'toggle', points: 3 },
+    { name: 'nif30', label: 'NIF < -30 cmH2O', type: 'toggle', points: 3 },
+    { name: 'decline', label: 'FVC decline > 30% from baseline', type: 'toggle', points: 3 },
+    { name: 'bulbar', label: 'Severe bulbar dysfunction', type: 'toggle', points: 2, description: 'Unable to handle secretions' },
+    { name: 'fatigue', label: 'Respiratory fatigue (tachypnea, accessory muscles)', type: 'toggle', points: 2 },
+    { name: 'autonomic', label: 'Severe autonomic instability', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Monitor', risk: 'Continue serial FVC/NIF', mortality: 'ICU observation', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'High Risk', risk: 'Prepare for intubation', mortality: 'Anesthesia at bedside', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'INTUBATE', risk: 'Immediate intubation', mortality: 'Do not delay', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Elective intubation is safer than emergency intubation in GBS.',
+  citations: ['Orlikowski D, et al. Respiratory dysfunction in Guillain-Barré syndrome. Neurocrit Care. 2004;1(4):415-422.'],
+};
+
+// -------------------------------------------------------------------
+// Myasthenia Gravis Calculators
+// -------------------------------------------------------------------
+
+const MG_CRISIS_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-crisis',
+  title: 'Crisis Differentiator',
+  subtitle: 'Myasthenic vs Cholinergic',
+  description: 'Distinguishing myasthenic crisis from cholinergic crisis is critical - treatments are opposite.',
+  fields: [
+    { name: 'secretions', label: 'Excess secretions (SLUDGE)', type: 'toggle', points: -2, description: 'Salivation, lacrimation, diarrhea' },
+    { name: 'pupils', label: 'Miosis (constricted pupils)', type: 'toggle', points: -2 },
+    { name: 'fasciculations', label: 'Fasciculations', type: 'toggle', points: -2 },
+    { name: 'bradycardia', label: 'Bradycardia', type: 'toggle', points: -1 },
+    { name: 'dry', label: 'Dry (no excess secretions)', type: 'toggle', points: 2 },
+    { name: 'mydriasis', label: 'Mydriasis (dilated pupils)', type: 'toggle', points: 2 },
+    { name: 'recent-increase', label: 'Recent pyridostigmine increase', type: 'toggle', points: -1 },
+    { name: 'trigger', label: 'Recent trigger (infection, surgery, med change)', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: -2, label: 'Cholinergic Crisis', risk: 'Excess anticholinesterase', mortality: 'STOP pyridostigmine, atropine', colorVar: '--color-danger' },
+    { min: -2, max: 2, label: 'Unclear', risk: 'Cannot differentiate', mortality: 'Stop anticholinesterases, support airway', colorVar: '--color-warning' },
+    { min: 2, max: Infinity, label: 'Myasthenic Crisis', risk: 'Disease exacerbation', mortality: 'IVIG or PLEX', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'If unclear, STOP all anticholinesterases and support airway. Can rechallenge later.',
+  citations: ['Wendell LC, Levine JM. Myasthenic crisis. Neurohospitalist. 2011;1(1):16-22.'],
+};
+
+const MG_FVC_NIF_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-fvc-nif',
+  title: 'MG FVC/NIF Monitoring',
+  subtitle: 'Respiratory Assessment',
+  description: 'Serial FVC and NIF monitoring in myasthenic crisis. Similar thresholds to GBS.',
+  fields: [
+    { name: 'fvc', label: 'FVC', type: 'number', points: 0, unit: 'mL/kg' },
+    { name: 'nif', label: 'NIF (MIP)', type: 'number', points: 0, unit: 'cmH2O' },
+  ],
+  results: [],
+  thresholdNote: 'Same 20/30/40 rule as GBS. Trend is critical.',
+  citations: ['Seneviratne J, et al. Noninvasive ventilation in myasthenic crisis. Arch Neurol. 2008;65(1):54-58.'],
+  computeResult: (values) => {
+    const fvc = values['fvc'] || 60;
+    const nif = Math.abs(values['nif'] || 60);
+
+    let risk = 'Low';
+    let color = '--color-primary';
+
+    if (fvc < 20 || nif < 30) {
+      risk = 'INTUBATE';
+      color = '--color-danger';
+    } else if (fvc < 25 || nif < 40) {
+      risk = 'High - Prepare';
+      color = '--color-warning';
+    }
+
+    return {
+      value: risk,
+      label: 'Respiratory Status',
+      description: `**FVC:** ${fvc} mL/kg\n**NIF:** -${nif} cmH2O\n\n**Intubation Triggers:**\n- FVC < 20 mL/kg\n- NIF < -30 cmH2O\n- Rapid decline\n- Inability to clear secretions\n\n**BiPAP may bridge** but do not delay intubation if declining.\n\n**Monitor q2-4h in ICU.**`,
+      colorVar: color,
+    };
+  },
+};
+
+const MG_DRUGS_AVOID_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-drugs-avoid',
+  title: 'Drugs to Avoid in MG',
+  subtitle: 'Neuromuscular Junction Risks',
+  description: 'Many drugs can precipitate or worsen myasthenia. Use with extreme caution.',
+  fields: [
+    { name: 'drug', label: 'Drug Class', type: 'select', points: 0, selectOptions: [
+      { label: 'Aminoglycosides (gentamicin, tobramycin)', points: 1 },
+      { label: 'Fluoroquinolones (cipro, levo)', points: 2 },
+      { label: 'Macrolides (azithromycin, erythromycin)', points: 3 },
+      { label: 'Beta-blockers', points: 4 },
+      { label: 'Magnesium', points: 5 },
+      { label: 'Neuromuscular blockers', points: 6 },
+      { label: 'Other', points: 7 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'When possible, choose MG-safe alternatives.',
+  citations: ['Gilhus NE. Myasthenia gravis. N Engl J Med. 2016;375(26):2570-2581.'],
+  computeResult: (values) => {
+    const drug = values['drug'] || 0;
+
+    const risks: Record<number, string> = {
+      1: '**Aminoglycosides:**\nHIGH RISK - blocks presynaptic Ca2+ channels\n\n**Alternatives:**\n- Ceftriaxone, cefepime\n- Aztreonam\n- Carbapenems (usually safe)',
+      2: '**Fluoroquinolones:**\nMODERATE-HIGH RISK - FDA black box warning for MG exacerbation\n\n**Alternatives:**\n- Cephalosporins\n- Carbapenems\n- TMP-SMX (usually safe)',
+      3: '**Macrolides:**\nMODERATE RISK - may exacerbate weakness\n\n**Alternatives:**\n- Doxycycline\n- Cephalosporins',
+      4: '**Beta-Blockers:**\nLOW-MODERATE RISK\nTimolol eye drops can worsen MG\n\n**If needed:**\n- Use cardioselective (metoprolol)\n- Monitor closely',
+      5: '**Magnesium:**\nMODERATE RISK - avoid IV boluses\nBlocks NMJ transmission\n\n**If needed for eclampsia:**\n- Use with extreme caution\n- Have ventilator ready',
+      6: '**Neuromuscular Blockers:**\nMG patients VERY sensitive\n- Succinylcholine: unpredictable (Phase II block)\n- Non-depolarizing: use 10-25% normal dose\n\n**Prepare for prolonged paralysis.**',
+      7: '**Other High-Risk Drugs:**\n- D-penicillamine (can induce MG)\n- Checkpoint inhibitors\n- Botulinum toxin\n- Quinine/Quinidine\n- Procainamide\n- Lithium\n- Phenytoin (IV)\n- Interferons',
+    };
+
+    return {
+      value: 'CAUTION',
+      label: 'Drug Interaction Risk',
+      description: risks[drug] || 'Check interaction database.',
+      colorVar: drug <= 2 ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
+const MG_MGFA_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-mgfa',
+  title: 'MGFA Classification',
+  subtitle: 'Myasthenia Gravis Foundation of America',
+  description: 'Clinical classification of MG severity. Guides treatment intensity.',
+  fields: [
+    { name: 'class', label: 'Clinical Presentation', type: 'select', points: 0, selectOptions: [
+      { label: 'Class I: Ocular only', points: 1 },
+      { label: 'Class II: Mild generalized', points: 2 },
+      { label: 'Class III: Moderate generalized', points: 3 },
+      { label: 'Class IV: Severe generalized', points: 4 },
+      { label: 'Class V: Intubation required', points: 5 },
+    ]},
+    { name: 'bulbar', label: 'Predominantly bulbar', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Class II-V subdivided into "a" (limb/axial) or "b" (oropharyngeal/respiratory) predominant.',
+  citations: ['Jaretzki A, et al. MGFA clinical classification. Neurology. 2000;55(7):1016-1020.'],
+  computeResult: (values) => {
+    const cls = values['class'] || 1;
+    const bulbar = values['bulbar'] || 0;
+
+    const suffix = bulbar ? 'b' : 'a';
+    const descriptions: Record<number, string> = {
+      1: '**Class I: Ocular MG**\n\nPtosis and/or diplopia only\nNo other muscle involvement\n\n**Treatment:**\n- Pyridostigmine\n- Consider low-dose prednisone if refractory\n- 50% progress to generalized within 2 years',
+      2: `**Class II${suffix}: Mild Generalized**\n\nMild weakness other than ocular\nMay have ocular symptoms of any severity\n\n**Treatment:**\n- Pyridostigmine\n- Prednisone\n- Consider steroid-sparing agents`,
+      3: `**Class III${suffix}: Moderate Generalized**\n\nModerate weakness other than ocular\nMay have ocular symptoms of any severity\n\n**Treatment:**\n- Pyridostigmine\n- Prednisone + steroid-sparing agent\n- Consider IVIG/PLEX for flares`,
+      4: `**Class IV${suffix}: Severe Generalized**\n\nSevere weakness other than ocular\nMay have ocular symptoms of any severity\n\n**Treatment:**\n- ICU monitoring\n- IVIG or PLEX\n- High-dose steroids\n- Urgent thymectomy evaluation`,
+      5: '**Class V: Myasthenic Crisis**\n\nRequires intubation\n± NG tube for feeding\n\n**Treatment:**\n- ICU, mechanical ventilation\n- IVIG or PLEX\n- HOLD pyridostigmine (cholinergic crisis risk)\n- Treat precipitant (infection, etc)',
+    };
+
+    return {
+      value: cls === 1 ? 'Class I' : `Class ${['', 'I', 'II', 'III', 'IV', 'V'][cls]}${cls > 1 ? suffix : ''}`,
+      label: 'MGFA Classification',
+      description: descriptions[cls],
+      colorVar: cls >= 4 ? '--color-danger' : cls >= 3 ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+const MG_ICE_TEST_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-ice-test',
+  title: 'Ice Pack Test',
+  subtitle: 'Bedside Diagnostic Test',
+  description: 'Simple bedside test for ocular MG. Cold improves neuromuscular transmission.',
+  fields: [
+    { name: 'ptosis-before', label: 'Ptosis severity before (1-3)', type: 'number', points: 0, description: '1=mild, 2=moderate, 3=severe' },
+    { name: 'ptosis-after', label: 'Ptosis severity after 2 min ice', type: 'number', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Improvement of ≥2mm or resolution of ptosis = positive test.',
+  citations: ['Sethi KD, et al. Ice pack test for myasthenia gravis. Neurology. 1987;37(8):1383-1385.'],
+  computeResult: (values) => {
+    const before = values['ptosis-before'] || 0;
+    const after = values['ptosis-after'] || 0;
+    const improvement = before - after;
+
+    const positive = improvement >= 1;
+
+    return {
+      value: positive ? 'POSITIVE' : 'NEGATIVE',
+      label: 'Ice Pack Test Result',
+      description: `**Method:**\n1. Measure palpebral fissure or assess ptosis severity\n2. Apply ice pack to closed eyelid for 2 minutes\n3. Reassess immediately after removing ice\n\n**Result:**\nBefore: ${before}/3\nAfter: ${after}/3\nImprovement: ${improvement > 0 ? '+' : ''}${improvement}\n\n**Interpretation:**\n${positive ? '✓ POSITIVE - Suggests MG (sensitivity ~80-90%)' : '✗ Negative - Does not rule out MG'}\n\n**Mechanism:** Cold improves acetylcholinesterase function\n\n**Note:** Positive test supports but does not confirm diagnosis. Order acetylcholine receptor antibodies.`,
+      colorVar: positive ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+const MG_PYRIDOSTIGMINE_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-pyridostigmine',
+  title: 'Pyridostigmine Dosing',
+  subtitle: 'Mestinon Guide',
+  description: 'Pyridostigmine (Mestinon) dosing for myasthenia gravis. Start low, titrate to effect.',
+  fields: [
+    { name: 'severity', label: 'Current Symptoms', type: 'select', points: 0, selectOptions: [
+      { label: 'Mild (ocular only)', points: 1 },
+      { label: 'Moderate (generalized, functional)', points: 2 },
+      { label: 'Severe (significant weakness)', points: 3 },
+    ]},
+    { name: 'current', label: 'Current daily dose (if any)', type: 'number', points: 0, unit: 'mg/day' },
+  ],
+  results: [],
+  thresholdNote: 'Max 120mg q3h. Watch for cholinergic symptoms.',
+  citations: ['Sanders DB, et al. International consensus guidance for MG. Neurology. 2016;87(4):419-425.'],
+  computeResult: (values) => {
+    const severity = values['severity'] || 1;
+    const current = values['current'] || 0;
+
+    let dose = '30mg PO TID';
+    if (severity === 2) dose = '60mg PO q4-6h';
+    if (severity === 3) dose = '60-90mg PO q4h';
+
+    return {
+      value: dose,
+      label: 'Pyridostigmine Dosing',
+      description: `**Starting Dose:** ${dose}\n\n**Titration:**\n- Increase by 30-60mg per dose q1-2 days\n- Max single dose: 120mg\n- Max daily dose: ~600-720mg\n- Onset: 30 min; Duration: 3-4 hours\n\n${current > 0 ? `**Current dose:** ${current} mg/day\n` : ''}**Watch for Cholinergic Side Effects:**\n- SLUDGE symptoms (diarrhea, cramps, salivation)\n- Bradycardia\n- Muscle twitching\n\nIf severe, reduce dose or skip doses.\n\n**Crisis:** HOLD pyridostigmine in crisis (may cause cholinergic crisis).`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const MG_IVIG_PLEX_CALCULATOR: CalculatorDefinition = {
+  id: 'mg-ivig-plex',
+  title: 'MG IVIG/PLEX',
+  subtitle: 'Crisis Treatment',
+  description: 'IVIG and PLEX are equally effective for myasthenic crisis. PLEX works faster.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'urgency', label: 'Clinical Urgency', type: 'select', points: 0, selectOptions: [
+      { label: 'Moderate (can wait for effect)', points: 1 },
+      { label: 'Severe/crisis (need rapid response)', points: 2 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'PLEX works in days; IVIG in 1-2 weeks. Choose based on acuity.',
+  citations: ['Barth D, et al. Comparison of IVIg and plasma exchange in myasthenic crisis. Neurology. 2011;76(23):2017-2023.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const urgency = values['urgency'] || 1;
+
+    const ivigDaily = Math.round(weight * 0.4);
+    const ivigTotal = Math.round(weight * 2);
+
+    if (urgency === 2) {
+      return {
+        value: 'PLEX Preferred',
+        label: 'Plasma Exchange for Crisis',
+        description: `**PLEX Protocol:**\n- 5 exchanges over 10-14 days\n- Alternate days\n- 1-1.5 plasma volumes per exchange\n\n**Onset:** 2-5 days (faster than IVIG)\n\n**Requirements:**\n- Central access\n- Apheresis team\n- Hemodynamic monitoring\n\n**Alternative:** IVIG ${ivigDaily}g/day × 5 days if PLEX unavailable`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: 'IVIG',
+      label: 'IVIG Protocol',
+      description: `**IVIG Dosing:**\n- 0.4 g/kg/day × 5 days = ${ivigDaily}g/day\n- Total: ${ivigTotal}g (2 g/kg)\n\n**Onset:** 1-2 weeks\n\n**Administration:**\n- Infuse over 4-6 hours\n- Premedicate: acetaminophen, antihistamine\n\n**If refractory:** Switch to PLEX\n\n**Note:** Do NOT combine IVIG + PLEX`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Botulism Calculators
+// -------------------------------------------------------------------
+
+const BOT_TYPES_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-types',
+  title: 'Botulism Types',
+  subtitle: 'Transmission Categories',
+  description: 'Different forms of botulism have different sources, populations, and management nuances.',
+  fields: [
+    { name: 'type', label: 'Suspected Type', type: 'select', points: 0, selectOptions: [
+      { label: 'Foodborne (contaminated food)', points: 1 },
+      { label: 'Wound (IVDU, trauma)', points: 2 },
+      { label: 'Infant (honey, soil exposure)', points: 3 },
+      { label: 'Iatrogenic (Botox complication)', points: 4 },
+      { label: 'Inhalational (bioterrorism)', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'All types: same toxin mechanism, different sources.',
+  citations: ['Sobel J. Botulism. Clin Infect Dis. 2005;41(8):1167-1173.'],
+  computeResult: (values) => {
+    const type = values['type'] || 1;
+
+    const types: Record<number, { name: string; desc: string }> = {
+      1: { name: 'FOODBORNE', desc: '**Source:** Preformed toxin in contaminated food\n\n**Classic sources:**\n- Home-canned vegetables\n- Fermented fish\n- Improperly stored food\n\n**Onset:** 12-36 hours (range 6h-10d)\n\n**Clues:**\n- GI symptoms may precede neuro\n- Cluster outbreaks\n\n**Management:**\n- Antitoxin (BAT)\n- Supportive care\n- Report to health department' },
+      2: { name: 'WOUND', desc: '**Source:** C. botulinum colonizes wound, produces toxin in vivo\n\n**Risk factors:**\n- Black tar heroin injection (most common now)\n- Skin popping\n- Traumatic wounds\n- Sinusitis (intranasal cocaine)\n\n**Management:**\n- Antitoxin (BAT)\n- Wound debridement\n- Antibiotics (metronidazole or penicillin)\n- NO aminoglycosides' },
+      3: { name: 'INFANT', desc: '**Source:** Ingested spores colonize infant gut\n\n**Age:** <1 year (usually 2-6 months)\n\n**Sources:**\n- Honey (classic)\n- Soil/dust\n- Corn syrup\n\n**Presentation:**\n- Constipation (often first sign)\n- Poor feeding, weak cry\n- Hypotonia ("floppy baby")\n- Descending paralysis\n\n**Management:**\n- BabyBIG (NOT BAT)\n- NO antibiotics (may worsen by lysing bacteria)\n- Contact CA Infant Botulism Program' },
+      4: { name: 'IATROGENIC', desc: '**Source:** Therapeutic/cosmetic botulinum toxin\n\n**Presentations:**\n- Local spread from injection site\n- Systemic weakness (rare)\n- Usually with high doses\n\n**Management:**\n- Supportive care\n- Antitoxin controversial (not FDA approved for this)\n- Usually self-limited' },
+      5: { name: 'INHALATIONAL', desc: '**Source:** Aerosolized toxin (weaponized)\n\n**Bioterrorism concern:**\n- NOT naturally occurring\n- Would present as outbreak without food source\n\n**Onset:** 12-80 hours\n\n**Management:**\n- Same as foodborne\n- Antitoxin (BAT)\n- Notify public health immediately\n- Mass casualty protocols' },
+    };
+
+    const t = types[type];
+    return {
+      value: t.name,
+      label: 'Botulism Type',
+      description: t.desc,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const BOT_DDX_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-ddx',
+  title: 'Botulism vs Mimics',
+  subtitle: 'Differential Diagnosis',
+  description: 'Botulism mimics several other conditions. Key distinguishing features.',
+  fields: [
+    { name: 'cranial', label: 'Cranial nerve involvement', type: 'toggle', points: 1 },
+    { name: 'descending', label: 'Descending weakness pattern', type: 'toggle', points: 2 },
+    { name: 'autonomic', label: 'Autonomic symptoms (dry mouth, constipation)', type: 'toggle', points: 1 },
+    { name: 'symmetric', label: 'Symmetric weakness', type: 'toggle', points: 1 },
+    { name: 'sensory', label: 'Sensory intact', type: 'toggle', points: 1 },
+    { name: 'reflexes', label: 'Reflexes diminished/absent', type: 'toggle', points: 1 },
+    { name: 'mental-status', label: 'Mental status normal', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 4, label: 'Low Suspicion', risk: 'Consider alternatives', mortality: 'GBS, MG, stroke, toxins', colorVar: '--color-primary' },
+    { min: 4, max: 6, label: 'Moderate', risk: 'Consider botulism', mortality: 'Obtain stool/serum for toxin', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'High Suspicion', risk: 'Classic botulism', mortality: 'Treat empirically, call CDC', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Classic: "Dry, weak, dizzy" with descending paralysis, normal mentation.',
+  citations: ['Cherington M. Botulism: clinical features and differential diagnosis. Curr Treat Options Neurol. 2004;6(5):405-410.'],
+};
+
+const BOT_ANTITOXIN_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-antitoxin',
+  title: 'Antitoxin Guide',
+  subtitle: 'BAT vs BabyBIG',
+  description: 'Botulism antitoxin prevents progression but does not reverse existing paralysis. Give early.',
+  fields: [
+    { name: 'age', label: 'Patient Age', type: 'select', points: 0, selectOptions: [
+      { label: 'Infant (<1 year)', points: 1 },
+      { label: 'Child/Adult', points: 2 },
+    ]},
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'BAT from CDC (770-488-7100). BabyBIG from CA IBTPP (510-231-7600).',
+  citations: ['CDC. Botulism antitoxin release. Emergency Operations Center. Updated 2023.'],
+  computeResult: (values) => {
+    const age = values['age'] || 2;
+    const weight = values['weight'] || 70;
+
+    if (age === 1) {
+      return {
+        value: 'BabyBIG',
+        label: 'Infant Botulism',
+        description: `**BabyBIG (Botulism Immune Globulin IV):**\n\n**Dose:** 50 mg/kg (0.5 mL/kg) IV\nFor ${weight} kg infant: ${Math.round(weight * 0.5)} mL\n\n**Administration:**\n- Infuse at 0.5 mL/kg/hr initially\n- Increase to 1.0 mL/kg/hr if tolerated\n- Single dose only\n\n**How to Obtain:**\nCalifornia Infant Botulism Program\n**510-231-7600** (24/7)\n\n**Cost:** ~$45,000 (but reduces hospitalization from 5.5 to 2.5 weeks)\n\n**DO NOT give BAT to infants** (equine product, higher reaction risk)`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'BAT',
+      label: 'Heptavalent Botulism Antitoxin',
+      description: `**BAT (Botulism Antitoxin Heptavalent):**\n\n**Covers:** Types A, B, C, D, E, F, G\n\n**Dose:** One vial IV (diluted 1:10 in NS)\n- Infuse over 30-60 min (can extend if reaction)\n\n**How to Obtain:**\nCDC Emergency Operations\n**770-488-7100** (24/7)\n\n**Pre-treatment:**\n- Skin test (per CDC protocol)\n- Have epinephrine ready\n- ~10% mild allergic reactions\n- <2% serious reactions\n\n**Timing:** Give as soon as suspected. Does not reverse existing paralysis but prevents progression.`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const BOT_TIMELINE_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-timeline',
+  title: 'Botulism Timeline',
+  subtitle: 'Clinical Progression',
+  description: 'Expected timeline of botulism symptoms and recovery.',
+  fields: [
+    { name: 'days', label: 'Days Since Symptom Onset', type: 'number', points: 0, unit: 'days' },
+    { name: 'ventilated', label: 'Currently ventilated', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Recovery is SLOW (weeks to months). Set expectations.',
+  citations: ['Sobel J. Botulism. Clin Infect Dis. 2005;41(8):1167-1173.'],
+  computeResult: (values) => {
+    const days = values['days'] || 1;
+    const vent = values['ventilated'] || 0;
+
+    return {
+      value: 'WEEKS-MONTHS',
+      label: 'Recovery Timeline',
+      description: `**Day ${days} of illness**\n\n**Typical Progression:**\n- Days 1-3: Cranial nerve symptoms (blurred vision, diplopia, dysphagia)\n- Days 3-7: Descending weakness, respiratory failure possible\n- Weeks 1-2: Nadir of weakness\n- Weeks 2-8: Gradual improvement begins\n- Months 1-3: Functional recovery\n- Up to 1 year: Full recovery possible\n\n${vent ? '**Ventilation Duration:**\nAverage 2-8 weeks\nSome patients require months\n' : ''}\n**Key Points:**\n- Antitoxin prevents progression but doesn\'t speed recovery\n- Fatigue may persist for months\n- Most patients recover fully (95%+)\n- Set realistic expectations for family`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const BOT_IVDU_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-ivdu',
+  title: 'Wound Botulism (IVDU)',
+  subtitle: 'Black Tar Heroin Associated',
+  description: 'Wound botulism from black tar heroin injection is now the most common form in adults.',
+  fields: [
+    { name: 'ivdu', label: 'IVDU history', type: 'toggle', points: 2 },
+    { name: 'abscess', label: 'Skin abscess/wound', type: 'toggle', points: 2 },
+    { name: 'skin-popping', label: 'Subcutaneous injection ("skin popping")', type: 'toggle', points: 2 },
+    { name: 'descending', label: 'Descending paralysis', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Low Risk', risk: 'Unlikely wound botulism', mortality: 'Consider other causes', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Moderate Risk', risk: 'Consider wound botulism', mortality: 'Examine all injection sites', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'High Risk', risk: 'Likely wound botulism', mortality: 'Treat empirically', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Black tar heroin + weakness = wound botulism until proven otherwise.',
+  citations: ['Werner SB, et al. Wound botulism in California, 1951-1998. Clin Infect Dis. 2000;31(4):1018-1024.'],
+};
+
+const BOT_INFANT_CALCULATOR: CalculatorDefinition = {
+  id: 'bot-infant',
+  title: 'Infant Botulism',
+  subtitle: 'BabyBIG Guide',
+  description: 'Infant botulism requires BabyBIG (not BAT). Contact CA Infant Botulism Program.',
+  fields: [
+    { name: 'weight', label: 'Infant Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'symptoms', label: 'Symptoms Present', type: 'select', points: 0, selectOptions: [
+      { label: 'Constipation only', points: 1 },
+      { label: 'Constipation + weak cry/poor feeding', points: 2 },
+      { label: 'Hypotonia ("floppy baby")', points: 3 },
+      { label: 'Respiratory compromise', points: 4 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'BabyBIG reduces hospital stay from 5.5 to 2.5 weeks. Give early.',
+  citations: ['Arnon SS, et al. Human botulism immune globulin for infant botulism. N Engl J Med. 2006;354(5):462-471.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 5;
+    const dose = Math.round(weight * 0.5 * 10) / 10;
+
+    return {
+      value: `${dose} mL BabyBIG`,
+      label: 'Infant Botulism Treatment',
+      description: `**BabyBIG Dose:** 50 mg/kg (0.5 mL/kg)\nFor ${weight} kg infant: ${dose} mL IV\n\n**Contact:**\nCA Infant Botulism Treatment & Prevention Program\n**510-231-7600** (24/7)\n\n**Administration:**\n- Single dose IV\n- Start at 0.5 mL/kg/hr, increase to 1.0 mL/kg/hr\n- Infuse over 1-2 hours total\n\n**Key Points:**\n- Human-derived (safer than equine BAT)\n- Give as soon as suspected\n- DO NOT give antibiotics (may worsen by releasing toxin)\n- Supportive care, feeding support\n- Avoid honey, corn syrup in infants <1 year`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// ECMO Calculators
+// -------------------------------------------------------------------
+
+const ECMO_VV_VA_SELECTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-vv-va-selector',
+  title: 'VV vs VA ECMO',
+  subtitle: 'Mode Selection Tool',
+  description: 'Choose ECMO configuration based on cardiac and pulmonary function.',
+  fields: [
+    { name: 'cardiac', label: 'Cardiac Function', type: 'select', points: 0, selectOptions: [
+      { label: 'Normal/Adequate', points: 0 },
+      { label: 'Mildly depressed', points: 1 },
+      { label: 'Severely depressed / Cardiogenic shock', points: 2 },
+    ]},
+    { name: 'pulmonary', label: 'Pulmonary Function', type: 'select', points: 0, selectOptions: [
+      { label: 'Normal', points: 0 },
+      { label: 'Moderate ARDS', points: 1 },
+      { label: 'Severe ARDS / Refractory hypoxemia', points: 2 },
+    ]},
+    { name: 'arrest', label: 'Cardiac arrest (ECPR)', type: 'toggle', points: 5 },
+  ],
+  results: [],
+  thresholdNote: 'VV = respiratory support only. VA = respiratory + circulatory support.',
+  citations: ['Brodie D, Bacchetta M. Extracorporeal membrane oxygenation for ARDS in adults. N Engl J Med. 2011;365(20):1905-1914.'],
+  computeResult: (values) => {
+    const cardiac = values['cardiac'] || 0;
+    const pulmonary = values['pulmonary'] || 0;
+    const arrest = values['arrest'] || 0;
+
+    if (arrest) {
+      return {
+        value: 'VA-ECMO (ECPR)',
+        label: 'Extracorporeal CPR',
+        description: '**ECPR Indication:** Cardiac arrest\n\n**Configuration:** VA-ECMO\n- Venous drainage: Femoral vein\n- Arterial return: Femoral artery\n\n**Provides:**\n- Full circulatory support\n- Oxygenation\n- CO2 removal\n\n**Urgency:** Cannulate during CPR\n\n**Note:** Need distal perfusion cannula to prevent leg ischemia.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (cardiac >= 2) {
+      return {
+        value: 'VA-ECMO',
+        label: 'Veno-Arterial ECMO',
+        description: '**Indication:** Cardiogenic shock ± respiratory failure\n\n**Configuration:**\n- Venous drainage: Femoral vein (or RA)\n- Arterial return: Femoral artery (or aorta if central)\n\n**Provides:**\n- Circulatory support (bypass heart)\n- Oxygenation\n- CO2 removal\n\n**Complications to watch:**\n- LV distension (may need venting)\n- Harlequin syndrome (differential hypoxia)\n- Limb ischemia (distal perfusion cannula)\n- Differential hypoxia with peripheral VA',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (pulmonary >= 1) {
+      return {
+        value: 'VV-ECMO',
+        label: 'Veno-Venous ECMO',
+        description: '**Indication:** Respiratory failure with adequate cardiac function\n\n**Configuration:**\n- Single dual-lumen cannula (IJ) OR\n- Femoral drainage + IJ return\n\n**Provides:**\n- Oxygenation\n- CO2 removal\n- NO circulatory support (heart still pumps)\n\n**Advantages:**\n- Simpler cannulation\n- No limb ischemia risk\n- Pulsatile flow preserved\n\n**Monitor for:** Recirculation (return blood re-entering drainage)',
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'May Not Need ECMO',
+      label: 'Assessment',
+      description: 'With adequate cardiac and pulmonary function, ECMO may not be indicated.\n\n**Consider ECMO if:**\n- P/F ratio <80 despite optimization\n- pH <7.20 with CO2 retention\n- Murray score >3\n- Failing conventional therapy\n\n**Try first:**\n- Optimize ventilator (lung protective)\n- Prone positioning\n- Neuromuscular blockade\n- Inhaled pulmonary vasodilators',
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const ECMO_RESP_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-resp-score',
+  title: 'RESP Score',
+  subtitle: 'Respiratory ECMO Survival Prediction',
+  description: 'RESP score predicts survival for VV-ECMO in respiratory failure.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'select', points: 0, selectOptions: [
+      { label: '18-49', points: 0 },
+      { label: '50-59', points: -2 },
+      { label: '≥60', points: -3 },
+    ]},
+    { name: 'immunocompromised', label: 'Immunocompromised', type: 'toggle', points: -2 },
+    { name: 'mv-days', label: 'MV before ECMO', type: 'select', points: 0, selectOptions: [
+      { label: '<48 hours', points: 3 },
+      { label: '48h - 7 days', points: 1 },
+      { label: '>7 days', points: 0 },
+    ]},
+    { name: 'diagnosis', label: 'Diagnosis Group', type: 'select', points: 0, selectOptions: [
+      { label: 'Viral pneumonia', points: 3 },
+      { label: 'Bacterial pneumonia', points: 3 },
+      { label: 'Asthma', points: 11 },
+      { label: 'Trauma/burn', points: 3 },
+      { label: 'Aspiration pneumonitis', points: 5 },
+      { label: 'Other acute respiratory failure', points: 1 },
+      { label: 'Nonrespiratory/chronic respiratory failure', points: 0 },
+    ]},
+    { name: 'cns', label: 'CNS dysfunction', type: 'toggle', points: -7 },
+    { name: 'acidosis', label: 'Acute non-pulmonary organ failure', type: 'toggle', points: -3 },
+    { name: 'nmb', label: 'Neuromuscular blockade pre-ECMO', type: 'toggle', points: 1 },
+    { name: 'no', label: 'Nitric oxide pre-ECMO', type: 'toggle', points: -1 },
+    { name: 'bicarb', label: 'Bicarbonate pre-ECMO', type: 'toggle', points: -2 },
+    { name: 'arrest', label: 'Cardiac arrest pre-ECMO', type: 'toggle', points: -2 },
+    { name: 'pip', label: 'PIP ≥42 cmH2O', type: 'toggle', points: 0 },
+  ],
+  results: [
+    { min: -Infinity, max: -6, label: 'Class V', risk: '~18% survival', mortality: 'Very high risk', colorVar: '--color-danger' },
+    { min: -6, max: -2, label: 'Class IV', risk: '~33% survival', mortality: 'High risk', colorVar: '--color-danger' },
+    { min: -2, max: 3, label: 'Class III', risk: '~50% survival', mortality: 'Moderate risk', colorVar: '--color-warning' },
+    { min: 3, max: 6, label: 'Class II', risk: '~67% survival', mortality: 'Intermediate', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'Class I', risk: '~92% survival', mortality: 'Good prognosis', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'Score ranges -22 to +15. Higher = better survival.',
+  citations: ['Schmidt M, et al. Predicting survival after ECMO for severe ARDS: the RESP score. Am J Respir Crit Care Med. 2014;189(11):1374-1382.'],
+};
+
+const ECMO_SAVE_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-save-score',
+  title: 'SAVE Score',
+  subtitle: 'VA-ECMO Survival Prediction',
+  description: 'SAVE score predicts survival for VA-ECMO in cardiogenic shock.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'select', points: 0, selectOptions: [
+      { label: '18-38', points: 7 },
+      { label: '39-52', points: 4 },
+      { label: '53-62', points: 3 },
+      { label: '≥63', points: 0 },
+    ]},
+    { name: 'weight', label: 'Weight', type: 'select', points: 0, selectOptions: [
+      { label: '<65 kg', points: 1 },
+      { label: '65-89 kg', points: 2 },
+      { label: '≥90 kg', points: 0 },
+    ]},
+    { name: 'diagnosis', label: 'Diagnosis', type: 'select', points: 0, selectOptions: [
+      { label: 'Myocarditis', points: 3 },
+      { label: 'Refractory VT/VF', points: 2 },
+      { label: 'Post heart/lung transplant', points: 3 },
+      { label: 'Congenital heart disease', points: -3 },
+      { label: 'Other', points: 0 },
+    ]},
+    { name: 'organ-failure', label: 'Acute organ failure', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Liver failure', points: -3 },
+      { label: 'CNS dysfunction', points: -3 },
+      { label: 'Renal failure', points: -3 },
+      { label: 'Multiple organ failure', points: -6 },
+    ]},
+    { name: 'mv', label: 'Mechanical ventilation duration', type: 'select', points: 0, selectOptions: [
+      { label: '<10 hours', points: 0 },
+      { label: '11-29 hours', points: -2 },
+      { label: '≥30 hours', points: -4 },
+    ]},
+    { name: 'arrest', label: 'Pre-ECMO cardiac arrest', type: 'toggle', points: -2 },
+    { name: 'pulse', label: 'Diastolic BP ≥40', type: 'toggle', points: 3 },
+    { name: 'bicarb', label: 'HCO3 <15', type: 'toggle', points: -3 },
+  ],
+  results: [
+    { min: -Infinity, max: -10, label: 'Class V', risk: '~18% survival', mortality: 'Very high risk', colorVar: '--color-danger' },
+    { min: -10, max: -5, label: 'Class IV', risk: '~30% survival', mortality: 'High risk', colorVar: '--color-danger' },
+    { min: -5, max: 0, label: 'Class III', risk: '~42% survival', mortality: 'Moderate risk', colorVar: '--color-warning' },
+    { min: 0, max: 5, label: 'Class II', risk: '~58% survival', mortality: 'Intermediate', colorVar: '--color-warning' },
+    { min: 5, max: Infinity, label: 'Class I', risk: '~75% survival', mortality: 'Favorable', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'Use to counsel families and set expectations.',
+  citations: ['Schmidt M, et al. Predicting survival after VA-ECMO for refractory cardiogenic shock: the SAVE score. Eur Heart J. 2015;36(33):2246-2256.'],
+};
+
+const ECMO_MURRAY_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-murray-score',
+  title: 'Murray Score',
+  subtitle: 'Lung Injury Score',
+  description: 'Murray score assesses severity of acute lung injury. Score ≥3 is severe (ECMO consideration).',
+  fields: [
+    { name: 'pf', label: 'PaO2/FiO2 ratio', type: 'select', points: 0, selectOptions: [
+      { label: '≥300', points: 0 },
+      { label: '225-299', points: 1 },
+      { label: '175-224', points: 2 },
+      { label: '100-174', points: 3 },
+      { label: '<100', points: 4 },
+    ]},
+    { name: 'cxr', label: 'CXR quadrants with consolidation', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: '1 quadrant', points: 1 },
+      { label: '2 quadrants', points: 2 },
+      { label: '3 quadrants', points: 3 },
+      { label: '4 quadrants', points: 4 },
+    ]},
+    { name: 'peep', label: 'PEEP (cmH2O)', type: 'select', points: 0, selectOptions: [
+      { label: '≤5', points: 0 },
+      { label: '6-8', points: 1 },
+      { label: '9-11', points: 2 },
+      { label: '12-14', points: 3 },
+      { label: '≥15', points: 4 },
+    ]},
+    { name: 'compliance', label: 'Lung Compliance (mL/cmH2O)', type: 'select', points: 0, selectOptions: [
+      { label: '≥80', points: 0 },
+      { label: '60-79', points: 1 },
+      { label: '40-59', points: 2 },
+      { label: '20-39', points: 3 },
+      { label: '<20', points: 4 },
+    ]},
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'Mild', risk: 'Mild lung injury', mortality: 'Continue conventional therapy', colorVar: '--color-primary' },
+    { min: 1, max: 2.5, label: 'Moderate', risk: 'Moderate lung injury', mortality: 'Optimize conventional therapy', colorVar: '--color-warning' },
+    { min: 2.5, max: Infinity, label: 'Severe', risk: 'Severe lung injury', mortality: 'Consider ECMO if failing', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Murray ≥3 with reversible cause = ECMO candidate if failing conventional therapy.',
+  citations: ['Murray JF, et al. An expanded definition of ARDS. Am Rev Respir Dis. 1988;138(3):720-723.'],
+};
+
+const ECMO_CANNULA_SIZE_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-cannula-size',
+  title: 'Cannula Sizing',
+  subtitle: 'ECMO Cannulation Guide',
+  description: 'Cannula size selection based on patient size and target flow.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'mode', label: 'ECMO Mode', type: 'select', points: 0, selectOptions: [
+      { label: 'VV-ECMO', points: 1 },
+      { label: 'VA-ECMO', points: 2 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Target flow: VV 60-80 mL/kg/min; VA 50-70 mL/kg/min.',
+  citations: ['ELSO Guidelines. Extracorporeal Life Support Organization. 2021.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 70;
+    const mode = values['mode'] || 1;
+
+    const targetFlow = mode === 1 ? Math.round(weight * 70) : Math.round(weight * 60);
+    const targetFlowLPM = Math.round(targetFlow / 1000 * 10) / 10;
+
+    let drainage = '';
+    let returnC = '';
+
+    if (mode === 1) {
+      // VV-ECMO
+      if (weight < 50) {
+        drainage = '21-23 Fr';
+        returnC = '17-19 Fr';
+      } else if (weight < 80) {
+        drainage = '23-25 Fr';
+        returnC = '19-21 Fr';
+      } else {
+        drainage = '25-27 Fr';
+        returnC = '21-23 Fr';
+      }
+      return {
+        value: `D: ${drainage}`,
+        label: 'VV-ECMO Cannulation',
+        description: `**Target Flow:** ${targetFlowLPM} L/min (${targetFlow} mL/min)\n\n**Drainage (femoral):** ${drainage}\n**Return (IJ):** ${returnC}\n\n**Alternative: Dual-lumen cannula (Avalon)**\n- 27-31 Fr depending on size\n- Single IJ cannulation\n- Reduces recirculation\n\n**Insertion Tips:**\n- Ultrasound-guided\n- Confirm wire in IVC/SVC fluoroscopically\n- TEE for positioning dual-lumen`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // VA-ECMO
+    if (weight < 50) {
+      drainage = '21-23 Fr';
+      returnC = '15-17 Fr';
+    } else if (weight < 80) {
+      drainage = '23-25 Fr';
+      returnC = '17-19 Fr';
+    } else {
+      drainage = '25-29 Fr';
+      returnC = '19-21 Fr';
+    }
+
+    return {
+      value: `D: ${drainage}`,
+      label: 'VA-ECMO Cannulation',
+      description: `**Target Flow:** ${targetFlowLPM} L/min (${targetFlow} mL/min)\n\n**Drainage (femoral vein):** ${drainage}\n**Return (femoral artery):** ${returnC}\n**Distal perfusion:** 6-8 Fr\n\n**CRITICAL:**\n- ALWAYS place distal perfusion cannula\n- Monitor leg perfusion continuously\n- Consider NIRS monitoring\n\n**Arterial cannula sizing:**\n- Rule of 3: (femoral artery diameter - 3) = max Fr\n- Leave room for distal perfusion\n\n**Central VA if needed:**\n- RA drainage, aortic return\n- Surgical approach`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const ECMO_SCAI_STAGES_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-scai-stages',
+  title: 'SCAI Shock Stages',
+  subtitle: 'Cardiogenic Shock Classification',
+  description: 'SCAI staging for cardiogenic shock guides escalation of support.',
+  fields: [
+    { name: 'stage', label: 'Clinical Stage', type: 'select', points: 0, selectOptions: [
+      { label: 'A: At risk (not currently in shock)', points: 1 },
+      { label: 'B: Beginning shock (hypoperfusion without hypotension)', points: 2 },
+      { label: 'C: Classic shock (hypotension + hypoperfusion)', points: 3 },
+      { label: 'D: Deteriorating (failing initial therapy)', points: 4 },
+      { label: 'E: Extremis (refractory arrest or PEA)', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Stage D-E = consider MCS/ECMO if appropriate candidate.',
+  citations: ['Baran DA, et al. SCAI clinical expert consensus on classification of cardiogenic shock. J Am Coll Cardiol. 2019;74(7):908-927.'],
+  computeResult: (values) => {
+    const stage = values['stage'] || 1;
+
+    const stages: Record<number, { name: string; desc: string; mgmt: string; color: string }> = {
+      1: { name: 'Stage A: At Risk', desc: 'Not in shock but at risk\n- Large MI\n- Acute HF admission\n- Prior MI with reduced EF', mgmt: '- Close monitoring\n- Optimize medical therapy\n- Early cardiology involvement', color: '--color-primary' },
+      2: { name: 'Stage B: Beginning', desc: 'Hypoperfusion without hypotension\n- Elevated JVP\n- Tachycardia\n- Normal SBP\n- Elevated lactate <2', mgmt: '- Optimize preload\n- Inotropes may be needed\n- Consider invasive monitoring', color: '--color-warning' },
+      3: { name: 'Stage C: Classic', desc: 'Hypotension + Hypoperfusion\n- SBP <90 or MAP <60\n- Lactate >2\n- Cool extremities\n- Oliguria', mgmt: '- Vasopressors + inotropes\n- Invasive monitoring\n- Consider MCS (IABP, Impella)', color: '--color-danger' },
+      4: { name: 'Stage D: Deteriorating', desc: 'Failing initial therapy\n- Worsening lactate\n- Escalating pressors\n- Unable to wean support', mgmt: '- Escalate MCS (Impella → ECMO)\n- Transfer to advanced center\n- Consider durable LVAD / transplant workup', color: '--color-danger' },
+      5: { name: 'Stage E: Extremis', desc: 'Refractory circulatory collapse\n- Cardiac arrest (ongoing or recurrent)\n- Multiple vasopressors\n- CPR or PEA', mgmt: '- ECPR consideration\n- VA-ECMO\n- Code status discussion if not candidate', color: '--color-danger' },
+    };
+
+    const s = stages[stage];
+    return {
+      value: s.name,
+      label: 'SCAI Shock Stage',
+      description: `**Clinical Features:**\n${s.desc}\n\n**Management:**\n${s.mgmt}`,
+      colorVar: s.color,
+    };
+  },
+};
+
+const ECMO_ECPR_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'ecmo-ecpr-criteria',
+  title: 'ECPR Criteria',
+  subtitle: 'Extracorporeal CPR Candidacy',
+  description: 'Patient selection criteria for ECPR. Strict criteria improve outcomes.',
+  fields: [
+    { name: 'age', label: 'Age <70 (or <75 if fit)', type: 'toggle', points: 1 },
+    { name: 'witnessed', label: 'Witnessed arrest', type: 'toggle', points: 2 },
+    { name: 'bystander', label: 'Bystander CPR', type: 'toggle', points: 2 },
+    { name: 'initial', label: 'Initial shockable rhythm (VF/pVT)', type: 'toggle', points: 2 },
+    { name: 'lowflow', label: 'Low-flow time <60 min', type: 'toggle', points: 2, description: 'Time from arrest to ECMO flow' },
+    { name: 'etco2', label: 'ETCO2 >10 mmHg', type: 'toggle', points: 1 },
+    { name: 'reversible', label: 'Potentially reversible cause', type: 'toggle', points: 2 },
+    { name: 'no-terminal', label: 'No terminal illness/DNR', type: 'toggle', points: 1 },
+    { name: 'signs-life', label: 'Signs of life during CPR', type: 'toggle', points: 1, description: 'Gasping, movement, pupil reactivity' },
+  ],
+  results: [
+    { min: -Infinity, max: 6, label: 'Poor Candidate', risk: 'ECPR unlikely beneficial', mortality: 'Continue standard ACLS', colorVar: '--color-danger' },
+    { min: 6, max: 10, label: 'Possible Candidate', risk: 'Consider if rapid access', mortality: 'Discuss with ECMO team', colorVar: '--color-warning' },
+    { min: 10, max: Infinity, label: 'Good Candidate', risk: 'ECPR reasonable', mortality: 'Proceed if available', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'ECPR best outcomes: witnessed VF, bystander CPR, <60 min, ECMO center.',
+  citations: ['Richardson ASC, et al. ECPR for refractory cardiac arrest. Circulation. 2021;143(23):2250-2263.'],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Digoxin toxicity
+  'dig-fab-dosing': DIG_FAB_DOSING_CALCULATOR,
+  'dig-ecg': DIG_ECG_CALCULATOR,
+  'dig-acute-chronic': DIG_ACUTE_CHRONIC_CALCULATOR,
+  'dig-arrhythmia': DIG_ARRHYTHMIA_CALCULATOR,
+  'dig-drug-interactions': DIG_DRUG_INTERACTIONS_CALCULATOR,
+  // Beta-blocker OD
+  'bb-hiet': BB_HIET_CALCULATOR,
+  'bb-glucagon': BB_GLUCAGON_CALCULATOR,
+  'bb-intralipid': BB_INTRALIPID_CALCULATOR,
+  'bb-pressors': BB_PRESSORS_CALCULATOR,
+  'bb-agent-guide': BB_AGENT_GUIDE_CALCULATOR,
+  // CCB OD
+  'ccb-shock-type': CCB_SHOCK_TYPE_CALCULATOR,
+  'ccb-hiet': CCB_HIET_CALCULATOR,
+  'ccb-calcium': CCB_CALCIUM_CALCULATOR,
+  'ccb-pressors': CCB_PRESSORS_CALCULATOR,
+  'ccb-intralipid': CCB_INTRALIPID_CALCULATOR,
+  // Iron OD
+  'iron-calc': IRON_CALC_CALCULATOR,
+  'iron-level': IRON_LEVEL_CALCULATOR,
+  'iron-dfo': IRON_DFO_CALCULATOR,
+  'iron-wbi': IRON_WBI_CALCULATOR,
+  'iron-stages': IRON_STAGES_CALCULATOR,
+  // CO toxicity
+  'co-level': CO_LEVEL_CALCULATOR,
+  'co-hbo': CO_HBO_CALCULATOR,
+  'co-half-life': CO_HALF_LIFE_CALCULATOR,
+  'co-pregnancy': CO_PREGNANCY_CALCULATOR,
+  'co-cyanide': CO_CYANIDE_CALCULATOR,
+  // Guillain-Barré
+  'gbs-fvc-nif': GBS_FVC_NIF_CALCULATOR,
+  'gbs-egris': GBS_EGRIS_CALCULATOR,
+  'gbs-ivig-plex': GBS_IVIG_PLEX_CALCULATOR,
+  'gbs-lp-interp': GBS_LP_INTERP_CALCULATOR,
+  'gbs-variants': GBS_VARIANTS_CALCULATOR,
+  'gbs-intubation': GBS_INTUBATION_CALCULATOR,
+  // Myasthenia Gravis
+  'mg-crisis': MG_CRISIS_CALCULATOR,
+  'mg-fvc-nif': MG_FVC_NIF_CALCULATOR,
+  'mg-drugs-avoid': MG_DRUGS_AVOID_CALCULATOR,
+  'mg-mgfa': MG_MGFA_CALCULATOR,
+  'mg-ice-test': MG_ICE_TEST_CALCULATOR,
+  'mg-pyridostigmine': MG_PYRIDOSTIGMINE_CALCULATOR,
+  'mg-ivig-plex': MG_IVIG_PLEX_CALCULATOR,
+  // Botulism
+  'bot-types': BOT_TYPES_CALCULATOR,
+  'bot-ddx': BOT_DDX_CALCULATOR,
+  'bot-antitoxin': BOT_ANTITOXIN_CALCULATOR,
+  'bot-timeline': BOT_TIMELINE_CALCULATOR,
+  'bot-ivdu': BOT_IVDU_CALCULATOR,
+  'bot-infant': BOT_INFANT_CALCULATOR,
+  // ECMO
+  'ecmo-vv-va-selector': ECMO_VV_VA_SELECTOR_CALCULATOR,
+  'ecmo-resp-score': ECMO_RESP_SCORE_CALCULATOR,
+  'ecmo-save-score': ECMO_SAVE_SCORE_CALCULATOR,
+  'ecmo-murray-score': ECMO_MURRAY_SCORE_CALCULATOR,
+  'ecmo-cannula-size': ECMO_CANNULA_SIZE_CALCULATOR,
+  'ecmo-scai-stages': ECMO_SCAI_STAGES_CALCULATOR,
+  'ecmo-ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
   'insulin-correction-dose': INSULIN_CORRECTION_DOSE_CALCULATOR,
   'tdd-estimator': TDD_ESTIMATOR_CALCULATOR,
   'basal-bolus-calc': BASAL_BOLUS_CALCULATOR,

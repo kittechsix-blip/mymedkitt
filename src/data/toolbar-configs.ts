@@ -409,7 +409,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'gbs-intubation', label: 'Intubate', icon: '⚠️', action: 'calculator', target: 'gbs-intubation' },
   ],
   'myasthenia-gravis': [
-    { id: 'mg-crisis', label: 'Crisis DDx', icon: '🔀', action: 'calculator', target: 'mg-crisis-diff' },
+    { id: 'mg-crisis', label: 'Crisis DDx', icon: '🔀', action: 'calculator', target: 'mg-crisis' },
     { id: 'mg-fvc', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'mg-fvc-nif' },
     { id: 'mg-drugs', label: 'Drug Avoid', icon: '⛔', action: 'calculator', target: 'mg-drugs-avoid' },
     { id: 'mg-mgfa', label: 'MGFA', icon: '📊', action: 'calculator', target: 'mg-mgfa' },
