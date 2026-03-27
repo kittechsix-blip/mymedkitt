@@ -216,6 +216,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'gi.png',
     decisionTrees: [
       {
+        id: 'acute-pancreatitis',
+        title: 'Acute Pancreatitis',
+        subtitle: 'Diagnosis → Severity → Resuscitation → Complications → Intervention',
+        categoryId: 'gastroenterology',
+        version: '1.0',
+        nodeCount: 22,
+        entryNodeId: 'ap-start',
+      },
+      {
         id: 'diarrhea',
         title: 'Acute Diarrhea',
         subtitle: 'Assessment → Red Flags → Diagnostics → Treatment → Disposition',

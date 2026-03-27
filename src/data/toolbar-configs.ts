@@ -351,6 +351,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },
     { id: 'zargar', label: 'Zargar', icon: '📊', action: 'calculator', target: 'zargar-grade' },
   ],
+  'acute-pancreatitis': [
+    { id: 'bisap', label: 'BISAP', icon: '📊', action: 'calculator', target: 'bisap' },
+    { id: 'atlanta', label: 'Atlanta', icon: '📋', action: 'calculator', target: 'atlanta-severity' },
+    { id: 'mctsi', label: 'MCTSI', icon: '🩻', action: 'calculator', target: 'mctsi' },
+    { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ap-fluid-rate' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

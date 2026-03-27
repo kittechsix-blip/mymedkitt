@@ -148,6 +148,7 @@ const TREE_REGISTRY = {
   'massive-transfusion':  { prefix: 'MASSIVE_TRANSFUSION',    entryNodeId: 'mtp-start',      categoryId: 'trauma-surg' },
   'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pf-start',       categoryId: 'trauma-surg' },
   'psychiatry-assessment': { prefix: 'PSYCHIATRY_ASSESSMENT', entryNodeId: 'mse-start',      categoryId: 'emergency-medicine' },
+  'acute-pancreatitis':   { prefix: 'ACUTE_PANCREATITIS',     entryNodeId: 'ap-start',       categoryId: 'gastroenterology' },
 };
 
 const CROSS_LISTINGS = {

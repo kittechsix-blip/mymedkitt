@@ -245,6 +245,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/first-trimester.js');
             return { nodes: m.FIRST_TRIMESTER_NODES, entryNodeId: 'ft-start', categoryId: 'ob-gyn', moduleLabels: m.FIRST_TRIMESTER_MODULE_LABELS, citations: m.FIRST_TRIMESTER_CITATIONS };
         },
+        'acute-pancreatitis': async () => {
+            const m = await import('../data/trees/acute-pancreatitis.js');
+            return { nodes: m.ACUTE_PANCREATITIS_NODES, entryNodeId: 'ap-start', categoryId: 'gastroenterology', moduleLabels: m.ACUTE_PANCREATITIS_MODULE_LABELS, citations: m.ACUTE_PANCREATITIS_CITATIONS };
+        },
         'diarrhea': async () => {
             const m = await import('../data/trees/diarrhea.js');
             return { nodes: m.DIARRHEA_NODES, entryNodeId: 'diarrhea-start', categoryId: 'gastroenterology', moduleLabels: m.DIARRHEA_MODULE_LABELS, citations: m.DIARRHEA_CITATIONS };

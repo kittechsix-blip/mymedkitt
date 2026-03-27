@@ -2,6 +2,7 @@
  * MedKitt Consult Trees Index
  * Export all consult trees for use in the application
  */
+export { ACUTE_PANCREATITIS_NODES, ACUTE_PANCREATITIS_MODULE_LABELS, ACUTE_PANCREATITIS_CITATIONS } from './acute-pancreatitis';
 export { NEUROSYPHILIS_NODES, NEUROSYPHILIS_MODULE_LABELS, NEUROSYPHILIS_CITATIONS } from './neurosyphilis';
 export { PE_TREATMENT_NODES, PE_TREATMENT_MODULE_LABELS, PE_TREATMENT_CITATIONS } from './pe-treatment';
 export { PNEUMOTHORAX_NODES, PNEUMOTHORAX_MODULE_LABELS, PNEUMOTHORAX_CITATIONS } from './pneumothorax';
