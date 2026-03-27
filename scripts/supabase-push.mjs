@@ -146,7 +146,7 @@ const TREE_REGISTRY = {
   'caustic-ingestion':    { prefix: 'CAUSTIC_INGESTION',      entryNodeId: 'caustic-start',  categoryId: 'toxicology' },
   'diabetes-management':  { prefix: 'DIABETES_MANAGEMENT',    entryNodeId: 'dm-start',       categoryId: 'nephro-rheum-endo' },
   'massive-transfusion':  { prefix: 'MASSIVE_TRANSFUSION',    entryNodeId: 'mtp-start',      categoryId: 'trauma-surg' },
-  'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pf-start',       categoryId: 'trauma-surg' },
+  'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pelvic-start',   categoryId: 'trauma-surg' },
   'psychiatry-assessment': { prefix: 'PSYCHIATRY_ASSESSMENT', entryNodeId: 'mse-start',      categoryId: 'emergency-medicine' },
   'acute-pancreatitis':   { prefix: 'ACUTE_PANCREATITIS',     entryNodeId: 'ap-start',       categoryId: 'gastroenterology' },
   'serotonin-syndrome':   { prefix: 'SEROTONIN_SYNDROME',     entryNodeId: 'ss-start',       categoryId: 'toxicology' },

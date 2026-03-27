@@ -425,7 +425,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'pelvic-fracture': async () => {
       const m = await import('../data/trees/pelvic-fracture.js');
-      return { nodes: m.PELVIC_FRACTURE_NODES, entryNodeId: 'pf-start', categoryId: 'trauma-surg', moduleLabels: m.PELVIC_FRACTURE_MODULE_LABELS, citations: m.PELVIC_FRACTURE_CITATIONS };
+      return { nodes: m.PELVIC_FRACTURE_NODES, entryNodeId: 'pelvic-start', categoryId: 'trauma-surg', moduleLabels: m.PELVIC_FRACTURE_MODULE_LABELS, citations: m.PELVIC_FRACTURE_CITATIONS };
     },
     'serotonin-syndrome': async () => {
       const m = await import('../data/trees/serotonin-syndrome.js');
