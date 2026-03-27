@@ -41,6 +41,11 @@ export { PELVIC_FRACTURE_NODES, PELVIC_FRACTURE_MODULE_LABELS, PELVIC_FRACTURE_C
 export { MASSIVE_TRANSFUSION_NODES, MASSIVE_TRANSFUSION_MODULE_LABELS, MASSIVE_TRANSFUSION_CITATIONS } from './massive-transfusion';
 export { PSYCHIATRY_ASSESSMENT_NODES, PSYCHIATRY_ASSESSMENT_MODULE_LABELS, PSYCHIATRY_ASSESSMENT_CITATIONS } from './psychiatry-assessment';
 export { SEROTONIN_SYNDROME_NODES, SEROTONIN_SYNDROME_MODULE_LABELS, SEROTONIN_SYNDROME_CITATIONS } from './serotonin-syndrome';
+export { DIGOXIN_TOXICITY_NODES, DIGOXIN_TOXICITY_MODULE_LABELS, DIGOXIN_TOXICITY_CITATIONS } from './digoxin-toxicity';
+export { BETA_BLOCKER_OD_NODES, BETA_BLOCKER_OD_MODULE_LABELS, BETA_BLOCKER_OD_CITATIONS } from './beta-blocker-od';
+export { CCB_OD_NODES, CCB_OD_MODULE_LABELS, CCB_OD_CITATIONS } from './ccb-od';
+export { IRON_OD_NODES, IRON_OD_MODULE_LABELS, IRON_OD_CITATIONS } from './iron-od';
+export { CO_TOXICITY_NODES, CO_TOXICITY_MODULE_LABELS, CO_TOXICITY_CITATIONS } from './co-toxicity';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**

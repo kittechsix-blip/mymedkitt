@@ -150,6 +150,11 @@ const TREE_REGISTRY = {
   'psychiatry-assessment': { prefix: 'PSYCHIATRY_ASSESSMENT', entryNodeId: 'mse-start',      categoryId: 'emergency-medicine' },
   'acute-pancreatitis':   { prefix: 'ACUTE_PANCREATITIS',     entryNodeId: 'ap-start',       categoryId: 'gastroenterology' },
   'serotonin-syndrome':   { prefix: 'SEROTONIN_SYNDROME',     entryNodeId: 'ss-start',       categoryId: 'toxicology' },
+  'digoxin-toxicity':     { prefix: 'DIGOXIN_TOXICITY',       entryNodeId: 'dig-start',      categoryId: 'toxicology' },
+  'beta-blocker-od':      { prefix: 'BETA_BLOCKER_OD',        entryNodeId: 'bb-start',       categoryId: 'toxicology' },
+  'ccb-od':               { prefix: 'CCB_OD',                 entryNodeId: 'ccb-start',      categoryId: 'toxicology' },
+  'iron-od':              { prefix: 'IRON_OD',                entryNodeId: 'iron-start',     categoryId: 'toxicology' },
+  'co-toxicity':          { prefix: 'CO_TOXICITY',            entryNodeId: 'co-start',       categoryId: 'toxicology' },
 };
 
 const CROSS_LISTINGS = {

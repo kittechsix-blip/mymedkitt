@@ -1,0 +1,372 @@
+// MedKitt — Calcium Channel Blocker Overdose
+// CCB toxicity: recognition, shock phenotype classification, high-dose insulin therapy,
+// vasopressor selection, lipid emulsion, and rescue therapies.
+// 8 modules: Recognition → Shock Phenotype → Initial Stabilization → HIET → Vasopressors → Lipid → Rescue → Disposition
+// 28 nodes total.
+export const CCB_OD_NODES = [
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 1: Recognition & Classification
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-start',
+        type: 'question',
+        module: 1,
+        title: 'CCB Overdose — Initial Assessment',
+        body: '[CCB Overdose Steps Summary](#/info/ccb-steps-summary) — quick reference.\n\nCalcium channel blockers are among the most lethal cardiovascular drug overdoses. Understanding the **drug class** is critical for predicting toxicity pattern [1][3].\n\n**Two major classes:**\n\n**Dihydropyridines** (amlodipine, nifedipine, felodipine):\n• Primarily peripheral vasodilation\n• Reflex tachycardia common\n• LESS cardiac depression\n• Predominantly vasodilatory shock\n\n**Non-dihydropyridines** (verapamil, diltiazem):\n• Cardiac conduction slowing\n• Negative inotropy and chronotropy\n• Bradycardia common\n• Predominantly cardiogenic shock\n\n**Classic triad:** Hypotension + bradycardia + hyperglycemia (blocks pancreatic insulin release) [1][3].\n\n**Mental status** often preserved until late — unlike beta-blocker toxicity [2].\n\nWhich CCB class was ingested?',
+        citation: [1, 2, 3],
+        options: [
+            { label: 'Dihydropyridine', description: 'Amlodipine, nifedipine, felodipine — expect vasodilatory shock', next: 'ccb-dhp' },
+            { label: 'Non-dihydropyridine', description: 'Verapamil, diltiazem — expect cardiogenic shock', next: 'ccb-nondhp' },
+            { label: 'Unknown or mixed', description: 'Unclear agent or polypharmacy', next: 'ccb-unknown' },
+        ],
+    },
+    {
+        id: 'ccb-dhp',
+        type: 'info',
+        module: 1,
+        title: 'Dihydropyridine CCB Toxicity',
+        body: '**Dihydropyridines** (amlodipine, nifedipine, felodipine, nicardipine):\n\n• Primarily block L-type calcium channels in **vascular smooth muscle**\n• Relative cardiac sparing at therapeutic doses\n• In overdose: profound vasodilation with **reflex tachycardia**\n• Shock phenotype: **VASODILATORY** (warm extremities, low SVR, preserved or elevated CO initially)\n\n**Amlodipine** is particularly dangerous:\n• Longest half-life (30-50 hours)\n• Extended-release not needed — already long-acting\n• Delayed onset, prolonged toxicity [3]\n\n**Treatment emphasis:** Vasopressors (norepinephrine, vasopressin) [1][2].',
+        citation: [1, 2, 3],
+        next: 'ccb-extended-release',
+    },
+    {
+        id: 'ccb-nondhp',
+        type: 'info',
+        module: 1,
+        title: 'Non-Dihydropyridine CCB Toxicity',
+        body: '**Non-dihydropyridines** (verapamil, diltiazem):\n\n• Block L-type calcium channels in **cardiac tissue**\n• SA node suppression → bradycardia\n• AV node blockade → conduction delays\n• Myocardial depression → reduced contractility\n• Shock phenotype: **CARDIOGENIC** (cool extremities, poor CO, elevated lactate) [1][2]\n\n**Verapamil** is the most cardiotoxic:\n• Greatest negative inotropic effect\n• Most deaths occur with verapamil overdose [3]\n\n**Treatment emphasis:** High-dose insulin euglycemia therapy (HIET) + inotropes [1][2].',
+        citation: [1, 2, 3],
+        next: 'ccb-extended-release',
+    },
+    {
+        id: 'ccb-unknown',
+        type: 'info',
+        module: 1,
+        title: 'Unknown CCB — Treat by Phenotype',
+        body: 'When the specific CCB is unknown:\n\n**Assess the shock phenotype clinically:**\n\n**Vasodilatory shock signs:**\n• Warm extremities\n• Tachycardia (or normal HR)\n• Flash capillary refill\n• Wide pulse pressure initially\n\n**Cardiogenic shock signs:**\n• Cool, mottled extremities\n• Bradycardia\n• Narrow pulse pressure\n• Elevated lactate out of proportion to hypotension\n\n**Mixed shock** is common — treat both components [2].\n\nProceed to shock phenotype assessment.',
+        citation: [2],
+        next: 'ccb-extended-release',
+    },
+    {
+        id: 'ccb-extended-release',
+        type: 'info',
+        module: 1,
+        title: 'Extended-Release Formulations',
+        body: '**Extended-release CCBs are particularly dangerous:**\n\n• Delayed onset of toxicity (up to 12-24 hours post-ingestion)\n• Prolonged and severe toxicity lasting 48-72+ hours\n• Bezoar formation in GI tract possible\n• May appear deceptively well initially [1][3]\n\n**Common extended-release formulations:**\n• Verapamil SR/ER, Diltiazem CD/XR/LA\n• Nifedipine XL, Amlodipine (inherently long-acting)\n\n**GI decontamination is critical:**\n• Whole bowel irrigation with GoLYTELY 2L/hr until clear rectal effluent\n• Consider repeated charcoal doses for bezoar\n• Endoscopic removal rarely needed [1]\n\nAll extended-release ingestions require minimum **24-48 hour ICU monitoring** regardless of initial presentation.',
+        citation: [1, 3],
+        next: 'ccb-shock-phenotype',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 2: Shock Phenotype — Key Differentiator
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-shock-phenotype',
+        type: 'question',
+        module: 2,
+        title: 'Shock Phenotype Assessment',
+        body: '**CRITICAL CONCEPT: Treatment depends on shock phenotype** [1][2].\n\n[CCB Shock Type Guide](#/calc/ccb-shock-type) — phenotype assessment tool.\n\n**VASODILATORY SHOCK:**\n• Warm extremities, flash cap refill\n• Normal or elevated cardiac output\n• Low systemic vascular resistance\n• More common with dihydropyridines\n• **Treatment: VASOPRESSORS (norepinephrine, vasopressin)**\n\n**CARDIOGENIC SHOCK:**\n• Cool, mottled extremities\n• Poor cardiac output, bradycardia\n• Elevated lactate, narrow pulse pressure\n• More common with verapamil/diltiazem\n• **Treatment: HIGH-DOSE INSULIN (HIET) + inotropes**\n\n**MIXED SHOCK:**\n• Features of both — COMMON\n• **Treatment: Both HIET AND vasopressors** [1][2]\n\nWhat is the predominant shock phenotype?',
+        citation: [1, 2],
+        calculatorLinks: [{ id: 'ccb-shock-type', label: 'Shock Type Assessment' }],
+        options: [
+            { label: 'Vasodilatory shock', description: 'Warm extremities, normal/high CO, low SVR — emphasize vasopressors', next: 'ccb-initial-stab', urgency: 'urgent' },
+            { label: 'Cardiogenic shock', description: 'Cool extremities, low CO, bradycardia — emphasize HIET', next: 'ccb-initial-stab', urgency: 'critical' },
+            { label: 'Mixed or unclear', description: 'Features of both — use both treatment modalities', next: 'ccb-initial-stab', urgency: 'critical' },
+            { label: 'Hemodynamically stable', description: 'Normal vitals — monitoring and decontamination', next: 'ccb-initial-stab' },
+        ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 3: Initial Stabilization
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-initial-stab',
+        type: 'info',
+        module: 3,
+        title: 'Initial Stabilization',
+        body: '**Immediate actions:**\n• ABCs, two large-bore IVs\n• Continuous cardiac monitor\n• 12-lead ECG (bradycardia, conduction delays)\n• Labs: BMP, lactate, glucose (hyperglycemia supports diagnosis)\n• Consider central line and arterial line early\n\n**[Atropine](#/drug/atropine/ccb bradycardia)** 0.5-1 mg IV:\n• Usually **ineffective** — toxicity is at the calcium channel, not vagal\n• May try, but do not delay other interventions [1][3]\n\n**Transcutaneous pacing:**\n• Temporizing measure\n• Often fails to capture or improve BP due to impaired contractility\n• Do not rely on pacing alone [1]',
+        citation: [1, 3],
+        next: 'ccb-calcium',
+    },
+    {
+        id: 'ccb-calcium',
+        type: 'info',
+        module: 3,
+        title: 'Calcium Therapy',
+        body: '[Calcium Dosing Guide](#/calc/ccb-calcium) — dosing calculator.\n\n**Calcium** is a first-line temporizing agent [1][3]:\n\n**Calcium chloride 10%:**\n• 1-2g (10-20 mL) IV over 5-10 min\n• 3x more elemental calcium than gluconate\n• Requires central line (causes tissue necrosis if extravasated)\n\n**Calcium gluconate 10%:**\n• 3-6g (30-60 mL) IV over 5-10 min\n• Can give peripherally\n• Preferred if no central access\n\n**Repeat dosing:**\n• May repeat q15-20 min PRN\n• Can give continuous infusion: 0.5 mEq/kg/hr (monitor for hypercalcemia)\n• Goal: overcome competitive blockade at calcium channels [1]\n\n**Monitoring:**\n• Ionized calcium q2-4h\n• Target iCa 1.5-2x normal\n• Watch for hypercalcemia (rarely limits therapy)',
+        citation: [1, 3],
+        calculatorLinks: [{ id: 'ccb-calcium', label: 'Calcium Dosing Guide' }],
+        treatment: {
+            firstLine: {
+                drug: 'Calcium chloride 10%',
+                dose: '1-2g (10-20 mL)',
+                route: 'IV over 5-10 min (central line)',
+                frequency: 'Repeat q15-20 min PRN',
+                duration: 'Until hemodynamic improvement',
+                notes: 'Requires central line. 3x more elemental Ca than gluconate.',
+            },
+            alternative: {
+                drug: 'Calcium gluconate 10%',
+                dose: '3-6g (30-60 mL)',
+                route: 'IV over 5-10 min',
+                frequency: 'Repeat q15-20 min PRN',
+                duration: 'Until hemodynamic improvement',
+                notes: 'Can give peripherally. Continuous infusion: 0.5 mEq/kg/hr.',
+            },
+            monitoring: 'Ionized calcium q2-4h. Target iCa 1.5-2x normal. Monitor ECG.',
+        },
+        next: 'ccb-glucagon',
+    },
+    {
+        id: 'ccb-glucagon',
+        type: 'info',
+        module: 3,
+        title: 'Glucagon',
+        body: '**[Glucagon](#/drug/glucagon/ccb toxicity)** 3-5 mg IV bolus [1][3]:\n\n• Bypasses the calcium channel via cAMP-mediated pathway\n• **Less effective in CCB than in beta-blocker toxicity**\n• May provide modest inotropic/chronotropic support\n• Still worth trying as a bridge while preparing other therapies\n\n**Dosing:**\n• Bolus: 3-5 mg IV\n• If response: infusion 2-5 mg/hr\n• Common side effect: nausea/vomiting — consider antiemetic\n\n**Do not rely on glucagon** — proceed rapidly to definitive therapies (HIET, vasopressors).',
+        citation: [1, 3],
+        treatment: {
+            firstLine: {
+                drug: 'Glucagon',
+                dose: '3-5 mg',
+                route: 'IV bolus',
+                frequency: 'Once, then 2-5 mg/hr infusion if response',
+                duration: 'Until other therapies initiated',
+                notes: 'Less effective than in BB toxicity. Bridge therapy only.',
+            },
+            monitoring: 'HR, BP. Anticipate nausea. Do not delay HIET.',
+        },
+        next: 'ccb-gi-decon',
+    },
+    {
+        id: 'ccb-gi-decon',
+        type: 'info',
+        module: 3,
+        title: 'GI Decontamination',
+        body: '**Activated charcoal:**\n• 1 g/kg PO (max 50g) if presenting within 1-2 hours\n• Consider even later for extended-release formulations\n• Protect airway first if altered mental status\n\n**Whole bowel irrigation (WBI):**\n• **Strongly recommended for extended-release CCB** [1]\n• GoLYTELY 1.5-2 L/hr via NG until clear rectal effluent\n• Contraindicated if ileus, obstruction, or hemodynamic instability precluding positioning\n\n**Duration:**\n• May require 4-12 hours for complete bowel evacuation\n• Continue even if patient deteriorates — removing drug load is critical\n\nProceed to definitive treatment based on shock phenotype.',
+        citation: [1],
+        next: 'ccb-hiet-intro',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 4: High-Dose Insulin Euglycemia Therapy (HIET)
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-hiet-intro',
+        type: 'info',
+        module: 4,
+        title: 'High-Dose Insulin Therapy (HIET)',
+        body: '[HIET Protocol](#/calc/ccb-hiet) — dosing calculator.\n\n**HIET is FIRST-LINE for cardiogenic shock phenotype** [1][2][4].\n\n**Mechanism:**\n• In shock, the heart switches from fatty acid to glucose metabolism\n• CCBs block insulin release from pancreas (hyperglycemia is diagnostic)\n• Exogenous insulin restores myocardial glucose uptake\n• Improves contractility independent of calcium channels\n• Some evidence of vasodilation reversal [4]\n\n**Key point:** HIET works through a **completely different mechanism** than trying to overcome calcium channel blockade — it is NOT just pushing more calcium.',
+        citation: [1, 2, 4],
+        calculatorLinks: [{ id: 'ccb-hiet', label: 'HIET Protocol' }],
+        next: 'ccb-hiet-dosing',
+    },
+    {
+        id: 'ccb-hiet-dosing',
+        type: 'info',
+        module: 4,
+        title: 'HIET Dosing Protocol',
+        body: '**Bolus:**\n• [Regular insulin](#/drug/regular-insulin/HIET) 1 unit/kg IV push\n\n**Infusion:**\n• Start at 1 unit/kg/hr\n• Titrate up to **10 units/kg/hr** as needed [1][2][4]\n• Some case reports use even higher doses\n\n**Glucose management is CRITICAL:**\n• If glucose <200 mg/dL: give D50W 25g (50 mL) with bolus\n• Start D10W infusion at 100-200 mL/hr\n• Titrate dextrose to maintain glucose 150-250 mg/dL\n• Check glucose q15-30 min initially, then q1h when stable\n\n**Potassium management:**\n• Insulin drives K+ intracellularly\n• Replete to maintain K+ 4.0-4.5 mEq/L\n• Check K+ with each glucose check initially',
+        citation: [1, 2, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Regular Insulin',
+                dose: '1 unit/kg bolus, then 1-10 units/kg/hr infusion',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: 'Until hemodynamic recovery',
+                notes: 'Titrate up to 10 units/kg/hr. Maintain glucose 150-250.',
+            },
+            monitoring: 'Glucose q15-30 min initially. K+ q1-2h. Replete K+ to 4.0-4.5. D10W infusion PRN.',
+        },
+        next: 'ccb-hiet-onset',
+    },
+    {
+        id: 'ccb-hiet-onset',
+        type: 'info',
+        module: 4,
+        title: 'HIET — Onset and Monitoring',
+        body: '**Onset of effect:**\n• Hemodynamic improvement typically within **15-60 minutes**\n• May take longer — do not abandon therapy prematurely\n• Some patients require several hours to respond [4]\n\n**Signs of response:**\n• Improved blood pressure\n• Improved cardiac output (if monitored)\n• Decreased vasopressor requirements\n• Improved mental status\n• Lactate clearance\n\n**Common pitfalls:**\n• Stopping HIET too early\n• Inadequate dextrose supplementation → hypoglycemia\n• Failure to monitor and replete potassium\n• Using too low a dose — go up to 10 units/kg/hr [1][2]',
+        citation: [1, 2, 4],
+        next: 'ccb-vasopressors',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 5: Vasopressor Therapy
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-vasopressors',
+        type: 'info',
+        module: 5,
+        title: 'Vasopressor Selection',
+        body: '[High-Dose Vasopressor Guide](#/calc/ccb-pressors) — dosing reference.\n\n**For VASODILATORY shock phenotype:**\n\n**[Norepinephrine](#/drug/norepinephrine/ccb shock)** — first-line:\n• Start 0.1 mcg/kg/min\n• Titrate aggressively — up to **0.5-3 mcg/kg/min** [1][2]\n• HIGH DOSES often needed in CCB toxicity\n\n**[Vasopressin](#/drug/vasopressin/ccb shock)** — adjunct:\n• 0.04 units/min (fixed dose)\n• Bypasses the catecholamine pathway entirely\n• Add for refractory vasodilatory shock [1][2]\n\n**[Epinephrine](#/drug/epinephrine/ccb shock):**\n• Combined alpha + beta agonism\n• Consider if combined cardiogenic/vasodilatory features\n• 0.1-0.5 mcg/kg/min, titrate to effect',
+        citation: [1, 2],
+        calculatorLinks: [{ id: 'ccb-pressors', label: 'High-Dose Vasopressor Guide' }],
+        treatment: {
+            firstLine: {
+                drug: 'Norepinephrine',
+                dose: '0.1 mcg/kg/min, titrate up to 0.5-3 mcg/kg/min',
+                route: 'IV infusion (central line preferred)',
+                frequency: 'Continuous',
+                duration: 'Until hemodynamic recovery',
+                notes: 'HIGH doses often needed. Do not be afraid to escalate.',
+            },
+            alternative: {
+                drug: 'Vasopressin',
+                dose: '0.04 units/min',
+                route: 'IV infusion',
+                frequency: 'Fixed dose (do not titrate)',
+                duration: 'Adjunct for refractory cases',
+                notes: 'Bypasses catecholamine pathway. Add to norepinephrine.',
+            },
+            monitoring: 'MAP target 65-70. Lactate clearance. Urine output.',
+        },
+        next: 'ccb-vasopressor-high-dose',
+    },
+    {
+        id: 'ccb-vasopressor-high-dose',
+        type: 'info',
+        module: 5,
+        title: 'High-Dose Vasopressor Rationale',
+        body: '**Why such high doses?**\n\nCCB toxicity causes profound receptor desensitization and catecholamine resistance [2].\n\n**Typical septic shock:** NE 0.1-0.5 mcg/kg/min\n**CCB toxicity:** May need NE 1-3+ mcg/kg/min\n\n**Multi-agent approach:**\n• Norepinephrine (alpha + beta)\n• PLUS vasopressin (V1 receptor — independent of catecholamines)\n• PLUS epinephrine if cardiac output remains poor\n\n**Phenylephrine** (pure alpha):\n• Less preferred — no beta-agonism\n• Consider only if marked tachycardia is problematic\n\n**Do not abandon vasopressors** if initial doses fail — escalate aggressively while adding other therapies.',
+        citation: [2],
+        next: 'ccb-lipid',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 6: Lipid Emulsion Therapy
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-lipid',
+        type: 'info',
+        module: 6,
+        title: 'Lipid Emulsion (Intralipid)',
+        body: '[Intralipid Dosing](#/calc/ccb-intralipid) — dosing calculator.\n\n**Consider lipid emulsion for severe, refractory toxicity** [1][5].\n\n**Best evidence:** Verapamil (highly lipophilic)\n\n**Dosing:**\n• [Intralipid 20%](#/drug/intralipid/ccb toxicity) 1.5 mL/kg IV bolus\n• May repeat bolus x2 PRN (q5 min)\n• Infusion: 0.25-0.5 mL/kg/min\n• **Maximum: 10-12 mL/kg in first hour**\n\n**Mechanism:**\n• Creates a "lipid sink" to sequester lipophilic drugs\n• May have direct cardiac effects\n• Evidence is largely from case reports and animal studies [5]',
+        citation: [1, 5],
+        calculatorLinks: [{ id: 'ccb-intralipid', label: 'Intralipid Dosing' }],
+        treatment: {
+            firstLine: {
+                drug: 'Intralipid 20%',
+                dose: '1.5 mL/kg bolus, then 0.25-0.5 mL/kg/min infusion',
+                route: 'IV',
+                frequency: 'Bolus may repeat x2 PRN',
+                duration: 'Max 10-12 mL/kg in first hour',
+                notes: 'Best evidence for verapamil. Reserve for refractory toxicity.',
+            },
+            monitoring: 'Lipemia may interfere with lab assays. Watch for pancreatitis.',
+        },
+        next: 'ccb-rescue',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 7: Rescue Therapies
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-rescue',
+        type: 'question',
+        module: 7,
+        title: 'Rescue Therapies',
+        body: '**When standard therapy fails:**\n\nPatient not responding to:\n• Calcium\n• HIET\n• High-dose vasopressors\n• Lipid emulsion\n\nWhat is the current status?',
+        options: [
+            { label: 'Refractory vasoplegia', description: 'SVR remains critically low despite max pressors', next: 'ccb-methylene-blue', urgency: 'critical' },
+            { label: 'Refractory cardiogenic shock', description: 'CO remains poor despite HIET', next: 'ccb-ecmo', urgency: 'critical' },
+            { label: 'Refractory bradycardia', description: 'HR critically low, not responding', next: 'ccb-pacing', urgency: 'critical' },
+            { label: 'Improving on current therapy', description: 'Hemodynamics stabilizing', next: 'ccb-disposition' },
+        ],
+    },
+    {
+        id: 'ccb-methylene-blue',
+        type: 'info',
+        module: 7,
+        title: 'Methylene Blue',
+        body: '**[Methylene blue](#/drug/methylene-blue/vasoplegia)** for refractory vasoplegia [1]:\n\n• Inhibits nitric oxide synthase and guanylate cyclase\n• Blocks the NO-mediated vasodilation pathway\n• Mechanism independent of catecholamines\n\n**Dosing:**\n• 1-2 mg/kg IV over 5-15 minutes\n• May repeat q1h PRN\n• Some use continuous infusion 0.5 mg/kg/hr\n\n**Cautions:**\n• Contraindicated with serotonergic drugs (risk of serotonin syndrome)\n• G6PD deficiency — risk of hemolysis\n• Will cause blue discoloration of skin/urine\n• Interferes with pulse oximetry readings\n\n**Evidence:** Case reports and small series in CCB toxicity. Mechanism-based rationale.',
+        citation: [1],
+        treatment: {
+            firstLine: {
+                drug: 'Methylene Blue',
+                dose: '1-2 mg/kg',
+                route: 'IV over 5-15 minutes',
+                frequency: 'May repeat q1h PRN',
+                duration: 'Until vasoplegia resolves',
+                notes: 'Avoid with serotonergic drugs. Interferes with pulse ox.',
+            },
+            monitoring: 'BP response. Watch for serotonin syndrome if on SSRIs.',
+        },
+        next: 'ccb-ecmo',
+    },
+    {
+        id: 'ccb-pacing',
+        type: 'info',
+        module: 7,
+        title: 'Temporary Pacing',
+        body: '**Temporary pacing for refractory bradycardia:**\n\n**Transcutaneous pacing:**\n• Immediate temporizing measure\n• Often fails to capture or improve hemodynamics\n• Contractility is impaired — pacing improves rate but not inotropy\n\n**Transvenous pacing:**\n• More reliable capture\n• Consider if transcutaneous fails\n• Still will not address underlying contractile dysfunction\n\n**Key point:** Pacing addresses RATE but NOT the underlying calcium channel blockade causing poor contractility. Continue HIET and other therapies even if pacing captures [1].\n\nIf pacing fails to improve hemodynamics, proceed to ECMO consideration.',
+        citation: [1],
+        next: 'ccb-ecmo',
+    },
+    {
+        id: 'ccb-ecmo',
+        type: 'info',
+        module: 7,
+        title: 'VA-ECMO — Bridge to Recovery',
+        body: '**VA-ECMO** is the ultimate rescue for refractory CCB toxicity [1][3].\n\n**Key principle:** CCB toxicity is **REVERSIBLE** — patients can fully recover if bridged through the acute phase.\n\n**When to consider:**\n• Cardiac arrest despite all other measures\n• Refractory shock despite maximum medical therapy\n• Young, previously healthy patient with reversible cause\n• Lactate rising despite aggressive resuscitation\n\n**Contact ECMO team EARLY** — do not wait until arrest.\n\n**Considerations:**\n• Half-life of CCBs: 4-50 hours depending on agent\n• Extended-release formulations may require prolonged support\n• Full neurologic recovery is possible even after prolonged resuscitation\n\n**Dialysis is NOT effective:**\n• CCBs are highly protein-bound with large volume of distribution\n• Hemodialysis will not meaningfully remove drug [1][3]',
+        citation: [1, 3],
+        next: 'ccb-disposition',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 8: Disposition
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'ccb-disposition',
+        type: 'question',
+        module: 8,
+        title: 'Disposition',
+        body: '**All significant CCB ingestions require ICU admission** [1][3].\n\n**Extended-release formulations:**\n• Minimum 24-48 hour monitoring regardless of initial presentation\n• Watch for delayed deterioration — can occur 12-24 hours post-ingestion\n\n**Psychiatric evaluation** is mandatory for intentional ingestions after medical clearance.\n\nWhat is the current clinical status?',
+        citation: [1, 3],
+        options: [
+            { label: 'ICU admission — unstable', description: 'Any hemodynamic instability, ongoing therapy', next: 'ccb-icu', urgency: 'critical' },
+            { label: 'ICU admission — stable but high-risk', description: 'Extended-release, verapamil, large ingestion', next: 'ccb-icu-stable' },
+            { label: 'Low-risk observation', description: 'Small immediate-release DHP, asymptomatic', next: 'ccb-obs' },
+        ],
+    },
+    {
+        id: 'ccb-icu',
+        type: 'result',
+        module: 8,
+        title: 'ICU Admission — Unstable',
+        body: '**ICU admission for active management:**\n\n• Continuous telemetry and arterial line\n• Continue HIET, vasopressors, calcium as indicated\n• Serial labs: glucose q1h, K+ q2h, lactate q4h, iCa q4h\n• Wean therapies slowly as hemodynamics improve\n\n**Duration of monitoring:**\n• Until hemodynamically stable off vasopressors x12-24h\n• Extended-release: minimum 48-72h even after stabilization\n\n**Watch for:**\n• Late deterioration with extended-release formulations\n• Rebound hyperkalemia when stopping HIET\n• Hypoglycemia after HIET discontinuation\n\n**Poison Control:** 1-800-222-1222',
+        recommendation: 'ICU admission with continuous monitoring, ongoing HIET/vasopressors as indicated, and minimum 24-48h observation.',
+        confidence: 'definitive',
+        citation: [1, 3],
+    },
+    {
+        id: 'ccb-icu-stable',
+        type: 'result',
+        module: 8,
+        title: 'ICU Admission — High-Risk but Stable',
+        body: '**ICU admission for monitoring:**\n\n**High-risk features requiring ICU even if currently stable:**\n• Extended-release formulation (ANY)\n• Verapamil ingestion (ANY significant amount)\n• Large ingestion of any CCB\n• Co-ingestion with beta-blockers or other cardiotoxic drugs\n\n**Monitoring plan:**\n• Continuous telemetry — minimum 24-48 hours\n• Serial ECGs q4-6h\n• Serial labs q6h\n• NPO or clear liquids only (in case of deterioration)\n\n**Do not be reassured** by initial stability — delayed toxicity is common and dangerous.\n\n**Poison Control:** 1-800-222-1222',
+        recommendation: 'ICU admission for 24-48h monitoring even if hemodynamically stable. Extended-release ingestions require prolonged observation.',
+        confidence: 'definitive',
+        citation: [1, 3],
+    },
+    {
+        id: 'ccb-obs',
+        type: 'result',
+        module: 8,
+        title: 'Low-Risk Observation',
+        body: '**Monitored observation may be appropriate for:**\n• Small, unintentional immediate-release DHP ingestion\n• Completely asymptomatic\n• Normal vitals and ECG\n• Reliable history\n\n**Observation criteria:**\n• Continuous telemetry minimum 6 hours\n• Serial vitals q1h\n• Serial ECGs q2h\n• If any abnormality develops → escalate to ICU\n\n**Discharge criteria:**\n• Asymptomatic x6 hours\n• Normal vitals and ECG throughout\n• Able to tolerate PO\n• Psychiatric clearance if intentional\n\n**If ANY doubt — admit to ICU.** These are potentially lethal ingestions.\n\n**Poison Control:** 1-800-222-1222',
+        recommendation: 'Monitored observation x6h for low-risk immediate-release ingestions. Escalate immediately if any hemodynamic changes.',
+        confidence: 'recommended',
+        citation: [1, 3],
+    },
+];
+export const CCB_OD_NODE_COUNT = CCB_OD_NODES.length;
+export const CCB_OD_MODULE_LABELS = [
+    'Recognition & Classification',
+    'Shock Phenotype',
+    'Initial Stabilization',
+    'High-Dose Insulin (HIET)',
+    'Vasopressor Therapy',
+    'Lipid Emulsion',
+    'Rescue Therapies',
+    'Disposition',
+];
+export const CCB_OD_CITATIONS = [
+    { num: 1, text: 'St-Onge M, Dubé PA, Gosselin S, et al. Treatment for Calcium Channel Blocker Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944. AACT Position Statement.' },
+    { num: 2, text: 'Levine M, Curry SC, Padilla-Jones A, Ruha AM. Critical Care Management of Verapamil and Diltiazem Overdose With a Focus on Vasopressors: A 25-Year Experience at a Single Center. Ann Emerg Med. 2013;62(3):252-258.' },
+    { num: 3, text: 'Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):507-523.' },
+    { num: 4, text: 'Engebretsen KM, Kaczmarek KM, Morgan J, Holger JS. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283.' },
+    { num: 5, text: 'Mégarbane B, Karyo S, Baud FJ. The Role of Antidotes in the Management of Calcium Channel Blocker Poisoning. Presse Med. 2013;42(4 Pt 2):e99-e109.' },
+];

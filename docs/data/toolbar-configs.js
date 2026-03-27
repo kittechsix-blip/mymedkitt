@@ -351,6 +351,41 @@ const TOOLBAR_CONFIGS = {
         { id: 'drug-list', label: 'Drug List', icon: '💊', action: 'calculator', target: 'ss-drug-list' },
         { id: 'cypro', label: 'Cypro', icon: '💉', action: 'calculator', target: 'cyproheptadine-dosing' },
     ],
+    'digoxin-toxicity': [
+        { id: 'digifab', label: 'DigiFab', icon: '💉', action: 'calculator', target: 'digifab-calculator' },
+        { id: 'dig-ecg', label: 'ECG', icon: '📈', action: 'calculator', target: 'dig-ecg' },
+        { id: 'acute-chronic', label: 'Acute/Chronic', icon: '🔀', action: 'calculator', target: 'dig-acute-chronic' },
+        { id: 'arrhythmia', label: 'Arrhythmia', icon: '💓', action: 'calculator', target: 'dig-arrhythmia' },
+        { id: 'interactions', label: 'Interactions', icon: '⚠️', action: 'calculator', target: 'dig-drug-interactions' },
+    ],
+    'beta-blocker-od': [
+        { id: 'bb-hiet', label: 'HIET', icon: '💉', action: 'calculator', target: 'bb-hiet' },
+        { id: 'bb-glucagon', label: 'Glucagon', icon: '💊', action: 'calculator', target: 'bb-glucagon' },
+        { id: 'bb-intralipid', label: 'Intralipid', icon: '🧴', action: 'calculator', target: 'bb-intralipid' },
+        { id: 'bb-pressors', label: 'Pressors', icon: '📈', action: 'calculator', target: 'bb-pressors' },
+        { id: 'bb-agents', label: 'Agent Guide', icon: '📋', action: 'calculator', target: 'bb-agent-guide' },
+    ],
+    'ccb-od': [
+        { id: 'ccb-shock', label: 'Shock Type', icon: '🔀', action: 'calculator', target: 'ccb-shock-type' },
+        { id: 'ccb-hiet', label: 'HIET', icon: '💉', action: 'calculator', target: 'ccb-hiet' },
+        { id: 'ccb-calcium', label: 'Calcium', icon: '💊', action: 'calculator', target: 'ccb-calcium' },
+        { id: 'ccb-pressors', label: 'Pressors', icon: '📈', action: 'calculator', target: 'ccb-pressors' },
+        { id: 'ccb-intralipid', label: 'Intralipid', icon: '🧴', action: 'calculator', target: 'ccb-intralipid' },
+    ],
+    'iron-od': [
+        { id: 'iron-calc', label: 'Iron Calc', icon: '🧮', action: 'calculator', target: 'iron-calc' },
+        { id: 'iron-level', label: 'Level', icon: '📊', action: 'calculator', target: 'iron-level' },
+        { id: 'iron-dfo', label: 'DFO', icon: '💉', action: 'calculator', target: 'iron-dfo' },
+        { id: 'iron-wbi', label: 'WBI', icon: '💧', action: 'calculator', target: 'iron-wbi' },
+        { id: 'iron-stages', label: 'Stages', icon: '📋', action: 'calculator', target: 'iron-stages' },
+    ],
+    'co-toxicity': [
+        { id: 'co-level', label: 'COHb', icon: '📊', action: 'calculator', target: 'co-level' },
+        { id: 'co-hbo', label: 'HBO', icon: '🫁', action: 'calculator', target: 'co-hbo' },
+        { id: 'co-halflife', label: 'Half-Life', icon: '⏱️', action: 'calculator', target: 'co-half-life' },
+        { id: 'co-pregnancy', label: 'Pregnancy', icon: '🤰', action: 'calculator', target: 'co-pregnancy' },
+        { id: 'co-cyanide', label: 'Cyanide', icon: '⚠️', action: 'calculator', target: 'co-cyanide' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

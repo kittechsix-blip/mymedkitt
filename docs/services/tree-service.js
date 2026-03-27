@@ -377,6 +377,26 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/serotonin-syndrome.js');
             return { nodes: m.SEROTONIN_SYNDROME_NODES, entryNodeId: 'ss-start', categoryId: 'toxicology', moduleLabels: m.SEROTONIN_SYNDROME_MODULE_LABELS, citations: m.SEROTONIN_SYNDROME_CITATIONS };
         },
+        'digoxin-toxicity': async () => {
+            const m = await import('../data/trees/digoxin-toxicity.js');
+            return { nodes: m.DIGOXIN_TOXICITY_NODES, entryNodeId: 'dig-start', categoryId: 'toxicology', moduleLabels: m.DIGOXIN_TOXICITY_MODULE_LABELS, citations: m.DIGOXIN_TOXICITY_CITATIONS };
+        },
+        'beta-blocker-od': async () => {
+            const m = await import('../data/trees/beta-blocker-od.js');
+            return { nodes: m.BETA_BLOCKER_OD_NODES, entryNodeId: 'bb-start', categoryId: 'toxicology', moduleLabels: m.BETA_BLOCKER_OD_MODULE_LABELS, citations: m.BETA_BLOCKER_OD_CITATIONS };
+        },
+        'ccb-od': async () => {
+            const m = await import('../data/trees/ccb-od.js');
+            return { nodes: m.CCB_OD_NODES, entryNodeId: 'ccb-start', categoryId: 'toxicology', moduleLabels: m.CCB_OD_MODULE_LABELS, citations: m.CCB_OD_CITATIONS };
+        },
+        'iron-od': async () => {
+            const m = await import('../data/trees/iron-od.js');
+            return { nodes: m.IRON_OD_NODES, entryNodeId: 'iron-start', categoryId: 'toxicology', moduleLabels: m.IRON_OD_MODULE_LABELS, citations: m.IRON_OD_CITATIONS };
+        },
+        'co-toxicity': async () => {
+            const m = await import('../data/trees/co-toxicity.js');
+            return { nodes: m.CO_TOXICITY_NODES, entryNodeId: 'co-start', categoryId: 'toxicology', moduleLabels: m.CO_TOXICITY_MODULE_LABELS, citations: m.CO_TOXICITY_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

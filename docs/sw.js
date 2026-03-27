@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v319';
+const CACHE_NAME = 'medkitt-v320';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -74,6 +74,11 @@ const ASSETS_TO_CACHE = [
   './data/trees/burns.js',
   './data/trees/acute-pancreatitis.js',
   './data/trees/serotonin-syndrome.js',
+  './data/trees/digoxin-toxicity.js',
+  './data/trees/beta-blocker-od.js',
+  './data/trees/ccb-od.js',
+  './data/trees/iron-od.js',
+  './data/trees/co-toxicity.js',
   './data/trees/chest-tube.js',
   './data/trees/croup.js',
   './data/trees/delirium.js',
