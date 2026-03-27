@@ -125,6 +125,7 @@ const TREE_REGISTRY = {
   'anticoag-reversal':    { prefix: 'ANTICOAG_REVERSAL',     entryNodeId: 'acr-start',      categoryId: 'heme-onc' },
   'combative-patient':    { prefix: 'COMBATIVE_PATIENT',     entryNodeId: 'comb-start',     categoryId: 'emergency-medicine' },
   'acute-pancreatitis':   { prefix: 'ACUTE_PANCREATITIS',    entryNodeId: 'ap-start',       categoryId: 'gastroenterology' },
+  'serotonin-syndrome':   { prefix: 'SEROTONIN_SYNDROME',    entryNodeId: 'ss-start',       categoryId: 'toxicology' },
 };
 
 // Cross-listing: which consults appear in multiple categories

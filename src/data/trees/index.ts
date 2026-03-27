@@ -41,6 +41,7 @@ export { EPISTAXIS_NODES, EPISTAXIS_MODULE_LABELS, EPISTAXIS_CITATIONS } from '.
 export { PELVIC_FRACTURE_NODES, PELVIC_FRACTURE_MODULE_LABELS, PELVIC_FRACTURE_CITATIONS } from './pelvic-fracture';
 export { MASSIVE_TRANSFUSION_NODES, MASSIVE_TRANSFUSION_MODULE_LABELS, MASSIVE_TRANSFUSION_CITATIONS } from './massive-transfusion';
 export { PSYCHIATRY_ASSESSMENT_NODES, PSYCHIATRY_ASSESSMENT_MODULE_LABELS, PSYCHIATRY_ASSESSMENT_CITATIONS } from './psychiatry-assessment';
+export { SEROTONIN_SYNDROME_NODES, SEROTONIN_SYNDROME_MODULE_LABELS, SEROTONIN_SYNDROME_CITATIONS } from './serotonin-syndrome';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

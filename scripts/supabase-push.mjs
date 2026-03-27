@@ -149,6 +149,7 @@ const TREE_REGISTRY = {
   'pelvic-fracture':      { prefix: 'PELVIC_FRACTURE',        entryNodeId: 'pf-start',       categoryId: 'trauma-surg' },
   'psychiatry-assessment': { prefix: 'PSYCHIATRY_ASSESSMENT', entryNodeId: 'mse-start',      categoryId: 'emergency-medicine' },
   'acute-pancreatitis':   { prefix: 'ACUTE_PANCREATITIS',     entryNodeId: 'ap-start',       categoryId: 'gastroenterology' },
+  'serotonin-syndrome':   { prefix: 'SEROTONIN_SYNDROME',     entryNodeId: 'ss-start',       categoryId: 'toxicology' },
 };
 
 const CROSS_LISTINGS = {

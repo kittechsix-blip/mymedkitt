@@ -343,6 +343,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'mctsi', label: 'MCTSI', icon: '🩻', action: 'calculator', target: 'mctsi' },
         { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ap-fluid-rate' },
     ],
+    'serotonin-syndrome': [
+        { id: 'hunter', label: 'Hunter', icon: '✅', action: 'calculator', target: 'hunter-criteria' },
+        { id: 'ss-nms', label: 'SS vs NMS', icon: '🔀', action: 'calculator', target: 'ss-nms-diff' },
+        { id: 'drug-list', label: 'Drug List', icon: '💊', action: 'calculator', target: 'ss-drug-list' },
+        { id: 'cypro', label: 'Cypro', icon: '💉', action: 'calculator', target: 'cyproheptadine-dosing' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
