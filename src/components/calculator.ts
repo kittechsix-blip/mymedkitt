@@ -11693,6 +11693,92 @@ const CCB_INTRALIPID_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Push-Dose Pressors Quick Cards
+// -------------------------------------------------------------------
+
+const PDP_EPI_QUICK_CARD: CalculatorDefinition = {
+  id: 'pdp-epi-quick',
+  title: 'Push-Dose Epinephrine',
+  subtitle: 'Quick Dosing Card',
+  description: 'Rapid reference for push-dose epinephrine preparation and dosing.',
+  fields: [],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Weingart S. EMCrit Podcast 6 & 205 - Push-Dose Pressors. EMCrit.',
+    'Acquisto NM, et al. Push-Dose Pressors in the ED. ACEP Now. 2021.',
+  ],
+  computeResult: () => ({
+    value: 'READY',
+    label: 'Push-Dose Epinephrine',
+    description: '**PREPARATION (EMCrit Method):**\n\n' +
+      '1. Take **10 mL syringe** with **9 mL NS**\n' +
+      '2. Draw **1 mL from cardiac epi amp** (1:10,000 = 100 mcg/mL)\n' +
+      '3. Mix well\n\n' +
+      '**RESULT:** 10 mL at **10 mcg/mL** (1:100,000)\n\n' +
+      '---\n\n' +
+      '**DOSING:**\n\n' +
+      '| Dose | Volume | Frequency |\n' +
+      '|------|--------|----------|\n' +
+      '| 5-10 mcg | 0.5-1 mL | q1-5 min |\n' +
+      '| 10-20 mcg | 1-2 mL | q1-5 min |\n\n' +
+      '**Onset:** <1 minute | **Duration:** 5-10 minutes\n\n' +
+      '---\n\n' +
+      '**KEY SAFETY:**\n' +
+      '- NEVER give 1 mg (cardiac arrest dose) to patient with pulse\n' +
+      '- LABEL SYRINGE CLEARLY\n' +
+      '- Safe for peripheral IV at this concentration\n' +
+      '- This = same concentration as lido w/ epi (1:100,000)\n\n' +
+      '**PREFERRED for most situations** (provides alpha + beta effects)',
+    colorVar: '--color-primary',
+  }),
+};
+
+const PDP_PHENYL_QUICK_CARD: CalculatorDefinition = {
+  id: 'pdp-phenyl-quick',
+  title: 'Push-Dose Phenylephrine',
+  subtitle: 'Quick Dosing Card',
+  description: 'Rapid reference for push-dose phenylephrine preparation and dosing.',
+  fields: [],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Weingart S. EMCrit Podcast 6 & 205 - Push-Dose Pressors. EMCrit.',
+    'Acquisto NM, et al. Push-Dose Pressors in the ED. ACEP Now. 2021.',
+  ],
+  computeResult: () => ({
+    value: 'READY',
+    label: 'Push-Dose Phenylephrine',
+    description: '**PREPARATION (EMCrit Method):**\n\n' +
+      '1. Draw **1 mL phenylephrine** from vial (10 mg/mL)\n' +
+      '2. Inject into **100 mL NS bag**\n' +
+      '3. Mix well by inverting\n' +
+      '4. Draw into syringe for use\n\n' +
+      '**RESULT:** 100 mL at **100 mcg/mL**\n\n' +
+      '---\n\n' +
+      '**DOSING:**\n\n' +
+      '| Dose | Volume | Frequency |\n' +
+      '|------|--------|----------|\n' +
+      '| 50-100 mcg | 0.5-1 mL | q3-5 min |\n' +
+      '| 100-200 mcg | 1-2 mL | q3-5 min |\n\n' +
+      '**Onset:** <1 minute | **Duration:** 5-20 minutes\n\n' +
+      '---\n\n' +
+      '**KEY POINTS:**\n' +
+      '- **Pure alpha agonist** (vasoconstriction only)\n' +
+      '- NO chronotropy, NO inotropy\n' +
+      '- May cause **reflex bradycardia**\n' +
+      '- Higher mixing error potential than epi\n\n' +
+      '**BEST FOR:**\n' +
+      '- Hypotension + tachycardia (rapid AFib, SVT)\n' +
+      '- Pure vasodilation with preserved cardiac output\n\n' +
+      '**AVOID IF:**\n' +
+      '- Bradycardia\n' +
+      '- Low cardiac output / cardiogenic component',
+    colorVar: '--color-warning',
+  }),
+};
+
+// -------------------------------------------------------------------
 // Iron Overdose Calculators
 // -------------------------------------------------------------------
 
@@ -14200,6 +14286,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'aortic-anti-impulse': AORTIC_ANTI_IMPULSE_CALCULATOR,
   'aortic-type-guide': AORTIC_TYPE_GUIDE_CALCULATOR,
   'aaa-permissive-hypotension': AAA_PERMISSIVE_HYPOTENSION_CALCULATOR,
+  // Push-Dose Pressors
+  'pdp-epi-quick': PDP_EPI_QUICK_CARD,
+  'pdp-phenyl-quick': PDP_PHENYL_QUICK_CARD,
   // Digoxin toxicity
   'dig-fab-dosing': DIG_FAB_DOSING_CALCULATOR,
   'dig-ecg': DIG_ECG_CALCULATOR,

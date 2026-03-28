@@ -15,6 +15,8 @@ export const PUSH_DOSE_PRESSORS_NODES = [
         citation: [1, 2, 3, 6],
         calculatorLinks: [
             { id: 'map-calculator', label: 'MAP Calculator' },
+            { id: 'pdp-epi-quick', label: 'Epi Quick Card' },
+            { id: 'pdp-phenyl-quick', label: 'Phenyl Quick Card' },
         ],
         options: [
             {
