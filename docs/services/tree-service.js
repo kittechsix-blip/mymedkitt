@@ -421,6 +421,30 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/aortic-aneurysm.js');
             return { nodes: m.AORTIC_ANEURYSM_NODES, entryNodeId: 'aortic-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_ANEURYSM_MODULE_LABELS, citations: m.AORTIC_ANEURYSM_CITATIONS };
         },
+        'measles': async () => {
+            const m = await import('../data/trees/measles.js');
+            return { nodes: m.MEASLES_NODES, entryNodeId: 'measles-start', categoryId: 'infectious-disease', moduleLabels: m.MEASLES_MODULE_LABELS, citations: m.MEASLES_CITATIONS };
+        },
+        'trach-emergency': async () => {
+            const m = await import('../data/trees/trach-emergency.js');
+            return { nodes: m.TRACH_EMERGENCY_NODES, entryNodeId: 'trach-start', categoryId: 'emergency-medicine', moduleLabels: m.TRACH_EMERGENCY_MODULE_LABELS, citations: m.TRACH_EMERGENCY_CITATIONS };
+        },
+        'methemoglobinemia': async () => {
+            const m = await import('../data/trees/methemoglobinemia.js');
+            return { nodes: m.METHEMOGLOBINEMIA_NODES, entryNodeId: 'methb-start', categoryId: 'toxicology', moduleLabels: m.METHEMOGLOBINEMIA_MODULE_LABELS, citations: m.METHEMOGLOBINEMIA_CITATIONS };
+        },
+        'extensor-tendon': async () => {
+            const m = await import('../data/trees/extensor-tendon.js');
+            return { nodes: m.EXTENSOR_TENDON_NODES, entryNodeId: 'ext-start', categoryId: 'procedures', moduleLabels: m.EXTENSOR_TENDON_MODULE_LABELS, citations: m.EXTENSOR_TENDON_CITATIONS };
+        },
+        'deep-neck-infection': async () => {
+            const m = await import('../data/trees/deep-neck-infection.js');
+            return { nodes: m.DEEP_NECK_INFECTION_NODES, entryNodeId: 'dni-start', categoryId: 'infectious-disease', moduleLabels: m.DEEP_NECK_INFECTION_MODULE_LABELS, citations: m.DEEP_NECK_INFECTION_CITATIONS };
+        },
+        'vp-shunt': async () => {
+            const m = await import('../data/trees/vp-shunt.js');
+            return { nodes: m.VP_SHUNT_NODES, entryNodeId: 'vps-start', categoryId: 'neurology', moduleLabels: m.VP_SHUNT_MODULE_LABELS, citations: m.VP_SHUNT_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

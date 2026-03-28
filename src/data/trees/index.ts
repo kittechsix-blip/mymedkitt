@@ -53,6 +53,12 @@ export { MYASTHENIA_GRAVIS_NODES, MYASTHENIA_GRAVIS_MODULE_LABELS, MYASTHENIA_GR
 export { ECMO_NODES, ECMO_MODULE_LABELS, ECMO_CITATIONS } from './ecmo';
 export { PUSH_DOSE_PRESSORS_NODES, PUSH_DOSE_PRESSORS_MODULE_LABELS, PUSH_DOSE_PRESSORS_CITATIONS } from './push-dose-pressors';
 export { AORTIC_ANEURYSM_NODES, AORTIC_ANEURYSM_MODULE_LABELS, AORTIC_ANEURYSM_CITATIONS } from './aortic-aneurysm';
+export { MEASLES_NODES, MEASLES_MODULE_LABELS, MEASLES_CITATIONS } from './measles';
+export { TRACH_EMERGENCY_NODES, TRACH_EMERGENCY_MODULE_LABELS, TRACH_EMERGENCY_CITATIONS } from './trach-emergency';
+export { METHEMOGLOBINEMIA_NODES, METHEMOGLOBINEMIA_MODULE_LABELS, METHEMOGLOBINEMIA_CITATIONS } from './methemoglobinemia';
+export { EXTENSOR_TENDON_NODES, EXTENSOR_TENDON_MODULE_LABELS, EXTENSOR_TENDON_CITATIONS } from './extensor-tendon';
+export { DEEP_NECK_INFECTION_NODES, DEEP_NECK_INFECTION_MODULE_LABELS, DEEP_NECK_INFECTION_CITATIONS } from './deep-neck-infection';
+export { VP_SHUNT_NODES, VP_SHUNT_MODULE_LABELS, VP_SHUNT_CITATIONS } from './vp-shunt';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
