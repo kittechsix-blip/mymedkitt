@@ -164,30 +164,6 @@ export function renderDashboard(container) {
         categoriesSection.appendChild(card);
     }
     dashboard.appendChild(categoriesSection);
-    // ---- Quick Actions ----
-    const quickActions = document.createElement('div');
-    quickActions.className = 'dashboard-quick-actions';
-    const drugsBtn = document.createElement('button');
-    drugsBtn.className = 'dashboard-quick-action';
-    drugsBtn.type = 'button';
-    const drugsIcon = document.createElement('span');
-    drugsIcon.className = 'dashboard-quick-action__icon';
-    drugsIcon.textContent = '💊';
-    drugsBtn.appendChild(drugsIcon);
-    drugsBtn.appendChild(document.createTextNode('Drugs'));
-    drugsBtn.addEventListener('click', () => router.navigate('/drugs'));
-    const calcsBtn = document.createElement('button');
-    calcsBtn.className = 'dashboard-quick-action';
-    calcsBtn.type = 'button';
-    const calcsIcon = document.createElement('span');
-    calcsIcon.className = 'dashboard-quick-action__icon';
-    calcsIcon.textContent = '🧮';
-    calcsBtn.appendChild(calcsIcon);
-    calcsBtn.appendChild(document.createTextNode('Calculators'));
-    calcsBtn.addEventListener('click', () => router.navigate('/calculators'));
-    quickActions.appendChild(drugsBtn);
-    quickActions.appendChild(calcsBtn);
-    dashboard.appendChild(quickActions);
     // ---- Unlock All (shared mode only) ----
     if (sharedMode) {
         const unlockBtn = document.createElement('button');
