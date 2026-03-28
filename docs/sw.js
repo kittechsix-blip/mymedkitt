@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v323';
+const CACHE_NAME = 'medkitt-v324';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -23,6 +23,7 @@ const ASSETS_TO_CACHE = [
   './components/consult-wizard.js',
   './components/contextual-toolbar.js',
   './components/dashboard.js',
+  './components/spotlight.js',
   './components/decision-card.js',
   './components/dosing-banner.js',
   './components/drug-store.js',
