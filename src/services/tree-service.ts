@@ -515,6 +515,22 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hfnc.js');
       return { nodes: m.HFNC_NODES, entryNodeId: 'hfnc-start', categoryId: 'critical-care', moduleLabels: m.HFNC_MODULE_LABELS, citations: m.HFNC_CITATIONS };
     },
+    'peds-stec-hus': async () => {
+      const m = await import('../data/trees/peds-stec-hus.js');
+      return { nodes: m.PEDS_STEC_HUS_NODES, entryNodeId: 'stec-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_STEC_HUS_MODULE_LABELS, citations: m.PEDS_STEC_HUS_CITATIONS };
+    },
+    'nail-bed-injuries': async () => {
+      const m = await import('../data/trees/nail-bed-injuries.js');
+      return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS };
+    },
+    'eclampsia': async () => {
+      const m = await import('../data/trees/eclampsia.js');
+      return { nodes: m.ECLAMPSIA_NODES, entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn', moduleLabels: m.ECLAMPSIA_MODULE_LABELS, citations: m.ECLAMPSIA_CITATIONS };
+    },
+    'aortic-dissection': async () => {
+      const m = await import('../data/trees/aortic-dissection.js');
+      return { nodes: m.AORTIC_DISSECTION_NODES, entryNodeId: 'dissect-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_DISSECTION_MODULE_LABELS, citations: m.AORTIC_DISSECTION_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

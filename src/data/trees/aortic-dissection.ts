@@ -1,0 +1,354 @@
+// MedKitt - Aortic Dissection
+// ED recognition, risk stratification, imaging strategy, and management
+// 5 modules: Recognition -> ADD-RS & D-dimer -> Imaging -> Immediate Management -> Type-Specific Treatment
+// Based on AHA/ACC 2022 guidelines, EMCrit, and current literature
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+export const AORTIC_DISSECTION_NODES: DecisionNode[] = [
+  // ===================================================================
+  // MODULE 1: Recognition
+  // ===================================================================
+  {
+    id: 'dissect-start',
+    type: 'info',
+    module: 1,
+    title: 'Aortic Dissection Overview',
+    body: '**Aortic dissection is a tear in the aortic intima with propagation of blood into the media.** [1,2]\n\n**Epidemiology:**\n- Incidence: 2.6-3.5 per 100,000 person-years\n- Male predominance (65%)\n- Peak age: 60-70 years\n- Mortality: 1-2% per hour if untreated (Type A)\n\n**Classifications:** [1]\n\n**Stanford (most commonly used):**\n- **Type A:** Involves ascending aorta (regardless of origin)\n- **Type B:** Does NOT involve ascending aorta\n\n**DeBakey:**\n- **Type I:** Originates in ascending, propagates to descending\n- **Type II:** Confined to ascending aorta\n- **Type III:** Originates distal to left subclavian\n  - IIIa: Confined to descending thoracic\n  - IIIb: Extends into abdominal aorta\n\n**Key point:** Stanford Type A = surgical emergency. Type B = usually medical management.',
+    citation: [1, 2],
+    next: 'dissect-risk-factors',
+  },
+  {
+    id: 'dissect-risk-factors',
+    type: 'info',
+    module: 1,
+    title: 'Risk Factors',
+    body: '**High-risk conditions for aortic dissection:** [1,2]\n\n**Hypertension (most common - 75%):**\n- Chronic shear stress on aortic wall\n- Often poorly controlled\n\n**Connective tissue disorders:**\n- Marfan syndrome (most important in young patients)\n- Ehlers-Danlos type IV\n- Loeys-Dietz syndrome\n- Turner syndrome\n\n**Aortic pathology:**\n- Bicuspid aortic valve (5-10x increased risk)\n- Prior aortic surgery or intervention\n- Known aortic aneurysm\n- Coarctation of aorta\n\n**Other:**\n- Cocaine/stimulant use (acute severe hypertension)\n- Pregnancy (especially 3rd trimester, postpartum)\n- Trauma (deceleration injuries)\n- Iatrogenic (cardiac surgery, catheterization)\n- Inflammatory conditions (giant cell arteritis, Takayasu)\n\n**Age considerations:**\n- Young patients (<40): suspect connective tissue disorder\n- Older patients: hypertension, atherosclerosis',
+    citation: [1, 2],
+    next: 'dissect-presentation',
+  },
+  {
+    id: 'dissect-presentation',
+    type: 'info',
+    module: 1,
+    title: 'Clinical Presentation',
+    body: '**Classic presentation: sudden severe chest pain.** [1,3]\n\n**Pain characteristics (90% present with pain):**\n- Sudden onset, maximal at onset (instantaneous)\n- Severe, "worst pain of life"\n- Tearing, ripping, or sharp quality (50%)\n- Anterior chest: Type A\n- Back/interscapular: Type B or extension\n- Migratory pain: suggests propagation\n\n**Associated symptoms:**\n- Syncope (9-13%) - poor prognostic sign\n- Dyspnea (heart failure, hemothorax, tamponade)\n- Stroke symptoms (carotid involvement)\n- Paraplegia (spinal artery involvement)\n- Limb ischemia (branch vessel involvement)\n- Abdominal pain (mesenteric ischemia)\n\n**Physical findings:** [3]\n- Hypertension (70%) - more common in Type B\n- Hypotension/shock (25%) - suggests rupture or tamponade\n- Pulse deficits (15-30%)\n- Blood pressure differential >20 mmHg between arms\n- Aortic regurgitation murmur (32% of Type A)\n- Focal neurologic deficits (17-40%)',
+    citation: [1, 3],
+    next: 'dissect-atypical',
+  },
+  {
+    id: 'dissect-atypical',
+    type: 'info',
+    module: 1,
+    title: 'Atypical Presentations',
+    body: '**Aortic dissection can mimic many conditions.** [3,4]\n\n**"Painless" dissection (6%):**\n- More common in elderly, diabetics\n- May present with syncope, stroke, or heart failure only\n\n**Stroke-like presentation:**\n- Carotid artery involvement (Type A)\n- May delay diagnosis if only CT head obtained\n- Always consider dissection in young stroke\n\n**Acute coronary syndrome mimic:**\n- Coronary ostia involvement causes true MI\n- ECG may show STEMI pattern\n- Fatal to give thrombolytics or aggressive anticoagulation\n\n**Acute aortic regurgitation:**\n- Acute heart failure, pulmonary edema\n- New diastolic murmur\n\n**Spinal cord ischemia:**\n- Paraplegia, paraparesis\n- Intercostal or lumbar artery involvement\n\n**Mesenteric ischemia:**\n- Abdominal pain, bloody diarrhea\n- SMA or celiac involvement\n\n**Limb ischemia:**\n- Pulseless, cool extremity\n- Iliac or subclavian involvement',
+    citation: [3, 4],
+    next: 'dissect-branch',
+  },
+  {
+    id: 'dissect-branch',
+    type: 'question',
+    module: 1,
+    title: 'Clinical Assessment',
+    body: 'What is the clinical scenario? [1]',
+    citation: [1],
+    options: [
+      {
+        label: 'High suspicion (classic presentation)',
+        description: 'Sudden severe chest/back pain, maximal at onset, risk factors present',
+        next: 'dissect-immediate-workup',
+        urgency: 'critical',
+      },
+      {
+        label: 'Moderate suspicion',
+        description: 'Chest pain with some concerning features, need risk stratification',
+        next: 'dissect-add-rs',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Low suspicion, rule-out needed',
+        description: 'Chest pain without classic features, want to exclude dissection',
+        next: 'dissect-add-rs',
+      },
+    ],
+  },
+
+  // ===================================================================
+  // MODULE 2: ADD-RS & D-dimer
+  // ===================================================================
+  {
+    id: 'dissect-add-rs',
+    type: 'info',
+    module: 2,
+    title: 'ADD-RS Score',
+    body: '**Aortic Dissection Detection Risk Score (ADD-RS)** stratifies pretest probability. [5,6]\n\n**Category 1 - High-Risk Conditions (1 point):**\n- Marfan syndrome (or other connective tissue disorder)\n- Family history of aortic disease\n- Known aortic valve disease\n- Known thoracic aortic aneurysm\n- Prior aortic manipulation (surgery, intervention)\n\n**Category 2 - High-Risk Pain Features (1 point):**\n- Chest, back, or abdominal pain with:\n  - Abrupt onset\n  - Severe intensity\n  - Ripping or tearing quality\n\n**Category 3 - High-Risk Exam Findings (1 point):**\n- Pulse deficit or SBP differential >20 mmHg\n- Focal neurologic deficit + chest pain\n- New aortic regurgitation murmur\n- Hypotension or shock\n\n**Scoring:** [5]\n- **0 points:** Low risk (~5% prevalence)\n- **1 point:** Intermediate risk (~15% prevalence)\n- **2-3 points:** High risk (~30-50% prevalence)',
+    citation: [5, 6],
+    calculatorLinks: [
+      { id: 'add-rs', label: 'ADD-RS Calculator' },
+    ],
+    next: 'dissect-ddimer',
+  },
+  {
+    id: 'dissect-ddimer',
+    type: 'info',
+    module: 2,
+    title: 'D-dimer in Aortic Dissection',
+    body: '**D-dimer can help rule OUT dissection in LOW-RISK patients.** [5,6,7]\n\n**Key evidence (ADvISED study 2018):** [6]\n- D-dimer <500 ng/mL + ADD-RS 0-1 = very low miss rate\n- Sensitivity of D-dimer alone: ~97%\n- Negative predictive value in low-risk: >99%\n\n**When D-dimer is helpful:**\n- ADD-RS 0: D-dimer <500 essentially rules out\n- ADD-RS 1: D-dimer <500 may avoid CTA in appropriate patients\n\n**When D-dimer is NOT helpful:**\n- ADD-RS ≥2 (go straight to CTA)\n- Symptoms >24 hours (D-dimer may normalize)\n- Intramural hematoma (may have lower D-dimer)\n- Chronic dissection\n\n**Elevated D-dimer in dissection:**\n- Most dissections have D-dimer >500\n- Higher D-dimer correlates with larger dissection extent\n- False negatives occur (small, localized dissections)\n\n**Bottom line:** D-dimer is a rule-OUT test in LOW-RISK patients only. High-risk → CTA.',
+    citation: [5, 6, 7],
+    next: 'dissect-pathway',
+  },
+  {
+    id: 'dissect-pathway',
+    type: 'question',
+    module: 2,
+    title: 'Diagnostic Pathway',
+    body: 'Based on ADD-RS score and clinical assessment: [5,6]',
+    citation: [5, 6],
+    options: [
+      {
+        label: 'ADD-RS 0, D-dimer negative',
+        description: 'Low risk, D-dimer <500 ng/mL → dissection ruled out',
+        next: 'dissect-ruled-out',
+      },
+      {
+        label: 'ADD-RS 0-1, D-dimer positive',
+        description: 'D-dimer ≥500 or not done → imaging needed',
+        next: 'dissect-imaging',
+        urgency: 'urgent',
+      },
+      {
+        label: 'ADD-RS ≥2 (any D-dimer)',
+        description: 'High risk → immediate imaging regardless of D-dimer',
+        next: 'dissect-immediate-workup',
+        urgency: 'critical',
+      },
+    ],
+  },
+  {
+    id: 'dissect-ruled-out',
+    type: 'result',
+    module: 2,
+    title: 'Dissection Ruled Out',
+    body: '**Low-risk patient with negative D-dimer:** [6]\n\n**ADD-RS 0 + D-dimer <500 ng/mL:**\n- False negative rate <1%\n- Consider alternative diagnoses for chest pain\n- Standard chest pain workup as indicated\n\n**Alternative diagnoses to consider:**\n- Acute coronary syndrome\n- Pulmonary embolism\n- Musculoskeletal pain\n- Pericarditis\n- Esophageal pathology\n- Pneumothorax\n\n**Disposition:**\n- If all other serious causes excluded, may discharge\n- Ensure close follow-up\n- Clear return precautions\n\n**Caution:** If clinical suspicion remains despite negative D-dimer, imaging should still be obtained. Clinical judgment supersedes algorithms.',
+    recommendation: 'Aortic dissection effectively ruled out with ADD-RS 0 and D-dimer <500. Evaluate for alternative diagnoses.',
+    confidence: 'consider',
+    citation: [6],
+  },
+
+  // ===================================================================
+  // MODULE 3: Imaging
+  // ===================================================================
+  {
+    id: 'dissect-imaging',
+    type: 'info',
+    module: 3,
+    title: 'Imaging Modalities',
+    body: '**CTA is the first-line imaging test for aortic dissection.** [1,8]\n\n**CT Angiography (CTA):**\n- Sensitivity: 95-100%\n- Specificity: 98-100%\n- Fast, widely available\n- Shows extent, branch involvement, complications\n- **First choice in ED**\n\n**TEE (Transesophageal Echo):**\n- Sensitivity: 98%\n- Specificity: 95%\n- Good for unstable patients (bedside)\n- Excellent for Type A, proximal extent\n- Limited view of distal ascending and arch\n- Requires sedation, may miss distal disease\n\n**MRA:**\n- Sensitivity: 98%\n- Specificity: 98%\n- No radiation or contrast\n- Too slow for acute ED evaluation\n- Use for follow-up or stable patients\n\n**TTE (Transthoracic Echo):**\n- Low sensitivity (60-80%)\n- Can show: pericardial effusion, AR, proximal flap (sometimes)\n- Does NOT rule out dissection\n- Useful for rapid bedside assessment of complications',
+    citation: [1, 8],
+    next: 'dissect-cta-findings',
+  },
+  {
+    id: 'dissect-cta-findings',
+    type: 'info',
+    module: 3,
+    title: 'CTA Findings',
+    body: '**What to look for on CTA:** [1,8]\n\n**Primary findings:**\n- Intimal flap separating true and false lumen\n- True lumen: often smaller, compressed\n- False lumen: often larger, may have slower flow\n- Entry tear location\n- Extent of dissection\n\n**Branch vessel involvement:**\n- Coronary arteries (Type A)\n- Brachiocephalic/carotid/subclavian\n- Celiac, SMA, renal arteries\n- Iliac arteries\n\n**Complications to identify:**\n- Pericardial effusion/tamponade\n- Hemothorax/mediastinal hematoma\n- Malperfusion (renal, mesenteric, limb)\n- Aortic rupture\n\n**Intramural hematoma (IMH):**\n- Variant of dissection (6-20%)\n- Crescent-shaped wall thickening >5mm\n- No visible intimal flap or flow in false lumen\n- Same management as typical dissection\n\n**Penetrating atherosclerotic ulcer (PAU):**\n- Focal, contained rupture through intima\n- May progress to IMH or dissection',
+    citation: [1, 8],
+    next: 'dissect-immediate-workup',
+  },
+  {
+    id: 'dissect-immediate-workup',
+    type: 'info',
+    module: 3,
+    title: 'Immediate Workup',
+    body: '**For high-suspicion patients, initiate workup and treatment simultaneously.** [1]\n\n**Do NOT delay imaging for labs.**\n\n**Labs to send:**\n- Type and screen (crossmatch 6 units PRBCs)\n- CBC, BMP, coagulation studies\n- Troponin (coronary involvement vs MI)\n- Lactate (malperfusion)\n- BNP (heart failure, AR)\n\n**ECG:**\n- Often non-specific\n- May show LVH (chronic hypertension)\n- May show ischemia/STEMI (coronary involvement)\n- Critical to differentiate from primary ACS\n\n**Chest X-ray:**\n- Widened mediastinum (50-60%)\n- Abnormal aortic contour\n- Pleural effusion (hemothorax)\n- **Normal CXR does NOT rule out dissection**\n\n**Bedside echo:**\n- Pericardial effusion?\n- Aortic regurgitation?\n- LV function?\n- Proximal flap visible?',
+    citation: [1],
+    next: 'dissect-management',
+  },
+
+  // ===================================================================
+  // MODULE 4: Immediate Management
+  // ===================================================================
+  {
+    id: 'dissect-management',
+    type: 'info',
+    module: 4,
+    title: 'Immediate Management Goals',
+    body: '**Goals of initial management:** [1,9]\n\n**1. Pain control:**\n- Reduces sympathetic drive\n- Reduces BP and heart rate\n- IV opioids (morphine, fentanyl)\n\n**2. Heart rate control (first priority):**\n- Target HR <60 bpm\n- Reduces dP/dt (force of aortic wall stress)\n- Beta-blockers are first-line\n\n**3. Blood pressure control:**\n- Target SBP 100-120 mmHg\n- AFTER heart rate controlled\n- Avoid reflex tachycardia from vasodilators\n\n**4. Prevent extension/rupture:**\n- Anti-impulse therapy\n- Avoid anticoagulation (unless clear indication)\n- NPO for possible surgery\n\n**Key concept: Anti-impulse therapy** [9]\n- dP/dt = change in pressure over time\n- Wall stress = pressure × radius / wall thickness\n- Reduce both HR and BP to minimize wall stress\n- Beta-blocker BEFORE vasodilator',
+    citation: [1, 9],
+    next: 'dissect-beta-blocker',
+  },
+  {
+    id: 'dissect-beta-blocker',
+    type: 'info',
+    module: 4,
+    title: 'Beta-Blocker Therapy',
+    body: '**Beta-blockers are the cornerstone of anti-impulse therapy.** [1,9]\n\n**Esmolol (preferred for titration):**\n- Bolus: 500 mcg/kg IV over 1 minute\n- Infusion: 50-200 mcg/kg/min\n- Ultra-short acting (t½ 9 minutes)\n- Easy to titrate up/down\n- Stop if proceeding to OR\n\n**Labetalol (alternative):**\n- 20mg IV, then 20-80mg q10min\n- Max 300mg\n- Combined alpha/beta blockade\n- Longer duration (good for stable patients)\n\n**Metoprolol:**\n- 5mg IV q5min, up to 15mg\n- Then 25-50mg PO q6h\n- Longer acting\n\n**Target:**\n- HR <60 bpm\n- Adequate dosing before adding vasodilator\n\n**Contraindications:**\n- Severe bradycardia\n- AV block\n- Acute heart failure (relative)\n- Severe AR with hemodynamic compromise\n- Cocaine-induced (relative - use cautiously)',
+    citation: [1, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Esmolol',
+        dose: '500 mcg/kg bolus, then 50-200 mcg/kg/min',
+        route: 'IV',
+        frequency: 'Continuous infusion',
+        duration: 'Until surgery or switched to oral',
+        notes: 'Titrate to HR <60. Add vasodilator only after adequate beta-blockade.',
+      },
+      alternative: {
+        drug: 'Labetalol',
+        dose: '20mg IV, then 20-80mg q10min (max 300mg)',
+        route: 'IV',
+        frequency: 'Bolus dosing',
+        duration: 'Until HR controlled',
+        notes: 'Combined alpha/beta blocker. Good alternative to esmolol.',
+      },
+      monitoring: 'Continuous HR monitoring. Target HR <60 bpm. BP q5min during titration. Continuous arterial line recommended.',
+    },
+    next: 'dissect-vasodilator',
+  },
+  {
+    id: 'dissect-vasodilator',
+    type: 'info',
+    module: 4,
+    title: 'Vasodilator Therapy',
+    body: '**Add vasodilator AFTER beta-blockade to reach BP goal.** [1,9]\n\n**Why beta-blocker first:**\n- Vasodilators cause reflex tachycardia\n- Tachycardia increases dP/dt and wall stress\n- Can worsen dissection propagation\n\n**Nicardipine (preferred):**\n- Start: 5 mg/hr IV\n- Titrate: 2.5 mg/hr every 5-15 min\n- Max: 15 mg/hr\n- Smooth, predictable control\n\n**Nitroprusside (alternative):**\n- Start: 0.3-0.5 mcg/kg/min\n- Titrate: up to 10 mcg/kg/min\n- Very potent, requires arterial line\n- Cyanide toxicity with prolonged use (>48h)\n- Avoid if possible\n\n**Clevidipine:**\n- Start: 1-2 mg/hr\n- Double q90 seconds until target\n- Max: 32 mg/hr\n- Ultra-short acting\n\n**Target BP:**\n- SBP 100-120 mmHg\n- Lowest BP that maintains organ perfusion\n- Monitor urine output, mental status',
+    citation: [1, 9],
+    next: 'dissect-hypotension',
+  },
+  {
+    id: 'dissect-hypotension',
+    type: 'info',
+    module: 4,
+    title: 'Hypotensive Dissection',
+    body: '**Hypotension in aortic dissection is a grave sign.** [1,10]\n\n**Causes of hypotension:**\n- Aortic rupture (hemothorax, retroperitoneal)\n- Cardiac tamponade\n- Acute severe aortic regurgitation\n- Malperfusion (cardiogenic shock from coronary involvement)\n\n**Management:**\n- Fluid resuscitation (cautious)\n- Blood product transfusion if hemorrhage\n- Pericardiocentesis ONLY if tamponade and imminent arrest\n  - Prefer surgical drainage (temporizing measure)\n- Vasopressors if needed (norepinephrine, phenylephrine)\n  - Balance: may worsen wall stress but needed to survive\n- Emergent surgical consultation\n\n**Key point:** [10]\n- Do NOT delay surgery for stabilization\n- Hypotensive Type A = OR immediately\n- Pericardiocentesis may relieve tamponade temporarily but can precipitate complete rupture\n\n**Avoid:**\n- Aggressive fluid resuscitation (worsens tamponade)\n- Waiting for hemodynamic optimization before OR',
+    citation: [1, 10],
+    next: 'dissect-type-decision',
+  },
+
+  // ===================================================================
+  // MODULE 5: Type-Specific Treatment
+  // ===================================================================
+  {
+    id: 'dissect-type-decision',
+    type: 'question',
+    module: 5,
+    title: 'Dissection Type',
+    body: 'Based on imaging, what type of aortic dissection is present? [1]',
+    citation: [1],
+    options: [
+      {
+        label: 'Type A (involves ascending aorta)',
+        description: 'Surgical emergency - OR consultation immediately',
+        next: 'dissect-type-a',
+        urgency: 'critical',
+      },
+      {
+        label: 'Type B uncomplicated',
+        description: 'Descending aorta only, no malperfusion, stable',
+        next: 'dissect-type-b-uncomplicated',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Type B complicated',
+        description: 'Malperfusion, rupture, refractory pain/hypertension',
+        next: 'dissect-type-b-complicated',
+        urgency: 'critical',
+      },
+    ],
+  },
+  {
+    id: 'dissect-type-a',
+    type: 'info',
+    module: 5,
+    title: 'Type A Dissection',
+    body: '**Type A dissection is a surgical emergency.** [1,10]\n\n**Mortality without surgery:**\n- 1-2% per hour in first 48 hours\n- 50% at 1 week\n- 90% at 1 year\n\n**Mortality with surgery:**\n- 15-25% overall\n- Higher if complicated (tamponade, malperfusion, shock)\n\n**Immediate actions:**\n- Emergent CT surgery consultation\n- Continue anti-impulse therapy\n- NPO\n- Blood products available (type and crossmatch)\n- Central line, arterial line\n- Prepare OR\n\n**Surgical repair includes:**\n- Replacement of ascending aorta\n- ± Aortic valve repair/replacement\n- ± Coronary reimplantation\n- ± Arch repair\n\n**Special situations:**\n- Stroke: NOT a contraindication (surgery may restore perfusion)\n- Coma: relative contraindication (discuss with team)\n- Advanced age: individualized decision',
+    citation: [1, 10],
+    next: 'dissect-type-a-disposition',
+  },
+  {
+    id: 'dissect-type-a-disposition',
+    type: 'result',
+    module: 5,
+    title: 'Type A Disposition',
+    body: '**All Type A dissections require emergent surgical intervention.** [1]\n\n**ED management while awaiting OR:**\n- ICU-level care in ED\n- Continuous arterial BP monitoring\n- Maintain HR <60, SBP 100-120 mmHg\n- Serial neuro exams\n- Serial lactate if concern for malperfusion\n- Blood products immediately available\n\n**Transfer considerations:**\n- If no CT surgery available, transfer emergently\n- Call accepting facility directly (surgeon-to-surgeon)\n- Medical transport with capability for blood transfusion\n- Continue anti-impulse therapy en route\n- Consider air transport for speed\n\n**Documentation:**\n- Time of symptom onset\n- Time of diagnosis\n- Time of surgical consultation\n- Hemodynamic parameters\n- Complications identified',
+    recommendation: 'Emergent CT surgery consultation. Continue anti-impulse therapy. Prepare for OR or emergent transfer.',
+    confidence: 'definitive',
+    citation: [1],
+  },
+  {
+    id: 'dissect-type-b-uncomplicated',
+    type: 'info',
+    module: 5,
+    title: 'Type B Uncomplicated',
+    body: '**Uncomplicated Type B dissection is managed medically.** [1,11]\n\n**Definition of uncomplicated:**\n- No malperfusion (visceral, renal, limb)\n- No rupture or impending rupture\n- No refractory pain despite medical therapy\n- No refractory hypertension\n- No rapid aortic expansion\n\n**Medical management:**\n- IV anti-impulse therapy (beta-blocker + vasodilator)\n- Admit to ICU\n- Serial imaging (CT or MRI) to monitor\n- Pain control\n- Transition to oral antihypertensives\n\n**Oral regimen goals:**\n- Lifelong beta-blocker (first-line)\n- SBP <130 mmHg (some say <120)\n- HR <60 at rest\n\n**Long-term outcomes:** [11]\n- 30-day mortality: 5-10%\n- 5-year survival: 60-80%\n- Risk of late aneurysm formation\n- Surveillance imaging required',
+    citation: [1, 11],
+    next: 'dissect-type-b-unc-dispo',
+  },
+  {
+    id: 'dissect-type-b-unc-dispo',
+    type: 'result',
+    module: 5,
+    title: 'Type B Uncomplicated Disposition',
+    body: '**Admit to ICU for medical management.** [1,11]\n\n**Initial ICU care:**\n- Arterial line for continuous BP monitoring\n- IV beta-blocker (esmolol) + vasodilator (nicardipine)\n- Pain control\n- Serial abdominal exams (mesenteric ischemia)\n- Monitor urine output, lactate, lower extremity pulses\n\n**Transition to oral therapy:**\n- Once stable on IV meds x 24-48 hours\n- Metoprolol, atenolol, or labetalol\n- Add ACE inhibitor or ARB\n- Add CCB if needed\n\n**Surveillance:**\n- Repeat CTA before discharge (new baseline)\n- CTA at 1, 3, 6, 12 months, then annually\n- Watch for: aneurysm formation, expansion, new dissection\n\n**TEVAR considerations (elective):** [11]\n- Emerging evidence for early TEVAR even in uncomplicated\n- May improve aortic remodeling\n- Discuss with vascular surgery\n\n**Discharge planning:**\n- Lifelong antihypertensives\n- Activity restrictions (avoid heavy lifting, straining)\n- Genetic testing if young or syndromic features',
+    recommendation: 'Admit to ICU for medical anti-impulse therapy. Vascular surgery consultation. Transition to oral agents, discharge with surveillance plan.',
+    confidence: 'definitive',
+    citation: [1, 11],
+  },
+  {
+    id: 'dissect-type-b-complicated',
+    type: 'info',
+    module: 5,
+    title: 'Type B Complicated',
+    body: '**Complicated Type B requires intervention.** [1,11]\n\n**Features of complicated Type B:**\n- **Malperfusion syndromes:**\n  - Mesenteric ischemia (abdominal pain, bloody stool, lactate elevation)\n  - Renal ischemia (oliguria, rising creatinine, hypertension)\n  - Limb ischemia (pulseless, cool extremity)\n  - Spinal cord ischemia (paraplegia)\n- **Rupture** (hemothorax, hemodynamic instability)\n- **Rapid aortic expansion** (>1 cm in 1 year or >5mm in 6 months)\n- **Refractory pain** despite adequate medical therapy\n- **Refractory hypertension** (>3 IV agents)\n\n**Treatment options:** [11]\n- **TEVAR** (Thoracic Endovascular Aortic Repair)\n  - First-line for most complicated Type B\n  - Covers entry tear, promotes remodeling\n  - Less invasive than open surgery\n- **Open surgical repair**\n  - High mortality (30-40%)\n  - Reserved for TEVAR failure or anatomic unsuitability\n- **Fenestration/stenting** for branch vessel malperfusion',
+    citation: [1, 11],
+    next: 'dissect-malperfusion',
+  },
+  {
+    id: 'dissect-malperfusion',
+    type: 'info',
+    module: 5,
+    title: 'Malperfusion Management',
+    body: '**Malperfusion is the major driver of mortality in Type B dissection.** [10,11]\n\n**Mechanism:**\n- True lumen compression by false lumen\n- Branch vessel involvement (static or dynamic)\n- Static: dissection extends into branch\n- Dynamic: flap occludes branch ostium\n\n**Management by territory:**\n\n**Mesenteric ischemia:**\n- Most lethal malperfusion syndrome\n- Emergent intervention (TEVAR, fenestration, or surgery)\n- Monitor lactate, LFTs\n\n**Renal ischemia:**\n- May cause severe hypertension\n- Intervention if oliguria, rising creatinine, or refractory HTN\n- Stenting of renal artery or TEVAR\n\n**Limb ischemia:**\n- Often resolves with TEVAR covering entry tear\n- May need iliofemoral stenting or bypass\n- Watch for compartment syndrome after reperfusion\n\n**Spinal cord ischemia:**\n- Most devastating complication\n- Maintain MAP >80-90 mmHg\n- Spinal drain (CSF drainage) if available\n- TEVAR may or may not restore perfusion',
+    citation: [10, 11],
+    next: 'dissect-type-b-comp-dispo',
+  },
+  {
+    id: 'dissect-type-b-comp-dispo',
+    type: 'result',
+    module: 5,
+    title: 'Complicated Type B Disposition',
+    body: '**Complicated Type B requires urgent intervention.** [1,11]\n\n**Immediate actions:**\n- Emergent vascular surgery consultation\n- Continue anti-impulse therapy\n- ICU admission\n- Prepare for TEVAR or surgery\n\n**Pre-intervention management:**\n- Arterial line, central line\n- Blood products available\n- For spinal cord protection: maintain MAP >80-90\n- For mesenteric ischemia: antibiotics, NG decompression\n\n**Post-intervention care:**\n- ICU monitoring\n- Watch for reperfusion injury\n- Serial neuro exams (spinal cord)\n- Monitor renal function\n- Continue antihypertensive therapy\n\n**If TEVAR/surgery not available:**\n- Transfer to facility with capability\n- Maintain medical management en route\n- Direct communication with accepting vascular surgeon\n\n**Prognosis:**\n- Complicated Type B mortality: 20-30%\n- Better outcomes with early intervention\n- Malperfusion duration correlates with mortality',
+    recommendation: 'Emergent vascular surgery consultation for TEVAR or operative intervention. ICU admission with aggressive medical management.',
+    confidence: 'definitive',
+    citation: [1, 11],
+  },
+];
+
+export const AORTIC_DISSECTION_NODE_COUNT = AORTIC_DISSECTION_NODES.length;
+
+export const AORTIC_DISSECTION_MODULE_LABELS = [
+  'Recognition',
+  'ADD-RS & D-dimer',
+  'Imaging',
+  'Immediate Management',
+  'Type-Specific',
+];
+
+export const AORTIC_DISSECTION_CITATIONS: Citation[] = [
+  { num: 1, text: 'Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. J Am Coll Cardiol. 2022;80(24):e223-e393.' },
+  { num: 2, text: 'Hagan PG, et al. The International Registry of Acute Aortic Dissection (IRAD): new insights into an old disease. JAMA. 2000;283(7):897-903.' },
+  { num: 3, text: 'Klompas M. Does this patient have an acute thoracic aortic dissection? JAMA. 2002;287(17):2262-2272.' },
+  { num: 4, text: 'Imamura H, et al. Acute aortic dissection presenting as neurological symptoms. Ann Vasc Dis. 2019;12(2):141-144.' },
+  { num: 5, text: 'Nazerian P, et al. The aortic dissection detection risk score: a novel concept and diagnostic tool. ACEP CORD-EM module, 2024.' },
+  { num: 6, text: 'Nazerian P, et al. Diagnostic accuracy of the aortic dissection detection risk score plus D-dimer for acute aortic syndromes: the ADvISED prospective multicenter study. Circulation. 2018;137(3):250-258.' },
+  { num: 7, text: 'Suzuki T, et al. Biomarkers of aortic diseases. Am Heart J. 2009;157(6):S62-S68.' },
+  { num: 8, text: 'Goldstein SA, et al. Multimodality imaging of diseases of the thoracic aorta in adults: from the American Society of Echocardiography and the European Association of Cardiovascular Imaging. J Am Soc Echocardiogr. 2015;28(2):119-182.' },
+  { num: 9, text: 'Weingart S. EMCrit Podcast 29 – Aortic Dissection. EMCrit.org. Updated 2024.' },
+  { num: 10, text: 'Trimarchi S, et al. Contemporary results of surgery in acute type A aortic dissection: The International Registry of Acute Aortic Dissection experience. J Thorac Cardiovasc Surg. 2005;129(1):112-122.' },
+  { num: 11, text: 'Fattori R, et al. Complicated acute type B dissection: is surgery still the best option? JACC Cardiovasc Interv. 2008;1(4):395-402.' },
+];

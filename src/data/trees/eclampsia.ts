@@ -1,0 +1,354 @@
+// MedKitt - Eclampsia
+// ED management of seizures in pregnancy with preeclampsia
+// 5 modules: Recognition -> Seizure Control -> BP Management -> Maternal/Fetal Stabilization -> Delivery
+// Based on ACOG 2020, SMFM 2022, and EM literature
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+export const ECLAMPSIA_NODES: DecisionNode[] = [
+  // ===================================================================
+  // MODULE 1: Recognition & Definitions
+  // ===================================================================
+  {
+    id: 'eclampsia-start',
+    type: 'info',
+    module: 1,
+    title: 'Eclampsia Overview',
+    body: '**Eclampsia = new-onset tonic-clonic seizures in a patient with preeclampsia.** [1,2]\n\n**Definition requirements:** [1]\n- Pregnancy ≥20 weeks gestation OR postpartum\n- Generalized tonic-clonic seizure\n- Absence of other cause (epilepsy, intracranial pathology)\n\n**Timing of eclampsia:** [2]\n- Antepartum: 38-53%\n- Intrapartum: 18-36%\n- Postpartum: 11-44% (most within 48h, can occur up to 4 weeks)\n\n**Key epidemiology:**\n- Incidence: 1.6-10 per 10,000 deliveries\n- Maternal mortality: 0-1.8% (developed countries)\n- Major cause of maternal and perinatal morbidity/mortality worldwide\n\n**Risk factors:**\n- Nulliparity\n- Multiple gestation\n- Extremes of maternal age (<20 or >35)\n- Pre-existing hypertension, renal disease, diabetes\n- Previous preeclampsia/eclampsia\n- Inadequate prenatal care',
+    citation: [1, 2],
+    next: 'eclampsia-preeclampsia',
+  },
+  {
+    id: 'eclampsia-preeclampsia',
+    type: 'info',
+    module: 1,
+    title: 'Preeclampsia Spectrum',
+    body: '**Eclampsia exists on the spectrum of hypertensive disorders of pregnancy.** [1,3]\n\n**Preeclampsia without severe features:**\n- BP ≥140/90 on two occasions ≥4h apart after 20 weeks\n- Proteinuria (≥300mg/24h or protein/creatinine ≥0.3)\n- OR other end-organ dysfunction without severe features\n\n**Preeclampsia with severe features (any of):** [1]\n- SBP ≥160 or DBP ≥110 (two readings 4h apart)\n- Platelets <100,000\n- Liver enzymes >2x normal OR RUQ/epigastric pain\n- Creatinine >1.1 or doubling of baseline\n- Pulmonary edema\n- New-onset headache unresponsive to meds\n- Visual disturbances\n\n**HELLP Syndrome:** [3]\n- **H**emolysis (LDH >600, schistocytes)\n- **E**levated **L**iver enzymes (AST/ALT >2x normal)\n- **L**ow **P**latelets (<100,000)\n\n**Key point:** 20-38% of eclampsia occurs WITHOUT prior diagnosis of preeclampsia or hypertension. [2]',
+    citation: [1, 2, 3],
+    next: 'eclampsia-warning',
+  },
+  {
+    id: 'eclampsia-warning',
+    type: 'info',
+    module: 1,
+    title: 'Warning Signs',
+    body: '**Prodromal symptoms often precede eclamptic seizure:** [1,2]\n\n**Headache (66-83%):**\n- Severe, persistent, frontal or occipital\n- Unrelieved by acetaminophen\n- Different from patient\'s usual headaches\n\n**Visual disturbances (27-44%):**\n- Scotomata (blind spots)\n- Blurred vision\n- Photophobia\n- Cortical blindness (rare)\n\n**Epigastric/RUQ pain (12-25%):**\n- Suggests hepatic involvement/HELLP\n- May mimic GERD, cholecystitis\n\n**Other warning signs:**\n- Altered mental status\n- Hyperreflexia with clonus\n- Rapid weight gain/edema\n- Oliguria\n\n**Important:** [2]\n- 20% of eclampsia has NO warning symptoms\n- 16-38% have minimal or no hypertension at seizure onset\n- Cannot rely on absence of symptoms to exclude risk',
+    citation: [1, 2],
+    next: 'eclampsia-branch',
+  },
+  {
+    id: 'eclampsia-branch',
+    type: 'question',
+    module: 1,
+    title: 'Current Status',
+    body: 'What is the current clinical scenario? [1,2]',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'Active seizure',
+        description: 'Patient currently seizing or just seized',
+        next: 'eclampsia-seizure-active',
+        urgency: 'critical',
+      },
+      {
+        label: 'Post-ictal / recent seizure',
+        description: 'Seizure terminated, patient recovering',
+        next: 'eclampsia-postictal',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Severe preeclampsia, no seizure yet',
+        description: 'High-risk patient, seizure prophylaxis needed',
+        next: 'eclampsia-prophylaxis',
+      },
+    ],
+  },
+
+  // ===================================================================
+  // MODULE 2: Seizure Control
+  // ===================================================================
+  {
+    id: 'eclampsia-seizure-active',
+    type: 'info',
+    module: 2,
+    title: 'Active Seizure Management',
+    body: '**Eclamptic seizures are self-limited but require immediate intervention.** [1,4]\n\n**Immediate actions:**\n\n**1. Call for help:**\n- OB stat consult\n- Neonatology if viable fetus\n- Anesthesia\n\n**2. Protect patient:**\n- Left lateral decubitus position (after seizure) to improve uteroplacental flow\n- Pad bedrails\n- Suction available\n- Do NOT restrain or place anything in mouth\n\n**3. Oxygenation:**\n- High-flow O2 via non-rebreather\n- Bag-valve mask if hypoventilating\n- Be prepared for intubation\n\n**4. IV access:**\n- Two large-bore IVs\n- Labs: CBC, CMP, LFTs, coags, type and screen\n- Magnesium level if already on mag\n\n**5. Fetal monitoring:**\n- Continuous fetal monitoring when possible\n- Expect fetal bradycardia during/after seizure (usually recovers)',
+    citation: [1, 4],
+    next: 'eclampsia-mag-loading',
+  },
+  {
+    id: 'eclampsia-mag-loading',
+    type: 'info',
+    module: 2,
+    title: 'Magnesium Loading Dose',
+    body: '**Magnesium sulfate is the FIRST-LINE treatment for eclamptic seizures.** [1,4,5]\n\n**Loading dose:**\n- **4-6g IV over 15-20 minutes**\n- Most protocols: 4g in 100mL NS over 15-20 min\n- If seizure ongoing: give 4g IV push over 5 minutes\n\n**Magnesium works because:** [5]\n- Cerebral vasodilation\n- NMDA receptor antagonism\n- Calcium channel blockade\n- Decreased acetylcholine release\n\n**Why magnesium over benzodiazepines:** [4]\n- Cochrane review: Mag reduces recurrent seizures better than phenytoin or diazepam\n- Prevents eclampsia in severe preeclampsia better than phenytoin\n- Lower maternal mortality\n\n**If already on magnesium when seizure occurs:** [1]\n- Give additional **2g IV bolus over 3-5 minutes**\n- Check magnesium level\n- Consider other etiologies if seizing on therapeutic mag\n\n**Mixing:** 4g MgSO4 = 8mL of 50% solution OR 16mL of 25% solution',
+    citation: [1, 4, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Magnesium Sulfate',
+        dose: '4-6g IV',
+        route: 'IV',
+        frequency: 'Loading dose over 15-20 minutes',
+        duration: 'Single loading dose, then maintenance',
+        notes: 'If seizure ongoing, give 4g IV push over 5 minutes. Follow with maintenance infusion.',
+      },
+      monitoring: 'Monitor DTRs q1-2h, RR every hour, urine output (Foley). Target mag level 4.8-8.4 mg/dL. Check q6h or if toxicity suspected.',
+    },
+    next: 'eclampsia-mag-maintenance',
+  },
+  {
+    id: 'eclampsia-mag-maintenance',
+    type: 'info',
+    module: 2,
+    title: 'Magnesium Maintenance',
+    body: '**After loading dose, start maintenance infusion:** [1,5]\n\n**Standard protocol:**\n- **1-2 g/hour IV continuous infusion**\n- Typical: 40g MgSO4 in 1000mL NS at 50mL/hr (2g/hr)\n- Continue for 24-48 hours postpartum (or after last seizure)\n\n**Therapeutic levels:**\n- Target: 4.8-8.4 mg/dL (4-7 mEq/L)\n- Seizure prophylaxis effective at 4.8-8.4 mg/dL\n\n**Monitoring:**\n- Reflexes (patellar) every 1-2 hours\n- Respiratory rate every hour\n- Urine output (Foley catheter)\n- Magnesium level q6h or if toxicity suspected\n\n**Renal adjustment:**\n- CrCl <30: reduce to 1g/hour\n- Anuria: hold maintenance, check levels frequently\n\n**Signs of toxicity (know these):**\n- Loss of deep tendon reflexes: 9-12 mg/dL\n- Respiratory depression: 12-15 mg/dL\n- Cardiac arrest: >15 mg/dL',
+    citation: [1, 5],
+    next: 'eclampsia-mag-toxicity',
+  },
+  {
+    id: 'eclampsia-mag-toxicity',
+    type: 'info',
+    module: 2,
+    title: 'Magnesium Toxicity',
+    body: '**Recognize and treat magnesium toxicity immediately.** [1,5]\n\n**Toxicity thresholds:**\n| Mag Level | Clinical Finding |\n|-----------|------------------|\n| 4.8-8.4 mg/dL | Therapeutic range |\n| 9-12 mg/dL | Loss of DTRs |\n| 12-15 mg/dL | Respiratory depression |\n| 15-20 mg/dL | Respiratory arrest |\n| >20 mg/dL | Cardiac arrest |\n\n**Management of toxicity:**\n\n**1. Stop magnesium infusion immediately**\n\n**2. Calcium gluconate (antidote):**\n- **1g (10mL of 10% solution) IV over 3-5 minutes**\n- Can repeat in 5 minutes if needed\n- Works within 1-3 minutes\n\n**3. Supportive care:**\n- Ventilatory support (BVM, intubation)\n- Continuous cardiac monitoring\n- IV fluids for diuresis (if renal function adequate)\n\n**Prevention:**\n- Check reflexes before each bolus\n- Never give mag if reflexes absent\n- Ensure UOP >25mL/hr\n- Respiratory rate >12/min',
+    citation: [1, 5],
+    treatment: {
+      firstLine: {
+        drug: 'Calcium Gluconate',
+        dose: '1g (10mL of 10% solution)',
+        route: 'IV',
+        frequency: 'Over 3-5 minutes',
+        duration: 'May repeat in 5 minutes if needed',
+        notes: 'Antidote for magnesium toxicity. Give immediately if respiratory depression or absent reflexes.',
+      },
+      monitoring: 'Continuous cardiac monitoring. Monitor respiratory status and mental status. Check magnesium level after administration.',
+    },
+    next: 'eclampsia-refractory',
+  },
+  {
+    id: 'eclampsia-refractory',
+    type: 'info',
+    module: 2,
+    title: 'Refractory Seizures',
+    body: '**If seizures continue despite magnesium:** [1,4]\n\n**Additional magnesium:**\n- 2g IV bolus over 3-5 minutes (if not already given)\n- Maximum total loading: 8g\n\n**Benzodiazepines:**\n- [Lorazepam](#/drug/lorazepam/eclampsia) 2-4mg IV\n- [Diazepam](#/drug/diazepam/eclampsia) 5-10mg IV\n- Use if mag fails or if concern for non-eclamptic etiology\n\n**Propofol or thiopental:**\n- For status epilepticus\n- Requires intubation\n- Anesthesia consultation\n\n**Levetiracetam:**\n- 1000-2000mg IV\n- Safe in pregnancy\n- Consider if recurrent seizures\n\n**Important considerations:**\n- If seizing on adequate magnesium, consider other causes\n- CT/MRI to rule out: ICH, venous thrombosis, PRES\n- Eclampsia is diagnosis of exclusion in setting of head trauma, focal deficits, or prolonged altered mental status',
+    citation: [1, 4],
+    next: 'eclampsia-postictal',
+  },
+  {
+    id: 'eclampsia-postictal',
+    type: 'info',
+    module: 2,
+    title: 'Post-Ictal Management',
+    body: '**After seizure terminates:** [1,2]\n\n**Immediate assessment:**\n- Airway patency\n- Oxygen saturation (target >94%)\n- Vital signs including BP\n- Mental status (expect postictal confusion 10-20 minutes)\n\n**Fetal assessment:**\n- Fetal heart rate monitoring\n- Bradycardia common during/after seizure (usually resolves)\n- Category III tracing: allow recovery before emergent cesarean\n- Late decelerations may persist - continuous monitoring\n\n**Labs:**\n- Magnesium level (if on mag)\n- CBC, BMP, LFTs, coags, LDH\n- Type and screen\n- Uric acid\n- Urinalysis with protein\n\n**Imaging considerations:** [2]\n- CT head if: focal deficits, prolonged AMS, head trauma, atypical presentation\n- MRI: if suspicion for PRES, venous thrombosis\n- Most uncomplicated eclampsia does NOT need imaging\n\n**Expected recovery:**\n- Mental status clears within 20-30 minutes\n- Persistent AMS (>30 min) warrants imaging',
+    citation: [1, 2],
+    next: 'eclampsia-bp-assessment',
+  },
+  {
+    id: 'eclampsia-prophylaxis',
+    type: 'info',
+    module: 2,
+    title: 'Seizure Prophylaxis',
+    body: '**Magnesium for seizure prophylaxis in severe preeclampsia:** [1,4]\n\n**Indications for prophylaxis:**\n- Preeclampsia with severe features\n- HELLP syndrome\n- Active labor in patient with preeclampsia\n- Planned delivery in severe preeclampsia\n\n**Prophylaxis protocol:**\n- Loading: 4g IV over 20 minutes\n- Maintenance: 1-2g/hour IV\n- Continue 24-48 hours postpartum\n\n**NNT (Number Needed to Treat):** [4]\n- Severe preeclampsia: NNT = 50-100 to prevent 1 eclamptic seizure\n- MAGPIE trial: 50% reduction in eclampsia risk\n\n**Controversial areas:**\n- Mild preeclampsia: benefit less clear\n- Individual risk assessment warranted\n\n**Alternative if magnesium contraindicated:**\n- Phenytoin (loading 10-15 mg/kg, max rate 50 mg/min)\n- Less effective than magnesium\n- Use only if true magnesium allergy or severe toxicity',
+    citation: [1, 4],
+    next: 'eclampsia-bp-assessment',
+  },
+
+  // ===================================================================
+  // MODULE 3: Blood Pressure Management
+  // ===================================================================
+  {
+    id: 'eclampsia-bp-assessment',
+    type: 'info',
+    module: 3,
+    title: 'Blood Pressure in Eclampsia',
+    body: '**Severe hypertension requires urgent treatment to prevent complications.** [1,6]\n\n**Severe hypertension definition:**\n- SBP ≥160 mmHg OR DBP ≥110 mmHg\n- Sustained for ≥15 minutes\n\n**Risks of untreated severe hypertension:**\n- Hemorrhagic stroke (leading cause of eclampsia death)\n- Cardiac failure\n- Placental abruption\n- Pulmonary edema\n\n**Treatment threshold:**\n- Treat within 30-60 minutes of confirmed severe hypertension\n- ACOG recommends treatment as emergency (like stroke BP emergency)\n\n**Target BP:**\n- Goal: 140-150/90-100 mmHg\n- Avoid precipitous drops (risk of uteroplacental hypoperfusion)\n- Never drop MAP by >25% in first hour\n\n**Important:** [6]\n- Persistent severe hypertension is an indication for delivery\n- BP control is bridge to delivery, not definitive treatment',
+    citation: [1, 6],
+    next: 'eclampsia-bp-labetalol',
+  },
+  {
+    id: 'eclampsia-bp-labetalol',
+    type: 'info',
+    module: 3,
+    title: 'Labetalol Protocol',
+    body: '**Labetalol is first-line for severe hypertension in pregnancy.** [1,6]\n\n**Mechanism:**\n- Combined alpha and beta blocker (1:7 ratio)\n- Reduces SVR without reducing cardiac output\n- Does not reduce uteroplacental blood flow\n\n**IV Labetalol escalating protocol:** [6]\n\n| Dose | Wait | If BP still ≥160/110 |\n|------|------|----------------------|\n| 20mg IV | 10 min | Give next dose |\n| 40mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Switch to hydralazine |\n\n**Maximum:** 300mg total in escalating protocol\n\n**Contraindications:**\n- Asthma/severe reactive airway disease\n- Heart block (2nd or 3rd degree)\n- Decompensated heart failure\n- Bradycardia <60\n\n**Alternative if labetalol contraindicated:** Start with hydralazine',
+    citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Labetalol',
+        dose: '20mg → 40mg → 80mg → 80mg IV',
+        route: 'IV',
+        frequency: 'Escalating doses every 10 minutes until BP controlled',
+        duration: 'Until target BP achieved or max 300mg',
+        notes: 'Goal BP 140-150/90-100. Switch to hydralazine if labetalol fails.',
+      },
+      monitoring: 'BP every 5-10 minutes during titration. Monitor HR (watch for bradycardia). Continuous fetal monitoring.',
+    },
+    next: 'eclampsia-bp-hydralazine',
+  },
+  {
+    id: 'eclampsia-bp-hydralazine',
+    type: 'info',
+    module: 3,
+    title: 'Hydralazine Protocol',
+    body: '**Hydralazine is second-line or alternative to labetalol.** [1,6]\n\n**Mechanism:**\n- Direct arteriolar vasodilator\n- No effect on venous capacitance\n- Can cause reflex tachycardia\n\n**IV Hydralazine protocol:**\n\n| Dose | Wait | If BP still ≥160/110 |\n|------|------|----------------------|\n| 5mg IV | 20 min | Give next dose |\n| 5-10mg IV | 20 min | Give next dose |\n| 10mg IV | 20 min | Consider other agent |\n\n**Maximum:** 20-30mg total\n\n**Onset:** 5-20 minutes (slower than labetalol)\n**Duration:** 4-6 hours\n\n**Considerations:**\n- Less predictable response than labetalol\n- May cause maternal tachycardia, headache\n- Pre-load with 500mL NS if volume depleted (prevents hypotension)\n\n**When to use:**\n- Labetalol contraindicated (asthma, bradycardia)\n- Labetalol max dose reached without BP control\n- Provider preference/availability',
+    citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'Hydralazine',
+        dose: '5-10mg IV',
+        route: 'IV',
+        frequency: 'Every 20-30 minutes',
+        duration: 'Until target BP achieved or max 20-30mg',
+        notes: 'Slower onset than labetalol. May cause reflex tachycardia.',
+      },
+      monitoring: 'BP every 10-20 minutes during titration. Monitor HR (may cause tachycardia). Continuous fetal monitoring.',
+    },
+    next: 'eclampsia-bp-nifedipine',
+  },
+  {
+    id: 'eclampsia-bp-nifedipine',
+    type: 'info',
+    module: 3,
+    title: 'Nifedipine (Oral Option)',
+    body: '**Oral nifedipine is an acceptable alternative.** [1,6]\n\n**Immediate-release nifedipine:**\n- 10-20mg PO\n- May repeat in 20-30 minutes\n- Maximum 50mg in short-term management\n\n**Advantages:**\n- No IV required\n- Effective and fast onset (10-20 minutes)\n- Safe in pregnancy\n\n**Concerns (historical, now debunked):**\n- Old teaching avoided nifedipine with magnesium (neuromuscular blockade)\n- Current evidence: safe to use together\n- Brief BP drop possible but usually well-tolerated\n\n**Practical considerations:**\n- Patient must be able to swallow\n- Not for actively seizing patient\n- Good option for severe preeclampsia without active seizure\n- Can use as bridge while obtaining IV access\n\n**Note:** Do NOT use sublingual nifedipine (unpredictable absorption, severe hypotension)',
+    citation: [1, 6],
+    next: 'eclampsia-bp-refractory',
+  },
+  {
+    id: 'eclampsia-bp-refractory',
+    type: 'info',
+    module: 3,
+    title: 'Refractory Hypertension',
+    body: '**If BP remains ≥160/110 despite first and second-line agents:** [1,6]\n\n**Options:**\n\n**Nicardipine infusion:**\n- Start: 5 mg/hr IV\n- Titrate: increase by 2.5 mg/hr every 5 minutes\n- Maximum: 15 mg/hr\n- Requires ICU monitoring\n\n**Esmolol infusion:**\n- Load: 500 mcg/kg over 1 minute\n- Maintenance: 50-200 mcg/kg/min\n- Ultra-short acting (useful near delivery)\n\n**Sodium nitroprusside:**\n- Last resort (fetal cyanide toxicity risk)\n- 0.25-5 mcg/kg/min\n- Use for <4 hours if possible\n- ICU only\n\n**When BP truly refractory:**\n- Delivery is the definitive treatment\n- Persistent severe hypertension = indication for delivery\n- Involve MFM/anesthesia for planning\n\n**Consider secondary causes:**\n- Pheochromocytoma (rare but catastrophic in pregnancy)\n- Renal artery stenosis',
+    citation: [1, 6],
+    next: 'eclampsia-stabilization',
+  },
+
+  // ===================================================================
+  // MODULE 4: Maternal & Fetal Stabilization
+  // ===================================================================
+  {
+    id: 'eclampsia-stabilization',
+    type: 'info',
+    module: 4,
+    title: 'Maternal Stabilization',
+    body: '**Priorities for maternal stabilization:** [1,2,7]\n\n**Airway/Breathing:**\n- Maintain SpO2 >94%\n- Supplemental O2 as needed\n- Aspiration precautions (left lateral positioning)\n- Intubation if: persistent AMS, airway compromise, respiratory failure\n\n**Circulation:**\n- Two large-bore IVs\n- Fluid resuscitation cautiously (avoid pulmonary edema)\n- Avoid aggressive fluid boluses (1-2L max unless hemorrhage)\n\n**Ongoing monitoring:**\n- Continuous pulse oximetry\n- Cardiac monitor\n- Foley catheter (strict I/O)\n- Frequent neuro checks\n\n**Labs to follow:**\n- CBC q6-12h (watch platelets)\n- LFTs, LDH q6-12h (HELLP progression)\n- Creatinine (renal function)\n- Magnesium level q6h or as indicated\n\n**Complications to monitor for:**\n- HELLP syndrome progression\n- DIC\n- Acute kidney injury\n- Pulmonary edema\n- Placental abruption',
+    citation: [1, 2, 7],
+    next: 'eclampsia-hellp',
+  },
+  {
+    id: 'eclampsia-hellp',
+    type: 'info',
+    module: 4,
+    title: 'HELLP Syndrome',
+    body: '**HELLP syndrome occurs in 10-20% of eclampsia cases.** [3,7]\n\n**Diagnostic criteria:** [3]\n- **H**emolysis: LDH >600, schistocytes, indirect bili elevated\n- **E**levated **L**iver enzymes: AST or ALT >2x upper normal\n- **L**ow **P**latelets: <100,000/µL\n\n**Clinical presentation:**\n- Epigastric/RUQ pain (65%)\n- Nausea/vomiting (36%)\n- Headache (31%)\n- May occur without hypertension or proteinuria (15-20%)\n\n**Complications:**\n- DIC (20%)\n- Placental abruption (16%)\n- Acute kidney injury (8%)\n- Pulmonary edema (6%)\n- Hepatic hematoma/rupture (rare but catastrophic)\n\n**Management:**\n- Supportive care\n- Blood products for coagulopathy/thrombocytopenia\n- Delivery (definitive treatment)\n- Steroids (betamethasone) for fetal lung maturity if <34 weeks\n- Dexamethasone 10mg IV q12h x 2 doses may accelerate platelet recovery post-delivery (controversial)',
+    citation: [3, 7],
+    next: 'eclampsia-fetal',
+  },
+  {
+    id: 'eclampsia-fetal',
+    type: 'info',
+    module: 4,
+    title: 'Fetal Assessment',
+    body: '**Fetal status monitoring during eclampsia:** [1,7]\n\n**Expected findings during/after seizure:**\n- Fetal bradycardia (common)\n- Late decelerations\n- Loss of variability\n- Usually recover within 10-20 minutes\n\n**Management approach:** [7]\n- Continuous electronic fetal monitoring\n- Allow fetal recovery after seizure (15-30 minutes)\n- Intrauterine resuscitation:\n  - Maternal left lateral positioning\n  - Oxygen supplementation\n  - IV fluids (cautiously)\n  - Correct maternal hypotension\n\n**When NOT to wait:**\n- Category III tracing with no recovery >30 minutes\n- Placental abruption\n- Cord prolapse\n- Maternal hemodynamic instability\n\n**Antenatal corticosteroids:** [1]\n- Betamethasone 12mg IM q24h x 2 doses\n- If 23-34 weeks gestation and delivery expected within 7 days\n- Do NOT delay delivery for steroid completion if maternal condition unstable',
+    citation: [1, 7],
+    next: 'eclampsia-delivery-decision',
+  },
+
+  // ===================================================================
+  // MODULE 5: Delivery
+  // ===================================================================
+  {
+    id: 'eclampsia-delivery-decision',
+    type: 'info',
+    module: 5,
+    title: 'Delivery Decision',
+    body: '**Delivery is the definitive treatment for eclampsia.** [1,2]\n\n**Timing of delivery:**\n- Eclampsia at ≥34 weeks: delivery after stabilization\n- Eclampsia at <34 weeks: consider delay for steroids IF stable\n- Never delay delivery for steroids if maternal/fetal compromise\n\n**Indications for immediate delivery:**\n- Maternal hemodynamic instability\n- Non-reassuring fetal status (persistent Category III)\n- Placental abruption\n- Uncontrollable seizures\n- Uncontrollable hypertension\n- HELLP with hepatic hemorrhage\n\n**Route of delivery:** [2]\n- Cesarean is NOT mandatory for eclampsia\n- Vaginal delivery acceptable if:\n  - Favorable cervix\n  - Reassuring fetal status\n  - Stable maternal condition\n- Cesarean indications: usual obstetric indications, fetal distress, failed induction\n\n**Timing after seizure:**\n- Stabilize first (seizure control, BP management)\n- Target delivery within 12-24 hours of eclampsia diagnosis\n- Do NOT rush to cesarean during active seizure or immediate postictal period',
+    citation: [1, 2],
+    next: 'eclampsia-anesthesia',
+  },
+  {
+    id: 'eclampsia-anesthesia',
+    type: 'info',
+    module: 5,
+    title: 'Anesthesia Considerations',
+    body: '**Anesthesia consultation is essential.** [1,7]\n\n**Regional anesthesia (preferred if eligible):**\n- Epidural or spinal\n- Contraindicated if: platelets <70,000, coagulopathy, patient refusal\n- Check platelet count before neuraxial\n\n**General anesthesia risks in eclampsia:** [7]\n- Difficult airway (edema, short neck)\n- Hypertensive response to intubation\n- Increased aspiration risk\n- Drug interactions with magnesium (prolonged paralysis)\n\n**If general anesthesia required:**\n- Rapid sequence intubation\n- Blunt hypertensive response:\n  - Lidocaine 1.5 mg/kg IV before intubation\n  - Remifentanil 1 mcg/kg\n  - Esmolol 1-2 mg/kg\n- Have difficult airway equipment ready\n- Reduce succinylcholine dose (mag potentiates)\n\n**Platelet thresholds:**\n- Neuraxial: >70,000 (some say >80,000)\n- Cesarean with general: no minimum if emergent\n- Platelet transfusion available',
+    citation: [1, 7],
+    next: 'eclampsia-postpartum',
+  },
+  {
+    id: 'eclampsia-postpartum',
+    type: 'info',
+    module: 5,
+    title: 'Postpartum Management',
+    body: '**Most maternal deaths from eclampsia occur postpartum.** [1,2]\n\n**Magnesium continuation:**\n- Continue 24-48 hours after delivery OR after last seizure\n- Minimum 24 hours\n- Some protocols extend to 48 hours for severe cases\n\n**Postpartum monitoring:**\n- Frequent vital signs (q1h initially)\n- Continued neurologic assessment\n- Strict I/O\n- Watch for pulmonary edema (fluid mobilization post-delivery)\n\n**BP management postpartum:** [6]\n- Continue IV agents if needed\n- Transition to oral agents:\n  - Labetalol 200-400mg PO q8-12h\n  - Nifedipine 30-60mg daily (extended release)\n  - Avoid ACE inhibitors if breastfeeding (enalapril OK)\n- Target BP <150/100 before discharge\n\n**Late postpartum eclampsia:**\n- Can occur up to 4 weeks postpartum (most within 48h)\n- Evaluate any postpartum seizure for eclampsia\n- Lower threshold for imaging (rule out CVT, PRES)\n\n**Breastfeeding:**\n- Safe with magnesium\n- Safe with labetalol, nifedipine, enalapril\n- Encourage breastfeeding',
+    citation: [1, 2, 6],
+    next: 'eclampsia-disposition',
+  },
+  {
+    id: 'eclampsia-disposition',
+    type: 'question',
+    module: 5,
+    title: 'Disposition',
+    body: 'Determine appropriate level of care: [1]',
+    citation: [1],
+    options: [
+      {
+        label: 'ICU / High-risk L&D',
+        description: 'Refractory seizures, refractory BP, HELLP, multi-organ dysfunction',
+        next: 'eclampsia-icu',
+        urgency: 'critical',
+      },
+      {
+        label: 'L&D with close monitoring',
+        description: 'Stabilized, controlled BP and seizures, preparing for delivery',
+        next: 'eclampsia-ld',
+      },
+    ],
+  },
+  {
+    id: 'eclampsia-icu',
+    type: 'result',
+    module: 5,
+    title: 'ICU Admission',
+    body: '**ICU/high-acuity admission criteria:** [1,7]\n\n**Indications:**\n- Refractory seizures\n- Refractory hypertension requiring continuous infusion\n- Respiratory failure / need for intubation\n- HELLP with DIC\n- Multi-organ dysfunction\n- Pulmonary edema\n- Suspected hepatic hemorrhage\n- Altered mental status >30 minutes\n\n**ICU management:**\n- Arterial line for BP monitoring\n- Continuous magnesium infusion with close monitoring\n- Mechanical ventilation if needed\n- Blood product support for coagulopathy\n- Serial labs q6h\n\n**Team involvement:**\n- OB/MFM\n- Critical care\n- Anesthesia\n- Neonatology\n- Nephrology if AKI\n- Hematology if severe coagulopathy\n\n**Delivery planning:**\n- Usually cesarean in unstable patients\n- Plan timing with multidisciplinary team',
+    recommendation: 'Admit to ICU with OB/MFM co-management. Continuous monitoring, prepare for urgent delivery.',
+    confidence: 'definitive',
+    citation: [1, 7],
+  },
+  {
+    id: 'eclampsia-ld',
+    type: 'result',
+    module: 5,
+    title: 'L&D Admission',
+    body: '**Criteria for L&D (vs ICU):** [1]\n- Seizures controlled on magnesium\n- BP controlled with intermittent IV or oral agents\n- Stable maternal status\n- Reassuring fetal status\n- No multi-organ dysfunction\n\n**L&D management:**\n- Continuous fetal monitoring\n- Magnesium infusion 1-2g/hr\n- Frequent BP checks (q15-30 min initially)\n- Neurologic checks every 1-2 hours\n- Strict I/O\n- Foley catheter\n\n**Preparation for delivery:**\n- NPO\n- Anesthesia consultation\n- Type and screen (crossmatch if HELLP/bleeding)\n- Neonatology notified\n\n**Escalation criteria (to ICU):**\n- Recurrent seizure\n- BP refractory to treatment\n- Pulmonary edema\n- Decreasing urine output\n- Worsening labs/HELLP\n\n**Postpartum:**\n- Continue magnesium 24-48 hours\n- Monitor for late complications',
+    recommendation: 'Admit to L&D with continuous monitoring. Prepare for delivery within 12-24 hours. Continue magnesium and BP management.',
+    confidence: 'definitive',
+    citation: [1],
+  },
+];
+
+export const ECLAMPSIA_NODE_COUNT = ECLAMPSIA_NODES.length;
+
+export const ECLAMPSIA_MODULE_LABELS = [
+  'Recognition',
+  'Seizure Control',
+  'BP Management',
+  'Stabilization',
+  'Delivery',
+];
+
+export const ECLAMPSIA_CITATIONS: Citation[] = [
+  { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-e260.' },
+  { num: 2, text: 'Sibai BM. Diagnosis, prevention, and management of eclampsia. Obstet Gynecol. 2005;105(2):402-410.' },
+  { num: 3, text: 'Haram K, Svendsen E, Abildgaard U. The HELLP syndrome: clinical issues and management. A review. BMC Pregnancy Childbirth. 2009;9:8.' },
+  { num: 4, text: 'Duley L, et al. Magnesium sulphate and other anticonvulsants for women with pre-eclampsia. Cochrane Database Syst Rev. 2010;(11):CD000025.' },
+  { num: 5, text: 'Lu JF, Bhonagiri D. Magnesium sulfate in eclampsia and pre-eclampsia: pharmacokinetic principles. Clin Pharmacokinet. 2002;41(12):897-908.' },
+  { num: 6, text: 'ACOG Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy and the Postpartum Period. Obstet Gynecol. 2019;133(2):e174-e180.' },
+  { num: 7, text: 'Dennis AT. Management of pre-eclampsia: issues for anaesthetists. Anaesthesia. 2012;67(9):1009-1020.' },
+];

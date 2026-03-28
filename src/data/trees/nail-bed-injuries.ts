@@ -1,0 +1,315 @@
+// MedKitt - Nail Bed Injuries
+// ED evaluation and repair of fingertip and nail injuries
+// 5 modules: Anatomy -> Assessment -> Nail Removal & Trephination -> Repair -> Disposition
+// Based on hand surgery literature and EM procedural guidelines
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
+  // ===================================================================
+  // MODULE 1: Anatomy
+  // ===================================================================
+  {
+    id: 'nail-start',
+    type: 'info',
+    module: 1,
+    title: 'Nail Anatomy Overview',
+    body: '**Understanding nail anatomy is essential for proper repair.** [1,2]\n\n**Key structures:**\n\n**Nail plate:** The hard keratinized structure (the "nail" itself)\n- Grows ~3mm/month (fingernails), ~1mm/month (toenails)\n- Complete regrowth: 4-6 months (fingers), 12-18 months (toes)\n\n**Nail bed:** Soft tissue beneath the nail plate\n- **Germinal matrix:** Proximal 1/3, produces 90% of nail plate\n- **Sterile matrix:** Distal 2/3, adds to undersurface of nail, responsible for nail adherence\n\n**Eponychium (cuticle):** Skin fold at proximal nail base\n\n**Paronychium:** Lateral skin folds along nail edges\n\n**Hyponychium:** Skin beneath distal free edge of nail\n\n**Lunula:** The white half-moon at nail base (visible germinal matrix)\n\n**Nail fold:** Proximal skin overlying the germinal matrix',
+    citation: [1, 2],
+    images: [
+      {
+        src: 'https://teachmeanatomy.info/wp-content/uploads/Anatomy-of-the-Fingernail-Finger-Tip-1024x540.jpg',
+        caption: 'Nail anatomy cross-section showing nail plate, nail bed (germinal and sterile matrix), eponychium, and hyponychium',
+        alt: 'Anatomical diagram of fingernail cross-section',
+      },
+    ],
+    next: 'nail-anatomy-clinical',
+  },
+  {
+    id: 'nail-anatomy-clinical',
+    type: 'info',
+    module: 1,
+    title: 'Clinical Anatomy Relevance',
+    body: '**Why anatomy matters for repair:** [1,2,3]\n\n**Germinal matrix injuries (proximal):**\n- Result in nail growth abnormalities\n- Split nail, ridged nail, absent nail\n- Require meticulous repair under magnification\n- Higher risk of permanent deformity\n\n**Sterile matrix injuries (distal):**\n- Result in non-adherence of nail to bed\n- Nail lifts off, catches on objects\n- Generally more forgiving with repair\n- Still needs anatomic alignment\n\n**Key relationships:** [3]\n- Nail bed sits on periosteum of distal phalanx\n- Fracture beneath = open fracture (nail bed laceration communicates)\n- 50% of nail bed injuries have associated distal phalanx fracture\n- Nail fold maintains normal nail growth direction\n\n**Blood supply:**\n- Paired digital arteries → redundant supply\n- Digital block does not compromise healing',
+    citation: [1, 2, 3],
+    images: [
+      {
+        src: 'https://www.statpearls.com/pictures/getimagecontent/31598',
+        caption: 'Sagittal view showing germinal matrix (proximal) vs sterile matrix (distal) and their clinical significance',
+        alt: 'Longitudinal nail anatomy showing germinal and sterile matrix',
+      },
+    ],
+    next: 'nail-injury-types',
+  },
+  {
+    id: 'nail-injury-types',
+    type: 'info',
+    module: 1,
+    title: 'Injury Classification',
+    body: '**Common nail bed injury patterns:** [1,3,4]\n\n**Simple laceration:**\n- Linear cut through nail bed\n- Often from sharp object or crush\n\n**Stellate laceration:**\n- Star-shaped pattern\n- Typical of crush injury\n- Multiple fragments to realign\n\n**Subungual hematoma:**\n- Blood under intact nail plate\n- May be >50% nail surface\n- Associated with occult laceration or fracture\n\n**Avulsion:**\n- Partial or complete nail plate avulsion\n- May include nail bed tissue loss\n\n**Crush injury:**\n- Combined soft tissue and bone injury\n- Nail plate often intact but displaced\n- Associated distal phalanx fracture common\n\n**Amputation:**\n- Partial or complete fingertip loss\n- Involves nail bed and distal phalanx\n- May have replantation potential',
+    citation: [1, 3, 4],
+    next: 'nail-assessment',
+  },
+
+  // ===================================================================
+  // MODULE 2: Assessment
+  // ===================================================================
+  {
+    id: 'nail-assessment',
+    type: 'info',
+    module: 2,
+    title: 'Initial Assessment',
+    body: '**Systematic evaluation of nail injuries:** [1,4]\n\n**History:**\n- Mechanism (crush, laceration, avulsion)\n- Time of injury\n- Hand dominance\n- Occupation (musician, typist = higher cosmetic expectations)\n- Tetanus status\n\n**Physical exam:**\n- Vascular status: capillary refill, color, temperature\n- Sensory status: two-point discrimination (normal <5mm)\n- Motor status: FDP and FDS function\n- Tendon assessment: extensor at DIP (mallet finger)\n- Nail plate: intact, avulsed, partially attached\n- Nail bed: visible injury, hematoma size\n- Associated injuries: skin lacerations, fractures\n\n**Neurovascular status is critical:**\n- Cool, pale finger with poor cap refill = vascular compromise\n- Absent sensation = digital nerve injury\n- Consider hand surgery consultation',
+    citation: [1, 4],
+    next: 'nail-imaging',
+  },
+  {
+    id: 'nail-imaging',
+    type: 'info',
+    module: 2,
+    title: 'Imaging',
+    body: '**X-ray is indicated for most nail bed injuries.** [3,4]\n\n**Obtain AP, lateral, and oblique views of affected digit.**\n\n**Evaluate for:**\n- Distal phalanx fracture (present in ~50%)\n- Tuft fracture (crush mechanism)\n- Transverse shaft fracture\n- Joint involvement (DIP)\n- Foreign body\n\n**Fracture implications:** [4]\n- Nail bed laceration + fracture = OPEN fracture\n- Antibiotics indicated (see treatment)\n- Unstable fractures may need pinning\n\n**Seymour fracture (pediatric):** [4]\n- Physeal fracture of distal phalanx\n- Nail plate often avulsed from eponychial fold and lies superficial\n- Looks like mallet finger\n- Open injury requiring irrigation, reduction, antibiotics\n\n**Tip:** If significant crush mechanism, get X-ray even if nail appears intact.',
+    citation: [3, 4],
+    next: 'nail-branch',
+  },
+  {
+    id: 'nail-branch',
+    type: 'question',
+    module: 2,
+    title: 'Injury Type',
+    body: 'What is the primary injury pattern? [1,4]',
+    citation: [1, 4],
+    options: [
+      {
+        label: 'Subungual hematoma (intact nail)',
+        description: 'Blood under nail, nail plate intact and adherent',
+        next: 'nail-hematoma',
+      },
+      {
+        label: 'Nail bed laceration',
+        description: 'Visible laceration, may need nail removal for repair',
+        next: 'nail-removal',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Nail avulsion (partial/complete)',
+        description: 'Nail plate separated from bed',
+        next: 'nail-avulsion',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Complex/amputation',
+        description: 'Significant tissue loss, crush with bone exposed',
+        next: 'nail-complex',
+        urgency: 'critical',
+      },
+    ],
+  },
+
+  // ===================================================================
+  // MODULE 3: Nail Removal & Trephination
+  // ===================================================================
+  {
+    id: 'nail-hematoma',
+    type: 'info',
+    module: 3,
+    title: 'Subungual Hematoma',
+    body: '**Subungual hematoma is blood trapped between nail plate and nail bed.** [1,5]\n\n**Assessment:**\n- Estimate hematoma size (% of nail surface)\n- Assess nail plate integrity (fractures, avulsion)\n- Check for associated fracture on X-ray\n\n**Traditional teaching:**\n- <25% nail surface → conservative management\n- 25-50% → consider trephination\n- >50% → nail removal and bed repair\n\n**Modern evidence (2024):** [5]\n- Trephination alone is sufficient for MOST subungual hematomas\n- Even >50% hematomas do well with trephination only\n- Nail removal rarely needed if nail plate intact and margins adherent\n- Intact nail margins = intact nail bed\n\n**Trephination indications:**\n- Painful pressure from hematoma\n- Any size if symptomatic\n- Patient preference for drainage',
+    citation: [1, 5],
+    next: 'nail-trephination',
+  },
+  {
+    id: 'nail-trephination',
+    type: 'info',
+    module: 3,
+    title: 'Trephination Technique',
+    body: '**Trephination = creating hole in nail to drain hematoma.** [1,5]\n\n**Methods:**\n\n**1. Electrocautery (preferred):**\n- Battery-powered cautery device\n- Touch to nail surface, melts through\n- No pressure needed (painless)\n- Stop immediately when blood wells up\n- Fast, efficient, minimal equipment\n\n**2. 18-gauge needle:**\n- Rotate needle between fingers while applying gentle pressure\n- Drill through nail plate\n- More time-consuming but always available\n\n**3. Heated paperclip (historical):**\n- Heat paperclip until red-hot\n- Touch to nail surface\n- Multiple applications may be needed\n- Less controlled than electrocautery\n\n**Tips:**\n- One hole may suffice; add second if drainage incomplete\n- Blood will drain spontaneously with pressure release\n- No need for digital block (nail plate has no sensation)\n- Express remaining blood with gentle pressure',
+    citation: [1, 5],
+    images: [
+      {
+        src: 'https://www.aafp.org/dam/AAFP/images/afp/2012/0815/p353-f1.jpg',
+        caption: 'Trephination technique using electrocautery to create drainage hole in nail plate',
+        alt: 'Illustration of nail trephination procedure',
+      },
+    ],
+    next: 'nail-hematoma-dispo',
+  },
+  {
+    id: 'nail-hematoma-dispo',
+    type: 'info',
+    module: 3,
+    title: 'Hematoma: When to Remove Nail',
+    body: '**Nail removal rarely needed for isolated subungual hematoma.** [5]\n\n**Remove nail plate if:**\n- Nail plate avulsed or significantly disrupted\n- Edges not adherent (suggests underlying laceration)\n- Unable to adequately decompress hematoma\n- Associated nail fold disruption\n- Obvious nail bed laceration visible at edges\n\n**Do NOT remove nail if:**\n- Nail plate intact with adherent margins\n- Adequate decompression achieved with trephination\n- No fracture or minimally displaced tuft fracture\n\n**Evidence (Roser 1999, Simon & Wolgin):** [5]\n- Prospective studies: trephination alone for hematomas (even >50%) had equivalent cosmetic outcomes to nail removal and repair\n- Nail plate acts as biological splint\n- Unnecessary nail removal may cause more harm\n\n**Bottom line:** If nail plate is intact and margins adherent, trephinate and leave the nail in place.',
+    citation: [5],
+    next: 'nail-hematoma-aftercare',
+  },
+  {
+    id: 'nail-hematoma-aftercare',
+    type: 'result',
+    module: 3,
+    title: 'Hematoma Aftercare',
+    body: '**Post-trephination care:** [1,5]\n\n**Wound care:**\n- Clean with saline\n- Apply antibiotic ointment (bacitracin)\n- Non-adherent dressing (Telfa)\n- Protective splint (aluminum finger splint) if fracture or significant injury\n\n**Medications:**\n- Tetanus prophylaxis if indicated\n- Antibiotics if fracture present\n- NSAIDs or acetaminophen for pain\n\n**Follow-up:**\n- Return in 48-72 hours for wound check\n- Soak in warm water daily, reapply dressing\n- Hand surgery follow-up if fracture needs management\n\n**Expectations:**\n- Old nail will grow out and fall off over 2-4 months\n- New nail grows from proximal matrix\n- Mild deformity possible but usually cosmetically acceptable\n\n**Return precautions:**\n- Increasing pain, redness, swelling (infection)\n- Fever\n- Pus or drainage',
+    recommendation: 'Trephination with protective dressing. Antibiotics if associated fracture. Follow up in 48-72 hours.',
+    confidence: 'definitive',
+    citation: [1, 5],
+  },
+  {
+    id: 'nail-removal',
+    type: 'info',
+    module: 3,
+    title: 'Nail Plate Removal',
+    body: '**When nail plate removal is indicated for nail bed repair:** [1,3]\n\n**Indications:**\n- Visible nail bed laceration requiring repair\n- Significantly disrupted/avulsed nail plate\n- Nail fold injury needing repair\n- Subungual hematoma with non-adherent nail margins\n\n**Technique:**\n\n**1. Digital block:**\n- Perform digital nerve block (two injection sites at base of finger)\n- Wait 5-10 minutes for complete anesthesia\n- Test for adequate block before proceeding\n\n**2. Elevate nail from bed:**\n- Insert small hemostat or Freer elevator beneath nail\n- Gently advance from distal to proximal\n- Separate nail from sterile matrix\n\n**3. Release from eponychium:**\n- Gently separate nail from germinal matrix and nail fold\n- Use spreading motion, not forceful traction\n\n**4. Remove nail plate:**\n- Grasp with hemostat and remove in one piece if possible\n- Save the nail plate (will use as splint after repair)',
+    citation: [1, 3],
+    images: [
+      {
+        src: 'https://www.statpearls.com/pictures/getimagecontent/31603',
+        caption: 'Technique for nail plate removal using hemostat elevation',
+        alt: 'Illustration of nail plate removal technique',
+      },
+    ],
+    next: 'nail-bed-repair',
+  },
+
+  // ===================================================================
+  // MODULE 4: Nail Bed Repair
+  // ===================================================================
+  {
+    id: 'nail-bed-repair',
+    type: 'info',
+    module: 4,
+    title: 'Nail Bed Repair Principles',
+    body: '**Goals of nail bed repair:** [1,3,6]\n1. Anatomic alignment of nail bed edges\n2. Prevent scarring that causes nail deformity\n3. Preserve germinal matrix function\n4. Splint nail fold to prevent synechiae\n\n**General principles:**\n- Meticulous hemostasis (use tourniquet/finger tourniquet)\n- Magnification improves outcomes (loupes or operating microscope)\n- Fine absorbable sutures (6-0 or 7-0 chromic/Vicryl)\n- Minimize tissue handling\n- Replace or splint the nail fold\n\n**Laceration patterns:** [3]\n- **Simple linear:** Primary repair edge-to-edge\n- **Stellate:** Realign fragments, may need multiple sutures\n- **Avulsion with tissue loss:** May need grafting\n\n**Key concept:** The nail plate is the best splint - always replace it or use substitute if available.',
+    citation: [1, 3, 6],
+    next: 'nail-repair-technique',
+  },
+  {
+    id: 'nail-repair-technique',
+    type: 'info',
+    module: 4,
+    title: 'Repair Technique',
+    body: '**Step-by-step nail bed repair:** [1,3,6]\n\n**Setup:**\n- Digital tourniquet (Penrose drain or commercial device)\n- Adequate lighting and magnification\n- 6-0 or 7-0 absorbable suture on small needle\n\n**Repair steps:**\n\n**1. Irrigate thoroughly** (saline, remove debris)\n\n**2. Identify and align nail bed edges:**\n- Match tissue edges anatomically\n- Germinal matrix especially important\n\n**3. Place interrupted sutures:**\n- Simple interrupted technique\n- Minimal tension\n- Bites just through nail bed (avoid periosteum)\n- 3-4 sutures for simple laceration\n- Space 2-3mm apart\n\n**4. Check alignment:**\n- Smooth surface when palpated\n- No step-off at wound edges\n\n**5. Splint the nail fold:**\n- Replace original nail plate (clean, trim if needed)\n- Or use nail substitute (foil suture packet, silicone sheet)\n- Secure with single mattress suture through eponychium',
+    citation: [1, 3, 6],
+    images: [
+      {
+        src: 'https://www.aafp.org/dam/AAFP/images/afp/2012/0815/p353-f3.jpg',
+        caption: 'Nail bed laceration repair with fine absorbable sutures',
+        alt: 'Illustration showing nail bed suture repair technique',
+      },
+    ],
+    next: 'nail-fold-stent',
+  },
+  {
+    id: 'nail-fold-stent',
+    type: 'info',
+    module: 4,
+    title: 'Nail Fold Stenting',
+    body: '**Why stent the nail fold:** [3,6]\n\n**Without stent:**\n- Eponychium adheres to nail bed (synechiae)\n- New nail cannot grow out properly\n- Results in split nail or no nail\n\n**Options for nail fold stent:**\n\n**1. Original nail plate (best):**\n- Clean with saline/betadine\n- Trim sharp edges\n- Replace under nail fold\n- Secure with mattress suture through nail and eponychium\n- Holes can be drilled for drainage\n\n**2. Foil suture packet:**\n- Cut to nail shape\n- Place under nail fold\n- Secure with suture\n\n**3. Silicone sheet:**\n- Commercial nail splints available\n- Flexible, non-adherent\n\n**4. Xeroform gauze:**\n- Fold to appropriate size\n- Place under nail fold\n- Less ideal but readily available\n\n**Duration:** Stent stays in place until new nail grows out and pushes it off (4-6 weeks).',
+    citation: [3, 6],
+    next: 'nail-fracture-mgmt',
+  },
+  {
+    id: 'nail-fracture-mgmt',
+    type: 'info',
+    module: 4,
+    title: 'Associated Fracture Management',
+    body: '**Distal phalanx fractures with nail bed injury:** [3,4]\n\n**Key principle:** Nail bed laceration + phalanx fracture = OPEN fracture\n\n**Tuft fractures (most common):**\n- Usually stable (comminuted but held by soft tissue)\n- Nail bed repair provides splinting\n- Replace nail plate for additional stability\n- Protective splint (aluminum)\n- Antibiotics for open fracture\n\n**Transverse shaft fractures:**\n- Assess stability after nail bed repair\n- Unstable: may need K-wire fixation\n- Hand surgery consultation for unstable patterns\n\n**Seymour fracture (pediatric):** [4]\n- Salter-Harris I or II of distal phalanx\n- Nail plate lies superficial to eponychium\n- Requires: nail removal, irrigation, reduction, nail replacement\n- Usually needs OR for formal I&D\n- High infection risk if not properly treated\n\n**Antibiotic regimen for open fractures:**\n- First-generation cephalosporin (cephalexin 500mg QID) x 5-7 days\n- Or amoxicillin-clavulanate if penicillin-allergic: use clindamycin',
+    citation: [3, 4],
+    next: 'nail-avulsion',
+  },
+  {
+    id: 'nail-avulsion',
+    type: 'info',
+    module: 4,
+    title: 'Nail Avulsion Injuries',
+    body: '**Management of avulsed nail plate:** [1,3]\n\n**Partial avulsion (nail still partially attached):**\n- Remove entire nail plate for bed inspection\n- Repair any laceration found\n- Replace nail as stent\n\n**Complete avulsion (nail separated):**\n- Inspect nail bed thoroughly\n- Repair lacerations\n- If original nail available: clean and replace as stent\n- If nail lost: use substitute stent\n\n**Avulsion from proximal nail fold:**\n- Nail plate lies ON TOP of eponychium instead of beneath\n- Must reduce nail plate back under nail fold\n- Common in pediatric Seymour fractures\n\n**Germinal matrix avulsion:**\n- May require microsurgical replantation\n- If significant matrix loss: consult hand surgery\n- Consider matrix grafting from adjacent digit or toe\n\n**Documentation:** Describe exactly what is avulsed and what remains attached.',
+    citation: [1, 3],
+    next: 'nail-complex',
+  },
+  {
+    id: 'nail-complex',
+    type: 'info',
+    module: 4,
+    title: 'Complex Injuries',
+    body: '**Complex nail bed injuries requiring specialist consultation:** [3,4]\n\n**Refer to hand surgery for:**\n- Significant tissue loss (>50% nail bed)\n- Complete germinal matrix loss\n- Amputation through nail bed\n- Unstable fractures requiring fixation\n- Tendon involvement (FDP/extensor)\n- Vascular compromise\n- Multiple digit involvement\n\n**Amputation considerations:** [4]\n- Zone 1 (tip only): often heal by secondary intention\n- Zone 2 (through nail bed): revision amputation vs grafting\n- Composite grafts possible in children <2 years\n- Allen classification for fingertip amputations\n\n**Initial ED management:**\n- Irrigate, control bleeding\n- Moist sterile dressing\n- Splint for protection\n- Tetanus, antibiotics\n- Urgent hand surgery consultation\n\n**Preserve amputated parts:**\n- Wrap in saline-moistened gauze\n- Place in plastic bag on ice\n- Never place tissue directly on ice\n- Document ischemia time',
+    citation: [3, 4],
+    next: 'nail-disposition',
+  },
+
+  // ===================================================================
+  // MODULE 5: Disposition
+  // ===================================================================
+  {
+    id: 'nail-disposition',
+    type: 'question',
+    module: 5,
+    title: 'Disposition',
+    body: 'Determine appropriate disposition based on injury complexity: [1,4]',
+    citation: [1, 4],
+    options: [
+      {
+        label: 'Discharge with follow-up',
+        description: 'Simple repair completed, stable fracture or no fracture',
+        next: 'nail-discharge',
+      },
+      {
+        label: 'Hand surgery consultation',
+        description: 'Complex injury, tissue loss, unstable fracture, amputation',
+        next: 'nail-consult',
+        urgency: 'urgent',
+      },
+    ],
+  },
+  {
+    id: 'nail-discharge',
+    type: 'result',
+    module: 5,
+    title: 'Discharge Instructions',
+    body: '**Post-repair care:** [1,3]\n\n**Wound care:**\n- Keep dressing clean and dry for 48 hours\n- After 48h: daily warm water soaks, reapply antibiotic ointment and non-adherent dressing\n- Leave nail plate stent in place until it falls off naturally\n\n**Splinting:**\n- Wear aluminum splint for comfort and protection x 2-3 weeks\n- OK to remove for gentle ROM exercises after 1 week\n\n**Medications:**\n- Complete antibiotic course if prescribed (open fracture)\n- NSAIDs or acetaminophen PRN pain\n- Tetanus if indicated\n\n**Activity:**\n- Elevate hand to reduce swelling\n- No heavy gripping or use of injured digit x 2-3 weeks\n\n**Follow-up:**\n- Primary care or hand surgery in 7-10 days\n- Suture removal: absorbable sutures will dissolve\n- Final cosmetic result visible at 6 months\n\n**Return precautions:**\n- Increasing pain, redness, swelling\n- Purulent drainage\n- Fever\n- Numbness or color change in fingertip',
+    recommendation: 'Discharge with protective splint, wound care instructions, and follow-up in 7-10 days.',
+    confidence: 'definitive',
+    citation: [1, 3],
+  },
+  {
+    id: 'nail-consult',
+    type: 'result',
+    module: 5,
+    title: 'Hand Surgery Consultation',
+    body: '**Indications for hand surgery involvement:** [3,4]\n\n**Urgent/emergent consultation:**\n- Significant tissue loss requiring grafting\n- Complete germinal matrix injury\n- Unstable fractures needing fixation\n- Amputation with replantation potential\n- Vascular compromise\n- Open fracture needing OR I&D\n- Seymour fracture (pediatric)\n\n**Consultation details to provide:**\n- Mechanism and time of injury\n- Digit(s) involved, dominant hand\n- Neurovascular status\n- Fracture pattern\n- Tissue loss description\n- What has been done in ED\n- Patient occupation/functional needs\n\n**While awaiting consultation:**\n- Irrigated, moist sterile dressing\n- Splint for protection\n- Pain control\n- NPO if OR anticipated\n- Antibiotics if open fracture\n- Tetanus prophylaxis\n\n**Timing:** Most nail bed repairs can be done within 12-24 hours; true emergencies are vascular compromise or heavily contaminated wounds.',
+    recommendation: 'Consult hand surgery for complex repair. Provide protective dressing, splint, antibiotics for open fracture, and analgesia.',
+    confidence: 'definitive',
+    citation: [3, 4],
+  },
+  {
+    id: 'nail-prognosis',
+    type: 'info',
+    module: 5,
+    title: 'Outcomes & Prognosis',
+    body: '**Expected outcomes after nail bed repair:** [1,3,6]\n\n**Timeline:**\n- New nail visible at proximal fold: 4-6 weeks\n- Complete nail regrowth: 4-6 months (finger), 12-18 months (toe)\n- Final cosmetic result: 6-12 months\n\n**Factors affecting outcome:**\n- Quality of initial repair (most important)\n- Location of injury (germinal matrix = worse prognosis)\n- Associated fracture complexity\n- Patient age (children heal better)\n- Smoking status (impairs healing)\n\n**Possible complications:** [6]\n- **Split nail:** from longitudinal scar in matrix\n- **Non-adherence:** nail lifts from bed\n- **Ridging:** from transverse scar\n- **Absent nail:** severe matrix injury\n- **Hook nail:** from loss of bony support\n- **Chronic pain/sensitivity**\n\n**Revision surgery:**\n- Considered at 6+ months if significant deformity\n- Options: scar excision, matrix grafting, ablation\n\n**Patient counseling:** Set realistic expectations - minor deformities are common but usually cosmetically acceptable.',
+    citation: [1, 3, 6],
+    next: 'nail-disposition',
+  },
+];
+
+export const NAIL_BED_INJURIES_NODE_COUNT = NAIL_BED_INJURIES_NODES.length;
+
+export const NAIL_BED_INJURIES_MODULE_LABELS = [
+  'Anatomy',
+  'Assessment',
+  'Trephination & Removal',
+  'Repair',
+  'Disposition',
+];
+
+export const NAIL_BED_INJURIES_CITATIONS: Citation[] = [
+  { num: 1, text: 'Wang QC, Johnson BA. Fingertip injuries. Am Fam Physician. 2001;63(10):1961-1966.' },
+  { num: 2, text: 'Zook EG. Anatomy and physiology of the perionychium. Hand Clin. 1990;6(1):1-7.' },
+  { num: 3, text: 'Strauss EJ, et al. Nail bed injuries. J Hand Surg Am. 2020;45(6):548-559.' },
+  { num: 4, text: 'Fassler PR. Fingertip injuries: evaluation and treatment. J Am Acad Orthop Surg. 1996;4(1):84-92.' },
+  { num: 5, text: 'Roser SE, Gellman H. Comparison of nail bed repair versus nail trephination for subungual hematomas in children. J Hand Surg Am. 1999;24(6):1166-1170.' },
+  { num: 6, text: 'Miranda BH, et al. Nailbed repair and nail splinting. Plast Reconstr Surg. 2014;134(2):312e-313e.' },
+];

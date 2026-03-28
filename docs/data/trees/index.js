@@ -62,6 +62,10 @@ export { PEDS_OSTEOMYELITIS_NODES, PEDS_OSTEOMYELITIS_MODULE_LABELS, PEDS_OSTEOM
 export { COPD_EXACERBATION_NODES, COPD_EXACERBATION_MODULE_LABELS, COPD_EXACERBATION_CITATIONS } from './copd-exacerbation';
 export { SEPTIC_ARTHRITIS_NODES, SEPTIC_ARTHRITIS_MODULE_LABELS, SEPTIC_ARTHRITIS_CITATIONS } from './septic-arthritis';
 export { HFNC_NODES, HFNC_MODULE_LABELS, HFNC_CITATIONS } from './hfnc';
+export { PEDS_STEC_HUS_NODES, PEDS_STEC_HUS_MODULE_LABELS, PEDS_STEC_HUS_CITATIONS } from './peds-stec-hus';
+export { NAIL_BED_INJURIES_NODES, NAIL_BED_INJURIES_MODULE_LABELS, NAIL_BED_INJURIES_CITATIONS } from './nail-bed-injuries';
+export { ECLAMPSIA_NODES, ECLAMPSIA_MODULE_LABELS, ECLAMPSIA_CITATIONS } from './eclampsia';
+export { AORTIC_DISSECTION_NODES, AORTIC_DISSECTION_MODULE_LABELS, AORTIC_DISSECTION_CITATIONS } from './aortic-dissection';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**
