@@ -353,6 +353,9 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     title: 'Monitoring Treatment Response',
     body: '**Markers of clinical improvement:** [1,3,4]\n\n**Clinical:**\n- Resolution of fever (typically 24-72 hours)\n- Decreased pain and swelling\n- Return of limb function\n- Improved appetite and activity\n\n**Laboratory:**\n- **CRP:** Most useful marker. Should decrease by 50% within 2-4 days of effective treatment. Return to normal in 9-12 days. [3,4]\n- **ESR:** Slower to respond; may remain elevated for weeks. Less useful for acute monitoring.\n\n**Poor response indicators:**\n- Persistent fever >72 hours\n- Rising or plateau of CRP\n- Clinical deterioration\n- New abscess formation\n\n**If poor response:** Consider:\n- Repeat imaging (MRI)\n- Surgical drainage/debridement\n- Alternative pathogens (MRSA, resistant organisms)\n- Drug-resistant organism',
     citation: [1, 3, 4],
+    calculatorLinks: [
+      { id: 'crp-trend', label: 'CRP Trend Tracker' },
+    ],
     next: 'osteo-oral-transition',
   },
 
@@ -366,6 +369,9 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     title: 'Transition to Oral Therapy',
     body: '**PIDS/IDSA guidelines recommend early transition to oral therapy.** [1]\n\n**Criteria for oral transition:** [1,3]\n- Significant clinical improvement\n- Afebrile for 24-48 hours\n- Tolerating oral intake\n- CRP decreasing (by 50% or to <20-30 mg/L)\n- Reliable oral option based on pathogen/sensitivities\n- Compliant family, reliable follow-up\n\n**Typical IV duration:** 2-7 days (median 3-4 days in recent studies) [1]\n\n**Oral antibiotics must achieve adequate bone levels:**\n- High doses required\n- Bioavailability critical\n- Avoid agents with poor bone penetration\n\n**Benefits of early oral transition:**\n- Reduced IV complications (CLABSI, thrombosis)\n- Shorter hospitalization\n- Lower costs\n- Similar outcomes to prolonged IV therapy [1]',
     citation: [1, 3],
+    calculatorLinks: [
+      { id: 'iv-oral-transition', label: 'IV-to-Oral Criteria' },
+    ],
     next: 'osteo-oral-regimens',
   },
   {

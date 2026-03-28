@@ -35,6 +35,7 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     citation: [1, 3],
     calculatorLinks: [
       { id: 'copd-severity', label: 'COPD Severity Calculator' },
+      { id: 'anthonisen-criteria', label: 'Anthonisen Criteria' },
     ],
     options: [
       {
@@ -332,6 +333,9 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     title: 'NIV (BiPAP) Indications',
     body: '**BiPAP strongly recommended in AECOPD with:**\n\n- Respiratory acidosis (pH <7.35, PaCO2 >45)\n- Severe dyspnea with signs of increased work of breathing\n- Respiratory rate >30/min\n- Hypercapnic encephalopathy (somnolence from CO2)\n- Persistent hypoxemia despite supplemental O2\n\n**Evidence for BiPAP:**\n- Reduces intubation (RR 0.41, NNT 4)\n- Reduces mortality (RR 0.52, NNT 10)\n- Reduces complications [10]\n\n**Contraindications:**\n- Immediate need for intubation\n- Vomiting/high aspiration risk\n- Facial trauma/surgery\n- Uncooperative patient (consider sedation first)\n\n**Does this patient need BiPAP?**',
     citation: [1, 2, 10],
+    calculatorLinks: [
+      { id: 'bipap-titration', label: 'BiPAP Settings Guide' },
+    ],
     options: [
       {
         label: 'Yes - Start BiPAP',

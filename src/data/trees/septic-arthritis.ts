@@ -136,6 +136,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Suspected Pathogen Type',
     body: 'Based on clinical presentation and risk factors, what is the most likely etiology? [1,2,14]\n\n**Gonococcal clues:**\n- Young, sexually active patient\n- Migratory polyarthralgia/polyarthritis\n- Tenosynovitis (especially wrists, fingers, ankles)\n- Dermatitis-arthritis syndrome (pustular/vesicular skin lesions)\n- 4:1 female predominance\n\n**Non-gonococcal clues:**\n- Monoarticular (large joint)\n- Risk factors: DM, RA, prosthetic joint, IVDU\n- Toxic-appearing patient\n- Purulent aspirate',
     citation: [1, 2, 14],
+    calculatorLinks: [
+      { id: 'gc-arthritis', label: 'GC vs Non-GC Guide' },
+    ],
     options: [
       {
         label: 'Non-gonococcal (most common)',

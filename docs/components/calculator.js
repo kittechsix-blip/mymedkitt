@@ -12734,6 +12734,156 @@ const NEWMAN_CRITERIA_CALCULATOR = {
         'Sharff KA, et al. Acute septic arthritis in adults. Am Fam Physician. 2013;87(11):745-754.',
     ],
 };
+// -------------------------------------------------------------------
+// Anthonisen Criteria Calculator (COPD Antibiotics)
+// -------------------------------------------------------------------
+const ANTHONISEN_CRITERIA_CALCULATOR = {
+    id: 'anthonisen-criteria',
+    title: 'Anthonisen Criteria',
+    subtitle: 'COPD Antibiotic Decision',
+    description: 'Determines need for antibiotics in COPD exacerbation based on 3 cardinal symptoms. Antibiotics indicated for Type I or purulent sputum.',
+    fields: [
+        { name: 'dyspnea', label: 'Increased dyspnea', type: 'toggle', points: 1, description: 'Worsening shortness of breath from baseline' },
+        { name: 'sputum-volume', label: 'Increased sputum volume', type: 'toggle', points: 1, description: 'More sputum production than usual' },
+        { name: 'sputum-purulence', label: 'Increased sputum purulence', type: 'toggle', points: 1, description: 'Change to yellow/green sputum' },
+    ],
+    results: [
+        { min: 3, max: Infinity, label: 'Type I', risk: 'Severe - Antibiotics Indicated', mortality: 'All 3 cardinal symptoms. Give antibiotics.', colorVar: '--color-danger' },
+        { min: 2, max: 3, label: 'Type II', risk: 'Moderate - Consider Antibiotics', mortality: '2 of 3 symptoms. Antibiotics if purulent sputum.', colorVar: '--color-warning' },
+        { min: 1, max: 2, label: 'Type III', risk: 'Mild - No Antibiotics', mortality: '1 symptom only. No antibiotics unless high risk.', colorVar: '--color-primary' },
+        { min: 0, max: 1, label: 'Not AECOPD', risk: 'Consider Alternative Diagnosis', mortality: '0 symptoms. Likely not acute exacerbation.', colorVar: '--color-text-muted' },
+    ],
+    thresholdNote: 'Type I (all 3) or Type II with purulent sputum: azithromycin or doxycycline x5 days.',
+    citations: [
+        'Anthonisen NR, et al. Antibiotic therapy in exacerbations of chronic obstructive pulmonary disease. Ann Intern Med. 1987;106(2):196-204.',
+        'GOLD 2024 Report. Global Strategy for the Diagnosis, Management, and Prevention of COPD.',
+    ],
+};
+// -------------------------------------------------------------------
+// BiPAP Titration Guide (COPD)
+// -------------------------------------------------------------------
+const BIPAP_TITRATION_CALCULATOR = {
+    id: 'bipap-titration',
+    title: 'BiPAP Settings for COPD',
+    subtitle: 'NIV Titration Guide',
+    description: 'Starting settings and titration targets for BiPAP in COPD exacerbation. Adjust based on patient comfort and gas exchange.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg', description: 'For tidal volume estimation' },
+        { name: 'pco2', label: 'Baseline PaCO2', type: 'number', points: 0, unit: 'mmHg', description: 'From ABG if available' },
+        { name: 'rr', label: 'Respiratory Rate', type: 'number', points: 0, unit: '/min', description: 'Current RR' },
+    ],
+    results: [],
+    thresholdNote: 'Start 10/5, target iPAP 18-20. FiO2 for SpO2 88-92%. Check ABG at 1-2h.',
+    citations: [
+        'Rochwerg B, et al. Official ERS/ATS clinical practice guidelines: noninvasive ventilation for acute respiratory failure. Eur Respir J. 2017;50(2):1602426.',
+        'EMCrit IBCC - AECOPD chapter. PulmCrit 2024.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 70;
+        const targetTv = Math.round(weight * 6);
+        return {
+            value: '10/5 → 18-20/8',
+            label: 'BiPAP Settings',
+            description: `**Starting:** iPAP 10, ePAP 5 cm H2O\\n**Target:** iPAP 18-20, ePAP 6-8 cm H2O\\n**Target Vt:** ${targetTv}-${Math.round(weight * 8)} mL (6-8 mL/kg)\\n**FiO2:** Titrate for SpO2 88-92%\\n**Backup rate:** 10-12/min\\n\\n**Reassess in 1-2h:** If no improvement (RR still >25, pH worsening), consider intubation.`,
+            colorVar: '--color-primary'
+        };
+    },
+};
+// -------------------------------------------------------------------
+// CRP Trend Tracker (Peds Osteomyelitis)
+// -------------------------------------------------------------------
+const CRP_TREND_CALCULATOR = {
+    id: 'crp-trend',
+    title: 'CRP Trend Tracker',
+    subtitle: 'Osteomyelitis Treatment Response',
+    description: 'Track CRP over treatment course. Expected 50% decline by day 3-4. Failure to decline suggests treatment failure, abscess, or resistant organism.',
+    fields: [
+        { name: 'day0', label: 'Day 0 (Baseline)', type: 'number', points: 0, unit: 'mg/L', description: 'CRP at diagnosis' },
+        { name: 'day2', label: 'Day 2', type: 'number', points: 0, unit: 'mg/L', description: 'CRP after 48h antibiotics' },
+        { name: 'day4', label: 'Day 3-4', type: 'number', points: 0, unit: 'mg/L', description: 'CRP at day 3-4' },
+    ],
+    results: [],
+    thresholdNote: 'Expected: 50% decline by day 3-4. CRP <20 mg/L often required for IV-to-oral transition.',
+    citations: [
+        'Peltola H, et al. Prospective, randomized trial of 10 days versus 30 days of antimicrobial treatment for childhood osteomyelitis. Clin Infect Dis. 2010;50(9):1201-1210.',
+        'PIDS/IDSA Guidelines for Pediatric Osteomyelitis. J Pediatric Infect Dis Soc. 2021.',
+    ],
+    computeResult: (values) => {
+        const day0 = values['day0'] || 0;
+        const day2 = values['day2'];
+        const day4 = values['day4'];
+        if (day0 === 0) {
+            return { value: '--', label: 'Enter Baseline', description: 'Enter Day 0 CRP to track trend', colorVar: '--color-text-muted' };
+        }
+        const currentVal = day4 !== undefined ? day4 : (day2 !== undefined ? day2 : day0);
+        const percentDecline = day0 > 0 ? Math.round(((day0 - currentVal) / day0) * 100) : 0;
+        const dayLabel = day4 !== undefined ? 'Day 3-4' : (day2 !== undefined ? 'Day 2' : 'Baseline');
+        if (percentDecline >= 50) {
+            return { value: `↓${percentDecline}%`, label: 'Good Response', description: `CRP declined ${percentDecline}% by ${dayLabel}. On track for treatment success. Consider IV-to-oral transition if clinically stable.`, colorVar: '--color-primary' };
+        }
+        else if (percentDecline >= 25) {
+            return { value: `↓${percentDecline}%`, label: 'Slow Response', description: `CRP declined ${percentDecline}% by ${dayLabel}. Slower than expected. Continue current therapy, consider imaging for abscess.`, colorVar: '--color-warning' };
+        }
+        else if (percentDecline > 0) {
+            return { value: `↓${percentDecline}%`, label: 'Poor Response', description: `CRP declined only ${percentDecline}% by ${dayLabel}. Consider: abscess needing drainage, resistant organism, wrong diagnosis.`, colorVar: '--color-danger' };
+        }
+        else {
+            return { value: `↑${Math.abs(percentDecline)}%`, label: 'Rising CRP', description: `CRP increased ${Math.abs(percentDecline)}% by ${dayLabel}. Treatment failure. Reassess: broaden antibiotics, imaging for abscess, surgical consultation.`, colorVar: '--color-danger' };
+        }
+    },
+};
+// -------------------------------------------------------------------
+// IV-to-Oral Transition Criteria (Peds Osteomyelitis)
+// -------------------------------------------------------------------
+const IV_ORAL_TRANSITION_CALCULATOR = {
+    id: 'iv-oral-transition',
+    title: 'IV-to-Oral Transition',
+    subtitle: 'Osteomyelitis Step-Down',
+    description: 'Checklist for transitioning from IV to oral antibiotics in pediatric osteomyelitis. All criteria should be met.',
+    fields: [
+        { name: 'afebrile', label: 'Afebrile ≥24-48h', type: 'toggle', points: 1, description: 'No fever for at least 24-48 hours' },
+        { name: 'pain', label: 'Pain improving', type: 'toggle', points: 1, description: 'Decreased pain, improved function' },
+        { name: 'crp', label: 'CRP declining (≥50% or <20)', type: 'toggle', points: 1, description: 'CRP down by half or below 20 mg/L' },
+        { name: 'oral', label: 'Tolerating oral intake', type: 'toggle', points: 1, description: 'Can take oral medications reliably' },
+        { name: 'organism', label: 'Organism identified or empiric OK', type: 'toggle', points: 1, description: 'Culture/PCR result, or empiric coverage adequate' },
+    ],
+    results: [
+        { min: 5, max: Infinity, label: 'Ready', risk: 'All Criteria Met', mortality: 'May transition to oral antibiotics. Total duration: 3-4 weeks.', colorVar: '--color-primary' },
+        { min: 4, max: 5, label: 'Almost Ready', risk: '4/5 Criteria Met', mortality: 'Close to transition. Address missing criterion.', colorVar: '--color-warning' },
+        { min: 0, max: 4, label: 'Not Ready', risk: '<4 Criteria Met', mortality: 'Continue IV therapy. Reassess daily.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Minimum IV duration: 2-4 days (shorter with good response). Total treatment: 3-4 weeks.',
+    citations: [
+        'Peltola H, et al. Prospective, randomized trial of 10 days versus 30 days of antimicrobial treatment for childhood osteomyelitis. Clin Infect Dis. 2010;50(9):1201-1210.',
+        'McNeil JC, et al. Acute hematogenous osteomyelitis in children. Infect Dis Clin North Am. 2017;31(4):779-794.',
+    ],
+};
+// -------------------------------------------------------------------
+// Gonococcal Arthritis Guide (Septic Arthritis)
+// -------------------------------------------------------------------
+const GC_ARTHRITIS_CALCULATOR = {
+    id: 'gc-arthritis',
+    title: 'Gonococcal vs Non-Gonococcal',
+    subtitle: 'Septic Arthritis Differentiation',
+    description: 'Distinguishes gonococcal (DGI) from non-gonococcal septic arthritis. Different treatment and prognosis.',
+    fields: [
+        { name: 'age', label: 'Age 15-40', type: 'toggle', points: 1, description: 'Sexually active age group' },
+        { name: 'polyarticular', label: 'Polyarticular or migratory', type: 'toggle', points: 1, description: 'Multiple joints or migrating pattern' },
+        { name: 'skin', label: 'Skin lesions', type: 'toggle', points: 1, description: 'Pustular or vesicular rash, often on extremities' },
+        { name: 'tenosynovitis', label: 'Tenosynovitis', type: 'toggle', points: 1, description: 'Inflammation along tendon sheaths' },
+        { name: 'risk', label: 'STI risk factors', type: 'toggle', points: 1, description: 'New partner, multiple partners, MSM, unprotected sex' },
+    ],
+    results: [
+        { min: 4, max: Infinity, label: 'Likely GC', risk: 'Gonococcal Arthritis (DGI)', mortality: 'Classic triad: tenosynovitis, dermatitis, polyarthralgia. Treat with ceftriaxone + azithromycin.', colorVar: '--color-warning' },
+        { min: 2, max: 4, label: 'Consider GC', risk: 'Possible Gonococcal', mortality: 'Test for GC (NAAT all sites). Add GC coverage empirically.', colorVar: '--color-warning' },
+        { min: 0, max: 2, label: 'Non-GC Pattern', risk: 'Non-Gonococcal Arthritis', mortality: 'Classic bacterial: S. aureus most common. Gram-positive coverage.', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'GC: ceftriaxone 1g IV q24h + azithromycin 1g x1. Non-GC: vancomycin + ceftriaxone pending culture.',
+    citations: [
+        'CDC STI Treatment Guidelines 2021. Gonococcal Infections.',
+        'Rice PA. Gonococcal arthritis (disseminated gonococcal infection). Infect Dis Clin North Am. 2005;19(4):853-861.',
+    ],
+};
 const CALCULATORS = {
     // HFNC
     'rox-index': ROX_INDEX_CALCULATOR,
@@ -12741,8 +12891,14 @@ const CALCULATORS = {
     'kocher-criteria': KOCHER_CRITERIA_CALCULATOR,
     'synovial-wbc': SYNOVIAL_WBC_CALCULATOR,
     'newman-criteria': NEWMAN_CRITERIA_CALCULATOR,
+    'gc-arthritis': GC_ARTHRITIS_CALCULATOR,
     // COPD
     'copd-severity': COPD_SEVERITY_CALCULATOR,
+    'anthonisen-criteria': ANTHONISEN_CRITERIA_CALCULATOR,
+    'bipap-titration': BIPAP_TITRATION_CALCULATOR,
+    // Peds Osteomyelitis
+    'crp-trend': CRP_TREND_CALCULATOR,
+    'iv-oral-transition': IV_ORAL_TRANSITION_CALCULATOR,
     // Digoxin toxicity
     'dig-fab-dosing': DIG_FAB_DOSING_CALCULATOR,
     'dig-ecg': DIG_ECG_CALCULATOR,
