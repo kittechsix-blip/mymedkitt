@@ -159,6 +159,14 @@ const TREE_REGISTRY = {
   'myasthenia-gravis':    { prefix: 'MYASTHENIA_GRAVIS',      entryNodeId: 'mg-start',       categoryId: 'neurology' },
   'botulism':             { prefix: 'BOTULISM',               entryNodeId: 'bot-start',      categoryId: 'neurology' },
   'ecmo':                 { prefix: 'ECMO',                   entryNodeId: 'ecmo-start',     categoryId: 'critical-care' },
+  'aortic-aneurysm':      { prefix: 'AORTIC_ANEURYSM',        entryNodeId: 'aortic-start',   categoryId: 'cardiology' },
+  'push-dose-pressors':   { prefix: 'PUSH_DOSE_PRESSORS',     entryNodeId: 'pdp-start',      categoryId: 'pharmacist' },
+  'vp-shunt':             { prefix: 'VP_SHUNT',               entryNodeId: 'vps-start',      categoryId: 'neurology' },
+  'measles':              { prefix: 'MEASLES',                entryNodeId: 'measles-start', categoryId: 'infectious-disease' },
+  'extensor-tendon':      { prefix: 'EXTENSOR_TENDON',        entryNodeId: 'ext-start',      categoryId: 'procedures' },
+  'trach-emergency':      { prefix: 'TRACH_EMERGENCY',        entryNodeId: 'trach-start',    categoryId: 'emergency-medicine' },
+  'methemoglobinemia':    { prefix: 'METHEMOGLOBINEMIA',      entryNodeId: 'methb-start',    categoryId: 'toxicology' },
+  'deep-neck-infection':  { prefix: 'DEEP_NECK_INFECTION',    entryNodeId: 'dni-start',      categoryId: 'infectious-disease' },
 };
 
 const CROSS_LISTINGS = {

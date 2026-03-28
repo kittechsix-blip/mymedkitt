@@ -59,6 +59,10 @@ export { METHEMOGLOBINEMIA_NODES, METHEMOGLOBINEMIA_MODULE_LABELS, METHEMOGLOBIN
 export { EXTENSOR_TENDON_NODES, EXTENSOR_TENDON_MODULE_LABELS, EXTENSOR_TENDON_CITATIONS } from './extensor-tendon';
 export { DEEP_NECK_INFECTION_NODES, DEEP_NECK_INFECTION_MODULE_LABELS, DEEP_NECK_INFECTION_CITATIONS } from './deep-neck-infection';
 export { VP_SHUNT_NODES, VP_SHUNT_MODULE_LABELS, VP_SHUNT_CITATIONS } from './vp-shunt';
+export { PEDS_OSTEOMYELITIS_NODES, PEDS_OSTEOMYELITIS_MODULE_LABELS, PEDS_OSTEOMYELITIS_CITATIONS } from './peds-osteomyelitis';
+export { COPD_EXACERBATION_NODES, COPD_EXACERBATION_MODULE_LABELS, COPD_EXACERBATION_CITATIONS } from './copd-exacerbation';
+export { SEPTIC_ARTHRITIS_NODES, SEPTIC_ARTHRITIS_MODULE_LABELS, SEPTIC_ARTHRITIS_CITATIONS } from './septic-arthritis';
+export { HFNC_NODES, HFNC_MODULE_LABELS, HFNC_CITATIONS } from './hfnc';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

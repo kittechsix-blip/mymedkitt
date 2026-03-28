@@ -499,6 +499,22 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/vp-shunt.js');
       return { nodes: m.VP_SHUNT_NODES, entryNodeId: 'vps-start', categoryId: 'neurology', moduleLabels: m.VP_SHUNT_MODULE_LABELS, citations: m.VP_SHUNT_CITATIONS };
     },
+    'peds-osteomyelitis': async () => {
+      const m = await import('../data/trees/peds-osteomyelitis.js');
+      return { nodes: m.PEDS_OSTEOMYELITIS_NODES, entryNodeId: 'osteo-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_OSTEOMYELITIS_MODULE_LABELS, citations: m.PEDS_OSTEOMYELITIS_CITATIONS };
+    },
+    'copd-exacerbation': async () => {
+      const m = await import('../data/trees/copd-exacerbation.js');
+      return { nodes: m.COPD_EXACERBATION_NODES, entryNodeId: 'copd-start', categoryId: 'emergency-medicine', moduleLabels: m.COPD_EXACERBATION_MODULE_LABELS, citations: m.COPD_EXACERBATION_CITATIONS };
+    },
+    'septic-arthritis': async () => {
+      const m = await import('../data/trees/septic-arthritis.js');
+      return { nodes: m.SEPTIC_ARTHRITIS_NODES, entryNodeId: 'sa-start', categoryId: 'orthopedics', moduleLabels: m.SEPTIC_ARTHRITIS_MODULE_LABELS, citations: m.SEPTIC_ARTHRITIS_CITATIONS };
+    },
+    'hfnc': async () => {
+      const m = await import('../data/trees/hfnc.js');
+      return { nodes: m.HFNC_NODES, entryNodeId: 'hfnc-start', categoryId: 'critical-care', moduleLabels: m.HFNC_MODULE_LABELS, citations: m.HFNC_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];
