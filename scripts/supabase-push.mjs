@@ -171,6 +171,10 @@ const TREE_REGISTRY = {
   'peds-osteomyelitis':   { prefix: 'PEDS_OSTEOMYELITIS',     entryNodeId: 'osteo-start',    categoryId: 'pediatrics' },
   'copd-exacerbation':    { prefix: 'COPD_EXACERBATION',      entryNodeId: 'copd-start',     categoryId: 'emergency-medicine' },
   'septic-arthritis':     { prefix: 'SEPTIC_ARTHRITIS',       entryNodeId: 'sa-start',       categoryId: 'orthopedics' },
+  'peds-stec-hus':        { prefix: 'PEDS_STEC_HUS',          entryNodeId: 'stec-start',     categoryId: 'pediatrics' },
+  'nail-bed-injuries':    { prefix: 'NAIL_BED_INJURIES',      entryNodeId: 'nail-start',     categoryId: 'procedures' },
+  'eclampsia':            { prefix: 'ECLAMPSIA',              entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn' },
+  'aortic-dissection':    { prefix: 'AORTIC_DISSECTION',      entryNodeId: 'dissect-start',  categoryId: 'cardiology' },
 };
 
 const CROSS_LISTINGS = {
