@@ -75,6 +75,9 @@ export const EXTENSOR_TENDON_NODES = [
         title: 'Zone Classification (Kleinert-Verdan)',
         body: 'The dorsum of hand, wrist, and forearm are divided into **8 zones** (I-VIII). Odd numbers overlie joints; even numbers are between joints. [1][3]\n\n**Thumb has separate classification (TI-TV)** - generally parallels finger zones.\n\n| Zone | Location | Key Structures |\n|------|----------|----------------|\n| I | DIP joint to fingertip | Terminal tendon |\n| II | Middle phalanx | Lateral bands |\n| III | PIP joint | Central slip |\n| IV | Proximal phalanx | Broad expansion |\n| V | MCP joint | Sagittal bands |\n| VI | Dorsum of hand | Juncturae |\n| VII | Wrist/retinaculum | Extensor retinaculum |\n| VIII | Distal forearm | Muscle-tendon junction |\n\n**Select a zone for details:**',
         citation: [1, 3, 7],
+        calculatorLinks: [
+            { id: 'extensor-zone-guide', label: 'Zone Quick Reference' },
+        ],
         images: [
             {
                 src: 'images/extensor-tendon/zone-classification.png',
@@ -200,6 +203,9 @@ export const EXTENSOR_TENDON_NODES = [
         title: 'Repair Techniques Overview',
         body: '**General Principles** [2][9]\n\n**Suture Selection:**\n- 3-0 for tendons at hand level (Zone VI)\n- 4-0 to 5-0 for finger tendons (Zones I-V)\n- Braided non-absorbable (Ethibond, Ticron) preferred\n- Tapered needle (avoid cutting needles)\n\n**Surgical Field:**\n- Good lighting, analgesia, tourniquet/hemostasis\n- Handle tendons delicately - avoid crushing with forceps\n- Minimize excessive punctures - adhesion risk\n- May need to extend wound for adequate exposure\n\n**Tendon Characteristics by Location:**\n- Proximal: Round, thick - holds core sutures well\n- Distal: Flat, thin - may only tolerate mattress/figure-of-8\n\n**Repair Timing:**\n- Optimal: Within 5 days (97.8% ROM vs 89.5% if >5 days) [12]\n- Delayed repair feasible up to 7 days with proper wound care\n- If delayed: irrigate, debride, loose skin closure, splint, hand surgery F/U\n\n**Select a technique:**',
         citation: [2, 9, 12],
+        calculatorLinks: [
+            { id: 'extensor-suture-guide', label: 'Suture Selection Guide' },
+        ],
         options: [
             {
                 label: 'Modified Kessler',
@@ -297,6 +303,9 @@ export const EXTENSOR_TENDON_NODES = [
         title: 'Splinting Protocols by Zone',
         body: '**Splinting is Critical for Extensor Tendon Healing** [1][8][9]\n\n| Zone | Position | Duration |\n|------|----------|----------|\n| I (Mallet) | DIP extension/slight hyperextension, PIP FREE | 8 wks continuous + 2 wks night |\n| II | DIP extension | 6 weeks |\n| III | PIP full extension, DIP FREE | 6 wks + 6 wks night |\n| IV | Wrist 30-45 ext, MCP neutral | 6 weeks |\n| V | Wrist 45 ext, MCP 20 flex | 6 weeks |\n| VI | Wrist 30 ext, MCP neutral | 6 weeks |\n| VII-VIII | Wrist 30-45 ext | 4-5 weeks |\n\n**Key Principles:**\n\n1. **Continuous Extension** - Any flexion at the repair site disrupts healing\n2. **Free Adjacent Joints** - Prevents adhesion of uninvolved structures\n3. **Compliance Critical** - Patient education essential\n4. **Early Mobilization Protocols** - Available for zones 4-7 with hand therapy',
         citation: [1, 8, 9],
+        calculatorLinks: [
+            { id: 'extensor-splint-guide', label: 'Splint Protocol Guide' },
+        ],
         next: 'ext-splint-types',
     },
     {

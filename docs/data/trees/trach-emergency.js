@@ -13,6 +13,9 @@ export const TRACH_EMERGENCY_NODES = [
         title: 'Tracheostomy Emergency',
         body: '**NTSP Emergency Algorithm: Tracheostomy patient in distress**\n\n**FIRST ACTIONS (simultaneous):**\n1. Call for expert airway help\n2. Apply high-flow O2 to BOTH face AND stoma\n3. Assess: Is this a tracheostomy or laryngectomy?\n\n**Critical distinction:**\n- **Tracheostomy:** Upper airway may be patent - can oxygenate from above\n- **Laryngectomy:** NO connection between mouth and lungs - stoma is ONLY airway\n\n**Look for:**\n- Red bedside sign = Laryngectomy (stoma only)\n- Green bedside sign = Tracheostomy (dual airway)\n\nCheck bedhead sign or ask patient/family. [1][2][3]',
         citation: [1, 2, 3],
+        calculatorLinks: [
+            { id: 'trach-algorithm', label: 'NTSP Algorithm' },
+        ],
         next: 'trach-vs-laryngectomy',
     },
     {
@@ -87,6 +90,9 @@ export const TRACH_EMERGENCY_NODES = [
         title: 'Tracheostomy Equipment Checklist',
         body: '**Bedside equipment for EVERY trach patient:**\n\n**Immediate access:**\n- Spare tracheostomy tube (same size + one size smaller)\n- Spare inner cannula (if applicable)\n- Suction equipment with appropriate catheters\n- 10 mL syringe for cuff deflation\n- Stitch cutters/scissors\n- Water-soluble lubricant\n- Tracheal dilators (for mature stomas)\n\n**Nearby access:**\n- Bag-valve-mask with pediatric face mask (for stoma ventilation)\n- Flexible bronchoscope\n- Size 6.0 cuffed ETT (fits most adult stomas)\n- Standard airway cart/difficult airway equipment\n- Capnography\n\n**Know your tube:** Inner cannula? Cuffed? Fenestrated? [2][4][5]',
         citation: [2, 4, 5],
+        calculatorLinks: [
+            { id: 'trach-tube-size', label: 'Tube Sizing Guide' },
+        ],
         next: 'trach-tube-types',
     },
     {
@@ -226,6 +232,9 @@ export const TRACH_EMERGENCY_NODES = [
         title: 'Bleeding: Timing & Severity',
         body: '**Tracheostomy bleeding - assess timing and severity:**\n\n**Early bleeding (<48 hours post-op):**\n- Usually minor: skin edges, granulation\n- Related to suctioning, manipulation\n- Rarely life-threatening\n\n**Late bleeding (>72 hours, especially 7-14 days):**\n- **HIGH RISK for tracheo-innominate fistula (TIF)**\n- Innominate artery erosion - mortality approaches 50%\n- Any late bleeding may be "sentinel bleed" before massive hemorrhage\n\n**Sentinel bleed:**\n- Small self-limited bleed preceding massive hemorrhage (up to 50% of TIF cases)\n- **TREAT ANY LATE BLEEDING AS POTENTIAL TIF** [4][6][7][8]',
         citation: [4, 6, 7, 8],
+        calculatorLinks: [
+            { id: 'trach-bleeding', label: 'Bleeding Risk Assessment' },
+        ],
         options: [
             {
                 label: 'Minor oozing, stable patient',

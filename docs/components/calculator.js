@@ -13158,9 +13158,449 @@ const AAA_PERMISSIVE_HYPOTENSION_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// VP Shunt Tools
+// -------------------------------------------------------------------
+const VPS_MALFUNCTION_CRITERIA_CALCULATOR = {
+    id: 'vps-malfunction-criteria',
+    title: 'VP Shunt Malfunction Risk',
+    subtitle: 'Clinical Likelihood Assessment',
+    description: 'Assesses clinical likelihood of VP shunt malfunction based on symptoms and exam findings.',
+    fields: [
+        { name: 'headache', label: 'Headache (new or changed)', type: 'toggle', points: 1 },
+        { name: 'vomiting', label: 'Nausea/vomiting', type: 'toggle', points: 1 },
+        { name: 'lethargy', label: 'Lethargy or AMS', type: 'toggle', points: 2 },
+        { name: 'caregiver', label: 'Caregiver says "like prior malfunction"', type: 'toggle', points: 2 },
+        { name: 'pump', label: 'Abnormal shunt pump test', type: 'toggle', points: 1 },
+        { name: 'imaging', label: 'Ventricle enlargement on CT', type: 'toggle', points: 3 },
+    ],
+    results: [
+        { min: 5, max: Infinity, label: 'High', risk: 'High Likelihood', mortality: 'Consult neurosurgery urgently. Likely malfunction.', colorVar: '--color-danger' },
+        { min: 3, max: 5, label: 'Moderate', risk: 'Moderate Likelihood', mortality: 'Get imaging if not done. Consider NSG consult even with normal CT.', colorVar: '--color-warning' },
+        { min: 0, max: 3, label: 'Low', risk: 'Low Likelihood', mortality: 'Consider alternative diagnoses. May still need imaging if clinical concern.', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'Normal CT does NOT exclude malfunction in chronically shunted patients with "stiff" ventricles.',
+    citations: [
+        'Piatt JH. Thirty-day outcomes of cerebrospinal fluid shunt surgery. J Neurosurg Pediatr. 2019;23(6):721-731.',
+        'Garton HJ, et al. Predicting shunt failure. J Neurosurg Pediatr. 2008;1(5):366-372.',
+    ],
+};
+const VPS_PUMP_TEST_CALCULATOR = {
+    id: 'vps-pump-test',
+    title: 'Shunt Pump Test Interpreter',
+    subtitle: 'Reservoir Palpation Guide',
+    description: 'Interprets VP shunt reservoir (pump) palpation findings. WARNING: Low sensitivity - do not rely solely on this test.',
+    fields: [
+        { name: 'compress', label: 'Hard to compress', type: 'toggle', points: 2, description: 'Resistance when pressing down' },
+        { name: 'refill', label: 'Slow to refill (>3-5 sec)', type: 'toggle', points: 2, description: 'After compression, slow return' },
+        { name: 'flat', label: 'Flat or soft reservoir', type: 'toggle', points: 1, description: 'Feels empty or collapsed' },
+    ],
+    results: [
+        { min: 2, max: Infinity, label: 'Abnormal', risk: 'Suggests Obstruction', mortality: 'Hard to compress → distal obstruction. Slow refill → proximal obstruction. Get imaging.', colorVar: '--color-warning' },
+        { min: 0, max: 2, label: 'Normal Feel', risk: 'Non-Diagnostic', mortality: 'Normal pump does NOT exclude malfunction. Pursue imaging if clinical suspicion.', colorVar: '--color-info' },
+    ],
+    thresholdNote: 'Pump test has POOR sensitivity and specificity. A normal test does NOT rule out malfunction.',
+    citations: [
+        'Garton HJ, Piatt JH. Hydrocephalus. Pediatr Clin North Am. 2004;51(2):305-325.',
+    ],
+};
+const VPS_ICP_MANAGEMENT_CALCULATOR = {
+    id: 'vps-icp-management',
+    title: 'ICP Emergency Treatment',
+    subtitle: 'Temporizing Measures',
+    description: 'Emergency ICP management while awaiting neurosurgery for VP shunt malfunction.',
+    fields: [
+        { name: 'herniation', label: 'Signs of herniation present', type: 'toggle', points: 3 },
+    ],
+    results: [],
+    thresholdNote: 'Definitive treatment is shunt revision. These are temporizing measures only.',
+    citations: [
+        'Farkas J. Elevated ICP. IBCC/EMCrit. 2025.',
+    ],
+    computeResult: (values) => {
+        const herniation = values['herniation'] || 0;
+        if (herniation) {
+            return {
+                value: 'EMERGENT',
+                label: 'ICP Crisis Protocol',
+                description: 'IMMEDIATE ACTIONS:\n\n1. HEAD OF BED 30 degrees\n2. HYPERVENTILATE to PCO2 30-35 mmHg (temporary)\n3. MANNITOL 1-1.5 g/kg IV bolus OR\n   HYPERTONIC SALINE 23.4% 30mL or 3% 250mL\n4. SEDATION if agitated (propofol, midazolam)\n5. AVOID hypotension, hypoxia, hyperthermia\n6. EMERGENT NSG for shunt tap or revision\n\nDo NOT delay definitive management.',
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: 'Stabilize',
+            label: 'Standard ICP Precautions',
+            description: 'SUPPORTIVE MEASURES:\n\n• Head of bed 30 degrees\n• Maintain normoxia (SpO2 >94%)\n• Maintain normotension (MAP 70-90)\n• Avoid hyperthermia\n• Pain control (reduces sympathetic drive)\n• Anti-emetics (vomiting raises ICP)\n\nPrepare for NSG evaluation and possible shunt tap.',
+            colorVar: '--color-warning',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Measles Tools
+// -------------------------------------------------------------------
+const MEASLES_IMMUNITY_CALCULATOR = {
+    id: 'measles-immunity',
+    title: 'Measles Immunity Check',
+    subtitle: 'Evidence of Immunity Assessment',
+    description: 'Determines if patient has evidence of presumptive immunity to measles.',
+    fields: [
+        { name: 'mmr2', label: '2 doses MMR documented', type: 'toggle', points: 3, description: 'Written documentation of 2 doses, ≥28 days apart' },
+        { name: 'igg', label: 'Positive measles IgG', type: 'toggle', points: 3, description: 'Laboratory evidence of immunity' },
+        { name: 'prior', label: 'Prior lab-confirmed measles', type: 'toggle', points: 3, description: 'Previous documented infection' },
+        { name: 'born', label: 'Born before 1957 (US)', type: 'toggle', points: 3, description: 'Considered immune due to natural exposure' },
+    ],
+    results: [
+        { min: 3, max: Infinity, label: 'Immune', risk: 'Evidence of Immunity', mortality: 'Patient has presumptive immunity. Breakthrough possible but rare (3-7%). Consider alternative diagnoses.', colorVar: '--color-primary' },
+        { min: 0, max: 3, label: 'Susceptible', risk: 'No Evidence of Immunity', mortality: 'Patient is susceptible. Maintain airborne isolation. Pursue testing and consider PEP for contacts.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'MMR vaccine: 93% effective (1 dose), 97% effective (2 doses). Breakthrough measles is typically milder.',
+    citations: [
+        'CDC. Prevention of Measles, Rubella, Congenital Rubella Syndrome, and Mumps. MMWR Recomm Rep. 2013;62(RR-4):1-34.',
+    ],
+};
+const MEASLES_PEP_CALCULATOR = {
+    id: 'measles-pep',
+    title: 'Measles PEP Guide',
+    subtitle: 'Post-Exposure Prophylaxis',
+    description: 'Guides post-exposure prophylaxis for measles contacts based on timing and patient factors.',
+    fields: [
+        { name: 'hours', label: 'Hours since exposure', type: 'number', points: 0, valueIsPoints: true },
+        { name: 'immunocomp', label: 'Immunocompromised', type: 'toggle', points: 0 },
+        { name: 'pregnant', label: 'Pregnant', type: 'toggle', points: 0 },
+        { name: 'infant', label: 'Infant <12 months', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'MMR PEP within 72h. IG PEP within 6 days. Coordinate with public health.',
+    citations: [
+        'CDC. Post-Exposure Prophylaxis for Measles. 2025.',
+        'AAP Red Book. Measles. 2024.',
+    ],
+    computeResult: (values) => {
+        const hours = values['hours'] || 0;
+        const immunocomp = values['immunocomp'] || 0;
+        const pregnant = values['pregnant'] || 0;
+        const infant = values['infant'] || 0;
+        const days = hours / 24;
+        if (days > 6) {
+            return { value: 'Too Late', label: 'PEP Window Closed', description: 'Beyond 6-day window for PEP. Monitor for symptoms. Isolate if symptomatic.', colorVar: '--color-danger' };
+        }
+        if (immunocomp || pregnant) {
+            return { value: 'IG', label: 'Immune Globulin', description: 'INTRAMUSCULAR IG: 0.5 mL/kg (max 15 mL)\nOR IV IG: 400 mg/kg\n\nWithin 6 days of exposure.\n\nMMR contraindicated in immunocompromised and pregnant patients.\n\nIsolate and monitor for symptoms for 28 days after IG.', colorVar: '--color-warning' };
+        }
+        if (infant) {
+            return { value: 'IG', label: 'Immune Globulin', description: 'For infants 0-5 months: IG 0.5 mL/kg IM\nFor infants 6-11 months: MMR (0.5 mL SC) preferred if within 72h, or IG if 3-6 days\n\nInfants <12mo who receive MMR still need 2 doses at ≥12mo.', colorVar: '--color-warning' };
+        }
+        if (days <= 3) {
+            return { value: 'MMR', label: 'MMR Vaccine', description: 'GIVE MMR VACCINE NOW\n\n0.5 mL subcutaneous injection.\n\nMost effective within 72 hours of exposure.\n\nHealthy, non-pregnant contacts ≥12 months: MMR is preferred PEP.', colorVar: '--color-primary' };
+        }
+        return { value: 'IG', label: 'Immune Globulin', description: '72h-6 day window: IG may be considered.\n\n0.5 mL/kg IM (max 15 mL) OR 400 mg/kg IV.\n\nMMR less effective after 72h but can still be given.', colorVar: '--color-warning' };
+    },
+};
+const MEASLES_VITAMIN_A_CALCULATOR = {
+    id: 'measles-vitamin-a',
+    title: 'Vitamin A Dosing',
+    subtitle: 'WHO Recommended Doses',
+    description: 'Weight-based vitamin A dosing for measles. Reduces mortality and complication rates.',
+    fields: [
+        { name: 'age', label: 'Age category', type: 'select', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Give 2 doses: one on day 1, one on day 2. Give to ALL children with severe measles.',
+    citations: [
+        'WHO. Vitamin A supplementation in measles. 2017.',
+        'Huiming Y, et al. Vitamin A for treating measles in children. Cochrane Database Syst Rev. 2005.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'See Doses',
+            label: 'Vitamin A by Age',
+            description: 'VITAMIN A DOSING (oral, 2 doses - Day 1 and Day 2):\n\n• <6 months: 50,000 IU (2 doses)\n• 6-11 months: 100,000 IU (2 doses)\n• ≥12 months: 200,000 IU (2 doses)\n\nREDUCES:\n• Mortality by 50-80%\n• Pneumonia severity\n• Diarrheal complications\n• Corneal ulceration\n\nGive to ALL children with measles, especially severe cases, immunocompromised, or malnourished.',
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Extensor Tendon Tools
+// -------------------------------------------------------------------
+const EXTENSOR_ZONE_GUIDE_CALCULATOR = {
+    id: 'extensor-zone-guide',
+    title: 'Extensor Zone Guide',
+    subtitle: 'Zone Classification & Management',
+    description: 'Quick reference for extensor tendon zone classification, anatomy, and ED repairability.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Odd zones over joints, even zones between joints. Zones I, II, IV, V, VI often ED repairable.',
+    citations: [
+        'Roberts & Hedges Clinical Procedures in Emergency Medicine. 7th ed.',
+        'Woo SH. Extensor Tendon Injuries. J Hand Surg Asian Pac Vol. 2019.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Zones I-VIII',
+            label: 'Zone Reference',
+            description: 'ZONE CLASSIFICATION:\n\nI (DIP) - Terminal tendon → MALLET FINGER\n• ED repair: Splint only (Stack splint 6-8 wks)\n\nII (Middle phalanx) - Lateral bands\n• ED repair: Yes, figure-of-8 suture\n\nIII (PIP) - Central slip → BOUTONNIERE\n• REFER: Complex anatomy, risk of boutonniere\n\nIV (Proximal phalanx) - Broad expansion\n• ED repair: Yes, horizontal mattress\n\nV (MCP) - Sagittal bands\n• ED repair: Yes, but rule out FIGHT BITE\n\nVI (Hand dorsum) - Juncturae tendinae\n• ED repair: Yes, modified Kessler\n\nVII (Wrist/retinaculum)\n• REFER: Complex, retinaculum involvement\n\nVIII (Forearm)\n• REFER: Muscle-tendon junction',
+            colorVar: '--color-info',
+        };
+    },
+};
+const EXTENSOR_SUTURE_GUIDE_CALCULATOR = {
+    id: 'extensor-suture-guide',
+    title: 'Extensor Suture Selection',
+    subtitle: 'Suture Technique by Zone',
+    description: 'Recommended suture techniques and materials for extensor tendon repair by zone.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Use 4-0 or 5-0 nonabsorbable (nylon, prolene) for most repairs. Absorbable OK for pediatric.',
+    citations: [
+        'Roberts & Hedges Clinical Procedures in Emergency Medicine. 7th ed.',
+        'Newport ML. Extensor tendon injuries in the hand. J Am Acad Orthop Surg. 1997;5(2):59-66.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Techniques',
+            label: 'Suture Guide',
+            description: 'SUTURE SELECTION BY ZONE:\n\nZONE I (Mallet):\n• NO suture - Stack splint 6-8 weeks\n• DIP in 0° extension (slight hyperextension OK)\n\nZONE II (Lateral bands):\n• 5-0 nonabsorbable\n• Figure-of-8 or horizontal mattress\n\nZONE IV-V (Phalanx/MCP):\n• 4-0 nonabsorbable\n• Horizontal mattress OR modified Kessler\n\nZONE VI (Hand):\n• 4-0 nonabsorbable\n• Modified Kessler core + epitendinous\n\nKEY PRINCIPLES:\n• Buried knots (away from tendon surface)\n• Minimal handling of tendon\n• Test repair with gentle ROM before splint',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const EXTENSOR_SPLINT_GUIDE_CALCULATOR = {
+    id: 'extensor-splint-guide',
+    title: 'Extensor Splint Protocol',
+    subtitle: 'Immobilization by Zone',
+    description: 'Splinting positions and durations for extensor tendon injuries by zone.',
+    fields: [],
+    results: [],
+    thresholdNote: 'All extensor repairs require 4-6 weeks immobilization. Hand therapy follow-up essential.',
+    citations: [
+        'Evans RB. A study of the zone I flexor tendon injury and implications for treatment. J Hand Ther. 1990;3(3):133-148.',
+        'Sameem M, et al. A systematic review of rehabilitation protocols for extensor tendon injuries. Plast Surg. 2009.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Splint Guide',
+            label: 'Immobilization Protocol',
+            description: 'SPLINTING BY ZONE:\n\nZONE I (Mallet):\n• Stack splint or aluminum\n• DIP 0° extension (PIP free)\n• 6-8 weeks continuous, then 2 weeks night only\n• NEVER let DIP flex during treatment\n\nZONE II:\n• DIP extension splint\n• 6 weeks\n\nZONE III (Boutonniere):\n• PIP extension splint (DIP free)\n• 6 weeks\n\nZONE IV-VI:\n• Dorsal wrist splint\n• Wrist 30-45° extension\n• MCP 15-20° flexion\n• IP joints free (for zones IV-V)\n• 4-6 weeks\n\nHAND THERAPY:\n• Refer all for supervised rehab\n• Controlled motion protocols reduce adhesions',
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Tracheostomy Emergency Tools
+// -------------------------------------------------------------------
+const TRACH_ALGORITHM_CALCULATOR = {
+    id: 'trach-algorithm',
+    title: 'NTSP Emergency Algorithm',
+    subtitle: 'Trach vs Laryngectomy',
+    description: 'Critical first steps for tracheostomy/laryngectomy patient in distress.',
+    fields: [
+        { name: 'laryngectomy', label: 'Laryngectomy (stoma only)', type: 'toggle', points: 2 },
+        { name: 'trach', label: 'Tracheostomy (upper airway intact)', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Call for expert airway help immediately. Apply O2 to face AND stoma while assessing.',
+    citations: [
+        'McGrath BA, et al. Multidisciplinary guidelines for the management of tracheostomy and laryngectomy airway emergencies. Anaesthesia. 2012;67(9):1025-1041.',
+    ],
+    computeResult: (values) => {
+        const laryngectomy = values['laryngectomy'] || 0;
+        if (laryngectomy) {
+            return {
+                value: 'STOMA ONLY',
+                label: 'Laryngectomy',
+                description: 'NO CONNECTION between mouth and lungs.\nCANNOT intubate from above.\n\nEMERGENCY STEPS:\n1. Apply O2 directly to stoma (peds mask)\n2. If not breathing: BVM over stoma\n3. Remove stoma devices/dressings\n4. Suction stoma\n5. If tube present: deflate cuff, remove inner cannula\n\nSTOMA INTUBATION:\n• Size 6.0 cuffed ETT fits most adult stomas\n• Or tracheostomy tube through stoma\n• NEVER attempt oral/nasal',
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: 'DUAL AIRWAY',
+            label: 'Tracheostomy',
+            description: 'Upper airway MAY be patent.\n\nEMERGENCY STEPS:\n1. Apply O2 to BOTH face AND stoma\n2. Remove inner cannula, suction\n3. If obstructed: deflate cuff, try to pass suction catheter\n4. If still obstructed: REMOVE tube completely\n5. Cover stoma, attempt oral ventilation\n6. If that fails: ventilate via stoma\n\nFRESH TRACH (<7 days):\n• Do NOT remove - tract not mature\n• Oral intubation preferred if needed',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const TRACH_TUBE_SIZE_CALCULATOR = {
+    id: 'trach-tube-size',
+    title: 'Trach Tube Sizing',
+    subtitle: 'Emergency Replacement Guide',
+    description: 'Emergency tracheostomy tube replacement sizing. Keep backup tubes at bedside.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Always have same size AND one size smaller available. ETT 6.0 fits most adult stomas.',
+    citations: [
+        'NTSP Guidelines for Tracheostomy and Laryngectomy Airway Emergencies. 2012.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Size Guide',
+            label: 'Emergency Sizing',
+            description: 'EMERGENCY REPLACEMENT:\n\n• Use SAME SIZE if available\n• If unavailable: ONE SIZE SMALLER\n• Universal backup: 6.0 cuffed ETT\n\nADULT SIZES:\nFemale: typically 6-8 Shiley\nMale: typically 8-10 Shiley\n\nPEDIATRIC SIZING:\n• <1 year: 3.0-3.5 (usually uncuffed)\n• 1-2 years: 4.0-4.5\n• >2 years: (age/4) + 4\n\nMATURE STOMA (>7 days):\n• Can replace with tube or ETT\n• Use tracheal dilators if needed\n\nFRESH STOMA (<7 days):\n• Avoid removal - tract immature\n• If dislodged: oral intubation',
+            colorVar: '--color-info',
+        };
+    },
+};
+const TRACH_BLEEDING_CALCULATOR = {
+    id: 'trach-bleeding',
+    title: 'Trach Bleeding Management',
+    subtitle: 'Minor vs Sentinel Bleed',
+    description: 'Distinguishes minor bleeding from sentinel bleed heralding tracheo-innominate fistula.',
+    fields: [
+        { name: 'fresh', label: 'Fresh trach (<3 weeks)', type: 'toggle', points: 2 },
+        { name: 'pulsatile', label: 'Pulsatile bleeding', type: 'toggle', points: 3 },
+        { name: 'massive', label: 'Massive hemorrhage', type: 'toggle', points: 3 },
+        { name: 'prior', label: 'Prior sentinel bleed', type: 'toggle', points: 2 },
+    ],
+    results: [
+        { min: 3, max: Infinity, label: 'CRITICAL', risk: 'Tracheo-Innominate Fistula', mortality: 'EMERGENT: Hyperinflate cuff. Digital pressure via stoma. OR for ligation.', colorVar: '--color-danger' },
+        { min: 1, max: 3, label: 'Concerning', risk: 'Evaluate Urgently', mortality: 'ENT/Surgery consult. CT angiography. May be sentinel bleed.', colorVar: '--color-warning' },
+        { min: 0, max: 1, label: 'Minor', risk: 'Likely Granulation', mortality: 'Suction carefully. Humidification. ENT follow-up if persistent.', colorVar: '--color-info' },
+    ],
+    thresholdNote: 'Tracheo-innominate fistula mortality >80%. Sentinel bleed precedes massive hemorrhage in 50%.',
+    citations: [
+        'Ridley RW, Zwischenberger JB. Tracheoinnominate fistula: surgical management. Oper Tech Thorac Cardiovasc Surg. 2006.',
+    ],
+};
+// -------------------------------------------------------------------
+// Deep Neck Infection Tools
+// -------------------------------------------------------------------
+const DNI_LUDWIG_CRITERIA_CALCULATOR = {
+    id: 'dni-ludwig-criteria',
+    title: 'Ludwig Angina Criteria',
+    subtitle: 'Clinical Diagnosis',
+    description: 'Clinical criteria for Ludwig angina - bilateral submandibular space cellulitis.',
+    fields: [
+        { name: 'bilateral', label: 'Bilateral submandibular swelling', type: 'toggle', points: 2 },
+        { name: 'floor', label: 'Floor of mouth elevation', type: 'toggle', points: 2 },
+        { name: 'woody', label: 'Woody/brawny induration (not fluctuant)', type: 'toggle', points: 1 },
+        { name: 'dental', label: 'Dental source identified', type: 'toggle', points: 1 },
+        { name: 'trismus', label: 'Trismus present', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 4, max: Infinity, label: 'Classic', risk: 'Ludwig Angina', mortality: 'Airway emergency. Early intubation or surgical airway. IV antibiotics. OR drainage.', colorVar: '--color-danger' },
+        { min: 2, max: 4, label: 'Possible', risk: 'Consider Ludwig', mortality: 'CT with contrast. ENT/OMFS consult. Close airway monitoring.', colorVar: '--color-warning' },
+        { min: 0, max: 2, label: 'Unlikely', risk: 'Other DNI', mortality: 'May be unilateral abscess or other space involvement.', colorVar: '--color-info' },
+    ],
+    thresholdNote: 'Ludwig angina is CELLULITIS, not abscess - typically no fluctuance or drainable collection.',
+    citations: [
+        'Candamourty R, et al. Ludwig\'s Angina - An emergency: A case report. J Nat Sci Biol Med. 2012;3(2):206-208.',
+    ],
+};
+const DNI_AIRWAY_DECISION_CALCULATOR = {
+    id: 'dni-airway-decision',
+    title: 'DNI Airway Decision',
+    subtitle: 'Secure Early or Watch?',
+    description: 'Helps decide on elective vs emergent airway management in deep neck infections.',
+    fields: [
+        { name: 'stridor', label: 'Stridor present', type: 'toggle', points: 3 },
+        { name: 'drool', label: 'Drooling/cannot handle secretions', type: 'toggle', points: 2 },
+        { name: 'tripod', label: 'Tripod positioning', type: 'toggle', points: 2 },
+        { name: 'floor', label: 'Floor of mouth elevation', type: 'toggle', points: 2 },
+        { name: 'progression', label: 'Rapid symptom progression', type: 'toggle', points: 2 },
+        { name: 'trismus', label: 'Severe trismus (<2cm opening)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 4, max: Infinity, label: 'SECURE NOW', risk: 'Immediate Airway', mortality: 'Awake fiberoptic intubation or surgical airway. Do NOT paralyze.', colorVar: '--color-danger' },
+        { min: 2, max: 4, label: 'HIGH RISK', risk: 'Prepare for Airway', mortality: 'Awake intubation setup. ENT/Anesthesia at bedside. May need emergent intervention.', colorVar: '--color-warning' },
+        { min: 0, max: 2, label: 'Monitor', risk: 'Close Observation', mortality: 'Serial exams. Difficult airway cart ready. Low threshold to secure.', colorVar: '--color-info' },
+    ],
+    thresholdNote: 'When in doubt, secure early. Rapid progression can occur. Awake intubation preferred - do NOT paralyze.',
+    citations: [
+        'Boscolo-Rizzo P, Da Mosto MC. Submandibular space infection: a potentially lethal infection. Int J Infect Dis. 2009;13(3):327-333.',
+    ],
+};
+const DNI_EMPIRIC_ABX_CALCULATOR = {
+    id: 'dni-empiric-abx',
+    title: 'DNI Empiric Antibiotics',
+    subtitle: 'Polymicrobial Coverage',
+    description: 'Empiric antibiotic selection for deep neck space infections - covers oral flora.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Deep neck infections are polymicrobial: strep, oral anaerobes, sometimes MRSA/GNRs.',
+    citations: [
+        'Vieira F, Allen SM, Stocks RM, Thompson JW. Deep neck infection. Otolaryngol Clin North Am. 2008;41(3):459-483.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Regimens',
+            label: 'Empiric Antibiotics',
+            description: 'STANDARD COVERAGE:\n\n1. AMPICILLIN-SULBACTAM 3g IV q6h\n   (Covers strep, oral anaerobes)\n\n2. OR: CLINDAMYCIN 900mg IV q8h\n   + CEFTRIAXONE 2g IV q24h\n\n3. ADD VANCOMYCIN if:\n   • MRSA risk (IVDU, prior MRSA)\n   • Severe sepsis\n   • Failed outpatient therapy\n\n4. ADD METRONIDAZOLE if:\n   • Using penicillin alone\n   • Suspected necrotizing infection\n\nLEMIERRE SYNDROME:\n• Ampicillin-sulbactam + Metronidazole\n• Or Piperacillin-tazobactam\n• Duration: 4-6 weeks for Fusobacterium',
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// HFNC Tools (adding to existing ROX)
+// -------------------------------------------------------------------
+const HFNC_SETTINGS_CALCULATOR = {
+    id: 'hfnc-settings',
+    title: 'HFNC Initial Settings',
+    subtitle: 'Flow & FiO2 Guide',
+    description: 'Starting settings for high-flow nasal cannula therapy by indication.',
+    fields: [
+        { name: 'indication', label: 'Select indication', type: 'select', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Start high, wean down. Higher flow = more dead space washout = less WOB.',
+    citations: [
+        'Frat JP, et al. High-flow oxygen through nasal cannula in acute hypoxemic respiratory failure (FLORALI). N Engl J Med. 2015;372(23):2185-2196.',
+    ],
+    computeResult: () => {
+        return {
+            value: 'Settings',
+            label: 'Initial HFNC Settings',
+            description: 'STARTING SETTINGS BY INDICATION:\n\nHYPOXEMIC RESPIRATORY FAILURE:\n• Flow: 50-60 L/min\n• FiO2: 100% initially, wean to SpO2 92-96%\n• Temperature: 37°C (may decrease if uncomfortable)\n\nCOPD/HYPERCAPNIC:\n• Flow: 30-40 L/min (start lower)\n• FiO2: Titrate to SpO2 88-92%\n• Monitor for CO2 retention\n\nPOST-EXTUBATION:\n• Flow: 50-60 L/min\n• FiO2: Start at prior vent FiO2, wean\n\nPRE-OXYGENATION:\n• Flow: 60 L/min maximum\n• FiO2: 100%\n• Leave on during intubation attempt',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const HFNC_ESCALATION_CALCULATOR = {
+    id: 'hfnc-escalation',
+    title: 'HFNC Failure Criteria',
+    subtitle: 'When to Escalate',
+    description: 'Signs of HFNC failure requiring escalation to NIV or intubation.',
+    fields: [
+        { name: 'rr', label: 'RR >30 on max settings', type: 'toggle', points: 2 },
+        { name: 'accessory', label: 'Accessory muscle use', type: 'toggle', points: 1 },
+        { name: 'spo2', label: 'SpO2 <90% on FiO2 100%', type: 'toggle', points: 2 },
+        { name: 'rox', label: 'ROX index <3.85 at 2-6h', type: 'toggle', points: 2 },
+        { name: 'ams', label: 'Altered mental status', type: 'toggle', points: 3 },
+    ],
+    results: [
+        { min: 4, max: Infinity, label: 'FAILING', risk: 'Intubation Likely', mortality: 'HFNC failing. Prepare for intubation. NIV may bridge.', colorVar: '--color-danger' },
+        { min: 2, max: 4, label: 'CONCERNING', risk: 'Monitor Closely', mortality: 'Re-assess in 30-60 min. Consider NIV trial. Low threshold to escalate.', colorVar: '--color-warning' },
+        { min: 0, max: 2, label: 'Adequate', risk: 'Continue HFNC', mortality: 'Responding appropriately. Continue current therapy. Serial reassessment.', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'ROX index <3.85 at 2, 6, or 12 hours predicts HFNC failure. Do not delay intubation.',
+    citations: [
+        'Roca O, et al. Predicting success of high-flow nasal cannula in pneumonia patients with hypoxemic respiratory failure: The ROX index. J Crit Care. 2016;35:200-205.',
+    ],
+};
 const CALCULATORS = {
     // HFNC
     'rox-index': ROX_INDEX_CALCULATOR,
+    'hfnc-settings': HFNC_SETTINGS_CALCULATOR,
+    'hfnc-escalation': HFNC_ESCALATION_CALCULATOR,
+    // VP Shunt
+    'vps-malfunction-criteria': VPS_MALFUNCTION_CRITERIA_CALCULATOR,
+    'vps-pump-test': VPS_PUMP_TEST_CALCULATOR,
+    'vps-icp-management': VPS_ICP_MANAGEMENT_CALCULATOR,
+    // Measles
+    'measles-immunity': MEASLES_IMMUNITY_CALCULATOR,
+    'measles-pep': MEASLES_PEP_CALCULATOR,
+    'measles-vitamin-a': MEASLES_VITAMIN_A_CALCULATOR,
+    // Extensor Tendon
+    'extensor-zone-guide': EXTENSOR_ZONE_GUIDE_CALCULATOR,
+    'extensor-suture-guide': EXTENSOR_SUTURE_GUIDE_CALCULATOR,
+    'extensor-splint-guide': EXTENSOR_SPLINT_GUIDE_CALCULATOR,
+    // Trach Emergency
+    'trach-algorithm': TRACH_ALGORITHM_CALCULATOR,
+    'trach-tube-size': TRACH_TUBE_SIZE_CALCULATOR,
+    'trach-bleeding': TRACH_BLEEDING_CALCULATOR,
+    // Deep Neck Infection
+    'dni-ludwig-criteria': DNI_LUDWIG_CRITERIA_CALCULATOR,
+    'dni-airway-decision': DNI_AIRWAY_DECISION_CALCULATOR,
+    'dni-empiric-abx': DNI_EMPIRIC_ABX_CALCULATOR,
     // Septic Arthritis / Peds Osteo
     'kocher-criteria': KOCHER_CRITERIA_CALCULATOR,
     'synovial-wbc': SYNOVIAL_WBC_CALCULATOR,

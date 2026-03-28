@@ -31,6 +31,9 @@ export const DEEP_NECK_INFECTION_NODES = [
         title: 'Airway Assessment',
         body: '**Assess for signs of airway compromise IMMEDIATELY.** [5,6]\n\nStridor and cyanosis are **late, ominous signs** of impending respiratory failure.\n\nEarlier signs include:\n- Drooling or inability to handle secretions\n- Muffled "hot potato" voice\n- Tripod positioning\n- Difficulty lying flat\n- Floor of mouth elevation\n- Tongue protrusion',
         citation: [5, 6],
+        calculatorLinks: [
+            { id: 'dni-airway-decision', label: 'Airway Decision Tool' },
+        ],
         options: [
             {
                 label: 'Airway compromise present',
@@ -103,6 +106,10 @@ export const DEEP_NECK_INFECTION_NODES = [
         title: 'Ludwig Angina',
         body: '**Ludwig angina is a rapidly progressive, life-threatening cellulitis of the floor of the mouth.** [5,9]\n\n**Classic triad:**\n1. Bilateral submandibular space involvement\n2. Gangrenous cellulitis (not abscess formation)\n3. No lymphatic involvement\n\n**Clinical features:**\n- "Bull neck" appearance with bilateral swelling\n- Firm, board-like induration of floor of mouth\n- Tongue elevation and posterior displacement\n- Drooling, dysphagia, dysphonia\n- Trismus\n\n**Etiology:** Typically odontogenic (2nd/3rd mandibular molars). Molar roots extend below the mylohyoid line, allowing direct spread into submandibular space. [9]\n\n**Key point:** This is primarily cellulitis, NOT an abscess. Surgery is for drainage only when fluctuance or abscess develops.\n\n**Mortality:** ~8% with modern aggressive management (historically up to 50%). [5]',
         citation: [5, 9],
+        calculatorLinks: [
+            { id: 'dni-ludwig-criteria', label: 'Ludwig Angina Criteria' },
+            { id: 'dni-empiric-abx', label: 'Empiric Antibiotics' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'Ampicillin-sulbactam',

@@ -116,6 +116,9 @@ export const HFNC_NODES: DecisionNode[] = [
     title: 'HFNC Device Setup & Initial Settings',
     body: '**Equipment Components:** [1][2]\n- Air/oxygen blender (21-100% FiO2)\n- Heated humidifier (37C, 100% relative humidity)\n- Single heated-wire circuit\n- Large-bore nasal cannula (sized appropriately)\n\n**Initial Settings:**\n\n| Parameter | Starting Value | Titration |\n|-----------|---------------|------------|\n| Flow Rate | 30-40 L/min | Titrate to WOB (up to 60-70 L/min) |\n| FiO2 | 50-60% | Titrate to SpO2 92-96% |\n| Temperature | 37C | Can decrease to 34C if uncomfortable |\n\n**Flow Rate Principle:** [1]\n- Flow is titrated against **work of breathing** (respiratory rate, accessory muscle use)\n- Higher flow = more dead space washout = reduced ventilatory demand\n- Even if SpO2 adequate, increasing flow reduces WOB\n- For severe ARF: start at 60 L/min and titrate down\n\n**FiO2 Principle:**\n- Titrate against SpO2 via pulse oximetry\n- ABG unnecessary if pulse ox adequate\n- Target SpO2 92-96% (88-92% in COPD with chronic hypercapnia)\n\n**Nasal Cannula Fit:** Prongs should not occlude nares completely - allows for exhalation.',
     citation: [1, 2],
+    calculatorLinks: [
+      { id: 'hfnc-settings', label: 'Initial Settings Guide' },
+    ],
     next: 'hfnc-titration',
   },
 
@@ -217,6 +220,9 @@ export const HFNC_NODES: DecisionNode[] = [
     title: 'HFNC Failure Criteria',
     body: '**Clinical Signs of HFNC Failure:** [1][13][14]\n\n**ROX Index:**\n- ROX <2.85 at 2 hours\n- ROX <3.47 at 6 hours\n- ROX <3.85 at 12 hours\n- Declining ROX despite optimization\n\n**Clinical Indicators:**\n- **RR >35** despite maximal HFNC\n- **SpO2 <88%** on HFNC 60 L/min, FiO2 100%\n- **Accessory muscle use** - sternocleidomastoid recruitment\n- **Paradoxical abdominal breathing**\n- **Altered mental status** - confusion, agitation, somnolence\n- **Inability to speak** in sentences\n- **Hemodynamic instability** - requiring vasopressors\n- **Copious secretions** patient cannot clear\n\n**Risk of Delayed Intubation:** [16]\n- Prolonged HFNC trial before intubation associated with worse outcomes\n- HFNC success/failure usually apparent within 24-48 hours\n- If no improvement by 24-48 hours, strongly consider escalation\n\n**Key Message:** HFNC failure is not a failure of the modality - it is recognition that the patient needs more support. Early recognition prevents adverse outcomes.',
     citation: [1, 13, 14, 16],
+    calculatorLinks: [
+      { id: 'hfnc-escalation', label: 'Failure Criteria Checker' },
+    ],
     next: 'hfnc-escalation-options',
   },
 

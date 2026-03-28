@@ -34,6 +34,9 @@ export const MEASLES_NODES = [
         title: 'Assess Presumptive Immunity',
         body: '**Evidence of Immunity (any ONE):**\n\n- Written documentation of 2 doses MMR vaccine (at least 28 days apart, first dose at age >= 12 months)\n- Laboratory evidence of immunity (positive IgG)\n- Laboratory confirmation of prior measles\n- Birth before 1957 in the US (considered immune due to natural exposure)\n\nDoes the patient have evidence of presumptive immunity?',
         citation: [1, 5],
+        calculatorLinks: [
+            { id: 'measles-immunity', label: 'Immunity Checklist' },
+        ],
         options: [
             {
                 label: 'Evidence of immunity present',
@@ -126,6 +129,9 @@ export const MEASLES_NODES = [
         title: 'Vitamin A Therapy',
         body: '**WHO/AAP Recommended Dosing:**\n\n| Age | Dose | Schedule |\n|-----|------|----------|\n| <6 months | 50,000 IU PO | Day 1 and Day 2 |\n| 6-11 months | 100,000 IU PO | Day 1 and Day 2 |\n| >= 12 months | 200,000 IU PO | Day 1 and Day 2 |\n\n**Administration:**\n- Give immediately upon diagnosis\n- Repeat dose the following day (total 2 doses)\n- Give 3rd dose 2-4 weeks later if clinical signs of vitamin A deficiency\n\n**Evidence:**\n- 87% reduction in mortality in children <2 years\n- 64% reduction in mortality overall (2 doses of 200,000 IU)\n- Reduces duration of diarrhea by 2 days, fever by 1 day\n\n**Cautions:**\n- Do NOT substitute cod liver oil (variable content, toxicity risk)\n- Avoid high-dose vitamin A in pregnancy (teratogenic)\n- Overdose risk: hepatotoxicity, CNS effects, bone damage',
         citation: [4, 9, 10],
+        calculatorLinks: [
+            { id: 'measles-vitamin-a', label: 'Vitamin A Dosing' },
+        ],
         next: 'measles-complications',
     },
     // =====================================================================
@@ -212,6 +218,9 @@ export const MEASLES_NODES = [
         title: 'PEP Timing Assessment',
         body: '**Timing is Critical for PEP Efficacy**\n\n**Window for MMR Vaccine:** Within 72 hours of exposure\n**Window for Immune Globulin:** Within 6 days of exposure\n\nHow long since exposure occurred?',
         citation: [1, 5, 4],
+        calculatorLinks: [
+            { id: 'measles-pep', label: 'PEP Decision Tool' },
+        ],
         options: [
             {
                 label: 'Within 72 hours',

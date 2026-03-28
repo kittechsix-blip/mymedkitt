@@ -29,6 +29,9 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     title: 'Clinical Presentation',
     body: '**Classic symptoms of shunt malfunction:**\n- Headache (most common presenting symptom)\n- Nausea and vomiting\n- Lethargy, irritability, drowsiness\n- Altered mental status\n- Visual changes (diplopia, blurred vision)\n- Abdominal pain (distal catheter issues)\n\n**Pediatric-specific signs:**\n- Bulging fontanelle (if open)\n- Increasing head circumference\n- Sunset eyes (upward gaze palsy)\n- Macewen sign ("cracked pot" sound on percussion)\n- Poor feeding, irritability\n\n**Red flags for impending herniation:**\n- Cushing triad: hypertension, bradycardia, irregular respirations\n- Unilateral or bilateral pupil dilation\n- Decerebrate/decorticate posturing\n- Seizures\n- Rapid neurologic decline\n\n**Critical point:** Symptoms may be intermittent in partial obstruction. Caregiver assessment of "acting like previous malfunction" should be taken seriously.',
     citation: [1, 2, 4],
+    calculatorLinks: [
+      { id: 'vps-malfunction-criteria', label: 'Malfunction Risk Score' },
+    ],
     options: [
       {
         label: 'Hemodynamically unstable / herniation signs',
@@ -57,6 +60,9 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     title: 'Physical Examination',
     body: '**Shunt palpation (pumping the reservoir):**\n- Locate the reservoir (usually behind the ear)\n- Press down and release\n\n**Interpretation:**\n| Finding | Suggests |\n|---------|----------|\n| Flat or slow refill (>3-5 sec) | Proximal obstruction - CSF not draining from ventricles |\n| Firm or difficult to compress | Distal obstruction - CSF not draining to peritoneum |\n| Easy to compress, refills quickly | May be functional but NOT reliable |\n\n**IMPORTANT: Shunt pumping has poor sensitivity and specificity.**\n- A normal-feeling shunt does NOT exclude malfunction\n- Do not rely solely on this exam\n\n**Complete neurologic examination:**\n- Mental status (compare to baseline)\n- Cranial nerves (especially III, IV, VI - extraocular movements)\n- Papilledema (if fundoscopy available)\n- Motor/sensory exam\n- Document baseline carefully for serial reassessment\n\n**Inspect the shunt tract:**\n- Redness, swelling, warmth (infection)\n- Skin breakdown over tubing\n- CSF leak',
     citation: [1, 2, 5],
+    calculatorLinks: [
+      { id: 'vps-pump-test', label: 'Pump Test Interpreter' },
+    ],
     next: 'vps-imaging',
   },
 
