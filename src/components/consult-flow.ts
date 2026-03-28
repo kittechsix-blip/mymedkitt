@@ -15,6 +15,7 @@ import { getAllCategories } from '../services/category-service.js';
 import { renderDosingBanner } from './dosing-banner.js';
 import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHeader } from './sticky-dosing-header.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
+import { addRecentConsult } from './dashboard.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -39,6 +40,12 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
   currentConfig = config;
   currentTreeId = treeId;
   controller = new ConsultFlowController(config.nodes);
+
+  // Track this consult for recents on dashboard
+  const consultTitle = getConsultTitle(treeId);
+  if (consultTitle) {
+    addRecentConsult(treeId, consultTitle);
+  }
 
   // Set up delegated click handler for inline links
   if (delegatedContainer !== container) {

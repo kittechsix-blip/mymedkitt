@@ -17,6 +17,7 @@ import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/sh
 import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
 import { setupExitIntent } from './init-exit-intent.js';
+import { initSpotlightShortcut } from './components/spotlight.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -213,6 +214,8 @@ async function init() {
     await splashPromise;
     // Initialize exit intent modal
     setupExitIntent();
+    // Initialize global Spotlight search shortcut (Cmd+K)
+    initSpotlightShortcut();
     // Tab bar click delegation
     const tabBar = document.getElementById('bottom-tab-bar');
     if (tabBar) {

@@ -1,6 +1,5 @@
-// myMedKitt — Dashboard (Home Screen)
-// Phase 1 shell: Logo header, 2-column grid of 3D specialty buttons
-// (alphabetical), search icon, bottom toolbar (Lab/Pharmacy/Med-Calc).
+// myMedKitt — Dashboard V2 (Command Center)
+// Hero search bar, recents row, clean category cards, quick actions
 
 import { getAllCategories } from '../services/category-service.js';
 import { getSpecialtyGradient } from './button-3d.js';
@@ -9,14 +8,64 @@ import { isSharedMode, getSharedTreeIds, grantFullAccess } from '../services/sha
 import type { Category } from '../models/types.js';
 import { getAllDrugs } from '../services/drug-service.js';
 import { getAllCalculators } from './calculator.js';
-import { showDrugModal } from './drug-store.js';
-import { search, buildSearchIndex, type SearchResult } from '../services/search-service.js';
+import { buildSearchIndex } from '../services/search-service.js';
+import { openSpotlight } from './spotlight.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
   'pharmacy': { route: '/drugs', getCount: () => getAllDrugs().length, unit: 'drug' },
   'med-calc': { route: '/calculators', getCount: () => getAllCalculators().length, unit: 'tool' },
 };
+
+/** Category icons (emoji fallbacks) */
+const CATEGORY_ICONS: Record<string, string> = {
+  'airway': '🫁',
+  'cardiology': '❤️',
+  'critical-care': '🏥',
+  'derm': '🔬',
+  'endo': '⚗️',
+  'gi': '🔄',
+  'gyn': '👶',
+  'heme': '🩸',
+  'id': '🦠',
+  'neuro': '🧠',
+  'psych': '🧘',
+  'pulm': '💨',
+  'renal': '💧',
+  'tox': '☠️',
+  'trauma': '🚑',
+};
+
+/** Recent consults storage key */
+const RECENTS_KEY = 'mymedkitt_recents';
+const MAX_RECENTS = 6;
+
+// ===================================================================
+// Recents Management
+// ===================================================================
+
+interface RecentItem {
+  id: string;
+  title: string;
+  timestamp: number;
+}
+
+function getRecents(): RecentItem[] {
+  try {
+    const stored = localStorage.getItem(RECENTS_KEY);
+    if (!stored) return [];
+    return JSON.parse(stored) as RecentItem[];
+  } catch {
+    return [];
+  }
+}
+
+export function addRecentConsult(id: string, title: string): void {
+  const recents = getRecents().filter(r => r.id !== id);
+  recents.unshift({ id, title, timestamp: Date.now() });
+  if (recents.length > MAX_RECENTS) recents.length = MAX_RECENTS;
+  localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));
+}
 
 // ===================================================================
 // Dashboard Render
@@ -31,6 +80,9 @@ export function renderDashboard(container: HTMLElement): void {
   // ---- Logo Header ----
   const logoHeader = document.createElement('div');
   logoHeader.className = 'dashboard-header';
+  logoHeader.style.cursor = 'pointer';
+  logoHeader.setAttribute('role', 'button');
+  logoHeader.setAttribute('aria-label', 'Open search');
 
   const logoImg = document.createElement('img');
   logoImg.className = 'dashboard-header__logo';
@@ -43,65 +95,88 @@ export function renderDashboard(container: HTMLElement): void {
 
   logoHeader.appendChild(logoImg);
   logoHeader.appendChild(logoText);
+
+  // Tap header to open Spotlight
+  logoHeader.addEventListener('click', openSpotlight);
+
   dashboard.appendChild(logoHeader);
 
-  // ---- Search Icon (expands to search bar on tap) ----
-  const subheader = document.createElement('div');
-  subheader.className = 'dashboard-subheader';
+  // ---- Hero Search Bar ----
+  const heroSearch = document.createElement('div');
+  heroSearch.className = 'dashboard-hero-search';
 
-  const searchIcon = document.createElement('button');
-  searchIcon.className = 'dashboard-subheader__search';
-  searchIcon.textContent = '\uD83D\uDD0D';
-  searchIcon.setAttribute('aria-label', 'Search');
+  const heroSearchBtn = document.createElement('button');
+  heroSearchBtn.className = 'dashboard-hero-search__btn';
+  heroSearchBtn.type = 'button';
 
-  const searchBar = document.createElement('div');
-  searchBar.className = 'dashboard-search';
-  searchBar.id = 'dashboard-search';
+  const searchIcon = document.createElement('span');
+  searchIcon.className = 'dashboard-hero-search__icon';
+  searchIcon.textContent = '🔍';
 
-  const searchInput = document.createElement('input');
-  searchInput.className = 'dashboard-search__input';
-  searchInput.type = 'search';
-  searchInput.placeholder = 'Search consults, drugs, calculators\u2026';
-  searchInput.setAttribute('aria-label', 'Search');
-  searchBar.appendChild(searchInput);
+  const searchText = document.createElement('span');
+  searchText.className = 'dashboard-hero-search__text';
+  searchText.textContent = 'Search consults, drugs, calculators...';
 
-  searchIcon.addEventListener('click', () => {
-    const isOpen = searchBar.classList.toggle('dashboard-search--open');
-    if (isOpen) searchInput.focus();
-  });
+  const searchShortcut = document.createElement('span');
+  searchShortcut.className = 'dashboard-hero-search__shortcut';
+  searchShortcut.textContent = '⌘K';
 
-  // Share app button — sends full app URL
-  const shareAppBtn = document.createElement('button');
-  shareAppBtn.className = 'dashboard-subheader__share';
-  shareAppBtn.textContent = '\u{1F517}';
-  shareAppBtn.setAttribute('aria-label', 'Share app');
-  shareAppBtn.addEventListener('click', () => {
-    const url = `${window.location.origin}${window.location.pathname}`;
-    if (navigator.share) {
-      navigator.share({ title: 'myMedKitt', text: 'Clinical decision support for emergency medicine', url }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(url).then(() => {
-        shareAppBtn.textContent = '\u2713';
-        setTimeout(() => { shareAppBtn.textContent = '\u{1F517}'; }, 1500);
-      }).catch(() => {});
+  heroSearchBtn.appendChild(searchIcon);
+  heroSearchBtn.appendChild(searchText);
+  heroSearchBtn.appendChild(searchShortcut);
+  heroSearchBtn.addEventListener('click', openSpotlight);
+
+  heroSearch.appendChild(heroSearchBtn);
+  dashboard.appendChild(heroSearch);
+
+  // ---- Recents Row ----
+  const recents = getRecents();
+  if (recents.length > 0) {
+    const recentsSection = document.createElement('div');
+    recentsSection.className = 'dashboard-recents';
+
+    const recentsHeader = document.createElement('div');
+    recentsHeader.className = 'dashboard-recents__header';
+
+    const recentsTitle = document.createElement('span');
+    recentsTitle.className = 'dashboard-recents__title';
+    recentsTitle.textContent = 'Recent';
+
+    recentsHeader.appendChild(recentsTitle);
+    recentsSection.appendChild(recentsHeader);
+
+    const recentsScroll = document.createElement('div');
+    recentsScroll.className = 'dashboard-recents__scroll';
+
+    for (const recent of recents) {
+      const item = document.createElement('div');
+      item.className = 'dashboard-recent-item';
+
+      const iconBox = document.createElement('div');
+      iconBox.className = 'dashboard-recent-item__icon';
+      iconBox.textContent = '🏥';
+
+      const label = document.createElement('span');
+      label.className = 'dashboard-recent-item__label';
+      label.textContent = recent.title;
+
+      item.appendChild(iconBox);
+      item.appendChild(label);
+
+      item.addEventListener('click', () => {
+        router.navigate(`/tree/${recent.id}`);
+      });
+
+      recentsScroll.appendChild(item);
     }
-  });
 
-  subheader.appendChild(shareAppBtn);
-  subheader.appendChild(searchIcon);
-  dashboard.appendChild(subheader);
-  dashboard.appendChild(searchBar);
+    recentsSection.appendChild(recentsScroll);
+    dashboard.appendChild(recentsSection);
+  }
 
-  // ---- Search Results ----
-  const searchResults = document.createElement('div');
-  searchResults.className = 'dashboard-search-results';
-  searchResults.style.display = 'none';
-  dashboard.appendChild(searchResults);
-
-  // ---- Specialty Grid ----
-  const grid = document.createElement('div');
-  grid.className = 'dashboard-grid';
-  grid.id = 'dashboard-grid';
+  // ---- Categories ----
+  const categoriesSection = document.createElement('div');
+  categoriesSection.className = 'dashboard-categories';
 
   const allCategories = getAllCategories();
   const sharedMode = isSharedMode();
@@ -126,32 +201,78 @@ export function renderDashboard(container: HTMLElement): void {
   categories.sort((a, b) => a.name.localeCompare(b.name));
 
   for (const cat of categories) {
-    const btn = document.createElement('button');
-    btn.className = 'dashboard-card';
-    btn.style.background = getSpecialtyGradient(cat.id);
-    btn.setAttribute('aria-label', `${cat.name} \u2014 ${cat.decisionTrees.length} consults`);
+    const card = document.createElement('button');
+    card.className = 'category-card-v2';
+    card.type = 'button';
+    card.setAttribute('aria-label', `${cat.name} - ${cat.decisionTrees.length} consults`);
 
-    btn.addEventListener('click', () => {
-      router.navigate(`/category/${cat.id}`);
-    });
+    // Icon with gradient background
+    const iconBox = document.createElement('div');
+    iconBox.className = 'category-card-v2__icon';
+    iconBox.textContent = CATEGORY_ICONS[cat.id] || '📋';
+    iconBox.style.background = getSpecialtyGradient(cat.id);
 
-    // Category name
+    // Content
+    const content = document.createElement('div');
+    content.className = 'category-card-v2__content';
+
     const name = document.createElement('div');
-    name.className = 'dashboard-card__name';
+    name.className = 'category-card-v2__name';
     name.textContent = cat.name;
 
-    // Consult count
     const count = document.createElement('div');
-    count.className = 'dashboard-card__count';
+    count.className = 'category-card-v2__count';
     const n = cat.decisionTrees.length;
     count.textContent = `${n} consult${n !== 1 ? 's' : ''}`;
 
-    btn.appendChild(name);
-    btn.appendChild(count);
-    grid.appendChild(btn);
+    content.appendChild(name);
+    content.appendChild(count);
+
+    // Arrow
+    const arrow = document.createElement('span');
+    arrow.className = 'category-card-v2__arrow';
+    arrow.textContent = '›';
+
+    card.appendChild(iconBox);
+    card.appendChild(content);
+    card.appendChild(arrow);
+
+    card.addEventListener('click', () => {
+      router.navigate(`/category/${cat.id}`);
+    });
+
+    categoriesSection.appendChild(card);
   }
 
-  dashboard.appendChild(grid);
+  dashboard.appendChild(categoriesSection);
+
+  // ---- Quick Actions ----
+  const quickActions = document.createElement('div');
+  quickActions.className = 'dashboard-quick-actions';
+
+  const drugsBtn = document.createElement('button');
+  drugsBtn.className = 'dashboard-quick-action';
+  drugsBtn.type = 'button';
+  const drugsIcon = document.createElement('span');
+  drugsIcon.className = 'dashboard-quick-action__icon';
+  drugsIcon.textContent = '💊';
+  drugsBtn.appendChild(drugsIcon);
+  drugsBtn.appendChild(document.createTextNode('Drugs'));
+  drugsBtn.addEventListener('click', () => router.navigate('/drugs'));
+
+  const calcsBtn = document.createElement('button');
+  calcsBtn.className = 'dashboard-quick-action';
+  calcsBtn.type = 'button';
+  const calcsIcon = document.createElement('span');
+  calcsIcon.className = 'dashboard-quick-action__icon';
+  calcsIcon.textContent = '🧮';
+  calcsBtn.appendChild(calcsIcon);
+  calcsBtn.appendChild(document.createTextNode('Calculators'));
+  calcsBtn.addEventListener('click', () => router.navigate('/calculators'));
+
+  quickActions.appendChild(drugsBtn);
+  quickActions.appendChild(calcsBtn);
+  dashboard.appendChild(quickActions);
 
   // ---- Unlock All (shared mode only) ----
   if (sharedMode) {
@@ -183,87 +304,4 @@ export function renderDashboard(container: HTMLElement): void {
   // ---- Show global tab bar ----
   const globalTabBar = document.getElementById('bottom-tab-bar');
   if (globalTabBar) globalTabBar.style.display = '';
-
-  // ---- Search Logic (Fuse.js fuzzy search) ----
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.trim();
-    if (query.length === 0) {
-      grid.style.display = '';
-      searchResults.style.display = 'none';
-      searchResults.innerHTML = '';
-      return;
-    }
-    grid.style.display = 'none';
-    searchResults.style.display = 'block';
-    searchResults.innerHTML = '';
-    const results = search(query);
-    searchResults.appendChild(renderSearchResultsList(results));
-  });
-}
-
-// ===================================================================
-// Search (powered by SearchService with Fuse.js fuzzy matching)
-// ===================================================================
-
-const TYPE_LABELS: Record<string, string> = {
-  category: 'Categories',
-  consult: 'Consults',
-  drug: 'Drugs',
-  calculator: 'Calculators',
-};
-
-function renderSearchResultsList(results: SearchResult[]): HTMLElement {
-  const wrapper = document.createElement('div');
-
-  if (results.length === 0) {
-    const empty = document.createElement('p');
-    empty.className = 'search-empty';
-    empty.textContent = 'No results found.';
-    wrapper.appendChild(empty);
-    return wrapper;
-  }
-
-  const grouped: Record<string, SearchResult[]> = {};
-  for (const r of results) {
-    if (!grouped[r.type]) grouped[r.type] = [];
-    grouped[r.type].push(r);
-  }
-
-  for (const type of ['category', 'consult', 'drug', 'calculator']) {
-    const group = grouped[type];
-    if (!group?.length) continue;
-
-    const groupLabel = document.createElement('h3');
-    groupLabel.className = 'search-group-label';
-    groupLabel.textContent = TYPE_LABELS[type];
-    wrapper.appendChild(groupLabel);
-
-    for (const item of group) {
-      const row = document.createElement('a');
-      row.className = 'search-result-item';
-      row.href = '#' + item.route;
-      row.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (item.drugId) {
-          showDrugModal(item.drugId);
-        } else {
-          router.navigate(item.route);
-        }
-      });
-
-      const label = document.createElement('span');
-      label.className = 'search-result-label';
-      label.textContent = item.label;
-
-      const sublabel = document.createElement('span');
-      sublabel.className = 'search-result-sublabel';
-      sublabel.textContent = item.sublabel;
-
-      row.appendChild(label);
-      row.appendChild(sublabel);
-      wrapper.appendChild(row);
-    }
-  }
-
-  return wrapper;
 }
