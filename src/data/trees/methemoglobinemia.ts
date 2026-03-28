@@ -51,6 +51,9 @@ export const METHEMOGLOBINEMIA_NODES: DecisionNode[] = [
     title: 'Moderate Methemoglobinemia (MetHb 20-40%)',
     body: '**Symptoms:**\n- Altered mental status / confusion\n- Dyspnea at rest\n- Tachycardia\n- Syncope or presyncope\n- Chest pain\n- Dizziness, weakness\n\n**Physical exam:**\n- Central cyanosis (lips, mucous membranes)\n- Tachycardia\n- Tachypnea\n- May appear anxious or confused\n\n**Key principle:** MetHb level does not always correlate with symptoms. Patients with baseline anemia or cardiopulmonary disease tolerate MetHb poorly. Calculate **functional hemoglobin**: [3]\n\n**Functional Hb = Total Hb x (1 - MetHb%)**\n\nThis determines true oxygen-carrying capacity.',
     citation: [1, 3],
+    calculatorLinks: [
+      { id: 'methb-functional-hb', label: 'Functional Hb Calculator' },
+    ],
     next: 'methb-causes',
   },
 
@@ -124,6 +127,9 @@ export const METHEMOGLOBINEMIA_NODES: DecisionNode[] = [
     title: 'Methylene Blue Protocol',
     body: '**[Methylene Blue](#/drug/methylene-blue/methemoglobinemia) - First-line treatment** [1][2][5]\n\n**Dosing:**\n- **1-2 mg/kg IV** of 1% solution (10 mg/mL)\n- Infuse over **5 minutes** (push too fast causes chest pain)\n- May repeat in **30-60 minutes** if no response\n- Maximum total dose: **7 mg/kg** (higher doses can paradoxically CAUSE MetHb) [2]\n\n**Mechanism:**\n- Acts as electron carrier in NADPH-dependent methemoglobin reductase pathway\n- Reduces ferric (Fe3+) back to ferrous (Fe2+)\n- Requires G6PD for NADPH production\n\n**Expected response:**\n- MetHb should decrease by 50% within 30-60 minutes [1]\n- Cyanosis improves, symptoms resolve\n- Repeat co-oximetry in 30-60 minutes\n\n**Side effects:**\n- Blue-green discoloration of urine and skin (expected)\n- Chest pain if infused too rapidly\n- Interferes with pulse oximetry (falsely low readings for hours)',
     citation: [1, 2, 5],
+    calculatorLinks: [
+      { id: 'methb-blue-dosing', label: 'MB Dosing Calculator' },
+    ],
     treatment: {
       firstLine: {
         drug: 'Methylene Blue 1%',
@@ -193,6 +199,9 @@ export const METHEMOGLOBINEMIA_NODES: DecisionNode[] = [
     title: 'G6PD Deficiency - Methylene Blue Contraindicated',
     body: '**Methylene blue is CONTRAINDICATED in G6PD deficiency** [5][6][7]\n\n**Why it fails:**\n- Methylene blue requires NADPH to work\n- G6PD is essential for NADPH production via hexose monophosphate shunt\n- In G6PD deficiency: insufficient NADPH, methylene blue cannot be reduced\n- **Worse:** Methylene blue becomes an oxidant and causes HEMOLYSIS [6]\n\n**FDA Warning (2024):** Treatment with methylene blue may result in severe hemolysis and severe anemia in G6PD-deficient patients. [7]\n\n**Clinical clues to G6PD deficiency:**\n- High-risk ethnicities: African, Mediterranean, Middle Eastern, Asian\n- History of hemolytic episodes with infections or drugs\n- Methylene blue given but MetHb worsening + new anemia\n\n**Alternative therapies for G6PD-deficient patients:**\n1. [Ascorbic Acid (Vitamin C)](#/drug/ascorbic-acid/methemoglobinemia) IV\n2. Exchange transfusion\n3. Hyperbaric oxygen\n4. Riboflavin (experimental)',
     citation: [5, 6, 7],
+    calculatorLinks: [
+      { id: 'methb-g6pd-risk', label: 'G6PD Risk Assessment' },
+    ],
     next: 'methb-alternatives',
   },
 

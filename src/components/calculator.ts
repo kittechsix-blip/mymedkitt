@@ -13454,6 +13454,263 @@ const GC_ARTHRITIS_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Methemoglobinemia Tools
+// -------------------------------------------------------------------
+
+const METHB_LEVEL_CALCULATOR: CalculatorDefinition = {
+  id: 'methb-level',
+  title: 'MetHb Level Interpreter',
+  subtitle: 'Symptom Severity by Level',
+  description: 'Interprets methemoglobin level and expected symptoms. Helps guide treatment decisions.',
+  fields: [
+    { name: 'methb', label: 'MetHb Level', type: 'number', points: 0, valueIsPoints: true, unit: '%' },
+  ],
+  results: [],
+  thresholdNote: 'Treat if symptomatic at ANY level, or MetHb >30% even if asymptomatic.',
+  citations: [
+    'Cortazzo JA, Lichtman AD. Methemoglobinemia: A Review and Recommendations for Management. J Cardiothorac Vasc Anesth. 2014;28(4):1043-1047.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const methb = values['methb'] || 0;
+    if (methb <= 0) return { value: '--', label: 'Enter MetHb %', description: 'Enter co-oximetry MetHb level.', colorVar: '--color-text-muted' };
+    if (methb < 3) return { value: methb + '%', label: 'Normal', description: 'Normal MetHb level (<3%).\nNo treatment needed.', colorVar: '--color-primary' };
+    if (methb < 15) return { value: methb + '%', label: 'Mild', description: 'Mild elevation (3-15%).\nMay have subtle cyanosis.\nRemove offending agent, supportive care.\nMonitor for symptom development.', colorVar: '--color-info' };
+    if (methb < 30) return { value: methb + '%', label: 'Moderate', description: 'Moderate (15-30%).\nFatigue, headache, dyspnea, tachycardia.\nConsider methylene blue if symptomatic.\nCheck G6PD status.', colorVar: '--color-warning' };
+    if (methb < 50) return { value: methb + '%', label: 'Severe', description: 'Severe (30-50%).\nConfusion, syncope, chest pain, severe dyspnea.\nMETHYLENE BLUE INDICATED.\n1-2 mg/kg IV over 5 min.', colorVar: '--color-danger' };
+    if (methb < 70) return { value: methb + '%', label: 'Life-Threatening', description: 'Life-threatening (50-70%).\nArrhythmias, seizures, coma.\nIMMEDIATE methylene blue.\nConsider exchange transfusion if G6PD+ or refractory.', colorVar: '--color-danger' };
+    return { value: methb + '%', label: 'Usually Fatal', description: 'Usually fatal (>70%).\nExchange transfusion may be required.\nMaximal resuscitative efforts.', colorVar: '--color-danger' };
+  },
+};
+
+const METHB_BLUE_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'methb-blue-dosing',
+  title: 'Methylene Blue Dosing',
+  subtitle: 'Weight-Based MB Calculation',
+  description: 'Calculates methylene blue dose for methemoglobinemia. Standard: 1-2 mg/kg IV.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Max total dose: 7 mg/kg. Higher doses can paradoxically CAUSE MetHb. Contraindicated in G6PD deficiency.',
+  citations: [
+    'Skold A, et al. Methemoglobinemia: Pathogenesis, Diagnosis, and Management. South Med J. 2011;104(11):757-761.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    if (weight <= 0) return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg.', colorVar: '--color-text-muted' };
+    const dose1 = Math.round(weight * 1);
+    const dose2 = Math.round(weight * 2);
+    const maxDose = Math.round(weight * 7);
+    const volume1 = Math.round(dose1 / 10 * 10) / 10; // 1% solution = 10 mg/mL
+    const volume2 = Math.round(dose2 / 10 * 10) / 10;
+    return {
+      value: dose1 + '-' + dose2 + ' mg',
+      label: 'Methylene Blue Dose',
+      description: 'Standard dose: 1-2 mg/kg IV over 5 minutes\n\nFor ' + weight + ' kg patient:\n• 1 mg/kg = ' + dose1 + ' mg (' + volume1 + ' mL of 1% solution)\n• 2 mg/kg = ' + dose2 + ' mg (' + volume2 + ' mL of 1% solution)\n\nMax total dose: ' + maxDose + ' mg (7 mg/kg)\n\nMay repeat in 30-60 min if no response.\nExpect blue-green urine (normal).',
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const METHB_FUNCTIONAL_HB_CALCULATOR: CalculatorDefinition = {
+  id: 'methb-functional-hb',
+  title: 'Functional Hemoglobin',
+  subtitle: 'True O2-Carrying Capacity',
+  description: 'Calculates functional hemoglobin = Total Hb × (1 - MetHb%). Determines actual oxygen-carrying capacity.',
+  fields: [
+    { name: 'hb', label: 'Total Hemoglobin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL' },
+    { name: 'methb', label: 'MetHb Level', type: 'number', points: 0, valueIsPoints: true, unit: '%' },
+  ],
+  results: [],
+  thresholdNote: 'Functional Hb <7 g/dL may need transfusion in addition to methylene blue.',
+  citations: [
+    'Cortazzo JA, Lichtman AD. Methemoglobinemia: A Review and Recommendations for Management. J Cardiothorac Vasc Anesth. 2014;28(4):1043-1047.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hb = values['hb'] || 0;
+    const methb = values['methb'] || 0;
+    if (hb <= 0 || methb < 0) return { value: '--', label: 'Enter values', description: 'Enter total Hb and MetHb %.', colorVar: '--color-text-muted' };
+    const functionalHb = Math.round(hb * (1 - methb / 100) * 10) / 10;
+    let interpretation = '';
+    let colorVar = '--color-primary';
+    if (functionalHb < 5) {
+      interpretation = 'CRITICAL: Severe anemia with inadequate O2 delivery. Immediate intervention required.';
+      colorVar = '--color-danger';
+    } else if (functionalHb < 7) {
+      interpretation = 'Significant impairment. Consider transfusion if symptomatic or hemodynamically unstable.';
+      colorVar = '--color-danger';
+    } else if (functionalHb < 10) {
+      interpretation = 'Moderate impairment. May tolerate if young/healthy. Lower threshold to treat MetHb in this patient.';
+      colorVar = '--color-warning';
+    } else {
+      interpretation = 'Adequate O2-carrying capacity. Treat MetHb per standard thresholds.';
+      colorVar = '--color-primary';
+    }
+    return {
+      value: functionalHb + ' g/dL',
+      label: 'Functional Hemoglobin',
+      description: 'Functional Hb = ' + hb + ' × (1 - ' + methb + '/100) = ' + functionalHb + ' g/dL\n\nThis represents the TRUE oxygen-carrying capacity.\n\n' + interpretation,
+      colorVar,
+    };
+  },
+};
+
+const METHB_G6PD_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'methb-g6pd-risk',
+  title: 'G6PD Risk Assessment',
+  subtitle: 'Methylene Blue Safety',
+  description: 'Assesses risk of G6PD deficiency and safety of methylene blue administration.',
+  fields: [
+    { name: 'african', label: 'African descent', type: 'toggle', points: 1, description: 'Type A- variant (primarily older RBCs affected)' },
+    { name: 'mediterranean', label: 'Mediterranean descent', type: 'toggle', points: 2, description: 'Type B variant (all RBCs affected - higher risk)' },
+    { name: 'asian', label: 'Asian/Middle Eastern descent', type: 'toggle', points: 2, description: 'Higher prevalence regions' },
+    { name: 'history', label: 'Prior hemolytic episode', type: 'toggle', points: 3, description: 'History of drug/infection-induced hemolysis' },
+    { name: 'fava', label: 'Fava bean reaction', type: 'toggle', points: 3, description: 'Classic trigger for G6PD hemolysis' },
+  ],
+  results: [
+    { min: 3, max: Infinity, label: 'High Risk', risk: 'Likely G6PD Deficient', mortality: 'Methylene blue contraindicated. Use ascorbic acid IV or exchange transfusion.', colorVar: '--color-danger' },
+    { min: 1, max: 3, label: 'Intermediate Risk', risk: 'Possible G6PD Deficiency', mortality: 'If life-threatening MetHb: consider cautious MB trial. Otherwise use alternatives.', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: 'Low Risk', risk: 'G6PD Unlikely', mortality: 'Methylene blue safe to use. Monitor for unexpected hemolysis.', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'G6PD test can be sent but do NOT delay treatment for results in critical cases.',
+  citations: [
+    'Hoffman RS, et al. Goldfranks Toxicologic Emergencies. 11th ed. McGraw-Hill; 2019.',
+    'FDA PROVAYBLUE Prescribing Information 2024.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Aortic Emergency Tools
+// -------------------------------------------------------------------
+
+const ADD_RS_CALCULATOR: CalculatorDefinition = {
+  id: 'add-rs',
+  title: 'ADD-RS Calculator',
+  subtitle: 'Aortic Dissection Detection Risk Score',
+  description: 'Risk stratification for acute aortic syndrome. Used with D-dimer to guide imaging.',
+  fields: [
+    { name: 'conditions', label: 'High-risk conditions', type: 'toggle', points: 1, description: 'Marfan, family hx aortic disease, known valve/aneurysm, prior aortic surgery' },
+    { name: 'pain', label: 'High-risk pain features', type: 'toggle', points: 1, description: 'Abrupt onset, severe intensity, ripping/tearing quality' },
+    { name: 'exam', label: 'High-risk exam findings', type: 'toggle', points: 1, description: 'Pulse deficit, BP differential >20, neuro deficit, new AI murmur, shock' },
+  ],
+  results: [
+    { min: 2, max: Infinity, label: 'High Risk', risk: 'ADD-RS ≥2', mortality: 'Immediate CTA. Do NOT use D-dimer to rule out.', colorVar: '--color-danger' },
+    { min: 1, max: 2, label: 'Intermediate', risk: 'ADD-RS = 1', mortality: 'D-dimer <500 ng/mL rules out with ~99% sensitivity.', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: 'Low Risk', risk: 'ADD-RS = 0', mortality: 'D-dimer <500 ng/mL rules out with 99.9% sensitivity.', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'ADD-RS 0-1 + D-dimer <500: Sens 98.9-99.9% for ruling out AAS.',
+  citations: [
+    'Nazerian P, et al. Diagnostic Accuracy of the ADD-RS Plus D-Dimer for AAS: ADvISED Study. Circulation. 2018;137(3):250-258.',
+  ],
+};
+
+const AORTIC_ANTI_IMPULSE_CALCULATOR: CalculatorDefinition = {
+  id: 'aortic-anti-impulse',
+  title: 'Anti-Impulse Targets',
+  subtitle: 'Hemodynamic Goals for Dissection',
+  description: 'Target HR and BP for aortic dissection to reduce wall stress and prevent propagation.',
+  fields: [
+    { name: 'hr', label: 'Current Heart Rate', type: 'number', points: 0, valueIsPoints: true, unit: 'bpm' },
+    { name: 'sbp', label: 'Current SBP (highest arm)', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+  ],
+  results: [],
+  thresholdNote: 'BETA-BLOCKER FIRST, then vasodilator. Never vasodilator alone (reflex tachycardia).',
+  citations: [
+    'Farkas J. Aortic Dissection. IBCC/EMCrit. 2025.',
+    '2022 ACC/AHA Aortic Disease Guidelines.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hr = values['hr'] || 0;
+    const sbp = values['sbp'] || 0;
+    if (hr <= 0 && sbp <= 0) return { value: '--', label: 'Enter vitals', description: 'Enter current HR and SBP.', colorVar: '--color-text-muted' };
+
+    let hrStatus = ''; let sbpStatus = ''; let colorVar = '--color-primary';
+    const targetHR = '60-70 bpm'; const targetSBP = '100-120 mmHg';
+
+    if (hr > 70) { hrStatus = 'HR ' + hr + ' > target. Increase beta-blocker.'; colorVar = '--color-warning'; }
+    else if (hr >= 60) { hrStatus = 'HR ' + hr + ' at target.'; }
+    else if (hr > 0) { hrStatus = 'HR ' + hr + ' < target. May decrease beta-blocker if symptomatic bradycardia.'; }
+
+    if (sbp > 120) { sbpStatus = 'SBP ' + sbp + ' > target. Add vasodilator (nicardipine) AFTER HR controlled.'; colorVar = '--color-warning'; }
+    else if (sbp >= 100) { sbpStatus = 'SBP ' + sbp + ' at target.'; }
+    else if (sbp > 0) { sbpStatus = 'SBP ' + sbp + ' < target. Assess perfusion. May need pressors if hypotensive dissection.'; colorVar = '--color-danger'; }
+
+    const onTarget = hr >= 60 && hr <= 70 && sbp >= 100 && sbp <= 120;
+    if (onTarget) colorVar = '--color-primary';
+
+    return {
+      value: onTarget ? 'At Goal' : 'Adjust Therapy',
+      label: 'Anti-Impulse Status',
+      description: 'TARGETS:\n• HR: ' + targetHR + '\n• SBP: ' + targetSBP + '\n\nCURRENT STATUS:\n• ' + hrStatus + '\n• ' + sbpStatus + '\n\nBETA-BLOCKER OPTIONS:\n• Esmolol: 500 mcg/kg load, 50-200 mcg/kg/min (preferred - titratable)\n• Labetalol: 20-80 mg IV q10min\n\nVASODILATOR (after HR controlled):\n• Nicardipine: 5 mg/hr, titrate by 2.5 mg/hr q5-15min',
+      colorVar,
+    };
+  },
+};
+
+const AORTIC_TYPE_GUIDE_CALCULATOR: CalculatorDefinition = {
+  id: 'aortic-type-guide',
+  title: 'Stanford Type A vs B',
+  subtitle: 'Classification & Management',
+  description: 'Quick reference for Stanford classification and initial management approach.',
+  fields: [
+    { name: 'ascending', label: 'Ascending aorta involved', type: 'toggle', points: 2, description: 'Proximal to left subclavian artery' },
+    { name: 'descending', label: 'Descending aorta only', type: 'toggle', points: 1, description: 'Distal to left subclavian, no ascending involvement' },
+  ],
+  results: [
+    { min: 2, max: Infinity, label: 'Type A', risk: 'SURGICAL EMERGENCY', mortality: 'Emergent cardiothoracic surgery. Mortality 1-2%/hour untreated. 50% dead at 48h without surgery.', colorVar: '--color-danger' },
+    { min: 1, max: 2, label: 'Type B', risk: 'Usually Medical Management', mortality: 'Anti-impulse therapy. Surgery only if complicated (malperfusion, rupture, refractory).', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: 'Uncertain', risk: 'Classify by CTA', mortality: 'Obtain definitive imaging to classify before management decisions.', colorVar: '--color-info' },
+  ],
+  thresholdNote: 'Type A = any ascending involvement = surgery. Type B = descending only = usually medical.',
+  citations: [
+    '2022 ACC/AHA Aortic Disease Guidelines. Circulation. 2022;146(24):e334-e482.',
+  ],
+};
+
+const AAA_PERMISSIVE_HYPOTENSION_CALCULATOR: CalculatorDefinition = {
+  id: 'aaa-permissive-hypotension',
+  title: 'AAA Resuscitation',
+  subtitle: 'Permissive Hypotension Targets',
+  description: 'Target resuscitation parameters for ruptured AAA. Permissive hypotension preserves tamponade.',
+  fields: [
+    { name: 'sbp', label: 'Current SBP', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'conscious', label: 'Patient conscious', type: 'toggle', points: 0, description: 'Responding to commands' },
+  ],
+  results: [],
+  thresholdNote: 'Target SBP 70-90 mmHg. Avoid crystalloid - use blood products 1:1:1.',
+  citations: [
+    'Houston Methodist Ruptured AAA Guidelines. Methodist DeBakey Cardiovasc J. 2024.',
+    'Holcomb JB, et al. PROPPR Trial. JAMA. 2015;313(5):471-482.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sbp = values['sbp'] || 0;
+    const conscious = values['conscious'] || 0;
+    if (sbp <= 0) return { value: '--', label: 'Enter SBP', description: 'Enter current systolic BP.', colorVar: '--color-text-muted' };
+
+    let status = ''; let colorVar = '--color-primary';
+    if (sbp > 90) {
+      status = 'SBP ' + sbp + ' mmHg is ABOVE target.\n\nDo NOT aggressively resuscitate to normal BP.\nMay disrupt tamponade and precipitate free rupture.';
+      colorVar = '--color-warning';
+    } else if (sbp >= 70) {
+      status = 'SBP ' + sbp + ' mmHg is AT TARGET.\n\nMaintain permissive hypotension.\nProceed to OR.';
+      colorVar = '--color-primary';
+    } else {
+      status = 'SBP ' + sbp + ' mmHg is BELOW target.\n\nActivate MTP. Give blood products.\nAVOID crystalloid.\nConsider endovascular balloon if available.';
+      colorVar = '--color-danger';
+    }
+
+    const consciousNote = conscious ? 'Patient is conscious - good prognostic sign.' : 'Patient unconscious - concerning for severe shock.';
+
+    return {
+      value: sbp >= 70 && sbp <= 90 ? 'At Target' : 'Off Target',
+      label: 'Permissive Hypotension',
+      description: 'TARGET: SBP 70-90 mmHg while maintaining consciousness\n\n' + status + '\n\n' + consciousNote + '\n\nRESUSCITATION:\n• Type O-neg blood for profound shock\n• MTP: 1:1:1 pRBC:FFP:Plt\n• AVOID crystalloid (dilutes clotting, hypothermia)\n• Keep warm (>36°C)\n• AVOID intubation if possible',
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // HFNC
   'rox-index': ROX_INDEX_CALCULATOR,
@@ -13469,6 +13726,16 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Peds Osteomyelitis
   'crp-trend': CRP_TREND_CALCULATOR,
   'iv-oral-transition': IV_ORAL_TRANSITION_CALCULATOR,
+  // Methemoglobinemia
+  'methb-level': METHB_LEVEL_CALCULATOR,
+  'methb-blue-dosing': METHB_BLUE_DOSING_CALCULATOR,
+  'methb-functional-hb': METHB_FUNCTIONAL_HB_CALCULATOR,
+  'methb-g6pd-risk': METHB_G6PD_RISK_CALCULATOR,
+  // Aortic Aneurysm
+  'add-rs': ADD_RS_CALCULATOR,
+  'aortic-anti-impulse': AORTIC_ANTI_IMPULSE_CALCULATOR,
+  'aortic-type-guide': AORTIC_TYPE_GUIDE_CALCULATOR,
+  'aaa-permissive-hypotension': AAA_PERMISSIVE_HYPOTENSION_CALCULATOR,
   // Digoxin toxicity
   'dig-fab-dosing': DIG_FAB_DOSING_CALCULATOR,
   'dig-ecg': DIG_ECG_CALCULATOR,

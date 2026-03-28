@@ -120,6 +120,9 @@ export const AORTIC_ANEURYSM_NODES = [
         title: 'Classification of Aortic Pathology',
         body: '**Based on CTA findings, classify the pathology:** [1][2][5]\n\n**Aortic Dissection:**\n- Intimal flap with true and false lumen\n- Stanford A: ascending aorta involvement\n- Stanford B: descending aorta only\n\n**Intramural Hematoma (IMH):**\n- Crescent-shaped aortic wall thickening >5 mm\n- No intimal tear or false lumen visible\n- Type A IMH: surgical mortality similar to dissection\n- Type B IMH: medical management, ~10% spontaneous resolution\n\n**Penetrating Atherosclerotic Ulcer (PAU):**\n- Ulceration penetrating internal elastic lamina into media\n- Most common in descending thoracic aorta (62%)\n- Risk of progression to IMH, dissection, or rupture',
         citation: [1, 2, 5],
+        calculatorLinks: [
+            { id: 'aortic-type-guide', label: 'Stanford Type A vs B' },
+        ],
         options: [
             {
                 label: 'Type A Dissection / IMH',
@@ -165,6 +168,9 @@ export const AORTIC_ANEURYSM_NODES = [
         title: 'Anti-Impulse Therapy - Dissection',
         body: '**Goal: Reduce aortic wall stress to prevent propagation and rupture.** [1][9]\n\n**Hemodynamic Targets:**\n- **SBP: 100-120 mmHg** (measure in arm with highest pressure)\n- **Heart rate: 60-70 bpm** (higher acceptable with severe aortic regurgitation)\n- **Adequate end-organ perfusion:** intact mentation, adequate urine output\n- **Pain control:** persistent pain suggests ongoing dissection\n\n**KEY: Beta-blocker FIRST before vasodilator.** Vasodilators alone cause reflex tachycardia, increasing dP/dt and promoting dissection propagation. [1][9]\n\n**Beta-Blocker Selection (Target HR 60-70):**\n\n| Agent | Onset | Duration | Dosing |\n|-------|-------|----------|--------|\n| [Esmolol](#/drug/esmolol/aortic dissection) | 1-2 min | 10-30 min | Load 500 mcg/kg; infuse 50-200 mcg/kg/min |\n| [Labetalol](#/drug/labetalol/aortic dissection) | 5-10 min | 3-6 hrs | Push 20-40-80-80-80 mg q10 min |\n| [Metoprolol](#/drug/metoprolol/aortic dissection) | ~5 min | Several hrs | 5 mg IV, repeat q5 min (max 15 mg) |\n\n**Esmolol preferred in unstable patients** - immediately titratable, short half-life if hypotension develops. [1]',
         citation: [1, 9],
+        calculatorLinks: [
+            { id: 'aortic-anti-impulse', label: 'Anti-Impulse Calculator' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'Esmolol',
@@ -338,6 +344,9 @@ export const AORTIC_ANEURYSM_NODES = [
         title: 'Ruptured AAA - Resuscitation',
         body: '**Permissive hypotension is the cornerstone of resuscitation.** [13][14]\n\n**Target SBP 70-90 mmHg** while maintaining consciousness.\n\n**Rationale:** [14]\n- Maintains tamponade effect of contained hematoma\n- Prevents clot disruption from hypertensive surges\n- Avoids dilutional/hypothermic coagulopathy from crystalloid\n- Preserves platelets and clotting factors\n\n**Resuscitation principles:**\n- **Two large-bore IVs or central access**\n- **Type O-negative blood** for profound shock until type-specific available\n- **Massive transfusion protocol:** 1:1:1 ratio of pRBC:FFP:platelets [14]\n- Order 6-10 units pRBCs\n- **Minimize crystalloid** - avoid cold, large-volume IV fluids\n- **Keep patient warm** (>36C core temp)\n- **Avoid intubation if possible** - positive pressure ventilation removes compensatory mechanisms and can precipitate arrest\n\n**Hemodynamic stability defined as:** [13]\nConsciousness maintained with SBP 70-90 mmHg for at least 5 minutes without fluid or vasopressor support.',
         citation: [13, 14],
+        calculatorLinks: [
+            { id: 'aaa-permissive-hypotension', label: 'Permissive Hypotension' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'pRBCs',
