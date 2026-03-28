@@ -13,24 +13,6 @@ const TOOL_ROUTES = {
     'pharmacy': { route: '/drugs', getCount: () => getAllDrugs().length, unit: 'drug' },
     'med-calc': { route: '/calculators', getCount: () => getAllCalculators().length, unit: 'tool' },
 };
-/** Category icons (emoji fallbacks) */
-const CATEGORY_ICONS = {
-    'airway': '🫁',
-    'cardiology': '❤️',
-    'critical-care': '🏥',
-    'derm': '🔬',
-    'endo': '⚗️',
-    'gi': '🔄',
-    'gyn': '👶',
-    'heme': '🩸',
-    'id': '🦠',
-    'neuro': '🧠',
-    'psych': '🧘',
-    'pulm': '💨',
-    'renal': '💧',
-    'tox': '☠️',
-    'trauma': '🚑',
-};
 /** Recent consults storage key */
 const RECENTS_KEY = 'mymedkitt_recents';
 const MAX_RECENTS = 6;
@@ -161,12 +143,9 @@ export function renderDashboard(container) {
         card.className = 'category-card-v2';
         card.type = 'button';
         card.setAttribute('aria-label', `${cat.name} - ${cat.decisionTrees.length} consults`);
-        // Icon with gradient background
-        const iconBox = document.createElement('div');
-        iconBox.className = 'category-card-v2__icon';
-        iconBox.textContent = CATEGORY_ICONS[cat.id] || '📋';
-        iconBox.style.background = getSpecialtyGradient(cat.id);
-        // Content
+        // Apply gradient background to the card itself (glass overlay on top)
+        card.style.background = getSpecialtyGradient(cat.id);
+        // Content - just name and count, vertically stacked
         const content = document.createElement('div');
         content.className = 'category-card-v2__content';
         const name = document.createElement('div');
@@ -178,13 +157,7 @@ export function renderDashboard(container) {
         count.textContent = `${n} consult${n !== 1 ? 's' : ''}`;
         content.appendChild(name);
         content.appendChild(count);
-        // Arrow
-        const arrow = document.createElement('span');
-        arrow.className = 'category-card-v2__arrow';
-        arrow.textContent = '›';
-        card.appendChild(iconBox);
         card.appendChild(content);
-        card.appendChild(arrow);
         card.addEventListener('click', () => {
             router.navigate(`/category/${cat.id}`);
         });

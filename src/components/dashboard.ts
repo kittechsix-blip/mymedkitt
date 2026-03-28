@@ -17,25 +17,6 @@ const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit:
   'med-calc': { route: '/calculators', getCount: () => getAllCalculators().length, unit: 'tool' },
 };
 
-/** Category icons (emoji fallbacks) */
-const CATEGORY_ICONS: Record<string, string> = {
-  'airway': '🫁',
-  'cardiology': '❤️',
-  'critical-care': '🏥',
-  'derm': '🔬',
-  'endo': '⚗️',
-  'gi': '🔄',
-  'gyn': '👶',
-  'heme': '🩸',
-  'id': '🦠',
-  'neuro': '🧠',
-  'psych': '🧘',
-  'pulm': '💨',
-  'renal': '💧',
-  'tox': '☠️',
-  'trauma': '🚑',
-};
-
 /** Recent consults storage key */
 const RECENTS_KEY = 'mymedkitt_recents';
 const MAX_RECENTS = 6;
@@ -206,13 +187,10 @@ export function renderDashboard(container: HTMLElement): void {
     card.type = 'button';
     card.setAttribute('aria-label', `${cat.name} - ${cat.decisionTrees.length} consults`);
 
-    // Icon with gradient background
-    const iconBox = document.createElement('div');
-    iconBox.className = 'category-card-v2__icon';
-    iconBox.textContent = CATEGORY_ICONS[cat.id] || '📋';
-    iconBox.style.background = getSpecialtyGradient(cat.id);
+    // Apply gradient background to the card itself (glass overlay on top)
+    card.style.background = getSpecialtyGradient(cat.id);
 
-    // Content
+    // Content - just name and count, vertically stacked
     const content = document.createElement('div');
     content.className = 'category-card-v2__content';
 
@@ -227,15 +205,7 @@ export function renderDashboard(container: HTMLElement): void {
 
     content.appendChild(name);
     content.appendChild(count);
-
-    // Arrow
-    const arrow = document.createElement('span');
-    arrow.className = 'category-card-v2__arrow';
-    arrow.textContent = '›';
-
-    card.appendChild(iconBox);
     card.appendChild(content);
-    card.appendChild(arrow);
 
     card.addEventListener('click', () => {
       router.navigate(`/category/${cat.id}`);
