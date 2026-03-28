@@ -467,6 +467,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ecmo.js');
       return { nodes: m.ECMO_NODES, entryNodeId: 'ecmo-start', categoryId: 'critical-care', moduleLabels: m.ECMO_MODULE_LABELS, citations: m.ECMO_CITATIONS };
     },
+    'push-dose-pressors': async () => {
+      const m = await import('../data/trees/push-dose-pressors.js');
+      return { nodes: m.PUSH_DOSE_PRESSORS_NODES, entryNodeId: 'pdp-start', categoryId: 'pharmacist', moduleLabels: m.PUSH_DOSE_PRESSORS_MODULE_LABELS, citations: m.PUSH_DOSE_PRESSORS_CITATIONS };
+    },
+    'aortic-aneurysm': async () => {
+      const m = await import('../data/trees/aortic-aneurysm.js');
+      return { nodes: m.AORTIC_ANEURYSM_NODES, entryNodeId: 'aortic-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_ANEURYSM_MODULE_LABELS, citations: m.AORTIC_ANEURYSM_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

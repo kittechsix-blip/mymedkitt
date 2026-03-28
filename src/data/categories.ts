@@ -55,6 +55,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 28,
         entryNodeId: 'chf-start',
+      },
+      {
+        id: 'aortic-aneurysm',
+        title: 'Aortic Aneurysm ED Management',
+        subtitle: 'Dissection vs AAA → Diagnosis → Hemodynamics → Type-Specific → Surgery',
+        categoryId: 'cardiology',
+        version: '1.0',
+        nodeCount: 32,
+        entryNodeId: 'aortic-start',
       }
     ],
     isCustom: false,
@@ -706,6 +715,23 @@ export const DEFAULT_CATEGORIES: Category[] = [
     ],
     isCustom: false,
   },
+  {
+    id: 'pharmacist',
+    name: 'Pharmacist',
+    icon: 'pharmacist.png',
+    decisionTrees: [
+      {
+        id: 'push-dose-pressors',
+        title: 'Push-Dose Pressors',
+        subtitle: 'Indications -> Epinephrine -> Phenylephrine -> Norepinephrine -> Troubleshooting',
+        categoryId: 'pharmacist',
+        version: '1.0',
+        nodeCount: 24,
+        entryNodeId: 'pdp-start',
+      },
+    ],
+    isCustom: false,
+  },
   { id: 'pharmacy',             name: 'Pharmacy',              icon: 'pharmacy.png',          decisionTrees: [], isCustom: false },
   {
     id: 'procedures',
@@ -960,6 +986,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
 export const CATEGORY_COLORS: Record<string, { card: string; iconBg: string; textColor?: string; outline?: string }> = {
   'anesthesia-airway':   { card: '#3D4F5F', iconBg: '#3D4F5F' },
   'cardiology':          { card: '#C62828', iconBg: '#C62828' },
+  'pharmacist':          { card: '#228B22', iconBg: '#228B22' }, // Forest Green
   'critical-care':       { card: '#37474F', iconBg: '#37474F' },
   'emergency-medicine':  { card: '#1565C0', iconBg: '#1565C0' },
   'gastroenterology':    { card: '#6D4C41', iconBg: '#6D4C41' },

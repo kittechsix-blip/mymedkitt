@@ -1,0 +1,487 @@
+// MedKitt — Aortic Aneurysm ED Management
+// Initial Assessment → Diagnosis → Hemodynamic Management → Type-Specific Management → Surgical Consultation & Disposition
+// 5 modules: Initial Assessment → Diagnosis → Hemodynamic Management → Type-Specific Management → Surgical Consultation & Disposition
+// 32 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'aortic-start',
+    type: 'question',
+    module: 1,
+    title: 'Aortic Emergency - Presentation',
+    body: '[Aortic Emergencies Steps Summary](#/info/aortic-summary)\n\n**Aortic emergencies are time-critical and often fatal.** Ruptured AAA mortality: >80% overall, 41-50% even with surgical repair. Untreated Type A dissection mortality: 1-2% per hour, 50% at 48 hours. [1][2]\n\n**Key principle:** These conditions share overlapping presentations but require DIFFERENT management strategies. Misdiagnosis rate: up to 30% for both AAA and dissection. [3][4]\n\n**High-risk features to recognize:**\n- Abrupt-onset severe chest/back/abdominal pain\n- Tearing or ripping quality\n- Hypotension with abdominal or flank pain\n- Pulse deficits or BP differential >20 mmHg between arms\n- New aortic regurgitation murmur\n- Neurologic deficits (stroke, syncope, paraplegia)\n\n**Classic AAA triad:** Hypotension + back pain + pulsatile abdominal mass (present in <50% of cases) [3]',
+    citation: [1, 2, 3, 4],
+    calculatorLinks: [
+      { id: 'map-calculator', label: 'MAP Calculator' },
+    ],
+    options: [
+      {
+        label: 'Suspected Aortic Dissection',
+        description: 'Chest/back pain, pulse deficits, BP differential, neurologic findings',
+        next: 'aortic-dissection-eval',
+        urgency: 'critical',
+      },
+      {
+        label: 'Suspected Ruptured AAA',
+        description: 'Abdominal/back pain, hypotension, pulsatile mass',
+        next: 'aortic-aaa-eval',
+        urgency: 'critical',
+      },
+      {
+        label: 'Symptomatic Unruptured Aneurysm',
+        description: 'Known aneurysm with new pain but hemodynamically stable',
+        next: 'aortic-symptomatic',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Incidental Aortic Aneurysm',
+        description: 'Discovered on imaging, asymptomatic',
+        next: 'aortic-incidental',
+      },
+    ],
+  },
+
+  {
+    id: 'aortic-dissection-eval',
+    type: 'info',
+    module: 1,
+    title: 'Aortic Dissection - Initial Evaluation',
+    body: '**Aortic dissection = intimal tear with blood tracking into the media, creating a false lumen.**\n\n**Stanford Classification:** [1][2]\n- **Type A:** Involves ascending aorta (proximal to left subclavian). Surgical emergency. Mortality 1-2%/hour untreated.\n- **Type B:** Descending aorta only (distal to left subclavian). Usually medical management unless complicated.\n\n**Acute Aortic Syndromes (all evaluated similarly):** [5]\n- Aortic dissection (85-95% of AAS)\n- Intramural hematoma (5-25%)\n- Penetrating atherosclerotic ulcer (2-7%)\n\n**Risk factors:** Hypertension (70%), connective tissue disorders (Marfan, Ehlers-Danlos), bicuspid aortic valve, prior cardiac surgery, cocaine use, pregnancy (3rd trimester), aortic coarctation. [1][2]\n\n**Physical exam findings (increase likelihood ratio):** [6]\n- Pulse deficit (LR 5.7)\n- BP differential >20 mmHg between arms (LR 5.7)\n- Focal neurologic deficit (LR 5.7)\n- New aortic regurgitation murmur\n\n[Aortic Dissection Detection Risk Score](#/info/aortic-add-rs)',
+    citation: [1, 2, 5, 6],
+    next: 'aortic-add-rs',
+  },
+
+  {
+    id: 'aortic-add-rs',
+    type: 'question',
+    module: 1,
+    title: 'ADD-RS Risk Stratification',
+    body: '**Aortic Dissection Detection Risk Score (ADD-RS)** - use to guide diagnostic approach. [7][8]\n\n**Score 1 point for EACH category present:**\n\n**High-risk conditions:**\n- Marfan syndrome or other connective tissue disease\n- Family history of aortic disease\n- Known aortic valve disease\n- Known thoracic aortic aneurysm\n- Prior aortic manipulation/surgery\n\n**High-risk pain features:**\n- Chest, back, or abdominal pain with:\n  - Abrupt onset\n  - Severe intensity\n  - Ripping/tearing quality\n\n**High-risk exam findings:**\n- Pulse deficit or BP differential >20 mmHg\n- Focal neurologic deficit + pain\n- New aortic insufficiency murmur\n- Hypotension or shock\n\n**ADD-RS + D-dimer strategy:** [7][8]\n- ADD-RS = 0 + D-dimer <500: 99.9% sensitivity for rule-out\n- ADD-RS <= 1 + D-dimer <500: 98.9% sensitivity, can avoid ~50% of CTAs',
+    citation: [7, 8],
+    calculatorLinks: [
+      { id: 'add-rs', label: 'ADD-RS Calculator' },
+    ],
+    options: [
+      {
+        label: 'ADD-RS >= 2 (High Risk)',
+        description: 'Immediate CTA without D-dimer',
+        next: 'aortic-imaging',
+        urgency: 'critical',
+      },
+      {
+        label: 'ADD-RS = 1 (Intermediate Risk)',
+        description: 'D-dimer may help; CTA if D-dimer elevated',
+        next: 'aortic-ddimer',
+      },
+      {
+        label: 'ADD-RS = 0 (Low Risk)',
+        description: 'D-dimer can reliably rule out if negative',
+        next: 'aortic-ddimer',
+      },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: DIAGNOSIS
+  // =====================================================================
+
+  {
+    id: 'aortic-ddimer',
+    type: 'question',
+    module: 2,
+    title: 'D-Dimer in Aortic Syndromes',
+    body: '**D-dimer cutoff: 500 ng/mL** [7][8]\n\n**Pooled performance (ADvISED study, n=1850):** [8]\n- D-dimer sensitivity: 96.7%\n- ADD-RS = 0 + D-dimer negative: failure rate 0.3% (1 AAS in 294 patients)\n- ADD-RS <= 1 + D-dimer negative: failure rate 0.3% (3 AAS in 924 patients)\n\n**Use D-dimer to RULE OUT, not to diagnose.** An elevated D-dimer is nonspecific and requires imaging.\n\n**Cautions:** [7]\n- May be falsely negative in thrombosed/chronic dissections\n- Age-adjusted D-dimer (age x 10 for patients >50) may improve specificity\n- Do NOT delay imaging in high-risk patients for D-dimer result\n\n**D-dimer result:**',
+    citation: [7, 8],
+    options: [
+      {
+        label: 'D-dimer Elevated (>= 500 ng/mL)',
+        description: 'Proceed to CTA',
+        next: 'aortic-imaging',
+        urgency: 'urgent',
+      },
+      {
+        label: 'D-dimer Negative (< 500 ng/mL)',
+        description: 'ADD-RS 0-1: AAS ruled out with ~99% sensitivity',
+        next: 'aortic-ruled-out',
+      },
+    ],
+  },
+
+  {
+    id: 'aortic-imaging',
+    type: 'info',
+    module: 2,
+    title: 'Imaging Strategy',
+    body: '**CT Angiography (CTA) is the diagnostic test of choice.** [1][5]\n\n**CTA protocol:**\n- ECG-gated if available (reduces motion artifact at aortic root)\n- Arterial phase, thin-slice acquisition\n- From thoracic inlet to femoral arteries (full aorta)\n- Noncontrast series first (to distinguish IMH from other wall thickening)\n- Sensitivity/specificity: approaching 100%\n\n**Alternative modalities:**\n- **TEE:** 98% sensitivity, useful in unstable patients going directly to OR\n- **MRA:** Excellent but time-consuming, not for unstable patients\n- **CXR:** Widened mediastinum (sensitivity 64%), abnormal aortic contour, pleural effusion (poor sensitivity)\n\n**Bedside POCUS (SPEED Protocol):** Sensitivity 92%, specificity 91% [1]\n1. Pericardial effusion (parasternal long axis)\n2. Aortic outflow tract diameter >35 mm (measured inner wall to inner wall, <20 mm from annulus, end-diastole)\n3. Intimal flap on abdominal aorta\n\n**Labs to order simultaneously:**\n- Type and screen (minimum 6-10 units RBCs)\n- BMP, CBC, coags, troponin\n- Lactate, CK (for rhabdomyolysis/ischemia)',
+    citation: [1, 5],
+    next: 'aortic-classify',
+  },
+
+  {
+    id: 'aortic-classify',
+    type: 'question',
+    module: 2,
+    title: 'Classification of Aortic Pathology',
+    body: '**Based on CTA findings, classify the pathology:** [1][2][5]\n\n**Aortic Dissection:**\n- Intimal flap with true and false lumen\n- Stanford A: ascending aorta involvement\n- Stanford B: descending aorta only\n\n**Intramural Hematoma (IMH):**\n- Crescent-shaped aortic wall thickening >5 mm\n- No intimal tear or false lumen visible\n- Type A IMH: surgical mortality similar to dissection\n- Type B IMH: medical management, ~10% spontaneous resolution\n\n**Penetrating Atherosclerotic Ulcer (PAU):**\n- Ulceration penetrating internal elastic lamina into media\n- Most common in descending thoracic aorta (62%)\n- Risk of progression to IMH, dissection, or rupture',
+    citation: [1, 2, 5],
+    options: [
+      {
+        label: 'Type A Dissection / IMH',
+        description: 'Involves ascending aorta - surgical emergency',
+        next: 'aortic-type-a',
+        urgency: 'critical',
+      },
+      {
+        label: 'Type B Dissection / IMH',
+        description: 'Descending aorta only - usually medical management',
+        next: 'aortic-type-b',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Penetrating Ulcer (PAU)',
+        description: 'Individualized management based on symptoms and imaging',
+        next: 'aortic-pau',
+      },
+      {
+        label: 'Ruptured AAA',
+        description: 'Free or contained retroperitoneal rupture',
+        next: 'aortic-aaa-ruptured',
+        urgency: 'critical',
+      },
+    ],
+  },
+
+  {
+    id: 'aortic-ruled-out',
+    type: 'result',
+    module: 2,
+    title: 'Acute Aortic Syndrome Ruled Out',
+    body: '**ADD-RS 0-1 with negative D-dimer reliably excludes AAS.** [7][8]\n\nSensitivity of this combination: 98.9-99.9%\n\n**Consider alternative diagnoses:**\n- Acute coronary syndrome\n- Pulmonary embolism\n- Pericarditis\n- Esophageal perforation (Boerhaave)\n- Musculoskeletal pain\n- Biliary/GI pathology\n\n**Disposition:**\n- If another diagnosis identified, treat appropriately\n- If pain resolved and workup negative, may discharge with close follow-up\n- Return precautions for recurrent severe pain, syncope, neurologic symptoms',
+    recommendation: 'AAS ruled out with ADD-RS 0-1 + negative D-dimer. Pursue alternative diagnoses.',
+    citation: [7, 8],
+  },
+
+  // =====================================================================
+  // MODULE 3: HEMODYNAMIC MANAGEMENT
+  // =====================================================================
+
+  {
+    id: 'aortic-hemo-dissection',
+    type: 'info',
+    module: 3,
+    title: 'Anti-Impulse Therapy - Dissection',
+    body: '**Goal: Reduce aortic wall stress to prevent propagation and rupture.** [1][9]\n\n**Hemodynamic Targets:**\n- **SBP: 100-120 mmHg** (measure in arm with highest pressure)\n- **Heart rate: 60-70 bpm** (higher acceptable with severe aortic regurgitation)\n- **Adequate end-organ perfusion:** intact mentation, adequate urine output\n- **Pain control:** persistent pain suggests ongoing dissection\n\n**KEY: Beta-blocker FIRST before vasodilator.** Vasodilators alone cause reflex tachycardia, increasing dP/dt and promoting dissection propagation. [1][9]\n\n**Beta-Blocker Selection (Target HR 60-70):**\n\n| Agent | Onset | Duration | Dosing |\n|-------|-------|----------|--------|\n| [Esmolol](#/drug/esmolol/aortic dissection) | 1-2 min | 10-30 min | Load 500 mcg/kg; infuse 50-200 mcg/kg/min |\n| [Labetalol](#/drug/labetalol/aortic dissection) | 5-10 min | 3-6 hrs | Push 20-40-80-80-80 mg q10 min |\n| [Metoprolol](#/drug/metoprolol/aortic dissection) | ~5 min | Several hrs | 5 mg IV, repeat q5 min (max 15 mg) |\n\n**Esmolol preferred in unstable patients** - immediately titratable, short half-life if hypotension develops. [1]',
+    citation: [1, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Esmolol',
+        dose: '500 mcg/kg IV load, then 50-200 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous infusion',
+        duration: 'until HR 60-70',
+        notes: 'Preferred in unstable patients - immediately titratable. Ultra-short half-life (10-30 min).',
+      },
+      alternative: {
+        drug: 'Labetalol',
+        dose: '20 mg IV, then 20-40-80-80-80 mg q10 min',
+        route: 'IV',
+        frequency: 'q10 min PRN',
+        duration: 'until HR 60-70 and SBP 100-120',
+        notes: 'Combined alpha/beta blocker. Longer duration (3-6 hrs). May use infusion 1-2 mg/min.',
+      },
+      monitoring: 'Continuous BP and HR monitoring. Target HR 60-70 bpm, SBP 100-120 mmHg.',
+    },
+    next: 'aortic-vasodilator',
+  },
+
+  {
+    id: 'aortic-vasodilator',
+    type: 'info',
+    module: 3,
+    title: 'Vasodilator Therapy',
+    body: '**Add vasodilator AFTER beta-blocker if SBP remains >120 mmHg.** [1][9]\n\n**Vasodilator options:**\n\n**[Nicardipine](#/drug/nicardipine/aortic dissection)** - Excellent first choice\n- Start 5 mg/hr, titrate by 2.5 mg/hr q5-15 min\n- Max 15 mg/hr\n- No reflex tachycardia when beta-blocked\n\n**[Clevidipine](#/drug/clevidipine/aortic dissection)** - Preferred if available\n- Ultra-short half-life (1-2 min)\n- Start 1-2 mg/hr, titrate by doubling q90 sec\n- Max 32 mg/hr\n\n**Sodium Nitroprusside** - Historical agent, less preferred\n- 0.25-10 mcg/kg/min\n- Risk of cyanide toxicity with prolonged use\n- Requires arterial line\n\n**CCB alternative if beta-blocker contraindicated:**\n- [Diltiazem](#/drug/diltiazem/aortic dissection) 0.25 mg/kg IV over 2 min, then 5-20 mg/hr infusion\n- Use if asthma/COPD precludes beta-blocker',
+    citation: [1, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Nicardipine',
+        dose: '5 mg/hr, titrate by 2.5 mg/hr q5-15 min',
+        route: 'IV',
+        frequency: 'continuous infusion',
+        duration: 'until SBP 100-120',
+        notes: 'Add AFTER beta-blocker achieves HR goal. Max 15 mg/hr.',
+      },
+      alternative: {
+        drug: 'Clevidipine',
+        dose: '1-2 mg/hr, double q90 sec',
+        route: 'IV',
+        frequency: 'continuous infusion',
+        duration: 'until SBP 100-120',
+        notes: 'Ultra-short half-life. Preferred if available. Max 32 mg/hr.',
+      },
+      monitoring: 'Arterial line recommended. Target SBP 100-120 mmHg.',
+    },
+    next: 'aortic-hypotensive',
+  },
+
+  {
+    id: 'aortic-hypotensive',
+    type: 'info',
+    module: 3,
+    title: 'Hypotensive Dissection Management',
+    body: '**Hypotension occurs in up to 25% of Type A dissections, <5% of Type B.** [1]\n\n**Causes of hypotension in dissection:**\n- Severe aortic regurgitation\n- Hemopericardium with tamponade\n- Occluding MI (RCA or left main involvement)\n- Aortic rupture/hemorrhage\n- Pseudohypotension (limb artery occlusion)\n- Mesenteric ischemia\n\n**Management:**\n- Check BP in BOTH arms and legs - use highest pressure for management\n- If unilateral arm hypotension with adequate contralateral pressure, this is pseudohypotension\n- **Vasopressor:** [Norepinephrine](#/drug/norepinephrine/aortic dissection) - maintain MAP ~65 mmHg, HR 60-80 bpm\n- Avoid pure alpha-agonists (phenylephrine) - reflex bradycardia with already compromised cardiac output\n\n**Cardiac tamponade:**\n- Pericardiocentesis is temporizing ONLY if surgical delay\n- Small-volume drainage (just enough to restore BP) - risk of precipitating complete rupture\n- Definitive treatment is emergent surgery\n\n**Most hypotensive Type A dissections require IMMEDIATE surgery** - do not delay for optimization. [1]',
+    citation: [1],
+    treatment: {
+      firstLine: {
+        drug: 'Norepinephrine',
+        dose: '0.05-0.5 mcg/kg/min',
+        route: 'IV',
+        frequency: 'continuous infusion',
+        duration: 'until surgical intervention',
+        notes: 'Target MAP ~65 mmHg, HR 60-80 bpm. Avoid pure alpha-agonists.',
+      },
+      monitoring: 'Check BP in all extremities. Use highest pressure for management. Prepare for emergent surgery.',
+    },
+    next: 'aortic-type-a',
+  },
+
+  // =====================================================================
+  // MODULE 4: TYPE-SPECIFIC MANAGEMENT
+  // =====================================================================
+
+  {
+    id: 'aortic-type-a',
+    type: 'info',
+    module: 4,
+    title: 'Type A Dissection - Surgical Emergency',
+    body: '**Type A dissection = IMMEDIATE SURGICAL INDICATION.** [1][2][10]\n\n**Mortality without surgery: 50% at 48 hours, 1-2% per hour.**\n**Mortality with surgery: 20% at 14 days** (much improved from historical rates)\n\n**Indications for emergent repair:**\n- All Type A dissections (regardless of symptoms)\n- Tamponade, severe aortic regurgitation\n- Malperfusion syndromes (coronary, cerebral, visceral, limb)\n- Rupture or impending rupture\n\n**ED Management while awaiting surgery:**\n1. Anti-impulse therapy (HR 60-70, SBP 100-120)\n2. Adequate IV access (large-bore x2 or central line)\n3. Type and crossmatch 6-10 units pRBCs\n4. Continuous monitoring (arterial line preferred)\n5. Pain control with opioids (morphine, fentanyl) - also reduces sympathetic drive\n6. NPO for surgery\n\n**Consults:**\n- Cardiothoracic surgery STAT\n- Cardiac anesthesia\n- Perfusionist for bypass\n\n[Type A Dissection Surgery Overview](#/info/aortic-surgery)',
+    citation: [1, 2, 10],
+    next: 'aortic-dispo-surgery',
+  },
+
+  {
+    id: 'aortic-type-b',
+    type: 'question',
+    module: 4,
+    title: 'Type B Dissection - Classify Complexity',
+    body: '**Type B dissection is managed MEDICALLY unless complicated.** [1][2][11]\n\n**Uncomplicated Type B:** 14-day mortality <10%\n**Complicated Type B:** 14-day mortality ~30%\n\n**Definition of COMPLICATED Type B:** [11]\n- Aortic rupture or hemothorax\n- Threatened rupture (rapid aortic expansion)\n- Major artery occlusion with malperfusion:\n  - Mesenteric ischemia (elevated lactate, abdominal pain)\n  - Limb ischemia (pulseless, cold extremity)\n  - Renal ischemia (oliguria, rising creatinine)\n  - Spinal cord ischemia (paraplegia, paraparesis)\n- Refractory pain despite BP/HR control\n- Refractory hypertension despite maximal medical therapy\n\n**High-risk features (may progress to complicated):**\n- Maximum aortic diameter >40 mm\n- False lumen diameter >22 mm\n- Hemorrhagic pleural effusion\n- Entry tear on inner curvature of aorta',
+    citation: [1, 2, 11],
+    options: [
+      {
+        label: 'Uncomplicated Type B',
+        description: 'No malperfusion, stable, responsive to medical therapy',
+        next: 'aortic-type-b-medical',
+      },
+      {
+        label: 'Complicated Type B',
+        description: 'Malperfusion, rupture, refractory symptoms',
+        next: 'aortic-type-b-intervention',
+        urgency: 'critical',
+      },
+    ],
+  },
+
+  {
+    id: 'aortic-type-b-medical',
+    type: 'info',
+    module: 4,
+    title: 'Uncomplicated Type B - Medical Management',
+    body: '**Uncomplicated Type B dissection responds well to aggressive medical therapy.** [1][11]\n\n**Anti-impulse therapy:**\n- Target HR 60-70 bpm\n- Target SBP 100-120 mmHg\n- Pain control (adequate analgesia reduces sympathetic drive)\n\n**ICU admission for:**\n- Continuous BP monitoring\n- Serial imaging at 24-48 hours to assess for progression\n- Detection of complications\n\n**Transition to oral therapy (once stable):**\n- [Metoprolol](#/drug/metoprolol/aortic dissection oral) or labetalol\n- Add calcium channel blocker (nifedipine XR) for additional BP control\n- ACE inhibitor or ARB for long-term management\n\n**Long-term surveillance:**\n- CT at 1, 3, 6, 12 months, then annually\n- SBP goal <130 mmHg chronically\n- Beta-blocker lifelong\n\n**Prognosis:** With optimal medical therapy, 5-year survival is 60-80%. ~24% will require intervention for late complications. [11]',
+    citation: [1, 11],
+    next: 'aortic-dispo-icu',
+  },
+
+  {
+    id: 'aortic-type-b-intervention',
+    type: 'info',
+    module: 4,
+    title: 'Complicated Type B - TEVAR',
+    body: '**Complicated Type B dissection requires TEVAR (Thoracic Endovascular Aortic Repair) or open surgery.** [1][11]\n\n**TEVAR is preferred for complicated Type B:**\n- Places stent-graft to seal entry tear\n- Excludes false lumen\n- Promotes thrombosis and remodeling\n- Less invasive than open repair\n\n**Indications for urgent intervention:**\n- Rupture or impending rupture\n- Malperfusion syndrome not responding to medical optimization\n- Rapid aortic expansion (>5 mm in acute phase)\n- Refractory pain or hypertension\n\n**ED management while awaiting intervention:**\n- Anti-impulse therapy (HR 60-70, SBP 100-120)\n- Permissive hypertension may be necessary if malperfusion present - balance perfusion vs rupture risk\n- Large-bore IV access, type and cross 6-10 units\n- Continuous monitoring\n\n**Consults:**\n- Vascular surgery\n- Cardiothoracic surgery (backup for open repair if TEVAR not feasible)\n\n**Mortality for complicated Type B requiring repair: ~30%** [1]',
+    citation: [1, 11],
+    next: 'aortic-dispo-surgery',
+  },
+
+  {
+    id: 'aortic-pau',
+    type: 'info',
+    module: 4,
+    title: 'Penetrating Atherosclerotic Ulcer',
+    body: '**PAU = atherosclerotic plaque ulcerates through intima into media.** [5][12]\n\n**Characteristics:**\n- Most common in descending thoracic aorta (62%)\n- Typically older patients (70s-80s) with severe atherosclerosis\n- May coexist with intramural hematoma\n- Risk of rupture reported up to 40%\n\n**Management is individualized:** [5][12]\n\n**Indications for intervention:**\n- Persistent or recurrent symptoms despite medical therapy\n- Rupture or impending rupture\n- Development of pseudoaneurysm\n- Progression to dissection or large IMH\n\n**Medical management (similar to Type B):**\n- Anti-impulse therapy\n- Beta-blocker + vasodilator\n- Pain control\n- Serial imaging\n\n**Intervention options:**\n- TEVAR is preferred modality\n- Open repair for complex anatomy\n\n**The natural history is unpredictable** - PAU can remain stable, enlarge, progress to IMH/dissection/pseudoaneurysm, or rupture.',
+    citation: [5, 12],
+    next: 'aortic-dispo-icu',
+  },
+
+  {
+    id: 'aortic-aaa-eval',
+    type: 'info',
+    module: 1,
+    title: 'AAA Rupture - Initial Evaluation',
+    body: '**Ruptured AAA is a surgical emergency with mortality >80% without intervention.** [3][13]\n\n**AAA defined as infrarenal aortic diameter >3 cm.** [3]\n\n**Classic triad (present in <50%):**\n- Hypotension\n- Abdominal or back pain\n- Pulsable abdominal mass\n\n**Risk factors:** Age >65, male, smoking history, HTN, family history, connective tissue disease.\n\n**Physical exam sensitivity for AAA by size:** [3]\n- 3.0-3.9 cm: 29%\n- 4.0-4.9 cm: 50%\n- >=5.0 cm: 76%\n\n**Common misdiagnoses:** Renal colic (24%), diverticulitis (13%), GI bleed (13%), acute coronary syndrome.\n\n**Bedside ultrasound:**\n- 100% sensitive when entire aorta visualized\n- Can measure diameter and detect AAA\n- CANNOT reliably detect rupture (retroperitoneal blood not visible)\n- Allows continued resuscitation without transport',
+    citation: [3, 13],
+    next: 'aortic-aaa-imaging',
+  },
+
+  {
+    id: 'aortic-aaa-imaging',
+    type: 'question',
+    module: 2,
+    title: 'AAA - Imaging Decision',
+    body: '**Imaging choice depends on hemodynamic stability.** [3][13]\n\n**Hemodynamically UNSTABLE:**\n- Bedside US confirms AAA\n- NO CT scan - delays definitive care\n- Straight to OR for surgical/endovascular repair\n- Call vascular surgery IMMEDIATELY upon suspicion\n\n**Hemodynamically STABLE:**\n- CT angiography (noncontrast + arterial phase)\n- Delineates anatomy for surgical planning\n- Identifies contained vs free rupture\n- May show crescent sign (impending rupture)\n\n**CT findings of AAA rupture:**\n- Retroperitoneal hematoma\n- Active contrast extravasation\n- Focal discontinuity of aortic wall\n- High-attenuation crescent (hyperattenuating thrombus = impending rupture)\n\n**Patient status:**',
+    citation: [3, 13],
+    options: [
+      {
+        label: 'Unstable - Bedside US Confirms AAA',
+        description: 'Straight to OR, no CT',
+        next: 'aortic-aaa-ruptured',
+        urgency: 'critical',
+      },
+      {
+        label: 'Stable - CT Shows Ruptured AAA',
+        description: 'Contained rupture, proceed to OR planning',
+        next: 'aortic-aaa-ruptured',
+        urgency: 'critical',
+      },
+      {
+        label: 'Stable - CT Shows Intact AAA',
+        description: 'Symptomatic but unruptured',
+        next: 'aortic-symptomatic',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'aortic-aaa-ruptured',
+    type: 'info',
+    module: 4,
+    title: 'Ruptured AAA - Resuscitation',
+    body: '**Permissive hypotension is the cornerstone of resuscitation.** [13][14]\n\n**Target SBP 70-90 mmHg** while maintaining consciousness.\n\n**Rationale:** [14]\n- Maintains tamponade effect of contained hematoma\n- Prevents clot disruption from hypertensive surges\n- Avoids dilutional/hypothermic coagulopathy from crystalloid\n- Preserves platelets and clotting factors\n\n**Resuscitation principles:**\n- **Two large-bore IVs or central access**\n- **Type O-negative blood** for profound shock until type-specific available\n- **Massive transfusion protocol:** 1:1:1 ratio of pRBC:FFP:platelets [14]\n- Order 6-10 units pRBCs\n- **Minimize crystalloid** - avoid cold, large-volume IV fluids\n- **Keep patient warm** (>36C core temp)\n- **Avoid intubation if possible** - positive pressure ventilation removes compensatory mechanisms and can precipitate arrest\n\n**Hemodynamic stability defined as:** [13]\nConsciousness maintained with SBP 70-90 mmHg for at least 5 minutes without fluid or vasopressor support.',
+    citation: [13, 14],
+    treatment: {
+      firstLine: {
+        drug: 'pRBCs',
+        dose: '6-10 units',
+        route: 'IV',
+        frequency: 'rapid infusion',
+        duration: 'until surgical control',
+        notes: 'Type O-negative for profound shock. 1:1:1 ratio with FFP and platelets. Avoid crystalloid.',
+      },
+      monitoring: 'Target SBP 70-90 mmHg. Maintain consciousness. Avoid intubation if possible.',
+    },
+    next: 'aortic-aaa-surgical',
+  },
+
+  {
+    id: 'aortic-aaa-surgical',
+    type: 'info',
+    module: 4,
+    title: 'Ruptured AAA - Surgical Options',
+    body: '**EVAR (endovascular) vs Open Surgical Repair (OSR)** [13]\n\n**EVAR preferred when anatomy allows:**\n- Can be performed under local anesthesia\n- Less physiologic stress\n- Anatomic requirements:\n  - Aortic bifurcation diameter >=17 mm\n  - Aneurysmal neck >=15 mm diameter\n  - Suitable femoral/iliac arteries (not excessively tortuous/calcified)\n\n**OSR indicated when:**\n- EVAR anatomy unsuitable\n- Rupture with free intraperitoneal hemorrhage\n- Performed under general anesthesia\n\n**Endovascular Balloon Control (EVBC):** [13]\n- For hemodynamically unstable patients\n- Occlusion balloon placed via femoral access\n- Provides temporary hemorrhage control\n- Bridge to definitive repair\n\n**30-minute window:** After hemodynamic stabilization, 3D imaging analysis determines EVAR vs OSR.\n\n**Operative mortality:** [3]\n- Elective AAA repair: 5-10%\n- Ruptured AAA repair: 41-50%\n- Normotensive patients with contained bleeding have best survival',
+    citation: [3, 13],
+    next: 'aortic-dispo-surgery',
+  },
+
+  {
+    id: 'aortic-symptomatic',
+    type: 'info',
+    module: 4,
+    title: 'Symptomatic Unruptured Aneurysm',
+    body: '**Symptomatic aneurysm = impending rupture until proven otherwise.** [3][15]\n\n**Symptoms suggesting instability:**\n- New or worsening abdominal/back pain\n- Tenderness over known aneurysm\n- Rapid growth on surveillance imaging\n- Peripheral embolization (blue toe syndrome)\n\n**Management:**\n- Admit for urgent surgical evaluation\n- CT angiography to assess for contained leak\n- Type and crossmatch\n- NPO for possible emergent surgery\n- BP control (avoid excessive hypertension)\n\n**Indications for urgent repair:** [15]\n- Symptomatic AAA (any size)\n- AAA >5.5 cm in men or >5.0 cm in women\n- Growth rate >0.5 cm in 6 months\n- Saccular morphology or eccentric shape\n\n**Consult vascular surgery for admission and timing of repair.**',
+    citation: [3, 15],
+    next: 'aortic-dispo-admit',
+  },
+
+  {
+    id: 'aortic-incidental',
+    type: 'result',
+    module: 4,
+    title: 'Incidental Aortic Aneurysm',
+    body: '**Asymptomatic aneurysm discovered on imaging performed for other reasons.**\n\n**AAA surveillance thresholds (ESVS 2024):** [15]\n- <4.0 cm: Repeat US in 2 years\n- 4.0-4.9 cm: Repeat US annually\n- >=5.0 cm: Refer to vascular surgery\n\n**Elective repair thresholds:** [15]\n- Men: >=5.5 cm\n- Women: >=5.0 cm (lower threshold due to higher rupture risk)\n- OR growth rate >0.5 cm in 6 months\n\n**Thoracic aortic aneurysm:**\n- Repair threshold: >=5.5 cm (or >=4.5-5.0 cm with Marfan, bicuspid valve, or family history)\n- Annual CT surveillance until threshold reached\n\n**ED disposition:**\n- Discharge with vascular surgery referral\n- Provide size and location information in discharge summary\n- Patient education: avoid heavy lifting, seek care for new pain\n- BP control reduces expansion rate',
+    recommendation: 'Discharge with vascular surgery referral within 2-4 weeks for surveillance planning.',
+    citation: [15],
+  },
+
+  // =====================================================================
+  // MODULE 5: SURGICAL CONSULTATION & DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'aortic-dispo-surgery',
+    type: 'result',
+    module: 5,
+    title: 'Disposition - Emergent Surgery',
+    body: '**Patient requires emergent surgical intervention.** [1][2][13]\n\n**Before leaving ED:**\n- Continuous hemodynamic monitoring\n- Two large-bore IVs or central access\n- Type and cross 6-10 units pRBCs\n- Coagulation labs, CBC, BMP, lactate\n- Foley catheter for UOP monitoring\n- NPO\n\n**Ongoing ED management:**\n- Anti-impulse therapy (dissection): HR 60-70, SBP 100-120\n- Permissive hypotension (ruptured AAA): SBP 70-90\n- Pain control with IV opioids\n- Avoid intubation unless absolutely necessary (especially AAA)\n\n**Consults:**\n- Cardiothoracic surgery (Type A dissection)\n- Vascular surgery (AAA, Type B with intervention)\n- Cardiac anesthesia\n- Blood bank / transfusion service\n\n**Family communication:**\n- High mortality risk even with optimal care\n- Potential complications: stroke, paraplegia, MI, renal failure, death\n- May need goals of care discussion in elderly/frail patients',
+    recommendation: 'Emergent surgical intervention. Maintain hemodynamic targets. Ensure adequate blood products available.',
+    confidence: 'definitive',
+    citation: [1, 2, 13],
+  },
+
+  {
+    id: 'aortic-dispo-icu',
+    type: 'result',
+    module: 5,
+    title: 'Disposition - ICU Admission',
+    body: '**Patient requires ICU-level monitoring.** [1][11]\n\n**Indications:**\n- Uncomplicated Type B dissection\n- Intramural hematoma\n- Penetrating atherosclerotic ulcer\n- Post-operative monitoring\n\n**ICU monitoring requirements:**\n- Arterial line for continuous BP\n- Hourly neurologic checks (spinal cord ischemia)\n- Continuous cardiac monitoring\n- Urine output (renal perfusion)\n- Serial lactate (mesenteric ischemia)\n\n**Medical management:**\n- Continue IV anti-impulse therapy\n- Transition to oral beta-blocker when stable\n- Pain control\n- NPO initially (risk of emergent surgery)\n\n**Repeat imaging:**\n- CT at 24-48 hours to assess for progression\n- Earlier if clinical deterioration\n\n**Indications to convert to surgical intervention:**\n- New malperfusion\n- Expansion on repeat imaging\n- Refractory symptoms despite optimal medical therapy',
+    recommendation: 'ICU admission for continuous monitoring and IV anti-impulse therapy. Serial imaging and reassessment.',
+    confidence: 'definitive',
+    citation: [1, 11],
+  },
+
+  {
+    id: 'aortic-dispo-admit',
+    type: 'result',
+    module: 5,
+    title: 'Disposition - Admit for Urgent Evaluation',
+    body: '**Patient requires inpatient admission for urgent vascular surgery consultation.** [3][15]\n\n**Indications:**\n- Symptomatic aneurysm (not actively ruptured)\n- Rapidly expanding aneurysm\n- Aneurysm at or above repair threshold\n- New peripheral embolization from aneurysm\n\n**Admission orders:**\n- Telemetry monitoring\n- NPO in case of emergent surgery\n- Type and screen\n- BP control (avoid hypertensive surges)\n- Pain management\n- Vascular surgery consult (urgent, not emergent)\n\n**Workup:**\n- CT angiography if not already obtained\n- Echocardiogram (preoperative cardiac risk)\n- Cardiac stress testing if indicated\n- Pulmonary function tests if thoracic aneurysm\n\n**Timing of repair:**\n- Symptomatic: within 24-48 hours\n- Asymptomatic at threshold: within 1-2 weeks',
+    recommendation: 'Admit for urgent vascular surgery evaluation. NPO, telemetry, BP control.',
+    confidence: 'recommended',
+    citation: [3, 15],
+  },
+
+  {
+    id: 'aortic-malperfusion',
+    type: 'info',
+    module: 4,
+    title: 'Malperfusion Syndromes',
+    body: '**Malperfusion = branch vessel compromise from dissection or thrombosis.** [1][2]\n\n**Coronary malperfusion:**\n- RCA most commonly involved (right coronary ostium)\n- Presents as STEMI - check for dissection before cath lab\n- Treatment: emergent surgery, not PCI\n\n**Cerebral malperfusion:**\n- Carotid/vertebral involvement\n- Stroke in 5-10% of Type A dissections\n- Does NOT preclude surgery unless massive stroke\n\n**Spinal cord malperfusion:**\n- Paraplegia/paraparesis\n- Intercostal/lumbar artery involvement\n- Associated with poor prognosis\n\n**Mesenteric malperfusion:**\n- SMA involvement\n- Elevated lactate, abdominal pain out of proportion\n- Mortality >50%\n\n**Renal malperfusion:**\n- Oliguria, rising creatinine\n- May require fenestration or stenting\n\n**Limb malperfusion:**\n- Pulseless, cold extremity\n- May resolve with true lumen reperfusion\n\n**Management:** Surgical repair restores true lumen flow; may need adjunctive fenestration or branch stenting.',
+    citation: [1, 2],
+    next: 'aortic-type-a',
+  },
+
+];
+
+export const AORTIC_ANEURYSM_NODE_COUNT = AORTIC_ANEURYSM_NODES.length;
+
+export const AORTIC_ANEURYSM_MODULE_LABELS = [
+  'Initial Assessment',
+  'Diagnosis',
+  'Hemodynamic Management',
+  'Type-Specific Management',
+  'Surgical Consultation & Disposition',
+];
+
+export const AORTIC_ANEURYSM_CITATIONS: Citation[] = [
+  { num: 1, text: 'Farkas J. Aortic Dissection. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/aortic-dissection/' },
+  { num: 2, text: 'Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482.' },
+  { num: 3, text: 'Kent KC. Clinical Practice: Abdominal Aortic Aneurysms. N Engl J Med. 2014;371(22):2101-2108.' },
+  { num: 4, text: 'Wittels K. Aortic Emergencies. Emerg Med Clin North Am. 2011;29(4):789-800.' },
+  { num: 5, text: 'Vilacosta I, San Roman JA, Aragoncillo P, et al. Penetrating Atherosclerotic Aortic Ulcer: Documentation by Transesophageal Echocardiography. J Am Coll Cardiol. 1998;32(1):83-89.' },
+  { num: 6, text: 'Klompas M. Does This Patient Have an Acute Thoracic Aortic Dissection? JAMA. 2002;287(17):2262-2272.' },
+  { num: 7, text: 'Nazerian P, Mueller C, Soeiro AM, et al. Diagnostic Accuracy of the Aortic Dissection Detection Risk Score Plus D-Dimer for Acute Aortic Syndromes: The ADvISED Prospective Multicenter Study. Circulation. 2018;137(3):250-258.' },
+  { num: 8, text: 'Defined Investigators. Systematic Review of Aortic Dissection Detection Risk Score Plus D-dimer for Diagnostic Rule-out of Suspected Acute Aortic Syndromes. Acad Emerg Med. 2020;27(10):1013-1027.' },
+  { num: 9, text: '2024 ESC Guidelines for the Management of Peripheral Arterial and Aortic Diseases. Eur Heart J. 2024;45(36):3538-3700.' },
+  { num: 10, text: 'Pape LA, Awais M, Woznicki EM, et al. Presentation, Diagnosis, and Outcomes of Acute Aortic Dissection: 17-Year Trends From the International Registry of Acute Aortic Dissection. J Am Coll Cardiol. 2015;66(4):350-358.' },
+  { num: 11, text: 'Erbel R, Aboyans V, Boileau C, et al. 2014 ESC Guidelines on the Diagnosis and Treatment of Aortic Diseases. Eur Heart J. 2014;35(41):2873-2926.' },
+  { num: 12, text: 'Harris KM, Braverman AC, Eagle KA, et al. Acute Aortic Intramural Hematoma: An Analysis From the International Registry of Acute Aortic Dissection. Circulation. 2012;126(11 Suppl 1):S91-S96.' },
+  { num: 13, text: 'Houston Methodist Ruptured Abdominal Aortic Aneurysm Guidelines. Methodist DeBakey Cardiovasc J. 2024.' },
+  { num: 14, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of Plasma, Platelets, and Red Blood Cells in a 1:1:1 vs a 1:1:2 Ratio and Mortality in Patients with Severe Trauma: The PROPPR Randomized Clinical Trial. JAMA. 2015;313(5):471-482.' },
+  { num: 15, text: 'European Society for Vascular Surgery (ESVS) 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms. Eur J Vasc Endovasc Surg. 2024;67(2):192-279.' },
+  { num: 16, text: 'EBMedicine. Thoracic Aortic Syndromes: ED Diagnosis and Management. Emergency Medicine Practice. 2024.' },
+];
