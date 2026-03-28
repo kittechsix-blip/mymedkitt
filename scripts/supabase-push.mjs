@@ -167,6 +167,10 @@ const TREE_REGISTRY = {
   'trach-emergency':      { prefix: 'TRACH_EMERGENCY',        entryNodeId: 'trach-start',    categoryId: 'emergency-medicine' },
   'methemoglobinemia':    { prefix: 'METHEMOGLOBINEMIA',      entryNodeId: 'methb-start',    categoryId: 'toxicology' },
   'deep-neck-infection':  { prefix: 'DEEP_NECK_INFECTION',    entryNodeId: 'dni-start',      categoryId: 'infectious-disease' },
+  'hfnc':                 { prefix: 'HFNC',                    entryNodeId: 'hfnc-start',     categoryId: 'critical-care' },
+  'peds-osteomyelitis':   { prefix: 'PEDS_OSTEOMYELITIS',     entryNodeId: 'osteo-start',    categoryId: 'pediatrics' },
+  'copd-exacerbation':    { prefix: 'COPD_EXACERBATION',      entryNodeId: 'copd-start',     categoryId: 'emergency-medicine' },
+  'septic-arthritis':     { prefix: 'SEPTIC_ARTHRITIS',       entryNodeId: 'sa-start',       categoryId: 'orthopedics' },
 };
 
 const CROSS_LISTINGS = {

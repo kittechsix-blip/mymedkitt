@@ -12528,7 +12528,221 @@ const ECMO_ECPR_CRITERIA_CALCULATOR = {
     thresholdNote: 'ECPR best outcomes: witnessed VF, bystander CPR, <60 min, ECMO center.',
     citations: ['Richardson ASC, et al. ECPR for refractory cardiac arrest. Circulation. 2021;143(23):2250-2263.'],
 };
+// -------------------------------------------------------------------
+// ROX Index Calculator (HFNC)
+// -------------------------------------------------------------------
+const ROX_INDEX_CALCULATOR = {
+    id: 'rox-index',
+    title: 'ROX Index',
+    subtitle: 'HFNC Failure Prediction',
+    description: 'Predicts risk of HFNC failure requiring intubation. Calculate at 2, 6, and 12 hours after HFNC initiation.',
+    fields: [
+        { name: 'spo2', label: 'SpO₂', type: 'number', points: 0, unit: '%', description: 'Oxygen saturation (%)' },
+        { name: 'fio2', label: 'FiO₂', type: 'number', points: 0, unit: '%', description: 'Fraction of inspired oxygen (%)' },
+        { name: 'rr', label: 'Respiratory Rate', type: 'number', points: 0, unit: '/min', description: 'Breaths per minute' },
+    ],
+    results: [],
+    thresholdNote: 'ROX ≥4.88 at 12h: Low risk of failure. ROX <3.85: High risk. 3.85-4.88: Gray zone (33% intubation rate).',
+    citations: [
+        'Roca O, et al. Predicting success of high-flow nasal cannula in pneumonia patients with hypoxemic respiratory failure: The utility of the ROX index. J Crit Care. 2016;35:200-205.',
+        'Roca O, et al. An index combining respiratory rate and oxygenation to predict outcome of nasal high-flow therapy. Am J Respir Crit Care Med. 2019;199(11):1368-1376.',
+    ],
+    computeResult: (values) => {
+        const spo2 = values['spo2'] || 0;
+        const fio2 = values['fio2'] || 0;
+        const rr = values['rr'] || 0;
+        if (spo2 === 0 || fio2 === 0 || rr === 0) {
+            return { value: '--', label: 'Incomplete', description: 'Enter all values to calculate ROX Index', colorVar: '--color-text-muted' };
+        }
+        const fio2Decimal = fio2 > 1 ? fio2 / 100 : fio2;
+        const rox = (spo2 / (fio2Decimal * 100)) / rr;
+        const roxRounded = rox.toFixed(2);
+        if (rox >= 4.88) {
+            return { value: roxRounded, label: 'Low Risk', description: 'ROX ≥4.88: ~80% PPV for HFNC success. Continue HFNC with monitoring.', colorVar: '--color-primary' };
+        }
+        else if (rox >= 3.85) {
+            return { value: roxRounded, label: 'Gray Zone', description: 'ROX 3.85-4.88: ~33% intubation rate. Close monitoring, reassess in 2h.', colorVar: '--color-warning' };
+        }
+        else {
+            return { value: roxRounded, label: 'High Risk', description: 'ROX <3.85: High risk of HFNC failure. Consider escalation to NIV or intubation.', colorVar: '--color-danger' };
+        }
+    },
+};
+// -------------------------------------------------------------------
+// Kocher Criteria Calculator (Septic Arthritis / Peds Osteo)
+// -------------------------------------------------------------------
+const KOCHER_CRITERIA_CALCULATOR = {
+    id: 'kocher-criteria',
+    title: 'Kocher Criteria',
+    subtitle: 'Pediatric Septic Arthritis Risk',
+    description: 'Differentiates septic arthritis from transient synovitis in children with hip pain. Modified (Caird) adds CRP.',
+    fields: [
+        { name: 'fever', label: 'Fever >38.5°C (101.3°F)', type: 'toggle', points: 1, description: 'History of fever' },
+        { name: 'non-weight-bearing', label: 'Non-weight bearing', type: 'toggle', points: 1, description: 'Unable or refuses to bear weight' },
+        { name: 'esr', label: 'ESR >40 mm/hr', type: 'toggle', points: 1, description: 'Erythrocyte sedimentation rate' },
+        { name: 'wbc', label: 'WBC >12,000 cells/μL', type: 'toggle', points: 1, description: 'Peripheral white blood cell count' },
+        { name: 'crp', label: 'CRP >20 mg/L (Caird modification)', type: 'toggle', points: 1, description: 'C-reactive protein - adds 5th criterion' },
+    ],
+    results: [
+        { min: 0, max: 1, label: '0 criteria', risk: 'Very Low Risk', mortality: 'Probability of septic arthritis: 0.2%', colorVar: '--color-primary' },
+        { min: 1, max: 2, label: '1 criterion', risk: 'Low Risk', mortality: 'Probability of septic arthritis: 3%', colorVar: '--color-primary' },
+        { min: 2, max: 3, label: '2 criteria', risk: 'Moderate Risk', mortality: 'Probability of septic arthritis: 40%', colorVar: '--color-warning' },
+        { min: 3, max: 4, label: '3 criteria', risk: 'High Risk', mortality: 'Probability of septic arthritis: 93.1%', colorVar: '--color-danger' },
+        { min: 4, max: 5, label: '4 criteria', risk: 'Very High Risk', mortality: 'Probability of septic arthritis: 99.6%', colorVar: '--color-danger' },
+        { min: 5, max: Infinity, label: '5 criteria', risk: 'Very High Risk', mortality: 'Probability of septic arthritis: 98%+ (with CRP)', colorVar: '--color-danger' },
+    ],
+    thresholdNote: '≥2 criteria warrants arthrocentesis. 0 criteria essentially rules out septic arthritis.',
+    citations: [
+        'Kocher MS, et al. Differentiating between septic arthritis and transient synovitis of the hip in children. J Bone Joint Surg Am. 1999;81(12):1662-1670.',
+        'Caird MS, et al. Predictors of failure of conservative treatment in children with septic arthritis of the hip. J Pediatr Orthop. 2006;26(5):573-578.',
+    ],
+};
+// -------------------------------------------------------------------
+// COPD Severity Calculator (Rome Classification)
+// -------------------------------------------------------------------
+const COPD_SEVERITY_CALCULATOR = {
+    id: 'copd-severity',
+    title: 'COPD Exacerbation Severity',
+    subtitle: 'Rome Classification',
+    description: 'Stratifies COPD exacerbation severity to guide treatment intensity (bronchodilators, steroids, NIV, ICU).',
+    fields: [
+        { name: 'spo2', label: 'SpO₂', type: 'number', points: 0, unit: '%', description: 'Oxygen saturation on room air' },
+        { name: 'rr', label: 'Respiratory Rate', type: 'number', points: 0, unit: '/min', description: 'Breaths per minute' },
+        { name: 'hr', label: 'Heart Rate', type: 'number', points: 0, unit: '/min', description: 'Beats per minute' },
+        { name: 'accessory', label: 'Accessory muscle use', type: 'toggle', points: 0, description: 'Visible use of accessory respiratory muscles' },
+        { name: 'ams', label: 'Altered mental status', type: 'toggle', points: 0, description: 'Confusion, lethargy, or somnolence' },
+        { name: 'unstable', label: 'Hemodynamic instability', type: 'toggle', points: 0, description: 'Hypotension or shock' },
+    ],
+    results: [],
+    thresholdNote: 'Mild: outpatient. Moderate: ED treatment + observation. Severe: BiPAP or intubation.',
+    citations: [
+        'GOLD 2024 Report. Global Strategy for the Diagnosis, Management, and Prevention of COPD.',
+        'Celli BR, et al. An official American Thoracic Society/European Respiratory Society statement: research questions in COPD. Eur Respir J. 2015;45(4):879-905.',
+        'Wedzicha JA, et al. Management of COPD exacerbations: European Respiratory Society/American Thoracic Society guideline. Eur Respir J. 2017;49(3):1600791.',
+    ],
+    computeResult: (values) => {
+        const spo2 = values['spo2'] || 100;
+        const rr = values['rr'] || 0;
+        const hr = values['hr'] || 0;
+        const accessory = values['accessory'] || 0;
+        const ams = values['ams'] || 0;
+        const unstable = values['unstable'] || 0;
+        // Severe criteria
+        if (spo2 < 88 || rr > 30 || ams === 1 || unstable === 1) {
+            return {
+                value: 'Severe',
+                label: 'Severe Exacerbation',
+                description: 'Immediate BiPAP. Consider intubation if AMS, fatigue, or hemodynamic instability. ICU admission.',
+                colorVar: '--color-danger'
+            };
+        }
+        // Moderate criteria
+        if ((spo2 >= 88 && spo2 <= 92) || (rr >= 24 && rr <= 30) || accessory === 1) {
+            return {
+                value: 'Moderate',
+                label: 'Moderate Exacerbation',
+                description: 'SABA+SAMA nebs, prednisone 40mg x5d, consider antibiotics if purulent sputum. Observe in ED.',
+                colorVar: '--color-warning'
+            };
+        }
+        // Mild
+        if (spo2 > 92 && rr < 24 && hr < 95) {
+            return {
+                value: 'Mild',
+                label: 'Mild Exacerbation',
+                description: 'Increase SABA, oral prednisone 40mg x5d, outpatient management with close follow-up.',
+                colorVar: '--color-primary'
+            };
+        }
+        return { value: 'Assess', label: 'Enter Values', description: 'Enter vital signs to determine severity', colorVar: '--color-text-muted' };
+    },
+};
+// -------------------------------------------------------------------
+// Synovial WBC Interpretation Calculator
+// -------------------------------------------------------------------
+const SYNOVIAL_WBC_CALCULATOR = {
+    id: 'synovial-wbc',
+    title: 'Synovial Fluid Analysis',
+    subtitle: 'Septic Arthritis Risk',
+    description: 'Interprets synovial WBC count to stratify septic arthritis risk. Adjusts threshold if patient received antibiotics.',
+    fields: [
+        { name: 'wbc', label: 'Synovial WBC', type: 'number', points: 0, unit: 'cells/mm³', description: 'White blood cell count from joint aspirate' },
+        { name: 'pmn', label: 'PMN Percentage', type: 'number', points: 0, unit: '%', description: 'Polymorphonuclear cells percentage' },
+        { name: 'prior-abx', label: 'Prior antibiotics (within 24h)', type: 'toggle', points: 0, description: 'Lower WBC threshold applies' },
+        { name: 'lactate', label: 'Synovial Lactate', type: 'number', points: 0, unit: 'mmol/L', description: 'If available - highly specific' },
+    ],
+    results: [],
+    thresholdNote: 'WBC >50,000 + >90% PMN: +LR 4.7. Synovial lactate >10: 100% specificity.',
+    citations: [
+        'Margaretten ME, et al. Does this adult patient have septic arthritis? JAMA. 2007;297(13):1478-1488.',
+        'Carpenter CR, et al. Evidence-based diagnostics: adult septic arthritis. Acad Emerg Med. 2011;18(8):781-796.',
+        'Lenski M, Scherer MA. Synovial lactate in diagnosing septic arthritis. PLoS One. 2014;9(4):e90795.',
+    ],
+    computeResult: (values) => {
+        const wbc = values['wbc'] || 0;
+        const pmn = values['pmn'] || 0;
+        const priorAbx = values['prior-abx'] || 0;
+        const lactate = values['lactate'] || 0;
+        if (wbc === 0) {
+            return { value: '--', label: 'Enter WBC', description: 'Enter synovial WBC count to assess', colorVar: '--color-text-muted' };
+        }
+        // Lactate is highly specific
+        if (lactate >= 10) {
+            return { value: `${wbc.toLocaleString()}`, label: 'High Risk', description: `Synovial lactate ≥10 mmol/L: 100% specificity for septic arthritis. Treat empirically.`, colorVar: '--color-danger' };
+        }
+        // Adjusted threshold for prior antibiotics
+        const threshold = priorAbx === 1 ? 16000 : 33000;
+        const thresholdText = priorAbx === 1 ? '16,000 (abx-adjusted)' : '33,000';
+        if (wbc >= 100000) {
+            return { value: `${wbc.toLocaleString()}`, label: 'Very High Risk', description: `WBC ≥100,000: +LR 13.2 for septic arthritis. Treat empirically.`, colorVar: '--color-danger' };
+        }
+        else if (wbc >= 50000 && pmn >= 90) {
+            return { value: `${wbc.toLocaleString()}`, label: 'High Risk', description: `WBC ≥50,000 + PMN ≥90%: +LR 4.7. High suspicion for septic arthritis.`, colorVar: '--color-danger' };
+        }
+        else if (wbc >= threshold) {
+            return { value: `${wbc.toLocaleString()}`, label: 'Moderate Risk', description: `WBC ≥${thresholdText}: Treat as presumptive septic arthritis pending culture.`, colorVar: '--color-warning' };
+        }
+        else if (wbc >= 25000) {
+            return { value: `${wbc.toLocaleString()}`, label: 'Low-Moderate Risk', description: `WBC 25,000-${thresholdText}: +LR 3.2. Consider clinical context.`, colorVar: '--color-warning' };
+        }
+        else {
+            return { value: `${wbc.toLocaleString()}`, label: 'Low Risk', description: `WBC <25,000: Low but not zero risk. Consider inflammatory arthritis, gout, trauma.`, colorVar: '--color-primary' };
+        }
+    },
+};
+// -------------------------------------------------------------------
+// Newman Criteria Calculator
+// -------------------------------------------------------------------
+const NEWMAN_CRITERIA_CALCULATOR = {
+    id: 'newman-criteria',
+    title: 'Newman Criteria',
+    subtitle: 'Adult Septic Arthritis Diagnosis',
+    description: 'Diagnostic criteria for septic arthritis in adults. Any positive criterion is diagnostic.',
+    fields: [
+        { name: 'gram-stain', label: 'Positive Gram stain', type: 'toggle', points: 1, description: 'Organisms seen on synovial fluid microscopy' },
+        { name: 'culture', label: 'Positive synovial culture', type: 'toggle', points: 1, description: 'Growth on synovial fluid culture' },
+        { name: 'purulent', label: 'Grossly purulent synovial fluid', type: 'toggle', points: 1, description: 'Visually purulent aspirate' },
+        { name: 'blood-cx', label: 'Positive blood culture + clinical features', type: 'toggle', points: 1, description: 'Bacteremia with compatible joint findings' },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'Not Diagnostic', risk: 'Criteria Not Met', mortality: 'Does not rule out septic arthritis - treat if high clinical suspicion', colorVar: '--color-warning' },
+        { min: 1, max: Infinity, label: 'Diagnostic', risk: 'Septic Arthritis Confirmed', mortality: 'Treat with IV antibiotics + orthopedic consultation for drainage', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'All acute monoarticular arthritis is septic arthritis until proven otherwise. Treat empirically while awaiting culture.',
+    citations: [
+        'Newman JH. Review of septic arthritis throughout the antibiotic era. Ann Rheum Dis. 1976;35(3):198-205.',
+        'Sharff KA, et al. Acute septic arthritis in adults. Am Fam Physician. 2013;87(11):745-754.',
+    ],
+};
 const CALCULATORS = {
+    // HFNC
+    'rox-index': ROX_INDEX_CALCULATOR,
+    // Septic Arthritis / Peds Osteo
+    'kocher-criteria': KOCHER_CRITERIA_CALCULATOR,
+    'synovial-wbc': SYNOVIAL_WBC_CALCULATOR,
+    'newman-criteria': NEWMAN_CRITERIA_CALCULATOR,
+    // COPD
+    'copd-severity': COPD_SEVERITY_CALCULATOR,
     // Digoxin toxicity
     'dig-fab-dosing': DIG_FAB_DOSING_CALCULATOR,
     'dig-ecg': DIG_ECG_CALCULATOR,

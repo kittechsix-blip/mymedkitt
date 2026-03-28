@@ -22,6 +22,9 @@ export const COPD_EXACERBATION_NODES = [
         title: 'AECOPD Severity Assessment',
         body: '**Rome Classification (GOLD 2024):**\n\n| Severity | Criteria |\n|----------|----------|\n| **Mild** | SpO2 >92%, RR <24, HR <95 |\n| **Moderate** | SpO2 88-92%, RR 24-30, accessory muscle use |\n| **Severe** | SpO2 <88%, RR >30, altered mental status, hemodynamic instability |\n\n**Clinical Red Flags:**\n- Respiratory rate >30/min\n- Accessory muscle use\n- Paradoxical breathing\n- Cyanosis\n- New arrhythmia\n- Hemodynamic instability\n- Acute confusion/somnolence\n\n**Select severity level:**',
         citation: [1, 3],
+        calculatorLinks: [
+            { id: 'copd-severity', label: 'COPD Severity Calculator' },
+        ],
         options: [
             {
                 label: 'Mild Exacerbation',

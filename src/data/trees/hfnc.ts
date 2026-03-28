@@ -24,7 +24,7 @@ export const HFNC_NODES: DecisionNode[] = [
     body: '**High-Flow Nasal Cannula (HFNC)** delivers warmed, humidified gas at flow rates up to 60-70 L/min via nasal prongs. [1][2]\n\n**Key Physiological Benefits:** [1][3]\n- **High FiO2 delivery:** Near 100% at max settings (vs NRB ~60-70%)\n- **PEEP effect:** 3-5 cm H2O at 50-60 L/min (mouth closed)\n- **Dead space washout:** Reduces anatomic dead space, improves CO2 clearance\n- **Reduced work of breathing:** Even if SpO2 adequate, higher flow reduces WOB\n- **Patient comfort:** Allows eating, talking, prolonged use without nasal ulceration\n\n**Why abandon the NRB?** Standard NRB delivers only 10-15 L/min - insufficient for patients with elevated minute ventilation. Room air entrainment occurs, reducing actual FiO2 to 60-70%. [4]\n\n[ROX Index Calculator](#/calculator/rox)\n\nWhat is the clinical indication?',
     citation: [1, 2, 3, 4],
     calculatorLinks: [
-      { id: 'rox', label: 'ROX Index Calculator' },
+      { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
     options: [
       {
@@ -151,7 +151,7 @@ export const HFNC_NODES: DecisionNode[] = [
     body: '**Continuous Monitoring Parameters:** [1][13]\n- SpO2 (continuous pulse oximetry)\n- Respiratory rate\n- Heart rate\n- Work of breathing (accessory muscle use, nasal flaring)\n- Mental status\n- Ability to speak in sentences\n\n**The ROX Index:** [13][14]\nDeveloped to predict HFNC failure and need for intubation.\n\n**Formula:**\n```\nROX = (SpO2/FiO2) / Respiratory Rate\n```\n\n**Example:** SpO2 95%, FiO2 60% (0.60), RR 24\n- ROX = (95/60) / 24 = 1.58 / 24 = 0.066... Wait, that\'s wrong.\n- ROX = (SpO2/FiO2) / RR = (95/0.60) / 24 = 158.3 / 24 = **6.6**\n\n**Interpretation (at 12 hours):** [13][14]\n- **ROX ≥4.88:** Low risk of HFNC failure (~80% PPV for success)\n- **ROX <3.85:** High risk of HFNC failure (consider escalation)\n- **ROX 3.85-4.88:** Gray zone, close monitoring required\n\n[ROX Index Calculator](#/calculator/rox)',
     citation: [1, 13, 14],
     calculatorLinks: [
-      { id: 'rox', label: 'ROX Index Calculator' },
+      { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
     next: 'hfnc-rox-timing',
   },
@@ -164,7 +164,7 @@ export const HFNC_NODES: DecisionNode[] = [
     body: '**ROX Index Timing:** [13][14]\n\n| Time Point | Failure Threshold | Success Threshold |\n|------------|-------------------|-------------------|\n| 2 hours | <2.85 | ≥4.88 |\n| 6 hours | <3.47 | ≥4.88 |\n| 12 hours | <3.85 | ≥4.88 |\n\n**Key Findings from ROX Validation:** [13]\n- Validated in FLORALI cohort\n- At 12-20 hours: PPV for success >80% if ROX ≥4.88\n- Gray zone (3.85-4.88) at 12h: only 11% of patients, 33% ultimately intubated\n\n**ROX-HR (Modified):** [15]\nSome centers incorporate heart rate:\n- ROX-HR = (ROX / HR) x 100\n- May improve predictive accuracy\n\n**Clinical Integration:**\n- Calculate ROX at 2, 6, and 12 hours\n- Trend is as important as absolute value\n- Declining ROX = concerning even if above threshold\n- ROX should not replace clinical judgment\n\nWhat is the current ROX index?',
     citation: [13, 14, 15],
     calculatorLinks: [
-      { id: 'rox', label: 'ROX Index Calculator' },
+      { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
     options: [
       {
@@ -320,7 +320,7 @@ export const HFNC_NODES: DecisionNode[] = [
     confidence: 'recommended',
     citation: [1, 2],
     calculatorLinks: [
-      { id: 'rox', label: 'ROX Index Calculator' },
+      { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
   },
 
@@ -332,7 +332,7 @@ export const HFNC_NODES: DecisionNode[] = [
     body: '**HFNC Key Points Summary:**\n\n**Indications:**\n- Hypoxemic respiratory failure (PaO2/FiO2 <300)\n- Post-extubation support\n- Pre-oxygenation/apneic oxygenation\n- Immunocompromised with ARF\n- NIV intolerance\n\n**Initial Settings:**\n- Flow: 30-60 L/min (titrate to WOB)\n- FiO2: 50-100% (titrate to SpO2 92-96%)\n- Temperature: 37C (decrease if uncomfortable)\n\n**ROX Index:**\n- Formula: (SpO2/FiO2) / RR\n- Success: ≥4.88 at 2, 6, or 12 hours\n- Failure: <2.85 (2h), <3.47 (6h), <3.85 (12h)\n\n**When to Escalate:**\n- ROX below thresholds\n- RR >35 despite max HFNC\n- SpO2 <88% on max settings\n- Altered mental status\n- Hemodynamic instability\n\n**Key Principle:** HFNC is front-line for parenchymal lung disease. Higher flow = less work of breathing, even if SpO2 is adequate. Abandon the NRB.',
     citation: [1, 2, 4, 5, 13],
     calculatorLinks: [
-      { id: 'rox', label: 'ROX Index Calculator' },
+      { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
   },
 ];

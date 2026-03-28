@@ -39,6 +39,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Pediatric: Kocher Criteria',
     body: '**Kocher Criteria** distinguishes septic arthritis from transient synovitis in children with inflamed hip. [5]\n\n**Original 4 criteria:**\n1. Fever >38.5C (101.3F)\n2. Inability to bear weight\n3. ESR >40 mm/hr\n4. WBC >12,000 cells/uL\n\n**Probability of septic arthritis:**\n- 0 predictors: 0.2%\n- 1 predictor: 3%\n- 2 predictors: 40%\n- 3 predictors: 93.1%\n- 4 predictors: 99.6%\n\n**Modified Kocher (Caird) adds CRP as 5th criterion:** [5]\n- CRP >2.0 mg/dL (>20 mg/L)\n- All 5 factors present: 98% predictive\n- CRP is the strongest independent risk factor\n\n**Important limitation:** Kocher criteria were developed for pediatric HIP. Studies show poor performance in adults and limited utility for knee in children. [6]',
     citation: [5, 6],
+    calculatorLinks: [
+      { id: 'kocher-criteria', label: 'Kocher Criteria Calculator' },
+    ],
     next: 'sa-adult-predictors',
   },
   {
@@ -48,6 +51,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Adult Risk Stratification',
     body: '**Kocher criteria have LIMITED utility in adults.** [6]\n\nIn the adult population, PMN percentage, ESR, serum WBC, fever, and weight-bearing status were **not significant predictors** of septic arthritis.\n\n**What matters in adults:**\n- Clinical suspicion based on risk factors\n- Synovial fluid analysis (most important)\n- Gram stain and culture\n\n**Newman criteria for adult septic arthritis:** [7]\n- Any synovial fluid with organisms on microscopy or culture, OR\n- Grossly purulent joint fluid, OR\n- Compatible clinical features plus positive blood culture\n\n**Rule of thumb for adults:**\n- All acute monoarticular arthritis is septic until proven otherwise\n- Maintain high suspicion in patients with risk factors\n- Presence of crystal disease does NOT exclude septic arthritis (dual diagnosis in 1-2%) [8]',
     citation: [6, 7, 8],
+    calculatorLinks: [
+      { id: 'newman-criteria', label: 'Newman Criteria' },
+    ],
     next: 'sa-ddx',
   },
   {
@@ -91,6 +97,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Synovial Fluid Analysis',
     body: '**Collect for:** [1,10]\n- Cell count with differential\n- Gram stain\n- Culture (aerobic and anaerobic)\n- Crystal analysis (polarized microscopy)\n- Consider: lactate, glucose\n\n**Synovial WBC interpretation:** [10,11]\n\n| WBC Count | +LR | Sensitivity | Specificity |\n|-----------|-----|-------------|-------------|\n| >25,000/mm3 | 3.2 | 73% | 77% |\n| >50,000/mm3 | 4.7 | 56% | 90% |\n| >100,000/mm3 | 13.2 | 19% | 99% |\n| >90% PMNs | 2.7 | 60% | 78% |\n\n**Critical point:** The traditional 50,000 cutoff has only **56-61% sensitivity**. [10]\n- 39% of culture-positive cases have WBC <50,000\n- Use clinical judgment, not just the number\n\n**Synovial lactate >10 mmol/L:** [11]\n- +LR: Infinite (essentially 100% specificity)\n- Sensitivity 86%\n- Most discriminating single test if available',
     citation: [1, 10, 11],
+    calculatorLinks: [
+      { id: 'synovial-wbc', label: 'Synovial WBC Interpreter' },
+    ],
     next: 'sa-prior-abx',
   },
   {

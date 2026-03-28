@@ -39,6 +39,9 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     title: 'Septic Arthritis vs Osteomyelitis',
     body: '**Kocher Criteria** help distinguish septic arthritis from transient synovitis (originally validated for the hip): [6,7]\n\n1. Fever (history of temp >38.5C)\n2. Non-weight bearing\n3. ESR >40 mm/hr\n4. WBC >12,000/mcL\n\n**Caird modification** adds: CRP >20 mg/L [7]\n\n**Probability of septic arthritis:**\n- 0 criteria: <0.2%\n- 1 criterion: 3%\n- 2 criteria: 40%\n- 3 criteria: 93%\n- 4 criteria: 99.6% [6]\n\n**Key clinical point:** Osteomyelitis and septic arthritis can coexist, especially in infants where transphyseal vessels allow spread. Joint effusion with adjacent bone infection requires arthrocentesis. [2,8]',
     citation: [2, 6, 7, 8],
+    calculatorLinks: [
+      { id: 'kocher-criteria', label: 'Kocher Criteria Calculator' },
+    ],
     options: [
       {
         label: 'Concern for septic arthritis',
