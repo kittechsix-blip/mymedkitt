@@ -2893,7 +2893,7 @@ const METHADONE = {
     genericName: 'Methadone hydrochloride',
     drugClass: 'Full opioid agonist (mu receptor)',
     route: 'PO/IM',
-    indications: ['Opioid withdrawal — acute management', 'Opioid use disorder — maintenance'],
+    indications: ['Opioid withdrawal — acute management', 'Opioid use disorder — maintenance', 'ED methadone — guest dose', 'ED methadone — initiation', 'ED methadone — unverified dose'],
     dosing: [
         {
             indication: 'Opioid withdrawal — acute management',
@@ -3582,6 +3582,47 @@ const OXYMETAZOLINE = {
     citations: [
         'Tunkel DE, et al. Clinical Practice Guideline: Nosebleed (Epistaxis). Otolaryngol Head Neck Surg. 2020;162(1_suppl):S1-S38.',
         'ALiEM. Epistaxis Management in the Emergency Department. aliem.com. 2024.',
+    ],
+};
+const OSELTAMIVIR = {
+    id: 'oseltamivir',
+    name: 'Oseltamivir (Tamiflu)',
+    genericName: 'Oseltamivir phosphate',
+    drugClass: 'Neuraminidase inhibitor (antiviral)',
+    route: 'PO',
+    indications: ['Influenza treatment', 'Influenza-associated myositis', 'Influenza prophylaxis'],
+    dosing: [
+        {
+            indication: 'Influenza treatment (Adult)',
+            regimen: '75 mg PO BID x 5 days. Start within 48 hours of symptom onset for best efficacy. May still provide benefit in severe cases if started after 48 hours.',
+        },
+        {
+            indication: 'Influenza treatment (Pediatric)',
+            regimen: 'Weight-based dosing x 5 days:\n<15 kg: 30 mg BID\n15-23 kg: 45 mg BID\n23-40 kg: 60 mg BID\n>40 kg: 75 mg BID\n\nStart within 48 hours of symptom onset.',
+            weightCalc: [
+                { dosePerKg: 3, unit: 'mg', maxDose: 75, label: 'Approximate dose' },
+            ],
+        },
+        {
+            indication: 'Influenza prophylaxis',
+            regimen: '75 mg PO daily x 10 days (adults), or weight-based once daily (pediatric). For household contacts of confirmed influenza.',
+        },
+    ],
+    contraindications: [
+        'Severe hypersensitivity to oseltamivir',
+    ],
+    cautions: [
+        'Reduce dose in renal impairment (CrCl 30-60: 30 mg BID; CrCl 10-30: 30 mg daily)',
+        'Neuropsychiatric events reported rarely (mostly in pediatric patients)',
+        'Efficacy reduced if started >48h from symptom onset in uncomplicated illness',
+        'Does not replace annual influenza vaccination',
+    ],
+    monitoring: 'Clinical improvement. Renal function if CKD. Monitor for neuropsychiatric symptoms in pediatric patients.',
+    notes: 'In viral myositis secondary to influenza, oseltamivir was given to all hospitalized patients in the 2024-2025 BACM study. May reduce disease severity even in complicated influenza. Consider treatment even if >48h in hospitalized or high-risk patients. Annual vaccination remains primary prevention strategy.',
+    citations: [
+        'Karapiperis D, et al. Influenza-Associated Benign Acute Childhood Myositis During the 2024-2025 Season. Children. 2025;12(10):1333.',
+        'CDC. Influenza Antiviral Medications: Summary for Clinicians. Updated 2024.',
+        'Dobson J, et al. Oseltamivir treatment for influenza in adults: a meta-analysis. Lancet. 2015;385:1729-1737.',
     ],
 };
 const OXYTOCIN = {
@@ -5084,6 +5125,50 @@ const HYDROCORTISONE = {
         'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. JCEM. 2016;101(2):364-389.',
         'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
         'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.',
+    ],
+};
+const IBUPROFEN = {
+    id: 'ibuprofen',
+    name: 'Ibuprofen (Motrin, Advil)',
+    genericName: 'Ibuprofen',
+    drugClass: 'NSAID (nonsteroidal anti-inflammatory)',
+    route: 'PO',
+    indications: ['Viral myositis pain', 'Benign acute childhood myositis', 'Fever', 'Mild-moderate pain', 'Dysmenorrhea'],
+    dosing: [
+        {
+            indication: 'Viral myositis / BACM pain (Pediatric)',
+            regimen: '10 mg/kg PO q6-8h PRN pain (max 400 mg/dose, 40 mg/kg/day or 2400 mg/day). In BACM, ibuprofen use in the ED was associated with decreased hospitalization rates. Encourage adequate hydration.',
+            weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 400 },
+        },
+        {
+            indication: 'Pain / Fever (Adult)',
+            regimen: '400-600 mg PO q6-8h PRN (max 3200 mg/day). Take with food to reduce GI upset.',
+        },
+        {
+            indication: 'Dysmenorrhea',
+            regimen: '400 mg PO q4-6h PRN, starting at onset of menses. Max 3200 mg/day.',
+        },
+    ],
+    contraindications: [
+        'Active GI bleeding or peptic ulcer disease',
+        'Severe renal impairment (CKD stage 4-5)',
+        'Third trimester pregnancy (risk of premature closure of ductus arteriosus)',
+        'NSAID hypersensitivity or aspirin-exacerbated respiratory disease',
+        'Post-CABG surgery (within 10-14 days)',
+    ],
+    cautions: [
+        'Dehydration (increased renal risk)',
+        'Heart failure (fluid retention)',
+        'Concurrent anticoagulation (increased bleeding risk)',
+        'History of GI ulcers',
+        'Elderly patients',
+        'Use caution if concern for rhabdomyolysis progression',
+    ],
+    monitoring: 'Renal function if prolonged use. GI symptoms. Blood pressure in hypertensive patients.',
+    notes: 'First-line analgesic for BACM with CK <5,000 U/L. In a large pediatric study, ibuprofen use in the ED decreased hospitalization risk. Ensure adequate oral hydration when using for viral myositis to maintain renal perfusion.',
+    citations: [
+        'Rosenberg T, et al. Management and outcome of benign acute childhood myositis in pediatric emergency department. Ital J Pediatr. 2021;47:54.',
+        'Magee CC, et al. Benign acute childhood myositis: a retrospective cohort study. Front Pediatr. 2025;13:1653651.',
     ],
 };
 const KETOROLAC = {
@@ -7840,6 +7925,7 @@ export const ALL_DRUGS = [
     HYDROMORPHONE,
     HYPERTONIC_SALINE,
     HYDROXOCOBALAMIN,
+    IBUPROFEN,
     IDARUCIZUMAB,
     ICATIBANT,
     ISONIAZID,
@@ -7886,6 +7972,7 @@ export const ALL_DRUGS = [
     OLANZAPINE,
     ONDANSETRON,
     ORAL_UREA,
+    OSELTAMIVIR,
     OXYMETAZOLINE,
     OXYTOCIN,
     PANTOPRAZOLE,

@@ -9033,6 +9033,45 @@ const DM_ORAL_DISCHARGE = {
     ],
 };
 // -------------------------------------------------------------------
+// ED Methadone Info Pages
+// -------------------------------------------------------------------
+const ED_METHADONE_SUMMARY = {
+    id: 'ed-methadone-summary',
+    title: 'ED Methadone Steps Summary',
+    subtitle: 'Quick Reference - Bridging, 72-Hour Rule, OTP Linkage',
+    sections: [
+        {
+            heading: '1. Identify Clinical Scenario',
+            body: '- [Guest dosing: OTP patient who missed their clinic](#/node/meth-guest-verify)\n- [Initiation: New patient with OUD, not on methadone](#/node/meth-init-screen)\n- [Unclear dose: Patient claims methadone but cannot verify](#/node/meth-unclear-dose)\n- [Inpatient bridging: Hospitalized maintenance patient](#/node/meth-inpatient)',
+        },
+        {
+            heading: '2. Dose Verification (Critical)',
+            body: '- **Always verify dose with OTP before administering claimed dose**\n- Call the OTP directly (patient should have contact info)\n- Confirm: enrollment status, last dose date, daily dose\n- **If unverified:** Give conservative 30 mg dose regardless of claimed dose\n- [Risk: overstatement can lead to fatal respiratory depression](#/node/meth-unclear-dose)',
+        },
+        {
+            heading: '3. 72-Hour Rule (21 CFR 1306.07b)',
+            body: '- Any DEA-registered provider may administer or dispense up to 3-day supply\n- **Purpose:** Emergency withdrawal management while arranging OTP linkage\n- **2023 Update:** May now dispense (provide take-home) not just administer\n- [Initiation: 30 mg PO Day 1, may add 10 mg if COWS >= 13 (max 40 mg)](#/node/meth-init-protocol)\n- Days 2-3: 40 mg PO daily\n- **OTP appointment required within 72 hours**',
+        },
+        {
+            heading: '4. QTc Monitoring',
+            body: '- [ECG not required for single dose <= 40 mg in healthy patient](#/node/meth-qtc-risk)\n- **Get ECG if:** dose >100 mg/day, QT-prolonging drugs, cardiac history, electrolyte abnormalities\n- QTc < 450 ms: Low risk\n- QTc 450-499 ms: Moderate risk (discuss, monitor)\n- QTc >= 500 ms: High risk (avoid methadone if possible)',
+        },
+        {
+            heading: '5. Monitoring & Safety',
+            body: '- [Post-dose: RR q15-30 min x 2h, SpO2, sedation level, COWS](#/node/meth-monitoring)\n- First dose observation: minimum 2-4 hours\n- Guest dosing (verified): 30 minutes minimum\n- **Red flags:** RR <10, SpO2 <92%, excessive sedation\n- [Respiratory depression: Naloxone 0.04-0.4 mg IV titrated to RR](#/node/meth-resp-depression)',
+        },
+        {
+            heading: '6. Disposition & OTP Linkage',
+            body: '- [Discharge with OTP appointment within 72 hours](#/node/meth-discharge)\n- Provide naloxone kit\n- Return precautions: difficulty breathing, excessive drowsiness, palpitations\n- SAMHSA OTP Locator: 1-800-662-4357\n- [Document 72-hour rule use in chart](#/node/meth-documentation)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Code of Federal Regulations. Title 21, Part 1306.07(b) - Administering or dispensing of narcotic drugs.' },
+        { num: 2, text: 'Brown Emergency Medicine. ED Methadone Guideline. September 2024.' },
+        { num: 3, text: 'Calcaterra SL, et al. ED Utilization of the Methadone 72-Hour Rule. Am J Emerg Med. 2025;87:78-83.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -9301,6 +9340,7 @@ export const INFO_PAGES = {
     'comb-sedation-table': COMB_SEDATION_TABLE,
     'comb-restraint-protocol': COMB_RESTRAINT_PROTOCOL,
     'comb-special-pops': COMB_SPECIAL_POPS,
+    'ed-methadone-summary': ED_METHADONE_SUMMARY,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

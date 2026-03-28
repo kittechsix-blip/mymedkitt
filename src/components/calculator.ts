@@ -14239,7 +14239,39 @@ const HFNC_ESCALATION_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// McMahon Score Calculator (Rhabdomyolysis AKI Risk)
+// -------------------------------------------------------------------
+
+const MCMAHON_RHABDO_CALCULATOR: CalculatorDefinition = {
+  id: 'mcmahon-rhabdo',
+  title: 'McMahon Score',
+  subtitle: 'Rhabdomyolysis AKI/RRT Risk',
+  description: 'Predicts risk of AKI requiring renal replacement therapy (dialysis) or mortality in rhabdomyolysis.',
+  fields: [
+    { name: 'age', label: 'Age ≥70 years', type: 'toggle', points: 2 },
+    { name: 'female', label: 'Female sex', type: 'toggle', points: 1 },
+    { name: 'ck', label: 'Initial CK >40,000 U/L', type: 'toggle', points: 2 },
+    { name: 'phos', label: 'Initial phosphate >4.0 mg/dL', type: 'toggle', points: 2 },
+    { name: 'ca', label: 'Initial calcium <7.5 mg/dL', type: 'toggle', points: 2 },
+    { name: 'cr', label: 'Initial creatinine elevated', type: 'toggle', points: 2, description: 'Above normal limit (>1.3 M / >1.1 F)' },
+    { name: 'bicarb', label: 'Initial bicarbonate <19 mEq/L', type: 'toggle', points: 2 },
+    { name: 'etiology', label: 'Cause NOT seizure, syncope, exercise, statin, or myositis', type: 'toggle', points: 3, description: 'Higher risk etiologies: trauma, crush, drugs' },
+  ],
+  results: [
+    { min: 0, max: 6, label: 'Low Risk', risk: 'Low AKI/RRT Risk', mortality: 'Death or RRT: <3%', colorVar: '--color-primary' },
+    { min: 6, max: 10, label: 'Moderate Risk', risk: 'Moderate AKI/RRT Risk', mortality: 'Death or RRT: 8-10%', colorVar: '--color-warning' },
+    { min: 10, max: Infinity, label: 'High Risk', risk: 'High AKI/RRT Risk', mortality: 'Death or RRT: >50%', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥6 predicts increased risk of AKI requiring RRT or death. Consider ICU admission.',
+  citations: [
+    'McMahon GM, et al. A risk prediction score for kidney failure or mortality in rhabdomyolysis. JAMA Intern Med. 2013;173(19):1821-8.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Rhabdomyolysis
+  'mcmahon-rhabdo': MCMAHON_RHABDO_CALCULATOR,
   // HFNC
   'rox-index': ROX_INDEX_CALCULATOR,
   'hfnc-settings': HFNC_SETTINGS_CALCULATOR,
@@ -14460,6 +14492,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'wses-pelvic': WSES_PELVIC_CALCULATOR,
   'urethral-injury-risk': URETHRAL_INJURY_RISK_CALCULATOR,
   'pelvic-hemorrhage-source': PELVIC_HEMORRHAGE_SOURCE_CALCULATOR,
+  // ILE Dosing (alias for intralipid tree)
+  'ile-dosing': BB_INTRALIPID_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

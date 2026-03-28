@@ -531,6 +531,22 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/aortic-dissection.js');
       return { nodes: m.AORTIC_DISSECTION_NODES, entryNodeId: 'dissect-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_DISSECTION_MODULE_LABELS, citations: m.AORTIC_DISSECTION_CITATIONS };
     },
+    'intralipid': async () => {
+      const m = await import('../data/trees/intralipid.js');
+      return { nodes: m.INTRALIPID_NODES, entryNodeId: 'ile-start', categoryId: 'pharmacist', moduleLabels: m.INTRALIPID_MODULE_LABELS, citations: m.INTRALIPID_CITATIONS };
+    },
+    'rhabdomyolysis': async () => {
+      const m = await import('../data/trees/rhabdomyolysis.js');
+      return { nodes: m.RHABDOMYOLYSIS_NODES, entryNodeId: 'rhabdo-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.RHABDOMYOLYSIS_MODULE_LABELS, citations: m.RHABDOMYOLYSIS_CITATIONS };
+    },
+    'viral-myositis': async () => {
+      const m = await import('../data/trees/viral-myositis.js');
+      return { nodes: m.VIRAL_MYOSITIS_NODES, entryNodeId: 'vm-start', categoryId: 'pediatrics', moduleLabels: m.VIRAL_MYOSITIS_MODULE_LABELS, citations: m.VIRAL_MYOSITIS_CITATIONS };
+    },
+    'ed-methadone': async () => {
+      const m = await import('../data/trees/ed-methadone.js');
+      return { nodes: m.ED_METHADONE_NODES, entryNodeId: 'meth-start', categoryId: 'emergency-medicine', moduleLabels: m.ED_METHADONE_MODULE_LABELS, citations: m.ED_METHADONE_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

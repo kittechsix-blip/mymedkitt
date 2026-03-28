@@ -175,6 +175,10 @@ const TREE_REGISTRY = {
   'nail-bed-injuries':    { prefix: 'NAIL_BED_INJURIES',      entryNodeId: 'nail-start',     categoryId: 'procedures' },
   'eclampsia':            { prefix: 'ECLAMPSIA',              entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn' },
   'aortic-dissection':    { prefix: 'AORTIC_DISSECTION',      entryNodeId: 'dissect-start',  categoryId: 'cardiology' },
+  'intralipid':           { prefix: 'INTRALIPID',            entryNodeId: 'ile-start',      categoryId: 'pharmacist' },
+  'rhabdomyolysis':       { prefix: 'RHABDOMYOLYSIS',        entryNodeId: 'rhabdo-start',   categoryId: 'nephro-rheum-endo' },
+  'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
+  'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {
@@ -197,6 +201,8 @@ const CROSS_LISTINGS = {
   'delirium':         [{ categoryId: 'emergency-medicine' }],
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
   'sepsis':           [{ categoryId: 'critical-care' }],
+  'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
+  'ed-methadone':     [{ categoryId: 'toxicology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

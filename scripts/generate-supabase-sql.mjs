@@ -135,6 +135,10 @@ const TREE_REGISTRY = {
   'myasthenia-gravis':    { prefix: 'MYASTHENIA_GRAVIS',     entryNodeId: 'mg-start',       categoryId: 'neurology' },
   'botulism':             { prefix: 'BOTULISM',              entryNodeId: 'bot-start',      categoryId: 'neurology' },
   'ecmo':                 { prefix: 'ECMO',                  entryNodeId: 'ecmo-start',     categoryId: 'critical-care' },
+  'intralipid':           { prefix: 'INTRALIPID',            entryNodeId: 'ile-start',      categoryId: 'pharmacist' },
+  'rhabdomyolysis':       { prefix: 'RHABDOMYOLYSIS',        entryNodeId: 'rhabdo-start',   categoryId: 'nephro-rheum-endo' },
+  'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
+  'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -161,6 +165,8 @@ const CROSS_LISTINGS = {
   'sepsis':           [{ categoryId: 'critical-care' }],
   'opioid-withdrawal': [{ categoryId: 'toxicology' }],
   'tuberculosis':      [{ categoryId: 'emergency-medicine' }],
+  'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
+  'ed-methadone':     [{ categoryId: 'toxicology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

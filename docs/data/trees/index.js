@@ -66,6 +66,10 @@ export { PEDS_STEC_HUS_NODES, PEDS_STEC_HUS_MODULE_LABELS, PEDS_STEC_HUS_CITATIO
 export { NAIL_BED_INJURIES_NODES, NAIL_BED_INJURIES_MODULE_LABELS, NAIL_BED_INJURIES_CITATIONS } from './nail-bed-injuries';
 export { ECLAMPSIA_NODES, ECLAMPSIA_MODULE_LABELS, ECLAMPSIA_CITATIONS } from './eclampsia';
 export { AORTIC_DISSECTION_NODES, AORTIC_DISSECTION_MODULE_LABELS, AORTIC_DISSECTION_CITATIONS } from './aortic-dissection';
+export { INTRALIPID_NODES, INTRALIPID_MODULE_LABELS, INTRALIPID_CITATIONS } from './intralipid';
+export { RHABDOMYOLYSIS_NODES, RHABDOMYOLYSIS_MODULE_LABELS, RHABDOMYOLYSIS_CITATIONS } from './rhabdomyolysis';
+export { VIRAL_MYOSITIS_NODES, VIRAL_MYOSITIS_MODULE_LABELS, VIRAL_MYOSITIS_CITATIONS } from './viral-myositis';
+export { ED_METHADONE_NODES, ED_METHADONE_MODULE_LABELS, ED_METHADONE_CITATIONS } from './ed-methadone';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**
