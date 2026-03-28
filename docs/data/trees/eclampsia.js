@@ -13,6 +13,9 @@ export const ECLAMPSIA_NODES = [
         title: 'Eclampsia Overview',
         body: '**Eclampsia = new-onset tonic-clonic seizures in a patient with preeclampsia.** [1,2]\n\n**Definition requirements:** [1]\n- Pregnancy ≥20 weeks gestation OR postpartum\n- Generalized tonic-clonic seizure\n- Absence of other cause (epilepsy, intracranial pathology)\n\n**Timing of eclampsia:** [2]\n- Antepartum: 38-53%\n- Intrapartum: 18-36%\n- Postpartum: 11-44% (most within 48h, can occur up to 4 weeks)\n\n**Key epidemiology:**\n- Incidence: 1.6-10 per 10,000 deliveries\n- Maternal mortality: 0-1.8% (developed countries)\n- Major cause of maternal and perinatal morbidity/mortality worldwide\n\n**Risk factors:**\n- Nulliparity\n- Multiple gestation\n- Extremes of maternal age (<20 or >35)\n- Pre-existing hypertension, renal disease, diabetes\n- Previous preeclampsia/eclampsia\n- Inadequate prenatal care',
         citation: [1, 2],
+        calculatorLinks: [
+            { id: 'map-calculator', label: 'MAP Calculator' },
+        ],
         next: 'eclampsia-preeclampsia',
     },
     {
@@ -77,8 +80,11 @@ export const ECLAMPSIA_NODES = [
         type: 'info',
         module: 2,
         title: 'Magnesium Loading Dose',
-        body: '**Magnesium sulfate is the FIRST-LINE treatment for eclamptic seizures.** [1,4,5]\n\n**Loading dose:**\n- **4-6g IV over 15-20 minutes**\n- Most protocols: 4g in 100mL NS over 15-20 min\n- If seizure ongoing: give 4g IV push over 5 minutes\n\n**Magnesium works because:** [5]\n- Cerebral vasodilation\n- NMDA receptor antagonism\n- Calcium channel blockade\n- Decreased acetylcholine release\n\n**Why magnesium over benzodiazepines:** [4]\n- Cochrane review: Mag reduces recurrent seizures better than phenytoin or diazepam\n- Prevents eclampsia in severe preeclampsia better than phenytoin\n- Lower maternal mortality\n\n**If already on magnesium when seizure occurs:** [1]\n- Give additional **2g IV bolus over 3-5 minutes**\n- Check magnesium level\n- Consider other etiologies if seizing on therapeutic mag\n\n**Mixing:** 4g MgSO4 = 8mL of 50% solution OR 16mL of 25% solution',
+        body: '**[Magnesium sulfate](#/drug/magnesium-sulfate/eclampsia) is the FIRST-LINE treatment for eclamptic seizures.** [1,4,5]\n\n**Loading dose:**\n- **4-6g IV over 15-20 minutes**\n- Most protocols: 4g in 100mL NS over 15-20 min\n- If seizure ongoing: give 4g IV push over 5 minutes\n\n**Magnesium works because:** [5]\n- Cerebral vasodilation\n- NMDA receptor antagonism\n- Calcium channel blockade\n- Decreased acetylcholine release\n\n**Why magnesium over benzodiazepines:** [4]\n- Cochrane review: Mag reduces recurrent seizures better than phenytoin or diazepam\n- Prevents eclampsia in severe preeclampsia better than phenytoin\n- Lower maternal mortality\n\n**If already on magnesium when seizure occurs:** [1]\n- Give additional **2g IV bolus over 3-5 minutes**\n- Check magnesium level\n- Consider other etiologies if seizing on therapeutic mag\n\n**Mixing:** 4g MgSO4 = 8mL of 50% solution OR 16mL of 25% solution',
         citation: [1, 4, 5],
+        calculatorLinks: [
+            { id: 'map-calculator', label: 'MAP Calculator' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'Magnesium Sulfate',
@@ -165,8 +171,11 @@ export const ECLAMPSIA_NODES = [
         type: 'info',
         module: 3,
         title: 'Labetalol Protocol',
-        body: '**Labetalol is first-line for severe hypertension in pregnancy.** [1,6]\n\n**Mechanism:**\n- Combined alpha and beta blocker (1:7 ratio)\n- Reduces SVR without reducing cardiac output\n- Does not reduce uteroplacental blood flow\n\n**IV Labetalol escalating protocol:** [6]\n\n| Dose | Wait | If BP still ≥160/110 |\n|------|------|----------------------|\n| 20mg IV | 10 min | Give next dose |\n| 40mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Switch to hydralazine |\n\n**Maximum:** 300mg total in escalating protocol\n\n**Contraindications:**\n- Asthma/severe reactive airway disease\n- Heart block (2nd or 3rd degree)\n- Decompensated heart failure\n- Bradycardia <60\n\n**Alternative if labetalol contraindicated:** Start with hydralazine',
+        body: '**[Labetalol](#/drug/labetalol/eclampsia) is first-line for severe hypertension in pregnancy.** [1,6]\n\n**Mechanism:**\n- Combined alpha and beta blocker (1:7 ratio)\n- Reduces SVR without reducing cardiac output\n- Does not reduce uteroplacental blood flow\n\n**IV Labetalol escalating protocol:** [6]\n\n| Dose | Wait | If BP still ≥160/110 |\n|------|------|----------------------|\n| 20mg IV | 10 min | Give next dose |\n| 40mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Give next dose |\n| 80mg IV | 10 min | Switch to hydralazine |\n\n**Maximum:** 300mg total in escalating protocol\n\n**Contraindications:**\n- Asthma/severe reactive airway disease\n- Heart block (2nd or 3rd degree)\n- Decompensated heart failure\n- Bradycardia <60\n\n**Alternative if labetalol contraindicated:** Start with hydralazine',
         citation: [1, 6],
+        calculatorLinks: [
+            { id: 'map-calculator', label: 'MAP Calculator' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'Labetalol',

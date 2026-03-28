@@ -13,6 +13,9 @@ export const PEDS_STEC_HUS_NODES = [
         title: 'STEC/HUS Overview',
         body: '**Shiga toxin-producing E. coli (STEC)** is a leading cause of acute kidney injury in children. [1]\n\n**Key epidemiology:**\n- Peak incidence: children <5 years old\n- Most common serotype: O157:H7 (but non-O157 increasing)\n- Seasonal peak: summer months (May-September)\n- 5-15% of STEC cases progress to HUS [1,2]\n\n**HUS Triad:** [2]\n1. **Microangiopathic hemolytic anemia** (MAHA)\n2. **Thrombocytopenia** (<150,000/µL)\n3. **Acute kidney injury** (oliguria, elevated Cr)\n\n**Timeline:**\n- Prodromal diarrhea: Day 0\n- Bloody diarrhea: Days 1-3\n- HUS onset: Days 5-10 (typically Day 7)\n\n**Risk factors for HUS progression:** [1,3]\n- Age <5 years\n- Bloody diarrhea\n- Fever\n- Elevated WBC (>13,000)\n- Antibiotic or antimotility use',
         citation: [1, 2, 3],
+        calculatorLinks: [
+            { id: 'corrected-na', label: 'Corrected Na Calculator' },
+        ],
         next: 'stec-clinical',
     },
     {

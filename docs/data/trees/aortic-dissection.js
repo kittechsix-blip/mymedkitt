@@ -13,6 +13,10 @@ export const AORTIC_DISSECTION_NODES = [
         title: 'Aortic Dissection Overview',
         body: '**Aortic dissection is a tear in the aortic intima with propagation of blood into the media.** [1,2]\n\n**Epidemiology:**\n- Incidence: 2.6-3.5 per 100,000 person-years\n- Male predominance (65%)\n- Peak age: 60-70 years\n- Mortality: 1-2% per hour if untreated (Type A)\n\n**Classifications:** [1]\n\n**Stanford (most commonly used):**\n- **Type A:** Involves ascending aorta (regardless of origin)\n- **Type B:** Does NOT involve ascending aorta\n\n**DeBakey:**\n- **Type I:** Originates in ascending, propagates to descending\n- **Type II:** Confined to ascending aorta\n- **Type III:** Originates distal to left subclavian\n  - IIIa: Confined to descending thoracic\n  - IIIb: Extends into abdominal aorta\n\n**Key point:** Stanford Type A = surgical emergency. Type B = usually medical management.',
         citation: [1, 2],
+        calculatorLinks: [
+            { id: 'add-rs', label: 'ADD-RS Score' },
+            { id: 'aortic-type-guide', label: 'Type A vs B Guide' },
+        ],
         next: 'dissect-risk-factors',
     },
     {
@@ -170,6 +174,10 @@ export const AORTIC_DISSECTION_NODES = [
         title: 'Immediate Management Goals',
         body: '**Goals of initial management:** [1,9]\n\n**1. Pain control:**\n- Reduces sympathetic drive\n- Reduces BP and heart rate\n- IV opioids (morphine, fentanyl)\n\n**2. Heart rate control (first priority):**\n- Target HR <60 bpm\n- Reduces dP/dt (force of aortic wall stress)\n- Beta-blockers are first-line\n\n**3. Blood pressure control:**\n- Target SBP 100-120 mmHg\n- AFTER heart rate controlled\n- Avoid reflex tachycardia from vasodilators\n\n**4. Prevent extension/rupture:**\n- Anti-impulse therapy\n- Avoid anticoagulation (unless clear indication)\n- NPO for possible surgery\n\n**Key concept: Anti-impulse therapy** [9]\n- dP/dt = change in pressure over time\n- Wall stress = pressure × radius / wall thickness\n- Reduce both HR and BP to minimize wall stress\n- Beta-blocker BEFORE vasodilator',
         citation: [1, 9],
+        calculatorLinks: [
+            { id: 'aortic-anti-impulse', label: 'Anti-Impulse Targets' },
+            { id: 'map-calculator', label: 'MAP Calculator' },
+        ],
         next: 'dissect-beta-blocker',
     },
     {
@@ -177,8 +185,11 @@ export const AORTIC_DISSECTION_NODES = [
         type: 'info',
         module: 4,
         title: 'Beta-Blocker Therapy',
-        body: '**Beta-blockers are the cornerstone of anti-impulse therapy.** [1,9]\n\n**Esmolol (preferred for titration):**\n- Bolus: 500 mcg/kg IV over 1 minute\n- Infusion: 50-200 mcg/kg/min\n- Ultra-short acting (t½ 9 minutes)\n- Easy to titrate up/down\n- Stop if proceeding to OR\n\n**Labetalol (alternative):**\n- 20mg IV, then 20-80mg q10min\n- Max 300mg\n- Combined alpha/beta blockade\n- Longer duration (good for stable patients)\n\n**Metoprolol:**\n- 5mg IV q5min, up to 15mg\n- Then 25-50mg PO q6h\n- Longer acting\n\n**Target:**\n- HR <60 bpm\n- Adequate dosing before adding vasodilator\n\n**Contraindications:**\n- Severe bradycardia\n- AV block\n- Acute heart failure (relative)\n- Severe AR with hemodynamic compromise\n- Cocaine-induced (relative - use cautiously)',
+        body: '**Beta-blockers are the cornerstone of anti-impulse therapy.** [1,9]\n\n**[Esmolol](#/drug/esmolol/dissection) (preferred for titration):**\n- Bolus: 500 mcg/kg IV over 1 minute\n- Infusion: 50-200 mcg/kg/min\n- Ultra-short acting (t½ 9 minutes)\n- Easy to titrate up/down\n- Stop if proceeding to OR\n\n**[Labetalol](#/drug/labetalol/dissection) (alternative):**\n- 20mg IV, then 20-80mg q10min\n- Max 300mg\n- Combined alpha/beta blockade\n- Longer duration (good for stable patients)\n\n**Metoprolol:**\n- 5mg IV q5min, up to 15mg\n- Then 25-50mg PO q6h\n- Longer acting\n\n**Target:**\n- HR <60 bpm\n- Adequate dosing before adding vasodilator\n\n**Contraindications:**\n- Severe bradycardia\n- AV block\n- Acute heart failure (relative)\n- Severe AR with hemodynamic compromise\n- Cocaine-induced (relative - use cautiously)',
         citation: [1, 9],
+        calculatorLinks: [
+            { id: 'aortic-anti-impulse', label: 'Anti-Impulse Targets' },
+        ],
         treatment: {
             firstLine: {
                 drug: 'Esmolol',
