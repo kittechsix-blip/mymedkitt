@@ -70,6 +70,7 @@ export { INTRALIPID_NODES, INTRALIPID_MODULE_LABELS, INTRALIPID_CITATIONS } from
 export { RHABDOMYOLYSIS_NODES, RHABDOMYOLYSIS_MODULE_LABELS, RHABDOMYOLYSIS_CITATIONS } from './rhabdomyolysis';
 export { VIRAL_MYOSITIS_NODES, VIRAL_MYOSITIS_MODULE_LABELS, VIRAL_MYOSITIS_CITATIONS } from './viral-myositis';
 export { ED_METHADONE_NODES, ED_METHADONE_MODULE_LABELS, ED_METHADONE_CITATIONS } from './ed-methadone';
+export { CVST_NODES, CVST_MODULE_LABELS, CVST_CITATIONS } from './cvst';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**

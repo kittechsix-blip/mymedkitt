@@ -14269,7 +14269,63 @@ const MCMAHON_RHABDO_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// CVST Calculators
+// -------------------------------------------------------------------
+
+const CVT_GS_CALCULATOR: CalculatorDefinition = {
+  id: 'cvt-gs',
+  title: 'CVT-GS Score',
+  subtitle: 'CVT Grading Scale for 30-Day Mortality',
+  description: 'The CVT Grading Scale predicts 30-day mortality in patients with cerebral venous thrombosis. Validated with 91.6% accuracy.',
+  fields: [
+    { name: 'lesion-6cm', label: 'Parenchymal lesion >6 cm', type: 'toggle', points: 3, description: 'Venous infarction or hemorrhage >6 cm' },
+    { name: 'bilateral-babinski', label: 'Bilateral Babinski signs', type: 'toggle', points: 3, description: 'Bilateral extensor plantar responses' },
+    { name: 'coma', label: 'Coma', type: 'toggle', points: 3, description: 'GCS ≤8, unresponsive' },
+    { name: 'male', label: 'Male sex', type: 'toggle', points: 2 },
+    { name: 'hemorrhage', label: 'Parenchymal hemorrhage', type: 'toggle', points: 2, description: 'Hemorrhagic transformation present' },
+    { name: 'stupor', label: 'Stupor', type: 'toggle', points: 2, description: 'Responds only to vigorous stimulation' },
+    { name: 'somnolence', label: 'Somnolence', type: 'toggle', points: 1, description: 'Drowsy but arousable' },
+  ],
+  results: [
+    { min: 0, max: 3, label: 'Mild', risk: 'Low 30-Day Mortality Risk', mortality: '30-day mortality: 1.1%', colorVar: '--color-primary' },
+    { min: 3, max: 8, label: 'Moderate', risk: 'Moderate 30-Day Mortality Risk', mortality: '30-day mortality: 19.6%', colorVar: '--color-warning' },
+    { min: 8, max: Infinity, label: 'Severe', risk: 'High 30-Day Mortality Risk', mortality: '30-day mortality: 61.4%', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥3 indicates increased mortality risk. Consider ICU admission and aggressive management.',
+  citations: [
+    'Aguiar de Sousa D, et al. A practical score for prediction of outcome after cerebral venous thrombosis. Front Neurol. 2018;9:882.',
+  ],
+};
+
+const ISCVT_RS_CALCULATOR: CalculatorDefinition = {
+  id: 'iscvt-rs',
+  title: 'ISCVT Risk Score',
+  subtitle: 'International Study on CVT Risk Score',
+  description: 'The ISCVT Risk Score predicts poor outcome (death or dependence) in cerebral venous thrombosis based on the International Study on Cerebral Vein and Dural Sinus Thrombosis.',
+  fields: [
+    { name: 'malignancy', label: 'Active malignancy', type: 'toggle', points: 2, description: 'Current cancer diagnosis' },
+    { name: 'coma', label: 'Coma at presentation', type: 'toggle', points: 2, description: 'GCS ≤8' },
+    { name: 'deep-vein', label: 'Deep cerebral venous system thrombosis', type: 'toggle', points: 2, description: 'Internal cerebral veins, vein of Galen, straight sinus' },
+    { name: 'mental-status', label: 'Mental status disturbance', type: 'toggle', points: 1, description: 'Altered consciousness, confusion, encephalopathy' },
+    { name: 'male', label: 'Male sex', type: 'toggle', points: 1 },
+    { name: 'ich', label: 'Intracranial hemorrhage', type: 'toggle', points: 1, description: 'Hemorrhagic infarction or parenchymal bleed' },
+  ],
+  results: [
+    { min: 0, max: 3, label: 'Low Risk', risk: 'Lower Risk of Poor Outcome', mortality: 'Good prognosis expected', colorVar: '--color-primary' },
+    { min: 3, max: 6, label: 'Moderate Risk', risk: 'Moderate Risk of Poor Outcome', mortality: 'Increased risk of death/dependence', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'High Risk', risk: 'High Risk of Poor Outcome', mortality: 'High risk of death or dependence', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥3 indicates high risk of poor outcome. Consider aggressive treatment and close monitoring.',
+  citations: [
+    'Ferro JM, et al. Risk score to predict the outcome of patients with cerebral vein and dural sinus thrombosis. Stroke. 2009;40:2129-2134.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // CVST
+  'cvt-gs': CVT_GS_CALCULATOR,
+  'iscvt-rs': ISCVT_RS_CALCULATOR,
   // Rhabdomyolysis
   'mcmahon-rhabdo': MCMAHON_RHABDO_CALCULATOR,
   // HFNC

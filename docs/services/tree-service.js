@@ -493,6 +493,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/ed-methadone.js');
             return { nodes: m.ED_METHADONE_NODES, entryNodeId: 'meth-start', categoryId: 'emergency-medicine', moduleLabels: m.ED_METHADONE_MODULE_LABELS, citations: m.ED_METHADONE_CITATIONS };
         },
+        'cvst': async () => {
+            const m = await import('../data/trees/cvst.js');
+            return { nodes: m.CVST_NODES, entryNodeId: 'cvst-start', categoryId: 'emergency-medicine', moduleLabels: m.CVST_MODULE_LABELS, citations: m.CVST_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -139,6 +139,7 @@ const TREE_REGISTRY = {
   'rhabdomyolysis':       { prefix: 'RHABDOMYOLYSIS',        entryNodeId: 'rhabdo-start',   categoryId: 'nephro-rheum-endo' },
   'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
   'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
+  'cvst':                 { prefix: 'CVST',                  entryNodeId: 'cvst-start',     categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -167,6 +168,7 @@ const CROSS_LISTINGS = {
   'tuberculosis':      [{ categoryId: 'emergency-medicine' }],
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
   'ed-methadone':     [{ categoryId: 'toxicology' }],
+  'cvst':             [{ categoryId: 'neurology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

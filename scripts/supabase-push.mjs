@@ -179,6 +179,7 @@ const TREE_REGISTRY = {
   'rhabdomyolysis':       { prefix: 'RHABDOMYOLYSIS',        entryNodeId: 'rhabdo-start',   categoryId: 'nephro-rheum-endo' },
   'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
   'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
+  'cvst':                 { prefix: 'CVST',                  entryNodeId: 'cvst-start',     categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {
@@ -203,6 +204,7 @@ const CROSS_LISTINGS = {
   'sepsis':           [{ categoryId: 'critical-care' }],
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
   'ed-methadone':     [{ categoryId: 'toxicology' }],
+  'cvst':             [{ categoryId: 'neurology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
