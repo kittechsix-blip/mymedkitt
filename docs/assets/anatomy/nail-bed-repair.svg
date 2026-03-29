@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="500" height="350">
+  <defs>
+    <linearGradient id="boneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E6"/>
+      <stop offset="100%" style="stop-color:#E8E0D0"/>
+    </linearGradient>
+    <linearGradient id="nailBedGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFB8A8"/>
+      <stop offset="100%" style="stop-color:#E89888"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFDCC8"/>
+      <stop offset="100%" style="stop-color:#E8C4B0"/>
+    </linearGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#A0A0A0"/>
+      <stop offset="50%" style="stop-color:#E0E0E0"/>
+      <stop offset="100%" style="stop-color:#909090"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="350" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="250" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">Nail Bed Repair with Sutures</text>
+  <text x="250" y="42" font-family="Arial, sans-serif" font-size="11" fill="#666" text-anchor="middle">Close-up View - Nail Plate Removed</text>
+
+  <!-- Surrounding skin/finger outline -->
+  <ellipse cx="250" cy="200" rx="160" ry="130" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="2"/>
+
+  <!-- Nail bed (exposed, pink tissue) -->
+  <path d="M 120 130 Q 120 100 250 90 Q 380 100 380 130 L 380 260 Q 380 290 250 295 Q 120 290 120 260 Z" fill="url(#nailBedGrad)" stroke="#C87060" stroke-width="2"/>
+
+  <!-- Germinal matrix region (slightly darker) -->
+  <path d="M 130 140 Q 130 115 250 105 Q 370 115 370 140 L 370 160 Q 300 155 250 155 Q 200 155 130 160 Z" fill="#FF9080" stroke="#C87060" stroke-width="1"/>
+
+  <!-- Laceration in nail bed (stellate pattern for realism) -->
+  <path d="M 200 170 L 300 230" stroke="#8B4040" stroke-width="2" fill="none"/>
+  <path d="M 220 210 L 280 180" stroke="#8B4040" stroke-width="1.5" fill="none"/>
+
+  <!-- Sutures closing the wound -->
+  <!-- Suture 1 -->
+  <ellipse cx="220" cy="183" rx="8" ry="4" fill="none" stroke="#4040A0" stroke-width="1.5" transform="rotate(-30, 220, 183)"/>
+  <line x1="214" y1="180" x2="226" y2="186" stroke="#4040A0" stroke-width="1"/>
+
+  <!-- Suture 2 -->
+  <ellipse cx="250" cy="200" rx="8" ry="4" fill="none" stroke="#4040A0" stroke-width="1.5" transform="rotate(-30, 250, 200)"/>
+  <line x1="244" y1="197" x2="256" y2="203" stroke="#4040A0" stroke-width="1"/>
+
+  <!-- Suture 3 -->
+  <ellipse cx="280" cy="217" rx="8" ry="4" fill="none" stroke="#4040A0" stroke-width="1.5" transform="rotate(-30, 280, 217)"/>
+  <line x1="274" y1="214" x2="286" y2="220" stroke="#4040A0" stroke-width="1"/>
+
+  <!-- Suture knots -->
+  <circle cx="228" cy="186" r="2" fill="#4040A0"/>
+  <circle cx="258" cy="203" r="2" fill="#4040A0"/>
+  <circle cx="288" cy="220" r="2" fill="#4040A0"/>
+
+  <!-- Needle holder instrument -->
+  <path d="M 380 100 L 420 60 L 430 65 L 395 110 Z" fill="url(#metalGrad)" stroke="#606060" stroke-width="1"/>
+  <path d="M 380 100 L 340 150 L 350 158 L 395 110 Z" fill="url(#metalGrad)" stroke="#606060" stroke-width="1.5"/>
+  <!-- Needle in holder -->
+  <path d="M 340 150 Q 320 165 310 180 Q 305 190 310 195" stroke="#808080" stroke-width="1.5" fill="none"/>
+  <!-- Suture trailing from needle -->
+  <path d="M 310 195 Q 290 200 280 210" stroke="#4040A0" stroke-width="1" fill="none"/>
+
+  <!-- Suture thread spool indication -->
+  <path d="M 280 210 L 250 250 Q 240 260 230 255" stroke="#4040A0" stroke-width="1" fill="none" stroke-dasharray="2,2"/>
+
+  <!-- Labels with leader lines -->
+  <style>
+    .label { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+    .label-bold { font-family: Arial, sans-serif; font-size: 11px; fill: #333; font-weight: bold; }
+  </style>
+
+  <!-- Nail bed label -->
+  <line x1="160" y1="220" x2="60" y2="220" stroke="#666" stroke-width="1"/>
+  <circle cx="160" cy="220" r="2" fill="#666"/>
+  <text x="55" y="215" class="label-bold" text-anchor="end">Exposed</text>
+  <text x="55" y="227" class="label" text-anchor="end">Nail Bed</text>
+
+  <!-- Germinal matrix label -->
+  <line x1="180" y1="140" x2="60" y2="100" stroke="#666" stroke-width="1"/>
+  <circle cx="180" cy="140" r="2" fill="#666"/>
+  <text x="55" y="93" class="label-bold" text-anchor="end">Germinal</text>
+  <text x="55" y="105" class="label" text-anchor="end">Matrix</text>
+
+  <!-- Laceration label -->
+  <line x1="250" y1="165" x2="180" y2="80" stroke="#666" stroke-width="1"/>
+  <circle cx="250" cy="165" r="2" fill="#666"/>
+  <text x="175" y="73" class="label-bold" text-anchor="end">Laceration</text>
+
+  <!-- Suture label -->
+  <line x1="258" y1="203" x2="100" y2="280" stroke="#666" stroke-width="1"/>
+  <circle cx="258" cy="203" r="2" fill="#666"/>
+  <text x="95" y="275" class="label-bold" text-anchor="end">6-0 Chromic</text>
+  <text x="95" y="287" class="label" text-anchor="end">Sutures</text>
+
+  <!-- Needle holder label -->
+  <line x1="400" y1="80" x2="450" y2="60" stroke="#666" stroke-width="1"/>
+  <circle cx="400" cy="80" r="2" fill="#666"/>
+  <text x="455" y="55" class="label-bold" text-anchor="start">Needle</text>
+  <text x="455" y="67" class="label" text-anchor="start">Holder</text>
+
+  <!-- Curved needle label -->
+  <line x1="320" y1="175" x2="400" y2="200" stroke="#666" stroke-width="1"/>
+  <circle cx="320" cy="175" r="2" fill="#666"/>
+  <text x="405" y="195" class="label-bold" text-anchor="start">Curved</text>
+  <text x="405" y="207" class="label" text-anchor="start">Needle</text>
+
+  <!-- Technique note box -->
+  <rect x="50" y="305" width="400" height="30" rx="5" fill="#F0F8FF" stroke="#B0C4DE" stroke-width="1"/>
+  <text x="250" y="323" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">Simple interrupted sutures, 2-3mm apart. Minimal tissue handling.</text>
+
+  <!-- Copyright/source -->
+  <text x="490" y="342" font-family="Arial, sans-serif" font-size="8" fill="#999" text-anchor="end">MedKitt</text>
+</svg>

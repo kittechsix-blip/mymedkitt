@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 350" width="520" height="350">
+  <defs>
+    <linearGradient id="boneGradSag" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E6"/>
+      <stop offset="100%" style="stop-color:#E8E0D0"/>
+    </linearGradient>
+    <linearGradient id="nailPlateGradSag" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8E8E0"/>
+      <stop offset="50%" style="stop-color:#E8C8B8"/>
+      <stop offset="100%" style="stop-color:#D8B8A8"/>
+    </linearGradient>
+    <linearGradient id="germinalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF8070"/>
+      <stop offset="100%" style="stop-color:#FFB8A8"/>
+    </linearGradient>
+    <linearGradient id="sterileGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFB8A8"/>
+      <stop offset="100%" style="stop-color:#FFC8B8"/>
+    </linearGradient>
+    <linearGradient id="skinGradSag" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFDCC8"/>
+      <stop offset="100%" style="stop-color:#E8C4B0"/>
+    </linearGradient>
+    <linearGradient id="subcutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE8D8"/>
+      <stop offset="100%" style="stop-color:#FFDCC8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="520" height="350" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="260" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">Nail Anatomy - Sagittal (Longitudinal) View</text>
+
+  <!-- Subcutaneous tissue / pulp -->
+  <path d="M 30 200 Q 30 280 100 300 L 430 300 Q 490 280 490 220 L 490 200 Z" fill="url(#subcutGrad)" stroke="#D4A88C" stroke-width="1"/>
+
+  <!-- Distal Phalanx Bone - elongated for sagittal view -->
+  <path d="M 60 180
+           Q 60 200 80 210
+           L 80 240
+           Q 80 260 100 265
+           L 420 265
+           Q 450 260 455 240
+           Q 465 210 450 180
+           L 450 160
+           Q 445 130 400 125
+           L 100 125
+           Q 60 130 60 160 Z" fill="url(#boneGradSag)" stroke="#8B7355" stroke-width="1.5"/>
+  <text x="260" y="200" font-family="Arial, sans-serif" font-size="10" fill="#5C4033" text-anchor="middle">Distal Phalanx</text>
+
+  <!-- Extensor tendon insertion (dorsal) -->
+  <path d="M 70 130 L 50 100 Q 45 85 55 80 L 80 80 Q 90 85 85 100 L 70 125 Z" fill="#E8D8C8" stroke="#A08060" stroke-width="1"/>
+
+  <!-- Germinal Matrix (proximal nail bed) -->
+  <path d="M 85 125 L 85 105 Q 120 95 180 95 L 180 125 Z" fill="url(#germinalGrad)" stroke="#C87060" stroke-width="1.5"/>
+
+  <!-- Sterile Matrix (distal nail bed) -->
+  <path d="M 180 125 L 180 95 Q 300 90 420 100 L 420 125 Z" fill="url(#sterileGrad)" stroke="#C87060" stroke-width="1"/>
+
+  <!-- Nail Plate - thick curved structure -->
+  <path d="M 90 105
+           Q 120 85 180 82
+           Q 300 78 420 88
+           L 435 92
+           Q 445 100 445 108
+           L 435 115
+           Q 300 105 180 107
+           Q 120 110 90 120
+           Q 85 115 85 110 Z" fill="url(#nailPlateGradSag)" stroke="#A08070" stroke-width="2"/>
+
+  <!-- Proximal nail fold / Eponychium -->
+  <path d="M 30 160
+           L 30 110
+           Q 35 70 70 55
+           L 110 50
+           Q 125 52 130 65
+           L 125 85
+           Q 110 75 90 80
+           Q 65 90 60 115
+           L 55 160 Z" fill="url(#skinGradSag)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Cuticle fold over nail root -->
+  <path d="M 85 105 Q 75 95 70 90 Q 80 85 95 88 L 90 100 Z" fill="url(#skinGradSag)" stroke="#B0967C" stroke-width="1"/>
+
+  <!-- Hyponychium (skin under free edge) -->
+  <path d="M 435 115
+           L 460 120
+           Q 480 135 480 160
+           L 475 180
+           Q 465 200 450 200
+           L 435 195
+           Q 445 175 445 150
+           Q 445 130 435 115 Z" fill="url(#skinGradSag)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Dorsal skin -->
+  <path d="M 30 160 L 55 160 L 60 115 Q 65 90 90 80 Q 110 75 125 85 L 130 65 Q 125 52 110 50 L 70 55 Q 35 70 30 110 Z" fill="url(#skinGradSag)" stroke="#B0967C" stroke-width="1"/>
+
+  <!-- Ventral skin / pulp pad -->
+  <path d="M 60 240
+           Q 60 290 120 310
+           L 420 310
+           Q 470 290 475 240
+           Q 475 220 465 200
+           L 450 200
+           Q 460 220 460 240
+           Q 460 280 420 295
+           L 120 295
+           Q 75 280 75 240
+           Q 75 220 80 210
+           L 80 240 Z" fill="url(#skinGradSag)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Labels -->
+  <style>
+    .label-sag { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+    .label-sag-bold { font-family: Arial, sans-serif; font-size: 11px; fill: #333; font-weight: bold; }
+    .label-sag-sm { font-family: Arial, sans-serif; font-size: 9px; fill: #555; }
+  </style>
+
+  <!-- Nail Plate label -->
+  <line x1="300" y1="95" x2="300" y2="50" stroke="#666" stroke-width="1"/>
+  <circle cx="300" cy="95" r="2" fill="#666"/>
+  <text x="300" y="45" class="label-sag-bold" text-anchor="middle">Nail Plate</text>
+
+  <!-- Germinal Matrix label -->
+  <line x1="130" y1="110" x2="100" y2="45" stroke="#666" stroke-width="1"/>
+  <circle cx="130" cy="110" r="2" fill="#666"/>
+  <text x="100" y="40" class="label-sag-bold" text-anchor="middle">Germinal Matrix</text>
+
+  <!-- Sterile Matrix label -->
+  <line x1="320" y1="115" x2="380" y2="55" stroke="#666" stroke-width="1"/>
+  <circle cx="320" cy="115" r="2" fill="#666"/>
+  <text x="410" y="50" class="label-sag-bold" text-anchor="middle">Sterile Matrix</text>
+
+  <!-- Eponychium label -->
+  <line x1="50" y1="90" x2="15" y2="60" stroke="#666" stroke-width="1"/>
+  <circle cx="50" cy="90" r="2" fill="#666"/>
+  <text x="15" y="55" class="label-sag-bold" text-anchor="start">Eponychium</text>
+
+  <!-- Proximal Nail Fold label -->
+  <line x1="45" y1="130" x2="5" y2="130" stroke="#666" stroke-width="1"/>
+  <circle cx="45" cy="130" r="2" fill="#666"/>
+  <text x="5" y="120" class="label-sag-bold" text-anchor="start">Proximal</text>
+  <text x="5" y="132" class="label-sag-bold" text-anchor="start">Nail Fold</text>
+
+  <!-- Hyponychium label -->
+  <line x1="465" y1="165" x2="500" y2="140" stroke="#666" stroke-width="1"/>
+  <circle cx="465" cy="165" r="2" fill="#666"/>
+  <text x="505" y="135" class="label-sag-bold" text-anchor="end">Hyponychium</text>
+
+  <!-- Lunula region indicator -->
+  <ellipse cx="140" cy="98" rx="30" ry="6" fill="rgba(255,255,255,0.4)" stroke="none"/>
+  <line x1="140" y1="105" x2="170" y2="55" stroke="#666" stroke-width="1"/>
+  <circle cx="140" cy="105" r="2" fill="#666"/>
+  <text x="195" y="48" class="label-sag-bold" text-anchor="middle">Lunula</text>
+  <text x="195" y="60" class="label-sag-sm" text-anchor="middle">(visible matrix)</text>
+
+  <!-- Distal Phalanx label -->
+  <line x1="260" y1="220" x2="260" y2="260" stroke="#666" stroke-width="1"/>
+  <circle cx="260" cy="220" r="2" fill="#666"/>
+  <text x="260" y="275" class="label-sag-bold" text-anchor="middle">Distal Phalanx</text>
+
+  <!-- Nail Bed bracket -->
+  <path d="M 88 128 L 88 135 L 418 135 L 418 128" fill="none" stroke="#C87060" stroke-width="1.5"/>
+  <text x="253" y="148" class="label-sag-bold" fill="#C87060" text-anchor="middle">Nail Bed</text>
+
+  <!-- Finger pulp label -->
+  <line x1="300" y1="280" x2="340" y2="330" stroke="#666" stroke-width="1"/>
+  <circle cx="300" cy="280" r="2" fill="#666"/>
+  <text x="340" y="342" class="label-sag-bold" text-anchor="middle">Finger Pulp</text>
+
+  <!-- Directional indicators -->
+  <text x="15" y="200" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="start">Proximal</text>
+  <path d="M 15 210 L 45 210 L 40 205 M 45 210 L 40 215" fill="none" stroke="#888" stroke-width="1"/>
+
+  <text x="505" y="200" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="end">Distal</text>
+  <path d="M 505 210 L 475 210 L 480 205 M 475 210 L 480 215" fill="none" stroke="#888" stroke-width="1"/>
+
+  <!-- Copyright -->
+  <text x="510" y="342" font-family="Arial, sans-serif" font-size="8" fill="#999" text-anchor="end">MedKitt</text>
+</svg>

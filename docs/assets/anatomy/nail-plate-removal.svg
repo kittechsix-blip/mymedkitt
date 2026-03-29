@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="500" height="350">
+  <defs>
+    <linearGradient id="boneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E6"/>
+      <stop offset="100%" style="stop-color:#E8E0D0"/>
+    </linearGradient>
+    <linearGradient id="nailPlateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8E8E0"/>
+      <stop offset="50%" style="stop-color:#E8C8B8"/>
+      <stop offset="100%" style="stop-color:#D8B8A8"/>
+    </linearGradient>
+    <linearGradient id="nailBedGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFB8A8"/>
+      <stop offset="100%" style="stop-color:#E89888"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFDCC8"/>
+      <stop offset="100%" style="stop-color:#E8C4B0"/>
+    </linearGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#A0A0A0"/>
+      <stop offset="50%" style="stop-color:#D0D0D0"/>
+      <stop offset="100%" style="stop-color:#909090"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="350" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="250" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">Nail Plate Removal Technique</text>
+  <text x="250" y="42" font-family="Arial, sans-serif" font-size="11" fill="#666" text-anchor="middle">Lateral View</text>
+
+  <!-- Distal Phalanx Bone -->
+  <path d="M 80 200 Q 80 230 110 240 L 380 240 Q 420 235 430 210 Q 435 190 420 175 L 110 175 Q 80 180 80 200 Z" fill="url(#boneGrad)" stroke="#8B7355" stroke-width="1.5"/>
+  <text x="240" y="215" font-family="Arial, sans-serif" font-size="9" fill="#5C4033" text-anchor="middle">Distal Phalanx</text>
+
+  <!-- Nail Bed (on top of bone) -->
+  <path d="M 100 175 L 100 160 Q 200 155 350 158 L 400 165 L 400 175 Z" fill="url(#nailBedGrad)" stroke="#C87060" stroke-width="1"/>
+
+  <!-- Nail plate - partially elevated -->
+  <path d="M 95 158 Q 150 140 250 135 L 280 138 L 280 155 Q 200 150 110 158 Z" fill="url(#nailPlateGrad)" stroke="#A08070" stroke-width="1.5"/>
+  <!-- Elevated portion of nail plate -->
+  <path d="M 280 138 Q 330 125 380 115 Q 410 112 430 120 L 430 145 Q 400 140 350 148 L 280 155 Z" fill="url(#nailPlateGrad)" stroke="#A08070" stroke-width="1.5" transform="rotate(-15, 280, 155)"/>
+
+  <!-- Skin around finger -->
+  <!-- Proximal skin/eponychium -->
+  <path d="M 40 180 L 40 130 Q 50 100 80 95 L 100 92 Q 115 90 120 95 L 100 158 L 80 160 Q 60 165 60 180 Z" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Distal skin (fingertip) -->
+  <path d="M 430 175 L 455 170 Q 475 180 475 210 Q 470 245 440 250 L 430 240 Z" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Bottom skin -->
+  <path d="M 80 240 L 80 260 Q 100 280 250 285 Q 400 280 430 260 L 430 240 Z" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Hemostat/Elevator instrument -->
+  <!-- Handle portion (off screen, just show the working end) -->
+  <path d="M 330 90 L 380 60 L 395 65 L 350 100 Z" fill="url(#metalGrad)" stroke="#606060" stroke-width="1"/>
+  <!-- Working tip under nail -->
+  <path d="M 330 100 L 280 150 L 285 155 L 340 108 Z" fill="url(#metalGrad)" stroke="#606060" stroke-width="1.5"/>
+  <!-- Tip detail -->
+  <ellipse cx="283" cy="152" rx="8" ry="4" fill="#C0C0C0" stroke="#606060" stroke-width="1" transform="rotate(-45, 283, 152)"/>
+
+  <!-- Direction arrow (distal to proximal) -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+    </marker>
+  </defs>
+  <line x1="380" y1="130" x2="310" y2="145" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <text x="360" y="118" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32" font-weight="bold">Direction of</text>
+  <text x="360" y="128" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32" font-weight="bold">movement</text>
+
+  <!-- Labels with leader lines -->
+  <style>
+    .label { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+    .label-bold { font-family: Arial, sans-serif; font-size: 11px; fill: #333; font-weight: bold; }
+  </style>
+
+  <!-- Hemostat label -->
+  <line x1="360" y1="70" x2="420" y2="50" stroke="#666" stroke-width="1"/>
+  <circle cx="360" cy="70" r="2" fill="#666"/>
+  <text x="425" y="45" class="label-bold" text-anchor="start">Freer Elevator</text>
+  <text x="425" y="57" class="label" text-anchor="start">or Hemostat</text>
+
+  <!-- Nail plate label -->
+  <line x1="200" y1="145" x2="150" y2="90" stroke="#666" stroke-width="1"/>
+  <circle cx="200" cy="145" r="2" fill="#666"/>
+  <text x="145" y="83" class="label-bold" text-anchor="end">Nail Plate</text>
+  <text x="145" y="95" class="label" text-anchor="end">(being elevated)</text>
+
+  <!-- Nail bed label -->
+  <line x1="300" y1="168" x2="340" y2="290" stroke="#666" stroke-width="1"/>
+  <circle cx="300" cy="168" r="2" fill="#666"/>
+  <text x="345" y="285" class="label-bold" text-anchor="start">Nail Bed</text>
+
+  <!-- Eponychium label -->
+  <line x1="90" y1="110" x2="40" y2="80" stroke="#666" stroke-width="1"/>
+  <circle cx="90" cy="110" r="2" fill="#666"/>
+  <text x="35" y="73" class="label-bold" text-anchor="end">Eponychium</text>
+
+  <!-- Distal tip label -->
+  <line x1="460" y1="200" x2="485" y2="170" stroke="#666" stroke-width="1"/>
+  <circle cx="460" cy="200" r="2" fill="#666"/>
+  <text x="480" y="162" class="label-bold" text-anchor="end">Fingertip</text>
+
+  <!-- Proximal/Distal orientation -->
+  <text x="70" y="310" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="start">PROXIMAL</text>
+  <line x1="120" y1="307" x2="380" y2="307" stroke="#888" stroke-width="1"/>
+  <polygon points="385,307 375,303 375,311" fill="#888"/>
+  <text x="430" y="310" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="end">DISTAL</text>
+
+  <!-- Instruction text -->
+  <text x="250" y="330" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">Insert instrument under distal nail edge, advance proximally with spreading motion.</text>
+
+  <!-- Copyright/source -->
+  <text x="490" y="342" font-family="Arial, sans-serif" font-size="8" fill="#999" text-anchor="end">MedKitt</text>
+</svg>

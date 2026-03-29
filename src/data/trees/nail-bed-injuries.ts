@@ -23,7 +23,7 @@ export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
     citation: [1, 2],
     images: [
       {
-        src: 'https://teachmeanatomy.info/wp-content/uploads/Anatomy-of-the-Fingernail-Finger-Tip-1024x540.jpg',
+        src: 'assets/anatomy/nail-anatomy-cross-section.svg',
         caption: 'Nail anatomy cross-section showing nail plate, nail bed (germinal and sterile matrix), eponychium, and hyponychium',
         alt: 'Anatomical diagram of fingernail cross-section',
       },
@@ -39,7 +39,7 @@ export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
     citation: [1, 2, 3],
     images: [
       {
-        src: 'https://www.statpearls.com/pictures/getimagecontent/31598',
+        src: 'assets/anatomy/nail-anatomy-sagittal.svg',
         caption: 'Sagittal view showing germinal matrix (proximal) vs sterile matrix (distal) and their clinical significance',
         alt: 'Longitudinal nail anatomy showing germinal and sterile matrix',
       },
@@ -132,7 +132,7 @@ export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
     citation: [1, 5],
     images: [
       {
-        src: 'https://www.aafp.org/dam/AAFP/images/afp/2012/0815/p353-f1.jpg',
+        src: 'assets/anatomy/nail-trephination.svg',
         caption: 'Trephination technique using electrocautery to create drainage hole in nail plate',
         alt: 'Illustration of nail trephination procedure',
       },
@@ -167,7 +167,7 @@ export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
     citation: [1, 3],
     images: [
       {
-        src: 'https://www.statpearls.com/pictures/getimagecontent/31603',
+        src: 'assets/anatomy/nail-plate-removal.svg',
         caption: 'Technique for nail plate removal using hemostat elevation',
         alt: 'Illustration of nail plate removal technique',
       },
@@ -196,7 +196,7 @@ export const NAIL_BED_INJURIES_NODES: DecisionNode[] = [
     citation: [1, 3, 6],
     images: [
       {
-        src: 'https://www.aafp.org/dam/AAFP/images/afp/2012/0815/p353-f3.jpg',
+        src: 'assets/anatomy/nail-bed-repair.svg',
         caption: 'Nail bed laceration repair with fine absorbable sutures',
         alt: 'Illustration showing nail bed suture repair technique',
       },

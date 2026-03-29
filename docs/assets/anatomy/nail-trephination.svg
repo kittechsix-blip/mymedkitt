@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="500" height="350">
+  <defs>
+    <linearGradient id="nailPlateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8E8E0"/>
+      <stop offset="50%" style="stop-color:#E8C8B8"/>
+      <stop offset="100%" style="stop-color:#D8B8A8"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFDCC8"/>
+      <stop offset="100%" style="stop-color:#E8C4B0"/>
+    </linearGradient>
+    <linearGradient id="deviceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#606060"/>
+      <stop offset="50%" style="stop-color:#808080"/>
+      <stop offset="100%" style="stop-color:#505050"/>
+    </linearGradient>
+    <linearGradient id="hematomaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B0000"/>
+      <stop offset="100%" style="stop-color:#4A0000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="350" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="250" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">Nail Trephination Technique</text>
+
+  <!-- Fingertip - dorsal view -->
+  <!-- Finger body -->
+  <ellipse cx="250" cy="220" rx="90" ry="110" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="2"/>
+
+  <!-- Nail plate -->
+  <path d="M 170 160 Q 170 120 250 110 Q 330 120 330 160 L 330 250 Q 330 270 250 275 Q 170 270 170 250 Z" fill="url(#nailPlateGrad)" stroke="#A08070" stroke-width="2"/>
+
+  <!-- Subungual hematoma (dark area under nail) -->
+  <ellipse cx="250" cy="200" rx="55" ry="45" fill="url(#hematomaGrad)" opacity="0.7"/>
+
+  <!-- Cuticle/Eponychium -->
+  <path d="M 165 165 Q 165 130 250 120 Q 335 130 335 165 L 325 155 Q 325 135 250 125 Q 175 135 175 155 Z" fill="url(#skinGrad)" stroke="#B0967C" stroke-width="1.5"/>
+
+  <!-- Electrocautery device -->
+  <rect x="235" y="40" width="30" height="100" rx="5" fill="url(#deviceGrad)" stroke="#404040" stroke-width="1.5"/>
+  <!-- Device tip -->
+  <path d="M 248 140 L 252 140 L 252 175 L 250 180 L 248 175 Z" fill="#C0C0C0" stroke="#404040" stroke-width="1"/>
+  <!-- Device button -->
+  <circle cx="250" cy="75" r="8" fill="#E06060" stroke="#B04040" stroke-width="1"/>
+  <!-- Device label -->
+  <rect x="240" y="90" width="20" height="15" fill="#333"/>
+
+  <!-- Heat/contact indicator at tip -->
+  <circle cx="250" cy="175" r="4" fill="#FF6600" opacity="0.8"/>
+  <circle cx="250" cy="175" r="8" fill="none" stroke="#FF6600" stroke-width="1" opacity="0.5"/>
+
+  <!-- Hole in nail with blood draining -->
+  <circle cx="250" cy="185" r="6" fill="#8B0000"/>
+  <!-- Blood droplets draining -->
+  <ellipse cx="250" cy="195" rx="4" ry="6" fill="#8B0000" opacity="0.9"/>
+  <ellipse cx="248" cy="208" rx="3" ry="4" fill="#8B0000" opacity="0.7"/>
+  <ellipse cx="253" cy="218" rx="2" ry="3" fill="#8B0000" opacity="0.5"/>
+
+  <!-- Labels with leader lines -->
+  <style>
+    .label { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+    .label-bold { font-family: Arial, sans-serif; font-size: 11px; fill: #333; font-weight: bold; }
+  </style>
+
+  <!-- Electrocautery label -->
+  <line x1="265" y1="70" x2="350" y2="50" stroke="#666" stroke-width="1"/>
+  <circle cx="265" cy="70" r="2" fill="#666"/>
+  <text x="355" y="45" class="label-bold" text-anchor="start">Electrocautery</text>
+  <text x="355" y="57" class="label" text-anchor="start">Device</text>
+
+  <!-- Nail plate label -->
+  <line x1="340" y1="200" x2="400" y2="180" stroke="#666" stroke-width="1"/>
+  <circle cx="340" cy="200" r="2" fill="#666"/>
+  <text x="405" y="175" class="label-bold" text-anchor="start">Nail Plate</text>
+
+  <!-- Subungual hematoma label -->
+  <line x1="200" y1="210" x2="100" y2="230" stroke="#666" stroke-width="1"/>
+  <circle cx="200" cy="210" r="2" fill="#666"/>
+  <text x="95" y="225" class="label-bold" text-anchor="end">Subungual</text>
+  <text x="95" y="237" class="label" text-anchor="end">Hematoma</text>
+
+  <!-- Drainage hole label -->
+  <line x1="258" y1="185" x2="380" y2="250" stroke="#666" stroke-width="1"/>
+  <circle cx="258" cy="185" r="2" fill="#666"/>
+  <text x="385" y="245" class="label-bold" text-anchor="start">Drainage</text>
+  <text x="385" y="257" class="label" text-anchor="start">Hole</text>
+
+  <!-- Blood draining label -->
+  <line x1="260" y1="208" x2="380" y2="290" stroke="#666" stroke-width="1"/>
+  <circle cx="260" cy="208" r="2" fill="#666"/>
+  <text x="385" y="285" class="label-bold" text-anchor="start">Blood</text>
+  <text x="385" y="297" class="label" text-anchor="start">Draining</text>
+
+  <!-- Cuticle label -->
+  <line x1="175" y1="145" x2="100" y2="130" stroke="#666" stroke-width="1"/>
+  <circle cx="175" cy="145" r="2" fill="#666"/>
+  <text x="95" y="125" class="label-bold" text-anchor="end">Eponychium</text>
+
+  <!-- Instruction text -->
+  <text x="250" y="320" font-family="Arial, sans-serif" font-size="10" fill="#555" text-anchor="middle">Touch cautery to nail surface until blood wells up. No pressure needed.</text>
+
+  <!-- Copyright/source -->
+  <text x="490" y="342" font-family="Arial, sans-serif" font-size="8" fill="#999" text-anchor="end">MedKitt</text>
+</svg>
