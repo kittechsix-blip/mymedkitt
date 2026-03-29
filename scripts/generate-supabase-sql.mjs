@@ -145,6 +145,8 @@ const TREE_REGISTRY = {
   'brugada-syndrome':     { prefix: 'BRUGADA_SYNDROME',     entryNodeId: 'brugada-start',    categoryId: 'cardiology' },
   'hd-emergencies':       { prefix: 'HD_EMERGENCIES',       entryNodeId: 'hd-start',         categoryId: 'critical-care' },
   'marine-envenomation':  { prefix: 'MARINE_ENVENOMATION',  entryNodeId: 'marine-start',     categoryId: 'toxicology' },
+  'button-battery':       { prefix: 'BUTTON_BATTERY',       entryNodeId: 'battery-start',    categoryId: 'pediatrics' },
+  'nat-screening':        { prefix: 'NAT_SCREENING',        entryNodeId: 'nat-start',        categoryId: 'pediatrics' },
 };
 
 // Cross-listing: which consults appear in multiple categories

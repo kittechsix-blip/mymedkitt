@@ -77,6 +77,8 @@ export { PEDS_SUBMERSION_NODES, PEDS_SUBMERSION_MODULE_LABELS, PEDS_SUBMERSION_C
 export { BRUGADA_SYNDROME_NODES, BRUGADA_SYNDROME_MODULE_LABELS, BRUGADA_SYNDROME_CITATIONS } from './brugada-syndrome';
 export { HD_EMERGENCIES_NODES, HD_EMERGENCIES_MODULE_LABELS, HD_EMERGENCIES_CITATIONS } from './hd-emergencies';
 export { MARINE_ENVENOMATION_NODES, MARINE_ENVENOMATION_MODULE_LABELS, MARINE_ENVENOMATION_CITATIONS } from './marine-envenomation';
+export { BUTTON_BATTERY_NODES, BUTTON_BATTERY_MODULE_LABELS, BUTTON_BATTERY_CITATIONS } from './button-battery';
+export { NAT_SCREENING_NODES, NAT_SCREENING_MODULE_LABELS, NAT_SCREENING_CITATIONS } from './nat-screening';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

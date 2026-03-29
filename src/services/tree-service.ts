@@ -571,6 +571,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/marine-envenomation.js');
       return { nodes: m.MARINE_ENVENOMATION_NODES, entryNodeId: 'marine-start', categoryId: 'toxicology', moduleLabels: m.MARINE_ENVENOMATION_MODULE_LABELS, citations: m.MARINE_ENVENOMATION_CITATIONS };
     },
+    'button-battery': async () => {
+      const m = await import('../data/trees/button-battery.js');
+      return { nodes: m.BUTTON_BATTERY_NODES, entryNodeId: 'battery-start', categoryId: 'pediatrics', moduleLabels: m.BUTTON_BATTERY_MODULE_LABELS, citations: m.BUTTON_BATTERY_CITATIONS };
+    },
+    'nat-screening': async () => {
+      const m = await import('../data/trees/nat-screening.js');
+      return { nodes: m.NAT_SCREENING_NODES, entryNodeId: 'nat-start', categoryId: 'pediatrics', moduleLabels: m.NAT_SCREENING_MODULE_LABELS, citations: m.NAT_SCREENING_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

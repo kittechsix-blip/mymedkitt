@@ -15234,6 +15234,256 @@ const MARINE_ADMISSION_CRITERIA_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Button Battery Risk Stratification Calculator
+// -------------------------------------------------------------------
+const BATTERY_RISK_STRATIFICATION_CALCULATOR = {
+    id: 'battery-risk-stratification',
+    title: 'Battery Risk Stratification',
+    subtitle: 'Button Battery Ingestion',
+    description: 'Risk stratify button battery ingestion based on battery size, patient age, and location.',
+    fields: [
+        {
+            name: 'location',
+            label: 'Battery Location on X-ray',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Esophagus', points: 10 },
+                { label: 'Stomach', points: 3 },
+                { label: 'Distal to stomach', points: 1 },
+            ],
+        },
+        {
+            name: 'size',
+            label: 'Battery Size',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '≥20mm', points: 5 },
+                { label: '15-19mm', points: 3 },
+                { label: '12-14mm', points: 1 },
+                { label: '<12mm', points: 0 },
+            ],
+        },
+        {
+            name: 'age',
+            label: 'Patient Age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<6 years', points: 3 },
+                { label: '6-11 years', points: 1 },
+                { label: '≥12 years', points: 0 },
+            ],
+        },
+        { name: 'symptomatic', label: 'Symptomatic (drooling, dysphagia, pain)', type: 'toggle', points: 5 },
+        { name: 'magnet', label: 'Co-ingested magnet', type: 'toggle', points: 5 },
+    ],
+    results: [
+        { min: 0, max: 3, label: 'Low Risk', risk: 'Low Risk', mortality: 'Home observation with follow-up', colorVar: '--color-primary' },
+        { min: 3, max: 8, label: 'Moderate Risk', risk: 'Moderate Risk', mortality: 'Close monitoring, repeat imaging', colorVar: '--color-warning' },
+        { min: 8, max: Infinity, label: 'High Risk', risk: 'High Risk', mortality: 'Emergent endoscopy consideration', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Esophageal batteries are ALWAYS emergent regardless of score. Score ≥8: High risk. Score 3-7: Moderate. Score <3: Low.',
+    citations: [
+        'National Capital Poison Center. Button Battery Ingestion Triage and Treatment Guideline. 2024.',
+        'Kramer RE, et al. Management of ingested foreign bodies in children. Pediatrics. 2015.',
+    ],
+    computeResult: (values) => {
+        // location: 10=esophageal, 3=gastric, 1=distal
+        // size: 5=≥20mm, 3=15-19mm, 1=12-14mm, 0=<12mm
+        // age: 3=<6y, 1=6-11y, 0=≥12y
+        const location = values['location'];
+        const size = values['size'];
+        const age = values['age'];
+        const symptomatic = values['symptomatic'] ? 5 : 0;
+        const magnet = values['magnet'] ? 5 : 0;
+        const score = location + size + age + symptomatic + magnet;
+        let risk;
+        let action;
+        let colorVar;
+        if (location === 10) { // Esophageal - ALWAYS emergent
+            risk = 'EMERGENT';
+            action = `**ESOPHAGEAL BATTERY — TIME CRITICAL**
+
+• Administer honey (if ≥12mo) or sucralfate every 10 min
+• EMERGENT endoscopic removal (target <2 hours)
+• NPO, IV access
+• Call GI/ENT STAT
+• Battery hotline: **1-800-498-8666**`;
+            colorVar = '--color-danger';
+        }
+        else if (score >= 8) {
+            risk = 'High Risk';
+            action = `**Early Endoscopy Consideration**
+
+• GI consultation
+• Admit for observation
+• Repeat X-ray at 48 hours (if ≥20mm) or Day 4 (if <20mm)
+• Remove if not progressing
+
+**Risk Factors:**
+• Large battery or young age
+• Symptomatic or magnet co-ingestion`;
+            colorVar = '--color-danger';
+        }
+        else if (score >= 3) {
+            risk = 'Moderate Risk';
+            action = `**Close Monitoring Required**
+
+• Repeat X-ray at Day 4
+• Remove endoscopically if still in stomach at Day 4
+• Normal diet/activity
+• Return for: vomiting, pain, bloody stool, fever
+
+**Discharge if:**
+• Asymptomatic
+• Reliable caregiver
+• Follow-up arranged`;
+            colorVar = '--color-warning';
+        }
+        else {
+            risk = 'Low Risk';
+            action = `**Home Observation**
+
+• Normal diet and activity
+• Inspect stools for passage
+• Repeat X-ray only if not passed by Day 10-14
+
+**Return for:**
+• Abdominal pain
+• Vomiting
+• Black/bloody stools
+• Fever`;
+            colorVar = '--color-primary';
+        }
+        return {
+            value: String(score),
+            label: `${risk} (Score: ${score})`,
+            description: action,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// TEN-4-FACESp Calculator for NAT Screening
+// -------------------------------------------------------------------
+const NAT_TEN4_FACESP_CALCULATOR = {
+    id: 'nat-ten4-facesp',
+    title: 'TEN-4-FACESp',
+    subtitle: 'NAT Bruising Screen',
+    description: 'Validated clinical decision rule for identifying abuse in children <4 years with bruising. Sensitivity 96%, Specificity 87%.',
+    fields: [
+        { name: 'torso', label: 'T — Torso bruising (chest, abdomen, back, buttocks, genitalia)', type: 'toggle', points: 1 },
+        { name: 'ear', label: 'E — Ear bruising (pinna or behind ear)', type: 'toggle', points: 1 },
+        { name: 'neck', label: 'N — Neck bruising (front or sides)', type: 'toggle', points: 1 },
+        { name: 'age4mo', label: '4 — Any bruise in infant ≤4.99 months', type: 'toggle', points: 1 },
+        { name: 'frenulum', label: 'F — Frenulum tear (labial or lingual)', type: 'toggle', points: 1 },
+        { name: 'jaw', label: 'A — Angle of jaw bruising', type: 'toggle', points: 1 },
+        { name: 'cheek', label: 'C — Cheek bruising (fleshy part)', type: 'toggle', points: 1 },
+        { name: 'eyelid', label: 'E — Eyelid or periorbital bruising', type: 'toggle', points: 1 },
+        { name: 'subconj', label: 'S — Subconjunctival hemorrhage', type: 'toggle', points: 1 },
+        { name: 'patterned', label: 'p — Patterned bruising (hand, loop, object shape)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'Negative', risk: 'Low Risk', mortality: 'No TEN-4-FACESp criteria met', colorVar: '--color-primary' },
+        { min: 1, max: Infinity, label: 'Positive', risk: 'Increased Abuse Risk', mortality: 'One or more criteria present', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'ANY positive finding indicates increased abuse risk and warrants full NAT workup. Sensitivity 96%, Specificity 87%.',
+    citations: [
+        'Pierce MC, et al. Validation of a clinical decision rule to predict abuse in young children based on bruising characteristics. JAMA Netw Open. 2021;4(4):e215832.',
+        'Maguire SA, et al. TEN-4-FACESp bruising screening tool validation. Arch Dis Child. 2021.',
+    ],
+    computeResult: (values) => {
+        let count = 0;
+        const findings = [];
+        if (values['torso']) {
+            count++;
+            findings.push('Torso bruising');
+        }
+        if (values['ear']) {
+            count++;
+            findings.push('Ear bruising');
+        }
+        if (values['neck']) {
+            count++;
+            findings.push('Neck bruising');
+        }
+        if (values['age4mo']) {
+            count++;
+            findings.push('Bruise in infant ≤4.99 months');
+        }
+        if (values['frenulum']) {
+            count++;
+            findings.push('Frenulum tear');
+        }
+        if (values['jaw']) {
+            count++;
+            findings.push('Angle of jaw bruising');
+        }
+        if (values['cheek']) {
+            count++;
+            findings.push('Cheek bruising');
+        }
+        if (values['eyelid']) {
+            count++;
+            findings.push('Eyelid/periorbital bruising');
+        }
+        if (values['subconj']) {
+            count++;
+            findings.push('Subconjunctival hemorrhage');
+        }
+        if (values['patterned']) {
+            count++;
+            findings.push('Patterned bruising');
+        }
+        let result;
+        let label;
+        let colorVar;
+        if (count === 0) {
+            label = 'TEN-4-FACESp NEGATIVE';
+            result = `**No TEN-4-FACESp criteria present**
+
+This does NOT exclude abuse. Consider full workup if:
+• History inconsistent with injury
+• Non-mobile infant with any bruising
+• Other concerning findings present
+• Clinical suspicion remains
+
+**Document:**
+• Complete physical exam
+• Caregiver explanation
+• Why NAT workup not pursued`;
+            colorVar = '--color-primary';
+        }
+        else {
+            label = `TEN-4-FACESp POSITIVE (${count} criteria)`;
+            result = `**POSITIVE — Initiate NAT Workup**
+
+**Findings:**
+${findings.map(f => `• ${f}`).join('\n')}
+
+**Required Actions:**
+• Complete NAT workup
+• Skeletal survey (if <2 years)
+• Head CT (if <1 year)
+• Labs for bleeding disorders
+• Social work consultation
+• Mandatory CPS report
+• Child abuse pediatrician consult
+
+**Note:** TEN-4-FACESp does NOT distinguish bleeding disorders from abuse — always screen for coagulopathy.`;
+            colorVar = '--color-danger';
+        }
+        return {
+            value: String(count),
+            label,
+            description: result,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Pediatric Submersion
     'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -15485,6 +15735,10 @@ const CALCULATORS = {
     'marine-irukandji-severity': MARINE_IRUKANDJI_SEVERITY_CALCULATOR,
     'marine-hot-water': MARINE_HOT_WATER_CALCULATOR,
     'marine-admission-criteria': MARINE_ADMISSION_CRITERIA_CALCULATOR,
+    // Button Battery
+    'battery-risk-stratification': BATTERY_RISK_STRATIFICATION_CALCULATOR,
+    // NAT Screening
+    'nat-ten4-facesp': NAT_TEN4_FACESP_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
