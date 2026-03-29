@@ -525,6 +525,46 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/nat-screening.js');
             return { nodes: m.NAT_SCREENING_NODES, entryNodeId: 'nat-start', categoryId: 'pediatrics', moduleLabels: m.NAT_SCREENING_MODULE_LABELS, citations: m.NAT_SCREENING_CITATIONS };
         },
+        'massive-hemoptysis': async () => {
+            const m = await import('../data/trees/massive-hemoptysis.js');
+            return { nodes: m.MASSIVE_HEMOPTYSIS_NODES, entryNodeId: 'hemo-start', categoryId: 'critical-care', moduleLabels: m.MASSIVE_HEMOPTYSIS_MODULE_LABELS, citations: m.MASSIVE_HEMOPTYSIS_CITATIONS };
+        },
+        'xylazine-toxicity': async () => {
+            const m = await import('../data/trees/xylazine-toxicity.js');
+            return { nodes: m.XYLAZINE_TOXICITY_NODES, entryNodeId: 'xyl-start', categoryId: 'toxicology', moduleLabels: m.XYLAZINE_TOXICITY_MODULE_LABELS, citations: m.XYLAZINE_TOXICITY_CITATIONS };
+        },
+        'laryngeal-trauma': async () => {
+            const m = await import('../data/trees/laryngeal-trauma.js');
+            return { nodes: m.LARYNGEAL_TRAUMA_NODES, entryNodeId: 'larynx-start', categoryId: 'trauma-surg', moduleLabels: m.LARYNGEAL_TRAUMA_MODULE_LABELS, citations: m.LARYNGEAL_TRAUMA_CITATIONS };
+        },
+        'refractory-vfvt': async () => {
+            const m = await import('../data/trees/refractory-vfvt.js');
+            return { nodes: m.REFRACTORY_VFVT_NODES, entryNodeId: 'rvf-start', categoryId: 'cardiology', moduleLabels: m.REFRACTORY_VFVT_MODULE_LABELS, citations: m.REFRACTORY_VFVT_CITATIONS };
+        },
+        'cardiogenic-shock': async () => {
+            const m = await import('../data/trees/cardiogenic-shock.js');
+            return { nodes: m.CARDIOGENIC_SHOCK_NODES, entryNodeId: 'cs-start', categoryId: 'critical-care', moduleLabels: m.CARDIOGENIC_SHOCK_MODULE_LABELS, citations: m.CARDIOGENIC_SHOCK_CITATIONS };
+        },
+        'pe-pregnancy': async () => {
+            const m = await import('../data/trees/pe-pregnancy.js');
+            return { nodes: m.PE_PREGNANCY_NODES, entryNodeId: 'pep-start', categoryId: 'ob-gyn', moduleLabels: m.PE_PREGNANCY_MODULE_LABELS, citations: m.PE_PREGNANCY_CITATIONS };
+        },
+        'cervical-artery-dissection': async () => {
+            const m = await import('../data/trees/cervical-artery-dissection.js');
+            return { nodes: m.CERVICAL_ARTERY_DISSECTION_NODES, entryNodeId: 'cad-start', categoryId: 'neurology', moduleLabels: m.CERVICAL_ARTERY_DISSECTION_MODULE_LABELS, citations: m.CERVICAL_ARTERY_DISSECTION_CITATIONS };
+        },
+        'code-status': async () => {
+            const m = await import('../data/trees/code-status.js');
+            return { nodes: m.CODE_STATUS_NODES, entryNodeId: 'code-start', categoryId: 'emergency-medicine', moduleLabels: m.CODE_STATUS_MODULE_LABELS, citations: m.CODE_STATUS_CITATIONS };
+        },
+        'human-trafficking': async () => {
+            const m = await import('../data/trees/human-trafficking.js');
+            return { nodes: m.HUMAN_TRAFFICKING_NODES, entryNodeId: 'ht-start', categoryId: 'emergency-medicine', moduleLabels: m.HUMAN_TRAFFICKING_MODULE_LABELS, citations: m.HUMAN_TRAFFICKING_CITATIONS };
+        },
+        'dental-avulsion': async () => {
+            const m = await import('../data/trees/dental-avulsion.js');
+            return { nodes: m.DENTAL_AVULSION_NODES, entryNodeId: 'avulsion-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_AVULSION_MODULE_LABELS, citations: m.DENTAL_AVULSION_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

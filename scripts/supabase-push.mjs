@@ -187,6 +187,16 @@ const TREE_REGISTRY = {
   'marine-envenomation':  { prefix: 'MARINE_ENVENOMATION',  entryNodeId: 'marine-start',     categoryId: 'toxicology' },
   'button-battery':       { prefix: 'BUTTON_BATTERY',       entryNodeId: 'battery-start',    categoryId: 'pediatrics' },
   'nat-screening':        { prefix: 'NAT_SCREENING',        entryNodeId: 'nat-start',        categoryId: 'pediatrics' },
+  'massive-hemoptysis':   { prefix: 'MASSIVE_HEMOPTYSIS',   entryNodeId: 'hemo-start',       categoryId: 'critical-care' },
+  'xylazine-toxicity':    { prefix: 'XYLAZINE_TOXICITY',    entryNodeId: 'xyl-start',        categoryId: 'toxicology' },
+  'laryngeal-trauma':     { prefix: 'LARYNGEAL_TRAUMA',     entryNodeId: 'larynx-start',     categoryId: 'trauma-surg' },
+  'refractory-vfvt':      { prefix: 'REFRACTORY_VFVT',      entryNodeId: 'rvf-start',        categoryId: 'cardiology' },
+  'cardiogenic-shock':    { prefix: 'CARDIOGENIC_SHOCK',    entryNodeId: 'cs-start',         categoryId: 'critical-care' },
+  'pe-pregnancy':         { prefix: 'PE_PREGNANCY',         entryNodeId: 'pep-start',        categoryId: 'ob-gyn' },
+  'cervical-artery-dissection': { prefix: 'CERVICAL_ARTERY_DISSECTION', entryNodeId: 'cad-start', categoryId: 'neurology' },
+  'code-status':          { prefix: 'CODE_STATUS',          entryNodeId: 'code-start',       categoryId: 'emergency-medicine' },
+  'human-trafficking':    { prefix: 'HUMAN_TRAFFICKING',    entryNodeId: 'ht-start',         categoryId: 'emergency-medicine' },
+  'dental-avulsion':      { prefix: 'DENTAL_AVULSION',      entryNodeId: 'avulsion-start',   categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {
