@@ -14466,7 +14466,949 @@ const REDUCTION_TECHNIQUE_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Pediatric Submersion — Szpilman Severity Classification
+// -------------------------------------------------------------------
+
+const PEDS_SUBMERSION_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-submersion-severity',
+  title: 'Szpilman Classification',
+  subtitle: 'Drowning Severity Grading',
+  description: 'The Szpilman classification grades drowning severity based on initial presentation. Validated in 46,080 rescues with excellent discrimination for mortality (AUC 0.989).',
+  fields: [
+    {
+      name: 'grade',
+      label: 'Initial Presentation',
+      type: 'select',
+      points: 0,
+      description: 'Assess immediately upon rescue/arrival',
+      selectOptions: [
+        { label: 'Grade 1: Normal auscultation, coughing only', points: 1 },
+        { label: 'Grade 2: Rales in some lung fields', points: 2 },
+        { label: 'Grade 3: Acute pulmonary edema, NO hypotension', points: 3 },
+        { label: 'Grade 4: Acute pulmonary edema WITH hypotension', points: 4 },
+        { label: 'Grade 5: Isolated respiratory arrest', points: 5 },
+        { label: 'Grade 6: Cardiopulmonary arrest', points: 6 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Higher grades require more aggressive intervention. Grade 5-6 = ICU mandatory.',
+  citations: [
+    'Szpilman D, et al. Classifications of Drowning. Chest. 2020;158(3):1168-1176.',
+    'Szpilman D. Near-drowning and drowning classification: a proposal to stratify mortality. Chest. 1997;112(3):660-665.',
+  ],
+  computeResult: (values) => {
+    const grade = values['grade'] || 0;
+
+    const gradeData: Record<number, { mortality: string; management: string; dispo: string; color: string }> = {
+      1: {
+        mortality: '0%',
+        management: '**Grade 1 — Mild**\n\n• Normal lung auscultation with cough\n• Supplemental O₂ PRN\n• Observation 4-6 hours\n• CXR optional',
+        dispo: 'ED observation → Discharge if stable',
+        color: '--color-primary',
+      },
+      2: {
+        mortality: '0-1.2%',
+        management: '**Grade 2 — Moderate**\n\n• Rales in some lung fields\n• Supplemental O₂ to maintain SpO₂ >94%\n• Serial exams q1-2h\n• CXR recommended\n• Consider CPAP/BiPAP if worsening',
+        dispo: 'Admit for observation (floor)',
+        color: '--color-warning',
+      },
+      3: {
+        mortality: '3-3.6%',
+        management: '**Grade 3 — Severe, Stable BP**\n\n• Acute pulmonary edema, SBP normal\n• High-flow O₂ or NIPPV\n• May need intubation if failing\n• IV access, labs (ABG, CBC, CMP)\n• NO diuretics (not fluid overload)',
+        dispo: 'ICU admission',
+        color: '--color-danger',
+      },
+      4: {
+        mortality: '0-22%',
+        management: '**Grade 4 — Severe, Hypotensive**\n\n• Pulmonary edema + hypotension\n• Aggressive resuscitation\n• Intubation likely needed\n• IV fluids (often hypovolemic)\n• Consider vasopressors if fluid-refractory',
+        dispo: 'ICU admission',
+        color: '--color-danger',
+      },
+      5: {
+        mortality: '2-31%',
+        management: '**Grade 5 — Respiratory Arrest**\n\n• Has pulse, not breathing\n• Immediate BVM ventilation\n• Early intubation\n• PALS protocol\n• Treat hypothermia if present',
+        dispo: 'ICU admission',
+        color: '--color-danger',
+      },
+      6: {
+        mortality: '54-88%',
+        management: '**Grade 6 — Cardiopulmonary Arrest**\n\n• Full PALS resuscitation\n• **5 rescue breaths BEFORE compressions** (hypoxic arrest)\n• Consider hypothermia status\n• Extended resuscitation if hypothermic\n• Post-arrest care if ROSC',
+        dispo: 'ICU if ROSC achieved',
+        color: '--color-critical',
+      },
+    };
+
+    const data = gradeData[grade];
+    if (!data) {
+      return {
+        value: '—',
+        label: 'Select Grade',
+        description: 'Choose initial presentation grade to see mortality and management recommendations.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    return {
+      value: `Grade ${grade}`,
+      label: `Mortality: ${data.mortality}`,
+      description: `${data.management}\n\n**Disposition:** ${data.dispo}`,
+      colorVar: data.color,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Pediatric Submersion — Orlowski Prognosis Score
+// -------------------------------------------------------------------
+
+const PEDS_DROWNING_PROGNOSIS_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-drowning-prognosis',
+  title: 'Orlowski Score',
+  subtitle: 'Pediatric Drowning Prognosis',
+  description: 'Orlowski score predicts outcome in pediatric drowning. Score ≤2: 90% chance of full recovery. Score ≥3: only 5% probability of survival.',
+  fields: [
+    { name: 'age', label: 'Age < 3 years', type: 'toggle', points: 1 },
+    { name: 'submersion', label: 'Submersion duration > 5 minutes', type: 'toggle', points: 1, description: 'Estimated or witnessed' },
+    { name: 'cpr-delay', label: 'No resuscitation for ≥10 min after rescue', type: 'toggle', points: 1, description: 'Delay from rescue to first CPR/rescue breaths' },
+    { name: 'coma', label: 'Comatose on ED arrival', type: 'toggle', points: 1, description: 'GCS ≤8 or unresponsive' },
+    { name: 'ph', label: 'Initial arterial pH ≤ 7.10', type: 'toggle', points: 1, description: 'First ABG in ED' },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Score 0-2', risk: 'Good Prognosis', mortality: '90% chance of full recovery', colorVar: '--color-primary' },
+    { min: 3, max: Infinity, label: 'Score 3-5', risk: 'Poor Prognosis', mortality: 'Only 5% probability of survival', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥3 indicates poor prognosis. However, no single predictor should determine termination — consider all factors including hypothermia status.',
+  citations: [
+    'Orlowski JP. Prognostic factors in pediatric cases of drowning and near-drowning. Am J Dis Child. 1979;133(10):1006-1009.',
+    'Quan L, et al. Predicting outcome in pediatric submersion victims. Pediatrics. 1995;95(6):868-874.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Pediatric Submersion — Observation/Discharge Criteria
+// -------------------------------------------------------------------
+
+const SUBMERSION_OBSERVATION_CALCULATOR: CalculatorDefinition = {
+  id: 'submersion-observation',
+  title: 'Submersion Discharge Criteria',
+  subtitle: 'Safe Discharge Assessment',
+  description: 'Determines if a pediatric drowning patient can be safely discharged after ED observation. Based on ILCOR scoping review and emergency medicine literature.',
+  fields: [
+    { name: 'gcs', label: 'GCS 15 throughout observation', type: 'toggle', points: 1 },
+    { name: 'spo2', label: 'SpO₂ ≥95% on room air at 4-6 hours', type: 'toggle', points: 1 },
+    { name: 'rr', label: 'Normal respiratory rate (age-appropriate)', type: 'toggle', points: 1 },
+    { name: 'no-symptoms', label: 'No persistent respiratory symptoms', type: 'toggle', points: 1, description: 'No cough, dyspnea, or abnormal lung sounds' },
+    { name: 'no-o2', label: 'No supplemental oxygen required', type: 'toggle', points: 1 },
+    { name: 'no-intervention', label: 'No field CPR or advanced intervention', type: 'toggle', points: 1 },
+    { name: 'caregiver', label: 'Reliable caregiver present', type: 'toggle', points: 1, description: 'Can return within 1 hour if needed' },
+  ],
+  results: [],
+  thresholdNote: 'ALL criteria must be met for safe discharge. If ANY criteria not met, admit for observation.',
+  citations: [
+    'ILCOR Scoping Review: Criteria for Discharge in Drowning. 2024.',
+    'Cohen N, et al. Duration of observation after submersion injury. Ann Emerg Med. 2021;77(6):651-659.',
+    'Causey AL, et al. Predicting discharge in uncomplicated near-drowning. Am J Emerg Med. 2000;18(1):9-11.',
+  ],
+  computeResult: (values) => {
+    const criteria = [
+      { key: 'gcs', label: 'GCS 15' },
+      { key: 'spo2', label: 'SpO₂ ≥95% RA' },
+      { key: 'rr', label: 'Normal RR' },
+      { key: 'no-symptoms', label: 'No respiratory symptoms' },
+      { key: 'no-o2', label: 'No O₂ requirement' },
+      { key: 'no-intervention', label: 'No field CPR' },
+      { key: 'caregiver', label: 'Reliable caregiver' },
+    ];
+
+    const met: string[] = [];
+    const notMet: string[] = [];
+
+    for (const c of criteria) {
+      if (values[c.key] === 1) {
+        met.push(c.label);
+      } else {
+        notMet.push(c.label);
+      }
+    }
+
+    const allMet = notMet.length === 0 && met.length === criteria.length;
+
+    if (allMet) {
+      return {
+        value: 'SAFE TO D/C',
+        label: 'All Discharge Criteria Met',
+        description: `**✓ Safe for discharge after 4-8 hour observation**\n\n**Criteria met:**\n${met.map(m => `• ${m}`).join('\n')}\n\n**Discharge instructions:**\n• Return for: difficulty breathing, persistent cough, drowsiness, vomiting, fever\n• Follow-up with PCP in 24-48 hours\n• Water safety counseling`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    const metCount = met.length;
+    if (metCount === 0) {
+      return {
+        value: '—',
+        label: 'Complete Assessment',
+        description: 'Check all applicable criteria to determine disposition.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    return {
+      value: 'ADMIT',
+      label: 'Discharge Criteria NOT Met',
+      description: `**⚠️ Admission recommended**\n\n**Met (${met.length}):**\n${met.map(m => `• ✓ ${m}`).join('\n')}\n\n**NOT met (${notMet.length}):**\n${notMet.map(m => `• ✗ ${m}`).join('\n')}\n\n**Disposition:**\n• Floor admission for observation if mild\n• ICU if GCS <15, significant O₂ requirement, or ongoing symptoms`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Brugada Syndrome — Shanghai Score Calculator
+// -------------------------------------------------------------------
+
+const BRUGADA_SHANGHAI_CALCULATOR: CalculatorDefinition = {
+  id: 'brugada-shanghai',
+  title: 'Shanghai Score',
+  subtitle: 'Brugada Syndrome Diagnosis',
+  description: 'The Shanghai Scoring System for diagnosis of Brugada syndrome. Score ≥3.5 = Probable/Definite BrS.',
+  fields: [
+    {
+      name: 'ecg',
+      label: 'ECG Pattern',
+      type: 'select',
+      points: 0,
+      description: 'Type 1 = coved ST elevation ≥2mm in V1-V3 with T-wave inversion',
+      selectOptions: [
+        { label: 'No Type 1 pattern', points: 0 },
+        { label: 'Drug-induced Type 1 only', points: 2 },
+        { label: 'Fever-induced Type 1', points: 3 },
+        { label: 'Spontaneous Type 1 (documented)', points: 3.5 },
+      ],
+    },
+    {
+      name: 'clinical',
+      label: 'Clinical History',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None of the below', points: 0 },
+        { label: 'Atrial fibrillation/flutter age <30', points: 0.5 },
+        { label: 'Syncope of unclear etiology', points: 1 },
+        { label: 'Suspected arrhythmic syncope', points: 2 },
+        { label: 'Nocturnal agonal respiration', points: 2 },
+        { label: 'Cardiac arrest or documented VF', points: 3 },
+      ],
+    },
+    {
+      name: 'family',
+      label: 'Family History',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None', points: 0 },
+        { label: 'Unexplained SCD <45y in relative (neg autopsy)', points: 0.5 },
+        { label: 'Suspicious SCD in 1st/2nd degree relative', points: 1 },
+        { label: '1st/2nd degree relative with definite BrS', points: 2 },
+      ],
+    },
+    { name: 'genetic', label: 'Probable pathogenic SCN5A variant', type: 'toggle', points: 0.5 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Score <2', risk: 'Non-diagnostic', mortality: 'Brugada syndrome unlikely', colorVar: '--color-primary' },
+    { min: 2, max: 3.5, label: 'Score 2-3', risk: 'Possible BrS', mortality: 'Further workup recommended', colorVar: '--color-warning' },
+    { min: 3.5, max: Infinity, label: 'Score ≥3.5', risk: 'Probable/Definite BrS', mortality: 'Brugada syndrome diagnosis', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Important: Drug-induced or fever-induced Type 1 patterns (2-3 points) require additional clinical criteria for diagnosis. Spontaneous Type 1 alone (3.5 points) is diagnostic.',
+  citations: [
+    'Probst V, et al. Shanghai Score System for Diagnosis of Brugada Syndrome. JACC Clin Electrophysiol. 2018;4(6):742-750.',
+    '2022 ESC Guidelines for ventricular arrhythmias and prevention of SCD. Eur Heart J. 2022;43(40):3997-4126.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Brugada Syndrome — VF Storm Management
+// -------------------------------------------------------------------
+
+const BRUGADA_VF_STORM_CALCULATOR: CalculatorDefinition = {
+  id: 'brugada-vf-storm',
+  title: 'VF Storm Protocol',
+  subtitle: 'Brugada Electrical Storm Management',
+  description: 'Management protocol for Brugada syndrome electrical storm (≥3 VF/VT episodes per day). Isoproterenol is first-line, NOT beta-blockers.',
+  fields: [
+    {
+      name: 'presentation',
+      label: 'Current Presentation',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Single VF episode, now stable', points: 1 },
+        { label: 'Recurrent ICD shocks (2+ in 24h)', points: 2 },
+        { label: 'Active electrical storm (≥3 VF/VT per day)', points: 3 },
+      ],
+    },
+    { name: 'icd', label: 'Has ICD in place', type: 'toggle', points: 0 },
+    { name: 'fever', label: 'Febrile (temp >38°C)', type: 'toggle', points: 0 },
+    { name: 'known', label: 'Known Brugada syndrome', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Isoproterenol is first-line for VF storm. Beta-blockers, amiodarone, and lidocaine are INEFFECTIVE or harmful.',
+  citations: [
+    'Maury P, et al. Management of electrical storm in Brugada syndrome. Circ Arrhythm Electrophysiol. 2018.',
+    'Brugada P, et al. Isoproterenol in Brugada syndrome. Circulation. 2000;102(11):1307-1310.',
+  ],
+  computeResult: (values) => {
+    const presentation = values['presentation'] || 0;
+    const fever = values['fever'] || 0;
+    const hasICD = values['icd'] || 0;
+
+    if (presentation === 0) {
+      return {
+        value: '—',
+        label: 'Select Presentation',
+        description: 'Choose current clinical presentation to see management protocol.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    let management = '';
+    let colorVar = '--color-warning';
+
+    if (fever) {
+      management += `**⚠️ FEVER PRESENT — TREAT AGGRESSIVELY**\n\n• Acetaminophen 1000 mg IV/PO\n• External cooling if refractory\n• Fever can trigger VF storm in Brugada\n\n`;
+    }
+
+    if (presentation >= 2) {
+      colorVar = '--color-danger';
+      management += `**ISOPROTERENOL PROTOCOL (First-Line)**\n\n`;
+      management += `**Loading:** 1-2 mcg IV bolus\n`;
+      management += `**Infusion:** 0.15-2.0 mcg/min\n`;
+      management += `**Target:** ↑ HR by 20% (suppresses J-point)\n\n`;
+      management += `**Mechanism:** Increases heart rate → decreases J-point amplitude → normalizes ST → suppresses VF\n\n`;
+      management += `**Duration:** Continue until stable (mean 24±13 days in literature)\n\n`;
+      management += `**Add QUINIDINE when stable:**\n`;
+      management += `• 200 mg PO TID, increase to 400 mg TID\n`;
+      management += `• Allows weaning of isoproterenol within 24-48h\n\n`;
+    } else {
+      management += `**Single Episode Management**\n\n`;
+      management += `• Continuous cardiac monitoring\n`;
+      management += `• 12-lead ECG (look for Type 1 pattern)\n`;
+      management += `• Review medications for sodium channel blockers\n`;
+      management += `• Aggressive fever control if present\n`;
+      management += `• EP consultation\n\n`;
+    }
+
+    management += `**❌ DO NOT USE:**\n`;
+    management += `• Beta-blockers (ineffective)\n`;
+    management += `• Amiodarone (may worsen)\n`;
+    management += `• Lidocaine (ineffective)\n`;
+    management += `• Flecainide/propafenone (will worsen)\n\n`;
+
+    if (!hasICD && presentation >= 2) {
+      management += `**⚠️ NO ICD — Consider emergent ICD placement after stabilization**`;
+    }
+
+    return {
+      value: presentation >= 2 ? 'ISOPROTERENOL' : 'MONITOR',
+      label: presentation >= 2 ? 'Start Isoproterenol Protocol' : 'Cardiac Monitoring + EP Consult',
+      description: management,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Brugada Syndrome — Drugs to Avoid
+// -------------------------------------------------------------------
+
+const BRUGADA_DRUGS_AVOID_CALCULATOR: CalculatorDefinition = {
+  id: 'brugada-drugs-avoid',
+  title: 'Drugs to Avoid',
+  subtitle: 'Brugada Contraindicated Medications',
+  description: 'Reference list of medications that can unmask or exacerbate Brugada syndrome. Based on BrugadaDrugs.org consensus.',
+  fields: [
+    {
+      name: 'category',
+      label: 'Drug Category',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'All Categories', points: 0 },
+        { label: 'Antiarrhythmics', points: 1 },
+        { label: 'Psychotropics', points: 2 },
+        { label: 'Anesthetics', points: 3 },
+        { label: 'Other', points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Full list at BrugadaDrugs.org. Provide patients with drug list for all healthcare providers.',
+  citations: [
+    'Postema PG, et al. Drugs and Brugada syndrome: consensus list. Heart Rhythm. 2009.',
+    'BrugadaDrugs.org — Consensus list updated 2025.',
+  ],
+  computeResult: (values) => {
+    const category = values['category'] || 0;
+
+    const drugs: Record<number, { title: string; avoid: string[]; caution: string[] }> = {
+      0: {
+        title: 'All Categories — High Risk Drugs',
+        avoid: [
+          'Class 1A: Ajmaline, procainamide, disopyramide',
+          'Class 1C: Flecainide, propafenone, pilsicainide',
+          'TCAs: Amitriptyline, clomipramine, desipramine, nortriptyline',
+          'Lithium',
+          'Cocaine',
+          'Oxcarbazepine',
+        ],
+        caution: [
+          'Propranolol (Class 1C effect at high doses)',
+          'Verapamil',
+          'Amiodarone',
+          'Cannabis/hemp',
+          'Excessive alcohol',
+        ],
+      },
+      1: {
+        title: 'Antiarrhythmics',
+        avoid: [
+          'Ajmaline',
+          'Flecainide',
+          'Propafenone',
+          'Pilsicainide',
+          'Procainamide',
+          'Disopyramide',
+        ],
+        caution: [
+          'Lidocaine (debated)',
+          'Propranolol (high doses)',
+          'Verapamil',
+          'Amiodarone',
+        ],
+      },
+      2: {
+        title: 'Psychotropics',
+        avoid: [
+          'Amitriptyline',
+          'Clomipramine',
+          'Desipramine',
+          'Nortriptyline',
+          'Lithium',
+          'Loxapine',
+          'Trifluoperazine',
+        ],
+        caution: [
+          'Other tricyclics',
+          'Phenothiazines',
+        ],
+      },
+      3: {
+        title: 'Anesthetics',
+        avoid: [
+          'Bupivacaine (high doses)',
+        ],
+        caution: [
+          'Propofol (controversial)',
+          'Ketamine',
+          'Local anesthetics with epinephrine',
+        ],
+      },
+      4: {
+        title: 'Other Substances',
+        avoid: [
+          'Cocaine — ABSOLUTE CONTRAINDICATION',
+          'Oxcarbazepine',
+        ],
+        caution: [
+          'Cannabis/hemp',
+          'Excessive alcohol',
+          'Ergot alkaloids',
+        ],
+      },
+    };
+
+    const data = drugs[category];
+
+    return {
+      value: 'DRUG LIST',
+      label: data.title,
+      description: `**🚫 DRUGS TO AVOID:**\n${data.avoid.map(d => `• ${d}`).join('\n')}\n\n**⚠️ USE WITH CAUTION:**\n${data.caution.map(d => `• ${d}`).join('\n')}\n\n**Patient Education:**\n• Provide printed drug list\n• Update all providers (anesthesia, dental, etc.)\n• Check BrugadaDrugs.org before new medications\n• Aggressive fever treatment (fever unmasks pattern)`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Hemodialysis — Emergent Complications Triage
+// -------------------------------------------------------------------
+
+const HD_EMERGENCY_TRIAGE_CALCULATOR: CalculatorDefinition = {
+  id: 'hd-emergency-triage',
+  title: 'HD Emergency Triage',
+  subtitle: 'AEIOU Complications Assessment',
+  description: 'Rapid triage tool for hemodialysis patient emergencies using the AEIOU mnemonic: Access, Electrolytes, Infection, Overload, Uremia.',
+  fields: [
+    {
+      name: 'primary',
+      label: 'Primary Complaint Category',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Access problem (bleeding, clotted, swelling)', points: 1 },
+        { label: 'Electrolyte/Cardiac (weakness, palpitations, arrhythmia)', points: 2 },
+        { label: 'Infection (fever, access site redness)', points: 3 },
+        { label: 'Overload (SOB, edema, HTN emergency)', points: 4 },
+        { label: 'Uremia (AMS, pericarditis, bleeding)', points: 5 },
+      ],
+    },
+    { name: 'missed', label: 'Missed dialysis (>1 session)', type: 'toggle', points: 1, description: 'Increases risk of electrolyte and overload emergencies' },
+    { name: 'hypotension', label: 'Hypotensive (SBP <90)', type: 'toggle', points: 2 },
+    { name: 'arrhythmia', label: 'ECG abnormality present', type: 'toggle', points: 2, description: 'Peaked T waves, wide QRS, arrhythmia' },
+  ],
+  results: [],
+  thresholdNote: 'Life-threatening complications require emergent dialysis. Call nephrology early.',
+  citations: [
+    'Daugirdas JT. Handbook of Dialysis. 5th ed. Lippincott Williams & Wilkins; 2015.',
+    'Patel N, et al. Dialysis disequilibrium syndrome. Semin Dial. 2008;21(4):493-498.',
+  ],
+  computeResult: (values) => {
+    const primary = values['primary'] || 0;
+    const missed = values['missed'] || 0;
+    const hypotension = values['hypotension'] || 0;
+    const arrhythmia = values['arrhythmia'] || 0;
+
+    if (primary === 0) {
+      return {
+        value: '—',
+        label: 'Select Primary Complaint',
+        description: '**AEIOU Mnemonic for HD Emergencies:**\n\n• **A**ccess complications\n• **E**lectrolyte emergencies (K+, Ca++)\n• **I**nfection (line sepsis, endocarditis)\n• **O**verload (pulmonary edema, HTN emergency)\n• **U**remia (encephalopathy, pericarditis)',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    const urgencyScore = primary + (missed * 2) + (hypotension * 3) + (arrhythmia * 3);
+    let colorVar = '--color-warning';
+    let urgency = 'URGENT';
+
+    if (urgencyScore >= 6 || arrhythmia || (primary === 2 && hypotension)) {
+      urgency = 'EMERGENT';
+      colorVar = '--color-danger';
+    }
+
+    const managementByCategory: Record<number, string> = {
+      1: `**ACCESS EMERGENCY**\n\n**Bleeding from access:**\n• Direct pressure 15-20 min\n• Do NOT use tourniquet proximal to fistula\n• Avoid excessive compression (thrombosis risk)\n• Suturing rarely needed\n\n**Clotted access:**\n• Time-sensitive — call vascular/IR urgently\n• tPA may be attempted (consult nephrology)\n• DO NOT use for dialysis until declotted\n\n**Steal syndrome:**\n• Pale, cool hand distal to access\n• Pain worse during dialysis\n• Emergent vascular surgery consult if severe`,
+      2: `**ELECTROLYTE EMERGENCY — HYPERKALEMIA LIKELY**\n\n**Immediate ECG** — Look for:\n• Peaked T waves (earliest)\n• PR prolongation\n• QRS widening\n• Loss of P waves\n• Sine wave (pre-arrest)\n\n**Management:**\n1. **Cardiac membrane stabilization:**\n   • Calcium gluconate 1-2 g IV (onset 1-3 min)\n   • Repeat if persistent ECG changes\n\n2. **Shift K+ intracellularly:**\n   • Insulin 10 units IV + D50 25g\n   • Albuterol 10-20 mg nebulized\n\n3. **EMERGENT DIALYSIS**\n   • Only definitive treatment in ESRD\n   • Call nephrology STAT\n\n**⚠️ Kayexalate is NOT emergent therapy**`,
+      3: `**INFECTION/SEPSIS**\n\n**Catheter-related bloodstream infection:**\n• Blood cultures × 2 (peripheral + catheter)\n• Remove tunneled catheter if: septic shock, persistent bacteremia, metastatic infection\n\n**Empiric antibiotics (IDSA):**\n• Vancomycin 25 mg/kg (dosed after HD) PLUS\n• Cefepime 2g IV or gentamicin\n\n**HD-specific dosing:**\n• Vanc: 25 mg/kg, redose per level\n• Most antibiotics dosed AFTER dialysis\n\n**Consider endocarditis workup:**\n• S. aureus bacteremia → TTE +/- TEE\n• Prolonged bacteremia\n• New murmur`,
+      4: `**VOLUME OVERLOAD / PULMONARY EDEMA**\n\n**Severe/Refractory cases:**\n• **EMERGENT DIALYSIS** is definitive\n• Contact nephrology immediately\n\n**Temporizing measures:**\n• High-flow O2 or NIPPV (BiPAP)\n• Nitrates (NTG 400 mcg SL, then drip)\n• Positioning (upright)\n\n**Diuretics?**\n• Generally ineffective in ESRD (no urine output)\n• High-dose furosemide MAY work if residual function\n\n**HTN Emergency:**\n• Nitroprusside or nicardipine drip\n• Target 20-25% MAP reduction in first hour\n• Avoid fluid boluses (worsen overload)`,
+      5: `**UREMIC EMERGENCY**\n\n**Uremic encephalopathy:**\n• AMS, asterixis, myoclonus, seizures\n• EMERGENT DIALYSIS indicated\n• Avoid excessive ultrafiltration (DDS risk)\n\n**Uremic pericarditis:**\n• Chest pain, friction rub, ECG changes\n• DO NOT anticoagulate (hemorrhagic effusion risk)\n• Emergent dialysis WITHOUT heparin\n• Echo for tamponade assessment\n\n**Uremic bleeding:**\n• Platelet dysfunction\n• DDAVP 0.3 mcg/kg IV\n• Consider conjugated estrogens for prolonged effect\n• Emergent dialysis`,
+    };
+
+    let description = managementByCategory[primary] || '';
+
+    if (missed) {
+      description = `**⚠️ MISSED DIALYSIS — Higher risk of electrolyte and volume complications**\n\n${description}`;
+    }
+
+    if (hypotension) {
+      description += `\n\n**⚠️ HYPOTENSIVE:**\n• Consider sepsis workup\n• Cautious fluid (250 mL bolus, reassess)\n• Pressors if refractory\n• May need dialysis with pressor support`;
+    }
+
+    return {
+      value: urgency,
+      label: ['', 'Access', 'Electrolyte', 'Infection', 'Overload', 'Uremia'][primary] + ' Emergency',
+      description,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Hemodialysis — Hyperkalemia Quick Reference
+// -------------------------------------------------------------------
+
+const HD_HYPERKALEMIA_CALCULATOR: CalculatorDefinition = {
+  id: 'hd-hyperkalemia',
+  title: 'HD Hyperkalemia Protocol',
+  subtitle: 'Emergent K+ Management in ESRD',
+  description: 'Rapid management protocol for hyperkalemia in dialysis patients. Emergent dialysis is definitive therapy.',
+  fields: [
+    { name: 'k', label: 'Potassium (mEq/L)', type: 'number', points: 0 },
+    { name: 'ecg-changes', label: 'ECG changes present', type: 'toggle', points: 0, description: 'Peaked T waves, wide QRS, arrhythmia' },
+    { name: 'symptoms', label: 'Symptomatic (weakness, palpitations)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'K+ >6.5 or ANY ECG changes = emergent treatment needed. Dialysis is definitive.',
+  citations: [
+    'Clase CM, et al. Potassium homeostasis and management of dyskalemia in kidney diseases. Kidney Int. 2020;97(1):42-61.',
+    'Daugirdas JT. Handbook of Dialysis. 5th ed. 2015.',
+  ],
+  computeResult: (values) => {
+    const k = values['k'] || 0;
+    const ecgChanges = values['ecg-changes'] || 0;
+    const symptoms = values['symptoms'] || 0;
+
+    if (k === 0) {
+      return {
+        value: '—',
+        label: 'Enter Potassium Level',
+        description: 'Enter serum potassium to generate treatment protocol.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    let severity = 'MILD';
+    let colorVar = '--color-primary';
+    let protocol = '';
+
+    if (k >= 6.5 || ecgChanges) {
+      severity = 'SEVERE';
+      colorVar = '--color-danger';
+      protocol = `**🚨 SEVERE HYPERKALEMIA (K+ ${k} mEq/L)**\n\n`;
+      protocol += `**1. CARDIAC PROTECTION (Immediate):**\n`;
+      protocol += `• Calcium gluconate 1-2 g IV over 2-3 min\n`;
+      protocol += `• Onset: 1-3 minutes, duration 30-60 min\n`;
+      protocol += `• May repeat if persistent ECG changes\n\n`;
+      protocol += `**2. SHIFT K+ INTRACELLULARLY:**\n`;
+      protocol += `• Regular insulin 10 units IV + D50 25g\n`;
+      protocol += `  (Onset 15-30 min, duration 4-6 hr)\n`;
+      protocol += `• Albuterol 10-20 mg nebulized\n`;
+      protocol += `  (Onset 30 min, duration 2 hr)\n\n`;
+      protocol += `**3. EMERGENT DIALYSIS:**\n`;
+      protocol += `• Call nephrology STAT\n`;
+      protocol += `• Only definitive treatment in ESRD\n`;
+      protocol += `• Removes 25-50 mEq K+/hour\n\n`;
+      protocol += `**⚠️ NOT EMERGENT (adjuncts only):**\n`;
+      protocol += `• Kayexalate — hours to work, avoid in bowel disease\n`;
+      protocol += `• Patiromer/SZC — not for acute use`;
+    } else if (k >= 6.0 || symptoms) {
+      severity = 'MODERATE';
+      colorVar = '--color-warning';
+      protocol = `**⚠️ MODERATE HYPERKALEMIA (K+ ${k} mEq/L)**\n\n`;
+      protocol += `**1. CONTINUOUS CARDIAC MONITORING**\n\n`;
+      protocol += `**2. SHIFT THERAPY:**\n`;
+      protocol += `• Regular insulin 10 units IV + D50 25g\n`;
+      protocol += `• Albuterol 10-20 mg nebulized (additive)\n\n`;
+      protocol += `**3. CONTACT NEPHROLOGY:**\n`;
+      protocol += `• Arrange urgent dialysis\n`;
+      protocol += `• May need same-day HD\n\n`;
+      protocol += `**Consider calcium gluconate if:**\n`;
+      protocol += `• ECG changes develop\n`;
+      protocol += `• Rapid rise expected\n`;
+      protocol += `• Significant symptoms`;
+    } else {
+      protocol = `**K+ ${k} mEq/L — Close Monitoring**\n\n`;
+      protocol += `• Continuous cardiac monitoring\n`;
+      protocol += `• Repeat K+ in 2-4 hours\n`;
+      protocol += `• Diet review with patient\n`;
+      protocol += `• Schedule urgent dialysis if rising\n`;
+      protocol += `• Contact nephrology for HD timing`;
+    }
+
+    return {
+      value: `K+ ${k}`,
+      label: severity,
+      description: protocol,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Hemodialysis — Access Emergencies
+// -------------------------------------------------------------------
+
+const HD_ACCESS_EMERGENCY_CALCULATOR: CalculatorDefinition = {
+  id: 'hd-access-emergency',
+  title: 'HD Access Emergencies',
+  subtitle: 'Fistula/Graft/Catheter Complications',
+  description: 'Management of hemodialysis access complications including bleeding, thrombosis, and infection.',
+  fields: [
+    {
+      name: 'access-type',
+      label: 'Access Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'AV Fistula (AVF)', points: 1 },
+        { label: 'AV Graft (AVG)', points: 2 },
+        { label: 'Tunneled catheter (Permacath)', points: 3 },
+        { label: 'Non-tunneled catheter (temp)', points: 4 },
+      ],
+    },
+    {
+      name: 'problem',
+      label: 'Problem Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Bleeding from access site', points: 1 },
+        { label: 'Suspected thrombosis (no thrill)', points: 2 },
+        { label: 'Infection signs (redness, warmth, pus)', points: 3 },
+        { label: 'Arm swelling/steal syndrome', points: 4 },
+      ],
+    },
+    { name: 'hemo-unstable', label: 'Hemodynamically unstable', type: 'toggle', points: 5 },
+    { name: 'fever', label: 'Fever present (temp >38°C)', type: 'toggle', points: 2 },
+  ],
+  results: [],
+  thresholdNote: 'Access is lifeline — preserve if possible. Vascular surgery and nephrology consultation often needed.',
+  citations: [
+    'KDOQI Clinical Practice Guidelines for Vascular Access. Am J Kidney Dis. 2019.',
+    'Lok CE, et al. Clinical practice guideline for vascular access. Am J Kidney Dis. 2020;75(4 Suppl 2):S1-S164.',
+  ],
+  computeResult: (values) => {
+    const accessType = values['access-type'] || 0;
+    const problem = values['problem'] || 0;
+    const unstable = values['hemo-unstable'] || 0;
+    const fever = values['fever'] || 0;
+
+    if (accessType === 0 || problem === 0) {
+      return {
+        value: '—',
+        label: 'Select Access Type and Problem',
+        description: 'Choose access type and problem to see management guidance.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    let management = '';
+    let colorVar = '--color-warning';
+    let label = '';
+
+    // Bleeding
+    if (problem === 1) {
+      label = 'ACCESS BLEEDING';
+      management = `**BLEEDING FROM ${['', 'AVF', 'AVG', 'TUNNELED CATHETER', 'TEMP CATHETER'][accessType]}**\n\n`;
+      management += `**Immediate management:**\n`;
+      management += `• Direct pressure 15-20 minutes\n`;
+      management += `• Elevate extremity\n`;
+      management += `• **Do NOT tourniquet proximal to fistula**\n`;
+      management += `• Avoid excessive compression (thrombosis risk)\n\n`;
+
+      if (unstable) {
+        colorVar = '--color-danger';
+        management += `**⚠️ HEMODYNAMICALLY UNSTABLE:**\n`;
+        management += `• Large bore IV in contralateral arm\n`;
+        management += `• Crossmatch, transfuse PRN\n`;
+        management += `• Vascular surgery STAT\n`;
+        management += `• Consider interventional radiology\n\n`;
+      }
+
+      management += `**If bleeding controlled:**\n`;
+      management += `• Observe 30-60 min\n`;
+      management += `• Review anticoagulation status\n`;
+      management += `• Contact HD unit for follow-up\n\n`;
+      management += `**If rebleeding:**\n`;
+      management += `• Suturing rarely helpful (may damage access)\n`;
+      management += `• Vascular surgery consultation`;
+    }
+
+    // Thrombosis
+    if (problem === 2) {
+      label = 'ACCESS THROMBOSIS';
+      colorVar = '--color-warning';
+      management = `**THROMBOSED ${['', 'AVF', 'AVG', 'CATHETER', 'CATHETER'][accessType]}**\n\n`;
+      management += `**Assessment:**\n`;
+      management += `• No thrill or bruit = likely thrombosed\n`;
+      management += `• Document when last worked\n`;
+      management += `• Assess for backup access options\n\n`;
+      management += `**Time-sensitive!** Best outcomes within 24-48 hours\n\n`;
+
+      if (accessType <= 2) { // AVF or AVG
+        management += `**Management:**\n`;
+        management += `• Vascular surgery or IR consultation\n`;
+        management += `• Thrombectomy/thrombolysis options\n`;
+        management += `• May need temporary catheter for HD\n\n`;
+      } else { // Catheter
+        management += `**Catheter-specific:**\n`;
+        management += `• tPA lock (2 mg in each lumen × 30-120 min)\n`;
+        management += `• Consult nephrology for protocol\n`;
+        management += `• May need catheter exchange\n\n`;
+      }
+      management += `**Contact nephrology for urgent HD arrangements**`;
+    }
+
+    // Infection
+    if (problem === 3) {
+      label = 'ACCESS INFECTION';
+      colorVar = fever ? '--color-danger' : '--color-warning';
+      management = `**INFECTED ${['', 'AVF', 'AVG', 'TUNNELED CATHETER', 'TEMP CATHETER'][accessType]}**\n\n`;
+
+      if (accessType >= 3) { // Catheter
+        management += `**Catheter infection protocol:**\n`;
+        management += `• Blood cultures × 2 (peripheral + through catheter)\n`;
+        management += `• Start empiric antibiotics:\n`;
+        management += `  — Vancomycin 25 mg/kg (dose after HD)\n`;
+        management += `  — + Cefepime 2g or gentamicin\n\n`;
+        management += `**Remove catheter if:**\n`;
+        management += `• Septic shock\n`;
+        management += `• Tunnel infection (erythema along tract)\n`;
+        management += `• Persistent bacteremia >72h on antibiotics\n`;
+        management += `• Metastatic infection (endocarditis, osteomyelitis)\n`;
+        management += `• S. aureus or fungemia\n\n`;
+      } else { // AVF/AVG
+        management += `**AVF/AVG infection:**\n`;
+        management += `• Blood cultures × 2 (peripheral)\n`;
+        management += `• Empiric antibiotics (vancomycin + coverage)\n`;
+        management += `• DO NOT cannulate infected access\n`;
+        management += `• Vascular surgery consult\n`;
+        management += `• May need temporary catheter\n\n`;
+      }
+      management += `**Consider endocarditis workup:**\n`;
+      management += `• S. aureus bacteremia → TTE +/- TEE\n`;
+      management += `• Duration based on infection site`;
+    }
+
+    // Swelling/Steal
+    if (problem === 4) {
+      label = 'STEAL SYNDROME/SWELLING';
+      management = `**${accessType <= 2 ? 'ACCESS-RELATED ISCHEMIA' : 'CENTRAL VENOUS STENOSIS'}**\n\n`;
+
+      if (accessType <= 2) {
+        management += `**Steal syndrome signs:**\n`;
+        management += `• Pale, cool hand distal to access\n`;
+        management += `• Pain, paresthesias, weakness\n`;
+        management += `• Symptoms worse DURING dialysis\n`;
+        management += `• Diminished pulses distally\n\n`;
+        management += `**Severity grading:**\n`;
+        management += `• Mild: Cool hand, no rest pain → monitor\n`;
+        management += `• Moderate: Rest pain → urgent vascular\n`;
+        management += `• Severe: Tissue loss → emergent vascular\n\n`;
+        colorVar = '--color-warning';
+      } else {
+        management += `**Central venous stenosis signs:**\n`;
+        management += `• Unilateral arm/facial swelling\n`;
+        management += `• Collateral veins visible on chest\n`;
+        management += `• Usually related to prior catheter\n\n`;
+      }
+      management += `**Vascular surgery/IR consultation needed**`;
+    }
+
+    return {
+      value: problem === 1 ? 'BLEEDING' : (problem === 2 ? 'CLOTTED' : (problem === 3 ? 'INFECTED' : 'ISCHEMIC')),
+      label,
+      description: management,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Hemodialysis — Dialysis Disequilibrium Prevention
+// -------------------------------------------------------------------
+
+const HD_DDS_PREVENTION_CALCULATOR: CalculatorDefinition = {
+  id: 'hd-dds-prevention',
+  title: 'Dialysis Disequilibrium',
+  subtitle: 'DDS Risk & Prevention',
+  description: 'Dialysis disequilibrium syndrome (DDS) risk assessment and prevention strategies. More common with first dialysis or after prolonged interruption.',
+  fields: [
+    { name: 'first-hd', label: 'First ever dialysis session', type: 'toggle', points: 3 },
+    { name: 'missed', label: 'Missed >1 week of dialysis', type: 'toggle', points: 2 },
+    { name: 'bun', label: 'BUN > 150 mg/dL', type: 'toggle', points: 2 },
+    { name: 'elderly', label: 'Age > 65', type: 'toggle', points: 1 },
+    { name: 'neuro', label: 'Pre-existing neurologic disease', type: 'toggle', points: 1, description: 'Stroke, TBI, seizure disorder' },
+    { name: 'pediatric', label: 'Pediatric patient', type: 'toggle', points: 2 },
+    { name: 'hyponatremia', label: 'Severe hyponatremia', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Low Risk', risk: 'Standard HD protocol', mortality: 'DDS unlikely', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Moderate Risk', risk: 'Modified HD parameters', mortality: 'DDS precautions indicated', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'High Risk', risk: 'Aggressive DDS prevention', mortality: 'Slow, gentle dialysis required', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'DDS: Cerebral edema from rapid urea clearance. Presents as headache → N/V → confusion → seizures → coma.',
+  citations: [
+    'Patel N, et al. Dialysis disequilibrium syndrome: a narrative review. Semin Dial. 2008;21(4):493-498.',
+    'Arieff AI. Dialysis disequilibrium syndrome: current concepts. Kidney Int. 1994;45(3):629-635.',
+  ],
+  computeResult: (values) => {
+    const score = (values['first-hd'] || 0) * 3 +
+                  (values['missed'] || 0) * 2 +
+                  (values['bun'] || 0) * 2 +
+                  (values['elderly'] || 0) +
+                  (values['neuro'] || 0) +
+                  (values['pediatric'] || 0) * 2 +
+                  (values['hyponatremia'] || 0);
+
+    if (score === 0) {
+      return {
+        value: '—',
+        label: 'Select Risk Factors',
+        description: 'Check applicable risk factors to assess DDS risk and get prevention protocol.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    let risk = 'LOW';
+    let colorVar = '--color-primary';
+    let prevention = '';
+
+    if (score >= 4) {
+      risk = 'HIGH';
+      colorVar = '--color-danger';
+      prevention = `**🚨 HIGH DDS RISK — Aggressive Prevention Required**\n\n`;
+      prevention += `**Modified HD parameters:**\n`;
+      prevention += `• Short initial session: 2 hours max\n`;
+      prevention += `• Low blood flow: 150-200 mL/min\n`;
+      prevention += `• Low dialysate flow: 300 mL/min\n`;
+      prevention += `• Target BUN reduction: <40% first session\n`;
+      prevention += `• Small dialyzer surface area\n\n`;
+      prevention += `**Osmotic agents:**\n`;
+      prevention += `• Mannitol 0.5-1 g/kg IV during HD\n`;
+      prevention += `• OR hypertonic saline (3%) PRN\n\n`;
+      prevention += `**Monitoring:**\n`;
+      prevention += `• Neuro checks q15-30 min\n`;
+      prevention += `• Stop HD if: headache, N/V, confusion, seizure\n`;
+      prevention += `• Daily sessions with gradual intensification`;
+    } else if (score >= 2) {
+      risk = 'MODERATE';
+      colorVar = '--color-warning';
+      prevention = `**⚠️ MODERATE DDS RISK — Precautions Indicated**\n\n`;
+      prevention += `**Modified HD parameters:**\n`;
+      prevention += `• Shorter session: 2-3 hours\n`;
+      prevention += `• Reduced blood flow: 200-250 mL/min\n`;
+      prevention += `• Target BUN reduction: 30-40%\n\n`;
+      prevention += `**Monitoring:**\n`;
+      prevention += `• Neuro checks during HD\n`;
+      prevention += `• Have mannitol available\n`;
+      prevention += `• Consider daily sessions initially`;
+    } else {
+      prevention = `**LOW DDS RISK**\n\n`;
+      prevention += `• Standard HD parameters appropriate\n`;
+      prevention += `• Routine monitoring sufficient\n`;
+      prevention += `• Watch for symptoms (headache, N/V) and respond promptly`;
+    }
+
+    prevention += `\n\n**DDS Symptoms (escalating):**\n`;
+    prevention += `• Headache, nausea, restlessness\n`;
+    prevention += `• Vomiting, disorientation\n`;
+    prevention += `• Muscle twitching, seizures\n`;
+    prevention += `• Coma\n\n`;
+    prevention += `**If DDS develops:** Stop HD immediately, supportive care, mannitol`;
+
+    return {
+      value: risk,
+      label: `DDS Risk: ${risk}`,
+      description: prevention,
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Pediatric Submersion
+  'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
+  'peds-drowning-prognosis': PEDS_DROWNING_PROGNOSIS_CALCULATOR,
+  'submersion-observation': SUBMERSION_OBSERVATION_CALCULATOR,
+  // Brugada Syndrome
+  'brugada-shanghai': BRUGADA_SHANGHAI_CALCULATOR,
+  'brugada-vf-storm': BRUGADA_VF_STORM_CALCULATOR,
+  'brugada-drugs-avoid': BRUGADA_DRUGS_AVOID_CALCULATOR,
+  // Hemodialysis Emergencies
+  'hd-emergency-triage': HD_EMERGENCY_TRIAGE_CALCULATOR,
+  'hd-hyperkalemia': HD_HYPERKALEMIA_CALCULATOR,
+  'hd-access-emergency': HD_ACCESS_EMERGENCY_CALCULATOR,
+  'hd-dds-prevention': HD_DDS_PREVENTION_CALCULATOR,
   // Shoulder Dislocation
   'isis-score': ISIS_SCORE_CALCULATOR,
   'shoulder-recurrence': SHOULDER_RECURRENCE_CALCULATOR,

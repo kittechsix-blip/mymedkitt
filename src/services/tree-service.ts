@@ -555,6 +555,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/shoulder-dislocation.js');
       return { nodes: m.SHOULDER_DISLOCATION_NODES, entryNodeId: 'shoulder-start', categoryId: 'emergency-medicine', moduleLabels: m.SHOULDER_DISLOCATION_MODULE_LABELS, citations: m.SHOULDER_DISLOCATION_CITATIONS };
     },
+    'peds-submersion': async () => {
+      const m = await import('../data/trees/peds-submersion.js');
+      return { nodes: m.PEDS_SUBMERSION_NODES, entryNodeId: 'submersion-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_SUBMERSION_MODULE_LABELS, citations: m.PEDS_SUBMERSION_CITATIONS };
+    },
+    'brugada-syndrome': async () => {
+      const m = await import('../data/trees/brugada-syndrome.js');
+      return { nodes: m.BRUGADA_SYNDROME_NODES, entryNodeId: 'brugada-start', categoryId: 'cardiology', moduleLabels: m.BRUGADA_SYNDROME_MODULE_LABELS, citations: m.BRUGADA_SYNDROME_CITATIONS };
+    },
+    'hd-emergencies': async () => {
+      const m = await import('../data/trees/hd-emergencies.js');
+      return { nodes: m.HD_EMERGENCIES_NODES, entryNodeId: 'hd-start', categoryId: 'critical-care', moduleLabels: m.HD_EMERGENCIES_MODULE_LABELS, citations: m.HD_EMERGENCIES_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

@@ -72,6 +72,9 @@ export { VIRAL_MYOSITIS_NODES, VIRAL_MYOSITIS_MODULE_LABELS, VIRAL_MYOSITIS_CITA
 export { ED_METHADONE_NODES, ED_METHADONE_MODULE_LABELS, ED_METHADONE_CITATIONS } from './ed-methadone';
 export { CVST_NODES, CVST_MODULE_LABELS, CVST_CITATIONS } from './cvst';
 export { SHOULDER_DISLOCATION_NODES, SHOULDER_DISLOCATION_MODULE_LABELS, SHOULDER_DISLOCATION_CITATIONS } from './shoulder-dislocation';
+export { PEDS_SUBMERSION_NODES, PEDS_SUBMERSION_MODULE_LABELS, PEDS_SUBMERSION_CITATIONS } from './peds-submersion';
+export { BRUGADA_SYNDROME_NODES, BRUGADA_SYNDROME_MODULE_LABELS, BRUGADA_SYNDROME_CITATIONS } from './brugada-syndrome';
+export { HD_EMERGENCIES_NODES, HD_EMERGENCIES_MODULE_LABELS, HD_EMERGENCIES_CITATIONS } from './hd-emergencies';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**
