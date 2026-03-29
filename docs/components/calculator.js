@@ -14747,6 +14747,493 @@ const HD_DDS_PREVENTION_CALCULATOR = {
         };
     },
 };
+// ─────────────────────────────────────────────────────────────────────────────
+// Marine Envenomation Calculators
+// ─────────────────────────────────────────────────────────────────────────────
+const MARINE_CREATURE_ID_CALCULATOR = {
+    id: 'marine-creature-id',
+    title: 'Creature Identification',
+    subtitle: 'Marine Envenomation',
+    description: 'Identify likely marine creature based on geographic location, mechanism, wound pattern, and symptoms.',
+    fields: [
+        {
+            name: 'location',
+            label: 'Geographic Location',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Tropical Australia (north of Bundaberg)', points: 1 },
+                { label: 'Indo-Pacific (excl. Australia)', points: 2 },
+                { label: 'Caribbean / Florida / Gulf', points: 3 },
+                { label: 'Hawaii', points: 4 },
+                { label: 'Mediterranean', points: 5 },
+                { label: 'Other / Unknown', points: 6 },
+            ],
+        },
+        {
+            name: 'mechanism',
+            label: 'Mechanism of Injury',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stepped on something in water', points: 1 },
+                { label: 'Brushed against tentacles while swimming', points: 2 },
+                { label: 'Picked up or handled creature', points: 3 },
+                { label: 'Bitten by aquatic creature', points: 4 },
+                { label: 'Unknown', points: 5 },
+            ],
+        },
+        {
+            name: 'wound-pattern',
+            label: 'Wound Pattern',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Long whip-like marks / linear welts', points: 1 },
+                { label: 'Single puncture wound', points: 2 },
+                { label: 'Multiple small punctures', points: 3 },
+                { label: 'Minimal visible wound', points: 4 },
+                { label: 'Deep laceration with barb', points: 5 },
+            ],
+        },
+        {
+            name: 'symptoms',
+            label: 'Primary Symptom',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Intense local pain (immediate)', points: 1 },
+                { label: 'Cardiac arrhythmias / arrest', points: 2 },
+                { label: 'Delayed HTN + sense of doom', points: 3 },
+                { label: 'Ascending paralysis', points: 4 },
+                { label: 'Rhabdomyolysis + weakness', points: 5 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Custom identification logic based on clinical pattern matching',
+    citations: [
+        'Diaz JH. Marine Envenomation: Current Concepts. Wilderness Environ Med. 2023;34(1):e72-e88.',
+        'Lippmann JM, et al. Marine Stingers: Review of an Under-Recognized Global Threat. Emerg Med J. 2022;39(8):621-629.',
+    ],
+    computeResult: (values) => {
+        // Map points back to meaningful values
+        const location = values['location'];
+        const mechanism = values['mechanism'];
+        const wound = values['wound-pattern'];
+        const symptoms = values['symptoms'];
+        let creatures = [];
+        let treatment = '';
+        let colorVar = '--color-primary';
+        // Logic for identification using point values
+        // symptoms: 1=local-pain, 2=cardiac, 3=irukandji, 4=paralysis, 5=myotoxic
+        // mechanism: 1=stepped, 2=tentacles, 3=handled, 4=bitten, 5=unknown
+        // wound: 1=whip, 2=single-puncture, 3=multi-puncture, 4=minimal, 5=barb
+        // location: 1=tropical-aus, 2=indo-pacific, 3=caribbean, 4=hawaii, 5=med, 6=other
+        if (symptoms === 2 && wound === 1) { // cardiac + whip
+            creatures = ['Box Jellyfish (Chironex fleckeri)'];
+            treatment = '**VINEGAR 30 sec** → Antivenom → Cardiac monitoring\n\nUp to 6 ampoules IV push if arrest';
+            colorVar = '--color-danger';
+        }
+        else if (symptoms === 3) { // irukandji
+            creatures = ['Irukandji Syndrome (Carukia barnesi)'];
+            treatment = '**Vinegar** → IV fentanyl → GTN for HTN → Mg for refractory pain\n\nNo antivenom available';
+            colorVar = '--color-danger';
+        }
+        else if (symptoms === 4) { // paralysis
+            if (mechanism === 3) { // handled
+                creatures = ['Blue-ringed Octopus', 'Cone Snail'];
+            }
+            else if (mechanism === 4) { // bitten
+                creatures = ['Sea Snake'];
+            }
+            else {
+                creatures = ['Blue-ringed Octopus', 'Cone Snail', 'Sea Snake'];
+            }
+            treatment = '**PRESSURE IMMOBILIZATION** → Prepare for intubation\n\nNo antivenom for octopus/cone snail; Sea Snake Antivenom available';
+            colorVar = '--color-danger';
+        }
+        else if (symptoms === 5) { // myotoxic
+            creatures = ['Sea Snake'];
+            treatment = '**PRESSURE IMMOBILIZATION** → Check CK, renal\n\nSea Snake Antivenom 1 vial IV (diluted 1:10)';
+            colorVar = '--color-danger';
+        }
+        else if (symptoms === 1) { // local-pain
+            if (mechanism === 1) { // stepped
+                if (wound === 5 || wound === 2) { // barb or single-puncture
+                    creatures = ['Stingray'];
+                    treatment = '**HOT WATER 40-45°C** → X-ray for barb → Antibiotics\n\nNo antivenom needed';
+                }
+                else if (wound === 3) { // multi-puncture
+                    if (location === 1 || location === 2) { // tropical-aus or indo-pacific
+                        creatures = ['Stonefish', 'Sea Urchin'];
+                        treatment = '**HOT WATER 40-45°C** → Consider Stonefish Antivenom if severe pain\n\nRemove visible spines';
+                    }
+                    else {
+                        creatures = ['Sea Urchin', 'Lionfish/Scorpionfish'];
+                        treatment = '**HOT WATER 40-45°C** → Remove visible spines\n\nNo antivenom for lionfish';
+                    }
+                }
+                else {
+                    creatures = ['Stonefish', 'Stingray', 'Sea Urchin'];
+                    treatment = '**HOT WATER 40-45°C** is first-line for all fish envenomations';
+                }
+                colorVar = '--color-warning';
+            }
+            else if (mechanism === 2) { // tentacles
+                if (location === 1) { // tropical-aus
+                    creatures = ['Box Jellyfish', 'Irukandji', 'Bluebottle'];
+                    treatment = '**VINEGAR for box jelly/Irukandji** | **HOT WATER for bluebottle** (no vinegar)';
+                }
+                else {
+                    creatures = ['Bluebottle / Portuguese Man-of-War', 'Other Jellyfish'];
+                    treatment = '**HOT WATER 43-45°C** (no vinegar for bluebottle)';
+                }
+                colorVar = '--color-warning';
+            }
+        }
+        if (creatures.length === 0) {
+            creatures = ['Unable to identify - consider symptoms and geographic clues'];
+            treatment = 'Supportive care, contact Poison Control';
+            colorVar = '--color-warning';
+        }
+        let result = `**Most Likely Creature(s):**\n`;
+        creatures.forEach(c => { result += `• ${c}\n`; });
+        result += `\n**Recommended First Aid/Treatment:**\n${treatment}`;
+        return {
+            value: creatures[0],
+            label: creatures.length === 1 ? creatures[0] : `${creatures.length} possibilities`,
+            description: result,
+            colorVar,
+        };
+    },
+};
+const MARINE_IRUKANDJI_SEVERITY_CALCULATOR = {
+    id: 'marine-irukandji-severity',
+    title: 'Irukandji Severity',
+    subtitle: 'Symptom Assessment',
+    description: 'Assess severity of Irukandji syndrome based on clinical features. Guides aggressiveness of treatment.',
+    fields: [
+        { name: 'doom', label: 'Sense of impending doom', type: 'toggle', points: 2 },
+        { name: 'severe-pain', label: 'Severe pain (back, limbs, abdomen)', type: 'toggle', points: 2 },
+        { name: 'hypertension', label: 'Hypertension (SBP >160)', type: 'toggle', points: 2 },
+        { name: 'tachycardia', label: 'Tachycardia (HR >100)', type: 'toggle', points: 1 },
+        { name: 'diaphoresis', label: 'Diaphoresis / restlessness', type: 'toggle', points: 1 },
+        { name: 'nausea', label: 'Nausea / vomiting', type: 'toggle', points: 1 },
+        { name: 'pulm-edema', label: 'Pulmonary edema', type: 'toggle', points: 3 },
+        { name: 'cardiac-dysfunction', label: 'Cardiac dysfunction on echo', type: 'toggle', points: 3 },
+    ],
+    results: [
+        { min: 0, max: 4, label: 'Mild', risk: 'Low Risk', mortality: 'Supportive care, observation', colorVar: '--color-primary' },
+        { min: 4, max: 8, label: 'Moderate', risk: 'Moderate Risk', mortality: 'IV analgesia, GTN for HTN, consider Mg', colorVar: '--color-warning' },
+        { min: 8, max: Infinity, label: 'Severe', risk: 'High Risk', mortality: 'ICU, aggressive BP control, echo, may need inotropes', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score ≥8: Severe (ICU required). Score 4-7: Moderate. Score 0-3: Mild.',
+    citations: [
+        'Fenner PJ, et al. Irukandji syndrome: a devastating syndrome caused by a north Australian jellyfish. Med J Aust. 1986;145:636-638.',
+        'Nickson CP, et al. Irukandji Syndrome Case Series from Australia. Ann Emerg Med. 2009;54:395-403.',
+    ],
+    computeResult: (values) => {
+        let score = 0;
+        if (values['doom'])
+            score += 2;
+        if (values['severe-pain'])
+            score += 2;
+        if (values['hypertension'])
+            score += 2;
+        if (values['tachycardia'])
+            score += 1;
+        if (values['diaphoresis'])
+            score += 1;
+        if (values['nausea'])
+            score += 1;
+        if (values['pulm-edema'])
+            score += 3;
+        if (values['cardiac-dysfunction'])
+            score += 3;
+        let severity;
+        let treatment;
+        let colorVar;
+        if (score >= 8) {
+            severity = 'Severe';
+            treatment = `**ICU admission required**
+
+• IV fentanyl 1-2 mcg/kg q10min
+• GTN infusion for SBP >160
+• IV magnesium 10 mmol for refractory pain
+• Bedside echo for cardiomyopathy
+• Consider inotropes if cardiac dysfunction`;
+            colorVar = '--color-danger';
+        }
+        else if (score >= 4) {
+            severity = 'Moderate';
+            treatment = `**Close monitoring required**
+
+• IV fentanyl 0.5-1 mcg/kg q10min
+• GTN infusion if SBP >160
+• IV ondansetron for nausea
+• Consider Mg for refractory pain
+• Echo if cardiac concerns`;
+            colorVar = '--color-warning';
+        }
+        else {
+            severity = 'Mild';
+            treatment = `**Supportive care**
+
+• Oral analgesia may suffice
+• IV access, cardiac monitoring
+• Observe 4-6 hours minimum
+• Upgrade if symptoms progress`;
+            colorVar = '--color-primary';
+        }
+        return {
+            value: String(score),
+            label: `${severity} (Score: ${score})`,
+            description: treatment,
+            colorVar,
+        };
+    },
+};
+const MARINE_HOT_WATER_CALCULATOR = {
+    id: 'marine-hot-water',
+    title: 'Hot Water Immersion',
+    subtitle: 'Timer & Protocol',
+    description: 'Hot water immersion protocol for heat-labile fish venoms. Temperature and duration guidance.',
+    fields: [
+        {
+            name: 'creature',
+            label: 'Creature Type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stingray', points: 1 },
+                { label: 'Stonefish', points: 2 },
+                { label: 'Lionfish / Scorpionfish', points: 3 },
+                { label: 'Sea Urchin', points: 4 },
+                { label: 'Bluebottle / Man-of-War', points: 5 },
+                { label: 'Other fish spine', points: 6 },
+            ],
+        },
+        {
+            name: 'pain-level',
+            label: 'Current Pain Level (0-10)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Mild (1-3)', points: 1 },
+                { label: 'Moderate (4-6)', points: 2 },
+                { label: 'Severe (7-10)', points: 3 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'All fish venoms are heat-labile. Hot water denatures venom proteins.',
+    citations: [
+        'Burnett JW. Treatment of Marine Envenomations. Clin Toxicol. 2022;60(7):794-806.',
+        'Loten C, et al. A randomised controlled trial of hot water (45°C) immersion versus ice packs for pain relief in bluebottle stings. Med J Aust. 2006;184:329-333.',
+    ],
+    computeResult: (values) => {
+        // creature: 1=stingray, 2=stonefish, 3=lionfish, 4=urchin, 5=bluebottle, 6=other
+        // pain: 1=mild, 2=moderate, 3=severe
+        const creature = values['creature'];
+        const pain = values['pain-level'];
+        let temp = '40-45°C (104-113°F)';
+        let duration = '30-90 minutes';
+        let notes = '';
+        // creature: 1=stingray, 2=stonefish, 3=lionfish, 4=urchin, 5=bluebottle, 6=other
+        if (creature === 2) { // stonefish
+            temp = '40-42°C (104-108°F)';
+            duration = '20+ minutes (often 60-90 min)';
+            notes = `**Stonefish - Most Potent Fish Venom**
+
+• Hot water is first-line but often insufficient
+• Consider regional nerve block
+• Stonefish Antivenom if pain uncontrolled:
+  - 1 ampoule per 2 spine punctures
+  - Max 3 ampoules initially
+  - IV diluted in 100mL NS over 20 min`;
+        }
+        else if (creature === 1) { // stingray
+            temp = '40-45°C (104-113°F)';
+            duration = '30-90 minutes';
+            notes = `**Stingray Protocol**
+
+• Test water on unaffected limb first
+• Immerse until significant pain relief
+• X-ray to rule out retained barb
+• Antibiotics recommended for all stingray injuries
+• Watch for deep penetrating trauma`;
+        }
+        else if (creature === 3) { // lionfish
+            temp = '40-45°C (104-113°F)';
+            duration = '30-60 minutes';
+            notes = `**Lionfish / Scorpionfish**
+
+• 94% achieve complete or moderate relief
+• No antivenom available
+• Remove visible spines carefully
+• Watch for necrosis at days-weeks`;
+        }
+        else if (creature === 4) { // urchin
+            temp = '40-46°C (104-115°F)';
+            duration = '30-90 minutes';
+            notes = `**Sea Urchin Protocol**
+
+• Remove visible spines after hot water
+• Shaving cream + razor for pedicellariae
+• X-ray if retained spines suspected
+• Watch for granuloma formation weeks later
+• Surgical consult for spines near joints`;
+        }
+        else if (creature === 5) { // bluebottle
+            temp = '43-45°C (109-113°F)';
+            duration = 'Up to 30 minutes';
+            notes = `**Bluebottle / Portuguese Man-of-War**
+
+⚠️ **DO NOT USE VINEGAR** - causes nematocyst discharge
+
+• Rinse with seawater, remove tentacles
+• Hot water is treatment of choice
+• Ice if hot water unavailable
+• Rarely causes systemic symptoms`;
+        }
+        else {
+            notes = `**General Fish Envenomation**
+
+• All fish venoms are heat-labile
+• Hot water denatures venom proteins
+• Test on unaffected limb to avoid burns
+• Repeat as needed if pain returns`;
+        }
+        let result = `**Temperature:** ${temp}\n**Duration:** ${duration}\n\n${notes}`;
+        // pain: 1=mild, 2=moderate, 3=severe
+        if (pain === 3) {
+            result += `\n\n**For Severe Pain:**\n• IV opioids in addition to hot water\n• Consider regional nerve block\n• May need antivenom if stonefish`;
+        }
+        return {
+            value: duration,
+            label: `${temp} for ${duration}`,
+            description: result,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const MARINE_ADMISSION_CRITERIA_CALCULATOR = {
+    id: 'marine-admission-criteria',
+    title: 'Admission Decision',
+    subtitle: 'Marine Envenomation',
+    description: 'Determine disposition based on clinical criteria for marine envenomation patients.',
+    fields: [
+        { name: 'antivenom', label: 'Received antivenom', type: 'toggle', points: 3 },
+        { name: 'resp-distress', label: 'Respiratory distress or paralysis', type: 'toggle', points: 3 },
+        { name: 'cardiac', label: 'Cardiac arrhythmias or arrest', type: 'toggle', points: 3 },
+        { name: 'hypotension', label: 'Hypotension requiring fluids/pressors', type: 'toggle', points: 3 },
+        { name: 'irukandji', label: 'Irukandji syndrome with ongoing symptoms', type: 'toggle', points: 3 },
+        { name: 'blue-ring', label: 'Blue-ringed octopus or cone snail exposure', type: 'toggle', points: 3 },
+        { name: 'or-needed', label: 'Penetrating trauma requiring OR', type: 'toggle', points: 3 },
+        { name: 'iv-analgesia', label: 'Requiring ongoing IV analgesia', type: 'toggle', points: 2 },
+        { name: 'severe-cramping', label: 'Severe muscle cramping', type: 'toggle', points: 2 },
+        { name: 'iv-antibiotics', label: 'IV antibiotics for severe infection', type: 'toggle', points: 2 },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'Discharge', risk: 'Low Risk', mortality: 'Safe for discharge with precautions', colorVar: '--color-primary' },
+        { min: 1, max: 3, label: 'Consider Admission', risk: 'Moderate Risk', mortality: 'Extended observation or floor admission', colorVar: '--color-warning' },
+        { min: 3, max: Infinity, label: 'Admit', risk: 'High Risk', mortality: 'Admission required', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score ≥3: Admit. Score 1-2: Consider admission. Score 0: May discharge.',
+    citations: [
+        'Lippmann JM, et al. Marine Envenomation: Current Emergency Management. Emerg Med Clin North Am. 2021;39(2):369-390.',
+        'Australian Resuscitation Council Guideline 9.4.5 Envenomation - Marine Stings. 2021.',
+    ],
+    computeResult: (values) => {
+        let score = 0;
+        const reasons = [];
+        if (values['antivenom']) {
+            score += 3;
+            reasons.push('Antivenom administered');
+        }
+        if (values['resp-distress']) {
+            score += 3;
+            reasons.push('Respiratory compromise');
+        }
+        if (values['cardiac']) {
+            score += 3;
+            reasons.push('Cardiac involvement');
+        }
+        if (values['hypotension']) {
+            score += 3;
+            reasons.push('Hemodynamic instability');
+        }
+        if (values['irukandji']) {
+            score += 3;
+            reasons.push('Irukandji syndrome');
+        }
+        if (values['blue-ring']) {
+            score += 3;
+            reasons.push('Potential tetrodotoxin');
+        }
+        if (values['or-needed']) {
+            score += 3;
+            reasons.push('Surgical intervention needed');
+        }
+        if (values['iv-analgesia']) {
+            score += 2;
+            reasons.push('IV analgesia required');
+        }
+        if (values['severe-cramping']) {
+            score += 2;
+            reasons.push('Severe cramping');
+        }
+        if (values['iv-antibiotics']) {
+            score += 2;
+            reasons.push('IV antibiotics needed');
+        }
+        let disposition;
+        let details;
+        let colorVar;
+        if (score >= 3) {
+            disposition = 'ADMIT';
+            if (values['antivenom'] || values['resp-distress'] || values['cardiac'] || values['blue-ring']) {
+                details = '**ICU Admission Required**\n\n';
+            }
+            else {
+                details = '**Floor Admission**\n\n';
+            }
+            details += `**Reasons:**\n`;
+            reasons.forEach(r => { details += `• ${r}\n`; });
+            colorVar = '--danger';
+        }
+        else if (score >= 1) {
+            disposition = 'Extended Observation';
+            details = `**Consider 6-12 hour observation or admission**\n\n`;
+            details += `**Concerns:**\n`;
+            reasons.forEach(r => { details += `• ${r}\n`; });
+            details += `\n**Reassess for:**\n• Delayed systemic symptoms\n• Pain requiring IV meds\n• New respiratory symptoms`;
+            colorVar = '--warning';
+        }
+        else {
+            disposition = 'Safe for Discharge';
+            details = `**Discharge Criteria Met:**
+• Pain controlled with oral analgesics
+• No systemic symptoms after 3-4 hour observation
+• Wound care instructions provided
+• Tetanus prophylaxis complete
+
+**Discharge With:**
+• Written wound care instructions
+• Return precautions (infection, worsening pain, breathing difficulty)
+• Antibiotic prescription if indicated (stingray, deep puncture)
+• Follow-up in 48-72 hours if deep wound`;
+            colorVar = '--success';
+        }
+        return {
+            value: String(score),
+            label: disposition,
+            description: details,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Pediatric Submersion
     'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -14993,6 +15480,11 @@ const CALCULATORS = {
     'pelvic-hemorrhage-source': PELVIC_HEMORRHAGE_SOURCE_CALCULATOR,
     // ILE Dosing (alias for intralipid tree)
     'ile-dosing': BB_INTRALIPID_CALCULATOR,
+    // Marine Envenomation
+    'marine-creature-id': MARINE_CREATURE_ID_CALCULATOR,
+    'marine-irukandji-severity': MARINE_IRUKANDJI_SEVERITY_CALCULATOR,
+    'marine-hot-water': MARINE_HOT_WATER_CALCULATOR,
+    'marine-admission-criteria': MARINE_ADMISSION_CRITERIA_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

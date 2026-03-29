@@ -513,6 +513,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/hd-emergencies.js');
             return { nodes: m.HD_EMERGENCIES_NODES, entryNodeId: 'hd-start', categoryId: 'critical-care', moduleLabels: m.HD_EMERGENCIES_MODULE_LABELS, citations: m.HD_EMERGENCIES_CITATIONS };
         },
+        'marine-envenomation': async () => {
+            const m = await import('../data/trees/marine-envenomation.js');
+            return { nodes: m.MARINE_ENVENOMATION_NODES, entryNodeId: 'marine-start', categoryId: 'toxicology', moduleLabels: m.MARINE_ENVENOMATION_MODULE_LABELS, citations: m.MARINE_ENVENOMATION_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

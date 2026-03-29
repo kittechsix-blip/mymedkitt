@@ -184,6 +184,7 @@ const TREE_REGISTRY = {
   'peds-submersion':      { prefix: 'PEDS_SUBMERSION',      entryNodeId: 'submersion-start', categoryId: 'pediatrics' },
   'brugada-syndrome':     { prefix: 'BRUGADA_SYNDROME',     entryNodeId: 'brugada-start',    categoryId: 'cardiology' },
   'hd-emergencies':       { prefix: 'HD_EMERGENCIES',       entryNodeId: 'hd-start',         categoryId: 'critical-care' },
+  'marine-envenomation':  { prefix: 'MARINE_ENVENOMATION',  entryNodeId: 'marine-start',     categoryId: 'toxicology' },
 };
 
 const CROSS_LISTINGS = {

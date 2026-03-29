@@ -76,6 +76,7 @@ export { SHOULDER_DISLOCATION_NODES, SHOULDER_DISLOCATION_MODULE_LABELS, SHOULDE
 export { PEDS_SUBMERSION_NODES, PEDS_SUBMERSION_MODULE_LABELS, PEDS_SUBMERSION_CITATIONS } from './peds-submersion';
 export { BRUGADA_SYNDROME_NODES, BRUGADA_SYNDROME_MODULE_LABELS, BRUGADA_SYNDROME_CITATIONS } from './brugada-syndrome';
 export { HD_EMERGENCIES_NODES, HD_EMERGENCIES_MODULE_LABELS, HD_EMERGENCIES_CITATIONS } from './hd-emergencies';
+export { MARINE_ENVENOMATION_NODES, MARINE_ENVENOMATION_MODULE_LABELS, MARINE_ENVENOMATION_CITATIONS } from './marine-envenomation';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
