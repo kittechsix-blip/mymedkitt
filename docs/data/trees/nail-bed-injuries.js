@@ -15,9 +15,9 @@ export const NAIL_BED_INJURIES_NODES = [
         citation: [1, 2],
         images: [
             {
-                src: 'assets/anatomy/nail-anatomy-cross-section.svg',
-                caption: 'Nail anatomy cross-section showing nail plate, nail bed (germinal and sterile matrix), eponychium, and hyponychium',
-                alt: 'Anatomical diagram of fingernail cross-section',
+                src: 'assets/anatomy/nail-anatomy.png',
+                caption: 'Nail anatomy: sagittal cross-section showing germinal matrix, sterile matrix, lunula, eponychium, nail fold, and hyponychium with dorsal view',
+                alt: 'Labeled nail anatomy cross-section and dorsal view',
             },
         ],
         next: 'nail-anatomy-clinical',
@@ -29,13 +29,6 @@ export const NAIL_BED_INJURIES_NODES = [
         title: 'Clinical Anatomy Relevance',
         body: '**Why anatomy matters for repair:** [1,2,3]\n\n**Germinal matrix injuries (proximal):**\n- Result in nail growth abnormalities\n- Split nail, ridged nail, absent nail\n- Require meticulous repair under magnification\n- Higher risk of permanent deformity\n\n**Sterile matrix injuries (distal):**\n- Result in non-adherence of nail to bed\n- Nail lifts off, catches on objects\n- Generally more forgiving with repair\n- Still needs anatomic alignment\n\n**Key relationships:** [3]\n- Nail bed sits on periosteum of distal phalanx\n- Fracture beneath = open fracture (nail bed laceration communicates)\n- 50% of nail bed injuries have associated distal phalanx fracture\n- Nail fold maintains normal nail growth direction\n\n**Blood supply:**\n- Paired digital arteries → redundant supply\n- Digital block does not compromise healing',
         citation: [1, 2, 3],
-        images: [
-            {
-                src: 'assets/anatomy/nail-anatomy-sagittal.svg',
-                caption: 'Sagittal view showing germinal matrix (proximal) vs sterile matrix (distal) and their clinical significance',
-                alt: 'Longitudinal nail anatomy showing germinal and sterile matrix',
-            },
-        ],
         next: 'nail-injury-types',
     },
     {
@@ -120,13 +113,6 @@ export const NAIL_BED_INJURIES_NODES = [
         title: 'Trephination Technique',
         body: '**Trephination = creating hole in nail to drain hematoma.** [1,5]\n\n**Methods:**\n\n**1. Electrocautery (preferred):**\n- Battery-powered cautery device\n- Touch to nail surface, melts through\n- No pressure needed (painless)\n- Stop immediately when blood wells up\n- Fast, efficient, minimal equipment\n\n**2. 18-gauge needle:**\n- Rotate needle between fingers while applying gentle pressure\n- Drill through nail plate\n- More time-consuming but always available\n\n**3. Heated paperclip (historical):**\n- Heat paperclip until red-hot\n- Touch to nail surface\n- Multiple applications may be needed\n- Less controlled than electrocautery\n\n**Tips:**\n- One hole may suffice; add second if drainage incomplete\n- Blood will drain spontaneously with pressure release\n- No need for digital block (nail plate has no sensation)\n- Express remaining blood with gentle pressure',
         citation: [1, 5],
-        images: [
-            {
-                src: 'assets/anatomy/nail-trephination.svg',
-                caption: 'Trephination technique using electrocautery to create drainage hole in nail plate',
-                alt: 'Illustration of nail trephination procedure',
-            },
-        ],
         next: 'nail-hematoma-dispo',
     },
     {
@@ -155,13 +141,6 @@ export const NAIL_BED_INJURIES_NODES = [
         title: 'Nail Plate Removal',
         body: '**When nail plate removal is indicated for nail bed repair:** [1,3]\n\n**Indications:**\n- Visible nail bed laceration requiring repair\n- Significantly disrupted/avulsed nail plate\n- Nail fold injury needing repair\n- Subungual hematoma with non-adherent nail margins\n\n**Technique:**\n\n**1. Digital block:**\n- Perform digital nerve block (two injection sites at base of finger)\n- Wait 5-10 minutes for complete anesthesia\n- Test for adequate block before proceeding\n\n**2. Elevate nail from bed:**\n- Insert small hemostat or Freer elevator beneath nail\n- Gently advance from distal to proximal\n- Separate nail from sterile matrix\n\n**3. Release from eponychium:**\n- Gently separate nail from germinal matrix and nail fold\n- Use spreading motion, not forceful traction\n\n**4. Remove nail plate:**\n- Grasp with hemostat and remove in one piece if possible\n- Save the nail plate (will use as splint after repair)',
         citation: [1, 3],
-        images: [
-            {
-                src: 'assets/anatomy/nail-plate-removal.svg',
-                caption: 'Technique for nail plate removal using hemostat elevation',
-                alt: 'Illustration of nail plate removal technique',
-            },
-        ],
         next: 'nail-bed-repair',
     },
     // ===================================================================
@@ -183,13 +162,6 @@ export const NAIL_BED_INJURIES_NODES = [
         title: 'Repair Technique',
         body: '**Step-by-step nail bed repair:** [1,3,6]\n\n**Setup:**\n- Digital tourniquet (Penrose drain or commercial device)\n- Adequate lighting and magnification\n- 6-0 or 7-0 absorbable suture on small needle\n\n**Repair steps:**\n\n**1. Irrigate thoroughly** (saline, remove debris)\n\n**2. Identify and align nail bed edges:**\n- Match tissue edges anatomically\n- Germinal matrix especially important\n\n**3. Place interrupted sutures:**\n- Simple interrupted technique\n- Minimal tension\n- Bites just through nail bed (avoid periosteum)\n- 3-4 sutures for simple laceration\n- Space 2-3mm apart\n\n**4. Check alignment:**\n- Smooth surface when palpated\n- No step-off at wound edges\n\n**5. Splint the nail fold:**\n- Replace original nail plate (clean, trim if needed)\n- Or use nail substitute (foil suture packet, silicone sheet)\n- Secure with single mattress suture through eponychium',
         citation: [1, 3, 6],
-        images: [
-            {
-                src: 'assets/anatomy/nail-bed-repair.svg',
-                caption: 'Nail bed laceration repair with fine absorbable sutures',
-                alt: 'Illustration showing nail bed suture repair technique',
-            },
-        ],
         next: 'nail-fold-stent',
     },
     {
@@ -199,6 +171,13 @@ export const NAIL_BED_INJURIES_NODES = [
         title: 'Nail Fold Stenting',
         body: '**Why stent the nail fold:** [3,6]\n\n**Without stent:**\n- Eponychium adheres to nail bed (synechiae)\n- New nail cannot grow out properly\n- Results in split nail or no nail\n\n**Options for nail fold stent:**\n\n**1. Original nail plate (best):**\n- Clean with saline/betadine\n- Trim sharp edges\n- Replace under nail fold\n- Secure with mattress suture through nail and eponychium\n- Holes can be drilled for drainage\n\n**2. Foil suture packet:**\n- Cut to nail shape\n- Place under nail fold\n- Secure with suture\n\n**3. Silicone sheet:**\n- Commercial nail splints available\n- Flexible, non-adherent\n\n**4. Xeroform gauze:**\n- Fold to appropriate size\n- Place under nail fold\n- Less ideal but readily available\n\n**Duration:** Stent stays in place until new nail grows out and pushes it off (4-6 weeks).',
         citation: [3, 6],
+        images: [
+            {
+                src: 'assets/anatomy/nail-bed-repair.png',
+                caption: 'A: Nail plate replaced as stent with mattress suture through eponychium. B: Final appearance after nail fold stenting',
+                alt: 'Nail plate replacement with mattress suture technique',
+            },
+        ],
         next: 'nail-fracture-mgmt',
     },
     {
