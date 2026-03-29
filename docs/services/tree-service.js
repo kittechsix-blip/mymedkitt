@@ -565,6 +565,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/dental-avulsion.js');
             return { nodes: m.DENTAL_AVULSION_NODES, entryNodeId: 'avulsion-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_AVULSION_MODULE_LABELS, citations: m.DENTAL_AVULSION_CITATIONS };
         },
+        'heat-stroke': async () => {
+            const m = await import('../data/trees/heat-stroke.js');
+            return { nodes: m.HEAT_STROKE_NODES, entryNodeId: 'hs-start', categoryId: 'emergency-medicine', moduleLabels: m.HEAT_STROKE_MODULE_LABELS, citations: m.HEAT_STROKE_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

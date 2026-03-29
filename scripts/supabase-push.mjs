@@ -130,6 +130,7 @@ const TREE_REGISTRY = {
   'chf-exacerbation':     { prefix: 'CHF_EXACERBATION',      entryNodeId: 'chf-start',      categoryId: 'cardiology' },
   'migraine':             { prefix: 'MIGRAINE',              entryNodeId: 'migraine-start', categoryId: 'neurology' },
   'snake-envenomation':   { prefix: 'SNAKE_ENVENOMATION',    entryNodeId: 'snake-start',    categoryId: 'emergency-medicine' },
+  'heat-stroke':          { prefix: 'HEAT_STROKE',           entryNodeId: 'hs-start',       categoryId: 'emergency-medicine' },
   'aacg':                 { prefix: 'AACG',                  entryNodeId: 'aacg-start',     categoryId: 'ophthalmology' },
   'chemical-burn':        { prefix: 'CHEMICAL_BURN',         entryNodeId: 'chemburn-start', categoryId: 'ophthalmology' },
   'orbital-cellulitis':   { prefix: 'ORBITAL_CELLULITIS',    entryNodeId: 'orbital-start',  categoryId: 'ophthalmology' },
