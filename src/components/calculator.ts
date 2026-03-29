@@ -14322,7 +14322,156 @@ const ISCVT_RS_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Shoulder Dislocation Calculators
+// -------------------------------------------------------------------
+
+const ISIS_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'isis-score',
+  title: 'ISIS Score',
+  subtitle: 'Instability Severity Index Score',
+  description: 'The ISIS (Instability Severity Index Score) predicts recurrence risk after arthroscopic Bankart repair. Helps guide surgical decision-making between arthroscopic vs augmented (Latarjet) repair.',
+  fields: [
+    { name: 'age', label: 'Age <20 years at surgery', type: 'toggle', points: 2 },
+    { name: 'contact', label: 'Contact or forced overhead sport', type: 'toggle', points: 2, description: 'Rugby, wrestling, hockey, volleyball, etc.' },
+    { name: 'competitive', label: 'Competitive sports participation', type: 'toggle', points: 2 },
+    { name: 'hyperlaxity', label: 'Shoulder hyperlaxity', type: 'toggle', points: 1, description: 'Generalized ligamentous laxity' },
+    { name: 'hill-sachs', label: 'Hill-Sachs on external rotation AP', type: 'toggle', points: 2, description: 'Visible on AP view in external rotation' },
+    { name: 'glenoid-loss', label: 'Glenoid loss of contour on AP', type: 'toggle', points: 2, description: 'Bony Bankart or glenoid bone loss' },
+  ],
+  results: [
+    { min: 0, max: 4, label: 'Low Risk', risk: 'Arthroscopic Bankart Appropriate', mortality: 'Recurrence after arthroscopic Bankart: ~4%', colorVar: '--color-primary' },
+    { min: 4, max: 7, label: 'Moderate Risk', risk: 'Shared Decision-Making', mortality: 'Recurrence after arthroscopic Bankart: ~70%', colorVar: '--color-warning' },
+    { min: 7, max: Infinity, label: 'High Risk', risk: 'Consider Latarjet/Augmented Repair', mortality: 'Arthroscopic Bankart NOT recommended', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'ISIS ≥4: 70% recurrence with arthroscopic Bankart alone. ISIS >6: Latarjet or augmented repair indicated.',
+  citations: [
+    'Balg F, Boileau P. The instability severity index score. J Bone Joint Surg Br. 2007;89(11):1470-1477.',
+  ],
+};
+
+const SHOULDER_RECURRENCE_CALCULATOR: CalculatorDefinition = {
+  id: 'shoulder-recurrence',
+  title: 'Recurrence Risk',
+  subtitle: 'Shoulder Dislocation Recurrence Prediction',
+  description: 'Estimates 5-year recurrence risk after first-time anterior shoulder dislocation based on age and risk factors.',
+  fields: [
+    { name: 'age-group', label: 'Age at first dislocation', type: 'select', points: 0,
+      selectOptions: [
+        { label: '15-20 years', points: 10 },
+        { label: '21-25 years', points: 8 },
+        { label: '26-30 years', points: 6 },
+        { label: '31-35 years', points: 4 },
+        { label: '36-40 years', points: 2 },
+        { label: '>40 years', points: 1 },
+      ],
+    },
+    { name: 'male', label: 'Male sex', type: 'toggle', points: 2, description: 'OR 1.92 for recurrence' },
+    { name: 'contact-sport', label: 'Contact/collision sport', type: 'toggle', points: 2, description: 'Rugby, football, hockey, wrestling' },
+    { name: 'hyperlaxity', label: 'Generalized hyperlaxity', type: 'toggle', points: 1 },
+    { name: 'manual-labor', label: 'Manual occupation', type: 'toggle', points: 1, description: 'Work involving overhead lifting' },
+    { name: 'hill-sachs', label: 'Hill-Sachs lesion present', type: 'toggle', points: 1, description: 'On post-reduction imaging' },
+    { name: 'bony-bankart', label: 'Bony Bankart lesion', type: 'toggle', points: 1, description: 'Glenoid bone loss' },
+  ],
+  results: [
+    { min: 0, max: 5, label: 'Lower Risk', risk: 'Lower Recurrence Risk', mortality: '5-year recurrence: 10-30%', colorVar: '--color-primary' },
+    { min: 5, max: 10, label: 'Moderate Risk', risk: 'Moderate Recurrence Risk', mortality: '5-year recurrence: 50-75%', colorVar: '--color-warning' },
+    { min: 10, max: Infinity, label: 'High Risk', risk: 'High Recurrence Risk', mortality: '5-year recurrence: >75%', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Age <25: Surgery reduces re-dislocation significantly (RR 0.14). High-risk patients warrant early surgical referral.',
+  citations: [
+    'Olds M, et al. Predicting recurrent instability of the shoulder (PRIS). JOSPT. 2020;50(8):431-437.',
+    'Hovelius L, et al. Primary anterior dislocation of the shoulder in young patients: a ten-year prospective study. J Bone Joint Surg Am. 1996;78(11):1677-84.',
+  ],
+};
+
+const QUEBEC_XRAY_CALCULATOR: CalculatorDefinition = {
+  id: 'quebec-xray',
+  title: 'Quebec Decision Rule',
+  subtitle: 'Pre-Reduction Radiograph Decision Aid',
+  description: 'Clinical decision aid for determining whether pre-reduction radiographs are necessary in anterior shoulder dislocation.',
+  fields: [
+    { name: 'age-40', label: 'Age >40 years', type: 'toggle', points: 3 },
+    { name: 'first-episode', label: 'First episode (never dislocated before)', type: 'toggle', points: 2 },
+    { name: 'high-energy', label: 'High-energy mechanism', type: 'toggle', points: 2, description: 'Fall >1 flight stairs, MVA, assault, fall from height' },
+    { name: 'uncertain', label: 'Clinical uncertainty about dislocation', type: 'toggle', points: 2, description: 'Unclear if truly dislocated vs other pathology' },
+    { name: 'different-mechanism', label: 'Different mechanism than usual (if recurrent)', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'May Defer', risk: 'Pre-Reduction Imaging Optional', mortality: 'Low fracture risk (<1%). May reduce without imaging.', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Consider Imaging', risk: 'Consider Pre-Reduction Radiographs', mortality: 'Moderate fracture risk. Use clinical judgment.', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'Image First', risk: 'Pre-Reduction Imaging Recommended', mortality: 'Higher fracture risk. Obtain radiographs before reduction.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Pre-reduction radiographs add ~30 min to treatment. 37.5% of fractures only visible post-reduction. Clinical certainty by experienced provider may allow deferral.',
+  citations: [
+    'Hendey GW, et al. Selective radiography in 100 patients with suspected shoulder dislocation. J Emerg Med. 2006;31(1):23-28.',
+    'Emond M, et al. Quebec clinical prediction rule for posterior shoulder dislocation. CJEM. 2009;11(6):543-549.',
+  ],
+};
+
+const REDUCTION_TECHNIQUE_CALCULATOR: CalculatorDefinition = {
+  id: 'reduction-technique',
+  title: 'Technique Selector',
+  subtitle: 'Shoulder Reduction Technique Guide',
+  description: 'Evidence-based guidance for selecting the optimal shoulder reduction technique based on patient factors and resources.',
+  fields: [
+    { name: 'sedation', label: 'Sedation available/planned', type: 'toggle', points: 0, description: 'PSA capability and monitoring available' },
+    { name: 'assistant', label: 'Assistant available', type: 'toggle', points: 0 },
+    { name: 'recurrent', label: 'Recurrent dislocator', type: 'toggle', points: 0 },
+    { name: 'cooperative', label: 'Highly cooperative patient', type: 'toggle', points: 0, description: 'Able to relax on command, calm demeanor' },
+    { name: 'muscular', label: 'Very muscular patient', type: 'toggle', points: 0 },
+    { name: 'time-pressure', label: 'Time pressure (multiple patients)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'FARES has best evidence: 89-95% success, VAS 1.6 pain. Scapular manipulation: 79-97%, fastest when successful.',
+  citations: [
+    'Alkaduhimi H, et al. Network meta-analysis of closed reduction methods for anterior shoulder dislocation. Bone Joint J. 2023.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sedation = values['sedation'] === 1;
+    const assistant = values['assistant'] === 1;
+    const recurrent = values['recurrent'] === 1;
+    const cooperative = values['cooperative'] === 1;
+    const muscular = values['muscular'] === 1;
+    const timePressure = values['time-pressure'] === 1;
+
+    let recommendation = '';
+    let technique = '';
+    let colorVar = '--color-primary';
+
+    if (recurrent && cooperative && !muscular) {
+      technique = 'Cunningham or External Rotation';
+      recommendation = 'CUNNINGHAM (no sedation): Patient sits upright, massage biceps/trapezius, patient shrugs then relaxes. Self-reduces via muscle relaxation.\n\nEXTERNAL ROTATION: Elbow at 90°, slowly externally rotate forearm (~1°/sec). May not need sedation.';
+    } else if (!assistant) {
+      technique = 'Stimson (Prone)';
+      recommendation = 'STIMSON: Patient prone, arm hanging off stretcher. Apply 5-10 lbs weight to wrist. Wait 15-30 minutes for muscle fatigue. No assistant needed but time-intensive.';
+    } else if (sedation && assistant && muscular) {
+      technique = 'Traction-Countertraction';
+      recommendation = 'TRACTION-COUNTERTRACTION: Sheet around chest for countertraction. Apply inline traction on arm with slight abduction. Gradually externally rotate. Best for muscular patients under sedation.';
+      colorVar = '--color-warning';
+    } else if (timePressure) {
+      technique = 'Scapular Manipulation';
+      recommendation = 'SCAPULAR MANIPULATION: Fastest technique (65% reduced in <1 min). Push inferior scapular tip medially while assistant applies forward traction. High success rate: 79-97%.';
+    } else {
+      technique = 'FARES Method (Best Evidence)';
+      recommendation = 'FARES (First-Line): Longitudinal traction + vertical oscillations (±5cm, 2-3/sec) while slowly abducting. At 90° add external rotation. Success: 89-95%, VAS pain 1.6. Can be done without sedation.';
+    }
+
+    return {
+      value: technique,
+      label: 'Recommended Technique',
+      description: recommendation,
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Shoulder Dislocation
+  'isis-score': ISIS_SCORE_CALCULATOR,
+  'shoulder-recurrence': SHOULDER_RECURRENCE_CALCULATOR,
+  'quebec-xray': QUEBEC_XRAY_CALCULATOR,
+  'reduction-technique': REDUCTION_TECHNIQUE_CALCULATOR,
   // CVST
   'cvt-gs': CVT_GS_CALCULATOR,
   'iscvt-rs': ISCVT_RS_CALCULATOR,

@@ -180,6 +180,7 @@ const TREE_REGISTRY = {
   'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
   'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
   'cvst':                 { prefix: 'CVST',                  entryNodeId: 'cvst-start',     categoryId: 'emergency-medicine' },
+  'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'shoulder-start', categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {

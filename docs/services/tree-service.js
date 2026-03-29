@@ -497,6 +497,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/cvst.js');
             return { nodes: m.CVST_NODES, entryNodeId: 'cvst-start', categoryId: 'emergency-medicine', moduleLabels: m.CVST_MODULE_LABELS, citations: m.CVST_CITATIONS };
         },
+        'shoulder-dislocation': async () => {
+            const m = await import('../data/trees/shoulder-dislocation.js');
+            return { nodes: m.SHOULDER_DISLOCATION_NODES, entryNodeId: 'shoulder-start', categoryId: 'emergency-medicine', moduleLabels: m.SHOULDER_DISLOCATION_MODULE_LABELS, citations: m.SHOULDER_DISLOCATION_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
