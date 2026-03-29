@@ -499,7 +499,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'shoulder-dislocation': async () => {
             const m = await import('../data/trees/shoulder-dislocation.js');
-            return { nodes: m.SHOULDER_DISLOCATION_NODES, entryNodeId: 'shoulder-start', categoryId: 'emergency-medicine', moduleLabels: m.SHOULDER_DISLOCATION_MODULE_LABELS, citations: m.SHOULDER_DISLOCATION_CITATIONS };
+            return { nodes: m.SHOULDER_DISLOCATION_NODES, entryNodeId: 'shoulder-start', categoryId: 'orthopedics', moduleLabels: m.SHOULDER_DISLOCATION_MODULE_LABELS, citations: m.SHOULDER_DISLOCATION_CITATIONS };
         },
         'peds-submersion': async () => {
             const m = await import('../data/trees/peds-submersion.js');

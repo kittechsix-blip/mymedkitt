@@ -140,7 +140,7 @@ const TREE_REGISTRY = {
   'viral-myositis':       { prefix: 'VIRAL_MYOSITIS',        entryNodeId: 'vm-start',       categoryId: 'pediatrics' },
   'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
   'cvst':                 { prefix: 'CVST',                  entryNodeId: 'cvst-start',     categoryId: 'emergency-medicine' },
-  'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'shoulder-start', categoryId: 'emergency-medicine' },
+  'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'shoulder-start', categoryId: 'orthopedics' },
   'peds-submersion':      { prefix: 'PEDS_SUBMERSION',      entryNodeId: 'submersion-start', categoryId: 'pediatrics' },
   'brugada-syndrome':     { prefix: 'BRUGADA_SYNDROME',     entryNodeId: 'brugada-start',    categoryId: 'cardiology' },
   'hd-emergencies':       { prefix: 'HD_EMERGENCIES',       entryNodeId: 'hd-start',         categoryId: 'critical-care' },
@@ -176,7 +176,7 @@ const CROSS_LISTINGS = {
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
   'ed-methadone':     [{ categoryId: 'toxicology' }],
   'cvst':             [{ categoryId: 'neurology' }],
-  'shoulder-dislocation': [{ categoryId: 'orthopedics' }, { categoryId: 'procedures' }],
+  'shoulder-dislocation': [{ categoryId: 'procedures' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
