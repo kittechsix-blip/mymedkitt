@@ -354,7 +354,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Cricothyroid Membrane (CTM):**\n• Located between thyroid cartilage (superior) and cricoid cartilage (inferior)\n• Dimensions: **9-19 mm horizontal × 9-20 mm vertical** in adults\n\n**Laryngeal Handshake (palpation technique):**\n1. Non-dominant hand stabilizes larynx\n2. Thumb and 3rd finger grasp lateral thyroid cartilage\n3. Index finger palpates downward to find CTM depression\n4. Brace wrist against sternum for stability\n\n**Obese patients:**\n• CTM may be difficult to palpate — use ultrasound if immediately available\n• Vertical skin incision (~4 cm) to expose landmarks before cutting CTM\n• Full head extension (unless c-spine precaution) improves palpation\n\n**Key landmark:** The CTM is the soft depression below the thyroid cartilage prominence (Adam\'s apple) and above the cricoid ring.',
         citation: [6, 7],
         images: [
-            { src: './images/difficult-airway/laryngeal-handshake.png', alt: 'Laryngeal handshake technique — non-dominant hand stabilizes larynx with thumb and third finger grasping thyroid cartilage, index finger palpating CTM' },
+            { src: './images/difficult-airway/laryngeal-handshake.png', alt: 'Laryngeal handshake technique — non-dominant hand stabilizes larynx with thumb and third finger grasping thyroid cartilage, index finger palpating CTM', caption: 'Laryngeal Handshake' },
         ],
         next: 'dab-cric-technique',
     },
@@ -366,7 +366,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Step 1:** **Stabilize larynx** with non-dominant hand (laryngeal handshake)\n\n**Step 2:** **Vertical skin incision** (~4 cm) over CTM — exposes landmarks even if anatomy is obscured. If anatomy is clear, single horizontal stab may suffice.\n\n**Step 3:** **Palpate CTM** with finger through incision — confirm depression between thyroid and cricoid\n\n**Step 4:** **Horizontal stab** through CTM (lower half to avoid superior vessels and vocal cords)\n\n**Step 5:** **Extend incision** — rotate scalpel 180° and extend in opposite direction (blade stays in)\n\n**Step 6:** **Finger in** — replace scalpel with non-dominant index finger through CTM into airway lumen\n\n**Step 7:** **Bougie insertion** — slide lubricated bougie alongside finger into trachea, advance until resistance at 10-15 cm\n\n**Step 8:** **Railroad ETT** (6.0 mm cuffed) over bougie — advance until cuff disappears into airway\n\n**Step 9:** **Inflate cuff**, remove bougie\n\n**Step 10:** **Confirm** with waveform capnography',
         citation: [6, 7, 19],
         images: [
-            { src: './images/difficult-airway/vertical-incision.png', alt: 'Vertical skin incision over cricothyroid membrane with scalpel and bougie placement — simulation model demonstrating landmark identification and incision technique' },
+            { src: './images/difficult-airway/vertical-incision.png', alt: 'Vertical skin incision over cricothyroid membrane with scalpel and bougie placement — simulation model demonstrating landmark identification and incision technique', caption: 'Vertical Incision' },
         ],
         next: 'dab-cric-confirm',
     },
