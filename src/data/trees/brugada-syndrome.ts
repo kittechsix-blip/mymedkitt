@@ -51,6 +51,11 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     module: 2,
     title: 'ECG Pattern Types',
     body: '**Brugada ECG Patterns:**\n\n**Type 1 (Coved) — DIAGNOSTIC**\n• Coved ST elevation ≥2mm in ≥1 lead (V1-V3)\n• Followed by T-wave inversion\n• Concave or straight ST descent below baseline\n• **This is the ONLY diagnostic pattern**\n\n**Type 2 (Saddleback) — SUGGESTIVE ONLY**\n• Saddleback ST elevation ≥0.5mm\n• J-point elevation ≥1mm\n• Positive or biphasic T wave\n• Requires provocation test if clinical suspicion\n\n**Type 3 — No longer considered diagnostic**\n• Now considered normal variant\n\n**Tip: Use HIGH precordial leads**\n• Place V1/V2 in 2nd or 3rd intercostal space\n• Increases sensitivity for detecting patterns',
+    images: [
+      { src: 'images/brugada/type-1-coved.png', alt: 'Brugada Type 1 (Coved) ECG pattern', caption: 'Type 1 — Coved ST elevation with T-wave inversion (DIAGNOSTIC)' },
+      { src: 'images/brugada/type-2-saddleback.png', alt: 'Brugada Type 2 (Saddleback) ECG pattern', caption: 'Type 2 — Saddleback ST elevation (SUGGESTIVE, requires provocation)' },
+      { src: 'images/brugada/type-3-variant.png', alt: 'Brugada Type 3 ECG pattern', caption: 'Type 3 — No longer considered diagnostic (normal variant)' },
+    ],
     citation: [2, 3],
     calculatorLinks: [
       { id: 'brugada-shanghai', label: 'Shanghai Score' },
