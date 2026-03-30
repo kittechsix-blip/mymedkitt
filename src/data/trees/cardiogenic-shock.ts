@@ -20,9 +20,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Definition:** Inadequate tissue perfusion due to primary cardiac dysfunction.\n\n**The SHOCK Spiral (EMCrit):**\n> Hypotension → Coronary hypoperfusion → Worsening ischemia → Further pump failure → More hypotension\n\n**Key Concept:** Every minute in shock = myocardial damage. **Time is myocardium.**\n\n**Mortality:** 40-50% even with modern therapy. Early recognition and aggressive intervention are critical. [1][2]',
     citation: [1, 2],
     calculatorLinks: [
-      { id: 'scai-shock', label: 'SCAI Shock Stage' },
-      { id: 'cardiac-power', label: 'Cardiac Power Output' },
-      { id: 'papi-calculator', label: 'PAPI Calculator' },
+      { id: 'ecmo-scai-stages', label: 'SCAI Shock Stage' },
       { id: 'shock-index', label: 'Shock Index' },
     ],
     next: 'cs-recognize',
@@ -301,8 +299,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**MCS Device Selection:**\n\n| Device | Hemodynamic Support | Best For |\n|--------|--------------------|---------|\n| **IABP** | ~0.5 L/min | Afterload reduction, AMI |\n| **Impella CP** | 3-4 L/min | LV unloading, PCI support |\n| **Impella 5.0/5.5** | 5+ L/min | Severe LV failure |\n| **VA-ECMO** | Full support | Biventricular failure, arrest |\n| **TandemHeart** | 4-5 L/min | Alternative to Impella |\n\n**IABP (still has a role):**\n• Reduces afterload, increases diastolic coronary flow\n• Less hemodynamic support than Impella\n• IABP-SHOCK II was negative, but still used as adjunct\n\n**Impella:**\n• Direct LV unloading\n• Better hemodynamic support than IABP\n• Requires femoral artery access [1][2][7]',
     citation: [1, 2, 7],
     calculatorLinks: [
-      { id: 'mcs-selection', label: 'MCS Device Selection' },
-      { id: 'ecmo-criteria', label: 'VA-ECMO Criteria' },
+      { id: 'ecmo-vv-va-selector', label: 'MCS Device Selection' },
+      { id: 'ecmo-ecpr-criteria', label: 'VA-ECMO Criteria' },
     ],
     next: 'cs-ecmo',
   },
