@@ -22,6 +22,11 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         title: 'LEMON — Difficult Intubation Assessment',
         body: '[LEMON/MOANS/RODS/SHORT Quick Reference](#/info/dab-lemon-card)\n\n**L — Look Externally:** Facial trauma, short neck, small mouth, prominent teeth, large tongue, beard, obesity, blood/secretions\n\n**E — Evaluate 3-3-2 Rule:**\n• **3** fingers between incisors (mouth opening ≥4.5 cm)\n• **3** fingers from mentum to hyoid (mandibular length)\n• **2** fingers from hyoid to thyroid notch (larynx position)\n\n**M — Mallampati Score:**\n• I: full soft palate + uvula + pillars\n• II: soft palate + uvula\n• III: soft palate + base of uvula only\n• IV: hard palate only\n\n**O — Obstruction:** Tumor, abscess, angioedema, epiglottitis, Ludwig angina. Signs: stridor, muffled voice, dysphagia\n\n**N — Neck Mobility:** C-spine injury, ankylosing spondylitis, prior radiation, arthritis. **Single strongest predictor** of difficult intubation.\n\n**LEMON score ≥4** predicts difficult intubation.',
         citation: [14, 9],
+        images: [
+            { src: './images/difficult-airway/mallampati.png', alt: 'Mallampati Classification — Classes I through IV showing progressive obscuring of oropharyngeal structures' },
+            { src: './images/difficult-airway/332-rule.png', alt: '3-3-2 Rule — Finger measurement technique for mouth opening, mandibular length, and larynx position' },
+        ],
+        calculatorLinks: [{ id: 'lemon-score', label: 'LEMON Score Calculator' }],
         next: 'dab-backup',
     },
     {

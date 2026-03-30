@@ -16144,6 +16144,119 @@ ${findings.map(f => `• ${f}`).join('\n')}
   },
 };
 
+// ===================================================================
+// LEMON Score — Difficult Airway Assessment
+// ===================================================================
+const LEMON_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'lemon-score',
+  title: 'LEMON Score',
+  subtitle: 'Difficult Airway Prediction',
+  description: 'The LEMON assessment uses five clinical criteria to predict difficult laryngoscopy and intubation. Each criterion is scored 0-2 points based on severity. Score ≥4 predicts difficult intubation. Neck mobility limitation is the single strongest predictor.',
+  fields: [
+    {
+      name: 'look',
+      label: 'L — Look Externally',
+      type: 'select',
+      points: 0,
+      description: 'Facial trauma, short neck, small mouth, prominent teeth, large tongue, beard, obesity, blood/secretions',
+      selectOptions: [
+        { label: 'Normal — no concerning features', points: 0 },
+        { label: 'Mildly concerning — 1 feature (e.g., beard, mild obesity)', points: 1 },
+        { label: 'Multiple concerning features or significant distortion', points: 2 },
+      ],
+    },
+    {
+      name: 'evaluate',
+      label: 'E — Evaluate 3-3-2 Rule',
+      type: 'select',
+      points: 0,
+      description: '3 fingers mouth opening, 3 fingers mentum→hyoid, 2 fingers hyoid→thyroid notch',
+      selectOptions: [
+        { label: 'All 3 measurements adequate', points: 0 },
+        { label: '1 measurement reduced', points: 1 },
+        { label: '2-3 measurements reduced', points: 2 },
+      ],
+    },
+    {
+      name: 'mallampati',
+      label: 'M — Mallampati Score',
+      type: 'select',
+      points: 0,
+      description: 'Class I: full uvula. Class II: partial uvula. Class III: soft palate only. Class IV: hard palate only.',
+      selectOptions: [
+        { label: 'Class I — full soft palate, uvula, pillars visible', points: 0 },
+        { label: 'Class II — soft palate, uvula visible', points: 1 },
+        { label: 'Class III — soft palate, base of uvula only', points: 2 },
+        { label: 'Class IV — hard palate only', points: 2 },
+      ],
+    },
+    {
+      name: 'obstruction',
+      label: 'O — Obstruction',
+      type: 'select',
+      points: 0,
+      description: 'Tumor, abscess, angioedema, epiglottitis, Ludwig angina, foreign body',
+      selectOptions: [
+        { label: 'No obstruction', points: 0 },
+        { label: 'Partial obstruction (mild stridor, muffled voice)', points: 1 },
+        { label: 'Significant obstruction (severe stridor, dysphagia, drooling)', points: 2 },
+      ],
+    },
+    {
+      name: 'neck',
+      label: 'N — Neck Mobility',
+      type: 'select',
+      points: 0,
+      description: 'C-spine injury, ankylosing spondylitis, arthritis, prior radiation, halo/collar. Strongest single predictor.',
+      selectOptions: [
+        { label: 'Normal mobility — full flexion/extension', points: 0 },
+        { label: 'Mildly reduced — arthritis, age-related stiffness', points: 1 },
+        { label: 'Significantly reduced — c-collar, ankylosing spondylitis, halo', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 2,
+      label: 'Score 0-1',
+      risk: 'Low Risk',
+      mortality: 'Low predicted difficulty. Standard intubation approach appropriate. Bougie at bedside as routine backup.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 4,
+      label: 'Score 2-3',
+      risk: 'Moderate Risk',
+      mortality: 'Moderate predicted difficulty. Bougie-first approach recommended. Video laryngoscopy preferred. Have SGA and surgical airway kit at bedside.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 4,
+      max: 7,
+      label: 'Score 4-6',
+      risk: 'High Risk',
+      mortality: 'High predicted difficulty. Bougie-first mandatory. VL required. Surgical airway kit open. Consider double setup or awake intubation. Call for anesthesia/ENT backup early.',
+      colorVar: '--color-danger',
+    },
+    {
+      min: 7,
+      max: Infinity,
+      label: 'Score 7-10',
+      risk: 'Extreme Risk',
+      mortality: 'Extreme predicted difficulty — multiple pathways compromised. Strongly consider awake intubation. Call anesthesia and ENT immediately. Surgical airway kit open and prepped.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'LEMON ≥4: Predicted difficult intubation. Prepare bougie-first, video laryngoscopy, and have surgical airway immediately available. Consider awake intubation if MOANS, RODS, and SHORT are also concerning.',
+  citations: [
+    'Reed MJ, et al. Can an Airway Assessment Score Predict Difficulty at Intubation in the Emergency Department? Emerg Med J. 2005;22:99-102.',
+    'Modified LEMON assessment correlation study. World J Emerg Surg. 2018;13:33.',
+    'Frerk C, et al. DAS 2015 Guidelines for Management of Unanticipated Difficult Intubation in Adults. Br J Anaesth. 2015;115(6):827-48.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -16399,6 +16512,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'battery-risk-stratification': BATTERY_RISK_STRATIFICATION_CALCULATOR,
   // NAT Screening
   'nat-ten4-facesp': NAT_TEN4_FACESP_CALCULATOR,
+  // Difficult Airway
+  'lemon-score': LEMON_SCORE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
