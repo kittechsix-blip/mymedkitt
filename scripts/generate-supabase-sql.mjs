@@ -72,6 +72,7 @@ function jsonbValOrNull(obj) {
 // Tree registration data (mirrors tree-service.ts TREE_IMPORTS)
 // ---------------------------------------------------------------------------
 const TREE_REGISTRY = {
+  'difficult-airway-bougie': { prefix: 'DIFFICULT_AIRWAY_BOUGIE', entryNodeId: 'dab-start', categoryId: 'anesthesia-airway' },
   'pneumothorax':     { prefix: 'PNEUMOTHORAX',       entryNodeId: 'pneumothorax-start', categoryId: 'us-rads' },
   'pe-treatment':     { prefix: 'PE_TREATMENT',       entryNodeId: 'pe-start',           categoryId: 'critical-care' },
   'priapism':         { prefix: 'PRIAPISM',            entryNodeId: 'priapism-start',     categoryId: 'procedures' },

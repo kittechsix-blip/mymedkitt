@@ -15,6 +15,12 @@ export interface ToolbarConfig {
 }
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'difficult-airway-bougie': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'dab-start' },
+    { id: 'bougie', label: 'Bougie', icon: '🔧', action: 'jump', target: 'dab-technique' },
+    { id: 'confirm', label: 'Confirm', icon: '✅', action: 'jump', target: 'dab-confirm' },
+    { id: 'cric', label: 'Cric', icon: '🔪', action: 'jump', target: 'dab-cric-technique' },
+  ],
   'anaphylaxis': [
     { id: 'criteria', label: 'Criteria', icon: '\u2705', action: 'calculator', target: 'anaphylaxis-criteria' },
     { id: 'epi-calc', label: 'Epi Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'epi-infusion' },

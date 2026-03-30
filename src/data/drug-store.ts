@@ -2273,7 +2273,7 @@ const ETOMIDATE: DrugEntry = {
     },
     {
       indication: 'RSI induction',
-      regimen: '0.3 mg/kg IV push. Onset 15-45 seconds. Hemodynamically neutral — ideal for patients with hypotension or cardiac disease. Single dose does not cause clinically significant adrenal suppression.',
+      regimen: '0.3 mg/kg IV push. Onset 15-45 seconds. Duration 5-15 minutes. Hemodynamically neutral — does not cause hypotension. Single-dose adrenal suppression is clinically insignificant. KeNIK trial showed ketamine is equivalent — etomidate no longer preferred as first-line.',
       weightCalc: { dosePerKg: 0.3, unit: 'mg' },
     },
   ],
@@ -2342,7 +2342,7 @@ const LIDOCAINE: DrugEntry = {
   genericName: 'Lidocaine',
   drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
   route: 'Local injection / IV / Topical',
-  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)'],
+  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment'],
   dosing: [
     {
       indication: 'Epistaxis (topical anesthesia)',
@@ -2361,6 +2361,11 @@ const LIDOCAINE: DrugEntry = {
       indication: 'TCA Overdose — Ventricular Arrhythmia',
       regimen: '1-1.5 mg/kg IV push over 2 min. May repeat 0.5-0.75 mg/kg q5-10 min (max total 3 mg/kg). If effective, start infusion 1-4 mg/min. Second-line after sodium bicarbonate. Class IB antiarrhythmic that competes for sodium channel binding sites — paradoxically IMPROVES sodium channel function by displacing more toxic agents (e.g., amitriptyline). May be more effective against agents that bind sodium channels for prolonged periods.',
       weightCalc: { dosePerKg: 1.5, unit: 'mg', maxDose: 100, label: 'IV push (high end)' },
+    },
+    {
+      indication: 'RSI pretreatment',
+      regimen: '1.5 mg/kg IV, given 3 minutes before induction. Theoretically attenuates ICP response to laryngoscopy — evidence is weak. Consider in patients with elevated ICP when fentanyl is also being given. NOT routinely recommended.',
+      weightCalc: { dosePerKg: 1.5, unit: 'mg' },
     },
   ],
   contraindications: [
@@ -5177,7 +5182,7 @@ const FENTANYL: DrugEntry = {
   genericName: 'Fentanyl citrate',
   drugClass: 'Opioid analgesic (synthetic)',
   route: 'IV/IN',
-  indications: ['Burns pain', 'Acute severe pain', 'Pediatric analgesia (intranasal)', 'SCD pain crisis'],
+  indications: ['Burns pain', 'Acute severe pain', 'Pediatric analgesia (intranasal)', 'SCD pain crisis', 'RSI pretreatment'],
   dosing: [
     {
       indication: 'Burns — IV analgesia',
@@ -5198,6 +5203,11 @@ const FENTANYL: DrugEntry = {
       indication: 'SCD pain crisis IV',
       regimen: '2 mcg/kg IV over 1-2 minutes. Max 100 mcg. Onset 2-3 min. Duration 30-60 min. ED-only option for patients who prefer fentanyl over morphine/hydromorphone.',
       weightCalc: { dosePerKg: 2, unit: 'mcg', maxDose: 100, label: 'IV' },
+    },
+    {
+      indication: 'RSI pretreatment',
+      regimen: '1-3 mcg/kg IV over 1-2 minutes, given 3 minutes before induction. Blunts sympathetic response to laryngoscopy. Consider for: elevated ICP, aortic dissection, severe hypertension. NOT routinely needed for standard RSI.',
+      weightCalc: { dosePerKg: 2, unit: 'mcg', maxDose: 200, label: 'RSI pretreatment' },
     },
   ],
   contraindications: ['MAO inhibitor use within 14 days', 'Severe respiratory depression without ventilatory support'],
@@ -5445,8 +5455,8 @@ const KETAMINE: DrugEntry = {
     },
     {
       indication: 'RSI induction',
-      regimen: '1-2 mg/kg IV push. Hemodynamically stable induction agent — ideal for burns/trauma patients.',
-      weightCalc: { dosePerKg: 1.5, unit: 'mg' },
+      regimen: '1.5-2 mg/kg IV push. Onset 30-60 seconds. Duration 10-20 minutes. Hemodynamically supportive (sympathomimetic) — preferred in hypotension. KeNIK trial: no difference in 7-day mortality vs etomidate. Safe first-line induction agent. NOT contraindicated in head injury (myth debunked).',
+      weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'Standard RSI dose' },
     },
     {
       indication: 'Refractory SE — continuous infusion',
@@ -6351,6 +6361,11 @@ const PROPOFOL: DrugEntry = {
     {
       indication: 'Refractory agitation (post-intubation)',
       regimen: 'After RSI: infusion 5-50 mcg/kg/min IV, titrate to RASS -2 to -3. For patients requiring intubation due to refractory agitation. Continuous monitoring required.',
+    },
+    {
+      indication: 'RSI induction',
+      regimen: '1.5-2.5 mg/kg IV push. Onset 15-45 seconds. Duration 5-10 minutes. CAUSES HYPOTENSION — reduce dose to 0.5-1 mg/kg in hemodynamically fragile patients. Contains egg lecithin and soybean oil (allergy consideration). Less commonly used for RSI in ED due to hemodynamic effects.',
+      weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Standard RSI dose' },
     },
   ],
   contraindications: [
@@ -8130,6 +8145,93 @@ const ZIPRASIDONE: DrugEntry = {
   ],
 };
 
+const ROCURONIUM: DrugEntry = {
+  id: 'rocuronium',
+  name: 'Rocuronium (Zemuron)',
+  genericName: 'Rocuronium bromide',
+  drugClass: 'Non-depolarizing neuromuscular blocker',
+  route: 'IV',
+  indications: ['Rapid sequence intubation', 'RSI (pediatric)'],
+  dosing: [
+    {
+      indication: 'RSI — rapid sequence intubation',
+      regimen: '1.2 mg/kg IV push (RSI dose). Onset 60-90 seconds. Duration 40-60 minutes. Higher dose (≥1.4 mg/kg) associated with improved first-attempt success in hypotensive patients. Standard intubating dose (non-RSI): 0.6 mg/kg.',
+      weightCalc: [
+        { dosePerKg: 1.2, unit: 'mg', label: 'RSI dose' },
+        { dosePerKg: 0.6, unit: 'mg', label: 'Standard intubating dose' },
+      ],
+    },
+    {
+      indication: 'RSI — pediatric',
+      regimen: '1.0-1.2 mg/kg IV push. Similar onset and duration as adults. No dose adjustment needed for age. Reversible with sugammadex 2-4 mg/kg (routine) or 16 mg/kg (immediate reversal).',
+      weightCalc: { dosePerKg: 1.2, unit: 'mg' },
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to rocuronium or bromides',
+  ],
+  cautions: [
+    'Long duration (40-60 min) — if intubation fails, patient will remain paralyzed. Must have rescue plan.',
+    'Tachycardia (vagolytic effect)',
+    'Hepatic dysfunction may prolong duration',
+    'Obesity — dose on ideal body weight (IBW), not actual weight, to avoid prolonged paralysis',
+  ],
+  monitoring: 'Heart rate, SpO2, ETCO2 after intubation. Train-of-four (TOF) monitoring if available for recovery assessment.',
+  notes: 'Preferred paralytic when succinylcholine is contraindicated (hyperkalemia, burns, crush, myopathies, MH). Fully reversible with sugammadex (Bridion): 16 mg/kg for immediate reversal (within 3 min of administration), 4 mg/kg for deep block, 2 mg/kg for moderate block. Sugammadex availability should be confirmed before choosing rocuronium in the difficult airway — immediate reversal is the key safety advantage.',
+  citations: [
+    'Driver BE, et al. BEAM Trial. JAMA. 2018;319(21):2179-2189.',
+    'Tran DTT, et al. Rocuronium vs Succinylcholine for RSI. Cochrane Database Syst Rev. 2015;10:CD002788.',
+    'Hristovska AM, et al. Efficacy and Safety of Sugammadex vs Neostigmine for Reversal. Cochrane Database Syst Rev. 2017.',
+  ],
+};
+
+const SUCCINYLCHOLINE: DrugEntry = {
+  id: 'succinylcholine',
+  name: 'Succinylcholine (Anectine)',
+  genericName: 'Succinylcholine chloride',
+  drugClass: 'Depolarizing neuromuscular blocker',
+  route: 'IV / IM',
+  indications: ['Rapid sequence intubation', 'RSI (pediatric)'],
+  dosing: [
+    {
+      indication: 'RSI — rapid sequence intubation',
+      regimen: '1.5 mg/kg IV push. Onset 30-60 seconds. Duration 3-8 minutes. Fastest onset of any paralytic — preferred when brief paralysis desired. For IM route (no IV access): 2 mg/kg IM (onset 2-3 min).',
+      weightCalc: [
+        { dosePerKg: 1.5, unit: 'mg', label: 'IV route' },
+        { dosePerKg: 2, unit: 'mg', label: 'IM route (no IV)' },
+      ],
+    },
+    {
+      indication: 'RSI — pediatric',
+      regimen: '2 mg/kg IV push (higher dose in infants/young children due to larger volume of distribution). Pretreat with atropine 0.02 mg/kg (min 0.1 mg) in children <1 year or if repeat dose needed.',
+      weightCalc: { dosePerKg: 2, unit: 'mg' },
+    },
+  ],
+  contraindications: [
+    'Hyperkalemia or conditions predisposing to hyperkalemia',
+    'Burns >24 hours old (upregulated nicotinic receptors → massive K+ release)',
+    'Crush injury >24 hours old',
+    'Denervation injury (stroke, spinal cord injury >72 hours)',
+    'Personal or family history of malignant hyperthermia',
+    'Myopathies (Duchenne muscular dystrophy — rhabdomyolysis risk)',
+    'Prolonged immobility or ICU myopathy',
+    'Known pseudocholinesterase deficiency (prolonged paralysis)',
+  ],
+  cautions: [
+    'Causes transient hyperkalemia (~0.5 mEq/L rise) — usually clinically insignificant in normal patients',
+    'Bradycardia — especially with repeat dosing or in pediatric patients (have atropine available)',
+    'Fasciculations prior to paralysis — may increase intragastric pressure',
+    'Masseter spasm — may be early sign of malignant hyperthermia',
+    'Increased intraocular pressure — relative concern in open globe (theoretical, debated)',
+  ],
+  monitoring: 'Heart rate, SpO2, ETCO2 after intubation. Watch for prolonged paralysis (>15 min suggests pseudocholinesterase deficiency).',
+  notes: 'Fastest onset paralytic available. Short duration is a double-edged sword: if intubation fails, paralysis wears off and patient resumes spontaneous ventilation — but may also resume protective airway reflexes before rescue attempts complete. When succinylcholine is contraindicated, use rocuronium 1.2 mg/kg (reversible with sugammadex 16 mg/kg).',
+  citations: [
+    'Driver BE, et al. BEAM Trial. JAMA. 2018;319(21):2179-2189.',
+    'Tran DTT, et al. Rocuronium versus Succinylcholine for Rapid Sequence Induction Intubation. Cochrane Database Syst Rev. 2015;10:CD002788.',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
@@ -8321,11 +8423,13 @@ export const ALL_DRUGS: DrugEntry[] = [
   RISPERIDONE,
   RITONAVIR,
   RIVAROXABAN,
+  ROCURONIUM,
   RUCONEST,
   RH_IMMUNE_GLOBULIN,
   SILVER_SULFADIAZINE,
   SODIUM_BICARBONATE,
   SSKI,
+  SUCCINYLCHOLINE,
   TAMSULOSIN,
   TENECTEPLASE,
   TDF_FTC,
@@ -8511,11 +8615,13 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/rifampin|rifadin|rifampicin/i, 'rifampin'],
   [/ritonavir|norvir/i, 'ritonavir'],
   [/rivaroxaban/i, 'rivaroxaban'],
+  [/rocuronium|zemuron|roc/i, 'rocuronium'],
   [/ruconest|conestat/i, 'ruconest'],
   [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
   [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
   [/sodium\s*bicarbonate|sodium\s*bicarb|nahco3|bicarb(?!onate)/i, 'sodium-bicarbonate'],
   [/sski|lugol|potassium\s*iodide/i, 'sski'],
+  [/succinylcholine|anectine|sux/i, 'succinylcholine'],
   [/tenecteplase|TNKase/i, 'tenecteplase'],
   [/tenofovir.*emtricitabine|truvada|TDF\/FTC/i, 'tdf-ftc'],
   [/terbutaline|brethine/i, 'terbutaline'],

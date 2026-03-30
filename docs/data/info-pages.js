@@ -9158,6 +9158,132 @@ const CHS_DISCHARGE_INSTRUCTIONS = {
     ],
 };
 // -------------------------------------------------------------------
+// Difficult Airway / Bougie-First
+// -------------------------------------------------------------------
+const DAB_SUMMARY = {
+    id: 'dab-summary',
+    title: 'Difficult Airway — Steps Summary',
+    subtitle: 'Bougie-first intubation rapid reference',
+    sections: [
+        {
+            heading: 'Module 1: Pre-Assessment',
+            body: '• [LEMON assessment — difficult intubation predictors](#/node/dab-lemon)\n• [MOANS/RODS/SHORT — backup plan assessment](#/node/dab-backup)\n• [Predicted difficulty level — approach decision](#/node/dab-predicted)',
+        },
+        {
+            heading: 'Module 2: Approach Decision',
+            body: '• [Standard RSI — bougie available as rescue](#/node/dab-standard-rsi)\n• [Bougie-first RSI protocol](#/node/dab-bougie-rsi)\n• [Awake intubation — when to consider](#/node/dab-awake)\n• [Cormack-Lehane grading — laryngoscopic view](#/node/dab-rsi-complete)',
+        },
+        {
+            heading: 'Module 3: Bougie Technique',
+            body: '• [Equipment setup — 15 Fr coude-tip bougie](#/node/dab-equipment)\n• [Insertion technique — step by step](#/node/dab-technique)\n• [Key adjuncts and common errors](#/node/dab-adjuncts)',
+        },
+        {
+            heading: 'Module 4: Confirmation',
+            body: '• [Confirmation algorithm — waveform capnography](#/node/dab-confirm)\n• [ETCO₂ check — sustained waveform?](#/node/dab-etco2-check)\n• [Post-intubation management](#/node/dab-confirmed)',
+        },
+        {
+            heading: 'Module 5: Failed Airway Rescue',
+            body: '• [Vortex Approach — 3 lifelines](#/node/dab-failed)\n• [Can you oxygenate? CI/CO vs CICO](#/node/dab-can-oxygenate)\n• [SGA rescue — i-gel preferred](#/node/dab-cico-green)',
+        },
+        {
+            heading: 'Module 6: Surgical Airway',
+            body: '• [CICO — emergency cricothyrotomy](#/node/dab-cric-go)\n• [CTM identification and landmarks](#/node/dab-cric-landmarks)\n• [Scalpel-finger-bougie technique](#/node/dab-cric-technique)\n• [Post-cricothyrotomy management](#/node/dab-cric-post)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Driver BE, et al. BEAM Trial. JAMA. 2018;319(21):2179-2189.' },
+        { num: 2, text: 'Frerk C, et al. DAS 2015 Guidelines. Br J Anaesth. 2015;115(6):827-48.' },
+    ],
+};
+const DAB_LEMON_CARD = {
+    id: 'dab-lemon-card',
+    title: 'Airway Assessment Quick Reference',
+    subtitle: 'LEMON • MOANS • RODS • SHORT',
+    sections: [
+        {
+            heading: 'LEMON — Difficult Intubation',
+            body: '**L** — Look Externally: facial trauma, short neck, small mouth, prominent teeth, large tongue, beard, obesity\n**E** — Evaluate 3-3-2: 3 fingers mouth opening, 3 fingers mentum→hyoid, 2 fingers hyoid→thyroid notch\n**M** — Mallampati: I (full view) → IV (hard palate only)\n**O** — Obstruction: tumor, abscess, angioedema, epiglottitis, Ludwig angina\n**N** — Neck Mobility: c-spine injury, ankylosing spondylitis, arthritis, radiation\n\n**Score ≥4 = predicted difficult intubation**',
+        },
+        {
+            heading: 'MOANS — Difficult Bag-Mask Ventilation',
+            body: '**M** — Mask seal (beard, blood, disrupted anatomy)\n**O** — Obesity/Obstruction (BMI >26, angioedema)\n**A** — Age >55\n**N** — No teeth (leave dentures in for seal)\n**S** — Stiff lungs/Sleep apnea (COPD, ARDS, asthma)',
+        },
+        {
+            heading: 'RODS — Difficult Supraglottic Airway',
+            body: '**R** — Restricted mouth opening (<2 cm)\n**O** — Obstruction (supraglottic mass, edema)\n**D** — Disrupted/distorted anatomy\n**S** — Stiff lungs / cervical Spine immobility',
+        },
+        {
+            heading: 'SHORT — Difficult Cricothyrotomy',
+            body: '**S** — Surgery (prior neck surgery)\n**H** — Hematoma/infection in neck\n**O** — Obesity/fixed flexion\n**R** — Radiation to neck\n**T** — Tumor involving airway\n\n**No absolute contraindications exist for emergency cricothyrotomy.**',
+        },
+        {
+            heading: 'Cormack-Lehane Grading',
+            body: '**Grade I** — Full glottis visible → standard intubation\n**Grade IIa** — Partial cords → standard intubation\n**Grade IIb** — Only arytenoids → bougie indicated\n**Grade III** — Only epiglottis → bougie strongly indicated\n**Grade IV** — No view → bougie or rescue pathway',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Reed MJ, et al. Airway Assessment Score. Emerg Med J. 2005;22:99-102.' },
+        { num: 2, text: 'Cormack RS, Lehane J. Anaesthesia. 1984;39:1105-1111.' },
+    ],
+    shareable: true,
+};
+const DAB_RSI_DRUGS = {
+    id: 'dab-rsi-drugs',
+    title: 'RSI Drug Quick Reference',
+    subtitle: 'Induction • Paralytic • Pretreatment',
+    sections: [
+        {
+            heading: 'Induction Agents',
+            body: '**Ketamine** — 1.5-2 mg/kg IV | Onset 30-60s | Duration 10-20 min\n• Hemodynamically supportive (sympathomimetic)\n• Preferred in hypotension\n• NOT contraindicated in head injury (myth debunked)\n• KeNIK trial: equivalent to etomidate\n\n**Etomidate** — 0.3 mg/kg IV | Onset 15-45s | Duration 5-15 min\n• Hemodynamically neutral\n• Single-dose adrenal suppression — clinically insignificant\n• No longer preferred over ketamine per KeNIK\n\n**Propofol** — 1.5-2.5 mg/kg IV | Onset 15-45s | Duration 5-10 min\n• CAUSES HYPOTENSION\n• Reduce to 0.5-1 mg/kg if hemodynamically fragile\n• Less commonly used for ED RSI',
+        },
+        {
+            heading: 'Paralytic Agents',
+            body: '**Succinylcholine** — 1.5 mg/kg IV (2 mg/kg IM) | Onset 30-60s | Duration 3-8 min\n• Depolarizing — fastest onset\n• Contraindicated: hyperkalemia, burns >24h, crush >24h, denervation, MH hx, myopathies\n\n**Rocuronium** — 1.2 mg/kg IV (RSI dose) | Onset 60-90s | Duration 40-60 min\n• Non-depolarizing — no succinylcholine contraindications\n• Reversible with sugammadex 16 mg/kg (immediate reversal)\n• Preferred for difficult airway (longer working time)',
+        },
+        {
+            heading: 'Pretreatment (Optional)',
+            body: '**Fentanyl** — 1-3 mcg/kg IV | Give 3 min before induction\n• Blunts sympathetic response\n• Consider for: elevated ICP, aortic dissection\n\n**Lidocaine** — 1.5 mg/kg IV | Give 3 min before induction\n• Theoretically attenuates ICP response (weak evidence)\n• NOT routinely recommended\n\n**Atropine** — 0.02 mg/kg IV (min 0.1 mg)\n• Pediatric patients <1 year\n• Repeat succinylcholine dosing',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Matchett G, et al. KeNIK Trial. N Engl J Med. 2023.' },
+        { num: 2, text: 'Tran DTT, et al. Rocuronium vs Succinylcholine for RSI. Cochrane Database Syst Rev. 2015;10:CD002788.' },
+    ],
+    shareable: true,
+};
+const DAB_CRIC_STEPS = {
+    id: 'dab-cric-steps',
+    title: 'Scalpel-Finger-Bougie Cricothyrotomy',
+    subtitle: 'Emergency surgical airway — step-by-step',
+    sections: [
+        {
+            heading: 'Equipment',
+            body: '• **Scalpel:** #10 blade (broad)\n• **Bougie:** 15 Fr coude-tip, lubricated\n• **ETT:** 6.0 mm cuffed\n• **Other:** 10 mL syringe, capnography, ties for securing',
+        },
+        {
+            heading: 'Preparation',
+            body: '1. Announce: **"Can\'t intubate, can\'t oxygenate — performing cricothyrotomy"**\n2. Assign second provider to continue rescue oxygenation\n3. Full head extension (unless c-spine precaution)\n4. PPE / eye protection',
+        },
+        {
+            heading: 'Technique',
+            body: '**Step 1:** Stabilize larynx — laryngeal handshake (thumb + 3rd finger on thyroid cartilage, index finger palpates CTM)\n\n**Step 2:** Vertical skin incision (~4 cm) over CTM. If anatomy clear, single horizontal stab may suffice.\n\n**Step 3:** Palpate CTM with finger through incision — confirm the depression\n\n**Step 4:** Horizontal stab through CTM (lower half — avoid superior vessels and cords)\n\n**Step 5:** Extend incision — rotate scalpel 180° and extend opposite direction\n\n**Step 6:** Finger in — replace scalpel with index finger through CTM into airway lumen\n\n**Step 7:** Bougie — slide alongside finger into trachea, advance until resistance (10-15 cm)\n\n**Step 8:** Railroad 6.0 mm ETT over bougie until cuff disappears into airway\n\n**Step 9:** Inflate cuff, remove bougie\n\n**Step 10:** Confirm with waveform capnography',
+        },
+        {
+            heading: 'Post-Procedure',
+            body: '• Secure tube with **ties** (not tape — blood prevents adhesion)\n• CXR — confirm position, rule out pneumothorax\n• Continuous waveform capnography monitoring\n• Convert to formal **tracheostomy within 24-72 hours** (ENT/surgery consult)\n• Monitor for: subcutaneous emphysema, bleeding, posterior wall perforation',
+        },
+        {
+            heading: 'Key Evidence',
+            body: '**NAP4 Audit (Cook 2011):**\n• Needle cricothyrotomy: 60% failure rate\n• Surgical cricothyrotomy: 100% success rate\n\n**DAS 2015** explicitly recommends scalpel-bougie over needle/cannula technique.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cook TM, et al. NAP4. Br J Anaesth. 2011;106(5):632-42.' },
+        { num: 2, text: 'Frerk C, et al. DAS 2015. Br J Anaesth. 2015;115(6):827-48.' },
+    ],
+    shareable: true,
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -9430,6 +9556,10 @@ export const INFO_PAGES = {
     'chs-summary': CHS_SUMMARY,
     'chs-ddx': CHS_DDX,
     'chs-discharge-instructions': CHS_DISCHARGE_INSTRUCTIONS,
+    'dab-summary': DAB_SUMMARY,
+    'dab-lemon-card': DAB_LEMON_CARD,
+    'dab-rsi-drugs': DAB_RSI_DRUGS,
+    'dab-cric-steps': DAB_CRIC_STEPS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

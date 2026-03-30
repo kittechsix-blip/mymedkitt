@@ -97,6 +97,10 @@ async function fetchFromSupabase(treeId) {
 /** Hardcoded fallback — dynamically import the tree file */
 async function loadHardcodedFallback(treeId) {
     const TREE_IMPORTS = {
+        'difficult-airway-bougie': async () => {
+            const m = await import('../data/trees/difficult-airway-bougie.js');
+            return { nodes: m.DIFFICULT_AIRWAY_BOUGIE_NODES, entryNodeId: 'dab-start', categoryId: 'anesthesia-airway', moduleLabels: m.DIFFICULT_AIRWAY_BOUGIE_MODULE_LABELS, citations: m.DIFFICULT_AIRWAY_BOUGIE_CITATIONS };
+        },
         'pneumothorax': async () => {
             const m = await import('../data/trees/pneumothorax.js');
             return { nodes: m.PNEUMOTHORAX_NODES, entryNodeId: 'pneumothorax-start', categoryId: 'us-rads', moduleLabels: m.PNEUMOTHORAX_MODULE_LABELS, citations: m.PNEUMOTHORAX_CITATIONS };

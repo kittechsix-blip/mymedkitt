@@ -2,7 +2,23 @@
 // Specialty categories with custom 3D icons + tool categories (Pharmacy, Med-Calc)
 /** Built-in categories in alphabetical order. Icon field stores PNG filename in assets/icons/. */
 export const DEFAULT_CATEGORIES = [
-    { id: 'anesthesia-airway', name: 'Anesthesia / Airway', icon: 'anesthesia-airway.png', decisionTrees: [], isCustom: false },
+    {
+        id: 'anesthesia-airway',
+        name: 'Anesthesia / Airway',
+        icon: 'anesthesia-airway.png',
+        decisionTrees: [
+            {
+                id: 'difficult-airway-bougie',
+                title: 'Difficult Airway / Bougie-First',
+                subtitle: 'Pre-Assessment → Approach → Bougie Technique → Confirmation → Failed Airway → Surgical Airway',
+                categoryId: 'anesthesia-airway',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'dab-start',
+            },
+        ],
+        isCustom: false,
+    },
     {
         id: 'cardiology',
         name: 'Cardiology',
