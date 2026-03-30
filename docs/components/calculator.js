@@ -13621,18 +13621,85 @@ const HFNC_SETTINGS_CALCULATOR = {
     subtitle: 'Flow & FiO2 Guide',
     description: 'Starting settings for high-flow nasal cannula therapy by indication.',
     fields: [
-        { name: 'indication', label: 'Select indication', type: 'select', points: 0 },
+        {
+            name: 'indication',
+            label: 'Select indication',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Hypoxemic Respiratory Failure', points: 1 },
+                { label: 'COPD / Hypercapnic', points: 2 },
+                { label: 'Post-Extubation', points: 3 },
+                { label: 'Pre-Oxygenation (Intubation)', points: 4 },
+                { label: 'Pulmonary Edema / CHF', points: 5 },
+                { label: 'Pneumonia', points: 6 },
+            ],
+        },
     ],
     results: [],
     thresholdNote: 'Start high, wean down. Higher flow = more dead space washout = less WOB.',
     citations: [
         'Frat JP, et al. High-flow oxygen through nasal cannula in acute hypoxemic respiratory failure (FLORALI). N Engl J Med. 2015;372(23):2185-2196.',
     ],
-    computeResult: () => {
+    computeResult: (values) => {
+        const indication = values.indication || 0;
+        const settings = {
+            1: {
+                title: 'HYPOXEMIC RESPIRATORY FAILURE',
+                flow: '50-60 L/min',
+                fio2: '100% initially, wean to SpO2 92-96%',
+                temp: '37°C (may decrease if uncomfortable)',
+                notes: 'Start at max flow, titrate FiO2 down as tolerated. ROX index to monitor for failure.',
+            },
+            2: {
+                title: 'COPD / HYPERCAPNIC',
+                flow: '30-40 L/min (start lower)',
+                fio2: 'Titrate to SpO2 88-92%',
+                temp: '37°C',
+                notes: 'Lower flow reduces dead space washout, preserving hypercapnic drive. Monitor for CO2 retention.',
+            },
+            3: {
+                title: 'POST-EXTUBATION',
+                flow: '50-60 L/min',
+                fio2: 'Start at prior vent FiO2, wean',
+                temp: '37°C',
+                notes: 'Reduces reintubation risk. Continue for 24-48h post-extubation in high-risk patients.',
+            },
+            4: {
+                title: 'PRE-OXYGENATION',
+                flow: '60 L/min (maximum)',
+                fio2: '100%',
+                temp: '37°C',
+                notes: 'Leave on during intubation attempt. Provides apneic oxygenation. Extends safe apnea time.',
+            },
+            5: {
+                title: 'PULMONARY EDEMA / CHF',
+                flow: '40-60 L/min',
+                fio2: 'Titrate to SpO2 92-96%',
+                temp: '37°C',
+                notes: 'HFNC provides modest PEEP effect (~3-5 cmH2O at 60 L/min). Consider NIV if no improvement.',
+            },
+            6: {
+                title: 'PNEUMONIA',
+                flow: '50-60 L/min',
+                fio2: '100% initially, titrate down',
+                temp: '37°C',
+                notes: 'Monitor ROX index closely. COVID/viral pneumonia may have delayed deterioration.',
+            },
+        };
+        if (indication === 0) {
+            return {
+                value: '—',
+                label: 'Select an Indication',
+                description: 'Choose a clinical indication above to see recommended HFNC settings.',
+                colorVar: '--color-muted',
+            };
+        }
+        const s = settings[indication];
         return {
-            value: 'Settings',
-            label: 'Initial HFNC Settings',
-            description: 'STARTING SETTINGS BY INDICATION:\n\nHYPOXEMIC RESPIRATORY FAILURE:\n• Flow: 50-60 L/min\n• FiO2: 100% initially, wean to SpO2 92-96%\n• Temperature: 37°C (may decrease if uncomfortable)\n\nCOPD/HYPERCAPNIC:\n• Flow: 30-40 L/min (start lower)\n• FiO2: Titrate to SpO2 88-92%\n• Monitor for CO2 retention\n\nPOST-EXTUBATION:\n• Flow: 50-60 L/min\n• FiO2: Start at prior vent FiO2, wean\n\nPRE-OXYGENATION:\n• Flow: 60 L/min maximum\n• FiO2: 100%\n• Leave on during intubation attempt',
+            value: s.flow.split(' ')[0],
+            label: s.title,
+            description: `**Flow Rate:** ${s.flow}\n\n**FiO2:** ${s.fio2}\n\n**Temperature:** ${s.temp}\n\n**Clinical Notes:**\n${s.notes}`,
             colorVar: '--color-primary',
         };
     },
