@@ -9071,6 +9071,92 @@ const ED_METHADONE_SUMMARY = {
         { num: 3, text: 'Calcaterra SL, et al. ED Utilization of the Methadone 72-Hour Rule. Am J Emerg Med. 2025;87:78-83.' },
     ],
 };
+const CHS_SUMMARY = {
+    id: 'chs-summary',
+    title: 'CHS Steps Summary',
+    subtitle: 'Quick-reference checklist for CHS management',
+    sections: [
+        {
+            heading: 'Recognition',
+            body: '1. [Identify phase: Prodromal / Hyperemetic / Recovery](#/node/chs-presentation)\n2. [Confirm diagnostic criteria (Simonetto)](#/node/chs-diagnostic-criteria)\n3. Key feature: compulsive hot water bathing (~90%)',
+        },
+        {
+            heading: 'Rule Out Alternatives',
+            body: '4. [Screen for red flags](#/node/chs-red-flags)\n5. [Order labs: BMP, Mg, lipase, UDS, pregnancy, ECG](#/node/chs-labs)\n6. [Check QTc before butyrophenones](#/node/chs-ecg)',
+        },
+        {
+            heading: 'Treat',
+            body: '7. [IV access, NS bolus, NPO](#/node/chs-iv-access)\n8. [First-line: Haloperidol 0.05 mg/kg IV OR Droperidol 0.625-2.5mg IV](#/node/chs-first-line)\n9. [Adjunct: Topical capsaicin 0.075% to abdomen](#/node/chs-capsaicin)\n10. [AVOID opioids and benzodiazepines](#/node/chs-avoid)',
+        },
+        {
+            heading: 'Escalate if Refractory',
+            body: '11. [Reassess response at 30-60 min](#/node/chs-response)\n12. [Olanzapine 5-10mg IM/PO as second-line](#/node/chs-olanzapine)',
+        },
+        {
+            heading: 'Disposition',
+            body: '13. [Discharge if tolerating PO, hydrated, counseled](#/node/chs-discharge)\n14. [Admit if AKI, refractory vomiting, severe electrolyte derangement](#/node/chs-admit)\n15. Cannabis cessation = ONLY definitive cure',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Borgundvaag B et al. GRACE-4: SAEM Guidelines for CHS in ED. Acad Emerg Med. 2024;31(5):425-455.' },
+        { num: 2, text: 'Ruberto AJ et al. HaVOC Trial: Haloperidol vs ondansetron for CHS. Ann Emerg Med. 2021;77(6):613-619.' },
+    ],
+};
+const CHS_DDX = {
+    id: 'chs-ddx',
+    title: 'CHS Differential Diagnosis',
+    subtitle: 'CHS vs Cyclic Vomiting Syndrome vs Cannabis Withdrawal',
+    sections: [
+        {
+            heading: 'CHS vs Cyclic Vomiting Syndrome (CVS)',
+            body: '**CHS:**\n• Requires chronic cannabis use (usually daily, >1 year)\n• Hot water bathing is pathognomonic (~90%)\n• Resolves with cannabis cessation\n• TRPV1 receptor pathway implicated\n\n**CVS (Rome IV):**\n• No cannabis association required\n• Hot water bathing less common\n• Stereotypical episodes since childhood possible\n• May respond to triptans\n• Comorbid migraine common',
+        },
+        {
+            heading: 'CHS vs Cannabis Withdrawal',
+            body: '**CHS:**\n• Occurs DURING active cannabis use\n• Relieved by cessation\n• Hot water bathing compulsion\n\n**Cannabis Withdrawal:**\n• Occurs AFTER cessation (24-72h after last use)\n• Irritability, insomnia, decreased appetite\n• Nausea is milder, no vomiting episodes\n• Resolves within 1-2 weeks',
+        },
+        {
+            heading: 'Other Differential Diagnoses',
+            body: '• **Gastroparesis** — worse postprandially, delayed gastric emptying\n• **Biliary disease** — RUQ pain, Murphy sign, abnormal LFTs\n• **Pancreatitis** — elevated lipase, epigastric pain radiating to back\n• **Bowel obstruction** — distension, absent bowel sounds, imaging\n• **Pregnancy** — hCG positive\n• **Adrenal insufficiency** — morning nausea, check cortisol\n• **Intracranial pathology** — headache, neurological signs\n• **Superior mesenteric artery syndrome** — thin patients, postprandial',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Venkatesan T et al. Role of chronic cannabis use: cyclic vomiting syndrome vs CHS. Neurogastroenterol Motil. 2020;32(6):e13853.' },
+        { num: 2, text: 'Sorensen CJ et al. CHS: diagnosis, pathophysiology, and treatment. BMJ. 2017;356:j1446.' },
+    ],
+};
+const CHS_DISCHARGE_INSTRUCTIONS = {
+    id: 'chs-discharge-instructions',
+    title: 'CHS Discharge Instructions',
+    subtitle: 'Patient information for Cannabinoid Hyperemesis Syndrome',
+    shareable: true,
+    sections: [
+        {
+            heading: 'What is CHS?',
+            body: 'Cannabinoid Hyperemesis Syndrome (CHS) is a condition caused by long-term cannabis (marijuana) use. It causes repeated episodes of severe nausea, vomiting, and abdominal pain. The only proven cure is to stop using cannabis completely.',
+        },
+        {
+            heading: 'Why Stop Cannabis?',
+            body: '• Cannabis is the direct cause of your symptoms\n• Symptoms will return every time you use cannabis\n• Symptoms typically resolve within days to weeks after stopping\n• No medication can permanently prevent episodes while continuing use',
+        },
+        {
+            heading: 'Home Treatment for Episodes',
+            body: '• Capsaicin cream (OTC): Apply 0.025-0.1% cream (Zostrix, Capzasin-HP) to your abdomen during episodes — this works on the same pathway as hot showers\n• Stay hydrated with small, frequent sips of water or electrolyte drinks\n• Avoid prolonged hot showers — while they provide temporary relief, they can worsen dehydration',
+        },
+        {
+            heading: 'Return to the ER if:',
+            body: '• You cannot keep any fluids down for more than 12 hours\n• You see blood in your vomit\n• You have severe abdominal pain that is worsening\n• You notice very dark urine or no urine output\n• You feel dizzy, confused, or faint\n• You develop chest pain',
+        },
+        {
+            heading: 'Follow-Up',
+            body: '• See your primary care provider within 1 week\n• Ask about substance use counseling resources\n• SAMHSA National Helpline: 1-800-662-4357 (free, 24/7)\n• Bring this information to your follow-up appointment',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Borgundvaag B et al. GRACE-4: SAEM Guidelines for CHS in ED. Acad Emerg Med. 2024;31(5):425-455.' },
+        { num: 2, text: 'Sorensen CJ et al. CHS: diagnosis, pathophysiology, and treatment. BMJ. 2017;356:j1446.' },
+    ],
+};
 // -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
@@ -9341,6 +9427,9 @@ export const INFO_PAGES = {
     'comb-restraint-protocol': COMB_RESTRAINT_PROTOCOL,
     'comb-special-pops': COMB_SPECIAL_POPS,
     'ed-methadone-summary': ED_METHADONE_SUMMARY,
+    'chs-summary': CHS_SUMMARY,
+    'chs-ddx': CHS_DDX,
+    'chs-discharge-instructions': CHS_DISCHARGE_INSTRUCTIONS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

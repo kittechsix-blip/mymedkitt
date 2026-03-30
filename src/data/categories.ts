@@ -334,6 +334,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'meth-start',
       },
       {
+        id: 'chs',
+        title: 'Cannabinoid Hyperemesis Syndrome',
+        subtitle: 'Recognition → Rule Out Organics → Butyrophenones → Capsaicin → Disposition',
+        categoryId: 'gastroenterology',
+        version: '1.0',
+        nodeCount: 25,
+        entryNodeId: 'chs-start',
+      },
+      {
         id: 'cvst',
         title: 'Cerebral Venous Sinus Thrombosis',
         subtitle: 'Presentation → Diagnosis → Risk Stratification → Treatment → Special Populations → Disposition',
@@ -394,6 +403,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 22,
         entryNodeId: 'ap-start',
+      },
+      {
+        id: 'chs',
+        title: 'Cannabinoid Hyperemesis Syndrome',
+        subtitle: 'Recognition → Rule Out Organics → Butyrophenones → Capsaicin → Disposition',
+        categoryId: 'gastroenterology',
+        version: '1.0',
+        nodeCount: 25,
+        entryNodeId: 'chs-start',
       },
       {
         id: 'diarrhea',

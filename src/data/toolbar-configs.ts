@@ -165,6 +165,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'insert', label: 'Insert', icon: '\uD83E\uDE7A', action: 'jump', target: 'ctube-cut' },
     { id: 'tube-size', label: 'Tube Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'ctube-tube-size' },
   ],
+  'chs': [
+    { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
+    { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },
+    { id: 'ddx', label: 'DDx', icon: '🔍', action: 'overlay', target: 'chs-ddx' },
+    { id: 'discharge', label: 'Discharge', icon: '🏠', action: 'overlay', target: 'chs-discharge-instructions' },
+    { id: 'avoid', label: 'Avoid', icon: '⛔', action: 'jump', target: 'chs-avoid' },
+  ],
   'pneumothorax': [
     { id: 'lung-point', label: 'Lung Point', icon: '\uD83D\uDCCD', action: 'jump', target: 'lung-point' },
     { id: 'tension', label: 'Tension?', icon: '\uD83D\uDEA8', action: 'jump', target: 'tension-assessment' },

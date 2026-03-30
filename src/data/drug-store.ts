@@ -5135,6 +5135,42 @@ const CALCIUM_GLUCONATE_GEL: DrugEntry = {
   ],
 };
 
+const CAPSAICIN_TOPICAL: DrugEntry = {
+  id: 'capsaicin-topical',
+  name: 'Capsaicin Topical (Zostrix)',
+  genericName: 'Capsaicin',
+  drugClass: 'TRPV1 receptor agonist / Topical analgesic',
+  route: 'Topical',
+  indications: ['CHS — Cannabinoid Hyperemesis Syndrome'],
+  dosing: [
+    {
+      indication: 'CHS — acute adjunctive therapy',
+      regimen: 'Apply 0.075% cream to periumbilical area (~15 cm diameter). 1-inch ribbon of cream. Reapply every 6-8 hours as needed. Wear gloves during application. GRACE-4: suggest capsaicin in addition to standard antiemetics (conditional recommendation). Same TRPV1 mechanism as hot showers — provides symptomatic relief.',
+    },
+    {
+      indication: 'CHS — OTC self-treatment (discharge)',
+      regimen: 'OTC capsaicin cream 0.025-0.1% (Zostrix, Capzasin-HP). Apply to abdomen during episodes at home. Available over the counter. Instruct patient on proper use at discharge.',
+    },
+  ],
+  contraindications: [
+    'Application to broken skin, wounds, or mucous membranes',
+    'Known hypersensitivity to capsaicin or capsicum products',
+  ],
+  cautions: [
+    'Initial burning sensation at application site — warn patient this is expected and temporary',
+    'Wear gloves during application to avoid inadvertent transfer to eyes',
+    'Avoid contact with eyes, nose, mouth',
+    'Do not apply heating pad over capsaicin — may increase absorption and burning',
+  ],
+  monitoring: 'Symptom improvement. Skin irritation at application site.',
+  notes: 'TRPV1 (transient receptor potential vanilloid 1) agonist — the same receptor activated by hot water bathing, which is why CHS patients instinctively seek hot showers. Capsaicin provides a more targeted activation of this pathway. Multiple RCTs and systematic reviews support use as adjunct to antiemetics in CHS. Low cost, minimal systemic effects, and available OTC.',
+  citations: [
+    'Dean DJ et al. Topical capsaicin in CHS: A systematic review. Am J Emerg Med. 2020;38(4):846-851.',
+    'Moon AM et al. Capsaicin cream for CHS: a systematic review. Pharmacotherapy. 2021;41(4):380-393.',
+    'Borgundvaag B et al. GRACE-4: SAEM Guidelines for CHS in ED. Acad Emerg Med. 2024;31(5):425-455.',
+  ],
+};
+
 const FENTANYL: DrugEntry = {
   id: 'fentanyl',
   name: 'Fentanyl',
@@ -6755,12 +6791,16 @@ const DROPERIDOL: DrugEntry = {
   genericName: 'Droperidol',
   drugClass: 'Typical antipsychotic (butyrophenone)',
   route: 'IV/IM',
-  indications: ['Acute agitation / delirium'],
+  indications: ['Acute agitation / delirium', 'CHS — Cannabinoid Hyperemesis Syndrome'],
   dosing: [
     {
       indication: 'Acute agitation / delirium',
       regimen: '2.5-5 mg IM or IV. Onset 3-10 min (faster than haloperidol). More sedating than haloperidol due to greater H1 and 5-HT2A activity. May repeat once at 15-20 min. Max 10 mg in 24h. ~2-3× more potent than haloperidol.',
       weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
+    },
+    {
+      indication: 'CHS — Cannabinoid Hyperemesis Syndrome',
+      regimen: '0.625-2.5 mg IV over 2-5 min. Faster onset than haloperidol (3-10 min). GRACE-4 recommends butyrophenones as first-line for CHS. Obtain ECG before dosing — check QTc. May repeat once at 15-20 min.',
     },
   ],
   contraindications: [
@@ -6790,7 +6830,7 @@ const HALOPERIDOL: DrugEntry = {
   genericName: 'Haloperidol',
   drugClass: 'Typical antipsychotic (butyrophenone)',
   route: 'IV/IM',
-  indications: ['Acute agitation / delirium', 'Elderly agitation'],
+  indications: ['Acute agitation / delirium', 'Elderly agitation', 'CHS — Cannabinoid Hyperemesis Syndrome'],
   dosing: [
     {
       indication: 'Acute agitation / delirium',
@@ -6800,6 +6840,11 @@ const HALOPERIDOL: DrugEntry = {
     {
       indication: 'Elderly agitation',
       regimen: '0.5-2 mg IM or IV push. Start with lowest effective dose (0.5-1 mg). May repeat q30-60 min. Max 5 mg in 24h. Higher risk of EPS and oversedation in elderly. All antipsychotics carry FDA black box for increased mortality in elderly with dementia-related psychosis.',
+    },
+    {
+      indication: 'CHS — Cannabinoid Hyperemesis Syndrome',
+      regimen: '0.05 mg/kg IV over 5 min (max 5 mg). HaVOC trial dose — lower than agitation dosing. May repeat once at 30 min if inadequate response. Obtain ECG before dosing — check QTc. GRACE-4: butyrophenones recommended over 5-HT3 antagonists for CHS.',
+      weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
     },
   ],
   contraindications: [
@@ -6831,7 +6876,7 @@ const OLANZAPINE: DrugEntry = {
   genericName: 'Olanzapine',
   drugClass: 'Atypical antipsychotic (thienobenzodiazepine)',
   route: 'IM/PO',
-  indications: ['Acute agitation / delirium', 'Elderly agitation', 'Parkinson\'s — low-dose alternative'],
+  indications: ['Acute agitation / delirium', 'Elderly agitation', 'Parkinson\'s — low-dose alternative', 'CHS — second-line antiemetic'],
   dosing: [
     {
       indication: 'Acute agitation / delirium',
@@ -6844,6 +6889,10 @@ const OLANZAPINE: DrugEntry = {
     {
       indication: 'Parkinson\'s — low-dose alternative',
       regimen: '2.5 mg IM. Moderate D2 affinity — less motor worsening than typical antipsychotics but use with caution. Quetiapine PO preferred if patient can take oral medications.',
+    },
+    {
+      indication: 'CHS — second-line / QTc prolonged',
+      regimen: '5-10 mg IM or PO. Use when butyrophenones are contraindicated (QTc >500ms) or as second-line for refractory CHS. No significant QTc prolongation — major advantage. DO NOT combine with parenteral benzodiazepines.',
     },
   ],
   contraindications: [
@@ -8118,6 +8167,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   CALCIUM_CHLORIDE,
   CALCIUM_GLUCONATE,
   CALCIUM_GLUCONATE_GEL,
+  CAPSAICIN_TOPICAL,
   CEFAZOLIN,
   CRYOPRECIPITATE,
   CEFEPIME,
@@ -8342,6 +8392,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/calcium\s*chloride/i, 'calcium-chloride'],
   [/calcium\s*gluconate\s*gel/i, 'calcium-gluconate-gel'],
   [/calcium\s*gluconate/i, 'calcium-gluconate'],
+  [/capsaicin|zostrix|capzasin/i, 'capsaicin-topical'],
   [/cryoprecipitate|cryo/i, 'cryoprecipitate'],
   [/cefazolin|ancef/i, 'cefazolin'],
   [/cefepime|maxipime/i, 'cefepime'],
