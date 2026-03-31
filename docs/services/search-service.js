@@ -5,6 +5,7 @@
 import { getAllCategories } from './category-service.js';
 import { getAllDrugs } from './drug-service.js';
 import { getAllCalculators } from '../components/calculator.js';
+import { sanitizeSearchInput } from './sanitize.js';
 // ===================================================================
 // Search Index
 // ===================================================================
@@ -118,11 +119,15 @@ export function buildSearchIndex() {
 export function search(query) {
     if (!query || query.trim().length === 0)
         return [];
+    // Security: sanitize user input before searching
+    const sanitized = sanitizeSearchInput(query);
+    if (sanitized.length === 0)
+        return [];
     // Safety: rebuild index if it's empty (race condition guard)
     if (indexedDocs.length === 0) {
         buildSearchIndex();
     }
-    const q = query.trim().toLowerCase();
+    const q = sanitized.toLowerCase();
     // Use Fuse.js if available
     if (searchIndex) {
         const fuseResults = searchIndex.search(q);

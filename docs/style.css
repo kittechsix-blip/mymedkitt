@@ -4008,3 +4008,68 @@ body.quick-fire-mode .qf-essential {
     max-width: 640px;
   }
 }
+
+/* ===================================================================
+   STICKY PATIENT CONTEXT HEADER
+   Shows patient weight/age across calculators for quick reference.
+   =================================================================== */
+
+.sticky-patient-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #5D4E37 0%, #6B5B45 100%);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sticky-patient-header--hidden {
+  display: none;
+}
+
+.sticky-patient-header--collapsed {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+.sticky-patient-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sticky-patient-icon {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.sticky-patient-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.3px;
+}
+
+.sticky-patient-clear {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sticky-patient-clear:hover,
+.sticky-patient-clear:active {
+  background: rgba(255, 255, 255, 0.25);
+}

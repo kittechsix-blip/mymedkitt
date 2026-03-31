@@ -3,6 +3,8 @@
 // Renders interactive forms with real-time score computation.
 
 import { router } from '../services/router.js';
+import { getPatientContext, setPatientContext, subscribeToPatientContext } from '../services/patient-context.js';
+import { renderStickyPatientHeader, cleanupStickyPatientHeader } from './sticky-patient-header.js';
 
 // -------------------------------------------------------------------
 // Calculator Interfaces
@@ -17649,6 +17651,9 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
 
   container.innerHTML = '';
 
+  // Render sticky patient context header
+  renderStickyPatientHeader(container);
+
   // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
   if (calculatorId.startsWith('tbsa')) {
     addScrollIndicator(container);
@@ -17857,8 +17862,26 @@ function renderNumberField(
   input.addEventListener('input', () => {
     const val = parseInt(input.value, 10);
     values[field.name] = isNaN(val) ? 0 : val;
+
+    // Capture weight/age to patient context
+    if (field.name === 'weight' && val > 0) {
+      setPatientContext({ weight: val });
+    } else if (field.name === 'age' && val >= 0) {
+      setPatientContext({ age: val });
+    }
+
     onChange();
   });
+
+  // Auto-fill from patient context if available
+  const ctx = getPatientContext();
+  if (field.name === 'weight' && ctx.weight && ctx.weight > 0) {
+    input.value = String(ctx.weight);
+    values[field.name] = ctx.weight;
+  } else if (field.name === 'age' && ctx.age !== undefined && ctx.age >= 0) {
+    input.value = String(ctx.age);
+    values[field.name] = ctx.age;
+  }
 
   inputRow.appendChild(input);
 
