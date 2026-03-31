@@ -23,7 +23,7 @@ export const DIGOXIN_TOXICITY_NODES: DecisionNode[] = [
     body: '[Digoxin Toxicity Steps Summary](#/info/dig-steps-summary) — quick reference.\n\nDigoxin has a **narrow therapeutic index** — toxicity can occur at therapeutic levels, especially in chronic use with predisposing factors [1][2].\n\n**Classic presentation triad:**\n• **GI:** Nausea, vomiting, anorexia (often earliest symptoms)\n• **Visual:** Yellow-green halos (xanthopsia), blurred vision, photophobia\n• **CNS:** Confusion, fatigue, weakness, delirium\n\n**Mechanism of toxicity:**\n• Inhibits Na+/K+-ATPase → increased intracellular Ca²⁺ → enhanced automaticity\n• Increased vagal tone → AV nodal blockade\n• Result: **any arrhythmia can occur** — "dig can do anything" [2]\n\nDistinguish between acute and chronic toxicity — they have different presentations, prognoses, and treatment approaches.',
     citation: [1, 2],
     calculatorLinks: [
-      { id: 'digifab-calculator', label: 'DigiFab Dosing Calculator' },
+      { id: 'dig-fab-dosing', label: 'DigiFab Dosing Calculator' },
       { id: 'dig-acute-chronic', label: 'Acute vs Chronic Comparison' },
     ],
     options: [
@@ -211,10 +211,10 @@ export const DIGOXIN_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'DigiFab — Indications',
-    body: '[DigiFab Dosing Calculator](#/calc/digifab-calculator)\n\n**Indications for DigiFab (Digoxin Immune Fab):** [2][3]\n\n**Life-threatening criteria:**\n• Life-threatening arrhythmia (VT, VF, high-grade AV block, symptomatic bradycardia unresponsive to atropine)\n• Hemodynamic instability (hypotension, shock)\n• **K+ >5.5 mEq/L** (in setting of digoxin toxicity)\n\n**Level-based criteria:**\n• Acute ingestion: digoxin level **>10 ng/mL** [3]\n• Chronic toxicity: digoxin level **>6 ng/mL** with symptoms [3]\n\n**Clinical gestalt:**\n• Significant ingestion with cardiac symptoms\n• Progressive toxicity despite supportive care\n• Known massive ingestion (even before symptoms develop)\n\n**Onset of action:** 30-60 minutes. Clinical improvement may take up to 4 hours [3].\n\n**Half-life:** 15-20 hours (Fab fragments are renally cleared).',
+    body: '[DigiFab Dosing Calculator](#/calc/dig-fab-dosing)\n\n**Indications for DigiFab (Digoxin Immune Fab):** [2][3]\n\n**Life-threatening criteria:**\n• Life-threatening arrhythmia (VT, VF, high-grade AV block, symptomatic bradycardia unresponsive to atropine)\n• Hemodynamic instability (hypotension, shock)\n• **K+ >5.5 mEq/L** (in setting of digoxin toxicity)\n\n**Level-based criteria:**\n• Acute ingestion: digoxin level **>10 ng/mL** [3]\n• Chronic toxicity: digoxin level **>6 ng/mL** with symptoms [3]\n\n**Clinical gestalt:**\n• Significant ingestion with cardiac symptoms\n• Progressive toxicity despite supportive care\n• Known massive ingestion (even before symptoms develop)\n\n**Onset of action:** 30-60 minutes. Clinical improvement may take up to 4 hours [3].\n\n**Half-life:** 15-20 hours (Fab fragments are renally cleared).',
     citation: [2, 3],
     calculatorLinks: [
-      { id: 'digifab-calculator', label: 'DigiFab Dosing Calculator' },
+      { id: 'dig-fab-dosing', label: 'DigiFab Dosing Calculator' },
     ],
     next: 'dig-fab-dosing',
   },
@@ -226,7 +226,7 @@ export const DIGOXIN_TOXICITY_NODES: DecisionNode[] = [
     body: '**[Digoxin Immune Fab](#/drug/digifab/digoxin toxicity)** (DigiFab, Digibind)\n\n**Dosing depends on known information:**\n\n**1. If AMOUNT INGESTED is known (acute):**\nVials = (mg ingested x 0.8) / 0.5\n• The 0.8 accounts for ~80% bioavailability\n• Each vial binds ~0.5 mg digoxin\n\n**2. If SERUM LEVEL is known:**\nVials = (level ng/mL x weight kg) / 100\n\n**3. EMPIRIC dosing (most common in practice):**\n• **Acute poisoning:** 10-20 vials\n• **Chronic toxicity:** 3-6 vials\n• For chronic toxicity, start low and repeat as needed [3]\n\nSelect dosing method:',
     citation: [3],
     calculatorLinks: [
-      { id: 'digifab-calculator', label: 'DigiFab Dosing Calculator' },
+      { id: 'dig-fab-dosing', label: 'DigiFab Dosing Calculator' },
     ],
     options: [
       { label: 'Known amount ingested', description: 'Calculate: vials = (mg x 0.8) / 0.5', next: 'dig-fab-amount' },

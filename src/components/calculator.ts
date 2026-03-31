@@ -16258,6 +16258,439 @@ const LEMON_SCORE_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// SEROTONIN SYNDROME CALCULATORS
+// =====================================================================
+
+const HUNTER_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'hunter-criteria',
+  title: 'Hunter Criteria',
+  subtitle: 'Hunter Serotonin Toxicity Criteria',
+  description: 'Diagnostic decision rules for serotonin syndrome. Requires serotonergic drug exposure PLUS one of five clinical criteria combinations. Sensitivity 84%, specificity 97% — superior to Sternbach criteria.',
+  fields: [
+    {
+      name: 'spontaneous_clonus',
+      label: 'Spontaneous Clonus',
+      type: 'select',
+      points: 0,
+      description: 'Rhythmic involuntary muscle contractions without stimulation',
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Present — DIAGNOSTIC alone', points: 4 },
+      ],
+    },
+    {
+      name: 'inducible_clonus',
+      label: 'Inducible Clonus',
+      type: 'select',
+      points: 0,
+      description: 'Clonus elicited by dorsiflexion of ankle or patella tap',
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Present', points: 2 },
+      ],
+    },
+    {
+      name: 'ocular_clonus',
+      label: 'Ocular Clonus',
+      type: 'select',
+      points: 0,
+      description: 'Slow roving eye movements, continuous horizontal nystagmus',
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Present', points: 2 },
+      ],
+    },
+    {
+      name: 'agitation_diaphoresis',
+      label: 'Agitation OR Diaphoresis',
+      type: 'select',
+      points: 0,
+      description: 'Required with inducible or ocular clonus for diagnosis',
+      selectOptions: [
+        { label: 'Neither present', points: 0 },
+        { label: 'Present (agitation and/or diaphoresis)', points: 1 },
+      ],
+    },
+    {
+      name: 'tremor_hyperreflexia',
+      label: 'Tremor + Hyperreflexia',
+      type: 'select',
+      points: 0,
+      description: 'Both tremor AND hyperreflexia must be present together',
+      selectOptions: [
+        { label: 'Absent or only one present', points: 0 },
+        { label: 'Both tremor AND hyperreflexia present', points: 4 },
+      ],
+    },
+    {
+      name: 'hypertonia_temp',
+      label: 'Hypertonia + Temperature >38°C',
+      type: 'select',
+      points: 0,
+      description: 'Muscle rigidity with fever — requires ocular or inducible clonus',
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Both hypertonia AND temp >38°C', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 2,
+      label: 'Criteria NOT Met',
+      risk: 'Serotonin Syndrome Unlikely',
+      mortality: 'Hunter Criteria not satisfied. Consider alternative diagnoses: NMS, anticholinergic toxicity, sympathomimetic toxicity, sepsis, meningitis, heat stroke.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 4,
+      label: 'Possible — Verify Combinations',
+      risk: 'Possible Serotonin Syndrome',
+      mortality: 'Findings present but verify correct combinations: inducible/ocular clonus requires agitation OR diaphoresis; hypertonia + fever requires clonus. If combinations valid, treat as serotonin syndrome.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 4,
+      max: Infinity,
+      label: 'HUNTER CRITERIA POSITIVE',
+      risk: 'Serotonin Syndrome Diagnosed',
+      mortality: 'Hunter Criteria met. Diagnose serotonin syndrome. Immediate management: STOP all serotonergic agents, benzodiazepines for agitation, cyproheptadine for moderate-severe, aggressive cooling if hyperthermic.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Hunter Criteria require serotonergic agent exposure + clinical findings. Spontaneous clonus alone is diagnostic. Tremor + hyperreflexia is diagnostic. All other combinations require specific pairings.',
+  citations: [
+    'Dunkley EJC, et al. The Hunter Serotonin Toxicity Criteria: simple and accurate diagnostic decision rules for serotonin toxicity. QJM. 2003;96(9):635-642.',
+    'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.',
+  ],
+};
+
+const SS_DRUG_LIST_CALCULATOR: CalculatorDefinition = {
+  id: 'ss-drug-list',
+  title: 'Serotonergic Drug List',
+  subtitle: 'Serotonergic Agents by Mechanism',
+  description: 'Reference lookup for drugs that increase serotonergic activity. Organized by mechanism of action. MAOI combinations carry the highest risk of severe serotonin syndrome.',
+  fields: [
+    {
+      name: 'mechanism',
+      label: 'Drug Category Involved',
+      type: 'select',
+      points: 0,
+      description: 'Select the drug mechanism category to see specific agents',
+      selectOptions: [
+        { label: 'SSRI — Fluoxetine, Sertraline, Paroxetine, Citalopram, Escitalopram, Fluvoxamine', points: 1 },
+        { label: 'SNRI — Venlafaxine, Duloxetine, Desvenlafaxine, Milnacipran', points: 1 },
+        { label: 'MAOI — Phenelzine, Tranylcypromine, Selegiline, Isocarboxazid, Linezolid, Methylene blue', points: 2 },
+        { label: 'TCA — Amitriptyline, Clomipramine, Imipramine, Nortriptyline, Doxepin', points: 1 },
+        { label: 'Opioid — Tramadol, Fentanyl, Meperidine, Methadone, Tapentadol', points: 1 },
+        { label: 'Triptans — Sumatriptan, Rizatriptan, Zolmitriptan, Eletriptan', points: 1 },
+        { label: 'Recreational — MDMA, Cocaine, Amphetamines, LSD, Mescaline', points: 1 },
+        { label: 'Other Rx — Buspirone, Lithium, Ondansetron, Metoclopramide, Trazodone, Mirtazapine', points: 1 },
+        { label: 'OTC/Supplements — Dextromethorphan, St. John\'s Wort, SAMe, Tryptophan, 5-HTP', points: 1 },
+      ],
+    },
+    {
+      name: 'combination',
+      label: 'Drug Combination Risk',
+      type: 'select',
+      points: 0,
+      description: 'Multiple serotonergic agents greatly increase risk',
+      selectOptions: [
+        { label: 'Single serotonergic agent', points: 0 },
+        { label: 'Two agents from SAME class', points: 1 },
+        { label: 'Two agents from DIFFERENT classes', points: 2 },
+        { label: 'MAOI + any serotonergic agent', points: 3 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 2,
+      label: 'Low Risk',
+      risk: 'Low Combination Risk',
+      mortality: 'Single agent or mild combination. SS rare with monotherapy at therapeutic doses. Monitor for early symptoms: tremor, agitation, myoclonus.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 4,
+      label: 'Moderate Risk',
+      risk: 'Moderate Combination Risk',
+      mortality: 'Multiple serotonergic agents increase risk. Watch for onset within hours of dose change. Most cases are moderate and self-limiting with drug removal.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 4,
+      max: Infinity,
+      label: 'HIGH RISK',
+      risk: 'High Risk Combination',
+      mortality: 'MAOI combinations carry highest risk of SEVERE serotonin syndrome. MAOI + SSRI/SNRI is the most dangerous combination. 2-week washout required between MAOIs and serotonergic agents (5 weeks for fluoxetine due to long half-life).',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'MAOI combinations are the most dangerous. Linezolid and methylene blue are "hidden" MAOIs. Fentanyl and tramadol are commonly overlooked serotonergic opioids. Always check the full medication list including OTC and supplements.',
+  citations: [
+    'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.',
+    'Foong A-L, et al. Demystifying serotonin syndrome (or serotonin toxicity). Can Fam Physician. 2018;64(10):720-727.',
+  ],
+};
+
+const SS_VS_NMS_CALCULATOR: CalculatorDefinition = {
+  id: 'ss-vs-nms',
+  title: 'SS vs NMS',
+  subtitle: 'Serotonin Syndrome vs Neuroleptic Malignant Syndrome Differentiator',
+  description: 'Side-by-side comparison tool to differentiate serotonin syndrome from neuroleptic malignant syndrome. These two conditions have similar presentations but require different treatments — bromocriptine (NMS) is contraindicated in SS.',
+  fields: [
+    {
+      name: 'onset',
+      label: 'Onset Timeline',
+      type: 'select',
+      points: 0,
+      description: 'Time from drug change to symptom onset',
+      selectOptions: [
+        { label: 'Rapid — hours (within 24h of drug change)', points: 0 },
+        { label: 'Slow — days to weeks', points: 2 },
+      ],
+    },
+    {
+      name: 'drug_class',
+      label: 'Causative Drug Class',
+      type: 'select',
+      points: 0,
+      description: 'Drug most likely responsible',
+      selectOptions: [
+        { label: 'Serotonergic agent (SSRI, SNRI, MAOI, tramadol, etc.)', points: 0 },
+        { label: 'Dopamine antagonist (haloperidol, risperidone, metoclopramide)', points: 2 },
+        { label: 'Unclear / both classes involved', points: 1 },
+      ],
+    },
+    {
+      name: 'muscle_tone',
+      label: 'Muscle Findings',
+      type: 'select',
+      points: 0,
+      description: 'Characteristic muscle examination findings',
+      selectOptions: [
+        { label: 'Hyperkinetic — clonus, tremor, hyperreflexia (lower > upper)', points: 0 },
+        { label: '"Lead-pipe" rigidity — diffuse, bradyreflexia', points: 2 },
+        { label: 'Mixed or unclear', points: 1 },
+      ],
+    },
+    {
+      name: 'pupils',
+      label: 'Pupils',
+      type: 'select',
+      points: 0,
+      description: 'Pupil examination',
+      selectOptions: [
+        { label: 'Dilated (mydriasis)', points: 0 },
+        { label: 'Normal', points: 2 },
+      ],
+    },
+    {
+      name: 'bowel_sounds',
+      label: 'Bowel Sounds',
+      type: 'select',
+      points: 0,
+      description: 'Abdominal auscultation',
+      selectOptions: [
+        { label: 'Hyperactive', points: 0 },
+        { label: 'Normal or decreased', points: 2 },
+      ],
+    },
+    {
+      name: 'ck',
+      label: 'CK Elevation',
+      type: 'select',
+      points: 0,
+      description: 'Creatine kinase level',
+      selectOptions: [
+        { label: 'Mild-moderate elevation (<1000 U/L)', points: 0 },
+        { label: 'Very high (>1000 U/L, often >10,000)', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 3,
+      label: 'Favors Serotonin Syndrome',
+      risk: 'Serotonin Syndrome Likely',
+      mortality: 'Rapid onset, hyperkinetic (clonus), dilated pupils, hyperactive bowels — classic SS. Treatment: STOP serotonergic agent, benzodiazepines, cyproheptadine. Do NOT give bromocriptine. Resolves in 24-72 hours.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 3,
+      max: 7,
+      label: 'Overlapping Features',
+      risk: 'Unclear — Consider Both',
+      mortality: 'Mixed features. Consider: Was a serotonergic AND dopamine antagonist involved? Timeline may be the strongest differentiator. Toxicology consult recommended. Supportive care with benzodiazepines is safe for both.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 7,
+      max: Infinity,
+      label: 'Favors NMS',
+      risk: 'Neuroleptic Malignant Syndrome Likely',
+      mortality: 'Slow onset, lead-pipe rigidity, normal pupils, high CK — classic NMS. Treatment: STOP antipsychotic, dantrolene for rigidity, bromocriptine (dopamine agonist). ICU for moderate-severe. Recovery takes days to weeks.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Key differentiator: SS = hyperkinetic (clonus), NMS = rigid (lead-pipe). Bromocriptine treats NMS but is CONTRAINDICATED in SS. When uncertain, benzodiazepines are safe for both.',
+  citations: [
+    'Perry PJ, Wilborn CA. Serotonin syndrome vs neuroleptic malignant syndrome: a contrast of causes, diagnoses, and management. Ann Clin Psychiatry. 2012;24(2):155-162.',
+    'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.',
+  ],
+};
+
+const CYPROHEPTADINE_DOSE_CALCULATOR: CalculatorDefinition = {
+  id: 'cyproheptadine-dose',
+  title: 'Cyproheptadine Dosing',
+  subtitle: 'Serotonin Antagonist Dosing for Serotonin Syndrome',
+  description: 'Cyproheptadine is the specific serotonin antagonist used for moderate-severe serotonin syndrome. Only available as oral formulation — can be crushed for NG tube administration.',
+  fields: [
+    {
+      name: 'severity',
+      label: 'SS Severity',
+      type: 'select',
+      points: 0,
+      description: 'Severity determines initial dosing strategy',
+      selectOptions: [
+        { label: 'Mild — tremor, hyperreflexia, alert', points: 0 },
+        { label: 'Moderate — agitation, confusion, temp 38.5-40°C', points: 1 },
+        { label: 'Severe — temp >40°C, rigidity, seizures, rhabdo', points: 2 },
+      ],
+    },
+    {
+      name: 'population',
+      label: 'Patient Population',
+      type: 'select',
+      points: 0,
+      description: 'Dosing adjustment for special populations',
+      selectOptions: [
+        { label: 'Adult', points: 0 },
+        { label: 'Pediatric', points: 0 },
+        { label: 'Elderly (>65)', points: 0 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'Mild SS',
+      risk: 'Generally Not Required',
+      mortality: 'Cyproheptadine usually not needed for mild SS. Observation + drug removal + benzodiazepines usually sufficient. If symptoms persist: 4 mg PO once, may repeat in 2 hours.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'Moderate SS',
+      risk: 'Recommended',
+      mortality: 'Loading: 12 mg PO/NG once. Maintenance: 2 mg PO q2h until response. After improvement: 4-8 mg PO q6h for 24-48h. Max: 32 mg/24h. Only available PO — crush tablets for NG tube.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 2,
+      max: Infinity,
+      label: 'Severe SS',
+      risk: 'Give Immediately',
+      mortality: 'Loading: 12 mg via NG tube immediately. Maintenance: 2 mg q2h until improvement (max 32 mg/day). Continue 4-8 mg q6h for 24-48h after resolution. Less effective in severe cases — benzodiazepines and cooling are primary. Paralysis may be needed for refractory hyperthermia.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Cyproheptadine is ONLY available orally — crush for NG. Anticholinergic side effects: sedation, dry mouth (actually beneficial for agitation). Do NOT rely on cyproheptadine alone for severe SS — benzos + cooling are primary.',
+  citations: [
+    'Graudins A, et al. Treatment of the serotonin syndrome with cyproheptadine. J Emerg Med. 1998;16(4):615-619.',
+    'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.',
+  ],
+};
+
+// =====================================================================
+// XYLAZINE TOXICITY CALCULATORS
+// =====================================================================
+
+const XYL_WOUND_STAGING_CALCULATOR: CalculatorDefinition = {
+  id: 'xyl-wound-staging',
+  title: 'Wound Staging',
+  subtitle: 'Xylazine-Associated Wound Classification (Philadelphia Consensus)',
+  description: 'Classifies xylazine-associated wounds using the Philadelphia Consensus staging system. Guides treatment intensity from conservative wound care to surgical evaluation. Key principle: avoid aggressive debridement — islands of healthy tissue represent healing potential.',
+  fields: [
+    {
+      name: 'depth',
+      label: 'Wound Depth',
+      type: 'select',
+      points: 0,
+      description: 'Deepest tissue layer involved',
+      selectOptions: [
+        { label: 'Superficial — partial or full thickness skin only', points: 0 },
+        { label: 'Moderate — exposed or compromised muscle/tendon', points: 1 },
+        { label: 'Severe — exposed bone, possible osteomyelitis', points: 2 },
+      ],
+    },
+    {
+      name: 'function',
+      label: 'Limb Function',
+      type: 'select',
+      points: 0,
+      description: 'Functional status of affected extremity',
+      selectOptions: [
+        { label: 'Normal function preserved', points: 0 },
+        { label: 'Reduced but meaningful function', points: 1 },
+        { label: 'No meaningful function preserved', points: 2 },
+      ],
+    },
+    {
+      name: 'infection',
+      label: 'Infection Signs',
+      type: 'select',
+      points: 0,
+      description: 'Signs of wound infection (warmth, erythema, purulence, fever)',
+      selectOptions: [
+        { label: 'No infection signs', points: 0 },
+        { label: 'Local infection (cellulitis, purulence)', points: 1 },
+        { label: 'Systemic signs (fever, leukocytosis, sepsis)', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 2,
+      label: 'Stage 1 — Superficial',
+      risk: 'Conservative Wound Care',
+      mortality: 'Soap/water cleansing, sterile nonadherent gauze, daily dressing changes. AVOID aggressive debridement. If infected: TMP-SMX 1-2 DS tabs PO BID (MRSA coverage — 56% prevalence). Discharge with wound care follow-up.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 4,
+      label: 'Stage 2 — Moderate',
+      risk: 'Wound Care + Antibiotics',
+      mortality: 'Autolytic debridement preferred. Topical silver sulfadiazine (broad spectrum, active 72+ hours). Systemic: TMP-SMX + amoxicillin (MRSA + GAS). Consider excisional debridement + STSG only after 3+ months abstinence. Refer to wound care clinic.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 4,
+      max: Infinity,
+      label: 'Stage 3 — Severe',
+      risk: 'Admit for IV Antibiotics + Surgical Eval',
+      mortality: 'Stage 3A (function preserved): Aggressive debridement + biologic template if abstinent. Stage 3B (no function): Amputation may be recommended. IV antibiotics: Vancomycin + Pip-Tazo. Admit for surgical evaluation. X-ray/MRI for osteomyelitis workup. Do NOT misdiagnose chronic XAW as NSTI.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Key principle: AVOID aggressive debridement of xylazine wounds — islands of healthy tissue represent healing potential. Differentiate from NSTI (chronic XAW ≠ acute necrotizing fasciitis). Culture data: 56% MRSA, 37% GAS.',
+  citations: [
+    'Friedman SR, et al. Xylazine and the US Drug Supply: A Comprehensive Review. Drug Alcohol Depend. 2024;256:111090.',
+    'Philadelphia Department of Public Health. Xylazine-Associated Wounds: Clinical Guidance. 2023.',
+  ],
+};
+
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 
@@ -17013,6 +17446,13 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'nat-ten4-facesp': NAT_TEN4_FACESP_CALCULATOR,
   // Difficult Airway
   'lemon-score': LEMON_SCORE_CALCULATOR,
+  // Serotonin Syndrome
+  'hunter-criteria': HUNTER_CRITERIA_CALCULATOR,
+  'ss-drug-list': SS_DRUG_LIST_CALCULATOR,
+  'ss-vs-nms': SS_VS_NMS_CALCULATOR,
+  'cyproheptadine-dose': CYPROHEPTADINE_DOSE_CALCULATOR,
+  // Xylazine Toxicity
+  'xyl-wound-staging': XYL_WOUND_STAGING_CALCULATOR,
   // Acute Pancreatitis
   'bisap': BISAP_CALCULATOR,
   'atlanta-severity': ATLANTA_SEVERITY_CALCULATOR,

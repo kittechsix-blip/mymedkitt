@@ -30,7 +30,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'diarrhea': [
     { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'diarrhea-red-flag-eval' },
     { id: 'stec', label: 'STEC', icon: '🦠', action: 'jump', target: 'diarrhea-bloody' },
-    { id: 'etiology', label: 'Etiology', icon: '🔬', action: 'calculator', target: 'diarrhea-etiology' },
+    { id: 'etiology', label: 'Etiology', icon: '🔬', action: 'overlay', target: 'diarrhea-etiology' },
   ],
   'hiv': [
     { id: 'ois', label: 'OIs', icon: '\uD83E\uDDA0', action: 'jump', target: 'hiv-immunocompromised' },
@@ -128,7 +128,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'afib-rvr': [
     { id: 'cardioversion', label: 'Cardiovert', icon: '\u26A1', action: 'jump', target: 'afib-cardioversion-protocol' },
     { id: 'rate-control', label: 'Rate Ctrl', icon: '\uD83D\uDC93', action: 'jump', target: 'afib-stable-drugs' },
-    { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '\u2764\uFE0F', action: 'calculator', target: 'chadsvasc' },
+    { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '\u2764\uFE0F', action: 'calculator', target: 'cha2ds2vasc' },
   ],
   'potassium': [
     { id: 'hyperk-rx', label: 'HyperK Rx', icon: '\u26A1', action: 'jump', target: 'k-hyper-step1' },
@@ -368,8 +368,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hypo-tx', label: 'Hypo Tx', icon: '💉', action: 'calculator', target: 'hypo-treatment' },
     { id: 'sliding', label: 'Sliding', icon: '📊', action: 'calculator', target: 'sliding-scale-gen' },
     { id: 'tdd', label: 'TDD', icon: '🧮', action: 'calculator', target: 'tdd-estimator' },
-    { id: 'insulin-dc', label: 'Insulin DC', icon: '📄', action: 'calculator', target: 'dm-insulin-discharge' },
-    { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'calculator', target: 'dm-oral-discharge' },
+    { id: 'insulin-dc', label: 'Insulin DC', icon: '📄', action: 'overlay', target: 'dm-insulin-discharge' },
+    { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'overlay', target: 'dm-oral-discharge' },
   ],
   'caustic-ingestion': [
     { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },
@@ -385,12 +385,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'serotonin-syndrome': [
     { id: 'hunter', label: 'Hunter', icon: '✅', action: 'calculator', target: 'hunter-criteria' },
-    { id: 'ss-nms', label: 'SS vs NMS', icon: '🔀', action: 'calculator', target: 'ss-nms-diff' },
+    { id: 'ss-nms', label: 'SS vs NMS', icon: '🔀', action: 'calculator', target: 'ss-vs-nms' },
     { id: 'drug-list', label: 'Drug List', icon: '💊', action: 'calculator', target: 'ss-drug-list' },
-    { id: 'cypro', label: 'Cypro', icon: '💉', action: 'calculator', target: 'cyproheptadine-dosing' },
+    { id: 'cypro', label: 'Cypro', icon: '💉', action: 'calculator', target: 'cyproheptadine-dose' },
   ],
   'digoxin-toxicity': [
-    { id: 'digifab', label: 'DigiFab', icon: '💉', action: 'calculator', target: 'digifab-calculator' },
+    { id: 'digifab', label: 'DigiFab', icon: '💉', action: 'calculator', target: 'dig-fab-dosing' },
     { id: 'dig-ecg', label: 'ECG', icon: '📈', action: 'calculator', target: 'dig-ecg' },
     { id: 'acute-chronic', label: 'Acute/Chronic', icon: '🔀', action: 'calculator', target: 'dig-acute-chronic' },
     { id: 'arrhythmia', label: 'Arrhythmia', icon: '💓', action: 'calculator', target: 'dig-arrhythmia' },
