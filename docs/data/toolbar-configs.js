@@ -683,6 +683,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'ecpr', label: 'ECPR', icon: '🫀', action: 'jump', target: 'rvf-ecpr-assess' },
         { id: 'hs-ts', label: "H's & T's", icon: '🔍', action: 'jump', target: 'rvf-hs-ts' },
     ],
+    'vad': [
+        { id: 'alarms', label: 'Alarms', icon: '🚨', action: 'overlay', target: 'vad-alarm-guide' },
+        { id: 'params', label: 'Params', icon: '📊', action: 'overlay', target: 'vad-device-params' },
+        { id: 'arrest', label: 'Arrest', icon: '💓', action: 'jump', target: 'vad-arrest-start' },
+        { id: 'hemolysis', label: 'Hemolysis', icon: '🔬', action: 'overlay', target: 'vad-hemolysis-labs' },
+        { id: 'echo', label: 'Echo', icon: '🫀', action: 'overlay', target: 'vad-echo-findings' },
+    ],
     'rhabdomyolysis': [
         { id: 'mcmahon', label: 'McMahon', icon: '📊', action: 'calculator', target: 'mcmahon-rhabdo' },
         { id: 'fluids', label: 'Fluids', icon: '💧', action: 'jump', target: 'rhabdo-fluid-resus' },

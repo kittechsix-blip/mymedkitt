@@ -603,6 +603,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/refractory-vfvt.js');
       return { nodes: m.REFRACTORY_VFVT_NODES, entryNodeId: 'rvf-start', categoryId: 'cardiology', moduleLabels: m.REFRACTORY_VFVT_MODULE_LABELS, citations: m.REFRACTORY_VFVT_CITATIONS };
     },
+    'vad': async () => {
+      const m = await import('../data/trees/vad.js');
+      return { nodes: m.VAD_NODES, entryNodeId: 'vad-start', categoryId: 'cardiology', moduleLabels: m.VAD_MODULE_LABELS, citations: m.VAD_CITATIONS };
+    },
     'cardiogenic-shock': async () => {
       const m = await import('../data/trees/cardiogenic-shock.js');
       return { nodes: m.CARDIOGENIC_SHOCK_NODES, entryNodeId: 'cs-start', categoryId: 'critical-care', moduleLabels: m.CARDIOGENIC_SHOCK_MODULE_LABELS, citations: m.CARDIOGENIC_SHOCK_CITATIONS };

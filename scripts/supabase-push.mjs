@@ -194,6 +194,7 @@ const TREE_REGISTRY = {
   'xylazine-toxicity':    { prefix: 'XYLAZINE_TOXICITY',    entryNodeId: 'xyl-start',        categoryId: 'toxicology' },
   'laryngeal-trauma':     { prefix: 'LARYNGEAL_TRAUMA',     entryNodeId: 'larynx-start',     categoryId: 'trauma-surg' },
   'refractory-vfvt':      { prefix: 'REFRACTORY_VFVT',      entryNodeId: 'rvf-start',        categoryId: 'cardiology' },
+  'vad':                  { prefix: 'VAD',                  entryNodeId: 'vad-start',        categoryId: 'cardiology' },
   'cardiogenic-shock':    { prefix: 'CARDIOGENIC_SHOCK',    entryNodeId: 'cs-start',         categoryId: 'critical-care' },
   'pe-pregnancy':         { prefix: 'PE_PREGNANCY',         entryNodeId: 'pep-start',        categoryId: 'ob-gyn' },
   'cervical-artery-dissection': { prefix: 'CERVICAL_ARTERY_DISSECTION', entryNodeId: 'cad-start', categoryId: 'neurology' },

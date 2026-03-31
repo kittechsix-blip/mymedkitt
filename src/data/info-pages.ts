@@ -9721,6 +9721,225 @@ const DAB_CRIC_STEPS: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// VAD Emergency Management
+// -------------------------------------------------------------------
+
+const VAD_STEPS_SUMMARY: InfoPage = {
+  id: 'vad-steps-summary',
+  title: 'VAD Emergency Management',
+  subtitle: 'Steps Summary',
+  sections: [
+    {
+      heading: 'Module 1: Initial Assessment',
+      body: '• [Is patient in cardiac arrest?](#/node/vad-start) → If yes, go directly to arrest protocol\n• [Contact VAD coordinator immediately](#/node/vad-coordinator) — every ED visit\n• [Auscultate for pump hum](#/node/vad-cabcde) — absence = pump failure = emergency\n• [Measure MAP via Doppler](#/node/vad-map-check) — goal 70-90 mmHg',
+    },
+    {
+      heading: 'Module 2: Device Evaluation',
+      body: '• [Read controller parameters](#/node/vad-device-eval) — Speed, Power, Flow, PI\n• [Interpret alarms](#/node/vad-alarm-triage) — Hazard (red) vs Advisory (yellow)\n• [Treat hypertension](#/node/vad-hypertension) if MAP >90\n• [Evaluate low flow](#/node/vad-low-flow) — assess JVP/IVC to differentiate',
+    },
+    {
+      heading: 'Module 3: Complication Triage',
+      body: '• [Triage by chief complaint](#/node/vad-triage) — bleeding, thrombosis, infection, RV failure, suction, stroke, arrhythmia\n• [Suction event](#/node/vad-suction) — volume challenge first\n• [Stroke](#/node/vad-stroke) — CT head, NO tPA (on warfarin), mechanical thrombectomy may be option',
+    },
+    {
+      heading: 'Module 4: Complication Management',
+      body: '• [Bleeding](#/node/vad-bleeding) — leukoreduced/irradiated blood ONLY; desmopressin for acquired vWD; octreotide for GI AVMs\n• [Pump thrombosis](#/node/vad-pump-thrombosis) — high power + hemolysis labs; heparin + transfer for pump exchange\n• [Infection](#/node/vad-infection) — driveline site vs BSI; never manipulate driveline\n• [RV failure](#/node/vad-rv-failure) — milrinone + dobutamine; AVOID intubation',
+    },
+    {
+      heading: 'Module 5: Cardiac Arrest',
+      body: '• [Assess perfusion, NOT pulse](#/node/vad-arrest-start) — MAP <50 AND ETCO₂ <20 = start CPR\n• [Defibrillation is SAFE](#/node/vad-arrest-defib) — anterior-posterior pads, avoid device\n• [Bedside echo in arrest](#/node/vad-arrest-echo) — LV/RV size guides the differential\n• [Post-arrest](#/node/vad-arrest-rosc) — if refractory, consider ECMO',
+    },
+    {
+      heading: 'Module 6: Disposition',
+      body: '• [Nearly all VAD patients require admission or transfer](#/node/vad-dispo-decision)\n• [Transfer criteria](#/node/vad-dispo-transfer) — pump failure, thrombosis, stroke, device infection\n• [Discharge is rare](#/node/vad-dispo-discharge) — requires VAD team approval',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. J Heart Lung Transplant. 2019;38(7):677-698.' },
+    { num: 2, text: 'Peura JL, et al. Clinician\'s field guide to LVAD emergencies. Prog Cardiovasc Dis. 2024;84:2-15.' },
+  ],
+};
+
+const VAD_ALARM_GUIDE: InfoPage = {
+  id: 'vad-alarm-guide',
+  title: 'VAD Alarm Guide',
+  subtitle: 'Device-Specific Alarm Interpretation',
+  sections: [
+    {
+      heading: 'HeartMate 3 — Hazard Alarms (RED)',
+      body: 'Life-threatening — require immediate action:\n\n• **Red heart (flashing):** Low flow (<2.5 LPM) or pump stoppage → Emergent VAD team contact\n• **Red battery icon:** <5 minutes power remaining → Connect to AC or swap battery immediately\n• **Driveline disconnected:** Pump stops → Reconnect immediately, check cable integrity\n• **Controller fault:** Internal malfunction → Use backup controller (patient should carry one)\n• **Electrical fault:** Possible driveline wire fracture → Immediate VAD team consultation',
+    },
+    {
+      heading: 'HeartMate 3 — Advisory Alarms (YELLOW)',
+      body: 'Important but non-life-threatening:\n\n• **Yellow battery (diamond):** <15 minutes power remaining → Replace battery promptly\n• **Yellow triangle:** Various advisory conditions including:\n  – High watts (may indicate pump thrombosis)\n  – Low flow advisory\n  – Speed change (automatic adjustment for suction)\n• **Battery charging:** Normal operational state when connected to AC power',
+    },
+    {
+      heading: 'HeartMate II Alarms',
+      body: '• **Red alarm + constant tone:** Critical — low flow, pump stop, battery depleted\n• **Yellow alarm:** Advisory — battery low, power deviation\n• Controller displays: Speed, Power, Flow, PI (same as HM3)\n• Older device (axial flow) — higher thrombosis rates than HM3',
+    },
+    {
+      heading: 'HVAD (HeartWare) Alarms',
+      body: '**Discontinued 2021 — ~4,000 patients still implanted**\n\n• **Solid yellow:** Low priority\n• **Flashing yellow:** Medium priority\n• **Red:** High priority ("VAD Stopped," "Critical Battery")\n• Controller displays Speed and Power only (no PI)\n• **Known safety concern:** Pump restart failures (106 complaints, 14 deaths)\n• If pump fails to restart → use patient\'s backup controller with modified software\n• Medtronic provides ongoing support with 20 global specialists',
+    },
+    {
+      heading: 'Universal Troubleshooting Steps',
+      body: '1. Check all connections — driveline to controller, controller to power source\n2. Ensure batteries are charged; switch to backup battery if needed\n3. **Position patient flat** before replacing battery (prevents suction event)\n4. Connect to hospital base unit or patient\'s own AC power unit\n5. If controller fault → use patient\'s backup controller\n6. Auscultate for pump hum — confirm pump is running\n7. **Call VAD coordinator** for any alarm you cannot quickly resolve\n\n**Low battery may trigger automatic speed reduction** → can cause syncope or hemodynamic instability. Always ensure adequate power supply.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Abbott HeartMate 3 LVAD System Clinical Reference Guide. Abbott Cardiovascular. 2023.' },
+    { num: 2, text: 'VUMC HeartMate 3 Alarm Guide. Vanderbilt University Medical Center.' },
+    { num: 3, text: 'Iowa Emergency Care Guide for the HeartMate 3 Patient. University of Iowa Hospitals and Clinics.' },
+    { num: 4, text: 'Medtronic HVAD Discontinuation and Ongoing Support. 2021.' },
+  ],
+};
+
+const VAD_DEVICE_PARAMS: InfoPage = {
+  id: 'vad-device-params',
+  title: 'Device Parameter Reference',
+  subtitle: 'Normal Values & Interpretation Matrix',
+  sections: [
+    {
+      heading: 'Controller Parameters',
+      body: '| Parameter | What It Measures | Clinical Significance |\n|-----------|-----------------|----------------------|\n| **Speed (RPM)** | Impeller rotation rate | Only manually set parameter — set by VAD team |\n| **Power (Watts)** | Energy consumed by pump | ↑ with thrombus, ↑ flow demand, ↑ viscosity |\n| **Flow (L/min)** | Estimated cardiac output | Calculated from power + speed + hematocrit |\n| **PI (Pulsatility Index)** | Native LV contractility | Higher = more native heart function |',
+    },
+    {
+      heading: 'Normal Ranges by Device',
+      body: '| Device | Speed (RPM) | Power (W) | Flow (L/min) | PI | Placement |\n|--------|------------|-----------|-------------|-----|----------|\n| **HeartMate 3** | 4,000-6,000 | 3-7 | 3-6 | 2-5 | Intrapericardial |\n| **HeartMate II** | 8,800-10,000 | 4-8 | 3-6 | 1-10 | Intra-abdominal |\n| **HVAD** | 2,500-3,500 | 3-7 | 3-6 | N/A* | Intrapericardial |\n\n*HVAD controller displays Speed and Power only — no PI on controller.',
+    },
+    {
+      heading: 'Parameter Change Interpretation',
+      body: '| Finding | Speed | Power | Flow | PI | Likely Cause |\n|---------|-------|-------|------|-----|-------------|\n| **Hypovolemia / bleeding** | — | ↓ | ↓ | ↓ | Decreased preload |\n| **Suction event** | — | ↓ or oscillating | ↓ | ↓ | LV underfilling |\n| **Pump thrombosis** | — | ↑↑ | Falsely ↑ | — | Clot increasing pump work |\n| **Complete obstruction** | — | ↓ | ↓ | — | Pump cannot generate flow |\n| **RV failure** | — | ↓ | ↓ | — | Inadequate LV filling |\n| **Sepsis / vasodilation** | — | ↑ | ↑ | — | Decreased afterload |\n| **Tamponade** | — | ↓ | ↓ | ↓ | External compression |\n| **Aortic regurgitation** | — | ↑ | ↑ (recirculated) | ↓ | Blood loops back into LV |',
+    },
+    {
+      heading: 'Flow + JVP Differential',
+      body: '| VAD Flow | JVP / IVC | Likely Diagnosis |\n|----------|-----------|------------------|\n| Low + Low JVP | Flat IVC | **Bleeding / hypovolemia** |\n| Low + High JVP | Distended IVC | **RV failure, PE, tamponade, pneumothorax** |\n| High flow | Variable | **Vasodilation (sepsis, vasoactive drugs)** |',
+    },
+    {
+      heading: 'INR Targets by Device',
+      body: '| Device | Target INR | Antiplatelet |\n|--------|-----------|-------------|\n| **HeartMate 3** | 2.0-3.0 | Aspirin 81 mg daily |\n| **HeartMate II** | 1.8-2.5 | Aspirin 81-325 mg daily |\n| **HVAD** | 2.0-3.0 | Aspirin 81 mg daily |\n\nTime in therapeutic range (TTR) averages only 47% despite intensive monitoring [1].',
+    },
+    {
+      heading: 'MAP Measurement: Doppler Technique',
+      body: '1. Place pencil Doppler probe over brachial artery\n2. Inflate standard BP cuff on ipsilateral arm\n3. Inflate >30 mmHg above last audible flow signal\n4. Slowly deflate cuff\n5. Record pressure at **first return of flow signal** = MAP\n\nThis value approximates MAP — there is no systolic/diastolic.\n\n**Goal MAP: 70-90 mmHg**\n• MAP >90 → treat (stroke risk) [2]\n• MAP <50 → arrest protocol\n• MAP <70 → hypoperfusion workup',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Loyaga-Rendon RY, et al. Anticoagulation Strategies for LVADs. Ann Transl Med. 2021;9(6):520.' },
+    { num: 2, text: 'AHA Scientific Statement: Hypertension in VAD Patients. Circ Heart Fail. 2020;13:e000074.' },
+    { num: 3, text: 'Abbott HeartMate 3 Clinical Reference Guide. 2023.' },
+    { num: 4, text: 'EMRA: ED Approach to LVAD Patients. 2023.' },
+  ],
+};
+
+const VAD_ARREST_PROTOCOL: InfoPage = {
+  id: 'vad-arrest-protocol',
+  title: 'VAD Cardiac Arrest Protocol',
+  subtitle: 'Modified ACLS for Mechanical Circulatory Support',
+  sections: [
+    {
+      heading: 'Key Paradigm Shift',
+      body: '**No pulse does NOT mean cardiac arrest in a VAD patient.**\n\nContinuous-flow LVADs produce minimal or zero pulsatility — absent pulse is the normal baseline state.\n\n**Unreliable in VAD patients:**\n• Pulse palpation\n• Pulse oximetry waveform\n• Oscillometric (automated) blood pressure cuffs\n\n**Reliable perfusion indicators:**\n• Level of consciousness\n• MAP by Doppler (>50 = some perfusion)\n• ETCO₂ (>20 = some perfusion)\n• Skin color, temperature, capillary refill\n• Arterial line waveform',
+    },
+    {
+      heading: 'When to Start Chest Compressions',
+      body: 'Initiate CPR if ALL of the following:\n\n1. Patient is **unresponsive**\n2. **MAP <50 mmHg** by Doppler (or undetectable)\n3. **ETCO₂ <20 mmHg** (in intubated patient)\n\nAND/OR:\n• LVAD is **non-functioning** (no hum, pump stopped)\n\n**Do NOT rely on:**\n• Absent pulse alone (normal in LVAD)\n• Low SpO₂ alone (unreliable without pulsatile flow)',
+    },
+    {
+      heading: 'Chest Compressions — Safe in VAD Patients',
+      body: '**AHA 2017 Scientific Statement officially endorsed chest compressions in VAD patients** [1].\n\nHistorical concerns about cannula dislodgement have been **debunked** — autopsy studies found no disruption or dislodgement of inflow/outflow cannulas after compressions.\n\n**Technique:**\n• Standard chest compressions — no modification needed\n• High quality: rate 100-120/min, depth 2-2.4 inches\n• Minimize interruptions\n• Rotate compressors every 2 minutes',
+    },
+    {
+      heading: 'Defibrillation',
+      body: '**Defibrillation is SAFE and NOT contraindicated.**\n\n**Pad placement:** Anterior-posterior preferred\n• Do NOT place pads directly over the LVAD device or driveline\n• Standard biphasic energy (200J)\n• Disconnect controller from AC power before shock (run on batteries)\n• **Never disconnect LVAD components** before cardioversion/defibrillation\n\nPatients with ICD: may fire appropriately or inappropriately — does not change external defibrillation management.',
+    },
+    {
+      heading: 'VAD Arrest Algorithm',
+      body: '1. Assess responsiveness and perfusion (NOT pulse)\n2. Verify LVAD function — listen for hum, check controller\n3. Troubleshoot device — check power, connections, batteries\n4. If LVAD non-functioning AND no perfusion → Begin CPR\n5. If LVAD functioning but MAP <50 AND ETCO₂ <20 → Begin CPR\n6. Attach defibrillator — anterior-posterior pads, away from device\n7. Standard ACLS — epinephrine, amiodarone, defibrillation per rhythm\n8. Bedside echo — assess LV/RV size, contractility, tamponade\n9. Address reversible causes (Hs and Ts + device-specific)\n10. **Contact VAD team emergently**\n11. Consider VA-ECMO for bridge-to-transplant patients\n12. Post-arrest: TTM, early PCI if indicated, ICU admission',
+    },
+    {
+      heading: 'ACLS Medications — All Permitted',
+      body: '• **Epinephrine** 1 mg IV/IO q3-5 min\n• **Amiodarone** 300 mg IV (first dose), 150 mg (second)\n• **Lidocaine** 1-1.5 mg/kg (alternative antiarrhythmic)\n• **Vasopressin** may be used\n• **Atropine** for symptomatic bradycardia\n• Standard doses — no LVAD-specific modifications needed',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Peberdy MA, et al. CPR in Adults and Children With Mechanical Circulatory Support. AHA Scientific Statement. Circulation. 2017;135(24):e1115-e1134.' },
+    { num: 2, text: 'Bowles CT, et al. British Societies Guideline on LVAD Emergencies. Intensive Care Med. 2024;50:590-603.' },
+    { num: 3, text: 'ACC 10 Points: CPR in Patients with MCS. 2017.' },
+  ],
+};
+
+const VAD_HEMOLYSIS_LABS: InfoPage = {
+  id: 'vad-hemolysis-labs',
+  title: 'Hemolysis Lab Panel',
+  subtitle: 'Pump Thrombosis Diagnosis',
+  sections: [
+    {
+      heading: 'When to Order',
+      body: 'Order a hemolysis panel when pump thrombosis is suspected:\n\n• High power on controller (>9-10 W for HM3)\n• Rising power trend\n• Abnormal pump sound (clunking, grinding)\n• Device feels warm to touch\n• Unexplained hemodynamic deterioration\n• Dark urine (hemoglobinuria)\n• New AKI',
+    },
+    {
+      heading: 'Hemolysis Panel Components',
+      body: '| Lab | Finding in Pump Thrombosis | Sensitivity/Specificity |\n|-----|---------------------------|------------------------|\n| **LDH** | >2.5× upper limit normal | ~80% sens / ~90% spec |\n| **LDH** | >1,150 IU/L | Highly suggestive |\n| **Haptoglobin** | Low or undetectable | Consumed by free Hgb |\n| **Plasma free Hgb** | >40 mg/dL | Direct hemolysis marker |\n| **Indirect bilirubin** | Elevated | Heme metabolism product |\n| **Reticulocyte count** | Elevated | Compensatory erythropoiesis |\n| **Fibrinogen** | May be consumed | DIC-like consumption |\n| **Urinalysis** | Hemoglobinuria (dark/red) | Free Hgb in urine |',
+    },
+    {
+      heading: 'Interpretation Algorithm',
+      body: '**LDH >2.5× ULN + Low haptoglobin + High power:**\n→ Pump thrombosis until proven otherwise\n\n**LDH mildly elevated + Normal haptoglobin:**\n→ Consider other causes (infection, hepatic congestion)\n\n**LDH normal + High power:**\n→ Less likely thrombosis; consider increased demand state\n\n**Rising LDH trend** (even within normal range) is concerning — serial monitoring q4-6h is recommended when thrombosis is suspected.',
+    },
+    {
+      heading: 'Additional Labs for All VAD ED Visits',
+      body: '**Standard panel:**\n• CBC — anemia assessment, platelet count\n• CMP — electrolytes, renal function, liver function\n• PT/INR/PTT — critical for anticoagulation management\n• Troponin — myocardial injury\n• BNP/NT-proBNP — device malfunction, RV failure\n• Lactate — perfusion adequacy\n• Type & screen — anticipate bleeding\n\n**If infection suspected:**\n• Blood cultures ×2 (before antibiotics)\n• Driveline site culture\n• CRP, procalcitonin\n\n**If critically ill:**\n• ABG — cannot rely on pulse oximetry\n• TEG (thromboelastography) if available',
+    },
+    {
+      heading: 'Pump Thrombosis — Key Numbers',
+      body: '• **48% six-month mortality** without intervention\n• Average onset: ~1 year post-implantation\n• Incidence: 1.5% at 2 years (HM3), higher for HMII and HVAD\n• LDH >1,150 IU/L is highly suggestive\n• tPA thrombolysis: 70% hemolysis resolution, 10% hemorrhagic stroke',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Goldstein DJ, et al. Algorithm for Diagnosis and Management of Suspected Pump Thrombus. JHLT. 2013;32(7):667-670.' },
+    { num: 2, text: 'Starling RC, et al. Unexpected Abrupt Increase in LVAD-Related Infections. JHLT. 2014;33(1):12-22.' },
+    { num: 3, text: 'Uriel N, et al. Hemocompatibility-Related Outcomes in MOMENTUM 3 Trial. Circulation. 2017;135(21):2003-2012.' },
+  ],
+};
+
+const VAD_ECHO_FINDINGS: InfoPage = {
+  id: 'vad-echo-findings',
+  title: 'VAD Echo Findings',
+  subtitle: 'Bedside Echocardiography in LVAD Patients',
+  sections: [
+    {
+      heading: 'Why Echo Is Essential',
+      body: 'Bedside echocardiography is the **primary imaging modality** for acute LVAD assessment. Compare all findings to the patient\'s baseline echo (available from the VAD center).\n\n**MRI is CONTRAINDICATED** in all current LVAD patients — ferromagnetic components.',
+    },
+    {
+      heading: 'What to Assess',
+      body: '• **LV size** — compare to baseline; over- or under-distension\n• **RV size and function** — RV:LV ratio, TAPSE, RV free wall motion\n• **Inflow cannula** — position, flow velocity (normal <2 m/s)\n• **Outflow graft** — flow pattern\n• **Aortic valve** — opening frequency, regurgitation\n• **IVC** — size and collapsibility for volume status\n• **Pericardial effusion** — tamponade assessment\n• **Septal position** — bowing suggests pressure differential',
+    },
+    {
+      heading: 'Echo-Based Differential Diagnosis',
+      body: '| Echo Finding | LV | RV | Likely Diagnosis |\n|-------------|-----|-----|------------------|\n| Small LV + Small RV | ↓ | ↓ | **Hypovolemia / bleeding** |\n| Small LV + Large RV | ↓ | ↑ | **PE, RV infarct, pulmonary HTN** |\n| Large LV + Large RV | ↑ | ↑ | **Pump thrombosis / obstruction** |\n| Small LV + Septal shift | ↓↓ | — | **Suction event** (septum pulled toward cannula) |\n| Normal LV + Large RV | — | ↑ | **RV failure** |\n| Pericardial effusion | — | — | **Tamponade** (diastolic collapse) |',
+    },
+    {
+      heading: 'Inflow Cannula Assessment',
+      body: '**Normal:** Cannula tip in mid-LV cavity, directed toward mitral valve, unobstructed.\n\n**Abnormal findings:**\n• **Flow velocity >2 m/s** — suggests obstruction (thrombus, malposition)\n• **Cannula abutting septum** — suction event\n• **Rocking/mobile cannula** — partial dehiscence (surgical emergency)\n\n**Tip:** Color Doppler across the cannula confirms flow direction and velocity.',
+    },
+    {
+      heading: 'Aortic Valve Assessment',
+      body: '**Normal in LVAD:** Aortic valve opens intermittently or not at all (continuous flow bypasses the valve).\n\n**Concerning findings:**\n• **Aortic regurgitation** — creates recirculation loop (blood pumped to aorta regurgitates back into LV → re-pumped). Incidence: 6-32% at 1 year.\n• **Commissural fusion** — leaflets fuse from chronic non-opening. Progressive.\n\nAR in LVAD patients causes:\n• Elevated pump flow (recirculated, not forward flow)\n• Decreased effective cardiac output despite "adequate" flow readings\n• Progressive heart failure symptoms despite mechanical support',
+    },
+    {
+      heading: 'RV Failure Markers',
+      body: '| Parameter | Normal | RV Failure |\n|-----------|--------|------------|\n| **RV:LV ratio** (A4C) | <0.6 | >0.6 |\n| **TAPSE** | >17 mm | <17 mm |\n| **IVC** | <2.1 cm, >50% collapse | >2.1 cm, <50% collapse |\n| **Hepatic vein flow** | Normal | Systolic reversal |\n| **RV free wall motion** | Normal | Hypokinetic/akinetic |\n\nRV failure is present in 9-40% of LVAD patients. Echo is the first-line diagnostic tool.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ASE 2024 Recommendations: Multimodality Imaging of Patients With LVADs. JASE. 2024.' },
+    { num: 2, text: 'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. JHLT. 2019;38(7):677-698.' },
+    { num: 3, text: 'Sen A, et al. MCS Devices: A Primer for Critical Care and EM. Crit Care. 2016;20:153.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -9998,6 +10217,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dab-lemon-card': DAB_LEMON_CARD,
   'dab-rsi-drugs': DAB_RSI_DRUGS,
   'dab-cric-steps': DAB_CRIC_STEPS,
+  'vad-steps-summary': VAD_STEPS_SUMMARY,
+  'vad-alarm-guide': VAD_ALARM_GUIDE,
+  'vad-device-params': VAD_DEVICE_PARAMS,
+  'vad-arrest-protocol': VAD_ARREST_PROTOCOL,
+  'vad-hemolysis-labs': VAD_HEMOLYSIS_LABS,
+  'vad-echo-findings': VAD_ECHO_FINDINGS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

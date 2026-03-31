@@ -278,7 +278,7 @@ const ALTEPLASE = {
     genericName: 'Alteplase',
     drugClass: 'Thrombolytic (tissue plasminogen activator)',
     route: 'IV',
-    indications: ['Massive (high-risk) pulmonary embolism', 'Acute ischemic stroke', 'Acute STEMI'],
+    indications: ['Massive (high-risk) pulmonary embolism', 'Acute ischemic stroke', 'Acute STEMI', 'VAD pump thrombosis'],
     dosing: [
         {
             indication: 'High-risk PE',
@@ -298,6 +298,10 @@ const ALTEPLASE = {
                 { dosePerKg: 0.5, unit: 'mg', maxDose: 35, label: '60-min infusion' },
             ],
         },
+        {
+            indication: 'VAD pump thrombosis',
+            regimen: 'VAD team decision ONLY. Protocol option 1: 5 mg IV bolus, then 3 mg/hr x 10h, then 1 mg/hr up to 48h (max 100 mg total). Protocol option 2: 10 mg IV bolus, then 1 mg/min x 20 min, then 1 mg/hr x 24h. Outcomes: 70% hemolysis resolution without device exchange; 10% hemorrhagic stroke risk. Use only when pump exchange surgery is unavailable or patient is peri-arrest.',
+        },
     ],
     contraindications: [
         'Absolute: Haemorrhagic stroke or stroke of unknown origin, Ischaemic stroke within 6 months, CNS neoplasm, Major trauma/surgery/head injury within 3 weeks, Bleeding diathesis, Active bleeding',
@@ -315,7 +319,7 @@ const AMIODARONE = {
     genericName: 'Amiodarone hydrochloride',
     drugClass: 'Class III antiarrhythmic (multichannel blocker)',
     route: 'IV / PO',
-    indications: ['A-Fib / A-Flutter rate control', 'A-Fib / A-Flutter rhythm control (cardioversion)', 'Ventricular tachycardia', 'Cardiac arrest (VF/pulseless VT)'],
+    indications: ['A-Fib / A-Flutter rate control', 'A-Fib / A-Flutter rhythm control (cardioversion)', 'Ventricular tachycardia', 'Cardiac arrest (VF/pulseless VT)', 'VAD arrhythmia management'],
     dosing: [
         {
             indication: 'A-Fib rate control',
@@ -329,6 +333,10 @@ const AMIODARONE = {
         {
             indication: 'Cardiac arrest (VF/pVT)',
             regimen: '300 mg IV/IO push. May repeat 150 mg x1.',
+        },
+        {
+            indication: 'VAD arrhythmia',
+            regimen: 'Load: 150 mg IV over 10 min. Infusion: 1 mg/min x 6h, then 0.5 mg/min x 18h. For VAD VT/VF: 300 mg IV push (arrest dose). Preferred antiarrhythmic in VAD patients — hemodynamically stable, effective for both atrial and ventricular arrhythmias. Note: potentiates warfarin — reduce warfarin dose by 30-50%.',
         },
     ],
     contraindications: [
@@ -1186,7 +1194,7 @@ const DESMOPRESSIN = {
     genericName: 'Desmopressin acetate',
     drugClass: 'Synthetic vasopressin analog (V2 agonist)',
     route: 'IV / Intranasal',
-    indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release', 'Antiplatelet reversal'],
+    indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release', 'Antiplatelet reversal', 'VAD bleeding (acquired von Willebrand disease)'],
     dosing: [
         {
             indication: 'DDAVP clamp (hyponatremia)',
@@ -1218,6 +1226,11 @@ const DESMOPRESSIN = {
             indication: 'Antiplatelet reversal — ICH or major bleeding',
             regimen: '0.3-0.4 mcg/kg IV over 20-30 min. Front-line agent to improve platelet function in patients on antiplatelet agents (including P2Y12 inhibitors). AHA 2022: level 2B recommendation for ICH on antiplatelets. Stimulates vWF and factor VIII release from endothelium. Usually single dose — tachyphylaxis occurs (vWF stores deplete). Restrict fluids × 24h. Uremic platelet dysfunction: use 0.4 mcg/kg.',
             weightCalc: { dosePerKg: 0.4, unit: 'mcg', label: 'Antiplatelet reversal' },
+        },
+        {
+            indication: 'VAD bleeding',
+            regimen: '0.3 mcg/kg IV over 15-30 minutes. Single dose. May repeat in 12-24 hours if ongoing bleeding (tachyphylaxis with repeated doses). Mechanism: releases stored VWF from endothelial cells, partially compensating for acquired VWD caused by LVAD shear forces. Most effective for mucosal/GI bleeding.',
+            weightCalc: { dosePerKg: 0.3, unit: 'mcg', label: 'IV dose (0.3 mcg/kg)' },
         },
     ],
     contraindications: [
@@ -1664,11 +1677,16 @@ const DOBUTAMINE = {
     genericName: 'Dobutamine',
     drugClass: 'Inotrope (beta-1 adrenergic agonist)',
     route: 'IV infusion',
-    indications: ['Septic shock with low cardiac output', 'Septic cardiomyopathy (inotropic support)'],
+    indications: ['Septic shock with low cardiac output', 'Septic cardiomyopathy (inotropic support)', 'VAD RV failure (inotropic support)'],
     dosing: [
         {
             indication: 'Septic shock inotrope',
             regimen: 'Start 2-5 mcg/kg/min IV continuous infusion, titrate to max 20 mcg/kg/min. May cause reflex hypotension \u2014 up-titrate norepinephrine if BP drops. Discontinue if no improvement or hypotension worsens.',
+        },
+        {
+            indication: 'VAD RV failure',
+            regimen: 'Start 2.5-5 mcg/kg/min IV continuous infusion, titrate to max 10 mcg/kg/min. Use for acute RV failure support — shorter half-life than milrinone allows rapid titration. Avoid in chronic RV failure (beta-receptor downregulation reduces efficacy).',
+            weightCalc: { dosePerKg: 5, unit: 'mcg/min', label: 'Standard infusion (5 mcg/kg/min)' },
         },
     ],
     contraindications: [
@@ -1851,7 +1869,7 @@ const EPINEPHRINE = {
     genericName: 'Epinephrine',
     drugClass: 'Non-selective adrenergic agonist (alpha + beta)',
     route: 'IM/IV/IO/SQ/ET/Intracavernosal',
-    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor', 'Septic shock (vasopressor infusion)'],
+    indications: ['Anaphylaxis / angioedema', 'Hyperkalemia with hemodynamic instability', 'Ischemic priapism (alternative to phenylephrine)', 'Neonatal resuscitation (NRP)', 'TCA overdose vasopressor', 'Septic shock (vasopressor infusion)', 'VAD cardiac arrest', 'VAD low-dose inotrope'],
     dosing: [
         {
             indication: 'Anaphylaxis — IM (first-line)',
@@ -1897,6 +1915,15 @@ const EPINEPHRINE = {
         {
             indication: 'Septic shock infusion',
             regimen: '0.01-0.5 mcg/kg/min IV continuous infusion. Alternative first-line vasopressor for patients with bradycardia or cardiac dysfunction. CAT trial: outcomes similar to norepinephrine. Note: Increases lactate — rising lactate on epinephrine is expected and often a positive prognostic sign. Avoid if lactate >5 mM (may worsen acidosis — use dobutamine instead).',
+        },
+        {
+            indication: 'VAD cardiac arrest',
+            regimen: '1 mg (1:10,000) IV/IO every 3-5 minutes per standard ACLS. All ACLS medications are safe and recommended in VAD patients. AHA 2017 endorses full ACLS protocol including chest compressions.',
+        },
+        {
+            indication: 'VAD low-dose inotrope',
+            regimen: '0.01-0.03 mcg/kg/min IV continuous infusion for RV contractile support. Provides combined inotropic and vasopressor effects. Alternative to dobutamine when vasopressor effect also needed.',
+            weightCalc: { dosePerKg: 0.02, unit: 'mcg/min', label: 'Low-dose inotrope (0.02 mcg/kg/min)' },
         },
     ],
     contraindications: [
@@ -2246,7 +2273,7 @@ const LIDOCAINE = {
     genericName: 'Lidocaine',
     drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
     route: 'Local injection / IV / Topical',
-    indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment'],
+    indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment', 'VAD ventricular tachycardia'],
     dosing: [
         {
             indication: 'Epistaxis (topical anesthesia)',
@@ -2270,6 +2297,11 @@ const LIDOCAINE = {
             indication: 'RSI pretreatment',
             regimen: '1.5 mg/kg IV, given 3 minutes before induction. Theoretically attenuates ICP response to laryngoscopy — evidence is weak. Consider in patients with elevated ICP when fentanyl is also being given. NOT routinely recommended.',
             weightCalc: { dosePerKg: 1.5, unit: 'mg' },
+        },
+        {
+            indication: 'VAD VT',
+            regimen: '1-1.5 mg/kg IV bolus, then 1-4 mg/min continuous infusion. Alternative to amiodarone for hemodynamically tolerated VT in VAD patients. May repeat bolus 0.5-0.75 mg/kg q5-10 min (max 3 mg/kg total).',
+            weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'IV bolus (1.5 mg/kg)' },
         },
     ],
     contraindications: [
@@ -3433,7 +3465,7 @@ const OCTREOTIDE = {
     genericName: 'Octreotide acetate',
     drugClass: 'Somatostatin analog',
     route: 'SQ/IV',
-    indications: ['Opioid withdrawal — refractory diarrhea', 'Sulfonylurea-induced hypoglycemia'],
+    indications: ['Opioid withdrawal — refractory diarrhea', 'Sulfonylurea-induced hypoglycemia', 'VAD GI bleeding (AVMs)'],
     dosing: [
         {
             indication: 'Opioid withdrawal — refractory diarrhea',
@@ -3442,6 +3474,10 @@ const OCTREOTIDE = {
         {
             indication: 'Sulfonylurea-induced hypoglycemia',
             regimen: '**SQ/IV:** 50\u2013100 mcg every 6\u20138 hours. Inhibits insulin secretion. Duration of therapy guided by half-life of sulfonylurea ingested.',
+        },
+        {
+            indication: 'VAD GI bleeding',
+            regimen: 'Acute: 50 mcg IV bolus, then 50 mcg/hr continuous infusion. Chronic/prophylaxis: 50-100 mcg SC BID, or octreotide LAR 20-30 mg IM monthly. Reduces splanchnic blood flow, enhances platelet aggregation, inhibits angiogenesis. Effective for recurrent GI bleeding from AVMs caused by non-pulsatile LVAD flow.',
         },
     ],
     contraindications: [
@@ -4655,7 +4691,7 @@ const TENECTEPLASE = {
     genericName: 'Tenecteplase',
     drugClass: 'Thrombolytic (tissue plasminogen activator)',
     route: 'IV',
-    indications: ['Acute ischemic stroke (0\u20134.5h)', 'Acute STEMI'],
+    indications: ['Acute ischemic stroke (0\u20134.5h)', 'Acute STEMI', 'VAD cardiac arrest (suspected PE)'],
     dosing: [
         {
             indication: 'Acute ischemic stroke',
@@ -4665,6 +4701,10 @@ const TENECTEPLASE = {
         {
             indication: 'STEMI / Fibrinolysis',
             regimen: 'Single IV bolus over 5 seconds, weight-based:\n\u2022 <60 kg: 30 mg\n\u2022 60-69 kg: 35 mg\n\u2022 70-79 kg: 40 mg\n\u2022 80-89 kg: 45 mg\n\u2022 \u226590 kg: 50 mg\n\nAge >75 years: Consider HALF dose (reduced ICH risk).\n\nPatency rate: 63% (TIMI grade 3 flow at 90 min).\nPreferred fibrinolytic due to single-bolus dosing.',
+        },
+        {
+            indication: 'VAD arrest PE',
+            regimen: 'Weight-based: <60 kg: 30 mg; 60-69 kg: 35 mg; 70-79 kg: 40 mg; 80-89 kg: 45 mg; \u226590 kg: 50 mg. Single IV bolus. For suspected massive PE causing VAD cardiac arrest. Use when clinical suspicion high and no other explanation for arrest.',
         },
     ],
     contraindications: [
@@ -4764,7 +4804,7 @@ const UFH = {
     genericName: 'Heparin sodium',
     drugClass: 'Unfractionated heparin (indirect thrombin/Xa inhibitor)',
     route: 'IV',
-    indications: ['Pulmonary embolism (all risk levels)', 'DVT', 'ACS', 'Bridge anticoagulation'],
+    indications: ['Pulmonary embolism (all risk levels)', 'DVT', 'ACS', 'Bridge anticoagulation', 'VAD anticoagulation bridge'],
     dosing: [
         {
             indication: 'High-risk / Massive PE',
@@ -4785,6 +4825,14 @@ const UFH = {
                 { dosePerKg: 70, unit: 'units', label: 'PCI bolus (without GP IIb/IIIa)' },
                 { dosePerKg: 50, unit: 'units', label: 'PCI bolus (with GP IIb/IIIa)' },
                 { dosePerKg: 60, unit: 'units', maxDose: 4000, label: 'Fibrinolysis bolus' },
+            ],
+        },
+        {
+            indication: 'VAD anticoagulation',
+            regimen: 'For pump thrombosis: 80 units/kg IV bolus, then 18 units/kg/hr continuous infusion, target PTT 60-80 sec. For warfarin bridge: standard weight-based protocol, target PTT 50-70 sec. Use unfractionated heparin (not LMWH) — shorter half-life allows rapid reversal if bleeding occurs.',
+            weightCalc: [
+                { dosePerKg: 80, unit: 'units', label: 'Loading bolus (80 units/kg)' },
+                { dosePerKg: 18, unit: 'units/hr', label: 'Infusion (18 units/kg/hr)' },
             ],
         },
     ],
@@ -4811,7 +4859,7 @@ const VASOPRESSIN = {
     genericName: 'Vasopressin',
     drugClass: 'Non-adrenergic vasopressor (V1 receptor agonist)',
     route: 'IV infusion',
-    indications: ['Septic shock (second-line vasopressor)', 'Vasodilatory shock (catecholamine-refractory)'],
+    indications: ['Septic shock (second-line vasopressor)', 'Vasodilatory shock (catecholamine-refractory)', 'VAD RV perfusion support'],
     dosing: [
         {
             indication: 'Septic shock (second-line)',
@@ -4820,6 +4868,10 @@ const VASOPRESSIN = {
         {
             indication: 'Vasodilatory / refractory shock',
             regimen: '0.03-0.04 units/min IV continuous infusion. Consider early addition at lower norepinephrine doses rather than escalating NE to high doses. VASST trial: no mortality benefit but NE-sparing. VANISH trial: no improvement in renal outcomes.',
+        },
+        {
+            indication: 'VAD RV support',
+            regimen: '0.02-0.04 units/min IV continuous infusion (no loading dose, no titration above 0.04). Preferred vasopressor for VAD RV failure — increases systemic BP for RV coronary perfusion WITHOUT increasing pulmonary vascular resistance.',
         },
     ],
     contraindications: [
@@ -5172,6 +5224,41 @@ const HYDROCORTISONE = {
         'Husebye ES, et al. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.',
     ],
 };
+const HYDRALAZINE = {
+    id: 'hydralazine',
+    name: 'Hydralazine',
+    genericName: 'Hydralazine hydrochloride',
+    drugClass: 'Direct-acting vasodilator (arteriolar)',
+    route: 'PO / IV',
+    indications: ['VAD hypertension (MAP >90)', 'Hypertensive emergency/urgency', 'Heart failure (with isosorbide dinitrate)'],
+    dosing: [
+        {
+            indication: 'VAD hypertension',
+            regimen: '10-25 mg PO every 6-8 hours. Titrate to target MAP 70-80 mmHg. Maximum 100 mg PO q8h. Preferred first-line oral agent for VAD hypertension — reduces afterload without decreasing native cardiac contractility.',
+        },
+        {
+            indication: 'Hypertensive emergency',
+            regimen: '10-20 mg IV over 1-2 minutes. May repeat q20-30 min PRN. Maximum cumulative dose 40 mg. Onset: 10-20 min IV, 20-30 min PO. Duration: 2-6 hours.',
+        },
+    ],
+    contraindications: [
+        'Coronary artery disease (reflex tachycardia worsens ischemia)',
+        'Mitral valve rheumatic heart disease',
+        'Known hypersensitivity',
+    ],
+    cautions: [
+        'Reflex tachycardia — may need beta-blocker adjunct (but avoid in VAD patients)',
+        'Drug-induced lupus with chronic high-dose use (>200 mg/day)',
+        'Headache, flushing, palpitations — common initial side effects',
+        'Unpredictable dose-response — titrate slowly',
+    ],
+    monitoring: 'MAP (Doppler in VAD patients) q30 min during acute titration. Heart rate. For chronic use: ANA annually if high dose.',
+    notes: 'Preferred oral antihypertensive for VAD patients because it reduces afterload (SVR) without negative inotropic effects. In VAD physiology, elevated afterload directly reduces pump flow — lowering MAP improves forward flow. Avoid IV beta-blockers in VAD patients (reduce native contractility). For acute severe hypertension in VAD, IV nicardipine or clevidipine infusions provide more predictable control.',
+    citations: [
+        'AHA Scientific Statement: Management of Hypertension in Patients with VADs. Circ Heart Fail. 2020;13:e000074.',
+        'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. J Heart Lung Transplant. 2019;38(7):677-698.',
+    ],
+};
 const IBUPROFEN = {
     id: 'ibuprofen',
     name: 'Ibuprofen (Motrin, Advil)',
@@ -5438,6 +5525,46 @@ const MISOPROSTOL = {
     citations: [
         'Bique C, Usta M, Debora B, et al. Comparison of misoprostol and manual vacuum aspiration for the treatment of incomplete abortion. Int J Gynaecol Obstet. 2007;98(3):222-226.',
         'Kim C, Barnard S, Neilson JP, et al. Medical treatments for incomplete miscarriage. Cochrane Database Syst Rev. 2017;1:CD007223.',
+    ],
+};
+const MILRINONE = {
+    id: 'milrinone',
+    name: 'Milrinone',
+    genericName: 'Milrinone lactate',
+    drugClass: 'Phosphodiesterase-3 (PDE3) inhibitor (inodilator)',
+    route: 'IV infusion',
+    indications: ['VAD RV failure (inotropic support)', 'Acute decompensated heart failure', 'Cardiogenic shock (adjunct)'],
+    dosing: [
+        {
+            indication: 'VAD RV failure',
+            regimen: 'Start 0.125-0.375 mcg/kg/min IV continuous infusion, titrate to max 0.75 mcg/kg/min. AVOID loading dose in VAD patients (risk of hypotension). Preferred over dobutamine for subacute/chronic RV support — reduces PVR while augmenting contractility.',
+            weightCalc: { dosePerKg: 0.375, unit: 'mcg/min', label: 'Standard infusion (0.375 mcg/kg/min)' },
+        },
+        {
+            indication: 'Acute decompensated heart failure',
+            regimen: 'Optional loading dose: 50 mcg/kg IV over 10 min (use with caution — may cause hypotension). Maintenance: 0.125-0.75 mcg/kg/min continuous infusion.',
+            weightCalc: [
+                { dosePerKg: 50, unit: 'mcg', label: 'Loading dose (50 mcg/kg over 10 min)' },
+                { dosePerKg: 0.5, unit: 'mcg/min', label: 'Maintenance infusion (0.5 mcg/kg/min)' },
+            ],
+        },
+    ],
+    contraindications: [
+        'Severe aortic or pulmonary stenosis (outflow obstruction)',
+        'Known hypersensitivity',
+    ],
+    cautions: [
+        'Hypotension — especially with loading dose; have vasopressor available',
+        'Arrhythmias — ventricular ectopy, sustained VT reported',
+        'Thrombocytopenia — monitor platelet count',
+        'Renal impairment — reduce dose if CrCl <30 (renally cleared)',
+        'Longer half-life than dobutamine (~2.3h vs ~2 min) — effects persist after discontinuation',
+    ],
+    monitoring: 'Continuous hemodynamic and cardiac monitoring. MAP, heart rate, urine output. Platelet count at baseline and periodically. Renal function.',
+    notes: 'Inodilator: increases cardiac output via PDE3 inhibition (increased cAMP) while simultaneously reducing SVR and PVR. Preferred for VAD RV failure because it reduces pulmonary vascular resistance without increasing myocardial oxygen demand as much as catecholamines. Does NOT require functioning beta receptors (advantage in chronic heart failure with beta-receptor downregulation).',
+    citations: [
+        'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. J Heart Lung Transplant. 2019;38(7):677-698.',
+        'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for Heart Failure. Circulation. 2022;145(18):e895-e1032.',
     ],
 };
 const SODIUM_BICARBONATE = {
@@ -5737,7 +5864,7 @@ const VITAMIN_K = {
     genericName: 'Phytonadione (Vitamin K1)',
     drugClass: 'Vitamin K (coagulation cofactor)',
     route: 'IV',
-    indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency', 'Supratherapeutic INR management'],
+    indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency', 'Supratherapeutic INR management', 'VAD warfarin reversal'],
     dosing: [
         {
             indication: 'Warfarin reversal — ICH (always with PCC)',
@@ -5746,6 +5873,10 @@ const VITAMIN_K = {
         {
             indication: 'Supratherapeutic INR — non-urgent (no active bleeding)',
             regimen: 'INR 5-9 without bleeding: 1-2.5 mg PO or IV if risk for bleeding. INR >9 without bleeding: 2.5-5 mg PO or IV; repeat in 24h if INR remains elevated. Resume warfarin at lower dose when INR is therapeutic. Small titrated doses are compatible with ongoing warfarin use. A 10 mg IV dose will make resuming warfarin difficult for 1-2 weeks. Anaphylactoid reaction risk with IV is exceedingly rare (~1/30,000) and can be avoided by slow infusion.',
+        },
+        {
+            indication: 'VAD warfarin reversal',
+            regimen: '2.5-5 mg IV slow infusion (over 10-20 min) for moderate bleeding. 10 mg IV for life-threatening bleeding (combined with 4-factor PCC). Warfarin reversal carries LOW risk for acute pump thrombosis — do not withhold in life-threatening bleeding. Coordinate target INR with VAD team. Onset: 6-12 hours for full effect.',
         },
     ],
     contraindications: [
@@ -7331,6 +7462,45 @@ const WHOLE_BLOOD = {
         'Bahr MP, et al. Low-titer group O whole blood in civilian trauma resuscitation. Transfusion. 2021;61(S1):S53-S60.',
     ],
 };
+const WARFARIN = {
+    id: 'warfarin',
+    name: 'Warfarin (Coumadin)',
+    genericName: 'Warfarin sodium',
+    drugClass: 'Vitamin K antagonist (anticoagulant)',
+    route: 'PO / IV',
+    indications: ['VAD anticoagulation', 'Atrial fibrillation (stroke prevention)', 'Venous thromboembolism', 'Mechanical heart valve'],
+    dosing: [
+        {
+            indication: 'VAD anticoagulation',
+            regimen: 'Dose adjusted to target INR by device type:\n\u2022 HeartMate 3: INR 2.0-3.0\n\u2022 HeartMate II: INR 1.8-2.5\n\u2022 HVAD: INR 2.0-3.0\nUsually combined with aspirin 81 mg daily. Time in therapeutic range (TTR) averages only 47% in VAD patients despite intensive monitoring.',
+        },
+        {
+            indication: 'Atrial fibrillation',
+            regimen: 'Target INR 2.0-3.0. Typical starting dose 5 mg PO daily, adjust based on INR. Lower starting dose (2-3 mg) in elderly, liver disease, malnutrition, or drug interactions.',
+        },
+    ],
+    contraindications: [
+        'Active major bleeding',
+        'Pregnancy (teratogenic \u2014 category X)',
+        'Severe hepatic disease with coagulopathy',
+        'Recent CNS surgery or hemorrhagic stroke (within 2 weeks)',
+    ],
+    cautions: [
+        'Narrow therapeutic index \u2014 requires frequent INR monitoring',
+        'Numerous drug interactions (CYP2C9, CYP3A4) \u2014 amiodarone reduces warfarin dose by 30-50%',
+        'Dietary vitamin K interactions \u2014 consistent intake important',
+        'Skin necrosis (rare, protein C/S deficiency) \u2014 bridge with heparin when starting',
+        'Purple toe syndrome \u2014 cholesterol microemboli',
+        'Fall risk patients \u2014 balance bleeding vs thrombotic risk',
+    ],
+    monitoring: 'INR at baseline, daily during initiation, then weekly until stable, then q4 weeks. More frequent monitoring with interacting medications.',
+    notes: 'The ONLY standard oral anticoagulant for VAD patients. DOACs (dabigatran, apixaban, rivaroxaban) are NOT standard of care for VADs \u2014 dabigatran was inferior to warfarin for mechanical heart valves (RE-ALIGN trial). Warfarin reversal in VAD patients carries LOW risk of acute pump thrombosis \u2014 do not withhold reversal in life-threatening bleeding. Reversal: Vitamin K (primary), 4-factor PCC (urgent), FFP (alternative).',
+    citations: [
+        'Loyaga-Rendon RY, et al. Antiplatelet and Anticoagulation Strategies for LVADs. Ann Transl Med. 2021;9(6):520.',
+        'Nassif ME, et al. Pearls in Anticoagulation Management for LVAD Patients. JACC Heart Fail. 2023;11(11):1559-1571.',
+        'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. J Heart Lung Transplant. 2019;38(7):677-698.',
+    ],
+};
 const ICATIBANT = {
     id: 'icatibant',
     name: 'Icatibant (Firazyr)',
@@ -7452,7 +7622,7 @@ const NOREPINEPHRINE = {
     genericName: 'Norepinephrine bitartrate',
     drugClass: 'Vasopressor / Catecholamine (alpha > beta)',
     route: 'IV infusion',
-    indications: ['TCA overdose hypotension', 'Septic shock', 'Vasodilatory shock'],
+    indications: ['TCA overdose hypotension', 'Septic shock', 'Vasodilatory shock', 'VAD vasopressor support'],
     dosing: [
         {
             indication: 'TCA Overdose — Hypotension',
@@ -7461,6 +7631,11 @@ const NOREPINEPHRINE = {
         {
             indication: 'Septic / Vasodilatory Shock',
             regimen: '0.01-3 mcg/kg/min IV infusion. First-line vasopressor per Surviving Sepsis Campaign 2021. Titrate to MAP ≥65 mmHg. Central line preferred but peripheral administration acceptable for initial resuscitation (max 12h via large-bore antecubital or external jugular).',
+        },
+        {
+            indication: 'VAD vasopressor',
+            regimen: 'Start 0.1-0.2 mcg/kg/min IV, titrate to maintain MAP 70-80 mmHg. First-line vasopressor for VAD hypotension. Use cautiously — increasing afterload reduces LVAD flow. Goal is adequate MAP for end-organ perfusion, not supranormal pressures.',
+            weightCalc: { dosePerKg: 0.2, unit: 'mcg/min', label: 'Standard infusion (0.2 mcg/kg/min)' },
         },
     ],
     contraindications: [
@@ -8070,6 +8245,7 @@ export const ALL_DRUGS = [
     GENTAMICIN,
     GLUCAGON,
     HALOPERIDOL,
+    HYDRALAZINE,
     HYDROCORTISONE,
     HYDROMORPHONE,
     HYPERTONIC_SALINE,
@@ -8105,6 +8281,7 @@ export const ALL_DRUGS = [
     METRONIDAZOLE,
     METOPROLOL,
     MIDAZOLAM,
+    MILRINONE,
     MORPHINE,
     MISOPROSTOL,
     MOXIFLOXACIN,
@@ -8187,6 +8364,7 @@ export const ALL_DRUGS = [
     VANCOMYCIN,
     VALPROATE,
     VASOPRESSIN,
+    WARFARIN,
     VERAPAMIL,
     VITAMIN_K,
     VWF_CONCENTRATE,
