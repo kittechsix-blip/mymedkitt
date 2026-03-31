@@ -16257,6 +16257,505 @@ const LEMON_SCORE_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// =====================================================================
+// ACUTE PANCREATITIS CALCULATORS
+// =====================================================================
+
+const BISAP_CALCULATOR: CalculatorDefinition = {
+  id: 'bisap',
+  title: 'BISAP Score',
+  subtitle: 'Bedside Index for Severity in Acute Pancreatitis',
+  description: 'Predicts mortality risk in acute pancreatitis within 24 hours of presentation. Score ≥3 associated with 12-30% mortality. Validated by Wu et al. (2008) in >17,000 patients.',
+  fields: [
+    {
+      name: 'bun',
+      label: 'BUN >25 mg/dL',
+      type: 'select',
+      points: 0,
+      description: 'Blood urea nitrogen greater than 25 mg/dL',
+      selectOptions: [
+        { label: 'No — BUN ≤25 mg/dL', points: 0 },
+        { label: 'Yes — BUN >25 mg/dL', points: 1 },
+      ],
+    },
+    {
+      name: 'mental_status',
+      label: 'Impaired Mental Status',
+      type: 'select',
+      points: 0,
+      description: 'Glasgow Coma Scale <15',
+      selectOptions: [
+        { label: 'No — GCS 15 (alert and oriented)', points: 0 },
+        { label: 'Yes — GCS <15', points: 1 },
+      ],
+    },
+    {
+      name: 'sirs',
+      label: 'SIRS (≥2 criteria)',
+      type: 'select',
+      points: 0,
+      description: 'Temp >38°C or <36°C, HR >90, RR >20 or PaCO₂ <32, WBC >12K or <4K',
+      selectOptions: [
+        { label: 'No — <2 SIRS criteria', points: 0 },
+        { label: 'Yes — ≥2 SIRS criteria met', points: 1 },
+      ],
+    },
+    {
+      name: 'age',
+      label: 'Age >60 years',
+      type: 'select',
+      points: 0,
+      description: 'Patient age greater than 60',
+      selectOptions: [
+        { label: 'No — Age ≤60', points: 0 },
+        { label: 'Yes — Age >60', points: 1 },
+      ],
+    },
+    {
+      name: 'effusion',
+      label: 'Pleural Effusion',
+      type: 'select',
+      points: 0,
+      description: 'Pleural effusion on imaging',
+      selectOptions: [
+        { label: 'No — No pleural effusion', points: 0 },
+        { label: 'Yes — Pleural effusion present', points: 1 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'BISAP 0',
+      risk: 'Low Risk',
+      mortality: 'Mortality <1%. Low risk for organ failure or necrotizing pancreatitis. Likely safe for floor admission.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'BISAP 1',
+      risk: 'Low Risk',
+      mortality: 'Mortality ~1-2%. Low risk. Floor admission with monitoring.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 3,
+      label: 'BISAP 2',
+      risk: 'Moderate Risk',
+      mortality: 'Mortality ~2-5%. Intermediate risk. Consider step-down or closer monitoring.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 3,
+      max: 4,
+      label: 'BISAP 3',
+      risk: 'High Risk',
+      mortality: 'Mortality ~5-20%. High risk for organ failure. ICU or step-down. Serial reassessment.',
+      colorVar: '--color-danger',
+    },
+    {
+      min: 4,
+      max: Infinity,
+      label: 'BISAP 4-5',
+      risk: 'Very High Risk',
+      mortality: 'Mortality ~20-30%+. Very high risk for persistent organ failure and necrotizing pancreatitis. ICU admission. Early aggressive monitoring.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'BISAP ≥3: 12-30% mortality. Strongly consider ICU admission, aggressive monitoring, and early GI/surgical consultation.',
+  citations: [
+    'Wu BU, et al. The early prediction of mortality in acute pancreatitis: a large population-based study. Gut. 2008;57(12):1698-1703.',
+    'Papachristou GI, et al. Comparison of BISAP, Ranson, APACHE-II, and CTSI scores in predicting organ failure, complications, and mortality. Am J Gastroenterol. 2010;105(2):435-441.',
+  ],
+};
+
+const ATLANTA_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'atlanta-severity',
+  title: 'Atlanta Classification',
+  subtitle: 'Revised Atlanta Classification of Acute Pancreatitis Severity (2012)',
+  description: 'Classifies acute pancreatitis into mild, moderately severe, and severe based on organ failure duration and local/systemic complications. Guides disposition and management intensity.',
+  fields: [
+    {
+      name: 'organ_failure',
+      label: 'Organ Failure',
+      type: 'select',
+      points: 0,
+      description: 'Respiratory (PaO₂/FiO₂ ≤300), Renal (Cr ≥1.9), Cardiovascular (SBP <90 despite fluids)',
+      selectOptions: [
+        { label: 'No organ failure', points: 0 },
+        { label: 'Transient organ failure (<48 hours)', points: 1 },
+        { label: 'Persistent organ failure (≥48 hours)', points: 2 },
+      ],
+    },
+    {
+      name: 'local_complications',
+      label: 'Local Complications',
+      type: 'select',
+      points: 0,
+      description: 'Acute peripancreatic fluid collection, pancreatic pseudocyst, acute necrotic collection, walled-off necrosis',
+      selectOptions: [
+        { label: 'None', points: 0 },
+        { label: 'Present (fluid collection, necrosis, pseudocyst)', points: 1 },
+      ],
+    },
+    {
+      name: 'systemic_complications',
+      label: 'Systemic Complications',
+      type: 'select',
+      points: 0,
+      description: 'Exacerbation of pre-existing comorbidity (e.g., CAD → ACS, CKD → acute renal failure, COPD → respiratory failure)',
+      selectOptions: [
+        { label: 'None', points: 0 },
+        { label: 'Present (exacerbation of comorbidity)', points: 1 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'Mild',
+      risk: 'Mild Acute Pancreatitis',
+      mortality: 'No organ failure, no local or systemic complications. Mortality <1%. Floor admission. Early oral feeding. Same-admission cholecystectomy if gallstone etiology.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'Moderately Severe',
+      risk: 'Moderately Severe',
+      mortality: 'Transient organ failure (<48h) AND/OR local/systemic complications. Mortality ~2-5%. Step-down or monitored bed. Serial reassessment for progression to severe.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 2,
+      max: Infinity,
+      label: 'Severe',
+      risk: 'Severe Acute Pancreatitis',
+      mortality: 'Persistent organ failure (≥48 hours). Mortality ~17-30%. ICU admission mandatory. Goal-directed resuscitation. Early enteral nutrition. Delay intervention for necrosis.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Severe AP (persistent organ failure ≥48h): ICU admission, aggressive monitoring, early enteral nutrition, delay surgical intervention for necrotizing complications.',
+  citations: [
+    'Banks PA, et al. Classification of acute pancreatitis—2012: revision of the Atlanta classification and definitions by international consensus. Gut. 2013;62(1):102-111.',
+    'IAP/APA evidence-based guidelines for the management of acute pancreatitis. Pancreatology. 2013;13(4 Suppl 2):e1-e15.',
+  ],
+};
+
+const MODIFIED_MARSHALL_CALCULATOR: CalculatorDefinition = {
+  id: 'modified-marshall',
+  title: 'Modified Marshall Score',
+  subtitle: 'Organ Failure Assessment for Acute Pancreatitis',
+  description: 'Assesses organ failure in three systems (respiratory, renal, cardiovascular) on a 0-4 scale. Score ≥2 in any system defines organ failure. Used in the Revised Atlanta Classification to stratify severity. Simple enough for bedside use.',
+  fields: [
+    {
+      name: 'respiratory',
+      label: 'Respiratory — PaO₂/FiO₂',
+      type: 'select',
+      points: 0,
+      description: 'PaO₂/FiO₂ ratio (normal >400)',
+      selectOptions: [
+        { label: '>400 — Normal', points: 0 },
+        { label: '301-400 — Mild impairment', points: 1 },
+        { label: '201-300 — Organ failure', points: 2 },
+        { label: '101-200 — Severe failure', points: 3 },
+        { label: '≤100 — Critical failure', points: 4 },
+      ],
+    },
+    {
+      name: 'renal',
+      label: 'Renal — Creatinine (mg/dL)',
+      type: 'select',
+      points: 0,
+      description: 'Serum creatinine',
+      selectOptions: [
+        { label: '≤1.4 — Normal', points: 0 },
+        { label: '1.5-1.8 — Mild impairment', points: 1 },
+        { label: '1.9-3.6 — Organ failure', points: 2 },
+        { label: '3.7-4.9 — Severe failure', points: 3 },
+        { label: '≥5.0 — Critical failure', points: 4 },
+      ],
+    },
+    {
+      name: 'cardiovascular',
+      label: 'Cardiovascular — SBP (mmHg)',
+      type: 'select',
+      points: 0,
+      description: 'Systolic blood pressure (not fluid-responsive)',
+      selectOptions: [
+        { label: '>90 — Normal', points: 0 },
+        { label: '<90, fluid responsive', points: 1 },
+        { label: '<90, not fluid responsive', points: 2 },
+        { label: '<90, pH <7.3', points: 3 },
+        { label: '<90, pH <7.2', points: 4 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 2,
+      label: 'No Organ Failure',
+      risk: 'No Organ Failure',
+      mortality: 'No system scores ≥2. No organ failure by Modified Marshall criteria. Classify as mild AP if no local complications.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 5,
+      label: 'Organ Failure Present',
+      risk: 'Organ Failure',
+      mortality: 'Score ≥2 in at least one system = organ failure. If transient (<48h): moderately severe AP. If persistent (≥48h): severe AP. ICU disposition warranted.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 5,
+      max: Infinity,
+      label: 'Multi-Organ Failure',
+      risk: 'Multi-Organ Failure',
+      mortality: 'Multiple systems with score ≥2. Multi-organ failure carries mortality >30%. ICU mandatory. Consider early transfer to tertiary center with surgical and interventional capabilities.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'Any system score ≥2 = organ failure. Reassess at 48 hours — transient (<48h) vs persistent (≥48h) organ failure determines Atlanta severity classification.',
+  citations: [
+    'Marshall JC, et al. Multiple organ dysfunction score: a reliable descriptor of a complex clinical outcome. Crit Care Med. 1995;23(10):1638-1652.',
+    'Banks PA, et al. Classification of acute pancreatitis—2012: revision of the Atlanta classification. Gut. 2013;62(1):102-111.',
+  ],
+};
+
+const AP_FLUID_RATE_CALCULATOR: CalculatorDefinition = {
+  id: 'ap-fluid-rate',
+  title: 'AP Fluid Calculator',
+  subtitle: 'Acute Pancreatitis Fluid Resuscitation',
+  description: 'Calculates initial fluid resuscitation for acute pancreatitis based on current evidence. Lactated Ringer\'s preferred. Moderate approach: 3-4 L in first 24h. Avoids overresuscitation (associated with worse outcomes per WATERFALL trial).',
+  fields: [
+    {
+      name: 'weight',
+      label: 'Patient Weight (kg)',
+      type: 'number',
+      points: 0,
+      unit: 'kg',
+      description: 'Actual body weight in kilograms (used for rate calculation)',
+    },
+    {
+      name: 'hypovolemic',
+      label: 'Hypovolemia on Presentation',
+      type: 'select',
+      points: 0,
+      description: 'Tachycardia, hypotension, decreased UOP, elevated BUN/Hct',
+      selectOptions: [
+        { label: 'No — euvolemic on presentation', points: 0 },
+        { label: 'Yes — signs of hypovolemia', points: 1 },
+      ],
+    },
+    {
+      name: 'severity',
+      label: 'Severity Classification',
+      type: 'select',
+      points: 0,
+      description: 'Per Revised Atlanta Classification',
+      selectOptions: [
+        { label: 'Mild AP', points: 0 },
+        { label: 'Moderately Severe AP', points: 1 },
+        { label: 'Severe AP', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'Standard Resuscitation',
+      risk: 'Moderate Fluid Strategy',
+      mortality: '',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'Aggressive Monitoring',
+      risk: 'Goal-Directed Fluid Strategy',
+      mortality: '',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 2,
+      max: Infinity,
+      label: 'ICU Fluid Management',
+      risk: 'ICU Goal-Directed Strategy',
+      mortality: '',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'LR preferred over NS (de Madaria, Lancet Gastro Hepatol 2022). Moderate resuscitation (1.5 mL/kg/hr) superior to aggressive (3 mL/kg/hr) per WATERFALL trial. Bolus 10 mL/kg over 2h if hypovolemic. Goal: UOP >0.5 mL/kg/hr, decreasing BUN.',
+  citations: [
+    'de Madaria E, et al. Aggressive or Moderate Fluid Resuscitation in Acute Pancreatitis (WATERFALL). N Engl J Med. 2022;387(11):989-1000.',
+    'ACG Clinical Guideline: Management of Acute Pancreatitis. Am J Gastroenterol. 2024;119(3):419-437.',
+  ],
+};
+
+const MCTSI_CALCULATOR: CalculatorDefinition = {
+  id: 'mctsi',
+  title: 'Modified CTSI',
+  subtitle: 'Modified CT Severity Index for Acute Pancreatitis',
+  description: 'Scores contrast-enhanced CT findings to predict severity, morbidity, and mortality in acute pancreatitis. Combines inflammation grade (0-4) with necrosis extent (0-4) and extrapancreatic complications (0-2). Total 0-10.',
+  fields: [
+    {
+      name: 'inflammation',
+      label: 'Pancreatic Inflammation',
+      type: 'select',
+      points: 0,
+      description: 'CT findings of pancreatic and peripancreatic inflammation',
+      selectOptions: [
+        { label: 'Normal pancreas', points: 0 },
+        { label: 'Intrinsic pancreatic abnormalities only (enlargement, edema)', points: 2 },
+        { label: 'Peripancreatic fat stranding or fluid collection', points: 4 },
+      ],
+    },
+    {
+      name: 'necrosis',
+      label: 'Pancreatic Necrosis',
+      type: 'select',
+      points: 0,
+      description: 'Non-enhancing areas of pancreatic parenchyma on contrast CT',
+      selectOptions: [
+        { label: 'No necrosis', points: 0 },
+        { label: '≤30% necrosis', points: 2 },
+        { label: '>30% necrosis', points: 4 },
+      ],
+    },
+    {
+      name: 'extrapancreatic',
+      label: 'Extrapancreatic Complications',
+      type: 'select',
+      points: 0,
+      description: 'Pleural effusion, ascites, vascular complications, parenchymal complications, GI tract involvement',
+      selectOptions: [
+        { label: 'None', points: 0 },
+        { label: 'One complication (e.g., pleural effusion OR ascites)', points: 2 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 3,
+      label: 'MCTSI 0-2',
+      risk: 'Mild',
+      mortality: 'Mortality ~3%. Low morbidity. Supportive care. Likely edematous/interstitial pancreatitis.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 3,
+      max: 5,
+      label: 'MCTSI 4',
+      risk: 'Moderate',
+      mortality: 'Mortality ~6%. Moderate morbidity. Close monitoring. May develop local complications requiring delayed intervention.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 5,
+      max: 7,
+      label: 'MCTSI 6',
+      risk: 'Moderately Severe',
+      mortality: 'Mortality ~11%. Significant morbidity (organ failure, need for intervention ~40%). ICU/step-down admission.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 7,
+      max: Infinity,
+      label: 'MCTSI 8-10',
+      risk: 'Severe',
+      mortality: 'Mortality ~17%+. High morbidity (organ failure ~65%, intervention ~70%). ICU admission. Early GI/surgical consultation. Anticipate need for step-up approach.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'MCTSI ≥6: High morbidity and mortality. ICU admission, close monitoring for organ failure, anticipate need for intervention (drain → debride if worsening). CT best obtained >72h from onset for accurate necrosis assessment.',
+  citations: [
+    'Mortele KJ, et al. A modified CT severity index for evaluating acute pancreatitis: improved correlation with patient outcome. AJR Am J Roentgenol. 2004;183(5):1261-1265.',
+    'Bollen TL, et al. The Atlanta Classification of acute pancreatitis revisited. Br J Surg. 2008;95(1):6-21.',
+  ],
+};
+
+const INFECTED_NECROSIS_STEP_CALCULATOR: CalculatorDefinition = {
+  id: 'infected-necrosis-step',
+  title: 'Step-Up Decision Aid',
+  subtitle: 'Step-Up Approach for Infected Pancreatic Necrosis',
+  description: 'Guides the step-up approach to managing infected pancreatic necrosis: antibiotics → percutaneous/endoscopic drainage → minimally invasive necrosectomy → open necrosectomy. Based on the PANTER trial and subsequent evidence. Key principle: delay intervention and escalate only when the current step fails.',
+  fields: [
+    {
+      name: 'abx_response',
+      label: 'Response to IV Antibiotics',
+      type: 'select',
+      points: 0,
+      description: 'Clinical response after 48-72 hours of appropriate IV antibiotics (carbapenems or fluoroquinolone + metronidazole)',
+      selectOptions: [
+        { label: 'Improving — decreasing fever, WBC, procalcitonin', points: 0 },
+        { label: 'No improvement or worsening after 48-72h', points: 1 },
+      ],
+    },
+    {
+      name: 'collection_maturity',
+      label: 'Collection Maturity',
+      type: 'select',
+      points: 0,
+      description: 'Walled-off necrosis (WON) typically matures >4 weeks from onset',
+      selectOptions: [
+        { label: '<4 weeks — acute necrotic collection (not yet walled-off)', points: 0 },
+        { label: '≥4 weeks — walled-off necrosis (WON) present', points: 1 },
+      ],
+    },
+    {
+      name: 'drain_response',
+      label: 'Response to Drainage',
+      type: 'select',
+      points: 0,
+      description: 'Clinical response to percutaneous or endoscopic drainage',
+      selectOptions: [
+        { label: 'Not yet drained / N/A', points: 0 },
+        { label: 'Improving after drainage', points: 0 },
+        { label: 'No improvement after drainage', points: 1 },
+      ],
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'Step 1: Antibiotics',
+      risk: 'Continue Antibiotics',
+      mortality: 'Continue IV antibiotics. Carbapenems (meropenem/imipenem) first-line, or ciprofloxacin + metronidazole. ~35% of patients improve with antibiotics alone without drainage. Reassess in 48-72 hours.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'Step 2: Drainage',
+      risk: 'Percutaneous/Endoscopic Drainage',
+      mortality: 'Antibiotics failed or collection mature enough for drainage. Preferred approaches: EUS-guided transmural drainage (endoscopic) or CT-guided percutaneous drainage. Wait for WON maturation (>4 weeks) if clinically stable. ~35% resolve with drain + antibiotics.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 2,
+      max: Infinity,
+      label: 'Step 3: Necrosectomy',
+      risk: 'Surgical Necrosectomy',
+      mortality: 'Drainage failed. Escalate to minimally invasive necrosectomy: video-assisted retroperitoneal debridement (VARD) or endoscopic necrosectomy. Open necrosectomy only as last resort. Mortality 15-40% at this stage. Multidisciplinary team essential.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'DELAY is the key principle. The longer you can delay intervention, the better outcomes. Walled-off necrosis (>4 weeks) is much safer to approach than acute necrotic collections. Per PANTER trial: step-up approach reduces new-onset organ failure by 56% vs primary open necrosectomy.',
+  citations: [
+    'van Santvoort HC, et al. A Step-up Approach or Open Necrosectomy for Necrotizing Pancreatitis (PANTER). N Engl J Med. 2010;362(16):1491-1502.',
+    'van Brunschot S, et al. Endoscopic or surgical step-up approach for infected necrotising pancreatitis (TENSION): a multicentre randomised trial. Lancet. 2018;391(10115):51-58.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -16514,6 +17013,13 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'nat-ten4-facesp': NAT_TEN4_FACESP_CALCULATOR,
   // Difficult Airway
   'lemon-score': LEMON_SCORE_CALCULATOR,
+  // Acute Pancreatitis
+  'bisap': BISAP_CALCULATOR,
+  'atlanta-severity': ATLANTA_SEVERITY_CALCULATOR,
+  'modified-marshall': MODIFIED_MARSHALL_CALCULATOR,
+  'ap-fluid-rate': AP_FLUID_RATE_CALCULATOR,
+  'mctsi': MCTSI_CALCULATOR,
+  'infected-necrosis-step': INFECTED_NECROSIS_STEP_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
