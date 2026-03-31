@@ -15,14 +15,14 @@
     "dry-run": "bun run runner.ts --dry-run"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
-    "lighthouse": "^12.0.0",
-    "puppeteer": "^23.0.0",
-    "fuse.js": "^7.0.0",
-    "text-readability": "^1.0.5"
+    "@anthropic-ai/sdk": "0.39.0",
+    "lighthouse": "12.0.0",
+    "puppeteer": "23.0.0",
+    "fuse.js": "7.0.0",
+    "text-readability": "1.0.5"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.0.0"
+    "@types/bun": "1.3.10",
+    "typescript": "5.0.0"
   }
 }

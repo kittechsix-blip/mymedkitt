@@ -24,8 +24,11 @@ const config: ElectrobunConfig = {
   },
   
   mac: {
-    codesign: false,
-    notarize: false,
+    // Security: Enable code signing for production builds.
+    // Set CODESIGN_IDENTITY env var to your Apple Developer identity.
+    // For local dev, keep false. For release builds, set to true.
+    codesign: !!process.env.CODESIGN_IDENTITY,
+    notarize: !!process.env.APPLE_NOTARIZE,
   },
 };
 

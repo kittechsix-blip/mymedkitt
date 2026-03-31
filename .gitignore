@@ -19,9 +19,10 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Environment
+# Environment — NEVER commit secrets
 .env
-.env.local
+.env.*
+!.env.example
 
 # Browser profile (Playwright persistent login sessions)
 .browser-profile/

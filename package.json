@@ -9,11 +9,11 @@
     "dev": "electrobun dev"
   },
   "dependencies": {
-    "electrobun": "latest",
-    "playwright": "^1.58.2"
+    "electrobun": "1.14.4",
+    "playwright": "1.58.2"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "5.7"
+    "@types/bun": "1.3.10",
+    "typescript": "5.7.0"
   }
 }
