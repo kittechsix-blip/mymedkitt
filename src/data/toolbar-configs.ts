@@ -125,6 +125,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'sgarbossa', label: 'Sgarbossa', icon: '\uD83E\uDDE0', action: 'calculator', target: 'sgarbossa' },
     { id: 'reperfusion', label: 'Reperfusion', icon: '\u23F1\uFE0F', action: 'overlay', target: 'stemi-reperfusion-pathway' },
   ],
+  'suicide-risk-assessment': [
+    { id: 'cssrs', label: 'C-SSRS', icon: '📋', action: 'calculator', target: 'cssrs-screen' },
+    { id: 'safety-plan', label: 'Safety Plan', icon: '📝', action: 'calculator', target: 'safety-plan-builder' },
+    { id: 'risk-strat', label: 'Risk Strat', icon: '⚠️', action: 'jump', target: 'sui-high-risk' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'sui-discharge-criteria' },
+  ],
   'afib-rvr': [
     { id: 'cardioversion', label: 'Cardiovert', icon: '\u26A1', action: 'jump', target: 'afib-cardioversion-protocol' },
     { id: 'rate-control', label: 'Rate Ctrl', icon: '\uD83D\uDC93', action: 'jump', target: 'afib-stable-drugs' },
