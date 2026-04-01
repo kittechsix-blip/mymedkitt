@@ -3,7 +3,6 @@
 // One tap toggles visibility, clear button resets for next patient.
 
 import {
-  getPatientContext,
   clearPatientContext,
   subscribeToPatientContext,
   formatPatientContext,

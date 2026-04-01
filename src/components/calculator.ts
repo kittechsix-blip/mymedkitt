@@ -3,8 +3,8 @@
 // Renders interactive forms with real-time score computation.
 
 import { router } from '../services/router.js';
-import { getPatientContext, setPatientContext, subscribeToPatientContext } from '../services/patient-context.js';
-import { renderStickyPatientHeader, cleanupStickyPatientHeader } from './sticky-patient-header.js';
+import { getPatientContext, setPatientContext } from '../services/patient-context.js';
+import { renderStickyPatientHeader } from './sticky-patient-header.js';
 
 // -------------------------------------------------------------------
 // Calculator Interfaces
@@ -17463,6 +17463,303 @@ const INFECTED_NECROSIS_STEP_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// C-SSRS Screener (Columbia Suicide Severity Rating Scale)
+// -------------------------------------------------------------------
+
+const CSSRS_SCREEN_CALCULATOR: CalculatorDefinition = {
+  id: 'cssrs-screen',
+  title: 'C-SSRS Screener',
+  subtitle: 'Columbia Suicide Severity Rating Scale',
+  description: 'Validated 6-question screener for suicidal ideation and behavior. Identifies risk level and guides clinical response. Standard of care per Joint Commission (2016).',
+  fields: [
+    {
+      name: 'q1-wish-dead',
+      label: 'Q1. Wish to be dead?',
+      type: 'select',
+      points: 0,
+      description: '"Have you wished you were dead or wished you could go to sleep and not wake up?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'q2-suicidal-thoughts',
+      label: 'Q2. Suicidal thoughts?',
+      type: 'select',
+      points: 0,
+      description: '"Have you actually had any thoughts of killing yourself?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 2 },
+      ],
+    },
+    {
+      name: 'q3-method',
+      label: 'Q3. Thought about method?',
+      type: 'select',
+      points: 0,
+      description: '"Have you been thinking about how you might do this?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 3 },
+      ],
+    },
+    {
+      name: 'q4-intent',
+      label: 'Q4. Intent to act?',
+      type: 'select',
+      points: 0,
+      description: '"Have you had these thoughts and had some intention of acting on them?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 4 },
+      ],
+    },
+    {
+      name: 'q5-plan',
+      label: 'Q5. Plan with intent?',
+      type: 'select',
+      points: 0,
+      description: '"Have you started to work out or worked out the details of how to kill yourself, and do you intend to carry out this plan?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 5 },
+      ],
+    },
+    {
+      name: 'q6-behavior',
+      label: 'Q6. Recent suicide behavior?',
+      type: 'select',
+      points: 0,
+      description: '"Have you done anything, started to do anything, or prepared to do anything to end your life?" (past 3 months)',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes — preparatory acts or behavior', points: 6 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Any "Yes" response requires clinical assessment. Q3+ (method/intent/plan) = high risk requiring immediate intervention. Q6 (recent behavior) = highest acuity.',
+  citations: [
+    'Posner K, et al. The Columbia-Suicide Severity Rating Scale. Am J Psychiatry. 2011;168(12):1266-1277.',
+    'The Joint Commission. Detecting and Treating Suicide Ideation in All Settings. Sentinel Event Alert 56. 2016.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const q1 = values['q1-wish-dead'] || 0;
+    const q2 = values['q2-suicidal-thoughts'] || 0;
+    const q3 = values['q3-method'] || 0;
+    const q4 = values['q4-intent'] || 0;
+    const q5 = values['q5-plan'] || 0;
+    const q6 = values['q6-behavior'] || 0;
+
+    // Get highest level endorsed
+    const maxLevel = Math.max(q1, q2, q3, q4, q5, q6);
+
+    // Count total positive responses
+    const positives: string[] = [];
+    if (q1 > 0) positives.push('Wish to be dead');
+    if (q2 > 0) positives.push('Suicidal thoughts');
+    if (q3 > 0) positives.push('Method considered');
+    if (q4 > 0) positives.push('Intent to act');
+    if (q5 > 0) positives.push('Plan with intent');
+    if (q6 > 0) positives.push('Recent behavior');
+
+    if (maxLevel === 0) {
+      return {
+        value: 'Negative Screen',
+        label: 'No Suicidal Ideation Reported',
+        description: 'All screening questions negative.\n\n**Clinical Guidance:**\n• Continue standard care\n• Document negative screen\n• Provide crisis resources (988 Suicide & Crisis Lifeline)\n• Re-screen if clinical concern develops',
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (maxLevel === 1) {
+      return {
+        value: 'Level 1: Passive Ideation',
+        label: 'Wish to Be Dead',
+        description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** Low-Moderate\n\n**Clinical Guidance:**\n• Full psychiatric assessment\n• Explore context and chronicity\n• Safety planning\n• Outpatient mental health referral\n• Consider discharge with safety plan if no active ideation`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (maxLevel === 2) {
+      return {
+        value: 'Level 2: Active Ideation',
+        label: 'Thoughts of Killing Self',
+        description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** Moderate\n\n**Clinical Guidance:**\n• Full psychiatric assessment required\n• 1:1 observation while in ED\n• CALM lethal means counseling\n• Safety planning intervention\n• Psychiatric consultation recommended\n• Consider voluntary admission`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (maxLevel === 3) {
+      return {
+        value: 'Level 3: Method Identified',
+        label: 'Has Thought About Method',
+        description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** HIGH\n\n**Clinical Guidance:**\n• Immediate psychiatric evaluation\n• Continuous 1:1 observation\n• Remove all potential means from environment\n• CALM lethal means counseling with family\n• Strong consideration for inpatient admission\n• Document risk assessment thoroughly`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (maxLevel === 4) {
+      return {
+        value: 'Level 4: Intent to Act',
+        label: 'Intent Without Specific Plan',
+        description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** HIGH\n\n**Clinical Guidance:**\n• Immediate psychiatric evaluation\n• Continuous 1:1 observation — constant visual monitoring\n• Safe environment protocol (remove all potential means)\n• Inpatient psychiatric admission strongly recommended\n• If refusing voluntary, consider emergency hold criteria\n• Family notification and lethal means restriction`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (maxLevel === 5) {
+      return {
+        value: 'Level 5: Specific Plan + Intent',
+        label: 'Plan with Intent to Act',
+        description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** HIGHEST\n\n**Clinical Guidance:**\n• Immediate psychiatric emergency\n• Constant 1:1 observation within arm's reach\n• Secure environment — remove ALL potential means\n• Inpatient psychiatric admission required\n• Involuntary hold if refusing voluntary admission\n• Document specific plan details\n• Notify family, restrict lethal means access at home`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // maxLevel === 6 (recent behavior)
+    return {
+      value: 'Level 6: Recent Behavior',
+      label: 'Preparatory Acts or Attempt',
+      description: `**Positive:** ${positives.join(', ')}\n\n**Risk Level:** HIGHEST — IMMEDIATE ACTION\n\n**Clinical Guidance:**\n• Treat as psychiatric emergency\n• Medical clearance if recent attempt\n• Constant 1:1 observation within arm's reach\n• Toxicology screen, labs, imaging as indicated\n• Inpatient psychiatric admission required\n• Involuntary hold if necessary\n• Document behavior, timeline, lethality\n• Family involvement and means restriction mandatory`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Safety Plan Builder
+// -------------------------------------------------------------------
+
+const SAFETY_PLAN_BUILDER_CALCULATOR: CalculatorDefinition = {
+  id: 'safety-plan-builder',
+  title: 'Safety Plan Builder',
+  subtitle: 'Stanley-Brown Safety Planning Intervention',
+  description: 'Structured safety planning tool based on the Stanley-Brown Intervention. Six-step collaborative process to create a personalized crisis plan. Reduces suicide attempts by 45% (ED-SAFE trial).',
+  fields: [
+    {
+      name: 'step1-warning',
+      label: 'Step 1: Warning Signs',
+      type: 'select',
+      points: 0,
+      description: 'Personal triggers that precede a crisis (thoughts, images, mood, situation, behavior)',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Patient identified warning signs', points: 1 },
+      ],
+    },
+    {
+      name: 'step2-coping',
+      label: 'Step 2: Internal Coping',
+      type: 'select',
+      points: 0,
+      description: 'Things patient can do alone to distract from crisis (activities, places, sensations)',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Patient identified coping strategies', points: 1 },
+      ],
+    },
+    {
+      name: 'step3-social',
+      label: 'Step 3: Social Contacts',
+      type: 'select',
+      points: 0,
+      description: 'People and places that provide distraction (does not require discussing crisis)',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Patient listed contacts/places', points: 1 },
+      ],
+    },
+    {
+      name: 'step4-support',
+      label: 'Step 4: People to Ask for Help',
+      type: 'select',
+      points: 0,
+      description: 'Family/friends patient can tell about crisis and ask for help',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Patient identified support people', points: 1 },
+      ],
+    },
+    {
+      name: 'step5-professional',
+      label: 'Step 5: Professional Resources',
+      type: 'select',
+      points: 0,
+      description: 'Clinicians, urgent care, crisis lines (988), ED',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Patient has professional contacts', points: 1 },
+      ],
+    },
+    {
+      name: 'step6-means',
+      label: 'Step 6: Lethal Means Restriction',
+      type: 'select',
+      points: 0,
+      description: 'Plan to make environment safer (firearms, medications, sharp objects)',
+      selectOptions: [
+        { label: 'Not yet discussed', points: 0 },
+        { label: 'Means restriction plan in place', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Complete all 6 steps collaboratively with patient. Give patient a copy. Enter contacts/resources into EHR. Efficacy: 45% reduction in suicide attempts (ED-SAFE). Average completion time: 20-45 min.',
+  citations: [
+    'Stanley B, Brown GK. Safety Planning Intervention: A Brief Intervention to Mitigate Suicide Risk. Cogn Behav Pract. 2012;19(2):256-264.',
+    'Miller IW, et al. Suicide Prevention in an Emergency Department Population (ED-SAFE). JAMA Psychiatry. 2017;74(6):563-570.',
+    'Suicide Prevention Resource Center. Safety Planning Guide. SPRC, 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const step1 = values['step1-warning'] || 0;
+    const step2 = values['step2-coping'] || 0;
+    const step3 = values['step3-social'] || 0;
+    const step4 = values['step4-support'] || 0;
+    const step5 = values['step5-professional'] || 0;
+    const step6 = values['step6-means'] || 0;
+
+    const completed = step1 + step2 + step3 + step4 + step5 + step6;
+    const missing: string[] = [];
+
+    if (step1 === 0) missing.push('1. Warning Signs');
+    if (step2 === 0) missing.push('2. Internal Coping');
+    if (step3 === 0) missing.push('3. Social Contacts');
+    if (step4 === 0) missing.push('4. Support People');
+    if (step5 === 0) missing.push('5. Professional Resources');
+    if (step6 === 0) missing.push('6. Lethal Means Restriction');
+
+    if (completed === 0) {
+      return {
+        value: '0/6 Steps',
+        label: 'Safety Plan Not Started',
+        description: '**Safety Plan Components:**\n\n1. **Warning Signs** — What thoughts, feelings, or situations signal a crisis?\n\n2. **Internal Coping** — What can you do on your own to feel better? (exercise, music, etc.)\n\n3. **Social Contacts** — People or places that help distract you\n\n4. **Support People** — Who can you tell about your crisis and ask for help?\n\n5. **Professional Resources** — Clinicians, 988 Lifeline, crisis services, ED\n\n6. **Lethal Means** — How will you make your environment safer?\n\n*Complete all 6 steps collaboratively. Give patient a written copy.*',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    if (completed < 6) {
+      return {
+        value: `${completed}/6 Steps`,
+        label: 'Safety Plan In Progress',
+        description: `**Completed ${completed} of 6 steps.**\n\n**Still needed:**\n${missing.map(m => `• ${m}`).join('\n')}\n\n**Key Resources to Include:**\n• 988 Suicide & Crisis Lifeline (call or text)\n• Crisis Text Line: Text HOME to 741741\n• Local crisis center: _______________\n• Patient's therapist/psychiatrist: _______________\n• Trusted family member/friend: _______________\n\n*Complete all steps before discharge. Provide written copy.*`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // All 6 completed
+    return {
+      value: '6/6 Steps',
+      label: 'Safety Plan Complete',
+      description: `**All 6 steps completed.**\n\n**Before Discharge:**\n✓ Give patient a written/printed copy\n✓ Enter contacts into EHR\n✓ Confirm patient understands when to use each step\n✓ Lethal means restriction confirmed with family (if applicable)\n✓ Follow-up appointment scheduled within 7 days\n\n**Crisis Resources Confirmed:**\n• 988 Suicide & Crisis Lifeline\n• Crisis Text Line: Text HOME to 741741\n• Patient's outpatient provider\n• ED return if needed\n\n**Efficacy:** 45% reduction in suicide attempts at 52 weeks (ED-SAFE trial)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -17739,6 +18036,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ap-fluid-rate': AP_FLUID_RATE_CALCULATOR,
   'mctsi': MCTSI_CALCULATOR,
   'infected-necrosis-step': INFECTED_NECROSIS_STEP_CALCULATOR,
+  // Suicide Risk Assessment
+  'cssrs-screen': CSSRS_SCREEN_CALCULATOR,
+  'safety-plan-builder': SAFETY_PLAN_BUILDER_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

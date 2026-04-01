@@ -581,6 +581,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/heat-stroke.js');
             return { nodes: m.HEAT_STROKE_NODES, entryNodeId: 'hs-start', categoryId: 'emergency-medicine', moduleLabels: m.HEAT_STROKE_MODULE_LABELS, citations: m.HEAT_STROKE_CITATIONS };
         },
+        'suicide-risk-assessment': async () => {
+            const m = await import('../data/trees/suicide-risk-assessment.js');
+            return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sra-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
