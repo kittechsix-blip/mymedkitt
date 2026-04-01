@@ -14312,6 +14312,278 @@ const HFNC_ESCALATION_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Heat Stroke Calculators
+// -------------------------------------------------------------------
+
+const HEAT_INDEX_CALCULATOR: CalculatorDefinition = {
+  id: 'heat-index',
+  title: 'Heat Index Calculator',
+  subtitle: 'Apparent Temperature',
+  description: 'Calculates the apparent temperature (what it "feels like") based on air temperature and relative humidity. Used to assess heat risk.',
+  fields: [
+    { name: 'temp', label: 'Air Temperature', type: 'number', points: 0, unit: '°F' },
+    { name: 'humidity', label: 'Relative Humidity', type: 'number', points: 0, unit: '%' },
+  ],
+  results: [],
+  thresholdNote: 'Heat index >103°F (39.4°C) = HIGH risk. >125°F = EXTREME danger.',
+  citations: [
+    'National Weather Service Heat Index Chart. NOAA.',
+  ],
+  computeResult: (values) => {
+    const T = values.temp || 0;
+    const R = values.humidity || 0;
+
+    if (T < 80 || R < 0) {
+      return {
+        value: '—',
+        label: 'Enter Values',
+        description: 'Enter air temperature (≥80°F) and relative humidity to calculate heat index.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    // Rothfusz regression equation
+    const HI = -42.379 + 2.04901523*T + 10.14333127*R
+      - 0.22475541*T*R - 0.00683783*T*T - 0.05481717*R*R
+      + 0.00122874*T*T*R + 0.00085282*T*R*R - 0.00000199*T*T*R*R;
+
+    const hiRounded = Math.round(HI);
+    const hiCelsius = Math.round((HI - 32) * 5/9);
+
+    let risk: string;
+    let colorVar: string;
+    let description: string;
+
+    if (HI >= 130) {
+      risk = 'EXTREME DANGER';
+      colorVar = '--color-danger';
+      description = '**Heat stroke highly likely**\n\nCease all outdoor activities. Immediate cooling required for any heat exposure.';
+    } else if (HI >= 105) {
+      risk = 'DANGER';
+      colorVar = '--color-danger';
+      description = '**Heat cramps and heat exhaustion likely**\n**Heat stroke possible**\n\nLimit exertion. Take breaks in shade/AC every 15-20 min. Aggressive hydration.';
+    } else if (HI >= 90) {
+      risk = 'EXTREME CAUTION';
+      colorVar = '--color-warning';
+      description = '**Heat cramps and heat exhaustion possible**\n\nReduce exertion intensity. Frequent hydration breaks. Monitor for symptoms.';
+    } else {
+      risk = 'CAUTION';
+      colorVar = '--color-primary';
+      description = 'Fatigue possible with prolonged exposure. Standard hydration precautions.';
+    }
+
+    return {
+      value: `${hiRounded}°F (${hiCelsius}°C)`,
+      label: risk,
+      description,
+      colorVar,
+    };
+  },
+};
+
+const COOLING_RATE_CALCULATOR: CalculatorDefinition = {
+  id: 'cooling-rate',
+  title: 'Cooling Rate Monitor',
+  subtitle: 'Heat Stroke Cooling',
+  description: 'Track cooling rate in heat stroke. Target: cool to 39°C (102.2°F) within 30 minutes. Goal cooling rate: ≥0.15°C/min.',
+  fields: [
+    { name: 'startTemp', label: 'Starting Core Temp', type: 'number', points: 0, unit: '°C' },
+    { name: 'currentTemp', label: 'Current Core Temp', type: 'number', points: 0, unit: '°C' },
+    { name: 'minutes', label: 'Elapsed Time', type: 'number', points: 0, unit: 'min' },
+  ],
+  results: [],
+  thresholdNote: 'STOP active cooling at 39°C (102.2°F) to prevent overshoot hypothermia.',
+  citations: [
+    'Bouchama A, et al. Heat Stroke. N Engl J Med. 2002;346:1978-1988.',
+  ],
+  computeResult: (values) => {
+    const start = values.startTemp || 0;
+    const current = values.currentTemp || 0;
+    const minutes = values.minutes || 0;
+
+    if (start < 38 || minutes <= 0) {
+      return {
+        value: '—',
+        label: 'Enter Values',
+        description: 'Enter starting temp (≥38°C), current temp, and elapsed time to calculate cooling rate.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    const tempDrop = start - current;
+    const rate = tempDrop / minutes;
+    const rateDisplay = rate.toFixed(3);
+
+    // Estimate time to target
+    const targetTemp = 39;
+    const remainingDrop = current - targetTemp;
+    const estMinutes = remainingDrop > 0 && rate > 0 ? Math.round(remainingDrop / rate) : 0;
+
+    let status: string;
+    let colorVar: string;
+    let guidance: string;
+
+    if (current <= 39) {
+      status = 'TARGET REACHED';
+      colorVar = '--color-primary';
+      guidance = '**STOP active cooling now!**\n\nRisk of overshoot hypothermia. Passive rewarming if temp drops below 38°C. Continue monitoring.';
+    } else if (rate >= 0.15) {
+      status = 'ADEQUATE COOLING';
+      colorVar = '--color-primary';
+      guidance = `**Rate: ${rateDisplay}°C/min (goal ≥0.15)**\n\nContinue current cooling method. Estimated ${estMinutes} min to target.\n\n**Monitor for:**\n• Shivering (treat with benzos)\n• Hypoglycemia\n• Electrolyte shifts`;
+    } else if (rate > 0) {
+      status = 'SLOW COOLING';
+      colorVar = '--color-warning';
+      guidance = `**Rate: ${rateDisplay}°C/min (below goal)**\n\n**Escalate cooling:**\n• Add cold water immersion if not started\n• Ice packs to axillae, groin, neck\n• Cold IV fluids\n• Consider peritoneal or bladder lavage`;
+    } else {
+      status = 'NOT COOLING';
+      colorVar = '--color-danger';
+      guidance = '**No temperature decrease!**\n\n**Immediate escalation needed:**\n• Verify rectal probe placement\n• Cold water immersion (gold standard)\n• Consider ECMO for refractory cases';
+    }
+
+    return {
+      value: `${rateDisplay}°C/min`,
+      label: status,
+      description: guidance,
+      colorVar,
+    };
+  },
+};
+
+const RHABDO_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'rhabdo-risk',
+  title: 'Rhabdo Risk in Heat Stroke',
+  subtitle: 'Exertional vs Classic',
+  description: 'Assess rhabdomyolysis risk in heat stroke. Exertional heat stroke has much higher rhabdo risk than classic.',
+  fields: [
+    { name: 'type', label: 'Heat Stroke Type', type: 'select', points: 0, selectOptions: [
+      { label: 'Classic (elderly, heat wave)', points: 1 },
+      { label: 'Exertional (athlete, laborer)', points: 2 },
+    ]},
+    { name: 'ck', label: 'Initial CK >5000', type: 'toggle', points: 2 },
+    { name: 'oliguria', label: 'Oliguria/anuria', type: 'toggle', points: 3 },
+    { name: 'darkUrine', label: 'Dark/cola-colored urine', type: 'toggle', points: 2 },
+    { name: 'acidosis', label: 'Metabolic acidosis', type: 'toggle', points: 2 },
+  ],
+  results: [],
+  thresholdNote: 'Up to 25% of exertional heat stroke develops rhabdomyolysis vs <5% classic.',
+  citations: [
+    'Leon LR, Bouchama A. Heat stroke. Compr Physiol. 2015;5(2):611-647.',
+  ],
+  computeResult: (values) => {
+    const type = values.type || 0;
+    const ck = values.ck || 0;
+    const oliguria = values.oliguria || 0;
+    const darkUrine = values.darkUrine || 0;
+    const acidosis = values.acidosis || 0;
+
+    const score = (type === 2 ? 3 : 0) + ck + oliguria + darkUrine + acidosis;
+
+    if (type === 0) {
+      return {
+        value: '—',
+        label: 'Select Type',
+        description: 'Select heat stroke type (classic vs exertional) to assess rhabdo risk.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    let risk: string;
+    let colorVar: string;
+    let management: string;
+
+    if (score >= 7 || oliguria) {
+      risk = 'HIGH RISK';
+      colorVar = '--color-danger';
+      management = '**Rhabdomyolysis highly likely or present**\n\n**Management:**\n• Aggressive IVF: 1-2 L/hr initially, then 200-500 mL/hr\n• Target UOP 200-300 mL/hr\n• Serial CK, BMP, urinalysis\n• Watch for compartment syndrome\n• Nephrology consult if AKI developing';
+    } else if (score >= 4 || type === 2) {
+      risk = 'MODERATE RISK';
+      colorVar = '--color-warning';
+      management = '**Significant rhabdo risk (especially if exertional)**\n\n**Management:**\n• IVF: 500 mL/hr, adjust for UOP\n• Check CK, BMP, UA now and q6h\n• Monitor for dark urine\n• Goal UOP >100-200 mL/hr\n• Low threshold for escalation';
+    } else {
+      risk = 'LOWER RISK';
+      colorVar = '--color-primary';
+      management = '**Classic heat stroke — lower rhabdo risk**\n\n**Still recommended:**\n• Baseline CK and UA\n• Standard IV hydration\n• Monitor for complications\n• Recheck CK if symptoms develop';
+    }
+
+    return {
+      value: risk,
+      label: `Risk Score: ${score}`,
+      description: management,
+      colorVar,
+    };
+  },
+};
+
+const HEAT_STROKE_FLUID_CALCULATOR: CalculatorDefinition = {
+  id: 'fluid-calculator',
+  title: 'Heat Stroke Fluid Calculator',
+  subtitle: 'Resuscitation Guidance',
+  description: 'Calculate initial fluid resuscitation for heat stroke. Balance between adequate perfusion and avoiding fluid overload.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'hypotension', label: 'Hypotensive (SBP <90)', type: 'toggle', points: 0 },
+    { name: 'rhabdo', label: 'Rhabdomyolysis present', type: 'toggle', points: 0 },
+    { name: 'cardiac', label: 'Cardiac history/CHF risk', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Cold crystalloid (4°C) adds cooling benefit. Avoid rapid fluid boluses in elderly/cardiac patients.',
+  citations: [
+    'Epstein Y, Yanovich R. Heatstroke. N Engl J Med. 2019;380:2449-2459.',
+  ],
+  computeResult: (values) => {
+    const weight = values.weight || 0;
+    const hypotension = values.hypotension || 0;
+    const rhabdo = values.rhabdo || 0;
+    const cardiac = values.cardiac || 0;
+
+    if (weight <= 0) {
+      return {
+        value: '—',
+        label: 'Enter Weight',
+        description: 'Enter patient weight to calculate fluid recommendations.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    let initialBolus: string;
+    let maintenance: string;
+    let target: string;
+    let cautions: string;
+    let colorVar = '--color-primary';
+
+    if (hypotension) {
+      initialBolus = `**Initial:** 1-2L cold NS rapidly, then reassess`;
+      colorVar = '--color-danger';
+    } else {
+      initialBolus = `**Initial:** 500-1000 mL cold NS over 30-60 min`;
+    }
+
+    if (rhabdo) {
+      maintenance = `**Rhabdo protocol:** 200-500 mL/hr (up to 1-2 L/hr initially)`;
+      target = `**Target UOP:** 200-300 mL/hr (3-4 mL/kg/hr)`;
+    } else {
+      maintenance = `**Maintenance:** 150-250 mL/hr (adjust for UOP)`;
+      target = `**Target UOP:** 0.5-1 mL/kg/hr (${Math.round(weight * 0.5)}-${weight} mL/hr)`;
+    }
+
+    if (cardiac) {
+      cautions = '**CAUTION:** CHF risk\n• Smaller boluses (250-500 mL)\n• Frequent lung auscultation\n• Consider early vasopressors if persistently hypotensive\n• Lower threshold for CVP/echo guidance';
+      colorVar = '--color-warning';
+    } else {
+      cautions = '**Monitor for:**\n• Volume overload (crackles, JVD)\n• Electrolyte shifts (K+, Na+, Phos)\n• Compartment syndrome (especially with rhabdo)';
+    }
+
+    return {
+      value: rhabdo ? 'High Volume' : 'Standard',
+      label: hypotension ? 'Hypotensive Resuscitation' : 'Fluid Guidance',
+      description: `${initialBolus}\n\n${maintenance}\n\n${target}\n\n${cautions}`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
 // McMahon Score Calculator (Rhabdomyolysis AKI Risk)
 // -------------------------------------------------------------------
 
@@ -17219,6 +17491,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'rox-index': ROX_INDEX_CALCULATOR,
   'hfnc-settings': HFNC_SETTINGS_CALCULATOR,
   'hfnc-escalation': HFNC_ESCALATION_CALCULATOR,
+  // Heat Stroke
+  'heat-index': HEAT_INDEX_CALCULATOR,
+  'cooling-rate': COOLING_RATE_CALCULATOR,
+  'rhabdo-risk': RHABDO_RISK_CALCULATOR,
+  'fluid-calculator': HEAT_STROKE_FLUID_CALCULATOR,
   // VP Shunt
   'vps-malfunction-criteria': VPS_MALFUNCTION_CRITERIA_CALCULATOR,
   'vps-pump-test': VPS_PUMP_TEST_CALCULATOR,
