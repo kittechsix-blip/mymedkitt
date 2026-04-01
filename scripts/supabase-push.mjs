@@ -201,7 +201,7 @@ const TREE_REGISTRY = {
   'code-status':          { prefix: 'CODE_STATUS',          entryNodeId: 'code-start',       categoryId: 'emergency-medicine' },
   'human-trafficking':    { prefix: 'HUMAN_TRAFFICKING',    entryNodeId: 'ht-start',         categoryId: 'emergency-medicine' },
   'dental-avulsion':      { prefix: 'DENTAL_AVULSION',      entryNodeId: 'avulsion-start',   categoryId: 'emergency-medicine' },
-  'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',      entryNodeId: 'sra-start',        categoryId: 'emergency-medicine' },
+  'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',      entryNodeId: 'sui-start',        categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {

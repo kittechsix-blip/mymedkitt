@@ -416,7 +416,7 @@ export const DEFAULT_CATEGORIES = [
                 categoryId: 'emergency-medicine',
                 version: '1.0',
                 nodeCount: 28,
-                entryNodeId: 'sra-start',
+                entryNodeId: 'sui-start',
             },
         ],
         isCustom: false,

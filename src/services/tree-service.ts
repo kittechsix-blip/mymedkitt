@@ -637,7 +637,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'suicide-risk-assessment': async () => {
       const m = await import('../data/trees/suicide-risk-assessment.js');
-      return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sra-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS };
+      return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sui-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS };
     },
   };
 
