@@ -365,7 +365,7 @@ if (!isUpdate) {
   // 2. category_trees
   console.log('2️⃣  category_trees...');
   const catRows = [
-    { category_id: reg.categoryId, tree_id: consultId, display_title: null, display_subtitle: null, entry_node_id: null, sort_order: 0 },
+    { category_id: reg.categoryId, tree_id: consultId, display_title: null, display_subtitle: null, entry_node_id: reg.entryNodeId, sort_order: 0 },
   ];
   const crossListings = CROSS_LISTINGS[consultId] || [];
   crossListings.forEach((cl, idx) => {
