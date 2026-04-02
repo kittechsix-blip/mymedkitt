@@ -169,6 +169,8 @@ function renderActiveInfo(card, node, opts) {
 // Active result card
 // -------------------------------------------------------------------
 function renderActiveResult(card, node, opts) {
+    // Add result-specific class for confidence pulse animation
+    card.classList.add('decision-card--result');
     // Confidence badge
     if (node.confidence) {
         const badge = document.createElement('div');

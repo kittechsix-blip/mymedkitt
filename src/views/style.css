@@ -1688,6 +1688,88 @@ body {
 }
 
 /* ===================================================================
+   CONFIDENCE PULSE — Success animation for result nodes
+   =================================================================== */
+
+.decision-card--result {
+  animation: confidence-pulse 0.5s ease-out;
+}
+
+.decision-card--result .decision-card__result-badge,
+.decision-card--result .decision-card__title {
+  position: relative;
+}
+
+/* Animated checkmark that draws itself */
+.decision-card--result .decision-card__result-badge::before,
+.decision-card--result .decision-card__title::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: var(--color-decision-active);
+  border-radius: 50%;
+  opacity: 0;
+  animation: checkmark-appear 0.3s ease-out 0.2s forwards;
+}
+
+.decision-card--result .decision-card__result-badge::after,
+.decision-card--result .decision-card__title::after {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  transform: translateY(-60%) rotate(45deg);
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  animation: checkmark-draw 0.2s ease-out 0.35s forwards;
+}
+
+@keyframes confidence-pulse {
+  0% {
+    box-shadow: var(--shadow-md);
+  }
+  30% {
+    box-shadow: 0 0 0 4px rgba(60, 179, 113, 0.25), var(--shadow-md);
+  }
+  100% {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes checkmark-draw {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  50% {
+    opacity: 1;
+    height: 0;
+  }
+  100% {
+    opacity: 1;
+    height: 9px;
+  }
+}
+
+/* ===================================================================
    IMAGES
    =================================================================== */
 

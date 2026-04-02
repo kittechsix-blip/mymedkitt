@@ -209,6 +209,9 @@ function renderActiveInfo(card: HTMLElement, node: DecisionNode, opts: CardOptio
 // -------------------------------------------------------------------
 
 function renderActiveResult(card: HTMLElement, node: DecisionNode, opts: CardOptions): void {
+  // Add result-specific class for confidence pulse animation
+  card.classList.add('decision-card--result');
+
   // Confidence badge
   if (node.confidence) {
     const badge = document.createElement('div');
