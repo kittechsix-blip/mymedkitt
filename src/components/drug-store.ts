@@ -7,6 +7,7 @@ import type { WeightCalc } from '../data/drug-store.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 import { renderDosingBanner } from './dosing-banner.js';
+import { trackDrugView } from '../services/kittmd-analytics.js';
 
 /** Context for dose calculations - passed to buildWeightCalcPanel */
 interface DrugContext {
@@ -191,6 +192,9 @@ function destroyOverlay(): void {
 export function showDrugModal(drugId: string, indicationHint?: string): boolean {
   const drug = getDrug(drugId);
   if (!drug) return false;
+
+  // Track drug view for KittMD analytics
+  trackDrugView(drug.name);
 
   destroyOverlay();
 

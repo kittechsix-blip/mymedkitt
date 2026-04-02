@@ -16,6 +16,7 @@ import { renderDosingBanner } from './dosing-banner.js';
 import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHeader } from './sticky-dosing-header.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 import { addRecentConsult } from './dashboard.js';
+import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -46,6 +47,9 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
   if (consultTitle) {
     addRecentConsult(treeId, consultTitle);
   }
+
+  // Track consult open for KittMD analytics
+  trackConsultOpen(treeId);
 
   // Set up delegated click handler for inline links
   if (delegatedContainer !== container) {
@@ -174,7 +178,11 @@ function renderFlow(container: HTMLElement): void {
       entryNodeId: currentEntryNodeId ?? undefined,
       onOptionSelect: (i) => {
         if (!controller) return;
-        controller.selectOption(i);
+        const nextNode = controller.selectOption(i);
+        // Track node visit for KittMD analytics
+        if (nextNode && currentTreeId) {
+          trackNodeVisit(currentTreeId, nextNode.id);
+        }
         renderFlow(container);
         // Auto-scroll to new card
         requestAnimationFrame(() => {
@@ -187,7 +195,11 @@ function renderFlow(container: HTMLElement): void {
       },
       onContinue: () => {
         if (!controller) return;
-        controller.continueToNext();
+        const nextNode = controller.continueToNext();
+        // Track node visit for KittMD analytics
+        if (nextNode && currentTreeId) {
+          trackNodeVisit(currentTreeId, nextNode.id);
+        }
         renderFlow(container);
         requestAnimationFrame(() => {
           const cards = container.querySelectorAll('.decision-card--active');

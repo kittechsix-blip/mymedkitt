@@ -5,6 +5,7 @@
 import { router } from '../services/router.js';
 import { getPatientContext, setPatientContext } from '../services/patient-context.js';
 import { renderStickyPatientHeader } from './sticky-patient-header.js';
+import { trackCalcOpen, trackCalcSubmit } from '../services/kittmd-analytics.js';
 
 // -------------------------------------------------------------------
 // Calculator Interfaces
@@ -18226,6 +18227,9 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
     return;
   }
 
+  // Track calculator open for KittMD analytics
+  trackCalcOpen(calculatorId);
+
   container.innerHTML = '';
 
   // Render sticky patient context header
@@ -18600,9 +18604,13 @@ function updateScore(
   values: Record<string, number>,
   display: HTMLElement,
 ): void {
+  // Track calculator usage for KittMD analytics (field structure only, no actual values)
+  const fieldNames = calc.fields.map(f => f.name);
+
   // Formula-based calculator override
   if (calc.computeResult) {
     const result = calc.computeResult(values);
+    trackCalcSubmit(calc.id, fieldNames, result.label);
     display.innerHTML = '';
 
     const scoreNum = document.createElement('div');
@@ -18652,6 +18660,9 @@ function updateScore(
   display.appendChild(scoreNum);
 
   if (result) {
+    // Track calculator result for KittMD analytics
+    trackCalcSubmit(calc.id, fieldNames, result.label);
+
     const badge = document.createElement('div');
     badge.className = 'calculator-risk-badge';
     badge.style.borderColor = `var(${result.colorVar})`;

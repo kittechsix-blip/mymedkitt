@@ -5,6 +5,7 @@ import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 import { renderDosingBanner } from './dosing-banner.js';
+import { trackDrugView } from '../services/kittmd-analytics.js';
 // -------------------------------------------------------------------
 // Ranked Search Helper
 // -------------------------------------------------------------------
@@ -146,6 +147,8 @@ export function showDrugModal(drugId, indicationHint) {
     const drug = getDrug(drugId);
     if (!drug)
         return false;
+    // Track drug view for KittMD analytics
+    trackDrugView(drug.name);
     destroyOverlay();
     // Overlay
     overlayEl = document.createElement('div');

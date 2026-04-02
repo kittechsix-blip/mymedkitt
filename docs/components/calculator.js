@@ -4,6 +4,7 @@
 import { router } from '../services/router.js';
 import { getPatientContext, setPatientContext } from '../services/patient-context.js';
 import { renderStickyPatientHeader } from './sticky-patient-header.js';
+import { trackCalcOpen, trackCalcSubmit } from '../services/kittmd-analytics.js';
 // -------------------------------------------------------------------
 // PESI Calculator Definition
 // -------------------------------------------------------------------
@@ -17565,6 +17566,8 @@ export function renderCalculator(container, calculatorId) {
         renderCalcNotFound(container, calculatorId);
         return;
     }
+    // Track calculator open for KittMD analytics
+    trackCalcOpen(calculatorId);
     container.innerHTML = '';
     // Render sticky patient context header
     renderStickyPatientHeader(container);
@@ -17855,9 +17858,12 @@ function renderSelectField(container, field, values, onChange) {
 // Score Computation & Display
 // -------------------------------------------------------------------
 function updateScore(calc, values, display) {
+    // Track calculator usage for KittMD analytics (field structure only, no actual values)
+    const fieldNames = calc.fields.map(f => f.name);
     // Formula-based calculator override
     if (calc.computeResult) {
         const result = calc.computeResult(values);
+        trackCalcSubmit(calc.id, fieldNames, result.label);
         display.innerHTML = '';
         const scoreNum = document.createElement('div');
         scoreNum.className = 'calculator-score-number';
@@ -17899,6 +17905,8 @@ function updateScore(calc, values, display) {
     scoreNum.textContent = String(score);
     display.appendChild(scoreNum);
     if (result) {
+        // Track calculator result for KittMD analytics
+        trackCalcSubmit(calc.id, fieldNames, result.label);
         const badge = document.createElement('div');
         badge.className = 'calculator-risk-badge';
         badge.style.borderColor = `var(${result.colorVar})`;

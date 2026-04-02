@@ -14,6 +14,7 @@ import { renderDosingBanner } from './dosing-banner.js';
 import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHeader } from './sticky-dosing-header.js';
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 import { addRecentConsult } from './dashboard.js';
+import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
 let controller = null;
 let currentConfig = null;
 let currentEntryNodeId = null;
@@ -39,6 +40,8 @@ export async function renderConsultFlow(container, treeId) {
     if (consultTitle) {
         addRecentConsult(treeId, consultTitle);
     }
+    // Track consult open for KittMD analytics
+    trackConsultOpen(treeId);
     // Set up delegated click handler for inline links
     if (delegatedContainer !== container) {
         if (delegatedContainer) {
@@ -153,7 +156,11 @@ function renderFlow(container) {
             onOptionSelect: (i) => {
                 if (!controller)
                     return;
-                controller.selectOption(i);
+                const nextNode = controller.selectOption(i);
+                // Track node visit for KittMD analytics
+                if (nextNode && currentTreeId) {
+                    trackNodeVisit(currentTreeId, nextNode.id);
+                }
                 renderFlow(container);
                 // Auto-scroll to new card
                 requestAnimationFrame(() => {
@@ -167,7 +174,11 @@ function renderFlow(container) {
             onContinue: () => {
                 if (!controller)
                     return;
-                controller.continueToNext();
+                const nextNode = controller.continueToNext();
+                // Track node visit for KittMD analytics
+                if (nextNode && currentTreeId) {
+                    trackNodeVisit(currentTreeId, nextNode.id);
+                }
                 renderFlow(container);
                 requestAnimationFrame(() => {
                     const cards = container.querySelectorAll('.decision-card--active');
