@@ -99,7 +99,7 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Source Control & IM Epinephrine',
-    body: '**SIMULTANEOUS actions:**\n\n**Source control:**\n• Stop all infusions/transfusions\n• Remove insect stinger (scrape, do not squeeze)\n• Sugammadex 16 mg/kg for rocuronium-induced\n\n**IM Epinephrine — FIRST LINE:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis im) **0.5 mg IM** (0.5 mL of 1 mg/mL) into **anterolateral thigh**\n• Pediatric: **0.01 mg/kg IM** (max 0.5 mg)\n• Repeat every 5 minutes, up to 3 doses\n\n**Do NOT delay for:**\n• IV access\n• Antihistamines\n• Steroids\n\nAnterolateral thigh achieves faster peak levels than deltoid or subcutaneous injection (Simons 2001). [1][2][3][4]',
+    body: '**SIMULTANEOUS actions:**\n\n**Source control:**\n• Stop all infusions/transfusions\n• Remove insect stinger (scrape, do not squeeze)\n• Sugammadex 16 mg/kg for rocuronium-induced\n\n**IM Epinephrine — FIRST LINE:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis im) **0.5 mg IM** (0.5 mL of 1 mg/mL) into **anterolateral thigh**\n• Pediatric: **0.01 mg/kg IM** (max 0.5 mg)\n• Repeat every 5 minutes, up to 3 doses\n\n**Do NOT delay for:**\n• IV access\n• Antihistamines\n• Steroids\n\nAnterolateral thigh achieves faster peak levels than deltoid or subcutaneous injection (Simons 2001). A 2026 study confirmed adults receiving 0.5 mg IM were less likely to need further intervention than those receiving 0.3 mg. [1][2][3][4][13]',
     citation: [1, 2, 3, 4],
     next: 'anaph-epi-response',
     treatment: {
@@ -643,4 +643,5 @@ export const ANAPHYLAXIS_CITATIONS: Citation[] = [
   { num: 10, text: 'Brown SGA, Blackman KE, Stenlake V, Heddle R. Insect sting anaphylaxis; prospective evaluation of treatment with intravenous adrenaline and volume resuscitation. Emerg Med J. 2004;21(2):149-154.' },
   { num: 11, text: 'Krishnaswamy G. Critical Care Management of the Patient With Anaphylaxis: A Concise Definitive Review. Crit Care Med. 2021;49(5):838-857.' },
   { num: 12, text: 'Pumphrey RS. Lessons for management of anaphylaxis from a study of fatal reactions. Clin Exp Allergy. 2000;30(8):1144-50.' },
+  { num: 13, text: 'Retrospective comparison between 0.3 mg and 0.5 mg dosing of intramuscular epinephrine for anaphylaxis. Am J Emerg Med. Jan 2026.' },
 ];

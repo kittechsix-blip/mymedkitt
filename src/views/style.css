@@ -1606,6 +1606,88 @@ body {
 }
 
 /* ===================================================================
+   DOSING CONFIDENCE VISUAL GRADIENT
+   Traffic light color coding for medication doses:
+   - Standard (green): High confidence, guideline-backed
+   - Caution (amber): Edge of range, special population, needs monitoring
+   - Critical (red): Max dose, narrow therapeutic index, high-risk
+   =================================================================== */
+
+/* Standard confidence (green) - default for most doses */
+.dose-highlight[data-confidence="standard"],
+.dosing-value[data-confidence="standard"],
+.sticky-dosing-primary[data-confidence="standard"],
+.sticky-dosing-row-value[data-confidence="standard"],
+.dosing-banner__pill[data-confidence="standard"] {
+  background: rgba(60, 179, 113, 0.12);
+  border-left: 3px solid #3CB371;
+  color: #2E8B57;
+}
+
+/* Caution confidence (amber) - edge of range, needs monitoring */
+.dose-highlight[data-confidence="caution"],
+.dosing-value[data-confidence="caution"],
+.sticky-dosing-primary[data-confidence="caution"],
+.sticky-dosing-row-value[data-confidence="caution"],
+.dosing-banner__pill[data-confidence="caution"] {
+  background: rgba(255, 165, 2, 0.12);
+  border-left: 3px solid #ffa502;
+  color: #b45309;
+}
+
+/* Critical confidence (red) - max dose, narrow therapeutic index */
+.dose-highlight[data-confidence="critical"],
+.dosing-value[data-confidence="critical"],
+.sticky-dosing-primary[data-confidence="critical"],
+.sticky-dosing-row-value[data-confidence="critical"],
+.dosing-banner__pill[data-confidence="critical"] {
+  background: rgba(255, 71, 87, 0.12);
+  border-left: 3px solid #ff4757;
+  color: #c62828;
+}
+
+/* Add left padding to accommodate border accent */
+.dose-highlight[data-confidence],
+.dosing-value[data-confidence],
+.sticky-dosing-primary[data-confidence],
+.sticky-dosing-row-value[data-confidence] {
+  padding-left: 8px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Dosing banner pills with confidence - adjust styling */
+.dosing-banner__pill[data-confidence] {
+  padding-left: 10px;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}
+
+/* Drug regimen card with confidence indicator */
+.drug-regimen-card[data-confidence="standard"] {
+  border-left: 4px solid #3CB371;
+}
+
+.drug-regimen-card[data-confidence="caution"] {
+  border-left: 4px solid #ffa502;
+}
+
+.drug-regimen-card[data-confidence="critical"] {
+  border-left: 4px solid #ff4757;
+}
+
+/* Dosing summary row with confidence */
+.dosing-summary-row[data-confidence="standard"] .dosing-value {
+  color: #2E8B57;
+}
+
+.dosing-summary-row[data-confidence="caution"] .dosing-value {
+  color: #b45309;
+}
+
+.dosing-summary-row[data-confidence="critical"] .dosing-value {
+  color: #c62828;
+}
+
+/* ===================================================================
    RESULT NODE STYLES
    =================================================================== */
 

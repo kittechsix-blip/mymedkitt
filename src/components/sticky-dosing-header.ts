@@ -46,9 +46,10 @@ export function updateStickyDosingHeader(treatment: TreatmentRegimen | null): vo
   summary.className = 'sticky-dosing-summary';
 
   const primaryText = `${treatment.firstLine.drug} ${treatment.firstLine.dose} ${treatment.firstLine.route}`;
+  const primaryConfAttr = treatment.firstLine.confidence ? ` data-confidence="${treatment.firstLine.confidence}"` : '';
   summary.innerHTML = `
     <span class="sticky-dosing-label">Rx:</span>
-    <span class="sticky-dosing-primary">${primaryText}</span>
+    <span class="sticky-dosing-primary"${primaryConfAttr}>${primaryText}</span>
     <span class="sticky-dosing-expand-icon"></span>
   `;
   details.appendChild(summary);
@@ -98,9 +99,12 @@ function createDosingRow(label: string, drug: DrugRegimen, isPrimary: boolean): 
     drug.duration ? `x ${drug.duration}` : ''
   ].filter(Boolean).join(' ');
 
+  // Apply confidence attribute to the row value for color coding
+  const confAttr = drug.confidence ? ` data-confidence="${drug.confidence}"` : '';
+
   row.innerHTML = `
     <span class="sticky-dosing-row-label">${label}:</span>
-    <span class="sticky-dosing-row-value">${fullDose}</span>
+    <span class="sticky-dosing-row-value"${confAttr}>${fullDose}</span>
   `;
 
   if (drug.notes) {

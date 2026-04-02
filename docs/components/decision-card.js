@@ -288,20 +288,33 @@ function renderTreatment(container, treatment) {
     // Dosing Summary Bar - quick glance at key doses
     const summary = document.createElement('div');
     summary.className = 'dosing-summary';
+    // First line dosing row with confidence attribute
     const firstLineRow = document.createElement('div');
     firstLineRow.className = 'dosing-summary-row';
-    firstLineRow.innerHTML = `<span class="dosing-label">1st:</span> <span class="dosing-value">${treatment.firstLine.drug} ${treatment.firstLine.dose} ${treatment.firstLine.route}</span>`;
+    if (treatment.firstLine.confidence) {
+        firstLineRow.setAttribute('data-confidence', treatment.firstLine.confidence);
+    }
+    const firstLineConfAttr = treatment.firstLine.confidence ? ` data-confidence="${treatment.firstLine.confidence}"` : '';
+    firstLineRow.innerHTML = `<span class="dosing-label">1st:</span> <span class="dosing-value"${firstLineConfAttr}>${treatment.firstLine.drug} ${treatment.firstLine.dose} ${treatment.firstLine.route}</span>`;
     summary.appendChild(firstLineRow);
     if (treatment.alternative) {
         const altRow = document.createElement('div');
         altRow.className = 'dosing-summary-row';
-        altRow.innerHTML = `<span class="dosing-label">Alt:</span> <span class="dosing-value">${treatment.alternative.drug} ${treatment.alternative.dose} ${treatment.alternative.route}</span>`;
+        if (treatment.alternative.confidence) {
+            altRow.setAttribute('data-confidence', treatment.alternative.confidence);
+        }
+        const altConfAttr = treatment.alternative.confidence ? ` data-confidence="${treatment.alternative.confidence}"` : '';
+        altRow.innerHTML = `<span class="dosing-label">Alt:</span> <span class="dosing-value"${altConfAttr}>${treatment.alternative.drug} ${treatment.alternative.dose} ${treatment.alternative.route}</span>`;
         summary.appendChild(altRow);
     }
     if (treatment.pcnAllergy) {
         const pcnRow = document.createElement('div');
         pcnRow.className = 'dosing-summary-row dosing-pcn';
-        pcnRow.innerHTML = `<span class="dosing-label">PCN\u2205:</span> <span class="dosing-value">${treatment.pcnAllergy.drug} ${treatment.pcnAllergy.dose}</span>`;
+        if (treatment.pcnAllergy.confidence) {
+            pcnRow.setAttribute('data-confidence', treatment.pcnAllergy.confidence);
+        }
+        const pcnConfAttr = treatment.pcnAllergy.confidence ? ` data-confidence="${treatment.pcnAllergy.confidence}"` : '';
+        pcnRow.innerHTML = `<span class="dosing-label">PCN\u2205:</span> <span class="dosing-value"${pcnConfAttr}>${treatment.pcnAllergy.drug} ${treatment.pcnAllergy.dose}</span>`;
         summary.appendChild(pcnRow);
     }
     section.appendChild(summary);
@@ -341,6 +354,10 @@ function renderTreatment(container, treatment) {
 function renderDrugCard(drug) {
     const card = document.createElement('div');
     card.className = 'drug-regimen-card';
+    // Apply confidence attribute to the card for left border coloring
+    if (drug.confidence) {
+        card.setAttribute('data-confidence', drug.confidence);
+    }
     const drugName = document.createElement('div');
     drugName.className = 'drug-regimen-name';
     const drugStoreId = findDrugIdByName(drug.drug);
@@ -360,6 +377,10 @@ function renderDrugCard(drug) {
     doseRow.className = 'drug-regimen-dose';
     const doseSpan = document.createElement('span');
     doseSpan.className = 'dose-highlight';
+    // Apply confidence attribute to dose highlight for color coding
+    if (drug.confidence) {
+        doseSpan.setAttribute('data-confidence', drug.confidence);
+    }
     doseSpan.textContent = `${drug.dose} ${drug.route}`;
     doseRow.appendChild(doseSpan);
     card.appendChild(doseRow);

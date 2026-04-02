@@ -277,6 +277,7 @@ export const DIGOXIN_TOXICITY_NODES = [
                 frequency: 'Once, may repeat at 1-2 hours',
                 duration: 'Until clinical response',
                 notes: 'Start low in chronic. Redose if inadequate response at 1-2 hours.',
+                confidence: 'critical',
             },
             monitoring: 'Clinical response. K+ normalization. Watch for rapid reversal in chronic (may unmask underlying arrhythmia).',
         },

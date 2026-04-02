@@ -13,6 +13,9 @@ export type Urgency = 'routine' | 'urgent' | 'critical';
 /** Confidence in the recommendation */
 export type Confidence = 'definitive' | 'recommended' | 'consider';
 
+/** Dosing confidence level for visual traffic-light color coding */
+export type DosingConfidence = 'standard' | 'caution' | 'critical';
+
 // -------------------------------------------------------------------
 // Node Images (ultrasound, clinical photos)
 // -------------------------------------------------------------------
@@ -101,6 +104,8 @@ export interface DrugRegimen {
   frequency: string;
   duration: string;
   notes?: string;
+  /** Dosing confidence: standard (green), caution (amber), critical (red) */
+  confidence?: DosingConfidence;
 }
 
 // -------------------------------------------------------------------

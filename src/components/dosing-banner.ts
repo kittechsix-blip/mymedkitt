@@ -84,6 +84,11 @@ function updateBannerDisplay(container: HTMLElement): void {
     const pill = document.createElement('div');
     pill.className = 'dosing-banner__pill';
 
+    // Apply confidence attribute for color coding
+    if (entry.confidence) {
+      pill.setAttribute('data-confidence', entry.confidence);
+    }
+
     // Build display text
     let text = entry.drug;
     if (entry.dose) text += ` ${entry.dose}`;

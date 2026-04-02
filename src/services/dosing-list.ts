@@ -3,6 +3,7 @@
 // Safe alternative to regex extraction.
 
 import { storageGet, storageSet } from './storage.js';
+import type { DosingConfidence } from '../models/types.js';
 
 const STORAGE_KEY = 'medkitt-dosing-list';
 
@@ -14,6 +15,8 @@ export interface DosingEntry {
   indication?: string;
   weight?: number;
   timestamp: number;
+  /** Dosing confidence: standard (green), caution (amber), critical (red) */
+  confidence?: DosingConfidence;
 }
 
 /** Get all entries in the dosing list */
