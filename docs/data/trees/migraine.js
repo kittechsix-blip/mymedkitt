@@ -164,7 +164,7 @@ export const MIGRAINE_NODES = [
         type: 'info',
         module: 3,
         title: 'Moderate-Severe Migraine — IV Cocktail',
-        body: '**2025 AHS Guidelines — ED First-Line (Level A-B):**\n\n**Standard "Migraine Cocktail":**\n\n| Step | Medication | Dose | Notes |\n|------|------------|------|-------|\n| 1 | **Diphenhydramine** | 25-50 mg IV | Give FIRST (prevents akathisia) |\n| 2 | **Prochlorperazine** | 10 mg IV over 15 min | OR Metoclopramide 10-20 mg IV |\n| 3 | **Ketorolac** | 15-30 mg IV | 15 mg equally effective as 30 mg |\n| 4 | **NS Bolus** | 500-1000 mL | If dehydrated from vomiting |\n\n**Before discharge, add:**\n- **Dexamethasone** 10 mg IV — prevents 48-72h recurrence (NNT=9)\n\n**Key Points:**\n- Slow infusion (15 min) reduces akathisia by 61%\n- Darken the room\n- Give all meds up front (more effective than stepwise)\n- Reassess at 30-60 min [1][3][4]',
+        body: '**2025 AHS Guidelines — ED First-Line:**\n\n**Standard "Migraine Cocktail":**\n\n| Step | Medication | Dose | Notes |\n|------|------------|------|-------|\n| 1 | **Diphenhydramine** | 25-50 mg IV | Give FIRST (prevents akathisia) |\n| 2 | **Prochlorperazine** | 10 mg IV over 15 min | **Level A — Must Offer** (upgraded 2025) |\n| 3 | **Ketorolac** | 15-30 mg IV | 15 mg equally effective as 30 mg |\n| 4 | **NS Bolus** | 500-1000 mL | If dehydrated from vomiting |\n\n⚡ **2025 Update:** Prochlorperazine upgraded to Level A (from Level B). Preferred over metoclopramide when available.\n\n**Before discharge, add:**\n- **Dexamethasone** 10 mg IV — prevents 48-72h recurrence (NNT=9)\n\n**Key Points:**\n- Slow infusion (15 min) reduces akathisia by 61%\n- Darken the room\n- Give all meds up front (more effective than stepwise)\n- Reassess at 30-60 min [1][3][4]',
         citation: [1, 3, 4],
         calculatorLinks: [
             { id: 'migraine-tx-algo', label: 'Treatment Algorithm' },
@@ -184,7 +184,7 @@ export const MIGRAINE_NODES = [
                 route: 'IV',
                 frequency: 'Once',
                 duration: 'Single dose; infuse metoclopramide slowly',
-                notes: 'Use metoclopramide if prochlorperazine unavailable or prior adverse reaction',
+                notes: 'Second-line per 2025 AHS (Level B); use if prochlorperazine unavailable',
             },
             adjunct: {
                 drug: 'Dexamethasone',
