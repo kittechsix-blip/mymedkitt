@@ -12,6 +12,7 @@ export const TORSADES_DE_POINTES_NODES = [
         module: 1,
         title: 'Torsades de Pointes (TdP)',
         body: '[TdP Management Steps Summary](#/info/tdp-steps-summary)\n\n**Torsades de Pointes** — a specific form of **polymorphic ventricular tachycardia** occurring in the setting of **prolonged QT interval**.\n\n**ECG Features:**\n• Polymorphic QRS complexes with sinusoidal waxing/waning amplitude\n• "Twisting of the points" around the isoelectric line\n• Rate 150–300 bpm, often self-terminating\n• Classic **short-long-short** initiation sequence\n• **QTc >500 ms** = 2–3× increased TdP risk\n\n**Critical Distinction:** TdP (prolonged QT) requires **opposite treatment** from polymorphic VT without QT prolongation. Always check baseline QTc.\n\n[TdP ECG Recognition](#/info/tdp-ecg-recognition)\n\n**Tools:** Use the QTc Calculator and QT Drug Checker in the toolbar below.',
+        images: [{ src: 'images/torsades/torsades-ecg.png', alt: 'Torsades de Pointes ECG strip showing characteristic sinusoidal waxing and waning QRS amplitude', caption: 'Torsades de Pointes — "twisting of the points" morphology' }],
         citation: [1, 2, 3],
         next: 'tdp-stability',
     },
