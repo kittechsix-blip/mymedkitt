@@ -765,6 +765,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ecmo-scai', label: 'SCAI', icon: '📈', action: 'calculator', target: 'ecmo-scai-stages' },
     { id: 'ecmo-ecpr', label: 'ECPR', icon: '⚡', action: 'calculator', target: 'ecmo-ecpr-criteria' },
   ],
+  'torsades-de-pointes': [
+    { id: 'drug-checker', label: 'QT Drugs', icon: '💊', action: 'calculator', target: 'qt-drug-checker' },
+    { id: 'qtc-calc', label: 'QTc Calc', icon: '🧮', action: 'calculator', target: 'qtc-calculator' },
+    { id: 'quick-card', label: 'Quick Tx', icon: '📋', action: 'overlay', target: 'tdp-quick-treatment' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

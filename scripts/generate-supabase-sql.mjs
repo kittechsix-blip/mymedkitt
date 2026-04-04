@@ -150,6 +150,7 @@ const TREE_REGISTRY = {
   'button-battery':       { prefix: 'BUTTON_BATTERY',       entryNodeId: 'battery-start',    categoryId: 'pediatrics' },
   'nat-screening':        { prefix: 'NAT_SCREENING',        entryNodeId: 'nat-start',        categoryId: 'pediatrics' },
   'vad':                  { prefix: 'VAD',                  entryNodeId: 'vad-start',        categoryId: 'cardiology' },
+  'torsades-de-pointes':  { prefix: 'TORSADES_DE_POINTES',  entryNodeId: 'tdp-start',        categoryId: 'cardiology' },
 };
 
 // Cross-listing: which consults appear in multiple categories

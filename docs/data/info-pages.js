@@ -9496,6 +9496,104 @@ const VAD_ECHO_FINDINGS = {
     ],
 };
 // -------------------------------------------------------------------
+// Torsades de Pointes
+// -------------------------------------------------------------------
+const TDP_STEPS_SUMMARY = {
+    id: 'tdp-steps-summary',
+    title: 'TdP Management Steps',
+    subtitle: 'Torsades de Pointes \u2014 Step-by-Step',
+    sections: [
+        {
+            heading: 'Module 1: Recognition & Stability',
+            body: '\u2022 [Identify TdP on ECG](#/node/tdp-start) \u2014 polymorphic VT with "twisting of points," short-long-short initiation\n\u2022 [Assess hemodynamic stability](#/node/tdp-stability) \u2014 pulseless vs unstable vs stable\n\u2022 [Pulseless: unsynchronized defibrillation](#/node/tdp-pulseless) \u2014 do NOT give amiodarone\n\u2022 [Unstable: synchronized cardioversion + IV Mg](#/node/tdp-unstable)',
+        },
+        {
+            heading: 'Module 2: Acquired vs Congenital',
+            body: '\u2022 [Determine etiology](#/node/tdp-etiology) \u2014 acquired (most common) vs congenital LQTS vs unknown\n\u2022 [Acquired TdP](#/node/tdp-acquired) \u2014 drug-induced, electrolytes, structural heart \u2192 proceed to Mg protocol\n\u2022 [Congenital LQTS](#/node/tdp-congenital) \u2014 **OPPOSITE treatment**: beta-blockers BENEFICIAL, isoproterenol CONTRAINDICATED\n\u2022 [Unknown: treat as acquired](#/node/tdp-unknown) (safer default)',
+        },
+        {
+            heading: 'Module 3: Acute Management',
+            body: '\u2022 [Magnesium protocol](#/node/tdp-mg-protocol) \u2014 EMCrit: 4g bolus \u2192 1g/hr \u00d74h \u2192 0.5g/hr \u00d720h. Target Mg 3.5\u20135.0\n\u2022 [If recurrent despite Mg](#/node/tdp-overdrive) \u2014 overdrive pacing 90\u2013110 bpm OR isoproterenol (acquired ONLY)\n\u2022 [Lidocaine](#/node/tdp-lidocaine) \u2014 1\u20131.5 mg/kg IV, Class IB (shortens QT)\n\u2022 [AVOID](#/node/tdp-avoid) \u2014 amiodarone, procainamide, sotalol, beta-blockers (acquired)',
+        },
+        {
+            heading: 'Module 4: Drug & Electrolyte Correction',
+            body: '\u2022 [Stop ALL QT-prolonging drugs](#/node/tdp-stop-drugs) \u2014 use QT Drug Checker tool\n\u2022 [Correct electrolytes aggressively](#/node/tdp-electrolytes) \u2014 K+ >4.5, Mg 3.5\u20135.0, normalize Ca\n\u2022 [Review risk factors](#/node/tdp-risk-factors) \u2014 female sex, age >65, CYP inhibitors, structural heart',
+        },
+        {
+            heading: 'Module 5: Disposition',
+            body: '\u2022 [All TdP patients require ICU admission](#/node/tdp-disposition)\n\u2022 [Resolved: ICU + telemetry + Mg infusion + cardiology](#/node/tdp-dispo-stable)\n\u2022 [Recurrent: ICU + overdrive pacing + EP consult](#/node/tdp-dispo-recurrent)\n\u2022 [Refractory: ECMO consideration + emergent EP](#/node/tdp-dispo-refractory)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Torsades de Pointes (TdP). EMCrit IBCC. https://emcrit.org/ibcc/torsades/' },
+        { num: 2, text: 'Kalus JS. Torsades de Pointes. StatPearls. Updated 2024.' },
+    ],
+};
+const TDP_QUICK_TREATMENT = {
+    id: 'tdp-quick-treatment',
+    title: 'TdP Quick Treatment Card',
+    subtitle: 'Rapid Reference \u2014 Torsades de Pointes',
+    sections: [
+        {
+            heading: '1. Immediate Actions',
+            body: '\u2022 **Pulseless \u2192 Unsynchronized defibrillation** (standard ACLS energy)\n\u2022 **Do NOT give amiodarone** \u2014 it prolongs QT\n\u2022 **IV Magnesium 4g bolus** over 20 min (faster if unstable)\n\u2022 **Stop ALL QT-prolonging drugs immediately**',
+        },
+        {
+            heading: '2. Magnesium Protocol (EMCrit/Farkas)',
+            body: '\u2022 **Bolus:** 4 g IV over 20 min\n\u2022 **Infusion:** 1 g/hr \u00d7 4 hours, then 0.5 g/hr \u00d7 20 hours\n\u2022 **Target serum Mg:** 3.5\u20135.0 mg/dL\n\u2022 Give even if serum Mg is normal \u2014 intracellular stores depleted\n\u2022 Covers drug washout period (e.g., dofetilide t\u00bd = 10h)\n\u2022 Toxicity antidote: Calcium gluconate 1 g IV',
+        },
+        {
+            heading: '3. Electrolyte Targets',
+            body: '\u2022 **K+ >4.5 mEq/L** (most important modifiable factor)\n\u2022 **Mg 3.5\u20135.0 mg/dL** (much higher than standard repletion)\n\u2022 **Normalize calcium**\n\u2022 Recheck electrolytes every 2 hours during active management',
+        },
+        {
+            heading: '4. If Refractory to Magnesium',
+            body: '\u2022 **Overdrive pacing** 90\u2013110 bpm (transvenous preferred, up to 140 bpm)\n\u2022 **Isoproterenol** 1\u201310 mcg/min IV (ACQUIRED LQTS only \u2014 CONTRAINDICATED in congenital)\n\u2022 **Lidocaine** 1\u20131.5 mg/kg IV push, then 1\u20134 mg/min infusion (Class IB \u2014 shortens QT)',
+        },
+        {
+            heading: '5. DRUGS TO AVOID',
+            body: '\u2022 **Amiodarone** \u2014 prolongs QT, worsens TdP\n\u2022 **Procainamide** \u2014 prolongs QT\n\u2022 **Sotalol** \u2014 Class III antiarrhythmic, prolongs QT\n\u2022 **Beta-blockers** \u2014 in acquired TdP (can worsen bradycardia-dependent TdP)\n\u2022 **Any Class IA or Class III antiarrhythmic**',
+        },
+        {
+            heading: '6. Acquired vs Congenital \u2014 OPPOSITE Treatments',
+            body: '**Acquired (most common):**\n\u2022 Mg + overdrive pacing + isoproterenol + lidocaine\n\u2022 Beta-blockers: AVOID\n\u2022 Prognosis: good with drug removal + correction\n\n**Congenital LQTS:**\n\u2022 Mg + IV beta-blocker (esmolol/propranolol) + pacing\n\u2022 Isoproterenol: CONTRAINDICATED (paradoxical QT lengthening)\n\u2022 Genetics/EP consult + ICD evaluation\n\u2022 Untreated mortality >50%; treated <10%',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Torsades de Pointes (TdP). EMCrit IBCC. https://emcrit.org/ibcc/torsades/' },
+        { num: 2, text: 'Nickson C. Torsades de Pointes. First10EM. https://first10em.com/torsades/' },
+        { num: 3, text: 'Kalus JS. Torsades de Pointes. StatPearls. Updated 2024.' },
+    ],
+};
+const TDP_ECG_RECOGNITION = {
+    id: 'tdp-ecg-recognition',
+    title: 'TdP ECG Recognition',
+    subtitle: 'Distinguishing TdP from Other Wide Complex Tachycardias',
+    sections: [
+        {
+            heading: 'Key ECG Features of Torsades de Pointes',
+            body: '\u2022 **Polymorphic QRS complexes** \u2014 continuously varying axis (the "twisting")\n\u2022 **Sinusoidal waxing and waning** of QRS amplitude around the isoelectric line\n\u2022 **Rate typically 150\u2013300 bpm**\n\u2022 **Self-terminating** in most episodes (seconds to minutes)\n\u2022 **Degeneration to VF** is the lethal risk',
+        },
+        {
+            heading: 'Short-Long-Short Initiation Sequence',
+            body: 'Classic trigger pattern:\n\n1. **Short interval** \u2014 a premature ventricular complex (PVC)\n2. **Long interval** \u2014 a compensatory pause after the PVC\n3. **Short interval** \u2014 another PVC landing on the T wave ("R-on-T phenomenon")\n4. **TdP initiates** \u2014 the R-on-T PVC triggers the arrhythmia\n\nThis pause-dependent mechanism explains why **bradycardia** and **early afterdepolarizations** (EADs) are the substrate for TdP.',
+        },
+        {
+            heading: 'TdP vs Polymorphic VT (No QT Prolongation)',
+            body: '**Critical distinction:**\n\n\u2022 **TdP** = polymorphic VT + **prolonged QT on baseline ECG** (QTc >500 ms)\n  \u2192 Treatment: Magnesium, overdrive pacing, isoproterenol\n  \u2192 AVOID: Amiodarone, procainamide\n\n\u2022 **Polymorphic VT without QT prolongation** = different entity (often ischemic)\n  \u2192 Treatment: Standard ACLS, amiodarone IS appropriate\n  \u2192 Must rule out ACS\n\n**Always check baseline QTc** to distinguish these two conditions \u2014 treatment is opposite.',
+        },
+        {
+            heading: 'QTc Thresholds',
+            body: '\u2022 **Normal:** \u2264440 ms (male), \u2264450 ms (female)\n\u2022 **Prolonged:** 441\u2013500 ms (male), 451\u2013500 ms (female)\n\u2022 **High TdP Risk:** >500 ms \u2014 **2\u20133\u00d7 increased risk of TdP**\n\u2022 **Critical:** >600 ms \u2014 very high risk, treat urgently\n\nNote: Bazett formula overcorrects at high heart rates. Consider Fridericia (FDA-preferred) or Rautaharju (ACEP Tox recommended) for ED use.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Dessertenne F. La tachycardie ventriculaire \u00e0 deux foyers oppos\u00e9s variables. Arch Mal Coeur. 1966;59:263-272.' },
+        { num: 2, text: 'Drew BJ, et al. Prevention of Torsade de Pointes in Hospital Settings. AHA/ACCF Scientific Statement. Circulation. 2010;121(8):1047-1060.' },
+        { num: 3, text: 'Yates C, Manini AF. Utility of the Electrocardiogram in Drug Overdose and Poisoning. ACEP Toxicology Section. 2012.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -9778,6 +9876,10 @@ export const INFO_PAGES = {
     'vad-arrest-protocol': VAD_ARREST_PROTOCOL,
     'vad-hemolysis-labs': VAD_HEMOLYSIS_LABS,
     'vad-echo-findings': VAD_ECHO_FINDINGS,
+    // Torsades de Pointes
+    'tdp-steps-summary': TDP_STEPS_SUMMARY,
+    'tdp-quick-treatment': TDP_QUICK_TREATMENT,
+    'tdp-ecg-recognition': TDP_ECG_RECOGNITION,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

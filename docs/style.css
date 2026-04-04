@@ -1606,6 +1606,88 @@ body {
 }
 
 /* ===================================================================
+   DOSING CONFIDENCE VISUAL GRADIENT
+   Traffic light color coding for medication doses:
+   - Standard (green): High confidence, guideline-backed
+   - Caution (amber): Edge of range, special population, needs monitoring
+   - Critical (red): Max dose, narrow therapeutic index, high-risk
+   =================================================================== */
+
+/* Standard confidence (green) - default for most doses */
+.dose-highlight[data-confidence="standard"],
+.dosing-value[data-confidence="standard"],
+.sticky-dosing-primary[data-confidence="standard"],
+.sticky-dosing-row-value[data-confidence="standard"],
+.dosing-banner__pill[data-confidence="standard"] {
+  background: rgba(60, 179, 113, 0.12);
+  border-left: 3px solid #3CB371;
+  color: #2E8B57;
+}
+
+/* Caution confidence (amber) - edge of range, needs monitoring */
+.dose-highlight[data-confidence="caution"],
+.dosing-value[data-confidence="caution"],
+.sticky-dosing-primary[data-confidence="caution"],
+.sticky-dosing-row-value[data-confidence="caution"],
+.dosing-banner__pill[data-confidence="caution"] {
+  background: rgba(255, 165, 2, 0.12);
+  border-left: 3px solid #ffa502;
+  color: #b45309;
+}
+
+/* Critical confidence (red) - max dose, narrow therapeutic index */
+.dose-highlight[data-confidence="critical"],
+.dosing-value[data-confidence="critical"],
+.sticky-dosing-primary[data-confidence="critical"],
+.sticky-dosing-row-value[data-confidence="critical"],
+.dosing-banner__pill[data-confidence="critical"] {
+  background: rgba(255, 71, 87, 0.12);
+  border-left: 3px solid #ff4757;
+  color: #c62828;
+}
+
+/* Add left padding to accommodate border accent */
+.dose-highlight[data-confidence],
+.dosing-value[data-confidence],
+.sticky-dosing-primary[data-confidence],
+.sticky-dosing-row-value[data-confidence] {
+  padding-left: 8px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Dosing banner pills with confidence - adjust styling */
+.dosing-banner__pill[data-confidence] {
+  padding-left: 10px;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}
+
+/* Drug regimen card with confidence indicator */
+.drug-regimen-card[data-confidence="standard"] {
+  border-left: 4px solid #3CB371;
+}
+
+.drug-regimen-card[data-confidence="caution"] {
+  border-left: 4px solid #ffa502;
+}
+
+.drug-regimen-card[data-confidence="critical"] {
+  border-left: 4px solid #ff4757;
+}
+
+/* Dosing summary row with confidence */
+.dosing-summary-row[data-confidence="standard"] .dosing-value {
+  color: #2E8B57;
+}
+
+.dosing-summary-row[data-confidence="caution"] .dosing-value {
+  color: #b45309;
+}
+
+.dosing-summary-row[data-confidence="critical"] .dosing-value {
+  color: #c62828;
+}
+
+/* ===================================================================
    RESULT NODE STYLES
    =================================================================== */
 
@@ -1685,6 +1767,88 @@ body {
   display: block;
   margin-top: 12px;
   text-align: center;
+}
+
+/* ===================================================================
+   CONFIDENCE PULSE — Success animation for result nodes
+   =================================================================== */
+
+.decision-card--result {
+  animation: confidence-pulse 0.5s ease-out;
+}
+
+.decision-card--result .decision-card__result-badge,
+.decision-card--result .decision-card__title {
+  position: relative;
+}
+
+/* Animated checkmark that draws itself */
+.decision-card--result .decision-card__result-badge::before,
+.decision-card--result .decision-card__title::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: var(--color-decision-active);
+  border-radius: 50%;
+  opacity: 0;
+  animation: checkmark-appear 0.3s ease-out 0.2s forwards;
+}
+
+.decision-card--result .decision-card__result-badge::after,
+.decision-card--result .decision-card__title::after {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  transform: translateY(-60%) rotate(45deg);
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  animation: checkmark-draw 0.2s ease-out 0.35s forwards;
+}
+
+@keyframes confidence-pulse {
+  0% {
+    box-shadow: var(--shadow-md);
+  }
+  30% {
+    box-shadow: 0 0 0 4px rgba(60, 179, 113, 0.25), var(--shadow-md);
+  }
+  100% {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@keyframes checkmark-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes checkmark-draw {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  50% {
+    opacity: 1;
+    height: 0;
+  }
+  100% {
+    opacity: 1;
+    height: 9px;
+  }
 }
 
 /* ===================================================================
@@ -3801,9 +3965,52 @@ body.quick-fire-mode .qf-essential {
   transition: all 0.15s ease;
 }
 
+/* Glassmorphic 3D Icon Style */
+.dashboard-recent-item__icon--glass {
+  border-radius: 50%;
+  border: none;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glossy highlight overlay */
+.dashboard-recent-item__icon--glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 45%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  border-radius: 50% 50% 40% 40%;
+  pointer-events: none;
+}
+
+/* Medical cross icon */
+.dashboard-recent-item__cross {
+  width: 22px;
+  height: 22px;
+  color: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  position: relative;
+  z-index: 1;
+}
+
 .dashboard-recent-item:active .dashboard-recent-item__icon {
   transform: scale(0.95);
-  box-shadow: none;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .dashboard-recent-item__label {

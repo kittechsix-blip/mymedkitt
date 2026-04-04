@@ -2369,7 +2369,7 @@ const LIDOCAINE: DrugEntry = {
   genericName: 'Lidocaine',
   drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
   route: 'Local injection / IV / Topical',
-  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment', 'VAD ventricular tachycardia'],
+  indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment', 'VAD ventricular tachycardia', 'Torsades de pointes'],
   dosing: [
     {
       indication: 'Epistaxis (topical anesthesia)',
@@ -2398,6 +2398,11 @@ const LIDOCAINE: DrugEntry = {
       indication: 'VAD VT',
       regimen: '1-1.5 mg/kg IV bolus, then 1-4 mg/min continuous infusion. Alternative to amiodarone for hemodynamically tolerated VT in VAD patients. May repeat bolus 0.5-0.75 mg/kg q5-10 min (max 3 mg/kg total).',
       weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'IV bolus (1.5 mg/kg)' },
+    },
+    {
+      indication: 'Torsades de pointes',
+      regimen: '1\u20131.5 mg/kg IV push over 2 min, then 1\u20134 mg/min continuous infusion. Class IB antiarrhythmic \u2014 shortens QT interval and suppresses triggered activity. Use when TdP is refractory to magnesium + overdrive pacing. May repeat bolus 0.5\u20130.75 mg/kg q5\u201310 min (max 3 mg/kg total). One of the few antiarrhythmics SAFE in TdP (unlike amiodarone, procainamide, sotalol which prolong QT).',
+      weightCalc: { dosePerKg: 1.5, unit: 'mg', maxDose: 100, label: 'IV push (high end)' },
     },
   ],
   contraindications: [
@@ -2872,7 +2877,7 @@ const MAGNESIUM_SULFATE: DrugEntry = {
     },
     {
       indication: 'Torsades de pointes',
-      regimen: '1-2 g IV over 5-60 min (faster for unstable patients).',
+      regimen: 'EMCrit/Farkas protocol:\n\u2022 Bolus: 4 g IV over 20 min (or faster if unstable/pulseless)\n\u2022 Infusion: 1 g/hr \u00d7 4 hours, then 0.5 g/hr \u00d7 20 hours\n\u2022 Target serum Mg: 3.5\u20135.0 mg/dL (much higher than standard repletion)\n\u2022 Give EVEN IF serum Mg is normal \u2014 intracellular stores are depleted\n\u2022 Rationale: covers drug washout period (e.g., dofetilide t\u00bd = 10h) and repletes intracellular Mg.\nAntidote for Mg toxicity: Calcium gluconate 1 g IV.',
     },
     {
       indication: 'TCA Overdose — Ventricular Arrhythmia',
@@ -7987,6 +7992,40 @@ const ISONIAZID: DrugEntry = {
   ],
 };
 
+const ISOPROTERENOL: DrugEntry = {
+  id: 'isoproterenol',
+  name: 'Isoproterenol (Isuprel)',
+  genericName: 'Isoproterenol',
+  drugClass: 'Non-selective beta-adrenergic agonist',
+  route: 'IV',
+  indications: ['Torsades de pointes (acquired LQTS)', 'Symptomatic bradycardia (temporizing)'],
+  dosing: [
+    {
+      indication: 'Torsades de pointes (acquired)',
+      regimen: 'Infusion: 1\u201310 mcg/min IV, titrate to heart rate 90\u2013110 bpm. Start at 2 mcg/min and increase every 3\u20135 min. Mechanism: increases heart rate \u2192 shortens QT interval \u2192 suppresses early afterdepolarizations that trigger TdP. Use as bridge to transvenous pacing. Continue magnesium infusion concurrently.\n\u2022 ACQUIRED LQTS ONLY \u2014 isoproterenol is CONTRAINDICATED in congenital LQTS (paradoxical QT lengthening, increased TdP risk).\n\u2022 Alternative to overdrive pacing when transvenous pacing is not immediately available.',
+    },
+  ],
+  contraindications: [
+    'Congenital long QT syndrome \u2014 paradoxically prolongs QT and increases TdP risk',
+    'Tachyarrhythmias (other than TdP)',
+    'Digitalis toxicity',
+    'Sulfite allergy (some formulations contain sodium metabisulfite)',
+  ],
+  cautions: [
+    'Potent chronotrope and inotrope \u2014 may cause myocardial ischemia in CAD patients',
+    'Hypotension from peripheral beta-2 vasodilation \u2014 use norepinephrine if needed for BP support',
+    'Monitor continuous telemetry during infusion',
+    'Hypokalemia from intracellular K+ shift \u2014 monitor and replete aggressively',
+  ],
+  monitoring: 'Continuous cardiac monitoring. Heart rate target 90\u2013110 bpm. Continuous BP monitoring. Serum potassium q2h (beta-agonist shifts K+ intracellularly). Serum magnesium q2\u20134h.',
+  notes: 'Pharmacologic overdrive pacing. Non-selective beta-agonist that increases SA node automaticity and AV conduction. In acquired TdP, the increased heart rate shortens the QT interval and eliminates the short-long-short sequences that initiate TdP. NOT a first-line agent \u2014 use after magnesium. Transvenous overdrive pacing is preferred when available. In congenital LQTS, beta-stimulation triggers arrhythmias rather than suppressing them \u2014 treatment is IV beta-blockade (opposite approach).',
+  citations: [
+    'Farkas J. Torsades de Pointes (TdP). EMCrit IBCC. https://emcrit.org/ibcc/torsades/',
+    'Kalus JS. Pharmacologic management of torsades de pointes. StatPearls. Updated 2024.',
+    'Lavonas EJ, et al. Torsade de pointes from isoproterenol in a patient with congenital long QT syndrome. J Emerg Med. 1998;16(1):75-78.',
+  ],
+};
+
 const PYRAZINAMIDE: DrugEntry = {
   id: 'pyrazinamide',
   name: 'Pyrazinamide (PZA)',
@@ -8513,6 +8552,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   IDARUCIZUMAB,
   ICATIBANT,
   ISONIAZID,
+  ISOPROTERENOL,
   KETAMINE,
   KETOROLAC,
   LABETALOL,
@@ -8727,6 +8767,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/hydroxocobalamin|cyanokit/i, 'hydroxocobalamin'],
   [/idarucizumab|praxbind/i, 'idarucizumab'],
   [/icatibant|firazyr/i, 'icatibant'],
+  [/isoproterenol|isuprel/i, 'isoproterenol'],
   [/ketamine|ketalar/i, 'ketamine'],
   [/labetalol/i, 'labetalol'],
   [/lacosamide|vimpat/i, 'lacosamide'],

@@ -17327,6 +17327,417 @@ const SAFETY_PLAN_BUILDER_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// QTc Calculator (Formula-Based — Bazett, Fridericia, Rautaharju)
+// -------------------------------------------------------------------
+const QTC_CALCULATOR = {
+    id: 'qtc-calculator',
+    title: 'QTc Calculator',
+    subtitle: 'Corrected QT Interval',
+    description: 'Calculates corrected QT interval using Bazett, Fridericia, or Rautaharju formulas with sex-specific thresholds. Rautaharju recommended for ED use (ACEP Toxicology).',
+    fields: [
+        {
+            name: 'qt-interval',
+            label: 'QT Interval',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'ms',
+            description: 'Measured QT interval in milliseconds',
+        },
+        {
+            name: 'heart-rate',
+            label: 'Heart Rate',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'bpm',
+            description: 'Current heart rate',
+        },
+        {
+            name: 'sex',
+            label: 'Sex',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Male', points: 0 },
+                { label: 'Female', points: 1 },
+            ],
+        },
+        {
+            name: 'formula',
+            label: 'Formula',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Bazett (standard, overcorrects at high HR)', points: 0 },
+                { label: 'Fridericia (FDA-preferred)', points: 1 },
+                { label: 'Rautaharju (ACEP Tox — best for ED)', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'QTc >500 ms = 2\u20133\u00d7 increased risk of Torsades de Pointes. Multiple QT-prolonging drugs increase risk multiplicatively. Always check electrolytes (K+, Mg, Ca).',
+    citations: [
+        'Bazett HC. An Analysis of the Time-Relations of Electrocardiograms. Heart. 1920;7:353-370.',
+        'Fridericia LS. Die Systolendauer im Elektrokardiogramm bei normalen Menschen und bei Herzkranken. Acta Med Scand. 1920;53:469-486.',
+        'Rautaharju PM, et al. Reassessment of the use of heart rate correction formulas. J Electrocardiol. 2009;42(6):e21.',
+        'Yates C, Manini AF. Utility of the Electrocardiogram in Drug Overdose and Poisoning. ACEP Toxicology Section. 2012.',
+    ],
+    computeResult: (values) => {
+        const qt = values['qt-interval'] || 0;
+        const hr = values['heart-rate'] || 0;
+        const isFemale = (values['sex'] || 0) === 1;
+        const formulaIdx = values['formula'] || 0;
+        if (qt <= 0 || hr <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter QT interval and heart rate to calculate QTc.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const rr = 60 / hr; // RR interval in seconds
+        let qtc;
+        let formulaName;
+        let formulaDetail;
+        if (formulaIdx === 1) {
+            // Fridericia: QTc = QT / RR^(1/3)
+            qtc = qt / Math.pow(rr, 1 / 3);
+            formulaName = 'Fridericia';
+            formulaDetail = `QT / \u00b3\u221aRR = ${qt} / ${Math.pow(rr, 1 / 3).toFixed(3)}`;
+        }
+        else if (formulaIdx === 2) {
+            // Rautaharju: QTc = QT \u00d7 (120 + HR) / 180
+            qtc = qt * (120 + hr) / 180;
+            formulaName = 'Rautaharju';
+            formulaDetail = `QT \u00d7 (120 + HR) / 180 = ${qt} \u00d7 ${120 + hr} / 180`;
+        }
+        else {
+            // Bazett: QTc = QT / \u221aRR
+            qtc = qt / Math.sqrt(rr);
+            formulaName = 'Bazett';
+            formulaDetail = `QT / \u221aRR = ${qt} / ${Math.sqrt(rr).toFixed(3)}`;
+        }
+        const qtcRounded = Math.round(qtc);
+        const normalMax = isFemale ? 450 : 440;
+        const sexLabel = isFemale ? 'Female' : 'Male';
+        let label;
+        let colorVar;
+        let riskNote;
+        if (qtcRounded > 500) {
+            label = 'HIGH TdP RISK';
+            colorVar = '--color-danger';
+            riskNote = `QTc >500 ms \u2014 2\u20133\u00d7 increased risk of Torsades de Pointes. Discontinue QT-prolonging drugs. Correct K+ >4.5, Mg >2.0.`;
+        }
+        else if (qtcRounded > normalMax) {
+            label = 'Prolonged';
+            colorVar = '--color-warning';
+            riskNote = `QTc ${normalMax + 1}\u2013500 ms (${sexLabel}) \u2014 prolonged. Review medications and electrolytes. Monitor closely.`;
+        }
+        else {
+            label = 'Normal';
+            colorVar = '--color-primary';
+            riskNote = `QTc \u2264${normalMax} ms (${sexLabel}) \u2014 within normal limits.`;
+        }
+        return {
+            value: `${qtcRounded} ms`,
+            label: `${label} (${formulaName})`,
+            description: `${formulaDetail}\n\n${riskNote}\n\nRR interval: ${rr.toFixed(3)} s | HR: ${hr} bpm\nNormal \u2264${normalMax} ms (${sexLabel}) | High risk >500 ms`,
+            colorVar,
+        };
+    },
+};
+const QT_DRUG_DATABASE = [
+    // Antiarrhythmics
+    { name: 'Amiodarone', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Disopyramide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Dofetilide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Dronedarone', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Flecainide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Ibutilide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Procainamide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Quinidine', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Sotalol', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Vernakalant', risk: 'possible', drugClass: 'Antiarrhythmic' },
+    // Antibiotics
+    { name: 'Azithromycin', risk: 'known', drugClass: 'Antibiotic', note: 'Risk lower than other macrolides' },
+    { name: 'Clarithromycin', risk: 'known', drugClass: 'Antibiotic' },
+    { name: 'Erythromycin', risk: 'known', drugClass: 'Antibiotic', note: 'IV > oral risk; CYP3A4 inhibitor' },
+    { name: 'Levofloxacin', risk: 'known', drugClass: 'Antibiotic' },
+    { name: 'Moxifloxacin', risk: 'known', drugClass: 'Antibiotic', note: 'Highest QT risk among fluoroquinolones' },
+    { name: 'Ciprofloxacin', risk: 'conditional', drugClass: 'Antibiotic', note: 'Risk with high dose or electrolyte abnormalities' },
+    { name: 'Trimethoprim-Sulfamethoxazole', risk: 'possible', drugClass: 'Antibiotic' },
+    { name: 'Bedaquiline', risk: 'possible', drugClass: 'Antibiotic' },
+    { name: 'Delamanid', risk: 'possible', drugClass: 'Antibiotic' },
+    // Antifungals
+    { name: 'Fluconazole', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Ketoconazole', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Voriconazole', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Pentamidine', risk: 'known', drugClass: 'Antifungal/Antiprotozoal' },
+    { name: 'Itraconazole', risk: 'possible', drugClass: 'Antifungal' },
+    { name: 'Posaconazole', risk: 'possible', drugClass: 'Antifungal' },
+    // Antimalarials
+    { name: 'Chloroquine', risk: 'known', drugClass: 'Antimalarial' },
+    { name: 'Halofantrine', risk: 'known', drugClass: 'Antimalarial' },
+    { name: 'Hydroxychloroquine', risk: 'conditional', drugClass: 'Antimalarial', note: 'Risk with overdose or electrolyte abnormalities' },
+    { name: 'Quinine', risk: 'conditional', drugClass: 'Antimalarial' },
+    { name: 'Mefloquine', risk: 'possible', drugClass: 'Antimalarial' },
+    // Antipsychotics
+    { name: 'Chlorpromazine', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Haloperidol', risk: 'known', drugClass: 'Antipsychotic', note: 'IV >> oral risk' },
+    { name: 'Droperidol', risk: 'known', drugClass: 'Antipsychotic', note: 'FDA black box warning' },
+    { name: 'Pimozide', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Thioridazine', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Ziprasidone', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Amisulpride', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Aripiprazole', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Clozapine', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Olanzapine', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Quetiapine', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Risperidone', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Paliperidone', risk: 'possible', drugClass: 'Antipsychotic' },
+    // Antiemetics
+    { name: 'Dolasetron', risk: 'known', drugClass: 'Antiemetic' },
+    { name: 'Granisetron', risk: 'known', drugClass: 'Antiemetic' },
+    { name: 'Ondansetron', risk: 'known', drugClass: 'Antiemetic', note: 'IV high-dose (32 mg) withdrawn; standard doses conditional risk' },
+    { name: 'Domperidone', risk: 'known', drugClass: 'Antiemetic/Prokinetic' },
+    { name: 'Prochlorperazine', risk: 'possible', drugClass: 'Antiemetic' },
+    { name: 'Promethazine', risk: 'possible', drugClass: 'Antiemetic' },
+    // Antidepressants
+    { name: 'Citalopram', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 40 mg (20 mg if >60 yo)' },
+    { name: 'Escitalopram', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 20 mg' },
+    { name: 'Amitriptyline', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Clomipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Desipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Doxepin', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Imipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Nortriptyline', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Trimipramine', risk: 'conditional', drugClass: 'Antidepressant' },
+    { name: 'Fluoxetine', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Mirtazapine', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Sertraline', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Trazodone', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Venlafaxine', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Bupropion', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    // Opioids
+    { name: 'Methadone', risk: 'known', drugClass: 'Opioid', note: 'Dose-dependent; >100 mg/day highest risk' },
+    { name: 'Levomethadyl (LAAM)', risk: 'known', drugClass: 'Opioid', note: 'Withdrawn from market' },
+    { name: 'Buprenorphine', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with IV use or overdose' },
+    { name: 'Oxycodone', risk: 'possible', drugClass: 'Opioid' },
+    { name: 'Loperamide', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with massive overdose (abuse)' },
+    // Oncology
+    { name: 'Arsenic trioxide', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Vandetanib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Crizotinib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Lenvatinib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Nilotinib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Ribociclib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Sunitinib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Toremifene', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Oxaliplatin', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Pazopanib', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Tamoxifen', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Vemurafenib', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Encorafenib', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Gilteritinib', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Osimertinib', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Capecitabine', risk: 'conditional', drugClass: 'Oncology' },
+    { name: 'Ivosidenib', risk: 'known', drugClass: 'Oncology' },
+    // HIV / Antivirals
+    { name: 'Rilpivirine', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Saquinavir', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Efavirenz', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Foscarnet', risk: 'conditional', drugClass: 'Antiviral', note: 'Via electrolyte derangements (Ca, Mg)' },
+    // Cardiology (non-antiarrhythmic)
+    { name: 'Ranolazine', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Ivabradine', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Cilostazol', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Nicardipine', risk: 'conditional', drugClass: 'Cardiology' },
+    { name: 'Isradipine', risk: 'conditional', drugClass: 'Cardiology' },
+    // GI
+    { name: 'Cisapride', risk: 'known', drugClass: 'GI', note: 'Withdrawn in US due to TdP' },
+    { name: 'Esomeprazole', risk: 'possible', drugClass: 'GI' },
+    { name: 'Famotidine', risk: 'possible', drugClass: 'GI' },
+    { name: 'Pantoprazole', risk: 'possible', drugClass: 'GI' },
+    // Other
+    { name: 'Cocaine', risk: 'known', drugClass: 'Substance of Abuse' },
+    { name: 'Donepezil', risk: 'known', drugClass: 'Cholinesterase Inhibitor' },
+    { name: 'Eliglustat', risk: 'known', drugClass: 'Other' },
+    { name: 'Papaverine', risk: 'known', drugClass: 'Vasodilator' },
+    { name: 'Probucol', risk: 'known', drugClass: 'Other' },
+    { name: 'Sevoflurane', risk: 'known', drugClass: 'Anesthetic' },
+    { name: 'Propofol', risk: 'conditional', drugClass: 'Anesthetic', note: 'Risk with propofol infusion syndrome' },
+    { name: 'Anagrelide', risk: 'possible', drugClass: 'Hematology' },
+    { name: 'Fingolimod', risk: 'possible', drugClass: 'Immunology' },
+    { name: 'Solifenacin', risk: 'possible', drugClass: 'Urology' },
+    { name: 'Alfuzosin', risk: 'possible', drugClass: 'Urology' },
+    { name: 'Gadobenate', risk: 'conditional', drugClass: 'Contrast Agent' },
+    { name: 'Galantamine', risk: 'possible', drugClass: 'Cholinesterase Inhibitor' },
+    { name: 'Pasireotide', risk: 'possible', drugClass: 'Other' },
+    { name: 'Sumatriptan', risk: 'conditional', drugClass: 'Migraine' },
+    { name: 'Tizanidine', risk: 'possible', drugClass: 'Muscle Relaxant' },
+    { name: 'Diphenhydramine', risk: 'conditional', drugClass: 'Antihistamine', note: 'Risk with overdose' },
+    { name: 'Hydroxyzine', risk: 'possible', drugClass: 'Antihistamine' },
+    { name: 'Lithium', risk: 'conditional', drugClass: 'Mood Stabilizer', note: 'Risk with toxicity' },
+    { name: 'Atomoxetine', risk: 'possible', drugClass: 'ADHD' },
+    { name: 'Amphetamines', risk: 'conditional', drugClass: 'Stimulant', note: 'Risk with overdose' },
+    { name: 'Terbutaline', risk: 'conditional', drugClass: 'Beta-agonist', note: 'IV use' },
+    { name: 'Tacrolimus', risk: 'possible', drugClass: 'Immunosuppressant' },
+    { name: 'Midostaurin', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Degarelix', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Leuprolide', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Oxytocin', risk: 'conditional', drugClass: 'Obstetric', note: 'IV bolus' },
+    { name: 'Phenylephrine', risk: 'conditional', drugClass: 'Vasopressor', note: 'Via reflex bradycardia' },
+    { name: 'Indapamide', risk: 'possible', drugClass: 'Diuretic' },
+    { name: 'Furosemide', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
+    { name: 'Hydrochlorothiazide', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
+];
+const QT_DRUG_RISK_CONFIG = {
+    known: { label: 'Known Risk', color: '#fff', bg: '#d32f2f' },
+    possible: { label: 'Possible Risk', color: '#fff', bg: '#e65100' },
+    conditional: { label: 'Conditional Risk', color: '#000', bg: '#fdd835' },
+};
+const QT_DRUG_CHECKER_CALCULATOR = {
+    id: 'qt-drug-checker',
+    title: 'QT Drug Checker',
+    subtitle: 'CredibleMeds QT-Prolonging Drug Database',
+    description: 'Search 150+ medications for QT prolongation risk. Data from CredibleMeds.org.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Data from CredibleMeds.org. Risk categories: Known Risk (TdP at recommended doses), Possible Risk (QT prolongation, no TdP evidence), Conditional Risk (TdP only with overdose/interactions/electrolytes).',
+    citations: [
+        'Woosley RL, Heise CW, Romero KA. www.CredibleMeds.org, QTdrugs List. AZCERT, Inc.',
+        'Woosley RL, et al. CredibleMeds: updating the gold standard for QT-related drug safety. Clin Pharmacol Ther. 2022.',
+    ],
+    customRender: (container, _onUpdate) => {
+        container.style.cssText = 'padding:0;';
+        // Search input
+        const searchWrap = document.createElement('div');
+        searchWrap.style.cssText = 'position:sticky;top:0;z-index:2;padding:12px 16px;background:var(--color-surface-card, #1a1a2e);border-bottom:1px solid rgba(255,255,255,0.1);';
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search drug name...';
+        searchInput.style.cssText = 'width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:var(--color-text, #fff);font-size:16px;outline:none;min-height:44px;box-sizing:border-box;';
+        searchInput.addEventListener('focus', () => { searchInput.style.borderColor = 'var(--color-decision-active, #3CB371)'; });
+        searchInput.addEventListener('blur', () => { searchInput.style.borderColor = 'rgba(255,255,255,0.2)'; });
+        searchWrap.appendChild(searchInput);
+        container.appendChild(searchWrap);
+        // Results container
+        const resultsContainer = document.createElement('div');
+        resultsContainer.style.cssText = 'padding:8px 16px 16px;';
+        container.appendChild(resultsContainer);
+        // Build drug result item
+        function buildDrugItem(drug) {
+            const item = document.createElement('div');
+            item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin-bottom:6px;border-radius:8px;background:rgba(255,255,255,0.05);';
+            const left = document.createElement('div');
+            const nameEl = document.createElement('div');
+            nameEl.style.cssText = 'font-weight:600;font-size:15px;color:var(--color-text, #fff);';
+            nameEl.textContent = drug.name;
+            left.appendChild(nameEl);
+            const classEl = document.createElement('div');
+            classEl.style.cssText = 'font-size:12px;color:var(--color-text-secondary, #aaa);margin-top:2px;';
+            classEl.textContent = drug.drugClass;
+            if (drug.note)
+                classEl.textContent += ` \u2014 ${drug.note}`;
+            left.appendChild(classEl);
+            const badge = document.createElement('span');
+            const config = QT_DRUG_RISK_CONFIG[drug.risk];
+            badge.style.cssText = `padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap;color:${config.color};background:${config.bg};`;
+            badge.textContent = config.label;
+            item.appendChild(left);
+            item.appendChild(badge);
+            return item;
+        }
+        // Render by-category view
+        function renderCategories() {
+            resultsContainer.innerHTML = '';
+            const categories = new Map();
+            for (const drug of QT_DRUG_DATABASE) {
+                const cls = drug.drugClass;
+                if (!categories.has(cls))
+                    categories.set(cls, []);
+                categories.get(cls).push(drug);
+            }
+            // Sort categories alphabetically
+            const sortedCats = [...categories.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+            for (const [catName, drugs] of sortedCats) {
+                const details = document.createElement('details');
+                details.style.cssText = 'margin-bottom:8px;';
+                const summary = document.createElement('summary');
+                summary.style.cssText = 'padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.08);cursor:pointer;font-weight:600;font-size:14px;color:var(--color-text, #fff);list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;';
+                summary.innerHTML = `${catName} <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary, #aaa);">${drugs.length} drugs</span>`;
+                details.appendChild(summary);
+                const content = document.createElement('div');
+                content.style.cssText = 'padding:8px 0 0;';
+                drugs.sort((a, b) => a.name.localeCompare(b.name));
+                for (const drug of drugs)
+                    content.appendChild(buildDrugItem(drug));
+                details.appendChild(content);
+                resultsContainer.appendChild(details);
+            }
+            // Footer
+            const footer = document.createElement('div');
+            footer.style.cssText = 'text-align:center;padding:16px 0 8px;font-size:11px;color:var(--color-text-secondary, #888);';
+            footer.textContent = `${QT_DRUG_DATABASE.length} drugs \u2022 Data from CredibleMeds.org`;
+            resultsContainer.appendChild(footer);
+        }
+        // Render search results
+        function renderSearchResults(query) {
+            resultsContainer.innerHTML = '';
+            const q = query.toLowerCase().trim();
+            const matches = QT_DRUG_DATABASE.filter(d => d.name.toLowerCase().includes(q) || d.drugClass.toLowerCase().includes(q)).sort((a, b) => {
+                // Exact prefix matches first
+                const aPrefix = a.name.toLowerCase().startsWith(q) ? 0 : 1;
+                const bPrefix = b.name.toLowerCase().startsWith(q) ? 0 : 1;
+                if (aPrefix !== bPrefix)
+                    return aPrefix - bPrefix;
+                return a.name.localeCompare(b.name);
+            });
+            if (matches.length === 0) {
+                const noResult = document.createElement('div');
+                noResult.style.cssText = 'padding:24px 12px;text-align:center;';
+                const checkmark = document.createElement('div');
+                checkmark.style.cssText = 'font-size:48px;margin-bottom:12px;';
+                checkmark.textContent = '\u2705';
+                noResult.appendChild(checkmark);
+                const msg = document.createElement('div');
+                msg.style.cssText = 'font-weight:600;font-size:16px;color:var(--color-decision-active, #3CB371);margin-bottom:8px;';
+                msg.textContent = 'No Known QT Risk';
+                noResult.appendChild(msg);
+                const sub = document.createElement('div');
+                sub.style.cssText = 'font-size:13px;color:var(--color-text-secondary, #aaa);';
+                sub.textContent = `"${query}" not found in CredibleMeds QT drug database. This does not guarantee zero risk \u2014 always check electrolytes and clinical context.`;
+                noResult.appendChild(sub);
+                resultsContainer.appendChild(noResult);
+                return;
+            }
+            const countEl = document.createElement('div');
+            countEl.style.cssText = 'padding:4px 12px 8px;font-size:12px;color:var(--color-text-secondary, #aaa);';
+            countEl.textContent = `${matches.length} result${matches.length !== 1 ? 's' : ''}`;
+            resultsContainer.appendChild(countEl);
+            for (const drug of matches)
+                resultsContainer.appendChild(buildDrugItem(drug));
+        }
+        // Initial render
+        renderCategories();
+        // Search handler with debounce
+        let timer;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                const q = searchInput.value.trim();
+                if (q.length === 0) {
+                    renderCategories();
+                }
+                else {
+                    renderSearchResults(q);
+                }
+            }, 150);
+        });
+    },
+};
 const CALCULATORS = {
     // Pediatric Submersion
     'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -17607,6 +18018,9 @@ const CALCULATORS = {
     // Suicide Risk Assessment
     'cssrs-screen': CSSRS_SCREEN_CALCULATOR,
     'safety-plan-builder': SAFETY_PLAN_BUILDER_CALCULATOR,
+    // Torsades de Pointes
+    'qtc-calculator': QTC_CALCULATOR,
+    'qt-drug-checker': QT_DRUG_CHECKER_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
