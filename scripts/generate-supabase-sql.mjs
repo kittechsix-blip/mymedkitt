@@ -151,6 +151,7 @@ const TREE_REGISTRY = {
   'nat-screening':        { prefix: 'NAT_SCREENING',        entryNodeId: 'nat-start',        categoryId: 'pediatrics' },
   'vad':                  { prefix: 'VAD',                  entryNodeId: 'vad-start',        categoryId: 'cardiology' },
   'torsades-de-pointes':  { prefix: 'TORSADES_DE_POINTES',  entryNodeId: 'tdp-start',        categoryId: 'cardiology' },
+  'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -182,6 +183,7 @@ const CROSS_LISTINGS = {
   'ed-methadone':     [{ categoryId: 'toxicology' }],
   'cvst':             [{ categoryId: 'neurology' }],
   'shoulder-dislocation': [{ categoryId: 'procedures' }],
+  'ct-decision-support': [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

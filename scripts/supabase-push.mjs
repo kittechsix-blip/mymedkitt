@@ -203,6 +203,7 @@ const TREE_REGISTRY = {
   'human-trafficking':    { prefix: 'HUMAN_TRAFFICKING',    entryNodeId: 'ht-start',         categoryId: 'emergency-medicine' },
   'dental-avulsion':      { prefix: 'DENTAL_AVULSION',      entryNodeId: 'avulsion-start',   categoryId: 'emergency-medicine' },
   'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',      entryNodeId: 'sui-start',        categoryId: 'emergency-medicine' },
+  'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
 };
 
 const CROSS_LISTINGS = {
@@ -229,6 +230,7 @@ const CROSS_LISTINGS = {
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
   'ed-methadone':     [{ categoryId: 'toxicology' }],
   'cvst':             [{ categoryId: 'neurology' }],
+  'ct-decision-support': [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

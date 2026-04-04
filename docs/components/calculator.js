@@ -17751,6 +17751,108 @@ const QT_DRUG_CHECKER_CALCULATOR = {
         });
     },
 };
+// -------------------------------------------------------------------
+// CT Decision Support Calculators
+// -------------------------------------------------------------------
+const CANADIAN_CT_HEAD_CALCULATOR = {
+    id: 'canadian-ct-head',
+    title: 'Canadian CT Head Rule',
+    subtitle: 'Minor Head Injury Decision Rule',
+    description: 'For adults (≥16) with minor head injury (GCS 13-15) and witnessed LOC, definite amnesia, or witnessed disorientation within 24h. Exclusions: age <16, GCS <13, anticoagulation, bleeding disorder, seizure prior to assessment, obvious open skull fracture.',
+    fields: [
+        { name: 'gcs-2h', label: 'GCS < 15 at 2 hours post-injury', type: 'toggle', points: 5 },
+        { name: 'skull-fx', label: 'Suspected open or depressed skull fracture', type: 'toggle', points: 5 },
+        { name: 'basal-fx', label: 'Signs of basal skull fracture', type: 'toggle', points: 5, description: 'Hemotympanum, raccoon eyes, CSF otorrhea/rhinorrhea, Battle sign' },
+        { name: 'vomiting', label: 'Vomiting ≥ 2 episodes', type: 'toggle', points: 5 },
+        { name: 'age65', label: 'Age ≥ 65 years', type: 'toggle', points: 5 },
+        { name: 'amnesia', label: 'Retrograde amnesia ≥ 30 min before impact', type: 'toggle', points: 1 },
+        { name: 'mechanism', label: 'Dangerous mechanism', type: 'toggle', points: 1, description: 'Pedestrian struck, ejected from vehicle, fall >3 ft or >5 stairs' },
+    ],
+    results: [
+        { min: -Infinity, max: 1, label: 'Low Risk', risk: 'No high/medium-risk criteria', mortality: 'CT not indicated. 98.4% sensitive for clinically important brain injury.', colorVar: '--color-decision-active' },
+        { min: 1, max: 5, label: 'Medium Risk', risk: 'Medium-risk criteria present', mortality: 'CT recommended — risk of brain injury on CT.', colorVar: '--color-warning' },
+        { min: 5, max: Infinity, label: 'High Risk', risk: 'High-risk criteria present', mortality: 'CT required — risk of neurosurgical intervention. 100% sensitivity.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Items 1-5 = high-risk (5 pts each, for neurosurgical intervention). Items 6-7 = medium-risk (1 pt each, for brain injury on CT). Any high-risk = CT required. Any medium-risk = CT recommended.',
+    citations: [
+        'Stiell IG, et al. The Canadian CT Head Rule for patients with minor head injury. Lancet. 2001;357:1391-1396. PMID: 11356436.',
+        'Stiell IG, et al. Comparison of the Canadian CT Head Rule and the New Orleans Criteria. JAMA. 2005;294:1511-1518.',
+    ],
+};
+const WELLS_PE_CALCULATOR = {
+    id: 'wells-pe',
+    title: 'Wells PE Score',
+    subtitle: 'Pulmonary Embolism Pre-Test Probability',
+    description: 'Clinical prediction model for PE probability. Use two-level interpretation: ≤4 = PE unlikely (D-dimer), >4 = PE likely (CTPA).',
+    fields: [
+        { name: 'dvt-signs', label: 'Clinical signs/symptoms of DVT', type: 'toggle', points: 3, description: 'Leg swelling, pain with palpation of deep veins' },
+        { name: 'pe-likely', label: 'PE is #1 diagnosis or equally likely', type: 'toggle', points: 3 },
+        { name: 'hr100', label: 'Heart rate > 100 bpm', type: 'toggle', points: 1.5 },
+        { name: 'immobilization', label: 'Immobilization ≥ 3 days or surgery in prior 4 weeks', type: 'toggle', points: 1.5 },
+        { name: 'prior-vte', label: 'Previous PE or DVT', type: 'toggle', points: 1.5 },
+        { name: 'hemoptysis', label: 'Hemoptysis', type: 'toggle', points: 1 },
+        { name: 'malignancy', label: 'Active malignancy', type: 'toggle', points: 1, description: 'Treatment within 6 months or palliative' },
+    ],
+    results: [
+        { min: -Infinity, max: 2, label: 'Low Risk', risk: 'PE unlikely', mortality: '~1.3% PE prevalence. Proceed to D-dimer.', colorVar: '--color-decision-active' },
+        { min: 2, max: 7, label: 'Moderate Risk', risk: 'PE possible', mortality: '~16.2% PE prevalence. Proceed to D-dimer.', colorVar: '--color-warning' },
+        { min: 7, max: Infinity, label: 'High Risk', risk: 'PE likely', mortality: '~37.5% PE prevalence. Proceed directly to CTPA.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Two-level: Score ≤ 4 = PE unlikely (proceed to D-dimer). Score > 4 = PE likely (proceed to CTPA). Do NOT use PERC or D-dimer in high pre-test probability.',
+    citations: [
+        'Wells PS, et al. Derivation of a simple clinical model to categorize patients probability of pulmonary embolism. Thromb Haemost. 2000;83:416-420. PMID: 10744147.',
+    ],
+};
+const PERC_RULE_CALCULATOR = {
+    id: 'perc-rule',
+    title: 'PERC Rule',
+    subtitle: 'PE Rule-Out Criteria',
+    description: 'Use ONLY when pre-test probability is LOW (gestalt <15% or Wells ≤4). ALL 8 criteria must be MET (checked) to rule out PE without D-dimer. A score of 8 = PE ruled out.',
+    fields: [
+        { name: 'age50', label: 'Age < 50 years', type: 'toggle', points: 1 },
+        { name: 'hr100', label: 'Heart rate < 100 bpm', type: 'toggle', points: 1 },
+        { name: 'spo2', label: 'SpO₂ ≥ 95% on room air', type: 'toggle', points: 1 },
+        { name: 'hemoptysis', label: 'No hemoptysis', type: 'toggle', points: 1 },
+        { name: 'estrogen', label: 'No estrogen use (OCPs, HRT)', type: 'toggle', points: 1 },
+        { name: 'prior-vte', label: 'No prior DVT or PE', type: 'toggle', points: 1 },
+        { name: 'leg-swell', label: 'No unilateral leg swelling', type: 'toggle', points: 1 },
+        { name: 'surgery', label: 'No surgery/trauma requiring hospitalization in 4 weeks', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 8, max: Infinity, label: 'PERC Negative', risk: 'PE Ruled Out', mortality: 'All 8 criteria met. No further testing needed in low pre-test probability.', colorVar: '--color-decision-active' },
+        { min: -Infinity, max: 8, label: 'PERC Positive', risk: 'Cannot Rule Out PE', mortality: 'One or more criteria NOT met. Proceed to D-dimer.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'ALL 8 criteria must be met (score = 8) to rule out PE. Apply ONLY in low pre-test probability patients (gestalt <15%). Sensitivity ~97.4%.',
+    citations: [
+        'Kline JA, et al. Clinical criteria to prevent unnecessary diagnostic testing in ED patients with suspected PE. J Thromb Haemost. 2004;2:1247-1255. PMID: 15304025.',
+    ],
+};
+const ALVARADO_SCORE_CALCULATOR = {
+    id: 'alvarado-score',
+    title: 'Alvarado Score',
+    subtitle: 'Appendicitis Prediction (MANTRELS)',
+    description: '8-item scoring system for acute appendicitis. Mnemonic: MANTRELS (Migration, Anorexia, Nausea, Tenderness, Rebound, Elevated temp, Leukocytosis, Shift). Maximum 10 points.',
+    fields: [
+        { name: 'migration', label: 'Migration of pain to RLQ', type: 'toggle', points: 1 },
+        { name: 'anorexia', label: 'Anorexia', type: 'toggle', points: 1 },
+        { name: 'nausea', label: 'Nausea / Vomiting', type: 'toggle', points: 1 },
+        { name: 'rlq-tender', label: 'Tenderness in RLQ', type: 'toggle', points: 2 },
+        { name: 'rebound', label: 'Rebound pain', type: 'toggle', points: 1 },
+        { name: 'temp', label: 'Elevated temperature (≥ 37.3°C / 99.1°F)', type: 'toggle', points: 1 },
+        { name: 'wbc', label: 'Leukocytosis (WBC > 10,000)', type: 'toggle', points: 2 },
+        { name: 'shift', label: 'Left shift (> 75% neutrophils)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: -Infinity, max: 5, label: 'Unlikely', risk: 'Appendicitis unlikely', mortality: 'Discharge with return precautions.', colorVar: '--color-decision-active' },
+        { min: 5, max: 7, label: 'Possible', risk: 'Compatible with appendicitis', mortality: 'Observation, serial exams, consider imaging.', colorVar: '--color-warning' },
+        { min: 7, max: 9, label: 'Probable', risk: 'Probable appendicitis', mortality: 'Surgical consult. CT if equivocal.', colorVar: '--color-danger' },
+        { min: 9, max: Infinity, label: 'Very Probable', risk: 'Very probable appendicitis', mortality: 'Surgical consult. CT may not be necessary.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score ≥ 5: 99% sensitive overall. Score ≥ 7: high specificity. RLQ Tenderness and Leukocytosis are weighted 2 points each.',
+    citations: [
+        'Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15:557-564. PMID: 3963537.',
+    ],
+};
 const CALCULATORS = {
     // Pediatric Submersion
     'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -18034,6 +18136,11 @@ const CALCULATORS = {
     // Torsades de Pointes
     'qtc-calculator': QTC_CALCULATOR,
     'qt-drug-checker': QT_DRUG_CHECKER_CALCULATOR,
+    // CT Decision Support
+    'canadian-ct-head': CANADIAN_CT_HEAD_CALCULATOR,
+    'wells-pe': WELLS_PE_CALCULATOR,
+    'perc-rule': PERC_RULE_CALCULATOR,
+    'alvarado-score': ALVARADO_SCORE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

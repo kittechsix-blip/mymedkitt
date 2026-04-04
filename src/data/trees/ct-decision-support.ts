@@ -1,0 +1,630 @@
+// MedKitt — CT Scan Decision Support
+// Scenario Selection → Head/C-Spine → Chest/PE → Abdomen → Extremity → Special Populations
+// 6 modules: Scenario Selection → Head/C-Spine → Chest/PE → Abdomen → Extremity → Special Populations
+// ~38 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: SCENARIO SELECTION
+  // =====================================================================
+
+  {
+    id: 'ct-start',
+    type: 'info',
+    module: 1,
+    title: 'CT Scan Decision Support',
+    body: '[CT Decision Support Steps Summary](#/info/ct-steps-summary)\n\nCT imaging is used in **27 per 100 ED encounters** — nearly matching ECG usage. An estimated **103,000 new cancers annually** may be attributable to CT imaging in the U.S. [1,2]\n\nThis tool applies validated clinical decision rules to guide CT ordering. Each rule has been prospectively validated in large multicenter studies.\n\n[Radiation Dose Reference](#/info/ct-radiation-doses) · [Special Populations](#/info/ct-special-populations) · [Choosing Wisely](#/info/ct-choosing-wisely)',
+    citation: [1, 2],
+    next: 'ct-scenario',
+  },
+
+  {
+    id: 'ct-scenario',
+    type: 'question',
+    module: 1,
+    title: 'Clinical Scenario',
+    body: 'Select the body region and clinical concern:',
+    options: [
+      { label: 'Head Injury (adult or pediatric)', next: 'ct-head-age' },
+      { label: 'Cervical Spine Clearance', next: 'ct-cspine-alert' },
+      { label: 'Chest / Suspected PE', next: 'ct-pe-pretest' },
+      { label: 'Abdomen (appendicitis / renal colic)', next: 'ct-abd-scenario' },
+      { label: 'Extremity (ankle / knee)', next: 'ct-ext-scenario' },
+      { label: 'Special Populations & Documentation', next: 'ct-special-pop' },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: HEAD / C-SPINE
+  // =====================================================================
+
+  // --- HEAD INJURY ---
+
+  {
+    id: 'ct-head-age',
+    type: 'question',
+    module: 2,
+    title: 'Patient Age',
+    body: 'Age determines which decision rule applies:',
+    options: [
+      { label: 'Adult (age ≥ 16)', next: 'ct-cchr-eligible' },
+      { label: 'Child ≥ 2 years', next: 'ct-pecarn-older' },
+      { label: 'Infant < 2 years', next: 'ct-pecarn-young' },
+    ],
+  },
+
+  // --- CANADIAN CT HEAD RULE (ADULT) ---
+
+  {
+    id: 'ct-cchr-eligible',
+    type: 'question',
+    module: 2,
+    title: 'Canadian CT Head Rule — Eligibility',
+    body: '**CCHR applies to:** Adults ≥16 with minor head injury (GCS 13-15) AND witnessed LOC, definite amnesia, or witnessed disorientation, within 24 hours.\n\n**Exclusions:** Age <16, no clear trauma history, GCS <13, unstable vitals, obvious open skull fracture, bleeding disorder/anticoagulation, seizure prior to assessment.\n\n[CCHR Calculator](#/calculator/canadian-ct-head)',
+    citation: [3],
+    options: [
+      { label: 'Meets CCHR criteria (GCS 13-15, LOC/amnesia/disorientation)', next: 'ct-cchr-high-risk' },
+      { label: 'Does not meet criteria / exclusion present', next: 'ct-head-clinical-judgment' },
+    ],
+  },
+
+  {
+    id: 'ct-cchr-high-risk',
+    type: 'question',
+    module: 2,
+    title: 'CCHR — High-Risk Criteria',
+    body: 'Any **HIGH-RISK** feature mandates CT (for neurosurgical intervention):\n\n1. GCS < 15 at 2 hours post-injury\n2. Suspected open or depressed skull fracture\n3. Any sign of basal skull fracture (hemotympanum, raccoon eyes, CSF otorrhea/rhinorrhea, Battle sign)\n4. Vomiting ≥ 2 episodes\n5. Age ≥ 65 years',
+    citation: [3],
+    options: [
+      { label: 'Yes — ≥ 1 high-risk criterion', next: 'ct-head-indicated', urgency: 'critical' },
+      { label: 'No high-risk criteria', next: 'ct-cchr-medium-risk' },
+    ],
+  },
+
+  {
+    id: 'ct-cchr-medium-risk',
+    type: 'question',
+    module: 2,
+    title: 'CCHR — Medium-Risk Criteria',
+    body: 'Any **MEDIUM-RISK** feature? (for brain injury on CT):\n\n1. Retrograde amnesia ≥ 30 minutes before impact\n2. Dangerous mechanism (pedestrian struck, ejected from vehicle, fall > 3 ft or > 5 stairs)',
+    citation: [3],
+    options: [
+      { label: 'Yes — ≥ 1 medium-risk criterion', next: 'ct-head-indicated', urgency: 'urgent' },
+      { label: 'No medium-risk criteria', next: 'ct-head-not-indicated' },
+    ],
+  },
+
+  {
+    id: 'ct-head-indicated',
+    type: 'result',
+    module: 2,
+    title: 'CT Head Indicated',
+    body: '**CT head is indicated** per Canadian CT Head Rule.\n\n**Radiation context:** Head CT ≈ 2 mSv (20 CXR equivalents, ~4 months background radiation). Cancer risk: ~0.23 per 1,000 patients. [15]\n\n**Document:** Clinical decision rule applied, specific criteria met, clinical indication.',
+    recommendation: 'CT head indicated per CCHR. Document high-risk or medium-risk criteria met.',
+    confidence: 'recommended',
+    citation: [3, 15],
+  },
+
+  {
+    id: 'ct-head-not-indicated',
+    type: 'result',
+    module: 2,
+    title: 'CT Head NOT Indicated',
+    body: '**No CT needed** per Canadian CT Head Rule — no high-risk or medium-risk criteria met.\n\n**Performance:** High-risk criteria 100% sensitive for neurosurgical intervention. All 7 criteria 98.4% sensitive for clinically important brain injury. [3]\n\n**Document:** CCHR applied with result. Shared decision-making. Return precautions:\n• Worsening headache\n• Repeated vomiting\n• Confusion or difficulty waking\n• Weakness or numbness\n• Seizure',
+    recommendation: 'CT not indicated per CCHR. Provide return precautions.',
+    confidence: 'definitive',
+    citation: [3],
+  },
+
+  {
+    id: 'ct-head-clinical-judgment',
+    type: 'result',
+    module: 2,
+    title: 'CCHR Not Applicable — Clinical Judgment',
+    body: 'CCHR entry criteria not met. Use **clinical judgment.**\n\nScenarios where CCHR does not apply:\n• GCS < 13 → CT indicated regardless\n• Anticoagulation or bleeding disorder → lower threshold for CT\n• Seizure prior to assessment → evaluate seizure etiology\n• Trivial mechanism without LOC/amnesia/disorientation → CT generally not needed\n• No clear trauma history → consider alternative diagnoses\n\nIf on **anticoagulants**, even minor head injury warrants CT. [3]',
+    recommendation: 'CCHR not applicable. Use clinical judgment based on risk factors.',
+    confidence: 'consider',
+    citation: [3],
+  },
+
+  // --- PECARN ≥ 2 YEARS ---
+
+  {
+    id: 'ct-pecarn-older',
+    type: 'question',
+    module: 2,
+    title: 'PECARN ≥ 2 Years — High-Risk Features',
+    body: 'Does the child have **ANY** of the following? (4.3% ciTBI risk if present)\n\n1. GCS < 15 or altered mental status (agitation, somnolence, repetitive questioning, slow response)\n2. Signs of basilar skull fracture (hemotympanum, raccoon eyes, CSF otorrhea/rhinorrhea, Battle sign)',
+    citation: [7],
+    options: [
+      { label: 'Yes — GCS <15 or basilar skull fracture signs', next: 'ct-pecarn-older-high', urgency: 'critical' },
+      { label: 'No — neither present', next: 'ct-pecarn-older-intermediate' },
+    ],
+  },
+
+  {
+    id: 'ct-pecarn-older-intermediate',
+    type: 'question',
+    module: 2,
+    title: 'PECARN ≥ 2 Years — Intermediate Criteria',
+    body: 'Any of the following? (0.8% ciTBI risk if present)\n\n1. Any loss of consciousness\n2. History of vomiting\n3. Severe mechanism (MVC with ejection/death/rollover, pedestrian/cyclist struck, fall > 3 ft, head struck by high-impact object)\n4. Severe headache',
+    citation: [7],
+    options: [
+      { label: 'Yes — ≥ 1 intermediate criterion', next: 'ct-pecarn-observe', urgency: 'urgent' },
+      { label: 'None present', next: 'ct-pecarn-not-indicated' },
+    ],
+  },
+
+  // --- PECARN < 2 YEARS ---
+
+  {
+    id: 'ct-pecarn-young',
+    type: 'question',
+    module: 2,
+    title: 'PECARN < 2 Years — High-Risk Features',
+    body: 'Does the infant have **ANY** of the following? (4.4% ciTBI risk if present)\n\n1. GCS < 15 or altered mental status (agitation, somnolence, repetitive questioning, slow response)\n2. Palpable skull fracture',
+    citation: [7],
+    options: [
+      { label: 'Yes — GCS <15 or palpable skull fracture', next: 'ct-pecarn-young-high', urgency: 'critical' },
+      { label: 'No — neither present', next: 'ct-pecarn-young-intermediate' },
+    ],
+  },
+
+  {
+    id: 'ct-pecarn-young-intermediate',
+    type: 'question',
+    module: 2,
+    title: 'PECARN < 2 Years — Intermediate Criteria',
+    body: 'Any of the following? (0.9% ciTBI risk if present)\n\n1. LOC ≥ 5 seconds\n2. Non-frontal scalp hematoma (occipital, parietal, or temporal)\n3. Severe mechanism (MVC with ejection/death/rollover, pedestrian/cyclist struck, fall > 3 ft, head struck by high-impact object)\n4. Not acting normally per parent assessment',
+    citation: [7],
+    options: [
+      { label: 'Yes — ≥ 1 intermediate criterion', next: 'ct-pecarn-observe', urgency: 'urgent' },
+      { label: 'None present', next: 'ct-pecarn-not-indicated' },
+    ],
+  },
+
+  // --- PECARN RESULTS ---
+
+  {
+    id: 'ct-pecarn-older-high',
+    type: 'result',
+    module: 2,
+    title: 'CT Head Recommended (PECARN ≥ 2y)',
+    body: '**CT head recommended.** High-risk PECARN features present.\n\n4.3% risk of clinically important traumatic brain injury.\n\n**Radiation context:** Head CT ≈ 2 mSv. Children are **several times more radiosensitive** than adults. [19]\n\n**Image Gently:** Child-size the dose, scan only indicated region, scan once. [19]',
+    recommendation: 'CT head recommended per PECARN — high-risk features present.',
+    confidence: 'recommended',
+    citation: [7, 19],
+  },
+
+  {
+    id: 'ct-pecarn-young-high',
+    type: 'result',
+    module: 2,
+    title: 'CT Head Recommended (PECARN < 2y)',
+    body: '**CT head recommended.** High-risk PECARN features present.\n\n4.4% risk of clinically important traumatic brain injury.\n\n**Radiation context:** Head CT ≈ 2 mSv. Infants are the most radiosensitive age group. [19]\n\n**Image Gently:** Child-size the dose, scan only indicated region, scan once. [19]',
+    recommendation: 'CT head recommended per PECARN — high-risk features present.',
+    confidence: 'recommended',
+    citation: [7, 19],
+  },
+
+  {
+    id: 'ct-pecarn-observe',
+    type: 'result',
+    module: 2,
+    title: 'Observation vs CT — Shared Decision-Making',
+    body: '**Intermediate risk.** Observation for 4-6 hours is a reasonable alternative to immediate CT.\n\n~0.8-0.9% ciTBI risk. [7]\n\n**Factors favoring CT:**\n• Multiple intermediate criteria present\n• Worsening symptoms during observation\n• Physician experience and parental concern\n• Younger age (< 3 months)\n\n**Factors favoring observation:**\n• Single isolated criterion\n• Improving symptoms\n• Experienced observer available\n• Parent preference to avoid radiation\n\n**Document:** PECARN applied, shared decision-making with family, plan for observation vs CT, return precautions.',
+    recommendation: 'Intermediate risk — observation vs CT per shared decision-making.',
+    confidence: 'consider',
+    citation: [7],
+  },
+
+  {
+    id: 'ct-pecarn-not-indicated',
+    type: 'result',
+    module: 2,
+    title: 'CT Head NOT Indicated (PECARN Negative)',
+    body: '**No high-risk or intermediate-risk features. CT not recommended.**\n\n< 0.02-0.05% risk of ciTBI. Sensitivity 96.8-100%. [7]\n\n**Document:** PECARN applied with result. Return precautions for caregivers:\n• Worsening headache or persistent crying\n• Repeated vomiting\n• Not acting normally / hard to wake\n• Fluid from ears or nose\n\n**Choosing Wisely:** Do not order CT head for patients meeting low-risk decision rule criteria. [20]',
+    recommendation: 'CT not indicated per PECARN. Provide return precautions to caregivers.',
+    confidence: 'definitive',
+    citation: [7, 20],
+  },
+
+  // --- C-SPINE ---
+
+  {
+    id: 'ct-cspine-alert',
+    type: 'question',
+    module: 2,
+    title: 'Canadian C-Spine Rule — Step 1',
+    body: 'For alert (GCS 15), stable trauma patients. **Canadian C-Spine Rule is superior to NEXUS** (100% sensitivity vs 99.6%). [5,6]\n\n**Step 1: Any HIGH-RISK factor?** (mandates imaging)\n\n• Age ≥ 65 years\n• Dangerous mechanism:\n  – Fall ≥ 3 ft or ≥ 5 stairs\n  – Axial load to head (e.g., diving)\n  – High-speed MVC (> 100 km/h), rollover, ejection\n  – Motorized recreational vehicle accident\n  – Bicycle collision\n• Paresthesias in extremities',
+    citation: [5, 6],
+    options: [
+      { label: 'Yes — high-risk factor present', next: 'ct-cspine-image', urgency: 'critical' },
+      { label: 'No high-risk factors', next: 'ct-cspine-low-risk' },
+    ],
+  },
+
+  {
+    id: 'ct-cspine-low-risk',
+    type: 'question',
+    module: 2,
+    title: 'Canadian C-Spine Rule — Step 2',
+    body: '**Step 2: Any LOW-RISK factor allowing safe ROM assessment?**\n\n• Simple rear-end MVC (excludes: pushed into oncoming traffic, hit by bus/large truck, rollover, hit by high-speed vehicle)\n• Sitting position in ED\n• Ambulatory at any time post-injury\n• Delayed onset of neck pain (not immediate)\n• Absence of midline c-spine tenderness',
+    citation: [5],
+    options: [
+      { label: 'No low-risk factors', next: 'ct-cspine-image', urgency: 'urgent' },
+      { label: 'At least 1 low-risk factor present', next: 'ct-cspine-rom' },
+    ],
+  },
+
+  {
+    id: 'ct-cspine-rom',
+    type: 'question',
+    module: 2,
+    title: 'Canadian C-Spine Rule — Step 3',
+    body: '**Step 3:** Can the patient actively rotate their neck **45° left AND right?**',
+    citation: [5],
+    options: [
+      { label: 'Yes — full active ROM', next: 'ct-cspine-clear' },
+      { label: 'No — unable to rotate', next: 'ct-cspine-image' },
+    ],
+  },
+
+  {
+    id: 'ct-cspine-image',
+    type: 'result',
+    module: 2,
+    title: 'C-Spine Imaging Indicated',
+    body: '**Cervical spine imaging indicated** per Canadian C-Spine Rule.\n\n**Radiation context:** C-spine CT ≈ 3-4 mSv (~30-40 CXR equivalents). [15]\n\nFor low-risk mechanism, **plain films** (3-view) may suffice. CT for high-risk mechanism or inadequate plain films.\n\n**NEXUS criteria** (alternative, lower specificity): No posterior midline tenderness, no intoxication, normal alertness, no focal neurologic deficit, no painful distracting injuries. All 5 must be met to clear. [4]\n\n**Document:** Canadian C-Spine Rule applied, specific step and criteria that triggered imaging.',
+    recommendation: 'C-spine imaging indicated per Canadian C-Spine Rule.',
+    confidence: 'recommended',
+    citation: [4, 5, 6, 15],
+  },
+
+  {
+    id: 'ct-cspine-clear',
+    type: 'result',
+    module: 2,
+    title: 'C-Spine Cleared Clinically',
+    body: '**No imaging needed** per Canadian C-Spine Rule.\n\nNo high-risk factors, at least one low-risk factor present, and full active ROM achieved. [5]\n\n**Sensitivity:** 100% for clinically important c-spine injury. [6]\n\n**Document:** Canadian C-Spine Rule applied — all 3 steps cleared. No imaging indicated.',
+    recommendation: 'C-spine cleared clinically per Canadian C-Spine Rule.',
+    confidence: 'definitive',
+    citation: [5, 6],
+  },
+
+  // =====================================================================
+  // MODULE 3: CHEST / PE
+  // =====================================================================
+
+  {
+    id: 'ct-pe-pretest',
+    type: 'question',
+    module: 3,
+    title: 'PE Workup — Pre-Test Probability',
+    body: 'What is your **clinical gestalt** for PE pre-test probability?\n\nApply **PERC only when pre-test probability is LOW** (gestalt < 15%). [9]\n\n[Wells PE Calculator](#/calculator/wells-pe) · [PERC Calculator](#/calculator/perc-rule)',
+    citation: [8, 9],
+    options: [
+      { label: 'Low pre-test probability (gestalt < 15%)', next: 'ct-perc' },
+      { label: 'Moderate pre-test probability', next: 'ct-pe-wells' },
+      { label: 'High pre-test probability', next: 'ct-pe-high', urgency: 'critical' },
+    ],
+  },
+
+  {
+    id: 'ct-perc',
+    type: 'question',
+    module: 3,
+    title: 'PERC Rule — Rule Out PE',
+    body: '**ALL 8 criteria must be met** to rule out PE without D-dimer:\n\n1. Age < 50 years\n2. Heart rate < 100 bpm\n3. SpO₂ ≥ 95% on room air\n4. No hemoptysis\n5. No estrogen use (OCPs, HRT)\n6. No prior DVT or PE\n7. No unilateral leg swelling\n8. No surgery/trauma requiring hospitalization in prior 4 weeks\n\n[PERC Calculator](#/calculator/perc-rule)',
+    citation: [9],
+    options: [
+      { label: 'All 8 criteria met', next: 'ct-pe-ruled-out' },
+      { label: 'Any criterion NOT met', next: 'ct-pe-ddimer' },
+    ],
+  },
+
+  {
+    id: 'ct-pe-ruled-out',
+    type: 'result',
+    module: 3,
+    title: 'PE Ruled Out — PERC Negative',
+    body: '**PE ruled out.** No further testing needed.\n\nSensitivity ~97.4%, false-negative rate < 2% in low-risk patients. [9]\n\n**Choosing Wisely:** Avoid CTPA in patients with low pre-test probability AND negative PERC. [20]\n\n**Document:** Pre-test probability assessment (low), PERC applied with all 8 criteria met. No further workup indicated.',
+    recommendation: 'PE ruled out by PERC in low pre-test probability patient.',
+    confidence: 'definitive',
+    citation: [9, 20],
+  },
+
+  {
+    id: 'ct-pe-ddimer',
+    type: 'question',
+    module: 3,
+    title: 'D-Dimer Testing',
+    body: 'Obtain **quantitative D-dimer.** For low/moderate pre-test probability.\n\n**Age-adjusted D-dimer** (patients ≥ 50): threshold = age × 10 ng/mL. Improves specificity without loss of sensitivity. [8]',
+    citation: [8],
+    options: [
+      { label: 'D-dimer negative (below threshold)', next: 'ct-pe-excluded' },
+      { label: 'D-dimer positive (above threshold)', next: 'ct-pe-ctpa' },
+    ],
+  },
+
+  {
+    id: 'ct-pe-wells',
+    type: 'question',
+    module: 3,
+    title: 'Wells PE Score',
+    body: 'Calculate Wells score to stratify risk:\n\n**Score ≤ 4** = PE unlikely → proceed to D-dimer\n**Score > 4** = PE likely → proceed to CTPA\n\n[Wells PE Calculator](#/calculator/wells-pe)',
+    citation: [8],
+    options: [
+      { label: 'Wells ≤ 4 (PE unlikely)', next: 'ct-pe-ddimer' },
+      { label: 'Wells > 4 (PE likely)', next: 'ct-pe-ctpa' },
+    ],
+  },
+
+  {
+    id: 'ct-pe-excluded',
+    type: 'result',
+    module: 3,
+    title: 'PE Excluded — Negative D-Dimer',
+    body: '**PE excluded** by negative D-dimer in low/moderate pre-test probability. [8,9]\n\n**Document:** Pre-test probability assessment, D-dimer result and threshold used (standard or age-adjusted). No CTPA indicated.',
+    recommendation: 'PE excluded by negative D-dimer in appropriate pre-test probability.',
+    confidence: 'definitive',
+    citation: [8, 9],
+  },
+
+  {
+    id: 'ct-pe-ctpa',
+    type: 'result',
+    module: 3,
+    title: 'CTPA Indicated',
+    body: '**CT Pulmonary Angiography indicated.**\n\n**Radiation context:** CTPA ≈ 10-15 mSv (~100-150 CXR equivalents). [15]\n\nCheck **eGFR** and **contrast allergy** status before ordering.\n\n**Pregnancy:** CTPA fetal dose 0.01-0.66 mGy — well below 50 mGy threshold. Do NOT withhold medically indicated CT from pregnant patients. [16]\n\n**Unstable patient:** Consider bedside echo for RV strain if too unstable for CT transport.\n\n[Special Populations Guide](#/info/ct-special-populations)',
+    recommendation: 'CTPA indicated. Check eGFR and contrast allergy status.',
+    confidence: 'recommended',
+    citation: [8, 15, 16],
+  },
+
+  {
+    id: 'ct-pe-high',
+    type: 'result',
+    module: 3,
+    title: 'High Pre-Test Probability — CTPA',
+    body: '**CTPA indicated.** Do NOT use PERC or D-dimer in high pre-test probability — they are not validated for this population. [8,9]\n\n~37.5% PE prevalence in high-risk patients. [8]\n\nIf **hemodynamically unstable**, consider bedside echo for RV strain before CT transport.\n\n**Radiation context:** CTPA ≈ 10-15 mSv.',
+    recommendation: 'CTPA indicated for high pre-test probability. Do NOT use PERC or D-dimer.',
+    confidence: 'recommended',
+    citation: [8, 9],
+  },
+
+  // =====================================================================
+  // MODULE 4: ABDOMEN
+  // =====================================================================
+
+  {
+    id: 'ct-abd-scenario',
+    type: 'question',
+    module: 4,
+    title: 'Abdominal Scenario',
+    body: 'Which abdominal concern?',
+    options: [
+      { label: 'Suspected appendicitis', next: 'ct-alvarado' },
+      { label: 'Suspected renal colic', next: 'ct-renal-colic' },
+    ],
+  },
+
+  {
+    id: 'ct-alvarado',
+    type: 'question',
+    module: 4,
+    title: 'Alvarado Score — Appendicitis',
+    body: 'Calculate the **Alvarado score** (MANTRELS mnemonic, max 10 points).\n\n[Alvarado Calculator](#/calculator/alvarado-score)',
+    citation: [14],
+    options: [
+      { label: 'Score 0-4 (unlikely)', next: 'ct-appy-unlikely' },
+      { label: 'Score 5-6 (possible)', next: 'ct-appy-possible' },
+      { label: 'Score 7-8 (probable)', next: 'ct-appy-probable' },
+      { label: 'Score 9-10 (very probable)', next: 'ct-appy-very-probable' },
+    ],
+  },
+
+  {
+    id: 'ct-appy-unlikely',
+    type: 'result',
+    module: 4,
+    title: 'Appendicitis Unlikely',
+    body: '**Alvarado 0-4.** Appendicitis unlikely.\n\nDischarge with return precautions:\n• Worsening or migrating abdominal pain\n• Fever\n• Persistent vomiting\n• Inability to tolerate oral intake\n\n**Document:** Alvarado score and criteria, serial exam findings, return precautions provided.',
+    recommendation: 'Appendicitis unlikely (Alvarado 0-4). Discharge with return precautions.',
+    confidence: 'recommended',
+    citation: [14],
+  },
+
+  {
+    id: 'ct-appy-possible',
+    type: 'result',
+    module: 4,
+    title: 'Appendicitis Possible — Observation / Imaging',
+    body: '**Alvarado 5-6.** Compatible with appendicitis. Consider observation with serial exams and imaging.\n\n**Imaging options:**\n• **POCUS:** Sensitivity 91%. Negative POCUS does NOT rule out appendicitis. Good first-line in pediatrics and pregnancy.\n• **CT abdomen/pelvis:** ≈ 10 mSv (single phase). Most accurate. [15]\n• **MRI:** Preferred in pregnancy — comparable accuracy, no radiation.\n\n**Pediatrics:** Ultrasound first. [19]\n**Pregnancy:** MRI or US preferred. CT if clinically necessary. [16]',
+    recommendation: 'Observation, serial exams, consider imaging (US first in peds/pregnancy, CT if equivocal).',
+    confidence: 'consider',
+    citation: [14, 15, 16, 19],
+  },
+
+  {
+    id: 'ct-appy-probable',
+    type: 'result',
+    module: 4,
+    title: 'Probable Appendicitis — Surgical Consult',
+    body: '**Alvarado 7-8.** Probable appendicitis.\n\nSurgical consult indicated. CT if diagnosis is equivocal or presentation is atypical. [14]\n\n**CT abdomen/pelvis:** ≈ 10 mSv (single phase). [15]',
+    recommendation: 'Surgical consult. CT if diagnosis equivocal.',
+    confidence: 'recommended',
+    citation: [14, 15],
+  },
+
+  {
+    id: 'ct-appy-very-probable',
+    type: 'result',
+    module: 4,
+    title: 'Very Probable Appendicitis',
+    body: '**Alvarado 9-10.** Very probable appendicitis.\n\nSurgical consult. CT may not be necessary with classic presentation and high clinical suspicion. [14]',
+    recommendation: 'Surgical consult. CT may not be necessary with classic presentation.',
+    confidence: 'definitive',
+    citation: [14],
+  },
+
+  {
+    id: 'ct-renal-colic',
+    type: 'result',
+    module: 4,
+    title: 'Renal Colic — Imaging Guidance',
+    body: '**Choosing Wisely:** Avoid CT abdomen/pelvis in young (< 50), otherwise healthy patients with known stone history presenting with symptoms of uncomplicated renal colic. [20]\n\n**When CT is appropriate:**\n• First episode of flank pain / no prior stone history\n• Fever or concern for infection (pyonephrosis)\n• Concern for alternative diagnosis\n• Solitary kidney or transplant\n• AKI or rising creatinine\n• Persistent symptoms despite treatment\n\n**POCUS alternative:** Can identify hydronephrosis. No difference from CT in high-risk patients, with lower radiation and shorter ED stay.\n\n**CT abdomen/pelvis:** ≈ 10 mSv (single phase). [15]',
+    recommendation: 'CT if first episode, fever, alternative diagnosis concern, or AKI. POCUS for hydronephrosis as alternative.',
+    confidence: 'consider',
+    citation: [15, 20],
+  },
+
+  // =====================================================================
+  // MODULE 5: EXTREMITY
+  // =====================================================================
+
+  {
+    id: 'ct-ext-scenario',
+    type: 'question',
+    module: 5,
+    title: 'Extremity Injury Type',
+    body: 'Select injury location:',
+    options: [
+      { label: 'Ankle / Foot injury', next: 'ct-ottawa-ankle' },
+      { label: 'Knee injury', next: 'ct-ottawa-knee' },
+    ],
+  },
+
+  {
+    id: 'ct-ottawa-ankle',
+    type: 'question',
+    module: 5,
+    title: 'Ottawa Ankle Rules',
+    body: '**Ankle X-ray** indicated if pain in malleolar zone AND any of:\n1. Bone tenderness along distal 6 cm posterior tibia or tip of medial malleolus\n2. Bone tenderness along distal 6 cm posterior fibula or tip of lateral malleolus\n3. Unable to bear weight 4 steps (immediately after injury AND in ED)\n\n**Foot X-ray** indicated if midfoot pain AND any of:\n1. Tenderness at base of 5th metatarsal\n2. Tenderness at navicular bone\n3. Unable to bear weight 4 steps\n\nSensitivity: **97.6%**. Can reduce ankle radiographs by 30-40%. [11]',
+    citation: [11],
+    options: [
+      { label: 'Criteria met — X-ray indicated', next: 'ct-xray-ankle-indicated' },
+      { label: 'No criteria met — no imaging needed', next: 'ct-xray-ankle-not-indicated' },
+    ],
+  },
+
+  {
+    id: 'ct-xray-ankle-indicated',
+    type: 'result',
+    module: 5,
+    title: 'Ankle/Foot X-Ray Indicated',
+    body: '**Plain radiographs indicated** per Ottawa Ankle Rules.\n\n**CT is rarely needed** for ankle/foot injuries. Consider CT only for:\n• Complex intra-articular fractures (pilon, calcaneus)\n• Lisfranc injury evaluation when plain films are equivocal\n• Pre-operative planning\n\n**Document:** Ottawa Ankle Rules applied, specific criteria met.',
+    recommendation: 'X-ray indicated per Ottawa Ankle Rules. CT rarely needed.',
+    confidence: 'recommended',
+    citation: [11],
+  },
+
+  {
+    id: 'ct-xray-ankle-not-indicated',
+    type: 'result',
+    module: 5,
+    title: 'No Imaging Needed (Ottawa Ankle)',
+    body: '**Ottawa Ankle Rules negative.** No imaging needed.\n\nSensitivity: **97.6%** for fractures. [11]\n\n**Document:** Ottawa Ankle Rules applied — no criteria met. No imaging indicated. Return precautions for persistent pain or inability to bear weight.',
+    recommendation: 'No imaging needed per Ottawa Ankle Rules.',
+    confidence: 'definitive',
+    citation: [11],
+  },
+
+  {
+    id: 'ct-ottawa-knee',
+    type: 'question',
+    module: 5,
+    title: 'Ottawa Knee Rules',
+    body: '**Knee X-ray** indicated if ANY of:\n1. Age ≥ 55 years\n2. Isolated patellar tenderness (no other knee bone tenderness)\n3. Tenderness at head of fibula\n4. Unable to flex knee to 90°\n5. Unable to bear weight 4 steps (immediately + in ED)\n\nSensitivity: **98-100%**. Can reduce knee radiographs ~28%. [12]\n\n**Alternative: Pittsburgh Knee Rules** (higher specificity 60% vs ~48%)\nX-ray if fall/blunt trauma AND either age < 12 or > 50, or unable to walk 4 weight-bearing steps. [13]',
+    citation: [12, 13],
+    options: [
+      { label: 'Criteria met — X-ray indicated', next: 'ct-xray-knee-indicated' },
+      { label: 'No criteria met — no imaging needed', next: 'ct-xray-knee-not-indicated' },
+    ],
+  },
+
+  {
+    id: 'ct-xray-knee-indicated',
+    type: 'result',
+    module: 5,
+    title: 'Knee X-Ray Indicated',
+    body: '**Plain radiographs indicated** per Ottawa/Pittsburgh Knee Rules.\n\n**CT is rarely needed** for acute knee injuries. Consider CT only for:\n• Tibial plateau fracture characterization\n• Complex intra-articular fractures\n• Pre-operative planning\n\n**MRI** preferred for suspected ligament, meniscal, or soft tissue injuries.\n\n**Document:** Knee rules applied, specific criteria met.',
+    recommendation: 'X-ray indicated per knee rules. CT rarely needed for acute knee injury.',
+    confidence: 'recommended',
+    citation: [12, 13],
+  },
+
+  {
+    id: 'ct-xray-knee-not-indicated',
+    type: 'result',
+    module: 5,
+    title: 'No Imaging Needed (Ottawa Knee)',
+    body: '**Knee rules negative.** No imaging needed.\n\nSensitivity: **98-100%** for clinically significant fractures. [12]\n\n**Document:** Ottawa/Pittsburgh Knee Rules applied — no criteria met. No imaging indicated. Return precautions for persistent swelling, inability to bear weight, or mechanical symptoms.',
+    recommendation: 'No imaging needed per knee rules.',
+    confidence: 'definitive',
+    citation: [12, 13],
+  },
+
+  // =====================================================================
+  // MODULE 6: SPECIAL POPULATIONS & DOCUMENTATION
+  // =====================================================================
+
+  {
+    id: 'ct-special-pop',
+    type: 'info',
+    module: 6,
+    title: 'Special Populations & Documentation',
+    body: '**Reference Pages:**\n\n[Radiation Dose Reference Table](#/info/ct-radiation-doses)\n\n[Special Populations Guide](#/info/ct-special-populations)\n(Pediatric, Pregnancy, Contrast Allergy)\n\n[Documentation Template](#/info/ct-documentation)\n\n[Choosing Wisely Quick Reference](#/info/ct-choosing-wisely)',
+    next: 'ct-doc-guidance',
+  },
+
+  {
+    id: 'ct-doc-guidance',
+    type: 'result',
+    module: 6,
+    title: 'Documentation Guidance',
+    body: '**When ORDERING CT — Document:**\n• Clinical indication and specific symptoms\n• Pre-test probability and decision rule result\n• Clinical question being answered\n• Risk-benefit discussion (especially peds, pregnancy, recent CTs)\n• Contrast decision and allergy status\n• Alternative imaging considered\n\n**When NOT ORDERING CT — Document:**\n• Decision rule applied and result\n• Shared decision-making discussion\n• Specific return precautions given\n• Follow-up plan\n\n**Key principle:** Document the **rule**, not just the conclusion. "Canadian CT Head Rule applied: no high-risk or medium-risk criteria met" is stronger than "CT head not indicated." [1,20]\n\n[Documentation Template](#/info/ct-documentation)',
+    recommendation: 'Document the decision rule applied, not just the conclusion.',
+    confidence: 'recommended',
+    citation: [1, 20],
+  },
+
+];
+
+export const CT_DECISION_SUPPORT_MODULE_LABELS = [
+  'Scenario Selection',
+  'Head / C-Spine',
+  'Chest / PE',
+  'Abdomen',
+  'Extremity',
+  'Special Populations',
+];
+
+export const CT_DECISION_SUPPORT_CITATIONS: Citation[] = [
+  { num: 1, text: 'Nwakama CA, Storch BM, Ezenkwele UA. The Renewed Necessity of Robust Clinical Judgment in CT Scan Utilization. ACEP Now. Dec 10, 2025. https://www.acepnow.com/article/the-renewed-necessity-of-robust-clinical-judgment-in-ct-scan-utilization/' },
+  { num: 2, text: 'Smith-Bindman R, et al. Projected Lifetime Cancer Risks From Current Computed Tomography Imaging. JAMA Intern Med. 2025. PMID: 40227719.' },
+  { num: 3, text: 'Stiell IG, et al. The Canadian CT Head Rule for patients with minor head injury. Lancet. 2001;357:1391-1396. PMID: 11356436.' },
+  { num: 4, text: 'Hoffman JR, et al. Validity of a Set of Clinical Criteria to Rule Out Injury to the Cervical Spine in Patients with Blunt Trauma. NEJM. 2000;343:94-99. PMID: 10891516.' },
+  { num: 5, text: 'Stiell IG, et al. The Canadian C-spine rule for radiography in alert and stable trauma patients. JAMA. 2001;286:1841-1848. PMID: 11597285.' },
+  { num: 6, text: 'Stiell IG, et al. The Canadian C-Spine Rule versus the NEXUS Low-Risk Criteria in Patients with Trauma. NEJM. 2003;349:2510-2518. PMID: 14695411.' },
+  { num: 7, text: 'Kuppermann N, et al. Identification of children at very low risk of clinically-important brain injuries after head trauma: a prospective cohort study. Lancet. 2009;374:1160-1170. PMID: 19758692.' },
+  { num: 8, text: 'Wells PS, et al. Derivation of a simple clinical model to categorize patients probability of pulmonary embolism. Thromb Haemost. 2000;83:416-420. PMID: 10744147.' },
+  { num: 9, text: 'Kline JA, et al. Clinical criteria to prevent unnecessary diagnostic testing in ED patients with suspected PE. J Thromb Haemost. 2004;2:1247-1255. PMID: 15304025.' },
+  { num: 10, text: 'Wells PS, et al. Value of assessment of pretest probability of deep-vein thrombosis in clinical management. Lancet. 1997;350:1795-1798. PMID: 9428249.' },
+  { num: 11, text: 'Stiell IG, et al. A study to develop clinical decision rules for the use of radiography in acute ankle injuries. Ann Emerg Med. 1992;21:384-390. PMID: 1554175.' },
+  { num: 12, text: 'Stiell IG, et al. Prospective validation of a decision rule for the use of radiography in acute knee injuries. JAMA. 1996;275:611-615. PMID: 8594242.' },
+  { num: 13, text: 'Seaberg DC, Jackson R. Clinical decision rule for knee radiographs. Am J Emerg Med. 1994;12:541-543. PMID: 8060729.' },
+  { num: 14, text: 'Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15:557-564. PMID: 3963537.' },
+  { num: 15, text: 'Smith-Bindman R, et al. Radiation dose associated with common computed tomography examinations. Arch Intern Med. 2009;169:2078-2086.' },
+  { num: 16, text: 'ACOG Committee Opinion No. 723. Guidelines for Diagnostic Imaging During Pregnancy and Lactation. Oct 2017. Reaffirmed 2021.' },
+  { num: 17, text: 'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. 2024 Edition. https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual' },
+  { num: 18, text: 'ACR/AAAAI Joint Consensus Statement. Management and Prevention of Hypersensitivity Reactions to Radiocontrast Media. J Allergy Clin Immunol In Practice. 2025.' },
+  { num: 19, text: 'Image Gently Campaign. Alliance for Radiation Safety in Pediatric Imaging. http://www.imagegently.org/' },
+  { num: 20, text: 'ACEP Choosing Wisely Recommendations. https://www.choosingwisely.org/societies/american-college-of-emergency-physicians/' },
+  { num: 21, text: 'NCI Fact Sheet. Computed Tomography (CT) Scans and Cancer. https://www.cancer.gov/about-cancer/diagnosis-staging/ct-scans-fact-sheet' },
+  { num: 22, text: 'RadiologyInfo.org. Radiation Dose from X-Ray and CT Exams. https://www.radiologyinfo.org/en/info/safety-xray' },
+];

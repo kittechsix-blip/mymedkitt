@@ -9594,6 +9594,135 @@ const TDP_ECG_RECOGNITION = {
     ],
 };
 // -------------------------------------------------------------------
+// CT Decision Support — Info Pages
+// -------------------------------------------------------------------
+const CT_STEPS_SUMMARY = {
+    id: 'ct-steps-summary',
+    title: 'CT Decision Support Steps Summary',
+    subtitle: 'Quick Reference — All Pathways',
+    sections: [
+        {
+            heading: 'Head Injury (Adult)',
+            body: '1. Confirm CCHR eligibility (GCS 13-15, LOC/amnesia/disorientation, within 24h)\n2. Assess HIGH-RISK criteria (GCS <15 at 2h, skull fracture signs, vomiting ≥2, age ≥65)\n3. If no high-risk → assess MEDIUM-RISK (amnesia ≥30 min, dangerous mechanism)\n4. Any positive → CT indicated. All negative → CT not indicated.',
+        },
+        {
+            heading: 'Pediatric Head Trauma',
+            body: '**≥ 2 years:** Check GCS <15 or basilar skull fracture signs → if yes, CT. If no → check LOC, vomiting, severe mechanism, severe headache → if yes, observe vs CT (shared decision). If none → no CT.\n\n**< 2 years:** Check GCS <15 or palpable skull fracture → if yes, CT. If no → check LOC ≥5s, non-frontal hematoma, severe mechanism, not acting normally → if yes, observe vs CT. If none → no CT.',
+        },
+        {
+            heading: 'C-Spine Clearance (Canadian C-Spine Rule)',
+            body: '1. Any HIGH-RISK factor? (age ≥65, dangerous mechanism, paresthesias) → Image\n2. Any LOW-RISK factor allowing ROM? (simple rear-end MVC, sitting, ambulatory, delayed pain, no midline tenderness) → If no low-risk factors → Image\n3. Active ROM 45° left AND right? → If yes, cleared. If no → Image.',
+        },
+        {
+            heading: 'Chest / PE Workup',
+            body: '1. Assess pre-test probability (gestalt)\n2. LOW risk → Apply PERC (all 8 met = ruled out)\n3. PERC fails → D-dimer (age-adjusted if ≥50)\n4. MODERATE risk → Wells score → if ≤4, D-dimer; if >4, CTPA\n5. HIGH risk → CTPA directly (do NOT use PERC or D-dimer)',
+        },
+        {
+            heading: 'Abdomen',
+            body: '**Appendicitis:** Calculate Alvarado (MANTRELS). 0-4 = unlikely (discharge). 5-6 = possible (observe/image). 7-8 = probable (surgery ± CT). 9-10 = very probable (surgery).\n\n**Renal Colic:** Known stones + typical symptoms + young/healthy → may not need CT. First episode, fever, or AKI → CT indicated.',
+        },
+        {
+            heading: 'Extremity',
+            body: '**Ankle/Foot:** Ottawa Ankle Rules → X-ray if criteria met. CT rarely needed.\n\n**Knee:** Ottawa Knee Rules or Pittsburgh Knee Rules → X-ray if criteria met. CT rarely needed.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stiell IG, et al. The Canadian CT Head Rule. Lancet. 2001.' },
+        { num: 2, text: 'Kuppermann N, et al. PECARN pediatric head trauma. Lancet. 2009.' },
+        { num: 3, text: 'Stiell IG, et al. Canadian C-Spine Rule. JAMA. 2001.' },
+        { num: 4, text: 'Kline JA, et al. PERC Rule. J Thromb Haemost. 2004.' },
+    ],
+};
+const CT_RADIATION_DOSES = {
+    id: 'ct-radiation-doses',
+    title: 'Radiation Dose Reference Table',
+    subtitle: 'Effective Doses for Common CT Scans',
+    sections: [
+        {
+            heading: 'CT Dose Comparison',
+            body: '**CT Head:** 2 mSv (20 CXR equivalents, ~4 months background)\n**CT C-Spine:** 3-4 mSv (30-40 CXR, ~6 months background)\n**CT Chest:** 7 mSv (70 CXR, ~1.1 years background)\n**CT Abdomen/Pelvis (single phase):** 10 mSv (100 CXR, ~1.6 years)\n**CT Abdomen/Pelvis (multiphase):** 31 mSv median (310 CXR, ~5 years)\n**CT Pulmonary Angiogram:** 10-15 mSv (100-150 CXR)\n**Chest X-ray (reference):** 0.1 mSv\n\nUS average background radiation: ~6.2 mSv/year.',
+        },
+        {
+            heading: 'Cancer Risk Per 1,000 Patients',
+            body: '**CT Head:** 0.23 cancers per 1,000 (range 0.03-0.70)\n**CT Chest:** 1.5 cancers per 1,000\n**Multiphase Abdomen/Pelvis:** 4.0 cancers per 1,000 (range 0.83-11.1)\n\nOverall: ~103,000 projected cancers/year from 93 million CT scans in the US (2023 data). [1]',
+        },
+        {
+            heading: 'Key Dose Facts',
+            body: '**13-fold dose variation** between highest and lowest dose for each CT study type at different facilities. [2]\n\nWidest range: multiphase abdomen/pelvis CT (6.4 to 90.4 mSv).\n\n**ALARA Principle:** As Low As Reasonably Achievable. Key strategies:\n• Weight-based protocols\n• Automatic exposure control\n• Iterative reconstruction\n• Limiting scan phases\n• Limiting scan range\n\nChildren are **more radiosensitive** than adults — higher cell proliferation, longer remaining lifespan for cancer to manifest.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Smith-Bindman R, et al. Projected Lifetime Cancer Risks From Current CT Imaging. JAMA Intern Med. 2025.' },
+        { num: 2, text: 'Smith-Bindman R, et al. Radiation dose associated with common CT examinations. Arch Intern Med. 2009;169:2078-2086.' },
+    ],
+};
+const CT_SPECIAL_POPULATIONS = {
+    id: 'ct-special-populations',
+    title: 'Special Populations Guide',
+    subtitle: 'Pediatric, Pregnancy, Contrast Allergy',
+    sections: [
+        {
+            heading: 'Pediatric Imaging',
+            body: '**Image Gently Campaign** (est. 2008) — 4 principles:\n1. **Child-size** the radiation dose (weight/size-based protocols)\n2. Scan **only when necessary** (use PECARN, clinical decision rules)\n3. Scan **only the indicated region** (limit scan length)\n4. Scan **once** (avoid multiphase scanning)\n\nChildren <10 years are **several times more radiosensitive** than adults.\n\n**Best practices:**\n• Use PECARN before head CT in minor trauma\n• Consider observation period for intermediate-risk PECARN\n• Ultrasound first for appendicitis, pyloric stenosis, intussusception\n• MRI when available for non-emergent conditions',
+        },
+        {
+            heading: 'Pregnancy',
+            body: '**Fetal radiation thresholds:**\n• < 50 mGy: No identifiable developmental defects. Pregnancy interruption NOT warranted.\n• 50-100 mGy: Threshold for teratogenic effects (first 15 weeks only)\n• > 100 mGy: Increased malformation risk — extremely rare from diagnostic imaging\n\n**Typical fetal doses from CT:**\n• CT Head: < 0.01 mGy (negligible)\n• CT Chest / CTPA: 0.01-0.66 mGy (minimal)\n• CT Abdomen/Pelvis: 10-25 mGy (modern scanners ~13 mGy)\n\n**All typical fetal doses are well below the 50 mGy threshold.**\n\n**Key principles (ACR/ACOG):**\n• Do NOT withhold medically indicated CT from pregnant patients\n• Risk of missed diagnosis far exceeds radiation risk\n• Iodinated contrast: crosses placenta but no proven teratogenicity at diagnostic doses\n• MRI preferred for abdominal pathology when clinically appropriate\n• Avoid gadolinium in pregnancy (especially first trimester)',
+        },
+        {
+            heading: 'Contrast Allergy — 2024-2025 Update',
+            body: '**Major paradigm shift (ACR 2024 + ACR/AAAAI 2025):**\n\n**Mild prior reactions** (hives, nausea, limited urticaria):\n• Premedication **no longer routinely recommended**\n• Primary strategy: **switch to a different contrast agent**\n• Breakthrough rate: 25.8% same agent → 6.9% different agent\n\n**Moderate prior reactions:**\n• Shared decision-making between provider, patient, radiologist\n• Premedication may be considered but NOT always needed\n• Agent switching preferred when feasible\n\n**Severe prior reactions** (anaphylaxis, laryngeal edema, hypotension):\n• Premedication still recommended when no alternative study exists\n\n**Traditional premedication (when indicated):**\n\n*13-hour oral:*\nPrednisone 50 mg PO at 13h, 7h, and 1h before\nDiphenhydramine 50 mg PO/IV/IM 1h before\n\n*5-hour IV (emergency):*\nMethylprednisolone 40 mg IV (or Hydrocortisone 200 mg IV) at 5h and 1h before\nDiphenhydramine 50 mg IV 1h before\n\n**Key:** Document ALL contrast reactions in the EHR with specific agent, reaction type, and severity.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Committee Opinion No. 723. Guidelines for Diagnostic Imaging During Pregnancy and Lactation. 2017.' },
+        { num: 2, text: 'ACR Manual on Contrast Media. 2024 Edition.' },
+        { num: 3, text: 'ACR/AAAAI Joint Consensus Statement. Management of Hypersensitivity Reactions to Radiocontrast Media. 2025.' },
+        { num: 4, text: 'Image Gently Campaign. http://www.imagegently.org/' },
+    ],
+};
+const CT_DOCUMENTATION = {
+    id: 'ct-documentation',
+    title: 'CT Documentation Template',
+    subtitle: 'Medical-Legal Protection',
+    sections: [
+        {
+            heading: 'When ORDERING CT — Document:',
+            body: '1. **Clinical indication:** Specific signs/symptoms prompting the study\n2. **Pre-test probability:** Decision rule applied and result (e.g., "Wells score = 6, PE likely")\n3. **Clinical question:** Specific diagnosis being evaluated\n4. **Risk-benefit discussion:** Especially for pregnant, pediatric, or patients with recent CTs\n5. **Contrast decision:** Why contrast is/is not needed; allergy status; eGFR\n6. **Alternative imaging considered:** Why CT was chosen over US, MRI, or plain films\n7. **Medical necessity language:** Tie order to presenting complaint and clinical findings',
+        },
+        {
+            heading: 'When NOT ORDERING CT — Document:',
+            body: '1. **Clinical decision rule applied and result** (e.g., "PECARN negative — no high-risk features")\n2. **Shared decision-making:** Discussion with patient/family about observation vs imaging\n3. **Return precautions given:** Specific instructions for when to return\n4. **Follow-up plan:** Who to see and when\n5. **Understanding confirmed:** Patient/family demonstrated understanding',
+        },
+        {
+            heading: 'Example Documentation',
+            body: '**Ordering:**\n"CT head ordered per CCHR: patient meets high-risk criteria (GCS 14 at 2h post-injury, age 72). Clinical question: intracranial hemorrhage or fracture. No contrast needed. Risks of radiation discussed."\n\n**Not ordering:**\n"Canadian CT Head Rule applied: no high-risk or medium-risk criteria met (GCS 15, no basal skull fracture signs, no vomiting, age 34, no amnesia >30 min, simple fall from standing). CT not indicated. Shared decision-making with patient. Return precautions provided for worsening headache, vomiting, confusion, weakness, or seizure. Follow-up with PCP in 2-3 days if symptoms persist."\n\n**Key principle:** Document the **rule**, not just the conclusion.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Choosing Wisely Recommendations. https://www.choosingwisely.org/societies/american-college-of-emergency-physicians/' },
+    ],
+};
+const CT_CHOOSING_WISELY = {
+    id: 'ct-choosing-wisely',
+    title: 'Choosing Wisely — CT Recommendations',
+    subtitle: 'ACEP Recommendations for Imaging',
+    sections: [
+        {
+            heading: 'ACEP CT-Specific Recommendations',
+            body: '**1. Head CT for syncope:**\nAvoid CT head in asymptomatic adults with syncope, insignificant trauma, and normal neurological evaluation. Abnormalities are rarely found.\n\n**2. CTPA for PE:**\nAvoid CT pulmonary angiography in patients with low pre-test probability AND either a negative PERC or a negative D-dimer.\n\n**3. CT abdomen for kidney stones:**\nAvoid CT abdomen/pelvis in young, otherwise healthy patients with known history of kidney stones presenting with uncomplicated renal colic (age <50, no fever, no concern for alternative diagnosis).\n\n**4. CT head for minor head injury:**\nDo not order CT head for patients with minor head injury who meet Canadian CT Head Rule or NEXUS II low-risk criteria.\n\n**5. Lumbar spine imaging:**\nAvoid lumbar spine imaging in the ED for adults with atraumatic back pain unless severe/progressive neurologic deficits or suspected serious underlying condition (infection, cancer with bony mets).',
+        },
+        {
+            heading: 'Context',
+            body: 'CT is used in **27 per 100 ED encounters** — nearly matching ECG usage (28 per 100). An estimated **103,000 new cancers annually** may be attributable to CT imaging.\n\nVulnerable populations relying on EDs for primary care face **disproportionate radiation exposure.** Clinical decision rules can reduce unnecessary imaging by 20-40% without missing clinically significant pathology.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Choosing Wisely Recommendations (2013, 2014). https://www.choosingwisely.org/societies/american-college-of-emergency-physicians/' },
+        { num: 2, text: 'Nwakama CA, et al. The Renewed Necessity of Robust Clinical Judgment in CT Scan Utilization. ACEP Now. Dec 2025.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -9880,6 +10009,20 @@ export const INFO_PAGES = {
     'tdp-steps-summary': TDP_STEPS_SUMMARY,
     'tdp-quick-treatment': TDP_QUICK_TREATMENT,
     'tdp-ecg-recognition': TDP_ECG_RECOGNITION,
+    // CT Decision Support
+    'ct-steps-summary': CT_STEPS_SUMMARY,
+    'ct-radiation-doses': CT_RADIATION_DOSES,
+    'ct-special-populations': CT_SPECIAL_POPULATIONS,
+    'ct-documentation': CT_DOCUMENTATION,
+    'ct-choosing-wisely': CT_CHOOSING_WISELY,
+    // Drug-Facilitated Sexual Assault
+    'dfsa-steps': DFSA_STEPS,
+    'dfsa-detection-windows': DFSA_DETECTION_WINDOWS,
+    'dfsa-soft-panel': DFSA_SOFT_PANEL,
+    'dfsa-specimen-guide': DFSA_SPECIMEN_GUIDE,
+    'dfsa-sti-regimens': DFSA_STI_REGIMENS,
+    'dfsa-vawa': DFSA_VAWA,
+    'dfsa-patient-handout': DFSA_PATIENT_HANDOUT,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

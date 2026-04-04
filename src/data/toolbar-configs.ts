@@ -37,6 +37,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'arv-effects', label: 'ARV Effects', icon: '\uD83D\uDC8A', action: 'jump', target: 'hiv-med-overview' },
     { id: 'pep-prep', label: 'PEP/PrEP', icon: '\uD83D\uDEE1\uFE0F', action: 'jump', target: 'hiv-prevention' },
   ],
+  'ct-decision-support': [
+    { id: 'cchr-calc', label: 'CCHR', icon: '🧠', action: 'calculator', target: 'canadian-ct-head' },
+    { id: 'wells-calc', label: 'Wells PE', icon: '🫁', action: 'calculator', target: 'wells-pe' },
+    { id: 'perc-calc', label: 'PERC', icon: '✓', action: 'calculator', target: 'perc-rule' },
+    { id: 'alvarado-calc', label: 'Alvarado', icon: '🔢', action: 'calculator', target: 'alvarado-score' },
+    { id: 'radiation', label: 'Radiation', icon: '☢️', action: 'overlay', target: 'ct-radiation-doses' },
+  ],
   'precip-delivery': [
     { id: 'deliver', label: 'Deliver', icon: '\uD83D\uDC76', action: 'jump', target: 'precip-head' },
     { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },

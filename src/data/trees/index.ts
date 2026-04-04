@@ -116,4 +116,5 @@ export function listConsults(): Array<{ id: string; title: string; category: str
 }
 
 export { TORSADES_DE_POINTES_NODES, TORSADES_DE_POINTES_MODULE_LABELS, TORSADES_DE_POINTES_CITATIONS } from './torsades-de-pointes';
+export { CT_DECISION_SUPPORT_NODES, CT_DECISION_SUPPORT_MODULE_LABELS, CT_DECISION_SUPPORT_CITATIONS } from './ct-decision-support';
 export type { ConsultTree, TreeNode, Reference } from '../../types/consult-tree';

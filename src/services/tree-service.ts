@@ -651,6 +651,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/suicide-risk-assessment.js');
       return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sui-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS };
     },
+    'ct-decision-support': async () => {
+      const m = await import('../data/trees/ct-decision-support.js');
+      return { nodes: m.CT_DECISION_SUPPORT_NODES, entryNodeId: 'ct-start', categoryId: 'us-rads', moduleLabels: m.CT_DECISION_SUPPORT_MODULE_LABELS, citations: m.CT_DECISION_SUPPORT_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];
