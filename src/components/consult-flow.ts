@@ -45,7 +45,7 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
   // Track this consult for recents on dashboard
   const consultTitle = getConsultTitle(treeId);
   if (consultTitle) {
-    addRecentConsult(treeId, consultTitle);
+    addRecentConsult(treeId, consultTitle, config.categoryId);
   }
 
   // Track consult open for KittMD analytics

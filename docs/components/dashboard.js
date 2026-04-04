@@ -1,7 +1,7 @@
 // myMedKitt — Dashboard V2 (Command Center)
 // Hero search bar, recents row, clean category cards, quick actions
-import { getAllCategories } from '../services/category-service.js';
-import { getSpecialtyGradient } from './button-3d.js';
+import { getAllCategories, getCategoryColors } from '../services/category-service.js';
+import { getSpecialtyGradient, buildSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { isSharedMode, getSharedTreeIds, grantFullAccess } from '../services/shared-mode.js';
 import { getAllDrugs } from '../services/drug-service.js';
@@ -27,9 +27,9 @@ function getRecents() {
         return [];
     }
 }
-export function addRecentConsult(id, title) {
+export function addRecentConsult(id, title, categoryId = 'emergency-medicine') {
     const recents = getRecents().filter(r => r.id !== id);
-    recents.unshift({ id, title, timestamp: Date.now() });
+    recents.unshift({ id, title, categoryId, timestamp: Date.now() });
     if (recents.length > MAX_RECENTS)
         recents.length = MAX_RECENTS;
     localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));
@@ -94,12 +94,23 @@ export function renderDashboard(container) {
         recentsSection.appendChild(recentsHeader);
         const recentsScroll = document.createElement('div');
         recentsScroll.className = 'dashboard-recents__scroll';
+        const colors = getCategoryColors();
         for (const recent of recents) {
             const item = document.createElement('div');
             item.className = 'dashboard-recent-item';
+            // Glassmorphic 3D icon with category color
             const iconBox = document.createElement('div');
-            iconBox.className = 'dashboard-recent-item__icon';
-            iconBox.textContent = '🏥';
+            iconBox.className = 'dashboard-recent-item__icon dashboard-recent-item__icon--glass';
+            // Get category color and apply gradient
+            const catColor = colors[recent.categoryId || 'emergency-medicine'];
+            const baseColor = catColor?.card || '#4a90d9';
+            iconBox.style.background = buildSpecialtyGradient(baseColor);
+            // Medical cross SVG
+            iconBox.innerHTML = `
+        <svg viewBox="0 0 24 24" class="dashboard-recent-item__cross">
+          <path d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z" fill="currentColor"/>
+        </svg>
+      `;
             const label = document.createElement('span');
             label.className = 'dashboard-recent-item__label';
             label.textContent = recent.title;
