@@ -777,6 +777,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'qtc-calc', label: 'QTc Calc', icon: '🧮', action: 'calculator', target: 'qtc-calculator' },
     { id: 'quick-card', label: 'Quick Tx', icon: '📋', action: 'overlay', target: 'tdp-quick-treatment' },
   ],
+  'dfsa-workup': [
+    { id: 'detection', label: 'Windows', icon: '\u23F1\uFE0F', action: 'overlay', target: 'dfsa-detection-windows' },
+    { id: 'specimens', label: 'Specimens', icon: '\uD83E\uDDEA', action: 'jump', target: 'dfsa-collection-triage' },
+    { id: 'prophylaxis', label: 'Prophy', icon: '\uD83D\uDC8A', action: 'jump', target: 'dfsa-prophylaxis-intro' },
+    { id: 'sane', label: 'SANE', icon: '\uD83D\uDCCB', action: 'jump', target: 'dfsa-sane-check' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

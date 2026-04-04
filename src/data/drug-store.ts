@@ -990,7 +990,7 @@ const CEFTRIAXONE: DrugEntry = {
   genericName: 'Ceftriaxone',
   drugClass: 'Third-generation cephalosporin',
   route: 'IV',
-  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)'],
+  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis'],
   dosing: [
     {
       indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -1035,6 +1035,10 @@ const CEFTRIAXONE: DrugEntry = {
     {
       indication: 'Community sepsis',
       regimen: 'Adult: 2g IV q24h. Third-generation cephalosporin — covers common community-acquired pathogens (E. coli, K. pneumoniae, S. pneumoniae). Does NOT cover Pseudomonas. For non-severe sepsis without Pseudomonas risk factors. Combine with atypical coverage (doxycycline or azithromycin) if pneumonia suspected.',
+    },
+    {
+      indication: 'Sexual assault STI prophylaxis',
+      regimen: '500 mg IM \u00D7 1 dose. Empiric gonorrhea prophylaxis post-sexual assault. Administer in ED. Cephalosporin allergy alternative: Gentamicin 240 mg IM \u00D7 1 + Azithromycin 2 g PO \u00D7 1. CDC STI Guidelines 2021.',
     },
   ],
   contraindications: [
@@ -1862,7 +1866,7 @@ const DOXYCYCLINE: DrugEntry = {
   genericName: 'Doxycycline',
   drugClass: 'Tetracycline antibiotic',
   route: 'PO',
-  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage'],
+  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage', 'Sexual assault STI prophylaxis'],
   dosing: [
     {
       indication: 'Primary / Secondary / Early latent syphilis (PCN allergy)',
@@ -1875,6 +1879,10 @@ const DOXYCYCLINE: DrugEntry = {
     {
       indication: 'CAP atypical coverage',
       regimen: '100 mg IV or PO q12h. Covers atypical organisms (Legionella, Mycoplasma, Chlamydophila) and tick-borne illnesses (Rickettsiae, Anaplasma, Ehrlichia). Preferred over azithromycin per IBCC for atypical coverage in sepsis. Add to beta-lactam backbone when CAP is suspected source.',
+    },
+    {
+      indication: 'Sexual assault STI prophylaxis',
+      regimen: '100 mg PO BID \u00D7 7 days. Empiric chlamydia prophylaxis post-sexual assault. Prescribe at discharge. Contraindicated in pregnancy — substitute azithromycin 1 g PO \u00D7 1. CDC STI Guidelines 2021.',
     },
   ],
   contraindications: [
@@ -3162,7 +3170,7 @@ const METRONIDAZOLE: DrugEntry = {
   genericName: 'Metronidazole',
   drugClass: 'Nitroimidazole antibiotic / antiprotozoal',
   route: 'PO/IV',
-  indications: ['C. difficile infection (alternative)', 'Persistent diarrhea (Giardia coverage)', 'Diarrhea in pregnancy (after first trimester)'],
+  indications: ['C. difficile infection (alternative)', 'Persistent diarrhea (Giardia coverage)', 'Diarrhea in pregnancy (after first trimester)', 'Sexual assault STI prophylaxis'],
   dosing: [
     {
       indication: 'C difficile',
@@ -3175,6 +3183,10 @@ const METRONIDAZOLE: DrugEntry = {
     {
       indication: 'Pregnancy',
       regimen: '500 mg PO TID × 10 days. FDA Category B \u2014 use after first trimester when benefits outweigh risks. Coordinate with OB/GYN.',
+    },
+    {
+      indication: 'Sexual assault STI prophylaxis',
+      regimen: '2 g PO \u00D7 1 dose. Empiric trichomoniasis prophylaxis post-sexual assault. Administer in ED. Take with food to reduce nausea. Safe in pregnancy (CDC category B). CDC STI Guidelines 2021.',
     },
   ],
   contraindications: [
@@ -8453,6 +8465,67 @@ const SUCCINYLCHOLINE: DrugEntry = {
 // Drug Registry (Alphabetical by name)
 // -------------------------------------------------------------------
 
+const LEVONORGESTREL: DrugEntry = {
+  id: 'levonorgestrel',
+  name: 'Levonorgestrel (Plan B)',
+  genericName: 'Levonorgestrel',
+  drugClass: 'Progestin — emergency contraception',
+  route: 'PO',
+  indications: ['Emergency contraception'],
+  dosing: [
+    {
+      indication: 'Emergency contraception',
+      regimen: '1.5 mg PO \u00D7 1 dose. Most effective within 72 hours of unprotected intercourse; some efficacy up to 120 hours. Available OTC without age restriction. Efficacy may be reduced if BMI > 25 kg/m\u00B2 — consider ulipristal acetate (ella) instead.',
+    },
+  ],
+  contraindications: [
+    'Known pregnancy (will not terminate existing pregnancy)',
+  ],
+  cautions: [
+    'Reduced efficacy with higher body weight (BMI >25)',
+    'Nausea and vomiting common \u2014 if vomiting within 2 hours, repeat dose',
+    'May alter timing of next menstrual period',
+    'Not for routine contraception',
+  ],
+  monitoring: 'Pregnancy test at 2 weeks if no period. Follow-up STI testing per protocol.',
+  notes: 'Progestin-only emergency contraception. Works primarily by delaying ovulation. Does NOT disrupt implantation. Can resume hormonal contraception immediately after taking. Copper IUD is more effective EC option (>99%) if available.',
+  citations: [
+    'Glassman LW, Lara-Torre E. Emergency Contraception. StatPearls. Updated 2024.',
+    'ACOG Committee Opinion No. 777. Sexual Assault. Obstet Gynecol. 2019;133(4):e296-e302.',
+  ],
+};
+
+const ULIPRISTAL: DrugEntry = {
+  id: 'ulipristal',
+  name: 'Ulipristal Acetate (ella)',
+  genericName: 'Ulipristal acetate',
+  drugClass: 'Selective progesterone receptor modulator — emergency contraception',
+  route: 'PO',
+  indications: ['Emergency contraception'],
+  dosing: [
+    {
+      indication: 'Emergency contraception',
+      regimen: '30 mg PO \u00D7 1 dose. Effective up to 120 hours (5 days) after unprotected intercourse with NO decrease in efficacy over time. Preferred over levonorgestrel for sexual assault prophylaxis. Requires prescription.',
+    },
+  ],
+  contraindications: [
+    'Known pregnancy (will not terminate existing pregnancy)',
+    'Do not co-administer with levonorgestrel \u2014 they interfere with each other',
+  ],
+  cautions: [
+    'Hormonal contraception should be held for 5 days after ulipristal (competitive progesterone receptor binding)',
+    'Nausea, headache, abdominal pain common',
+    'If vomiting within 3 hours, repeat dose',
+    'May delay next menstrual period',
+  ],
+  monitoring: 'Pregnancy test at 2 weeks if no period. Follow-up STI testing per protocol.',
+  notes: 'Selective progesterone receptor modulator (SPRM). Delays or inhibits ovulation even after LH surge has begun (advantage over levonorgestrel). No decrease in efficacy over the 5-day window. Effective regardless of BMI. Copper IUD remains most effective EC option (>99%).',
+  citations: [
+    'Glassman LW, Lara-Torre E. Emergency Contraception. StatPearls. Updated 2024.',
+    'ACOG Committee Opinion No. 777. Sexual Assault. Obstet Gynecol. 2019;133(4):e296-e302.',
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   ACAMPROSATE,
   ACETAMINOPHEN,
@@ -8558,6 +8631,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   LABETALOL,
   LACOSAMIDE,
   LEVETIRACETAM,
+  LEVONORGESTREL,
   LEVOTHYROXINE,
   LIDOCAINE,
   LINEZOLID,
@@ -8660,6 +8734,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   TICAGRELOR,
   TRANEXAMIC_ACID,
   UFH,
+  ULIPRISTAL,
   VANCOMYCIN,
   VALPROATE,
   VASOPRESSIN,
@@ -8772,6 +8847,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/labetalol/i, 'labetalol'],
   [/lacosamide|vimpat/i, 'lacosamide'],
   [/levetiracetam|keppra/i, 'levetiracetam'],
+  [/levonorgestrel|plan\s*b/i, 'levonorgestrel'],
   [/levothyroxine|synthroid/i, 'levothyroxine'],
   [/lidocaine/i, 'lidocaine'],
   [/lipid\s*emulsion|intralipid|ILE\b/i, 'lipid-emulsion'],
@@ -8852,6 +8928,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/thiopental|pentothal/i, 'thiopental'],
   [/ticagrelor|brilinta/i, 'ticagrelor'],
   [/tranexamic.*acid|TXA/i, 'tranexamic-acid'],
+  [/ulipristal|ella(?:\s|$)/i, 'ulipristal'],
   [/unfractionated heparin|^UFH$|heparin sodium/i, 'ufh'],
   [/valproate|valproic|depacon|depakote|depakene/i, 'valproate'],
   [/vancomycin|vancocin/i, 'vancomycin'],

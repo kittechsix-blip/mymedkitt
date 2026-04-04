@@ -2,6 +2,7 @@
  * MedKitt Consult Trees Index
  * Export all consult trees for use in the application
  */
+export { DFSA_WORKUP_NODES, DFSA_WORKUP_MODULE_LABELS, DFSA_WORKUP_CITATIONS } from './dfsa-workup';
 export { DIFFICULT_AIRWAY_BOUGIE_NODES, DIFFICULT_AIRWAY_BOUGIE_MODULE_LABELS, DIFFICULT_AIRWAY_BOUGIE_CITATIONS } from './difficult-airway-bougie';
 export { VAD_NODES, VAD_MODULE_LABELS, VAD_CITATIONS } from './vad';
 export { ACUTE_PANCREATITIS_NODES, ACUTE_PANCREATITIS_MODULE_LABELS, ACUTE_PANCREATITIS_CITATIONS } from './acute-pancreatitis';

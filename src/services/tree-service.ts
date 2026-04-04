@@ -655,6 +655,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ct-decision-support.js');
       return { nodes: m.CT_DECISION_SUPPORT_NODES, entryNodeId: 'ct-start', categoryId: 'us-rads', moduleLabels: m.CT_DECISION_SUPPORT_MODULE_LABELS, citations: m.CT_DECISION_SUPPORT_CITATIONS };
     },
+    'dfsa-workup': async () => {
+      const m = await import('../data/trees/dfsa-workup.js');
+      return { nodes: m.DFSA_WORKUP_NODES, entryNodeId: 'dfsa-start', categoryId: 'emergency-medicine', moduleLabels: m.DFSA_WORKUP_MODULE_LABELS, citations: m.DFSA_WORKUP_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

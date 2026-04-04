@@ -9723,6 +9723,248 @@ const CT_CHOOSING_WISELY = {
     ],
 };
 // -------------------------------------------------------------------
+// DFSA Workup Info Pages
+// -------------------------------------------------------------------
+const DFSA_STEPS = {
+    id: 'dfsa-steps',
+    title: 'DFSA Workup',
+    subtitle: 'Steps Summary — Drug-Facilitated Sexual Assault',
+    sections: [
+        {
+            heading: 'Module 1: Initial Assessment',
+            body: '• [Identify DFSA red flags](#/node/dfsa-red-flags) — amnesia, unexplained injuries, incapacitation\n• [Assess medical stability](#/node/dfsa-stabilize) — treat life threats before forensic workup\n• [Determine time since assault](#/node/dfsa-time-since) — drives specimen collection urgency',
+        },
+        {
+            heading: 'Module 2: Consent & Safety',
+            body: '• [Informed consent framework](#/node/dfsa-consent-intro) — each element independent\n• [Consent for exam](#/node/dfsa-consent-exam) — patient may decline any component\n• [Consent for specimens](#/node/dfsa-consent-specimens) — no police report required\n• [Photo consent](#/node/dfsa-consent-photos) — injury documentation',
+        },
+        {
+            heading: 'Module 3: Specimen Collection',
+            body: '• [Collection priority by time window](#/node/dfsa-collection-triage)\n• <6h: GHB still detectable — gray-top tube (NaF) STAT\n• 6-12h: Urine urgently, blood for other agents\n• 12-72h: Urine primary, blood secondary\n• >5 days: Plan hair collection at 4-6 weeks',
+        },
+        {
+            heading: 'Module 4: Drug Panel Selection',
+            body: '• [Hospital UDS is INADEQUATE](#/node/dfsa-panel-select) — must use forensic lab\n• [Lab ordering](#/node/dfsa-lab-note) — baseline clinical labs + forensic specimens',
+        },
+        {
+            heading: 'Module 5: SANE & Forensic Exam',
+            body: '• [SANE availability check](#/node/dfsa-sane-check)\n• [Clothing evidence](#/node/dfsa-clothing) — paper bags, NOT plastic\n• [Documentation](#/node/dfsa-documentation) — objective findings only',
+        },
+        {
+            heading: 'Module 6: Prophylaxis & Disposition',
+            body: '• [STI prophylaxis](#/node/dfsa-sti-prophylaxis) — ceftriaxone + doxycycline + metronidazole\n• [Emergency contraception](#/node/dfsa-pregnancy-prophylaxis) — ulipristal preferred\n• [HIV PEP assessment](#/node/dfsa-hiv-pep) — link to PEP consult\n• [Safe discharge](#/node/dfsa-safe-discharge) — screen for ongoing threat\n• [Follow-up plan](#/node/dfsa-disposition) — STI 2wk/3mo, hair 4-6wk',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Linden JA. Care of the Adult Patient After Sexual Assault. N Engl J Med. 2011;365(9):834-841.' },
+        { num: 2, text: 'ACEP. Evaluation and Management of the Sexually Assaulted or Sexually Abused Patient. 2nd ed. 2013.' },
+    ],
+};
+const DFSA_DETECTION_WINDOWS = {
+    id: 'dfsa-detection-windows',
+    title: 'Drug Detection Windows',
+    subtitle: 'DFSA Agent Detection by Specimen Type',
+    sections: [
+        {
+            body: 'Detection windows are approximate and depend on dose, individual metabolism, and analytical sensitivity. Times listed are for forensic-grade LC-MS/MS or GC-MS analysis.\n\n**CRITICAL:** Hospital immunoassay (UDS) will MISS most of these at relevant concentrations.',
+        },
+        {
+            heading: 'GHB (Gamma-Hydroxybutyrate)',
+            body: '**Blood:** 4-6 hours\n**Urine:** 3-12 hours\n**Hair:** 4-6 weeks post-exposure\n\nMost time-critical agent. Endogenous GHB exists at low levels — forensic labs use cutoffs of >10 mcg/mL (blood) and >10 mcg/mL (urine) to distinguish exogenous dosing.\n\n**Gray-top tube (NaF preservative) is MANDATORY** — NaF inhibits in vitro GHB production that occurs in standard blood tubes.',
+        },
+        {
+            heading: 'Flunitrazepam (Rohypnol)',
+            body: '**Blood:** 24-72 hours\n**Urine:** Up to 72 hours (as 7-aminoflunitrazepam metabolite)\n**Hair:** 4-6 weeks post-exposure\n\nParent drug has short half-life. Forensic labs target the 7-aminoflunitrazepam metabolite, which standard immunoassay does NOT detect.',
+        },
+        {
+            heading: 'Ketamine',
+            body: '**Blood:** 24-48 hours\n**Urine:** 72-96 hours (as norketamine metabolite)\n**Hair:** 4-6 weeks post-exposure\n\nLow facilitative doses may fall below standard immunoassay cutoffs. LC-MS/MS targets both ketamine and norketamine.',
+        },
+        {
+            heading: 'Zolpidem / Zaleplon / Zopiclone (Z-drugs)',
+            body: '**Blood:** 4-8 hours (zolpidem), 2-4 hours (zaleplon)\n**Urine:** Up to 24 hours\n**Hair:** 4-6 weeks post-exposure\n\nNOT detected by standard benzodiazepine immunoassay — structurally different. Requires specific LC-MS/MS targeting.',
+        },
+        {
+            heading: 'Benzodiazepines (general)',
+            body: '**Blood:** 6-12 hours (short-acting) to 24-48 hours (long-acting)\n**Urine:** 24-72 hours (short-acting) to 1-2 weeks (long-acting)\n**Hair:** 4-6 weeks post-exposure\n\nStandard immunoassay detects some but has poor sensitivity for clonazepam, lorazepam, and midazolam. Forensic labs use targeted LC-MS/MS.',
+        },
+        {
+            heading: 'Antihistamines (Diphenhydramine, Doxylamine)',
+            body: '**Blood:** Up to 24 hours\n**Urine:** 48-72 hours\n**Hair:** 4-6 weeks post-exposure\n\nEmerging DFSA agents. NOT included in standard UDS panels. Easy to administer covertly (OTC, tasteless in food/drink).',
+        },
+        {
+            heading: 'Alcohol (Ethanol)',
+            body: '**Blood:** 10-12 hours\n**Urine:** 12 hours (parent) / **EtG up to 80 hours** / EtS up to 48 hours\n**Hair:** Not standard for alcohol\n\nEthyl glucuronide (EtG) and ethyl sulfate (EtS) are alcohol metabolites that persist much longer than ethanol. EtG in urine can confirm alcohol consumption up to 80 hours post-ingestion.',
+        },
+        {
+            heading: 'Opioids',
+            body: '**Blood:** 24-48 hours (most agents)\n**Urine:** 48-96 hours\n**Hair:** 4-6 weeks post-exposure\n\nFentanyl and synthetic opioids may not be detected by standard immunoassay. Forensic labs use expanded panels with norfentanyl and other metabolites.',
+        },
+        {
+            heading: 'Scopolamine',
+            body: '**Blood:** Limited data, likely <24 hours\n**Urine:** 24-72 hours\n**Hair:** Limited data\n\nEmerging DFSA agent. Can cause amnesia, sedation, and confusion at supratherapeutic doses. NOT included in standard panels.',
+        },
+        {
+            heading: 'Cannabis (THC)',
+            body: '**Blood:** Up to 72 hours (single use) to 1 month (chronic)\n**Urine:** 3-30+ days depending on use pattern\n**Hair:** 4-6 weeks post-exposure\n\nLongest standard detection window in urine. Presence alone does not confirm facilitation — must correlate with clinical presentation.',
+        },
+        {
+            heading: 'Muscle Relaxants (Carisoprodol, Cyclobenzaprine)',
+            body: '**Blood:** 24-48 hours\n**Urine:** 48-96 hours\n**Hair:** 4-6 weeks post-exposure\n\nNot commonly considered DFSA agents but included in SOFT-recommended panels. Carisoprodol (Soma) has abuse potential and sedative effects.',
+        },
+        {
+            heading: 'Hair Collection (All Agents)',
+            body: '**Window:** 4-6 weeks after exposure (allows incorporation into hair shaft)\n**Collection:** Pencil-thickness bundle from posterior vertex, cut at scalp\n**Wrap** in aluminum foil, label proximal (scalp) end\n**Detects:** GHB, flunitrazepam, ketamine, zolpidem, benzodiazepines, opioids, cannabinoids, antihistamines, and most DFSA agents\n\nHair analysis is the only option for presentations >5 days post-assault.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'LeBeau MA, et al. Recommendations for Toxicological Investigations of Drug-Facilitated Sexual Assaults. J Forensic Sci. 2011;56(5):1175-1179.' },
+        { num: 2, text: 'Hurley M, Parker H, Wells DL. The Epidemiology of Drug Facilitated Sexual Assault. J Clin Forensic Med. 2006;13(4):181-185.' },
+        { num: 3, text: 'Juhascik MP, et al. An Estimate of the Proportion of Drug-Facilitation of Sexual Assault in Four U.S. Localities. J Forensic Sci. 2007;52(6):1396-1400.' },
+    ],
+};
+const DFSA_SOFT_PANEL = {
+    id: 'dfsa-soft-panel',
+    title: 'SOFT/ANSI Recommended Panel',
+    subtitle: 'Forensic Drug Panel for DFSA — Standard 121',
+    sections: [
+        {
+            body: 'The Society of Forensic Toxicologists (SOFT) and ANSI ASB Standard 121 recommend the following minimum panel for suspected DFSA cases. **Hospital immunoassay is NOT adequate** — it lacks the sensitivity, specificity, and chain-of-custody requirements for forensic use.',
+        },
+        {
+            heading: 'Target Analytes',
+            body: '**Sedative-Hypnotics:**\n• GHB (gamma-hydroxybutyrate) + GBL\n• Benzodiazepines (full panel including clonazepam, lorazepam, midazolam, flunitrazepam)\n• Zolpidem, zaleplon, zopiclone\n• Barbiturates\n\n**Dissociatives:**\n• Ketamine + norketamine\n• PCP + metabolites\n\n**Opioids:**\n• Natural: morphine, codeine\n• Semi-synthetic: oxycodone, hydrocodone, hydromorphone\n• Synthetic: fentanyl + norfentanyl, tramadol, methadone\n\n**Stimulants:**\n• Amphetamines, methamphetamine, MDMA\n• Cocaine + benzoylecgonine\n\n**Antihistamines:**\n• Diphenhydramine, doxylamine, hydroxyzine, chlorpheniramine\n\n**Muscle Relaxants:**\n• Carisoprodol + meprobamate\n• Cyclobenzaprine\n\n**Other:**\n• Scopolamine\n• Cannabinoids (THC + metabolites)\n• Alcohol + EtG/EtS (ethyl glucuronide/sulfate)',
+        },
+        {
+            heading: 'Key Metabolites',
+            body: 'Forensic labs specifically target these metabolites that hospital UDS misses:\n\n• **7-aminoflunitrazepam** — primary Rohypnol metabolite\n• **Norketamine** — persists longer than parent ketamine\n• **Norfentanyl** — confirms fentanyl exposure\n• **EtG/EtS** — alcohol metabolites detectable 48-80h post-ingestion\n• **Benzoylecgonine** — cocaine metabolite\n• **Meprobamate** — carisoprodol metabolite',
+        },
+        {
+            heading: 'Why Hospital UDS Fails',
+            body: '• **Immunoassay cutoffs too high** — designed for clinical use (detecting overdose), not forensic use (detecting facilitative doses)\n• **Missing analytes** — GHB, Z-drugs, and many benzodiazepines not included\n• **No confirmation testing** — GC-MS/LC-MS/MS required for forensic admissibility\n• **No chain of custody** — standard clinical specimens lack forensic documentation\n• **Cross-reactivity** — false positives from common medications\n\n**Bottom line:** A negative hospital UDS does NOT rule out drug facilitation.',
+        },
+        {
+            heading: 'Forensic Reference Laboratories',
+            body: '• **NMS Labs** (Willow Grove, PA) — nmslab.com\n• **Axiom Testing** (San Diego, CA)\n• **Redwood Toxicology Laboratory** (Santa Rosa, CA)\n• **Your state/regional crime lab**\n\nContact for specimen requirements, shipping instructions, and turnaround times. Most accept gray-top blood + first-void urine with chain of custody documentation.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'SOFT/ANSI ASB Standard 121. Forensic Toxicology Laboratory Guidelines. 2022.' },
+        { num: 2, text: 'LeBeau MA, et al. Recommendations for Toxicological Investigations of Drug-Facilitated Sexual Assaults. J Forensic Sci. 2011;56(5):1175-1179.' },
+    ],
+};
+const DFSA_SPECIMEN_GUIDE = {
+    id: 'dfsa-specimen-guide',
+    title: 'Forensic Specimen Collection',
+    subtitle: 'Tube Types, Volumes, and Chain of Custody',
+    sections: [
+        {
+            heading: 'Blood Specimens',
+            body: '**Gray-top tube (NaF/KOx) — MANDATORY for GHB:**\n• Sodium fluoride inhibits in vitro GHB production\n• Without NaF, GHB is generated post-collection, causing false positives\n• Collect at least 5 mL\n\n**Lavender-top tube (EDTA) — standard forensic tox:**\n• 10 mL minimum\n• For benzodiazepines, ketamine, opioids, Z-drugs, antihistamines\n\n**Red-top tube (no additive) — clinical baseline:**\n• HIV, Hepatitis B/C, RPR, CMP\n• Separate from forensic chain of custody',
+        },
+        {
+            heading: 'Urine Specimen',
+            body: '**First-void urine is critical:**\n• Do NOT have patient void and discard before collection\n• Minimum 50-100 mL in clean, additive-free container\n• Do NOT use standard UA cups with preservatives\n• Label immediately with tamper-evident seal\n\nUrine has longer detection windows than blood for most DFSA agents and is the primary specimen for presentations >6 hours post-assault.',
+        },
+        {
+            heading: 'Hair Specimen (for delayed presentations)',
+            body: '**Collect at 4-6 weeks post-assault** (allows drug incorporation into shaft)\n\n• **Pencil-thickness bundle** (~100 strands)\n• From **posterior vertex** (back of crown) — most consistent growth rate\n• **Cut at scalp** — do NOT pluck (damages root)\n• Wrap in aluminum foil\n• **Mark proximal (scalp) end** — orientation is critical for timeline\n• Store at room temperature in paper envelope\n\nHair growth rate: ~1 cm/month. The proximal 1-3 cm segment corresponds to the assault timeframe.',
+        },
+        {
+            heading: 'Chain of Custody Protocol',
+            body: '**Every specimen requires:**\n1. Label: patient name, DOB, date/time of collection, collector name/signature\n2. Tamper-evident seal across container lid\n3. Chain of custody form initiated at collection\n4. Every transfer documented: who, when, where, signature\n5. Specimens refrigerated (2-8\u00B0C), NOT frozen\n6. Stored in locked, access-controlled location\n7. Transport to forensic lab as soon as possible\n\n**Break in chain = evidence may be inadmissible.** Document meticulously.',
+        },
+        {
+            heading: 'Clothing & Physical Evidence',
+            body: '• Each clothing item in a **separate PAPER bag**\n• **NEVER plastic** — promotes bacterial growth, degrades DNA\n• Place paper sheet under patient during undressing to catch trace evidence\n• Seal each bag with tamper-evident tape\n• Label: item description, patient name, date/time, collector\n• Store in evidence locker or secure location\n\n**Fingernail scrapings:** Wooden stick under each nail, separate envelopes for each hand. Indicated if patient reports scratching assailant.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'US DOJ OVW. A National Protocol for Sexual Assault Medical Forensic Examinations. 2nd ed. 2013.' },
+        { num: 2, text: 'LeBeau MA, et al. Recommendations for Toxicological Investigations of Drug-Facilitated Sexual Assaults. J Forensic Sci. 2011;56(5):1175-1179.' },
+    ],
+};
+const DFSA_STI_REGIMENS = {
+    id: 'dfsa-sti-regimens',
+    title: 'STI Prophylaxis Regimens',
+    subtitle: 'Post-Sexual Assault — CDC Guidelines 2021',
+    sections: [
+        {
+            heading: 'Standard Regimen',
+            body: '**Gonorrhea:**\n• Ceftriaxone 500 mg IM \u00D7 1 dose\n\n**Chlamydia:**\n• Doxycycline 100 mg PO BID \u00D7 7 days\n\n**Trichomoniasis:**\n• Metronidazole 2 g PO \u00D7 1 dose\n\nAll three can be given simultaneously in the ED.',
+        },
+        {
+            heading: 'Cephalosporin Allergy',
+            body: '**Gonorrhea alternative:**\n• Gentamicin 240 mg IM \u00D7 1 dose + Azithromycin 2 g PO \u00D7 1 dose\n\n**Chlamydia and trichomoniasis:** Same as standard (doxycycline + metronidazole)\n\nIf IgE-mediated cephalosporin allergy, azithromycin + gentamicin avoids all beta-lactams.',
+        },
+        {
+            heading: 'Pregnancy Modifications',
+            body: '**Chlamydia in pregnancy:**\n• Azithromycin 1 g PO \u00D7 1 dose (replaces doxycycline — contraindicated in pregnancy)\n\n**Gonorrhea:** Ceftriaxone 500 mg IM \u00D7 1 (same — safe in pregnancy)\n\n**Trichomoniasis:** Metronidazole 2 g PO \u00D7 1 (CDC category B — safe in pregnancy)',
+        },
+        {
+            heading: 'Follow-Up Testing',
+            body: '• **2 weeks:** NAAT for GC/CT (nucleic acid amplification test)\n• **3 months:** Full STI panel — GC, CT, syphilis (RPR), HIV (4th gen), Hep B/C\n• **Test of cure** not routinely needed unless symptoms persist or pregnancy\n• **Pelvic exam** if symptoms develop (discharge, pain, bleeding)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Workowski KA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.' },
+    ],
+};
+const DFSA_VAWA = {
+    id: 'dfsa-vawa',
+    title: 'VAWA Protections',
+    subtitle: 'Violence Against Women Act — Patient Rights',
+    sections: [
+        {
+            heading: 'Key Provisions (VAWA 2005/2013)',
+            body: '• **No police report required** — patients can receive a forensic exam and have specimens collected without filing a police report\n• **No insurance billing** — forensic examination costs cannot be billed to the patient\'s insurance\n• **Specimens can be held** — evidence can be stored by the hospital or crime lab while the patient decides whether to involve law enforcement\n• **Cannot condition exam on cooperation** — facilities cannot deny a forensic exam based on willingness to cooperate with law enforcement\n• **Patient may decline any component** — each element of the exam and evidence collection is independently consentable',
+        },
+        {
+            heading: 'State-Specific Variations',
+            body: '• Some states have mandatory reporting requirements for sexual assault (especially for minors, dependent adults, and certain weapon injuries)\n• Evidence retention periods vary by state (typically 20-50 years for untested kits)\n• Victim compensation programs vary — most cover forensic exam costs regardless of LE cooperation\n• Check your state\'s specific VAWA implementation and mandatory reporting statutes\n\n**When in doubt:** Contact your hospital\'s social work department or patient advocate for guidance on local requirements.',
+        },
+        {
+            heading: 'Documentation Implications',
+            body: '• Document that VAWA rights were explained to the patient\n• Document each consent/declination separately\n• Do NOT include language implying the patient must cooperate with LE\n• Do NOT delay forensic exam pending LE arrival unless patient requests it\n• The medical record may be subpoenaed — document objectively',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Violence Against Women Reauthorization Act of 2013, 42 USC \u00A73796gg-4.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 777. Sexual Assault. Obstet Gynecol. 2019;133(4):e296-e302.' },
+    ],
+};
+const DFSA_PATIENT_HANDOUT = {
+    id: 'dfsa-patient-handout',
+    title: 'After Your Exam',
+    subtitle: 'What to Expect and Follow-Up Resources',
+    shareable: true,
+    sections: [
+        {
+            heading: 'What Happened Today',
+            body: 'You received a medical evaluation in the emergency department. Depending on what you consented to, the following may have been done:\n\n• Medical examination and treatment of injuries\n• Collection of specimens for evidence\n• Medications to prevent sexually transmitted infections\n• Emergency contraception (if applicable)\n• Medications to prevent HIV (if applicable)\n• Referral to a victim advocate',
+        },
+        {
+            heading: 'What to Expect',
+            body: '**Physically:**\n• Soreness or bruising may develop over the next few days\n• Medications may cause nausea (especially metronidazole) — take with food\n• If you received emergency contraception, your next period may be early or late\n\n**Emotionally:**\n• A wide range of reactions is normal — fear, anger, numbness, confusion, sadness, guilt\n• Reactions may come and go unpredictably\n• Sleep disturbances and flashbacks are common\n• There is no "right" way to feel — whatever you are experiencing is valid',
+        },
+        {
+            heading: 'Follow-Up Appointments',
+            body: '**2 weeks:** STI testing and pregnancy test with your doctor or clinic\n**4-6 weeks:** Hair specimen collection (if applicable) and HIV test (if PEP started)\n**3 months:** Repeat full STI panel (gonorrhea, chlamydia, syphilis, HIV, Hepatitis)\n**6 months:** Final HIV test and Hepatitis B vaccine dose 3 (if started)\n\n**Complete all prescribed medications** — finish the full course of doxycycline (7 days) and/or HIV PEP medications (28 days) if prescribed.',
+        },
+        {
+            heading: 'Your Rights',
+            body: '• You can file a police report at any time — there is no deadline for reporting\n• Your evidence specimens are being held safely\n• You do NOT need to file a police report to have your evidence stored\n• You can access victim compensation regardless of whether you file a report\n• You have the right to change your mind about any aspect of your care at any time',
+        },
+        {
+            heading: 'Resources — Available 24/7',
+            body: '**RAINN National Sexual Assault Hotline:**\n1-800-656-4673 (free, confidential)\nOnline chat: rainn.org/get-help\n\n**National Domestic Violence Hotline:**\n1-800-799-7233\n\n**Crisis Text Line:**\nText HOME to 741741\n\n**Local victim advocacy:** Ask your emergency department or call RAINN for a referral to services in your area.\n\nYou are not alone. Help is available whenever you are ready.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'RAINN. What to Expect at the Hospital. https://www.rainn.org/articles/rape-kit. 2024.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {

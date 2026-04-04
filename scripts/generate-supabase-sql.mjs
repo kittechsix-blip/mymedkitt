@@ -152,6 +152,7 @@ const TREE_REGISTRY = {
   'vad':                  { prefix: 'VAD',                  entryNodeId: 'vad-start',        categoryId: 'cardiology' },
   'torsades-de-pointes':  { prefix: 'TORSADES_DE_POINTES',  entryNodeId: 'tdp-start',        categoryId: 'cardiology' },
   'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
+  'dfsa-workup':          { prefix: 'DFSA_WORKUP',          entryNodeId: 'dfsa-start',       categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
