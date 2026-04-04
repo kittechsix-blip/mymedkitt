@@ -775,6 +775,24 @@ const TOOLBAR_CONFIGS = {
         { id: 'prophylaxis', label: 'Prophy', icon: '\uD83D\uDC8A', action: 'jump', target: 'dfsa-prophylaxis-intro' },
         { id: 'sane', label: 'SANE', icon: '\uD83D\uDCCB', action: 'jump', target: 'dfsa-sane-check' },
     ],
+    'eating-disorders': [
+        { id: 'marsipan', label: 'MARSIPAN', icon: '📊', action: 'calculator', target: 'marsipan-risk' },
+        { id: 'qtc', label: 'QTc', icon: '🧮', action: 'calculator', target: 'qtc-calculator' },
+        { id: 'refeeding', label: 'Refeeding', icon: '🍽️', action: 'jump', target: 'ed-refeeding-protocol' },
+        { id: 'lytes', label: 'Lytes', icon: '💧', action: 'jump', target: 'ed-electrolyte-replacement' },
+    ],
+    'peds-trauma': [
+        { id: 'weight', label: 'Weight', icon: '⚖️', action: 'calculator', target: 'broselow-weight' },
+        { id: 'pecarn', label: 'PECARN', icon: '🧠', action: 'calculator', target: 'pecarn-head-ct' },
+        { id: 'gcs', label: 'GCS', icon: '📋', action: 'calculator', target: 'peds-gcs' },
+        { id: 'nat', label: 'NAT', icon: '🚩', action: 'jump', target: 'peds-trauma-nat' },
+    ],
+    'urinary-sphincter': [
+        { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'overlay', target: 'cauda-equina-red-flags' },
+        { id: 'pvr', label: 'PVR', icon: '📊', action: 'jump', target: 'sphincter-pvr' },
+        { id: 'cath', label: 'Catheter', icon: '🔧', action: 'jump', target: 'sphincter-cath-technique' },
+        { id: 'neuro', label: 'Neuro Exam', icon: '🔍', action: 'jump', target: 'sphincter-neuro-exam' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
