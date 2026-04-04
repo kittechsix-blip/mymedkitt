@@ -171,6 +171,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'hfnc-start',
       },
       {
+        id: 'oxygen-delivery',
+        title: 'Oxygen Delivery Systems',
+        subtitle: 'Assessment → Device Selection → Settings → Titration → Monitoring → Escalation',
+        categoryId: 'critical-care',
+        version: '1.0',
+        nodeCount: 28,
+        entryNodeId: 'o2-start',
+      },
+      {
         id: 'hd-emergencies',
         title: 'Hemodialysis Emergencies',
         subtitle: 'AEIOU Triage → Electrolytes → Access → Infection/Overload → Uremia',

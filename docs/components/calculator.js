@@ -13730,6 +13730,203 @@ const HFNC_ESCALATION_CALCULATOR = {
     ],
 };
 // -------------------------------------------------------------------
+// Oxygen Delivery Settings Calculator (with interactive sliders)
+// -------------------------------------------------------------------
+const OXYGEN_SETTINGS_CALCULATOR = {
+    id: 'oxygen-settings',
+    title: 'Oxygen Device Settings',
+    subtitle: 'Flow, FiO2 & Pressure Configuration',
+    description: 'Configure settings for any oxygen delivery device. Select device type, then adjust settings with sliders.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Titrate to target SpO2: 92-96% (general), 88-92% (COPD). Higher flow = more dead space washout.',
+    citations: [
+        'Kallstrom TJ. AARC Clinical Practice Guideline: Oxygen Therapy for Adults. Respir Care. 2002;47(6):717-720.',
+        'Rochwerg B, et al. Official ERS/ATS Guidelines: NIV for Acute Respiratory Failure. Eur Respir J. 2017.',
+    ],
+    customRender: (container, onUpdate) => {
+        // Device configurations
+        const devices = {
+            nc: {
+                name: 'Nasal Cannula',
+                controls: [
+                    { id: 'flow', label: 'Flow Rate', unit: 'L/min', min: 1, max: 6, step: 1, default: 2 },
+                ],
+                fio2Formula: (v) => `~${24 + (v.flow - 1) * 4}%`,
+                notes: 'Each 1 L/min ≈ +4% FiO2 (estimate). Max 6 L/min for comfort.',
+            },
+            mask: {
+                name: 'Simple Mask',
+                controls: [
+                    { id: 'flow', label: 'Flow Rate', unit: 'L/min', min: 5, max: 10, step: 1, default: 6 },
+                ],
+                fio2Formula: (v) => `~${35 + (v.flow - 5) * 4}%`,
+                notes: 'Minimum 5 L/min to prevent CO2 rebreathing. FiO2 35-55%.',
+            },
+            nrb: {
+                name: 'Non-Rebreather',
+                controls: [
+                    { id: 'flow', label: 'Flow Rate', unit: 'L/min', min: 10, max: 15, step: 1, default: 15 },
+                ],
+                fio2Formula: () => '60-90%',
+                notes: 'Keep reservoir bag ≥1/3 full. Always use 10-15 L/min.',
+            },
+            venturi: {
+                name: 'Venturi Mask',
+                controls: [
+                    { id: 'fio2', label: 'FiO2', unit: '%', min: 24, max: 60, step: 4, default: 28 },
+                ],
+                notes: 'Color-coded adapters: Blue=24%, Yellow=28%, White=31%, Green=35%, Pink=40%, Orange=50-60%.',
+            },
+            hfnc: {
+                name: 'High-Flow Nasal Cannula',
+                controls: [
+                    { id: 'flow', label: 'Flow Rate', unit: 'L/min', min: 20, max: 70, step: 5, default: 50 },
+                    { id: 'fio2', label: 'FiO2', unit: '%', min: 21, max: 100, step: 5, default: 60 },
+                ],
+                notes: 'PEEP ~1 cmH2O per 10 L/min (mouth closed). Start 50 L/min, wean FiO2 first.',
+            },
+            cpap: {
+                name: 'CPAP',
+                controls: [
+                    { id: 'pressure', label: 'Pressure', unit: 'cmH2O', min: 5, max: 20, step: 1, default: 8 },
+                    { id: 'fio2', label: 'FiO2', unit: '%', min: 21, max: 100, step: 5, default: 100 },
+                ],
+                notes: 'Start 5-8 cmH2O, titrate up. Best for CHF, OSA, atelectasis.',
+            },
+            bipap: {
+                name: 'BiPAP',
+                controls: [
+                    { id: 'ipap', label: 'IPAP', unit: 'cmH2O', min: 8, max: 30, step: 2, default: 12 },
+                    { id: 'epap', label: 'EPAP', unit: 'cmH2O', min: 4, max: 15, step: 1, default: 5 },
+                    { id: 'fio2', label: 'FiO2', unit: '%', min: 21, max: 100, step: 5, default: 100 },
+                    { id: 'rate', label: 'Backup Rate', unit: '/min', min: 0, max: 20, step: 2, default: 10 },
+                ],
+                notes: 'PS = IPAP - EPAP. ↑IPAP for ventilation (CO2). ↑EPAP for oxygenation. Best for COPD, hypercapnic failure.',
+            },
+        };
+        let selectedDevice = 'hfnc';
+        let currentValues = {};
+        // Styles
+        const sliderStyles = `
+      .o2-device-selector { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+      .o2-device-btn { flex: 1 1 calc(33% - 8px); min-width: 90px; padding: 10px 8px; border: 2px solid var(--color-border); border-radius: 8px; background: var(--color-surface); color: var(--color-text); font-size: 13px; font-weight: 500; cursor: pointer; text-align: center; transition: all 0.2s; }
+      .o2-device-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: #fff; }
+      .o2-slider-group { margin-bottom: 16px; }
+      .o2-slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+      .o2-slider-label { font-weight: 600; color: var(--color-text); font-size: 14px; }
+      .o2-slider-value { font-size: 18px; font-weight: 700; color: var(--color-primary); min-width: 70px; text-align: right; }
+      .o2-slider { -webkit-appearance: none; width: 100%; height: 8px; border-radius: 4px; background: var(--color-border); outline: none; }
+      .o2-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--color-primary); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+      .o2-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--color-primary); cursor: pointer; border: 3px solid #fff; }
+      .o2-output-card { background: var(--color-surface-elevated); border-radius: 12px; padding: 16px; margin-top: 16px; border: 1px solid var(--color-border); }
+      .o2-output-title { font-size: 16px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+      .o2-output-settings { font-size: 14px; color: var(--color-text); line-height: 1.6; }
+      .o2-output-fio2 { font-size: 15px; font-weight: 600; color: var(--color-primary); margin: 8px 0; }
+      .o2-output-notes { font-size: 13px; color: var(--color-text-muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--color-border); }
+    `;
+        // Inject styles
+        const styleEl = document.createElement('style');
+        styleEl.textContent = sliderStyles;
+        container.appendChild(styleEl);
+        // Device selector
+        const selectorDiv = document.createElement('div');
+        selectorDiv.className = 'o2-device-selector';
+        Object.entries(devices).forEach(([key, dev]) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'o2-device-btn' + (key === selectedDevice ? ' active' : '');
+            btn.textContent = dev.name;
+            btn.onclick = () => {
+                selectedDevice = key;
+                selectorDiv.querySelectorAll('.o2-device-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                buildSliders();
+                updateOutput();
+            };
+            selectorDiv.appendChild(btn);
+        });
+        container.appendChild(selectorDiv);
+        // Sliders container
+        const slidersDiv = document.createElement('div');
+        slidersDiv.id = 'o2-sliders';
+        container.appendChild(slidersDiv);
+        // Output card
+        const outputDiv = document.createElement('div');
+        outputDiv.className = 'o2-output-card';
+        container.appendChild(outputDiv);
+        function buildSliders() {
+            slidersDiv.innerHTML = '';
+            currentValues = {};
+            const dev = devices[selectedDevice];
+            dev.controls.forEach(ctrl => {
+                currentValues[ctrl.id] = ctrl.default;
+                const group = document.createElement('div');
+                group.className = 'o2-slider-group';
+                const header = document.createElement('div');
+                header.className = 'o2-slider-header';
+                const label = document.createElement('span');
+                label.className = 'o2-slider-label';
+                label.textContent = ctrl.label;
+                const valueSpan = document.createElement('span');
+                valueSpan.className = 'o2-slider-value';
+                valueSpan.id = `o2-val-${ctrl.id}`;
+                valueSpan.textContent = `${ctrl.default} ${ctrl.unit}`;
+                header.appendChild(label);
+                header.appendChild(valueSpan);
+                group.appendChild(header);
+                const slider = document.createElement('input');
+                slider.type = 'range';
+                slider.className = 'o2-slider';
+                slider.min = String(ctrl.min);
+                slider.max = String(ctrl.max);
+                slider.step = String(ctrl.step);
+                slider.value = String(ctrl.default);
+                slider.oninput = () => {
+                    const val = parseFloat(slider.value);
+                    currentValues[ctrl.id] = val;
+                    valueSpan.textContent = `${val} ${ctrl.unit}`;
+                    updateOutput();
+                };
+                group.appendChild(slider);
+                slidersDiv.appendChild(group);
+            });
+        }
+        function updateOutput() {
+            const dev = devices[selectedDevice];
+            let settingsStr = dev.controls.map(c => `**${c.label}:** ${currentValues[c.id]} ${c.unit}`).join(' · ');
+            let fio2Str = '';
+            if (dev.fio2Formula) {
+                fio2Str = `<div class="o2-output-fio2">Estimated FiO2: ${dev.fio2Formula(currentValues)}</div>`;
+            }
+            // BiPAP pressure support calculation
+            let psStr = '';
+            if (selectedDevice === 'bipap') {
+                const ps = currentValues.ipap - currentValues.epap;
+                psStr = `<div class="o2-output-fio2">Pressure Support: ${ps} cmH2O</div>`;
+            }
+            outputDiv.innerHTML = `
+        <div class="o2-output-title">${dev.name} Settings</div>
+        <div class="o2-output-settings">${settingsStr}</div>
+        ${fio2Str}
+        ${psStr}
+        <div class="o2-output-notes">${dev.notes}</div>
+      `;
+            // Trigger update for calculator result (not used for scoring, just for tracking)
+            onUpdate({ device: Object.keys(devices).indexOf(selectedDevice), ...currentValues });
+        }
+        // Initialize
+        buildSliders();
+        updateOutput();
+    },
+    computeResult: () => ({
+        value: '—',
+        label: 'Settings Configured',
+        description: 'Use the sliders above to configure your device settings.',
+        colorVar: '--color-primary',
+    }),
+};
+// -------------------------------------------------------------------
 // Heat Stroke Calculators
 // -------------------------------------------------------------------
 const HEAT_INDEX_CALCULATOR = {
@@ -17154,10 +17351,11 @@ const CALCULATORS = {
     'iscvt-rs': ISCVT_RS_CALCULATOR,
     // Rhabdomyolysis
     'mcmahon-rhabdo': MCMAHON_RHABDO_CALCULATOR,
-    // HFNC
+    // HFNC & Oxygen Delivery
     'rox-index': ROX_INDEX_CALCULATOR,
     'hfnc-settings': HFNC_SETTINGS_CALCULATOR,
     'hfnc-escalation': HFNC_ESCALATION_CALCULATOR,
+    'oxygen-settings': OXYGEN_SETTINGS_CALCULATOR,
     // Heat Stroke
     'heat-index': HEAT_INDEX_CALCULATOR,
     'cooling-rate': COOLING_RATE_CALCULATOR,

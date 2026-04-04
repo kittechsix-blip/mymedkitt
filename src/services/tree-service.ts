@@ -527,6 +527,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hfnc.js');
       return { nodes: m.HFNC_NODES, entryNodeId: 'hfnc-start', categoryId: 'critical-care', moduleLabels: m.HFNC_MODULE_LABELS, citations: m.HFNC_CITATIONS };
     },
+    'oxygen-delivery': async () => {
+      const m = await import('../data/trees/oxygen-delivery.js');
+      return { nodes: m.OXYGEN_DELIVERY_NODES, entryNodeId: 'o2-start', categoryId: 'critical-care', moduleLabels: m.OXYGEN_DELIVERY_MODULE_LABELS, citations: m.OXYGEN_DELIVERY_CITATIONS };
+    },
     'peds-stec-hus': async () => {
       const m = await import('../data/trees/peds-stec-hus.js');
       return { nodes: m.PEDS_STEC_HUS_NODES, entryNodeId: 'stec-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_STEC_HUS_MODULE_LABELS, citations: m.PEDS_STEC_HUS_CITATIONS };
