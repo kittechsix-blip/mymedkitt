@@ -18553,6 +18553,542 @@ const ALVARADO_SCORE_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Pediatric Trauma Calculators
+// -------------------------------------------------------------------
+
+const BROSELOW_WEIGHT_CALCULATOR: CalculatorDefinition = {
+  id: 'broselow-weight',
+  title: 'Broselow Weight Estimation',
+  subtitle: 'Pediatric Weight & Equipment Sizing',
+  description: 'Estimate pediatric weight from length. Includes ETT size, defibrillation energy, and fluid bolus calculations.',
+  fields: [
+    { name: 'length', label: 'Length (cm)', type: 'number', points: 0, valueIsPoints: true, unit: 'cm', description: 'Measure crown-to-heel length' },
+  ],
+  results: [],
+  thresholdNote: 'Broselow tape zones. Formula backup: Weight (kg) = (Age + 4) × 2 for ages 1-10.',
+  citations: ['Broselow J, Luten R. The Broselow Tape. Pediatr Emerg Care. 2008.'],
+  computeResult: (values) => {
+    const length = values['length'] || 0;
+    if (length < 46) return { value: '—', label: 'Too Small', description: 'Length below Broselow range. Use actual weight.', colorVar: '--color-warning' };
+
+    let zone = '', weight = 0, ettSize = '', ettDepth = '', defib = 0, fluidBolus = 0;
+    if (length >= 46 && length < 60) { zone = 'Gray'; weight = 3; ettSize = '3.0 uncuffed'; ettDepth = '9 cm'; defib = 6; }
+    else if (length >= 60 && length < 70) { zone = 'Pink'; weight = 6; ettSize = '3.5 uncuffed'; ettDepth = '10 cm'; defib = 12; }
+    else if (length >= 70 && length < 80) { zone = 'Red'; weight = 8; ettSize = '4.0 cuffed'; ettDepth = '11 cm'; defib = 16; }
+    else if (length >= 80 && length < 90) { zone = 'Purple'; weight = 10; ettSize = '4.5 cuffed'; ettDepth = '12 cm'; defib = 20; }
+    else if (length >= 90 && length < 100) { zone = 'Yellow'; weight = 12; ettSize = '4.5 cuffed'; ettDepth = '13 cm'; defib = 24; }
+    else if (length >= 100 && length < 110) { zone = 'White'; weight = 14; ettSize = '5.0 cuffed'; ettDepth = '14 cm'; defib = 28; }
+    else if (length >= 110 && length < 120) { zone = 'Blue'; weight = 18; ettSize = '5.5 cuffed'; ettDepth = '15 cm'; defib = 36; }
+    else if (length >= 120 && length < 130) { zone = 'Orange'; weight = 22; ettSize = '5.5 cuffed'; ettDepth = '16 cm'; defib = 44; }
+    else if (length >= 130 && length < 140) { zone = 'Green'; weight = 28; ettSize = '6.0 cuffed'; ettDepth = '17 cm'; defib = 56; }
+    else { zone = 'Adult'; weight = 36; ettSize = '6.5-7.0 cuffed'; ettDepth = '18-21 cm'; defib = 72; }
+
+    fluidBolus = weight * 20;
+    return {
+      value: `${weight} kg`,
+      label: `${zone} Zone`,
+      description: `**Estimated Weight:** ${weight} kg\n\n**Airway:**\n• ETT Size: ${ettSize}\n• ETT Depth: ${ettDepth} (lip)\n• LMA: ${weight < 10 ? '1.5' : weight < 20 ? '2.0' : '2.5'}\n\n**Resuscitation:**\n• Defib: ${defib} J (2 J/kg)\n• Fluid Bolus: ${fluidBolus} mL (20 mL/kg)\n• Blood: ${weight * 10} mL (10 mL/kg)\n\n**Medications:**\n• Epi: ${(weight * 0.01).toFixed(2)} mg (0.01 mg/kg)\n• Atropine: ${(weight * 0.02).toFixed(2)} mg (0.02 mg/kg)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const PEDS_GCS_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-gcs',
+  title: 'Pediatric GCS',
+  subtitle: 'Modified Glasgow Coma Scale',
+  description: 'Age-appropriate GCS for preverbal children. Use standard GCS for children >5 years who can follow commands.',
+  fields: [
+    { name: 'eye', label: 'Eye Opening', type: 'select', points: 0, selectOptions: [
+      { label: '4 - Spontaneous', points: 4 },
+      { label: '3 - To voice', points: 3 },
+      { label: '2 - To pain', points: 2 },
+      { label: '1 - None', points: 1 },
+    ]},
+    { name: 'verbal', label: 'Verbal Response (Modified)', type: 'select', points: 0, selectOptions: [
+      { label: '5 - Coos, babbles, smiles appropriately', points: 5 },
+      { label: '4 - Irritable cry, consolable', points: 4 },
+      { label: '3 - Cries to pain, inconsolable', points: 3 },
+      { label: '2 - Moans to pain', points: 2 },
+      { label: '1 - None', points: 1 },
+    ]},
+    { name: 'motor', label: 'Motor Response', type: 'select', points: 0, selectOptions: [
+      { label: '6 - Normal spontaneous movement', points: 6 },
+      { label: '5 - Withdraws to touch', points: 5 },
+      { label: '4 - Withdraws to pain', points: 4 },
+      { label: '3 - Abnormal flexion (decorticate)', points: 3 },
+      { label: '2 - Extension (decerebrate)', points: 2 },
+      { label: '1 - None', points: 1 },
+    ]},
+  ],
+  results: [
+    { min: 13, max: Infinity, label: 'Mild TBI', risk: 'GCS 13-15', mortality: 'Observe, PECARN for CT decision', colorVar: '--color-decision-active' },
+    { min: 9, max: 13, label: 'Moderate TBI', risk: 'GCS 9-12', mortality: 'CT indicated, admission likely', colorVar: '--color-warning' },
+    { min: -Infinity, max: 9, label: 'Severe TBI', risk: 'GCS ≤8', mortality: 'Intubate, CT, neurosurgery consult', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Use modified verbal scale for infants/preverbal. Motor score most predictive of outcome.',
+  citations: ['Holmes JF, et al. Performance of the pediatric glasgow coma scale. Acad Emerg Med. 2005;12:814-819.'],
+};
+
+const PECARN_HEAD_CT_CALCULATOR: CalculatorDefinition = {
+  id: 'pecarn-head-ct',
+  title: 'PECARN Head CT Rule',
+  subtitle: 'Pediatric Head Injury Decision',
+  description: 'Identifies children at very low risk for clinically-important TBI who do not require CT. 99.9% sensitive for ciTBI.',
+  fields: [
+    { name: 'age-group', label: 'Age Group', type: 'select', points: 0, selectOptions: [
+      { label: '< 2 years', points: 1 },
+      { label: '≥ 2 years', points: 2 },
+    ]},
+    { name: 'gcs-14', label: 'GCS < 15 (or < 14 if age < 1 year)', type: 'toggle', points: 10 },
+    { name: 'altered-mental', label: 'Altered mental status (agitation, somnolence, repetitive questions, slow response)', type: 'toggle', points: 10 },
+    { name: 'skull-fx', label: 'Palpable skull fracture (< 2y) OR signs of basilar skull fracture (≥ 2y)', type: 'toggle', points: 10 },
+    { name: 'loc', label: 'Loss of consciousness ≥ 5 seconds', type: 'toggle', points: 5 },
+    { name: 'severe-mechanism', label: 'Severe mechanism (MVC ejection, death in crash, rollover, pedestrian/bike vs car, fall > 3 ft if < 2y or > 5 ft if ≥ 2y, head struck by high-impact object)', type: 'toggle', points: 5 },
+    { name: 'severe-headache', label: 'Severe headache (≥ 2y only)', type: 'toggle', points: 5 },
+    { name: 'vomiting', label: 'Vomiting (any if < 2y, > 1 episode if ≥ 2y)', type: 'toggle', points: 5 },
+    { name: 'hematoma', label: 'Scalp hematoma (occipital/parietal/temporal if < 2y, or "not acting normally" per parent)', type: 'toggle', points: 5 },
+  ],
+  results: [],
+  thresholdNote: 'High-risk criteria (GCS, altered, skull fx) → CT recommended. Intermediate-risk → Observe vs CT based on clinical factors. No criteria → CT not recommended.',
+  citations: ['Kuppermann N, et al. PECARN. Lancet. 2009;374:1160-1170. PMID: 19758692.'],
+  computeResult: (values) => {
+    const highRisk = (values['gcs-14'] || 0) >= 10 || (values['altered-mental'] || 0) >= 10 || (values['skull-fx'] || 0) >= 10;
+    const intermediateRisk = (values['loc'] || 0) >= 5 || (values['severe-mechanism'] || 0) >= 5 ||
+      (values['severe-headache'] || 0) >= 5 || (values['vomiting'] || 0) >= 5 || (values['hematoma'] || 0) >= 5;
+
+    if (highRisk) {
+      return { value: 'CT Recommended', label: 'High Risk', description: '**ciTBI risk: 4.4%**\n\nOne or more high-risk criteria present:\n• GCS < 15\n• Altered mental status\n• Palpable skull fracture (< 2y) or basilar skull fracture signs (≥ 2y)\n\n**Recommendation:** CT head indicated.', colorVar: '--color-danger' };
+    } else if (intermediateRisk) {
+      return { value: 'Observation vs CT', label: 'Intermediate Risk', description: '**ciTBI risk: 0.9%**\n\nIntermediate-risk criteria present. Consider:\n• Physician experience\n• Multiple findings vs isolated\n• Worsening symptoms\n• Age < 3 months\n• Parental preference\n\n**Options:**\n• CT head, OR\n• Observation 4-6 hours with re-evaluation', colorVar: '--color-warning' };
+    } else {
+      return { value: 'CT Not Recommended', label: 'Very Low Risk', description: '**ciTBI risk: < 0.02%**\n\nNo high or intermediate risk criteria.\n\n**Recommendation:** CT not recommended. Discharge with head injury instructions.\n\n**Return if:**\n• Persistent vomiting\n• Worsening headache\n• Behavioral changes\n• Difficulty walking/talking', colorVar: '--color-decision-active' };
+    }
+  },
+};
+
+const PEDS_BLOOD_VOLUME_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-blood-volume',
+  title: 'Pediatric Blood Volume',
+  subtitle: 'Estimated Blood Volume & Hemorrhage Class',
+  description: 'Calculate estimated blood volume and transfusion thresholds for pediatric trauma.',
+  fields: [
+    { name: 'weight', label: 'Weight (kg)', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+    { name: 'age', label: 'Age Group', type: 'select', points: 0, selectOptions: [
+      { label: 'Preterm neonate', points: 90 },
+      { label: 'Term neonate', points: 85 },
+      { label: 'Infant (1-12 mo)', points: 80 },
+      { label: 'Child (1-12 y)', points: 75 },
+      { label: 'Adolescent', points: 70 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Blood volume varies by age. Transfuse at 10 mL/kg pRBCs. Consider MTP after 40 mL/kg.',
+  citations: ['ATLS 10th Edition. American College of Surgeons.'],
+  computeResult: (values) => {
+    const weight = values['weight'] || 0;
+    const mlPerKg = values['age'] || 75;
+    const ebv = weight * mlPerKg;
+
+    return {
+      value: `${ebv} mL`,
+      label: 'Estimated Blood Volume',
+      description: `**Blood Volume:** ${ebv} mL (${mlPerKg} mL/kg)\n\n**Hemorrhage Classes:**\n• Class I (< 15%): < ${Math.round(ebv * 0.15)} mL\n• Class II (15-30%): ${Math.round(ebv * 0.15)}-${Math.round(ebv * 0.30)} mL\n• Class III (30-40%): ${Math.round(ebv * 0.30)}-${Math.round(ebv * 0.40)} mL\n• Class IV (> 40%): > ${Math.round(ebv * 0.40)} mL\n\n**Transfusion:**\n• pRBC: 10 mL/kg = ${weight * 10} mL\n• FFP: 10-15 mL/kg = ${weight * 10}-${weight * 15} mL\n• Platelets: 10 mL/kg = ${weight * 10} mL\n• TXA: 15 mg/kg = ${weight * 15} mg (if < 3h from injury)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Eating Disorders Calculators
+// -------------------------------------------------------------------
+
+const MARSIPAN_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'marsipan-risk',
+  title: 'MARSIPAN Risk Assessment',
+  subtitle: 'Eating Disorder Medical Risk',
+  description: 'Medical assessment for severe eating disorders. Based on UK Royal College guidelines (MARSIPAN 2022).',
+  fields: [
+    { name: 'bmi', label: 'BMI', type: 'select', points: 0, selectOptions: [
+      { label: '> 15', points: 0 },
+      { label: '13-15', points: 2 },
+      { label: '< 13', points: 4 },
+    ]},
+    { name: 'weight-loss', label: 'Recent weight loss', type: 'select', points: 0, selectOptions: [
+      { label: '< 0.5 kg/week', points: 0 },
+      { label: '0.5-1 kg/week', points: 1 },
+      { label: '> 1 kg/week', points: 3 },
+    ]},
+    { name: 'hr', label: 'Heart rate', type: 'select', points: 0, selectOptions: [
+      { label: '> 50 bpm', points: 0 },
+      { label: '40-50 bpm', points: 2 },
+      { label: '< 40 bpm', points: 4 },
+    ]},
+    { name: 'bp', label: 'Systolic BP', type: 'select', points: 0, selectOptions: [
+      { label: '> 90 mmHg', points: 0 },
+      { label: '80-90 mmHg', points: 2 },
+      { label: '< 80 mmHg', points: 4 },
+    ]},
+    { name: 'temp', label: 'Temperature', type: 'select', points: 0, selectOptions: [
+      { label: '> 36°C', points: 0 },
+      { label: '35-36°C', points: 1 },
+      { label: '< 35°C', points: 3 },
+    ]},
+    { name: 'squat', label: 'Sit-up Squat-Stand (SUSS) test', type: 'select', points: 0, selectOptions: [
+      { label: 'Can stand without using arms', points: 0 },
+      { label: 'Needs arms to stand', points: 2 },
+      { label: 'Cannot stand', points: 4 },
+    ]},
+    { name: 'electrolytes', label: 'Electrolyte abnormalities', type: 'toggle', points: 3, description: 'K+ < 3.0, Na+ < 130, Phos < 0.5' },
+    { name: 'ecg', label: 'ECG abnormality', type: 'toggle', points: 3, description: 'QTc > 450ms, arrhythmia' },
+  ],
+  results: [
+    { min: -Infinity, max: 4, label: 'Low Risk', risk: 'Outpatient management', mortality: 'Close follow-up with eating disorder team', colorVar: '--color-decision-active' },
+    { min: 4, max: 8, label: 'Moderate Risk', risk: 'Consider admission', mortality: 'Medical monitoring, daily labs', colorVar: '--color-warning' },
+    { min: 8, max: Infinity, label: 'High Risk', risk: 'Medical admission', mortality: 'Inpatient refeeding protocol, cardiac monitoring', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Any single high-risk criterion (BMI < 13, HR < 40, SBP < 80, K+ < 2.5) mandates admission regardless of total score.',
+  citations: ['MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. Royal College of Psychiatrists. 2022.'],
+};
+
+const BMI_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'bmi-severity',
+  title: 'BMI Severity Classification',
+  subtitle: 'DSM-5 Anorexia Nervosa Severity',
+  description: 'Calculate BMI and classify anorexia nervosa severity per DSM-5-TR criteria.',
+  fields: [
+    { name: 'weight-kg', label: 'Weight (kg)', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+    { name: 'height-cm', label: 'Height (cm)', type: 'number', points: 0, valueIsPoints: true, unit: 'cm' },
+  ],
+  results: [],
+  thresholdNote: 'BMI < 15 is extreme severity. Pediatric patients: use BMI percentile for age.',
+  citations: ['DSM-5-TR. American Psychiatric Association. 2022.'],
+  computeResult: (values) => {
+    const weight = values['weight-kg'] || 0;
+    const height = (values['height-cm'] || 0) / 100;
+    if (height === 0) return { value: '—', label: 'Enter height', description: '', colorVar: '--color-warning' };
+
+    const bmi = weight / (height * height);
+    let severity = '', description = '', color = '--color-primary';
+
+    if (bmi >= 18.5) {
+      severity = 'Normal/Overweight';
+      description = 'BMI ≥ 18.5. Does not meet AN weight criterion. Consider atypical AN if significant weight loss from higher baseline.';
+      color = '--color-decision-active';
+    } else if (bmi >= 17) {
+      severity = 'Mild';
+      description = 'BMI 17-18.5. Mild severity AN.\n\n**Outpatient appropriate if:**\n• Medically stable\n• Engaged in treatment\n• Supportive home environment';
+      color = '--color-warning';
+    } else if (bmi >= 16) {
+      severity = 'Moderate';
+      description = 'BMI 16-16.99. Moderate severity AN.\n\n**Consider:**\n• Intensive outpatient\n• Partial hospitalization\n• Medical monitoring';
+      color = '--color-warning';
+    } else if (bmi >= 15) {
+      severity = 'Severe';
+      description = 'BMI 15-15.99. Severe AN.\n\n**Likely requires:**\n• Inpatient treatment\n• Medical stabilization\n• Refeeding protocol';
+      color = '--color-danger';
+    } else {
+      severity = 'Extreme';
+      description = 'BMI < 15. Extreme severity AN.\n\n**Medical emergency:**\n• Admit to medical unit\n• Cardiac monitoring\n• Careful refeeding (risk of refeeding syndrome highest)\n• Daily electrolytes';
+      color = '--color-danger';
+    }
+
+    return { value: bmi.toFixed(1), label: severity, description: `**BMI:** ${bmi.toFixed(1)} kg/m²\n\n**DSM-5 Severity:** ${severity}\n\n${description}`, colorVar: color };
+  },
+};
+
+const REFEEDING_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'refeeding-risk',
+  title: 'Refeeding Syndrome Risk',
+  subtitle: 'NICE Criteria for High Risk',
+  description: 'Identify patients at high risk for refeeding syndrome who require prophylactic thiamine and careful electrolyte monitoring.',
+  fields: [
+    { name: 'bmi-16', label: 'BMI < 16 kg/m²', type: 'toggle', points: 2 },
+    { name: 'weight-loss-15', label: 'Unintentional weight loss > 15% in 3-6 months', type: 'toggle', points: 2 },
+    { name: 'little-intake', label: 'Little or no nutritional intake > 10 days', type: 'toggle', points: 2 },
+    { name: 'low-k-phos-mg', label: 'Low K+, PO₄, or Mg²⁺ before feeding', type: 'toggle', points: 2 },
+    { name: 'bmi-18', label: 'BMI < 18.5 kg/m²', type: 'toggle', points: 1 },
+    { name: 'weight-loss-10', label: 'Unintentional weight loss > 10% in 3-6 months', type: 'toggle', points: 1 },
+    { name: 'little-intake-5', label: 'Little or no nutritional intake > 5 days', type: 'toggle', points: 1 },
+    { name: 'etoh-drugs', label: 'Alcohol misuse or drugs (insulin, chemotherapy, antacids, diuretics)', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: '1 major criterion OR 2+ minor criteria = HIGH RISK. Start refeeding at 10 kcal/kg/day.',
+  citations: ['NICE Clinical Guideline CG32. Nutrition support for adults. 2017 update.'],
+  computeResult: (values) => {
+    const majorCriteria = (values['bmi-16'] || 0) + (values['weight-loss-15'] || 0) + (values['little-intake'] || 0) + (values['low-k-phos-mg'] || 0);
+    const minorCriteria = (values['bmi-18'] || 0) + (values['weight-loss-10'] || 0) + (values['little-intake-5'] || 0) + (values['etoh-drugs'] || 0);
+
+    const highRisk = majorCriteria >= 2 || minorCriteria >= 2;
+
+    if (highRisk) {
+      return {
+        value: 'HIGH RISK',
+        label: 'Refeeding Syndrome Risk',
+        description: `**Risk Level:** HIGH\n\n**Protocol:**\n1. **Thiamine** 200-300 mg IV/PO daily × 3 days BEFORE feeding\n2. **Start low:** 10 kcal/kg/day (5 kcal/kg if extreme risk)\n3. **Advance slowly:** Increase by 5 kcal/kg/day\n4. **Electrolytes:** Check K+, PO₄, Mg²⁺ q12h × 72h\n5. **Replete prophylactically:**\n   • Phosphate 0.5 mmol/kg/day\n   • Potassium 2-4 mEq/kg/day\n   • Magnesium 0.3 mmol/kg/day\n6. **Monitor:** Weight daily, fluid balance, ECG if QTc prolonged`,
+        colorVar: '--color-danger',
+      };
+    } else {
+      return {
+        value: 'Lower Risk',
+        label: 'Standard Refeeding',
+        description: '**Risk Level:** Lower (but not zero)\n\n**Protocol:**\n1. Start at 15-20 kcal/kg/day\n2. Advance as tolerated\n3. Check electrolytes daily × 3 days\n4. Thiamine supplementation recommended\n5. Monitor for symptoms: edema, confusion, weakness, arrhythmia',
+        colorVar: '--color-warning',
+      };
+    }
+  },
+};
+
+// -------------------------------------------------------------------
+// Urinary Sphincter Calculators
+// -------------------------------------------------------------------
+
+const IPSS_CALCULATOR: CalculatorDefinition = {
+  id: 'ipss',
+  title: 'IPSS Score',
+  subtitle: 'International Prostate Symptom Score',
+  description: 'Validated questionnaire for lower urinary tract symptoms (LUTS) severity. Also known as AUA Symptom Index.',
+  fields: [
+    { name: 'incomplete', label: 'Incomplete emptying: How often have you had the sensation of not emptying your bladder completely?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'frequency', label: 'Frequency: How often have you had to urinate again less than 2 hours after finishing?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'intermittency', label: 'Intermittency: How often have you stopped and started again several times when urinating?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'urgency', label: 'Urgency: How often have you found it difficult to postpone urination?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'weak-stream', label: 'Weak stream: How often have you had a weak urinary stream?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'straining', label: 'Straining: How often have you had to push or strain to begin urination?', type: 'select', points: 0, selectOptions: [
+      { label: 'Not at all', points: 0 }, { label: 'Less than 1 in 5 times', points: 1 }, { label: 'Less than half the time', points: 2 },
+      { label: 'About half the time', points: 3 }, { label: 'More than half the time', points: 4 }, { label: 'Almost always', points: 5 },
+    ]},
+    { name: 'nocturia', label: 'Nocturia: How many times do you typically get up at night to urinate?', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 }, { label: '1 time', points: 1 }, { label: '2 times', points: 2 },
+      { label: '3 times', points: 3 }, { label: '4 times', points: 4 }, { label: '5+ times', points: 5 },
+    ]},
+  ],
+  results: [
+    { min: -Infinity, max: 8, label: 'Mild', risk: 'IPSS 0-7', mortality: 'Watchful waiting appropriate', colorVar: '--color-decision-active' },
+    { min: 8, max: 20, label: 'Moderate', risk: 'IPSS 8-19', mortality: 'Medical therapy indicated', colorVar: '--color-warning' },
+    { min: 20, max: Infinity, label: 'Severe', risk: 'IPSS 20-35', mortality: 'Consider surgical intervention', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Maximum score 35. Higher scores indicate more severe symptoms. Not diagnostic for BPH but guides treatment intensity.',
+  citations: ['Barry MJ, et al. The American Urological Association symptom index for benign prostatic hyperplasia. J Urol. 1992;148:1549-1557.'],
+};
+
+const PVR_INTERPRETATION_CALCULATOR: CalculatorDefinition = {
+  id: 'pvr-interpretation',
+  title: 'Post-Void Residual Guide',
+  subtitle: 'PVR Interpretation',
+  description: 'Interpret post-void residual bladder volume and guide management.',
+  fields: [
+    { name: 'pvr', label: 'PVR Volume (mL)', type: 'number', points: 0, valueIsPoints: true, unit: 'mL' },
+    { name: 'symptoms', label: 'Patient has urinary symptoms', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Bladder scan preferred. If cath: use sterile technique, send UA if indicated.',
+  citations: ['AUA Guidelines on Management of BPH. 2023.'],
+  computeResult: (values) => {
+    const pvr = values['pvr'] || 0;
+    const symptomatic = values['symptoms'] || 0;
+
+    let interpretation = '', management = '', color = '--color-primary';
+
+    if (pvr < 50) {
+      interpretation = 'Normal';
+      management = 'No intervention needed. Bladder emptying is adequate.';
+      color = '--color-decision-active';
+    } else if (pvr < 100) {
+      interpretation = 'Mildly Elevated';
+      management = 'May be normal variant. Repeat if symptomatic. No immediate intervention.';
+      color = '--color-decision-active';
+    } else if (pvr < 200) {
+      interpretation = 'Moderately Elevated';
+      management = symptomatic ? 'Start alpha-blocker (tamsulosin 0.4 mg daily). Urology follow-up 2-4 weeks.' : 'Monitor if asymptomatic. Repeat PVR in 2-4 weeks.';
+      color = '--color-warning';
+    } else if (pvr < 400) {
+      interpretation = 'Significantly Elevated';
+      management = 'High risk for retention. Alpha-blocker + consider catheterization if symptomatic. Urology referral.';
+      color = '--color-warning';
+    } else {
+      interpretation = 'Severe Retention';
+      management = '**Catheterize immediately.** Risk of:\n• Bladder overdistension injury\n• Obstructive uropathy/AKI\n• Overflow incontinence\n\nLeave catheter in place. Urology consult. Check creatinine.';
+      color = '--color-danger';
+    }
+
+    return { value: `${pvr} mL`, label: interpretation, description: `**PVR:** ${pvr} mL\n\n**Interpretation:** ${interpretation}\n\n**Management:** ${management}`, colorVar: color };
+  },
+};
+
+const CAUDA_EQUINA_CHECKLIST_CALCULATOR: CalculatorDefinition = {
+  id: 'cauda-equina-checklist',
+  title: 'Cauda Equina Red Flags',
+  subtitle: 'CES Screening Checklist',
+  description: 'Screen for cauda equina syndrome in patients with back pain. Any positive finding warrants emergent MRI.',
+  fields: [
+    { name: 'saddle', label: 'Saddle anesthesia (numbness in perineum/inner thighs)', type: 'toggle', points: 5 },
+    { name: 'retention', label: 'Urinary retention (painless, overflow incontinence)', type: 'toggle', points: 5 },
+    { name: 'incontinence', label: 'Fecal incontinence or loss of anal tone', type: 'toggle', points: 5 },
+    { name: 'bilateral', label: 'Bilateral leg weakness or numbness', type: 'toggle', points: 4 },
+    { name: 'progressive', label: 'Rapidly progressive neurologic deficit', type: 'toggle', points: 4 },
+    { name: 'sexual', label: 'Sexual dysfunction (new onset)', type: 'toggle', points: 3 },
+    { name: 'reflex', label: 'Absent ankle reflexes bilaterally', type: 'toggle', points: 2 },
+    { name: 'gait', label: 'Gait disturbance', type: 'toggle', points: 2 },
+  ],
+  results: [],
+  thresholdNote: 'CES is a surgical emergency. MRI within 24h (ideally 6h). Delay → permanent deficits.',
+  citations: ['Todd NV. Cauda equina syndrome. Nat Rev Neurol. 2022;18:308-319.'],
+  computeResult: (values) => {
+    const score = Object.values(values).reduce((a: number, b) => a + (b as number || 0), 0);
+    const hasMajor = (values['saddle'] || 0) >= 5 || (values['retention'] || 0) >= 5 || (values['incontinence'] || 0) >= 5;
+
+    if (hasMajor) {
+      return {
+        value: 'HIGH SUSPICION',
+        label: 'Emergent MRI',
+        description: '**Major CES criterion present.**\n\n**Immediate actions:**\n1. **MRI lumbar spine STAT** (within 6 hours)\n2. Foley catheter to decompress bladder\n3. Neurosurgery/spine consult STAT\n4. If malignancy suspected: Dexamethasone 10 mg IV\n5. NPO in case of surgery\n\n**Surgical decompression** within 48h improves outcomes. Best outcomes if < 24h.',
+        colorVar: '--color-danger',
+      };
+    } else if (score >= 4) {
+      return {
+        value: 'MODERATE SUSPICION',
+        label: 'Urgent MRI',
+        description: '**Multiple concerning findings.**\n\n**Actions:**\n1. MRI lumbar spine within 24 hours\n2. Detailed neuro exam with documentation\n3. Check post-void residual\n4. Spine/neurosurgery aware\n5. Strict return precautions\n\n**Red flags for immediate return:**\n• New urinary retention\n• Saddle numbness\n• Leg weakness progression',
+        colorVar: '--color-warning',
+      };
+    } else if (score > 0) {
+      return {
+        value: 'LOW SUSPICION',
+        label: 'Consider MRI',
+        description: '**Minor findings only.**\n\nCES less likely but not excluded. Consider:\n• Outpatient MRI if symptoms persist\n• Clear return precautions\n• PCP follow-up within 1 week\n• Document neuro exam thoroughly',
+        colorVar: '--color-warning',
+      };
+    } else {
+      return {
+        value: 'NO RED FLAGS',
+        label: 'CES Unlikely',
+        description: '**No CES red flags identified.**\n\nStandard back pain evaluation. Return precautions for:\n• New urinary symptoms\n• Numbness in groin/perineum\n• Leg weakness\n• Loss of bowel/bladder control',
+        colorVar: '--color-decision-active',
+      };
+    }
+  },
+};
+
+const CATHETER_SIZING_GUIDE: CalculatorDefinition = {
+  id: 'catheter-sizing',
+  title: 'Catheter Sizing Guide',
+  subtitle: 'Foley & Coude Selection',
+  description: 'Guide for urinary catheter selection based on patient factors.',
+  fields: [
+    { name: 'sex', label: 'Sex', type: 'select', points: 0, selectOptions: [
+      { label: 'Male', points: 1 },
+      { label: 'Female', points: 2 },
+    ]},
+    { name: 'bph', label: 'Known BPH or enlarged prostate', type: 'toggle', points: 0 },
+    { name: 'stricture', label: 'History of urethral stricture', type: 'toggle', points: 0 },
+    { name: 'hematuria', label: 'Gross hematuria with clots', type: 'toggle', points: 0 },
+    { name: 'prior-diff', label: 'Prior difficult catheterization', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Always use smallest effective size. Larger catheters cause more urethral trauma.',
+  citations: ['AUA Guidelines. Catheter-associated UTI prevention. 2023.'],
+  computeResult: (values) => {
+    const isMale = values['sex'] === 1;
+    const bph = values['bph'] || 0;
+    const stricture = values['stricture'] || 0;
+    const hematuria = values['hematuria'] || 0;
+    const priorDiff = values['prior-diff'] || 0;
+
+    let size = '', type = '', tips = '';
+
+    if (hematuria) {
+      size = '20-24 Fr';
+      type = '3-way Foley';
+      tips = 'Large bore for clot evacuation. May need CBI (continuous bladder irrigation).';
+    } else if (isMale && (bph || priorDiff)) {
+      size = '16-18 Fr';
+      type = 'Coude-tip catheter';
+      tips = 'Coude tip navigates prostatic urethra. Insert with tip pointing UP (toward ceiling). If unsuccessful after 2 attempts, call urology.';
+    } else if (stricture) {
+      size = '12-14 Fr';
+      type = 'Standard or Coude';
+      tips = 'Start small. May need urology for dilation or suprapubic placement.';
+    } else if (isMale) {
+      size = '16 Fr';
+      type = 'Standard Foley';
+      tips = 'Standard adult male size. Smaller (14 Fr) if prolonged use expected.';
+    } else {
+      size = '14-16 Fr';
+      type = 'Standard Foley';
+      tips = 'Standard adult female size. 14 Fr adequate for most.';
+    }
+
+    return {
+      value: size,
+      label: type,
+      description: `**Recommended Size:** ${size}\n**Catheter Type:** ${type}\n\n**Tips:** ${tips}\n\n**Technique Reminders:**\n• Use sterile technique\n• Adequate lubrication (lidocaine jelly 2% preferred)\n• In males: hold penis perpendicular, advance fully before inflating balloon\n• Confirm urine return before inflating balloon\n• Balloon: 10 mL sterile water (not saline)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const MED_RETENTION_REFERENCE: CalculatorDefinition = {
+  id: 'med-retention-reference',
+  title: 'Medication-Induced Retention',
+  subtitle: 'Drug Reference for AUR',
+  description: 'Common medications causing acute urinary retention. Use for medication reconciliation in AUR workup.',
+  fields: [
+    { name: 'anticholinergic', label: 'Anticholinergics (diphenhydramine, oxybutynin, benztropine, TCAs)', type: 'toggle', points: 3 },
+    { name: 'opioids', label: 'Opioids (morphine, oxycodone, fentanyl, tramadol)', type: 'toggle', points: 3 },
+    { name: 'sympathomimetics', label: 'Sympathomimetics (pseudoephedrine, phenylephrine)', type: 'toggle', points: 2 },
+    { name: 'antihistamines', label: 'First-gen antihistamines (diphenhydramine, chlorpheniramine)', type: 'toggle', points: 2 },
+    { name: 'antipsychotics', label: 'Antipsychotics (haloperidol, risperidone, quetiapine)', type: 'toggle', points: 2 },
+    { name: 'muscle-relax', label: 'Muscle relaxants (cyclobenzaprine, baclofen)', type: 'toggle', points: 2 },
+    { name: 'calcium-ch', label: 'Calcium channel blockers', type: 'toggle', points: 1 },
+    { name: 'beta-agonist', label: 'Beta-agonists (albuterol, terbutaline)', type: 'toggle', points: 1 },
+    { name: 'anesthetics', label: 'Recent anesthesia/sedation', type: 'toggle', points: 2 },
+  ],
+  results: [],
+  thresholdNote: 'Risk is additive. Elderly males with BPH at highest risk.',
+  citations: ['Verhamme KM, et al. Drug-induced urinary retention. Drug Saf. 2008;31:373-388.'],
+  computeResult: (values) => {
+    const score = Object.values(values).reduce((a: number, b) => a + (b as number || 0), 0);
+    const meds: string[] = [];
+    if (values['anticholinergic']) meds.push('Anticholinergics');
+    if (values['opioids']) meds.push('Opioids');
+    if (values['sympathomimetics']) meds.push('Sympathomimetics');
+    if (values['antihistamines']) meds.push('Antihistamines');
+    if (values['antipsychotics']) meds.push('Antipsychotics');
+    if (values['muscle-relax']) meds.push('Muscle relaxants');
+    if (values['calcium-ch']) meds.push('CCBs');
+    if (values['beta-agonist']) meds.push('Beta-agonists');
+    if (values['anesthetics']) meds.push('Recent anesthesia');
+
+    if (score === 0) {
+      return { value: 'No culprits', label: 'Medication Review', description: 'No common retention-causing medications identified. Consider other etiologies.', colorVar: '--color-decision-active' };
+    }
+
+    return {
+      value: `${meds.length} culprit(s)`,
+      label: score >= 4 ? 'High Med Burden' : 'Possible Contributor',
+      description: `**Identified medications:**\n${meds.map(m => '• ' + m).join('\n')}\n\n**Management:**\n1. Discontinue or reduce if possible\n2. Substitute alternatives with less anticholinergic burden\n3. Catheterize if in retention\n4. Trial of void (TWOC) after meds cleared\n\n**High-risk combinations:**\n• Opioid + anticholinergic\n• BPH + any culprit medication\n• Elderly + multiple agents`,
+      colorVar: score >= 4 ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -18841,6 +19377,21 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'wells-pe': WELLS_PE_CALCULATOR,
   'perc-rule': PERC_RULE_CALCULATOR,
   'alvarado-score': ALVARADO_SCORE_CALCULATOR,
+  // Pediatric Trauma
+  'broselow-weight': BROSELOW_WEIGHT_CALCULATOR,
+  'peds-gcs': PEDS_GCS_CALCULATOR,
+  'pecarn-head-ct': PECARN_HEAD_CT_CALCULATOR,
+  'peds-blood-volume': PEDS_BLOOD_VOLUME_CALCULATOR,
+  // Eating Disorders
+  'marsipan-risk': MARSIPAN_RISK_CALCULATOR,
+  'bmi-severity': BMI_SEVERITY_CALCULATOR,
+  'refeeding-risk': REFEEDING_RISK_CALCULATOR,
+  // Urinary Sphincter
+  'ipss': IPSS_CALCULATOR,
+  'pvr-interpretation': PVR_INTERPRETATION_CALCULATOR,
+  'cauda-equina-checklist': CAUDA_EQUINA_CHECKLIST_CALCULATOR,
+  'catheter-sizing': CATHETER_SIZING_GUIDE,
+  'med-retention-reference': MED_RETENTION_REFERENCE,
 };
 
 // -------------------------------------------------------------------

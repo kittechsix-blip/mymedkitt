@@ -605,6 +605,18 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/dfsa-workup.js');
             return { nodes: m.DFSA_WORKUP_NODES, entryNodeId: 'dfsa-start', categoryId: 'emergency-medicine', moduleLabels: m.DFSA_WORKUP_MODULE_LABELS, citations: m.DFSA_WORKUP_CITATIONS };
         },
+        'urinary-sphincter': async () => {
+            const m = await import('../data/trees/urinary-sphincter.js');
+            return { nodes: m.URINARY_SPHINCTER_NODES, entryNodeId: 'sphincter-start', categoryId: 'urology', moduleLabels: m.URINARY_SPHINCTER_MODULE_LABELS, citations: m.URINARY_SPHINCTER_CITATIONS };
+        },
+        'eating-disorders': async () => {
+            const m = await import('../data/trees/eating-disorders.js');
+            return { nodes: m.EATING_DISORDERS_NODES, entryNodeId: 'ed-start', categoryId: 'emergency-medicine', moduleLabels: m.EATING_DISORDERS_MODULE_LABELS, citations: m.EATING_DISORDERS_CITATIONS };
+        },
+        'peds-trauma': async () => {
+            const m = await import('../data/trees/peds-trauma.js');
+            return { nodes: m.PEDS_TRAUMA_NODES, entryNodeId: 'peds-trauma-start', categoryId: 'trauma-surg', moduleLabels: m.PEDS_TRAUMA_MODULE_LABELS, citations: m.PEDS_TRAUMA_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
