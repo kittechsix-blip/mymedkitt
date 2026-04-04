@@ -17450,148 +17450,148 @@ const QTC_CALCULATOR = {
 };
 const QT_DRUG_DATABASE = [
     // Antiarrhythmics
-    { name: 'Amiodarone', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Disopyramide', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Dofetilide', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Dronedarone', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Flecainide', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Ibutilide', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Procainamide', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Amiodarone', tradeName: 'Cordarone, Pacerone', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Disopyramide', tradeName: 'Norpace', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Dofetilide', tradeName: 'Tikosyn', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Dronedarone', tradeName: 'Multaq', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Flecainide', tradeName: 'Tambocor', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Ibutilide', tradeName: 'Corvert', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Procainamide', tradeName: 'Pronestyl', risk: 'known', drugClass: 'Antiarrhythmic' },
     { name: 'Quinidine', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Sotalol', risk: 'known', drugClass: 'Antiarrhythmic' },
-    { name: 'Vernakalant', risk: 'possible', drugClass: 'Antiarrhythmic' },
+    { name: 'Sotalol', tradeName: 'Betapace', risk: 'known', drugClass: 'Antiarrhythmic' },
+    { name: 'Vernakalant', tradeName: 'Brinavess', risk: 'possible', drugClass: 'Antiarrhythmic' },
     // Antibiotics
-    { name: 'Azithromycin', risk: 'known', drugClass: 'Antibiotic', note: 'Risk lower than other macrolides' },
-    { name: 'Clarithromycin', risk: 'known', drugClass: 'Antibiotic' },
-    { name: 'Erythromycin', risk: 'known', drugClass: 'Antibiotic', note: 'IV > oral risk; CYP3A4 inhibitor' },
-    { name: 'Levofloxacin', risk: 'known', drugClass: 'Antibiotic' },
-    { name: 'Moxifloxacin', risk: 'known', drugClass: 'Antibiotic', note: 'Highest QT risk among fluoroquinolones' },
-    { name: 'Ciprofloxacin', risk: 'conditional', drugClass: 'Antibiotic', note: 'Risk with high dose or electrolyte abnormalities' },
-    { name: 'Trimethoprim-Sulfamethoxazole', risk: 'possible', drugClass: 'Antibiotic' },
-    { name: 'Bedaquiline', risk: 'possible', drugClass: 'Antibiotic' },
-    { name: 'Delamanid', risk: 'possible', drugClass: 'Antibiotic' },
+    { name: 'Azithromycin', tradeName: 'Zithromax, Z-Pack', risk: 'known', drugClass: 'Antibiotic', note: 'Risk lower than other macrolides' },
+    { name: 'Clarithromycin', tradeName: 'Biaxin', risk: 'known', drugClass: 'Antibiotic' },
+    { name: 'Erythromycin', tradeName: 'E-Mycin, Ery-Tab', risk: 'known', drugClass: 'Antibiotic', note: 'IV > oral risk; CYP3A4 inhibitor' },
+    { name: 'Levofloxacin', tradeName: 'Levaquin', risk: 'known', drugClass: 'Antibiotic' },
+    { name: 'Moxifloxacin', tradeName: 'Avelox', risk: 'known', drugClass: 'Antibiotic', note: 'Highest QT risk among fluoroquinolones' },
+    { name: 'Ciprofloxacin', tradeName: 'Cipro', risk: 'conditional', drugClass: 'Antibiotic', note: 'Risk with high dose or electrolyte abnormalities' },
+    { name: 'Trimethoprim-Sulfamethoxazole', tradeName: 'Bactrim, Septra', risk: 'possible', drugClass: 'Antibiotic' },
+    { name: 'Bedaquiline', tradeName: 'Sirturo', risk: 'possible', drugClass: 'Antibiotic' },
+    { name: 'Delamanid', tradeName: 'Deltyba', risk: 'possible', drugClass: 'Antibiotic' },
     // Antifungals
-    { name: 'Fluconazole', risk: 'known', drugClass: 'Antifungal' },
-    { name: 'Ketoconazole', risk: 'known', drugClass: 'Antifungal' },
-    { name: 'Voriconazole', risk: 'known', drugClass: 'Antifungal' },
-    { name: 'Pentamidine', risk: 'known', drugClass: 'Antifungal/Antiprotozoal' },
-    { name: 'Itraconazole', risk: 'possible', drugClass: 'Antifungal' },
-    { name: 'Posaconazole', risk: 'possible', drugClass: 'Antifungal' },
+    { name: 'Fluconazole', tradeName: 'Diflucan', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Ketoconazole', tradeName: 'Nizoral', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Voriconazole', tradeName: 'Vfend', risk: 'known', drugClass: 'Antifungal' },
+    { name: 'Pentamidine', tradeName: 'Pentam', risk: 'known', drugClass: 'Antifungal/Antiprotozoal' },
+    { name: 'Itraconazole', tradeName: 'Sporanox', risk: 'possible', drugClass: 'Antifungal' },
+    { name: 'Posaconazole', tradeName: 'Noxafil', risk: 'possible', drugClass: 'Antifungal' },
     // Antimalarials
-    { name: 'Chloroquine', risk: 'known', drugClass: 'Antimalarial' },
-    { name: 'Halofantrine', risk: 'known', drugClass: 'Antimalarial' },
-    { name: 'Hydroxychloroquine', risk: 'conditional', drugClass: 'Antimalarial', note: 'Risk with overdose or electrolyte abnormalities' },
-    { name: 'Quinine', risk: 'conditional', drugClass: 'Antimalarial' },
-    { name: 'Mefloquine', risk: 'possible', drugClass: 'Antimalarial' },
+    { name: 'Chloroquine', tradeName: 'Aralen', risk: 'known', drugClass: 'Antimalarial' },
+    { name: 'Halofantrine', tradeName: 'Halfan', risk: 'known', drugClass: 'Antimalarial' },
+    { name: 'Hydroxychloroquine', tradeName: 'Plaquenil', risk: 'conditional', drugClass: 'Antimalarial', note: 'Risk with overdose or electrolyte abnormalities' },
+    { name: 'Quinine', tradeName: 'Qualaquin', risk: 'conditional', drugClass: 'Antimalarial' },
+    { name: 'Mefloquine', tradeName: 'Lariam', risk: 'possible', drugClass: 'Antimalarial' },
     // Antipsychotics
-    { name: 'Chlorpromazine', risk: 'known', drugClass: 'Antipsychotic' },
-    { name: 'Haloperidol', risk: 'known', drugClass: 'Antipsychotic', note: 'IV >> oral risk' },
-    { name: 'Droperidol', risk: 'known', drugClass: 'Antipsychotic', note: 'FDA black box warning' },
-    { name: 'Pimozide', risk: 'known', drugClass: 'Antipsychotic' },
-    { name: 'Thioridazine', risk: 'known', drugClass: 'Antipsychotic' },
-    { name: 'Ziprasidone', risk: 'known', drugClass: 'Antipsychotic' },
-    { name: 'Amisulpride', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Aripiprazole', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Clozapine', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Olanzapine', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Quetiapine', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Risperidone', risk: 'possible', drugClass: 'Antipsychotic' },
-    { name: 'Paliperidone', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Chlorpromazine', tradeName: 'Thorazine', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Haloperidol', tradeName: 'Haldol', risk: 'known', drugClass: 'Antipsychotic', note: 'IV >> oral risk' },
+    { name: 'Droperidol', tradeName: 'Inapsine', risk: 'known', drugClass: 'Antipsychotic', note: 'FDA black box warning' },
+    { name: 'Pimozide', tradeName: 'Orap', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Thioridazine', tradeName: 'Mellaril', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Ziprasidone', tradeName: 'Geodon', risk: 'known', drugClass: 'Antipsychotic' },
+    { name: 'Amisulpride', tradeName: 'Barhemsys', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Aripiprazole', tradeName: 'Abilify', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Clozapine', tradeName: 'Clozaril', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Olanzapine', tradeName: 'Zyprexa', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Quetiapine', tradeName: 'Seroquel', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Risperidone', tradeName: 'Risperdal', risk: 'possible', drugClass: 'Antipsychotic' },
+    { name: 'Paliperidone', tradeName: 'Invega', risk: 'possible', drugClass: 'Antipsychotic' },
     // Antiemetics
-    { name: 'Dolasetron', risk: 'known', drugClass: 'Antiemetic' },
-    { name: 'Granisetron', risk: 'known', drugClass: 'Antiemetic' },
-    { name: 'Ondansetron', risk: 'known', drugClass: 'Antiemetic', note: 'IV high-dose (32 mg) withdrawn; standard doses conditional risk' },
-    { name: 'Domperidone', risk: 'known', drugClass: 'Antiemetic/Prokinetic' },
-    { name: 'Prochlorperazine', risk: 'possible', drugClass: 'Antiemetic' },
-    { name: 'Promethazine', risk: 'possible', drugClass: 'Antiemetic' },
+    { name: 'Dolasetron', tradeName: 'Anzemet', risk: 'known', drugClass: 'Antiemetic' },
+    { name: 'Granisetron', tradeName: 'Kytril', risk: 'known', drugClass: 'Antiemetic' },
+    { name: 'Ondansetron', tradeName: 'Zofran', risk: 'known', drugClass: 'Antiemetic', note: 'IV high-dose (32 mg) withdrawn; standard doses conditional risk' },
+    { name: 'Domperidone', tradeName: 'Motilium', risk: 'known', drugClass: 'Antiemetic/Prokinetic' },
+    { name: 'Prochlorperazine', tradeName: 'Compazine', risk: 'possible', drugClass: 'Antiemetic' },
+    { name: 'Promethazine', tradeName: 'Phenergan', risk: 'possible', drugClass: 'Antiemetic' },
     // Antidepressants
-    { name: 'Citalopram', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 40 mg (20 mg if >60 yo)' },
-    { name: 'Escitalopram', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 20 mg' },
-    { name: 'Amitriptyline', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Clomipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Desipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Doxepin', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Imipramine', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Nortriptyline', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
-    { name: 'Trimipramine', risk: 'conditional', drugClass: 'Antidepressant' },
-    { name: 'Fluoxetine', risk: 'possible', drugClass: 'Antidepressant' },
-    { name: 'Mirtazapine', risk: 'possible', drugClass: 'Antidepressant' },
-    { name: 'Sertraline', risk: 'possible', drugClass: 'Antidepressant' },
-    { name: 'Trazodone', risk: 'possible', drugClass: 'Antidepressant' },
-    { name: 'Venlafaxine', risk: 'possible', drugClass: 'Antidepressant' },
-    { name: 'Bupropion', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Citalopram', tradeName: 'Celexa', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 40 mg (20 mg if >60 yo)' },
+    { name: 'Escitalopram', tradeName: 'Lexapro', risk: 'known', drugClass: 'Antidepressant', note: 'Dose-dependent; max 20 mg' },
+    { name: 'Amitriptyline', tradeName: 'Elavil', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Clomipramine', tradeName: 'Anafranil', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Desipramine', tradeName: 'Norpramin', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Doxepin', tradeName: 'Sinequan', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Imipramine', tradeName: 'Tofranil', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Nortriptyline', tradeName: 'Pamelor', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
+    { name: 'Trimipramine', tradeName: 'Surmontil', risk: 'conditional', drugClass: 'Antidepressant' },
+    { name: 'Fluoxetine', tradeName: 'Prozac', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Mirtazapine', tradeName: 'Remeron', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Sertraline', tradeName: 'Zoloft', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Trazodone', tradeName: 'Desyrel', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Venlafaxine', tradeName: 'Effexor', risk: 'possible', drugClass: 'Antidepressant' },
+    { name: 'Bupropion', tradeName: 'Wellbutrin', risk: 'conditional', drugClass: 'Antidepressant', note: 'Risk with overdose' },
     // Opioids
-    { name: 'Methadone', risk: 'known', drugClass: 'Opioid', note: 'Dose-dependent; >100 mg/day highest risk' },
+    { name: 'Methadone', tradeName: 'Dolophine', risk: 'known', drugClass: 'Opioid', note: 'Dose-dependent; >100 mg/day highest risk' },
     { name: 'Levomethadyl (LAAM)', risk: 'known', drugClass: 'Opioid', note: 'Withdrawn from market' },
-    { name: 'Buprenorphine', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with IV use or overdose' },
-    { name: 'Oxycodone', risk: 'possible', drugClass: 'Opioid' },
-    { name: 'Loperamide', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with massive overdose (abuse)' },
+    { name: 'Buprenorphine', tradeName: 'Subutex, Suboxone', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with IV use or overdose' },
+    { name: 'Oxycodone', tradeName: 'OxyContin, Percocet', risk: 'possible', drugClass: 'Opioid' },
+    { name: 'Loperamide', tradeName: 'Imodium', risk: 'conditional', drugClass: 'Opioid', note: 'Risk with massive overdose (abuse)' },
     // Oncology
-    { name: 'Arsenic trioxide', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Vandetanib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Crizotinib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Lenvatinib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Nilotinib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Ribociclib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Sunitinib', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Toremifene', risk: 'known', drugClass: 'Oncology' },
-    { name: 'Oxaliplatin', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Pazopanib', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Tamoxifen', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Vemurafenib', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Encorafenib', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Gilteritinib', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Osimertinib', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Capecitabine', risk: 'conditional', drugClass: 'Oncology' },
-    { name: 'Ivosidenib', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Arsenic trioxide', tradeName: 'Trisenox', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Vandetanib', tradeName: 'Caprelsa', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Crizotinib', tradeName: 'Xalkori', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Lenvatinib', tradeName: 'Lenvima', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Nilotinib', tradeName: 'Tasigna', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Ribociclib', tradeName: 'Kisqali', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Sunitinib', tradeName: 'Sutent', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Toremifene', tradeName: 'Fareston', risk: 'known', drugClass: 'Oncology' },
+    { name: 'Oxaliplatin', tradeName: 'Eloxatin', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Pazopanib', tradeName: 'Votrient', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Tamoxifen', tradeName: 'Nolvadex', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Vemurafenib', tradeName: 'Zelboraf', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Encorafenib', tradeName: 'Braftovi', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Gilteritinib', tradeName: 'Xospata', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Osimertinib', tradeName: 'Tagrisso', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Capecitabine', tradeName: 'Xeloda', risk: 'conditional', drugClass: 'Oncology' },
+    { name: 'Ivosidenib', tradeName: 'Tibsovo', risk: 'known', drugClass: 'Oncology' },
     // HIV / Antivirals
-    { name: 'Rilpivirine', risk: 'possible', drugClass: 'HIV/Antiviral' },
-    { name: 'Saquinavir', risk: 'possible', drugClass: 'HIV/Antiviral' },
-    { name: 'Efavirenz', risk: 'possible', drugClass: 'HIV/Antiviral' },
-    { name: 'Foscarnet', risk: 'conditional', drugClass: 'Antiviral', note: 'Via electrolyte derangements (Ca, Mg)' },
+    { name: 'Rilpivirine', tradeName: 'Edurant', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Saquinavir', tradeName: 'Invirase', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Efavirenz', tradeName: 'Sustiva', risk: 'possible', drugClass: 'HIV/Antiviral' },
+    { name: 'Foscarnet', tradeName: 'Foscavir', risk: 'conditional', drugClass: 'Antiviral', note: 'Via electrolyte derangements (Ca, Mg)' },
     // Cardiology (non-antiarrhythmic)
-    { name: 'Ranolazine', risk: 'possible', drugClass: 'Cardiology' },
-    { name: 'Ivabradine', risk: 'possible', drugClass: 'Cardiology' },
-    { name: 'Cilostazol', risk: 'possible', drugClass: 'Cardiology' },
-    { name: 'Nicardipine', risk: 'conditional', drugClass: 'Cardiology' },
-    { name: 'Isradipine', risk: 'conditional', drugClass: 'Cardiology' },
+    { name: 'Ranolazine', tradeName: 'Ranexa', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Ivabradine', tradeName: 'Corlanor', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Cilostazol', tradeName: 'Pletal', risk: 'possible', drugClass: 'Cardiology' },
+    { name: 'Nicardipine', tradeName: 'Cardene', risk: 'conditional', drugClass: 'Cardiology' },
+    { name: 'Isradipine', tradeName: 'DynaCirc', risk: 'conditional', drugClass: 'Cardiology' },
     // GI
-    { name: 'Cisapride', risk: 'known', drugClass: 'GI', note: 'Withdrawn in US due to TdP' },
-    { name: 'Esomeprazole', risk: 'possible', drugClass: 'GI' },
-    { name: 'Famotidine', risk: 'possible', drugClass: 'GI' },
-    { name: 'Pantoprazole', risk: 'possible', drugClass: 'GI' },
+    { name: 'Cisapride', tradeName: 'Propulsid', risk: 'known', drugClass: 'GI', note: 'Withdrawn in US due to TdP' },
+    { name: 'Esomeprazole', tradeName: 'Nexium', risk: 'possible', drugClass: 'GI' },
+    { name: 'Famotidine', tradeName: 'Pepcid', risk: 'possible', drugClass: 'GI' },
+    { name: 'Pantoprazole', tradeName: 'Protonix', risk: 'possible', drugClass: 'GI' },
     // Other
     { name: 'Cocaine', risk: 'known', drugClass: 'Substance of Abuse' },
-    { name: 'Donepezil', risk: 'known', drugClass: 'Cholinesterase Inhibitor' },
-    { name: 'Eliglustat', risk: 'known', drugClass: 'Other' },
+    { name: 'Donepezil', tradeName: 'Aricept', risk: 'known', drugClass: 'Cholinesterase Inhibitor' },
+    { name: 'Eliglustat', tradeName: 'Cerdelga', risk: 'known', drugClass: 'Other' },
     { name: 'Papaverine', risk: 'known', drugClass: 'Vasodilator' },
     { name: 'Probucol', risk: 'known', drugClass: 'Other' },
-    { name: 'Sevoflurane', risk: 'known', drugClass: 'Anesthetic' },
-    { name: 'Propofol', risk: 'conditional', drugClass: 'Anesthetic', note: 'Risk with propofol infusion syndrome' },
-    { name: 'Anagrelide', risk: 'possible', drugClass: 'Hematology' },
-    { name: 'Fingolimod', risk: 'possible', drugClass: 'Immunology' },
-    { name: 'Solifenacin', risk: 'possible', drugClass: 'Urology' },
-    { name: 'Alfuzosin', risk: 'possible', drugClass: 'Urology' },
-    { name: 'Gadobenate', risk: 'conditional', drugClass: 'Contrast Agent' },
-    { name: 'Galantamine', risk: 'possible', drugClass: 'Cholinesterase Inhibitor' },
-    { name: 'Pasireotide', risk: 'possible', drugClass: 'Other' },
-    { name: 'Sumatriptan', risk: 'conditional', drugClass: 'Migraine' },
-    { name: 'Tizanidine', risk: 'possible', drugClass: 'Muscle Relaxant' },
-    { name: 'Diphenhydramine', risk: 'conditional', drugClass: 'Antihistamine', note: 'Risk with overdose' },
-    { name: 'Hydroxyzine', risk: 'possible', drugClass: 'Antihistamine' },
-    { name: 'Lithium', risk: 'conditional', drugClass: 'Mood Stabilizer', note: 'Risk with toxicity' },
-    { name: 'Atomoxetine', risk: 'possible', drugClass: 'ADHD' },
-    { name: 'Amphetamines', risk: 'conditional', drugClass: 'Stimulant', note: 'Risk with overdose' },
-    { name: 'Terbutaline', risk: 'conditional', drugClass: 'Beta-agonist', note: 'IV use' },
-    { name: 'Tacrolimus', risk: 'possible', drugClass: 'Immunosuppressant' },
-    { name: 'Midostaurin', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Degarelix', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Leuprolide', risk: 'possible', drugClass: 'Oncology' },
-    { name: 'Oxytocin', risk: 'conditional', drugClass: 'Obstetric', note: 'IV bolus' },
-    { name: 'Phenylephrine', risk: 'conditional', drugClass: 'Vasopressor', note: 'Via reflex bradycardia' },
-    { name: 'Indapamide', risk: 'possible', drugClass: 'Diuretic' },
-    { name: 'Furosemide', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
-    { name: 'Hydrochlorothiazide', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
+    { name: 'Sevoflurane', tradeName: 'Ultane', risk: 'known', drugClass: 'Anesthetic' },
+    { name: 'Propofol', tradeName: 'Diprivan', risk: 'conditional', drugClass: 'Anesthetic', note: 'Risk with propofol infusion syndrome' },
+    { name: 'Anagrelide', tradeName: 'Agrylin', risk: 'possible', drugClass: 'Hematology' },
+    { name: 'Fingolimod', tradeName: 'Gilenya', risk: 'possible', drugClass: 'Immunology' },
+    { name: 'Solifenacin', tradeName: 'Vesicare', risk: 'possible', drugClass: 'Urology' },
+    { name: 'Alfuzosin', tradeName: 'Uroxatral', risk: 'possible', drugClass: 'Urology' },
+    { name: 'Gadobenate', tradeName: 'MultiHance', risk: 'conditional', drugClass: 'Contrast Agent' },
+    { name: 'Galantamine', tradeName: 'Razadyne', risk: 'possible', drugClass: 'Cholinesterase Inhibitor' },
+    { name: 'Pasireotide', tradeName: 'Signifor', risk: 'possible', drugClass: 'Other' },
+    { name: 'Sumatriptan', tradeName: 'Imitrex', risk: 'conditional', drugClass: 'Migraine' },
+    { name: 'Tizanidine', tradeName: 'Zanaflex', risk: 'possible', drugClass: 'Muscle Relaxant' },
+    { name: 'Diphenhydramine', tradeName: 'Benadryl', risk: 'conditional', drugClass: 'Antihistamine', note: 'Risk with overdose' },
+    { name: 'Hydroxyzine', tradeName: 'Vistaril, Atarax', risk: 'possible', drugClass: 'Antihistamine' },
+    { name: 'Lithium', tradeName: 'Lithobid', risk: 'conditional', drugClass: 'Mood Stabilizer', note: 'Risk with toxicity' },
+    { name: 'Atomoxetine', tradeName: 'Strattera', risk: 'possible', drugClass: 'ADHD' },
+    { name: 'Amphetamines', tradeName: 'Adderall', risk: 'conditional', drugClass: 'Stimulant', note: 'Risk with overdose' },
+    { name: 'Terbutaline', tradeName: 'Brethine', risk: 'conditional', drugClass: 'Beta-agonist', note: 'IV use' },
+    { name: 'Tacrolimus', tradeName: 'Prograf', risk: 'possible', drugClass: 'Immunosuppressant' },
+    { name: 'Midostaurin', tradeName: 'Rydapt', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Degarelix', tradeName: 'Firmagon', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Leuprolide', tradeName: 'Lupron', risk: 'possible', drugClass: 'Oncology' },
+    { name: 'Oxytocin', tradeName: 'Pitocin', risk: 'conditional', drugClass: 'Obstetric', note: 'IV bolus' },
+    { name: 'Phenylephrine', tradeName: 'Neo-Synephrine', risk: 'conditional', drugClass: 'Vasopressor', note: 'Via reflex bradycardia' },
+    { name: 'Indapamide', tradeName: 'Lozol', risk: 'possible', drugClass: 'Diuretic' },
+    { name: 'Furosemide', tradeName: 'Lasix', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
+    { name: 'Hydrochlorothiazide', tradeName: 'Microzide, HCTZ', risk: 'conditional', drugClass: 'Diuretic', note: 'Via hypokalemia/hypomagnesemia' },
 ];
 const QT_DRUG_RISK_CONFIG = {
     known: { label: 'Known Risk', color: '#fff', bg: '#d32f2f' },
@@ -17612,15 +17612,15 @@ const QT_DRUG_CHECKER_CALCULATOR = {
     ],
     customRender: (container, _onUpdate) => {
         container.style.cssText = 'padding:0;';
-        // Search input
+        // Search input — pearl white theme
         const searchWrap = document.createElement('div');
-        searchWrap.style.cssText = 'position:sticky;top:0;z-index:2;padding:12px 16px;background:var(--color-surface-card, #1a1a2e);border-bottom:1px solid rgba(255,255,255,0.1);';
+        searchWrap.style.cssText = 'position:sticky;top:0;z-index:2;padding:12px 16px;background:var(--color-bg, #FAFAF5);border-bottom:1px solid rgba(0,0,0,0.1);';
         const searchInput = document.createElement('input');
         searchInput.type = 'text';
-        searchInput.placeholder = 'Search drug name...';
-        searchInput.style.cssText = 'width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:var(--color-text, #fff);font-size:16px;outline:none;min-height:44px;box-sizing:border-box;';
+        searchInput.placeholder = 'Search generic or trade name...';
+        searchInput.style.cssText = 'width:100%;padding:12px 16px;border-radius:10px;border:2px solid rgba(0,0,0,0.15);background:#fff;color:var(--color-text-primary, #1A1A1A);font-size:16px;outline:none;min-height:44px;box-sizing:border-box;';
         searchInput.addEventListener('focus', () => { searchInput.style.borderColor = 'var(--color-decision-active, #3CB371)'; });
-        searchInput.addEventListener('blur', () => { searchInput.style.borderColor = 'rgba(255,255,255,0.2)'; });
+        searchInput.addEventListener('blur', () => { searchInput.style.borderColor = 'rgba(0,0,0,0.15)'; });
         searchWrap.appendChild(searchInput);
         container.appendChild(searchWrap);
         // Results container
@@ -17630,27 +17630,34 @@ const QT_DRUG_CHECKER_CALCULATOR = {
         // Build drug result item
         function buildDrugItem(drug) {
             const item = document.createElement('div');
-            item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin-bottom:6px;border-radius:8px;background:rgba(255,255,255,0.05);';
+            item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 12px;margin-bottom:6px;border-radius:8px;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.06);';
             const left = document.createElement('div');
+            left.style.cssText = 'flex:1;min-width:0;margin-right:8px;';
             const nameEl = document.createElement('div');
-            nameEl.style.cssText = 'font-weight:600;font-size:15px;color:var(--color-text, #fff);';
+            nameEl.style.cssText = 'font-weight:600;font-size:15px;color:var(--color-text-primary, #1A1A1A);';
             nameEl.textContent = drug.name;
             left.appendChild(nameEl);
+            if (drug.tradeName) {
+                const tradeEl = document.createElement('div');
+                tradeEl.style.cssText = 'font-size:13px;color:var(--color-decision-active, #3CB371);margin-top:1px;font-style:italic;';
+                tradeEl.textContent = drug.tradeName;
+                left.appendChild(tradeEl);
+            }
             const classEl = document.createElement('div');
-            classEl.style.cssText = 'font-size:12px;color:var(--color-text-secondary, #aaa);margin-top:2px;';
+            classEl.style.cssText = 'font-size:12px;color:var(--color-text-secondary, #5A5A5A);margin-top:2px;';
             classEl.textContent = drug.drugClass;
             if (drug.note)
                 classEl.textContent += ` \u2014 ${drug.note}`;
             left.appendChild(classEl);
             const badge = document.createElement('span');
             const config = QT_DRUG_RISK_CONFIG[drug.risk];
-            badge.style.cssText = `padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap;color:${config.color};background:${config.bg};`;
+            badge.style.cssText = `padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0;color:${config.color};background:${config.bg};`;
             badge.textContent = config.label;
             item.appendChild(left);
             item.appendChild(badge);
             return item;
         }
-        // Render by-category view
+        // Render by-category view — all categories open by default
         function renderCategories() {
             resultsContainer.innerHTML = '';
             const categories = new Map();
@@ -17666,8 +17673,8 @@ const QT_DRUG_CHECKER_CALCULATOR = {
                 const details = document.createElement('details');
                 details.style.cssText = 'margin-bottom:8px;';
                 const summary = document.createElement('summary');
-                summary.style.cssText = 'padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.08);cursor:pointer;font-weight:600;font-size:14px;color:var(--color-text, #fff);list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;';
-                summary.innerHTML = `${catName} <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary, #aaa);">${drugs.length} drugs</span>`;
+                summary.style.cssText = 'padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.05);cursor:pointer;font-weight:600;font-size:14px;color:var(--color-text-primary, #1A1A1A);list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;';
+                summary.innerHTML = `${catName} <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary, #5A5A5A);">${drugs.length} drugs</span>`;
                 details.appendChild(summary);
                 const content = document.createElement('div');
                 content.style.cssText = 'padding:8px 0 0;';
@@ -17679,18 +17686,24 @@ const QT_DRUG_CHECKER_CALCULATOR = {
             }
             // Footer
             const footer = document.createElement('div');
-            footer.style.cssText = 'text-align:center;padding:16px 0 8px;font-size:11px;color:var(--color-text-secondary, #888);';
+            footer.style.cssText = 'text-align:center;padding:16px 0 8px;font-size:11px;color:var(--color-text-secondary, #5A5A5A);';
             footer.textContent = `${QT_DRUG_DATABASE.length} drugs \u2022 Data from CredibleMeds.org`;
             resultsContainer.appendChild(footer);
         }
-        // Render search results
+        // Render search results — matches generic name, trade name, and drug class
         function renderSearchResults(query) {
             resultsContainer.innerHTML = '';
             const q = query.toLowerCase().trim();
-            const matches = QT_DRUG_DATABASE.filter(d => d.name.toLowerCase().includes(q) || d.drugClass.toLowerCase().includes(q)).sort((a, b) => {
-                // Exact prefix matches first
-                const aPrefix = a.name.toLowerCase().startsWith(q) ? 0 : 1;
-                const bPrefix = b.name.toLowerCase().startsWith(q) ? 0 : 1;
+            const matches = QT_DRUG_DATABASE.filter(d => d.name.toLowerCase().includes(q) ||
+                (d.tradeName && d.tradeName.toLowerCase().includes(q)) ||
+                d.drugClass.toLowerCase().includes(q)).sort((a, b) => {
+                // Exact prefix matches on generic or trade name first
+                const aGenericPrefix = a.name.toLowerCase().startsWith(q) ? 0 : 1;
+                const bGenericPrefix = b.name.toLowerCase().startsWith(q) ? 0 : 1;
+                const aTradePrefix = (a.tradeName && a.tradeName.toLowerCase().split(/,\s*/).some(t => t.startsWith(q))) ? 0 : 1;
+                const bTradePrefix = (b.tradeName && b.tradeName.toLowerCase().split(/,\s*/).some(t => t.startsWith(q))) ? 0 : 1;
+                const aPrefix = Math.min(aGenericPrefix, aTradePrefix);
+                const bPrefix = Math.min(bGenericPrefix, bTradePrefix);
                 if (aPrefix !== bPrefix)
                     return aPrefix - bPrefix;
                 return a.name.localeCompare(b.name);
@@ -17707,14 +17720,14 @@ const QT_DRUG_CHECKER_CALCULATOR = {
                 msg.textContent = 'No Known QT Risk';
                 noResult.appendChild(msg);
                 const sub = document.createElement('div');
-                sub.style.cssText = 'font-size:13px;color:var(--color-text-secondary, #aaa);';
+                sub.style.cssText = 'font-size:13px;color:var(--color-text-secondary, #5A5A5A);';
                 sub.textContent = `"${query}" not found in CredibleMeds QT drug database. This does not guarantee zero risk \u2014 always check electrolytes and clinical context.`;
                 noResult.appendChild(sub);
                 resultsContainer.appendChild(noResult);
                 return;
             }
             const countEl = document.createElement('div');
-            countEl.style.cssText = 'padding:4px 12px 8px;font-size:12px;color:var(--color-text-secondary, #aaa);';
+            countEl.style.cssText = 'padding:4px 12px 8px;font-size:12px;color:var(--color-text-secondary, #5A5A5A);';
             countEl.textContent = `${matches.length} result${matches.length !== 1 ? 's' : ''}`;
             resultsContainer.appendChild(countEl);
             for (const drug of matches)
