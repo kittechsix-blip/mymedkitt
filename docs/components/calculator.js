@@ -18223,11 +18223,13 @@ export function renderCalculator(container, calculatorId) {
     desc.className = 'calculator-description';
     desc.textContent = calc.description;
     container.appendChild(desc);
-    // Score display (will update in real-time)
+    // Score display (will update in real-time) — only if calculator has computeResult
     const scoreDisplay = document.createElement('div');
     scoreDisplay.className = 'calculator-score-display';
     scoreDisplay.id = 'calc-score-display';
-    container.appendChild(scoreDisplay);
+    if (!calc.customRender || calc.computeResult) {
+        container.appendChild(scoreDisplay);
+    }
     // Custom render path (e.g., SVG body diagrams)
     if (calc.customRender) {
         const customContainer = document.createElement('div');
