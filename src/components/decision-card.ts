@@ -128,15 +128,15 @@ function renderActiveQuestion(card: HTMLElement, node: DecisionNode, opts: CardO
   card.appendChild(title);
 
   // Body
+  // Images (before body so visual examples appear above explanatory text)
+  renderNodeImages(card, node);
+
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
     renderBodyText(body, node.body);
     card.appendChild(body);
   }
-
-  // Images
-  renderNodeImages(card, node);
 
   // Calculator links
   renderCalcLinks(card, node);
@@ -181,14 +181,14 @@ function renderActiveInfo(card: HTMLElement, node: DecisionNode, opts: CardOptio
   title.textContent = node.title;
   card.appendChild(title);
 
+  renderNodeImages(card, node);
+
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
     renderBodyText(body, node.body);
     card.appendChild(body);
   }
-
-  renderNodeImages(card, node);
   renderCalcLinks(card, node);
 
   if (node.citation?.length && opts.config) {
@@ -228,14 +228,14 @@ function renderActiveResult(card: HTMLElement, node: DecisionNode, opts: CardOpt
     card.appendChild(title);
   }
 
+  renderNodeImages(card, node);
+
   if (node.body) {
     const body = document.createElement('div');
     body.className = 'decision-card__body';
     renderBodyText(body, node.body);
     card.appendChild(body);
   }
-
-  renderNodeImages(card, node);
 
   // Recommendation
   if (node.recommendation) {

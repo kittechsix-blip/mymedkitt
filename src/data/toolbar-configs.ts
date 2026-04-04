@@ -514,6 +514,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'framework', label: 'REMAP', icon: '📋', action: 'jump', target: 'code-framework' },
     { id: 'everything', label: '"Everything"', icon: '🤔', action: 'jump', target: 'code-everything' },
   ],
+  'oxygen-delivery': [
+    { id: 'o2-settings', label: 'O2 Settings', icon: '⚙️', action: 'calculator', target: 'oxygen-settings' },
+    { id: 'rox', label: 'ROX Index', icon: '📊', action: 'calculator', target: 'rox-index' },
+    { id: 'escalation', label: 'Escalate', icon: '🔺', action: 'jump', target: 'o2-escalation' },
+    { id: 'devices', label: 'Devices', icon: '🫁', action: 'jump', target: 'o2-severity' },
+  ],
   'copd-exacerbation': [
     { id: 'bipap', label: 'BiPAP', icon: '💨', action: 'jump', target: 'copd-niv-indication' },
     { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'copd-antibiotics' },
