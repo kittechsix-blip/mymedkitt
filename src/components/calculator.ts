@@ -21081,7 +21081,477 @@ const GOUT_VS_SEPTIC_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// HOP Killers (Physiologically Difficult Airway) Calculators
+// -------------------------------------------------------------------
+
+const HOP_HYPOTENSIVE_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-hypotensive-intubation',
+  title: 'Hypotensive Intubation Guide',
+  subtitle: 'ROCKETamine + Push-Dose Pressors',
+  description: 'Quick reference for intubating hypotensive patients: shock-dose RSI and push-dose pressor preparation.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'sbp', label: 'SBP', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'on-pressors', label: 'Already on vasopressors', type: 'toggle', points: 2 },
+    { name: 'catecholamine-depleted', label: 'Catecholamine depleted (prolonged shock)', type: 'toggle', points: 2 },
+    { name: 'septic', label: 'Septic shock', type: 'toggle', points: 1 },
+    { name: 'hemorrhagic', label: 'Hemorrhagic shock', type: 'toggle', points: 1 },
+    { name: 'cardiogenic', label: 'Cardiogenic shock', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'ROCKETamine: Ketamine 0.5 mg/kg + Rocuronium 1.6 mg/kg. Give push-dose epinephrine WITH induction.',
+  citations: ['Heffner AC, et al. Predictors of post-intubation hypotension. J Crit Care. 2012;27(6):587-593.', 'Weingart SD. Push-dose pressors for immediate blood pressure control. AJEM. 2015.'],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 70;
+    const sbp = values['sbp'] || 100;
+    const onPressors = values['on-pressors'] || 0;
+    const depleted = values['catecholamine-depleted'] || 0;
+
+    const ketamineDose = Math.round(weight * 0.5);
+    const rocuroniumDose = Math.round(weight * 1.6);
+    const standardKetamine = Math.round(weight * 1.5);
+
+    let riskLevel = 'Standard';
+    let colorVar = '--color-primary';
+    if (sbp < 90 || onPressors || depleted) {
+      riskLevel = 'HIGH RISK';
+      colorVar = '--color-danger';
+    } else if (sbp < 100) {
+      riskLevel = 'ELEVATED RISK';
+      colorVar = '--color-warning';
+    }
+
+    return {
+      value: riskLevel,
+      label: 'Hypotensive Intubation',
+      description: `**ROCKETamine Doses (${weight} kg):**
+
+| Medication | Shock Dose | Standard |
+|------------|-----------|----------|
+| **Ketamine** | **${ketamineDose} mg** (0.5 mg/kg) | ${standardKetamine} mg (1.5 mg/kg) |
+| **Rocuronium** | **${rocuroniumDose} mg** (1.6 mg/kg) | ${Math.round(weight * 1.2)} mg (1.2 mg/kg) |
+
+**Push-Dose Epinephrine:**
+- Draw 1 mL cardiac epi (100 mcg/mL) + 9 mL NS = **10 mcg/mL**
+- Give **0.5-2 mL (5-20 mcg)** IV push WITH induction
+- May repeat q2-5 min PRN
+
+**Pre-Intubation Checklist:**
+- [ ] MAP target > 65 (ideally > 75)
+- [ ] Vasopressor infusion primed/running
+- [ ] Push-dose epi syringe at bedside
+- [ ] 2 large-bore IVs
+
+**NEVER give code-dose (1 mg) epinephrine to patients with a pulse.**`,
+      colorVar,
+    };
+  },
+};
+
+const HOP_HYPOXIC_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-hypoxic-intubation',
+  title: 'NODESAT & DSI Protocol',
+  subtitle: 'Hypoxic Intubation Guide',
+  description: 'Delayed Sequence Intubation and NODESAT protocol for hypoxemic patients.',
+  fields: [
+    { name: 'spo2', label: 'Current SpO2', type: 'number', points: 0, unit: '%' },
+    { name: 'fio2', label: 'Current FiO2', type: 'number', points: 0, unit: '%' },
+    { name: 'agitated', label: 'Agitated/fighting mask', type: 'toggle', points: 2 },
+    { name: 'shunt', label: 'Shunt physiology (ARDS, pneumonia)', type: 'toggle', points: 2 },
+    { name: 'obesity', label: 'Morbid obesity', type: 'toggle', points: 1 },
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'DSI uses procedural sedation dose ketamine to allow preoxygenation. The "procedure" IS effective preoxygenation.',
+  citations: ['Weingart SD, et al. Delayed sequence intubation. Ann Emerg Med. 2015;65(4):349-355.'],
+  computeResult: (values: Record<string, number>) => {
+    const spo2 = values['spo2'] || 95;
+    const weight = values['weight'] || 70;
+    const agitated = values['agitated'] || 0;
+
+    const ketamineLow = Math.round(weight * 1);
+    const ketamineHigh = Math.round(weight * 2);
+
+    let riskLevel = 'Standard Preoxygenation';
+    let colorVar = '--color-primary';
+    let dsiIndicated = false;
+
+    if (spo2 < 93 || agitated) {
+      riskLevel = 'DSI INDICATED';
+      colorVar = '--color-danger';
+      dsiIndicated = true;
+    } else if (spo2 < 95) {
+      riskLevel = 'Consider DSI';
+      colorVar = '--color-warning';
+    }
+
+    const dsiProtocol = dsiIndicated ? `
+**DSI Protocol:**
+1. Push **ketamine ${ketamineLow}-${ketamineHigh} mg** IV (1-2 mg/kg)
+2. Wait 30-60 seconds for dissociation
+3. Apply NRB or CPAP/BiPAP
+4. Preoxygenate 2-3 minutes to SpO2 > 95%
+5. Document baseline ETCO2
+6. THEN push paralytic
+7. Intubate after 45-60 sec
+
+` : '';
+
+    return {
+      value: riskLevel,
+      label: 'Hypoxic Intubation',
+      description: `**N-O-D-E-S-A-T Checklist:**
+
+| Step | Action | Details |
+|------|--------|---------|
+| **N** | Nasal O2 | NC 15 lpm OR HFNC 60 lpm |
+| **O** | Optimal position | Head elevated, ramped |
+| **D** | DSI | Ketamine if not cooperating |
+| **E** | End-tidal CO2 | Document baseline |
+| **S** | Suction | Ready and tested |
+| **A** | Apneic oxygenation | NC stays ON during laryngoscopy |
+| **T** | Two-person BVM | For rescue |
+
+${dsiProtocol}**Apneic Oxygenation:**
+- Keep NC at 15 lpm during intubation attempt
+- HFNC 60 lpm if available (no proven superiority)
+
+**If SpO2 drops during attempt:** STOP, BVM with PEEP, reoxygenate, retry.`,
+      colorVar,
+    };
+  },
+};
+
+const HOP_ACIDOTIC_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-acidotic-intubation',
+  title: 'Acidotic Intubation Guide',
+  subtitle: 'Winter\'s Formula & VAPOX',
+  description: 'Ventilator settings and Winter\'s formula for severely acidotic patients.',
+  fields: [
+    { name: 'ph', label: 'pH', type: 'number', points: 0 },
+    { name: 'hco3', label: 'HCO3', type: 'number', points: 0, unit: 'mEq/L' },
+    { name: 'current-rr', label: 'Current RR', type: 'number', points: 0, unit: '/min' },
+    { name: 'weight', label: 'Weight (IBW)', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Try to AVOID intubation in severe acidosis. Even brief apnea is dangerous. If intubating, match pre-intubation minute ventilation.',
+  citations: ['Farkas J. IBCC: Ventilatory management of severe metabolic acidosis. EMCrit.org.'],
+  computeResult: (values: Record<string, number>) => {
+    const ph = values['ph'] || 7.4;
+    const hco3 = values['hco3'] || 24;
+    const currentRR = values['current-rr'] || 20;
+    const weight = values['weight'] || 70;
+
+    const expectedPco2Low = Math.round((1.5 * hco3) + 8 - 2);
+    const expectedPco2High = Math.round((1.5 * hco3) + 8 + 2);
+    const expectedPco2Mid = Math.round((1.5 * hco3) + 8);
+
+    // Estimate target RR post-intubation (assuming TV ~500 mL)
+    const targetMV = currentRR * 500 / 1000; // L/min
+    const postIntubationRR = Math.round(targetMV * 1000 / (8 * weight)); // using 8 mL/kg TV
+    const recommendedRR = Math.min(Math.max(postIntubationRR, 20), 35);
+
+    let riskLevel = 'Moderate Risk';
+    let colorVar = '--color-warning';
+    if (ph < 7.1) {
+      riskLevel = 'CRITICAL - Avoid Intubation';
+      colorVar = '--color-danger';
+    } else if (ph < 7.2) {
+      riskLevel = 'HIGH RISK';
+      colorVar = '--color-danger';
+    } else if (ph >= 7.3) {
+      riskLevel = 'Lower Risk';
+      colorVar = '--color-primary';
+    }
+
+    return {
+      value: riskLevel,
+      label: 'Acidotic Intubation',
+      description: `**Winter's Formula:**
+\`\`\`
+Expected PaCO2 = (1.5 x HCO3) + 8 (+/- 2)
+             = (1.5 x ${hco3}) + 8
+             = ${expectedPco2Low}-${expectedPco2High} mmHg
+\`\`\`
+
+**Patient must maintain PaCO2 ~${expectedPco2Mid} mmHg to compensate.**
+
+**VAPOX Technique (Pre-Intubation):**
+1. Set up ICU vent with NIV mask
+2. Mode: SIMV, TV 550, FiO2 100%, RR **0**
+3. PEEP 5-15 cmH2O, PSV 5-15
+4. Monitor ETCO2 as baseline
+5. After induction: increase RR to 12, vent breathes through mask
+
+**Post-Intubation Vent Settings:**
+| Parameter | Recommendation |
+|-----------|----------------|
+| **RR** | **${recommendedRR}-30 breaths/min** |
+| **TV** | ${Math.round(weight * 8)} mL (8 mL/kg) |
+| **Target ETCO2** | Match pre-intubation |
+| **Flow** | 60 lpm |
+
+**GET ABG URGENTLY post-intubation.**
+
+**Bicarb generally NOT recommended** - generates CO2.`,
+      colorVar,
+    };
+  },
+};
+
+const HOP_RV_FAILURE_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-rv-failure-intubation',
+  title: 'RV Failure Intubation Guide',
+  subtitle: 'PE / Pulmonary HTN Strategy',
+  description: 'Intubation strategy for right heart failure. AVOID intubation if at all possible.',
+  fields: [
+    { name: 'massive-pe', label: 'Massive PE (shock)', type: 'toggle', points: 3 },
+    { name: 'submassive-pe', label: 'Submassive PE (RV strain)', type: 'toggle', points: 2 },
+    { name: 'pulm-htn', label: 'Known pulmonary hypertension', type: 'toggle', points: 2 },
+    { name: 'rv-infarct', label: 'RV infarction', type: 'toggle', points: 2 },
+    { name: 'hypotensive', label: 'Hypotensive (SBP < 90)', type: 'toggle', points: 2 },
+    { name: 'jvd', label: 'JVD present', type: 'toggle', points: 1 },
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'PPV dramatically worsens RV failure. Awake intubation or avoiding intubation altogether is preferred.',
+  citations: ['Farkas J. IBCC: RV failure and pulmonary hypertension. EMCrit.org.'],
+  computeResult: (values: Record<string, number>) => {
+    const massivePE = values['massive-pe'] || 0;
+    const hypotensive = values['hypotensive'] || 0;
+    const weight = values['weight'] || 70;
+
+    const ketamineDose = Math.round(weight * 0.5);
+    const rocuroniumDose = Math.round(weight * 1.2);
+
+    let riskLevel = 'HIGH RISK';
+    let colorVar = '--color-danger';
+
+    if (massivePE || hypotensive) {
+      riskLevel = 'CRITICAL - Avoid if Possible';
+    }
+
+    return {
+      value: riskLevel,
+      label: 'RV Failure Intubation',
+      description: `**AVOID INTUBATION IF POSSIBLE**
+
+PPV worsens RV failure via:
+- Increased RV afterload
+- Decreased RV preload
+- Decreased LV filling (septal shift)
+
+**First, Try:**
+- NIV/CPAP
+- Treat underlying cause
+- Thrombolytics for massive PE
+
+**Avoid:**
+| Factor | Why |
+|--------|-----|
+| Hypoxia | Pulm vasoconstriction |
+| Hypercarbia | Pulm vasoconstriction |
+| Acidosis | Pulm vasoconstriction |
+| Propofol | Drops SVR |
+| Excessive fluid | Worsens RV distension |
+| High PEEP | Increases RV afterload |
+
+**If RSI Unavoidable:**
+- **Ketamine ${ketamineDose} mg** (0.5 mg/kg)
+- **Rocuronium ${rocuroniumDose} mg** (1.2 mg/kg)
+- Vasopressors RUNNING before induction
+- Push-dose epi WITH induction
+
+**Post-Intubation:**
+| Setting | Target |
+|---------|--------|
+| **PEEP** | LOW (5-8 cmH2O) |
+| **TV** | 6-8 mL/kg |
+| **FiO2** | 100% initially |
+| **Avoid hypercarbia** | RR adequate |
+
+**Consider awake intubation** - preserves spontaneous ventilation.`,
+      colorVar,
+    };
+  },
+};
+
+const HOP_METABOLIC_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-metabolic-intubation',
+  title: 'Metabolic (K+) Intubation Guide',
+  subtitle: 'Hyperkalemia Management',
+  description: 'Pre-intubation hyperkalemia treatment and paralytic selection.',
+  fields: [
+    { name: 'potassium', label: 'Serum K+', type: 'number', points: 0, unit: 'mEq/L' },
+    { name: 'ecg-changes', label: 'ECG changes present', type: 'toggle', points: 3 },
+    { name: 'burns', label: 'Burns > 24-72 hours', type: 'toggle', points: 2 },
+    { name: 'crush', label: 'Crush injury > 24-72 hours', type: 'toggle', points: 2 },
+    { name: 'sci', label: 'Spinal cord injury (recent)', type: 'toggle', points: 2 },
+    { name: 'immobilized', label: 'Prolonged immobilization', type: 'toggle', points: 1 },
+    { name: 'muscular-dystrophy', label: 'Muscular dystrophy', type: 'toggle', points: 3 },
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Succinylcholine raises K+ ~0.5 mEq/L. Use rocuronium in ALL patients with hyperkalemia or upregulated ACh receptors.',
+  citations: ['Martyn JAJ, et al. Succinylcholine-induced hyperkalemia. Anesthesiology. 2006;104(1):158-169.'],
+  computeResult: (values: Record<string, number>) => {
+    const k = values['potassium'] || 5;
+    const ecgChanges = values['ecg-changes'] || 0;
+    const weight = values['weight'] || 70;
+    const burns = values['burns'] || 0;
+    const crush = values['crush'] || 0;
+    const sci = values['sci'] || 0;
+    const md = values['muscular-dystrophy'] || 0;
+
+    const rocuroniumDose = Math.round(weight * 1.2);
+    const rocuroniumShock = Math.round(weight * 1.6);
+
+    const contraindications = burns + crush + sci + md;
+
+    let riskLevel = 'Use Rocuronium';
+    let colorVar = '--color-warning';
+    if (k > 6 || ecgChanges || contraindications > 0) {
+      riskLevel = 'SUCCINYLCHOLINE CONTRAINDICATED';
+      colorVar = '--color-danger';
+    } else if (k > 5.5) {
+      riskLevel = 'Avoid Succinylcholine';
+      colorVar = '--color-warning';
+    } else if (k <= 5) {
+      riskLevel = 'Standard Precautions';
+      colorVar = '--color-primary';
+    }
+
+    return {
+      value: riskLevel,
+      label: 'Metabolic Intubation',
+      description: `**Succinylcholine raises K+ ~0.5 mEq/L**
+
+**Current K+: ${k} mEq/L** ${k > 5.5 ? '- ELEVATED' : ''}
+
+**Pre-Intubation Treatment (if K+ > 5.5):**
+| Intervention | Dose | Onset |
+|--------------|------|-------|
+| **Calcium gluconate** | 1-2 g IV over 5-10 min | 1-3 min |
+| **Calcium chloride** | 1 g IV (central) | 1-3 min |
+| **Regular insulin** | 10 units IV | 15-30 min |
+| **D50** | 50 mL (25g) IV | -- |
+| **Albuterol** | 10-20 mg neb | 15-30 min |
+
+**Give calcium FIRST** - membrane stabilization is immediate.
+
+**Paralytic Selection:**
+| Agent | Dose | Notes |
+|-------|------|-------|
+| **Rocuronium** | **${rocuroniumDose}-${rocuroniumShock} mg** | SAFE in hyperK |
+| Succinylcholine | AVOID | Raises K+ |
+
+**Succinylcholine Contraindications:**
+- K+ > 5.5 mEq/L
+- Burns > 24-72 hours
+- Crush injury > 24-72 hours
+- Spinal cord injury (up to 2 years)
+- Prolonged immobilization
+- Muscular dystrophy
+- Denervation injuries`,
+      colorVar,
+    };
+  },
+};
+
+const HOP_ELEVATED_ICP_INTUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'hop-elevated-icp-intubation',
+  title: 'Elevated ICP Intubation Guide',
+  subtitle: 'Neuroprotective Intubation',
+  description: 'Induction strategy and post-intubation management for elevated ICP.',
+  fields: [
+    { name: 'tbi', label: 'Traumatic brain injury', type: 'toggle', points: 2 },
+    { name: 'ich', label: 'Intracerebral hemorrhage', type: 'toggle', points: 2 },
+    { name: 'mass-effect', label: 'Mass effect on imaging', type: 'toggle', points: 2 },
+    { name: 'herniation', label: 'Herniation signs present', type: 'toggle', points: 3 },
+    { name: 'hypotensive', label: 'Hypotensive (SBP < 100)', type: 'toggle', points: 2 },
+    { name: 'posturing', label: 'Posturing', type: 'toggle', points: 3 },
+    { name: 'pupil', label: 'Dilated/fixed pupil', type: 'toggle', points: 3 },
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Ketamine is SAFE in elevated ICP. Modern evidence does NOT support the old dogma. Maintain MAP > 80 for CPP.',
+  citations: ['Zeiler FA, et al. Ketamine and ICP: A systematic review. J Neurotrauma. 2016;33(24):2089-2104.'],
+  computeResult: (values: Record<string, number>) => {
+    const herniation = values['herniation'] || 0;
+    const posturing = values['posturing'] || 0;
+    const pupil = values['pupil'] || 0;
+    const hypotensive = values['hypotensive'] || 0;
+    const weight = values['weight'] || 70;
+
+    const ketamineDose = Math.round(weight * 1);
+    const fentanylDose = Math.round(weight * 3);
+    const rocuroniumDose = Math.round(weight * 1.2);
+    const etomidateDose = Math.round(weight * 0.3 * 10) / 10;
+
+    const activeHerniation = herniation || posturing || pupil;
+
+    let riskLevel = 'Neuroprotective RSI';
+    let colorVar = '--color-warning';
+    if (activeHerniation) {
+      riskLevel = 'ACTIVE HERNIATION';
+      colorVar = '--color-danger';
+    }
+
+    return {
+      value: riskLevel,
+      label: 'Elevated ICP Intubation',
+      description: `**Goals:**
+- SBP > 100 mmHg
+- MAP > 80 mmHg
+- SpO2 > 95%
+- PaCO2 35-40 mmHg (post-intubation)
+
+**KETAMINE IS SAFE IN TBI**
+Modern evidence does NOT support old dogma about ketamine raising ICP.
+${hypotensive ? '**Ketamine PREFERRED** in hypotensive TBI - maintains BP = maintains CPP.' : ''}
+
+**Induction Options (${weight} kg):**
+| Agent | Dose | Pros |
+|-------|------|------|
+| **Ketamine** | ${ketamineDose} mg (1 mg/kg) | Maintains hemodynamics |
+| **Etomidate** | ${etomidateDose} mg (0.3 mg/kg) | Minimal BP effect |
+| **Propofol** | ${Math.round(weight * 1.5)} mg (if normotensive) | Reduces CMRO2 |
+
+**Pretreatment:**
+- **Fentanyl ${fentanylDose} mcg** (3-5 mcg/kg) 3-5 min before laryngoscopy
+- Blunts sympathetic response
+- Have push-dose pressors ready
+
+**Paralytic:** Rocuronium ${rocuroniumDose} mg (1.2 mg/kg)
+
+**Post-Intubation:**
+| Target | Value |
+|--------|-------|
+| **HOB** | 30-45 degrees |
+| **SpO2** | > 95% |
+| **ETCO2** | 35 mmHg (then ABG) |
+| **PaCO2** | 35-40 mmHg |
+| **PEEP** | Minimize if possible |
+
+${activeHerniation ? `**ACTIVE HERNIATION MANAGEMENT:**
+- Temporarily hyperventilate to PaCO2 30-35
+- Mannitol 1 g/kg IV OR
+- 23.4% NaCl 30 mL IV (if central line)
+- STAT neurosurgery consultation` : '**AVOID routine hyperventilation** - may cause cerebral ischemia.'}`,
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // HOP Killers (Physiologically Difficult Airway)
+  'hop-hypotensive-intubation': HOP_HYPOTENSIVE_INTUBATION_CALCULATOR,
+  'hop-hypoxic-intubation': HOP_HYPOXIC_INTUBATION_CALCULATOR,
+  'hop-acidotic-intubation': HOP_ACIDOTIC_INTUBATION_CALCULATOR,
+  'hop-rv-failure-intubation': HOP_RV_FAILURE_INTUBATION_CALCULATOR,
+  'hop-metabolic-intubation': HOP_METABOLIC_INTUBATION_CALCULATOR,
+  'hop-elevated-icp-intubation': HOP_ELEVATED_ICP_INTUBATION_CALCULATOR,
   // Pediatric Arthritis
   'peds-arth-kocher': PEDS_ARTH_KOCHER_CALCULATOR,
   'peds-arth-caird': PEDS_ARTH_CAIRD_CALCULATOR,

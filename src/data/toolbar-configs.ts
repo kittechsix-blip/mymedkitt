@@ -853,6 +853,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'gout-synovial', label: 'Synovial', icon: '🧪', action: 'calculator', target: 'gout-synovial-interpreter' },
     { id: 'gout-vs-septic', label: 'vs Septic', icon: '🦠', action: 'calculator', target: 'gout-vs-septic' },
   ],
+  'hop-killers': [
+    { id: 'hop-hypotensive', label: 'Hypotensive', icon: '💉', action: 'calculator', target: 'hop-hypotensive-intubation' },
+    { id: 'hop-hypoxic', label: 'Hypoxic', icon: '🫁', action: 'calculator', target: 'hop-hypoxic-intubation' },
+    { id: 'hop-acidotic', label: 'Acidotic', icon: '⚗️', action: 'calculator', target: 'hop-acidotic-intubation' },
+    { id: 'hop-rv', label: 'RV Failure', icon: '❤️', action: 'calculator', target: 'hop-rv-failure-intubation' },
+    { id: 'hop-metabolic', label: 'Metabolic', icon: '⚡', action: 'calculator', target: 'hop-metabolic-intubation' },
+    { id: 'hop-icp', label: 'Elevated ICP', icon: '🧠', action: 'calculator', target: 'hop-elevated-icp-intubation' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

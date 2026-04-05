@@ -645,6 +645,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/gout.js');
             return { nodes: m.GOUT_NODES, entryNodeId: 'gout-start', categoryId: 'rheumatology', moduleLabels: m.GOUT_MODULE_LABELS, citations: m.GOUT_CITATIONS };
         },
+        'hop-killers': async () => {
+            const m = await import('../data/trees/hop-killers.js');
+            return { nodes: m.HOP_KILLERS_NODES, entryNodeId: 'hop-start', categoryId: 'anesthesia-airway', moduleLabels: m.HOP_KILLERS_MODULE_LABELS, citations: m.HOP_KILLERS_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
