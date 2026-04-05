@@ -793,6 +793,24 @@ const TOOLBAR_CONFIGS = {
         { id: 'cath', label: 'Catheter', icon: '🔧', action: 'jump', target: 'sphincter-cath-technique' },
         { id: 'neuro', label: 'Neuro Exam', icon: '🔍', action: 'jump', target: 'sphincter-neuro-exam' },
     ],
+    'sti-comprehensive': [
+        { id: 'cdc-rx', label: 'CDC Rx', icon: '📋', action: 'calculator', target: 'sti-cdc-regimens' },
+        { id: 'syndromes', label: 'Syndromes', icon: '💊', action: 'jump', target: 'sti-syndrome-picker' },
+        { id: 'pregnancy', label: 'Pregnancy', icon: '🤰', action: 'jump', target: 'sti-pregnancy-mods' },
+        { id: 'doxypep', label: 'DoxyPEP', icon: '🧪', action: 'jump', target: 'sti-doxypep-guide' },
+    ],
+    'ohss': [
+        { id: 'severity', label: 'Severity', icon: '📊', action: 'jump', target: 'ohss-branch-severity' },
+        { id: 'fluids', label: 'Fluids', icon: '💧', action: 'jump', target: 'ohss-fluid-management' },
+        { id: 'vte', label: 'VTE', icon: '🩸', action: 'jump', target: 'ohss-vte-prophylaxis' },
+        { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'ohss-disposition' },
+    ],
+    'rhogam-early-pregnancy': [
+        { id: 'first-tri', label: '1st Tri', icon: '🩸', action: 'jump', target: 'rhogam-first-trimester' },
+        { id: 'exceptions', label: 'Exceptions', icon: '⚠️', action: 'jump', target: 'rhogam-exceptions' },
+        { id: 'second-third', label: '2nd/3rd', icon: '📅', action: 'jump', target: 'rhogam-second-third' },
+        { id: 'dosing', label: 'Dosing', icon: '💉', action: 'jump', target: 'rhogam-dosing' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
