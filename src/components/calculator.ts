@@ -13236,6 +13236,451 @@ const KOCHER_CRITERIA_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Approach to Arthritis Calculators
+// -------------------------------------------------------------------
+
+const ARTH_INFLAMMATORY_MECHANICAL_CALCULATOR: CalculatorDefinition = {
+  id: 'arth-inflammatory-mechanical',
+  title: 'Inflammatory vs Mechanical',
+  subtitle: 'Arthritis Pattern Recognition',
+  description: 'Distinguishes inflammatory from mechanical/degenerative arthritis based on key clinical features. Helps guide workup and treatment approach.',
+  fields: [
+    {
+      name: 'morning-stiffness',
+      label: 'Morning Stiffness Duration',
+      type: 'select',
+      points: 0,
+      description: 'Duration of stiffness after waking',
+      selectOptions: [
+        { label: '<30 minutes', points: 0 },
+        { label: '30-60 minutes', points: 1 },
+        { label: '>60 minutes', points: 2 },
+      ],
+    },
+    {
+      name: 'activity-effect',
+      label: 'Effect of Activity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Worsens with activity', points: 0 },
+        { label: 'No clear pattern', points: 1 },
+        { label: 'Improves with activity', points: 2 },
+      ],
+    },
+    {
+      name: 'rest-effect',
+      label: 'Effect of Rest',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Improves with rest', points: 0 },
+        { label: 'No clear pattern', points: 1 },
+        { label: 'Stiffens with rest', points: 2 },
+      ],
+    },
+    {
+      name: 'swelling-type',
+      label: 'Swelling Characteristics',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Bony enlargement only', points: 0 },
+        { label: 'Minimal soft tissue swelling', points: 1 },
+        { label: 'Soft tissue swelling/effusion', points: 2 },
+      ],
+    },
+    { name: 'warmth', label: 'Joint Warmth or Erythema', type: 'toggle', points: 2, description: 'Palpable warmth or visible redness' },
+    { name: 'systemic', label: 'Systemic Symptoms', type: 'toggle', points: 2, description: 'Fever, fatigue, weight loss, malaise' },
+    { name: 'elevated-markers', label: 'Elevated ESR or CRP', type: 'toggle', points: 1, description: 'Inflammatory markers above normal' },
+  ],
+  results: [
+    { min: 0, max: 3, label: 'Score 0-2', risk: 'Mechanical/Degenerative', mortality: 'Osteoarthritis pattern. Imaging, NSAIDs, physical therapy.', colorVar: '--color-primary' },
+    { min: 3, max: 6, label: 'Score 3-5', risk: 'Indeterminate', mortality: 'Mixed features. Consider arthrocentesis if effusion present.', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'Score 6+', risk: 'Inflammatory', mortality: 'Inflammatory pattern. Arthrocentesis, labs, rheumatology referral.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Score ≥6 strongly suggests inflammatory arthritis. Morning stiffness >60 min is the most specific feature.',
+  citations: [
+    'Ma L, Cranney A, Holroyd-Leduc JM. Acute monoarthritis: what is the cause of my patient\'s painful swollen joint? CMAJ. 2009;180(1):59-65.',
+    'Cush JJ. Approach to articular and musculoskeletal disorders. Harrison\'s Principles of Internal Medicine. 21st ed. 2022.',
+  ],
+};
+
+const ARTH_SYNOVIAL_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'arth-synovial-interpreter',
+  title: 'Synovial Fluid Interpreter',
+  subtitle: 'Comprehensive Analysis Guide',
+  description: 'Interprets synovial fluid analysis results to distinguish normal, non-inflammatory, inflammatory, and septic patterns.',
+  fields: [
+    {
+      name: 'appearance',
+      label: 'Fluid Appearance',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Clear, yellow/straw', points: 0 },
+        { label: 'Slightly cloudy', points: 1 },
+        { label: 'Cloudy/turbid', points: 2 },
+        { label: 'Purulent/opaque', points: 3 },
+        { label: 'Bloody', points: 1 },
+      ],
+    },
+    {
+      name: 'wbc-count',
+      label: 'WBC Count (/mm³)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '<200 (Normal)', points: 0 },
+        { label: '200-2,000 (Non-inflammatory)', points: 1 },
+        { label: '2,000-25,000 (Inflammatory)', points: 2 },
+        { label: '25,000-50,000 (Highly Inflammatory)', points: 3 },
+        { label: '50,000-100,000 (Likely Septic)', points: 4 },
+        { label: '>100,000 (Septic)', points: 5 },
+      ],
+    },
+    {
+      name: 'pmn-percent',
+      label: 'PMN Percentage',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '<25%', points: 0 },
+        { label: '25-50%', points: 1 },
+        { label: '50-75%', points: 2 },
+        { label: '75-90%', points: 3 },
+        { label: '>90%', points: 4 },
+      ],
+    },
+    { name: 'gram-stain', label: 'Gram Stain Positive', type: 'toggle', points: 5, description: 'Organisms seen on Gram stain' },
+    { name: 'crystals-msu', label: 'MSU Crystals (Gout)', type: 'toggle', points: 0, description: 'Needle-shaped, negatively birefringent' },
+    { name: 'crystals-cppd', label: 'CPPD Crystals', type: 'toggle', points: 0, description: 'Rhomboid, positively birefringent' },
+    {
+      name: 'lactate',
+      label: 'Synovial Lactate (if available)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not measured', points: 0 },
+        { label: '<5 mmol/L', points: 0 },
+        { label: '5-10 mmol/L', points: 2 },
+        { label: '>10 mmol/L', points: 5 },
+      ],
+    },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'Normal/Non-inflammatory', risk: 'Low Risk', mortality: 'OA, trauma, early inflammatory. Septic unlikely.', colorVar: '--color-primary' },
+    { min: 2, max: 5, label: 'Inflammatory', risk: 'Moderate Risk', mortality: 'Crystal disease, inflammatory arthritis. Cannot exclude septic if WBC high.', colorVar: '--color-warning' },
+    { min: 5, max: 8, label: 'Highly Inflammatory', risk: 'High Risk', mortality: 'Treat as septic until cultures return. Start empiric antibiotics.', colorVar: '--color-danger' },
+    { min: 8, max: Infinity, label: 'Septic', risk: 'Critical', mortality: 'Septic arthritis. IV antibiotics + orthopedic consult.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'WBC >50k with >90% PMNs: 90% specific for septic. BUT 39% of septic arthritis has WBC <50k. Lactate >10: essentially 100% specific. Crystals do NOT exclude infection.',
+  citations: [
+    'Carpenter CR, et al. Evidence-based diagnostics: adult septic arthritis. Acad Emerg Med. 2011;18(8):781-796.',
+    'Margaretten ME, et al. Does this adult patient have septic arthritis? JAMA. 2007;297(13):1478-1488.',
+  ],
+};
+
+const ARTH_SEPTIC_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'arth-septic-risk',
+  title: 'Septic Arthritis Risk',
+  subtitle: 'Adult Risk Stratification',
+  description: 'Assesses probability of septic arthritis in adults with acute monoarthritis based on clinical features. Does not replace clinical judgment.',
+  fields: [
+    { name: 'fever', label: 'Fever (>38°C / 100.4°F)', type: 'toggle', points: 1, description: 'Current or recent documented fever' },
+    { name: 'joint-erythema', label: 'Joint Erythema', type: 'toggle', points: 1, description: 'Visible redness over joint' },
+    { name: 'non-weight', label: 'Unable to Bear Weight', type: 'toggle', points: 1, description: 'Cannot walk on affected limb' },
+    { name: 'acute-onset', label: 'Acute Onset (<24-48 hours)', type: 'toggle', points: 1, description: 'Rapid symptom development' },
+    { name: 'dm', label: 'Diabetes Mellitus', type: 'toggle', points: 1, description: 'Known diabetes' },
+    { name: 'ra', label: 'Rheumatoid Arthritis', type: 'toggle', points: 1, description: 'Established RA diagnosis' },
+    { name: 'prosthetic', label: 'Prosthetic Joint', type: 'toggle', points: 2, description: 'Total joint replacement' },
+    { name: 'immunocomp', label: 'Immunocompromised', type: 'toggle', points: 1, description: 'HIV, transplant, biologics, steroids' },
+    { name: 'ivdu', label: 'IV Drug Use', type: 'toggle', points: 1, description: 'Active or recent IVDU' },
+    { name: 'skin-infection', label: 'Overlying Skin Infection', type: 'toggle', points: 1, description: 'Cellulitis or wound over joint' },
+    { name: 'recent-surgery', label: 'Recent Joint Surgery/Injection', type: 'toggle', points: 2, description: 'Within past 3 months' },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'Score 0-1', risk: 'Low Risk', mortality: 'Low probability. Consider observation if WBC and PMN low on aspirate.', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Score 2-3', risk: 'Moderate Risk', mortality: 'Arthrocentesis required. Send cultures before antibiotics.', colorVar: '--color-warning' },
+    { min: 4, max: 6, label: 'Score 4-5', risk: 'High Risk', mortality: 'Treat empirically while awaiting cultures. Ortho consult.', colorVar: '--color-danger' },
+    { min: 6, max: Infinity, label: 'Score 6+', risk: 'Very High Risk', mortality: 'High probability. Empiric antibiotics + urgent ortho/ID consult.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'No scoring system reliably rules out septic arthritis. When in doubt, tap the joint and start empiric treatment.',
+  citations: [
+    'Shirtliff ME, Mader JT. Acute septic arthritis. Clin Microbiol Rev. 2002;15(4):527-544.',
+    'Mathews CJ, et al. Bacterial septic arthritis in adults. Lancet. 2010;375(9717):846-855.',
+  ],
+};
+
+const ARTH_PATTERN_MATCHER_CALCULATOR: CalculatorDefinition = {
+  id: 'arth-pattern-matcher',
+  title: 'Joint Pattern Matcher',
+  subtitle: 'Differential Generator',
+  description: 'Generates differential diagnosis based on joint distribution pattern and associated clinical features.',
+  fields: [
+    {
+      name: 'joint-count',
+      label: 'Number of Joints Involved',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '1 joint (Monoarticular)', points: 1 },
+        { label: '2-4 joints (Oligoarticular)', points: 2 },
+        { label: '5+ joints (Polyarticular)', points: 3 },
+      ],
+    },
+    {
+      name: 'symmetry',
+      label: 'Pattern',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Symmetric', points: 1 },
+        { label: 'Asymmetric', points: 2 },
+        { label: 'Migratory', points: 3 },
+      ],
+    },
+    {
+      name: 'joint-size',
+      label: 'Predominant Joint Size',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Large joints (knee, hip, shoulder)', points: 1 },
+        { label: 'Small joints (MCP, PIP, wrist)', points: 2 },
+        { label: 'Mixed', points: 3 },
+      ],
+    },
+    { name: 'dip', label: 'DIP Involvement', type: 'toggle', points: 0, description: 'Distal interphalangeal joints affected' },
+    { name: 'spine', label: 'Axial/Spine Involvement', type: 'toggle', points: 0, description: 'Back pain, SI joint tenderness' },
+    { name: 'dactylitis', label: 'Dactylitis (Sausage Digit)', type: 'toggle', points: 0, description: 'Entire finger/toe swollen' },
+    { name: 'enthesitis', label: 'Enthesitis', type: 'toggle', points: 0, description: 'Tendon insertion pain (heel, plantar)' },
+    { name: 'skin-rash', label: 'Skin Findings', type: 'toggle', points: 0, description: 'Psoriasis, nodules, pustules, malar rash' },
+    { name: 'recent-infection', label: 'Recent GI or GU Infection', type: 'toggle', points: 0, description: 'Diarrhea or urethritis in past 1-4 weeks' },
+    { name: 'sexually-active', label: 'Sexually Active (STI Risk)', type: 'toggle', points: 0, description: 'Consider gonococcal if young adult' },
+  ],
+  results: [],
+  thresholdNote: 'Pattern guides differential. Mono = septic/crystal. Oligo asymmetric = spondyloarthropathy. Poly symmetric small = RA/SLE.',
+  citations: [
+    'Ma L, Cranney A, Holroyd-Leduc JM. Acute monoarthritis: what is the cause of my patient\'s painful swollen joint? CMAJ. 2009;180(1):59-65.',
+    'Cush JJ. Approach to articular and musculoskeletal disorders. Harrison\'s Principles of Internal Medicine. 21st ed. 2022.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const jointCount = values['joint-count'] || 0;
+    const symmetry = values['symmetry'] || 0;
+    const jointSize = values['joint-size'] || 0;
+    const dip = values['dip'] || 0;
+    const spine = values['spine'] || 0;
+    const dactylitis = values['dactylitis'] || 0;
+    const enthesitis = values['enthesitis'] || 0;
+    const skinRash = values['skin-rash'] || 0;
+    const recentInfection = values['recent-infection'] || 0;
+    const sexuallyActive = values['sexually-active'] || 0;
+
+    const ddx: string[] = [];
+    let primaryPattern = '';
+
+    // Monoarticular
+    if (jointCount === 1) {
+      primaryPattern = 'Monoarticular';
+      ddx.push('Septic arthritis (rule out first)');
+      ddx.push('Gout');
+      ddx.push('Pseudogout (CPPD)');
+      ddx.push('Trauma/hemarthrosis');
+      if (sexuallyActive === 1) ddx.push('Gonococcal arthritis');
+    }
+    // Oligoarticular
+    else if (jointCount === 2) {
+      primaryPattern = 'Oligoarticular';
+      if (symmetry === 2 || spine === 1 || enthesitis === 1) {
+        ddx.push('Reactive arthritis');
+        ddx.push('Psoriatic arthritis');
+        ddx.push('Ankylosing spondylitis');
+      }
+      if (recentInfection === 1) ddx.push('Reactive arthritis (post-infectious)');
+      if (sexuallyActive === 1) ddx.push('Gonococcal arthritis (migratory)');
+      ddx.push('Early RA');
+    }
+    // Polyarticular
+    else if (jointCount === 3) {
+      primaryPattern = 'Polyarticular';
+      if (symmetry === 1 && jointSize === 2) {
+        ddx.push('Rheumatoid arthritis');
+        ddx.push('SLE');
+        ddx.push('Viral arthritis (Parvovirus, Hepatitis)');
+      }
+      if (dip === 1) ddx.push('Psoriatic arthritis (DIP pattern)');
+      if (dip === 1 && jointSize === 2) ddx.push('Osteoarthritis');
+      if (skinRash === 1) ddx.push('SLE, Psoriatic arthritis');
+    }
+
+    // Additional modifiers
+    if (dactylitis === 1) ddx.push('Psoriatic arthritis, Reactive arthritis');
+    if (spine === 1) ddx.push('Spondyloarthropathy (AS, PsA, Reactive)');
+
+    if (ddx.length === 0) {
+      return {
+        value: '--',
+        label: 'Select Pattern',
+        description: 'Complete the fields to generate differential.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Remove duplicates
+    const uniqueDdx = [...new Set(ddx)];
+
+    return {
+      value: primaryPattern,
+      label: 'Differential Diagnosis',
+      description: uniqueDdx.slice(0, 5).join(' | '),
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const ARTH_LAB_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'arth-lab-interpreter',
+  title: 'Arthritis Lab Interpreter',
+  subtitle: 'RF, ANA, CCP, Uric Acid, ESR/CRP',
+  description: 'Interprets common rheumatologic laboratory tests in the context of arthritis workup.',
+  fields: [
+    {
+      name: 'rf',
+      label: 'Rheumatoid Factor (RF)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Negative', points: 0 },
+        { label: 'Low positive (1-3x ULN)', points: 1 },
+        { label: 'High positive (>3x ULN)', points: 2 },
+      ],
+    },
+    {
+      name: 'ccp',
+      label: 'Anti-CCP Antibodies',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Negative', points: 0 },
+        { label: 'Positive', points: 3 },
+      ],
+    },
+    {
+      name: 'ana',
+      label: 'ANA (Antinuclear Antibody)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Negative (<1:40)', points: 0 },
+        { label: 'Low positive (1:40-1:80)', points: 1 },
+        { label: 'Moderate positive (1:160-1:320)', points: 2 },
+        { label: 'High positive (≥1:640)', points: 3 },
+      ],
+    },
+    {
+      name: 'uric-acid',
+      label: 'Serum Uric Acid',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Normal (<6.8 mg/dL)', points: 0 },
+        { label: 'Elevated (6.8-9 mg/dL)', points: 1 },
+        { label: 'Markedly elevated (>9 mg/dL)', points: 2 },
+      ],
+    },
+    {
+      name: 'esr',
+      label: 'ESR',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Normal', points: 0 },
+        { label: 'Mildly elevated (20-40)', points: 1 },
+        { label: 'Moderately elevated (40-100)', points: 2 },
+        { label: 'Markedly elevated (>100)', points: 3 },
+      ],
+    },
+    {
+      name: 'crp',
+      label: 'CRP',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not tested', points: 0 },
+        { label: 'Normal (<1 mg/dL)', points: 0 },
+        { label: 'Elevated (1-5 mg/dL)', points: 1 },
+        { label: 'Markedly elevated (>5 mg/dL)', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Labs are supportive, not diagnostic. RF is 5% positive in healthy people. ANA is 15-20% positive in healthy individuals. Uric acid may be NORMAL during acute gout flare (20-40%).',
+  citations: [
+    'Nishimura K, et al. Meta-analysis: diagnostic accuracy of anti-cyclic citrullinated peptide antibody and rheumatoid factor for rheumatoid arthritis. Ann Intern Med. 2007;146(11):797-808.',
+    'FitzGerald JD, et al. 2020 ACR Guideline for the Management of Gout. Arthritis Care Res. 2020;72(6):744-760.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const rf = values['rf'] || 0;
+    const ccp = values['ccp'] || 0;
+    const ana = values['ana'] || 0;
+    const uricAcid = values['uric-acid'] || 0;
+    const esr = values['esr'] || 0;
+    const crp = values['crp'] || 0;
+
+    const findings: string[] = [];
+
+    // RF interpretation
+    if (rf === 2) findings.push('High RF: suggests RA (also: Sjogren, HCV, cryoglobulinemia)');
+    else if (rf === 1) findings.push('Low RF: nonspecific, seen in 5% healthy population');
+
+    // Anti-CCP interpretation
+    if (ccp === 3) findings.push('Anti-CCP+: highly specific for RA (>95%), can precede symptoms');
+
+    // ANA interpretation
+    if (ana >= 3) findings.push('High ANA: suggests SLE, drug-induced lupus, Sjogren, scleroderma');
+    else if (ana === 2) findings.push('Moderate ANA: evaluate for connective tissue disease');
+    else if (ana === 1) findings.push('Low ANA: often nonspecific, present in 15-20% healthy individuals');
+
+    // Uric acid interpretation
+    if (uricAcid === 2) findings.push('High uric acid: risk factor for gout but may be normal during flare');
+    else if (uricAcid === 1) findings.push('Mildly elevated uric acid: monitor, consider dietary modification');
+
+    // Inflammatory markers
+    if (esr >= 2 || crp >= 2) findings.push('Elevated inflammatory markers: supports inflammatory process');
+    if (esr === 3) findings.push('ESR >100: consider infection, malignancy, vasculitis');
+
+    if (findings.length === 0) {
+      return {
+        value: '--',
+        label: 'No Labs Entered',
+        description: 'Enter lab values for interpretation.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Determine overall pattern
+    let pattern = 'Mixed findings';
+    if (ccp === 3 || rf === 2) pattern = 'RA pattern';
+    else if (ana >= 2) pattern = 'CTD screening positive';
+    else if (uricAcid >= 1) pattern = 'Crystal disease risk';
+    else if (esr >= 2 || crp >= 2) pattern = 'Inflammatory';
+
+    return {
+      value: pattern,
+      label: 'Lab Interpretation',
+      description: findings.join(' | '),
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
 // COPD Severity Calculator (Rome Classification)
 // -------------------------------------------------------------------
 
@@ -19618,7 +20063,1037 @@ const STI_DOXYPEP_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Diabetic Foot Wounds Calculators
+// -------------------------------------------------------------------
+
+const DFW_WAGNER_PEDIS_CALCULATOR: CalculatorDefinition = {
+  id: 'dfw-wagner-pedis',
+  title: 'Wagner / PEDIS Classification',
+  subtitle: 'Wound Depth & Severity',
+  description: 'Classify diabetic foot ulcer severity using Wagner and PEDIS systems.',
+  fields: [
+    { name: 'wagner-depth', label: 'Wound depth (Wagner)', type: 'select', points: 0, selectOptions: [
+      { label: 'Grade 0: Pre-ulcerative or healed', points: 0 },
+      { label: 'Grade 1: Superficial ulcer (partial thickness)', points: 1 },
+      { label: 'Grade 2: Deep ulcer to tendon/capsule/bone', points: 2 },
+      { label: 'Grade 3: Deep with abscess/osteomyelitis', points: 3 },
+      { label: 'Grade 4: Localized gangrene (forefoot)', points: 4 },
+      { label: 'Grade 5: Extensive gangrene (whole foot)', points: 5 },
+    ]},
+    { name: 'perfusion', label: 'PEDIS: Perfusion', type: 'select', points: 0, selectOptions: [
+      { label: 'Grade 1: No PAD (ABI 0.9-1.1, palpable pulses)', points: 1 },
+      { label: 'Grade 2: PAD, not critical (ABI 0.5-0.9)', points: 2 },
+      { label: 'Grade 3: Critical limb ischemia (ABI <0.5)', points: 3 },
+    ]},
+    { name: 'extent', label: 'PEDIS: Extent (largest diameter)', type: 'select', points: 0, selectOptions: [
+      { label: '< 1 cm', points: 1 },
+      { label: '1-3 cm', points: 2 },
+      { label: '> 3 cm', points: 3 },
+    ]},
+    { name: 'depth-pedis', label: 'PEDIS: Depth', type: 'select', points: 0, selectOptions: [
+      { label: 'Grade 1: Superficial (skin only)', points: 1 },
+      { label: 'Grade 2: Deep (below dermis)', points: 2 },
+      { label: 'Grade 3: All layers including bone', points: 3 },
+    ]},
+    { name: 'sensation', label: 'PEDIS: Sensation', type: 'select', points: 0, selectOptions: [
+      { label: 'Grade 1: No loss of protective sensation', points: 1 },
+      { label: 'Grade 2: Loss of protective sensation', points: 2 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Wagner is simpler for quick grading. PEDIS is more comprehensive and includes perfusion/infection status.',
+  citations: ['Wagner FW. Foot Ankle. 1981.', 'Lipsky BA et al. IDSA DFI Guidelines. CID. 2012.'],
+  computeResult: (values) => {
+    const wagner = values['wagner-depth'] || 0;
+    const perfusion = values['perfusion'] || 1;
+    const extent = values['extent'] || 1;
+    const depth = values['depth-pedis'] || 1;
+    const sensation = values['sensation'] || 1;
+
+    let wagnerDesc = '';
+    let risk = '';
+    let colorVar = '--color-decision-active';
+
+    if (wagner === 0) {
+      wagnerDesc = '**Wagner Grade 0:** No open ulcer, high-risk foot\n\nFocus on prevention: offloading, foot care education, quarterly podiatry.';
+      risk = 'LOW';
+    } else if (wagner === 1) {
+      wagnerDesc = '**Wagner Grade 1:** Superficial ulcer\n\nOffloading + wound care usually sufficient. Weekly f/u until healed.';
+      risk = 'LOW';
+    } else if (wagner === 2) {
+      wagnerDesc = '**Wagner Grade 2:** Deep ulcer (tendon/capsule/bone exposed)\n\nProbe-to-bone test. Consider MRI if osteo suspected. Aggressive wound care.';
+      risk = 'MODERATE';
+      colorVar = '--color-warning';
+    } else if (wagner === 3) {
+      wagnerDesc = '**Wagner Grade 3:** Deep with abscess or osteomyelitis\n\nAdmit for IV antibiotics. Surgical consult for debridement. MRI to define extent.';
+      risk = 'HIGH';
+      colorVar = '--color-danger';
+    } else if (wagner === 4) {
+      wagnerDesc = '**Wagner Grade 4:** Localized gangrene (forefoot)\n\nEmergent vascular surgery consult. Assess for revascularization vs partial amputation.';
+      risk = 'CRITICAL';
+      colorVar = '--color-danger';
+    } else if (wagner === 5) {
+      wagnerDesc = '**Wagner Grade 5:** Extensive gangrene\n\nEmergent surgery. Likely requires major amputation. Sepsis workup.';
+      risk = 'CRITICAL';
+      colorVar = '--color-danger';
+    }
+
+    const pedisScore = perfusion + extent + depth + sensation;
+    const pedisDesc = `\n\n**PEDIS Summary:**\n• Perfusion: Grade ${perfusion}\n• Extent: Grade ${extent}\n• Depth: Grade ${depth}\n• Sensation: Grade ${sensation}\n• **Total PEDIS:** ${pedisScore}/11`;
+
+    return { value: `Wagner ${wagner}`, label: `Risk: ${risk}`, description: wagnerDesc + pedisDesc, colorVar };
+  },
+};
+
+const DFW_IDSA_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'dfw-idsa-severity',
+  title: 'IDSA Infection Severity',
+  subtitle: 'Grade 1-4 Classification',
+  description: 'Classify diabetic foot infection severity per IDSA/IWGDF guidelines.',
+  fields: [
+    { name: 'purulence', label: 'Purulence or drainage', type: 'toggle', points: 1 },
+    { name: 'erythema', label: 'Erythema present', type: 'toggle', points: 1 },
+    { name: 'erythema-size', label: 'If erythema, extent from wound edge', type: 'select', points: 0, selectOptions: [
+      { label: 'None or < 0.5 cm', points: 0 },
+      { label: '0.5-2 cm', points: 1 },
+      { label: '> 2 cm', points: 2 },
+    ]},
+    { name: 'swelling', label: 'Local swelling or induration', type: 'toggle', points: 1 },
+    { name: 'warmth', label: 'Local warmth', type: 'toggle', points: 1 },
+    { name: 'pain', label: 'Pain or tenderness', type: 'toggle', points: 1 },
+    { name: 'deep', label: 'Deep tissue involvement (abscess, osteo, septic joint)', type: 'toggle', points: 2 },
+    { name: 'sirs', label: 'SIRS criteria met (≥2: T>38 or <36, HR>90, RR>20, WBC>12k or <4k)', type: 'toggle', points: 3 },
+  ],
+  results: [],
+  thresholdNote: 'IDSA Grade 1 = uninfected. Grades 2-4 guide antibiotic and surgical decisions.',
+  citations: ['Lipsky BA et al. IDSA DFI Guidelines. CID. 2012.', 'IWGDF Guidelines. 2023.'],
+  computeResult: (values) => {
+    const purulence = values['purulence'] || 0;
+    const erythema = values['erythema'] || 0;
+    const erythemaSize = values['erythema-size'] || 0;
+    const swelling = values['swelling'] || 0;
+    const warmth = values['warmth'] || 0;
+    const pain = values['pain'] || 0;
+    const deep = values['deep'] || 0;
+    const sirs = values['sirs'] || 0;
+
+    const localSigns = (purulence ? 1 : 0) + (erythema ? 1 : 0) + (swelling ? 1 : 0) + (warmth ? 1 : 0) + (pain ? 1 : 0);
+
+    // Grade 4: SIRS present = severe/limb-threatening
+    if (sirs) {
+      return {
+        value: 'Grade 4',
+        label: 'SEVERE - Limb/Life Threatening',
+        description: '**IDSA Grade 4: Severe Infection**\n\n• SIRS criteria met = systemic involvement\n• High risk of sepsis and limb loss\n\n**Action:**\n• Admit to hospital\n• IV broad-spectrum antibiotics immediately\n• Emergent surgical consult\n• Blood cultures, lactate, procalcitonin\n• Consider ICU if hemodynamically unstable',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Grade 3: Deep tissue or erythema > 2 cm
+    if (deep || erythemaSize === 2) {
+      return {
+        value: 'Grade 3',
+        label: 'MODERATE Infection',
+        description: '**IDSA Grade 3: Moderate Infection**\n\n• Deep tissue involvement OR cellulitis > 2 cm from wound edge\n• No systemic signs\n\n**Action:**\n• Usually requires admission\n• IV antibiotics (cover Staph, Strep, ± GNR, ± anaerobes)\n• Surgical consult for deep debridement\n• MRI if osteomyelitis suspected\n• Transition to PO when improving',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Grade 2: At least 2 local signs, erythema ≤ 2 cm
+    if (localSigns >= 2 || erythemaSize === 1) {
+      return {
+        value: 'Grade 2',
+        label: 'MILD Infection',
+        description: '**IDSA Grade 2: Mild Infection**\n\n• ≥ 2 local signs of inflammation\n• Cellulitis ≤ 2 cm from wound edge\n• No deep tissue involvement\n• No systemic signs\n\n**Action:**\n• Outpatient oral antibiotics (7-14 days)\n• Cover Staph and Strep\n• Wound care and offloading\n• Close follow-up in 2-3 days',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Grade 1: No infection
+    return {
+      value: 'Grade 1',
+      label: 'UNINFECTED',
+      description: '**IDSA Grade 1: Uninfected Wound**\n\n• Wound present but no signs of infection\n• < 2 local signs of inflammation\n\n**Action:**\n• No antibiotics needed\n• Focus on wound care\n• Offloading\n• Glycemic control\n• Vascular assessment if not healing',
+      colorVar: '--color-decision-active',
+    };
+  },
+};
+
+const DFW_VASCULAR_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'dfw-vascular-interpreter',
+  title: 'Vascular Assessment Interpreter',
+  subtitle: 'ABI / TBI / TcPO2',
+  description: 'Interpret vascular studies to assess perfusion and healing potential.',
+  fields: [
+    { name: 'abi', label: 'Ankle-Brachial Index (ABI)', type: 'select', points: 0, selectOptions: [
+      { label: 'Not available', points: 0 },
+      { label: '> 1.3 (non-compressible)', points: 1 },
+      { label: '0.9-1.3 (normal)', points: 2 },
+      { label: '0.7-0.89 (mild PAD)', points: 3 },
+      { label: '0.5-0.69 (moderate PAD)', points: 4 },
+      { label: '< 0.5 (severe PAD / CLI)', points: 5 },
+    ]},
+    { name: 'tbi', label: 'Toe-Brachial Index (TBI)', type: 'select', points: 0, selectOptions: [
+      { label: 'Not available', points: 0 },
+      { label: '> 0.7 (normal)', points: 1 },
+      { label: '0.5-0.7 (mild-moderate PAD)', points: 2 },
+      { label: '< 0.5 (severe PAD / CLI)', points: 3 },
+    ]},
+    { name: 'tcpo2', label: 'Transcutaneous oxygen (TcPO2) mmHg', type: 'select', points: 0, selectOptions: [
+      { label: 'Not available', points: 0 },
+      { label: '> 40 mmHg (adequate for healing)', points: 1 },
+      { label: '30-40 mmHg (borderline)', points: 2 },
+      { label: '< 30 mmHg (inadequate for healing)', points: 3 },
+    ]},
+    { name: 'pulses', label: 'Pedal pulses', type: 'select', points: 0, selectOptions: [
+      { label: 'Both DP and PT palpable', points: 1 },
+      { label: 'One pulse palpable', points: 2 },
+      { label: 'Neither palpable, Doppler signal present', points: 3 },
+      { label: 'No pulses, no Doppler signal', points: 4 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'TBI is more reliable than ABI in diabetics (medial calcinosis makes ABI falsely high). TcPO2 > 40 mmHg suggests adequate tissue oxygenation for healing.',
+  citations: ['Mills JL et al. SVS WIfI Classification. J Vasc Surg. 2014.', 'Conte MS et al. GVG Guidelines. J Vasc Surg. 2019.'],
+  computeResult: (values) => {
+    const abi = values['abi'] || 0;
+    const tbi = values['tbi'] || 0;
+    const tcpo2 = values['tcpo2'] || 0;
+    const pulses = values['pulses'] || 1;
+
+    let interpretation = '';
+    let healingPotential = '';
+    let colorVar = '--color-decision-active';
+    let vascReferral = false;
+
+    // ABI interpretation
+    if (abi === 1) {
+      interpretation += '**ABI > 1.3:** Non-compressible arteries (medial calcinosis)\n→ ABI unreliable in this patient. Use TBI or TcPO2 instead.\n\n';
+    } else if (abi === 2) {
+      interpretation += '**ABI 0.9-1.3:** Normal perfusion at ankle level\n\n';
+    } else if (abi === 3) {
+      interpretation += '**ABI 0.7-0.89:** Mild PAD - usually adequate for healing\n\n';
+      colorVar = '--color-warning';
+    } else if (abi === 4) {
+      interpretation += '**ABI 0.5-0.69:** Moderate PAD - compromised healing\n\n';
+      colorVar = '--color-warning';
+      vascReferral = true;
+    } else if (abi === 5) {
+      interpretation += '**ABI < 0.5:** Severe PAD / Critical Limb Ischemia\n→ High amputation risk without revascularization\n\n';
+      colorVar = '--color-danger';
+      vascReferral = true;
+    }
+
+    // TBI interpretation
+    if (tbi === 1) {
+      interpretation += '**TBI > 0.7:** Adequate toe perfusion for healing\n\n';
+    } else if (tbi === 2) {
+      interpretation += '**TBI 0.5-0.7:** Reduced toe perfusion - borderline for healing\n\n';
+      colorVar = '--color-warning';
+    } else if (tbi === 3) {
+      interpretation += '**TBI < 0.5:** Severely reduced perfusion - poor healing expected\n→ Vascular referral for revascularization\n\n';
+      colorVar = '--color-danger';
+      vascReferral = true;
+    }
+
+    // TcPO2 interpretation
+    if (tcpo2 === 1) {
+      interpretation += '**TcPO2 > 40 mmHg:** Adequate tissue oxygenation for wound healing\n\n';
+    } else if (tcpo2 === 2) {
+      interpretation += '**TcPO2 30-40 mmHg:** Borderline oxygenation - healing may be delayed\n\n';
+      colorVar = '--color-warning';
+    } else if (tcpo2 === 3) {
+      interpretation += '**TcPO2 < 30 mmHg:** Inadequate oxygenation - wound unlikely to heal\n→ Consider hyperbaric oxygen or revascularization\n\n';
+      colorVar = '--color-danger';
+      vascReferral = true;
+    }
+
+    // Pulses
+    if (pulses === 1) {
+      interpretation += '**Pulses:** Both pedal pulses palpable - reassuring\n';
+    } else if (pulses === 2) {
+      interpretation += '**Pulses:** Only one pedal pulse palpable - further testing recommended\n';
+    } else if (pulses === 3) {
+      interpretation += '**Pulses:** No palpable pulses, Doppler signal present - PAD likely\n';
+      vascReferral = true;
+    } else if (pulses === 4) {
+      interpretation += '**Pulses:** No pulses, no Doppler signal - severe ischemia\n';
+      colorVar = '--color-danger';
+      vascReferral = true;
+    }
+
+    if (vascReferral) {
+      healingPotential = '\n\n**Recommendation:** Vascular surgery referral for revascularization assessment';
+    } else {
+      healingPotential = '\n\n**Healing potential:** Adequate with proper wound care and offloading';
+    }
+
+    return { value: vascReferral ? 'IMPAIRED' : 'ADEQUATE', label: 'Perfusion Assessment', description: interpretation + healingPotential, colorVar };
+  },
+};
+
+const DFW_OSTEO_PROBABILITY_CALCULATOR: CalculatorDefinition = {
+  id: 'dfw-osteo-probability',
+  title: 'Osteomyelitis Probability',
+  subtitle: 'Clinical Risk Assessment',
+  description: 'Estimate likelihood of osteomyelitis based on clinical and lab findings.',
+  fields: [
+    { name: 'probe-to-bone', label: 'Positive probe-to-bone test', type: 'toggle', points: 6, description: 'Metal probe touches bone through ulcer' },
+    { name: 'ulcer-size', label: 'Ulcer size > 2 cm²', type: 'toggle', points: 2 },
+    { name: 'ulcer-duration', label: 'Ulcer duration > 1-2 weeks', type: 'toggle', points: 1 },
+    { name: 'esr', label: 'ESR > 70 mm/hr', type: 'toggle', points: 3, description: 'LR+ 11 for osteo' },
+    { name: 'xray-changes', label: 'X-ray shows bone changes', type: 'toggle', points: 4, description: 'Cortical erosion, periosteal reaction, sequestrum' },
+    { name: 'exposed-bone', label: 'Visible bone in wound', type: 'toggle', points: 10 },
+    { name: 'sausage-toe', label: 'Sausage toe (diffuse swelling)', type: 'toggle', points: 2 },
+    { name: 'recurrent', label: 'Recurrent infection same location', type: 'toggle', points: 2 },
+  ],
+  results: [
+    { label: 'LOW probability', min: 0, max: 3, risk: 'Low Risk', mortality: 'Treat as soft tissue infection', colorVar: '--color-decision-active' },
+    { label: 'MODERATE probability', min: 4, max: 8, risk: 'Moderate Risk', mortality: 'MRI recommended', colorVar: '--color-warning' },
+    { label: 'HIGH probability', min: 9, max: 30, risk: 'High Risk', mortality: '6-week antibiotic course, surgery likely', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Probe-to-bone: PPV 87% in high-risk wounds, 57% in low-risk. ESR > 70 has LR+ 11 for osteo. MRI is gold standard imaging.',
+  citations: ['Butalia S et al. Probe-to-bone meta-analysis. JAMA. 2008.', 'Dinh MT et al. DFI meta-analysis. CID. 2008.'],
+  computeResult: (values) => {
+    const ptb = values['probe-to-bone'] || 0;
+    const size = values['ulcer-size'] || 0;
+    const duration = values['ulcer-duration'] || 0;
+    const esr = values['esr'] || 0;
+    const xray = values['xray-changes'] || 0;
+    const exposed = values['exposed-bone'] || 0;
+    const sausage = values['sausage-toe'] || 0;
+    const recurrent = values['recurrent'] || 0;
+
+    const total = ptb + size + duration + esr + xray + exposed + sausage + recurrent;
+
+    let probability = '';
+    let recommendation = '';
+    let colorVar = '--color-decision-active';
+
+    if (total >= 9 || exposed >= 1) {
+      probability = 'HIGH';
+      recommendation = '**High probability of osteomyelitis**\n\n**Findings:**\n';
+      if (exposed) recommendation += '• Visible bone = definitive\n';
+      if (ptb) recommendation += '• Positive probe-to-bone (PPV 87% in high-risk)\n';
+      if (esr) recommendation += '• ESR > 70 (LR+ 11)\n';
+      if (xray) recommendation += '• X-ray bone changes\n';
+      recommendation += '\n**Action:**\n• MRI if surgical planning needed\n• Consider bone biopsy for culture\n• 6-week antibiotic course\n• Surgical debridement likely needed';
+      colorVar = '--color-danger';
+    } else if (total >= 4) {
+      probability = 'MODERATE';
+      recommendation = '**Moderate probability of osteomyelitis**\n\n**Action:**\n• Order MRI (93% sensitive, 75% specific)\n• If MRI positive → bone biopsy for culture before starting antibiotics\n• If MRI negative → soft tissue infection only, shorter antibiotic course';
+      colorVar = '--color-warning';
+    } else {
+      probability = 'LOW';
+      recommendation = '**Low probability of osteomyelitis**\n\n• Treat as soft tissue infection\n• 1-2 week antibiotic course\n• Repeat assessment if not improving\n• Consider MRI if high clinical suspicion despite low score';
+    }
+
+    return { value: total.toString(), label: `${probability} Probability`, description: recommendation, colorVar };
+  },
+};
+
+const DFW_ABX_SELECTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'dfw-abx-selector',
+  title: 'Antibiotic Selector',
+  subtitle: 'By IDSA Grade',
+  description: 'Select empiric antibiotics based on infection severity and patient factors.',
+  fields: [
+    { name: 'idsa-grade', label: 'IDSA Infection Grade', type: 'select', points: 0, selectOptions: [
+      { label: 'Grade 1 (uninfected)', points: 1 },
+      { label: 'Grade 2 (mild)', points: 2 },
+      { label: 'Grade 3 (moderate)', points: 3 },
+      { label: 'Grade 4 (severe)', points: 4 },
+    ]},
+    { name: 'mrsa-risk', label: 'MRSA risk factors', type: 'toggle', points: 1, description: 'Prior MRSA, nursing home, recent hospitalization' },
+    { name: 'pseudomonas-risk', label: 'Pseudomonas risk factors', type: 'toggle', points: 1, description: 'Macerated wound, water exposure, prior Pseudomonas' },
+    { name: 'anaerobe-concern', label: 'Anaerobe concern', type: 'toggle', points: 1, description: 'Foul smell, necrotic tissue, deep abscess' },
+    { name: 'pcn-allergy', label: 'Penicillin allergy', type: 'toggle', points: 1 },
+    { name: 'renal-impairment', label: 'Renal impairment (CrCl < 30)', type: 'toggle', points: 1 },
+    { name: 'osteo', label: 'Osteomyelitis confirmed/suspected', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Empiric coverage: Mild = Staph/Strep. Moderate/Severe = add GNR ± anaerobes ± MRSA.',
+  citations: ['Lipsky BA et al. IDSA DFI Guidelines. CID. 2012.', 'IWGDF Infection Guidelines. 2023.'],
+  computeResult: (values) => {
+    const grade = values['idsa-grade'] || 1;
+    const mrsa = values['mrsa-risk'] || 0;
+    const pseudomonas = values['pseudomonas-risk'] || 0;
+    // anaerobe-concern is captured by the form but logic is handled inline in regimen strings
+    const pcnAllergy = values['pcn-allergy'] || 0;
+    const renal = values['renal-impairment'] || 0;
+    const osteo = values['osteo'] || 0;
+
+    // Grade 1: No antibiotics
+    if (grade === 1) {
+      return {
+        value: 'NONE',
+        label: 'No Antibiotics Needed',
+        description: '**IDSA Grade 1: Uninfected Wound**\n\nNo antibiotics indicated.\n\n**Focus on:**\n• Wound care and debridement\n• Offloading\n• Glycemic control\n• Vascular assessment',
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    let regimen = '';
+    let duration = '';
+    let colorVar = '--color-warning';
+
+    // Grade 2: Mild - oral outpatient
+    if (grade === 2) {
+      regimen = '**IDSA Grade 2: Mild Infection**\n\n**Oral Outpatient Regimen:**\n';
+      if (mrsa) {
+        if (pcnAllergy) {
+          regimen += '• **TMP-SMX DS** 1-2 tabs PO BID\n  OR\n• **Doxycycline** 100mg PO BID';
+        } else {
+          regimen += '• **TMP-SMX DS** 1-2 tabs PO BID\n  OR\n• **Doxycycline** 100mg PO BID';
+        }
+      } else {
+        if (pcnAllergy) {
+          regimen += '• **Cephalexin** 500mg PO QID (if mild allergy)\n  OR\n• **Clindamycin** 300-450mg PO TID';
+        } else {
+          regimen += '• **Amoxicillin-clavulanate** 875/125mg PO BID\n  OR\n• **Cephalexin** 500mg PO QID + Metronidazole 500mg TID (if anaerobe concern)';
+        }
+      }
+      duration = '\n\n**Duration:** 1-2 weeks (reassess at 2-3 days)';
+    }
+
+    // Grade 3: Moderate - IV or high-dose oral, usually admit
+    if (grade === 3) {
+      colorVar = '--color-warning';
+      regimen = '**IDSA Grade 3: Moderate Infection**\n\n**Usually requires admission for IV antibiotics:**\n';
+      if (pcnAllergy) {
+        regimen += '• **Vancomycin** 15-20 mg/kg IV q8-12h (adjust for renal)\n  PLUS\n• **Ciprofloxacin** 400mg IV q12h + **Metronidazole** 500mg IV q8h';
+        if (renal) {
+          regimen += '\n\n⚠️ Dose-adjust vanco and cipro for CrCl < 30';
+        }
+      } else {
+        if (mrsa) {
+          regimen += '• **Vancomycin** 15-20 mg/kg IV q8-12h\n  PLUS\n• **Piperacillin-tazobactam** 3.375g IV q6h';
+        } else {
+          regimen += '• **Ampicillin-sulbactam** 3g IV q6h\n  OR\n• **Piperacillin-tazobactam** 3.375g IV q6h';
+        }
+        if (pseudomonas) {
+          regimen += '\n\n→ Use pip-tazo for Pseudomonas coverage';
+        }
+      }
+      duration = '\n\n**Duration:** 2-3 weeks soft tissue, 4-6 weeks if osteo';
+    }
+
+    // Grade 4: Severe - broad-spectrum IV
+    if (grade === 4) {
+      colorVar = '--color-danger';
+      regimen = '**IDSA Grade 4: Severe/Life-Threatening**\n\n**Broad-spectrum IV - emergent start:**\n';
+      if (pcnAllergy) {
+        regimen += '• **Vancomycin** 25-30 mg/kg loading then 15-20 mg/kg q8-12h\n  PLUS\n• **Ciprofloxacin** 400mg IV q8h\n  PLUS\n• **Metronidazole** 500mg IV q8h';
+      } else {
+        regimen += '• **Vancomycin** 25-30 mg/kg loading then 15-20 mg/kg q8-12h\n  PLUS\n• **Piperacillin-tazobactam** 4.5g IV q6h\n  OR\n• **Meropenem** 1g IV q8h (if ESBL risk)';
+      }
+      regimen += '\n\n**Also:**\n• Blood cultures before antibiotics\n• Emergent surgical consult\n• Source control is critical';
+      duration = '\n\n**Duration:** 2-4 weeks after source control (4-6 weeks if osteo)';
+    }
+
+    // Add osteo note
+    if (osteo) {
+      duration += '\n\n⚠️ **Osteomyelitis:** Bone biopsy culture preferred before antibiotics. Rifampin may be added for staph osteo (never as monotherapy).';
+    }
+
+    return { value: grade === 4 ? 'SEVERE' : grade === 3 ? 'MODERATE' : 'MILD', label: 'Antibiotic Regimen', description: regimen + duration, colorVar };
+  },
+};
+
+// -------------------------------------------------------------------
+// Pediatric Arthritis Calculators
+// -------------------------------------------------------------------
+
+const PEDS_ARTH_KOCHER_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-arth-kocher',
+  title: 'Kocher Criteria',
+  subtitle: 'Septic Hip Probability',
+  description: 'Differentiates septic arthritis from transient synovitis of the hip in children. Estimates probability of septic arthritis.',
+  fields: [
+    { name: 'fever', label: 'History of Fever (>38.5°C / 101.3°F)', type: 'toggle', points: 1, description: 'Any documented or reported fever' },
+    { name: 'non-weight-bearing', label: 'Non-weight bearing on affected side', type: 'toggle', points: 1, description: 'Refuses to bear weight or walk' },
+    { name: 'esr', label: 'ESR >40 mm/hr', type: 'toggle', points: 1, description: 'Erythrocyte sedimentation rate' },
+    { name: 'wbc', label: 'WBC >12,000/mm³', type: 'toggle', points: 1, description: 'Peripheral white blood cell count' },
+  ],
+  results: [
+    { min: 0, max: 1, label: '0 Criteria', risk: '<0.2% probability', mortality: 'Very low risk - observation reasonable', colorVar: '--color-primary' },
+    { min: 1, max: 2, label: '1 Criterion', risk: '3.0% probability', mortality: 'Low risk - consider observation vs aspiration', colorVar: '--color-primary' },
+    { min: 2, max: 3, label: '2 Criteria', risk: '40.0% probability', mortality: 'Moderate risk - strongly consider arthrocentesis', colorVar: '--color-warning' },
+    { min: 3, max: 4, label: '3 Criteria', risk: '93.1% probability', mortality: 'High risk - arthrocentesis mandatory', colorVar: '--color-danger' },
+    { min: 4, max: Infinity, label: '4 Criteria', risk: '99.6% probability', mortality: 'Very high risk - OR consult, arthrocentesis mandatory', colorVar: '--color-danger' },
+  ],
+  thresholdNote: '0 criteria essentially rules out septic arthritis. ≥2 criteria warrants arthrocentesis. When in doubt, tap the joint.',
+  citations: [
+    'Kocher MS, et al. Differentiating between septic arthritis and transient synovitis of the hip in children. J Bone Joint Surg Am. 1999;81(12):1662-1670. PMID: 10608376',
+  ],
+};
+
+const PEDS_ARTH_CAIRD_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-arth-caird',
+  title: 'Caird Criteria (Modified Kocher)',
+  subtitle: 'Septic Hip with CRP',
+  description: 'Modified Kocher criteria adding CRP for improved prediction of septic arthritis vs transient synovitis.',
+  fields: [
+    { name: 'fever', label: 'History of Fever (>38.5°C / 101.3°F)', type: 'toggle', points: 1, description: 'Any documented or reported fever' },
+    { name: 'non-weight-bearing', label: 'Non-weight bearing on affected side', type: 'toggle', points: 1, description: 'Refuses to bear weight or walk' },
+    { name: 'esr', label: 'ESR >40 mm/hr', type: 'toggle', points: 1, description: 'Erythrocyte sedimentation rate' },
+    { name: 'wbc', label: 'WBC >12,000/mm³', type: 'toggle', points: 1, description: 'Peripheral white blood cell count' },
+    { name: 'crp', label: 'CRP >20 mg/L', type: 'toggle', points: 1, description: 'C-reactive protein - strongest single predictor' },
+  ],
+  results: [
+    { min: 0, max: 1, label: '0 Criteria', risk: '16.9% probability', mortality: 'If CRP <20 AND weight-bearing: <1% risk', colorVar: '--color-primary' },
+    { min: 1, max: 2, label: '1 Criterion', risk: '36.7% probability', mortality: 'Intermediate risk - clinical judgment', colorVar: '--color-warning' },
+    { min: 2, max: 3, label: '2 Criteria', risk: '62.4% probability', mortality: 'Moderate-high risk - arthrocentesis recommended', colorVar: '--color-warning' },
+    { min: 3, max: 4, label: '3 Criteria', risk: '82.6% probability', mortality: 'High risk - arthrocentesis mandatory', colorVar: '--color-danger' },
+    { min: 4, max: 5, label: '4 Criteria', risk: '93.1% probability', mortality: 'Very high risk - OR consult', colorVar: '--color-danger' },
+    { min: 5, max: Infinity, label: '5 Criteria', risk: '97.5% probability', mortality: 'Critical - immediate OR consultation', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'CRP >20 is the strongest single predictor. If CRP <20 AND weight-bearing, <1% probability of septic arthritis.',
+  citations: [
+    'Caird MS, et al. Factors distinguishing septic arthritis from transient synovitis of the hip in children. J Bone Joint Surg Am. 2006;88(6):1251-1257. PMID: 16757758',
+  ],
+};
+
+const PEDS_ARTH_PATTERN_MATCHER_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-arth-pattern-matcher',
+  title: 'Pediatric Arthritis Pattern',
+  subtitle: 'Age + Pattern Differential',
+  description: 'Generate differential diagnosis based on age group, joint pattern, duration, and clinical features.',
+  fields: [
+    {
+      name: 'age-group',
+      label: 'Age Group',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Infant (<1 year)', points: 1 },
+        { label: 'Toddler (1-3 years)', points: 2 },
+        { label: 'Young child (4-10 years)', points: 3 },
+        { label: 'Adolescent (>10 years)', points: 4 },
+      ],
+    },
+    {
+      name: 'joint-pattern',
+      label: 'Joint Involvement',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Single joint (monoarticular)', points: 1 },
+        { label: '2-4 joints (oligoarticular)', points: 2 },
+        { label: '5+ joints (polyarticular)', points: 3 },
+      ],
+    },
+    {
+      name: 'duration',
+      label: 'Symptom Duration',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Acute (<2 weeks)', points: 1 },
+        { label: 'Subacute (2-6 weeks)', points: 2 },
+        { label: 'Chronic (>6 weeks)', points: 3 },
+      ],
+    },
+    { name: 'fever', label: 'Fever present', type: 'toggle', points: 0, description: 'Temperature >38.5C' },
+    { name: 'limp', label: 'Limp or refusal to bear weight', type: 'toggle', points: 0 },
+    { name: 'morning-stiffness', label: 'Morning stiffness >30 minutes', type: 'toggle', points: 0, description: 'Improves with activity' },
+    { name: 'recent-illness', label: 'Recent viral illness or sore throat', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'This tool guides differential diagnosis. Clinical judgment is essential. Rule out septic arthritis first if febrile + monoarticular.',
+  citations: [
+    'Mathison DJ, Teach SJ. Approach to Pediatric Joint Pain. Pediatr Clin North Am. 2012;59(2):359-378.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const age = values['age-group'] || 1;
+    const pattern = values['joint-pattern'] || 1;
+    const duration = values['duration'] || 1;
+    const fever = values['fever'] || 0;
+    const limp = values['limp'] || 0;
+    const stiffness = values['morning-stiffness'] || 0;
+    const recentIllness = values['recent-illness'] || 0;
+
+    const ddx: string[] = [];
+    let priority = '';
+
+    // Fever + monoarticular = septic until proven otherwise
+    if (fever && pattern === 1) {
+      priority = '**PRIORITY: Rule out septic arthritis first**\n\n';
+      ddx.push('Septic arthritis (must rule out)');
+    }
+
+    // Age-based differentials
+    if (age === 1) { // Infant
+      ddx.push('Septic arthritis', 'Osteomyelitis', 'Non-accidental injury', 'Congenital hip dysplasia');
+    } else if (age === 2) { // Toddler
+      if (pattern === 1 && recentIllness) ddx.push('Transient synovitis (most common)');
+      ddx.push('Septic arthritis', 'Kingella kingae infection', 'Toddlers fracture', 'Leukemia');
+    } else if (age === 3) { // Young child
+      if (pattern === 1 && recentIllness) ddx.push('Transient synovitis');
+      ddx.push('Legg-Calve-Perthes disease', 'Lyme arthritis (endemic areas)', 'HSP');
+      if (duration === 3 && stiffness) ddx.push('JIA (oligoarticular)');
+    } else if (age === 4) { // Adolescent
+      ddx.push('SCFE (rule out in obese patient)', 'JIA (ERA subtype)', 'Osgood-Schlatter', 'Gonococcal arthritis');
+      if (pattern === 3) ddx.push('Acute rheumatic fever');
+    }
+
+    // Duration-based
+    if (duration === 3 && stiffness) {
+      ddx.push('Juvenile idiopathic arthritis (requires >6 weeks)');
+    }
+    if (duration === 1 && pattern === 3) {
+      ddx.push('Viral arthritis', 'Acute rheumatic fever');
+    }
+
+    // Pattern-based
+    if (pattern === 2) { // Oligoarticular
+      ddx.push('JIA (oligoarticular)', 'Reactive arthritis', 'HSP');
+    }
+
+    // Growing pains - diagnosis of exclusion
+    if (age >= 2 && age <= 3 && !fever && !limp && pattern === 1 && duration <= 2) {
+      ddx.push('Growing pains (bilateral, nighttime, no limp, normal exam)');
+    }
+
+    const uniqueDdx = [...new Set(ddx)];
+    const ddxList = uniqueDdx.map((d, i) => `${i + 1}. ${d}`).join('\n');
+
+    return {
+      value: `${uniqueDdx.length} diagnoses`,
+      label: 'Differential Diagnosis',
+      description: `${priority}**Top Considerations:**\n${ddxList}\n\n**Workup:** CBC, ESR, CRP. X-ray if trauma/SCFE concern. Ultrasound if effusion suspected. Aspiration if septic arthritis concern.`,
+      colorVar: fever && pattern === 1 ? '--color-danger' : '--color-primary',
+    };
+  },
+};
+
+const PEDS_ARTH_MALIGNANCY_FLAGS_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-arth-malignancy-flags',
+  title: 'Malignancy Red Flag Checker',
+  subtitle: 'Leukemia Screening',
+  description: 'Screen for features suggesting malignancy in children with musculoskeletal complaints. Leukemia presents with bone/joint pain in 25-43% of cases.',
+  fields: [
+    { name: 'night-pain', label: 'Night pain waking child from sleep', type: 'toggle', points: 1, description: 'Pain severe enough to wake from sleep' },
+    { name: 'bone-pain', label: 'Pain localized to bone (not joint)', type: 'toggle', points: 1, description: 'Point tenderness over bone, not joint' },
+    { name: 'pain-disproportionate', label: 'Pain out of proportion to exam', type: 'toggle', points: 1, description: 'Severe pain with minimal findings' },
+    { name: 'progressive', label: 'Progressive, unremitting symptoms', type: 'toggle', points: 1 },
+    { name: 'fever', label: 'Unexplained fever', type: 'toggle', points: 1 },
+    { name: 'weight-loss', label: 'Weight loss or anorexia', type: 'toggle', points: 1 },
+    { name: 'fatigue', label: 'Fatigue or lethargy', type: 'toggle', points: 1 },
+    { name: 'pallor', label: 'Pallor', type: 'toggle', points: 1 },
+    { name: 'bruising', label: 'Easy bruising or petechiae', type: 'toggle', points: 1 },
+    { name: 'lymphadenopathy', label: 'Lymphadenopathy', type: 'toggle', points: 2, description: 'Hard stop - requires urgent evaluation' },
+    { name: 'hepatosplenomegaly', label: 'Hepatosplenomegaly', type: 'toggle', points: 2, description: 'Hard stop - requires urgent evaluation' },
+    { name: 'thrombocytopenia', label: 'Platelets <300 x 10^9/L', type: 'toggle', points: 2, description: 'Most specific lab finding' },
+    { name: 'anemia', label: 'Unexplained anemia', type: 'toggle', points: 1 },
+    { name: 'neutropenia', label: 'Neutropenia (<2 x 10^9/L)', type: 'toggle', points: 2 },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'Low Concern', risk: '0-1 red flags', mortality: 'Consider if persistent. Routine follow-up.', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Moderate Concern', risk: '2-3 red flags', mortality: 'CBC with smear, LDH. Consider heme referral.', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'High Concern', risk: '>=4 red flags', mortality: 'Urgent heme/onc referral. Consider bone marrow.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'HARD STOPS requiring immediate evaluation: Hepatosplenomegaly + MSK complaints, any cytopenia, unexplained pancytopenia. Pain > swelling suggests malignancy; Swelling > pain suggests JIA.',
+  citations: [
+    'Cabral DA, Tucker LB. Malignancies in Children Who Initially Present with Rheumatic Complaints. J Pediatr. 1999;134(1):53-57. PMID: 9880449',
+  ],
+};
+
+const PEDS_ARTH_JONES_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-arth-jones',
+  title: 'Jones Criteria',
+  subtitle: 'Acute Rheumatic Fever',
+  description: 'Revised Jones Criteria (2015) for diagnosis of acute rheumatic fever. Requires evidence of preceding GAS infection plus major/minor criteria.',
+  fields: [
+    {
+      name: 'population',
+      label: 'Population Risk',
+      type: 'select',
+      points: 0,
+      description: 'Low-risk: ARF incidence <=2/100,000 school-age. Most US populations are low-risk.',
+      selectOptions: [
+        { label: 'Low-risk population', points: 1 },
+        { label: 'Moderate/High-risk population', points: 2 },
+      ],
+    },
+    { name: 'strep-evidence', label: 'Evidence of prior GAS infection', type: 'toggle', points: 0, description: 'Positive throat culture, elevated/rising ASO or anti-DNase B, recent scarlet fever' },
+    { name: 'carditis', label: 'Carditis (clinical or subclinical echo)', type: 'toggle', points: 10, description: 'MAJOR criterion - new murmur, CHF, pericarditis, or echo findings' },
+    { name: 'polyarthritis', label: 'Polyarthritis (migratory)', type: 'toggle', points: 10, description: 'MAJOR in low-risk; monoarthritis also major in high-risk' },
+    { name: 'monoarthritis', label: 'Monoarthritis or polyarthralgia', type: 'toggle', points: 0, description: 'MAJOR only in high-risk populations' },
+    { name: 'chorea', label: 'Sydenham chorea', type: 'toggle', points: 10, description: 'MAJOR criterion - may be only manifestation' },
+    { name: 'erythema', label: 'Erythema marginatum', type: 'toggle', points: 10, description: 'MAJOR criterion - evanescent, pink rings' },
+    { name: 'nodules', label: 'Subcutaneous nodules', type: 'toggle', points: 10, description: 'MAJOR criterion - painless, over bony prominences' },
+    { name: 'fever', label: 'Fever (>=38.5C low-risk, >=38.0C high-risk)', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'esr-crp', label: 'Elevated ESR (>=60 low, >=30 high) or CRP >=3.0', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'pr-prolonged', label: 'Prolonged PR interval', type: 'toggle', points: 1, description: 'MINOR criterion (only if no carditis)' },
+  ],
+  results: [],
+  thresholdNote: 'Diagnosis: Evidence of GAS + 2 major OR 1 major + 2 minor criteria. Cannot count both carditis AND prolonged PR. Cannot count both polyarthritis AND polyarthralgia.',
+  citations: [
+    'Gewitz MH, et al. Revision of the Jones Criteria for the Diagnosis of Acute Rheumatic Fever. Circulation. 2015;131(20):1806-1818. PMID: 25908771',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const population = values['population'] || 1;
+    const strepEvidence = values['strep-evidence'] || 0;
+    const carditis = values['carditis'] || 0;
+    const polyarthritis = values['polyarthritis'] || 0;
+    const monoarthritis = values['monoarthritis'] || 0;
+    const chorea = values['chorea'] || 0;
+    const erythema = values['erythema'] || 0;
+    const nodules = values['nodules'] || 0;
+    const fever = values['fever'] || 0;
+    const esrCrp = values['esr-crp'] || 0;
+    const prProlonged = values['pr-prolonged'] || 0;
+
+    // Count major criteria
+    let majorCount = 0;
+    if (carditis) majorCount++;
+    if (polyarthritis) majorCount++;
+    if (chorea) majorCount++;
+    if (erythema) majorCount++;
+    if (nodules) majorCount++;
+    // In high-risk populations, monoarthritis/polyarthralgia counts as major
+    if (population === 2 && monoarthritis) majorCount++;
+
+    // Count minor criteria
+    let minorCount = 0;
+    if (fever) minorCount++;
+    if (esrCrp) minorCount++;
+    // PR prolongation only counts if NO carditis
+    if (prProlonged && !carditis) minorCount++;
+    // In low-risk, monoarthritis is minor (in high-risk its already major)
+    if (population === 1 && monoarthritis) minorCount++;
+
+    // Diagnosis criteria
+    const meetsCriteria = (majorCount >= 2) || (majorCount >= 1 && minorCount >= 2);
+
+    if (!strepEvidence) {
+      return {
+        value: 'INCOMPLETE',
+        label: 'Missing Strep Evidence',
+        description: `**Evidence of prior GAS infection is REQUIRED.**\n\nNeeded: Positive throat culture, elevated/rising ASO or anti-DNase B, or recent scarlet fever.\n\n**Current count:**\n- Major criteria: ${majorCount}\n- Minor criteria: ${minorCount}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (chorea && majorCount === 1 && minorCount === 0) {
+      return {
+        value: 'CHOREA ALONE',
+        label: 'Possible ARF (Chorea)',
+        description: '**Sydenham chorea alone can establish ARF diagnosis** even without other criteria, as it often appears months after infection when strep evidence may be negative.\n\n**Management:**\n- Echocardiogram for carditis\n- Begin secondary prophylaxis\n- Neurology referral',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (meetsCriteria) {
+      return {
+        value: 'POSITIVE',
+        label: 'ARF Criteria Met',
+        description: `**Jones Criteria POSITIVE for Acute Rheumatic Fever**\n\n- Major criteria: ${majorCount}\n- Minor criteria: ${minorCount}\n\n**Required:** 2 major OR 1 major + 2 minor\n\n**Management:**\n1. **Eradicate GAS:** Penicillin or amoxicillin x 10 days\n2. **Anti-inflammatory:** High-dose aspirin (50-75 mg/kg/day)\n3. **Cardiac evaluation:** ECG, echocardiogram\n4. **Secondary prophylaxis:** Benzathine PCN q4 weeks\n\n**Admit** for cardiac monitoring if carditis present.`,
+        colorVar: '--color-danger',
+      };
+    } else {
+      return {
+        value: 'NOT MET',
+        label: 'Criteria Not Met',
+        description: `**Jones Criteria NOT MET for ARF**\n\n- Major criteria: ${majorCount} (need 2, or 1 + 2 minor)\n- Minor criteria: ${minorCount}\n\n**Consider:**\n- Post-streptococcal reactive arthritis (PSRA) if arthritis is non-migratory, prolonged, and slow NSAID response\n- Other causes of arthritis\n\n**If PSRA:** Treat GAS, consider 1-year secondary prophylaxis, get baseline echo.`,
+        colorVar: '--color-warning',
+      };
+    }
+  },
+};
+
+// -------------------------------------------------------------------
+// Gout & Pseudogout Calculators
+// -------------------------------------------------------------------
+
+const GOUT_ACR_EULAR_CALCULATOR: CalculatorDefinition = {
+  id: 'gout-acr-eular',
+  title: 'ACR/EULAR Gout Classification',
+  subtitle: '2015 Gout Classification Criteria',
+  description: 'ACR/EULAR 2015 classification criteria for gout. Entry criterion: at least 1 episode of peripheral joint or bursal swelling, pain, or tenderness. Score ≥8 classifies as gout (Sensitivity 92%, Specificity 89%). If MSU crystals are identified, gout is confirmed without scoring.',
+  fields: [
+    { name: 'joint-pattern', label: 'Joint Pattern', type: 'select', points: 0, description: 'Pattern of joint/bursa involvement', selectOptions: [
+        { label: 'Not scored / Other joints only', points: 0 },
+        { label: 'Ankle or midfoot (as part of monoarticular/oligoarticular)', points: 1 },
+        { label: '1st MTP involvement (as part of monoarticular/oligoarticular)', points: 2 },
+      ],
+    },
+    { name: 'erythema', label: 'Erythema over affected joint', type: 'toggle', points: 1, description: 'Episode characteristic' },
+    { name: 'cant-bear-touch', label: 'Can\'t bear touch or pressure', type: 'toggle', points: 1, description: 'Episode characteristic' },
+    { name: 'walking-difficulty', label: 'Great difficulty walking or using joint', type: 'toggle', points: 1, description: 'Episode characteristic' },
+    { name: 'time-course', label: 'Time Course', type: 'select', points: 0, description: 'Time to maximal pain (<24h), resolution (≤14d), complete between episodes', selectOptions: [
+        { label: 'No typical episodes', points: 0 },
+        { label: '1 typical episode', points: 1 },
+        { label: 'Recurrent typical episodes', points: 2 },
+      ],
+    },
+    { name: 'tophus', label: 'Tophus present', type: 'toggle', points: 4, description: 'Draining or chalk-like subcutaneous nodule' },
+    { name: 'serum-urate', label: 'Serum Urate', type: 'select', points: 0, description: 'Highest measured urate', selectOptions: [
+        { label: '< 4 mg/dL (<0.24 mmol/L)', points: -4 },
+        { label: '4 - <6 mg/dL (0.24-<0.36)', points: 0 },
+        { label: '6 - <8 mg/dL (0.36-<0.48)', points: 2 },
+        { label: '8 - <10 mg/dL (0.48-<0.60)', points: 3 },
+        { label: '≥10 mg/dL (≥0.60 mmol/L)', points: 4 },
+      ],
+    },
+    { name: 'sf-analysis', label: 'Synovial Fluid Analysis', type: 'select', points: 0, description: 'Crystal analysis from symptomatic joint/bursa', selectOptions: [
+        { label: 'Not performed', points: 0 },
+        { label: 'MSU negative', points: -2 },
+      ],
+    },
+    { name: 'imaging', label: 'Imaging Evidence', type: 'select', points: 0, description: 'US double contour OR DECT urate OR X-ray erosion', selectOptions: [
+        { label: 'Not present / Not done', points: 0 },
+        { label: 'Double contour sign (US) or DECT urate', points: 4 },
+        { label: 'Gout-related erosion on X-ray', points: 4 },
+      ],
+    },
+  ],
+  results: [
+    { min: -Infinity, max: 8, label: 'Does Not Classify as Gout', risk: 'Score <8', mortality: 'Consider alternative diagnoses', colorVar: '--color-warning' },
+    { min: 8, max: Infinity, label: 'Classifies as Gout', risk: 'Score ≥8', mortality: 'Sensitivity 92%, Specificity 89%', colorVar: '--color-decision-active' },
+  ],
+  thresholdNote: 'Score ≥8 = Gout classification. If MSU crystals identified, gout is confirmed regardless of score.',
+  citations: ['Neogi T, et al. 2015 Gout Classification Criteria. Arthritis Rheumatol. 2015;67(10):2557-2568.'],
+};
+
+const GOUT_TREATMENT_SELECTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'gout-treatment-selector',
+  title: 'Gout Treatment Selector',
+  subtitle: 'Acute Flare Treatment by Contraindications',
+  description: 'Selects the appropriate acute gout treatment based on patient contraindications. Per ACR 2020 guidelines.',
+  fields: [
+    { name: 'renal', label: 'Renal impairment (CrCl <60)', type: 'toggle', points: 1, description: 'NSAIDs relatively contraindicated' },
+    { name: 'gi', label: 'GI risk (ulcer, bleed, GERD)', type: 'toggle', points: 1, description: 'NSAIDs relatively contraindicated' },
+    { name: 'cvd', label: 'Cardiovascular disease', type: 'toggle', points: 1, description: 'CHF, recent MI, uncontrolled HTN' },
+    { name: 'anticoag', label: 'On anticoagulation', type: 'toggle', points: 1, description: 'Increased bleeding risk with NSAIDs' },
+    { name: 'diabetes', label: 'Diabetes mellitus', type: 'toggle', points: 0, description: 'Steroids will cause hyperglycemia' },
+    { name: 'infection', label: 'Active infection concern', type: 'toggle', points: 0, description: 'Steroids may mask infection' },
+    { name: 'cyp3a4', label: 'On CYP3A4 inhibitor', type: 'toggle', points: 0, description: 'Clarithromycin, ketoconazole, ritonavir' },
+    { name: 'onset', label: 'Symptom onset >36 hours', type: 'toggle', points: 0, description: 'Colchicine less effective after 36h' },
+    { name: 'single-joint', label: 'Single joint with effusion', type: 'toggle', points: 0, description: 'IA steroid preferred if aspiratable' },
+  ],
+  results: [],
+  thresholdNote: 'Decision-logic tool. Recommendations based on ACR 2020 guidelines.',
+  citations: ['FitzGerald JD, et al. 2020 ACR Guideline for Management of Gout. Arthritis Care Res. 2020;72(6):744-760.'],
+  computeResult: (values: Record<string, number>) => {
+    const renal = values['renal'] || 0;
+    const gi = values['gi'] || 0;
+    const cvd = values['cvd'] || 0;
+    const anticoag = values['anticoag'] || 0;
+    const diabetes = values['diabetes'] || 0;
+    const infection = values['infection'] || 0;
+    const cyp3a4 = values['cyp3a4'] || 0;
+    const onset = values['onset'] || 0;
+    const singleJoint = values['single-joint'] || 0;
+    const nsaidContraindicated = renal || gi || cvd || anticoag;
+    const colchicineContraindicated = cyp3a4 || (renal && onset);
+    if (singleJoint === 1) {
+      return { value: 'IA Steroid', label: 'Intra-articular Corticosteroid Preferred', description: '**Single joint with effusion - IA steroid is first choice.**\n\n1. Aspirate joint (diagnostic + therapeutic)\n2. Send fluid for crystals AND culture\n3. Inject steroid after aspiration\n\n**Dosing:**\n• Large joint (knee): Triamcinolone 40mg\n• Medium (ankle, wrist): 20-30mg\n• Small (MTP, MCP): 10mg', colorVar: '--color-decision-active' };
+    }
+    if (!nsaidContraindicated) {
+      return { value: 'NSAIDs', label: 'NSAIDs Recommended', description: '**NSAIDs are first-line for acute gout.**\n\n**Options (FULL anti-inflammatory doses):**\n• Naproxen 750mg x1, then 250mg q8h\n• Indomethacin 50mg TID x2-3d, then 25mg TID\n• Ibuprofen 800mg TID\n\n**Duration:** Until flare resolves (5-7 days)', colorVar: '--color-decision-active' };
+    }
+    if (nsaidContraindicated && !colchicineContraindicated && onset === 0) {
+      return { value: 'Colchicine', label: 'Colchicine Recommended', description: '**Colchicine - best within 36h of onset.**\n\n**Low-dose protocol:**\n• 1.2mg x1, then 0.6mg 1 hour later\n• Day 2+: 0.6mg daily or BID until resolved\n\n**CrCl <30:** Same acute dose, do NOT repeat for 2 weeks.', colorVar: '--color-decision-active' };
+    }
+    if (nsaidContraindicated && (colchicineContraindicated || onset === 1)) {
+      const diabetesWarning = diabetes ? '\n\n⚠️ DIABETES: Will cause hyperglycemia.' : '';
+      const infectionWarning = infection ? '\n\n⚠️ INFECTION CONCERN: Ensure cultures obtained before steroids.' : '';
+      return { value: 'Steroids', label: 'Corticosteroids Recommended', description: '**Corticosteroids - first choice when NSAID/colchicine contraindicated.**\n\n**Oral prednisone:**\n• 30-40mg daily x 5 days\n\n**IM option:**\n• Triamcinolone 60mg IM x1' + diabetesWarning + infectionWarning, colorVar: '--color-decision-active' };
+    }
+    return { value: '—', label: 'Select contraindications', description: 'Check applicable contraindications to generate recommendation.', colorVar: '--color-text-muted' };
+  },
+};
+
+const GOUT_COLCHICINE_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'gout-colchicine-dosing',
+  title: 'Colchicine Dosing Calculator',
+  subtitle: 'Renal-Adjusted Low-Dose Protocol',
+  description: 'Calculates appropriate colchicine dosing for acute gout flare based on renal function and drug interactions.',
+  fields: [
+    { name: 'crcl', label: 'Creatinine Clearance (CrCl)', type: 'select', points: 0, description: 'Use Cockcroft-Gault', selectOptions: [
+        { label: '>50 mL/min (normal)', points: 0 },
+        { label: '30-50 mL/min (moderate CKD)', points: 1 },
+        { label: '<30 mL/min (severe CKD)', points: 2 },
+        { label: 'On hemodialysis', points: 3 },
+      ],
+    },
+    { name: 'cyp3a4', label: 'On strong CYP3A4 inhibitor', type: 'toggle', points: 0, description: 'Clarithromycin, ketoconazole, ritonavir' },
+    { name: 'pgp', label: 'On P-glycoprotein inhibitor', type: 'toggle', points: 0, description: 'Cyclosporine, ranolazine' },
+    { name: 'onset', label: 'Time since symptom onset', type: 'select', points: 0, description: 'Colchicine most effective within 36h', selectOptions: [
+        { label: '<12 hours', points: 0 },
+        { label: '12-36 hours', points: 1 },
+        { label: '>36 hours', points: 2 },
+      ],
+    },
+    { name: 'prior-colch', label: 'Colchicine in past 14 days', type: 'toggle', points: 0, description: 'For prophylaxis or prior flare' },
+  ],
+  results: [],
+  thresholdNote: 'Low-dose colchicine is as effective as high-dose with fewer side effects.',
+  citations: ['FitzGerald JD, et al. 2020 ACR Guideline. Arthritis Care Res. 2020;72(6):744-760.', 'Terkeltaub RA, et al. Arthritis Rheum. 2010;62(4):1060-1068.'],
+  computeResult: (values: Record<string, number>) => {
+    const crcl = values['crcl'] || 0;
+    const cyp3a4 = values['cyp3a4'] || 0;
+    const pgp = values['pgp'] || 0;
+    const onset = values['onset'] || 0;
+    const priorColch = values['prior-colch'] || 0;
+    if (cyp3a4 === 1 || pgp === 1) {
+      const drug = cyp3a4 ? 'CYP3A4 inhibitor' : 'P-gp inhibitor';
+      return { value: 'CONTRAINDICATED', label: 'Drug Interaction - Avoid Colchicine', description: `**On ${drug} - colchicine contraindicated.**\n\n**Risk:** Severe toxicity including bone marrow suppression, neuromyopathy, death.\n\n**Alternative:** Corticosteroids (prednisone 30-40mg daily x 5 days)`, colorVar: '--color-danger' };
+    }
+    if (onset === 2) {
+      return { value: 'SUBOPTIMAL', label: 'Onset >36h - Consider Alternative', description: '**Colchicine is most effective within 36 hours.**\n\nConsider NSAIDs or corticosteroids instead.', colorVar: '--color-warning' };
+    }
+    if (priorColch === 1) {
+      return { value: '0.6mg x1', label: 'Recent Colchicine - Reduced Dose', description: '**Recent colchicine use - give 0.6mg x1 only.**\n\nDo NOT give loading dose. Continue 0.6mg daily next day.', colorVar: '--color-warning' };
+    }
+    if (crcl === 0) {
+      return { value: '1.2mg + 0.6mg', label: 'Standard Low-Dose Protocol', description: '**Day 1:** 1.2mg x1, then 0.6mg 1 hour later (total 1.8mg)\n**Day 2+:** 0.6mg once or twice daily until resolved', colorVar: '--color-decision-active' };
+    }
+    if (crcl === 1) {
+      return { value: '1.2mg + 0.6mg', label: 'Standard Dose - Monitor Closely', description: '**CrCl 30-50:** Standard acute dose, then 0.6mg once daily (not BID).\n\nMonitor for GI symptoms, myopathy.', colorVar: '--color-decision-active' };
+    }
+    if (crcl === 2) {
+      return { value: '1.2mg + 0.6mg x1', label: 'Severe CKD - Single Treatment', description: '**CrCl <30:** Give acute dose ONCE, then **do NOT repeat for 14 days.**\n\nUse steroids for ongoing treatment.', colorVar: '--color-warning' };
+    }
+    if (crcl === 3) {
+      return { value: '0.6mg x1 ONLY', label: 'Hemodialysis - Single Reduced Dose', description: '**Hemodialysis:** Maximum 0.6mg single dose.\n**Do NOT repeat for 14 days.** Not removed by dialysis.', colorVar: '--color-warning' };
+    }
+    return { value: '—', label: 'Select renal function', description: 'Select CrCl to calculate appropriate dosing.', colorVar: '--color-text-muted' };
+  },
+};
+
+const GOUT_SYNOVIAL_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'gout-synovial-interpreter',
+  title: 'Synovial Fluid Interpreter',
+  subtitle: 'Joint Aspiration Analysis',
+  description: 'Interprets synovial fluid analysis results to guide diagnosis and management.',
+  fields: [
+    { name: 'wbc', label: 'Synovial WBC Count', type: 'select', points: 0, description: 'WBC per mm³', selectOptions: [
+        { label: '<2,000/mm³', points: 0 },
+        { label: '2,000 - 25,000/mm³', points: 1 },
+        { label: '25,000 - 50,000/mm³', points: 2 },
+        { label: '50,000 - 100,000/mm³', points: 3 },
+        { label: '>100,000/mm³', points: 4 },
+      ],
+    },
+    { name: 'crystals', label: 'Crystal Analysis', type: 'select', points: 0, description: 'Polarized microscopy result', selectOptions: [
+        { label: 'No crystals seen', points: 0 },
+        { label: 'MSU crystals (needle, neg birefringent)', points: 1 },
+        { label: 'CPP crystals (rhomboid, pos birefringent)', points: 2 },
+        { label: 'Both crystal types', points: 3 },
+      ],
+    },
+    { name: 'gram', label: 'Gram Stain', type: 'select', points: 0, description: 'Gram stain result', selectOptions: [
+        { label: 'Negative / No organisms', points: 0 },
+        { label: 'Gram-positive cocci', points: 1 },
+        { label: 'Gram-negative organisms', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Crystals do NOT exclude septic arthritis. Infected joints can contain crystals.',
+  citations: ['Swan A, et al. Ann Rheum Dis. 2002;61(6):493-498.', 'Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
+  computeResult: (values: Record<string, number>) => {
+    const wbc = values['wbc'] || 0;
+    const crystals = values['crystals'] || 0;
+    const gram = values['gram'] || 0;
+    if (gram === 1 || gram === 2) {
+      const organism = gram === 1 ? 'Gram-positive cocci' : 'Gram-negative organisms';
+      return { value: 'SEPTIC ARTHRITIS', label: 'Positive Gram Stain - Treat as Septic', description: `**${organism} identified.**\n\n**Treat as septic arthritis regardless of crystals.**\n\nVancomycin + Ceftriaxone. Ortho consultation for washout.`, colorVar: '--color-danger' };
+    }
+    if (wbc >= 4) {
+      return { value: 'HIGH SUSPICION SEPTIC', label: 'WBC >100,000 - Treat as Septic', description: '**WBC >100,000/mm³ has ~99% sensitivity for septic arthritis.**\n\nEmpric antibiotics, ortho consultation for drainage.', colorVar: '--color-danger' };
+    }
+    if (crystals === 1) {
+      const warningNote = wbc >= 3 ? '\n\n⚠️ WBC 50-100k overlaps with septic range. If infection concern, treat for BOTH.' : '';
+      return { value: 'GOUT', label: 'MSU Crystals - Gout Confirmed', description: '**Monosodium urate crystals identified.**\n\nNeedle-shaped, strong negative birefringence.\n\nTreat with NSAIDs, colchicine, or steroids.' + warningNote, colorVar: '--color-decision-active' };
+    }
+    if (crystals === 2) {
+      const warningNote = wbc >= 3 ? '\n\n⚠️ WBC 50-100k overlaps with septic range. If infection concern, treat for BOTH.' : '';
+      return { value: 'CPPD / PSEUDOGOUT', label: 'CPP Crystals - CPPD Confirmed', description: '**Calcium pyrophosphate crystals identified.**\n\nRhomboid, weak positive birefringence.\n\nTreatment same as gout. Consider secondary cause workup.' + warningNote, colorVar: '--color-decision-active' };
+    }
+    if (crystals === 3) {
+      return { value: 'MIXED CRYSTALS', label: 'Both MSU and CPP Crystals', description: '**Both crystal types identified - can coexist.**\n\nTreat with anti-inflammatory therapy. Rheumatology referral helpful.', colorVar: '--color-decision-active' };
+    }
+    if (wbc === 0) {
+      return { value: 'NON-INFLAMMATORY', label: 'Non-Inflammatory Fluid', description: '**WBC <2,000/mm³ suggests non-inflammatory etiology.**\n\nConsider OA, trauma, avascular necrosis.', colorVar: '--color-primary' };
+    }
+    if (crystals === 0 && wbc >= 1 && wbc <= 2) {
+      return { value: 'INFLAMMATORY', label: 'Inflammatory - No Crystals', description: '**Inflammatory fluid without crystals.**\n\nDDx: Crystal arthritis (crystals missed), RA, reactive, early septic.\n\nAwait cultures before steroids if possible.', colorVar: '--color-warning' };
+    }
+    if (crystals === 0 && wbc === 3) {
+      return { value: 'UNCERTAIN', label: 'WBC 50-100k - Cannot Exclude Septic', description: '**Gray zone between inflammatory and septic.**\n\nAwait Gram stain and culture. Do NOT discharge until septic excluded.', colorVar: '--color-warning' };
+    }
+    return { value: '—', label: 'Enter fluid analysis', description: 'Enter synovial fluid results for interpretation.', colorVar: '--color-text-muted' };
+  },
+};
+
+const GOUT_VS_SEPTIC_CALCULATOR: CalculatorDefinition = {
+  id: 'gout-vs-septic',
+  title: 'Gout vs Septic Differentiator',
+  subtitle: 'Risk Assessment for Septic Arthritis',
+  description: 'Assesses clinical features to differentiate crystal arthritis from septic arthritis. Crystals do NOT exclude infection.',
+  fields: [
+    { name: 'fever', label: 'Fever ≥38.5°C (101.3°F)', type: 'toggle', points: 1, description: 'Documented temperature elevation' },
+    { name: 'rigor', label: 'Rigors/chills', type: 'toggle', points: 1, description: 'Suggests bacteremia' },
+    { name: 'wbc', label: 'Serum WBC >10,000', type: 'toggle', points: 1, description: 'Peripheral leukocytosis' },
+    { name: 'immunocompromised', label: 'Immunocompromised', type: 'toggle', points: 2, description: 'DM, HIV, steroids, chemotherapy' },
+    { name: 'ivdu', label: 'IV drug use', type: 'toggle', points: 2, description: 'High risk for septic arthritis' },
+    { name: 'prosthetic', label: 'Prosthetic joint', type: 'toggle', points: 2, description: 'Periprosthetic infection risk' },
+    { name: 'skin-infection', label: 'Overlying skin infection', type: 'toggle', points: 2, description: 'Cellulitis over joint' },
+    { name: 'bacteremia', label: 'Known/suspected bacteremia', type: 'toggle', points: 2, description: 'Endocarditis, line infection' },
+    { name: 'podagra', label: 'Classic podagra (1st MTP)', type: 'toggle', points: 0, description: 'Favors gout' },
+    { name: 'history-gout', label: 'Prior crystal-proven gout', type: 'toggle', points: 0, description: 'Still need to consider infection' },
+  ],
+  results: [],
+  thresholdNote: 'High-risk features warrant arthrocentesis regardless of prior gout history.',
+  citations: ['Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
+  computeResult: (values: Record<string, number>) => {
+    const fever = values['fever'] || 0;
+    const rigor = values['rigor'] || 0;
+    const wbc = values['wbc'] || 0;
+    const immunocompromised = values['immunocompromised'] || 0;
+    const ivdu = values['ivdu'] || 0;
+    const prosthetic = values['prosthetic'] || 0;
+    const skinInfection = values['skin-infection'] || 0;
+    const bacteremia = values['bacteremia'] || 0;
+    const podagra = values['podagra'] || 0;
+    const historyGout = values['history-gout'] || 0;
+    const highRiskFeatures = immunocompromised + ivdu + prosthetic + skinInfection + bacteremia;
+    const moderateRiskFeatures = fever + rigor + wbc;
+    const goutFeatures = podagra + historyGout;
+    if (prosthetic === 1 || bacteremia === 1 || skinInfection === 1) {
+      return { value: 'HIGH RISK', label: 'Critical - Must Exclude Septic', description: '**Critical risk factor present.**\n\nAspirate joint, hold steroids until cultures obtained, ortho/ID consultation.\n\nCrystals may coexist with infection.', colorVar: '--color-danger' };
+    }
+    if (highRiskFeatures >= 1 || moderateRiskFeatures >= 3) {
+      return { value: 'ELEVATED RISK', label: 'Elevated Risk - Aspiration Required', description: '**Multiple risk factors present.**\n\nAspiration mandatory even with prior gout history.', colorVar: '--color-warning' };
+    }
+    if (moderateRiskFeatures >= 1) {
+      return { value: 'MODERATE RISK', label: 'Moderate Risk - Consider Aspiration', description: '**Some risk factors present.**\n\nAspiration recommended unless classic podagra with known gout and no fever.', colorVar: '--color-warning' };
+    }
+    if (goutFeatures >= 2 && highRiskFeatures === 0 && moderateRiskFeatures === 0) {
+      return { value: 'LOW RISK', label: 'Low Risk - Empiric Treatment Reasonable', description: '**Low risk for septic arthritis.**\n\nClassic presentation, prior gout, no fever/risk factors.\n\nEmpiric treatment acceptable with reliable follow-up.', colorVar: '--color-decision-active' };
+    }
+    return { value: 'ASSESS', label: 'Complete Assessment', description: '**Select applicable risk factors.**\n\nRemember: Crystals do NOT exclude infection. When in doubt, aspirate.', colorVar: '--color-text-muted' };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Pediatric Arthritis
+  'peds-arth-kocher': PEDS_ARTH_KOCHER_CALCULATOR,
+  'peds-arth-caird': PEDS_ARTH_CAIRD_CALCULATOR,
+  'peds-arth-pattern-matcher': PEDS_ARTH_PATTERN_MATCHER_CALCULATOR,
+  'peds-arth-malignancy-flags': PEDS_ARTH_MALIGNANCY_FLAGS_CALCULATOR,
+  'peds-arth-jones': PEDS_ARTH_JONES_CALCULATOR,
+  // Diabetic Foot Wounds
+  'dfw-wagner-pedis': DFW_WAGNER_PEDIS_CALCULATOR,
+  'dfw-idsa-severity': DFW_IDSA_SEVERITY_CALCULATOR,
+  'dfw-vascular-interpreter': DFW_VASCULAR_INTERPRETER_CALCULATOR,
+  'dfw-osteo-probability': DFW_OSTEO_PROBABILITY_CALCULATOR,
+  'dfw-abx-selector': DFW_ABX_SELECTOR_CALCULATOR,
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
   'peds-drowning-prognosis': PEDS_DROWNING_PROGNOSIS_CALCULATOR,
@@ -19677,6 +21152,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'synovial-wbc': SYNOVIAL_WBC_CALCULATOR,
   'newman-criteria': NEWMAN_CRITERIA_CALCULATOR,
   'gc-arthritis': GC_ARTHRITIS_CALCULATOR,
+  // Approach to Arthritis
+  'arth-inflammatory-mechanical': ARTH_INFLAMMATORY_MECHANICAL_CALCULATOR,
+  'arth-synovial-interpreter': ARTH_SYNOVIAL_INTERPRETER_CALCULATOR,
+  'arth-septic-risk': ARTH_SEPTIC_RISK_CALCULATOR,
+  'arth-pattern-matcher': ARTH_PATTERN_MATCHER_CALCULATOR,
+  'arth-lab-interpreter': ARTH_LAB_INTERPRETER_CALCULATOR,
   // COPD
   'copd-severity': COPD_SEVERITY_CALCULATOR,
   'anthonisen-criteria': ANTHONISEN_CRITERIA_CALCULATOR,
@@ -19934,6 +21415,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'sti-syphilis-staging': STI_SYPHILIS_STAGING_CALCULATOR,
   'sti-pregnancy-safety': STI_PREGNANCY_SAFETY_CALCULATOR,
   'sti-doxypep': STI_DOXYPEP_CALCULATOR,
+  // Gout & Pseudogout
+  'gout-acr-eular': GOUT_ACR_EULAR_CALCULATOR,
+  'gout-treatment-selector': GOUT_TREATMENT_SELECTOR_CALCULATOR,
+  'gout-colchicine-dosing': GOUT_COLCHICINE_DOSING_CALCULATOR,
+  'gout-synovial-interpreter': GOUT_SYNOVIAL_INTERPRETER_CALCULATOR,
+  'gout-vs-septic': GOUT_VS_SEPTIC_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

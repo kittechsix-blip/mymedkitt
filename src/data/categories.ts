@@ -1124,6 +1124,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         nodeCount: 16,
         entryNodeId: 'nat-start',
       },
+      {
+        id: 'pediatric-arthritis',
+        title: 'Pediatric Arthritis',
+        subtitle: 'Assessment → Septic vs Transient → JIA → Reactive → Red Flags → Treatment',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 43,
+        entryNodeId: 'peds-arth-start',
+      },
     ],
     isCustom: false,
   },
@@ -1154,6 +1163,32 @@ export const DEFAULT_CATEGORIES: Category[] = [
     isCustom: false,
   },
   { id: 'pharmacy',             name: 'Pharmacy',              icon: 'pharmacy.png',          decisionTrees: [], isCustom: false },
+  {
+    id: 'rheumatology',
+    name: 'Rheumatology',
+    icon: 'rheumatology.png',
+    decisionTrees: [
+      {
+        id: 'approach-to-arthritis',
+        title: 'Approach to Arthritis',
+        subtitle: 'Initial Assessment → Inflammatory vs Mechanical → Septic Arthritis → Crystal Arthropathies → Systemic Rheumatic → Disposition',
+        categoryId: 'rheumatology',
+        version: '1.0',
+        nodeCount: 48,
+        entryNodeId: 'arth-start',
+      },
+      {
+        id: 'gout',
+        title: 'Gout & Pseudogout',
+        subtitle: 'Presentation → Diagnosis → Gout vs Pseudogout → Acute Treatment → Disposition',
+        categoryId: 'rheumatology',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'gout-start',
+      },
+    ],
+    isCustom: false,
+  },
   {
     id: 'procedures',
     name: 'Procedures',
@@ -1409,6 +1444,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         nodeCount: 32,
         entryNodeId: 'peds-trauma-start',
       },
+      {
+        id: 'diabetic-foot-wounds',
+        title: 'Diabetic Foot Wounds',
+        subtitle: 'Assessment → Infection Severity → Vascular → Osteomyelitis → Charcot → Disposition',
+        categoryId: 'trauma-surg',
+        version: '1.0',
+        nodeCount: 52,
+        entryNodeId: 'dfw-start',
+      },
     ],
     isCustom: false,
   },
@@ -1514,6 +1558,7 @@ export const CATEGORY_COLORS: Record<string, { card: string; iconBg: string; tex
   'trauma-surg':         { card: '#E65100', iconBg: '#E65100' },
   'us-rads':             { card: '#1A237E', iconBg: '#1A237E' },
   'urology':             { card: '#F57F17', iconBg: '#F57F17', textColor: '#1A1A2E' },
+  'rheumatology':        { card: '#7B1FA2', iconBg: '#7B1FA2' },
 };
 
 const STORAGE_KEY = 'em-custom-categories';

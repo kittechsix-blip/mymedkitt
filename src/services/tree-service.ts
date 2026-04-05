@@ -683,6 +683,22 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/sti-comprehensive.js');
       return { nodes: m.STI_COMPREHENSIVE_NODES, entryNodeId: 'sti-start', categoryId: 'infectious-disease', moduleLabels: m.STI_COMPREHENSIVE_MODULE_LABELS, citations: m.STI_COMPREHENSIVE_CITATIONS };
     },
+    'approach-to-arthritis': async () => {
+      const m = await import('../data/trees/approach-to-arthritis.js');
+      return { nodes: m.APPROACH_TO_ARTHRITIS_NODES, entryNodeId: 'arth-start', categoryId: 'rheumatology', moduleLabels: m.APPROACH_TO_ARTHRITIS_MODULE_LABELS, citations: m.APPROACH_TO_ARTHRITIS_CITATIONS };
+    },
+    'diabetic-foot-wounds': async () => {
+      const m = await import('../data/trees/diabetic-foot-wounds.js');
+      return { nodes: m.DIABETIC_FOOT_WOUNDS_NODES, entryNodeId: 'dfw-start', categoryId: 'trauma-surg', moduleLabels: m.DIABETIC_FOOT_WOUNDS_MODULE_LABELS, citations: m.DIABETIC_FOOT_WOUNDS_CITATIONS };
+    },
+    'pediatric-arthritis': async () => {
+      const m = await import('../data/trees/pediatric-arthritis.js');
+      return { nodes: m.PEDIATRIC_ARTHRITIS_NODES, entryNodeId: 'peds-arth-start', categoryId: 'pediatrics', moduleLabels: m.MODULE_LABELS, citations: m.CITATIONS };
+    },
+    'gout': async () => {
+      const m = await import('../data/trees/gout.js');
+      return { nodes: m.GOUT_NODES, entryNodeId: 'gout-start', categoryId: 'rheumatology', moduleLabels: m.GOUT_MODULE_LABELS, citations: m.GOUT_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

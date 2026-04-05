@@ -811,6 +811,34 @@ const TOOLBAR_CONFIGS = {
         { id: 'second-third', label: '2nd/3rd', icon: '📅', action: 'jump', target: 'rhogam-second-third' },
         { id: 'dosing', label: 'Dosing', icon: '💉', action: 'jump', target: 'rhogam-dosing' },
     ],
+    'approach-to-arthritis': [
+        { id: 'inflam-mech', label: 'Inflam/Mech', icon: '📊', action: 'calculator', target: 'arth-inflammatory-mechanical' },
+        { id: 'synovial', label: 'Synovial', icon: '🧪', action: 'calculator', target: 'arth-synovial-interpreter' },
+        { id: 'septic-risk', label: 'Septic Risk', icon: '🦠', action: 'calculator', target: 'arth-septic-risk' },
+        { id: 'pattern', label: 'Pattern', icon: '🦴', action: 'calculator', target: 'arth-pattern-matcher' },
+        { id: 'labs', label: 'Labs', icon: '🔬', action: 'calculator', target: 'arth-lab-interpreter' },
+    ],
+    'diabetic-foot-wounds': [
+        { id: 'wagner-pedis', label: 'Wagner/PEDIS', icon: '📊', action: 'calculator', target: 'dfw-wagner-pedis' },
+        { id: 'idsa-severity', label: 'IDSA Grade', icon: '🦠', action: 'calculator', target: 'dfw-idsa-severity' },
+        { id: 'vascular', label: 'Vascular', icon: '🫀', action: 'calculator', target: 'dfw-vascular-interpreter' },
+        { id: 'osteo', label: 'Osteo Risk', icon: '🦴', action: 'calculator', target: 'dfw-osteo-probability' },
+        { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'calculator', target: 'dfw-abx-selector' },
+    ],
+    'pediatric-arthritis': [
+        { id: 'peds-arth-kocher', label: 'Kocher', icon: '📊', action: 'calculator', target: 'peds-arth-kocher' },
+        { id: 'peds-arth-caird', label: 'Caird', icon: '🧮', action: 'calculator', target: 'peds-arth-caird' },
+        { id: 'peds-arth-pattern', label: 'Pattern', icon: '👶', action: 'calculator', target: 'peds-arth-pattern-matcher' },
+        { id: 'peds-arth-flags', label: 'Red Flags', icon: '🚨', action: 'calculator', target: 'peds-arth-malignancy-flags' },
+        { id: 'peds-arth-jones', label: 'Jones', icon: '❤️', action: 'calculator', target: 'peds-arth-jones' },
+    ],
+    'gout': [
+        { id: 'gout-acr-eular', label: 'ACR/EULAR', icon: '📊', action: 'calculator', target: 'gout-acr-eular' },
+        { id: 'gout-treatment', label: 'Treatment', icon: '💊', action: 'calculator', target: 'gout-treatment-selector' },
+        { id: 'gout-colchicine', label: 'Colchicine', icon: '💉', action: 'calculator', target: 'gout-colchicine-dosing' },
+        { id: 'gout-synovial', label: 'Synovial', icon: '🧪', action: 'calculator', target: 'gout-synovial-interpreter' },
+        { id: 'gout-vs-septic', label: 'vs Septic', icon: '🦠', action: 'calculator', target: 'gout-vs-septic' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {
