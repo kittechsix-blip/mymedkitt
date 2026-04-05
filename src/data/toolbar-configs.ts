@@ -861,6 +861,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hop-metabolic', label: 'Metabolic', icon: '⚡', action: 'calculator', target: 'hop-metabolic-intubation' },
     { id: 'hop-icp', label: 'Elevated ICP', icon: '🧠', action: 'calculator', target: 'hop-elevated-icp-intubation' },
   ],
+  'tia-workup': [
+    { id: 'tia-abcd2', label: 'ABCD2', icon: '📊', action: 'calculator', target: 'tia-abcd2' },
+    { id: 'tia-canadian', label: 'Canadian', icon: '🍁', action: 'calculator', target: 'tia-canadian-score' },
+    { id: 'tia-workup', label: 'Workup', icon: '📋', action: 'calculator', target: 'tia-workup-checklist' },
+    { id: 'tia-dapt', label: 'DAPT', icon: '💊', action: 'calculator', target: 'tia-dapt-protocol' },
+    { id: 'tia-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'tia-disposition' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

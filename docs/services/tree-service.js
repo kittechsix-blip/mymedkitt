@@ -649,6 +649,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/hop-killers.js');
             return { nodes: m.HOP_KILLERS_NODES, entryNodeId: 'hop-start', categoryId: 'anesthesia-airway', moduleLabels: m.HOP_KILLERS_MODULE_LABELS, citations: m.HOP_KILLERS_CITATIONS };
         },
+        'tia-workup': async () => {
+            const m = await import('../data/trees/tia-workup.js');
+            return { nodes: m.TIA_WORKUP_NODES, entryNodeId: 'tia-start', categoryId: 'neurology', moduleLabels: m.TIA_WORKUP_MODULE_LABELS, citations: m.TIA_WORKUP_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

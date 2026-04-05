@@ -21544,7 +21544,534 @@ ${activeHerniation ? `**ACTIVE HERNIATION MANAGEMENT:**
   },
 };
 
+// -------------------------------------------------------------------
+// TIA Workup Calculators
+// -------------------------------------------------------------------
+
+const TIA_ABCD2_CALCULATOR: CalculatorDefinition = {
+  id: 'tia-abcd2',
+  title: 'ABCD2 Score',
+  subtitle: 'TIA Risk Stratification',
+  description: 'Estimates 2, 7, and 90-day stroke risk after TIA. ACEP 2016 Level B: Do NOT use ABCD2 alone to identify low-risk patients for outpatient workup.',
+  fields: [
+    {
+      name: 'age',
+      label: 'Age >= 60 years',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'bp',
+      label: 'Blood Pressure >= 140/90 at presentation',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'clinical',
+      label: 'Clinical Features',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Other symptoms', points: 0 },
+        { label: 'Speech disturbance without weakness', points: 1 },
+        { label: 'Unilateral weakness', points: 2 },
+      ],
+    },
+    {
+      name: 'duration',
+      label: 'Duration of Symptoms',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '< 10 minutes', points: 0 },
+        { label: '10-59 minutes', points: 1 },
+        { label: '>= 60 minutes', points: 2 },
+      ],
+    },
+    {
+      name: 'diabetes',
+      label: 'History of Diabetes',
+      type: 'toggle',
+      points: 1,
+    },
+  ],
+  results: [
+    { min: 0, max: 3, label: 'Low Risk (0-3)', risk: 'Low', mortality: '2-Day: ~1.0% | 7-Day: ~1.2% | 90-Day: ~3.1%', colorVar: '--color-primary' },
+    { min: 4, max: 5, label: 'Moderate Risk (4-5)', risk: 'Moderate', mortality: '2-Day: ~4.1% | 7-Day: ~5.9% | 90-Day: ~9.8%', colorVar: '--color-warning' },
+    { min: 6, max: 7, label: 'High Risk (6-7)', risk: 'High', mortality: '2-Day: ~8.1% | 7-Day: ~11.7% | 90-Day: ~17.8%', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'ACEP 2016 Level B: Do NOT rely on ABCD2 alone to identify patients safe for outpatient workup. Does not account for mechanism (large vessel, cardioembolic) or imaging findings. Use in conjunction with clinical judgment and Canadian TIA Score.',
+  citations: [
+    'Johnston SC, et al. Validation and refinement of scores to predict very early stroke risk after TIA. Lancet. 2007;369(9558):283-292. PMID 17258668',
+    'ACEP Clinical Policy 2016: Critical Issues in the Evaluation of Adult Patients With Suspected TIA. Ann Emerg Med. 2016;68:354-370. PMID 27568419',
+  ],
+};
+
+const TIA_CANADIAN_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'tia-canadian-score',
+  title: 'Canadian TIA Score',
+  subtitle: 'TIA 7-Day Stroke Risk',
+  description: 'Predicts 7-day stroke risk after TIA. Validated in 7,607 patients with superior discrimination vs ABCD2 (AUC 0.70 vs 0.60). Includes clinical AND investigation findings.',
+  fields: [
+    {
+      name: 'first-tia',
+      label: 'First TIA ever',
+      type: 'toggle',
+      points: 0,
+      description: '+2.3 points',
+    },
+    {
+      name: 'duration',
+      label: 'Symptom duration >= 10 minutes',
+      type: 'toggle',
+      points: 0,
+      description: '+2.0 points',
+    },
+    {
+      name: 'carotid-history',
+      label: 'History of carotid stenosis',
+      type: 'toggle',
+      points: 0,
+      description: '+2.0 points',
+    },
+    {
+      name: 'antiplatelet',
+      label: 'Already on antiplatelet therapy',
+      type: 'toggle',
+      points: 0,
+      description: '+1.5 points',
+    },
+    {
+      name: 'gait',
+      label: 'Gait disturbance',
+      type: 'toggle',
+      points: 0,
+      description: '+1.3 points',
+    },
+    {
+      name: 'weakness',
+      label: 'Unilateral weakness',
+      type: 'toggle',
+      points: 0,
+      description: '+1.2 points',
+    },
+    {
+      name: 'vertigo-history',
+      label: 'History of vertigo (NOT current symptom)',
+      type: 'toggle',
+      points: 0,
+      description: '-0.9 points (protective)',
+    },
+    {
+      name: 'dbp-high',
+      label: 'DBP >= 110 mmHg',
+      type: 'toggle',
+      points: 0,
+      description: '+0.6 points',
+    },
+    {
+      name: 'dysarthria-aphasia',
+      label: 'Dysarthria or aphasia',
+      type: 'toggle',
+      points: 0,
+      description: '+0.8 points',
+    },
+    {
+      name: 'afib-ecg',
+      label: 'Atrial fibrillation on ECG',
+      type: 'toggle',
+      points: 0,
+      description: '+1.2 points',
+    },
+    {
+      name: 'infarct-ct',
+      label: 'Infarction on CT head',
+      type: 'toggle',
+      points: 0,
+      description: '+1.5 points',
+    },
+    {
+      name: 'platelets-high',
+      label: 'Platelets >= 400 x 10^9/L',
+      type: 'toggle',
+      points: 0,
+      description: '+1.5 points',
+    },
+    {
+      name: 'glucose-high',
+      label: 'Glucose >= 270 mg/dL (15 mmol/L)',
+      type: 'toggle',
+      points: 0,
+      description: '+1.0 point',
+    },
+  ],
+  results: [],
+  thresholdNote: 'Risk categories: Minimal (<-1, <0.5%), Low (-1 to 3, 0.5-2.5%), Medium (4-7, 2.3%), High (8-13, 5.9%), Critical (>13, >10%). Validated in 7,607 patients with 7-day stroke as outcome.',
+  citations: [
+    'Perry JJ, et al. Prospective validation of Canadian TIA Score and comparison with ABCD2 and ABCD2i for subsequent stroke risk after TIA. BMJ. 2021;372:n49. PMID 33504525',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const firstTIA = values['first-tia'] ? 2.3 : 0;
+    const duration = values['duration'] ? 2.0 : 0;
+    const carotid = values['carotid-history'] ? 2.0 : 0;
+    const antiplatelet = values['antiplatelet'] ? 1.5 : 0;
+    const gait = values['gait'] ? 1.3 : 0;
+    const weakness = values['weakness'] ? 1.2 : 0;
+    const vertigo = values['vertigo-history'] ? -0.9 : 0;
+    const dbp = values['dbp-high'] ? 0.6 : 0;
+    const speech = values['dysarthria-aphasia'] ? 0.8 : 0;
+    const afib = values['afib-ecg'] ? 1.2 : 0;
+    const infarct = values['infarct-ct'] ? 1.5 : 0;
+    const platelets = values['platelets-high'] ? 1.5 : 0;
+    const glucose = values['glucose-high'] ? 1.0 : 0;
+
+    const total = firstTIA + duration + carotid + antiplatelet + gait + weakness + vertigo + dbp + speech + afib + infarct + platelets + glucose;
+    const rounded = Math.round(total * 10) / 10;
+
+    let riskCategory = 'Minimal Risk';
+    let riskPercent = '<0.5%';
+    let colorVar = '--color-primary';
+    let recommendation = 'May be appropriate for outpatient workup with rapid TIA clinic follow-up (<24-48h).';
+
+    if (rounded > 13) {
+      riskCategory = 'CRITICAL RISK';
+      riskPercent = '>10%';
+      colorVar = '--color-danger';
+      recommendation = 'ADMIT. High-risk TIA with significant 7-day stroke risk. Complete workup in hospital, initiate DAPT, evaluate for intervention.';
+    } else if (rounded >= 8) {
+      riskCategory = 'High Risk';
+      riskPercent = '~5.9%';
+      colorVar = '--color-danger';
+      recommendation = 'ADMIT or close observation. Complete workup urgently. DAPT initiation, vascular imaging, telemetry.';
+    } else if (rounded >= 4) {
+      riskCategory = 'Medium Risk';
+      riskPercent = '~2.3%';
+      colorVar = '--color-warning';
+      recommendation = 'Consider ED observation or admission. Complete workup within 24-48 hours. DAPT if no contraindication.';
+    } else if (rounded >= -1) {
+      riskCategory = 'Low Risk';
+      riskPercent = '0.5-2.5%';
+      colorVar = '--color-primary';
+      recommendation = 'Discharge with DAPT may be appropriate if workup complete and rapid follow-up assured (<48h).';
+    }
+
+    return {
+      value: rounded.toString(),
+      label: `${riskCategory} (7-Day Stroke: ${riskPercent})`,
+      description: `**Canadian TIA Score: ${rounded}**\n\n**Risk Category:** ${riskCategory}\n**7-Day Stroke Risk:** ${riskPercent}\n\n**Recommendation:** ${recommendation}\n\n**Score Breakdown:**\n${firstTIA ? '+ First TIA ever (+2.3)\n' : ''}${duration ? '+ Duration >= 10 min (+2.0)\n' : ''}${carotid ? '+ Carotid stenosis history (+2.0)\n' : ''}${antiplatelet ? '+ On antiplatelet (+1.5)\n' : ''}${gait ? '+ Gait disturbance (+1.3)\n' : ''}${weakness ? '+ Unilateral weakness (+1.2)\n' : ''}${vertigo ? '+ Vertigo history (-0.9)\n' : ''}${dbp ? '+ DBP >= 110 (+0.6)\n' : ''}${speech ? '+ Dysarthria/aphasia (+0.8)\n' : ''}${afib ? '+ Afib on ECG (+1.2)\n' : ''}${infarct ? '+ Infarct on CT (+1.5)\n' : ''}${platelets ? '+ Platelets >= 400 (+1.5)\n' : ''}${glucose ? '+ Glucose >= 270 (+1.0)\n' : ''}\n**Superior to ABCD2** - includes imaging/lab findings and mechanism indicators.`,
+      colorVar,
+    };
+  },
+};
+
+const TIA_WORKUP_CHECKLIST_CALCULATOR: CalculatorDefinition = {
+  id: 'tia-workup-checklist',
+  title: 'TIA Workup Checklist',
+  subtitle: 'ED Evaluation Tracker',
+  description: 'Interactive checklist to track completion of TIA workup. Highlights high-risk findings that mandate admission.',
+  fields: [
+    { name: 'glucose', label: 'Fingerstick glucose checked', type: 'toggle', points: 1 },
+    { name: 'ecg', label: 'ECG obtained', type: 'toggle', points: 1 },
+    { name: 'afib-found', label: 'Atrial fibrillation detected', type: 'toggle', points: 0, description: 'HIGH-RISK FINDING' },
+    { name: 'ct-head', label: 'CT head completed', type: 'toggle', points: 1 },
+    { name: 'cta', label: 'CTA head/neck completed', type: 'toggle', points: 1 },
+    { name: 'stenosis-found', label: 'Stenosis >= 50% identified', type: 'toggle', points: 0, description: 'HIGH-RISK FINDING' },
+    { name: 'mri-dwi', label: 'MRI with DWI obtained (if available)', type: 'toggle', points: 1 },
+    { name: 'dwi-positive', label: 'DWI positive (acute infarct)', type: 'toggle', points: 0, description: 'This is a STROKE, not TIA' },
+    { name: 'labs', label: 'Labs: CBC, BMP, coags, lipids, HbA1c', type: 'toggle', points: 1 },
+    { name: 'echo-ordered', label: 'Echo ordered (TTE)', type: 'toggle', points: 1 },
+    { name: 'dapt-loaded', label: 'DAPT loaded (if non-cardioembolic)', type: 'toggle', points: 1 },
+    { name: 'statin', label: 'High-intensity statin started', type: 'toggle', points: 1 },
+    { name: 'neurology', label: 'Neurology consulted or follow-up arranged', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'High-risk findings (Afib, stenosis >= 50%, DWI positive, crescendo TIA) mandate admission regardless of risk score.',
+  citations: [
+    'AHA 2023 Scientific Statement: Diagnosis, Workup, Risk Reduction of TIA in the ED Setting. Stroke. 2023;54:e109-e121.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const completed = (values['glucose'] || 0) + (values['ecg'] || 0) + (values['ct-head'] || 0) +
+                      (values['cta'] || 0) + (values['labs'] || 0);
+    const total = 5; // Core required items
+
+    const afib = values['afib-found'] || 0;
+    const stenosis = values['stenosis-found'] || 0;
+    const dwiPositive = values['dwi-positive'] || 0;
+
+    const highRiskFindings: string[] = [];
+    if (afib) highRiskFindings.push('Atrial fibrillation detected');
+    if (stenosis) highRiskFindings.push('Significant stenosis (>= 50%)');
+    if (dwiPositive) highRiskFindings.push('DWI positive = STROKE (not TIA)');
+
+    const daptLoaded = values['dapt-loaded'] || 0;
+    const statinStarted = values['statin'] || 0;
+    const neuroArranged = values['neurology'] || 0;
+
+    let status = 'Incomplete';
+    let colorVar = '--color-warning';
+
+    if (highRiskFindings.length > 0) {
+      status = 'HIGH-RISK FINDINGS - ADMIT';
+      colorVar = '--color-danger';
+    } else if (completed >= total && daptLoaded && statinStarted && neuroArranged) {
+      status = 'Workup Complete';
+      colorVar = '--color-primary';
+    }
+
+    let description = `**Core Workup:** ${completed}/${total} complete\n\n`;
+
+    if (highRiskFindings.length > 0) {
+      description += `**HIGH-RISK FINDINGS IDENTIFIED:**\n${highRiskFindings.map(f => '- ' + f).join('\n')}\n\n**ADMISSION INDICATED** regardless of risk score.\n\n`;
+    }
+
+    description += `**Workup Checklist:**\n`;
+    description += `${values['glucose'] ? '[X]' : '[ ]'} Fingerstick glucose\n`;
+    description += `${values['ecg'] ? '[X]' : '[ ]'} ECG${afib ? ' - **AFIB DETECTED**' : ''}\n`;
+    description += `${values['ct-head'] ? '[X]' : '[ ]'} CT head\n`;
+    description += `${values['cta'] ? '[X]' : '[ ]'} CTA head/neck${stenosis ? ' - **STENOSIS >= 50%**' : ''}\n`;
+    description += `${values['mri-dwi'] ? '[X]' : '[ ]'} MRI/DWI${dwiPositive ? ' - **INFARCT = STROKE**' : ''}\n`;
+    description += `${values['labs'] ? '[X]' : '[ ]'} Labs (CBC, BMP, coags, lipids, HbA1c)\n`;
+    description += `${values['echo-ordered'] ? '[X]' : '[ ]'} Echo ordered\n\n`;
+
+    description += `**Treatment Initiated:**\n`;
+    description += `${daptLoaded ? '[X]' : '[ ]'} DAPT loaded (ASA + Clopidogrel)\n`;
+    description += `${statinStarted ? '[X]' : '[ ]'} High-intensity statin\n`;
+    description += `${neuroArranged ? '[X]' : '[ ]'} Neurology consult/follow-up\n`;
+
+    return {
+      value: status,
+      label: `${completed}/${total} Core Items`,
+      description,
+      colorVar,
+    };
+  },
+};
+
+const TIA_DAPT_PROTOCOL_CALCULATOR: CalculatorDefinition = {
+  id: 'tia-dapt-protocol',
+  title: 'TIA DAPT Protocol',
+  subtitle: 'POINT/CHANCE Dosing',
+  description: 'Dual antiplatelet therapy (DAPT) protocol for high-risk TIA and minor stroke. Based on CHANCE and POINT trials showing 21 days of DAPT reduces early stroke risk.',
+  fields: [
+    {
+      name: 'indication',
+      label: 'Indication Check',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'High-risk TIA (ABCD2 >= 4)', points: 1 },
+        { label: 'Minor ischemic stroke (NIHSS <= 3)', points: 1 },
+        { label: 'Low-risk TIA (ABCD2 < 4)', points: 0 },
+      ],
+    },
+    {
+      name: 'etiology',
+      label: 'Etiology',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Non-cardioembolic (large artery, small vessel, cryptogenic)', points: 1 },
+        { label: 'Cardioembolic (Afib, PFO with shunt, LV thrombus)', points: 0 },
+        { label: 'Unknown/undetermined', points: 1 },
+      ],
+    },
+    {
+      name: 'already-on-aspirin',
+      label: 'Already on aspirin?',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'bleeding-risk',
+      label: 'High bleeding risk (recent GI bleed, ICH history, coagulopathy)',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'on-anticoag',
+      label: 'Already on anticoagulation',
+      type: 'toggle',
+      points: 0,
+    },
+  ],
+  results: [],
+  thresholdNote: 'DAPT (ASA + clopidogrel) for 21 days, then aspirin monotherapy. Do NOT use DAPT if cardioembolic etiology (use anticoagulation instead). Do NOT use for moderate-severe stroke (NIHSS > 3).',
+  citations: [
+    'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT Trial). N Engl J Med. 2018;379:215-225. PMID 29766750',
+    'Wang Y, et al. Clopidogrel with Aspirin in Acute Minor Stroke or TIA (CHANCE Trial). N Engl J Med. 2013;369:11-19. PMID 23803136',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const indication = values['indication'] || 0;
+    const etiology = values['etiology'] || 0;
+    const onAspirin = values['already-on-aspirin'] || 0;
+    const bleedingRisk = values['bleeding-risk'] || 0;
+    const onAnticoag = values['on-anticoag'] || 0;
+
+    // Contraindications
+    if (onAnticoag) {
+      return {
+        value: 'DAPT Contraindicated',
+        label: 'Already on Anticoagulation',
+        description: '**Patient already on anticoagulation.**\n\nDo NOT add DAPT to anticoagulation - significantly increases bleeding risk without proven benefit.\n\n**Management:**\n- Continue anticoagulation\n- Ensure therapeutic levels/compliance\n- Evaluate for cardioembolic source',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (etiology === 0) {
+      return {
+        value: 'Use Anticoagulation',
+        label: 'Cardioembolic Etiology',
+        description: '**Cardioembolic TIA/stroke requires anticoagulation, NOT DAPT.**\n\n**For Atrial Fibrillation:**\n- Start DOAC (apixaban preferred)\n- Apixaban 5 mg BID (2.5 mg BID if >= 2 of: age >= 80, weight <= 60 kg, Cr >= 1.5)\n- Rivaroxaban 20 mg daily with food\n- Dabigatran 150 mg BID\n\n**Timing:**\n- TIA: Start immediately\n- Minor stroke: 1-3 days\n- Moderate stroke: 3-6 days\n- Large stroke: 12-14 days',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (bleedingRisk) {
+      return {
+        value: 'Caution',
+        label: 'High Bleeding Risk',
+        description: '**High bleeding risk identified.**\n\n**Relative contraindications to DAPT:**\n- Recent GI bleeding\n- History of ICH\n- Active peptic ulcer disease\n- Coagulopathy\n- Thrombocytopenia\n\n**Options:**\n1. Aspirin monotherapy (lower efficacy but safer)\n2. Discuss with neurology - individualize risk/benefit\n3. If DAPT used, consider shorter duration (7-10 days) or PPI',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (indication === 0) {
+      return {
+        value: 'Consider ASA Only',
+        label: 'Low-Risk TIA',
+        description: '**Low-risk TIA (ABCD2 < 4)**\n\nDAPT benefit is less clear for low-risk TIA. POINT/CHANCE trials enrolled high-risk TIA (ABCD2 >= 4) and minor stroke.\n\n**Options:**\n1. Aspirin monotherapy (81-325 mg daily)\n2. DAPT if ANY high-risk features despite low ABCD2\n3. Individualize based on imaging findings\n\n**Consider DAPT if:**\n- DWI positive (minor stroke)\n- Significant stenosis\n- Multiple risk factors',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Standard DAPT protocol
+    const asaLoad = onAspirin ? 'Already on aspirin - no loading needed' : 'Aspirin 162-325 mg loading dose NOW';
+    const clopLoad = 'Clopidogrel 300-600 mg loading dose NOW';
+
+    return {
+      value: 'Start DAPT',
+      label: 'POINT/CHANCE Protocol',
+      description: `**DUAL ANTIPLATELET THERAPY (DAPT)**\n\n**LOADING DOSES:**\n- ${asaLoad}\n- ${clopLoad}\n\n**MAINTENANCE:**\n- Aspirin 81 mg daily\n- Clopidogrel 75 mg daily\n\n**DURATION:**\n- **21 days** of DAPT (optimal per pooled analysis)\n- Then aspirin 81 mg monotherapy indefinitely\n\n**TIMING:**\n- Ideally within 12-24 hours of symptom onset\n- Can consider up to 7 days after onset\n\n**KEY POINTS:**\n- NNT = 33 to prevent one stroke in 90 days\n- NNH = 67 for major bleeding\n- Net benefit greatest in first 3 weeks\n- After 21 days, bleeding risk exceeds benefit of continued DAPT\n\n**ALSO START:**\n- High-intensity statin (atorvastatin 80 mg)\n- BP management (<130/80 target)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TIA_DISPOSITION_CALCULATOR: CalculatorDefinition = {
+  id: 'tia-disposition',
+  title: 'TIA Disposition',
+  subtitle: 'Admit vs Discharge Decision Support',
+  description: 'Helps determine appropriate disposition for TIA patients based on risk factors, workup completion, and follow-up availability.',
+  fields: [
+    { name: 'crescendo', label: 'Crescendo TIA (>1 event in 7 days)', type: 'toggle', points: 10, description: 'HIGH-RISK - Admit' },
+    { name: 'afib', label: 'Atrial fibrillation requiring anticoagulation', type: 'toggle', points: 10, description: 'HIGH-RISK - Admit' },
+    { name: 'stenosis', label: 'Symptomatic stenosis >= 50%', type: 'toggle', points: 10, description: 'HIGH-RISK - Admit' },
+    { name: 'dwi-positive', label: 'Acute infarct on DWI (this is stroke, not TIA)', type: 'toggle', points: 10, description: 'HIGH-RISK - Admit' },
+    { name: 'fluctuating', label: 'Fluctuating or recurrent symptoms', type: 'toggle', points: 10, description: 'HIGH-RISK - Admit' },
+    {
+      name: 'risk-score',
+      label: 'Risk Score Result',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Low risk (ABCD2 0-3 AND Canadian TIA minimal/low)', points: 0 },
+        { label: 'Moderate risk (ABCD2 4-5 OR Canadian TIA medium)', points: 3 },
+        { label: 'High risk (ABCD2 6-7 OR Canadian TIA high/critical)', points: 6 },
+      ],
+    },
+    { name: 'workup-complete', label: 'Core workup complete (CT, CTA, ECG, labs)', type: 'toggle', points: 0 },
+    { name: 'dapt-loaded', label: 'DAPT loaded and statin started', type: 'toggle', points: 0 },
+    { name: 'rapid-followup', label: 'Rapid TIA clinic follow-up available (<48h)', type: 'toggle', points: 0 },
+    { name: 'reliable-patient', label: 'Reliable patient who can recognize warning signs', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'High-risk features mandate admission regardless of score. EXPRESS study showed 80% reduction in 90-day stroke with rapid vs delayed workup.',
+  citations: [
+    'Rothwell PM, et al. Effect of urgent treatment of TIA and minor stroke (EXPRESS study). Lancet. 2007;370:1432-1442. PMID 17928046',
+    'AHA 2023 Scientific Statement: TIA in the ED Setting. Stroke. 2023;54:e109-e121.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const highRiskFeatures = (values['crescendo'] || 0) + (values['afib'] || 0) + (values['stenosis'] || 0) +
+                             (values['dwi-positive'] || 0) + (values['fluctuating'] || 0);
+
+    const riskScore = values['risk-score'] || 0;
+    const workupComplete = values['workup-complete'] || 0;
+    const daptLoaded = values['dapt-loaded'] || 0;
+    const rapidFollowup = values['rapid-followup'] || 0;
+    const reliablePatient = values['reliable-patient'] || 0;
+
+    // High-risk features = automatic admission
+    if (highRiskFeatures > 0) {
+      const reasons: string[] = [];
+      if (values['crescendo']) reasons.push('Crescendo TIA');
+      if (values['afib']) reasons.push('Atrial fibrillation');
+      if (values['stenosis']) reasons.push('Symptomatic stenosis >= 50%');
+      if (values['dwi-positive']) reasons.push('DWI positive (stroke)');
+      if (values['fluctuating']) reasons.push('Fluctuating symptoms');
+
+      return {
+        value: 'ADMIT',
+        label: 'High-Risk Features Present',
+        description: `**ADMISSION REQUIRED**\n\n**High-Risk Features:**\n${reasons.map(r => '- ' + r).join('\n')}\n\n**Admission Priorities:**\n1. Continuous telemetry\n2. Complete vascular imaging if not done\n3. TTE (consider TEE if indicated)\n4. Neurology consultation\n5. Vascular surgery consult if significant stenosis\n\n**Treatment:**\n- DAPT or anticoagulation per etiology\n- High-intensity statin\n- BP management\n- DVT prophylaxis`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // High-risk score without high-risk features
+    if (riskScore >= 6) {
+      return {
+        value: 'ADMIT or OBSERVE',
+        label: 'High Risk Score',
+        description: `**High-risk score warrants admission or extended observation.**\n\n**Options:**\n1. **Admit** to stroke/neurology service\n2. **23-hour observation** if all of:\n   - Workup can be completed during obs\n   - Neurology available for consultation\n   - No high-risk features develop\n\n**During admission/observation:**\n- Complete MRI/DWI if not done\n- Continuous telemetry\n- TTE\n- Initiate secondary prevention\n- Arrange close follow-up`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Moderate risk
+    if (riskScore >= 3) {
+      if (workupComplete && daptLoaded && rapidFollowup && reliablePatient) {
+        return {
+          value: 'DISCHARGE POSSIBLE',
+          label: 'Moderate Risk - May Discharge',
+          description: `**Moderate risk TIA with complete workup.**\n\nDischarge may be appropriate if ALL criteria met:\n- [X] Core workup complete\n- [X] DAPT loaded, statin started\n- [X] Rapid follow-up available (<48h)\n- [X] Reliable patient\n\n**Discharge with:**\n- ASA 81 mg + Clopidogrel 75 mg daily x 21 days\n- Atorvastatin 80 mg daily\n- Written stroke warning signs (BE FAST)\n- Follow-up in <48 hours\n- Clear return precautions\n\n**Document:** Risk stratification, workup completed, low-risk criteria met.`,
+          colorVar: '--color-primary',
+        };
+      } else {
+        return {
+          value: 'OBSERVATION',
+          label: 'Moderate Risk - Observation',
+          description: `**Moderate risk TIA - consider ED observation.**\n\n**Missing criteria for discharge:**\n${!workupComplete ? '- [ ] Core workup incomplete\n' : ''}${!daptLoaded ? '- [ ] DAPT/statin not initiated\n' : ''}${!rapidFollowup ? '- [ ] Rapid follow-up not available\n' : ''}${!reliablePatient ? '- [ ] Patient reliability concern\n' : ''}\n**23-Hour Observation Protocol:**\n- Complete remaining workup\n- Continuous telemetry\n- Initiate secondary prevention\n- Arrange follow-up\n- Reassess for discharge vs admission`,
+          colorVar: '--color-warning',
+        };
+      }
+    }
+
+    // Low risk
+    if (workupComplete && daptLoaded && rapidFollowup && reliablePatient) {
+      return {
+        value: 'DISCHARGE',
+        label: 'Low Risk - Discharge Appropriate',
+        description: `**Low-risk TIA with complete evaluation.**\n\n**Discharge Criteria Met:**\n- [X] Low-risk score (ABCD2 0-3, Canadian TIA minimal/low)\n- [X] No high-risk features\n- [X] Core workup complete and reassuring\n- [X] DAPT loaded, statin started\n- [X] Rapid follow-up arranged (<48h)\n- [X] Reliable patient\n\n**Discharge Medications:**\n- Aspirin 81 mg daily\n- Clopidogrel 75 mg daily x 21 days, then stop\n- Atorvastatin 80 mg daily\n\n**Instructions:**\n- Return immediately for ANY new symptoms\n- BE FAST warning signs provided\n- No driving until cleared by neurology\n- Follow-up appointment confirmed`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'INCOMPLETE',
+      label: 'Complete Evaluation Needed',
+      description: `**Cannot determine disposition - evaluation incomplete.**\n\n**Still needed:**\n${!workupComplete ? '- Core workup (CT, CTA, ECG, labs)\n' : ''}${!daptLoaded ? '- Initiate DAPT and statin\n' : ''}${!rapidFollowup ? '- Arrange rapid follow-up\n' : ''}${!reliablePatient ? '- Assess patient reliability\n' : ''}\n**Complete evaluation before disposition decision.**\n\nWhen in doubt, err on the side of observation/admission. The consequence of missing a high-risk TIA far outweighs over-admission.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // TIA Workup
+  'tia-abcd2': TIA_ABCD2_CALCULATOR,
+  'tia-canadian-score': TIA_CANADIAN_SCORE_CALCULATOR,
+  'tia-workup-checklist': TIA_WORKUP_CHECKLIST_CALCULATOR,
+  'tia-dapt-protocol': TIA_DAPT_PROTOCOL_CALCULATOR,
+  'tia-disposition': TIA_DISPOSITION_CALCULATOR,
   // HOP Killers (Physiologically Difficult Airway)
   'hop-hypotensive-intubation': HOP_HYPOTENSIVE_INTUBATION_CALCULATOR,
   'hop-hypoxic-intubation': HOP_HYPOXIC_INTUBATION_CALCULATOR,

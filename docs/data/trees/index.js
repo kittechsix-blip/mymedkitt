@@ -87,6 +87,7 @@ export { DIABETIC_FOOT_WOUNDS_NODES, DIABETIC_FOOT_WOUNDS_MODULE_LABELS, DIABETI
 export { PEDIATRIC_ARTHRITIS_NODES, MODULE_LABELS as PEDIATRIC_ARTHRITIS_MODULE_LABELS, CITATIONS as PEDIATRIC_ARTHRITIS_CITATIONS, NODE_COUNT as PEDIATRIC_ARTHRITIS_NODE_COUNT } from './pediatric-arthritis';
 export { GOUT_NODES, GOUT_MODULE_LABELS, GOUT_CITATIONS, GOUT_NODE_COUNT } from './gout';
 export { HOP_KILLERS_NODES, HOP_KILLERS_MODULE_LABELS, HOP_KILLERS_CITATIONS, HOP_KILLERS_NODE_COUNT } from './hop-killers';
+export { TIA_WORKUP_NODES, TIA_WORKUP_MODULE_LABELS, TIA_WORKUP_CITATIONS, TIA_WORKUP_NODE_COUNT } from './tia-workup';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**
