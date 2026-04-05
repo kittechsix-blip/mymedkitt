@@ -646,7 +646,7 @@ export const DEFAULT_CATEGORIES = [
     { id: 'med-calc', name: 'Med-Calc', icon: 'med-calc.png', decisionTrees: [], isCustom: false },
     {
         id: 'nephro-rheum-endo',
-        name: 'Nephro/Rheum/Endo',
+        name: 'Nephrology/Endocrinology',
         icon: 'nephro-rheum-endo.png',
         decisionTrees: [
             {
@@ -1547,14 +1547,14 @@ export const CATEGORY_COLORS = {
     'neurology': { card: '#00695C', iconBg: '#00695C' },
     'ob-gyn': { card: '#880E4F', iconBg: '#880E4F' },
     'ophthalmology': { card: '#00838F', iconBg: '#00838F' },
-    'orthopedics': { card: '#455A64', iconBg: '#455A64' },
+    'orthopedics': { card: '#E8E0D4', iconBg: '#E8E0D4', textColor: '#1A1A1A' },
     'pediatrics': { card: '#1B5E20', iconBg: '#1B5E20' },
     'procedures': { card: '#283593', iconBg: '#283593' },
     'toxicology': { card: '#9E9D24', iconBg: '#9E9D24', textColor: '#1A1A2E' },
     'trauma-surg': { card: '#E65100', iconBg: '#E65100' },
     'us-rads': { card: '#1A237E', iconBg: '#1A237E' },
     'urology': { card: '#F57F17', iconBg: '#F57F17', textColor: '#1A1A2E' },
-    'rheumatology': { card: '#7B1FA2', iconBg: '#7B1FA2' },
+    'rheumatology': { card: '#C75050', iconBg: '#C75050' },
 };
 const STORAGE_KEY = 'em-custom-categories';
 /** Load custom categories from LocalStorage */

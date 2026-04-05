@@ -1,6 +1,6 @@
 // myMedKitt — Specialty View (replaces category-view.ts)
 // Header in specialty color, 3D consult buttons, alphabetical order.
-import { getAllCategories } from '../services/category-service.js';
+import { getAllCategories, getCategoryColors } from '../services/category-service.js';
 import { isSharedMode, getSharedTreeIds } from '../services/shared-mode.js';
 import { create3DButton, getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
@@ -19,6 +19,11 @@ export function renderSpecialtyView(container, categoryId) {
     const header = document.createElement('div');
     header.className = 'specialty-view__header';
     header.style.background = getSpecialtyGradient(categoryId);
+    // Apply custom text color for light-background categories
+    const specColors = getCategoryColors()[categoryId];
+    if (specColors?.textColor) {
+        header.style.color = specColors.textColor;
+    }
     const backBtn = document.createElement('button');
     backBtn.className = 'specialty-view__back';
     backBtn.textContent = '\u2190';

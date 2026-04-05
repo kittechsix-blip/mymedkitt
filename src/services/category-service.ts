@@ -127,7 +127,15 @@ async function mergeHardcodedConsults(): Promise<void> {
 
   for (const hCat of hardcoded) {
     const cached = categoryCache.find(c => c.id === hCat.id);
-    if (!cached) continue;
+    if (!cached) {
+      // Entire category is new — add it to the cache
+      categoryCache.push(hCat);
+      const hColors = mod.CATEGORY_COLORS as typeof colorsCache;
+      if (hColors[hCat.id]) {
+        colorsCache[hCat.id] = hColors[hCat.id];
+      }
+      continue;
+    }
 
     // Find consults in hardcoded that are missing from cached
     const cachedIds = new Set(cached.decisionTrees.map(t => t.id));

@@ -83,8 +83,15 @@ async function mergeHardcodedConsults() {
     const hardcoded = mod.getAllCategories();
     for (const hCat of hardcoded) {
         const cached = categoryCache.find(c => c.id === hCat.id);
-        if (!cached)
+        if (!cached) {
+            // Entire category is new — add it to the cache
+            categoryCache.push(hCat);
+            const hColors = mod.CATEGORY_COLORS;
+            if (hColors[hCat.id]) {
+                colorsCache[hCat.id] = hColors[hCat.id];
+            }
             continue;
+        }
         // Find consults in hardcoded that are missing from cached
         const cachedIds = new Set(cached.decisionTrees.map(t => t.id));
         const missing = hCat.decisionTrees.filter(t => !cachedIds.has(t.id));

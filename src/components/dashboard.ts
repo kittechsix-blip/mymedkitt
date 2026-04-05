@@ -205,6 +205,12 @@ export function renderDashboard(container: HTMLElement): void {
     // Apply gradient background to the card itself (glass overlay on top)
     card.style.background = getSpecialtyGradient(cat.id);
 
+    // Apply custom text color if defined (e.g., black text on light cards)
+    const catColors = getCategoryColors()[cat.id];
+    if (catColors?.textColor) {
+      card.style.color = catColors.textColor;
+    }
+
     // Content - just name and count, vertically stacked
     const content = document.createElement('div');
     content.className = 'category-card-v2__content';
