@@ -1311,10 +1311,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'xylazine-toxicity',
                 title: 'Xylazine Toxicity ("Tranq")',
-                subtitle: 'OA2A Toxidrome → Naloxone → Supportive → Wounds → Withdrawal → Disposition',
+                subtitle: 'Recognition → Wound Assessment → Acute Management → Wound Care → Withdrawal → Disposition',
                 categoryId: 'toxicology',
                 version: '1.0',
-                nodeCount: 26,
+                nodeCount: 32,
                 entryNodeId: 'xyl-start',
             },
         ],

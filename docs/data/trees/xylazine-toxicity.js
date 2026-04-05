@@ -1,130 +1,208 @@
 // MedKitt — Xylazine Toxicity ("Tranq Dope")
-// OA2A Toxidrome: Opioid + Alpha-2 Agonist
-// 6 modules: Recognition → OA2A Toxidrome → Supportive Care → Wound Management → Withdrawal → Disposition
-// ~26 nodes total.
+// Recognition of xylazine-adulterated opioid use, OA2A toxidrome management,
+// wound assessment and staging, acute supportive care, withdrawal management, and disposition.
+// 6 modules: Recognition → Wound Assessment → Acute Management → Wound Care → Withdrawal → Disposition
+// 32 nodes total.
 export const XYLAZINE_TOXICITY_NODES = [
-    // =====================================================================
-    // MODULE 1: RECOGNITION
-    // =====================================================================
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 1: Recognition
+    // ═══════════════════════════════════════════════════════════════
     {
         id: 'xyl-start',
-        type: 'info',
-        module: 1,
-        title: 'Xylazine Toxicity ("Tranq")',
-        body: '**What is Xylazine?**\n• Alpha-2 adrenergic agonist (like clonidine, dexmedetomidine)\n• FDA-approved for veterinary use only (NOT human)\n• Trade name: Rompun\n• **Not a controlled substance** (DEA scheduling pending)\n\n**Why it\'s in the drug supply:**\n• Cheap adulterant that extends/intensifies fentanyl high\n• 95% of xylazine OD deaths involve co-ingestion with fentanyl [1][2]\n\n**Detection:**\n• Standard UDS does NOT detect xylazine\n• Requires GC-MS or LC-MS (7-8 day turnaround)\n• Lateral flow test strips available via harm reduction [2]',
-        citation: [1, 2],
-        calculatorLinks: [
-            { id: 'xyl-wound-staging', label: 'Wound Staging Tool' },
-            { id: 'naloxone-calc', label: 'Naloxone Dosing' },
-        ],
-        next: 'xyl-presentation',
-    },
-    {
-        id: 'xyl-presentation',
         type: 'question',
         module: 1,
-        title: 'Clinical Presentation',
-        body: '**OA2A Toxidrome (Opioid + Alpha-2 Agonist):**\n\n| Finding | Opioid | Xylazine |\n|---------|--------|----------|\n| Sedation | ✓ | ✓ |\n| Miosis | ✓ | ✓ |\n| Respiratory depression | ✓ | ✓ |\n| Bradycardia | ✗ | ✓ |\n| Hypotension | Variable | ✓ |\n| Hypothermia | ✗ | ✓ |\n| Hyperglycemia | ✗ | ✓ |\n\n**Key clue:** Looks like opioid OD but naloxone doesn\'t fully wake them up [1]',
+        title: 'Xylazine Toxicity — Initial Assessment',
+        body: '[Xylazine Quick Reference](#/info/xyl-quick-ref) — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n• Now detected in **>90% of fentanyl supply** in some cities [1][2]\n\n**The epidemic:**\n• 2015: <1% of overdose deaths involved xylazine\n• 2020: 7% nationally, **26% in Philadelphia**\n• 2022: CDC Health Alert Network advisory issued [1]\n\n**Critical point:** Xylazine is **NOT reversed by naloxone** — it is not an opioid. However, **still give naloxone** because 95% of xylazine exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
         citation: [1, 2],
+        calculatorLinks: [
+            { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
+            { id: 'xyl-withdrawal-comparison', label: 'Tranq vs Opioid Withdrawal' },
+        ],
         options: [
-            {
-                label: 'Respiratory depression / apnea',
-                next: 'xyl-naloxone',
-                urgency: 'critical',
-            },
-            {
-                label: 'Sedated but breathing adequately',
-                next: 'xyl-supportive',
-                urgency: 'urgent',
-            },
-            {
-                label: 'Skin wounds present',
-                next: 'xyl-wound-assess',
-                urgency: 'urgent',
-            },
+            { label: 'Acute overdose presentation', description: 'Respiratory depression, altered mental status, recent use', next: 'xyl-oa2a' },
+            { label: 'Skin wounds present', description: 'Necrotic ulcers, non-healing wounds, may or may not be at injection sites', next: 'xyl-wound-assess' },
+            { label: 'Withdrawal symptoms', description: 'Restless, anxious, tachycardic — recent cessation of use', next: 'xyl-withdrawal' },
         ],
     },
-    // =====================================================================
-    // MODULE 2: OA2A TOXIDROME — NALOXONE
-    // =====================================================================
+    {
+        id: 'xyl-quick-ref',
+        type: 'info',
+        module: 1,
+        title: 'Xylazine Quick Reference',
+        body: '**Mechanism:** Alpha-2 adrenergic agonist (central sympatholysis)\n\n**Street names:** Tranq, Tranq dope, Sleep cut, Zombie drug\n\n**NOT detected by:** Standard urine drug screen\n**Detected by:** GC-MS, LC-MS (7-8 day turnaround), lateral flow test strips\n\n**Half-life:** 23-50 minutes IV, longer with IM/SC\n\n**Key clinical features:**\n• Prolonged sedation DESPITE naloxone\n• Bradycardia + hypotension\n• Hypothermia\n• Hyperglycemia\n• Necrotic skin wounds (even remote from injection sites)\n\n**No antidote:** Atipamezole (alpha-2 antagonist) works in animals but is NOT available for human use [1][2]',
+        citation: [1, 2],
+        next: 'xyl-start',
+    },
+    {
+        id: 'xyl-oa2a',
+        type: 'info',
+        module: 1,
+        title: 'OA2A Toxidrome',
+        body: '**OA2A = Opioid + Alpha-2 Agonist** — the combined toxidrome of fentanyl + xylazine [1].\n\n[Tranq vs Opioid Withdrawal](#/info/xyl-withdrawal-comparison)\n\n| Finding | Pure Opioid | OA2A (Xylazine + Opioid) |\n|---------|-------------|---------------------------|\n| Miosis | ✓ | ✓ |\n| Sedation | ✓ | ✓ (prolonged) |\n| Respiratory depression | ✓ | ✓ |\n| Naloxone response | Full arousal | Respirations improve, stays sedated |\n| Bradycardia | Rare | **Common** |\n| Hypotension | Variable | **Common** |\n| Hypothermia | Rare | **Common** |\n| Hyperglycemia | No | Yes |\n\n**Clinical pearl:** If naloxone improves respirations but the patient doesn\'t wake up — suspect xylazine [1][2].',
+        citation: [1, 2],
+        next: 'xyl-resp-assess',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 2: Wound Assessment
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'xyl-wound-assess',
+        type: 'question',
+        module: 2,
+        title: 'Xylazine-Associated Wounds (XAW)',
+        body: '[Xylazine Wound Staging Tool](#/calc/xyl-wound-staging)\n\n**Unique features of "tranq wounds":**\n• Necrotic, non-healing ulcers\n• **NOT always at injection sites** — can appear anywhere on the body\n• Users who **smoke or snort** can develop wounds (systemic effect)\n• Mechanism: vasoconstriction + direct tissue cytotoxicity [3][4]\n\n**Philadelphia wound culture data:**\n• 56% MRSA positive\n• 37% Group A Streptococcus\n• Many polymicrobial [4]\n\n**Critical distinction:** Do NOT misdiagnose chronic XAW as necrotizing fasciitis — aggressive debridement can worsen outcomes [3].\n\nAssess wound severity using the Philadelphia Consensus staging:',
+        citation: [3, 4],
+        calculatorLinks: [
+            { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
+            { id: 'xyl-wound-antibiotics', label: 'Wound Antibiotic Guide' },
+        ],
+        options: [
+            { label: 'No wounds present', description: 'Continue to acute management', next: 'xyl-resp-assess' },
+            { label: 'Stage 1 — Superficial', description: 'Partial/full thickness skin loss only, no exposed deep structures', next: 'xyl-wound-stage1' },
+            { label: 'Stage 2 — Moderate', description: 'Exposed muscle or tendon, function preserved', next: 'xyl-wound-stage2', urgency: 'urgent' },
+            { label: 'Stage 3A — Severe with function', description: 'Exposed bone, possible osteomyelitis, function preserved', next: 'xyl-wound-stage3a', urgency: 'critical' },
+            { label: 'Stage 3B — Severe without function', description: 'Exposed bone, osteomyelitis, NO meaningful function', next: 'xyl-wound-stage3b', urgency: 'critical' },
+        ],
+    },
+    {
+        id: 'xyl-wound-stage1',
+        type: 'info',
+        module: 2,
+        title: 'Stage 1 — Superficial XAW',
+        body: '**Philadelphia Consensus Classification [3]:**\n• Partial or full thickness skin loss\n• No exposed tendon, muscle, or bone\n• Preserved function\n\n**Key principle:** **AVOID aggressive debridement**\n• Islands of healthy tissue = healing potential\n• Autolytic debridement preferred (wet-to-dry dressings, hydrogels)\n\n**Local wound care:**\n1. Cleanse with soap and water (or NS)\n2. Sterile non-adherent gauze (Adaptic, Xeroform)\n3. Daily dressing changes\n4. Silver sulfadiazine if signs of infection [3][4]\n\n**Antibiotics if infected:**\n• Signs: erythema >1cm from wound edge, purulence, warmth, tenderness\n• [Wound Antibiotic Selection](#/info/xyl-wound-antibiotics)',
+        citation: [3, 4],
+        next: 'xyl-wound-antibiotics',
+    },
+    {
+        id: 'xyl-wound-stage2',
+        type: 'info',
+        module: 2,
+        title: 'Stage 2 — Moderate XAW',
+        body: '**Philadelphia Consensus Classification [3]:**\n• Full thickness skin loss\n• **Exposed or compromised muscle/tendon**\n• **Preserved function** — patient can move the affected limb\n\n**Management:**\n1. **Conservative initially** — avoid aggressive surgical debridement\n2. Autolytic debridement (preferred)\n3. Enzymatic debridement (collagenase) for heavy eschar\n4. Consider **wound VAC** for granulation tissue promotion\n5. Definitive surgery (STSG) only after **3+ months abstinence** [3]\n\n**Antibiotics:**\n• [TMP-SMX](#/drug/tmp-smx/xylazine-wound) for MRSA coverage\n• Add beta-lactam for GAS coverage if cellulitis present\n• Silver sulfadiazine topically — broad spectrum, active 72+ hours',
+        citation: [3, 4],
+        calculatorLinks: [
+            { id: 'xyl-wound-antibiotics', label: 'Wound Antibiotic Guide' },
+        ],
+        next: 'xyl-wound-antibiotics',
+    },
+    {
+        id: 'xyl-wound-stage3a',
+        type: 'info',
+        module: 2,
+        title: 'Stage 3A — Severe XAW with Function',
+        body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + [Piperacillin-Tazobactam](#/drug/piptazo/xylazine)\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
+        citation: [3, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Vancomycin + Piperacillin-Tazobactam',
+                dose: 'Vanc 25-30 mg/kg load, then per levels; Pip-Tazo 4.5g q8h',
+                route: 'IV',
+                frequency: 'Per levels (vanc), q8h (pip-tazo)',
+                duration: '6 weeks if osteomyelitis',
+                notes: 'Covers MRSA, GAS, gram-negatives, anaerobes',
+            },
+            monitoring: 'Vancomycin troughs, renal function, serial wound exams',
+        },
+        next: 'xyl-dispo-wound',
+    },
+    {
+        id: 'xyl-wound-stage3b',
+        type: 'info',
+        module: 2,
+        title: 'Stage 3B — Severe XAW without Function',
+        body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis with exposed bone\n• Osteomyelitis present\n• **NO meaningful function preserved**\n\n**Recommendation: Amputation** [3]\n• Limb salvage unlikely to succeed\n• Ongoing infection risk\n• Quality of life considerations\n\n**Patient-centered approach:**\n• Discuss goals of care\n• Some patients may prefer limb preservation despite poor function\n• Document shared decision-making\n\n**Pre-operative:**\n• IV antibiotics\n• Optimize nutrition\n• Pain control\n• Addiction medicine consultation for perioperative MOUD',
+        citation: [3, 4],
+        treatment: {
+            firstLine: {
+                drug: 'Vancomycin + Piperacillin-Tazobactam',
+                dose: 'Vanc 25-30 mg/kg load; Pip-Tazo 4.5g q8h',
+                route: 'IV',
+                frequency: 'Per levels (vanc), q8h (pip-tazo)',
+                duration: 'Until definitive surgical management',
+                notes: 'Broad coverage pending operative cultures',
+            },
+            monitoring: 'Surgical planning, pre-op optimization',
+        },
+        next: 'xyl-dispo-wound',
+    },
+    {
+        id: 'xyl-wound-antibiotics',
+        type: 'info',
+        module: 2,
+        title: 'XAW Antibiotic Selection Guide',
+        body: '**Culture data from Philadelphia XAW series [4]:**\n• **56% MRSA**\n• **37% Group A Streptococcus**\n• Polymicrobial common\n\n**Outpatient (Stage 1, mild Stage 2):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| [TMP-SMX](#/drug/tmp-smx/xylazine) 1-2 DS BID | MRSA | First-line |\n| TMP-SMX + Amoxicillin 500 TID | MRSA + GAS | If cellulitis |\n| Doxycycline 100 BID | MRSA (some) | Alternative if sulfa allergy |\n\n**Inpatient (Stage 2-3 with infection):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| Vancomycin + Pip-Tazo | MRSA, GAS, GN, anaerobes | Severe infection |\n| Vancomycin + Ceftriaxone | MRSA, GAS | If AKI |\n\n**Topical:**\n• **Silver sulfadiazine** — broad spectrum, active 72+ hours\n• Mupirocin — decolonization\n\n**Duration:** 7-10 days (uncomplicated), 6 weeks (osteomyelitis) [3][4]',
+        citation: [3, 4],
+        next: 'xyl-dispo-wound',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 3: Acute Management
+    // ═══════════════════════════════════════════════════════════════
+    {
+        id: 'xyl-resp-assess',
+        type: 'question',
+        module: 3,
+        title: 'Respiratory Assessment',
+        body: '**First priority:** Assess airway and breathing.\n\n**Xylazine + opioid = synergistic respiratory depression**\n• Both cause CNS depression\n• Xylazine alone rarely causes apnea\n• Combined with fentanyl → profound respiratory failure [1]\n\nWhat is the respiratory status?',
+        citation: [1, 2],
+        options: [
+            { label: 'Apnea / RR <8', description: 'Immediate intervention required', next: 'xyl-naloxone', urgency: 'critical' },
+            { label: 'RR 8-12, sedated', description: 'Depressed but not apneic', next: 'xyl-naloxone', urgency: 'urgent' },
+            { label: 'RR >12, adequate', description: 'Breathing OK, assess circulation', next: 'xyl-cv-assess' },
+        ],
+    },
     {
         id: 'xyl-naloxone',
         type: 'info',
-        module: 2,
+        module: 3,
         title: 'Naloxone Administration',
-        body: '**STILL GIVE NALOXONE** — 95% involve fentanyl [1][2]\n\n**Key difference from pure opioid OD:**\n> Titrate to **adequate respiratory rate**, NOT wakefulness\n\n**EMCrit warning:**\n> "Avoid excessive dosing of naloxone. High naloxone dosing could provoke opioid withdrawal in a patient who remains sedated by alpha-2 agonists, leading to emesis with aspiration." [1]\n\n**Standard dosing:**\n• 0.4-2 mg IV/IM/IN\n• Repeat q2-3 min PRN for respiratory depression\n• Goal: RR >12, adequate SpO₂',
+        body: '**STILL GIVE NALOXONE** — 95% of xylazine ODs involve fentanyl [1][2]\n\n[Naloxone Dosing Reference](#/info/naloxone-dosing)\n\n**Critical difference from pure opioid OD:**\n> Titrate to **adequate respiratory rate**, NOT wakefulness\n\n**EMCrit warning [1]:**\n> "Avoid excessive naloxone dosing. High naloxone could provoke opioid withdrawal in a patient who remains sedated by alpha-2 agonists, leading to emesis with aspiration."\n\n**Dosing:**\n| Route | Dose | Repeat |\n|-------|------|--------|\n| IV | 0.4-2 mg | q2-3 min PRN |\n| IM | 0.4-2 mg | q2-3 min PRN |\n| IN | 4 mg (one spray each nostril) | q2-3 min PRN |\n\n**Goal:** RR >12, SpO₂ >92% — NOT full arousal',
         citation: [1, 2],
-        next: 'xyl-naloxone-response',
         treatment: {
             firstLine: {
                 drug: 'Naloxone',
-                dose: '0.4-2 mg IV/IM/IN',
-                route: 'IV, IM, or intranasal',
+                dose: '0.4-2 mg',
+                route: 'IV, IM, or IN',
                 frequency: 'Every 2-3 minutes PRN',
-                duration: 'Until adequate respirations',
-                notes: 'Titrate to respiratory rate (>12), NOT wakefulness',
+                duration: 'Until adequate respirations (RR >12)',
+                notes: 'Titrate to respiratory rate, NOT wakefulness. Avoid precipitating withdrawal.',
             },
-            monitoring: 'SpO2, respiratory rate, aspiration risk (sedation persists)',
+            monitoring: 'SpO2, respiratory rate, level of consciousness, aspiration risk',
         },
+        next: 'xyl-naloxone-response',
     },
     {
         id: 'xyl-naloxone-response',
         type: 'question',
-        module: 2,
-        title: 'Naloxone Response Assessment',
-        body: '**Decision point:**\n\n• Respirations improve → patient doesn\'t wake up → **SUSPECT XYLAZINE**\n• Continued sedation + bradycardia + hypotension after naloxone = high suspicion\n\nHow did the patient respond to naloxone?',
+        module: 3,
+        title: 'Naloxone Response',
+        body: '**Assessing response to naloxone:**\n\n**Pure opioid OD:** Respirations improve AND patient wakes up\n**OA2A toxidrome:** Respirations improve BUT patient stays sedated\n\n**If no response to 10mg total naloxone:**\n• Consider non-opioid cause\n• May need airway protection regardless [1]\n\nHow did the patient respond?',
         citation: [1],
         options: [
-            {
-                label: 'Respirations improved but still sedated',
-                next: 'xyl-supportive',
-                urgency: 'urgent',
-            },
-            {
-                label: 'Respirations still inadequate',
-                next: 'xyl-airway',
-                urgency: 'critical',
-            },
-            {
-                label: 'Full arousal (likely pure opioid)',
-                next: 'xyl-observation',
-            },
+            { label: 'Full arousal', description: 'Likely pure opioid OD — observe for re-sedation', next: 'xyl-observation' },
+            { label: 'Respirations improved, still sedated', description: 'Classic OA2A response — supportive care', next: 'xyl-cv-assess' },
+            { label: 'No improvement', description: 'Airway management needed', next: 'xyl-airway', urgency: 'critical' },
         ],
     },
     {
         id: 'xyl-airway',
         type: 'info',
-        module: 2,
+        module: 3,
         title: 'Airway Management',
-        body: '**If apneic or inadequate respirations despite naloxone:**\n\n1. **Recovery position** if spontaneous respirations\n2. **Bag-valve mask** — rescue breaths especially helpful (xylazine slows breathing even after naloxone)\n3. **Supplemental O₂** via NC or NRB\n4. **Intubation** if:\n   • Persistent apnea\n   • Unable to protect airway\n   • GCS <8 with aspiration risk [1][2]\n\n**Post-intubation:** Continue supportive care, monitor for bradycardia/hypotension',
+        body: '**Indications for intubation:**\n• Persistent apnea despite naloxone\n• GCS <8 with aspiration risk\n• Copious secretions/emesis\n• Refractory hypoxia [1]\n\n**Airway approach:**\n1. Position in **recovery position** if spontaneous respirations\n2. **Bag-valve mask** — rescue breaths especially helpful\n3. **Supplemental O₂** via NC or NRB\n4. **Intubation** if above criteria met\n\n**Post-intubation considerations:**\n• Continue supportive care\n• Monitor for bradycardia/hypotension\n• Sedation may be difficult to titrate (already sedated)\n• Plan for prolonged intubation if severe xylazine component',
         citation: [1, 2],
-        next: 'xyl-supportive',
+        next: 'xyl-cv-assess',
     },
-    // =====================================================================
-    // MODULE 3: SUPPORTIVE CARE
-    // =====================================================================
     {
-        id: 'xyl-supportive',
+        id: 'xyl-cv-assess',
         type: 'question',
         module: 3,
-        title: 'Cardiovascular Support',
-        body: '**Xylazine effects:**\n• Initial transient hypertension (alpha-2b vasoconstriction) → sustained hypotension (central sympatholysis)\n• Bradycardia (reduced NE release)\n• Potential QTc prolongation [2]\n\nWhat cardiovascular findings are present?',
+        title: 'Cardiovascular Assessment',
+        body: '**Xylazine cardiovascular effects [1][2]:**\n\n**Mechanism:**\n1. **Initial:** Peripheral alpha-2B activation → vasoconstriction → transient hypertension\n2. **Then:** Central alpha-2A activation → reduced NE release → bradycardia + hypotension\n\n**Expected findings:**\n• HR 40-60 bpm (bradycardia)\n• SBP 80-100 (hypotension)\n• Possible QTc prolongation\n\nWhat cardiovascular findings are present?',
         citation: [1, 2],
         options: [
-            {
-                label: 'Hypotension — SBP <90',
-                next: 'xyl-hypotension',
-                urgency: 'critical',
-            },
-            {
-                label: 'Symptomatic bradycardia',
-                next: 'xyl-bradycardia',
-                urgency: 'urgent',
-            },
-            {
-                label: 'Hemodynamically stable',
-                next: 'xyl-monitoring',
-            },
+            { label: 'Hypotension — SBP <90', description: 'Needs fluid resuscitation', next: 'xyl-hypotension', urgency: 'critical' },
+            { label: 'Symptomatic bradycardia', description: 'HR <50 with symptoms', next: 'xyl-bradycardia', urgency: 'urgent' },
+            { label: 'Hemodynamically stable', description: 'SBP >90, HR >50, asymptomatic', next: 'xyl-monitoring' },
         ],
     },
     {
@@ -132,17 +210,16 @@ export const XYLAZINE_TOXICITY_NODES = [
         type: 'info',
         module: 3,
         title: 'Hypotension Management',
-        body: '**First-line: Volume resuscitation**\n• NS or LR 500-1000 mL bolus\n• Often sufficient [1]\n\n**Refractory hypotension:**\n• [Norepinephrine](#/drug/norepinephrine/xylazine) 0.1-0.3 mcg/kg/min\n• Consider underlying vasoconstriction — pure alpha agonists may worsen tissue perfusion\n\n**Monitor:**\n• ECG (arrhythmias, QTc)\n• Glucose (hyperglycemia common)\n• Temperature (hypothermia) [1][2]',
+        body: '**First-line: Volume resuscitation [1]**\n• Normal saline or Lactated Ringer\'s\n• 500-1000 mL bolus\n• Often sufficient for mild-moderate hypotension\n\n**Refractory hypotension:**\n• [Norepinephrine](#/drug/norepinephrine/xylazine) 0.1-0.3 mcg/kg/min\n• Start low — underlying vasoconstriction may be present\n\n**Caution:** Alpha-2 agonism causes vasoconstriction peripherally — pure alpha agonists may worsen tissue perfusion. NE preferred over phenylephrine [1].\n\n**Monitoring:**\n• ECG (QTc, arrhythmias)\n• Glucose (hyperglycemia common)\n• Temperature (hypothermia)\n• Lactate (perfusion marker)',
         citation: [1, 2],
-        next: 'xyl-monitoring',
         treatment: {
             firstLine: {
-                drug: 'Normal saline or Lactated Ringer',
+                drug: 'Normal saline or Lactated Ringer\'s',
                 dose: '500-1000 mL bolus',
                 route: 'IV',
                 frequency: 'Repeat PRN',
-                duration: 'Until euvolemic',
-                notes: 'IVF often sufficient. Consider underlying vasoconstriction.',
+                duration: 'Until euvolemic/normotensive',
+                notes: 'Often sufficient. Monitor for fluid overload.',
             },
             alternative: {
                 drug: 'Norepinephrine',
@@ -150,19 +227,19 @@ export const XYLAZINE_TOXICITY_NODES = [
                 route: 'IV infusion',
                 frequency: 'Continuous',
                 duration: 'Until hemodynamically stable',
-                notes: 'For refractory hypotension only',
+                notes: 'For refractory hypotension. Start low.',
             },
-            monitoring: 'ECG, BP, glucose, temperature',
+            monitoring: 'BP, HR, ECG, glucose, temperature, lactate',
         },
+        next: 'xyl-monitoring',
     },
     {
         id: 'xyl-bradycardia',
         type: 'info',
         module: 3,
         title: 'Bradycardia Management',
-        body: '**EMCrit approach (preferred):**\n• Generally does NOT require treatment\n• **Avoid atropine** — difficult to titrate, risk of hypertensive crisis from systemic vasoconstriction\n• If symptomatic: [Dobutamine](#/drug/dobutamine/xylazine) or [Isoproterenol](#/drug/isoproterenol/xylazine) (gradual, titratable inodilators) [1]\n\n**Alternative (case reports):**\n• [Atropine](#/drug/atropine/xylazine) 0.5-1 mg IV if symptomatic\n• May repeat q3-5 min (max 3 mg)\n\n**Note:** Bradycardia treatment is controversial — EMCrit discourages atropine [1]',
+        body: '**EMCrit approach (preferred) [1]:**\n• Bradycardia often does **NOT require treatment**\n• **Avoid atropine** — difficult to titrate, risk of hypertensive crisis from unopposed vasoconstriction\n\n**If symptomatic (hypotension, AMS, chest pain):**\n| Option | Dose | Notes |\n|--------|------|-------|\n| Observation | — | Preferred if stable |\n| [Dobutamine](#/drug/dobutamine/xylazine) | 2.5-10 mcg/kg/min | Inodilator, titratable |\n| [Isoproterenol](#/drug/isoproterenol/xylazine) | 1-4 mcg/min | Beta agonist |\n| [Atropine](#/drug/atropine/xylazine) | 0.5-1 mg IV | Last resort — use cautiously |\n\n**Why avoid atropine?**\n• Blocks muscarinic receptors → tachycardia\n• Alpha-2 vasoconstriction still present → severe hypertension possible [1]',
         citation: [1],
-        next: 'xyl-monitoring',
         treatment: {
             firstLine: {
                 drug: 'Observation',
@@ -170,141 +247,81 @@ export const XYLAZINE_TOXICITY_NODES = [
                 route: 'N/A',
                 frequency: 'N/A',
                 duration: 'N/A',
-                notes: 'Bradycardia often does NOT require treatment',
+                notes: 'Bradycardia often does NOT require treatment if asymptomatic',
             },
             alternative: {
-                drug: 'Dobutamine or Isoproterenol',
-                dose: 'Dobutamine 2.5-10 mcg/kg/min',
+                drug: 'Dobutamine',
+                dose: '2.5-10 mcg/kg/min',
                 route: 'IV infusion',
                 frequency: 'Continuous',
-                duration: 'Until HR improves',
+                duration: 'Until hemodynamically stable',
                 notes: 'Preferred over atropine if treatment needed. Titratable.',
             },
-            monitoring: 'Continuous cardiac monitoring',
+            monitoring: 'Continuous cardiac monitoring, BP',
         },
+        next: 'xyl-monitoring',
     },
     {
         id: 'xyl-monitoring',
         type: 'info',
         module: 3,
         title: 'Monitoring Parameters',
-        body: '**Standard monitoring:**\n• Continuous SpO₂ and cardiac telemetry\n• ECG (QTc prolongation)\n• Glucose (hyperglycemia common)\n• Temperature (hypothermia)\n• Electrolytes\n\n**Watch for:**\n• Thromboembolic complications\n• Aspiration (sedated patient)\n• Delayed wound complications\n\n**No antidote exists:** Atipamezole (alpha-2 antagonist) reversed xylazine in animal models but is NOT available for human use [1][2]',
+        body: '**Standard monitoring:**\n• Continuous pulse oximetry\n• Cardiac telemetry\n• Temperature (hypothermia common)\n• Glucose (hyperglycemia common)\n• ECG at baseline (QTc)\n\n**Labs:**\n• BMP (glucose, renal function)\n• VBG/ABG if concern for hypoperfusion\n• Lactate\n• Consider troponin if chest pain\n\n**Duration:**\n• Minimum 4-6 hours post-naloxone\n• Longer if xylazine confirmed/suspected\n• Watch for delayed wound complications\n\n**No antidote exists:** Atipamezole (veterinary alpha-2 antagonist) is NOT available for human use [1][2]',
         citation: [1, 2],
         next: 'xyl-wound-assess',
     },
-    // =====================================================================
-    // MODULE 4: WOUND MANAGEMENT
-    // =====================================================================
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 4: Wound Care (treatment details in Module 2)
+    // ═══════════════════════════════════════════════════════════════
     {
-        id: 'xyl-wound-assess',
+        id: 'xyl-dispo-wound',
         type: 'question',
         module: 4,
-        title: 'Xylazine-Associated Wounds',
-        body: '**Key features:**\n• Necrotic ulcers — NOT always at injection sites\n• Can appear distant from injection (legs, arms, trunk, sternum, scalp)\n• Mechanism: vasoconstriction + direct tissue toxicity\n• May appear in users who smoke or snort (systemic effect) [3]\n\nAre xylazine-associated wounds present?',
+        title: 'Wound Disposition',
+        body: '**Wound-specific disposition criteria:**\n\n**Discharge (Stage 1, non-infected Stage 2):**\n• Outpatient antibiotics\n• Wound care supplies\n• Low-barrier wound clinic follow-up\n\n**Admit (Stage 2 with infection, Stage 3):**\n• IV antibiotics\n• Surgical consultation\n• Serial debridement\n• Nutrition optimization\n\nWhat is the wound disposition?',
         citation: [3, 4],
         options: [
-            {
-                label: 'No wounds',
-                next: 'xyl-dispo-assess',
-            },
-            {
-                label: 'Superficial wounds (Stage 1)',
-                next: 'xyl-wound-stage1',
-            },
-            {
-                label: 'Moderate wounds — exposed muscle/tendon (Stage 2)',
-                next: 'xyl-wound-stage2',
-                urgency: 'urgent',
-            },
-            {
-                label: 'Severe wounds — exposed bone, possible osteomyelitis (Stage 3)',
-                next: 'xyl-wound-stage3',
-                urgency: 'critical',
-            },
+            { label: 'Discharge with wound care', description: 'Stage 1 or mild Stage 2, non-infected', next: 'xyl-discharge' },
+            { label: 'Admit for IV antibiotics', description: 'Infected Stage 2 or Stage 3A', next: 'xyl-admit-obs', urgency: 'urgent' },
+            { label: 'Admit for surgical management', description: 'Stage 3B or failed conservative care', next: 'xyl-admit-icu', urgency: 'critical' },
         ],
     },
-    {
-        id: 'xyl-wound-stage1',
-        type: 'result',
-        module: 4,
-        title: 'Stage 1 — Superficial Wounds',
-        body: '**Philadelphia Consensus Classification:**\n• Superficial, partial/full thickness skin only\n• No exposed tendon/muscle\n• Normal function preserved [3]\n\n**Treatment:**\n• Soap and water cleansing\n• Sterile nonadherent gauze\n• Daily dressing changes\n• **AVOID aggressive debridement** — islands of healthy tissue = healing potential\n\n**Antibiotics if infected:**\n• [TMP-SMX](#/drug/tmp-smx/xylazine) 1-2 DS tabs PO BID (MRSA coverage)\n• Culture data: 56% MRSA, 37% GAS',
-        recommendation: 'Conservative wound care. Avoid aggressive debridement. Discharge with follow-up.',
-        confidence: 'recommended',
-        citation: [3, 4],
-        treatment: {
-            firstLine: {
-                drug: 'TMP-SMX (if infected)',
-                dose: '1-2 DS tablets PO BID',
-                route: 'PO',
-                frequency: 'BID',
-                duration: '7-10 days',
-                notes: 'MRSA coverage. Culture data: 56% MRSA prevalence.',
-            },
-            monitoring: 'Daily wound checks, return if worsening',
-        },
-    },
-    {
-        id: 'xyl-wound-stage2',
-        type: 'result',
-        module: 4,
-        title: 'Stage 2 — Moderate Wounds',
-        body: '**Philadelphia Consensus Classification:**\n• Full thickness loss\n• Exposed/compromised muscle/tendon\n• **Preserved function** [3]\n\n**Treatment:**\n• Conservative initially\n• **Autolytic debridement** with topical antibiotics (preferred)\n• Enzymatic debridement (collagenase) for heavy eschar\n• Consider excisional debridement + STSG after 3+ months abstinence\n\n**Antibiotics:**\n• [TMP-SMX](#/drug/tmp-smx/xylazine) + beta-lactam (GAS coverage)\n• Silver sulfadiazine topically — broad spectrum, active 72+ hours [3][4]',
-        recommendation: 'Conservative wound care. Surgical debridement only if abscess/infection. Refer to wound care clinic.',
-        confidence: 'recommended',
-        citation: [3, 4],
-        treatment: {
-            firstLine: {
-                drug: 'TMP-SMX + Amoxicillin',
-                dose: 'TMP-SMX 1-2 DS BID + Amoxicillin 500 mg TID',
-                route: 'PO',
-                frequency: 'As above',
-                duration: '7-14 days',
-                notes: 'Covers MRSA + GAS. Add silver sulfadiazine topically.',
-            },
-            monitoring: 'Serial wound exams, watch for progression',
-        },
-    },
-    {
-        id: 'xyl-wound-stage3',
-        type: 'result',
-        module: 4,
-        title: 'Stage 3 — Severe Wounds',
-        body: '**Philadelphia Consensus Classification:**\n• **3A:** Severe necrosis, exposed bone, osteomyelitis possible, **preserved function** → aggressive debridement + BTM if abstinent\n• **3B:** Same as 3A but **no meaningful function preserved** → amputation recommended [3]\n\n**Critical distinction:** Differentiate XAW necrosis from acute NSTI — avoid misdiagnosing chronic XAW as NSTI (prevents unnecessary aggressive debridement)\n\n**ED management:**\n• IV antibiotics: [Vancomycin](#/drug/vancomycin/xylazine) + [Pip-Tazo](#/drug/pip-tazo/xylazine)\n• Admit for surgical evaluation\n• X-ray/MRI for osteomyelitis workup',
-        recommendation: 'Admit for IV antibiotics and surgical evaluation. Stage 3B may require amputation.',
-        confidence: 'recommended',
-        citation: [3, 4],
-        treatment: {
-            firstLine: {
-                drug: 'Vancomycin + Piperacillin-Tazobactam',
-                dose: 'Vancomycin 25-30 mg/kg load, Pip-Tazo 4.5g q8h',
-                route: 'IV',
-                frequency: 'Vanc per levels, Pip-Tazo q8h',
-                duration: 'Admit for duration',
-                notes: 'Broad coverage including MRSA, GAS, GN, anaerobes',
-            },
-            monitoring: 'Surgical consult, imaging for osteomyelitis',
-        },
-    },
-    // =====================================================================
-    // MODULE 5: WITHDRAWAL
-    // =====================================================================
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 5: Withdrawal
+    // ═══════════════════════════════════════════════════════════════
     {
         id: 'xyl-withdrawal',
         type: 'info',
         module: 5,
         title: 'Xylazine Withdrawal',
-        body: '**Timeline:** Symptoms begin 8-24 hours after last use\n\n**Symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n\n**Treatment Protocol:**\n| Medication | Dose | Notes |\n|------------|------|-------|\n| [Clonidine](#/drug/clonidine/xylazine) | 0.2-0.3 mg PO q4-6h | First-line; hold if SBP <90, HR <50 |\n| [Dexmedetomidine](#/drug/dexmedetomidine/xylazine) | 0.2-1.4 mcg/kg/hr IV | ICU; for severe withdrawal |\n| [Tizanidine](#/drug/tizanidine/xylazine) | 2-4 mg PO q6-8h | Alternative alpha-2 agonist |\n| [Gabapentin](#/drug/gabapentin/xylazine) | 300-600 mg PO TID | Adjunct for anxiety/pain |\n\n**De-escalation:** Transition dex → clonidine when tolerating PO (24-48h) [1][5]',
+        body: '**Timeline:** Symptoms begin **8-24 hours** after last use\n\n[Tranq vs Opioid Withdrawal Comparison](#/info/xyl-withdrawal-comparison)\n\n**Xylazine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
         citation: [1, 5],
-        next: 'xyl-dispo-assess',
+        next: 'xyl-withdrawal-tx',
+    },
+    {
+        id: 'xyl-withdrawal-comparison',
+        type: 'info',
+        module: 5,
+        title: 'Xylazine vs Opioid Withdrawal',
+        body: '**Comparison Table:**\n\n| Symptom | Opioid Withdrawal | Xylazine Withdrawal |\n|---------|-------------------|---------------------|\n| **Onset** | 8-24h (short-acting) | 8-24h |\n| **Duration** | 5-7 days | 3-5 days |\n| **Anxiety/Restlessness** | ✓ | ✓ |\n| **Tachycardia** | ✓ | ✓ |\n| **Hypertension** | ✓ | ✓ |\n| **Diaphoresis** | ✓ | ✓ |\n| **Nausea/Vomiting** | ✓ | ✗ |\n| **Diarrhea** | ✓ | ✗ |\n| **Piloerection** | ✓ | ✗ |\n| **Yawning/Lacrimation** | ✓ | ✗ |\n| **Mydriasis** | ✓ | Variable |\n| **Treated by buprenorphine** | ✓ | ✗ |\n| **Treated by clonidine** | ✓ (adjunct) | ✓ (first-line) |\n\n**No FDA-approved treatment** for xylazine withdrawal [1][5]',
+        citation: [1, 5],
+        next: 'xyl-withdrawal-tx',
+    },
+    {
+        id: 'xyl-withdrawal-tx',
+        type: 'info',
+        module: 5,
+        title: 'Xylazine Withdrawal Treatment',
+        body: '**No FDA-approved medications** — alpha-2 agonists are first-line empirically [1][5]\n\n**Treatment Protocol:**\n| Medication | Dose | Notes |\n|------------|------|-------|\n| [Clonidine](#/drug/clonidine/xylazine) | 0.1-0.3 mg PO q4-6h | First-line. Hold if SBP <90, HR <50 |\n| [Dexmedetomidine](#/drug/dexmedetomidine/xylazine) | 0.2-1.4 mcg/kg/hr IV | ICU only. Severe withdrawal |\n| [Tizanidine](#/drug/tizanidine/xylazine) | 2-4 mg PO q6-8h | Alternative alpha-2 agonist |\n| [Gabapentin](#/drug/gabapentin/xylazine) | 300-600 mg PO TID | Adjunct for anxiety |\n\n**Combined xylazine + opioid withdrawal:**\n• Start buprenorphine for opioid component (using standard COWS protocol)\n• Add clonidine for xylazine component\n• Both can be initiated simultaneously [1]\n\n**De-escalation:** Transition dex → clonidine when tolerating PO (24-48h)',
+        citation: [1, 5],
         treatment: {
             firstLine: {
                 drug: 'Clonidine',
-                dose: '0.2-0.3 mg PO q4-6h',
+                dose: '0.1-0.3 mg PO q4-6h',
                 route: 'PO',
                 frequency: 'Q4-6 hours',
                 duration: 'Taper over 3-5 days',
-                notes: 'Hold if SBP <90 or HR <50',
+                notes: 'Hold if SBP <90 or HR <50. Max 1.2 mg/day.',
             },
             alternative: {
                 drug: 'Dexmedetomidine',
@@ -314,34 +331,34 @@ export const XYLAZINE_TOXICITY_NODES = [
                 duration: 'Until PO tolerated, then transition to clonidine',
                 notes: 'ICU setting only. For severe withdrawal.',
             },
-            monitoring: 'Vital signs, symptom control',
+            monitoring: 'Vital signs q4h, symptom reassessment, sedation level',
         },
+        next: 'xyl-moud',
     },
-    // =====================================================================
-    // MODULE 6: DISPOSITION
-    // =====================================================================
+    {
+        id: 'xyl-moud',
+        type: 'info',
+        module: 5,
+        title: 'MOUD Considerations',
+        body: '**MOUD = Medications for Opioid Use Disorder**\n\n**Key point:** Xylazine does NOT block buprenorphine binding — MOUD still works for the opioid component [1][5]\n\n**Buprenorphine initiation:**\n• Standard COWS-based protocol\n• Wait for COWS ≥8-12 before dosing\n• Start 2-4 mg SL, titrate up\n\n**Methadone:**\n• Can be started in ED under federal exemption (72-hour rule)\n• Refer to OTP for continuation\n\n**Counseling points:**\n• MOUD treats the opioid craving/withdrawal — NOT xylazine\n• Patients may still feel xylazine withdrawal symptoms\n• Clonidine bridges the gap\n• Harm reduction: xylazine test strips available',
+        citation: [1, 5, 6],
+        next: 'xyl-dispo-assess',
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // MODULE 6: Disposition
+    // ═══════════════════════════════════════════════════════════════
     {
         id: 'xyl-dispo-assess',
         type: 'question',
         module: 6,
         title: 'Disposition Assessment',
-        body: '**Admit criteria:**\n• Persistent respiratory depression\n• Hemodynamic instability\n• Severe bradycardia requiring intervention\n• Deep wound involvement (Stage 2-3)\n• Suspected osteomyelitis/discitis\n• Bacteremia/endocarditis concern\n• Severe withdrawal requiring dex infusion [1][5]\n\nWhat is the patient\'s current status?',
+        body: '**Discharge criteria:**\n• Hemodynamically stable (HR >50, SBP >90)\n• Adequate respirations (RR >12, SpO₂ >92%)\n• Ambulatory\n• Tolerating PO\n• Wound care plan in place (if applicable)\n• 4-6 hours post-naloxone without re-sedation\n\n**Admit criteria:**\n• Persistent respiratory depression\n• Hemodynamic instability requiring pressors\n• Stage 2-3 wounds with infection\n• Severe withdrawal requiring dex infusion\n• Unable to protect airway [1]\n\nWhat is the disposition?',
         citation: [1, 5],
         options: [
-            {
-                label: 'Stable — discharge appropriate',
-                next: 'xyl-discharge',
-            },
-            {
-                label: 'Needs observation — monitor unit',
-                next: 'xyl-admit-obs',
-                urgency: 'urgent',
-            },
-            {
-                label: 'ICU level care required',
-                next: 'xyl-admit-icu',
-                urgency: 'critical',
-            },
+            { label: 'Stable — discharge appropriate', next: 'xyl-discharge' },
+            { label: 'Needs observation', description: '4-6 hour post-naloxone period, stable wounds', next: 'xyl-observation', urgency: 'urgent' },
+            { label: 'Admit telemetry', description: 'Wound infection, withdrawal management', next: 'xyl-admit-obs', urgency: 'urgent' },
+            { label: 'Admit ICU', description: 'Intubated, pressors, severe withdrawal', next: 'xyl-admit-icu', urgency: 'critical' },
         ],
     },
     {
@@ -349,7 +366,7 @@ export const XYLAZINE_TOXICITY_NODES = [
         type: 'info',
         module: 6,
         title: 'ED Observation',
-        body: '**Observation period:**\n• Minimum 4-6 hours post naloxone\n• Monitor for recurrent respiratory depression (fentanyl outlasts naloxone)\n• Watch for delayed xylazine effects\n\n**Discharge criteria:**\n• Hemodynamically stable\n• Adequate respirations\n• Ambulatory\n• Tolerating PO\n• Wound care plan in place',
+        body: '**Observation period: 4-6 hours post-naloxone**\n\n**Rationale:**\n• Fentanyl half-life can outlast naloxone\n• Xylazine effects persist longer\n• Watch for recurrent respiratory depression\n\n**Monitoring during observation:**\n• Pulse oximetry continuous\n• Vitals q1h\n• LOC checks\n• Aspiration precautions (elevate HOB)\n\n**Re-dose naloxone if:**\n• RR <12\n• SpO₂ <92%\n• Increasing sedation',
         citation: [1],
         next: 'xyl-discharge',
     },
@@ -358,46 +375,47 @@ export const XYLAZINE_TOXICITY_NODES = [
         type: 'result',
         module: 6,
         title: 'Discharge Planning',
-        body: '**Discharge supplies:**\n• Wound dressings, ointments, silver sulfadiazine if applicable\n• Antibiotics (complete course)\n\n**Harm reduction kit:**\n• Narcan nasal spray (2 doses)\n• Fentanyl test strips\n• Xylazine test strips\n• Sterile supplies\n\n**Resources:**\n• **Never Use Alone:** 1-800-484-3731\n• **SAMHSA Helpline:** 1-800-662-4357\n• Local syringe service programs\n\n**Follow-up:**\n• Low-barrier wound care clinic\n• Addiction medicine referral',
-        recommendation: 'Discharge with harm reduction supplies, wound care, and addiction resources.',
+        body: '**Discharge supplies — "Harm Reduction Kit":**\n• Narcan nasal spray (2 doses)\n• Fentanyl test strips\n• Xylazine test strips (if available)\n• Sterile injection supplies\n• Wound dressings and ointments (if applicable)\n\n**Resources:**\n• **Never Use Alone:** 1-800-484-3731 (call before using)\n• **SAMHSA National Helpline:** 1-800-662-4357\n• Local syringe service programs\n• Low-barrier wound care clinics\n\n**Follow-up:**\n• Wound clinic 3-5 days (if applicable)\n• Addiction medicine/MOUD clinic\n• PCP within 1 week\n\n**Return precautions:** Worsening wounds, fever, chest pain, difficulty breathing, recurrent overdose',
+        recommendation: 'Discharge with harm reduction supplies, wound care if needed, MOUD referral, and clear return precautions.',
         confidence: 'recommended',
-        citation: [1, 2],
+        citation: [1, 2, 6],
     },
     {
         id: 'xyl-admit-obs',
         type: 'result',
         module: 6,
         title: 'Admit — Observation/Telemetry',
-        body: '**Admission indications:**\n• Persistent sedation >6 hours\n• Moderate wound requiring serial debridement\n• Withdrawal management with clonidine\n• Social concerns (no safe discharge)\n\n**Monitoring:**\n• Telemetry\n• Vitals q2-4h\n• Serial wound exams\n• Anaphylaxis kit at bedside',
-        recommendation: 'Admit for observation. Telemetry monitoring, wound care, withdrawal management.',
+        body: '**Admission indications:**\n• Persistent sedation >6 hours\n• Wound requiring IV antibiotics or serial debridement\n• Withdrawal management with clonidine (close monitoring needed)\n• Social concerns (no safe discharge environment)\n\n**Monitoring:**\n• Telemetry\n• Vitals q2-4h\n• Serial wound exams\n• Symptom reassessment (COWS if opioid component, clinical assessment for xylazine)\n\n**Consults:**\n• Addiction medicine\n• Wound care/surgery if applicable\n• Social work\n\n**Anticipate:** 24-72 hour stay depending on withdrawal severity and wound status',
+        recommendation: 'Telemetry admission for observation, wound care, and/or withdrawal management.',
         confidence: 'recommended',
-        citation: [1],
+        citation: [1, 3],
     },
     {
         id: 'xyl-admit-icu',
         type: 'result',
         module: 6,
         title: 'ICU Admission',
-        body: '**ICU criteria:**\n• Intubated patients\n• Vasopressor requirement\n• Dexmedetomidine infusion for withdrawal\n• Stage 3 wounds with sepsis/bacteremia\n• Severe medetomidine withdrawal (77.5% require ICU) [5]\n\n**Note:** Medetomidine is replacing xylazine in some markets — 100-200x more potent, more severe withdrawal, higher ICU rates [5]',
-        recommendation: 'ICU for ongoing hemodynamic support, airway management, or severe withdrawal.',
+        body: '**ICU criteria:**\n• Intubated for airway protection\n• Vasopressor requirement\n• Dexmedetomidine infusion for severe withdrawal\n• Stage 3 wounds with sepsis/bacteremia\n• End-organ dysfunction\n\n**Emerging concern — Medetomidine:**\n• 100-200x more potent than xylazine\n• Being detected in some drug supplies\n• 77.5% of medetomidine withdrawal cases require ICU [5]\n• Higher sedation, longer recovery, more severe withdrawal\n\n**ICU management:**\n• Ventilator management if intubated\n• Hemodynamic optimization\n• IV antibiotics for severe wounds\n• Plan for prolonged stay\n• Early tracheostomy discussion if appropriate',
+        recommendation: 'ICU admission for ongoing hemodynamic support, airway management, or severe xylazine/medetomidine withdrawal.',
         confidence: 'recommended',
         citation: [1, 5],
     },
 ];
+export const XYLAZINE_TOXICITY_NODE_COUNT = XYLAZINE_TOXICITY_NODES.length;
 export const XYLAZINE_TOXICITY_MODULE_LABELS = [
     'Recognition',
-    'OA2A Toxidrome',
-    'Supportive Care',
-    'Wound Management',
+    'Wound Assessment',
+    'Acute Management',
+    'Wound Care',
     'Withdrawal',
     'Disposition',
 ];
 export const XYLAZINE_TOXICITY_CITATIONS = [
-    { num: 1, text: 'Farkas J. OA2A Syndrome (Opioid + Alpha-2 Agonist). Internet Book of Critical Care (IBCC). January 2025.' },
-    { num: 2, text: 'CDC. Xylazine (Tranq): What You Should Know. Centers for Disease Control and Prevention. October 2024.' },
-    { num: 3, text: 'Philadelphia Consensus on the Surgical Management of Xylazine-Associated Wounds. SurgiColl. 2024.' },
-    { num: 4, text: 'Oxford Academic. Guidelines for Xylazine-Associated Wound Management. Open Forum Infect Dis. 2024.' },
-    { num: 5, text: 'American Journal of Psychiatry. Medetomidine Withdrawal Syndrome. AJP Resident\'s Journal. 2025.' },
-    { num: 6, text: 'SAMHSA. Overdose Prevention and Response Toolkit. 2023.' },
-    { num: 7, text: 'PennCAMP. Xylazine Wound Best Practices. Philadelphia Department of Public Health. 2023.' },
+    { num: 1, text: 'Farkas J. OA2A Syndrome (Opioid + Alpha-2 Agonist). Internet Book of Critical Care (IBCC). EMCrit. January 2025.' },
+    { num: 2, text: 'CDC Health Alert Network. Increasing Threats from Xylazine (Tranq) in the Illicit Drug Supply. CDC HAN-00490. November 2022.' },
+    { num: 3, text: 'Philadelphia Consensus on the Surgical Management of Xylazine-Associated Wounds. Ann Surg. 2024.' },
+    { num: 4, text: 'Friedman J, et al. Xylazine Spreads Across the US: A Growing Component of the Overdose Crisis. Drug Alcohol Depend. 2022;232:109315. PMID 35150970' },
+    { num: 5, text: 'Silverstein SM, et al. Medetomidine-Associated Withdrawal Requiring ICU Admission. Am J Psychiatry. 2025;182(2):194-198.' },
+    { num: 6, text: 'SAMHSA. Overdose Prevention and Response Toolkit. Substance Abuse and Mental Health Services Administration. 2023.' },
+    { num: 7, text: 'Philadelphia Department of Public Health. Xylazine (Tranq) Wound Best Practices. PennCAMP. 2023.' },
 ];
