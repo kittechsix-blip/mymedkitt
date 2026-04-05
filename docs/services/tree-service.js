@@ -617,6 +617,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/peds-trauma.js');
             return { nodes: m.PEDS_TRAUMA_NODES, entryNodeId: 'peds-trauma-start', categoryId: 'trauma-surg', moduleLabels: m.PEDS_TRAUMA_MODULE_LABELS, citations: m.PEDS_TRAUMA_CITATIONS };
         },
+        'ohss': async () => {
+            const m = await import('../data/trees/ohss.js');
+            return { nodes: m.OHSS_NODES, entryNodeId: 'ohss-start', categoryId: 'ob-gyn', moduleLabels: m.OHSS_MODULE_LABELS, citations: m.OHSS_CITATIONS };
+        },
+        'rhogam-early-pregnancy': async () => {
+            const m = await import('../data/trees/rhogam-early-pregnancy.js');
+            return { nodes: m.RHOGAM_EARLY_PREGNANCY_NODES, entryNodeId: 'rhogam-start', categoryId: 'ob-gyn', moduleLabels: m.RHOGAM_EARLY_PREGNANCY_MODULE_LABELS, citations: m.RHOGAM_EARLY_PREGNANCY_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

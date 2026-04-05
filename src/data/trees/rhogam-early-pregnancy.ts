@@ -1,0 +1,553 @@
+// MedKitt - Early Pregnancy RhoGAM Guidelines
+// Based on ACOG Practice Advisory 2024 (major practice change)
+// Rh Status Assessment -> First Trimester (<12 wk) -> Exceptions -> Second/Third Trimester -> Dosing -> Special Scenarios
+// 6 modules, 26 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: RH STATUS ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'rhogam-start',
+    type: 'info',
+    module: 1,
+    title: 'Early Pregnancy RhoGAM Guidelines',
+    body: '**2024 ACOG Practice Advisory: Major Practice Change**\n\nAnti-D immune globulin (RhoGAM) is **NO LONGER routinely recommended before 12 weeks gestation** for threatened miscarriage, spontaneous abortion, or ectopic pregnancy. [1]\n\nThis represents a significant departure from prior practice based on updated evidence.\n\n[2024 vs Prior Practice Comparison](#/info/rhogam-practice-change)\n\n**Key Points:**\n- Risk of alloimmunization from first-trimester events is extremely low (<0.1%)\n- RhoGAM still indicated for specific high-risk scenarios even in first trimester\n- Standard 28-week prophylaxis unchanged',
+    citation: [1, 2],
+    calculatorLinks: [{ id: 'rhogam-decision', label: 'RhoGAM Decision Tool' }],
+    next: 'rhogam-rh-check',
+  },
+
+  {
+    id: 'rhogam-rh-check',
+    type: 'question',
+    module: 1,
+    title: 'Rh(D) Status',
+    body: 'Determine the patient\'s Rh(D) blood type status.\n\n**Type & Screen includes:**\n- ABO blood group\n- Rh(D) status (positive or negative)\n- Antibody screen (indirect Coombs)\n\n**If antibody screen positive:** Patient may already be sensitized. Consult blood bank/MFM.\n\n[Rh Typing Interpretation](#/info/rhogam-rh-interpretation)',
+    citation: [3],
+    options: [
+      {
+        label: 'Rh(D) Positive',
+        description: 'No RhoGAM needed',
+        next: 'rhogam-rh-positive',
+      },
+      {
+        label: 'Rh(D) Negative, antibody screen negative',
+        description: 'Candidate for RhoGAM if indicated',
+        next: 'rhogam-rh-negative',
+      },
+      {
+        label: 'Rh(D) Negative, antibody screen positive',
+        description: 'Already sensitized - consult MFM/blood bank',
+        next: 'rhogam-sensitized',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Weak D / D variant',
+        description: 'May need genotyping',
+        next: 'rhogam-weak-d',
+      },
+    ],
+  },
+
+  {
+    id: 'rhogam-rh-positive',
+    type: 'result',
+    module: 1,
+    title: 'Rh(D) Positive - No RhoGAM Needed',
+    body: 'Patient is Rh(D) positive.\n\n**RhoGAM is NOT indicated** for Rh-positive patients regardless of clinical scenario.\n\nRhoGAM is only given to prevent Rh-negative mothers from developing antibodies against Rh-positive fetal red blood cells.',
+    recommendation: 'No RhoGAM indicated. Document Rh-positive status in chart.',
+    confidence: 'definitive',
+    citation: [3],
+  },
+
+  {
+    id: 'rhogam-sensitized',
+    type: 'result',
+    module: 1,
+    title: 'Already Sensitized',
+    body: '**Antibody screen positive** indicates prior sensitization to Rh(D) antigen.\n\n**RhoGAM is NOT effective** once alloimmunization has occurred. It can only prevent sensitization, not reverse it.\n\n**Next steps:**\n- Identify specific antibody (anti-D vs other)\n- Quantify antibody titer\n- MFM consultation for ongoing pregnancy management\n- Serial middle cerebral artery (MCA) Doppler to monitor for fetal anemia if continuing pregnancy\n\nAlloimmunized pregnancies require close surveillance for hemolytic disease of the fetus/newborn (HDFN).',
+    recommendation: 'Consult MFM/blood bank. RhoGAM not indicated once sensitization has occurred. Serial MCA Doppler monitoring for ongoing pregnancy.',
+    confidence: 'definitive',
+    citation: [3, 4],
+  },
+
+  {
+    id: 'rhogam-weak-d',
+    type: 'info',
+    module: 1,
+    title: 'Weak D / D Variant',
+    body: '**Weak D phenotype** occurs in ~0.2-1% of Caucasians.\n\nSerologic typing may show:\n- Weak positive reaction\n- Discordant results between testing methods\n- "Du" (historical term)\n\n**AABB/ACOG Recommendation:** RHD genotyping to determine if patient needs RhoGAM [5]\n\n**Genotype Interpretation:**\n- **RHD gene present (types 1, 2, 3):** Typically safe, no RhoGAM needed\n- **RHD gene absent or partial:** Treat as Rh-negative, RhoGAM indicated\n\n[Weak D Genotyping Guide](#/info/rhogam-weak-d-genotype)\n\nIf genotyping unavailable, treat as Rh-negative (give RhoGAM when indicated).',
+    citation: [5, 6],
+    next: 'rhogam-rh-negative',
+  },
+
+  {
+    id: 'rhogam-rh-negative',
+    type: 'question',
+    module: 1,
+    title: 'Gestational Age Assessment',
+    body: 'Patient is Rh(D) negative and unsensitized.\n\nDetermine gestational age to guide RhoGAM decision.\n\n[Gestational Age Reference](#/info/rhogam-ga-reference)\n\n**Critical threshold: 12 weeks gestation**\n\n2024 ACOG guidance varies significantly based on whether the event occurs before or after 12 weeks.',
+    citation: [1],
+    calculatorLinks: [{ id: 'gestational-age', label: 'Gestational Age Calculator' }],
+    options: [
+      {
+        label: 'First trimester (<12 weeks)',
+        description: '2024 ACOG: RhoGAM often NOT needed',
+        next: 'rhogam-first-trimester',
+      },
+      {
+        label: 'Second or third trimester (≥12 weeks)',
+        description: 'Standard RhoGAM indications apply',
+        next: 'rhogam-second-third',
+      },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: FIRST TRIMESTER (<12 WEEKS)
+  // =====================================================================
+
+  {
+    id: 'rhogam-first-trimester',
+    type: 'question',
+    module: 2,
+    title: 'First Trimester Event (<12 weeks)',
+    body: '**2024 ACOG Practice Change:** RhoGAM is **NOT routinely recommended** before 12 weeks for most indications. [1]\n\n**Rationale:**\n- Fetal RBCs express Rh(D) antigen starting ~38 days post-conception (~7-8 weeks GA)\n- Volume of fetal-maternal hemorrhage in early pregnancy is negligible (<0.1 mL)\n- Risk of alloimmunization from first-trimester events is extremely low\n- Studies show no significant reduction in sensitization with early RhoGAM [2]\n\nSelect the clinical scenario:',
+    citation: [1, 2, 7],
+    calculatorLinks: [{ id: 'rhogam-decision', label: 'RhoGAM Decision Tool' }],
+    options: [
+      {
+        label: 'Threatened miscarriage',
+        description: 'Vaginal bleeding, closed os, viable IUP',
+        next: 'rhogam-threatened-sab',
+      },
+      {
+        label: 'Spontaneous abortion (complete or incomplete)',
+        description: 'Pregnancy loss <12 weeks',
+        next: 'rhogam-sab',
+      },
+      {
+        label: 'Ectopic pregnancy',
+        description: 'Extrauterine pregnancy <12 weeks',
+        next: 'rhogam-ectopic',
+      },
+      {
+        label: 'Exception scenario',
+        description: 'Molar, procedure, trauma, heavy bleeding',
+        next: 'rhogam-exceptions',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'rhogam-threatened-sab',
+    type: 'result',
+    module: 2,
+    title: 'Threatened Miscarriage <12 Weeks',
+    body: '**2024 ACOG: RhoGAM is NOT recommended.** [1]\n\nThreatened miscarriage at <12 weeks with:\n- Vaginal bleeding (light to moderate)\n- Closed cervical os\n- Viable intrauterine pregnancy on ultrasound\n\n**Evidence:**\n- Risk of alloimmunization is negligible (<0.1%)\n- No RCTs demonstrate benefit of RhoGAM in this setting\n- Prior recommendations were based on expert opinion, not evidence [2]\n\n**Note:** If heavy bleeding (soaking >1 pad/hour) or traumatic etiology, see Exceptions.',
+    recommendation: 'RhoGAM NOT indicated for routine threatened miscarriage <12 weeks. Reassess if progresses to heavier bleeding.',
+    confidence: 'definitive',
+    citation: [1, 2, 7],
+  },
+
+  {
+    id: 'rhogam-sab',
+    type: 'result',
+    module: 2,
+    title: 'Spontaneous Abortion <12 Weeks',
+    body: '**2024 ACOG: RhoGAM is NOT recommended.** [1]\n\nSpontaneous abortion at <12 weeks includes:\n- Complete miscarriage\n- Incomplete miscarriage\n- Missed abortion\n- Medical management with misoprostol\n- Surgical management (D&C/MVA)\n\n**Evidence:**\n- Cochrane review: No difference in alloimmunization rates with vs without RhoGAM before 12 weeks [2]\n- Volume of fetal blood exposure is insufficient to trigger maternal immune response\n\n**Surgical evacuation:** Even D&C for SAB <12 weeks does not require routine RhoGAM per 2024 guidance.',
+    recommendation: 'RhoGAM NOT indicated for spontaneous abortion <12 weeks (including surgical management). Document Rh status for future pregnancies.',
+    confidence: 'definitive',
+    citation: [1, 2, 7],
+  },
+
+  {
+    id: 'rhogam-ectopic',
+    type: 'result',
+    module: 2,
+    title: 'Ectopic Pregnancy <12 Weeks',
+    body: '**2024 ACOG: RhoGAM is NOT recommended.** [1]\n\nEctopic pregnancy at <12 weeks managed by:\n- Medical therapy (methotrexate)\n- Surgical management (salpingectomy, salpingostomy)\n- Expectant management\n\n**Rationale:**\n- Tubal/extrauterine pregnancies rarely develop adequate placentation for significant fetal-maternal hemorrhage\n- Even ruptured ectopic at <12 weeks typically involves minimal fetal blood\n\n**Note:** Large hemoperitoneum with ruptured ectopic may warrant consideration (see Exceptions) - use clinical judgment.',
+    recommendation: 'RhoGAM NOT indicated for routine ectopic pregnancy <12 weeks. Use clinical judgment for ruptured ectopic with large hemoperitoneum.',
+    confidence: 'definitive',
+    citation: [1, 2],
+  },
+
+  // =====================================================================
+  // MODULE 3: EXCEPTIONS REQUIRING RHOGAM
+  // =====================================================================
+
+  {
+    id: 'rhogam-exceptions',
+    type: 'question',
+    module: 3,
+    title: 'First Trimester Exceptions',
+    body: '**RhoGAM IS indicated in first trimester for specific high-risk scenarios** regardless of gestational age. [1]\n\nThese exceptions involve:\n- Higher volume fetal-maternal hemorrhage\n- Invasive procedures\n- Conditions with theoretical increased risk',
+    citation: [1, 3],
+    options: [
+      {
+        label: 'Molar pregnancy (any gestational age)',
+        description: 'Complete or partial mole',
+        next: 'rhogam-molar',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Invasive procedure',
+        description: 'CVS, amniocentesis, cordocentesis',
+        next: 'rhogam-procedure',
+      },
+      {
+        label: 'Abdominal trauma',
+        description: 'Blunt or penetrating trauma to abdomen',
+        next: 'rhogam-trauma',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Significant vaginal bleeding',
+        description: 'Heavy bleeding with hemodynamic changes',
+        next: 'rhogam-heavy-bleed',
+        urgency: 'critical',
+      },
+    ],
+  },
+
+  {
+    id: 'rhogam-molar',
+    type: 'result',
+    module: 3,
+    title: 'Molar Pregnancy',
+    body: '**RhoGAM IS indicated** for molar pregnancy at ANY gestational age. [1]\n\n**Rationale:**\n- Molar tissue can express Rh(D) antigen\n- Evacuation of molar pregnancy disrupts abnormal trophoblastic tissue\n- Risk of fetal-maternal hemorrhage is higher than typical miscarriage\n\n**Applies to:**\n- Complete hydatidiform mole\n- Partial hydatidiform mole\n- Gestational trophoblastic disease\n\n**Dosing:** Standard 300 mcg IM dose (50 mcg MICRhoGAM alternative)',
+    recommendation: 'RhoGAM 300 mcg IM indicated for molar pregnancy at any gestational age. Give within 72 hours of evacuation.',
+    confidence: 'definitive',
+    citation: [1, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours of molar evacuation',
+        notes: 'Standard full dose. Document administration for future pregnancies.',
+      },
+      alternative: {
+        drug: 'MICRhoGAM',
+        dose: '50 mcg (250 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours',
+        notes: 'Acceptable alternative for first trimester. Covers up to 2.5 mL fetal blood.',
+      },
+      monitoring: 'Ensure hCG follow-up per GTD protocol. Document RhoGAM administration.',
+    },
+  },
+
+  {
+    id: 'rhogam-procedure',
+    type: 'result',
+    module: 3,
+    title: 'Invasive Procedures',
+    body: '**RhoGAM IS indicated** for invasive procedures at any gestational age. [1, 3]\n\n**Procedures requiring RhoGAM:**\n- Chorionic villus sampling (CVS)\n- Amniocentesis\n- Cordocentesis (PUBS)\n- Fetal surgery/intervention\n- External cephalic version (later GA)\n\n**Rationale:** These procedures involve direct placental/fetal manipulation with significant risk of fetal-maternal hemorrhage.\n\n**Timing:** Give RhoGAM within 72 hours of procedure. May give before if procedure planned.',
+    recommendation: 'RhoGAM 300 mcg IM indicated for invasive fetal procedures at any gestational age. Administer within 72 hours.',
+    confidence: 'definitive',
+    citation: [1, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours of procedure',
+        notes: 'Full dose regardless of gestational age for invasive procedures.',
+      },
+      monitoring: 'Document procedure and RhoGAM administration. If repeated procedure >72 hours later, may need additional dose.',
+    },
+  },
+
+  {
+    id: 'rhogam-trauma',
+    type: 'result',
+    module: 3,
+    title: 'Abdominal Trauma',
+    body: '**RhoGAM IS indicated** for abdominal trauma at any gestational age. [1, 3]\n\n**Includes:**\n- Motor vehicle collision\n- Falls with abdominal impact\n- Assault/intimate partner violence\n- Penetrating abdominal trauma\n\n**Rationale:** Trauma can cause placental separation and significant fetal-maternal hemorrhage even in early pregnancy.\n\n**Second/Third Trimester Trauma:** Consider Kleihauer-Betke testing to quantify fetal-maternal hemorrhage and calculate additional RhoGAM doses needed.\n\n[Kleihauer-Betke Dosing Guide](#/info/rhogam-kb-dosing)',
+    recommendation: 'RhoGAM 300 mcg IM indicated for abdominal trauma at any gestational age. Consider KB testing if >20 weeks.',
+    confidence: 'definitive',
+    citation: [1, 3, 8],
+    calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours of trauma',
+        notes: 'Initial dose. Order KB if >20 weeks to determine if additional doses needed.',
+      },
+      monitoring: 'If KB positive >20 weeks: calculate additional RhoGAM doses. 300 mcg covers 30 mL fetal whole blood (15 mL fetal RBCs).',
+    },
+  },
+
+  {
+    id: 'rhogam-heavy-bleed',
+    type: 'result',
+    module: 3,
+    title: 'Significant Vaginal Bleeding',
+    body: '**Consider RhoGAM** for heavy vaginal bleeding even in first trimester. [1]\n\n**Definition of significant bleeding:**\n- Soaking >1 pad per hour for 2+ hours\n- Hemodynamic changes (tachycardia, hypotension)\n- Symptomatic anemia\n- Visible clots or tissue\n\n**Clinical judgment applies:** The 2024 ACOG guidance acknowledges uncertainty in heavy bleeding scenarios. When in doubt, giving RhoGAM is reasonable as the risk is minimal.\n\n**This is NOT a contraindication scenario** - provider discretion is appropriate.',
+    recommendation: 'Consider RhoGAM 300 mcg IM for heavy first-trimester bleeding with clinical judgment. When uncertain, giving RhoGAM is reasonable.',
+    confidence: 'consider',
+    citation: [1, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours',
+        notes: 'Clinical judgment for heavy first-trimester bleeding. When in doubt, administer.',
+      },
+      alternative: {
+        drug: 'MICRhoGAM',
+        dose: '50 mcg (250 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Within 72 hours',
+        notes: 'Alternative for first trimester. Some institutions prefer full dose.',
+      },
+      monitoring: 'Document clinical reasoning for decision. Follow standard miscarriage protocols.',
+    },
+  },
+
+  // =====================================================================
+  // MODULE 4: SECOND/THIRD TRIMESTER
+  // =====================================================================
+
+  {
+    id: 'rhogam-second-third',
+    type: 'question',
+    module: 4,
+    title: 'Second/Third Trimester (≥12 weeks)',
+    body: '**Standard RhoGAM recommendations apply** for events at or after 12 weeks gestation. [3]\n\n2024 ACOG changes apply ONLY to events <12 weeks. After 12 weeks, follow established guidelines.\n\nSelect the clinical scenario:',
+    citation: [3],
+    options: [
+      {
+        label: 'Routine 28-week prophylaxis',
+        description: 'Standard antenatal RhoGAM',
+        next: 'rhogam-28-week',
+      },
+      {
+        label: 'Sensitizing event (bleeding, trauma)',
+        description: 'Second/third trimester complication',
+        next: 'rhogam-sensitizing-event',
+      },
+      {
+        label: 'Delivery (postpartum)',
+        description: 'Newborn Rh-positive, give within 72h',
+        next: 'rhogam-postpartum',
+      },
+    ],
+  },
+
+  {
+    id: 'rhogam-28-week',
+    type: 'result',
+    module: 4,
+    title: 'Routine 28-Week Prophylaxis',
+    body: '**RhoGAM 300 mcg IM at 28 weeks gestation** - unchanged by 2024 guidance. [3]\n\n**Standard protocol:**\n- Given at 28-week prenatal visit\n- Protects through delivery (12-week window)\n- Required even if no sensitizing events\n\n**Evidence:**\n- Reduces third-trimester sensitization from 2% to 0.1%\n- Combined with postpartum dose, reduces overall sensitization to 0.1-0.2%\n\n**Repeat antibody screen** not required before 28-week dose if initial screen negative.',
+    recommendation: 'RhoGAM 300 mcg IM at 28 weeks for all Rh-negative, unsensitized pregnant patients. Standard of care - unchanged by 2024 ACOG.',
+    confidence: 'definitive',
+    citation: [3, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose',
+        duration: 'Given at 28 weeks gestation',
+        notes: 'Standard antenatal prophylaxis. Provides protection for ~12 weeks.',
+      },
+      monitoring: 'Document administration. Postpartum dose needed if newborn Rh-positive.',
+    },
+  },
+
+  {
+    id: 'rhogam-sensitizing-event',
+    type: 'result',
+    module: 4,
+    title: 'Sensitizing Event ≥12 Weeks',
+    body: '**RhoGAM 300 mcg IM within 72 hours** for sensitizing events at ≥12 weeks. [3]\n\n**Sensitizing events:**\n- Vaginal bleeding (any amount)\n- Placental abruption\n- Placenta previa with bleeding\n- Abdominal trauma\n- External cephalic version\n- Amniocentesis/CVS\n- Second-trimester loss/IUFD\n- Preterm labor\n\n**If >20 weeks:** Order Kleihauer-Betke to assess for large fetal-maternal hemorrhage requiring additional doses.\n\n[Kleihauer-Betke Dosing Guide](#/info/rhogam-kb-dosing)',
+    recommendation: 'RhoGAM 300 mcg IM within 72 hours. Order KB if >20 weeks to quantify hemorrhage.',
+    confidence: 'definitive',
+    citation: [3, 8],
+    calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose (may need additional based on KB)',
+        duration: 'Within 72 hours of event',
+        notes: 'Initial dose. Additional vials if KB indicates large FMH.',
+      },
+      monitoring: 'KB testing if >20 weeks. 300 mcg covers 30 mL fetal whole blood. Calculate additional doses if KB indicates larger hemorrhage.',
+    },
+  },
+
+  {
+    id: 'rhogam-postpartum',
+    type: 'result',
+    module: 4,
+    title: 'Postpartum RhoGAM',
+    body: '**RhoGAM 300 mcg IM within 72 hours of delivery** if newborn is Rh-positive. [3]\n\n**Postpartum protocol:**\n1. Cord blood: ABO/Rh typing of newborn\n2. If newborn Rh-positive: Give RhoGAM 300 mcg IM\n3. If newborn Rh-negative: No RhoGAM needed\n4. Order KB (rosette if available) to screen for large FMH\n\n**Even if 28-week dose given**, postpartum dose is still required.\n\n**Missed 72-hour window:** Give up to 28 days postpartum - still provides partial protection.',
+    recommendation: 'RhoGAM 300 mcg IM within 72 hours of delivery if newborn Rh-positive. Confirm cord blood Rh. Screen for large FMH.',
+    confidence: 'definitive',
+    citation: [3, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: '300 mcg (1500 IU)',
+        route: 'IM',
+        frequency: 'Single dose (additional if large FMH)',
+        duration: 'Within 72 hours of delivery (up to 28 days if missed)',
+        notes: 'Confirm newborn Rh status from cord blood before administration.',
+      },
+      monitoring: 'Rosette screen or KB to detect large FMH. If positive, quantitative KB to calculate additional doses needed.',
+    },
+  },
+
+  // =====================================================================
+  // MODULE 5: DOSING & ADMINISTRATION
+  // =====================================================================
+
+  {
+    id: 'rhogam-dosing',
+    type: 'info',
+    module: 5,
+    title: 'RhoGAM Dosing & Administration',
+    body: '**Standard Dosing:**\n\n| Product | Dose | Coverage | Use |\n|---------|------|----------|-----|\n| RhoGAM | 300 mcg (1500 IU) | 30 mL fetal blood | Standard - any GA |\n| MICRhoGAM | 50 mcg (250 IU) | 2.5 mL fetal blood | First trimester only |\n\n**300 mcg standard dose covers:**\n- Up to 30 mL of fetal whole blood\n- Up to 15 mL of fetal packed RBCs\n\n**Administration:**\n- Route: IM (deltoid or gluteal)\n- Timing: Within 72 hours of sensitizing event\n- Can give IV in emergent massive transfusion (off-label)\n\n**MICRhoGAM (50 mcg):**\n- Acceptable for first-trimester events if given\n- Not adequate after 12 weeks\n- Some institutions use standard 300 mcg for all',
+    citation: [3, 10],
+    calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
+    next: 'rhogam-special',
+  },
+
+  // =====================================================================
+  // MODULE 6: SPECIAL SCENARIOS
+  // =====================================================================
+
+  {
+    id: 'rhogam-special',
+    type: 'question',
+    module: 6,
+    title: 'Special Scenarios',
+    body: 'Select if any of these special clinical situations apply:',
+    citation: [3, 8],
+    options: [
+      {
+        label: 'Massive fetomaternal hemorrhage',
+        description: 'Large volume FMH requiring multiple doses',
+        next: 'rhogam-massive-fmh',
+        urgency: 'critical',
+      },
+      {
+        label: 'Kleihauer-Betke interpretation',
+        description: 'How to use KB to calculate dosing',
+        next: 'rhogam-kb-calc',
+      },
+      {
+        label: 'Weak D genotyping',
+        description: 'When and how to interpret',
+        next: 'rhogam-weak-d-detail',
+      },
+      {
+        label: 'Summary complete',
+        description: 'Return to overview',
+        next: 'rhogam-summary',
+      },
+    ],
+  },
+
+  {
+    id: 'rhogam-massive-fmh',
+    type: 'result',
+    module: 6,
+    title: 'Massive Fetomaternal Hemorrhage',
+    body: '**Large FMH (>30 mL fetal blood) requires additional RhoGAM doses.** [8]\n\n**Causes of massive FMH:**\n- Placental abruption\n- Abdominal trauma\n- Manual placenta removal\n- Intrauterine fetal demise\n- Multifetal gestation reduction\n\n**Detection:**\n- Rosette screen: Qualitative (positive/negative for large FMH)\n- Kleihauer-Betke: Quantitative (% fetal cells)\n- Flow cytometry: Most accurate\n\n**Dosing Calculation:**\n```\nFetal blood volume (mL) = (% fetal cells x maternal blood volume) / 100\nVials needed = fetal blood volume / 30 (round up, add 1 extra vial)\n```\n\n**Example:** 1% KB, 5000 mL maternal blood = 50 mL fetal blood = 2 vials + 1 = 3 vials (900 mcg)',
+    recommendation: 'For massive FMH: Calculate fetal blood volume from KB, divide by 30, round up, add 1 extra vial. Give within 72 hours.',
+    confidence: 'definitive',
+    citation: [3, 8],
+    calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Rh(D) Immune Globulin (RhoGAM)',
+        dose: 'Calculate from KB: (FMH volume / 30) + 1 vial',
+        route: 'IM (IV for very large doses)',
+        frequency: 'All vials within 72 hours',
+        duration: 'Single treatment episode',
+        notes: 'Max 5 vials (1500 mcg) IM at one site. For larger doses, divide sites or give IV.',
+      },
+      monitoring: 'Repeat KB at 24-48 hours if initial was very high to confirm clearance. Document total dose given.',
+    },
+  },
+
+  {
+    id: 'rhogam-kb-calc',
+    type: 'info',
+    module: 6,
+    title: 'Kleihauer-Betke Interpretation',
+    body: '**Kleihauer-Betke (KB) Test** quantifies fetal RBCs in maternal circulation. [8]\n\n**Indications for KB:**\n- Trauma at >20 weeks\n- Abruption\n- Postpartum (some institutions)\n- Any suspected large FMH\n\n**Calculation:**\n\n1. **% fetal cells** = fetal cells counted / total cells counted x 100\n\n2. **Fetal blood volume** = % fetal cells x maternal blood volume / 100\n   - Maternal blood volume ≈ 5000 mL (adjust for patient size)\n\n3. **Vials needed** = fetal blood volume / 30 mL, round UP, then add 1\n\n**Example:**\n- KB = 0.5% fetal cells\n- FMH = 0.5 x 5000 / 100 = 25 mL\n- Vials = 25/30 = 0.83 → round to 1 → add 1 = **2 vials (600 mcg)**\n\n[Kleihauer-Betke Dosing Guide](#/info/rhogam-kb-dosing)',
+    citation: [3, 8],
+    calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
+    next: 'rhogam-summary',
+  },
+
+  {
+    id: 'rhogam-weak-d-detail',
+    type: 'info',
+    module: 6,
+    title: 'Weak D Genotyping Details',
+    body: '**When to order RHD genotyping:** [5, 6]\n\n- Serologic Rh typing shows weak or discordant result\n- Patient reports conflicting Rh results from prior testing\n- Planning future pregnancies and want definitive answer\n\n**Genotype Results:**\n\n| Type | Gene | RhoGAM Needed? |\n|------|------|----------------|\n| Weak D types 1, 2, 3 | RHD present | NO |\n| Weak D type 4.0, 4.1 | Partial RHD | YES |\n| Partial D (any) | Partial RHD | YES |\n| DEL | Minimal expression | YES |\n| RHD negative | No RHD gene | YES |\n\n**AABB/ACOG recommendation:** Genotyping allows definitive determination and prevents unnecessary RhoGAM in weak D types 1-3 (most common).\n\n**If genotyping unavailable:** Treat as Rh-negative.',
+    citation: [5, 6],
+    next: 'rhogam-summary',
+  },
+
+  {
+    id: 'rhogam-summary',
+    type: 'result',
+    module: 6,
+    title: 'RhoGAM Guidelines Summary',
+    body: '**2024 ACOG Early Pregnancy RhoGAM Summary:**\n\n**<12 weeks - NO RhoGAM needed for:**\n- Threatened miscarriage\n- Spontaneous abortion (complete/incomplete)\n- Ectopic pregnancy\n- Medical or surgical management of above\n\n**<12 weeks - RhoGAM IS needed for:**\n- Molar pregnancy (any GA)\n- Invasive procedures (CVS, amnio)\n- Abdominal trauma\n- Heavy bleeding (clinical judgment)\n\n**≥12 weeks - Standard indications:**\n- 28-week prophylaxis\n- Any bleeding or sensitizing event\n- Trauma\n- Postpartum if newborn Rh-positive\n\n**Key points:**\n- 300 mcg standard dose (50 mcg acceptable <12 weeks)\n- Give within 72 hours\n- KB testing if >20 weeks trauma/abruption\n\n[2024 vs Prior Practice Comparison](#/info/rhogam-practice-change)',
+    recommendation: 'Follow 2024 ACOG guidance: No routine RhoGAM <12 weeks for SAB, threatened SAB, or ectopic. Standard indications apply ≥12 weeks.',
+    confidence: 'definitive',
+    citation: [1, 2, 3],
+    calculatorLinks: [{ id: 'rhogam-decision', label: 'RhoGAM Decision Tool' }],
+  },
+
+];
+
+export const RHOGAM_EARLY_PREGNANCY_MODULE_LABELS = [
+  'Rh Status Assessment',
+  'First Trimester (<12 wk)',
+  'Exceptions Requiring RhoGAM',
+  'Second/Third Trimester',
+  'Dosing & Administration',
+  'Special Scenarios',
+];
+
+export const RHOGAM_EARLY_PREGNANCY_CITATIONS: Citation[] = [
+  { num: 1, text: 'ACOG Practice Advisory. Prevention of Rh D Alloimmunization: Updated Guidance. American College of Obstetricians and Gynecologists. 2024.' },
+  { num: 2, text: 'Karanth L, Jaafar SH, Engeland A, et al. Anti-D administration after spontaneous miscarriage for preventing Rh alloimmunisation. Cochrane Database Syst Rev. 2020;3(3):CD009617.' },
+  { num: 3, text: 'ACOG Practice Bulletin No. 181: Prevention of Rh D Alloimmunization. Obstet Gynecol. 2017;130(2):e57-e70.' },
+  { num: 4, text: 'Mari G, Deter RL, Carpenter RL, et al. Noninvasive diagnosis by Doppler ultrasonography of fetal anemia due to maternal red-cell alloimmunization. N Engl J Med. 2000;342(1):9-14.' },
+  { num: 5, text: 'Sandler SG, Flegel WA, Westhoff CM, et al. It\'s time to phase in RHD genotyping for patients with a serologic weak D phenotype. Transfusion. 2015;55(3):680-689.' },
+  { num: 6, text: 'AABB Technical Manual. 20th ed. Bethesda, MD: AABB; 2020. Chapter 15: The Rh Blood Group System.' },
+  { num: 7, text: 'Hannafin B, Lovecchio F, Blackburn P. Do Rh-negative women with first trimester spontaneous abortions need Rh immune globulin? Am J Emerg Med. 2006;24(4):487-489.' },
+  { num: 8, text: 'Fung KFK, Eason E. No. 133-Prevention of Rh Alloimmunization. J Obstet Gynaecol Can. 2018;40(1):e1-e10.' },
+  { num: 9, text: 'Bowman JM, Chown B, Lewis M, Pollock JM. Rh isoimmunization during pregnancy: antenatal prophylaxis. Can Med Assoc J. 1978;118(6):623-627.' },
+  { num: 10, text: 'RhoGAM [package insert]. Kedrion Biopharma Inc. 2023.' },
+];
+
+export const RHOGAM_EARLY_PREGNANCY_NODE_COUNT = RHOGAM_EARLY_PREGNANCY_NODES.length;

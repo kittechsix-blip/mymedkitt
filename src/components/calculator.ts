@@ -19089,6 +19089,187 @@ const MED_RETENTION_REFERENCE: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// RhoGAM Early Pregnancy Calculators
+// -------------------------------------------------------------------
+
+const RHOGAM_DECISION_CALCULATOR: CalculatorDefinition = {
+  id: 'rhogam-decision',
+  title: 'RhoGAM Decision Tool',
+  subtitle: '2024 ACOG Guidelines',
+  description: 'Determine if RhoGAM is indicated based on gestational age and clinical scenario. Reflects 2024 ACOG Practice Advisory major practice change.',
+  fields: [
+    { name: 'rh-status', label: 'Patient Rh Status', type: 'select', points: 0, selectOptions: [
+      { label: 'Rh Negative', points: 1 },
+      { label: 'Rh Positive', points: 0 },
+      { label: 'Unknown', points: 2 },
+    ]},
+    { name: 'ga', label: 'Gestational Age', type: 'select', points: 0, selectOptions: [
+      { label: '< 12 weeks', points: 1 },
+      { label: '12-20 weeks', points: 2 },
+      { label: '> 20 weeks', points: 3 },
+    ]},
+    { name: 'scenario', label: 'Clinical Scenario', type: 'select', points: 0, selectOptions: [
+      { label: 'Threatened miscarriage (bleeding, closed os)', points: 1 },
+      { label: 'Completed/incomplete SAB', points: 2 },
+      { label: 'Ectopic pregnancy', points: 3 },
+      { label: 'Molar pregnancy', points: 10 },
+      { label: 'Invasive procedure (CVS, amnio, cordocentesis)', points: 10 },
+      { label: 'Abdominal trauma', points: 10 },
+      { label: 'Routine 28-week prophylaxis', points: 5 },
+      { label: 'Postpartum (Rh+ newborn)', points: 5 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: '2024 ACOG: RhoGAM NOT routinely indicated <12 weeks for threatened SAB, completed SAB, or ectopic. Still indicated for molar pregnancy, procedures, and trauma at any GA.',
+  citations: ['ACOG Practice Advisory. Prevention of Rh D Alloimmunization. December 2024.'],
+  computeResult: (values) => {
+    const rhStatus = values['rh-status'] || 0;
+    const ga = values['ga'] || 1;
+    const scenario = values['scenario'] || 1;
+
+    // Rh positive = no RhoGAM needed
+    if (rhStatus === 0) {
+      return { value: 'NOT Indicated', label: 'Rh Positive Patient', description: 'RhoGAM is not indicated for Rh-positive patients.', colorVar: '--color-decision-active' };
+    }
+
+    // High-risk scenarios always need RhoGAM (molar, procedures, trauma)
+    if (scenario >= 10) {
+      return { value: 'INDICATED', label: 'RhoGAM Required', description: `**RhoGAM indicated regardless of gestational age.**\n\nScenario: ${scenario === 10 ? 'Molar pregnancy / Invasive procedure / Abdominal trauma' : ''}\n\n**Dose:** 300 mcg IM (or 50 mcg MICRhoGAM if <12 weeks and low-risk for large FMH)\n\n**Timing:** Within 72 hours of event`, colorVar: '--color-danger' };
+    }
+
+    // <12 weeks: 2024 ACOG change
+    if (ga === 1 && scenario <= 3) {
+      return { value: 'NOT Indicated', label: '2024 ACOG Change', description: `**RhoGAM NOT routinely indicated <12 weeks** for:\n• Threatened miscarriage\n• Completed/incomplete SAB\n• Ectopic pregnancy\n\n**Why the change?**\nFetomaternal hemorrhage volume <12 weeks is too small to cause sensitization in most cases. Risk of sensitization is <0.1%.\n\n**Exceptions (still give RhoGAM):**\n• Molar pregnancy (any GA)\n• Invasive procedures\n• Significant abdominal trauma`, colorVar: '--color-decision-active' };
+    }
+
+    // ≥12 weeks: standard indications
+    if (ga >= 2) {
+      return { value: 'INDICATED', label: 'RhoGAM Required', description: `**RhoGAM indicated at ≥12 weeks** for this scenario.\n\n**Dose:** 300 mcg IM\n\n**Timing:** Within 72 hours of sensitizing event\n\n**Also ensure:**\n• 28-week routine prophylaxis\n• Postpartum dose if newborn is Rh-positive`, colorVar: '--color-danger' };
+    }
+
+    return { value: 'Check Rh Status', label: 'Unknown Rh', description: 'Determine Rh status before deciding on RhoGAM. If Rh-negative, re-evaluate based on GA and scenario.', colorVar: '--color-warning' };
+  },
+};
+
+const KB_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'kb-dosing',
+  title: 'Kleihauer-Betke Dosing',
+  subtitle: 'RhoGAM for Massive FMH',
+  description: 'Calculate additional RhoGAM vials needed for massive fetomaternal hemorrhage based on Kleihauer-Betke result.',
+  fields: [
+    { name: 'kb-percent', label: 'KB Result (%)', type: 'number', points: 0, valueIsPoints: true, unit: '%', description: 'Percentage of fetal cells on KB smear' },
+    { name: 'maternal-blood-vol', label: 'Maternal Blood Volume (mL)', type: 'number', points: 0, valueIsPoints: true, unit: 'mL', description: 'Estimate ~5000 mL for average adult' },
+  ],
+  results: [],
+  thresholdNote: 'One 300 mcg RhoGAM vial covers 30 mL fetal whole blood (15 mL fetal RBCs). Round up and add 1 vial for safety.',
+  citations: ['AABB Technical Manual, 20th Edition. 2020.'],
+  computeResult: (values) => {
+    const kbPercent = values['kb-percent'] || 0;
+    const maternalVol = values['maternal-blood-vol'] || 5000;
+
+    if (kbPercent === 0) {
+      return { value: '1 vial', label: 'Standard Dose', description: 'KB negative or not performed. Give standard 300 mcg (1 vial) for routine indications.', colorVar: '--color-primary' };
+    }
+
+    // FMH (mL) = KB% × Maternal Blood Volume
+    const fmhVolume = (kbPercent / 100) * maternalVol;
+    // Vials needed = FMH / 30, round up, add 1
+    const vialsRaw = fmhVolume / 30;
+    const vialsNeeded = Math.ceil(vialsRaw) + 1;
+
+    return {
+      value: `${vialsNeeded} vials`,
+      label: 'Massive FMH',
+      description: `**Calculation:**\n• FMH Volume = ${kbPercent}% × ${maternalVol} mL = **${fmhVolume.toFixed(0)} mL**\n• Vials = ${fmhVolume.toFixed(0)} ÷ 30 = ${vialsRaw.toFixed(1)} → round up + 1 = **${vialsNeeded} vials**\n\n**Total RhoGAM:** ${vialsNeeded} × 300 mcg = **${vialsNeeded * 300} mcg**\n\n**Administration:**\n• Can give multiple vials IM at different sites\n• Or give IV RhoGAM if available (WinRho)\n• Repeat KB at 24 hours to confirm clearance`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// OHSS Calculators
+// -------------------------------------------------------------------
+
+const OHSS_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'ohss-severity',
+  title: 'OHSS Severity Classification',
+  subtitle: 'Golan Classification',
+  description: 'Classify ovarian hyperstimulation syndrome severity to guide management and disposition.',
+  fields: [
+    { name: 'abdominal', label: 'Abdominal distension/discomfort', type: 'select', points: 0, selectOptions: [
+      { label: 'None/minimal', points: 0 },
+      { label: 'Moderate (bloating, pants tight)', points: 1 },
+      { label: 'Severe (tense ascites)', points: 3 },
+    ]},
+    { name: 'ovary-size', label: 'Ovarian size (if known)', type: 'select', points: 0, selectOptions: [
+      { label: '< 8 cm', points: 0 },
+      { label: '8-12 cm', points: 1 },
+      { label: '> 12 cm', points: 2 },
+    ]},
+    { name: 'ascites', label: 'Ascites on ultrasound', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Mild (small pockets)', points: 1 },
+      { label: 'Moderate-severe (visible on exam)', points: 3 },
+    ]},
+    { name: 'hematocrit', label: 'Hematocrit', type: 'select', points: 0, selectOptions: [
+      { label: '< 41%', points: 0 },
+      { label: '41-45%', points: 2 },
+      { label: '> 45%', points: 4 },
+    ]},
+    { name: 'wbc', label: 'WBC', type: 'select', points: 0, selectOptions: [
+      { label: '< 15,000', points: 0 },
+      { label: '15,000-25,000', points: 1 },
+      { label: '> 25,000', points: 2 },
+    ]},
+    { name: 'creatinine', label: 'Creatinine', type: 'select', points: 0, selectOptions: [
+      { label: '< 1.0 mg/dL', points: 0 },
+      { label: '1.0-1.5 mg/dL', points: 2 },
+      { label: '> 1.5 mg/dL', points: 4 },
+    ]},
+    { name: 'respiratory', label: 'Respiratory symptoms', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Mild dyspnea', points: 2 },
+      { label: 'Pleural effusion / ARDS', points: 5 },
+    ]},
+    { name: 'vte', label: 'VTE present', type: 'toggle', points: 10, description: 'DVT, PE, arterial thrombosis, or stroke' },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Mild OHSS', risk: 'Outpatient', mortality: 'Supportive care, close follow-up', colorVar: '--color-decision-active' },
+    { min: 3, max: 8, label: 'Moderate OHSS', risk: 'Consider admission', mortality: 'IV fluids, monitoring, VTE prophylaxis', colorVar: '--color-warning' },
+    { min: 8, max: 15, label: 'Severe OHSS', risk: 'Admit', mortality: 'Hemoconcentration, renal compromise', colorVar: '--color-danger' },
+    { min: 15, max: Infinity, label: 'Critical OHSS', risk: 'ICU', mortality: 'VTE, ARDS, multi-organ failure', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Hct > 45% is a marker of severe disease. VTE can be arterial OR venous. Avoid NSAIDs (renal risk) and diuretics (worsen hemoconcentration).',
+  citations: ['Humaidan P, et al. Classification of OHSS. Hum Reprod Update. 2016;22(6):682-698.'],
+};
+
+const OHSS_ADMISSION_CALCULATOR: CalculatorDefinition = {
+  id: 'ohss-admission',
+  title: 'OHSS Admission Criteria',
+  subtitle: 'Inpatient vs Outpatient',
+  description: 'Checklist to determine if OHSS patient requires inpatient admission.',
+  fields: [
+    { name: 'hct45', label: 'Hematocrit > 45%', type: 'toggle', points: 3 },
+    { name: 'oliguria', label: 'Oliguria (< 30 mL/hr or < 500 mL/day)', type: 'toggle', points: 3 },
+    { name: 'cr-elevated', label: 'Creatinine > 1.2 mg/dL', type: 'toggle', points: 3 },
+    { name: 'severe-pain', label: 'Severe pain not controlled with PO meds', type: 'toggle', points: 2 },
+    { name: 'intractable-nv', label: 'Intractable nausea/vomiting', type: 'toggle', points: 2 },
+    { name: 'dyspnea', label: 'Dyspnea or pleural effusion', type: 'toggle', points: 3 },
+    { name: 'tense-ascites', label: 'Tense ascites requiring paracentesis', type: 'toggle', points: 2 },
+    { name: 'vte-symptoms', label: 'Symptoms concerning for VTE', type: 'toggle', points: 5 },
+    { name: 'electrolyte', label: 'Significant electrolyte abnormalities', type: 'toggle', points: 2 },
+    { name: 'no-followup', label: 'Unable to ensure close outpatient follow-up', type: 'toggle', points: 2 },
+  ],
+  results: [
+    { min: -Infinity, max: 3, label: 'Outpatient', risk: 'Low risk', mortality: 'Discharge with close REI follow-up in 24-48h', colorVar: '--color-decision-active' },
+    { min: 3, max: 6, label: 'Consider Admission', risk: 'Moderate risk', mortality: 'Observation vs 23-hour admit vs floor', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'Admit', risk: 'High risk', mortality: 'Inpatient management required', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Always consult REI. VTE prophylaxis for ALL admitted patients. Avoid diuretics and NSAIDs.',
+  citations: ['ASRM Practice Committee. Prevention and treatment of moderate and severe OHSS. Fertil Steril. 2023.'],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -19392,6 +19573,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cauda-equina-checklist': CAUDA_EQUINA_CHECKLIST_CALCULATOR,
   'catheter-sizing': CATHETER_SIZING_GUIDE,
   'med-retention-reference': MED_RETENTION_REFERENCE,
+  // RhoGAM Early Pregnancy
+  'rhogam-decision': RHOGAM_DECISION_CALCULATOR,
+  'kb-dosing': KB_DOSING_CALCULATOR,
+  // OHSS
+  'ohss-severity': OHSS_SEVERITY_CALCULATOR,
+  'ohss-admission': OHSS_ADMISSION_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
