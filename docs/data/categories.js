@@ -1547,7 +1547,7 @@ export const CATEGORY_COLORS = {
     'neurology': { card: '#00695C', iconBg: '#00695C' },
     'ob-gyn': { card: '#880E4F', iconBg: '#880E4F' },
     'ophthalmology': { card: '#00838F', iconBg: '#00838F' },
-    'orthopedics': { card: '#E8E0D4', iconBg: '#E8E0D4', textColor: '#1A1A1A' },
+    'orthopedics': { card: '#1A1A1A', iconBg: '#1A1A1A' },
     'pediatrics': { card: '#1B5E20', iconBg: '#1B5E20' },
     'procedures': { card: '#283593', iconBg: '#283593' },
     'toxicology': { card: '#9E9D24', iconBg: '#9E9D24', textColor: '#1A1A2E' },
