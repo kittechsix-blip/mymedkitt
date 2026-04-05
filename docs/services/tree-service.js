@@ -625,6 +625,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/rhogam-early-pregnancy.js');
             return { nodes: m.RHOGAM_EARLY_PREGNANCY_NODES, entryNodeId: 'rhogam-start', categoryId: 'ob-gyn', moduleLabels: m.RHOGAM_EARLY_PREGNANCY_MODULE_LABELS, citations: m.RHOGAM_EARLY_PREGNANCY_CITATIONS };
         },
+        'sti-comprehensive': async () => {
+            const m = await import('../data/trees/sti-comprehensive.js');
+            return { nodes: m.STI_COMPREHENSIVE_NODES, entryNodeId: 'sti-start', categoryId: 'infectious-disease', moduleLabels: m.STI_COMPREHENSIVE_MODULE_LABELS, citations: m.STI_COMPREHENSIVE_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

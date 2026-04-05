@@ -19270,6 +19270,354 @@ const OHSS_ADMISSION_CALCULATOR: CalculatorDefinition = {
   citations: ['ASRM Practice Committee. Prevention and treatment of moderate and severe OHSS. Fertil Steril. 2023.'],
 };
 
+// -------------------------------------------------------------------
+// STI Comprehensive Calculators
+// -------------------------------------------------------------------
+
+const STI_SYNDROMIC_RX_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-syndromic-rx',
+  title: 'Syndromic STI Treatment',
+  subtitle: 'CDC 2021 Guidelines',
+  description: 'Select presentation and patient factors to get the appropriate empiric STI treatment regimen.',
+  fields: [
+    { name: 'syndrome', label: 'Presenting Syndrome', type: 'select', points: 0, selectOptions: [
+      { label: 'Urethritis (discharge, dysuria)', points: 1 },
+      { label: 'Cervicitis', points: 2 },
+      { label: 'PID (pelvic pain, cervical motion tenderness)', points: 3 },
+      { label: 'Epididymitis/Orchitis', points: 4 },
+      { label: 'Proctitis (MSM)', points: 5 },
+      { label: 'Genital ulcer - painful (HSV likely)', points: 6 },
+      { label: 'Genital ulcer - painless (syphilis likely)', points: 7 },
+      { label: 'Pharyngeal exposure', points: 8 },
+    ]},
+    { name: 'pregnant', label: 'Pregnant', type: 'toggle', points: 100 },
+    { name: 'severe-pcn-allergy', label: 'Severe PCN allergy (anaphylaxis)', type: 'toggle', points: 50 },
+    { name: 'ceftriaxone-allergy', label: 'Ceftriaxone allergy', type: 'toggle', points: 25 },
+  ],
+  results: [],
+  thresholdNote: 'Azithromycin NO LONGER co-treatment for GC (2021). Ceftriaxone monotherapy is standard. Doxycycline contraindicated in pregnancy.',
+  citations: ['CDC STI Treatment Guidelines. 2021.'],
+  computeResult: (values) => {
+    const syndrome = values['syndrome'] || 1;
+    const pregnant = values['pregnant'] || 0;
+    const ceftriaxoneAllergy = values['ceftriaxone-allergy'] || 0;
+
+    let rx = '', notes = '';
+
+    // Urethritis/Cervicitis
+    if (syndrome === 1 || syndrome === 2) {
+      if (pregnant) {
+        rx = '**Ceftriaxone 500mg IM × 1** + **Azithromycin 1g PO × 1**';
+        notes = 'Doxycycline contraindicated in pregnancy. Use azithromycin for chlamydia coverage.';
+      } else if (ceftriaxoneAllergy) {
+        rx = '**Gentamicin 240mg IM × 1** + **Azithromycin 2g PO × 1**';
+        notes = 'Alternative for cephalosporin allergy. Test of cure in 7-14 days required.';
+      } else {
+        rx = '**Ceftriaxone 500mg IM × 1** + **Doxycycline 100mg PO BID × 7 days**';
+        notes = 'Standard dual therapy for GC/CT. Azithromycin 1g × 1 is alternative to doxy if compliance concern.';
+      }
+    }
+    // PID
+    else if (syndrome === 3) {
+      if (pregnant) {
+        rx = '**ADMIT - IV therapy required in pregnancy**\nCefotetan 2g IV q12h + Doxycycline 100mg IV/PO q12h';
+        notes = 'Pregnant patients with PID should be hospitalized. Doxy can be given PO.';
+      } else {
+        rx = '**Outpatient:** Ceftriaxone 500mg IM × 1 + Doxycycline 100mg PO BID × 14d + Metronidazole 500mg PO BID × 14d\n\n**Inpatient:** Cefotetan 2g IV q12h (or Cefoxitin 2g IV q6h) + Doxy 100mg IV/PO q12h';
+        notes = 'Admit if: surgical emergency, pregnant, no response to PO, cannot tolerate PO, tubo-ovarian abscess.';
+      }
+    }
+    // Epididymitis
+    else if (syndrome === 4) {
+      rx = pregnant ? 'N/A - male syndrome' : '**Age <35 (likely STI):** Ceftriaxone 500mg IM × 1 + Doxycycline 100mg PO BID × 10d\n\n**Age ≥35 or insertive anal sex:** Ceftriaxone 500mg IM × 1 + Levofloxacin 500mg PO daily × 10d';
+      notes = 'Younger patients: GC/CT likely. Older or enteric exposure: add gram-negative coverage.';
+    }
+    // Proctitis
+    else if (syndrome === 5) {
+      rx = '**Ceftriaxone 500mg IM × 1** + **Doxycycline 100mg PO BID × 7d**\n\n**If LGV suspected (severe, ulcerative):** Extend doxycycline to 21 days';
+      notes = 'MSM proctitis: test for GC, CT (including LGV), HSV, syphilis. Consider mpox if vesicular lesions.';
+    }
+    // HSV (painful ulcer)
+    else if (syndrome === 6) {
+      rx = '**Primary HSV:** Valacyclovir 1g PO BID × 7-10d\n\n**Recurrent:** Valacyclovir 500mg PO BID × 3d (or 1g daily × 5d)\n\n**Suppressive (≥6 outbreaks/yr):** Valacyclovir 500mg-1g PO daily';
+      notes = 'Acyclovir and famciclovir are alternatives. Safe in pregnancy.';
+    }
+    // Syphilis (painless ulcer)
+    else if (syndrome === 7) {
+      if (pregnant) {
+        rx = '**Benzathine PCN G 2.4 million units IM × 1** (primary/secondary)\n\n**Late latent/unknown duration:** 2.4 MU IM weekly × 3 doses';
+        notes = 'PENICILLIN IS ONLY ACCEPTABLE TREATMENT IN PREGNANCY. If PCN allergic: desensitize.';
+      } else {
+        rx = '**Primary/Secondary/Early Latent (<1yr):** Benzathine PCN G 2.4 MU IM × 1\n\n**Late Latent/Unknown:** 2.4 MU IM weekly × 3 weeks\n\n**PCN allergy (non-pregnant):** Doxycycline 100mg PO BID × 14d (early) or 28d (late)';
+        notes = 'Confirm with serology. Jarisch-Herxheimer reaction may occur in first 24h.';
+      }
+    }
+    // Pharyngeal
+    else if (syndrome === 8) {
+      rx = '**Ceftriaxone 500mg IM × 1**\n\nIf chlamydia co-infection: add Doxycycline 100mg PO BID × 7d';
+      notes = 'Pharyngeal GC harder to treat. Test of cure in 7-14 days recommended. CT pharyngeal rare.';
+    }
+
+    return { value: 'See Regimen', label: getSyndromeName(syndrome), description: `**Treatment:**\n${rx}\n\n**Notes:** ${notes}`, colorVar: '--color-primary' };
+  },
+};
+
+function getSyndromeName(s: number): string {
+  const names: Record<number, string> = { 1: 'Urethritis', 2: 'Cervicitis', 3: 'PID', 4: 'Epididymitis', 5: 'Proctitis', 6: 'HSV Ulcer', 7: 'Syphilis Ulcer', 8: 'Pharyngeal' };
+  return names[s] || 'Unknown';
+}
+
+const STI_CDC_REGIMENS_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-cdc-regimens',
+  title: 'CDC STI Regimens',
+  subtitle: 'Quick Reference 2021',
+  description: 'Quick reference for CDC-recommended STI treatment regimens. Select pathogen for first-line and alternative treatments.',
+  fields: [
+    { name: 'pathogen', label: 'Pathogen/Condition', type: 'select', points: 0, selectOptions: [
+      { label: 'Gonorrhea (uncomplicated)', points: 1 },
+      { label: 'Chlamydia', points: 2 },
+      { label: 'Trichomonas', points: 3 },
+      { label: 'Bacterial Vaginosis', points: 4 },
+      { label: 'HSV (Genital)', points: 5 },
+      { label: 'Syphilis (Primary/Secondary)', points: 6 },
+      { label: 'Syphilis (Late Latent)', points: 7 },
+      { label: 'Mycoplasma genitalium', points: 8 },
+      { label: 'Chancroid', points: 9 },
+      { label: 'LGV', points: 10 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'CDC guidelines updated 2021. DoxyPEP added 2024 for MSM/TGW.',
+  citations: ['CDC STI Treatment Guidelines. 2021.'],
+  computeResult: (values) => {
+    const p = values['pathogen'] || 1;
+    const regimens: Record<number, { first: string; alt: string; notes: string }> = {
+      1: { first: 'Ceftriaxone 500mg IM × 1 (if ≥150kg: 1g)', alt: 'Gentamicin 240mg IM + Azithromycin 2g PO (cephalosporin allergy)', notes: 'Azithromycin no longer added routinely. Weight-based dosing ≥150kg.' },
+      2: { first: 'Doxycycline 100mg PO BID × 7d', alt: 'Azithromycin 1g PO × 1', notes: 'Doxy preferred for better efficacy. Azithromycin if pregnancy or compliance concern.' },
+      3: { first: 'Metronidazole 500mg PO BID × 7d', alt: 'Metronidazole 2g PO × 1 (single dose) or Tinidazole 2g PO × 1', notes: 'Alcohol restriction during metronidazole is NOT evidence-based. Treat partners.' },
+      4: { first: 'Metronidazole 500mg PO BID × 7d', alt: 'Metronidazole gel 0.75% intravaginally daily × 5d or Clindamycin cream 2% intravaginally QHS × 7d', notes: 'Partner treatment traditionally not recommended but 2025 RCT shows benefit (reduces recurrence 35% vs 63%).' },
+      5: { first: 'Valacyclovir 1g PO BID × 7-10d (primary) or × 3d (recurrent)', alt: 'Acyclovir 400mg PO TID × 7-10d or Famciclovir 250mg PO TID × 7-10d', notes: 'All antivirals equivalent efficacy. Safe in pregnancy.' },
+      6: { first: 'Benzathine PCN G 2.4 million units IM × 1', alt: 'Doxycycline 100mg PO BID × 14d (non-pregnant only)', notes: 'PCN is ONLY option in pregnancy. Jarisch-Herxheimer reaction common.' },
+      7: { first: 'Benzathine PCN G 2.4 million units IM weekly × 3 doses', alt: 'Doxycycline 100mg PO BID × 28d (non-pregnant only)', notes: 'Late latent = >1 year or unknown duration. Requires 3 weekly injections.' },
+      8: { first: 'Doxycycline 100mg PO BID × 7d, then Moxifloxacin 400mg PO daily × 7d if persistent', alt: 'Azithromycin 1g × 1, then 500mg daily × 3d (resistance emerging)', notes: 'Macrolide resistance increasing. Test of cure at 21 days recommended.' },
+      9: { first: 'Azithromycin 1g PO × 1', alt: 'Ceftriaxone 250mg IM × 1 or Ciprofloxacin 500mg PO BID × 3d', notes: 'Rare in US. Painful ulcer with inguinal adenopathy. H. ducreyi.' },
+      10: { first: 'Doxycycline 100mg PO BID × 21 days', alt: 'Erythromycin 500mg PO QID × 21d or Azithromycin 1g weekly × 3 weeks', notes: 'LGV = Chlamydia serovars L1-L3. Causes severe proctitis in MSM. Extended treatment required.' },
+    };
+    const r = regimens[p];
+    return { value: 'Regimen', label: getPathogenName(p), description: `**First-Line:**\n${r.first}\n\n**Alternative:**\n${r.alt}\n\n**Notes:** ${r.notes}`, colorVar: '--color-primary' };
+  },
+};
+
+function getPathogenName(p: number): string {
+  const names: Record<number, string> = { 1: 'Gonorrhea', 2: 'Chlamydia', 3: 'Trichomonas', 4: 'BV', 5: 'HSV', 6: 'Syphilis (Early)', 7: 'Syphilis (Late)', 8: 'M. genitalium', 9: 'Chancroid', 10: 'LGV' };
+  return names[p] || 'Unknown';
+}
+
+const STI_EPT_GENERATOR_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-ept-generator',
+  title: 'EPT Prescription Generator',
+  subtitle: 'Expedited Partner Therapy',
+  description: 'Generate expedited partner therapy prescriptions. Legal in 47 states + DC (not KS, SD as of 2024).',
+  fields: [
+    { name: 'state', label: 'State (for legal check)', type: 'select', points: 0, selectOptions: [
+      { label: 'Most states (EPT permitted)', points: 1 },
+      { label: 'Kansas', points: 0 },
+      { label: 'South Dakota', points: 0 },
+    ]},
+    { name: 'infection', label: 'Infection to treat', type: 'select', points: 0, selectOptions: [
+      { label: 'Chlamydia', points: 1 },
+      { label: 'Gonorrhea + Chlamydia', points: 2 },
+      { label: 'Trichomonas', points: 3 },
+    ]},
+    { name: 'partner-pregnant', label: 'Partner may be pregnant', type: 'toggle', points: 10 },
+  ],
+  results: [],
+  thresholdNote: 'EPT is NOT recommended for MSM (risk of undiagnosed HIV, syphilis, LGV). Partners should be evaluated.',
+  citations: ['CDC EPT Legal Status. 2024. cdc.gov/sti/php/ept-legal-status'],
+  computeResult: (values) => {
+    const state = values['state'] || 1;
+    const infection = values['infection'] || 1;
+    const partnerPregnant = values['partner-pregnant'] || 0;
+
+    if (state === 0) {
+      return { value: 'NOT LEGAL', label: 'EPT Prohibited', description: 'EPT is **not permitted** in Kansas and South Dakota. Partner must be evaluated in person.', colorVar: '--color-danger' };
+    }
+
+    let rx = '', label = '';
+    if (infection === 1) {
+      label = 'Chlamydia EPT';
+      rx = partnerPregnant ? '**Azithromycin 1g PO × 1**\n\n(Doxycycline contraindicated if pregnant)' : '**Doxycycline 100mg PO BID × 7 days** (preferred)\n\nOR Azithromycin 1g PO × 1';
+    } else if (infection === 2) {
+      label = 'GC + CT EPT';
+      rx = partnerPregnant ? '**Ceftriaxone 500mg IM × 1** (partner must come in for injection)\n+ **Azithromycin 1g PO × 1**' : '**Cefixime 800mg PO × 1** + **Doxycycline 100mg PO BID × 7d**\n\n(Oral cefixime is alternative when IM injection not possible)';
+    } else if (infection === 3) {
+      label = 'Trichomonas EPT';
+      rx = '**Metronidazole 2g PO × 1** (single dose)\n\nOR Metronidazole 500mg PO BID × 7d';
+    }
+
+    return { value: 'Generate Rx', label, description: `**EPT Prescription:**\n${rx}\n\n**Include with prescription:**\n• Written information about the infection\n• Advice to seek evaluation if symptoms develop\n• Warning about allergic reactions\n• Abstain from sex for 7 days after treatment\n\n**Document:** Note that EPT was provided for partner in patient's chart.`, colorVar: '--color-primary' };
+  },
+};
+
+const STI_SYPHILIS_STAGING_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-syphilis-staging',
+  title: 'Syphilis Staging',
+  subtitle: 'Serology Interpreter',
+  description: 'Interpret syphilis serology (RPR/VDRL + treponemal tests) and determine stage.',
+  fields: [
+    { name: 'rpr', label: 'RPR or VDRL', type: 'select', points: 0, selectOptions: [
+      { label: 'Non-reactive', points: 0 },
+      { label: 'Reactive (any titer)', points: 1 },
+    ]},
+    { name: 'treponemal', label: 'Treponemal test (TP-PA, FTA-ABS, EIA)', type: 'select', points: 0, selectOptions: [
+      { label: 'Non-reactive', points: 0 },
+      { label: 'Reactive', points: 1 },
+    ]},
+    { name: 'prior-syphilis', label: 'History of prior syphilis treatment', type: 'toggle', points: 0 },
+    { name: 'symptoms', label: 'Current symptoms', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Painless genital ulcer (chancre)', points: 1 },
+      { label: 'Rash (palms/soles), condyloma lata, mucous patches', points: 2 },
+      { label: 'Neurologic symptoms (headache, vision, hearing)', points: 3 },
+      { label: 'Cardiovascular (aortitis)', points: 4 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Treponemal tests remain positive for life after infection. RPR/VDRL titers correlate with disease activity.',
+  citations: ['CDC STI Treatment Guidelines. 2021.', 'Workowski KA, Bachmann LH. MMWR Recomm Rep. 2021.'],
+  computeResult: (values) => {
+    const rpr = values['rpr'] || 0;
+    const treponemal = values['treponemal'] || 0;
+    const prior = values['prior-syphilis'] || 0;
+    const symptoms = values['symptoms'] || 0;
+
+    // Both negative
+    if (rpr === 0 && treponemal === 0) {
+      return { value: 'Negative', label: 'No Syphilis', description: 'Both nontreponemal and treponemal tests negative.\n\n**Interpretation:** No current or past syphilis infection.\n\n**Caveat:** Very early primary syphilis may have negative serology. If high suspicion with ulcer, retest in 2-4 weeks.', colorVar: '--color-decision-active' };
+    }
+
+    // RPR positive, treponemal negative = likely false positive
+    if (rpr === 1 && treponemal === 0) {
+      return { value: 'False Positive', label: 'Likely False Positive RPR', description: '**RPR+, Treponemal−**\n\nLikely biological false positive. Common causes:\n• Pregnancy\n• Autoimmune disease (SLE)\n• IV drug use\n• Acute infections (EBV, hepatitis)\n• Advanced age\n\n**Action:** No syphilis treatment needed. Investigate underlying cause.', colorVar: '--color-warning' };
+    }
+
+    // Both positive
+    if (rpr === 1 && treponemal === 1) {
+      if (symptoms === 1) {
+        return { value: 'PRIMARY', label: 'Primary Syphilis', description: '**RPR+, Treponemal+, Chancre present**\n\n**Stage:** Primary syphilis\n\n**Treatment:** Benzathine PCN G 2.4 million units IM × 1\n\n**Partner notification:** Partners in past 90 days\n\n**Follow-up:** RPR at 6 and 12 months (expect 4-fold decline)', colorVar: '--color-danger' };
+      } else if (symptoms === 2) {
+        return { value: 'SECONDARY', label: 'Secondary Syphilis', description: '**RPR+, Treponemal+, Rash/mucocutaneous lesions**\n\n**Stage:** Secondary syphilis\n\n**Treatment:** Benzathine PCN G 2.4 million units IM × 1\n\n**Partner notification:** Partners in past 6 months\n\n**Follow-up:** RPR at 6 and 12 months\n\n**Jarisch-Herxheimer:** Warn patient about fever/malaise in first 24h', colorVar: '--color-danger' };
+      } else if (symptoms === 3) {
+        return { value: 'NEURO', label: 'Neurosyphilis', description: '**RPR+, Treponemal+, Neurologic symptoms**\n\n**Stage:** Neurosyphilis (any stage can have neuro involvement)\n\n**Workup:** Lumbar puncture (CSF VDRL, protein, WBC)\n\n**Treatment:** Aqueous PCN G 18-24 million units/day IV × 10-14 days\n\n**Alternative:** Procaine PCN 2.4 MU IM daily + Probenecid 500mg PO QID × 10-14d\n\n**Follow-up:** CSF exam q6 months until normal', colorVar: '--color-danger' };
+      } else if (prior) {
+        return { value: 'REINFECTION?', label: 'Prior Treated - Check Titer', description: '**RPR+, Treponemal+, Prior treatment history**\n\n**Interpretation:** Could be:\n1. Reinfection (4-fold rise in titer)\n2. Serofast state (persistent low titer after adequate treatment)\n3. Treatment failure\n\n**Action:** Compare current RPR titer to prior. 4-fold rise = reinfection, treat again.\n\n**Serofast:** Low stable titer (usually ≤1:8) without 4-fold change does not require retreatment.', colorVar: '--color-warning' };
+      } else {
+        return { value: 'LATENT', label: 'Latent Syphilis', description: '**RPR+, Treponemal+, No symptoms**\n\n**Stage:** Latent syphilis\n• **Early latent (<1 year):** Benzathine PCN G 2.4 MU IM × 1\n• **Late latent (>1 year or unknown):** Benzathine PCN G 2.4 MU IM weekly × 3 doses\n\n**Determine duration by:** Prior negative serology, documented seroconversion, symptoms in past year, partner with early syphilis.\n\n**If duration unknown:** Treat as late latent (3 doses).', colorVar: '--color-warning' };
+      }
+    }
+
+    // Treponemal positive, RPR negative = past treated or very early
+    if (rpr === 0 && treponemal === 1) {
+      return { value: 'Past Infection', label: 'Treated Syphilis or Early', description: '**RPR−, Treponemal+**\n\n**Interpretation:**\n1. Successfully treated past syphilis (treponemal stays positive for life)\n2. Very early primary syphilis (RPR not yet positive)\n\n**Action:**\n• If history of treatment → no further treatment needed\n• If no treatment history → treat for early latent and follow RPR\n• If ulcer present → treat as primary, recheck RPR in 2 weeks', colorVar: '--color-warning' };
+    }
+
+    return { value: '—', label: 'Check inputs', description: '', colorVar: '--color-warning' };
+  },
+};
+
+const STI_PREGNANCY_SAFETY_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-pregnancy-safety',
+  title: 'STI Meds in Pregnancy',
+  subtitle: 'Safety Reference',
+  description: 'Quick reference for STI medication safety in pregnancy.',
+  fields: [
+    { name: 'med', label: 'Medication', type: 'select', points: 0, selectOptions: [
+      { label: 'Ceftriaxone', points: 1 },
+      { label: 'Azithromycin', points: 2 },
+      { label: 'Doxycycline', points: 3 },
+      { label: 'Metronidazole', points: 4 },
+      { label: 'Penicillin G (Benzathine)', points: 5 },
+      { label: 'Valacyclovir/Acyclovir', points: 6 },
+      { label: 'Ciprofloxacin/Levofloxacin', points: 7 },
+      { label: 'Gentamicin', points: 8 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'When in doubt, consult pharmacy or MFM.',
+  citations: ['CDC STI Treatment Guidelines. 2021.', 'ACOG Committee Opinion. 2024.'],
+  computeResult: (values) => {
+    const med = values['med'] || 1;
+    const safety: Record<number, { status: string; notes: string; color: string }> = {
+      1: { status: 'SAFE', notes: 'Ceftriaxone is first-line for gonorrhea in pregnancy. No dose adjustment needed.', color: '--color-decision-active' },
+      2: { status: 'SAFE', notes: 'Azithromycin is safe in pregnancy. Use instead of doxycycline for chlamydia. 1g single dose.', color: '--color-decision-active' },
+      3: { status: 'CONTRAINDICATED', notes: 'Doxycycline (and all tetracyclines) contraindicated in pregnancy. Causes fetal tooth discoloration and bone growth inhibition. Use azithromycin instead.', color: '--color-danger' },
+      4: { status: 'SAFE (2nd/3rd trimester)', notes: 'Metronidazole safe after first trimester. Can use in 1st trimester if benefits outweigh risks (no proven teratogenicity in humans). Alcohol restriction is a myth.', color: '--color-decision-active' },
+      5: { status: 'SAFE - REQUIRED', notes: 'Penicillin is the ONLY acceptable treatment for syphilis in pregnancy. If PCN allergic: DESENSITIZE. Do not use alternatives.', color: '--color-decision-active' },
+      6: { status: 'SAFE', notes: 'Valacyclovir and acyclovir are safe in pregnancy. Use for HSV suppression starting at 36 weeks to prevent neonatal herpes.', color: '--color-decision-active' },
+      7: { status: 'AVOID', notes: 'Fluoroquinolones (cipro, levo) should be avoided in pregnancy due to theoretical cartilage toxicity. Use alternatives.', color: '--color-danger' },
+      8: { status: 'USE WITH CAUTION', notes: 'Gentamicin may cause ototoxicity and nephrotoxicity in fetus with prolonged use. Single dose for GC in cephalosporin allergy is likely acceptable.', color: '--color-warning' },
+    };
+    const s = safety[med];
+    return { value: s.status, label: getMedName(med), description: s.notes, colorVar: s.color };
+  },
+};
+
+function getMedName(m: number): string {
+  const names: Record<number, string> = { 1: 'Ceftriaxone', 2: 'Azithromycin', 3: 'Doxycycline', 4: 'Metronidazole', 5: 'Penicillin G', 6: 'Valacyclovir', 7: 'Fluoroquinolones', 8: 'Gentamicin' };
+  return names[m] || 'Unknown';
+}
+
+const STI_DOXYPEP_CALCULATOR: CalculatorDefinition = {
+  id: 'sti-doxypep',
+  title: 'DoxyPEP Eligibility',
+  subtitle: 'CDC 2024 Guidelines',
+  description: 'Determine eligibility for doxycycline post-exposure prophylaxis (doxyPEP) per June 2024 CDC guidelines.',
+  fields: [
+    { name: 'population', label: 'Patient population', type: 'select', points: 0, selectOptions: [
+      { label: 'MSM (men who have sex with men)', points: 1 },
+      { label: 'Transgender woman', points: 1 },
+      { label: 'Cisgender heterosexual man', points: 0 },
+      { label: 'Cisgender woman', points: 0 },
+    ]},
+    { name: 'sti-history', label: 'STI in past 12 months', type: 'toggle', points: 1, description: 'Gonorrhea, chlamydia, or syphilis' },
+    { name: 'timing', label: 'Time since exposure', type: 'select', points: 0, selectOptions: [
+      { label: '< 24 hours', points: 2 },
+      { label: '24-72 hours', points: 1 },
+      { label: '> 72 hours', points: 0 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'DoxyPEP reduces syphilis 73-87%, chlamydia 70-88%, gonorrhea ~50%. NOT recommended for cisgender women or heterosexual men (insufficient data).',
+  citations: ['CDC DoxyPEP Guidelines. MMWR. June 2024.'],
+  computeResult: (values) => {
+    const population = values['population'] || 0;
+    const stiHistory = values['sti-history'] || 0;
+    const timing = values['timing'] || 0;
+
+    // Not eligible populations
+    if (population === 0) {
+      return { value: 'NOT ELIGIBLE', label: 'DoxyPEP Not Recommended', description: '**DoxyPEP is NOT currently recommended for:**\n• Cisgender heterosexual men\n• Cisgender women\n\n**Reason:** Insufficient clinical trial data in these populations. Ongoing studies (DOXYVAC) may inform future recommendations.', colorVar: '--color-warning' };
+    }
+
+    // Eligible population but outside window
+    if (timing === 0) {
+      return { value: 'TOO LATE', label: 'Outside Window', description: '**DoxyPEP must be taken within 72 hours of exposure.**\n\nPatient is outside the recommended window. DoxyPEP will not be effective.\n\n**Alternative:** Screen for STIs now and at 2 weeks.', colorVar: '--color-danger' };
+    }
+
+    // Eligible population within window
+    if (population === 1 && stiHistory >= 1) {
+      return { value: 'ELIGIBLE', label: 'DoxyPEP Recommended', description: '**Patient meets CDC criteria for DoxyPEP:**\n• MSM or transgender woman ✓\n• STI in past 12 months ✓\n• Within 72h of exposure ✓\n\n**Prescription:**\n**Doxycycline 200mg PO × 1 dose**\n(Take within 24-72h after condomless sex)\n\n**Efficacy:**\n• Syphilis: 73-87% reduction\n• Chlamydia: 70-88% reduction\n• Gonorrhea: ~50% reduction\n\n**Counseling:**\n• Does not prevent HIV (continue PrEP)\n• Does not prevent all STIs (continue regular screening)\n• Report any adverse effects', colorVar: '--color-decision-active' };
+    }
+
+    // Eligible population but no recent STI
+    if (population === 1 && stiHistory === 0) {
+      return { value: 'CONSIDER', label: 'May Be Appropriate', description: '**Patient is MSM/transgender woman but no STI in past 12 months.**\n\nCDC recommends doxyPEP primarily for those with recent STI history, but shared decision-making may support use in high-risk individuals without documented STI.\n\n**If prescribing:**\nDoxycycline 200mg PO × 1 within 72h of exposure\n\n**Counsel about:**\n• Antimicrobial stewardship concerns\n• Regular STI screening regardless', colorVar: '--color-warning' };
+    }
+
+    return { value: '—', label: 'Check inputs', description: '', colorVar: '--color-warning' };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pediatric Submersion
   'peds-submersion-severity': PEDS_SUBMERSION_SEVERITY_CALCULATOR,
@@ -19579,6 +19927,13 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // OHSS
   'ohss-severity': OHSS_SEVERITY_CALCULATOR,
   'ohss-admission': OHSS_ADMISSION_CALCULATOR,
+  // STI Comprehensive
+  'sti-syndromic-rx': STI_SYNDROMIC_RX_CALCULATOR,
+  'sti-cdc-regimens': STI_CDC_REGIMENS_CALCULATOR,
+  'sti-ept-generator': STI_EPT_GENERATOR_CALCULATOR,
+  'sti-syphilis-staging': STI_SYPHILIS_STAGING_CALCULATOR,
+  'sti-pregnancy-safety': STI_PREGNANCY_SAFETY_CALCULATOR,
+  'sti-doxypep': STI_DOXYPEP_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

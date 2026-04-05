@@ -633,6 +633,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 26,
         entryNodeId: 'dni-start',
+      },
+      {
+        id: 'sti-comprehensive',
+        title: 'STI Comprehensive',
+        subtitle: 'Syndrome-Based Approach → Urethral/Cervical → Ulcers → Pelvic → Special Populations → Partner Management',
+        categoryId: 'infectious-disease',
+        version: '1.0',
+        nodeCount: 46,
+        entryNodeId: 'sti-start',
       }
     ],
     isCustom: false,
