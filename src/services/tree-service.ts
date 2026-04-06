@@ -651,6 +651,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hypothermia.js');
       return { nodes: m.HYPOTHERMIA_NODES, entryNodeId: 'hypo-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPOTHERMIA_MODULE_LABELS, citations: m.HYPOTHERMIA_CITATIONS };
     },
+    'awake-intubation': async () => {
+      const m = await import('../data/trees/awake-intubation.js');
+      return { nodes: m.AWAKE_INTUBATION_NODES, entryNodeId: 'awake-start', categoryId: 'anesthesia-airway', moduleLabels: m.AWAKE_INTUBATION_MODULE_LABELS, citations: m.AWAKE_INTUBATION_CITATIONS };
+    },
     'suicide-risk-assessment': async () => {
       const m = await import('../data/trees/suicide-risk-assessment.js');
       return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sui-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS };

@@ -604,6 +604,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hypo-rewarm', label: 'Rewarming', icon: '🔥', action: 'calculator', target: 'hypo-rewarming' },
     { id: 'hypo-transport', label: 'ECMO Transport', icon: '🚑', action: 'calculator', target: 'hypo-ecmo-transport' },
   ],
+  'awake-intubation': [
+    { id: 'awake-who', label: 'Who Needs?', icon: '❓', action: 'calculator', target: 'awake-who-needs' },
+    { id: 'awake-topical', label: 'Topical Prep', icon: '💊', action: 'calculator', target: 'awake-topical-prep' },
+    { id: 'awake-atomized', label: 'Atomized', icon: '💨', action: 'calculator', target: 'awake-atomized-recipe' },
+    { id: 'awake-nasal', label: 'Nasal Steps', icon: '👃', action: 'calculator', target: 'awake-nasal-steps' },
+    { id: 'awake-oral', label: 'Oral Steps', icon: '👄', action: 'calculator', target: 'awake-oral-steps' },
+    { id: 'awake-go', label: 'See → Go', icon: '✅', action: 'calculator', target: 'awake-see-cords-go' },
+  ],
   'hfnc': [
     { id: 'rox', label: 'ROX', icon: '📊', action: 'calculator', target: 'rox-index' },
     { id: 'settings', label: 'Settings', icon: '⚙️', action: 'calculator', target: 'hfnc-settings' },

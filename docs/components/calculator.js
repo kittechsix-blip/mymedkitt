@@ -22671,6 +22671,718 @@ const HYPO_ECMO_TRANSPORT_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// AWAKE INTUBATION TOOLS
+// -------------------------------------------------------------------
+// Tool 1: Who Needs Awake Intubation?
+const AWAKE_WHO_NEEDS_CALCULATOR = {
+    id: 'awake-who-needs',
+    title: 'Who Needs Awake Intubation?',
+    subtitle: 'Patient Selection Criteria',
+    description: 'Identify patients who should receive awake intubation rather than RSI. Based on NEAR registry data and EMCrit guidance.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Kornas RL, et al. Awake Intubation in the Emergency Department. Ann Emerg Med. 2024;83(4):326-340.',
+        'Weingart S. EMCrit 342: Awake Intubation. Updated 2024.',
+        'Difficult Airway Society. Guidelines for awake tracheal intubation. Anaesthesia. 2020;75:509-528.',
+    ],
+    fields: [
+        {
+            name: 'angioedema',
+            label: 'Angioedema',
+            description: 'Progressive airway edema — RSI contraindicated',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'epiglottitis',
+            label: 'Epiglottitis / Supraglottitis',
+            description: 'Infectious obstruction — high CICO risk',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'ludwig',
+            label: "Ludwig's Angina / Deep Neck Infection",
+            description: 'Floor of mouth elevation, trismus',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'mass',
+            label: 'Oral/Pharyngeal Mass',
+            description: 'Tumor, abscess, or hematoma',
+            type: 'toggle',
+            points: 8,
+        },
+        {
+            name: 'prior-diff',
+            label: 'Prior Documented Difficult Intubation',
+            description: 'Patient knows they are "difficult"',
+            type: 'toggle',
+            points: 8,
+        },
+        {
+            name: 'limited-opening',
+            label: 'Severely Limited Mouth Opening',
+            description: '<3 cm or wired jaw',
+            type: 'toggle',
+            points: 8,
+        },
+        {
+            name: 'neck-immobile',
+            label: 'Immobile Cervical Spine',
+            description: 'Halo, ankylosing spondylitis, fusion',
+            type: 'toggle',
+            points: 6,
+        },
+        {
+            name: 'cannot-mask',
+            label: 'Cannot Mask Ventilate',
+            description: 'Facial hair, burns, trauma',
+            type: 'toggle',
+            points: 6,
+        },
+        {
+            name: 'acidosis',
+            label: 'Severe Metabolic Acidosis',
+            description: 'pH <7.1, cannot tolerate apnea',
+            type: 'toggle',
+            points: 6,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        const indications = [];
+        if (values['angioedema'])
+            indications.push('**Angioedema** — RSI contraindicated, prepare double-setup');
+        if (values['epiglottitis'])
+            indications.push('**Epiglottitis** — Maintain spontaneous ventilation');
+        if (values['ludwig'])
+            indications.push('**Deep neck infection** — Trismus limits laryngoscopy');
+        if (values['mass'])
+            indications.push('**Airway mass** — Risk of complete obstruction');
+        if (values['prior-diff'])
+            indications.push('**Prior difficult airway** — Patient knows they are difficult');
+        if (values['limited-opening'])
+            indications.push('**Limited mouth opening** — Cannot use standard laryngoscopy');
+        if (values['neck-immobile'])
+            indications.push('**Immobile C-spine** — Cannot optimize position');
+        if (values['cannot-mask'])
+            indications.push('**Cannot mask ventilate** — No backup plan');
+        if (values['acidosis'])
+            indications.push('**Severe acidosis** — Apnea will cause arrest');
+        if (score >= 10) {
+            return {
+                value: 'YES',
+                label: 'AWAKE INTUBATION INDICATED',
+                description: `**STRONG INDICATION FOR AWAKE INTUBATION**\n\n${indications.map(i => '• ' + i).join('\n')}\n\n---\n\n**Preparation Checklist:**\n☐ Topicalization equipment (atomizer, lidocaine)\n☐ Sedation ready (ketamine 20 mg aliquots)\n☐ Flexible fiberoptic or video scope\n☐ Double-setup with surgical airway ready\n☐ Team briefed on plan\n\n**Expected Timeline:** 15-30 minutes of preparation`,
+                colorVar: '--color-danger',
+            };
+        }
+        else if (score >= 6) {
+            return {
+                value: 'CONSIDER',
+                label: 'Consider Awake Intubation',
+                description: `**RELATIVE INDICATION — Consider Awake Technique**\n\n${indications.map(i => '• ' + i).join('\n')}\n\n---\n\n**Decision Factors:**\n• Time available? (Need 15-30 min)\n• Patient cooperative?\n• Backup plan for RSI failure?\n\n**Alternative Approaches:**\n• DSI (Delayed Sequence Intubation) with ketamine\n• Video laryngoscopy with senior operator\n• Double-setup with surgical airway ready`,
+                colorVar: '--color-warning',
+            };
+        }
+        else {
+            return {
+                value: 'NO',
+                label: 'Standard RSI Appropriate',
+                description: `**NO STRONG INDICATION FOR AWAKE INTUBATION**\n\nThis patient does not meet typical criteria for awake intubation.\n\n**Standard RSI is likely appropriate if:**\n• No predicted difficult airway\n• Can mask ventilate\n• Have backup devices ready\n• Surgical airway available\n\n**Awake Intubation Indications Review:**\n• Angioedema (most common ED indication)\n• Epiglottitis/supraglottitis\n• Deep neck infection\n• Oral/pharyngeal mass\n• Prior difficult intubation\n• Limited mouth opening\n• Cervical immobility\n• Cannot mask ventilate\n• Severe metabolic acidosis`,
+                colorVar: '--color-primary',
+            };
+        }
+    },
+};
+// Tool 2: Topical Preparation Recipe
+const AWAKE_TOPICAL_PREP_CALCULATOR = {
+    id: 'awake-topical-prep',
+    title: 'Topical Prep Recipe',
+    subtitle: 'Oral & Nasal Anesthesia',
+    description: 'Quick reference for topical anesthesia preparation. All doses based on lidocaine max of 9 mg/kg lean body weight (DAS Guidelines 2020).',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Difficult Airway Society. Guidelines for awake tracheal intubation. Anaesthesia. 2020;75:509-528.',
+        'Weingart S. EMCrit 342: Awake Intubation. Updated 2024.',
+    ],
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient Weight (kg)',
+            description: 'Use lean body weight for obese patients',
+            type: 'number',
+            points: 0,
+            unit: 'kg',
+        },
+        {
+            name: 'route',
+            label: 'Planned Route',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Nasal (fiberoptic)', points: 1 },
+                { label: 'Oral (fiberoptic)', points: 2 },
+                { label: 'Oral (video laryngoscopy)', points: 3 },
+            ],
+        },
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 70;
+        const route = values['route'] || 1;
+        const maxLido = Math.round(weight * 9); // 9 mg/kg max
+        let recipe = '';
+        let routeName = '';
+        if (route === 1) {
+            // Nasal route
+            routeName = 'NASAL FIBEROPTIC';
+            recipe = `**NASAL ROUTE RECIPE**
+
+**Step 1: Vasoconstriction (pick one)**
+• Oxymetazoline spray: 2-3 sprays each nostril
+• Phenylephrine 0.25%: 2-3 sprays each nostril
+• Cocaine 4%: 2-3 mL each nostril (if available)
+
+**Step 2: Nasal Anesthesia**
+• Lidocaine 4% spray: 2-4 sprays each nostril (~40 mg)
+  - OR -
+• Lidocaine 2% gel: Apply to NPA, insert & remove
+• Leave NPA in place progressively larger sizes
+
+**Step 3: Oropharyngeal Topicalization**
+• 4% Lidocaine atomized (MAD): 4-6 mL (~160-240 mg)
+• Target: Soft palate, posterior tongue, pharynx
+• Have patient gargle if able
+
+**Step 4: Glottic/Subglottic (via scope)**
+• 2% Lidocaine: 2-3 mL sprayed through working channel
+• "Spray as you go" technique (~40-60 mg)`;
+        }
+        else if (route === 2) {
+            // Oral fiberoptic
+            routeName = 'ORAL FIBEROPTIC';
+            recipe = `**ORAL FIBEROPTIC RECIPE**
+
+**Step 1: Antisialagogue (optional)**
+• Glycopyrrolate 0.2 mg IV (~15 min before)
+• Reduces secretions, improves visualization
+
+**Step 2: Oropharyngeal Anesthesia**
+• 4% Lidocaine viscous: Gargle 5 mL, spit out (~200 mg absorbed)
+• 4% Lidocaine atomized (MAD): 4-6 mL (~160-240 mg)
+• Target: Soft palate, base of tongue, posterior pharynx
+
+**Step 3: Suppression of Gag Reflex**
+• Benzocaine spray (Hurricaine): Brief spray to posterior tongue
+  ⚠️ Limit benzocaine (methemoglobin risk)
+• OR: Focus atomized lidocaine on uvula/soft palate
+
+**Step 4: Glottic/Subglottic (via scope)**
+• 2% Lidocaine: 2-3 mL via working channel
+• "Spray as you go" at vocal cords
+• Additional spray for subglottic anesthesia`;
+        }
+        else {
+            // Oral VL
+            routeName = 'ORAL VIDEO LARYNGOSCOPY';
+            recipe = `**ORAL VL (AWAKE LOOK) RECIPE**
+
+**Step 1: Antisialagogue (optional)**
+• Glycopyrrolate 0.2 mg IV (~15 min before)
+
+**Step 2: Oropharyngeal Anesthesia**
+• 4% Lidocaine viscous: Gargle 5 mL, spit
+• 4% Lidocaine atomized: 4-6 mL to posterior pharynx
+• Target: Soft palate, base of tongue, pharynx
+
+**Step 3: Glottic Anesthesia**
+Option A — Atomizer through mouth:
+• Aim MAD device toward glottis, spray 2-3 mL
+
+Option B — Nebulized lidocaine:
+• 4% Lidocaine 4 mL via nebulizer × 10-15 min
+• Provides excellent distribution
+
+**Step 4: Ready for Awake Look**
+• Video laryngoscopy to visualize cords
+• Confirm view is adequate
+• THEN: Ketamine + paralytic → intubate`;
+        }
+        return {
+            value: routeName,
+            label: `Max Lidocaine: ${maxLido} mg`,
+            description: `**ROUTE: ${routeName}**\n\n**Max Lidocaine Dose: ${maxLido} mg** (9 mg/kg × ${weight} kg)\n\n---\n\n${recipe}\n\n---\n\n**TIMING:**\n• T-15 min: Antisialagogue (if using)\n• T-5 min: Begin topicalization\n• T-0: Ready for sedation + procedure\n\n**LIDOCAINE TRACKING:**\nKeep running total — do not exceed ${maxLido} mg`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// Tool 3: Atomized/Nebulized Anesthesia Recipe
+const AWAKE_ATOMIZED_RECIPE_CALCULATOR = {
+    id: 'awake-atomized-recipe',
+    title: 'Atomized Anesthesia Recipe',
+    subtitle: 'MAD & Nebulizer Techniques',
+    description: 'Specific instructions for atomized and nebulized lidocaine delivery. Includes equipment setup and dosing.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Difficult Airway Society. Guidelines for awake tracheal intubation. Anaesthesia. 2020;75:509-528.',
+        'NYSORA. Airway Topical Anesthesia. 2024.',
+    ],
+    fields: [
+        {
+            name: 'technique',
+            label: 'Delivery Technique',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'MAD (Mucosal Atomizer)', points: 1 },
+                { label: 'Nebulizer', points: 2 },
+                { label: 'Both (MAD + Nebulizer)', points: 3 },
+            ],
+        },
+        {
+            name: 'has-mad',
+            label: 'Have MAD device available?',
+            type: 'toggle',
+            points: 0,
+        },
+    ],
+    computeResult: (values) => {
+        const technique = values['technique'] || 1;
+        const hasMad = values['has-mad'];
+        let instructions = '';
+        if (technique === 1 || technique === 3) {
+            instructions += `**MAD (MUCOSAL ATOMIZER DEVICE)**
+
+**Equipment:**
+• MAD nasal device (Teleflex LMA MAD)
+• 10 mL syringe
+• 4% Lidocaine solution
+
+**Preparation:**
+1. Draw up 5-10 mL of 4% lidocaine
+2. Attach MAD to syringe (remove needle)
+3. Prime MAD with small amount
+
+**Technique:**
+1. **Nasal** (if nasal route planned):
+   - 2-3 mL each nostril, aim superiorly
+   - Wait 30 sec between nostrils
+
+2. **Oropharyngeal**:
+   - Open mouth wide, tongue out
+   - Spray soft palate: 2-3 mL
+   - Spray posterior tongue: 2 mL
+   - Spray tonsillar pillars: 1-2 mL
+   - Have patient say "ahhh" during spray
+
+3. **Glottic** (advanced):
+   - Use angled MAD or laryngoscope to visualize
+   - Spray directly at cords: 2-3 mL
+   - Patient will cough briefly
+
+**Dose per area: ~40-80 mg per spray**\n\n`;
+        }
+        if (technique === 2 || technique === 3) {
+            instructions += `**NEBULIZED LIDOCAINE**
+
+**Equipment:**
+• Standard nebulizer setup
+• 4% Lidocaine solution (4 mL = 160 mg)
+
+**Preparation:**
+1. Add 4 mL of 4% lidocaine to nebulizer
+2. Connect to O2 at 6-8 L/min
+3. Use mouthpiece (not mask for better distribution)
+
+**Technique:**
+1. Patient breathes normally through mouthpiece
+2. Total nebulization time: 10-15 minutes
+3. Have patient take occasional deep breaths
+4. Can add glycopyrrolate 0.2 mg to nebulizer
+
+**Advantages:**
+• Excellent supraglottic + glottic distribution
+• Hands-free (no active spraying)
+• Well-tolerated by anxious patients
+
+**Disadvantages:**
+• Takes longer (10-15 min)
+• Less precise targeting
+• May need supplemental MAD for nasal route
+
+**Total dose: ~160 mg (one nebulizer)**`;
+        }
+        let colorVar = '--color-primary';
+        if (!hasMad && (technique === 1 || technique === 3)) {
+            instructions += `\n\n---\n\n**⚠️ NO MAD AVAILABLE**\n\n**Alternatives:**\n• Standard nasal spray bottle with lidocaine\n• Lidocaine-soaked pledgets\n• Nebulizer alone (takes longer)\n• Lidocaine gel on NPA\n\nOrder MAD devices for future — they make this much easier.`;
+            colorVar = '--color-warning';
+        }
+        return {
+            value: technique === 1 ? 'MAD' : technique === 2 ? 'Nebulizer' : 'MAD + Nebulizer',
+            label: technique === 3 ? 'Combination Technique' : 'Single Technique',
+            description: instructions,
+            colorVar,
+        };
+    },
+};
+// Tool 4: Nasal Fiberoptic Quick Steps
+const AWAKE_NASAL_STEPS_CALCULATOR = {
+    id: 'awake-nasal-steps',
+    title: 'Nasal Fiberoptic: Quick Steps',
+    subtitle: 'Step-by-Step Procedure',
+    description: 'Quick reference for awake nasal fiberoptic intubation technique. Success rate 92% in NEAR registry.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Kornas RL, et al. Awake Intubation in the Emergency Department. Ann Emerg Med. 2024;83(4):326-340.',
+        'Weingart S. EMCrit 342: Awake Intubation. Updated 2024.',
+    ],
+    fields: [
+        {
+            name: 'step1',
+            label: '1. Preparation complete',
+            description: 'Topicalization done, sedation ready',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step2',
+            label: '2. Nasal vasoconstriction',
+            description: 'Oxymetazoline or phenylephrine applied',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step3',
+            label: '3. Nasal dilated',
+            description: 'NPA progressively upsized OR well-lubed scope',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step4',
+            label: '4. ETT loaded on scope',
+            description: '7.0 cuffed (or 6.5 if difficult)',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step5',
+            label: '5. Scope inserted to cords',
+            description: 'Navigate nasopharynx → oropharynx → visualize cords',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step6',
+            label: '6. Cords visualized',
+            description: 'Can see vocal cords opening',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step7',
+            label: '7. Scope through cords',
+            description: 'Advance during inspiration',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step8',
+            label: '8. Tracheal rings seen',
+            description: 'Confirm scope is in trachea',
+            type: 'toggle',
+            points: 1,
+        },
+    ],
+    computeResult: (values) => {
+        const completed = Object.values(values).filter(v => v).length;
+        // total = 8 for nasal fiberoptic steps
+        if (completed === 0) {
+            return {
+                value: '0/8',
+                label: 'Ready to Start',
+                description: `**NASAL FIBEROPTIC INTUBATION**
+
+**Success Rate: 92%** (NEAR Registry)
+
+**PREPARATION:**
+1. ☐ Topicalize nose + oropharynx (see Topical Prep Recipe)
+2. ☐ Ketamine sedation started (20 mg aliquots)
+3. ☐ Vasoconstrict nares (oxymetazoline)
+4. ☐ NPA progressive dilation (optional)
+5. ☐ Load ETT 7.0 on fiberoptic scope
+
+**TECHNIQUE:**
+1. ☐ Insert scope into more patent nostril
+2. ☐ Navigate: floor of nose → nasopharynx → see uvula
+3. ☐ Advance: oropharynx → visualize epiglottis
+4. ☐ "Spray as you go" — lidocaine at each level
+5. ☐ Pass scope anterior to epiglottis
+6. ☐ Visualize vocal cords
+7. ☐ Advance scope through cords during inspiration
+8. ☐ Confirm tracheal rings visible
+9. ☐ Advance ETT over scope (may need rotation)
+10. ☐ Remove scope, confirm placement
+
+**TIPS:**
+• Keep jaw thrust if needed for epiglottis view
+• Anti-fog the scope tip
+• Rotate ETT 90° counterclockwise if it catches on arytenoids`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (completed < 6) {
+            return {
+                value: `${completed}/8`,
+                label: 'In Progress — Not at Cords',
+                description: `**PROCEDURE IN PROGRESS**\n\n**Completed:** ${completed}/8 steps\n\n**TROUBLESHOOTING:**\n\n**Can't navigate nasopharynx?**\n• Try other nostril\n• More vasoconstriction\n• Smaller ETT (6.5 or 6.0)\n• More lidocaine gel lubrication\n\n**Blood obscuring view?**\n• Oxymetazoline pledget\n• Suction through scope channel\n• Wait and let it settle\n\n**Patient gagging?**\n• More sedation (ketamine 20 mg)\n• More topical lidocaine to posterior pharynx\n• Ask patient to breathe slowly`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (completed < 8) {
+            return {
+                value: `${completed}/8`,
+                label: 'CORDS VISUALIZED',
+                description: `**AT VOCAL CORDS — CRITICAL STEP**\n\n**You can see the cords — you're almost there!**\n\n**Next Steps:**\n1. Spray lidocaine at cords (2 mL)\n2. Wait for cough to settle (5-10 sec)\n3. Advance scope DURING INSPIRATION (cords open)\n4. Watch scope pass through cords\n5. Confirm tracheal rings visible\n6. Railroad ETT over scope\n\n**ETT GETTING STUCK?**\n• Rotate ETT 90° counterclockwise\n• Withdraw 1 cm, rotate, re-advance\n• Ensure bevel facing posteriorly\n• Try smaller ETT\n\n**IF CORDS CLOSE:**\n• Wait for next breath\n• More sedation\n• Do NOT force`,
+                colorVar: '--color-umber',
+            };
+        }
+        return {
+            value: '8/8',
+            label: 'SCOPE IN TRACHEA',
+            description: `**✓ SCOPE IN TRACHEA — PROCEED TO INTUBATION**\n\n**Final Steps:**\n\n1. **Confirm position:** See tracheal rings (incomplete circles)\n\n2. **Give induction:**\n   • Ketamine 1-2 mg/kg IV push\n   • Rocuronium 1.2 mg/kg (if desired)\n   • Patient loses consciousness\n\n3. **Advance ETT:**\n   • Railroad tube over scope\n   • Rotate 90° counterclockwise if stuck\n   • Watch tip pass through cords on screen\n\n4. **Confirm placement:**\n   • Remove scope\n   • ETCO2 waveform\n   • Bilateral breath sounds\n   • Secure tube\n\n**YOU DID IT!**\nAwake intubation preserves the airway. You confirmed visualization before committing to paralysis.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// Tool 5: Oral Fiberoptic Quick Steps
+const AWAKE_ORAL_STEPS_CALCULATOR = {
+    id: 'awake-oral-steps',
+    title: 'Oral Fiberoptic: Quick Steps',
+    subtitle: 'Step-by-Step Procedure',
+    description: 'Quick reference for awake oral fiberoptic intubation technique. Success rate 57% in NEAR registry — consider nasal or VL instead.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Kornas RL, et al. Awake Intubation in the Emergency Department. Ann Emerg Med. 2024;83(4):326-340.',
+        'Difficult Airway Society. Guidelines for awake tracheal intubation. Anaesthesia. 2020;75:509-528.',
+    ],
+    fields: [
+        {
+            name: 'step1',
+            label: '1. Preparation complete',
+            description: 'Topicalization done, sedation ready',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step2',
+            label: '2. Oral airway/Berman in place',
+            description: 'Bite block to protect scope',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step3',
+            label: '3. ETT loaded on scope',
+            description: '7.5-8.0 cuffed',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step4',
+            label: '4. Scope through airway to cords',
+            description: 'Navigate oropharynx → visualize cords',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step5',
+            label: '5. Cords visualized',
+            description: 'Can see vocal cords opening',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step6',
+            label: '6. Scope through cords',
+            description: 'Advance during inspiration',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'step7',
+            label: '7. Tracheal rings seen',
+            description: 'Confirm scope is in trachea',
+            type: 'toggle',
+            points: 1,
+        },
+    ],
+    computeResult: (values) => {
+        const completed = Object.values(values).filter(v => v).length;
+        // total = 7 for oral fiberoptic steps
+        if (completed === 0) {
+            return {
+                value: '0/7',
+                label: 'Ready to Start',
+                description: `**ORAL FIBEROPTIC INTUBATION**
+
+**⚠️ Success Rate: 57%** (NEAR Registry)
+Consider nasal route (92%) or VL (89%) if available.
+
+**PREPARATION:**
+1. ☐ Topicalize oropharynx thoroughly
+2. ☐ Ketamine sedation started (20 mg aliquots)
+3. ☐ Insert Berman airway or bite block
+4. ☐ Load ETT 7.5-8.0 on fiberoptic scope
+
+**TECHNIQUE:**
+1. ☐ Insert scope through oral airway
+2. ☐ Navigate: tongue base → vallecula → epiglottis
+3. ☐ "Spray as you go" — lidocaine at pharynx
+4. ☐ Pass scope anterior to epiglottis
+5. ☐ Visualize vocal cords
+6. ☐ Advance scope through cords during inspiration
+7. ☐ Confirm tracheal rings visible
+8. ☐ Advance ETT over scope
+9. ☐ Remove scope, confirm placement
+
+**KEY CHALLENGES:**
+• Tongue falls back — use jaw thrust
+• Gag reflex — more topicalization needed
+• Secretions — glycopyrrolate helps
+• Bite scope — always use Berman airway`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (completed < 5) {
+            return {
+                value: `${completed}/7`,
+                label: 'In Progress — Navigating',
+                description: `**PROCEDURE IN PROGRESS**\n\n**Completed:** ${completed}/7 steps\n\n**TROUBLESHOOTING:**\n\n**Can't see past tongue?**\n• Jaw thrust by assistant\n• Tongue out (patient or pull with gauze)\n• Reposition Berman airway\n\n**Patient gagging?**\n• More sedation (ketamine 20 mg)\n• More topical to posterior pharynx\n• Pause and let patient recover\n\n**Secretions obscuring view?**\n• Suction through scope channel\n• Glycopyrrolate if not given\n• Blow oxygen through scope channel\n\n**CONSIDER SWITCHING:**\nOral fiberoptic has lowest success rate (57%). If struggling:\n• Switch to nasal approach (92%)\n• Switch to awake VL (89%)`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (completed < 7) {
+            return {
+                value: `${completed}/7`,
+                label: 'CORDS VISUALIZED',
+                description: `**AT VOCAL CORDS — CRITICAL STEP**\n\n**You can see the cords — almost there!**\n\n**Next Steps:**\n1. Spray lidocaine at cords (2 mL)\n2. Wait for cough to settle\n3. Advance scope DURING INSPIRATION\n4. Watch scope pass through cords\n5. Confirm tracheal rings visible\n6. Railroad ETT over scope\n\n**ETT GETTING STUCK?**\n• Rotate ETT 90° counterclockwise\n• Withdraw 1 cm, rotate, re-advance\n• Try smaller ETT (7.0)\n• Have assistant push larynx posteriorly`,
+                colorVar: '--color-umber',
+            };
+        }
+        return {
+            value: '7/7',
+            label: 'SCOPE IN TRACHEA',
+            description: `**✓ SCOPE IN TRACHEA — PROCEED TO INTUBATION**\n\n**Final Steps:**\n\n1. **Confirm position:** See tracheal rings\n\n2. **Give induction:**\n   • Ketamine 1-2 mg/kg IV push\n   • Rocuronium 1.2 mg/kg (optional)\n\n3. **Advance ETT:**\n   • Railroad tube over scope\n   • Rotate counterclockwise if stuck\n   • Watch tip pass through cords\n\n4. **Confirm placement:**\n   • Remove scope\n   • ETCO2 waveform\n   • Bilateral breath sounds\n   • Secure tube\n\n**SUCCESS!**\nDespite lower success rates, you completed the oral approach. Well done!`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// Tool 6: See Cords → Go Checklist
+const AWAKE_SEE_CORDS_GO_CALCULATOR = {
+    id: 'awake-see-cords-go',
+    title: 'See Cords → Ketamine → Go',
+    subtitle: 'Final Confirmation Checklist',
+    description: 'Final checklist before converting from awake intubation to induction and tube placement. The key decision point.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Weingart S. EMCrit 342: Awake Intubation. Updated 2024.',
+        'Kornas RL, et al. Awake Intubation in the Emergency Department. Ann Emerg Med. 2024;83(4):326-340.',
+    ],
+    fields: [
+        {
+            name: 'cords-visible',
+            label: 'Vocal cords clearly visible',
+            description: 'Can see cords opening with breathing',
+            type: 'toggle',
+            points: 3,
+        },
+        {
+            name: 'scope-through',
+            label: 'Scope passed through cords',
+            description: 'Tip is in trachea, rings visible',
+            type: 'toggle',
+            points: 3,
+        },
+        {
+            name: 'ett-ready',
+            label: 'ETT loaded and ready',
+            description: 'Tube on scope, cuff checked',
+            type: 'toggle',
+            points: 2,
+        },
+        {
+            name: 'ketamine-ready',
+            label: 'Ketamine induction dose ready',
+            description: '1-2 mg/kg drawn up',
+            type: 'toggle',
+            points: 2,
+        },
+        {
+            name: 'paralytic-ready',
+            label: 'Paralytic ready (optional)',
+            description: 'Rocuronium 1.2 mg/kg drawn',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'backup-ready',
+            label: 'Surgical airway still ready',
+            description: 'Cric equipment at bedside',
+            type: 'toggle',
+            points: 1,
+        },
+    ],
+    computeResult: (values) => {
+        const cordsVisible = values['cords-visible'];
+        const scopeThrough = values['scope-through'];
+        const ettReady = values['ett-ready'];
+        const ketamineReady = values['ketamine-ready'];
+        const paralyticReady = values['paralytic-ready'];
+        const backupReady = values['backup-ready'];
+        // Critical checks
+        if (!cordsVisible && !scopeThrough) {
+            return {
+                value: 'WAIT',
+                label: 'CORDS NOT CONFIRMED',
+                description: `**⛔ DO NOT PROCEED — CORDS NOT VISUALIZED**\n\nThe entire point of awake intubation is to confirm the airway BEFORE inducing.\n\n**You must see:**\n• Vocal cords clearly visible, OR\n• Scope tip through cords (tracheal rings visible)\n\n**Troubleshooting:**\n• Reposition patient (sniffing position)\n• Jaw thrust by assistant\n• More topicalization if patient fighting\n• More sedation (ketamine 20 mg)\n• Suction secretions\n\n**If you cannot visualize after multiple attempts:**\n• Consider alternative technique (nasal vs oral vs VL)\n• Call for backup\n• Prepare for surgical airway\n\n**DO NOT give induction dose until cords confirmed!**`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (!scopeThrough && cordsVisible) {
+            return {
+                value: 'ALMOST',
+                label: 'CORDS SEEN — ADVANCE SCOPE',
+                description: `**CORDS VISUALIZED — ADVANCE SCOPE THROUGH**\n\nYou can see the cords. Now:\n\n1. **Spray lidocaine at cords** (2 mL via scope)\n2. **Wait for cough** to settle (5-10 sec)\n3. **Advance during INSPIRATION** (cords open)\n4. **Confirm tracheal rings** visible\n\n**THEN proceed to induction.**\n\n**Why advance scope first?**\n• Confirms you can actually pass through\n• Tracheal rings = definitive confirmation\n• ETT will follow same path\n\n**If scope won't pass:**\n• Try during next inspiration\n• Ask patient to take deep breath\n• Rotate scope slightly\n• More lidocaine to cords`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (scopeThrough && (!ettReady || !ketamineReady)) {
+            return {
+                value: 'PREP MEDS',
+                label: 'SCOPE IN — PREPARE INDUCTION',
+                description: `**✓ SCOPE IN TRACHEA — PREPARE FOR INDUCTION**\n\n**Tracheal position confirmed!**\n\n**Before giving induction:**\n☐ ETT loaded on scope and ready\n☐ Ketamine 1-2 mg/kg IV drawn up\n☐ Paralytic ready (optional but recommended)\n☐ Team ready for tube advancement\n\n**Standard Induction:**\n• Ketamine 1-2 mg/kg IV push\n• Rocuronium 1.2 mg/kg (optional)\n• Wait 10-20 seconds for effect\n• Advance ETT over scope\n\n**Why ketamine?**\n• Maintains respiratory drive briefly\n• Hemodynamically stable\n• Already familiar from sedation`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Ready to go!
+        return {
+            value: 'GO!',
+            label: '✓ READY — PROCEED WITH INDUCTION',
+            description: `**✓ ALL CONFIRMED — PROCEED WITH INTUBATION**\n\n**EXECUTE:**\n\n1. **Give Ketamine** 1-2 mg/kg IV push\n   ${paralyticReady ? '• Give Rocuronium 1.2 mg/kg' : '• (Paralytic not drawn — consider giving)'}\n\n2. **Wait 10-20 seconds**\n   • Patient becomes apneic/deeply sedated\n\n3. **Advance ETT**\n   • Railroad over scope\n   • Watch tip pass through cords on screen\n   • Rotate 90° counterclockwise if stuck\n   • Advance to 21-23 cm at lips\n\n4. **Remove scope**\n   • Hold ETT firmly in place\n   • Withdraw scope smoothly\n\n5. **Confirm placement**\n   • Connect ETCO2 — confirm waveform\n   • Bilateral breath sounds\n   • Secure tube immediately\n\n---\n\n**YOU DID IT!**\n\n"Look before you leap" — you confirmed the airway before committing.\n${backupReady ? '✓ Surgical backup was ready (good practice)' : '⚠️ Surgical backup not confirmed — always have cric ready'}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -23039,6 +23751,13 @@ const CALCULATORS = {
     'hypo-hope-score': HYPO_HOPE_SCORE_CALCULATOR,
     'hypo-rewarming': HYPO_REWARMING_CALCULATOR,
     'hypo-ecmo-transport': HYPO_ECMO_TRANSPORT_CALCULATOR,
+    // Awake Intubation
+    'awake-who-needs': AWAKE_WHO_NEEDS_CALCULATOR,
+    'awake-topical-prep': AWAKE_TOPICAL_PREP_CALCULATOR,
+    'awake-atomized-recipe': AWAKE_ATOMIZED_RECIPE_CALCULATOR,
+    'awake-nasal-steps': AWAKE_NASAL_STEPS_CALCULATOR,
+    'awake-oral-steps': AWAKE_ORAL_STEPS_CALCULATOR,
+    'awake-see-cords-go': AWAKE_SEE_CORDS_GO_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
