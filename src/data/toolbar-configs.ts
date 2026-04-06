@@ -862,6 +862,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hop-icp', label: 'Elevated ICP', icon: '🧠', action: 'calculator', target: 'hop-elevated-icp-intubation' },
   ],
   'tia-workup': [
+    { id: 'tia-dot', label: 'TIA vs Mimic', icon: '🎯', action: 'calculator', target: 'tia-dot-score' },
     { id: 'tia-abcd2', label: 'ABCD2', icon: '📊', action: 'calculator', target: 'tia-abcd2' },
     { id: 'tia-canadian', label: 'Canadian', icon: '🍁', action: 'calculator', target: 'tia-canadian-score' },
     { id: 'tia-workup', label: 'Workup', icon: '📋', action: 'calculator', target: 'tia-workup-checklist' },

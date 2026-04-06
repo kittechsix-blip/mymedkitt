@@ -21336,6 +21336,244 @@ const TIA_DISPOSITION_CALCULATOR = {
     },
 };
 // =====================================================================
+// TIA vs MIMIC - DOT SCORE
+// =====================================================================
+const TIA_DOT_SCORE_CALCULATOR = {
+    id: 'tia-dot-score',
+    title: 'DOT Score (Diagnosis of TIA)',
+    subtitle: 'TIA vs Mimic Discrimination',
+    description: 'Differentiates true TIA from mimics. Derived from 525 patients, AUC 0.89 (superior to Dawson score 0.77). 50-60% of suspected TIAs are mimics.',
+    fields: [
+        // Demographic/History
+        {
+            name: 'age',
+            label: 'Age (years)',
+            type: 'number',
+            points: 0,
+            description: '+0.02 per year',
+        },
+        {
+            name: 'hypertension',
+            label: 'History of hypertension',
+            type: 'toggle',
+            points: 1,
+            description: '+0.32 points',
+        },
+        {
+            name: 'afib',
+            label: 'History of AF or new AF',
+            type: 'toggle',
+            points: 1,
+            description: '+0.62 points',
+        },
+        // POSITIVE predictors (TIA more likely)
+        {
+            name: 'dysphasia',
+            label: 'Dysphasia (speech difficulty)',
+            type: 'toggle',
+            points: 1,
+            description: '+3.13 points (strong predictor)',
+        },
+        {
+            name: 'facial-weakness',
+            label: 'Unilateral facial weakness (UMN pattern)',
+            type: 'toggle',
+            points: 1,
+            description: '+1.69 points',
+        },
+        {
+            name: 'unilateral-weakness',
+            label: 'Unilateral weakness (arm, leg, or both)',
+            type: 'toggle',
+            points: 1,
+            description: '+3.15 points (strong predictor)',
+        },
+        {
+            name: 'monocular-vision',
+            label: 'Monocular visual loss (amaurosis fugax)',
+            type: 'toggle',
+            points: 1,
+            description: '+3.58 points (strongest predictor)',
+        },
+        {
+            name: 'diplopia',
+            label: 'Diplopia',
+            type: 'toggle',
+            points: 1,
+            description: '+2.14 points',
+        },
+        {
+            name: 'bilateral-vision',
+            label: 'Bilateral visual loss',
+            type: 'toggle',
+            points: 1,
+            description: '+1.83 points',
+        },
+        {
+            name: 'hemianopia',
+            label: 'Hemianopia (visual field cut)',
+            type: 'toggle',
+            points: 1,
+            description: '+3.25 points (strong predictor)',
+        },
+        {
+            name: 'sensory-loss',
+            label: 'Unilateral sensory loss',
+            type: 'toggle',
+            points: 1,
+            description: '+2.11 points',
+        },
+        {
+            name: 'ataxia',
+            label: 'Ataxia (limb or gait)',
+            type: 'toggle',
+            points: 1,
+            description: '+2.06 points',
+        },
+        // NEGATIVE predictors (mimic more likely)
+        {
+            name: 'visual-aura',
+            label: 'Visual aura (scintillating scotoma, zigzag lines)',
+            type: 'toggle',
+            points: 1,
+            description: '-1.84 points (suggests migraine)',
+        },
+        {
+            name: 'headache',
+            label: 'Headache',
+            type: 'toggle',
+            points: 1,
+            description: '-0.66 points (suggests mimic)',
+        },
+        {
+            name: 'amnesia',
+            label: 'Amnesia',
+            type: 'toggle',
+            points: 1,
+            description: '-1.70 points (suggests TGA or mimic)',
+        },
+        {
+            name: 'loc',
+            label: 'Loss of consciousness or pre-syncope',
+            type: 'toggle',
+            points: 1,
+            description: '-0.78 points (suggests syncope/mimic)',
+        },
+        {
+            name: 'tingling',
+            label: 'Tingling/numbness (non-anatomical)',
+            type: 'toggle',
+            points: 1,
+            description: '-0.80 points (suggests mimic)',
+        },
+    ],
+    results: [],
+    thresholdNote: 'DOT ≥0.297 (>57%): Probable TIA | DOT -0.547 to 0.297: Possible TIA | DOT <-0.547 (<37%): TIA Unlikely. Sensitivity 89%, Specificity 76%, AUC 0.89.',
+    citations: [
+        'Dutta D, et al. Diagnosis of TIA (DOT) score - design and validation of a new clinical diagnostic tool for transient ischaemic attack. BMC Neurol. 2016;16:20. PMID 26857238',
+    ],
+    computeResult: (values) => {
+        // Intercept
+        let score = -3.365;
+        // Age (continuous): +0.02 per year
+        const age = values['age'] || 0;
+        score += age * 0.02;
+        // Positive predictors (TIA more likely)
+        if (values['hypertension'])
+            score += 0.32;
+        if (values['afib'])
+            score += 0.62;
+        if (values['dysphasia'])
+            score += 3.13;
+        if (values['facial-weakness'])
+            score += 1.69;
+        if (values['unilateral-weakness'])
+            score += 3.15;
+        if (values['monocular-vision'])
+            score += 3.58;
+        if (values['diplopia'])
+            score += 2.14;
+        if (values['bilateral-vision'])
+            score += 1.83;
+        if (values['hemianopia'])
+            score += 3.25;
+        if (values['sensory-loss'])
+            score += 2.11;
+        if (values['ataxia'])
+            score += 2.06;
+        // Negative predictors (mimic more likely)
+        if (values['visual-aura'])
+            score -= 1.84;
+        if (values['headache'])
+            score -= 0.66;
+        if (values['amnesia'])
+            score -= 1.70;
+        if (values['loc'])
+            score -= 0.78;
+        if (values['tingling'])
+            score -= 0.80;
+        // Convert logit to probability
+        const probability = 1 / (1 + Math.exp(-score));
+        const probPercent = Math.round(probability * 100);
+        const roundedScore = Math.round(score * 100) / 100;
+        // Collect present symptoms for display
+        const positiveSymptoms = [];
+        const negativeSymptoms = [];
+        if (values['dysphasia'])
+            positiveSymptoms.push('Dysphasia (+3.13)');
+        if (values['facial-weakness'])
+            positiveSymptoms.push('Facial weakness (+1.69)');
+        if (values['unilateral-weakness'])
+            positiveSymptoms.push('Unilateral weakness (+3.15)');
+        if (values['monocular-vision'])
+            positiveSymptoms.push('Monocular vision loss (+3.58)');
+        if (values['diplopia'])
+            positiveSymptoms.push('Diplopia (+2.14)');
+        if (values['bilateral-vision'])
+            positiveSymptoms.push('Bilateral vision loss (+1.83)');
+        if (values['hemianopia'])
+            positiveSymptoms.push('Hemianopia (+3.25)');
+        if (values['sensory-loss'])
+            positiveSymptoms.push('Sensory loss (+2.11)');
+        if (values['ataxia'])
+            positiveSymptoms.push('Ataxia (+2.06)');
+        if (values['visual-aura'])
+            negativeSymptoms.push('Visual aura (-1.84)');
+        if (values['headache'])
+            negativeSymptoms.push('Headache (-0.66)');
+        if (values['amnesia'])
+            negativeSymptoms.push('Amnesia (-1.70)');
+        if (values['loc'])
+            negativeSymptoms.push('LOC/pre-syncope (-0.78)');
+        if (values['tingling'])
+            negativeSymptoms.push('Tingling/numbness (-0.80)');
+        // Classification based on cutpoints
+        if (score >= 0.297) {
+            return {
+                value: `${probPercent}%`,
+                label: 'PROBABLE TIA',
+                description: `**DOT Score: ${roundedScore}** | Probability: **${probPercent}%**\n\n**PROBABLE TIA** - This presentation is consistent with true transient ischemic attack.\n\n${positiveSymptoms.length > 0 ? `**TIA Features Present:**\n${positiveSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}${negativeSymptoms.length > 0 ? `**Mimic Features Present:**\n${negativeSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}**Recommended Action:**\n- Proceed with full TIA workup (CT, CTA, ECG, labs)\n- Use ABCD2 or Canadian TIA Score for risk stratification\n- Initiate DAPT + statin if non-cardioembolic\n- Arrange rapid neurology follow-up\n\n**Important:** DOT score helps differentiate TIA from mimics but does NOT assess stroke risk. Use ABCD2/Canadian score for that.`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= -0.547) {
+            return {
+                value: `${probPercent}%`,
+                label: 'POSSIBLE TIA',
+                description: `**DOT Score: ${roundedScore}** | Probability: **${probPercent}%**\n\n**POSSIBLE TIA** - Presentation has features of both TIA and mimic. Further evaluation warranted.\n\n${positiveSymptoms.length > 0 ? `**TIA Features Present:**\n${positiveSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}${negativeSymptoms.length > 0 ? `**Mimic Features Present:**\n${negativeSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}**Recommended Action:**\n- Complete TIA workup - cannot rule out based on score alone\n- Consider alternative diagnoses (migraine, seizure, syncope, anxiety, vestibular)\n- If atypical features, consider MRI with DWI\n- Clinical judgment remains paramount\n\n**Common TIA Mimics (50-60% of referrals):**\n- Migraine with aura\n- Seizure (Todd's paralysis)\n- Syncope/pre-syncope\n- Peripheral vestibular disorders\n- Anxiety/functional neurological disorder\n- Metabolic (hypoglycemia, electrolyte)`,
+                colorVar: '--color-warning',
+            };
+        }
+        // TIA Unlikely (score < -0.547)
+        return {
+            value: `${probPercent}%`,
+            label: 'TIA UNLIKELY',
+            description: `**DOT Score: ${roundedScore}** | Probability: **${probPercent}%**\n\n**TIA UNLIKELY** - This presentation is more consistent with a mimic than true TIA.\n\n${positiveSymptoms.length > 0 ? `**TIA Features Present:**\n${positiveSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}${negativeSymptoms.length > 0 ? `**Mimic Features Present:**\n${negativeSymptoms.map(s => '- ' + s).join('\n')}\n\n` : ''}**Common TIA Mimics to Consider:**\n- **Migraine with aura** - visual aura, headache, gradual onset\n- **Seizure** - positive symptoms, post-ictal confusion\n- **Syncope/pre-syncope** - LOC, global symptoms\n- **Peripheral vestibular** - vertigo, nausea, no focal deficits\n- **Transient global amnesia** - isolated amnesia, no other deficits\n- **Anxiety/functional** - non-anatomical, inconsistent exam\n- **Metabolic** - hypoglycemia, electrolyte abnormalities\n\n**However:** Clinical judgment supersedes any score. If high clinical suspicion persists, proceed with workup.\n\n**Negative Likelihood Ratio: 0.15** - Low score significantly decreases post-test probability of TIA.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// =====================================================================
 // PERIPARTUM CARDIOMYOPATHY CALCULATORS
 // =====================================================================
 const PPCM_SEVERITY_ASSESSMENT_CALCULATOR = {
@@ -21816,6 +22054,7 @@ const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
     'tia-canadian-score': TIA_CANADIAN_SCORE_CALCULATOR,
+    'tia-dot-score': TIA_DOT_SCORE_CALCULATOR,
     'tia-workup-checklist': TIA_WORKUP_CHECKLIST_CALCULATOR,
     'tia-dapt-protocol': TIA_DAPT_PROTOCOL_CALCULATOR,
     'tia-disposition': TIA_DISPOSITION_CALCULATOR,
