@@ -2831,13 +2831,13 @@ body {
   line-height: 1.6;
 }
 
-/* ---- Feature 1: Sticky Score Display ---- */
+/* ---- Feature 1: Score Display (sticky disabled - was covering toggles) ---- */
 .calculator-score-display--sticky {
-  position: sticky;
-  top: 56px;
-  z-index: 90;
+  /* position: sticky disabled - overlapped toggle fields when scrolling */
+  /* top: 56px; */
+  /* z-index: 90; */
   margin: 0 0 16px 0;
-  border-radius: 0 0 16px 16px;
+  border-radius: 16px;
 }
 
 .calculator-score-display--stuck {
