@@ -437,6 +437,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'hs-start',
             },
             {
+                id: 'hypothermia',
+                title: 'Accidental Hypothermia',
+                subtitle: 'Recognition → Resuscitation → Rewarming → ECMO → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 32,
+                entryNodeId: 'hypo-start',
+            },
+            {
                 id: 'suicide-risk-assessment',
                 title: 'Suicide Risk Assessment',
                 subtitle: 'Screening → Risk Stratification → Safety Planning → Disposition → Special Populations',

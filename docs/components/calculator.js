@@ -22050,6 +22050,627 @@ const PPCM_DELIVERY_GUIDE_CALCULATOR = {
         };
     },
 };
+// =====================================================================
+// HYPOTHERMIA CALCULATORS
+// =====================================================================
+const HYPO_TEMP_CONVERTER_CALCULATOR = {
+    id: 'hypo-temp-convert',
+    title: 'Temperature Converter',
+    subtitle: 'Celsius ↔ Fahrenheit',
+    description: 'Quick conversion between Celsius and Fahrenheit for hypothermia assessment.',
+    fields: [
+        {
+            name: 'celsius',
+            label: 'Temperature in Celsius',
+            type: 'number',
+            points: 0,
+            unit: '°C',
+        },
+        {
+            name: 'fahrenheit',
+            label: 'Temperature in Fahrenheit',
+            type: 'number',
+            points: 0,
+            unit: '°F',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Enter either Celsius OR Fahrenheit. Last entered value is used for conversion.',
+    citations: [],
+    computeResult: (values) => {
+        const celsius = values['celsius'] || 0;
+        const fahrenheit = values['fahrenheit'] || 0;
+        // Determine which was entered (use the non-zero one, prefer celsius if both)
+        let resultC;
+        let resultF;
+        let source;
+        if (celsius > 0) {
+            resultC = celsius;
+            resultF = Math.round((celsius * 9 / 5 + 32) * 10) / 10;
+            source = 'Celsius';
+        }
+        else if (fahrenheit > 0) {
+            resultF = fahrenheit;
+            resultC = Math.round((fahrenheit - 32) * 5 / 9 * 10) / 10;
+            source = 'Fahrenheit';
+        }
+        else {
+            return {
+                value: '—',
+                label: 'Enter Temperature',
+                description: 'Enter a temperature in either Celsius or Fahrenheit to convert.',
+                colorVar: '--color-muted',
+            };
+        }
+        // Determine severity
+        let severity = '';
+        let colorVar = '--color-primary';
+        if (resultC >= 35) {
+            severity = 'Normal (≥35°C)';
+            colorVar = '--color-primary';
+        }
+        else if (resultC >= 32) {
+            severity = 'MILD HYPOTHERMIA (32-35°C)';
+            colorVar = '--color-warning';
+        }
+        else if (resultC >= 28) {
+            severity = 'MODERATE HYPOTHERMIA (28-32°C)';
+            colorVar = '--color-urgent';
+        }
+        else if (resultC >= 24) {
+            severity = 'SEVERE HYPOTHERMIA (24-28°C)';
+            colorVar = '--color-critical';
+        }
+        else {
+            severity = 'PROFOUND HYPOTHERMIA (<24°C)';
+            colorVar = '--color-critical';
+        }
+        return {
+            value: `${resultC}°C`,
+            label: `${resultF}°F`,
+            description: `**Conversion (from ${source}):**\n\n**${resultC}°C = ${resultF}°F**\n\n**Classification:** ${severity}\n\n---\n\n**Quick Reference:**\n| Severity | °C | °F |\n|----------|-----|-----|\n| Normal | ≥35 | ≥95 |\n| Mild | 32-35 | 90-95 |\n| Moderate | 28-32 | 82-90 |\n| Severe | 24-28 | 75-82 |\n| Profound | <24 | <75 |`,
+            colorVar,
+        };
+    },
+};
+const HYPO_KEY_TEMPS_CALCULATOR = {
+    id: 'hypo-key-temps',
+    title: 'Key Temperature Thresholds',
+    subtitle: 'Critical Decision Points',
+    description: 'Quick reference for key temperature thresholds in hypothermia management.',
+    fields: [
+        {
+            name: 'temp',
+            label: 'Core Temperature',
+            type: 'number',
+            points: 0,
+            unit: '°C',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Core temp (esophageal or rectal preferred). Do not use oral/temporal.',
+    citations: [
+        'Paal P, et al. Accidental hypothermia-an update. Scand J Trauma Resusc Emerg Med. 2016;24(1):111.',
+    ],
+    computeResult: (values) => {
+        const temp = values['temp'] || 0;
+        if (temp <= 0) {
+            return {
+                value: '—',
+                label: 'Enter Core Temperature',
+                description: `**KEY TEMPERATURE THRESHOLDS:**\n\n| Threshold | °C | °F | Significance |\n|-----------|-----|-----|---------------|\n| **ACLS meds** | 30°C | 86°F | Withhold drugs below this |\n| **Shivering stops** | 30-32°C | 86-90°F | If shivering, temp >30°C |\n| **Defib limit** | 30°C | 86°F | Max 3 shocks below this |\n| **Warm & dead** | 32°C | 90°F | Minimum before death pronouncement |\n| **VF risk highest** | 28°C | 82°F | Handle extremely gently |\n| **J waves appear** | 32°C | 90°F | Osborn waves on ECG |\n| **Lowest survivor** | 13.7°C | 56.7°F | Anna Bågenholm, 1999 |`,
+                colorVar: '--color-muted',
+            };
+        }
+        const fahrenheit = Math.round((temp * 9 / 5 + 32) * 10) / 10;
+        let status = [];
+        let colorVar = '--color-primary';
+        // Check each threshold
+        if (temp < 30) {
+            status.push('🚫 WITHHOLD ACLS drugs (epinephrine, amiodarone)');
+            status.push('🚫 Limit to 3 defibrillation attempts max');
+            status.push('⚠️ Vasopressors ineffective');
+            colorVar = '--color-critical';
+        }
+        else if (temp < 35) {
+            status.push('⚠️ Double drug intervals (epi q6-10 min)');
+            status.push('✓ Standard defibrillation OK');
+        }
+        if (temp < 32) {
+            status.push('❄️ J waves (Osborn waves) likely on ECG');
+            status.push('⚠️ Cannot pronounce death yet (need ≥32°C)');
+        }
+        else {
+            status.push('✓ At "warm and dead" threshold - can consider termination if unresponsive');
+        }
+        if (temp < 28) {
+            status.push('💀 EXTREME VF RISK - handle as "cardiac time bomb"');
+            status.push('🏥 ECMO strongly indicated for cardiac arrest');
+        }
+        if (temp >= 30 && temp < 32) {
+            status.push('❓ Shivering may or may not be present');
+        }
+        else if (temp >= 32) {
+            status.push('🥶 Shivering should be present if patient able');
+        }
+        else {
+            status.push('❌ Shivering absent (too cold)');
+        }
+        return {
+            value: `${temp}°C`,
+            label: `${fahrenheit}°F - Key Thresholds`,
+            description: `**Core Temperature: ${temp}°C (${fahrenheit}°F)**\n\n**Current Status:**\n${status.map(s => '- ' + s).join('\n')}\n\n---\n\n**Quick Reference:**\n| Threshold | °C | °F | Significance |\n|-----------|-----|-----|---------------|\n| **ACLS meds** | 30°C | 86°F | Withhold below |\n| **Defib limit** | 30°C | 86°F | Max 3 shocks |\n| **Warm & dead** | 32°C | 90°F | Min for death |\n| **Shivering** | 30-32°C | 86-90°F | Stops below |`,
+            colorVar,
+        };
+    },
+};
+const HYPO_SWISS_STAGE_CALCULATOR = {
+    id: 'hypo-swiss-stage',
+    title: 'Swiss Staging System',
+    subtitle: 'Clinical Signs-Based Classification',
+    description: 'When core temperature unavailable, use clinical signs to estimate hypothermia severity.',
+    fields: [
+        {
+            name: 'consciousness',
+            label: 'Level of Consciousness',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Alert and oriented', points: 0 },
+                { label: 'Altered consciousness (confused, drowsy)', points: 1 },
+                { label: 'Unconscious but responsive to pain', points: 2 },
+                { label: 'Unresponsive, no vital signs', points: 3 },
+            ],
+        },
+        {
+            name: 'shivering',
+            label: 'Shivering',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Shivering present', points: 0 },
+                { label: 'Shivering absent', points: 1 },
+            ],
+        },
+        {
+            name: 'vitals',
+            label: 'Vital Signs',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Vital signs present (pulse, breathing)', points: 0 },
+                { label: 'No vital signs detectable', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Swiss Staging correlates clinical signs with estimated core temperature when measurement not available.',
+    citations: [
+        'Durrer B, et al. The medical on-site treatment of hypothermia: ICAR-MEDCOM recommendation. High Alt Med Biol. 2003;4(1):99-103.',
+    ],
+    computeResult: (values) => {
+        const consciousness = values['consciousness'] || 0;
+        const shivering = values['shivering'] || 0;
+        const vitals = values['vitals'] || 0;
+        // HT-IV: No vital signs
+        if (vitals === 1) {
+            return {
+                value: 'HT-IV',
+                label: 'PROFOUND - No Vital Signs',
+                description: `**SWISS STAGE HT-IV**\n\n**Estimated temp:** <24°C (<75°F)\n\n**Clinical features:**\n- Unresponsive\n- No detectable pulse or breathing\n- Apparent death\n\n**Management:**\n- Check for HARD contraindications before CPR\n- Start CPR if no contraindications\n- ECMO is treatment of choice\n- Check K+ (>12 = futile)\n- Calculate HOPE score\n\n**Remember:** "No one is dead until WARM and dead"`,
+                colorVar: '--color-critical',
+            };
+        }
+        // HT-III: Unconscious
+        if (consciousness === 2) {
+            return {
+                value: 'HT-III',
+                label: 'SEVERE - Unconscious',
+                description: `**SWISS STAGE HT-III**\n\n**Estimated temp:** 24-28°C (75-82°F)\n\n**Clinical features:**\n- Unconscious\n- Vital signs present\n- No shivering\n- HIGH arrhythmia risk\n\n**Management:**\n- Handle as "cardiac time bomb"\n- Minimize all movement\n- Horizontal positioning only\n- Active internal rewarming needed\n- Prepare for ECMO\n- Consider early intubation (ketamine preferred)`,
+                colorVar: '--color-critical',
+            };
+        }
+        // HT-II: Altered consciousness, no shivering
+        if (consciousness === 1 || shivering === 1) {
+            return {
+                value: 'HT-II',
+                label: 'MODERATE - Altered LOC',
+                description: `**SWISS STAGE HT-II**\n\n**Estimated temp:** 28-32°C (82-90°F)\n\n**Clinical features:**\n- Altered consciousness (confused, drowsy)\n- Shivering has stopped\n- Bradycardia, hypotension possible\n- Arrhythmia risk\n\n**Management:**\n- Gentle handling (VF risk)\n- Active external rewarming (Bair Hugger)\n- Warm IV fluids (40-43°C)\n- Heated humidified O2\n- Cardiac monitoring\n- Avoid rewarming extremities (afterdrop)`,
+                colorVar: '--color-urgent',
+            };
+        }
+        // HT-I: Alert, shivering
+        return {
+            value: 'HT-I',
+            label: 'MILD - Alert, Shivering',
+            description: `**SWISS STAGE HT-I**\n\n**Estimated temp:** 32-35°C (90-95°F)\n\n**Clinical features:**\n- Alert and oriented\n- Shivering present and effective\n- Tachycardia common\n- Low cardiac arrest risk\n\n**Management:**\n- Remove wet clothing\n- Warm dry environment\n- Passive rewarming (blankets)\n- Warm oral fluids if protecting airway\n- Active external warming if slow progress\n- May consider discharge if rewarmed and stable`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const HYPO_RESUS_CRITERIA_CALCULATOR = {
+    id: 'hypo-resus-criteria',
+    title: 'Resuscitation Criteria',
+    subtitle: 'When NOT to Resuscitate',
+    description: 'Decision support for withholding resuscitation in hypothermic cardiac arrest.',
+    fields: [
+        {
+            name: 'frozen-chest',
+            label: 'Chest wall frozen solid (incompressible)',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'lethal-injury',
+            label: 'Obvious lethal injury (decapitation, truncal transection)',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'decomposition',
+            label: 'Signs of decomposition',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'avalanche',
+            label: 'Avalanche burial >35 min + airway packed with snow + asystole',
+            type: 'toggle',
+            points: 1,
+        },
+        {
+            name: 'potassium',
+            label: 'Potassium Level',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'K+ <10 mEq/L or unknown', points: 0 },
+                { label: 'K+ 10-12 mEq/L', points: 1 },
+                { label: 'K+ >12 mEq/L (confirmed, non-hemolyzed)', points: 2 },
+            ],
+        },
+        {
+            name: 'arrest-first',
+            label: 'Cardiac arrest occurred BEFORE hypothermia (witnessed)',
+            type: 'toggle',
+            points: 1,
+        },
+    ],
+    results: [],
+    thresholdNote: 'These are HARD contraindications. Fixed pupils, rigor, and prolonged down time are NOT contraindications in hypothermia.',
+    citations: [
+        'Paal P, et al. Accidental hypothermia-an update. Scand J Trauma Resusc Emerg Med. 2016;24(1):111.',
+        'ERC Guidelines 2021: Cardiac arrest in special circumstances.',
+    ],
+    computeResult: (values) => {
+        const frozenChest = values['frozen-chest'] || 0;
+        const lethalInjury = values['lethal-injury'] || 0;
+        const decomposition = values['decomposition'] || 0;
+        const avalanche = values['avalanche'] || 0;
+        const potassium = values['potassium'] || 0;
+        const arrestFirst = values['arrest-first'] || 0;
+        const contraindications = [];
+        if (frozenChest)
+            contraindications.push('Frozen chest wall (incompressible)');
+        if (lethalInjury)
+            contraindications.push('Lethal traumatic injury');
+        if (decomposition)
+            contraindications.push('Signs of decomposition');
+        if (avalanche)
+            contraindications.push('Avalanche burial >35 min with snow-packed airway + asystole');
+        if (potassium === 2)
+            contraindications.push('K+ >12 mEq/L (no survivors documented)');
+        if (arrestFirst)
+            contraindications.push('Arrest occurred before hypothermia (not protective)');
+        if (contraindications.length > 0) {
+            return {
+                value: 'FUTILE',
+                label: 'Resuscitation NOT Indicated',
+                description: `**HARD CONTRAINDICATION(S) PRESENT**\n\n**Identified:**\n${contraindications.map(c => '- ❌ ' + c).join('\n')}\n\n**Recommendation:** Resuscitation is not indicated.\n\n**Documentation:** Record specific contraindication(s) and clinical reasoning.\n\n---\n\n**Note:** If K+ is 10-12 mEq/L (borderline), calculate HOPE score before deciding. Confirm specimen is not hemolyzed.`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (potassium === 1) {
+            return {
+                value: 'BORDERLINE',
+                label: 'K+ Borderline - Calculate HOPE Score',
+                description: `**NO HARD CONTRAINDICATIONS - But K+ is Borderline**\n\nK+ 10-12 mEq/L is associated with very poor prognosis.\n\n**Next step:** Calculate HOPE score.\n\n**If HOPE ≥10%:** Proceed with resuscitation and ECMO if available.\n**If HOPE <10%:** Consider termination (NPV 97%).\n\n**While calculating:**\n- Continue CPR\n- Confirm K+ is from non-hemolyzed sample\n- Begin rewarming efforts\n\n**Remember:** These are NOT contraindications:\n- ✓ Fixed/dilated pupils\n- ✓ Muscular rigidity\n- ✓ Prolonged down time\n- ✓ Very low temperature`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'PROCEED',
+            label: 'NO Contraindications - Resuscitate',
+            description: `**NO HARD CONTRAINDICATIONS IDENTIFIED**\n\n✓ Chest compressible\n✓ No lethal injury\n✓ No decomposition\n✓ K+ <10 mEq/L or unknown\n✓ Hypothermia preceded arrest (protective)\n\n**PROCEED WITH AGGRESSIVE RESUSCITATION**\n\n**Actions:**\n1. Start CPR (mechanical preferred)\n2. Obtain core temperature\n3. Check rhythm - attempt defib if VF/VT\n4. Calculate HOPE score if ECMO available\n5. Begin rewarming\n6. Arrange ECMO transport if criteria met\n\n**Remember:** Remarkable survivals documented:\n- Lowest survivor: 13.7°C\n- Longest CPR with intact neuro: 6h 52min`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const HYPO_HOPE_SCORE_CALCULATOR = {
+    id: 'hypo-hope-score',
+    title: 'HOPE Score',
+    subtitle: 'Hypothermia Outcome Prediction',
+    description: 'Predicts survival with neurologically favorable outcome after ECLS rewarming for hypothermic cardiac arrest.',
+    fields: [
+        {
+            name: 'sex',
+            label: 'Sex',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Female', points: 0 },
+                { label: 'Male', points: 1 },
+            ],
+        },
+        {
+            name: 'age',
+            label: 'Age (years)',
+            type: 'number',
+            points: 0,
+        },
+        {
+            name: 'mechanism',
+            label: 'Mechanism of Hypothermia',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Non-asphyxia (exposure, immersion without submersion)', points: 0 },
+                { label: 'Asphyxia (drowning, avalanche burial with airway obstruction)', points: 1 },
+            ],
+        },
+        {
+            name: 'temp',
+            label: 'Core Temperature at Admission (°C)',
+            type: 'number',
+            points: 0,
+        },
+        {
+            name: 'potassium',
+            label: 'Serum Potassium (mEq/L)',
+            type: 'number',
+            points: 0,
+        },
+        {
+            name: 'cpr-duration',
+            label: 'CPR Duration (minutes)',
+            type: 'number',
+            points: 0,
+        },
+    ],
+    results: [],
+    thresholdNote: 'HOPE score ≥10% suggests ECLS rewarming is indicated. <10% has NPV 97% for poor outcome.',
+    citations: [
+        'Pasquier M, et al. Hypothermia outcome prediction after extracorporeal life support for hypothermic cardiac arrest (HOPE). Resuscitation. 2018;126:58-64.',
+    ],
+    computeResult: (values) => {
+        const sex = values['sex'] || 0; // 0 = female, 1 = male
+        const age = values['age'] || 0;
+        const mechanism = values['mechanism'] || 0; // 0 = non-asphyxia, 1 = asphyxia
+        const temp = values['temp'] || 0;
+        const potassium = values['potassium'] || 0;
+        const cprDuration = values['cpr-duration'] || 0;
+        // Validate inputs
+        if (age <= 0 || temp <= 0 || potassium <= 0 || cprDuration <= 0) {
+            return {
+                value: '—',
+                label: 'Enter All Values',
+                description: '**HOPE Score Calculator**\n\nEnter all required values:\n- Age\n- Core temperature (°C)\n- Serum potassium (mEq/L)\n- CPR duration (minutes)\n\n**Interpretation:**\n- HOPE ≥10%: ECLS rewarming indicated\n- HOPE <10%: ECLS unlikely to benefit (NPV 97%)\n\n**Online calculator:** hypothermiascore.org',
+                colorVar: '--color-muted',
+            };
+        }
+        // HOPE formula:
+        // logit = 2.44 - 1.55(male) - 1.95(asphyxia) - 0.0191(age)
+        //         - 2.07×log2(K+) - 0.573×log2(CPR min)
+        //         + 0.937(temp) - 0.0247(temp)²
+        const logit = 2.44
+            - 1.55 * sex
+            - 1.95 * mechanism
+            - 0.0191 * age
+            - 2.07 * Math.log2(potassium)
+            - 0.573 * Math.log2(cprDuration)
+            + 0.937 * temp
+            - 0.0247 * (temp * temp);
+        // Convert to probability
+        const probability = Math.exp(logit) / (1 + Math.exp(logit));
+        const survivalPercent = Math.round(probability * 100);
+        // Determine recommendation
+        let recommendation;
+        let colorVar;
+        if (survivalPercent >= 10) {
+            recommendation = '**ECLS REWARMING INDICATED**\n\nSurvival probability justifies aggressive intervention.\n\n**Actions:**\n- Transport to ECMO center\n- Continue CPR during transport\n- Begin rewarming measures\n- ECMO cannulation under ongoing CPR';
+            colorVar = '--color-primary';
+        }
+        else {
+            recommendation = '**ECLS UNLIKELY TO BENEFIT**\n\nSurvival probability <10% (NPV 97% for poor outcome).\n\n**Consider:**\n- Discuss with ECMO team\n- Family communication about prognosis\n- May still attempt if specific circumstances warrant\n\n**Note:** This is a prediction tool, not an absolute rule.';
+            colorVar = '--color-warning';
+        }
+        const fahrenheit = Math.round((temp * 9 / 5 + 32) * 10) / 10;
+        return {
+            value: `${survivalPercent}%`,
+            label: survivalPercent >= 10 ? 'ECLS Indicated' : 'ECLS Unlikely to Benefit',
+            description: `**HOPE Score: ${survivalPercent}% Survival Probability**\n\n**Input Summary:**\n- Sex: ${sex === 0 ? 'Female' : 'Male'}\n- Age: ${age} years\n- Mechanism: ${mechanism === 0 ? 'Non-asphyxia' : 'Asphyxia'}\n- Core temp: ${temp}°C (${fahrenheit}°F)\n- Potassium: ${potassium} mEq/L\n- CPR duration: ${cprDuration} minutes\n\n---\n\n${recommendation}\n\n---\n\n**Prognostic Factors (worst → best):**\n- Asphyxia mechanism = worst\n- K+ >10 = very poor\n- Male sex\n- Longer CPR\n- Older age`,
+            colorVar,
+        };
+    },
+};
+const HYPO_REWARMING_CALCULATOR = {
+    id: 'hypo-rewarming',
+    title: 'Rewarming Modalities',
+    subtitle: 'Method Selection Guide',
+    description: 'Guides selection of appropriate rewarming method based on severity and resources.',
+    fields: [
+        {
+            name: 'severity',
+            label: 'Hypothermia Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Mild (32-35°C) - Alert, shivering', points: 0 },
+                { label: 'Moderate (28-32°C) - Altered LOC, no shivering', points: 1 },
+                { label: 'Severe (<28°C) - Unconscious, VS present', points: 2 },
+                { label: 'Cardiac arrest', points: 3 },
+            ],
+        },
+        {
+            name: 'hemodynamics',
+            label: 'Hemodynamic Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable', points: 0 },
+                { label: 'Unstable (hypotension, arrhythmia)', points: 1 },
+            ],
+        },
+        {
+            name: 'ecmo',
+            label: 'ECMO Available',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Yes - ECMO available', points: 0 },
+                { label: 'No - ECMO not available', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Rewarming rates vary by method. ECMO is gold standard for arrest/severe hypothermia.',
+    citations: [
+        'Brown DJ, et al. Accidental Hypothermia. N Engl J Med. 2012;367:1930-1938.',
+        'EMCrit IBCC Hypothermia Chapter. 2024.',
+    ],
+    computeResult: (values) => {
+        const severity = values['severity'] || 0;
+        const hemodynamics = values['hemodynamics'] || 0;
+        const ecmo = values['ecmo'] || 0;
+        // Cardiac arrest
+        if (severity === 3) {
+            if (ecmo === 0) {
+                return {
+                    value: 'VA-ECMO',
+                    label: 'ECMO Rewarming (Gold Standard)',
+                    description: `**CARDIAC ARREST - VA-ECMO REWARMING**\n\n**Rate:** 6-10°C/hour (fastest)\n\n**Procedure:**\n1. Continue CPR during cannulation\n2. VA-ECMO initiation\n3. Gradual rewarming to 32-34°C, then 36-37°C\n4. Wean as cardiac function recovers\n\n**Monitoring:**\n- Core temp q15 min\n- K+ frequently (rewarming hyperkalemia)\n- Coagulation parameters\n- Cardiac function recovery\n\n**Additional measures while ECMO running:**\n- Warm IV fluids\n- Heated blankets to trunk`,
+                    colorVar: '--color-critical',
+                };
+            }
+            else {
+                return {
+                    value: 'THORACIC',
+                    label: 'Thoracic Lavage (No ECMO)',
+                    description: `**CARDIAC ARREST - NO ECMO AVAILABLE**\n\n**Thoracic Lavage** (most effective non-ECMO)\n**Rate:** 3-6°C/hour\n\n**Procedure:**\n1. Bilateral chest tubes:\n   - Anterior (2nd-3rd ICS MCL) = INSTILL\n   - Posterolateral (5th ICS MAL) = DRAIN\n2. Warm crystalloid to 42°C\n3. Instill 300-500 mL via anterior tube\n4. Clamp 15 minutes, then drain\n5. Repeat continuously\n\n**Combine with:**\n- Peritoneal lavage (3-4°C/hr)\n- Warm IV fluids (40-43°C)\n- Heated humidified O2\n- Forced air warming to trunk\n\n**Continue CPR throughout**`,
+                    colorVar: '--color-critical',
+                };
+            }
+        }
+        // Severe or unstable moderate
+        if (severity === 2 || (severity === 1 && hemodynamics === 1)) {
+            if (ecmo === 0) {
+                return {
+                    value: 'ECMO',
+                    label: 'Consider ECMO Transfer',
+                    description: `**SEVERE/UNSTABLE - ECMO PREFERRED**\n\n**Why ECMO:**\n- Fastest rewarming (6-10°C/hr)\n- Provides circulatory support\n- Backup if arrest occurs\n\n**While arranging:**\n\n**Active Internal Rewarming:**\n- Warm IV fluids 40-43°C (0.5-1°C/hr)\n- Heated humidified O2 via HFNC/vent (1-2°C/hr)\n\n**Active External:**\n- Forced air warming to TRUNK only\n- Avoid extremity warming (afterdrop)\n\n**If deteriorating, consider:**\n- Thoracic lavage (3-6°C/hr)\n- Peritoneal lavage (3-4°C/hr)\n\n**Handle GENTLY - VF risk!**`,
+                    colorVar: '--color-critical',
+                };
+            }
+            else {
+                return {
+                    value: 'INVASIVE',
+                    label: 'Invasive Rewarming Required',
+                    description: `**SEVERE/UNSTABLE - INVASIVE REWARMING (No ECMO)**\n\n**Technique Selection:**\n\n| Method | Rate | Notes |\n|--------|------|-------|\n| Thoracic lavage | 3-6°C/hr | Most effective |\n| Peritoneal lavage | 3-4°C/hr | Alternative |\n| Bladder lavage | 1-2°C/hr | Easy, low yield |\n\n**Combine with:**\n- Warm IV fluids 40-43°C\n- Heated humidified O2\n- Forced air warming to trunk\n\n**Thoracic Lavage Procedure:**\n1. Bilateral chest tubes\n2. Warm crystalloid to 42°C\n3. Instill anteriorly, drain posteriorly\n4. Cycle q15 min or continuous\n\n**Monitor:** Core temp, rhythm, K+`,
+                    colorVar: '--color-urgent',
+                };
+            }
+        }
+        // Moderate stable
+        if (severity === 1) {
+            return {
+                value: 'ACTIVE EXT',
+                label: 'Active External Rewarming',
+                description: `**MODERATE STABLE - ACTIVE EXTERNAL REWARMING**\n\n**Rate:** 1-3°C/hour\n\n**Methods:**\n\n**Forced Air Warming (Bair Hugger)** - Preferred\n- Apply to trunk ONLY\n- Avoid extremities (afterdrop risk)\n\n**Plus:**\n- Warm IV fluids 40-43°C (+0.5-1°C/hr)\n- Heated humidified O2 (+1-2°C/hr)\n\n**Monitoring:**\n- Cardiac monitor (arrhythmia risk)\n- Core temp q15-30 min\n- Mental status\n- K+ (watch for hyperkalemia during rewarming)\n\n**Escalate if:**\n- Temp not improving\n- Hemodynamic deterioration\n- Arrhythmias develop\n\n**Handle gently - VF still possible**`,
+                colorVar: '--color-urgent',
+            };
+        }
+        // Mild
+        return {
+            value: 'PASSIVE',
+            label: 'Passive ± Active External',
+            description: `**MILD HYPOTHERMIA - PASSIVE REWARMING**\n\n**Rate:** 0.5-2°C/hour\n\n**Passive measures:**\n- Remove wet clothing\n- Warm, dry environment\n- Warm blankets\n- Warm oral fluids (if alert)\n\n**Add Active External if:**\n- Not improving after 1-2 hours\n- Shivering ineffective\n- Elderly or comorbid\n\n**Monitoring:**\n- Core temp q30-60 min\n- Cardiac monitor\n- Mental status\n\n**Disposition:**\n- May discharge if:\n  - Temp normalized (>36°C)\n  - Mental status normal\n  - Underlying cause addressed\n  - Safe environment`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const HYPO_ECMO_TRANSPORT_CALCULATOR = {
+    id: 'hypo-ecmo-transport',
+    title: 'ECMO Transport Checklist',
+    subtitle: 'Hypothermic Arrest Transport',
+    description: 'Step-by-step checklist for transporting hypothermic cardiac arrest patient to ECMO center.',
+    fields: [
+        { name: 'hope-calc', label: 'HOPE score calculated (≥10%)', type: 'toggle', points: 1 },
+        { name: 'k-checked', label: 'K+ confirmed <12 mEq/L (non-hemolyzed)', type: 'toggle', points: 1 },
+        { name: 'ecmo-notified', label: 'ECMO team notified with ETA', type: 'toggle', points: 1 },
+        { name: 'mech-cpr', label: 'Mechanical CPR applied (LUCAS/AutoPulse)', type: 'toggle', points: 1 },
+        { name: 'temp-probe', label: 'Core temp probe in place', type: 'toggle', points: 1 },
+        { name: 'warm-iv', label: 'Warm IV fluids running (40-43°C)', type: 'toggle', points: 1 },
+        { name: 'trunk-warming', label: 'Heated blankets to trunk (NOT extremities)', type: 'toggle', points: 1 },
+        { name: 'horizontal', label: 'Patient secured horizontally', type: 'toggle', points: 1 },
+        { name: 'team-brief', label: 'Team briefed: continuous CPR, gentle handling', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Transport to ECMO center even if not closest hospital. NNT = 2 for mortality reduction.',
+    citations: [
+        'ELSO Guidelines 2025. ECMO for Accidental Hypothermia.',
+        'Pasquier M, et al. HOPE Score. Resuscitation. 2018.',
+    ],
+    computeResult: (values) => {
+        const checklist = [
+            { key: 'hope-calc', label: 'HOPE score calculated', critical: true },
+            { key: 'k-checked', label: 'K+ confirmed <12', critical: true },
+            { key: 'ecmo-notified', label: 'ECMO team notified', critical: true },
+            { key: 'mech-cpr', label: 'Mechanical CPR applied', critical: false },
+            { key: 'temp-probe', label: 'Core temp monitored', critical: false },
+            { key: 'warm-iv', label: 'Warm IV running', critical: false },
+            { key: 'trunk-warming', label: 'Trunk warming (not extremities)', critical: false },
+            { key: 'horizontal', label: 'Patient horizontal', critical: false },
+            { key: 'team-brief', label: 'Team briefed', critical: false },
+        ];
+        const completed = [];
+        const incomplete = [];
+        const criticalIncomplete = [];
+        for (const item of checklist) {
+            if (values[item.key]) {
+                completed.push(item.label);
+            }
+            else {
+                incomplete.push(item.label);
+                if (item.critical)
+                    criticalIncomplete.push(item.label);
+            }
+        }
+        const total = checklist.length;
+        const done = completed.length;
+        if (criticalIncomplete.length > 0) {
+            return {
+                value: `${done}/${total}`,
+                label: 'CRITICAL ITEMS MISSING',
+                description: `**⚠️ CRITICAL ITEMS INCOMPLETE**\n\n**Missing critical items:**\n${criticalIncomplete.map(i => '- ❌ ' + i).join('\n')}\n\n**Complete before transport!**\n\n---\n\n**Completed (${done}/${total}):**\n${completed.length > 0 ? completed.map(i => '- ✓ ' + i).join('\n') : '- None'}\n\n**Remaining:**\n${incomplete.map(i => '- ☐ ' + i).join('\n')}`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (incomplete.length > 0) {
+            return {
+                value: `${done}/${total}`,
+                label: 'Nearly Ready',
+                description: `**Checklist ${done}/${total} Complete**\n\n**Completed:**\n${completed.map(i => '- ✓ ' + i).join('\n')}\n\n**Still needed:**\n${incomplete.map(i => '- ☐ ' + i).join('\n')}\n\n---\n\n**During Transport:**\n- Continuous CPR (do not stop for loading/unloading)\n- Gentle handling (VF risk)\n- Check rhythm q5 min\n- Monitor for ROSC\n\n**At arrival:**\n- Handoff to ECMO team\n- Provide HOPE score, K+, down time`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `${done}/${total}`,
+            label: 'READY FOR TRANSPORT',
+            description: `**✓ ALL ITEMS COMPLETE - READY FOR TRANSPORT**\n\n**Completed:**\n${completed.map(i => '- ✓ ' + i).join('\n')}\n\n---\n\n**DURING TRANSPORT:**\n\n☐ Continuous CPR - do NOT stop for loading/unloading\n☐ Gentle handling - rough movement triggers VF\n☐ Horizontal positioning only\n☐ Check rhythm q5 min during CPR pauses\n☐ Monitor for ROSC (check pulse q5 min)\n☐ Continue trunk warming en route\n\n**IF ROSC DURING TRANSPORT:**\n- Continue rewarming\n- Standard post-arrest care\n- Still transport to ECMO center\n\n**ARRIVAL HANDOFF:**\n- HOPE score + survival probability\n- K+ value and trend\n- Total down time / CPR duration\n- CPR quality assessment`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -22410,6 +23031,14 @@ const CALCULATORS = {
     'gout-colchicine-dosing': GOUT_COLCHICINE_DOSING_CALCULATOR,
     'gout-synovial-interpreter': GOUT_SYNOVIAL_INTERPRETER_CALCULATOR,
     'gout-vs-septic': GOUT_VS_SEPTIC_CALCULATOR,
+    // Hypothermia
+    'hypo-temp-convert': HYPO_TEMP_CONVERTER_CALCULATOR,
+    'hypo-key-temps': HYPO_KEY_TEMPS_CALCULATOR,
+    'hypo-swiss-stage': HYPO_SWISS_STAGE_CALCULATOR,
+    'hypo-resus-criteria': HYPO_RESUS_CRITERIA_CALCULATOR,
+    'hypo-hope-score': HYPO_HOPE_SCORE_CALCULATOR,
+    'hypo-rewarming': HYPO_REWARMING_CALCULATOR,
+    'hypo-ecmo-transport': HYPO_ECMO_TRANSPORT_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

@@ -581,6 +581,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'complications', label: 'Complications', icon: '⚠️', action: 'jump', target: 'hs-complications' },
         { id: 'seizure', label: 'Seizure Rx', icon: '⚡', action: 'jump', target: 'hs-seizure-rx' },
     ],
+    'hypothermia': [
+        { id: 'hypo-temp', label: 'Temp Convert', icon: '🌡️', action: 'calculator', target: 'hypo-temp-convert' },
+        { id: 'hypo-key', label: 'Key Temps', icon: '🎯', action: 'calculator', target: 'hypo-key-temps' },
+        { id: 'hypo-swiss', label: 'Swiss Stage', icon: '🏔️', action: 'calculator', target: 'hypo-swiss-stage' },
+        { id: 'hypo-resus', label: 'Resus Criteria', icon: '❌', action: 'calculator', target: 'hypo-resus-criteria' },
+        { id: 'hypo-hope', label: 'HOPE Score', icon: '📊', action: 'calculator', target: 'hypo-hope-score' },
+        { id: 'hypo-rewarm', label: 'Rewarming', icon: '🔥', action: 'calculator', target: 'hypo-rewarming' },
+        { id: 'hypo-transport', label: 'ECMO Transport', icon: '🚑', action: 'calculator', target: 'hypo-ecmo-transport' },
+    ],
     'hfnc': [
         { id: 'rox', label: 'ROX', icon: '📊', action: 'calculator', target: 'rox-index' },
         { id: 'settings', label: 'Settings', icon: '⚙️', action: 'calculator', target: 'hfnc-settings' },
