@@ -235,7 +235,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 6,
         title: 'Lipid Emulsion (Intralipid)',
-        body: '[Intralipid Dosing](#/calc/ccb-intralipid) — dosing calculator.\n\n**Consider lipid emulsion for severe, refractory toxicity** [1][5].\n\n**Best evidence:** Verapamil (highly lipophilic)\n\n**Dosing:**\n• [Intralipid 20%](#/drug/intralipid/ccb toxicity) 1.5 mL/kg IV bolus\n• May repeat bolus x2 PRN (q5 min)\n• Infusion: 0.25-0.5 mL/kg/min\n• **Maximum: 10-12 mL/kg in first hour**\n\n**Mechanism:**\n• Creates a "lipid sink" to sequester lipophilic drugs\n• May have direct cardiac effects\n• Evidence is largely from case reports and animal studies [5]',
+        body: '[Intralipid Dosing](#/calc/ccb-intralipid) — dosing calculator.\n\n**Consider lipid emulsion for severe, refractory toxicity** [1][5].\n\n**Best evidence:** Verapamil (highly lipophilic)\n\n**Dosing:**\n• [Intralipid 20%](#/drug/lipid-emulsion/ccb toxicity) 1.5 mL/kg IV bolus\n• May repeat bolus x2 PRN (q5 min)\n• Infusion: 0.25-0.5 mL/kg/min\n• **Maximum: 10-12 mL/kg in first hour**\n\n**Mechanism:**\n• Creates a "lipid sink" to sequester lipophilic drugs\n• May have direct cardiac effects\n• Evidence is largely from case reports and animal studies [5]',
         citation: [1, 5],
         calculatorLinks: [{ id: 'ccb-intralipid', label: 'Intralipid Dosing' }],
         treatment: {

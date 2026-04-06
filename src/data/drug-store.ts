@@ -511,6 +511,61 @@ const ATORVASTATIN: DrugEntry = {
   ],
 };
 
+const ATROPINE: DrugEntry = {
+  id: 'atropine',
+  name: 'Atropine',
+  genericName: 'Atropine sulfate',
+  drugClass: 'Anticholinergic (muscarinic antagonist)',
+  route: 'IV',
+  indications: ['Symptomatic bradycardia', 'Organophosphate/carbamate poisoning', 'Digoxin toxicity (temporizing)', 'Beta-blocker toxicity (usually ineffective)', 'CCB toxicity (usually ineffective)'],
+  dosing: [
+    {
+      indication: 'Symptomatic bradycardia (ACLS)',
+      regimen: '1 mg IV push. May repeat every 3-5 minutes. Maximum total dose: 3 mg. First-line for symptomatic bradycardia with pulse.',
+    },
+    {
+      indication: 'Organophosphate/carbamate poisoning',
+      regimen: 'Initial: 2-4 mg IV. Double dose every 5 minutes until secretions dry (may require 10-20+ mg). Goal: dry secretions, HR >80, SBP >90. No maximum dose in cholinergic crisis.',
+    },
+    {
+      indication: 'Digoxin toxicity — bradycardia',
+      regimen: '0.5-1 mg IV. May repeat every 3-5 minutes (max 3 mg). Temporizing measure only — prepare DigiFab for definitive treatment.',
+    },
+    {
+      indication: 'Beta-blocker toxicity',
+      regimen: '0.5-1 mg IV. Usually ineffective because beta-blockers act downstream of muscarinic receptors. Try first but expect minimal response. Escalate to glucagon.',
+    },
+    {
+      indication: 'CCB toxicity',
+      regimen: '0.5-1 mg IV. Usually ineffective — toxicity is at the calcium channel, not vagal. Do not delay calcium and high-dose insulin.',
+    },
+    {
+      indication: 'Pediatric bradycardia',
+      regimen: '0.02 mg/kg IV (minimum 0.1 mg, maximum 0.5 mg per dose). May repeat once. Total maximum: 1 mg (child), 2 mg (adolescent).',
+      weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 0.5 },
+    },
+  ],
+  contraindications: [
+    'Narrow-angle glaucoma (relative)',
+    'Obstructive uropathy (relative)',
+    'Myasthenia gravis (relative)',
+  ],
+  cautions: [
+    'May cause paradoxical bradycardia at doses <0.5 mg (central vagal stimulation)',
+    'Tachycardia may precipitate ischemia in CAD',
+    'Avoid in suspected acute MI with bradycardia — may increase infarct size',
+    'In digoxin toxicity: avoid transcutaneous pacing until DigiFab given (can precipitate VF)',
+    'In beta-blocker/CCB toxicity: usually ineffective — proceed quickly to other therapies',
+  ],
+  monitoring: 'Heart rate, blood pressure. In organophosphate poisoning: secretion control, pupil size.',
+  notes: 'Competitive antagonist at muscarinic receptors. Blocks vagal input to the heart, allowing sympathetic tone to dominate. Onset: 1-2 minutes IV. Duration: 2-6 hours. In beta-blocker and CCB toxicity, atropine is usually ineffective because the toxic mechanism is downstream of muscarinic receptors. Worth trying briefly but do not delay definitive therapy (glucagon, calcium, high-dose insulin).',
+  citations: [
+    'Panchal AR, et al. 2020 AHA Guidelines for CPR and ECC: Part 3 Adult BLS and Part 7 Systems of Care. Circulation. 2020;142(16 Suppl 2):S366-S468.',
+    'Eddleston M, et al. Management of acute organophosphorus pesticide poisoning. Lancet. 2008;371(9612):597-607.',
+    'Levine M, et al. Critical Care Toxicology. 2nd ed. Springer; 2017.',
+  ],
+};
+
 const AZITHROMYCIN: DrugEntry = {
   id: 'azithromycin',
   name: 'Azithromycin (Zithromax)',
@@ -3977,6 +4032,61 @@ const PREDNISOLONE: DrugEntry = {
   ],
 };
 
+const PREDNISONE: DrugEntry = {
+  id: 'prednisone',
+  name: 'Prednisone',
+  genericName: 'Prednisone',
+  drugClass: 'Corticosteroid (glucocorticoid)',
+  route: 'PO',
+  indications: ['COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions'],
+  dosing: [
+    {
+      indication: 'COPD exacerbation',
+      regimen: '40 mg PO once daily for 5 days. No taper needed for 5-day course. GOLD 2024 standard. Longer courses offer no additional benefit.',
+    },
+    {
+      indication: 'Asthma exacerbation (adult)',
+      regimen: '40-60 mg PO once daily for 5-7 days. No taper needed for courses ≤7 days.',
+    },
+    {
+      indication: 'Gout flare',
+      regimen: '30-40 mg PO once daily for 5-7 days. Alternative when NSAIDs and colchicine contraindicated.',
+    },
+    {
+      indication: 'RA flare',
+      regimen: '10-20 mg PO once daily for 5-7 days with taper. Continue DMARDs. Rheumatology follow-up.',
+    },
+    {
+      indication: 'SLE flare (moderate)',
+      regimen: '0.5-1 mg/kg/day PO. Close rheumatology follow-up.',
+      weightCalc: { dosePerKg: 1, unit: 'mg', maxDose: 60 },
+    },
+    {
+      indication: 'Pediatric asthma exacerbation',
+      regimen: '1-2 mg/kg/day PO (max 60 mg) for 3-5 days.',
+      weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 60 },
+    },
+  ],
+  contraindications: [
+    'Systemic fungal infections',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Hyperglycemia — monitor glucose, especially in diabetics',
+    'Insomnia, agitation — consider morning dosing',
+    'GI upset — take with food',
+    'Immunosuppression — avoid in active untreated infection',
+    'Adrenal suppression with prolonged use (>2 weeks)',
+  ],
+  monitoring: 'Blood glucose. Clinical response. For COPD: respiratory status, SpO2.',
+  notes: 'Prednisone is a prodrug that is converted to prednisolone (active form) in the liver. Equivalent anti-inflammatory potency: prednisone 5 mg = prednisolone 5 mg = methylprednisolone 4 mg = dexamethasone 0.75 mg. For short courses (≤7 days), no taper is required. The REDUCE trial confirmed that 5 days of systemic steroids is non-inferior to 14 days for COPD exacerbation.',
+  citations: [
+    'GOLD 2024. Global Strategy for Diagnosis, Management, and Prevention of COPD. goldcopd.org.',
+    'Leuppi JD, et al. Short-term vs Conventional Glucocorticoid Therapy in Acute Exacerbations of COPD: The REDUCE Trial. JAMA. 2013;309(21):2223-2231.',
+    'Qaseem A, et al. Diagnosis and Management of Stable COPD: ACP Clinical Practice Guideline. Ann Intern Med. 2011;155(3):179-191.',
+  ],
+};
+
 const PROCAINAMIDE: DrugEntry = {
   id: 'procainamide',
   name: 'Procainamide',
@@ -6101,6 +6211,47 @@ const VITAMIN_K: DrugEntry = {
   citations: [
     'Greenberg SM, et al. 2022 Guideline for Management of Spontaneous ICH. Stroke. 2022;53(7):e282-e361.',
     'Tomaselli GF, et al. 2020 ACC: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+  ],
+};
+
+const VITAMIN_A_MEASLES: DrugEntry = {
+  id: 'vitamin-a-measles',
+  name: 'Vitamin A (Measles)',
+  genericName: 'Retinol (Vitamin A)',
+  drugClass: 'Fat-soluble vitamin',
+  route: 'PO',
+  indications: ['Measles - severe or hospitalized', 'Measles - outpatient (especially if malnutrition risk)', 'Vitamin A deficiency'],
+  dosing: [
+    {
+      indication: 'Measles - children <6 months',
+      regimen: '50,000 IU PO on Day 1 and Day 2 (total 2 doses). Give 3rd dose 2-4 weeks later if clinical signs of vitamin A deficiency.',
+    },
+    {
+      indication: 'Measles - children 6-11 months',
+      regimen: '100,000 IU PO on Day 1 and Day 2 (total 2 doses). Give 3rd dose 2-4 weeks later if clinical signs of vitamin A deficiency.',
+    },
+    {
+      indication: 'Measles - children >=12 months and adults',
+      regimen: '200,000 IU PO on Day 1 and Day 2 (total 2 doses). Give 3rd dose 2-4 weeks later if clinical signs of vitamin A deficiency.',
+    },
+  ],
+  contraindications: [
+    'Pregnancy - high-dose vitamin A is teratogenic',
+    'Hypervitaminosis A',
+  ],
+  cautions: [
+    'Do NOT substitute cod liver oil - variable vitamin A content and toxicity risk',
+    'Overdose risk: hepatotoxicity, increased intracranial pressure, bone damage',
+    'Nausea and vomiting may occur with high doses',
+    'Store away from light',
+  ],
+  monitoring: 'Clinical response. Watch for signs of vitamin A toxicity: headache, nausea, hepatomegaly.',
+  notes: 'WHO/AAP recommend vitamin A for ALL hospitalized children with measles and should be considered for outpatients, especially those with malnutrition risk, recent immigration, or suspected vitamin A deficiency. Evidence: 87% reduction in mortality in children <2 years, 64% reduction in mortality overall with two doses of 200,000 IU. Also reduces duration of diarrhea by 2 days and fever by 1 day. Mechanism: vitamin A deficiency impairs immune response and epithelial integrity; supplementation restores these functions.',
+  citations: [
+    'WHO. Vitamin A supplements: WHO position paper. Wkly Epidemiol Rec. 2011;86(21):185-192.',
+    'Bello S, et al. Vitamin A for preventing acute lower respiratory tract infections in children. Cochrane Database Syst Rev. 2023.',
+    'AAP Red Book: Report of the Committee on Infectious Diseases. 32nd ed. 2021.',
+    'Huiming Y, et al. Vitamin A for treating measles in children. Cochrane Database Syst Rev. 2005;(4):CD001479.',
   ],
 };
 
@@ -8544,6 +8695,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ASPIRIN,
   ATAZANAVIR,
   ATORVASTATIN,
+  ATROPINE,
   AZITHROMYCIN,
   BACITRACIN,
   BEDAQUILINE,
@@ -8689,6 +8841,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   POTASSIUM_CHLORIDE_ORAL,
   PRASUGREL,
   PREDNISOLONE,
+  PREDNISONE,
   PRETOMANID,
   PROCAINAMIDE,
   PROCAINE_PENICILLIN,
@@ -8741,6 +8894,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   WARFARIN,
   VERAPAMIL,
   VITAMIN_K,
+  VITAMIN_A_MEASLES,
   VWF_CONCENTRATE,
   WHOLE_BLOOD,
   ZIPRASIDONE,
@@ -8779,6 +8933,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/aspirin|ASA|acetylsalicylic/i, 'aspirin'],
   [/atazanavir|reyataz/i, 'atazanavir'],
   [/atorvastatin|lipitor/i, 'atorvastatin'],
+  [/atropine/i, 'atropine'],
   [/azithromycin|zithromax|z-?pack/i, 'azithromycin'],
   [/bacitracin/i, 'bacitracin'],
   [/biktarvy|BIC\/FTC\/TAF/i, 'biktarvy'],
@@ -8902,6 +9057,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/protamine/i, 'protamine'],
   [/prasugrel|effient/i, 'prasugrel'],
   [/prednisolone|prelone|orapred/i, 'prednisolone'],
+  [/prednisone|deltasone|rayos/i, 'prednisone'],
   [/pyridoxine|vitamin.?b6/i, 'pyridoxine'],
   [/racemic.*epinephrine|neb.*epinephrine|vaponefrin/i, 'racemic-epinephrine'],
   [/regular\s*insulin|insulin\s*regular|humulin/i, 'regular-insulin'],
@@ -8934,6 +9090,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/vancomycin|vancocin/i, 'vancomycin'],
   [/verapamil|calan|isoptin/i, 'verapamil'],
   [/vitamin\s*k|phytonadione/i, 'vitamin-k'],
+  [/vitamin\s*a.*measles|retinol.*measles/i, 'vitamin-a-measles'],
   [/whole\s*blood|LTOWB/i, 'whole-blood'],
   [/ziprasidone|geodon/i, 'ziprasidone'],
 ];

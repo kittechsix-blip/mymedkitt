@@ -146,7 +146,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 
 **Medications:**
 - [Box Jellyfish Antivenom](#/drug/box-jellyfish-antivenom/envenomation): 1-6 ampoules IV
-- [Magnesium sulfate](#/drug/magnesium/cardiac-arrest): 10 mmol IV if antivenom fails`,
+- [Magnesium sulfate](#/drug/magnesium-sulfate/cardiac-arrest): 10 mmol IV if antivenom fails`,
     citation: [1, 4, 5, 6],
     next: 'marine-systemic',
   },
@@ -182,7 +182,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 **Medications:**
 - [Fentanyl](#/drug/fentanyl/analgesia): 0.5-1.0 mcg/kg IV q10min
 - [GTN infusion](#/drug/nitroglycerin/hypertension): Titrate to SBP <160
-- [Magnesium sulfate](#/drug/magnesium/pain): 0.2 mmol/kg (max 10 mmol)`,
+- [Magnesium sulfate](#/drug/magnesium-sulfate/pain): 0.2 mmol/kg (max 10 mmol)`,
     citation: [1, 7],
     calculatorLinks: [
       { id: 'marine-irukandji-severity', label: 'Irukandji Severity Score' },
