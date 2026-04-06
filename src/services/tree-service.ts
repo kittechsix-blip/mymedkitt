@@ -707,6 +707,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/tia-workup.js');
       return { nodes: m.TIA_WORKUP_NODES, entryNodeId: 'tia-start', categoryId: 'neurology', moduleLabels: m.TIA_WORKUP_MODULE_LABELS, citations: m.TIA_WORKUP_CITATIONS };
     },
+    'peripartum-cardiomyopathy': async () => {
+      const m = await import('../data/trees/peripartum-cardiomyopathy.js');
+      return { nodes: m.PERIPARTUM_CARDIOMYOPATHY_NODES, entryNodeId: 'ppcm-start', categoryId: 'ob-gyn', moduleLabels: m.PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS, citations: m.PERIPARTUM_CARDIOMYOPATHY_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

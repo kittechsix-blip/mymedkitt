@@ -868,6 +868,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'tia-dapt', label: 'DAPT', icon: '💊', action: 'calculator', target: 'tia-dapt-protocol' },
     { id: 'tia-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'tia-disposition' },
   ],
+  'peripartum-cardiomyopathy': [
+    { id: 'ppcm-severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'ppcm-severity-assessment' },
+    { id: 'ppcm-meds', label: 'Medications', icon: '💊', action: 'calculator', target: 'ppcm-medication-guide' },
+    { id: 'ppcm-anticoag', label: 'Anticoag', icon: '💉', action: 'calculator', target: 'ppcm-anticoag-guide' },
+    { id: 'ppcm-prognosis', label: 'Prognosis', icon: '📈', action: 'calculator', target: 'ppcm-prognosis-factors' },
+    { id: 'ppcm-delivery', label: 'Delivery', icon: '🤰', action: 'calculator', target: 'ppcm-delivery-guide' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

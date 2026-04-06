@@ -88,6 +88,7 @@ export { PEDIATRIC_ARTHRITIS_NODES, MODULE_LABELS as PEDIATRIC_ARTHRITIS_MODULE_
 export { GOUT_NODES, GOUT_MODULE_LABELS, GOUT_CITATIONS, GOUT_NODE_COUNT } from './gout';
 export { HOP_KILLERS_NODES, HOP_KILLERS_MODULE_LABELS, HOP_KILLERS_CITATIONS, HOP_KILLERS_NODE_COUNT } from './hop-killers';
 export { TIA_WORKUP_NODES, TIA_WORKUP_MODULE_LABELS, TIA_WORKUP_CITATIONS, TIA_WORKUP_NODE_COUNT } from './tia-workup';
+export { PERIPARTUM_CARDIOMYOPATHY_NODES, PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS, PERIPARTUM_CARDIOMYOPATHY_CITATIONS, PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT } from './peripartum-cardiomyopathy';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**

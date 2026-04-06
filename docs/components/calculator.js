@@ -21335,6 +21335,483 @@ const TIA_DISPOSITION_CALCULATOR = {
         };
     },
 };
+// =====================================================================
+// PERIPARTUM CARDIOMYOPATHY CALCULATORS
+// =====================================================================
+const PPCM_SEVERITY_ASSESSMENT_CALCULATOR = {
+    id: 'ppcm-severity-assessment',
+    title: 'PPCM Severity Assessment',
+    subtitle: 'Based on LVEF and hemodynamics',
+    description: 'Assess severity based on LVEF, hemodynamics, and clinical features',
+    fields: [
+        {
+            name: 'lvef',
+            label: 'Left Ventricular Ejection Fraction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'LVEF 35-45% (mild-moderate)', points: 0 },
+                { label: 'LVEF 25-34% (severe)', points: 1 },
+                { label: 'LVEF <25% (critical)', points: 2 },
+                { label: 'Unknown/awaiting echo', points: 3 },
+            ],
+        },
+        {
+            name: 'hemodynamics',
+            label: 'Hemodynamic Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable (SBP >100, no vasopressors)', points: 0 },
+                { label: 'Borderline (SBP 90-100)', points: 1 },
+                { label: 'Shock (SBP <90 or vasopressors)', points: 2 },
+            ],
+        },
+        {
+            name: 'respiratory',
+            label: 'Respiratory Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable on room air or low-flow O2', points: 0 },
+                { label: 'High-flow O2 or NIPPV', points: 1 },
+                { label: 'Intubated or impending respiratory failure', points: 2 },
+            ],
+        },
+        { name: 'rvdys', label: 'RV Dysfunction on Echo', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [],
+    computeResult: (values) => {
+        const lvef = values['lvef'] || 0;
+        const hemodynamics = values['hemodynamics'] || 0;
+        const respiratory = values['respiratory'] || 0;
+        const rvdys = values['rvdys'] || 0;
+        // lvef: 0=mild-moderate, 1=severe, 2=critical, 3=unknown
+        // hemodynamics: 0=stable, 1=borderline, 2=shock
+        // respiratory: 0=stable, 1=high-flow/NIPPV, 2=intubated
+        // rvdys: 0=off, 1=on (toggle gives 1 when on)
+        const isCritical = lvef === 2 || hemodynamics === 2 || respiratory === 2;
+        const isSevere = lvef === 1 || hemodynamics === 1 || respiratory === 1 || rvdys === 1;
+        if (isCritical) {
+            return {
+                value: 'CRITICAL',
+                label: 'Critical PPCM - ICU Required',
+                description: `**CRITICAL PERIPARTUM CARDIOMYOPATHY**\n\n**Immediate Actions:**\n- ICU admission\n- Arterial line, central access\n- Cardiology STAT consult\n- OB/MFM STAT if pregnant\n- Consider mechanical circulatory support\n\n**Inotrope/Vasopressor Protocol:**\n- Dobutamine 2.5-20 mcg/kg/min (first-line inotrope)\n- Add norepinephrine if MAP <65 despite dobutamine\n\n**If Pregnant:**\n- Left lateral tilt positioning\n- Consider urgent delivery if inotrope-dependent\n- ECMO standby if available\n\n**PPCM has HIGH recovery potential.** Young patients with potentially reversible pathology. Aggressive support warranted.`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (isSevere) {
+            return {
+                value: 'SEVERE',
+                label: 'Severe PPCM - Close Monitoring',
+                description: `**SEVERE PERIPARTUM CARDIOMYOPATHY**\n\n**Management:**\n- Admit to telemetry/stepdown minimum\n- Cardiology consult\n- Aggressive diuresis if volume overloaded\n- Start GDMT as tolerated\n\n**High-Risk Features Present:**\n${lvef === 1 ? '- LVEF <35%\n' : ''}${hemodynamics === 1 ? '- Borderline hemodynamics\n' : ''}${respiratory === 1 ? '- Respiratory compromise\n' : ''}${rvdys === 1 ? '- RV dysfunction (poor prognostic marker)\n' : ''}\n**Anticoagulation:**\nStrongly consider prophylactic anticoagulation (enoxaparin 40 mg SQ daily) given EF <35%.\n\n**Escalation Triggers:**\n- SBP <90\n- Requiring >6 L/min O2\n- New arrhythmia\n- Declining mentation`,
+                colorVar: '--color-urgent',
+            };
+        }
+        if (lvef === 3) { // unknown
+            return {
+                value: 'PENDING',
+                label: 'Echo Required for Assessment',
+                description: `**ECHO NEEDED FOR RISK STRATIFICATION**\n\nCannot fully assess severity without LVEF.\n\n**Order STAT Echo to assess:**\n- LV systolic function (LVEF)\n- LV dilation\n- RV function\n- Presence of LV thrombus\n- Functional MR/TR\n\n**While Awaiting Echo:**\n- Obtain BNP/NT-proBNP\n- ECG for arrhythmia, QRS width\n- CXR for cardiomegaly, pulmonary edema\n- Monitor hemodynamics closely\n\nIf unstable, treat as severe pending echo confirmation.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'MILD-MODERATE',
+            label: 'Mild-Moderate PPCM',
+            description: `**MILD-MODERATE PERIPARTUM CARDIOMYOPATHY**\n\n**Management:**\n- Admit for new diagnosis\n- Initiate/optimize GDMT\n- Cardiology consult\n\n**Medication Initiation:**\n- Diuretics (furosemide 20-40 mg IV) for congestion\n- ACEi/ARB if postpartum OR hydralazine/nitrates if pregnant\n- Beta-blocker once euvolemic and stable\n\n**Favorable Prognostic Features:**\n- LVEF 35-45%\n- Hemodynamically stable\n- No RV dysfunction\n\n**Recovery Expectation:**\n50-70% of PPCM patients recover EF to >50% by 6 months. Early treatment improves outcomes.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const PPCM_MEDICATION_GUIDE_CALCULATOR = {
+    id: 'ppcm-medication-guide',
+    title: 'PPCM Medication Guide',
+    subtitle: 'Pregnancy-safe vs postpartum medication selection',
+    description: 'Pregnancy-safe vs postpartum medication selection',
+    fields: [
+        {
+            name: 'status',
+            label: 'Pregnancy Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Currently pregnant', points: 0 },
+                { label: 'Postpartum - breastfeeding', points: 1 },
+                { label: 'Postpartum - not breastfeeding', points: 2 },
+            ],
+        },
+        {
+            name: 'severity',
+            label: 'HF Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Compensated (stable on oral meds)', points: 0 },
+                { label: 'Decompensated (needs IV diuretics)', points: 1 },
+                { label: 'Cardiogenic shock', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [],
+    computeResult: (values) => {
+        const status = values['status'] || 0;
+        const severity = values['severity'] || 0;
+        if (severity === 2) { // shock
+            return {
+                value: 'SHOCK',
+                label: 'Cardiogenic Shock Protocol',
+                description: `**CARDIOGENIC SHOCK - SAME REGARDLESS OF PREGNANCY STATUS**\n\n**Inotropes:**\n- Dobutamine 2.5-20 mcg/kg/min (first-line)\n- Consider milrinone 0.375-0.75 mcg/kg/min if dobutamine inadequate\n\n**Vasopressors:**\n- Norepinephrine 0.1-0.5 mcg/kg/min if MAP <65\n- Add to dobutamine as needed\n\n**Volume:**\n- Judicious - avoid over-resuscitation\n- Goal euvolemia, not hypervolemia\n\n**Mechanical Support:**\n- IABP if available\n- VA-ECMO for refractory shock\n\n**Delivery Considerations:**\nIf pregnant and inotrope-dependent, urgent delivery indicated after maternal stabilization.`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (status === 0) { // pregnant
+            return {
+                value: 'PREGNANT',
+                label: 'Pregnancy-Safe Medications',
+                description: `**MEDICATIONS SAFE IN PREGNANCY:**\n\n**Diuretics:**\n- Furosemide 20-40 mg IV/PO (safe, use lowest effective dose)\n\n**Afterload Reduction:**\n- Hydralazine 25-50 mg PO TID-QID (or 10-20 mg IV q4-6h)\n- Isosorbide dinitrate 20-40 mg PO TID\n- IV nitroglycerin 10-200 mcg/min if SBP >110\n\n**Beta-Blocker:**\n- Metoprolol tartrate 12.5-25 mg BID (titrate to 100 mg BID)\n- Avoid atenolol (IUGR risk)\n\n**Other:**\n- Digoxin 0.125-0.25 mg daily (safe)\n\n**AVOID IN PREGNANCY:**\n- ACE inhibitors / ARBs (teratogenic)\n- Spironolactone/eplerenone\n- SGLT2 inhibitors\n- Nitroprusside (cyanide toxicity)\n\n**Switch to ACEi/ARB immediately after delivery.**`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (status === 1) { // breastfeeding
+            return {
+                value: 'BREASTFEEDING',
+                label: 'Breastfeeding-Safe Medications',
+                description: `**MEDICATIONS SAFE WHILE BREASTFEEDING:**\n\n**ACE Inhibitors (First-Line):**\n- Enalapril 2.5 mg BID (titrate to 10-20 mg BID) - preferred\n- Captopril 6.25-50 mg TID\n- Benazepril 5-40 mg daily\n\n**Beta-Blockers:**\n- Metoprolol 12.5-100 mg BID\n- Carvedilol 3.125-25 mg BID (some breast milk transfer)\n\n**Diuretics:**\n- Furosemide - safe\n\n**Other:**\n- Digoxin - safe\n- Warfarin - safe (for anticoagulation)\n\n**AVOID WHILE BREASTFEEDING:**\n- ARBs (limited data)\n- Spironolactone (insufficient data)\n- SGLT2 inhibitors\n- DOACs\n- Bromocriptine (suppresses lactation)\n\nIf bromocriptine indicated, patient cannot breastfeed.`,
+                colorVar: '--color-primary',
+            };
+        }
+        // not-breastfeeding
+        return {
+            value: 'FULL-GDMT',
+            label: 'Full GDMT Available',
+            description: `**FULL GUIDELINE-DIRECTED MEDICAL THERAPY**\n\n**ACE Inhibitor/ARB:**\n- Lisinopril 2.5-5 mg daily (titrate to 20-40 mg)\n- OR Enalapril 2.5 mg BID (titrate to 10-20 mg BID)\n- ARB if ACE-intolerant\n\n**Beta-Blocker:**\n- Carvedilol 3.125 mg BID (titrate to 25 mg BID) - preferred\n- OR Metoprolol succinate 12.5-25 mg daily (titrate to 200 mg)\n\n**MRA:**\n- Spironolactone 12.5-25 mg daily (if EF <35%)\n\n**SGLT2 Inhibitor:**\n- Empagliflozin 10 mg daily\n- Dapagliflozin 10 mg daily\n\n**Diuretics:**\n- Furosemide PRN for congestion\n\n**Consider ARNI:**\n- If EF remains <35% on max ACE/ARB\n\n**Titration:**\nStart low, go slow. Double doses every 1-2 weeks as tolerated.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const PPCM_ANTICOAG_GUIDE_CALCULATOR = {
+    id: 'ppcm-anticoag-guide',
+    title: 'PPCM Anticoagulation Guide',
+    subtitle: 'Anticoagulation decision support',
+    description: 'Anticoagulation decision support for PPCM',
+    fields: [
+        {
+            name: 'lvef',
+            label: 'LVEF Category',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'LVEF >=35%', points: 0 },
+                { label: 'LVEF 30-34%', points: 1 },
+                { label: 'LVEF <30%', points: 2 },
+            ],
+        },
+        {
+            name: 'thrombus',
+            label: 'LV Thrombus',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No thrombus on echo', points: 0 },
+                { label: 'LV thrombus present', points: 1 },
+                { label: 'Echo pending', points: 2 },
+            ],
+        },
+        {
+            name: 'afib',
+            label: 'Atrial Fibrillation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No atrial fibrillation', points: 0 },
+                { label: 'Atrial fibrillation present', points: 1 },
+            ],
+        },
+        {
+            name: 'bromocriptine',
+            label: 'On Bromocriptine',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not on bromocriptine', points: 0 },
+                { label: 'On bromocriptine', points: 1 },
+            ],
+        },
+        {
+            name: 'status',
+            label: 'Pregnancy Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Currently pregnant', points: 0 },
+                { label: 'Postpartum', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [],
+    computeResult: (values) => {
+        const lvef = values['lvef'] || 0;
+        const thrombus = values['thrombus'] || 0;
+        const afib = values['afib'] || 0;
+        const bromocriptine = values['bromocriptine'] || 0;
+        const status = values['status'] || 0;
+        const needsTherapeutic = thrombus === 1 || afib === 1; // thrombus present or afib present
+        const needsProphylactic = lvef === 2 || lvef === 1 || bromocriptine === 1; // severely-reduced, reduced, or on bromocriptine
+        if (needsTherapeutic) {
+            const indication = thrombus === 1 ? 'LV thrombus' : 'Atrial fibrillation';
+            if (status === 0) { // pregnant
+                return {
+                    value: 'THERAPEUTIC-PREGNANCY',
+                    label: 'Therapeutic Anticoagulation - Pregnancy',
+                    description: `**THERAPEUTIC ANTICOAGULATION REQUIRED**\nIndication: ${indication}\n\n**During Pregnancy:**\n- Enoxaparin 1 mg/kg SQ every 12 hours\n- Monitor anti-Xa levels (target 0.6-1.0 IU/mL, 4h post-dose)\n- Adjust dose as pregnancy progresses\n\n**Near Delivery:**\n- Switch to UFH 24-36 hours before planned delivery\n- Hold LMWH 24 hours before epidural/spinal\n- Protamine available for reversal if needed\n\n**Duration:**\n- Minimum 3 months\n- Continue until thrombus resolved and EF improved\n\n**CONTRAINDICATED in Pregnancy:**\n- Warfarin (teratogenic)\n- DOACs (insufficient safety data)`,
+                    colorVar: '--color-urgent',
+                };
+            }
+            return {
+                value: 'THERAPEUTIC-POSTPARTUM',
+                label: 'Therapeutic Anticoagulation - Postpartum',
+                description: `**THERAPEUTIC ANTICOAGULATION REQUIRED**\nIndication: ${indication}\n\n**Postpartum Options:**\n\n**Warfarin (preferred if breastfeeding):**\n- Target INR 2-3\n- Safe during breastfeeding\n- Bridge with enoxaparin until INR therapeutic\n\n**LMWH (alternative):**\n- Enoxaparin 1 mg/kg SQ every 12 hours\n- No INR monitoring required\n\n**DOACs:**\n- Limited data in breastfeeding - avoid if possible\n- If not breastfeeding, apixaban or rivaroxaban acceptable\n\n**Duration:**\n- Minimum 3 months\n- Continue until thrombus resolved and EF >35%\n- May require longer if persistent AF`,
+                colorVar: '--color-urgent',
+            };
+        }
+        if (needsProphylactic) {
+            const reasons = [];
+            if (lvef === 2)
+                reasons.push('LVEF <30%');
+            if (lvef === 1)
+                reasons.push('LVEF 30-34%');
+            if (bromocriptine === 1)
+                reasons.push('On bromocriptine');
+            if (status === 0) { // pregnant
+                return {
+                    value: 'PROPHYLACTIC-PREGNANCY',
+                    label: 'Prophylactic Anticoagulation - Pregnancy',
+                    description: `**PROPHYLACTIC ANTICOAGULATION RECOMMENDED**\nIndications: ${reasons.join(', ')}\n\n**During Pregnancy:**\n- Enoxaparin 40 mg SQ daily (prophylactic dose)\n- OR 0.5 mg/kg SQ daily if weight-based preferred\n\n**Near Delivery:**\n- Switch to UFH if delivery imminent\n- Hold LMWH 24 hours before epidural\n\n**Duration:**\n- Continue until EF >=35-40%\n- Minimum 8 weeks postpartum (highest risk period)\n\n**Monitoring:**\n- Anti-Xa levels not routinely needed for prophylactic dosing\n- Monitor for bleeding`,
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'PROPHYLACTIC-POSTPARTUM',
+                label: 'Prophylactic Anticoagulation - Postpartum',
+                description: `**PROPHYLACTIC ANTICOAGULATION RECOMMENDED**\nIndications: ${reasons.join(', ')}\n\n**Options:**\n\n**LMWH:**\n- Enoxaparin 40 mg SQ daily\n\n**Warfarin:**\n- INR 2-3 (therapeutic, but for prophylactic indication)\n- Safe for breastfeeding\n\n**Duration:**\n- Continue until EF >=35-40%\n- Minimum 8 weeks postpartum\n- Repeat echo in 4-6 weeks to reassess\n\n**Re-assess if:**\n- New symptoms of embolism\n- EF declines\n- New atrial fibrillation`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'NO-ANTICOAG',
+            label: 'Routine Anticoagulation Not Required',
+            description: `**ROUTINE ANTICOAGULATION NOT INDICATED**\n\n**Current Status:**\n- LVEF >=35%\n- No LV thrombus\n- No atrial fibrillation\n- Not on bromocriptine\n\n**Standard VTE Prophylaxis:**\n- Per routine obstetric/postpartum guidelines\n\n**Indications to Reassess:**\n- EF declines to <35%\n- New atrial fibrillation detected\n- Starting bromocriptine\n- Symptoms suggesting embolism\n\n**Follow-up:**\n- Repeat echo in 4-6 weeks\n- Reassess anticoagulation needs at each visit`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const PPCM_PROGNOSIS_FACTORS_CALCULATOR = {
+    id: 'ppcm-prognosis-factors',
+    title: 'PPCM Prognosis Factors',
+    subtitle: 'Prognostic indicators',
+    description: 'Identify favorable and unfavorable prognostic indicators',
+    fields: [
+        {
+            name: 'lvef',
+            label: 'Initial LVEF',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'LVEF 35-45%', points: 0 },
+                { label: 'LVEF 25-34%', points: 1 },
+                { label: 'LVEF <25%', points: 2 },
+            ],
+        },
+        {
+            name: 'lvedd',
+            label: 'LV End-Diastolic Dimension',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'LVEDD <55 mm', points: 0 },
+                { label: 'LVEDD 55-60 mm', points: 1 },
+                { label: 'LVEDD >60 mm', points: 2 },
+            ],
+        },
+        {
+            name: 'timing',
+            label: 'Timing of Diagnosis',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Postpartum (after delivery)', points: 0 },
+                { label: 'Antepartum (before delivery)', points: 1 },
+            ],
+        },
+        {
+            name: 'race',
+            label: 'Race/Ethnicity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'African American', points: 1 },
+                { label: 'Caucasian/Hispanic/Other', points: 0 },
+            ],
+        },
+        {
+            name: 'rvdys',
+            label: 'RV Dysfunction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No RV dysfunction', points: 0 },
+                { label: 'RV dysfunction present', points: 1 },
+            ],
+        },
+        {
+            name: 'bnp',
+            label: 'BNP Level',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'BNP <1000 pg/mL', points: 0 },
+                { label: 'BNP 1000-1860 pg/mL', points: 1 },
+                { label: 'BNP >1860 pg/mL', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [],
+    computeResult: (values) => {
+        const lvef = values['lvef'] || 0;
+        const lvedd = values['lvedd'] || 0;
+        const timing = values['timing'] || 0;
+        const race = values['race'] || 0;
+        const rvdys = values['rvdys'] || 0;
+        const bnp = values['bnp'] || 0;
+        const unfavorable = [];
+        const favorable = [];
+        if (lvef === 2)
+            unfavorable.push('LVEF <25%');
+        else if (lvef === 0)
+            favorable.push('LVEF 35-45%');
+        if (lvedd === 2)
+            unfavorable.push('Severely dilated LV (>60 mm)');
+        else if (lvedd === 0)
+            favorable.push('Normal LV size');
+        if (timing === 1)
+            unfavorable.push('Antepartum diagnosis');
+        else
+            favorable.push('Postpartum diagnosis');
+        if (race === 1)
+            unfavorable.push('African American race');
+        else
+            favorable.push('Non-African American race');
+        if (rvdys === 1)
+            unfavorable.push('RV dysfunction');
+        else
+            favorable.push('Preserved RV function');
+        if (bnp === 2)
+            unfavorable.push('BNP >1860 pg/mL');
+        else if (bnp === 0)
+            favorable.push('BNP <1000 pg/mL');
+        const score = unfavorable.length;
+        let prognosis = '';
+        let colorVar = '';
+        if (score >= 4) {
+            prognosis = 'HIGH RISK - Poor Recovery Expected';
+            colorVar = '--color-critical';
+        }
+        else if (score >= 2) {
+            prognosis = 'INTERMEDIATE RISK - Variable Recovery';
+            colorVar = '--color-warning';
+        }
+        else {
+            prognosis = 'FAVORABLE - Good Recovery Expected';
+            colorVar = '--color-primary';
+        }
+        return {
+            value: `${score}/6`,
+            label: prognosis,
+            description: `**PPCM PROGNOSTIC ASSESSMENT**\n\n**Unfavorable Factors (${unfavorable.length}):**\n${unfavorable.length > 0 ? unfavorable.map(f => `- ${f}`).join('\n') : '- None identified'}\n\n**Favorable Factors (${favorable.length}):**\n${favorable.length > 0 ? favorable.map(f => `- ${f}`).join('\n') : '- None identified'}\n\n---\n\n**IPAC Study Recovery Data:**\n- 71% recovered LVEF >50% at 12 months\n- Most recovery occurs within first 2-3 months\n- Little change after 12 months\n\n**Mortality:**\n- US: 6-10%\n- Developing countries: up to 28%\n- Highest risk in first 30 days\n\n**Future Pregnancy:**\n- If EF recovered (>50%): 30-50% recurrence risk\n- If EF NOT recovered (<50%): HIGH risk - mWHO Class IV\n- Contraception counseling essential`,
+            colorVar,
+        };
+    },
+};
+const PPCM_DELIVERY_GUIDE_CALCULATOR = {
+    id: 'ppcm-delivery-guide',
+    title: 'PPCM Delivery Guide',
+    subtitle: 'Delivery timing and mode',
+    description: 'Delivery timing and mode recommendations for pregnant PPCM patients',
+    fields: [
+        {
+            name: 'gestational-age',
+            label: 'Gestational Age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<34 weeks', points: 0 },
+                { label: '34-36 weeks', points: 1 },
+                { label: '>=37 weeks', points: 2 },
+            ],
+        },
+        {
+            name: 'hemodynamics',
+            label: 'Hemodynamic Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable - no inotropes', points: 0 },
+                { label: 'Requiring inotropes/vasopressors', points: 1 },
+                { label: 'Mechanical circulatory support', points: 2 },
+            ],
+        },
+        {
+            name: 'fetal',
+            label: 'Fetal Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Fetal status reassuring', points: 0 },
+                { label: 'Fetal distress', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: [],
+    computeResult: (values) => {
+        const ga = values['gestational-age'] || 0;
+        const hemodynamics = values['hemodynamics'] || 0;
+        const fetal = values['fetal'] || 0;
+        const needsUrgent = hemodynamics === 1 || hemodynamics === 2 || fetal === 1;
+        if (needsUrgent) {
+            return {
+                value: 'URGENT',
+                label: 'Urgent Delivery Indicated',
+                description: `**URGENT DELIVERY REQUIRED**\n\n**Indication:**\n${hemodynamics === 1 ? '- Inotrope-dependent\n' : ''}${hemodynamics === 2 ? '- On mechanical circulatory support\n' : ''}${fetal === 1 ? '- Fetal distress\n' : ''}\n**Mode of Delivery:**\n- Cesarean section usually necessary\n- Cannot tolerate labor if hemodynamically unstable\n\n**Anesthesia:**\n- General anesthesia may be required if unstable\n- Neuraxial preferred if hemodynamics permit\n\n**Preparation:**\n- Blood products available\n- ECMO standby if available\n- Neonatology at bedside\n\n**Post-Delivery:**\n- Expect hemodynamic shifts (~500 mL auto-transfusion)\n- May need increased pressors or diuresis\n- Close monitoring x 24-48 hours minimum\n\n**Perimortem C-section:**\nIf cardiac arrest occurs: deliver within 4-5 minutes. May improve both maternal resuscitation and neonatal outcomes.`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (ga === 0) { // preterm
+            return {
+                value: 'OPTIMIZE-WAIT',
+                label: 'Optimize Mother, Delay Delivery if Possible',
+                description: `**PRETERM (<34 weeks) - OPTIMIZE AND WAIT**\n\n**Goals:**\n- Stabilize maternal hemodynamics\n- Optimize GDMT\n- Advance gestational age if safe\n\n**Maternal Optimization:**\n- IV diuretics for decongestion\n- Hydralazine/nitrates for afterload reduction\n- Beta-blocker when stable\n\n**Fetal Considerations:**\n- Betamethasone for fetal lung maturity if delivery anticipated within 7 days\n- Continuous fetal monitoring\n- MFM involvement\n\n**Triggers for Earlier Delivery:**\n- Maternal decompensation despite therapy\n- Need for inotropes\n- Fetal distress\n\n**Mode if Stable:**\n- Vaginal delivery preferred\n- Early epidural recommended`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'PLAN-DELIVERY',
+            label: 'Plan Controlled Delivery',
+            description: `**TERM/LATE PRETERM - PLAN CONTROLLED DELIVERY**\n\n**Timing:**\n- Delivery indicated once mother stabilized\n- No benefit to continuing pregnancy at term with PPCM\n\n**Mode - Vaginal Preferred:**\n- Less hemodynamic stress than C-section\n- Lower infection/VTE risk\n- Early epidural strongly recommended\n\n**Labor Management:**\n- Continuous cardiac monitoring\n- Arterial line if LVEF <35%\n- Shorten second stage (vacuum/forceps assist)\n- Avoid prolonged Valsalva\n\n**Multidisciplinary Team:**\n- OB/MFM\n- Cardiology\n- Anesthesia\n- Neonatology\n\n**Anticoagulation:**\n- Hold LMWH 24 hours before epidural\n- Restart 12-24 hours after delivery\n\n**Post-Delivery:**\n- Watch for decompensation (auto-transfusion ~500 mL)\n- May need post-delivery diuresis\n- Transition to ACEi/ARB immediately`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -21342,6 +21819,12 @@ const CALCULATORS = {
     'tia-workup-checklist': TIA_WORKUP_CHECKLIST_CALCULATOR,
     'tia-dapt-protocol': TIA_DAPT_PROTOCOL_CALCULATOR,
     'tia-disposition': TIA_DISPOSITION_CALCULATOR,
+    // Peripartum Cardiomyopathy
+    'ppcm-severity-assessment': PPCM_SEVERITY_ASSESSMENT_CALCULATOR,
+    'ppcm-medication-guide': PPCM_MEDICATION_GUIDE_CALCULATOR,
+    'ppcm-anticoag-guide': PPCM_ANTICOAG_GUIDE_CALCULATOR,
+    'ppcm-prognosis-factors': PPCM_PROGNOSIS_FACTORS_CALCULATOR,
+    'ppcm-delivery-guide': PPCM_DELIVERY_GUIDE_CALCULATOR,
     // HOP Killers (Physiologically Difficult Airway)
     'hop-hypotensive-intubation': HOP_HYPOTENSIVE_INTUBATION_CALCULATOR,
     'hop-hypoxic-intubation': HOP_HYPOXIC_INTUBATION_CALCULATOR,
