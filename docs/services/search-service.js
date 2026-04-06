@@ -136,6 +136,23 @@ export function search(query) {
     // Fallback to substring search
     return fallbackSearch(q);
 }
+/** Search with optional type filters */
+export function searchWithFilters(query, filters) {
+    let results = search(query);
+    // Apply type filters if provided
+    if (filters && filters.length > 0) {
+        results = results.filter(r => filters.includes(r.type));
+    }
+    return results;
+}
+/** Get available filter types (for UI) */
+export function getAvailableFilterTypes() {
+    return [
+        { type: 'consult', label: 'Consults' },
+        { type: 'drug', label: 'Drugs' },
+        { type: 'calculator', label: 'Calculators' },
+    ];
+}
 /** Convert SearchDoc to SearchResult */
 function docToResult(doc, score) {
     let route;

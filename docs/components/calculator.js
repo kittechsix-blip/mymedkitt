@@ -23228,12 +23228,21 @@ export function renderCalculator(container, calculatorId) {
     desc.className = 'calculator-description';
     desc.textContent = calc.description;
     container.appendChild(desc);
+    // Feature 1: Scroll sentinel for sticky score detection
+    const sentinel = document.createElement('div');
+    sentinel.className = 'calculator-scroll-sentinel';
+    container.appendChild(sentinel);
     // Score display (will update in real-time) — only if calculator has computeResult
     const scoreDisplay = document.createElement('div');
-    scoreDisplay.className = 'calculator-score-display';
+    scoreDisplay.className = 'calculator-score-display calculator-score-display--sticky';
     scoreDisplay.id = 'calc-score-display';
     if (!calc.customRender || calc.computeResult) {
         container.appendChild(scoreDisplay);
+        // Feature 1: Intersection observer for stuck state
+        const observer = new IntersectionObserver(([entry]) => {
+            scoreDisplay.classList.toggle('calculator-score-display--stuck', !entry.isIntersecting);
+        }, { threshold: 0, rootMargin: '-56px 0px 0px 0px' });
+        observer.observe(sentinel);
     }
     // Custom render path (e.g., SVG body diagrams)
     if (calc.customRender) {
@@ -23510,6 +23519,8 @@ function updateScore(calc, values, display) {
         descEl.className = 'calculator-result-risk';
         descEl.textContent = result.description;
         display.appendChild(descEl);
+        // Feature 5: Copy Results Button (formula-based)
+        addCopyButton(display, calc.title, result.label, result.description);
         return;
     }
     // Sum all field values
@@ -23556,7 +23567,33 @@ function updateScore(calc, values, display) {
         mortality.className = 'calculator-mortality';
         mortality.textContent = result.mortality;
         display.appendChild(mortality);
+        // Feature 5: Copy Results Button (standard sum-based)
+        addCopyButton(display, calc.title, `${result.label} (${score} points)`, result.mortality);
     }
+}
+// Feature 5: Copy Results Button helper
+function addCopyButton(display, title, label, description) {
+    // Remove existing copy button if any
+    const existing = display.querySelector('.calculator-copy-btn');
+    if (existing)
+        existing.remove();
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'calculator-copy-btn';
+    copyBtn.innerHTML = '📋 Copy Result';
+    copyBtn.addEventListener('click', async () => {
+        const text = `${title}: ${label}\n${description}\n\nCalculated via myMedKitt`;
+        try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.innerHTML = '✓ Copied!';
+            setTimeout(() => { copyBtn.innerHTML = '📋 Copy Result'; }, 2000);
+        }
+        catch {
+            // Fallback for older browsers
+            copyBtn.innerHTML = '⚠ Copy failed';
+            setTimeout(() => { copyBtn.innerHTML = '📋 Copy Result'; }, 2000);
+        }
+    });
+    display.appendChild(copyBtn);
 }
 // -------------------------------------------------------------------
 // Not Found

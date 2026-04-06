@@ -202,6 +202,33 @@ export function search(query: string): SearchResult[] {
   return fallbackSearch(q);
 }
 
+// ===================================================================
+// Feature 4: Faceted Search with Type Filters
+// ===================================================================
+
+export type SearchFilterType = 'category' | 'consult' | 'drug' | 'calculator';
+
+/** Search with optional type filters */
+export function searchWithFilters(query: string, filters?: SearchFilterType[]): SearchResult[] {
+  let results = search(query);
+
+  // Apply type filters if provided
+  if (filters && filters.length > 0) {
+    results = results.filter(r => filters.includes(r.type));
+  }
+
+  return results;
+}
+
+/** Get available filter types (for UI) */
+export function getAvailableFilterTypes(): { type: SearchFilterType; label: string }[] {
+  return [
+    { type: 'consult', label: 'Consults' },
+    { type: 'drug', label: 'Drugs' },
+    { type: 'calculator', label: 'Calculators' },
+  ];
+}
+
 /** Convert SearchDoc to SearchResult */
 function docToResult(doc: SearchDoc, score?: number): SearchResult {
   let route: string;

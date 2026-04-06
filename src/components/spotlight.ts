@@ -4,7 +4,7 @@
  * Inspired by Linear, Raycast, Arc
  */
 
-import { search, buildSearchIndex, type SearchResult } from '../services/search-service.js';
+import { search, searchWithFilters, buildSearchIndex, getAvailableFilterTypes, type SearchResult, type SearchFilterType } from '../services/search-service.js';
 import { router } from '../services/router.js';
 import { showDrugModal } from './drug-store.js';
 
@@ -18,6 +18,7 @@ let spotlightResults: HTMLElement | null = null;
 let selectedIndex = -1;
 let currentResults: SearchResult[] = [];
 let isOpen = false;
+let activeFilters: SearchFilterType[] = [];
 
 // ===================================================================
 // Type Icons
@@ -91,6 +92,30 @@ export function openSpotlight(): void {
   inputContainer.appendChild(shortcutHint);
   modal.appendChild(inputContainer);
 
+  // Feature 4: Filter chips
+  const filterChips = document.createElement('div');
+  filterChips.className = 'spotlight-filter-chips';
+  for (const { type, label } of getAvailableFilterTypes()) {
+    const chip = document.createElement('button');
+    chip.className = 'spotlight-filter-chip';
+    chip.textContent = label;
+    chip.dataset.filterType = type;
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('spotlight-filter-chip--active');
+      if (activeFilters.includes(type)) {
+        activeFilters = activeFilters.filter(f => f !== type);
+      } else {
+        activeFilters.push(type);
+      }
+      // Re-run search with filters
+      if (spotlightInput) {
+        runSearch(spotlightInput.value);
+      }
+    });
+    filterChips.appendChild(chip);
+  }
+  modal.appendChild(filterChips);
+
   // Results container
   spotlightResults = document.createElement('div');
   spotlightResults.className = 'spotlight-results';
@@ -133,6 +158,7 @@ export function closeSpotlight(): void {
     spotlightResults = null;
     selectedIndex = -1;
     currentResults = [];
+    activeFilters = []; // Reset filters on close
     document.body.style.overflow = '';
   }, 150);
 }
@@ -146,19 +172,30 @@ export function isSpotlightOpen(): boolean {
 // ===================================================================
 
 function handleInput(): void {
-  if (!spotlightInput || !spotlightResults) return;
+  if (!spotlightInput) return;
+  runSearch(spotlightInput.value);
+}
 
-  const query = spotlightInput.value.trim();
+/** Feature 4: Search with active filters */
+function runSearch(query: string): void {
+  if (!spotlightResults) return;
+
+  const trimmed = query.trim();
   selectedIndex = -1;
 
-  if (query.length === 0) {
+  if (trimmed.length === 0) {
     spotlightResults.innerHTML = '';
     spotlightResults.classList.remove('spotlight-results--has-results');
     currentResults = [];
     return;
   }
 
-  currentResults = search(query);
+  // Use filtered search if filters are active
+  if (activeFilters.length > 0) {
+    currentResults = searchWithFilters(trimmed, activeFilters);
+  } else {
+    currentResults = search(trimmed);
+  }
   renderResults();
 }
 

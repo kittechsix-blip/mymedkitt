@@ -212,6 +212,8 @@ function renderActiveResult(card, node, opts) {
     if (node.citation?.length && opts.config) {
         renderInlineCitations(card, node.citation, opts.config.citations);
     }
+    // Feature 2: Progressive Disclosure Tabs
+    renderProgressiveTabs(card, node);
     // Reference link
     const refLink = document.createElement('button');
     refLink.className = 'btn-text reference-link';
@@ -240,6 +242,32 @@ function renderActiveResult(card, node, opts) {
 // -------------------------------------------------------------------
 // Shared render helpers
 // -------------------------------------------------------------------
+/** Feature 2: Progressive Disclosure Tabs (When to Use, Pearls, Evidence) */
+function renderProgressiveTabs(container, node) {
+    if (!node.whenToUse && !node.pearls && !node.evidence)
+        return;
+    const tabsContainer = document.createElement('div');
+    tabsContainer.className = 'decision-card__tabs';
+    if (node.whenToUse) {
+        const tab = document.createElement('details');
+        tab.className = 'decision-card__tab decision-card__tab--when';
+        tab.innerHTML = `<summary>When to Use</summary><div class="decision-card__tab-content">${node.whenToUse}</div>`;
+        tabsContainer.appendChild(tab);
+    }
+    if (node.pearls) {
+        const tab = document.createElement('details');
+        tab.className = 'decision-card__tab decision-card__tab--pearls';
+        tab.innerHTML = `<summary>Clinical Pearls</summary><div class="decision-card__tab-content">${node.pearls}</div>`;
+        tabsContainer.appendChild(tab);
+    }
+    if (node.evidence) {
+        const tab = document.createElement('details');
+        tab.className = 'decision-card__tab decision-card__tab--evidence';
+        tab.innerHTML = `<summary>Evidence</summary><div class="decision-card__tab-content">${node.evidence}</div>`;
+        tabsContainer.appendChild(tab);
+    }
+    container.appendChild(tabsContainer);
+}
 function renderNodeImages(container, node) {
     if (!node.images || node.images.length === 0)
         return;

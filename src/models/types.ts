@@ -58,6 +58,12 @@ export interface DecisionNode {
   images?: NodeImage[];
   /** Optional calculator links to show as buttons (e.g., PESI, sPESI) */
   calculatorLinks?: { id: string; label: string }[];
+  /** Feature 2: Progressive disclosure - When to use this node */
+  whenToUse?: string;
+  /** Feature 2: Progressive disclosure - Clinical pearls */
+  pearls?: string;
+  /** Feature 2: Progressive disclosure - Evidence summary */
+  evidence?: string;
 }
 
 export interface NodeOption {
