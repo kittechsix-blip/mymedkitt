@@ -17,35 +17,8 @@ interface DrugContext {
 }
 
 // -------------------------------------------------------------------
-// Ranked Search Helper
+// Alphabetical Prefix Search Helper
 // -------------------------------------------------------------------
-
-/**
- * Rank score for matching: lower = better match.
- * 0 = exact name match, 1 = name starts with query,
- * 2 = word in any field starts with query, 3 = substring match anywhere.
- * Returns -1 for no match.
- */
-function rankMatch(fields: string[], query: string): number {
-  const primary = fields[0]; // primary field (name) gets prefix boost
-  if (primary === query) return 0;         // exact match
-  if (primary.startsWith(query)) return 1; // name starts with query
-
-  // Check if any word in any field starts with query
-  for (const field of fields) {
-    const words = field.split(/[\s/(),\-]+/);
-    for (const word of words) {
-      if (word.startsWith(query)) return 2;
-    }
-  }
-
-  // Substring match anywhere in any field
-  for (const field of fields) {
-    if (field.includes(query)) return 3;
-  }
-
-  return -1; // no match
-}
 
 interface DrugLike {
   name: string;
@@ -54,25 +27,21 @@ interface DrugLike {
   indications: string[];
 }
 
-/** Search drugs with ranked results — prefix matches first */
+/** Alphabetical prefix search for drugs — strict "starts with" matching on name */
 function rankedDrugSearch<T extends DrugLike>(drugs: T[], query: string): T[] {
-  const scored: Array<{ drug: T; rank: number }> = [];
+  const matches: T[] = [];
 
   for (const drug of drugs) {
-    const fields = [
-      drug.name.toLowerCase(),
-      drug.genericName.toLowerCase(),
-      drug.drugClass.toLowerCase(),
-      ...drug.indications.map(i => i.toLowerCase()),
-    ];
-    const rank = rankMatch(fields, query);
-    if (rank >= 0) {
-      scored.push({ drug, rank });
+    const name = drug.name.toLowerCase();
+    // Strict prefix match on drug name only
+    if (name.startsWith(query)) {
+      matches.push(drug);
     }
   }
 
-  scored.sort((a, b) => a.rank - b.rank || a.drug.name.localeCompare(b.drug.name));
-  return scored.map(s => s.drug);
+  // Sort alphabetically by name
+  matches.sort((a, b) => a.name.localeCompare(b.name));
+  return matches;
 }
 
 // -------------------------------------------------------------------

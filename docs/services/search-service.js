@@ -115,7 +115,7 @@ export function buildSearchIndex() {
         console.warn('[SearchService] Fuse.js not loaded, falling back to substring search');
     }
 }
-/** Search with fuzzy matching */
+/** Search with strict alphabetical prefix matching */
 export function search(query) {
     if (!query || query.trim().length === 0)
         return [];
@@ -128,13 +128,8 @@ export function search(query) {
         buildSearchIndex();
     }
     const q = sanitized.toLowerCase();
-    // Use Fuse.js if available
-    if (searchIndex) {
-        const fuseResults = searchIndex.search(q);
-        return fuseResults.slice(0, 20).map((r) => docToResult(r.item, r.score));
-    }
-    // Fallback to substring search
-    return fallbackSearch(q);
+    // Use strict alphabetical prefix search
+    return alphabeticalPrefixSearch(q);
 }
 /** Search with optional type filters */
 export function searchWithFilters(query, filters) {
@@ -153,41 +148,14 @@ export function getAvailableFilterTypes() {
         { type: 'calculator', label: 'Calculators' },
     ];
 }
-/** Convert SearchDoc to SearchResult */
-function docToResult(doc, score) {
-    let route;
-    switch (doc.type) {
-        case 'category':
-            route = `/category/${doc.id.replace('cat-', '')}`;
-            break;
-        case 'consult':
-            route = `/tree/${doc.id}`;
-            break;
-        case 'drug':
-            route = '/drugs';
-            break;
-        case 'calculator':
-            route = `/calculator/${doc.id}`;
-            break;
-        default:
-            route = '/';
-    }
-    return {
-        type: doc.type,
-        label: doc.title,
-        sublabel: doc.subtitle,
-        route,
-        drugId: doc.drugId,
-        score,
-    };
-}
-/** Fallback substring search (same as current implementation) */
-function fallbackSearch(query) {
+/** Strict alphabetical prefix search - only matches items starting with query */
+function alphabeticalPrefixSearch(query) {
     const results = [];
     const categories = getAllCategories();
     const seenTreeIds = new Set();
+    // Categories - prefix match on name
     for (const cat of categories) {
-        if (cat.name.toLowerCase().includes(query)) {
+        if (cat.name.toLowerCase().startsWith(query)) {
             results.push({
                 type: 'category',
                 label: cat.name,
@@ -195,10 +163,11 @@ function fallbackSearch(query) {
                 route: `/category/${cat.id}`,
             });
         }
+        // Consults - prefix match on title
         for (const tree of cat.decisionTrees) {
             if (seenTreeIds.has(tree.id))
                 continue;
-            if (tree.title.toLowerCase().includes(query) || tree.subtitle.toLowerCase().includes(query)) {
+            if (tree.title.toLowerCase().startsWith(query)) {
                 seenTreeIds.add(tree.id);
                 results.push({
                     type: 'consult',
@@ -209,10 +178,9 @@ function fallbackSearch(query) {
             }
         }
     }
+    // Drugs - prefix match on name only
     for (const drug of getAllDrugs()) {
-        if (drug.name.toLowerCase().includes(query) ||
-            drug.genericName.toLowerCase().includes(query) ||
-            drug.drugClass.toLowerCase().includes(query)) {
+        if (drug.name.toLowerCase().startsWith(query)) {
             results.push({
                 type: 'drug',
                 label: drug.name,
@@ -222,8 +190,9 @@ function fallbackSearch(query) {
             });
         }
     }
+    // Calculators - prefix match on title only
     for (const calc of getAllCalculators()) {
-        if (calc.title.toLowerCase().includes(query) || calc.subtitle.toLowerCase().includes(query)) {
+        if (calc.title.toLowerCase().startsWith(query)) {
             results.push({
                 type: 'calculator',
                 label: calc.title,
@@ -232,6 +201,8 @@ function fallbackSearch(query) {
             });
         }
     }
+    // Sort all results alphabetically by label
+    results.sort((a, b) => a.label.localeCompare(b.label));
     return results;
 }
 /** Check if Fuse.js is available */

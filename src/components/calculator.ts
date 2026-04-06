@@ -24553,27 +24553,21 @@ export function getAllCalculators(): CalculatorMeta[] {
 // Render: Calculator List (Medical Calculators category)
 // -------------------------------------------------------------------
 
-/** Ranked search for calculators — prefix matches first */
+/** Alphabetical prefix search for calculators — strict "starts with" matching */
 function rankedCalcSearch(calcs: CalculatorMeta[], query: string): CalculatorMeta[] {
-  const scored: Array<{ calc: CalculatorMeta; rank: number }> = [];
+  const matches: CalculatorMeta[] = [];
 
   for (const calc of calcs) {
     const title = calc.title.toLowerCase();
-    const sub = calc.subtitle.toLowerCase();
-
-    // Exact title match
-    if (title === query) { scored.push({ calc, rank: 0 }); continue; }
-    // Title starts with query
-    if (title.startsWith(query)) { scored.push({ calc, rank: 1 }); continue; }
-    // Any word in title or subtitle starts with query
-    const words = `${title} ${sub}`.split(/[\s/(),\-]+/);
-    if (words.some(w => w.startsWith(query))) { scored.push({ calc, rank: 2 }); continue; }
-    // Substring match
-    if (title.includes(query) || sub.includes(query)) { scored.push({ calc, rank: 3 }); continue; }
+    // Strict prefix match on title only
+    if (title.startsWith(query)) {
+      matches.push(calc);
+    }
   }
 
-  scored.sort((a, b) => a.rank - b.rank || a.calc.title.localeCompare(b.calc.title));
-  return scored.map(s => s.calc);
+  // Sort alphabetically by title
+  matches.sort((a, b) => a.title.localeCompare(b.title));
+  return matches;
 }
 
 /** Render the calculator list view with search */
