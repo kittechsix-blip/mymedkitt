@@ -205,6 +205,7 @@ const TREE_REGISTRY = {
   'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',      entryNodeId: 'sui-start',        categoryId: 'emergency-medicine' },
   'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
   'dfsa-workup':          { prefix: 'DFSA_WORKUP',          entryNodeId: 'dfsa-start',       categoryId: 'emergency-medicine' },
+  'hypothermia':          { prefix: 'HYPOTHERMIA',          entryNodeId: 'hypo-start',       categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {

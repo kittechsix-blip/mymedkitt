@@ -153,6 +153,7 @@ const TREE_REGISTRY = {
   'torsades-de-pointes':  { prefix: 'TORSADES_DE_POINTES',  entryNodeId: 'tdp-start',        categoryId: 'cardiology' },
   'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
   'dfsa-workup':          { prefix: 'DFSA_WORKUP',          entryNodeId: 'dfsa-start',       categoryId: 'emergency-medicine' },
+  'hypothermia':          { prefix: 'HYPOTHERMIA',          entryNodeId: 'hypo-start',       categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
