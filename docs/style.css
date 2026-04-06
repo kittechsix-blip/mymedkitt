@@ -329,6 +329,61 @@ body {
   margin-top: 2px;
 }
 
+/* ---- Feature 2: Progressive Disclosure Tabs ---- */
+.decision-card__tabs {
+  margin-top: 16px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+.decision-card__tab {
+  margin-bottom: 8px;
+}
+
+.decision-card__tab summary {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-umber);
+  cursor: pointer;
+  padding: 6px 0;
+  list-style: none;
+}
+
+.decision-card__tab summary::-webkit-details-marker {
+  display: none;
+}
+
+.decision-card__tab summary::before {
+  content: '▶ ';
+  font-size: 10px;
+  margin-right: 6px;
+  transition: transform 0.15s;
+  display: inline-block;
+}
+
+.decision-card__tab[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.decision-card__tab--pearls summary::after {
+  content: ' 💡';
+}
+
+.decision-card__tab--evidence summary::after {
+  content: ' 📊';
+}
+
+.decision-card__tab--when summary::after {
+  content: ' 🎯';
+}
+
+.decision-card__tab-content {
+  padding: 8px 0 8px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
 /* Result badge */
 .decision-card__result-badge {
   display: inline-block;
@@ -2524,8 +2579,28 @@ body {
 .calculator-result-risk {
   font-size: 13px;
   color: var(--color-text-secondary);
-  margin-top: 4px;
-  line-height: 1.4;
+  margin-top: 8px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.calculator-result-risk p {
+  margin: 0 0 2px 0;
+}
+
+/* Step headers — bold lines rendered as <strong> by renderBodyText */
+.calculator-result-risk p > strong:first-child {
+  display: block;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.calculator-result-risk p:first-child > strong:first-child {
+  margin-top: 0;
 }
 
 .calculator-risk-badge {
@@ -2581,11 +2656,16 @@ body {
   margin-bottom: 2px;
 }
 
+/* Feature 3: Enhanced Inline Helper Text */
 .calculator-field-desc {
   display: block;
-  font-size: 12px;
-  color: var(--color-text-muted);
-  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 4px 0 10px 0;
+  padding: 6px 10px;
+  background: rgba(184, 115, 51, 0.05);
+  border-left: 2px solid var(--color-umber);
+  border-radius: 0 4px 4px 0;
   line-height: 1.4;
 }
 
@@ -2753,6 +2833,50 @@ body {
   font-size: 13px;
   color: var(--color-text-secondary);
   line-height: 1.6;
+}
+
+/* ---- Feature 1: Sticky Score Display ---- */
+.calculator-score-display--sticky {
+  position: sticky;
+  top: 56px;
+  z-index: 90;
+  margin: 0 0 16px 0;
+  border-radius: 0 0 16px 16px;
+}
+
+.calculator-score-display--stuck {
+  box-shadow:
+    0 8px 24px rgba(184, 115, 51, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-scroll-sentinel {
+  height: 1px;
+  margin: 0;
+}
+
+/* ---- Feature 5: Copy Results Button ---- */
+.calculator-copy-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: rgba(184, 115, 51, 0.1);
+  border: 1px solid rgba(184, 115, 51, 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-umber);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.calculator-copy-btn:hover {
+  background: rgba(184, 115, 51, 0.15);
+}
+
+.calculator-copy-btn:active {
+  transform: scale(0.98);
 }
 
 /* ===================================================================
@@ -3813,6 +3937,39 @@ body.quick-fire-mode .qf-essential {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ---- Feature 4: Faceted Search Filter Chips ---- */
+.spotlight-filter-chips {
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.spotlight-filter-chip {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.spotlight-filter-chip:hover {
+  background: var(--color-surface-hover);
+}
+
+.spotlight-filter-chip--active {
+  background: var(--color-umber);
+  color: #fff;
+  border-color: var(--color-umber);
 }
 
 /* Mobile adjustments */

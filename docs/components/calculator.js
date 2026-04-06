@@ -5,6 +5,7 @@ import { router } from '../services/router.js';
 import { getPatientContext, setPatientContext } from '../services/patient-context.js';
 import { renderStickyPatientHeader } from './sticky-patient-header.js';
 import { trackCalcOpen, trackCalcSubmit } from '../services/kittmd-analytics.js';
+import { renderBodyText } from './text-renderer.js';
 // -------------------------------------------------------------------
 // PESI Calculator Definition
 // -------------------------------------------------------------------
@@ -23966,7 +23967,7 @@ export function renderCalculator(container, calculatorId) {
                 scoreDisplay.appendChild(labelEl);
                 const descEl = document.createElement('div');
                 descEl.className = 'calculator-result-risk';
-                descEl.textContent = result.description;
+                renderBodyText(descEl, result.description);
                 scoreDisplay.appendChild(descEl);
             }
         });
@@ -24219,7 +24220,7 @@ function updateScore(calc, values, display) {
         display.appendChild(labelEl);
         const descEl = document.createElement('div');
         descEl.className = 'calculator-result-risk';
-        descEl.textContent = result.description;
+        renderBodyText(descEl, result.description);
         display.appendChild(descEl);
         // Feature 5: Copy Results Button (formula-based)
         addCopyButton(display, calc.title, result.label, result.description);

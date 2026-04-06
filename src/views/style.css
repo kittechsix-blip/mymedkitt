@@ -2579,8 +2579,28 @@ body {
 .calculator-result-risk {
   font-size: 13px;
   color: var(--color-text-secondary);
-  margin-top: 4px;
-  line-height: 1.4;
+  margin-top: 8px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.calculator-result-risk p {
+  margin: 0 0 2px 0;
+}
+
+/* Step headers — bold lines rendered as <strong> by renderBodyText */
+.calculator-result-risk p > strong:first-child {
+  display: block;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.calculator-result-risk p:first-child > strong:first-child {
+  margin-top: 0;
 }
 
 .calculator-risk-badge {
