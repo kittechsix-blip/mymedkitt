@@ -206,6 +206,22 @@ const TREE_REGISTRY = {
   'ct-decision-support':  { prefix: 'CT_DECISION_SUPPORT',  entryNodeId: 'ct-start',         categoryId: 'us-rads' },
   'dfsa-workup':          { prefix: 'DFSA_WORKUP',          entryNodeId: 'dfsa-start',       categoryId: 'emergency-medicine' },
   'hypothermia':          { prefix: 'HYPOTHERMIA',          entryNodeId: 'hypo-start',       categoryId: 'emergency-medicine' },
+  'echo-views':           { prefix: 'ECHO_VIEWS',           entryNodeId: 'echo-views-start', categoryId: 'us-rads' },
+  'psych-assessment':     { prefix: 'PSYCH_ASSESSMENT',     entryNodeId: 'psych-start',      categoryId: 'emergency-medicine' },
+  'oxygen-delivery':      { prefix: 'OXYGEN_DELIVERY',      entryNodeId: 'o2-start',         categoryId: 'critical-care' },
+  'urinary-sphincter':    { prefix: 'URINARY_SPHINCTER',    entryNodeId: 'sphincter-start',  categoryId: 'urology' },
+  'eating-disorders':     { prefix: 'EATING_DISORDERS',     entryNodeId: 'ed-start',         categoryId: 'emergency-medicine' },
+  'peds-trauma':          { prefix: 'PEDS_TRAUMA',          entryNodeId: 'peds-trauma-start', categoryId: 'trauma-surg' },
+  'ohss':                 { prefix: 'OHSS',                 entryNodeId: 'ohss-start',       categoryId: 'ob-gyn' },
+  'rhogam-early-pregnancy': { prefix: 'RHOGAM_EARLY_PREGNANCY', entryNodeId: 'rhogam-start', categoryId: 'ob-gyn' },
+  'sti-comprehensive':    { prefix: 'STI_COMPREHENSIVE',    entryNodeId: 'sti-start',        categoryId: 'infectious-disease' },
+  'approach-to-arthritis': { prefix: 'APPROACH_TO_ARTHRITIS', entryNodeId: 'arth-start',     categoryId: 'rheumatology' },
+  'diabetic-foot-wounds': { prefix: 'DIABETIC_FOOT_WOUNDS', entryNodeId: 'dfw-start',        categoryId: 'trauma-surg' },
+  'pediatric-arthritis':  { prefix: 'PEDIATRIC_ARTHRITIS',  entryNodeId: 'peds-arth-start',  categoryId: 'pediatrics' },
+  'gout':                 { prefix: 'GOUT',                 entryNodeId: 'gout-start',       categoryId: 'rheumatology' },
+  'hop-killers':          { prefix: 'HOP_KILLERS',          entryNodeId: 'hop-start',        categoryId: 'anesthesia-airway' },
+  'tia-workup':           { prefix: 'TIA_WORKUP',           entryNodeId: 'tia-start',        categoryId: 'neurology' },
+  'peripartum-cardiomyopathy': { prefix: 'PERIPARTUM_CARDIOMYOPATHY', entryNodeId: 'ppcm-start', categoryId: 'ob-gyn' },
 };
 
 const CROSS_LISTINGS = {

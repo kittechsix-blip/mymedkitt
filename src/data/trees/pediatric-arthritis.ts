@@ -661,3 +661,8 @@ export const CITATIONS: Citation[] = [
   { num: 13, text: 'Kim HKW, Herring JA. Pathophysiology, Classifications, and Natural History of Perthes Disease. Orthop Clin North Am. 2011;42(3):285-295. PMID: 21742140' },
   { num: 14, text: 'Evans AM, Scutter SD. Prevalence of "Growing Pains" in Young Children. J Pediatr. 2004;145(2):255-258. PMID: 15289779' },
 ];
+
+// Alias exports for push script compatibility
+export const PEDIATRIC_ARTHRITIS_MODULE_LABELS = MODULE_LABELS;
+export const PEDIATRIC_ARTHRITIS_CITATIONS = CITATIONS;
+export const PEDIATRIC_ARTHRITIS_NODE_COUNT = NODE_COUNT;
