@@ -226,6 +226,7 @@ const TREE_REGISTRY = {
   'peripartum-cardiomyopathy': { prefix: 'PERIPARTUM_CARDIOMYOPATHY', entryNodeId: 'ppcm-start', categoryId: 'ob-gyn' },
   'ciguatera':            { prefix: 'CIGUATERA',            entryNodeId: 'cig-start',        categoryId: 'toxicology' },
   'traveler-infections':  { prefix: 'TRAVELER_INFECTIONS',  entryNodeId: 'ti-start',          categoryId: 'infectious-disease' },
+  'malaria':              { prefix: 'MALARIA',              entryNodeId: 'mal-start',         categoryId: 'infectious-disease' },
 };
 
 const CROSS_LISTINGS = {
@@ -253,6 +254,7 @@ const CROSS_LISTINGS = {
   'ed-methadone':     [{ categoryId: 'toxicology' }],
   'cvst':             [{ categoryId: 'neurology' }],
   'ct-decision-support': [{ categoryId: 'emergency-medicine' }],
+  'malaria':             [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
