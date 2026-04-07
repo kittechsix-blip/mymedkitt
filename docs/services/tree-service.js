@@ -669,6 +669,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/peripartum-cardiomyopathy.js');
             return { nodes: m.PERIPARTUM_CARDIOMYOPATHY_NODES, entryNodeId: 'ppcm-start', categoryId: 'ob-gyn', moduleLabels: m.PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS, citations: m.PERIPARTUM_CARDIOMYOPATHY_CITATIONS };
         },
+        'ciguatera': async () => {
+            const m = await import('../data/trees/ciguatera.js');
+            return { nodes: m.CIGUATERA_NODES, entryNodeId: 'cig-start', categoryId: 'toxicology', moduleLabels: m.CIGUATERA_MODULE_LABELS, citations: m.CIGUATERA_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

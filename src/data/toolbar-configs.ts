@@ -899,6 +899,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'earfb-tech', label: 'Technique', icon: '🔧', action: 'calculator', target: 'earfb-technique-guide' },
     { id: 'earfb-ent', label: 'ENT Ref', icon: '📞', action: 'calculator', target: 'earfb-ent-criteria' },
   ],
+  'ciguatera': [
+    { id: 'cig-fish', label: 'Fish Risk', icon: '🐟', action: 'calculator', target: 'cig-fish-risk' },
+    { id: 'cig-symptom', label: 'Symptoms', icon: '🩺', action: 'calculator', target: 'cig-symptom-assessment' },
+    { id: 'cig-mannitol', label: 'Mannitol', icon: '💉', action: 'calculator', target: 'cig-mannitol-protocol' },
+    { id: 'cig-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'cig-disposition' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

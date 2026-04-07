@@ -23827,6 +23827,457 @@ const EARFB_ENT_CRITERIA_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Ciguatera Fish Poisoning Tools
+// -------------------------------------------------------------------
+// Tool 1: Fish Risk Checker
+const CIG_FISH_RISK_CALCULATOR = {
+    id: 'cig-fish-risk',
+    title: 'Fish Risk Checker',
+    subtitle: 'Ciguatera Risk by Species',
+    description: 'Identify high-risk fish species for ciguatera poisoning.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Friedman MA, et al. An Updated Review of Ciguatera Fish Poisoning. Mar Drugs. 2017;15(3):72.',
+        'CDC Yellow Book 2024. Food Poisoning from Marine Toxins.',
+    ],
+    fields: [
+        {
+            name: 'barracuda',
+            label: 'Barracuda',
+            description: 'HIGHEST risk — most common culprit',
+            type: 'toggle',
+            points: 100,
+        },
+        {
+            name: 'moray',
+            label: 'Moray eel',
+            description: 'HIGHEST risk — extremely toxic',
+            type: 'toggle',
+            points: 100,
+        },
+        {
+            name: 'amberjack',
+            label: 'Amberjack',
+            description: 'HIGH risk',
+            type: 'toggle',
+            points: 80,
+        },
+        {
+            name: 'grouper',
+            label: 'Grouper',
+            description: 'HIGH risk',
+            type: 'toggle',
+            points: 70,
+        },
+        {
+            name: 'snapper',
+            label: 'Red snapper',
+            description: 'HIGH risk',
+            type: 'toggle',
+            points: 70,
+        },
+        {
+            name: 'seabass',
+            label: 'Sea bass',
+            description: 'MODERATE risk',
+            type: 'toggle',
+            points: 50,
+        },
+        {
+            name: 'large',
+            label: 'Fish >5-6 lbs',
+            description: 'Larger fish concentrate more toxin',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'organs',
+            label: 'Ate head/liver/organs',
+            description: 'Highest toxin concentration',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'tropical',
+            label: 'Tropical/reef source',
+            description: 'Caribbean, Pacific, Hawaii, Florida',
+            type: 'toggle',
+            points: 20,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        const risks = [];
+        if (values['barracuda'])
+            risks.push('**Barracuda** — most common ciguatera source');
+        if (values['moray'])
+            risks.push('**Moray eel** — extremely high toxin levels');
+        if (values['amberjack'])
+            risks.push('**Amberjack** — CDC warns against');
+        if (values['grouper'])
+            risks.push('**Grouper** — common reef predator');
+        if (values['snapper'])
+            risks.push('**Red snapper** — high-risk reef fish');
+        if (values['seabass'])
+            risks.push('**Sea bass** — moderate risk');
+        if (values['large'])
+            risks.push('**Large fish** — bioaccumulation');
+        if (values['organs'])
+            risks.push('**Ate organs** — highest toxin load');
+        if (values['tropical'])
+            risks.push('**Tropical source** — endemic area');
+        if (score >= 100) {
+            return {
+                value: 'VERY HIGH',
+                label: '🚨 Very High Risk',
+                description: `**VERY HIGH CIGUATERA RISK**\n\n${risks.map(r => '• ' + r).join('\n')}\n\n---\n\n**Clinical Action:**\n• High suspicion for ciguatera if symptomatic\n• Ask about hot-cold reversal specifically\n• Monitor for cardiovascular symptoms\n• Consider early treatment`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 50) {
+            return {
+                value: 'HIGH',
+                label: '⚠️ High Risk',
+                description: `**HIGH CIGUATERA RISK**\n\n${risks.map(r => '• ' + r).join('\n')}\n\n---\n\n**Clinical Suspicion:**\n• Ciguatera likely if compatible symptoms\n• GI symptoms + neuro = classic presentation\n• Ask about temperature reversal\n• Cardiac monitoring if any CV symptoms`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (score > 0) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate Risk',
+                description: `**MODERATE CIGUATERA RISK**\n\n${risks.map(r => '• ' + r).join('\n')}\n\n---\n\nCiguatera possible if compatible symptoms.\n\n**Consider also:**\n• Scombroid (histamine — flushing, rapid onset)\n• Bacterial gastroenteritis\n• Other marine toxins`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'LOW',
+            label: '✓ Low Risk',
+            description: `**LOW CIGUATERA RISK**\n\n**Low-Risk Fish:**\n• Pelagic species (tuna, mahi-mahi, salmon)\n• Open-ocean fish\n• Small reef fish\n• Shellfish (different toxins)\n\n**If symptoms present**, consider:\n• Scombroid poisoning\n• Bacterial gastroenteritis\n• Shellfish toxins\n• Other food poisoning`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// Tool 2: Symptom Assessment
+const CIG_SYMPTOM_CALCULATOR = {
+    id: 'cig-symptom-assessment',
+    title: 'Symptom Assessment',
+    subtitle: 'GI, Neuro, Cardiac Staging',
+    description: 'Assess symptom severity and system involvement.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Pearn J. Neurology of ciguatera. J Neurol Neurosurg Psychiatry. 2001;70(1):4-8.',
+    ],
+    fields: [
+        {
+            name: 'gi',
+            label: 'GI symptoms',
+            description: 'Nausea, vomiting, diarrhea',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'paresthesias',
+            label: 'Paresthesias',
+            description: 'Tingling lips, fingers, toes',
+            type: 'toggle',
+            points: 15,
+        },
+        {
+            name: 'hotcold',
+            label: 'Hot-cold reversal',
+            description: 'PATHOGNOMONIC — cold feels hot',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'myalgias',
+            label: 'Myalgias/fatigue',
+            description: 'Muscle aches, weakness, exhaustion',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'pruritus',
+            label: 'Pruritus',
+            description: 'Itching, cold allodynia',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'bradycardia',
+            label: 'Bradycardia (HR <50)',
+            description: 'Slow heart rate',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'hypotension',
+            label: 'Hypotension (SBP <90)',
+            description: 'Low blood pressure',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'ataxia',
+            label: 'Ataxia/weakness',
+            description: 'Motor involvement — SEVERE',
+            type: 'toggle',
+            points: 50,
+        },
+        {
+            name: 'ams',
+            label: 'Altered mental status',
+            description: 'Confusion, seizures — SEVERE',
+            type: 'toggle',
+            points: 60,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        const symptoms = [];
+        if (values['gi'])
+            symptoms.push('GI: nausea/vomiting/diarrhea');
+        if (values['paresthesias'])
+            symptoms.push('Neuro: paresthesias');
+        if (values['hotcold'])
+            symptoms.push('Neuro: **HOT-COLD REVERSAL** (pathognomonic)');
+        if (values['myalgias'])
+            symptoms.push('Neuro: myalgias/fatigue');
+        if (values['pruritus'])
+            symptoms.push('Neuro: pruritus');
+        if (values['bradycardia'])
+            symptoms.push('**Cardiac: bradycardia**');
+        if (values['hypotension'])
+            symptoms.push('**Cardiac: hypotension**');
+        if (values['ataxia'])
+            symptoms.push('**SEVERE: motor weakness/ataxia**');
+        if (values['ams'])
+            symptoms.push('**SEVERE: altered mental status**');
+        const hasCardiac = values['bradycardia'] || values['hypotension'];
+        const hasSevereNeuro = values['ataxia'] || values['ams'];
+        if (hasSevereNeuro) {
+            return {
+                value: 'SEVERE',
+                label: '🚨 SEVERE — ICU Admission',
+                description: `**SEVERE CIGUATERA — ICU REQUIRED**\n\n${symptoms.map(s => '• ' + s).join('\n')}\n\n---\n\n**Immediate Actions:**\n• Continuous cardiac monitoring\n• Airway assessment\n• IV mannitol 1 g/kg over 30-45 min\n• Neurology consult\n• Consider intubation if respiratory weakness`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (hasCardiac) {
+            return {
+                value: 'MODERATE-SEVERE',
+                label: '⚠️ Cardiac Involvement',
+                description: `**MODERATE-SEVERE — CARDIAC SYMPTOMS**\n\n${symptoms.map(s => '• ' + s).join('\n')}\n\n---\n\n**Management:**\n• Continuous cardiac monitoring\n• For bradycardia: Atropine 0.5-1 mg IV\n• For hypotension: NS/LR 20 mL/kg bolus\n• Consider observation/admission\n• ECG and troponin`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (values['hotcold'] || score >= 30) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate — Classic Ciguatera',
+                description: `**MODERATE CIGUATERA**\n\n${symptoms.map(s => '• ' + s).join('\n')}\n\n---\n\n**Management:**\n• Supportive care\n• Consider IV mannitol if within 72 hours\n• Amitriptyline 25 mg for neuropathy\n• Antiemetics as needed\n• Most can be discharged with precautions`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (score > 0) {
+            return {
+                value: 'MILD',
+                label: '✓ Mild Symptoms',
+                description: `**MILD CIGUATERA**\n\n${symptoms.map(s => '• ' + s).join('\n')}\n\n---\n\n**Management:**\n• Supportive care\n• IV fluids for dehydration\n• Antiemetics\n• Monitor for progression\n\n**Ask specifically about:**\n• Hot-cold reversal\n• Cardiac symptoms\n\nMay progress over 24-48 hours.`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'ASSESS',
+            label: 'Assess Symptoms Above',
+            description: `**SELECT SYMPTOMS TO ASSESS SEVERITY**\n\n**Typical Timeline:**\n• GI: 1-6 hours (first)\n• Neuro: 6-24 hours (classic)\n• Cardiac: variable\n\n**Pathognomonic:** Hot-cold reversal (ask specifically!)\n\n**Red Flags:**\n• Bradycardia\n• Hypotension\n• Motor weakness\n• Altered mental status`,
+            colorVar: '--color-text-secondary',
+        };
+    },
+};
+// Tool 3: Mannitol Protocol
+const CIG_MANNITOL_CALCULATOR = {
+    id: 'cig-mannitol-protocol',
+    title: 'Mannitol Protocol',
+    subtitle: 'Dosing & Monitoring',
+    description: 'IV mannitol protocol for ciguatera neurological symptoms.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Palafox NA, et al. Successful treatment of ciguatera with IV mannitol. JAMA. 1988;259(18):2740-2742.',
+        'Schnorf H, et al. Ciguatera fish poisoning: double-blind RCT of mannitol. Neurology. 2002;58(6):873-880.',
+    ],
+    fields: [
+        {
+            name: 'within72',
+            label: 'Within 72 hours of ingestion',
+            description: 'Best evidence for early use',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'neuro',
+            label: 'Moderate-severe neuro symptoms',
+            description: 'Paresthesias, hot-cold reversal, weakness',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'euvolemic',
+            label: 'Adequately hydrated',
+            description: 'Not severely dehydrated',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'renal-ok',
+            label: 'Normal renal function',
+            description: 'No oliguric/anuric renal failure',
+            type: 'toggle',
+            points: 10,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        if (score >= 40) {
+            return {
+                value: 'GIVE',
+                label: '✓ Mannitol Indicated',
+                description: `**IV MANNITOL PROTOCOL**\n\n**Dosing:**\n• 25% mannitol 1.0 g/kg IV over 30-45 minutes\n• May repeat in 3-4 hours if partial response\n• Maximum 2 doses in 24 hours\n\n**Monitoring (REQUIRED):**\n• Strict intake/output\n• Serum osmolality (keep <320 mOsm/kg)\n• Electrolytes q4-6h\n• Renal function\n\n**Fluid Replacement:**\n• Replace urine output with isotonic crystalloid\n• Mannitol causes significant diuresis\n\n**Evidence:**\nPalafox 1988: case series showed benefit.\nSchnorf 2002 RCT: no difference vs saline.\n\nReasonable if given early (within 72h).`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (score >= 20 && !values['within72']) {
+            return {
+                value: 'LATE',
+                label: '⚠️ >72 Hours — Limited Benefit',
+                description: `**LATE PRESENTATION — MANNITOL LESS EFFECTIVE**\n\nBest evidence is within 72 hours of ingestion.\n\n**Options:**\n• May still try if symptoms severe\n• Focus on supportive care\n• Amitriptyline 25-50 mg for neuropathy\n• Gabapentin for paresthesias\n\n**Long-term management** may be needed for chronic symptoms.`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (!values['euvolemic'] || !values['renal-ok']) {
+            return {
+                value: 'CONTRAINDICATED',
+                label: '⛔ Contraindication Present',
+                description: `**MANNITOL CONTRAINDICATED**\n\n**Absolute Contraindications:**\n• Oliguric or anuric renal failure\n• Severe dehydration (correct first)\n• Pulmonary edema or CHF\n• Active intracranial hemorrhage\n\n**Action:**\n• Correct dehydration first\n• Supportive care\n• Amitriptyline for neuropathy\n• Gabapentin for paresthesias`,
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: 'ASSESS',
+            label: 'Complete Assessment Above',
+            description: `**MANNITOL CRITERIA**\n\nBest used when:\n• Within 72 hours of ingestion\n• Moderate-severe neuro symptoms\n• Adequately hydrated\n• Normal renal function\n\n**Mechanism:**\nOsmotic effect may reduce neuronal edema and abnormal depolarization.\n\n**Evidence is mixed** — one RCT showed no benefit, but case series suggest improvement.`,
+            colorVar: '--color-text-secondary',
+        };
+    },
+};
+// Tool 4: Disposition Guide
+const CIG_DISPOSITION_CALCULATOR = {
+    id: 'cig-disposition',
+    title: 'Disposition Guide',
+    subtitle: 'Admit vs Discharge',
+    description: 'Disposition criteria for ciguatera poisoning.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Friedman MA, et al. An Updated Review of Ciguatera Fish Poisoning. Mar Drugs. 2017;15(3):72.',
+    ],
+    fields: [
+        {
+            name: 'vitals-stable',
+            label: 'Stable vital signs',
+            description: 'HR >50, SBP >90, no arrhythmias',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'neuro-mild',
+            label: 'No severe neuro symptoms',
+            description: 'No ataxia, weakness, or AMS',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'tolerating-po',
+            label: 'Tolerating oral fluids',
+            description: 'Can maintain hydration at home',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'safe-home',
+            label: 'Safe discharge environment',
+            description: 'Not alone, reliable follow-up',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'brady-atropine',
+            label: 'Required atropine',
+            description: 'Symptomatic bradycardia treated',
+            type: 'toggle',
+            points: -30,
+        },
+        {
+            name: 'hypotension-fluids',
+            label: 'Required IV fluids for hypotension',
+            description: 'Hemodynamic support needed',
+            type: 'toggle',
+            points: -20,
+        },
+        {
+            name: 'mannitol-given',
+            label: 'Mannitol administered',
+            description: 'Needs monitoring',
+            type: 'toggle',
+            points: -15,
+        },
+        {
+            name: 'seizure',
+            label: 'Seizure or respiratory symptoms',
+            description: 'Severe manifestation',
+            type: 'toggle',
+            points: -50,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        if (values['seizure'] || values['brady-atropine']) {
+            return {
+                value: 'ADMIT',
+                label: '🏥 Admit to Telemetry/ICU',
+                description: `**ADMISSION REQUIRED**\n\n**Indications Present:**\n${values['seizure'] ? '• Seizure or respiratory symptoms\n' : ''}${values['brady-atropine'] ? '• Required atropine for bradycardia\n' : ''}${values['hypotension-fluids'] ? '• Required IV fluids for hypotension\n' : ''}\n---\n\n**Monitoring:**\n• Continuous cardiac monitoring x 24-48h\n• Serial vitals q1h initially\n• Neuro checks q2h\n• Serial electrolytes`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (values['mannitol-given'] || values['hypotension-fluids']) {
+            return {
+                value: 'OBSERVE',
+                label: '👁 Observation (23-hour)',
+                description: `**OBSERVATION RECOMMENDED**\n\n**Indications:**\n${values['mannitol-given'] ? '• Mannitol administered — needs I/O monitoring\n' : ''}${values['hypotension-fluids'] ? '• Required IV fluids — assess stability\n' : ''}\n---\n\n**Discharge when:**\n• Stable vitals x 6 hours\n• Symptoms stable or improving\n• Tolerating PO\n• No cardiac arrhythmias`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (score >= 30) {
+            return {
+                value: 'DISCHARGE',
+                label: '✓ Safe for Discharge',
+                description: `**DISCHARGE WITH PRECAUTIONS**\n\n**Medications:**\n• Ondansetron ODT PRN nausea\n• Amitriptyline 25 mg qHS for neuropathy\n• NSAIDs PRN for myalgias\n\n**STRICT AVOIDANCE (6+ months):**\n• ALL fish and seafood\n• Alcohol (triggers recurrence)\n• Caffeine, nuts, chocolate\n\n**Follow-up:**\n• PCP within 48-72 hours\n• Neurology if symptoms persist >2 weeks\n\n**Return if:**\n• Worsening neuro symptoms\n• Bradycardia or palpitations\n• Syncope`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'ASSESS',
+            label: 'Complete Assessment',
+            description: `**ASSESS DISCHARGE CRITERIA**\n\n**Required for discharge:**\n☐ Stable vital signs\n☐ No severe neuro symptoms\n☐ Tolerating oral fluids\n☐ Safe discharge environment\n\n**Admission if:**\n• Required atropine\n• Required IV fluids for hypotension\n• Seizures or respiratory symptoms\n• Unable to maintain hydration`,
+            colorVar: '--color-text-secondary',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -24207,6 +24658,11 @@ const CALCULATORS = {
     'earfb-contraindication': EARFB_CONTRAINDICATION_CALCULATOR,
     'earfb-technique-guide': EARFB_TECHNIQUE_GUIDE_CALCULATOR,
     'earfb-ent-criteria': EARFB_ENT_CRITERIA_CALCULATOR,
+    // Ciguatera Fish Poisoning
+    'cig-fish-risk': CIG_FISH_RISK_CALCULATOR,
+    'cig-symptom-assessment': CIG_SYMPTOM_CALCULATOR,
+    'cig-mannitol-protocol': CIG_MANNITOL_CALCULATOR,
+    'cig-disposition': CIG_DISPOSITION_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
