@@ -581,6 +581,18 @@ export const ACETAMINOPHEN_OD_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const ACETAMINOPHEN_OD_CRITICAL_ACTIONS = [
+  { text: 'N-acetylcysteine (NAC) within 8 hours for APAP level >150 mcg/mL at 4h (100% effective)', nodeId: 'apap-nac-iv' },
+  { text: 'Activated charcoal 1 g/kg PO (max 50 g) if <4 hours since ingestion', nodeId: 'apap-gi-decon' },
+  { text: 'NAC IV protocol: Bag 1: 150 mg/kg over 1h, Bag 2: 50 mg/kg over 4h, Bag 3: 100 mg/kg over 16h', nodeId: 'apap-nac-iv' },
+  { text: 'Check APAP level at 4 hours post-ingestion and plot on Rumack-Matthew nomogram', nodeId: 'apap-acute-strat' },
+  { text: 'High-dose NAC for massive OD: double/triple Bag 3 rate (12.5-25 mg/kg/hr)', nodeId: 'apap-high-nac' },
+  { text: 'Fomepizole 15 mg/kg IV for massive ingestion (>30g or level >300 line)', nodeId: 'apap-fomepizole' },
+  { text: 'Hemodialysis if APAP >900 mcg/mL or pH <7.1 + lactate >3', nodeId: 'apap-dialysis' },
+  { text: 'Continue NAC indefinitely until APAP <10 + INR <2 + ALT improving', nodeId: 'apap-nac-stop' },
+  { text: 'King\'s College Criteria: pH <7.3 or (INR >6.5 + Cr >3.4 + grade III encephalopathy) → transplant referral', nodeId: 'apap-kings' },
+];
+
 export const ACETAMINOPHEN_OD_CITATIONS: Citation[] = [
   { num: 1, text: 'WikEM: Acetaminophen Toxicity. Last edited March 22, 2026. https://wikem.org/wiki/Acetaminophen_toxicity' },
   { num: 2, text: 'Smilkstein MJ, et al. Efficacy of oral N-acetylcysteine in the treatment of acetaminophen overdose. N Engl J Med. 1988;319(24):1557-1562. PMID 3059186' },

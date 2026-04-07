@@ -304,6 +304,16 @@ export const SEROTONIN_SYNDROME_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const SEROTONIN_SYNDROME_CRITICAL_ACTIONS = [
+  { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'sero-stop-agents' },
+  { text: 'Benzodiazepines for agitation: lorazepam 1-2 mg IV q5-10min to control myoclonus/rigidity', nodeId: 'sero-benzos' },
+  { text: 'Cyproheptadine 12 mg PO initial, then 2 mg q2h (max 32 mg/day) for moderate-severe cases', nodeId: 'sero-cyprohep' },
+  { text: 'Aggressive cooling for hyperthermia >41°C (evaporative + cold IV fluids)', nodeId: 'sero-cooling' },
+  { text: 'Intubate with paralysis (rocuronium/vecuronium) if severe rigidity or temp >41°C', nodeId: 'sero-intubate' },
+  { text: 'Avoid antipyretics (ineffective), avoid succinylcholine (rhabdo risk with rigidity)', nodeId: 'sero-avoid' },
+  { text: 'Hunter criteria for diagnosis: serotonergic agent + (myoclonus + agitation) OR (tremor + hyperreflexia + temp >38)', nodeId: 'sero-hunter' },
+];
+
 export const SEROTONIN_SYNDROME_CITATIONS: Citation[] = [
   { num: 1, text: 'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.' },
   { num: 2, text: 'Ables AZ, Nagubilli R. Prevention, recognition, and management of serotonin syndrome. Am Fam Physician. 2010;81(9):1139-1142.' },

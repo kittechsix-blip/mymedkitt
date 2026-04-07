@@ -167,7 +167,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'pe-treatment': async () => {
       const m = await import('../data/trees/pe-treatment.js');
-      return { nodes: m.PE_TREATMENT_NODES, entryNodeId: 'pe-start', categoryId: 'critical-care', moduleLabels: m.PE_TREATMENT_MODULE_LABELS, citations: m.PE_TREATMENT_CITATIONS };
+      return { nodes: m.PE_TREATMENT_NODES, entryNodeId: 'pe-start', categoryId: 'critical-care', moduleLabels: m.PE_TREATMENT_MODULE_LABELS, citations: m.PE_TREATMENT_CITATIONS, criticalActions: m.PE_TREATMENT_CRITICAL_ACTIONS };
     },
     'priapism': async () => {
       const m = await import('../data/trees/priapism.js');
@@ -283,7 +283,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'burns': async () => {
       const m = await import('../data/trees/burns.js');
-      return { nodes: m.BURNS_NODES, entryNodeId: 'burn-start', categoryId: 'trauma-surg', moduleLabels: m.BURNS_MODULE_LABELS, citations: m.BURNS_CITATIONS };
+      return { nodes: m.BURNS_NODES, entryNodeId: 'burn-start', categoryId: 'trauma-surg', moduleLabels: m.BURNS_MODULE_LABELS, citations: m.BURNS_CITATIONS, criticalActions: m.BURNS_CRITICAL_ACTIONS };
     },
     'psych-assessment': async () => {
       const m = await import('../data/trees/psych-assessment.js');
@@ -295,7 +295,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'sah': async () => {
       const m = await import('../data/trees/sah.js');
-      return { nodes: m.SAH_NODES, entryNodeId: 'sah-start', categoryId: 'neurology', moduleLabels: m.SAH_MODULE_LABELS, citations: m.SAH_CITATIONS };
+      return { nodes: m.SAH_NODES, entryNodeId: 'sah-start', categoryId: 'neurology', moduleLabels: m.SAH_MODULE_LABELS, citations: m.SAH_CITATIONS, criticalActions: m.SAH_CRITICAL_ACTIONS };
     },
     'aub': async () => {
       const m = await import('../data/trees/aub.js');
@@ -303,7 +303,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'status-epilepticus': async () => {
       const m = await import('../data/trees/status-epilepticus.js');
-      return { nodes: m.STATUS_EPILEPTICUS_NODES, entryNodeId: 'se-start', categoryId: 'neurology', moduleLabels: m.STATUS_EPILEPTICUS_MODULE_LABELS, citations: m.STATUS_EPILEPTICUS_CITATIONS };
+      return { nodes: m.STATUS_EPILEPTICUS_NODES, entryNodeId: 'se-start', categoryId: 'neurology', moduleLabels: m.STATUS_EPILEPTICUS_MODULE_LABELS, citations: m.STATUS_EPILEPTICUS_CITATIONS, criticalActions: m.STATUS_EPILEPTICUS_CRITICAL_ACTIONS };
     },
     'opioid-withdrawal': async () => {
       const m = await import('../data/trees/opioid-withdrawal.js');
@@ -339,11 +339,11 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'anaphylaxis': async () => {
       const m = await import('../data/trees/anaphylaxis.js');
-      return { nodes: m.ANAPHYLAXIS_NODES, entryNodeId: 'anaph-start', categoryId: 'emergency-medicine', moduleLabels: m.ANAPHYLAXIS_MODULE_LABELS, citations: m.ANAPHYLAXIS_CITATIONS };
+      return { nodes: m.ANAPHYLAXIS_NODES, entryNodeId: 'anaph-start', categoryId: 'emergency-medicine', moduleLabels: m.ANAPHYLAXIS_MODULE_LABELS, citations: m.ANAPHYLAXIS_CITATIONS, criticalActions: m.ANAPHYLAXIS_CRITICAL_ACTIONS };
     },
     'angioedema': async () => {
       const m = await import('../data/trees/angioedema.js');
-      return { nodes: m.ANGIOEDEMA_NODES, entryNodeId: 'angio-start', categoryId: 'emergency-medicine', moduleLabels: m.ANGIOEDEMA_MODULE_LABELS, citations: m.ANGIOEDEMA_CITATIONS };
+      return { nodes: m.ANGIOEDEMA_NODES, entryNodeId: 'angio-start', categoryId: 'emergency-medicine', moduleLabels: m.ANGIOEDEMA_MODULE_LABELS, citations: m.ANGIOEDEMA_CITATIONS, criticalActions: m.ANGIOEDEMA_CRITICAL_ACTIONS };
     },
     'sickle-cell': async () => {
       const m = await import('../data/trees/sickle-cell.js');
@@ -355,23 +355,23 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'anticoag-reversal': async () => {
       const m = await import('../data/trees/anticoag-reversal.js');
-      return { nodes: m.ANTICOAG_REVERSAL_NODES, entryNodeId: 'acr-start', categoryId: 'heme-onc', moduleLabels: m.ANTICOAG_REVERSAL_MODULE_LABELS, citations: m.ANTICOAG_REVERSAL_CITATIONS };
+      return { nodes: m.ANTICOAG_REVERSAL_NODES, entryNodeId: 'acr-start', categoryId: 'heme-onc', moduleLabels: m.ANTICOAG_REVERSAL_MODULE_LABELS, citations: m.ANTICOAG_REVERSAL_CITATIONS, criticalActions: m.ANTICOAG_REVERSAL_CRITICAL_ACTIONS };
     },
     'tca-toxidrome': async () => {
       const m = await import('../data/trees/tca-toxidrome.js');
-      return { nodes: m.TCA_TOXIDROME_NODES, entryNodeId: 'tca-start', categoryId: 'toxicology', moduleLabels: m.TCA_TOXIDROME_MODULE_LABELS, citations: m.TCA_TOXIDROME_CITATIONS };
+      return { nodes: m.TCA_TOXIDROME_NODES, entryNodeId: 'tca-start', categoryId: 'toxicology', moduleLabels: m.TCA_TOXIDROME_MODULE_LABELS, citations: m.TCA_TOXIDROME_CITATIONS, criticalActions: m.TCA_TOXIDROME_CRITICAL_ACTIONS };
     },
     'salicylate': async () => {
       const m = await import('../data/trees/salicylate.js');
-      return { nodes: m.SALICYLATE_NODES, entryNodeId: 'sal-start', categoryId: 'toxicology', moduleLabels: m.SALICYLATE_MODULE_LABELS, citations: m.SALICYLATE_CITATIONS };
+      return { nodes: m.SALICYLATE_NODES, entryNodeId: 'sal-start', categoryId: 'toxicology', moduleLabels: m.SALICYLATE_MODULE_LABELS, citations: m.SALICYLATE_CITATIONS, criticalActions: m.SALICYLATE_CRITICAL_ACTIONS };
     },
     'acetaminophen': async () => {
       const m = await import('../data/trees/acetaminophen.js');
-      return { nodes: m.ACETAMINOPHEN_OD_NODES, entryNodeId: 'apap-start', categoryId: 'toxicology', moduleLabels: m.ACETAMINOPHEN_OD_MODULE_LABELS, citations: m.ACETAMINOPHEN_OD_CITATIONS };
+      return { nodes: m.ACETAMINOPHEN_OD_NODES, entryNodeId: 'apap-start', categoryId: 'toxicology', moduleLabels: m.ACETAMINOPHEN_OD_MODULE_LABELS, citations: m.ACETAMINOPHEN_OD_CITATIONS, criticalActions: m.ACETAMINOPHEN_OD_CRITICAL_ACTIONS };
     },
     'dka': async () => {
       const m = await import('../data/trees/dka.js');
-      return { nodes: m.DKA_NODES, entryNodeId: 'dka-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DKA_MODULE_LABELS, citations: m.DKA_CITATIONS };
+      return { nodes: m.DKA_NODES, entryNodeId: 'dka-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DKA_MODULE_LABELS, citations: m.DKA_CITATIONS, criticalActions: m.DKA_CRITICAL_ACTIONS };
     },
     'diabetes-management': async () => {
       const m = await import('../data/trees/diabetes-management.js');
@@ -391,7 +391,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'chf-exacerbation': async () => {
       const m = await import('../data/trees/chf-exacerbation.js');
-      return { nodes: m.CHF_EXACERBATION_NODES, entryNodeId: 'chf-start', categoryId: 'cardiology', moduleLabels: m.CHF_EXACERBATION_MODULE_LABELS, citations: m.CHF_EXACERBATION_CITATIONS };
+      return { nodes: m.CHF_EXACERBATION_NODES, entryNodeId: 'chf-start', categoryId: 'cardiology', moduleLabels: m.CHF_EXACERBATION_MODULE_LABELS, citations: m.CHF_EXACERBATION_CITATIONS, criticalActions: m.CHF_EXACERBATION_CRITICAL_ACTIONS };
     },
     'migraine': async () => {
       const m = await import('../data/trees/migraine.js');
@@ -439,7 +439,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'massive-transfusion': async () => {
       const m = await import('../data/trees/massive-transfusion.js');
-      return { nodes: m.MASSIVE_TRANSFUSION_NODES, entryNodeId: 'mtp-start', categoryId: 'trauma-surg', moduleLabels: m.MASSIVE_TRANSFUSION_MODULE_LABELS, citations: m.MASSIVE_TRANSFUSION_CITATIONS };
+      return { nodes: m.MASSIVE_TRANSFUSION_NODES, entryNodeId: 'mtp-start', categoryId: 'trauma-surg', moduleLabels: m.MASSIVE_TRANSFUSION_MODULE_LABELS, citations: m.MASSIVE_TRANSFUSION_CITATIONS, criticalActions: m.MASSIVE_TRANSFUSION_CRITICAL_ACTIONS };
     },
     'pelvic-fracture': async () => {
       const m = await import('../data/trees/pelvic-fracture.js');
@@ -447,7 +447,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'serotonin-syndrome': async () => {
       const m = await import('../data/trees/serotonin-syndrome.js');
-      return { nodes: m.SEROTONIN_SYNDROME_NODES, entryNodeId: 'ss-start', categoryId: 'toxicology', moduleLabels: m.SEROTONIN_SYNDROME_MODULE_LABELS, citations: m.SEROTONIN_SYNDROME_CITATIONS };
+      return { nodes: m.SEROTONIN_SYNDROME_NODES, entryNodeId: 'ss-start', categoryId: 'toxicology', moduleLabels: m.SEROTONIN_SYNDROME_MODULE_LABELS, citations: m.SEROTONIN_SYNDROME_CITATIONS, criticalActions: m.SEROTONIN_SYNDROME_CRITICAL_ACTIONS };
     },
     'digoxin-toxicity': async () => {
       const m = await import('../data/trees/digoxin-toxicity.js');
@@ -491,7 +491,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'aortic-aneurysm': async () => {
       const m = await import('../data/trees/aortic-aneurysm.js');
-      return { nodes: m.AORTIC_ANEURYSM_NODES, entryNodeId: 'aortic-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_ANEURYSM_MODULE_LABELS, citations: m.AORTIC_ANEURYSM_CITATIONS };
+      return { nodes: m.AORTIC_ANEURYSM_NODES, entryNodeId: 'aortic-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_ANEURYSM_MODULE_LABELS, citations: m.AORTIC_ANEURYSM_CITATIONS, criticalActions: m.AORTIC_ANEURYSM_CRITICAL_ACTIONS };
     },
     'measles': async () => {
       const m = await import('../data/trees/measles.js');
@@ -503,7 +503,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'methemoglobinemia': async () => {
       const m = await import('../data/trees/methemoglobinemia.js');
-      return { nodes: m.METHEMOGLOBINEMIA_NODES, entryNodeId: 'methb-start', categoryId: 'toxicology', moduleLabels: m.METHEMOGLOBINEMIA_MODULE_LABELS, citations: m.METHEMOGLOBINEMIA_CITATIONS };
+      return { nodes: m.METHEMOGLOBINEMIA_NODES, entryNodeId: 'methb-start', categoryId: 'toxicology', moduleLabels: m.METHEMOGLOBINEMIA_MODULE_LABELS, citations: m.METHEMOGLOBINEMIA_CITATIONS, criticalActions: m.METHEMOGLOBINEMIA_CRITICAL_ACTIONS };
     },
     'extensor-tendon': async () => {
       const m = await import('../data/trees/extensor-tendon.js');
@@ -547,11 +547,11 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'eclampsia': async () => {
       const m = await import('../data/trees/eclampsia.js');
-      return { nodes: m.ECLAMPSIA_NODES, entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn', moduleLabels: m.ECLAMPSIA_MODULE_LABELS, citations: m.ECLAMPSIA_CITATIONS };
+      return { nodes: m.ECLAMPSIA_NODES, entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn', moduleLabels: m.ECLAMPSIA_MODULE_LABELS, citations: m.ECLAMPSIA_CITATIONS, criticalActions: m.ECLAMPSIA_CRITICAL_ACTIONS };
     },
     'aortic-dissection': async () => {
       const m = await import('../data/trees/aortic-dissection.js');
-      return { nodes: m.AORTIC_DISSECTION_NODES, entryNodeId: 'dissect-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_DISSECTION_MODULE_LABELS, citations: m.AORTIC_DISSECTION_CITATIONS };
+      return { nodes: m.AORTIC_DISSECTION_NODES, entryNodeId: 'dissect-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_DISSECTION_MODULE_LABELS, citations: m.AORTIC_DISSECTION_CITATIONS, criticalActions: m.AORTIC_DISSECTION_CRITICAL_ACTIONS };
     },
     'intralipid': async () => {
       const m = await import('../data/trees/intralipid.js');
@@ -603,7 +603,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'massive-hemoptysis': async () => {
       const m = await import('../data/trees/massive-hemoptysis.js');
-      return { nodes: m.MASSIVE_HEMOPTYSIS_NODES, entryNodeId: 'hemo-start', categoryId: 'critical-care', moduleLabels: m.MASSIVE_HEMOPTYSIS_MODULE_LABELS, citations: m.MASSIVE_HEMOPTYSIS_CITATIONS };
+      return { nodes: m.MASSIVE_HEMOPTYSIS_NODES, entryNodeId: 'hemo-start', categoryId: 'critical-care', moduleLabels: m.MASSIVE_HEMOPTYSIS_MODULE_LABELS, citations: m.MASSIVE_HEMOPTYSIS_CITATIONS, criticalActions: m.MASSIVE_HEMOPTYSIS_CRITICAL_ACTIONS };
     },
     'xylazine-toxicity': async () => {
       const m = await import('../data/trees/xylazine-toxicity.js');
@@ -651,7 +651,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'heat-stroke': async () => {
       const m = await import('../data/trees/heat-stroke.js');
-      return { nodes: m.HEAT_STROKE_NODES, entryNodeId: 'hs-start', categoryId: 'emergency-medicine', moduleLabels: m.HEAT_STROKE_MODULE_LABELS, citations: m.HEAT_STROKE_CITATIONS };
+      return { nodes: m.HEAT_STROKE_NODES, entryNodeId: 'hs-start', categoryId: 'emergency-medicine', moduleLabels: m.HEAT_STROKE_MODULE_LABELS, citations: m.HEAT_STROKE_CITATIONS, criticalActions: m.HEAT_STROKE_CRITICAL_ACTIONS };
     },
     'hypothermia': async () => {
       const m = await import('../data/trees/hypothermia.js');

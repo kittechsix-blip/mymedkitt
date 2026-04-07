@@ -599,6 +599,15 @@ export const ANGIOEDEMA_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const ANGIOEDEMA_CRITICAL_ACTIONS = [
+  { text: 'Secure airway EARLY if stridor, voice change, or tongue swelling - have cricothyrotomy kit ready', nodeId: 'angio-airway-secure' },
+  { text: 'ACE-inhibitor angioedema: icatibant 30 mg SQ or FFP 2-4 units (bradykinin-mediated - epi/steroids ineffective)', nodeId: 'angio-acei-icatibant' },
+  { text: 'Hereditary angioedema: C1-esterase inhibitor 20 units/kg IV or icatibant 30 mg SQ', nodeId: 'angio-hae-c1inh' },
+  { text: 'Histamine-mediated: epinephrine 0.3-0.5 mg IM + antihistamines + steroids', nodeId: 'angio-histamine-treat' },
+  { text: 'Avoid ACE inhibitors permanently after ACEi-induced angioedema (switch to ARB with caution)', nodeId: 'angio-acei-avoid' },
+  { text: 'Awake fiberoptic intubation preferred (do NOT paralyze until airway visualized)', nodeId: 'angio-airway-secure' },
+];
+
 export const ANGIOEDEMA_CITATIONS: Citation[] = [
   { num: 1, text: 'Kelly M, et al. National estimates of emergency department visits for angioedema and allergic reactions in the United States. Allergy Asthma Proc. 2013;34(2):150-154.' },
   { num: 2, text: 'Zanichelli A, et al. Misdiagnosis trends in patients with hereditary angioedema from the real-world clinical setting. Ann Allergy Asthma Immunol. 2016;117(4):394-398.' },

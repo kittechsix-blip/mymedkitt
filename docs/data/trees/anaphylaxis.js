@@ -590,6 +590,18 @@ export const ANAPHYLAXIS_MODULE_LABELS = [
     'Adjunctive Therapies',
     'Disposition & Discharge',
 ];
+export const ANAPHYLAXIS_CRITICAL_ACTIONS = [
+    { text: 'IM Epinephrine 0.5 mg (0.5 mL of 1:1000) into anterolateral thigh within 5 minutes of recognition', nodeId: 'anaph-source-control' },
+    { text: 'Repeat IM epinephrine every 5 minutes if no response, up to 3 doses before escalating to IV', nodeId: 'anaph-epi-response' },
+    { text: 'IV epinephrine infusion if refractory to 2-3 IM doses: 1 mg in 100 mL NS at 10 mcg/min', nodeId: 'anaph-epi-infusion' },
+    { text: 'Aggressive IV fluid resuscitation: 500-1000 mL NS bolus (adults), 20-30 mL/kg (peds)', nodeId: 'anaph-fluids' },
+    { text: 'BiPAP/CPAP 15-20 cm H₂O for SCAPE-like presentations with massive afterload', nodeId: 'anaph-airway-critical' },
+    { text: 'Secure airway if stridor or upper airway edema - prepare for difficult airway with video laryngoscopy', nodeId: 'anaph-airway-critical' },
+    { text: 'Methylene blue 1-2 mg/kg IV for beta-blocked patients with blunted epinephrine response', nodeId: 'anaph-beta-blocked' },
+    { text: 'Push-dose epinephrine 20-50 mcg IV for peri-arrest presentations', nodeId: 'anaph-peri-arrest' },
+    { text: 'Continuous albuterol nebulizer for persistent bronchospasm despite adequate epinephrine', nodeId: 'anaph-bronchospasm' },
+    { text: 'Discharge only after symptom-free ×4 hours minimum with EpiPen ×2 prescription', nodeId: 'anaph-dispo-4hr' },
+];
 export const ANAPHYLAXIS_CITATIONS = [
     { num: 1, text: 'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). September 15, 2025.' },
     { num: 2, text: 'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients: Early Recognition and Treatment Are Critical for Best Outcomes. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.' },

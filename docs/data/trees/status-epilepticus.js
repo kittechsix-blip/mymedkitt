@@ -585,6 +585,17 @@ export const STATUS_EPILEPTICUS_MODULE_LABELS = [
 // -------------------------------------------------------------------
 // Evidence Citations
 // -------------------------------------------------------------------
+export const STATUS_EPILEPTICUS_CRITICAL_ACTIONS = [
+    { text: 'Lorazepam 0.1 mg/kg IV (max 4 mg) or midazolam 0.2 mg/kg IM (max 10 mg) within 5 minutes', nodeId: 'se-iv-bzd' },
+    { text: 'Repeat benzodiazepine once in 5-10 minutes if seizure persists', nodeId: 'se-bzd-response' },
+    { text: 'Second-line ASM within 10 minutes: levetiracetam 60 mg/kg IV (max 4500 mg)', nodeId: 'se-levetiracetam' },
+    { text: 'Check fingerstick glucose STAT - treat if <60 mg/dL with D50W 25 g IV', nodeId: 'se-glucose-labs' },
+    { text: 'Intubate for refractory SE - use short-acting paralytic (avoid prolonged paralysis)', nodeId: 'se-rse-prep' },
+    { text: 'Continuous EEG monitoring MANDATORY for refractory SE (cannot assess seizures in paralyzed patient)', nodeId: 'se-rse-prep' },
+    { text: 'Midazolam infusion 0.2 mg/kg load, then 0.05-2 mg/kg/hr for refractory SE', nodeId: 'se-rse-infusion' },
+    { text: 'Magnesium sulfate 4-6 g IV for eclampsia before other ASMs', nodeId: 'se-pregnancy' },
+    { text: 'Pyridoxine 5 g IV empiric if INH toxicity suspected', nodeId: 'se-substance' },
+];
 export const STATUS_EPILEPTICUS_CITATIONS = [
     { num: 1, text: 'Betjemann JP, Bhatt J, Engel A. Status Epilepticus. Emergency Medicine Practice (EB Medicine). 2025;27(9):1-28.' },
     { num: 2, text: 'Brophy GM, Bell R, Claassen J, et al. Guidelines for the Evaluation and Management of Status Epilepticus. Neurocrit Care. 2012;17(1):3-23.' },

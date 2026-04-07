@@ -638,6 +638,17 @@ export const CHF_EXACERBATION_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const CHF_EXACERBATION_CRITICAL_ACTIONS = [
+  { text: 'NIV (BiPAP/CPAP) 10-15 cm H₂O for severe respiratory distress', nodeId: 'chf-bipap' },
+  { text: 'Furosemide 40-80 mg IV (or 2× home dose) within 30 minutes', nodeId: 'chf-diuretic' },
+  { text: 'Nitroglycerin 0.4 mg SL q5min × 3 or infusion 10-20 mcg/min for afterload reduction', nodeId: 'chf-nitro' },
+  { text: 'Intubate if severe hypoxia (SpO₂ <90%) despite NIV + maximal oxygen', nodeId: 'chf-intubate' },
+  { text: 'Push-dose pressors if hypotensive: norepinephrine 10-20 mcg IVP q2-3min', nodeId: 'chf-cardiogenic-shock' },
+  { text: 'Check BNP/NT-proBNP to confirm diagnosis (BNP >400 or NT-proBNP >900)', nodeId: 'chf-bnp' },
+  { text: 'POCUS to assess IVC, LV function, B-lines for volume status', nodeId: 'chf-pocus' },
+  { text: 'Avoid aggressive IV fluids in volume overload (may worsen pulmonary edema)', nodeId: 'chf-diuretic' },
+];
+
 export const CHF_EXACERBATION_CITATIONS: Citation[] = [
   { num: 1, text: 'Weingart S. EMCrit IBCC: Sympathetic Crashing Acute Pulmonary Edema (SCAPE). emcrit.org/ibcc/scape. Accessed 2024.' },
   { num: 2, text: 'Hollander JE, et al. EB Medicine: Acute Decompensated Heart Failure in the Emergency Department. 2023.' },

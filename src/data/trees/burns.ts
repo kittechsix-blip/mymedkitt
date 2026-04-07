@@ -976,6 +976,18 @@ export const BURNS_MODULE_LABELS = [
   'Wound Care & Disposition',
 ];
 
+export const BURNS_CRITICAL_ACTIONS = [
+  { text: 'Parkland formula: 4 mL × weight (kg) × %TBSA in first 24h (give half in first 8h)', nodeId: 'burn-parkland' },
+  { text: 'Early intubation if facial burns, stridor, hoarseness - airway edema peaks at 12-24h', nodeId: 'burn-airway-assess' },
+  { text: 'Escharotomy within 6 hours for circumferential burns with vascular compromise', nodeId: 'burn-escharotomy-timing' },
+  { text: 'CO poisoning: 100% O₂ via NRB, target SpO₂ >95%, check carboxyhemoglobin level', nodeId: 'burn-co-treat' },
+  { text: 'Cyanide antidote (hydroxocobalamin 5 g IV) if lactate >8 + enclosed space fire', nodeId: 'burn-cyanide' },
+  { text: 'Chemical burns: irrigate copiously (20-30 min minimum) before neutralization attempts', nodeId: 'burn-chem-irrigate' },
+  { text: 'HF burns: calcium gluconate gel topically + IV calcium for systemic toxicity', nodeId: 'burn-hf' },
+  { text: 'Target UOP 30-50 mL/hr (adults) or 1 mL/kg/hr (children) with fluid resuscitation', nodeId: 'burn-parkland' },
+  { text: 'Burn center transfer: >10% TBSA (>20% adults), face/hands/feet/genitals, electrical, inhalation injury', nodeId: 'burn-transfer-criteria' },
+];
+
 export const BURNS_CITATIONS: Citation[] = [
   { num: 1, text: 'Walker PF et al. Diagnosis and management of inhalation injury: an updated review. Crit Care. 2015;19:351.' },
   { num: 2, text: 'Greenhalgh DG. Management of Burns. NEJM. 2019;380(24):2349-2359.' },

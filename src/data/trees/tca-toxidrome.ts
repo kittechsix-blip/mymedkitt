@@ -476,6 +476,16 @@ export const TCA_TOXIDROME_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const TCA_TOXIDROME_CRITICAL_ACTIONS = [
+  { text: 'Sodium bicarbonate 1-2 mEq/kg IV bolus (50-100 mEq) for QRS >100 ms or arrhythmia', nodeId: 'tca-bicarb' },
+  { text: 'Target serum pH 7.50-7.55 with continuous bicarbonate infusion', nodeId: 'tca-bicarb-infusion' },
+  { text: 'Intubate for airway protection - avoid propofol (worsens hypotension), use etomidate/ketamine', nodeId: 'tca-intubate' },
+  { text: 'Lipid emulsion 20%: 1.5 mL/kg bolus if refractory arrhythmias or cardiac arrest', nodeId: 'tca-lipid' },
+  { text: 'Norepinephrine for hypotension (avoid phenylephrine - unopposed alpha worsens outcomes)', nodeId: 'tca-pressors' },
+  { text: 'Avoid class IA/IC antiarrhythmics (procainamide, flecainide - worsen sodium channel blockade)', nodeId: 'tca-bicarb' },
+  { text: 'Benzodiazepines for seizures (lorazepam 0.1 mg/kg IV)', nodeId: 'tca-seizure' },
+];
+
 export const TCA_TOXIDROME_CITATIONS: Citation[] = [
   { num: 1, text: 'Boehnert MT, Lovejoy FH Jr. Value of the QRS duration versus the serum drug level in predicting seizures and ventricular arrhythmias after an acute overdose of tricyclic antidepressants. N Engl J Med. 1985;313(8):474-479.' },
   { num: 2, text: 'Liebelt EL, Francis PD, Woolf AD. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201.' },

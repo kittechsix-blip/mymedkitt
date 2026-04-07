@@ -375,6 +375,16 @@ export const MASSIVE_HEMOPTYSIS_MODULE_LABELS = [
     'Additional Therapies',
     'Disposition',
 ];
+export const MASSIVE_HEMOPTYSIS_CRITICAL_ACTIONS = [
+    { text: 'Position patient bleeding-side down (protect good lung from blood)', nodeId: 'hemopty-position' },
+    { text: 'Intubate with largest ETT possible (≥8.0) for bronchoscopy and isolation', nodeId: 'hemopty-intubate' },
+    { text: 'Double-lumen tube or bronchial blocker for lung isolation if available', nodeId: 'hemopty-isolation' },
+    { text: 'TXA 1 g IV over 10 min (may reduce bleeding)', nodeId: 'hemopty-txa' },
+    { text: 'Reverse anticoagulation urgently (4-factor PCC, protamine, idarucizumab as indicated)', nodeId: 'hemopty-reverse' },
+    { text: 'IR consult for emergent bronchial artery embolization (definitive treatment)', nodeId: 'hemopty-ir' },
+    { text: 'Rigid bronchoscopy for massive bleeding (better suction/hemostasis than flexible)', nodeId: 'hemopty-rigid-bronch' },
+    { text: 'Avoid cough suppressants (retained blood → airway obstruction)', nodeId: 'hemopty-avoid-suppress' },
+];
 export const MASSIVE_HEMOPTYSIS_CITATIONS = [
     { num: 1, text: 'Farkas J. Severe Hemoptysis. Internet Book of Critical Care (IBCC). December 2024.' },
     { num: 2, text: 'Radchenko C, et al. A Systematic Approach to the Management of Massive Hemoptysis. J Thorac Dis. 2017;9(Suppl 10):S1069-S1086.' },

@@ -438,6 +438,14 @@ export const AORTIC_ANEURYSM_MODULE_LABELS = [
     'Type-Specific Management',
     'Surgical Consultation & Disposition',
 ];
+export const AORTIC_ANEURYSM_CRITICAL_ACTIONS = [
+    { text: 'Permissive hypotension: target SBP 90-100 mmHg to prevent rupture (avoid aggressive resuscitation)', nodeId: 'aortic-permissive' },
+    { text: 'Vascular surgery consult stat for ruptured AAA (activate OR immediately)', nodeId: 'aortic-aaa-ruptured' },
+    { text: 'Bedside ultrasound to measure AAA diameter (≥5.5 cm or expanding = high rupture risk)', nodeId: 'aortic-bedside-us' },
+    { text: 'CTA abdomen/pelvis if hemodynamically stable to plan surgical approach', nodeId: 'aortic-cta' },
+    { text: 'Type & cross 6-10 units PRBCs, activate MTP if ruptured', nodeId: 'aortic-aaa-ruptured' },
+    { text: 'Avoid NG tube placement (risk of esophageal perforation in thoracic aneurysm)', nodeId: 'aortic-avoid-ng' },
+];
 export const AORTIC_ANEURYSM_CITATIONS = [
     { num: 1, text: 'Farkas J. Aortic Dissection. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/aortic-dissection/' },
     { num: 2, text: 'Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482.' },

@@ -406,6 +406,15 @@ export const ANTICOAG_REVERSAL_MODULE_LABELS = [
     'Non-Urgent',
     'Monitoring',
 ];
+export const ANTICOAG_REVERSAL_CRITICAL_ACTIONS = [
+    { text: 'Warfarin reversal: 10 mg IV vitamin K + 4-factor PCC 25-50 units/kg (based on INR)', nodeId: 'anticoag-warfarin' },
+    { text: 'Apixaban/rivaroxaban: 4-factor PCC 50 units/kg or andexanet alfa 400-800 mg IV', nodeId: 'anticoag-doac' },
+    { text: 'Dabigatran: idarucizumab 5 g IV (2 vials of 2.5 g) - specific reversal agent', nodeId: 'anticoag-dabigatran' },
+    { text: 'Heparin: protamine 1 mg per 100 units heparin (max 50 mg, infuse slowly)', nodeId: 'anticoag-heparin' },
+    { text: 'Enoxaparin: protamine 1 mg per 1 mg enoxaparin (within 8h: 100% dose, 8-12h: 50% dose)', nodeId: 'anticoag-lmwh' },
+    { text: 'Massive hemorrhage: activate MTP, give 4-factor PCC empirically while awaiting specific agent', nodeId: 'anticoag-mtp' },
+    { text: 'TXA 1 g IV over 10 min for severe bleeding (repeat if ongoing)', nodeId: 'anticoag-txa' },
+];
 // -------------------------------------------------------------------
 // Citations — IBCC source (Farkas 2025) + primary literature
 // -------------------------------------------------------------------

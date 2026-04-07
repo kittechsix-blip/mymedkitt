@@ -337,6 +337,15 @@ export const ECLAMPSIA_MODULE_LABELS = [
     'Stabilization',
     'Delivery',
 ];
+export const ECLAMPSIA_CRITICAL_ACTIONS = [
+    { text: 'Magnesium sulfate 4-6 g IV bolus over 15-20 min, then 1-2 g/hr infusion', nodeId: 'eclamp-mg' },
+    { text: 'Labetalol 20 mg IV (then 40-80 mg q10min) or hydralazine 5-10 mg IV for SBP >160', nodeId: 'eclamp-bp' },
+    { text: 'Benzodiazepines if seizures persist despite magnesium (lorazepam 2-4 mg IV)', nodeId: 'eclamp-bzd' },
+    { text: 'OB consult stat - definitive treatment is delivery (stabilize mother first)', nodeId: 'eclamp-delivery' },
+    { text: 'Monitor magnesium toxicity: loss of DTRs, respiratory depression (hold if RR <12)', nodeId: 'eclamp-mg-toxicity' },
+    { text: 'Calcium gluconate 1 g IV for magnesium toxicity (antidote)', nodeId: 'eclamp-ca' },
+    { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclamp-labs' },
+];
 export const ECLAMPSIA_CITATIONS = [
     { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-e260.' },
     { num: 2, text: 'Sibai BM. Diagnosis, prevention, and management of eclampsia. Obstet Gynecol. 2005;105(2):402-410.' },

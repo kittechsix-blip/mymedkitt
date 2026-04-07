@@ -868,6 +868,18 @@ export const DKA_MODULE_LABELS = [
     'Electrolytes & Monitoring',
     'Special Scenarios & Disposition',
 ];
+export const DKA_CRITICAL_ACTIONS = [
+    { text: 'IV fluid bolus 500-1000 mL NS over 30-60 min for volume depletion/shock', nodeId: 'dka-fluid-management' },
+    { text: 'Check K+ before starting insulin - hold insulin if K+ <3.3 mEq/L', nodeId: 'dka-initial-insulin' },
+    { text: 'Regular insulin infusion 0.1 units/kg/hr (or 0.14 units/kg/hr per 2024 guidelines) after K+ ≥3.3', nodeId: 'dka-initial-insulin' },
+    { text: 'Add dextrose to IV fluids when glucose drops to 200-250 mg/dL to prevent hypoglycemia', nodeId: 'dka-dextrose-timing' },
+    { text: 'Potassium repletion 20-40 mEq/L in IV fluids if K+ 3.3-5.3 (avoid if K+ >5.3)', nodeId: 'dka-k-repletion' },
+    { text: 'Check β-hydroxybutyrate (BOHB) ≥3 mmol/L to confirm DKA diagnosis', nodeId: 'dka-bohb-interpret' },
+    { text: 'Repeat labs q2-4h: BMP, glucose, anion gap, BOHB until DKA resolved', nodeId: 'dka-monitoring-protocol' },
+    { text: 'DKA resolution: glucose <200 + anion gap <12 + pH >7.3 + HCO₃ >18', nodeId: 'dka-resolution-criteria' },
+    { text: 'Overlap insulin: continue IV insulin x1-2 hours after starting subcutaneous insulin', nodeId: 'dka-insulin-transition' },
+    { text: 'Identify and treat precipitant (infection most common) to prevent recurrence', nodeId: 'dka-precipitant' },
+];
 export const DKA_CITATIONS = [
     { num: 1, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care. 2024;47(8):1257-1275.' },
     { num: 2, text: 'Farkas J. Diabetic Ketoacidosis (DKA). Internet Book of Critical Care (IBCC). Updated Sep 2025.' },

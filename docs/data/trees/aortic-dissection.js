@@ -335,6 +335,15 @@ export const AORTIC_DISSECTION_MODULE_LABELS = [
     'Immediate Management',
     'Type-Specific',
 ];
+export const AORTIC_DISSECTION_CRITICAL_ACTIONS = [
+    { text: 'Lower HR to <60 bpm with beta-blocker (esmolol 500 mcg/kg bolus, then 50-300 mcg/kg/min)', nodeId: 'dissect-hr-control' },
+    { text: 'Target SBP 100-120 mmHg (MAP 60-75) after adequate beta-blockade', nodeId: 'dissect-bp-control' },
+    { text: 'Stat CTA chest/abdomen/pelvis (or TEE if unstable) to confirm diagnosis and classify type', nodeId: 'dissect-imaging' },
+    { text: 'Cardiothoracic surgery consult immediately for Type A dissection (surgical emergency)', nodeId: 'dissect-type-a' },
+    { text: 'Pain control with opioids (fentanyl 50-100 mcg IV) to reduce catecholamine surge', nodeId: 'dissect-pain' },
+    { text: 'Avoid beta-blockers if severe AI, bradycardia, or cocaine use (use diltiazem instead)', nodeId: 'dissect-hr-control' },
+    { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-add-rs' },
+];
 export const AORTIC_DISSECTION_CITATIONS = [
     { num: 1, text: 'Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. J Am Coll Cardiol. 2022;80(24):e223-e393.' },
     { num: 2, text: 'Hagan PG, et al. The International Registry of Acute Aortic Dissection (IRAD): new insights into an old disease. JAMA. 2000;283(7):897-903.' },

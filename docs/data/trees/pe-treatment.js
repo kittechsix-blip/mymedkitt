@@ -378,6 +378,15 @@ export const PE_TREATMENT_MODULE_LABELS = [
 // -------------------------------------------------------------------
 // Evidence Citations
 // -------------------------------------------------------------------
+export const PE_TREATMENT_CRITICAL_ACTIONS = [
+    { text: 'Anticoagulation within 60 minutes: heparin bolus 80 units/kg IV (max 10,000 units)', nodeId: 'pe-anticoag-choice' },
+    { text: 'Thrombolytics (tPA 50 mg IV over 2 hours) if massive PE with hypotension', nodeId: 'pe-thrombolytics' },
+    { text: 'Avoid intubation if possible (positive pressure worsens RV strain) - use NIV if needed', nodeId: 'pe-avoid-intubation' },
+    { text: 'Push-dose pressors for hypotension: phenylephrine 100-200 mcg IVP (preserve RV perfusion)', nodeId: 'pe-pressors' },
+    { text: 'POCUS to assess RV strain (RV:LV ratio >1, McConnell sign, septal bowing)', nodeId: 'pe-pocus' },
+    { text: 'Activate PERT (Pulmonary Embolism Response Team) for massive/submassive PE', nodeId: 'pe-pert' },
+    { text: 'Consider ECMO/catheter-directed therapy for refractory shock', nodeId: 'pe-catheter-directed' },
+];
 export const PE_TREATMENT_CITATIONS = [
     { num: 1, text: 'Konstantinides SV, Meyer G, Becattini C, et al. 2019 ESC Guidelines for the Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603. https://academic.oup.com/eurheartj/article/41/4/543/5556506' },
     { num: 2, text: 'Torbicki A, Perrier A, Konstantinides S, et al. Guidelines on the Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2008;29(18):2276-315.' },

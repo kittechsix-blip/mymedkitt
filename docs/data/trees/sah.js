@@ -460,6 +460,16 @@ export const SAH_MODULE_LABELS = [
     'ED Management',
     'Disposition',
 ];
+export const SAH_CRITICAL_ACTIONS = [
+    { text: 'Lower MAP to 100-110 mmHg (SBP <160) within 30 minutes to prevent rebleeding', nodeId: 'sah-bp-control' },
+    { text: 'Nimodipine 60 mg PO/NG q4h to prevent vasospasm (start within 96 hours)', nodeId: 'sah-nimodipine' },
+    { text: 'Stat non-contrast head CT (98% sensitive if <6 hours from onset)', nodeId: 'sah-ct' },
+    { text: 'LP if CT negative and high suspicion (xanthochromia, elevated RBC count)', nodeId: 'sah-lp' },
+    { text: 'Neurosurgery consult immediately for aneurysm securing (clipping vs coiling)', nodeId: 'sah-neurosurg' },
+    { text: 'Prevent Valsalva: stool softeners, antiemetics, adequate analgesia', nodeId: 'sah-prevent-rebleed' },
+    { text: 'Seizure prophylaxis: levetiracetam 1000-1500 mg IV load (avoid phenytoin)', nodeId: 'sah-seizure-ppx' },
+    { text: 'Maintain euvolemia (avoid hypovolemia which worsens vasospasm)', nodeId: 'sah-fluids' },
+];
 export const SAH_CITATIONS = [
     { num: 1, text: 'Godwin SA, Cherkas DS, Panagos PD, et al. Clinical policy: critical issues in the evaluation and management of adult patients presenting to the emergency department with acute headache. Ann Emerg Med. 2019;74(4):e41-e74.' },
     { num: 2, text: 'Connolly ES Jr, Rabinstein AA, Carhuapoma JR, et al. Guidelines for the management of aneurysmal subarachnoid hemorrhage: a guideline for healthcare professionals from the American Heart Association/American Stroke Association. Stroke. 2012;43(6):1711-1737.' },

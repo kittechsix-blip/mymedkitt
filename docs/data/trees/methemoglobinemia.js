@@ -326,6 +326,15 @@ export const METHEMOGLOBINEMIA_MODULE_LABELS = [
     'Special Populations',
     'Disposition',
 ];
+export const METHEMOGLOBINEMIA_CRITICAL_ACTIONS = [
+    { text: 'Methylene blue 1-2 mg/kg IV (0.1-0.2 mL/kg of 1%) over 5 min if MetHb >20% or symptomatic', nodeId: 'methb-mb-dose' },
+    { text: 'Repeat methylene blue 1 mg/kg in 30-60 min if no response (max 7 mg/kg total)', nodeId: 'methb-repeat' },
+    { text: '100% O₂ via NRB (increases dissolved O₂ despite low pulse ox reading)', nodeId: 'methb-oxygen' },
+    { text: 'Check co-oximetry (NOT pulse ox - falsely reads ~85% in methemoglobinemia)', nodeId: 'methb-coox' },
+    { text: 'Avoid methylene blue if G6PD deficiency (causes hemolysis) - use exchange transfusion or hyperbaric O₂', nodeId: 'methb-g6pd' },
+    { text: 'Treat underlying cause: stop benzocaine, dapsone, nitrites, local anesthetics', nodeId: 'methb-stop-agent' },
+    { text: 'Chocolate-brown blood on ABG is classic finding', nodeId: 'methb-diagnosis' },
+];
 export const METHEMOGLOBINEMIA_CITATIONS = [
     { num: 1, text: 'Farkas J. Methemoglobinemia. Internet Book of Critical Care (IBCC). EMCrit. 2025.' },
     { num: 2, text: 'Cortazzo JA, Lichtman AD. Methemoglobinemia: a review and recommendations for management. J Cardiothorac Vasc Anesth. 2014;28(4):1043-1047. PMID 24035060' },

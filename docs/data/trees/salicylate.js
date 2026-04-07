@@ -628,6 +628,15 @@ export const SALICYLATE_NODES = [
         citation: [1, 3],
     },
 ];
+export const SALICYLATE_CRITICAL_ACTIONS = [
+    { text: 'Sodium bicarbonate 150 mEq (3 amps) in 1L D5W at 200-250 mL/hr for urine alkalinization', nodeId: 'sal-bicarb' },
+    { text: 'Target urine pH 7.5-8.0 (recheck q2-4h) to enhance renal elimination', nodeId: 'sal-bicarb' },
+    { text: 'Hemodialysis for severe toxicity: pH <7.1, altered MS, pulmonary edema, renal failure, salicylate >100 mg/dL', nodeId: 'sal-dialysis' },
+    { text: 'Avoid acetazolamide (worsens acidosis) and intubation (respiratory alkalosis compensation critical)', nodeId: 'sal-avoid-intubation' },
+    { text: 'Activated charcoal 1 g/kg PO if <2 hours or evidence of ongoing absorption', nodeId: 'sal-charcoal' },
+    { text: 'Aggressive IV fluids: 500-1000 mL NS bolus, then 200-250 mL/hr', nodeId: 'sal-fluids' },
+    { text: 'Check salicylate level q2-4h until declining (delayed absorption common)', nodeId: 'sal-monitoring' },
+];
 export const SALICYLATE_CITATIONS = [
     { num: 1, text: 'Long N. Salicylate Toxicity. Life in the Fast Lane (LITFL). 2020. https://litfl.com/salicylate-toxicity/' },
     { num: 2, text: 'Farkas J. Salicylate Intoxication. Internet Book of Critical Care (IBCC). EMCrit. 2025. https://emcrit.org/ibcc/salicylate/' },
