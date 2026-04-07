@@ -10225,6 +10225,209 @@ const MAL_PEARLS = {
     ],
 };
 // -------------------------------------------------------------------
+// Cardiac Arrest Suite — Info Pages
+// -------------------------------------------------------------------
+const CA_ETCO2_GUIDE = {
+    id: 'ca-etco2-guide',
+    title: 'ETCO₂ in Cardiac Arrest',
+    subtitle: 'Waveform Capnography for CPR Quality, ROSC Detection, and TOR',
+    sections: [
+        {
+            heading: 'Why ETCO₂ Matters in Arrest',
+            body: 'ETCO₂ is the most reliable real-time indicator of CPR quality and the earliest detector of ROSC — often minutes before a palpable pulse.\n\n• Waveform capnography preferred over colorimetric\n• Attach immediately after advanced airway secured\n• Continuous display during resuscitation',
+        },
+        {
+            heading: 'CPR Quality Targets',
+            body: '• **>20 mmHg** = adequate CPR quality (EMCrit target)\n• **>10 mmHg** = AHA minimum acceptable\n• **<10 mmHg** = poor compressions — check technique, depth, rate, recoil\n• Use feedback to coach compressors in real time\n• Rotate compressors every 2 minutes (fatigue → declining ETCO₂)',
+        },
+        {
+            heading: 'ROSC Detection',
+            body: '• **Sudden rise >10 mmHg** from baseline = likely ROSC\n• Often precedes palpable pulse by 30-60 seconds\n• Sustained rise to **>35-40 mmHg** strongly suggests ROSC\n• Do NOT interrupt CPR to check pulse based on ETCO₂ alone — wait for scheduled rhythm check',
+        },
+        {
+            heading: 'Termination of Resuscitation Signal',
+            body: '• **ETCO₂ <10 mmHg after 20 minutes** of optimal CPR = very poor prognosis\n• Combined with no cardiac activity on POCUS = near-zero survival\n• NOT an absolute criterion — still consider reversible causes\n• Exception: hypothermia, poisoning (continue resuscitation)',
+        },
+        {
+            heading: 'Common Pitfalls',
+            body: '• Sodium bicarbonate causes transient ETCO₂ spike (CO₂ released from buffering) — do not mistake for ROSC\n• Epinephrine may transiently decrease ETCO₂ (vasoconstriction reduces pulmonary blood flow)\n• Low ETCO₂ with good compressions → consider massive PE, air trapping, or equipment malfunction\n• BVM ventilation gives less reliable readings than ETT/SGA',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. ETCO₂-Guided Resuscitation. EMCrit IBCC. https://emcrit.org/ibcc/etco2/' },
+        { num: 2, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+        { num: 3, text: 'Touma O, Davies M. The prognostic value of end-tidal carbon dioxide during cardiac arrest: a systematic review. Resuscitation. 2013;84(11):1470-1479.' },
+        { num: 4, text: 'Levine RL et al. End-tidal CO2 and outcome of out-of-hospital cardiac arrest. NEJM. 1997;337(5):301-306.' },
+    ],
+};
+const CA_NO_CPR_CRITERIA = {
+    id: 'ca-no-cpr-criteria',
+    title: 'When NOT to Initiate CPR',
+    subtitle: 'Obvious Death Signs, Valid DNAR, and Futility Criteria',
+    sections: [
+        {
+            heading: 'Obvious Signs of Death (Do NOT Initiate)',
+            body: '• **Decapitation**\n• **Hemicorporectomy** (transection of the torso)\n• **Dependent lividity** (non-blanching discoloration in dependent areas)\n• **Rigor mortis** (stiffening of joints and muscles)\n• **Decomposition** (tissue breakdown, odor)\n• **Obviously non-survivable traumatic injury** (e.g., massive cranial destruction)',
+        },
+        {
+            heading: 'Valid DNAR / Advance Directive',
+            body: '• Valid Do Not Attempt Resuscitation order on scene\n• Physician Orders for Life-Sustaining Treatment (POLST) indicating no CPR\n• Must be a valid, signed document — verbal reports alone may be insufficient\n• **When in doubt, start CPR** — can always stop after verification',
+        },
+        {
+            heading: 'Traumatic Arrest Futility (EMCrit)',
+            body: '• Blunt trauma with CPR >10 minutes and no signs of life = consider futility\n• Penetrating trauma with CPR >15 minutes and no signs of life\n• Signs of life: pupillary response, spontaneous movement, organized cardiac rhythm\n• **Exception:** penetrating torso trauma → resuscitative thoracotomy may be indicated',
+        },
+        {
+            heading: 'Key Principle',
+            body: '**When uncertain, always initiate CPR.** It is far better to start and then appropriately terminate than to withhold CPR from a potentially salvageable patient.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+        { num: 2, text: 'Farkas J. Futility in Cardiac Arrest. EMCrit. https://emcrit.org/' },
+        { num: 3, text: 'Millin MG et al. Withholding and Termination of Resuscitation of Adult Cardiopulmonary Arrest. Prehosp Emerg Care. 2007;11(4):334-339.' },
+    ],
+};
+const CA_TOR_RULES = {
+    id: 'ca-tor-rules',
+    title: 'Termination of Resuscitation',
+    subtitle: 'BLS Rule, ALS Rule, ETCO₂ Criteria, and POCUS Futility',
+    sections: [
+        {
+            heading: 'BLS Termination Rule',
+            body: 'Consider TOR if ALL of the following:\n• Arrest not witnessed by EMS\n• No bystander CPR\n• No AED shock delivered\n• No ROSC prior to transport decision\n\nValidated in multiple studies — 99.5% specificity for non-survival.',
+        },
+        {
+            heading: 'ALS Termination Rule',
+            body: 'Consider TOR if ALL of the following:\n• Arrest not witnessed (or witnessed but non-shockable)\n• No ROSC prior to transport\n• No shocks delivered during resuscitation\n\nAdds ALS-level information to BLS rule.',
+        },
+        {
+            heading: 'ETCO₂ Criteria',
+            body: '• **ETCO₂ <10 mmHg after 20 minutes** of quality CPR\n• Must ensure adequate CPR technique (not falsely low from poor compressions)\n• Combined with other criteria, not alone\n• Exception: hypothermic arrest, poisoning',
+        },
+        {
+            heading: 'POCUS Futility Signal',
+            body: '• **No cardiac activity on POCUS** after adequate resuscitation duration\n• Combined with ETCO₂ <10 = strongest futility signal\n• Cardiac standstill at any point = near-zero survival (but NOT absolute)\n• Always reassess for reversible causes before calling',
+        },
+        {
+            heading: 'When to CONTINUE Resuscitation',
+            body: '• Reversible cause still being treated (hyperK, tension PTX, PE, toxin)\n• Hypothermic cardiac arrest ("not dead until warm and dead")\n• Drug overdose (may require prolonged CPR — 60+ min for some toxins)\n• ECPR in progress or immediately available\n• Intermittent ROSC\n• Pediatric arrest (longer resuscitation attempts warranted)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Morrison LJ et al. Validation of a Rule for Termination of Resuscitation. NEJM. 2006;355(5):478-487.' },
+        { num: 2, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+        { num: 3, text: 'Soar J et al. ERC Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
+    ],
+};
+const PEA_RUSH_PROTOCOL = {
+    id: 'pea-rush-protocol',
+    title: 'RUSH Exam in Cardiac Arrest',
+    subtitle: 'Rapid Ultrasound in Shock — Pump, Tank, Pipes',
+    sections: [
+        {
+            heading: 'When to Perform',
+            body: '• During scheduled pulse/rhythm checks ONLY (<10 seconds)\n• Do NOT interrupt CPR for POCUS\n• Have probe ready and pre-positioned before pausing compressions\n• Subxiphoid cardiac view is fastest in arrest',
+        },
+        {
+            heading: 'PUMP — Cardiac Assessment',
+            body: '**Subxiphoid or parasternal long axis:**\n• **Cardiac activity present?** Organized wall motion vs standstill\n• **RV dilation?** RV > LV suggests massive PE\n• **Pericardial effusion?** Fluid around heart → tamponade if RV collapse\n• **Global function?** Hyperdynamic (hypovolemia) vs poor squeeze (cardiogenic)\n\n**No cardiac activity = pseudo-PEA / strongest futility signal**',
+        },
+        {
+            heading: 'TANK — Volume Status',
+            body: '**IVC (subxiphoid longitudinal):**\n• **Collapsed IVC** (<1 cm, >50% respiratory variation) = hypovolemia\n• **Plethoric IVC** (>2 cm, no variation) = obstructive cause (PE, tamponade) or cardiogenic\n\n**Lungs (bilateral anterior):**\n• **Absent lung sliding** = pneumothorax → needle decompression\n• **B-lines** = pulmonary edema (cardiogenic, fluid overload)\n\n**FAST (Focused Assessment with Sonography for Trauma):**\n• Free fluid (Morison, splenorenal, pelvis) = hemorrhage',
+        },
+        {
+            heading: 'PIPES — Aorta',
+            body: '**Abdominal aorta (epigastric):**\n• **AAA >3 cm** = ruptured aneurysm as cause of arrest (rare but treatable)\n• Quick sweep from xiphoid to bifurcation',
+        },
+        {
+            heading: 'Integration with PEA Width',
+            body: '• **Wide QRS PEA** → look for hyperkalemia signs (clinical), treat empirically\n• **Narrow QRS PEA** → RUSH findings direct treatment:\n  - RV dilation → tPA for PE\n  - Pericardial effusion → pericardiocentesis\n  - No lung sliding → needle decompression\n  - Collapsed IVC → volume resuscitation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Perera P et al. The RUSH Exam: Rapid Ultrasound in Shock. Emerg Med Clin North Am. 2010;28(1):29-56.' },
+        { num: 2, text: 'Breitkreutz R et al. Focused Echo in Life Support. Resuscitation. 2010;81(11):1431-1433.' },
+        { num: 3, text: 'Driver BE et al. Treatable Causes of Cardiac Arrest by Ultrasound. Resuscitation. 2017;120:116-120.' },
+        { num: 4, text: 'Taming the SRU. RUSH Exam Protocol. tamingthesru.com.' },
+    ],
+};
+const PEA_WIDE_NARROW = {
+    id: 'pea-wide-narrow',
+    title: 'Wide vs. Narrow Complex PEA',
+    subtitle: 'QRS Width-Based Differential and First-Move Treatment',
+    sections: [
+        {
+            heading: 'Wide Complex PEA (QRS >120ms)',
+            body: '**Think: Sodium channel blockade**\n\n| Cause | Key Feature | First Treatment |\n|-------|-------------|------------------|\n| Hyperkalemia | Peaked T waves, sine wave | CaCl/CaGluc 1g IV, NaHCO₃, insulin+D50 |\n| TCA overdose | Anticholinergic signs, R in aVR >3mm | NaHCO₃ 1-2 mEq/kg IV push |\n| Na channel blocker | Drug history | NaHCO₃ + lipid emulsion |\n| Severe acidosis | pH <7.0 | NaHCO₃ 1 mEq/kg |\n| Hypermagnesemia | Renal failure + Mg infusion | Calcium 1g IV |',
+        },
+        {
+            heading: 'Narrow Complex PEA (QRS ≤120ms)',
+            body: '**Think: Obstructive or hypovolemic**\n\n| Cause | POCUS Finding | First Treatment |\n|-------|---------------|------------------|\n| Cardiac tamponade | Pericardial effusion + RV collapse | Pericardiocentesis |\n| Tension pneumothorax | Absent lung sliding | Needle decompression |\n| Massive PE | RV dilation, McConnell sign | tPA 50mg IV push |\n| Hypovolemia | Collapsed IVC, empty heart | 1-2L crystalloid rapid bolus |\n| Auto-PEEP | Ventilated patient | Disconnect ventilator, decompress |',
+        },
+        {
+            heading: 'Clinical Pearl',
+            body: '**Wide complex PEA has a metabolic/toxic cause until proven otherwise.**\n**Narrow complex PEA has a mechanical/obstructive cause until proven otherwise.**\n\nThis distinction guides your first intervention while waiting for definitive diagnosis. Treat empirically — the risk of treating is far less than the risk of delay.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Littmann L et al. A Simplified and Structured Teaching Tool for the Evaluation and Management of PEA. Med Princ Pract. 2014;23(1):1-6.' },
+        { num: 2, text: 'Farkas J. PEA Cardiac Arrest. EMCrit IBCC. https://emcrit.org/ibcc/pea/' },
+    ],
+};
+const VF_DSD = {
+    id: 'vf-dsd',
+    title: 'Double Sequential Defibrillation (DSD)',
+    subtitle: 'Technique, Evidence, and Setup for Refractory VF',
+    sections: [
+        {
+            heading: 'When to Use',
+            body: '• VF refractory to **3+ standard shocks** with optimal CPR\n• After vector change (AP pad repositioning) has been attempted\n• Requires two defibrillators and four pads\n• DOSE-VF Trial: 30.4% survival with DSD vs 13.3% standard care',
+        },
+        {
+            heading: 'Pad Placement',
+            body: '**Defibrillator 1:** Standard anterolateral (AL)\n• Right infraclavicular\n• Left lateral chest (mid-axillary)\n\n**Defibrillator 2:** Anterior-Posterior (AP)\n• Left parasternal (anterior)\n• Left infrascapular (posterior)\n\nPads must not overlap — trim or offset if necessary.',
+        },
+        {
+            heading: 'Technique',
+            body: '1. Charge both defibrillators to **maximum energy**\n2. Assign one operator per defibrillator\n3. Verbal countdown: "Charging... ready... 3-2-1-SHOCK"\n4. Deliver shocks **<1 second apart** (near-simultaneous)\n5. Resume CPR immediately after both shocks\n6. Continue 2-minute CPR cycle, reassess rhythm',
+        },
+        {
+            heading: 'Evidence (DOSE-VF Trial, NEJM 2022)',
+            body: '• **N=405** patients with refractory shockable OHCA\n• 3 arms: standard, vector change only, DSD\n• **Survival to discharge:** DSD 30.4% vs standard 13.3% (p=0.009)\n• **Vector change alone:** 21.7% (also superior to standard)\n• Favorable neurological outcome: DSD 27.4% vs standard 11.2%\n\n**Bottom line:** DSD should be attempted in all refractory VF when a second defibrillator is available.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cheskes S et al. DOSE-VF Trial: Defibrillation Strategies for Refractory VF. NEJM. 2022;387:1947-1956.' },
+        { num: 2, text: 'Myerburg RJ et al. Double Sequential External Defibrillation for Refractory VF. J Am Coll Cardiol. 2019.' },
+    ],
+};
+const CA_HS_TS_TABLE = {
+    id: 'ca-hs-ts-table',
+    title: "H's & T's Quick Reference",
+    subtitle: 'All 10 Reversible Causes: Diagnosis → POCUS Finding → Treatment',
+    sections: [
+        {
+            heading: "The H's",
+            body: '| Cause | POCUS / Clue | Treatment |\n|-------|-------------|----------|\n| **Hypoxia** | Cyanosis, low SpO₂ | Secure airway, 100% O₂ |\n| **Hypovolemia** | Collapsed IVC, empty heart | IV fluids, blood, stop bleeding |\n| **Hydrogen ion (Acidosis)** | Wide QRS, history (DKA, renal) | NaHCO₃ 1 mEq/kg, treat cause |\n| **Hypokalemia** | Flat T waves, U waves | KCl IV, Mg repletion |\n| **Hyperkalemia** | Peaked T, wide QRS, sine wave | CaCl 1g, NaHCO₃, insulin+D50 |\n| **Hypothermia** | Core temp <30°C, history | Active rewarming, continue CPR |',
+        },
+        {
+            heading: "The T's",
+            body: '| Cause | POCUS / Clue | Treatment |\n|-------|-------------|----------|\n| **Tension PTX** | Absent lung sliding | Needle decompression → chest tube |\n| **Tamponade** | Pericardial effusion + RV collapse | Pericardiocentesis |\n| **Thrombosis (PE)** | RV dilation, McConnell sign | tPA 50mg IV push, CPR 60-90 min |\n| **Thrombosis (MI)** | Wall motion abnormality, STEMI | PCI if ROSC; continue ACLS |\n| **Toxins** | Medication history, tox screen | Specific antidote (NaHCO₃, DigiFab, lipid, glucagon) |',
+        },
+        {
+            heading: 'Clinical Approach',
+            body: '• Address H\'s and T\'s at **every pulse check** — not just once\n• POCUS is the fastest way to identify tamponade, PE, PTX, hypovolemia\n• Wide QRS → think hyperK or toxin FIRST\n• Narrow QRS → think obstructive causes FIRST\n• Multiple causes may coexist — treat all identified\n• Empiric calcium + bicarb is reasonable when hyperK/toxin cannot be excluded',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+        { num: 2, text: 'Farkas J. Cardiac Arrest. EMCrit IBCC. https://emcrit.org/ibcc/' },
+        { num: 3, text: 'Taming the SRU. Reversible Causes of Cardiac Arrest. tamingthesru.com.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
@@ -10533,6 +10736,13 @@ export const INFO_PAGES = {
     'mal-pregnancy': MAL_PREGNANCY,
     'mal-prophylaxis-failure': MAL_PROPHYLAXIS_FAILURE,
     'mal-pearls': MAL_PEARLS,
+    'ca-etco2-guide': CA_ETCO2_GUIDE,
+    'ca-no-cpr-criteria': CA_NO_CPR_CRITERIA,
+    'ca-tor-rules': CA_TOR_RULES,
+    'pea-rush-protocol': PEA_RUSH_PROTOCOL,
+    'pea-wide-narrow': PEA_WIDE_NARROW,
+    'vf-dsd': VF_DSD,
+    'ca-hs-ts-table': CA_HS_TS_TABLE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

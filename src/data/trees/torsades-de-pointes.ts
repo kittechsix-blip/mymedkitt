@@ -51,7 +51,7 @@ export const TORSADES_DE_POINTES_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Pulseless TdP — Defibrillation',
-    body: '**Unsynchronized defibrillation** per standard ACLS energy dosing.\n\n**⚠️ Do NOT give amiodarone** — it prolongs QT and will worsen TdP.\n\n**During resuscitation:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) 4 g IV push (can give rapidly in arrest)\n• Standard ACLS otherwise (epinephrine, CPR)\n• Repeat defibrillation as needed\n\n**After ROSC** → proceed to acute management protocol.',
+    body: '**Unsynchronized defibrillation** per standard ACLS energy dosing.\n\n**⚠️ Do NOT give amiodarone** — it prolongs QT and will worsen TdP.\n\n**During resuscitation:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) 4 g IV push (can give rapidly in arrest)\n• Standard ACLS otherwise (epinephrine, CPR)\n• Repeat defibrillation as needed\n\n**After ROSC** → proceed to acute management protocol, then [Post-Cardiac Arrest Care](#/tree/post-rosc).\n\n← [Return to Cardiac Arrest Hub](#/tree/cardiac-arrest)',
     citation: [1, 4],
     next: 'tdp-pulseless-rosc',
   },

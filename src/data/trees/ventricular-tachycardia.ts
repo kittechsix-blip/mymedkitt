@@ -1,0 +1,290 @@
+// MedKitt — Ventricular Tachycardia (Pulseless + Stable)
+// Pulse check → Pulseless VT → Unstable VT → Stable VT → Post-Conversion.
+// 5 modules: Pulse Check → Pulseless VT → Unstable VT → Stable VT → Post-Conversion
+// ~20 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const VENTRICULAR_TACHYCARDIA_CRITICAL_ACTIONS = [
+  { text: 'Pulse check first — VT with pulse = different protocol', nodeId: 'vt-pulse' },
+  { text: 'Pulseless VT: shock 200J, resume CPR immediately', nodeId: 'pvt-shock' },
+  { text: 'Polymorphic VT → check QTc → if prolonged → Torsades protocol', nodeId: 'vt-poly-check' },
+  { text: 'Unstable VT: synchronized cardioversion 100J → 200J → 360J', nodeId: 'vt-cardiovert' },
+  { text: 'Stable monomorphic VT: amiodarone 150mg over 10min OR procainamide', nodeId: 'vt-mono-stable' },
+  { text: 'Post-conversion: 12-lead, electrolytes, identify trigger, EP consult', nodeId: 'vt-converted' },
+];
+
+export const VENTRICULAR_TACHYCARDIA_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: PULSE CHECK / BRANCH POINT
+  // =====================================================================
+
+  {
+    id: 'vt-start',
+    type: 'info',
+    module: 1,
+    title: 'Ventricular Tachycardia',
+    body: '[VT Management Steps Summary](#/info/vt-steps-summary)\n\n**VT confirmed:** wide complex tachycardia, rate usually 150–250 bpm.\n\n**Key Features:**\n• QRS duration >120 ms\n• AV dissociation (if present, highly specific for VT)\n• Concordance across precordial leads\n• Fusion/capture beats\n\n**⚠️ Check pulse immediately** — pulseless VT and VT with pulse have fundamentally different management protocols.',
+    images: [{ src: 'images/cardiac-arrest/mvt-ecg.png', alt: 'Monomorphic ventricular tachycardia ECG', caption: 'Monomorphic VT — regular wide complex tachycardia' }],
+    citation: [1, 3, 6],
+    next: 'vt-pulse',
+  },
+
+  {
+    id: 'vt-pulse',
+    type: 'question',
+    module: 1,
+    title: 'Pulse Check',
+    body: 'Is a pulse present?',
+    options: [
+      { label: 'No pulse — pulseless VT', description: 'Cardiac arrest protocol', next: 'pvt-shock', urgency: 'critical' },
+      { label: 'Yes — pulse present', description: 'Assess hemodynamic stability', next: 'vt-unstable-check' },
+    ],
+  },
+
+  {
+    id: 'vt-morphology',
+    type: 'question',
+    module: 1,
+    title: 'QRS Morphology',
+    body: 'What is the QRS morphology?',
+    options: [
+      { label: 'Monomorphic (uniform QRS)', description: 'Same QRS shape beat-to-beat', next: 'vt-mono-stable' },
+      { label: 'Polymorphic', description: 'Varying QRS shape', next: 'vt-poly-check' },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: PULSELESS VT
+  // =====================================================================
+
+  {
+    id: 'pvt-shock',
+    type: 'info',
+    module: 2,
+    title: 'Pulseless VT — Defibrillation',
+    body: '**Shock immediately: 200J biphasic.**\n\nResume CPR immediately after shock — do NOT check pulse first. Same protocol as VF.\n\n**Key Points:**\n• Biphasic 200J (or manufacturer max if different device)\n• Resume chest compressions immediately — do not pause for rhythm analysis\n• 2-minute CPR cycles between rhythm checks\n• Minimize hands-off time (<10 sec for shock delivery)',
+    citation: [2, 4, 9],
+    next: 'pvt-cycle',
+  },
+
+  {
+    id: 'pvt-cycle',
+    type: 'info',
+    module: 2,
+    title: 'CPR + Epinephrine + Antiarrhythmic',
+    body: '**Epinephrine:** [Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO after 2nd shock, repeat every 3–5 minutes.\n\n**Antiarrhythmic after 3rd shock:**\n• [Amiodarone](#/drug/amiodarone/vf arrest) 300 mg IV push, then 150 mg IV push if still in VT/VF\n• **OR** [Lidocaine](#/drug/lidocaine/vf arrest) 1–1.5 mg/kg IV, then 0.5–0.75 mg/kg q5–10 min (max 3 mg/kg)\n\n**Continue:**\n• High-quality CPR (100–120/min, ≥2 inches depth, full recoil)\n• Rhythm check every 2 minutes\n• Search for reversible causes (H\'s and T\'s)',
+    citation: [2, 9],
+    next: 'pvt-check',
+  },
+
+  {
+    id: 'pvt-check',
+    type: 'question',
+    module: 2,
+    title: 'Rhythm Check After 2-min CPR Cycle',
+    body: 'After 2-minute CPR cycle: what does the rhythm check show?',
+    options: [
+      { label: 'ROSC', description: 'Pulse restored', next: 'pvt-rosc' },
+      { label: 'Still pVT — continue shocks + ACLS', description: 'Persistent pulseless VT', next: 'pvt-refractory' },
+      { label: 'Polymorphic VT / Torsades morphology', description: 'Twisting QRS pattern', next: 'pvt-torsades-check' },
+    ],
+  },
+
+  {
+    id: 'pvt-refractory',
+    type: 'info',
+    module: 2,
+    title: 'Refractory Pulseless VT',
+    body: '**Refractory pulseless VT:** follow VF/VT arrest escalation protocol.\n\n**Consider:**\n• Double sequential defibrillation (DSD)\n• Esmolol 500 mcg/kg IV bolus\n• Pad position change (anterolateral → anterior-posterior)\n• ECPR if available and criteria met\n• Reversible cause search (H\'s and T\'s)\n\n[Refractory VF/VT Protocol](#/tree/refractory-vfvt)',
+    citation: [2, 4, 9],
+    next: 'pvt-rosc',
+  },
+
+  {
+    id: 'pvt-torsades-check',
+    type: 'info',
+    module: 2,
+    title: 'Polymorphic VT in Arrest — Check QTc',
+    body: '**Polymorphic VT in arrest** → check baseline QTc if known.\n\n**If prolonged QTc → Torsades protocol:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades) 2 g IV push (can give rapidly in arrest)\n• **⚠️ Do NOT give amiodarone** — it prolongs QT and worsens Torsades\n• Overdrive pacing if available\n\n[Torsades de Pointes Protocol](#/tree/torsades-de-pointes)',
+    citation: [1, 2, 7],
+    next: 'pvt-rosc',
+  },
+
+  {
+    id: 'pvt-rosc',
+    type: 'result',
+    module: 2,
+    title: 'ROSC — Post-Cardiac Arrest Care',
+    body: '**ROSC achieved** → immediate post-cardiac arrest care.\n\n**Priorities:**\n• 12-lead ECG immediately — ischemia-driven VT may need emergent cath lab\n• Start antiarrhythmic maintenance infusion (amiodarone 1 mg/min × 6h → 0.5 mg/min or lidocaine 1–4 mg/min)\n• Targeted temperature management\n• Identify and treat VT trigger\n\n[Post-Cardiac Arrest Care](#/tree/post-rosc)',
+    citation: [2, 10],
+    recommendation: 'Post-ROSC: 12-lead ECG immediately, antiarrhythmic infusion, identify VT trigger.',
+    confidence: 'definitive',
+  },
+
+  // =====================================================================
+  // MODULE 3: UNSTABLE VT WITH PULSE
+  // =====================================================================
+
+  {
+    id: 'vt-unstable-check',
+    type: 'question',
+    module: 3,
+    title: 'Hemodynamic Stability',
+    body: 'Is the patient hemodynamically unstable?\n\n**Unstable criteria:**\n• SBP <90 mmHg\n• Altered mental status\n• Ischemic chest pain\n• Acute pulmonary edema',
+    options: [
+      { label: 'Yes — unstable', description: 'Hypotension, AMS, chest pain, or pulmonary edema', next: 'vt-cardiovert', urgency: 'critical' },
+      { label: 'No — stable', description: 'Adequate perfusion, alert, no acute distress', next: 'vt-morphology' },
+    ],
+  },
+
+  {
+    id: 'vt-cardiovert',
+    type: 'info',
+    module: 3,
+    title: 'Unstable VT — Synchronized Cardioversion',
+    body: '**Synchronized cardioversion:**\n• Start **100J** → **200J** → **360J** (biphasic)\n• **Confirm synchronized mode** — shock must land on R wave\n• If sync mode fails to track → switch to unsynchronized\n\n**Sedation** (if hemodynamics tolerate brief sedation):\n• [Midazolam](#/drug/midazolam/cardioversion) 2–5 mg IV\n• **OR** [Ketamine](#/drug/ketamine/procedural sedation) 1–2 mg/kg IV\n\n**⚠️ If patient deteriorates to pulseless** → unsynchronized shock 200J immediately.',
+    citation: [2, 3, 4],
+    next: 'vt-post-cardiovert',
+  },
+
+  {
+    id: 'vt-post-cardiovert',
+    type: 'info',
+    module: 3,
+    title: 'Post-Cardioversion Management',
+    body: '**Post-cardioversion checklist:**\n• 12-lead ECG (compare to prior)\n• Start maintenance antiarrhythmic infusion\n• Check electrolytes (K+ target >4.0, Mg2+ target >2.0)\n• Identify trigger: ischemia, electrolyte abnormality, drug-induced\n• **Cardiology consult**\n\nIf VT recurs → consider alternative antiarrhythmic or repeat cardioversion.',
+    citation: [3, 10],
+    next: 'vt-recurrent',
+  },
+
+  // =====================================================================
+  // MODULE 4: STABLE VT WITH PULSE
+  // =====================================================================
+
+  {
+    id: 'vt-mono-stable',
+    type: 'info',
+    module: 4,
+    title: 'Stable Monomorphic VT — IV Antiarrhythmic',
+    body: '**Monomorphic stable VT — IV antiarrhythmic.**\n\n**First-line options:**\n• [Amiodarone](#/drug/amiodarone/stable vt) 150 mg IV over 10 min → 1 mg/min × 6h → 0.5 mg/min\n• [Procainamide](#/drug/procainamide/stable vt) 20–50 mg/min until arrhythmia suppresses, hypotension, QRS widens >50%, or max 17 mg/kg\n• [Lidocaine](#/drug/lidocaine/stable vt) 1–1.5 mg/kg → 0.5–0.75 mg/kg q5–10 min → infusion 1–4 mg/min\n\n**Procainamide may be preferred** (2023 AHA) — higher termination rates than amiodarone for hemodynamically stable VT [8].\n\n**⚠️ Avoid** if prolonged QTc at baseline → risk of Torsades.',
+    citation: [2, 3, 7, 8],
+    next: 'vt-mono-response',
+  },
+
+  {
+    id: 'vt-mono-response',
+    type: 'question',
+    module: 4,
+    title: 'Response to Antiarrhythmic',
+    body: 'What is the response to antiarrhythmic therapy?',
+    options: [
+      { label: 'Converted to sinus', description: 'VT terminated', next: 'vt-converted' },
+      { label: 'Persists — hemodynamically stable', description: 'VT continues but patient stable', next: 'vt-mono-refractory' },
+      { label: 'Deteriorating', description: 'Hemodynamic compromise', next: 'vt-cardiovert', urgency: 'critical' },
+    ],
+  },
+
+  {
+    id: 'vt-mono-refractory',
+    type: 'info',
+    module: 4,
+    title: 'Refractory Stable Monomorphic VT',
+    body: '**Refractory stable monomorphic VT:**\n\n• Try alternative antiarrhythmic if first agent failed (e.g., procainamide after amiodarone)\n• Consider **synchronized cardioversion** even if "stable" — pharmacologic conversion has limitations\n• **Electrophysiology consult** for catheter ablation consideration\n• Continuous hemodynamic monitoring — stable VT can deteriorate without warning\n\n**Do NOT combine** amiodarone + procainamide (additive QT prolongation).',
+    citation: [3, 8, 12],
+    next: 'vt-converted',
+  },
+
+  {
+    id: 'vt-poly-check',
+    type: 'question',
+    module: 4,
+    title: 'Polymorphic VT — Baseline QTc',
+    body: 'What is the baseline QTc?',
+    options: [
+      { label: 'Prolonged QTc (>480 ms)', description: 'Torsades de Pointes likely', next: 'vt-poly-long-qt', urgency: 'critical' },
+      { label: 'Normal QTc', description: 'Likely ischemia-driven', next: 'vt-poly-normal-qt' },
+      { label: 'Unknown', description: 'No prior ECG available', next: 'vt-poly-normal-qt' },
+    ],
+  },
+
+  {
+    id: 'vt-poly-normal-qt',
+    type: 'info',
+    module: 4,
+    title: 'Polymorphic VT — Normal QTc (Ischemia)',
+    body: '**Polymorphic VT with normal QTc: treat like ischemia.**\n\nUsually ischemia-driven. Treat as ACS:\n• Emergent **cardiology consult** + cath lab activation\n• Beta-blockers may help suppress catecholamine-driven VT\n• Amiodarone acceptable (QT not prolonged)\n• Aggressive electrolyte correction (K+ >4.0, Mg2+ >2.0)\n\n[NSTEMI Management](#/tree/nstemi)',
+    citation: [3, 7, 11],
+    next: 'vt-converted',
+  },
+
+  {
+    id: 'vt-poly-long-qt',
+    type: 'info',
+    module: 4,
+    title: 'Polymorphic VT + Prolonged QTc = Torsades',
+    body: '**Polymorphic VT with prolonged QTc = Torsades de Pointes.**\n\nTreatment is **OPPOSITE** of standard VT.\n\n**⚠️ Do NOT give amiodarone or procainamide** — they prolong QT and will worsen Torsades.\n\n**Immediate treatment:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades) 2–4 g IV over 15 min\n• Overdrive pacing to 90–110 bpm\n• Isoproterenol infusion if pacing unavailable\n• Stop ALL QT-prolonging medications\n\n→ [Torsades de Pointes Protocol](#/tree/torsades-de-pointes)',
+    citation: [1, 3, 7],
+    next: 'vt-converted',
+  },
+
+  // =====================================================================
+  // MODULE 5: POST-CONVERSION
+  // =====================================================================
+
+  {
+    id: 'vt-converted',
+    type: 'info',
+    module: 5,
+    title: 'Post-Conversion Checklist',
+    body: '**Post-conversion checklist:**\n• 12-lead ECG (compare to prior)\n• Electrolytes: K+ target >4.0, Mg2+ target >2.0\n• Troponin (ischemia trigger?)\n• Echo if not done (EF, wall motion abnormalities)\n• Identify and treat cause: ischemia, electrolyte, drug-induced, structural heart disease\n• Start maintenance antiarrhythmic infusion',
+    citation: [3, 10],
+    next: 'vt-recurrent',
+  },
+
+  {
+    id: 'vt-recurrent',
+    type: 'info',
+    module: 5,
+    title: 'Recurrent VT Management',
+    body: '**Recurrent VT management:**\n• **Electrophysiology consult**\n• ICD evaluation (EF ≤35%, or survived VT arrest)\n• Amiodarone maintenance (200–400 mg PO daily) as bridge to ICD\n• Catheter ablation for recurrent monomorphic VT [12]\n• Medication review — discontinue QT-prolonging agents\n• Beta-blocker therapy (reduces VT recurrence in structural heart disease)',
+    citation: [3, 7, 12],
+    next: 'vt-disposition',
+  },
+
+  {
+    id: 'vt-disposition',
+    type: 'result',
+    module: 5,
+    title: 'Disposition',
+    body: '**Disposition:** ICU with continuous telemetry.\n\n**All VT patients require inpatient monitoring:**\n• Continuous telemetry (minimum 48 hours)\n• Cardiology/EP consult\n• Echo if not done (assess EF, structural heart disease)\n• ICD evaluation if EF ≤35% or survived VT arrest\n• Complete medication reconciliation\n• Electrolyte monitoring q4–6h until stable',
+    citation: [3, 10],
+    recommendation: 'ICU admission with telemetry, cardiology/EP consult, echo, ICD evaluation if EF ≤35%.',
+    confidence: 'recommended',
+  },
+];
+
+export const VENTRICULAR_TACHYCARDIA_MODULE_LABELS: string[] = [
+  'Pulse Check',
+  'Pulseless VT',
+  'Unstable VT',
+  'Stable VT',
+  'Post-Conversion',
+];
+
+export const VENTRICULAR_TACHYCARDIA_CITATIONS: Citation[] = [
+  { num: 1, text: 'Farkas J. Ventricular Tachycardia. EMCrit Internet Book of Critical Care. https://emcrit.org/ibcc/vt/' },
+  { num: 2, text: 'Panchal AR, et al. 2023 AHA Focused Update on Advanced Cardiovascular Life Support. Circulation. 2023.' },
+  { num: 3, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death. Circulation. 2018;138(13):e272-e391.' },
+  { num: 4, text: 'Soar J, et al. European Resuscitation Council Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
+  { num: 5, text: 'First10EM. Wide Complex Tachycardia. https://first10em.com/' },
+  { num: 6, text: 'Nickson C. Ventricular Tachycardia. Life in the Fast Lane. https://litfl.com/' },
+  { num: 7, text: 'Priori SG, et al. 2015 ESC Guidelines for the Management of Patients with Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death. Eur Heart J. 2015;36(41):2793-2867.' },
+  { num: 8, text: 'Ortiz M, et al. Randomized Comparison of Intravenous Procainamide vs. Intravenous Amiodarone for the Acute Treatment of Tolerated Wide QRS Tachycardia. J Am Coll Cardiol. 2017;69(4):491.' },
+  { num: 9, text: 'Kudenchuk PJ, et al. Amiodarone, Lidocaine, or Placebo in Out-of-Hospital Cardiac Arrest (ALPS Trial). N Engl J Med. 2016;374:1711-1722.' },
+  { num: 10, text: 'Callaway CW, et al. Part 8: Post-Cardiac Arrest Care. 2015 AHA Guidelines Update for CPR and ECC. Circulation. 2015;132(18 Suppl 2):S465-S482.' },
+  { num: 11, text: 'Brugada J, et al. 2019 ESC Guidelines for the Management of Patients with Supraventricular Tachycardia. Eur Heart J. 2020;41(5):655-720.' },
+  { num: 12, text: 'Tung R, et al. Catheter Ablation of Ventricular Tachycardia. Circulation. 2020;142(2):e1-e17.' },
+];

@@ -377,7 +377,7 @@ export const REFRACTORY_VFVT_NODES = [
         type: 'result',
         module: 6,
         title: 'Post-ROSC Management',
-        body: '**Immediate post-ROSC:**\n\n1. **Antiarrhythmic infusion:** Continue amiodarone or lidocaine drip\n2. **Target hemodynamics:** SBP >90, MAP >65\n3. **Sedation:** Propofol or dexmedetomidine (sympatholytic)\n4. **Temperature management:** Target 32-36°C per 2025 AHA\n5. **Cardiology consult:** Emergent cath if STEMI or high suspicion ACS\n6. **Electrolytes:** Correct K, Mg\n\n**Disposition:** ICU with continuous telemetry',
+        body: '**Immediate post-ROSC:**\n\n1. **Antiarrhythmic infusion:** Continue amiodarone or lidocaine drip\n2. **Target hemodynamics:** SBP >90, MAP >65\n3. **Sedation:** Propofol or dexmedetomidine (sympatholytic)\n4. **Temperature management:** Target 32-36°C per 2025 AHA\n5. **Cardiology consult:** Emergent cath if STEMI or high suspicion ACS\n6. **Electrolytes:** Correct K, Mg\n\n→ [Full Post-Cardiac Arrest Care Protocol](#/tree/post-rosc)\n\n**Disposition:** ICU with continuous telemetry\n\n← [Return to Cardiac Arrest Hub](#/tree/cardiac-arrest)',
         recommendation: 'Antiarrhythmic infusion, targeted temperature management, emergent cath if indicated, ICU admission.',
         confidence: 'definitive',
         citation: [2],

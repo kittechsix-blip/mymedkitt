@@ -625,6 +625,26 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/torsades-de-pointes.js');
       return { nodes: m.TORSADES_DE_POINTES_NODES, entryNodeId: 'tdp-start', categoryId: 'cardiology', moduleLabels: m.TORSADES_DE_POINTES_MODULE_LABELS, citations: m.TORSADES_DE_POINTES_CITATIONS, criticalActions: m.TORSADES_DE_POINTES_CRITICAL_ACTIONS };
     },
+    'cardiac-arrest': async () => {
+      const m = await import('../data/trees/cardiac-arrest.js');
+      return { nodes: m.CARDIAC_ARREST_NODES, entryNodeId: 'ca-start', categoryId: 'emergency-medicine', moduleLabels: m.CARDIAC_ARREST_MODULE_LABELS, citations: m.CARDIAC_ARREST_CITATIONS, criticalActions: m.CARDIAC_ARREST_CRITICAL_ACTIONS };
+    },
+    'pea-arrest': async () => {
+      const m = await import('../data/trees/pea-arrest.js');
+      return { nodes: m.PEA_ARREST_NODES, entryNodeId: 'pea-start', categoryId: 'emergency-medicine', moduleLabels: m.PEA_ARREST_MODULE_LABELS, citations: m.PEA_ARREST_CITATIONS, criticalActions: m.PEA_ARREST_CRITICAL_ACTIONS };
+    },
+    'bradycardic-arrest': async () => {
+      const m = await import('../data/trees/bradycardic-arrest.js');
+      return { nodes: m.BRADYCARDIC_ARREST_NODES, entryNodeId: 'brady-start', categoryId: 'emergency-medicine', moduleLabels: m.BRADYCARDIC_ARREST_MODULE_LABELS, citations: m.BRADYCARDIC_ARREST_CITATIONS, criticalActions: m.BRADYCARDIC_ARREST_CRITICAL_ACTIONS };
+    },
+    'ventricular-tachycardia': async () => {
+      const m = await import('../data/trees/ventricular-tachycardia.js');
+      return { nodes: m.VENTRICULAR_TACHYCARDIA_NODES, entryNodeId: 'vt-start', categoryId: 'emergency-medicine', moduleLabels: m.VENTRICULAR_TACHYCARDIA_MODULE_LABELS, citations: m.VENTRICULAR_TACHYCARDIA_CITATIONS, criticalActions: m.VENTRICULAR_TACHYCARDIA_CRITICAL_ACTIONS };
+    },
+    'post-rosc': async () => {
+      const m = await import('../data/trees/post-rosc.js');
+      return { nodes: m.POST_ROSC_NODES, entryNodeId: 'rosc-start', categoryId: 'emergency-medicine', moduleLabels: m.POST_ROSC_MODULE_LABELS, citations: m.POST_ROSC_CITATIONS, criticalActions: m.POST_ROSC_CRITICAL_ACTIONS };
+    },
     'cardiogenic-shock': async () => {
       const m = await import('../data/trees/cardiogenic-shock.js');
       return { nodes: m.CARDIOGENIC_SHOCK_NODES, entryNodeId: 'cs-start', categoryId: 'critical-care', moduleLabels: m.CARDIOGENIC_SHOCK_MODULE_LABELS, citations: m.CARDIOGENIC_SHOCK_CITATIONS, criticalActions: m.CARDIOGENIC_SHOCK_CRITICAL_ACTIONS };

@@ -731,7 +731,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'esmolol', label: 'Esmolol', icon: '💉', action: 'jump', target: 'rvf-esmolol-dose' },
     { id: 'antiarrhyth', label: 'Antiarrhyth', icon: '💊', action: 'jump', target: 'rvf-antiarrhythmic-dose' },
     { id: 'ecpr', label: 'ECPR', icon: '🫀', action: 'jump', target: 'rvf-ecpr-assess' },
-    { id: 'hs-ts', label: "H's & T's", icon: '🔍', action: 'jump', target: 'rvf-hs-ts' },
+    { id: 'hs-ts', label: "H's & T's", icon: '🔍', action: 'overlay', target: 'ca-hs-ts-table' },
+    { id: 'etco2', label: 'ETCO₂', icon: '📊', action: 'overlay', target: 'ca-etco2-guide' },
   ],
   'vad': [
     { id: 'alarms', label: 'Alarms', icon: '🚨', action: 'overlay', target: 'vad-alarm-guide' },
@@ -799,6 +800,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'drug-checker', label: 'QT Drugs', icon: '💊', action: 'calculator', target: 'qt-drug-checker' },
     { id: 'qtc-calc', label: 'QTc Calc', icon: '🧮', action: 'calculator', target: 'qtc-calculator' },
     { id: 'quick-card', label: 'Quick Tx', icon: '📋', action: 'overlay', target: 'tdp-quick-treatment' },
+    { id: 'etco2', label: 'ETCO₂', icon: '📊', action: 'overlay', target: 'ca-etco2-guide' },
   ],
   'dfsa-workup': [
     { id: 'detection', label: 'Windows', icon: '\u23F1\uFE0F', action: 'overlay', target: 'dfsa-detection-windows' },
@@ -920,6 +922,46 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'parasitemia', label: 'Parasitemia', icon: '🔬', action: 'calculator', target: 'parasitemia-calc' },
     { id: 'artesunate', label: 'Artesunate', icon: '💉', action: 'calculator', target: 'artesunate-dosing' },
     { id: 'species', label: 'Species', icon: '🦠', action: 'overlay', target: 'mal-species-table' },
+  ],
+  // ---------------------------------------------------------------
+  // Cardiac Arrest Suite
+  // ---------------------------------------------------------------
+  'cardiac-arrest': [
+    { id: 'vf', label: 'VF', icon: '⚡', action: 'jump', target: 'ca-vf-link' },
+    { id: 'vt', label: 'VT', icon: '🫀', action: 'jump', target: 'ca-pvt-link' },
+    { id: 'pea', label: 'PEA', icon: '💛', action: 'jump', target: 'ca-pea-link' },
+    { id: 'brady', label: 'Brady', icon: '🔵', action: 'jump', target: 'ca-brady-link' },
+    { id: 'etco2', label: 'ETCO₂', icon: '📊', action: 'overlay', target: 'ca-etco2-guide' },
+    { id: 'hs-ts', label: "H's & T's", icon: '🔍', action: 'overlay', target: 'ca-hs-ts-table' },
+  ],
+  'pea-arrest': [
+    { id: 'rush', label: 'RUSH', icon: '🔬', action: 'overlay', target: 'pea-rush-protocol' },
+    { id: 'wide', label: 'Wide QRS', icon: '⚡', action: 'jump', target: 'pea-wide' },
+    { id: 'narrow', label: 'Narrow QRS', icon: '🫀', action: 'jump', target: 'pea-narrow' },
+    { id: 'tamponade', label: 'Tamponade', icon: '💛', action: 'jump', target: 'pea-tamponade' },
+    { id: 'tension', label: 'Tension PTX', icon: '🫁', action: 'jump', target: 'pea-tension' },
+    { id: 'pe', label: 'Massive PE', icon: '🔴', action: 'jump', target: 'pea-massive-pe' },
+  ],
+  'bradycardic-arrest': [
+    { id: 'tcp', label: 'TCP Now', icon: '🔌', action: 'jump', target: 'brady-tcp' },
+    { id: 'atropine', label: 'Atropine', icon: '💉', action: 'jump', target: 'brady-atropine' },
+    { id: 'epi-drip', label: 'Epi Drip', icon: '💊', action: 'jump', target: 'brady-epi-infusion' },
+    { id: 'causes', label: 'Causes', icon: '🔍', action: 'jump', target: 'brady-causes' },
+    { id: 'etco2', label: 'ETCO₂', icon: '📊', action: 'overlay', target: 'ca-etco2-guide' },
+  ],
+  'ventricular-tachycardia': [
+    { id: 'pulseless', label: 'Pulseless', icon: '⚡', action: 'jump', target: 'pvt-shock' },
+    { id: 'cardiovert', label: 'Cardiovert', icon: '💛', action: 'jump', target: 'vt-cardiovert' },
+    { id: 'stable-rx', label: 'Stable Rx', icon: '💊', action: 'jump', target: 'vt-mono-stable' },
+    { id: 'torsades', label: 'Torsades', icon: '🔄', action: 'jump', target: 'vt-poly-long-qt' },
+    { id: 'etco2', label: 'ETCO₂', icon: '📊', action: 'overlay', target: 'ca-etco2-guide' },
+  ],
+  'post-rosc': [
+    { id: 'stemi', label: 'STEMI', icon: '❤️', action: 'jump', target: 'rosc-stemi' },
+    { id: 'hemo', label: 'Hemo Targets', icon: '📊', action: 'jump', target: 'rosc-hemo' },
+    { id: 'ttm', label: 'TTM', icon: '🌡️', action: 'jump', target: 'rosc-ttm-check' },
+    { id: 'neuro', label: 'Neuro Prog', icon: '🧠', action: 'jump', target: 'rosc-neuro' },
+    { id: 'icu', label: 'ICU Targets', icon: '🏥', action: 'jump', target: 'rosc-icu-targets' },
   ],
 };
 
