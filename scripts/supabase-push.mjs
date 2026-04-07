@@ -232,6 +232,8 @@ const TREE_REGISTRY = {
   'bradycardic-arrest':   { prefix: 'BRADYCARDIC_ARREST',   entryNodeId: 'brady-start',       categoryId: 'emergency-medicine' },
   'ventricular-tachycardia': { prefix: 'VENTRICULAR_TACHYCARDIA', entryNodeId: 'vt-start',    categoryId: 'emergency-medicine' },
   'post-rosc':            { prefix: 'POST_ROSC',            entryNodeId: 'rosc-start',        categoryId: 'emergency-medicine' },
+  'asthma-exacerbation':  { prefix: 'ASTHMA_EXACERBATION',  entryNodeId: 'asthma-start',      categoryId: 'critical-care' },
+  'adult-uti':            { prefix: 'ADULT_UTI',            entryNodeId: 'uti-start',         categoryId: 'urology' },
 };
 
 const CROSS_LISTINGS = {
@@ -267,6 +269,7 @@ const CROSS_LISTINGS = {
   'post-rosc':           [{ categoryId: 'cardiology' }],
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
+  'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

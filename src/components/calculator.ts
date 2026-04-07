@@ -26001,6 +26001,735 @@ const PRIMAQUINE_SAFETY_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Asthma Exacerbation Calculators
+// -------------------------------------------------------------------
+
+const ASTHMA_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'asthma-severity',
+  title: 'Asthma Exacerbation Severity',
+  subtitle: 'Acute Severity Classification',
+  description: 'Stratifies acute asthma exacerbation severity to guide treatment intensity (bronchodilators, steroids, magnesium, BiPAP, intubation).',
+  fields: [
+    {
+      name: 'speaking',
+      label: 'Speaking Ability',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Speaking in full sentences', points: 0 },
+        { label: 'Speaking in phrases only', points: 1 },
+        { label: 'Speaking in words only / unable to speak', points: 2 },
+      ],
+    },
+    { name: 'accessory', label: 'Accessory muscle use', type: 'toggle', points: 0, description: 'Visible use of accessory respiratory muscles' },
+    { name: 'rr', label: 'Respiratory Rate', type: 'number', points: 0, unit: '/min', description: 'Breaths per minute' },
+    { name: 'hr', label: 'Heart Rate', type: 'number', points: 0, unit: '/min', description: 'Beats per minute' },
+    { name: 'spo2', label: 'SpO2 (on room air)', type: 'number', points: 0, unit: '%', description: 'Oxygen saturation on room air' },
+    { name: 'pef', label: 'Peak Flow % Predicted', type: 'number', points: 0, unit: '%', description: 'PEF as percentage of predicted (if available)' },
+    { name: 'ams', label: 'Altered mental status', type: 'toggle', points: 0, description: 'Confusion, drowsiness, or exhaustion' },
+  ],
+  results: [],
+  thresholdNote: 'Mild: outpatient. Moderate: ED treatment + observation. Severe: continuous nebs + magnesium. Life-threatening: BiPAP or intubation.',
+  citations: [
+    'GINA 2024 Report. Global Strategy for Asthma Management and Prevention.',
+    'Camargo CA Jr, et al. Managing asthma exacerbations in the emergency department. Proc Am Thorac Soc. 2009;6(4):357-366.',
+    'Rowe BH, et al. Corticosteroids for preventing relapse following acute exacerbations of asthma. Cochrane Database Syst Rev. 2007;3:CD000195.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const speaking = values['speaking'] || 0;
+    const accessory = values['accessory'] || 0;
+    const rr = values['rr'] || 0;
+    const hr = values['hr'] || 0;
+    const spo2 = values['spo2'] || 100;
+    const pef = values['pef'] || 100;
+    const ams = values['ams'] || 0;
+
+    // Life-threatening criteria
+    if (ams === 1 || spo2 < 90 || speaking === 2) {
+      return {
+        value: 'Life-Threatening',
+        label: 'Life-Threatening Exacerbation',
+        description: 'Silent chest, cyanosis, poor respiratory effort, AMS, or exhaustion.\\n\\n**Immediate actions:**\\n• Continuous nebs + IV magnesium\\n• Prepare for BiPAP or intubation\\n• ICU admission\\n• Consider IV ketamine for bronchodilation',
+        colorVar: '--color-danger'
+      };
+    }
+
+    // Severe criteria
+    if (spo2 < 92 || rr > 30 || hr > 120 || pef < 50 || speaking === 1 || accessory === 1) {
+      return {
+        value: 'Severe',
+        label: 'Severe Exacerbation',
+        description: 'Significant respiratory distress, accessory muscle use, tachypnea.\\n\\n**Treatment:**\\n• Continuous albuterol nebs\\n• IV magnesium 2g over 20 min\\n• Prednisone 60mg or methylpred 125mg IV\\n• Consider BiPAP if tiring\\n• Admit to monitored bed',
+        colorVar: '--color-danger'
+      };
+    }
+
+    // Moderate criteria
+    if ((spo2 >= 92 && spo2 <= 95) || (rr >= 20 && rr <= 30) || (pef >= 50 && pef < 70)) {
+      return {
+        value: 'Moderate',
+        label: 'Moderate Exacerbation',
+        description: 'Dyspnea with activity, speaking in phrases, some accessory use.\\n\\n**Treatment:**\\n• Albuterol nebs q20min x3, then reassess\\n• Ipratropium with first 3 nebs\\n• Prednisone 40-60mg PO\\n• Reassess in 1-2h for disposition',
+        colorVar: '--color-warning'
+      };
+    }
+
+    // Mild
+    if (spo2 > 95 && rr < 20 && pef >= 70) {
+      return {
+        value: 'Mild',
+        label: 'Mild Exacerbation',
+        description: 'Dyspnea on exertion only, speaking in sentences, no accessory use.\\n\\n**Treatment:**\\n• Albuterol MDI 4-8 puffs or neb x1-2\\n• Prednisone 40mg PO x5 days\\n• Outpatient management\\n• Close follow-up in 1-2 days',
+        colorVar: '--color-primary'
+      };
+    }
+
+    return { value: 'Assess', label: 'Enter Values', description: 'Enter vital signs and clinical findings to determine severity', colorVar: '--color-text-muted' };
+  },
+};
+
+const PEF_PERCENT_PREDICTED_CALCULATOR: CalculatorDefinition = {
+  id: 'pef-percent',
+  title: 'Peak Flow % Predicted',
+  subtitle: 'PEF Calculation',
+  description: 'Calculates predicted peak expiratory flow (PEF) based on age, sex, and height. Compares measured PEF to predicted to assess severity.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'number', points: 0, unit: 'years', description: 'Patient age (15-85 years)' },
+    {
+      name: 'sex',
+      label: 'Sex',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Male', points: 1 },
+        { label: 'Female', points: 0 },
+      ],
+    },
+    { name: 'height', label: 'Height', type: 'number', points: 0, unit: 'inches', description: 'Height in inches' },
+    { name: 'measured-pef', label: 'Measured PEF', type: 'number', points: 0, unit: 'L/min', description: 'Actual peak flow measurement' },
+  ],
+  results: [],
+  thresholdNote: '>80% = Normal, 50-80% = Moderate obstruction, <50% = Severe obstruction',
+  citations: [
+    'Nunn AJ, Gregg I. New regression equations for predicting peak expiratory flow in adults. BMJ. 1989;298(6680):1068-1070.',
+    'GINA 2024 Report. Global Strategy for Asthma Management and Prevention.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const age = values['age'] || 0;
+    const sex = values['sex'] || 0; // 1 = male, 0 = female
+    const heightIn = values['height'] || 0;
+    const measuredPef = values['measured-pef'] || 0;
+
+    if (age <= 0 || heightIn <= 0) {
+      return { value: '--', label: 'Enter Values', description: 'Enter age, sex, and height to calculate predicted PEF', colorVar: '--color-text-muted' };
+    }
+
+    // Convert height to cm
+    const heightCm = heightIn * 2.54;
+
+    // Nunn & Gregg equations (age 15-85, height in cm)
+    let predictedPef: number;
+    if (sex === 1) {
+      // Male: PEF = (0.544 x height) - (0.0151 x age) - 58.8 (in L/min, using height in cm)
+      // More accurate: Male: exp(0.544 × height(m) - 0.0151 × age - 74.7) × 60
+      predictedPef = ((heightCm * 5.48) - (age * 1.58) - 404);
+    } else {
+      // Female: PEF = ((height × 3.72) - (age × 1.16) - 236)
+      predictedPef = ((heightCm * 3.72) - (age * 1.16) - 236);
+    }
+
+    predictedPef = Math.round(predictedPef);
+
+    if (measuredPef <= 0) {
+      return {
+        value: `${predictedPef} L/min`,
+        label: 'Predicted PEF',
+        description: `**Predicted PEF:** ${predictedPef} L/min\\n\\nEnter measured PEF to calculate % predicted.`,
+        colorVar: '--color-primary'
+      };
+    }
+
+    const percentPredicted = Math.round((measuredPef / predictedPef) * 100);
+
+    if (percentPredicted >= 80) {
+      return {
+        value: `${percentPredicted}%`,
+        label: 'Normal',
+        description: `**Measured:** ${measuredPef} L/min\\n**Predicted:** ${predictedPef} L/min\\n**% Predicted:** ${percentPredicted}%\\n\\n≥80% = Normal / Mild obstruction`,
+        colorVar: '--color-primary'
+      };
+    } else if (percentPredicted >= 50) {
+      return {
+        value: `${percentPredicted}%`,
+        label: 'Moderate Obstruction',
+        description: `**Measured:** ${measuredPef} L/min\\n**Predicted:** ${predictedPef} L/min\\n**% Predicted:** ${percentPredicted}%\\n\\n50-79% = Moderate obstruction\\nContinue bronchodilator therapy, reassess after treatment`,
+        colorVar: '--color-warning'
+      };
+    } else {
+      return {
+        value: `${percentPredicted}%`,
+        label: 'Severe Obstruction',
+        description: `**Measured:** ${measuredPef} L/min\\n**Predicted:** ${predictedPef} L/min\\n**% Predicted:** ${percentPredicted}%\\n\\n<50% = Severe obstruction\\nAggressive treatment, consider IV magnesium, prepare for escalation`,
+        colorVar: '--color-danger'
+      };
+    }
+  },
+};
+
+const ASTHMA_BIPAP_SETTINGS_CALCULATOR: CalculatorDefinition = {
+  id: 'asthma-bipap',
+  title: 'BiPAP Settings for Asthma',
+  subtitle: 'NIV in Severe Asthma',
+  description: 'Starting settings and titration guidance for BiPAP in severe asthma exacerbation. Key differences from COPD: lower EPAP to avoid air trapping.',
+  fields: [
+    { name: 'high-drive', label: 'High respiratory drive', type: 'toggle', points: 0, description: 'Tachypnea, agitation, accessory muscle use' },
+    { name: 'hypercapnia', label: 'Hypercapnia on ABG', type: 'toggle', points: 0, description: 'PaCO2 >45 mmHg' },
+    { name: 'air-trapping', label: 'Significant air trapping', type: 'toggle', points: 0, description: 'Auto-PEEP present, difficulty exhaling' },
+  ],
+  results: [],
+  thresholdNote: 'Start with lower pressures than COPD. Goal: reduce work of breathing without worsening air trapping.',
+  citations: [
+    'Lim WJ, et al. Non-invasive positive pressure ventilation for treatment of respiratory failure due to severe acute exacerbations of asthma. Cochrane Database Syst Rev. 2012;12:CD004360.',
+    'EMCrit IBCC - Asthma chapter. PulmCrit 2024.',
+    'Brenner B, et al. The clinical presentation of acute asthma in adults and children. Clin Rev Allergy Immunol. 2018;55(3):332-344.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const highDrive = values['high-drive'] || 0;
+    const hypercapnia = values['hypercapnia'] || 0;
+    const airTrapping = values['air-trapping'] || 0;
+
+    let ipapStart = 10;
+    let ipapTarget = 12;
+    let epapStart = 3;
+    let epapTarget = 5;
+    let notes: string[] = [];
+
+    if (hypercapnia === 1) {
+      ipapTarget = 14;
+      notes.push('Hypercapnic: May need higher IPAP for ventilation');
+    }
+
+    if (airTrapping === 1) {
+      epapStart = 3;
+      epapTarget = 4;
+      notes.push('Air trapping: Keep EPAP low (3-4) to avoid worsening auto-PEEP');
+    }
+
+    if (highDrive === 1) {
+      notes.push('High drive: May need sedation (ketamine preferred) if unable to synchronize');
+    }
+
+    const notesText = notes.length > 0 ? '\\n\\n**Adjustments:**\\n• ' + notes.join('\\n• ') : '';
+
+    return {
+      value: `${ipapStart}-${ipapTarget}/${epapStart}-${epapTarget}`,
+      label: 'BiPAP Settings',
+      description: `**Starting settings:**\\n• IPAP: ${ipapStart}-12 cm H2O\\n• EPAP: ${epapStart}-5 cm H2O\\n• FiO2: Titrate for SpO2 92-95%\\n• Backup rate: 10-12/min\\n\\n**Target settings:**\\n• IPAP: ${ipapTarget}-16 cm H2O (titrate for comfort, Vt 6-8 mL/kg)\\n• EPAP: ${epapTarget} cm H2O (keep low to avoid air trapping)\\n\\n**Key differences from COPD BiPAP:**\\n• Lower EPAP (3-5 vs 5-8)\\n• Goal is comfort + work of breathing, not CO2 clearance\\n• Watch for air trapping - if worsening, lower EPAP${notesText}\\n\\n**Failure signs:** Worsening air trapping, fatigue, AMS → prepare for intubation`,
+      colorVar: '--color-primary'
+    };
+  },
+};
+
+const ASTHMA_VENT_SETTINGS_CALCULATOR: CalculatorDefinition = {
+  id: 'asthma-vent',
+  title: 'Asthma Vent Settings',
+  subtitle: 'Post-Intubation Ventilator Management',
+  description: 'Initial ventilator settings for intubated asthma patient. Key: prevent air trapping with low RR, long expiratory time, and permissive hypercapnia.',
+  fields: [
+    { name: 'ibw', label: 'Ideal Body Weight', type: 'number', points: 0, unit: 'kg', description: 'Use IBW calculator if needed' },
+  ],
+  results: [],
+  thresholdNote: 'Priority: Prevent air trapping and barotrauma. Permissive hypercapnia is acceptable (pH >7.2).',
+  citations: [
+    'Leatherman J. Mechanical ventilation for severe asthma. Chest. 2015;147(6):1671-1680.',
+    'Brenner B, et al. The clinical presentation of acute asthma in adults and children. Clin Rev Allergy Immunol. 2018;55(3):332-344.',
+    'EMCrit IBCC - Asthma chapter. PulmCrit 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const ibw = values['ibw'] || 0;
+
+    if (ibw <= 0) {
+      return { value: '--', label: 'Enter IBW', description: 'Enter ideal body weight in kg. Use IBW calculator if needed.', colorVar: '--color-text-muted' };
+    }
+
+    const tvLow = Math.round(ibw * 6);
+    const tvHigh = Math.round(ibw * 8);
+
+    return {
+      value: `TV ${tvLow}-${tvHigh} mL`,
+      label: 'Vent Settings',
+      description: `**Initial Settings (${ibw} kg IBW):**\\n\\n**Mode:** Volume Control (AC/VC)\\n**Tidal Volume:** ${tvLow}-${tvHigh} mL (6-8 mL/kg IBW)\\n**Respiratory Rate:** 10-14/min (start low!)\\n**I:E Ratio:** 1:4 to 1:5 (long expiratory time)\\n**PEEP:** 0-5 cm H2O (minimal)\\n**FiO2:** 100% initially, wean for SpO2 92-95%\\n\\n**Targets:**\\n• Plateau pressure <30 cm H2O\\n• Auto-PEEP <10 cm H2O\\n• pH >7.2 (permissive hypercapnia OK)\\n\\n**Air Trapping Check:**\\nDo expiratory hold - if auto-PEEP >10:\\n• Decrease RR\\n• Increase I:E ratio\\n• Sedate/paralyze if needed\\n\\n**Sedation:** Deep sedation required\\n• Propofol + fentanyl\\n• Consider ketamine (bronchodilator)\\n• Paralysis if severe dyssynchrony`,
+      colorVar: '--color-primary'
+    };
+  },
+};
+
+const ASTHMA_IBW_CALCULATOR: CalculatorDefinition = {
+  id: 'asthma-ibw',
+  title: 'Ideal Body Weight',
+  subtitle: 'IBW for Vent Settings',
+  description: 'Calculates ideal body weight for tidal volume calculation. Use IBW (not actual weight) for all ventilator settings.',
+  fields: [
+    {
+      name: 'sex',
+      label: 'Sex',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Male', points: 1 },
+        { label: 'Female', points: 0 },
+      ],
+    },
+    { name: 'height', label: 'Height', type: 'number', points: 0, unit: 'inches', description: 'Height in inches' },
+  ],
+  results: [],
+  thresholdNote: 'Male: 50 + 2.3 × (height - 60). Female: 45.5 + 2.3 × (height - 60).',
+  citations: [
+    'Devine BJ. Gentamicin therapy. Drug Intell Clin Pharm. 1974;8:650-655.',
+    'ARDSNet Protocol. NHLBI ARDS Network.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sex = values['sex'] || 0; // 1 = male, 0 = female
+    const heightIn = values['height'] || 0;
+
+    if (heightIn <= 0) {
+      return { value: '--', label: 'Enter Height', description: 'Enter height in inches to calculate IBW.', colorVar: '--color-text-muted' };
+    }
+
+    let ibw: number;
+    if (sex === 1) {
+      // Male: 50 + 2.3 × (height in inches - 60)
+      ibw = 50 + 2.3 * (heightIn - 60);
+    } else {
+      // Female: 45.5 + 2.3 × (height in inches - 60)
+      ibw = 45.5 + 2.3 * (heightIn - 60);
+    }
+
+    ibw = Math.round(ibw * 10) / 10;
+    const tvLow = Math.round(ibw * 6);
+    const tvHigh = Math.round(ibw * 8);
+
+    const sexLabel = sex === 1 ? 'Male' : 'Female';
+
+    return {
+      value: `${ibw} kg`,
+      label: 'Ideal Body Weight',
+      description: `**${sexLabel}, ${heightIn}" tall**\\n\\n**IBW:** ${ibw} kg\\n\\n**Tidal Volume Range:**\\n• 6 mL/kg: ${tvLow} mL\\n• 8 mL/kg: ${tvHigh} mL\\n\\n**Formula (${sexLabel}):**\\n${sex === 1 ? '50' : '45.5'} + 2.3 × (${heightIn} - 60) = ${ibw} kg`,
+      colorVar: '--color-primary'
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Adult UTI Calculators
+// -------------------------------------------------------------------
+
+const UTI_UA_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'uti-ua-interp',
+  title: 'UA Interpreter',
+  subtitle: 'Urinalysis for UTI',
+  description: 'Interpret urinalysis findings to assess probability of urinary tract infection. Combines leukocyte esterase, nitrites, microscopy findings, and specimen quality.',
+  fields: [
+    {
+      name: 'le',
+      label: 'Leukocyte Esterase',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Negative', points: 0 },
+        { label: 'Trace', points: 1 },
+        { label: '1+', points: 2 },
+        { label: '2+', points: 3 },
+        { label: '3+', points: 4 },
+      ],
+    },
+    { name: 'nitrites', label: 'Nitrites Positive', type: 'toggle', points: 0, description: 'Most specific finding for UTI' },
+    {
+      name: 'wbc',
+      label: 'WBC Count (per HPF)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '0-5', points: 0 },
+        { label: '6-10', points: 1 },
+        { label: '11-25', points: 2 },
+        { label: '>25', points: 3 },
+      ],
+    },
+    {
+      name: 'bacteria',
+      label: 'Bacteria',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None', points: 0 },
+        { label: 'Few', points: 1 },
+        { label: 'Moderate', points: 2 },
+        { label: 'Many', points: 3 },
+      ],
+    },
+    {
+      name: 'squamous',
+      label: 'Squamous Cells (per LPF)',
+      type: 'select',
+      points: 0,
+      description: 'High count suggests contamination',
+      selectOptions: [
+        { label: '0-5', points: 0 },
+        { label: '6-10', points: 1 },
+        { label: '>10', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Positive nitrites are highly specific (>90%) but less sensitive (~50%). Leukocyte esterase has higher sensitivity but lower specificity. Pyuria (WBC >10) supports diagnosis in symptomatic patients.',
+  citations: [
+    'Hooton TM, et al. Diagnosis, Prevention, and Treatment of Catheter-Associated UTI in Adults: 2009 IDSA Guidelines. CID. 2010;50(5):625-663.',
+    'Gupta K, et al. International Clinical Practice Guidelines for Uncomplicated Cystitis and Pyelonephritis in Women: 2010 IDSA/ESCMID Guidelines. CID. 2011;52(5):e103-e120.',
+  ],
+  computeResult: (values) => {
+    const le = values['le'] || 0;
+    const nitrites = values['nitrites'] || 0;
+    const wbc = values['wbc'] || 0;
+    const bacteria = values['bacteria'] || 0;
+    const squamous = values['squamous'] || 0;
+
+    // Check for contamination first
+    if (squamous === 2) {
+      return {
+        value: 'CONTAMINATED',
+        label: 'Specimen Contamination',
+        description: '**High squamous cell count (>10/LPF)**\n\nThis specimen is likely contaminated with vaginal or periurethral flora.\n\n**Recommendation:**\n- Consider recollection with clean-catch technique\n- Mid-stream specimen after cleansing\n- Catheterized specimen if clean-catch not feasible\n\n**Interpretation:** Current results are unreliable for UTI diagnosis.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // High probability: LE + Nitrites + WBC >10
+    if ((le >= 2 || nitrites) && wbc >= 2) {
+      const findings = [];
+      if (le >= 2) findings.push(`LE ${le === 2 ? '1+' : le === 3 ? '2+' : '3+'}`);
+      if (nitrites) findings.push('Nitrites+');
+      if (wbc >= 2) findings.push(`WBC ${wbc === 2 ? '11-25' : '>25'}/HPF`);
+      if (bacteria >= 2) findings.push(`${bacteria === 2 ? 'Moderate' : 'Many'} bacteria`);
+
+      return {
+        value: 'HIGH',
+        label: 'High Probability UTI',
+        description: `**Findings:** ${findings.join(', ')}\n\n**Interpretation:** Urinalysis strongly supports UTI diagnosis in symptomatic patient.\n\n**Next steps:**\n- Empiric antibiotics appropriate if symptomatic\n- Consider urine culture if complicated UTI, treatment failure risk, or pyelonephritis\n- Culture recommended before treatment in men, pregnancy, recurrent UTI`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Moderate probability: LE only OR Nitrites only with WBC 6-10
+    if ((le >= 1 && !nitrites && wbc >= 1) || (nitrites && wbc >= 1) || (le >= 2 && wbc === 0)) {
+      const findings = [];
+      if (le >= 1) findings.push(`LE ${['Negative', 'Trace', '1+', '2+', '3+'][le]}`);
+      if (nitrites) findings.push('Nitrites+');
+      if (wbc >= 1) findings.push(`WBC ${wbc === 1 ? '6-10' : wbc === 2 ? '11-25' : '>25'}/HPF`);
+      if (bacteria >= 1) findings.push(`${['None', 'Few', 'Moderate', 'Many'][bacteria]} bacteria`);
+
+      return {
+        value: 'MODERATE',
+        label: 'Moderate Probability UTI',
+        description: `**Findings:** ${findings.join(', ')}\n\n**Interpretation:** UA findings are suggestive but not definitive.\n\n**Recommendations:**\n- Correlate with clinical symptoms (dysuria, frequency, urgency)\n- If symptomatic: empiric treatment reasonable, send culture\n- If asymptomatic: likely asymptomatic bacteriuria (avoid treatment unless pregnant or pre-urologic procedure)\n- Consider alternative diagnoses (vaginitis, STI, interstitial cystitis)`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Low probability: Negative LE/Nitrites
+    if (le === 0 && !nitrites && wbc === 0) {
+      return {
+        value: 'LOW',
+        label: 'Low Probability UTI',
+        description: '**Findings:** Negative LE, negative nitrites, WBC 0-5/HPF\n\n**Interpretation:** Urinalysis does not support UTI diagnosis.\n\n**Considerations:**\n- Negative predictive value is high (>95%)\n- Consider other causes of symptoms:\n  - Vaginitis/cervicitis\n  - Urethritis (STI testing)\n  - Interstitial cystitis\n  - Atrophic vaginitis\n  - Bladder irritation (caffeine, spicy foods)\n\n**Note:** False negatives possible with dilute urine, recent voiding, or early infection.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Default: Equivocal
+    const findings = [];
+    if (le >= 1) findings.push(`LE ${['Negative', 'Trace', '1+', '2+', '3+'][le]}`);
+    if (nitrites) findings.push('Nitrites+');
+    if (wbc >= 1) findings.push(`WBC ${['0-5', '6-10', '11-25', '>25'][wbc]}/HPF`);
+    if (bacteria >= 1) findings.push(`${['None', 'Few', 'Moderate', 'Many'][bacteria]} bacteria`);
+
+    return {
+      value: 'EQUIVOCAL',
+      label: 'Equivocal Results',
+      description: `**Findings:** ${findings.length > 0 ? findings.join(', ') : 'Minimal abnormalities'}\n\n**Interpretation:** Results are indeterminate.\n\n**Recommendations:**\n- Clinical correlation essential\n- Consider urine culture for definitive diagnosis\n- If high clinical suspicion: empiric treatment + culture\n- If low clinical suspicion: await culture results`,
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const UTI_CRCL_CALCULATOR: CalculatorDefinition = {
+  id: 'uti-crcl',
+  title: 'CrCl Calculator',
+  subtitle: 'Antibiotic Dose Adjustment',
+  description: 'Calculate creatinine clearance using Cockcroft-Gault equation to guide antibiotic dosing for UTI. Provides dose adjustment recommendations for common UTI antibiotics.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'number', points: 0, unit: 'years' },
+    {
+      name: 'sex',
+      label: 'Sex',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Male', points: 1 },
+        { label: 'Female', points: 0.85 },
+      ],
+    },
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg' },
+    { name: 'scr', label: 'Serum Creatinine', type: 'number', points: 0, unit: 'mg/dL' },
+  ],
+  results: [],
+  thresholdNote: 'Cockcroft-Gault: CrCl = [(140-age) x weight / (72 x SCr)] x 0.85 if female. Use actual body weight unless obese (use adjusted BW). Round SCr up to 1.0 if <1.0 in elderly.',
+  citations: [
+    'Cockcroft DW, Gault MH. Prediction of Creatinine Clearance from Serum Creatinine. Nephron. 1976;16(1):31-41.',
+    'Gupta K, et al. IDSA Guidelines for Uncomplicated Cystitis and Pyelonephritis in Women. CID. 2011;52(5):e103-e120.',
+  ],
+  computeResult: (values) => {
+    const age = values['age'] || 0;
+    const sexFactor = values['sex'] || 0.85;
+    const weight = values['weight'] || 0;
+    const scr = values['scr'] || 0;
+
+    if (age <= 0 || weight <= 0 || scr <= 0) {
+      return {
+        value: '--',
+        label: 'Enter Values',
+        description: 'Enter age, sex, weight, and serum creatinine to calculate CrCl.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const crcl = ((140 - age) * weight / (72 * scr)) * sexFactor;
+    const crclRounded = Math.round(crcl);
+
+    let label: string;
+    let colorVar: string;
+    let dosing: string;
+
+    if (crclRounded >= 90) {
+      label = 'Normal Renal Function';
+      colorVar = '--color-primary';
+      dosing = '**Standard Dosing (No Adjustment Needed)**\n\n' +
+        '- **Nitrofurantoin** 100mg BID x 5 days\n' +
+        '- **TMP-SMX DS** 1 tab BID x 3 days\n' +
+        '- **Ciprofloxacin** 250mg BID x 3 days (uncomplicated)\n' +
+        '- **Cephalexin** 500mg QID x 5-7 days\n' +
+        '- **Fosfomycin** 3g x 1 dose';
+    } else if (crclRounded >= 60) {
+      label = 'Mild Impairment';
+      colorVar = '--color-primary';
+      dosing = '**Mild Renal Impairment (CrCl 60-89)**\n\n' +
+        '- **Nitrofurantoin** 100mg BID (OK if CrCl >40)\n' +
+        '- **TMP-SMX DS** 1 tab BID (standard dose OK)\n' +
+        '- **Ciprofloxacin** 250mg BID (standard dose OK)\n' +
+        '- **Cephalexin** 500mg QID (standard dose OK)\n' +
+        '- **Fosfomycin** 3g x 1 (no adjustment needed)';
+    } else if (crclRounded >= 30) {
+      label = 'Moderate Impairment';
+      colorVar = '--color-warning';
+      dosing = '**Moderate Renal Impairment (CrCl 30-59)**\n\n' +
+        '- **Nitrofurantoin** AVOID if CrCl <40 (inadequate urine concentration)\n' +
+        '- **TMP-SMX DS** Use with caution, consider 1 SS tab BID or DS daily\n' +
+        '- **Ciprofloxacin** 250mg q12-24h (reduce frequency)\n' +
+        '- **Cephalexin** 250-500mg TID (reduce dose)\n' +
+        '- **Fosfomycin** 3g x 1 (no adjustment needed)\n\n' +
+        '**Preferred agents:** Fosfomycin, cephalexin (adjusted)';
+    } else {
+      label = 'Severe Impairment';
+      colorVar = '--color-danger';
+      dosing = '**Severe Renal Impairment (CrCl <30)**\n\n' +
+        '- **Nitrofurantoin** CONTRAINDICATED\n' +
+        '- **TMP-SMX** AVOID or significant dose reduction (half dose)\n' +
+        '- **Ciprofloxacin** 250mg q24h (if necessary)\n' +
+        '- **Cephalexin** 250mg BID-TID\n' +
+        '- **Fosfomycin** 3g x 1 (may use, but efficacy uncertain)\n\n' +
+        '**Preferred agents:**\n' +
+        '- Fosfomycin (single dose, renally eliminated but still effective)\n' +
+        '- Amoxicillin-clavulanate 500/125mg BID (if susceptible)\n\n' +
+        '**Consider ID consult for complicated UTI with severe CKD.**';
+    }
+
+    return {
+      value: `${crclRounded} mL/min`,
+      label,
+      description: `**Cockcroft-Gault CrCl:** ${crclRounded} mL/min\n\n${dosing}`,
+      colorVar,
+    };
+  },
+};
+
+const UTI_ABX_SELECTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'uti-abx-select',
+  title: 'Antibiotic Selector',
+  subtitle: 'UTI Treatment Guide',
+  description: 'Select appropriate empiric antibiotics for UTI based on type, patient factors, and allergies. Follows IDSA/AUA guidelines.',
+  fields: [
+    {
+      name: 'uti-type',
+      label: 'UTI Type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Uncomplicated cystitis', points: 1 },
+        { label: 'Complicated cystitis', points: 2 },
+        { label: 'Pyelonephritis', points: 3 },
+        { label: 'CAUTI', points: 4 },
+      ],
+    },
+    { name: 'fq-recent', label: 'Recent fluoroquinolone use (<90 days)', type: 'toggle', points: 0, description: 'Increases FQ resistance risk' },
+    { name: 'pregnancy', label: 'Pregnancy', type: 'toggle', points: 0, description: 'Limits antibiotic options' },
+    { name: 'pcn-allergy', label: 'Penicillin allergy', type: 'toggle', points: 0 },
+    { name: 'sulfa-allergy', label: 'Sulfa allergy', type: 'toggle', points: 0, description: 'Avoid TMP-SMX' },
+  ],
+  results: [],
+  thresholdNote: 'First-line for uncomplicated cystitis: nitrofurantoin, TMP-SMX, or fosfomycin. Reserve fluoroquinolones for pyelonephritis or complicated UTI when no alternatives exist.',
+  citations: [
+    'Gupta K, et al. International Clinical Practice Guidelines for Uncomplicated Cystitis and Pyelonephritis: 2010 IDSA/ESCMID Guidelines. CID. 2011;52(5):e103-e120.',
+    'Anger J, et al. Recurrent Uncomplicated UTI in Women: AUA/CUA/SUFU Guideline. J Urol. 2019;202(2):282-289.',
+  ],
+  computeResult: (values) => {
+    const utiType = values['uti-type'] || 1;
+    const fqRecent = values['fq-recent'] || 0;
+    const pregnancy = values['pregnancy'] || 0;
+    const pcnAllergy = values['pcn-allergy'] || 0;
+    const sulfaAllergy = values['sulfa-allergy'] || 0;
+
+    let regimen = '';
+    let alternatives = '';
+    let duration = '';
+    let notes = '';
+    let colorVar = '--color-primary';
+
+    // Uncomplicated cystitis
+    if (utiType === 1) {
+      regimen = '**UNCOMPLICATED CYSTITIS**\n\n**First-Line Options:**\n';
+
+      if (pregnancy) {
+        regimen += '- **Nitrofurantoin monohydrate** 100mg BID x 5-7 days\n';
+        regimen += '- **Cephalexin** 500mg QID x 5-7 days\n';
+        regimen += '- **Fosfomycin** 3g PO x 1 dose\n';
+        if (!pcnAllergy) {
+          regimen += '- **Amoxicillin-clavulanate** 500/125mg BID x 5-7 days\n';
+        }
+        notes = '\n\n**Pregnancy Considerations:**\n- Nitrofurantoin: avoid at term (>36 wks) and in G6PD deficiency\n- TMP-SMX: avoid 1st trimester (folate antagonist) and at term\n- FQs: contraindicated throughout pregnancy';
+      } else if (sulfaAllergy) {
+        regimen += '- **Nitrofurantoin monohydrate** 100mg BID x 5 days\n';
+        regimen += '- **Fosfomycin** 3g PO x 1 dose\n';
+        alternatives = '\n\n**Alternatives if nitrofurantoin CI:**\n- **Cephalexin** 500mg QID x 5-7 days\n- **Ciprofloxacin** 250mg BID x 3 days (reserve for no alternatives)';
+        notes = '\n\nTMP-SMX avoided due to sulfa allergy';
+      } else {
+        regimen += '- **Nitrofurantoin monohydrate** 100mg BID x 5 days\n';
+        regimen += '- **TMP-SMX DS** 1 tab BID x 3 days (if local resistance <20%)\n';
+        regimen += '- **Fosfomycin** 3g PO x 1 dose\n';
+        alternatives = '\n\n**Second-Line (avoid if possible):**\n- Fluoroquinolones (reserve for pyelo or complicated UTI)';
+      }
+      duration = '\n\n**Duration:** 3-5 days (fosfomycin: single dose)';
+    }
+
+    // Complicated cystitis
+    if (utiType === 2) {
+      colorVar = '--color-warning';
+      regimen = '**COMPLICATED CYSTITIS**\n\n*Structural/functional abnormality, male, catheter, immunocompromised*\n\n**First-Line:**\n';
+
+      if (pregnancy) {
+        regimen += '- **Cephalexin** 500mg QID x 7-14 days\n';
+        regimen += '- **Nitrofurantoin** 100mg BID x 7 days (avoid if upper tract involvement suspected)\n';
+        if (!pcnAllergy) {
+          regimen += '- **Amoxicillin-clavulanate** 875/125mg BID x 7-14 days\n';
+        }
+        notes = '\n\nCulture-directed therapy essential in pregnancy';
+      } else {
+        if (!fqRecent) {
+          regimen += '- **Ciprofloxacin** 500mg BID x 7 days\n';
+          regimen += '- **Levofloxacin** 750mg daily x 5 days\n';
+        }
+        if (!sulfaAllergy) {
+          regimen += '- **TMP-SMX DS** 1 tab BID x 7-14 days (if susceptible)\n';
+        }
+        regimen += '- **Cephalexin** 500mg QID x 7-14 days (Gram-positive coverage)\n';
+
+        if (fqRecent) {
+          notes = '\n\nRecent FQ use increases resistance risk. Prefer non-FQ agent or await culture.';
+        }
+      }
+      duration = '\n\n**Duration:** 7-14 days\n**Culture:** Obtain before treatment and adjust based on susceptibilities';
+    }
+
+    // Pyelonephritis
+    if (utiType === 3) {
+      colorVar = '--color-danger';
+      regimen = '**PYELONEPHRITIS**\n\n**Outpatient (mild, non-pregnant, tolerating PO):**\n';
+
+      if (pregnancy) {
+        regimen = '**PYELONEPHRITIS IN PREGNANCY**\n\n**Admit for IV antibiotics**\n\n**IV Options:**\n';
+        regimen += '- **Ceftriaxone** 1g IV q24h\n';
+        regimen += '- **Cefepime** 1g IV q12h (if Pseudomonas concern)\n';
+        if (!pcnAllergy) {
+          regimen += '- **Ampicillin** + **Gentamicin** (if enterococcus suspected)\n';
+        }
+        notes = '\n\n**Pregnancy notes:**\n- Always admit (higher risk of preterm labor, sepsis)\n- IV-to-PO transition after 24-48h afebrile\n- Complete 10-14 days total therapy\n- Monthly urine cultures for remainder of pregnancy';
+      } else if (!fqRecent) {
+        regimen += '- **Ciprofloxacin** 500mg BID x 7 days\n';
+        regimen += '- **Levofloxacin** 750mg daily x 5 days\n';
+        if (!sulfaAllergy) {
+          regimen += '- **TMP-SMX DS** 1 tab BID x 14 days (if susceptible)\n';
+        }
+        alternatives = '\n\n**Inpatient IV options:**\n- **Ceftriaxone** 1g IV q24h\n- **Ciprofloxacin** 400mg IV q12h\n- **Gentamicin** 5mg/kg IV q24h + Ampicillin (if enterococcus)';
+      } else {
+        regimen += '- **Ceftriaxone** 1g IM/IV x 1 as initial dose, then:\n';
+        if (!sulfaAllergy) {
+          regimen += '- **TMP-SMX DS** 1 tab BID x 14 days (if susceptible)\n';
+        }
+        regimen += '- **Oral beta-lactam** (cefpodoxime 200mg BID) less effective, use if no alternatives\n';
+        notes = '\n\nRecent FQ use. Avoid fluoroquinolones empirically. Initial ceftriaxone covers while awaiting culture.';
+      }
+      duration = '\n\n**Duration:** 5-7 days (FQ), 10-14 days (TMP-SMX, beta-lactams)';
+    }
+
+    // CAUTI
+    if (utiType === 4) {
+      colorVar = '--color-warning';
+      regimen = '**CATHETER-ASSOCIATED UTI**\n\n**Key principles:**\n- Remove or replace catheter before/during treatment\n- Treat only if symptomatic (fever, rigors, AMS, flank pain)\n- Do NOT treat asymptomatic bacteriuria\n\n**Empiric options:**\n';
+
+      if (!fqRecent) {
+        regimen += '- **Ciprofloxacin** 500mg BID x 7 days\n';
+        regimen += '- **Levofloxacin** 750mg daily x 5 days\n';
+      }
+      regimen += '- **Ceftriaxone** 1g IV q24h (if IV needed)\n';
+      if (!sulfaAllergy) {
+        regimen += '- **TMP-SMX DS** 1 tab BID x 7 days (if susceptible)\n';
+      }
+
+      if (fqRecent) {
+        regimen += '\n\n**If Pseudomonas concern or recent FQ:**\n';
+        regimen += '- **Cefepime** 2g IV q8h\n';
+        regimen += '- **Piperacillin-tazobactam** 4.5g IV q6h\n';
+      }
+
+      duration = '\n\n**Duration:**\n- 7 days (prompt symptom resolution)\n- 10-14 days (delayed response)\n- 5 days (women with non-severe symptoms after catheter removal)';
+      notes = '\n\n**CAUTI Prevention:**\n- Remove catheter ASAP\n- Avoid routine catheter changes\n- Do NOT treat asymptomatic bacteriuria (even with pyuria)';
+    }
+
+    // Build final description
+    let description = regimen;
+    if (alternatives) description += alternatives;
+    if (duration) description += duration;
+    if (notes) description += notes;
+
+    return {
+      value: utiType === 1 ? 'OUTPATIENT' : utiType === 2 ? 'CULTURE + TX' : utiType === 3 ? (pregnancy ? 'ADMIT' : 'ORAL OR IV') : 'REMOVE CATH',
+      label: ['', 'Uncomplicated Cystitis', 'Complicated Cystitis', 'Pyelonephritis', 'CAUTI'][utiType],
+      description,
+      colorVar,
+    };
+  },
+};
+
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // TIA Workup
@@ -26108,6 +26837,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'copd-severity': COPD_SEVERITY_CALCULATOR,
   'anthonisen-criteria': ANTHONISEN_CRITERIA_CALCULATOR,
   'bipap-titration': BIPAP_TITRATION_CALCULATOR,
+  // Asthma Exacerbation
+  'asthma-severity': ASTHMA_SEVERITY_CALCULATOR,
+  'pef-percent': PEF_PERCENT_PREDICTED_CALCULATOR,
+  'asthma-bipap': ASTHMA_BIPAP_SETTINGS_CALCULATOR,
+  'asthma-vent': ASTHMA_VENT_SETTINGS_CALCULATOR,
+  'asthma-ibw': ASTHMA_IBW_CALCULATOR,
   // Peds Osteomyelitis
   'crp-trend': CRP_TREND_CALCULATOR,
   'iv-oral-transition': IV_ORAL_TRANSITION_CALCULATOR,
@@ -26399,6 +27134,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ti-admission': TI_ADMISSION_CRITERIA_CALCULATOR,
   'ti-isolation': TI_ISOLATION_PRECAUTIONS_CALCULATOR,
   'ti-cdc-resources': TI_CDC_RESOURCES_CALCULATOR,
+  // Adult UTI
+  'uti-ua-interp': UTI_UA_INTERPRETER_CALCULATOR,
+  'uti-crcl': UTI_CRCL_CALCULATOR,
+  'uti-abx-select': UTI_ABX_SELECTOR_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

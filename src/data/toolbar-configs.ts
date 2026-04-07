@@ -924,6 +924,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'species', label: 'Species', icon: '🦠', action: 'overlay', target: 'mal-species-table' },
   ],
   // ---------------------------------------------------------------
+  // Asthma Exacerbation
+  // ---------------------------------------------------------------
+  'asthma-exacerbation': [
+    { id: 'severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'asthma-severity' },
+    { id: 'pef', label: 'PEF %', icon: '💨', action: 'calculator', target: 'pef-percent' },
+    { id: 'bipap', label: 'BiPAP', icon: '😷', action: 'calculator', target: 'asthma-bipap' },
+    { id: 'ibw', label: 'IBW', icon: '⚖️', action: 'calculator', target: 'asthma-ibw' },
+    { id: 'vent', label: 'Vent', icon: '🫁', action: 'calculator', target: 'asthma-vent' },
+    { id: 'intubation', label: 'Intubate', icon: '🔧', action: 'overlay', target: 'asthma-intubation-approach' },
+  ],
+  // ---------------------------------------------------------------
+  // Adult UTI
+  // ---------------------------------------------------------------
+  'adult-uti': [
+    { id: 'ua', label: 'UA Interp', icon: '🧪', action: 'calculator', target: 'uti-ua-interp' },
+    { id: 'crcl', label: 'CrCl', icon: '💊', action: 'calculator', target: 'uti-crcl' },
+    { id: 'abx', label: 'Abx Select', icon: '💉', action: 'calculator', target: 'uti-abx-select' },
+    { id: 'classify', label: 'Classify', icon: '📋', action: 'overlay', target: 'uti-classification' },
+    { id: 'special', label: 'Special', icon: '⚠️', action: 'overlay', target: 'uti-special-pops' },
+  ],
+  // ---------------------------------------------------------------
   // Cardiac Arrest Suite
   // ---------------------------------------------------------------
   'cardiac-arrest': [

@@ -735,6 +735,195 @@ const UTI_DEFINITION_PAGE = {
     ],
 };
 // -------------------------------------------------------------------
+// Adult UTI - Steps Summary
+// -------------------------------------------------------------------
+const UTI_STEPS_SUMMARY = {
+    id: 'uti-steps',
+    title: 'Adult UTI',
+    subtitle: 'Key Steps Overview',
+    sections: [
+        {
+            body: 'A systematic approach to managing adult urinary tract infections in the ED.',
+        },
+        {
+            heading: '1. Obtain UA and Culture',
+            body: 'Order urinalysis with reflex culture. Midstream clean-catch is standard for most patients. Catheterized specimen if unable to provide clean-catch or concern for contamination.',
+        },
+        {
+            heading: '2. Differentiate Uncomplicated vs Complicated',
+            body: 'Uncomplicated: premenopausal, non-pregnant female with cystitis and no structural abnormalities.\n\nComplicated: male sex, pregnancy, diabetes, immunocompromised, structural abnormality, recent instrumentation, or healthcare-associated infection.',
+        },
+        {
+            heading: '3. Consider Special Populations',
+            body: 'Pregnancy: always treat, use safe agents.\nElderly: distinguish ASB from true UTI, avoid treating asymptomatic bacteriuria.\nCAUTI: remove catheter when possible, treat only if symptomatic.\nMales: always complicated, consider prostatitis.',
+        },
+        {
+            heading: '4. Select Appropriate Antibiotics',
+            body: 'Uncomplicated cystitis: Nitrofurantoin (1st line), TMP-SMX, or Fosfomycin.\nPyelonephritis: Fluoroquinolone or TMP-SMX with culture guidance.\nFollow local resistance patterns and IDSA guidelines.',
+        },
+        {
+            heading: '5. Arrange Follow-Up',
+            body: 'Uncomplicated cystitis: PCP follow-up if symptoms persist >48-72 hours.\nPyelonephritis: Close follow-up within 24-48 hours if discharged.\nComplicated UTI: Consider urology referral for structural abnormalities or recurrent infections.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gupta K, Hooton TM, Naber KG, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and ESMID. Clin Infect Dis. 2011;52(5):e103-e120.' },
+        { num: 2, text: 'Anger J, Lee U, Ackerman AL, et al. Recurrent Uncomplicated Urinary Tract Infections in Women: AUA/CUA/SUFU Guideline. J Urol. 2019;202(2):282-289.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Adult UTI - UA Interpretation
+// -------------------------------------------------------------------
+const UTI_UA_INTERPRETATION = {
+    id: 'uti-ua-interpretation',
+    title: 'UA Interpretation',
+    subtitle: 'Urinalysis Findings in UTI',
+    sections: [
+        {
+            body: 'Urinalysis is the cornerstone of UTI diagnosis. Understanding the sensitivity and specificity of each component guides clinical decision-making.',
+        },
+        {
+            heading: 'Leukocyte Esterase',
+            body: 'Sensitivity: 75-96%\nSpecificity: 94-98%\n\nProduced by neutrophils. A positive result indicates pyuria and supports the diagnosis of UTI. False negatives can occur with dilute urine, glycosuria, or proteinuria.',
+        },
+        {
+            heading: 'Nitrites',
+            body: 'Sensitivity: 35-85%\nSpecificity: 95-98%\n\nIndicates presence of gram-negative bacteria (Enterobacteriaceae) that convert urinary nitrate to nitrite. Requires 4+ hours of bladder incubation. False negative with frequent voiding, non-nitrate-reducing organisms (Enterococcus, Pseudomonas, Staphylococcus saprophyticus), or low dietary nitrate.',
+        },
+        {
+            heading: 'WBC on Microscopy',
+            body: '>5 WBC/hpf is abnormal and suggests pyuria.\n>10 WBC/hpf strongly supports UTI.\n\nPyuria without bacteriuria: consider urethritis (Chlamydia, gonorrhea), interstitial cystitis, renal TB, or recent antibiotic use.',
+        },
+        {
+            heading: 'Bacteria on Microscopy',
+            body: 'Any bacteria on unspun urine correlates with >10^5 CFU/mL.\nGram stain can help guide empiric therapy (gram-negative rods vs gram-positive cocci).',
+        },
+        {
+            heading: 'Contamination Indicators',
+            body: 'High squamous epithelial cells (>5/hpf): suggests contamination from vaginal or perineal flora. Consider repeat specimen with better technique or catheterized sample.\n\nMixed flora on culture: typically indicates contamination rather than true infection.',
+        },
+        {
+            heading: 'Combined Findings',
+            body: 'Positive LE + positive nitrites: PPV >90% for UTI\nNegative LE + negative nitrites: NPV >95% for UTI\n\nIn symptomatic patients with negative dipstick, send culture and consider empiric treatment based on clinical presentation.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gupta K, Hooton TM, Naber KG, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and ESMID. Clin Infect Dis. 2011;52(5):e103-e120.' },
+        { num: 2, text: 'Simerville JA, Maxted WC, Pahira JJ. Urinalysis: A Comprehensive Review. Am Fam Physician. 2005;71(6):1153-1162.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Adult UTI - Classification Table
+// -------------------------------------------------------------------
+const UTI_CLASSIFICATION_TABLE = {
+    id: 'uti-classification',
+    title: 'UTI Classification',
+    subtitle: 'Uncomplicated vs Complicated',
+    sections: [
+        {
+            body: 'Classification determines antibiotic choice, duration of therapy, and need for further workup.',
+        },
+        {
+            heading: 'Uncomplicated UTI',
+            body: 'Definition: Acute cystitis or pyelonephritis in a premenopausal, non-pregnant woman with no known urological abnormalities, no recent instrumentation, and no recent healthcare exposure.\n\nKey features:\n- Female sex\n- Premenopausal\n- Non-pregnant\n- No structural abnormalities\n- No recent instrumentation\n- No recent antibiotics\n- Community-acquired\n- Normal renal function',
+        },
+        {
+            heading: 'Complicated UTI',
+            body: 'Definition: UTI associated with factors that increase the risk of treatment failure or serious outcomes.\n\nComplicating factors:\n- Male sex (always complicated)\n- Pregnancy\n- Diabetes mellitus\n- Immunocompromised state\n- Structural urinary tract abnormality\n- Functional abnormality (neurogenic bladder)\n- Indwelling urinary catheter\n- Recent urinary tract instrumentation\n- Recent antibiotic use\n- Healthcare-associated infection\n- Renal insufficiency\n- Renal transplant',
+        },
+        {
+            heading: 'Why It Matters',
+            body: 'Uncomplicated cystitis:\n- Short course antibiotics (3-5 days)\n- Narrow-spectrum agents appropriate\n- No imaging required\n\nComplicated UTI:\n- Longer treatment course (7-14 days)\n- Broader empiric coverage\n- May require imaging to rule out obstruction/abscess\n- Higher risk of resistant organisms\n- May require urology consultation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gupta K, Hooton TM, Naber KG, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and ESMID. Clin Infect Dis. 2011;52(5):e103-e120.' },
+        { num: 2, text: 'Hooton TM. Clinical practice. Uncomplicated urinary tract infection. N Engl J Med. 2012;366(11):1028-1037.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Adult UTI - Antibiotic Selection Table
+// -------------------------------------------------------------------
+const UTI_ABX_TABLE = {
+    id: 'uti-abx-table',
+    title: 'Antibiotic Selection',
+    subtitle: 'IDSA/AUA Guidelines',
+    sections: [
+        {
+            body: 'Antibiotic selection should be guided by local resistance patterns, patient allergies, and complicating factors. Avoid fluoroquinolones when alternatives exist due to serious adverse effects.',
+        },
+        {
+            heading: 'Uncomplicated Cystitis',
+            body: '',
+            drugTable: [
+                { drug: 'Nitrofurantoin', regimen: '100 mg BID x 5 days (1st line). Avoid if CrCl <30 mL/min or suspected pyelonephritis.' },
+                { drug: 'TMP-SMX', regimen: '160/800 mg (DS) BID x 3 days. Use if local E. coli resistance <20%.' },
+                { drug: 'Fosfomycin', regimen: '3 g single dose. Convenient but slightly less effective. Good for resistant organisms.' },
+            ],
+        },
+        {
+            heading: 'Uncomplicated Pyelonephritis',
+            body: '',
+            drugTable: [
+                { drug: 'Ciprofloxacin', regimen: '500 mg BID x 7 days. Reserve for when other options inappropriate.' },
+                { drug: 'Levofloxacin', regimen: '750 mg daily x 5 days. Alternative fluoroquinolone option.' },
+                { drug: 'TMP-SMX', regimen: '160/800 mg (DS) BID x 14 days. Use if susceptible on culture.' },
+                { drug: 'Ceftriaxone', regimen: '1 g IV x 1 dose, then oral transition (cefixime, TMP-SMX, or FQ) to complete 10-14 days.' },
+            ],
+        },
+        {
+            heading: 'Complicated UTI / Pyelonephritis',
+            body: '',
+            drugTable: [
+                { drug: 'Ceftriaxone', regimen: '1-2 g IV daily. Empiric coverage pending cultures.' },
+                { drug: 'Ciprofloxacin', regimen: '400 mg IV q12h or 500-750 mg PO BID x 7-14 days.' },
+                { drug: 'Piperacillin-tazobactam', regimen: '3.375 g IV q6h. For severe infection or concern for Pseudomonas.' },
+                { drug: 'Meropenem', regimen: '1 g IV q8h. For ESBL or multidrug-resistant organisms.' },
+            ],
+        },
+        {
+            heading: 'Fluoroquinolone Warning',
+            body: 'FDA black box warning: Fluoroquinolones are associated with disabling and potentially permanent adverse effects including tendinitis/rupture, peripheral neuropathy, and CNS effects. Reserve for infections without alternative treatment options.\n\nAvoid fluoroquinolones in:\n- Uncomplicated cystitis (when alternatives exist)\n- Patients >60 years (higher tendon rupture risk)\n- Concurrent corticosteroid use\n- History of tendon disorders\n- Renal/cardiac/lung transplant recipients',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gupta K, Hooton TM, Naber KG, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and ESMID. Clin Infect Dis. 2011;52(5):e103-e120.' },
+        { num: 2, text: 'FDA Drug Safety Communication: FDA updates warnings for oral and injectable fluoroquinolone antibiotics due to disabling side effects. July 2016, updated December 2018.' },
+        { num: 3, text: 'Anger J, Lee U, Ackerman AL, et al. Recurrent Uncomplicated Urinary Tract Infections in Women: AUA/CUA/SUFU Guideline. J Urol. 2019;202(2):282-289.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Adult UTI - Special Populations
+// -------------------------------------------------------------------
+const UTI_SPECIAL_POPULATIONS = {
+    id: 'uti-special-pops',
+    title: 'Special Populations',
+    subtitle: 'Pregnancy, Elderly, CAUTI, Males',
+    sections: [
+        {
+            heading: 'Pregnancy',
+            body: 'Always treat UTI in pregnancy (including asymptomatic bacteriuria) due to risk of pyelonephritis and adverse fetal outcomes.\n\nSafe agents:\n- Nitrofurantoin (avoid at term >36 weeks - hemolysis risk)\n- Cephalexin 500 mg QID x 7 days\n- Amoxicillin-clavulanate 500 mg BID x 7 days\n\nAvoid:\n- TMP-SMX in 1st trimester (neural tube defects) and at term (kernicterus)\n- Fluoroquinolones (cartilage toxicity)\n- Nitrofurantoin at term (neonatal hemolysis if G6PD deficient)\n\nDuration: 7 days minimum for cystitis. Always obtain test of cure culture 1-2 weeks after treatment.',
+        },
+        {
+            heading: 'Elderly',
+            body: 'Key principle: Do NOT treat asymptomatic bacteriuria (ASB) in the elderly.\n\nASB is common (up to 50% in institutionalized elderly) and treatment does not improve outcomes but increases resistance and adverse effects.\n\nTrue UTI requires:\n- Urinary symptoms (dysuria, urgency, frequency, suprapubic pain) AND\n- Positive UA/culture\n\nNon-specific symptoms (confusion, falls, weakness) should prompt search for other causes before attributing to UTI. Altered mental status alone is not an indication for UTI treatment.\n\nConsider UTI if: new or worsening urinary symptoms, fever, flank pain, rigors.',
+        },
+        {
+            heading: 'Catheter-Associated UTI (CAUTI)',
+            body: 'Definition: UTI in patient with indwelling catheter or within 48 hours of removal.\n\nManagement principles:\n1. Remove or replace catheter if possible (reduces treatment failure)\n2. Treat only if symptomatic (fever, rigors, flank pain, acute mental status change)\n3. Do NOT treat asymptomatic bacteriuria in catheterized patients\n4. Obtain culture from new catheter before starting antibiotics\n\nDuration:\n- 7 days if prompt resolution\n- 10-14 days if delayed response\n- 5 days may be sufficient in women with catheter removed\n\nCommon organisms: E. coli, Enterococcus, Pseudomonas, Candida',
+        },
+        {
+            heading: 'Males',
+            body: 'All male UTIs are considered complicated.\n\nRationale: Anatomic abnormality, prostatitis, or obstruction is often present.\n\nWorkup:\n- UA with culture\n- Consider prostate exam\n- Consider STI testing in sexually active men\n- Consider imaging if recurrent, severe, or concern for obstruction\n\nTreatment:\n- Duration: 7-14 days (longer if prostatitis suspected)\n- Agents with good prostate penetration preferred:\n  - TMP-SMX\n  - Fluoroquinolones\n  - Avoid nitrofurantoin (poor tissue penetration)\n\nRefer to urology if: recurrent infections, structural abnormality, suspected prostatitis, or age >50 (prostate evaluation).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gupta K, Hooton TM, Naber KG, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women: A 2010 Update by the IDSA and ESMID. Clin Infect Dis. 2011;52(5):e103-e120.' },
+        { num: 2, text: 'Nicolle LE, Gupta K, Bradley SF, et al. Clinical Practice Guideline for the Management of Asymptomatic Bacteriuria: 2019 Update by the IDSA. Clin Infect Dis. 2019;68(10):e83-e110.' },
+        { num: 3, text: 'Hooton TM, Bradley SF, Cardenas DD, et al. Diagnosis, Prevention, and Treatment of Catheter-Associated Urinary Tract Infection in Adults: 2009 International Clinical Practice Guidelines from the IDSA. Clin Infect Dis. 2010;50(5):625-663.' },
+    ],
+};
+// -------------------------------------------------------------------
 // HSV Workup Criteria (Peds Fever)
 // -------------------------------------------------------------------
 const PF_HSV_CRITERIA_PAGE = {
@@ -10428,9 +10617,186 @@ const CA_HS_TS_TABLE = {
     ],
 };
 // -------------------------------------------------------------------
+// Asthma Exacerbation
+// -------------------------------------------------------------------
+const ASTHMA_STEPS_SUMMARY = {
+    id: 'asthma-steps',
+    title: 'Asthma Exacerbation',
+    subtitle: 'Key Steps Overview',
+    sections: [
+        {
+            heading: '1. Assess Severity',
+            body: 'Use the GINA severity assessment to classify as mild, moderate, severe, or life-threatening. Key indicators: ability to speak (sentences vs. words vs. single words), respiratory rate, heart rate, accessory muscle use, SpO2, and peak flow if obtainable. [1]',
+        },
+        {
+            heading: '2. Maximize Bronchodilators',
+            body: '\u2022 Albuterol continuous nebulization (10-15 mg/hr) or back-to-back MDI (4-8 puffs q20min)\n\u2022 Ipratropium 0.5 mg nebulized q20min x 3 doses in moderate-severe\n\u2022 Magnesium sulfate 2g IV over 20 min if severe/life-threatening\n\u2022 Consider epinephrine 0.3-0.5 mg IM if not responding [2][3]',
+        },
+        {
+            heading: '3. Early Steroids',
+            body: '\u2022 Dexamethasone 0.6 mg/kg (max 16 mg) PO/IV x1 dose OR\n\u2022 Prednisone/methylprednisolone 1-2 mg/kg (max 60-125 mg)\n\u2022 Give within first hour of presentation\n\u2022 Single-dose dexamethasone is equivalent to 5-day prednisone for most patients [2][4]',
+        },
+        {
+            heading: '4. Consider BiPAP Before Intubation',
+            body: 'Non-invasive ventilation can buy time and may prevent intubation. Start IPAP 10-12, EPAP 3-5. Titrate to patient comfort and work of breathing. Ketamine sedation may help if patient is too agitated for BiPAP. [2][3]',
+        },
+        {
+            heading: '5. If Intubating: DSI Approach',
+            body: 'Delayed Sequence Intubation (DSI) uses ketamine 1-2 mg/kg to dissociate the patient before paralysis, allowing preoxygenation in patients too agitated to tolerate it. This preserves spontaneous respirations while optimizing conditions. [2][5]',
+        },
+        {
+            heading: '6. Vent Settings for Obstructive Physiology',
+            body: '\u2022 Low RR (10-14/min) with long expiratory time (I:E 1:4 or 1:5)\n\u2022 Low tidal volume (6-8 mL/kg IBW)\n\u2022 Permissive hypercapnia is acceptable (pH >7.15)\n\u2022 Watch for auto-PEEP and breath stacking\n\u2022 Target plateau pressure <30 cmH2O [2][3]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2024 Update.' },
+        { num: 2, text: 'Farkas J. Asthma and COPD Exacerbations. EMCrit IBCC. https://emcrit.org/ibcc/asthma/' },
+        { num: 3, text: 'Camargo CA, Rachelefsky G, Schatz M. Managing Asthma Exacerbations in the Emergency Department. Proc Am Thorac Soc. 2009;6(4):357-366.' },
+        { num: 4, text: 'Keeney GE, et al. Dexamethasone for Acute Asthma Exacerbations in Children: A Meta-analysis. Pediatrics. 2014;133(3):493-499.' },
+        { num: 5, text: 'Weingart SD. Preoxygenation, Reoxygenation, and Delayed Sequence Intubation in the Emergency Department. J Emerg Med. 2011;40(6):661-667.' },
+    ],
+};
+const ASTHMA_SEVERITY_TABLE = {
+    id: 'asthma-severity-table',
+    title: 'Severity Classification',
+    subtitle: 'GINA Severity Assessment',
+    sections: [
+        {
+            heading: 'Mild Exacerbation',
+            body: '\u2022 Talks in sentences\n\u2022 Prefers sitting to lying\n\u2022 Not agitated\n\u2022 RR increased (but <30)\n\u2022 HR <100\n\u2022 SpO2 >95%\n\u2022 PEF >70% predicted',
+        },
+        {
+            heading: 'Moderate Exacerbation',
+            body: '\u2022 Talks in phrases\n\u2022 Prefers sitting, hunched forward\n\u2022 May be agitated\n\u2022 Accessory muscle use\n\u2022 RR 20-30\n\u2022 HR 100-120\n\u2022 SpO2 90-95%\n\u2022 PEF 50-70% predicted',
+        },
+        {
+            heading: 'Severe Exacerbation',
+            body: '\u2022 Talks in single words\n\u2022 Sitting hunched forward, tripod position\n\u2022 Agitated\n\u2022 Accessory muscle use prominent\n\u2022 RR >30\n\u2022 HR >120\n\u2022 SpO2 <90%\n\u2022 PEF <50% predicted\n\u2022 May have paradoxical thoracoabdominal movement',
+        },
+        {
+            heading: 'Life-Threatening',
+            body: '\u2022 Unable to speak / not talking\n\u2022 Drowsy, confused, or exhausted\n\u2022 Silent chest on auscultation\n\u2022 Bradycardia or hypotension\n\u2022 Cyanosis\n\u2022 SpO2 <90% despite O2\n\u2022 PEF <25% predicted or unable to perform\n\u2022 Respiratory arrest imminent',
+        },
+        {
+            heading: 'Clinical Pearl',
+            body: 'A "silent chest" in severe asthma is ominous\u2014it indicates such severe airflow obstruction that no wheeze can be generated. Absence of wheeze in a severe asthmatic is a pre-arrest sign, not a reassuring finding. [1][2]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2024 Update.' },
+        { num: 2, text: 'British Thoracic Society/SIGN. British Guideline on the Management of Asthma. 2019.' },
+    ],
+};
+const ASTHMA_BIPAP_GUIDE = {
+    id: 'asthma-bipap-guide',
+    title: 'BiPAP for Asthma',
+    subtitle: 'Non-Invasive Ventilation Strategy',
+    sections: [
+        {
+            heading: 'Initial Settings',
+            body: '\u2022 **IPAP:** 10-12 cmH2O (start low, titrate up to 15-20 as tolerated)\n\u2022 **EPAP:** 3-5 cmH2O (keep low to avoid increasing air trapping)\n\u2022 **FiO2:** Titrate to SpO2 92-95%\n\u2022 **Backup rate:** 10-12 if available (not always needed)',
+        },
+        {
+            heading: 'Titration Goals',
+            body: '\u2022 Decrease work of breathing (less accessory muscle use)\n\u2022 Improved patient comfort and decreased agitation\n\u2022 RR trending down toward 20-25\n\u2022 Able to speak in longer phrases\n\u2022 Improving SpO2 and mental status\n\u2022 Increase IPAP by 2 cmH2O every 5-10 min until improvement (max 20)',
+        },
+        {
+            heading: 'When to Use Sedation',
+            body: '\u2022 Patient too agitated or uncomfortable to tolerate mask\n\u2022 **Ketamine dissociative dose (1-1.5 mg/kg IV):** Creates calm, dissociated state while preserving respirations\n\u2022 **Low-dose ketamine (0.2-0.5 mg/kg):** For anxiolysis without full dissociation\n\u2022 Avoid benzodiazepines and opioids\u2014respiratory depression risk\n\u2022 Ketamine also provides direct bronchodilation [1][2]',
+        },
+        {
+            heading: 'Contraindications',
+            body: '\u2022 Altered mental status / unable to protect airway\n\u2022 Facial trauma or burns preventing mask seal\n\u2022 Hemodynamic instability / impending arrest\n\u2022 Vomiting or high aspiration risk\n\u2022 Patient refusal\n\u2022 Upper airway obstruction',
+        },
+        {
+            heading: 'Monitoring',
+            body: '\u2022 Continuous SpO2, RR, HR monitoring\n\u2022 Reassess every 15-30 minutes\n\u2022 VBG at 1 hour to assess CO2 trend (not required before starting)\n\u2022 Failure to improve in 1-2 hours or worsening = prepare for intubation\n\u2022 Watch for air swallowing (gastric distension)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Asthma and COPD Exacerbations. EMCrit IBCC. https://emcrit.org/ibcc/asthma/' },
+        { num: 2, text: 'Pallin M, Naughton MT. Noninvasive Ventilation in Acute Asthma. J Crit Care. 2014;29(4):586-593.' },
+        { num: 3, text: 'Soroksky A, et al. A Pilot Prospective, Randomized, Placebo-Controlled Trial of BiPAP in Acute Asthmatic Attack. Chest. 2003;123(4):1018-1025.' },
+    ],
+};
+const ASTHMA_INTUBATION_APPROACH = {
+    id: 'asthma-intubation-approach',
+    title: 'Intubating Asthma',
+    subtitle: 'DSI and Ketamine Strategy',
+    sections: [
+        {
+            heading: 'Why Asthma Intubation Is High Risk',
+            body: '\u2022 Patients are often hypoxic and cannot tolerate apnea for preoxygenation\n\u2022 Air trapping leads to rapid desaturation post-intubation\n\u2022 Breath stacking and auto-PEEP cause hemodynamic collapse\n\u2022 Post-intubation arrest is common if ventilator settings are wrong\n\u2022 Goal: Avoid intubation if at all possible [1][2]',
+        },
+        {
+            heading: 'Delayed Sequence Intubation (DSI) Concept',
+            body: 'DSI uses ketamine to create a dissociated state BEFORE paralysis, allowing:\n\n\u2022 Apneic oxygenation via high-flow nasal cannula (40-70 L/min) or NRB\n\u2022 Preoxygenation in a patient too agitated to cooperate\n\u2022 Time to optimize conditions before committing to paralysis\n\u2022 Patient breathes spontaneously while dissociated\n\u2022 Once SpO2 optimized, proceed with paralysis and intubation [1][2]',
+        },
+        {
+            heading: 'Ketamine Dosing',
+            body: '**Dissociative Dose:** 1-2 mg/kg IV push\n\u2022 Onset: 30-60 seconds\n\u2022 Duration: 10-20 minutes\n\u2022 Patient will appear "awake" but is dissociated\n\n**Infusion (if needed):** 0.5 mg/kg/hr after initial bolus\n\n**Bronchodilatory effect:** Ketamine causes smooth muscle relaxation\u2014beneficial in asthma independent of sedation [2][3]',
+        },
+        {
+            heading: 'Why Ketamine Works for Asthma',
+            body: '\u2022 Preserves respiratory drive (unlike propofol, benzos)\n\u2022 Maintains airway reflexes\n\u2022 Direct bronchodilation via catecholamine release\n\u2022 Inhibits vagal-mediated bronchoconstriction\n\u2022 Does not cause histamine release (unlike morphine, fentanyl)\n\u2022 Maintains hemodynamic stability [2][3]',
+        },
+        {
+            heading: 'Alternative Agents (If Ketamine Contraindicated)',
+            body: '**Induction:**\n\u2022 Propofol 1-1.5 mg/kg (causes bronchodilation but hypotension)\n\u2022 Etomidate 0.3 mg/kg (hemodynamically stable)\n\n**Paralytics:**\n\u2022 Rocuronium 1.2 mg/kg (preferred)\n\u2022 Succinylcholine 1.5 mg/kg (may cause histamine release\u2014less ideal)\n\n**Avoid:** Morphine, meperidine, atracurium (histamine release)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart SD. Preoxygenation, Reoxygenation, and Delayed Sequence Intubation in the Emergency Department. J Emerg Med. 2011;40(6):661-667.' },
+        { num: 2, text: 'Farkas J. Asthma and COPD Exacerbations. EMCrit IBCC. https://emcrit.org/ibcc/asthma/' },
+        { num: 3, text: 'Goyal S, Agrawal A. Ketamine in Status Asthmaticus: A Review. Indian Pediatr. 2013;50(11):1001-1004.' },
+    ],
+};
+const ASTHMA_VENT_STRATEGY = {
+    id: 'asthma-vent-strategy',
+    title: 'Ventilator Settings',
+    subtitle: 'Managing Obstructive Physiology',
+    sections: [
+        {
+            heading: 'Core Principle',
+            body: 'The intubated asthmatic dies from breath stacking and auto-PEEP, not hypoxia. The priority is allowing complete exhalation, even at the cost of permissive hypercapnia. "Low and slow" is the mantra. [1][2]',
+        },
+        {
+            heading: 'Initial Settings',
+            body: '| Parameter | Target |\n|-----------|--------|\n| **Mode** | Volume control (AC/VC) |\n| **Tidal Volume** | 6-8 mL/kg IBW |\n| **Respiratory Rate** | 10-14/min |\n| **I:E Ratio** | 1:4 to 1:5 |\n| **PEEP** | 0-5 cmH2O (start low) |\n| **FiO2** | Titrate to SpO2 88-92% |',
+        },
+        {
+            heading: 'Permissive Hypercapnia',
+            body: '\u2022 **Target pH >7.15** (not a specific CO2 number)\n\u2022 pCO2 of 60-80 is acceptable and often unavoidable\n\u2022 Higher CO2 is tolerable if pH is maintained\n\u2022 Avoid sodium bicarbonate unless pH <7.10\u2014bicarb generates CO2\n\u2022 Paralysis reduces CO2 production and may improve pH [1][2]',
+        },
+        {
+            heading: 'Monitoring for Auto-PEEP',
+            body: '**Signs of auto-PEEP (breath stacking):**\n\u2022 Flow on expiratory limb of vent waveform does not return to zero before next breath\n\u2022 Rising plateau pressures despite unchanged tidal volume\n\u2022 Hypotension (auto-PEEP reduces venous return)\n\u2022 Patient-ventilator dyssynchrony\n\n**Management:**\n\u2022 Decrease RR (longer time for exhalation)\n\u2022 Decrease I:E ratio\n\u2022 Brief ventilator disconnect to allow full exhalation (30-60 sec)\n\u2022 Deep sedation +/- paralysis',
+        },
+        {
+            heading: 'Pressure Targets',
+            body: '\u2022 **Plateau pressure <30 cmH2O** (goal)\n\u2022 Peak pressure will be high (often 40-60) due to airway resistance\u2014this is expected\n\u2022 Plateau pressure reflects alveolar pressure\u2014this is what matters for barotrauma\n\u2022 If plateau >30: decrease tidal volume, increase expiratory time\n\u2022 Check auto-PEEP with inspiratory hold maneuver',
+        },
+        {
+            heading: 'Troubleshooting Hypotension',
+            body: '\u2022 Auto-PEEP causing decreased venous return: disconnect vent briefly\n\u2022 Tension pneumothorax: check for absent breath sounds, tracheal deviation\n\u2022 Sedation-related vasodilation: judicious fluids, vasopressors if needed\n\u2022 Mucus plugging: consider bronchoscopy if unilateral decreased breath sounds\n\u2022 Dynamic hyperinflation: use apnea test (disconnect for 30-60 sec)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Asthma and COPD Exacerbations. EMCrit IBCC. https://emcrit.org/ibcc/asthma/' },
+        { num: 2, text: 'Oddo M, et al. Management of Mechanical Ventilation in Acute Severe Asthma: Practical Aspects. Intensive Care Med. 2006;32(4):501-510.' },
+        { num: 3, text: 'Leatherman JW, McArthur C, Shapiro RS. Effect of Prolongation of Expiratory Time on Dynamic Hyperinflation in Mechanically Ventilated Patients with Severe Asthma. Crit Care Med. 2004;32(7):1542-1545.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 export const INFO_PAGES = {
+    'asthma-steps': ASTHMA_STEPS_SUMMARY,
+    'asthma-severity-table': ASTHMA_SEVERITY_TABLE,
+    'asthma-bipap-guide': ASTHMA_BIPAP_GUIDE,
+    'asthma-intubation-approach': ASTHMA_INTUBATION_APPROACH,
+    'asthma-vent-strategy': ASTHMA_VENT_STRATEGY,
     'dm-summary': DM_SUMMARY,
     'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
     'dm-oral-discharge': DM_ORAL_DISCHARGE,
@@ -10458,6 +10824,11 @@ export const INFO_PAGES = {
     'k-hyper-ecg-info': K_HYPER_ECG_PAGE,
     'k-hypo-ecg-info': K_HYPO_ECG_PAGE,
     'uti-definition-info': UTI_DEFINITION_PAGE,
+    'uti-steps': UTI_STEPS_SUMMARY,
+    'uti-ua-interpretation': UTI_UA_INTERPRETATION,
+    'uti-classification': UTI_CLASSIFICATION_TABLE,
+    'uti-abx-table': UTI_ABX_TABLE,
+    'uti-special-pops': UTI_SPECIAL_POPULATIONS,
     'pf-hsv-criteria': PF_HSV_CRITERIA_PAGE,
     'pf-ceftriaxone-ci': PF_CEFTRIAXONE_CI_PAGE,
     'pf-abx-dosing': PF_ABX_DOSING_PAGE,

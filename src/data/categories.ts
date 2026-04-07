@@ -194,7 +194,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
   },
   {
     id: 'critical-care',
-    name: 'Critical Care',
+    name: 'Pulm/Critical Care',
     icon: 'critical-care.png',
     decisionTrees: [
       {
@@ -277,6 +277,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 28,
         entryNodeId: 'cs-start',
+      },
+      {
+        id: 'asthma-exacerbation',
+        title: 'Asthma Exacerbation',
+        subtitle: 'Severity → Maximize Therapy → BiPAP/Sedation → Intubation → Ventilator → Disposition',
+        categoryId: 'critical-care',
+        version: '1.0',
+        nodeCount: 36,
+        entryNodeId: 'asthma-start',
       },
     ],
     isCustom: false,
@@ -600,6 +609,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 25,
         entryNodeId: 'tdp-start',
+      },
+      {
+        id: 'asthma-exacerbation',
+        title: 'Asthma Exacerbation',
+        subtitle: 'Severity → Maximize Therapy → BiPAP/Sedation → Intubation → Ventilator → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 36,
+        entryNodeId: 'asthma-start',
       },
     ],
     isCustom: false,
@@ -1729,7 +1747,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 25,
         entryNodeId: 'sphincter-start',
-      }
+      },
+      {
+        id: 'adult-uti',
+        title: 'Adult UTI',
+        subtitle: 'Assessment → UA Interpretation → Classification → Antibiotics → Special Populations → Disposition',
+        categoryId: 'urology',
+        version: '1.0',
+        nodeCount: 32,
+        entryNodeId: 'uti-start',
+      },
     ],
     isCustom: false,
   },

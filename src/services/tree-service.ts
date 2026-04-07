@@ -317,6 +317,8 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'ciguatera': async () => (await import('../data/trees/ciguatera.js')).CIGUATERA_CRITICAL_ACTIONS,
     'traveler-infections': async () => (await import('../data/trees/traveler-infections.js')).TRAVELER_INFECTIONS_CRITICAL_ACTIONS,
     'malaria': async () => (await import('../data/trees/malaria.js')).MALARIA_CRITICAL_ACTIONS,
+    'asthma-exacerbation': async () => (await import('../data/trees/asthma-exacerbation.js')).ASTHMA_EXACERBATION_CRITICAL_ACTIONS,
+    'adult-uti': async () => (await import('../data/trees/adult-uti.js')).ADULT_UTI_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -935,6 +937,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'malaria': async () => {
       const m = await import('../data/trees/malaria.js');
       return { nodes: m.MALARIA_NODES, entryNodeId: 'mal-start', categoryId: 'infectious-disease', moduleLabels: m.MALARIA_MODULE_LABELS, citations: m.MALARIA_CITATIONS, criticalActions: m.MALARIA_CRITICAL_ACTIONS };
+    },
+    'asthma-exacerbation': async () => {
+      const m = await import('../data/trees/asthma-exacerbation.js');
+      return { nodes: m.ASTHMA_EXACERBATION_NODES, entryNodeId: 'asthma-start', categoryId: 'critical-care', moduleLabels: m.ASTHMA_EXACERBATION_MODULE_LABELS, citations: m.ASTHMA_EXACERBATION_CITATIONS, criticalActions: m.ASTHMA_EXACERBATION_CRITICAL_ACTIONS };
+    },
+    'adult-uti': async () => {
+      const m = await import('../data/trees/adult-uti.js');
+      return { nodes: m.ADULT_UTI_NODES, entryNodeId: 'uti-start', categoryId: 'urology', moduleLabels: m.ADULT_UTI_MODULE_LABELS, citations: m.ADULT_UTI_CITATIONS, criticalActions: m.ADULT_UTI_CRITICAL_ACTIONS };
     },
   };
 

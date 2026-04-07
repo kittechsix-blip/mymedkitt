@@ -1010,6 +1010,10 @@ const CEFTRIAXONE = {
             weightCalc: { dosePerKg: 75, unit: 'mg', maxDose: 2000 },
         },
         {
+            indication: 'Pyelonephritis (adult, empiric IV)',
+            regimen: '1 g IV q24h. Good empiric coverage for pyelonephritis and complicated UTI. Can be given as one-time dose in ED with oral transition (if appropriate for discharge). Continue until afebrile 24-48 hours, then transition to oral based on culture sensitivities.',
+        },
+        {
             indication: 'Pyelonephritis in pregnancy',
             regimen: '1 g IV daily. Continue until afebrile 48 hours, then transition to oral cephalexin guided by culture sensitivities. Admit all pregnant patients with pyelonephritis.',
         },
@@ -1421,8 +1425,16 @@ const CIPROFLOXACIN = {
     genericName: 'Ciprofloxacin',
     drugClass: 'Fluoroquinolone',
     route: 'PO/IV',
-    indications: ['Pediatric UTI (IgE-mediated allergy to penicillins AND cephalosporins)', 'Complicated UTI', 'Acute infectious diarrhea (adults)', 'Traveler\'s diarrhea (adults)'],
+    indications: ['Pyelonephritis', 'Complicated UTI', 'Pediatric UTI (IgE-mediated allergy to penicillins AND cephalosporins)', 'Acute infectious diarrhea (adults)', 'Traveler\'s diarrhea (adults)'],
     dosing: [
+        {
+            indication: 'Pyelonephritis',
+            regimen: '500 mg PO BID x 7 days, OR 400 mg IV q12h (inpatient). Reserve fluoroquinolones for pyelonephritis and complicated UTI only. Do not use for uncomplicated cystitis (stewardship).',
+        },
+        {
+            indication: 'Complicated UTI',
+            regimen: '500 mg PO BID x 7-14 days, OR 400 mg IV q12h. For UTI with complicating factors (structural abnormality, catheter, obstruction, immunocompromise).',
+        },
         {
             indication: 'Pediatric UTI',
             regimen: '20 mg/kg/day divided BID. Max 750 mg/dose (oral).',
@@ -1430,29 +1442,34 @@ const CIPROFLOXACIN = {
         },
         {
             indication: 'Acute diarrhea',
-            regimen: '500 mg PO BID × 3-5 days. First-line empiric antibiotic for adults with fever >38.5°C + positive fecal markers, acute dysentery, or diarrhea >48 hours.',
+            regimen: '500 mg PO BID x 3-5 days. First-line empiric antibiotic for adults with fever >38.5C + positive fecal markers, acute dysentery, or diarrhea >48 hours.',
         },
         {
             indication: 'Traveler diarrhea',
-            regimen: '500 mg PO BID × 3 days. First-line for most regions. For Southeast Asia: use azithromycin instead (>80% fluoroquinolone-resistant Campylobacter).',
+            regimen: '500 mg PO BID x 3 days. First-line for most regions. For Southeast Asia: use azithromycin instead (>80% fluoroquinolone-resistant Campylobacter).',
         },
         {
             indication: 'Meningococcal Postexposure Prophylaxis',
-            regimen: '500 mg PO × 1 dose. Single-dose alternative to ceftriaxone IM or rifampin for close contacts of confirmed N. meningitidis cases.',
+            regimen: '500 mg PO x 1 dose. Single-dose alternative to ceftriaxone IM or rifampin for close contacts of confirmed N. meningitidis cases.',
         },
     ],
     contraindications: [
+        'Myasthenia gravis (may exacerbate weakness)',
         'Concurrent tizanidine use',
         'QT prolongation risk',
     ],
     cautions: [
-        'FDA black box warnings (tendon rupture, peripheral neuropathy, CNS effects)',
+        'FDA black box warnings: tendon rupture, peripheral neuropathy, CNS effects, aortic aneurysm/dissection',
+        'Tendinopathy - stop immediately if tendon pain develops',
+        'QT prolongation - avoid with other QT-prolonging drugs',
+        'CNS effects - seizures, dizziness, confusion (especially in elderly)',
         'Generally avoided in children except when benefits outweigh risks',
         'Musculoskeletal adverse events in pediatric patients',
     ],
     monitoring: 'Renal function, QTc if concurrent QT-prolonging agents. Monitor for tendon pain, neuropathy symptoms.',
-    notes: 'Reserved for IgE-mediated allergy to penicillins AND cephalosporins in pediatric UTI. Use with caution in pediatric patients \u2014 FDA approval limited. TMP-SMX only 71% susceptible among E. coli isolates, making ciprofloxacin preferred fluoroquinolone alternative.',
+    notes: 'Reserve for pyelonephritis and complicated UTI per IDSA guidelines. FDA black box warning for serious adverse effects limits use for uncomplicated cystitis. Good oral bioavailability allows step-down from IV to PO. Avoid in myasthenia gravis. Use with caution in pediatric patients.',
     citations: [
+        'Gupta K, et al. IDSA Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-e120.',
         'Dell Children\'s EBOC. First Febrile Urinary Tract Infection Clinical Pathway. May 2017.',
         'Roberts KB. Urinary tract infection: clinical practice guideline for febrile infants and children 2 to 24 months. Pediatrics. 2011;128(3):595-610.',
     ],
@@ -2632,6 +2649,35 @@ const FOMEPIZOLE = {
         'Kraut JA, Kurtz I. Toxic Alcohol Ingestions: Clinical Features, Diagnosis, and Management. Clin J Am Soc Nephrol. 2008;3(1):208-225.',
     ],
 };
+const FOSFOMYCIN = {
+    id: 'fosfomycin',
+    name: 'Fosfomycin (Monurol)',
+    genericName: 'Fosfomycin tromethamine',
+    drugClass: 'Phosphonic acid antibiotic',
+    route: 'PO',
+    indications: ['Uncomplicated cystitis'],
+    dosing: [
+        {
+            indication: 'Uncomplicated cystitis',
+            regimen: '3 g PO single dose. Mix granules in 3-4 oz water, take immediately after dissolving. Can take with or without food. Convenient single-dose option for uncomplicated lower UTI.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to fosfomycin',
+    ],
+    cautions: [
+        'Lower efficacy than 5-day nitrofurantoin regimen (clinical cure ~75-80% vs 85-90%)',
+        'Not recommended for pyelonephritis or complicated UTI (inadequate tissue levels)',
+        'GI upset (diarrhea, nausea) common',
+        'Do not use for recurrent UTI prophylaxis',
+    ],
+    monitoring: 'Clinical response. Urine culture if symptoms persist >3 days.',
+    notes: 'Alternative first-line agent for uncomplicated cystitis per IDSA guidelines. Main advantage is single-dose convenience, which improves compliance. Lower cure rates than nitrofurantoin make it a reasonable alternative when adherence to multi-day regimen is a concern. Concentrated in urine. Does NOT achieve adequate serum or tissue levels for upper tract infections.',
+    citations: [
+        'Gupta K, et al. IDSA Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-e120.',
+        'Hooton TM. Uncomplicated Urinary Tract Infection. N Engl J Med. 2012;366(11):1028-1037.',
+    ],
+};
 const FLUDROCORTISONE = {
     id: 'fludrocortisone',
     name: 'Fludrocortisone',
@@ -2928,6 +2974,43 @@ const MAGNESIUM_SULFATE = {
         'Bosch NA, et al. Atrial Fibrillation in the ICU. Chest. 2018;154(6):1424-1434.',
     ],
 };
+const MAGNESIUM_SULFATE_ASTHMA = {
+    id: 'magnesium-sulfate-asthma',
+    name: 'Magnesium Sulfate (Asthma)',
+    genericName: 'Magnesium sulfate',
+    drugClass: 'Bronchodilator (smooth muscle relaxant)',
+    route: 'IV',
+    indications: ['Severe asthma exacerbation', 'Life-threatening asthma', 'Status asthmaticus'],
+    dosing: [
+        {
+            indication: 'Severe asthma (Adult)',
+            regimen: '2 g IV over 20 minutes. Single dose. Most effective in severe exacerbations (FEV1 <25-30% predicted). Give early in severe asthma — do not wait for treatment failure.',
+        },
+        {
+            indication: 'Severe asthma (Pediatric)',
+            regimen: '40 mg/kg IV over 20 minutes (max 2 g). Evidence strongest for severe exacerbations. Cochrane review: reduces hospitalization in children with severe asthma.',
+            weightCalc: { dosePerKg: 40, unit: 'mg', maxDose: 2000 },
+        },
+    ],
+    contraindications: [
+        'Severe renal failure (use with caution, reduce dose)',
+        'Hypermagnesemia',
+        'Heart block (without pacemaker)',
+    ],
+    cautions: [
+        'Onset 15-30 minutes — give early, not as rescue',
+        'Hypotension with rapid infusion — infuse over 20 min minimum',
+        'Flushing, warmth during infusion (common, benign)',
+        'Monitor for hypermagnesemia in renal impairment',
+    ],
+    monitoring: 'Blood pressure during infusion. Consider serum Mg if renal impairment. Clinical response (air movement, peak flow).',
+    notes: 'Magnesium causes bronchial smooth muscle relaxation via calcium channel antagonism and inhibition of acetylcholine release. GINA recommends IV magnesium for severe exacerbations not responding to initial bronchodilator therapy. NNT ~4 for preventing hospitalization in severe pediatric asthma. Most effective when given early in severe exacerbation — limited benefit in mild-moderate asthma.',
+    citations: [
+        'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2024.',
+        'Kew KM, et al. Intravenous magnesium sulfate for treating adults with acute asthma in the emergency department. Cochrane Database Syst Rev. 2014;(5):CD010909.',
+        'Griffiths B, Kew KM. Intravenous magnesium sulfate for treating children with acute asthma in the emergency department. Cochrane Database Syst Rev. 2016;(4):CD011050.',
+    ],
+};
 const MEDROXYPROGESTERONE = {
     id: 'medroxyprogesterone',
     name: 'Medroxyprogesterone Acetate (MPA)',
@@ -3026,6 +3109,44 @@ const METHYLPREDNISOLONE = {
     citations: [
         'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
         'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
+    ],
+};
+const METHYLPREDNISOLONE_IV = {
+    id: 'methylprednisolone-iv-asthma',
+    name: 'Methylprednisolone IV (Asthma)',
+    genericName: 'Methylprednisolone sodium succinate',
+    drugClass: 'Corticosteroid',
+    route: 'IV',
+    indications: ['Asthma exacerbation', 'Status asthmaticus', 'Severe acute asthma'],
+    dosing: [
+        {
+            indication: 'Severe asthma / Status asthmaticus (Adult)',
+            regimen: '125 mg IV x 1 (high dose for life-threatening) OR 60-80 mg IV (moderate-severe). No evidence that doses >80 mg IV provide additional benefit. Onset 4-6 hours -- give early.',
+        },
+        {
+            indication: 'Asthma exacerbation (Adult)',
+            regimen: '40-60 mg IV or PO daily. IV and PO are equivalent if patient can tolerate oral. Duration 5-7 days, no taper needed for short courses.',
+        },
+        {
+            indication: 'Asthma exacerbation (Pediatric)',
+            regimen: '1-2 mg/kg IV (max 60 mg). Can give PO if tolerating. Dexamethasone 0.6 mg/kg PO x 1-2 days is an acceptable alternative with better compliance.',
+            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 60 },
+        },
+    ],
+    contraindications: [
+        'Systemic fungal infection (relative -- do not withhold in severe asthma)',
+    ],
+    cautions: [
+        'Onset 4-6 hours -- steroids do NOT provide immediate relief',
+        'Hyperglycemia -- check glucose, especially in diabetics',
+        'No taper needed for courses <2 weeks',
+        'PO prednisone/prednisolone is equivalent to IV if patient can take PO',
+    ],
+    monitoring: 'Blood glucose. Clinical response (takes 4-6 hours for onset).',
+    notes: 'Systemic corticosteroids are essential in acute asthma -- reduce inflammation, restore beta-receptor sensitivity, and prevent relapse. GINA recommends steroids for ALL patients with acute asthma except the mildest exacerbations. Give within first hour of ED arrival. Higher doses (>80 mg methylprednisolone equivalent) do NOT improve outcomes but increase side effects. IV route offers no advantage over PO if patient can swallow.',
+    citations: [
+        'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2024.',
+        'Rowe BH, et al. Corticosteroids for preventing relapse following acute exacerbations of asthma. Cochrane Database Syst Rev. 2007;(3):CD000195.',
     ],
 };
 const METHYLENE_BLUE = {
@@ -3539,19 +3660,23 @@ const NIMODIPINE = {
 };
 const NITROFURANTOIN = {
     id: 'nitrofurantoin',
-    name: 'Nitrofurantoin',
+    name: 'Nitrofurantoin (Macrobid/Macrodantin)',
     genericName: 'Nitrofurantoin monohydrate/macrocrystals',
-    drugClass: 'Nitrofuran antibiotic',
+    drugClass: 'Urinary antiseptic',
     route: 'PO',
-    indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy', 'Uncomplicated cystitis'],
+    indications: ['Uncomplicated cystitis', 'UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy'],
     dosing: [
         {
-            indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
-            regimen: '100 mg (macrobid) PO BID × 7 days. ACOG: appropriate in first trimester only "when no other suitable alternative antibiotics are available." Safe in second and third trimesters.',
+            indication: 'Uncomplicated cystitis (preferred)',
+            regimen: 'Macrobid 100 mg PO BID x 5 days (preferred formulation). First-line for uncomplicated cystitis per IDSA guidelines.',
         },
         {
-            indication: 'Uncomplicated cystitis (non-pregnant)',
-            regimen: '100 mg (macrobid) PO BID × 5 days.',
+            indication: 'Uncomplicated cystitis (alternative)',
+            regimen: 'Macrodantin 50-100 mg PO QID x 7 days. More GI upset than Macrobid. Use when Macrobid not available.',
+        },
+        {
+            indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
+            regimen: '100 mg (Macrobid) PO BID x 7 days. ACOG: appropriate in first trimester only "when no other suitable alternative antibiotics are available." Safe in second and third trimesters.',
         },
     ],
     contraindications: [
@@ -3568,8 +3693,9 @@ const NITROFURANTOIN = {
         'Colors urine brown/rust — warn patient',
     ],
     monitoring: 'Urine culture to confirm eradication. Watch for pulmonary symptoms with prolonged use.',
-    notes: 'Concentrated in urine — effective for lower UTI but NOT for pyelonephritis (does not achieve adequate serum/tissue levels). ACOG 2017 review found the association between nitrofurantoin and birth defects is uncertain, but recommends caution in the first trimester as a precaution. Safe and effective in second/third trimesters. Good option when local E. coli resistance to amoxicillin/ampicillin is high.',
+    notes: 'First-line for uncomplicated cystitis per IDSA guidelines. Concentrated in urine — effective for lower UTI but NOT for pyelonephritis (does not achieve adequate serum/tissue levels). Do not use for upper tract infections. ACOG 2017 review found the association between nitrofurantoin and birth defects is uncertain, but recommends caution in the first trimester as a precaution. Safe and effective in second/third trimesters.',
     citations: [
+        'Gupta K, et al. IDSA Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-e120.',
         'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.',
         'Kazemier BM, et al. Maternal and neonatal consequences of treated and untreated asymptomatic bacteriuria in pregnancy. Lancet Infect Dis. 2015;15(11):1324-1333.',
     ],
@@ -5514,6 +5640,39 @@ const IBUPROFEN = {
         'Magee CC, et al. Benign acute childhood myositis: a retrospective cohort study. Front Pediatr. 2025;13:1653651.',
     ],
 };
+const IPRATROPIUM_NEB = {
+    id: 'ipratropium-neb',
+    name: 'Ipratropium (Nebulized)',
+    genericName: 'Ipratropium bromide',
+    drugClass: 'Anticholinergic bronchodilator',
+    route: 'Inhaled (nebulized)',
+    indications: ['Acute asthma exacerbation (adjunct)', 'COPD exacerbation'],
+    dosing: [
+        {
+            indication: 'Acute asthma exacerbation',
+            regimen: '500 mcg nebulized q20 min × 3 doses combined with albuterol, then q4-6h PRN. Most benefit in severe exacerbations (FEV1 <30% predicted). Always give WITH albuterol, not as monotherapy.',
+        },
+        {
+            indication: 'COPD exacerbation',
+            regimen: '500 mcg nebulized q4-6h. Combine with albuterol for synergistic bronchodilation. May use Duoneb (ipratropium 500 mcg + albuterol 2.5 mg) for convenience.',
+        },
+    ],
+    contraindications: [
+        'Hypersensitivity to ipratropium or atropine derivatives',
+        'Soy or peanut allergy (some formulations contain soy lecithin)',
+    ],
+    cautions: [
+        'Narrow-angle glaucoma (avoid nebulizer mist in eyes)',
+        'Urinary retention / BPH',
+        'Minimal systemic absorption — anticholinergic side effects rare',
+    ],
+    monitoring: 'Peak flow or FEV1 response. Watch for paradoxical bronchospasm (rare).',
+    notes: 'Ipratropium provides additive bronchodilation when combined with albuterol in acute asthma. GINA guidelines recommend ipratropium only for severe exacerbations — limited benefit in mild-moderate asthma. Onset 15-30 min, peak effect 1-2 hours. Primarily affects large airways (unlike albuterol which affects small airways).',
+    citations: [
+        'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2024.',
+        'Rodrigo GJ, Castro-Rodriguez JA. Anticholinergics in the treatment of children and adults with acute asthma. Thorax. 2005;60(9):740-746.',
+    ],
+};
 const KETOROLAC = {
     id: 'ketorolac',
     name: 'Ketorolac (Toradol)',
@@ -5610,6 +5769,47 @@ const KETAMINE = {
     citations: [
         'Greenhalgh DG. Management of Burns. NEJM. 2019;380(24):2349-2359.',
         'Bitter CC et al. WMS Clinical Practice Guideline on Care of Burns in the Wilderness. Wilderness Environ Med. 2025;36(4):549-558.',
+    ],
+};
+const KETAMINE_ASTHMA = {
+    id: 'ketamine-asthma',
+    name: 'Ketamine (Asthma/Bronchodilation)',
+    genericName: 'Ketamine hydrochloride',
+    drugClass: 'Dissociative anesthetic with bronchodilator properties',
+    route: 'IV',
+    indications: ['Refractory asthma', 'DSI sedation for asthma intubation', 'Status asthmaticus'],
+    dosing: [
+        {
+            indication: 'Bronchodilation (sub-dissociative)',
+            regimen: '0.2-0.5 mg/kg IV bolus over 1-2 min. May repeat q10-20 min PRN. Bronchodilator effect via smooth muscle relaxation and catecholamine release. Use when beta-agonists and anticholinergics are failing.',
+            weightCalc: { dosePerKg: 0.3, unit: 'mg', label: 'Bronchodilation bolus' },
+        },
+        {
+            indication: 'DSI (Delayed Sequence Intubation)',
+            regimen: '1-2 mg/kg IV push. Dissociative dose for preoxygenation optimization before paralysis. Patient maintains respiratory drive at dissociative dose. Apply BiPAP/NRB, allow 3-5 min preoxygenation, then give paralytic. Ideal for the "can\'t preoxygenate" asthmatic.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mg', label: 'DSI dose' },
+        },
+        {
+            indication: 'Continuous infusion (refractory)',
+            regimen: '0.5-2 mg/kg/hr IV infusion after bolus. For status asthmaticus requiring ongoing bronchodilation. Titrate to clinical effect (improved air movement, decreasing pCO2).',
+            weightCalc: { dosePerKg: 1, unit: 'mg', label: 'Infusion rate (mg/kg/hr)' },
+        },
+    ],
+    contraindications: [
+        'Avoid if possible in patients with CAD (catecholamine surge)',
+        'Known psychotic disorder (relative)',
+    ],
+    cautions: [
+        'Dissociative dose releases endogenous catecholamines — beneficial in asthma (bronchodilation)',
+        'Maintain spontaneous respirations — ketamine does NOT suppress respiratory drive',
+        'Emergence reactions (prophylactic midazolam 0.05 mg/kg if needed)',
+        'Increases secretions — consider glycopyrrolate',
+    ],
+    monitoring: 'SpO2, capnography, respiratory effort, air movement. Monitor for improvement in peak flow if measurable.',
+    notes: 'Ketamine causes bronchodilation through direct smooth muscle relaxation AND indirect catecholamine release. Preferred induction agent for asthma intubation because it maintains respiratory drive (DSI) and provides bronchodilation. For the peri-intubation asthmatic: DSI with ketamine → preoxygenate on BiPAP → rocuronium → intubate. Post-intubation: consider ketamine infusion for ongoing bronchodilation.',
+    citations: [
+        'Weingart SD, Trueger NS, et al. Delayed sequence intubation: a prospective observational study. Ann Emerg Med. 2015;65(4):349-355.',
+        'Goyal S, Agrawal A. Ketamine in status asthmaticus: A review. Indian J Crit Care Med. 2013;17(3):154-161.',
     ],
 };
 const MIDAZOLAM = {
@@ -6614,29 +6814,37 @@ const TMP_SMX = {
     genericName: 'Trimethoprim-sulfamethoxazole',
     drugClass: 'Sulfonamide antibiotic combination',
     route: 'PO',
-    indications: ['Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea', 'PJP prophylaxis (HIV, CD4 <200)'],
+    indications: ['Uncomplicated cystitis', 'Pyelonephritis (if susceptible)', 'Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea', 'PJP prophylaxis (HIV, CD4 <200)'],
     dosing: [
         {
+            indication: 'Uncomplicated cystitis',
+            regimen: 'DS tablet (160/800 mg) PO BID x 3 days. First-line option per IDSA if local E. coli resistance <20%.',
+        },
+        {
+            indication: 'Pyelonephritis (if susceptible)',
+            regimen: 'DS tablet (160/800 mg) PO BID x 7-14 days. Use only if culture shows susceptibility. Not recommended for empiric pyelonephritis therapy due to resistance.',
+        },
+        {
             indication: 'Acute diarrhea',
-            regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID × 3-5 days.',
+            regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID x 3-5 days.',
         },
         {
             indication: 'Traveler diarrhea',
-            regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID × 3-5 days. Combination with loperamide is most efficacious regimen.',
+            regimen: 'Adult: 1 DS tablet (160/800 mg) PO BID x 3-5 days. Combination with loperamide is most efficacious regimen.',
         },
         {
             indication: 'Pediatric diarrhea',
-            regimen: '8 mg/kg/day (TMP component) divided BID × 3-5 days. Max 320 mg TMP per day.',
+            regimen: '8 mg/kg/day (TMP component) divided BID x 3-5 days. Max 320 mg TMP per day.',
             weightCalc: { dosePerKg: 8, unit: 'mg TMP', maxDose: 320, dailyDivided: 2 },
         },
         {
             indication: 'PJP Prophylaxis (CD4 <200)',
-            regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for ≥3 months on ART.',
+            regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for 3+ months on ART.',
         },
     ],
     contraindications: [
         'Sulfonamide allergy',
-        'Pregnancy (especially first trimester and near term) \u2014 folate antagonism',
+        'Pregnancy (first trimester) - folate antagonism, neural tube defect risk',
         'Severe hepatic or renal insufficiency',
         'Megaloblastic anemia due to folate deficiency',
         'Infants under 2 months',
@@ -6650,8 +6858,9 @@ const TMP_SMX = {
         'G6PD deficiency \u2014 risk of hemolytic anemia',
     ],
     monitoring: 'CBC, renal function, potassium. INR if on warfarin. Watch for rash (discontinue immediately).',
-    notes: 'First-line empiric antibiotic for children with acute infectious diarrhea. In adults, used as alternative to fluoroquinolones. Only 71% susceptibility among E. coli isolates limits utility in some settings. Combination with loperamide is the most efficacious regimen for traveler\'s diarrhea.',
+    notes: 'First-line for uncomplicated cystitis if local E. coli resistance <20%. Check your regional antibiogram. Not recommended for empiric pyelonephritis due to rising resistance, but can use if culture confirms susceptibility. Also first-line empiric antibiotic for children with acute infectious diarrhea.',
     citations: [
+        'Gupta K, et al. IDSA Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-e120.',
         'Ericsson CD, et al. Treatment of Traveler\'s Diarrhea with Sulfamethoxazole and Trimethoprim and Loperamide. JAMA. 1990;263(2):257-261.',
         'Shane AL, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.',
     ],
@@ -8259,7 +8468,7 @@ const DEXMEDETOMIDINE = {
     genericName: 'Dexmedetomidine hydrochloride',
     drugClass: 'Alpha-2 adrenergic agonist',
     route: 'IV/SL',
-    indications: ['Refractory agitation', 'ICU sedation'],
+    indications: ['Refractory agitation', 'ICU sedation', 'BiPAP sedation for asthma', 'Procedural sedation'],
     dosing: [
         {
             indication: 'Acute agitation — sublingual film (Igalmi)',
@@ -8269,6 +8478,11 @@ const DEXMEDETOMIDINE = {
             indication: 'Refractory agitation — IV infusion',
             regimen: 'Infusion 0.2-1.5 mcg/kg/hr. Titrate q15 min. Optional loading: 0.5-1 mcg/kg IV over 10 min (may cause transient hypertension). No respiratory depression — major advantage.',
             weightCalc: { dosePerKg: 1, unit: 'mcg', maxDose: 200, label: 'IV loading dose' },
+        },
+        {
+            indication: 'BiPAP sedation (asthma/COPD)',
+            regimen: 'Load 0.5-1 mcg/kg IV over 10 min, then infuse 0.2-0.7 mcg/kg/hr. Titrate to RASS 0 to -2 (cooperative sedation). Does NOT suppress respiratory drive — ideal for non-intubated patients on BiPAP. Allows patient to remain cooperative and follow commands while tolerating mask.',
+            weightCalc: { dosePerKg: 1, unit: 'mcg', maxDose: 200, label: 'BiPAP loading dose' },
         },
     ],
     contraindications: [
@@ -8284,10 +8498,11 @@ const DEXMEDETOMIDINE = {
         'Slower onset than benzos or ketamine — not for immediate control',
     ],
     monitoring: 'Continuous cardiac monitor (bradycardia). BP q5 min during loading, q15 min during infusion. SpO2.',
-    notes: 'Produces "cooperative sedation" — arousable, follows commands. No respiratory depression. Ideal for patients who failed first-line agents but do not need intubation. Sublingual film (Igalmi) approved 2022.',
+    notes: 'Produces "cooperative sedation" — arousable, follows commands. No respiratory depression. Ideal for patients who failed first-line agents but do not need intubation. For asthma patients on BiPAP: dex allows anxiolysis without suppressing respiratory drive — patient stays awake enough to cooperate with BiPAP but calm enough to tolerate the mask. Sublingual film (Igalmi) approved 2022.',
     citations: [
         'Preskorn SH, Zeller S, et al. Sublingual Dexmedetomidine vs Placebo for Acute Agitation in Bipolar Disorder. JAMA. 2022;327:727.',
         'Carrasco G, et al. Dexmedetomidine for Hyperactive Delirium Refractory to Haloperidol in Nonintubated ICU Patients. Crit Care Med. 2016;44:1295.',
+        'Devlin JW, et al. Clinical Practice Guidelines for the Prevention and Management of Pain, Agitation/Sedation, Delirium, Immobility, and Sleep Disruption in Adult Patients in the ICU. Crit Care Med. 2018;46(9):e825-e873.',
     ],
 };
 const PHYSOSTIGMINE = {
@@ -8835,6 +9050,7 @@ export const ALL_DRUGS = [
     FLUCONAZOLE,
     FLUCYTOSINE,
     FOMEPIZOLE,
+    FOSFOMYCIN,
     FONDAPARINUX,
     FFP,
     FOSPHENYTOIN,
@@ -8852,7 +9068,9 @@ export const ALL_DRUGS = [
     ICATIBANT,
     ISONIAZID,
     ISOPROTERENOL,
+    IPRATROPIUM_NEB,
     KETAMINE,
+    KETAMINE_ASTHMA,
     KETOROLAC,
     LABETALOL,
     LACOSAMIDE,
@@ -8868,6 +9086,7 @@ export const ALL_DRUGS = [
     LORAZEPAM,
     SODIUM_ZIRCONIUM_CYCLOSILICATE,
     MAGNESIUM_SULFATE,
+    MAGNESIUM_SULFATE_ASTHMA,
     MEDROXYPROGESTERONE,
     MEPERIDINE,
     MEROPENEM,
@@ -8875,6 +9094,7 @@ export const ALL_DRUGS = [
     METHOTREXATE,
     METHIMAZOLE,
     METHYLPREDNISOLONE,
+    METHYLPREDNISOLONE_IV,
     METHYLENE_BLUE,
     METOCLOPRAMIDE,
     METOLAZONE,
@@ -9061,6 +9281,7 @@ const NAME_TO_ID = [
     [/fluconazole|diflucan/i, 'fluconazole'],
     [/flucytosine|5-?fc|ancobon/i, 'flucytosine'],
     [/fomepizole|antizol/i, 'fomepizole'],
+    [/fosfomycin|monurol/i, 'fosfomycin'],
     [/fondaparinux|arixtra/i, 'fondaparinux'],
     [/fresh.*frozen.*plasma|\bFFP\b/i, 'ffp'],
     [/fosphenytoin|cerebyx|phenytoin.*equiv/i, 'fosphenytoin'],
@@ -9073,6 +9294,7 @@ const NAME_TO_ID = [
     [/idarucizumab|praxbind/i, 'idarucizumab'],
     [/icatibant|firazyr/i, 'icatibant'],
     [/isoproterenol|isuprel/i, 'isoproterenol'],
+    [/ipratropium|atrovent/i, 'ipratropium-neb'],
     [/ketamine|ketalar/i, 'ketamine'],
     [/labetalol/i, 'labetalol'],
     [/lacosamide|vimpat/i, 'lacosamide'],
