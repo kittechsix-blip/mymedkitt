@@ -4,11 +4,23 @@
 // Based on ILCOR/AHA 2020 Guidelines and pediatric drowning literature
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 interface Citation {
   num: number;
   text: string;
 }
+
+export const PEDS_SUBMERSION_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Obtain accurate submersion duration (most important prognostic factor)', nodeId: 'submersion-start' },
+  { text: 'Begin CPR immediately if pulseless (prolonged resuscitation may be successful)', nodeId: 'submersion-cpr' },
+  { text: 'Warm hypothermic patients before declaring death', nodeId: 'submersion-hypothermia' },
+  { text: 'Obtain chest X-ray for all symptomatic submersion patients', nodeId: 'submersion-imaging' },
+  { text: 'Observe all symptomatic patients for minimum 4-8 hours', nodeId: 'submersion-observation' },
+  { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-dispo' },
+  { text: 'Consider child abuse in submersion injuries <1 year or with inconsistent history', nodeId: 'submersion-abuse' },
+  { text: 'Provide family support and anticipatory guidance', nodeId: 'submersion-dispo' },
+];
 
 export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
   // ===================================================================

@@ -552,6 +552,19 @@ export const URINARY_SPHINCTER_MODULE_LABELS = [
 // Evidence Citations
 // -------------------------------------------------------------------
 
+export const URINARY_SPHINCTER_CRITICAL_ACTIONS = [
+  { text: 'Screen for cauda equina red flags (saddle anesthesia, bilateral leg symptoms, bowel dysfunction)', nodeId: 'sphincter-retention-neuro' },
+  { text: 'Emergent MRI lumbar spine for suspected cauda equina (time to decompression <48h critical)', nodeId: 'sphincter-ces-imaging' },
+  { text: 'Foley catheter for bladder decompression in cauda equina (bladder function has worst recovery)', nodeId: 'sphincter-cauda-equina' },
+  { text: 'Dexamethasone 10 mg IV if malignancy or epidural abscess suspected', nodeId: 'sphincter-cauda-equina' },
+  { text: 'Neurosurgery consult STAT for cauda equina or spinal cord compression', nodeId: 'sphincter-cauda-equina' },
+  { text: 'Bladder ultrasound (PVR): >300 mL = definite retention requiring catheterization', nodeId: 'sphincter-pvr' },
+  { text: 'Start tamsulosin 0.4 mg PO at time of catheterization (improves trial without catheter success)', nodeId: 'sphincter-alpha-blocker' },
+  { text: 'Coude catheter first-line in older men with BPH (curve points UP)', nodeId: 'sphincter-cath-technique' },
+  { text: 'Monitor for post-obstructive diuresis if PVR >1000 mL (replace 50-75% of output, NOT 100%)', nodeId: 'sphincter-high-volume' },
+  { text: 'Complete drainage is safe - clamping myth debunked (no evidence supports interval clamping)', nodeId: 'sphincter-high-volume' },
+];
+
 export const URINARY_SPHINCTER_CITATIONS: Citation[] = [
   { num: 1, text: 'American Urological Association (AUA). Surgical Management of Lower Urinary Tract Symptoms Attributed to Benign Prostatic Hyperplasia. AUA Guideline. 2023.' },
   { num: 2, text: 'Long B, et al. Evaluation and Management of Cauda Equina Syndrome in the Emergency Department. J Emerg Med. 2020;58(5):723-729. PMID: 32111479' },

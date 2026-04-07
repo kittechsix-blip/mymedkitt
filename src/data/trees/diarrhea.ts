@@ -6,6 +6,17 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const DIARRHEA_CRITICAL_ACTIONS = [
+  { text: 'IV rehydration 20 mL/kg NS/LR bolus if unstable', nodeId: 'diarrhea-resuscitate' },
+  { text: 'Stool culture if bloody diarrhea or fever >38.5°C', nodeId: 'diarrhea-labs' },
+  { text: 'C. diff testing if antibiotics in past 3 months', nodeId: 'diarrhea-cdiff' },
+  { text: 'Do NOT give antibiotics if STEC suspected', nodeId: 'diarrhea-bloody' },
+  { text: 'Oral vancomycin 125 mg QID for C. difficile', nodeId: 'diarrhea-cdiff-treatment' },
+  { text: 'Ciprofloxacin 500 mg BID for traveler\'s diarrhea', nodeId: 'diarrhea-travelers-severe' },
+  { text: 'ORS rehydration preferred over IV in children', nodeId: 'diarrhea-pediatric' },
+  { text: 'Screen for HUS if bloody diarrhea (platelets, Cr)', nodeId: 'diarrhea-bloody' },
+];
+
 export const DIARRHEA_NODES: DecisionNode[] = [
 
   // =====================================================================

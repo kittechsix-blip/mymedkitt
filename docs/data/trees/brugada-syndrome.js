@@ -247,6 +247,18 @@ export const BRUGADA_SYNDROME_NODES = [
         next: undefined,
     },
 ];
+export const BRUGADA_SYNDROME_CRITICAL_ACTIONS = [
+    { text: 'Type 1 ECG (coved ST elevation ≥2mm in V1-V3) is DIAGNOSTIC - Types 2/3 are NOT diagnostic', nodeId: 'brugada-ecg-patterns' },
+    { text: 'Use high precordial leads (V1/V2 in 2nd or 3rd intercostal space) to increase sensitivity', nodeId: 'brugada-ecg-patterns' },
+    { text: 'Rule out Brugada phenocopies: hyperkalemia, PE, RV infarct, hypothermia (pattern resolves when treated)', nodeId: 'brugada-phenocopy-check' },
+    { text: 'Aggressive fever control with acetaminophen/ibuprofen + cooling measures (fever unmasks Type 1)', nodeId: 'brugada-fever' },
+    { text: 'Isoproterenol 1-5 mcg/min for VF storm (suppresses arrhythmias)', nodeId: 'brugada-arrest' },
+    { text: 'Avoid sodium channel blockers, vagal maneuvers, and large meals (trigger VF)', nodeId: 'brugada-drugs-avoid' },
+    { text: 'ICD for cardiac arrest survivors or Type 1 with syncope (only proven therapy)', nodeId: 'brugada-icd-criteria' },
+    { text: 'EP consult for all symptomatic patients or confirmed Type 1 pattern', nodeId: 'brugada-disposition' },
+    { text: 'Family screening for first-degree relatives (ECG ± genetic testing)', nodeId: 'brugada-disposition' },
+    { text: 'Shanghai Score ≥3.5 points = probable/definite diagnosis', nodeId: 'brugada-shanghai-assessment' },
+];
 export const BRUGADA_SYNDROME_CITATIONS = [
     { num: 1, text: '2022 ESC Guidelines for ventricular arrhythmias and prevention of sudden cardiac death. Eur Heart J. 2022;43(40):3997-4126.' },
     { num: 2, text: 'Priori SG, et al. HRS/EHRA/APHRS Expert Consensus on Inherited Primary Arrhythmia Syndromes. Heart Rhythm. 2013;10(12):1932-1963.' },

@@ -1,6 +1,15 @@
 // MedKitt — Neurosyphilis Evaluation & Treatment
 // Screening → Neuro Symptoms → CSF Evaluation → CSF Interpretation → Treatment → Special Populations
 // CDC 2021 STI Treatment Guidelines. 4 modules, 11 nodes.
+export const NEUROSYPHILIS_CRITICAL_ACTIONS = [
+    { text: 'CSF-VDRL reactive is diagnostic of neurosyphilis - start IV penicillin G immediately', nodeId: 'ns-confirmed' },
+    { text: 'Aqueous crystalline penicillin G 18-24 million units/day IV × 10-14 days is first-line treatment', nodeId: 'ns-confirmed' },
+    { text: 'CSF pleocytosis (>5 WBC/µL) or elevated protein with neuro symptoms → treat as neurosyphilis even if CSF-VDRL negative', nodeId: 'ns-probable' },
+    { text: 'Ocular or otic syphilis: treat same as neurosyphilis - ophthalmology/ENT consult mandatory', nodeId: 'ns-ocular-otic' },
+    { text: 'Repeat CSF at 6 months - CSF pleocytosis should normalize first (protein/VDRL lag)', nodeId: 'ns-confirmed' },
+    { text: 'PCN allergy: desensitization preferred over ceftriaxone alternative (limited data for ceftriaxone)', nodeId: 'ns-confirmed' },
+    { text: 'Do NOT use benzathine penicillin for neurosyphilis - does NOT penetrate blood-brain barrier', nodeId: 'ns-confirmed' },
+];
 export const NEUROSYPHILIS_NODES = [
     // =====================================================================
     // MODULE 1: SCREENING & PRESENTATION

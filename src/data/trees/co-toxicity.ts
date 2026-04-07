@@ -4,7 +4,19 @@
 // 28 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const CO_TOXICITY_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Give 100% O2 immediately (pulse ox is falsely normal)', nodeId: 'co-start' },
+  { text: 'Obtain venous or arterial COHb level (not from pulse ox)', nodeId: 'co-workup' },
+  { text: 'Check for household cluster: multiple patients with headache/nausea', nodeId: 'co-start' },
+  { text: 'Consider cyanide co-exposure in fire/smoke inhalation victims', nodeId: 'co-cyanide' },
+  { text: 'Arrange hyperbaric oxygen (HBO) for severe cases: AMS, loss of consciousness, pregnancy, COHb >25%', nodeId: 'co-hbo' },
+  { text: 'Give normobaric 100% O2 for minimum 6 hours if HBO not available', nodeId: 'co-oxygen' },
+  { text: 'Assess for delayed neurologic sequelae at 2-6 weeks follow-up', nodeId: 'co-dns' },
+  { text: 'Notify fire department/housing authority for source investigation', nodeId: 'co-dispo' },
+];
 
 export const CO_TOXICITY_NODES: DecisionNode[] = [
 

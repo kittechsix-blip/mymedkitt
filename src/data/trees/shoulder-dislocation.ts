@@ -10,6 +10,17 @@ interface Citation {
   text: string;
 }
 
+export const SHOULDER_DISLOCATION_CRITICAL_ACTIONS = [
+  { text: 'Document pre-reduction neurovascular exam (axillary nerve: regimental badge sensation)', nodeId: 'shoulder-neurovascular' },
+  { text: 'FARES method - highest success (89-95%), lowest pain', nodeId: 'shoulder-fares' },
+  { text: 'Intra-articular lidocaine 20 mL - fewer adverse events than PSA', nodeId: 'shoulder-ial-technique' },
+  { text: 'Post-reduction radiographs to confirm reduction and assess for fractures', nodeId: 'shoulder-post-reduction' },
+  { text: 'Repeat neurovascular exam post-reduction', nodeId: 'shoulder-post-reduction' },
+  { text: 'First-time young patients (<30) - consider external rotation brace (reduced recurrence)', nodeId: 'shoulder-er-brace' },
+  { text: 'Greater tuberosity fracture: single attempt only, immobilize in abduction sling', nodeId: 'shoulder-gt-fracture' },
+  { text: 'Age >40 - high risk rotator cuff tear (70% at age >60)', nodeId: 'shoulder-elderly' },
+];
+
 export const SHOULDER_DISLOCATION_NODES: DecisionNode[] = [
   // ===================================================================
   // MODULE 1: Initial Assessment
@@ -159,7 +170,7 @@ export const SHOULDER_DISLOCATION_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Reduction Technique Selection',
-    body: '**First-line techniques (evidence-based ranking):**\n\n| Technique | Success | Pain | Sedation |\n|-----------|---------|------|----------|\n| **FARES** | 89-95% | Low (VAS 1.6) | Often not needed |\n| **Scapular manipulation** | 79-97% | Low-moderate | Often not needed |\n| **External rotation** | 78-90% | Low | 61-81% not needed |\n| **Cunningham** | 35-77% | Minimal | Not needed |\n\n**Second-line:**\n• Stimson (prone): 28-97%, no assistant needed\n• Traction-countertraction: ~80%, backup method\n\n**Avoid:** Kocher technique, Hippocratic (foot in axilla) — high complication rates\n\nSelect your reduction technique:',
+    body: '**First-line techniques (evidence-based ranking):**\n\n| Technique | Success | Pain | Sedation |\n|-----------|---------|------|----------|\n| **FARES** | 89-95% | Low (VAS 1.6) | Often not needed |\n| **Scapular manipulation** | 79-97% | Low-moderate | Often not needed |\n| **External rotation** | 78-90% | Low | 61-81% not needed |\n| **Cunningham** | 35-77% | Minimal | Not needed |\n\n**Second-line:**\n• Stimson (prone): 28-97%, no assistant needed\n• Traction-countertrtext: ~80%, backup method\n\n**Avoid:** Kocher technique, Hippocratic (foot in axilla) — high complication rates\n\nSelect your reduction technique:',
     citation: [2, 10, 11],
     options: [
       { label: 'FARES Method', description: 'Best evidence — highest success, lowest pain', next: 'shoulder-fares' },

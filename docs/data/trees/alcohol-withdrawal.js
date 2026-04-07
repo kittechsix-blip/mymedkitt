@@ -2,6 +2,17 @@
 // Diagnosis → Severity → Treatment (Phenobarbital vs Benzodiazepine pathways) → Disposition → AUD Medications
 // 4 modules: Assessment → Severity → Treatment → Disposition & AUD
 // 32 nodes total.
+export const ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS = [
+    { text: 'Give thiamine 100-500mg IV BEFORE glucose to prevent Wernicke', nodeId: 'aw-start' },
+    { text: 'Check fingerstick glucose, electrolytes (Ca/Mg/Phos), CBC, LFTs', nodeId: 'aw-start' },
+    { text: 'Screen for hepatic encephalopathy (contraindication to phenobarbital)', nodeId: 'aw-he-warning' },
+    { text: 'Give phenobarbital 15-20mg/kg IV for withdrawal seizure', nodeId: 'aw-seizure' },
+    { text: 'Phenobarbital loading 10mg/kg, then titrate 130mg IV q30min to RASS 0 to -1', nodeId: 'aw-pb-protocol' },
+    { text: 'Re-evaluate diagnosis if >20mg/kg phenobarbital without improvement (NARD)', nodeId: 'aw-nard' },
+    { text: 'Use symptom-triggered benzodiazepines with CIWA-Ar monitoring', nodeId: 'aw-bz-dosing' },
+    { text: 'Replete magnesium aggressively (often severely depleted)', nodeId: 'aw-controlled' },
+    { text: 'Initiate naltrexone or acamprosate for AUD before discharge', nodeId: 'aw-aud-select' },
+];
 export const ALCOHOL_WITHDRAWAL_NODES = [
     // =====================================================================
     // MODULE 1: ASSESSMENT & DIAGNOSIS

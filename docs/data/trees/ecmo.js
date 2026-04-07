@@ -4,6 +4,17 @@
 // 10 modules: Recognition → VV vs VA Selection → VV-ECMO → VA-ECMO → Contraindications →
 //             Cannulation → Complications → Scores → Communication → Disposition
 // Sources: EMCrit IBCC, ELSO Guidelines, Dr. Katrina Augustin CV-EMCrit, EOLIA, CESAR trials
+export const ECMO_CRITICAL_ACTIONS = [
+    { text: 'VV-ECMO provides oxygenation ONLY (no hemodynamic support) - patient must have adequate cardiac function', nodeId: 'ecmo-start' },
+    { text: 'VA-ECMO provides oxygenation AND circulatory support - for cardiogenic shock and cardiac arrest', nodeId: 'ecmo-start' },
+    { text: 'When in doubt between VV and VA, go VA - VA can support both heart and lungs, VV cannot support failing heart', nodeId: 'ecmo-selection-decision' },
+    { text: 'VV-ECMO indication: PaO2/FiO2 <80 on FiO2 100% despite optimal ventilator settings', nodeId: 'ecmo-vv-indications' },
+    { text: 'VA-ECMO indication: lactate >4 and rising + CI <2.0 + MAP <65 despite high-dose pressors', nodeId: 'ecmo-va-indications' },
+    { text: 'ECPR (cardiac arrest): CPR <60 min, witnessed arrest, bystander CPR, shockable rhythm best outcomes', nodeId: 'ecmo-ecpr' },
+    { text: 'Absolute contraindication: severe aortic regurgitation for VA-ECMO (worsens with retrograde flow)', nodeId: 'ecmo-contraindications' },
+    { text: 'RESP score >3 predicts 75% survival on VV-ECMO | <-2 predicts 18% survival - use for triage', nodeId: 'ecmo-resp-score' },
+    { text: 'Harlequin syndrome in VA-ECMO: upper body cyanosis + lower body pink = left ventricular failure with mixing', nodeId: 'ecmo-harlequin' },
+];
 export const ECMO_NODES = [
     // ═══════════════════════════════════════════════════════════════
     // MODULE 1: Recognition & Initial Assessment

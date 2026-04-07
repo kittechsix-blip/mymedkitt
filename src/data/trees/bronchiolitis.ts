@@ -339,6 +339,19 @@ export const BRONCHIOLITIS_MODULE_LABELS = [
 // Evidence Citations
 // -------------------------------------------------------------------
 
+export const BRONCHIOLITIS_CRITICAL_ACTIONS = [
+  { text: 'Use BAS Calculator for objective severity scoring before and after all interventions', nodeId: 'bronch-severity' },
+  { text: 'HFNC starting flow: <7 kg = 4 LPM, ≥7 kg = 6 LPM (start FiO₂ 21%, titrate to SpO₂ ≥90%)', nodeId: 'bronch-hfnc-init' },
+  { text: 'Monitor BAS every 15 minutes after HFNC initiation (suction first if BAS ≥9)', nodeId: 'bronch-hfnc-assess' },
+  { text: 'HFNC escalation triggers: worsening after 60 min, FiO₂ >50%, max flow rates, apnea', nodeId: 'bronch-hfnc-escalate' },
+  { text: 'NOT recommended: CXR, viral testing, albuterol, steroids, antibiotics (no role in standard bronchiolitis)', nodeId: 'bronch-start' },
+  { text: 'Target SpO₂ ≥90% awake or ≥88% asleep (do not over-oxygenate)', nodeId: 'bronch-moderate' },
+  { text: 'Nasal suction using nasal aspirator (gentle, superficial - NOT deep beyond nasopharynx)', nodeId: 'bronch-mild' },
+  { text: 'Stable ≥4 hours on maintenance phase required before weaning HFNC', nodeId: 'bronch-wean-check' },
+  { text: 'Discharge criteria: SpO₂ ≥90% RA for ≥2 continuous hours, RR <60, tolerating PO, parents confident', nodeId: 'bronch-inpt-dc' },
+  { text: 'PICU if worsening >60 min on HFNC, requiring PPV, witnessed apnea, or FiO₂ >50%', nodeId: 'bronch-picu' },
+];
+
 export const BRONCHIOLITIS_CITATIONS: Citation[] = [
   { num: 1, text: 'Ralston SL, et al. Clinical Practice Guideline: The Diagnosis, Management, and Prevention of Bronchiolitis. Pediatrics. 2014;134(5):e1474-e1502.' },
   { num: 2, text: "Dell Children's Medical Center EBOC. Bronchiolitis Clinical Pathway. Rev Oct 2019." },

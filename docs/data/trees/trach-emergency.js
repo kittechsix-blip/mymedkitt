@@ -2,6 +2,16 @@
 // Emergency Algorithm → Trach Types → Obstruction → Dislodgement → Bleeding → Fresh vs Mature → Disposition
 // 6 modules: Emergency Algorithm → Tracheostomy Types → Obstruction Management → Dislodgement → Bleeding → Disposition
 // 28 nodes total.
+export const TRACH_EMERGENCY_CRITICAL_ACTIONS = [
+    { text: 'Apply high-flow O2 to BOTH face AND stoma', nodeId: 'trach-start' },
+    { text: 'Remove inner cannula FIRST for obstruction', nodeId: 'trach-obstruction-start' },
+    { text: 'Deflate cuff if unable to ventilate', nodeId: 'trach-obstruction-start' },
+    { text: 'Do NOT blind replace fresh trach (<7 days)', nodeId: 'trach-fresh-emergency' },
+    { text: 'Oral intubation for fresh trach dislodgement', nodeId: 'trach-oral-intubation' },
+    { text: 'Hyperinflate cuff (50 mL) for TIF hemorrhage', nodeId: 'trach-bleeding-massive' },
+    { text: 'Call ENT/surgery for fresh trach or TIF', nodeId: 'trach-disposition-ent' },
+    { text: 'Confirm placement with capnography after replacement', nodeId: 'trach-confirm-placement' },
+];
 export const TRACH_EMERGENCY_NODES = [
     // =====================================================================
     // MODULE 1: EMERGENCY ALGORITHM (NTSP Green Algorithm)

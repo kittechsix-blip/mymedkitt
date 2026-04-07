@@ -4,11 +4,22 @@
 // Based on KDOQI Guidelines and nephrology literature
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 interface Citation {
   num: number;
   text: string;
 }
+
+export const HD_EMERGENCIES_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Use AEIOU framework to triage HD emergencies', nodeId: 'hd-start' },
+  { text: 'Check potassium immediately and get EKG if elevated', nodeId: 'hd-hyperkalemia' },
+  { text: 'Give calcium gluconate 1-2g IV for severe hyperkalemia with EKG changes', nodeId: 'hd-hyperkalemia' },
+  { text: 'Arrange emergent dialysis for refractory hyperkalemia, pulmonary edema, or uremic emergency', nodeId: 'hd-emergent-dialysis' },
+  { text: 'Preserve vascular access at all costs (avoid blood draws, BP cuffs on access arm)', nodeId: 'hd-access' },
+  { text: 'Give antibiotics early for suspected catheter-related sepsis', nodeId: 'hd-infection' },
+  { text: 'Call nephrology early for all HD-related emergencies', nodeId: 'hd-start' },
+];
 
 export const HD_EMERGENCIES_NODES: DecisionNode[] = [
   // ===================================================================

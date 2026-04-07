@@ -5,6 +5,17 @@
 // ===================================================================
 // Module 1 — Initial Assessment
 // ===================================================================
+export const HEMOPHILIA_CRITICAL_ACTIONS = [
+    { text: 'Factor VIII or IX to 100% BEFORE imaging for head trauma/ICH - do NOT delay', nodeId: 'hemo-ich' },
+    { text: 'ICH mortality 20% in hemophilia - Factor FVIII 50 U/kg or FIX 100 U/kg STAT', nodeId: 'hemo-ich' },
+    { text: 'Hemophilia A dosing: 1 U/kg raises FVIII by 2% | Hemophilia B: 1 U/kg raises FIX by 1%', nodeId: 'hemo-factor-dosing' },
+    { text: 'Iliopsoas hemorrhage: 80% factor level × 3 days, then >50% - strict bed rest, MRI imaging', nodeId: 'hemo-iliopsoas' },
+    { text: 'Antifibrinolytics (aminocaproic acid/TXA) CONTRAINDICATED with hematuria - risk of renal thrombi', nodeId: 'hemo-hematuria' },
+    { text: 'High-titer inhibitor (≥5 BU/mL): factor will NOT work - use FEIBA or rFVIIa bypassing agents', nodeId: 'hemo-high-inhibitor' },
+    { text: 'FEIBA max 200 units/kg/day (thrombotic risk) | rFVIIa 90 mcg/kg q2-3h', nodeId: 'hemo-high-inhibitor' },
+    { text: '30% of hemophilia cases are de novo mutations with no family history', nodeId: 'hemo-neonates' },
+    { text: 'DDAVP for mild hemophilia A only (raises FVIII 2-6 fold) - NOT effective for hemophilia B', nodeId: 'hemo-mild-a' },
+];
 export const HEMOPHILIA_NODES = [
     {
         id: 'hemo-start',

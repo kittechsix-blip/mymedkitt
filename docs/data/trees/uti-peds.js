@@ -2,6 +2,15 @@
 // Initial Assessment → Screening & Workup → Antibiotic Management → Imaging → Disposition & Follow-up
 // 5 modules: Initial Assessment → Screening & Workup → Antibiotic Management → Imaging → Disposition & Follow-up
 // 28 nodes total.
+export const UTI_PEDS_CRITICAL_ACTIONS = [
+    { text: 'Catheter or SPA specimen required for culture - bag specimens NOT acceptable for culture', nodeId: 'uti-ua-cath' },
+    { text: 'Neonatal UTI (<48 wks PMA): ceftazidime + ampicillin IV for Pseudomonas + Enterococcus coverage', nodeId: 'uti-neo-abx' },
+    { text: 'Febrile infant 2-24 months: ceftriaxone 50 mg/kg IM/IV empiric (covers E. coli, GBS)', nodeId: 'uti-infant-abx' },
+    { text: 'VCUG only needed after first febrile UTI if renal ultrasound shows abnormalities', nodeId: 'uti-imaging-results' },
+    { text: 'Uncircumcised males: screen ALL febrile males for UTI', nodeId: 'uti-infant-screen' },
+    { text: 'Do NOT repeat urine culture for test of cure unless Candida or ESBL organism', nodeId: 'uti-neo-dx' },
+    { text: 'Prophylactic antibiotics NOT routinely recommended post first febrile UTI', nodeId: 'uti-prophylaxis' },
+];
 export const UTI_PEDS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

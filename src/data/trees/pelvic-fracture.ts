@@ -10,6 +10,17 @@ interface Citation {
   text: string;
 }
 
+export const PELVIC_FRACTURE_CRITICAL_ACTIONS = [
+  { text: 'Apply pelvic binder immediately at level of greater trochanters (NOT iliac crests)', nodeId: 'pelvic-unstable' },
+  { text: 'TXA 1g IV load within 3h of injury, then 1g over 8h - mortality benefit', nodeId: 'pelvic-unstable' },
+  { text: 'FAST positive + unstable → OR for laparotomy (NOT angiography)', nodeId: 'pelvic-fast-positive' },
+  { text: 'Do NOT rock pelvis to assess stability - may dislodge clots and worsen bleeding', nodeId: 'pelvic-start' },
+  { text: 'Retrograde urethrogram BEFORE Foley if blood at meatus, high-riding prostate, or scrotal hematoma', nodeId: 'pelvic-urethral-injury' },
+  { text: 'Intraperitoneal bladder rupture requires surgical repair - extraperitoneal can be managed with Foley', nodeId: 'pelvic-intraperitoneal-bladder' },
+  { text: '90% of pelvic hemorrhage is venous (binder + resuscitation), 10% arterial (needs angio)', nodeId: 'pelvic-fast-negative' },
+  { text: 'REBOA Zone 3 buys time but max occlusion 60-90 min - bridge to PPP or angio', nodeId: 'pelvic-reboa' },
+];
+
 export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
 
   // =====================================================================

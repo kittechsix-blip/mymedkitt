@@ -5,6 +5,16 @@
 
 import type { DecisionNode } from '../../models/types.js';
 
+export const PNEUMOTHORAX_CRITICAL_ACTIONS = [
+  { text: 'Needle decompression at 2nd ICS MCL if tension PTX (hypotension + JVD + tracheal deviation)', nodeId: 'needle-decompression' },
+  { text: 'Chest tube (28-32Fr) for PTX ≥3cm at apex or any symptomatic PTX', nodeId: 'large-ptx' },
+  { text: 'Lung point on POCUS is pathognomonic for PTX (100% specificity)', nodeId: 'confirmed-ptx' },
+  { text: 'Normal lung sliding, B-lines, or seashore sign excludes PTX (NPV >99%)', nodeId: 'normal-findings' },
+  { text: 'Do NOT delay needle decompression for imaging if tension suspected', nodeId: 'needle-decompression' },
+  { text: 'Occult PTX on POCUS requires chest tube if positive pressure ventilation planned', nodeId: 'trauma-efast' },
+  { text: 'Small PTX (<3cm): high-flow O2 increases reabsorption rate from 2%/day to 4%/day', nodeId: 'small-ptx' },
+];
+
 export const PNEUMOTHORAX_NODES: DecisionNode[] = [
 
   // =====================================================================

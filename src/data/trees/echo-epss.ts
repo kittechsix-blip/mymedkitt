@@ -7,6 +7,15 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const ECHO_EPSS_CRITICAL_ACTIONS = [
+  { text: 'Obtain PLAX view: probe at 3rd-4th ICS, marker to left hip', nodeId: 'epss-plax' },
+  { text: 'Activate M-mode through mitral valve leaflet tips', nodeId: 'epss-mmode' },
+  { text: 'Measure gap between E-point and septum', nodeId: 'epss-measure' },
+  { text: 'EPSS >7 mm suggests LVEF <50%', nodeId: 'epss-interpret' },
+  { text: 'EPSS >10 mm indicates severe dysfunction', nodeId: 'epss-high' },
+  { text: 'Invalid in AR, MS, HCM, non-sinus rhythms', nodeId: 'epss-start' },
+];
+
 export const ECHO_EPSS_NODES: DecisionNode[] = [
 
   // =====================================================================

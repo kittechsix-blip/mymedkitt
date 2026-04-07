@@ -6,6 +6,16 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const VP_SHUNT_CRITICAL_ACTIONS = [
+  { text: 'Normal imaging does NOT exclude shunt malfunction', nodeId: 'vps-imaging' },
+  { text: 'CT head + shunt series for suspected malfunction', nodeId: 'vps-imaging' },
+  { text: 'Compare ventricular size to prior imaging', nodeId: 'vps-imaging-interpretation' },
+  { text: 'Emergent ICP reduction if herniation signs present', nodeId: 'vps-emergent-icp' },
+  { text: 'Neurosurgery consult for all suspected malfunctions', nodeId: 'vps-nsgy-consult' },
+  { text: 'Blood cultures before antibiotics for suspected infection', nodeId: 'vps-infection-workup' },
+  { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap' },
+];
+
 export const VP_SHUNT_NODES: DecisionNode[] = [
 
   // =====================================================================

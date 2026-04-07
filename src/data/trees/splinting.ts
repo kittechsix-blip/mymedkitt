@@ -7,6 +7,15 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const SPLINTING_CRITICAL_ACTIONS = [
+  { text: 'Pre-splint neurovascular exam and documentation', nodeId: 'splint-start' },
+  { text: 'Reduce angulated fractures before splinting', nodeId: 'splint-start' },
+  { text: 'Apply stockinette, then padding (avoid wrinkles)', nodeId: 'splint-start' },
+  { text: 'Mold splint with flat palms, not fingertips', nodeId: 'splint-start' },
+  { text: 'Post-splint neurovascular check and documentation', nodeId: 'splint-start' },
+  { text: 'Position of function: wrist extended, MCP flexed', nodeId: 'splint-start' },
+];
+
 export const SPLINTING_NODES: DecisionNode[] = [
 
   // =====================================================================

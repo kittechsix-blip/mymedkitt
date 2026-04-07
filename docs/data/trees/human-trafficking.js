@@ -2,6 +2,16 @@
 // ED recognition, safe screening, trauma-informed care, resources
 // 6 modules: Recognition → Red Flags → Safe Screening → Response → Resources → Documentation
 // ~24 nodes total.
+export const HUMAN_TRAFFICKING_CRITICAL_ACTIONS = [
+    { text: 'Separate patient from companion for private screening', nodeId: 'ht-separate' },
+    { text: 'Screen using trauma-informed questions', nodeId: 'ht-screen' },
+    { text: 'Call National Human Trafficking Hotline: 1-888-373-7888', nodeId: 'ht-activate' },
+    { text: 'Activate social work and hospital trafficking response team', nodeId: 'ht-activate' },
+    { text: 'Mandatory CPS/law enforcement reporting for minors', nodeId: 'ht-minor' },
+    { text: 'Do NOT release minor to suspected trafficker', nodeId: 'ht-minor-dispo' },
+    { text: 'Document using patient\'s own words in quotes', nodeId: 'ht-documentation' },
+    { text: 'Provide resources discretely if patient not ready', nodeId: 'ht-not-ready' },
+];
 export const HUMAN_TRAFFICKING_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

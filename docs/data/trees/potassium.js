@@ -2,6 +2,17 @@
 // Initial Assessment → HyperK Severity → Severe HyperK Rx → K+ Elimination → HypoK Management → Periodic Paralysis
 // 6 modules: Initial Assessment → HyperK Severity → Severe HyperK Rx → K+ Elimination → HypoK Management → Periodic Paralysis
 // 24 nodes total.
+export const POTASSIUM_CRITICAL_ACTIONS = [
+    { text: 'Calcium 3g IV (or CaCl 1g central) over 10 min for ECG changes - onset <5 min', nodeId: 'k-hyper-calcium' },
+    { text: 'Regular insulin 5 units IV + D10W 500 mL over 4h (less hypoglycemia than D50W)', nodeId: 'k-hyper-insulin' },
+    { text: 'Terbutaline 0.5 mg SQ preferred over albuterol (logistically superior)', nodeId: 'k-hyper-beta2' },
+    { text: 'Isotonic bicarbonate (3 amp in 1L D5W) AS resuscitative fluid if bicarb <22', nodeId: 'k-hyper-bicarb' },
+    { text: 'Diuretic + replace losses with LR - simple, scalable, effective kaliuresis', nodeId: 'k-hyper-step3' },
+    { text: 'K+ <2.5 or life-threatening: KCl 5-10 mEq over 15-30 min with cardiac monitoring', nodeId: 'k-hypo-severe' },
+    { text: 'Always check and correct magnesium - 50% of hypoK have concurrent hypoMg', nodeId: 'k-hypo-severe' },
+    { text: 'HypoPP: oral KCl 1 mEq/kg (transcellular shift, NOT true depletion - avoid aggressive IV)', nodeId: 'k-hypopp-acute' },
+    { text: 'AVOID normal saline in hyperkalemia (worsens K+ via chloride-bicarb exchange)', nodeId: 'k-hyper-step2' },
+];
 export const POTASSIUM_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

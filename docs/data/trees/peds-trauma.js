@@ -3,6 +3,17 @@
 // Initial Assessment -> Hemorrhage Control -> Head Trauma -> Thoracoabdominal -> Orthopedic -> Disposition
 // Sources: ATLS 10th ed, PECARN, AAP, Pediatric Surgery journals
 // 32 nodes total
+export const PEDS_TRAUMA_CRITICAL_ACTIONS = [
+    { text: 'Obtain weight using Broselow tape or formula', nodeId: 'peds-trauma-weight' },
+    { text: '20 mL/kg NS/LR bolus if hemodynamically unstable', nodeId: 'peds-trauma-hemorrhage' },
+    { text: 'Intubate if GCS ≤8 or inability to protect airway', nodeId: 'peds-trauma-severe-tbi' },
+    { text: 'Activate massive transfusion protocol if hemorrhage', nodeId: 'peds-trauma-transfusion' },
+    { text: 'CT head for moderate-severe TBI (GCS <14)', nodeId: 'peds-trauma-head-severity' },
+    { text: 'Apply PECARN criteria for mild TBI imaging decisions', nodeId: 'peds-trauma-pecarn' },
+    { text: 'CPS mandatory reporting for suspected NAT', nodeId: 'peds-trauma-nat-report' },
+    { text: 'Transfer to pediatric trauma center if meets criteria', nodeId: 'peds-trauma-transfer' },
+    { text: 'TXA 15 mg/kg within 3 hours of injury', nodeId: 'peds-trauma-transfusion' },
+];
 export const PEDS_TRAUMA_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

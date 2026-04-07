@@ -3,6 +3,15 @@
 // Emergency Medicine Practice, Jan 2019, Vol 21 No 1
 // Initial Assessment → Ectopic → Miscarriage → NVP/Hyperemesis → Nonobstetric → Disposition
 // 6 modules, 33 nodes total.
+export const FIRST_TRIMESTER_CRITICAL_ACTIONS = [
+    { text: 'Pregnancy test in ALL reproductive-age women with abd pain/bleeding', nodeId: 'ft-start' },
+    { text: 'Unstable patient: assume ruptured ectopic until proven otherwise', nodeId: 'ft-unstable-ectopic' },
+    { text: 'Type and screen, activate MTP if hemorrhage', nodeId: 'ft-unstable-ectopic' },
+    { text: 'STAT transvaginal ultrasound for all pregnant patients with bleeding', nodeId: 'ft-stable-branch' },
+    { text: 'Quantitative hCG + ultrasound to localize pregnancy', nodeId: 'ft-ectopic-workup' },
+    { text: 'Methotrexate for stable ectopic (no free fluid, hCG <5000)', nodeId: 'ft-ectopic-mtx' },
+    { text: 'Rho(D) immune globulin for all Rh-negative patients with bleeding', nodeId: 'ft-miscarriage-complete' },
+];
 export const FIRST_TRIMESTER_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

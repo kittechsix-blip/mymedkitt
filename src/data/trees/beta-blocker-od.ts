@@ -458,6 +458,19 @@ export const BETA_BLOCKER_OD_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const BETA_BLOCKER_OD_CRITICAL_ACTIONS = [
+  { text: 'Glucagon 3-10 mg IV bolus, then 2-10 mg/hr infusion (bypasses blocked beta receptor)', nodeId: 'bb-glucagon' },
+  { text: 'Calcium chloride 1g IV or calcium gluconate 3g IV for inotropic support', nodeId: 'bb-calcium' },
+  { text: 'High-dose insulin euglycemia therapy (HIET): 1 unit/kg bolus, then 1-10 units/kg/hr infusion', nodeId: 'bb-hiet-dosing' },
+  { text: 'Co-administer dextrose (D10/D25 infusion) and monitor glucose q15-30 min during HIET', nodeId: 'bb-hiet-monitoring' },
+  { text: 'Aggressive potassium repletion during HIET (target K+ 3.5-4.5, may need 10-40 mEq/hr)', nodeId: 'bb-hiet-monitoring' },
+  { text: 'High-dose vasopressors often required (norepinephrine 0.5-3 mcg/kg/min, epinephrine)', nodeId: 'bb-pressors' },
+  { text: 'Intralipid 20%: 1.5 mL/kg bolus for refractory shock from lipophilic agents (propranolol, carvedilol)', nodeId: 'bb-lipid' },
+  { text: 'Sodium bicarbonate 1-2 mEq/kg IV for propranolol with QRS >100ms (treat like TCA)', nodeId: 'bb-propranolol' },
+  { text: 'Magnesium 2g IV for sotalol-induced QT prolongation/Torsades + overdrive pacing', nodeId: 'bb-sotalol' },
+  { text: 'Consider hemodialysis for atenolol/nadolol (hydrophilic, dialyzable)', nodeId: 'bb-dialysis' },
+];
+
 export const BETA_BLOCKER_OD_CITATIONS: Citation[] = [
   { num: 1, text: 'Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):531-546.' },
   { num: 2, text: 'Levine M, Hoffman RS, Lavergne V, et al. Systematic review of the effect of intravenous lipid emulsion therapy for non-local anesthetic toxicity. Clin Toxicol. 2016;54(3):194-221.' },

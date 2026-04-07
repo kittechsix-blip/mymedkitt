@@ -318,6 +318,21 @@ export const HFNC_MODULE_LABELS = [
 ];
 export const HFNC_NODE_COUNT = 23;
 // =====================================================================
+// CRITICAL ACTIONS
+// =====================================================================
+export const HFNC_CRITICAL_ACTIONS = [
+    { text: 'Starting flow: 30-60 LPM (start at 40 LPM, titrate to comfort)', nodeId: 'hfnc-settings' },
+    { text: 'FiO₂: start at minimum needed for SpO₂ 92-96% (avoid excessive oxygen)', nodeId: 'hfnc-fio2' },
+    { text: 'ROX Index q2h: (SpO₂/FiO₂) / RR. ROX <3.85 at 2-6h predicts HFNC failure', nodeId: 'hfnc-rox' },
+    { text: 'Escalate to NIV/intubation if ROX declining, RR >30, work of breathing worsening, or pH <7.25', nodeId: 'hfnc-escalation' },
+    { text: 'Best evidence for hypoxemic respiratory failure (COVID, pneumonia, ARDS)', nodeId: 'hfnc-indications' },
+    { text: 'Avoid in pure hypercarbic respiratory failure (COPD, obesity hypoventilation) - use NIV instead', nodeId: 'hfnc-contraindications' },
+    { text: 'Monitor for aerosol generation risk - use airborne precautions for COVID/TB', nodeId: 'hfnc-infection-control' },
+    { text: 'Wean by decreasing FiO₂ first, then flow (wean to 30 LPM before transitioning to NC)', nodeId: 'hfnc-weaning' },
+    { text: 'Early intubation for impending respiratory arrest - do NOT delay for "HFNC trial"', nodeId: 'hfnc-intubation' },
+    { text: 'ROX Index >4.88 at 12h predicts HFNC success', nodeId: 'hfnc-rox-success' },
+];
+// =====================================================================
 // CITATIONS
 // =====================================================================
 export const HFNC_CITATIONS = [

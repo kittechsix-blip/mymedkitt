@@ -2,6 +2,16 @@
 // EMCrit/IBCC-focused: Phenotypes → Hemodynamics → Inotropes/Vasopressors → MCS → Cath Lab
 // 6 modules: Recognition → Hemodynamic Assessment → Initial Stabilization → Pharmacologic Support → Mechanical Support → Disposition
 // ~28 nodes total.
+export const CARDIOGENIC_SHOCK_CRITICAL_ACTIONS = [
+    { text: 'Recognize the SHOCK spiral: hypotension worsens coronary perfusion', nodeId: 'cs-start' },
+    { text: 'Obtain bedside echo to assess EF, wall motion, and valves', nodeId: 'cs-hemodynamics' },
+    { text: 'Avoid fluid boluses if POCUS shows B-lines or hyperdynamic LV', nodeId: 'cs-fluids' },
+    { text: 'Start inotropes early: dobutamine for true cardiogenic shock', nodeId: 'cs-inotropes' },
+    { text: 'Add vasopressor (norepinephrine) if MAP <65 despite inotropes', nodeId: 'cs-vasopressors' },
+    { text: 'Activate cath lab immediately for STEMI-related shock', nodeId: 'cs-cath-lab' },
+    { text: 'Consider mechanical circulatory support (IABP, Impella, ECMO) early', nodeId: 'cs-mcs' },
+    { text: 'ICU admission required for all cardiogenic shock patients', nodeId: 'cs-dispo' },
+];
 export const CARDIOGENIC_SHOCK_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

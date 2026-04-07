@@ -6,6 +6,16 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const ADRENAL_INSUFFICIENCY_CRITICAL_ACTIONS = [
+  { text: 'Hydrocortisone 100 mg IV immediately for crisis', nodeId: 'ai-crisis-steroid' },
+  { text: '1L NS bolus, add D5 if hypoglycemic', nodeId: 'ai-crisis-fluids' },
+  { text: 'Draw cortisol and ACTH BEFORE steroids if possible', nodeId: 'ai-crisis-fluids' },
+  { text: 'Random cortisol <18 mcg/dL during stress suggests AI', nodeId: 'ai-crisis-fluids' },
+  { text: 'Stress dosing: 2-3x maintenance dose for illness', nodeId: 'ai-stress-dose' },
+  { text: 'Cosyntropin 250 mcg for diagnostic testing', nodeId: 'ai-cosyntropin' },
+  { text: 'Admit all adrenal crises to ICU', nodeId: 'ai-crisis-admit' },
+];
+
 export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
 
   // =====================================================================

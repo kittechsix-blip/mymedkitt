@@ -27,6 +27,16 @@ export const EAR_FB_CITATIONS: Citation[] = [
   { num: 8, text: 'Olajuyin O, Olatunya OS, Olajide TG. Aural foreign body extraction in children: A double-edged sword. Pan Afr Med J. 2015;20:186.' },
 ];
 
+export const EAR_FB_CRITICAL_ACTIONS = [
+  { text: 'Button battery = EMERGENCY - remove immediately, do NOT irrigate', nodeId: 'earfb-battery' },
+  { text: 'Kill live insect with mineral oil before extraction', nodeId: 'earfb-insect-kill' },
+  { text: 'Do NOT irrigate soft/organic material (cotton, foam, seeds) - they swell', nodeId: 'earfb-tech-soft' },
+  { text: 'Limit to 1-2 attempts - each attempt causes more edema and bleeding', nodeId: 'earfb-failed' },
+  { text: 'First attempt has highest success rate (65-78%) - plan technique carefully', nodeId: 'earfb-start' },
+  { text: 'Suspected TM perforation - do NOT attempt removal, refer to ENT', nodeId: 'earfb-tm-perf' },
+  { text: 'Object pushed deeper or against TM - STOP, refer to ENT', nodeId: 'earfb-comp-deeper' },
+] as const;
+
 export const EAR_FB_NODES: DecisionNode[] = [
 
   // =====================================================================

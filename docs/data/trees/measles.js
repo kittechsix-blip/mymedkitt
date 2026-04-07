@@ -333,6 +333,21 @@ export const MEASLES_MODULE_LABELS = [
     'Disposition',
 ];
 // -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+export const MEASLES_CRITICAL_ACTIONS = [
+    { text: 'AIRBORNE ISOLATION immediately if measles suspected (R0 = 12-18, extremely contagious)', nodeId: 'measles-isolation' },
+    { text: 'Classic triad: Cough, Coryza, Conjunctivitis (3 Cs) + fever + maculopapular rash', nodeId: 'measles-start' },
+    { text: 'Koplik spots (white spots on buccal mucosa) are pathognomonic, appear 1-2 days before rash', nodeId: 'measles-diagnosis' },
+    { text: 'Measles IgM and PCR (throat/nasopharyngeal swab) for confirmation', nodeId: 'measles-workup' },
+    { text: 'Vitamin A 200,000 IU (100,000 IU if <1 year) PO x2 doses (reduces mortality)', nodeId: 'measles-vitamin-a' },
+    { text: 'Notify Public Health Department immediately (reportable disease)', nodeId: 'measles-reporting' },
+    { text: 'Post-exposure prophylaxis: MMR within 72h OR IVIG within 6 days for high-risk contacts', nodeId: 'measles-pep' },
+    { text: 'Contagious 4 days before to 4 days after rash onset (isolate until day 4 of rash)', nodeId: 'measles-isolation' },
+    { text: 'Monitor for complications: pneumonia (most common), encephalitis, subacute sclerosing panencephalitis', nodeId: 'measles-complications' },
+    { text: 'Healthcare workers must have documented immunity (2 MMR doses or positive titers)', nodeId: 'measles-hcw-exposure' },
+];
+// -------------------------------------------------------------------
 // Evidence Citations
 // -------------------------------------------------------------------
 export const MEASLES_CITATIONS = [

@@ -2,6 +2,16 @@
 // Based on ACOG Committee Opinion 557 (2013, reaffirmed 2019) + Mendez ER Lecture
 // Stability → Workup → PALM-COEIN → Treatment → Disposition
 // 5 modules, 21 nodes total.
+export const AUB_CRITICAL_ACTIONS = [
+    { text: 'IV conjugated estrogen 25mg q4-6h x24h MUST be followed by progestin to prevent rebound bleeding', nodeId: 'aub-rx-estrogen' },
+    { text: 'Hemodynamically unstable AUB - tranexamic acid 1g IV + conjugated estrogen 25mg IV STAT', nodeId: 'aub-unstable' },
+    { text: 'Intrauterine balloon tamponade (26F Foley with 30mL saline) if GYN unavailable', nodeId: 'aub-unstable' },
+    { text: 'Endometrial biopsy required for age ≥45 or <45 with obesity/PCOS/unopposed estrogen', nodeId: 'aub-imaging' },
+    { text: 'Up to 20% of heavy menstrual bleeding has underlying coagulopathy (vWD most common)', nodeId: 'aub-coagulopathy' },
+    { text: 'AVOID NSAIDs if coagulopathy - impair platelet aggregation', nodeId: 'aub-coagulopathy' },
+    { text: 'All hormonal treatments contraindicated in pregnancy - check hCG first', nodeId: 'aub-pregnancy' },
+    { text: 'Ovulatory dysfunction (AUB-O) is most common cause - treat with OCPs or MPA', nodeId: 'aub-classify' },
+];
 export const AUB_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

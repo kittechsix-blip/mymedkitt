@@ -2,6 +2,17 @@
 // Initial Assessment → Device Evaluation → Complication Triage → Complication Management → Cardiac Arrest → Disposition
 // 6 modules: Initial Assessment → Device Evaluation → Complication Triage → Complication Management → Cardiac Arrest → Disposition
 // 31 nodes total.
+export const VAD_CRITICAL_ACTIONS = [
+    { text: 'No pulse is NORMAL in continuous-flow LVADs - use Doppler for MAP (not standard BP cuff)', nodeId: 'vad-start' },
+    { text: 'Contact VAD coordinator IMMEDIATELY for all ED visits - every visit, no exceptions', nodeId: 'vad-coordinator' },
+    { text: 'Listen for pump hum - absence = pump failure = critical emergency', nodeId: 'vad-cabcde' },
+    { text: 'Do NOT clamp the outflow graft - causes acute aortic regurgitation and cardiogenic shock', nodeId: 'vad-no-hum' },
+    { text: 'Target MAP 70-90 mmHg - higher increases stroke risk, lower risks hypoperfusion', nodeId: 'vad-map-check' },
+    { text: 'Low flow (<3 L/min): check for hypovolemia, RV failure, or obstruction', nodeId: 'vad-low-flow' },
+    { text: 'High power (>9-10 W) or power spikes: suspect pump thrombosis - activate VAD team immediately', nodeId: 'vad-pump-thrombosis' },
+    { text: 'CPR in VAD arrest: use standard CPR - pump may or may not work, compressions provide flow even if pump off', nodeId: 'vad-arrest-cpr' },
+    { text: 'Defibrillation safe - use standard ACLS, shock VAD patients in VF/pVT', nodeId: 'vad-arrest-cpr' },
+];
 export const VAD_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

@@ -1,6 +1,18 @@
 // MedKitt — Pneumothorax Management & Chest Tube Consult
 // Indications → Preparation → Insertion → Management
 // Cross-listed: Trauma/Surgery + Procedures. 4 modules, 40 nodes.
+export const CHEST_TUBE_CRITICAL_ACTIONS = [
+    { text: 'Tension PTX - needle decompression at 4th-5th ICS anterior axillary line (higher success than 2nd ICS)', nodeId: 'ctube-tension' },
+    { text: 'NEVER use trocars for chest tube insertion - unacceptable visceral injury rate', nodeId: 'ctube-tube-insert' },
+    { text: 'Traumatic PTX <35mm on CT - observation safe in stable patients not on PPV', nodeId: 'ctube-traumatic-observe' },
+    { text: 'Insert over SUPERIOR rib edge to avoid neurovascular bundle (though it runs variably)', nodeId: 'ctube-anatomy' },
+    { text: 'DO NOT strip chest tubes - generates -300 to -400 cmH2O (dangerous) with no evidence of benefit', nodeId: 'ctube-air-leak' },
+    { text: 'Massive hemothorax: >1500 mL initial OR >200 mL/hr x 2-4 hours = emergent thoracotomy', nodeId: 'ctube-massive-hemothorax' },
+    { text: 'Pigtail catheters (10-14 Fr) equivalent to large-bore for simple PTX - less pain, fewer complications', nodeId: 'ctube-pigtail' },
+    { text: 'Primary spontaneous PTX: conservative management non-inferior (Brown NEJM 2020 - 98.5% resolution at 8 weeks)', nodeId: 'ctube-psp-conservative' },
+    { text: 'MAC spin test for kinking - rotate tube 180° clockwise and release (spins back = kinked)', nodeId: 'ctube-confirm' },
+    { text: 'DO NOT clamp functioning chest tube without attending approval - tension PTX risk with ongoing air leak', nodeId: 'ctube-air-leak' },
+];
 export const CHEST_TUBE_NODES = [
     // =====================================================================
     // MODULE 1: INDICATIONS

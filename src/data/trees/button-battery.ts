@@ -23,6 +23,15 @@ export const BUTTON_BATTERY_CITATIONS = [
   { num: 8, text: 'CPSC Safety Standard for Button Cell Batteries. Federal Register. 2024.' },
 ];
 
+export const BUTTON_BATTERY_CRITICAL_ACTIONS = [
+  { text: 'STAT X-ray AP + lateral: head/neck/chest/abdomen', nodeId: 'battery-start' },
+  { text: 'Battery hotline: 1-800-498-8666', nodeId: 'battery-start' },
+  { text: 'Esophageal battery = emergent endoscopy within 2 hours', nodeId: 'battery-esophageal' },
+  { text: 'Honey 10 mL q10min (up to 6 doses) en route to OR', nodeId: 'battery-honey' },
+  { text: 'Gastric battery >20mm or symptomatic = endoscopy', nodeId: 'battery-gastric' },
+  { text: 'Monitor for 28 days post-removal for AEF', nodeId: 'battery-complications' },
+];
+
 export const BUTTON_BATTERY_NODES: DecisionNode[] = [
   // ─────────────────────────────────────────────────────────────────────────────
   // MODULE 0 — Initial Assessment

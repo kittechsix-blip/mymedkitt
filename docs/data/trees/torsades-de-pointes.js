@@ -2,6 +2,15 @@
 // Recognition & stability → Acquired vs Congenital → Acute Mg Protocol → Drug/Electrolyte Correction → Disposition.
 // 5 modules: Recognition → Etiology → Acute Management → Drug Correction → Disposition
 // 25 nodes total.
+export const TORSADES_DE_POINTES_CRITICAL_ACTIONS = [
+    { text: 'Pulseless TdP: unsynchronized defibrillation', nodeId: 'tdp-pulseless' },
+    { text: 'Do NOT give amiodarone - it prolongs QT', nodeId: 'tdp-pulseless' },
+    { text: 'Magnesium 2-4 g IV over 15 min (first-line)', nodeId: 'tdp-mg-protocol' },
+    { text: 'Stop ALL QT-prolonging drugs immediately', nodeId: 'tdp-drug-stop' },
+    { text: 'Correct hypokalemia to >4.5, hypomagnesemia to >2', nodeId: 'tdp-lytes' },
+    { text: 'Overdrive pacing at 100-120 bpm if refractory', nodeId: 'tdp-pacing' },
+    { text: 'Isoproterenol infusion if no pacing available', nodeId: 'tdp-isoproterenol' },
+];
 export const TORSADES_DE_POINTES_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION & STABILITY

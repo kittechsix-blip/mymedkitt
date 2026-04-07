@@ -439,6 +439,21 @@ export const CAUSTIC_INGESTION_MODULE_LABELS = [
     'Disposition',
 ];
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+export const CAUSTIC_INGESTION_CRITICAL_ACTIONS = [
+    { text: 'Do NOT induce vomiting, use activated charcoal, or give neutralizing agents (worsens injury)', nodeId: 'caustic-contraindications' },
+    { text: 'Airway burns require early intubation BEFORE edema progresses (have difficult airway cart ready)', nodeId: 'caustic-airway' },
+    { text: 'NPO immediately - do NOT give oral fluids (risk of perforation)', nodeId: 'caustic-npo' },
+    { text: 'GI consult for endoscopy within 12-24h (NOT emergent unless perforation suspected)', nodeId: 'caustic-endoscopy' },
+    { text: 'Alkali (lye, drain cleaners) causes liquefactive necrosis - deeper, more severe injury', nodeId: 'caustic-alkali' },
+    { text: 'Acid (toilet bowl cleaners, rust removers) causes coagulative necrosis - esophagus may be spared', nodeId: 'caustic-acid' },
+    { text: 'CXR/AXR for free air or pneumomediastinum (perforation)', nodeId: 'caustic-imaging' },
+    { text: 'Steroids and antibiotics NOT recommended (no mortality benefit)', nodeId: 'caustic-steroids' },
+    { text: 'Zargar classification: Grade 0-1 = discharge, Grade 2a-3 = admit for endoscopy and monitoring', nodeId: 'caustic-zargar' },
+    { text: 'Asymptomatic patients with intentional ingestion still need endoscopy (30% have significant injury)', nodeId: 'caustic-asymptomatic' },
+];
 // Evidence Citations
 // -------------------------------------------------------------------
 export const CAUSTIC_INGESTION_CITATIONS = [

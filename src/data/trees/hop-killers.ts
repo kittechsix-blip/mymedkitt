@@ -10,6 +10,17 @@ export interface Citation {
   text: string;
 }
 
+export const HOP_KILLERS_CRITICAL_ACTIONS = [
+  { text: 'Screen all critical intubations for HOp killers', nodeId: 'hop-screen' },
+  { text: 'Hypotension: push-dose pressors + ketamine induction', nodeId: 'hop-hypotension-intro' },
+  { text: 'Hypoxemia: preoxygenate with PEEP, consider awake intubation', nodeId: 'hop-hypoxia-intro' },
+  { text: 'Severe acidosis: delay intubation if possible, correct first', nodeId: 'hop-acidosis-intro' },
+  { text: 'RV failure: avoid PPV, maintain preload and BP', nodeId: 'hop-rv-intro' },
+  { text: 'Hyperkalemia: avoid sux, treat before intubation', nodeId: 'hop-hyperkalemia-intro' },
+  { text: 'Elevated ICP: head up, normocarbia, prevent hypotension', nodeId: 'hop-icp-intro' },
+  { text: 'Prepare for arrest in all physiologically difficult airways', nodeId: 'hop-start' },
+];
+
 export const HOP_KILLERS_NODES: DecisionNode[] = [
 
   // =====================================================================

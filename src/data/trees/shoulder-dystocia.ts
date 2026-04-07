@@ -7,6 +7,16 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const SHOULDER_DYSTOCIA_CRITICAL_ACTIONS = [
+  { text: 'Call for help - announce "shoulder dystocia"', nodeId: 'sd-initial' },
+  { text: 'Start the clock - designate timekeeper', nodeId: 'sd-initial' },
+  { text: 'McRoberts maneuver + suprapubic pressure', nodeId: 'sd-mcroberts' },
+  { text: 'Wood\'s screw rotational maneuver', nodeId: 'sd-rotational' },
+  { text: 'Deliver posterior arm', nodeId: 'sd-posterior-arm' },
+  { text: 'Zavanelli + emergency C-section if all else fails', nodeId: 'sd-last-resort' },
+  { text: 'Call pediatrics/NICU for neonatal resuscitation', nodeId: 'sd-initial' },
+];
+
 export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
 
   // =====================================================================

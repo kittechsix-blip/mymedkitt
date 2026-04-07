@@ -6,6 +6,15 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const LARYNGEAL_TRAUMA_CRITICAL_ACTIONS = [
+  { text: 'Do NOT paralyze - RSI is contraindicated', nodeId: 'larynx-start' },
+  { text: 'Awake tracheostomy preferred over intubation', nodeId: 'larynx-unstable-airway' },
+  { text: 'ENT/surgery consult immediately for hard signs', nodeId: 'larynx-unstable-airway' },
+  { text: 'CT neck with contrast for stable patients', nodeId: 'larynx-imaging' },
+  { text: 'Flexible laryngoscopy by ENT for all suspected injuries', nodeId: 'larynx-stable-management' },
+  { text: 'Schaefer-Fuhrman grading guides surgical timing', nodeId: 'larynx-classification' },
+];
+
 export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
 
   // =====================================================================

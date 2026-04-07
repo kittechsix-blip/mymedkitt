@@ -2,6 +2,15 @@
 // Indications -> Push-Dose Epinephrine -> Push-Dose Phenylephrine -> Push-Dose Norepinephrine -> Troubleshooting & Escalation
 // 5 modules: Indications & Patient Selection -> Push-Dose Epinephrine -> Push-Dose Phenylephrine -> Push-Dose Norepinephrine -> Troubleshooting & Escalation
 // 24 nodes total.
+export const PUSH_DOSE_PRESSORS_CRITICAL_ACTIONS = [
+    { text: 'Push-dose epi preferred over phenylephrine for most scenarios', nodeId: 'pdp-start' },
+    { text: 'Epinephrine: 10 mcg (1 mL of 10 mcg/mL) IV push q2-5min', nodeId: 'pdp-epi-dosing' },
+    { text: 'Phenylephrine: 100 mcg (1 mL of 100 mcg/mL) IV push q2-5min', nodeId: 'pdp-phenyl-dosing' },
+    { text: 'Mix 1 mL cardiac epi (1:10,000) + 9 mL NS = 100 mcg/10 mL', nodeId: 'pdp-epi-mixing' },
+    { text: 'Do NOT give 1 mg epi to patient with pulse', nodeId: 'pdp-start' },
+    { text: 'Label syringes clearly to prevent dosing errors', nodeId: 'pdp-safety' },
+    { text: 'Bridge to continuous infusion within 10-15 minutes', nodeId: 'pdp-troubleshooting' },
+];
 export const PUSH_DOSE_PRESSORS_NODES = [
     // =====================================================================
     // MODULE 1: INDICATIONS & PATIENT SELECTION

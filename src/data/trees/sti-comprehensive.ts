@@ -475,7 +475,7 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Syphilis Treatment',
-    body: '**[Syphilis Consult](#/tree/syphilis) - for full workup**\n\n| Stage | Treatment |\n|-------|----------|\n| **Primary/Secondary/Early Latent** | Benzathine PCN G 2.4 MU IM x1 |\n| **Late Latent/Tertiary** | Benzathine PCN G 2.4 MU IM weekly x 3 weeks |\n| **Neurosyphilis** | Aqueous PCN G 18-24 MU/day IV x 10-14 days |\n\n**PCN allergy (non-pregnant):**\n- Early: Doxycycline 100mg PO BID x 14 days\n- Late: Doxycycline 100mg PO BID x 28 days\n- Neurosyphilis: MUST desensitize - no alternative\n\n**Pregnancy:** Penicillin is the ONLY effective treatment. Desensitize if allergic.\n\n**Bicillin shortage (2024-2026):**\n- FDA authorized imports: Lentocilin, Extencilline\n- Prioritize penicillin for pregnant patients\n\n**Jarisch-Herxheimer reaction:** Febrile reaction within 24h of treatment. Supportive care. NOT an allergy.',
+    body: '**[Syphilis Consult](#/tree/syphilis) - for full workup**\n\n| Stage | Treatment |\n|-------|----------|\n| **Primary/Secondary/Early Latent** | Benzathine PCN G 2.4 MU IM x1 |\n| **Late Latent/Tertiary** | Benzathine PCN G 2.4 MU IM weekly x 3 weeks |\n| **Neurosyphilis** | Aqueous PCN G 18-24 MU/day IV x 10-14 days |\n\n**PCN allergy (non-pregnant):**\n- Early: Doxycycline 100mg PO BID x 14 days\n- Late: Doxycycline 100mg PO BID x 28 days\n- Neurosyphilis: MUST desensitize - no alternative\n\n**Pregnancy:** Penicillin is the ONLY effective treatment. Desensitize if allergic.\n\n**Bicillin shortage (2024-2026):**\n- FDA authorized imports: Lentocilin, Extencilline\n- Prioritize penicillin for pregnant patients\n\n**Jarisch-Herxheimer retext:** Febrile reaction within 24h of treatment. Supportive care. NOT an allergy.',
     recommendation: 'Follow-up serology at 6 and 12 months (24 months for late latent). Fourfold decline expected by 6-12 months. Evaluate for neurosyphilis if failure to decline.',
     treatment: {
       firstLine: {
@@ -997,6 +997,19 @@ export const STI_COMPREHENSIVE_MODULE_LABELS: string[] = [
   'Pelvic & Regional Syndromes',
   'Special Populations',
   'Partner Management & Follow-up',
+];
+
+export const STI_COMPREHENSIVE_CRITICAL_ACTIONS = [
+  { text: 'Gonorrhea + Chlamydia co-treatment always: ceftriaxone 500 mg IM + doxycycline 100 mg PO BID x 7 days', nodeId: 'sti-gc-ctx' },
+  { text: 'DoxyPEP 200 mg within 72h post-exposure reduces STI risk 60-80% (MSM, transgender women)', nodeId: 'sti-doxypep' },
+  { text: 'Syphilis treatment: benzathine PCN 2.4 million units IM (primary/secondary/early latent)', nodeId: 'sti-syphilis-treatment' },
+  { text: 'Disseminated GC: ceftriaxone 1-2g IV q24h x 7 days (endocarditis/meningitis = 4 weeks)', nodeId: 'sti-dgc' },
+  { text: 'BV treatment: metronidazole 500 mg PO BID x 7 days (avoid alcohol)', nodeId: 'sti-bv-treatment' },
+  { text: 'Pelvic Inflammatory Disease (PID): ceftriaxone 500 mg IM + doxycycline 100 mg BID x 14 days + metronidazole 500 mg BID x 14 days', nodeId: 'sti-pid' },
+  { text: 'Expedited Partner Therapy (EPT) legal in most states - give patient meds for partner(s)', nodeId: 'sti-ept' },
+  { text: 'Test of cure for pharyngeal GC at 2 weeks, rectal GC at 3 months, syphilis at 6 months', nodeId: 'sti-test-cure' },
+  { text: 'HIV/Hep B/C screening with all STI diagnoses', nodeId: 'sti-additional-testing' },
+  { text: 'Pregnancy test mandatory before treatment (doxycycline teratogenic)', nodeId: 'sti-pregnancy' },
 ];
 
 export const STI_COMPREHENSIVE_CITATIONS: Citation[] = [

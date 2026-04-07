@@ -2,6 +2,13 @@
 // Structured Mental Status Exam walkthrough for documentation.
 // 6 modules: Start → Appearance & Behavior → Speech & Mood/Affect → Thought Process & Content → Perceptions & Cognition → Insight, Judgment & Risk
 // 7 nodes total.
+export const PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS = [
+    { text: 'Active SI with plan and intent = high risk requiring admission or safety plan', nodeId: 'mse-insight-judgment-risk' },
+    { text: 'Command auditory hallucinations to harm self/others = immediate safety concern', nodeId: 'mse-perceptions-cognition' },
+    { text: 'Document suicidal ideation as passive, active without plan, or active with plan', nodeId: 'mse-thought-process-content' },
+    { text: 'Quote patient\'s exact words for mood (subjective) vs your observation for affect (objective)', nodeId: 'mse-speech-mood' },
+    { text: 'Assess insight and judgment - poor insight may require involuntary commitment', nodeId: 'mse-insight-judgment-risk' },
+];
 export const PSYCHIATRY_ASSESSMENT_NODES = [
     // =====================================================================
     // MODULE 0: START

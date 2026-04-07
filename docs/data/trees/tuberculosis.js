@@ -2,6 +2,16 @@
 // ED evaluation, diagnosis, drug-susceptible treatment, latent TB, drug-resistant TB, HIV-TB co-infection
 // 6 modules: ED Evaluation → Diagnosis → Drug-Susceptible Treatment → Latent TB → Drug-Resistant TB → HIV-TB
 // 34 nodes total.
+export const TUBERCULOSIS_CRITICAL_ACTIONS = [
+    { text: 'Antibiotics + Dexamethasone within 1 HOUR for suspected TB meningitis - do NOT delay for LP/CT', nodeId: 'tb-confirmed' },
+    { text: 'Airborne isolation (negative pressure, N95) for active cough + risk factors or positive AFB smear', nodeId: 'tb-isolation' },
+    { text: 'RIPE regimen for drug-susceptible TB: INH + RIF + PZA + EMB × 2 months, then INH + RIF × 4 months', nodeId: 'tb-ripe' },
+    { text: 'Add Ampicillin 2g q4h if age ≥50, pregnant, or immunocompromised (Listeria coverage)', nodeId: 'tb-confirmed' },
+    { text: 'Positive NAA with risk factors = sufficient for presumptive treatment - do NOT delay', nodeId: 'tb-afb-naa-result' },
+    { text: 'Collect 3 sputum specimens at least 8h apart (including 1 early morning) - induced sputum if needed', nodeId: 'tb-sputum-collection' },
+    { text: 'Drug susceptibility testing on ALL initial isolates - resistance changes regimen entirely', nodeId: 'tb-culture' },
+    { text: 'MDR-TB (INH + RIF resistant): BPaL/BPaLM regimen × 26 weeks with weekly CBC and monthly ECG', nodeId: 'tb-bpal' },
+];
 export const TUBERCULOSIS_NODES = [
     // ===================================================================
     // MODULE 1: ED Evaluation & Initial Assessment

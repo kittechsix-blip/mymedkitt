@@ -6,7 +6,19 @@
 // 27 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from '../../services/tree-service.js';
+
+export const OPIOID_WITHDRAWAL_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Calculate COWS score to objectively assess withdrawal severity', nodeId: 'ow-recognize' },
+  { text: 'Initiate buprenorphine when COWS ≥8 (moderate withdrawal)', nodeId: 'ow-bup-dosing' },
+  { text: 'Give buprenorphine 4mg SL, reassess in 60-90min, repeat up to 16-24mg day 1', nodeId: 'ow-bup-dosing' },
+  { text: 'Avoid precipitated withdrawal: wait for withdrawal signs before first dose', nodeId: 'ow-precipitated' },
+  { text: 'Provide non-opioid adjuncts: ondansetron, loperamide, clonidine, NSAIDs', nodeId: 'ow-adjuncts' },
+  { text: 'Arrange MOUD follow-up within 72 hours before discharge', nodeId: 'ow-dispo' },
+  { text: 'Prescribe 3-day buprenorphine bridge prescription to outpatient provider', nodeId: 'ow-dispo' },
+  { text: 'Provide naloxone kit and overdose prevention education', nodeId: 'ow-dispo' },
+];
 
 export const OPIOID_WITHDRAWAL_NODES: DecisionNode[] = [
 

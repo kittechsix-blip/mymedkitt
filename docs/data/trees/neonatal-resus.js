@@ -3,6 +3,18 @@
 // 6 modules: Preparation & Initial Assessment → Initial Steps (Golden 30s) → PPV → Chest Compressions → Medications & Vascular Access → Post-Resuscitation
 // 25 nodes total.
 // Source: 2025 AHA/AAP Guidelines, NRP 8th ed (AAP 2021), 2020 ILCOR Consensus, McFarlin (EMR 2019)
+export const NEONATAL_RESUS_CRITICAL_ACTIONS = [
+    { text: 'Radiant warmer ON, prewarmed, dry and stimulate', nodeId: 'nrp-initial-steps' },
+    { text: 'PPV is the most important intervention - start if apnea/gasping or HR <100', nodeId: 'nrp-ppv' },
+    { text: 'Do NOT delay PPV for meconium suctioning (2025 guideline)', nodeId: 'nrp-meconium' },
+    { text: 'Monitor SpO2 on RIGHT hand/wrist (preductal) - target 60-65% at 1 min', nodeId: 'nrp-spo2-targets' },
+    { text: 'Use T-piece resuscitator (preferred) - PIP 20-25 cm, rate 40-60/min', nodeId: 'nrp-ppv' },
+    { text: 'Apply MR SOPA corrective steps if PPV ineffective', nodeId: 'nrp-corrective' },
+    { text: 'CPR if HR <60 despite effective PPV - 3:1 ratio (90 compressions + 30 breaths)', nodeId: 'nrp-cpr' },
+    { text: 'Epinephrine 0.01-0.03 mg/kg IV if HR <60 after 60 sec CPR', nodeId: 'nrp-epinephrine' },
+    { text: 'Establish UVC early for IV access (2-4 cm depth only)', nodeId: 'nrp-uvc' },
+    { text: 'Maintain normothermia 36.5-37.5°C (both hypo- and hyperthermia worsen outcomes)', nodeId: 'nrp-postresus' },
+];
 export const NEONATAL_RESUS_NODES = [
     // =====================================================================
     // MODULE 1: PREPARATION & INITIAL ASSESSMENT

@@ -4,11 +4,23 @@
 // ~50 nodes total
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 interface Citation {
   num: number;
   text: string;
 }
+
+export const DIABETES_MANAGEMENT_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Treat severe hypoglycemia (<40 or symptomatic) with D50 25-50mL IV', nodeId: 'dm-hypo-treatment' },
+  { text: 'Check for DKA/HHS: glucose, VBG/ABG, ketones, anion gap', nodeId: 'dm-dka-screening' },
+  { text: 'Start insulin infusion (0.1 units/kg/hr) for DKA after fluids', nodeId: 'dm-dka-insulin' },
+  { text: 'Give aggressive fluid resuscitation for HHS (often 6-10L deficit)', nodeId: 'dm-hhs-fluids' },
+  { text: 'Correct sodium slowly (<10-12 mEq/L per 24h) to avoid osmotic demyelination', nodeId: 'dm-hhs-treatment' },
+  { text: 'Continue basal insulin even if NPO (prevents rebound hyperglycemia)', nodeId: 'dm-inpatient-npo' },
+  { text: 'Use correctional insulin with sliding scale for inpatient management', nodeId: 'dm-inpatient-correction' },
+  { text: 'Bridge to outpatient diabetes care with medication reconciliation', nodeId: 'dm-discharge' },
+];
 
 export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
 
@@ -21,7 +33,7 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Diabetes Management - Initial Assessment',
-    body: '[Diabetes Management Steps Summary](#/info/dm-summary) - quick reference.\n\n**Approach to the diabetic patient:**\n\n**Immediate triage based on glucose level:**\n- Glucose <70 mg/dL: [Hypoglycemia pathway](#/node/dm-hypo-severity)\n- Glucose 70-180 mg/dL: Assess for DKA/HHS risk factors\n- Glucose 180-300 mg/dL: Mild hyperglycemia, assess context\n- Glucose >300 mg/dL: Evaluate for DKA/HHS\n- Glucose >600 mg/dL: High suspicion for HHS\n\n**Critical questions:**\n1. Type 1 vs Type 2 diabetes?\n2. On insulin? What type (pump, basal-bolus, premixed)?\n3. Recent illness, missed doses, new medications?\n4. Last oral intake? NPO status?\n\n**Red flags requiring immediate action:**\n- Altered mental status\n- Kussmaul respirations (deep, rapid breathing)\n- Fruity breath odor (ketones)\n- Signs of dehydration/shock',
+    body: '[Diabetes Management Steps Summary](#/info/dm-summary) - quick reference.\n\n**Approach to the diabetic patient:**\n\n**Immediate triage based on glucose level:**\n- Glucose <70 mg/dL: [Hypoglycemia pathway](#/node/dm-hypo-severity)\n- Glucose 70-180 mg/dL: Assess for DKA/HHS risk factors\n- Glucose 180-300 mg/dL: Mild hyperglycemia, assess context\n- Glucose >300 mg/dL: Evaluate for DKA/HHS\n- Glucose >600 mg/dL: High suspicion for HHS\n\n**Critical questions:**\n1. Type 1 vs Type 2 diabetes?\n2. On insulin? What type (pump, basal-bolus, premixed)?\n3. Recent illness, missed doses, new medications?\n4. Last oral intake? NPO status?\n\n**Red flags requiring immediate text:**\n- Altered mental status\n- Kussmaul respirations (deep, rapid breathing)\n- Fruity breath odor (ketones)\n- Signs of dehydration/shock',
     citation: [1, 2],
     next: 'dm-glucose-triage',
   },

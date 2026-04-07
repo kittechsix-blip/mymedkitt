@@ -2,6 +2,17 @@
 // Stepwise approach to acquiring the 5 essential emergency echocardiography views.
 // 5 modules: Overview → PLAX → PSAX → Apical 4-Chamber → Subcostal/IVC
 // Based on ACEP Emergency Echocardiography Guidelines and ASE Recommendations.
+export const ECHO_VIEWS_CRITICAL_ACTIONS = [
+    { text: 'PLAX view: "3 L\'s" rule - Parasternal Long axis should have Left ventricle on Left side of screen', nodeId: 'echo-plax' },
+    { text: 'D-sign (septal flattening) in PSAX: pressure overload during systole = PE, volume overload during diastole', nodeId: 'echo-psax-assess' },
+    { text: 'McConnell sign: RV free wall akinesis WITH apical sparing - highly specific for acute PE', nodeId: 'echo-a4c-assess' },
+    { text: 'A4C RV:LV ratio: RV = LV suggests moderate dilation, RV > LV suggests severe dilation (massive PE)', nodeId: 'echo-a4c-assess' },
+    { text: 'Subcostal view BEST for visualizing pericardial effusion (liver provides acoustic window)', nodeId: 'echo-subcostal-assess' },
+    { text: 'Tamponade physiology: RA systolic collapse (sensitive), RV diastolic collapse (specific)', nodeId: 'echo-subcostal-assess' },
+    { text: 'IVC interpretation: <2.1 cm with >50% collapse = low CVP (volume responsive)', nodeId: 'echo-ivc' },
+    { text: 'IVC interpretation: >2.1 cm with <50% collapse = elevated CVP (volume overload/RV failure)', nodeId: 'echo-ivc' },
+    { text: 'EPSS measurement for quantitative LV function assessment when visual estimation insufficient', nodeId: 'echo-summary' },
+];
 export const ECHO_VIEWS_NODES = [
     // =====================================================================
     // MODULE 1: OVERVIEW
@@ -113,7 +124,7 @@ export const ECHO_VIEWS_NODES = [
         type: 'result',
         module: 5,
         title: 'Emergency Echo Summary',
-        body: '**FOCUSED CARDIAC ULTRASOUND CHECKLIST:**\n\n☐ **Pericardial effusion** — PLAX, subcostal (best)\n☐ **LV function** — PLAX, PSAX, A4C (visual + EPSS)\n☐ **RV size/strain** — A4C (RV:LV ratio, McConnell sign)\n☐ **Volume status** — IVC (diameter + collapse)\n\n**Red flags requiring immediate action:**\n• Large pericardial effusion with tamponade physiology\n• Severely dilated RV with hypotension (massive PE)\n• Severely reduced LV function with cardiogenic shock\n• Plethoric IVC with signs of volume overload\n\n**For quantitative LV assessment:**\n• [EPSS Measurement](#/info/epss-measurement)\n• [Echo-EPSS Consult](#/consult/echo-epss)',
+        body: '**FOCUSED CARDIAC ULTRASOUND CHECKLIST:**\n\n☐ **Pericardial effusion** — PLAX, subcostal (best)\n☐ **LV function** — PLAX, PSAX, A4C (visual + EPSS)\n☐ **RV size/strain** — A4C (RV:LV ratio, McConnell sign)\n☐ **Volume status** — IVC (diameter + collapse)\n\n**Red flags requiring immediate text:**\n• Large pericardial effusion with tamponade physiology\n• Severely dilated RV with hypotension (massive PE)\n• Severely reduced LV function with cardiogenic shock\n• Plethoric IVC with signs of volume overload\n\n**For quantitative LV assessment:**\n• [EPSS Measurement](#/info/epss-measurement)\n• [Echo-EPSS Consult](#/consult/echo-epss)',
         recommendation: 'Complete 5-view focused cardiac ultrasound. Integrate findings with clinical presentation. Formal echocardiography recommended for complex cases or when findings significantly change management.',
         confidence: 'recommended',
         citation: [1, 2, 3, 4, 5],

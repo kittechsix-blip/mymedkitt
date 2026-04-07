@@ -358,6 +358,18 @@ export const ACUTE_PANCREATITIS_MODULE_LABELS = [
     'Intervention',
     'Disposition',
 ];
+export const ACUTE_PANCREATITIS_CRITICAL_ACTIONS = [
+    { text: 'Diagnosis requires 2 of 3: characteristic pain, lipase >3x ULN, imaging findings', nodeId: 'ap-start' },
+    { text: 'BISAP score ≥3 or Ranson ≥3 = severe pancreatitis (ICU candidate)', nodeId: 'ap-bisap' },
+    { text: 'MODERATE fluid resuscitation: LR 5-10 mL/kg/hr (NOT aggressive 20 mL/kg - increases mortality)', nodeId: 'ap-fluids-moderate' },
+    { text: 'Goal-directed resuscitation: reassess q6h, target UOP 0.5-1 mL/kg/hr, HR <120, MAP 65-85', nodeId: 'ap-fluids-moderate' },
+    { text: 'Early feeding within 24h if tolerated (oral > enteral > parenteral)', nodeId: 'ap-nutrition' },
+    { text: 'Antibiotics only for infected necrosis or cholangitis (NOT prophylactic)', nodeId: 'ap-antibiotics' },
+    { text: 'ERCP within 24h for acute cholangitis with gallstone pancreatitis (NOT routine)', nodeId: 'ap-ercp-urgent' },
+    { text: 'Cholecystectomy same admission for gallstone pancreatitis if mild (NOT delayed)', nodeId: 'ap-cholecystectomy' },
+    { text: 'Avoid early CT (<72h) unless uncertain diagnosis - CECT after 72h for necrosis assessment', nodeId: 'ap-imaging-timing' },
+    { text: 'ICU for SIRS ≥2 criteria, organ failure, or BISAP ≥3', nodeId: 'ap-icu-admit' },
+];
 export const ACUTE_PANCREATITIS_CITATIONS = [
     { num: 1, text: 'Tenner S, et al. American College of Gastroenterology Guideline: Management of Acute Pancreatitis. Am J Gastroenterol. 2024;119(3):419-437.' },
     { num: 2, text: 'Crockett SD, et al. American Gastroenterological Association Institute Guideline on Initial Management of Acute Pancreatitis. Gastroenterology. 2018;154(4):1096-1101.' },

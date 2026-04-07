@@ -2,6 +2,16 @@
 // ED recognition, workup, empiric treatment, CSF interpretation, and disposition
 // 5 modules: Recognition → Workup → Empiric Treatment → CSF & Tailored Therapy → Disposition
 // 28 nodes total.
+export const MENINGITIS_CRITICAL_ACTIONS = [
+    { text: 'Antibiotics + Dexamethasone within 1 HOUR of suspicion - do NOT delay for LP or CT', nodeId: 'mening-empiric-timing' },
+    { text: 'Dexamethasone 0.15 mg/kg WITH or 15-20 min BEFORE first antibiotic dose', nodeId: 'mening-steroids' },
+    { text: 'Start antibiotics BEFORE CT if any delay expected - culture sensitivity drops but PCR remains reliable', nodeId: 'mening-abx-then-ct' },
+    { text: 'Acyclovir 10 mg/kg q8h for ALL encephalitis features - HSV mortality 70% → 9% with treatment', nodeId: 'mening-encephalitis-pathway' },
+    { text: 'CT before LP only if: GCS ≤12, papilledema, focal deficits, seizures, or severe immunocompromise', nodeId: 'mening-ct-decision' },
+    { text: 'Add Ampicillin 2g q4h if age ≥50, pregnant, or immunocompromised (Listeria coverage)', nodeId: 'mening-tx-expanded' },
+    { text: 'Absence of ALL 4 (headache, fever, stiff neck, AMS) effectively rules out meningitis (99% NPV)', nodeId: 'mening-clinical' },
+    { text: 'STOP dexamethasone immediately if Listeria or Cryptococcus identified (worse outcomes)', nodeId: 'mening-steroids' },
+];
 export const MENINGITIS_NODES = [
     // ===================================================================
     // MODULE 1: Recognition & Assessment

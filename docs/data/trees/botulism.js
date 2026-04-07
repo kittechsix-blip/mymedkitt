@@ -322,6 +322,21 @@ export const BOTULISM_MODULE_LABELS = [
     'Prognosis',
 ];
 // -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+export const BOTULISM_CRITICAL_ACTIONS = [
+    { text: 'Classic "4 Ds": Diplopia, Dysarthria, Dysphagia, Descending paralysis (afebrile, clear sensorium)', nodeId: 'bot-start' },
+    { text: 'Contact State Health Department and CDC IMMEDIATELY for antitoxin (1-770-488-7100)', nodeId: 'bot-antitoxin-contact' },
+    { text: 'Heptavalent equine antitoxin for adults (BabyBIG for infant botulism)', nodeId: 'bot-antitoxin-adult' },
+    { text: 'Give antitoxin ASAP - halts progression but does NOT reverse paralysis', nodeId: 'bot-antitoxin-timing' },
+    { text: 'Intubate early for vital capacity <30% or declining respiratory status (prolonged mechanical ventilation common)', nodeId: 'bot-airway' },
+    { text: 'Do NOT give aminoglycosides (potentiate neuromuscular blockade)', nodeId: 'bot-supportive' },
+    { text: 'Food history critical: home-canned foods, fermented fish, honey in infants', nodeId: 'bot-foodborne' },
+    { text: 'EMG showing incremental response to high-frequency stimulation (not always present)', nodeId: 'bot-emg' },
+    { text: 'Differentiate from Guillain-Barré (ascending, CSF protein ↑) and myasthenia gravis (fluctuating, Tensilon test +)', nodeId: 'bot-gbs-diff' },
+    { text: 'Median recovery time 2-3 months; some require ventilation for months', nodeId: 'bot-prognosis' },
+];
+// -------------------------------------------------------------------
 // Evidence Citations
 // -------------------------------------------------------------------
 export const BOTULISM_CITATIONS = [

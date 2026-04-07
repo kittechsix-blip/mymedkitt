@@ -538,6 +538,21 @@ export const ACID_BASE_MODULE_LABELS = [
     'Treatment & Disposition',
 ];
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+export const ACID_BASE_CRITICAL_ACTIONS = [
+    { text: 'Stepwise approach: pH → PCO2 compensation → Anion gap → Delta-delta → Osmolar gap', nodeId: 'ab-traditional' },
+    { text: 'Anion gap = Na - (Cl + HCO3), normal 8-12. Elevated AG >12 = GOLDMARK mnemonic', nodeId: 'ab-ag' },
+    { text: 'Delta-delta ratio = ΔAG / ΔHCO3. Ratio <1 = non-AG acidosis, 1-2 = pure AG acidosis, >2 = concurrent metabolic alkalosis', nodeId: 'ab-delta-delta' },
+    { text: 'Winter formula for respiratory compensation: Expected PCO2 = 1.5(HCO3) + 8 ± 2', nodeId: 'ab-primary' },
+    { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-osmolar-gap' },
+    { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-uag' },
+    { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <40 = acidosis, >40 = alkalosis', nodeId: 'ab-stewart' },
+    { text: 'Treat underlying cause, NOT the pH (bicarbonate rarely indicated except DKA, severe metabolic acidosis pH <7.1)', nodeId: 'ab-treatment' },
+    { text: 'VBG sufficient for most ED acid-base assessment (pH 0.04 lower than ABG)', nodeId: 'ab-start' },
+    { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed' },
+];
 // Citations (evidence base)
 // -------------------------------------------------------------------
 export const ACID_BASE_CITATIONS = [

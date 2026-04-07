@@ -4,7 +4,20 @@
 // 28 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Assess difficult airway with LEMON criteria before induction', nodeId: 'dab-lemon' },
+  { text: 'Have surgical airway kit at bedside before paralysis', nodeId: 'dab-start' },
+  { text: 'Use video laryngoscopy for all intubations (14.3% improvement in first-pass)', nodeId: 'dab-start' },
+  { text: 'Use bougie-first technique for predicted difficult airways (98% vs 87% success)', nodeId: 'dab-bougie-technique' },
+  { text: 'Feel for tracheal clicks as bougie advances along tracheal rings', nodeId: 'dab-bougie-technique' },
+  { text: 'Hold bougie in place while loading ETT over it', nodeId: 'dab-bougie-technique' },
+  { text: 'Confirm placement with waveform capnography', nodeId: 'dab-confirmation' },
+  { text: 'Call for help early if failed attempt - do not exceed 3 attempts', nodeId: 'dab-failed-airway' },
+  { text: 'Perform emergency cricothyrotomy if cannot ventilate/cannot intubate', nodeId: 'dab-surgical-airway' },
+];
 
 export const DIFFICULT_AIRWAY_BOUGIE_NODES: DecisionNode[] = [
 

@@ -3,6 +3,16 @@
 // 6 modules: Recognition -> Classification -> Pathophysiology -> ED Management -> Complications -> Disposition
 // Based on ASRM 2023, RCOG Green-top 2016, SOGC 2011, and Cochrane reviews
 // ~28 nodes total
+export const OHSS_CRITICAL_ACTIONS = [
+    { text: 'DO NOT give diuretics for OHSS ascites - worsens hemoconcentration', nodeId: 'ohss-why-no-diuretics' },
+    { text: 'VTE prophylaxis required for all moderate-severe OHSS (enoxaparin 40mg SC daily)', nodeId: 'ohss-vte-prophylaxis' },
+    { text: 'Hematocrit >45% = severe OHSS requiring hospitalization', nodeId: 'ohss-severe' },
+    { text: 'Therapeutic paracentesis if respiratory compromise or tense ascites', nodeId: 'ohss-paracentesis' },
+    { text: 'Ovarian torsion risk 6-16% in severe OHSS - high suspicion for unilateral pain', nodeId: 'ohss-torsion' },
+    { text: 'Albumin 25% 50-100g IV for severe hemoconcentration or with large-volume paracentesis', nodeId: 'ohss-fluid-management' },
+    { text: 'Tranexamic acid 1g IV for acute hemorrhage stabilization', nodeId: 'ohss-unstable' },
+    { text: 'Monitor pH - rising pH after stopping irrigation means chemical still present', nodeId: 'chemburn-ph-check' },
+];
 export const OHSS_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

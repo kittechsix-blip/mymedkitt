@@ -10,6 +10,17 @@ interface Citation {
   text: string;
 }
 
+export const HIV_CRITICAL_ACTIONS = [
+  { text: 'Assess CD4 count and viral load status', nodeId: 'hiv-status-assess' },
+  { text: 'Do NOT stop HAART without HIV specialist guidance', nodeId: 'hiv-immunocompromised-disposition' },
+  { text: 'Start TMP-SMX prophylaxis if CD4 <200', nodeId: 'hiv-immunocompromised-disposition' },
+  { text: 'PJP treatment: TMP-SMX 15-20 mg/kg/day + prednisone', nodeId: 'hiv-pulm-oi' },
+  { text: 'Same-day ART initiation for new HIV diagnosis', nodeId: 'hiv-new-diagnosis' },
+  { text: 'PEP must start within 72 hours of exposure', nodeId: 'hiv-pep-overview' },
+  { text: 'Screen for HBV co-infection before stopping ARVs', nodeId: 'hiv-hbv-caution' },
+  { text: 'Urgent ID consult for suspected opportunistic infections', nodeId: 'hiv-cns-oi' },
+];
+
 export const HIV_NODES: DecisionNode[] = [
 
   // =====================================================================

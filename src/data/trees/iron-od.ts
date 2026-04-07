@@ -6,6 +6,18 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const IRON_OD_CRITICAL_ACTIONS = [
+  { text: 'Calculate ELEMENTAL iron dose (ferrous sulfate 20%, gluconate 12%, fumarate 33%)', nodeId: 'iron-start' },
+  { text: 'Serum iron level at 4-6 hours post-ingestion (peak absorption)', nodeId: 'iron-workup' },
+  { text: 'Activated charcoal does NOT work for iron - use whole bowel irrigation if pills visible', nodeId: 'iron-gi-decon' },
+  { text: 'Deferoxamine if iron >500 mcg/dL OR severe symptoms (shock, acidosis, AMS)', nodeId: 'iron-deferoxamine' },
+  { text: 'Start deferoxamine at 5 mg/kg/hr IV, titrate to 15 mg/kg/hr (max 6g/24h)', nodeId: 'iron-dfo-dosing' },
+  { text: 'Do NOT rely on "vin rose" urine to guide therapy (unreliable)', nodeId: 'iron-dfo-duration' },
+  { text: 'Continue deferoxamine until clinical improvement AND iron normalized AND acidosis resolved', nodeId: 'iron-dfo-duration' },
+  { text: 'Monitor for Stage 2 "latent phase" - apparent improvement while toxicity progresses', nodeId: 'iron-stages' },
+  { text: 'Whole bowel irrigation: GoLYTELY 500 mL/hr peds, 1-2 L/hr adults until clear effluent', nodeId: 'iron-wbi' },
+];
+
 export const IRON_OD_NODES: DecisionNode[] = [
 
   // =====================================================================

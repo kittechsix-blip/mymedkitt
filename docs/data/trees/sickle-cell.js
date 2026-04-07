@@ -5,6 +5,18 @@
 // ============================================================
 // MODULE 1: Presentation & Triage
 // ============================================================
+export const SICKLE_CELL_CRITICAL_ACTIONS = [
+    { text: 'Fever ≥38.5°C in SCD = MEDICAL EMERGENCY - ceftriaxone 50mg/kg IV within 1 hour', nodeId: 'scd-fever-start' },
+    { text: 'VOC pain goal: analgesia within 30 min of triage - intranasal fentanyl BEFORE IV access', nodeId: 'scd-voc-triage' },
+    { text: 'Splenic sequestration - transfuse in 5mL/kg aliquots, DO NOT exceed Hgb 8 g/dL (reverse sequestration risk)', nodeId: 'scd-splenic-treatment' },
+    { text: 'Acute chest syndrome = new infiltrate + fever/respiratory symptoms - ceftriaxone + azithromycin', nodeId: 'scd-acs-start' },
+    { text: 'SCD stroke - exchange transfusion within 2 hours targeting HbS <30%', nodeId: 'scd-stroke-treatment' },
+    { text: 'AVOID corticosteroids in SCD - risk of rebound pain and stroke', nodeId: 'scd-voc-iv' },
+    { text: 'Incentive spirometry q2h prevents ACS - start in ED for all VOC patients', nodeId: 'scd-voc-iv' },
+    { text: 'Priapism >4 hours - corporal aspiration with phenylephrine to prevent permanent dysfunction', nodeId: 'scd-priapism-route' },
+    { text: 'ECAST (sickle trait exertional collapse) - aggressive IV fluids targeting UOP 200-300 mL/hr', nodeId: 'scd-sct-ecast' },
+    { text: 'Sub-dissociative ketamine 0.1-0.3 mg/kg IV for refractory VOC pain (ASH-recommended)', nodeId: 'scd-voc-refractory' },
+];
 export const SICKLE_CELL_NODES = [
     {
         id: 'scd-start',

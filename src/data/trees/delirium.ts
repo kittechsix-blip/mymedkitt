@@ -4,7 +4,18 @@
 // 30 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const DELIRIUM_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Ensure scene safety: remove sharps, adequate staffing, security if needed', nodeId: 'del-safety' },
+  { text: 'Use verbal de-escalation techniques (AAEP Project BETA guidelines)', nodeId: 'del-safety' },
+  { text: 'Search for reversible causes: hypoxia, hypoglycemia, infection, medications', nodeId: 'del-workup' },
+  { text: 'Prioritize non-pharmacological interventions: reorientation, family presence, quiet environment', nodeId: 'del-nonpharm' },
+  { text: 'Use haloperidol or olanzapine for severe agitation (avoid benzodiazepines)', nodeId: 'del-pharm' },
+  { text: 'Avoid physical restraints unless imminent danger (worsens delirium)', nodeId: 'del-restraints' },
+  { text: 'Monitor for QTc prolongation if using antipsychotics', nodeId: 'del-monitoring' },
+];
 
 export const DELIRIUM_NODES: DecisionNode[] = [
 

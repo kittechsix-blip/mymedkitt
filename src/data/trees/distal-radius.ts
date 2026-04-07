@@ -5,7 +5,20 @@
 // Source: Dr. Arun Sayal (EM Cases), AO Foundation, 11 hematoma block peer-reviewed references
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const DISTAL_RADIUS_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Assess "Obtain & Maintain": Is position acceptable? Will fracture shift?', nodeId: 'dr-start' },
+  { text: 'Perform hematoma block with 5-10mL 1% lidocaine (aspirate dark blood first)', nodeId: 'dr-hema-block' },
+  { text: 'Apply TRACTION first to disimpact fragments before reducing', nodeId: 'dr-traction' },
+  { text: 'Exaggerate deformity to unlock periosteum, then push palmar + ulnar deviate', nodeId: 'dr-reduce' },
+  { text: 'Use PLASTER (not fiberglass) with 10 layers, minimal padding at fracture', nodeId: 'dr-apply' },
+  { text: 'Mold with FLAT HANDS into oval cross-section, do NOT squeeze or move during setting', nodeId: 'dr-mold' },
+  { text: 'Position wrist at 10° flexion with ulnar deviation, keep elbow/MCPs/thumb FREE', nodeId: 'dr-position' },
+  { text: 'Verify post-reduction: 2nd metacarpal line parallel to radius, cast index <0.80', nodeId: 'dr-post-xray' },
+  { text: 'Ortho follow-up in 5-7 days for repeat films', nodeId: 'dr-dispo' },
+];
 
 export const DISTAL_RADIUS_NODES: DecisionNode[] = [
 
@@ -230,7 +243,7 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       {
         src: 'images/distal-radius/finger-trap-traction.png',
         alt: 'Illustration showing finger trap traction setup with hand suspended from finger traps and countertraction weights at elbow for sustained traction during distal radius fracture reduction',
-        caption: 'Traction: Finger traps with countertraction for sustained pull. Frees hands for reduction and splinting.',
+        caption: 'Trtext: Finger traps with countertraction for sustained pull. Frees hands for reduction and splinting.',
       },
     ],
     next: 'dr-reduce',

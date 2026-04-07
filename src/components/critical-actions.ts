@@ -12,7 +12,7 @@ let modalOpen = false;
  */
 export function renderCriticalActionsButton(
   container: HTMLElement,
-  criticalActions: CriticalAction[] | undefined,
+  criticalActions: readonly CriticalAction[] | undefined,
   controller: ConsultFlowController,
   onJump: () => void
 ): void {
@@ -34,7 +34,7 @@ export function renderCriticalActionsButton(
  * Open the Critical Actions modal overlay
  */
 function openCriticalActionsModal(
-  criticalActions: CriticalAction[],
+  criticalActions: readonly CriticalAction[],
   controller: ConsultFlowController,
   onJump: () => void
 ): void {

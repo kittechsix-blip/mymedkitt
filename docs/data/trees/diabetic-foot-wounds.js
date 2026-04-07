@@ -3,6 +3,18 @@
 // Initial Assessment -> Infection Severity -> Vascular Assessment -> Osteomyelitis Workup -> Charcot Foot -> Treatment & Disposition
 // Sources: IWGDF/IDSA 2023, SVS WIfI, AAFP guidelines
 // 52 nodes total
+export const DIABETIC_FOOT_WOUNDS_CRITICAL_ACTIONS = [
+    { text: 'ABI unreliable in diabetics - use TBI (toe-brachial index) instead', nodeId: 'dfw-vascular-intro' },
+    { text: '25% of acute Charcot is misdiagnosed as cellulitis/gout/DVT - red hot swollen foot WITHOUT wound', nodeId: 'dfw-charcot-intro' },
+    { text: 'Do NOT treat uninfected ulcers with antibiotics - even if osteomyelitis on imaging', nodeId: 'dfw-infection-intro' },
+    { text: 'Probe-to-bone positive + positive X-ray = osteomyelitis very likely (>90%)', nodeId: 'dfw-osteo-combined' },
+    { text: 'Wet gangrene + sepsis = EMERGENT surgical amputation', nodeId: 'dfw-wet-gangrene' },
+    { text: 'Necrotizing fasciitis - LRINEC ≥6 suspicious, do NOT delay surgery for imaging', nodeId: 'dfw-nec-fasc' },
+    { text: 'Offloading (total contact cast) as important as antibiotics - 90% healing rate', nodeId: 'dfw-offloading' },
+    { text: 'IDSA Grade 4 (severe) = vancomycin + piperacillin-tazobactam, STAT surgical consult', nodeId: 'dfw-grade4-severe' },
+    { text: 'Acute Charcot requires strict non-weight-bearing immediately - permanent deformity risk', nodeId: 'dfw-charcot-management' },
+    { text: 'TcPO2 <25 mmHg or toe pressure <30 mmHg = healing unlikely without revascularization', nodeId: 'dfw-vascular-tcpo2' },
+];
 export const DIABETIC_FOOT_WOUNDS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT
@@ -25,7 +37,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES = [
         type: 'question',
         module: 1,
         title: 'Rule Out Emergencies',
-        body: '**Life/limb-threatening conditions requiring IMMEDIATE action:**\n\n**Necrotizing fasciitis:**\n- Pain out of proportion (early) or absent (late - nerve destruction)\n- Rapidly spreading erythema, skin necrosis, bullae, crepitus\n- Systemic toxicity, elevated lactate\n\n**Wet gangrene:**\n- Edematous, purulent necrotic tissue\n- Sepsis/systemic infection\n- Requires urgent amputation\n\n**Severe limb ischemia:**\n- Rest pain, absent pulses\n- Toe pressure <30 mmHg, TcPO2 <25 mmHg\n- Non-viable tissue without revascularization\n\n**Compartment syndrome:**\n- Pain out of proportion with passive stretch\n- Tense compartments, paresthesias\n\nIs any limb-threatening emergency present?',
+        body: '**Life/limb-threatening conditions requiring IMMEDIATE text:**\n\n**Necrotizing fasciitis:**\n- Pain out of proportion (early) or absent (late - nerve destruction)\n- Rapidly spreading erythema, skin necrosis, bullae, crepitus\n- Systemic toxicity, elevated lactate\n\n**Wet gangrene:**\n- Edematous, purulent necrotic tissue\n- Sepsis/systemic infection\n- Requires urgent amputation\n\n**Severe limb ischemia:**\n- Rest pain, absent pulses\n- Toe pressure <30 mmHg, TcPO2 <25 mmHg\n- Non-viable tissue without revascularization\n\n**Compartment syndrome:**\n- Pain out of proportion with passive stretch\n- Tense compartments, paresthesias\n\nIs any limb-threatening emergency present?',
         citation: [1, 3],
         options: [
             { label: 'Necrotizing fasciitis suspected', description: 'Pain OOP, rapid spread, crepitus, bullae, systemic toxicity', next: 'dfw-nec-fasc', urgency: 'critical' },

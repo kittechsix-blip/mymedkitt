@@ -4,6 +4,17 @@
 // 6 modules: Initial Assessment -> Inflammatory vs Mechanical -> Septic Arthritis ->
 // Crystal Arthropathies -> Systemic Rheumatic -> Disposition
 // 48 nodes total.
+export const APPROACH_TO_ARTHRITIS_CRITICAL_ACTIONS = [
+    { text: 'Acute monoarthritis is septic until proven otherwise - tap the joint', nodeId: 'arth-mono-overview' },
+    { text: 'Synovial WBC >50,000 with >90% PMNs highly suggestive of septic arthritis', nodeId: 'arth-synovial-analysis' },
+    { text: 'Crystals do NOT rule out infection (1-2% dual diagnosis) - send culture even if crystals present', nodeId: 'arth-mono-overview' },
+    { text: 'Start empiric vancomycin for suspected septic arthritis (MRSA coverage)', nodeId: 'arth-septic-empiric' },
+    { text: 'All septic arthritis requires drainage (serial aspiration, arthroscopy, or open I&D)', nodeId: 'arth-septic-drainage' },
+    { text: 'Prosthetic joint infection has lower threshold: synovial WBC >3,000 (vs >50,000 native)', nodeId: 'arth-septic-pji' },
+    { text: 'Gout treatment: colchicine OR NSAIDs OR prednisone (choose based on contraindications)', nodeId: 'arth-gout-treatment' },
+    { text: 'Serum uric acid may be NORMAL during acute gout flare (20-40% of cases)', nodeId: 'arth-gout-presentation' },
+    { text: 'RA flare: rule out septic first (tap if single joint significantly worse)', nodeId: 'arth-ra-flare' },
+];
 export const APPROACH_TO_ARTHRITIS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

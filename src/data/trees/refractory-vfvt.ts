@@ -6,6 +6,16 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const REFRACTORY_VFVT_CRITICAL_ACTIONS = [
+  { text: 'Change pad position to AP after 3 failed shocks', nodeId: 'rvf-vector-change' },
+  { text: 'Double sequential defibrillation with 2 defibrillators', nodeId: 'rvf-dsd-setup' },
+  { text: 'Amiodarone 300 mg IV or lidocaine 1-1.5 mg/kg', nodeId: 'rvf-antiarrhythmic-dose' },
+  { text: 'Esmolol 500 mcg/kg if refractory after standard therapy', nodeId: 'rvf-esmolol-dose' },
+  { text: 'Activate ECPR if criteria met (<60 min to flow)', nodeId: 'rvf-ecpr-activate' },
+  { text: 'Treat reversible causes: hyperK, toxins, PE', nodeId: 'rvf-hs-ts' },
+  { text: 'Epinephrine 1 mg IV/IO every 3-5 minutes', nodeId: 'rvf-epi-timing' },
+];
+
 export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
 
   // =====================================================================

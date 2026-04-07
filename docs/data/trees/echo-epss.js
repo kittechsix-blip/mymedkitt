@@ -3,6 +3,14 @@
 // 5 modules: Overview → PLAX View → M-Mode & Measurement → Interpretation → Grey Zone Assessment
 // 10 nodes total.
 // Source: Stenberg Y et al. (2021), McKaigney CJ et al. (2014), Prats MI & Bahner DP (2020), CoreUltrasound.com
+export const ECHO_EPSS_CRITICAL_ACTIONS = [
+    { text: 'Obtain PLAX view: probe at 3rd-4th ICS, marker to left hip', nodeId: 'epss-plax' },
+    { text: 'Activate M-mode through mitral valve leaflet tips', nodeId: 'epss-mmode' },
+    { text: 'Measure gap between E-point and septum', nodeId: 'epss-measure' },
+    { text: 'EPSS >7 mm suggests LVEF <50%', nodeId: 'epss-interpret' },
+    { text: 'EPSS >10 mm indicates severe dysfunction', nodeId: 'epss-high' },
+    { text: 'Invalid in AR, MS, HCM, non-sinus rhythms', nodeId: 'epss-start' },
+];
 export const ECHO_EPSS_NODES = [
     // =====================================================================
     // MODULE 1: OVERVIEW

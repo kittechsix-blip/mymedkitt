@@ -5,7 +5,19 @@
 // Sources: Roberts & Hedges, ACEP Now, Medscape, ALiEM, StatPearls, Journal of Hand Surgery
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const EXTENSOR_TENDON_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Test extension strength with active ROM against gravity', nodeId: 'ext-exam' },
+  { text: 'Determine zone of injury using anatomic landmarks', nodeId: 'ext-zones' },
+  { text: 'Refer Zones III, VII, VIII to hand surgery (complex anatomy)', nodeId: 'ext-zones' },
+  { text: 'Irrigate wound thoroughly before repair', nodeId: 'ext-repair-overview' },
+  { text: 'Repair with 4-0 or 5-0 non-absorbable suture (nylon/prolene)', nodeId: 'ext-repair-overview' },
+  { text: 'Use figure-of-8 or horizontal mattress for flat tendons', nodeId: 'ext-repair-overview' },
+  { text: 'Splint in extension with proper position for each zone', nodeId: 'ext-splint-overview' },
+  { text: 'Arrange hand surgery follow-up within 5-7 days', nodeId: 'ext-splint-overview' },
+];
 
 export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
 

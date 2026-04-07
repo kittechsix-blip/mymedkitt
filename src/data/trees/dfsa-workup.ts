@@ -6,6 +6,19 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from '../../services/tree-service.js';
 
+export const DFSA_WORKUP_CRITICAL_ACTIONS = [
+  { text: 'URGENT: GHB undetectable after 6h blood, 12h urine - collect IMMEDIATELY', nodeId: 'dfsa-start' },
+  { text: 'Gray-top tube (NaF/KOx) for GHB preservation - prevents in vitro production', nodeId: 'dfsa-collect-urgent' },
+  { text: 'Standard hospital drug screens MISS most DFSA drugs - send to forensic lab', nodeId: 'dfsa-panel-select' },
+  { text: 'Maintain chain of custody: label, seal tamper-evident, document all transfers', nodeId: 'dfsa-collect-urgent' },
+  { text: 'Patient can consent to exam/specimens independently of police report', nodeId: 'dfsa-consent-intro' },
+  { text: 'Place clothing in PAPER bags (NOT plastic - degrades DNA)', nodeId: 'dfsa-clothing' },
+  { text: 'SANE nurse if available (higher prosecution rates, better evidence)', nodeId: 'dfsa-sane-check' },
+  { text: 'STI prophylaxis: ceftriaxone 500mg IM + doxycycline 100mg BID x7d + metronidazole 2g', nodeId: 'dfsa-sti-prophylaxis' },
+  { text: 'Emergency contraception: ulipristal 30mg preferred (effective up to 5 days)', nodeId: 'dfsa-pregnancy-prophylaxis' },
+  { text: 'Hair collection at 4-6 weeks detects all DFSA agents if >5 days post-assault', nodeId: 'dfsa-collect-late' },
+];
+
 export const DFSA_WORKUP_NODES: DecisionNode[] = [
 
   // =====================================================================

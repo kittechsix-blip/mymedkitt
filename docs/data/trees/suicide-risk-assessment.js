@@ -2,6 +2,16 @@
 // ED approach to suicidal ideation and self-harm evaluation
 // Screening → Risk Stratification → Safety Planning → Lethal Means → Disposition
 // 6 modules, 28 nodes total.
+export const SUICIDE_RISK_CRITICAL_ACTIONS = [
+    { text: 'Universal screening is standard of care - use C-SSRS screening tool for all behavioral health presentations', nodeId: 'sui-cssrs' },
+    { text: 'Recent behavior (Q6), intent (Q4), or planning (Q5) = HIGH RISK - immediate 1:1 observation and psych consult', nodeId: 'sui-high-risk' },
+    { text: 'Lethal means counseling: firearms account for 50% of suicides - temporary storage outside home saves lives', nodeId: 'sui-lethal-means' },
+    { text: 'Stanley-Brown Safety Planning: create WITH the patient collaboratively, not FOR them', nodeId: 'sui-safety-plan' },
+    { text: 'ALL discharge criteria must be met: safety plan completed, means restricted, support person present, follow-up within 72h', nodeId: 'sui-discharge-criteria' },
+    { text: 'Suicide within 7 days of ED discharge is now a Joint Commission sentinel event (2024)', nodeId: 'sui-documentation' },
+    { text: 'Patients cannot be assessed while intoxicated - observe until sober and re-assess C-SSRS', nodeId: 'sui-intox' },
+    { text: 'Contract for safety alone has limited value - must assess the balance of risk vs protective factors', nodeId: 'sui-moderate-factors' },
+];
 export const SUICIDE_RISK_NODES = [
     // =====================================================================
     // MODULE 1: SCREENING & INITIAL ASSESSMENT

@@ -2,6 +2,16 @@
 // Recognition & diagnosis -> Respiratory monitoring -> Workup -> Treatment -> Supportive care -> Intubation -> Disposition
 // 8 modules: Recognition -> Respiratory Monitoring -> Diagnostic Workup -> Treatment -> Supportive Care -> Intubation -> Disposition -> Prognosis
 // 21 nodes total.
+export const GUILLAIN_BARRE_CRITICAL_ACTIONS = [
+    { text: 'Serial respiratory monitoring: NIF, FVC, O2 sat', nodeId: 'gbs-respiratory-monitoring' },
+    { text: 'Intubate if NIF >-20, FVC <20 mL/kg, or impending failure', nodeId: 'gbs-intubation-criteria' },
+    { text: 'LP for CSF: albuminocytologic dissociation confirms GBS', nodeId: 'gbs-csf' },
+    { text: 'IVIG 0.4 g/kg/day x 5 days (preferred)', nodeId: 'gbs-treatment' },
+    { text: 'Plasmapheresis if IVIG unavailable or contraindicated', nodeId: 'gbs-treatment' },
+    { text: 'Admit all GBS patients for monitoring', nodeId: 'gbs-disposition' },
+    { text: 'Neurology consult for all suspected GBS', nodeId: 'gbs-neuro-consult' },
+    { text: 'DVT prophylaxis for all admitted GBS patients', nodeId: 'gbs-supportive' },
+];
 export const GUILLAIN_BARRE_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

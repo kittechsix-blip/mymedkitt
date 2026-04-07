@@ -6,6 +6,17 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const AFIB_RVR_CRITICAL_ACTIONS = [
+  { text: 'Cardioversion if unstable (shock, ischemia, severe CHF, severe dyspnea with RVR)', nodeId: 'afib-unstable-wpw' },
+  { text: 'Diltiazem 0.25 mg/kg IV (15-25mg) over 2 min first-line for rate control', nodeId: 'afib-stable-drugs' },
+  { text: 'Check TSH + troponin in ALL patients - thyrotoxicosis and ACS are critical reversible causes', nodeId: 'afib-workup' },
+  { text: 'CHA2DS2-VASc ≥2 → anticoagulation regardless of rhythm strategy', nodeId: 'afib-cha2ds2vasc' },
+  { text: 'New AFib <48h → may cardiovert if no thrombus on TEE, or rate control + anticoagulation + cardiology', nodeId: 'afib-onset-assessment' },
+  { text: 'Do NOT cardiovert AFib >48h without TEE or 3 weeks anticoagulation (stroke risk)', nodeId: 'afib-cha2ds2vasc' },
+  { text: 'Metoprolol may worsen hypotension in decompensated CHF - prefer diltiazem or amiodarone', nodeId: 'afib-hfref-drugs' },
+  { text: 'Digoxin onset 2-6 hours - inadequate for acute RVR, use as adjunct for CHF patients', nodeId: 'afib-refractory-dig' },
+];
+
 export const AFIB_RVR_NODES: DecisionNode[] = [
 
   // =====================================================================

@@ -4,11 +4,24 @@
 // Ophthalmology consult #4
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 export interface Citation {
   num: number;
   text: string;
 }
+
+export const CRAO_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Document precise time of symptom onset (last known well)', nodeId: 'crao-start' },
+  { text: 'Confirm afferent pupillary defect (APD) with swinging flashlight test', nodeId: 'crao-exam' },
+  { text: 'Perform fundoscopy looking for cherry-red spot and pale retina', nodeId: 'crao-fundoscopy' },
+  { text: 'Rule out GCA in all patients ≥50 (ESR, CRP, symptoms)', nodeId: 'crao-age-check' },
+  { text: 'Give IV methylprednisolone 1000mg if GCA suspected (do NOT wait for biopsy)', nodeId: 'crao-gca-treatment' },
+  { text: 'Activate stroke protocol for non-arteritic CRAO', nodeId: 'crao-stroke-protocol' },
+  { text: 'Give IV tPA 0.9mg/kg if <4.5 hours and no contraindications', nodeId: 'crao-tpa-treatment' },
+  { text: 'Admit ALL CRAO patients for stroke workup (MRI, carotid US, echo)', nodeId: 'crao-dispo' },
+  { text: 'Initiate secondary prevention: aspirin, statin, BP control', nodeId: 'crao-secondary-prevention' },
+];
 
 export const CRAO_NODES: DecisionNode[] = [
 

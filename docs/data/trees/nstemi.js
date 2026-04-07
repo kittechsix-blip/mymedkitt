@@ -471,6 +471,21 @@ export const NSTEMI_MODULE_LABELS = [
     'Discharge & Prevention',
 ];
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+export const NSTEMI_CRITICAL_ACTIONS = [
+    { text: 'Aspirin 162-325 mg chewed immediately (mortality benefit)', nodeId: 'nstemi-start' },
+    { text: 'Choose ONE anticoagulant and do NOT switch (switching increases bleeding)', nodeId: 'nstemi-initial-anticoag' },
+    { text: 'Enoxaparin 1 mg/kg SC q12h preferred (reduce to daily if CrCl 15-30)', nodeId: 'nstemi-initial-anticoag' },
+    { text: 'UFH if CrCl <30 or PCI within 24h (60 units/kg bolus, max 4000; then 12 units/kg/hr, max 1000)', nodeId: 'nstemi-initial-anticoag' },
+    { text: 'Emergent cath <2h if shock, refractory chest pain, VT/VF, acute MR/VSD, or heart failure', nodeId: 'nstemi-emergent' },
+    { text: 'TIMI score ≥3 = early invasive strategy within 24h (TIMI 5-7 = very high risk)', nodeId: 'nstemi-timi-high' },
+    { text: 'Ticagrelor 180 mg OR prasugrel 60 mg loading (NOT clopidogrel unless contraindications)', nodeId: 'nstemi-p2y12' },
+    { text: 'Avoid prasugrel if prior stroke/TIA, age >75, or weight <60 kg', nodeId: 'nstemi-prasugrel-caution' },
+    { text: 'Morphine only for refractory pain (may increase mortality)', nodeId: 'nstemi-start' },
+    { text: 'Stat echo for suspected mechanical complication (acute MR, VSD, free wall rupture)', nodeId: 'nstemi-emergent' },
+];
 // Evidence Citations
 // -------------------------------------------------------------------
 export const NSTEMI_CITATIONS = [

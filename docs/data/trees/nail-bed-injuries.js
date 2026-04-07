@@ -2,6 +2,16 @@
 // ED evaluation and repair of fingertip and nail injuries
 // 5 modules: Anatomy -> Assessment -> Nail Removal & Trephination -> Repair -> Disposition
 // Based on hand surgery literature and EM procedural guidelines
+export const NAIL_BED_INJURIES_CRITICAL_ACTIONS = [
+    { text: 'Digital block for anesthesia before nail removal', nodeId: 'nail-removal' },
+    { text: 'Probe-to-bone test if >2cm or >2 weeks duration', nodeId: 'nail-imaging' },
+    { text: 'Trephination for subungual hematoma - NOT nail removal if margins adherent', nodeId: 'nail-trephination' },
+    { text: 'X-ray all nail bed injuries - 50% have fracture', nodeId: 'nail-imaging' },
+    { text: 'Nail plate acts as biological splint - replace after repair', nodeId: 'nail-fold-stent' },
+    { text: 'Stent nail fold to prevent synechiae - use original nail or foil', nodeId: 'nail-fold-stent' },
+    { text: 'Antibiotics if fracture present (open fracture)', nodeId: 'nail-fracture-mgmt' },
+    { text: 'Repair with 6-0 or 7-0 absorbable suture under magnification', nodeId: 'nail-repair-technique' },
+];
 export const NAIL_BED_INJURIES_NODES = [
     // ===================================================================
     // MODULE 1: Anatomy

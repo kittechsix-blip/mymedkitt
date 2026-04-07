@@ -2,6 +2,16 @@
 // Initial Assessment → Hypo Evaluation → Hypo Monitoring → Storm Treatment → Storm Special Situations → Subclinical
 // 6 modules: Initial Assessment → Decompensated Hypothyroidism Evaluation → Decompensated Hypothyroidism Monitoring → Thyroid Storm Treatment → Thyroid Storm Special Situations → Subclinical Findings
 // 33 nodes total.
+export const THYROID_CRITICAL_ACTIONS = [
+    { text: 'Levothyroxine 200-400 mcg IV load for decompensated hypothyroidism - do NOT delay for lab confirmation', nodeId: 'thyroid-hypo-tx' },
+    { text: 'Hydrocortisone 100 mg IV q8h BEFORE levothyroxine (prevent adrenal crisis)', nodeId: 'thyroid-hypo-steroids' },
+    { text: 'Propylthiouracil 600-1000 mg loading, then 200-250 mg q4h for thyroid storm', nodeId: 'thyroid-storm-ptu' },
+    { text: 'Propranolol 60-80 mg PO q4h (or 1-2 mg IV q10-15 min) to block peripheral conversion', nodeId: 'thyroid-storm-betablock' },
+    { text: 'Iodine therapy MUST wait 1 hour after PTU/methimazole - given too early worsens storm', nodeId: 'thyroid-storm-iodine' },
+    { text: 'Aggressive cooling for thyroid storm hyperthermia - acetaminophen preferred (NOT aspirin)', nodeId: 'thyroid-storm-cooling' },
+    { text: 'Decompensated hypothyroidism mortality 25-50% - treat empirically if suspected', nodeId: 'thyroid-hypo-confirm' },
+    { text: 'Thyroid storm mortality 8-25% despite treatment - ICU admission required', nodeId: 'thyroid-storm-confirm' },
+];
 export const THYROID_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT
@@ -616,7 +626,7 @@ export const THYROID_NODES = [
         type: 'result',
         module: 6,
         title: 'Subclinical Hyperthyroidism — Urgent Referral',
-        body: 'Suppressed TSH (<0.1 mIU/L) with normal free T4/T3. Risk depends on degree of TSH suppression and age. [14]\n\n**Risks of untreated subclinical hyperthyroidism:**\n• AFib (especially if TSH <0.1 and age >65)\n• Osteoporosis (accelerated bone turnover)\n• Progression to overt hyperthyroidism\n\n**Common causes (check first):**\n• Exogenous thyroid hormone (most common cause — is patient on levothyroxine?)\n• Amiodarone\n• Recent iodinated contrast\n\n**ED action:** No acute treatment needed.\n\n**Disposition:** Urgent endocrinology referral within 1-2 weeks. Repeat TSH + free T4/T3 to confirm (may be transient).',
+        body: 'Suppressed TSH (<0.1 mIU/L) with normal free T4/T3. Risk depends on degree of TSH suppression and age. [14]\n\n**Risks of untreated subclinical hyperthyroidism:**\n• AFib (especially if TSH <0.1 and age >65)\n• Osteoporosis (accelerated bone turnover)\n• Progression to overt hyperthyroidism\n\n**Common causes (check first):**\n• Exogenous thyroid hormone (most common cause — is patient on levothyroxine?)\n• Amiodarone\n• Recent iodinated contrast\n\n**ED text:** No acute treatment needed.\n\n**Disposition:** Urgent endocrinology referral within 1-2 weeks. Repeat TSH + free T4/T3 to confirm (may be transient).',
         recommendation: 'Urgent endocrinology referral within 1-2 weeks. Confirm with repeat labs.',
         citation: [8, 14],
     },

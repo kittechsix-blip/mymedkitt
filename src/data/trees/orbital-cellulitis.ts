@@ -4,11 +4,22 @@
 // Ophthalmology consult #3
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 export interface Citation {
   num: number;
   text: string;
 }
+
+export const ORBITAL_CELLULITIS_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Distinguish preseptal (anterior) from orbital (posterior to septum)', nodeId: 'orbital-start' },
+  { text: 'Test for signs of orbital involvement: proptosis, EOM restriction, vision loss', nodeId: 'orbital-exam' },
+  { text: 'Obtain CT orbits with contrast if orbital cellulitis suspected', nodeId: 'orbital-imaging' },
+  { text: 'Give IV antibiotics immediately (ampicillin-sulbactam or ceftriaxone + vancomycin)', nodeId: 'orbital-treatment' },
+  { text: 'Immediate ophthalmology and ENT consult for orbital cellulitis', nodeId: 'orbital-consult' },
+  { text: 'Admit all orbital cellulitis for IV antibiotics and monitoring', nodeId: 'orbital-dispo' },
+  { text: 'Recognize cavernous sinus thrombosis (bilateral, severe, cranial nerve palsies)', nodeId: 'orbital-start' },
+];
 
 export const ORBITAL_CELLULITIS_NODES: DecisionNode[] = [
 

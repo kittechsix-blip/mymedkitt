@@ -2,6 +2,16 @@
 // Communication framework for emergent goals-of-care discussions
 // 6 modules: When to Have → Framework → Key Phrases → Common Scenarios → Documentation → Transitions
 // ~22 nodes total.
+export const CODE_STATUS_CRITICAL_ACTIONS = [
+    { text: 'Use "Surprise Question": Would I be surprised if this patient died?', nodeId: 'code-when' },
+    { text: 'MAKE A RECOMMENDATION (do not ask "do you want everything?")', nodeId: 'code-recommend' },
+    { text: 'Explore patient values: "What matters most to you?"', nodeId: 'code-explore' },
+    { text: 'Share prognosis honestly and pause to allow processing', nodeId: 'code-reframe' },
+    { text: 'Explain CPR honestly: designed for sudden arrest in otherwise healthy patients', nodeId: 'code-key-phrases' },
+    { text: 'Avoid phrases: "withdraw care", "do everything", "give up"', nodeId: 'code-avoid' },
+    { text: 'Document: who present, capacity, prognosis shared, values expressed, recommendation made', nodeId: 'code-documentation' },
+    { text: 'Communicate code status at ALL handoffs and update EMR orders', nodeId: 'code-transitions' },
+];
 export const CODE_STATUS_NODES = [
     // =====================================================================
     // MODULE 1: WHEN TO HAVE THE CONVERSATION

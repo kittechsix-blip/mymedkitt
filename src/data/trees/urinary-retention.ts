@@ -10,6 +10,16 @@ interface Citation {
   text: string;
 }
 
+export const URINARY_RETENTION_CRITICAL_ACTIONS = [
+  { text: 'Bladder scan to confirm retention (>300 mL)', nodeId: 'aur-volume' },
+  { text: 'Emergent MRI for cauda equina syndrome', nodeId: 'aur-neuro-emergency' },
+  { text: 'Coude catheter for BPH after failed standard attempt', nodeId: 'aur-failed-cath' },
+  { text: 'Start tamsulosin 0.4 mg at time of catheterization', nodeId: 'aur-bph-meds' },
+  { text: 'Urology consult for failed catheter attempts', nodeId: 'aur-urology-consult' },
+  { text: 'Monitor for post-obstructive diuresis (>200 mL/hr)', nodeId: 'aur-pod-management' },
+  { text: 'Replace 50-75% of urine output for POD', nodeId: 'aur-pod-fluids' },
+];
+
 export const URINARY_RETENTION_NODES: DecisionNode[] = [
 
   // =====================================================================

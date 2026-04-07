@@ -8,6 +8,17 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const PSYCH_ASSESSMENT_CRITICAL_ACTIONS = [
+  { text: 'MSE differs from MMSE - MSE is comprehensive psychological state, MMSE is cognitive screening only', nodeId: 'psych-start' },
+  { text: 'Document mood in patient\'s own words (subjective) vs affect (your objective observation)', nodeId: 'psych-mood' },
+  { text: 'Always screen for suicidal ideation: "Have you had thoughts of hurting yourself or ending your life?"', nodeId: 'psych-safety' },
+  { text: 'Collateral sources critical - family, EMS, pharmacy records, prior ED visits document sources', nodeId: 'psych-history' },
+  { text: 'Tardive dyskinesia: lip smacking, tongue writhing, grimacing - document movement disorders', nodeId: 'psych-behavior' },
+  { text: 'Thought process vs thought content: process = HOW they think, content = WHAT they think', nodeId: 'psych-thought-process' },
+  { text: 'Flat affect = no emotional expression (schizophrenia, severe depression) vs blunted (minimal)', nodeId: 'psych-affect' },
+  { text: 'CPT 90792 requires: complete history + MSE + initial diagnosis + treatment plan + capacity assessment', nodeId: 'psych-start' },
+];
+
 export const PSYCH_ASSESSMENT_NODES: DecisionNode[] = [
 
   // =====================================================================

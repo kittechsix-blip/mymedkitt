@@ -4,7 +4,18 @@
 // ~38 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const CT_DECISION_SUPPORT_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Apply validated clinical decision rules to guide CT ordering', nodeId: 'ct-start' },
+  { text: 'Use Canadian C-Spine Rule for cervical spine clearance', nodeId: 'ct-scenario' },
+  { text: 'Apply PECARN criteria for pediatric head trauma', nodeId: 'ct-scenario' },
+  { text: 'Use Wells or PERC score before ordering CT-PE', nodeId: 'ct-scenario' },
+  { text: 'Consider radiation exposure (27 per 100 ED encounters)', nodeId: 'ct-start' },
+  { text: 'Document clinical decision rule results in chart', nodeId: 'ct-start' },
+  { text: 'Use Choosing Wisely guidelines for special populations', nodeId: 'ct-start' },
+];
 
 export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
 

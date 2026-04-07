@@ -6,6 +6,18 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const DENTAL_AVULSION_CRITICAL_ACTIONS = [
+  { text: 'TIME IS TOOTH - reimplantation success drops dramatically with extraoral dry time >30 min', nodeId: 'avulsion-start' },
+  { text: 'NEVER reimplant primary (baby) teeth - risk of damaging permanent tooth bud', nodeId: 'avulsion-primary' },
+  { text: 'Handle tooth by CROWN only - never touch the root', nodeId: 'avulsion-storage' },
+  { text: 'Best storage: HBSS (up to 24h) or cold milk (up to 6h) - NOT water (hypotonic)', nodeId: 'avulsion-storage' },
+  { text: 'Reimplant in ED if dentist not available within 15-30 minutes', nodeId: 'avulsion-reimplant-decision' },
+  { text: 'Tooth missing - obtain CXR to rule out aspiration', nodeId: 'avulsion-missing' },
+  { text: 'Flexible splint for 2 weeks - rigid splints cause ankylosis', nodeId: 'avulsion-splint' },
+  { text: 'Doxycycline 100mg BID x7 days first-line antibiotic (adults/children >12y)', nodeId: 'avulsion-meds' },
+  { text: 'Urgent dental follow-up within 24-48 hours mandatory', nodeId: 'avulsion-followup' },
+] as const;
+
 export const DENTAL_AVULSION_NODES: DecisionNode[] = [
 
   // =====================================================================

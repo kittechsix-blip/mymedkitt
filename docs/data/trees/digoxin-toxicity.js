@@ -3,6 +3,17 @@
 // treatment options, DigiFab indications and dosing, and disposition.
 // 6 modules: Recognition → ECG Findings → Risk Stratification → Treatment → DigiFab → Disposition
 // 28 nodes total.
+export const DIGOXIN_TOXICITY_CRITICAL_ACTIONS = [
+    { text: 'K+ >5.5 mEq/L in digoxin toxicity = DigiFab indicated immediately', nodeId: 'dig-hyperkalemia' },
+    { text: 'Avoid cardioversion if possible - can precipitate refractory VF. Use lowest effective energy if absolutely necessary', nodeId: 'dig-tachy' },
+    { text: 'Magnesium sulfate 2g IV over 2-5 min first-line for ventricular arrhythmias', nodeId: 'dig-tachy' },
+    { text: 'DigiFab dosing: 10 vials empiric for life-threatening tox, or calculate based on ingestion/level', nodeId: 'dig-digifab-dosing' },
+    { text: 'Acute ingestion with normal K+ can appear deceptively well before cardiovascular collapse', nodeId: 'dig-acute' },
+    { text: 'PAT with block and bidirectional VT are pathognomonic for digoxin toxicity', nodeId: 'dig-ecg' },
+    { text: 'Chronic toxicity can occur at therapeutic levels (1-2 ng/mL) with predisposing factors', nodeId: 'dig-chronic' },
+    { text: 'Do NOT give calcium for hyperkalemia in digoxin toxicity - worsens cardiotoxicity', nodeId: 'dig-hyperkalemia' },
+    { text: 'Atropine for bradycardia may not work in severe toxicity - prepare DigiFab', nodeId: 'dig-brady' },
+];
 export const DIGOXIN_TOXICITY_NODES = [
     // ═══════════════════════════════════════════════════════════════
     // MODULE 1: Recognition
@@ -199,7 +210,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         type: 'info',
         module: 5,
         title: 'DigiFab — Indications',
-        body: '[DigiFab Dosing Calculator](#/calc/dig-fab-dosing)\n\n**Indications for DigiFab (Digoxin Immune Fab):** [2][3]\n\n**Life-threatening criteria:**\n• Life-threatening arrhythmia (VT, VF, high-grade AV block, symptomatic bradycardia unresponsive to atropine)\n• Hemodynamic instability (hypotension, shock)\n• **K+ >5.5 mEq/L** (in setting of digoxin toxicity)\n\n**Level-based criteria:**\n• Acute ingestion: digoxin level **>10 ng/mL** [3]\n• Chronic toxicity: digoxin level **>6 ng/mL** with symptoms [3]\n\n**Clinical gestalt:**\n• Significant ingestion with cardiac symptoms\n• Progressive toxicity despite supportive care\n• Known massive ingestion (even before symptoms develop)\n\n**Onset of action:** 30-60 minutes. Clinical improvement may take up to 4 hours [3].\n\n**Half-life:** 15-20 hours (Fab fragments are renally cleared).',
+        body: '[DigiFab Dosing Calculator](#/calc/dig-fab-dosing)\n\n**Indications for DigiFab (Digoxin Immune Fab):** [2][3]\n\n**Life-threatening criteria:**\n• Life-threatening arrhythmia (VT, VF, high-grade AV block, symptomatic bradycardia unresponsive to atropine)\n• Hemodynamic instability (hypotension, shock)\n• **K+ >5.5 mEq/L** (in setting of digoxin toxicity)\n\n**Level-based criteria:**\n• Acute ingestion: digoxin level **>10 ng/mL** [3]\n• Chronic toxicity: digoxin level **>6 ng/mL** with symptoms [3]\n\n**Clinical gestalt:**\n• Significant ingestion with cardiac symptoms\n• Progressive toxicity despite supportive care\n• Known massive ingestion (even before symptoms develop)\n\n**Onset of text:** 30-60 minutes. Clinical improvement may take up to 4 hours [3].\n\n**Half-life:** 15-20 hours (Fab fragments are renally cleared).',
         citation: [2, 3],
         calculatorLinks: [
             { id: 'dig-fab-dosing', label: 'DigiFab Dosing Calculator' },

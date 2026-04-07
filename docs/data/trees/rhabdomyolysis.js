@@ -2,6 +2,16 @@
 // ED evaluation and management of rhabdomyolysis with CK-based severity stratification
 // 6 modules: Recognition -> Etiology -> Workup -> Treatment -> Complications -> Disposition
 // ~28 nodes total
+export const RHABDOMYOLYSIS_CRITICAL_ACTIONS = [
+    { text: 'Aggressive IV fluids targeting UOP 1-3 mL/kg/hr - cornerstone of treatment', nodeId: 'rhabdo-fluid-resus' },
+    { text: 'CK >15,000 significantly increases AKI risk (5-14% dialysis rate)', nodeId: 'rhabdo-severity' },
+    { text: 'Lactated Ringers preferred over NS - better pH maintenance, avoids hyperchloremic acidosis', nodeId: 'rhabdo-lr-protocol' },
+    { text: 'Isotonic bicarbonate (3 amp NaHCO3 in 1L D5W) if bicarb <22 - USE AS resuscitative fluid', nodeId: 'rhabdo-bicarb' },
+    { text: 'Always check and correct magnesium - up to 50% have concurrent hypoMg', nodeId: 'k-hypo-severe' },
+    { text: 'Compartment syndrome if pain with passive stretch + pressure >30 mmHg - fasciotomy within 6h', nodeId: 'rhabdo-compartment-eval' },
+    { text: 'Hyperkalemia treatment: Calcium + Insulin/glucose + Beta-2 agonist + Kaliuresis ALL together', nodeId: 'rhabdo-hyperkalemia-tx' },
+    { text: 'Sodium bicarbonate for urine alkalinization NOT proven effective (multiple RCTs) - fluids alone sufficient', nodeId: 'rhabdo-bicarb' },
+];
 export const RHABDOMYOLYSIS_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION & SEVERITY STRATIFICATION

@@ -536,6 +536,19 @@ export const MIGRAINE_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const MIGRAINE_CRITICAL_ACTIONS = [
+  { text: 'Ottawa SAH Rule: sudden-onset worst headache, thunderclap onset, age ≥40 with new headache = CT + LP if negative', nodeId: 'migraine-red-flags' },
+  { text: 'First-line: Prochlorperazine 10 mg IV + metoclopramide 10 mg IV + ketorolac 30 mg IV + NS 1L bolus', nodeId: 'migraine-first-line' },
+  { text: 'Magnesium 2g IV over 15 min (especially for aura)', nodeId: 'migraine-magnesium' },
+  { text: 'Avoid opioids (rebound headache, medication overuse)', nodeId: 'migraine-avoid-opioids' },
+  { text: 'Greater occipital nerve block for refractory migraine (0.5% bupivacaine 3-5 mL)', nodeId: 'migraine-nerve-block' },
+  { text: 'Dexamethasone 10 mg IV/IM to prevent recurrence within 72h', nodeId: 'migraine-dexamethasone' },
+  { text: 'Triptans contraindicated in basilar/hemiplegic migraine, uncontrolled HTN, recent stroke/MI', nodeId: 'migraine-triptan-contraindications' },
+  { text: 'Admit for thunderclap onset, new neurologic deficits, or inability to exclude secondary cause', nodeId: 'migraine-admit' },
+  { text: 'Discharge with rescue triptan (sumatriptan 100 mg) and follow-up with neurology', nodeId: 'migraine-discharge' },
+  { text: 'Red flags: sudden onset, fever, seizure, focal deficit, altered mental status, papilledema', nodeId: 'migraine-red-flags' },
+];
+
 export const MIGRAINE_CITATIONS: Citation[] = [
   { num: 1, text: 'EB Medicine. Evidence-Based Emergency Medicine Management of Migraine and Other Primary Headaches. 2024.' },
   { num: 2, text: 'Perry JJ, et al. Ottawa SAH Rule for Headache Evaluation. JAMA. 2013;310(12):1248-1255.' },

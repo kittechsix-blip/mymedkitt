@@ -401,6 +401,19 @@ export const EATING_DISORDERS_MODULE_LABELS = [
   'Disposition',
 ];
 
+export const EATING_DISORDERS_CRITICAL_ACTIONS = [
+  { text: 'MARSIPAN Risk Assessment for medical severity stratification', nodeId: 'ed-start' },
+  { text: 'Check BMI - severe AN defined as BMI <15 (extreme <13)', nodeId: 'ed-medical-severity' },
+  { text: 'Screen for refeeding syndrome risk: phosphate <0.6, K+ <2.5, Mg <1.4, or rapid weight loss', nodeId: 'ed-refeeding-risk' },
+  { text: 'Start prophylactic thiamine 100-300 mg IV/PO BEFORE nutrition if at refeeding risk', nodeId: 'ed-refeeding-prevent' },
+  { text: 'Initial feeding: 10-20 kcal/kg/day for high-risk, increase 200 kcal every 3-4 days', nodeId: 'ed-refeeding-prevent' },
+  { text: 'Check phosphate, K+, Mg, glucose daily during first week of refeeding', nodeId: 'ed-labs-refeeding' },
+  { text: 'ECG for prolonged QTc (>450ms) - increased risk of sudden death', nodeId: 'ed-medical-severity' },
+  { text: 'Admit for HR <40, SBP <90, glucose <60, temp <35.5C, prolonged QTc, or severe electrolytes', nodeId: 'ed-admit-criteria' },
+  { text: 'NG feeds if unable to meet oral nutrition goals (NOT as punishment)', nodeId: 'ed-nutrition-support' },
+  { text: 'Psychiatric clearance required before discharge for intentional self-harm or active suicidal ideation', nodeId: 'ed-psych-assessment' },
+];
+
 export const EATING_DISORDERS_CITATIONS: Citation[] = [
   { num: 1, text: 'Mehler PS, Andersen AE. Eating Disorders: A Guide to Medical Care and Complications. 3rd ed. Johns Hopkins University Press. 2017.' },
   { num: 2, text: 'Royal College of Psychiatrists. MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. 2nd ed. CR189. 2022.' },

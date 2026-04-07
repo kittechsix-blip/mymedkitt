@@ -5,11 +5,23 @@
 // Categories: anesthesia-airway, procedures
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 export interface Citation {
   num: number;
   text: string;
 }
+
+export const AWAKE_INTUBATION_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Identify indications: cannot intubate/ventilate predicted, airway obstruction, C-spine injury', nodeId: 'awake-indications' },
+  { text: 'Prepare all equipment before starting: bougie, video laryngoscope, surgical airway kit', nodeId: 'awake-preparation' },
+  { text: 'Topicalize airway thoroughly: lidocaine nebulizer, atomizer, and superior laryngeal nerve block', nodeId: 'awake-topicalization' },
+  { text: 'Use low-dose ketamine (0.2-0.5mg/kg) for sedation while preserving airway reflexes', nodeId: 'awake-sedation' },
+  { text: 'Perform video laryngoscopy first (confirm view BEFORE committing)', nodeId: 'awake-technique' },
+  { text: 'Use bougie-first technique through vocal cords', nodeId: 'awake-technique' },
+  { text: 'Give propofol/rocuronium ONLY after tube through cords', nodeId: 'awake-technique' },
+  { text: 'Have immediate surgical airway backup ready', nodeId: 'awake-complications' },
+];
 
 export const AWAKE_INTUBATION_NODES: DecisionNode[] = [
   // =====================================================================

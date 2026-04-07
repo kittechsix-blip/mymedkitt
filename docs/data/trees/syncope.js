@@ -2,6 +2,16 @@
 // Life-Threat Screen → Seizure vs Syncope → Etiology → Risk Stratification → Disposition
 // 6 modules: Is This Syncope? → Initial Evaluation → Etiology → Risk Stratification → Special Populations → Disposition
 // 28 nodes total.
+export const SYNCOPE_CRITICAL_ACTIONS = [
+    { text: 'Check ECG immediately - abnormal ECG is high-risk in all syncope tools', nodeId: 'sync-ecg' },
+    { text: 'Exclude life-threatening causes before diagnosing simple syncope', nodeId: 'sync-life-threat' },
+    { text: 'At least 2 of 4 symptoms (headache, fever, neck stiffness, AMS) present in 95% of meningitis', nodeId: 'sync-true-syncope' },
+    { text: 'QTc >460 ms concerning, >500 ms high-risk for arrhythmia', nodeId: 'sync-abnormal-ecg' },
+    { text: 'Head CT NOT indicated for asymptomatic syncope with normal neuro exam', nodeId: 'sync-no-head-ct' },
+    { text: 'Routine D-dimer NOT indicated unless PE suspected by PERC/Wells', nodeId: 'sync-pe-screening' },
+    { text: 'Normal orthostatics do NOT predict 30-day outcomes in elderly - do NOT rely on them alone', nodeId: 'sync-orthostatic' },
+    { text: 'Elevated troponin or BNP predicts 30-day mortality - check in uncertain cases', nodeId: 'sync-labs' },
+];
 export const SYNCOPE_NODES = [
     // =====================================================================
     // MODULE 1: IS THIS SYNCOPE?

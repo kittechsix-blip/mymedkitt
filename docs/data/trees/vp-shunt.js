@@ -2,6 +2,15 @@
 // Recognition -> Imaging Strategy -> Malfunction vs Infection -> ICP Management -> Shunt Tap -> Neurosurgery -> Disposition
 // 7 modules: Recognition -> Imaging -> Differentiation -> ICP Management -> Shunt Tap -> Neurosurgery Consultation -> Disposition
 // 24 nodes total.
+export const VP_SHUNT_CRITICAL_ACTIONS = [
+    { text: 'Normal imaging does NOT exclude shunt malfunction', nodeId: 'vps-imaging' },
+    { text: 'CT head + shunt series for suspected malfunction', nodeId: 'vps-imaging' },
+    { text: 'Compare ventricular size to prior imaging', nodeId: 'vps-imaging-interpretation' },
+    { text: 'Emergent ICP reduction if herniation signs present', nodeId: 'vps-emergent-icp' },
+    { text: 'Neurosurgery consult for all suspected malfunctions', nodeId: 'vps-nsgy-consult' },
+    { text: 'Blood cultures before antibiotics for suspected infection', nodeId: 'vps-infection-workup' },
+    { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap' },
+];
 export const VP_SHUNT_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

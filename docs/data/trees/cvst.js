@@ -2,6 +2,16 @@
 // ED evaluation, risk stratification, anticoagulation, and special populations
 // 6 modules: Presentation → Diagnosis → Risk Stratification → Treatment → Special Populations → Disposition
 // Based on AHA/ASA 2024 Scientific Statement and ESO 2017 Guidelines
+export const CVST_CRITICAL_ACTIONS = [
+    { text: 'ICH in CVST is NOT a contraindication to anticoagulation - proceed with LMWH', nodeId: 'cvst-ich-anticoag' },
+    { text: 'Enoxaparin 1 mg/kg SC q12h immediately - do NOT delay', nodeId: 'cvst-treatment' },
+    { text: 'MRI+MRV gold standard, but CT+CTV acceptable (79% sensitivity, 90% specificity)', nodeId: 'cvst-diagnosis' },
+    { text: 'D-dimer NPV 95-99.8%, but 10% CVST have normal D-dimer - do NOT rely alone', nodeId: 'cvst-diagnosis' },
+    { text: 'No seizure prophylaxis unless seizure already occurred', nodeId: 'cvst-seizure-management' },
+    { text: 'Pregnant/postpartum: LMWH throughout (DOACs contraindicated)', nodeId: 'cvst-pregnancy' },
+    { text: 'Decompressive craniectomy if herniation signs or midline shift ≥5 mm', nodeId: 'cvst-craniectomy' },
+    { text: 'Duration: 3 months (transient) to indefinite (severe thrombophilia)', nodeId: 'cvst-duration' },
+];
 export const CVST_NODES = [
     // ===================================================================
     // MODULE 1: Clinical Presentation

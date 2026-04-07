@@ -528,6 +528,21 @@ export const PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS = [
 ];
 export const PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT = 28;
 // =====================================================================
+// CRITICAL ACTIONS
+// =====================================================================
+export const PERIPARTUM_CARDIOMYOPATHY_CRITICAL_ACTIONS = [
+    { text: 'Echocardiogram STAT for any pregnant/postpartum woman with orthopnea, PND, or dyspnea at rest (LVEF <45% diagnostic)', nodeId: 'ppcm-workup' },
+    { text: 'Bromocriptine 2.5 mg PO BID x 2 weeks, then daily x 6 weeks (improves EF recovery)', nodeId: 'ppcm-bromocriptine' },
+    { text: 'Anticoagulation for LVEF <30% or LV thrombus (high-risk population)', nodeId: 'ppcm-anticoag' },
+    { text: 'ACE inhibitors/ARBs only AFTER delivery (teratogenic before delivery)', nodeId: 'ppcm-acei' },
+    { text: 'Beta-blocker (metoprolol or carvedilol) safe in pregnancy and breastfeeding', nodeId: 'ppcm-bb' },
+    { text: 'Avoid NSAIDs (worsen heart failure and increase afterload)', nodeId: 'ppcm-delivery' },
+    { text: 'Deliver at 37 weeks if LVEF <30% (increased risk of decompensation)', nodeId: 'ppcm-delivery' },
+    { text: 'STOP breastfeeding and start bromocriptine (prolactin worsens PPCM)', nodeId: 'ppcm-bromocriptine' },
+    { text: 'Dobutamine or milrinone for cardiogenic shock (low-dose vasopressin if refractory)', nodeId: 'ppcm-unstable' },
+    { text: 'Contraception essential - pregnancy within 5 years has 50% mortality if LVEF not recovered', nodeId: 'ppcm-disposition' },
+];
+// =====================================================================
 // CITATIONS
 // =====================================================================
 export const PERIPARTUM_CARDIOMYOPATHY_CITATIONS = [

@@ -470,6 +470,19 @@ export const PEDS_OSTEOMYELITIS_MODULE_LABELS = [
   'Disposition & Transition',
 ];
 
+export const PEDS_OSTEOMYELITIS_CRITICAL_ACTIONS = [
+  { text: 'MRI gold standard for diagnosis (sensitivity 90-100%), get within 24-48h', nodeId: 'osteo-imaging' },
+  { text: 'Blood cultures before antibiotics (positive in 30-60%)', nodeId: 'osteo-labs' },
+  { text: 'Empiric antibiotics: Vancomycin + ceftriaxone (covers MRSA + typical organisms)', nodeId: 'osteo-empiric-abx' },
+  { text: 'CRP and ESR for baseline (CRP >2 mg/dL or ESR >20 mm/hr suggestive)', nodeId: 'osteo-labs' },
+  { text: 'Orthopedic surgery consult for abscess, septic arthritis, or vertebral osteomyelitis', nodeId: 'osteo-ortho-consult' },
+  { text: 'IV to PO transition when afebrile 24-48h, CRP improving, clinically better', nodeId: 'osteo-iv-to-po' },
+  { text: 'Total antibiotic duration 3-4 weeks minimum (longer for complications)', nodeId: 'osteo-duration' },
+  { text: 'Avoid NSAIDs until infection controlled (may mask fever and delay diagnosis)', nodeId: 'osteo-pain' },
+  { text: 'S. aureus most common (50-70%), increasing MRSA prevalence', nodeId: 'osteo-organisms' },
+  { text: 'Weight-bearing as tolerated - immobilization NOT required', nodeId: 'osteo-activity' },
+];
+
 export const PEDS_OSTEOMYELITIS_CITATIONS: Citation[] = [
   { num: 1, text: 'Woods CR, Bradley JS, Chatterjee A, et al. Clinical Practice Guideline by the Pediatric Infectious Diseases Society and the Infectious Diseases Society of America: 2021 Guideline on Diagnosis and Management of Acute Hematogenous Osteomyelitis in Pediatrics. J Pediatric Infect Dis Soc. 2021;10(8):801-844.' },
   { num: 2, text: 'Dartnell J, Ramachandran M, Katchburian M. Haematogenous acute and subacute paediatric osteomyelitis: a systematic review of the literature. J Bone Joint Surg Br. 2012;94(5):584-595.' },

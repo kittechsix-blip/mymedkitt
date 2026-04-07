@@ -758,6 +758,18 @@ export const COMBATIVE_PATIENT_MODULE_LABELS = [
     'Restraints',
     'Post-Sedation Care',
 ];
+export const COMBATIVE_PATIENT_CRITICAL_ACTIONS = [
+    { text: 'De-escalation FIRST: calm voice, maintain distance, remove triggers, involve family', nodeId: 'comb-deesc' },
+    { text: 'Mild-moderate agitation: PO preferred - lorazepam 1-2 mg OR olanzapine 5-10 mg', nodeId: 'comb-po' },
+    { text: 'Severe agitation: IM ketamine 4-5 mg/kg OR droperidol 5 mg + midazolam 5 mg', nodeId: 'comb-im-severe' },
+    { text: 'Ketamine preferred for undifferentiated agitation (rapid onset, safe profile)', nodeId: 'comb-ketamine' },
+    { text: 'Physical restraints ONLY when verbal/chemical fail AND imminent danger', nodeId: 'comb-restraints' },
+    { text: 'Monitor Q15min after chemical sedation (vitals, pulse ox, airway)', nodeId: 'comb-post-sedation' },
+    { text: 'Avoid haloperidol monotherapy (QTc prolongation, less effective than combinations)', nodeId: 'comb-avoid-haldol' },
+    { text: 'Reverse search: glucose, vitals, ECG, toxicology screen for reversible causes', nodeId: 'comb-workup' },
+    { text: 'Capacity assessment after agitation resolves - psychiatric clearance if intentional ingestion', nodeId: 'comb-capacity' },
+    { text: 'Document: initial presentation, de-escalation attempts, medication doses/times, response, restraint justification', nodeId: 'comb-documentation' },
+];
 export const COMBATIVE_PATIENT_CITATIONS = [
     { num: 1, text: 'Thiessen MEW, Godwin SA, et al. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or Emergency Department Patients Presenting With Severe Agitation. ACEP. Ann Emerg Med. 2024;83:e1.' },
     { num: 2, text: 'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. Updated Oct 10, 2025.' },

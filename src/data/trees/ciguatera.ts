@@ -27,6 +27,14 @@ export const CIGUATERA_CITATIONS: Citation[] = [
   { num: 8, text: 'Bagnis R, et al. Origins, epidemiology, clinical features and treatment of ciguatera fish poisoning. Toxicon. 1979;17(5):575-588.' },
 ];
 
+export const CIGUATERA_CRITICAL_ACTIONS = [
+  { text: 'Confirm reef fish ingestion within 72 hours', nodeId: 'cig-history' },
+  { text: 'Screen for pathognomonic hot-cold reversal', nodeId: 'cig-symptoms' },
+  { text: 'Mannitol 1 g/kg IV over 45 min for severe symptoms', nodeId: 'cig-severe-treatment' },
+  { text: 'Admit for cardiovascular monitoring if bradycardia/hypotension', nodeId: 'cig-cardiovascular' },
+  { text: 'Avoid ciguatoxic fish for 6 months after poisoning', nodeId: 'cig-discharge' },
+];
+
 export const CIGUATERA_NODES: DecisionNode[] = [
 
   // =====================================================================

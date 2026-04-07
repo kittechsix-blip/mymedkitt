@@ -11,6 +11,19 @@ interface Citation {
   text: string;
 }
 
+export const TIA_WORKUP_CRITICAL_ACTIONS = [
+  { text: 'Fingerstick glucose immediately (rule out hypoglycemia mimic)', nodeId: 'tia-workup-intro' },
+  { text: '12-lead ECG ASAP (detect atrial fibrillation in ~7%)', nodeId: 'tia-workup-intro' },
+  { text: 'MRI with DWI when feasible (distinguish TIA from minor stroke)', nodeId: 'tia-brain-imaging' },
+  { text: 'CTA head/neck to identify large vessel stenosis/dissection', nodeId: 'tia-vascular-imaging' },
+  { text: 'Load DAPT if non-cardioembolic (ASA 162-325 mg + clopidogrel 300-600 mg)', nodeId: 'tia-dapt-treatment' },
+  { text: 'Start high-intensity statin immediately (atorvastatin 80 mg)', nodeId: 'tia-statin-treatment' },
+  { text: 'Symptomatic carotid stenosis ≥50% requires CEA/CAS within 2 weeks', nodeId: 'tia-large-artery' },
+  { text: 'Atrial fibrillation requires anticoagulation (NOT DAPT)', nodeId: 'tia-cardioembolic' },
+  { text: 'DAPT x 21 days then transition to aspirin monotherapy', nodeId: 'tia-dapt-treatment' },
+  { text: 'Do NOT delay treatment - 90-day stroke risk up to 17.8%, 50% in first 2 days', nodeId: 'tia-start' },
+];
+
 export const TIA_WORKUP_NODES: DecisionNode[] = [
 
   // =====================================================================

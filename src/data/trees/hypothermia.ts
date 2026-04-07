@@ -4,11 +4,24 @@
 // Sources: EMCrit IBCC, Wilderness Medical Society 2019, ELSO 2025, AHA ACLS
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 
 interface Citation {
   num: number;
   text: string;
 }
+
+export const HYPOTHERMIA_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Measure core temperature with esophageal or rectal probe', nodeId: 'hypo-start' },
+  { text: 'Remember: "No one is dead until they are WARM and dead"', nodeId: 'hypo-start' },
+  { text: 'Remove wet clothing and prevent further heat loss immediately', nodeId: 'hypo-rewarming' },
+  { text: 'Give warm IV fluids (40-42°C) via Level 1 or Ranger', nodeId: 'hypo-rewarming' },
+  { text: 'Start active rewarming with Bair Hugger, warm blankets, heated humidified O2', nodeId: 'hypo-rewarming' },
+  { text: 'Avoid defibrillation if temp <30°C (J-wave VF is refractory)', nodeId: 'hypo-cardiac-arrest' },
+  { text: 'Continue CPR during rewarming (may need hours of CPR)', nodeId: 'hypo-cardiac-arrest' },
+  { text: 'Activate ECMO for cardiac arrest with temp <28°C (best survival)', nodeId: 'hypo-ecmo' },
+  { text: 'Calculate HOPE score to guide ECMO futility (K+ >12, asphyxia, trauma)', nodeId: 'hypo-ecmo' },
+];
 
 export const HYPOTHERMIA_NODES: DecisionNode[] = [
 

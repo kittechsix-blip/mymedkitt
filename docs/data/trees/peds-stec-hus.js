@@ -2,6 +2,18 @@
 // Shiga toxin-producing E. coli and Hemolytic Uremic Syndrome
 // 5 modules: Recognition -> Workup -> Management -> HUS Treatment -> Disposition
 // Based on AAP, CDC, and current pediatric nephrology guidelines
+export const PEDS_STEC_HUS_CRITICAL_ACTIONS = [
+    { text: 'Check labs: CBC, BMP, LDH, retic, haptoglobin', nodeId: 'stec-workup' },
+    { text: 'Stool: Shiga toxin EIA (do NOT rely on culture alone)', nodeId: 'stec-workup' },
+    { text: 'Monitor daily for HUS triad (MAHA, thrombocytopenia, AKI)', nodeId: 'stec-monitoring' },
+    { text: 'Do NOT give antibiotics (may increase HUS risk)', nodeId: 'stec-abx-controversy' },
+    { text: 'Do NOT give antimotility agents (contraindicated in bloody diarrhea)', nodeId: 'stec-abx-controversy' },
+    { text: 'Aggressive IV fluids (maintain euvolemia to reduce HUS severity)', nodeId: 'stec-management' },
+    { text: 'Dialysis if anuria >24h, K >6.5, severe acidosis, volume overload', nodeId: 'hus-dialysis' },
+    { text: 'Consult nephrology early if HUS features developing', nodeId: 'hus-evolving' },
+    { text: 'Monitor for CNS complications (seizures, AMS)', nodeId: 'hus-cns' },
+    { text: 'Avoid platelet transfusion unless life-threatening bleeding', nodeId: 'hus-transfusion' },
+];
 export const PEDS_STEC_HUS_NODES = [
     // ===================================================================
     // MODULE 1: Recognition & Risk Assessment

@@ -2,6 +2,17 @@
 // Initial Assessment → Stage Classification → Risk Assessment & Testing → Test Interpretation → Treatment → Special Populations & Disposition
 // 6 modules: Initial Assessment → Stage Classification → Risk Assessment & Testing → Test Interpretation → Treatment → Special Populations & Disposition
 // 32 nodes total.
+export const SYPHILIS_CRITICAL_ACTIONS = [
+    { text: 'Pregnancy: Penicillin is the ONLY acceptable treatment - desensitization MANDATORY if PCN-allergic', nodeId: 'syph-treat-pregnancy' },
+    { text: 'Ocular/otosyphilis = neurosyphilis treatment (IV Penicillin G) regardless of CSF findings - do NOT delay for LP', nodeId: 'syph-neuro-route' },
+    { text: 'Benzathine PCN-G does NOT achieve treponemicidal CSF levels - inadequate for neurosyphilis', nodeId: 'syph-neuro-route' },
+    { text: 'Early syphilis (primary/secondary/early latent): Benzathine PCN-G 2.4M units IM × 1 dose', nodeId: 'syph-treat-early' },
+    { text: 'Late latent/tertiary: Benzathine PCN-G 2.4M units IM weekly × 3 weeks (total 7.2M units)', nodeId: 'syph-treat-late' },
+    { text: 'Azithromycin is NOT recommended - documented macrolide resistance and treatment failures', nodeId: 'syph-pcn-allergy' },
+    { text: 'Partner exposure within 90 days = treat presumptively even if seronegative', nodeId: 'syph-partner-exposure' },
+    { text: 'Jarisch-Herxheimer in pregnancy can cause preterm labor - monitor with continuous fetal monitoring × 24h if viable GA', nodeId: 'syph-treat-pregnancy' },
+    { text: 'Treponemal tests (TP-PA, FTA-ABS) remain positive for life - cannot distinguish active from past infection', nodeId: 'syph-both-reactive' },
+];
 export const SYPHILIS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT & PRESENTATION
@@ -118,7 +129,7 @@ export const SYPHILIS_NODES = [
         type: 'info',
         module: 1,
         title: 'Syphilis in Pregnancy',
-        body: 'Syphilis in pregnancy is a **public health emergency**. Congenital syphilis cases increased 755% from 2012-2022 (3,761 cases in 2022), with 282 stillbirths and infant deaths. [3][10][11]\n\n**Critical rules:**\n• ALL pregnant patients with syphilis must receive **penicillin** — there are **NO adequate alternatives**\n• If PCN-allergic: **desensitization is MANDATORY** (oral protocol preferred, can be done in ED/L&D with monitoring)\n• Vertical transmission risk is highest in primary/secondary syphilis but can occur at any stage\n\n**Screening schedule:**\n• First prenatal visit\n• Beginning of third trimester (28 weeks)\n• At delivery (in high-prevalence areas)\n\n**Jarisch-Herxheimer reaction:** Can precipitate preterm labor and fetal distress. Monitor with continuous fetal monitoring × 24h if viable gestational age. [3][12]\n\n[Congenital Syphilis Risks & Signs](#/info/syph-congenital)',
+        body: 'Syphilis in pregnancy is a **public health emergency**. Congenital syphilis cases increased 755% from 2012-2022 (3,761 cases in 2022), with 282 stillbirths and infant deaths. [3][10][11]\n\n**Critical rules:**\n• ALL pregnant patients with syphilis must receive **penicillin** — there are **NO adequate alternatives**\n• If PCN-allergic: **desensitization is MANDATORY** (oral protocol preferred, can be done in ED/L&D with monitoring)\n• Vertical transmission risk is highest in primary/secondary syphilis but can occur at any stage\n\n**Screening schedule:**\n• First prenatal visit\n• Beginning of third trimester (28 weeks)\n• At delivery (in high-prevalence areas)\n\n**Jarisch-Herxheimer retext:** Can precipitate preterm labor and fetal distress. Monitor with continuous fetal monitoring × 24h if viable gestational age. [3][12]\n\n[Congenital Syphilis Risks & Signs](#/info/syph-congenital)',
         citation: [3, 10, 11, 12],
         next: 'syph-stage-classify',
     },
@@ -387,7 +398,7 @@ export const SYPHILIS_NODES = [
         type: 'result',
         module: 5,
         title: 'Early Syphilis Treatment',
-        body: '**Primary / Secondary / Early Latent (< 1 year):** [1][5][31]\n\n[Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) **2.4 million units IM × 1 dose**\n\nAdminister as a single injection (can split into two gluteal sites for comfort).\n\n**Jarisch-Herxheimer reaction:** [32]\n• Occurs in 10-35% of primary, 75-90% of secondary syphilis\n• Onset 2-8 hours after treatment, resolves within 24 hours\n• Fever, rigors, myalgias, headache, tachycardia, flushing, worsening of rash\n• **NOT an allergic reaction** — caused by immune response to dying spirochetes\n• Treat supportively (antipyretics, fluids). Do NOT withhold future treatment.\n\n[Jarisch-Herxheimer Reaction](#/info/syph-jarisch-herxheimer)\n\n**Follow-up:** Quantitative RPR at 6 and 12 months. Expect **4-fold titer decline** by 6-12 months (e.g., 1:64 → 1:16).',
+        body: '**Primary / Secondary / Early Latent (< 1 year):** [1][5][31]\n\n[Benzathine Penicillin G](#/drug/benzathine-penicillin/primary) **2.4 million units IM × 1 dose**\n\nAdminister as a single injection (can split into two gluteal sites for comfort).\n\n**Jarisch-Herxheimer retext:** [32]\n• Occurs in 10-35% of primary, 75-90% of secondary syphilis\n• Onset 2-8 hours after treatment, resolves within 24 hours\n• Fever, rigors, myalgias, headache, tachycardia, flushing, worsening of rash\n• **NOT an allergic reaction** — caused by immune response to dying spirochetes\n• Treat supportively (antipyretics, fluids). Do NOT withhold future treatment.\n\n[Jarisch-Herxheimer Reaction](#/info/syph-jarisch-herxheimer)\n\n**Follow-up:** Quantitative RPR at 6 and 12 months. Expect **4-fold titer decline** by 6-12 months (e.g., 1:64 → 1:16).',
         recommendation: 'Benzathine PCN-G 2.4M units IM × 1. Counsel regarding Jarisch-Herxheimer. RPR at 6 and 12 months.',
         citation: [1, 5, 31, 32],
         treatment: {

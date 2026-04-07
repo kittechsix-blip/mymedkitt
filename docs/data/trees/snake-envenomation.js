@@ -2,6 +2,16 @@
 // Sources: EB Medicine, UpToDate, EMCRIT, OpenEvidence, Surgical Critical Care 2023
 // 7 modules: Initial Assessment → Snake ID → Pit Viper Grading → Antivenom → Special Populations → Coral Snake → Disposition
 // Covers: Pit vipers (rattlesnakes, copperheads, cottonmouths) + Coral snakes
+export const SNAKE_ENVENOMATION_CRITICAL_ACTIONS = [
+    { text: 'Remove jewelry/constrictive items immediately', nodeId: 'snake-start' },
+    { text: 'Mark leading edge of swelling with time to track progression', nodeId: 'snake-start' },
+    { text: 'Obtain baseline labs: CBC, PT/INR, PTT, fibrinogen, BMP, CK', nodeId: 'snake-start' },
+    { text: 'Do NOT apply ice, tourniquets, or incise/suction bite', nodeId: 'snake-start' },
+    { text: 'Grade pit viper envenomation severity (mild/moderate/severe)', nodeId: 'snake-grading' },
+    { text: 'Give CroFab antivenom for moderate-severe envenomation (loading dose 4-6 vials)', nodeId: 'snake-crofab' },
+    { text: 'Monitor for coagulopathy (PT/INR, fibrinogen q6h × 3 days)', nodeId: 'snake-monitoring' },
+    { text: 'Admit all moderate-severe envenomations and coral snake bites', nodeId: 'snake-dispo' },
+];
 export const SNAKE_ENVENOMATION_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT
@@ -182,7 +192,7 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 4,
         title: 'CroFab Administration',
-        body: '**CroFab Dosing Protocol:**\n\n**Reconstitution:**\n1. Reconstitute each vial with 18 mL NS\n2. Mix by continuous manual inversion (1-2/sec)\n3. **DO NOT SHAKE** (causes foaming)\n4. Reconstitution should take < 7 min\n5. Dilute total dose to 250 mL NS\n6. Use within 4 hours\n\n**Initial Dose:**\n- Standard: **4-6 vials** IV\n- Severe: **8-12 vials** IV\n- Pediatric = Adult dose\n\n**Administration:**\n- Start slow: 25-50 mL/hr × 10 min\n- If no reaction: increase to 250 mL/hr\n- Monitor for anaphylaxis\n\n**Maintenance Dosing (Controversial):**\n- 2 vials at 6, 12, and 18 hours post-initial control\n- Consult poison center for guidance\n\n[CroFab/Anavip Calculator](#/calculator/snake-antivenom) [3][4]',
+        body: '**CroFab Dosing Protocol:**\n\n**Reconstitution:**\n1. Reconstitute each vial with 18 mL NS\n2. Mix by continuous manual inversion (1-2/sec)\n3. **DO NOT SHAKE** (causes foaming)\n4. Reconstitution should take < 7 min\n5. Dilute total dose to 250 mL NS\n6. Use within 4 hours\n\n**Initial Dose:**\n- Standard: **4-6 vials** IV\n- Severe: **8-12 vials** IV\n- Pediatric = Adult dose\n\n**Administration:**\n- Start slow: 25-50 mL/hr × 10 min\n- If no retext: increase to 250 mL/hr\n- Monitor for anaphylaxis\n\n**Maintenance Dosing (Controversial):**\n- 2 vials at 6, 12, and 18 hours post-initial control\n- Consult poison center for guidance\n\n[CroFab/Anavip Calculator](#/calculator/snake-antivenom) [3][4]',
         citation: [3, 4],
         calculatorLinks: [
             { id: 'snake-antivenom', label: 'Antivenom Dosing' },
@@ -312,7 +322,7 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 4,
         title: 'Antivenom Allergic Reaction',
-        body: '**Anaphylaxis/Hypersensitivity Management:**\n\n**Immediate:**\n1. STOP infusion\n2. **Epinephrine 0.3-0.5 mg IM** (preferred over SC)\n3. IVF bolus\n4. Supportive care\n\n**When stable:**\n- Restart infusion at SLOWER rate\n- Antivenom benefit usually outweighs reaction risk\n- Premedicate if restarting (diphenhydramine, steroids)\n\n**Risk factors for CroFab reaction:**\n- Papain, chymopapain, papaya extract allergy\n- Bromelain (pineapple enzyme) allergy\n- Dust mite allergies (share papain antigens)\n- Latex allergies\n\n**Delayed Reactions (Serum Sickness):**\n- 5-14 days post-antivenom\n- Rash, fever, myalgia, arthralgia\n- Incidence: 5-10%\n- Counsel all patients on return precautions [3][4]',
+        body: '**Anaphylaxis/Hypersensitivity Management:**\n\n**Immediate:**\n1. STOP infusion\n2. **Epinephrine 0.3-0.5 mg IM** (preferred over SC)\n3. IVF bolus\n4. Supportive care\n\n**When stable:**\n- Restart infusion at SLOWER rate\n- Antivenom benefit usually outweighs reaction risk\n- Premedicate if restarting (diphenhydramine, steroids)\n\n**Risk factors for CroFab retext:**\n- Papain, chymopapain, papaya extract allergy\n- Bromelain (pineapple enzyme) allergy\n- Dust mite allergies (share papain antigens)\n- Latex allergies\n\n**Delayed Reactions (Serum Sickness):**\n- 5-14 days post-antivenom\n- Rash, fever, myalgia, arthralgia\n- Incidence: 5-10%\n- Counsel all patients on return precautions [3][4]',
         citation: [3, 4],
         treatment: {
             firstLine: {

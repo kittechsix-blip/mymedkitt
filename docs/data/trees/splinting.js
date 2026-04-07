@@ -3,6 +3,14 @@
 // 5 modules: Overview → Humerus → Forearm → Wrist & Hand → Lower Extremity
 // 17 nodes total.
 // Source: ALiEM Splinter Series, WikEM, Boyd et al. (2009), Eiff & Hatch (2018), multiple authors
+export const SPLINTING_CRITICAL_ACTIONS = [
+    { text: 'Pre-splint neurovascular exam and documentation', nodeId: 'splint-start' },
+    { text: 'Reduce angulated fractures before splinting', nodeId: 'splint-start' },
+    { text: 'Apply stockinette, then padding (avoid wrinkles)', nodeId: 'splint-start' },
+    { text: 'Mold splint with flat palms, not fingertips', nodeId: 'splint-start' },
+    { text: 'Post-splint neurovascular check and documentation', nodeId: 'splint-start' },
+    { text: 'Position of function: wrist extended, MCP flexed', nodeId: 'splint-start' },
+];
 export const SPLINTING_NODES = [
     // =====================================================================
     // MODULE 1: OVERVIEW

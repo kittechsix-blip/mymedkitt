@@ -413,6 +413,18 @@ export const ED_METHADONE_MODULE_LABELS = [
     'Monitoring',
     'Disposition',
 ];
+export const ED_METHADONE_CRITICAL_ACTIONS = [
+    { text: '72-hour rule: ED can administer/dispense methadone x3 days while arranging OTP referral (DEA 21 CFR 1306.07)', nodeId: 'meth-72hr-rule' },
+    { text: 'Verify OTP enrollment and last dose: call OTP directly, check state PDMP, review OTP card', nodeId: 'meth-verify' },
+    { text: 'EKG before dosing: QTc >500 ms = contraindication to methadone', nodeId: 'meth-qtc' },
+    { text: 'Conservative dosing: 20-30 mg initial dose if OTP dose unverified (max 40 mg first dose)', nodeId: 'meth-dosing-unverified' },
+    { text: 'Verified OTP dose: give usual dose if last dose within 72h (stable patients)', nodeId: 'meth-dosing-verified' },
+    { text: 'Buprenorphine preferred if no established OTP enrollment (ED can prescribe via X-waiver)', nodeId: 'meth-buprenorphine' },
+    { text: 'OTP linkage required: cannot discharge without documented referral and appointment', nodeId: 'meth-otp-linkage' },
+    { text: 'Avoid methadone if: prolonged QTc, benzodiazepine use, severe liver disease, respiratory depression', nodeId: 'meth-contraindications' },
+    { text: 'Peak respiratory depression 2-4 hours after dose (delayed vs. other opioids)', nodeId: 'meth-respiratory' },
+    { text: 'Do NOT combine with benzodiazepines (additive respiratory depression, FDA black box warning)', nodeId: 'meth-benzos' },
+];
 export const ED_METHADONE_CITATIONS = [
     { num: 1, text: 'Substance Abuse and Mental Health Services Administration. Medications for Opioid Use Disorder. Treatment Improvement Protocol (TIP) Series 63. HHS Publication No. (SMA) 21-PEP21-02-01-002. Rockville, MD: SAMHSA; 2021.' },
     { num: 2, text: 'Code of Federal Regulations. Title 21, Part 1306.07(b) - Administering or dispensing of narcotic drugs.' },

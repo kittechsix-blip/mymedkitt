@@ -2,6 +2,16 @@
 // ED recognition, workup, empiric treatment, and disposition
 // 5 modules: Recognition -> Workup -> Empiric Treatment -> Gonococcal vs Non-Gonococcal -> Disposition
 // 27 nodes total.
+export const SEPTIC_ARTHRITIS_CRITICAL_ACTIONS = [
+    { text: 'Arthrocentesis IMMEDIATELY - do NOT delay for imaging, labs, or coagulopathy', nodeId: 'sa-workup-overview' },
+    { text: 'Synovial WBC >50,000 only 56% sensitive - 39% culture-positive cases <50K', nodeId: 'sa-synovial-fluid' },
+    { text: 'Synovial lactate >10 mmol/L: 86% sensitivity, essentially 100% specificity', nodeId: 'sa-synovial-fluid' },
+    { text: 'Empiric antibiotics: Vancomycin 15-20 mg/kg (MRSA coverage) ± ceftriaxone for gram-neg', nodeId: 'sa-empiric-nongc' },
+    { text: 'Crystals do NOT exclude infection - dual diagnosis in 1-2%', nodeId: 'sa-adult-predictors' },
+    { text: 'Hip, shoulder, SI joint → surgical drainage required (not amenable to aspiration)', nodeId: 'sa-surgical-drainage' },
+    { text: 'Prosthetic joint: synovial WBC >3,000 (MUCH lower threshold than native joint)', nodeId: 'sa-prosthetic' },
+    { text: 'Gonococcal: ceftriaxone 1g + doxycycline 100mg BID - often managed WITHOUT surgery', nodeId: 'sa-gonococcal' },
+];
 export const SEPTIC_ARTHRITIS_NODES = [
     // ===================================================================
     // MODULE 1: Recognition & Assessment

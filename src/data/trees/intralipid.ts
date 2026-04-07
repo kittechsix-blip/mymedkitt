@@ -347,6 +347,19 @@ export const INTRALIPID_NODE_COUNT = 21;
 // CITATIONS
 // =====================================================================
 
+export const INTRALIPID_CRITICAL_ACTIONS = [
+  { text: 'Intralipid 20% bolus: 1.5 mL/kg IV over 1 minute (may repeat x2 at 5-min intervals)', nodeId: 'ile-dosing-protocol' },
+  { text: 'Intralipid 20% infusion: 0.25 mL/kg/min continuous (double to 0.5 if unstable)', nodeId: 'ile-dosing-protocol' },
+  { text: 'Maximum dose: ~12 mL/kg in first 30 minutes (~840 mL for 70 kg patient)', nodeId: 'ile-dosing-protocol' },
+  { text: 'Continue infusion 15-30 minutes after hemodynamic stability achieved', nodeId: 'ile-endpoints' },
+  { text: 'Modified CPR for LAST: use small-dose epinephrine (<1 mcg/kg), avoid vasopressin and propofol', nodeId: 'ile-cpr-modifications' },
+  { text: 'Best evidence for LAST (standard of care per ASRA/AHA), also used for lipophilic drug OD (BB/CCB/TCA)', nodeId: 'ile-indications-question' },
+  { text: 'Stop local anesthetic injection immediately at first signs of toxicity', nodeId: 'ile-last' },
+  { text: 'Prolonged CPR may be needed (60+ min) - ILE provides ongoing drug sequestration', nodeId: 'ile-cpr-modifications' },
+  { text: 'Consider VA-ECMO for refractory LAST arrest (early cannulation improves outcomes)', nodeId: 'ile-dispo-refractory' },
+  { text: 'Monitor for recrudescence 4-6 hours after stopping ILE (toxicity may return as ILE metabolized)', nodeId: 'ile-endpoints' },
+];
+
 export const INTRALIPID_CITATIONS: Citation[] = [
   {
     num: 1,

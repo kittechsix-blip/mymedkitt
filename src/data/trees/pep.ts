@@ -322,6 +322,23 @@ export const PEP_MODULE_LABELS = [
 ];
 
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+
+export const PEP_CRITICAL_ACTIONS = [
+  { text: 'Start PEP within 72 hours of exposure (sooner is better, most effective within 24h)', nodeId: 'pep-timing' },
+  { text: 'Preferred PEP regimen: tenofovir DF/emtricitabine + dolutegravir x 28 days', nodeId: 'pep-regimen-preferred' },
+  { text: 'HIV transmission risk: receptive anal highest (1.4%), then insertive anal (0.11%), receptive vaginal (0.08%)', nodeId: 'pep-risk' },
+  { text: 'Baseline HIV rapid test + HepB/C, CBC, CMP, pregnancy test before starting PEP', nodeId: 'pep-baseline' },
+  { text: 'Source patient testing: rapid HIV test (if consents), HepB/C status', nodeId: 'pep-source' },
+  { text: 'PEP reduces transmission risk by >80% when taken correctly', nodeId: 'pep-effectiveness' },
+  { text: 'Follow-up HIV testing at 4-6 weeks, 3 months, and 6 months after exposure', nodeId: 'pep-followup' },
+  { text: 'Do NOT wait for source patient HIV results to start PEP (can discontinue if source negative)', nodeId: 'pep-dont-wait' },
+  { text: 'Occupational exposure: sharps injury from HIV+ source = start PEP immediately', nodeId: 'pep-occupational' },
+  { text: 'Common side effects: GI upset, headache, fatigue (usually resolve after first week)', nodeId: 'pep-side-effects' },
+];
+
 // Evidence Citations
 // -------------------------------------------------------------------
 

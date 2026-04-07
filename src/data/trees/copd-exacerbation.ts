@@ -10,6 +10,19 @@ export interface Citation {
   text: string;
 }
 
+export const COPD_EXACERBATION_CRITICAL_ACTIONS = [
+  { text: 'Target SpO2 88-92% (NOT higher - avoid hyperoxia)', nodeId: 'copd-start' },
+  { text: 'Nebulized albuterol + ipratropium q4-6h scheduled (can give through BiPAP)', nodeId: 'copd-bronchodilators' },
+  { text: 'Prednisone 40 mg PO daily x 5 days (no taper needed)', nodeId: 'copd-steroids' },
+  { text: 'Antibiotics if purulent sputum + 1 other symptom OR on NIV', nodeId: 'copd-antibiotics' },
+  { text: 'Start BiPAP if RR >30, respiratory acidosis, or severe dyspnea', nodeId: 'copd-niv-indication' },
+  { text: 'BiPAP settings: start 10/5, titrate to 18-20/8 cm H2O, FiO2 to SpO2 88-92%', nodeId: 'copd-niv-management' },
+  { text: 'Reassess BiPAP response at 2 hours (pH should improve)', nodeId: 'copd-niv-response' },
+  { text: 'Dexmedetomidine for BiPAP intolerance (no respiratory depression)', nodeId: 'copd-niv-management' },
+  { text: 'Intubation: ketamine preferred (bronchodilator), watch for auto-PEEP', nodeId: 'copd-intubation' },
+  { text: 'Permissive hypercapnia post-intubation (target pH 7.25-7.35, not normal CO2)', nodeId: 'copd-vent-management' },
+];
+
 export const COPD_EXACERBATION_NODES: DecisionNode[] = [
 
   // =====================================================================

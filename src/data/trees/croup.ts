@@ -6,6 +6,17 @@
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
+export const CROUP_CRITICAL_ACTIONS = [
+  { text: 'Dexamethasone 0.6 mg/kg PO (max 16 mg) for ALL severities - single dose reduces return visits by ~50%', nodeId: 'croup-mild-tx' },
+  { text: 'Racemic epinephrine 0.5 mL of 2.25% nebulized for stridor at rest - provides 1-2h relief', nodeId: 'croup-mod-tx' },
+  { text: 'Observe minimum 2 hours after last epinephrine dose for rebound stridor', nodeId: 'croup-epi-obs' },
+  { text: 'Use ETT 0.5-1.0 size smaller than age-predicted if intubation needed (subglottic narrowing)', nodeId: 'croup-failure-tx' },
+  { text: 'Dexamethasone 0.15 mg/kg PO is non-inferior to 0.6 mg/kg dose (Parker RCT 2019)', nodeId: 'croup-mild-tx' },
+  { text: 'Prednisolone 1 mg/kg PO is non-inferior alternative if dexamethasone unavailable', nodeId: 'croup-mild-tx' },
+  { text: 'Repeated epinephrine doses may prevent intubation - do NOT limit to single dose', nodeId: 'croup-repeat-epi' },
+  { text: 'Humidified air and cool mist have NO evidence of benefit - focus on steroids + epinephrine', nodeId: 'croup-discharge' },
+];
+
 export const CROUP_NODES: DecisionNode[] = [
 
   // =====================================================================

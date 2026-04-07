@@ -12,6 +12,19 @@ export const NAT_SCREENING_MODULE_LABELS: string[] = [
   'Disposition',
 ];
 
+export const NAT_SCREENING_CRITICAL_ACTIONS = [
+  { text: 'Apply TEN-4-FACESp rule for bruising in children <4 years (any positive finding = abuse risk)', nodeId: 'nat-ten4' },
+  { text: 'Skeletal survey mandatory for all children <2 years with suspected abuse', nodeId: 'nat-skeletal-survey' },
+  { text: 'Head CT mandatory for all children <1 year with suspected abuse', nodeId: 'nat-imaging' },
+  { text: 'MRI brain + cervical spine for abusive head trauma (75% have unsuspected spinal injuries)', nodeId: 'nat-aht-imaging' },
+  { text: 'Ophthalmology consult within 24-48 hours for retinal exam (grade 3A/3B hemorrhages highly specific for abuse)', nodeId: 'nat-aht' },
+  { text: 'Coagulation studies (CBC, PT, aPTT, Factor VIII/IX) for all cases with bruising or intracranial hemorrhage', nodeId: 'nat-labs' },
+  { text: 'Mandatory CPS report for all suspected abuse ("reasonable cause to believe" standard)', nodeId: 'nat-reporting' },
+  { text: 'Document complete physical exam with body diagrams/photos (no permission required for medical evaluation)', nodeId: 'nat-documentation' },
+  { text: 'Interview caregivers separately with direct quotations and document inconsistencies', nodeId: 'nat-documentation' },
+  { text: 'Repeat skeletal survey at 10-14 days if initial negative but high suspicion (fractures only visible during healing)', nodeId: 'nat-skeletal-survey' },
+];
+
 export const NAT_SCREENING_CITATIONS = [
   { num: 1, text: 'Pierce MC, et al. Validation of a clinical decision rule to predict abuse in young children based on bruising characteristics. JAMA Netw Open. 2021;4(4):e215832.' },
   { num: 2, text: 'Lindberg DM, et al. Prevalence of abusive injuries in siblings and household contacts of abused children. Pediatrics. 2012;130(2):193-201.' },

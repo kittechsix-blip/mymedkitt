@@ -2,6 +2,17 @@
 // Sources: UpToDate, EMCrit, IBCC, ATS/ERS Guidelines
 // 6 modules: Assessment → Device Selection → Settings → Titration → Monitoring → Escalation
 // ~28 nodes
+export const OXYGEN_DELIVERY_CRITICAL_ACTIONS = [
+    { text: 'COPD target SpO2 88-92% (NOT 94-98%) - over-oxygenation worsens hypercapnia via Haldane effect', nodeId: 'o2-copd-device' },
+    { text: 'Non-rebreather mask requires 10-15 L/min to keep reservoir bag ≥1/3 full - inadequate flow = inadequate O2', nodeId: 'o2-nrb-info' },
+    { text: 'HFNC ROX Index <3.85 at 2h = high risk of intubation - consider NIV or intubation', nodeId: 'o2-titrate-hfnc' },
+    { text: 'BiPAP for hypercapnic failure: IPAP 10-12 → titrate up by 2 q5-10 min to max 20-25', nodeId: 'o2-bipap-info' },
+    { text: 'CPAP for CHF/flash pulmonary edema: Start 5 cmH2O → titrate to 8-12 cmH2O by 2-3 increments', nodeId: 'o2-cpap-info' },
+    { text: 'Apneic oxygenation during intubation: Nasal cannula 15 L/min or HFNC 60-70 L/min throughout attempt', nodeId: 'o2-intubation-bridge' },
+    { text: 'Nasal cannula max effective flow 6 L/min (≈44% FiO2) - higher flows do NOT increase FiO2', nodeId: 'o2-mild-device' },
+    { text: 'Venturi mask provides precise FiO2 regardless of breathing pattern - use for COPD or protocol titration', nodeId: 'o2-venturi-info' },
+    { text: 'Check ABG at 1-2h on NIV - if pH unchanged/worse → escalate to intubation', nodeId: 'o2-titrate-bipap' },
+];
 export const OXYGEN_DELIVERY_NODES = [
     // =====================================================================
     // MODULE 1: CLINICAL ASSESSMENT
@@ -93,7 +104,7 @@ export const OXYGEN_DELIVERY_NODES = [
         type: 'question',
         module: 2,
         title: 'Severe Hypoxemia — Escalation',
-        body: '**Critical hypoxemia (SpO2 <75%) requires immediate action:**\n\n**Options:**\n1. **HFNC** — If patient alert, tolerating, Type 1 RF\n2. **NIV (BiPAP/CPAP)** — If Type 2 RF, CHF, COPD exacerbation\n3. **Intubation** — If altered, not protecting airway, refractory\n\n**Red Flags Requiring Intubation:**\n- GCS ≤8 or declining mental status\n- Unable to protect airway (secretions, vomiting)\n- Severe respiratory acidosis (pH <7.20) not improving\n- Hemodynamic instability\n- Refractory hypoxemia despite maximal non-invasive support\n\n**What is the best approach?**',
+        body: '**Critical hypoxemia (SpO2 <75%) requires immediate text:**\n\n**Options:**\n1. **HFNC** — If patient alert, tolerating, Type 1 RF\n2. **NIV (BiPAP/CPAP)** — If Type 2 RF, CHF, COPD exacerbation\n3. **Intubation** — If altered, not protecting airway, refractory\n\n**Red Flags Requiring Intubation:**\n- GCS ≤8 or declining mental status\n- Unable to protect airway (secretions, vomiting)\n- Severe respiratory acidosis (pH <7.20) not improving\n- Hemodynamic instability\n- Refractory hypoxemia despite maximal non-invasive support\n\n**What is the best approach?**',
         citation: [1, 2, 4],
         options: [
             {

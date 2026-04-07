@@ -356,7 +356,7 @@ export const AACG_NODES = [
         type: 'info',
         module: 3,
         title: 'Refractory AACG',
-        body: '**IOP remains elevated despite maximal medical therapy:**\n\n**Options (Ophthalmology Decision):**\n\n**1. Anterior Chamber Paracentesis:**\n- Immediate IOP reduction\n- Specialist procedure\n- Temporizing until laser available\n\n**2. Emergent Laser Peripheral Iridotomy:**\n- If cornea clear enough\n- May need to wait for corneal edema to resolve\n\n**3. Surgical Iridectomy:**\n- If laser not possible\n- OR availability required\n\n**4. Lens Extraction:**\n- If cataract present\n- Especially if IOP >55 mmHg\n\n**ED Role:**\n- Continue medical therapy\n- Urgent ophthalmology at bedside\n- Prepare for admission/transfer\n\n**Do NOT discharge** refractory AACG. [1][2][4]',
+        body: '**IOP remains elevated despite maximal medical therapy:**\n\n**Options (Ophthalmology Decision):**\n\n**1. Anterior Chamber Paracentesis:**\n- Immediate IOP reduction\n- Specialist procedure\n- Temporizing until laser available\n\n**2. Emergent Laser Peripheral Iridotomy:**\n- If cornea clear enough\n- May need to wait for corneal edema to resolve\n\n**3. Surgical Iridectomy:**\n- If laser not possible\n- OR availability required\n\n**4. Lens Extrtext:**\n- If cataract present\n- Especially if IOP >55 mmHg\n\n**ED Role:**\n- Continue medical therapy\n- Urgent ophthalmology at bedside\n- Prepare for admission/transfer\n\n**Do NOT discharge** refractory AACG. [1][2][4]',
         citation: [1, 2, 4],
         next: 'aacg-dispo',
     },
@@ -538,6 +538,18 @@ export const AACG_MODULE_LABELS = [
     'Treatment Cascade',
     'Precipitating Meds',
     'Disposition',
+];
+export const AACG_CRITICAL_ACTIONS = [
+    { text: 'Ophthalmology consult FIRST - do NOT delay for treatment (they need to assess for laser iridotomy)', nodeId: 'aacg-start' },
+    { text: 'Tonometry to measure IOP (normal 10-21 mmHg; AACG usually 50-80+ mmHg)', nodeId: 'aacg-iop' },
+    { text: 'Acetazolamide 500 mg IV/PO + timolol 0.5% 1 drop + apraclonidine 1% 1 drop immediately', nodeId: 'aacg-triple-therapy' },
+    { text: 'Mannitol 1-2 g/kg IV over 30-45 min if IOP >40 despite initial therapy', nodeId: 'aacg-mannitol' },
+    { text: 'Pilocarpine 1-2% AFTER IOP <40 (ineffective when IOP very high)', nodeId: 'aacg-pilocarpine' },
+    { text: 'Recheck IOP q1h until <30 mmHg, then q2-4h until ophthalmology evaluation', nodeId: 'aacg-monitoring' },
+    { text: 'Avoid anticholinergics, antihistamines, and sympathomimetics (worsen AACG)', nodeId: 'aacg-avoid-meds' },
+    { text: 'Definitive treatment is laser peripheral iridotomy (LPI) - ophthalmology performs', nodeId: 'aacg-disposition' },
+    { text: 'Treat both eyes prophylactically (fellow eye has 40-80% risk within 5-10 years)', nodeId: 'aacg-disposition' },
+    { text: 'Admit if IOP remains >30 despite maximal therapy or significant optic nerve damage', nodeId: 'aacg-admit' },
 ];
 export const AACG_CITATIONS = [
     { num: 1, text: 'EB Medicine. Ophthalmic Emergencies: Acute Visual Complaints. 2024.' },

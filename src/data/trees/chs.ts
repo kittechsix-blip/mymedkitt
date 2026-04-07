@@ -4,7 +4,19 @@
 // 25 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const CHS_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Ask about compulsive hot water bathing (90% of CHS patients)', nodeId: 'chs-presentation' },
+  { text: 'Confirm chronic cannabis use (daily or near-daily for months/years)', nodeId: 'chs-presentation' },
+  { text: 'Rule out organic causes: pregnancy, appendicitis, cholecystitis, pancreatitis', nodeId: 'chs-ddx' },
+  { text: 'Use butyrophenones (haloperidol, droperidol) as first-line antiemetic', nodeId: 'chs-antiemetics' },
+  { text: 'Apply topical capsaicin cream 0.1% to abdomen for symptom relief', nodeId: 'chs-capsaicin' },
+  { text: 'Avoid ondansetron (usually fails in CHS)', nodeId: 'chs-antiemetics' },
+  { text: 'Counsel on cannabis cessation as definitive treatment', nodeId: 'chs-dispo' },
+  { text: 'Discharge with anti-emetics and capsaicin prescription', nodeId: 'chs-dispo' },
+];
 
 export const CHS_NODES: DecisionNode[] = [
 

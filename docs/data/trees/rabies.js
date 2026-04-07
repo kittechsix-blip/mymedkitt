@@ -2,6 +2,17 @@
 // Clinical rabies workup + post-exposure prophylaxis decision tree.
 // 7 modules: Initial Assessment → Clinical Rabies → Diagnostic Workup → Exposure Assessment → Animal Risk & Wound Care → PEP Decision → Schedule & Follow-Up
 // 30 nodes total.
+export const RABIES_CRITICAL_ACTIONS = [
+    { text: 'Rabies is 100% fatal once symptomatic - post-exposure prophylaxis is highly effective if given promptly', nodeId: 'rabies-start' },
+    { text: 'Bat exposure = PEP even if no bite confirmed (bite marks can be invisible)', nodeId: 'rabies-bat' },
+    { text: 'Wound care is the single most effective prevention: wash with soap and water ≥15 minutes', nodeId: 'rabies-wound' },
+    { text: 'RIG 20 IU/kg: infiltrate as much as possible into wound, give remainder IM distant from vaccine site', nodeId: 'rabies-full-pep' },
+    { text: 'Do NOT give RIG after day 7 of vaccine series (interferes with active immunity)', nodeId: 'rabies-full-pep' },
+    { text: 'Immunocompromised: 5-dose vaccine series + RIG (even if previously vaccinated)', nodeId: 'rabies-immunocomp-pep' },
+    { text: 'Previously vaccinated immunocompetent: 2 doses only (days 0 and 3), no RIG needed', nodeId: 'rabies-prevax-regimen' },
+    { text: 'Pregnancy is NOT a contraindication to rabies PEP', nodeId: 'rabies-full-pep' },
+    { text: 'Dogs/cats/ferrets can be observed for 10 days, but START PEP immediately for Category III exposures', nodeId: 'rabies-observe-severe' },
+];
 export const RABIES_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

@@ -2,6 +2,16 @@
 // Recognition → Crisis → Cholinergic vs Myasthenic → Diagnostics → Drug Triggers → Treatment → Airway → Thymectomy → Disposition.
 // 9 modules: Recognition → Myasthenic Crisis → Cholinergic Crisis → Diagnostics → Drug Triggers → Acute Treatment → Airway → Thymectomy → Disposition
 // 27 nodes total.
+export const MYASTHENIA_GRAVIS_CRITICAL_ACTIONS = [
+    { text: 'FVC <15-20 mL/kg or NIF weaker than -20 to -25 → intubate', nodeId: 'mg-airway' },
+    { text: 'STOP all anticholinesterase if uncertain myasthenic vs cholinergic crisis', nodeId: 'mg-uncertain-crisis' },
+    { text: 'Atropine 0.5-1 mg IV for cholinergic crisis (SLUDGE/BBB symptoms)', nodeId: 'mg-cholinergic-treatment' },
+    { text: 'IVIG or plasmapheresis for crisis - start immediately, do NOT delay', nodeId: 'mg-ivig-plex' },
+    { text: 'Steroids can cause initial worsening - give with IVIG/PLEX "cover" in moderate-severe disease', nodeId: 'mg-steroids' },
+    { text: 'Rocuronium 0.3-0.5 mg/kg (1/3 normal dose) if NMB needed - MG patients very sensitive', nodeId: 'mg-airway' },
+    { text: 'Ice pack test: >2mm improvement in ptosis = 80% sensitive for ocular MG', nodeId: 'mg-diagnostics' },
+    { text: 'Avoid: aminoglycosides, FQs, beta-blockers, magnesium IV - all can precipitate crisis', nodeId: 'mg-triggers' },
+];
 export const MYASTHENIA_GRAVIS_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

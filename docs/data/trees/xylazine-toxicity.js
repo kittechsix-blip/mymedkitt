@@ -3,6 +3,17 @@
 // wound assessment and staging, acute supportive care, withdrawal management, and disposition.
 // 6 modules: Recognition → Wound Assessment → Acute Management → Wound Care → Withdrawal → Disposition
 // 32 nodes total.
+export const XYLAZINE_TOXICITY_CRITICAL_ACTIONS = [
+    { text: 'STILL give naloxone - 95% of xylazine ODs involve fentanyl co-ingestion', nodeId: 'xyl-naloxone' },
+    { text: 'Titrate naloxone to RR >12, NOT wakefulness - avoid precipitating withdrawal with aspiration risk', nodeId: 'xyl-naloxone' },
+    { text: 'Classic OA2A response: respirations improve BUT patient stays sedated (unlike pure opioid OD)', nodeId: 'xyl-naloxone-response' },
+    { text: 'Xylazine wounds: do NOT aggressively debride - islands of healthy tissue = healing potential', nodeId: 'xyl-wound-stage1' },
+    { text: 'Philadelphia wound data: 56% MRSA, 37% Group A Strep - TMP-SMX first-line for outpatient', nodeId: 'xyl-wound-antibiotics' },
+    { text: 'No antidote for xylazine - atipamezole (veterinary alpha-2 antagonist) NOT available for humans', nodeId: 'xyl-monitoring' },
+    { text: 'Xylazine withdrawal: clonidine 0.1-0.3 mg PO q4-6h (hold if SBP <90 or HR <50)', nodeId: 'xyl-withdrawal-tx' },
+    { text: 'Avoid atropine for bradycardia - risk of hypertensive crisis from unopposed vasoconstriction', nodeId: 'xyl-bradycardia' },
+    { text: 'Strangulation is leading predictor of future homicide in IPV - liberal imaging threshold', nodeId: 'xyl-start' },
+];
 export const XYLAZINE_TOXICITY_NODES = [
     // ═══════════════════════════════════════════════════════════════
     // MODULE 1: Recognition

@@ -2,6 +2,16 @@
 // High-risk: Non-fatal strangulation screening, delayed presentation, stroke prevention
 // 6 modules: Recognition → Strangulation Assessment → Imaging → Treatment → Complications → Disposition
 // ~24 nodes total.
+export const CERVICAL_ARTERY_DISSECTION_CRITICAL_ACTIONS = [
+    { text: 'Ask directly: "Has anyone ever choked you or put hands around your neck?" - 50% have no visible injury', nodeId: 'cad-strangulation' },
+    { text: 'Loss of consciousness during strangulation = high-risk for arterial injury - immediate CTA needed', nodeId: 'cad-red-flags' },
+    { text: 'CTA head and neck is gold standard for cervical artery dissection screening', nodeId: 'cad-imaging' },
+    { text: 'tPA NOT contraindicated in dissection-related stroke - standard criteria apply', nodeId: 'cad-stroke-treatment' },
+    { text: 'CADISS trial: antiplatelet (aspirin) equivalent to anticoagulation - prefer antiplatelet (lower bleeding risk)', nodeId: 'cad-treatment' },
+    { text: 'Strangulation is leading predictor of future homicide in IPV - safety assessment mandatory', nodeId: 'cad-safety' },
+    { text: 'Symptoms may be delayed 24-72 hours after strangulation - close follow-up critical', nodeId: 'cad-strangulation' },
+    { text: 'Most dissections heal spontaneously with medical therapy alone - endovascular rarely needed acutely', nodeId: 'cad-endovascular' },
+];
 export const CERVICAL_ARTERY_DISSECTION_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION

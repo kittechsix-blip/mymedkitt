@@ -4,7 +4,18 @@
 // 6 modules, 26 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
 import type { Citation } from './neurosyphilis.js';
+
+export const RHOGAM_EARLY_PREGNANCY_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Determine Rh(D) blood type status', nodeId: 'rhogam-rh-check' },
+  { text: 'Give RhoGAM for molar pregnancy at any gestational age', nodeId: 'rhogam-molar' },
+  { text: 'Give RhoGAM for invasive procedures (CVS, amniocentesis, cordocentesis)', nodeId: 'rhogam-procedure' },
+  { text: 'Give RhoGAM for abdominal trauma at any gestational age', nodeId: 'rhogam-trauma' },
+  { text: 'Give RhoGAM 300 mcg IM at 28 weeks for all Rh-negative, unsensitized pregnant patients', nodeId: 'rhogam-28-week' },
+  { text: 'Give RhoGAM 300 mcg IM within 72 hours of delivery if newborn is Rh-positive', nodeId: 'rhogam-postpartum' },
+  { text: 'Order Kleihauer-Betke testing after trauma >20 weeks to quantify fetal-maternal hemorrhage', nodeId: 'rhogam-trauma' },
+];
 
 export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
 

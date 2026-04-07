@@ -2,6 +2,16 @@
 // Initial assessment → Localization → Treatment escalation → Anticoagulation → Disposition.
 // 5 modules: Assessment → Localization → Treatment → Anticoagulation → Disposition
 // 28 nodes total.
+export const EPISTAXIS_CRITICAL_ACTIONS = [
+    { text: 'Firm compression of fleshy part of nose for 15-20 min (not bony bridge)', nodeId: 'epi-initial-measures' },
+    { text: 'Apply topical vasoconstrictor (oxymetazoline or phenylephrine) + lidocaine', nodeId: 'epi-initial-measures' },
+    { text: 'Never cauterize BOTH sides of septum (risk septal perforation)', nodeId: 'epi-anterior-cautery' },
+    { text: 'All posterior packs require admission + continuous SpO2 monitoring', nodeId: 'epi-posterior-pack' },
+    { text: 'ENT consultation for all posterior epistaxis', nodeId: 'epi-posterior' },
+    { text: 'Do NOT routinely reverse anticoagulation (local hemostasis is effective)', nodeId: 'epi-warfarin' },
+    { text: 'Topical TXA helpful for antiplatelet/anticoagulated patients', nodeId: 'epi-antiplatelet' },
+    { text: 'BP usually normalizes after bleeding controlled (anxiety response)', nodeId: 'epi-htn-management' },
+];
 export const EPISTAXIS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

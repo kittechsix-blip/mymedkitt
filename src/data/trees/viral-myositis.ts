@@ -10,6 +10,17 @@ interface Citation {
   text: string;
 }
 
+export const VIRAL_MYOSITIS_CRITICAL_ACTIONS = [
+  { text: 'CK >10,000 OR myoglobinuria = rhabdomyolysis risk, admit for IV fluids', nodeId: 'vm-rhabdo' },
+  { text: 'Goal UOP 200-300 mL/hr (adults) or 2-3 mL/kg/hr (peds) to prevent AKI', nodeId: 'vm-rhabdo-treatment' },
+  { text: 'DO NOT use diuretics for rhabdomyolysis - worsens hemoconcentration and VTE risk', nodeId: 'vm-rhabdo-treatment' },
+  { text: 'Oseltamivir within 48h if influenza confirmed (most common viral cause)', nodeId: 'vm-influenza' },
+  { text: 'Pediatric BACM rarely causes AKI even with massive CK elevation - less aggressive than adults', nodeId: 'vm-peds-high' },
+  { text: 'AVOID NSAIDs in viral myositis - risk of worsening renal function', nodeId: 'vm-pain-antiemetics' },
+  { text: 'Exclude Guillain-Barre (ascending weakness, areflexia) before diagnosing benign myositis', nodeId: 'vm-peds-exclude' },
+  { text: 'Influenza B more commonly associated with BACM than Influenza A', nodeId: 'vm-influenza' },
+];
+
 export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
 
   // =====================================================================

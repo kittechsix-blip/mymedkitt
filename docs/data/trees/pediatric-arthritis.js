@@ -3,6 +3,16 @@
 // Initial Assessment -> Septic vs Transient -> JIA & Chronic -> Reactive & Post-Infectious -> Red Flags & Mimics -> Treatment & Disposition
 // Sources: PIDS/IDSA 2023, Kocher 1999, Caird 2006, AHA Jones Criteria 2015, PECARN
 // 43 nodes total
+export const PEDIATRIC_ARTHRITIS_CRITICAL_ACTIONS = [
+    { text: 'Assess if child is systemically ill or well-appearing', nodeId: 'peds-arth-sick-well' },
+    { text: 'Obtain arthrocentesis for suspected septic arthritis', nodeId: 'peds-arth-septic-workup' },
+    { text: 'Apply Kocher criteria for septic arthritis risk stratification', nodeId: 'peds-arth-septic-workup' },
+    { text: 'Give empiric IV antibiotics if high suspicion for septic joint', nodeId: 'peds-arth-septic-workup' },
+    { text: 'Obtain hip ultrasound for all pediatric hip pain', nodeId: 'peds-arth-hip-approach' },
+    { text: 'Rule out SCFE with frog-leg lateral radiograph in adolescents', nodeId: 'peds-arth-hip-approach' },
+    { text: 'Consider malignancy in children with night pain, systemic symptoms', nodeId: 'peds-arth-red-flags' },
+    { text: 'Urgent orthopedics consult for suspected septic arthritis', nodeId: 'peds-arth-septic-treatment' },
+];
 export const PEDIATRIC_ARTHRITIS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

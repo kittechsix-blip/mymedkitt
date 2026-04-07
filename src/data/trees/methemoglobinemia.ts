@@ -164,7 +164,7 @@ export const METHEMOGLOBINEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Rebound Methemoglobinemia',
-    body: '**Rebound occurs with agents that have prolonged action:** [4]\n\n**High-risk agents:**\n- **Dapsone** (t1/2 ~24-30 hours, enterohepatic circulation)\n- **Aniline dyes**\n- **Phenazopyridine**\n\n**Management:**\n\n**1. Repeat methylene blue:**\n- Give additional 1 mg/kg doses as needed\n- Monitor q2-4h for rebound\n\n**2. Activated charcoal:**\n- Multiple-dose activated charcoal (MDAC) for dapsone\n- 25-50g q4-6h for 24-48 hours\n- Interrupts enterohepatic recirculation [4]\n\n**3. Cimetidine:**\n- 400 mg IV/PO q6h\n- Inhibits CYP450 metabolism of dapsone to hydroxylamine (more toxic metabolite) [4]\n- Alternative: ketoconazole\n\n**4. Prolonged monitoring:**\n- ICU admission for 24-48 hours\n- Serial MetHb levels q4-6h',
+    body: '**Rebound occurs with agents that have prolonged text:** [4]\n\n**High-risk agents:**\n- **Dapsone** (t1/2 ~24-30 hours, enterohepatic circulation)\n- **Aniline dyes**\n- **Phenazopyridine**\n\n**Management:**\n\n**1. Repeat methylene blue:**\n- Give additional 1 mg/kg doses as needed\n- Monitor q2-4h for rebound\n\n**2. Activated charcoal:**\n- Multiple-dose activated charcoal (MDAC) for dapsone\n- 25-50g q4-6h for 24-48 hours\n- Interrupts enterohepatic recirculation [4]\n\n**3. Cimetidine:**\n- 400 mg IV/PO q6h\n- Inhibits CYP450 metabolism of dapsone to hydroxylamine (more toxic metabolite) [4]\n- Alternative: ketoconazole\n\n**4. Prolonged monitoring:**\n- ICU admission for 24-48 hours\n- Serial MetHb levels q4-6h',
     citation: [4],
     treatment: {
       firstLine: {

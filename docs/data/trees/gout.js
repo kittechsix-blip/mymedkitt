@@ -3,6 +3,15 @@
 // Clinical Presentation -> Diagnosis -> Gout vs Pseudogout -> Acute Treatment -> Disposition
 // Sources: ACR 2020 Guidelines, EULAR 2016, ACR/EULAR 2015 Classification Criteria
 // 38 nodes total
+export const GOUT_CRITICAL_ACTIONS = [
+    { text: 'Indomethacin 50mg TID × 3 days (avoid if renal disease or anticoagulated)', nodeId: 'gout-nsaid-treatment' },
+    { text: 'Never delay treatment for joint aspiration - treat based on clinical diagnosis if low suspicion for septic arthritis', nodeId: 'gout-when-aspirate' },
+    { text: 'Colchicine 1.2mg × 1, then 0.6mg 1h later (most effective within 36h of onset)', nodeId: 'gout-colchicine-treatment' },
+    { text: 'Prednisone 30-40mg daily × 5 days if NSAIDs/colchicine contraindicated', nodeId: 'gout-steroid-treatment' },
+    { text: 'Crystals do NOT rule out septic arthritis - gout/CPPD joints at increased infection risk', nodeId: 'gout-septic-concern' },
+    { text: 'Serum urate can be normal during acute flare (up to 40% of cases)', nodeId: 'gout-serum-urate' },
+    { text: 'Avoid corticosteroids - risk of rebound pain and stroke', nodeId: 'gout-treatment-assessment' },
+];
 export const GOUT_NODES = [
     // =====================================================================
     // MODULE 1: CLINICAL PRESENTATION

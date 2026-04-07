@@ -11,6 +11,17 @@ interface Citation {
   text: string;
 }
 
+export const CCB_OD_CRITICAL_ACTIONS = [
+  { text: 'High-dose insulin euglycemia therapy (HIET): 1 unit/kg bolus, then 1-10 units/kg/hr infusion', nodeId: 'ccb-hiet-dosing' },
+  { text: 'Calcium chloride 1-2g IV q15-20min (or continuous infusion) to overcome channel blockade', nodeId: 'ccb-calcium' },
+  { text: 'Vasopressors at HIGH doses (norepinephrine 0.5-3 mcg/kg/min) for vasodilatory shock', nodeId: 'ccb-vasopressors' },
+  { text: 'Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions', nodeId: 'ccb-gi-decon' },
+  { text: 'Shock phenotype determines treatment: vasodilatory = vasopressors; cardiogenic = HIET + inotropes', nodeId: 'ccb-shock-phenotype' },
+  { text: 'Contact ECMO team early - CCB toxicity is reversible, full recovery possible with bridging', nodeId: 'ccb-ecmo' },
+  { text: 'Extended-release formulations: delayed toxicity up to 12-24h, requires 24-48h ICU monitoring even if initially stable', nodeId: 'ccb-extended-release' },
+  { text: 'Atropine and pacing often ineffective - toxicity is at the calcium channel, not vagal', nodeId: 'ccb-initial-stab' },
+];
+
 export const CCB_OD_NODES: DecisionNode[] = [
   // ═══════════════════════════════════════════════════════════════
   // MODULE 1: Recognition & Classification

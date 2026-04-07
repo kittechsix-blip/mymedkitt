@@ -10,6 +10,17 @@ export interface Citation {
   text: string;
 }
 
+export const CHEMICAL_BURN_CRITICAL_ACTIONS = [
+  { text: 'IRRIGATE BEFORE ANYTHING ELSE - do not delay for history, VA, or pH testing', nodeId: 'chemburn-immediate' },
+  { text: 'Alkali burns WORSE than acid - lipophilic penetration reaches anterior chamber in <15 seconds', nodeId: 'chemburn-start' },
+  { text: 'Cement/lime exposure - sweep fornices for particulate matter that continues releasing alkali', nodeId: 'chemburn-sweep' },
+  { text: 'Target pH 7.0-7.4 - wait 5-10 min after stopping irrigation before checking pH (reservoir effect)', nodeId: 'chemburn-ph-check' },
+  { text: 'Prednisolone 1% MUST be tapered by day 10-14 - risk of corneal perforation if continued', nodeId: 'chemburn-steroid-caution' },
+  { text: 'Grade III-IV injury (opaque cornea, >50% limbal ischemia) - STAT ophthalmology, admission required', nodeId: 'chemburn-treatment-severe' },
+  { text: 'Alkali burns require 30 min to 2+ hours irrigation - acid burns 15-30 minutes', nodeId: 'chemburn-irrigation' },
+  { text: 'Limbal ischemia is KEY prognostic factor - document clock hours involved', nodeId: 'chemburn-classification' },
+] as const;
+
 export const CHEMICAL_BURN_NODES: DecisionNode[] = [
 
   // =====================================================================

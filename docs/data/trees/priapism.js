@@ -1,6 +1,17 @@
 // MedKitt — Priapism Treatment Consult
 // Classification → Duration → Penile Block → Aspiration → Phenylephrine → Reassessment → Escalation
 // AUA/SMSNA 2022 + EAU guidelines. 7 modules, 46 nodes.
+export const PRIAPISM_CRITICAL_ACTIONS = [
+    { text: 'Ischemic priapism is urologic EMERGENCY - smooth muscle necrosis begins at 4-6 hours', nodeId: 'priapism-ischemic-confirm' },
+    { text: 'Phenylephrine 200 mcg (2 mL of 100 mcg/mL) intracavernosal q5 min, max 5 doses total (NOT per side)', nodeId: 'priapism-phenylephrine-dose' },
+    { text: 'Corporal aspiration + phenylephrine: 70-100% success rate - do NOT delay', nodeId: 'priapism-phenylephrine-intro' },
+    { text: 'Dorsal penile nerve block: 10 mL total 1% lidocaine WITHOUT epinephrine (end-artery territory)', nodeId: 'priapism-penile-block-intro' },
+    { text: 'Hold phenylephrine if SBP >160 or HR >110 - check BP/HR q5 min between injections', nodeId: 'priapism-phenylephrine-dose' },
+    { text: 'Aspiration alone: only 36% success - proceed to phenylephrine if still rigid', nodeId: 'priapism-aspiration-response' },
+    { text: 'Non-ischemic priapism is NOT emergency - 62% resolve spontaneously, observe or refer for embolization', nodeId: 'priapism-nonischemic-info' },
+    { text: 'Delayed treatment >24h → 30-70% erectile dysfunction rate', nodeId: 'priapism-ischemic-confirm' },
+    { text: 'SCD priapism <4h: try supportive care first - do NOT use RBC transfusion to treat priapism', nodeId: 'priapism-scd-supportive' },
+];
 export const PRIAPISM_NODES = [
     // =====================================================================
     // MODULE 1: CLASSIFICATION

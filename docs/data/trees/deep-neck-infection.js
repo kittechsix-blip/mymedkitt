@@ -2,6 +2,16 @@
 // ED recognition, anatomic classification, airway management, antibiotics, and disposition
 // 6 modules: Recognition -> Anatomic Spaces -> Airway -> Antibiotics -> Complications -> Disposition
 // 26 nodes total.
+export const DEEP_NECK_INFECTION_CRITICAL_ACTIONS = [
+    { text: 'Assess airway immediately for stridor, trismus, dysphagia, drooling', nodeId: 'dni-start' },
+    { text: 'Secure airway BEFORE detailed workup if any signs of compromise', nodeId: 'dni-airway' },
+    { text: 'Obtain CT neck with IV contrast to define abscess and complications', nodeId: 'dni-imaging' },
+    { text: 'Give broad-spectrum IV antibiotics (ampicillin-sulbactam or clindamycin + ceftriaxone)', nodeId: 'dni-antibiotics' },
+    { text: 'Add vancomycin if MRSA risk (IVDU, recent hospitalization)', nodeId: 'dni-antibiotics' },
+    { text: 'Immediate ENT/oral surgery consult for drainage planning', nodeId: 'dni-consult' },
+    { text: 'Assess for descending mediastinitis (chest CT if concern)', nodeId: 'dni-complications' },
+    { text: 'Admit all deep neck infections for IV antibiotics and monitoring', nodeId: 'dni-dispo' },
+];
 export const DEEP_NECK_INFECTION_NODES = [
     // ===================================================================
     // MODULE 1: Recognition & Assessment
