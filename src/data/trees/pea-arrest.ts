@@ -47,17 +47,17 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Cardiac Activity on POCUS?',
-    body: 'Is organized cardiac activity visible on bedside echocardiography?',
-    citation: [3, 4],
+    body: '**POCUS pulse check** at femoral or carotid artery (<5 sec) is more accurate than manual palpation for detecting a pulse.\n\nSimultaneously assess cardiac contractility on bedside echo.\n\n**PREM** = Pulseless Rhythm with Echocardiographic **Motion** (pseudo-PEA)\n**PRES** = Pulseless Rhythm with Echocardiographic **Standstill** (true PEA)',
+    citation: [3, 4, 12, 13],
     options: [
       {
-        label: 'Yes — organized activity seen',
-        description: 'Ventricular wall motion present on POCUS',
-        next: 'pea-qrs-width',
+        label: 'PREM — cardiac motion present',
+        description: 'Wall motion visible: pseudo-PEA / profound shock',
+        next: 'pea-pseudopea',
       },
       {
-        label: 'No — no cardiac activity',
-        description: 'No ventricular wall motion, cardiac standstill',
+        label: 'PRES — cardiac standstill',
+        description: 'No wall motion: true PEA',
         next: 'pea-no-activity',
         urgency: 'critical',
       },
@@ -65,15 +65,47 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
   },
 
   // =====================================================================
-  // MODULE 2: NO CARDIAC ACTIVITY
+  // MODULE 2: PREM (PSEUDO-PEA) vs PRES (TRUE PEA)
   // =====================================================================
+
+  {
+    id: 'pea-pseudopea',
+    type: 'question',
+    module: 2,
+    title: 'PREM: Pseudo-PEA Assessment',
+    body: '**PREM (cardiac motion present) = pseudo-PEA = profound shock state, NOT cardiac arrest.**\n\n**Weingart Chain of Survival — where is this patient?**\n1. Rhythm capable of perfusion? ✓ (organized rhythm)\n2. Rhythm causing cardiac contraction? ✓ (POCUS shows motion)\n3. Contraction generating a pulse? → **Assess now**\n4. Pulse generating sufficient BP to perfuse organs?\n\n**4 tools to assess for perfusion:**\n• **POCUS pulse** — femoral/carotid pulsation visible?\n• **Arterial line** — DBP >30-40 mmHg?\n• **SpO₂ waveform** — persistent plethysmographic waveform?\n• **ETCO₂** — persistent elevation >30-40 mmHg?\n\nAny sign of perfusion suggests pseudo-PEA → treat as **shock**, not arrest.',
+    citation: [12, 13, 14],
+    options: [
+      {
+        label: 'Signs of perfusion present',
+        description: 'POCUS pulse, SpO₂ waveform, ETCO₂ >30, or art line DBP >30',
+        next: 'pea-shock-mgmt',
+      },
+      {
+        label: 'No signs of perfusion despite motion',
+        description: 'Cardiac activity but no evidence of output',
+        next: 'pea-qrs-width',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'pea-shock-mgmt',
+    type: 'info',
+    module: 2,
+    title: 'Pseudo-PEA: Treat as Profound Shock',
+    body: '**Stop chest compressions** — this patient has cardiac output. CPR during contractility may actually impair output.\n\n**Vasopressor strategy (choose one):**\n• [Norepinephrine](#/drug/norepinephrine/post-rosc) 10-50 mcg/min IV infusion — **first choice** if drip ready\n• **Push-dose epinephrine:** 5-20 mcg IV q1-5 min (10 mcg/mL dilution) — bridge while starting drip\n• [Vasopressin](#/drug/vasopressin/post-rosc) 20 IU IV bolus — bridge to norepinephrine\n\n**⚠️ Do NOT give full-dose epi 1mg** — beta-adrenergic effects (tachycardia, increased O₂ demand) may be harmful in pseudo-PEA.\n\n**Simultaneously:**\n• **Volume** — wide-open IV fluids\n• Correct hypoxemia\n• Search for cause: POCUS (cardiac, lung, abdomen), ECG, blood gas electrolytes, EMS/collateral history\n• Target MAP ≥60 mmHg\n\n**If patient deteriorates to pulseless with no perfusion signs → resume CPR and standard ACLS.**',
+    citation: [12, 13, 14],
+    next: 'pea-qrs-width',
+  },
 
   {
     id: 'pea-no-activity',
     type: 'info',
     module: 2,
-    title: 'No Cardiac Activity on POCUS',
-    body: '**No cardiac activity = pseudo-EMD vs true EMD vs fine VF.**\n\nNo visible wall motion despite organized electrical activity carries a very poor prognosis.\n\n**Check for fine VF:**\n• Increase gain settings on monitor\n• Confirm lead placement\n• If fine VF identified → defibrillate\n\n**Prolonged no-activity** after adequate resuscitation is a strong futility signal (EMCrit).\n\n**Continue:**\n• High-quality CPR\n• [Epinephrine](#/drug/epinephrine/cardiac arrest) 1mg IV/IO q3-5 min\n• Treat reversible causes\n• Prognosis is grim if no activity persists\n\n[TOR Rules](#/info/ca-tor-rules)',
+    title: 'PRES: True PEA — Cardiac Standstill',
+    body: '**PRES (Pulseless Rhythm with Echocardiographic Standstill) = true PEA.**\n\nNo visible wall motion despite organized electrical activity — very poor prognosis.\n\n**Check for fine VF:**\n• Increase gain settings on monitor\n• Confirm lead placement\n• If fine VF identified → defibrillate\n\n**Rule out agonal rhythm** — wide, slow complexes with no mechanical activity is near-terminal.\n\n**Prolonged PRES** after adequate resuscitation is the strongest futility signal (EMCrit).\n\n**Continue:**\n• High-quality CPR\n• [Epinephrine](#/drug/epinephrine/cardiac arrest) 1mg IV/IO q3-5 min (standard ACLS — true PEA)\n• Aggressively search for reversible causes\n• Reassess for development of PREM (cardiac motion) each cycle\n\n[TOR Rules](#/info/ca-tor-rules)',
     citation: [1, 4, 8],
     next: 'pea-cpr',
   },
@@ -87,8 +119,8 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'QRS Width on Monitor?',
-    body: 'QRS duration guides differential diagnosis and empiric treatment in PEA arrest.\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
-    citation: [1, 2],
+    body: 'QRS duration guides differential diagnosis and empiric treatment in PEA arrest.\n\n**Caveat:** Bergman 2016 challenged this approach in a small study (n=51). QRS width is an imperfect discriminator — use it as a **memory aid and first-move guide**, not a definitive diagnostic tool. Always integrate with POCUS findings and clinical context.\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
+    citation: [1, 2, 15],
     options: [
       {
         label: 'Wide (>120ms)',
@@ -308,7 +340,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Epinephrine in PEA Arrest',
-    body: '**[Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO:**\n\n• Give **as soon as possible** after 1st CPR cycle — epinephrine is given EARLY in non-shockable rhythms (PEA/asystole)\n• Repeat every **3-5 minutes**\n• No benefit to high-dose epinephrine\n\n**Administration:**\n• IV/IO push followed by 20 mL flush\n• Elevate extremity briefly after push\n\n**Note:** In non-shockable rhythms (PEA/asystole), early epinephrine is associated with improved outcomes compared to delayed administration.',
+    body: '**[Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO:**\n\n• Give **as soon as possible** after 1st CPR cycle in true PEA (PRES)\n• Repeat every **3-5 minutes**\n• **Consider limiting to ≤3 total doses** — higher cumulative doses associated with worse neurological outcomes (PARAMEDIC-2)\n\n**Administration:**\n• IV/IO push followed by 20 mL flush\n• Elevate extremity briefly after push\n\n**⚠️ Epinephrine harm in PEA:**\n• Beta-adrenergic effects (tachycardia, ↑ O₂ demand) may worsen ischemia\n• Higher total epi doses associated with worse neurologically intact survival\n• In **pseudo-PEA (PREM)** — do NOT give 1mg epi. Use titratable vasopressors instead (norepi infusion, push-dose epi 5-20 mcg, or vasopressin)\n\n**If EMS has already given ≥3 doses:** consider withholding further epi in the ED and focusing on cause-specific treatment.',
     citation: [5, 7, 9],
     next: 'pea-rosc-check',
   },
@@ -407,4 +439,8 @@ export const PEA_ARREST_CITATIONS: Citation[] = [
   { num: 9, text: 'Link MS et al. Part 7: Adult Advanced Cardiovascular Life Support. Circulation. 2015.' },
   { num: 10, text: 'Myerburg RJ et al. Electrolyte Derangements in Cardiac Arrest. Circulation. 2018.' },
   { num: 11, text: 'Perera P et al. The RUSH Exam: Rapid Ultrasound in Shock. Emerg Med Clin North Am. 2010;28(1):29-56.' },
+  { num: 12, text: 'Helman A, Simard R, Weingart S. PEA Arrest, PseudoPEA and PREM. Emergency Medicine Cases. October 2019. https://emergencymedicinecases.com/pea-arrest-pseudopea-prem' },
+  { num: 13, text: 'Paradis NA et al. Aortic pressure during human cardiac arrest: identification of pseudo-electromechanical dissociation. Chest. 1992;101:123-128.' },
+  { num: 14, text: 'Weingart S. Pulseless Electrical Activity is Stupid. EMCrit. https://emcrit.org/emcrit/pea-is-stupid/' },
+  { num: 15, text: 'Bergman R. Wide vs Narrow QRS Complex Approach to PEA Arrest. Resuscitation. 2016;109:e13.' },
 ];
