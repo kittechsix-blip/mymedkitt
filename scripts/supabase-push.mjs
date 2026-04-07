@@ -224,6 +224,7 @@ const TREE_REGISTRY = {
   'hop-killers':          { prefix: 'HOP_KILLERS',          entryNodeId: 'hop-start',        categoryId: 'anesthesia-airway' },
   'tia-workup':           { prefix: 'TIA_WORKUP',           entryNodeId: 'tia-start',        categoryId: 'neurology' },
   'peripartum-cardiomyopathy': { prefix: 'PERIPARTUM_CARDIOMYOPATHY', entryNodeId: 'ppcm-start', categoryId: 'ob-gyn' },
+  'ciguatera':            { prefix: 'CIGUATERA',            entryNodeId: 'cig-start',        categoryId: 'toxicology' },
 };
 
 const CROSS_LISTINGS = {
