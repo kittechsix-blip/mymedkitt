@@ -10427,6 +10427,274 @@ const DFSA_PATIENT_HANDOUT: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Malaria
+// -------------------------------------------------------------------
+
+const MAL_STEPS: InfoPage = {
+  id: 'mal-steps',
+  title: 'Malaria Management: Steps Summary',
+  subtitle: 'Quick Reference for ED Management',
+  shareable: false,
+  sections: [
+    {
+      heading: '1. Suspect Malaria',
+      body: 'Any fever in a patient with recent travel to an endemic area (< 3 months). Consider even if taking prophylaxis. Incubation ranges from 7 days to several months depending on species. [1]',
+    },
+    {
+      heading: '2. Calculate Severity',
+      body: 'Use the [Malaria Severity Calculator](calc:malaria-severity) to determine if the patient meets WHO 2023 criteria for severe malaria. Any ONE criterion = severe malaria. Severe disease requires IV artesunate and ICU admission. [2]',
+    },
+    {
+      heading: '3. Order Diagnostic Testing',
+      body: 'Thick and thin blood smears (gold standard for species and parasitemia). Rapid diagnostic test (RDT) if available. Repeat smears q12-24h for 48h if initial negative but suspicion high. CBC, CMP, lactate, LFTs, coagulation panel. [3]',
+    },
+    {
+      heading: '4. Species Identification',
+      body: 'Five species infect humans: P. falciparum (most severe), P. vivax, P. ovale, P. malariae, P. knowlesi. [Species comparison table](info:mal-species-table) guides treatment selection. Mixed infections occur. [4]',
+    },
+    {
+      heading: '5. Assess Drug Resistance',
+      body: 'Chloroquine resistance is widespread in P. falciparum. Artemisinin resistance emerging in Southeast Asia. [Resistance patterns by region](info:mal-resistance) determine first-line therapy. [5]',
+    },
+    {
+      heading: '6. Initiate Treatment',
+      body: 'Severe malaria: IV {{drug:artesunate}} (preferred) or quinidine + ICU. Uncomplicated malaria: {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, or {{drug:chloroquine}} (only if chloroquine-sensitive). Start empirically while awaiting smear results if high clinical suspicion. [6]',
+    },
+    {
+      heading: '7. Special Populations',
+      body: '[Pregnancy management](info:mal-pregnancy) requires modified drug selection by trimester. Children receive weight-based dosing. G6PD testing required before primaquine for P. vivax/ovale radical cure. [7]',
+    },
+    {
+      heading: '8. Monitor for Complications',
+      body: 'Severe malaria complications: cerebral malaria (altered mental status, seizures), acute respiratory distress, acute kidney injury, severe anemia, hypoglycemia, lactic acidosis. Check glucose frequently. [8]',
+    },
+    {
+      heading: '9. Consider Prophylaxis Failure',
+      body: 'If patient was on prophylaxis, [evaluate for failure causes](info:mal-prophylaxis-failure): non-adherence, resistance, inadequate dosing, drug interactions. Do NOT use same drug for treatment that was used for prophylaxis. [9]',
+    },
+    {
+      heading: '10. Disposition',
+      body: 'Severe malaria: ICU admission. Uncomplicated malaria: admit for IV therapy if unable to tolerate PO, parasitemia > 5%, comorbidities, or uncertain diagnosis. Low-risk patients may be discharged with close follow-up and daily phone contact. CDC Malaria Hotline available 24/7: 770-488-7788. [10]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
+    { num: 2, text: 'WHO. Severe Malaria. Trop Med Int Health. 2014;19(Suppl 1):7-131.' },
+    { num: 3, text: 'CDC. Malaria Diagnosis (U.S.). 2023.' },
+    { num: 4, text: 'White NJ. Plasmodium knowlesi: the fifth human malaria parasite. Clin Infect Dis. 2008;46(2):172-173.' },
+    { num: 5, text: 'Ashley EA, et al. Spread of artemisinin resistance in Plasmodium falciparum malaria. NEJM. 2014;371(5):411-423.' },
+    { num: 6, text: 'CDC. Treatment of Malaria: Guidelines for Clinicians (United States). 2023.' },
+    { num: 7, text: 'Desai M, et al. Epidemiology and burden of malaria in pregnancy. Lancet Infect Dis. 2007;7(2):93-104.' },
+    { num: 8, text: 'Trampuz A, et al. Clinical review: Severe malaria. Crit Care. 2003;7(4):315-323.' },
+    { num: 9, text: 'Schwartz E, et al. Delayed onset of malaria: implications for chemoprophylaxis. NEJM. 2003;349(16):1510-1516.' },
+    { num: 10, text: 'Bruneel F, et al. Imported falciparum malaria in adults: host- and parasite-related factors associated with severity. Clin Microbiol Infect. 2016;22(11):906.e1-906.e9.' },
+  ],
+};
+
+const MAL_SPECIES_TABLE: InfoPage = {
+  id: 'mal-species-table',
+  title: 'Malaria Species Comparison',
+  subtitle: 'Clinical Features, Geographic Distribution, and Treatment',
+  shareable: false,
+  sections: [
+    {
+      heading: 'P. falciparum',
+      body: '**Severity:** Most severe — causes cerebral malaria, multi-organ failure, death\n**Incubation:** 7-14 days (occasionally up to 30)\n**Relapse:** No hypnozoite stage — no liver relapse\n**RBC Preference:** All ages of RBCs — high parasitemia possible (>10%)\n**Parasitemia:** Can exceed 10% — marker of severity\n**Geographic:** Sub-Saharan Africa (90% of cases), Southeast Asia, South America\n**Treatment:** {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, IV {{drug:artesunate}} (severe)\n**Resistance:** Widespread chloroquine resistance. Emerging artemisinin resistance in Southeast Asia (Cambodia, Thailand, Myanmar)',
+    },
+    {
+      heading: 'P. vivax',
+      body: '**Severity:** Usually benign — severe disease rare but reported\n**Incubation:** 12-17 days (up to 6-12 months for temperate strains)\n**Relapse:** YES — hypnozoites remain dormant in liver. Relapses common without primaquine\n**RBC Preference:** Young RBCs (reticulocytes) — limits parasitemia to <2%\n**Parasitemia:** Typically <2%\n**Geographic:** Central/South America, Asia, Middle East, Pacific islands\n**Treatment:** {{drug:chloroquine}} (most regions) + {{drug:primaquine}} 14 days (radical cure). Check G6PD before primaquine\n**Resistance:** Chloroquine resistance emerging in Papua New Guinea, Indonesia, parts of Asia. Use {{drug:atovaquone-proguanil}} or {{drug:artemether-lumefantrine}} if resistant',
+    },
+    {
+      heading: 'P. ovale',
+      body: '**Severity:** Benign — rarely severe\n**Incubation:** 12-20 days (can be months to years)\n**Relapse:** YES — hypnozoites in liver. Requires primaquine for radical cure\n**RBC Preference:** Young RBCs — low parasitemia\n**Parasitemia:** Typically <2%\n**Geographic:** West Africa primarily. Rare outside Africa\n**Treatment:** {{drug:chloroquine}} + {{drug:primaquine}} 14 days. Check G6PD before primaquine\n**Resistance:** No documented chloroquine resistance',
+    },
+    {
+      heading: 'P. malariae',
+      body: '**Severity:** Benign — chronic infection possible\n**Incubation:** 18-40 days (longest incubation)\n**Relapse:** No hypnozoite stage — but can persist in blood for decades (recrudescence)\n**RBC Preference:** Old RBCs — very low parasitemia\n**Parasitemia:** Typically <1%\n**Geographic:** Sub-Saharan Africa, parts of South America, Southeast Asia (less common than other species)\n**Treatment:** {{drug:chloroquine}} alone (no primaquine needed)\n**Resistance:** Chloroquine resistance rare',
+    },
+    {
+      heading: 'P. knowlesi',
+      body: '**Severity:** Can be severe — rapid replication (24h cycle) allows high parasitemia\n**Incubation:** 9-12 days\n**Relapse:** No hypnozoite stage\n**RBC Preference:** All ages — parasitemia can rise rapidly\n**Parasitemia:** Can exceed 5% quickly due to 24h cycle\n**Geographic:** Southeast Asia (Malaysia, Thailand, Philippines, Indonesia). Zoonotic — natural host is macaque monkeys\n**Treatment:** {{drug:artemether-lumefantrine}} or {{drug:atovaquone-proguanil}}. IV {{drug:artesunate}} if severe. Do NOT use chloroquine\n**Resistance:** Chloroquine not effective',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'CDC. Malaria Biology. 2023.' },
+    { num: 2, text: 'White NJ. Plasmodium knowlesi: the fifth human malaria parasite. Clin Infect Dis. 2008;46(2):172-173.' },
+    { num: 3, text: 'Baird JK. Evidence and implications of mortality associated with acute Plasmodium vivax malaria. Clin Microbiol Rev. 2013;26(1):36-57.' },
+  ],
+};
+
+const MAL_SEVERE_CRITERIA: InfoPage = {
+  id: 'mal-severe-criteria',
+  title: 'Severe Malaria Criteria (WHO 2023)',
+  subtitle: 'Any ONE criterion defines severe malaria',
+  shareable: false,
+  sections: [
+    {
+      heading: 'Clinical Criteria (8 Items)',
+      body: '1. **Impaired consciousness** — GCS <11, or Blantyre Coma Scale <3 (children)\n2. **Prostration** — generalized weakness, unable to walk/sit without assistance\n3. **Multiple convulsions** — >2 episodes within 24h\n4. **Acidosis** — base deficit >8 mEq/L or bicarbonate <15 mmol/L or venous lactate >5 mmol/L\n5. **Hypoglycemia** — blood glucose <40 mg/dL (<2.2 mmol/L)\n6. **Severe malarial anemia** — Hgb <5 g/dL (children) or <7 g/dL (adults) with parasitemia >10,000/μL\n7. **Acute kidney injury** — Cr >3 mg/dL or urine output <0.5 mL/kg/h\n8. **Acute pulmonary edema / ARDS** — radiographically confirmed with SpO2 <92% on room air',
+    },
+    {
+      heading: 'Laboratory Criteria (6 Items)',
+      body: '1. **Hyperparasitemia** — >10% parasitized RBCs (or >500,000/μL)\n2. **Hyperbilirubinemia** — bilirubin >3 mg/dL with parasitemia >100,000/μL\n3. **Hemoglobinuria** — macroscopic black/red urine ("blackwater fever")\n4. **Abnormal bleeding / DIC** — spontaneous bleeding from gums, nose, GI tract; prolonged PT/PTT\n5. **Shock** — SBP <80 mmHg (adults) with cool extremities\n6. **Pulmonary edema** — radiographic evidence',
+    },
+    {
+      heading: 'Key Points',
+      body: '**Any ONE criterion = Severe Malaria** → requires IV {{drug:artesunate}} and ICU admission. [1]\n\n**Use the [Severity Calculator](calc:malaria-severity)** to systematically evaluate all criteria.\n\n**Do NOT wait for smear confirmation** if clinical suspicion is high and patient meets severity criteria. Start IV artesunate empirically. [2]\n\n**Cerebral malaria** is a subset defined by unarousable coma (GCS ≤9) not attributable to another cause, with P. falciparum parasitemia. Mortality 15-20% even with treatment. [3]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
+    { num: 2, text: 'CDC. Treatment of Malaria: Guidelines for Clinicians (United States). 2023.' },
+    { num: 3, text: 'Idro R, et al. Pathogenesis, clinical features, and neurological outcome of cerebral malaria. Lancet Neurol. 2005;4(12):827-840.' },
+  ],
+};
+
+const MAL_RESISTANCE: InfoPage = {
+  id: 'mal-resistance',
+  title: 'Antimalarial Drug Resistance by Region',
+  subtitle: 'Geographic Patterns of Resistance (2023 Update)',
+  shareable: false,
+  sections: [
+    {
+      heading: 'Chloroquine Resistance',
+      body: '**Widespread in P. falciparum:**\n• Sub-Saharan Africa — near-universal resistance\n• Southeast Asia — complete resistance\n• South America — widespread resistance\n• Central America, Caribbean, Middle East — variable resistance\n\n**Still chloroquine-sensitive:**\n• Central America west of Panama Canal (parts of Mexico, Guatemala)\n• Caribbean (Haiti, Dominican Republic)\n• Middle East (limited areas)\n\n**P. vivax chloroquine resistance:**\n• Papua New Guinea, Indonesia — confirmed resistance\n• Parts of Southeast Asia — emerging resistance\n• Consider {{drug:atovaquone-proguanil}} or {{drug:artemether-lumefantrine}} for P. vivax from these regions [1,2]',
+    },
+    {
+      heading: 'Mefloquine Resistance',
+      body: '**P. falciparum mefloquine resistance:**\n• Thailand-Cambodia-Myanmar border (Golden Triangle) — high-level resistance\n• Western Cambodia — widespread resistance\n• Parts of sub-Saharan Africa — sporadic reports\n\nMefloquine is NO LONGER first-line for Southeast Asia. Use artemisinin-based combination therapy (ACT) instead. [3]',
+    },
+    {
+      heading: 'Artemisinin Resistance',
+      body: '**Emerging resistance in P. falciparum (MAJOR CONCERN):**\n• Greater Mekong Subregion (Cambodia, Thailand, Myanmar, Laos, Vietnam) — confirmed delayed parasite clearance\n• Eastern India — sporadic reports\n• Papua New Guinea — under investigation\n• East Africa (Rwanda, Uganda) — concerning signals in 2021-2023 surveillance [4,5]\n\n**Clinical marker:** Parasite clearance half-life >5 hours after IV artesunate. Parasites still detectable on Day 3 smear.\n\n**Treatment adjustment:** Extend treatment duration. Consider {{drug:atovaquone-proguanil}} as alternative. Consult CDC Malaria Hotline (770-488-7788) for resistance patterns. [6]',
+    },
+    {
+      heading: 'Sulfadoxine-Pyrimethamine Resistance',
+      body: '**Widespread P. falciparum resistance:**\n• Southeast Asia — high-level resistance\n• Parts of South America — common resistance\n• East Africa — increasing resistance\n\nSulfadoxine-pyrimethamine is NO LONGER recommended for treatment. Still used in pregnancy for intermittent preventive therapy (IPTp) in some regions despite resistance. [7]',
+    },
+    {
+      heading: 'Treatment Recommendations by Region',
+      body: '**Southeast Asia (artemisinin resistance zone):**\n• {{drug:atovaquone-proguanil}} (preferred)\n• {{drug:artemether-lumefantrine}} (extended 3-day course)\n• Consult CDC for latest guidance\n\n**Sub-Saharan Africa:**\n• {{drug:artemether-lumefantrine}} (first-line)\n• {{drug:atovaquone-proguanil}} (alternative)\n• IV {{drug:artesunate}} (severe malaria)\n\n**South America:**\n• {{drug:atovaquone-proguanil}} or {{drug:artemether-lumefantrine}}\n\n**Chloroquine-sensitive areas:**\n• {{drug:chloroquine}} (if confirmed sensitive region)\n\n**Always verify current resistance patterns with CDC (cdc.gov/malaria) before selecting therapy.** [8]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Price RN, et al. Vivax malaria: neglected and not benign. Am J Trop Med Hyg. 2007;77(6 Suppl):79-87.' },
+    { num: 2, text: 'Baird JK. Chloroquine resistance in Plasmodium vivax. Antimicrob Agents Chemother. 2004;48(11):4075-4083.' },
+    { num: 3, text: 'Wongsrichanalai C, et al. Epidemiology of drug-resistant malaria. Lancet Infect Dis. 2002;2(4):209-218.' },
+    { num: 4, text: 'Ashley EA, et al. Spread of artemisinin resistance in Plasmodium falciparum malaria. NEJM. 2014;371(5):411-423.' },
+    { num: 5, text: 'WHO. Artemisinin resistance and artemisinin-based combination therapy efficacy: status report. 2023.' },
+    { num: 6, text: 'Dondorp AM, et al. Artemisinin resistance in Plasmodium falciparum malaria. NEJM. 2009;361(5):455-467.' },
+    { num: 7, text: 'Naidoo I, Roper C. Mapping "partially resistant", "fully resistant", and "super resistant" malaria. Trends Parasitol. 2013;29(10):505-515.' },
+    { num: 8, text: 'CDC. Malaria: Choosing a Drug to Prevent Malaria. 2023.' },
+  ],
+};
+
+const MAL_PREGNANCY: InfoPage = {
+  id: 'mal-pregnancy',
+  title: 'Malaria in Pregnancy',
+  subtitle: 'Trimester-Specific Management and Drug Safety',
+  shareable: false,
+  sections: [
+    {
+      heading: 'First Trimester',
+      body: '**Severe malaria:**\n• IV {{drug:artesunate}} (preferred) — benefit outweighs theoretical risk [1]\n• Quinidine + clindamycin (alternative)\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}} (safest in pregnancy)\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} OR quinine + clindamycin × 7 days [2]\n• **Avoid {{drug:atovaquone-proguanil}}** in first trimester (limited safety data)\n• **Avoid {{drug:primaquine}}** (hemolytic risk to fetus)\n• **Avoid doxycycline** (teratogenic)',
+    },
+    {
+      heading: 'Second & Third Trimester',
+      body: '**Severe malaria:**\n• IV {{drug:artesunate}} (preferred) [3]\n• Quinidine + clindamycin (alternative)\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}}\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} (preferred) OR {{drug:atovaquone-proguanil}} (limited data but likely safe) OR quinine + clindamycin × 7 days [4]\n• **Avoid {{drug:primaquine}}** until after delivery (hemolytic risk)\n• **Avoid doxycycline** (tooth/bone effects)',
+    },
+    {
+      heading: 'Special Considerations in Pregnancy',
+      body: '**Increased severity risk:**\n• Pregnant women have higher parasitemia, more severe disease, and higher mortality than non-pregnant women\n• Placental sequestration of parasites occurs even when peripheral smears are negative\n• First pregnancies carry highest risk [5]\n\n**Complications:**\n• Severe anemia (Hgb <7 g/dL)\n• Hypoglycemia (monitor glucose frequently)\n• Pulmonary edema (avoid fluid overload)\n• Premature labor\n• Fetal distress, intrauterine growth restriction, stillbirth [6]\n\n**Fetal monitoring:**\n• Continuous fetal heart rate monitoring if viable gestational age\n• Obstetric consultation early\n\n**Delivery considerations:**\n• Malaria treatment does NOT require immediate delivery unless maternal instability or fetal distress\n• Treat malaria aggressively first, then reassess fetal status',
+    },
+    {
+      heading: 'Post-Delivery',
+      body: '**Radical cure for P. vivax / P. ovale:**\n• Defer {{drug:primaquine}} until after delivery AND after breastfeeding is complete (if infant has not been tested for G6PD deficiency)\n• Alternative: check infant G6PD, and if normal, mother may take primaquine while breastfeeding [7]\n\n**Breastfeeding:**\n• Chloroquine, artemether-lumefantrine, atovaquone-proguanil are likely compatible with breastfeeding\n• Primaquine is contraindicated if infant G6PD status unknown',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
+    { num: 2, text: 'McGready R, et al. Artemisinin antimalarials in pregnancy: a prospective treatment study of 539 episodes of multidrug-resistant Plasmodium falciparum. Clin Infect Dis. 2001;33(12):2009-2016.' },
+    { num: 3, text: 'Dondorp A, et al. Artesunate versus quinine for treatment of severe falciparum malaria: a randomised trial. Lancet. 2005;366(9487):717-725.' },
+    { num: 4, text: 'CDC. Treatment of Malaria: Guidelines for Clinicians (United States). 2023.' },
+    { num: 5, text: 'Desai M, et al. Epidemiology and burden of malaria in pregnancy. Lancet Infect Dis. 2007;7(2):93-104.' },
+    { num: 6, text: 'Steketee RW, et al. The burden of malaria in pregnancy in malaria-endemic areas. Am J Trop Med Hyg. 2001;64(1-2 Suppl):28-35.' },
+    { num: 7, text: 'Briggs GG, Freeman RK. Drugs in Pregnancy and Lactation. 11th ed. 2023.' },
+  ],
+};
+
+const MAL_PROPHYLAXIS_FAILURE: InfoPage = {
+  id: 'mal-prophylaxis-failure',
+  title: 'Post-Exposure Prophylaxis Failure',
+  subtitle: 'Why Prophylaxis Fails and How to Manage It',
+  shareable: false,
+  sections: [
+    {
+      heading: 'Reasons for Prophylaxis Failure',
+      body: '**Non-adherence (most common):**\n• Missed doses or inconsistent timing\n• Stopped prophylaxis too early after leaving endemic area (must continue 1-4 weeks post-exposure depending on drug)\n• Did not start prophylaxis before travel (should start 1-2 days to 2 weeks before, depending on drug)\n\n**Inadequate drug selection:**\n• Wrong drug for region (e.g., chloroquine in chloroquine-resistant area)\n• Did not consult CDC guidance for destination-specific prophylaxis\n\n**Drug resistance:**\n• Emerging resistance patterns (e.g., mefloquine resistance in SE Asia)\n• Artemisinin-resistant P. falciparum in Greater Mekong Subregion [1,2]\n\n**Inadequate dosing:**\n• Weight-based dosing not adjusted for obese or pediatric patients\n• Malabsorption (vomiting, diarrhea)\n\n**Drug interactions:**\n• Rifampin reduces atovaquone levels\n• Tetracyclines reduce atovaquone bioavailability [3]\n\n**Delayed-onset malaria:**\n• P. vivax and P. ovale can relapse months to years after initial infection from hypnozoites\n• Prophylaxis does NOT eliminate liver-stage hypnozoites (requires primaquine)',
+    },
+    {
+      heading: 'Evaluation Approach',
+      body: '**History:**\n• Exact prophylaxis drug, dose, duration\n• Adherence: did patient miss any doses?\n• When did prophylaxis stop relative to leaving endemic area?\n• Travel destination (verify resistance patterns)\n\n**Testing:**\n• Thick and thin smears × 3 (q12-24h for 48h)\n• Rapid diagnostic test (RDT)\n• Serum drug levels (rarely available, not practical in ED)\n\n**Severity assessment:**\n• Use [Malaria Severity Calculator](calc:malaria-severity)\n• Check CBC, CMP, lactate, LFTs',
+    },
+    {
+      heading: 'Treatment Selection When Prophylaxis Fails',
+      body: '**KEY RULE: Do NOT use the same drug for treatment that was used for prophylaxis.** Risk of resistance or subtherapeutic levels. [4]\n\n**If on atovaquone-proguanil prophylaxis:**\n• Treat with {{drug:artemether-lumefantrine}} OR quinine + doxycycline/clindamycin\n\n**If on mefloquine prophylaxis:**\n• Treat with {{drug:artemether-lumefantrine}} OR {{drug:atovaquone-proguanil}}\n\n**If on doxycycline prophylaxis:**\n• Treat with {{drug:artemether-lumefantrine}} OR {{drug:atovaquone-proguanil}}\n\n**If on chloroquine prophylaxis:**\n• Suspect chloroquine resistance → treat with {{drug:artemether-lumefantrine}} OR {{drug:atovaquone-proguanil}}\n\n**Severe malaria (regardless of prophylaxis):**\n• IV {{drug:artesunate}} + ICU admission [5]',
+    },
+    {
+      heading: 'Prevention Counseling',
+      body: '**Key messages for future travel:**\n• No prophylaxis is 100% effective — still use insect repellent, bed nets, protective clothing\n• Must continue prophylaxis for 1-4 weeks AFTER leaving endemic area (drug-dependent)\n• Seek medical care immediately for any fever within 1 year of travel\n• Consult CDC travel website (wwwnc.cdc.gov/travel) for destination-specific prophylaxis recommendations\n• Consider terminal prophylaxis with primaquine for P. vivax/ovale prevention if prolonged exposure in high-risk area [6]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Ashley EA, et al. Spread of artemisinin resistance in Plasmodium falciparum malaria. NEJM. 2014;371(5):411-423.' },
+    { num: 2, text: 'Mita T, et al. Mechanisms of drug resistance in Plasmodium falciparum. Jpn J Infect Dis. 2009;62(3):165-170.' },
+    { num: 3, text: 'CDC. Malaria: Choosing a Drug to Prevent Malaria. 2023.' },
+    { num: 4, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
+    { num: 5, text: 'Dondorp A, et al. Artesunate versus quinine for treatment of severe falciparum malaria: a randomised trial. Lancet. 2005;366(9487):717-725.' },
+    { num: 6, text: 'Hill DR, et al. Primaquine: report from CDC expert meeting on malaria chemoprophylaxis. Am J Trop Med Hyg. 2006;75(3):402-415.' },
+  ],
+};
+
+const MAL_PEARLS: InfoPage = {
+  id: 'mal-pearls',
+  title: 'Malaria: Diagnostic & Treatment Pearls',
+  subtitle: 'Key Clinical Insights for ED Management',
+  shareable: false,
+  sections: [
+    {
+      heading: 'Diagnostic Pearls',
+      body: '• **Classic triad:** Fever, chills, sweats — but only 50% present with classic "paroxysms" every 48-72h. Do not rule out malaria based on fever pattern alone. [1]\n\n• **Thrombocytopenia is common:** Platelet count <150,000 in 60-70% of malaria cases. Helps distinguish from other causes of fever in returning traveler. [2]\n\n• **Negative smear does NOT rule out malaria:** Sensitivity of single smear is only 50-75%. Repeat q12-24h × 3 if clinical suspicion high. [3]\n\n• **Parasitemia may be low or absent on peripheral smear in severe disease:** Placental, cerebral, and splenic sequestration can hide parasites from peripheral circulation.\n\n• **RDT detects antigen (not live parasites):** Can remain positive for weeks after successful treatment. Do NOT use RDT to assess treatment response. Use smear parasitemia. [4]\n\n• **Splenomegaly is present in only 15-30%** of acute malaria. Do not rely on physical exam alone.\n\n• **G6PD testing before primaquine:** Primaquine causes hemolysis in G6PD-deficient patients. MUST check G6PD before giving primaquine for P. vivax/ovale radical cure. [5]',
+    },
+    {
+      heading: 'Treatment Pearls',
+      body: '• **Start treatment empirically if high suspicion and severe disease:** Do NOT wait for smear confirmation. Delay increases mortality in severe malaria. [6]\n\n• **IV artesunate is superior to IV quinidine:** 22.5% relative reduction in mortality with artesunate. Quinidine requires cardiac monitoring and has more side effects. [7]\n\n• **Artemisinin-based combination therapy (ACT) is preferred over monotherapy:** Combination reduces resistance emergence. {{drug:artemether-lumefantrine}} is first-line ACT. [8]\n\n• **Primaquine is NOT needed for P. falciparum:** P. falciparum has no hypnozoite liver stage. Only P. vivax and P. ovale require primaquine for radical cure (14-day course). [9]\n\n• **Hypoglycemia is common:** Quinine/quinidine stimulates insulin release. Parasites consume glucose. Check glucose frequently (q4h) in severe malaria and during quinine therapy. [10]\n\n• **Avoid steroids in cerebral malaria:** No benefit, possible harm. Do NOT give dexamethasone. [11]\n\n• **Fluid resuscitation must be cautious:** Pulmonary edema risk is high in severe malaria. Avoid aggressive fluid boluses unless clear hypovolemia. [12]',
+    },
+    {
+      heading: 'Disposition Pearls',
+      body: '• **Any severe malaria criterion = ICU admission:** Use [Severity Calculator](calc:malaria-severity) systematically. Do not miss acidosis, hypoglycemia, or hyperparasitemia.\n\n• **Parasitemia > 5% = high risk:** Admit for IV therapy even if no other severity criteria. [13]\n\n• **Discharge criteria for uncomplicated malaria:** Tolerating PO, parasitemia <5%, reliable for follow-up, able to return immediately if worsening, no comorbidities.\n\n• **Follow-up smear at 48-72h:** Ensure parasitemia is declining. If not, consider resistance or treatment failure.\n\n• **CDC Malaria Hotline available 24/7:** 770-488-7788. Use for treatment guidance, drug procurement (IV artesunate), and resistance patterns.\n\n• **Exchange transfusion is NO LONGER recommended:** Historical practice. No RCT evidence of benefit. Labor-intensive, risk of transfusion reactions. IV artesunate is superior. [14]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Trampuz A, et al. Clinical review: Severe malaria. Crit Care. 2003;7(4):315-323.' },
+    { num: 2, text: 'Ladhani S, et al. Clinical features and the role of bedside tests in diagnosing malaria in returning travellers. Trans R Soc Trop Med Hyg. 2003;97(5):549-552.' },
+    { num: 3, text: 'Moody A. Rapid diagnostic tests for malaria parasites. Clin Microbiol Rev. 2002;15(1):66-78.' },
+    { num: 4, text: 'Murray CK, et al. Update on rapid diagnostic testing for malaria. Clin Microbiol Rev. 2008;21(1):97-110.' },
+    { num: 5, text: 'Cappellini MD, Fiorelli G. Glucose-6-phosphate dehydrogenase deficiency. Lancet. 2008;371(9606):64-74.' },
+    { num: 6, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
+    { num: 7, text: 'Dondorp A, et al. Artesunate versus quinine for treatment of severe falciparum malaria: a randomised trial. Lancet. 2005;366(9487):717-725.' },
+    { num: 8, text: 'White NJ. Qinghaosu (artemisinin): the price of success. Science. 2008;320(5874):330-334.' },
+    { num: 9, text: 'Baird JK, Hoffman SL. Primaquine therapy for malaria. Clin Infect Dis. 2004;39(9):1336-1345.' },
+    { num: 10, text: 'White NJ, et al. Severe hypoglycemia and hyperinsulinemia in falciparum malaria. NEJM. 1983;309(2):61-66.' },
+    { num: 11, text: 'Warrell DA, et al. Dexamethasone proves deleterious in cerebral malaria. NEJM. 1982;306(6):313-319.' },
+    { num: 12, text: 'Hanson J, et al. Fluid management in severe malaria. Trop Med Int Health. 2010;15(9):1014-1021.' },
+    { num: 13, text: 'Bruneel F, et al. Imported falciparum malaria in adults: host- and parasite-related factors associated with severity. Clin Microbiol Infect. 2016;22(11):906.e1-906.e9.' },
+    { num: 14, text: 'Riddle MS, et al. Exchange transfusion as an adjunct therapy in severe Plasmodium falciparum malaria: a meta-analysis. Clin Infect Dis. 2002;34(9):1192-1198.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
 
@@ -10728,6 +10996,14 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dfsa-sti-regimens': DFSA_STI_REGIMENS,
   'dfsa-vawa': DFSA_VAWA,
   'dfsa-patient-handout': DFSA_PATIENT_HANDOUT,
+  // Malaria
+  'mal-steps': MAL_STEPS,
+  'mal-species-table': MAL_SPECIES_TABLE,
+  'mal-severe-criteria': MAL_SEVERE_CRITERIA,
+  'mal-resistance': MAL_RESISTANCE,
+  'mal-pregnancy': MAL_PREGNANCY,
+  'mal-prophylaxis-failure': MAL_PROPHYLAXIS_FAILURE,
+  'mal-pearls': MAL_PEARLS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

@@ -8412,6 +8412,245 @@ const ULIPRISTAL = {
         'ACOG Committee Opinion No. 777. Sexual Assault. Obstet Gynecol. 2019;133(4):e296-e302.',
     ],
 };
+const IV_ARTESUNATE = {
+    id: 'iv-artesunate',
+    name: 'IV Artesunate',
+    genericName: 'Artesunate for injection',
+    drugClass: 'Antimalarial — Artemisinin derivative',
+    route: 'IV',
+    indications: ['Severe malaria (ONLY treatment)'],
+    dosing: [
+        {
+            indication: 'Severe malaria (adults and children ≥20 kg)',
+            regimen: '2.4 mg/kg IV at 0, 12, and 24 hours (loading doses), then 2.4 mg/kg IV daily until patient can tolerate oral ACT (usually 3-7 days). Complete total 3-day course of oral ACT after IV therapy (artemether-lumefantrine or atovaquone-proguanil).',
+            weightCalc: { dosePerKg: 2.4, unit: 'mg' },
+        },
+        {
+            indication: 'Severe malaria (pediatric <20 kg)',
+            regimen: '3 mg/kg IV at 0, 12, and 24 hours (loading doses), then 3 mg/kg IV daily until patient can tolerate oral ACT.',
+            weightCalc: { dosePerKg: 3, unit: 'mg' },
+        },
+    ],
+    contraindications: [
+        'No absolute contraindications — severe malaria is life-threatening and artesunate is ONLY treatment',
+    ],
+    cautions: [
+        'Post-artesunate delayed hemolysis (PADH) occurs in 10-15% at 1-4 weeks after treatment — monitor CBC weekly × 4 weeks',
+        'Pregnancy: use in all trimesters for severe malaria (benefits outweigh risks)',
+    ],
+    monitoring: 'Glucose q4-6h (hypoglycemia risk). Repeat blood smears q12-24h until parasitemia <1%. CBC weekly × 4 weeks post-treatment (delayed hemolysis surveillance). ICU monitoring for severe malaria complications.',
+    notes: '**Obtain via CDC IND (Investigational New Drug) protocol.** Call CDC Malaria Hotline: 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours). Artesunate is delivered to bedside within hours. IV artesunate reduced mortality by 35% vs quinine in SEAQUAMAT trial (adults) and 23% in AQUAMAT trial (children). If artesunate unavailable: quinidine gluconate 10 mg/kg IV load over 1-2h, then 0.02 mg/kg/min infusion with cardiac monitoring (QTc prolongation risk).',
+    citations: [
+        'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
+        'Rosenthal PJ. Artesunate for the Treatment of Severe Falciparum Malaria. N Engl J Med. 2008;358(17):1829-1836.',
+        'CDC. Malaria Hotline and Treatment Information. 770-488-7788 (M-F) / 770-488-7100 (24/7).',
+    ],
+};
+const ARTEMETHER_LUMEFANTRINE = {
+    id: 'artemether-lumefantrine',
+    name: 'Artemether-Lumefantrine (Coartem)',
+    genericName: 'Artemether / Lumefantrine',
+    drugClass: 'Antimalarial — Artemisinin-based combination therapy (ACT)',
+    route: 'PO',
+    indications: ['Uncomplicated P. falciparum malaria (chloroquine-resistant)'],
+    dosing: [
+        {
+            indication: 'Uncomplicated malaria (≥35 kg)',
+            regimen: '4 tablets (20 mg artemether / 120 mg lumefantrine per tablet) PO BID × 3 days (total 6 doses at 0, 8, 24, 36, 48, 60 hours). Take with fatty food or whole milk (enhances absorption 2-3 fold). FDA-approved, most common first-line ACT.',
+        },
+        {
+            indication: 'Pediatric 25-34 kg',
+            regimen: '3 tablets PO BID × 3 days. Take with fatty food.',
+        },
+        {
+            indication: 'Pediatric 15-24 kg',
+            regimen: '2 tablets PO BID × 3 days. Take with fatty food.',
+        },
+        {
+            indication: 'Pediatric 5-14 kg',
+            regimen: '1 tablet PO BID × 3 days. Take with fatty food.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to artemether or lumefantrine',
+        'Severe hepatic impairment',
+        'QTc prolongation or on QT-prolonging drugs',
+    ],
+    cautions: [
+        'MUST be taken with fatty food (improves bioavailability)',
+        'If vomiting within 1 hour, repeat dose',
+        'QTc prolongation risk — avoid with other QT drugs',
+        'Pregnancy: safe in 2nd/3rd trimester, avoid in 1st trimester if possible (quinine + clindamycin preferred)',
+    ],
+    monitoring: 'Repeat blood smears day 3 and day 7 (should be negative by day 7). ECG if cardiac risk factors. Admit all P. falciparum cases for observation (can deteriorate rapidly).',
+    notes: 'Artemisinin-based combination therapy (ACT) is first-line for uncomplicated chloroquine-resistant P. falciparum (most regions worldwide). NEVER use artemisinin monotherapy — promotes resistance. Fatty food is CRITICAL — absorption is 2-3 times higher when taken with fat. Alternative ACT: atovaquone-proguanil (Malarone).',
+    citations: [
+        'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. 2024.',
+        'Artemether-Lumefantrine (Coartem) Prescribing Information. Novartis Pharmaceuticals. 2021.',
+    ],
+};
+const ATOVAQUONE_PROGUANIL = {
+    id: 'atovaquone-proguanil',
+    name: 'Atovaquone-Proguanil (Malarone)',
+    genericName: 'Atovaquone / Proguanil',
+    drugClass: 'Antimalarial — Combination therapy',
+    route: 'PO',
+    indications: ['Uncomplicated P. falciparum malaria (chloroquine-resistant)', 'Malaria chemoprophylaxis'],
+    dosing: [
+        {
+            indication: 'Uncomplicated malaria (adults and children >40 kg)',
+            regimen: '4 tablets (250 mg atovaquone / 100 mg proguanil per tablet) PO daily × 3 days. Take with food or milky drink. Well-tolerated alternative to artemether-lumefantrine.',
+        },
+        {
+            indication: 'Pediatric 31-40 kg',
+            regimen: '3 adult tablets PO daily × 3 days. Take with food.',
+        },
+        {
+            indication: 'Pediatric 21-30 kg',
+            regimen: '2 adult tablets PO daily × 3 days. Take with food.',
+        },
+        {
+            indication: 'Pediatric 11-20 kg',
+            regimen: '1 adult tablet PO daily × 3 days. Take with food.',
+        },
+        {
+            indication: 'Malaria prophylaxis (adults)',
+            regimen: '1 tablet (250/100 mg) PO daily. Start 1-2 days before travel, continue through travel, and for 7 days after leaving endemic area. Well-tolerated, expensive.',
+        },
+    ],
+    contraindications: [
+        'Severe renal impairment (CrCl <30 mL/min)',
+        'Known hypersensitivity',
+        'Prophylaxis in pregnancy (treatment is safe)',
+    ],
+    cautions: [
+        'Expensive (but well-tolerated)',
+        'Do NOT use for treatment if patient was on atovaquone-proguanil for prophylaxis (resistance likely)',
+        'Pregnancy: avoid in 1st trimester for treatment if possible, contraindicated for prophylaxis',
+    ],
+    monitoring: 'Repeat blood smears day 3 and day 7. Admit all P. falciparum cases for observation.',
+    notes: 'Combination of atovaquone (inhibits mitochondrial electron transport) and proguanil (inhibits dihydrofolate reductase). Synergistic effect. Well-tolerated, once-daily dosing. Preferred alternative to artemether-lumefantrine if ACT unavailable. Also used for chemoprophylaxis (highly effective, expensive).',
+    citations: [
+        'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. 2024.',
+        'Atovaquone-Proguanil (Malarone) Prescribing Information. GlaxoSmithKline. 2020.',
+    ],
+};
+const CHLOROQUINE = {
+    id: 'chloroquine',
+    name: 'Chloroquine Phosphate',
+    genericName: 'Chloroquine phosphate',
+    drugClass: 'Antimalarial — 4-aminoquinoline',
+    route: 'PO',
+    indications: ['Chloroquine-sensitive P. falciparum (rare)', 'P. vivax / P. ovale (blood stage)', 'P. malariae'],
+    dosing: [
+        {
+            indication: 'Chloroquine-sensitive malaria (adults)',
+            regimen: '1000 mg (600 mg base) PO initial dose, then 500 mg (300 mg base) at 6, 24, and 48 hours. Total dose over 3 days: 2500 mg salt (1500 mg base). For P. vivax/ovale: add primaquine for radical cure (eradicate liver stages).',
+        },
+        {
+            indication: 'Pediatric dosing',
+            regimen: '10 mg base/kg (max 600 mg base) initial dose, then 5 mg base/kg at 6, 24, 48 hours. For P. vivax/ovale: add primaquine if G6PD normal.',
+            weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600 },
+        },
+        {
+            indication: 'Chloroquine prophylaxis (vivax/ovale relapse suppression)',
+            regimen: '300 mg base (500 mg salt) PO weekly. Use when primaquine contraindicated (pregnancy, G6PD deficiency, age <6 months). Continue until primaquine can be given safely.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity',
+        'Retinal disease',
+        'G6PD deficiency (relative — can cause hemolysis at treatment doses)',
+    ],
+    cautions: [
+        'Chloroquine-resistant P. falciparum is WIDESPREAD (Africa, Southeast Asia, South America) — use ACT instead',
+        'Chloroquine-resistant P. vivax exists (Indonesia, Papua New Guinea) — use ACT instead',
+        'QTc prolongation — avoid with other QT drugs',
+        'GI upset common (nausea, abdominal pain)',
+        'Retinopathy with chronic use (not relevant for acute treatment)',
+    ],
+    monitoring: 'Repeat blood smears day 3 and 7. Watch for treatment failure (persistent/rising parasitemia) — switch to ACT if resistance suspected. ECG if cardiac risk factors.',
+    notes: 'Chloroquine was first-line malaria treatment for decades but widespread resistance has emerged. NOW RARELY USED for P. falciparum (ACT preferred). Still effective for P. vivax/ovale/malariae in most regions, but resistance emerging. Chloroquine-sensitive regions: Central America west of Panama Canal, Haiti, Dominican Republic, parts of Middle East. Always check CDC resistance maps before using.',
+    citations: [
+        'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. 2024.',
+        'Chloroquine Phosphate Prescribing Information. Sanofi-Aventis. 2019.',
+    ],
+};
+const PRIMAQUINE = {
+    id: 'primaquine',
+    name: 'Primaquine',
+    genericName: 'Primaquine phosphate',
+    drugClass: 'Antimalarial — 8-aminoquinoline',
+    route: 'PO',
+    indications: ['P. vivax / P. ovale radical cure (eradicate dormant liver stages)'],
+    dosing: [
+        {
+            indication: 'Radical cure (G6PD normal)',
+            regimen: '30 mg base (52.6 mg salt) PO daily × 14 days. Take with food to reduce nausea. Start after chloroquine blood-stage treatment. G6PD testing is MANDATORY before prescribing.',
+        },
+        {
+            indication: 'High-dose radical cure (alternative)',
+            regimen: '0.5 mg/kg base PO daily × 14 days. Higher cure rates, more GI side effects.',
+            weightCalc: { dosePerKg: 0.5, unit: 'mg' },
+        },
+        {
+            indication: 'G6PD-deficient weekly regimen (specialist guidance)',
+            regimen: '45 mg base (79 mg salt) PO once weekly × 8 weeks. Monitor CBC weekly for hemolysis. Infectious disease consultation recommended.',
+        },
+    ],
+    contraindications: [
+        'G6PD deficiency (unless using weekly low-dose regimen under specialist care)',
+        'Pregnancy (risk to fetus if fetus is G6PD-deficient)',
+        'Breastfeeding if infant <6 months or infant G6PD-deficient',
+        'Infants <6 months',
+    ],
+    cautions: [
+        'G6PD testing is MANDATORY — dose-dependent hemolysis in deficient patients',
+        'If recently transfused: G6PD test may be falsely normal (transfused RBCs have normal G6PD) — defer primaquine or retest in 3 months',
+        'Nausea, abdominal pain (take with food)',
+        'Methemoglobinemia (rare)',
+    ],
+    monitoring: 'CBC at baseline. If weekly dosing for G6PD deficiency: CBC weekly to monitor for hemolysis. Repeat blood smear day 7 to confirm clearance. Relapse can occur months later if primaquine not given or inadequate.',
+    notes: 'Primaquine is the ONLY drug that eradicates hypnozoites (dormant liver stages of P. vivax and P. ovale). Without primaquine, relapse occurs in 50-80% of patients months to years later. G6PD deficiency is X-linked (affects males predominantly, but heterozygous females can have intermediate enzyme levels). Quantitative G6PD enzyme activity test preferred over qualitative screening.',
+    citations: [
+        'Hill DR, Baird JK, Parise ME, et al. Primaquine: Report from CDC Expert Meeting on Malaria Chemoprophylaxis. Am J Trop Med Hyg. 2006;75(3):402-415.',
+        'Primaquine Prescribing Information. Sanofi-Aventis. 2022.',
+    ],
+};
+const QUINIDINE_GLUCONATE = {
+    id: 'quinidine-gluconate',
+    name: 'Quinidine Gluconate',
+    genericName: 'Quinidine gluconate',
+    drugClass: 'Antimalarial / Antiarrhythmic (Class IA)',
+    route: 'IV',
+    indications: ['Severe malaria (ONLY if IV artesunate unavailable)'],
+    dosing: [
+        {
+            indication: 'Severe malaria (adults)',
+            regimen: '10 mg/kg IV loading dose over 1-2 hours (in normal saline or D5W), then 0.02 mg/kg/min continuous infusion until patient can tolerate oral ACT. Reduce infusion rate by 30-50% if QTc >0.6 seconds. Requires continuous cardiac monitoring (QTc prolongation risk). CALL CDC if using: 770-488-7788 or 770-488-7100.',
+            weightCalc: { dosePerKg: 10, unit: 'mg' },
+        },
+    ],
+    contraindications: [
+        'QTc >500 ms',
+        'Complete AV block',
+        'Known quinidine hypersensitivity',
+        'Myasthenia gravis',
+    ],
+    cautions: [
+        'QTc prolongation — requires continuous cardiac monitoring',
+        'Hypoglycemia (stimulates insulin release) — monitor glucose q4-6h',
+        'Hypotension — may require vasopressor support',
+        'Cinchonism (tinnitus, nausea, dizziness, visual disturbances)',
+        'Inferior to IV artesunate — use ONLY if artesunate unavailable',
+    ],
+    monitoring: 'Continuous cardiac monitoring (QTc, heart rate, BP). Glucose q4-6h. Repeat blood smears q12-24h. Quinidine level if available (therapeutic 2-6 mcg/mL). ICU admission required.',
+    notes: 'Quinidine is the historical treatment for severe malaria in the US but has been REPLACED by IV artesunate (superior efficacy, fewer side effects). Use quinidine ONLY if artesunate unavailable (rare). Artesunate reduced mortality by 35% vs quinine in SEAQUAMAT trial. Call CDC Malaria Hotline for guidance: 770-488-7788 (M-F) or 770-488-7100 (24/7).',
+    citations: [
+        'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. 2024.',
+        'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
+    ],
+};
 export const ALL_DRUGS = [
     ACAMPROSATE,
     ACETAMINOPHEN,
@@ -8427,8 +8666,11 @@ export const ALL_DRUGS = [
     AMPICILLIN,
     AMPHOTERICIN_B,
     APIXABAN,
+    ARTEMETHER_LUMEFANTRINE,
+    IV_ARTESUNATE,
     ASPIRIN,
     ATAZANAVIR,
+    ATOVAQUONE_PROGUANIL,
     ATORVASTATIN,
     ATROPINE,
     AZITHROMYCIN,
@@ -8455,6 +8697,7 @@ export const ALL_DRUGS = [
     CETIRIZINE,
     CHLORDIAZEPOXIDE,
     CHOLESTYRAMINE,
+    CHLOROQUINE,
     CHLOROTHIAZIDE,
     CIPROFLOXACIN,
     CLINDAMYCIN,
@@ -8578,6 +8821,7 @@ export const ALL_DRUGS = [
     PREDNISOLONE,
     PREDNISONE,
     PRETOMANID,
+    PRIMAQUINE,
     PROCAINAMIDE,
     PROCAINE_PENICILLIN,
     PROCHLORPERAZINE,
@@ -8587,6 +8831,7 @@ export const ALL_DRUGS = [
     PROTAMINE,
     PTU,
     QUETIAPINE,
+    QUINIDINE_GLUCONATE,
     PYRAZINAMIDE,
     PYRIDOXINE,
     RABIES_IMMUNE_GLOBULIN,

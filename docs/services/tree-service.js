@@ -677,6 +677,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/traveler-infections.js');
             return { nodes: m.TRAVELER_INFECTIONS_NODES, entryNodeId: 'ti-start', categoryId: 'infectious-disease', moduleLabels: m.TRAVELER_INFECTIONS_MODULE_LABELS, citations: m.TRAVELER_INFECTIONS_CITATIONS, criticalActions: m.TRAVELER_INFECTIONS_CRITICAL_ACTIONS };
         },
+        'malaria': async () => {
+            const m = await import('../data/trees/malaria.js');
+            return { nodes: m.MALARIA_NODES, entryNodeId: 'mal-start', categoryId: 'infectious-disease', moduleLabels: m.MALARIA_MODULE_LABELS, citations: m.MALARIA_CITATIONS, criticalActions: m.MALARIA_CRITICAL_ACTIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

@@ -901,6 +901,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'ti-isolation', label: 'Isolation', icon: '⚠️', action: 'calculator', target: 'ti-isolation' },
         { id: 'ti-cdc', label: 'CDC Links', icon: '📞', action: 'calculator', target: 'ti-cdc-resources' },
     ],
+    'malaria': [
+        { id: 'severity', label: 'Severity', icon: '🌡️', action: 'calculator', target: 'malaria-severity' },
+        { id: 'parasitemia', label: 'Parasitemia', icon: '🔬', action: 'calculator', target: 'parasitemia-calc' },
+        { id: 'artesunate', label: 'Artesunate', icon: '💉', action: 'calculator', target: 'artesunate-dosing' },
+        { id: 'species', label: 'Species', icon: '🦠', action: 'overlay', target: 'mal-species-table' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

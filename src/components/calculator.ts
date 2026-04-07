@@ -25675,6 +25675,332 @@ const TI_CDC_RESOURCES_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Malaria Severity Score (Scored)
+// -------------------------------------------------------------------
+
+const MALARIA_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'malaria-severity',
+  title: 'Malaria Severity Score',
+  subtitle: 'WHO 2023 Severe Malaria Criteria',
+  description: 'Severe malaria is defined as Plasmodium infection PLUS ≥1 of the following WHO criteria. Any single criterion requires ICU admission and IV artesunate.',
+  fields: [
+    { name: 'impaired-consciousness', label: 'Impaired consciousness (GCS <11)', type: 'toggle', points: 1 },
+    { name: 'prostration', label: 'Prostration (inability to sit/stand unassisted)', type: 'toggle', points: 1 },
+    { name: 'convulsions', label: 'Multiple convulsions (≥2 in 24h)', type: 'toggle', points: 1 },
+    { name: 'acidotic-breathing', label: 'Respiratory distress (acidotic breathing)', type: 'toggle', points: 1 },
+    { name: 'shock', label: 'Circulatory collapse / shock', type: 'toggle', points: 1, description: 'SBP <70 mmHg (children), <80 mmHg (adults)' },
+    { name: 'pulm-edema', label: 'Acute pulmonary edema (radiographic)', type: 'toggle', points: 1 },
+    { name: 'bleeding', label: 'Abnormal bleeding (spontaneous)', type: 'toggle', points: 1 },
+    { name: 'jaundice', label: 'Jaundice (bilirubin >3 mg/dL + parasitemia >100,000)', type: 'toggle', points: 1 },
+    { name: 'parasitemia', label: 'Parasitemia >10% (or >250,000/mcL)', type: 'toggle', points: 1 },
+    { name: 'anemia', label: 'Severe anemia (Hgb <5 g/dL children, <7 adults)', type: 'toggle', points: 1 },
+    { name: 'hypoglycemia', label: 'Hypoglycemia (glucose <40 mg/dL)', type: 'toggle', points: 1 },
+    { name: 'acidosis', label: 'Metabolic acidosis (pH <7.25 or HCO₃ <15)', type: 'toggle', points: 1 },
+    { name: 'renal', label: 'Renal impairment (creatinine >3 mg/dL)', type: 'toggle', points: 1 },
+    { name: 'lactate', label: 'Hyperlactatemia (lactate >5 mmol/L)', type: 'toggle', points: 1 },
+    { name: 'hemoglobinuria', label: 'Hemoglobinuria (macroscopic dark urine)', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'Uncomplicated Malaria', risk: 'No severe criteria', mortality: 'Oral ACT regimen. Admit all P. falciparum for observation.', colorVar: '--color-primary' },
+    { min: 1, max: Infinity, label: 'SEVERE MALARIA', risk: '≥1 WHO criterion present', mortality: 'ICU admission. IV artesunate via CDC IND (call 770-488-7788 or 770-488-7100). Mortality 10-50% depending on complications.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: '**ANY single severe criterion = SEVERE MALARIA.** Call CDC Malaria Hotline: 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours). IV artesunate is ONLY treatment for severe malaria.',
+  citations: [
+    'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
+    'Trampuz A, Jereb M, Muzlovic I, Prabhu RM. Clinical Review: Severe Malaria. Crit Care. 2003;7(4):315-323.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Parasitemia Calculator (Formula-Based)
+// -------------------------------------------------------------------
+
+const PARASITEMIA_CALC_CALCULATOR: CalculatorDefinition = {
+  id: 'parasitemia-calc',
+  title: 'Parasitemia Calculator',
+  subtitle: 'Percent Infected RBCs',
+  description: 'Calculates parasitemia percentage from thin blood smear counts. Parasitemia >10% = severe malaria requiring ICU and IV artesunate.',
+  fields: [
+    {
+      name: 'infected-rbcs',
+      label: 'Infected RBCs Counted',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'cells',
+      description: 'Number of parasitized RBCs on thin smear',
+    },
+    {
+      name: 'total-rbcs',
+      label: 'Total RBCs Counted',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'cells',
+      description: 'Total RBCs counted (typically 500-1000)',
+    },
+  ],
+  results: [],
+  thresholdNote: '**>10% = severe malaria** — ICU admission + IV artesunate required. Repeat smears q12-24h to monitor treatment response.',
+  citations: [
+    'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
+    'CDC. Malaria: Diagnosis & Treatment (United States). Centers for Disease Control and Prevention. 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const infected = values['infected-rbcs'] || 0;
+    const total = values['total-rbcs'] || 0;
+
+    if (infected <= 0 || total <= 0) {
+      return {
+        value: '--',
+        label: 'Enter values',
+        description: 'Enter infected RBCs and total RBCs counted to calculate parasitemia.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    if (infected > total) {
+      return {
+        value: 'Error',
+        label: 'Invalid Input',
+        description: 'Infected RBCs cannot exceed total RBCs counted.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    const parasitemia = (infected / total) * 100;
+    const parasitemiaRounded = Math.round(parasitemia * 100) / 100;
+
+    let label: string;
+    let description: string;
+    let colorVar: string;
+
+    if (parasitemiaRounded < 1) {
+      label = 'Low Parasitemia';
+      description = '<1% — uncomplicated malaria if no other severe criteria. Admit all P. falciparum cases for observation.';
+      colorVar = '--color-primary';
+    } else if (parasitemiaRounded < 5) {
+      label = 'Moderate Parasitemia';
+      description = '1-5% — monitor closely. Higher mortality risk. Repeat smears q12-24h.';
+      colorVar = '--color-warning';
+    } else if (parasitemiaRounded < 10) {
+      label = 'High Parasitemia';
+      description = '5-10% — high risk of progression. ICU consultation recommended. Repeat smears q12h.';
+      colorVar = '--color-warning';
+    } else {
+      label = 'SEVERE MALARIA';
+      description = '>10% = WHO severe malaria criterion. ICU admission + IV artesunate via CDC IND protocol. Call 770-488-7788 or 770-488-7100.';
+      colorVar = '--color-danger';
+    }
+
+    return {
+      value: `${parasitemiaRounded}%`,
+      label,
+      description,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Artesunate Dosing Calculator (Formula-Based)
+// -------------------------------------------------------------------
+
+const ARTESUNATE_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'artesunate-dosing',
+  title: 'IV Artesunate Dosing',
+  subtitle: 'Severe Malaria Treatment',
+  description: 'IV artesunate is the ONLY treatment for severe malaria. Obtain via CDC IND protocol: call 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours).',
+  fields: [
+    {
+      name: 'weight',
+      label: 'Patient Weight',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'kg',
+      description: 'Body weight for dosing calculation',
+    },
+    {
+      name: 'pediatric',
+      label: 'Pediatric patient (<20 kg)',
+      type: 'toggle',
+      points: 1,
+      description: 'Use 3 mg/kg dosing for children <20 kg',
+    },
+  ],
+  results: [],
+  thresholdNote: '**Loading doses:** 0, 12, and 24 hours. **Maintenance:** Daily until patient can tolerate oral ACT (usually 3-7 days). Monitor for post-artesunate delayed hemolysis (CBC weekly × 4 weeks post-treatment).',
+  citations: [
+    'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
+    'Rosenthal PJ. Artesunate for the Treatment of Severe Falciparum Malaria. N Engl J Med. 2008;358(17):1829-1836.',
+    'CDC. Malaria Hotline: 770-488-7788 (M-F) / 770-488-7100 (24/7).',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const isPediatric = values['pediatric'] === 1;
+
+    if (weight <= 0) {
+      return {
+        value: '--',
+        label: 'Enter weight',
+        description: 'Enter patient weight to calculate artesunate dosing.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const dosePerKg = isPediatric ? 3 : 2.4;
+    const singleDose = weight * dosePerKg;
+    const singleDoseRounded = Math.round(singleDose * 10) / 10;
+
+    let description: string;
+    if (isPediatric) {
+      description = `**Pediatric dosing (<20 kg):** ${singleDoseRounded} mg IV at 0, 12, and 24 hours (loading), then ${singleDoseRounded} mg IV daily until can tolerate oral ACT.\n\n**CDC Hotline:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7)\n\n**Post-treatment:** CBC weekly × 4 weeks (delayed hemolysis risk).`;
+    } else {
+      description = `**Adult dosing:** ${singleDoseRounded} mg IV at 0, 12, and 24 hours (loading), then ${singleDoseRounded} mg IV daily until can tolerate oral ACT.\n\n**CDC Hotline:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7)\n\n**Post-treatment:** CBC weekly × 4 weeks (delayed hemolysis risk).`;
+    }
+
+    return {
+      value: `${singleDoseRounded} mg`,
+      label: isPediatric ? 'Pediatric Dose (3 mg/kg)' : 'Adult Dose (2.4 mg/kg)',
+      description,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Primaquine Safety Calculator (Decision Logic)
+// -------------------------------------------------------------------
+
+const PRIMAQUINE_SAFETY_CALCULATOR: CalculatorDefinition = {
+  id: 'primaquine-safety',
+  title: 'Primaquine Safety Check',
+  subtitle: 'G6PD Testing & Contraindications',
+  description: 'Primaquine is REQUIRED for radical cure of P. vivax and P. ovale (eradicates dormant liver stages). G6PD testing is MANDATORY before prescribing due to hemolysis risk in deficient patients.',
+  fields: [
+    {
+      name: 'g6pd-status',
+      label: 'G6PD Enzyme Status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Normal (quantitative test)', points: 0 },
+        { label: 'Deficient', points: 1 },
+        { label: 'Unknown / Not tested', points: 2 },
+      ],
+    },
+    {
+      name: 'weight',
+      label: 'Weight',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'kg',
+      description: 'For dosing calculation',
+    },
+    {
+      name: 'pregnant',
+      label: 'Pregnant',
+      type: 'toggle',
+      points: 1,
+      description: 'Risk to fetus if fetus is G6PD-deficient',
+    },
+    {
+      name: 'breastfeeding',
+      label: 'Breastfeeding infant <6 months or G6PD-deficient',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'infant',
+      label: 'Infant <6 months of age',
+      type: 'toggle',
+      points: 1,
+    },
+  ],
+  results: [],
+  thresholdNote: '**Standard regimen:** 30 mg base (52.6 mg salt) PO daily × 14 days. **High-dose alternative:** 0.5 mg/kg base daily × 14 days (higher cure rates, more GI side effects). **G6PD-deficient weekly regimen:** 45 mg base once weekly × 8 weeks (specialist consultation recommended).',
+  citations: [
+    'Hill DR, Baird JK, Parise ME, et al. Primaquine: Report from CDC Expert Meeting on Malaria Chemoprophylaxis. Am J Trop Med Hyg. 2006;75(3):402-415.',
+    'Primaquine Prescribing Information. Sanofi-Aventis. 2022.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const g6pdStatus = values['g6pd-status'] || 0;
+    const weight = values['weight'] || 0;
+    const pregnant = values['pregnant'] === 1;
+    const breastfeeding = values['breastfeeding'] === 1;
+    const infant = values['infant'] === 1;
+
+    // Check contraindications
+    if (pregnant) {
+      return {
+        value: 'CONTRAINDICATED',
+        label: 'Defer Until Postpartum',
+        description: '**Primaquine is contraindicated in pregnancy** (risk to fetus if fetus is G6PD-deficient).\n\n**Management:** Give chloroquine for blood stage, then provide chloroquine prophylaxis 300 mg base (500 mg salt) PO weekly to suppress relapses until after delivery. Start primaquine postpartum after G6PD testing.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (breastfeeding) {
+      return {
+        value: 'CONTRAINDICATED',
+        label: 'Risk to Infant',
+        description: '**Primaquine is contraindicated** if breastfeeding infant is <6 months or G6PD-deficient.\n\n**Management:** Test infant for G6PD. If deficient or age <6 months, defer primaquine and use chloroquine prophylaxis 300 mg base weekly in mother to suppress relapses.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (infant) {
+      return {
+        value: 'CONTRAINDICATED',
+        label: 'Age <6 Months',
+        description: '**Primaquine is contraindicated in infants <6 months.**\n\n**Management:** Defer primaquine. Use chloroquine for blood stage. Reassess at 6 months for G6PD testing and primaquine.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (g6pdStatus === 2) {
+      return {
+        value: 'G6PD TESTING REQUIRED',
+        label: 'Cannot Prescribe',
+        description: '**G6PD testing is MANDATORY before prescribing primaquine** due to dose-dependent hemolysis risk in deficient patients.\n\n**Management:** Order quantitative G6PD enzyme activity test. If recently transfused, test may be falsely normal — defer primaquine or retest in 3 months. Use chloroquine prophylaxis 300 mg base weekly until primaquine can be given safely.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (g6pdStatus === 1) {
+      return {
+        value: 'WEEKLY REGIMEN',
+        label: 'G6PD-Deficient — Specialist Consult',
+        description: '**Weekly low-dose primaquine regimen for G6PD-deficient patients:** 45 mg base (79 mg salt) PO once weekly × 8 weeks.\n\n**Monitoring:** CBC weekly to monitor for hemolysis.\n\n**Recommendation:** Infectious disease or hematology consultation recommended. Alternative: defer primaquine and use chloroquine prophylaxis 300 mg base weekly to suppress relapses.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // G6PD normal
+    if (weight <= 0) {
+      return {
+        value: 'SAFE TO PRESCRIBE',
+        label: 'G6PD Normal',
+        description: '**Standard regimen:** 30 mg base (52.6 mg salt) PO daily × 14 days. Take with food to reduce nausea.\n\n**High-dose alternative:** 0.5 mg/kg base daily × 14 days (higher cure rates, more GI side effects).\n\n**Monitoring:** CBC at baseline. Repeat blood smear day 7 to confirm clearance.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    const highDose = weight * 0.5; // mg base
+    const highDoseRounded = Math.round(highDose * 10) / 10;
+
+    return {
+      value: 'SAFE TO PRESCRIBE',
+      label: 'G6PD Normal',
+      description: `**Standard regimen:** 30 mg base (52.6 mg salt) PO daily × 14 days. Take with food to reduce nausea.\n\n**High-dose alternative (${weight} kg):** ${highDoseRounded} mg base daily × 14 days (0.5 mg/kg) — higher cure rates, more GI side effects.\n\n**Monitoring:** CBC at baseline. Repeat blood smear day 7 to confirm clearance.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // TIA Workup
@@ -25750,6 +26076,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'measles-immunity': MEASLES_IMMUNITY_CALCULATOR,
   'measles-pep': MEASLES_PEP_CALCULATOR,
   'measles-vitamin-a': MEASLES_VITAMIN_A_CALCULATOR,
+  // Malaria
+  'malaria-severity': MALARIA_SEVERITY_CALCULATOR,
+  'parasitemia-calc': PARASITEMIA_CALC_CALCULATOR,
+  'artesunate-dosing': ARTESUNATE_DOSING_CALCULATOR,
+  'primaquine-safety': PRIMAQUINE_SAFETY_CALCULATOR,
   // Extensor Tendon
   'extensor-zone-guide': EXTENSOR_ZONE_GUIDE_CALCULATOR,
   'extensor-suture-guide': EXTENSOR_SUTURE_GUIDE_CALCULATOR,

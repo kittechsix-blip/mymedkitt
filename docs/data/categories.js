@@ -675,6 +675,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 26,
                 entryNodeId: 'ti-start',
+            },
+            {
+                id: 'malaria',
+                title: 'Malaria',
+                subtitle: 'Initial Assessment → Diagnostic Testing → Severity Classification → Treatment Selection → Special Populations → Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 35,
+                entryNodeId: 'mal-start',
             }
         ],
         isCustom: false,
