@@ -121,7 +121,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Narrow Complex PEA',
-    body: '**Narrow complex PEA — think obstructive or hypovolemic.**\n\n**Common causes:**\n• Cardiac tamponade\n• Tension pneumothorax\n• Massive pulmonary embolism\n• Profound hypovolemia (hemorrhage, sepsis)\n\nPOCUS findings direct specific treatment.\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
+    body: '**Narrow complex PEA — think mechanical / RV problem (pseudo-PEA).**\n\nNarrow QRS = myocardium is electrically intact. The problem is mechanical obstruction to RV inflow or outflow.\n\n**Common causes:**\n• Cardiac tamponade\n• Tension pneumothorax\n• Mechanical hyperinflation / auto-PEEP\n• Massive pulmonary embolism\n• Profound hypovolemia\n\n**First-line treatment: wide-open IV fluids** — narrow-complex PEA is frequently fluid-responsive.\n\nPOCUS findings direct cause-specific intervention.\n\n**Note:** Calcium and bicarb are unlikely to help in narrow-complex PEA — save for wide QRS.\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
     citation: [1, 2, 11],
     next: 'pea-causes-narrow',
   },
@@ -226,11 +226,27 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
       {
+        label: 'Ventilated patient — hyperexpanded chest',
+        description: 'Mechanical hyperinflation / auto-PEEP',
+        next: 'pea-autopeep',
+        urgency: 'urgent',
+      },
+      {
         label: 'No specific finding',
         description: 'Continue resuscitation, reassess next cycle',
         next: 'pea-cpr',
       },
     ],
+  },
+
+  {
+    id: 'pea-autopeep',
+    type: 'info',
+    module: 4,
+    title: 'Mechanical Hyperinflation / Auto-PEEP',
+    body: '**Mechanical hyperinflation (auto-PEEP) — RV inflow obstruction from air trapping.**\n\n**Clues:**\n• Ventilated patient (especially asthma, COPD)\n• Hyperexpanded chest, bilateral air entry\n• Progressive hypotension preceding arrest\n• Absent lung sliding may be BILATERAL (distinguish from tension PTX)\n\n**Immediate treatment:**\n• **Disconnect ventilator** — allow passive exhalation for 10-15 seconds\n• Manually compress chest to assist exhalation\n• Reduce respiratory rate and tidal volume\n• Increase expiratory time (I:E ratio 1:4 or 1:5)\n\n**If no improvement:**\n• Consider bilateral needle decompression (tension PTX may coexist)\n• Reduce PEEP to zero temporarily\n\n**Key concept:** External cardiac compression may worsen auto-PEEP — cannot compress a hyperinflated chest effectively. Fixing the ventilator problem may restore circulation.',
+    citation: [2, 5],
+    next: 'pea-cpr',
   },
 
   {
