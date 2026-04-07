@@ -178,7 +178,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'TCA / Na Channel Blocker Toxicity',
-    body: '**TCA/Na channel blocker toxicity in arrest:**\n\n**1. Sodium Bicarbonate:**\n• [Sodium Bicarbonate](#/drug/nahco3/tca toxicity) 1-2 mEq/kg IV push\n• Target pH 7.45-7.55\n• Repeat q5 min if QRS still wide\n\n**2. Lipid Emulsion (if refractory):**\n• [Lipid Emulsion](#/drug/lipid-emulsion/tca toxicity) 20% 1.5 mL/kg IV bolus\n• Follow with 0.25 mL/kg/min infusion\n\n**Do NOT use:**\n• Class IA/IC antiarrhythmics\n• Physostigmine in arrest\n\n**Continue CPR — prolonged resuscitation may be successful** in toxicologic arrests.',
+    body: '**TCA/Na channel blocker toxicity in arrest:**\n\n**1. Sodium Bicarbonate:**\n• [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca toxicity) 1-2 mEq/kg IV push\n• Target pH 7.45-7.55\n• Repeat q5 min if QRS still wide\n\n**2. Lipid Emulsion (if refractory):**\n• [Lipid Emulsion](#/drug/lipid-emulsion/tca toxicity) 20% 1.5 mL/kg IV bolus\n• Follow with 0.25 mL/kg/min infusion\n\n**Do NOT use:**\n• Class IA/IC antiarrhythmics\n• Physostigmine in arrest\n\n**Continue CPR — prolonged resuscitation may be successful** in toxicologic arrests.',
     citation: [1, 5],
     next: 'pea-cpr',
   },

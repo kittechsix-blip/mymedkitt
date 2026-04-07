@@ -107,7 +107,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hyperkalemia Treatment Stack',
-    body: '**During cardiac arrest:**\n\n1. **[Calcium chloride](#/drug/calcium-chloride/hyperK)** 1g IV (or Calcium gluconate 3g IV) — membrane stabilization\n2. **[Regular insulin](#/drug/insulin/hyperK)** 10 units + **D50** 50 mL IV — intracellular shift\n3. **[Albuterol](#/drug/albuterol/hyperK)** 10-20 mg nebulized — intracellular shift\n4. **[Sodium bicarbonate](#/drug/nahco3/hyperK)** 50-100 mEq IV if acidotic\n5. **Dialysis** if refractory\n\n**Continue ACLS** while treating hyperkalemia [2]',
+    body: '**During cardiac arrest:**\n\n1. **[Calcium chloride](#/drug/calcium-chloride/hyperK)** 1g IV (or Calcium gluconate 3g IV) — membrane stabilization\n2. **[Regular insulin](#/drug/regular-insulin/hyperK)** 10 units + **D50** 50 mL IV — intracellular shift\n3. **[Albuterol](#/drug/albuterol/hyperK)** 10-20 mg nebulized — intracellular shift\n4. **[Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperK)** 50-100 mEq IV if acidotic\n5. **Dialysis** if refractory\n\n**Continue ACLS** while treating hyperkalemia [2]',
     citation: [2],
     next: 'rvf-vector-change',
     treatment: {
@@ -136,7 +136,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Toxin-Induced VF/VT',
-    body: '**Key antidotes during arrest:**\n\n| Toxin | Treatment |\n|-------|----------|\n| TCA | [NaHCO₃](#/drug/nahco3/tca) 1-2 mEq/kg IV, target pH 7.5 |\n| Beta-blocker | [Glucagon](#/drug/glucagon/bb) 5-10 mg IV, high-dose insulin |\n| CCB | [Calcium chloride](#/drug/calcium-chloride/ccb) 1-3g IV, high-dose insulin |\n| Digoxin | [DigiFab](#/drug/digifab/dig) |\n| Local anesthetic (LAST) | [Intralipid](#/drug/lipid-emulsion/last) 20% 1.5 mL/kg bolus |\n| Cocaine | Benzodiazepines, avoid beta-blockers |\n\n**Continue ACLS** while administering antidotes [2]',
+    body: '**Key antidotes during arrest:**\n\n| Toxin | Treatment |\n|-------|----------|\n| TCA | [NaHCO₃](#/drug/sodium-bicarbonate/tca) 1-2 mEq/kg IV, target pH 7.5 |\n| Beta-blocker | [Glucagon](#/drug/glucagon/bb) 5-10 mg IV, high-dose insulin |\n| CCB | [Calcium chloride](#/drug/calcium-chloride/ccb) 1-3g IV, high-dose insulin |\n| Digoxin | [DigiFab](#/drug/digifab/dig) |\n| Local anesthetic (LAST) | [Intralipid](#/drug/lipid-emulsion/last) 20% 1.5 mL/kg bolus |\n| Cocaine | Benzodiazepines, avoid beta-blockers |\n\n**Continue ACLS** while administering antidotes [2]',
     citation: [2],
     next: 'rvf-vector-change',
   },

@@ -384,6 +384,10 @@ const AMIODARONE: DrugEntry = {
       indication: 'VAD arrhythmia',
       regimen: 'Load: 150 mg IV over 10 min. Infusion: 1 mg/min x 6h, then 0.5 mg/min x 18h. For VAD VT/VF: 300 mg IV push (arrest dose). Preferred antiarrhythmic in VAD patients — hemodynamically stable, effective for both atrial and ventricular arrhythmias. Note: potentiates warfarin — reduce warfarin dose by 30-50%.',
     },
+    {
+      indication: 'Stable monomorphic VT',
+      regimen: '150 mg IV over 10 min. Then 1 mg/min × 6h, then 0.5 mg/min × 18h (max 2.2 g/24h). Alternative to procainamide. Avoid if baseline QTc prolonged.',
+    },
   ],
   contraindications: [
     'Cardiogenic shock',
@@ -1738,6 +1742,33 @@ const DIGOXIN: DrugEntry = {
   ],
 };
 
+const DIGIFAB: DrugEntry = {
+  id: 'digifab',
+  name: 'DigiFab (Digoxin Immune Fab)',
+  genericName: 'Digoxin immune Fab (ovine)',
+  drugClass: 'Antidote — digoxin-specific antibody fragments',
+  route: 'IV',
+  indications: ['Digoxin toxicity', 'Digitalis glycoside poisoning', 'Oleander/foxglove poisoning'],
+  dosing: [
+    {
+      indication: 'Acute digoxin toxicity — known ingestion',
+      regimen: 'Dose (vials) = ingested dose (mg) × 0.8 / 0.5. Each vial binds 0.5 mg digoxin. Infuse IV over 30 min. For cardiac arrest: can give as IV push.',
+    },
+    {
+      indication: 'Chronic digoxin toxicity',
+      regimen: 'Empiric: 3-6 vials IV. May repeat in 30 min if no response. For life-threatening arrhythmia or cardiac arrest: 10-20 vials IV.',
+    },
+    {
+      indication: 'Digoxin toxicity — level-based dosing',
+      regimen: 'Dose (vials) = serum digoxin (ng/mL) × weight (kg) / 100. Round up to nearest whole vial. Give IV over 30 min.',
+    },
+  ],
+  cautions: ['Hypokalemia may unmask as digoxin is bound (monitor K+ closely)', 'Allergy to sheep proteins (skin test if time allows)', 'Serum digoxin levels unreliable for 1-2 weeks after Fab (measures total, not free)'],
+  monitoring: 'Continuous ECG, potassium q1-2h (K+ drops as digoxin unbound), clinical response within 30-60 min.',
+  notes: 'Indications for DigiFab: life-threatening arrhythmia (VT/VF, high-grade AV block, symptomatic bradycardia unresponsive to atropine), K+ >5.0 in acute ingestion, ingestion >10mg (adult) or >4mg (child), serum level >15 ng/mL at any time or >10 ng/mL at steady state. Works for all cardiac glycosides (digoxin, digitoxin, oleander, foxglove, toad venom).',
+  citations: ['Howland MA. Digoxin-Specific Antibody Fragments (Fab). Goldfrank\'s Toxicologic Emergencies. 11th ed.', 'Lapostolle F et al. Treatment of Digitalis Intoxication. Br J Clin Pharmacol. 2008;65(6):834-844.'],
+};
+
 const DIMENHYDRINATE: DrugEntry = {
   id: 'dimenhydrinate',
   name: 'Dimenhydrinate',
@@ -1845,6 +1876,29 @@ const DOBUTAMINE: DrugEntry = {
     'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
     'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
   ],
+};
+
+const DOPAMINE: DrugEntry = {
+  id: 'dopamine',
+  name: 'Dopamine (Intropin)',
+  genericName: 'Dopamine hydrochloride',
+  drugClass: 'Catecholamine / vasopressor-inotrope',
+  route: 'IV infusion only',
+  indications: ['Symptomatic bradycardia', 'Cardiogenic shock', 'Hypotension'],
+  dosing: [
+    {
+      indication: 'Symptomatic bradycardia (ACLS)',
+      regimen: '5-20 mcg/kg/min IV infusion. Start at 5 mcg/kg/min, titrate to heart rate >60 bpm and adequate perfusion. Alternative to epinephrine infusion when pacing unavailable.',
+    },
+    {
+      indication: 'Cardiogenic shock / hypotension',
+      regimen: '5-15 mcg/kg/min IV infusion. Low dose (2-5 mcg/kg/min): renal/mesenteric vasodilation. Mid dose (5-15 mcg/kg/min): beta-1 inotropy. High dose (>15 mcg/kg/min): alpha vasoconstriction.',
+    },
+  ],
+  cautions: ['Tachyarrhythmias (dose-dependent)', 'Tissue necrosis with extravasation', 'MAO inhibitor interaction (reduce dose by 90%)', 'Hypovolemia must be corrected first'],
+  monitoring: 'Continuous ECG, BP, HR. Central line preferred for high doses. Watch for tachyarrhythmias.',
+  notes: 'Second-line to epinephrine for bradycardia per AHA. Dose-dependent receptor activation: D1 (low) → beta-1 (mid) → alpha-1 (high). Less preferred than norepinephrine for septic shock (SOAP II trial).',
+  citations: ['Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.', 'De Backer D et al. Dopamine versus norepinephrine in cardiogenic shock (SOAP II). NEJM. 2010;362(9):779-789.'],
 };
 
 const DOLUTEGRAVIR: DrugEntry = {
@@ -2075,6 +2129,10 @@ const EPINEPHRINE: DrugEntry = {
       indication: 'VAD low-dose inotrope',
       regimen: '0.01-0.03 mcg/kg/min IV continuous infusion for RV contractile support. Provides combined inotropic and vasopressor effects. Alternative to dobutamine when vasopressor effect also needed.',
       weightCalc: { dosePerKg: 0.02, unit: 'mcg/min', label: 'Low-dose inotrope (0.02 mcg/kg/min)' },
+    },
+    {
+      indication: 'Symptomatic bradycardia (ACLS infusion)',
+      regimen: '2-10 mcg/min IV infusion. Start at 2 mcg/min, titrate to HR >60 and adequate perfusion. Bridge to transcutaneous or transvenous pacing. Push-dose: 10-20 mcg IV bolus (1 mL of 1:100,000 or 0.1 mL of 1:10,000) every 2-3 min as temporizing measure.',
     },
   ],
   contraindications: [
@@ -2466,6 +2524,10 @@ const LIDOCAINE: DrugEntry = {
       indication: 'Torsades de pointes',
       regimen: '1\u20131.5 mg/kg IV push over 2 min, then 1\u20134 mg/min continuous infusion. Class IB antiarrhythmic \u2014 shortens QT interval and suppresses triggered activity. Use when TdP is refractory to magnesium + overdrive pacing. May repeat bolus 0.5\u20130.75 mg/kg q5\u201310 min (max 3 mg/kg total). One of the few antiarrhythmics SAFE in TdP (unlike amiodarone, procainamide, sotalol which prolong QT).',
       weightCalc: { dosePerKg: 1.5, unit: 'mg', maxDose: 100, label: 'IV push (high end)' },
+    },
+    {
+      indication: 'Cardiac arrest — VF/pVT (ACLS)',
+      regimen: '1-1.5 mg/kg IV/IO push. May repeat 0.5-0.75 mg/kg q5-10 min (max 3 mg/kg total). Post-ROSC maintenance: 1-4 mg/min infusion. Give after 3rd shock if amiodarone unavailable. 2025 AHA: target trial emulation suggests lidocaine may have higher prehospital ROSC rates.',
     },
   ],
   contraindications: [
@@ -2954,6 +3016,10 @@ const MAGNESIUM_SULFATE: DrugEntry = {
       indication: 'Eclampsia / Pregnancy SE',
       regimen: 'Loading dose: 4-6 g IV over 15-20 min. Maintenance: 1-2 g/hr continuous infusion. Primary treatment for eclamptic seizures. If seizures persist despite magnesium, add benzodiazepines then standard SE algorithm. Monitor deep tendon reflexes (loss = first sign of toxicity), respiratory rate, urine output. Antidote for Mg toxicity: Calcium gluconate 1 g IV.',
     },
+    {
+      indication: 'Post-arrest TTM — anti-shivering',
+      regimen: '4 g IV bolus over 20 min. Raises shivering threshold by ~1°C. Give as first-line anti-shivering agent before meperidine or paralysis. Also repletes intracellular magnesium (common post-arrest). Target Mg 3-4 mg/dL during TTM.',
+    },
   ],
   contraindications: [
     'Severe renal failure (GFR <30 mL/min or oliguria) for continuous infusion \u2014 use intermittent boluses instead',
@@ -3010,6 +3076,25 @@ const MEDROXYPROGESTERONE: DrugEntry = {
     'ACOG Committee Opinion No. 557. Management of Acute AUB in Nonpregnant Reproductive-Aged Women. Obstet Gynecol. 2013;121(4):891-896.',
     'Munro MG, et al. Oral MPA and combination OCPs for acute uterine bleeding: RCT. Obstet Gynecol. 2006;108:924-929.',
   ],
+};
+
+const MEPERIDINE: DrugEntry = {
+  id: 'meperidine',
+  name: 'Meperidine (Demerol)',
+  genericName: 'Meperidine hydrochloride',
+  drugClass: 'Opioid analgesic (anti-shivering)',
+  route: 'IV',
+  indications: ['Post-cardiac arrest shivering (TTM)', 'Rigors'],
+  dosing: [
+    {
+      indication: 'Post-arrest shivering (TTM)',
+      regimen: '25-50 mg IV q15-20 min PRN shivering (max 100 mg in first hour). Lowers shivering threshold centrally via kappa-opioid receptor. First-line pharmacologic anti-shivering agent during TTM.',
+    },
+  ],
+  cautions: ['Seizure risk (normeperidine metabolite accumulates)', 'Avoid in renal failure', 'Serotonin syndrome risk with MAOIs/SSRIs', 'Respiratory depression'],
+  monitoring: 'Shivering assessment (Bedside Shivering Assessment Scale), respiratory rate, sedation level.',
+  notes: 'Unique among opioids for anti-shivering properties (kappa receptor agonism). Use only for short-term TTM shivering management — not for ongoing analgesia. Prefer surface counter-warming + magnesium first.',
+  citations: ['Nolan JP et al. ERC/ESICM Guidelines on Post-Resuscitation Care. Resuscitation. 2021;161:220-269.', 'Callaway CW et al. Part 8: Post-Cardiac Arrest Care. Circulation. 2015;132(18 Suppl 2):S465-S482.'],
 };
 
 const METHYLPREDNISOLONE: DrugEntry = {
@@ -5165,6 +5250,10 @@ const VASOPRESSIN: DrugEntry = {
       indication: 'VAD RV support',
       regimen: '0.02-0.04 units/min IV continuous infusion (no loading dose, no titration above 0.04). Preferred vasopressor for VAD RV failure — increases systemic BP for RV coronary perfusion WITHOUT increasing pulmonary vascular resistance.',
     },
+    {
+      indication: 'Post-cardiac arrest vasopressor (adjunct)',
+      regimen: '0.04 units/min IV infusion (fixed dose, do not titrate). Add to norepinephrine for refractory post-arrest hypotension. May reduce norepinephrine requirements. Also used as alternative to epinephrine in cardiac arrest (40 units IV single dose, no longer recommended as routine).',
+    },
   ],
   contraindications: [
     'Known hypersensitivity',
@@ -5744,6 +5833,10 @@ const MIDAZOLAM: DrugEntry = {
       indication: 'Acute agitation / delirium',
       regimen: '2.5-5 mg IM (onset 5 min) or 2.5 mg IV push. May repeat q5-10 min to effect. Preferred for intoxication/withdrawal-related agitation. For excited delirium: 5 mg IM, repeat as needed. DO NOT combine with IM/IV olanzapine (respiratory depression risk).',
       weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
+    },
+    {
+      indication: 'Procedural sedation — cardioversion',
+      regimen: '1-2 mg IV over 2 min. May repeat 1 mg q2 min to adequate sedation (typical total 2-5 mg). Onset 1-3 min IV. Use lower doses in elderly, hemodynamically unstable, or post-arrest patients. Have flumazenil available.',
     },
   ],
   contraindications: ['Acute narrow-angle glaucoma', 'Known hypersensitivity to benzodiazepines'],
@@ -8048,6 +8141,10 @@ const NOREPINEPHRINE: DrugEntry = {
       regimen: 'Start 0.1-0.2 mcg/kg/min IV, titrate to maintain MAP 70-80 mmHg. First-line vasopressor for VAD hypotension. Use cautiously — increasing afterload reduces LVAD flow. Goal is adequate MAP for end-organ perfusion, not supranormal pressures.',
       weightCalc: { dosePerKg: 0.2, unit: 'mcg/min', label: 'Standard infusion (0.2 mcg/kg/min)' },
     },
+    {
+      indication: 'Post-cardiac arrest hemodynamic support',
+      regimen: '0.1-0.5 mcg/kg/min IV infusion. First-line vasopressor post-ROSC. Target MAP ≥65 mmHg (some guidelines ≥70). Preferred over epinephrine infusion post-arrest (less tachyarrhythmia risk). Add vasopressin 0.04 units/min for refractory hypotension.',
+    },
   ],
   contraindications: [
     'Hypovolemia (correct volume deficit first)',
@@ -8984,11 +9081,13 @@ export const ALL_DRUGS: DrugEntry[] = [
   DEXMEDETOMIDINE,
   DEXTROSE,
   DIAZEPAM,
+  DIGIFAB,
   DIGOXIN,
   DILTIAZEM,
   DIMENHYDRINATE,
   DIPHENHYDRAMINE,
   DOBUTAMINE,
+  DOPAMINE,
   DOLUTEGRAVIR,
   DROPERIDOL,
   DOXYCYCLINE,
@@ -9044,6 +9143,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   SODIUM_ZIRCONIUM_CYCLOSILICATE,
   MAGNESIUM_SULFATE,
   MEDROXYPROGESTERONE,
+  MEPERIDINE,
   MEROPENEM,
   METHADONE,
   METHOTREXATE,
@@ -9218,10 +9318,12 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/desmopressin|ddavp/i, 'desmopressin'],
   [/dextrose|d50|d50w|d10|d10w|d5w/i, 'dextrose'],
   [/diazepam|valium/i, 'diazepam'],
+  [/digifab|digoxin.*immune.*fab|digoxin.*antibod/i, 'digifab'],
   [/digoxin|digitalis|lanoxin/i, 'digoxin'],
   [/diltiazem|cardizem/i, 'diltiazem'],
   [/dimenhydrinate|dramamine|gravol/i, 'dimenhydrinate'],
   [/diphenhydramine|benadryl/i, 'diphenhydramine'],
+  [/dopamine|intropin/i, 'dopamine'],
   [/dolutegravir|tivicay/i, 'dolutegravir'],
   [/doxycycline/i, 'doxycycline'],
   [/doxylamine|unisom.*sleep.*tab|diclegis|bonjesta/i, 'doxylamine'],
@@ -9262,6 +9364,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/lorazepam|ativan/i, 'lorazepam'],
   [/lokelma|sodium\s*zirconium|szc/i, 'sodium-zirconium-cyclosilicate'],
   [/magnesium sulfate|mag sulfate|MgSO4/i, 'magnesium-sulfate'],
+  [/meperidine|demerol/i, 'meperidine'],
   [/medroxyprogesterone|MPA|provera|depo.provera/i, 'medroxyprogesterone'],
   [/meropenem|merrem/i, 'meropenem'],
   [/methimazole|tapazole/i, 'methimazole'],
