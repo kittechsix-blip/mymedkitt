@@ -319,6 +319,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'malaria': async () => (await import('../data/trees/malaria.js')).MALARIA_CRITICAL_ACTIONS,
     'asthma-exacerbation': async () => (await import('../data/trees/asthma-exacerbation.js')).ASTHMA_EXACERBATION_CRITICAL_ACTIONS,
     'adult-uti': async () => (await import('../data/trees/adult-uti.js')).ADULT_UTI_CRITICAL_ACTIONS,
+    'ttp': async () => (await import('../data/trees/ttp.js')).TTP_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -945,6 +946,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'adult-uti': async () => {
       const m = await import('../data/trees/adult-uti.js');
       return { nodes: m.ADULT_UTI_NODES, entryNodeId: 'uti-start', categoryId: 'urology', moduleLabels: m.ADULT_UTI_MODULE_LABELS, citations: m.ADULT_UTI_CITATIONS, criticalActions: m.ADULT_UTI_CRITICAL_ACTIONS };
+    },
+    'ttp': async () => {
+      const m = await import('../data/trees/ttp.js');
+      return { nodes: m.TTP_NODES, entryNodeId: 'ttp-start', categoryId: 'heme-onc', moduleLabels: m.TTP_MODULE_LABELS, citations: m.TTP_CITATIONS, criticalActions: m.TTP_CRITICAL_ACTIONS };
     },
   };
 

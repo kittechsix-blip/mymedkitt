@@ -4871,6 +4871,41 @@ const RH_IMMUNE_GLOBULIN = {
         'Hannafin B, Lovecchio F, Blackburn P. Do Rh-negative women with first trimester spontaneous abortions need Rh immune globulin? Am J Emerg Med. 2006;24(4):487-489.',
     ],
 };
+const RITUXIMAB_TTP = {
+    id: 'rituximab-ttp',
+    name: 'Rituximab (Rituxan)',
+    genericName: 'Rituximab',
+    drugClass: 'Anti-CD20 monoclonal antibody',
+    route: 'IV',
+    indications: ['Refractory TTP', 'Relapsing TTP', 'TTP prophylaxis'],
+    dosing: [
+        {
+            indication: 'TTP (standard)',
+            regimen: '375 mg/m2 IV weekly x 4 weeks. Premedicate with acetaminophen, diphenhydramine, and methylprednisolone.',
+        },
+        {
+            indication: 'TTP (accelerated)',
+            regimen: '375 mg/m2 IV x 2 doses within first 4 days, then 3rd dose at day 15 if needed.',
+        },
+        {
+            indication: 'TTP prophylaxis',
+            regimen: 'Consider if ADAMTS13 persistently <20% during remission. Single dose or short course may prevent relapse.',
+        },
+    ],
+    cautions: [
+        'Hold TPE for at least 4 hours after rituximab infusion to prevent drug removal',
+        'Infusion reactions common (fever, chills, rigors) - slow rate or hold if severe',
+        'HBV reactivation risk - screen all patients before starting',
+        'Progressive multifocal leukoencephalopathy (PML) - rare but reported',
+        'Hypogammaglobulinemia with repeated dosing',
+    ],
+    monitoring: 'ADAMTS13 activity levels. HBV serologies before treatment. Immunoglobulin levels if repeated courses.',
+    notes: 'Depletes CD20+ B cells that produce anti-ADAMTS13 autoantibodies. Standard of care for refractory or relapsing TTP. May also be used upfront in severe disease. Timing with TPE is critical - administering immediately after TPE maximizes drug retention.',
+    citations: [
+        'Scully M, et al. Rituximab in TTP. Blood. 2011;118(7):1746-1753.',
+        'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
+    ],
+};
 const SODIUM_ZIRCONIUM_CYCLOSILICATE = {
     id: 'sodium-zirconium-cyclosilicate',
     name: 'Lokelma (Sodium Zirconium Cyclosilicate)',
@@ -5392,6 +5427,39 @@ const CAPSAICIN_TOPICAL = {
         'Dean DJ et al. Topical capsaicin in CHS: A systematic review. Am J Emerg Med. 2020;38(4):846-851.',
         'Moon AM et al. Capsaicin cream for CHS: a systematic review. Pharmacotherapy. 2021;41(4):380-393.',
         'Borgundvaag B et al. GRACE-4: SAEM Guidelines for CHS in ED. Acad Emerg Med. 2024;31(5):425-455.',
+    ],
+};
+const CAPLACIZUMAB = {
+    id: 'caplacizumab',
+    name: 'Caplacizumab (Cablivi)',
+    genericName: 'Caplacizumab-yhdp',
+    drugClass: 'Anti-vWF nanobody',
+    route: 'IV/SC',
+    indications: ['Acquired/immune TTP'],
+    dosing: [
+        {
+            indication: 'TTP (loading)',
+            regimen: '11 mg IV bolus before first TPE session.',
+        },
+        {
+            indication: 'TTP (maintenance)',
+            regimen: '11 mg SC daily following each TPE, then continue 11 mg SC daily for 30 days after last TPE. If ADAMTS13 remains <10% after 30 days, may extend up to 28 additional days.',
+        },
+    ],
+    contraindications: [
+        'Active pathological bleeding',
+    ],
+    cautions: [
+        'Increased bleeding risk (epistaxis 29%, headache 21%, gingival bleeding 16%)',
+        'Hold or discontinue if clinically significant bleeding occurs',
+        'If recombinant vWF is given, withhold caplacizumab for 12 hours after',
+        'Interruption may increase thrombotic risk',
+    ],
+    monitoring: 'ADAMTS13 activity levels to guide duration of therapy. Monitor for bleeding symptoms.',
+    notes: 'Humanized nanobody that blocks the A1 domain of vWF, preventing vWF-platelet interaction. HERCULES trial demonstrated 74% reduction in composite outcome (TTP-related death, recurrence, or major thromboembolic event). Approved for acquired TTP in adults.',
+    citations: [
+        'Scully M, et al. Caplacizumab treatment for acquired TTP. N Engl J Med. 2019;380(4):335-346. (HERCULES trial)',
+        'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
     ],
 };
 const FENTANYL = {
@@ -8997,6 +9065,7 @@ export const ALL_DRUGS = [
     CALCIUM_CHLORIDE,
     CALCIUM_GLUCONATE,
     CALCIUM_GLUCONATE_GEL,
+    CAPLACIZUMAB,
     CAPSAICIN_TOPICAL,
     CEFAZOLIN,
     CRYOPRECIPITATE,
@@ -9166,6 +9235,7 @@ export const ALL_DRUGS = [
     RIFAPENTINE,
     RISPERIDONE,
     RITONAVIR,
+    RITUXIMAB_TTP,
     RIVAROXABAN,
     ROCURONIUM,
     RUCONEST,
@@ -9241,6 +9311,7 @@ const NAME_TO_ID = [
     [/calcium\s*gluconate\s*gel/i, 'calcium-gluconate-gel'],
     [/calcium\s*gluconate/i, 'calcium-gluconate'],
     [/capsaicin|zostrix|capzasin/i, 'capsaicin-topical'],
+    [/caplacizumab|cablivi/i, 'caplacizumab'],
     [/cryoprecipitate|cryo/i, 'cryoprecipitate'],
     [/cefazolin|ancef/i, 'cefazolin'],
     [/cefepime|maxipime/i, 'cefepime'],
@@ -9366,6 +9437,7 @@ const NAME_TO_ID = [
     [/semaglutide|ozempic|wegovy|rybelsus/i, 'semaglutide'],
     [/rifampin|rifadin|rifampicin/i, 'rifampin'],
     [/ritonavir|norvir/i, 'ritonavir'],
+    [/rituximab|rituxan/i, 'rituximab-ttp'],
     [/rivaroxaban/i, 'rivaroxaban'],
     [/rocuronium|zemuron|roc/i, 'rocuronium'],
     [/ruconest|conestat/i, 'ruconest'],

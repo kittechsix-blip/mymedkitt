@@ -10791,7 +10791,125 @@ const ASTHMA_VENT_STRATEGY = {
 // -------------------------------------------------------------------
 // Info Page Registry
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Thrombotic Thrombocytopenic Purpura (TTP)
+// -------------------------------------------------------------------
+const TTP_STEPS_SUMMARY = {
+    id: 'ttp-steps',
+    title: 'TTP',
+    subtitle: 'Key Steps Overview',
+    sections: [
+        {
+            heading: '1. Recognition',
+            body: '\u2022 Classic pentad (all 5 present in <5% of cases): MAHA, thrombocytopenia, neurologic changes, renal dysfunction, fever\n\u2022 Modern diagnosis: MAHA + thrombocytopenia + no alternative explanation\n\u2022 Key labs: schistocytes on smear, elevated LDH, indirect hyperbilirubinemia, low/undetectable haptoglobin, normal coagulation studies\n\u2022 Direct Coombs test: negative (not immune-mediated hemolysis)',
+        },
+        {
+            heading: '2. PLASMIC Score',
+            body: '\u2022 **P**latelet count <30,000 (+1)\n\u2022 Combined hemolysis variable (reticulocyte >2.5%, haptoglobin undetectable, or indirect bilirubin >2) (+1)\n\u2022 No active cancer (**L**ack of malignancy) (+1)\n\u2022 No stem cell or organ transplant (**A**bsence of transplant) (+1)\n\u2022 MCV <90 fL (**S**mall MCV) (+1)\n\u2022 INR <1.5 (**M**ild coagulopathy) (+1)\n\u2022 Creatinine <2.0 mg/dL (**I**mpaired renal function absent) (+1)\n\n**Score interpretation:** 0-4 = low risk (0-4%), 5 = intermediate (24%), 6-7 = high risk (72-96%)',
+        },
+        {
+            heading: '3. Differentiate TMAs',
+            body: '\u2022 **TTP:** ADAMTS13 <10%, normal coags, often neurologic symptoms\n\u2022 **HUS:** Shiga-toxin associated (E. coli O157:H7), renal failure predominates, often pediatric\n\u2022 **aHUS:** Complement-mediated, ADAMTS13 normal, may have genetic predisposition\n\u2022 **DIC:** Abnormal coags (prolonged PT/PTT, low fibrinogen), elevated D-dimer\n\u2022 **HELLP:** Pregnancy-associated, elevated liver enzymes',
+        },
+        {
+            heading: '4. Emergent TPE + Steroids',
+            body: '\u2022 Do NOT wait for ADAMTS13 results to start treatment\n\u2022 **TPE:** 1-1.5 plasma volumes daily until platelet count >150,000 x 2 days\n\u2022 **Methylprednisolone:** 1 g IV daily x 3 days, then 1 mg/kg/day\n\u2022 If TPE unavailable: transfuse FFP as bridge (10-15 mL/kg)\n\u2022 **Do NOT transfuse platelets** unless life-threatening bleeding or pre-procedure',
+        },
+        {
+            heading: '5. Adjunctive Therapy',
+            body: '\u2022 **Caplacizumab:** 11 mg IV load before first TPE, then 11 mg SC daily\n\u2022 **Rituximab:** 375 mg/m\u00B2 weekly x 4 for refractory/relapsing disease\n\u2022 Hold rituximab infusion until 4+ hours after TPE to avoid drug removal\n\u2022 Consider caplacizumab for all patients (reduces time to platelet normalization and recurrence)',
+        },
+        {
+            heading: '6. ICU Monitoring',
+            body: '\u2022 All TTP patients require ICU admission\n\u2022 Daily CBC, LDH, haptoglobin to monitor response\n\u2022 ADAMTS13 activity at diagnosis and during treatment\n\u2022 Watch for neurologic changes (can fluctuate rapidly)\n\u2022 Troponin at baseline (cardiac involvement common)\n\u2022 Continue TPE until sustained remission (platelets >150K x 2 days)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.' },
+        { num: 2, text: 'Bendapudi PK, et al. Derivation and validation of the PLASMIC score. Lancet Haematol. 2017;4(4):e157-e164.' },
+        { num: 3, text: 'Scully M, et al. Caplacizumab treatment for acquired TTP (HERCULES). N Engl J Med. 2019;380(4):335-346.' },
+        { num: 4, text: 'George JN, Nester CM. Syndromes of thrombotic microangiopathy. N Engl J Med. 2014;371(7):654-666.' },
+    ],
+};
+const TTP_TMA_DDX = {
+    id: 'ttp-tma-ddx',
+    title: 'TMA Differential',
+    subtitle: 'TTP vs HUS vs DIC vs HELLP',
+    sections: [
+        {
+            heading: 'Overview',
+            body: 'Thrombotic microangiopathies (TMAs) share features of microangiopathic hemolytic anemia (MAHA) and thrombocytopenia. Distinguishing the underlying cause is critical because treatments differ significantly.',
+        },
+        {
+            heading: 'TTP (Thrombotic Thrombocytopenic Purpura)',
+            body: '\u2022 **ADAMTS13:** <10% (diagnostic)\n\u2022 **Coagulation studies:** Normal PT, PTT, fibrinogen\n\u2022 **Renal involvement:** Mild (Cr usually <2)\n\u2022 **Neurologic symptoms:** Common (50-70%): confusion, headache, seizure, stroke\n\u2022 **Triggers:** Idiopathic, autoimmune diseases, pregnancy, drugs (quinine, ticlopidine)\n\u2022 **Treatment:** TPE + steroids + caplacizumab',
+        },
+        {
+            heading: 'HUS (Hemolytic Uremic Syndrome)',
+            body: '\u2022 **ADAMTS13:** Normal (>10%)\n\u2022 **Coagulation studies:** Normal\n\u2022 **Renal involvement:** Severe (dialysis often needed)\n\u2022 **Neurologic symptoms:** Less common than TTP\n\u2022 **Typical HUS:** Shiga toxin-producing E. coli (O157:H7), bloody diarrhea prodrome, often pediatric\n\u2022 **aHUS:** Complement-mediated, may have genetic mutations (CFH, CFI, MCP)\n\u2022 **Treatment:** Typical HUS = supportive. aHUS = eculizumab (complement inhibitor)',
+        },
+        {
+            heading: 'DIC (Disseminated Intravascular Coagulation)',
+            body: '\u2022 **ADAMTS13:** Normal\n\u2022 **Coagulation studies:** Abnormal (prolonged PT/PTT, low fibrinogen, elevated D-dimer)\n\u2022 **Renal involvement:** Variable\n\u2022 **Neurologic symptoms:** Variable\n\u2022 **Triggers:** Sepsis, malignancy, trauma, obstetric complications\n\u2022 **Treatment:** Treat underlying cause, transfuse products as needed',
+        },
+        {
+            heading: 'HELLP Syndrome',
+            body: '\u2022 **ADAMTS13:** Normal (usually >10%)\n\u2022 **Coagulation studies:** Usually normal (unless DIC develops)\n\u2022 **Renal involvement:** Variable\n\u2022 **Neurologic symptoms:** Headache, visual changes (associated preeclampsia)\n\u2022 **Distinguishing features:** Elevated liver enzymes (AST/ALT), pregnancy (usually 3rd trimester or postpartum)\n\u2022 **Treatment:** Delivery of fetus',
+        },
+        {
+            heading: 'Key Lab Comparison Table',
+            body: '| Feature | TTP | HUS | DIC | HELLP |\n|---------|-----|-----|-----|-------|\n| ADAMTS13 | <10% | Normal | Normal | Normal |\n| PT/PTT | Normal | Normal | Prolonged | Normal |\n| Fibrinogen | Normal | Normal | Low | Normal |\n| D-dimer | Mild \u2191 | Mild \u2191 | Markedly \u2191 | Mild \u2191 |\n| Creatinine | Mild \u2191 | Markedly \u2191 | Variable | Variable |\n| LFTs | Normal | Normal | Variable | Elevated |\n| Pregnancy | Possible trigger | Rare | Possible | Required |',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'George JN, Nester CM. Syndromes of thrombotic microangiopathy. N Engl J Med. 2014;371(7):654-666.' },
+        { num: 2, text: 'Kremer Hovinga JA, et al. Thrombotic thrombocytopenic purpura. Nat Rev Dis Primers. 2017;3:17020.' },
+        { num: 3, text: 'Campistol JM, et al. An update for atypical haemolytic uraemic syndrome. Nat Rev Nephrol. 2015;11(3):144-157.' },
+    ],
+};
+const TTP_TREATMENT_SUMMARY = {
+    id: 'ttp-treatment',
+    title: 'TTP Treatment Summary',
+    subtitle: 'TPE + Steroids + Caplacizumab',
+    sections: [
+        {
+            heading: 'Therapeutic Plasma Exchange (TPE)',
+            body: '\u2022 **Volume:** 1-1.5 plasma volumes daily (typically 40-60 mL/kg)\n\u2022 **Replacement fluid:** Fresh frozen plasma (FFP) or cryosupernatant\n\u2022 **Frequency:** Daily until remission\n\u2022 **Remission criteria:** Platelet count >150,000/\u03BCL for 2 consecutive days + normalizing LDH\n\u2022 **Taper:** Some centers taper (every other day x 2-3) before stopping\n\u2022 **If TPE unavailable:** Transfuse FFP 10-15 mL/kg as temporizing measure',
+        },
+        {
+            heading: 'Corticosteroids',
+            body: '\u2022 **Induction:** Methylprednisolone 1 g IV daily x 3 days OR 10 mg/kg/day (max 1 g)\n\u2022 **Maintenance:** Prednisone 1 mg/kg/day PO after IV pulse\n\u2022 **Taper:** Gradual taper over weeks once in remission\n\u2022 **Rationale:** Suppresses autoantibody production against ADAMTS13\n\u2022 Start steroids immediately with TPE - do not wait for ADAMTS13 confirmation',
+        },
+        {
+            heading: 'Caplacizumab (Cablivi)',
+            body: '\u2022 **Loading:** 11 mg IV bolus before first TPE\n\u2022 **Maintenance:** 11 mg SC daily after each TPE, then continue for 30 days after last TPE\n\u2022 **Extension:** If ADAMTS13 <10% after 30 days, extend up to 28 additional days\n\u2022 **Mechanism:** Blocks vWF-platelet interaction (anti-vWF nanobody)\n\u2022 **HERCULES trial:** 74% reduction in TTP-related death/recurrence/major thromboembolism\n\u2022 **Bleeding risk:** Monitor for epistaxis (29%), gingival bleeding (16%)',
+        },
+        {
+            heading: 'When to Add Rituximab',
+            body: '\u2022 **Refractory TTP:** No response to TPE + steroids after 3-5 days\n\u2022 **Relapsing TTP:** Recurrence after initial remission\n\u2022 **Prophylaxis:** ADAMTS13 persistently <20% during remission (prevents relapse)\n\u2022 **Dosing:** 375 mg/m\u00B2 IV weekly x 4 weeks\n\u2022 **Timing with TPE:** Administer immediately after TPE; hold next TPE for \u22654 hours to prevent drug removal\n\u2022 **HBV screening:** Required before starting (risk of reactivation)',
+        },
+        {
+            heading: 'Platelet Transfusion',
+            body: '\u2022 **General rule:** AVOID platelet transfusion in TTP\n\u2022 **Concern:** May worsen microvascular thrombosis ("fuel on the fire")\n\u2022 **Exceptions:**\n  - Life-threatening hemorrhage\n  - Required for central line placement or other urgent procedure\n  - Active CNS hemorrhage\n\u2022 If transfusion required: use smallest effective dose, continue TPE aggressively',
+        },
+        {
+            heading: 'Monitoring & Response',
+            body: '\u2022 **Daily:** CBC with platelet count, LDH, haptoglobin\n\u2022 **ADAMTS13 activity:** At diagnosis, during treatment, and at remission\n\u2022 **Response indicators:** Rising platelets, falling LDH, improving symptoms\n\u2022 **Exacerbation:** Platelets fall within 30 days of stopping TPE\n\u2022 **Relapse:** Platelets fall >30 days after stopping TPE\n\u2022 **Long-term:** Monitor ADAMTS13 q3-6 months (relapse risk if <10-20%)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.' },
+        { num: 2, text: 'Scully M, et al. Caplacizumab treatment for acquired TTP (HERCULES). N Engl J Med. 2019;380(4):335-346.' },
+        { num: 3, text: 'Scully M, et al. Rituximab in acquired TTP. Blood. 2011;118(7):1746-1753.' },
+        { num: 4, text: 'Rock GA, et al. Comparison of plasma exchange with plasma infusion in TTP (Canadian Apheresis Study Group). N Engl J Med. 1991;325(6):393-397.' },
+    ],
+};
 export const INFO_PAGES = {
+    // TTP
+    'ttp-steps': TTP_STEPS_SUMMARY,
+    'ttp-tma-ddx': TTP_TMA_DDX,
+    'ttp-treatment': TTP_TREATMENT_SUMMARY,
+    // Asthma
     'asthma-steps': ASTHMA_STEPS_SUMMARY,
     'asthma-severity-table': ASTHMA_SEVERITY_TABLE,
     'asthma-bipap-guide': ASTHMA_BIPAP_GUIDE,

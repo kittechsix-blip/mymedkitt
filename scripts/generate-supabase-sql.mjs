@@ -178,6 +178,7 @@ const TREE_REGISTRY = {
   'post-rosc':            { prefix: 'POST_ROSC',            entryNodeId: 'rosc-start',        categoryId: 'emergency-medicine' },
   'asthma-exacerbation':  { prefix: 'ASTHMA_EXACERBATION',  entryNodeId: 'asthma-start',      categoryId: 'critical-care' },
   'adult-uti':            { prefix: 'ADULT_UTI',            entryNodeId: 'uti-start',         categoryId: 'urology' },
+  'ttp':                  { prefix: 'TTP',                  entryNodeId: 'ttp-start',         categoryId: 'heme-onc' },
 };
 
 // Cross-listing: which consults appear in multiple categories

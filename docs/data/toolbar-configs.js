@@ -931,6 +931,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'special', label: 'Special', icon: '⚠️', action: 'overlay', target: 'uti-special-pops' },
     ],
     // ---------------------------------------------------------------
+    // TTP
+    // ---------------------------------------------------------------
+    'ttp': [
+        { id: 'plasmic', label: 'PLASMIC', icon: '📊', action: 'calculator', target: 'ttp-plasmic' },
+        { id: 'tpe-vol', label: 'TPE Vol', icon: '🩸', action: 'calculator', target: 'ttp-tpe-volume' },
+        { id: 'tma-ddx', label: 'TMA DDx', icon: '🔍', action: 'calculator', target: 'ttp-tma-ddx' },
+        { id: 'treatment', label: 'Treatment', icon: '💉', action: 'overlay', target: 'ttp-treatment' },
+    ],
+    // ---------------------------------------------------------------
     // Cardiac Arrest Suite
     // ---------------------------------------------------------------
     'cardiac-arrest': [

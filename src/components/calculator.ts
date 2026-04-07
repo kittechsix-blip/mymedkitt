@@ -26730,6 +26730,168 @@ const UTI_ABX_SELECTOR_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// TTP CALCULATORS
+// =====================================================================
+
+const TTP_PLASMIC_CALCULATOR: CalculatorDefinition = {
+  id: 'ttp-plasmic',
+  title: 'PLASMIC Score',
+  subtitle: 'TTP Probability Assessment',
+  description: 'The PLASMIC score predicts the likelihood of severe ADAMTS13 deficiency in patients with thrombotic microangiopathy. A high score supports empiric TPE initiation while awaiting confirmatory testing.',
+  fields: [
+    { name: 'plt', label: 'Platelet count <30 × 10⁹/L', type: 'toggle', points: 1 },
+    { name: 'hemolysis', label: 'Hemolysis', type: 'toggle', points: 1, description: 'Reticulocyte >2.5% OR haptoglobin undetectable OR indirect bilirubin >2 mg/dL' },
+    { name: 'no-cancer', label: 'No active cancer', type: 'toggle', points: 1 },
+    { name: 'no-transplant', label: 'No stem cell or solid organ transplant history', type: 'toggle', points: 1 },
+    { name: 'mcv', label: 'MCV <90 fL', type: 'toggle', points: 1 },
+    { name: 'inr', label: 'INR <1.5', type: 'toggle', points: 1 },
+    { name: 'creat', label: 'Creatinine <2.0 mg/dL', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: -Infinity, max: 5, label: 'Low Risk', risk: '5% probability', mortality: 'Low probability of severe ADAMTS13 deficiency', colorVar: '--color-primary' },
+    { min: 5, max: 6, label: 'Intermediate Risk', risk: '24% probability', mortality: 'Moderate probability of severe ADAMTS13 deficiency', colorVar: '--color-warning' },
+    { min: 6, max: Infinity, label: 'High Risk', risk: '72% probability', mortality: 'High probability of severe ADAMTS13 deficiency', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'PLASMIC ≥5: Consider empiric TPE while awaiting ADAMTS13. PLASMIC 6-7: Initiate TPE emergently.',
+  citations: [
+    'Bendapudi PK, et al. Derivation and External Validation of the PLASMIC Score for Rapid Assessment of Adults with Thrombotic Microangiopathies: A Cohort Study. Lancet Haematol. 2017;4(4):e157-e164.',
+  ],
+};
+
+const TTP_TPE_VOLUME_CALCULATOR: CalculatorDefinition = {
+  id: 'ttp-tpe-volume',
+  title: 'TPE Volume Calculator',
+  subtitle: 'Plasma Exchange Volume',
+  description: 'Calculates the target plasma exchange volume for therapeutic plasmapheresis in TTP. Standard therapy exchanges 1.0-1.5 plasma volumes daily.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg', description: 'Patient weight in kilograms' },
+    {
+      name: 'pv-exchange',
+      label: 'Plasma volumes to exchange',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '1.0 PV (standard)', points: 1 },
+        { label: '1.5 PV (intensive)', points: 1.5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Standard TPE: 1.0-1.5 plasma volumes daily. FFP or cryo-poor plasma as replacement fluid.',
+  citations: [
+    'Rock GA, et al. Comparison of Plasma Exchange with Plasma Infusion in the Treatment of TTP. NEJM. 1991;325(6):393-397.',
+    'Zheng XL, et al. ISTH Guidelines for Treatment of TTP. J Thromb Haemost. 2020;18(10):2496-2502.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const pvExchange = values['pv-exchange'] || 1;
+
+    if (weight <= 0) {
+      return {
+        value: '--',
+        label: 'Enter weight',
+        description: 'Enter patient weight to calculate TPE volume.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Plasma volume ≈ 40 mL/kg for 1.0 PV, 60 mL/kg for 1.5 PV
+    const mlPerKg = pvExchange === 1.5 ? 60 : 40;
+    const plasmaVolume = Math.round(weight * mlPerKg);
+    const ffpUnits = Math.round(plasmaVolume / 250 * 10) / 10;
+
+    return {
+      value: `${plasmaVolume} mL`,
+      label: `${pvExchange} Plasma Volume${pvExchange > 1 ? 's' : ''}`,
+      description: `**Exchange Volume:** ${plasmaVolume} mL\n\n**FFP Required:** ~${ffpUnits} units\n(1 unit FFP ≈ 250 mL)\n\n**Calculation:**\n${weight} kg × ${mlPerKg} mL/kg = ${plasmaVolume} mL\n\n**Replacement Fluid Options:**\n- FFP (standard)\n- Cryo-poor plasma (if available)\n- Solvent-detergent plasma`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TTP_TMA_DDX_CALCULATOR: CalculatorDefinition = {
+  id: 'ttp-tma-ddx',
+  title: 'TMA Differential',
+  subtitle: 'TTP vs HUS vs DIC vs HELLP',
+  description: 'Helps differentiate between thrombotic microangiopathies based on clinical features. TTP, HUS, DIC, and HELLP share overlapping features but have distinct patterns.',
+  fields: [
+    { name: 'abnormal-coags', label: 'Abnormal PT/PTT or low fibrinogen', type: 'toggle', points: 0, description: 'Coagulopathy suggests DIC over TTP/HUS' },
+    { name: 'severe-aki', label: 'Severe AKI (Cr >3)', type: 'toggle', points: 0, description: 'Prominent renal failure more typical of HUS' },
+    { name: 'diarrhea', label: 'Bloody diarrhea prodrome', type: 'toggle', points: 0, description: 'Classic for STEC-HUS (Shiga toxin)' },
+    { name: 'pregnancy', label: 'Pregnancy or postpartum', type: 'toggle', points: 0, description: 'Consider HELLP, pregnancy-associated TTP, or atypical HUS' },
+    { name: 'neuro', label: 'Neurological symptoms', type: 'toggle', points: 0, description: 'Confusion, headache, seizures, focal deficits' },
+    { name: 'plt-severe', label: 'Platelet count <30', type: 'toggle', points: 0, description: 'Severe thrombocytopenia more typical of TTP' },
+  ],
+  results: [],
+  thresholdNote: 'TTP is a clinical diagnosis of exclusion. Send ADAMTS13 but do not delay TPE if TTP is suspected.',
+  citations: [
+    'George JN, Nester CM. Syndromes of Thrombotic Microangiopathy. NEJM. 2014;371(7):654-666.',
+    'Bendapudi PK, et al. Lancet Haematol. 2017;4(4):e157-e164.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const abnormalCoags = values['abnormal-coags'] || 0;
+    const severeAKI = values['severe-aki'] || 0;
+    const diarrhea = values['diarrhea'] || 0;
+    const pregnancy = values['pregnancy'] || 0;
+    const neuro = values['neuro'] || 0;
+    const pltSevere = values['plt-severe'] || 0;
+
+    let diagnosis = '';
+    let description = '';
+    let colorVar = '--color-primary';
+
+    // DIC pattern: abnormal coags are the key distinguishing feature
+    if (abnormalCoags) {
+      diagnosis = 'DIC Most Likely';
+      description = `**Pattern suggests DIC**\n\n**Key finding:** Abnormal PT/PTT or low fibrinogen\n\nDIC is characterized by:\n- Consumption coagulopathy (prolonged PT/PTT)\n- Low fibrinogen\n- Elevated D-dimer\n- Thrombocytopenia + MAHA\n\n**TTP/HUS typically have:**\n- Normal PT/PTT\n- Normal fibrinogen\n\n**Next steps:**\n- Identify/treat underlying cause\n- Supportive care\n- FFP/cryo/platelets if bleeding`;
+      colorVar = '--color-danger';
+    }
+    // STEC-HUS pattern: diarrhea + severe AKI
+    else if (diarrhea && severeAKI) {
+      diagnosis = 'STEC-HUS Most Likely';
+      description = `**Pattern suggests Shiga toxin-producing E. coli HUS**\n\n**Key findings:**\n- Bloody diarrhea prodrome\n- Severe renal failure\n\n**Classic triad:**\n- MAHA\n- Thrombocytopenia\n- Acute kidney injury\n\n**Management:**\n- Supportive care (NO antibiotics initially)\n- Dialysis if needed\n- TPE NOT beneficial in typical STEC-HUS\n- Send stool for STEC/Shiga toxin`;
+      colorVar = '--color-warning';
+    }
+    // HELLP pattern: pregnancy with TMA features
+    else if (pregnancy && !neuro && !pltSevere) {
+      diagnosis = 'Consider HELLP';
+      description = `**Pattern suggests HELLP syndrome**\n\n**Key finding:** Pregnancy/postpartum + TMA features\n\n**HELLP criteria:**\n- Hemolysis (LDH >600, schistocytes)\n- Elevated Liver enzymes (AST >70)\n- Low Platelets (<100,000)\n\n**Differentiating HELLP vs pregnancy-associated TTP:**\n- HELLP: resolves with delivery\n- TTP: persists post-delivery, needs TPE\n\n**Next steps:**\n- Expedite delivery (definitive treatment)\n- Monitor for DIC\n- If no improvement post-delivery: consider TTP`;
+      colorVar = '--color-warning';
+    }
+    // TTP pattern: neuro symptoms + severe thrombocytopenia + normal coags
+    else if (neuro && pltSevere && !abnormalCoags) {
+      diagnosis = 'TTP Most Likely';
+      description = `**Pattern strongly suggests TTP**\n\n**Key findings:**\n- Neurological symptoms\n- Severe thrombocytopenia (<30K)\n- Normal coagulation studies\n\n**Classic pentad (rare to see all 5):**\n- MAHA\n- Thrombocytopenia\n- Neurological symptoms\n- Renal dysfunction\n- Fever\n\n**Action:**\n- Do NOT delay TPE for ADAMTS13 results\n- Send ADAMTS13 activity + inhibitor\n- Consider caplacizumab if available\n- Steroids (methylprednisolone 1g/d or prednisone 1mg/kg)\n\n**Do NOT transfuse platelets** unless life-threatening bleeding`;
+      colorVar = '--color-danger';
+    }
+    // Probable TTP: severe thrombocytopenia + neuro OR severe thrombocytopenia alone with normal coags
+    else if (pltSevere && !abnormalCoags) {
+      diagnosis = 'Probable TTP';
+      description = `**Pattern suggests TTP**\n\n**Key finding:** Severe thrombocytopenia with normal coags\n\n**Supporting TTP diagnosis:**\n- Platelet count <30,000 (highly suggestive)\n- Normal PT/PTT and fibrinogen\n- MAHA on smear\n\n**Missing classic features:**\n${!neuro ? '- No neurological symptoms\n' : ''}${!severeAKI ? '- No severe AKI (argues against HUS)\n' : ''}\n**Recommendation:**\n- Calculate PLASMIC score\n- Send ADAMTS13\n- If PLASMIC ≥5: start empiric TPE\n- Steroids (methylprednisolone or prednisone)`;
+      colorVar = '--color-warning';
+    }
+    // Atypical HUS: severe AKI without diarrhea
+    else if (severeAKI && !diarrhea && !abnormalCoags) {
+      diagnosis = 'Consider Atypical HUS';
+      description = `**Pattern suggests atypical HUS (aHUS)**\n\n**Key findings:**\n- Severe renal failure\n- No diarrhea prodrome\n- Normal coagulation\n\n**aHUS features:**\n- Complement-mediated TMA\n- Often triggered by infection, pregnancy, drugs\n- Can occur at any age\n\n**Workup:**\n- ADAMTS13 (to exclude TTP)\n- Complement studies (C3, C4, CH50)\n- Genetic testing if available\n\n**Treatment:**\n- Eculizumab is first-line for aHUS\n- TPE may temporize but not curative\n- Dialysis support as needed`;
+      colorVar = '--color-warning';
+    }
+    // No clear pattern
+    else {
+      diagnosis = 'TMA - Needs Workup';
+      description = `**Thrombotic microangiopathy present, pattern unclear**\n\n**Common TMA workup:**\n1. ADAMTS13 activity + inhibitor\n2. PT/PTT, fibrinogen, D-dimer\n3. LDH, haptoglobin, bilirubin\n4. Peripheral smear for schistocytes\n5. Direct Coombs (rule out autoimmune)\n6. Pregnancy test\n7. HIV, hepatitis panel\n8. Stool for STEC if diarrhea\n\n**Consider PLASMIC score** to risk-stratify for TTP\n\n**If high suspicion for TTP:**\n- Do NOT delay TPE for results\n- Mortality without treatment: ~90%`;
+      colorVar = '--color-text-muted';
+    }
+
+    return {
+      value: diagnosis,
+      label: 'Most Likely Diagnosis',
+      description,
+      colorVar,
+    };
+  },
+};
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // TIA Workup
@@ -27138,6 +27300,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'uti-ua-interp': UTI_UA_INTERPRETER_CALCULATOR,
   'uti-crcl': UTI_CRCL_CALCULATOR,
   'uti-abx-select': UTI_ABX_SELECTOR_CALCULATOR,
+  // TTP
+  'ttp-plasmic': TTP_PLASMIC_CALCULATOR,
+  'ttp-tpe-volume': TTP_TPE_VOLUME_CALCULATOR,
+  'ttp-tma-ddx': TTP_TMA_DDX_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
