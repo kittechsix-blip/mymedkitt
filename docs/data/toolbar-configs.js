@@ -879,6 +879,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'ppcm-prognosis', label: 'Prognosis', icon: '📈', action: 'calculator', target: 'ppcm-prognosis-factors' },
         { id: 'ppcm-delivery', label: 'Delivery', icon: '🤰', action: 'calculator', target: 'ppcm-delivery-guide' },
     ],
+    'ear-fb': [
+        { id: 'earfb-type', label: 'FB Type', icon: '🔍', action: 'calculator', target: 'earfb-type-identifier' },
+        { id: 'earfb-contra', label: 'Contras', icon: '⚠️', action: 'calculator', target: 'earfb-contraindication' },
+        { id: 'earfb-tech', label: 'Technique', icon: '🔧', action: 'calculator', target: 'earfb-technique-guide' },
+        { id: 'earfb-ent', label: 'ENT Ref', icon: '📞', action: 'calculator', target: 'earfb-ent-criteria' },
+    ],
 };
 /** Get the toolbar config for a consult, or an empty default */
 export function getToolbarConfig(consultId) {

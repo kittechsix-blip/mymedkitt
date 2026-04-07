@@ -23384,6 +23384,449 @@ const AWAKE_SEE_CORDS_GO_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Ear Foreign Body Removal Tools
+// -------------------------------------------------------------------
+// Tool 1: FB Type Identifier — helps classify object and choose technique
+const EARFB_TYPE_IDENTIFIER_CALCULATOR = {
+    id: 'earfb-type-identifier',
+    title: 'FB Type Identifier',
+    subtitle: 'Classify Object & Choose Technique',
+    description: 'Identify the foreign body type to select the optimal removal technique.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Heim SW, Maughan KL. Foreign Bodies in the Ear, Nose, and Throat. Am Fam Physician. 2007;76(8):1185-1189.',
+        'Thompson SK, et al. External auditory canal foreign body removal. Laryngoscope. 2003;113(11):1912-1915.',
+    ],
+    fields: [
+        {
+            name: 'insect',
+            label: 'Insect',
+            description: 'Cockroach, fly, tick, moth — KILL FIRST with mineral oil',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'sphere',
+            label: 'Hard sphere / bead',
+            description: 'Plastic bead, BB pellet, ball — forceps will slip',
+            type: 'toggle',
+            points: 20,
+        },
+        {
+            name: 'soft',
+            label: 'Soft / compressible',
+            description: 'Cotton, foam, paper, sponge — DO NOT irrigate',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'organic',
+            label: 'Organic material',
+            description: 'Seeds, beans, food — swells with water, NO irrigation',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'particles',
+            label: 'Small particles',
+            description: 'Sand, dirt, small debris — irrigation OK',
+            type: 'toggle',
+            points: 50,
+        },
+        {
+            name: 'battery',
+            label: 'Button battery',
+            description: 'EMERGENCY — tissue necrosis in 1-2 hours',
+            type: 'toggle',
+            points: 100,
+        },
+    ],
+    computeResult: (values) => {
+        if (values['battery']) {
+            return {
+                value: 'EMERGENCY',
+                label: '🚨 BUTTON BATTERY',
+                description: `**BUTTON BATTERY — EMERGENT REMOVAL**\n\n• Do NOT irrigate (water accelerates damage)\n• Keep ear completely dry\n• Emergent ENT consultation\n• If ENT unavailable, attempt gentle removal with alligator forceps or magnetic tool\n\n**Damage begins in 1-2 hours:**\n• Electrical current + hydroxide production\n• Liquefaction necrosis\n• Can erode through canal\n\n**Complications:** Canal stenosis, TM perforation, hearing loss, facial nerve injury`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (values['insect']) {
+            return {
+                value: 'INSECT',
+                label: 'Insect — Kill First',
+                description: `**INSECT REMOVAL**\n\n**STEP 1: KILL THE INSECT**\n• Mineral oil drops — fill canal\n• Wait 1-2 minutes\n• Insect dies quietly (no thrashing)\n\n**STEP 2: EXTRACT**\n• Irrigation — may float out\n• Alligator forceps — grasp leg/wing\n• Suction — for fragments\n• Right-angle hook — scoop body\n\n**Why kill first?**\n• Reduces patient distress\n• Prevents further injury\n• Easier extraction when still`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (values['sphere']) {
+            return {
+                value: 'SPHERE',
+                label: 'Hard Sphere — Use Hook/Curette',
+                description: `**HARD SPHERE / BEAD REMOVAL**\n\n**PRIMARY: Right-Angle Hook or Curette**\n• Advance BEHIND the object\n• Rotate to position tip posterior\n• Scoop and withdraw\n\n**ALTERNATIVE: Suction**\n• Small, loose objects\n• Soft-tipped catheter\n\n**ALTERNATIVE: Cyanoacrylate (Glue)**\n• Apply to cotton swab tip\n• Contact FB, hold 60 sec\n• Withdraw together\n• 19% success rate\n\n**⚠️ AVOID: Alligator forceps**\n• Slippage pushes object deeper`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['soft']) {
+            return {
+                value: 'SOFT',
+                label: 'Soft Object — Forceps/Suction',
+                description: `**SOFT OBJECT REMOVAL**\n\n**PRIMARY: Alligator Forceps**\n• Grasp edge or protruding surface\n• Gentle traction\n• May fragment — multiple passes OK\n\n**ALTERNATIVE: Suction**\n• Soft-tipped catheter\n• Good for fluffy material\n\n**⛔ CONTRAINDICATED: Irrigation**\n• Spongy materials SWELL\n• Converts easy removal to impaction\n• Never irrigate cotton, foam, paper\n\n**Tips:**\n• Work slowly — easy to fragment\n• Have multiple instruments ready`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['organic']) {
+            return {
+                value: 'ORGANIC',
+                label: 'Organic — DRY Extraction Only',
+                description: `**ORGANIC MATERIAL REMOVAL**\n\n**⛔ CONTRAINDICATED: Irrigation**\n• Seeds/beans absorb water\n• Can swell 2-3x size\n• Converts simple FB to impaction\n\n**PRIMARY: Alligator Forceps**\n• Grasp firmly\n• Seeds may be slippery\n\n**ALTERNATIVE: Right-Angle Hook**\n• Get behind object\n• Scoop anteriorly\n\n**Common objects:**\n• Beans (swell dramatically)\n• Popcorn kernels (fragment)\n• Seeds (may have sharp edges)\n• Food particles`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (values['particles']) {
+            return {
+                value: 'PARTICLES',
+                label: 'Particles — Irrigation OK',
+                description: `**SMALL PARTICLE REMOVAL**\n\n**PRIMARY: Irrigation**\n• 20-50 mL syringe + 14-16g plastic catheter\n• Body-temperature water/saline\n• Direct stream along superior canal wall\n• Low pressure — avoid Waterpik\n• 65% first-pass success\n\n**Contraindications to irrigation:**\n• TM perforation\n• Soft/organic material\n• Button battery\n• Prior tympanostomy tubes\n\n**ALTERNATIVE: Suction**\n• For visible particles\n• Curette for adherent debris`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'SELECT',
+            label: 'Select FB Type Above',
+            description: `**SELECT THE FOREIGN BODY TYPE**\n\nChoose one option above to see technique recommendations.\n\n**Common Objects by Age:**\n\n**Children:** Beads, toy parts, food, insects, paper\n**Adults:** Cotton swabs, hearing aid parts, insects, earbuds\n\n**Key Principles:**\n• First attempt is most successful (65-78%)\n• Match technique to object type\n• Know when to stop and refer\n• Button battery = EMERGENCY`,
+            colorVar: '--color-text-secondary',
+        };
+    },
+};
+// Tool 2: Contraindication Checker — screens for TM perf, battery, etc.
+const EARFB_CONTRAINDICATION_CALCULATOR = {
+    id: 'earfb-contraindication',
+    title: 'Contraindication Check',
+    subtitle: 'Screen Before Attempting Removal',
+    description: 'Check for contraindications to ED removal attempt.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Thompson SK, et al. External auditory canal foreign body removal. Laryngoscope. 2003;113(11):1912-1915.',
+        'Schulze SL, et al. Pediatric external auditory canal foreign bodies. Otolaryngol Head Neck Surg. 2002;127(1):73-78.',
+    ],
+    fields: [
+        {
+            name: 'battery',
+            label: 'Button battery suspected',
+            description: 'Metallic disc, hearing aid component',
+            type: 'toggle',
+            points: 100,
+        },
+        {
+            name: 'tm-perf',
+            label: 'TM perforation suspected',
+            description: 'Vertigo, hearing loss, bleeding, deep object',
+            type: 'toggle',
+            points: 50,
+        },
+        {
+            name: 'touching-tm',
+            label: 'Object touching/impacting TM',
+            description: 'Poor visualization of depth, object at TM',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'sharp',
+            label: 'Sharp object near TM',
+            description: 'Glass, metal with edges, broken pieces',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'prior-failed',
+            label: 'Multiple failed prior attempts',
+            description: 'Previous provider attempts, swelling present',
+            type: 'toggle',
+            points: 25,
+        },
+        {
+            name: 'uncooperative',
+            label: 'Uncooperative patient',
+            description: 'No sedation option, cannot restrain safely',
+            type: 'toggle',
+            points: 20,
+        },
+        {
+            name: 'poor-vis',
+            label: 'Poor visualization',
+            description: 'Inadequate lighting, cerumen blocking, canal edema',
+            type: 'toggle',
+            points: 15,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        const issues = [];
+        if (values['battery'])
+            issues.push('**Button battery** — EMERGENT ENT, keep dry');
+        if (values['tm-perf'])
+            issues.push('**TM perforation** — ENT referral, no irrigation');
+        if (values['touching-tm'])
+            issues.push('**Object at TM** — High risk, needs microscope');
+        if (values['sharp'])
+            issues.push('**Sharp object** — Risk of canal/TM injury');
+        if (values['prior-failed'])
+            issues.push('**Prior failed attempts** — Edema reduces success');
+        if (values['uncooperative'])
+            issues.push('**Uncooperative** — Needs sedation or ENT');
+        if (values['poor-vis'])
+            issues.push('**Poor visualization** — Cannot see = cannot safely remove');
+        if (values['battery']) {
+            return {
+                value: 'EMERGENT',
+                label: '🚨 BUTTON BATTERY — EMERGENT',
+                description: `**ABSOLUTE CONTRAINDICATION — EMERGENT ENT**\n\n${issues.map(i => '• ' + i).join('\n')}\n\n---\n\n**Button battery protocol:**\n• Keep ear completely DRY\n• Do NOT irrigate\n• Emergent ENT consultation\n• If ENT unavailable, attempt gentle removal\n• Document time of insertion\n\nDamage begins within 1-2 hours.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (values['tm-perf'] || values['touching-tm']) {
+            return {
+                value: 'REFER',
+                label: 'ABSOLUTE CONTRAINDICATION',
+                description: `**DO NOT ATTEMPT — ENT REFERRAL REQUIRED**\n\n${issues.map(i => '• ' + i).join('\n')}\n\n---\n\n**Why refer:**\n• Risk of ossicular damage\n• Risk of sensorineural hearing loss\n• Operative microscope needed\n• May require tympanoplasty\n\n**While awaiting ENT:**\n• Keep ear dry\n• Pain control\n• No drops unless ENT-directed`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 30) {
+            return {
+                value: 'CAUTION',
+                label: 'RELATIVE CONTRAINDICATIONS',
+                description: `**PROCEED WITH CAUTION — Consider ENT Referral**\n\n${issues.map(i => '• ' + i).join('\n')}\n\n---\n\n**Options:**\n• Procedural sedation (if uncooperative)\n• Improve visualization first\n• Single careful attempt, then refer\n• Direct ENT referral if multiple issues\n\n**If you proceed:**\n• Limit to 1 attempt\n• Have ENT backup plan\n• Stop if any complication`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (score > 0) {
+            return {
+                value: 'PROCEED',
+                label: 'Minor Concerns — OK to Attempt',
+                description: `**PROCEED WITH CAUTION**\n\n${issues.map(i => '• ' + i).join('\n')}\n\n---\n\n**Before attempting:**\n• Optimize visualization\n• Ensure patient cooperation\n• Select appropriate technique\n• Have backup plan\n\n**Limit to 1-2 attempts**\n\nEach subsequent attempt has lower success rate.`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'CLEAR',
+            label: '✓ No Contraindications',
+            description: `**NO CONTRAINDICATIONS — PROCEED WITH REMOVAL**\n\n**Checklist before attempting:**\n☐ Adequate visualization with otoscope\n☐ Patient cooperative or sedated\n☐ Correct technique selected for FB type\n☐ Backup instruments ready\n☐ Know your bail-out plan\n\n**Success factors:**\n• First attempt = highest success (65-78%)\n• Match technique to object\n• Don't push object deeper\n• Stop if complications arise`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// Tool 3: Technique Quick Reference
+const EARFB_TECHNIQUE_GUIDE_CALCULATOR = {
+    id: 'earfb-technique-guide',
+    title: 'Technique Quick Ref',
+    subtitle: 'Step-by-Step Removal Methods',
+    description: 'Quick reference for each removal technique.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Ansley JF, Cunningham MJ. Treatment of aural foreign bodies in children. Pediatrics. 1998;101(4 Pt 1):638-641.',
+    ],
+    fields: [
+        {
+            name: 'irrigation',
+            label: 'Irrigation',
+            description: 'Best for small particles, sand, debris',
+            type: 'toggle',
+            points: 10,
+        },
+        {
+            name: 'forceps',
+            label: 'Alligator Forceps',
+            description: 'Best for soft objects, insects, irregular shapes',
+            type: 'toggle',
+            points: 20,
+        },
+        {
+            name: 'hook',
+            label: 'Right-Angle Hook / Curette',
+            description: 'Best for hard spheres, beads',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'suction',
+            label: 'Suction Catheter',
+            description: 'Adjunct for small/loose objects, fragments',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'glue',
+            label: 'Cyanoacrylate (Glue) Method',
+            description: 'For ungraspable, stuck objects',
+            type: 'toggle',
+            points: 50,
+        },
+    ],
+    computeResult: (values) => {
+        if (values['irrigation']) {
+            return {
+                value: 'IRRIGATE',
+                label: 'Irrigation Technique',
+                description: `**IRRIGATION TECHNIQUE**\n\n**Equipment:**\n• 20-50 mL syringe\n• 14-16 gauge plastic catheter (or butterfly tubing)\n• Basin to catch effluent\n• Body-temperature water or saline\n\n**Technique:**\n1. Position patient: affected ear UP, head tilted\n2. Pull pinna up and back\n3. Direct stream along SUPERIOR canal wall\n4. Use low pressure — NOT Waterpik\n5. Catch effluent in basin\n6. Repeat 3-5 times\n\n**Success rate:** 65% first-pass\n\n**⛔ CONTRAINDICATIONS:**\n• TM perforation\n• Soft/organic material (swells)\n• Button battery\n• Tympanostomy tubes`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['forceps']) {
+            return {
+                value: 'FORCEPS',
+                label: 'Alligator Forceps Technique',
+                description: `**ALLIGATOR FORCEPS TECHNIQUE**\n\n**Best for:** Soft objects, insects, irregular shapes\n\n**Equipment:**\n• Alligator or Hartmann forceps\n• Good lighting/headlamp\n• Suction for backup\n\n**Technique:**\n1. Visualize object clearly with otoscope\n2. Remove otoscope, use headlamp\n3. Advance open forceps alongside object\n4. Grasp edge or protruding surface\n5. Gentle, steady traction\n6. Withdraw slowly\n\n**Tips:**\n• Don't squeeze too hard — may crush\n• May need multiple passes for fragments\n• If object slippery, try hook instead\n\n**⚠️ Not ideal for:** Hard spheres (slippage risk)`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['hook']) {
+            return {
+                value: 'HOOK',
+                label: 'Hook / Curette Technique',
+                description: `**RIGHT-ANGLE HOOK / CURETTE TECHNIQUE**\n\n**Best for:** Hard spheres, beads, round objects\n\n**Equipment:**\n• Right-angle hook or ear curette\n• Good lighting\n• Suction ready\n\n**Technique:**\n1. Visualize object position\n2. Advance hook/curette PAST the object\n3. Rotate tip to position BEHIND object\n4. Apply gentle posterior-to-anterior pressure\n5. "Scoop" object toward opening\n6. Withdraw slowly\n\n**Tips:**\n• Get fully behind before scooping\n• Don't push object deeper\n• May need to redirect if object rolls\n\n**Why this works:** Forceps slip on hard spheres — hook lets you pull from behind`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['suction']) {
+            return {
+                value: 'SUCTION',
+                label: 'Suction Technique',
+                description: `**SUCTION CATHETER TECHNIQUE**\n\n**Best for:** Small objects, loose debris, fragments\n\n**Equipment:**\n• Frazier suction tip (5-7 Fr)\n• OR soft-tipped catheter\n• Suction source at moderate pressure\n\n**Technique:**\n1. Visualize object\n2. Advance suction tip near object\n3. Make contact — catheter adheres\n4. Withdraw slowly\n5. Keep suction on during removal\n\n**Tips:**\n• Works best for objects <3 mm\n• Soft tip reduces canal trauma\n• Good as adjunct after partial removal\n• Useful for insect fragments\n\n**Limitations:**\n• May not adhere to wet/slimy objects\n• Can push object if angle wrong`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (values['glue']) {
+            return {
+                value: 'GLUE',
+                label: 'Cyanoacrylate (Glue) Method',
+                description: `**CYANOACRYLATE (SUPERGLUE) TECHNIQUE**\n\n**Best for:** Ungraspable, stuck, cooperative patient\n\n**Equipment:**\n• Cyanoacrylate glue (Dermabond or superglue)\n• Cotton swab with blunt end\n• Steady hands, good lighting\n\n**Technique:**\n1. Ensure COOPERATIVE patient (critical)\n2. Apply small amount of glue to swab tip\n3. Insert swab, contact object surface\n4. HOLD STEADY for 60 seconds\n5. Withdraw swab + object together\n\n**Success rate:** ~19% first-pass (lower than other methods)\n\n**⚠️ CAUTIONS:**\n• Avoid glue contact with canal skin\n• Patient MUST stay still\n• Not for deep or near-TM objects\n\n**Alternative:** Dental impression material (ENT use)`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'SELECT',
+            label: 'Select Technique Above',
+            description: `**SELECT A TECHNIQUE FOR INSTRUCTIONS**\n\n**Technique by Object Type:**\n\n| Object | Best Technique |\n|--------|---------------|\n| Particles/debris | Irrigation |\n| Soft objects | Alligator forceps |\n| Hard spheres | Hook/curette |\n| Insects | Kill + forceps |\n| Stuck objects | Cyanoacrylate |\n\n**General Principles:**\n• First attempt = best chance\n• Don't push deeper\n• 1-2 attempts max, then refer\n• Have backup technique ready`,
+            colorVar: '--color-text-secondary',
+        };
+    },
+};
+// Tool 4: ENT Referral Criteria
+const EARFB_ENT_CRITERIA_CALCULATOR = {
+    id: 'earfb-ent-criteria',
+    title: 'ENT Referral Guide',
+    subtitle: 'When to Call for Help',
+    description: 'Criteria for ENT referral — timing and indications.',
+    results: [],
+    thresholdNote: '',
+    citations: [
+        'Thompson SK, et al. External auditory canal foreign body removal. Laryngoscope. 2003;113(11):1912-1915.',
+    ],
+    fields: [
+        {
+            name: 'battery',
+            label: 'Button battery',
+            description: 'EMERGENT — tissue damage in 1-2 hours',
+            type: 'toggle',
+            points: 100,
+        },
+        {
+            name: 'tm-injury',
+            label: 'TM perforation / injury',
+            description: 'Suspected or confirmed during removal',
+            type: 'toggle',
+            points: 50,
+        },
+        {
+            name: 'deep',
+            label: 'Deep / medial impaction',
+            description: 'Object at or past TM',
+            type: 'toggle',
+            points: 40,
+        },
+        {
+            name: 'failed',
+            label: 'Failed removal (1-2 attempts)',
+            description: 'Unable to remove despite appropriate technique',
+            type: 'toggle',
+            points: 30,
+        },
+        {
+            name: 'bleeding',
+            label: 'Significant canal trauma',
+            description: 'Laceration, hematoma, active bleeding',
+            type: 'toggle',
+            points: 25,
+        },
+        {
+            name: 'sedation-fail',
+            label: 'Sedation needed but unavailable',
+            description: 'Uncooperative patient, cannot sedate',
+            type: 'toggle',
+            points: 20,
+        },
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((a, b) => a + b, 0);
+        const reasons = [];
+        if (values['battery'])
+            reasons.push('**Button battery** — EMERGENT');
+        if (values['tm-injury'])
+            reasons.push('**TM perforation** — operative microscope needed');
+        if (values['deep'])
+            reasons.push('**Deep impaction** — high complication risk');
+        if (values['failed'])
+            reasons.push('**Failed removal** — success rate drops after 2 attempts');
+        if (values['bleeding'])
+            reasons.push('**Canal trauma** — may need controlled repair');
+        if (values['sedation-fail'])
+            reasons.push('**Cannot cooperate** — needs OR setting');
+        if (values['battery']) {
+            return {
+                value: 'EMERGENT',
+                label: '🚨 EMERGENT ENT Consult',
+                description: `**EMERGENT ENT REFERRAL**\n\n${reasons.map(r => '• ' + r).join('\n')}\n\n---\n\n**Timing:** Immediate — damage within 1-2 hours\n\n**What to communicate:**\n• Button battery confirmed/suspected\n• Time of insertion if known\n• Current ear status\n• What attempts made\n\n**While awaiting ENT:**\n• Keep ear completely DRY\n• No irrigation\n• No drops`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (values['tm-injury'] || values['deep']) {
+            return {
+                value: 'URGENT',
+                label: 'URGENT ENT (Same Day)',
+                description: `**URGENT ENT REFERRAL — SAME DAY**\n\n${reasons.map(r => '• ' + r).join('\n')}\n\n---\n\n**Why urgent:**\n• Risk of permanent hearing loss\n• Risk of infection\n• Operative microscope needed\n• May require tympanoplasty\n\n**While awaiting ENT:**\n• Keep ear dry\n• No drops unless directed\n• Pain control\n• Return precautions`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 30) {
+            return {
+                value: 'SOON',
+                label: 'ENT Referral (24-48 hrs)',
+                description: `**ENT REFERRAL — 24-48 HOURS**\n\n${reasons.map(r => '• ' + r).join('\n')}\n\n---\n\n**Why refer:**\n• ED attempts have failed\n• Operative microscope provides better visualization\n• Controlled environment for sedation\n• Lower complication rate\n\n**Statistics:**\n• 75% of EAC FBs removable in ED\n• 23% require operative removal\n\n**Discharge instructions:**\n• Keep ear dry\n• Antibiotic drops if trauma\n• Pain control\n• Return for worsening`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (score > 0) {
+            return {
+                value: 'CONSIDER',
+                label: 'Consider ENT Referral',
+                description: `**CONSIDER ENT REFERRAL**\n\n${reasons.map(r => '• ' + r).join('\n')}\n\n---\n\n**Options:**\n• One more careful attempt in ED\n• Routine ENT follow-up (1-2 weeks)\n• Direct referral if multiple concerns\n\n**When to stop:**\n• 1-2 attempts max\n• Stop if any complication\n• Stop if patient distress`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'OK',
+            label: '✓ ED Removal Appropriate',
+            description: `**NO ENT REFERRAL CRITERIA MET**\n\n**ED Removal Appropriate When:**\n• Object visible and accessible\n• No TM perforation\n• Not a button battery\n• Patient cooperative (or can sedate)\n• 1-2 attempts have not failed\n\n**Success Factors:**\n• First attempt most successful (65-78%)\n• Match technique to object type\n• Stop if complications arise\n• Low threshold to refer if struggling`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -23759,6 +24202,11 @@ const CALCULATORS = {
     'awake-nasal-steps': AWAKE_NASAL_STEPS_CALCULATOR,
     'awake-oral-steps': AWAKE_ORAL_STEPS_CALCULATOR,
     'awake-see-cords-go': AWAKE_SEE_CORDS_GO_CALCULATOR,
+    // Ear Foreign Body Removal
+    'earfb-type-identifier': EARFB_TYPE_IDENTIFIER_CALCULATOR,
+    'earfb-contraindication': EARFB_CONTRAINDICATION_CALCULATOR,
+    'earfb-technique-guide': EARFB_TECHNIQUE_GUIDE_CALCULATOR,
+    'earfb-ent-criteria': EARFB_ENT_CRITERIA_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

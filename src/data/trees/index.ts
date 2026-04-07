@@ -92,6 +92,7 @@ export { TIA_WORKUP_NODES, TIA_WORKUP_MODULE_LABELS, TIA_WORKUP_CITATIONS, TIA_W
 export { PERIPARTUM_CARDIOMYOPATHY_NODES, PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS, PERIPARTUM_CARDIOMYOPATHY_CITATIONS, PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT } from './peripartum-cardiomyopathy';
 export { HYPOTHERMIA_NODES, HYPOTHERMIA_MODULE_LABELS, HYPOTHERMIA_CITATIONS, HYPOTHERMIA_NODE_COUNT } from './hypothermia';
 export { AWAKE_INTUBATION_NODES, AWAKE_INTUBATION_MODULE_LABELS, AWAKE_INTUBATION_CITATIONS, AWAKE_INTUBATION_NODE_COUNT } from './awake-intubation';
+export { EAR_FB_NODES, EAR_FB_MODULE_LABELS, EAR_FB_CITATIONS } from './ear-fb';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
