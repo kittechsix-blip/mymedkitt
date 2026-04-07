@@ -207,6 +207,7 @@ const TREE_REGISTRY = {
   'dfsa-workup':          { prefix: 'DFSA_WORKUP',          entryNodeId: 'dfsa-start',       categoryId: 'emergency-medicine' },
   'hypothermia':          { prefix: 'HYPOTHERMIA',          entryNodeId: 'hypo-start',       categoryId: 'emergency-medicine' },
   'awake-intubation':     { prefix: 'AWAKE_INTUBATION',     entryNodeId: 'awake-start',      categoryId: 'anesthesia-airway' },
+  'ear-fb':               { prefix: 'EAR_FB',               entryNodeId: 'earfb-start',      categoryId: 'procedures' },
   'echo-views':           { prefix: 'ECHO_VIEWS',           entryNodeId: 'echo-views-start', categoryId: 'us-rads' },
   'psych-assessment':     { prefix: 'PSYCH_ASSESSMENT',     entryNodeId: 'psych-start',      categoryId: 'emergency-medicine' },
   'oxygen-delivery':      { prefix: 'OXYGEN_DELIVERY',      entryNodeId: 'o2-start',         categoryId: 'critical-care' },
