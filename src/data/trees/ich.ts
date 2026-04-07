@@ -420,6 +420,19 @@ export const ICH_MODULE_LABELS = [
 // Evidence Citations
 // -------------------------------------------------------------------
 
+export const ICH_CRITICAL_ACTIONS = [
+  { text: 'Do NOT delay anticoagulant reversal for labs - start empiric reversal immediately', nodeId: 'ich-anticoag' },
+  { text: 'Warfarin ICH: 4-factor PCC 25-50 IU/kg + Vitamin K 10 mg IV - target INR <1.4', nodeId: 'ich-warfarin-rev' },
+  { text: 'Dabigatran ICH: Idarucizumab 5g IV (two 2.5g boluses) - immediate complete reversal', nodeId: 'ich-dabi-rev' },
+  { text: 'Xa inhibitor ICH: 4-factor PCC 50 IU/kg - most widely available option', nodeId: 'ich-xa-rev' },
+  { text: 'Target SBP 130-150 mmHg with nicardipine or clevidipine - avoid drops >70 mmHg first hour', nodeId: 'ich-bp' },
+  { text: 'Do NOT transfuse platelets for antiplatelet-associated ICH (PATCH trial: worse outcomes)', nodeId: 'ich-coag-adj' },
+  { text: 'Cerebellar hematoma >15 mL: immediate surgical evacuation - do NOT just place EVD', nodeId: 'ich-cerebellar-surg' },
+  { text: 'Seizure prophylaxis NOT recommended - treat only witnessed or EEG-confirmed seizures', nodeId: 'ich-seizures' },
+  { text: 'IPC immediately, chemical DVT prophylaxis after 24-48h if ICH stable on repeat CT', nodeId: 'ich-dvt' },
+  { text: 'Perihematomal edema peaks at 5-6 days - anticipate delayed deterioration', nodeId: 'ich-icp-fever' },
+];
+
 export const ICH_CITATIONS: Citation[] = [
   { num: 1, text: 'Greenberg SM, Ziai WC, Cordonnier C, et al. 2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage. Stroke. 2022;53(7):e282-e361.' },
   { num: 2, text: 'Steiner T, Purrucker JC, Aguiar de Sousa D, et al. European Stroke Organisation (ESO) and European Association of Neurosurgical Societies (EANS) guideline on stroke due to spontaneous intracerebral haemorrhage. Eur Stroke J. 2025;10(4):1007-1086.' },

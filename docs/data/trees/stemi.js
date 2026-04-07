@@ -539,6 +539,18 @@ export const STEMI_MODULE_LABELS = [
 // -------------------------------------------------------------------
 // Evidence Citations
 // -------------------------------------------------------------------
+export const STEMI_CRITICAL_ACTIONS = [
+    { text: '12-lead ECG within 10 minutes of first medical contact - STEMI is an ECG diagnosis', nodeId: 'stemi-start' },
+    { text: 'Activate cath lab immediately for confirmed STEMI - goal door-to-device <90 min', nodeId: 'stemi-confirmed' },
+    { text: 'Aspirin 162-325 mg chewed + P2Y12 inhibitor loading before/during PCI', nodeId: 'stemi-initial-tx' },
+    { text: 'Check posterior leads V7-V9 if V1-V3 show ST depression with upright T waves', nodeId: 'stemi-posterior' },
+    { text: 'Apply Sgarbossa criteria for STEMI diagnosis in LBBB or paced rhythm', nodeId: 'stemi-lbbb' },
+    { text: 'Give beta-lactam FIRST when also giving vancomycin (improved survival)', nodeId: 'stemi-p2y12' },
+    { text: 'Do NOT give morphine unless refractory pain - delays P2Y12 absorption, increases mortality', nodeId: 'stemi-initial-tx' },
+    { text: 'Fibrinolytics within 30 min if PCI not available within 120 min FMC-to-device', nodeId: 'stemi-lytics' },
+    { text: 'Check right-sided leads for all inferior STEMIs - avoid nitrates if RV involvement', nodeId: 'stemi-rv' },
+    { text: 'AIVR post-reperfusion is benign - do NOT treat with antidysrhythmics (may cause collapse)', nodeId: 'stemi-arrhythmia' },
+];
 export const STEMI_CITATIONS = [
     { num: 1, text: 'Gokhroo RK, et al. Sweating: a Specific Predictor of ST-Segment Elevation Myocardial Infarction Among the Symptoms of ACS (SWIMI Study). Clin Cardiol. 2016;39(2):90-95.' },
     { num: 2, text: 'Fanaroff AC, et al. Does This Patient with Chest Pain Have Acute Coronary Syndrome? JAMA. 2015;314(18):1955-1965.' },

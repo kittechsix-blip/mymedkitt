@@ -17,6 +17,7 @@ import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHe
 import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 import { addRecentConsult } from './dashboard.js';
 import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
+import { renderCriticalActionsButton } from './critical-actions.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -307,6 +308,14 @@ function renderConsultSearch(container: HTMLElement): void {
   });
 
   wrapper.appendChild(toggleBtn);
+
+  // Critical Actions button (next to search, above disclaimer)
+  if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
+    renderCriticalActionsButton(wrapper, currentConfig.criticalActions, controller, () => {
+      if (delegatedContainer) renderFlow(delegatedContainer);
+    });
+  }
+
   wrapper.appendChild(input);
   wrapper.appendChild(results);
   container.appendChild(wrapper);

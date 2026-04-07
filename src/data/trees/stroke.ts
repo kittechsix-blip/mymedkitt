@@ -571,6 +571,18 @@ export const STROKE_CITATIONS: Citation[] = [
   { num: 11, text: 'Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients with Stroke and TIA. Stroke. 2021;52(7):e364-e467.' },
 ];
 
+export const STROKE_CRITICAL_ACTIONS = [
+  { text: 'Establish last known well time immediately - determines IVT window', nodeId: 'stroke-timing' },
+  { text: 'Fingerstick glucose is the ONLY required pre-tPA lab - do not delay for others', nodeId: 'stroke-start' },
+  { text: 'BP <185/110 mmHg required before IVT - give labetalol 10-20 mg IV bolus', nodeId: 'stroke-ivt-check' },
+  { text: 'Tenecteplase 0.25 mg/kg single bolus preferred over alteplase 60-min infusion', nodeId: 'stroke-ivt-treat' },
+  { text: 'Activate cath lab for LVO on CTA - EVT within 24h for select patients', nodeId: 'stroke-evt-eligible' },
+  { text: 'DAPT x21 days only for minor stroke (NIHSS 0-5) with high risk features', nodeId: 'stroke-dapt' },
+  { text: 'Check right-sided leads (V4R) for all inferior STEMIs - avoid nitrates if RV involvement', nodeId: 'stroke-start' },
+  { text: 'Do NOT bridge with heparin when starting DOAC for cardioembolic stroke', nodeId: 'stroke-afib' },
+  { text: 'Post-tPA: BP <180/105 x24h, neuro checks q15min x2h, no antiplatelets x24h', nodeId: 'stroke-post-treatment' },
+];
+
 // -------------------------------------------------------------------
 // Clinical Notes (for reference table)
 // -------------------------------------------------------------------

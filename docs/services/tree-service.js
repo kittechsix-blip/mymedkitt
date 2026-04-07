@@ -131,7 +131,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'stroke': async () => {
             const m = await import('../data/trees/stroke.js');
-            return { nodes: m.STROKE_NODES, entryNodeId: 'stroke-start', categoryId: 'neurology', moduleLabels: m.STROKE_MODULE_LABELS, citations: m.STROKE_CITATIONS };
+            return { nodes: m.STROKE_NODES, entryNodeId: 'stroke-start', categoryId: 'neurology', moduleLabels: m.STROKE_MODULE_LABELS, citations: m.STROKE_CITATIONS, criticalActions: m.STROKE_CRITICAL_ACTIONS };
         },
         'nstemi': async () => {
             const m = await import('../data/trees/nstemi.js');
@@ -139,7 +139,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'stemi': async () => {
             const m = await import('../data/trees/stemi.js');
-            return { nodes: m.STEMI_NODES, entryNodeId: 'stemi-start', categoryId: 'cardiology', moduleLabels: m.STEMI_MODULE_LABELS, citations: m.STEMI_CITATIONS };
+            return { nodes: m.STEMI_NODES, entryNodeId: 'stemi-start', categoryId: 'cardiology', moduleLabels: m.STEMI_MODULE_LABELS, citations: m.STEMI_CITATIONS, criticalActions: m.STEMI_CRITICAL_ACTIONS };
         },
         'syncope': async () => {
             const m = await import('../data/trees/syncope.js');
@@ -231,7 +231,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'ich': async () => {
             const m = await import('../data/trees/ich.js');
-            return { nodes: m.ICH_NODES, entryNodeId: 'ich-start', categoryId: 'neurology', moduleLabels: m.ICH_MODULE_LABELS, citations: m.ICH_CITATIONS };
+            return { nodes: m.ICH_NODES, entryNodeId: 'ich-start', categoryId: 'neurology', moduleLabels: m.ICH_MODULE_LABELS, citations: m.ICH_CITATIONS, criticalActions: m.ICH_CRITICAL_ACTIONS };
         },
         'sah': async () => {
             const m = await import('../data/trees/sah.js');
@@ -319,7 +319,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'sepsis': async () => {
             const m = await import('../data/trees/sepsis.js');
-            return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS };
+            return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS, criticalActions: m.SEPSIS_CRITICAL_ACTIONS };
         },
         'tuberculosis': async () => {
             const m = await import('../data/trees/tuberculosis.js');
@@ -675,7 +675,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'traveler-infections': async () => {
             const m = await import('../data/trees/traveler-infections.js');
-            return { nodes: m.TRAVELER_INFECTIONS_NODES, entryNodeId: 'ti-start', categoryId: 'infectious-disease', moduleLabels: m.TRAVELER_INFECTIONS_MODULE_LABELS, citations: m.TRAVELER_INFECTIONS_CITATIONS };
+            return { nodes: m.TRAVELER_INFECTIONS_NODES, entryNodeId: 'ti-start', categoryId: 'infectious-disease', moduleLabels: m.TRAVELER_INFECTIONS_MODULE_LABELS, citations: m.TRAVELER_INFECTIONS_CITATIONS, criticalActions: m.TRAVELER_INFECTIONS_CRITICAL_ACTIONS };
         },
     };
     const loader = TREE_IMPORTS[treeId];
