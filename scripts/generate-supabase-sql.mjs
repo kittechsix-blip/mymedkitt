@@ -171,6 +171,11 @@ const TREE_REGISTRY = {
   'hop-killers':          { prefix: 'HOP_KILLERS',          entryNodeId: 'hop-start',        categoryId: 'anesthesia-airway' },
   'tia-workup':           { prefix: 'TIA_WORKUP',           entryNodeId: 'tia-start',        categoryId: 'neurology' },
   'peripartum-cardiomyopathy': { prefix: 'PERIPARTUM_CARDIOMYOPATHY', entryNodeId: 'ppcm-start', categoryId: 'ob-gyn' },
+  'cardiac-arrest':       { prefix: 'CARDIAC_ARREST',       entryNodeId: 'ca-start',          categoryId: 'emergency-medicine' },
+  'pea-arrest':           { prefix: 'PEA_ARREST',           entryNodeId: 'pea-start',         categoryId: 'emergency-medicine' },
+  'bradycardic-arrest':   { prefix: 'BRADYCARDIC_ARREST',   entryNodeId: 'brady-start',       categoryId: 'emergency-medicine' },
+  'ventricular-tachycardia': { prefix: 'VENTRICULAR_TACHYCARDIA', entryNodeId: 'vt-start',    categoryId: 'emergency-medicine' },
+  'post-rosc':            { prefix: 'POST_ROSC',            entryNodeId: 'rosc-start',        categoryId: 'emergency-medicine' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -203,6 +208,13 @@ const CROSS_LISTINGS = {
   'cvst':             [{ categoryId: 'neurology' }],
   'shoulder-dislocation': [{ categoryId: 'procedures' }],
   'ct-decision-support': [{ categoryId: 'emergency-medicine' }],
+  'cardiac-arrest':      [{ categoryId: 'cardiology' }, { categoryId: 'critical-care' }],
+  'pea-arrest':          [{ categoryId: 'critical-care' }],
+  'bradycardic-arrest':  [{ categoryId: 'cardiology' }],
+  'ventricular-tachycardia': [{ categoryId: 'cardiology' }],
+  'post-rosc':           [{ categoryId: 'critical-care' }],
+  'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
+  'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
