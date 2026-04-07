@@ -666,6 +666,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 46,
                 entryNodeId: 'sti-start',
+            },
+            {
+                id: 'traveler-infections',
+                title: 'Traveler Infections',
+                subtitle: 'Assessment → Fever/GI/Rash/Respiratory → Geographic Risk → Malaria/Dengue/Typhoid → Treatment → Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 26,
+                entryNodeId: 'ti-start',
             }
         ],
         isCustom: false,

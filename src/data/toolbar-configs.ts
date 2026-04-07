@@ -905,6 +905,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'cig-mannitol', label: 'Mannitol', icon: '💉', action: 'calculator', target: 'cig-mannitol-protocol' },
     { id: 'cig-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'cig-disposition' },
   ],
+  'traveler-infections': [
+    { id: 'ti-geo', label: 'Geo Risk', icon: '🌍', action: 'calculator', target: 'ti-geographic-risk' },
+    { id: 'ti-incub', label: 'Incubation', icon: '⏱️', action: 'calculator', target: 'ti-incubation' },
+    { id: 'ti-syndrome', label: 'Syndrome DDx', icon: '🔍', action: 'calculator', target: 'ti-syndrome-ddx' },
+    { id: 'ti-ppx', label: 'Malaria Ppx', icon: '💊', action: 'calculator', target: 'ti-malaria-ppx' },
+    { id: 'ti-treatment', label: 'Empiric Tx', icon: '💉', action: 'calculator', target: 'ti-empiric-tx' },
+    { id: 'ti-admit', label: 'Admit?', icon: '🏥', action: 'calculator', target: 'ti-admission' },
+    { id: 'ti-isolation', label: 'Isolation', icon: '⚠️', action: 'calculator', target: 'ti-isolation' },
+    { id: 'ti-cdc', label: 'CDC Links', icon: '📞', action: 'calculator', target: 'ti-cdc-resources' },
+  ],
 };
 
 /** Get the toolbar config for a consult, or an empty default */

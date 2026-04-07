@@ -25058,6 +25058,624 @@ const CIG_DISPOSITION_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// ==================== TRAVELER INFECTIONS ====================
+
+const TI_SYNDROME_DDX_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-syndrome-ddx',
+  title: 'Syndrome-Based DDx',
+  subtitle: 'Generate differential by syndrome + region',
+  description: 'Generate differential by syndrome + region',
+  fields: [
+    {
+      name: 'syndrome',
+      label: 'Primary Syndrome',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Fever alone', points: 0 },
+        { label: 'Fever + thrombocytopenia', points: 1 },
+        { label: 'Fever + hepatosplenomegaly', points: 2 },
+        { label: 'Fever + jaundice', points: 3 },
+        { label: 'Fever + eschar', points: 4 },
+        { label: 'Fever + rash', points: 5 },
+        { label: 'Fever + arthralgia', points: 6 },
+        { label: 'Diarrhea', points: 7 },
+        { label: 'Respiratory symptoms', points: 8 },
+        { label: 'Neurologic symptoms', points: 9 },
+      ],
+    },
+    {
+      name: 'region',
+      label: 'Travel Region',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Asia (SE or South)', points: 0 },
+        { label: 'Sub-Saharan Africa', points: 1 },
+        { label: 'Latin America/Caribbean', points: 2 },
+        { label: 'Middle East', points: 3 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ syndrome, region }) => {
+    const syndromeMap: Record<number, string> = {
+      0: 'fever-only',
+      1: 'fever-thrombocytopenia',
+      2: 'fever-hepatosplenomegaly',
+      3: 'fever-jaundice',
+      4: 'fever-eschar',
+      5: 'fever-rash',
+      6: 'fever-arthralgia',
+      7: 'diarrhea',
+      8: 'respiratory',
+      9: 'neurologic',
+    };
+
+    const regionMap: Record<number, string> = {
+      0: 'asia',
+      1: 'africa',
+      2: 'latin-am',
+      3: 'middle-east',
+    };
+
+    const syndromeVal = syndromeMap[syndrome as number] || 'fever-thrombocytopenia';
+    const regionVal = regionMap[region as number] || 'asia';
+
+    const ddx: Record<string, Record<string, string>> = {
+      'fever-thrombocytopenia': {
+        'asia': '**DDx:** Dengue (most common), malaria, rickettsial\n**Next:** Dengue PCR, malaria smears + RDT, look for eschar',
+        'africa': '**DDx:** Malaria (most common), dengue, African tick bite fever\n**Next:** STAT malaria testing, look for eschar, dengue if urban',
+        'latin-am': '**DDx:** Dengue (most common), chikungunya, malaria (if Amazon)\n**Next:** Dengue PCR, chikungunya PCR, malaria if rural exposure',
+        'middle-east': '**DDx:** Dengue, viral infection, brucellosis\n**Next:** Dengue PCR, blood cultures',
+      },
+      'fever-hepatosplenomegaly': {
+        'asia': '**DDx:** Malaria, typhoid, hepatitis, dengue\n**Next:** Malaria testing, blood cultures, hepatitis panel',
+        'africa': '**DDx:** Malaria (most common), typhoid, hepatitis, schistosomiasis\n**Next:** STAT malaria, blood cultures, hepatitis panel',
+        'latin-am': '**DDx:** Dengue, typhoid, hepatitis, malaria (if Amazon)\n**Next:** Dengue PCR, blood cultures, hepatitis panel',
+        'middle-east': '**DDx:** Brucellosis, typhoid, hepatitis, leishmaniasis\n**Next:** Blood cultures, hepatitis panel, brucella serology',
+      },
+      'fever-jaundice': {
+        'asia': '**DDx:** Hepatitis A/E, malaria, leptospirosis\n**Next:** Hepatitis panel (A IgM, E IgM), malaria testing, leptospirosis PCR/serology',
+        'africa': '**DDx:** Malaria (most common with jaundice), hepatitis, leptospirosis, yellow fever\n**Next:** STAT malaria, hepatitis panel, yellow fever serology if unvaccinated',
+        'latin-am': '**DDx:** Leptospirosis, hepatitis A, dengue, malaria\n**Next:** Leptospirosis PCR/MAT, hepatitis A IgM, dengue PCR',
+        'middle-east': '**DDx:** Hepatitis A/E, leptospirosis, brucellosis\n**Next:** Hepatitis panel, leptospirosis testing, blood cultures',
+      },
+      'fever-eschar': {
+        'asia': '**DDx:** Scrub typhus (rickettsial)\n**URGENT:** Start doxycycline 100mg BID immediately. Case fatality 20-40% if delayed.',
+        'africa': '**DDx:** African tick bite fever (rickettsial)\n**URGENT:** Start doxycycline 100mg BID immediately. Excellent outcomes if early treatment.',
+        'latin-am': '**DDx:** Rickettsial infection (Rocky Mountain spotted fever-like)\n**URGENT:** Start doxycycline immediately.',
+        'middle-east': '**DDx:** Rickettsial infection, cutaneous leishmaniasis\n**URGENT:** Start doxycycline if suspect rickettsial.',
+      },
+      'fever-arthralgia': {
+        'asia': '**DDx:** Chikungunya (severe arthritis), dengue, Zika\n**Next:** Chikungunya PCR (arthritis can persist months), dengue PCR, Zika PCR',
+        'africa': '**DDx:** Chikungunya, dengue, malaria\n**Next:** Chikungunya PCR, dengue PCR, STAT malaria testing',
+        'latin-am': '**DDx:** Chikungunya (most likely for severe arthritis), dengue, Zika\n**Next:** Chikungunya PCR, dengue PCR. 2026 outbreak: Cuba, Suriname, Bolivia',
+        'middle-east': '**DDx:** Brucellosis, viral infection\n**Next:** Blood cultures, brucella serology',
+      },
+      'diarrhea': {
+        'asia': "**DDx:** Traveler's diarrhea (ETEC), Campylobacter, Giardia, typhoid\n**Next:** Stool culture, Giardia antigen, blood cultures if fever",
+        'africa': "**DDx:** Traveler's diarrhea, Giardia, E. histolytica, typhoid\n**Next:** Stool culture, stool O&P, blood cultures if fever",
+        'latin-am': "**DDx:** Traveler's diarrhea, Giardia, Shigella, E. histolytica\n**Next:** Stool culture, Giardia antigen, stool O&P",
+        'middle-east': "**DDx:** Traveler's diarrhea, typhoid, brucellosis\n**Next:** Stool culture, blood cultures if fever",
+      },
+      'respiratory': {
+        'asia': '**DDx:** COVID-19, influenza, avian flu (if poultry contact), TB\n**Next:** COVID PCR, influenza PCR, CXR, consider TB testing',
+        'africa': '**DDx:** TB, pneumonia, COVID-19, meningococcal (if Sahel)\n**Next:** CXR, sputum AFB, COVID PCR. Airborne isolation if TB suspected.',
+        'latin-am': '**DDx:** COVID-19, influenza, pneumonia\n**Next:** COVID PCR, influenza PCR, CXR',
+        'middle-east': '**DDx:** MERS-CoV (if camel/healthcare), COVID-19, pneumonia\n**Next:** MERS-CoV PCR if exposure, COVID PCR, CXR. Airborne isolation if MERS suspected.',
+      },
+      'neurologic': {
+        'asia': '**DDx:** Cerebral malaria, Japanese encephalitis (rural), meningitis\n**Next:** STAT malaria, LP (CSF), blood cultures',
+        'africa': '**DDx:** Cerebral malaria (most common), meningococcal meningitis, rabies (if bite)\n**Next:** STAT malaria, LP if malaria negative, rabies PEP if exposure',
+        'latin-am': '**DDx:** Meningitis, neurocysticercosis, rabies (if bite)\n**Next:** LP (CSF), head CT, rabies PEP if animal exposure',
+        'middle-east': '**DDx:** Meningitis, brucellosis (neurobrucellosis), rabies\n**Next:** LP (CSF), blood cultures, rabies PEP if bite',
+      },
+    };
+
+    const result = ddx[syndromeVal]?.[regionVal] || 'Consult ID for complex cases';
+
+    return {
+      value: syndromeVal,
+      label: `${syndromeVal.replace(/-/g, ' ').toUpperCase()}`,
+      description: result,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TI_MALARIA_PROPHYLAXIS_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-malaria-ppx',
+  title: 'Malaria Prophylaxis Assessment',
+  subtitle: 'Evaluate compliance and breakthrough risk',
+  description: 'Evaluate compliance and breakthrough risk',
+  fields: [
+    {
+      name: 'drug',
+      label: 'Prophylaxis Drug',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None / Unknown', points: 0 },
+        { label: 'Atovaquone-proguanil (Malarone)', points: 1 },
+        { label: 'Doxycycline', points: 2 },
+        { label: 'Mefloquine (Lariam)', points: 3 },
+        { label: 'Chloroquine', points: 4 },
+      ],
+    },
+    {
+      name: 'compliance',
+      label: 'Compliance During Travel',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Excellent (no missed doses)', points: 0 },
+        { label: 'Good (occasional missed dose)', points: 1 },
+        { label: 'Poor (frequent missed doses)', points: 2 },
+        { label: 'Unknown', points: 3 },
+      ],
+    },
+    {
+      name: 'postTravel',
+      label: 'Continued Post-Travel?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Yes, continued as directed', points: 0 },
+        { label: 'No, stopped upon return', points: 1 },
+        { label: 'Unknown', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ drug, compliance, postTravel }) => {
+    const drugMap: Record<number, string> = {
+      0: 'none',
+      1: 'atovaquone-proguanil',
+      2: 'doxycycline',
+      3: 'mefloquine',
+      4: 'chloroquine',
+    };
+
+    const complianceMap: Record<number, string> = {
+      0: 'excellent',
+      1: 'good',
+      2: 'poor',
+      3: 'unknown',
+    };
+
+    const postTravelMap: Record<number, string> = {
+      0: 'yes',
+      1: 'no',
+      2: 'unknown',
+    };
+
+    const drugVal = drugMap[drug as number] || 'none';
+    const complianceVal = complianceMap[compliance as number] || 'unknown';
+    const postTravelVal = postTravelMap[postTravel as number] || 'unknown';
+
+    if (drugVal === 'none') {
+      return {
+        value: 'NO-PPX',
+        label: '⚠️ No Prophylaxis',
+        description: `**NO MALARIA PROPHYLAXIS**\n\n**IMPLICATIONS:**\n• **STAT malaria testing mandatory** for any fever\n• Higher risk for malaria\n• Thick & thin blood smears + RDT\n• Repeat q12-24h x3 if initial negative\n\n**TREATMENT:**\nIf positive → start treatment immediately\n\n**CDC Malaria Hotline:**\n• Business: 770-488-7788 or 855-856-4713\n• After hours: 770-488-7100`,
+        colorVar: '--color-critical',
+      };
+    }
+
+    const postTravelReq: Record<string, string> = {
+      'atovaquone-proguanil': '7 days post-travel',
+      'doxycycline': '4 weeks post-travel',
+      'mefloquine': '4 weeks post-travel',
+      'chloroquine': '4 weeks post-travel',
+    };
+
+    const req = postTravelReq[drugVal] || '4 weeks';
+
+    if (complianceVal === 'poor' || postTravelVal === 'no') {
+      return {
+        value: 'POOR-COMPLIANCE',
+        label: '⚠️ Poor Compliance / Incomplete',
+        description: `**SUBOPTIMAL PROPHYLAXIS**\n\nDrug: ${drugVal}\nCompliance: ${complianceVal}\nPost-travel: ${postTravelVal === 'no' ? `Stopped early (should continue ${req})` : 'Poor compliance'}\n\n**MALARIA STILL POSSIBLE:**\n• **Test as if no prophylaxis**\n• STAT thick/thin smears + RDT\n• Repeat q12-24h x3 if negative\n• No drug is 100% effective\n• Poor compliance = breakthrough common\n\n**COMPLIANCE DATA:**\n• Weekly regimens (mefloquine) have better compliance than daily\n• Doxycycline has highest discontinuation rate`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'GOOD-COMPLIANCE',
+      label: '✓ Good Compliance',
+      description: `**ADEQUATE PROPHYLAXIS**\n\nDrug: ${drugVal}\nCompliance: ${complianceVal}\nPost-travel continuation: ${postTravelVal}\n\n**BREAKTHROUGH MALARIA STILL POSSIBLE:**\n• No drug is 100% effective\n• **Still test if fever from endemic area**\n• STAT thick/thin smears + RDT\n• Repeat q12-24h x3 if initial negative\n\n**POST-TRAVEL DURATION:**\n• ${drugVal}: continue ${req}\n\n**NOTE:**\nGood compliance reduces but doesn't eliminate risk. Test all fevers from malaria-endemic areas.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TI_EMPIRIC_TREATMENT_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-empiric-tx',
+  title: 'Empiric Treatment Guide',
+  subtitle: 'Syndrome-based empiric antibiotics',
+  description: 'Syndrome-based empiric antibiotics',
+  fields: [
+    {
+      name: 'syndrome',
+      label: 'Clinical Syndrome',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Suspected Typhoid/Enteric Fever', points: 0 },
+        { label: 'Suspected Rickettsial (Eschar Present)', points: 1 },
+        { label: 'Dysentery (Bloody Diarrhea + Fever)', points: 2 },
+        { label: 'Severe Leptospirosis', points: 3 },
+        { label: 'Mild Leptospirosis', points: 4 },
+        { label: 'Meningitis/Encephalitis', points: 5 },
+        { label: "Traveler's Diarrhea (Moderate-Severe)", points: 6 },
+      ],
+    },
+    {
+      name: 'region',
+      label: 'Travel Region (if applicable)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Iraq or Pakistan', points: 0 },
+        { label: 'Other region', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ syndrome, region }) => {
+    const syndromeMap: Record<number, string> = {
+      0: 'typhoid',
+      1: 'rickettsial',
+      2: 'dysentery',
+      3: 'leptospirosis-severe',
+      4: 'leptospirosis-mild',
+      5: 'meningitis',
+      6: 'td',
+    };
+
+    const regionMap: Record<number, string> = {
+      0: 'iraq-pakistan',
+      1: 'other',
+    };
+
+    const syndromeVal = syndromeMap[syndrome as number] || 'typhoid';
+    const regionVal = regionMap[region as number] || 'other';
+
+    const treatments: Record<string, { rx: string; notes: string }> = {
+      'typhoid': {
+        rx: regionVal === 'iraq-pakistan'
+          ? '**Azithromycin 1g PO day 1, then 500mg daily x 6 days** (uncomplicated)\n\nOR\n\n**Carbapenem** (meropenem 1g IV q8h) if complicated'
+          : '**Ceftriaxone 2g IV daily** (first-line)\n\nOR\n\n**Azithromycin 1g PO day 1, then 500mg daily x 6 days** (alternative)',
+        notes: 'Iraq/Pakistan: ceftriaxone resistance common. Other regions: ceftriaxone preferred. DO NOT use fluoroquinolones (widespread resistance). Get blood cultures BEFORE antibiotics.',
+      },
+      'rickettsial': {
+        rx: '**Doxycycline 100mg PO/IV BID x 7-10 days**\n\n**START IMMEDIATELY**',
+        notes: '⚠️ DO NOT WAIT FOR SEROLOGY. Eschar + fever + travel = start doxycycline in ED. Case fatality 20-40% if delayed. Excellent outcomes if started within first week.',
+      },
+      'dysentery': {
+        rx: '**Azithromycin 500mg PO daily x 3 days**\n\n**Plus IV fluids**\n\n**Avoid antimotility agents** (loperamide)',
+        notes: 'Empiric treatment before culture. If E. coli O157:H7 suspected → supportive only (antibiotics may increase HUS risk). If E. histolytica confirmed → add metronidazole 750mg TID x 7-10 days + luminal agent.',
+      },
+      'leptospirosis-severe': {
+        rx: '**Penicillin G 1.5 million units IV q6h**\n\nOR\n\n**Ceftriaxone 1g IV daily**\n\n**Plus supportive care** (dialysis, mechanical ventilation as needed)',
+        notes: "Severe = Weil's disease (jaundice, renal failure, pulmonary hemorrhage). High mortality without treatment.",
+      },
+      'leptospirosis-mild': {
+        rx: '**Doxycycline 100mg PO BID x 7 days**\n\nAlternatives: amoxicillin 500mg TID, azithromycin 500mg daily',
+        notes: 'Mild = no organ dysfunction. Freshwater/flood exposure + fever + myalgia (esp. calves) + conjunctival injection.',
+      },
+      'meningitis': {
+        rx: '**Ceftriaxone 2g IV** OR **Cefotaxime 2g IV**\n\n**Add vancomycin** if concern for resistant pneumococcus\n\n**Add acyclovir 10mg/kg IV q8h** if encephalitis features',
+        notes: "Get blood cultures → LP → START ANTIBIOTICS. Don't delay treatment waiting for LP. Meningococcal → droplet precautions, notify public health.",
+      },
+      'td': {
+        rx: '**Azithromycin 1000mg single dose** OR **500mg daily x 3 days**\n\nAlternative: fluoroquinolone (if from area without resistance)\n\n**Plus loperamide** (if no fever, no blood)',
+        notes: 'Mild diarrhea: hydration only. Moderate-severe: add antibiotics. Avoid antimotility agents if fever or bloody stools.',
+      },
+    };
+
+    const tx = treatments[syndromeVal] || { rx: 'Consult ID', notes: '' };
+
+    return {
+      value: syndromeVal,
+      label: 'Empiric Treatment',
+      description: `**${syndromeVal.toUpperCase().replace(/-/g, ' ')}**\n\n**TREATMENT:**\n${tx.rx}\n\n**NOTES:**\n${tx.notes}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TI_ADMISSION_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-admission',
+  title: 'Admission Criteria',
+  subtitle: 'Disposition decision support',
+  description: 'Disposition decision support',
+  fields: [
+    {
+      name: 'malaria',
+      label: 'Malaria Testing',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Positive - P. falciparum', points: 0 },
+        { label: 'Positive - other species', points: 1 },
+        { label: 'Negative', points: 2 },
+        { label: 'Pending from endemic area', points: 3 },
+      ],
+    },
+    {
+      name: 'vitals',
+      label: 'Hemodynamic Status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Unstable (hypotension, tachycardia)', points: 0 },
+        { label: 'Stable', points: 1 },
+      ],
+    },
+    {
+      name: 'mental',
+      label: 'Mental Status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Altered mental status', points: 0 },
+        { label: 'Normal', points: 1 },
+      ],
+    },
+    {
+      name: 'labs',
+      label: 'Laboratory Abnormalities',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Severe (thrombocytopenia <50k, Cr >2, elevated bili)', points: 0 },
+        { label: 'Mild abnormalities', points: 1 },
+        { label: 'Normal', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ malaria, vitals, mental, labs }) => {
+    if (malaria === 0) {
+      return {
+        value: 'ADMIT-ICU',
+        label: '⚠️ ADMIT - ICU',
+        description: `**MANDATORY ADMISSION**\n\n**P. falciparum malaria = MEDICAL EMERGENCY**\n\n• ICU admission\n• ID consultation\n• CDC Malaria Hotline: 770-488-7788 (business) or 770-488-7100 (after hours)\n• Start treatment immediately\n• Can deteriorate within 24-36 hours\n\n**TREATMENT:**\n• IV artesunate (first-line via CDC)\n• Alternative: IV quinidine + doxycycline`,
+        colorVar: '--color-critical',
+      };
+    }
+
+    if (vitals === 0 || mental === 0) {
+      return {
+        value: 'ADMIT-ICU',
+        label: '⚠️ ADMIT - ICU',
+        description: `**MANDATORY ADMISSION**\n\n**Critical illness:**\n• Hemodynamic instability OR altered mental status\n• ICU level care required\n• ID consultation\n• Broad infectious workup\n• Empiric treatment as indicated\n\n**DDx:**\n• Severe dengue (shock syndrome)\n• Meningococcal sepsis\n• Cerebral malaria\n• Severe leptospirosis\n• Typhoid with complications`,
+        colorVar: '--color-critical',
+      };
+    }
+
+    if (malaria === 3) {
+      return {
+        value: 'ADMIT-OBSERVATION',
+        label: 'ADMIT - Observation',
+        description: `**ADMIT FOR OBSERVATION**\n\n**Pending malaria testing from endemic area:**\n• Low threshold for admission\n• Complete malaria workup (repeat q12-24h x3)\n• Expedited infectious workup\n• Can deteriorate rapidly if malaria\n\n**DISCHARGE ONLY IF:**\n• Malaria ruled out (3 negative tests)\n• Alternative diagnosis confirmed\n• Hemodynamically stable\n• Reliable for outpatient follow-up`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (malaria === 1 && (labs === 0 || vitals === 0)) {
+      return {
+        value: 'ADMIT',
+        label: 'ADMIT - Floor',
+        description: `**ADMISSION RECOMMENDED**\n\n**Non-falciparum malaria with complications OR severe labs:**\n• Floor admission\n• ID consultation\n• Treatment initiation\n• Monitor for complications\n\n**Species:** P. vivax, P. ovale, P. malariae generally less severe but still require treatment and monitoring.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (labs === 0) {
+      return {
+        value: 'ADMIT',
+        label: 'ADMIT - Floor',
+        description: `**ADMISSION RECOMMENDED**\n\n**Severe laboratory abnormalities:**\n• Thrombocytopenia <50k\n• Renal dysfunction (Cr >2)\n• Elevated bilirubin\n• Other organ dysfunction\n\n**WORKUP:**\n• Complete infectious evaluation\n• ID consultation\n• Monitor for clinical deterioration\n\n**Consider:** dengue, malaria, leptospirosis, typhoid`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (malaria === 2 && vitals === 1 && mental === 1 && (labs === 2 || labs === 1)) {
+      return {
+        value: 'DISCHARGE',
+        label: '✓ Safe for Discharge',
+        description: `**SAFE DISCHARGE CRITERIA MET**\n\n**Requirements:**\n☑ Hemodynamically stable\n☑ Normal mental status\n☑ Malaria ruled out\n☑ No severe lab abnormalities\n\n**DISCHARGE PLAN:**\n• **ID follow-up within 24-48 hours** (arrange before discharge)\n• Complete diagnostic workup as outpatient (stool studies, serology)\n• **Return precautions**: fever, bleeding, confusion, persistent vomiting, SOB, inability to tolerate PO\n• Provide empiric treatment if indicated\n\n**EXAMPLES:**\n• Mild traveler's diarrhea → azithromycin, hydration\n• Suspected dengue (stable) → acetaminophen, close f/u\n• Mild viral syndrome → supportive care, ID f/u`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'ASSESS',
+      label: 'Clinical Judgment Required',
+      description: `**BORDERLINE CASE - USE CLINICAL JUDGMENT**\n\n**ADMIT IF:**\n• Undiagnosed undifferentiated fever\n• Diagnostic uncertainty\n• Unable to arrange reliable outpatient follow-up\n• Patient/family concern\n• Social factors\n\n**DISCHARGE IF:**\n• Clear diagnosis with outpatient treatment plan\n• Reliable follow-up within 24-48 hours\n• Patient understands return precautions\n• Tolerating PO fluids/medications\n\n**LOW THRESHOLD FOR ADMISSION** in returned travelers with unexplained illness.`,
+      colorVar: '--color-text-secondary',
+    };
+  },
+};
+
+const TI_ISOLATION_PRECAUTIONS_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-isolation',
+  title: 'Isolation Precautions',
+  subtitle: 'CDC isolation guidelines for travel infections',
+  description: 'CDC isolation guidelines for travel infections',
+  fields: [
+    {
+      name: 'presentation',
+      label: 'Clinical Presentation',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Respiratory distress', points: 0 },
+        { label: 'Hemorrhagic symptoms (bleeding)', points: 1 },
+        { label: 'Suspected measles (rash + fever)', points: 2 },
+        { label: 'Suspected meningococcal disease', points: 3 },
+        { label: 'Suspected TB', points: 4 },
+        { label: 'Fever only (no above features)', points: 5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ presentation }) => {
+    const presentationMap: Record<number, string> = {
+      0: 'respiratory-distress',
+      1: 'hemorrhagic',
+      2: 'suspected-measles',
+      3: 'meningococcal',
+      4: 'suspected-tb',
+      5: 'fever-only',
+    };
+
+    const presentationVal = presentationMap[presentation as number] || 'fever-only';
+
+    const precautions: Record<string, { level: string; details: string; duration: string }> = {
+      'respiratory-distress': {
+        level: '⚠️ AIRBORNE + CONTACT',
+        details: '**PRECAUTIONS:**\n• AIIR room (negative pressure)\n• N95 respirator for all staff\n• Gown and gloves\n• Eye protection\n\n**RULE OUT:**\n• MERS-CoV (Middle East, camel/healthcare)\n• Avian influenza (Asia, poultry contact)\n• Tuberculosis\n• Measles\n• COVID-19 variants',
+        duration: 'Until diagnosis confirmed or ruled out',
+      },
+      'hemorrhagic': {
+        level: '⚠️ CONTACT + DROPLET',
+        details: '**PRECAUTIONS:**\n• Private room\n• Gown and gloves\n• Face mask/eye protection\n• Limit staff exposure\n\n**NOTIFY IMMEDIATELY:**\n• Infection control\n• Public health\n• CDC (viral hemorrhagic fever)\n\n**RULE OUT:**\n• Viral hemorrhagic fever (Ebola, Lassa, etc.)\n• Severe dengue (dengue hemorrhagic fever)\n• Meningococcemia',
+        duration: 'Until diagnosis confirmed',
+      },
+      'suspected-measles': {
+        level: '⚠️ AIRBORNE',
+        details: '**PRECAUTIONS:**\n• **AIIR room (negative pressure)** - CRITICAL\n• **N95 respirator** for all staff\n• Limit staff to immune only if possible\n\n**DURATION:**\n• **4 days after rash onset** (Day 0 = rash onset)\n\n**IMMEDIATE ACTIONS:**\n• Measles PCR (nasopharyngeal, urine)\n• **Notify public health immediately**\n• Contact tracing\n• PEP for unvaccinated contacts (MMR <72hr or IG <6 days)\n\n**2026 ALERT:**\n1,671 US cases (highest since 2000). Most from unvaccinated travelers.',
+        duration: '4 days after rash onset',
+      },
+      'meningococcal': {
+        level: '⚠️ DROPLET',
+        details: "**PRECAUTIONS:**\n• Private room\n• Surgical mask for staff within 3 feet\n• Gown and gloves for contact\n\n**DURATION:**\n• 24 hours after effective antibiotic initiated\n\n**IMMEDIATE ACTIONS:**\n• Blood cultures\n• LP (if no contraindications)\n• Start ceftriaxone 2g IV (don't delay for LP)\n• **Notify public health** (contact prophylaxis needed)\n\n**PROPHYLAXIS:**\nClose contacts need ciprofloxacin or ceftriaxone within 24 hours",
+        duration: '24 hours after antibiotics started',
+      },
+      'suspected-tb': {
+        level: '⚠️ AIRBORNE',
+        details: '**PRECAUTIONS:**\n• AIIR room (negative pressure)\n• N95 respirator for all staff\n• Keep door closed\n\n**DURATION:**\n• Until 3 negative AFB sputum smears OR diagnosis ruled out\n\n**WORKUP:**\n• CXR (upper lobe cavitary lesions)\n• Sputum AFB smear x3 (early morning)\n• Sputum culture & NAAT\n• IGRA or TST\n\n**CONSULTATION:**\n• ID before starting treatment\n• Public health if confirmed',
+        duration: '3 negative AFB smears or diagnosis excluded',
+      },
+      'fever-only': {
+        level: 'STANDARD',
+        details: '**PRECAUTIONS:**\n• Standard precautions\n• Hand hygiene\n• Source isolation (private room if available)\n• Respiratory etiquette\n\n**UPGRADE IF:**\n• Develops respiratory symptoms → airborne\n• Develops hemorrhagic symptoms → contact + droplet\n• Develops rash → consider measles (airborne)\n• Confirmed meningococcal → droplet\n\n**WORKUP:**\n• Complete infectious evaluation\n• Malaria testing if from endemic area\n• Dengue/arboviral if indicated\n• Blood cultures if septic',
+        duration: 'Reassess based on diagnosis',
+      },
+    };
+
+    const p = precautions[presentationVal] || precautions['fever-only'];
+
+    return {
+      value: presentationVal,
+      label: p.level,
+      description: `${p.details}\n\n**DURATION:**\n${p.duration}`,
+      colorVar: presentationVal === 'fever-only' ? '--color-primary' : '--color-critical',
+    };
+  },
+};
+
+const TI_CDC_RESOURCES_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-cdc-resources',
+  title: 'CDC Resources & Hotlines',
+  subtitle: 'Quick access to CDC travel health resources',
+  description: 'Quick access to CDC travel health resources',
+  fields: [
+    {
+      name: 'resource',
+      label: 'Resource Needed',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Malaria Hotline & Treatment', points: 0 },
+        { label: 'Yellow Book / Post-Travel Evaluation', points: 1 },
+        { label: 'Current Travel Notices & Outbreaks', points: 2 },
+        { label: 'Dengue/Chikungunya/Zika', points: 3 },
+        { label: 'Typhoid & Enteric Fever', points: 4 },
+        { label: 'Rickettsial Diseases', points: 5 },
+        { label: "Traveler's Diarrhea", points: 6 },
+        { label: 'Measles Information', points: 7 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [],
+  computeResult: ({ resource }) => {
+    const resourceMap: Record<number, string> = {
+      0: 'malaria',
+      1: 'yellow-book',
+      2: 'travel-notices',
+      3: 'arboviral',
+      4: 'typhoid',
+      5: 'rickettsial',
+      6: 'diarrhea',
+      7: 'measles',
+    };
+
+    const resourceVal = resourceMap[resource as number] || 'yellow-book';
+
+    const resources: Record<string, { info: string; links: string }> = {
+      'malaria': {
+        info: '**CDC MALARIA HOTLINE (24/7):**\n\n• **Business Hours (9am-5pm ET Mon-Fri):**\n  - 770-488-7788\n  - Toll-free: 855-856-4713\n\n• **After Hours / Weekends:**\n  - 770-488-7100 (CDC Emergency Operations Center)\n  - Ask for Malaria Branch on-call\n\n**IV ARTESUNATE:**\nAvailable through CDC for severe malaria',
+        links: '**LINKS:**\n• Diagnosis: https://www.cdc.gov/malaria/hcp/diagnosis-testing/\n• Treatment: https://www.cdc.gov/malaria/hcp/clinical-guidance/diagnosis-treatment.html',
+      },
+      'yellow-book': {
+        info: '**CDC YELLOW BOOK 2026:**\n\nComprehensive resource for travel health',
+        links: '**LINKS:**\n• Yellow Book Home: https://www.cdc.gov/yellow-book/\n• Post-Travel Evaluation: https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/\n• Fever in Returned Traveler: https://wwwnc.cdc.gov/travel/yellowbook/2024/posttravel-evaluation/fever-in-the-returned-traveler\n• NCBI Bookshelf: https://www.ncbi.nlm.nih.gov/books/NBK620896/',
+      },
+      'travel-notices': {
+        info: '**CURRENT TRAVEL HEALTH NOTICES:**\n\n2026 Outbreaks:\n• Dengue: Colombia, Cuba, Nicaragua, Puerto Rico, Samoa, Philippines\n• Chikungunya: Cuba, Suriname, Bolivia\n• Measles: 1,671 US cases (highest since 2000)\n• COVID-19: BA.3.2 "Cicada" variant (23+ countries)',
+        links: '**LINKS:**\n• Travel Notices: https://wwwnc.cdc.gov/travel/notices\n• Disease Outbreak News: https://www.who.int/emergencies/disease-outbreak-news',
+      },
+      'arboviral': {
+        info: '**DENGUE, CHIKUNGUNYA, ZIKA:**\n\n• No specific treatment\n• NO NSAIDs until dengue ruled out\n• Acetaminophen only\n• Monitor for warning signs\n• 2026: active outbreaks in Americas, Asia, Africa',
+        links: '**LINKS:**\n• Chikungunya: https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/chikungunya.html\n• Zika: https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/zika.html\n• Dengue: https://www.cdc.gov/dengue/',
+      },
+      'typhoid': {
+        info: '**TYPHOID & PARATYPHOID FEVER:**\n\n• Incubation: 7-21 days\n• Iraq/Pakistan: ceftriaxone-resistant → use azithromycin or carbapenem\n• Other regions: ceftriaxone first-line\n• Blood cultures before antibiotics',
+        links: '**LINKS:**\n• CDC Typhoid: https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html\n• StatPearls: https://www.ncbi.nlm.nih.gov/books/NBK557513/',
+      },
+      'rickettsial': {
+        info: "**RICKETTSIAL INFECTIONS:**\n\n• Eschar = pathognomonic\n• START DOXYCYCLINE IMMEDIATELY\n• Don't wait for serology\n• Case fatality 20-40% if delayed\n• Excellent outcomes if early treatment",
+        links: '**LINKS:**\n• CDC Rickettsial 2026: https://www.ncbi.nlm.nih.gov/books/NBK620978/\n• StatPearls: https://www.ncbi.nlm.nih.gov/books/NBK431127/',
+      },
+      'diarrhea': {
+        info: "**TRAVELER'S DIARRHEA:**\n\n• Acute (<2 weeks): bacterial/viral\n• Persistent (>2 weeks): parasites (Giardia, Crypto, E. histolytica)\n• Azithromycin first-line for moderate-severe\n• Serial stool O&P x3 for persistent",
+        links: "**LINKS:**\n• CDC Travelers' Diarrhea: https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/travelers-diarrhea.html\n• Post-Travel Diarrhea: https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-diarrhea.html\n• StatPearls: https://www.ncbi.nlm.nih.gov/books/NBK459348/",
+      },
+      'measles': {
+        info: '**MEASLES 2026:**\n\n• 1,671 US cases (highest since 2000)\n• AIRBORNE ISOLATION (AIIR, N95)\n• Duration: 4 days after rash onset\n• Notify public health immediately\n• PEP: MMR <72hr or IG <6 days',
+        links: '**LINKS:**\n• CDC Measles Cases: https://www.cdc.gov/measles/data-research/\n• Infection Control: https://www.cdc.gov/infection-control/hcp/measles/',
+      },
+    };
+
+    const r = resources[resourceVal] || resources['yellow-book'];
+
+    return {
+      value: resourceVal,
+      label: 'CDC Resource',
+      description: `${r.info}\n\n${r.links}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // TIA Workup
   'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -25443,6 +26061,13 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cig-symptom-assessment': CIG_SYMPTOM_CALCULATOR,
   'cig-mannitol-protocol': CIG_MANNITOL_CALCULATOR,
   'cig-disposition': CIG_DISPOSITION_CALCULATOR,
+  // Traveler Infections
+  'ti-syndrome-ddx': TI_SYNDROME_DDX_CALCULATOR,
+  'ti-malaria-ppx': TI_MALARIA_PROPHYLAXIS_CALCULATOR,
+  'ti-empiric-tx': TI_EMPIRIC_TREATMENT_CALCULATOR,
+  'ti-admission': TI_ADMISSION_CRITERIA_CALCULATOR,
+  'ti-isolation': TI_ISOLATION_PRECAUTIONS_CALCULATOR,
+  'ti-cdc-resources': TI_CDC_RESOURCES_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

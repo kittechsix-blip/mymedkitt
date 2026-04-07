@@ -727,6 +727,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ciguatera.js');
       return { nodes: m.CIGUATERA_NODES, entryNodeId: 'cig-start', categoryId: 'toxicology', moduleLabels: m.CIGUATERA_MODULE_LABELS, citations: m.CIGUATERA_CITATIONS };
     },
+    'traveler-infections': async () => {
+      const m = await import('../data/trees/traveler-infections.js');
+      return { nodes: m.TRAVELER_INFECTIONS_NODES, entryNodeId: 'ti-start', categoryId: 'infectious-disease', moduleLabels: m.TRAVELER_INFECTIONS_MODULE_LABELS, citations: m.TRAVELER_INFECTIONS_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

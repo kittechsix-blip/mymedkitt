@@ -225,6 +225,7 @@ const TREE_REGISTRY = {
   'tia-workup':           { prefix: 'TIA_WORKUP',           entryNodeId: 'tia-start',        categoryId: 'neurology' },
   'peripartum-cardiomyopathy': { prefix: 'PERIPARTUM_CARDIOMYOPATHY', entryNodeId: 'ppcm-start', categoryId: 'ob-gyn' },
   'ciguatera':            { prefix: 'CIGUATERA',            entryNodeId: 'cig-start',        categoryId: 'toxicology' },
+  'traveler-infections':  { prefix: 'TRAVELER_INFECTIONS',  entryNodeId: 'ti-start',          categoryId: 'infectious-disease' },
 };
 
 const CROSS_LISTINGS = {
