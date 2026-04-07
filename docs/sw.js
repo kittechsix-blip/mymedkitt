@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v434';
+const CACHE_NAME = 'medkitt-v435';
 
 const ASSETS_TO_CACHE = [
   './',
