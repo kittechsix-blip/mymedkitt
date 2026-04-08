@@ -539,6 +539,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'splint', label: 'Splint', icon: '🩹', action: 'jump', target: 'avulsion-splint' },
         { id: 'meds', label: 'Meds', icon: '💊', action: 'jump', target: 'avulsion-meds' },
     ],
+    'dental-trauma': [
+        { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'dental-trauma-steps' },
+        { id: 'ellis', label: 'Ellis Fx', icon: '🦷', action: 'jump', target: 'dental-ellis1' },
+        { id: 'avulsion', label: 'Avulsion', icon: '🩸', action: 'jump', target: 'dental-avulsion-permanent' },
+        { id: 'luxation', label: 'Luxation', icon: '↔️', action: 'jump', target: 'dental-luxation-lateral' },
+        { id: 'splint', label: 'Splint', icon: '🩹', action: 'jump', target: 'dental-splint-flexible' },
+    ],
     'eclampsia': [
         { id: 'map', label: 'MAP', icon: '📊', action: 'calculator', target: 'map-calculator' },
         { id: 'mag-load', label: 'Mag Load', icon: '💉', action: 'jump', target: 'eclampsia-mag-loading' },
@@ -711,6 +718,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'phenyl-card', label: 'Phenyl Card', icon: '💊', action: 'calculator', target: 'pdp-phenyl-quick' },
         { id: 'epi-prep', label: 'Epi Prep', icon: '🧪', action: 'jump', target: 'pdp-epi-prep' },
         { id: 'phenyl-prep', label: 'Phenyl Prep', icon: '🔬', action: 'jump', target: 'pdp-phenyl-prep' },
+    ],
+    'pta-drainage': [
+        { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'pta-steps' },
+        { id: 'pocus', label: 'POCUS', icon: '🔊', action: 'jump', target: 'pta-pocus' },
+        { id: 'aspiration', label: 'Aspiration', icon: '💉', action: 'jump', target: 'pta-aspiration-technique' },
+        { id: 'i-d', label: 'I&D', icon: '🔪', action: 'jump', target: 'pta-id-technique' },
+        { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'pta-antibiotics' },
     ],
     'refractory-vfvt': [
         { id: 'dsd', label: 'DSD', icon: '⚡', action: 'jump', target: 'rvf-dsd-decision' },

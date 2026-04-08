@@ -9395,6 +9395,90 @@ const EPISTAXIS_SUMMARY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Dental Trauma
+// -------------------------------------------------------------------
+
+const DENTAL_TRAUMA_STEPS: InfoPage = {
+  id: 'dental-trauma-steps',
+  title: 'Dental Trauma Steps Summary',
+  subtitle: 'Comprehensive ED approach to tooth injuries',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Examine dentition systematically](#/node/dental-trauma-start)\n• Count and document all teeth (note missing, broken, loose)\n• Primary (baby) vs Permanent tooth distinction is critical\n• **Missing fragments:** If not located, CXR to rule out aspiration',
+    },
+    {
+      heading: '2. Ellis Classification (Crown Fractures)',
+      body: '• **[Ellis I — Enamel only](#/node/dental-ellis1):** Smooth edges, no Tx needed in ED\n• **[Ellis II — Dentin exposed](#/node/dental-ellis2):** Yellow/sensitive layer, Calcium hydroxide cover\n• **[Ellis III — Pulp exposed](#/node/dental-ellis3):** Pink/bleeding tissue, EMERGENCY - Ca(OH)2 + same-day dental',
+    },
+    {
+      heading: '3. Luxation Injuries',
+      body: '• **Concussion/Subluxation:** Soft diet, observe\n• **[Lateral luxation](#/node/dental-luxation-lateral):** Reposition with firm pressure + splint\n• **[Extrusive luxation](#/node/dental-luxation-extrusive):** Reposition into socket + splint\n• **[Intrusive luxation](#/node/dental-luxation-intrusive):** Most severe - allow spontaneous eruption or surgical repositioning',
+    },
+    {
+      heading: '4. Avulsion Management',
+      body: '• **[Permanent tooth](#/node/dental-avulsion-permanent):** TIME IS TOOTH - reimplant within 60 min!\n  - Store in milk, HBSS, saliva (NOT water)\n  - Handle by crown only, rinse debris gently\n  - Reimplant, splint, antibiotics, tetanus\n• **[Primary tooth](#/node/dental-avulsion-primary):** NEVER reimplant (damages permanent bud)',
+    },
+    {
+      heading: '5. Splinting',
+      body: '• [Flexible splint preferred](#/node/dental-splint-flexible): Coe-Pak, wire + composite\n• Duration varies by injury:\n  - Avulsion: 7-14 days\n  - Lateral luxation: 4 weeks\n  - Root fracture: 4-8 weeks\n• Patient should avoid biting on injured teeth',
+    },
+    {
+      heading: '6. Antibiotics & Follow-up',
+      body: '• [Doxycycline or Penicillin V for avulsion/open fractures](#/node/dental-disposition)\n• Tetanus prophylaxis if needed\n• Dental follow-up: 24-48h for severe, 1 week for mild\n• Long-term: Root resorption monitoring',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'International Association of Dental Traumatology (IADT). Guidelines for the Management of Traumatic Dental Injuries. 2020.' },
+    { num: 2, text: 'Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. Chapter on Dental Procedures.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// PTA Drainage
+// -------------------------------------------------------------------
+
+const PTA_STEPS: InfoPage = {
+  id: 'pta-steps',
+  title: 'PTA Drainage Steps Summary',
+  subtitle: 'Peritonsillar abscess aspiration & I&D',
+  sections: [
+    {
+      heading: '1. Diagnosis',
+      body: '• [Classic triad](#/node/pta-start): Severe sore throat, "hot potato" voice, trismus\n• Uvular deviation to opposite side\n• Unilateral tonsillar swelling and exudate\n• Differentiate from peritonsillar cellulitis (no drainable pus)',
+    },
+    {
+      heading: '2. POCUS',
+      body: '• [Intraoral ultrasound](#/node/pta-pocus): High-frequency linear probe with cover\n• Sensitivity 91%, specificity 82%\n• Differentiates abscess vs cellulitis\n• Measures depth, identifies carotid (typically >2.5 cm lateral)',
+    },
+    {
+      heading: '3. Preparation',
+      body: '• Position: Sitting upright (aspiration risk)\n• Topical anesthesia: Benzocaine spray or cetacaine\n• Injection: [Lidocaine with epinephrine](#/node/pta-anesthesia) - inject superficially at puncture site\n• Have suction ready',
+    },
+    {
+      heading: '4. Needle Aspiration',
+      body: '• [18G needle on 10-20 mL syringe](#/node/pta-aspiration-technique)\n• **DEPTH LIMIT: 8-10mm maximum** (mark needle depth!)\n• Target superior pole of tonsil (70% of abscesses here)\n• Aspirate while advancing slowly\n• Redirect medially if no pus\n• Success: 90-95% resolution with repeat aspiration PRN',
+    },
+    {
+      heading: '5. Incision & Drainage (if aspiration fails)',
+      body: '• [#11 or #15 blade](#/node/pta-id-technique), guard with tape at 1 cm\n• Stab incision at most fluctuant point\n• Spread with hemostat to break loculations\n• Express pus with external massage\n• Irrigate with saline',
+    },
+    {
+      heading: '6. Antibiotics',
+      body: '• [Clindamycin 300-450 mg PO TID x 10 days](#/node/pta-antibiotics) (best anaerobic coverage)\n• OR Amoxicillin-clavulanate 875/125 mg BID\n• Add metronidazole to PCN if anaerobic coverage needed\n• Pain control: NSAIDs, viscous lidocaine gargle',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [Most patients discharged](#/node/pta-disposition)\n• Admit if: Airway concern, severe trismus, dehydration, immunocompromised, I&D failure\n• ENT follow-up in 24-48 hours\n• Tonsillectomy consideration for recurrent PTA',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. Chapter 65: Incision and Drainage.' },
+    { num: 2, text: 'Lyon M, Blaivas M. Intraoral ultrasound in the diagnosis and treatment of suspected peritonsillar abscess. Acad Emerg Med. 2005.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Massive Transfusion Protocol
 // -------------------------------------------------------------------
 
@@ -11539,6 +11623,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pelvic-rug-procedure': PELVIC_RUG_PROCEDURE,
   'mtp-summary': MTP_SUMMARY,
   'epistaxis-summary': EPISTAXIS_SUMMARY,
+  'dental-trauma-steps': DENTAL_TRAUMA_STEPS,
+  'pta-steps': PTA_STEPS,
   'caustic-summary': CAUSTIC_SUMMARY,
   'caustic-zargar': CAUSTIC_ZARGAR,
   'caustic-contraindications': CAUSTIC_CONTRAINDICATIONS,

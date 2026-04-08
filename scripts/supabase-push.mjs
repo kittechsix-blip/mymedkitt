@@ -236,6 +236,8 @@ const TREE_REGISTRY = {
   'adult-uti':            { prefix: 'ADULT_UTI',            entryNodeId: 'uti-start',         categoryId: 'urology' },
   'ttp':                  { prefix: 'TTP',                  entryNodeId: 'ttp-start',         categoryId: 'heme-onc' },
   'tracheo-innominate-fistula': { prefix: 'TRACHEO_INNOMINATE_FISTULA', entryNodeId: 'tif-start', categoryId: 'anesthesia-airway' },
+  'dental-trauma':       { prefix: 'DENTAL_TRAUMA',        entryNodeId: 'dental-trauma-start', categoryId: 'emergency-medicine' },
+  'pta-drainage':        { prefix: 'PTA_DRAINAGE',         entryNodeId: 'pta-start',          categoryId: 'procedures' },
 };
 
 const CROSS_LISTINGS = {

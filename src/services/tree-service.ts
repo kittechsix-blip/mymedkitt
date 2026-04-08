@@ -294,6 +294,8 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'code-status': async () => (await import('../data/trees/code-status.js')).CODE_STATUS_CRITICAL_ACTIONS,
     'human-trafficking': async () => (await import('../data/trees/human-trafficking.js')).HUMAN_TRAFFICKING_CRITICAL_ACTIONS,
     'dental-avulsion': async () => (await import('../data/trees/dental-avulsion.js')).DENTAL_AVULSION_CRITICAL_ACTIONS,
+    'dental-trauma': async () => (await import('../data/trees/dental-trauma.js')).DENTAL_TRAUMA_CRITICAL_ACTIONS,
+    'pta-drainage': async () => (await import('../data/trees/pta-drainage.js')).PTA_DRAINAGE_CRITICAL_ACTIONS,
     'heat-stroke': async () => (await import('../data/trees/heat-stroke.js')).HEAT_STROKE_CRITICAL_ACTIONS,
     'hypothermia': async () => (await import('../data/trees/hypothermia.js')).HYPOTHERMIA_CRITICAL_ACTIONS,
     'awake-intubation': async () => (await import('../data/trees/awake-intubation.js')).AWAKE_INTUBATION_CRITICAL_ACTIONS,
@@ -847,6 +849,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'dental-avulsion': async () => {
       const m = await import('../data/trees/dental-avulsion.js');
       return { nodes: m.DENTAL_AVULSION_NODES, entryNodeId: 'avulsion-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_AVULSION_MODULE_LABELS, citations: m.DENTAL_AVULSION_CITATIONS, criticalActions: m.DENTAL_AVULSION_CRITICAL_ACTIONS };
+    },
+    'dental-trauma': async () => {
+      const m = await import('../data/trees/dental-trauma.js');
+      return { nodes: m.DENTAL_TRAUMA_NODES, entryNodeId: 'dental-trauma-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_TRAUMA_MODULE_LABELS, citations: m.DENTAL_TRAUMA_CITATIONS, criticalActions: m.DENTAL_TRAUMA_CRITICAL_ACTIONS };
+    },
+    'pta-drainage': async () => {
+      const m = await import('../data/trees/pta-drainage.js');
+      return { nodes: m.PTA_DRAINAGE_NODES, entryNodeId: 'pta-start', categoryId: 'procedures', moduleLabels: m.PTA_DRAINAGE_MODULE_LABELS, citations: m.PTA_DRAINAGE_CITATIONS, criticalActions: m.PTA_DRAINAGE_CRITICAL_ACTIONS };
     },
     'heat-stroke': async () => {
       const m = await import('../data/trees/heat-stroke.js');
