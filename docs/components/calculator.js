@@ -515,7 +515,7 @@ const FWD_CALCULATOR = {
         return {
             value: `${deficitRounded} L`,
             label,
-            description: `TBW: ${Math.round(tbw * 10) / 10} L (${weight} kg \u00D7 ${tbwFactor}). Replace over 48-72h for chronic hypernatremia. Account for ongoing losses.`,
+            description: `**TOTAL BODY WATER:** ${Math.round(tbw * 10) / 10} L (${weight} kg × ${tbwFactor})\n\n**FREE WATER DEFICIT:** **${deficitRounded} L**\n\n**REPLACEMENT:** Replace over 48–72h for chronic hypernatremia\n\n**NOTE:** Account for ongoing losses`,
             colorVar,
         };
     },
@@ -601,7 +601,7 @@ const CORRECTED_NA_CALCULATOR = {
         return {
             value: `${correctedNa} mEq/L`,
             label,
-            description: `Correction: +${Math.round(correction * 10) / 10} mEq/L (factor: ${factorNote}). ${correctedNa >= 135 ? 'Hyponatremia is translocational — treat hyperglycemia, not sodium.' : 'True hypotonic hyponatremia coexists with hyperglycemia — proceed with hyponatremia workup.'}`,
+            description: `**MEASURED NA:** ${na} mEq/L\n\n**CORRECTION:** +${Math.round(correction * 10) / 10} mEq/L (${factorNote})\n\n**CORRECTED NA:** **${correctedNa} mEq/L**\n\n**INTERPRETATION:** ${correctedNa >= 135 ? 'Hyponatremia is translocational — treat hyperglycemia, not sodium.' : 'True hypotonic hyponatremia coexists with hyperglycemia — proceed with hyponatremia workup.'}`,
             colorVar,
         };
     },
@@ -1119,7 +1119,7 @@ const RULE_OF_10_CALCULATOR = {
         return {
             value: `${totalRate} mL/hr`,
             label: 'Initial LR Rate',
-            description: `Base rate: ${tbsa}% x 10 = ${baseRate} mL/hr${weightNote}. Total: ${totalRate} mL/hr LR. Titrate to UOP 0.5-1 mL/kg/hr.`,
+            description: `**BASE RATE:** ${tbsa}% × 10 = ${baseRate} mL/hr${weightAdj > 0 ? `\n\n**WEIGHT ADJUSTMENT:** +${weightAdj} mL/hr (${Math.floor((weight - 80) / 10)} × 100 for ${weight - 80} kg above 80 kg)` : ''}\n\n**TOTAL RATE:** **${totalRate} mL/hr LR**\n\n**TITRATE TO:** UOP 0.5–1 mL/kg/hr`,
             colorVar,
         };
     },
@@ -1168,9 +1168,7 @@ const PARKLAND_CALCULATOR = {
             const volumeRemaining = firstHalf - volumeGivenFirst8;
             currentRate = Math.round(volumeRemaining / remainingFirst8);
             rateLabel = `First 8h Rate`;
-            desc = `24h total: ${Math.round(total24h).toLocaleString()} mL LR. First 8h: ${Math.round(firstHalf).toLocaleString()} mL (${Math.round(firstHalf / 8)} mL/hr). ` +
-                `${hoursElapsed > 0 ? `${hoursElapsed}h elapsed — remaining ${Math.round(volumeRemaining).toLocaleString()} mL over ${remainingFirst8}h = ` : ''}${currentRate} mL/hr. ` +
-                `Next 16h: ${Math.round(secondHalf).toLocaleString()} mL (${Math.round(secondHalf / 16)} mL/hr).`;
+            desc = `**24H TOTAL:** ${Math.round(total24h).toLocaleString()} mL LR\n\n**FIRST 8H:** ${Math.round(firstHalf).toLocaleString()} mL (${Math.round(firstHalf / 8)} mL/hr)\n\n${hoursElapsed > 0 ? `**${hoursElapsed}H ELAPSED:** Remaining ${Math.round(volumeRemaining).toLocaleString()} mL over ${remainingFirst8}h = **${currentRate} mL/hr**\n\n` : ''}**NEXT 16H:** ${Math.round(secondHalf).toLocaleString()} mL (${Math.round(secondHalf / 16)} mL/hr)`;
         }
         else {
             const remainingSecond16 = 24 - hoursElapsed;
@@ -1179,8 +1177,7 @@ const PARKLAND_CALCULATOR = {
             const volumeRemaining = secondHalf - volumeGivenSecond;
             currentRate = Math.round(volumeRemaining / remainingSecond16);
             rateLabel = `Next 16h Rate`;
-            desc = `24h total: ${Math.round(total24h).toLocaleString()} mL LR. First 8h phase complete (${Math.round(firstHalf).toLocaleString()} mL). ` +
-                `${hoursIntoSecondPhase > 0 ? `${hoursIntoSecondPhase}h into second phase — remaining ${Math.round(volumeRemaining).toLocaleString()} mL over ${remainingSecond16}h = ` : ''}${currentRate} mL/hr.`;
+            desc = `**24H TOTAL:** ${Math.round(total24h).toLocaleString()} mL LR\n\n**FIRST 8H:** Complete (${Math.round(firstHalf).toLocaleString()} mL)\n\n${hoursIntoSecondPhase > 0 ? `**${hoursIntoSecondPhase}H INTO SECOND PHASE:** Remaining ${Math.round(volumeRemaining).toLocaleString()} mL over ${remainingSecond16}h = **${currentRate} mL/hr**` : `**NEXT 16H RATE:** ${currentRate} mL/hr`}`;
         }
         let colorVar;
         if (tbsa < 20) {
@@ -1247,10 +1244,7 @@ const DELL_SETON_CALCULATOR = {
             return {
                 value: `${startingRate} mL/hr FFP`,
                 label: 'Tier 2: Immediate FFP + Trialysis',
-                description: `TBSA >=40% — Start FFP at ${startingRate} mL/hr (Rule of 10s: ${tbsa}% x 10${weightAdj > 0 ? ` + ${weightAdj} weight adj` : ''}). ` +
-                    `Volume cap: ${volumeCap.toLocaleString()} mL (20 cc x ${tbsa}% x ${weight} kg). ` +
-                    `Initiate TRIALYSIS immediately (LR + FFP + albumin). Titrate to UOP 0.5-1 mL/kg/hr. ` +
-                    `Consider vasopressin if rate exceeds cap.`,
+                description: `**STARTING RATE:** FFP at **${startingRate} mL/hr** (Rule of 10s: ${tbsa}% × 10${weightAdj > 0 ? ` + ${weightAdj} weight adj` : ''})\n\n**VOLUME CAP:** ${volumeCap.toLocaleString()} mL (20 cc × ${tbsa}% × ${weight} kg)\n\n**TRIALYSIS:** Initiate immediately\n• LR + FFP + Albumin\n\n**TITRATE TO:** UOP 0.5–1 mL/kg/hr\n\n**ESCALATION:** Consider vasopressin if rate exceeds cap`,
                 colorVar: '--color-danger',
             };
         }
@@ -1258,10 +1252,7 @@ const DELL_SETON_CALCULATOR = {
         return {
             value: `${startingRate} mL/hr LR`,
             label: 'Tier 1: LR Start, FFP Switch',
-            description: `TBSA 20-39% — Start LR at ${startingRate} mL/hr (Rule of 10s: ${tbsa}% x 10${weightAdj > 0 ? ` + ${weightAdj} weight adj` : ''}). ` +
-                `FFP switch trigger: ${ffpSwitch.toLocaleString()} mL cumulative (15 cc x ${tbsa}% x ${weight} kg). ` +
-                `Volume cap: ${volumeCap.toLocaleString()} mL (20 cc x ${tbsa}% x ${weight} kg). ` +
-                `Titrate to UOP 0.5-1 mL/kg/hr. Switch from LR to FFP when cumulative volume reaches trigger.`,
+            description: `**STARTING RATE:** LR at **${startingRate} mL/hr** (Rule of 10s: ${tbsa}% × 10${weightAdj > 0 ? ` + ${weightAdj} weight adj` : ''})\n\n**FFP SWITCH TRIGGER:** ${ffpSwitch.toLocaleString()} mL cumulative (15 cc × ${tbsa}% × ${weight} kg)\n• Switch from LR → FFP when cumulative volume reaches trigger\n\n**VOLUME CAP:** ${volumeCap.toLocaleString()} mL (20 cc × ${tbsa}% × ${weight} kg)\n\n**TITRATE TO:** UOP 0.5–1 mL/kg/hr`,
             colorVar: '--color-warning',
         };
     },
@@ -1875,7 +1866,7 @@ const WINTERS_FORMULA_CALCULATOR = {
         return {
             value: `${low}–${high} mmHg`,
             label,
-            description: `Expected pCO2 = 1.5 × ${hco3} + 8 = ${Math.round(expectedPco2 * 10) / 10} mmHg\nExpected range: ${low}–${high} mmHg\nActual pCO2: ${pco2} mmHg\n\n${interpretation}`,
+            description: `**EXPECTED PCO2:** 1.5 × ${hco3} + 8 = **${Math.round(expectedPco2 * 10) / 10} mmHg**\n\n**EXPECTED RANGE:** ${low}–${high} mmHg\n\n**ACTUAL PCO2:** ${pco2} mmHg\n\n**INTERPRETATION:** ${interpretation}`,
             colorVar,
         };
     },
@@ -1935,7 +1926,7 @@ const OSMOLAR_GAP_CALCULATOR = {
         return {
             value: `${gap} mOsm/kg`,
             label,
-            description: `Calculated Osm = ${formula} = ${calcOsm} mOsm/kg\nMeasured Osm: ${measuredOsm} mOsm/kg\nOsmolar Gap: ${measuredOsm} − ${calcOsm} = ${gap}\n\n${interpretation}`,
+            description: `**CALCULATED OSM:** ${formula} = **${calcOsm} mOsm/kg**\n\n**MEASURED OSM:** ${measuredOsm} mOsm/kg\n\n**OSMOLAR GAP:** ${measuredOsm} − ${calcOsm} = **${gap}**\n\n**INTERPRETATION:** ${interpretation}`,
             colorVar,
         };
     },
@@ -2676,7 +2667,7 @@ const STEROID_EQUIVALENCY_CALCULATOR = {
         const mp = (ratio * 4).toFixed(1);
         const tri = (ratio * 4).toFixed(1);
         const dex = (ratio * 0.75).toFixed(1);
-        const desc = sourceName + ' ' + dose + ' mg/day equivalents: HC ' + hc + ' mg | Cortisone ' + cortisone + ' mg | Pred ' + pred + ' mg | MethylPred ' + mp + ' mg | Triam ' + tri + ' mg | Dex ' + dex + ' mg. Mineralocorticoid: High (HC, Cortisone), Low (Pred), None (MethylPred, Dex, Triam).';
+        const desc = `**SOURCE:** ${sourceName} ${dose} mg/day\n\n**EQUIVALENT DOSES:**\n• Hydrocortisone: **${hc} mg**\n• Cortisone: **${cortisone} mg**\n• Prednisone/Prednisolone: **${pred} mg**\n• Methylprednisolone: **${mp} mg**\n• Triamcinolone: **${tri} mg**\n• Dexamethasone: **${dex} mg**\n\n**MINERALOCORTICOID ACTIVITY:**\n• High: Hydrocortisone, Cortisone\n• Low: Prednisone\n• None: Methylprednisolone, Dexamethasone, Triamcinolone`;
         return { value: pred + ' mg Pred', label: 'Steroid Equivalency', description: desc, colorVar: '--color-primary' };
     },
 };
@@ -5346,7 +5337,7 @@ const FACTOR_DOSING_CALCULATOR = {
         return {
             value: `${dose.toLocaleString()} units`,
             label: `${factorName} dose`,
-            description: `${factorName}: ${dose.toLocaleString()} units IV\nTarget: ${targetLevel}% (from baseline ${baselineLevel}%)\nExpected rise: ${levelNeeded}%\nHalf-life: ${halfLife} hours\nRedose: ${redoseInterval} if ongoing treatment needed\n\nRound up to nearest whole vial.`,
+            description: `**DOSE:** ${factorName} **${dose.toLocaleString()} units** IV\n\n**TARGET LEVEL:** ${targetLevel}% (from baseline ${baselineLevel}%)\n\n**EXPECTED RISE:** ${levelNeeded}%\n\n**HALF-LIFE:** ${halfLife} hours\n\n**REDOSE:** ${redoseInterval} if ongoing treatment needed\n\n**NOTE:** Round up to nearest whole vial`,
             colorVar: targetLevel >= 80 ? '--color-danger' : '--color-primary',
         };
     },
@@ -5401,8 +5392,8 @@ const TB_DRUG_CARD_CALCULATOR = {
         const inhLatent = Math.min(Math.round(w * 15), 900);
         return {
             value: `${w} kg`,
-            label: `INH: ${inh} mg daily | RIF: ${rif} mg daily | PZA: ${pza} mg daily | EMB: ${emb} mg daily`,
-            description: `Pyridoxine B6: 25–50 mg daily | INH weekly (3HP): ${inhLatent} mg | Rifapentine: 900 mg weekly`,
+            label: 'RIPE Dosing',
+            description: `**DAILY RIPE REGIMEN (${w} KG):**\n• INH: **${inh} mg** daily (5 mg/kg, max 300)\n• RIF: **${rif} mg** daily (10 mg/kg, max 600)\n• PZA: **${pza} mg** daily (25 mg/kg, max 2000)\n• EMB: **${emb} mg** daily (15 mg/kg, max 1600)\n\n**ADJUNCTS:**\n• Pyridoxine (B6): **25–50 mg** daily (with INH)\n\n**LATENT TB (3HP WEEKLY):**\n• INH: **${inhLatent} mg** weekly (15 mg/kg, max 900)\n• Rifapentine: **900 mg** weekly`,
             colorVar: '--color-primary',
         };
     },
@@ -5803,7 +5794,7 @@ const CHF_NTG_CALCULATOR = {
             return {
                 value: 'Contraindicated',
                 label: 'SBP Too Low',
-                description: 'NTG contraindicated with SBP < 100 mmHg. Risk of profound hypotension.\n\nConsider:\n• Volume assessment (may need IVF)\n• Inotrope if cardiogenic shock\n• Alternative vasodilator at lower dose',
+                description: '**CONTRAINDICATED:** NTG with SBP < 100 mmHg — risk of profound hypotension\n\n**CONSIDER:**\n• Volume assessment (may need IVF)\n• Inotrope if cardiogenic shock\n• Alternative vasodilator at lower dose',
                 colorVar: '--color-danger',
             };
         }
@@ -13317,7 +13308,7 @@ const BIPAP_TITRATION_CALCULATOR = {
         return {
             value: '10/5 → 18-20/8',
             label: 'BiPAP Settings',
-            description: `**Starting:** iPAP 10, ePAP 5 cm H2O\\n**Target:** iPAP 18-20, ePAP 6-8 cm H2O\\n**Target Vt:** ${targetTv}-${Math.round(weight * 8)} mL (6-8 mL/kg)\\n**FiO2:** Titrate for SpO2 88-92%\\n**Backup rate:** 10-12/min\\n\\n**Reassess in 1-2h:** If no improvement (RR still >25, pH worsening), consider intubation.`,
+            description: `**STARTING:** iPAP 10, ePAP 5 cm H2O\n\n**TARGET:** iPAP 18-20, ePAP 6-8 cm H2O\n\n**TARGET VT:** ${targetTv}-${Math.round(weight * 8)} mL (6-8 mL/kg)\n\n**FIO2:** Titrate for SpO2 88-92%\n\n**BACKUP RATE:** 10-12/min\n\n**REASSESS IN 1-2H:** If no improvement (RR still >25, pH worsening), consider intubation`,
             colorVar: '--color-primary'
         };
     },
@@ -25645,7 +25636,7 @@ const ASTHMA_VENT_SETTINGS_CALCULATOR = {
         return {
             value: `TV ${tvLow}-${tvHigh} mL`,
             label: 'Vent Settings',
-            description: `**Initial Settings (${ibw} kg IBW):**\\n\\n**Mode:** Volume Control (AC/VC)\\n**Tidal Volume:** ${tvLow}-${tvHigh} mL (6-8 mL/kg IBW)\\n**Respiratory Rate:** 10-14/min (start low!)\\n**I:E Ratio:** 1:4 to 1:5 (long expiratory time)\\n**PEEP:** 0-5 cm H2O (minimal)\\n**FiO2:** 100% initially, wean for SpO2 92-95%\\n\\n**Targets:**\\n• Plateau pressure <30 cm H2O\\n• Auto-PEEP <10 cm H2O\\n• pH >7.2 (permissive hypercapnia OK)\\n\\n**Air Trapping Check:**\\nDo expiratory hold - if auto-PEEP >10:\\n• Decrease RR\\n• Increase I:E ratio\\n• Sedate/paralyze if needed\\n\\n**Sedation:** Deep sedation required\\n• Propofol + fentanyl\\n• Consider ketamine (bronchodilator)\\n• Paralysis if severe dyssynchrony`,
+            description: `**INITIAL SETTINGS (${ibw} KG IBW):**\n\n**MODE:** Volume Control (AC/VC)\n\n**TIDAL VOLUME:** ${tvLow}-${tvHigh} mL (6-8 mL/kg IBW)\n\n**RESPIRATORY RATE:** **10-14/min** (start low!)\n\n**I:E RATIO:** **1:4 to 1:5** (long expiratory time)\n\n**PEEP:** 0-5 cm H2O (minimal)\n\n**FIO2:** 100% initially, wean for SpO2 92-95%\n\n**TARGETS:**\n• Plateau pressure <30 cm H2O\n• Auto-PEEP <10 cm H2O\n• pH >7.2 (permissive hypercapnia OK)\n\n**AIR TRAPPING CHECK:**\nDo expiratory hold — if auto-PEEP >10:\n• Decrease RR\n• Increase I:E ratio\n• Sedate/paralyze if needed\n\n**SEDATION:** Deep sedation required\n• Propofol + fentanyl\n• Consider ketamine (bronchodilator)\n• Paralysis if severe dyssynchrony`,
             colorVar: '--color-primary'
         };
     },
@@ -25696,7 +25687,7 @@ const ASTHMA_IBW_CALCULATOR = {
         return {
             value: `${ibw} kg`,
             label: 'Ideal Body Weight',
-            description: `**${sexLabel}, ${heightIn}" tall**\\n\\n**IBW:** ${ibw} kg\\n\\n**Tidal Volume Range:**\\n• 6 mL/kg: ${tvLow} mL\\n• 8 mL/kg: ${tvHigh} mL\\n\\n**Formula (${sexLabel}):**\\n${sex === 1 ? '50' : '45.5'} + 2.3 × (${heightIn} - 60) = ${ibw} kg`,
+            description: `**${sexLabel.toUpperCase()}, ${heightIn}" TALL**\n\n**IBW:** **${ibw} kg**\n\n**TIDAL VOLUME RANGE:**\n• 6 mL/kg: ${tvLow} mL\n• 8 mL/kg: ${tvHigh} mL\n\n**FORMULA (${sexLabel.toUpperCase()}):**\n${sex === 1 ? '50' : '45.5'} + 2.3 × (${heightIn} - 60) = ${ibw} kg`,
             colorVar: '--color-primary'
         };
     },

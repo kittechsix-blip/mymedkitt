@@ -439,6 +439,32 @@ Every consult involving an emergent procedure, resuscitation, or time-critical p
 
 **Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
 
+### Calculator Output Formatting (MANDATORY)
+
+Every calculator's output text (in `computeResult()` descriptions, `results[]` mortality/risk fields, and inline guidance text) MUST follow this formatting pattern for mobile readability:
+
+1. **BOLD, UPPERCASE step headers** — Every logical step/section starts with `**UPPERCASE HEADER:**`
+2. **Bullet points** (`•`) for list items under each header
+3. **Blank line between sections** — `\n\n` between each major step so content doesn't run together
+4. **Actionable bullets** — Each bullet is a complete, actionable statement (not just a noun)
+5. **Bold key values** — Critical parameters wrapped in `**bold**` (e.g., `**8-12 breaths/min**`)
+
+**Good example:**
+```
+**MODE:** Volume Control (AC/VC)\n\n**TIDAL VOLUME:** 360-480 mL (6-8 mL/kg IBW)\n\n**RESPIRATORY RATE:** 10-14/min (start low!)\n\n**TARGETS:**\n• Plateau pressure <30 cm H2O\n• Auto-PEEP <10 cm H2O\n• pH >7.2 (permissive hypercapnia OK)
+```
+
+**Bad example (DO NOT):**
+```
+Mode: Volume Control. TV: 360-480 mL. RR: 10-14/min. Targets: Plat <30, Auto-PEEP <10, pH >7.2.
+```
+
+**Rules:**
+- Dense single-line outputs are NEVER acceptable
+- Pipe-delimited lists (`A | B | C`) must be converted to bulleted format
+- Single `\n` between major sections is insufficient — always use `\n\n`
+- Result `mortality` fields should include metric + percentage + brief clinical guidance
+
 ### Expandable Citations on All Node Types (MANDATORY)
 
 Every node type (question, info, result) with a `citation` array MUST render expandable citation references using `renderInlineCitations()` from `reference-table.ts`.
