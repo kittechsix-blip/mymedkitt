@@ -33,6 +33,7 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     title: 'Does This Meet Anaphylaxis Criteria?',
     body: '**WAO 2020 Diagnostic Criteria — either criterion:**\n\n**Criterion 1:** Skin/mucosal involvement (urticaria, flushing, angioedema) PLUS at least one of:\n• Respiratory compromise (dyspnea, wheeze, stridor, hypoxemia)\n• Hypotension or end-organ dysfunction (syncope, incontinence, collapse)\n• Severe GI symptoms (crampy abdominal pain, repetitive vomiting)\n\n**Criterion 2:** After exposure to a **known or likely allergen**, TWO or more of:\n• Skin/mucosal involvement\n• Respiratory compromise\n• Hypotension/end-organ dysfunction\n• Persistent GI symptoms\n\n[Differential Diagnosis](#/info/anaph-ddx)\n\n**Onset timing:** IV medications <30 min, insect stings ~15 min, food minutes to hours. [1][3]',
     citation: [1, 3],
+    images: [{ src: 'images/anaphylaxis/anaphylaxis-signs.png', alt: 'Signs and symptoms of anaphylaxis body diagram', caption: 'Anaphylaxis recognition: multi-system involvement required — skin (urticaria/angioedema) + respiratory or cardiovascular compromise (Wikimedia Commons, CC BY-SA 3.0)' }],
     options: [
       {
         label: 'Yes — Anaphylaxis criteria met',

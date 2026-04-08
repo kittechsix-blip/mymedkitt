@@ -38,6 +38,7 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     title: 'POCUS Technique',
     body: '**Probe:** High-frequency linear probe\n\n**Position:** Scan anterior chest at **2nd-4th intercostal spaces**, mid-clavicular line\n\n**Steps:**\n1. Compare bilateral lung sliding\n2. Use **M-mode** to confirm findings\n3. Look for lung point if no sliding\n\n**Tip:** In trauma, this is part of the **eFAST** exam. Supine position — air rises anteriorly.',
     citation: [2, 3],
+    images: [{ src: 'images/pneumothorax/us-anatomy.jpg', alt: 'Lung ultrasound anatomy — pleural line, rib shadows, A-lines', caption: 'POCUS anatomy: rib shadows (R), pleural line (P), and A-lines (horizontal reverberation artifacts). Normal lung sliding occurs at the pleural line.' }],
     next: 'lung-sliding-assessment',
   },
 
@@ -52,6 +53,7 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     title: 'Lung Sliding Present?',
     body: 'Assess for **lung sliding** — the shimmering movement of the visceral pleura against the parietal pleura during respiration.\n\nAlso look for:\n• **Comet tail artifacts** (B-lines)\n• **Seashore sign** on M-mode (normal)\n• **Barcode/stratosphere sign** on M-mode (abnormal)',
     citation: [2, 3],
+    images: [{ src: 'images/pneumothorax/b-lines.png', alt: 'B-lines on lung ultrasound — comet tail artifacts', caption: 'B-lines (comet tail artifacts): vertical hyperechoic lines from pleural surface. Presence of B-lines EXCLUDES pneumothorax — cannot have interstitial edema without pleural contact.' }],
     options: [
       {
         label: 'Lung Sliding Present',
@@ -92,6 +94,7 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     title: 'Abnormal: Stratosphere Sign',
     body: 'Absent lung sliding with **stratosphere sign** on M-mode (barcode sign) suggests pneumothorax.\n\n**Important:** Absent sliding alone is not diagnostic — can also be seen in:\n• Mainstem intubation\n• Pleural adhesions\n• Apnea\n• Severe ARDS\n\nCheck **multiple rib spaces** and look for the **lung point**.',
     citation: [2, 3],
+    images: [{ src: 'images/pneumothorax/m-mode-barcode.png', alt: 'M-mode barcode sign — stratosphere sign indicating absent lung sliding', caption: 'Barcode/stratosphere sign: horizontal parallel lines throughout M-mode image. Replaces normal seashore sign, indicating absent lung sliding. Suggests but does not confirm PTX — look for lung point.' }],
     next: 'lung-point',
   },
 
@@ -102,6 +105,7 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     title: 'Lung Point Identified?',
     body: 'The **lung point** is **pathognomonic** for pneumothorax — where lung sliding appears and disappears with respiration at the border of the collapsed lung.\n\n**Specificity: 100%**\n\nSlide the probe laterally from the area of absent sliding until you see intermittent sliding.',
     citation: [2, 3],
+    images: [{ src: 'images/pneumothorax/lung-point.png', alt: 'Lung point on POCUS — intermittent sliding at PTX border', caption: 'Lung point: intermittent appearance/disappearance of lung sliding with each breath at the edge of the pneumothorax. Pathognomonic for PTX (100% specificity). Location estimates size — more lateral = larger PTX.' }],
     options: [
       {
         label: 'Lung Point Found',
@@ -181,6 +185,7 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     title: 'Stable Patient — Size Assessment',
     body: 'Obtain **CXR or CT** to assess pneumothorax size.\n\nPOCUS lung point location provides initial size estimate.',
     citation: [1, 5],
+    images: [{ src: 'images/pneumothorax/ptx-cxr-annotated.png', alt: 'Annotated chest X-ray showing pneumothorax', caption: 'CXR: visceral pleural line (white arrow) with absent lung markings lateral to it. Size measured at apex (BTS method). ≥3cm at apex or symptomatic → chest tube. <3cm + stable → observation with O2.' }],
     options: [
       {
         label: 'Small PTX (<3cm at apex)',

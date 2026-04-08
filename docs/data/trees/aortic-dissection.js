@@ -12,6 +12,7 @@ export const AORTIC_DISSECTION_NODES = [
         module: 1,
         title: 'Aortic Dissection Overview',
         body: '**Aortic dissection is a tear in the aortic intima with propagation of blood into the media.** [1,2]\n\n**Epidemiology:**\n- Incidence: 2.6-3.5 per 100,000 person-years\n- Male predominance (65%)\n- Peak age: 60-70 years\n- Mortality: 1-2% per hour if untreated (Type A)\n\n**Classifications:** [1]\n\n**Stanford (most commonly used):**\n- **Type A:** Involves ascending aorta (regardless of origin)\n- **Type B:** Does NOT involve ascending aorta\n\n**DeBakey:**\n- **Type I:** Originates in ascending, propagates to descending\n- **Type II:** Confined to ascending aorta\n- **Type III:** Originates distal to left subclavian\n  - IIIa: Confined to descending thoracic\n  - IIIb: Extends into abdominal aorta\n\n**Key point:** Stanford Type A = surgical emergency. Type B = usually medical management.',
+        images: [{ src: 'images/aortic-dissection/dissection-ab-schema.png', alt: 'Aortic dissection Stanford Type A and Type B classification diagram', caption: 'Stanford classification: Type A (ascending aorta involved) vs Type B (descending only) — determines surgical vs medical management (Wikimedia Commons, CC BY-SA 3.0)' }],
         citation: [1, 2],
         calculatorLinks: [
             { id: 'add-rs', label: 'ADD-RS Score' },

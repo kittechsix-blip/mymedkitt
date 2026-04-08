@@ -28,6 +28,7 @@ export const ICH_NODES: DecisionNode[] = [
     module: 1,
     title: 'Evaluation & Imaging',
     body: '**Initial labs:**\n• CBC, BMP, Mg, Phos\n• INR, PTT, fibrinogen\n• Anti-Xa level if on oral Xa inhibitors (apixaban, rivaroxaban)\n• Toxicology screen (if clinically warranted)\n• Type & screen\n• ABG/VBG if intubated\n\n**Hematoma volume (ABC/2):**\nA × B × C ÷ 2 (cm) = volume in mL\n• A = largest diameter on axial CT\n• B = perpendicular diameter on same slice\n• C = number of slices with hemorrhage × slice thickness\n• <30 mL = relatively favorable prognosis\n• >30 mL = moderate-to-severe\n\n[CT Markers of Expansion](#/info/ich-ct-markers) — swirl sign, black hole sign, spot sign\n\n**CT Angiography:** Obtain for nearly all patients unless classic hypertensive location in an older patient. **Mandatory** if:\n• Lobar ICH in patient <70 years\n• Deep/posterior fossa ICH in patient <45 years\n• Deep ICH in patient 45–70 without hypertension history\n\n**Serial CT:** Repeat at ~6h and 24h for stable patients. More frequent if neuro decline or sedated.',
+    images: [{ src: 'images/ich/ich-basal-ganglia-ct.png', alt: 'CT head showing basal ganglia intracranial hemorrhage', caption: 'Basal ganglia ICH: hyperdense (white) blood on noncontrast CT — most common spontaneous ICH location (Wikimedia Commons, CC BY 4.0)' }],
     citation: [1, 2, 3],
     next: 'ich-anticoag',
   },

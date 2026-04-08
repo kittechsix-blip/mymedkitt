@@ -596,6 +596,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 
 **Proceed to sedation →** [4]`,
         citation: [4],
+        images: [{ src: 'images/awake-intubation/larynx-anatomy.png', alt: 'Diagram of human larynx anatomy', caption: 'Larynx anatomy: epiglottis, arytenoids, and vocal cords — key landmarks for awake intubation topicalization and scope navigation (Wikimedia Commons, CC BY-SA 4.0)' }],
         calculatorLinks: [
             { id: 'awake-atomized-recipe', label: 'Atomized Recipe' },
         ],

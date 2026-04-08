@@ -80,6 +80,7 @@ const SAH_CT: DecisionNode = {
   title: 'Noncontrast CT Head',
   body: 'The initial test for suspected sSAH is **noncontrast head CT**. CT sensitivity is time-dependent — blood is degraded and diluted by CSF circulation over time.\n\n**CT sensitivity by timing:**\n• Within 6 hours: **98.7%** (meta-analysis of 8,907 patients)\n• Day 0: 92-100%\n• Day 1: 86%\n• Day 2: 76%\n• Day 5: 58%\n\n**Conditions for highest sensitivity (≤6h):**\n• Third-generation or newer scanner\n• Interpreted by attending radiologist\n• Normal neurologic examination\n• Normal hematocrit (anemia may make blood isodense with CSF)\n\n**Key pearl:** A negative CT does not rule out SAH, especially with later presentations.',
   citation: [1, 5, 6],
+  images: [{ src: 'images/sah/sah-ct.jpg', alt: 'Noncontrast CT head showing subarachnoid hemorrhage', caption: 'SAH on CT: hyperdense blood filling the basal cisterns (star pattern) — CT sensitivity 98% within 6h of onset (Wikimedia Commons, CC BY-SA 3.0)' }],
   next: 'sah-ct-result',
 };
 

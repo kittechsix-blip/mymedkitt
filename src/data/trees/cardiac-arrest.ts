@@ -93,6 +93,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     title: 'First Rhythm Check',
     body: '**At 2 minutes:** Pause compressions briefly (<10 sec) for rhythm analysis.\n\n**Is the rhythm shockable or non-shockable?**\n\n• **Shockable:** VF (chaotic, no organized QRS) or pulseless VT (wide, regular, fast)\n• **Non-shockable:** PEA (organized rhythm, no pulse) or asystole (flatline — confirm in 2 leads)',
     citation: [5],
+    images: [{ src: 'images/cardiac-arrest/vf-ecg.png', alt: 'Ventricular fibrillation ECG', caption: 'VF: chaotic irregular waveform — SHOCKABLE. Defibrillate immediately, minimize interruptions' }],
     options: [
       {
         label: 'Shockable (VF/pVT)',
@@ -199,6 +200,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     title: 'Bradycardic Arrest / Asystole',
     body: 'Extreme bradycardia or asystole → pacing FIRST.\n\nConfirm asystole in 2 leads. Check lead connections. If any organized activity present, consider transcutaneous pacing.\n\n[Bradycardic Arrest Protocol](#/tree/bradycardic-arrest)',
     citation: [5, 6],
+    images: [{ src: 'images/cardiac-arrest/asystole-ecg.png', alt: 'Asystole ECG — flatline rhythm strip', caption: 'Asystole: no electrical activity — NON-SHOCKABLE. Continue CPR, treat reversible causes (H\'s and T\'s)' }],
     next: 'ca-universal',
   },
 

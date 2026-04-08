@@ -112,6 +112,7 @@ export const TRACH_EMERGENCY_NODES = [
         title: 'Tracheostomy Tube Types',
         body: '**CUFFED vs UNCUFFED:**\n- **Cuffed:** Inflatable balloon creates seal for mechanical ventilation\n- **Uncuffed:** For spontaneous breathers, allows speech with finger occlusion\n\n**INNER CANNULA:**\n- Removable inner tube for easy cleaning\n- **ALWAYS remove inner cannula first** when troubleshooting obstruction\n- Not all tubes have inner cannulas\n\n**FENESTRATED:**\n- Holes in outer cannula allow airflow through vocal cords\n- Used for speech and weaning\n- **Must use non-fenestrated inner cannula for suctioning**\n- Fenestrations can cause granulation tissue formation\n\n**SPEAKING VALVES (Passy-Muir):**\n- One-way valve allows air through cords on exhalation\n- **MUST deflate cuff** before placing speaking valve\n- Remove immediately if respiratory distress [2][4][5]',
         citation: [2, 4, 5],
+        images: [{ src: 'images/trach-emergency/trach-tube-anatomy.png', alt: 'Diagram of fenestrated and non-fenestrated tracheostomy tubes', caption: 'Trach tube anatomy: fenestrated (speaking valve compatible) vs non-fenestrated — inner cannula removal is first step in obstruction management (Wikimedia Commons, CC BY-SA 4.0)' }],
         next: 'trach-sizing',
     },
     {

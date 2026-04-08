@@ -140,6 +140,7 @@ export const DKA_NODES = [
         title: 'DKA Severity Classification',
         body: '**DKA severity determines urgency, ICU admission, and management intensity.** [1]\n\n**2024 Consensus Criteria (ADA/EASD/JBDS):**\n\n| Severity | pH | HCO3 (mEq/L) | BOHB (mmol/L) | Altered Mental Status? |\n|----------|-----|-----|-----|-----|\n| **Mild** | 7.25-7.30 | 15-18 | 3-4 | No |\n| **Moderate** | 7.00-7.24 | 10-14 | 4-6 | Variable |\n| **Severe** | <7.00 | <10 | >6 | Often yes |\n\n**Additional risk factors requiring ICU:**\n• Osmolality >320 mOsm/kg (increased risk of cerebral edema in children)\n• Presentation in shock (SBP <90, lactate >5, altered MS)\n• Age >65 years\n• Pregnancy\n• Comorbidities (renal failure, cardiac disease, infection)\n\n**Severe DKA pathway:** pH <7.0 or HCO3 <10 requires ICU admission, aggressive management, closer monitoring for complications.',
         citation: [1, 2, 5],
+        images: [{ src: 'images/dka/dka-pathophysiology.png', alt: 'Diabetic ketoacidosis pathophysiology concept map', caption: 'DKA pathophysiology: insulin deficiency → ketogenesis + hyperglycemia → osmotic diuresis → dehydration/electrolyte loss (Wikimedia Commons, CC BY-SA 4.0)' }],
         options: [
             {
                 label: 'Mild DKA',

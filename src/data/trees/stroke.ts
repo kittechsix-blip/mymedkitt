@@ -20,6 +20,7 @@ export const STROKE_NODES: DecisionNode[] = [
     body: '[Ischemic Stroke Steps Summary](#/info/stroke-summary) — time-critical reperfusion pathway.\n\nWe do not yet know if this is ischemic or hemorrhagic. If ICH (intracerebral hemorrhage) is highly suspicious, rule out with **CT head non-contrast** before proceeding.\n\nEstablish **last known well** time.\n\n**Immediate actions:**\n\u2022 Fingerstick glucose (only pre-tPA lab required)\n\u2022 Obtain [NIHSS (NIH Stroke Scale) score](#/calculator/nihss)\n\u2022 Establish IV access \u00D7 2\n\u2022 Activate stroke team if not already done\n\u2022 [MRI vs CT Stroke Protocol](#/info/stroke-imaging) \u2014 determine best imaging modality\n\nAll other labs (CBC, BMP, coags, troponin) should be drawn but should NOT delay thrombolysis in patients without known coagulopathy.',
     citation: [1, 2],
     calculatorLinks: [{ id: 'nihss', label: 'NIHSS Calculator' }],
+    images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present (Wikimedia Commons, CC BY-SA 4.0)' }],
     next: 'stroke-deficit',
   },
 
