@@ -62,6 +62,7 @@ export const XYLAZINE_TOXICITY_NODES = [
         module: 2,
         title: 'Xylazine-Associated Wounds (XAW)',
         body: '[Xylazine Wound Staging Tool](#/calc/xyl-wound-staging)\n\n**Unique features of "tranq wounds":**\n• Necrotic, non-healing ulcers\n• **NOT always at injection sites** — can appear anywhere on the body\n• Users who **smoke or snort** can develop wounds (systemic effect)\n• Mechanism: vasoconstriction + direct tissue cytotoxicity [3][4]\n\n**Philadelphia wound culture data:**\n• 56% MRSA positive\n• 37% Group A Streptococcus\n• Many polymicrobial [4]\n\n**Critical distinction:** Do NOT misdiagnose chronic XAW as necrotizing fasciitis — aggressive debridement can worsen outcomes [3].\n\nAssess wound severity using the Philadelphia Consensus staging:',
+        images: [{ src: 'images/xylazine-toxicity/xylazine-wound.png', alt: 'Necrotic xylazine-associated wound on medial leg', caption: 'Xylazine-associated wound (XAW) — necrotic ulceration at injection site. CC BY 4.0.' }],
         citation: [3, 4],
         calculatorLinks: [
             { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },

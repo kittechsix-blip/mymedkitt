@@ -151,6 +151,7 @@ export const MARINE_ENVENOMATION_NODES = [
 **Medications:**
 - [Box Jellyfish Antivenom](#/drug/box-jellyfish-antivenom/envenomation): 1-6 ampoules IV
 - [Magnesium sulfate](#/drug/magnesium-sulfate/cardiac-arrest): 10 mmol IV if antivenom fails`,
+        images: [{ src: 'images/marine-envenomation/box-jellyfish.png', alt: 'Box jellyfish (Chironex sp.) — cube-shaped bell with tentacles', caption: 'Box jellyfish (Chironex sp.) — cube-shaped bell, potent venom. CC BY-SA 2.0.' }],
         citation: [1, 4, 5, 6],
         next: 'marine-systemic',
     },

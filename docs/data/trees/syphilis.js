@@ -177,7 +177,7 @@ export const SYPHILIS_NODES = [
         module: 2,
         title: 'Primary Syphilis',
         body: '**Classic chancre:** painless, firm, round, indurated ulcer with clean base at the inoculation site. Appears 10-90 days after exposure (average 21 days). Heals spontaneously in 3-6 weeks even without treatment. [1][14][15]\n\n**Characteristics:**\n• Usually **single**, but can be multiple (especially in HIV+ patients or with high spirochete load)\n• Common sites: penis, vulva, cervix, anus, mouth (oral sexual contact), fingers\n• Bilateral, painless inguinal lymphadenopathy in ~70%\n• Patients often do not notice the primary lesion because it is **not painful** and may not be easily visible\n\n**Atypical presentations:** painful lesions, multiple lesions, atypical appearance — maintain high suspicion in at-risk populations.\n\n**Definitive diagnosis:** Dark-field microscopy of lesion fluid (rarely available in EDs). PCR testing is emerging but not FDA-approved.\n\n[Differential Diagnosis of Genital Lesions](#/info/syph-genital-ddx)',
-        images: [{ src: 'assets/images/syphilis/chancre.png', alt: 'Primary syphilis chancre — painless indurated ulcer', caption: 'Primary syphilis chancre. Firm, round, painless ulcer at the site of inoculation.' }],
+        images: [{ src: 'images/syphilis/primary-chancre.jpg', alt: 'Primary syphilis chancres on penile shaft', caption: 'Primary syphilis — painless, indurated chancres at the inoculation site. CDC/PHIL.' }],
         citation: [1, 14, 15],
         next: 'syph-risk-factors',
     },
@@ -188,8 +188,7 @@ export const SYPHILIS_NODES = [
         title: 'Secondary Syphilis',
         body: 'Occurs **4-10 weeks after chancre** (which may still be present). Represents hematogenous dissemination of T. pallidum. [1][16][17]\n\n**Rash:**\n• Diffuse, symmetric, maculopapular\n• Classically involves **palms and soles** (50-80% of cases)\n• Non-pruritic, red to red-brown, flat and scaly\n• Can be more generalized — "the great imitator" can mimic virtually any dermatologic condition\n• May be difficult to identify on darker skin tones\n• Can present atypically: vesicular, pustular, follicular, smooth, or as **malignant syphilis** (lues maligna — cutaneous ulcers with central necrosis and black-brown crust)\n\n**Other findings:**\n• **Condylomata lata:** moist, flat, broad-based, highly infectious lesions in warm/moist areas (perineum, vulva, inner thighs)\n• **Mucous patches:** painless, silvery-gray oral/genital erosions\n• **Moth-eaten alopecia:** patchy, non-scarring hair loss\n\n**Systemic symptoms:** low-grade fever, malaise, weight loss, diffuse lymphadenopathy, arthralgias, hepatitis, nephrotic syndrome, uveitis\n\nUntreated: resolves in 3-12 weeks, then enters latent phase. [1][16]',
         images: [
-            { src: 'assets/images/syphilis/palms-rash.png', alt: 'Secondary syphilis palmar rash — red-brown maculopapular lesions', caption: 'Secondary syphilis rash on palms. Classic red-brown, flat, scaly lesions.' },
-            { src: 'assets/images/syphilis/diffuse-rash.png', alt: 'Secondary syphilis diffuse cutaneous rash', caption: 'Diffuse maculopapular rash of secondary syphilis on trunk.' },
+            { src: 'images/syphilis/secondary-palmar-rash.png', alt: 'Secondary syphilis — maculopapular rash on both palms', caption: 'Secondary syphilis — classic palmar rash. Red-brown, flat, scaly lesions on both palms. CDC.' },
         ],
         citation: [1, 16, 17],
         next: 'syph-risk-factors',
