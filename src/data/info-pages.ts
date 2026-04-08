@@ -3288,6 +3288,50 @@ const SE_NCSE_CRITERIA: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Upper GI Bleed
+// -------------------------------------------------------------------
+
+const UGIB_SUMMARY: InfoPage = {
+  id: 'ugib-summary',
+  title: 'Upper GI Bleed Steps Summary',
+  subtitle: 'Risk stratification, resuscitation, variceal management',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Hematemesis vs melena vs hematochezia](#/node/ugib-start)\n• History: NSAIDs, anticoagulants, alcohol, liver disease\n• [Hemodynamic status](#/node/ugib-hemodynamics): Shock? Active bleeding?\n• TXA is NOT recommended (HALT-IT trial: no benefit, increased harm)',
+    },
+    {
+      heading: '2. Risk Stratification',
+      body: '• [Glasgow-Blatchford Score (GBS)](#/calculator/gbs): Best for identifying low-risk\n  - GBS 0-1 = <1% need intervention, consider outpatient EGD\n• [AIMS65](#/calculator/aims65): Predicts mortality/ICU need\n  - Score ≥2 = high risk (31% mortality)\n• [Cirrhosis](#/node/ugib-cirrhosis-check)? Variceal bleeding in 59% of cirrhotic patients',
+    },
+    {
+      heading: '3. Resuscitation',
+      body: '• **Restrictive transfusion:** Hgb <7 g/dL threshold\n• Target Hgb 7-8 g/dL (exception: ACS target >8)\n• Villanueva trial: 45% mortality reduction with restrictive\n• Avoid over-resuscitation (increases portal pressure in varices)\n• [Coagulation targets](#/node/ugib-transfusion): Plt >50k, fibrinogen >150',
+    },
+    {
+      heading: '4. Medical Management',
+      body: '• [PPI](#/node/ugib-ppi): 80 mg IV bolus, then 40 mg IV Q12h or 8 mg/hr infusion\n• [Erythromycin](#/node/ugib-pre-egd): 250 mg IV 20-90 min pre-EGD (improves visualization)\n• Endoscopy timing: Within 24 hours (earlier does NOT improve outcomes)',
+    },
+    {
+      heading: '5. Variceal Bleeding',
+      body: '• [Octreotide](#/node/ugib-octreotide): 50 mcg bolus, then 50 mcg/hr x 2-5 days\n• Start BEFORE EGD if varices suspected\n• [Antibiotics](#/node/ugib-variceal-abx): Ceftriaxone 1g IV daily x 7 days (ALL cirrhotics)\n• Avoid excessive fluid (worsens portal pressure)',
+    },
+    {
+      heading: '6. Balloon Tamponade',
+      body: '• [Indications](#/node/ugib-blakemore-indications): Exsanguinating bleed, bridge to TIPS, failed EGD\n• INTUBATE FIRST (aspiration risk)\n• CXR before inflation\n• Gastric balloon: 250-300 mL (SBT) or 450-500 mL (Minnesota)\n• Esophageal balloon: NEVER exceed 45 mmHg',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [GBS 0-1](#/node/ugib-low-risk): Outpatient EGD 24-48h\n• [Floor](#/node/ugib-floor-admit): GBS ≥2, stable after resuscitation\n• [ICU](#/node/ugib-icu-admit): AIMS65 ≥2, unstable, cirrhosis + varices, intubated',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Laine L, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021.' },
+    { num: 2, text: 'Villanueva C, et al. Transfusion Strategies for Acute Upper Gastrointestinal Bleeding. NEJM. 2013.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Acute Diarrhea
 // -------------------------------------------------------------------
 
@@ -11715,6 +11759,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'se-infusion-comparison': SE_INFUSION_COMPARISON,
   'se-rse-principles': SE_RSE_PRINCIPLES,
   'se-ncse-criteria': SE_NCSE_CRITERIA,
+  'ugib-summary': UGIB_SUMMARY,
   'diarrhea-summary': DIARRHEA_SUMMARY,
   'diarrhea-discharge': DIARRHEA_DISCHARGE,
   'diarrhea-ddx-pitfalls': DIARRHEA_DDX_PITFALLS,

@@ -382,6 +382,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'mctsi', label: 'MCTSI', icon: '🩻', action: 'calculator', target: 'mctsi' },
         { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ap-fluid-rate' },
     ],
+    'upper-gi-bleed': [
+        { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'ugib-summary' },
+        { id: 'gbs', label: 'GBS', icon: '📊', action: 'calculator', target: 'gbs' },
+        { id: 'aims65', label: 'AIMS65', icon: '⚠️', action: 'calculator', target: 'aims65' },
+        { id: 'variceal', label: 'Varices', icon: '🩸', action: 'jump', target: 'ugib-variceal-pathway' },
+        { id: 'blakemore', label: 'Blakemore', icon: '🎈', action: 'jump', target: 'ugib-blakemore-indications' },
+    ],
     'serotonin-syndrome': [
         { id: 'hunter', label: 'Hunter', icon: '✅', action: 'calculator', target: 'hunter-criteria' },
         { id: 'ss-nms', label: 'SS vs NMS', icon: '🔀', action: 'calculator', target: 'ss-vs-nms' },

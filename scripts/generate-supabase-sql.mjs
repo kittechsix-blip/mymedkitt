@@ -182,6 +182,7 @@ const TREE_REGISTRY = {
   'tracheo-innominate-fistula': { prefix: 'TRACHEO_INNOMINATE_FISTULA', entryNodeId: 'tif-start', categoryId: 'anesthesia-airway' },
   'dental-trauma':       { prefix: 'DENTAL_TRAUMA',        entryNodeId: 'dental-trauma-start', categoryId: 'emergency-medicine' },
   'pta-drainage':        { prefix: 'PTA_DRAINAGE',         entryNodeId: 'pta-start',          categoryId: 'procedures' },
+  'upper-gi-bleed':      { prefix: 'UPPER_GI_BLEED',       entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
 };
 
 // Cross-listing: which consults appear in multiple categories

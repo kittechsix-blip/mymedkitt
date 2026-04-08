@@ -1,0 +1,380 @@
+// MedKitt — Upper GI Bleed Management
+// Assessment → Resuscitation → Medical Management → Variceal → Balloon Tamponade → Disposition
+// 6 modules: Initial Assessment → Resuscitation → Medical Management → Variceal Bleeding → Balloon Tamponade → Disposition
+// ~28 nodes total.
+export const UPPER_GI_BLEED_CRITICAL_ACTIONS = [
+    { text: 'Restrictive transfusion: Hgb <7 g/dL threshold (except ACS)', nodeId: 'ugib-transfusion' },
+    { text: 'TXA is NOT recommended (HALT-IT trial: no benefit, increased VTE/seizures)', nodeId: 'ugib-start' },
+    { text: 'Cirrhosis + GI bleed = Ceftriaxone 1g IV daily x 7 days', nodeId: 'ugib-variceal-abx' },
+    { text: 'Octreotide: 50 mcg bolus, then 50 mcg/hr — start BEFORE EGD if varices suspected', nodeId: 'ugib-octreotide' },
+    { text: 'Blakemore: INTUBATE FIRST, CXR before inflation, never exceed 45 mmHg esophageal pressure', nodeId: 'ugib-blakemore-technique' },
+    { text: 'GBS 0-1 = Low risk, consider outpatient EGD within 24-48h', nodeId: 'ugib-low-risk' },
+    { text: 'Erythromycin 250 mg IV 20-90 min pre-EGD improves visualization', nodeId: 'ugib-pre-egd' },
+    { text: 'Avoid over-resuscitation in varices — increases portal pressure, worsens bleeding', nodeId: 'ugib-variceal-resus' },
+];
+export const UPPER_GI_BLEED_NODES = [
+    // =====================================================================
+    // MODULE 1: INITIAL ASSESSMENT
+    // =====================================================================
+    {
+        id: 'ugib-start',
+        type: 'info',
+        module: 1,
+        title: 'Upper GI Bleed — Initial Assessment',
+        body: '[UGIB Steps Summary](#/info/ugib-summary)\n\n**Definition:** Hemorrhage proximal to ligament of Treitz (esophagus, stomach, duodenum). [1][2]\n\n**Presentation:**\n• Hematemesis (bright red or coffee-ground)\n• Melena (black, tarry stool)\n• Hematochezia (if massive — brisk UGIB)\n• Syncope, lightheadedness, presyncope\n\n**Critical History:**\n• NSAIDs, aspirin, anticoagulants\n• Alcohol use, known liver disease/cirrhosis\n• Prior GI bleeding, H. pylori status\n• Retching/vomiting before hematemesis (Mallory-Weiss)\n\n**Key Point:** TXA is NOT recommended for GI bleeding — HALT-IT trial showed no mortality benefit with increased VTE and seizures. [3]',
+        citation: [1, 2, 3],
+        calculatorLinks: [
+            { id: 'gbs', label: 'Glasgow-Blatchford' },
+            { id: 'aims65', label: 'AIMS65' },
+        ],
+        next: 'ugib-hemodynamics',
+    },
+    {
+        id: 'ugib-hemodynamics',
+        type: 'question',
+        module: 1,
+        title: 'Hemodynamic Status',
+        body: '**Assess hemodynamic stability:** [1][2]\n\n**Signs of Shock:**\n• SBP <90 mmHg or MAP <65\n• HR >100 with hypotension\n• Altered mental status\n• Cool, clammy extremities\n• Weak/thready pulse\n\n**High-Risk Features:**\n• Hematemesis with active bleeding\n• Syncope at presentation\n• Age >65 with comorbidities\n\n**What is the patient\'s hemodynamic status?**',
+        citation: [1, 2],
+        options: [
+            {
+                label: 'Hemodynamically Stable',
+                description: 'SBP >90, HR <100, alert and oriented',
+                next: 'ugib-risk-stratify',
+            },
+            {
+                label: 'Hemodynamically Unstable',
+                description: 'Shock, active hemorrhage, altered mental status',
+                next: 'ugib-unstable-resus',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'ugib-risk-stratify',
+        type: 'info',
+        module: 1,
+        title: 'Risk Stratification',
+        body: '**Glasgow-Blatchford Score (GBS)** — Best for identifying low-risk [2][4]\n\n| Component | Criteria | Points |\n|-----------|----------|--------|\n| BUN 18-22 mg/dL | +2 | 22-28 = +3, 28-70 = +4, >70 = +6 |\n| Hgb (M) <13 | +1 | <12 = +3, <10 = +6 |\n| Hgb (F) <12 | +1 | <10 = +6 |\n| SBP 100-109 | +1 | 90-99 = +2, <90 = +3 |\n| HR >100 | +1 | |\n| Melena | +1 | |\n| Syncope | +2 | |\n| Liver disease | +2 | |\n| Heart failure | +2 | |\n\n**GBS 0-1 = Low risk** — consider outpatient management\n\n**AIMS65** — Predicts mortality/ICU need [5]\n• Albumin <3.0, INR >1.5, Altered mental status (GCS <14), SBP ≤90, Age ≥65\n• Score ≥2 = High risk (31% mortality vs 4.5%)',
+        citation: [2, 4, 5],
+        calculatorLinks: [
+            { id: 'gbs', label: 'Glasgow-Blatchford Score' },
+            { id: 'aims65', label: 'AIMS65 Score' },
+            { id: 'rockall', label: 'Rockall Score' },
+        ],
+        next: 'ugib-cirrhosis-check',
+    },
+    {
+        id: 'ugib-cirrhosis-check',
+        type: 'question',
+        module: 1,
+        title: 'Cirrhosis or Liver Disease?',
+        body: '**Variceal bleeding accounts for 10-20% of UGIB** [6]\n\nIn cirrhotic patients with GI bleeding:\n• 59% variceal\n• 16% peptic ulcer disease\n• 25% other causes\n\n**Signs suggesting cirrhosis:**\n• Known liver disease history\n• Jaundice, ascites, spider angiomata\n• Thrombocytopenia, coagulopathy\n• Hepatomegaly/splenomegaly\n\n**Does patient have known or suspected cirrhosis?**',
+        citation: [6],
+        options: [
+            {
+                label: 'Yes — Cirrhosis/Liver Disease',
+                description: 'Known cirrhosis, stigmata of liver disease, or high suspicion',
+                next: 'ugib-variceal-pathway',
+            },
+            {
+                label: 'No — Non-Cirrhotic',
+                description: 'No liver disease, likely non-variceal cause',
+                next: 'ugib-non-variceal',
+            },
+        ],
+    },
+    // =====================================================================
+    // MODULE 2: RESUSCITATION
+    // =====================================================================
+    {
+        id: 'ugib-unstable-resus',
+        type: 'info',
+        module: 2,
+        title: 'Unstable UGIB — Resuscitation',
+        body: '**Immediate Actions:** [1][2][7]\n\n**Access & Labs:**\n• 2 large-bore IVs (16-18G) or central line\n• Type and crossmatch (4+ units if massive)\n• CBC, BMP, PT/INR, fibrinogen, lactate\n• Consider MTP activation if exsanguinating\n\n**Airway Protection:**\n• Intubate if: GCS <8, massive hematemesis, inability to protect airway\n• Suction ready at bedside\n\n**Blood Products — RESTRICTIVE Strategy:** [8]\n• Transfuse when Hgb **<7 g/dL** (not <9)\n• Target Hgb 7-8 g/dL\n• Exception: ACS patients, target Hgb >8 g/dL\n\n**Villanueva Trial (NEJM 2013):** Restrictive transfusion = 45% relative mortality reduction vs liberal\n\n[IMAGE: UGIB Resuscitation Algorithm](#/image/ugib-resuscitation)',
+        citation: [1, 2, 7, 8],
+        calculatorLinks: [
+            { id: 'shock-index', label: 'Shock Index' },
+        ],
+        next: 'ugib-transfusion',
+    },
+    {
+        id: 'ugib-transfusion',
+        type: 'info',
+        module: 2,
+        title: 'Transfusion Strategy',
+        body: '**Restrictive Transfusion (Recommended):** [8]\n\n| Threshold | Hgb <7 g/dL |\n|-----------|-------------|\n| Target | 7-8 g/dL |\n| Exception | ACS: target >8 g/dL |\n\n**Why Restrictive?**\n• Excessive transfusion increases portal pressure\n• Worsens variceal bleeding\n• Villanueva: 45% mortality reduction with restrictive approach\n\n**Coagulation Targets:**\n• Platelets >50,000\n• Fibrinogen >150 mg/dL\n• INR: Consider reversal if supratherapeutic\n\n**Special Situations:**\n• **Massive bleeding:** Activate MTP, permissive hypotension\n• **On warfarin:** 4F-PCC if life-threatening; Vitamin K 10mg IV\n• **On DOAC:** Idarucizumab (dabigatran), Andexanet (Xa inhibitors)',
+        citation: [8],
+        next: 'ugib-cirrhosis-check',
+    },
+    // =====================================================================
+    // MODULE 3: MEDICAL MANAGEMENT (NON-VARICEAL)
+    // =====================================================================
+    {
+        id: 'ugib-non-variceal',
+        type: 'info',
+        module: 3,
+        title: 'Non-Variceal UGIB — Causes',
+        body: '**Differential Diagnosis:** [1][2]\n\n| Cause | Frequency | Key Features |\n|-------|-----------|---------------|\n| Peptic Ulcer | 35-50% | NSAIDs, aspirin, H. pylori |\n| Erosive Gastritis | 8-15% | NSAIDs, alcohol, stress |\n| Mallory-Weiss | 8-15% | Retching/vomiting first |\n| Esophagitis | 5-15% | GERD history |\n| Dieulafoy Lesion | 1-2% | Large arteriole, intermittent massive bleed |\n| Malignancy | 1-4% | Weight loss, dysphagia |\n| Angiodysplasia | 1-2% | Elderly, CKD, aortic stenosis |\n\n**Labs suggesting upper source:**\n• BUN:Cr ratio >30 (blood protein digestion)\n• Elevated lactate (tissue hypoperfusion)',
+        citation: [1, 2],
+        next: 'ugib-ppi',
+    },
+    {
+        id: 'ugib-ppi',
+        type: 'info',
+        module: 3,
+        title: 'PPI Therapy',
+        body: '**Pre-Endoscopy PPI:** [1][9]\n• ACG 2021: No strong recommendation (limited evidence)\n• If used: **Pantoprazole 80 mg IV** or Esomeprazole 80 mg IV\n\n**Post-Endoscopy PPI (High-Risk Ulcers):** [9]\n• **Bolus:** 80 mg IV\n• **Then:** 8 mg/hr infusion x 72h OR 40 mg IV BID-QID x 3 days\n• **Rationale:** Raises gastric pH >6, stabilizes clot\n\n**EMCrit/IBCC Approach:**\n• PPI 40 mg IV Q12h (bolus dosing = infusion efficacy)\n\n**Duration:**\n• High-risk (Rockall ≥6): PPI BID x 14 days\n• Low-risk: PPI daily, transition to PO\n• H. pylori positive: Add eradication therapy',
+        citation: [1, 9],
+        next: 'ugib-pre-egd',
+    },
+    {
+        id: 'ugib-pre-egd',
+        type: 'info',
+        module: 3,
+        title: 'Pre-Endoscopy Preparation',
+        body: '**Erythromycin (Prokinetic):** [1][10]\n• **Dose:** 250 mg IV over 10-30 min (or 3 mg/kg)\n• **Timing:** 20-90 minutes before EGD\n• **Benefits:**\n  - Improves visualization (OR 3.4)\n  - Reduces repeat endoscopy (OR 0.51)\n  - Shorter hospital stay\n• **Best for:** Active hematemesis, blood on NG lavage\n\n**Pre-EGD Checklist:**\n1. Hemodynamic stabilization\n2. Airway protection (intubate if GCS <8)\n3. Erythromycin 250 mg IV\n4. PPI 40-80 mg IV\n5. Correct coagulopathy if possible\n6. Type and crossmatch ready\n\n**NG Tube:** Optional — does not change outcomes, may help clear stomach',
+        citation: [1, 10],
+        next: 'ugib-egd-timing',
+    },
+    {
+        id: 'ugib-egd-timing',
+        type: 'info',
+        module: 3,
+        title: 'Endoscopy Timing',
+        body: '**Standard Timing:** [1][11]\n• **Within 24 hours** for most patients (ACG 2021)\n• Earlier endoscopy (<12h) NOT shown to improve outcomes\n\n**Urgent EGD (<12 hours):**\n• Hemodynamic instability DESPITE resuscitation\n• Ongoing active bleeding\n• High-risk features\n\n**Emergent EGD (<6 hours):**\n• Massive hemorrhage with persistent shock\n• Suspected variceal bleeding with instability\n\n**When to Skip EGD → Go to IR:**\n• Suspected aortoenteric fistula\n• Exsanguinating duodenal ulcer\n• Failed endoscopic hemostasis\n\n[IMAGE: EGD Timing Algorithm](#/image/ugib-egd-timing)',
+        citation: [1, 11],
+        next: 'ugib-disposition-decision',
+    },
+    // =====================================================================
+    // MODULE 4: VARICEAL BLEEDING
+    // =====================================================================
+    {
+        id: 'ugib-variceal-pathway',
+        type: 'info',
+        module: 4,
+        title: 'Variceal Bleeding — Overview',
+        body: '**Key Principles:** [6][12]\n\n1. **Start vasoactive therapy IMMEDIATELY** (even before EGD confirmation)\n2. **Restrictive transfusion critical** — over-resuscitation increases portal pressure\n3. **Antibiotics reduce mortality** in cirrhosis\n4. **Target mild hypotension** rather than normotension\n\n**Vasoactive Agents:**\n• Octreotide (US standard)\n• Terlipressin (if available — only one with mortality benefit)\n\n**Avoid:**\n• Excessive crystalloid\n• Liberal transfusion (worsens bleeding)\n• NSAIDs\n\n[IMAGE: Variceal Bleed Management](#/image/ugib-variceal)',
+        citation: [6, 12],
+        next: 'ugib-octreotide',
+    },
+    {
+        id: 'ugib-octreotide',
+        type: 'result',
+        module: 4,
+        title: 'Octreotide Protocol',
+        body: '**Octreotide Dosing:** [6][12]\n\n**Loading dose:** 50 mcg IV bolus\n**Maintenance:** 50 mcg/hr continuous infusion\n**Duration:** 2-5 days\n\n**Mechanism:**\n• Reduces splanchnic blood flow\n• Decreases portal pressure\n• Start immediately when varices suspected\n\n**Side Effects:**\n• QT prolongation\n• Bradycardia\n• Hyperglycemia\n• Gallbladder sludge (prolonged use)\n\n**Terlipressin (if available):**\n• 2 mg IV bolus, then 1 mg IV q4-6h\n• Only vasoactive with proven mortality benefit\n• FDA approved for HRS, not variceal bleeding in US',
+        recommendation: 'Octreotide 50 mcg IV bolus, then 50 mcg/hr x 2-5 days. Start BEFORE EGD.',
+        confidence: 'definitive',
+        citation: [6, 12],
+        treatment: {
+            firstLine: {
+                drug: 'Octreotide',
+                dose: '50 mcg bolus, then 50 mcg/hr',
+                route: 'IV',
+                frequency: 'Continuous infusion',
+                duration: '2-5 days',
+                notes: 'Start immediately when variceal bleeding suspected',
+            },
+            monitoring: 'QTc interval, blood glucose, heart rate. Continue until endoscopic therapy and 2-5 days after.',
+        },
+        next: 'ugib-variceal-abx',
+    },
+    {
+        id: 'ugib-variceal-abx',
+        type: 'result',
+        module: 4,
+        title: 'Antibiotic Prophylaxis',
+        body: '**MANDATORY for all cirrhotic patients with GI bleeding:** [6][12][13]\n\n**First-line:**\n[Ceftriaxone](#/drug/ceftriaxone/ugib) 1g IV daily x 7 days\n\n**Alternative:**\nNorfloxacin 400 mg PO BID x 7 days (avoid if high quinolone resistance)\n\n**Evidence:**\n• Reduces bacterial infections\n• Reduces rebleeding\n• May reduce mortality\n• Most infections occur within 5 days\n\n**Rationale:** Cirrhosis = gut translocation of bacteria. GI bleeding increases infection risk dramatically.\n\n**Note:** Child-Pugh A cirrhosis may have less benefit',
+        recommendation: 'Ceftriaxone 1g IV daily x 7 days for all cirrhotic patients with GI bleeding.',
+        confidence: 'definitive',
+        citation: [6, 12, 13],
+        treatment: {
+            firstLine: {
+                drug: 'Ceftriaxone',
+                dose: '1 g',
+                route: 'IV',
+                frequency: 'Daily',
+                duration: '7 days',
+                notes: 'All cirrhotic patients with GI bleeding',
+            },
+            alternative: {
+                drug: 'Norfloxacin',
+                dose: '400 mg',
+                route: 'PO',
+                frequency: 'BID',
+                duration: '7 days',
+                notes: 'If ceftriaxone unavailable; avoid if quinolone resistance',
+            },
+            monitoring: 'Monitor for infection signs. Continue full 7-day course.',
+        },
+    },
+    {
+        id: 'ugib-variceal-resus',
+        type: 'info',
+        module: 4,
+        title: 'Variceal Resuscitation Principles',
+        body: '**CRITICAL: Avoid Over-Resuscitation** [6][8]\n\n**Why less is more:**\n• Excessive fluid increases portal pressure\n• Increased portal pressure worsens variceal bleeding\n• Dilutional coagulopathy\n• Pulmonary edema in cirrhosis\n\n**Targets:**\n• Permissive hypotension: SBP 90-100 mmHg acceptable\n• Hgb 7-8 g/dL (restrictive transfusion critical)\n• Avoid crystalloid boluses if possible\n\n**Blood Products:**\n• pRBCs when Hgb <7\n• FFP only if actively bleeding AND INR >2.0\n• Platelets if <50,000 and actively bleeding\n\n**Coagulation in Cirrhosis:**\n• INR does NOT reliably predict bleeding risk\n• "Rebalanced hemostasis" — pro/anti-coagulant balance',
+        citation: [6, 8],
+        next: 'ugib-blakemore-indications',
+    },
+    // =====================================================================
+    // MODULE 5: BALLOON TAMPONADE
+    // =====================================================================
+    {
+        id: 'ugib-blakemore-indications',
+        type: 'info',
+        module: 5,
+        title: 'Balloon Tamponade — Indications',
+        body: '**Sengstaken-Blakemore or Minnesota Tube:** [14][15]\n\n**Indications:**\n• Massive, exsanguinating variceal bleeding uncontrolled by medical/endoscopic therapy\n• Bridge to TIPS or definitive treatment\n• Last resort when endoscopy unavailable or failed\n• 80-90% effective for temporary control\n\n**Minnesota Tube Preferred** (has esophageal aspiration port)\n\n**Contraindications (Relative):**\n• Esophageal stricture\n• Recent esophageal surgery\n• Large hiatal hernia\n• Severe coagulopathy\n• Recent endoscopic intervention (7-10 days)\n\n[IMAGE: Blakemore vs Minnesota Tube](#/image/ugib-blakemore-tube)',
+        citation: [14, 15],
+        next: 'ugib-blakemore-prep',
+    },
+    {
+        id: 'ugib-blakemore-prep',
+        type: 'info',
+        module: 5,
+        title: 'Balloon Tamponade — Preparation',
+        body: '**Equipment:** [14][15]\n• Sengstaken-Blakemore (3 lumen) or Minnesota tube (4 lumen)\n• 60 mL syringes (Luer-lock and slip-tip)\n• Three-way stopcocks\n• Manometer for pressure monitoring\n• 1000 mL IV bag for traction\n• Water basin for balloon testing\n• Water-soluble lubricant\n\n**Pre-Procedure:**\n1. **INTUBATE THE PATIENT** — aspiration risk is high\n2. Test both balloons underwater — inflate to max, check for leaks\n3. Document baseline pressures at each inflation increment\n4. Position patient supine, HOB elevated 30-45°\n5. Apply topical anesthetic to nares/oropharynx\n6. Lubricate deflated tube\n\n**CRITICAL:** Airway protection is MANDATORY before placement',
+        citation: [14, 15],
+        next: 'ugib-blakemore-technique',
+    },
+    {
+        id: 'ugib-blakemore-technique',
+        type: 'info',
+        module: 5,
+        title: 'Balloon Tamponade — Technique',
+        body: '**Insertion (from Roberts & Hedges):** [14]\n\n1. Insert deflated tube orally (preferred) or nasally\n2. Advance to 50-cm mark (past GE junction)\n3. Confirm gastric position: auscultate epigastrium + air injection\n\n**STOP — Obtain CXR to confirm position BEFORE inflation**\n\n**Gastric Balloon Inflation:**\n1. Inflate with 50 mL air initially\n2. Add 50 mL increments to **250-300 mL** (SBT) or **450-500 mL** (Minnesota)\n3. If pressure >15 mmHg above baseline: STOP, deflate, reposition\n4. Double-clamp gastric balloon port\n\n**Apply Traction:**\n1. Pull back until resistance (balloon at GE junction)\n2. Mark tube position at teeth\n3. Apply traction: 0.5-1 kg (500-1000 mL IV bag)\n4. Tape securely\n\n[IMAGE: Blakemore Placement Technique](#/image/ugib-blakemore-placement)',
+        citation: [14],
+        next: 'ugib-esophageal-balloon',
+    },
+    {
+        id: 'ugib-esophageal-balloon',
+        type: 'info',
+        module: 5,
+        title: 'Esophageal Balloon (If Needed)',
+        body: '**Only inflate if gastric tamponade fails:** [14][15]\n\n**Technique:**\n1. Inflate esophageal balloon in 5-10 mmHg increments\n2. Target pressure: **30-40 mmHg**\n3. **NEVER exceed 45 mmHg** (esophageal necrosis/rupture risk)\n4. Monitor pressure continuously with manometer\n\n**Post-Placement:**\n• CXR to confirm final position\n• ICU admission mandatory\n• Continuous vital sign monitoring\n• Tube position checks Q1-2h\n• **Deflate esophageal balloon Q6-8h** to prevent necrosis\n• Maximum inflation time: **24 hours**\n\n**Success Assessment:**\n• Aspirate gastric port — clearing blood = effective\n• Patient stabilizing hemodynamically',
+        citation: [14, 15],
+        next: 'ugib-blakemore-complications',
+    },
+    {
+        id: 'ugib-blakemore-complications',
+        type: 'info',
+        module: 5,
+        title: 'Balloon Tamponade — Complications',
+        body: '**Complications:** [14][15]\n\n**Minor:**\n• Nasal/pharyngeal irritation\n• Epistaxis\n• Hoarseness\n\n**Major:**\n• Aspiration pneumonia (most common)\n• Esophageal rupture (up to 6%, often fatal)\n• Esophageal/gastric necrosis\n• Airway obstruction from tube migration\n• Rebleeding on deflation (~50%)\n\n**Catastrophic:**\n• Tracheal compression\n• Tracheoesophageal fistula\n• Cardiopulmonary arrest\n\n**EMERGENCY TUBE REMOVAL:**\nIf airway obstruction from proximal migration:\n**CUT ALL LUMENS** at bifurcation point and remove entire apparatus immediately\n\n**Next Steps:** Consult GI for EGD, IR for TIPS if rebleeding',
+        citation: [14, 15],
+        next: 'ugib-tips',
+    },
+    {
+        id: 'ugib-tips',
+        type: 'info',
+        module: 5,
+        title: 'TIPS Consultation',
+        body: '**Transjugular Intrahepatic Portosystemic Shunt (TIPS):** [6][16]\n\n**Indications:**\n• Failed endoscopic therapy (2 attempts)\n• Rebleeding despite optimal medical therapy\n• Child-Pugh B/C with active bleeding (early TIPS within 72h)\n• Bridge to transplant\n\n**Early TIPS (<72h):**\n• Consider in high-risk patients (Child-Pugh C or B with active bleeding)\n• Improved survival in select patients\n\n**Contraindications:**\n• Right heart failure\n• Severe hepatic encephalopathy\n• Polycystic liver disease\n• Severe coagulopathy\n\n**Complications:**\n• Hepatic encephalopathy (30%)\n• Shunt stenosis/occlusion\n• Liver failure',
+        citation: [6, 16],
+        next: 'ugib-disposition-decision',
+    },
+    // =====================================================================
+    // MODULE 6: DISPOSITION
+    // =====================================================================
+    {
+        id: 'ugib-disposition-decision',
+        type: 'question',
+        module: 6,
+        title: 'Disposition Decision',
+        body: '**Risk-Stratify for Disposition:** [1][2][4]\n\n**GBS 0-1 = Low Risk:**\n• <1% need intervention\n• Consider outpatient EGD within 24-48h\n• Requires reliable follow-up\n\n**Admission Criteria:**\n• GBS ≥2 or any high-risk feature\n• Required transfusion\n• Hemodynamic instability\n• Active bleeding\n• Anticoagulation that needs management\n\n**ICU Criteria:**\n• AIMS65 ≥2\n• Hemodynamic instability\n• Ongoing bleeding\n• Intubated\n• Cirrhosis with variceal bleeding',
+        citation: [1, 2, 4],
+        calculatorLinks: [
+            { id: 'gbs', label: 'Glasgow-Blatchford' },
+            { id: 'aims65', label: 'AIMS65' },
+        ],
+        options: [
+            {
+                label: 'GBS 0-1 — Low Risk',
+                description: 'Consider outpatient management with 24-48h EGD',
+                next: 'ugib-low-risk',
+            },
+            {
+                label: 'Stable — Floor Admission',
+                description: 'GBS ≥2, stable after resuscitation',
+                next: 'ugib-floor-admit',
+            },
+            {
+                label: 'High Risk — ICU Admission',
+                description: 'AIMS65 ≥2, unstable, cirrhosis, ongoing bleeding',
+                next: 'ugib-icu-admit',
+                urgency: 'critical',
+            },
+        ],
+    },
+    {
+        id: 'ugib-low-risk',
+        type: 'result',
+        module: 6,
+        title: 'Low-Risk UGIB — Outpatient',
+        body: '**GBS 0-1 = Low Risk, Outpatient Candidate:** [4][17]\n\n**Criteria for Outpatient Management:**\n• GBS 0-1\n• Hemodynamically stable\n• No transfusion required\n• No high-risk comorbidities\n• Reliable follow-up available\n• Can tolerate PO\n\n**Discharge Plan:**\n• PPI: [Omeprazole](#/drug/omeprazole/ugib) 40 mg PO BID until EGD\n• Outpatient EGD within **24-48 hours**\n• Avoid NSAIDs, aspirin (discuss with PCP)\n• Clear liquid diet, advance as tolerated\n\n**Return Precautions:**\n• Recurrent vomiting blood\n• Black/tarry stools\n• Lightheadedness, syncope\n• Abdominal pain worsening',
+        recommendation: 'GBS 0-1: Outpatient PPI + EGD within 24-48h. Strict return precautions.',
+        confidence: 'definitive',
+        citation: [4, 17],
+    },
+    {
+        id: 'ugib-floor-admit',
+        type: 'result',
+        module: 6,
+        title: 'Floor Admission',
+        body: '**Admission Orders:** [1][2]\n\n**Monitoring:**\n• Vital signs Q4h\n• Serial hemoglobin Q6-8h\n• NPO until after EGD\n\n**Medications:**\n• PPI 40 mg IV Q12h (or 80 mg bolus + 8 mg/hr if high-risk)\n• Consider erythromycin 250 mg IV pre-EGD\n\n**Consults:**\n• GI for EGD within 24 hours\n\n**Blood Bank:**\n• Type and screen on hold\n• Crossmatch if high-risk\n\n**Post-EGD:**\n• Risk-stratify based on endoscopic findings\n• High-risk ulcer (Forrest Ia/Ib/IIa): Continue IV PPI\n• Low-risk: Transition to PO PPI\n• H. pylori testing and treatment',
+        recommendation: 'Floor admission: IV PPI, EGD within 24h, serial Hgb. GI consult.',
+        confidence: 'definitive',
+        citation: [1, 2],
+    },
+    {
+        id: 'ugib-icu-admit',
+        type: 'result',
+        module: 6,
+        title: 'ICU Admission',
+        body: '**ICU Admission Criteria:** [1][2][5]\n• AIMS65 ≥2\n• Hemodynamic instability despite resuscitation\n• Ongoing active bleeding\n• Intubated for airway protection\n• Cirrhosis with variceal bleeding\n• Multiple vasopressor requirement\n• Balloon tamponade in place\n\n**ICU Orders:**\n• Continuous telemetry\n• Arterial line for BP monitoring\n• Central access for resuscitation\n• Ventilator management if intubated\n• Serial lactate Q4-6h\n• Type and crossmatch 4+ units\n\n**Variceal Bleeding:**\n• Continue octreotide infusion\n• Continue antibiotics (ceftriaxone)\n• Early TIPS consult if Child-Pugh B/C\n\n**Notify:**\n• GI for urgent/emergent EGD\n• IR for TIPS if rebleeding or failed EGD',
+        recommendation: 'ICU admission for high-risk UGIB. Urgent GI + consider IR for TIPS.',
+        confidence: 'definitive',
+        citation: [1, 2, 5],
+    },
+    {
+        id: 'ugib-post-egd',
+        type: 'info',
+        module: 6,
+        title: 'Post-Endoscopy Management',
+        body: '**Based on Endoscopic Findings:** [1][9]\n\n**Forrest Classification (Ulcers):**\n| Class | Description | Rebleed Risk |\n|-------|-------------|--------------|\n| Ia | Spurting hemorrhage | 90% |\n| Ib | Oozing hemorrhage | 50% |\n| IIa | Visible vessel | 43% |\n| IIb | Adherent clot | 22% |\n| IIc | Flat pigmented spot | 7% |\n| III | Clean ulcer base | 3% |\n\n**High-Risk (Ia, Ib, IIa):**\n• PPI infusion x 72h\n• Second-look EGD if concern for rebleeding\n• Hospital stay 72+ hours\n\n**Low-Risk (IIc, III):**\n• PO PPI\n• Diet advancement\n• May discharge 24-48h after EGD if stable\n\n**All Patients:**\n• H. pylori testing — treat if positive\n• NSAID cessation counseling\n• PPI for at least 8 weeks',
+        citation: [1, 9],
+        calculatorLinks: [
+            { id: 'forrest', label: 'Forrest Classification' },
+        ],
+    },
+];
+export const UPPER_GI_BLEED_MODULE_LABELS = [
+    'Initial Assessment',
+    'Resuscitation',
+    'Medical Management',
+    'Variceal Bleeding',
+    'Balloon Tamponade',
+    'Disposition',
+];
+export const UPPER_GI_BLEED_CITATIONS = [
+    { num: 1, text: 'Laine L, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917.' },
+    { num: 2, text: 'EB Medicine. Upper Gastrointestinal Bleeding in the Emergency Department. 2023.' },
+    { num: 3, text: 'HALT-IT Trial Collaborators. Effects of a high-dose 24-h infusion of tranexamic acid on death and thromboembolic events in patients with acute gastrointestinal bleeding (HALT-IT). Lancet. 2020;395(10241):1927-1936.' },
+    { num: 4, text: 'Stanley AJ, et al. Outpatient management of patients with low-risk upper-gastrointestinal haemorrhage: multicentre validation and prospective evaluation. Lancet. 2009;373(9657):42-47.' },
+    { num: 5, text: 'Saltzman JR, et al. A simple risk score accurately predicts in-hospital mortality, length of stay, and cost in acute upper GI bleeding (AIMS65). Am J Gastroenterol. 2011;106(6):1059-1066.' },
+    { num: 6, text: 'Garcia-Tsao G, et al. Portal Hypertensive Bleeding in Cirrhosis: Risk Stratification, Diagnosis, and Management. Hepatology. 2017;65(1):310-335.' },
+    { num: 7, text: 'EMCrit IBCC. GI Bleeding Chapter. emcrit.org/ibcc/gib.' },
+    { num: 8, text: 'Villanueva C, et al. Transfusion Strategies for Acute Upper Gastrointestinal Bleeding. N Engl J Med. 2013;368(1):11-21.' },
+    { num: 9, text: 'Gralnek IM, et al. Diagnosis and management of nonvariceal upper gastrointestinal hemorrhage: European Society of Gastrointestinal Endoscopy (ESGE) Guideline. Endoscopy. 2021;53(3):300-332.' },
+    { num: 10, text: 'Barkun AN, et al. The effect of intravenous erythromycin prior to endoscopy in acute nonvariceal upper-GI bleeding: a systematic review and meta-analysis. Endoscopy. 2022.' },
+    { num: 11, text: 'Lau JYW, et al. Timing of Endoscopy for Acute Upper Gastrointestinal Bleeding. N Engl J Med. 2020;382(14):1299-1308.' },
+    { num: 12, text: 'de Franchis R, et al. Baveno VII: Renewing consensus in portal hypertension. J Hepatol. 2022;76(4):959-974.' },
+    { num: 13, text: 'Chavez-Tapia NC, et al. Antibiotic prophylaxis for cirrhotic patients with upper gastrointestinal bleeding. Cochrane Database Syst Rev. 2010.' },
+    { num: 14, text: 'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine and Acute Care, 7th ed. Elsevier, 2019. Chapter: Balloon Tamponade.' },
+    { num: 15, text: 'LITFL. Sengstaken-Blakemore and Minnesota Tubes. litfl.com.' },
+    { num: 16, text: 'Garcia-Pagan JC, et al. Early use of TIPS in patients with cirrhosis and variceal bleeding. N Engl J Med. 2010;362(25):2370-2379.' },
+    { num: 17, text: 'Blatchford O, et al. A risk score to predict need for treatment for upper-gastrointestinal haemorrhage. Lancet. 2000;356(9238):1318-1321.' },
+];

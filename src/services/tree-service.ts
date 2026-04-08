@@ -207,6 +207,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'alcohol-withdrawal': async () => (await import('../data/trees/alcohol-withdrawal.js')).ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS,
     'first-trimester': async () => (await import('../data/trees/first-trimester.js')).FIRST_TRIMESTER_CRITICAL_ACTIONS,
     'acute-pancreatitis': async () => (await import('../data/trees/acute-pancreatitis.js')).ACUTE_PANCREATITIS_CRITICAL_ACTIONS,
+    'upper-gi-bleed': async () => (await import('../data/trees/upper-gi-bleed.js')).UPPER_GI_BLEED_CRITICAL_ACTIONS,
     'diarrhea': async () => (await import('../data/trees/diarrhea.js')).DIARRHEA_CRITICAL_ACTIONS,
     'hiv': async () => (await import('../data/trees/hiv.js')).HIV_CRITICAL_ACTIONS,
     'meningitis': async () => (await import('../data/trees/meningitis.js')).MENINGITIS_CRITICAL_ACTIONS,
@@ -501,6 +502,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'acute-pancreatitis': async () => {
       const m = await import('../data/trees/acute-pancreatitis.js');
       return { nodes: m.ACUTE_PANCREATITIS_NODES, entryNodeId: 'ap-start', categoryId: 'gastroenterology', moduleLabels: m.ACUTE_PANCREATITIS_MODULE_LABELS, citations: m.ACUTE_PANCREATITIS_CITATIONS, criticalActions: m.ACUTE_PANCREATITIS_CRITICAL_ACTIONS };
+    },
+    'upper-gi-bleed': async () => {
+      const m = await import('../data/trees/upper-gi-bleed.js');
+      return { nodes: m.UPPER_GI_BLEED_NODES, entryNodeId: 'ugib-start', categoryId: 'gastroenterology', moduleLabels: m.UPPER_GI_BLEED_MODULE_LABELS, citations: m.UPPER_GI_BLEED_CITATIONS, criticalActions: m.UPPER_GI_BLEED_CRITICAL_ACTIONS };
     },
     'diarrhea': async () => {
       const m = await import('../data/trees/diarrhea.js');

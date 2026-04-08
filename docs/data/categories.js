@@ -652,6 +652,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ap-start',
             },
             {
+                id: 'upper-gi-bleed',
+                title: 'Upper GI Bleed',
+                subtitle: 'Assessment → Resuscitation → Variceal → Blakemore Tube → Disposition',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'ugib-start',
+            },
+            {
                 id: 'chs',
                 title: 'Cannabinoid Hyperemesis Syndrome',
                 subtitle: 'Recognition → Rule Out Organics → Butyrophenones → Capsaicin → Disposition',
