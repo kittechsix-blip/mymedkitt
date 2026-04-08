@@ -20,8 +20,6 @@ function infoBoldAware(parent, text) {
     }
     if (last < text.length)
         parent.appendChild(document.createTextNode(text.slice(last)));
-    if (last === 0 && text.length > 0)
-        parent.textContent = text;
 }
 /** Render a line of info page body text with inline links, bold, and citation refs. */
 function renderInfoBodyLine(container, line) {
