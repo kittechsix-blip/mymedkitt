@@ -69,6 +69,7 @@ export const TCA_TOXIDROME_NODES = [
         module: 2,
         title: 'ECG Assessment',
         body: '**The 12-lead ECG is the single most important test** [1][3].\n\n[ECG Findings in TCA Toxicity](#/info/tca-ecg-findings) — detailed reference.\n\n**Critical ECG markers:**\n• **QRS >100 ms** → increased seizure risk [1]\n• **QRS >160 ms** → increased risk of ventricular arrhythmias [1]\n• **R wave >3 mm in aVR** → sensitive marker of Na channel blockade [2]\n• R/S ratio >0.7 in aVR\n• Rightward axis of terminal 40 ms QRS\n• QT prolongation (K+ channel blockade)\n\nRepeat ECG every 15-30 minutes in the first 2 hours [3].\n\nWhat is the QRS duration?',
+        images: [{ src: 'images/tca-toxidrome/tca-wide-qrs-ecg.png', alt: 'ECG showing wide QRS complex from tricyclic antidepressant overdose with sodium channel blockade — QRS duration >120ms', caption: 'TCA toxicity ECG — wide QRS from Na⁺ channel blockade. QRS >100ms → seizure risk; >160ms → VT/VF risk. R wave ≥3mm in aVR confirms blockade. Treatment: sodium bicarbonate to narrow QRS and shift pH. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 2, 3],
         calculatorLinks: [{ id: 'qrs-risk', label: 'QRS Risk Stratifier' }],
         options: [

@@ -13,6 +13,7 @@ export const ANTICOAG_REVERSAL_NODES = [
         module: 1,
         title: 'Anticoagulant Reversal',
         body: '[Reversal Quick Reference](#/info/acr-reversal-summary) — one-glance guide.\n\n**Before reversing, consider:**\n• **How coagulopathic?** Assess ALL meds affecting coagulation + labs. Critically ill patients often have multiple coagulopathies.\n• **Why anticoagulated?** AF or DVT = short interruption generally fine. Mechanical mitral valve = high thrombotic risk.\n• **How important is reversal?** Life-threatening bleeding → aggressive. Minor bleeding → local measures. Minor procedures → often unnecessary.\n• **Cirrhosis or DIC?** INR may not reflect true coagulation state — consider TEG. [1,2,16]',
+        images: [{ src: 'images/anticoag-reversal/coagulation-cascade-anticoags.png', alt: 'Coagulation cascade diagram annotated with anticoagulant drug classes showing where warfarin, heparin, dabigatran, and factor Xa inhibitors act in the clotting pathway', caption: 'Anticoagulant mechanism map — warfarin (Factors II,VII,IX,X), UFH/LMWH (Xa + IIa), dabigatran (IIa only), rivaroxaban/apixaban/edoxaban (Xa only). Reversal strategy is agent-specific. (CC BY-SA 4.0)' }],
         citation: [1, 2, 16],
         next: 'acr-bleeding-q',
     },

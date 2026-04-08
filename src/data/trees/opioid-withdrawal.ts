@@ -42,6 +42,7 @@ export const OPIOID_WITHDRAWAL_NODES: DecisionNode[] = [
     module: 1,
     title: 'Clinical Recognition',
     body: '**History** — symptoms begin 4–12 hours after last dose of short-acting opioids, 24–48 hours after methadone cessation:\n• Craving for opioids\n• Dysphoria and restlessness\n• Rhinorrhea and lacrimation\n• Myalgias and arthralgias\n• Nausea, vomiting, abdominal cramping, diarrhea\n\n**Physical Examination:**\n• Mydriasis (pupillary dilation)\n• Yawning\n• Diaphoresis\n• Piloerection ("gooseflesh")\n• Increased bowel sounds\n• Rhinorrhea\n\nVital signs often **normal** — tachycardia if present reflects agitation or hypovolemia. Temperature is normal. Mental status preserved except in severe cases. [4]\n\nUse the **COWS score** to quantify severity and guide treatment:\n\n[COWS Interpretation Guide](#/info/ow-cows-guide)',
+    images: [{ src: 'images/opioid-withdrawal/opioid-withdrawal-course.jpg', alt: 'Timeline diagram showing the clinical course of opioid withdrawal symptoms from onset through peak to resolution for short-acting vs long-acting opioids', caption: 'Opioid withdrawal timeline — short-acting (heroin, oxycodone): onset 8-24h, peak 36-72h, resolution 5-7d. Long-acting (methadone): onset 36-48h, peak 72-96h, prolonged course. COWS ≥13 = moderate withdrawal. (CC BY 4.0)' }],
     citation: [4, 5],
     calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
     next: 'ow-cows-result',

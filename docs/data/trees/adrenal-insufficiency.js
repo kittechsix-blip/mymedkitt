@@ -21,6 +21,7 @@ export const ADRENAL_INSUFFICIENCY_NODES = [
         module: 1,
         title: 'Adrenal Insufficiency — Presentation',
         body: '[Adrenal Insufficiency Steps Summary](#/info/ai-summary)\n\n**Adrenal crisis is a medical emergency.** Defined as acute hemodynamic deterioration (SBP ≤100 mmHg or ≥20 mmHg below baseline) that resolves within 1-2 hours of parenteral hydrocortisone. Mortality rate: 0.5 per 100 patient-years in known AI patients. [2][4]\n\nAdrenal crisis can be the first presentation of previously undiagnosed AI in up to 50% of cases. Maintain high clinical suspicion in unexplained shock refractory to fluids and vasopressors.',
+        images: [{ src: 'images/adrenal-insufficiency/addisons-hyperpigmentation.jpg', alt: 'Lower extremities of a patient with Addison\'s disease showing diffuse bronze-brown hyperpigmentation from elevated ACTH stimulating melanocortin receptors', caption: "Addison's disease — bronze hyperpigmentation from ACTH-driven MSH stimulation. Found in PRIMARY AI (elevated ACTH); ABSENT in secondary AI (low ACTH). Adrenal crisis can occur WITHOUT hyperpigmentation — maintain suspicion in unexplained refractory shock. (CC BY-SA 4.0, James Heilman MD)" }],
         citation: [2, 4, 7],
         calculatorLinks: [
             { id: 'bsa', label: 'BSA Calculator' },

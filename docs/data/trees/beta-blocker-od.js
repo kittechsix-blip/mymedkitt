@@ -13,6 +13,7 @@ export const BETA_BLOCKER_OD_NODES = [
         module: 1,
         title: 'Beta-Blocker Overdose — Initial Assessment',
         body: '[Beta-Blocker OD Steps Summary](#/info/bb-steps-summary) — quick reference.\n\nBeta-blocker toxicity causes **bradycardia, hypotension, and hypoglycemia** (the classic triad). Hypoglycemia is especially common in children [1][2].\n\n**Agent characteristics matter:**\n• **Lipophilic** (propranolol, metoprolol, carvedilol) — cross BBB → CNS depression, seizures\n• **Hydrophilic** (atenolol, nadolol) — less CNS effects, dialyzable\n• **Propranolol** — sodium channel blockade → QRS widening (treat like TCA with sodium bicarb)\n• **Sotalol** — QT prolongation, Torsades risk (Class III antiarrhythmic effect)\n• **Carvedilol** — alpha blockade → more profound hypotension\n\n[Agent-Specific Guide](#/info/bb-agent-guide) — propranolol, sotalol, carvedilol highlighted.\n\nWhat is the patient\'s current clinical status?',
+        images: [{ src: 'images/beta-blocker-od/first-degree-avblock.jpg', alt: '12-lead ECG showing first-degree AV block with prolonged PR interval >300ms characteristic of beta-blocker toxicity', caption: 'Beta-blocker toxicity ECG — first-degree AV block (PR >300 ms). Progressive findings: PR prolongation → sinus bradycardia → junctional escape → QRS widening (propranolol adds Na⁺ channel blockade → treat like TCA). (CC BY-SA 4.0, James Heilman MD)' }],
         citation: [1, 2],
         calculatorLinks: [{ id: 'bb-agent-guide', label: 'Agent-Specific Guide' }],
         options: [

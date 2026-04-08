@@ -29,6 +29,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     module: 1,
     title: 'Guillain-Barre Syndrome',
     body: '[GBS Summary](#/info/gbs-summary) - acute inflammatory polyneuropathy requiring early recognition and aggressive monitoring.\n\n**Guillain-Barre Syndrome (GBS)** is an acute immune-mediated polyradiculoneuropathy characterized by rapidly progressive, symmetric weakness and areflexia.\n\n**Key features:**\n- Ascending symmetric weakness (legs before arms)\n- Hyporeflexia or areflexia\n- Sensory symptoms (paresthesias, numbness) often precede weakness\n- Progression over days to 4 weeks (nadir typically by 4 weeks)\n\n**Antecedent infection in 2/3 of cases:**\n- Campylobacter jejuni (most common, associated with axonal variants)\n- CMV, EBV, Zika virus\n- Recent vaccination (rare)\n\n**3-5% mortality** from respiratory failure, autonomic dysfunction, or pulmonary embolism.',
+    images: [{ src: 'images/guillain-barre/gbs-patterns.png', alt: 'Diagram showing the different clinical patterns of Guillain-Barré syndrome including AIDP, AMAN, AMSAN, Miller Fisher syndrome, and pharyngeal-cervical-brachial variants', caption: 'GBS variants — AIDP (ascending demyelinating, most common in West), AMAN/AMSAN (axonal, post-Campylobacter), Miller Fisher (ophthalmoplegia + ataxia + areflexia). All require IVIG or plasmapheresis for confirmed moderate-severe disease. (CC BY 4.0, Leonhard et al. 2019)' }],
     citation: [1, 2, 3],
     calculatorLinks: [{ id: 'gbs-variants', label: 'GBS Variants' }],
     next: 'gbs-presentation',

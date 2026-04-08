@@ -29,6 +29,7 @@ export const MYASTHENIA_GRAVIS_NODES: DecisionNode[] = [
     module: 1,
     title: 'Myasthenia Gravis',
     body: '[MG Quick Reference](#/info/mg-summary) — recognition, crisis management, and treatment pathway.\n\n**Myasthenia gravis (MG)** is an autoimmune disorder affecting the neuromuscular junction, caused by antibodies against acetylcholine receptors (AChR) or related proteins.\n\n**Hallmark feature:** Fatigable weakness — worse with use, better with rest.\n\n**Key patterns:**\n• Ocular symptoms (ptosis, diplopia) present in **85% at onset**\n• Bulbar involvement: dysarthria, dysphagia, facial weakness\n• Limb weakness: proximal > distal\n• Respiratory muscles can be involved — this is the emergency\n• **Diurnal variation** — symptoms worsen throughout the day\n\n**Critical distinction:** MG weakness fluctuates and improves with rest. GBS weakness is progressive and does not fluctuate.',
+    images: [{ src: 'images/myasthenia-gravis/mg-ptosis-diplopia.jpg', alt: 'Patient with myasthenia gravis showing bilateral ptosis and strabismus attempting to look upward — classic fatigable ocular muscle weakness', caption: 'Myasthenic crisis — bilateral ptosis and diplopia from fatigable ocular muscle weakness. Present in 85% at onset. Respiratory compromise (FVC <20 mL/kg or NIF worse than -30 cmH₂O) defines crisis requiring intubation. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 4],
     next: 'mg-mgfa-class',
   },

@@ -12,6 +12,7 @@ export const TTP_NODES = [
         module: 1,
         title: 'TTP — Recognition',
         body: '[TTP Steps Summary](#/info/ttp-steps)\n\n**Thrombotic Thrombocytopenic Purpura (TTP)** is a life-threatening thrombotic microangiopathy characterized by ADAMTS13 deficiency causing microvascular platelet aggregation. [1][2]\n\n**Mortality without treatment: >90%**\n**Mortality with prompt TPE: <10%** [3]\n\n**Key Principle:** TTP is a clinical diagnosis requiring emergent plasma exchange (TPE). Do NOT wait for ADAMTS13 results to start treatment if clinical suspicion is high. [4]\n\n**Classic Pentad** (present in <5% of cases): [1]\n1. Microangiopathic hemolytic anemia (MAHA)\n2. Thrombocytopenia\n3. Neurological abnormalities\n4. Renal dysfunction\n5. Fever\n\n**Modern criteria:** MAHA + thrombocytopenia without alternative explanation is sufficient to suspect TTP and initiate workup. [2][4]',
+        images: [{ src: 'images/ttp/ttp-schistocytes.jpg', alt: 'Peripheral blood smear showing fragmented red blood cells (schistocytes, helmet cells) from intravascular shearing — hallmark of microangiopathic hemolytic anemia in TTP', caption: 'TTP blood smear — schistocytes (fragmented RBCs, helmet cells) from ADAMTS13 deficiency causing platelet-fibrin microthrombi that shear RBCs. MAHA + thrombocytopenia = initiate TPE immediately — do not wait for ADAMTS13 results. (CC0, Erhabor)' }],
         citation: [1, 2, 3, 4],
         calculatorLinks: [
             { id: 'ttp-plasmic', label: 'PLASMIC Score' },
