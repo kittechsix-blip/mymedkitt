@@ -60,13 +60,15 @@ async function refreshFromSupabase(): Promise<void> {
 /** Load hardcoded data as last-resort fallback */
 async function loadHardcodedFallback(): Promise<void> {
   const mod = await import('../data/info-pages.js');
-  setCache(mod.getAllInfoPagesFallback());
+  const stopMod = await import('../data/stop-pages.js');
+  setCache([...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()]);
 }
 
 /** Merge hardcoded info pages missing from cached data */
 async function mergeHardcodedInfoPages(): Promise<void> {
   const mod = await import('../data/info-pages.js');
-  const hardcoded = mod.getAllInfoPagesFallback() as InfoPage[];
+  const stopMod = await import('../data/stop-pages.js');
+  const hardcoded = [...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()] as InfoPage[];
   for (const page of hardcoded) {
     if (!infoPageMap.has(page.id)) {
       infoPageMap.set(page.id, page);

@@ -421,6 +421,48 @@ Every consult involving an emergent procedure, resuscitation, or time-critical p
 - `#/tree/tree-id` uses `window.location.hash` navigation
 - Overlay closes automatically before navigation
 
+### "Stop" Page — Do NOT Items (MANDATORY for ALL Consults)
+
+Every consult MUST include a "Stop" info page listing 5-10 critical pitfalls to avoid. This surfaces common errors that could harm patients.
+
+**Implementation:**
+1. Create `{CONSULT}_STOP: InfoPage` in `info-pages.ts` with this format:
+```typescript
+const CONSULT_STOP: InfoPage = {
+  id: 'consult-stop',  // e.g., 'afib-stop', 'dka-stop', 'stroke-stop'
+  title: 'Consult Name — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT [action]',
+      body: 'Explanation of why this is dangerous. [Link to relevant node](#/node/node-id).',
+    },
+    // 5-10 sections, each a critical "don't do"
+  ],
+};
+```
+
+2. Register in `INFO_PAGES` map
+3. Add to toolbar: `{ id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '{consult-id}-stop' }`
+
+**What to include (think like a senior EM attending warning residents):**
+- Contraindicated medications in specific contexts
+- Dangerous actions/procedures that could cause harm
+- Common diagnostic errors that lead to bad outcomes
+- Things that delay critical treatment
+- Drug interactions that cause harm
+- Actions that worsen the underlying condition
+
+**Examples of good "Do NOT" items:**
+- "Do NOT give diltiazem to a patient with AFib and EF ≤40%" (worsens CHF)
+- "Do NOT give beta-blockers in cocaine chest pain" (unopposed alpha)
+- "Do NOT discharge thunderclap headache without SAH workup"
+- "Do NOT give TPA if symptom onset >4.5 hours"
+- "Do NOT turn lights off in acute angle closure glaucoma"
+- "Do NOT nasally intubate Le Fort II/III" (cribriform plate risk)
+
+**Each item MUST link to the relevant node** where this is explained using `[text](#/node/node-id)` format.
+
 ### Consult Images (MANDATORY)
 
 **Sources (search in order, all open-source/Creative Commons):**
