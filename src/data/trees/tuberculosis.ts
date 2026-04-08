@@ -117,6 +117,7 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     module: 2,
     title: 'Chest Radiography',
     body: 'CXR is an important **supportive diagnostic tool** but cannot confirm or exclude TB. [1]\n\n**Classic findings (immunocompetent):**\n• Upper lobe infiltrates or cavitation\n• Apical scarring\n• Hilar/mediastinal lymphadenopathy\n• Miliary pattern (diffuse small nodules)\n\n**Atypical presentations (HIV/immunocompromised):**\n• Lower lobe disease\n• Non-cavitary infiltrates\n• Isolated lymphadenopathy\n• Normal CXR (up to 10–15% of HIV+ TB cases)\n\n**Key point:** Radiographic findings should prompt microbiologic confirmation — **never treat based on CXR alone**. [1]',
+    images: [{ src: 'images/tuberculosis/tb-cxr.jpg', alt: 'PA chest X-ray showing bilateral upper lobe infiltrates and right apical cavitation in advanced pulmonary TB', caption: 'Active pulmonary TB — bilateral upper lobe infiltrates with right apical cavitation. Classic pattern in immunocompetent patients. (Public domain)' }],
     citation: [1],
     next: 'tb-afb-naa',
   },

@@ -50,6 +50,7 @@ export const HYPOTHERMIA_NODES = [
         module: 1,
         title: 'Severity Classification',
         body: '**Temperature-based classification:**\n\n| Severity | Temperature | Features |\n|----------|-------------|----------|\n| **Mild** | 32-35°C (90-95°F) | Conscious, shivering |\n| **Moderate** | 28-32°C (82-90°F) | Altered LOC, shivering stops |\n| **Severe** | 24-28°C (75-82°F) | Unconscious, VS present |\n| **Profound** | <24°C (<75°F) | No vital signs |\n\n**Key sign:** Shivering typically STOPS below 30-32°C. If patient is shivering → temp likely >30°C.\n\nWhat is the patient\'s status? [1][2][3]',
+        images: [{ src: 'images/hypothermia/osborn-j-waves.jpg', alt: 'ECG strip showing prominent Osborn J waves — positive deflection at the J-point in a hypothermic patient', caption: "Hypothermia ECG — Osborn (J) waves: positive deflection at the J-point. Amplitude correlates with degree of hypothermia. (CC BY 3.0)" }],
         citation: [1, 2, 3],
         options: [
             {

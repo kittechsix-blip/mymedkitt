@@ -18,6 +18,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     module: 1,
     title: 'NSTEMI Confirmed',
     body: 'Establish diagnosis: [troponin rise](#/info/nstemi-troponin-sensitivity) AND at least one of ischemic symptoms, new ST depression/T-wave inversion, or wall motion abnormality.\n\n**Immediate actions:**\n\u2022 [Aspirin](#/drug/aspirin/acs) 162\u2013325 mg chewed\n\u2022 [Nitroglycerin](#/drug/nitroglycerin/acs) 0.4 mg SL q5min \u00D7 3 \u2014 rule out RV infarction first\n\u2022 Morphine ONLY for refractory pain (may increase mortality)\n\u2022 Supplemental O\u2082 only if SpO\u2082 <90%\n\u2022 12-lead ECG within 10 minutes\n\u2022 Serial troponins q3\u20136h',
+    images: [{ src: 'images/nstemi/wellens-ecg.jpg', alt: "Wellens' syndrome ECG showing deep symmetric T-wave inversions in V2-V3 during chest pain", caption: "Wellens' syndrome — deep anterior T-wave inversions indicating critical proximal LAD stenosis; a high-risk NSTEMI equivalent. (CC BY-SA 3.0)" }],
     citation: [1, 2],
     next: 'nstemi-initial-anticoag',
   },

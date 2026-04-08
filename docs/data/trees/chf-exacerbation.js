@@ -12,6 +12,7 @@ export const CHF_EXACERBATION_NODES = [
         module: 1,
         title: 'CHF Exacerbation: Initial Assessment',
         body: '**Acute Decompensated Heart Failure (ADHF)** — rapid onset of signs/symptoms requiring urgent treatment.\n\n**Key Question:** Is this **SCAPE** (Sympathetic Crashing Acute Pulmonary Edema) or **FOPE** (Fluid Overload Pulmonary Edema)?\n\n| Feature | SCAPE | FOPE |\n|---------|-------|------|\n| Onset | Minutes to hours | Days to weeks |\n| SBP | Often >180 | Variable |\n| Volume status | Euvolemic or dry | True volume overload |\n| Edema | Minimal | Significant |\n| Primary treatment | NTG + BiPAP | Diuretics |\n\n**Common precipitants:**\n- Medication non-adherence (diuretics, ACE-I)\n- ACS / new ischemia\n- Uncontrolled hypertension\n- Arrhythmia (new A-Fib)\n- Infection / sepsis\n- Renal dysfunction\n\nAlways identify and treat the precipitant. [1][2]',
+        images: [{ src: 'images/chf-exacerbation/pulmonary-edema-cxr.jpg', alt: 'AP chest X-ray showing acute pulmonary edema with cardiomegaly, bilateral pleural effusions, and vascular redistribution', caption: 'Acute cardiogenic pulmonary edema — cardiomegaly, vascular redistribution, bilateral pleural effusions. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 2],
         calculatorLinks: [
             { id: 'chf-ehmrg', label: 'EHMRG 7-Day Mortality' },

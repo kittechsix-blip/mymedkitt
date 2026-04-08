@@ -1554,6 +1554,52 @@ const SD_SUMMARY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// "STOP" Pages — Common Pitfalls / Do NOT Do
+// Format: 5-10 critical errors to avoid, each linking to relevant node
+// -------------------------------------------------------------------
+
+const AFIB_STOP: InfoPage = {
+  id: 'afib-stop',
+  title: 'A-Fib RVR — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  citations: [],
+  sections: [
+    {
+      heading: '🛑 Do NOT give diltiazem or verapamil in HFrEF',
+      body: 'Calcium channel blockers are **Class 3: Harm** in patients with EF ≤40%. They worsen heart failure and increase mortality. Use [beta-blockers or amiodarone instead](#/node/afib-hfref-drugs).',
+    },
+    {
+      heading: '🛑 Do NOT give AV nodal blockers in WPW',
+      body: 'Beta-blockers, CCBs, digoxin, and adenosine are **contraindicated** in AFib with WPW (pre-excitation). They block the AV node, forcing conduction down the accessory pathway → VF. [Procainamide or cardioversion](#/node/afib-unstable-wpw).',
+    },
+    {
+      heading: '🛑 Do NOT cardiovert AFib >48h without anticoagulation',
+      body: 'Cardioverting AFib of unknown or >48h duration without 3+ weeks of anticoagulation or TEE-confirmed no thrombus risks stroke. [Rate control + anticoagulation + cardiology](#/node/afib-cha2ds2vasc).',
+    },
+    {
+      heading: '🛑 Do NOT combine beta-blocker + CCB IV',
+      body: 'Giving IV metoprolol + IV diltiazem together causes severe bradycardia and hypotension. Choose one agent first, add the other cautiously if needed. [Rate control approach](#/node/afib-stable-drugs).',
+    },
+    {
+      heading: '🛑 Do NOT rely on digoxin alone for acute RVR',
+      body: 'Digoxin takes 2-6 hours to achieve rate control — too slow for acute RVR. Use beta-blockers or CCBs first; digoxin is an [adjunct for CHF patients](#/node/afib-refractory-dig).',
+    },
+    {
+      heading: '🛑 Do NOT forget to check TSH',
+      body: 'Thyrotoxicosis is a reversible cause of AFib. Rate control will fail if hyperthyroidism is not treated. [Check TSH + troponin in ALL patients](#/node/afib-workup).',
+    },
+    {
+      heading: '🛑 Do NOT discharge new AFib without cardiology follow-up',
+      body: 'New-onset AFib needs evaluation for underlying cause, long-term anticoagulation decision, and rhythm vs rate control strategy. [Arrange cardiology follow-up](#/node/afib-disposition).',
+    },
+    {
+      heading: '🛑 Do NOT skip EF assessment',
+      body: 'EF determines safe rate control agents. If EF is unknown, avoid CCBs until clarified. [Bedside echo or prior records](#/node/afib-ef-screen).',
+    },
+  ],
+};
+
+// -------------------------------------------------------------------
 // A-Fib RVR — Steps Summary
 // -------------------------------------------------------------------
 
@@ -11756,6 +11802,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
   'sd-summary': SD_SUMMARY,
   'afib-summary': AFIB_SUMMARY,
+  'afib-stop': AFIB_STOP,
   'pe-summary': PE_SUMMARY,
   'k-summary': K_SUMMARY,
   'stroke-summary': STROKE_SUMMARY,

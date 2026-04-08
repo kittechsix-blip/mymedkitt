@@ -40,6 +40,7 @@ export const MENINGITIS_NODES = [
         module: 1,
         title: 'Physical Examination',
         body: '**Kernig and Brudzinski signs:**\n\u2022 Sensitivity: only **2%** (essentially useless for ruling out) [13]\n\u2022 Specificity: **97\u201398%** (useful when positive, but rarely positive) [13]\n\n**Jolt accentuation of headache:**\n\u2022 Originally reported sensitivity 65\u201397%, but subsequent studies show only **21% sensitivity**, 82% specificity [13]\n\u2022 Inadequate to confirm or refute diagnosis\n\n**Key exam findings suggesting specific etiologies:**\n\u2022 Petechial rash (palms/soles) \u2192 *N. meningitidis* (also other bacterial causes) [9]\n\u2022 Dermatomal vesicular rash \u2192 VZV meningitis/encephalitis [6]\n\u2022 Swollen parotid glands (unvaccinated) \u2192 mumps [6]\n\n**Findings suggesting encephalitis (brain parenchyma involvement):**\n\u2022 Motor weakness / hemiparesis\n\u2022 Aphasia\n\u2022 Personality changes, hallucinations, psychosis\n\u2022 Dysautonomia\n\u2022 Seizures [8]',
+        images: [{ src: 'images/meningitis/meningococcemia-petechiae.jpg', alt: 'Hand showing non-blanching petechial and purpuric rash of meningococcemia', caption: 'Meningococcemia — non-blanching petechiae/purpura. Presence mandates immediate antibiotics before LP. (Public domain)' }],
         citation: [6, 8, 9, 13],
         next: 'mening-focal-deficits',
     },

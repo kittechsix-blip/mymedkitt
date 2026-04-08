@@ -53,6 +53,7 @@ export const POTASSIUM_NODES = [
         module: 1,
         title: 'Check ECG Immediately',
         body: 'The **first response** to a lab report of hyperkalemia should be to look at telemetry and obtain an ECG.\n\n[Hyperkalemia ECG Findings](#/info/k-hyper-ecg-info) \u2014 progression by K+ level\n\n**If ECG shows hyperkalemia features** \u2192 confirms diagnosis, treat as severe.\n\n**If severe lab value but normal ECG** \u2192 consider pseudohyperkalemia, repeat lab.\n\nMost patients with hyperkalemia are **asymptomatic**, even with severe elevations.',
+        images: [{ src: 'images/potassium/hyperkalemia-ecg.jpg', alt: 'ECG from a patient with K+ 8.2 mmol/L showing prominent peaked narrow T waves', caption: 'Hyperkalemia ECG (K⁺ 8.2 mmol/L) — peaked narrow T waves. Escalating findings: peaked T → PR prolongation → wide QRS → sine wave → PEA. (CC BY 4.0)' }],
         citation: [1, 5],
         next: 'k-hyper-severity',
     },

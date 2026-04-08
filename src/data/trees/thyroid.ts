@@ -29,6 +29,7 @@ export const THYROID_NODES: DecisionNode[] = [
     module: 1,
     title: 'Thyroid Disorders — Presentation',
     body: '[Thyroid Disorders Steps Summary](#/info/thyroid-summary)\n\n**Thyroid emergencies are rare but lethal.** Decompensated hypothyroidism mortality: 25-50%. Thyroid storm mortality: 8-25%. Both are **clinical diagnoses** — lab values reflect chronic state, not acute severity. Do NOT delay treatment for lab confirmation. [1][14]\n\nSepsis is the most common precipitant for BOTH conditions and can occur concurrently. Always consider endocrine emergency in the undifferentiated critically ill patient, especially if elderly, known thyroid disease, or on thyroid-altering medications (amiodarone, lithium, checkpoint inhibitors). [6][14]',
+    images: [{ src: 'images/thyroid/goiter.png', alt: 'Clinical photograph of a woman with visible anterior neck enlargement from goiter with annotated thyroid diagram', caption: 'Goiter — visible thyroid enlargement; may precipitate thyroid storm in hyperthyroid patients with physiologic stress. (CC BY-SA 4.0)' }],
     citation: [1, 6, 14],
     calculatorLinks: [
       { id: 'burch-wartofsky', label: 'Burch-Wartofsky Score' },

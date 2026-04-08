@@ -104,6 +104,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'ESOPHAGEAL BATTERY — EMERGENT',
+    images: [{ src: 'images/button-battery/button-battery-xray.png', alt: 'Abdominal X-ray showing a button battery as a round radiopaque disc in the GI tract', caption: 'Button battery on X-ray — round radiopaque disc. Esophageal location (not shown) requires removal within 2 hours. (CC BY-SA 4.0, Doc James)' }],
     body: `**This is a TIME-CRITICAL emergency.**
 
 **Target: Remove within 2 hours (maximum 12 hours)**

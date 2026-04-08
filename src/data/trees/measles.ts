@@ -80,6 +80,7 @@ export const MEASLES_NODES: DecisionNode[] = [
     module: 3,
     title: 'Clinical Diagnosis',
     body: '**Pathognomonic Finding: Koplik Spots**\n\n- 1-3mm grayish-white papules on erythematous base\n- Location: buccal mucosa opposite upper 1st/2nd molars\n- "Salt grains on a red background"\n- Appear 1-2 days BEFORE rash, disappear 1-2 days AFTER rash\n- Present in 60-70% of cases\n\n**Characteristic Rash:**\n- Appears ~14 days post-exposure (3-7 days after prodrome)\n- Starts on face (hairline, behind ears) and neck\n- Spreads cephalocaudally over 24-48 hours to trunk, then extremities (including palms/soles)\n- Erythematous macules become papules, may coalesce\n- Fades in same order (head first) over 5-7 days\n- May leave brownish discoloration and fine desquamation\n\n**Classic Triad at Rash Onset:**\n- Cough (harsh, non-productive)\n- Coryza (rhinorrhea)\n- Conjunctivitis (bilateral, non-purulent)',
+    images: [{ src: 'images/measles/koplik-spots.jpg', alt: 'Koplik spots on buccal mucosa — irregular white lesions on erythematous base near upper molar', caption: 'Koplik spots — pathognomonic for measles; appear 1-2 days before rash. "Salt grains on a red background." (CC BY-SA 4.0)' }],
     citation: [2, 6, 7],
     next: 'measles-lab-confirm',
   },

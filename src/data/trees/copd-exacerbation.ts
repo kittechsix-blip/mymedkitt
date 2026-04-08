@@ -35,6 +35,7 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     module: 1,
     title: 'COPD Exacerbation: Initial Assessment',
     body: '**Acute Exacerbation of COPD (AECOPD)** - acute worsening of respiratory symptoms requiring additional therapy.\n\n**Cardinal Symptoms (Anthonisen Criteria):**\n- Increased dyspnea\n- Increased sputum volume\n- Increased sputum purulence\n\n**Common Triggers:**\n- Viral infection (50-70%)\n- Bacterial infection (30-50%)\n- Environmental pollutants\n- Medication non-adherence\n- Unknown (30%)\n\n**Initial Actions:**\n1. IV access, cardiac monitor, SpO2\n2. Target SpO2 **88-92%** (avoid hyperoxia)\n3. Discontinue home inhalers initially\n4. Labs: CBC, BMP, VBG/ABG, procalcitonin\n5. CXR (rule out pneumonia, CHF, PTX)\n6. ECG (arrhythmia, RV strain)\n\n**Key Question:** How sick is this patient? [1][2]',
+    images: [{ src: 'images/copd-exacerbation/copd-cxr.jpg', alt: 'PA chest X-ray showing severe COPD with marked hyperinflation, flattened hemidiaphragms, and small cardiac silhouette', caption: 'Severe COPD CXR — hyperinflation, flattened diaphragms, barrel chest configuration. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 2],
     next: 'copd-severity',
   },

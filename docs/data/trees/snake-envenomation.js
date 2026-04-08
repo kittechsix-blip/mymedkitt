@@ -55,6 +55,7 @@ export const SNAKE_ENVENOMATION_NODES = [
         module: 3,
         title: 'Pit Viper: Severity Assessment',
         body: '**Perform serial assessments every 30-60 minutes:**\n- Circumference measurements at consistent landmarks\n- Leading edge marking with time stamps\n- Pain assessment\n- Systemic symptoms review\n\n**Snakebite Severity Score (SSS):** 0-20 points\n- Change of 1 point = clinically significant worsening\n- Used to track progression and response to treatment\n\n[Severity Score Calculator](#/calculator/snake-severity)\n\n**Initial Lab Thresholds Requiring Antivenom:**\n- Platelets < 100,000\n- Fibrinogen < 100 mg/dL\n- INR > 3.0\n- PTT > 50 seconds\n\n**Repeat labs at 6 hours** (or before discharge for dry bites). [1][3]',
+        images: [{ src: 'images/snake-envenomation/pit-viper-bite.jpg', alt: 'Left calf 48 hours after Fer-de-Lance pit viper bite showing swelling, ecchymosis, and local tissue reaction', caption: 'Pit viper (Fer-de-Lance) bite — local tissue swelling and ecchymosis at bite site. Serial limb circumference measurements are key. (CC BY-SA 4.0)' }],
         citation: [1, 3],
         calculatorLinks: [
             { id: 'snake-severity', label: 'Severity Score' },

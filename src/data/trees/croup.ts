@@ -39,6 +39,7 @@ export const CROUP_NODES: DecisionNode[] = [
     module: 1,
     title: 'Severity Assessment',
     body: 'Classify croup severity based on clinical findings. The **Westley Croup Score** guides management.\n\nAssess: stridor, retractions, air entry, cyanosis, and level of consciousness.\n\n**Key distinction:** Stridor at rest vs. only with agitation determines the threshold for epinephrine.',
+    images: [{ src: 'images/croup/steeple-sign.jpg', alt: 'AP neck X-ray in a child with croup showing subglottic tracheal narrowing — the steeple sign', caption: 'Croup steeple sign — AP neck X-ray showing subglottic narrowing. Present in ~50% of cases; diagnosis is clinical. (CC BY-SA 3.0, Frank Gaillard)' }],
     citation: [2, 4, 7],
     options: [
       {

@@ -73,6 +73,7 @@ export const CO_TOXICITY_NODES = [
         module: 1,
         title: 'Clinical Recognition — Key Pitfalls',
         body: '**Classic triad:** Headache, nausea, dizziness — but these are **nonspecific!** CO poisoning is frequently missed because symptoms mimic viral illness, migraine, or food poisoning. [1]\n\n**Cherry red skin:** This finding is **RARE** and usually seen **postmortem**. Do NOT rely on this for diagnosis. [2]\n\n⚠️ **Pulse oximetry is FALSELY NORMAL** — standard pulse ox cannot distinguish carboxyhemoglobin (COHb) from oxyhemoglobin (O2Hb). A patient with severe CO poisoning will have SpO2 reading 98-100%! [1][3]\n\n**High-risk scenarios that should trigger CO testing:**\n• Headache that improves when patient leaves home/workplace\n• Multiple family members or coworkers with similar symptoms\n• Symptoms in winter with gas heating\n• Symptoms after generator use, fire exposure, or car in garage\n• Suicide attempt in enclosed space with running vehicle [2]',
+        images: [{ src: 'images/co-toxicity/co-symptoms.jpg', alt: 'Diagram listing carbon monoxide poisoning symptom severity by carboxyhemoglobin level from mild to fatal', caption: 'CO poisoning symptom spectrum by COHb level — headache/nausea at low levels progressing to seizure/coma. SpO2 is FALSELY NORMAL. (Public domain/CC0)' }],
         citation: [1, 2, 3],
         next: 'co-workup',
     },

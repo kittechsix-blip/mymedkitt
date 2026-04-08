@@ -54,6 +54,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     module: 2,
     title: 'Massive PE — High-Risk',
     body: 'Sustained hypotension (SBP <90 mmHg or drop ≥40 mmHg for >15 min), cardiogenic shock, or cardiac arrest.\n\n**Mortality >15%** without immediate treatment.\n\n**ICD-10:** I26.02 (saddle embolus with acute cor pulmonale), I26.09, I26.90',
+    images: [{ src: 'images/pe-treatment/saddle-pe-ct.png', alt: 'CT pulmonary angiogram showing saddle embolus straddling the main pulmonary artery bifurcation with bilateral filling defects', caption: 'Saddle PE on CT-PA — massive embolus at the main PA bifurcation with bilateral filling defects. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 3],
     next: 'pe-massive-tx',
   },

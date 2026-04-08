@@ -34,6 +34,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
     module: 1,
     title: 'Heat Illness Classification',
     body: '**Heat stroke criteria (BOTH required):**\n• Core temp >40°C (104°F) — use rectal or esophageal thermometry\n• CNS dysfunction (confusion, delirium, seizures, coma)\n\n**Heat exhaustion:**\n• Core temp <40°C\n• May have symptoms (headache, nausea, weakness) but **normal mentation**\n\n**CRITICAL:** Oral, axillary, and temporal thermometry are UNRELIABLE in heat illness — use rectal temp. [1][2][3]',
+    images: [{ src: 'images/heat-stroke/heat-exhaustion-vs-stroke.png', alt: 'Side-by-side comparison of heat exhaustion vs heat stroke symptoms, mental status, skin findings, and temperature thresholds', caption: 'Heat exhaustion vs heat stroke — AMS + temp >40°C = stroke. Differentiation drives immediate cooling decision. (Public domain)' }],
     citation: [1, 2, 3],
     options: [
       {

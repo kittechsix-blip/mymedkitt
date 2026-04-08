@@ -32,6 +32,7 @@ export const AACG_NODES: DecisionNode[] = [
     module: 1,
     title: 'Clinical Presentation',
     body: '**Does the patient have features suggestive of AACG?**\n\n**Symptoms:**\n- Sudden severe unilateral eye pain\n- Headache (may mimic migraine)\n- Blurred vision / decreased acuity\n- **Halos around lights** (pathognomonic)\n- Nausea and vomiting (prominent — may mimic GI illness)\n\n**Exam Findings:**\n- **Fixed mid-dilated pupil** (4-6mm, non-reactive)\n- Red eye with ciliary flush\n- **Corneal edema** (hazy/cloudy)\n- "Rock hard" globe on palpation\n- Shallow anterior chamber\n- Diminished red reflex\n\n**Key Differentiator:** Mid-dilated FIXED pupil + hard globe = AACG until proven otherwise.',
+    images: [{ src: 'images/aacg/aacg-eye.jpg', alt: 'Eye with acute angle-closure glaucoma — conjunctival injection, corneal haziness, mid-dilated fixed pupil', caption: 'Acute angle-closure glaucoma — red eye with corneal edema and mid-dilated non-reactive pupil. Ocular emergency. (CC BY 3.0)' }],
     citation: [1, 2, 3],
     options: [
       {

@@ -35,6 +35,7 @@ export const CARDIOGENIC_SHOCK_NODES = [
         module: 1,
         title: 'Clinical Recognition',
         body: '**Classic Presentation:**\n| Finding | Significance |\n|---------|-------------|\n| SBP <90 or MAP <65 | Despite adequate volume |\n| Cold extremities | Peripheral vasoconstriction |\n| Mottled skin | Poor perfusion |\n| Altered mental status | Cerebral hypoperfusion |\n| Oliguria | Renal hypoperfusion |\n| Elevated lactate | Tissue hypoxia |\n\n**SCAI Shock Staging:**\n• **A** - At risk (e.g., large STEMI, no hypotension)\n• **B** - Beginning shock (SBP <90 or requiring support)\n• **C** - Classic (hypoperfusion + cold/wet)\n• **D** - Deteriorating (escalating support)\n• **E** - Extremis (refractory, dying) [1][2][3]',
+        images: [{ src: 'images/cardiogenic-shock/cardiogenic-shock-cxr.jpg', alt: 'Annotated chest radiograph showing cardiomegaly, Kerley B lines, vascular redistribution, and pleural effusion in CHF/cardiogenic shock', caption: 'Cardiogenic shock CXR — cardiomegaly, Kerley B lines, vascular congestion, pleural effusion. (CC0)' }],
         citation: [1, 2, 3],
         options: [
             {

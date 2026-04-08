@@ -139,9 +139,10 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'sui-discharge-criteria' },
   ],
   'afib-rvr': [
-    { id: 'cardioversion', label: 'Cardiovert', icon: '\u26A1', action: 'jump', target: 'afib-cardioversion-protocol' },
-    { id: 'rate-control', label: 'Rate Ctrl', icon: '\uD83D\uDC93', action: 'jump', target: 'afib-stable-drugs' },
-    { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '\u2764\uFE0F', action: 'calculator', target: 'cha2ds2vasc' },
+    { id: 'cardioversion', label: 'Cardiovert', icon: '⚡', action: 'jump', target: 'afib-cardioversion-protocol' },
+    { id: 'rate-control', label: 'Rate Ctrl', icon: '💓', action: 'jump', target: 'afib-stable-drugs' },
+    { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '❤️', action: 'calculator', target: 'cha2ds2vasc' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'afib-stop' },
   ],
   'potassium': [
     { id: 'hyperk-rx', label: 'HyperK Rx', icon: '\u26A1', action: 'jump', target: 'k-hyper-step1' },

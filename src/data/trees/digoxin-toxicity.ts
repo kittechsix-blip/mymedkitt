@@ -84,6 +84,7 @@ export const DIGOXIN_TOXICITY_NODES: DecisionNode[] = [
     module: 2,
     title: 'ECG Assessment',
     body: '**ECG is critical** — but remember: **"dig can do anything"** [1][2].\n\n[ECG Findings Reference](#/info/dig-ecg)\n\n**Digoxin EFFECT (therapeutic) vs TOXICITY:**\n• **Effect:** "Scooped" ST depression (Salvador Dali mustache), shortened QT — NOT toxicity\n• **Toxicity:** Arrhythmias — bradycardias AND tachycardias\n\n**Classic arrhythmias of toxicity:**\n• **PAT with block** — paroxysmal atrial tachycardia with AV block (PATHOGNOMONIC) [1][2]\n• **Bidirectional VT** — alternating QRS axis (also seen in aconitine poisoning)\n• **Accelerated junctional rhythm** — regularized AF with narrow QRS\n• **Sinus bradycardia, junctional bradycardia**\n• **AV blocks** — 1st, 2nd (Mobitz I or II), 3rd degree\n• **Ventricular ectopy** — PVCs, bigeminy, trigeminy\n\n⚠️ **Regularization of atrial fibrillation** in a digitalized patient suggests toxicity (junctional takeover).',
+    images: [{ src: 'images/digoxin-toxicity/digoxin-ecg.jpg', alt: '12-lead ECG showing digoxin toxicity with scooped Salvador Dali ST depression pattern', caption: 'Digoxin toxicity ECG — scooped "Salvador Dalí mustache" ST depression. Distinguish from toxicity arrhythmias (PAT with block, bidirectional VT). (CC BY-SA 3.0)' }],
     citation: [1, 2],
     calculatorLinks: [
       { id: 'dig-ecg', label: 'ECG Findings Reference' },

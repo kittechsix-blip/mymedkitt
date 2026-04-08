@@ -44,6 +44,7 @@ export const ECHO_VIEWS_NODES: DecisionNode[] = [
     module: 2,
     title: 'Parasternal Long Axis (PLAX)',
     body: '**Position:** Left sternal border, 3rd–4th intercostal space\n**Indicator:** Toward right shoulder (or left hip in some conventions)\n\n**Structures visualized:**\n• Left ventricle (LV)\n• Left atrium (LA)\n• Mitral valve (MV)\n• Aortic valve (AV) and root\n• Right ventricular outflow tract (RVOT)\n• Pericardium\n\n**Remember the 3 L\'s:** Parasternal **L**ong axis should have the **L**eft ventricle on the **L**eft side of the screen.',
+    images: [{ src: 'images/echo-views/plax-mmode.jpg', alt: 'Parasternal long axis M-mode echocardiogram showing mitral valve motion and ventricular dimensions', caption: 'PLAX M-mode — used for EPSS measurement, LV dimensions, and ventricular function assessment. (Public domain)' }],
     citation: [2, 3],
     next: 'echo-plax-assess',
   },
