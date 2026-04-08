@@ -17637,6 +17637,258 @@ const XYL_WOUND_STAGING_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// UPPER GI BLEED CALCULATORS
+// =====================================================================
+
+const GBS_CALCULATOR: CalculatorDefinition = {
+  id: 'gbs',
+  title: 'Glasgow-Blatchford Score',
+  subtitle: 'Upper GI Bleed Risk Stratification',
+  description: 'The Glasgow-Blatchford Score (GBS) identifies patients with upper GI bleeding who can be safely discharged for outpatient management. GBS 0-1 = low risk (<1% need intervention). Most validated score for identifying low-risk patients.',
+  fields: [
+    {
+      name: 'bun_mg',
+      label: 'Blood Urea Nitrogen',
+      type: 'select',
+      points: 0,
+      description: 'BUN in mg/dL (US units)',
+      selectOptions: [
+        { label: 'BUN <18.2 mg/dL', points: 0 },
+        { label: 'BUN 18.2-22.3 mg/dL', points: 2 },
+        { label: 'BUN 22.4-27.9 mg/dL', points: 3 },
+        { label: 'BUN 28-69.9 mg/dL', points: 4 },
+        { label: 'BUN ≥70 mg/dL', points: 6 },
+      ],
+    },
+    {
+      name: 'hgb_male',
+      label: 'Hemoglobin (Men)',
+      type: 'select',
+      points: 0,
+      description: 'For male patients only',
+      selectOptions: [
+        { label: 'Hgb ≥13 g/dL', points: 0 },
+        { label: 'Hgb 12-12.9 g/dL', points: 1 },
+        { label: 'Hgb 10-11.9 g/dL', points: 3 },
+        { label: 'Hgb <10 g/dL', points: 6 },
+      ],
+    },
+    {
+      name: 'hgb_female',
+      label: 'Hemoglobin (Women)',
+      type: 'select',
+      points: 0,
+      description: 'For female patients only',
+      selectOptions: [
+        { label: 'Hgb ≥12 g/dL (or N/A — male)', points: 0 },
+        { label: 'Hgb 10-11.9 g/dL', points: 1 },
+        { label: 'Hgb <10 g/dL', points: 6 },
+      ],
+    },
+    {
+      name: 'sbp',
+      label: 'Systolic Blood Pressure',
+      type: 'select',
+      points: 0,
+      description: 'Lowest recorded SBP',
+      selectOptions: [
+        { label: 'SBP ≥110 mmHg', points: 0 },
+        { label: 'SBP 100-109 mmHg', points: 1 },
+        { label: 'SBP 90-99 mmHg', points: 2 },
+        { label: 'SBP <90 mmHg', points: 3 },
+      ],
+    },
+    {
+      name: 'pulse',
+      label: 'Pulse',
+      type: 'select',
+      points: 0,
+      description: 'Heart rate',
+      selectOptions: [
+        { label: 'Pulse <100 bpm', points: 0 },
+        { label: 'Pulse ≥100 bpm', points: 1 },
+      ],
+    },
+    {
+      name: 'melena',
+      label: 'Melena',
+      type: 'toggle',
+      points: 1,
+      description: 'Black, tarry stools',
+    },
+    {
+      name: 'syncope',
+      label: 'Syncope',
+      type: 'toggle',
+      points: 2,
+      description: 'Loss of consciousness',
+    },
+    {
+      name: 'liver',
+      label: 'Hepatic Disease',
+      type: 'toggle',
+      points: 2,
+      description: 'Known liver disease or clinical/lab evidence',
+    },
+    {
+      name: 'chf',
+      label: 'Heart Failure',
+      type: 'toggle',
+      points: 2,
+      description: 'Known or clinical evidence of heart failure',
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'GBS 0',
+      risk: 'Very Low Risk',
+      mortality: '<1% need intervention. Safe for outpatient EGD within 24-48h. No need for admission or urgent endoscopy.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'GBS 1',
+      risk: 'Low Risk',
+      mortality: '~1% need intervention. Consider outpatient management in reliable patients with follow-up.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 6,
+      label: 'GBS 2-5',
+      risk: 'Intermediate Risk',
+      mortality: 'Admission recommended. Endoscopy within 24 hours.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 6,
+      max: 12,
+      label: 'GBS 6-11',
+      risk: 'High Risk',
+      mortality: 'Significant risk of intervention. Consider ICU admission. Urgent endoscopy.',
+      colorVar: '--color-danger',
+    },
+    {
+      min: 12,
+      max: Infinity,
+      label: 'GBS ≥12',
+      risk: 'Very High Risk',
+      mortality: 'High mortality risk. ICU admission. Emergent endoscopy. Consider MTP if actively bleeding.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'GBS 0-1 = Low risk — can be safely discharged for outpatient EGD within 24-48 hours. Stanley et al. (Lancet 2009): GBS 0 patients had 0% need for intervention.',
+  citations: [
+    'Blatchford O, et al. A Risk Score to Predict Need for Treatment for Upper-Gastrointestinal Haemorrhage. Lancet. 2000;356(9238):1318-1321.',
+    'Stanley AJ, et al. Outpatient Management of Patients with Low-Risk Upper-Gastrointestinal Haemorrhage: Multicentre Validation and Prospective Evaluation. Lancet. 2009;373(9657):42-47.',
+    'Laine L, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917.',
+  ],
+};
+
+const AIMS65_CALCULATOR: CalculatorDefinition = {
+  id: 'aims65',
+  title: 'AIMS65 Score',
+  subtitle: 'Upper GI Bleed Mortality Prediction',
+  description: 'AIMS65 predicts in-hospital mortality and ICU admission in patients with acute upper GI bleeding. More focused on mortality than GBS (which predicts intervention need). Score ≥2 = high risk.',
+  fields: [
+    {
+      name: 'albumin',
+      label: 'Albumin <3.0 g/dL',
+      type: 'toggle',
+      points: 1,
+      description: 'A = Albumin',
+    },
+    {
+      name: 'inr',
+      label: 'INR >1.5',
+      type: 'toggle',
+      points: 1,
+      description: 'I = INR',
+    },
+    {
+      name: 'mental',
+      label: 'Altered Mental Status',
+      type: 'toggle',
+      points: 1,
+      description: 'M = Mental status (GCS <14, confusion, lethargy)',
+    },
+    {
+      name: 'sbp',
+      label: 'Systolic BP ≤90 mmHg',
+      type: 'toggle',
+      points: 1,
+      description: 'S = Systolic blood pressure',
+    },
+    {
+      name: 'age',
+      label: 'Age ≥65 years',
+      type: 'toggle',
+      points: 1,
+      description: '65 = Age threshold',
+    },
+  ],
+  results: [
+    {
+      min: -Infinity,
+      max: 1,
+      label: 'AIMS65 = 0',
+      risk: 'Low Risk',
+      mortality: 'In-hospital mortality: 0.3%. Length of stay: ~3 days.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 1,
+      max: 2,
+      label: 'AIMS65 = 1',
+      risk: 'Low-Moderate Risk',
+      mortality: 'In-hospital mortality: 1.2%. Length of stay: ~4 days.',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2,
+      max: 3,
+      label: 'AIMS65 = 2',
+      risk: 'Moderate-High Risk',
+      mortality: 'In-hospital mortality: 5.3%. Consider ICU admission.',
+      colorVar: '--color-warning',
+    },
+    {
+      min: 3,
+      max: 4,
+      label: 'AIMS65 = 3',
+      risk: 'High Risk',
+      mortality: 'In-hospital mortality: 10.3%. ICU admission recommended.',
+      colorVar: '--color-danger',
+    },
+    {
+      min: 4,
+      max: 5,
+      label: 'AIMS65 = 4',
+      risk: 'Very High Risk',
+      mortality: 'In-hospital mortality: 16.5%. ICU admission mandatory.',
+      colorVar: '--color-danger',
+    },
+    {
+      min: 5,
+      max: Infinity,
+      label: 'AIMS65 = 5',
+      risk: 'Critical Risk',
+      mortality: 'In-hospital mortality: 24.5%. ICU admission mandatory. Consider goals of care discussion.',
+      colorVar: '--color-danger',
+    },
+  ],
+  thresholdNote: 'AIMS65 ≥2 = High risk for mortality and ICU need. Use GBS for intervention prediction, AIMS65 for mortality prediction. Both scores complement each other.',
+  citations: [
+    'Saltzman JR, et al. A Simple Risk Score Accurately Predicts In-Hospital Mortality, Length of Stay, and Cost in Acute Upper GI Bleeding. Gastrointest Endosc. 2011;74(6):1215-1224.',
+    'Robertson M, et al. Risk Stratification in Acute Upper GI Bleeding: Comparison of the AIMS65 Score with the Glasgow-Blatchford Score. Gastrointest Endosc. 2016;83(6):1151-1160.',
+    'Laine L, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917.',
+  ],
+};
+
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 
@@ -27304,6 +27556,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ttp-plasmic': TTP_PLASMIC_CALCULATOR,
   'ttp-tpe-volume': TTP_TPE_VOLUME_CALCULATOR,
   'ttp-tma-ddx': TTP_TMA_DDX_CALCULATOR,
+  // Upper GI Bleed
+  'gbs': GBS_CALCULATOR,
+  'aims65': AIMS65_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
