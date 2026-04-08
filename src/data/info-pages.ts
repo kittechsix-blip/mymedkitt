@@ -11403,7 +11403,125 @@ const TTP_TREATMENT_SUMMARY: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Tracheo-Innominate Fistula (TIF)
+// -------------------------------------------------------------------
+
+const TIF_STEPS_SUMMARY: InfoPage = {
+  id: 'tif-steps',
+  title: 'TIF',
+  subtitle: 'Key Steps Overview',
+  sections: [
+    {
+      heading: '1. Recognition',
+      body: '\u2022 TIF = catastrophic complication of tracheostomy (0.1-1% incidence)\n\u2022 Near-100% mortality without intervention; 50-70% mortality with surgery\n\u2022 **Critical time window:** 3 days to 6 weeks post-tracheostomy\n\u2022 Sentinel bleed precedes massive hemorrhage by 24-48 hours\n\u2022 Pathognomonic triad: sentinel bleeding, tube pulsating with heartbeat, stoma bleeding',
+    },
+    {
+      heading: '2. Hyperinflate Cuff First',
+      body: '\u2022 **First-line maneuver** for TIF bleeding\n\u2022 Add ~50 mL air to tracheostomy cuff balloon\n\u2022 **Success rate: 85%** for controlling hemorrhage\n\u2022 Goal: tamponade bleeding vessel by compressing against tracheal wall\n\u2022 This is temporizing only - surgery still required',
+    },
+    {
+      heading: '3. Finger Tamponade if Cuff Fails',
+      body: '\u2022 **Utley maneuver:** Insert finger through stoma, compress innominate artery against sternum\n\u2022 First secure airway with oral ETT\n\u2022 Remove tracheostomy tube\n\u2022 Insert index finger through stoma into pretracheal space\n\u2022 **DO NOT release** until surgeon takes over in OR',
+    },
+    {
+      heading: '4. Surgical Emergency',
+      body: '\u2022 Call CT surgery/vascular surgery STAT\n\u2022 All TIF patients go directly to OR\n\u2022 Definitive treatment: ligate AND divide innominate artery\n\u2022 Ligation without division = contraindicated (can re-fistulize)\n\u2022 Mortality without surgery approaches 100%',
+    },
+    {
+      heading: '5. Critical DO NOTs',
+      body: '\u2022 Do NOT remove tracheostomy tube unless proceeding to finger tamponade\n\u2022 Do NOT delay for imaging (CTA/bronchoscopy only 20-30% sensitive)\n\u2022 Do NOT suction aggressively during active bleeding\n\u2022 Do NOT release finger tamponade before surgical takeover\n\u2022 Do NOT ligate without division (risk of re-fistulization)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Now. How To Manage Tracheo-Innominate Fistula. acepnow.com' },
+    { num: 2, text: 'Allan JS, Wright CD. Tracheoinnominate fistula: diagnosis and management. Chest Surg Clin N Am. 2003;13(2):331-341.' },
+    { num: 3, text: 'Yang L, et al. Mortality associations in tracheoinnominate fistula: A systematic review. 2024.' },
+  ],
+};
+
+const TIF_UTLEY_STEPS: InfoPage = {
+  id: 'tif-utley-steps',
+  title: 'Utley Maneuver',
+  subtitle: 'Finger Tamponade Technique',
+  sections: [
+    {
+      heading: 'Overview',
+      body: 'The Utley maneuver is the lifesaving bedside intervention when cuff hyperinflation fails to control TIF hemorrhage. **Success rate >80%** for controlling hemorrhage via direct digital tamponade of the innominate artery.',
+    },
+    {
+      heading: 'Step 1: Secure Airway',
+      body: '\u2022 Deflate tracheostomy cuff\n\u2022 Insert cuffed oral ETT **deep** (cuff 2 cm past stoma)\n\u2022 Inflate ETT cuff\n\u2022 Confirm ventilation before proceeding',
+    },
+    {
+      heading: 'Step 2: Remove Tracheostomy',
+      body: '\u2022 With airway secured via oral ETT, remove tracheostomy tube\n\u2022 May need to **extend stoma incision vertically** for finger access\n\u2022 Do not hesitate to extend if stoma is too small',
+    },
+    {
+      heading: 'Step 3: Insert Finger',
+      body: '\u2022 Insert index finger through stoma into **pretracheal space**\n\u2022 Use blunt dissection to create space if needed\n\u2022 Advance finger anteriorly toward sternum',
+    },
+    {
+      heading: 'Step 4: Compress Artery',
+      body: '\u2022 Compress innominate artery **anteriorly against posterior sternum/manubrium**\n\u2022 Apply firm, steady pressure\n\u2022 Innominate crosses anterior to trachea at rings 6-9',
+    },
+    {
+      heading: 'Step 5: External Counter-Pressure',
+      body: '\u2022 Place thumb in sternal notch\n\u2022 "Pinch" the artery between finger (internal) and thumb (external)\n\u2022 This provides additional tamponade',
+    },
+    {
+      heading: 'Step 6: MAINTAIN PRESSURE',
+      body: '\u2022 **Do NOT release until patient is in OR under surgical care**\n\u2022 You are now physically attached to this patient\n\u2022 Transport to OR with finger in place\n\u2022 Surgeon must be ready to take over immediately',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Utley JR, et al. Definitive management of innominate artery hemorrhage complicating tracheostomy. JAMA. 1972;220(4):577-579.' },
+    { num: 2, text: 'ACEP Now. How To Manage Tracheo-Innominate Fistula. acepnow.com' },
+  ],
+};
+
+const TIF_CRITICAL_DONTS: InfoPage = {
+  id: 'tif-critical-donts',
+  title: 'Critical DO NOTs',
+  subtitle: 'Actions That Can Be Fatal',
+  sections: [
+    {
+      heading: 'DO NOT Remove Tube Unless Doing Utley',
+      body: '\u2022 The tracheostomy tube provides tamponade and maintains airway\n\u2022 Removing it prematurely leads to uncontrolled hemorrhage and airway loss\n\u2022 Only remove if you are proceeding directly to finger tamponade with oral airway secured',
+    },
+    {
+      heading: 'DO NOT Delay for Imaging',
+      body: '\u2022 CTA, bronchoscopy, and angiography combined have only **20-30% sensitivity**\n\u2022 Diagnosis is clinical - bleeding 3 days to 6 weeks post-tracheostomy = TIF until proven otherwise\n\u2022 Time spent imaging is time lost for definitive surgical management',
+    },
+    {
+      heading: 'DO NOT Ligate Without Division',
+      body: '\u2022 Ligation alone is **contraindicated**\n\u2022 Artery can re-fistulize if not divided\n\u2022 Surgical management requires ligate AND divide innominate artery proximal and distal to fistula\n\u2022 Cover tracheal defect with muscle flap',
+    },
+    {
+      heading: 'DO NOT Release Finger Tamponade',
+      body: '\u2022 Once Utley maneuver is started, you are committed\n\u2022 Maintain pressure until surgeon takes over in OR\n\u2022 You will be physically attached to the patient during transport\n\u2022 Releasing early = uncontrolled hemorrhage and death',
+    },
+    {
+      heading: 'DO NOT Suction Aggressively',
+      body: '\u2022 May dislodge protective clot\n\u2022 May worsen bleeding\n\u2022 Gentle suctioning only if needed for airway',
+    },
+    {
+      heading: 'DO NOT Ignore Sentinel Bleed',
+      body: '\u2022 Sentinel bleed is a WARNING, not reassurance\n\u2022 Massive hemorrhage follows within 24-48 hours in 50% of cases\n\u2022 Use this window to prepare for surgery and OR',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Now. How To Manage Tracheo-Innominate Fistula. acepnow.com' },
+    { num: 2, text: 'Jones JW, Reynolds M, Hewitt RL, Drapanas T. Tracheo-innominate artery erosion: successful surgical management. Ann Surg. 1976;184(2):194-204.' },
+    { num: 3, text: 'Gasparri MG, et al. Tracheoinnominate artery fistula: surgical management. Operative Techniques in Thoracic and Cardiovascular Surgery. 2009.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // TIF
+  'tif-steps': TIF_STEPS_SUMMARY,
+  'tif-utley-steps': TIF_UTLEY_STEPS,
+  'tif-critical-donts': TIF_CRITICAL_DONTS,
   // TTP
   'ttp-steps': TTP_STEPS_SUMMARY,
   'ttp-tma-ddx': TTP_TMA_DDX,

@@ -320,6 +320,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'asthma-exacerbation': async () => (await import('../data/trees/asthma-exacerbation.js')).ASTHMA_EXACERBATION_CRITICAL_ACTIONS,
     'adult-uti': async () => (await import('../data/trees/adult-uti.js')).ADULT_UTI_CRITICAL_ACTIONS,
     'ttp': async () => (await import('../data/trees/ttp.js')).TTP_CRITICAL_ACTIONS,
+    'tracheo-innominate-fistula': async () => (await import('../data/trees/tracheo-innominate-fistula.js')).TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -950,6 +951,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'ttp': async () => {
       const m = await import('../data/trees/ttp.js');
       return { nodes: m.TTP_NODES, entryNodeId: 'ttp-start', categoryId: 'heme-onc', moduleLabels: m.TTP_MODULE_LABELS, citations: m.TTP_CITATIONS, criticalActions: m.TTP_CRITICAL_ACTIONS };
+    },
+    'tracheo-innominate-fistula': async () => {
+      const m = await import('../data/trees/tracheo-innominate-fistula.js');
+      return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'anesthesia-airway', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };
     },
   };
 

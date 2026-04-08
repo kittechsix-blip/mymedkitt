@@ -179,6 +179,7 @@ const TREE_REGISTRY = {
   'asthma-exacerbation':  { prefix: 'ASTHMA_EXACERBATION',  entryNodeId: 'asthma-start',      categoryId: 'critical-care' },
   'adult-uti':            { prefix: 'ADULT_UTI',            entryNodeId: 'uti-start',         categoryId: 'urology' },
   'ttp':                  { prefix: 'TTP',                  entryNodeId: 'ttp-start',         categoryId: 'heme-onc' },
+  'tracheo-innominate-fistula': { prefix: 'TRACHEO_INNOMINATE_FISTULA', entryNodeId: 'tif-start', categoryId: 'anesthesia-airway' },
 };
 
 // Cross-listing: which consults appear in multiple categories

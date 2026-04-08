@@ -940,6 +940,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'treatment', label: 'Treatment', icon: '💉', action: 'overlay', target: 'ttp-treatment' },
     ],
     // ---------------------------------------------------------------
+    // Tracheo-Innominate Fistula
+    // ---------------------------------------------------------------
+    'tracheo-innominate-fistula': [
+        { id: 'timing', label: 'Timing', icon: '⏱️', action: 'calculator', target: 'tif-timing-risk' },
+        { id: 'utley', label: 'Utley', icon: '👆', action: 'overlay', target: 'tif-utley-steps' },
+        { id: 'surgery', label: 'Surgery', icon: '🔪', action: 'overlay', target: 'tif-surgical-options' },
+        { id: 'donts', label: "Don'ts", icon: '⚠️', action: 'overlay', target: 'tif-critical-donts' },
+    ],
+    // ---------------------------------------------------------------
     // Cardiac Arrest Suite
     // ---------------------------------------------------------------
     'cardiac-arrest': [
