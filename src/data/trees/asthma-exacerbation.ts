@@ -19,6 +19,7 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     module: 1,
     title: 'Asthma Exacerbation',
     body: '**Asthma exacerbation** = acute worsening of symptoms requiring escalation of therapy. [1][2]\n\n**Key Principle:** Maximize medical therapy aggressively before considering intubation. Most patients can avoid intubation with proper management.\n\n**This consult covers:**\n• Severity classification\n• Maximizing bronchodilator therapy\n• BiPAP with appropriate sedation\n• Intubation approach (when unavoidable)\n• Ventilator settings for obstructive physiology\n• PFT-based disposition\n\n**EMCrit Pearl:** "The best treatment for status asthmaticus is to not intubate the patient." [3]',
+    images: [{ src: 'images/asthma-exacerbation/asthma-airway-diagram.jpg', alt: 'NHLBI diagram comparing normal airway cross-section to asthmatic airway with mucosal edema, bronchospasm, and mucus plugging', caption: 'Acute asthma pathophysiology — mucosal edema, bronchospasm, and mucus plugging. Explains why beta-agonists + steroids + magnesium are the triad of treatment. (Public Domain, NHLBI/NIH)' }],
     citation: [1, 2, 3],
     calculatorLinks: [
       { id: 'pef-predicted', label: 'PEF % Predicted' },

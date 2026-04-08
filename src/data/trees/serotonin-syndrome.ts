@@ -81,6 +81,7 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
     module: 2,
     title: 'Hunter Serotonin Toxicity Criteria',
     body: '**Hunter Criteria** — More sensitive (84%) and specific (97%) than Sternbach criteria. [4]\n\n**REQUIRES:**\n1. Exposure to serotonergic agent, AND\n2. ONE of the following:\n\n**Spontaneous clonus** ✓\n**Inducible clonus** + (agitation OR diaphoresis) ✓\n**Ocular clonus** + (agitation OR diaphoresis) ✓\n**Tremor** + hyperreflexia ✓\n**Hypertonia** + temp >38°C + (ocular OR inducible clonus) ✓\n\n**Key exam findings:**\n• **Clonus** — rhythmic, involuntary muscle contractions\n• **Ocular clonus** — slow roving eye movements, lateral nystagmus\n• **Hyperreflexia** — more pronounced in lower extremities\n• Check ankle clonus (>3 beats = positive)',
+    images: [{ src: 'images/serotonin-syndrome/serotonin-syndrome-triad.jpg', alt: 'Clinical diagram showing the triad of serotonin syndrome: altered mental status, autonomic instability, and neuromuscular abnormalities including clonus', caption: 'Serotonin syndrome triad — Hunter Criteria require clonus (spontaneous/inducible/ocular) as the key discriminator from NMS. Check ankle clonus >3 beats. (CC BY 4.0)' }],
     citation: [4],
     calculatorLinks: [
       { id: 'hunter-criteria', label: 'Hunter Criteria Calculator' },

@@ -31,6 +31,7 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     module: 1,
     title: 'Alcohol Withdrawal',
     body: '[Alcohol Withdrawal Steps Summary](#/info/aw-summary) — quick reference.\n\nAlcohol withdrawal occurs when chronic alcohol use is abruptly reduced or stopped. Symptoms range from mild tremor to life-threatening delirium tremens (DT).\n\n**Pathophysiology:**\n• Chronic alcohol ↑ inhibitory GABA activity and ↓ excitatory glutamate activity\n• Brain adapts: **down-regulates** GABA receptors, **up-regulates** glutamate receptors\n• Cessation unmasks these adaptations → CNS hyperexcitability\n\n**Immediate actions:**\n• Fingerstick glucose (exclude hypoglycemia)\n• Electrolytes including Ca/Mg/Phos\n• CBC, INR, liver function tests\n• Chest X-ray\n• Consider CT head (exclude subdural hematoma)\n• [Thiamine](#/drug/thiamine/wernicke) 100-500 mg IV (prevent Wernicke encephalopathy)',
+    images: [{ src: 'images/alcohol-withdrawal/wernicke-mri.jpg', alt: 'MRI FLAIR sequence showing hyperintense signal in mammillary bodies and periventricular regions in Wernicke Encephalopathy', caption: "Wernicke Encephalopathy MRI — hyperintense FLAIR signal in mammillary bodies and periaqueductal grey. Give thiamine BEFORE dextrose in any alcohol patient. (CC BY-SA 3.0)" }],
     citation: [1, 2, 3],
     next: 'aw-history',
   },

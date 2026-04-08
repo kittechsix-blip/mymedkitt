@@ -24,6 +24,7 @@ export const ECLAMPSIA_NODES = [
         module: 1,
         title: 'Preeclampsia Spectrum',
         body: '**Eclampsia exists on the spectrum of hypertensive disorders of pregnancy.** [1,3]\n\n**Preeclampsia without severe features:**\n- BP ≥140/90 on two occasions ≥4h apart after 20 weeks\n- Proteinuria (≥300mg/24h or protein/creatinine ≥0.3)\n- OR other end-organ dysfunction without severe features\n\n**Preeclampsia with severe features (any of):** [1]\n- SBP ≥160 or DBP ≥110 (two readings 4h apart)\n- Platelets <100,000\n- Liver enzymes >2x normal OR RUQ/epigastric pain\n- Creatinine >1.1 or doubling of baseline\n- Pulmonary edema\n- New-onset headache unresponsive to meds\n- Visual disturbances\n\n**HELLP Syndrome:** [3]\n- **H**emolysis (LDH >600, schistocytes)\n- **E**levated **L**iver enzymes (AST/ALT >2x normal)\n- **L**ow **P**latelets (<100,000)\n\n**Key point:** 20-38% of eclampsia occurs WITHOUT prior diagnosis of preeclampsia or hypertension. [2]',
+        images: [{ src: 'images/eclampsia/hypertensive-retinopathy.jpg', alt: 'Fundoscopic photo showing grade III/IV hypertensive retinopathy with flame hemorrhages, cotton wool spots, and papilledema', caption: 'Hypertensive retinopathy — flame hemorrhages, cotton wool spots, and papilledema seen in severe preeclampsia/eclampsia indicating end-organ damage. (CC BY 3.0, Frank Wood)' }],
         citation: [1, 2, 3],
         next: 'eclampsia-warning',
     },

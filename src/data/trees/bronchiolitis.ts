@@ -18,6 +18,7 @@ export const BRONCHIOLITIS_NODES: DecisionNode[] = [
     module: 1,
     title: 'Bronchiolitis — Clinical Recognition',
     body: '**Inclusion Criteria:**\n\u2022 Age >28 days and <24 months\n\u2022 Clinical symptoms: increased work of breathing, persistent cough, feeding difficulty, \u00B1 fever\n\u2022 First episode of wheezing OR diagnosis of bronchiolitis\n\nIf respiratory arrest is imminent, triage and initiate care in the resuscitation room.\n\nUse the [BAS Calculator](#/calculator/bas) for objective severity scoring.\n\nSee [NOT Recommended Interventions](#/info/bronch-not-recommended) \u2014 CXR, viral testing, albuterol, steroids, and antibiotics have no role in standard bronchiolitis.',
+    images: [{ src: 'images/bronchiolitis/bronchiolitis-cxr.jpg', alt: 'Infant AP chest X-ray showing bilateral hyperinflation, flattened diaphragms, and perihilar peribronchial streaking in bronchiolitis', caption: 'Bronchiolitis CXR — hyperinflation and peribronchial thickening. CXR is NOT routinely indicated but shows classic radiographic changes when ordered. (CC BY 2.0, Di Nardo et al.)' }],
     citation: [1, 2],
     next: 'bronch-exclude',
   },

@@ -12,6 +12,7 @@ export const ACID_BASE_NODES = [
         module: 1,
         title: 'Acid-Base Assessment',
         body: '[Acid-Base Steps Summary](#/info/ab-summary) — stepwise approach to both Traditional and Stewart methods.\n\n**Order labs:** ABG or VBG, BMP (Na, Cl, HCO3, BUN, Cr, Glucose), lactate, albumin, beta-hydroxybutyrate, serum osmolality.\n\n[ABG vs VBG Evidence](#/info/ab-abg-vbg) — VBG is sufficient for most ED acid-base assessments.\n\nChoose your diagnostic approach:',
+        images: [{ src: 'images/acid-base/davenport-diagram.jpg', alt: 'Davenport diagram plotting pH vs bicarbonate showing zones for metabolic acidosis, metabolic alkalosis, respiratory acidosis, and respiratory alkalosis', caption: 'Davenport diagram — pH vs HCO₃⁻ framework for ABG interpretation, compensation limits, and identifying mixed disorders. (Public domain)' }],
         citation: [4, 9, 11],
         calculatorLinks: [
             { id: 'anion-gap', label: 'Anion Gap' },

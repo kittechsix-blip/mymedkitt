@@ -54,6 +54,7 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     module: 1,
     title: 'Initial Imaging',
     body: '**AP Pelvis X-ray:**\n• Part of trauma series (chest, pelvis, C-spine)\n• Identifies gross instability, pubic symphysis diastasis, sacral fractures\n• Pubic symphysis >2.5 cm = significant instability\n\n**FAST Exam:**\n• Evaluates for free fluid (hemoperitoneum)\n• Positive FAST in unstable patient → OR for laparotomy\n• Negative FAST does NOT rule out pelvic hemorrhage (retroperitoneal)\n\n**CT Pelvis with IV Contrast:**\n• Gold standard for fracture characterization\n• Identifies arterial contrast blush (active hemorrhage)\n• Defines injury pattern for classification\n• CT cystogram if bladder injury suspected\n\n**Indications for CT:**\n• All hemodynamically stable patients with pelvic fracture on X-ray\n• Unstable patients — only if can be stabilized for transport',
+    images: [{ src: 'images/pelvic-fracture/pelvis-fracture-xray.jpg', alt: 'AP pelvis radiograph showing fracture of the left inferior pubic ramus and left acetabular wall', caption: 'AP pelvic X-ray — pubic ramus and acetabular wall fracture. Part of mandatory trauma series in any hemodynamically unstable trauma patient. (CC BY-SA 4.0, Cerevisae)' }],
     citation: [1, 2, 5],
     next: 'pelvic-hemodynamics',
   },

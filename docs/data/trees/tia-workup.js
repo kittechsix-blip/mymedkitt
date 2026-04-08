@@ -38,6 +38,7 @@ export const TIA_WORKUP_NODES = [
         module: 1,
         title: 'TIA Definition: Tissue vs Time',
         body: '**Modern Tissue-Based Definition (AHA 2009, reaffirmed 2023):**\n- Acute focal neurologic dysfunction\n- Symptoms attributable to a single vascular territory\n- Rapid resolution\n- **No infarction on diffusion-weighted MRI (DWI)**\n\n**Time-Based (Legacy):**\n- Symptoms resolve within 24 hours\n- Limitation: ~30-50% of "TIAs" by time criteria have infarct on MRI\n\n**Clinical Reality:**\n- Most true TIAs last <1 hour (often <15 minutes)\n- Duration >1 hour significantly increases likelihood of DWI positivity\n- If MRI unavailable, reasonable to diagnose TIA clinically with negative CT and symptom resolution <24h\n\n**Epidemiology:**\n- Incidence: 240,000-500,000/year in US\n- 2-day stroke risk: 4-8%\n- 7-day stroke risk: 5-12%\n- 90-day stroke risk: up to 17.8% [1][2]',
+        images: [{ src: 'images/tia-workup/dwi-acute-infarct.png', alt: 'Axial brain DWI (left) showing bright signal and ADC map (right) showing dark match indicating acute ischemic infarction', caption: 'DWI MRI: restricted diffusion in acute ischemic stroke — the same sequence distinguishing DWI-positive TIA from true TIA (no infarct). ~30-50% of "TIAs" by time criteria are DWI-positive. (CC BY 4.0)' }],
         citation: [1, 2],
         next: 'tia-classic-presentation',
     },

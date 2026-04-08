@@ -22,6 +22,7 @@ export const RHABDOMYOLYSIS_NODES = [
         module: 1,
         title: 'Rhabdomyolysis - Recognition',
         body: '**Rhabdomyolysis** is skeletal muscle breakdown releasing intracellular contents (myoglobin, CK, potassium, phosphate) into circulation.\n\n**Classic triad (present in <10%):**\n• Myalgia\n• Muscle weakness\n• Dark/tea-colored urine (myoglobinuria)\n\n**Diagnostic criteria:**\n• CK >5x upper limit of normal (~1,000 U/L)\n• Many clinicians use CK >1,000 U/L as threshold [1]\n\n**AKI incidence:** 15-55% of cases, higher with:\n• CK >15,000-16,000 U/L [2]\n• Concurrent dehydration or sepsis\n• Delayed fluid resuscitation (>6 hours)\n\n**Key point:** AKI risk increases progressively with CK level, but there is no absolute threshold that guarantees injury.',
+        images: [{ src: 'images/rhabdomyolysis/rhabdo-urine.jpg', alt: 'Specimen cup showing dark cola/tea-colored urine from myoglobinuria in confirmed rhabdomyolysis', caption: 'Cola-colored urine from myoglobinuria — clinical hallmark of significant rhabdomyolysis; indication for aggressive IV fluid resuscitation. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 2],
         next: 'rhabdo-severity',
         calculatorLinks: [

@@ -80,6 +80,7 @@ export const CVST_NODES: DecisionNode[] = [
     module: 2,
     title: 'Imaging Findings by Phase',
     body: '**MRI signal changes by thrombus age:**\n\n| Phase | Time | T1 | T2 |\n|-------|------|----|----|  \n| **Acute** | Days 1-7 | Isointense | Hypointense |\n| **Subacute** | Weeks 1-2 | Hyperintense | Hyperintense |\n| **Chronic** | >2 weeks | Variable | Variable |\n\n**CT findings:**\n• **Dense vein sign** — hyperdense cortical vein/sinus (non-contrast)\n• **Cord sign** — hyperdense cortical vein\n• **Empty delta sign** — contrast surrounds thrombus in SSS\n\n**Parenchymal findings:**\n• Venous infarction (often hemorrhagic)\n• Edema disproportionate to infarct size\n• Bilateral or parasagittal distribution (suggests SSS thrombosis)',
+    images: [{ src: 'images/cvst/cvst-mri.jpg', alt: 'MRI showing cerebral venous sinus thrombosis with absent flow void in superior sagittal sinus', caption: 'CVST MRI — loss of normal flow void in the superior sagittal sinus indicating thrombus (subacute phase: T1 hyperintense). (Public domain)' }],
     citation: [2],
     next: 'cvst-confirmed',
   },

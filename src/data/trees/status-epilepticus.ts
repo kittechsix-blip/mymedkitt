@@ -18,6 +18,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     module: 1,
     title: 'Status Epilepticus',
     body: '[SE Steps Summary](#/info/se-summary) — time-critical escalating treatment pathway.\n\n**Status epilepticus (SE)** is defined as a seizure lasting >5 minutes or recurrent seizures without recovery between episodes.\n\nSE that persists despite first-line and second-line treatments often necessitates intubation and anesthetic infusions. Underrecognition and delays in treatment increase morbidity and mortality.\n\n**Key principle:** Benzodiazepines become less effective the longer SE persists — GABAA receptors are internalized from the cell surface during prolonged seizure activity. Early, adequate-dose treatment is critical.\n\n**Up to 30% morbidity and mortality** in adults. Etiology drives ~80% of SE-related mortality.',
+    images: [{ src: 'images/status-epilepticus/spike-wave-eeg.png', alt: 'EEG tracing showing 3 Hz generalized spike-and-wave discharges — hallmark pattern of seizure activity', caption: 'EEG: generalized spike-wave discharges. Continuous/recurrent discharges without recovery = status epilepticus. cEEG required to detect non-convulsive SE. (CC BY-SA 2.0)' }],
     citation: [1, 2, 3],
     next: 'se-is-this-se',
   },

@@ -84,6 +84,7 @@ export const PEDS_STEC_HUS_NODES = [
         module: 2,
         title: 'STEC Diagnostic Workup',
         body: '**Essential labs:** [1,5]\n\n**Stool studies:**\n- Stool culture on sorbitol-MacConkey agar (O157)\n- **Shiga toxin EIA** (detects Stx1 and Stx2) - MOST IMPORTANT\n- Stool PCR for Shiga toxin genes (if available)\n\n**Blood work (baseline for HUS monitoring):**\n- CBC with smear (look for schistocytes)\n- BMP (creatinine, BUN, electrolytes)\n- LDH (elevated in hemolysis)\n- Reticulocyte count\n- Haptoglobin (decreased in hemolysis)\n- Direct Coombs (negative in MAHA)\n- Urinalysis (hematuria, proteinuria)\n\n**Key points:** [5]\n- Shiga toxin EIA is most sensitive (order on ALL bloody diarrhea in children)\n- Culture alone misses 50% of STEC (non-O157 strains)\n- Continue monitoring labs q12-24h during high-risk window (days 5-10)\n\n**Not recommended:** [1]\n- Fecal lactoferrin, fecal calprotectin (not useful)\n- Abdominal imaging (unless surgical concern)',
+        images: [{ src: 'images/peds-stec-hus/schistocytes.jpg', alt: 'Peripheral blood smear showing schistocytes (fragmented red blood cells and helmet cells) in microangiopathic hemolytic anemia', caption: 'Schistocytes on blood smear — hallmark of microangiopathic hemolytic anemia (MAHA) in HUS. Fragmented RBCs indicate intravascular shearing from fibrin strands. (CC0)' }],
         citation: [1, 5],
         next: 'stec-monitoring',
     },

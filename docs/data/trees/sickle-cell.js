@@ -24,6 +24,7 @@ export const SICKLE_CELL_NODES = [
         module: 1,
         title: 'Sickle Cell Disease — ED Management',
         body: '[SCD Steps Summary](#/info/scd-steps-summary)\n\nSickle cell disease (SCD) affects ~100,000 Americans. Occurs in ~1 of 365 Black/African American births and ~1 of 16,300 Hispanic American births. [1][2]\n\nMultiple acute complications can affect any organ system. Prompt recognition and management reduces morbidity and mortality. [1][3]\n\n[SCD Genotypes & Severity](#/info/scd-genotypes)\n\n**Key History to Obtain:**\n• SCD genotype (HbSS, HbSC, HbSβ0, HbSβ+)\n• Baseline hemoglobin (HbSS: 6–8 g/dL, HbSC: 10–15 g/dL)\n• Prior complications (ACS, stroke, splenic sequestration)\n• Individualized pain plan from hematologist\n• Immunization status (PCV, meningococcal) + penicillin prophylaxis\n• Hydroxyurea use, last transfusion, last HbS%\n• Pregnancy status',
+        images: [{ src: 'images/sickle-cell/sickle-cell-smear.jpg', alt: 'Peripheral blood smear showing sickle-shaped erythrocytes, target cells, and polychromasia in sickle cell anemia', caption: 'Sickle cell blood smear — drepanocytes (sickle cells), target cells, and polychromasia from hemolytic anemia and vaso-occlusion. (CC BY-SA 4.0)' }],
         citation: [1, 2, 3],
         calculatorLinks: [{ id: 'scd-triage', label: 'SCD Triage Calculator' }],
         options: [

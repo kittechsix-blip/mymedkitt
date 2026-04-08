@@ -18,6 +18,7 @@ export const SEPSIS_NODES: DecisionNode[] = [
     module: 1,
     title: 'Sepsis — Initial Assessment',
     body: '[Sepsis Steps Summary](#/info/sepsis-summary)\n\n**Sepsis-3 Definition:** Life-threatening organ dysfunction caused by a dysregulated host response to infection. Clinically identified as suspected infection with **SOFA score increase ≥2**. [1]\n\n**Septic Shock:** Vasopressor requirement to maintain MAP ≥65 mmHg AND lactate >2 mmol/L despite adequate fluid resuscitation. Mortality ≥40%. [1][3]\n\n**Key Principle:** Early recognition → aggressive resuscitation → source control → antibiotics within 1 hour. [2][20]\n\n[CMS SEP-1 Bundle Requirements](#/info/sepsis-sep1-bundle)\n\nAssess hemodynamic status:',
+    images: [{ src: 'images/sepsis/sepsis-steps.png', alt: 'Teaching diagram showing SIRS → Sepsis → Severe Sepsis → Septic Shock continuum with criteria at each stage', caption: 'Sepsis recognition spectrum — SIRS criteria, sepsis-3 organ dysfunction markers, and septic shock definition. (CC BY-SA 4.0)' }],
     citation: [1, 2, 3, 20],
     calculatorLinks: [
       { id: 'qsofa', label: 'qSOFA Score' },
