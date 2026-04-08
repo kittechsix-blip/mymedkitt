@@ -50,6 +50,7 @@ export const ORBITAL_CELLULITIS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'orbital-chandler', label: 'Chandler Classification' },
     ],
+    images: [{ src: 'images/orbital-cellulitis/orbital-cellulitis.jpg', alt: 'Orbital cellulitis — proptosis and periorbital swelling', caption: 'Orbital cellulitis: proptosis, chemosis, and restricted EOM distinguish it from preseptal cellulitis — CT orbits required (Wikimedia Commons, CC BY 3.0)' }],
     next: 'orbital-differentiate',
   },
 

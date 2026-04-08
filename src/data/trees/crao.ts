@@ -95,6 +95,7 @@ export const CRAO_NODES: DecisionNode[] = [
     title: 'Fundoscopic Findings',
     body: '**Classic CRAO Findings:**\n\n| Finding | Description | Frequency |\n|---------|-------------|------------|\n| **Cherry-red spot** | Red fovea, pale surrounding retina | 90% |\n| **Pale/white retina** | Ischemic swelling | 58% |\n| **Boxcarring** | Segmented blood columns in arteries | 19% |\n| **Attenuated arteries** | Thin, thread-like | 32% |\n| **Disc pallor** | Late finding | 39% |\n\n**Cherry-Red Spot Explained:**\nThe fovea has no inner retinal layers. You see the red choroid through the thin fovea, surrounded by pale, edematous, ischemic retina.\n\n**Emboli Types:**\n\n| Type | Appearance | Source |\n|------|------------|--------|\n| Cholesterol (Hollenhorst) | Orange/refractile | Carotid |\n| Calcific | White | Cardiac valves |\n| Platelet-fibrin | Dull white | Atherosclerotic plaques |\n\n[Fundus Findings Tool](#/calculator/crao-fundus) [1][2][3]',
     citation: [1, 2, 3],
+    images: [{ src: 'images/crao/crao-fluorescein.jpg', alt: 'Fluorescein angiogram showing CRAO with poor retinal perfusion', caption: 'CRAO on FA: absent/delayed arterial filling with segmental perfusion — fundoscopy shows pale retina + cherry-red spot at fovea. Time-critical: treat within 4.5h (Wikimedia Commons, CC BY-SA 4.0)' }],
     calculatorLinks: [
       { id: 'crao-fundus', label: 'Fundus Findings' },
     ],

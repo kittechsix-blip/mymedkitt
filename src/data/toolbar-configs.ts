@@ -975,6 +975,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'treatment', label: 'Treatment', icon: '💉', action: 'overlay', target: 'ttp-treatment' },
   ],
   // ---------------------------------------------------------------
+  // Tracheostomy Emergencies
+  // ---------------------------------------------------------------
+  'trach-emergency': [
+    { id: 'obstruction', label: 'Obstruction', icon: '🔴', action: 'jump', target: 'trach-obstruction-start' },
+    { id: 'dislodged', label: 'Dislodged', icon: '⚠️', action: 'jump', target: 'trach-dislodge-assess' },
+    { id: 'bleeding', label: 'Bleeding', icon: '🩸', action: 'jump', target: 'trach-bleeding-start' },
+    { id: 'fresh', label: 'Fresh Trach', icon: '⏱️', action: 'jump', target: 'trach-fresh-emergency' },
+  ],
+  // ---------------------------------------------------------------
   // Tracheo-Innominate Fistula
   // ---------------------------------------------------------------
   'tracheo-innominate-fistula': [

@@ -70,6 +70,7 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     title: 'Classify the Angioedema',
     body: 'The most important distinction is **histamine-mediated vs bradykinin-mediated** angioedema. Treatment is entirely different for each. [3][5]\n\n[Histamine vs Bradykinin Differentiation](#/info/angio-differentiation)\n\n**Histamine-mediated:** Rapid onset (minutes-hours), urticaria/pruritus, responds to epinephrine/antihistamines. Accounts for 40-70% of ED presentations. [5]\n\n**Bradykinin-mediated:** Slow onset (hours-days), NO urticaria, does NOT respond to epinephrine/antihistamines/steroids. Includes ACEi-induced, HAE, and acquired angioedema. [5]',
     citation: [3, 5],
+    images: [{ src: 'images/angioedema/angioedema-periorbital.jpg', alt: 'Severe periorbital angioedema — bilateral eye swelling preventing eye opening', caption: 'Angioedema severity: periorbital/facial involvement can progress to laryngeal — reassess airway q15min, any voice change or stridor = immediate airway action (Wikimedia Commons, CC BY-SA 3.0)' }],
     options: [
       {
         label: 'Urticaria, Pruritus, or Flushing Present',

@@ -101,6 +101,7 @@ export const SHOULDER_DISLOCATION_NODES: DecisionNode[] = [
     title: 'Radiograph Findings',
     body: '**Standard views:** AP, scapular Y (or axillary)\n\n**Confirm dislocation direction:**\n• Anterior: humeral head inferior to coracoid\n• Posterior: "lightbulb sign" (internal rotation), loss of half-moon overlap\n\n**Associated fractures:**\n• **Greater tuberosity (15-25%)** — usually reduces with humeral head\n• **Hill-Sachs (40-90%)** — posterolateral humeral head compression\n• **Bankart (bony)** — anteroinferior glenoid avulsion\n• **Humeral neck fracture** — change reduction strategy\n\nAre there associated fractures?',
     citation: [1, 7],
+    images: [{ src: 'images/shoulder-dislocation/shoulder-anterior-dislocation.png', alt: 'Anterior shoulder dislocation X-ray — AP view showing subcoracoid displacement', caption: 'Anterior dislocation (95% of cases): humeral head displaced anterior/inferior to glenoid, subcoracoid position — AP and scapular Y views confirm (Wikimedia Commons, CC BY-SA 4.0)' }],
     options: [
       { label: 'No fracture', description: 'Isolated dislocation', next: 'shoulder-analgesia-choice' },
       { label: 'Greater tuberosity fracture', description: '15-25% of anterior dislocations', next: 'shoulder-gt-fracture' },

@@ -48,6 +48,7 @@ export const GOUT_NODES: DecisionNode[] = [
     title: 'Clinical Presentation',
     body: '**Classic gout presentation:**\n- Rapid onset (peak severity in <24 hours)\n- Intense pain, swelling, erythema\n- Exquisite tenderness ("cannot tolerate bedsheet")\n- Self-limited (resolves in 7-14 days without treatment)\n\n**Classic joint involvement:**\n- **1st MTP (podagra):** Most specific for gout (50% of first attacks)\n- **Midfoot, ankle:** Common\n- **Knee:** Frequent, especially in elderly\n- **Upper extremity:** Less common, more frequent with chronic gout\n\n**Tophus:** Chalky subcutaneous nodule indicating chronic gout. Common locations: ear helix, olecranon bursa, fingers, Achilles tendon.\n\n**Episode characteristics (ACR/EULAR):**\n- Erythema overlying affected joint\n- Cannot bear touch or pressure\n- Great difficulty walking or using joint\n- Resolution within 14 days [1][3]',
     citation: [1, 3],
+    images: [{ src: 'images/gout/gout-podagra.jpg', alt: 'Acute gouty arthritis of the first metatarsophalangeal joint (podagra)', caption: 'Podagra: classic first MTP joint involvement with overlying erythema and swelling — present in 50% of first gout attacks (Wikimedia Commons, CC BY-SA 3.0)' }],
     next: 'gout-vs-pseudogout-clinical',
   },
 
