@@ -1436,7 +1436,7 @@ const SD_SUMMARY = {
 // Format: 5-10 critical errors to avoid, each linking to relevant node
 // -------------------------------------------------------------------
 const AFIB_STOP = {
-    id: 'afib-stop',
+    id: 'afib-rvr-stop',
     title: 'A-Fib RVR — Do NOT',
     subtitle: 'Critical pitfalls to avoid',
     citations: [],
@@ -11333,7 +11333,7 @@ export const INFO_PAGES = {
     'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
     'sd-summary': SD_SUMMARY,
     'afib-summary': AFIB_SUMMARY,
-    'afib-stop': AFIB_STOP,
+    'afib-rvr-stop': AFIB_STOP,
     'pe-summary': PE_SUMMARY,
     'k-summary': K_SUMMARY,
     'stroke-summary': STROKE_SUMMARY,

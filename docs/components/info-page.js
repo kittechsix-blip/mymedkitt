@@ -275,8 +275,38 @@ export function showInfoModal(pageId) {
     // Body
     const body = document.createElement('div');
     body.className = 'modal-body info-modal-body';
+    const isStopPage = page.id.endsWith('-stop');
     for (const section of page.sections) {
-        const sectionEl = document.createElement('div');
+        let sectionEl;
+        if (isStopPage && section.heading) {
+            // Stop pages: accordion — heading is the tap target, body expands below
+            const details = document.createElement('details');
+            details.className = 'info-page-stop-item';
+            const summary = document.createElement('summary');
+            summary.className = 'info-page-stop-heading';
+            summary.textContent = section.heading;
+            details.appendChild(summary);
+            if (section.body) {
+                const bodyEl = document.createElement('div');
+                bodyEl.className = 'info-page-stop-body';
+                const lines = section.body.split('\n');
+                for (const line of lines) {
+                    if (line.trim() === '') {
+                        bodyEl.appendChild(document.createElement('br'));
+                    }
+                    else {
+                        const p = document.createElement('p');
+                        p.className = 'info-page-text';
+                        renderInfoBodyLine(p, line);
+                        bodyEl.appendChild(p);
+                    }
+                }
+                details.appendChild(bodyEl);
+            }
+            body.appendChild(details);
+            continue;
+        }
+        sectionEl = document.createElement('div');
         sectionEl.className = 'info-page-section';
         if (section.heading) {
             const h = document.createElement('h2');
