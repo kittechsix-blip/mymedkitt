@@ -422,7 +422,7 @@ export const DEFAULT_CATEGORIES = [
                 id: 'trach-emergency',
                 title: 'Tracheostomy Emergencies',
                 subtitle: 'Emergency Algorithm → Obstruction → Dislodgement → Bleeding → Fresh vs Mature',
-                categoryId: 'emergency-medicine',
+                categoryId: 'anesthesia-airway',
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'trach-start',

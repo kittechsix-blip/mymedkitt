@@ -186,6 +186,30 @@ function scrollToCardCitation(num) {
         }
     }
 }
+/** Show a fullscreen image lightbox. imageSrc is relative to docs/ (e.g. 'images/ugib/blakemore-tube.jpg'). */
+function showImageLightbox(imageSrc, caption) {
+    const overlay = document.createElement('div');
+    overlay.className = 'image-lightbox-overlay';
+    const img = document.createElement('img');
+    img.className = 'image-lightbox-img';
+    img.src = imageSrc;
+    img.alt = caption;
+    const captionEl = document.createElement('p');
+    captionEl.className = 'image-lightbox-caption';
+    captionEl.textContent = caption;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'image-lightbox-close';
+    closeBtn.textContent = '×';
+    closeBtn.setAttribute('aria-label', 'Close image');
+    overlay.appendChild(closeBtn);
+    overlay.appendChild(img);
+    overlay.appendChild(captionEl);
+    document.body.appendChild(overlay);
+    const dismiss = () => overlay.remove();
+    closeBtn.addEventListener('click', dismiss);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay)
+        dismiss(); });
+}
 /** Handle clicks on inline links via event delegation (most reliable on iOS Safari).
  *  Attach to a container element — handles drug, calculator, tree, node, and info link types.
  *  Optional onNodeJump callback for jumping to nodes within the current tree. */
@@ -218,6 +242,10 @@ export function handleInlineLinkClick(e, onNodeJump) {
         if (onNodeJump) {
             onNodeJump(linkId);
         }
+    }
+    else if (linkType === 'image') {
+        const caption = target.textContent || '';
+        showImageLightbox('images/' + linkId, caption);
     }
     else {
         showInfoModal(linkId);
