@@ -223,6 +223,7 @@ const CROSS_LISTINGS = {
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
+  'le-fort-fracture': { prefix: 'LE_FORT_FRACTURE', entryNodeId: 'lefort-start', categoryId: 'trauma-surg' },
 };
 
 const reg = TREE_REGISTRY[consultId];

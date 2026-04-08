@@ -239,6 +239,7 @@ const TREE_REGISTRY = {
   'dental-trauma':       { prefix: 'DENTAL_TRAUMA',        entryNodeId: 'dental-trauma-start', categoryId: 'emergency-medicine' },
   'pta-drainage':        { prefix: 'PTA_DRAINAGE',         entryNodeId: 'pta-start',          categoryId: 'procedures' },
   'upper-gi-bleed':      { prefix: 'UPPER_GI_BLEED',       entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
+  'le-fort-fracture':    { prefix: 'LE_FORT_FRACTURE',     entryNodeId: 'lefort-start',       categoryId: 'trauma-surg' },
 };
 
 const CROSS_LISTINGS = {
