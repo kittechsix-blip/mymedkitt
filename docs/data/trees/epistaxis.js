@@ -21,8 +21,15 @@ export const EPISTAXIS_NODES = [
         type: 'info',
         module: 1,
         title: 'Epistaxis Assessment',
-        body: '[Epistaxis Steps Summary](#/info/epistaxis-summary) - quick reference.\n\n**Immediate assessment:**\n\u2022 Hemodynamic stability (HR, BP, mental status)\n\u2022 Estimate blood loss (usually overestimated)\n\u2022 Establish IV access if significant bleeding\n\u2022 Type and screen if severe/recurrent\n\n**History:**\n\u2022 Duration and severity of current episode\n\u2022 Prior episodes and treatments\n\u2022 Anticoagulant/antiplatelet use\n\u2022 Bleeding diathesis (personal/family)\n\u2022 Recent trauma or nasal surgery\n\u2022 Hypertension history\n\n90% of epistaxis is anterior (Kiesselbach plexus). Posterior bleeds are less common but more severe.\n\n[IMAGE: Kiesselbach\'s Plexus Anatomy](#/image/epistaxis-kiesselbach)',
+        body: '[Epistaxis Steps Summary](#/info/epistaxis-summary) - quick reference.\n\n**Immediate assessment:**\n\u2022 Hemodynamic stability (HR, BP, mental status)\n\u2022 Estimate blood loss (usually overestimated)\n\u2022 Establish IV access if significant bleeding\n\u2022 Type and screen if severe/recurrent\n\n**History:**\n\u2022 Duration and severity of current episode\n\u2022 Prior episodes and treatments\n\u2022 Anticoagulant/antiplatelet use\n\u2022 Bleeding diathesis (personal/family)\n\u2022 Recent trauma or nasal surgery\n\u2022 Hypertension history\n\n90% of epistaxis is anterior (Kiesselbach plexus). Posterior bleeds are less common but more severe.',
         citation: [1, 2],
+        images: [
+            {
+                src: 'images/epistaxis/kiesselbach-plexus.jpg',
+                alt: 'Arteries of the nose showing Kiesselbach plexus at the anterior septum where branches of the sphenopalatine, anterior ethmoidal, superior labial, and greater palatine arteries converge',
+                caption: 'Kiesselbach\'s plexus: convergence of 4 arterial supplies at the anterior septum. Source: WikEM (CC).',
+            },
+        ],
         next: 'epi-stability',
     },
     {
@@ -63,8 +70,15 @@ export const EPISTAXIS_NODES = [
         type: 'info',
         module: 2,
         title: 'Initial Hemostasis',
-        body: '**Step 1: Compression**\nPatient applies firm, sustained pressure over the **fleshy part** of nose (not bony bridge) for **15-20 minutes** without releasing to check.\n\n[IMAGE: Correct Nose Pinch Technique](#/image/epistaxis-pressure)\n\n**Step 2: Topical vasoconstrictor + anesthetic**\n\u2022 [Oxymetazoline](#/drug/oxymetazoline/epistaxis) 0.05% spray 2-3 sprays per nostril\n\u2022 OR [Phenylephrine](#/drug/phenylephrine/epistaxis) / [Epinephrine](#/drug/epinephrine/epistaxis) soaked pledget\n\u2022 Add [Lidocaine](#/drug/lidocaine/epistaxis) 4% for anesthesia\n\n**Step 3: Visualization**\nAfter 10-15 min with vasoconstrictor:\n\u2022 Have patient gently blow out clots\n\u2022 Suction if needed\n\u2022 Use nasal speculum + headlamp for visualization\n\u2022 Look for anterior bleeding site on septum (Kiesselbach plexus)',
+        body: '**Step 1: Compression**\nPatient applies firm, sustained pressure over the **fleshy part** of nose (not bony bridge) for **15-20 minutes** without releasing to check.\n\n**Step 2: Topical vasoconstrictor + anesthetic**\n\u2022 [Oxymetazoline](#/drug/oxymetazoline/epistaxis) 0.05% spray 2-3 sprays per nostril\n\u2022 OR [Phenylephrine](#/drug/phenylephrine/epistaxis) / [Epinephrine](#/drug/epinephrine/epistaxis) soaked pledget\n\u2022 Add [Lidocaine](#/drug/lidocaine/epistaxis) 4% for anesthesia\n\n**Step 3: Visualization**\nAfter 10-15 min with vasoconstrictor:\n\u2022 Have patient gently blow out clots\n\u2022 Suction if needed\n\u2022 Use nasal speculum + headlamp for visualization\n\u2022 Look for anterior bleeding site on septum (Kiesselbach plexus)',
         citation: [1, 2],
+        images: [
+            {
+                src: 'images/epistaxis/pressure-technique.jpg',
+                alt: 'Demonstration of correct nose pinch technique: firm pressure applied over the fleshy cartilaginous part of the nose, not the bony bridge',
+                caption: 'Correct pressure technique: pinch the soft cartilaginous part of the nose, not the bridge. Source: WikEM (CC).',
+            },
+        ],
         next: 'epi-localize',
     },
     {

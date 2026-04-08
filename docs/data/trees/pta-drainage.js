@@ -87,6 +87,13 @@ export const PTA_DRAINAGE_NODES = [
         title: 'Ultrasound Findings',
         body: '**Interpret the ultrasound:** [3][4]\n\n**Abscess (drainable):**\n• Hypoechoic or anechoic fluid collection\n• Well-defined borders\n• May have debris/loculations\n\n**Cellulitis (no drainage):**\n• Diffuse edema, no discrete collection\n• Hyperechoic "dirty" appearance\n• No anechoic pocket\n\n**What did ultrasound show?**',
         citation: [3, 4],
+        images: [
+            {
+                src: 'images/pta-drainage/pta-ultrasound.gif',
+                alt: 'Endocavitary probe ultrasound showing hypoechoic circumscribed area consistent with peritonsillar abscess',
+                caption: 'PTA on intraoral US: hypoechoic collection with defined borders = drainable abscess. Source: WikEM (CC).',
+            },
+        ],
         options: [
             {
                 label: 'Abscess Confirmed',
