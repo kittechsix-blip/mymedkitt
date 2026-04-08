@@ -543,8 +543,8 @@ const TOOLBAR_CONFIGS = {
         { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'dental-trauma-steps' },
         { id: 'ellis', label: 'Ellis Fx', icon: '🦷', action: 'jump', target: 'dental-ellis1' },
         { id: 'avulsion', label: 'Avulsion', icon: '🩸', action: 'jump', target: 'dental-avulsion-permanent' },
-        { id: 'luxation', label: 'Luxation', icon: '↔️', action: 'jump', target: 'dental-luxation-lateral' },
-        { id: 'splint', label: 'Splint', icon: '🩹', action: 'jump', target: 'dental-splint-flexible' },
+        { id: 'luxation', label: 'Luxation', icon: '↔️', action: 'jump', target: 'dental-luxation-type' },
+        { id: 'splint', label: 'Splint', icon: '🩹', action: 'jump', target: 'dental-splinting' },
     ],
     'eclampsia': [
         { id: 'map', label: 'MAP', icon: '📊', action: 'calculator', target: 'map-calculator' },
