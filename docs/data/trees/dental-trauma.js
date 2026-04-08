@@ -21,8 +21,15 @@ export const DENTAL_TRAUMA_NODES = [
         type: 'info',
         module: 1,
         title: 'Dental Trauma — Assessment',
-        body: '[Dental Trauma Steps Summary](#/info/dental-trauma-steps)\n\n**Dental trauma classification:** [1][2]\n\n**Crown Fractures (Ellis Classification):**\n• Ellis I — Enamel only\n• Ellis II — Enamel + Dentin\n• Ellis III — Enamel + Dentin + Pulp exposure\n\n**Luxation Injuries:**\n• Concussion, Subluxation\n• Extrusive, Lateral, Intrusive luxation\n\n**Other:**\n• Root fractures\n• Alveolar fractures\n• Avulsion (complete displacement)\n\n**First priority:** Locate ALL tooth fragments. If not found, CXR to rule out aspiration. [1]\n\n[IMAGE: Dental Trauma Classification](#/image/dental-trauma-types)',
+        body: '[Dental Trauma Steps Summary](#/info/dental-trauma-steps)\n\n**Dental trauma classification:** [1][2]\n\n**Crown Fractures (Ellis Classification):**\n• Ellis I — Enamel only\n• Ellis II — Enamel + Dentin\n• Ellis III — Enamel + Dentin + Pulp exposure\n\n**Luxation Injuries:**\n• Concussion, Subluxation\n• Extrusive, Lateral, Intrusive luxation\n\n**Other:**\n• Root fractures\n• Alveolar fractures\n• Avulsion (complete displacement)\n\n**First priority:** Locate ALL tooth fragments. If not found, CXR to rule out aspiration. [1]',
         citation: [1, 2],
+        images: [
+            {
+                src: 'images/dental-trauma/tooth-anatomy.png',
+                alt: 'Cross-section of tooth anatomy showing enamel (outermost), dentin (middle), and pulp (innermost) layers — the basis for Ellis fracture classification',
+                caption: 'Tooth anatomy: Ellis I = enamel, Ellis II = dentin, Ellis III = pulp exposed. Source: WikEM (CC).',
+            },
+        ],
         next: 'dental-primary-or-permanent',
     },
     {
