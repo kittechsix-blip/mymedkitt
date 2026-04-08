@@ -421,9 +421,11 @@ Every consult involving an emergent procedure, resuscitation, or time-critical p
 - `#/tree/tree-id` uses `window.location.hash` navigation
 - Overlay closes automatically before navigation
 
-### Consult Images — WikEM as Source (MANDATORY)
+### Consult Images (MANDATORY)
 
-When a consult needs an image (clinical photos, ECGs, imaging examples, etc.), search **WikEM** (wikem.org) first. WikEM images are open-source (Creative Commons) and can be downloaded and included in the app without copyright concerns. Do not use images from UpToDate, EMCrit, or other paywalled/copyrighted sources unless explicitly approved by Andy.
+**Source:** Search **WikEM** (wikem.org) first. WikEM images are open-source (Creative Commons) and can be downloaded and included in the app without copyright concerns. Do not use images from UpToDate, EMCrit, or other paywalled/copyrighted sources unless explicitly approved by Andy.
+
+**Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
 
 ### Expandable Citations on All Node Types (MANDATORY)
 
