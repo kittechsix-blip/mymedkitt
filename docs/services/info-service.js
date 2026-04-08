@@ -38,12 +38,14 @@ async function refreshFromSupabase() {
 /** Load hardcoded data as last-resort fallback */
 async function loadHardcodedFallback() {
     const mod = await import('../data/info-pages.js');
-    setCache(mod.getAllInfoPagesFallback());
+    const stopMod = await import('../data/stop-pages.js');
+    setCache([...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()]);
 }
 /** Merge hardcoded info pages missing from cached data */
 async function mergeHardcodedInfoPages() {
     const mod = await import('../data/info-pages.js');
-    const hardcoded = mod.getAllInfoPagesFallback();
+    const stopMod = await import('../data/stop-pages.js');
+    const hardcoded = [...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()];
     for (const page of hardcoded) {
         if (!infoPageMap.has(page.id)) {
             infoPageMap.set(page.id, page);

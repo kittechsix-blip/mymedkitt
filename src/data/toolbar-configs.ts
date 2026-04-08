@@ -105,6 +105,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
     { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
     { id: 'evt', label: 'EVT', icon: '\u23F0', action: 'jump', target: 'stroke-evt-window' },
+    { id: 'mri-screen', label: 'MRI Screen', icon: '\uD83E\uDDA8', action: 'overlay', target: 'stroke-mri-screen' },
   ],
   'ich': [
     { id: 'reversal', label: 'Reversal', icon: '\uD83E\uDE78', action: 'jump', target: 'ich-anticoag' },
@@ -142,7 +143,6 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'cardioversion', label: 'Cardiovert', icon: '⚡', action: 'jump', target: 'afib-cardioversion-protocol' },
     { id: 'rate-control', label: 'Rate Ctrl', icon: '💓', action: 'jump', target: 'afib-stable-drugs' },
     { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '❤️', action: 'calculator', target: 'cha2ds2vasc' },
-    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'afib-stop' },
   ],
   'potassium': [
     { id: 'hyperk-rx', label: 'HyperK Rx', icon: '\u26A1', action: 'jump', target: 'k-hyper-step1' },
@@ -1042,10 +1042,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
 };
 
-/** Get the toolbar config for a consult, or an empty default */
+// Stop button appended automatically to every consult
+const STOP_ITEM: ToolbarItem = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
+
+/** Get the toolbar config for a consult, always including the 🛑 Stop button */
 export function getToolbarConfig(consultId: string): ToolbarConfig {
+  const tools = TOOLBAR_CONFIGS[consultId] ?? [];
+  const stopItem: ToolbarItem = { ...STOP_ITEM, target: `${consultId}-stop` };
   return {
     consultId,
-    tools: TOOLBAR_CONFIGS[consultId] ?? [],
+    tools: [...tools, stopItem],
   };
 }

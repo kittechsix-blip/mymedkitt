@@ -1744,6 +1744,51 @@ const STROKE_SUMMARY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Stroke — MRI Safety Screening
+// -------------------------------------------------------------------
+
+const STROKE_MRI_SCREEN: InfoPage = {
+  id: 'stroke-mri-screen',
+  title: 'MRI Safety Screening',
+  subtitle: 'Pre-MRI checklist, device identification, and conditional protocols',
+  sections: [
+    {
+      heading: 'Verbal Screening — Ask Patient or Surrogate',
+      body: 'Run through ALL questions. Any "Yes" or "Unknown" requires investigation before proceeding.\n\n**1. Cardiac device?**\n• Pacemaker, ICD (defibrillator), or loop recorder?\n• Any prior cardiac surgery or heart procedure?\n\n**2. Brain or spine stimulator?**\n• Deep brain stimulator (DBS)?\n• Spinal cord stimulator?\n• Vagus nerve stimulator (VNS)?\n\n**3. Cochlear or hearing implant?**\n• Internal ear device (not a hearing aid)\n\n**4. Brain aneurysm clips or coils?**\n• Prior brain surgery for an aneurysm?\n• Neurosurgical hardware in the head?\n\n**5. Implanted pump?**\n• Insulin pump (external = safe; internal = screen)\n• Intrathecal pain pump\n• Baclofen pump\n\n**6. Metal in or near the eyes?**\n• Welding or grinding history without protective eyewear\n• Prior eye surgery with metallic implant\n\n**7. Joint or bone hardware?**\n• Hip, knee, shoulder replacement\n• Plates, rods, or screws from prior fractures\n\n**8. Vascular stents or filters?**\n• Coronary stent — when placed?\n• IVC filter\n\n**9. Other metallic implants?**\n• Penile implant, tissue expander\n• Dental implants, bridges, or braces (usually safe)\n\n**10. Claustrophobia?**\n• May need sedation or open-bore scanner',
+    },
+    {
+      heading: 'Non-Verbal Patient — X-Ray Identification Pathway',
+      body: 'When patient cannot communicate, order films to identify unknown implants.\n\n**Step 1 — Portable Chest X-Ray (always first)**\n• Pacemaker/ICD: generator in pectoral area + leads into heart\n• Loop recorder: small oblong density, left parasternal, NO leads\n• LVAD: large pump + driveline visible\n• Sternotomy wires: prior cardiac surgery (sternal hardware visible)\n• Prosthetic heart valves: metallic density at valve position\n\n**Step 2 — Skull X-Ray (if neurological device suspected)**\n• Deep brain stimulator: generator in chest + leads through scalp + electrodes in brain\n• Cochlear implant: metallic density in mastoid/temporal bone\n• VP shunt: radiopaque tubing from skull into abdomen\n• Aneurysm clips: small metallic clip at base of skull or brain parenchyma\n\n**Step 3 — Abdominal X-Ray (if spine/abdominal device suspected)**\n• Spinal cord stimulator: paddle/cylindrical electrodes in spinal canal + generator in flank\n• Intrathecal pump: round metallic disc in abdominal wall\n• Baclofen pump: same appearance, left or right lower quadrant\n\n**If device identified but model unknown:**\n• Call Cardiology/EP to interrogate with programmer wand\n• Check MRIsafety.com (Shellock database) by manufacturer + model\n• Patient may carry a device ID card in wallet\n• Contact implanting institution if stable enough to wait',
+    },
+    {
+      heading: 'Pacemaker vs ICD vs Loop Recorder — X-Ray Differentiation',
+      body: '**These must be distinguished before any MRI decision.**\n\n**Pacemaker (PPM)**\n• Generator: rectangular metallic box, 4–5 cm, left pectoral\n• Leads: 1–3 thin wires entering subclavian vein → right heart\n• Single lead (VVI): tip at right ventricular apex\n• Dual lead (DDD): one to RA, one to RV apex\n• Biventricular (CRT-P): three leads — RA, RV, and left lateral (via coronary sinus)\n• Generator has characteristic X-ray marker identifying manufacturer\n\n**ICD (Implantable Cardioverter Defibrillator)**\n• Generator: LARGER and THICKER than pacemaker (high-energy capacitor)\n• Shocking coil: thick, dense segment on RV lead — the key distinguishing feature\n• Coil appears as a dense, ribbed segment 2–5 cm long on the RV lead\n• Subcutaneous ICD (S-ICD): lead along sternum, generator at left lateral chest — NO intracardiac leads\n\n**Loop Recorder / ILR (Implantable Loop Recorder)**\n• NO leads — completely leadless device\n• Size: ~3 × 1 cm — about the size of a USB drive\n• Location: subcutaneous, left parasternal or sternal\n• Appears as a small, faint oblong metallic density — easy to miss\n• Reveal LINQ (Medtronic) is the most common model\n• If you see a small subcutaneous density with NO leads anywhere → Loop Recorder\n• **Most loop recorders are MRI-conditional at 1.5T — check model to confirm**\n\n**Key Differentiator Summary**\n• Leads present, large box → Pacemaker or ICD\n• Leads present, thick coil on RV lead → ICD (not just pacemaker)\n• No leads, small subcutaneous device → Loop Recorder\n• Leads along sternum, box at lateral chest wall → Subcutaneous ICD',
+    },
+    {
+      heading: 'Device Safety — Tiers',
+      body: '**ABSOLUTE CONTRAINDICATIONS — Do NOT scan**\n• Pacemaker or ICD — NOT MRI-conditional (most devices implanted before 2011)\n• Cochlear implant — most models (some newer are MRI-conditional; confirm)\n• Ferromagnetic aneurysm clips (pre-1990 era clips — titanium clips are safe)\n• Metallic intraocular foreign body\n• Most implanted neurostimulators not labeled MRI-conditional\n• Magnetic ossicular prostheses (inner ear)\n\n**CONDITIONAL — Safe only with proper protocol**\n• **MRI-conditional pacemaker/ICD** — requires EP reprogramming before scan (see protocol below)\n• **Loop recorder (most models)** — MRI-conditional at 1.5T; check model\n• **Coronary stent** — generally safe after 6–8 weeks post-placement (earlier if hemodynamically stable and non-ferromagnetic)\n• **IVC filter** — most modern filters safe; confirm model\n• **Orthopedic hardware** — titanium and stainless SS316L implants safe; cobalt-chrome alloy check model\n• **Prosthetic heart valves** — most modern valves safe; older Starr-Edwards caged-ball: consult\n• **Intrathecal pump** — must confirm MRI-conditional status before scanning\n\n**GENERALLY SAFE — Proceed without delay**\n• Titanium surgical implants (plates, rods, screws, staples)\n• Modern joint replacements (confirm implant is non-ferromagnetic)\n• Dental implants and crowns\n• Most IUDs (copper and hormonal)\n• Surgical skin staples and clips (non-ferromagnetic)\n• Aneurysm coils (endovascular treatment) — generally safe after 6 weeks\n• External insulin pump (remove before scan)\n• Non-magnetic penile implants',
+    },
+    {
+      heading: 'Conditional Pacemaker / ICD — Pre-MRI Protocol',
+      body: '**MANDATORY: Do not scan a pacemaker/ICD patient without EP involvement.**\n\n**Step 1 — Confirm MRI-conditional status**\n• Must be explicitly labeled "MRI-conditional" by the manufacturer\n• Common MRI-conditional brands: Medtronic SureScan, Abbott Assurity MRI, Boston Scientific Incepta MRI, Biotronik ProMRI\n• Unknown device → treat as NOT conditional until proven otherwise\n\n**Step 2 — Page Cardiology/EP STAT**\n• EP must interrogate the device with a programmer wand\n• Confirms: model number, MRI-conditional status, battery life, pacemaker-dependency\n• **Pacemaker-dependent patients** — highest risk; discuss benefit vs. risk carefully before proceeding\n\n**Step 3 — Pre-scan programming**\n• EP reprograms device to MRI-safe mode (e.g., asynchronous pacing at fixed rate, tachycardia therapy off)\n• Specific mode varies by manufacturer\n• DO NOT scan before this step is confirmed\n\n**Step 4 — During scan**\n• EP or trained cardiac device tech must be present or immediately available\n• Continuous cardiac monitoring\n• Crash cart immediately accessible\n• MRI tech must have emergency stop capability\n• 1.5T scanners are standard; 3T requires additional confirmation of conditional status\n\n**Step 5 — Post-scan reprogramming**\n• EP reprograms device back to original settings immediately after scan\n• Device interrogated again to verify normal function\n• Patient observed on telemetry post-scan\n\n**In stroke: If EP is unavailable and device is non-conditional →**\n• CT head + CTA is the faster, safer alternative\n• DWI-FLAIR mismatch (wake-up stroke criterion) is the primary MRI indication — discuss with Neurology whether CT perfusion can substitute\n• Do NOT delay treatment to achieve MRI if CT can answer the clinical question',
+    },
+    {
+      heading: 'Quick Reference — Who to Call',
+      body: '**Unknown cardiac device → Cardiology/EP**\n• Device interrogation + MRI-conditional confirmation\n• Required for all pacemaker/ICD MRI decisions\n\n**Unknown neurostimulator → Neurosurgery**\n• DBS, VNS, spinal cord stimulators\n• Many require manufacturer tech support for programming\n\n**Cochlear implant → ENT or Audiology**\n• Very few models are MRI-conditional; most require magnet removal before scan\n\n**Intrathecal pump → Neurosurgery or Pain Management**\n• Device must be aspirated before scan in most protocols\n\n**Model lookup → MRIsafety.com**\n• Shellock MRI Safety Database\n• Search by manufacturer + model number\n• Lists field strength limits, SAR limits, and special conditions\n\n**Scan safety questions → MRI technologist or Radiologist**\n• Final MRI safety authority at your institution\n• Radiologist signs off on all conditional device scans',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kalin R, Stanton MS. Current clinical issues for MRI scanning of pacemaker and defibrillator patients. Pacing Clin Electrophysiol. 2005;28(4):326-328.' },
+    { num: 2, text: 'Indik JH, Gimbel JR, Abe H, et al. 2017 HRS Expert Consensus Statement on Magnetic Resonance Imaging and Radiation Exposure in Patients with Cardiovascular Implantable Electronic Devices. Heart Rhythm. 2017;14(7):e97-e153.' },
+    { num: 3, text: 'Shellock FG, Spinazzi A. MRI Safety Update 2008: Part 2, Screening Patients for MRI. AJR Am J Roentgenol. 2008;191(4):1140-1149.' },
+    { num: 4, text: 'American College of Radiology. ACR Manual on MR Safety. ACR Committee on MR Safety. 2020.' },
+    { num: 5, text: 'Nazarian S, Hansford R, Roguin A, et al. A Prospective Evaluation of a Protocol for Magnetic Resonance Imaging of Patients with Implanted Cardiac Devices. Ann Intern Med. 2011;155(7):415-424.' },
+    { num: 6, text: 'Brignole M, Vardas P, Hoffman E, et al. Indications for the use of diagnostic implantable and external ECG loop recorders. Europace. 2009;11(5):671-687.' },
+    { num: 7, text: 'Zikria JF, Machnicki S, Rhim E, et al. MRI of Patients with Cardiac Pacemakers: A Review of the Medical Literature. AJR Am J Roentgenol. 2011;196(2):390-401.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Pneumothorax POCUS — Steps Summary
 // -------------------------------------------------------------------
 
@@ -11774,6 +11819,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'stroke-contraindications': STROKE_CONTRAINDICATIONS_PAGE,
   'stroke-imaging': STROKE_IMAGING_PAGE,
   'stroke-consent': STROKE_CONSENT_PAGE,
+  'stroke-mri-screen': STROKE_MRI_SCREEN,
   'nstemi-antiplatelet-cx': NSTEMI_ANTIPLATELET_PAGE,
   'nstemi-conservative': NSTEMI_CONSERVATIVE_PAGE,
   'nstemi-pocus': NSTEMI_POCUS_PAGE,
