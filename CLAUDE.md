@@ -423,7 +423,19 @@ Every consult involving an emergent procedure, resuscitation, or time-critical p
 
 ### Consult Images (MANDATORY)
 
-**Source:** Search **WikEM** (wikem.org) first. WikEM images are open-source (Creative Commons) and can be downloaded and included in the app without copyright concerns. Do not use images from UpToDate, EMCrit, or other paywalled/copyrighted sources unless explicitly approved by Andy.
+**Sources (search in order, all open-source/Creative Commons):**
+1. **WikEM** (wikem.org) — CC-licensed EM reference images
+2. **Radiopaedia** (radiopaedia.org) — CC-licensed radiology/imaging cases
+3. **OpenStax Anatomy** (openstax.org) — CC-licensed anatomical illustrations
+4. **Wikimedia Commons** (commons.wikimedia.org) — CC/public domain medical images
+5. **Open-i / PMC** (openi.nlm.nih.gov) — open-access biomedical images from PubMed Central
+
+**Do NOT use** images from UpToDate, EMCrit, EBMedicine, or other paywalled/copyrighted sources unless explicitly approved by Andy.
+
+**Image sourcing during consult builds:**
+- When building or enhancing a consult, proactively search the above sources for relevant clinical images (anatomy, procedures, ECGs, imaging, clinical photos)
+- Download usable images and add `images` arrays to appropriate nodes
+- **At end of build, before deploy:** Present Andy with a summary of all images chosen — source, description, and which node they'll appear on — for approval before committing
 
 **Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
 
