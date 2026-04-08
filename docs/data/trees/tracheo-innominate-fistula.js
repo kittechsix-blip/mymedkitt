@@ -113,8 +113,15 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES = [
         type: 'info',
         module: 2,
         title: 'Hyperinflate Cuff - First Maneuver',
-        body: '**Cuff hyperinflation is the FIRST-LINE maneuver for TIF bleeding.** [1][6]\n\n[IMAGE: Cuff Hyperinflation Technique](#/image/tif-cuff-hyperinflate)\n\n**Technique:**\n1. **Slowly add air** to the tracheostomy cuff balloon\n2. **Target:** ~50 mL total volume (much higher than normal)\n3. **Goal:** Tamponade the bleeding vessel by compressing against tracheal wall\n\n**Success rate: 85%** [6]\n\n**2024 data:** Cuff overinflation reduced mortality from 80% to 52.2% (p<0.001). [4]\n\n**Critical points:**\n- This is a **temporizing measure only**\n- Even successful tamponade can fail with tube movement\n- Continue to prepare for OR\n- Surgery is still required for definitive management\n\n**While hyperinflating:**\n- Call surgery if not already done\n- Activate MTP\n- Prepare finger tamponade equipment\n- Set up for oral intubation',
+        body: '**Cuff hyperinflation is the FIRST-LINE maneuver for TIF bleeding.** [1][6]\n\n**Technique:**\n1. **Slowly add air** to the tracheostomy cuff balloon\n2. **Target:** ~50 mL total volume (much higher than normal)\n3. **Goal:** Tamponade the bleeding vessel by compressing against tracheal wall\n\n**Success rate: 85%** [6]\n\n**2024 data:** Cuff overinflation reduced mortality from 80% to 52.2% (p<0.001). [4]\n\n**Critical points:**\n- This is a **temporizing measure only**\n- Even successful tamponade can fail with tube movement\n- Continue to prepare for OR\n- Surgery is still required for definitive management\n\n**While hyperinflating:**\n- Call surgery if not already done\n- Activate MTP\n- Prepare finger tamponade equipment\n- Set up for oral intubation',
         citation: [1, 4, 6],
+        images: [
+            {
+                src: 'images/tracheo-innominate-fistula/cuff-hyperinflation.png',
+                alt: 'Cuff hyperinflation technique showing tracheostomy cuff inflated to tamponade the innominate artery against the tracheal wall',
+                caption: 'Cuff hyperinflation: inflate cuff with ~50 mL air to tamponade the innominate artery.',
+            },
+        ],
         next: 'tif-hyperinflate-result',
     },
     {
@@ -169,8 +176,15 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES = [
         type: 'info',
         module: 3,
         title: 'Finger Tamponade - Utley Maneuver',
-        body: '**The Utley maneuver is THE lifesaving bedside intervention when cuff hyperinflation fails.** [1][7]\n\n[IMAGE: Utley Maneuver Technique](#/image/tif-utley-maneuver)\n\n**Success rate: >80%** for controlling hemorrhage via direct tamponade. [7]\n\n**CRITICAL RULE:** The provider who performs this maneuver **MUST NOT MOVE THEIR FINGER until the patient is in the OR under surgical care.** [1][7]\n\n**You will be physically attached to this patient during transport to OR.**\n\n**Before starting:**\n1. Ensure airway backup plan (oral ETT ready)\n2. Have surgical team en route\n3. Blood products running or ready\n4. OR notified and preparing\n5. Transport team assembled',
+        body: '**The Utley maneuver is THE lifesaving bedside intervention when cuff hyperinflation fails.** [1][7]\n\n**Success rate: >80%** for controlling hemorrhage via direct tamponade. [7]\n\n**CRITICAL RULE:** The provider who performs this maneuver **MUST NOT MOVE THEIR FINGER until the patient is in the OR under surgical care.** [1][7]\n\n**You will be physically attached to this patient during transport to OR.**\n\n**Before starting:**\n1. Ensure airway backup plan (oral ETT ready)\n2. Have surgical team en route\n3. Blood products running or ready\n4. OR notified and preparing\n5. Transport team assembled',
         citation: [1, 7],
+        images: [
+            {
+                src: 'images/tracheo-innominate-fistula/utley-maneuver.png',
+                alt: 'Utley maneuver technique showing finger inserted through tracheostomy stoma compressing the innominate artery against the posterior sternum',
+                caption: 'Utley maneuver: finger through stoma compresses innominate artery against sternum.',
+            },
+        ],
         next: 'tif-utley-technique',
     },
     {
@@ -178,8 +192,15 @@ export const TRACHEO_INNOMINATE_FISTULA_NODES = [
         type: 'info',
         module: 3,
         title: 'Utley Maneuver - Step by Step',
-        body: '**Finger Tamponade Technique:** [1][7]\n\n[IMAGE: Utley Maneuver Steps](#/image/tif-utley-steps)\n\n**Step 1 - Secure Airway:**\n- Deflate tracheostomy cuff\n- Insert cuffed oral ETT **deep** (cuff 2 cm past stoma)\n- Inflate ETT cuff\n- Confirm ventilation\n\n**Step 2 - Remove Tracheostomy:**\n- With airway secured, remove tracheostomy tube\n- May need to **extend stoma incision vertically** for access\n\n**Step 3 - Insert Finger:**\n- Insert index finger through stoma into **pretracheal space**\n- Use blunt dissection to create space if needed\n- Advance finger anteriorly\n\n**Step 4 - Compress Artery:**\n- Compress innominate artery **anteriorly against posterior sternum/manubrium**\n- Apply firm, steady pressure\n\n**Step 5 - External Counter-Pressure:**\n- Place thumb in sternal notch\n- "Pinch" the artery between finger and thumb\n\n**Step 6 - MAINTAIN PRESSURE:**\n- Do NOT release until patient is in OR under surgical care\n- You are now attached to this patient',
+        body: '**Finger Tamponade Technique:** [1][7]\n\n**Step 1 - Secure Airway:**\n- Deflate tracheostomy cuff\n- Insert cuffed oral ETT **deep** (cuff 2 cm past stoma)\n- Inflate ETT cuff\n- Confirm ventilation\n\n**Step 2 - Remove Tracheostomy:**\n- With airway secured, remove tracheostomy tube\n- May need to **extend stoma incision vertically** for access\n\n**Step 3 - Insert Finger:**\n- Insert index finger through stoma into **pretracheal space**\n- Use blunt dissection to create space if needed\n- Advance finger anteriorly\n\n**Step 4 - Compress Artery:**\n- Compress innominate artery **anteriorly against posterior sternum/manubrium**\n- Apply firm, steady pressure\n\n**Step 5 - External Counter-Pressure:**\n- Place thumb in sternal notch\n- "Pinch" the artery between finger and thumb\n\n**Step 6 - MAINTAIN PRESSURE:**\n- Do NOT release until patient is in OR under surgical care\n- You are now attached to this patient',
         citation: [1, 7],
+        images: [
+            {
+                src: 'images/tracheo-innominate-fistula/utley-maneuver.png',
+                alt: 'Utley maneuver step-by-step showing finger through stoma compressing the innominate artery against the posterior sternum',
+                caption: 'Utley maneuver: finger through stoma, compress artery anteriorly against sternum.',
+            },
+        ],
         next: 'tif-utley-considerations',
     },
     {

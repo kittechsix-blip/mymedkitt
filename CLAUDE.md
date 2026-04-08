@@ -14,15 +14,37 @@
 **Deploy:** GitHub Pages from `docs/` directory.
 **Build:** `bunx tsc` (TypeScript compilation via Bun)
 
-### Auto-Deploy Rule (MANDATORY)
+### Auto-Deploy Rule (MANDATORY HOOK)
 
-**After every code change**, automatically run `/deploy` before asking Andy to review. Never ask Andy to test without deploying first — the app runs from GitHub Pages, not localhost.
+**After ANY code change that should go live**, you MUST invoke the `/deploy` skill. This is a hard rule — never commit+push without running the full deploy skill first.
 
-The project-level deploy skill (`.claude/commands/deploy.md`) uses `deploy-cache-sync.mjs` which:
-- Auto-detects changed data files via git diff
-- Bumps `DATA_VERSION` in `src/services/cache-db.ts` + `docs/services/cache-db.js` → forces IndexedDB wipe
-- Bumps `CACHE_NAME` in `docs/sw.js` → triggers service worker update
-- Users get fresh content automatically — no manual cache clearing needed
+```
+Skill tool → skill: "deploy"
+```
+
+**The deploy skill (`.claude/commands/deploy.md`) handles:**
+1. Compile TypeScript (`bunx tsc --skipLibCheck --noUnusedLocals false`)
+2. Copy CSS to docs (`cp src/views/style.css docs/style.css`)
+3. Run `deploy-cache-sync.mjs` → auto-bumps DATA_VERSION + SW cache
+4. Recompile after cache sync
+5. Push to Supabase if tree/node data changed
+6. Verify all docs/ files staged
+7. Commit and push
+8. Verify GitHub Pages build succeeded
+
+**CRITICAL:** Users must NEVER need to manually clear cache. The deploy process handles all three data layers:
+- Supabase (source of truth for production)
+- IndexedDB (DATA_VERSION bump forces wipe)
+- Service Worker (CACHE_NAME bump triggers update)
+
+**When to invoke `/deploy`:**
+- After building a new consult
+- After editing any tree/node content
+- After CSS/styling changes
+- After any code fix
+- Before asking Andy to review anything
+
+**Do NOT manually run deploy steps.** Always use the skill to ensure nothing is missed.
 
 ### New Consult Build Pipeline (Autonomous)
 1. Create tree file: `src/data/trees/<id>.ts` (use `CONSULT_TEMPLATE.md`)
@@ -398,6 +420,10 @@ Every consult involving an emergent procedure, resuscitation, or time-critical p
 - `#/node/node-id` dispatches `medkitt-jump-node` custom event → `TreeEngine.jumpToNode()`
 - `#/tree/tree-id` uses `window.location.hash` navigation
 - Overlay closes automatically before navigation
+
+### Consult Images — WikEM as Source (MANDATORY)
+
+When a consult needs an image (clinical photos, ECGs, imaging examples, etc.), search **WikEM** (wikem.org) first. WikEM images are open-source (Creative Commons) and can be downloaded and included in the app without copyright concerns. Do not use images from UpToDate, EMCrit, or other paywalled/copyrighted sources unless explicitly approved by Andy.
 
 ### Expandable Citations on All Node Types (MANDATORY)
 
