@@ -363,6 +363,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'urethral', label: 'Urethral', icon: '⚠️', action: 'calculator', target: 'urethral-injury-risk' },
         { id: 'hemorrhage', label: 'Hemorrhage', icon: '🩸', action: 'calculator', target: 'pelvic-hemorrhage-source' },
     ],
+    'le-fort-fracture': [
+        { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'lefort-summary' },
+        { id: 'classify', label: 'Classify', icon: '🦴', action: 'jump', target: 'lefort-classification' },
+        { id: 'airway', label: 'Airway', icon: '💨', action: 'jump', target: 'lefort-airway-decision' },
+        { id: 'bleed', label: 'Hemorrhage', icon: '🩸', action: 'jump', target: 'lefort-hemorrhage-initial' },
+        { id: 'consults', label: 'Consults', icon: '📞', action: 'jump', target: 'lefort-consults' },
+    ],
     'diabetes-management': [
         { id: 'hypo-tx', label: 'Hypo Tx', icon: '💉', action: 'calculator', target: 'hypo-treatment' },
         { id: 'sliding', label: 'Sliding', icon: '📊', action: 'calculator', target: 'sliding-scale-gen' },

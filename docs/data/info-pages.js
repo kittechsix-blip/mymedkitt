@@ -9182,6 +9182,49 @@ const PELVIC_SUMMARY = {
         { num: 3, text: 'ACS TQIP Best Practices Guidelines: Pelvic Fracture Management. 2020.' },
     ],
 };
+// -------------------------------------------------------------------
+// Le Fort Fracture
+// -------------------------------------------------------------------
+const LEFORT_SUMMARY = {
+    id: 'lefort-summary',
+    title: 'Le Fort Fracture Steps Summary',
+    subtitle: 'Classification → Airway → Hemorrhage → Workup → Disposition',
+    sections: [
+        {
+            heading: '1. Recognize Pattern',
+            body: '• **All Le Fort fractures disrupt pterygoid plates** — if pterygoids intact, NOT a Le Fort\n• [Le Fort I](#/node/lefort-type-i): "Floating palate" — maxilla separates from skull base\n• [Le Fort II](#/node/lefort-type-ii): "Floating maxilla" — pyramidal fracture through orbits\n• [Le Fort III](#/node/lefort-type-iii): "Floating face" — craniofacial dissociation\n• Classic exam: Grasp hard palate and rock — motion confirms Le Fort',
+        },
+        {
+            heading: '2. Airway (CRITICAL)',
+            body: '• **NEVER nasally intubate or place NG tube in Le Fort II/III** — cribriform plate fractured, risk of intracranial passage\n• [Airway assessment](#/node/lefort-airway-decision): Swelling, blood, debris, structural collapse\n• [Intubation approach](#/node/lefort-airway-approach): Video laryngoscopy preferred\n• **Double setup:** Have cricothyrotomy kit OPEN — rapid airway loss risk is HIGH\n• C-spine precautions until cleared (high association with cervical injury)',
+        },
+        {
+            heading: '3. Hemorrhage Control',
+            body: '• [Initial steps](#/node/lefort-hemorrhage-initial): Direct pressure, sit upright if c-spine cleared\n• [Anterior nasal packing](#/node/lefort-anterior-packing): Merocel, RhinoRocket, or gauze\n• [Posterior packing](#/node/lefort-posterior-packing): If anterior fails — Foley balloon or posterior pack\n• [IR embolization](#/node/lefort-embolization): For refractory bleeding — targets internal maxillary artery\n• Massive transfusion protocol if unstable',
+        },
+        {
+            heading: '4. Associated Injuries',
+            body: '• **Skull fractures:** 40.7% association — get CT head\n• **Ocular injuries:** 24-28% — check globes, acuity, EOMs\n• **Globe rupture:** Teardrop pupil, shallow chamber, exposed uvea\n• **C-spine injury:** High association — maintain precautions\n• **TBI:** GCS assessment, neurosurgery consult if abnormal',
+        },
+        {
+            heading: '5. Imaging',
+            body: '• **CT face with 3D reconstruction** — gold standard for Le Fort classification\n• Include CT head (TBI, intracranial hemorrhage)\n• C-spine imaging per protocol\n• Do NOT delay for plain films — CT is definitive',
+        },
+        {
+            heading: '6. Consults & Disposition',
+            body: '• [Trauma surgery](#/node/lefort-consults): All Le Fort fractures\n• [OMFS/Plastics](#/node/lefort-consults): For operative planning\n• [Ophthalmology](#/node/lefort-consults): If orbital involvement or vision change\n• [Neurosurgery](#/node/lefort-consults): If TBI or intracranial hemorrhage\n• **Disposition:** Le Fort II/III → ICU; Le Fort I → floor or ICU per injuries',
+        },
+        {
+            heading: '7. Critical Pearls',
+            body: '• **Surgical timing:** Semi-urgent — definitive ORIF once swelling resolves (5-10 days)\n• **Antibiotics:** Start if open fracture or contaminated wound\n• **Tetanus:** Update per protocol\n• **Ophthalmology STAT:** If globe rupture suspected — do NOT pry lids open',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Le Fort R. Etude experimentale sur les fractures de la machoire superieure. Rev Chir Paris. 1901;23:208-227.' },
+        { num: 2, text: 'Kellman RM, Losquadro WD. Midface Fractures: Le Fort Fractures. Facial Plast Surg Clin North Am. 2022;30(1):43-60.' },
+        { num: 3, text: 'Perry M, et al. Maxillofacial Trauma — A Practical Approach. Facial Plast Surg. 2020;36(5):505-522.' },
+    ],
+};
 const PELVIC_RUG_PROCEDURE = {
     id: 'pelvic-rug-procedure',
     title: 'Retrograde Urethrogram (RUG)',
@@ -11155,6 +11198,7 @@ export const INFO_PAGES = {
     'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
     'dm-oral-discharge': DM_ORAL_DISCHARGE,
     'pelvic-summary': PELVIC_SUMMARY,
+    'lefort-summary': LEFORT_SUMMARY,
     'pelvic-rug-procedure': PELVIC_RUG_PROCEDURE,
     'mtp-summary': MTP_SUMMARY,
     'epistaxis-summary': EPISTAXIS_SUMMARY,
