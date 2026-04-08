@@ -35,11 +35,24 @@ sepsis, status-epilepticus, sickle-cell, upper-gi-bleed, asthma-exacerbation, ao
 ### Batch E (deployed 2026-04-08 — 13 consults)
 beta-blocker-od, tca-toxidrome, methemoglobinemia, myasthenia-gravis, acute-pancreatitis, guillain-barre, opioid-withdrawal, adult-uti, vp-shunt, adrenal-insufficiency, anticoag-reversal, ttp, acetaminophen
 
+### Batch F (deployed 2026-04-08 — 4 consults + Supabase pushed)
+syphilis (chancre + palmar rash, CDC/PD — fixed wrong assets/images/ paths), xylazine-toxicity (XAW wound CC BY 4.0), marine-envenomation (box jellyfish CC BY-SA 2.0), le-fort-fracture (classification diagram CC BY 3.0)
+
+**Note:** bradycardic-arrest already had images in tree (uses cardiac-arrest/ shared folder) — correctly excluded by comm but tree is done.
+
+**Supabase sync status:** Batches F synced. Batches A/C/D/E/Tier1/Tier2 NOT yet re-synced after image additions. Fallback to compiled JS works but Supabase tier will show images only after re-sync.
+
 ---
 
-## REMAINING — 69 consults without images
+## REMAINING — ~61 consults without images
 
 To resume: run `comm -23 <(ls src/data/trees/ | sed 's/\.ts$//' | grep -v '^index$' | sort) <(ls docs/images/ | sort)` to get current list.
+
+### Already done (false-positive from comm — different folder names)
+- bradycardic-arrest → uses `images/cardiac-arrest/` (chb-ecg.png + asystole-ecg.png already there)
+- brugada-syndrome → uses `images/brugada/` folder
+- difficult-airway-bougie → uses `images/difficult-airway/` folder
+- pep → uses `images/difficult-airway/` folder (laryngeal handshake image)
 
 ### Skip (no good CC image available)
 - cervical-artery-dissection — no good crescent sign CTA/MRA on Wikimedia
