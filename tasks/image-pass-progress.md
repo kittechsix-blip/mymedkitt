@@ -38,6 +38,12 @@ beta-blocker-od, tca-toxidrome, methemoglobinemia, myasthenia-gravis, acute-panc
 ### Batch F (deployed 2026-04-08 — 4 consults + Supabase pushed)
 syphilis (chancre + palmar rash, CDC/PD — fixed wrong assets/images/ paths), xylazine-toxicity (XAW wound CC BY 4.0), marine-envenomation (box jellyfish CC BY-SA 2.0), le-fort-fracture (classification diagram CC BY 3.0)
 
+### Batch G (deployed 2026-04-09 — 8 consults)
+botulism (infant paralysis CC BY-SA 3.0), ccb-od (bradycardia ECG CC BY-SA 4.0), deep-neck-infection (peritonsillar abscess CT CC BY-SA 4.0), globe-rupture (open globe clinical photo CC BY 4.0), iron-od (radiopaque AXR CC BY-SA 4.0), refractory-vfvt (VF ECG CC BY-SA 3.0), septic-arthritis (joint fluid aspirate CC BY-SA 3.0), urinary-retention (bladder US CC0)
+
+### Batch H (deployed 2026-04-09 — 8 consults)
+migraine (trigeminal nerve Gray784 PD), peds-osteomyelitis (Brodie abscess tibia X-ray CC BY-SA 3.0), massive-transfusion (platelet bag PD), oxygen-delivery (non-rebreather mask CC BY-SA 4.0), dental-avulsion (tooth avulsion diagram CC BY-SA 3.0), ear-fb (ear canal FB photo CC BY-SA 2.5), pea-arrest (PEA ECG SVG PD), rabies (Negri bodies H&E CDC PD)
+
 **Note:** bradycardic-arrest already had images in tree (uses cardiac-arrest/ shared folder) — correctly excluded by comm but tree is done.
 
 **Supabase sync status:** Batches F synced. Batches A/C/D/E/Tier1/Tier2 NOT yet re-synced after image additions. Fallback to compiled JS works but Supabase tier will show images only after re-sync.
@@ -135,8 +141,52 @@ To resume: run `comm -23 <(ls src/data/trees/ | sed 's/\.ts$//' | grep -v '^inde
 
 1. Open new Claude Code session in `~/Desktop/myMedKitt/`
 2. Say: "Resume the medical images pass for myMedKitt — see tasks/image-pass-progress.md"
-3. Pick the next batch from the REMAINING section above
-4. For each: find CC image on Wikimedia Commons → download to docs/images/<id>/ → edit tree → deploy
+3. Run `comm -23 <(ls src/data/trees/ | sed 's/\.ts$//' | grep -v '^index$' | sort) <(ls docs/images/ | sort)` to confirm what's still missing
+4. Pick next batch from REMAINING section (skip "no strong image" rows, skip "cervical-artery-dissection")
+5. For each: find CC image on Wikimedia Commons → download to docs/images/<id>/ → edit tree → deploy
+
+## Recommended Next Batch (Batch I — strong visual candidates)
+| Tree ID | Best image idea | Wikimedia search term |
+|---------|----------------|----------------------|
+| delirium | CAM criteria diagram or delirium photo | "delirium assessment confusion" |
+| hemophilia | joint hemarthrosis or factor concentrate | "hemarthrosis knee joint" |
+| laryngeal-trauma | CT neck laryngeal fracture | "laryngeal fracture CT" |
+| massive-hemoptysis | chest CT pulmonary hemorrhage | "massive hemoptysis CT" |
+| nail-bed-injuries | nail bed repair technique | "nail bed laceration repair" |
+| neurosyphilis | CSF/MRI findings or syphilitic gumma | "neurosyphilis MRI" |
+| peds-submersion | drowning resuscitation or near-drowning | "drowning near-drowning resuscitation" |
+| post-rosc | targeted temperature management device | "targeted temperature management cooling" |
+
+## Session workflow (already proven — just repeat this):
+```bash
+# 1. Find remaining
+comm -23 <(ls src/data/trees/ | sed 's/\.ts$//' | grep -v '^index$' | sort) <(ls docs/images/ | sort)
+
+# 2. Create dirs + download (parallel)
+mkdir -p docs/images/{id1,id2,...}
+curl -sL -A "Mozilla/5.0" "https://upload.wikimedia.org/..." -o docs/images/<id>/filename.jpg &
+# ... (all 8 in parallel with & and wait)
+wait
+
+# 3. Resize if >1MB
+sips -Z 800 docs/images/<id>/filename.jpg --out docs/images/<id>/filename.jpg
+
+# 4. Find node (first node of each tree)
+grep -n "id:" src/data/trees/<id>.ts | head -6
+
+# 5. Read start node to find citation/next/options line
+# 6. Edit each tree — add images[] block BEFORE citation:
+# 7. bunx tsc --skipLibCheck --noUnusedLocals false
+# 8. /deploy skill
+```
+
+## Image block template:
+```typescript
+    images: [
+      { src: 'images/<tree-id>/filename.jpg', alt: '...', caption: '...' License: CC X.X Wikimedia Commons.' },
+    ],
+```
+Place BEFORE `citation:` line in the start node.
 
 ## Workflow per batch
 ```bash
