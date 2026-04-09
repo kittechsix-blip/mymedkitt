@@ -917,6 +917,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'tia-dapt', label: 'DAPT', icon: '💊', action: 'calculator', target: 'tia-dapt-protocol' },
     { id: 'tia-dispo', label: 'Dispo', icon: '🏥', action: 'calculator', target: 'tia-disposition' },
   ],
+  'multiple-sclerosis': [
+    { id: 'ms-relapse', label: 'Relapse?', icon: '🔄', action: 'calculator', target: 'ms-relapse-vs-pseudo' },
+    { id: 'ms-mcdonald', label: 'McDonald', icon: '📊', action: 'calculator', target: 'ms-mcdonald' },
+    { id: 'ms-ontt', label: 'ON → MS', icon: '👁️', action: 'calculator', target: 'ms-ontt-risk' },
+    { id: 'ms-dmt', label: 'DMT Ref', icon: '💊', action: 'calculator', target: 'ms-dmt-reference' },
+    { id: 'ms-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'ms-stop' },
+  ],
   'peripartum-cardiomyopathy': [
     { id: 'ppcm-severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'ppcm-severity-assessment' },
     { id: 'ppcm-meds', label: 'Medications', icon: '💊', action: 'calculator', target: 'ppcm-medication-guide' },

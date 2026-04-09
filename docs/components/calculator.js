@@ -1103,9 +1103,6 @@ const RULE_OF_10_CALCULATOR = {
             weightAdj = Math.floor((weight - 80) / 10) * 100;
         }
         const totalRate = baseRate + weightAdj;
-        const weightNote = weight > 80
-            ? ` + ${weightAdj} mL/hr weight adjustment (${Math.floor((weight - 80) / 10)} x 100 for ${weight - 80} kg above 80 kg)`
-            : '';
         let colorVar;
         if (tbsa < 20) {
             colorVar = '--color-primary';
@@ -17549,6 +17546,535 @@ const LP_OP_INTERPRETER_CALCULATOR = {
     },
 };
 // =====================================================================
+// MULTIPLE SCLEROSIS CALCULATORS
+// =====================================================================
+const MS_RELAPSE_VS_PSEUDO_CALCULATOR = {
+    id: 'ms-relapse-vs-pseudo',
+    title: 'Relapse vs Pseudoexacerbation',
+    subtitle: 'MS Symptom Worsening Assessment',
+    description: 'Distinguishes true MS relapse from pseudoexacerbation (temporary symptom worsening due to infection, fever, heat, or metabolic derangement). Critical for determining treatment approach.',
+    fields: [
+        {
+            name: 'new_symptoms',
+            label: 'NEW neurological symptoms',
+            type: 'select',
+            points: 0,
+            description: 'Symptoms patient has never had before (vs worsening of existing deficits)',
+            selectOptions: [
+                { label: 'No — only worsening of EXISTING deficits', points: 0 },
+                { label: 'Yes — NEW symptoms never experienced before', points: 2 },
+            ],
+        },
+        {
+            name: 'duration',
+            label: 'Symptom Duration',
+            type: 'select',
+            points: 0,
+            description: 'How long have symptoms been present?',
+            selectOptions: [
+                { label: 'Less than 24 hours', points: 0 },
+                { label: 'More than 24 hours (required for true relapse)', points: 1 },
+            ],
+        },
+        {
+            name: 'fever',
+            label: 'Fever Present',
+            type: 'toggle',
+            points: 0,
+            description: 'Temperature >38°C (100.4°F)',
+        },
+        {
+            name: 'uti',
+            label: 'UTI Symptoms or Positive UA',
+            type: 'toggle',
+            points: 0,
+            description: 'Dysuria, frequency, positive UA/culture — #1 cause of pseudoexacerbation',
+        },
+        {
+            name: 'respiratory',
+            label: 'Respiratory Infection',
+            type: 'toggle',
+            points: 0,
+            description: 'URI, pneumonia, productive cough',
+        },
+        {
+            name: 'heat',
+            label: 'Heat Exposure',
+            type: 'toggle',
+            points: 0,
+            description: 'Recent hot shower, exercise, or elevated ambient temperature (Uhthoff phenomenon)',
+        },
+        {
+            name: 'metabolic',
+            label: 'Metabolic Derangement',
+            type: 'toggle',
+            points: 0,
+            description: 'Hyponatremia, hyperglycemia, uremia, electrolyte abnormality',
+        },
+        {
+            name: 'recent_dmt_change',
+            label: 'Recent DMT Change/Stop',
+            type: 'toggle',
+            points: 0,
+            description: 'Stopped or changed disease-modifying therapy (esp. fingolimod, natalizumab)',
+        },
+    ],
+    results: [],
+    thresholdNote: 'True MS relapse: NEW neurological symptoms lasting >24 hours in ABSENCE of fever or infection. Pseudoexacerbation: worsening of EXISTING deficits with identifiable trigger.',
+    citations: [
+        'Polman CH, et al. Diagnostic criteria for MS: 2010 revisions to McDonald criteria. Ann Neurol. 2011;69(2):292-302.',
+        'Wingerchuk DM, et al. International consensus diagnostic criteria for neuromyelitis optica spectrum disorders. Neurology. 2015;85(2):177-189.',
+        'Brownlee WJ, et al. Diagnosis of multiple sclerosis: progress and challenges. Lancet. 2017;389(10076):1336-1346.',
+    ],
+    computeResult: (values) => {
+        const newSymptoms = values['new_symptoms'] || 0;
+        const duration = values['duration'] || 0;
+        const fever = values['fever'] || 0;
+        const uti = values['uti'] || 0;
+        const respiratory = values['respiratory'] || 0;
+        const heat = values['heat'] || 0;
+        const metabolic = values['metabolic'] || 0;
+        const dmtChange = values['recent_dmt_change'] || 0;
+        const hasTrigger = fever || uti || respiratory || heat || metabolic;
+        const isNewSymptom = newSymptoms === 2;
+        const durationOver24h = duration === 1;
+        // Clear pseudoexacerbation: trigger present + existing symptoms worsening
+        if (hasTrigger && !isNewSymptom) {
+            const triggers = [];
+            if (fever)
+                triggers.push('Fever');
+            if (uti)
+                triggers.push('UTI');
+            if (respiratory)
+                triggers.push('Respiratory infection');
+            if (heat)
+                triggers.push('Heat exposure');
+            if (metabolic)
+                triggers.push('Metabolic derangement');
+            return {
+                value: 'PSEUDO',
+                label: 'Likely Pseudoexacerbation',
+                description: `**Pattern suggests PSEUDOEXACERBATION**\n\n**Triggers identified:**\n• ${triggers.join('\n• ')}\n\n**Management:**\n1. **Treat the underlying trigger**\n   - UTI: antibiotics\n   - Fever: antipyretics + infection workup\n   - Heat: cooling measures\n   - Metabolic: correct derangements\n\n2. **Do NOT give steroids** for pseudoexacerbation\n\n3. **Symptoms should improve** within 24-48h of trigger resolution\n\n4. **If symptoms persist** after trigger resolved → reassess for true relapse\n\n**Uhthoff Phenomenon:**\nHeat-induced symptom worsening that resolves with cooling. Not a true relapse — no steroids needed.`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Clear true relapse: new symptoms, >24h duration, no trigger
+        if (isNewSymptom && durationOver24h && !hasTrigger) {
+            return {
+                value: 'RELAPSE',
+                label: 'Likely TRUE Relapse',
+                description: `**Pattern suggests TRUE MS RELAPSE**\n\n**Criteria met:**\n• NEW neurological symptoms\n• Duration >24 hours\n• No identifiable trigger (infection/fever/heat/metabolic)\n\n**Next steps:**\n1. **MRI brain ± spine with gadolinium**\n   - If new enhancing lesions → confirms acute relapse\n   - Get BEFORE steroids if any concern for alternative diagnosis\n\n2. **Treatment:**\n   - **IV methylprednisolone** 1g daily × 3-5 days\n   - OR high-dose oral prednisone 1250mg daily × 3-5 days\n   - Do NOT taper (no benefit shown)\n\n3. **Neurology consultation**\n\n4. **Admission if:**\n   - Severe functional impairment\n   - Respiratory involvement (brainstem/cervical cord)\n   - Unable to care for self\n   - First presentation of MS\n\n**Note:** Steroids speed recovery but do NOT change long-term outcome.${dmtChange ? '\n\n⚠️ **DMT CHANGE/STOP detected** — Rebound relapse possible. Discuss with neurology.' : ''}`,
+                colorVar: '--color-danger',
+            };
+        }
+        // DMT rebound concern
+        if (dmtChange) {
+            return {
+                value: 'DMT_REBOUND',
+                label: 'Possible DMT Rebound',
+                description: `**DMT discontinuation detected — high risk for REBOUND RELAPSE**\n\n**High-risk DMTs for rebound:**\n• **Natalizumab** — severe rebound within 3-6 months\n• **Fingolimod** — rebound within 2-4 months\n\n**Even if trigger present:**\nConsider dual contribution of pseudoexacerbation + DMT rebound.\n\n**Recommendations:**\n1. **Neurology consultation** — urgent\n2. **MRI** to assess for new activity\n3. **May need both:**\n   - Treat the trigger (if present)\n   - Consider steroids for DMT rebound\n4. **Expedite restart of DMT** or transition to new therapy\n\n**Warning:** Natalizumab rebound can cause severe, polysymptomatic relapses with multiple new lesions.`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Ambiguous case
+        if (!isNewSymptom && !hasTrigger && durationOver24h) {
+            return {
+                value: 'AMBIGUOUS',
+                label: 'Ambiguous — Needs Workup',
+                description: `**Pattern is ambiguous — more workup needed**\n\n**Findings:**\n• Worsening of existing deficits (not new symptoms)\n• >24 hours duration\n• No clear trigger identified\n\n**This could be:**\n• True relapse (can worsen existing deficits)\n• Subclinical infection (check thoroughly)\n• Progressive disease (if gradual worsening over weeks/months)\n• Fatigue-related worsening\n\n**Recommended workup:**\n1. **Thorough infection screen:**\n   - UA with culture (even if no urinary symptoms)\n   - CBC, CMP\n   - CXR if any respiratory symptoms\n   - Consider occult dental/skin infection\n\n2. **If no trigger found:**\n   - MRI brain ± spine with gadolinium\n   - Neurology consultation\n\n3. **If imaging shows new activity:**\n   - Treat as true relapse\n\n**Pearl:** MS patients often have asymptomatic UTIs — always check!`,
+                colorVar: '--color-text-muted',
+            };
+        }
+        // Default - need more information
+        return {
+            value: '--',
+            label: 'More Information Needed',
+            description: `**Please complete the assessment**\n\n**Key questions:**\n\n1. **Are these NEW symptoms?**\n   - True relapse = new neurological deficits\n   - Pseudoexacerbation = worsening of existing deficits\n\n2. **Duration >24 hours?**\n   - Required criterion for true relapse\n\n3. **Any triggers present?**\n   - Infection (especially UTI)\n   - Fever\n   - Heat exposure\n   - Metabolic abnormality\n\n**Initial workup for ALL MS patients with worsening:**\n• UA + culture\n• CBC, CMP\n• Temperature\n• CXR if respiratory symptoms`,
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const MS_MCDONALD_CALCULATOR = {
+    id: 'ms-mcdonald',
+    title: 'McDonald Criteria',
+    subtitle: '2017 McDonald Criteria for MS Diagnosis',
+    description: 'The 2017 revised McDonald criteria allow earlier MS diagnosis by demonstrating dissemination in space (DIS) and time (DIT). For ED use: helps determine if workup is consistent with MS diagnosis.',
+    fields: [
+        {
+            name: 'clinical_attacks',
+            label: 'Number of Clinical Attacks',
+            type: 'select',
+            points: 0,
+            description: 'Objective clinical episodes suggestive of CNS demyelination',
+            selectOptions: [
+                { label: '0 attacks', points: 0 },
+                { label: '1 attack (CIS - Clinically Isolated Syndrome)', points: 1 },
+                { label: '≥2 attacks', points: 2 },
+            ],
+        },
+        {
+            name: 'objective_lesions',
+            label: 'Objective Clinical Evidence (Exam)',
+            type: 'select',
+            points: 0,
+            description: 'Number of CNS regions with objective clinical findings',
+            selectOptions: [
+                { label: '0 lesions on exam', points: 0 },
+                { label: '1 lesion (e.g., optic neuritis OR myelopathy)', points: 1 },
+                { label: '≥2 lesions (e.g., optic neuritis + myelopathy)', points: 2 },
+            ],
+        },
+        {
+            name: 'dis',
+            label: 'Dissemination in Space (DIS)',
+            type: 'select',
+            points: 0,
+            description: 'MRI: ≥1 T2 lesion in ≥2 of 4 MS-typical regions: periventricular, cortical/juxtacortical, infratentorial, spinal cord',
+            selectOptions: [
+                { label: 'Not assessed / Unknown', points: 0 },
+                { label: 'DIS NOT met (<2 regions with lesions)', points: 1 },
+                { label: 'DIS MET (≥2 of 4 regions with T2 lesions)', points: 2 },
+            ],
+        },
+        {
+            name: 'dit',
+            label: 'Dissemination in Time (DIT)',
+            type: 'select',
+            points: 0,
+            description: 'MRI: simultaneous Gd-enhancing + non-enhancing lesions, OR new T2/Gd-enhancing lesion on follow-up MRI, OR presence of CSF oligoclonal bands',
+            selectOptions: [
+                { label: 'Not assessed / Unknown', points: 0 },
+                { label: 'DIT NOT met', points: 1 },
+                { label: 'DIT MET (enhancing + non-enhancing, or OCBs positive)', points: 2 },
+            ],
+        },
+        {
+            name: 'csf_ocb',
+            label: 'CSF Oligoclonal Bands',
+            type: 'select',
+            points: 0,
+            description: 'CSF-specific oligoclonal bands (≥2 bands in CSF not in serum)',
+            selectOptions: [
+                { label: 'Not done / Unknown', points: 0 },
+                { label: 'Negative', points: 1 },
+                { label: 'Positive (can substitute for DIT)', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '2017 McDonald: ≥2 attacks + ≥2 lesions = MS. CIS + DIS + DIT = MS. OCBs can substitute for DIT.',
+    citations: [
+        'Thompson AJ, et al. Diagnosis of multiple sclerosis: 2017 revisions of the McDonald criteria. Lancet Neurol. 2018;17(2):162-173.',
+        'Filippi M, et al. MRI criteria for the diagnosis of MS: MAGNIMS consensus guidelines. Lancet Neurol. 2016;15(3):292-303.',
+        'Brownlee WJ, et al. Diagnosis of MS: progress and challenges. Lancet. 2017;389(10076):1336-1346.',
+    ],
+    computeResult: (values) => {
+        const attacks = values['clinical_attacks'] || 0;
+        const lesions = values['objective_lesions'] || 0;
+        const dis = values['dis'] || 0;
+        const dit = values['dit'] || 0;
+        const ocb = values['csf_ocb'] || 0;
+        // DIT can be satisfied by positive OCBs
+        const ditMet = dit === 2 || ocb === 2;
+        const disMet = dis === 2;
+        // ≥2 attacks + ≥2 objective lesions = MS (no additional criteria needed)
+        if (attacks === 2 && lesions === 2) {
+            return {
+                value: 'MS_CLINICAL',
+                label: 'MS Diagnosis — Clinical',
+                description: `**McDonald Criteria MET — MS Diagnosis**\n\n**Criteria satisfied:**\n• ≥2 clinical attacks\n• ≥2 objective lesions\n\n**No additional MRI criteria needed**\n\n**However, MRI still recommended to:**\n• Establish baseline lesion burden\n• Rule out alternative diagnoses\n• Assess prognostic factors\n\n**Next Steps:**\n1. Neurology referral for DMT initiation\n2. Baseline MRI brain + spine if not done\n3. Consider LP if atypical features\n4. Start DMT — early treatment improves outcomes`,
+                colorVar: '--color-danger',
+            };
+        }
+        // ≥2 attacks + 1 lesion + DIS
+        if (attacks === 2 && lesions === 1 && disMet) {
+            return {
+                value: 'MS_DIS',
+                label: 'MS Diagnosis — DIS Confirmed',
+                description: `**McDonald Criteria MET — MS Diagnosis**\n\n**Criteria satisfied:**\n• ≥2 clinical attacks\n• 1 objective lesion on exam\n• DIS confirmed by MRI (≥2 of 4 regions)\n\n**MS diagnosis established**\n\n**Next Steps:**\n1. Neurology referral for DMT initiation\n2. Complete baseline workup\n3. Early treatment improves long-term outcomes`,
+                colorVar: '--color-danger',
+            };
+        }
+        // 1 attack (CIS) + ≥2 lesions + DIT
+        if (attacks === 1 && lesions === 2 && ditMet) {
+            return {
+                value: 'MS_DIT',
+                label: 'MS Diagnosis — DIT Confirmed',
+                description: `**McDonald Criteria MET — MS Diagnosis**\n\n**Criteria satisfied:**\n• 1 clinical attack (CIS)\n• ≥2 objective lesions\n• DIT confirmed ${ocb === 2 ? '(positive CSF OCBs)' : '(MRI: Gd+ and Gd- lesions, or new lesion on follow-up)'}\n\n**MS diagnosis established**\n\n**2017 Update:** Positive CSF oligoclonal bands can now substitute for MRI-based DIT.\n\n**Next Steps:**\n1. Neurology referral\n2. DMT initiation recommended for CIS with DIT`,
+                colorVar: '--color-danger',
+            };
+        }
+        // 1 attack + 1 lesion + DIS + DIT (or OCBs)
+        if (attacks === 1 && lesions === 1 && disMet && ditMet) {
+            return {
+                value: 'MS_FULL',
+                label: 'MS Diagnosis — Full Criteria Met',
+                description: `**McDonald Criteria MET — MS Diagnosis**\n\n**Criteria satisfied:**\n• 1 clinical attack (CIS)\n• 1 objective lesion\n• DIS confirmed (MRI: ≥2 of 4 regions)\n• DIT confirmed ${ocb === 2 ? '(positive CSF OCBs)' : '(MRI criteria)'}\n\n**MS diagnosis established**\n\n**Next Steps:**\n1. Neurology referral\n2. DMT initiation — early treatment is key\n3. Discuss prognosis and treatment options`,
+                colorVar: '--color-danger',
+            };
+        }
+        // CIS only - DIS or DIT not yet met
+        if (attacks === 1 && (dis <= 1 || dit <= 1)) {
+            const missing = [];
+            if (dis <= 1)
+                missing.push('Dissemination in Space (DIS)');
+            if (dit <= 1 && ocb !== 2)
+                missing.push('Dissemination in Time (DIT)');
+            return {
+                value: 'CIS',
+                label: 'Clinically Isolated Syndrome (CIS)',
+                description: `**Clinically Isolated Syndrome — Not Yet MS**\n\n**Current status:**\n• 1 clinical attack consistent with demyelination\n• Full MS criteria NOT yet met\n\n**Still needed to diagnose MS:**\n• ${missing.join('\n• ')}\n\n**DIS requires:** ≥1 T2 lesion in ≥2 of:\n• Periventricular\n• Cortical/juxtacortical\n• Infratentorial (brainstem/cerebellum)\n• Spinal cord\n\n**DIT can be shown by:**\n• Simultaneous Gd-enhancing + non-enhancing lesions\n• New T2 or Gd-enhancing lesion on follow-up MRI\n• **CSF oligoclonal bands** (2017 criteria update)\n\n**CIS Management:**\n• ~60-80% with abnormal MRI will convert to MS\n• Neurology follow-up essential\n• DMT may be offered for high-risk CIS\n• Repeat MRI in 3-6 months if diagnosis uncertain`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Not enough information
+        return {
+            value: '--',
+            label: 'More Information Needed',
+            description: `**Complete the assessment to evaluate McDonald criteria**\n\n**Key elements needed:**\n\n1. **Clinical attacks:** Objective symptoms suggestive of CNS demyelination\n\n2. **Objective lesions:** Physical exam findings localizing to CNS\n\n3. **Dissemination in Space (DIS):** MRI showing ≥1 T2 lesion in ≥2 of 4 regions:\n   - Periventricular\n   - Cortical/juxtacortical\n   - Infratentorial\n   - Spinal cord\n\n4. **Dissemination in Time (DIT):**\n   - Gd-enhancing + non-enhancing lesions simultaneously\n   - OR new lesion on follow-up MRI\n   - OR positive CSF oligoclonal bands (2017 update)\n\n**ED Role:** Order MRI brain ± spine with gadolinium, neurology consult for first presentation.`,
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const MS_ONTT_RISK_CALCULATOR = {
+    id: 'ms-ontt-risk',
+    title: 'ONTT MS Risk',
+    subtitle: 'Optic Neuritis → MS Conversion Risk',
+    description: 'Based on the Optic Neuritis Treatment Trial (ONTT) 15-year follow-up data. Predicts risk of developing MS after an episode of optic neuritis based on baseline brain MRI findings.',
+    fields: [
+        {
+            name: 'mri_lesions',
+            label: 'Baseline Brain MRI',
+            type: 'select',
+            points: 0,
+            description: 'Number of white matter lesions on baseline brain MRI',
+            selectOptions: [
+                { label: 'Normal (no lesions)', points: 0 },
+                { label: '1 lesion', points: 1 },
+                { label: '2 lesions', points: 2 },
+                { label: '≥3 lesions', points: 3 },
+            ],
+        },
+        {
+            name: 'typical_features',
+            label: 'Typical ON Features Present',
+            type: 'toggle',
+            points: 0,
+            description: 'Pain with eye movement, RAPD, central/cecocentral scotoma, age 18-45',
+        },
+        {
+            name: 'atypical_features',
+            label: 'Atypical Features Present',
+            type: 'toggle',
+            points: 0,
+            description: 'Bilateral, painless, severe disc edema/hemorrhage, no recovery, age <18 or >50',
+        },
+        {
+            name: 'nmo_risk',
+            label: 'NMOSD Red Flags',
+            type: 'toggle',
+            points: 0,
+            description: 'Severe vision loss, bilateral ON, non-white ethnicity, poor recovery, concurrent myelitis',
+        },
+    ],
+    results: [],
+    thresholdNote: 'ONTT 15-year data: Normal MRI → 25% MS risk. ≥1 lesion → 72% MS risk. ≥3 lesions → 78% MS risk.',
+    citations: [
+        'Optic Neuritis Study Group. Multiple sclerosis risk after optic neuritis: final optic neuritis treatment trial follow-up. Arch Neurol. 2008;65(6):727-732.',
+        'Beck RW, et al. The Optic Neuritis Treatment Trial: three-year follow-up results. Arch Ophthalmol. 1995;113(2):136-137.',
+        'Toosy AT, et al. Optic neuritis. Lancet Neurol. 2014;13(1):83-99.',
+    ],
+    computeResult: (values) => {
+        const lesions = values['mri_lesions'] || 0;
+        const typical = values['typical_features'] || 0;
+        const atypical = values['atypical_features'] || 0;
+        const nmoRisk = values['nmo_risk'] || 0;
+        // NMOSD concern takes priority
+        if (nmoRisk) {
+            return {
+                value: 'NMOSD',
+                label: '⚠️ Consider NMOSD',
+                description: `**Red flags for Neuromyelitis Optica Spectrum Disorder (NMOSD)**\n\n**NMOSD features present — this changes management!**\n\n**NMOSD vs MS:**\n• NMOSD is a distinct disease (AQP4-IgG antibody mediated)\n• Some MS DMTs (natalizumab, fingolimod) can WORSEN NMOSD\n• NMOSD has different prognosis and treatment\n\n**NMOSD Red Flags:**\n• Severe bilateral optic neuritis\n• Severe vision loss (often worse than typical MS-ON)\n• Poor recovery\n• Concurrent longitudinally extensive transverse myelitis (≥3 segments)\n• Non-white ethnicity (higher NMOSD prevalence)\n• Negative brain MRI with severe cord disease\n\n**Critical Workup:**\n1. **AQP4-IgG antibody** (highly specific for NMOSD)\n2. **MOG-IgG antibody** (MOG-Ab disease is a separate entity)\n3. **MRI spine** — look for longitudinally extensive lesion\n\n**ED Action:**\n• Neurology consult — mention NMOSD concern\n• Hold on IV steroids if any concern for NMOSD until neuro consult\n• Order AQP4 and MOG antibodies\n\n**Warning:** Do NOT assume this is MS without excluding NMOSD.`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Atypical features
+        if (atypical) {
+            return {
+                value: 'ATYPICAL',
+                label: 'Atypical — Expand Differential',
+                description: `**Atypical optic neuritis features — consider alternative diagnoses**\n\n**Atypical features present:**\nExpand differential beyond typical MS-associated ON.\n\n**Atypical Features and Differentials:**\n• **Bilateral ON** → NMOSD, MOG-Ab, infectious, autoimmune\n• **Painless** → ischemic optic neuropathy, compressive, Leber hereditary\n• **Severe disc edema/hemorrhage** → NAION, papilledema, CRVO\n• **No recovery by 4 weeks** → NMOSD, compressive lesion\n• **Age <18** → ADEM, MOG-Ab disease\n• **Age >50** → NAION (anterior ischemic optic neuropathy)\n\n**Expanded Workup:**\n1. AQP4-IgG and MOG-IgG antibodies\n2. ESR, CRP (giant cell arteritis if >50)\n3. ANA, anti-dsDNA (autoimmune)\n4. MRI brain AND orbits with contrast\n5. Consider MRA if vascular cause suspected\n6. Visual evoked potentials\n\n**Ophthalmology + Neurology consultation recommended**\n\n**Do NOT assume MS in atypical presentations.**`,
+                colorVar: '--color-warning',
+            };
+        }
+        // Risk stratification based on MRI lesions
+        if (lesions === 0 && typical) {
+            return {
+                value: '25%',
+                label: '25% MS Risk (Normal MRI)',
+                description: `**Typical Optic Neuritis with NORMAL Brain MRI**\n\n**15-Year MS Risk: ~25%**\n\n**ONTT Findings:**\n• Normal baseline MRI = lowest risk category\n• Still 1 in 4 will develop MS over 15 years\n• Most conversions occur within first 5 years\n\n**Current Episode Treatment:**\n• **IV methylprednisolone** 1g daily × 3 days speeds visual recovery\n• Does NOT change long-term visual outcome\n• ⚠️ **NEVER give oral prednisone ALONE** — ONTT showed DOUBLED recurrence rate!\n\n**Follow-up Plan:**\n• Neurology follow-up within 2-4 weeks\n• Repeat MRI brain in 3-6 months to assess for new lesions\n• Ophthalmology for visual field/acuity monitoring\n\n**Counseling:**\n• 75% will NOT develop MS\n• Vision usually recovers well (>90% recover 20/40 or better)\n• Discuss symptoms to watch for (numbness, weakness, etc.)`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (lesions === 1 || lesions === 2) {
+            return {
+                value: '56-72%',
+                label: '56-72% MS Risk (1-2 Lesions)',
+                description: `**Optic Neuritis with 1-2 Brain MRI Lesions**\n\n**15-Year MS Risk: ~56-72%**\n\n**ONTT Data:**\n• 1 lesion: ~56% MS risk\n• 2 lesions: ~68% MS risk\n• Risk concentrated in first 5 years\n\n**This patient likely has/will develop MS**\n\n**Current Episode:**\n• **IV methylprednisolone** 1g daily × 3 days\n• Speeds visual recovery\n• ⚠️ **Never oral prednisone alone** (doubles recurrence)\n\n**MS Workup to Complete:**\n1. MRI spine with contrast (additional DIS region)\n2. Consider LP with OCBs (can establish DIT)\n3. Full neurological exam for subclinical findings\n\n**DMT Consideration:**\n• High-risk CIS may benefit from early DMT\n• Neurology referral for DMT discussion\n• Early treatment reduces conversion to definite MS\n\n**Follow-up:**\n• Neurology within 2 weeks\n• Repeat MRI in 3 months if diagnosis uncertain`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (lesions === 3) {
+            return {
+                value: '78%',
+                label: '78% MS Risk (≥3 Lesions)',
+                description: `**Optic Neuritis with ≥3 Brain MRI Lesions**\n\n**15-Year MS Risk: ~78%**\n\n**HIGH PROBABILITY of MS — likely meets McDonald criteria**\n\n**ONTT Data:**\n• ≥3 lesions = highest risk category\n• Most will meet MS criteria within 5 years\n• May ALREADY meet McDonald criteria\n\n**Does this patient meet 2017 McDonald Criteria?**\n• DIS (Dissemination in Space): Likely met if lesions in ≥2 regions\n• DIT (Dissemination in Time): Met if Gd-enhancing + non-enhancing lesions, OR positive OCBs\n\n**Acute Treatment:**\n• **IV methylprednisolone** 1g daily × 3 days\n• ⚠️ **Never oral prednisone alone**\n\n**Complete Workup:**\n1. MRI spine with contrast\n2. LP with CSF OCBs (can confirm DIT)\n3. Full neurological exam\n\n**Next Steps:**\n• **Neurology referral — expedited**\n• Likely candidate for DMT initiation\n• Early treatment significantly improves long-term outcomes\n• Strong consideration for admission if first presentation\n\n**Counsel patient:** MS is highly likely. Early treatment available and effective.`,
+                colorVar: '--color-danger',
+            };
+        }
+        // Default
+        return {
+            value: '--',
+            label: 'Complete Assessment',
+            description: `**Complete the assessment to estimate MS risk**\n\n**ONTT 15-Year MS Risk by Baseline MRI:**\n• **Normal MRI (0 lesions):** ~25%\n• **1 lesion:** ~56%\n• **2 lesions:** ~68%\n• **≥3 lesions:** ~78%\n\n**Key Factors:**\n1. **Number of MRI lesions** — strongest predictor\n2. **Typical vs atypical features**\n3. **NMOSD red flags** (separate disease!)\n\n**Typical ON features:**\n• Unilateral\n• Pain with eye movement\n• Age 18-45\n• RAPD present\n• Central or cecocentral scotoma\n• Recovery begins within 2-4 weeks\n\n**Treatment Reminder:**\n• IV steroids speed recovery\n• NEVER use oral prednisone alone`,
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const MS_DMT_REFERENCE_CALCULATOR = {
+    id: 'ms-dmt-reference',
+    title: 'DMT Quick Reference',
+    subtitle: 'MS Disease-Modifying Therapy ED Guide',
+    description: 'Quick reference for common MS disease-modifying therapies — side effects, drug interactions, and ED-relevant considerations. NOT for initiation decisions (neurology domain).',
+    fields: [
+        {
+            name: 'dmt',
+            label: 'Patient\'s Current DMT',
+            type: 'select',
+            points: 0,
+            description: 'Select the disease-modifying therapy the patient is taking',
+            selectOptions: [
+                { label: 'Unknown / Not listed', points: 0 },
+                { label: 'Interferon beta (Avonex, Rebif, Betaseron, Plegridy)', points: 1 },
+                { label: 'Glatiramer acetate (Copaxone, Glatopa)', points: 2 },
+                { label: 'Dimethyl fumarate (Tecfidera)', points: 3 },
+                { label: 'Fingolimod (Gilenya)', points: 4 },
+                { label: 'Natalizumab (Tysabri)', points: 5 },
+                { label: 'Ocrelizumab (Ocrevus)', points: 6 },
+                { label: 'Rituximab (Rituxan - off-label)', points: 7 },
+                { label: 'Alemtuzumab (Lemtrada)', points: 8 },
+                { label: 'Teriflunomide (Aubagio)', points: 9 },
+                { label: 'Siponimod (Mayzent)', points: 10 },
+                { label: 'Cladribine (Mavenclad)', points: 11 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'DMT-specific side effects can mimic MS relapse or cause serious complications. Always verify current DMT and recent doses.',
+    citations: [
+        'Rae-Grant A, et al. Practice guideline recommendations summary: DMTs for adults with MS. Neurology. 2018;90(17):777-788.',
+        'Montalban X, et al. ECTRIMS/EAN guideline on the pharmacological treatment of people with MS. Mult Scler. 2018;24(2):96-120.',
+        'Cross AH, et al. Safety of Disease-Modifying Therapies in Multiple Sclerosis. Neurology. 2021;97(20 Suppl 2):S94-S107.',
+    ],
+    computeResult: (values) => {
+        const dmt = values['dmt'] || 0;
+        const dmtInfo = {
+            1: {
+                name: 'Interferon Beta',
+                class: 'Injectable immunomodulator',
+                sideEffects: 'Flu-like symptoms (esp. first months), injection site reactions, depression, hepatotoxicity, leukopenia',
+                edConcerns: '• Flu-like symptoms can mimic infection\n• Check LFTs if hepatotoxicity concern\n• Depression/suicidality — screen if presenting with psych symptoms\n• Can cause/worsen cytopenias',
+                labs: 'CBC, LFTs — monitor for leukopenia and transaminitis',
+            },
+            2: {
+                name: 'Glatiramer Acetate',
+                class: 'Injectable immunomodulator',
+                sideEffects: 'Injection site reactions, post-injection reaction (flushing, chest tightness, palpitations, dyspnea — self-limited)',
+                edConcerns: '• **Post-injection reaction** can mimic anaphylaxis or cardiac event\n• Occurs minutes after injection, resolves in 15-30 min\n• Reassurance and observation usually sufficient\n• Very safe profile — rarely causes serious issues',
+                labs: 'No routine labs required. Low-risk therapy.',
+            },
+            3: {
+                name: 'Dimethyl Fumarate (Tecfidera)',
+                class: 'Oral immunomodulator',
+                sideEffects: 'GI symptoms (N/V/diarrhea, cramping), flushing, lymphopenia, elevated LFTs, rare PML',
+                edConcerns: '• **GI symptoms** can be severe — may present as abdominal pain\n• **Flushing** — can mimic allergic reaction\n• **Lymphopenia** — check ALC if infection concern\n• Rare **PML** risk if prolonged severe lymphopenia (<500 for >6 months)',
+                labs: 'CBC with differential (check ALC), LFTs',
+            },
+            4: {
+                name: 'Fingolimod (Gilenya)',
+                class: 'S1P receptor modulator (oral)',
+                sideEffects: 'Bradycardia (first dose), macular edema, infections (especially herpes), PML risk, liver injury',
+                edConcerns: '• **Bradycardia** — usually first-dose only, but can occur with restart after missed doses\n• **Macular edema** — blurred vision, usually in first 4 months\n• **Serious infections** — VZV reactivation, cryptococcal meningitis\n• ⚠️ **REBOUND on discontinuation** — severe relapses if stopped abruptly\n• **Do NOT stop without neuro consult**',
+                labs: 'CBC, LFTs, ECG if cardiac symptoms',
+            },
+            5: {
+                name: 'Natalizumab (Tysabri)',
+                class: 'Monoclonal antibody (IV infusion)',
+                sideEffects: 'Infusion reactions, infections, hepatotoxicity, **PML (major risk)**',
+                edConcerns: '• ⚠️ **PML RISK** — highest of all MS DMTs\n• PML presents as PROGRESSIVE deficits (not typical relapse pattern)\n• Subacute cognitive changes, visual loss, weakness, ataxia\n• **If PML concern:** HOLD steroids, urgent MRI, LP for JCV PCR\n• **Rebound after stopping** — severe, polysymptomatic relapses\n• Infusion reactions can occur',
+                labs: 'CBC, LFTs. If PML concern: MRI, LP for JCV PCR',
+            },
+            6: {
+                name: 'Ocrelizumab (Ocrevus)',
+                class: 'Anti-CD20 monoclonal antibody (IV)',
+                sideEffects: 'Infusion reactions, infections (especially respiratory), hypogammaglobulinemia, possible increased malignancy risk',
+                edConcerns: '• **Infusion reactions** — usually within 24h of infusion\n• **Increased infection risk** — especially respiratory, UTI, skin\n• **Hypogammaglobulinemia** — check IgG if recurrent infections\n• Reactivation of hepatitis B possible\n• PML risk exists but lower than natalizumab',
+                labs: 'CBC, immunoglobulin levels if recurrent infections',
+            },
+            7: {
+                name: 'Rituximab (off-label)',
+                class: 'Anti-CD20 monoclonal antibody (IV)',
+                sideEffects: 'Similar to ocrelizumab — infusion reactions, infections, hypogammaglobulinemia',
+                edConcerns: '• Same considerations as ocrelizumab\n• **Infusion reactions** common\n• **Infection risk** — B-cell depletion lasts months\n• Check IgG if recurrent infections\n• Late-onset neutropenia (rare, weeks after infusion)',
+                labs: 'CBC, immunoglobulins',
+            },
+            8: {
+                name: 'Alemtuzumab (Lemtrada)',
+                class: 'Anti-CD52 monoclonal antibody (IV)',
+                sideEffects: 'Profound immunosuppression, autoimmune disorders (thyroid, ITP, nephropathy), serious infections, infusion reactions',
+                edConcerns: '• ⚠️ **HIGHEST RISK DMT** — serious autoimmune complications\n• **Autoimmune thyroiditis** — most common, check TSH\n• **Immune thrombocytopenia (ITP)** — petechiae, bleeding, low platelets\n• **Autoimmune nephropathy** — check creatinine, UA\n• **Serious infections** — profound lymphopenia for months\n• Requires REMS program monitoring',
+                labs: 'CBC with platelets, TSH, creatinine, UA',
+            },
+            9: {
+                name: 'Teriflunomide (Aubagio)',
+                class: 'Oral immunomodulator',
+                sideEffects: 'Hepatotoxicity, hair thinning, GI upset, teratogenic, peripheral neuropathy, elevated BP',
+                edConcerns: '• **Hepatotoxicity** — can be severe; check LFTs if RUQ pain, jaundice\n• ⚠️ **TERATOGENIC** — Category X, very long half-life (requires cholestyramine washout)\n• **Peripheral neuropathy** — can mimic MS symptoms\n• Mild immunosuppression — infection risk present',
+                labs: 'LFTs, pregnancy test if applicable',
+            },
+            10: {
+                name: 'Siponimod (Mayzent)',
+                class: 'S1P receptor modulator (oral)',
+                sideEffects: 'Similar to fingolimod — bradycardia, macular edema, infections, liver injury',
+                edConcerns: '• Same cardiac concerns as fingolimod\n• **Bradycardia** — especially on initiation or after missed doses\n• **Macular edema** risk\n• **Infections** — herpes reactivation\n• Rebound possible on discontinuation (less than fingolimod)',
+                labs: 'ECG, CBC, LFTs, ophthalmology if vision changes',
+            },
+            11: {
+                name: 'Cladribine (Mavenclad)',
+                class: 'Oral purine analog (immune reconstitution therapy)',
+                sideEffects: 'Lymphopenia (expected and prolonged), infections (including herpes), malignancy concern',
+                edConcerns: '• **Profound lymphopenia** — expected effect, lasts months\n• **Herpes reactivation** — prophylaxis usually given\n• **Infection risk** during lymphopenia nadir\n• Given as short courses with long gaps between',
+                labs: 'CBC with differential — expect lymphopenia',
+            },
+        };
+        if (dmt === 0 || !dmtInfo[dmt]) {
+            return {
+                value: 'SELECT',
+                label: 'Select a DMT',
+                description: `**Select the patient's DMT to see ED-relevant information**\n\n**General DMT Considerations:**\n\n**Higher-risk DMTs requiring close monitoring:**\n• Natalizumab — PML risk\n• Alemtuzumab — autoimmune complications\n• Fingolimod — cardiac, rebound on stopping\n\n**Common DMT-related ED presentations:**\n• Infection (all DMTs cause some immunosuppression)\n• Infusion reactions (natalizumab, ocrelizumab, rituximab)\n• GI symptoms (dimethyl fumarate)\n• Flu-like symptoms (interferon beta)\n\n**Key Question:** When was the last dose? Recent dose can cause acute symptoms.`,
+                colorVar: '--color-text-muted',
+            };
+        }
+        const info = dmtInfo[dmt];
+        return {
+            value: info.name.split(' ')[0].toUpperCase(),
+            label: info.name,
+            description: `**${info.name}**\n*${info.class}*\n\n**Common Side Effects:**\n${info.sideEffects}\n\n**ED-Relevant Concerns:**\n${info.edConcerns}\n\n**Labs to Consider:**\n${info.labs}\n\n---\n\n**General Principles:**\n• Contact patient's neurologist for medication questions\n• Do NOT stop DMT without neuro consult (rebound risk)\n• Many DMT side effects can mimic MS relapse`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 const BISAP_CALCULATOR = {
@@ -26981,6 +27507,11 @@ const CALCULATORS = {
     'lp-lab-interpreter': LP_LAB_INTERPRETER_CALCULATOR,
     'lp-ct-criteria-calc': LP_CT_CRITERIA_CALCULATOR,
     'lp-op-interpreter': LP_OP_INTERPRETER_CALCULATOR,
+    // Multiple Sclerosis
+    'ms-relapse-vs-pseudo': MS_RELAPSE_VS_PSEUDO_CALCULATOR,
+    'ms-mcdonald': MS_MCDONALD_CALCULATOR,
+    'ms-ontt-risk': MS_ONTT_RISK_CALCULATOR,
+    'ms-dmt-reference': MS_DMT_REFERENCE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

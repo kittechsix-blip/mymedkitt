@@ -263,6 +263,7 @@ async function loadCriticalActionsOnly(treeId) {
         'tracheo-innominate-fistula': async () => (await import('../data/trees/tracheo-innominate-fistula.js')).TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS,
         'le-fort-fracture': async () => (await import('../data/trees/le-fort-fracture.js')).LE_FORT_FRACTURE_CRITICAL_ACTIONS,
         'lumbar-puncture': async () => (await import('../data/trees/lumbar-puncture.js')).LUMBAR_PUNCTURE_CRITICAL_ACTIONS,
+        'multiple-sclerosis': async () => (await import('../data/trees/multiple-sclerosis.js')).MULTIPLE_SCLEROSIS_CRITICAL_ACTIONS,
     };
     const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
     if (!loader)
@@ -916,6 +917,10 @@ async function loadHardcodedFallback(treeId) {
         'lumbar-puncture': async () => {
             const m = await import('../data/trees/lumbar-puncture.js');
             return { nodes: m.LUMBAR_PUNCTURE_NODES, entryNodeId: 'lp-start', categoryId: 'procedures', moduleLabels: m.LUMBAR_PUNCTURE_MODULE_LABELS, citations: m.LUMBAR_PUNCTURE_CITATIONS, criticalActions: m.LUMBAR_PUNCTURE_CRITICAL_ACTIONS };
+        },
+        'multiple-sclerosis': async () => {
+            const m = await import('../data/trees/multiple-sclerosis.js');
+            return { nodes: m.MULTIPLE_SCLEROSIS_NODES, entryNodeId: 'ms-start', categoryId: 'neurology', moduleLabels: m.MULTIPLE_SCLEROSIS_MODULE_LABELS, citations: m.MULTIPLE_SCLEROSIS_CITATIONS, criticalActions: m.MULTIPLE_SCLEROSIS_CRITICAL_ACTIONS };
         },
     };
     const loader = TREE_IMPORTS[treeId];

@@ -241,6 +241,7 @@ const TREE_REGISTRY = {
   'upper-gi-bleed':      { prefix: 'UPPER_GI_BLEED',       entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
   'le-fort-fracture':    { prefix: 'LE_FORT_FRACTURE',     entryNodeId: 'lefort-start',       categoryId: 'trauma-surg' },
   'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
+  'multiple-sclerosis':  { prefix: 'MULTIPLE_SCLEROSIS',   entryNodeId: 'ms-start',           categoryId: 'neurology' },
 };
 
 const CROSS_LISTINGS = {

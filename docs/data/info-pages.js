@@ -11051,6 +11051,91 @@ const LP_OP_GUIDE = {
     ],
 };
 // -------------------------------------------------------------------
+// Multiple Sclerosis
+// -------------------------------------------------------------------
+const MS_STOP = {
+    id: 'ms-stop',
+    title: 'Multiple Sclerosis — Do NOT',
+    subtitle: 'Critical pitfalls in MS management',
+    sections: [
+        {
+            heading: '🛑 Do NOT assume symptoms are MS relapse without checking for infection',
+            body: '**UTI is the #1 cause of pseudoexacerbation.** Check UA, CBC, temp in ALL MS patients with worsening symptoms. Treat infection first, reassess after fever resolves. [Assessment](#/node/ms-pseudoexacerbation)',
+        },
+        {
+            heading: '🛑 Do NOT give oral prednisone ALONE for optic neuritis',
+            body: 'ONTT trial showed oral prednisone monotherapy **DOUBLES** recurrence risk. Must use IV steroids first, or no steroids at all. [Treatment](#/node/ms-on-treatment)',
+        },
+        {
+            heading: '🛑 Do NOT give steroids if PML is suspected',
+            body: 'Progressive deficits over weeks (not typical relapse pattern) in patient on natalizumab = PML until proven otherwise. **Steroids worsen PML.** Get MRI + LP for JCV PCR. [PML](#/node/ms-pml)',
+        },
+        {
+            heading: '🛑 Do NOT give steroids before ruling out cord compression',
+            body: 'New sensory level, paraparesis, or bladder retention = **STAT MRI spine FIRST**. Cord compression is a surgical emergency. [Transverse Myelitis](#/node/ms-tm-start)',
+        },
+        {
+            heading: '🛑 Do NOT diagnose MS in the ED',
+            body: 'MS diagnosis requires McDonald criteria with MRI ± LP ± clinical dissemination. Many mimics exist (NMOSD, ADEM, tumors, infections). Refer to neurology. [New-Onset](#/node/ms-new-onset)',
+        },
+        {
+            heading: '🛑 Do NOT ignore baclofen withdrawal — it is LIFE-THREATENING',
+            body: 'Abrupt baclofen discontinuation (oral or pump) causes hyperthermia, rigidity, AMS, seizures, multi-organ failure. **Restore baclofen immediately.** [Baclofen](#/node/ms-baclofen-withdrawal)',
+        },
+        {
+            heading: '🛑 Do NOT start MS DMTs without clarifying NMOSD vs MS',
+            body: 'Some MS DMTs (interferon-beta, fingolimod) **WORSEN** NMOSD. Check AQP4/MOG antibodies. Document diagnostic uncertainty. [NMOSD vs MS](#/node/ms-nmosd-vs-ms)',
+        },
+        {
+            heading: '🛑 Do NOT discharge severe relapses without safe home/follow-up',
+            body: 'Patients unable to ambulate, with bladder retention, or brainstem involvement need admission. Ensure neurology follow-up within 1-2 weeks for all relapses. [Disposition](#/node/ms-disposition)',
+        },
+        {
+            heading: '🛑 Do NOT forget postpartum MS patients are HIGH-RISK',
+            body: 'First 3 months postpartum has highest relapse risk. ~37% relapse within 6 months. Low threshold for evaluation and treatment. [Pregnancy](#/node/ms-pregnancy)',
+        },
+        {
+            heading: '🛑 Do NOT miss respiratory compromise with brainstem/cervical lesions',
+            body: 'High cervical or brainstem lesions can cause respiratory muscle weakness. Accounts for ~47% of MS deaths. Low threshold for intubation. [Respiratory](#/node/ms-respiratory)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Beck RW, et al. ONTT: oral prednisone alone is contraindicated. Ophthalmology. 2008.' },
+        { num: 2, text: 'Berger JR, et al. PML diagnostic criteria. AAN Neuroinfectious Disease Section. Neurology. 2013.' },
+    ],
+};
+const MS_DMT_REFERENCE = {
+    id: 'ms-dmt-reference',
+    title: 'MS Disease-Modifying Therapies',
+    subtitle: 'ED-relevant side effects and concerns',
+    sections: [
+        {
+            heading: 'Injectable DMTs',
+            body: '**Interferon-beta** (Avonex, Rebif, Betaseron): Flu-like symptoms (fever, myalgias), injection site reactions, depression, hepatotoxicity\n\n**Glatiramer** (Copaxone): Injection site reactions, post-injection systemic reaction (chest tightness, flushing — self-limited)',
+        },
+        {
+            heading: 'Oral DMTs',
+            body: '**Dimethyl fumarate** (Tecfidera): GI upset, flushing, **lymphopenia** (PML risk if ALC <500 prolonged)\n\n**Fingolimod** (Gilenya): **First-dose bradycardia**, macular edema, lymphopenia\n\n**Teriflunomide** (Aubagio): Hepatotoxicity, **teratogenic** (requires washout)\n\n**Cladribine** (Mavenclad): Lymphopenia, herpes zoster reactivation',
+        },
+        {
+            heading: 'Infused DMTs',
+            body: '**Natalizumab** (Tysabri): **PML** (1/100-1/1000), infusion reactions, hepatotoxicity\n\n**Ocrelizumab** (Ocrevus): Infusion reactions, infections, lymphopenia\n\n**Alemtuzumab** (Lemtrada): **Autoimmune disorders** (thyroid 30%, ITP, nephritis), infections',
+        },
+        {
+            heading: 'PML Risk Stratification',
+            body: '| DMT | PML Risk |\n|-----|----------|\n| **Natalizumab** | **1/100-1/1000** |\n| Fingolimod | 1/18,000 |\n| Dimethyl fumarate | 1/50,000 |\n| Others | Rare/unknown |\n\nRisk factors: JCV antibody+, prior immunosuppression, duration >2 years',
+        },
+        {
+            heading: 'ED Action',
+            body: '• Check lymphocyte count in patients on lymphopenia-causing DMTs\n• Lower threshold for broad-spectrum antibiotics if ALC <500\n• Consider opportunistic infections\n• Contact prescribing neurologist with concerns\n• Document DMT and concerns in chart',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Multiple Sclerosis Coalition. DMT Consensus Paper. 2021.' },
+        { num: 2, text: 'Cleveland Clinic. Safety Monitoring for MS DMTs. 2023.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Asthma Exacerbation
 // -------------------------------------------------------------------
 const ASTHMA_STEPS_SUMMARY = {
@@ -11791,6 +11876,9 @@ export const INFO_PAGES = {
     'lp-midline-steps': LP_MIDLINE_STEPS,
     'lp-paramedian-steps': LP_PARAMEDIAN_STEPS,
     'lp-op-guide': LP_OP_GUIDE,
+    // Multiple Sclerosis
+    'ms-stop': MS_STOP,
+    'ms-dmt-reference': MS_DMT_REFERENCE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
