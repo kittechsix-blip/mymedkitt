@@ -28,6 +28,9 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     module: 1,
     title: 'Refractory VF/VT',
     body: '**Definition:** VF or pulseless VT persisting after:\n• 3+ defibrillation attempts with 2-minute CPR cycles\n• Standard ACLS interventions (epi, antiarrhythmic)\n\n**2025 AHA terminology:** "Persisting VF/pVT" (preferred when mechanism unclear) [1][2]\n\n**Subtypes:**\n| Type | Definition |\n|------|------------|\n| True shock-refractory | VF never terminates |\n| Recurrent VF | VF terminates but refibrillates <5 sec |\n| Electrical storm | 3+ sustained VT/VF in 24h |\n\n**Incidence:** 10-25% of OHCA; survival only 2-12% with standard care [1]',
+    images: [
+      { src: 'images/refractory-vfvt/vf-ecg-tracing.png', alt: 'ECG tracing showing ventricular fibrillation', caption: 'Ventricular fibrillation: chaotic, disorganized waveform with no discernible QRS complexes. Refractory VF persists after 3+ defibrillation attempts — requires escalation beyond standard ACLS. CC BY-SA 3.0 Wikimedia Commons.' },
+    ],
     citation: [1, 2],
     calculatorLinks: [
       { id: 'ecpr-criteria', label: 'ECPR Criteria Checklist' },

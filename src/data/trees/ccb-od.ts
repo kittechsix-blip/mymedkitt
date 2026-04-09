@@ -32,6 +32,9 @@ export const CCB_OD_NODES: DecisionNode[] = [
     module: 1,
     title: 'CCB Overdose — Initial Assessment',
     body: '[CCB Overdose Steps Summary](#/info/ccb-steps-summary) — quick reference.\n\nCalcium channel blockers are among the most lethal cardiovascular drug overdoses. Understanding the **drug class** is critical for predicting toxicity pattern [1][3].\n\n**Two major classes:**\n\n**Dihydropyridines** (amlodipine, nifedipine, felodipine):\n• Primarily peripheral vasodilation\n• Reflex tachycardia common\n• LESS cardiac depression\n• Predominantly vasodilatory shock\n\n**Non-dihydropyridines** (verapamil, diltiazem):\n• Cardiac conduction slowing\n• Negative inotropy and chronotropy\n• Bradycardia common\n• Predominantly cardiogenic shock\n\n**Classic triad:** Hypotension + bradycardia + hyperglycemia (blocks pancreatic insulin release) [1][3].\n\n**Mental status** often preserved until late — unlike beta-blocker toxicity [2].\n\nWhich CCB class was ingested?',
+    images: [
+      { src: 'images/ccb-od/ccb-od-bradycardia-ecg.jpg', alt: 'ECG showing sinus bradycardia at 43 bpm', caption: 'Severe sinus bradycardia (43 bpm) — classic CCB overdose presentation. Non-dihydropyridines (verapamil, diltiazem) cause conduction slowing and negative chronotropy. CC BY-SA 4.0 Wikimedia Commons.' },
+    ],
     citation: [1, 2, 3],
     options: [
       { label: 'Dihydropyridine', description: 'Amlodipine, nifedipine, felodipine — expect vasodilatory shock', next: 'ccb-dhp' },

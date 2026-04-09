@@ -31,6 +31,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     module: 1,
     title: 'Septic Arthritis',
     body: 'Septic arthritis is a bacterial infection of a joint space and its synovial fluid. It is an **orthopedic emergency** because irreversible cartilage destruction develops within **8 hours** through proteolytic enzyme release from neutrophils. [1,2]\n\n**Epidemiology:**\n- Knee most commonly affected (~50% of cases)\n- Bimodal age distribution (young children and adults >55 years)\n- Incidence: 2-10 per 100,000 person-years [1]\n\n**Risk factors:** [1,3]\n- Age >80 years\n- Diabetes mellitus\n- Rheumatoid arthritis\n- Recent joint surgery or prosthesis\n- IVDU\n- Immunocompromise (HIV, transplant, biologics)\n- Crystal arthropathy (gout, pseudogout)\n\n**Key principle:** Time to diagnosis and treatment directly impacts outcomes. Untreated or delayed treatment leads to permanent joint destruction.',
+    images: [
+      { src: 'images/septic-arthritis/joint-fluid-aspirate.jpg', alt: 'Joint fluid aspirate comparison showing turbid synovial fluid', caption: 'Synovial fluid aspirate: turbid/purulent fluid (right) vs normal clear fluid (left). Septic arthritis typically shows WBC >50,000/μL with >90% PMNs — however, no WBC threshold absolutely excludes infection. CC BY-SA 3.0 Wikimedia Commons.' },
+    ],
     citation: [1, 2, 3],
     next: 'sa-clinical',
   },

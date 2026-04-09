@@ -21,6 +21,9 @@ export const URINARY_RETENTION_NODES = [
         module: 1,
         title: 'Acute Urinary Retention',
         body: 'Inability to voluntarily void urine. Most common urologic emergency in men.\n\n**Immediate actions:**\n\u2022 Bladder scan to confirm retention (>300 mL)\n\u2022 Assess for signs of infection (fever, dysuria, pyuria)\n\u2022 Review medication list for anticholinergics, sympathomimetics, opioids\n\u2022 Check for neurologic symptoms (saddle anesthesia, leg weakness, fecal incontinence)\n\n**Four categories of causes:**\n\u2022 **Structural:** BPH (most common, ~50%), stricture, phimosis, tumor\n\u2022 **Medication/Toxicologic:** Anticholinergics, opioids, alpha-agonists, antihistamines\n\u2022 **Neurogenic:** Spinal cord injury, cauda equina, diabetic neuropathy, MS\n\u2022 **Infectious:** UTI, prostatitis, urethritis',
+        images: [
+            { src: 'images/urinary-retention/urinary-retention-ultrasound.jpg', alt: 'Bladder ultrasound showing trabeculated distended bladder', caption: 'Bladder ultrasound: markedly distended bladder with trabeculated wall — indicating chronic outlet obstruction (typically BPH). Bladder scan >300 mL confirms retention. Trabeculation suggests long-standing obstruction. Public domain / CC0.' },
+        ],
         citation: [1, 2],
         next: 'aur-red-flags',
     },

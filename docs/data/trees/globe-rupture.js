@@ -22,6 +22,9 @@ export const GLOBE_RUPTURE_NODES = [
         module: 1,
         title: 'Open Globe Injury',
         body: '**Open Globe = Full-Thickness Injury to Cornea, Sclera, or Both**\n\nThis is an ophthalmic emergency requiring emergent surgical repair.\n\n**Types of Open Globe:**\n\n| Type | Definition |\n|------|------------|\n| **Penetrating** | Object enters eye, does NOT exit |\n| **Perforating** | Entrance AND exit wound |\n| **Rupture** | Blunt force causes wall to burst |\n| **IOFB** | Intraocular foreign body present |\n\n**Key Principle:**\nOnce suspected, PROTECT the eye and call ophthalmology. Do NOT manipulate the globe.\n\n**Time-Critical:**\n- Ideal surgical repair within 12-24 hours\n- Delay increases endophthalmitis risk\n- Delay increases sympathetic ophthalmia risk\n\n[OTS Calculator](#/calculator/globe-ots) [1][2]',
+        images: [
+            { src: 'images/globe-rupture/globe-rupture-clinical.jpg', alt: 'Clinical photograph of ruptured globe with prolapsed uveal tissue', caption: 'Open globe injury: prolapsed uveal tissue (dark pigmented material) through a full-thickness laceration — a hallmark sign. Requires emergent ophthalmology and metallic shield placement. CC BY 4.0 Wikimedia Commons.' },
+        ],
         citation: [1, 2],
         calculatorLinks: [
             { id: 'globe-ots', label: 'OTS Calculator' },

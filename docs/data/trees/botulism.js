@@ -12,6 +12,9 @@ export const BOTULISM_NODES = [
         module: 1,
         title: 'Botulism',
         body: '[Botulism Summary](#/info/bot-summary) - descending symmetric paralysis from Clostridium botulinum neurotoxin.\n\n**Botulism** is a rare but life-threatening neuroparalytic illness caused by botulinum toxin, the most potent biological toxin known.\n\n**CLASSIC PRESENTATION - The "4 Ds":**\n- **D**iplopia (double vision)\n- **D**ysarthria (slurred speech)\n- **D**ysphagia (difficulty swallowing)\n- **D**escending paralysis (cranial nerves first, then descending)\n\n**KEY DISTINGUISHING FEATURES:**\n- **Afebrile** (unlike infectious causes)\n- **Clear sensorium** (unlike stroke)\n- **Symmetric** (unlike stroke)\n- Normal reflexes early, then hyporeflexia\n\n**Autonomic features:**\n- Constipation, urinary retention\n- Dry mouth (decreased secretions)\n- Fixed, dilated pupils',
+        images: [
+            { src: 'images/botulism/botulism-infant-patient.jpg', alt: 'Infant with botulism showing hypotonia and descending paralysis', caption: 'Infant botulism: classic hypotonia ("floppy infant") from descending neuromuscular blockade. Cranial nerve palsies (ptosis, diplopia, dysphagia) precede limb weakness. CC BY-SA 3.0 Wikimedia Commons.' },
+        ],
         citation: [1, 2, 3],
         calculatorLinks: [
             { id: 'bot-types', label: 'Botulism Types' },

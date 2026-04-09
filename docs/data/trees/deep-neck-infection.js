@@ -22,6 +22,9 @@ export const DEEP_NECK_INFECTION_NODES = [
         module: 1,
         title: 'Deep Neck Space Infections',
         body: 'Deep neck infections (DNIs) are potentially life-threatening infections affecting the cervical fascial spaces. They can progress rapidly to **airway obstruction, sepsis, mediastinitis**, and death. [1,2]\n\nMortality without treatment approaches **40-60%** when complicated by descending necrotizing mediastinitis. With aggressive management, mortality has decreased to **8-16%**. [2,3]\n\n**Most common etiologies:**\n- **Odontogenic** (dental infections): 40-60% of cases [1,4]\n- **Tonsillar/pharyngeal**: 20-30% [1]\n- **Salivary gland infections**\n- **Iatrogenic** (post-instrumentation)\n- **Trauma/foreign body**\n\n**Key principle:** Airway management takes absolute priority. Secure the airway BEFORE detailed workup if any signs of compromise.',
+        images: [
+            { src: 'images/deep-neck-infection/peritonsillar-abscess-ct.png', alt: 'CT neck showing right peritonsillar abscess', caption: 'Peritonsillar abscess on CT: hypodense fluid collection with rim enhancement displacing the airway. CT is essential for identifying abscess vs cellulitis and guiding surgical planning. CC BY-SA 4.0 Wikimedia Commons.' },
+        ],
         citation: [1, 2, 3, 4],
         next: 'dni-presentation',
     },
