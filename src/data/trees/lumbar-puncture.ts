@@ -272,6 +272,7 @@ export const LUMBAR_PUNCTURE_NODES: DecisionNode[] = [
     module: 4,
     title: 'Midline Approach — Technique',
     body: '[Midline LP Step-by-Step Guide](#/info/lp-midline-steps)\n\n**Preparation:**\n1. Position patient (lateral decubitus or sitting)\n2. Identify landmarks, mark insertion site\n3. Sterile prep — wide area with chlorhexidine or povidone-iodine\n4. Drape with sterile fenestrated drape\n5. Don sterile gloves\n\n**Local Anesthesia:**\n1. Raise skin wheal with **1% lidocaine** using 25G needle\n2. Infiltrate deeper tissues along planned needle path\n3. Use up to 5-10 mL lidocaine\n4. Wait 1-2 minutes for effect\n\n**Layers traversed (midline):**\n1. Skin\n2. Subcutaneous tissue\n3. **Supraspinous ligament**\n4. **Interspinous ligament**\n5. **Ligamentum flavum** (distinct "pop")\n6. Epidural space\n7. **Dura mater** (second "pop")\n8. Arachnoid mater\n9. **Subarachnoid space** (CSF) ✓ [1][2]',
+    images: [{ src: 'images/lumbar-puncture/lp-midline-anatomy.png', alt: 'Lumbar puncture midline approach showing needle trajectory through interspinous space into subarachnoid space', caption: 'Midline approach: Needle enters through interspinous ligaments, traverses ligamentum flavum and dura to reach subarachnoid space containing CSF. (Blausen Medical, CC BY 3.0)' }],
     citation: [1, 2],
     next: 'lp-midline-insertion',
   },

@@ -16,10 +16,18 @@ export interface DrugDosing {
   regimen: string;
 }
 
+export interface InfoPageImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface InfoPage {
   id: string;
   title: string;
   subtitle: string;
+  /** Optional hero image displayed at the top of the info page */
+  image?: InfoPageImage;
   sections: InfoSection[];
   citations: InfoCitation[];
   /** If true, show a Share button that uses Web Share API to text/email the content */
@@ -11428,6 +11436,7 @@ const LP_MIDLINE_STEPS: InfoPage = {
   id: 'lp-midline-steps',
   title: 'Midline LP — Quick Guide',
   subtitle: 'Step-by-step procedure',
+  image: { src: 'images/lumbar-puncture/lp-midline-anatomy.png', alt: 'Midline LP anatomy showing needle trajectory', caption: 'Midline approach: Needle passes through supraspinous and interspinous ligaments, then ligamentum flavum and dura. (Blausen Medical, CC BY 3.0)' },
   sections: [
     {
       heading: '1. Position',
@@ -11477,20 +11486,24 @@ const LP_PARAMEDIAN_STEPS: InfoPage = {
       body: '• Failed midline attempts\n• Age >50 (calcified ligaments)\n• Severe degenerative changes\n• Kyphosis/scoliosis\n• Cannot flex spine adequately\n• **NOT for severely obese** (long path)',
     },
     {
+      heading: 'Anatomy: Paramedian vs Midline',
+      body: '**MIDLINE** passes through:\n→ Supraspinous ligament → Interspinous ligament → Ligamentum flavum → Dura\n\n**PARAMEDIAN** bypasses the midline ligaments:\n→ Skin → Paraspinal muscles → Ligamentum flavum → Dura\n\nThe needle enters lateral to spinous process and angles medially toward the interlaminar space (the "window" between adjacent laminae). This avoids calcified supraspinous/interspinous ligaments common in elderly.',
+    },
+    {
       heading: '1. Position & Prep',
       body: '• Same as midline (lateral decubitus or sitting)\n• Sterile prep and drape\n• Identify spinous processes',
     },
     {
       heading: '2. Entry Point',
-      body: '• **1-1.5 cm lateral** to midline\n• At level of **superior tip** of lower spinous process\n• Mark insertion site',
+      body: '**Mark two points:**\n1. Midline between spinous processes (L3-L4 or L4-L5)\n2. **1-1.5 cm lateral** to that point\n\nEntry is at the **superior tip of the LOWER spinous process** — not between them.\n\n📍 The entry point is lateral AND slightly caudal to where you\'d enter for midline.',
     },
     {
       heading: '3. Anesthesia',
-      body: '• Skin wheal with 1% lidocaine\n• Infiltrate deeper along planned trajectory',
+      body: '• Skin wheal with 1% lidocaine\n• Infiltrate deeper along planned trajectory\n• More depth than midline — use adequate volume',
     },
     {
       heading: '4. Needle Trajectory',
-      body: '• Insert perpendicular to skin initially\n• Angle **10-30° cephalad** (sagittal plane)\n• Angle **10-20° medially** (toward midline)\n• Aim for interlaminar space',
+      body: '**TWO angles to remember:**\n\n**Sagittal plane:** Angle **10-25° CEPHALAD** (toward head)\n**Coronal plane:** Angle **10-15° MEDIALLY** (toward midline)\n\nImagine aiming the needle toward the patient\'s umbilicus (cephalad) and slightly toward the midline. The needle passes through paraspinal muscle → ligamentum flavum → dura.',
     },
     {
       heading: '5. Navigate to CSF',
