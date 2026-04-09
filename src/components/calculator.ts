@@ -17880,6 +17880,338 @@ const AIMS65_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// LUMBAR PUNCTURE CALCULATORS
+// =====================================================================
+
+const LP_LAB_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'lp-lab-interpreter',
+  title: 'CSF Lab Interpreter',
+  subtitle: 'Lumbar Puncture Results Analysis',
+  description: 'Interpret cerebrospinal fluid findings to differentiate bacterial meningitis, viral meningitis, TB/fungal meningitis, and subarachnoid hemorrhage. Based on classic CSF profiles and validated decision rules.',
+  fields: [
+    {
+      name: 'wbc',
+      label: 'CSF WBC Count (cells/µL)',
+      type: 'select',
+      points: 0,
+      description: 'White blood cell count in CSF',
+      selectOptions: [
+        { label: '0-5 (Normal)', points: 0 },
+        { label: '6-100 (Mild elevation)', points: 1 },
+        { label: '100-500 (Moderate elevation)', points: 2 },
+        { label: '500-1000 (High)', points: 3 },
+        { label: '>1000 (Very high)', points: 4 },
+      ],
+    },
+    {
+      name: 'pmn',
+      label: 'Predominant Cell Type',
+      type: 'select',
+      points: 0,
+      description: 'Differential shows predominance of',
+      selectOptions: [
+        { label: 'Lymphocytes (>50%)', points: 0 },
+        { label: 'Neutrophils (>50%)', points: 1 },
+        { label: 'Mixed (~50/50)', points: 2 },
+      ],
+    },
+    {
+      name: 'glucose',
+      label: 'CSF Glucose',
+      type: 'select',
+      points: 0,
+      description: 'Compare to serum glucose (CSF:serum ratio)',
+      selectOptions: [
+        { label: 'Normal (>60% of serum, typically 40-70 mg/dL)', points: 0 },
+        { label: 'Low (40-60% of serum)', points: 1 },
+        { label: 'Very Low (<40% of serum or <40 mg/dL)', points: 2 },
+      ],
+    },
+    {
+      name: 'protein',
+      label: 'CSF Protein',
+      type: 'select',
+      points: 0,
+      description: 'Normal is 15-45 mg/dL',
+      selectOptions: [
+        { label: 'Normal (15-45 mg/dL)', points: 0 },
+        { label: 'Mildly elevated (45-100 mg/dL)', points: 1 },
+        { label: 'Moderately elevated (100-200 mg/dL)', points: 2 },
+        { label: 'Markedly elevated (>200 mg/dL)', points: 3 },
+      ],
+    },
+    {
+      name: 'xanth',
+      label: 'Xanthochromia',
+      type: 'toggle',
+      points: 0,
+      description: 'Yellow discoloration of CSF supernatant (bilirubin = SAH)',
+    },
+    {
+      name: 'gram',
+      label: 'Gram Stain Positive',
+      type: 'toggle',
+      points: 0,
+      description: 'Organisms seen on Gram stain',
+    },
+  ],
+  results: [],
+  thresholdNote: 'Bacterial meningitis: WBC >1000, >80% PMN, low glucose, high protein, positive Gram stain. Viral: WBC 10-500, lymphocyte predominance, normal glucose. TB/fungal: lymphocytes, very low glucose, very high protein.',
+  citations: [
+    'Tunkel AR, et al. Practice Guidelines for Bacterial Meningitis. IDSA. Clin Infect Dis. 2004;39(9):1267-1284.',
+    'Spanos A, et al. Differential diagnosis of acute meningitis: a meta-analysis. JAMA. 1989;262(19):2700-2707.',
+    'Roberts JR, et al. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. 2019.',
+  ],
+  computeResult: (values) => {
+    const wbc = values['wbc'] || 0;
+    const pmn = values['pmn'] || 0;
+    const glucose = values['glucose'] || 0;
+    const protein = values['protein'] || 0;
+    const xanth = values['xanth'] || 0;
+    const gram = values['gram'] || 0;
+
+    // SAH pattern: xanthochromia present
+    if (xanth) {
+      return {
+        value: 'SAH',
+        label: 'Subarachnoid Hemorrhage',
+        description: '**Xanthochromia present = SAH until proven otherwise**\n\n**Key points:**\n• Bilirubin in CSF (causing yellow color) requires >9-10 hours to develop\n• Definitive for SAH if LP performed >12h after headache onset\n• Oxyhemoglobin alone (pink/red CSF) is non-specific\n\n**Next steps:**\n• Neurosurgery consult STAT\n• CT angiography (CTA) to identify aneurysm\n• Admit to ICU\n• Blood pressure control\n• Nimodipine for vasospasm prophylaxis',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Bacterial meningitis pattern: High WBC, PMN predominance, low glucose, +/- Gram stain
+    if ((wbc >= 3 && pmn === 1 && glucose >= 1) || gram) {
+      return {
+        value: 'BACTERIAL',
+        label: 'Likely Bacterial Meningitis',
+        description: `**CSF profile suggests BACTERIAL meningitis**\n\n**Classic findings:**\n• WBC >1000 (often >5000), >80% neutrophils\n• Glucose <40 mg/dL or <40% serum\n• Protein >200 mg/dL\n• Gram stain positive in ~60-90%\n\n${gram ? '⚠️ **GRAM STAIN POSITIVE** — treat immediately!\n\n' : ''}**Empiric Treatment (adults):**\n• **Ceftriaxone** 2g IV q12h\n• **Vancomycin** 15-20 mg/kg IV q8-12h\n• **Dexamethasone** 0.15 mg/kg IV q6h × 4 days\n\n**Add Ampicillin 2g IV q4h if:**\n• Age >50, immunocompromised, alcoholism (Listeria coverage)\n\n**Disposition:** ICU admission`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // TB/Fungal pattern: Lymphocytes, very low glucose, very high protein
+    if (wbc >= 2 && pmn === 0 && glucose === 2 && protein >= 2) {
+      return {
+        value: 'TB/FUNGAL',
+        label: 'Possible TB or Fungal Meningitis',
+        description: '**CSF profile suggests TB or fungal meningitis**\n\n**Classic findings:**\n• WBC 50-500, lymphocyte predominance\n• Glucose markedly low (<40 mg/dL)\n• Protein markedly elevated (>200 mg/dL)\n• Subacute presentation (days to weeks)\n\n**Risk factors:**\n• HIV/AIDS\n• Immunosuppression\n• Endemic area exposure\n• Prior TB\n\n**Diagnostic workup:**\n• CSF AFB smear and culture (low sensitivity)\n• CSF fungal culture\n• Cryptococcal antigen (if HIV/immunocompromised)\n• CSF adenosine deaminase (ADA) — elevated in TB\n• CSF TB PCR (GeneXpert)\n\n**Initial treatment (pending workup):**\n• Empiric anti-TB therapy if high suspicion\n• Amphotericin B + flucytosine if cryptococcal suspected\n\n**Disposition:** Admission, ID consult',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Viral meningitis pattern: Moderate WBC, lymphocytes, normal glucose
+    if (wbc >= 1 && pmn === 0 && glucose === 0) {
+      return {
+        value: 'VIRAL',
+        label: 'Likely Viral Meningitis',
+        description: '**CSF profile suggests VIRAL meningitis**\n\n**Classic findings:**\n• WBC 10-500, lymphocyte predominance\n• Glucose NORMAL (>60% of serum)\n• Protein mildly elevated (50-100 mg/dL)\n\n**Common causes:**\n• Enteroviruses (most common)\n• HSV-2 (Mollaret meningitis)\n• Arboviruses (West Nile, etc.)\n• Mumps, HIV seroconversion\n\n**Consider HSV encephalitis if:**\n• Altered mental status\n• Focal deficits\n• Seizures\n• Temporal lobe changes on MRI\n→ Treat with **Acyclovir 10 mg/kg IV q8h**\n\n**Management:**\n• Supportive care\n• Most patients can be discharged if:\n  - Well-appearing\n  - No AMS\n  - Tolerating PO\n  - Reliable follow-up\n\n**Disposition:** Often discharge with close follow-up',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Normal CSF
+    if (wbc === 0 && glucose === 0 && protein === 0) {
+      return {
+        value: 'NORMAL',
+        label: 'Normal CSF',
+        description: '**CSF is within normal limits**\n\n**Normal values:**\n• WBC: 0-5 cells/µL\n• Protein: 15-45 mg/dL\n• Glucose: 40-70 mg/dL (>60% of serum)\n• RBC: 0\n• Clear, colorless\n\n**This pattern makes bacterial meningitis VERY unlikely**\n\nConsider:\n• Viral syndrome (early course)\n• Migraine\n• Drug-induced aseptic meningitis\n• Non-infectious cause of symptoms',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Indeterminate
+    return {
+      value: 'INDETERMINATE',
+      label: 'Atypical Pattern',
+      description: '**CSF findings are atypical — clinical correlation required**\n\n**Consider:**\n• Early bacterial meningitis (may be lymphocyte-predominant initially)\n• Partially treated meningitis\n• Viral meningitis\n• Drug-induced aseptic meningitis\n• Autoimmune/inflammatory conditions\n\n**Recommendations:**\n• Send full CSF panel: culture, viral PCR, fungal, TB studies\n• Consider ID consultation\n• If bacterial meningitis cannot be excluded, treat empirically\n• Repeat LP in 12-24h may clarify diagnosis\n\n**When in doubt, treat for bacterial meningitis pending cultures**',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const LP_CT_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'lp-ct-criteria-calc',
+  title: 'CT Before LP Criteria',
+  subtitle: 'IDSA/ACEP Decision Rule',
+  description: 'Identifies patients who need CT head before lumbar puncture to rule out mass lesion and reduce herniation risk. Based on IDSA guidelines and Hasbun et al. (NEJM 2001). CT does NOT delay empiric antibiotics — give antibiotics FIRST.',
+  fields: [
+    { name: 'age60', label: 'Age >60 years', type: 'toggle', points: 1, description: 'Increased risk of mass lesions' },
+    { name: 'immunocomp', label: 'Immunocompromised', type: 'toggle', points: 1, description: 'HIV/AIDS, transplant, chemotherapy, steroids, asplenia' },
+    { name: 'cns_history', label: 'History of CNS disease', type: 'toggle', points: 1, description: 'Mass lesion, stroke, focal infection, prior neurosurgery' },
+    { name: 'seizure', label: 'New-onset seizure (within 1 week)', type: 'toggle', points: 1, description: 'Recent seizure activity' },
+    { name: 'ams', label: 'Altered mental status', type: 'toggle', points: 1, description: 'GCS <15 or abnormal level of consciousness' },
+    { name: 'focal', label: 'Focal neurological deficit', type: 'toggle', points: 1, description: 'Hemiparesis, CN palsy (except VI nerve), aphasia' },
+    { name: 'papilledema', label: 'Papilledema', type: 'toggle', points: 1, description: 'Fundoscopic evidence of elevated ICP' },
+  ],
+  results: [],
+  thresholdNote: 'ANY positive criterion = CT head BEFORE LP. Absence of ALL criteria = safe to LP without CT (97% NPV for abnormal CT). CRITICAL: Do NOT delay antibiotics for CT — give empiric treatment FIRST.',
+  citations: [
+    'Hasbun R, et al. Computed tomography of the head before lumbar puncture in adults with suspected meningitis. N Engl J Med. 2001;345(24):1727-1733.',
+    'Tunkel AR, et al. Practice Guidelines for Bacterial Meningitis. IDSA/ACEP. Clin Infect Dis. 2004;39(9):1267-1284.',
+  ],
+  computeResult: (values) => {
+    const total = Object.values(values).reduce((sum: number, v) => sum + (Number(v) || 0), 0);
+
+    if (total === 0) {
+      return {
+        value: 'LP OK',
+        label: 'CT NOT Required Before LP',
+        description: '**No high-risk criteria present**\n\n**Safe to proceed directly to LP without CT head**\n\nHasbun et al. (NEJM 2001) found that absence of ALL criteria had a 97% negative predictive value for abnormal CT.\n\n**Proceed to LP:**\n• Position patient (lateral decubitus preferred)\n• Sterile prep and drape\n• Use atraumatic (pencil-point) needle\n• Measure opening pressure\n\n**Remember:**\n• If meningitis suspected, give empiric antibiotics NOW (before LP)\n• Door-to-antibiotic <60 minutes reduces mortality',
+        colorVar: '--color-primary',
+      };
+    }
+
+    const criteria: string[] = [];
+    if (values['age60']) criteria.push('Age >60');
+    if (values['immunocomp']) criteria.push('Immunocompromised');
+    if (values['cns_history']) criteria.push('CNS disease history');
+    if (values['seizure']) criteria.push('New-onset seizure');
+    if (values['ams']) criteria.push('Altered mental status');
+    if (values['focal']) criteria.push('Focal neurological deficit');
+    if (values['papilledema']) criteria.push('Papilledema');
+
+    return {
+      value: 'CT FIRST',
+      label: 'CT Required Before LP',
+      description: `**CT head is indicated BEFORE LP**\n\n**Criteria present:** ${criteria.join(', ')}\n\n⚠️ **CRITICAL ORDER OF OPERATIONS:**\n1. Blood cultures × 2 NOW\n2. **Empiric antibiotics NOW** (do NOT wait for CT!)\n3. CT head\n4. LP (if CT safe)\n5. Adjust antibiotics based on CSF\n\n**Empiric Antibiotics (give BEFORE CT):**\n• **Ceftriaxone** 2g IV + **Vancomycin** 15-20 mg/kg IV\n• **Dexamethasone** 0.15 mg/kg IV (before or with abx)\n• Add **Ampicillin** 2g IV if age >50 or immunocompromised\n\n**If CT shows mass effect or obstruction:**\n• Do NOT perform LP\n• Neurosurgery consult\n• Continue empiric treatment\n\n**Door-to-antibiotic time matters** — do NOT delay for CT!`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const LP_OP_INTERPRETER_CALCULATOR: CalculatorDefinition = {
+  id: 'lp-op-interpreter',
+  title: 'Opening Pressure Interpreter',
+  subtitle: 'CSF Pressure Analysis',
+  description: 'Interpret lumbar puncture opening pressure measurements. Normal range 10-25 cm H₂O (adults). Opening pressure MUST be measured in lateral decubitus position with legs extended for accuracy.',
+  fields: [
+    {
+      name: 'op',
+      label: 'Opening Pressure',
+      type: 'select',
+      points: 0,
+      description: 'Measured in lateral decubitus with legs extended',
+      selectOptions: [
+        { label: '<6 cm H₂O (Very low)', points: 1 },
+        { label: '6-10 cm H₂O (Low-normal)', points: 2 },
+        { label: '10-20 cm H₂O (Normal)', points: 3 },
+        { label: '20-25 cm H₂O (Upper normal)', points: 4 },
+        { label: '25-30 cm H₂O (Borderline elevated)', points: 5 },
+        { label: '30-40 cm H₂O (Elevated)', points: 6 },
+        { label: '>40 cm H₂O (Markedly elevated)', points: 7 },
+      ],
+    },
+    {
+      name: 'position',
+      label: 'Measured in lateral decubitus',
+      type: 'toggle',
+      points: 0,
+      description: 'OP is only accurate in lateral decubitus — sitting position overestimates',
+    },
+    {
+      name: 'obesity',
+      label: 'Patient is obese (BMI >30)',
+      type: 'toggle',
+      points: 0,
+      description: 'Obesity increases OP without pathology',
+    },
+  ],
+  results: [],
+  thresholdNote: 'Normal OP: 10-25 cm H₂O (adults), up to 28 cm H₂O (children/obese). IIH criteria: ≥25 cm H₂O adults, ≥28 cm H₂O children. Must be measured in lateral decubitus with legs extended.',
+  citations: [
+    'Lee SCM, et al. Opening pressure measurement in lumbar puncture: systematic review. J Neurol. 2019;266(12):3095-3106.',
+    'Friedman DI, et al. Revised diagnostic criteria for idiopathic intracranial hypertension (IIH). Neurology. 2013;81(13):1159-1165.',
+    'Roberts JR, et al. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. 2019.',
+  ],
+  computeResult: (values) => {
+    const op = values['op'] || 3;
+    const lateral = values['position'] || 0;
+    const obese = values['obesity'] || 0;
+
+    // Position warning
+    const positionWarning = !lateral ? '\n\n⚠️ **Position not confirmed** — Opening pressure is ONLY accurate in lateral decubitus with legs extended. Sitting position overestimates OP by ~10-15 cm H₂O.' : '';
+
+    // Very low
+    if (op === 1) {
+      return {
+        value: '<6 cm H₂O',
+        label: 'Low Opening Pressure',
+        description: `**Opening pressure is LOW**\n\n**Possible causes:**\n• CSF leak (post-traumatic, iatrogenic, spontaneous)\n• Post-LP (recent LP with ongoing leak)\n• Dehydration (severe)\n• Diabetic coma\n• Circulatory collapse\n\n**Spontaneous Intracranial Hypotension (SIH):**\n• Positional headache (worse upright)\n• MRI: Diffuse pachymeningeal enhancement\n• May require epidural blood patch${positionWarning}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Low-normal
+    if (op === 2) {
+      return {
+        value: '6-10 cm H₂O',
+        label: 'Low-Normal Opening Pressure',
+        description: `**Opening pressure is at the lower end of normal**\n\n**Normal range:** 10-20 cm H₂O (some sources 6-25)\n\n**Consider:**\n• Normal variant\n• Dehydration\n• Recent CSF removal\n\nGenerally does not require intervention if patient is asymptomatic.${positionWarning}`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Normal
+    if (op === 3) {
+      return {
+        value: '10-20 cm H₂O',
+        label: 'Normal Opening Pressure',
+        description: `**Opening pressure is NORMAL**\n\n**Normal range:**\n• Adults: 10-20 cm H₂O (some sources 6-25)\n• Children: 10-28 cm H₂O\n• Obese adults: up to 25 cm H₂O may be normal\n\nNo intervention needed for the OP itself. Interpret in context of clinical presentation and CSF analysis.${positionWarning}`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Upper normal
+    if (op === 4) {
+      return {
+        value: '20-25 cm H₂O',
+        label: 'Upper Normal Opening Pressure',
+        description: `**Opening pressure is at upper limit of normal**\n\n**Interpretation:**\n• 20-25 cm H₂O = upper limit of normal in adults\n• Up to 25-28 cm H₂O may be normal in:\n  - Obese patients (BMI >30)\n  - Children\n${obese ? '\n✓ Patient is obese — this value is likely normal for them' : ''}\n\n**If symptomatic (headache, papilledema, visual changes):**\n• Consider borderline IIH\n• Ophthalmology evaluation for papilledema\n• MRI/MRV to exclude venous thrombosis${positionWarning}`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Borderline elevated
+    if (op === 5) {
+      return {
+        value: '25-30 cm H₂O',
+        label: 'Borderline Elevated Pressure',
+        description: `**Opening pressure is BORDERLINE ELEVATED**\n\n**IIH Diagnostic Criteria (Modified Dandy):**\n• OP ≥25 cm H₂O (adults), ≥28 cm H₂O (children)\n• Symptoms of elevated ICP\n• Normal neuroimaging (except for IIH signs)\n• Normal CSF composition\n• No other cause identified\n${obese ? '\n**Note:** Patient is obese — OP up to 25-28 may be normal in obesity. Clinical correlation essential.' : ''}\n\n**If IIH suspected:**\n• High-volume therapeutic tap (30-50 mL)\n• Acetazolamide 250mg BID, titrate up\n• Weight loss counseling\n• Neurology/neuro-ophthalmology referral${positionWarning}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Elevated
+    if (op === 6) {
+      return {
+        value: '30-40 cm H₂O',
+        label: 'Elevated Opening Pressure',
+        description: `**Opening pressure is ELEVATED**\n\n**Causes of elevated OP:**\n• **IIH/Pseudotumor cerebri** — young, obese, female\n• **Cerebral venous thrombosis** — check MRV\n• **Meningitis** — especially TB/fungal\n• **Mass lesion** — should have been excluded by CT\n• **Hydrocephalus**\n• **Medications** — tetracyclines, vitamin A, steroids (withdrawal)\n\n**Immediate actions:**\n1. **Therapeutic tap:** Remove 30-50 mL CSF\n2. Target closing pressure: 10-15 cm H₂O\n3. Patient will likely have immediate symptom relief\n\n**Workup if not done:**\n• MRI brain + MRV (exclude venous thrombosis)\n• Full CSF analysis\n• Ophthalmology (papilledema assessment)\n\n**Treatment (IIH):**\n• Acetazolamide 250-500mg BID, titrate\n• Weight loss (if obese)\n• Serial LP may be needed${positionWarning}`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Markedly elevated
+    if (op === 7) {
+      return {
+        value: '>40 cm H₂O',
+        label: 'Markedly Elevated Pressure',
+        description: `**Opening pressure is MARKEDLY ELEVATED**\n\n⚠️ **Urgent evaluation required**\n\n**Immediate concerns:**\n• Risk of visual loss from papilledema\n• Need to exclude secondary causes\n\n**Actions:**\n1. **Therapeutic high-volume tap:** Remove 40-50 mL CSF\n2. Target closing pressure: 10-15 cm H₂O\n3. Monitor during removal — stop if severe headache develops\n\n**Urgent workup:**\n• MRI brain + MRV (venous sinus thrombosis?)\n• Complete CSF analysis\n• Emergent ophthalmology consult\n\n**If severe papilledema with vision threat:**\n• Neurosurgery consult for possible shunt\n• May need serial urgent LPs\n• Consider IV acetazolamide\n\n**IIH treatment:**\n• Acetazolamide 500mg BID, titrate to effect\n• Weight loss program\n• Close neuro-ophthalmology follow-up${positionWarning}`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Select Pressure',
+      description: 'Select the opening pressure to interpret results.',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 
@@ -27550,6 +27882,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Upper GI Bleed
   'gbs': GBS_CALCULATOR,
   'aims65': AIMS65_CALCULATOR,
+  // Lumbar Puncture
+  'lp-lab-interpreter': LP_LAB_INTERPRETER_CALCULATOR,
+  'lp-ct-criteria-calc': LP_CT_CRITERIA_CALCULATOR,
+  'lp-op-interpreter': LP_OP_INTERPRETER_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

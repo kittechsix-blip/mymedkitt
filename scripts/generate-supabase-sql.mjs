@@ -183,6 +183,8 @@ const TREE_REGISTRY = {
   'dental-trauma':       { prefix: 'DENTAL_TRAUMA',        entryNodeId: 'dental-trauma-start', categoryId: 'emergency-medicine' },
   'pta-drainage':        { prefix: 'PTA_DRAINAGE',         entryNodeId: 'pta-start',          categoryId: 'procedures' },
   'upper-gi-bleed':      { prefix: 'UPPER_GI_BLEED',       entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
+  'le-fort-fracture':    { prefix: 'LE_FORT_FRACTURE',     entryNodeId: 'lefort-start',       categoryId: 'trauma-surg' },
+  'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -223,7 +225,6 @@ const CROSS_LISTINGS = {
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
-  'le-fort-fracture': { prefix: 'LE_FORT_FRACTURE', entryNodeId: 'lefort-start', categoryId: 'trauma-surg' },
 };
 
 const reg = TREE_REGISTRY[consultId];

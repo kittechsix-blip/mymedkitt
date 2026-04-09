@@ -240,6 +240,7 @@ const TREE_REGISTRY = {
   'pta-drainage':        { prefix: 'PTA_DRAINAGE',         entryNodeId: 'pta-start',          categoryId: 'procedures' },
   'upper-gi-bleed':      { prefix: 'UPPER_GI_BLEED',       entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
   'le-fort-fracture':    { prefix: 'LE_FORT_FRACTURE',     entryNodeId: 'lefort-start',       categoryId: 'trauma-surg' },
+  'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
 };
 
 const CROSS_LISTINGS = {

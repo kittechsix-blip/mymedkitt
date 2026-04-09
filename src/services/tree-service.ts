@@ -325,6 +325,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'ttp': async () => (await import('../data/trees/ttp.js')).TTP_CRITICAL_ACTIONS,
     'tracheo-innominate-fistula': async () => (await import('../data/trees/tracheo-innominate-fistula.js')).TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS,
     'le-fort-fracture': async () => (await import('../data/trees/le-fort-fracture.js')).LE_FORT_FRACTURE_CRITICAL_ACTIONS,
+    'lumbar-puncture': async () => (await import('../data/trees/lumbar-puncture.js')).LUMBAR_PUNCTURE_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -975,6 +976,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'le-fort-fracture': async () => {
       const m = await import('../data/trees/le-fort-fracture.js');
       return { nodes: m.LE_FORT_FRACTURE_NODES, entryNodeId: 'lefort-start', categoryId: 'trauma-surg', moduleLabels: m.LE_FORT_FRACTURE_MODULE_LABELS, citations: m.LE_FORT_FRACTURE_CITATIONS, criticalActions: m.LE_FORT_FRACTURE_CRITICAL_ACTIONS };
+    },
+    'lumbar-puncture': async () => {
+      const m = await import('../data/trees/lumbar-puncture.js');
+      return { nodes: m.LUMBAR_PUNCTURE_NODES, entryNodeId: 'lp-start', categoryId: 'procedures', moduleLabels: m.LUMBAR_PUNCTURE_MODULE_LABELS, citations: m.LUMBAR_PUNCTURE_CITATIONS, criticalActions: m.LUMBAR_PUNCTURE_CRITICAL_ACTIONS };
     },
   };
 

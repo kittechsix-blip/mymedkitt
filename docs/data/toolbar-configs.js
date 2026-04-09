@@ -1026,6 +1026,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'neuro', label: 'Neuro Prog', icon: '🧠', action: 'jump', target: 'rosc-neuro' },
         { id: 'icu', label: 'ICU Targets', icon: '🏥', action: 'jump', target: 'rosc-icu-targets' },
     ],
+    'lumbar-puncture': [
+        { id: 'csf-interp', label: 'CSF Interp', icon: '🧪', action: 'calculator', target: 'lp-lab-interpreter' },
+        { id: 'ct-criteria', label: 'CT First?', icon: '🧠', action: 'calculator', target: 'lp-ct-criteria-calc' },
+        { id: 'midline', label: 'Midline', icon: '📋', action: 'overlay', target: 'lp-midline-steps' },
+        { id: 'paramedian', label: 'Paramedian', icon: '↗️', action: 'overlay', target: 'lp-paramedian-steps' },
+        { id: 'op-guide', label: 'OP Interp', icon: '📊', action: 'calculator', target: 'lp-op-interpreter' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

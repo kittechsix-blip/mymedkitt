@@ -10869,6 +10869,183 @@ const CA_HS_TS_TABLE = {
     ],
 };
 // -------------------------------------------------------------------
+// Lumbar Puncture
+// -------------------------------------------------------------------
+const LP_STOP = {
+    id: 'lp-stop',
+    title: 'Lumbar Puncture — Do NOT',
+    subtitle: 'Critical contraindications and pitfalls',
+    sections: [
+        {
+            heading: '🛑 Do NOT LP without CT if high-risk criteria present',
+            body: '**CT FIRST if ANY of:** Age >60, immunocompromised, CNS disease history, new seizure, altered mental status (GCS <15), focal deficit, papilledema. Risk of herniation. [CT criteria](#/node/lp-ct-criteria).',
+        },
+        {
+            heading: '🛑 Do NOT delay antibiotics for CT or LP in meningitis',
+            body: 'Bacterial meningitis mortality increases with antibiotic delay. **Give empiric antibiotics FIRST** (ceftriaxone + vancomycin ± ampicillin), then CT, then LP. [Meningitis management](#/node/lp-meningitis-urgency).',
+        },
+        {
+            heading: '🛑 Do NOT LP through infected skin',
+            body: 'Cellulitis, abscess, or any infection overlying the puncture site is an **absolute contraindication**. Risk of iatrogenic meningitis or epidural abscess.',
+        },
+        {
+            heading: '🛑 Do NOT LP with PLT <20,000 without transfusion',
+            body: 'Traditional threshold: PLT >50,000. Evidence-based: PLT >40,000 likely safe. PLT <20,000 = high risk — transfuse first unless emergent meningitis. [Coagulation thresholds](#/node/lp-coag-check).',
+        },
+        {
+            heading: '🛑 Do NOT LP with INR >1.5 (or active anticoagulation)',
+            body: 'Risk of epidural/spinal hematoma. **Warfarin:** hold 5d, target INR <1.4. **DOACs:** wait 72h minimum. **Heparin:** wait 4-6h. [Anticoagulant management](#/node/lp-coag-check).',
+        },
+        {
+            heading: '🛑 Do NOT measure opening pressure in sitting position',
+            body: 'Sitting position **CANNOT** accurately measure OP — falsely elevated. **Must use lateral decubitus** with legs extended, patient relaxed. [OP technique](#/node/lp-op-technique).',
+        },
+        {
+            heading: '🛑 Do NOT rely on RBC clearing alone to exclude SAH',
+            body: 'RBC count decrease tube 1→4 is **unreliable** (25% reduction occurs in SAH too). **Xanthochromia with bilirubin** (requires >9-10h) is the gold standard. [Traumatic tap vs SAH](#/node/lp-traumatic-vs-sah).',
+        },
+        {
+            heading: '🛑 Do NOT use cutting needles if atraumatic available',
+            body: 'Quincke (cutting) needles: **15-30% PDPH**. Whitacre/Sprotte (atraumatic): **~4% PDPH**. Always use pencil-point needles when available. [Needle selection](#/node/lp-needle-selection).',
+        },
+        {
+            heading: '🛑 Do NOT remove stylet before withdrawing needle',
+            body: '**Replace stylet before removing needle** — reduces PDPH risk. The stylet prevents arachnoid tissue from being pulled through the dura.',
+        },
+        {
+            heading: '🛑 Do NOT ignore post-LP leg weakness or urinary retention',
+            body: 'Back pain + leg weakness + urinary symptoms = **epidural hematoma** until proven otherwise. **Urgent MRI spine** and neurosurgery consult. [Complications](#/node/lp-other-complications).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR, et al. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. Elsevier; 2019.' },
+        { num: 2, text: 'Horlocker TT, et al. Regional Anesthesia in the Patient Receiving Antithrombotic or Thrombolytic Therapy: ASRA Guidelines. Reg Anesth Pain Med. 2021;46:28-51.' },
+    ],
+};
+const LP_MIDLINE_STEPS = {
+    id: 'lp-midline-steps',
+    title: 'Midline LP — Quick Guide',
+    subtitle: 'Step-by-step procedure',
+    sections: [
+        {
+            heading: '1. Position',
+            body: '• **Lateral decubitus** (for OP measurement) or sitting\n• Spine parallel to bed edge, shoulders/hips stacked\n• Knees to chest, neck flexed (fetal position)\n• Assistant holds position',
+        },
+        {
+            heading: '2. Landmarks',
+            body: '• Find **intercristal line** (iliac crests → L4 level)\n• Palpate spinous processes\n• Target **L3-L4 or L4-L5** interspace\n• Mark insertion point',
+        },
+        {
+            heading: '3. Sterile Prep',
+            body: '• Wide chlorhexidine or povidone-iodine prep\n• Sterile drape (fenestrated)\n• Sterile gloves, face mask',
+        },
+        {
+            heading: '4. Anesthesia',
+            body: '• **1% lidocaine** with 25G needle\n• Skin wheal at insertion site\n• Infiltrate deeper tissues along needle path\n• Wait 1-2 minutes',
+        },
+        {
+            heading: '5. Needle Insertion',
+            body: '• Entry: midway between spinous processes\n• Angle: **15° cephalad** (toward umbilicus)\n• Bevel parallel to dural fibers (Quincke)\n• Advance slowly through ligaments',
+        },
+        {
+            heading: '6. Confirm Entry',
+            body: '• Feel for "pop" — ligamentum flavum, then dura\n• Remove stylet — CSF should flow\n• If no flow: rotate 90°, advance 1-2mm\n• If bone: withdraw, redirect cephalad/caudad',
+        },
+        {
+            heading: '7. Collect CSF',
+            body: '• **Opening pressure first** (if needed) — attach manometer\n• Collect 1-2 mL per tube (4 tubes)\n• Tube 1 & 4: cell count (compare for traumatic tap)',
+        },
+        {
+            heading: '8. Close',
+            body: '• **Replace stylet** before withdrawing needle\n• Remove needle smoothly\n• Pressure with gauze, small bandage\n• Patient may ambulate',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR, et al. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. Elsevier; 2019.' },
+    ],
+};
+const LP_PARAMEDIAN_STEPS = {
+    id: 'lp-paramedian-steps',
+    title: 'Paramedian LP — Quick Guide',
+    subtitle: '30-40% higher success than midline',
+    sections: [
+        {
+            heading: 'When to Use Paramedian',
+            body: '• Failed midline attempts\n• Age >50 (calcified ligaments)\n• Severe degenerative changes\n• Kyphosis/scoliosis\n• Cannot flex spine adequately\n• **NOT for severely obese** (long path)',
+        },
+        {
+            heading: '1. Position & Prep',
+            body: '• Same as midline (lateral decubitus or sitting)\n• Sterile prep and drape\n• Identify spinous processes',
+        },
+        {
+            heading: '2. Entry Point',
+            body: '• **1-1.5 cm lateral** to midline\n• At level of **superior tip** of lower spinous process\n• Mark insertion site',
+        },
+        {
+            heading: '3. Anesthesia',
+            body: '• Skin wheal with 1% lidocaine\n• Infiltrate deeper along planned trajectory',
+        },
+        {
+            heading: '4. Needle Trajectory',
+            body: '• Insert perpendicular to skin initially\n• Angle **10-30° cephalad** (sagittal plane)\n• Angle **10-20° medially** (toward midline)\n• Aim for interlaminar space',
+        },
+        {
+            heading: '5. Navigate to CSF',
+            body: '• Depth: typically 3-7 cm\n• Feel for **ligamentum flavum "give"**\n• Then dural puncture → CSF\n• If bone (lamina): withdraw, angle more cephalad/medial',
+        },
+        {
+            heading: '6. Collect & Close',
+            body: '• Measure OP if needed\n• Collect CSF (same tubes as midline)\n• **Replace stylet**, remove needle\n• Bandage',
+        },
+        {
+            heading: 'Advantages',
+            body: '• **30-40% higher first-attempt success**\n• Avoids calcified interspinous ligaments\n• Wider interlaminar space\n• Lower PDPH (oblique track)\n• Does NOT require full spine flexion',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Seeberger MD et al. Paramedian approach for spinal anesthesia. Anesth Analg. 2002;95(2):379-382.' },
+        { num: 2, text: 'NYSORA. Spinal Anesthesia. https://www.nysora.com/' },
+    ],
+};
+const LP_OP_GUIDE = {
+    id: 'lp-op-guide',
+    title: 'Opening Pressure Measurement',
+    subtitle: 'Technique and interpretation',
+    sections: [
+        {
+            heading: 'Requirements for Accurate OP',
+            body: '• **Lateral decubitus position** (NOT sitting)\n• Patient completely **relaxed** (no straining)\n• **Legs EXTENDED** (not flexed) — reduces intra-abdominal pressure\n• Head in **neutral position**\n• Bed completely **flat**',
+        },
+        {
+            heading: 'Technique',
+            body: '1. Confirm CSF flow\n2. Attach **3-way stopcock** to needle hub\n3. Connect **manometer column** (cm H₂O)\n4. Open stopcock — CSF rises in column\n5. Wait for oscillations to stop\n6. Read at **meniscus**\n7. Measure **BEFORE** withdrawing any CSF',
+        },
+        {
+            heading: 'Normal Values',
+            body: '| Population | Normal OP |\n|------------|----------|\n| **Adults** | 6-25 cm H₂O |\n| **Children** | <28 cm H₂O |\n| **Population mean** | ~18 cm H₂O |',
+        },
+        {
+            heading: 'Elevated OP (>25 cm H₂O)',
+            body: '• **IIH / Pseudotumor cerebri**\n• Bacterial/fungal/TB meningitis\n• SAH (elevated in ~60%)\n• Cerebral venous sinus thrombosis\n• Mass lesion, hydrocephalus\n• Hypertensive encephalopathy',
+        },
+        {
+            heading: 'Low OP (<6 cm H₂O)',
+            body: '• CSF leak (post-LP, traumatic, spontaneous)\n• Dehydration/hypovolemia\n• Intracranial hypotension syndrome',
+        },
+        {
+            heading: 'Factors That FALSELY ELEVATE OP',
+            body: '⚠️ **Common errors:**\n• Patient straining or Valsalva\n• Knees flexed tightly to chest\n• Anxiety, crying, agitation\n• Head-up bed position (even slight)\n• **Sitting position** (do NOT use for OP)\n• Prone position (+32%)\n• Obesity',
+        },
+        {
+            heading: 'Therapeutic LP (IIH)',
+            body: '• Remove **30-50 mL CSF**\n• Target closing pressure: **10-15 cm H₂O**\n• Provides immediate symptom relief\n• Temporary — recurs without medical Rx or shunt',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lee SCM et al. Opening pressure measurement in lumbar puncture. J Neurol. 2019;266(12):3095-3106.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Asthma Exacerbation
 // -------------------------------------------------------------------
 const ASTHMA_STEPS_SUMMARY = {
@@ -11604,6 +11781,11 @@ export const INFO_PAGES = {
     'pea-wide-narrow': PEA_WIDE_NARROW,
     'vf-dsd': VF_DSD,
     'ca-hs-ts-table': CA_HS_TS_TABLE,
+    // Lumbar Puncture
+    'lp-stop': LP_STOP,
+    'lp-midline-steps': LP_MIDLINE_STEPS,
+    'lp-paramedian-steps': LP_PARAMEDIAN_STEPS,
+    'lp-op-guide': LP_OP_GUIDE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
