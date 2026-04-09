@@ -18075,6 +18075,474 @@ const MS_DMT_REFERENCE_CALCULATOR = {
     },
 };
 // =====================================================================
+// TETANUS CALCULATORS
+// =====================================================================
+const TET_PROPHYLAXIS_CALCULATOR = {
+    id: 'tet-prophylaxis',
+    title: 'Tetanus Prophylaxis Decision',
+    subtitle: 'Wound-based Tdap/TIG recommendations',
+    description: 'CDC/ACIP-based decision support for tetanus prophylaxis. Determines need for Tdap/Td vaccine and Tetanus Immune Globulin (TIG) based on wound type and vaccination history.',
+    fields: [
+        {
+            name: 'wound-type',
+            label: 'Wound Type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Clean, minor wound', points: 0 },
+                { label: 'Tetanus-prone wound', points: 1 },
+            ],
+        },
+        {
+            name: 'vax-status',
+            label: 'Vaccination History',
+            type: 'select',
+            points: 0,
+            description: 'Documented prior tetanus-containing vaccines (Td, Tdap, DTaP, DTP)',
+            selectOptions: [
+                { label: 'Unknown or <3 doses', points: 0 },
+                { label: '≥3 doses, last booster >10 years ago', points: 1 },
+                { label: '≥3 doses, last booster 5-10 years ago', points: 2 },
+                { label: '≥3 doses, last booster ≤5 years ago', points: 3 },
+            ],
+        },
+        {
+            name: 'immunocompromised',
+            label: 'Immunocompromised?',
+            type: 'select',
+            points: 0,
+            description: 'HIV (CD4 <200), transplant, chemotherapy, chronic steroids',
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Based on CDC/ACIP guidelines. Tetanus-prone: puncture, contaminated, >6h old, burns, crush, devitalized tissue.',
+    citations: [
+        'CDC. Epidemiology and Prevention of Vaccine-Preventable Diseases (Pink Book). 14th ed. 2021.',
+        'ACIP. Prevention of Pertussis, Tetanus, and Diphtheria with Vaccines. MMWR 2018;67(RR-2).',
+    ],
+    computeResult: (values) => {
+        const wound = values['wound-type'] || 0;
+        const vax = values['vax-status'] || 0;
+        const immunocomp = values['immunocompromised'] || 0;
+        // Clean wound
+        if (wound === 0) {
+            if (vax === 0) {
+                return {
+                    value: 'Tdap',
+                    label: 'Give Tdap/Td — TIG NOT needed',
+                    description: '**Clean wound + <3 doses or unknown:**\n\n✅ **Give Tdap (or Td)**\n❌ **TIG NOT needed** for clean wounds\n\n**Next Steps:**\n• Patient needs to complete 3-dose primary series\n• Refer to PCP for doses 2 & 3\n\n**Tdap vs Td:** Tdap preferred if never received as adult',
+                    colorVar: '--color-warning',
+                };
+            }
+            if (vax === 1) {
+                return {
+                    value: 'Tdap',
+                    label: 'Give Tdap/Td booster — TIG NOT needed',
+                    description: '**Clean wound + ≥3 doses + >10 years since booster:**\n\n✅ **Give Tdap (or Td) booster**\n❌ **TIG NOT needed**\n\n**Rationale:** 10-year interval for boosters with clean wounds.',
+                    colorVar: '--color-warning',
+                };
+            }
+            // vax 2 or 3
+            return {
+                value: 'NONE',
+                label: 'No prophylaxis needed',
+                description: '**Clean wound + ≥3 doses + ≤10 years since booster:**\n\n❌ **No Tdap/Td needed**\n❌ **No TIG needed**\n\nPatient is adequately protected.\n\n**Standard wound care only.**',
+                colorVar: '--color-primary',
+            };
+        }
+        // Tetanus-prone wound
+        if (wound === 1) {
+            if (vax === 0) {
+                const immunoNote = immunocomp === 1 ? '\n\n⚠️ **IMMUNOCOMPROMISED:** Lower threshold for TIG is appropriate. Some experts recommend TIG for ANY tetanus-prone wound in immunocompromised patients regardless of vaccination history.' : '';
+                return {
+                    value: 'TIG + Tdap',
+                    label: 'Give BOTH TIG + Tdap at separate sites',
+                    description: `**Tetanus-prone wound + <3 doses or unknown:**\n\n✅ **Give BOTH:**\n\n**1. TIG 250 units IM**\n• Provides immediate passive immunity\n\n**2. Tdap 0.5 mL IM**\n• Starts active immunity\n\n⚠️ **CRITICAL: Different injection sites!**\nUse opposite deltoids or deltoid + thigh.\nNEVER mix in same syringe.\n\n**Complete the series:** Refer to PCP for doses 2 & 3.${immunoNote}`,
+                    colorVar: '--color-danger',
+                };
+            }
+            if (vax === 1 || vax === 2) {
+                // >5 years for tetanus-prone
+                if (vax === 1) {
+                    return {
+                        value: 'Tdap',
+                        label: 'Give Tdap/Td — TIG NOT needed',
+                        description: '**Tetanus-prone wound + ≥3 doses + >5 years:**\n\n✅ **Give Tdap (or Td) booster**\n❌ **TIG NOT needed**\n\n**Note:** 5-year threshold for tetanus-prone wounds (vs 10 years for clean wounds).',
+                        colorVar: '--color-warning',
+                    };
+                }
+                // 5-10 years — still give booster for tetanus-prone
+                return {
+                    value: 'Tdap',
+                    label: 'Give Tdap/Td — TIG NOT needed',
+                    description: '**Tetanus-prone wound + ≥3 doses + 5-10 years:**\n\n✅ **Give Tdap (or Td) booster**\n❌ **TIG NOT needed**\n\n**Note:** More aggressive 5-year threshold for dirty/tetanus-prone wounds.',
+                    colorVar: '--color-warning',
+                };
+            }
+            // vax === 3 (≤5 years)
+            if (immunocomp === 1) {
+                return {
+                    value: 'Consider TIG',
+                    label: 'Protected — but consider TIG if immunocompromised',
+                    description: '**Tetanus-prone wound + ≥3 doses + ≤5 years + IMMUNOCOMPROMISED:**\n\n⚠️ **Consider TIG** despite vaccination\n❌ **No Tdap needed**\n\nImmunocompromised patients may not mount adequate vaccine response. Some experts recommend TIG for tetanus-prone wounds regardless of vaccination status in:\n• Active chemotherapy\n• CD4 <200\n• High-dose steroids >2 weeks\n• Transplant recipients',
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'NONE',
+                label: 'No prophylaxis needed',
+                description: '**Tetanus-prone wound + ≥3 doses + ≤5 years:**\n\n❌ **No Tdap/Td needed**\n❌ **No TIG needed**\n\nPatient has adequate immunity from recent vaccination.\n\n**Focus on wound care:**\n• Thorough irrigation\n• Debridement of devitalized tissue\n• Consider antibiotics per wound type',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select all fields',
+            description: 'Complete all fields to generate recommendation.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const TET_SPATULA_CALCULATOR = {
+    id: 'tet-spatula',
+    title: 'Spatula Test',
+    subtitle: 'Clinical test for tetanus diagnosis',
+    description: 'The spatula test is a bedside clinical test with high sensitivity (94%) and specificity (100%) for tetanus. A positive test is jaw spasm (bite reflex) when the posterior pharynx is touched.',
+    fields: [
+        {
+            name: 'test-result',
+            label: 'Spatula Test Result',
+            type: 'select',
+            points: 0,
+            description: 'Touch posterior pharynx with tongue depressor',
+            selectOptions: [
+                { label: 'Not performed', points: 0 },
+                { label: 'Normal gag reflex (negative)', points: 1 },
+                { label: 'Jaw spasm / bites spatula (positive)', points: 2 },
+            ],
+        },
+        {
+            name: 'trismus',
+            label: 'Trismus (lockjaw) present?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No — normal mouth opening', points: 0 },
+                { label: 'Yes — restricted jaw opening', points: 1 },
+            ],
+        },
+        {
+            name: 'spasms',
+            label: 'Muscle spasms or rigidity?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Localized rigidity', points: 1 },
+                { label: 'Generalized rigidity or spasms', points: 2 },
+            ],
+        },
+        {
+            name: 'wound',
+            label: 'Recent wound or injection site?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No identifiable wound', points: 0 },
+                { label: 'Yes — wound present', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Spatula test: Sens 94%, Spec 100% (Apte & Karnad, 1995). Tetanus is a CLINICAL diagnosis — no confirmatory lab test.',
+    citations: [
+        'Apte NM, Karnad DR. Short report: the spatula test: a simple bedside test to diagnose tetanus. Am J Trop Med Hyg. 1995;53(4):386-387.',
+        'Thwaites CL, et al. Maternal and neonatal tetanus. Lancet 2015;385:362-70.',
+    ],
+    computeResult: (values) => {
+        const test = values['test-result'] || 0;
+        const trismus = values['trismus'] || 0;
+        const spasms = values['spasms'] || 0;
+        if (test === 2) {
+            return {
+                value: 'POSITIVE',
+                label: 'Positive spatula test — high probability of tetanus',
+                description: '**Positive Spatula Test**\n\nJaw spasm when posterior pharynx touched is highly specific (100%) for tetanus.\n\n**Next Steps:**\n1. **ICU admission** — generalized tetanus anticipated\n2. **TIG 3000-6000 units IM** immediately\n3. **Metronidazole 500mg IV q6-8h**\n4. **Benzodiazepines** for spasm control\n5. **Early intubation** if any respiratory concern\n6. **Dark, quiet room** — minimize stimulation\n\n⚠️ **Tetanus is a CLINICAL diagnosis**\nNo lab test confirms it. Wound cultures rarely positive.',
+                colorVar: '--color-danger',
+            };
+        }
+        if (test === 1) {
+            if (trismus === 1 || spasms >= 1) {
+                return {
+                    value: 'SUSPICIOUS',
+                    label: 'Negative spatula test but clinical features present',
+                    description: '**Negative Spatula Test + Trismus/Rigidity**\n\nSpatula test is not 100% sensitive. Clinical features still warrant concern.\n\n**Differential Diagnosis:**\n• **Tetanus** — cannot be excluded\n• **Dystonic drug reaction** — acute onset, responds to anticholinergics\n• **Strychnine poisoning** — no trismus, retained consciousness\n• **Hypocalcemic tetany** — Chvostek/Trousseau signs, check calcium\n• **Meningitis** — fever, headache, different quality of neck stiffness\n• **Dental abscess** — can cause trismus\n\n**If tetanus suspected:**\n• Admit for observation\n• Consider empiric treatment if high suspicion\n• Repeat clinical assessment',
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: 'NEGATIVE',
+                label: 'Negative spatula test — tetanus unlikely',
+                description: '**Negative Spatula Test + No Other Features**\n\nTetanus is unlikely but not completely excluded.\n\n**Consider if still concerned:**\n• Early/localized tetanus may have subtle findings\n• Re-examine for localized rigidity near wound\n• Observe for progression\n\n**If symptoms develop:**\n• New trismus, rigidity, or spasms warrant reassessment',
+                colorVar: '--color-primary',
+            };
+        }
+        if (trismus === 1 && spasms >= 1) {
+            return {
+                value: 'HIGH CONCERN',
+                label: 'Trismus + spasms — perform spatula test',
+                description: '**Clinical Features Suggest Tetanus**\n\n**Perform the Spatula Test:**\n1. Touch posterior pharynx with tongue depressor\n2. **Normal:** Gag reflex, tries to expel spatula\n3. **Positive:** Jaw CLAMPS DOWN, bites spatula\n\n**If unable to perform (severe trismus):**\n• Clinical picture alone may be diagnostic\n• Trismus + generalized spasms = presumed tetanus\n\n**Do NOT delay treatment waiting for test results**\nIf clinical suspicion high, treat empirically.',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Enter clinical findings',
+            description: 'Complete the assessment to generate interpretation.\n\n**How to Perform Spatula Test:**\n1. Touch posterior pharynx with tongue depressor\n2. Observe response:\n   • **Normal:** Gag reflex, tries to expel\n   • **Positive:** Jaw spasm, bites spatula',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const TET_SEVERITY_CALCULATOR = {
+    id: 'tet-severity',
+    title: 'Tetanus Severity & Prognosis',
+    subtitle: 'Ablett classification + prognostic factors',
+    description: 'Grades tetanus severity using the Ablett classification and identifies key prognostic factors. Shorter incubation period and faster onset predict worse outcomes.',
+    fields: [
+        {
+            name: 'ablett',
+            label: 'Ablett Grade',
+            type: 'select',
+            points: 0,
+            description: 'Based on clinical features',
+            selectOptions: [
+                { label: 'Grade I — Mild: Trismus, no spasms, no dysphagia', points: 1 },
+                { label: 'Grade II — Moderate: Trismus + rigidity + mild spasms', points: 2 },
+                { label: 'Grade III — Severe: Severe spasms, autonomic instability', points: 3 },
+                { label: 'Grade IV — Very Severe: Grade III + cardiovascular instability', points: 4 },
+            ],
+        },
+        {
+            name: 'incubation',
+            label: 'Incubation Period',
+            type: 'select',
+            points: 0,
+            description: 'Time from wound to first symptom',
+            selectOptions: [
+                { label: 'Unknown', points: 0 },
+                { label: '>14 days', points: 1 },
+                { label: '7-14 days', points: 2 },
+                { label: '<7 days', points: 3 },
+            ],
+        },
+        {
+            name: 'onset-period',
+            label: 'Onset Period',
+            type: 'select',
+            points: 0,
+            description: 'Time from first symptom (trismus) to first generalized spasm',
+            selectOptions: [
+                { label: 'Unknown or no spasms yet', points: 0 },
+                { label: '>48 hours', points: 1 },
+                { label: '24-48 hours', points: 2 },
+                { label: '<24 hours', points: 3 },
+            ],
+        },
+        {
+            name: 'age',
+            label: 'Patient Age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '1-50 years', points: 0 },
+                { label: '>50 years or neonate', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Phillips score: incubation <7d = 1 pt, onset <48h = 1 pt. Score ≥2 predicts severe disease.',
+    citations: [
+        'Ablett JJL. Analysis and main experiences in 82 patients treated in the Leeds Tetanus Unit. Proc Symp on Tetanus. 1967.',
+        'Thwaites CL, et al. Maternal and neonatal tetanus. Lancet 2015;385:362-70.',
+        'Phillips LA. A classification of tetanus. Lancet 1967;1:1216-1217.',
+    ],
+    computeResult: (values) => {
+        const ablett = values['ablett'] || 0;
+        const incubation = values['incubation'] || 0;
+        const onset = values['onset-period'] || 0;
+        const age = values['age'] || 0;
+        if (ablett === 0) {
+            return {
+                value: '--',
+                label: 'Select Ablett grade',
+                description: '**Ablett Classification:**\n\n**Grade I — Mild:**\nTrismus, mild dysphagia, no spasms, no respiratory involvement\n\n**Grade II — Moderate:**\nTrismus, rigidity, MILD spasms (not sustained), no respiratory compromise\n\n**Grade III — Severe:**\nSevere generalized spasms, autonomic dysfunction, respiratory distress\n\n**Grade IV — Very Severe:**\nGrade III PLUS cardiovascular instability (severe BP fluctuations, arrhythmias)',
+                colorVar: '--color-text-muted',
+            };
+        }
+        let prognosis = '';
+        let mortality = '';
+        let colorVar = '--color-primary';
+        if (ablett === 1) {
+            mortality = '~1%';
+            prognosis = '**Good prognosis.** May not require ICU. Close monitoring for progression.';
+            colorVar = '--color-primary';
+        }
+        else if (ablett === 2) {
+            mortality = '5-10%';
+            prognosis = '**Moderate prognosis.** Requires ICU. May need intubation if spasms worsen.';
+            colorVar = '--color-warning';
+        }
+        else if (ablett === 3) {
+            mortality = '15-30%';
+            prognosis = '**Guarded prognosis.** ICU with likely prolonged intubation. Autonomic instability major concern.';
+            colorVar = '--color-danger';
+        }
+        else {
+            mortality = '30-50%';
+            prognosis = '**Poor prognosis.** Cardiovascular instability is major cause of death. Requires aggressive ICU management.';
+            colorVar = '--color-danger';
+        }
+        // Add prognostic modifiers
+        let modifiers = '';
+        if (incubation === 3) {
+            modifiers += '\n\n⚠️ **Short incubation (<7 days)** — predicts more severe disease';
+        }
+        if (onset === 3) {
+            modifiers += '\n\n⚠️ **Rapid onset (<24h)** — predicts severe spasms and autonomic instability';
+        }
+        if (age === 1) {
+            modifiers += '\n\n⚠️ **Extremes of age** — higher mortality in elderly and neonates';
+        }
+        return {
+            value: `GRADE ${ablett}`,
+            label: `Ablett Grade ${ablett === 1 ? 'I — Mild' : ablett === 2 ? 'II — Moderate' : ablett === 3 ? 'III — Severe' : 'IV — Very Severe'}`,
+            description: `**Estimated Mortality:** ${mortality}\n\n${prognosis}${modifiers}\n\n---\n\n**Expected ICU Course:**\n• Grade I-II: Days to 1-2 weeks\n• Grade III-IV: 3-6 weeks\n\n**Recovery requires new synapse formation** — toxin binding is irreversible.`,
+            colorVar: colorVar,
+        };
+    },
+};
+const TET_MANAGEMENT_CALCULATOR = {
+    id: 'tet-management',
+    title: 'Active Tetanus Management',
+    subtitle: 'Treatment checklist for clinical tetanus',
+    description: 'Step-by-step management checklist for active tetanus. Covers the key treatment priorities: airway, toxin neutralization, source control, spasm control, and autonomic management.',
+    fields: [
+        {
+            name: 'severity',
+            label: 'Clinical Severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Localized tetanus', points: 1 },
+                { label: 'Generalized — mild spasms', points: 2 },
+                { label: 'Generalized — severe spasms', points: 3 },
+                { label: 'Autonomic instability present', points: 4 },
+            ],
+        },
+        {
+            name: 'airway',
+            label: 'Airway Status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stable — handling secretions', points: 0 },
+                { label: 'Concerning — laryngospasm risk', points: 1 },
+                { label: 'Already intubated', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'All generalized tetanus requires ICU. Early intubation is safer than emergent airway.',
+    citations: [
+        'UpToDate. Tetanus. 2024.',
+        'Cook TM, et al. Tetanus: a review of the literature. Br J Anaesth 2001;87:477-87.',
+        'Thwaites CL, et al. Maternal and neonatal tetanus. Lancet 2015;385:362-70.',
+    ],
+    computeResult: (values) => {
+        const severity = values['severity'] || 0;
+        const airway = values['airway'] || 0;
+        if (severity === 0) {
+            return {
+                value: '--',
+                label: 'Select severity',
+                description: 'Select clinical severity to generate management checklist.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        let checklist = '**ACTIVE TETANUS MANAGEMENT CHECKLIST**\n\n';
+        // Airway section
+        checklist += '**1. AIRWAY**\n';
+        if (airway === 2) {
+            checklist += '✅ Already intubated\n';
+        }
+        else if (airway === 1 || severity >= 3) {
+            checklist += '⚠️ **Intubate EARLY** — laryngospasm can be sudden and fatal\n';
+            checklist += '• RSI with neuromuscular blocker\n';
+            checklist += '• Succinylcholine OK (no hyperK like burns)\n';
+            checklist += '• Have surgical airway backup ready\n';
+            checklist += '• Consider early tracheostomy for prolonged ventilation\n\n';
+        }
+        else {
+            checklist += '• Monitor closely — early intubation preferred over emergent\n\n';
+        }
+        // TIG
+        checklist += '**2. NEUTRALIZE TOXIN — TIG**\n';
+        checklist += '• **TIG 3000-6000 units IM** (NOT 250 unit prophylaxis dose)\n';
+        checklist += '• Give immediately — only neutralizes UNBOUND toxin\n';
+        checklist += '• Divide into multiple IM sites\n\n';
+        // Antibiotics
+        checklist += '**3. SOURCE CONTROL**\n';
+        checklist += '• **Metronidazole 500mg IV q6-8h × 7-10 days** (preferred)\n';
+        checklist += '• ⚠️ Avoid penicillin — GABA antagonist may worsen spasms\n';
+        checklist += '• Aggressive wound debridement\n\n';
+        // Spasm control
+        checklist += '**4. SPASM CONTROL — Benzodiazepines**\n';
+        if (severity >= 3) {
+            checklist += '• **Diazepam 10-40mg IV q1-8h** or **infusion 5-15 mg/hr**\n';
+            checklist += '• May need 100s of mg/day — do NOT undertreat\n';
+            checklist += '• Alternative: Midazolam 5-15 mg/hr infusion\n';
+            checklist += '• If refractory: Add propofol, consider NMB as last resort\n\n';
+        }
+        else {
+            checklist += '• **Diazepam 5-10mg IV PRN spasms**\n';
+            checklist += '• Titrate to effect — may need escalation\n\n';
+        }
+        // Autonomic
+        if (severity >= 4) {
+            checklist += '**5. AUTONOMIC INSTABILITY**\n';
+            checklist += '• **Magnesium sulfate:** 5g IV load → 1-3 g/hr infusion\n';
+            checklist += '• Target Mg 3.5-5.5 mEq/L\n';
+            checklist += '• ⚠️ **AVOID beta-blockers** — can cause asystole\n';
+            checklist += '• Consider morphine, clonidine for additional control\n\n';
+        }
+        // Environment
+        checklist += '**6. SUPPORTIVE CARE**\n';
+        checklist += '• **Dark, quiet room** — minimize stimulation\n';
+        checklist += '• DVT prophylaxis\n';
+        checklist += '• Early enteral nutrition\n';
+        checklist += '• Pressure ulcer prevention\n\n';
+        // Vaccination
+        checklist += '**7. VACCINATION**\n';
+        checklist += '• ⚠️ Tetanus infection does NOT confer immunity\n';
+        checklist += '• Patient needs full 3-dose series before/after discharge\n';
+        const colorVar = severity >= 3 ? '--color-danger' : '--color-warning';
+        const label = severity === 1 ? 'Localized — floor admit, close monitoring' :
+            severity === 2 ? 'Generalized mild — ICU admission' :
+                severity === 3 ? 'Generalized severe — ICU, likely intubation' :
+                    'Autonomic instability — high mortality, aggressive ICU';
+        return {
+            value: severity === 1 ? 'LOCAL' : severity === 4 ? 'SEVERE' : 'ICU',
+            label: label,
+            description: checklist,
+            colorVar: colorVar,
+        };
+    },
+};
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 const BISAP_CALCULATOR = {
@@ -27512,6 +27980,11 @@ const CALCULATORS = {
     'ms-mcdonald': MS_MCDONALD_CALCULATOR,
     'ms-ontt-risk': MS_ONTT_RISK_CALCULATOR,
     'ms-dmt-reference': MS_DMT_REFERENCE_CALCULATOR,
+    // Tetanus
+    'tet-prophylaxis': TET_PROPHYLAXIS_CALCULATOR,
+    'tet-spatula': TET_SPATULA_CALCULATOR,
+    'tet-severity': TET_SEVERITY_CALCULATOR,
+    'tet-management': TET_MANAGEMENT_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

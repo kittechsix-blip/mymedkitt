@@ -1,0 +1,550 @@
+// MedKitt — Tetanus
+// ED-focused tetanus consult: Prophylaxis Decisions → Clinical Recognition → Active Disease Management → Special Populations
+// Sources: CDC Pink Book, ACIP Guidelines, UpToDate, EMCrit, EB Medicine, WHO
+// 5 modules: Prophylaxis → Clinical Recognition → Active Management → Special Populations → Disposition
+// ~32 nodes
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+export const TETANUS_CRITICAL_ACTIONS = [
+  { text: 'TIG must be given at a DIFFERENT injection site than Td/Tdap — do not mix', nodeId: 'tet-tig-admin' },
+  { text: 'Active tetanus requires 3000-6000 units TIG IM (NOT the 250 unit prophylaxis dose)', nodeId: 'tet-active-treatment' },
+  { text: 'Metronidazole is preferred over penicillin for active tetanus — penicillin is a GABA antagonist', nodeId: 'tet-antibiotics' },
+  { text: 'Benzodiazepines are first-line for spasm control — may need MASSIVE doses (100s of mg diazepam/day)', nodeId: 'tet-spasm-control' },
+  { text: 'Intubate EARLY for generalized tetanus — laryngospasm can be sudden and fatal', nodeId: 'tet-airway' },
+  { text: 'Autonomic instability is the major cause of death in ICU — avoid beta-blockers (can cause asystole)', nodeId: 'tet-autonomic' },
+  { text: 'Vaccination does NOT provide immunity — even recovered patients need full vaccination series', nodeId: 'tet-post-recovery' },
+  { text: 'IVDU patients: even "clean" injection sites can cause tetanus — lower threshold for TIG', nodeId: 'tet-ivdu' },
+] as const;
+
+export const TETANUS_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: ENTRY & TRIAGE
+  // =====================================================================
+
+  {
+    id: 'tet-start',
+    type: 'question',
+    module: 1,
+    title: 'Tetanus — ED Approach',
+    body: '**Tetanus** is caused by *Clostridium tetani* neurotoxin (tetanospasmin). The toxin irreversibly binds spinal cord inhibitory interneurons → unopposed muscle contraction.\n\n**Why It Matters:**\n• Mortality 10-20% even with modern ICU care\n• Higher mortality in elderly and neonates\n• Completely preventable with vaccination\n• Toxin binding is IRREVERSIBLE — recovery requires new synapse formation (weeks-months)\n\n**Two ED Scenarios:**\n1. **Prophylaxis** — wound management, vaccination decisions\n2. **Active tetanus** — clinical disease requiring ICU\n\nWhat is the clinical scenario?',
+    options: [
+      { label: 'Wound — need prophylaxis decision', description: 'Patient has wound, need to decide Tdap/TIG', next: 'tet-wound-type', urgency: 'routine' },
+      { label: 'Suspected active tetanus', description: 'Trismus, spasms, rigidity', next: 'tet-clinical-assessment', urgency: 'critical' },
+      { label: 'Special population', description: 'Pregnancy, neonate, IVDU, immunocompromised', next: 'tet-special-populations' },
+    ],
+    calculatorLinks: [
+      { id: 'tet-prophylaxis', label: 'Prophylaxis Decision' },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: PROPHYLAXIS
+  // =====================================================================
+
+  {
+    id: 'tet-wound-type',
+    type: 'question',
+    module: 2,
+    title: 'Wound Classification',
+    body: '**Tetanus-Prone Wounds:**\n• Puncture wounds\n• Contaminated with dirt, feces, soil, saliva\n• Crush injuries, avulsions\n• Burns (any degree)\n• Frostbite\n• Wounds >6 hours old\n• Devitalized tissue\n• Missile injuries (gunshot, shrapnel)\n• Compound fractures\n• IVDU injection sites\n\n**Clean, Minor Wounds:**\n• Clean lacerations <6 hours old\n• Superficial abrasions\n• No devitalized tissue\n• No contamination\n\nClassify the wound:',
+    options: [
+      { label: 'Clean, minor wound', description: 'Superficial, <6 hours, uncontaminated', next: 'tet-clean-wound' },
+      { label: 'Tetanus-prone wound', description: 'Puncture, dirty, >6h, burns, crush, contaminated', next: 'tet-prone-wound' },
+      { label: 'Animal/human bite', description: 'Special consideration', next: 'tet-bite-wound' },
+    ],
+    calculatorLinks: [
+      { id: 'tet-prophylaxis', label: 'Prophylaxis Decision' },
+    ],
+  },
+
+  {
+    id: 'tet-clean-wound',
+    type: 'question',
+    module: 2,
+    title: 'Clean Wound — Vaccination History',
+    body: '**For Clean, Minor Wounds:**\n\nTIG is NOT indicated regardless of vaccination status.\n\nVaccine (Td or Tdap) is indicated based on:\n• Number of prior doses\n• Time since last booster\n\n**Tdap vs Td:**\n• **Tdap** (with pertussis) preferred if never received Tdap as adult\n• **Td** acceptable if prior Tdap received\n\nWhat is the vaccination history?',
+    options: [
+      { label: 'Unknown or <3 doses', description: 'Incomplete primary series', next: 'tet-clean-incomplete' },
+      { label: '≥3 doses, last >10 years ago', description: 'Needs booster', next: 'tet-clean-booster' },
+      { label: '≥3 doses, last ≤10 years', description: 'No vaccine needed', next: 'tet-clean-protected' },
+    ],
+  },
+
+  {
+    id: 'tet-clean-incomplete',
+    type: 'info',
+    module: 2,
+    title: 'Clean Wound — Incomplete Vaccination',
+    body: '**Clean wound + <3 prior doses or unknown:**\n\n✅ **Give Tdap (or Td) today**\n❌ **TIG NOT needed**\n\n**Important:**\n• Patient needs to complete primary series (3-dose total)\n• Refer to PCP for remaining doses:\n  - Dose 2: 4-8 weeks after dose 1\n  - Dose 3: 6-12 months after dose 2\n\n**Tdap Preference:**\n• If never received Tdap as adult, give Tdap\n• Can use Td if Tdap unavailable\n\n**Documentation:**\n• Provide immunization record to patient\n• Document in chart that series incomplete\n• Arrange PCP follow-up for series completion [1][2]',
+    citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Tdap',
+        dose: '0.5 mL',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Deltoid preferred. Can give same visit as other vaccines.',
+        confidence: 'standard',
+      },
+      monitoring: 'Observe 15 min for anaphylaxis. Common: injection site soreness, mild fever.',
+    },
+    next: 'tet-discharge',
+  },
+
+  {
+    id: 'tet-clean-booster',
+    type: 'info',
+    module: 2,
+    title: 'Clean Wound — Booster Needed',
+    body: '**Clean wound + ≥3 doses + last booster >10 years ago:**\n\n✅ **Give Tdap (or Td) booster**\n❌ **TIG NOT needed**\n\n**Rationale:**\n• Protective antibodies decline over time\n• Booster restores immunity rapidly\n• 10-year interval standard for clean wounds\n\n**Tdap vs Td:**\n• Tdap preferred if never received as adult (pertussis protection)\n• Td acceptable if prior Tdap received [1][2]',
+    citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Tdap',
+        dose: '0.5 mL',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Deltoid preferred. Tdap preferred over Td for pertussis coverage.',
+        confidence: 'standard',
+      },
+      monitoring: 'Observe 15 min. Mild local reaction common.',
+    },
+    next: 'tet-discharge',
+  },
+
+  {
+    id: 'tet-clean-protected',
+    type: 'info',
+    module: 2,
+    title: 'Clean Wound — Protected',
+    body: '**Clean wound + ≥3 doses + last booster ≤10 years:**\n\n❌ **No Tdap/Td needed**\n❌ **No TIG needed**\n\nPatient is adequately protected.\n\n**Standard wound care only:**\n• Clean and irrigate wound\n• Debride devitalized tissue if present\n• Primary closure if appropriate\n• Standard discharge instructions [1][2]',
+    citation: [1, 2],
+    next: 'tet-discharge',
+  },
+
+  {
+    id: 'tet-prone-wound',
+    type: 'question',
+    module: 2,
+    title: 'Tetanus-Prone Wound — Vaccination History',
+    body: '**For Tetanus-Prone Wounds:**\n\nBoth vaccine AND TIG may be indicated.\n\n**Key Decision Points:**\n1. Is primary series complete (≥3 doses)?\n2. When was last booster?\n\n**TIG Indications (tetanus-prone wounds):**\n• <3 doses or unknown vaccination history\n• Some experts: immunocompromised patients regardless of history\n\nWhat is the vaccination history?',
+    options: [
+      { label: 'Unknown or <3 doses', description: 'TIG + vaccine needed', next: 'tet-prone-incomplete' },
+      { label: '≥3 doses, last >5 years ago', description: 'Vaccine needed, no TIG', next: 'tet-prone-booster' },
+      { label: '≥3 doses, last ≤5 years', description: 'Protected, consider wound care', next: 'tet-prone-protected' },
+    ],
+    calculatorLinks: [
+      { id: 'tet-prophylaxis', label: 'Prophylaxis Decision' },
+    ],
+  },
+
+  {
+    id: 'tet-prone-incomplete',
+    type: 'info',
+    module: 2,
+    title: 'Tetanus-Prone — TIG + Vaccine Required',
+    body: '**Tetanus-prone wound + <3 doses or unknown:**\n\n✅ **Give BOTH:**\n\n**1. Tetanus Immune Globulin (TIG)**\n• [TIG](#/drug/tetanus-immune-globulin/prophylaxis) **250 units IM**\n• Provides immediate passive immunity\n• Lasts ~4 weeks\n\n**2. Tdap (or Td)**\n• **0.5 mL IM**\n• Starts active immunity\n\n⚠️ **CRITICAL: Different Injection Sites**\n• TIG and Tdap must be given at DIFFERENT anatomic sites\n• Use opposite deltoids, or deltoid + anterolateral thigh\n• NEVER mix in same syringe\n\n**Why Both?**\n• TIG provides immediate protection (passive)\n• Vaccine provides long-term protection (active)\n\n**Complete the Series:**\n• Patient needs remaining doses for full immunity\n• Refer to PCP for doses 2 and 3 [1][2][3]',
+    citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Tetanus Immune Globulin (TIG)',
+        dose: '250 units',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'MUST be different site than Tdap. Can infiltrate part of dose around wound.',
+        confidence: 'standard',
+      },
+      secondLine: {
+        drug: 'Tdap',
+        dose: '0.5 mL',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Different injection site than TIG. Opposite arm preferred.',
+        confidence: 'standard',
+      },
+      monitoring: 'Observe 15 min for anaphylaxis after each injection.',
+    },
+    next: 'tet-tig-admin',
+  },
+
+  {
+    id: 'tet-tig-admin',
+    type: 'info',
+    module: 2,
+    title: 'TIG Administration Details',
+    body: '**Tetanus Immune Globulin (TIG) — Prophylaxis:**\n\n**Dose:** 250 units IM (standard prophylaxis dose)\n\n**Administration:**\n• Deltoid or anterolateral thigh\n• **DIFFERENT site than Td/Tdap**\n• Some experts: infiltrate portion around wound edges\n\n**For Large/Contaminated Wounds:**\n• Some authorities recommend 500 units\n• Can infiltrate up to half the dose locally\n\n**Do NOT Give TIG If:**\n• History of severe allergic reaction to human Ig products\n• IgA deficiency with anti-IgA antibodies (rare)\n\n**Availability:**\n• Brand names: HyperTET, BayTet\n• May need to check pharmacy stock — not always readily available\n• If unavailable: IVIG can be substituted (check with pharmacy)\n\n**Duration of Protection:**\n• Passive immunity lasts ~4 weeks\n• Active immunization still required [1][3]',
+    citation: [1, 3],
+    next: 'tet-wound-care',
+  },
+
+  {
+    id: 'tet-prone-booster',
+    type: 'info',
+    module: 2,
+    title: 'Tetanus-Prone — Booster Needed',
+    body: '**Tetanus-prone wound + ≥3 doses + last >5 years:**\n\n✅ **Give Tdap (or Td) booster**\n❌ **TIG NOT needed**\n\n**Note the 5-year interval:**\n• Tetanus-PRONE wounds: booster if >5 years\n• CLEAN wounds: booster if >10 years\n• More aggressive threshold for dirty wounds\n\n**Rationale:**\n• Antibody levels may be suboptimal after 5 years\n• Higher-risk wound warrants earlier booster [1][2]',
+    citation: [1, 2],
+    treatment: {
+      firstLine: {
+        drug: 'Tdap',
+        dose: '0.5 mL',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Deltoid preferred. Tdap preferred over Td.',
+        confidence: 'standard',
+      },
+      monitoring: 'Observe 15 min. Local soreness common.',
+    },
+    next: 'tet-wound-care',
+  },
+
+  {
+    id: 'tet-prone-protected',
+    type: 'info',
+    module: 2,
+    title: 'Tetanus-Prone — Protected',
+    body: '**Tetanus-prone wound + ≥3 doses + last ≤5 years:**\n\n❌ **No Tdap/Td needed**\n❌ **No TIG needed**\n\nPatient has adequate immunity from recent vaccination.\n\n**Focus on Wound Care:**\n• Thorough irrigation\n• Debridement of devitalized tissue (critical for tetanus prevention)\n• Consider delayed primary closure for contaminated wounds\n• Antibiotic prophylaxis per wound type\n\n**Tetanus Spores:**\n• Killed by debridement and oxygen exposure\n• Anaerobic environment allows germination\n• Clean wound bed prevents tetanus even without prophylaxis [1][2]',
+    citation: [1, 2],
+    next: 'tet-wound-care',
+  },
+
+  {
+    id: 'tet-bite-wound',
+    type: 'info',
+    module: 2,
+    title: 'Bite Wounds — Tetanus Consideration',
+    body: '**Animal and Human Bites:**\n\nBite wounds are considered **tetanus-prone** due to:\n• Contamination with oral flora\n• Puncture component\n• Crush injury\n• Devitalized tissue\n\n**Apply Standard Tetanus-Prone Guidelines:**\n• <3 doses or unknown: TIG + Tdap\n• ≥3 doses, >5 years: Tdap booster\n• ≥3 doses, ≤5 years: No tetanus prophylaxis needed\n\n**Remember Other Bite Considerations:**\n• Rabies prophylaxis (animal bites)\n• Antibiotic prophylaxis (most bites)\n• Wound management (usually no primary closure)\n• Refer to specific bite consult for full management\n\n**C. tetani** can be present in animal mouths, especially herbivores [1][4]',
+    citation: [1, 4],
+    next: 'tet-prone-wound',
+  },
+
+  {
+    id: 'tet-wound-care',
+    type: 'info',
+    module: 2,
+    title: 'Wound Care for Tetanus Prevention',
+    body: '**Wound Care is Critical:**\n\nProper wound care is as important as prophylaxis.\n\n**Debridement:**\n• Remove ALL devitalized tissue\n• Spores survive in necrotic tissue\n• Aerobic wound bed prevents spore germination\n\n**Irrigation:**\n• Copious irrigation with saline or water\n• High pressure for contaminated wounds\n• Reduces bacterial/spore load\n\n**Closure:**\n• Clean wounds: primary closure OK\n• Contaminated wounds: consider delayed closure\n• Puncture wounds: leave open\n\n**Antibiotics:**\n• NOT routinely required for tetanus prevention\n• Consider based on wound type, not tetanus risk\n• Antibiotics do NOT replace TIG\n\n**Foreign Bodies:**\n• Remove if possible\n• Retained FB increases tetanus risk\n• Consider imaging if concerned [4][5]',
+    citation: [4, 5],
+    next: 'tet-discharge',
+  },
+
+  // =====================================================================
+  // MODULE 3: CLINICAL TETANUS RECOGNITION
+  // =====================================================================
+
+  {
+    id: 'tet-clinical-assessment',
+    type: 'question',
+    module: 3,
+    title: 'Suspected Active Tetanus — Assessment',
+    body: '**Clinical Tetanus is a CLINICAL DIAGNOSIS**\n\nNo confirmatory lab test. Culture rarely positive.\n\n**Classic Presentation:**\n• **Trismus** (lockjaw) — often first symptom\n• **Risus sardonicus** — sardonic smile from facial muscle spasm\n• **Opisthotonus** — arched back from paraspinal spasm\n• **Dysphagia** — difficulty swallowing\n• **Muscle rigidity** — diffuse, especially abdomen\n• **Reflex spasms** — triggered by stimuli\n\n**Incubation Period:**\n• Typically 3-21 days (range: 1 day to months)\n• Shorter incubation → worse prognosis\n\n**Types of Tetanus:**\n\nSelect the presentation:',
+    options: [
+      { label: 'Generalized tetanus', description: 'Diffuse rigidity, trismus, spasms — most common', next: 'tet-generalized', urgency: 'critical' },
+      { label: 'Localized tetanus', description: 'Rigidity confined to wound region', next: 'tet-localized' },
+      { label: 'Cephalic tetanus', description: 'Head/neck wounds, cranial nerve involvement', next: 'tet-cephalic', urgency: 'critical' },
+      { label: 'Neonatal tetanus', description: 'Umbilical stump infection in newborn', next: 'tet-neonatal', urgency: 'critical' },
+    ],
+    calculatorLinks: [
+      { id: 'tet-spatula', label: 'Spatula Test' },
+      { id: 'tet-severity', label: 'Severity Score' },
+    ],
+  },
+
+  {
+    id: 'tet-generalized',
+    type: 'info',
+    module: 3,
+    title: 'Generalized Tetanus',
+    body: '**Generalized Tetanus** (80% of cases)\n\n**Progression:**\n1. **Trismus** (lockjaw) — earliest sign\n2. **Neck stiffness** and dysphagia\n3. **Risus sardonicus** — facial muscle spasm\n4. **Opisthotonus** — severe back arching\n5. **Board-like abdomen** — can mimic acute abdomen\n6. **Reflex spasms** — triggered by any stimuli (noise, light, touch)\n7. **Autonomic instability** (later) — BP swings, tachycardia, arrhythmias\n\n**Spatula Test:**\n• Touch posterior pharynx with spatula\n• Positive: Reflex JAW SPASM (bites spatula)\n• Negative: Normal gag reflex\n• Sensitivity 94%, Specificity 100%\n\n**Differential Diagnosis:**\n• Dystonic drug reaction (acute, responds to anticholinergics)\n• Strychnine poisoning (no trismus, retained consciousness)\n• Hypocalcemic tetany (Chvostek/Trousseau signs)\n• Meningitis (fever, headache, neck stiffness different quality)\n• Rabies (hydrophobia, encephalopathy)\n• Stiff person syndrome (chronic) [6][7]',
+    citation: [6, 7],
+    calculatorLinks: [
+      { id: 'tet-spatula', label: 'Spatula Test' },
+      { id: 'tet-severity', label: 'Severity Score' },
+    ],
+    next: 'tet-active-treatment',
+  },
+
+  {
+    id: 'tet-localized',
+    type: 'info',
+    module: 3,
+    title: 'Localized Tetanus',
+    body: '**Localized Tetanus:**\n\nMuscle rigidity confined to the region of the wound.\n\n**Features:**\n• Continuous muscle contraction near wound\n• May have local spasms\n• No trismus or generalized symptoms\n• Often seen in partially immune patients\n\n**Prognosis:**\n• Generally milder than generalized\n• Mortality ~1% (vs 10-20% generalized)\n• **Can progress to generalized tetanus** — requires close monitoring\n\n**Management:**\n• Same principles as generalized (TIG, antibiotics, wound care)\n• May not require ICU initially\n• Observe for progression\n• Lower threshold for ICU if any proximal spread\n\n⚠️ **Don\'t be fooled:**\nLocalized tetanus can rapidly become generalized — treat seriously [6]',
+    citation: [6],
+    next: 'tet-active-treatment',
+  },
+
+  {
+    id: 'tet-cephalic',
+    type: 'info',
+    module: 3,
+    title: 'Cephalic Tetanus',
+    body: '**Cephalic Tetanus:**\n\nRare form following head/face wounds or otitis media.\n\n**Features:**\n• Cranial nerve palsies (especially VII)\n• Trismus common\n• Dysphagia\n• Facial weakness or spasm\n• Often follows otitis media or facial wounds\n\n**Incubation:**\n• Often shorter (1-2 days)\n• Shorter incubation = worse prognosis\n\n**Danger:**\n• **High mortality** (15-30%)\n• **Frequently progresses to generalized tetanus**\n• Airway at risk from pharyngeal muscle involvement\n\n**Management:**\n• ICU admission required\n• Early airway control\n• Same treatment as generalized tetanus\n• May require ENT if otogenic source [6][7]',
+    citation: [6, 7],
+    next: 'tet-airway',
+  },
+
+  // =====================================================================
+  // MODULE 4: ACTIVE TETANUS TREATMENT
+  // =====================================================================
+
+  {
+    id: 'tet-active-treatment',
+    type: 'info',
+    module: 4,
+    title: 'Active Tetanus — Treatment Overview',
+    body: '**Treatment Priorities (in order):**\n\n**1. AIRWAY** — Early intubation for generalized tetanus\n\n**2. NEUTRALIZE UNBOUND TOXIN — TIG**\n• [TIG](#/drug/tetanus-immune-globulin/therapeutic) **3000-6000 units IM**\n• Does NOT reverse bound toxin\n• Give ASAP — toxin binding is irreversible\n\n**3. ELIMINATE SOURCE — Antibiotics + Wound**\n• Metronidazole preferred\n• Aggressive wound debridement\n\n**4. CONTROL SPASMS — Benzodiazepines**\n• Diazepam or midazolam\n• May need MASSIVE doses\n\n**5. MANAGE AUTONOMIC INSTABILITY**\n• Magnesium sulfate infusion\n• Avoid beta-blockers\n\n**6. SUPPORTIVE CARE**\n• ICU admission\n• Nutrition, DVT prophylaxis, positioning\n\n**ICU is MANDATORY for generalized tetanus** [6][7][8]',
+    citation: [6, 7, 8],
+    calculatorLinks: [
+      { id: 'tet-management', label: 'Management Checklist' },
+    ],
+    next: 'tet-airway',
+  },
+
+  {
+    id: 'tet-airway',
+    type: 'info',
+    module: 4,
+    title: 'Airway Management in Tetanus',
+    body: '**Intubation in Tetanus:**\n\n⚠️ **Intubate EARLY** — do not wait for respiratory failure\n\n**Indications for Immediate Intubation:**\n• Generalized tetanus with severe spasms\n• Laryngospasm or stridor\n• Inability to handle secretions\n• Respiratory muscle involvement\n• Cephalic tetanus\n\n**Challenges:**\n• Trismus limits mouth opening\n• Spasms during intubation\n• Laryngospasm can be sudden and fatal\n\n**Approach:**\n• RSI with neuromuscular blocker\n• Succinylcholine OK (no K+ release like in burns)\n• Consider awake fiberoptic if severe trismus\n• Have surgical airway backup ready\n• Cricothyrotomy may be needed\n\n**Tracheostomy:**\n• Consider early if prolonged ventilation expected\n• Generalized tetanus = weeks of ventilation\n• Trach decreases sedation needs [6][8]',
+    citation: [6, 8],
+    next: 'tet-tig-therapeutic',
+  },
+
+  {
+    id: 'tet-tig-therapeutic',
+    type: 'info',
+    module: 4,
+    title: 'TIG — Therapeutic Dosing',
+    body: '**Tetanus Immune Globulin — Active Disease:**\n\n**Dose:** [TIG](#/drug/tetanus-immune-globulin/therapeutic) **3000-6000 units IM**\n• Much higher than prophylaxis (250 units)\n• Some give 500 units intrathecally (controversial, not FDA approved)\n\n**Timing:**\n• Give immediately — don\'t delay for wound care\n• Only neutralizes UNBOUND toxin\n• Toxin already bound to neurons is irreversible\n\n**Administration:**\n• Large IM dose — may need to divide into multiple sites\n• Intrathecal use is experimental but may reduce mortality\n\n**Duration:**\n• Half-life ~3-4 weeks\n• Single dose sufficient\n\n**If TIG Unavailable:**\n• IVIG can be substituted\n• Dose: 200-400 mg/kg\n• Contains tetanus antibodies from pooled donors [6][7]',
+    citation: [6, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Tetanus Immune Globulin (TIG)',
+        dose: '3000-6000 units',
+        route: 'IM',
+        frequency: 'Once',
+        duration: 'Single dose',
+        notes: 'Therapeutic dose for active tetanus. Divide into multiple IM sites. Give immediately.',
+        confidence: 'standard',
+      },
+      monitoring: 'Monitor for allergic reaction. No dose adjustment needed for renal/hepatic dysfunction.',
+    },
+    next: 'tet-antibiotics',
+  },
+
+  {
+    id: 'tet-antibiotics',
+    type: 'info',
+    module: 4,
+    title: 'Antibiotics in Active Tetanus',
+    body: '**Antibiotic Choice:**\n\n✅ **Metronidazole (PREFERRED)**\n• [Metronidazole](#/drug/metronidazole/tetanus) **500 mg IV q6-8h × 7-10 days**\n• Excellent anaerobic coverage\n• Achieves high tissue levels\n\n⚠️ **Penicillin (AVOID if possible)**\n• Historically used but NOT preferred\n• Penicillin is a GABA antagonist → may worsen spasms\n• Use only if metronidazole unavailable\n\n**Why Antibiotics?**\n• Kills vegetative C. tetani at wound site\n• Stops further toxin production\n• Does NOT neutralize existing toxin\n\n**Wound Debridement:**\n• Aggressive debridement essential\n• Wait until after TIG given (avoid toxin release)\n• Remove all necrotic tissue\n• Foreign body removal if present [6][7][8]',
+    citation: [6, 7, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Metronidazole',
+        dose: '500 mg',
+        route: 'IV',
+        frequency: 'Every 6-8 hours',
+        duration: '7-10 days',
+        notes: 'Preferred over penicillin. Penicillin is GABA antagonist and may worsen spasms.',
+        confidence: 'standard',
+      },
+      monitoring: 'Standard IV antibiotic monitoring. Watch for peripheral neuropathy with prolonged use.',
+    },
+    next: 'tet-spasm-control',
+  },
+
+  {
+    id: 'tet-spasm-control',
+    type: 'info',
+    module: 4,
+    title: 'Spasm Control — Benzodiazepines',
+    body: '**Benzodiazepines are First-Line:**\n\n**Mechanism:** Enhance GABA (counteracts toxin effect)\n\n**Diazepam:**\n• **10-40 mg IV q1-8h PRN** (can titrate higher)\n• Severe cases: **continuous infusion 5-15 mg/hr**\n• May need 100s of mg per day in severe cases\n\n**Midazolam:**\n• **5-15 mg/hr infusion**\n• Shorter acting, easier to titrate\n• Preferred for infusion\n\n**Lorazepam:**\n• **2-10 mg IV q2-6h** or infusion\n• Alternative if propylene glycol toxicity concern (diazepam)\n\n⚠️ **Expect MASSIVE doses:**\n• Patients may require 500+ mg diazepam equivalents/day\n• Tolerance develops rapidly\n• Do not be afraid to escalate\n\n**If Benzodiazepines Inadequate:**\n• Add propofol infusion\n• Consider dantrolene (direct muscle relaxant)\n• NMB + continuous sedation as last resort [6][7]',
+    citation: [6, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Diazepam',
+        dose: '10-40 mg IV; infusion 5-15 mg/hr',
+        route: 'IV',
+        frequency: 'PRN or continuous',
+        duration: 'Duration of active tetanus (weeks)',
+        notes: 'May need 100s of mg/day. Titrate to spasm control. Watch propylene glycol toxicity.',
+        confidence: 'standard',
+      },
+      monitoring: 'Respiratory status. Sedation level. Propylene glycol gap if prolonged diazepam.',
+    },
+    next: 'tet-autonomic',
+  },
+
+  {
+    id: 'tet-autonomic',
+    type: 'info',
+    module: 4,
+    title: 'Autonomic Instability',
+    body: '**Autonomic Dysfunction:**\n\nMajor cause of death in ICU-managed tetanus.\n\n**Manifestations:**\n• Labile blood pressure (hypertensive crises → hypotension)\n• Tachycardia, bradycardia, arrhythmias\n• Diaphoresis\n• Hyperpyrexia\n• Cardiac arrest\n\n**Management:**\n\n✅ **Magnesium Sulfate (FIRST-LINE)**\n• Loading: **5g IV over 20 min**\n• Infusion: **1-3 g/hr** (titrate to effect)\n• Target Mg level: 3.5-5.5 mEq/L\n• Also helps with spasm control\n\n⚠️ **AVOID Beta-Blockers:**\n• Can cause severe hypotension or asystole\n• Unopposed alpha stimulation problematic\n• Case reports of sudden death with propranolol\n\n**Other Options:**\n• Morphine (sympatholytic effect)\n• Clonidine\n• Labetalol (if beta-blocker needed, combined alpha/beta better than pure beta)\n• Epidural anesthesia [6][7][8]',
+    citation: [6, 7, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Magnesium Sulfate',
+        dose: '5g IV load, then 1-3 g/hr infusion',
+        route: 'IV',
+        frequency: 'Continuous',
+        duration: 'Duration of autonomic instability',
+        notes: 'Target Mg 3.5-5.5 mEq/L. Helps both spasms and autonomic dysfunction.',
+        confidence: 'standard',
+      },
+      monitoring: 'Magnesium levels q6h. Deep tendon reflexes. Respiratory depression at high levels.',
+    },
+    next: 'tet-icu-supportive',
+  },
+
+  {
+    id: 'tet-icu-supportive',
+    type: 'info',
+    module: 4,
+    title: 'ICU Supportive Care',
+    body: '**Supportive Care in Tetanus:**\n\n**Environment:**\n• Dark, quiet room\n• Minimize stimulation (triggers spasms)\n• Limit procedures, cluster care\n\n**Nutrition:**\n• Early enteral nutrition\n• High caloric needs (hypermetabolic state)\n• May need NG/PEG if prolonged\n\n**DVT Prophylaxis:**\n• LMWH or heparin\n• SCDs\n• High risk due to immobility\n\n**Pressure Ulcer Prevention:**\n• Frequent repositioning\n• Specialized mattress\n\n**Duration:**\n• Generalized tetanus: 3-6 weeks ICU course\n• Recovery requires new synapse formation\n• Prolonged rehabilitation often needed\n\n**Vaccination After Recovery:**\n• Natural infection does NOT confer immunity\n• Patient must complete full vaccination series\n• Start Tdap before discharge or at first follow-up [6][7]',
+    citation: [6, 7],
+    next: 'tet-post-recovery',
+  },
+
+  {
+    id: 'tet-post-recovery',
+    type: 'info',
+    module: 4,
+    title: 'Post-Recovery Vaccination',
+    body: '**Critical Point:**\n\n⚠️ **Tetanus infection does NOT confer immunity**\n\nThe toxin dose causing disease is too small to trigger immune response.\n\n**After Recovery from Tetanus:**\n• Complete full 3-dose primary series\n• Start Td/Tdap before discharge or at first follow-up\n• Follow standard schedule:\n  - Dose 1: Now\n  - Dose 2: 4-8 weeks later\n  - Dose 3: 6-12 months after dose 2\n\n**Document and Communicate:**\n• Clear documentation in discharge summary\n• Follow-up appointment for series completion\n• Patient education about need for full series\n\n**Recovered patients can get tetanus again** if not vaccinated [1][6]',
+    citation: [1, 6],
+    next: 'tet-disposition',
+  },
+
+  // =====================================================================
+  // MODULE 5: SPECIAL POPULATIONS
+  // =====================================================================
+
+  {
+    id: 'tet-special-populations',
+    type: 'question',
+    module: 5,
+    title: 'Special Populations',
+    body: 'Select the special population:',
+    options: [
+      { label: 'Pregnancy', description: 'Tetanus prophylaxis in pregnant patient', next: 'tet-pregnancy' },
+      { label: 'Neonate', description: 'Neonatal tetanus from umbilical infection', next: 'tet-neonatal', urgency: 'critical' },
+      { label: 'IVDU', description: 'Injection drug user', next: 'tet-ivdu' },
+      { label: 'Immunocompromised', description: 'HIV, transplant, chemotherapy', next: 'tet-immunocompromised' },
+    ],
+  },
+
+  {
+    id: 'tet-pregnancy',
+    type: 'info',
+    module: 5,
+    title: 'Tetanus in Pregnancy',
+    body: '**Tdap in Pregnancy:**\n\n**Routine Recommendation:**\n• Tdap recommended for ALL pregnant women\n• Optimal timing: **27-36 weeks gestation**\n• Protects newborn via passive antibody transfer\n\n**Wound Prophylaxis in Pregnancy:**\n• Same guidelines as non-pregnant\n• Tdap and TIG are both SAFE in pregnancy\n• Do not withhold due to pregnancy\n\n**Maternal Tetanus:**\n• Rare in developed countries\n• High mortality for mother and fetus\n• Aggressive treatment same as non-pregnant\n\n**Preventing Neonatal Tetanus:**\n• Maternal vaccination → passive immunity to neonate\n• Key global health intervention\n• Two doses at least 4 weeks apart if no prior vaccination [1][2][9]',
+    citation: [1, 2, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Tdap',
+        dose: '0.5 mL',
+        route: 'IM',
+        frequency: 'Once per pregnancy',
+        duration: 'Single dose (27-36 weeks preferred)',
+        notes: 'Safe in pregnancy. Also protects newborn via passive antibody transfer.',
+        confidence: 'standard',
+      },
+      monitoring: 'Standard post-vaccine monitoring. No special pregnancy considerations.',
+    },
+    next: 'tet-discharge',
+  },
+
+  {
+    id: 'tet-neonatal',
+    type: 'info',
+    module: 5,
+    title: 'Neonatal Tetanus',
+    body: '**Neonatal Tetanus:**\n\nUsually from contaminated umbilical stump.\n\n**Risk Factors:**\n• Unvaccinated mother\n• Unclean delivery conditions\n• Traditional umbilical stump treatments (ash, dung)\n• Home births without sterile technique\n\n**Presentation:**\n• Onset typically day 3-14 of life\n• Inability to suck (first sign)\n• Rigidity, opisthotonus\n• Spasms triggered by handling\n• High-pitched cry\n\n**Prognosis:**\n• Mortality **60-80%** even with treatment\n• Survivors often have neurological sequelae\n\n**Treatment:**\n• NICU admission mandatory\n• TIG: 3000-6000 units IM (or 250 units intrathecal — controversial)\n• Metronidazole IV\n• Umbilical stump care\n• Aggressive spasm control\n• Mechanical ventilation often required\n\n**Prevention:**\n• Maternal vaccination is key [6][9]',
+    citation: [6, 9],
+    next: 'tet-active-treatment',
+  },
+
+  {
+    id: 'tet-ivdu',
+    type: 'info',
+    module: 5,
+    title: 'Tetanus in IVDU',
+    body: '**IV Drug Users — High Risk:**\n\n**Why IVDU are High Risk:**\n• Contaminated drug supply (especially "black tar" heroin)\n• Non-sterile injection technique\n• Skin popping creates tetanus-prone wounds\n• Often undervaccinated\n• Delayed presentation\n\n**"Wound" May Be Any Injection Site:**\n• Even apparently clean sites can be contaminated\n• Subcutaneous abscesses common\n• Lower threshold for TIG\n\n**Management:**\n• Lower threshold for TIG (even if "minor" injection site)\n• Assume incomplete vaccination unless documented\n• Consider TIG + Tdap for any IVDU with injection site infection\n• Look for abscess — may need I&D\n\n**Disposition:**\n• Higher index of suspicion for active tetanus\n• Education about wound care, vaccination\n• Connect to harm reduction services [4][10]',
+    citation: [4, 10],
+    next: 'tet-wound-type',
+  },
+
+  {
+    id: 'tet-immunocompromised',
+    type: 'info',
+    module: 5,
+    title: 'Immunocompromised Patients',
+    body: '**Immunocompromised — Special Considerations:**\n\n**May Not Respond to Vaccine:**\n• HIV (especially low CD4)\n• Transplant recipients\n• Chemotherapy\n• Chronic steroids\n• Congenital immunodeficiency\n\n**Recommendations:**\n• **Lower threshold for TIG** with tetanus-prone wounds\n• Some experts: TIG for ANY tetanus-prone wound regardless of vaccination history\n• Tdap still recommended (may have partial response)\n\n**TIG Indications (broader in immunocompromised):**\n• Standard tetanus-prone wound guidelines PLUS:\n• Consider TIG even with complete vaccination if:\n  - Active chemotherapy\n  - CD4 <200\n  - High-dose steroids >2 weeks\n\n**Vaccination:**\n• Killed vaccine (Td/Tdap) is safe in immunocompromised\n• Give when immune system is most competent if possible [1][3]',
+    citation: [1, 3],
+    next: 'tet-wound-type',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'tet-discharge',
+    type: 'info',
+    module: 6,
+    title: 'Discharge — Wound Prophylaxis',
+    body: '**Discharge After Tetanus Prophylaxis:**\n\n**Before Discharge:**\n✓ Wound properly cleaned and managed\n✓ Tdap given if indicated\n✓ TIG given if indicated (at different site)\n✓ Patient understands need for series completion (if applicable)\n✓ Follow-up arranged\n\n**Discharge Instructions:**\n• Wound care instructions\n• Signs of wound infection\n• Complete vaccination series with PCP (if <3 doses)\n• Next booster in 10 years (if series complete)\n\n**Documentation:**\n• Vaccination given (lot number, site)\n• TIG given if applicable\n• Vaccination history assessment\n• Follow-up plan for series completion\n\n**Patient Handout:**\n• Provide written immunization record\n• Tetanus booster schedule [1][2]',
+    citation: [1, 2],
+    next: undefined,
+  },
+
+  {
+    id: 'tet-disposition',
+    type: 'info',
+    module: 6,
+    title: 'Disposition — Active Tetanus',
+    body: '**Disposition for Active Tetanus:**\n\n**Generalized Tetanus:**\n• **ICU admission mandatory**\n• Intubation often required\n• Expected course: 3-6 weeks\n• Multi-disciplinary care\n\n**Localized Tetanus:**\n• Floor admission with close monitoring\n• May progress to generalized — ICU transfer PRN\n\n**Cephalic Tetanus:**\n• ICU admission\n• High risk of progression\n\n**Prognosis Factors:**\n• Shorter incubation = worse outcome\n• Older age = worse outcome\n• Rapid progression = worse outcome\n• Autonomic instability = worse outcome\n\n**Long-term:**\n• Prolonged rehabilitation often needed\n• Complete vaccination series before or after discharge\n• Tetanus can recur — immunity not conferred by disease [6][7]',
+    citation: [6, 7],
+    next: undefined,
+  },
+
+];
+
+export const TETANUS_MODULE_LABELS: string[] = [
+  'Entry',
+  'Prophylaxis',
+  'Recognition',
+  'Treatment',
+  'Special Populations',
+  'Disposition',
+];
+
+export const TETANUS_CITATIONS: Citation[] = [
+  { num: 1, text: 'CDC. Epidemiology and Prevention of Vaccine-Preventable Diseases (Pink Book). 14th ed. 2021.' },
+  { num: 2, text: 'ACIP. Prevention of Pertussis, Tetanus, and Diphtheria with Vaccines. MMWR 2018;67(RR-2).' },
+  { num: 3, text: 'AAP Red Book. Tetanus. 2021.' },
+  { num: 4, text: 'EB Medicine. Evidence-Based Management of Tetanus. 2019.' },
+  { num: 5, text: 'Tintinalli JE, et al. Emergency Medicine: A Comprehensive Study Guide. 9th ed. 2020.' },
+  { num: 6, text: 'UpToDate. Tetanus. 2024.' },
+  { num: 7, text: 'Thwaites CL, et al. Maternal and neonatal tetanus. Lancet 2015;385:362-70.' },
+  { num: 8, text: 'Cook TM, et al. Tetanus: a review of the literature. Br J Anaesth 2001;87:477-87.' },
+  { num: 9, text: 'WHO. Maternal and Neonatal Tetanus Elimination. 2023.' },
+  { num: 10, text: 'Beeching NJ, et al. Tetanus in injecting drug users. BMJ 2005;330:208-9.' },
+];

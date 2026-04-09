@@ -320,6 +320,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'ciguatera': async () => (await import('../data/trees/ciguatera.js')).CIGUATERA_CRITICAL_ACTIONS,
     'traveler-infections': async () => (await import('../data/trees/traveler-infections.js')).TRAVELER_INFECTIONS_CRITICAL_ACTIONS,
     'malaria': async () => (await import('../data/trees/malaria.js')).MALARIA_CRITICAL_ACTIONS,
+    'tetanus': async () => (await import('../data/trees/tetanus.js')).TETANUS_CRITICAL_ACTIONS,
     'asthma-exacerbation': async () => (await import('../data/trees/asthma-exacerbation.js')).ASTHMA_EXACERBATION_CRITICAL_ACTIONS,
     'adult-uti': async () => (await import('../data/trees/adult-uti.js')).ADULT_UTI_CRITICAL_ACTIONS,
     'ttp': async () => (await import('../data/trees/ttp.js')).TTP_CRITICAL_ACTIONS,
@@ -957,6 +958,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'malaria': async () => {
       const m = await import('../data/trees/malaria.js');
       return { nodes: m.MALARIA_NODES, entryNodeId: 'mal-start', categoryId: 'infectious-disease', moduleLabels: m.MALARIA_MODULE_LABELS, citations: m.MALARIA_CITATIONS, criticalActions: m.MALARIA_CRITICAL_ACTIONS };
+    },
+    'tetanus': async () => {
+      const m = await import('../data/trees/tetanus.js');
+      return { nodes: m.TETANUS_NODES, entryNodeId: 'tet-start', categoryId: 'infectious-disease', moduleLabels: m.TETANUS_MODULE_LABELS, citations: m.TETANUS_CITATIONS, criticalActions: m.TETANUS_CRITICAL_ACTIONS };
     },
     'asthma-exacerbation': async () => {
       const m = await import('../data/trees/asthma-exacerbation.js');

@@ -227,6 +227,7 @@ const TREE_REGISTRY = {
   'ciguatera':            { prefix: 'CIGUATERA',            entryNodeId: 'cig-start',        categoryId: 'toxicology' },
   'traveler-infections':  { prefix: 'TRAVELER_INFECTIONS',  entryNodeId: 'ti-start',          categoryId: 'infectious-disease' },
   'malaria':              { prefix: 'MALARIA',              entryNodeId: 'mal-start',         categoryId: 'infectious-disease' },
+  'tetanus':              { prefix: 'TETANUS',              entryNodeId: 'tet-start',         categoryId: 'infectious-disease' },
   'cardiac-arrest':       { prefix: 'CARDIAC_ARREST',       entryNodeId: 'ca-start',          categoryId: 'emergency-medicine' },
   'pea-arrest':           { prefix: 'PEA_ARREST',           entryNodeId: 'pea-start',         categoryId: 'emergency-medicine' },
   'bradycardic-arrest':   { prefix: 'BRADYCARDIC_ARREST',   entryNodeId: 'brady-start',       categoryId: 'emergency-medicine' },

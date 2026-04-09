@@ -960,6 +960,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'species', label: 'Species', icon: '🦠', action: 'overlay', target: 'mal-species-table' },
   ],
   // ---------------------------------------------------------------
+  // Tetanus
+  // ---------------------------------------------------------------
+  'tetanus': [
+    { id: 'prophylaxis', label: 'Prophylaxis', icon: '💉', action: 'calculator', target: 'tet-prophylaxis' },
+    { id: 'spatula', label: 'Spatula', icon: '🔍', action: 'calculator', target: 'tet-spatula' },
+    { id: 'severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'tet-severity' },
+    { id: 'management', label: 'Manage', icon: '✅', action: 'calculator', target: 'tet-management' },
+  ],
+  // ---------------------------------------------------------------
   // Asthma Exacerbation
   // ---------------------------------------------------------------
   'asthma-exacerbation': [

@@ -849,7 +849,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 35,
         entryNodeId: 'mal-start',
-      }
+      },
+      {
+        id: 'tetanus',
+        title: 'Tetanus',
+        subtitle: 'Prophylaxis Decision → Clinical Recognition → Active Management → Special Populations',
+        categoryId: 'infectious-disease',
+        version: '1.0',
+        nodeCount: 32,
+        entryNodeId: 'tet-start',
+      },
     ],
     isCustom: false,
   },
