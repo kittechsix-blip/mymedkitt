@@ -49,6 +49,9 @@ export const EAR_FB_NODES: DecisionNode[] = [
     module: 1,
     title: 'Ear Foreign Body Removal',
     body: 'External auditory canal (EAC) foreign bodies are common ED presentations, especially in children. Success rates are highest on the first attempt — plan your technique carefully before starting.\n\nKEY PRINCIPLES\n• First attempt is most successful (65-78%)\n• Match technique to object type\n• Know when to stop and refer\n• Button battery = EMERGENCY\n\nCOMMON OBJECTS\n• Children: beads, toys, food, insects, paper\n• Adults: cotton swabs, hearing aid parts, insects\n\nSUCCESS FACTORS\n• Adequate visualization\n• Cooperative patient (or appropriate restraint/sedation)\n• Correct technique for object type\n• Limit to 1-2 attempts before ENT referral',
+    images: [
+      { src: 'images/ear-fb/ear-foreign-body.jpg', alt: 'Otoscopic or clinical photo showing a foreign body in the external auditory canal', caption: 'Foreign body in the external auditory canal (EAC). Most objects lodge in the outer third. First removal attempt has the highest success rate (65–78%) — choose technique carefully. CC BY-SA 2.5, Lars Chittka et al. Wikimedia Commons.' },
+    ],
     citation: [1, 3, 4],
     next: 'earfb-triage',
   },

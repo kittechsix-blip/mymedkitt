@@ -12,6 +12,9 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         module: 1,
         title: 'Pediatric Osteomyelitis - Clinical Recognition',
         body: '[Osteomyelitis Quick Reference](#/info/osteo-quick-ref) - key clinical pearls.\n\nAcute hematogenous osteomyelitis (AHO) is the most common form of bone infection in children. Peak incidence occurs at **ages 12-24 months**. [1,2]\n\n**Definitions:** [1]\n- **Acute:** Symptoms <4 weeks in previously uninfected bone\n- **Subacute:** Symptoms 1-3 months, often insidious\n- **Chronic:** >3 months or relapse after treatment; often has sequestrum\n\n**Key principle:** Empiric antibiotics should be started within **1 hour** of suspicion in ill-appearing children. Cultures (blood and/or bone) should be obtained but should NOT delay treatment. [1,3]',
+        images: [
+            { src: 'images/peds-osteomyelitis/brodie-abscess-xray.jpg', alt: 'AP radiograph of the distal tibia showing a lytic lesion from subacute staphylococcal osteomyelitis (Brodie abscess)', caption: 'Brodie abscess — lytic lesion in the distal tibia from subacute osteomyelitis. Subacute AHO is more radiographically subtle than acute forms. CC BY-SA 3.0, Jto410. Wikimedia Commons.' },
+        ],
         citation: [1, 2, 3],
         next: 'osteo-clinical',
     },

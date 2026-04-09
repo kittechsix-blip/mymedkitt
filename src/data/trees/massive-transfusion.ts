@@ -20,6 +20,9 @@ export const MASSIVE_TRANSFUSION_NODES: DecisionNode[] = [
     module: 1,
     title: 'Massive Transfusion Protocol',
     body: '[MTP Steps Summary](#/info/mtp-summary) — quick reference.\n\n**Definition:** Transfusion of ≥10 units pRBCs in 24h, OR ≥4 units pRBCs in 1h with ongoing hemorrhage, OR replacement of >50% blood volume in 3h. [1,2]\n\n**Key principle:** Activate MTP early — waiting for lab confirmation of coagulopathy costs lives. Clinical gestalt + prediction scores guide activation. [1,3]\n\n**Calculators:**\n• [ABC Score](#/calculator/abc-score) — MTP prediction\n• [Shock Index](#/calculator/shock-index) — HR/SBP ratio',
+    images: [
+      { src: 'images/massive-transfusion/platelet-bag.jpg', alt: 'Unit of pooled platelets in a blood bag as used in massive transfusion protocols', caption: 'Pooled platelet unit — MTP protocols use a balanced 1:1:1 ratio of pRBC:FFP:platelets to replicate whole blood and prevent dilutional coagulopathy. Public domain. Wikimedia Commons.' },
+    ],
     citation: [1, 2, 3],
     next: 'mtp-indications',
   },

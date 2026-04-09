@@ -30,6 +30,9 @@ export const DENTAL_AVULSION_NODES: DecisionNode[] = [
     module: 1,
     title: 'Dental Avulsion',
     body: '**Complete displacement of tooth from alveolar socket** — a true dental emergency.\n\n**TIME IS TOOTH:**\n> Reimplantation success drops dramatically with extraoral dry time:\n> • <5 min: ~95% survival\n> • 15 min: ~80% survival\n> • 30 min: ~50% survival\n> • >60 min dry: Poor prognosis\n\n**Key Question:** Is this a PRIMARY (baby) or PERMANENT tooth?\n\n**Primary teeth are NEVER reimplanted** — risk of damaging permanent tooth bud. [1][2]',
+    images: [
+      { src: 'images/dental-avulsion/tooth-avulsion.jpg', alt: 'Diagram of a tooth completely displaced from its alveolar socket (dental avulsion)', caption: 'Dental avulsion — complete displacement from the socket. Reimplantation success: ~95% at <5 min, ~50% at 30 min, poor prognosis after 60 min dry time. CC BY-SA 3.0, Endsurg. Wikimedia Commons.' },
+    ],
     citation: [1, 2],
     calculatorLinks: [
       { id: 'tooth-id', label: 'Tooth Identification' },

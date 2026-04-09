@@ -34,6 +34,9 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     module: 1,
     title: 'Oxygen Delivery: Initial Assessment',
     body: '**Goal:** Match oxygen delivery device to patient physiology.\n\n**Key Parameters:**\n- **SpO2** — target varies by condition\n- **Respiratory rate** — tachypnea suggests work of breathing\n- **Work of breathing** — accessory muscle use, retractions, tripoding\n- **Mental status** — hypoxemia vs hypercapnia\n- **Underlying diagnosis** — Type 1 vs Type 2 respiratory failure\n\n**Type 1 (Hypoxemic):** Low O2, normal/low CO2 → Oxygenation problem\n- Pneumonia, ARDS, PE, pulmonary edema\n\n**Type 2 (Hypercapnic):** High CO2 ± low O2 → Ventilation problem\n- COPD, asthma, neuromuscular disease, drug overdose\n\n**Important:** Over-oxygenation in COPD can worsen hypercapnia. Target SpO2 88-92% in CO2 retainers. [1][2]',
+    images: [
+      { src: 'images/oxygen-delivery/non-rebreather-mask.jpg', alt: 'Non-rebreather mask for high-flow oxygen delivery', caption: 'Non-rebreather mask (NRB) — delivers 90–95% FiO₂ at 15 L/min. One step below HFNC/NIV in the escalation ladder for severe hypoxemia. CC BY-SA 4.0, ICUnurses. Wikimedia Commons.' },
+    ],
     citation: [1, 2],
     next: 'o2-severity',
   },

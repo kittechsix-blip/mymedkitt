@@ -12,6 +12,9 @@ export const MIGRAINE_NODES = [
         module: 1,
         title: 'Migraine: Initial Assessment',
         body: '**Primary headache** — migraine, tension-type, cluster — accounts for most ED headache visits. But first, **rule out secondary causes**.\n\n**Key Question:** Does this patient have any red flags suggesting a dangerous secondary headache?\n\n**SNNOOP10 Mnemonic — Red Flags:**\n- **S**ystemic symptoms (fever, weight loss, immunocompromise)\n- **N**eoplasm history\n- **N**eurologic deficit (decreased LOC, focal signs)\n- **O**nset sudden (thunderclap — SAH, RCVS, CVT)\n- **O**lder age onset (>50 years — GCA, stroke, mass)\n- **P**attern change or new headache\n- Positional, Precipitated by Valsalva, Papilledema\n- Progressive, Pregnancy/puerperium, Painful eye + autonomic\n- Post-traumatic, Pathology of immune system, Painkiller overuse\n\n[Ottawa SAH Rule](#/calculator/ottawa-sah) — validated decision tool for thunderclap headache. [1][2]',
+        images: [
+            { src: 'images/migraine/trigeminal-nerve.png', alt: 'Sensory distribution of the three divisions of the trigeminal nerve (V1, V2, V3) on the face', caption: 'Trigeminal nerve sensory distribution — migraine pain is mediated through the trigeminovascular pathway. V1 (ophthalmic), V2 (maxillary), V3 (mandibular). Henry Vandyke Carter / Gray\'s Anatomy (1918). Public domain.' },
+        ],
         citation: [1, 2],
         calculatorLinks: [
             { id: 'ottawa-sah', label: 'Ottawa SAH Rule' },

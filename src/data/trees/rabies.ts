@@ -30,6 +30,9 @@ export const RABIES_NODES: DecisionNode[] = [
     module: 1,
     title: 'Rabies — Clinical Concern or Exposure?',
     body: '[Rabies Steps Summary](#/info/rabies-summary) — quick-reference for both clinical rabies workup and post-exposure prophylaxis.\n\nRabies is nearly **100% fatal once symptomatic**. Post-exposure prophylaxis is highly effective if given promptly — no confirmed PEP failures when administered correctly.\n\nSelect your clinical scenario below.',
+    images: [
+      { src: 'images/rabies/negri-bodies.jpg', alt: 'H&E histopathology micrograph showing eosinophilic Negri bodies in neurons — pathognomonic for rabies encephalitis', caption: 'Negri bodies — eosinophilic intracytoplasmic inclusions in neurons (H&E), pathognomonic for rabies. Found in pyramidal cells of Ammon\'s horn and cerebellar Purkinje cells. CDC / Dr. Daniel P. Perl. Public domain.' },
+    ],
     citation: [1, 2],
     next: 'rabies-fork',
   },
