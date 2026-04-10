@@ -187,6 +187,7 @@ const TREE_REGISTRY = {
   'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
   'multiple-sclerosis':  { prefix: 'MULTIPLE_SCLEROSIS',   entryNodeId: 'ms-start',           categoryId: 'neurology' },
   'tetanus':             { prefix: 'TETANUS',              entryNodeId: 'tet-start',          categoryId: 'infectious-disease' },
+  'burr-hole':           { prefix: 'BURR_HOLE',            entryNodeId: 'bh-start',           categoryId: 'procedures' },
 };
 
 // Cross-listing: which consults appear in multiple categories

@@ -243,6 +243,7 @@ const TREE_REGISTRY = {
   'le-fort-fracture':    { prefix: 'LE_FORT_FRACTURE',     entryNodeId: 'lefort-start',       categoryId: 'trauma-surg' },
   'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
   'multiple-sclerosis':  { prefix: 'MULTIPLE_SCLEROSIS',   entryNodeId: 'ms-start',           categoryId: 'neurology' },
+  'burr-hole':           { prefix: 'BURR_HOLE',            entryNodeId: 'bh-start',           categoryId: 'procedures' },
 };
 
 const CROSS_LISTINGS = {

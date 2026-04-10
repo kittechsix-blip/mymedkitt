@@ -328,6 +328,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'le-fort-fracture': async () => (await import('../data/trees/le-fort-fracture.js')).LE_FORT_FRACTURE_CRITICAL_ACTIONS,
     'lumbar-puncture': async () => (await import('../data/trees/lumbar-puncture.js')).LUMBAR_PUNCTURE_CRITICAL_ACTIONS,
     'multiple-sclerosis': async () => (await import('../data/trees/multiple-sclerosis.js')).MULTIPLE_SCLEROSIS_CRITICAL_ACTIONS,
+    'burr-hole': async () => (await import('../data/trees/burr-hole.js')).BURR_HOLE_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -990,6 +991,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'multiple-sclerosis': async () => {
       const m = await import('../data/trees/multiple-sclerosis.js');
       return { nodes: m.MULTIPLE_SCLEROSIS_NODES, entryNodeId: 'ms-start', categoryId: 'neurology', moduleLabels: m.MULTIPLE_SCLEROSIS_MODULE_LABELS, citations: m.MULTIPLE_SCLEROSIS_CITATIONS, criticalActions: m.MULTIPLE_SCLEROSIS_CRITICAL_ACTIONS };
+    },
+    'burr-hole': async () => {
+      const m = await import('../data/trees/burr-hole.js');
+      return { nodes: m.BURR_HOLE_NODES, entryNodeId: 'bh-start', categoryId: 'procedures', moduleLabels: m.BURR_HOLE_MODULE_LABELS, citations: m.BURR_HOLE_CITATIONS, criticalActions: m.BURR_HOLE_CRITICAL_ACTIONS };
     },
   };
 

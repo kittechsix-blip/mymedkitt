@@ -1049,6 +1049,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'paramedian', label: 'Paramedian', icon: '↗️', action: 'overlay', target: 'lp-paramedian-steps' },
         { id: 'op-guide', label: 'OP Interp', icon: '📊', action: 'calculator', target: 'lp-op-interpreter' },
     ],
+    // ---------------------------------------------------------------
+    // Emergency Burr Hole
+    // ---------------------------------------------------------------
+    'burr-hole': [
+        { id: 'indication', label: 'Indicated?', icon: '⚠️', action: 'calculator', target: 'bh-indication-check' },
+        { id: 'side', label: 'Which Side', icon: '🎯', action: 'calculator', target: 'bh-side-selector' },
+        { id: 'landmarks', label: 'Landmarks', icon: '📍', action: 'calculator', target: 'bh-landmark-guide' },
+        { id: 'checklist', label: 'Checklist', icon: '✅', action: 'calculator', target: 'bh-procedure-checklist' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

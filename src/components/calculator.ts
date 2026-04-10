@@ -19249,6 +19249,498 @@ const TET_MANAGEMENT_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// BURR HOLE CALCULATORS
+// =====================================================================
+
+const BH_INDICATION_CHECK_CALCULATOR: CalculatorDefinition = {
+  id: 'bh-indication-check',
+  title: 'Burr Hole Indication Check',
+  subtitle: 'Is emergency trephination indicated?',
+  description: 'Systematic assessment of indications and contraindications for emergency burr hole craniostomy. Based on Roberts & Hedges and Joint Trauma System guidelines.',
+  fields: [
+    {
+      name: 'hematoma',
+      label: 'CT-confirmed extra-axial hematoma?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No CT / No hematoma', points: 0 },
+        { label: 'Yes — EDH or SDH with mass effect', points: 1 },
+      ],
+    },
+    {
+      name: 'gcs',
+      label: 'Current GCS',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'GCS 9-15', points: 0 },
+        { label: 'GCS 4-8', points: 1 },
+        { label: 'GCS 3 with one reactive pupil', points: 2 },
+        { label: 'GCS 3 with bilateral fixed pupils', points: 3 },
+      ],
+    },
+    {
+      name: 'pupils',
+      label: 'Pupil findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Equal and reactive', points: 0 },
+        { label: 'Unilateral fixed/dilated (anisocoria)', points: 1 },
+        { label: 'Bilateral fixed/dilated', points: 2 },
+      ],
+    },
+    {
+      name: 'neurosurg',
+      label: 'Neurosurgery availability',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Available within 2 hours', points: 0 },
+        { label: 'Unavailable or >2 hours away', points: 1 },
+      ],
+    },
+    {
+      name: 'trajectory',
+      label: 'Clinical trajectory',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Stable or improving', points: 0 },
+        { label: 'Rapidly deteriorating', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Emergency burr hole is a LAST RESORT when patient will clearly die during transport to neurosurgical care.',
+  citations: [
+    'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine. 7th ed. 2018.',
+    'Joint Trauma System. Emergency Cranial Procedures CPG. 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hematoma = values['hematoma'] || 0;
+    const gcs = values['gcs'] || 0;
+    const pupils = values['pupils'] || 0;
+    const neurosurg = values['neurosurg'] || 0;
+    const trajectory = values['trajectory'] || 0;
+
+    // Contraindication: bilateral fixed pupils + GCS 3
+    if (gcs === 3 && pupils === 2) {
+      return {
+        value: 'NO',
+        label: 'Contraindicated — non-survivable injury',
+        description: '**GCS 3 with bilateral fixed/dilated pupils**\n\n❌ **Do NOT perform burr hole**\n\nThis represents non-survivable brain injury. Burr hole will not change outcome.\n\nConsider:\n• Organ donation discussion with family\n• Comfort care\n• Withdrawal of aggressive interventions',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // No hematoma or neurosurg available
+    if (hematoma === 0) {
+      return {
+        value: 'NO',
+        label: 'No extra-axial hematoma — burr hole not indicated',
+        description: '**Burr hole requires CT-confirmed EDH or SDH**\n\nBurr hole evacuates extra-axial blood collections only.\n\n**Not indicated for:**\n• Intraparenchymal hemorrhage\n• Diffuse axonal injury\n• Cerebral edema without hematoma\n\nFocus on medical ICP management and transport.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (neurosurg === 0) {
+      return {
+        value: 'NO',
+        label: 'Neurosurgery available — transfer preferred',
+        description: '**Transfer to neurosurgical care**\n\nEven with hematoma and herniation signs, transfer with aggressive medical management is almost always preferable to non-neurosurgeon drilling.\n\n**During transport:**\n• Mannitol 0.5-1 g/kg IV\n• Head elevated 30°\n• Normocapnia (EtCO₂ 35-40)\n• Brief hyperventilation only for acute pupil changes',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Check for indication
+    if (hematoma === 1 && neurosurg === 1 && (gcs >= 1 || pupils === 1 || trajectory === 1)) {
+      if (pupils === 1 && trajectory === 1) {
+        return {
+          value: 'YES',
+          label: 'INDICATED — herniation signs, no neurosurgery',
+          description: '**Emergency burr hole is indicated**\n\n✅ CT-confirmed extra-axial hematoma\n✅ Unilateral fixed/dilated pupil (herniation)\n✅ Rapidly deteriorating\n✅ Neurosurgery unavailable within 2 hours\n\n**Proceed if:**\n• Patient will die during transport\n• Equipment available (clutch drill preferred)\n• You have training/comfort with procedure\n\n⚠️ **Time-critical:** Outcomes worsen significantly if drainage >70-90 min from herniation signs.\n\n**Drill ipsilateral to dilated pupil** (correct side >85%)',
+          colorVar: '--color-danger',
+        };
+      }
+      return {
+        value: 'CONSIDER',
+        label: 'May be indicated — assess clinical trajectory',
+        description: '**Emergency burr hole may be indicated**\n\n✅ CT-confirmed extra-axial hematoma\n✅ Neurosurgery unavailable\n\n**Consider if:**\n• Clinical deterioration despite medical management\n• Developing herniation signs\n• Will clearly die during transport\n\n**Maximize medical management first:**\n• Mannitol 0.5-1 g/kg IV\n• Hypertonic saline\n• Head elevation, avoid hypoxia/hypotension\n\nReassess: If stabilizes → transport. If deteriorates → proceed.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Complete assessment',
+      description: 'Select all fields to generate recommendation.',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const BH_SIDE_SELECTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'bh-side-selector',
+  title: 'Burr Hole Side Selection',
+  subtitle: 'Which side to drill?',
+  description: 'Determines the correct side for burr hole placement based on clinical findings. CT guidance is always preferred when available.',
+  fields: [
+    {
+      name: 'ct-available',
+      label: 'CT imaging available?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Yes — CT shows hematoma location', points: 1 },
+        { label: 'No — clinical decision only', points: 0 },
+      ],
+    },
+    {
+      name: 'pupil',
+      label: 'Pupil findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Both equal', points: 0 },
+        { label: 'RIGHT pupil dilated', points: 1 },
+        { label: 'LEFT pupil dilated', points: 2 },
+        { label: 'Both dilated — RIGHT first', points: 3 },
+        { label: 'Both dilated — LEFT first', points: 4 },
+        { label: 'Both dilated — unknown which first', points: 5 },
+      ],
+    },
+    {
+      name: 'weakness',
+      label: 'Motor weakness',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None or symmetric', points: 0 },
+        { label: 'RIGHT-sided weakness', points: 1 },
+        { label: 'LEFT-sided weakness', points: 2 },
+      ],
+    },
+    {
+      name: 'trauma',
+      label: 'Obvious external trauma',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None or bilateral', points: 0 },
+        { label: 'RIGHT side (scalp hematoma, fracture)', points: 1 },
+        { label: 'LEFT side (scalp hematoma, fracture)', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Ipsilateral to dilated pupil is correct in >85% of cases. False localizing signs (Kernohan notch) occur in ~15%.',
+  citations: [
+    'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine. 7th ed. 2018.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const ct = values['ct-available'] || 0;
+    const pupil = values['pupil'] || 0;
+    const weakness = values['weakness'] || 0;
+    const trauma = values['trauma'] || 0;
+
+    if (ct === 1) {
+      return {
+        value: 'CT-GUIDED',
+        label: 'Use CT to localize — count slices from vertex',
+        description: '**CT-Guided Placement (Preferred)**\n\nCount CT slices from vertex to center of hematoma to determine optimal burr hole position.\n\n**Correlate with clinical:**\n• Dilated pupil usually ipsilateral to hematoma\n• Weakness usually contralateral\n\n**Drill directly over lesion** as shown on CT.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Unilateral dilated pupil
+    if (pupil === 1) {
+      return {
+        value: 'RIGHT',
+        label: 'Drill RIGHT side — ipsilateral to dilated pupil',
+        description: '**RIGHT-sided burr hole**\n\nUnilateral pupil dilation indicates ipsilateral hematoma with CN III compression in >85% of cases.\n\n⚠️ **False localizing signs occur in ~15%**\n(Kernohan notch phenomenon)\n\nIf no blood found on RIGHT, consider single LEFT-sided hole.',
+        colorVar: '--color-danger',
+      };
+    }
+    if (pupil === 2) {
+      return {
+        value: 'LEFT',
+        label: 'Drill LEFT side — ipsilateral to dilated pupil',
+        description: '**LEFT-sided burr hole**\n\nUnilateral pupil dilation indicates ipsilateral hematoma with CN III compression in >85% of cases.\n\n⚠️ **False localizing signs occur in ~15%**\n(Kernohan notch phenomenon)\n\nIf no blood found on LEFT, consider single RIGHT-sided hole.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Both dilated, first known
+    if (pupil === 3) {
+      return {
+        value: 'RIGHT',
+        label: 'Drill RIGHT side — side of first pupil dilation',
+        description: '**RIGHT-sided burr hole**\n\nWhen both pupils are dilated, the side that dilated FIRST indicates the primary lesion.\n\nThis requires serial neurologic exams with documentation.',
+        colorVar: '--color-danger',
+      };
+    }
+    if (pupil === 4) {
+      return {
+        value: 'LEFT',
+        label: 'Drill LEFT side — side of first pupil dilation',
+        description: '**LEFT-sided burr hole**\n\nWhen both pupils are dilated, the side that dilated FIRST indicates the primary lesion.\n\nThis requires serial neurologic exams with documentation.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Both dilated, unknown first — use weakness or trauma
+    if (pupil === 5 || pupil === 0) {
+      // Use weakness (contralateral to hematoma)
+      if (weakness === 1) {
+        return {
+          value: 'LEFT',
+          label: 'Drill LEFT — contralateral to RIGHT weakness',
+          description: '**LEFT-sided burr hole**\n\nMotor weakness is typically CONTRALATERAL to the hematoma (cerebral peduncle compression).\n\nRIGHT-sided weakness suggests LEFT-sided lesion.\n\n⚠️ Less reliable than pupil findings.',
+          colorVar: '--color-warning',
+        };
+      }
+      if (weakness === 2) {
+        return {
+          value: 'RIGHT',
+          label: 'Drill RIGHT — contralateral to LEFT weakness',
+          description: '**RIGHT-sided burr hole**\n\nMotor weakness is typically CONTRALATERAL to the hematoma (cerebral peduncle compression).\n\nLEFT-sided weakness suggests RIGHT-sided lesion.\n\n⚠️ Less reliable than pupil findings.',
+          colorVar: '--color-warning',
+        };
+      }
+
+      // Use trauma location
+      if (trauma === 1) {
+        return {
+          value: 'RIGHT',
+          label: 'Drill RIGHT — site of external trauma',
+          description: '**RIGHT-sided burr hole**\n\nExternal trauma (scalp hematoma, fracture) suggests ipsilateral hematoma.\n\n⚠️ Least reliable indicator — contrecoup injuries occur.',
+          colorVar: '--color-warning',
+        };
+      }
+      if (trauma === 2) {
+        return {
+          value: 'LEFT',
+          label: 'Drill LEFT — site of external trauma',
+          description: '**LEFT-sided burr hole**\n\nExternal trauma (scalp hematoma, fracture) suggests ipsilateral hematoma.\n\n⚠️ Least reliable indicator — contrecoup injuries occur.',
+          colorVar: '--color-warning',
+        };
+      }
+    }
+
+    return {
+      value: '--',
+      label: 'Insufficient data for side selection',
+      description: '**Cannot determine side**\n\nNeed at least one of:\n• CT imaging (preferred)\n• Unilateral pupil dilation\n• Lateralized weakness\n• Lateralized external trauma\n\nWithout localizing signs, risk of wrong-side surgery is unacceptably high.',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const BH_LANDMARK_GUIDE_CALCULATOR: CalculatorDefinition = {
+  id: 'bh-landmark-guide',
+  title: 'Burr Hole Landmarks',
+  subtitle: 'Anatomical entry points',
+  description: 'Quick reference for burr hole anatomical landmarks. Select the target location to see exact positioning.',
+  fields: [
+    {
+      name: 'target',
+      label: 'Target Location',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Temporal (most common for EDH)', points: 1 },
+        { label: 'Frontal', points: 2 },
+        { label: 'Parietal', points: 3 },
+        { label: "Kocher's Point (ventriculostomy)", points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Stay ≥3 cm lateral to midline to avoid sagittal sinus. Avoid asterion (over transverse/sigmoid sinus).',
+  citations: [
+    'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine. 7th ed. 2018.',
+    'WikEM. Burr Hole. https://wikem.org/wiki/Burr_hole',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const target = values['target'] || 0;
+
+    if (target === 1) {
+      return {
+        value: 'TEMPORAL',
+        label: '2 FB above & anterior to tragus',
+        description: '**TEMPORAL Point** (Most Common for EDH)\n\n📍 **Location:**\n• 2 finger-breadths (3-4 cm) ABOVE the external auditory canal\n• 2 finger-breadths ANTERIOR to the tragus\n• ABOVE the zygomatic arch\n\n**Corresponds to:**\n• Pterion region\n• Middle meningeal artery territory\n• 75% of adult EDH occur here\n\n**Landmarks:**\n• Tragus → go up 2 FB → go forward 2 FB\n• Should be above the ear, anterior to it\n\n⚠️ **Danger:** Middle meningeal artery runs deep here — have bone wax ready',
+        colorVar: '--color-decision-active',
+      };
+    }
+    if (target === 2) {
+      return {
+        value: 'FRONTAL',
+        label: '10 cm above eye, mid-pupillary line',
+        description: '**FRONTAL Point**\n\n📍 **Location:**\n• 10 cm above the supraorbital ridge (eyebrow)\n• In the mid-pupillary line\n• ~3 cm lateral to midline\n\n**Access to:**\n• Frontal hematomas\n• Anterior convexity lesions\n\n**Landmarks:**\n• Patient looking straight ahead\n• Draw vertical line from pupil up\n• Measure 10 cm from eyebrow along this line\n\n⚠️ **Danger:** Stay ≥3 cm lateral to midline (sagittal sinus)',
+        colorVar: '--color-decision-active',
+      };
+    }
+    if (target === 3) {
+      return {
+        value: 'PARIETAL',
+        label: '4 FB posterior & superior to EAC',
+        description: '**PARIETAL Point**\n\n📍 **Location:**\n• 4 finger-breadths (6-8 cm) POSTERIOR to external auditory canal\n• 4 finger-breadths SUPERIOR to external auditory canal\n• Over the parietal eminence\n\n**Access to:**\n• Convexity lesions\n• Parietal hematomas\n\n**Landmarks:**\n• Find the parietal eminence (rounded prominence)\n• Burr hole centered over eminence\n\n⚠️ **Danger:** Avoid going too far posteriorly toward asterion',
+        colorVar: '--color-decision-active',
+      };
+    }
+    if (target === 4) {
+      return {
+        value: "KOCHER'S",
+        label: '11 cm from glabella, 3 cm lateral',
+        description: "**KOCHER'S Point** (Ventriculostomy Access)\n\n📍 **Location:**\n• 11 cm posterior to glabella (between eyebrows)\n• 3-4 cm lateral to midline\n• In line with ipsilateral medial canthus\n\n**Access to:**\n• Frontal horn of lateral ventricle\n• Used for EVD placement\n\n**Landmarks:**\n• Glabella → measure 11 cm posteriorly along midline\n• Then 3 cm lateral (same side as medial canthus line)\n\n**Note:** Primary use is ventriculostomy, not hematoma evacuation. Non-neurosurgeon EVD placement is beyond typical ED scope.",
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Select target location',
+      description: '**Available Landmarks:**\n\n• **Temporal** — 2 FB above & anterior to tragus (EDH)\n• **Frontal** — 10 cm above eye, mid-pupillary line\n• **Parietal** — 4 FB posterior & superior to EAC\n• **Kocher\'s** — 11 cm from glabella, 3 cm lateral (EVD)',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const BH_PROCEDURE_CHECKLIST_CALCULATOR: CalculatorDefinition = {
+  id: 'bh-procedure-checklist',
+  title: 'Burr Hole Checklist',
+  subtitle: 'Pre-procedure verification',
+  description: 'Systematic checklist before proceeding with emergency burr hole craniostomy.',
+  fields: [
+    {
+      name: 'indication',
+      label: 'Indication confirmed?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes — patient will die without intervention', points: 1 },
+      ],
+    },
+    {
+      name: 'drill',
+      label: 'Drill with clutch bit available?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No drill available', points: 0 },
+        { label: 'Drill without clutch (higher risk)', points: 1 },
+        { label: 'Yes — clutch drill available', points: 2 },
+      ],
+    },
+    {
+      name: 'airway',
+      label: 'Airway secured?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes — intubated, sedated, paralyzed', points: 1 },
+      ],
+    },
+    {
+      name: 'osmotherapy',
+      label: 'Osmotherapy given?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes — mannitol or HTS', points: 1 },
+      ],
+    },
+    {
+      name: 'side',
+      label: 'Side determined?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No — uncertain', points: 0 },
+        { label: 'Yes — based on CT or clinical signs', points: 1 },
+      ],
+    },
+    {
+      name: 'telemedicine',
+      label: 'Neurosurgery consulted?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No — unavailable', points: 0 },
+        { label: 'Yes — telemedicine guidance', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'All items should be addressed before proceeding. Telemedicine neurosurgical guidance is ideal when available.',
+  citations: [
+    'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine. 7th ed. 2018.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const indication = values['indication'] || 0;
+    const drill = values['drill'] || 0;
+    const airway = values['airway'] || 0;
+    const osmotherapy = values['osmotherapy'] || 0;
+    const side = values['side'] || 0;
+    const telemedicine = values['telemedicine'] || 0;
+
+    const score = indication + (drill > 0 ? 1 : 0) + airway + osmotherapy + side;
+    const total = 5;
+
+    if (indication === 0) {
+      return {
+        value: 'HOLD',
+        label: 'Indication not confirmed',
+        description: '**DO NOT PROCEED**\n\nEmergency burr hole is a LAST RESORT procedure.\n\n**Required:**\n• CT-confirmed extra-axial hematoma\n• Herniation signs (pupil dilation, deteriorating GCS)\n• Neurosurgery unavailable within 2 hours\n• Patient will die without intervention\n\nIf these criteria are not met, focus on medical management and transport.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (drill === 0) {
+      return {
+        value: 'HOLD',
+        label: 'No drill available',
+        description: '**Cannot proceed without drill**\n\nRequired equipment:\n• Manual (Hudson-Brace) or power drill\n• Preferably with clutch bit (auto-disengages at inner table)\n\n**Alternatives (case reports only):**\n• EZ-IO with 25mm needle (extremely limited)\n\nWithout proper equipment, focus on medical management and transport.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    let checklist = '**PRE-PROCEDURE CHECKLIST:**\n\n';
+    checklist += indication === 1 ? '✅' : '❌';
+    checklist += ' Indication confirmed\n';
+    checklist += drill === 2 ? '✅ Clutch drill available (preferred)\n' : drill === 1 ? '⚠️ Drill available (no clutch — higher risk)\n' : '❌ No drill\n';
+    checklist += airway === 1 ? '✅' : '❌';
+    checklist += ' Airway secured\n';
+    checklist += osmotherapy === 1 ? '✅' : '❌';
+    checklist += ' Osmotherapy given\n';
+    checklist += side === 1 ? '✅' : '❌';
+    checklist += ' Side determined\n';
+    checklist += telemedicine === 1 ? '✅ Neurosurgery telemedicine connected\n' : '⚠️ No neurosurgery guidance available\n';
+
+    if (score >= 4 && drill >= 1) {
+      return {
+        value: 'READY',
+        label: `Checklist ${score}/${total} — ready to proceed`,
+        description: checklist + '\n---\n\n**Ready to proceed with burr hole.**\n\nKey steps:\n1. Position patient (head elevated, rotated)\n2. Prep and drape\n3. Vertical incision to bone\n4. Drill perpendicular, steady pressure\n5. Evacuate hematoma\n6. Loose closure\n7. Transport immediately',
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'INCOMPLETE',
+      label: `Checklist ${score}/${total} — items missing`,
+      description: checklist + '\n---\n\n**Address missing items before proceeding.**\n\nCritical items:\n• Indication must be clearly met\n• Drill must be available\n• Side must be determined\n\nOsmotherapy and airway should be addressed but should not delay a clearly dying patient.',
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 
@@ -28933,6 +29425,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'tet-spatula': TET_SPATULA_CALCULATOR,
   'tet-severity': TET_SEVERITY_CALCULATOR,
   'tet-management': TET_MANAGEMENT_CALCULATOR,
+  // Burr Hole
+  'bh-indication-check': BH_INDICATION_CHECK_CALCULATOR,
+  'bh-side-selector': BH_SIDE_SELECTOR_CALCULATOR,
+  'bh-landmark-guide': BH_LANDMARK_GUIDE_CALCULATOR,
+  'bh-procedure-checklist': BH_PROCEDURE_CHECKLIST_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
