@@ -1824,8 +1824,12 @@ const DIPHENHYDRAMINE: DrugEntry = {
   genericName: 'Diphenhydramine hydrochloride',
   drugClass: 'Antihistamine / Antiemetic',
   route: 'PO/IV',
-  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia', 'Anaphylaxis (H1 blocker)', 'Angioedema'],
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia', 'Anaphylaxis (H1 blocker)', 'Angioedema', 'Acute vertigo (short-term vestibular suppressant)'],
   dosing: [
+    {
+      indication: 'Vestibular suppressant (short-term) — acute vertigo',
+      regimen: '25-50 mg PO or IV every 6-8 hours PRN. **Maximum 72 hours** — prolonged use delays central vestibular compensation and prolongs recovery. Second-line to meclizine. Significant sedation — warn about falls and driving. Avoid in elderly (Beers criteria, delirium risk).',
+    },
     {
       indication: 'NVP — oral',
       regimen: '25-50 mg PO every 6 hours as needed. Second-line oral agent per ACOG stepwise pathway. Alternative to dimenhydrinate.',
@@ -3396,8 +3400,12 @@ const METOCLOPRAMIDE: DrugEntry = {
   genericName: 'Metoclopramide hydrochloride',
   drugClass: 'Dopamine antagonist / Prokinetic antiemetic',
   route: 'IV/PO',
-  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum'],
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Vestibular migraine (acute)', 'Acute vertigo with nausea'],
   dosing: [
+    {
+      indication: 'Vestibular migraine / acute vertigo nausea',
+      regimen: '10 mg IV over 15 minutes. Dopamine antagonist with dual antiemetic and antimigraine activity — particularly useful for vestibular migraine where both nausea and headache are present. Combine with IV fluids. Watch for akathisia — pretreat with diphenhydramine 25 mg IV if high-risk. Avoid in patients with QT prolongation or Parkinson disease.',
+    },
     {
       indication: 'NVP / Hyperemesis — IV',
       regimen: '10 mg IV every 8 hours. Reasonable first-line IV antiemetic in pregnancy — no association with fetal malformations.',
@@ -3958,8 +3966,12 @@ const ONDANSETRON: DrugEntry = {
   genericName: 'Ondansetron hydrochloride',
   drugClass: '5-HT3 receptor antagonist / Antiemetic',
   route: 'IV/PO (ODT)',
-  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Postoperative nausea/vomiting', 'Acute diarrhea with nausea/vomiting', 'Pediatric gastroenteritis (facilitates oral rehydration)'],
+  indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Postoperative nausea/vomiting', 'Acute diarrhea with nausea/vomiting', 'Pediatric gastroenteritis (facilitates oral rehydration)', 'Acute vertigo nausea'],
   dosing: [
+    {
+      indication: 'Acute vertigo / peripheral vestibular nausea',
+      regimen: '4 mg IV or 4-8 mg ODT every 6-8 hours PRN. Effective for nausea/vomiting of acute vestibular syndrome and BPPV without the central vestibular suppression caused by antihistamines/benzodiazepines. Preferred antiemetic when preserving vestibular compensation is the goal. ODT route ideal when patient cannot tolerate swallowing from positional nausea.',
+    },
     {
       indication: 'NVP / Hyperemesis — IV',
       regimen: '4-8 mg IV over 15 min every 12 hours. Effective for all severities. Reserve as second-line IV agent — exhaust metoclopramide first given possible small risk of fetal cardiac abnormalities.',
@@ -6667,7 +6679,7 @@ const DIAZEPAM: DrugEntry = {
   genericName: 'Diazepam',
   drugClass: 'Benzodiazepine (long-acting)',
   route: 'IV/PR',
-  indications: ['Status epilepticus (alternative)', 'Seizure disorders', 'TCA overdose seizure', 'Alcohol withdrawal'],
+  indications: ['Status epilepticus (alternative)', 'Seizure disorders', 'TCA overdose seizure', 'Alcohol withdrawal', 'Acute vestibular syndrome (severe, short-term)'],
   dosing: [
     {
       indication: 'TCA Overdose — Seizure',
@@ -6695,6 +6707,10 @@ const DIAZEPAM: DrugEntry = {
     {
       indication: 'Acute agitation (undifferentiated)',
       regimen: '10-20 mg PO or IV. IV onset within minutes. Single IV dose duration 1-2 hours. Following multiple doses, duration prolonged >20 hours due to active metabolites. Preferred when prolonged agitation anticipated. Do NOT give IM — erratic absorption.',
+    },
+    {
+      indication: 'Acute vestibular syndrome (short-term)',
+      regimen: '2-5 mg PO or IV every 8-12 hours PRN severe vertigo. **STRICT LIMIT: 48-72 hours** — benzodiazepines are potent vestibular suppressants that significantly delay central compensation. Reserve for severe refractory symptoms that prevent rehydration or mobilization. Never use as routine discharge medication. Elevated falls risk (sedation + unsteadiness + underlying vertigo) — warn patient and family.',
     },
   ],
   contraindications: [
@@ -9309,6 +9325,113 @@ const QUINIDINE_GLUCONATE: DrugEntry = {
   ],
 };
 
+const MECLIZINE: DrugEntry = {
+  id: 'meclizine',
+  name: 'Meclizine (Antivert)',
+  genericName: 'Meclizine hydrochloride',
+  drugClass: 'Antihistamine / Vestibular suppressant (H1 antagonist)',
+  route: 'PO',
+  indications: ['Acute vertigo (short-term)', 'Motion sickness', 'BPPV symptom relief'],
+  dosing: [
+    {
+      indication: 'Vertigo / vestibular symptom relief',
+      regimen: '25 mg PO every 6-8 hours PRN. **Maximum 3-5 days** — prolonged use delays central vestibular compensation and prolongs recovery. Adjunct only — does NOT treat the underlying cause (Epley for BPPV, rehab for vestibular neuritis).',
+    },
+    {
+      indication: 'Motion sickness',
+      regimen: '25-50 mg PO 1 hour before travel. May repeat every 24 hours during exposure.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to meclizine or piperazine derivatives',
+    'Narrow-angle glaucoma',
+    'Obstructive uropathy / BPH with urinary retention',
+  ],
+  cautions: [
+    'Significant sedation — warn about drowsiness, avoid driving',
+    'Anticholinergic effects (dry mouth, blurred vision, urinary retention)',
+    'Elderly — falls risk, anticholinergic burden (Beers criteria)',
+    'DELAYS vestibular compensation — never use beyond 72 hours',
+    'Avoid in combination with other CNS depressants',
+  ],
+  monitoring: 'Symptom relief. Sedation level. Assess continued need daily — discontinue as soon as tolerable.',
+  notes: 'First-line symptomatic therapy for acute peripheral vertigo. The most important prescribing principle is LIMITED DURATION: vestibular suppressants inhibit central adaptation. Continued use beyond 72 hours prolongs symptom duration. Early mobilization and vestibular rehabilitation are more effective than continued pharmacotherapy. Does nothing for BPPV mechanism — particle repositioning (Epley) is definitive.',
+  citations: [
+    'Edlow JA, et al. Guidelines for reasonable and appropriate care in the emergency department 3 (GRACE-3): Acute dizziness and vertigo in the emergency department. Acad Emerg Med. 2023;30(5):442-486.',
+    'Hilton MP, Pinder DK. The Epley (canalith repositioning) maneuver for benign paroxysmal positional vertigo. Cochrane Database Syst Rev. 2014;(12):CD003162.',
+    'Furman JM, Barton JJS. Treatment of vertigo. UpToDate. 2024.',
+  ],
+};
+
+const BETAHISTINE: DrugEntry = {
+  id: 'betahistine',
+  name: 'Betahistine (Serc)',
+  genericName: 'Betahistine dihydrochloride',
+  drugClass: 'Histamine analog (H1 agonist / H3 antagonist)',
+  route: 'PO',
+  indications: ['Meniere disease', 'Chronic vestibular symptoms'],
+  dosing: [
+    {
+      indication: 'Vestibular / Meniere disease',
+      regimen: '16 mg PO TID (range 8-16 mg TID). Used for recurrent Meniere attacks and chronic vestibular symptoms. **NOT FDA-approved in the United States** — available in Canada, UK, Europe, Australia. Patients may obtain via international prescriptions.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity',
+    'Pheochromocytoma (theoretical — histamine release)',
+    'Active peptic ulcer disease (relative)',
+  ],
+  cautions: [
+    'Asthma — may provoke bronchospasm (histamine agonist effect)',
+    'Peptic ulcer history — may increase gastric acid secretion',
+    'Evidence base is weaker than often quoted — 2016 Cochrane review showed modest/uncertain benefit',
+    'Not available in US — prescribe only if patient has reliable international supply',
+  ],
+  monitoring: 'Frequency of vertigo attacks. Hearing assessment. GI symptoms.',
+  notes: 'Weak H1 agonist + more potent H3 antagonist — proposed mechanism is increased inner ear microcirculation and vestibular nucleus inhibition. Commonly prescribed outside the US for Meniere disease and chronic vestibular disorders. Unlike meclizine, not a suppressant — does not delay compensation. Consider for chronic management via outpatient referral, not acute ED use.',
+  citations: [
+    'Murdin L, Hussain K, Schilder AG. Betahistine for symptoms of vertigo. Cochrane Database Syst Rev. 2016;(6):CD010696.',
+    'Furman JM, Barton JJS. Treatment of vertigo. UpToDate. 2024.',
+  ],
+};
+
+const SCOPOLAMINE: DrugEntry = {
+  id: 'scopolamine',
+  name: 'Scopolamine (Transderm Scop)',
+  genericName: 'Scopolamine hydrobromide',
+  drugClass: 'Anticholinergic / Antimuscarinic',
+  route: 'Transdermal',
+  indications: ['Motion sickness', 'Vestibular symptoms (select cases)'],
+  dosing: [
+    {
+      indication: 'Vestibular / motion sickness',
+      regimen: '**1.5 mg patch** applied behind the ear. Apply at least **4 hours before needed effect**. Each patch delivers ~1 mg over 72 hours — replace every 3 days. **Wash hands immediately after application** — touching eyes causes unilateral mydriasis and can mimic uncal herniation on neuro exam.',
+    },
+  ],
+  contraindications: [
+    'Narrow-angle glaucoma (ABSOLUTE — may precipitate acute angle closure)',
+    'Obstructive uropathy / BPH with urinary retention',
+    'Pyloric obstruction / GI obstruction',
+    'Myasthenia gravis',
+    'Known hypersensitivity to scopolamine or belladonna alkaloids',
+  ],
+  cautions: [
+    'Elderly — high risk of delirium, anticholinergic toxidrome, falls (Beers criteria)',
+    'Avoid in children <12 years',
+    'Unilateral mydriasis if patch fluid contacts eye — can mimic herniation',
+    'Confusion, hallucinations, psychosis (especially elderly)',
+    'Dry mouth, blurred vision, urinary retention',
+    'Withdrawal syndrome on removal after prolonged use — dizziness, nausea, headache',
+    'Drowsiness — warn against driving',
+  ],
+  monitoring: 'Mental status (especially elderly). Pupil symmetry. Urinary output. Symptom control.',
+  notes: 'Centrally-acting muscarinic antagonist — blocks vestibular nucleus acetylcholine transmission. Most useful for motion-provoked vertigo. Not a routine ED discharge medication for BPPV or vestibular neuritis — sedation and delirium risk generally outweigh benefit in older adults. Consider for select younger patients with severe motion-sensitive vertigo.',
+  citations: [
+    'Spinks A, Wasiak J. Scopolamine (hyoscine) for preventing and treating motion sickness. Cochrane Database Syst Rev. 2011;(6):CD002851.',
+    'Furman JM, Barton JJS. Treatment of vertigo. UpToDate. 2024.',
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   ACAMPROSATE,
   ACETAMINOPHEN,
@@ -9336,6 +9459,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   BEDAQUILINE,
   BENZATHINE_PENICILLIN,
   BENZTROPINE,
+  BETAHISTINE,
   BIKTARVY,
   BIVALIRUDIN,
   BISMUTH_SUBSALICYLATE,
@@ -9437,6 +9561,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   SODIUM_ZIRCONIUM_CYCLOSILICATE,
   MAGNESIUM_SULFATE,
   MAGNESIUM_SULFATE_ASTHMA,
+  MECLIZINE,
   MEDROXYPROGESTERONE,
   MEPERIDINE,
   MEROPENEM,
@@ -9521,6 +9646,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ROCURONIUM,
   RUCONEST,
   RH_IMMUNE_GLOBULIN,
+  SCOPOLAMINE,
   SILVER_SULFADIAZINE,
   SODIUM_BICARBONATE,
   SSKI,

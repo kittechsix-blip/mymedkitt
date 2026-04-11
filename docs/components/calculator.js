@@ -19011,6 +19011,827 @@ const BH_PROCEDURE_CHECKLIST_CALCULATOR = {
     },
 };
 // =====================================================================
+// RV ASSESSMENT (PRE-INTUBATION) CALCULATORS
+// =====================================================================
+const RV_RISK_ASSESSMENT_CALCULATOR = {
+    id: 'rv-risk-assessment',
+    title: 'RV Risk Assessment',
+    subtitle: 'Pre-intubation RV dysfunction risk',
+    description: 'Systematic assessment of RV dysfunction risk before intubation. Identifies patients at high risk of peri-intubation cardiovascular collapse.',
+    fields: [
+        {
+            name: 'presentation',
+            label: 'Primary presentation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Other / not listed', points: 0 },
+                { label: 'Massive or submassive PE', points: 3 },
+                { label: 'Known pulmonary hypertension', points: 3 },
+                { label: 'RV infarction', points: 3 },
+                { label: 'Severe COPD/ARDS', points: 2 },
+                { label: 'Cardiomyopathy with RV involvement', points: 2 },
+                { label: 'Decompensated CHF', points: 1 },
+            ],
+        },
+        {
+            name: 'jvd',
+            label: 'JVD present?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes', points: 1 },
+            ],
+        },
+        {
+            name: 'hypotension',
+            label: 'Hypotension (SBP <90)?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes', points: 2 },
+            ],
+        },
+        {
+            name: 'hypoxia',
+            label: 'Severe hypoxemia (SpO₂ <88% on high-flow)?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes', points: 1 },
+            ],
+        },
+        {
+            name: 'ecg',
+            label: 'ECG findings',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal or non-specific', points: 0 },
+                { label: 'Right axis deviation, RBBB, or S1Q3T3', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Score ≥3: Perform bedside echo before intubation. Score ≥5: Extreme risk — strongly consider alternatives to RSI.',
+    citations: [
+        'EMCrit IBCC. Right Ventricular Failure. 2025.',
+        'First10EM. Pulmonary Hypertension and RV Failure. 2023.',
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((sum, v) => sum + (v || 0), 0);
+        if (score >= 5) {
+            return {
+                value: score.toString(),
+                label: 'EXTREME RISK — RV dysfunction highly likely',
+                description: `**Score: ${score}**\n\n🚨 **EXTREME peri-intubation risk**\n\n**Before intubating:**\n• Perform POCUS (RV:LV ratio, TAPSE, D-sign)\n• Pre-optimize hemodynamics (SBP >120)\n• Have push-dose pressors at bedside\n• Consider awake intubation\n• Have inhaled pulmonary vasodilator ready\n\n**Strongly consider BiPAP** if able to avoid intubation.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 3) {
+            return {
+                value: score.toString(),
+                label: 'HIGH RISK — perform echo before intubation',
+                description: `**Score: ${score}**\n\n⚠️ **Elevated peri-intubation risk**\n\n**Perform bedside echo:**\n• RV:LV ratio\n• TAPSE\n• D-sign\n\nIf RV dysfunction confirmed, pre-optimize before intubation.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: score.toString(),
+            label: 'Lower risk — standard approach may be appropriate',
+            description: `**Score: ${score}**\n\nRV dysfunction less likely but not excluded.\n\n**Still consider:**\n• Quick POCUS if time permits\n• Other causes of physiologically difficult airway (HOP killers)`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const RV_ECHO_INTERPRETER_CALCULATOR = {
+    id: 'rv-echo-interpreter',
+    title: 'RV Echo Interpreter',
+    subtitle: 'Interpret bedside RV assessment',
+    description: 'Interpret POCUS findings for RV dysfunction. Combines RV:LV ratio, TAPSE, and D-sign to stratify risk.',
+    fields: [
+        {
+            name: 'rv-lv',
+            label: 'RV:LV Ratio (A4C view)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal (<0.6)', points: 0 },
+                { label: 'RV dilated (0.6-1.0)', points: 1 },
+                { label: 'RV > LV (>1.0)', points: 3 },
+            ],
+        },
+        {
+            name: 'tapse',
+            label: 'TAPSE (mm)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal (>17mm)', points: 0 },
+                { label: 'Mild-moderate (10-17mm)', points: 1 },
+                { label: 'Severe (<10mm)', points: 3 },
+            ],
+        },
+        {
+            name: 'd-sign',
+            label: 'D-sign (PSAX view)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent — LV circular', points: 0 },
+                { label: 'Present in diastole (volume overload)', points: 1 },
+                { label: 'Present in systole + diastole (pressure overload)', points: 2 },
+            ],
+        },
+        {
+            name: 'mcconnell',
+            label: "McConnell's Sign (A4C view)",
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Present — RV free wall akinesis with apical sparing', points: 2 },
+            ],
+        },
+        {
+            name: 'rv-wall',
+            label: 'RV free wall thickness',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal (≤5mm) — likely ACUTE', points: 0 },
+                { label: 'Thickened (>5mm) — CHRONIC', points: 0 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'RV > LV or TAPSE <10mm = severe dysfunction. McConnell\'s sign is specific (97%) for acute PE.',
+    citations: [
+        'POCUS 101. Cardiac Ultrasound Made Easy. 2024.',
+        'McConnell MV, et al. Am J Cardiol. 1996.',
+    ],
+    computeResult: (values) => {
+        const rvLv = values['rv-lv'] || 0;
+        const tapse = values['tapse'] || 0;
+        const dSign = values['d-sign'] || 0;
+        const mcconnell = values['mcconnell'] || 0;
+        const wall = values['rv-wall'] || 0;
+        const score = rvLv + tapse + dSign + mcconnell;
+        const chronicity = wall === 1 ? '**Chronic** (RV wall >5mm) — suggests long-standing pulmonary hypertension' : '**Acute** (normal RV wall) — suggests acute PE, acute RV infarct';
+        if (rvLv === 3 || tapse === 3) {
+            return {
+                value: 'SEVERE',
+                label: 'SEVERE RV dysfunction — EXTREME intubation risk',
+                description: `**SEVERE RV Dysfunction**\n\n🚨 **EXTREME peri-intubation risk**\n\n**Findings:**\n${rvLv === 3 ? '• RV > LV (severe dilation)\n' : ''}${tapse === 3 ? '• TAPSE <10mm (severe dysfunction)\n' : ''}${dSign > 0 ? '• D-sign present\n' : ''}${mcconnell > 0 ? "• McConnell's sign (suggests PE)\n" : ''}\n**Chronicity:** ${chronicity}\n\n**Pre-intubation:**\n• Target SBP >120, MAP ~80\n• Push-dose epi + vasopressin at bedside\n• Consider awake intubation\n• Have inhaled pulmonary vasodilator ready`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 2) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate RV dysfunction — elevated risk',
+                description: `**Moderate RV Dysfunction**\n\n⚠️ **Elevated peri-intubation risk**\n\n**Findings:**\n${rvLv === 1 ? '• RV dilated (approaching LV size)\n' : ''}${tapse === 1 ? '• TAPSE 10-17mm\n' : ''}${dSign > 0 ? '• D-sign present\n' : ''}${mcconnell > 0 ? "• McConnell's sign\n" : ''}\n**Chronicity:** ${chronicity}\n\n**Pre-intubation:**\n• Vasopressors running or push-dose at bedside\n• BiPAP preoxygenation\n• Optimize before induction`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'NORMAL',
+            label: 'RV function appears preserved',
+            description: '**Normal RV Function**\n\nRV size and function appear preserved.\n\nStandard intubation approach is appropriate.\n\n**Still consider other HOP killers:**\n• Hypotension\n• Severe hypoxemia\n• Metabolic acidosis\n• Elevated ICP',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const RV_TAPSE_CALCULATOR = {
+    id: 'rv-tapse',
+    title: 'TAPSE Guide',
+    subtitle: 'Tricuspid Annular Plane Systolic Excursion',
+    description: 'Quick reference for measuring and interpreting TAPSE — the best single measure of RV systolic function on bedside echo.',
+    fields: [
+        {
+            name: 'tapse-mm',
+            label: 'TAPSE measurement (mm)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '>20mm', points: 0 },
+                { label: '17-20mm', points: 1 },
+                { label: '14-17mm (mild dysfunction)', points: 2 },
+                { label: '10-14mm (moderate dysfunction)', points: 3 },
+                { label: '<10mm (severe dysfunction)', points: 4 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'TAPSE >17mm = normal. TAPSE <10mm = severe RV dysfunction.',
+    citations: [
+        'POCUS 101. TAPSE Made Easy. 2024.',
+    ],
+    computeResult: (values) => {
+        const tapse = values['tapse-mm'] || 0;
+        const technique = '**How to Measure TAPSE:**\n\n1. Obtain A4C view\n2. Place M-mode cursor through lateral tricuspid annulus\n3. Measure vertical distance annulus moves during systole\n4. Distance from trough to peak = TAPSE\n\n';
+        if (tapse === 0 || tapse === 1) {
+            return {
+                value: 'NORMAL',
+                label: 'Normal RV systolic function',
+                description: technique + '**Interpretation: NORMAL**\n\nTAPSE ≥17mm indicates preserved RV systolic function.',
+                colorVar: '--color-primary',
+            };
+        }
+        if (tapse === 2) {
+            return {
+                value: 'MILD',
+                label: 'Mild RV dysfunction',
+                description: technique + '**Interpretation: MILD DYSFUNCTION**\n\nTAPSE 14-17mm\n\nMild reduction in RV systolic function. Consider pre-optimization before intubation.',
+                colorVar: '--color-warning',
+            };
+        }
+        if (tapse === 3) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate RV dysfunction',
+                description: technique + '**Interpretation: MODERATE DYSFUNCTION**\n\nTAPSE 10-14mm\n\nSignificant RV dysfunction. **Aggressive pre-optimization required before intubation.**',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'SEVERE',
+            label: 'Severe RV dysfunction — EXTREME risk',
+            description: technique + '**Interpretation: SEVERE DYSFUNCTION**\n\nTAPSE <10mm\n\n🚨 **EXTREME peri-intubation risk**\n\nConsider:\n• Avoiding intubation (BiPAP)\n• Awake intubation\n• Full optimization before RSI',
+            colorVar: '--color-danger',
+        };
+    },
+};
+const RV_HEMODYNAMIC_CALCULATOR = {
+    id: 'rv-hemodynamic-calc',
+    title: 'RV Hemodynamic Goals',
+    subtitle: 'Pre-intubation targets',
+    description: 'Calculate hemodynamic targets before intubating a patient with RV dysfunction.',
+    fields: [
+        {
+            name: 'current-sbp',
+            label: 'Current SBP (mmHg)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<80', points: 3 },
+                { label: '80-90', points: 2 },
+                { label: '90-110', points: 1 },
+                { label: '110-130', points: 0 },
+                { label: '>130', points: 0 },
+            ],
+        },
+        {
+            name: 'current-map',
+            label: 'Current MAP (mmHg)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<60', points: 2 },
+                { label: '60-70', points: 1 },
+                { label: '70-80', points: 0 },
+                { label: '>80', points: 0 },
+            ],
+        },
+        {
+            name: 'vasopressors',
+            label: 'Current vasopressor support',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Low-dose single agent', points: 0 },
+                { label: 'High-dose or multiple agents', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Target: SBP 120-130 (expect 20-30% drop), MAP ~80. SBP must exceed PA systolic pressure for RV perfusion.',
+    citations: [
+        'EMCrit IBCC. Right Ventricular Failure. 2025.',
+    ],
+    computeResult: (values) => {
+        const sbp = values['current-sbp'] || 0;
+        const map = values['current-map'] || 0;
+        const targets = '**HEMODYNAMIC TARGETS:**\n\n| Parameter | Target | Rationale |\n|-----------|--------|----------|\n| **SBP** | 120-130 mmHg | Anticipate 20-30% drop |\n| **MAP** | ~80 mmHg | Ensure adequate perfusion |\n| **SBP > PASP** | Critical | RV perfusion requires SBP >> PA pressure |\n\n';
+        if (sbp >= 2) {
+            return {
+                value: 'NOT READY',
+                label: 'OPTIMIZE FIRST — hypotension present',
+                description: targets + '**⚠️ DO NOT INTUBATE until SBP optimized**\n\n**Immediate actions:**\n1. Push-dose epi (10-20 mcg) + vasopressin (1-2 units)\n2. Start norepinephrine infusion\n3. Target SBP ≥120 mmHg before induction\n\n**Why:** Induction will drop BP 20-30%. Starting hypotensive → arrest.',
+                colorVar: '--color-danger',
+            };
+        }
+        if (sbp === 1 || map === 1) {
+            return {
+                value: 'MARGINAL',
+                label: 'Marginally acceptable — have pressors ready',
+                description: targets + '**Marginal hemodynamics**\n\n**Before induction:**\n• Push-dose epi (10-20 mcg) + vasopressin (1-2 units) at bedside\n• Consider pre-treating with push-dose just before induction\n• Have norepinephrine infusion primed\n\nExpect 20-30% drop in BP with induction.',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'ACCEPTABLE',
+            label: 'Hemodynamics acceptable for intubation',
+            description: targets + '**Hemodynamics acceptable**\n\n**Still prepare:**\n• Push-dose pressors at bedside\n• Vasopressor infusion primed\n• Monitor closely during and after induction\n\nEven with good starting hemodynamics, be prepared for decline.',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const RV_PUSH_DOSE_CALCULATOR = {
+    id: 'rv-push-dose-calc',
+    title: 'Push-Dose Prep',
+    subtitle: 'Epinephrine & vasopressin preparation',
+    description: 'Quick reference for preparing and dosing push-dose pressors for peri-intubation use in RV failure.',
+    fields: [
+        {
+            name: 'agent',
+            label: 'Agent to prepare',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Push-dose epinephrine', points: 1 },
+                { label: 'Push-dose vasopressin', points: 2 },
+                { label: 'Both (recommended for RV failure)', points: 3 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'For RV failure: Give push-dose epi (10-20 mcg) + vasopressin (1-2 units) just PRIOR to induction.',
+    citations: [
+        'Weingart S. Push-Dose Pressors. EMCrit. 2023.',
+        'EMCrit IBCC. Right Ventricular Failure. 2025.',
+    ],
+    computeResult: (values) => {
+        const agent = values['agent'] || 0;
+        const epiPrep = '**PUSH-DOSE EPINEPHRINE:**\n\n**Preparation:**\n1. Draw 1 mL from cardiac epi amp (100 mcg/mL or 1:10,000)\n2. Add to 9 mL normal saline\n3. **Final concentration: 10 mcg/mL** (1:100,000)\n\n**Dosing:**\n• 5-20 mcg (0.5-2 mL) IV push\n• Every 1-5 minutes PRN\n• Onset <1 minute, duration 5-10 minutes\n\n';
+        const vasoPrep = '**PUSH-DOSE VASOPRESSIN:**\n\n**Dosing:**\n• 1-2 units IV push\n• Onset <1 minute\n• Longer duration than epinephrine\n\n**Note:** Vasopressin does not require dilution.\n\n';
+        const strategy = '**PRE-MEDICATION STRATEGY:**\n\nEven if patient is NOT yet hypotensive:\n\n✅ Give push-dose epi (10-20 mcg) + vasopressin (1-2 units) **just prior to induction**\n\nThis pre-emptively supports BP through the critical induction period.';
+        if (agent === 1) {
+            return {
+                value: 'EPI',
+                label: 'Push-dose epinephrine preparation',
+                description: epiPrep + strategy,
+                colorVar: '--color-decision-active',
+            };
+        }
+        if (agent === 2) {
+            return {
+                value: 'VASO',
+                label: 'Push-dose vasopressin dosing',
+                description: vasoPrep + strategy,
+                colorVar: '--color-decision-active',
+            };
+        }
+        if (agent === 3) {
+            return {
+                value: 'BOTH',
+                label: 'Both agents (recommended for RV failure)',
+                description: epiPrep + '---\n\n' + vasoPrep + '---\n\n' + strategy,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select agent to prepare',
+            description: 'Choose an agent to see preparation and dosing instructions.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+// =====================================================================
+// CERVICAL SPINE INJURY CALCULATORS
+// =====================================================================
+const CSPINE_CCR_CALCULATOR = {
+    id: 'cspine-ccr',
+    title: 'Canadian C-Spine Rule',
+    subtitle: 'Clinical clearance decision',
+    description: 'The Canadian C-Spine Rule (CCR) determines whether cervical spine imaging is required. Sensitivity 99-100%, more sensitive than NEXUS.',
+    fields: [
+        {
+            name: 'high-risk',
+            label: 'Any HIGH-RISK factor?',
+            type: 'select',
+            points: 0,
+            description: 'Age ≥65, dangerous mechanism, paresthesias',
+            selectOptions: [
+                { label: 'No high-risk factors', points: 0 },
+                { label: 'Yes — age ≥65 years', points: 1 },
+                { label: 'Yes — dangerous mechanism', points: 1 },
+                { label: 'Yes — paresthesias in extremities', points: 1 },
+            ],
+        },
+        {
+            name: 'low-risk',
+            label: 'Any LOW-RISK factor allowing ROM assessment?',
+            type: 'select',
+            points: 0,
+            description: 'Simple rear-end MVC, sitting in ED, ambulatory, delayed pain onset, no midline tenderness',
+            selectOptions: [
+                { label: 'No — no low-risk factors', points: 0 },
+                { label: 'Yes — low-risk factor present', points: 1 },
+            ],
+        },
+        {
+            name: 'rom',
+            label: 'Can actively rotate neck 45° L and R?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not assessed', points: 0 },
+                { label: 'Yes — full ROM 45° both directions', points: 1 },
+                { label: 'No — unable to rotate 45°', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'CCR sensitivity 99-100% — preferred over NEXUS. CCR includes mechanism and works in intoxicated alert patients.',
+    citations: [
+        'Stiell IG, et al. JAMA. 2001;286(15):1841-8.',
+        'Stiell IG, et al. NEJM. 2003;349(26):2510-8.',
+    ],
+    computeResult: (values) => {
+        const highRisk = values['high-risk'] || 0;
+        const lowRisk = values['low-risk'] || 0;
+        const rom = values['rom'] || 0;
+        if (highRisk >= 1) {
+            return {
+                value: 'IMAGE',
+                label: 'HIGH-RISK — Imaging required',
+                description: '**Imaging Required**\n\nHigh-risk factor present:\n• Age ≥65 years, OR\n• Dangerous mechanism, OR\n• Paresthesias in extremities\n\n→ **Order CT C-spine** (occiput to T1)',
+                colorVar: '--color-danger',
+            };
+        }
+        if (lowRisk === 0) {
+            return {
+                value: 'IMAGE',
+                label: 'No low-risk factors — Imaging required',
+                description: '**Imaging Required**\n\nNo low-risk factors present to allow clinical clearance.\n\n→ **Order CT C-spine**',
+                colorVar: '--color-warning',
+            };
+        }
+        // Low-risk present, check ROM
+        if (rom === 0) {
+            return {
+                value: 'ROM',
+                label: 'Assess range of motion',
+                description: '**Low-risk factors present**\n\nPatient can attempt active ROM:\n• Actively rotate neck 45° LEFT\n• Actively rotate neck 45° RIGHT\n\n⚠️ Patient must perform this actively.',
+                colorVar: '--color-primary',
+            };
+        }
+        if (rom === 1) {
+            return {
+                value: 'CLEAR',
+                label: 'CLEARED — No imaging required',
+                description: '**C-Spine Clinically Cleared**\n\n✅ No high-risk factors\n✅ Low-risk factor present\n✅ Full active ROM\n\n→ Remove collar\n→ Discharge with precautions',
+                colorVar: '--color-success',
+            };
+        }
+        return {
+            value: 'IMAGE',
+            label: 'Unable to rotate — Imaging required',
+            description: '**Imaging Required**\n\nUnable to actively rotate neck 45° in both directions.\n\n→ **Order CT C-spine**',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const CSPINE_NEXUS_CALCULATOR = {
+    id: 'cspine-nexus',
+    title: 'NEXUS Criteria',
+    subtitle: 'C-spine clinical clearance',
+    description: 'NEXUS Low-Risk Criteria for cervical spine clearance. ALL 5 criteria must be met to clear clinically. Sensitivity 94% — lower than CCR.',
+    fields: [
+        {
+            name: 'tenderness',
+            label: 'Midline cervical tenderness?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No midline tenderness', points: 0 },
+                { label: 'Yes — midline tenderness present', points: 1 },
+            ],
+        },
+        {
+            name: 'neuro',
+            label: 'Focal neurologic deficit?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No focal deficit', points: 0 },
+                { label: 'Yes — focal deficit present', points: 1 },
+            ],
+        },
+        {
+            name: 'alertness',
+            label: 'Altered alertness?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal alertness', points: 0 },
+                { label: 'Yes — altered alertness', points: 1 },
+            ],
+        },
+        {
+            name: 'intoxication',
+            label: 'Intoxication?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not intoxicated', points: 0 },
+                { label: 'Yes — intoxicated', points: 1 },
+            ],
+        },
+        {
+            name: 'distraction',
+            label: 'Painful distracting injury?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No distracting injury', points: 0 },
+                { label: 'Yes — painful distracting injury', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'All 5 criteria must be met (score = 0) to clear clinically. NEXUS sensitivity 94% — consider CCR for higher sensitivity.',
+    citations: [
+        'Hoffman JR, et al. NEJM. 2000;343(2):94-9.',
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((sum, v) => sum + (v || 0), 0);
+        if (score === 0) {
+            return {
+                value: 'CLEAR',
+                label: 'All criteria met — Clinical clearance',
+                description: '**C-Spine Clinically Cleared by NEXUS**\n\n✅ No midline tenderness\n✅ No focal neurologic deficit\n✅ Normal alertness\n✅ Not intoxicated\n✅ No distracting injury\n\n→ Remove collar\n→ Discharge with precautions\n\n⚠️ Note: NEXUS sensitivity 94% — less sensitive than CCR (99%)',
+                colorVar: '--color-success',
+            };
+        }
+        return {
+            value: 'IMAGE',
+            label: `${score} criterion/criteria not met — Imaging required`,
+            description: '**Imaging Required**\n\nOne or more NEXUS criteria not met.\n\n→ **Order CT C-spine** (occiput to T1)',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const CSPINE_SLIC_CALCULATOR = {
+    id: 'cspine-slic',
+    title: 'SLIC Score',
+    subtitle: 'Subaxial Injury Classification',
+    description: 'Subaxial Cervical Spine Injury Classification (SLIC) score guides surgical vs conservative management for C3-C7 injuries.',
+    fields: [
+        {
+            name: 'morphology',
+            label: 'Injury morphology',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No abnormality', points: 0 },
+                { label: 'Compression fracture', points: 1 },
+                { label: 'Burst fracture', points: 2 },
+                { label: 'Distraction', points: 3 },
+                { label: 'Rotation/Translation', points: 4 },
+            ],
+        },
+        {
+            name: 'dlc',
+            label: 'Disco-ligamentous complex (DLC)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Intact', points: 0 },
+                { label: 'Indeterminate', points: 1 },
+                { label: 'Disrupted', points: 2 },
+            ],
+        },
+        {
+            name: 'neuro',
+            label: 'Neurologic status',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Intact', points: 0 },
+                { label: 'Root injury', points: 1 },
+                { label: 'Complete cord injury', points: 2 },
+                { label: 'Incomplete cord injury', points: 3 },
+            ],
+        },
+        {
+            name: 'compression',
+            label: 'Continuous cord compression?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes — with neuro deficit', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Score 1-3: Conservative. Score 4: Surgeon discretion. Score ≥5: Surgical.',
+    citations: [
+        'Vaccaro AR, et al. Spine. 2007;32(21):2365-74.',
+    ],
+    computeResult: (values) => {
+        const score = Object.values(values).reduce((sum, v) => sum + (v || 0), 0);
+        if (score >= 5) {
+            return {
+                value: score.toString(),
+                label: 'SLIC ≥5 — Surgical stabilization',
+                description: `**SLIC Score: ${score}**\n\n🔴 **Surgical stabilization recommended**\n\n→ Consult spine surgery urgently\n→ Maintain collar immobilization\n→ Monitor neuro status closely`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score === 4) {
+            return {
+                value: score.toString(),
+                label: 'SLIC 4 — Surgeon discretion',
+                description: `**SLIC Score: ${score}**\n\n⚠️ **Management at surgeon discretion**\n\nConsider:\n• Patient factors (age, comorbidities)\n• Specific injury pattern\n• MRI findings\n\n→ Consult spine surgery`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: score.toString(),
+            label: 'SLIC 1-3 — Conservative management',
+            description: `**SLIC Score: ${score}**\n\n✅ **Conservative management appropriate**\n\n→ Rigid cervical collar\n→ Follow-up imaging\n→ Spine surgery follow-up`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const CSPINE_ODONTOID_CALCULATOR = {
+    id: 'cspine-odontoid-class',
+    title: 'Odontoid Classification',
+    subtitle: 'Anderson-D\'Alonzo types',
+    description: 'Classification and management of odontoid (dens) fractures based on Anderson-D\'Alonzo system.',
+    fields: [
+        {
+            name: 'type',
+            label: 'Fracture type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Type I — tip avulsion', points: 1 },
+                { label: 'Type II — base of dens', points: 2 },
+                { label: 'Type IIA — comminuted base', points: 3 },
+                { label: 'Type III — extends into C2 body', points: 4 },
+            ],
+        },
+        {
+            name: 'displacement',
+            label: 'Displacement (Type II)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not applicable / minimal', points: 0 },
+                { label: '<5mm displacement', points: 0 },
+                { label: '≥5mm displacement', points: 1 },
+            ],
+        },
+        {
+            name: 'age',
+            label: 'Patient age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<65 years', points: 0 },
+                { label: '≥65 years', points: 1 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Type II is most common and has highest nonunion rate. Elderly patients have worse outcomes.',
+    citations: [
+        'Anderson LD, D\'Alonzo RT. J Bone Joint Surg Am. 1974;56(8):1663-74.',
+    ],
+    computeResult: (values) => {
+        const type = values['type'] || 0;
+        const displacement = values['displacement'] || 0;
+        const age = values['age'] || 0;
+        if (type === 1) {
+            return {
+                value: 'TYPE I',
+                label: 'Type I — Tip avulsion — Usually stable',
+                description: '**Type I Odontoid Fracture**\n\nAvulsion fracture above the transverse ligament.\n\n**Treatment:**\nRigid cervical collar\n\n**Prognosis:**\nGenerally stable, good healing',
+                colorVar: '--color-primary',
+            };
+        }
+        if (type === 2) {
+            let rec = '**Type II Odontoid Fracture**\n\nFracture through the base of the dens.\n\n**Most common type — highest nonunion rate**\n\n';
+            if (displacement === 1 || age === 1) {
+                rec += '**Surgical fixation recommended:**\n';
+                if (displacement === 1)
+                    rec += '• Displacement ≥5mm\n';
+                if (age === 1)
+                    rec += '• Age ≥65 (22% mortality at 2 years in elderly)\n';
+                return {
+                    value: 'TYPE II',
+                    label: 'Type II — Surgery likely indicated',
+                    description: rec + '\n**Options:**\n• Anterior odontoid screw\n• Posterior C1-C2 fusion',
+                    colorVar: '--color-danger',
+                };
+            }
+            return {
+                value: 'TYPE II',
+                label: 'Type II — Non-displaced — Collar or halo',
+                description: rec + '**Treatment Options:**\n• Rigid collar 8-12 weeks\n• Halo immobilization\n\n**Surgery if:**\n• Displacement >5mm\n• Angulation >10°\n• Gap >2mm\n• Nonunion',
+                colorVar: '--color-warning',
+            };
+        }
+        if (type === 3) {
+            return {
+                value: 'TYPE IIA',
+                label: 'Type IIA — Comminuted — Usually surgical',
+                description: '**Type IIA Odontoid Fracture**\n\nComminuted fracture at base of dens.\n\n**Treatment:**\nUsually requires surgical fixation due to instability and comminution.',
+                colorVar: '--color-danger',
+            };
+        }
+        if (type === 4) {
+            return {
+                value: 'TYPE III',
+                label: 'Type III — Into C2 body — Usually stable',
+                description: '**Type III Odontoid Fracture**\n\nFracture extends into C2 vertebral body.\n\n**Treatment:**\nUsually rigid collar — larger cancellous surface heals well\n\n**Surgery if:**\n• Significant displacement\n• Nonunion',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select fracture type',
+            description: 'Choose the fracture type for management guidance.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const CSPINE_HANGMAN_CALCULATOR = {
+    id: 'cspine-hangman-class',
+    title: 'Hangman\'s Classification',
+    subtitle: 'Levine-Edwards types',
+    description: 'Classification and management of Hangman\'s fractures (C2 pars interarticularis) based on Levine-Edwards system.',
+    fields: [
+        {
+            name: 'type',
+            label: 'Fracture type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Type I — <3mm subluxation, intact disc', points: 1 },
+                { label: 'Type II — >4mm subluxation, disc disruption', points: 2 },
+                { label: 'Type IIa — Flexion injury, angulation', points: 3 },
+                { label: 'Type III — Bilateral facet dislocation', points: 4 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '⚠️ Type IIa: NO TRACTION — flexion injury worsens with distraction',
+    citations: [
+        'Levine AM, Edwards CC. J Bone Joint Surg Am. 1985;67(2):217-26.',
+    ],
+    computeResult: (values) => {
+        const type = values['type'] || 0;
+        if (type === 1) {
+            return {
+                value: 'TYPE I',
+                label: 'Type I — Rigid collar 6-12 weeks',
+                description: '**Type I Hangman\'s Fracture**\n\n<3mm subluxation, intact C2-C3 disc.\n\n**Treatment:**\nRigid cervical collar 6-12 weeks\n\n**Prognosis:**\n90% fusion rate with conservative treatment',
+                colorVar: '--color-primary',
+            };
+        }
+        if (type === 2) {
+            return {
+                value: 'TYPE II',
+                label: 'Type II — Traction reduction, halo vs surgery',
+                description: '**Type II Hangman\'s Fracture**\n\n>4mm subluxation, >11° angulation, disc disruption.\n\n**Treatment:**\n1. Cervical traction for reduction\n2. Halo immobilization, OR\n3. Surgical fixation\n\n**Prognosis:**\nGood with appropriate treatment',
+                colorVar: '--color-warning',
+            };
+        }
+        if (type === 3) {
+            return {
+                value: 'TYPE IIa',
+                label: 'TYPE IIa — ⚠️ NO TRACTION',
+                description: '**Type IIa Hangman\'s Fracture**\n\nMinimal translation, significant angulation, FLEXION injury.\n\n🔴 **DO NOT APPLY TRACTION**\n\nThis is a flexion injury — traction will worsen displacement!\n\n**Treatment:**\nHalo immobilization (not traction)',
+                colorVar: '--color-danger',
+            };
+        }
+        if (type === 4) {
+            return {
+                value: 'TYPE III',
+                label: 'Type III — Surgical fixation required',
+                description: '**Type III Hangman\'s Fracture**\n\nBilateral facet dislocation with C2-C3.\n\n**Treatment:**\nSurgical fixation required\n\nHighly unstable injury pattern.',
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select fracture type',
+            description: 'Choose the fracture type for management guidance.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 const BISAP_CALCULATOR = {
@@ -28458,6 +29279,18 @@ const CALCULATORS = {
     'bh-side-selector': BH_SIDE_SELECTOR_CALCULATOR,
     'bh-landmark-guide': BH_LANDMARK_GUIDE_CALCULATOR,
     'bh-procedure-checklist': BH_PROCEDURE_CHECKLIST_CALCULATOR,
+    // RV Assessment (Pre-Intubation)
+    'rv-risk-assessment': RV_RISK_ASSESSMENT_CALCULATOR,
+    'rv-echo-interpreter': RV_ECHO_INTERPRETER_CALCULATOR,
+    'rv-tapse': RV_TAPSE_CALCULATOR,
+    'rv-hemodynamic-calc': RV_HEMODYNAMIC_CALCULATOR,
+    'rv-push-dose-calc': RV_PUSH_DOSE_CALCULATOR,
+    // Cervical Spine Injuries
+    'cspine-ccr': CSPINE_CCR_CALCULATOR,
+    'cspine-nexus': CSPINE_NEXUS_CALCULATOR,
+    'cspine-slic': CSPINE_SLIC_CALCULATOR,
+    'cspine-odontoid-class': CSPINE_ODONTOID_CALCULATOR,
+    'cspine-hangman-class': CSPINE_HANGMAN_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

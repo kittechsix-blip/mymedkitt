@@ -188,6 +188,8 @@ const TREE_REGISTRY = {
   'multiple-sclerosis':  { prefix: 'MULTIPLE_SCLEROSIS',   entryNodeId: 'ms-start',           categoryId: 'neurology' },
   'tetanus':             { prefix: 'TETANUS',              entryNodeId: 'tet-start',          categoryId: 'infectious-disease' },
   'burr-hole':           { prefix: 'BURR_HOLE',            entryNodeId: 'bh-start',           categoryId: 'procedures' },
+  'rv-assessment':       { prefix: 'RV_ASSESSMENT',        entryNodeId: 'rv-start',           categoryId: 'anesthesia-airway' },
+  'cervical-spine':      { prefix: 'CERVICAL_SPINE',       entryNodeId: 'cspine-start',       categoryId: 'trauma-surg' },
 };
 
 // Cross-listing: which consults appear in multiple categories

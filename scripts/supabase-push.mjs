@@ -244,6 +244,8 @@ const TREE_REGISTRY = {
   'lumbar-puncture':     { prefix: 'LUMBAR_PUNCTURE',      entryNodeId: 'lp-start',           categoryId: 'procedures' },
   'multiple-sclerosis':  { prefix: 'MULTIPLE_SCLEROSIS',   entryNodeId: 'ms-start',           categoryId: 'neurology' },
   'burr-hole':           { prefix: 'BURR_HOLE',            entryNodeId: 'bh-start',           categoryId: 'procedures' },
+  'rv-assessment':       { prefix: 'RV_ASSESSMENT',        entryNodeId: 'rv-start',           categoryId: 'anesthesia-airway' },
+  'cervical-spine':      { prefix: 'CERVICAL_SPINE',       entryNodeId: 'cspine-start',       categoryId: 'trauma-surg' },
 };
 
 const CROSS_LISTINGS = {

@@ -1072,6 +1072,26 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'landmarks', label: 'Landmarks', icon: '📍', action: 'calculator', target: 'bh-landmark-guide' },
     { id: 'checklist', label: 'Checklist', icon: '✅', action: 'calculator', target: 'bh-procedure-checklist' },
   ],
+  // ---------------------------------------------------------------
+  // Pre-Intubation RV Assessment
+  // ---------------------------------------------------------------
+  'rv-assessment': [
+    { id: 'risk', label: 'RV Risk', icon: '⚠️', action: 'calculator', target: 'rv-risk-assessment' },
+    { id: 'echo', label: 'Echo Interp', icon: '🫀', action: 'calculator', target: 'rv-echo-interpreter' },
+    { id: 'tapse', label: 'TAPSE', icon: '📏', action: 'calculator', target: 'rv-tapse' },
+    { id: 'hemodynamics', label: 'HD Goals', icon: '📊', action: 'calculator', target: 'rv-hemodynamic-calc' },
+    { id: 'push-dose', label: 'Push-Dose', icon: '💉', action: 'calculator', target: 'rv-push-dose-calc' },
+  ],
+  // ---------------------------------------------------------------
+  // Cervical Spine Injuries
+  // ---------------------------------------------------------------
+  'cervical-spine': [
+    { id: 'ccr', label: 'C-Spine Rule', icon: '📋', action: 'calculator', target: 'cspine-ccr' },
+    { id: 'nexus', label: 'NEXUS', icon: '✓', action: 'calculator', target: 'cspine-nexus' },
+    { id: 'slic', label: 'SLIC Score', icon: '📊', action: 'calculator', target: 'cspine-slic' },
+    { id: 'odontoid', label: 'Odontoid', icon: '🦴', action: 'calculator', target: 'cspine-odontoid-class' },
+    { id: 'hangman', label: 'Hangman', icon: '⚠️', action: 'calculator', target: 'cspine-hangman-class' },
+  ],
 };
 
 // Stop button appended automatically to every consult

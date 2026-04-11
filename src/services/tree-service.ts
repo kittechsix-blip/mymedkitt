@@ -329,6 +329,8 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'lumbar-puncture': async () => (await import('../data/trees/lumbar-puncture.js')).LUMBAR_PUNCTURE_CRITICAL_ACTIONS,
     'multiple-sclerosis': async () => (await import('../data/trees/multiple-sclerosis.js')).MULTIPLE_SCLEROSIS_CRITICAL_ACTIONS,
     'burr-hole': async () => (await import('../data/trees/burr-hole.js')).BURR_HOLE_CRITICAL_ACTIONS,
+    'rv-assessment': async () => (await import('../data/trees/rv-assessment.js')).RV_ASSESSMENT_CRITICAL_ACTIONS,
+    'cervical-spine': async () => (await import('../data/trees/cervical-spine.js')).CERVICAL_SPINE_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -995,6 +997,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'burr-hole': async () => {
       const m = await import('../data/trees/burr-hole.js');
       return { nodes: m.BURR_HOLE_NODES, entryNodeId: 'bh-start', categoryId: 'procedures', moduleLabels: m.BURR_HOLE_MODULE_LABELS, citations: m.BURR_HOLE_CITATIONS, criticalActions: m.BURR_HOLE_CRITICAL_ACTIONS };
+    },
+    'rv-assessment': async () => {
+      const m = await import('../data/trees/rv-assessment.js');
+      return { nodes: m.RV_ASSESSMENT_NODES, entryNodeId: 'rv-start', categoryId: 'anesthesia-airway', moduleLabels: m.RV_ASSESSMENT_MODULE_LABELS, citations: m.RV_ASSESSMENT_CITATIONS, criticalActions: m.RV_ASSESSMENT_CRITICAL_ACTIONS };
+    },
+    'cervical-spine': async () => {
+      const m = await import('../data/trees/cervical-spine.js');
+      return { nodes: m.CERVICAL_SPINE_NODES, entryNodeId: 'cspine-start', categoryId: 'trauma-surg', moduleLabels: m.CERVICAL_SPINE_MODULE_LABELS, citations: m.CERVICAL_SPINE_CITATIONS, criticalActions: m.CERVICAL_SPINE_CRITICAL_ACTIONS };
     },
   };
 

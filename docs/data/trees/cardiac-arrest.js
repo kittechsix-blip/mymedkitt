@@ -308,7 +308,7 @@ export const CARDIAC_ARREST_CITATIONS = [
     { num: 2, text: 'IBCC (Internet Book of Critical Care). PEA, post-cardiac arrest care. emcrit.org/ibcc.' },
     { num: 3, text: 'First10EM (Justin Morgenstern). Cardiac arrest pearls. first10em.com.' },
     { num: 4, text: 'Taming the SRU. POCUS in arrest, RUSH exam. tamingthesru.com.' },
-    { num: 5, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+    { num: 5, text: 'American Heart Association. 2025 AHA Guidelines for CPR and ECC: Adult Advanced Life Support. Circulation. 2025.' },
     { num: 6, text: 'Soar J et al. ERC Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
     { num: 7, text: 'Perkins GD et al. ERC Guidelines 2021: Executive Summary. Resuscitation. 2021;161:1-60.' },
     { num: 8, text: 'Neumar RW et al. Part 8: Adult ACLS. Circulation. 2010.' },
