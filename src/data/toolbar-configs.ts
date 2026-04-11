@@ -1108,6 +1108,23 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'brady', label: 'Brady Protocol', icon: '🫀', action: 'calculator', target: 'neuro-shock-brady-protocol' },
     { id: 'map', label: 'MAP Goals', icon: '📊', action: 'calculator', target: 'neuro-shock-map-calc' },
   ],
+  // ---------------------------------------------------------------
+  // Cauda Equina Syndrome
+  // ---------------------------------------------------------------
+  'cauda-equina': [
+    { id: 'screen', label: 'CES Screen', icon: '🚨', action: 'calculator', target: 'ces-screening' },
+    { id: 'pvr', label: 'PVR Check', icon: '🔍', action: 'calculator', target: 'ces-pvr' },
+    { id: 'timing', label: 'Surgery Time', icon: '⏱️', action: 'calculator', target: 'ces-timing' },
+  ],
+  // ---------------------------------------------------------------
+  // Brain Herniation Syndromes
+  // ---------------------------------------------------------------
+  'brain-herniation': [
+    { id: 'icp', label: 'ICP/CPP', icon: '🧠', action: 'calculator', target: 'hern-icp' },
+    { id: 'cushing', label: 'Cushing', icon: '⚠️', action: 'calculator', target: 'hern-cushing' },
+    { id: 'mannitol', label: 'Mannitol', icon: '💉', action: 'calculator', target: 'hern-mannitol-dose' },
+    { id: 'hts', label: 'HTS Dose', icon: '🧪', action: 'calculator', target: 'hern-hts-dose' },
+  ],
 };
 
 // Stop button appended automatically to every consult

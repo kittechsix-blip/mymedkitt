@@ -248,6 +248,8 @@ const TREE_REGISTRY = {
   'rv-assessment':       { prefix: 'RV_ASSESSMENT',        entryNodeId: 'rv-start',           categoryId: 'anesthesia-airway' },
   'cervical-spine':      { prefix: 'CERVICAL_SPINE',       entryNodeId: 'cspine-start',       categoryId: 'trauma-surg' },
   'neurogenic-shock':    { prefix: 'NEUROGENIC_SHOCK',     entryNodeId: 'neuro-shock-start',  categoryId: 'trauma-surg' },
+  'cauda-equina':        { prefix: 'CAUDA_EQUINA',         entryNodeId: 'ces-start',          categoryId: 'trauma-surg' },
+  'brain-herniation':    { prefix: 'BRAIN_HERNIATION',     entryNodeId: 'hern-start',         categoryId: 'trauma-surg' },
 };
 
 const CROSS_LISTINGS = {

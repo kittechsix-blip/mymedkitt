@@ -1015,6 +1015,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/neurogenic-shock.js');
       return { nodes: m.NEUROGENIC_SHOCK_NODES, entryNodeId: 'neuro-shock-start', categoryId: 'trauma-surg', moduleLabels: m.NEUROGENIC_SHOCK_MODULE_LABELS, citations: m.NEUROGENIC_SHOCK_CITATIONS, criticalActions: m.NEUROGENIC_SHOCK_CRITICAL_ACTIONS };
     },
+    'cauda-equina': async () => {
+      const m = await import('../data/trees/cauda-equina.js');
+      return { nodes: m.CAUDA_EQUINA_NODES, entryNodeId: 'ces-start', categoryId: 'trauma-surg', moduleLabels: m.CAUDA_EQUINA_MODULE_LABELS, citations: m.CAUDA_EQUINA_CITATIONS, criticalActions: m.CAUDA_EQUINA_CRITICAL_ACTIONS };
+    },
+    'brain-herniation': async () => {
+      const m = await import('../data/trees/brain-herniation.js');
+      return { nodes: m.BRAIN_HERNIATION_NODES, entryNodeId: 'hern-start', categoryId: 'trauma-surg', moduleLabels: m.BRAIN_HERNIATION_MODULE_LABELS, citations: m.BRAIN_HERNIATION_CITATIONS, criticalActions: m.BRAIN_HERNIATION_CRITICAL_ACTIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

@@ -20225,6 +20225,501 @@ const NEURO_SHOCK_MAP_CALCULATOR = {
     },
 };
 // =====================================================================
+// CAUDA EQUINA SYNDROME CALCULATORS
+// =====================================================================
+const CES_SCREENING_CALCULATOR = {
+    id: 'ces-screening',
+    title: 'CES Red Flag Screen',
+    subtitle: 'Cauda equina risk stratification',
+    description: 'Screen back pain patients for cauda equina syndrome red flags.',
+    fields: [
+        {
+            name: 'bilateral',
+            label: 'Bilateral leg symptoms',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No — unilateral only', points: 0 },
+                { label: 'Yes — bilateral weakness or sciatica', points: 2 },
+            ],
+        },
+        {
+            name: 'saddle',
+            label: 'Saddle anesthesia',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No — normal perineal sensation', points: 0 },
+                { label: 'Yes — numbness perineum/genitals', points: 2 },
+            ],
+        },
+        {
+            name: 'bladder',
+            label: 'Bladder dysfunction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No — normal voiding', points: 0 },
+                { label: 'Difficulty voiding, weak stream', points: 1 },
+                { label: 'Retention or incontinence', points: 2 },
+            ],
+        },
+        {
+            name: 'bowel',
+            label: 'Bowel dysfunction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No — normal', points: 0 },
+                { label: 'Yes — incontinence or loss of sensation', points: 2 },
+            ],
+        },
+        {
+            name: 'rectal',
+            label: 'Rectal tone',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal tone', points: 0 },
+                { label: 'Reduced or absent', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: '',
+    citations: ['GIRFT Cauda Equina Syndrome Pathway. NHS England. 2023.'],
+    computeResult(values) {
+        const score = (values.bilateral || 0) + (values.saddle || 0) + (values.bladder || 0) + (values.bowel || 0) + (values.rectal || 0);
+        if (score >= 4) {
+            return {
+                value: 'HIGH',
+                label: 'HIGH SUSPICION — Emergent MRI',
+                description: '**HIGH SUSPICION FOR CES**\n\n**Immediate actions:**\n• MRI lumbar spine within 4 hours\n• Call neurosurgery NOW\n• Place Foley, document sensation\n• NPO for potential surgery\n\n**Do NOT delay imaging or consultation.**',
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= 2) {
+            return {
+                value: 'INTERMEDIATE',
+                label: 'INTERMEDIATE — Urgent workup',
+                description: '**INTERMEDIATE SUSPICION**\n\n**Actions:**\n• Urgent MRI (same day)\n• Detailed neuro exam\n• Check post-void residual\n• Serial exams q2-4h\n• Low threshold for neurosurgery consult',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'LOW',
+            label: 'LOW SUSPICION — Outpatient',
+            description: '**LOW SUSPICION**\n\n• Likely safe for outpatient management\n• Provide written red flag precautions\n• Return if: saddle numbness, bladder/bowel changes, bilateral weakness\n• Spine clinic follow-up if persistent',
+            colorVar: '--color-success',
+        };
+    },
+};
+const CES_PVR_CALCULATOR = {
+    id: 'ces-pvr',
+    title: 'PVR Interpretation',
+    subtitle: 'Post-void residual in CES',
+    description: 'Interpret post-void residual bladder scan results in suspected CES.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Bell DA, et al. Cauda equina syndrome: A review of the current clinical and medicolegal position. Eur Spine J. 2007;16(2):169-177.'],
+    fields: [
+        {
+            name: 'pvr',
+            label: 'Post-Void Residual (mL)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<100 mL', points: 0 },
+                { label: '100-200 mL', points: 1 },
+                { label: '200-500 mL', points: 2 },
+                { label: '>500 mL', points: 3 },
+            ],
+        },
+        {
+            name: 'bilateral',
+            label: 'Bilateral sciatica?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No', points: 0 },
+                { label: 'Yes', points: 1 },
+            ],
+        },
+        {
+            name: 'symptoms',
+            label: 'Urinary symptoms?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Difficulty voiding or weak stream', points: 1 },
+                { label: 'Retention symptoms', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const pvr = values.pvr || 0;
+        const bilateral = values.bilateral || 0;
+        const symptoms = values.symptoms || 0;
+        if (pvr >= 3 && bilateral >= 1) {
+            return {
+                value: '48x',
+                label: 'PVR >500 + bilateral = 48x odds CES',
+                description: '**VERY HIGH PROBABILITY CES**\n\n• PVR >500 mL with bilateral sciatica: **48x odds ratio**\n• Emergent MRI\n• Call neurosurgery STAT\n• This constellation is near-diagnostic',
+                colorVar: '--color-critical',
+            };
+        }
+        if (pvr >= 2) {
+            return {
+                value: '43%',
+                label: 'PVR 200-500 mL = 43% probability CES',
+                description: '**ELEVATED PVR — CONCERNING**\n\n• PVR >200 mL: 43% probability of CES\n• Urgent MRI indicated\n• Neurosurgery consultation\n• Complete neuro exam',
+                colorVar: '--color-warning',
+            };
+        }
+        if (pvr <= 1 && (bilateral >= 1 || symptoms >= 1)) {
+            return {
+                value: 'CAUTION',
+                label: 'Low PVR but symptoms — still concern',
+                description: '**⚠️ LOW PVR DOES NOT EXCLUDE CES**\n\n• 50% of CES-Incomplete have PVR <200 mL\n• If bilateral symptoms or urinary complaints: still workup\n• Do NOT use PVR alone to exclude CES\n• Consider MRI based on clinical picture',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'NPV 97%',
+            label: 'Low PVR + no symptoms = reassuring',
+            description: '**REASSURING PVR**\n\n• PVR <200 mL: NPV 97% for CES\n• If no bilateral symptoms and normal exam\n• Lower suspicion for CES\n• BUT: still provide red flag precautions on discharge',
+            colorVar: '--color-success',
+        };
+    },
+};
+const CES_TIMING_CALCULATOR = {
+    id: 'ces-timing',
+    title: 'Surgery Timing',
+    subtitle: 'CES surgical urgency',
+    description: 'Determine surgical timing based on CES classification.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Ahn UM, et al. Cauda equina syndrome secondary to lumbar disc herniation: a meta-analysis of surgical outcomes. Spine. 2000;25(12):1515-1522.'],
+    fields: [
+        {
+            name: 'type',
+            label: 'CES Classification',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'CES-Incomplete: difficulty voiding but CAN void', points: 1 },
+                { label: 'CES-Retention: painless retention, overflow', points: 2 },
+            ],
+        },
+        {
+            name: 'duration',
+            label: 'Symptom duration',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<24 hours', points: 0 },
+                { label: '24-48 hours', points: 1 },
+                { label: '>48 hours', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const type = values.type || 0;
+        const duration = values.duration || 0;
+        if (type === 1) {
+            return {
+                value: '<24h',
+                label: 'CES-Incomplete: Surgery <24 hours',
+                description: '**CES-INCOMPLETE = TRUE EMERGENCY**\n\n• Goal: Prevent progression to CES-Retention\n• Surgery within **<24 hours** strongly recommended\n• Better prognosis than CES-R\n• Bladder function at surgery = strongest predictor of recovery\n\n**Do NOT delay — this is time-sensitive!**',
+                colorVar: '--color-critical',
+            };
+        }
+        if (type === 2 && duration <= 1) {
+            return {
+                value: 'Urgent',
+                label: 'CES-Retention: Urgent surgery',
+                description: '**CES-RETENTION**\n\n• Damage may already be permanent\n• Surgery still indicated but less time-critical than CES-I\n• As soon as reasonably possible\n• Optimized surgical conditions acceptable\n• More guarded prognosis for bladder recovery',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'Guarded',
+            label: 'CES-Retention >48h: Guarded prognosis',
+            description: '**DELAYED CES-RETENTION**\n\n• >48 hours: significantly worse outcomes\n• Surgery still indicated\n• Permanent deficits likely\n• Discuss realistic expectations with patient/family',
+            colorVar: '--color-warning',
+        };
+    },
+};
+// =====================================================================
+// BRAIN HERNIATION CALCULATORS
+// =====================================================================
+const HERN_ICP_CALCULATOR = {
+    id: 'hern-icp',
+    title: 'ICP/CPP Calculator',
+    subtitle: 'Cerebral perfusion pressure',
+    description: 'Calculate cerebral perfusion pressure from MAP and ICP.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Carney N, et al. Guidelines for the Management of Severe Traumatic Brain Injury. Brain Trauma Foundation. 4th Ed. 2016.'],
+    fields: [
+        {
+            name: 'sbp',
+            label: 'Systolic BP (mmHg)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<90', points: 70 },
+                { label: '90-100', points: 75 },
+                { label: '100-120', points: 85 },
+                { label: '120-140', points: 95 },
+                { label: '140-160', points: 105 },
+                { label: '>160', points: 115 },
+            ],
+        },
+        {
+            name: 'dbp',
+            label: 'Diastolic BP (mmHg)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<50', points: 45 },
+                { label: '50-60', points: 55 },
+                { label: '60-80', points: 70 },
+                { label: '80-90', points: 85 },
+                { label: '>90', points: 95 },
+            ],
+        },
+        {
+            name: 'icp',
+            label: 'ICP (mmHg) if known',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Unknown/Not monitored', points: 15 },
+                { label: '<15 (normal)', points: 10 },
+                { label: '15-20 (elevated)', points: 18 },
+                { label: '20-25 (high)', points: 22 },
+                { label: '25-40 (severe)', points: 32 },
+                { label: '>40 (critical)', points: 45 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const sbp = values.sbp || 85;
+        const dbp = values.dbp || 70;
+        const icp = values.icp || 15;
+        const map = Math.round(dbp + (sbp - dbp) / 3);
+        const cpp = map - icp;
+        if (cpp < 50) {
+            return {
+                value: `${cpp}`,
+                label: `CPP ~${cpp} mmHg — CRITICAL`,
+                description: `**MAP:** ~${map} mmHg\n**ICP:** ~${icp} mmHg\n**CPP:** ~${cpp} mmHg\n\n🚨 **CRITICAL — CPP <50**\n\n• Cerebral ischemia imminent\n• Increase MAP urgently (vasopressors)\n• Reduce ICP (osmolar therapy)\n• Target CPP >60 mmHg`,
+                colorVar: '--color-critical',
+            };
+        }
+        if (cpp < 60) {
+            return {
+                value: `${cpp}`,
+                label: `CPP ~${cpp} mmHg — BELOW TARGET`,
+                description: `**MAP:** ~${map} mmHg\n**ICP:** ~${icp} mmHg\n**CPP:** ~${cpp} mmHg\n\n⚠️ **Below goal — target CPP >60**\n\n• Optimize MAP (goal >80)\n• ICP reduction strategies\n• Close monitoring`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (cpp <= 70) {
+            return {
+                value: `${cpp}`,
+                label: `CPP ~${cpp} mmHg — ON TARGET`,
+                description: `**MAP:** ~${map} mmHg\n**ICP:** ~${icp} mmHg\n**CPP:** ~${cpp} mmHg\n\n✅ **CPP 60-70 = Optimal range**\n\n• Maintain current therapy\n• Continue monitoring\n• Avoid both hypotension and hypertension`,
+                colorVar: '--color-success',
+            };
+        }
+        return {
+            value: `${cpp}`,
+            label: `CPP ~${cpp} mmHg — Adequate`,
+            description: `**MAP:** ~${map} mmHg\n**ICP:** ~${icp} mmHg\n**CPP:** ~${cpp} mmHg\n\n• CPP adequate (>70)\n• If ICP elevated despite adequate CPP, treat ICP\n• Avoid excessive hypertension`,
+            colorVar: '--color-success',
+        };
+    },
+};
+const HERN_CUSHING_CALCULATOR = {
+    id: 'hern-cushing',
+    title: 'Cushing Triad Check',
+    subtitle: 'Herniation warning signs',
+    description: 'Assess for Cushing triad indicating imminent herniation.',
+    results: [],
+    thresholdNote: '',
+    citations: ['StatPearls. Brain Herniation. NCBI Bookshelf. 2024.'],
+    fields: [
+        {
+            name: 'htn',
+            label: 'Hypertension',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'SBP <160', points: 0 },
+                { label: 'SBP 160-180', points: 1 },
+                { label: 'SBP >180 or severe', points: 2 },
+            ],
+        },
+        {
+            name: 'brady',
+            label: 'Bradycardia',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'HR >60', points: 0 },
+                { label: 'HR 50-60', points: 1 },
+                { label: 'HR <50 or new bradycardia', points: 2 },
+            ],
+        },
+        {
+            name: 'resp',
+            label: 'Respiratory pattern',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal', points: 0 },
+                { label: 'Cheyne-Stokes or irregular', points: 1 },
+                { label: 'Ataxic/agonal or apnea', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const htn = values.htn || 0;
+        const brady = values.brady || 0;
+        const resp = values.resp || 0;
+        const score = htn + brady + resp;
+        if (score >= 4 || (htn >= 2 && brady >= 2)) {
+            return {
+                value: 'CUSHING',
+                label: 'CUSHING TRIAD — IMMINENT HERNIATION',
+                description: '🚨 **CUSHING TRIAD PRESENT**\n\n**This indicates:**\n• Medullary compression\n• Imminent or active herniation\n• Requires IMMEDIATE intervention\n\n**Actions NOW:**\n1. Hyperosmolar therapy STAT\n2. Hyperventilation as bridge\n3. Call neurosurgery STAT\n4. Prepare for emergency craniotomy',
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= 2) {
+            return {
+                value: 'CONCERNING',
+                label: 'Partial Cushing — Concerning',
+                description: '⚠️ **Partial Cushing Response**\n\n• Some but not all triad elements\n• May indicate early/impending herniation\n• Close monitoring required\n• Low threshold for intervention\n• Consider preemptive osmolar therapy',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'ABSENT',
+            label: 'No Cushing triad',
+            description: '**Cushing Triad NOT Present**\n\n• Does not exclude elevated ICP\n• Cushing is a LATE sign\n• Continue monitoring\n• Watch for pupil changes, posturing',
+            colorVar: '--color-success',
+        };
+    },
+};
+const HERN_MANNITOL_CALCULATOR = {
+    id: 'hern-mannitol-dose',
+    title: 'Mannitol Dosing',
+    subtitle: 'ICP reduction',
+    description: 'Calculate mannitol 20% dose for ICP reduction.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Cook AM, et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients. Neurocrit Care. 2020;32(3):647-666.'],
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient weight',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '40-50 kg', points: 45 },
+                { label: '50-60 kg', points: 55 },
+                { label: '60-70 kg', points: 65 },
+                { label: '70-80 kg', points: 75 },
+                { label: '80-90 kg', points: 85 },
+                { label: '90-100 kg', points: 95 },
+                { label: '>100 kg', points: 100 },
+            ],
+        },
+        {
+            name: 'severity',
+            label: 'Clinical severity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Moderate (ICP elevation, responsive)', points: 5 },
+                { label: 'Severe (herniation signs)', points: 10 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const weight = values.weight || 70;
+        const severity = values.severity || 5;
+        const dosePerKg = severity >= 10 ? 1.0 : 0.5;
+        const totalGrams = Math.round(weight * dosePerKg);
+        const volumeML = Math.round(totalGrams * 5); // 20% = 0.2 g/mL = 5 mL/g
+        return {
+            value: `${totalGrams}g`,
+            label: `Mannitol 20%: ${totalGrams}g (${volumeML} mL)`,
+            description: `**Mannitol 20% Dosing**\n\n• **Dose:** ${dosePerKg} g/kg × ${weight} kg = **${totalGrams} g**\n• **Volume:** ${volumeML} mL of 20% mannitol\n• **Rate:** Over 15-20 minutes\n\n**Monitoring:**\n• Serum osmolarity (hold if >320)\n• Urine output (expect diuresis)\n• Blood pressure\n• Repeat q6h PRN (0.25-0.5 g/kg)\n\n**Onset:** 15-30 min | **Duration:** ~90 min`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const HERN_HTS_CALCULATOR = {
+    id: 'hern-hts-dose',
+    title: 'Hypertonic Saline Dosing',
+    subtitle: 'ICP reduction',
+    description: 'Calculate hypertonic saline dose for ICP reduction.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Shi J, et al. Hypertonic saline and mannitol in patients with traumatic brain injury: A systematic review and meta-analysis. Medicine. 2020;99(35):e21655.'],
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient weight',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '40-50 kg', points: 45 },
+                { label: '50-60 kg', points: 55 },
+                { label: '60-70 kg', points: 65 },
+                { label: '70-80 kg', points: 75 },
+                { label: '80-90 kg', points: 85 },
+                { label: '90-100 kg', points: 95 },
+                { label: '>100 kg', points: 100 },
+            ],
+        },
+        {
+            name: 'concentration',
+            label: 'Available concentration',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '3% NaCl (peripheral OK)', points: 3 },
+                { label: '23.4% NaCl (central line)', points: 23 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const weight = values.weight || 70;
+        const conc = values.concentration || 3;
+        if (conc === 3) {
+            const volumeML = Math.round(weight * 4); // ~4 mL/kg
+            return {
+                value: `${volumeML}mL`,
+                label: `3% NaCl: ${volumeML} mL bolus`,
+                description: `**Hypertonic Saline 3%**\n\n• **Dose:** 2-5 mL/kg × ${weight} kg ≈ **${volumeML} mL**\n• **Route:** Peripheral IV OK\n• **Rate:** Bolus over 10-20 min\n\n**Monitoring:**\n• Serum sodium (target 145-155)\n• Clinical response (pupils, motor)\n• May repeat\n\n**Onset:** 10-20 min | **Duration:** 60+ min\n\n**Advantage:** More sustained effect than mannitol`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '30mL',
+            label: '23.4% NaCl: 30 mL via central line',
+            description: `**Hypertonic Saline 23.4%**\n\n• **Dose:** 30 mL (standard dose)\n• **Route:** CENTRAL LINE ONLY\n• **Rate:** Bolus over 10-15 min\n\n**⚠️ MUST have central access**\n\n**Monitoring:**\n• Serum sodium\n• Clinical response\n• May repeat\n\n**Very concentrated — fast acting**`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 const BISAP_CALCULATOR = {
@@ -29690,6 +30185,15 @@ const CALCULATORS = {
     'neuro-shock-pressor-calc': NEURO_SHOCK_PRESSOR_CALCULATOR,
     'neuro-shock-brady-protocol': NEURO_SHOCK_BRADY_CALCULATOR,
     'neuro-shock-map-calc': NEURO_SHOCK_MAP_CALCULATOR,
+    // Cauda Equina Syndrome
+    'ces-screening': CES_SCREENING_CALCULATOR,
+    'ces-pvr': CES_PVR_CALCULATOR,
+    'ces-timing': CES_TIMING_CALCULATOR,
+    // Brain Herniation
+    'hern-icp': HERN_ICP_CALCULATOR,
+    'hern-cushing': HERN_CUSHING_CALCULATOR,
+    'hern-mannitol-dose': HERN_MANNITOL_CALCULATOR,
+    'hern-hts-dose': HERN_HTS_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
