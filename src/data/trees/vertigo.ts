@@ -19,7 +19,7 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Vertigo: Initial Assessment',
     body: '[Vertigo Steps Summary](#/info/vertigo-summary) — timing-and-triggers approach (TITRATE), not quality of dizziness.\n\n**Core principle:** The word "dizzy" means different things. Focus on **timing** (constant vs episodic), **triggers** (spontaneous vs positional), and **exam findings** — NOT "is it vertigo or lightheadedness." Patients are unreliable on quality descriptors.\n\n**First actions:**\n• Full vitals **including orthostatic BP** — POTS and orthostatic hypotension masquerade as vertigo\n• Fingerstick glucose\n• Full neuro exam (cranial nerves, cerebellar, gait)\n• If altered, focal deficit, or severe headache → immediate central workup\n\n**The "Big Three" diagnoses to distinguish:**\n1. **BPPV** — brief, positional, Dix-Hallpike positive\n2. **Vestibular Neuritis** — acute, constant, HINTS peripheral\n3. **Posterior Circulation Stroke** — acute, constant, HINTS central or any red flag',
     citation: [1, 11],
-    images: [{ src: 'images/vertigo/semicircular-canals.png', alt: 'Inner ear anatomy showing three semicircular canals', caption: 'Vestibular labyrinth: three semicircular canals (posterior, horizontal, superior), utricle, and saccule. Posterior canal BPPV is most common (~85%). (Wikimedia Commons, CC BY-SA)' }],
+    images: [{ src: 'images/vertigo/semicircular-canals.svg', alt: 'Human ear anatomy with semicircular canals', caption: 'Human ear anatomy: three semicircular canals (posterior, horizontal, superior), cochlea, utricle, and saccule. Posterior canal BPPV is most common (~85%). (Chittka & Brockmann, Wikimedia Commons, CC BY 2.5)' }],
     next: 'vert-true-vertigo',
   },
 
@@ -210,6 +210,7 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'BPPV History Confirmation',
     body: '**Classic BPPV features (all should be present):**\n• Brief episodes <1 minute (often 5-30 seconds)\n• Triggered by head position change — rolling over, looking up, lying down\n• No vertigo at rest\n• No spontaneous nystagmus\n• No hearing loss, tinnitus, or neurologic signs\n• Onset often on waking or rolling in bed\n\n**Epidemiology:**\n• Most common peripheral vestibular disorder\n• Peak incidence 50-70 years old\n• More common in women\n• Risk factors: head trauma, prolonged recumbency, osteoporosis, vitamin D deficiency\n\n**Mechanism:** Calcium carbonate crystals (otoconia) from the utricle displace into a semicircular canal. Posterior canal involvement is most common (85-90%) because gravity pools particles there in the upright position.\n\nProceed to **Dix-Hallpike test** to confirm and identify which canal.',
     citation: [7, 17, 19],
+    images: [{ src: 'images/vertigo/canalolithiasis.jpg', alt: 'Canalolithiasis in semicircular canal', caption: 'Canalolithiasis: free-floating otoconia (calcium carbonate crystals) in a semicircular canal — the mechanism of BPPV. Head movement shifts the particles, deflecting the cupula and triggering vertigo. (TnoXX, Wikimedia Commons, CC BY 4.0)' }],
     next: 'vert-dix-hallpike',
   },
 
@@ -220,7 +221,6 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Dix-Hallpike Test',
     body: '[Dix-Hallpike & Epley Technique](#/info/vertigo-dix-hallpike)\n\n**Technique (right side):**\n1. Patient sits upright on exam table, legs extended\n2. Turn head 45° to the right\n3. Rapidly lay patient supine with head extending 20° off the end of the table\n4. **Observe for nystagmus for 30-45 seconds**\n5. Return to sitting, observe for reversal nystagmus\n6. Repeat on left side\n\n**Classic posterior canal BPPV response:**\n• **Upbeat-torsional nystagmus** (top poles of eyes beat toward downward ear)\n• Latency 5-20 seconds before onset\n• Duration <1 minute (crescendo-decrescendo)\n• Reverses on return to upright\n• Vertigo accompanies nystagmus\n\n**Horizontal canal BPPV:**\n• Purely horizontal nystagmus\n• No latency or very brief\n• May be geotropic (toward ground) or apogeotropic (toward ceiling)\n• Requires **supine roll test** to confirm\n\n**Red flags — NOT benign BPPV:**\n• Pure vertical (downbeat) nystagmus\n• Direction-changing nystagmus\n• No latency, no fatigue\n• Duration >1 minute\n• Associated neurologic signs\n→ image for central cause',
     citation: [7, 16, 17],
-    images: [{ src: 'images/vertigo/dix-hallpike-positions.png', alt: 'Three positions of Dix-Hallpike maneuver', caption: 'Dix-Hallpike: (1) seated with head turned 45° toward test side; (2) rapidly laid supine with head hanging 20° off edge; (3) observe for latency, nystagmus, and vertigo. (Wikimedia Commons, CC BY-SA)' }],
     options: [
       {
         label: 'Positive — upbeat-torsional (posterior canal)',
@@ -247,7 +247,10 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Posterior Canal BPPV — Epley Maneuver',
     body: '**Canalith Repositioning Procedure (Epley Maneuver):** first-line treatment. Cochrane 2014: NNT = 2 for resolution at 24 hours.\n\n**Technique (for right-sided BPPV):**\n1. **Position 1:** Start in Dix-Hallpike right (head 45° right, supine with head hanging). Hold 30-60 seconds or until nystagmus stops.\n2. **Position 2:** Without lifting head, rotate head 90° to the LEFT (now facing left with head still extended). Hold 30-60 seconds.\n3. **Position 3:** Roll entire body to the LEFT side while rotating head another 90° so patient is looking down at the floor. Hold 30-60 seconds.\n4. **Position 4:** Slowly return to sitting position with head tilted down and turned 45° toward the affected side. Hold 30 seconds.\n\n**Post-maneuver:**\n• 80-95% success rate with single maneuver for posterior canal\n• May repeat 2-3 times if first unsuccessful\n• No need for post-maneuver positional restrictions (old advice — not evidence-based)\n\n**Medications:** [Meclizine](#/drug/meclizine/vertigo) 25 mg PO PRN only — short-term, does NOT treat BPPV mechanism. Epley is definitive.',
     citation: [7, 17, 20],
-    images: [{ src: 'images/vertigo/epley-maneuver-steps.png', alt: 'Four steps of the Epley canalith repositioning maneuver', caption: 'Epley Maneuver for posterior canal BPPV: 4 sequential positions to move otoconia out of the posterior semicircular canal back into the utricle. Hold each position 30-60 seconds. (Wikimedia Commons, CC BY-SA)' }],
+    images: [
+      { src: 'images/vertigo/epley-maneuver-steps.jpg', alt: 'Sequential steps of the Epley canalith repositioning maneuver', caption: 'Epley Maneuver for posterior canal BPPV: sequential positions moving otoconia out of the posterior semicircular canal back into the utricle. Hold each position 30-60 seconds. (Ruhrgur, Wikimedia Commons, CC BY-SA 4.0)' },
+      { src: 'images/vertigo/semont-maneuver.svg', alt: 'Semont liberatory maneuver', caption: 'Semont liberatory maneuver: alternative to Epley for posterior canal BPPV. Patient is rapidly moved from sitting to side-lying on the affected side, then swung 180° to the opposite side. (Hariadhi, Wikimedia Commons, CC BY-SA 4.0)' },
+    ],
     next: 'vert-verify-cure',
   },
 
@@ -258,7 +261,7 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Supine Roll Test — Horizontal Canal',
     body: '**Supine roll test (Pagnini-McClure):** used to confirm and sub-type horizontal canal BPPV.\n\n**Technique:**\n1. Patient supine with head flexed 30° (pillow under head)\n2. Rapidly rotate head 90° to one side\n3. Observe for nystagmus 30-60 seconds\n4. Return head to midline\n5. Rotate 90° to opposite side, observe\n\n**Interpretation:**\n\n**Geotropic nystagmus** (beats toward the ground on both sides):\n• **Canalithiasis** (particles floating in the canal)\n• Affected ear = side with MORE intense nystagmus\n• More common, better prognosis\n\n**Apogeotropic nystagmus** (beats toward the ceiling on both sides):\n• **Cupulolithiasis** (particles adherent to cupula)\n• Affected ear = side with LESS intense nystagmus\n• Less common, harder to treat\n\n**Critical:** Do NOT use Epley maneuver for horizontal canal BPPV — different maneuvers (Gufoni, Barbecue Roll) are required.',
     citation: [17, 19],
-    images: [{ src: 'images/vertigo/supine-roll-test.png', alt: 'Supine roll test for horizontal canal BPPV', caption: 'Supine roll (Pagnini-McClure) test: with head flexed 30°, rapidly turn to each side and observe for horizontal nystagmus. (Wikimedia Commons, CC BY-SA)' }],
+    images: [{ src: 'images/vertigo/lampert-maneuver.svg', alt: 'Lempert (Barbecue Roll) maneuver for horizontal canal BPPV', caption: 'Lempert / "Barbecue Roll" maneuver for horizontal canal BPPV: patient rolls 90° at a time, from supine toward the unaffected side, through prone, and back to supine. Used INSTEAD of Epley for horizontal canal. (Hariadhi, Wikimedia Commons, CC BY-SA 4.0)' }],
     options: [
       {
         label: 'Geotropic nystagmus',
@@ -356,7 +359,7 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Step 1: Nystagmus Assessment',
     body: '[Nystagmus Interpretation Guide](#/info/vertigo-nystagmus-guide)\n\n**Critical technique: remove visual fixation.**\n\nPeripheral nystagmus **suppresses with fixation** — you may miss it entirely unless you eliminate fixation. Three methods:\n• **Frenzel goggles** (ideal but rarely available in ED)\n• **Ophthalmoscope trick** — look at one fundus while asking patient to cover other eye. Nystagmus direction reverses what you see through the scope.\n• **"Paper trick"** — hold blank white paper ~10 cm from patient\'s face so nothing to fixate on\n\n**Interpretation:**\n\n**Peripheral (reassuring):**\n• **Unidirectional** — fast phase beats in the same direction regardless of gaze\n• Horizontal + torsional (mixed)\n• Suppresses with fixation\n• Follows Alexander\'s law: stronger with gaze toward fast phase\n\n**Central (worrisome):**\n• **Direction-changing** — beats one way on right gaze, opposite way on left gaze\n• **Pure vertical** (downbeat especially) or **pure torsional**\n• Does NOT suppress with fixation\n• May be gaze-evoked',
     citation: [2, 11, 27],
-    images: [{ src: 'images/vertigo/nystagmus-patterns.png', alt: 'Peripheral vs central nystagmus patterns', caption: 'Left: peripheral (unidirectional, suppresses with fixation). Right: central (direction-changing, vertical, or does not suppress). (Wikimedia Commons, CC BY-SA)' }],
+    images: [{ src: 'images/vertigo/nystagmus-patterns.png', alt: 'Central vs peripheral nystagmus comparison', caption: 'Comparison of nystagmus in central vs peripheral vestibular disease. Peripheral: unidirectional, suppresses with fixation. Central: direction-changing or pure vertical, does not suppress. (Drjaseemali, Wikimedia Commons, CC0)' }],
     options: [
       {
         label: 'Unidirectional horizontal/torsional',
@@ -379,7 +382,6 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Step 2: Head Impulse Test (HIT)',
     body: '**Technique:**\n1. Patient fixates on your nose\n2. Hold head gently with both hands\n3. Rapidly turn head ~20° to one side (high-velocity, small-amplitude thrust)\n4. **Watch the eyes** — do they stay fixated on your nose, or do they drift and make a corrective saccade?\n5. Repeat to the other side\n\n**⚠️ COUNTERINTUITIVE RULE ⚠️**\n\n**Abnormal HIT (corrective saccade present) = REASSURING for peripheral cause.**\n• Peripheral lesion disables the VOR on the affected side\n• Eyes cannot track → drift off target → catch-up saccade brings eyes back\n• This indicates **peripheral vestibular dysfunction**\n\n**Normal HIT (NO corrective saccade, eyes stay fixed) = WORRISOME for stroke.**\n• Intact VOR in a patient with AVS is alarming — means the vestibular apparatus is working, so why are they dizzy?\n• → **central cause until proven otherwise**\n• Sensitivity ~85%, specificity ~95% when combined with rest of HINTS\n\n**Memorable phrase:** "Normal HIT in AVS = NOT nice" (not peripheral).',
     citation: [2, 11, 12, 27],
-    images: [{ src: 'images/vertigo/head-impulse-test.png', alt: 'Head impulse test technique and interpretation', caption: 'Head Impulse Test: abnormal (catch-up saccade) = peripheral; normal (eyes stay fixed) in AVS = worrisome for central lesion. Counterintuitive! (Wikimedia Commons, CC BY-SA)' }],
     options: [
       {
         label: 'Abnormal — catch-up saccade present',
@@ -402,7 +404,6 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Step 3: Test of Skew (Alternate Cover Test)',
     body: '**Technique:**\n1. Patient fixates on your nose with both eyes open\n2. Cover one eye with your hand or occluder\n3. Rapidly uncover and immediately cover the other eye\n4. Watch the newly uncovered eye for vertical refixation movement\n5. Repeat several times\n\n**Interpretation:**\n\n**No skew deviation = peripheral (reassuring)**\n• Eyes remain vertically aligned with cover-uncover\n\n**Vertical skew deviation = CENTRAL (worrisome)**\n• One eye drifts upward, the other downward under cover\n• When uncovered, there is a vertical refixation movement (eye drops down or shifts up)\n• Indicates brainstem or cerebellar lesion affecting vertical vestibulo-ocular pathways\n• Often subtle — must look carefully\n\n**This is the most specific finding in HINTS** (specificity ~98%). A positive skew essentially rules in central lesion.',
     citation: [2, 11, 27],
-    images: [{ src: 'images/vertigo/test-of-skew.png', alt: 'Test of skew using alternate cover test', caption: 'Test of Skew: alternately cover each eye. Vertical refixation movement when eye is uncovered = skew deviation = CENTRAL. (Wikimedia Commons, CC BY-SA)' }],
     options: [
       {
         label: 'No skew',
@@ -425,7 +426,6 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Step 4: Bedside Hearing (HINTS+)',
     body: '**HINTS+ (HINTS plus hearing)** extends sensitivity by detecting AICA (anterior inferior cerebellar artery) strokes, which can present with **unilateral hearing loss** due to labyrinthine artery involvement.\n\n**Technique:**\n1. Rub fingers together 6 inches from each ear\n2. Ask patient if they hear it equally on both sides\n3. Whisper a word at each ear\n4. Compare both sides\n\n**If abnormal available: Weber and Rinne with 512 Hz tuning fork** to characterize unilateral loss as sensorineural (central, AICA stroke) vs conductive (unrelated).\n\n**Interpretation:**\n\n**Normal hearing = peripheral (reassuring)**\n• Pure vestibular neuritis does NOT cause hearing loss\n\n**New unilateral hearing loss = CENTRAL (AICA stroke until proven otherwise)**\n• AICA supplies the labyrinth via the labyrinthine artery\n• Infarction causes combined auditory + vestibular symptoms\n• Can mimic "labyrinthitis" — but is actually a stroke\n• Even in young patients, new unilateral SNHL with vertigo warrants MRI + MRA\n\n**Pearl:** "Labyrinthitis" in the ED is often mis-labeled AICA stroke. Any acute unilateral hearing loss + vertigo deserves neurovascular imaging.',
     citation: [2, 11, 13, 27],
-    images: [{ src: 'images/vertigo/weber-rinne-tests.png', alt: 'Weber and Rinne tuning fork tests', caption: 'Weber and Rinne tuning fork tests help localize unilateral hearing loss. New sensorineural loss with acute vertigo = suspect AICA stroke. (Wikimedia Commons, CC BY-SA)' }],
     options: [
       {
         label: 'Normal hearing bilaterally',
