@@ -129,6 +129,7 @@ const TREE_REGISTRY = {
   'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
   'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
+  'vertigo':              { prefix: 'VERTIGO',               entryNodeId: 'vert-start',     categoryId: 'neurology' },
   'chf-exacerbation':     { prefix: 'CHF_EXACERBATION',      entryNodeId: 'chf-start',      categoryId: 'cardiology' },
   'migraine':             { prefix: 'MIGRAINE',              entryNodeId: 'migraine-start', categoryId: 'neurology' },
   'snake-envenomation':   { prefix: 'SNAKE_ENVENOMATION',    entryNodeId: 'snake-start',    categoryId: 'emergency-medicine' },

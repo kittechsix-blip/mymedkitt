@@ -955,6 +955,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'neurology.png',
         decisionTrees: [
             {
+                id: 'vertigo',
+                title: 'Vertigo',
+                subtitle: 'TITRATE Triage \u2192 Central Screen \u2192 BPPV \u2192 HINTS \u2192 VM \u2192 Disposition',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 40,
+                entryNodeId: 'vert-start',
+            },
+            {
                 id: 'stroke',
                 title: 'Acute Ischemic Stroke',
                 subtitle: 'NIHSS \u2192 IVT/EVT \u2192 DAPT \u2192 Prevention',

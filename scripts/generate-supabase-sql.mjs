@@ -120,6 +120,7 @@ const TREE_REGISTRY = {
   'salicylate':           { prefix: 'SALICYLATE',            entryNodeId: 'sal-start',      categoryId: 'toxicology' },
   'dka':                  { prefix: 'DKA',                   entryNodeId: 'dka-start',      categoryId: 'nephro-rheum-endo' },
   'sepsis':               { prefix: 'SEPSIS',                entryNodeId: 'sepsis-start',   categoryId: 'infectious-disease' },
+  'vertigo':              { prefix: 'VERTIGO',               entryNodeId: 'vert-start',     categoryId: 'neurology' },
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',    entryNodeId: 'ow-start',       categoryId: 'emergency-medicine' },
   'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',   entryNodeId: 'aw-start',       categoryId: 'emergency-medicine' },
   'tuberculosis':         { prefix: 'TUBERCULOSIS',          entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },

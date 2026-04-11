@@ -336,6 +336,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'migraine-tx', label: 'Tx Algo', icon: '💊', action: 'calculator', target: 'migraine-tx-algo' },
     { id: 'migraine-dhe', label: 'DHE', icon: '💉', action: 'calculator', target: 'dhe-protocol' },
   ],
+  'vertigo': [
+    { id: 'hints', label: 'HINTS', icon: '👁️', action: 'overlay', target: 'vertigo-hints-guide' },
+    { id: 'epley', label: 'Epley', icon: '🔄', action: 'overlay', target: 'vertigo-dix-hallpike' },
+    { id: 'bppv', label: 'BPPV', icon: '💫', action: 'jump', target: 'vert-bppv-history' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'vertigo-stop' },
+  ],
   'snake-envenomation': [
     { id: 'snake-severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'snake-severity' },
     { id: 'snake-antivenom', label: 'Antivenom', icon: '💉', action: 'calculator', target: 'snake-antivenom' },

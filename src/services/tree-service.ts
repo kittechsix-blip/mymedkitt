@@ -227,6 +227,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'combative-patient': async () => (await import('../data/trees/combative-patient.js')).COMBATIVE_PATIENT_CRITICAL_ACTIONS,
     'chf-exacerbation': async () => (await import('../data/trees/chf-exacerbation.js')).CHF_EXACERBATION_CRITICAL_ACTIONS,
     'migraine': async () => (await import('../data/trees/migraine.js')).MIGRAINE_CRITICAL_ACTIONS,
+    'vertigo': async () => (await import('../data/trees/vertigo.js')).VERTIGO_CRITICAL_ACTIONS,
     'snake-envenomation': async () => (await import('../data/trees/snake-envenomation.js')).SNAKE_ENVENOMATION_CRITICAL_ACTIONS,
     'aacg': async () => (await import('../data/trees/aacg.js')).AACG_CRITICAL_ACTIONS,
     'chemical-burn': async () => (await import('../data/trees/chemical-burn.js')).CHEMICAL_BURN_CRITICAL_ACTIONS,
@@ -589,6 +590,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'migraine': async () => {
       const m = await import('../data/trees/migraine.js');
       return { nodes: m.MIGRAINE_NODES, entryNodeId: 'migraine-start', categoryId: 'neurology', moduleLabels: m.MIGRAINE_MODULE_LABELS, citations: m.MIGRAINE_CITATIONS, criticalActions: m.MIGRAINE_CRITICAL_ACTIONS };
+    },
+    'vertigo': async () => {
+      const m = await import('../data/trees/vertigo.js');
+      return { nodes: m.VERTIGO_NODES, entryNodeId: 'vert-start', categoryId: 'neurology', moduleLabels: m.VERTIGO_MODULE_LABELS, citations: m.VERTIGO_CITATIONS, criticalActions: m.VERTIGO_CRITICAL_ACTIONS };
     },
     'snake-envenomation': async () => {
       const m = await import('../data/trees/snake-envenomation.js');

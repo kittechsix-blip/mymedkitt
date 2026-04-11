@@ -11533,7 +11533,374 @@ const TIF_CRITICAL_DONTS = {
         { num: 3, text: 'Gasparri MG, et al. Tracheoinnominate artery fistula: surgical management. Operative Techniques in Thoracic and Cardiovascular Surgery. 2009.' },
     ],
 };
+// =====================================================================
+// VERTIGO INFO PAGES
+// =====================================================================
+const VERTIGO_SUMMARY = {
+    id: 'vertigo-summary',
+    title: 'Vertigo Steps Summary',
+    subtitle: 'TITRATE approach: timing, triggers, and targeted exam',
+    sections: [
+        {
+            heading: '1. Initial Assessment',
+            body: '• Full vitals including [orthostatic BP](#/node/vert-vitals-check) — POTS masquerades as vertigo\n• Fingerstick glucose, full neuro exam, gait test\n• [Characterize the dizziness](#/node/vert-true-vertigo) — true vertigo vs lightheaded vs disequilibrium\n• Focus on TIMING and TRIGGERS, not sensation quality',
+        },
+        {
+            heading: '2. Classify by Time Course (TITRATE)',
+            body: '• **AVS** — [Acute Vestibular Syndrome](#/node/vert-avs-path): constant hours-days + spontaneous nystagmus → HINTS pathway\n• **t-EVS** — [Triggered Episodic](#/node/vert-tevs-path): brief <1 min, positional → BPPV pathway\n• **s-EVS** — [Spontaneous Episodic](#/node/vert-sevs-path): min-hours, no trigger → VM / TIA pathway',
+        },
+        {
+            heading: '3. Screen for Central Features',
+            body: '• [Deadly D\'s screen](#/node/vert-central-screen) BEFORE HINTS — dysarthria, dysphagia, diplopia, dysmetria, dysphonia, downbeat nystagmus\n• Red flags: severe headache, neck pain, focal deficit, truncal ataxia, cannot walk\n• Any positive → [immediate stroke workup](#/node/vert-central-present)',
+        },
+        {
+            heading: '4. BPPV Pathway (t-EVS)',
+            body: '• [BPPV history confirmation](#/node/vert-bppv-history)\n• [Dix-Hallpike test](#/node/vert-dix-hallpike) — posterior canal = upbeat-torsional nystagmus\n• [Epley maneuver for posterior canal](#/node/vert-posterior-bppv) — 80-95% single-session success\n• [Horizontal canal — supine roll test](#/node/vert-horizontal-test) + [Gufoni/Barbecue](#/node/vert-horizontal-bppv) (NOT Epley)\n• [Verify cure](#/node/vert-verify-cure) → [discharge](#/node/vert-bppv-disposition) with Brandt-Daroff if needed',
+        },
+        {
+            heading: '5. HINTS Pathway (AVS)',
+            body: '• [Confirm HINTS appropriateness](#/node/vert-hints-check) — requires continuous vertigo + spontaneous nystagmus\n• Step 1: [Nystagmus assessment](#/node/vert-hints-nystagmus) — remove fixation!\n• Step 2: [Head Impulse Test](#/node/vert-hints-hit) — **Normal HIT = worrisome** (counterintuitive)\n• Step 3: [Test of skew](#/node/vert-hints-skew) — vertical skew = central\n• Step 4: [Bedside hearing (HINTS+)](#/node/vert-hints-hearing) — new unilateral loss = AICA stroke\n• All 4 reassuring → [vestibular neuritis](#/node/vert-hints-peripheral) → [treatment](#/node/vert-vn-treatment)\n• Any central → [stroke pathway](#/node/vert-hints-central)',
+        },
+        {
+            heading: '6. Vestibular Migraine / s-EVS Pathway',
+            body: '• [VM criteria](#/node/vert-vm-criteria) — 50% have NO headache!\n• [Meets criteria](#/node/vert-vm-diagnosis) → [acute migraine treatment](#/node/vert-vm-treatment) → [discharge](#/node/vert-vm-disposition)\n• [Risk stratify for TIA](#/node/vert-sevs-risk) if doesn\'t meet VM\n• High risk → [TIA workup](#/node/vert-tia-workup), low risk → [outpatient](#/node/vert-transient-low-risk)',
+        },
+        {
+            heading: '7. Disposition & Management',
+            body: '• [VN admission criteria](#/node/vert-vn-disposition) → [admit](#/node/vert-vn-admit) or [discharge](#/node/vert-vn-discharge)\n• [Vestibular medication principles](#/node/vert-med-principles) — suppressants max 72h\n• [Vestibular rehabilitation](#/node/vert-rehab-referral) — most effective intervention',
+        },
+    ],
+    citations: [],
+};
+const VERTIGO_HINTS_GUIDE = {
+    id: 'vertigo-hints-guide',
+    title: 'HINTS Exam Technique',
+    subtitle: 'Head Impulse, Nystagmus, Test of Skew — and how to get it right',
+    sections: [
+        {
+            heading: '⚠️ "Soup Nazi" Rules — HINTS only applies when ALL are true',
+            body: '• **Continuous vertigo** (AVS) — NOT episodic, NOT BPPV\n• **Spontaneous nystagmus** present at rest\n• **No central red flags** (already screened — Deadly D\'s)\n• Patient is currently symptomatic (not between episodes)\n\n**Using HINTS on BPPV or asymptomatic patients will give dangerously misleading results.** Normal HIT in a healthy person is normal — if you interpret it as worrisome, you will over-image. If you interpret a BPPV patient\'s transient positional nystagmus as "spontaneous," you will misclassify them. [1, 27]',
+        },
+        {
+            heading: 'Step 1 — Nystagmus Direction',
+            body: '**Must remove visual fixation** (peripheral nystagmus suppresses with fixation):\n• Frenzel goggles (ideal)\n• Ophthalmoscope trick (view one fundus while patient covers other eye)\n• "Paper trick" — blank paper 10 cm from face\n\n**Peripheral pattern (reassuring):** unidirectional, horizontal-torsional, follows Alexander\'s law\n**Central pattern (worrisome):** direction-changing, pure vertical (especially downbeat), pure torsional, does not suppress with fixation',
+        },
+        {
+            heading: 'Step 2 — Head Impulse Test (HIT)',
+            body: '• Patient fixates on your nose\n• Rapidly thrust head ~20° side to side (small amplitude, high velocity)\n• Watch for corrective saccade\n\n**⚠️ Counterintuitive rule:**\n• **Abnormal HIT (saccade) = peripheral lesion = REASSURING**\n• **Normal HIT (no saccade) in AVS = CENTRAL = WORRISOME**\n\nWhy: peripheral lesions impair the VOR on one side, so eyes fall off target. A patient with severe vertigo but intact VOR means the vestibular apparatus is working — so the lesion must be central. [2]',
+        },
+        {
+            heading: 'Step 3 — Test of Skew',
+            body: '• Alternate cover test — rapidly cover and uncover each eye\n• Watch for vertical refixation movement\n\n**No skew = peripheral**\n**Vertical skew present = CENTRAL** (most specific HINTS finding, spec ~98%)',
+        },
+        {
+            heading: 'Step 4 — Bedside Hearing (HINTS+)',
+            body: '• Finger rub bilaterally\n• Whisper test\n• Weber + Rinne if loss detected\n\n**New unilateral SNHL + vertigo = AICA stroke** until proven otherwise. The labyrinthine artery is a branch of AICA — infarction causes combined hearing + vestibular symptoms that mimic labyrinthitis. [2, 13]',
+        },
+        {
+            heading: 'INFARCT Mnemonic — Central findings',
+            body: '**I**mpulse **N**ormal (HIT without saccade)\n**F**ast-phase **A**lternating (direction-changing nystagmus)\n**R**efixation on **C**over **T**est (skew deviation)\n\nAny one of these = central = stroke workup.\n\n**Peripheral (INFARCT-negative) = all 3 reassuring findings present.**',
+        },
+        {
+            heading: 'Operator expertise caveat',
+            body: 'HINTS sensitivity is 100% in expert hands (Kattah 2009). In non-neurologist hands, sensitivity is much lower (Nelson 2011). **Practice on well patients** with spontaneous-appearing peripheral-pattern nystagmus videos. If you are uncertain about your findings, default to imaging. [27]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, et al. GRACE-3 Guidelines. Acad Emerg Med. 2023;30(5):442-486.' },
+        { num: 2, text: 'Kattah JC, et al. HINTS to diagnose stroke in the acute vestibular syndrome. Stroke. 2009;40(11):3504-3510.' },
+        { num: 13, text: 'Kerber KA, et al. Stroke among patients with dizziness. Stroke. 2006;37(10):2484-2487.' },
+        { num: 27, text: 'Nelson JA, Viirre E. The clinical differentiation of cerebellar infarction from common vertigo syndromes. West J Emerg Med. 2009;10(4):273-277.' },
+    ],
+};
+const VERTIGO_DIX_HALLPIKE = {
+    id: 'vertigo-dix-hallpike',
+    title: 'Dix-Hallpike & Epley Technique',
+    subtitle: 'Step-by-step positioning for posterior canal BPPV',
+    sections: [
+        {
+            heading: 'Dix-Hallpike — Diagnostic Test',
+            body: '**Purpose:** diagnose posterior canal BPPV and identify the affected ear.\n\n**Technique (testing right ear):**\n1. Patient seated on exam table, legs extended\n2. Turn head 45° to the **right**\n3. Rapidly lay patient supine with head extending **20° off the end of the table**\n4. Maintain head turn throughout\n5. **Observe the eyes for 30-45 seconds**\n6. Return to sitting, watch for reversal nystagmus\n7. Rest 1 minute, repeat on left side\n\n**Positive test (posterior canal BPPV):**\n• Latency 5-20 seconds\n• Upbeat-torsional nystagmus (top poles beat toward downward ear)\n• Crescendo-decrescendo, <1 minute duration\n• Reverses on sitting up\n• Vertigo accompanies nystagmus',
+        },
+        {
+            heading: '⚠️ Red flag features — NOT BPPV',
+            body: '• Pure vertical (downbeat) nystagmus\n• Direction-changing nystagmus\n• No latency\n• Does not fatigue\n• Duration >1 minute\n• Associated focal neuro signs\n\n→ consider central positional vertigo; image the posterior fossa.',
+        },
+        {
+            heading: 'Epley Maneuver — Treatment',
+            body: '**For right-sided posterior canal BPPV:**\n\n**Position 1:** Start in Dix-Hallpike right (head 45° right, supine with head hanging 20°). Hold **30-60 seconds** or until nystagmus subsides.\n\n**Position 2:** Without lifting the head, rotate it 90° to the **left** so patient now faces left (head still extended). Hold **30-60 seconds**.\n\n**Position 3:** Roll the entire body onto the **left** side while rotating the head another 90° so patient is looking at the floor (face-down position). Hold **30-60 seconds**.\n\n**Position 4:** Slowly bring patient to seated position with head tilted down and turned 45° toward the affected (right) side. Hold **30 seconds**.\n\n**Success rate:** 80-95% with a single maneuver (NNT=2 in Cochrane review). May repeat 2-3 times if needed.',
+        },
+        {
+            heading: 'Common mistakes to avoid',
+            body: '• Not extending the head enough off the edge (need 20°)\n• Lifting the head off the table between positions — breaks the maneuver\n• Not holding each position long enough for otoconia to migrate (30-60 sec minimum)\n• Testing on the wrong side\n• Waiting for the patient to "recover" between positions — actually worsens outcomes\n• Prescribing post-maneuver positional restrictions — not evidence-based\n\n**Do NOT** test for fatiguability (outdated, delays treatment).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hilton MP, Pinder DK. The Epley (canalith repositioning) manoeuvre for BPPV. Cochrane Database Syst Rev. 2014;(12):CD003162.' },
+        { num: 2, text: 'Bhattacharyya N, et al. Clinical practice guideline: BPPV (update). Otolaryngol Head Neck Surg. 2017;156(3_suppl):S1-S47.' },
+        { num: 3, text: 'Saccomanno S, et al. Dix-Hallpike test and Epley maneuver. Eur Arch Otorhinolaryngol. 2019;276(11):3009-3015.' },
+    ],
+};
+const VERTIGO_NYSTAGMUS_GUIDE = {
+    id: 'vertigo-nystagmus-guide',
+    title: 'Nystagmus Interpretation Guide',
+    subtitle: 'Peripheral vs central — patterns and fixation removal',
+    sections: [
+        {
+            heading: 'Removing visual fixation (critical!)',
+            body: '**Peripheral nystagmus suppresses with fixation.** If you don\'t remove fixation, you may miss it entirely.\n\n**Methods:**\n• **Frenzel goggles** — high-plus lenses + light, blurs patient\'s vision while magnifying eyes for examiner. Gold standard but rarely available in ED.\n• **Ophthalmoscope trick** — ask patient to cover one eye. Look at the OTHER eye\'s fundus with a direct ophthalmoscope. Nystagmus direction appears reversed (horizontal movement of the posterior pole).\n• **"Paper trick"** — hold a plain white sheet of paper ~10 cm from patient\'s face. Nothing to fixate on. Less sensitive but accessible.',
+        },
+        {
+            heading: 'Peripheral nystagmus — reassuring features',
+            body: '• **Unidirectional** — fast phase always in the same direction regardless of gaze\n• **Horizontal + torsional** (mixed pattern)\n• **Suppresses with fixation**\n• **Alexander\'s law**: amplitude increases on gaze toward the fast phase\n• Patient is "awake" and engaged\n• Associated with abnormal HIT and no skew',
+        },
+        {
+            heading: 'Central nystagmus — worrisome features',
+            body: '• **Direction-changing** — beats right on right gaze, left on left gaze (gaze-evoked)\n• **Pure vertical** — especially downbeat nystagmus (cerebellar/brainstem)\n• **Pure torsional** (without horizontal component)\n• **Does NOT suppress with fixation**\n• **Out of proportion** to vestibular symptoms (prominent nystagmus, minimal vertigo, or vice versa)\n• May be associated with saccadic abnormalities',
+        },
+        {
+            heading: 'Special patterns',
+            body: '**Positional-only nystagmus (BPPV):** transient, occurs only with specific positions, not spontaneous. Not used for HINTS.\n\n**Downbeat nystagmus:** cervicomedullary junction lesion (Chiari, MS, tumor, ischemia). Almost always central.\n\n**Upbeat nystagmus:** pontomedullary or cerebellar lesion. Central.\n\n**Periodic alternating nystagmus (PAN):** changes direction every 1-2 minutes. Central (cerebellum, Chiari, drugs).\n\n**Pendular nystagmus:** equal velocity in both directions (not fast/slow phases). Usually congenital or acquired from MS / brainstem stroke.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, Newman-Toker DE. Using the physical examination to diagnose patients with acute dizziness and vertigo. J Emerg Med. 2016;50(4):617-628.' },
+        { num: 2, text: 'Kattah JC, et al. HINTS. Stroke. 2009;40(11):3504-3510.' },
+    ],
+};
+const VERTIGO_BPPV_VARIANTS = {
+    id: 'vertigo-bppv-variants',
+    title: 'BPPV Canal Variants & Maneuvers',
+    subtitle: 'Posterior, horizontal, and anterior canal — which test, which treatment',
+    sections: [
+        {
+            heading: 'Posterior canal BPPV (~85%)',
+            body: '**Diagnosis:** Dix-Hallpike — upbeat-torsional nystagmus with latency\n**Treatment:** Epley maneuver (canalith repositioning)\n**Alternative treatment:** Semont maneuver, Brandt-Daroff exercises (home)\n**Success:** 80-95% with single Epley',
+        },
+        {
+            heading: 'Horizontal (lateral) canal BPPV (~10-15%)',
+            body: '**Diagnosis:** Supine roll test (Pagnini-McClure) — purely horizontal nystagmus\n\n**Subtypes:**\n• **Geotropic (canalithiasis):** nystagmus beats toward the ground on both sides. Affected side = stronger nystagmus. More common, easier to treat.\n• **Apogeotropic (cupulolithiasis):** nystagmus beats toward the ceiling. Affected side = weaker nystagmus. Less common, harder to treat.\n\n**Treatment:**\n• **Gufoni maneuver** — easier to perform in ED\n• **Barbecue Roll (Lempert)** — alternative\n• **Do NOT use Epley** — specific to posterior canal\n\n**Success:** 70-80% for canalithiasis; lower for cupulolithiasis',
+        },
+        {
+            heading: 'Anterior (superior) canal BPPV (<1%)',
+            body: 'Very rare. Diagnosis: downbeat-torsional nystagmus on Dix-Hallpike.\n\n**⚠️ Warning:** pure downbeat nystagmus is almost always central — anterior canal BPPV is a diagnosis of exclusion after imaging.\n\n**Treatment:** Reverse Epley or deep head-hanging maneuver. Specialist referral recommended.',
+        },
+        {
+            heading: 'Brandt-Daroff Exercises (home)',
+            body: '**Use when:** ED maneuvers fail, refractory BPPV, patient cannot return for repeat treatment.\n\n**Technique:**\n1. Sit on edge of bed, head 45° to LEFT\n2. Quickly lie down on RIGHT side\n3. Hold 30 seconds or until vertigo stops\n4. Sit up, hold 30 seconds\n5. Head 45° to RIGHT, lie down on LEFT side\n6. Hold 30 seconds, sit up\n\n**Regimen:** 5 reps per session, 3 times daily, for 2 weeks or until 2 consecutive symptom-free days. Warn patients that initial symptoms worsen before improving.',
+        },
+        {
+            heading: 'When to refer',
+            body: '• Failed 2-3 in-ED attempts\n• Horizontal canal (especially cupulolithiasis)\n• Suspected anterior canal\n• Multiple recurrences\n• Atypical features suggesting central cause\n• Fall risk in elderly requiring formal vestibular PT',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bhattacharyya N, et al. AAO-HNS BPPV guideline. Otolaryngol Head Neck Surg. 2017;156(3_suppl):S1-S47.' },
+        { num: 2, text: 'Hilton MP, Pinder DK. Cochrane Database Syst Rev. 2014;(12):CD003162.' },
+        { num: 3, text: 'Fife TD, et al. AAN Practice Parameter: therapies for BPPV. Neurology. 2008;70(22):2067-2074.' },
+    ],
+};
+const VERTIGO_CENTRAL_PERIPHERAL = {
+    id: 'vertigo-central-peripheral',
+    title: 'Central vs Peripheral — Quick Reference',
+    subtitle: 'Clinical comparison for rapid triage',
+    sections: [
+        {
+            heading: 'Onset & time course',
+            body: '**Peripheral:** Often sudden but gradually improves. Patient feels better with stillness.\n**Central:** Sudden or gradual, may progress. Often no improvement with stillness.',
+        },
+        {
+            heading: 'Severity of symptoms',
+            body: '**Peripheral:** Severe vertigo, prominent nausea/vomiting, patient often prefers to stay still with eyes closed.\n**Central:** Often less severe subjective vertigo but more imbalance and gait dysfunction. "Disconnect" between the vertigo severity and the exam findings is a red flag.',
+        },
+        {
+            heading: 'Nystagmus',
+            body: '**Peripheral:**\n• Unidirectional\n• Horizontal-torsional (mixed)\n• Suppresses with fixation\n• Alexander\'s law\n\n**Central:**\n• Direction-changing\n• Pure vertical (especially downbeat) or pure torsional\n• Does NOT suppress with fixation\n• Gaze-evoked patterns',
+        },
+        {
+            heading: 'Head Impulse Test',
+            body: '**Peripheral:** Abnormal (catch-up saccade) — reassuring\n**Central:** Normal (no saccade) in AVS patient — worrisome (counterintuitive)',
+        },
+        {
+            heading: 'Hearing',
+            body: '**Peripheral:** Usually spared in vestibular neuritis. Affected in labyrinthitis (rare).\n**Central:** New unilateral SNHL = AICA stroke until proven otherwise.',
+        },
+        {
+            heading: 'Gait & truncal stability',
+            body: '**Peripheral:** Unsteady but can walk with assistance. Falls toward affected side.\n**Central:** Often cannot walk unaided. Truncal ataxia — cannot sit upright. **"Cannot walk" is a critical red flag.**',
+        },
+        {
+            heading: 'Associated neuro findings',
+            body: '**Peripheral:** Isolated vestibular symptoms. No CN, cerebellar, sensory, or motor deficits.\n**Central:** May have Deadly D\'s, focal weakness, Horner syndrome, sensory loss, crossed signs (face on one side, body on the other), Wallenberg syndrome.',
+        },
+        {
+            heading: 'Imaging',
+            body: '**Peripheral:** Negative MRI (vestibular neuritis has no imaging correlate).\n**Central:** MRI-DWI positive for ischemia — but 20-35% false-negative in first 24-48h for posterior fossa. Repeat MRI at 48-72h if clinical suspicion high.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, et al. GRACE-3. Acad Emerg Med. 2023;30(5):442-486.' },
+        { num: 2, text: 'Tarnutzer AA, et al. Does my dizzy patient have a stroke? CMAJ. 2011;183(9):E571-E592.' },
+    ],
+};
+const VERTIGO_MIGRAINE_CRITERIA = {
+    id: 'vertigo-migraine-criteria',
+    title: 'Vestibular Migraine Criteria (Bárány Society)',
+    subtitle: 'Diagnostic criteria — and why most cases are missed',
+    sections: [
+        {
+            heading: 'Definite Vestibular Migraine — all required',
+            body: '1. **≥5 episodes** of vestibular symptoms of moderate or severe intensity, lasting **5 minutes to 72 hours**\n2. **Current or previous history of migraine** with or without aura (ICHD-3 criteria)\n3. **≥50% of vestibular episodes** accompanied by at least ONE migrainous feature:\n   • Headache with migraine characteristics (unilateral, pulsating, moderate-severe, aggravated by activity)\n   • Photophobia AND phonophobia\n   • Visual aura\n4. Not better explained by another vestibular or ICHD-3 diagnosis',
+        },
+        {
+            heading: 'Probable Vestibular Migraine',
+            body: '• ≥5 episodes of vestibular symptoms 5 min-72 h\n• EITHER migraine history OR migrainous features during episodes (not both required)\n• Not attributable to another cause',
+        },
+        {
+            heading: '⚠️ Critical teaching point',
+            body: '**~50% of vestibular migraine attacks occur WITHOUT headache.** This is why the diagnosis is commonly missed in the ED.\n\n**Ask specifically:**\n• Any photophobia or sound sensitivity during the episodes?\n• Any visual disturbance (flashing lights, blind spots, zigzag lines)?\n• History of childhood motion sickness?\n• Personal or family history of migraine?\n• Trigger relationships (sleep, stress, hormones, foods)?\n\nA patient with recurrent episodic vertigo + history of migraine + no other explanation has vestibular migraine until proven otherwise.',
+        },
+        {
+            heading: 'Epidemiology',
+            body: '• **Most common cause of recurrent spontaneous vertigo** in adults\n• Lifetime prevalence ~1-3%\n• F:M ratio ~3:1\n• More common than Ménière disease\n• Often starts after typical migraine has improved (e.g., perimenopause)\n• Underdiagnosed by a factor of 5-10x',
+        },
+        {
+            heading: 'Differential to rule out',
+            body: '• **Ménière disease** — requires fluctuating SNHL, tinnitus, aural fullness\n• **BPPV** — brief positional attacks\n• **Posterior circulation TIA** — vascular risk factors\n• **Cardiac arrhythmia** — ECG mandatory in recurrent s-EVS\n• **Anxiety / panic** — diagnosis of exclusion',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lempert T, et al. Vestibular migraine: diagnostic criteria (Bárány Society / IHS). J Vestib Res. 2012;22(4):167-172.' },
+        { num: 2, text: 'Neuhauser HK, et al. The interrelations of migraine, vertigo, and migrainous vertigo. Neurology. 2001;56(4):436-441.' },
+        { num: 3, text: 'von Brevern M, et al. Acute migrainous vertigo: clinical and oculographic findings. Brain. 2005;128(Pt 2):365-374.' },
+    ],
+};
+const VERTIGO_IMAGING_GUIDE = {
+    id: 'vertigo-imaging-guide',
+    title: 'Vertigo Imaging Decision Guide',
+    subtitle: 'CT vs MRI vs MRA — and when NOT to image',
+    sections: [
+        {
+            heading: 'CT Head — limited role',
+            body: '**Role:** Rule out intracerebral hemorrhage or mass effect before thrombolytics or in altered patients.\n\n**⚠️ Sensitivity for acute posterior fossa ischemia: 7-16%.** CT cannot rule out posterior circulation stroke. Do NOT reassure based on a negative CT.\n\n**When to get CT:** Suspected hemorrhage, altered mental status, anticoagulation, thunderclap headache, before LP or thrombolytics.',
+        },
+        {
+            heading: 'MRI with DWI — test of choice',
+            body: '**Gold standard** for posterior circulation stroke — but with important caveats:\n\n• **False-negative rate ~20% in first 24 hours** for small posterior strokes (Oppenheim 2000)\n• **~35% miss rate within first 6 hours** in small lacunar or brainstem strokes\n• **Repeat MRI at 48-72 hours** if first study negative and clinical suspicion persists\n\nDo NOT discharge a patient with AVS and central features based on a negative early MRI alone.',
+        },
+        {
+            heading: 'Vascular Imaging — CTA or MRA',
+            body: '**Indications:**\n• Suspected vertebrobasilar stenosis or occlusion\n• Suspected dissection (especially with neck pain, recent manipulation, trauma)\n• TIA workup in high-risk s-EVS\n• Assessment for thrombectomy eligibility\n\n**CTA:** Fast, widely available, good for bony anatomy and dissection.\n**MRA:** No radiation, no contrast (TOF), better for intracranial vessels. Time of flight (TOF) or contrast-enhanced.',
+        },
+        {
+            heading: 'When NOT to image',
+            body: '• **Classic BPPV** — brief positional episodes, positive Dix-Hallpike, normal neuro exam. Imaging is unnecessary and low-yield.\n• **Young patient with typical vestibular migraine** — clinical diagnosis.\n• **Clear orthostatic cause** — treat, do not image.\n• **Peripheral HINTS pattern** with expert exam — HINTS is more sensitive than early MRI in these patients (Kattah 2009).\n\n**⚠️ Exceptions where you should still image:**\n• Any new focal neurologic deficit\n• Age >60 with vascular risk factors and spontaneous episodic symptoms\n• First episode with atypical features\n• Progressive or crescendo pattern',
+        },
+        {
+            heading: 'The "missed posterior stroke" epidemic',
+            body: 'Posterior circulation strokes are missed in **~35% of cases** in US EDs (Arch 2016, Saber Tehrani 2014). Common reasons:\n• Reliance on negative CT\n• Anchoring on "labyrinthitis" diagnosis\n• Not performing HINTS correctly\n• Discharging without repeat imaging when clinical suspicion remains\n• Attributing symptoms to medications or anxiety\n\n**Mitigation:** systematic TITRATE approach + appropriate imaging + HINTS by trained examiners + willingness to admit diagnostic uncertainty.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Oppenheim C, et al. False-negative DWI findings in acute ischemic stroke. AJNR. 2000;21(8):1434-1440.' },
+        { num: 2, text: 'Simonsen CZ, et al. Sensitivity of DWI in posterior circulation. Neurology. 2015;85(20):1785-1788.' },
+        { num: 3, text: 'Arch AE, et al. Missed ischemic stroke diagnosis in the ED. Stroke. 2016;47(3):668-673.' },
+        { num: 4, text: 'Saber Tehrani AS, et al. Small strokes causing severe vertigo. Neurology. 2014;83(2):169-173.' },
+        { num: 5, text: 'Kattah JC, et al. HINTS. Stroke. 2009;40(11):3504-3510.' },
+    ],
+};
+const VERTIGO_POST_CIRC_EVIDENCE = {
+    id: 'vertigo-post-circ-evidence',
+    title: 'Posterior Circulation Stroke — Evidence Summary',
+    subtitle: 'DWI sensitivity data, HINTS vs MRI, and the missed-stroke problem',
+    sections: [
+        {
+            heading: 'Incidence and mortality',
+            body: '• Posterior circulation strokes account for ~20-25% of all ischemic strokes\n• Brainstem strokes have **1-year mortality 20-30%**\n• Vertebral artery dissection causes up to 20% of posterior strokes in patients <45\n• Cerebellar strokes can cause fatal edema requiring decompression within 48-72 hours',
+        },
+        {
+            heading: 'CT limitations',
+            body: '**CT sensitivity for acute posterior fossa ischemia: 7-16%** (multiple studies).\n\nReasons:\n• Posterior fossa bone artifact\n• Small stroke size\n• Limited early ischemic changes\n\nCT is useful to exclude hemorrhage but **cannot rule out posterior circulation stroke**. [1]',
+        },
+        {
+            heading: 'MRI-DWI false negatives',
+            body: '**Oppenheim 2000:** ~20% false-negative rate for acute stroke in first 24 hours.\n\n**Simonsen 2015:** Sensitivity for posterior circulation stroke was lower than for anterior circulation, especially in first 48 hours.\n\n**Saber Tehrani 2014:** Small strokes (<10 mm) in pons, medulla, and lateral medulla had **~35% false-negative rate** on first DWI within 48 hours of symptom onset.\n\n**Implication:** A single negative early MRI does not rule out stroke. **Repeat imaging at 48-72 hours** is the standard when clinical suspicion remains high. [2, 4]',
+        },
+        {
+            heading: 'HINTS vs early MRI',
+            body: '**Kattah 2009:** In 101 AVS patients, HINTS examination by experienced neuro-ophthalmologists:\n• Sensitivity for stroke: **100%**\n• Specificity: **96%**\n• Superior to early MRI-DWI (sensitivity ~88% in first 48 hours)\n• All HINTS-central patients had stroke on repeat imaging\n\n**Critical caveat:** This was performed by neuro-ophthalmology specialists, not ED providers. **Nelson 2011** showed much lower accuracy in non-specialists.\n\n**Newman-Toker 2013:** HINTS outperformed ABCD2 score for identifying stroke in acute continuous vertigo. [2, 3, 28]',
+        },
+        {
+            heading: 'Missed posterior stroke epidemiology',
+            body: '**Arch 2016:** Retrospective review of 465 patients ultimately diagnosed with ischemic stroke. **~35% were initially missed** by ED or neurology services. Posterior circulation strokes were 2.3-fold more likely to be missed than anterior strokes.\n\n**Common errors:**\n• Misattribution to "labyrinthitis" or "vestibular neuritis"\n• Reliance on negative CT\n• Not performing HINTS (or performing it incorrectly)\n• Discharge without follow-up imaging when symptoms persist\n• Underweighting vascular risk factors\n\n**Vulnerable populations:** isolated vertigo without other neuro signs, young patients (dismissed as "benign"), patients with "normal" early MRI. [6]',
+        },
+        {
+            heading: 'Dissection red flags',
+            body: '• Neck pain or occipital headache + vertigo = suspect vertebral dissection\n• Recent neck manipulation (chiropractic) or trauma (including minor)\n• Young patient (<50)\n• Horner syndrome\n• Crossed signs (Wallenberg syndrome)\n• CTA/MRA head and neck is essential',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Chalela JA, et al. Magnetic resonance imaging and computed tomography in emergency assessment of patients with suspected acute stroke. Lancet. 2007;369(9558):293-298.' },
+        { num: 2, text: 'Kattah JC, et al. HINTS to diagnose stroke in the acute vestibular syndrome. Stroke. 2009;40(11):3504-3510.' },
+        { num: 3, text: 'Oppenheim C, et al. False-negative DWI findings. AJNR. 2000;21(8):1434-1440.' },
+        { num: 4, text: 'Saber Tehrani AS, et al. Small strokes causing severe vertigo. Neurology. 2014;83(2):169-173.' },
+        { num: 5, text: 'Simonsen CZ, et al. Sensitivity of DWI in posterior circulation. Neurology. 2015;85(20):1785-1788.' },
+        { num: 6, text: 'Arch AE, et al. Missed ischemic stroke in the ED. Stroke. 2016;47(3):668-673.' },
+        { num: 28, text: 'Newman-Toker DE, et al. HINTS outperforms ABCD2. Acad Emerg Med. 2013;20(10):986-996.' },
+    ],
+};
+const VERTIGO_REHAB_DISCHARGE = {
+    id: 'vertigo-rehab-discharge',
+    title: 'Vertigo Discharge Instructions',
+    subtitle: 'Patient handout — what to do at home',
+    shareable: true,
+    sections: [
+        {
+            heading: 'What we think is happening',
+            body: 'You have a condition affecting your inner ear or the balance system in your brain. Your doctor has examined you and determined this is most likely a benign (non-dangerous) cause. The dizziness should gradually improve over days to weeks as your brain adjusts.',
+        },
+        {
+            heading: 'Medications — use sparingly',
+            body: '• **Meclizine (Antivert) 25 mg**: take 1 tablet every 6-8 hours AS NEEDED for severe symptoms. **Do not use for more than 3-5 days** — longer use actually slows recovery.\n• **Ondansetron (Zofran) 4 mg**: dissolves on your tongue. Take as needed for nausea, up to 3 times per day.\n• **Avoid** sleeping pills, sedatives, and alcohol — they make balance worse.',
+        },
+        {
+            heading: 'The most important thing you can do',
+            body: '**MOVE. Do NOT stay in bed.**\n\nBed rest makes dizziness last longer. The sooner you get up, walk around, and do your normal activities, the faster your brain will reset its balance system.\n\n• Walk around your home as soon as you feel able (with someone to help if unsteady)\n• Try turning your head from side to side while walking\n• Look up, down, and side to side throughout the day\n• Some brief dizziness with movement is normal and helpful — your brain is re-learning\n• Slowly increase activity each day',
+        },
+        {
+            heading: 'Vestibular physical therapy',
+            body: '**This is the single most effective treatment for your symptoms.** It is more effective than any medication for long-term recovery.\n\n• Ask your primary care doctor for a referral to a **vestibular-trained physical therapist**\n• You can find certified therapists at **vestibular.org**\n• Start as soon as possible — earlier treatment means faster recovery\n• Even if you feel better, 2-3 PT sessions can significantly speed up your full recovery',
+        },
+        {
+            heading: 'Fall prevention',
+            body: '• Remove loose rugs and clutter from walking areas\n• Use nightlights in bedroom and hallway\n• Hold handrails on stairs\n• Sit down when putting on pants or shoes\n• Ask for help with tasks requiring balance or reaching\n• Do not drive until your doctor says it is safe\n• Elderly patients: consider a cane or walker temporarily',
+        },
+        {
+            heading: 'Return to the ER immediately if you develop:',
+            body: '• **New weakness** in face, arm, or leg\n• **Trouble speaking** or slurred speech\n• **Double vision** or new vision loss\n• **Severe headache** or new neck pain\n• **Hearing loss** in one ear\n• **Cannot walk at all**\n• **Persistent vomiting** and cannot keep fluids down\n• **Symptoms get much worse** instead of gradually improving\n• **Fall** with injury',
+        },
+        {
+            heading: 'Follow-up',
+            body: '• **Primary care doctor** within 1 week\n• **Vestibular physical therapy** as soon as possible\n• **ENT (ear/nose/throat)** if your primary care doctor recommends\n• **Neurology** if your symptoms are not improving after 2 weeks',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, et al. GRACE-3 Guidelines for ED dizziness and vertigo. Acad Emerg Med. 2023;30(5):442-486.' },
+        { num: 2, text: 'Whitney SL, et al. Vestibular rehabilitation overview. Handb Clin Neurol. 2016;137:187-205.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Vertigo
+    'vertigo-summary': VERTIGO_SUMMARY,
+    'vertigo-hints-guide': VERTIGO_HINTS_GUIDE,
+    'vertigo-dix-hallpike': VERTIGO_DIX_HALLPIKE,
+    'vertigo-nystagmus-guide': VERTIGO_NYSTAGMUS_GUIDE,
+    'vertigo-bppv-variants': VERTIGO_BPPV_VARIANTS,
+    'vertigo-central-peripheral': VERTIGO_CENTRAL_PERIPHERAL,
+    'vertigo-migraine-criteria': VERTIGO_MIGRAINE_CRITERIA,
+    'vertigo-imaging-guide': VERTIGO_IMAGING_GUIDE,
+    'vertigo-post-circ-evidence': VERTIGO_POST_CIRC_EVIDENCE,
+    'vertigo-rehab-discharge': VERTIGO_REHAB_DISCHARGE,
     // TIF
     'tif-steps': TIF_STEPS_SUMMARY,
     'tif-utley-steps': TIF_UTLEY_STEPS,
