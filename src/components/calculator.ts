@@ -20601,6 +20601,422 @@ const CSPINE_HANGMAN_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// NEUROGENIC SHOCK CALCULATORS
+// =====================================================================
+
+const NEURO_SHOCK_DDX_CALCULATOR: CalculatorDefinition = {
+  id: 'neuro-shock-ddx',
+  title: 'Shock Type DDx',
+  subtitle: 'Neurogenic vs hypovolemic',
+  description: 'Differentiate neurogenic shock from other shock types based on clinical findings.',
+  fields: [
+    {
+      name: 'hr',
+      label: 'Heart rate response to hypotension',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Tachycardia (HR >100)', points: 0 },
+        { label: 'Normal or inappropriate (HR 60-100)', points: 1 },
+        { label: 'Bradycardia (HR <60)', points: 2 },
+      ],
+    },
+    {
+      name: 'skin',
+      label: 'Skin findings',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Cool, pale, clammy (poor perfusion)', points: 0 },
+        { label: 'Warm, dry, pink (vasodilation)', points: 1 },
+      ],
+    },
+    {
+      name: 'spine',
+      label: 'Spinal injury level',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No spinal injury identified', points: 0 },
+        { label: 'T7 or below', points: 0 },
+        { label: 'T6 or above', points: 1 },
+        { label: 'Cervical spine', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Neurogenic shock requires injury at T6 or above. Always rule out hemorrhage first.',
+  citations: [
+    'EMCrit IBCC. Traumatic Spinal Cord Injury. 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hr = values['hr'] || 0;
+    const skin = values['skin'] || 0;
+    const spine = values['spine'] || 0;
+
+    // Score used for pattern matching
+    void (hr + skin + spine);
+
+    if (hr === 0 && skin === 0) {
+      return {
+        value: 'HYPOVOLEMIC',
+        label: 'Pattern suggests HYPOVOLEMIC shock',
+        description: '**Hypovolemic/Hemorrhagic Shock Pattern**\n\n**Findings:**\n• Tachycardia in response to hypotension\n• Cool, pale, clammy skin\n\n**Action:**\n• AGGRESSIVE hemorrhage workup\n• FAST, pelvic XR, long bones\n• Volume resuscitation\n• Blood products if indicated',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (hr >= 1 && skin === 1 && spine >= 1) {
+      return {
+        value: 'NEUROGENIC',
+        label: 'Pattern suggests NEUROGENIC shock',
+        description: `**Neurogenic Shock Pattern**\n\n**Findings:**\n• Bradycardia or inappropriate HR\n• Warm, vasodilated periphery\n• High spinal injury (T6 or above)\n\n**Classic Triad:**\n1. Hypotension\n2. Bradycardia\n3. Hypothermia\n\n**⚠️ Still rule out hemorrhage** — neurogenic shock is diagnosis of exclusion`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'MIXED/UNCLEAR',
+      label: 'Mixed picture — thorough workup needed',
+      description: '**Pattern unclear**\n\nMay have mixed shock physiology or early presentation.\n\n**Complete workup:**\n• FAST exam\n• Pelvic XR\n• Long bone assessment\n• Spine imaging\n\n**Treat empirically** based on most dangerous etiology (hemorrhage) while completing workup.',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const NEURO_SHOCK_HEMORRHAGE_CALCULATOR: CalculatorDefinition = {
+  id: 'neuro-shock-hemorrhage-check',
+  title: 'Hemorrhage Checklist',
+  subtitle: 'Rule out bleeding before neurogenic dx',
+  description: 'Systematic checklist to rule out hemorrhage before attributing hypotension to neurogenic shock.',
+  fields: [
+    {
+      name: 'fast',
+      label: 'E-FAST exam',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not done', points: 0 },
+        { label: 'Negative', points: 1 },
+        { label: 'Positive — free fluid', points: 2 },
+      ],
+    },
+    {
+      name: 'pelvic',
+      label: 'Pelvic XR',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not done', points: 0 },
+        { label: 'No fracture', points: 1 },
+        { label: 'Fracture identified', points: 2 },
+      ],
+    },
+    {
+      name: 'longbone',
+      label: 'Long bone fractures',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not assessed', points: 0 },
+        { label: 'None identified', points: 1 },
+        { label: 'Fracture(s) present', points: 2 },
+      ],
+    },
+    {
+      name: 'external',
+      label: 'External bleeding',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not assessed', points: 0 },
+        { label: 'None', points: 1 },
+        { label: 'Present — controlled', points: 2 },
+        { label: 'Present — ongoing', points: 3 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'ALL items must be completed and negative before attributing hypotension to neurogenic shock.',
+  citations: [
+    'EMCrit IBCC. Traumatic Spinal Cord Injury. 2025.',
+    'WikEM. Neurogenic Shock. 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const fast = values['fast'] || 0;
+    const pelvic = values['pelvic'] || 0;
+    const longbone = values['longbone'] || 0;
+    const external = values['external'] || 0;
+
+    // Check for positive findings
+    if (fast === 2 || pelvic === 2 || longbone === 2 || external >= 2) {
+      return {
+        value: 'HEMORRHAGE',
+        label: '🔴 HEMORRHAGE IDENTIFIED — treat bleeding first',
+        description: '**Hemorrhage source identified!**\n\n**Do NOT attribute hypotension to neurogenic shock alone.**\n\n**Immediate actions:**\n• MTP if indicated\n• Surgical/IR consultation\n• Address hemorrhage source\n\nNeurogenic shock may coexist but bleeding takes priority.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Check for incomplete workup
+    if (fast === 0 || pelvic === 0 || longbone === 0 || external === 0) {
+      let missing = '';
+      if (fast === 0) missing += '• E-FAST exam\n';
+      if (pelvic === 0) missing += '• Pelvic XR\n';
+      if (longbone === 0) missing += '• Long bone assessment\n';
+      if (external === 0) missing += '• External bleeding check\n';
+
+      return {
+        value: 'INCOMPLETE',
+        label: 'Workup incomplete — complete before neurogenic dx',
+        description: `**Missing studies:**\n\n${missing}\n**Complete hemorrhage workup before attributing hypotension to neurogenic shock.**\n\nNeurogenic shock is a diagnosis of EXCLUSION.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'CLEARED',
+      label: '✅ Hemorrhage workup negative',
+      description: '**Hemorrhage workup complete and negative:**\n\n✅ E-FAST negative\n✅ Pelvic XR negative\n✅ No long bone fractures\n✅ No external bleeding\n\n→ Neurogenic shock is now a reasonable diagnosis if spinal injury at T6 or above with hypotension + bradycardia.',
+      colorVar: '--color-success',
+    };
+  },
+};
+
+const NEURO_SHOCK_PRESSOR_CALCULATOR: CalculatorDefinition = {
+  id: 'neuro-shock-pressor-calc',
+  title: 'Vasopressor Dosing',
+  subtitle: 'Neurogenic shock pressor selection',
+  description: 'Vasopressor selection and dosing guide for neurogenic shock.',
+  fields: [
+    {
+      name: 'agent',
+      label: 'Select vasopressor',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Norepinephrine (first-line)', points: 1 },
+        { label: 'Epinephrine', points: 2 },
+        { label: 'Dopamine (if NE unavailable)', points: 3 },
+        { label: 'Vasopressin (adjunct)', points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: '⚠️ AVOID phenylephrine monotherapy — causes reflex bradycardia, worsens existing bradycardia.',
+  citations: [
+    'EMCrit IBCC. Traumatic Spinal Cord Injury. 2025.',
+    'StatPearls. Neurogenic Shock. 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const agent = values['agent'] || 0;
+
+    if (agent === 1) {
+      return {
+        value: 'NE',
+        label: 'NOREPINEPHRINE — First-line',
+        description: '**NOREPINEPHRINE (Levophed)**\n\n✅ **Preferred first-line agent**\n\n**Why:**\n• Combined α₁ (vasoconstriction) + β₁ (chronotropic)\n• Addresses BOTH hypotension AND bradycardia\n\n**Dosing:**\n| Parameter | Value |\n|-----------|-------|\n| **Start** | 0.05-0.1 mcg/kg/min |\n| **Titrate** | Every 5-15 min |\n| **Range** | 0.05-2 mcg/kg/min |\n| **Target** | MAP ≥85 mmHg |',
+        colorVar: '--color-primary',
+      };
+    }
+    if (agent === 2) {
+      return {
+        value: 'EPI',
+        label: 'EPINEPHRINE — If prominent bradycardia',
+        description: '**EPINEPHRINE**\n\n**When to use:**\n• Prominent bradycardia with hypotension\n• Better chronotropic effect than norepinephrine\n\n**Dosing:**\n| Route | Dose |\n|-------|------|\n| **Push-dose** | 10-20 mcg IV bolus |\n| **Infusion** | 0.01-0.2 mcg/kg/min |\n\n**Preparation (push-dose):**\n1. 1 mL cardiac epi (1:10,000 = 100 mcg/mL)\n2. Add to 9 mL NS\n3. Final: 10 mcg/mL\n4. Give 1-2 mL (10-20 mcg)',
+        colorVar: '--color-decision-active',
+      };
+    }
+    if (agent === 3) {
+      return {
+        value: 'DOPA',
+        label: 'DOPAMINE — If NE unavailable',
+        description: '**DOPAMINE**\n\n**When to use:**\nOnly if norepinephrine unavailable\n\n**Dosing:**\n• **5-20 mcg/kg/min**\n• Low dose (2-5): β predominant\n• Medium (5-10): β + some α\n• High (>10): α predominant\n\n**Disadvantages:**\n• Higher complication rate than NE\n• Less effective α activity\n• May cause inappropriate diuresis at low doses',
+        colorVar: '--color-warning',
+      };
+    }
+    if (agent === 4) {
+      return {
+        value: 'VASO',
+        label: 'VASOPRESSIN — Adjunct only',
+        description: '**VASOPRESSIN**\n\n**Role:** Adjunct for refractory neurogenic shock\n\n**Dosing:**\n• **0.03-0.04 units/min** IV infusion\n\n**Characteristics:**\n• Pure V1 receptor vasoconstrictor\n• NO chronotropic effect\n• Does not address bradycardia\n• Use WITH norepinephrine, not alone',
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Select an agent',
+      description: '**Vasopressor Selection in Neurogenic Shock:**\n\n1. **Norepinephrine** — First-line (α + β)\n2. **Epinephrine** — If prominent bradycardia\n3. **Dopamine** — If NE unavailable\n4. **Vasopressin** — Adjunct only\n\n🚫 **AVOID:** Phenylephrine monotherapy',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const NEURO_SHOCK_BRADY_CALCULATOR: CalculatorDefinition = {
+  id: 'neuro-shock-brady-protocol',
+  title: 'Bradycardia Protocol',
+  subtitle: 'Neurogenic shock HR management',
+  description: 'Management algorithm for bradycardia in neurogenic shock.',
+  fields: [
+    {
+      name: 'hr',
+      label: 'Current heart rate',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '50-60 bpm', points: 1 },
+        { label: '40-50 bpm', points: 2 },
+        { label: '<40 bpm or symptomatic', points: 3 },
+      ],
+    },
+    {
+      name: 'atropine-tried',
+      label: 'Atropine response',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not yet tried', points: 0 },
+        { label: 'Responsive', points: 1 },
+        { label: 'Refractory to atropine', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Target HR >60 bpm with adequate perfusion.',
+  citations: [
+    'EMCrit IBCC. Traumatic Spinal Cord Injury. 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hr = values['hr'] || 0;
+    const atropine = values['atropine-tried'] || 0;
+
+    if (hr === 3) {
+      return {
+        value: 'SEVERE',
+        label: 'Severe bradycardia — escalate therapy',
+        description: '**Severe/Symptomatic Bradycardia**\n\n**Immediate:**\n• Atropine 0.5-1 mg IV (max 3 mg)\n• Push-dose epinephrine 10-20 mcg\n• Prepare for pacing\n\n**If refractory:**\n• Transcutaneous pacing\n• Isoproterenol 2-10 mcg/min\n• Aminophylline 6 mg/kg IV',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (atropine === 2) {
+      return {
+        value: 'REFRACTORY',
+        label: 'Atropine-refractory — escalate',
+        description: '**Atropine-Refractory Bradycardia**\n\n**Options:**\n\n1. **Isoproterenol** — pure β-agonist\n   • 2-10 mcg/min IV infusion\n\n2. **Aminophylline** — methylxanthine\n   • 6 mg/kg IV load\n   • Maintenance 0.5 mg/kg/hr\n\n3. **Transcutaneous pacing**\n   • For symptomatic, refractory cases\n\n4. **Transvenous pacing**\n   • For sustained requirement',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (atropine === 0) {
+      return {
+        value: 'ATROPINE',
+        label: 'Start with atropine',
+        description: '**First-Line: ATROPINE**\n\n**Dosing:**\n• 0.4-0.6 mg IV every 4 hours PRN\n• May repeat to max 3 mg total\n\n**Alternative:**\n• Glycopyrrolate 0.1-0.2 mg IV\n• Less CNS penetration than atropine\n\n**Target:** HR >60 bpm with adequate perfusion',
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'MONITOR',
+      label: 'Continue current therapy + monitor',
+      description: '**Continue Current Management**\n\n• Atropine responsive — continue PRN\n• Monitor HR and perfusion\n• Ensure MAP goal 85-90 mmHg maintained\n• Watch for late deterioration',
+      colorVar: '--color-success',
+    };
+  },
+};
+
+const NEURO_SHOCK_MAP_CALCULATOR: CalculatorDefinition = {
+  id: 'neuro-shock-map-calc',
+  title: 'MAP Goals Calculator',
+  subtitle: 'SCI hemodynamic targets',
+  description: 'Calculate and track MAP goals for spinal cord injury management.',
+  fields: [
+    {
+      name: 'sbp',
+      label: 'Current SBP (mmHg)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '<80', points: 1 },
+        { label: '80-90', points: 2 },
+        { label: '90-110', points: 3 },
+        { label: '110-130', points: 4 },
+        { label: '>130', points: 5 },
+      ],
+    },
+    {
+      name: 'dbp',
+      label: 'Current DBP (mmHg)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '<50', points: 1 },
+        { label: '50-60', points: 2 },
+        { label: '60-70', points: 3 },
+        { label: '70-80', points: 4 },
+        { label: '>80', points: 5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Target MAP 85-90 mmHg for 3-7 days. Small differences (2-3 mmHg) correlate with outcomes.',
+  citations: [
+    '2024 SCI Guidelines. Hemodynamic Management in Acute SCI.',
+    'EMCrit IBCC. Traumatic Spinal Cord Injury. 2025.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const sbpIndex = values['sbp'] || 0;
+    const dbpIndex = values['dbp'] || 0;
+
+    // Approximate MAP calculation from ranges
+    const sbpMap: Record<number, number> = { 1: 75, 2: 85, 3: 100, 4: 120, 5: 140 };
+    const dbpMap: Record<number, number> = { 1: 45, 2: 55, 3: 65, 4: 75, 5: 85 };
+
+    const sbp = sbpMap[sbpIndex] || 100;
+    const dbp = dbpMap[dbpIndex] || 65;
+    const map = Math.round(dbp + (sbp - dbp) / 3);
+
+    const targets = '**2024 Guidelines:**\n| Parameter | Target | Duration |\n|-----------|--------|----------|\n| MAP | 85-90 mmHg | 3-7 days |\n| Lower limit | 75-80 mmHg | Minimum |\n| Upper limit | 90-95 mmHg | Maximum |\n\n';
+
+    if (map < 75) {
+      return {
+        value: `~${map}`,
+        label: `Estimated MAP ~${map} mmHg — BELOW TARGET`,
+        description: targets + `**Current estimated MAP: ~${map} mmHg**\n\n🔴 **BELOW minimum target (75-80)**\n\n**Immediate actions:**\n• Increase vasopressor\n• Ensure adequate volume status\n• Check for hemorrhage\n• Arterial line for accurate monitoring`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (map < 85) {
+      return {
+        value: `~${map}`,
+        label: `Estimated MAP ~${map} mmHg — Low-normal`,
+        description: targets + `**Current estimated MAP: ~${map} mmHg**\n\n⚠️ **Below optimal target (85-90)**\n\nAcceptable but suboptimal. Consider uptitrating vasopressor.\n\n**Evidence:** MAPs <85 associated with poorer neurologic outcomes.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (map <= 95) {
+      return {
+        value: `~${map}`,
+        label: `Estimated MAP ~${map} mmHg — ON TARGET`,
+        description: targets + `**Current estimated MAP: ~${map} mmHg**\n\n✅ **Within target range (85-95)**\n\nMaintain current vasopressor dose.\nContinue monitoring.\nDuration: 3-7 days.`,
+        colorVar: '--color-success',
+      };
+    }
+
+    return {
+      value: `~${map}`,
+      label: `Estimated MAP ~${map} mmHg — Above target`,
+      description: targets + `**Current estimated MAP: ~${map} mmHg**\n\n⚠️ **Above upper target (>95)**\n\nConsider reducing vasopressor if stable.\nAvoid hypertension-induced complications.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 
@@ -30302,6 +30718,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cspine-slic': CSPINE_SLIC_CALCULATOR,
   'cspine-odontoid-class': CSPINE_ODONTOID_CALCULATOR,
   'cspine-hangman-class': CSPINE_HANGMAN_CALCULATOR,
+  // Neurogenic Shock
+  'neuro-shock-ddx': NEURO_SHOCK_DDX_CALCULATOR,
+  'neuro-shock-hemorrhage-check': NEURO_SHOCK_HEMORRHAGE_CALCULATOR,
+  'neuro-shock-pressor-calc': NEURO_SHOCK_PRESSOR_CALCULATOR,
+  'neuro-shock-brady-protocol': NEURO_SHOCK_BRADY_CALCULATOR,
+  'neuro-shock-map-calc': NEURO_SHOCK_MAP_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

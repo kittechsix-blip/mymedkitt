@@ -1092,6 +1092,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'odontoid', label: 'Odontoid', icon: '🦴', action: 'calculator', target: 'cspine-odontoid-class' },
     { id: 'hangman', label: 'Hangman', icon: '⚠️', action: 'calculator', target: 'cspine-hangman-class' },
   ],
+  // ---------------------------------------------------------------
+  // Neurogenic Shock & Spinal Shock
+  // ---------------------------------------------------------------
+  'neurogenic-shock': [
+    { id: 'shock-ddx', label: 'Shock DDx', icon: '🔍', action: 'calculator', target: 'neuro-shock-ddx' },
+    { id: 'hemorrhage', label: 'Bleed Check', icon: '🩸', action: 'calculator', target: 'neuro-shock-hemorrhage-check' },
+    { id: 'pressors', label: 'Pressors', icon: '💉', action: 'calculator', target: 'neuro-shock-pressor-calc' },
+    { id: 'brady', label: 'Brady Protocol', icon: '🫀', action: 'calculator', target: 'neuro-shock-brady-protocol' },
+    { id: 'map', label: 'MAP Goals', icon: '📊', action: 'calculator', target: 'neuro-shock-map-calc' },
+  ],
 };
 
 // Stop button appended automatically to every consult

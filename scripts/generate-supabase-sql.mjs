@@ -190,6 +190,7 @@ const TREE_REGISTRY = {
   'burr-hole':           { prefix: 'BURR_HOLE',            entryNodeId: 'bh-start',           categoryId: 'procedures' },
   'rv-assessment':       { prefix: 'RV_ASSESSMENT',        entryNodeId: 'rv-start',           categoryId: 'anesthesia-airway' },
   'cervical-spine':      { prefix: 'CERVICAL_SPINE',       entryNodeId: 'cspine-start',       categoryId: 'trauma-surg' },
+  'neurogenic-shock':    { prefix: 'NEUROGENIC_SHOCK',     entryNodeId: 'neuro-shock-start',  categoryId: 'trauma-surg' },
 };
 
 // Cross-listing: which consults appear in multiple categories

@@ -942,6 +942,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/cervical-spine.js');
             return { nodes: m.CERVICAL_SPINE_NODES, entryNodeId: 'cspine-start', categoryId: 'trauma-surg', moduleLabels: m.CERVICAL_SPINE_MODULE_LABELS, citations: m.CERVICAL_SPINE_CITATIONS, criticalActions: m.CERVICAL_SPINE_CRITICAL_ACTIONS };
         },
+        'neurogenic-shock': async () => {
+            const m = await import('../data/trees/neurogenic-shock.js');
+            return { nodes: m.NEUROGENIC_SHOCK_NODES, entryNodeId: 'neuro-shock-start', categoryId: 'trauma-surg', moduleLabels: m.NEUROGENIC_SHOCK_MODULE_LABELS, citations: m.NEUROGENIC_SHOCK_CITATIONS, criticalActions: m.NEUROGENIC_SHOCK_CRITICAL_ACTIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
