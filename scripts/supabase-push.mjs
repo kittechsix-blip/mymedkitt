@@ -185,6 +185,7 @@ const TREE_REGISTRY = {
   'ed-methadone':         { prefix: 'ED_METHADONE',          entryNodeId: 'meth-start',     categoryId: 'emergency-medicine' },
   'cvst':                 { prefix: 'CVST',                  entryNodeId: 'cvst-start',     categoryId: 'emergency-medicine' },
   'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'shoulder-start', categoryId: 'orthopedics' },
+  'wrist-injuries':       { prefix: 'WRIST_INJURIES',       entryNodeId: 'wrist-start',    categoryId: 'orthopedics' },
   'peds-submersion':      { prefix: 'PEDS_SUBMERSION',      entryNodeId: 'submersion-start', categoryId: 'pediatrics' },
   'brugada-syndrome':     { prefix: 'BRUGADA_SYNDROME',     entryNodeId: 'brugada-start',    categoryId: 'cardiology' },
   'hd-emergencies':       { prefix: 'HD_EMERGENCIES',       entryNodeId: 'hd-start',         categoryId: 'critical-care' },

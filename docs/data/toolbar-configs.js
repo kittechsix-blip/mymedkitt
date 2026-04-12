@@ -783,6 +783,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'technique', label: 'Technique', icon: '🔀', action: 'jump', target: 'shoulder-technique-select' },
         { id: 'fares', label: 'FARES', icon: '✋', action: 'jump', target: 'shoulder-fares' },
     ],
+    'wrist-injuries': [
+        { id: 'reduction', label: 'Reduction OK?', icon: '📐', action: 'calculator', target: 'wrist-reduction-check' },
+        { id: 'scaphoid', label: 'Scaphoid Risk', icon: '🔍', action: 'calculator', target: 'wrist-scaphoid-suspect' },
+        { id: 'druj', label: 'DRUJ Stable?', icon: '🔄', action: 'calculator', target: 'wrist-druj-stability' },
+        { id: 'cts', label: 'CTS Risk', icon: '⚠️', action: 'calculator', target: 'wrist-cts-risk' },
+        { id: 'splint', label: 'Splint Guide', icon: '🩹', action: 'calculator', target: 'wrist-splint-selector' },
+    ],
     'urinary-retention': [
         { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aur-red-flags' },
         { id: 'catheter', label: 'Catheter', icon: '🩹', action: 'jump', target: 'aur-cath-technique' },

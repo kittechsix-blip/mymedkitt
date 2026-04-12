@@ -20720,6 +20720,368 @@ const HERN_HTS_CALCULATOR = {
     },
 };
 // =====================================================================
+// WRIST INJURY CALCULATORS
+// =====================================================================
+const WRIST_REDUCTION_CALC = {
+    id: 'wrist-reduction-check',
+    title: 'Post-Reduction Check',
+    subtitle: 'Distal radius reduction adequacy',
+    description: 'Assess whether distal radius post-reduction parameters are acceptable for non-operative management.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Distal Radius Fractures. StatPearls. 2024.', 'AAOS Management of Distal Radius Fractures. 2009.'],
+    fields: [
+        {
+            name: 'radial-shortening',
+            label: 'Radial shortening',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<3mm (acceptable)', points: 0 },
+                { label: '3-5mm (borderline)', points: 1 },
+                { label: '>5mm (unacceptable)', points: 2 },
+            ],
+        },
+        {
+            name: 'dorsal-tilt',
+            label: 'Dorsal tilt (angulation)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<10° (acceptable)', points: 0 },
+                { label: '10-15° (borderline)', points: 1 },
+                { label: '>15° (unacceptable)', points: 2 },
+            ],
+        },
+        {
+            name: 'intra-articular',
+            label: 'Intra-articular step-off',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<2mm (acceptable)', points: 0 },
+                { label: '2-3mm (borderline)', points: 1 },
+                { label: '>3mm (unacceptable)', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const shortening = values['radial-shortening'] || 0;
+        const tilt = values['dorsal-tilt'] || 0;
+        const stepoff = values['intra-articular'] || 0;
+        const total = shortening + tilt + stepoff;
+        if (total === 0) {
+            return {
+                value: 'ACCEPTABLE',
+                label: 'Acceptable reduction — conservative management',
+                description: '✅ **ACCEPTABLE REDUCTION**\n\n• Radial shortening <3mm\n• Dorsal tilt <10°\n• Intra-articular step-off <2mm\n\n**Plan:**\n• Sugar tong splint\n• Routine ortho follow-up 3-5 days\n• Post-splint neurovascular check\n• Elevation, ice, analgesia',
+                colorVar: '--color-success',
+            };
+        }
+        if (total <= 2 && shortening < 2 && tilt < 2 && stepoff < 2) {
+            return {
+                value: 'BORDERLINE',
+                label: 'Borderline reduction — close follow-up',
+                description: '⚠️ **BORDERLINE REDUCTION**\n\n• One parameter at borderline\n• May be acceptable in elderly with low functional demands\n• Higher risk of loss of reduction\n\n**Plan:**\n• Sugar tong splint\n• **Urgent ortho follow-up 24-48h**\n• Repeat films at follow-up\n• Consider surgical referral if younger, high-demand patient',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'UNACCEPTABLE',
+            label: 'Unacceptable reduction — URGENT ortho',
+            description: '🚨 **UNACCEPTABLE REDUCTION**\n\n• Parameters outside acceptable range\n• High likelihood of operative fixation\n• Risk of malunion, arthritis, functional impairment\n\n**Actions:**\n• **URGENT orthopedic consultation (24-48h)**\n• Sugar tong splint for comfort\n• May require re-reduction or surgical fixation\n• Do not delay referral',
+            colorVar: '--color-critical',
+        };
+    },
+};
+const WRIST_SCAPHOID_SUSPECT = {
+    id: 'wrist-scaphoid-suspect',
+    title: 'Scaphoid Clinical Suspicion',
+    subtitle: 'Predict scaphoid fracture risk',
+    description: 'Determine likelihood of scaphoid fracture based on clinical exam when X-rays are negative or equivocal.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Acute scaphoid fractures: guidelines. PMC. 2020.'],
+    fields: [
+        {
+            name: 'snuffbox',
+            label: 'Snuffbox tenderness',
+            type: 'toggle',
+            points: 2,
+            description: 'Tenderness in anatomic snuffbox (dorsal radial wrist)',
+        },
+        {
+            name: 'tubercle',
+            label: 'Scaphoid tubercle tenderness',
+            type: 'toggle',
+            points: 2,
+            description: 'Volar tenderness over scaphoid tubercle',
+        },
+        {
+            name: 'axial-load',
+            label: 'Pain with thumb axial loading',
+            type: 'toggle',
+            points: 1,
+            description: 'Pain when pushing along thumb axis',
+        },
+        {
+            name: 'foosh',
+            label: 'FOOSH mechanism',
+            type: 'toggle',
+            points: 1,
+            description: 'Fall on outstretched hand',
+        },
+    ],
+    computeResult(values) {
+        const snuffbox = values.snuffbox || 0;
+        const tubercle = values.tubercle || 0;
+        const axial = values['axial-load'] || 0;
+        const foosh = values.foosh || 0;
+        const score = snuffbox + tubercle + axial + foosh;
+        if (score >= 4) {
+            return {
+                value: 'HIGH',
+                label: 'HIGH suspicion — immobilize NOW',
+                description: '🚨 **HIGH CLINICAL SUSPICION**\n\n• Snuffbox + tubercle tenderness = scaphoid fracture until proven otherwise\n• Plain X-rays only 70% sensitive\n\n**Actions:**\n1. **Thumb spica splint immediately** (even if X-rays negative)\n2. Arrange MRI or CT in 3-5 days\n3. Patient education on AVN risk\n4. Follow-up with hand specialist\n\n**Do NOT dismiss as sprain**',
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= 2) {
+            return {
+                value: 'MODERATE',
+                label: 'MODERATE suspicion — splint and image',
+                description: '⚠️ **MODERATE CLINICAL SUSPICION**\n\n• Some clinical features present\n• Cannot exclude scaphoid fracture\n\n**Actions:**\n1. Thumb spica splint\n2. Consider MRI/CT in 3-5 days OR\n3. Repeat X-rays in 10-14 days\n4. Ortho follow-up\n\n**Better to over-treat than miss it**',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'LOW',
+            label: 'LOW suspicion — but still consider imaging',
+            description: '**LOW CLINICAL SUSPICION**\n\n• Minimal clinical features\n• Lower probability of scaphoid fracture\n\n**Options:**\n• Volar splint for comfort\n• Return precautions: if pain worsens or persists >7 days → re-evaluate\n• Low threshold to splint and image if any doubt\n\n**Remember:** Missed scaphoid → AVN, nonunion, disability',
+            colorVar: '--color-success',
+        };
+    },
+};
+const WRIST_DRUJ_STABILITY = {
+    id: 'wrist-druj-stability',
+    title: 'DRUJ Stability Test',
+    subtitle: 'Distal radioulnar joint assessment',
+    description: 'Assess DRUJ stability after reduction or with ulnar styloid fracture.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Distal Radioulnar Joint Instability. PMC. 2015.'],
+    fields: [
+        {
+            name: 'laxity',
+            label: 'DRUJ laxity with stress',
+            type: 'select',
+            points: 0,
+            description: 'Ballottement test: push ulnar head dorsal/volar',
+            selectOptions: [
+                { label: 'Stable (minimal movement, solid endpoint)', points: 0 },
+                { label: 'Mild laxity (some movement, firm endpoint)', points: 1 },
+                { label: 'Gross instability (subluxates easily, no endpoint)', points: 2 },
+            ],
+        },
+        {
+            name: 'ulnar-styloid',
+            label: 'Ulnar styloid fracture',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Tip fracture (<2mm displacement)', points: 0 },
+                { label: 'Base fracture (>2mm displacement)', points: 2 },
+            ],
+        },
+        {
+            name: 'rotation',
+            label: 'Forearm rotation limitation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Full pronation/supination', points: 0 },
+                { label: 'Mild limitation or pain', points: 1 },
+                { label: 'Severe limitation or locked', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const laxity = values.laxity || 0;
+        const styloid = values['ulnar-styloid'] || 0;
+        const rotation = values.rotation || 0;
+        const score = laxity + styloid + rotation;
+        if (score >= 4 || laxity >= 2) {
+            return {
+                value: 'UNSTABLE',
+                label: 'UNSTABLE DRUJ — URGENT ortho',
+                description: '🚨 **UNSTABLE DRUJ**\n\n• Gross instability on exam\n• High likelihood of operative fixation\n• Cannot be managed conservatively\n\n**Actions:**\n1. Above-elbow splint in position of stability (supination for dorsal instability, pronation for volar)\n2. **URGENT orthopedic referral (24-48h)**\n3. May require K-wire fixation\n4. Do not delay — chronic instability is disabling',
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= 2) {
+            return {
+                value: 'BORDERLINE',
+                label: 'Borderline stability — close follow-up',
+                description: '⚠️ **BORDERLINE DRUJ STABILITY**\n\n• Some instability or concerning features\n• May be acceptable with immobilization\n• Risk of late instability\n\n**Actions:**\n1. Above-elbow splint\n2. **Urgent ortho follow-up (24-48h)**\n3. Repeat stability testing at follow-up\n4. Low threshold for surgical referral',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'STABLE',
+            label: 'Stable DRUJ — conservative management',
+            description: '✅ **STABLE DRUJ**\n\n• Minimal laxity on stress testing\n• Likely to do well with immobilization\n\n**Actions:**\n• Sugar tong splint (limits rotation)\n• Routine ortho follow-up 3-5 days\n• Re-assess stability at follow-up\n• Good prognosis for conservative management',
+            colorVar: '--color-success',
+        };
+    },
+};
+const WRIST_CARPAL_TUNNEL_RISK = {
+    id: 'wrist-cts-risk',
+    title: 'Acute CTS Risk',
+    subtitle: 'Carpal tunnel syndrome after wrist fracture',
+    description: 'Predict risk of acute carpal tunnel syndrome after wrist fracture. Up to 20% of wrist fractures develop CTS.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Incidence of CTS after Distal Radius Fracture. PMC. 2022.', 'Acute CTS: Early Decompression. PMC. 2023.'],
+    fields: [
+        {
+            name: 'median-symptoms',
+            label: 'Median nerve symptoms',
+            type: 'select',
+            points: 0,
+            description: 'Paresthesias in thumb/index/middle/radial ring finger',
+            selectOptions: [
+                { label: 'None', points: 0 },
+                { label: 'Mild paresthesias', points: 2 },
+                { label: 'Severe paresthesias or motor weakness', points: 4 },
+            ],
+        },
+        {
+            name: 'displacement',
+            label: 'Fracture displacement',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Minimal displacement', points: 0 },
+                { label: 'Moderate displacement', points: 1 },
+                { label: 'Severe displacement or comminution', points: 2 },
+            ],
+        },
+        {
+            name: 'swelling',
+            label: 'Soft tissue swelling',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Mild', points: 0 },
+                { label: 'Moderate', points: 1 },
+                { label: 'Severe/tense', points: 2 },
+            ],
+        },
+        {
+            name: 'dislocation',
+            label: 'Associated dislocation',
+            type: 'toggle',
+            points: 2,
+            description: 'Perilunate, lunate, or radiocarpal dislocation',
+        },
+    ],
+    computeResult(values) {
+        const median = values['median-symptoms'] || 0;
+        const displacement = values.displacement || 0;
+        const swelling = values.swelling || 0;
+        const dislocation = values.dislocation || 0;
+        const score = median + displacement + swelling + dislocation;
+        if (median >= 2) {
+            return {
+                value: 'PRESENT',
+                label: 'ACUTE CTS PRESENT — decompress NOW',
+                description: '🚨 **ACUTE CARPAL TUNNEL SYNDROME**\n\n• Median nerve symptoms present\n• Urgent decompression improves outcomes\n• Best results if decompressed <40 hours\n\n**Actions:**\n1. **EMERGENT orthopedic consultation**\n2. Elevate, ice, loosen splint\n3. May require urgent carpal tunnel release + fracture fixation\n4. Do NOT delay — permanent nerve damage possible\n\n**Prognosis:** Worse than idiopathic CTS if not treated urgently',
+                colorVar: '--color-critical',
+            };
+        }
+        if (score >= 4) {
+            return {
+                value: 'HIGH RISK',
+                label: 'HIGH RISK for acute CTS — monitor closely',
+                description: '⚠️ **HIGH RISK FOR ACUTE CTS**\n\n• Multiple risk factors present\n• Up to 20% of wrist fractures develop CTS\n• Early recognition critical\n\n**Actions:**\n1. Educate patient on median nerve symptoms\n2. Strict elevation protocol\n3. Ice, analgesia\n4. **Close monitoring** — return immediately if numbness/tingling develops\n5. Consider urgent ortho referral (24-48h)\n\n**Symptoms to watch:** Thumb/index/middle finger numbness, thenar weakness',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'LOW RISK',
+            label: 'Lower risk — but educate on symptoms',
+            description: '**LOWER RISK FOR ACUTE CTS**\n\n• Fewer risk factors\n• Still possible (up to 20% overall incidence)\n\n**Discharge Instructions:**\n• Educate on median nerve symptoms\n• Strict elevation × 48-72 hours\n• Return precautions: numbness, tingling, weakness in thumb/index/middle fingers\n• Ice, analgesia\n\n**If symptoms develop → return immediately**',
+            colorVar: '--color-success',
+        };
+    },
+};
+const WRIST_SPLINT_SELECTOR = {
+    id: 'wrist-splint-selector',
+    title: 'Splint Selector',
+    subtitle: 'Choose the right wrist splint',
+    description: 'Select appropriate splint type based on injury pattern.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Splints and Casts: Indications and Methods. AAFP. 2009.'],
+    fields: [
+        {
+            name: 'injury-type',
+            label: 'Injury type',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Distal radius fracture (Colles, Smith, Barton)', points: 1 },
+                { label: 'Scaphoid fracture (confirmed or suspected)', points: 2 },
+                { label: 'Other carpal fracture (triquetrum, lunate, hamate)', points: 3 },
+                { label: 'Ulnar styloid or DRUJ injury', points: 4 },
+                { label: 'Soft tissue injury / ligament sprain', points: 5 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const type = values['injury-type'] || 1;
+        if (type === 1) {
+            return {
+                value: 'SUGAR TONG',
+                label: 'Sugar Tong Splint — limits rotation',
+                description: '**SUGAR TONG SPLINT**\n\n**Best for:** Distal radius fractures (Colles, Smith, Barton)\n\n**Position:**\n• Forearm neutral rotation\n• Wrist neutral to 10-20° extension\n• Elbow 90° flexion\n\n**Coverage:** U-shaped from dorsal MCPs → around elbow → volar MCPs\n\n**Advantage:** Limits forearm rotation (pronation/supination)\n\n**Application:**\n• Stockinette + padding\n• 8-10 layers plaster OR 3-4 layers fiberglass\n• Cover 1/2 to 2/3 circumference\n• Smooth edges',
+                colorVar: '--color-primary',
+            };
+        }
+        if (type === 2) {
+            return {
+                value: 'THUMB SPICA',
+                label: 'Thumb Spica — includes thumb IP joint',
+                description: '**THUMB SPICA SPLINT**\n\n**Best for:** Scaphoid fractures (confirmed or suspected)\n\n**⚠️ CRITICAL:** Use even if X-rays negative but clinical suspicion high\n\n**Position:**\n• Forearm neutral\n• Wrist extended 20-30°\n• Thumb in "soda can" grasp position\n\n**Coverage:** Radial forearm to just past thumb IP joint\n\n**Why thumb IP included:** Scaphoid moves with thumb — immobilization reduces fracture motion and AVN risk\n\n**Application:**\n• Include thumb IP joint\n• Palmar crease free for finger flexion\n• Radial side only (not circumferential)',
+                colorVar: '--color-primary',
+            };
+        }
+        if (type === 3) {
+            return {
+                value: 'VOLAR SPLINT',
+                label: 'Volar Splint — allows thumb motion',
+                description: '**VOLAR SPLINT**\n\n**Best for:** Carpal fractures (triquetrum, lunate, hamate), soft tissue injuries\n\n**Position:**\n• Wrist 20° extension\n\n**Coverage:** Volar forearm from proximal forearm to just proximal to MCP joints\n\n**Advantage:** Allows free thumb motion (good for non-scaphoid carpal injuries)\n\n**Application:**\n• Stockinette + padding\n• Volar surface only\n• Smooth, rolled edges\n\n**Note:** Some carpal fractures (scaphoid, trapezium) require thumb spica instead',
+                colorVar: '--color-primary',
+            };
+        }
+        if (type === 4) {
+            return {
+                value: 'SUGAR TONG OR ABOVE-ELBOW',
+                label: 'Sugar Tong or Above-Elbow Splint',
+                description: '**SUGAR TONG OR ABOVE-ELBOW SPLINT**\n\n**Best for:** Ulnar styloid fractures, DRUJ injuries\n\n**Choice depends on DRUJ stability:**\n\n**Stable DRUJ:**\n• Sugar tong splint (limits rotation)\n• Forearm neutral rotation\n\n**Unstable DRUJ:**\n• **Above-elbow cast** in position of stability\n• Dorsal dislocation → supination\n• Volar dislocation → pronation\n• Elbow 90° flexion\n• Duration: 4-6 weeks\n\n**Application:** Same as sugar tong but may need above-elbow immobilization for unstable DRUJ',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'VOLAR',
+            label: 'Volar Splint — for comfort',
+            description: '**VOLAR SPLINT**\n\n**Best for:** Soft tissue injuries, sprains, suspected but unconfirmed fractures\n\n**Position:** Wrist 20° extension\n\n**Coverage:** Volar forearm to proximal to MCPs\n\n**Use for:**\n• Wrist sprains\n• Contusions\n• Comfort splinting while awaiting imaging\n• Non-displaced carpal fractures\n\n**Follow-Up:** Re-evaluate if symptoms persist >7 days or worsen',
+            colorVar: '--color-primary',
+        };
+    },
+};
+// =====================================================================
 // ACUTE PANCREATITIS CALCULATORS
 // =====================================================================
 const BISAP_CALCULATOR = {
@@ -30194,6 +30556,12 @@ const CALCULATORS = {
     'hern-cushing': HERN_CUSHING_CALCULATOR,
     'hern-mannitol-dose': HERN_MANNITOL_CALCULATOR,
     'hern-hts-dose': HERN_HTS_CALCULATOR,
+    // Wrist Injuries
+    'wrist-reduction-check': WRIST_REDUCTION_CALC,
+    'wrist-scaphoid-suspect': WRIST_SCAPHOID_SUSPECT,
+    'wrist-druj-stability': WRIST_DRUJ_STABILITY,
+    'wrist-cts-risk': WRIST_CARPAL_TUNNEL_RISK,
+    'wrist-splint-selector': WRIST_SPLINT_SELECTOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
