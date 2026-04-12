@@ -14616,6 +14616,72 @@ const HEAT_STROKE_FLUID_CALCULATOR = {
         };
     },
 };
+const HEAT_DISCHARGE_SAFETY_CALCULATOR = {
+    id: 'heat-discharge-safe',
+    title: 'Heat Illness Discharge Safety',
+    subtitle: 'Environmental Hyperthermia Checklist',
+    description: 'Systematic checklist to assess safety of ED discharge for heat exhaustion/environmental hyperthermia. ALL criteria must be met.',
+    fields: [
+        { name: 'temp-normal', label: 'Core temp <38°C (100.4°F) × 2 readings 30 min apart', type: 'toggle', points: 1 },
+        { name: 'mental-status', label: 'Normal mental status (alert, oriented, appropriate)', type: 'toggle', points: 1 },
+        { name: 'vitals-stable', label: 'Hemodynamically stable (HR <100, BP normal, no orthostatics)', type: 'toggle', points: 1 },
+        { name: 'tolerating-po', label: 'Tolerating oral fluids without nausea/vomiting', type: 'toggle', points: 1 },
+        { name: 'symptoms-resolved', label: 'Symptoms resolved/improving (no weakness, dizziness, headache)', type: 'toggle', points: 1 },
+        { name: 'observation', label: 'Observed ≥2-4 hours post-cooling with stable vitals', type: 'toggle', points: 1 },
+        { name: 'labs-normal', label: 'Labs normal (if obtained): electrolytes, Cr, CK <1000', type: 'toggle', points: 1 },
+        { name: 'safe-environment', label: 'Safe environment to return to (A/C or cool space)', type: 'toggle', points: 1 },
+        { name: 'reliable-followup', label: 'Reliable follow-up (able to return if worsening)', type: 'toggle', points: 1 },
+        { name: 'low-risk-comorbid', label: 'No high-risk comorbidities (not elderly/cardiac/alone)', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'ALL 10 criteria must be met for safe discharge. If ANY criteria not met → ADMIT.',
+    citations: [
+        'Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Heat Illness: 2019 Update. Wilderness Environ Med. 2019;30(4S):S33-S46.',
+        'Epstein Y, Yanovich R. Heatstroke. N Engl J Med. 2019;380(25):2449-2459.',
+    ],
+    computeResult: (values) => {
+        const criteria = [
+            values['temp-normal'],
+            values['mental-status'],
+            values['vitals-stable'],
+            values['tolerating-po'],
+            values['symptoms-resolved'],
+            values['observation'],
+            values['labs-normal'],
+            values['safe-environment'],
+            values['reliable-followup'],
+            values['low-risk-comorbid'],
+        ];
+        const metCriteria = criteria.filter(c => c === 1).length;
+        const totalCriteria = 10;
+        if (metCriteria === totalCriteria) {
+            return {
+                value: '✓ ALL MET',
+                label: 'Safe for Discharge',
+                description: `**All 10 discharge criteria met**\n\n**Discharge Instructions:**\n• Rest in cool environment × 24-48 hours\n• Avoid strenuous activity × 48-72 hours\n• Hydrate aggressively (electrolyte drinks)\n• Return to ED immediately if:\n  - Fever returns or temp >100.4°F\n  - Confusion, dizziness, weakness\n  - Unable to keep fluids down\n  - Dark urine or decreased urination\n  - Severe headache, chest pain\n\n**Follow-up:**\n• PCP in 3-5 days for recheck\n• Gradual return to activity over 1 week\n• Avoid heat exposure during heat wave`,
+                colorVar: '--color-primary',
+            };
+        }
+        else if (metCriteria >= 7) {
+            const missing = totalCriteria - metCriteria;
+            return {
+                value: `${metCriteria}/${totalCriteria}`,
+                label: 'Consider Observation',
+                description: `**${missing} criteria not met**\n\n**Consider:**\n• Extended ED observation (additional 2-4 hours)\n• Address reversible issues:\n  - Give more time for temp normalization\n  - Trial additional oral fluids\n  - Reassess vitals after rehydration\n  - Contact social work for housing/cooling resources\n\n**If criteria still not met after extended observation → ADMIT**\n\n**High-risk factors requiring admission:**\n• Persistent tachycardia or orthostatic hypotension\n• Unable to tolerate PO\n• Temperature rebound >38°C\n• Elderly, homeless, or heat wave without A/C\n• Abnormal labs (AKI, hyperkalemia, elevated CK)`,
+                colorVar: '--color-warning',
+            };
+        }
+        else {
+            const missing = totalCriteria - metCriteria;
+            return {
+                value: `${metCriteria}/${totalCriteria}`,
+                label: 'ADMIT',
+                description: `**${missing} criteria not met → ADMISSION REQUIRED**\n\n**Common reasons for admission:**\n• Persistent hyperthermia or temp rebound\n• Hemodynamic instability\n• Unable to tolerate oral intake\n• High-risk social situation (elderly, homeless, no A/C during heat wave)\n• Abnormal labs suggesting organ dysfunction\n• Concern for progression to heat stroke\n\n**Level of care:**\n• Telemetry/step-down if stable but requires monitoring\n• ICU if any organ dysfunction, persistent hypotension, or altered mental status\n\n**Monitoring:**\n• Serial temps q2-4h × 24h\n• Repeat labs: CMP, CK q12h\n• Continue oral/IV hydration\n• Watch for delayed complications (AKI, rhabdo, hepatic injury)`,
+                colorVar: '--color-danger',
+            };
+        }
+    },
+};
 // -------------------------------------------------------------------
 // McMahon Score Calculator (Rhabdomyolysis AKI Risk)
 // -------------------------------------------------------------------
@@ -30162,6 +30228,7 @@ const CALCULATORS = {
     'cooling-rate': COOLING_RATE_CALCULATOR,
     'rhabdo-risk': RHABDO_RISK_CALCULATOR,
     'fluid-calculator': HEAT_STROKE_FLUID_CALCULATOR,
+    'heat-discharge-safe': HEAT_DISCHARGE_SAFETY_CALCULATOR,
     // VP Shunt
     'vps-malfunction-criteria': VPS_MALFUNCTION_CRITERIA_CALCULATOR,
     'vps-pump-test': VPS_PUMP_TEST_CALCULATOR,

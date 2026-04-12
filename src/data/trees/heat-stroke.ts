@@ -74,6 +74,20 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
       },
       monitoring: 'Serial temp checks, mental status assessment every 15-30 minutes',
     },
+    next: 'hs-discharge-criteria',
+  },
+
+  {
+    id: 'hs-discharge-criteria',
+    type: 'info',
+    module: 1,
+    title: 'Safe Discharge Criteria — Environmental Hyperthermia',
+    body: '**ALL of the following criteria must be met for safe ED discharge:** [2][3][4]\n\n**Clinical Criteria:**\n• **Core temperature <38°C (100.4°F)** after cooling and observation\n• **Normal mental status** — alert, oriented, appropriate\n• **Hemodynamically stable** — HR <100, BP normal, orthostatics negative\n• **Tolerating oral fluids** — able to drink without nausea/vomiting\n• **Symptoms resolved or improving** — no weakness, dizziness, headache\n\n**Laboratory Criteria (if obtained):**\n• **Normal electrolytes** — Na, K, Cl within normal limits\n• **Normal renal function** — Cr at baseline\n• **CK <1000 U/L** — no significant rhabdomyolysis\n\n**Social Criteria:**\n• **Safe environment to return to** — air conditioning or cool living space\n• **Reliable follow-up** — able to return or seek care if worsening\n• **No high-risk comorbidities** — elderly, cardiac disease, living alone\n\n**Observation Period:**\n• Minimum 2-4 hours post-cooling with stable vitals\n• Documented temperature normalization (<38°C) × 2 readings 30 minutes apart\n\n**⚠️ ADMIT if:**\n• Persistent tachycardia or orthostatic hypotension\n• Unable to tolerate PO\n• Temperature rebound >38°C\n• High-risk social situation (elderly, homeless, heat wave, no A/C)\n• Abnormal labs (AKI, hyperkalemia, elevated CK)\n• Any concern for progression to heat stroke [2][3][4]',
+    citation: [2, 3, 4],
+    calculatorLinks: [
+      { id: 'heat-discharge-safe', label: 'Discharge Safety Checklist' },
+    ],
+    next: 'hs-cooling-start',
   },
 
   // =====================================================================

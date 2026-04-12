@@ -603,6 +603,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'overload', label: 'Overload', icon: '💧', action: 'jump', target: 'hd-overload-main' },
     ],
     'heat-stroke': [
+        { id: 'discharge-safe', label: 'Discharge Safe?', icon: '✅', action: 'calculator', target: 'heat-discharge-safe' },
         { id: 'cooling', label: 'Cooling', icon: '🧊', action: 'jump', target: 'hs-cooling-start' },
         { id: 'method', label: 'Method', icon: '💧', action: 'jump', target: 'hs-cooling-method' },
         { id: 'rhabdo', label: 'Rhabdo', icon: '🧪', action: 'jump', target: 'hs-rhabdo' },
