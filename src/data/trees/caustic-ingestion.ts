@@ -24,6 +24,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '[Caustic Ingestion Steps Summary](#/info/caustic-summary) - time-critical airway and GI pathway.\n\n**Establish the 5 Ws:**\n- **Who:** Patient demographics, age, weight\n- **What:** Substance, concentration, pH, form (liquid/solid/gel)\n- **When:** Time of ingestion\n- **Where:** Intentional vs accidental\n- **Why:** Suicide attempt vs unintentional exposure\n\n**CRITICAL: Do NOT:**\n- Induce emesis\n- Administer activated charcoal\n- Attempt pH neutralization\n- Place blind NG tube\n- Dilute with water/milk (controversial, limited benefit)\n\n[Contraindications Detail](#/info/caustic-contraindications)',
     citation: [1, 2],
     next: 'caustic-type',
+  
+    summary: 'Establish 5 Ws — NEVER induce emesis, charcoal, neutralize, blind NG, or dilute',
   },
 
   {
@@ -53,6 +55,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         next: 'caustic-airway-assess',
       },
     ],
+  
+    summary: 'Alkali causes deep liquefactive necrosis; acid causes coagulative necrosis with eschar',
   },
 
   {
@@ -63,6 +67,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Liquefactive necrosis** - alkalis dissolve tissue proteins via saponification. Injury penetrates deeply without forming protective barrier.\n\n**High-risk features:**\n- Esophageal injury predominates (slower transit)\n- Transmural perforation more common\n- Delayed stricture formation (30% of grade 2b+ injuries)\n- Long-term esophageal cancer risk (1000x increased)\n\n**Titrable Acid/Alkali Reserve (TAR):** Amount of acid/base needed to neutralize substance. Better predictor of injury than pH alone.\n\nProceed to airway assessment.',
     citation: [1, 3],
     next: 'caustic-airway-assess',
+  
+    summary: 'Alkali penetrates deeply — higher perforation and stricture risk than acid',
+    skippable: true,
   },
 
   {
@@ -73,6 +80,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Coagulative necrosis** - acids denature proteins to form protective eschar that limits tissue penetration.\n\n**Injury characteristics:**\n- Gastric injury more common (rapid esophageal transit, pyloric pooling)\n- May create "skip lesions" in esophagus\n- Gastric perforation and hemorrhage risks\n- Systemic absorption possible (especially HF, formic acid)\n\n**Hydrofluoric acid (HF):** Uniquely dangerous - penetrates deeply, binds calcium/magnesium causing severe hypocalcemia and arrhythmias. Treat with calcium gluconate.\n\nProceed to airway assessment.',
     citation: [1, 3],
     next: 'caustic-airway-assess',
+  
+    summary: 'Acid causes gastric injury with eschar — watch for HF causing systemic hypocalcemia',
+    skippable: true,
   },
 
   // =====================================================================
@@ -99,6 +109,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         next: 'caustic-symptoms',
       },
     ],
+  
+    summary: 'Up to 50% need intubation — assess for edema, stridor, drooling, visible burns',
   },
 
   {
@@ -121,6 +133,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'SpO2, ETCO2, HR/BP. Prepare for surgical airway. Post-intubation: CXR, avoid NG tube.',
     },
+  
+    summary: 'Fiberoptic/video laryngoscopy preferred — have surgical airway backup ready',
+    safetyLevel: 'critical',
   },
 
   {
@@ -149,6 +164,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         next: 'caustic-observe',
       },
     ],
+  
+    summary: 'Absence of oral burns does NOT exclude GI injury — 15% false negative rate',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -163,6 +181,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Order:**\n- CBC with differential\n- BMP (renal function, electrolytes)\n- LFTs\n- Coagulation studies (PT/INR, PTT, fibrinogen)\n- Type and screen\n- VBG or ABG with lactate\n- CRP (elevated suggests transmural injury)\n- Lipase (if abdominal pain)\n\n**Predictive findings for transmural necrosis/perforation:**\n- Leukocytosis\n- Thrombocytopenia\n- Elevated CRP\n- Metabolic acidosis\n- Renal dysfunction\n- Hepatic dysfunction',
     citation: [1, 2],
     next: 'caustic-imaging',
+  
+    summary: 'Order CBC, BMP, coags, VBG with lactate, CRP — predict transmural necrosis',
+    skippable: true,
   },
 
   {
@@ -190,6 +211,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         next: 'caustic-egd-timing',
       },
     ],
+  
+    summary: 'CXR for free air, CT for transmural necrosis — free air means surgical emergency',
   },
 
   {
@@ -220,6 +243,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'Lactate q4-6h, serial abdominal exams, hemodynamic monitoring. Prepare for OR.',
     },
+  
+    summary: 'Surgical emergency — bypass endoscopy, broad-spectrum abx, ICU, NPO',
+    safetyLevel: 'critical',
   },
 
   {
@@ -230,6 +256,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Perform EGD within 12-24 hours** for:\n- All intentional ingestions (regardless of symptoms)\n- Symptomatic patients\n- Large volume ingestions\n- High-concentration substances\n\n**Endoscopy goals:**\n- Grade injury severity ([Zargar Classification](#/info/caustic-zargar))\n- Guide treatment and disposition\n- Predict stricture risk\n\n**Timing considerations:**\n- Optimal: 12-24 hours post-ingestion\n- Acceptable: Up to 48-96 hours with gentle technique\n- **AVOID:** Days 5-15 (tissue most friable, highest perforation risk)\n\n**EGD technique:**\n- Gentle insufflation\n- Do not advance past severe injury\n- Document gastric involvement if safe',
     citation: [1, 4, 5],
     next: 'caustic-zargar-assess',
+  
+    summary: 'EGD within 12-24h — AVOID days 5-15 when tissue is most friable',
+    safetyLevel: 'warning',
   },
 
   {
@@ -266,6 +295,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Grade 2b+ has 70-100% stricture rate — drives treatment and disposition',
   },
 
   // =====================================================================
@@ -292,6 +323,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'Ability to tolerate oral intake. Return if worsening dysphagia, vomiting, or chest/abdominal pain.',
     },
+  
+    summary: 'Grade 0-1: excellent prognosis — clear liquid diet, PPI, discharge with GI follow-up',
   },
 
   {
@@ -322,6 +355,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'Serial abdominal exams. Diet tolerance. Signs of perforation.',
     },
+  
+    summary: 'Grade 2a: low stricture risk — NPO 24-48h, observe, PPI, advance diet as tolerated',
   },
 
   {
@@ -351,6 +386,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'Serial abdominal exams q4-6h. CBC, CRP, lactate daily. Nutrition support. Watch for perforation.',
     },
+  
+    summary: 'Grade 2b: ICU — 70-100% stricture rate, consider steroids per GI consult',
   },
 
   {
@@ -381,6 +418,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
       },
       monitoring: 'Hemodynamics, lactate q4h, serial abdominal exams, surgical consultation. Prepare for emergent OR.',
     },
+  
+    summary: 'Grade 3: high mortality — emergent surgery likely, broad-spectrum abx, ICU',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -395,6 +435,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Low-risk accidental ingestion:**\n- Small volume (taste/sip)\n- Household concentration\n- Asymptomatic after ingestion\n- No oropharyngeal burns\n\n**Observation period:**\n- Monitor for 4-6 hours\n- Assess ability to swallow\n- Observe for delayed symptom development\n\n**Trial of oral intake:**\n- Offer clear liquids\n- If tolerated without pain, advance diet\n- If painful or refused, proceed to full workup',
     citation: [1],
     next: 'caustic-discharge-criteria',
+  
+    summary: 'Low-risk accidental ingestion — observe 4-6h, trial oral intake, watch for symptoms',
   },
 
   {
@@ -417,6 +459,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'All criteria: asymptomatic, tolerating PO, no burns, accidental, reliable follow-up',
   },
 
   {
@@ -428,6 +472,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     recommendation: 'Safe for discharge with return precautions. PCP or GI follow-up within 1 week.',
     confidence: 'recommended',
     citation: [1],
+  
+    summary: 'Soft diet 24-48h, return for dysphagia/vomiting/pain, PCP or GI within 1 week',
   },
 
   {
@@ -438,6 +484,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     body: '**Mandatory psychiatric evaluation for all intentional ingestions.**\n\n**Timing:**\n- After medical stabilization\n- Before discharge from hospital\n- May require extended observation or admission\n\n**Consult should address:**\n- Suicide risk assessment\n- Intent and lethality of method\n- Protective factors\n- Safety planning\n- Disposition (outpatient vs inpatient psychiatric care)\n\n**Documentation:**\n- Medical clearance for psychiatric evaluation\n- Suicide precautions during medical admission\n- 1:1 observation if actively suicidal',
     citation: [1],
     next: 'caustic-discharge-criteria',
+  
+    summary: 'Mandatory psych eval for ALL intentional ingestions — 1:1 if actively suicidal',
   },
 
   // =====================================================================
@@ -451,6 +499,8 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     title: 'Supportive Care Measures',
     body: '**General supportive care:**\n\n**NPO status:**\n- All symptomatic patients initially NPO\n- Advance diet based on EGD findings and tolerance\n\n**Pain management:**\n- [Acetaminophen](#/drug/acetaminophen/pain) 1g IV q6h\n- [Hydromorphone](#/drug/hydromorphone/pain) 0.2-0.5mg IV q2-4h PRN for severe pain\n- Avoid NSAIDs (GI irritation)\n\n**Antiemetics:**\n- [Ondansetron](#/drug/ondansetron/nausea) 4-8mg IV q6-8h\n- Vomiting increases aspiration and re-exposure risk\n\n**Nutrition:**\n- Early TPN for grade 2b-3 injuries\n- Consider nasojejunal feeding tube placed under fluoroscopy (not blind)\n- Avoid NG tube through injured esophagus\n\n**PPI therapy:**\n- [Pantoprazole](#/drug/pantoprazole/gerd) 40mg IV q12h\n- May reduce secondary injury from acid reflux\n- Does NOT prevent stricture formation',
     citation: [1, 2],
+  
+    summary: 'NPO initially, acetaminophen for pain, avoid NSAIDs, ondansetron for nausea',
   },
 
   {
@@ -460,6 +510,9 @@ export const CAUSTIC_INGESTION_NODES: DecisionNode[] = [
     title: 'Long-term Complications',
     body: '**Stricture formation:**\n- Grade 2b: 70-100% develop strictures\n- Grade 3: Near-universal stricture in survivors\n- Typically develops 3-8 weeks post-ingestion\n- May require serial dilations, stenting, or surgical reconstruction\n\n**Upper GI hemorrhage:**\n- Typically occurs 2-4 weeks post-ingestion\n- As necrotic tissue sloughs\n- May be massive\n\n**Esophageal cancer:**\n- 1000x increased risk (up to 6.5% lifetime)\n- Squamous cell carcinoma predominates\n- Latency period: 15-40 years\n- Requires lifelong surveillance endoscopy\n\n**Other complications:**\n- Tracheoesophageal fistula\n- Esophageal shortening\n- Gastric outlet obstruction\n- Nutritional deficiencies',
     citation: [3, 4, 5],
+  
+    summary: 'Grade 2b-3: near-universal strictures, 1000x esophageal cancer risk — lifelong surveillance',
+    skippable: true,
   },
 
 ];

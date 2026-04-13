@@ -24,6 +24,8 @@ export const AACG_NODES: DecisionNode[] = [
     body: '**Ophthalmologic emergency** — rapid IOP elevation causes optic nerve damage within hours.\n\n**Mechanism:** Pupillary block → aqueous outflow obstruction → IOP 50-80 mmHg\n\n**Classic Triad:**\n1. Severe unilateral eye pain\n2. Fixed mid-dilated pupil\n3. Rock-hard globe\n\n**Risk Factors:**\n- Age >50 (peak 55-65)\n- Female (2-4x higher)\n- Asian > Caucasian\n- Hyperopia (farsightedness)\n- Shallow anterior chamber\n- Precipitating medications\n\n**Pearl:** 1/3 of AACG patients initially see non-ophthalmologists. Don\'t miss it. [1][2]',
     citation: [1, 2],
     next: 'aacg-presentation',
+    summary: 'Ophthalmologic emergency — IOP 50-80 mmHg causes optic nerve damage within hours',
+    skippable: true,
   },
 
   {
@@ -52,6 +54,7 @@ export const AACG_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Fixed mid-dilated pupil + rock-hard globe = AACG until proven otherwise',
   },
 
   {
@@ -62,6 +65,8 @@ export const AACG_NODES: DecisionNode[] = [
     body: '**AACG Mimics — Rule Out:**\n\n| Condition | Key Distinguishing Features |\n|-----------|----------------------------|\n| **Migraine** | Mobile pain, normal pupils, normal IOP |\n| **Cluster headache** | Lacrimation, rhinorrhea, Horner syndrome |\n| **Intracranial pathology** | Other neuro findings, papilledema |\n| **Iritis/Uveitis** | Photophobia, cells/flare, CONSTRICTED pupil |\n| **Conjunctivitis** | Discharge, bilateral, normal pupil |\n| **Keratitis/Corneal ulcer** | Fluorescein uptake, history of contacts |\n| **Scleritis** | Deep boring pain, scleral injection |\n| **Endophthalmitis** | Recent eye surgery, hypopyon |\n| **Retrobulbar hemorrhage** | Trauma, proptosis, APD |\n\n**AACG Distinguishers:**\n- Unilateral\n- **Fixed MID-dilated pupil** (not constricted like uveitis)\n- Rock hard globe\n- Elevated IOP\n\n**Pearl:** If uncertain, palpate both globes — affected side feels significantly harder. [1][3]',
     citation: [1, 3],
     next: 'aacg-iop-assess',
+    summary: 'Distinguish AACG from mimics — fixed mid-dilated pupil and hard globe are key differentiators',
+    skippable: true,
   },
 
   // =====================================================================
@@ -79,6 +84,8 @@ export const AACG_NODES: DecisionNode[] = [
       { id: 'aacg-iop', label: 'IOP Assessment' },
     ],
     next: 'aacg-iop-decision',
+    summary: 'Rock hard globe + classic presentation — treat empirically even without tonometry',
+    skippable: true,
   },
 
   {
@@ -106,6 +113,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-differential',
       },
     ],
+    summary: 'IOP ≥40 or rock hard globe = begin treatment cascade immediately',
   },
 
   {
@@ -142,6 +150,7 @@ export const AACG_NODES: DecisionNode[] = [
       monitoring: 'Recheck IOP in 30-60 minutes. If IOP rises or symptoms worsen, initiate full treatment cascade.',
     },
     next: 'aacg-dispo',
+    summary: 'Subacute angle closure — start topical therapy, urgent (not emergent) ophthalmology within 24h',
   },
 
   // =====================================================================
@@ -167,6 +176,8 @@ export const AACG_NODES: DecisionNode[] = [
       monitoring: 'Proceed immediately to medication cascade (Phase 2: Reduce Aqueous Production).',
     },
     next: 'aacg-reduce-production',
+    summary: 'Position supine, bright lights, call ophthalmology STAT, antiemetics — do NOT delay meds',
+    safetyLevel: 'critical',
   },
 
   {
@@ -211,6 +222,8 @@ export const AACG_NODES: DecisionNode[] = [
       monitoring: 'Recheck IOP in 30-60 minutes. Target IOP <40 mmHg to enable pilocarpine.',
     },
     next: 'aacg-response-check1',
+    summary: 'Give acetazolamide 500mg IV + timolol + brimonidine simultaneously — recheck IOP in 30-60 min',
+    safetyLevel: 'warning',
   },
 
   {
@@ -232,6 +245,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-osmotic',
       },
     ],
+    summary: 'IOP must drop below 40 before pilocarpine will work — assess response at 30-60 min',
   },
 
   {
@@ -269,6 +283,7 @@ export const AACG_NODES: DecisionNode[] = [
       monitoring: 'Recheck IOP in 30-60 minutes. Monitor urine output and electrolytes. Goal IOP <40 mmHg.',
     },
     next: 'aacg-response-check2',
+    summary: 'Mannitol 1-2 g/kg IV for refractory IOP — avoid in CHF, renal failure, severe dehydration',
   },
 
   {
@@ -290,6 +305,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-refractory',
       },
     ],
+    summary: 'Reassess IOP after osmotics — if still elevated, ophthalmology for paracentesis',
   },
 
   {
@@ -330,6 +346,8 @@ export const AACG_NODES: DecisionNode[] = [
       { id: 'aacg-treatment', label: 'Treatment Cascade' },
     ],
     next: 'aacg-supportive',
+    summary: 'Pilocarpine ONLY after IOP <40 — ischemic sphincter will not respond at higher pressures',
+    safetyLevel: 'warning',
   },
 
   {
@@ -375,6 +393,7 @@ export const AACG_NODES: DecisionNode[] = [
       monitoring: 'Recheck IOP every 30-60 minutes. Document pupil reactivity and corneal clarity. Continue until definitive laser iridotomy.',
     },
     next: 'aacg-definitive',
+    summary: 'Ongoing pain control, prednisolone, antiemetics — continue all IOP drops until laser iridotomy',
   },
 
   {
@@ -385,6 +404,8 @@ export const AACG_NODES: DecisionNode[] = [
     body: '**IOP remains elevated despite maximal medical therapy:**\n\n**Options (Ophthalmology Decision):**\n\n**1. Anterior Chamber Paracentesis:**\n- Immediate IOP reduction\n- Specialist procedure\n- Temporizing until laser available\n\n**2. Emergent Laser Peripheral Iridotomy:**\n- If cornea clear enough\n- May need to wait for corneal edema to resolve\n\n**3. Surgical Iridectomy:**\n- If laser not possible\n- OR availability required\n\n**4. Lens Extrtext:**\n- If cataract present\n- Especially if IOP >55 mmHg\n\n**ED Role:**\n- Continue medical therapy\n- Urgent ophthalmology at bedside\n- Prepare for admission/transfer\n\n**Do NOT discharge** refractory AACG. [1][2][4]',
     citation: [1, 2, 4],
     next: 'aacg-dispo',
+    summary: 'Refractory AACG — do NOT discharge, ophthalmology must perform paracentesis or surgery',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -402,6 +423,8 @@ export const AACG_NODES: DecisionNode[] = [
       { id: 'aacg-meds', label: 'Precipitating Meds' },
     ],
     next: 'aacg-treatment-start',
+    summary: 'Bilateral AACG = drug-induced (topiramate) — use cycloplegics, NOT pilocarpine; iridotomy ineffective',
+    safetyLevel: 'critical',
   },
 
   {
@@ -412,6 +435,8 @@ export const AACG_NODES: DecisionNode[] = [
     body: '**Pupillary Block Mechanism (Cause Mydriasis):**\n\n| Class | Examples |\n|-------|----------|\n| **Anticholinergics** | Atropine, scopolamine, ipratropium, glycopyrrolate |\n| **Sympathomimetics** | Phenylephrine, ephedrine, pseudoephedrine |\n| **Antihistamines** | Diphenhydramine, promethazine, hydroxyzine |\n| **TCAs** | Amitriptyline, nortriptyline, imipramine |\n| **SSRIs/SNRIs** | Fluoxetine, paroxetine, venlafaxine |\n| **Antipsychotics** | Trifluoperazine, olanzapine |\n| **Mydriatics** | Tropicamide, cyclopentolate |\n\n**Non-Pupillary Block (Ciliary Effusion):**\n\n| Drug | Key Feature |\n|------|-------------|\n| **Topiramate** | Bilateral, myopic shift, 1-2 weeks after start |\n| **Acetazolamide** | Paradoxical (rare) |\n| **Sulfonamides** | HCTZ, TMP-SMX |\n\n**Ask about OTC medications** — antihistamines, decongestants commonly implicated. [1][5]',
     citation: [1, 5],
     next: 'aacg-dispo',
+    summary: 'Common precipitants: anticholinergics, sympathomimetics, antihistamines, SSRIs, TCAs — ask about OTCs',
+    skippable: true,
   },
 
   // =====================================================================
@@ -426,6 +451,8 @@ export const AACG_NODES: DecisionNode[] = [
     body: '**Laser Peripheral Iridotomy (LPI):**\n\n**Mechanism:**\n- Creates hole in peripheral iris\n- Bypasses pupillary block\n- Equalizes pressure between anterior/posterior chambers\n\n**Timing:**\n- Once cornea clears (hours to 1-2 days after IOP controlled)\n- Outpatient procedure\n- Takes minutes\n\n**Both Eyes:**\n- Treat affected eye\n- **Prophylactic LPI to fellow eye** (40-80% will develop AACG)\n\n**Alternatives:**\n- Surgical iridectomy (if laser fails)\n- Cataract extraction (if lens contributing)\n\n**Post-LPI:**\n- Continue topical steroids\n- IOP monitoring\n- Most patients cured [1][2][4]',
     citation: [1, 2, 4],
     next: 'aacg-dispo',
+    summary: 'Laser iridotomy is definitive — treat BOTH eyes (fellow eye 40-80% risk of AACG)',
+    skippable: true,
   },
 
   {
@@ -452,6 +479,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-dispo-discharge',
       },
     ],
+    summary: 'Disposition based on IOP control and ophthalmology availability',
   },
 
   {
@@ -501,6 +529,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-start',
       },
     ],
+    summary: 'IOP controlled — admit if osmotics needed, discharge with 24h follow-up if drops-only',
   },
 
   {
@@ -516,6 +545,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-start',
       },
     ],
+    summary: 'Transfer if no ophthalmology — continue all IOP therapy, keep supine during transport',
   },
 
   {
@@ -565,6 +595,7 @@ export const AACG_NODES: DecisionNode[] = [
         next: 'aacg-start',
       },
     ],
+    summary: 'Discharge only if IOP <21, symptoms resolved, 24h ophthalmology follow-up confirmed',
   },
 
 ];

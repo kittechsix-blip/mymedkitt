@@ -24,6 +24,7 @@ export const PEP_NODES = [
                 next: 'pep-fluid',
             },
         ],
+        summary: 'Classify exposure as occupational or nonoccupational to guide PEP evaluation pathway',
     },
     {
         id: 'pep-fluid',
@@ -44,6 +45,7 @@ export const PEP_NODES = [
                 next: 'pep-low-risk',
             },
         ],
+        summary: 'Substantial-risk fluids (blood, semen, vaginal/rectal secretions) warrant PEP evaluation',
     },
     {
         id: 'pep-low-risk',

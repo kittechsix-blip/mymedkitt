@@ -35,6 +35,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**True ocular emergency — IRRIGATE BEFORE ANYTHING ELSE.**\n\n**Mechanism:**\n- Alkali: Lipophilic penetration, liquefactive necrosis — **WORSE prognosis**\n- Acid: Coagulative necrosis, protein barrier limits penetration\n\n**Alkali can reach anterior chamber in <15 seconds.**\n\n**Time is cornea.** Every minute without irrigation = worse outcome.\n\n**Common Agents:**\n\n| Alkali (More Severe) | Acid |\n|---------------------|------|\n| Ammonia (cleaners) | Sulfuric acid (batteries) |\n| Sodium hydroxide (drain cleaner) | Hydrochloric acid (pool) |\n| Calcium hydroxide (cement/lime) | Hydrofluoric acid* |\n| Potassium hydroxide (fertilizer) | Acetic acid |\n\n*Hydrofluoric acid behaves like alkali — deep penetration.\n\n**Pearl:** Cement/lime particles continue releasing alkali — must sweep fornices. [1][2]',
     citation: [1, 2],
     next: 'chemburn-immediate',
+  
+    summary: 'Alkali reaches anterior chamber in <15 seconds — IRRIGATE BEFORE ANYTHING ELSE',
+    safetyLevel: 'critical',
   },
 
   {
@@ -45,6 +48,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**DO NOT DELAY FOR:**\n- History\n- Visual acuity\n- Slit lamp exam\n- pH testing\n- Ophthalmology consult\n\n**START IRRIGATION NOW.**\n\n**At Scene:**\n- Any non-caustic fluid (tap water, saline, water fountain)\n- Continue during transport\n\n**In ED:**\n1. Topical anesthetic (proparacaine)\n2. Sweep fornices for particulate matter\n3. Begin continuous irrigation\n4. Morgan lens if available\n\n**Exception:** Suspected globe rupture — do NOT irrigate. Shield and consult. [1][2][3]',
     citation: [1, 2, 3],
     next: 'chemburn-agent-type',
+  
+    summary: 'Do NOT delay for history, VA, pH, or slit lamp — start irrigation NOW',
+    safetyLevel: 'critical',
   },
 
   {
@@ -79,6 +85,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'If unknown, treat as alkali — worst-case approach for deepest penetration',
   },
 
   // =====================================================================
@@ -96,6 +104,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       { id: 'chemburn-ph', label: 'pH Monitor' },
     ],
     next: 'chemburn-morgan',
+  
+    summary: 'Alkali: 30 min to 2+ hours irrigation; acid: 15-30 min — LR preferred over NS',
   },
 
   {
@@ -106,6 +116,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**Morgan Lens = hands-free continuous irrigation**\n\n**Insertion Steps:**\n1. Apply topical anesthetic (proparacaine 0.5%)\n2. Fill lens with irrigation fluid\n3. Have patient look down\n4. Insert lens under upper lid\n5. Have patient look up\n6. Tuck lens under lower lid\n7. Connect to IV tubing with fluid running\n\n**Flow Rate:**\n- Wide open initially\n- 250-500 mL over 15-20 min\n- Adjust based on tolerance\n\n**Contraindications:**\n- Suspected globe rupture\n- Severe corneal laceration\n- Uncooperative patient (relative)\n\n**Alternative:** Nasal cannula placed over bridge of nose, tubing in each eye.\n\n**Pearl:** LR preferred — NS at low pH causes discomfort. [1][3]',
     citation: [1, 3],
     next: 'chemburn-sweep',
+  
+    summary: 'Morgan lens for hands-free continuous irrigation — contraindicated if globe rupture suspected',
   },
 
   {
@@ -116,6 +128,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**CRITICAL for cement/lime/plite exposures:**\n\nParticulate alkali continues releasing hydroxide until removed.\n\n**Technique:**\n1. Apply topical anesthetic\n2. Double-evert upper lid\n3. Use moist cotton swab\n4. Sweep upper fornix systematically\n5. Repeat for lower fornix\n6. Check lid margins and puncta\n\n**Look for:**\n- White calcium hydroxide particles (lime)\n- Cement fragments\n- Plaster debris\n- Any retained foreign material\n\n**Remove ALL visible particles.**\n\nIf cement adherent to cornea, do NOT force removal — ophthalmology will handle.\n\n**Recheck fornices q15-30 min** — particles migrate from upper to lower fornix with irrigation. [1][2]',
     citation: [1, 2],
     next: 'chemburn-ph-check',
+  
+    summary: 'Cement/lime: sweep fornices for particulate matter — continues releasing alkali until removed',
+    safetyLevel: 'warning',
   },
 
   {
@@ -129,6 +144,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       { id: 'chemburn-ph', label: 'pH Monitor' },
     ],
     next: 'chemburn-ph-decision',
+  
+    summary: 'Target pH 7.0-7.4 — wait 5-10 min after stopping irrigation before checking (reservoir effect)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -155,6 +173,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         next: 'chemburn-continue-irrigation',
       },
     ],
+  
+    summary: 'pH must be stable on two readings 30 min apart before proceeding to exam',
   },
 
   {
@@ -165,6 +185,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**pH not normalized — continue irrigation:**\n\n**Steps:**\n1. Resume irrigation for additional 15-30 minutes\n2. Re-sweep fornices for retained particles\n3. Ensure adequate volume and flow rate\n4. Recheck pH after 5-10 minute pause\n\n**Refractory pH:**\n- May indicate deep tissue penetration (severe alkali)\n- May indicate retained particulate\n- Consider ophthalmology consultation\n\n**Do NOT stop irrigation prematurely.**\n\nContinuous irrigation for 2+ hours may be needed for severe alkali burns.\n\n**When to escalate:**\n- pH still abnormal after 2L+ irrigation\n- Unable to visualize/remove particles\n- Corneal opacification visible [1][2]',
     citation: [1, 2],
     next: 'chemburn-ph-check',
+  
+    summary: 'pH not normalized — continue irrigation, re-sweep fornices, may need 2+ hours for severe alkali',
   },
 
   // =====================================================================
@@ -179,6 +201,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**Once pH normalized, perform complete exam:**\n\n**1. Visual Acuity:**\n- Document in each eye\n- Use pinhole if reduced\n\n**2. External:**\n- Lid burns, periorbital skin involvement\n- Forniceal shortening (early symblepharon)\n\n**3. Cornea:**\n- Fluorescein — epithelial defect size\n- Stromal haze/opacity\n- Clarity (can you see iris details?)\n\n**4. Limbus:**\n- **Ischemia** — perilimbal blanching (KEY prognostic)\n- Clock hours involved\n\n**5. Conjunctiva:**\n- Chemosis, injection\n- Ischemia/necrosis (white areas)\n- Percentage involvement\n\n**6. Anterior Chamber:**\n- Cell/flare\n- Hyphema\n\n**7. IOP:**\n- May be elevated acutely\n- Applanation or Tono-Pen\n\n**8. Lens:**\n- Clarity (cataract from chemical penetration) [1][2][4]',
     citation: [1, 2, 4],
     next: 'chemburn-classification',
+  
+    summary: 'Post-irrigation: VA, fluorescein, limbal ischemia clock hours, anterior chamber, IOP',
   },
 
   {
@@ -192,6 +216,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       { id: 'chemburn-grade', label: 'Roper-Hall Grading' },
     ],
     next: 'chemburn-dua',
+  
+    summary: 'Limbal ischemia is KEY prognostic factor — document clock hours of perilimbal blanching',
+    skippable: true,
   },
 
   {
@@ -202,6 +229,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**Dua Classification (Newer, More Granular):**\n\n| Grade | Limbus (clock hours) | Conjunctiva | Prognosis |\n|-------|---------------------|-------------|------------|\n| **I** | 0 | 0% | Very good |\n| **II** | ≤3 | ≤30% | Good |\n| **III** | 3-6 | 30-50% | Good |\n| **IV** | 6-9 | 50-75% | Guarded |\n| **V** | 9-12 | 75-100% | Poor |\n| **VI** | Total (12) | Total (100%) | Very poor |\n\n**Advantages over Roper-Hall:**\n- More granular (6 grades vs 4)\n- Uses fluorescein staining (limbal uptake = damage)\n- Better predicts severe outcomes\n- Separates Grade III/IV into 4 categories\n\n**Either classification acceptable — document which you used.** [1][4]',
     citation: [1, 4],
     next: 'chemburn-grade-decision',
+  
+    summary: 'Dua classification: more granular than Roper-Hall — 6 grades by limbus clock hours and conjunctiva %',
+    skippable: true,
   },
 
   {
@@ -235,6 +265,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Grade III-IV (opaque cornea, >50% limbal ischemia) = STAT ophthalmology, admission required',
   },
 
   // =====================================================================
@@ -268,6 +300,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       monitoring: 'Ophthalmology follow-up in 24-48 hours. Return for worsening pain, decreased vision, or increasing redness.',
     },
     next: 'chemburn-discharge',
+  
+    summary: 'Grade I: cycloplegic, erythromycin, prednisolone QID x 7d — discharge with 24-48h ophth follow-up',
   },
 
   {
@@ -300,6 +334,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       monitoring: 'Ophthalmology follow-up within 24 hours mandatory. Daily IOP checks. Monitor for corneal melting after day 10.',
     },
     next: 'chemburn-ophtho-consult',
+  
+    summary: 'Grade II: aggressive steroids Q1-2H, ascorbate hourly, doxycycline BID — ophth within 24h',
   },
 
   {
@@ -332,6 +368,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       monitoring: 'STAT ophthalmology consult. Admission required. Daily slit lamp exam. IOP monitoring. Watch for corneal melting especially after day 10.',
     },
     next: 'chemburn-ophtho-consult',
+  
+    summary: 'Grade III-IV: prednisolone Q1H around the clock — TAPER BY DAY 10-14 or risk corneal perforation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -342,6 +381,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
     body: '**Consultation Timing:**\n\n| Scenario | Timing |\n|----------|--------|\n| Grade III-IV | **STAT** |\n| All alkali burns | **STAT** |\n| Limbal ischemia present | **STAT** |\n| Vision loss | **STAT** |\n| IOP elevation | **STAT** |\n| Bilateral involvement | **STAT** |\n| Grade II | Same day/urgent |\n| Grade I with concerns | Urgent (24h) |\n| Grade I routine | 24-48h follow-up |\n\n**Information for Consultant:**\n- Agent (alkali vs acid, specific chemical if known)\n- Time of exposure\n- Initial pH and current pH\n- Irrigation volume and duration\n- Grade (Roper-Hall or Dua)\n- Visual acuity\n- IOP\n- Clock hours of limbal ischemia [1][2]',
     citation: [1, 2],
     next: 'chemburn-steroid-caution',
+  
+    summary: 'STAT ophthalmology for Grade III-IV, all alkali burns, limbal ischemia, and vision loss',
   },
 
   {
@@ -371,6 +412,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       monitoring: 'Mandatory ophthalmology follow-up. Document steroid start date. Begin taper by day 10-14. Monitor for corneal thinning/melting.',
     },
     next: 'chemburn-dispo',
+  
+    summary: 'Steroids beneficial days 0-10 but MUST taper by day 10-14 — risk of corneal perforation',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -402,6 +446,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         next: 'chemburn-discharge',
       },
     ],
+  
+    summary: 'Grade III-IV: admit for hourly medications; Grade I: discharge with follow-up',
   },
 
   {
@@ -436,6 +482,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         next: 'chemburn-start',
       },
     ],
+  
+    summary: 'Admission for hourly drops around the clock — prednisolone, ascorbate, citrate, fluoroquinolone',
   },
 
   {
@@ -465,6 +513,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
       monitoring: 'Ophthalmology follow-up within 24 hours mandatory. Return immediately for worsening pain, vision changes, or increasing redness.',
     },
     next: 'chemburn-discharge',
+  
+    summary: 'Grade II: admit if significant limbal ischemia or strong alkali; discharge if reliable with 24h follow-up',
   },
 
   {
@@ -499,6 +549,8 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         next: 'chemburn-start',
       },
     ],
+  
+    summary: 'pH stable x2 readings, medications prescribed, ophthalmology follow-up confirmed, return precautions given',
   },
 
   {
@@ -514,6 +566,9 @@ export const CHEMICAL_BURN_NODES: DecisionNode[] = [
         next: 'chemburn-start',
       },
     ],
+  
+    summary: 'Long-term: glaucoma 15-55%, symblepharon, corneal scarring, perforation if steroids continued >14d',
+    skippable: true,
   },
 
 ];

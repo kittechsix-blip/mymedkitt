@@ -37,6 +37,8 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-unknown',
             },
         ],
+        summary: 'NAC is 100% effective within 8h — determine ingestion pattern to guide risk stratification',
+        safetyLevel: 'critical',
     },
     {
         id: 'apap-acute-hx',
@@ -46,6 +48,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         body: '**Gather critical history elements:**\n\n• **Dose** — Potentially toxic: >150 mg/kg or >7.5g total (>10g per IBCC). How many pills? What strength?\n• **Timing** — When did the ingestion occur? Single ingestion within <24h?\n• **Formulation** — Immediate-release or extended-release?\n• **Coingestants** — Opioids/anticholinergics delay absorption → delayed peak APAP level\n• **Intent** — Intentional vs unintentional (affects disposition — psych eval required for intentional) [6]\n\n[Risk Factors for Enhanced Toxicity](#/info/apap-risk-factors)\n\n**Risk factors for enhanced toxicity (lower threshold for treatment):**\n• **CYP2E1 inducers:** Isoniazid, rifampin, phenobarbital, carbamazepine, phenytoin, chronic alcohol\n• **Glutathione depletion:** Chronic alcohol, malnutrition/fasting, chronic APAP use, chronic liver disease\n• **Decreased glucuronidation:** Gilbert disease, zidovudine, TMP-SMX [4][12]\n\n**Is the history reliable?** History is unreliable if: insufficient detail for dose/time, conflicting statements, or symptoms/labs inconsistent with stated history. When in doubt, treat as unreliable. [6]',
         citation: [4, 6, 12],
         next: 'apap-acute-strat',
+        summary: 'Gather dose, timing, formulation, coingestants — CYP2E1 inducers and fasting lower toxicity threshold',
+        skippable: true,
     },
     {
         id: 'apap-chronic-hx',
@@ -55,6 +59,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         body: '[Chronic/Repeated Supratherapeutic Ingestion](#/info/apap-chronic-ingestion)\n\nRepeated supratherapeutic ingestion = **multiple ingestions spanning >24 hours** (including acute-on-chronic use). More common than acute OD in clinical practice. [6][17]\n\n**The Rumack-Matthew nomogram does NOT apply** — there is no single "time of ingestion" to plot.\n\nPresents with hepatotoxicity **without** early Stage 1 symptoms (nausea/vomiting). Patients may present directly with RUQ pain and elevated transaminases.\n\n**"Alcohol-Tylenol Syndrome":** Chronic alcohol use + chronic acetaminophen = hepatotoxicity at doses generally considered safe (<4g/day). Double mechanism: CYP2E1 induction + glutathione depletion. [17]\n\n**Inadvertent overdose** is especially dangerous — subacute glutathione depletion may not trigger alarm until significant hepatic injury has occurred.',
         citation: [6, 17],
         next: 'apap-chronic-eval',
+        summary: 'Nomogram does NOT apply to repeated ingestion — presents with hepatotoxicity without early symptoms',
+        safetyLevel: 'warning',
     },
     {
         id: 'apap-unknown',
@@ -64,6 +70,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         body: '**Unreliable history — cannot apply nomogram.**\n\nCriteria for unreliable history: [6]\n• Insufficient detail to establish dose and time\n• Conflicting statements\n• Symptoms, signs, or lab values inconsistent with stated history\n\n**Immediate actions:**\n• Draw APAP level + AST/ALT + INR + BMP + lactate NOW\n• Salicylate level (coingestion screening)\n• If APAP detectable OR ALT elevated → **start NAC empirically**\n• If massive ingestion suspected (AMS, early lactic acidosis) → treat as high-risk\n\n**When in doubt → give NAC.** Minimal side effects, potentially life-saving. [2]',
         citation: [2, 6],
         next: 'apap-empiric-nac',
+        summary: 'Unreliable history — draw APAP + ALT now, start NAC empirically if either abnormal',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 2: RISK STRATIFICATION
@@ -102,6 +110,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-er-coingest',
             },
         ],
+        summary: 'Draw APAP level at 4h post-ingestion — plot on Rumack-Matthew nomogram at 150 line',
     },
     {
         id: 'apap-er-coingest',
@@ -128,6 +137,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-below-line',
             },
         ],
+        summary: 'ER or coingestant delays peak — redraw in 4-6h if below line but >10 mcg/mL',
     },
     {
         id: 'apap-chronic-eval',
@@ -152,6 +162,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-chronic-discharge',
             },
         ],
+        summary: 'Nomogram does NOT apply — use (ALT)(APAP) product; treat if ALT elevated or APAP detectable',
     },
     {
         id: 'apap-chronic-treat',
@@ -161,6 +172,7 @@ export const ACETAMINOPHEN_OD_NODES = [
         body: '**Initiate IV NAC** — chronic/repeated supratherapeutic ingestion with evidence of hepatotoxicity or ongoing APAP exposure.\n\nUse standard 3-bag IV protocol. Consult toxicology/poison control — these cases are complex. [6]\n\nSerial labs q6h: APAP level, AST/ALT, INR, BMP. Recalculate (ALT)(APAP) product with each set to track trajectory.\n\nStopping criteria are the same as for acute ingestion: APAP <10 mcg/mL + INR <2 + AST/ALT improving + clinically well.',
         citation: [6],
         next: 'apap-nac-iv',
+        summary: 'Start IV NAC for chronic ingestion with hepatotoxicity — same stopping criteria as acute',
     },
     {
         id: 'apap-chronic-discharge',
@@ -171,6 +183,7 @@ export const ACETAMINOPHEN_OD_NODES = [
         recommendation: 'Low-risk chronic ingestion — consider discharge after counseling on safe APAP use',
         confidence: 'recommended',
         citation: [6],
+        summary: 'Low-risk chronic ingestion — normal ALT, undetectable APAP, (ALT)(APAP) <1500',
     },
     {
         id: 'apap-below-line',
@@ -191,6 +204,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-gi-decon',
             },
         ],
+        summary: 'Below treatment line — low risk if reliable history; if any doubt, give NAC anyway',
     },
     // =====================================================================
     // MODULE 3: NAC PROTOCOL
@@ -214,6 +228,7 @@ export const ACETAMINOPHEN_OD_NODES = [
             monitoring: 'Monitor for vomiting and aspiration. Do NOT delay NAC for charcoal administration.',
         },
         next: 'apap-nac-choice',
+        summary: 'Activated charcoal 1 g/kg within 4h — do NOT delay NAC for charcoal; give concurrently',
     },
     {
         id: 'apap-nac-choice',
@@ -242,6 +257,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 next: 'apap-nac-twobag',
             },
         ],
+        summary: 'NAC is the definitive antidote — IV preferred (21h); pregnancy is NOT a contraindication',
     },
     {
         id: 'apap-nac-iv',
@@ -262,6 +278,7 @@ export const ACETAMINOPHEN_OD_NODES = [
             monitoring: 'APAP level q4-6h, AST/ALT, INR, BMP. Watch for anaphylactoid reactions during Bag 1. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
         },
         next: 'apap-nac-anaphylactoid',
+        summary: '3-bag IV NAC: 150 mg/kg over 1h, 50 mg/kg over 4h, 100 mg/kg over 16h — cap at 100 kg',
     },
     {
         id: 'apap-nac-oral',
@@ -282,6 +299,8 @@ export const ACETAMINOPHEN_OD_NODES = [
             monitoring: 'APAP level, AST/ALT, INR, BMP q6-12h. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
         },
         next: 'apap-nac-stop',
+        summary: 'Oral NAC 72h protocol: 140 mg/kg load then 70 mg/kg q4h x17 — mix with cola for palatability',
+        skippable: true,
     },
     {
         id: 'apap-nac-twobag',
@@ -302,6 +321,8 @@ export const ACETAMINOPHEN_OD_NODES = [
             monitoring: 'APAP level, AST/ALT, INR, BMP q6-12h. Stop criteria: APAP <10, INR <2, ALT improving, clinically well.',
         },
         next: 'apap-nac-stop',
+        summary: '2-bag protocol: 200 mg/kg over 4h then 100 mg/kg over 16h — lower anaphylactoid rate',
+        skippable: true,
     },
     {
         id: 'apap-nac-anaphylactoid',
@@ -330,6 +351,8 @@ export const ACETAMINOPHEN_OD_NODES = [
             monitoring: 'Vitals q5 min during reaction. Resume NAC after 1 hour hold. NEVER permanently stop NAC.',
         },
         next: 'apap-nac-stop',
+        summary: 'NEVER permanently stop NAC — anaphylactoid reactions are histamine-mediated, not true allergy',
+        safetyLevel: 'critical',
     },
     {
         id: 'apap-nac-stop',
@@ -351,6 +374,7 @@ export const ACETAMINOPHEN_OD_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Stop NAC only when: APAP <10 + INR <2 + ALT improving + clinically well — all four required',
     },
     // =====================================================================
     // MODULE 4: MASSIVE OVERDOSE

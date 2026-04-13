@@ -38,6 +38,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
       { id: 'dni-documentation', label: 'DNR/DNI Documentation' },
     ],
     next: 'code-when',
+  
+    summary: 'Code status is a goals-of-care conversation — focus on values, make a recommendation',
   },
 
   {
@@ -62,6 +64,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
         next: 'code-uncertain',
       },
     ],
+  
+    summary: 'Use Surprise Question: would I be surprised if this patient died in the next year?',
   },
 
   {
@@ -72,6 +76,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**When you have seconds to minutes:**\n\n**The 30-Second Conversation:**\n\n"I\'m Dr. [Name]. Your [mother/father/loved one] is very sick. I need to talk with you about what happens if [their] heart stops."\n\n"Based on what I\'m seeing, if we do CPR, I don\'t think it will help [them] survive, and it may cause more suffering. What I\'d recommend is that we focus on keeping [them] comfortable and let [them] die peacefully."\n\n"Is that okay? Do you have questions?"\n\n**Don\'t ask:** "Do you want us to do everything?"\n**Instead make a recommendation** based on medical judgment. [1][2]',
     citation: [1, 2],
     next: 'code-key-phrases',
+  
+    summary: 'The 30-second conversation — make a recommendation, do not ask "do you want everything?"',
   },
 
   // =====================================================================
@@ -86,6 +92,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**VitalTalk/REMAP Framework:**\n\n**R** — Reframe: Set the stage\n> "I wish we were meeting under different circumstances..."\n\n**E** — Expect emotion, explore values\n> "What\'s most important to you right now?"\n> "What gives your life meaning?"\n\n**M** — Map the future\n> "Given what you\'ve told me about what\'s important..."\n\n**A** — Align\n> "It sounds like what matters most is..."\n\n**P** — Plan\n> "Based on that, I\'d recommend..."\n\n**This takes 5-10 minutes when done well.** [1][2][4]',
     citation: [1, 2, 4],
     next: 'code-reframe',
+  
+    summary: 'REMAP framework: Reframe, Expect emotion, Map future, Align, Plan — takes 5-10 minutes',
   },
 
   {
@@ -96,6 +104,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Opening the Conversation:**\n\n**Warning shot:**\n> "I\'m worried about what I\'m seeing today..."\n> "I have some serious news to discuss..."\n\n**Assess understanding:**\n> "What have the doctors told you about your condition?"\n> "What\'s your understanding of where things are?"\n\n**Share prognosis honestly:**\n> "I wish I had better news. The cancer has spread despite treatment."\n> "I\'m worried that [they] may not survive this hospitalization."\n\n**Pause.** Allow silence. Let them process. [1][2]',
     citation: [1, 2],
     next: 'code-explore',
+  
+    summary: 'Warning shot, assess understanding, share prognosis honestly — then PAUSE for processing',
   },
 
   {
@@ -106,6 +116,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Understanding What Matters:**\n\n**Key Questions:**\n> "What\'s most important to you as you think about the future?"\n> "What are you hoping for?"\n> "What abilities are so important that you can\'t imagine living without them?"\n> "What would be a fate worse than death for you?"\n\n**For surrogates:**\n> "If [they] could see [themselves] now, what would [they] say?"\n> "What did [they] tell you about what [they\'d] want?"\n> "Knowing [them] as you do, what do you think [they] would choose?"\n\n**Listen more than you talk.** [1][2][4]',
     citation: [1, 2, 4],
     next: 'code-recommend',
+  
+    summary: 'Ask what matters most — for surrogates: "what would THEY want?" to relieve decision burden',
   },
 
   {
@@ -116,6 +128,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Doctors SHOULD make recommendations:**\n\n**Do NOT say:**\n> "Do you want us to do everything?"\n> "We can keep trying or we can stop."\n\nThis puts an impossible burden on families and implies false equivalence.\n\n**DO say:**\n> "Based on what you\'ve told me about what\'s important to [them], I\'d recommend..."\n> "Given the situation, I think the best thing we can do is..."\n> "In my medical opinion, CPR would not help [them] and would cause suffering."\n\n**A recommendation is a gift**, not an imposition.\nFamilies often feel relief when given clear guidance. [1][2][5]',
     citation: [1, 2, 5],
     next: 'code-key-phrases',
+  
+    summary: 'Doctors SHOULD recommend — a recommendation is a gift, not an imposition on families',
   },
 
   // =====================================================================
@@ -130,6 +144,9 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Language That Works:**\n\n**On prognosis:**\n> "I\'m hoping for the best but preparing for the worst."\n> "I wish the situation were different."\n> "I\'m worried this illness is very serious."\n\n**On CPR:**\n> "CPR is designed to restart a heart that stops suddenly in an otherwise healthy person. In [their] situation, it would not restore [them] to health."\n\n**On ventilators:**\n> "The breathing machine can buy time, but it can\'t fix the underlying problem."\n\n**On comfort:**\n> "Allow natural death" (not "withdraw care")\n> "Focus on comfort" (not "do nothing")\n> "We will never abandon you." [1][2][5]',
     citation: [1, 2, 5],
     next: 'code-avoid',
+  
+    summary: 'CPR is for sudden arrest in otherwise healthy patients — say "allow natural death" not "withdraw care"',
+    skippable: true,
   },
 
   {
@@ -140,6 +157,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Language That Harms:**\n\n| Avoid | Why | Say Instead |\n|-------|-----|-------------|\n| "Do you want us to do everything?" | Implies CPR = "everything" | Make a recommendation |\n| "Withdraw care" | Implies abandonment | "Shift focus to comfort" |\n| "There\'s nothing more we can do" | Never true | "We\'ll keep you comfortable" |\n| "Fight" or "give up" | War metaphors create guilt | "Allow natural death" |\n| "Coding" (with family) | Medical jargon | "If the heart stops..." |\n| "DNR means we won\'t treat you" | Untrue and frightening | Explain what WILL be done |\n\n**Never ask permission to stop futile treatments.** Make a recommendation. [1][2]',
     citation: [1, 2],
     next: 'code-scenarios',
+  
+    summary: 'Never ask "do you want everything?" or say "withdraw care" — use "shift focus to comfort"',
   },
 
   // =====================================================================
@@ -170,6 +189,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
         next: 'code-everything',
       },
     ],
+  
+    summary: 'Select scenario: patient with capacity, surrogate, family conflict, or wanting "everything"',
   },
 
   {
@@ -180,6 +201,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Speaking directly with the patient:**\n\n**Advantages:**\n• Honors autonomy directly\n• Avoids surrogate burden\n• Patient knows their own values\n\n**Approach:**\n1. Assess understanding of illness\n2. Share prognosis honestly\n3. Explore values: "What matters most?"\n4. Make a recommendation\n5. Document carefully\n\n**If patient doesn\'t want to discuss:**\n> "I understand this is hard. I want to respect your wishes. Can you tell me who should make decisions if you become too sick to speak for yourself?"\n\n**Always identify a surrogate** even when patient has capacity. [1][2]',
     citation: [1, 2],
     next: 'code-documentation',
+  
+    summary: 'Speaking directly with patient honors autonomy — always identify a surrogate even with capacity',
   },
 
   {
@@ -190,6 +213,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**When the patient can\'t speak for themselves:**\n\n**Key concept: Substituted judgment**\n> "Our goal is to figure out what [they] would want, not what you want for them."\n\n**Questions for surrogates:**\n> "Did [they] ever tell you what [they] would want in a situation like this?"\n> "If [they] could see [themselves] right now, what would [they] say?"\n> "What did [they] value most in life?"\n\n**Relieve the burden:**\n> "You\'re not making this decision — you\'re helping us understand what [they] would want."\n> "Whatever happens, you didn\'t cause this illness."\n\n**Identify the legal decision-maker** (DPOA, next of kin by state law). [1][2][4]',
     citation: [1, 2, 4],
     next: 'code-documentation',
+  
+    summary: 'Substituted judgment: "what would THEY want?" — relieve burden: "you did not cause this illness"',
   },
 
   {
@@ -200,6 +225,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**When family members disagree:**\n\n**Strategies:**\n\n1. **Refocus on the patient:**\n   > "Let\'s step back and think about what [patient] would want."\n\n2. **Identify the decision-maker:**\n   > "Who is the person legally authorized to make decisions?"\n\n3. **Hold a family meeting:**\n   • Private room\n   • All stakeholders present (or on phone)\n   • Chaplain/social work if available\n\n4. **Acknowledge the difficulty:**\n   > "This is one of the hardest things families face. You all love [them]."\n\n5. **Time-limited trial:**\n   > "Let\'s try [intervention] for 72 hours and reassess."\n\n**You cannot please everyone.** Focus on the patient. [1][2]',
     citation: [1, 2],
     next: 'code-documentation',
+  
+    summary: 'Refocus on the patient, identify legal decision-maker, consider time-limited trial — you cannot please everyone',
   },
 
   {
@@ -210,6 +237,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**When family says "do everything":**\n\n**First, understand why:**\n> "Tell me more about what \'everything\' means to you."\n\nOften they mean:\n• Don\'t give up / keep fighting\n• Don\'t let them suffer\n• Make sure nothing is missed\n\n**Reframe:**\n> "I hear you — you want us to do everything that will help. So do I. What I\'m worried about is doing things that would hurt [them] without helping."\n\n**Be honest:**\n> "CPR is designed for hearts that stop suddenly. In [their] situation, it would not bring [them] back to the life [they] had. It would cause pain without helping."\n\n**Offer alternatives:**\n> "I will promise to do everything that will help. And I won\'t do anything that will only cause suffering." [1][2][5]',
     citation: [1, 2, 5],
     next: 'code-documentation',
+  
+    summary: 'Understand why — often means "dont give up" — reframe: "I will do everything that will HELP"',
   },
 
   {
@@ -220,6 +249,9 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**When you don\'t know the outcome:**\n\n**It\'s okay to say:**\n> "I wish I could tell you exactly what will happen. I can\'t. But I can tell you what I\'m seeing and what I\'m worried about."\n\n**Consider a time-limited trial:**\n> "Let\'s try [intervention] for [48-72 hours]. If we see improvement, we\'ll continue. If not, we\'ll talk again about what makes sense."\n\n**Document the plan:**\n• Clear goals for the trial\n• Specific endpoints\n• Who will reassess and when\n\n**Revisit early and often.** Prognosis becomes clearer with time. [1][2]',
     citation: [1, 2],
     next: 'code-documentation',
+  
+    summary: 'Time-limited trial with clear goals and endpoints — revisit early and often as prognosis clarifies',
+    skippable: true,
   },
 
   // =====================================================================
@@ -234,6 +266,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**Document thoroughly — this protects everyone:**\n\n**Include:**\n• Who was present at the conversation\n• Patient\'s capacity (or why surrogate is speaking)\n• Prognosis communicated\n• Values and goals expressed\n• Specific recommendation made\n• Decision reached\n• Questions/concerns addressed\n\n**Code Status Orders:**\n• Full Code\n• DNR/DNI\n• DNR only (intubation acceptable)\n• Comfort measures only / Allow natural death\n\n**Note:** Code status ≠ level of care. DNR patients can still receive aggressive treatment. [1][2]',
     citation: [1, 2],
     next: 'code-polst',
+  
+    summary: 'Document: who present, capacity, prognosis shared, values expressed, recommendation made, decision reached',
   },
 
   {
@@ -244,6 +278,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     body: '**POLST (Physician Orders for Life-Sustaining Treatment):**\n\n**What it is:**\n• A portable medical order (not an advance directive)\n• Follows patient across settings\n• Signed by physician/NP/PA AND patient/surrogate\n\n**When to complete:**\n• Serious illness with limited life expectancy\n• Clear goals have been established\n• Patient wants decisions documented as orders\n\n**Not appropriate for:**\n• Healthy patients\n• Patients who haven\'t had goals conversation\n• As a substitute for conversation\n\n**POLST does not replace advance directives** — they complement each other. [1][2]',
     citation: [1, 2],
     next: 'code-transitions',
+  
+    summary: 'POLST is a portable medical order, not an advance directive — for serious illness with limited life expectancy',
   },
 
   // =====================================================================
@@ -270,6 +306,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
         next: 'code-full',
       },
     ],
+  
+    summary: 'Communicate code status at ALL handoffs — update EMR orders, arrange follow-up conversation',
   },
 
   {
@@ -281,6 +319,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     recommendation: 'Transition to comfort-focused care. Continue aggressive symptom management. Support family presence.',
     confidence: 'recommended',
     citation: [1, 2],
+  
+    summary: 'Comfort care IS active treatment — aggressive symptom management, family presence, dignity',
   },
 
   {
@@ -292,6 +332,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     recommendation: 'DNR/DNI status does not preclude active treatment. Continue disease-directed therapy as appropriate.',
     confidence: 'recommended',
     citation: [1, 2],
+  
+    summary: 'DNR does NOT mean "do not treat" — clarify intubation, pressors, dialysis, feeding tube preferences',
   },
 
   {
@@ -303,6 +345,8 @@ export const CODE_STATUS_NODES: DecisionNode[] = [
     recommendation: 'Full code status confirmed after goals-of-care discussion. Revisit if clinical status changes.',
     confidence: 'recommended',
     citation: [1, 2],
+  
+    summary: 'Full code after discussion is a choice, not a default — document conversation and plan to revisit',
   },
 
 ];

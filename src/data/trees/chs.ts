@@ -32,6 +32,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '[CHS Steps Summary](#/info/chs-summary)\n\nCHS is a clinical syndrome in chronic cannabis users characterized by cyclic nausea/vomiting and compulsive hot water bathing (~90% of patients). Traditional antiemetics (ondansetron) usually **FAIL**. GRACE-4 guidelines recommend butyrophenones as first-line therapy. Definitive treatment is cannabis cessation.',
     citation: [1, 2, 9],
     next: 'chs-presentation',
+  
+    summary: 'CHS: cyclic vomiting in chronic cannabis users — ondansetron usually FAILS, use butyrophenones',
   },
 
   {
@@ -59,6 +61,8 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-diagnostic-criteria',
       },
     ],
+  
+    summary: 'Identify phase: prodromal (morning nausea), hyperemetic (profuse vomiting), or recovery (abstinent)',
   },
 
   {
@@ -69,6 +73,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: 'Profuse vomiting (often >7 episodes/day), diffuse abdominal pain, compulsive hot water bathing for relief, significant volume depletion.\n\n**Complications to screen for:**\n\u2022 AKI from dehydration\n\u2022 Electrolyte abnormalities (hypokalemia, hyponatremia, hypomagnesemia)\n\u2022 Mallory-Weiss tear (hematemesis)\n\u2022 Boerhaave syndrome (rare but life-threatening \u2014 chest pain, subcutaneous emphysema after forceful vomiting)\n\nWeight loss common with recurrent episodes.',
     citation: [1, 6, 7, 11],
     next: 'chs-diagnostic-criteria',
+  
+    summary: 'Screen for complications: AKI, electrolyte abnormalities, Mallory-Weiss tear, Boerhaave',
   },
 
   {
@@ -79,6 +85,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**CHS is a clinical diagnosis of exclusion.** No standardized ED diagnostic criteria exist.\n\n**Simonetto Criteria (2012):**\n1. Long-term cannabis use (usually daily, >1 year)\n2. Cyclic nausea and vomiting\n3. Symptom resolution with cannabis cessation\n4. No alternative diagnosis\n\n**Supportive features:**\n\u2022 Compulsive hot water bathing (~90%)\n\u2022 Age <50 at onset\n\u2022 Morning predominance of nausea\n\u2022 Weight loss >5 kg\n\u2022 Cannabis use \u2265weekly for \u22651 year\n\n**Key distinction from Cyclic Vomiting Syndrome (CVS):** [Differential Diagnosis](#/info/chs-ddx)',
     citation: [1, 2, 6, 14],
     next: 'chs-red-flags',
+  
+    summary: 'Clinical diagnosis of exclusion — daily cannabis >1 year, cyclic vomiting, hot water bathing relief',
+    skippable: true,
   },
 
   // =====================================================================
@@ -105,6 +114,8 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-labs',
       },
     ],
+  
+    summary: 'Screen for red flags: hematemesis, localized pain, peritoneal signs, fever, jaundice, age >50',
   },
 
   {
@@ -115,6 +126,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: 'Red flags present \u2014 pursue targeted workup:\n\n**Differential Diagnosis:**\n\u2022 **Cyclic Vomiting Syndrome** \u2014 no cannabis association, may respond to triptans\n\u2022 **Gastroparesis** \u2014 worse postprandially, delayed gastric emptying study\n\u2022 **Cannabis withdrawal** \u2014 occurs AFTER cessation, not during use\n\u2022 **Biliary disease** \u2014 RUQ pain, Murphy sign, check LFTs/RUQ US\n\u2022 **Pancreatitis** \u2014 epigastric radiating to back, check lipase\n\u2022 **Bowel obstruction** \u2014 distension, absent bowel sounds, imaging\n\u2022 **Pregnancy** \u2014 check hCG\n\u2022 **Adrenal insufficiency** \u2014 morning nausea overlap, check cortisol\n\nOrder imaging and labs as clinically indicated.',
     citation: [2, 6, 14],
     next: 'chs-organic-found',
+  
+    summary: 'Red flags: pursue targeted workup — biliary, pancreatitis, SBO, pregnancy, adrenal insufficiency',
+    skippable: true,
   },
 
   {
@@ -126,6 +140,8 @@ export const CHS_NODES: DecisionNode[] = [
     recommendation: 'Treat the underlying cause. CHS remains a diagnosis of exclusion \u2014 if no alternative diagnosis is identified on repeat evaluation, reconsider CHS.',
     confidence: 'consider',
     citation: [2],
+  
+    summary: 'Alternative diagnosis found — treat underlying cause, reconsider CHS if no alternative identified',
   },
 
   {
@@ -136,6 +152,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**Order baseline labs:**\n\u2022 **BMP** \u2014 Cr (AKI screening), electrolytes (hypokalemia, hyponatremia)\n\u2022 **Magnesium** \u2014 often depleted with prolonged vomiting\n\u2022 **Lipase** \u2014 rule out pancreatitis\n\u2022 **Urine drug screen** \u2014 confirms cannabis use\n\u2022 **Pregnancy test** \u2014 all women of reproductive age\n\u2022 **Lactate** \u2014 if severe dehydration/hypoperfusion\n\n**ECG** \u2014 obtain BEFORE administering butyrophenones (haloperidol, droperidol). Check baseline QTc.\n\n**Note:** Ondansetron is typically ineffective in CHS \u2014 do not rely on it as first-line therapy.',
     citation: [2, 3, 7],
     next: 'chs-ecg',
+  
+    summary: 'BMP, Mg, lipase, UDS, pregnancy test — get ECG BEFORE butyrophenones for baseline QTc',
   },
 
   {
@@ -158,6 +176,9 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-iv-access',
       },
     ],
+  
+    summary: 'QTc >500ms: avoid butyrophenones, use olanzapine instead — no significant QTc prolongation',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -172,6 +193,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**Immediate interventions:**\n\u2022 IV access \u2014 2 large-bore IVs if severe dehydration\n\u2022 **NS bolus 20 mL/kg** for volume repletion\n\u2022 NPO (nothing by mouth until vomiting controlled)\n\u2022 Cardiac monitor\n\n**GRACE-4 Good Practice Statement:**\n\u26a0\ufe0f **AVOID opioids and benzodiazepines** \u2014 opioids worsen gastroparesis, benzodiazepines are ineffective for CHS nausea, and both create dependence risk in this population.\n\nProceed to first-line antiemetic therapy.',
     citation: [2, 3, 8],
     next: 'chs-first-line',
+  
+    summary: 'NS bolus 20 mL/kg — AVOID opioids and benzodiazepines (worsen gastroparesis, create dependence)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -193,6 +217,8 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-droperidol',
       },
     ],
+  
+    summary: 'GRACE-4: butyrophenones over ondansetron — HaVOC trial showed haloperidol superior',
   },
 
   {
@@ -203,6 +229,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: '[Haloperidol](#/drug/haloperidol/chs) **0.05 mg/kg IV** over 5 minutes (max 5 mg)\n\n**HaVOC Trial Evidence:**\n\u2022 Greater nausea VAS reduction at 2 hours vs ondansetron 4mg IV\n\u2022 More patients achieved adequate relief\n\u2022 Dose is LOWER than standard agitation dosing (0.1 mg/kg)\n\n**May repeat once** at 30 min if inadequate response\n\n**Monitor:** QTc (repeat ECG after dosing), EPS (treat dystonia with diphenhydramine 50mg IV/IM)',
     citation: [2, 4],
     next: 'chs-capsaicin',
+  
+    summary: 'Haloperidol 0.05 mg/kg IV — LOWER dose than agitation dosing, may repeat once at 30 min',
+    skippable: true,
   },
 
   {
@@ -213,6 +242,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '[Droperidol](#/drug/droperidol/chs) **0.625-2.5 mg IV**\n\n\u2022 **Faster onset** than haloperidol (3-10 min vs 10-20 min)\n\u2022 GRACE-4 recommends butyrophenones as a class for CHS\n\u2022 More sedating than haloperidol (greater H1/5-HT2A activity)\n\n**May repeat once** at 15-20 min if inadequate response\n\n**Monitor:** QTc (repeat ECG after dosing), blood pressure (alpha-1 blockade can cause hypotension)',
     citation: [2, 3, 10],
     next: 'chs-capsaicin',
+  
+    summary: 'Droperidol 0.625-2.5 mg IV — faster onset than haloperidol, more sedating',
   },
 
   {
@@ -223,6 +254,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: 'QTc >500ms \u2014 **haloperidol and droperidol are contraindicated.**\n\nUse [Olanzapine](#/drug/olanzapine/chs) instead:\n\u2022 **No significant QTc prolongation** \u2014 major advantage\n\u2022 5-10 mg IM or PO\n\u2022 Do NOT combine with parenteral benzodiazepines\n\nAlso apply topical capsaicin as adjunct.',
     citation: [2, 3],
     next: 'chs-olanzapine',
+  
+    summary: 'QTc >500ms: olanzapine 5-10 mg IM/PO — do NOT combine with parenteral benzodiazepines',
   },
 
   // =====================================================================
@@ -237,6 +270,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**GRACE-4 Recommendation 2:** Suggest capsaicin in addition to standard antiemetics (conditional, very low certainty evidence).\n\n[Capsaicin 0.075% Cream](#/drug/capsaicin-topical/chs)\n\n**Mechanism:** TRPV1 (transient receptor potential vanilloid 1) receptor agonist \u2014 the **same pathway activated by hot water bathing**, which is why CHS patients instinctively seek hot showers. Capsaicin provides targeted activation without the dehydration risk of prolonged hot showers.\n\nMultiple RCTs and systematic reviews support adjunctive use.',
     citation: [2, 5, 12, 13],
     next: 'chs-capsaicin-apply',
+  
+    summary: 'Capsaicin activates same TRPV1 pathway as hot water bathing — targeted relief without dehydration',
+    skippable: true,
   },
 
   {
@@ -247,6 +283,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**Application:**\n\u2022 Use 0.075% cream (e.g., Zostrix, Capzasin-HP)\n\u2022 Apply ~1 inch ribbon to periumbilical area (~15 cm diameter)\n\u2022 **Wear gloves** during application\n\u2022 Reapply every 6-8 hours as needed\n\n**Patient counseling:**\n\u2022 Initial burning sensation is expected and temporary\n\u2022 Avoid contact with eyes, nose, mouth\n\u2022 Do NOT apply heating pad over capsaicin\n\u2022 Wash hands thoroughly if gloves not used',
     citation: [5, 12, 13],
     next: 'chs-response',
+  
+    summary: 'Apply 0.075% cream to periumbilical area — wear gloves, initial burning is expected and temporary',
   },
 
   // =====================================================================
@@ -273,6 +311,8 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-refractory',
       },
     ],
+  
+    summary: 'Reassess 30-60 min after butyrophenone + capsaicin — ability to tolerate PO fluids is key',
   },
 
   {
@@ -283,6 +323,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**Continue supportive care:**\n\u2022 Complete IV fluid resuscitation\n\u2022 Trial PO fluids \u2014 start with small sips of clear liquids\n\u2022 Recheck electrolytes if initially abnormal\n\u2022 Continue capsaicin application\n\nIf tolerating PO, proceed to disposition planning.',
     citation: [2],
     next: 'chs-disposition',
+  
+    summary: 'Continue supportive care — trial PO fluids, recheck electrolytes, proceed to disposition',
   },
 
   {
@@ -293,6 +335,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: 'Persistent vomiting despite butyrophenone + capsaicin.\n\n**Escalation options:**\n1. **Repeat butyrophenone dose** if first dose was subtherapeutic\n2. **Olanzapine** 5-10 mg IM/PO as second-line agent\n3. Reassess for alternative diagnoses if truly refractory\n4. Consider admission for continued IV antiemetics\n\n\u26a0\ufe0f Do NOT escalate to opioids or benzodiazepines.',
     citation: [2, 3],
     next: 'chs-olanzapine',
+  
+    summary: 'Repeat butyrophenone or add olanzapine — do NOT escalate to opioids or benzodiazepines',
   },
 
   {
@@ -303,6 +347,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '[Olanzapine](#/drug/olanzapine/chs) **5-10 mg IM or PO**\n\n**Advantages:**\n\u2022 No significant QTc prolongation\n\u2022 No dystonia risk\n\u2022 Effective antiemetic with D2, 5-HT2A, 5-HT3, H1 receptor blockade\n\n**\u26a0\ufe0f DO NOT combine with parenteral (IM/IV) benzodiazepines** \u2014 risk of respiratory depression and death.\n\nUsed when:\n\u2022 Butyrophenones contraindicated (QTc >500ms)\n\u2022 Refractory to butyrophenone therapy\n\u2022 Patient preference for IM/PO vs IV',
     citation: [2, 3],
     next: 'chs-avoid',
+  
+    summary: 'Olanzapine 5-10 mg IM/PO — no QTc risk, no dystonia — avoid with parenteral benzos',
   },
 
   {
@@ -313,6 +359,9 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**GRACE-4 Good Practice Statement:**\n\n\u274c **Opioids** \u2014 worsen gastroparesis, promote dependence, do not treat underlying CHS nausea\n\n\u274c **Benzodiazepines** \u2014 ineffective for CHS nausea, cause sedation without antiemetic benefit\n\n\u274c **Ondansetron as sole therapy** \u2014 typically fails in CHS. The HaVOC trial showed butyrophenones are superior. May use as adjunct but should not be first-line.\n\n\u274c **IV cannabinoids (dronabinol)** \u2014 paradoxically worsens CHS despite being a cannabinoid\n\n\u26a0\ufe0f Many CHS patients receive multiple ED visits with ondansetron and opioids before diagnosis \u2014 break this cycle.',
     citation: [2, 3, 8],
     next: 'chs-disposition',
+  
+    summary: 'Avoid opioids, benzos, ondansetron alone, and dronabinol — break the cycle of ineffective treatment',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -339,6 +388,8 @@ export const CHS_NODES: DecisionNode[] = [
         next: 'chs-admit',
       },
     ],
+  
+    summary: 'Discharge if tolerating PO, adequate rehydration, electrolytes corrected; admit if refractory or AKI',
   },
 
   {
@@ -350,6 +401,8 @@ export const CHS_NODES: DecisionNode[] = [
     recommendation: 'Admit to medicine/observation for IV hydration, antiemetic management, and electrolyte monitoring.',
     confidence: 'recommended',
     citation: [2, 3, 11],
+  
+    summary: 'Admit for IV hydration, scheduled butyrophenone + capsaicin, serial labs, GI consult if Boerhaave concern',
   },
 
   {
@@ -361,6 +414,8 @@ export const CHS_NODES: DecisionNode[] = [
     recommendation: 'Discharge with cannabis cessation counseling, OTC capsaicin cream, and close follow-up.',
     confidence: 'definitive',
     citation: [2, 3, 6],
+  
+    summary: 'Discharge with OTC capsaicin cream, cessation counseling — cannabis cessation is the ONLY cure',
   },
 
   {
@@ -371,6 +426,8 @@ export const CHS_NODES: DecisionNode[] = [
     body: '**Cannabis cessation is the ONLY definitive cure for CHS.**\n\n**Key counseling points:**\n\u2022 Symptoms typically resolve within **days to weeks** of complete abstinence\n\u2022 Recurrence is expected with ANY resumed cannabis use \u2014 even reduced amounts\n\u2022 Synthetic cannabinoids (K2/Spice) can also cause CHS\n\u2022 CBD products may contain enough THC to trigger symptoms\n\n**Support resources:**\n\u2022 SAMHSA National Helpline: 1-800-662-4357 (free, 24/7)\n\u2022 Marijuana Anonymous: www.marijuana-anonymous.org\n\u2022 Primary care follow-up for ongoing support\n\u2022 Consider cognitive behavioral therapy (CBT)\n\n**Prophylaxis (limited evidence):**\n\u2022 Amitriptyline 25-50 mg qhs \u2014 may reduce episode frequency in patients not yet abstinent\n\u2022 Not a substitute for cessation',
     citation: [1, 6, 9],
     next: undefined,
+  
+    summary: 'Cannabis cessation: symptoms resolve within days to weeks — recurrence with ANY resumed use',
   },
 
 ];

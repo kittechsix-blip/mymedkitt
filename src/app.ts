@@ -10,16 +10,12 @@ import { renderConsultFlow } from './components/consult-flow.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
-import { renderConsultWizard } from './components/consult-wizard.js';
-import { ACUTE_STROKE_WIZARD } from './data/wizard-consults/acute-stroke.js';
 import { initDrugs } from './services/drug-service.js';
 import { initCategories } from './services/category-service.js';
 import { initInfoPages } from './services/info-service.js';
 import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
 import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
-import { setupExitIntent } from './init-exit-intent.js';
-import { initSpotlightShortcut } from './components/spotlight.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -185,22 +181,6 @@ function handleCalculator(params: RouteParams): void {
   renderCalculator(main, id);
 }
 
-function handleWizard(params: RouteParams): void {
-  removeContextualToolbar();
-  hideGlobalTabBar();
-  const id = params['id'] ?? 'unknown';
-  const main = clearMain();
-  const wizardData: Record<string, typeof ACUTE_STROKE_WIZARD> = {
-    'acute-stroke': ACUTE_STROKE_WIZARD,
-  };
-  const consult = wizardData[id];
-  if (consult) {
-    renderConsultWizard(main, consult);
-  } else {
-    renderPlaceholder(`Wizard: ${id}`, 'Consult wizard data not found.', '\u{1F50D}');
-  }
-}
-
 function handleShare(params: RouteParams): void {
   const treeId = params['treeId'] ?? '';
   if (treeId) {
@@ -238,12 +218,6 @@ async function init(): Promise<void> {
   // Wait for splash to finish
   await splashPromise;
 
-  // Initialize exit intent modal
-  setupExitIntent();
-
-  // Initialize global Spotlight search shortcut (Cmd+K)
-  initSpotlightShortcut();
-
   // Tab bar click delegation
   const tabBar = document.getElementById('bottom-tab-bar');
   if (tabBar) {
@@ -270,7 +244,6 @@ async function init(): Promise<void> {
   router.on('/drugs', handleDrugList);
   router.on('/calculators', handleCalculatorList);
   router.on('/calculator/:id', handleCalculator);
-  router.on('/wizard/:id', handleWizard);
   router.onNotFound(handleNotFound);
 
   // Start routing

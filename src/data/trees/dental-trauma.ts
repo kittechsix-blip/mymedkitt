@@ -38,6 +38,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
       },
     ],
     next: 'dental-primary-or-permanent',
+  
+    summary: 'Dental Trauma — Assessment — review key clinical information before proceeding',
   },
 
   {
@@ -64,6 +66,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
         next: 'dental-injury-type',
       },
     ],
+  
+    summary: 'Primary or Permanent Dentition? — assess clinical status to guide next management decision',
   },
 
   {
@@ -74,6 +78,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Primary teeth management is CONSERVATIVE:** [1][3]\n\n**Avulsion:**\n• NEVER reimplant — risk of damaging permanent tooth bud\n• Control bleeding with pressure\n• Soft diet 2-3 days\n• Dental follow-up 1-2 weeks\n\n**Luxation:**\n• Observation usually sufficient\n• Extract only if severely mobile and aspiration risk\n• Monitor for infection, color change\n\n**Intrusion:**\n• Allow spontaneous re-eruption (5-8 weeks)\n• Do NOT attempt to pull out\n• Refer if no eruption by 8 weeks\n\n**Fractures:**\n• Ellis I-II: Smooth edges, dental follow-up\n• Ellis III: Calcium hydroxide if accessible, dental referral\n\n**Main concern:** Damage to underlying permanent tooth bud (20-30% risk with severe trauma) [3]',
     citation: [1, 3],
     next: 'dental-injury-type',
+  
+    summary: 'Primary Tooth Trauma — Key Principles — review key clinical information before proceeding',
   },
 
   {
@@ -110,6 +116,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
         next: 'dental-ellis-assess',
       },
     ],
+  
+    summary: 'Type of Dental Injury? — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -141,6 +149,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Ellis Classification — assess clinical status to guide next management decision',
   },
 
   {
@@ -152,6 +162,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Smooth rough edges if needed. Routine dental follow-up. No urgent intervention required.',
     confidence: 'definitive',
     citation: [1, 4],
+  
+    summary: 'Ellis I: enamel only (white chip) — smooth sharp edges with emery board, dental follow-up 1-2 weeks',
   },
 
   {
@@ -174,6 +186,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Dental follow-up within 24 hours for definitive treatment',
     },
+  
+    summary: 'Ellis II: dentin exposed (yellow layer) — cover with CaOH or GIC, dental follow-up within 24h',
   },
 
   {
@@ -204,6 +218,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Same-day dental referral for definitive pulp capping or root canal',
     },
+  
+    summary: 'Ellis III: pulp exposed (pink/bleeding center) — dental emergency, CaOH cover, urgent dental within hours',
   },
 
   // =====================================================================
@@ -245,6 +261,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Luxation Type — assess clinical status to guide next management decision',
   },
 
   {
@@ -256,6 +274,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Observation only. Soft diet. Follow up if pain persists or tooth discolors.',
     confidence: 'definitive',
     citation: [1, 6],
+  
+    summary: 'Concussion — Minimal Injury — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -267,6 +287,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Flexible splint if significantly loose. Soft diet. Dental follow-up within 1 week.',
     confidence: 'definitive',
     citation: [1, 6],
+  
+    summary: 'Subluxation: tooth mobile but not displaced — soft diet, dental follow-up within 1 week',
   },
 
   {
@@ -278,6 +300,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Reposition gently into socket, flexible splint × 2 weeks. Dental follow-up 24-48h.',
     confidence: 'definitive',
     citation: [1, 6],
+  
+    summary: 'Extrusive Luxation — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -289,6 +313,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Reposition and flexible splint × 2 weeks. High necrosis risk. Dental follow-up within 24h.',
     confidence: 'definitive',
     citation: [1, 6],
+  
+    summary: 'Lateral Luxation — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -300,6 +326,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Management based on depth. >3mm needs surgical repositioning. Same-day referral.',
     confidence: 'definitive',
     citation: [1, 6, 7],
+  
+    summary: 'Intrusion: tooth pushed into socket — do NOT attempt to reposition, dental/OMFS referral promptly',
   },
 
   // =====================================================================
@@ -326,6 +354,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Oral surgery same-day for definitive splinting, 3-4 week healing',
     },
+  
+    summary: 'Alveolar Fracture — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -352,6 +382,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Tooth Avulsion — assess clinical status to guide next management decision',
   },
 
   {
@@ -363,6 +395,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'DO NOT reimplant. Control bleeding, reassure family, dental follow-up 1-2 weeks.',
     confidence: 'definitive',
     citation: [1, 3],
+  
+    summary: 'Primary Tooth Avulsion — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -373,6 +407,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**TIME IS TOOTH — Act immediately:** [1][2][9]\n\n**Step 1: Locate the tooth**\nIf not found → CXR to rule out aspiration\n\n**Step 2: Handle by CROWN only**\nNEVER touch, scrub, or dry the root\n\n**Step 3: If dirty, rinse briefly**\n• <10 seconds under cold running water\n• Do NOT scrub or use chemicals\n\n**Step 4: Optimal storage (if not reimplanting immediately)**\n\n| Medium | Duration | Notes |\n|--------|----------|-------|\n| **HBSS** | Up to 24h | GOLD standard |\n| **Cold milk** | Up to 6h | Excellent, accessible |\n| **Saliva** | <30 min | Place in buccal vestibule |\n| **Saline** | <1h | Acceptable |\n| **Water** | <5 min | AVOID — hypotonic |\n\n[IMAGE: Avulsed Tooth — Handle by Crown Only](#/image/dental-trauma/avulsion-diagram.jpg)',
     citation: [1, 2, 9],
     next: 'dental-avulsion-reimplant',
+  
+    summary: 'Permanent Tooth Avulsion — EMERGENCY — review key clinical information before proceeding',
   },
 
   {
@@ -383,6 +419,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Reimplant in ED if dentist not available within 30 min:** [1][9]\n\n**Technique:**\n1. Rinse socket with saline (remove clot gently)\n2. Rinse tooth root briefly (<10 sec cold water)\n3. Insert tooth into socket with gentle pressure\n4. Have patient bite on gauze to stabilize\n5. Verify correct orientation (facial surface forward)\n6. Check occlusion\n\n**If resistance encountered:**\n• Do not force\n• Clot may be blocking — suction gently\n• If still difficult, refer to dentist\n\n**Splinting:**\n• Flexible splint × **7-10 days** (if <60 min dry)\n• Flexible splint × **14 days** (if >60 min dry)\n\n**Temporizing:** If splinting materials unavailable, patient bites on gauze, dental referral ASAP',
     citation: [1, 9],
     next: 'dental-avulsion-meds',
+  
+    summary: 'Reimplantation Technique — review key clinical information before proceeding',
   },
 
   {
@@ -413,6 +451,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Mandatory dental follow-up 24-48h. Root canal typically needed within 2-4 weeks.',
     },
+  
+    summary: 'Avulsion — Medications & Follow-up — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -427,6 +467,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Splinting principles:** [1][6]\n\n**FLEXIBLE splints preferred** (allow physiologic motion)\n• Wire-composite\n• Resin-bonded\n• Soft wire + adhesive\n\n**RIGID splints increase ankylosis risk** — avoid if possible\n\n**Duration by injury:**\n\n| Injury | Splint Type | Duration |\n|--------|-------------|----------|\n| Subluxation | Flexible | 2 weeks |\n| Extrusive | Flexible | 2 weeks |\n| Lateral | Flexible | 2 weeks |\n| Intrusion | Flexible | 4 weeks |\n| Avulsion <60 min | Flexible | 7-10 days |\n| Avulsion >60 min | Flexible | 14 days |\n| Alveolar fx | Semi-rigid | 4 weeks |\n| Root fx (cervical) | Flexible | 4 weeks |\n\n[IMAGE: Flexible Dental Splint](#/image/dental-trauma/dental-splinting.jpg)\n\n**ED Temporizing:**\n• Aluminum foil molded to teeth\n• Dental wax\n• Patient bites gauze until dental follow-up',
     citation: [1, 6],
     next: 'dental-disposition',
+  
+    summary: 'Splinting Techniques — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -442,6 +484,8 @@ export const DENTAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Disposition based on injury severity. All splinted teeth need dental follow-up. Ellis III/avulsion/alveolar fx = same-day.',
     confidence: 'definitive',
     citation: [1, 2],
+  
+    summary: 'Dental Trauma — Disposition Summary — determine disposition and follow-up plan based on clinical findings',
   },
 
 ];

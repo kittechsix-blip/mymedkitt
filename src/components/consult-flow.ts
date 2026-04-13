@@ -11,13 +11,8 @@ import { renderContextualToolbar, removeContextualToolbar } from './contextual-t
 import { getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
-// SAFE: Dosing banner now only shows doses the user explicitly adds (no regex extraction)
-import { renderDosingBanner } from './dosing-banner.js';
-import { renderStickyDosingHeader, updateStickyDosingHeader, clearStickyDosingHeader } from './sticky-dosing-header.js';
-import { isQuickFireMode, renderQuickFireToggle, initQuickFireMode } from './quick-fire-mode.js';
 import { addRecentConsult } from './dashboard.js';
 import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
-import { renderCriticalActionsButton } from './critical-actions.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -26,10 +21,6 @@ let currentTreeId: string | null = null;
 let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
-let quickFireListenerRegistered = false;
-
-// Initialize quick fire mode state on module load
-initQuickFireMode();
 
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container: HTMLElement, treeId: string): Promise<void> {
@@ -80,16 +71,6 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
     }) as EventListener);
   }
 
-  // Listen for quick fire mode toggle
-  if (!quickFireListenerRegistered) {
-    quickFireListenerRegistered = true;
-    window.addEventListener('medkitt-quick-fire-toggle', () => {
-      if (delegatedContainer) {
-        renderFlow(delegatedContainer);
-      }
-    });
-  }
-
   // Check for category-specific entry point override
   const entryOverride = sessionStorage.getItem('medkitt-tree-entry');
   sessionStorage.removeItem('medkitt-tree-entry');
@@ -119,24 +100,12 @@ function renderFlow(container: HTMLElement): void {
   const categoryId = currentConfig.categoryId || findCategoryId(currentTreeId ?? '');
   renderFlowHeader(container, categoryId);
 
-  // Dosing banner (shows user-added doses, safe - no regex extraction)
-  renderDosingBanner(container);
-
-  // Sticky dosing header (auto-shows treatment from current result node)
-  renderStickyDosingHeader(container);
-
   // Consult search bar
   renderConsultSearch(container);
 
   // Card stack container
   const stackContainer = document.createElement('div');
   stackContainer.className = 'card-stack-container';
-
-  // Add quick fire mode class if enabled
-  const quickFire = isQuickFireMode();
-  if (quickFire) {
-    stackContainer.classList.add('card-stack-container--quick-fire');
-  }
 
   // Disclaimer on first render (no answered cards)
   const cardStack = controller.getCardStack();
@@ -147,7 +116,7 @@ function renderFlow(container: HTMLElement): void {
     stackContainer.appendChild(disclaimer);
   }
 
-  // Render answered cards
+  // Render answered cards as pills
   for (const entry of cardStack) {
     const card = createDecisionCard(entry.node, {
       state: 'answered',
@@ -155,21 +124,13 @@ function renderFlow(container: HTMLElement): void {
       selectedLabel: entry.selectedLabel,
       config: currentConfig,
       treeId: currentTreeId ?? undefined,
-      quickFireMode: quickFire,
+      autoAdvanced: entry.autoAdvanced,
     });
     stackContainer.appendChild(card);
   }
 
   // Render active card
   const currentNode = controller.getCurrentNode();
-
-  // Update sticky dosing header based on current node's treatment
-  // Show for any node with treatment property (result or info with dosing recommendations)
-  if (currentNode && currentNode.treatment) {
-    updateStickyDosingHeader(currentNode.treatment);
-  } else {
-    updateStickyDosingHeader(null);
-  }
 
   if (currentNode) {
     const activeCard = createDecisionCard(currentNode, {
@@ -217,7 +178,6 @@ function renderFlow(container: HTMLElement): void {
       },
       onHome: () => {
         if (controller) controller.fullReset();
-        clearStickyDosingHeader();
         removeContextualToolbar();
         router.navigate('/');
       },
@@ -308,14 +268,6 @@ function renderConsultSearch(container: HTMLElement): void {
   });
 
   wrapper.appendChild(toggleBtn);
-
-  // Critical Actions button (next to search, above disclaimer)
-  if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
-    renderCriticalActionsButton(wrapper, currentConfig.criticalActions, controller, () => {
-      if (delegatedContainer) renderFlow(delegatedContainer);
-    });
-  }
-
   wrapper.appendChild(input);
   wrapper.appendChild(results);
   container.appendChild(wrapper);
@@ -521,14 +473,10 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
     router.navigate('/');
   });
 
-  // Quick fire toggle
-  const quickFireBtn = renderQuickFireToggle();
-
   header.appendChild(backBtn);
   header.appendChild(resetBtn);
   header.appendChild(title);
   header.appendChild(progress);
-  header.appendChild(quickFireBtn);
   header.appendChild(shareBtn);
   header.appendChild(homeBtn);
   container.appendChild(header);

@@ -31,6 +31,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Croup (laryngotracheobronchitis)** is a parainfluenza viral infection causing subglottic inflammation.\n\n**Classic presentation:**\n\u2022 Barking "seal-like" cough\n\u2022 Inspiratory stridor\n\u2022 Hoarseness\n\u2022 Low-grade fever\n\u2022 URI prodrome (1-3 days)\n\n**Epidemiology:** 3% of children aged 6 months to 3 years. Peak incidence 1-2 years. Male:female 1.4:1. Most common in fall/winter.\n\n**Most cases are mild and self-limited** \u2014 only 1-8% require hospitalization, <3% of admitted patients require intubation.',
     citation: [1, 2, 7],
     next: 'croup-severity',
+  
+    summary: 'Parainfluenza causing subglottic inflammation — barking cough, stridor, hoarseness, age 6mo-3yr',
   },
 
   {
@@ -64,6 +66,8 @@ export const CROUP_NODES: DecisionNode[] = [
         next: 'croup-failure-tx',
       },
     ],
+  
+    summary: 'Key distinction: stridor at rest vs only with agitation determines threshold for epinephrine',
   },
 
   // =====================================================================
@@ -78,6 +82,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Single dose glucocorticoid is standard of care for ALL severities of croup.**\n\n**First-line:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO** (max 16 mg) \u2014 single dose\n\n**Non-inferior alternatives:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.15 mg/kg PO** \u2014 lower dose equally effective [3][6]\n\u2022 [Prednisolone](#/drug/prednisolone) **1 mg/kg PO** \u2014 non-inferior for symptom relief and 7-day outcomes [6]\n\n**If unable to tolerate oral:**\n\u2022 [Budesonide](#/drug/budesonide-neb) **2 mg nebulized** \u2014 effective alternative [5][9]\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM**\n\n**NNT = 7** to prevent one return visit. Reduces return visits/readmissions by ~50%. Safe single-dose profile.',
     citation: [1, 2, 3, 5, 6, 8],
     next: 'croup-mild-obs',
+  
+    summary: 'Dexamethasone 0.6 mg/kg PO single dose for ALL severities — NNT 7 to prevent return visit',
   },
 
   {
@@ -88,6 +94,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL normal saline\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) nebulized\n\nEpinephrine provides rapid but **temporary** relief (onset minutes, duration 1-2 hours). Must observe minimum 2 hours after administration.\n\n**Keep child calm** \u2014 agitation worsens airway obstruction.',
     citation: [2, 4, 7],
     next: 'croup-epi-obs',
+  
+    summary: 'Dex + racemic epi 0.5mL of 2.25% nebulized — onset minutes, duration 1-2h, observe minimum 2h',
   },
 
   {
@@ -98,6 +106,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\u2022 **May repeat epinephrine** \u2014 repeated doses can prevent intubation in many cases [4]\n\n**Additional considerations:**\n\u2022 Heliox (70:30 He:O\u2082) \u2014 may provide short-term benefit when combined with dex, but limited evidence [11]\n\u2022 Continuous monitoring with pulse oximetry\n\u2022 **Minimize interventions that cause agitation** \u2014 crying worsens obstruction\n\u2022 Have airway equipment at bedside',
     citation: [2, 4, 7, 11],
     next: 'croup-epi-obs',
+  
+    summary: 'Repeat epinephrine may prevent intubation — minimize agitation, have airway equipment ready',
   },
 
   {
@@ -108,6 +118,9 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**This is a clinical emergency \u2014 activate airway team.**\n\n**Immediate interventions:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM** (if not already given)\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) nebulized \u2014 may repeat\n\u2022 **Blow-by oxygen** \u2014 do NOT agitate the child\n\u2022 **Call anesthesia/ENT for airway backup**\n\n**Airway management:**\n\u2022 Use endotracheal tube **0.5-1.0 size smaller** than age-predicted (subglottic narrowing)\n\u2022 Oral intubation preferred \u2014 may need smaller tube than expected\n\u2022 Have surgical airway equipment available\n\n**Rule out alternative diagnoses:** bacterial tracheitis, epiglottitis, foreign body, peritonsillar abscess.',
     citation: [2, 4],
     next: 'croup-icu',
+  
+    summary: 'ETT 0.5-1.0 size SMALLER than age-predicted — subglottic narrowing, call anesthesia/ENT backup',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -133,6 +146,8 @@ export const CROUP_NODES: DecisionNode[] = [
         next: 'croup-mod-tx',
       },
     ],
+  
+    summary: 'Observe 1-2h post-dex — most improve within 2-3h, dex half-life ~36h provides sustained benefit',
   },
 
   {
@@ -159,6 +174,9 @@ export const CROUP_NODES: DecisionNode[] = [
         next: 'croup-admit',
       },
     ],
+  
+    summary: 'Observe minimum 2h after last epinephrine — symptoms may recur as effect wears off (rebound)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -169,6 +187,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Repeat nebulized epinephrine** at same dose:\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\n**Repeated doses may prevent intubation** in many cases. [4]\n\nRestart 2-hour observation clock after each dose.\n\n**Escalation considerations:**\n\u2022 Multiple doses of epinephrine \u2192 strong indicator for admission\n\u2022 If requiring >2 doses \u2192 consider ICU level monitoring\n\u2022 **Failure to improve with dexamethasone + epinephrine** \u2192 consider alternative diagnoses (bacterial tracheitis, foreign body)',
     citation: [4],
     next: 'croup-re-obs',
+  
+    summary: 'Repeat epi at same dose — restart 2h observation clock; >2 doses = strong indicator for admission',
   },
 
   {
@@ -190,6 +210,8 @@ export const CROUP_NODES: DecisionNode[] = [
         next: 'croup-admit',
       },
     ],
+  
+    summary: 'Reassess 2h after repeat epi — multiple doses = higher likelihood of needing admission',
   },
 
   // =====================================================================
@@ -204,6 +226,8 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Discharge criteria:**\n\u2022 No stridor at rest for \u22652 hours after last epinephrine\n\u2022 Tolerating oral fluids\n\u2022 Comfortable, not in distress\n\u2022 Reliable caregiver with access to emergency care\n\n**Parent education:**\n\u2022 Symptoms are often **worse at night** \u2014 warn parents\n\u2022 Barking cough typically lasts 1-2 days, may continue up to 5-7 days\n\u2022 Keep child calm \u2014 agitation worsens symptoms\n\u2022 Acetaminophen/ibuprofen for fever and comfort\n\u2022 **Humidified air and cool mist lack evidence of benefit** [2][9]\n\n[Croup: When to Return to the ED](#/info/croup-return-precautions) \u2014 shareable parent handout\n\n**No additional steroid doses needed** \u2014 single dose of dexamethasone provides sustained benefit (half-life ~36 hours).',
     recommendation: 'Discharge with return precautions. Single-dose dexamethasone provides sustained benefit. Symptoms worse at night \u2014 warn parents. Follow up with pediatrician in 1-2 days if symptoms persist beyond 3 days. Return immediately for worsening stridor, breathing difficulty, or inability to drink fluids.',
     citation: [2, 3, 5, 9],
+  
+    summary: 'No stridor at rest x2h, tolerating fluids — humidified air/cool mist have NO evidence of benefit',
   },
 
   {
@@ -225,6 +249,8 @@ export const CROUP_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous pulse oximetry. Reassess respiratory status after each epinephrine dose. Most children improve within 24-48 hours.',
     },
+  
+    summary: 'Persistent stridor despite dex + epi, unable to tolerate PO, <6mo with moderate-severe = admit',
   },
 
   {
@@ -255,6 +281,8 @@ export const CROUP_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous cardiorespiratory monitoring. Daily assessment for extubation readiness with cuff leak test. Plan extubation after 24-72 hours of clinical improvement.',
     },
+  
+    summary: 'ETT 0.5-1.0 smaller, continue dex q6-12h for extubation — <3% of hospitalized croup need intubation',
   },
 
 ];

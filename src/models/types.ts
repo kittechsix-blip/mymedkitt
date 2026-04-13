@@ -64,6 +64,12 @@ export interface DecisionNode {
   pearls?: string;
   /** Feature 2: Progressive disclosure - Evidence summary */
   evidence?: string;
+  /** Need-to-Know: One-line clinical summary (10-20 words) for accordion mode */
+  summary?: string;
+  /** Need-to-Know: Info nodes that can be auto-skipped for experts */
+  skippable?: boolean;
+  /** Need-to-Know: Safety level — always-visible banner above accordion */
+  safetyLevel?: 'critical' | 'warning';
 }
 
 export interface NodeOption {

@@ -38,6 +38,9 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     images: [{ src: 'images/copd-exacerbation/copd-cxr.jpg', alt: 'PA chest X-ray showing severe COPD with marked hyperinflation, flattened hemidiaphragms, and small cardiac silhouette', caption: 'Severe COPD CXR — hyperinflation, flattened diaphragms, barrel chest configuration. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 2],
     next: 'copd-severity',
+  
+    summary: 'Target SpO2 88-92% NOT higher — hyperoxia worsens V/Q mismatch and CO2 retention',
+    safetyLevel: 'warning',
   },
 
   {
@@ -70,6 +73,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Rome classification: mild (SpO2 >92%), moderate (88-92%, accessory muscles), severe (SpO2 <88%, AMS)',
   },
 
   // =====================================================================
@@ -103,6 +108,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Return precautions for worsening dyspnea, fever, or altered mental status.',
     },
     next: 'copd-disposition',
+  
+    summary: 'Mild: outpatient — prednisone 40mg PO x5 days (no taper), consider azithromycin or doxycycline',
   },
 
   {
@@ -132,6 +139,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'RR, SpO2 (target 88-92%), work of breathing. Reassess for NIV need in 1-2 hours.',
     },
     next: 'copd-response-moderate',
+  
+    summary: 'Moderate: nebs q4-6h + methylpred 125mg IV + target SpO2 88-92% — reassess for BiPAP in 1-2h',
   },
 
   {
@@ -154,6 +163,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Reassess at 1-2h: RR improving, less accessory muscle use = good; still distressed = start BiPAP',
   },
 
   {
@@ -183,6 +194,9 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous SpO2, RR, mental status. ABG/VBG within 2 hours of BiPAP initiation.',
     },
     next: 'copd-niv-management',
+  
+    summary: 'Severe: start BiPAP NOW 10/5 titrate to 18-20/8 — do NOT delay for ABG, give nebs through BiPAP',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -216,6 +230,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'HR (tachycardia common), tremor, K+ if prolonged use. Response assessed by RR, work of breathing.',
     },
     next: 'copd-steroids',
+  
+    summary: 'Albuterol + ipratropium nebulized q4-6h — combination superior to either alone, can give through BiPAP',
   },
 
   {
@@ -245,6 +261,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Blood glucose (especially diabetics). Mental status changes. GI symptoms.',
     },
     next: 'copd-antibiotics',
+  
+    summary: 'Prednisone 40mg PO daily x 5 days — no taper needed, longer courses offer no additional benefit',
   },
 
   // =====================================================================
@@ -276,6 +294,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Antibiotics if purulent sputum + 1 other cardinal symptom OR on NIV — not routine for all exacerbations',
   },
 
   {
@@ -305,6 +325,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Clinical improvement expected in 48-72 hours. Reassess if no improvement.',
     },
     next: 'copd-niv-indication',
+  
+    summary: 'Uncomplicated: azithromycin 500mg x 3d or doxycycline 100mg BID x 5d — narrow spectrum sufficient',
   },
 
   {
@@ -334,6 +356,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Cultures if intubated. Procalcitonin trend. Clinical response in 48-72 hours.',
     },
     next: 'copd-niv-management',
+  
+    summary: 'Complicated/ICU: levofloxacin 750mg daily; Pseudomonas risk: pip-tazo or cefepime',
   },
 
   // =====================================================================
@@ -369,6 +393,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'BiPAP reduces intubation (NNT 4) and mortality (NNT 10) — start if RR >30 or respiratory acidosis',
   },
 
   {
@@ -398,6 +424,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous SpO2, RR, TV/MV on device. ABG/VBG at 2 hours. If pH not improving, escalate care.',
     },
     next: 'copd-niv-response',
+  
+    summary: 'Start 10/5, titrate to 18-20/8 — dexmedetomidine for intolerance (no respiratory depression)',
   },
 
   {
@@ -420,6 +448,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'pH should improve within 2h on BiPAP — if no improvement, prepare for intubation',
   },
 
   {
@@ -430,6 +460,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Patient improving on BiPAP:**\n\n**Continue therapy:**\n- Maintain current BiPAP settings\n- Continue scheduled bronchodilators through BiPAP\n- Complete steroid course\n- Antibiotics if indicated\n\n**Weaning approach:**\n- Avoid continuous BiPAP >48 hours (nasal ulceration)\n- Trial breaks as tolerated (meals, communication)\n- Gradually reduce support over 24-48 hours\n- Step down: BiPAP -> HFNC -> NC\n\n**When to attempt off BiPAP:**\n- RR <25 on BiPAP\n- SpO2 maintained on FiO2 <40%\n- Alert, cooperative\n- Secretions manageable\n\n**Admission:** ICU or step-down for BiPAP monitoring. [1][2]',
     citation: [1, 2],
     next: 'copd-disposition',
+  
+    summary: 'Improving on BiPAP — wean gradually over 24-48h, avoid continuous >48h (nasal ulceration)',
   },
 
   {
@@ -451,6 +483,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous SpO2, RR, work of breathing. Escalate to BiPAP if worsening or no improvement.',
     },
     next: 'copd-niv-response',
+  
+    summary: 'HFNC as bridge or when BiPAP contraindicated — flow 40-60 L/min, better tolerated but less pressure support',
   },
 
   {
@@ -480,6 +514,9 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Post-intubation ABG. Watch for auto-PEEP (persistent expiratory flow). Plateau pressure <30.',
     },
     next: 'copd-vent-management',
+  
+    summary: 'Ketamine preferred for induction (bronchodilation) — low RR to prevent auto-PEEP, have NE ready',
+    safetyLevel: 'critical',
   },
 
   {
@@ -490,6 +527,9 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Initial ventilator settings:**\n\n| Parameter | Setting |\n|-----------|----------|\n| Mode | Volume Control (AC) |\n| TV | 6-8 mL/kg IBW |\n| RR | 12-14/min (low!) |\n| PEEP | 5-8 cm H2O |\n| FiO2 | Titrate to SpO2 88-92% |\n\n**Critical: Prevent Auto-PEEP**\n\n- Use low RR (12-14) to allow complete exhalation\n- Watch expiratory flow on vent waveform\n- If persistent flow at end-expiration = auto-PEEP\n- Reduce RR further, sedate adequately\n\n**Permissive hypercapnia:**\n- Target pH 7.25-7.35 (not normal CO2)\n- Accept elevated CO2 if pH acceptable\n- Match patient\'s chronic baseline\n\n**Weaning:**\n- Rest patient 24 hours minimum\n- Aggressive weaning at 36-48 hours\n- Consider extubation to HFNC or BiPAP [1][2][6]',
     citation: [1, 2, 6],
     next: 'copd-disposition',
+  
+    summary: 'Low RR 12-14 for long expiratory time — permissive hypercapnia target pH 7.25-7.35, not normal CO2',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -521,6 +561,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
         next: 'copd-discharge',
       },
     ],
+  
+    summary: 'ICU if on BiPAP/intubated; floor if stable on low-flow O2; discharge if returned to baseline',
   },
 
   {
@@ -532,6 +574,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     recommendation: 'ICU admission for BiPAP or mechanical ventilation. Continue bronchodilators, steroids, antibiotics. Goal: wean respiratory support, identify precipitant.',
     confidence: 'recommended',
     citation: [1, 2],
+  
+    summary: 'ICU for BiPAP or mechanical ventilation — ABG q4-6h, respiratory therapy q4-6h, wean as tolerated',
   },
 
   {
@@ -543,6 +587,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     recommendation: 'Telemetry/floor admission. Complete steroid course, bronchodilators, antibiotics if indicated. Discharge when stable on room air or baseline O2.',
     confidence: 'recommended',
     citation: [1, 2, 11],
+  
+    summary: 'Nebs q4-6h, prednisone 40mg PO daily x 5d total, escalate to BiPAP if worsening',
   },
 
   {
@@ -554,6 +600,8 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     recommendation: 'ED discharge with 5-day prednisone, increased bronchodilators, antibiotics if indicated. PCP follow-up within 7 days. Smoking cessation counseling.',
     confidence: 'recommended',
     citation: [1, 2, 11, 12],
+  
+    summary: 'Prednisone 40mg x 5d, increase SABA, antibiotics if criteria met — PCP within 7d, smoking cessation',
   },
 ];
 

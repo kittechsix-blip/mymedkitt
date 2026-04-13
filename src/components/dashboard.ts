@@ -9,7 +9,6 @@ import type { Category } from '../models/types.js';
 import { getAllDrugs } from '../services/drug-service.js';
 import { getAllCalculators } from './calculator.js';
 import { buildSearchIndex } from '../services/search-service.js';
-import { openSpotlight } from './spotlight.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -78,9 +77,6 @@ export function renderDashboard(container: HTMLElement): void {
   logoHeader.appendChild(logoImg);
   logoHeader.appendChild(logoText);
 
-  // Tap header to open Spotlight
-  logoHeader.addEventListener('click', openSpotlight);
-
   dashboard.appendChild(logoHeader);
 
   // ---- Hero Search Bar ----
@@ -106,7 +102,6 @@ export function renderDashboard(container: HTMLElement): void {
   heroSearchBtn.appendChild(searchIcon);
   heroSearchBtn.appendChild(searchText);
   heroSearchBtn.appendChild(searchShortcut);
-  heroSearchBtn.addEventListener('click', openSpotlight);
 
   heroSearch.appendChild(heroSearchBtn);
   dashboard.appendChild(heroSearch);

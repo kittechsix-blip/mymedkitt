@@ -4,7 +4,6 @@
 
 import { router } from '../services/router.js';
 import { getPatientContext, setPatientContext } from '../services/patient-context.js';
-import { renderStickyPatientHeader } from './sticky-patient-header.js';
 import { trackCalcOpen, trackCalcSubmit } from '../services/kittmd-analytics.js';
 import { renderBodyText } from './text-renderer.js';
 
@@ -33399,9 +33398,6 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
   trackCalcOpen(calculatorId);
 
   container.innerHTML = '';
-
-  // Render sticky patient context header
-  renderStickyPatientHeader(container);
 
   // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
   if (calculatorId.startsWith('tbsa')) {

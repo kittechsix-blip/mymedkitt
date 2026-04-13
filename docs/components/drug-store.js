@@ -4,7 +4,6 @@
 import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
-import { renderDosingBanner } from './dosing-banner.js';
 import { trackDrugView } from '../services/kittmd-analytics.js';
 /** Alphabetical prefix search for drugs — strict "starts with" matching on name */
 function rankedDrugSearch(drugs, query) {
@@ -55,8 +54,6 @@ export function renderDrugList(container) {
     searchInput.setAttribute('aria-label', 'Search drugs');
     searchWrap.appendChild(searchInput);
     container.appendChild(searchWrap);
-    // Dosing banner (shows user-pinned doses)
-    renderDosingBanner(container);
     // Drug list
     const list = document.createElement('div');
     list.className = 'tree-list';

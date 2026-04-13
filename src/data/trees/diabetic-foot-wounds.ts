@@ -42,6 +42,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-idsa-severity', label: 'IDSA Infection Severity' },
     ],
     next: 'dfw-emergencies',
+  
+    summary: 'Diabetic foot infections are limb-threatening — assess severity, vascular status, and osteomyelitis risk',
   },
 
   {
@@ -57,6 +59,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { label: 'Critical limb ischemia', description: 'Absent pulses, rest pain, toe pressure <30', next: 'dfw-cli-emergency', urgency: 'critical' },
       { label: 'No immediate emergency', description: 'Proceed with systematic evaluation', next: 'dfw-wound-exam' },
     ],
+  
+    summary: 'Rule Out Emergencies — assess clinical status to guide next management decision',
   },
 
   {
@@ -79,6 +83,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       monitoring: 'ICU admission. Serial lactate, CBC, BMP q6h. Repeat OR in 24-48h.',
     },
     next: 'dfw-dispo-admit-icu',
+  
+    summary: 'Necrotizing Fasciitis Management — review key clinical information before proceeding',
   },
 
   {
@@ -101,6 +107,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       monitoring: 'Serial exams, lactate q4-6h, glucose control target 140-180 mg/dL',
     },
     next: 'dfw-dispo-admit-icu',
+  
+    summary: 'Wet Gangrene Management — review key clinical information before proceeding',
   },
 
   {
@@ -111,6 +119,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Critical limb-threatening ischemia (CLTI) requires URGENT vascular surgery.**\n\n**Diagnostic thresholds (any of):**\n- Ankle pressure <50 mmHg\n- ABI <0.4\n- Toe pressure <30 mmHg\n- TcPO2 <25 mmHg\n\n**Clinical features:**\n- Rest pain (burning, often worse at night, improves with dependency)\n- Absent pedal pulses\n- Tissue loss (ulcer, gangrene)\n- Pallor, prolonged capillary refill, dependent rubor\n\n**ED management:**\n1. **Pain control** - dependent positioning, opioids PRN\n2. **IV hydration** - improve rheology\n3. **STAT vascular surgery consultation**\n4. **CTA or duplex US of lower extremities**\n5. **Avoid compression bandages**\n6. **Avoid heat/cold application to limb**\n\n**Revascularization options:**\n- Endovascular: angioplasty, stenting\n- Surgical: bypass (fem-pop, fem-distal)\n- Hybrid approaches\n\n**If non-revascularizable:** Discuss amputation for pain control and preventing sepsis [5][6]',
     citation: [5, 6],
     next: 'dfw-dispo-admit-floor',
+  
+    summary: 'Critical Limb Ischemia Emergency — review key clinical information before proceeding',
   },
 
   {
@@ -125,6 +135,9 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-wagner-pedis', label: 'Wagner/PEDIS Classification' },
     ],
     next: 'dfw-classification',
+  
+    summary: 'Wound Examination — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -138,6 +151,9 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-wagner-pedis', label: 'Wagner/PEDIS Classification' },
     ],
     next: 'dfw-infection-intro',
+  
+    summary: 'Wagner classification: grade 0-5 determines management — grade 3+ often requires surgery',
+    skippable: true,
   },
 
   // =====================================================================
@@ -155,6 +171,9 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-idsa-severity', label: 'IDSA Infection Severity' },
     ],
     next: 'dfw-infection-assess',
+  
+    summary: 'Infection Assessment: IDSA/IWGDF 2023 — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -173,6 +192,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { label: 'Grade 3 - Moderate', description: 'Erythema >2cm OR deep tissue OR abscess OR bone', next: 'dfw-grade3-moderate', urgency: 'urgent' },
       { label: 'Grade 4 - Severe', description: 'Systemic toxicity or metabolic instability', next: 'dfw-grade4-severe', urgency: 'critical' },
     ],
+  
+    summary: 'Infection Severity Determination — assess clinical status to guide next management decision',
   },
 
   {
@@ -183,6 +204,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**No antibiotics indicated for uninfected diabetic foot ulcers.**\n\n**Management focus:**\n1. **Wound care:**\n   - Sharp debridement of callus and necrotic tissue\n   - Moisture-balanced dressing\n   - Protect from trauma\n\n2. **Offloading:**\n   - Total contact cast (gold standard) - 90% healing at 12 weeks\n   - Irremovable cast walker (iRCW) - equivalent efficacy\n   - Removable cast walker if frequent inspection needed\n\n3. **Vascular assessment:**\n   - Check pulses, obtain TBI if diabetic\n   - Refer to vascular if TBI <0.6\n\n4. **Glucose optimization:**\n   - Target HbA1c per guidelines\n   - Poor control impairs healing\n\n5. **Follow-up:**\n   - Wound clinic or podiatry within 1-2 weeks\n   - Patient education on foot inspection, footwear\n\n**If not healing at 4 weeks despite optimal care:** Re-evaluate for occult infection, ischemia, or need for advanced therapies [1][10]',
     citation: [1, 10],
     next: 'dfw-vascular-intro',
+  
+    summary: 'Grade 1 - Uninfected Wound — review key clinical information before proceeding',
   },
 
   {
@@ -215,6 +238,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-abx-selector', label: 'Antibiotic Selector' },
     ],
     next: 'dfw-vascular-intro',
+  
+    summary: 'Grade 2 - Mild Infection (Outpatient) — review key clinical information before proceeding',
   },
 
   {
@@ -247,6 +272,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-abx-selector', label: 'Antibiotic Selector' },
     ],
     next: 'dfw-vascular-intro',
+  
+    summary: 'Grade 3 - Moderate Infection — review key clinical information before proceeding',
   },
 
   {
@@ -280,6 +307,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-abx-selector', label: 'Antibiotic Selector' },
     ],
     next: 'dfw-vascular-intro',
+  
+    summary: 'Grade 4 - Severe Infection — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -297,6 +326,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-vascular-interpreter', label: 'Vascular Assessment Interpreter' },
     ],
     next: 'dfw-vascular-tcpo2',
+  
+    summary: 'Vascular Assessment: Why TBI Over ABI — review key clinical information before proceeding',
   },
 
   {
@@ -310,6 +341,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-vascular-interpreter', label: 'Vascular Assessment Interpreter' },
     ],
     next: 'dfw-vascular-decision',
+  
+    summary: 'TcPO2 and Wound Healing — review key clinical information before proceeding',
   },
 
   {
@@ -328,6 +361,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { label: 'Severe PAD / CLTI', description: 'TBI <0.30, toe pressure <30, TcPO2 <25', next: 'dfw-pad-severe', urgency: 'urgent' },
       { label: 'Non-compressible (ABI >1.4)', description: 'Need TBI or TcPO2 for accurate assessment', next: 'dfw-non-compressible' },
     ],
+  
+    summary: 'Vascular Status Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -338,6 +373,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Wound healing may be delayed but is possible with optimal care.**\n\n**Management:**\n1. **Optimize wound care and offloading**\n2. **Control infection aggressively**\n3. **Vascular surgery referral** (semi-urgent, within 1-2 weeks)\n4. **Medical optimization:**\n   - Statin therapy (regardless of LDL)\n   - Antiplatelet (aspirin or clopidogrel)\n   - Smoking cessation\n   - Glucose control\n   - Blood pressure control\n\n**Consider vascular imaging if:**\n- Wound not improving at 4 weeks\n- Large or deep wound\n- Multiple ulcers\n- Prior amputation\n\n**Revascularization indications:**\n- Wound not healing despite optimal care\n- Pain limiting function\n- TcPO2 <25 at wound site\n\n**Close follow-up:** Wound clinic within 1-2 weeks to reassess healing trajectory [5][6]',
     citation: [5, 6],
     next: 'dfw-osteo-intro',
+  
+    summary: 'Mild-Moderate PAD Management — review key clinical information before proceeding',
   },
 
   {
@@ -348,6 +385,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Severe PAD = limb-threatening. Urgent vascular intervention needed.**\n\n**Immediate actions:**\n1. **STAT vascular surgery consultation**\n2. **Vascular imaging** (CTA or duplex)\n3. **Pain management** - dependency positioning, opioids\n4. **Avoid:**\n   - Compression bandages\n   - Heat/cold application\n   - Elevation (worsens ischemia)\n\n**Revascularization urgency:**\n| Finding | Timeline |\n|---------|---------|\n| Rest pain only | Days to 1 week |\n| Tissue loss without infection | 1-2 weeks |\n| Tissue loss WITH infection | 24-48 hours |\n| Wet gangrene/sepsis | EMERGENT |\n\n**If non-revascularizable:**\n- Discuss realistic prognosis with patient/family\n- Primary amputation may be best option\n- Level determined by TcPO2 and tissue viability\n- Palliative care involvement for non-operative candidates\n\n**Pearl:** Infection control may require amputation BEFORE revascularization in some cases [5][6]',
     citation: [5, 6],
     next: 'dfw-osteo-intro',
+  
+    summary: 'Severe PAD / CLTI — review key clinical information before proceeding',
   },
 
   {
@@ -358,6 +397,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**ABI >1.4 indicates calcified, non-compressible vessels - ABI is UNRELIABLE.**\n\n**Common in:**\n- Diabetes mellitus\n- End-stage renal disease\n- Advanced age\n\n**Alternative assessments needed:**\n\n**1. Toe-Brachial Index (TBI)** - preferred\n- Digital arteries typically spared from calcification\n- TBI <0.6 indicates PAD\n- TBI <0.3 indicates critical ischemia\n\n**2. TcPO2**\n- Direct measurement of tissue oxygenation\n- <25 mmHg = healing unlikely\n\n**3. Toe pressure (absolute)**\n- <30 mmHg = critical ischemia\n- 30-50 mmHg = compromised\n- >50 mmHg = likely adequate\n\n**4. Waveform analysis**\n- Monophasic waveform suggests significant PAD\n- Even with "normal" ABI\n\n**If TBI/TcPO2 unavailable:**\n- Clinical assessment of pulses\n- Capillary refill\n- Doppler waveform quality\n- Refer for formal vascular lab evaluation [5][6]',
     citation: [5, 6],
     next: 'dfw-osteo-intro',
+  
+    summary: 'Non-Compressible Vessels (ABI >1.4) — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -375,6 +416,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-osteo-probability', label: 'Osteomyelitis Probability' },
     ],
     next: 'dfw-osteo-imaging',
+  
+    summary: 'Osteomyelitis Workup: When to Suspect — review key clinical information before proceeding',
   },
 
   {
@@ -385,6 +428,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Step 1: Plain Radiographs (X-Ray)**\n- Order for ALL suspected DFI\n- Sensitivity: 54% | Specificity: 68%\n- May take 2-3 weeks for changes to appear\n- Look for: cortical erosion, periosteal reaction, sequestrum, involucrum, soft tissue gas\n\n**Step 2: MRI (Gold Standard for diagnosis)**\n- Sensitivity: 90-96% | Specificity: 79-84%\n- **Indications:**\n  - Negative or equivocal X-ray with clinical concern\n  - Positive probe-to-bone test\n  - Planning surgical debridement/amputation level\n  - Non-healing wound despite treatment\n\n**MRI findings:**\n- T1: Low signal in bone marrow (replaces normal fat)\n- T2/STIR: High signal in bone marrow\n- Post-contrast: Enhancement of bone and soft tissue\n\n**Step 3: Bone Biopsy (Definitive)**\n- Sensitivity: 95% | Specificity: 99%\n- Indications:\n  - Definitive diagnosis required\n  - Culture/susceptibility needed\n  - Non-response to empiric antibiotics\n\n**CAVEAT:** MRI cannot always distinguish osteomyelitis from acute Charcot neuroarthropathy [12][13]',
     citation: [12, 13],
     next: 'dfw-osteo-combined',
+  
+    summary: 'Osteomyelitis Imaging Algorithm — review key clinical information before proceeding',
   },
 
   {
@@ -398,6 +443,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-osteo-probability', label: 'Osteomyelitis Probability' },
     ],
     next: 'dfw-osteo-treatment',
+  
+    summary: 'Combined Diagnostic Approach — review key clinical information before proceeding',
   },
 
   {
@@ -408,6 +455,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Treatment depends on surgical intervention.**\n\n**Duration of antibiotic therapy:**\n| Scenario | Duration |\n|----------|----------|\n| Surgical resection + negative margins | 3 weeks |\n| Surgical resection + positive margins | 6 weeks |\n| No surgery (medical management only) | 6+ weeks |\n| Soft tissue infection post-debridement | 10 days |\n\n**Empiric antibiotics (pending cultures):**\nSame as moderate-severe DFI regimens, but:\n- Choose agents with good bone penetration\n- Oral options: fluoroquinolones, linezolid, TMP-SMX, rifampin (adjunct)\n\n**Oral agents with good bone penetration:**\n| Agent | Notes |\n|-------|-------|\n| Fluoroquinolones | Good bone penetration, cover gram-neg |\n| Linezolid | MRSA, good bone penetration |\n| TMP-SMX | MRSA, moderate bone penetration |\n| Rifampin | Adjunct only, excellent bone penetration |\n| Metronidazole | Anaerobes, good bone penetration |\n\n**2023 Update:** Post-treatment follow-up for osteomyelitis remission reduced from 12 to 6 months.\n\n**Failure criteria:** Persistent drainage, non-healing wound, new bone destruction on imaging, persistent elevated inflammatory markers [9][13]',
     citation: [9, 13],
     next: 'dfw-charcot-intro',
+  
+    summary: 'Osteomyelitis Treatment — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -422,6 +471,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Charcot neuroarthropathy (CN) is a MEDICAL EMERGENCY that can lead to irreversible deformity.**\n\n**Prevalence:** Up to 13% of diabetics with neuropathy\n\n**CRITICAL FACT: 25% of acute Charcot is MISDIAGNOSED** (as cellulitis, gout, DVT, sprain)\n\n**Average delay to diagnosis: 7 months**\n\n**Risk factors:**\n- Diabetes with peripheral neuropathy (most common)\n- Long-standing diabetes (>10 years)\n- Tight glycemic control (relative)\n- Prior foot surgery or trauma\n- Obesity\n- Renal transplant patients\n\n**Pathophysiology:**\n- Autonomic neuropathy → increased blood flow → bone resorption\n- Sensory neuropathy → continued weight-bearing despite injury\n- Motor neuropathy → abnormal biomechanics\n- Result: Progressive bone destruction, fragmentation, deformity\n\n**Most common location:** Midfoot (tarsometatarsal joints - Lisfranc area) [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-presentation',
+  
+    summary: 'Charcot Foot: A Commonly Missed Diagnosis — review key clinical information before proceeding',
   },
 
   {
@@ -432,6 +483,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Classic triad of acute Charcot:**\n1. **Unilateral swollen foot/ankle**\n2. **Warmth** (2-8°C difference vs. contralateral)\n3. **Erythema**\n\n**Key distinguishing features from infection:**\n| Feature | Acute Charcot | Osteomyelitis/Cellulitis |\n|---------|---------------|-------------------------|\n| Open wound | Usually ABSENT | Usually PRESENT |\n| Fever | Absent | May be present |\n| WBC | Normal | Often elevated |\n| ESR/CRP | Mildly elevated | Significantly elevated |\n| Pain | Minimal (neuropathy) | Variable |\n| Pulses | Often bounding | Variable |\n\n**Red flags for Charcot:**\n- Diabetic >40 years with neuropathy\n- Red, hot, swollen foot WITHOUT open wound\n- Minimal or no pain despite appearance\n- History of minor or unrecalled trauma\n- Normal systemic vitals and labs\n- Patient walking on affected foot without complaint\n\n**Diagnostic approach:**\n1. Compare temperature to contralateral foot\n2. Weight-bearing X-rays (may be normal early)\n3. MRI if X-ray normal but high clinical suspicion\n4. Labs: CBC, BMP, ESR, CRP (to help r/o infection) [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-staging',
+  
+    summary: 'Acute Charcot: Clinical Presentation — review key clinical information before proceeding',
   },
 
   {
@@ -442,6 +495,9 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Eichenholtz Classification (Stages 0-3):**\n\n| Stage | Name | Clinical | Radiographic |\n|-------|------|----------|---------------|\n| 0 | Pre-clinical | Warm, swollen, painful | Normal X-ray, marrow edema on MRI |\n| 1 | Development/Fragmentation | Red, hot, swollen | Osteopenia, fragmentation, subluxation |\n| 2 | Coalescence | Decreased warmth/swelling | Absorption of debris, sclerosis |\n| 3 | Reconstruction | No inflammation | Remodeling, fusion, stable deformity |\n\n**Stage 0 is critical to recognize:**\n- X-ray is NORMAL\n- MRI shows bone marrow edema\n- Clinical suspicion drives diagnosis\n- Early treatment prevents deformity\n\n**Progression:**\n- Without treatment: Stage 1 → rocker-bottom deformity → ulceration → amputation\n- With early treatment: Can arrest progression and preserve function\n\n**Treatment varies by stage:**\n- Acute (0-1): Strict offloading, immobilization\n- Coalescence (2): Gradual weight-bearing\n- Reconstruction (3): Custom orthotics, possibly surgery for deformity [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-management',
+  
+    summary: 'Eichenholtz Staging — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -452,6 +508,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Acute Charcot is a LIMB-THREATENING condition requiring immediate intervention.**\n\n**ED Management:**\n\n**1. Immediate offloading:**\n- CAM boot or wheelchair\n- **Strict non-weight-bearing**\n- Do NOT use splint that patient might not follow up to remove\n\n**2. Patient education:**\n- Emphasize this is a MEDICAL EMERGENCY\n- Continued walking will cause permanent deformity\n- May require months of immobilization\n\n**3. Glycemic control:**\n- Optimize glucose management\n- Poor control worsens bone resorption\n\n**4. Urgent referral:**\n- Podiatry or foot/ankle orthopedics within 24-48 hours\n- Do NOT discharge without clear follow-up plan\n\n**5. Consider admission if:**\n- Unable to comply with non-weight-bearing\n- Inadequate social support\n- Concurrent infection\n- Severe deformity with skin compromise\n\n**Total Contact Cast (TCC):**\n- Gold standard for offloading\n- Applied by trained specialist\n- Not typically done in ED\n- Referral should be for TCC application [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-vs-infection',
+  
+    summary: 'Acute Charcot ED Management — review key clinical information before proceeding',
   },
 
   {
@@ -462,6 +520,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**This is one of the most challenging diagnostic dilemmas in DFU management.**\n\n**Clinical clues favoring Charcot:**\n- No open wound or ulcer\n- Bilateral warmth (sometimes)\n- Pain minimal or absent\n- Normal WBC\n- ESR/CRP mildly elevated (<40)\n- Patient afebrile\n- Bounding pulses\n\n**Clinical clues favoring infection:**\n- Open wound or ulcer present\n- Unilateral warmth with wound\n- Pain present (unless severe neuropathy)\n- Elevated WBC\n- ESR/CRP significantly elevated (>70)\n- Fever or systemic symptoms\n- Purulent drainage\n\n**When both coexist:**\n- Treat the infection AND offload for Charcot\n- More common than isolated Charcot\n- Worse prognosis\n\n**MRI findings:**\n- Charcot: Diffuse marrow edema, often bilateral, no focal bone destruction\n- Osteomyelitis: Focal bone destruction adjacent to ulcer, cortical disruption\n\n**When uncertain:** Treat for BOTH until proven otherwise. Better to offload unnecessarily than miss Charcot. [14][15]',
     citation: [14, 15],
     next: 'dfw-treatment-overview',
+  
+    summary: 'Differentiating Charcot from Infection — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -476,6 +536,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Diabetic foot wounds require a multidisciplinary team.**\n\n**Core team members:**\n- Emergency medicine (initial stabilization, workup)\n- Podiatry/foot surgery (wound care, offloading, debridement)\n- Vascular surgery (revascularization)\n- Infectious disease (complex infections, osteomyelitis)\n- Endocrinology (glucose optimization)\n- Wound care specialists\n\n**Treatment pillars:**\n1. **Infection control** - antibiotics, debridement, source control\n2. **Vascular optimization** - revascularization if needed\n3. **Offloading** - the most underutilized intervention\n4. **Wound care** - debridement, appropriate dressings\n5. **Glucose control** - target HbA1c, avoid hypoglycemia\n6. **Risk factor modification** - smoking cessation, BP, lipids\n\n**Why offloading is critical:**\n- Neuropathy → no pain signal → continued pressure\n- Continued pressure → tissue ischemia → wound expansion\n- Total contact cast: 90% healing at 12 weeks\n- Removable walker: 65% healing (compliance issue) [1][10]',
     citation: [1, 10],
     next: 'dfw-surgical-indications',
+  
+    summary: 'Treatment Overview: Multidisciplinary Approach — review key clinical information before proceeding',
   },
 
   {
@@ -486,6 +548,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Emergency Surgery (Within Hours):**\n| Indication | Action |\n|------------|--------|\n| Necrotizing fasciitis | IMMEDIATE fasciotomy, debridement |\n| Gas gangrene | IMMEDIATE debridement/amputation |\n| Compartment syndrome | IMMEDIATE fasciotomy |\n| Wet gangrene with sepsis | EMERGENT amputation |\n\n**Urgent Surgery (24-48 Hours):**\n| Indication | Action |\n|------------|--------|\n| Deep abscess | I&D |\n| Moderate-severe DFI with complications | Debridement |\n| Extensive necrotic tissue | Debridement |\n| Osteomyelitis requiring resection | Bone resection |\n\n**Semi-Urgent/Elective:**\n| Indication | Action |\n|------------|--------|\n| Chronic osteomyelitis | Elective bone resection |\n| Charcot deformity | Corrective surgery |\n| Recurrent ulceration | Pressure-relieving surgery |\n\n**Amputation level determination:**\n- TcPO2 >25 mmHg at proposed level\n- Toe pressure >30 mmHg\n- Palpable pulse at level above\n- Adequate soft tissue coverage [3][5]',
     citation: [3, 5],
     next: 'dfw-wound-care',
+  
+    summary: 'Surgical Indications — review key clinical information before proceeding',
   },
 
   {
@@ -496,6 +560,9 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Debridement:**\n- Sharp/surgical debridement is most effective\n- Remove callus, necrotic tissue, biofilm\n- Enables accurate wound assessment\n- Stimulates healing by converting chronic to acute wound\n- Frequency: weekly in outpatient setting\n\n**Dressing selection:**\n| Wound Type | Dressing Choice |\n|------------|----------------|\n| Dry wound | Hydrogel, hydrocolloid |\n| Moist wound | Foam, alginate |\n| Heavy exudate | Alginate, foam, hydrofiber |\n| Infected | Silver-containing, iodine-containing |\n| Deep cavity | Alginate rope, hydrofiber |\n\n**IWGDF 2023:** No strong evidence for superiority of any specific advanced dressing. Focus on:\n- Moisture balance\n- Infection control\n- Regular assessment\n\n**Negative Pressure Wound Therapy (NPWT):**\n- Post-surgical wounds\n- Deep cavity wounds\n- High exudate\n- Bridge to surgery\n- NOT recommended for infection treatment\n\n**Adjunctive therapies NOT recommended:**\n- G-CSF, topical antiseptics, silver (for infection), honey, hyperbaric O2 (for infection) [10][16]',
     citation: [10, 16],
     next: 'dfw-offloading',
+  
+    summary: 'Wound Care Principles — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -506,6 +573,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Offloading is the MOST important intervention for neuropathic DFU healing.**\n\n**Hierarchy (Most to Least Effective):**\n\n**1. Total Contact Cast (TCC)** - GOLD STANDARD\n- Non-removable\n- Redistributes pressure across entire foot\n- Healing rate: ~90% at 12 weeks\n- Requires trained application\n- Contraindicated: active infection, severe PAD, heavy drainage\n\n**2. Irremovable Cast Walker (iRCW)**\n- Removable walker made irremovable with wrap\n- Equal efficacy to TCC\n- Lower cost, easier application\n- Patient cannot remove\n\n**3. Removable Cast Walker (RCW)**\n- Allows wound inspection\n- Healing rate: ~65% at 12 weeks (lower due to non-compliance)\n- Use when frequent inspection needed\n\n**4. Half-shoe/Healing sandal**\n- Healing rate: ~58%\n- Less effective but better than nothing\n- Use when above options not possible\n\n**IWGDF Recommendation:**\n- Non-removable knee-high device (TCC or iRCW) for neuropathic plantar forefoot/midfoot ulcers\n- Removable device if contraindication to non-removable [10]',
     citation: [10],
     next: 'dfw-disposition-decision',
+  
+    summary: 'Offloading Devices — review key clinical information before proceeding',
   },
 
   {
@@ -520,6 +589,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { label: 'Admit to floor', description: 'Moderate infection, IV antibiotics, surgery consult', next: 'dfw-dispo-admit-floor' },
       { label: 'Admit to ICU', description: 'Severe infection, sepsis, emergent surgery', next: 'dfw-dispo-admit-icu', urgency: 'critical' },
     ],
+  
+    summary: 'Disposition Decision — assess clinical status to guide next management decision',
   },
 
   {
@@ -531,6 +602,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     recommendation: 'Discharge with oral antibiotics (if indicated), offloading device, wound care supplies, and follow-up in 48-72 hours. Clear return precautions provided.',
     confidence: 'recommended',
     citation: [1, 9],
+  
+    summary: 'Discharge with Follow-up — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -542,6 +615,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     recommendation: 'Admit for IV antibiotics, serial wound assessments, and multidisciplinary consultation. Surgical evaluation if abscess, necrosis, or osteomyelitis.',
     confidence: 'recommended',
     citation: [1, 9],
+  
+    summary: 'Admit to Medical/Surgical Floor — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -553,6 +628,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     recommendation: 'ICU admission for severe sepsis, necrotizing infection, or hemodynamic instability. Emergent surgical consultation. Broad-spectrum IV antibiotics. Sepsis bundle.',
     confidence: 'definitive',
     citation: [1, 9],
+  
+    summary: 'Admit to ICU — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -567,6 +644,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**10 Key Clinical Pearls:**\n\n1. **25% of acute Charcot is misdiagnosed.** Think of it in any diabetic with a red, hot, swollen foot and normal labs.\n\n2. **ABI is unreliable in diabetics.** Use TBI instead due to medial arterial calcification.\n\n3. **Positive PTB + positive X-ray = osteomyelitis very likely.** Don\'t delay treatment for MRI.\n\n4. **Don\'t treat uninfected ulcers with antibiotics** - even if osteomyelitis is present on imaging. Wait for cultures.\n\n5. **Offloading is as important as antibiotics.** A TCC heals 90% of neuropathic ulcers in 12 weeks.\n\n6. **Wet gangrene is an emergency.** Dry gangrene can wait for demarcation.\n\n7. **Necrotizing fasciitis: early pain is out of proportion, late pain is absent** (due to nerve destruction).\n\n8. **MRSA nasal PCR has >95% negative predictive value.** Use it to de-escalate.\n\n9. **MRI cannot always distinguish osteomyelitis from acute Charcot.** Clinical context matters.\n\n10. **Multidisciplinary care improves outcomes.** ID, vascular, podiatry, wound care, and endocrine.',
     citation: [1, 2, 9],
     next: 'dfw-start',
+  
+    summary: 'Diabetic Foot Wounds: Key Pearls — review key clinical information before proceeding',
   },
 
   {
@@ -580,6 +659,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-abx-selector', label: 'Antibiotic Selector' },
     ],
     next: 'dfw-start',
+  
+    summary: 'Antibiotic Summary by IDSA Grade — review key clinical information before proceeding',
   },
 
 ];

@@ -38,60 +38,69 @@ export function createDecisionCard(node, opts) {
 // Answered card (compact)
 // -------------------------------------------------------------------
 function renderAnsweredCard(card, node, opts) {
-    // Quick fire mode: ultra-compact pill format
-    if (opts.quickFireMode) {
-        card.classList.add('decision-card--quick-fire');
-        if (node.options && opts.selectedOptionIndex !== undefined) {
-            const selectedOpt = node.options[opts.selectedOptionIndex];
-            // Single line: Question → Answer
-            const pill = document.createElement('div');
-            pill.className = 'quick-fire-pill';
-            pill.innerHTML = `<span class="quick-fire-pill__q">${node.title}</span> <span class="quick-fire-pill__arrow">&rarr;</span> <span class="quick-fire-pill__a">${selectedOpt.label}</span>`;
-            card.appendChild(pill);
-        }
-        else if (node.type === 'info') {
-            const pill = document.createElement('div');
-            pill.className = 'quick-fire-pill quick-fire-pill--info';
-            pill.innerHTML = `<span class="quick-fire-pill__q">${node.title}</span> <span class="quick-fire-pill__arrow">&check;</span>`;
-            card.appendChild(pill);
-        }
-        return;
+    // All answered cards render as compact pills
+    const pill = document.createElement('div');
+    pill.className = 'answered-pill';
+    if (node.safetyLevel) {
+        pill.setAttribute('data-safety-level', node.safetyLevel);
     }
-    // Standard answered card: Question + Answer format for better context
     if (node.options && opts.selectedOptionIndex !== undefined) {
+        // Question node: Title → Selected Answer
         const selectedOpt = node.options[opts.selectedOptionIndex];
-        // Question label (small, muted)
-        const questionLabel = document.createElement('div');
-        questionLabel.className = 'answered-card__question';
-        questionLabel.textContent = node.title;
-        card.appendChild(questionLabel);
-        // Selected answer (prominent)
-        let variant;
-        if (selectedOpt.urgency === 'critical') {
-            variant = 'critical';
-        }
-        else if (selectedOpt.urgency === 'urgent') {
-            variant = 'urgent';
-        }
-        else {
-            variant = 'yes';
-        }
-        const answerBtn = create3DButton(selectedOpt.label, { variant });
-        answerBtn.className += ' answered-card__answer';
-        answerBtn.style.minHeight = '36px';
-        answerBtn.style.padding = '6px 14px';
-        answerBtn.style.fontSize = '14px';
-        answerBtn.style.pointerEvents = 'none';
-        card.appendChild(answerBtn);
+        const q = document.createElement('span');
+        q.className = 'answered-pill__q';
+        q.textContent = node.title;
+        const arrow = document.createElement('span');
+        arrow.className = 'answered-pill__arrow';
+        arrow.textContent = '\u2192';
+        const a = document.createElement('span');
+        a.className = 'answered-pill__a';
+        a.textContent = selectedOpt.label;
+        if (selectedOpt.urgency === 'critical')
+            a.classList.add('answered-pill__a--critical');
+        else if (selectedOpt.urgency === 'urgent')
+            a.classList.add('answered-pill__a--urgent');
+        pill.appendChild(q);
+        pill.appendChild(arrow);
+        pill.appendChild(a);
     }
     else if (node.type === 'info') {
-        // Info nodes show "Continued →" indicator
-        const indicator = document.createElement('div');
-        indicator.style.fontSize = '13px';
-        indicator.style.color = 'var(--color-text-muted)';
-        indicator.textContent = 'Continued \u2192';
-        card.appendChild(indicator);
+        // Info node: Title ✓
+        pill.classList.add('answered-pill--info');
+        if (opts.autoAdvanced)
+            pill.classList.add('answered-pill--auto-advanced');
+        const q = document.createElement('span');
+        q.className = 'answered-pill__q';
+        q.textContent = node.title;
+        const check = document.createElement('span');
+        check.className = 'answered-pill__check';
+        check.textContent = '\u2713';
+        pill.appendChild(q);
+        pill.appendChild(check);
     }
+    card.appendChild(pill);
+    // Expanded content container (hidden by default, shown on tap)
+    const expandedContent = document.createElement('div');
+    expandedContent.className = 'pill-expanded-content';
+    // Render read-only full card content inside
+    if (node.body) {
+        const body = document.createElement('div');
+        body.className = 'decision-card__body';
+        renderBodyText(body, node.body);
+        expandedContent.appendChild(body);
+    }
+    if (node.options && opts.selectedOptionIndex !== undefined) {
+        const selectedOpt = node.options[opts.selectedOptionIndex];
+        const answer = document.createElement('div');
+        answer.className = 'pill-expanded-answer';
+        answer.textContent = '\u2713 ' + selectedOpt.label;
+        expandedContent.appendChild(answer);
+    }
+    card.appendChild(expandedContent);
+    // Tap pill to toggle expansion
+    pill.addEventListener('click', () => {
+        card.classList.toggle('answered-pill--expanded');
+    });
 }
 // -------------------------------------------------------------------
 // Active question card
@@ -102,15 +111,12 @@ function renderActiveQuestion(card, node, opts) {
     title.className = 'decision-card__title';
     title.textContent = node.title;
     card.appendChild(title);
-    // Body
+    // Safety banner (always visible, above everything)
+    renderSafetyBanner(card, node);
     // Images (before body so visual examples appear above explanatory text)
     renderNodeImages(card, node);
-    if (node.body) {
-        const body = document.createElement('div');
-        body.className = 'decision-card__body';
-        renderBodyText(body, node.body);
-        card.appendChild(body);
-    }
+    // Summary + accordion body OR plain body
+    renderBodyWithAccordion(card, node);
     // Calculator links
     renderCalcLinks(card, node);
     // Citations
@@ -146,13 +152,11 @@ function renderActiveInfo(card, node, opts) {
     title.className = 'decision-card__title';
     title.textContent = node.title;
     card.appendChild(title);
+    // Safety banner (always visible, above everything)
+    renderSafetyBanner(card, node);
     renderNodeImages(card, node);
-    if (node.body) {
-        const body = document.createElement('div');
-        body.className = 'decision-card__body';
-        renderBodyText(body, node.body);
-        card.appendChild(body);
-    }
+    // Summary + accordion body OR plain body
+    renderBodyWithAccordion(card, node);
     renderCalcLinks(card, node);
     if (node.citation?.length && opts.config) {
         renderInlineCitations(card, node.citation, opts.config.citations);
@@ -242,6 +246,62 @@ function renderActiveResult(card, node, opts) {
 // -------------------------------------------------------------------
 // Shared render helpers
 // -------------------------------------------------------------------
+/** Need-to-Know: Safety banner — always visible above accordion */
+function renderSafetyBanner(container, node) {
+    if (!node.safetyLevel)
+        return;
+    const banner = document.createElement('div');
+    banner.className = 'safety-banner';
+    if (node.safetyLevel === 'critical') {
+        banner.classList.add('safety-banner--critical');
+        banner.innerHTML = '<span class="safety-banner__icon">\u26D4</span> <span class="safety-banner__text">Critical Safety Point</span>';
+    }
+    else {
+        banner.classList.add('safety-banner--warning');
+        banner.innerHTML = '<span class="safety-banner__icon">\u26A0\uFE0F</span> <span class="safety-banner__text">Safety Consideration</span>';
+    }
+    container.appendChild(banner);
+}
+/** Need-to-Know: Render body with summary + accordion, or plain body if no summary */
+function renderBodyWithAccordion(container, node) {
+    if (node.summary) {
+        // Summary paragraph (always visible)
+        const summaryEl = document.createElement('p');
+        summaryEl.className = 'card-summary';
+        summaryEl.textContent = node.summary;
+        container.appendChild(summaryEl);
+        // Full body in accordion
+        if (node.body) {
+            const details = document.createElement('details');
+            details.className = 'card-accordion';
+            const summary = document.createElement('summary');
+            summary.className = 'card-accordion__trigger';
+            summary.textContent = 'More Details';
+            details.appendChild(summary);
+            const content = document.createElement('div');
+            content.className = 'card-accordion__content';
+            renderBodyText(content, node.body);
+            // Pearls callout inside accordion
+            if (node.pearls) {
+                const pearlBox = document.createElement('div');
+                pearlBox.className = 'pearl-callout';
+                pearlBox.textContent = node.pearls;
+                content.appendChild(pearlBox);
+            }
+            details.appendChild(content);
+            container.appendChild(details);
+        }
+    }
+    else {
+        // No summary — render body as normal (backward compatible)
+        if (node.body) {
+            const body = document.createElement('div');
+            body.className = 'decision-card__body';
+            renderBodyText(body, node.body);
+            container.appendChild(body);
+        }
+    }
+}
 /** Feature 2: Progressive Disclosure Tabs (When to Use, Pearls, Evidence) */
 function renderProgressiveTabs(container, node) {
     if (!node.whenToUse && !node.pearls && !node.evidence)

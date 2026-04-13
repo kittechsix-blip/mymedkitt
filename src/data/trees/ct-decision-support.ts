@@ -31,6 +31,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     body: '[CT Decision Support Steps Summary](#/info/ct-steps-summary)\n\nCT imaging is used in **27 per 100 ED encounters** — nearly matching ECG usage. An estimated **103,000 new cancers annually** may be attributable to CT imaging in the U.S. [1,2]\n\nThis tool applies validated clinical decision rules to guide CT ordering. Each rule has been prospectively validated in large multicenter studies.\n\n[Radiation Dose Reference](#/info/ct-radiation-doses) · [Special Populations](#/info/ct-special-populations) · [Choosing Wisely](#/info/ct-choosing-wisely)',
     citation: [1, 2],
     next: 'ct-scenario',
+  
+    summary: 'Evidence-based decision support for CT imaging — reduce unnecessary radiation and contrast exposure',
   },
 
   {
@@ -47,6 +49,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Extremity (ankle / knee)', next: 'ct-ext-scenario' },
       { label: 'Special Populations & Documentation', next: 'ct-special-pop' },
     ],
+  
+    summary: 'Clinical Scenario — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -66,6 +70,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Child ≥ 2 years', next: 'ct-pecarn-older' },
       { label: 'Infant < 2 years', next: 'ct-pecarn-young' },
     ],
+  
+    summary: 'Patient Age — assess clinical status to guide next management decision',
   },
 
   // --- CANADIAN CT HEAD RULE (ADULT) ---
@@ -81,6 +87,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Meets CCHR criteria (GCS 13-15, LOC/amnesia/disorientation)', next: 'ct-cchr-high-risk' },
       { label: 'Does not meet criteria / exclusion present', next: 'ct-head-clinical-judgment' },
     ],
+  
+    summary: 'Canadian CT Head Rule — Eligibility — assess clinical status to guide next management decision',
   },
 
   {
@@ -94,6 +102,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — ≥ 1 high-risk criterion', next: 'ct-head-indicated', urgency: 'critical' },
       { label: 'No high-risk criteria', next: 'ct-cchr-medium-risk' },
     ],
+  
+    summary: 'CCHR — High-Risk Criteria — assess clinical status to guide next management decision',
   },
 
   {
@@ -107,6 +117,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — ≥ 1 medium-risk criterion', next: 'ct-head-indicated', urgency: 'urgent' },
       { label: 'No medium-risk criteria', next: 'ct-head-not-indicated' },
     ],
+  
+    summary: 'CCHR — Medium-Risk Criteria — assess clinical status to guide next management decision',
   },
 
   {
@@ -118,6 +130,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT head indicated per CCHR. Document high-risk or medium-risk criteria met.',
     confidence: 'recommended',
     citation: [3, 15],
+  
+    summary: 'CT Head Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -129,6 +143,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT not indicated per CCHR. Provide return precautions.',
     confidence: 'definitive',
     citation: [3],
+  
+    summary: 'CT Head NOT Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -140,6 +156,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CCHR not applicable. Use clinical judgment based on risk factors.',
     confidence: 'consider',
     citation: [3],
+  
+    summary: 'CCHR Not Applicable — Clinical Judgment — determine disposition and follow-up plan based on clinical findings',
   },
 
   // --- PECARN ≥ 2 YEARS ---
@@ -155,6 +173,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — GCS <15 or basilar skull fracture signs', next: 'ct-pecarn-older-high', urgency: 'critical' },
       { label: 'No — neither present', next: 'ct-pecarn-older-intermediate' },
     ],
+  
+    summary: 'PECARN ≥ 2 Years — High-Risk Features — assess clinical status to guide next management decision',
   },
 
   {
@@ -168,6 +188,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — ≥ 1 intermediate criterion', next: 'ct-pecarn-observe', urgency: 'urgent' },
       { label: 'None present', next: 'ct-pecarn-not-indicated' },
     ],
+  
+    summary: 'PECARN ≥ 2 Years — Intermediate Criteria — assess clinical status to guide next management decision',
   },
 
   // --- PECARN < 2 YEARS ---
@@ -183,6 +205,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — GCS <15 or palpable skull fracture', next: 'ct-pecarn-young-high', urgency: 'critical' },
       { label: 'No — neither present', next: 'ct-pecarn-young-intermediate' },
     ],
+  
+    summary: 'PECARN < 2 Years — High-Risk Features — assess clinical status to guide next management decision',
   },
 
   {
@@ -196,6 +220,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — ≥ 1 intermediate criterion', next: 'ct-pecarn-observe', urgency: 'urgent' },
       { label: 'None present', next: 'ct-pecarn-not-indicated' },
     ],
+  
+    summary: 'PECARN < 2 Years — Intermediate Criteria — assess clinical status to guide next management decision',
   },
 
   // --- PECARN RESULTS ---
@@ -209,6 +235,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT head recommended per PECARN — high-risk features present.',
     confidence: 'recommended',
     citation: [7, 19],
+  
+    summary: 'CT Head Recommended (PECARN ≥ 2y) — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -220,6 +248,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT head recommended per PECARN — high-risk features present.',
     confidence: 'recommended',
     citation: [7, 19],
+  
+    summary: 'CT Head Recommended (PECARN < 2y) — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -231,6 +261,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Intermediate risk — observation vs CT per shared decision-making.',
     confidence: 'consider',
     citation: [7],
+  
+    summary: 'Observation vs CT — Shared Decision-Making — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -242,6 +274,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT not indicated per PECARN. Provide return precautions to caregivers.',
     confidence: 'definitive',
     citation: [7, 20],
+  
+    summary: 'CT Head NOT Indicated (PECARN Negative) — determine disposition and follow-up plan based on clinical findings',
   },
 
   // --- C-SPINE ---
@@ -257,6 +291,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — high-risk factor present', next: 'ct-cspine-image', urgency: 'critical' },
       { label: 'No high-risk factors', next: 'ct-cspine-low-risk' },
     ],
+  
+    summary: 'Canadian C-Spine Rule — Step 1 — assess clinical status to guide next management decision',
   },
 
   {
@@ -270,6 +306,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'No low-risk factors', next: 'ct-cspine-image', urgency: 'urgent' },
       { label: 'At least 1 low-risk factor present', next: 'ct-cspine-rom' },
     ],
+  
+    summary: 'Canadian C-Spine Rule — Step 2 — assess clinical status to guide next management decision',
   },
 
   {
@@ -283,6 +321,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Yes — full active ROM', next: 'ct-cspine-clear' },
       { label: 'No — unable to rotate', next: 'ct-cspine-image' },
     ],
+  
+    summary: 'Canadian C-Spine Rule — Step 3 — assess clinical status to guide next management decision',
   },
 
   {
@@ -294,6 +334,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'C-spine imaging indicated per Canadian C-Spine Rule.',
     confidence: 'recommended',
     citation: [4, 5, 6, 15],
+  
+    summary: 'C-Spine Imaging Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -305,6 +347,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'C-spine cleared clinically per Canadian C-Spine Rule.',
     confidence: 'definitive',
     citation: [5, 6],
+  
+    summary: 'C-Spine Cleared Clinically — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -323,6 +367,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Moderate pre-test probability', next: 'ct-pe-wells' },
       { label: 'High pre-test probability', next: 'ct-pe-high', urgency: 'critical' },
     ],
+  
+    summary: 'PE Workup — Pre-Test Probability — assess clinical status to guide next management decision',
   },
 
   {
@@ -336,6 +382,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'All 8 criteria met', next: 'ct-pe-ruled-out' },
       { label: 'Any criterion NOT met', next: 'ct-pe-ddimer' },
     ],
+  
+    summary: 'PERC rule: all 8 criteria must be met to rule out PE without further testing — age <50, HR <100, SpO2 ≥95%',
   },
 
   {
@@ -347,6 +395,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'PE ruled out by PERC in low pre-test probability patient.',
     confidence: 'definitive',
     citation: [9, 20],
+  
+    summary: 'PE Ruled Out — PERC Negative — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -360,6 +410,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'D-dimer negative (below threshold)', next: 'ct-pe-excluded' },
       { label: 'D-dimer positive (above threshold)', next: 'ct-pe-ctpa' },
     ],
+  
+    summary: 'D-Dimer Testing — assess clinical status to guide next management decision',
   },
 
   {
@@ -373,6 +425,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Wells ≤ 4 (PE unlikely)', next: 'ct-pe-ddimer' },
       { label: 'Wells > 4 (PE likely)', next: 'ct-pe-ctpa' },
     ],
+  
+    summary: 'Wells PE Score — assess clinical status to guide next management decision',
   },
 
   {
@@ -384,6 +438,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'PE excluded by negative D-dimer in appropriate pre-test probability.',
     confidence: 'definitive',
     citation: [8, 9],
+  
+    summary: 'PE Excluded — Negative D-Dimer — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -395,6 +451,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CTPA indicated. Check eGFR and contrast allergy status.',
     confidence: 'recommended',
     citation: [8, 15, 16],
+  
+    summary: 'CTPA Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -406,6 +464,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CTPA indicated for high pre-test probability. Do NOT use PERC or D-dimer.',
     confidence: 'recommended',
     citation: [8, 9],
+  
+    summary: 'High Pre-Test Probability — CTPA — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -422,6 +482,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Suspected appendicitis', next: 'ct-alvarado' },
       { label: 'Suspected renal colic', next: 'ct-renal-colic' },
     ],
+  
+    summary: 'Abdominal Scenario — assess clinical status to guide next management decision',
   },
 
   {
@@ -437,6 +499,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Score 7-8 (probable)', next: 'ct-appy-probable' },
       { label: 'Score 9-10 (very probable)', next: 'ct-appy-very-probable' },
     ],
+  
+    summary: 'Alvarado score ≥7: high likelihood appendicitis, consider surgical consult without CT',
   },
 
   {
@@ -448,6 +512,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Appendicitis unlikely (Alvarado 0-4). Discharge with return precautions.',
     confidence: 'recommended',
     citation: [14],
+  
+    summary: 'Appendicitis Unlikely — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -459,6 +525,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Observation, serial exams, consider imaging (US first in peds/pregnancy, CT if equivocal).',
     confidence: 'consider',
     citation: [14, 15, 16, 19],
+  
+    summary: 'Appendicitis Possible — Observation / Imaging — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -470,6 +538,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Surgical consult. CT if diagnosis equivocal.',
     confidence: 'recommended',
     citation: [14, 15],
+  
+    summary: 'Probable Appendicitis — Surgical Consult — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -481,6 +551,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Surgical consult. CT may not be necessary with classic presentation.',
     confidence: 'definitive',
     citation: [14],
+  
+    summary: 'Very Probable Appendicitis — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -492,6 +564,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'CT if first episode, fever, alternative diagnosis concern, or AKI. POCUS for hydronephrosis as alternative.',
     confidence: 'consider',
     citation: [15, 20],
+  
+    summary: 'Renal Colic — Imaging Guidance — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -508,6 +582,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Ankle / Foot injury', next: 'ct-ottawa-ankle' },
       { label: 'Knee injury', next: 'ct-ottawa-knee' },
     ],
+  
+    summary: 'Extremity Injury Type — assess clinical status to guide next management decision',
   },
 
   {
@@ -521,6 +597,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Criteria met — X-ray indicated', next: 'ct-xray-ankle-indicated' },
       { label: 'No criteria met — no imaging needed', next: 'ct-xray-ankle-not-indicated' },
     ],
+  
+    summary: 'Ottawa Ankle Rules — assess clinical status to guide next management decision',
   },
 
   {
@@ -532,6 +610,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'X-ray indicated per Ottawa Ankle Rules. CT rarely needed.',
     confidence: 'recommended',
     citation: [11],
+  
+    summary: 'Ankle/Foot X-Ray Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -543,6 +623,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'No imaging needed per Ottawa Ankle Rules.',
     confidence: 'definitive',
     citation: [11],
+  
+    summary: 'No Imaging Needed (Ottawa Ankle) — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -556,6 +638,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
       { label: 'Criteria met — X-ray indicated', next: 'ct-xray-knee-indicated' },
       { label: 'No criteria met — no imaging needed', next: 'ct-xray-knee-not-indicated' },
     ],
+  
+    summary: 'Ottawa Knee Rules — assess clinical status to guide next management decision',
   },
 
   {
@@ -567,6 +651,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'X-ray indicated per knee rules. CT rarely needed for acute knee injury.',
     confidence: 'recommended',
     citation: [12, 13],
+  
+    summary: 'Knee X-Ray Indicated — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -578,6 +664,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'No imaging needed per knee rules.',
     confidence: 'definitive',
     citation: [12, 13],
+  
+    summary: 'No Imaging Needed (Ottawa Knee) — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -591,6 +679,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     title: 'Special Populations & Documentation',
     body: '**Reference Pages:**\n\n[Radiation Dose Reference Table](#/info/ct-radiation-doses)\n\n[Special Populations Guide](#/info/ct-special-populations)\n(Pediatric, Pregnancy, Contrast Allergy)\n\n[Documentation Template](#/info/ct-documentation)\n\n[Choosing Wisely Quick Reference](#/info/ct-choosing-wisely)',
     next: 'ct-doc-guidance',
+  
+    summary: 'Special Populations & Documentation — review key clinical information before proceeding',
   },
 
   {
@@ -602,6 +692,8 @@ export const CT_DECISION_SUPPORT_NODES: DecisionNode[] = [
     recommendation: 'Document the decision rule applied, not just the conclusion.',
     confidence: 'recommended',
     citation: [1, 20],
+  
+    summary: 'Documentation Guidance — determine disposition and follow-up plan based on clinical findings',
   },
 
 ];

@@ -28,6 +28,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'chf-ehmrg', label: 'EHMRG 7-Day Mortality' },
     ],
     next: 'chf-scape-screen',
+  
+    summary: 'Key question: SCAPE (flash pulmonary edema) vs FOPE (volume overload) — treatment differs completely',
   },
 
   {
@@ -56,6 +58,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'SCAPE: acute onset, SBP >160, diaphoretic, minimal edema — NOT volume overload',
   },
 
   // =====================================================================
@@ -93,6 +97,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'BP every 2-5 min during titration. SpO2, respiratory effort, mental status. Watch for hypotension as SCAPE breaks.',
     },
     next: 'chf-scape-avoid',
+  
+    summary: 'Simultaneous BiPAP + high-dose NTG — patient should be out of the water by 10 minutes',
+    safetyLevel: 'critical',
   },
 
   {
@@ -103,6 +110,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Critical: These can HARM your SCAPE patient:**\n\n| Agent | Why Harmful |\n|-------|-------------|\n| **Beta-blockers** | Impair pump function — absolutely contraindicated |\n| **Morphine** | MIMO trial stopped early for harm — increased cardiac arrest and shock |\n| **Routine diuretics** | Only if TRUE volume overload. Many SCAPE patients are intravascularly depleted |\n\n**When to give diuretics in SCAPE:**\n- Only AFTER vasodilator therapy working\n- Only if evidence of true volume overload (weight gain, weeks of edema)\n- Use low dose initially (20-40 mg furosemide)\n\n**Intubation:**\n- AVOID if possible — these patients often turn around dramatically\n- BiPAP buys time for NTG to work\n- If must intubate: ketamine > propofol (less hypotension) [1][3]',
     citation: [1, 3],
     next: 'chf-scape-response',
+  
+    summary: 'No beta-blockers, no morphine (MIMO trial: increased arrest), no routine diuretics in SCAPE',
+    safetyLevel: 'critical',
   },
 
   {
@@ -131,6 +141,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Assess at 10-15 min — flash is fast both ways, rapid improvement expected with correct treatment',
   },
 
   {
@@ -141,6 +153,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Patient responding — continue current therapy:**\n\n- Maintain NTG infusion at effective rate\n- Keep BiPAP at current settings\n- Monitor BP closely — when SCAPE breaks, BP can crash\n- Reduce NTG rate sharply as BP normalizes\n\n**Transition plan:**\n- Wean BiPAP as tolerated → high-flow NC → regular NC\n- Transition NTG drip to oral/patch as stabilizes\n- NOW can consider gentle diuresis if volume overloaded\n- Address precipitant (ACS workup, arrhythmia, etc.)\n\n**Disposition:** ICU admission for NTG drip monitoring. [1]',
     citation: [1],
     next: 'chf-disposition',
+  
+    summary: 'Patient responding — maintain NTG, wean BiPAP as tolerated, watch for BP crash when SCAPE breaks',
   },
 
   {
@@ -170,6 +184,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Arterial line preferred. BP q2-5 min during titration. Watch for precipitous hypotension. ECG monitoring.',
     },
     next: 'chf-scape-response',
+  
+    summary: 'Push NTG to 400-800 mcg/min, add second vasodilator — clevidipine or nicardipine',
   },
 
   {
@@ -199,6 +215,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous BP, SpO2, ETCO2. Post-intubation: continue aggressive vasodilation, monitor for post-intubation hypotension.',
     },
     next: 'chf-cardiogenic-shock',
+  
+    summary: 'Refractory SCAPE: ketamine for RSI (not propofol), have vasopressor ready — now cardiogenic shock',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -236,6 +255,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         next: 'chf-warm-dry',
       },
     ],
+  
+    summary: 'Warm/cold + wet/dry assessment — warm-wet is most common, cold-wet is cardiogenic shock',
   },
 
   {
@@ -247,6 +268,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     recommendation: 'Outpatient management. Ensure CHF medications optimized. Cardiology follow-up.',
     confidence: 'recommended',
     citation: [1],
+  
+    summary: 'Not acute CHF — outpatient optimization, address actual presenting complaint',
   },
 
   {
@@ -276,6 +299,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous telemetry, BP q5 min, reassess volume status after each fluid bolus. Emergent cardiology consult. Consider ECMO evaluation.',
     },
     next: 'chf-cardiogenic-shock',
+  
+    summary: 'Rare pure cardiogenic shock — DO NOT give diuretics, cautious fluids then inotropes',
+    safetyLevel: 'warning',
   },
 
   {
@@ -308,6 +334,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Urine output q1-2h, daily weights, electrolytes (K+, Mg++) q12-24h, creatinine daily. Spot urine Na >50-70 mEq/L at 2h indicates adequate response.',
     },
     next: 'chf-diuretic-response',
+  
+    summary: 'Furosemide 1-2.5x home dose IV — target urine output >100-150 mL/hr by 6 hours',
   },
 
   {
@@ -335,6 +363,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Good response: UOP >150 mL/hr; diuretic resistance: UOP <50 mL/hr despite adequate dosing',
   },
 
   {
@@ -345,6 +375,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Patient responding — continue current regimen:**\n\n- Continue IV loop diuretic until euvolemic\n- Monitor daily weights (goal -0.5 to -1 kg/day)\n- Check electrolytes q12-24h (K+, Mg++)\n- Track creatinine (transient rise acceptable)\n\n**Transition to oral:**\n- Once euvolemic, switch to PO\n- Discharge dose = dose that achieved euvolemia\n- Often higher than pre-admission dose\n\n**Add guideline-directed medical therapy (GDMT):**\n- ACE-I/ARB/ARNI\n- Beta-blocker (once euvolemic)\n- MRA (spironolactone)\n- SGLT2i (dapagliflozin, empagliflozin)',
     citation: [1, 2],
     next: 'chf-renal-assessment',
+  
+    summary: 'Continue until euvolemic — transition to PO, discharge dose often higher than pre-admission',
   },
 
   {
@@ -374,6 +406,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Urine output, BP q1h, K+ and Mg++ q8-12h (higher frequency with metolazone). Creatinine daily.',
     },
     next: 'chf-diuretic-response',
+  
+    summary: 'Double dose or add metolazone 30 min before loop diuretic — sequential nephron blockade',
   },
 
   {
@@ -403,6 +437,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Strict I/Os, daily weights, electrolytes q8h, creatinine q12-24h. Consider nephrology for ultrafiltration if refractory.',
     },
     next: 'chf-renal-assessment',
+  
+    summary: 'May need furosemide 160-200mg IV, metolazone, albumin, or ultrafiltration — nephrology consult',
   },
 
   // =====================================================================
@@ -436,6 +472,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Cold-wet: dobutamine for SBP 80-100, NE first for SBP <80 — milrinone for HFpEF or BB toxicity',
+    safetyLevel: 'critical',
   },
 
   {
@@ -465,6 +504,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous telemetry, BP q5-15 min during titration, HR (tachycardia common), lactate q2-4h, urine output hourly, ECG for arrhythmias.',
     },
     next: 'chf-shock-response',
+  
+    summary: 'Dobutamine 2.5-20 mcg/kg/min — improves contractility, mild vasodilation, watch tachycardia',
+    skippable: true,
   },
 
   {
@@ -494,6 +536,9 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous telemetry, BP q5-15 min (hypotension common), may need concurrent vasopressor. Less tachycardia than dobutamine. Monitor for arrhythmias.',
     },
     next: 'chf-shock-response',
+  
+    summary: 'Milrinone 0.25-0.75 mcg/kg/min — NO loading dose in shock, long half-life 2-3h persists after stopping',
+    skippable: true,
   },
 
   {
@@ -523,6 +568,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous arterial line BP, telemetry, lactate q2h, urine output hourly. Goal SBP >80 then add inotrope.',
     },
     next: 'chf-shock-response',
+  
+    summary: 'SBP <80: NE first-line vasopressor, then add inotrope — consider ECMO if refractory to 2+ agents',
   },
 
   {
@@ -545,6 +592,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Improving: SBP >90, lactate declining, UOP increasing; not improving: escalate to mechanical support',
   },
 
   {
@@ -555,6 +604,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Refractory cardiogenic shock — consider mechanical support:**\n\n**Options:**\n- **VA-ECMO:** Full cardiac + pulmonary support. Rapid deployment.\n- **IABP:** Reduces afterload, improves coronary perfusion. Temporizing.\n- **Impella:** Percutaneous LVAD. Unloads LV.\n- **Ultrafiltration:** If volume overload refractory to diuretics.\n\n**Indications:**\n- Refractory to 2+ inotropes/vasopressors\n- Lactate rising >4 mmol/L\n- Multi-organ failure developing\n- Bridge to recovery or transplant\n\n**Actions:**\n- Activate cardiology + CT surgery\n- Transfer to ECMO center if not available\n- Continue maximal medical therapy during transport [1]',
     citation: [1],
     next: 'chf-disposition',
+  
+    summary: 'Refractory shock: VA-ECMO, IABP, Impella — activate cardiology and CT surgery early',
   },
 
   // =====================================================================
@@ -586,6 +637,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Transient Cr rise acceptable during diuresis — hold ACE-I/ARB during acute episode',
   },
 
   {
@@ -596,6 +649,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Cardiorenal syndrome:** AKI from poor renal perfusion in CHF.\n\n**Management:**\n- **Continue diuretics** if patient still volume overloaded\n- Transient Cr rise is acceptable ("permissive worsening renal function")\n- **Hold ACE-I/ARB** during acute episode (restart once stable)\n- **Avoid NSAIDs, contrast** if possible\n- **Optimize perfusion:** maintain SBP >90, consider low-dose inotrope\n- **Monitor K+** closely — supplement if <3.5, hold diuretics if >5.5\n\n**Expect:**\n- Cr may rise 0.3-0.5 mg/dL during aggressive diuresis\n- Should plateau and improve as cardiac output improves\n- If Cr keeps rising despite stable hemodynamics → nephrology consult [2][4]',
     citation: [2, 4],
     next: 'chf-disposition',
+  
+    summary: 'Continue diuretics if volume overloaded — permissive worsening renal function is acceptable',
   },
 
   {
@@ -606,6 +661,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Stage 2-3 AKI with ADHF — high risk:**\n\n**Optimize first:**\n- Hold diuretics temporarily if anuric\n- Optimize hemodynamics (inotropes if needed)\n- Stop all nephrotoxins\n- Check for obstruction (Foley, bladder scan)\n\n**RRT Indications:**\n- K+ >6.5 unresponsive to medical therapy\n- Severe metabolic acidosis (pH <7.15)\n- Volume overload refractory to diuretics\n- Uremic symptoms (encephalopathy, pericarditis)\n\n**RRT Options:**\n- CVVH/CVVHD if hemodynamically unstable\n- Intermittent HD if stable\n- Ultrafiltration for pure volume removal\n\n**Consult nephrology early.** [2][4]',
     citation: [2, 4],
     next: 'chf-disposition',
+  
+    summary: 'Stage 2-3 AKI: consider RRT if K+ >6.5, pH <7.15, or refractory volume overload',
   },
 
   // =====================================================================
@@ -625,6 +682,8 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'chf-ehmrg', label: 'EHMRG Risk Score' },
       { id: 'chf-dispo', label: 'Dispo Decision Guide' },
     ],
+  
+    summary: 'ICU for shock/NTG drip; telemetry for diuresis; always address precipitant and optimize GDMT',
   },
 ];
 

@@ -6,7 +6,6 @@ import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import type { WeightCalc } from '../data/drug-store.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
-import { renderDosingBanner } from './dosing-banner.js';
 import { trackDrugView } from '../services/kittmd-analytics.js';
 
 /** Context for dose calculations - passed to buildWeightCalcPanel */
@@ -88,9 +87,6 @@ export function renderDrugList(container: HTMLElement): void {
 
   searchWrap.appendChild(searchInput);
   container.appendChild(searchWrap);
-
-  // Dosing banner (shows user-pinned doses)
-  renderDosingBanner(container);
 
   // Drug list
   const list = document.createElement('div');

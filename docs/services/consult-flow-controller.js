@@ -59,7 +59,9 @@ export class ConsultFlowController {
             selectedLabel,
         });
         // Navigate engine
-        return this.engine.selectOption(optionIndex);
+        this.engine.selectOption(optionIndex);
+        this.autoSkipIfNeeded();
+        return this.engine.getCurrentNode();
     }
     /** Continue to next node (info nodes) */
     continueToNext() {
@@ -71,7 +73,26 @@ export class ConsultFlowController {
             nodeId: currentNode.id,
             node: currentNode,
         });
-        return this.engine.continueToNext();
+        this.engine.continueToNext();
+        this.autoSkipIfNeeded();
+        return this.engine.getCurrentNode();
+    }
+    /** Auto-skip skippable info nodes for expert mode */
+    autoSkipIfNeeded() {
+        let skips = 0;
+        while (skips < 20) {
+            const node = this.engine.getCurrentNode();
+            if (!node)
+                break;
+            if (node.skippable && node.type === 'info' && node.next && !node.safetyLevel) {
+                this.cardStack.push({ nodeId: node.id, node, autoAdvanced: true });
+                this.engine.continueToNext();
+                skips++;
+            }
+            else {
+                break;
+            }
+        }
     }
     /** Go back one step */
     goBack() {

@@ -270,22 +270,206 @@ body {
 
 .decision-card--answered {
   opacity: 0.9;
-  padding: 12px 16px;
+  padding: 6px 12px;
+  box-shadow: none;
+  border-radius: 20px;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
 }
 
-/* Answered card: Question + Answer layout */
-.answered-card__question {
-  font-size: 12px;
+/* --- Answered Pills (Need-to-Know) --- */
+
+.answered-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.answered-pill__q {
+  color: var(--color-text-secondary);
   font-weight: 500;
-  color: var(--color-text-muted);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.answered-card__answer {
-  display: inline-block;
-  width: auto;
+.answered-pill__arrow {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.answered-pill__a {
+  color: var(--color-decision-active);
+  font-weight: 600;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.answered-pill__a--critical {
+  color: var(--color-danger);
+}
+
+.answered-pill__a--urgent {
+  color: var(--color-warning);
+}
+
+.answered-pill__check {
+  color: var(--color-decision-active);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.answered-pill--info .answered-pill__q {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.answered-pill--auto-advanced .answered-pill__q {
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-size: 13px;
+}
+
+.answered-pill--auto-advanced .answered-pill__check {
+  color: var(--color-text-muted);
+}
+
+/* Pill expanded state */
+.pill-expanded-content {
+  display: none;
+  padding: 10px 14px 6px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.answered-pill--expanded .pill-expanded-content {
+  display: block;
+}
+
+.answered-pill--expanded {
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.pill-expanded-answer {
+  margin-top: 8px;
+  font-weight: 600;
+  color: var(--color-decision-active);
+}
+
+/* Safety pill badge for answered cards with safetyLevel */
+.answered-pill[data-safety-level="critical"] {
+  border-left: 3px solid var(--color-danger);
+}
+
+.answered-pill[data-safety-level="warning"] {
+  border-left: 3px solid var(--color-warning);
+}
+
+/* --- Safety Banners (Need-to-Know) --- */
+
+.safety-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.safety-banner--critical {
+  background: rgba(255, 71, 87, 0.12);
+  color: var(--color-danger);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+.safety-banner--warning {
+  background: rgba(255, 165, 2, 0.12);
+  color: #e67e00;
+  border: 1px solid rgba(255, 165, 2, 0.3);
+}
+
+.safety-banner__icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.safety-banner__text {
+  flex: 1;
+}
+
+/* --- Card Summary & Accordion (Need-to-Know) --- */
+
+.card-summary {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.card-accordion {
+  margin-bottom: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-accordion__trigger {
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-decision-active);
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-accordion__trigger::-webkit-details-marker {
+  display: none;
+}
+
+.card-accordion__trigger::before {
+  content: '\25B8 ';
+}
+
+.card-accordion[open] .card-accordion__trigger::before {
+  content: '\25BE ';
+}
+
+.card-accordion__content {
+  padding: 0 14px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* --- Pearl Callout (inside accordion) --- */
+
+.pearl-callout {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--color-decision-active);
+  background: rgba(60, 179, 113, 0.06);
+  border-radius: 0 6px 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
 }
 
 .decision-card--active {
@@ -1718,10 +1902,7 @@ body {
 
 /* Standard confidence (green) - default for most doses */
 .dose-highlight[data-confidence="standard"],
-.dosing-value[data-confidence="standard"],
-.sticky-dosing-primary[data-confidence="standard"],
-.sticky-dosing-row-value[data-confidence="standard"],
-.dosing-banner__pill[data-confidence="standard"] {
+.dosing-value[data-confidence="standard"] {
   background: rgba(60, 179, 113, 0.12);
   border-left: 3px solid #3CB371;
   color: #2E8B57;
@@ -1729,10 +1910,7 @@ body {
 
 /* Caution confidence (amber) - edge of range, needs monitoring */
 .dose-highlight[data-confidence="caution"],
-.dosing-value[data-confidence="caution"],
-.sticky-dosing-primary[data-confidence="caution"],
-.sticky-dosing-row-value[data-confidence="caution"],
-.dosing-banner__pill[data-confidence="caution"] {
+.dosing-value[data-confidence="caution"] {
   background: rgba(255, 165, 2, 0.12);
   border-left: 3px solid #ffa502;
   color: #b45309;
@@ -1740,10 +1918,7 @@ body {
 
 /* Critical confidence (red) - max dose, narrow therapeutic index */
 .dose-highlight[data-confidence="critical"],
-.dosing-value[data-confidence="critical"],
-.sticky-dosing-primary[data-confidence="critical"],
-.sticky-dosing-row-value[data-confidence="critical"],
-.dosing-banner__pill[data-confidence="critical"] {
+.dosing-value[data-confidence="critical"] {
   background: rgba(255, 71, 87, 0.12);
   border-left: 3px solid #ff4757;
   color: #c62828;
@@ -1751,17 +1926,9 @@ body {
 
 /* Add left padding to accommodate border accent */
 .dose-highlight[data-confidence],
-.dosing-value[data-confidence],
-.sticky-dosing-primary[data-confidence],
-.sticky-dosing-row-value[data-confidence] {
+.dosing-value[data-confidence] {
   padding-left: 8px;
   border-radius: 0 4px 4px 0;
-}
-
-/* Dosing banner pills with confidence - adjust styling */
-.dosing-banner__pill[data-confidence] {
-  padding-left: 10px;
-  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
 }
 
 /* Drug regimen card with confidence indicator */
@@ -3475,618 +3642,8 @@ body {
   color: var(--color-text-muted);
 }
 
-/* ===================================================================
-   DOSING BANNER — Sticky summary of key doses
-   =================================================================== */
 
-.dosing-banner {
-  position: sticky;
-  top: 56px; /* Below header */
-  z-index: 90;
-  background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
 
-.dosing-banner__label {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-}
-
-.dosing-banner__pills {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.dosing-banner__pills::-webkit-scrollbar {
-  display: none;
-}
-
-.dosing-banner__pill {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
-  padding: 4px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #fff;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  flex-shrink: 0;
-}
-
-.dosing-banner__pill:active {
-  transform: scale(0.96);
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.dosing-banner__pill--copied {
-  background: #4CAF50 !important;
-  border-color: #4CAF50 !important;
-}
-
-.dosing-banner__pill--copied::after {
-  content: ' ✓';
-}
-
-/* ===================================================================
-   STICKY DOSING HEADER — Auto-shows treatment from result nodes
-   =================================================================== */
-
-.sticky-dosing-header {
-  position: sticky;
-  top: 56px; /* Below main header, same as dosing-banner */
-  z-index: 89; /* Just below dosing-banner */
-  background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-/* When dosing-banner is also showing, stack below it */
-.dosing-banner + .sticky-dosing-header {
-  top: 100px; /* 56px header + ~44px banner */
-}
-
-.sticky-dosing-header--hidden {
-  display: none;
-}
-
-.sticky-dosing-details {
-  margin: 0;
-}
-
-.sticky-dosing-summary {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-
-.sticky-dosing-summary::-webkit-details-marker {
-  display: none;
-}
-
-.sticky-dosing-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.75);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-}
-
-.sticky-dosing-primary {
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sticky-dosing-expand-icon {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid rgba(255, 255, 255, 0.7);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.sticky-dosing-details[open] .sticky-dosing-expand-icon {
-  transform: rotate(180deg);
-}
-
-.sticky-dosing-content {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 10px 14px 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sticky-dosing-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.sticky-dosing-row:last-of-type {
-  border-bottom: none;
-}
-
-.sticky-dosing-row--primary {
-  font-weight: 600;
-}
-
-.sticky-dosing-row-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  min-width: 60px;
-}
-
-.sticky-dosing-row-value {
-  font-size: 13px;
-  color: #fff;
-  flex: 1;
-}
-
-.sticky-dosing-row-notes {
-  width: 100%;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.65);
-  font-style: italic;
-  padding-left: 60px;
-  margin-top: 2px;
-}
-
-.sticky-dosing-copy {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s ease;
-}
-
-.sticky-dosing-copy:active {
-  transform: scale(0.98);
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* ===================================================================
-   QUICK FIRE MODE — Expert toggle for rapid navigation
-   =================================================================== */
-
-.quick-fire-toggle {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  color: rgba(255, 255, 255, 0.6);
-  margin-right: 4px;
-}
-
-.quick-fire-toggle:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.quick-fire-toggle--active {
-  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-  color: #FFD700;
-  box-shadow: 0 0 12px rgba(139, 69, 19, 0.7);
-  font-size: 16px;
-  padding: 4px 10px;
-}
-
-/* Quick fire mode answered cards */
-.decision-card--quick-fire {
-  padding: 6px 12px !important;
-  margin-bottom: 4px !important;
-  min-height: auto !important;
-}
-
-.quick-fire-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  line-height: 1.3;
-}
-
-.quick-fire-pill__q {
-  color: var(--color-text-secondary, #6A6A6A);
-  font-weight: 500;
-}
-
-.quick-fire-pill__arrow {
-  color: var(--color-primary, #3CB371);
-  font-weight: 700;
-}
-
-.quick-fire-pill__a {
-  color: var(--color-text-primary, #1A1A1A);
-  font-weight: 600;
-}
-
-.quick-fire-pill--info .quick-fire-pill__arrow {
-  color: var(--color-text-muted, #8A8A8A);
-}
-
-/* Quick fire mode container spacing */
-.card-stack-container--quick-fire {
-  gap: 4px;
-}
-
-/* Body class for global quick fire state */
-body.quick-fire-mode .decision-card--answered:not(.decision-card--quick-fire) {
-  padding: 8px 12px;
-}
-
-/* ===================================================================
-   QUICK FIRE MODE — Global visual feedback (yellow lightning round)
-   =================================================================== */
-
-body.quick-fire-mode .card-stack-container {
-  background: linear-gradient(135deg,
-    rgba(139, 69, 19, 0.04) 0%,
-    rgba(139, 69, 19, 0.02) 100%);
-  border: 4px solid #8B4513;
-  border-radius: 14px;
-  padding: 10px 6px;
-  margin: 0 4px;
-  box-shadow:
-    inset 0 0 12px rgba(139, 69, 19, 0.06),
-    0 0 12px rgba(139, 69, 19, 0.2);
-}
-
-body.quick-fire-mode .consult-flow-header {
-  box-shadow: 0 2px 12px rgba(139, 69, 19, 0.3);
-}
-
-body.quick-fire-mode .quick-fire-toggle--active {
-  animation: pulse-glow 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(139, 69, 19, 0.5); }
-  50% { box-shadow: 0 0 16px rgba(139, 69, 19, 0.8); }
-}
-
-/* Quick fire mode label badge */
-body.quick-fire-mode .card-stack-container::before {
-  content: '⚡ QUICK FIRE';
-  position: absolute;
-  top: -10px;
-  left: 16px;
-  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-  color: #FFFFFF;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(139, 69, 19, 0.4);
-}
-
-body.quick-fire-mode .card-stack-container {
-  position: relative;
-  margin-top: 16px;
-}
-
-/* ===================================================================
-   QUICK FIRE MODE — Body text expand/collapse
-   =================================================================== */
-
-body.quick-fire-mode .qf-section {
-  margin-bottom: 4px;
-}
-
-body.quick-fire-mode .qf-heading {
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--color-text-primary, #1A1A1A);
-  margin: 0 0 2px 0;
-  line-height: 1.4;
-}
-
-/* Expand bar — tappable burnt umber strip, not full width */
-body.quick-fire-mode .qf-expand-card {
-  height: 18px;
-  width: 60%;
-  margin: 4px auto;
-  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-  border-radius: 6px;
-  cursor: pointer;
-  opacity: 0.4;
-  transition: opacity 0.15s ease, height 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body.quick-fire-mode .qf-expand-card:active {
-  opacity: 0.7;
-}
-
-/* Content — hidden by default */
-body.quick-fire-mode .qf-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-/* Content — revealed when expanded */
-body.quick-fire-mode .qf-expanded .qf-content {
-  max-height: 2000px;
-  opacity: 1;
-}
-
-/* Expand bar visual change when expanded */
-body.quick-fire-mode .qf-expanded .qf-expand-card {
-  opacity: 0.25;
-  height: 8px;
-}
-
-/* Essential links — always visible regardless of collapse state */
-body.quick-fire-mode .qf-essential {
-  margin: 4px 0;
-}
-
-/* ===================================================================
-   SPOTLIGHT SEARCH — Global Command Palette
-   =================================================================== */
-
-.spotlight-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 12vh;
-  opacity: 0;
-  transition: opacity 0.15s ease-out;
-  pointer-events: none;
-}
-
-.spotlight-overlay--open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.spotlight-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.spotlight-modal {
-  position: relative;
-  width: 90%;
-  max-width: 560px;
-  max-height: 70vh;
-  background: var(--color-surface-card);
-  border-radius: 16px;
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.3),
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transform: translateY(-10px);
-  transition: transform 0.15s ease-out;
-}
-
-.spotlight-overlay--open .spotlight-modal {
-  transform: translateY(0);
-}
-
-.spotlight-input-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.spotlight-search-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  opacity: 0.5;
-}
-
-.spotlight-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-family: var(--font-sans);
-  font-size: 18px;
-  color: var(--color-text-primary);
-  outline: none;
-}
-
-.spotlight-input::placeholder {
-  color: var(--color-text-muted);
-}
-
-.spotlight-shortcut {
-  flex-shrink: 0;
-  padding: 4px 8px;
-  background: var(--color-surface-hover);
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.spotlight-results {
-  max-height: calc(70vh - 80px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.spotlight-results--has-results {
-  padding: 8px 0;
-}
-
-.spotlight-empty {
-  padding: 32px 20px;
-  text-align: center;
-  color: var(--color-text-muted);
-  font-size: 15px;
-}
-
-.spotlight-group-header {
-  padding: 12px 20px 6px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--color-text-muted);
-}
-
-.spotlight-result-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background 0.1s ease;
-}
-
-.spotlight-result-item:hover,
-.spotlight-result-item--selected {
-  background: var(--color-surface-hover);
-}
-
-.spotlight-result-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  width: 28px;
-  text-align: center;
-}
-
-.spotlight-result-content {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.spotlight-result-label {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.spotlight-result-sublabel {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ---- Feature 4: Faceted Search Filter Chips ---- */
-.spotlight-filter-chips {
-  display: flex;
-  gap: 6px;
-  padding: 8px 16px;
-  border-bottom: 1px solid var(--color-border);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.spotlight-filter-chip {
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s;
-}
-
-.spotlight-filter-chip:hover {
-  background: var(--color-surface-hover);
-}
-
-.spotlight-filter-chip--active {
-  background: var(--color-umber);
-  color: #fff;
-  border-color: var(--color-umber);
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  .spotlight-overlay {
-    padding-top: 8vh;
-  }
-
-  .spotlight-modal {
-    width: 94%;
-    max-height: 75vh;
-    border-radius: 14px;
-  }
-
-  .spotlight-input {
-    font-size: 16px;
-  }
-
-  .spotlight-shortcut {
-    display: none;
-  }
-
-  .spotlight-results {
-    max-height: calc(75vh - 70px);
-  }
-}
 
 /* ===================================================================
    DASHBOARD V2 — Command Center Redesign
@@ -4464,247 +4021,3 @@ body.quick-fire-mode .qf-essential {
   }
 }
 
-/* ===================================================================
-   STICKY PATIENT CONTEXT HEADER
-   Shows patient weight/age across calculators for quick reference.
-   =================================================================== */
-
-.sticky-patient-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 14px;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #5D4E37 0%, #6B5B45 100%);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.sticky-patient-header--hidden {
-  display: none;
-}
-
-.sticky-patient-header--collapsed {
-  opacity: 0.6;
-  transform: scale(0.98);
-}
-
-.sticky-patient-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sticky-patient-icon {
-  font-size: 16px;
-  opacity: 0.9;
-}
-
-.sticky-patient-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: #FFFFFF;
-  letter-spacing: 0.3px;
-}
-
-.sticky-patient-clear {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.sticky-patient-clear:hover,
-.sticky-patient-clear:active {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* =====================================================
-   CRITICAL ACTIONS BUTTON + MODAL
-   Red 3D button with modal overlay for quick reference
-   ===================================================== */
-
-/* Critical Actions Button - 3D Red Style */
-.critical-actions-btn {
-  height: 40px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #dc143c 0%, #b00020 100%);
-  color: white;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow:
-    0 4px 6px rgba(220, 20, 60, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-}
-
-.critical-actions-btn:hover {
-  background: linear-gradient(135deg, #e6163f 0%, #c00025 100%);
-  box-shadow:
-    0 6px 10px rgba(220, 20, 60, 0.35),
-    0 3px 6px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  transform: translateY(-1px);
-}
-
-.critical-actions-btn:active {
-  background: linear-gradient(135deg, #b00020 0%, #8b0015 100%);
-  box-shadow:
-    0 2px 4px rgba(220, 20, 60, 0.25),
-    0 1px 2px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(0, 0, 0, 0.3);
-  transform: translateY(1px);
-}
-
-/* Critical Actions Modal Overlay */
-.critical-actions-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.critical-actions-overlay--open {
-  opacity: 1;
-}
-
-/* Critical Actions Modal */
-.critical-actions-modal {
-  background: var(--color-surface-card);
-  border-radius: 16px;
-  max-width: 500px;
-  width: 100%;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 10px 20px rgba(0, 0, 0, 0.2);
-  transform: scale(0.95);
-  transition: transform 0.2s ease;
-}
-
-.critical-actions-overlay--open .critical-actions-modal {
-  transform: scale(1);
-}
-
-/* Modal Header */
-.critical-actions-modal__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border);
-  background: linear-gradient(135deg, #dc143c 0%, #b00020 100%);
-  border-radius: 16px 16px 0 0;
-}
-
-.critical-actions-modal__header h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 0.3px;
-}
-
-.critical-actions-modal__close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.critical-actions-modal__close:hover,
-.critical-actions-modal__close:active {
-  background: rgba(255, 255, 255, 0.35);
-}
-
-/* Modal List */
-.critical-actions-modal__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.critical-actions-modal__item {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.critical-actions-modal__item:last-child {
-  border-bottom: none;
-}
-
-/* Modal Action Link */
-.critical-actions-modal__link {
-  display: block;
-  width: 100%;
-  padding: 16px 20px;
-  border: none;
-  background: transparent;
-  color: var(--color-text-primary);
-  font-size: 15px;
-  line-height: 1.5;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.critical-actions-modal__link:hover {
-  background: rgba(220, 20, 60, 0.08);
-}
-
-.critical-actions-modal__link:active {
-  background: rgba(220, 20, 60, 0.15);
-}
-
-/* Bullet point before each action */
-.critical-actions-modal__link::before {
-  content: '•';
-  color: #dc143c;
-  font-weight: bold;
-  margin-right: 10px;
-}

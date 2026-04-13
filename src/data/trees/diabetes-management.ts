@@ -36,6 +36,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     body: '[Diabetes Management Steps Summary](#/info/dm-summary) - quick reference.\n\n**Approach to the diabetic patient:**\n\n**Immediate triage based on glucose level:**\n- Glucose <70 mg/dL: [Hypoglycemia pathway](#/node/dm-hypo-severity)\n- Glucose 70-180 mg/dL: Assess for DKA/HHS risk factors\n- Glucose 180-300 mg/dL: Mild hyperglycemia, assess context\n- Glucose >300 mg/dL: Evaluate for DKA/HHS\n- Glucose >600 mg/dL: High suspicion for HHS\n\n**Critical questions:**\n1. Type 1 vs Type 2 diabetes?\n2. On insulin? What type (pump, basal-bolus, premixed)?\n3. Recent illness, missed doses, new medications?\n4. Last oral intake? NPO status?\n\n**Red flags requiring immediate text:**\n- Altered mental status\n- Kussmaul respirations (deep, rapid breathing)\n- Fruity breath odor (ketones)\n- Signs of dehydration/shock',
     citation: [1, 2],
     next: 'dm-glucose-triage',
+  
+    summary: 'Identify the acute diabetic emergency — DKA, HHS, or hypoglycemia require different management',
   },
 
   {
@@ -64,6 +66,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Current Glucose Level — assess clinical status to guide next management decision',
   },
 
   {
@@ -92,6 +96,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-type-assess',
       },
     ],
+  
+    summary: 'DKA/HHS Screening — assess clinical status to guide next management decision',
   },
 
   {
@@ -103,6 +109,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Navigate to DKA consult for detailed protocol management.',
     citation: [1, 2],
     confidence: 'definitive',
+  
+    summary: 'DKA Management — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -133,6 +141,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1h, BMP q2-4h, osmolality q4h. ICU admission mandatory. Target osmolality decrease <3 mOsm/kg/hr.',
     },
+  
+    summary: 'HHS Management — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -159,6 +169,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-new-dx',
       },
     ],
+  
+    summary: 'Type 1 vs Type 2 Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -186,6 +198,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-inpatient-vs-outpatient',
       },
     ],
+  
+    summary: 'Insulin Pump Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -197,6 +211,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Continue patient-managed insulin pump with documented settings. Target glucose 140-180 mg/dL. Have backup insulin available.',
     citation: [6],
     confidence: 'definitive',
+  
+    summary: 'Continue Insulin Pump — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -227,6 +243,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1h on IV drip, q4-6h on SC. Start basal 2-4h before stopping IV drip.',
     },
+  
+    summary: 'Disconnect Insulin Pump — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -237,6 +255,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     body: '**Approach to new diabetes in the ED/hospital:**\n\n**Immediate assessment:**\n1. Check for DKA (glucose, VBG, BMP, ketones)\n2. Assess symptoms: polyuria, polydipsia, weight loss, fatigue\n3. HbA1c if not recently checked\n\n**Classification clues:**\n- **Likely Type 1:** young, thin, rapid onset, DKA at presentation, FH of autoimmune disease\n- **Likely Type 2:** older, obese, gradual onset, metabolic syndrome features\n- **Uncertain:** send C-peptide (fasting), consider GAD65 antibodies\n\n**Initial management:**\n- If DKA: treat as DKA protocol\n- If stable hyperglycemia: start basal insulin 0.1-0.2 U/kg/day\n- Diabetes education consult\n- Outpatient endocrinology follow-up\n\n**Do NOT discharge without:**\n- Glucose monitoring supplies\n- Basic insulin education if starting insulin\n- Follow-up appointment\n- Hypoglycemia education and treatment supplies',
     citation: [1, 5],
     next: 'dm-inpatient-vs-outpatient',
+  
+    summary: 'New Diabetes Diagnosis — review key clinical information before proceeding',
   },
 
   {
@@ -258,6 +278,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-outpatient-start',
       },
     ],
+  
+    summary: 'Inpatient vs Outpatient Management — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -284,6 +306,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Hypoglycemia Severity Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -306,6 +330,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Recheck glucose q15 min until >70. Investigate underlying cause.',
     },
+  
+    summary: 'Oral Hypoglycemia Treatment — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -329,6 +355,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Severe Hypoglycemia - IV Access? — assess clinical status to guide next management decision',
   },
 
   {
@@ -360,6 +388,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q15 min until stable >100. May need D10W infusion for sustained hypoglycemia.',
     },
+  
+    summary: 'IV Dextrose for Severe Hypoglycemia — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -390,6 +420,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Recheck glucose q15 min. Give oral carbs when able to swallow. Obtain IV access.',
     },
+  
+    summary: 'Glucagon for Severe Hypoglycemia — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -417,6 +449,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-hypo-other',
       },
     ],
+  
+    summary: 'Hypoglycemia - Underlying Cause — assess clinical status to guide next management decision',
   },
 
   {
@@ -447,6 +481,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1-2h initially. Admission required. Extended monitoring for glyburide.',
     },
+  
+    summary: 'Sulfonylurea-Induced Hypoglycemia — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -458,6 +494,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Duration of observation based on insulin type. Educate on cause. Adjust regimen if indicated. Consider endocrine follow-up.',
     citation: [7],
     confidence: 'definitive',
+  
+    summary: 'Insulin-Induced Hypoglycemia — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -469,6 +507,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Investigate underlying cause. Treat accordingly. Ensure appropriate observation period before discharge.',
     citation: [7, 9],
     confidence: 'recommended',
+  
+    summary: 'Hypoglycemia - Other Causes — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -483,6 +523,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     body: '**Glycemic targets for hospitalized patients:** [1][10]\n\n**General inpatient (non-ICU):**\n- Target: 140-180 mg/dL\n- Preprandial: <140 mg/dL\n- Random: <180 mg/dL\n- Avoid glucose <70 mg/dL (hypoglycemia)\n\n**ICU patients:**\n- Target: 140-180 mg/dL (same as general)\n- Previous target of 80-110 mg/dL abandoned due to increased hypoglycemia and mortality (NICE-SUGAR trial)\n\n**Stricter targets (110-140 mg/dL) may be appropriate for:**\n- Cardiac surgery patients\n- Stroke patients (avoid hyperglycemia)\n- Selected stable patients with low hypoglycemia risk\n\n**Less strict targets (>180-200 mg/dL) may be appropriate for:**\n- Terminal/palliative patients\n- Severe comorbidities\n- History of severe hypoglycemia\n- Limited life expectancy',
     citation: [1, 10, 11],
     next: 'dm-inpatient-regimen',
+  
+    summary: 'Inpatient Glucose Targets — review key clinical information before proceeding',
   },
 
   {
@@ -513,6 +555,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-npo-management',
       },
     ],
+  
+    summary: 'Inpatient Insulin Regimen Selection — assess clinical status to guide next management decision',
   },
 
   {
@@ -524,6 +568,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     citation: [1, 10],
     calculatorLinks: [{ id: 'sliding-scale-gen', label: 'Generate Sliding Scale' }],
     next: 'dm-basal-bolus-example',
+  
+    summary: 'Basal-Bolus-Correction Protocol — review key clinical information before proceeding',
   },
 
   {
@@ -554,6 +600,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose before meals and at bedtime (QID). Adjust TDD by 10-20% based on trends.',
     },
+  
+    summary: 'Basal-Bolus Example & Orders — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -576,6 +624,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1h while on drip. BMP q6-12h for potassium. Transition to SC: give basal 2-4h before stopping drip.',
     },
+  
+    summary: 'IV Insulin Drip Protocol — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -587,6 +637,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Type 1: Continue basal, hold bolus, monitor closely. Type 2: Continue basal at 75-100%, hold oral agents, correction scale PRN.',
     citation: [10],
     confidence: 'definitive',
+  
+    summary: 'NPO Diabetic Patient Management — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -617,6 +669,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose QID. Watch for afternoon/evening peaks. Adjust with steroid taper.',
     },
+  
+    summary: 'Steroid-Induced Hyperglycemia — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -647,6 +701,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-regimen-adjust',
       },
     ],
+  
+    summary: 'Outpatient Diabetes Management — assess clinical status to guide next management decision',
   },
 
   {
@@ -657,6 +713,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     body: '**First-line: Metformin** [5][13]\n\n[Metformin](#/drug/metformin/diabetes):\n- Start 500 mg daily with dinner, increase to 500 mg BID after 1 week\n- Target: 1000 mg BID (max 2550 mg/day)\n- GI side effects common initially (start low, titrate slow)\n- Contraindicated: eGFR <30, acute kidney injury, contrast within 48h\n- Hold if eGFR 30-45 (reassess)\n\n**Second-line agents (add to metformin if not at goal):**\n\n**SGLT2 Inhibitors** (empagliflozin, dapagliflozin, canagliflozin):\n- Cardiovascular and renal benefits (especially with HFrEF or CKD)\n- Weight loss\n- Risk: euglycemic DKA, UTI, genital yeast infections\n- Stop before surgery\n\n**GLP-1 Receptor Agonists** (semaglutide, liraglutide, dulaglutide):\n- Weight loss benefit\n- Cardiovascular benefit\n- GI side effects (nausea, vomiting)\n- Injectable or oral (semaglutide)\n\n**Sulfonylureas** (glipizide, glimepiride):\n- Inexpensive\n- Risk of hypoglycemia and weight gain\n- Avoid glyburide (long half-life, hypoglycemia risk)',
     citation: [5, 13],
     next: 'dm-oral-agents-choice',
+  
+    summary: 'Oral Diabetes Agents — review key clinical information before proceeding',
   },
 
   {
@@ -668,6 +726,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Metformin first-line. Add SGLT2i if HF/CKD, GLP-1 if weight loss/ASCVD. Avoid sulfonylureas if hypoglycemia risk.',
     citation: [5, 13],
     confidence: 'definitive',
+  
+    summary: 'Oral Agent Selection — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -679,6 +739,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     citation: [5],
     calculatorLinks: [{ id: 'tdd-estimator', label: 'Calculate Starting Dose' }],
     next: 'dm-outpatient-insulin-titration',
+  
+    summary: 'Outpatient Insulin Initiation — review key clinical information before proceeding',
   },
 
   {
@@ -710,6 +772,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
       },
       monitoring: 'Fasting glucose daily. Adjust every 3 days. Check A1c in 3 months.',
     },
+  
+    summary: 'Insulin Titration Protocol — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -721,6 +785,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Intensify therapy stepwise. Optimize current regimen before adding agents. Basal insulin often more effective than third oral agent.',
     citation: [5],
     confidence: 'recommended',
+  
+    summary: 'Adjusting Existing Regimen — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -750,6 +816,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
         next: 'dm-perioperative',
       },
     ],
+  
+    summary: 'Special Situations — assess clinical status to guide next management decision',
   },
 
   {
@@ -761,6 +829,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Calculate TDD from IV rate x 24 x 0.8. Give basal 2-4 hours before stopping drip. Never stop IV drip without basal coverage.',
     citation: [10],
     confidence: 'definitive',
+  
+    summary: 'IV to SC Insulin Transition — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -772,6 +842,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Ensure clear medication instructions, adequate supplies, hypoglycemia education, sick-day rules, and close follow-up.',
     citation: [14],
     confidence: 'definitive',
+  
+    summary: 'Diabetes Discharge Planning — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -783,6 +855,8 @@ export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [
     recommendation: 'Continue basal insulin, hold bolus/orals day of surgery. IV insulin for major surgery. Transition to SC when eating.',
     citation: [15],
     confidence: 'definitive',
+  
+    summary: 'Perioperative Diabetes Management — determine disposition and follow-up plan based on clinical findings',
   },
 
 ];

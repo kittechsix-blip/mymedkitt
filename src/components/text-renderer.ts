@@ -4,7 +4,6 @@
 import { showInfoModal } from './info-page.js';
 import { showDrugModal } from './drug-store.js';
 import { router } from '../services/router.js';
-import { isQuickFireMode } from './quick-fire-mode.js';
 
 /** Append text to a parent element, converting **bold** markers to <strong> elements. */
 export function appendBoldAware(parent: HTMLElement, text: string): void {
@@ -31,104 +30,12 @@ export function appendBoldAware(parent: HTMLElement, text: string): void {
  *  [text](#/calculator/id), [text](#/tree/id), [text](https://url) links, and [N] citation refs. */
 export function renderBodyText(container: HTMLElement, text: string): void {
   const lines = text.split('\n');
-
-  // Quick Fire grouping only applies when mode is ON
-  const useQuickFire = isQuickFireMode();
-
-  if (!useQuickFire) {
-    // Normal mode: plain paragraphs, no qf wrappers
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed) continue;
-      const p = document.createElement('p');
-      renderLineWithLinksAndCitations(p, trimmed);
-      container.appendChild(p);
-    }
-    return;
-  }
-
-  // Quick Fire mode: group by bold headings with collapsible content
-  let currentSection: { heading: string; content: string[] } | null = null;
-  const sections: Array<{ type: 'heading-section'; heading: string; content: string[] } |
-                        { type: 'link-line'; line: string } |
-                        { type: 'plain'; line: string }> = [];
-
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
-
-    const isBoldHeading = /\*\*.+?\*\*/.test(trimmed);
-    // ALL CAPS lines (3+ chars, letters/spaces/punctuation) are also headings
-    const isAllCapsHeading = !isBoldHeading && /^[A-Z][A-Z \/'&(),+\u2013-]{2,}$/.test(trimmed);
-    const isHeading = isBoldHeading || isAllCapsHeading;
-    const hasLink = /\[.+?\]\(.+?\)/.test(trimmed);
-
-    if (isHeading) {
-      if (currentSection) {
-        sections.push({ type: 'heading-section', ...currentSection });
-      }
-      currentSection = { heading: trimmed, content: [] };
-    } else if (currentSection) {
-      currentSection.content.push(trimmed);
-    } else if (hasLink) {
-      sections.push({ type: 'link-line', line: trimmed });
-    } else {
-      sections.push({ type: 'plain', line: trimmed });
-    }
-  }
-
-  if (currentSection) {
-    sections.push({ type: 'heading-section', ...currentSection });
-  }
-
-  for (const section of sections) {
-    if (section.type === 'link-line') {
-      // Links always visible
-      const p = document.createElement('p');
-      p.classList.add('qf-essential');
-      renderLineWithLinksAndCitations(p, section.line);
-      container.appendChild(p);
-
-    } else if (section.type === 'heading-section') {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'qf-section';
-
-      // Bold heading - always visible
-      const heading = document.createElement('p');
-      heading.className = 'qf-heading';
-      renderLineWithLinksAndCitations(heading, section.heading);
-      wrapper.appendChild(heading);
-
-      // Small expandable card + hidden content
-      if (section.content.length > 0) {
-        const expandCard = document.createElement('div');
-        expandCard.className = 'qf-expand-card';
-
-        const content = document.createElement('div');
-        content.className = 'qf-content';
-        for (const contentLine of section.content) {
-          const p = document.createElement('p');
-          renderLineWithLinksAndCitations(p, contentLine);
-          content.appendChild(p);
-        }
-
-        wrapper.appendChild(expandCard);
-        wrapper.appendChild(content);
-
-        expandCard.addEventListener('click', (e) => {
-          e.stopPropagation();
-          wrapper.classList.toggle('qf-expanded');
-        });
-      }
-
-      container.appendChild(wrapper);
-
-    } else {
-      // Plain text before any heading — stays visible (no collapse)
-      const p = document.createElement('p');
-      renderLineWithLinksAndCitations(p, section.line);
-      container.appendChild(p);
-    }
+    const p = document.createElement('p');
+    renderLineWithLinksAndCitations(p, trimmed);
+    container.appendChild(p);
   }
 }
 

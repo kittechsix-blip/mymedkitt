@@ -41,6 +41,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-history',
       },
     ],
+  
+    summary: 'Acute vs chronic, bloody vs watery — most acute diarrhea is self-limited and needs only hydration',
   },
 
   {
@@ -51,6 +53,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: '**Immediate interventions:**\n• **ABCs** — secure airway if altered mental status\n• **2 large-bore IVs** — NS or LR bolus 20 mL/kg\n• **Cardiac monitor** — assess for arrhythmia from electrolyte derangement\n• **POC glucose** — hypoglycemia common in pediatric patients\n\n**Assess for sepsis:**\n• Fever + tachycardia + hypotension → septic diarrhea until proven otherwise\n• **Lactate**, **blood cultures** if sepsis suspected\n• Broad-spectrum antibiotics per sepsis protocol if indicated\n\n**Labs:** CBC, BMP (electrolytes, renal function, glucose), lactate, blood cultures, type & screen if severe anemia suspected\n\nOnce stabilized, proceed with targeted history.',
     citation: [1],
     next: 'diarrhea-history',
+  
+    summary: 'Resuscitation — review key clinical information before proceeding',
   },
 
   {
@@ -71,6 +75,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-mild',
       },
     ],
+  
+    summary: 'Targeted History & Red Flag Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -106,6 +112,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Red Flag Category — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -120,6 +128,10 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: '**Differential diagnosis:**\n• **Shigella** — fever, bloody mucoid stool, tenesmus\n• **Salmonella** — fever, cramping, may be bloody\n• **Campylobacter** — fever, headache, bloody diarrhea 2-5 days after exposure\n• **E. coli O157:H7 (EHEC/STEC)** — bloody diarrhea, often afebrile, undercooked beef or unpasteurized products\n• **C. difficile** — recent antibiotic use, can be bloody\n• **IBD** — chronic/recurrent, family history\n• **Ischemic colitis** — elderly, vascular disease, severe pain\n\n[Differential Diagnosis Pitfalls](#/info/diarrhea-ddx-pitfalls)\n\n⚠️ **CRITICAL — Shiga toxin-producing E. coli (STEC):**\n• Do **NOT** give antibiotics if STEC suspected — increases risk of **hemolytic uremic syndrome (HUS)**\n• Do **NOT** give antimotility agents — delays pathogen clearance\n• Suspect STEC: bloody diarrhea + afebrile + history of undercooked beef or unpasteurized products\n\n**Mandatory workup:** stool culture, CBC with platelets (screen for HUS), BMP',
     citation: [1, 2, 5],
     next: 'diarrhea-labs',
+  
+    summary: 'Bloody diarrhea: consider STEC (avoid antibiotics — HUS risk), Shigella, Salmonella, C. diff, IBD',
+    skippable: true,
+    safetyLevel: 'warning',
   },
 
   {
@@ -130,6 +142,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: 'Temperature **>38.5°C (101.3°F)** usually indicates intestinal inflammation from **invasive bacteria** (Shigella, Salmonella, Campylobacter) or toxin-producing organisms (C. difficile, Entamoeba histolytica).\n\n**Workup:**\n• **Fecal leukocytes or fecal lactoferrin** — screens for inflammatory diarrhea\n• **Stool culture** — indicated when fever + positive fecal markers\n• **C. difficile toxin** — if antibiotic use in past 3 months\n• **CBC, BMP** — assess for leukocytosis, electrolyte derangement, renal function\n\n[Empiric Antibiotic Criteria](#/info/diarrhea-abx-criteria)\n\nFecal lactoferrin is **more sensitive** than fecal leukocytes for detecting invasive pathogens and does not require a fresh specimen.',
     citation: [1, 2, 4],
     next: 'diarrhea-labs',
+  
+    summary: 'Febrile Diarrhea — review key clinical information before proceeding',
   },
 
   {
@@ -140,6 +154,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: '[Dehydration Assessment Guide](#/info/diarrhea-dehydration-assessment)\n\n**Adults:**\n• **Dry axilla** — supports hypovolemia diagnosis\n• **Moist mucous membranes + tongue without furrows** — argues against hypovolemia\n• Capillary refill and skin turgor have **no proven diagnostic value** in adults\n• Orthostatic vitals, BUN/Cr ratio\n\n**Children:**\n• **Acute body weight change** — best measure of dehydration\n• Mucous membrane hydration, capillary refill >2 sec, absence of tears, altered mental status — next best measures\n• Sunken anterior fontanelle in infants\n\n**IV rehydration:**\n• NS or LR bolus 20 mL/kg, repeat as needed\n• Monitor urine output as marker of volume status\n• BMP for electrolyte correction\n• Reassess after each bolus',
     citation: [1, 3],
     next: 'diarrhea-labs',
+  
+    summary: 'Severe dehydration: NS/LR bolus 20 mL/kg — mild-moderate: oral rehydration with WHO ORS solution',
   },
 
   {
@@ -150,6 +166,9 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: 'HIV/AIDS, transplant recipients, chemotherapy, chronic steroids, and other immunocompromised patients have a **broader differential** and require **more aggressive workup**.\n\n**Additional pathogens to consider:**\n• Cryptosporidium, Microsporidium, Isospora — profuse watery diarrhea, weight loss\n• CMV — bloody diarrhea in advanced disease\n• Mycobacterium avium complex (MAC) — chronic diarrhea, advanced HIV\n• GI malignancies — lymphoma, Kaposi sarcoma\n\n**Workup:**\n• Stool culture (standard pathogens)\n• C. difficile toxin assay\n• **Ova and parasites** — indicated in this population\n• CBC, BMP, lactate\n• Consider CD4 count if HIV status unknown\n\n**Disposition:** Lower threshold for admission. Consider early GI or infectious disease consultation. If stool studies negative, endoscopy referral may be needed for definitive diagnosis.',
     citation: [1, 4, 5],
     next: 'diarrhea-labs',
+  
+    summary: 'Immunocompromised Patient — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -160,6 +179,9 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: 'Diarrhea can be a presenting feature of several **surgical emergencies**. Maintain high suspicion in patients with severe abdominal pain.\n\n[Differential Diagnosis Pitfalls](#/info/diarrhea-ddx-pitfalls)\n\n**Appendicitis:**\n• Vomiting typically **follows** pain (in gastroenteritis, vomiting **precedes** pain)\n• 1-2 loose stools (not voluminous like gastroenteritis)\n• 15% of appendices are in atypical locations\n• 27% of children initially misdiagnosed — diarrhea is a common confounding symptom\n• Serial exams improve diagnostic accuracy\n\n**Ischemic bowel:**\n• Consider in adults **>50 years** or with peripheral vascular disease\n• Severe pain out of proportion to exam\n• Voluminous diarrhea (small bowel ischemia) or bloody diarrhea (ischemic colitis)\n• Risk factors: arrhythmias, CHF, vasoconstrictors, cocaine\n• Occult blood in up to 75% of patients\n\n**Other surgical causes:** bowel obstruction, toxic megacolon, diverticulitis, intussusception (pediatric)\n\n**CT abdomen/pelvis** indicated for surgical concern. If surgical etiology identified → surgical consult.',
     citation: [1, 2],
     next: 'diarrhea-labs',
+  
+    summary: 'Surgical Differential — review key clinical information before proceeding',
+    skippable: true,
   },
 
   // =====================================================================
@@ -190,6 +212,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-treatment',
       },
     ],
+  
+    summary: 'Diagnostic Evaluation — assess clinical status to guide next management decision',
   },
 
   {
@@ -200,6 +224,9 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     body: '**Suspect C. difficile if:**\n• Antibiotic use in past **3 months** (especially clindamycin, fluoroquinolones, cephalosporins)\n• Recent hospitalization or nursing home residence\n• Diarrhea developing **≥3 days after hospitalization** (C. diff testing has 15-20% yield in nosocomial diarrhea vs <5% for standard stool cultures)\n\n**Testing:**\n• **C. difficile toxin assay** — preferred: NAAT (PCR) or GDH + toxin two-step algorithm\n• Toxin A/B immunoassay alone has lower sensitivity\n\n**Key management:**\n• **STOP the offending antibiotic** if possible\n• Start empiric treatment if strong clinical suspicion — stop if toxin assay returns negative\n\n**Severity classification:**\n• **Non-severe:** WBC ≤15K, Cr <1.5\n• **Severe:** WBC >15K, Cr >1.5, albumin <3\n• **Fulminant:** hypotension, ileus, megacolon → surgical consult',
     citation: [1, 5, 6],
     next: 'diarrhea-cdiff-treatment',
+  
+    summary: 'C. diff: stop offending antibiotic, oral vancomycin 125mg QID x 10d — avoid loperamide in severe cases',
+    safetyLevel: 'warning',
   },
 
   {
@@ -230,6 +257,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'WBC, creatinine, clinical response. Surgical consult for fulminant cases (hypotension, ileus, megacolon).',
     },
+  
+    summary: 'C. difficile Treatment — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -253,6 +282,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-travelers-severe',
       },
     ],
+  
+    summary: 'Traveler diarrhea: azithromycin 1g single dose or 500mg daily x 3d — avoid fluoroquinolones in SE Asia',
   },
 
   {
@@ -283,6 +314,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Symptom resolution, hydration status. Return if bloody diarrhea, fever, or symptoms worsen.',
     },
+  
+    summary: 'Mild Traveler\ — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -313,6 +346,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Clinical response, hydration status. Avoid loperamide if bloody diarrhea or high fever.',
     },
+  
+    summary: 'Moderate-Severe Traveler\ — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -337,6 +372,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-empiric-abx',
       },
     ],
+  
+    summary: 'Treatment Approach — assess clinical status to guide next management decision',
   },
 
   {
@@ -367,6 +404,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Hydration status, symptom resolution. Return precautions for bloody stool, high fever, worsening symptoms.',
     },
+  
+    summary: 'Mild / Self-Limited Diarrhea — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -396,6 +435,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Urine output, vitals, oral tolerance. Assess for empiric antibiotic criteria.',
     },
+  
+    summary: 'Moderate Diarrhea Treatment — review key clinical information before proceeding',
   },
 
   {
@@ -426,6 +467,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Clinical response, stool culture results. Do NOT give antibiotics if STEC (E. coli O157:H7) suspected.',
     },
+  
+    summary: 'Empiric Antibiotic Therapy — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -456,6 +499,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
         next: 'diarrhea-disposition',
       },
     ],
+  
+    summary: 'Special Population Considerations — assess clinical status to guide next management decision',
   },
 
   {
@@ -486,6 +531,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Hydration status, fetal well-being. Low threshold for admission if unable to maintain oral hydration. AVOID fluoroquinolones and TMP-SMX.',
     },
+  
+    summary: 'Diarrhea in Pregnancy — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -508,6 +555,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
       },
       monitoring: 'Oral rehydration tolerance, hydration status, urine output. If STEC suspected: platelet count, hemolytic anemia, renal function. Do NOT give antimotility agents or antibiotics if STEC suspected.',
     },
+  
+    summary: 'Pediatric: oral rehydration is cornerstone — ondansetron 0.15 mg/kg facilitates oral rehydration success',
   },
 
   {
@@ -519,6 +568,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Higher suspicion for serious etiologies. Lower threshold for CT, admission, and surgical consult. Careful rehydration in those with cardiac/renal disease.',
     confidence: 'recommended',
     citation: [1, 2, 7],
+  
+    summary: 'Diarrhea in the Elderly — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -530,6 +581,8 @@ export const DIARRHEA_NODES: DecisionNode[] = [
     recommendation: 'Discharge stable patients who tolerate oral fluids with clear return precautions. Admit those failing ED treatment, immunocompromised, or with diagnostic uncertainty.',
     confidence: 'definitive',
     citation: [1, 2],
+  
+    summary: 'Discharge if tolerating ORT, no dehydration, reliable follow-up; admit if severe dehydration or bloody + toxic',
   },
 
 ];

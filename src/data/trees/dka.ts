@@ -37,6 +37,8 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-exclude',
       },
     ],
+    summary: 'Confirm triad: hyperglycemia + ketonemia (BOHB >3) + acidosis (pH <7.3). Watch for euglycemic DKA with SGLT2i.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -47,6 +49,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Initial labs for suspected DKA:**\n\n**Acid-base & Electrolytes:**\n• Arterial or venous blood gas — pH, HCO3 (reliable on VBG for pH and HCO3)\n• Anion gap = Na - (Cl + HCO3). Normal ~10-12. AG >12-14 suggests metabolic acidosis. [2]\n• BMP: sodium, potassium, chloride, glucose, BUN, creatinine\n\n**Ketone Assessment (most important for diagnosis):**\n• **β-hydroxybutyrate (most specific):** >3 mmol/L = DKA confirmed, 1-3 = moderate ketosis (investigate further), <1 = unlikely DKA [1][2]\n• Serum/urine acetoacetate (rapid but less specific)\n• Urine dipstick ketones (insensitive, may miss euglycemic DKA)\n\n**Other critical labs:**\n• CBC with differential, lactate, phosphate, magnesium\n• Urinalysis with culture\n• Blood cultures if infection suspected\n• ECG (assess for peaked T-waves from hyperkalemia)\n• Pregnancy test in reproductive-age females\n\n**Imaging:**\n• Chest X-ray if infection suspected or respiratory distress\n• Abdominal imaging only if surgical abdomen suspected (DKA itself causes abd pain)\n\n**β-hydroxybutyrate correlation with severity:** >6 mmol/L = severe DKA (2024 ADA/EASD/JBDS). [1][3]',
     citation: [1, 2, 3],
     next: 'dka-bohb-interpret',
+    summary: 'Order VBG, BMP, BOHB, lactate, UA, cultures, ECG. BOHB >3 confirms DKA, >6 = severe.',
+    skippable: true,
   },
 
   {
@@ -74,6 +78,7 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-exclude',
       },
     ],
+    summary: 'BOHB is the gold standard — urine dipstick misses DKA. >3 confirms, 1-3 investigate, <1 excludes.',
   },
 
   {
@@ -101,6 +106,8 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-euglycemic',
       },
     ],
+    summary: 'Differentiate early DKA vs alcoholic/starvation ketoacidosis vs euglycemic DKA by glucose level.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -111,6 +118,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**If BOHB 1-3 mmol/L with glucose <150 and AG acidosis:**\n\n**Likely diagnoses:**\n• **Alcoholic ketoacidosis:** Heavy alcohol use, recent cessation, minimal hyperglycemia, often hypoglycemic. Treatment: dextrose + fluids, NOT insulin. [5]\n• **Starvation ketosis:** Prolonged fasting, minimal hyperglycemia, normal lactate. Resolves with oral intake/dextrose.\n• **Lactic acidosis:** Check lactate level (>2-4 mmol/L). Elevated lactate + AG acidosis. Different treatment paradigm.\n\n**Management:**\n• Hold insulin — may worsen hypoglycemia in alcoholic ketoacidosis\n• Start [D5W or D50 bolus](#/drug/dextrose/hypoglycemia) — glucose correction is primary therapy\n• IV fluids: NS ± dextrose, thiamine 100 mg IV (25% of patients are thiamine deficient)\n• Address underlying cause\n• Do NOT treat as DKA — insulin protocol inappropriate\n\n**Lactate check essential:** Lactate >4 mmol/L suggests lactic acidosis requiring different management.',
     recommendation: 'Do not initiate DKA insulin protocol. Give dextrose, IV fluids, thiamine. Hold insulin if hypoglycemic. Treat underlying cause. Lactate level determines lactic acidosis diagnosis.',
     citation: [5, 12],
+    summary: 'NOT DKA — give dextrose + thiamine, hold insulin. Alcoholic ketoacidosis worsens with insulin.',
+    safetyLevel: 'critical',
     treatment: {
       firstLine: {
         drug: 'Dextrose 50% (D50)',
@@ -140,6 +149,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**If BOHB <1 mmol/L or absence of AG acidosis:**\n\n**Alternative diagnoses to consider:**\n• **Hyperglycemic hyperosmolar state (HHS):** Glucose >600, osmolality >320, minimal ketonemia. Risk factors: older age, renal impairment, medication-induced. [9]\n• **Diabetic hyperglycemia without ketoacidosis:** Mild hyperglycemia, stress hyperglycemia, or medication-related\n• **Non-diabetic AG acidosis:** Lactic acidosis, methanol/ethylene glycol toxicity, salicylate poisoning, uremia\n\n**Management:**\n• Treat underlying cause and hyperglycemia\n• Do NOT use aggressive DKA insulin protocol\n• IV fluids, electrolyte monitoring\n• Endocrinology or toxicology consultation PRN\n\n**If HHS suspected:** Slower glucose correction (50 mg/dL/hr), careful fluid balance given osmolality risk.',
     recommendation: 'Exclude DKA confirmed. Identify alternative diagnosis. Adjust treatment accordingly.',
     citation: [1, 9],
+    summary: 'DKA excluded — consider HHS (glucose >600, osm >320), lactic acidosis, or toxic ingestion.',
   },
 
   // =====================================================================
@@ -173,6 +183,7 @@ export const DKA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Classify by pH/HCO3/BOHB: mild (7.25-7.30), moderate (7.00-7.24), severe (<7.00). Severe = ICU.',
   },
 
   {
@@ -195,6 +206,8 @@ export const DKA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Screen for HD, pregnancy, SGLT2i, pump user, HF — each requires modified fluid/insulin protocol.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -224,6 +237,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous cardiac monitor. Labs q1-2h. ICU admission mandatory.',
     },
+    summary: 'pH <7.0 = immediate parallel resuscitation: 2 IVs, NS bolus, check K+ before insulin, ICU.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -234,6 +249,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**High-risk populations require protocol modifications to prevent harm:**\n\n**Hemodialysis patients:**\n• Problem: Often euvolemic/hypervolemic; aggressive fluid resuscitation causes volume overload, pulmonary edema, hypertension\n• Solution: Target fluid resuscitation carefully; may only need insulin + modest fluids + dextrose\n• Insulin: Same 0.1 U/kg/hr drip protocol\n• Dialysis: Consider during severe DKA for K removal, HCO3 correction, acidosis clearance\n• Potassium: Very restricted; use [potassium acetate](#/drug/potassium-acetate/DKA) preferentially over KCl\n• Resolution marker: Use BOHB <1 mmol/L, not AG normalization (AG may not normalize in renal disease)\n\n**SGLT2 inhibitor-associated & Euglycemic DKA:**\n• Discontinue SGLT2i permanently — high recurrence risk\n• Lower glucose threshold for suspicion (<200 acceptable)\n• Same insulin + fluid protocol as classic DKA\n• Earlier basal glargine to prevent recurrence\n\n**Pregnancy:**\n• Higher risk, lower glucose threshold\n• Continuous fetal monitoring\n• Obstetric & endocrinology co-management\n• Insulin demand increases significantly in third trimester — may need 10-20 U/kg/day\n• Avoid bicarb if pH >6.9\n\n**Insulin pump users:**\n• Rapid onset — often severe at presentation (4-8h from failure to severe DKA)\n• [Detailed pump troubleshooting protocol](#node/dka-insulin-pump) in Module 7\n• Check pump function, infusion site, reservoir, tubing\n• Aggressive insulin dosing (IV drip + basal glargine early)\n• Decision: suspend pump vs continue with increased basal\n\n**Details for each path available in Module 7.**',
     citation: [1, 10, 11, 13, 14],
     next: 'dka-precipitant-screen',
+    summary: 'HD = restrict fluids/K+. SGLT2i = permanently discontinue. Pregnancy = fetal monitoring + OB/endo.',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -248,6 +265,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Common triggers for DKA — "Five Is" framework:** [1][2][3]\n\n• **Infection (30-40%):** Most common. Bacterial infection in adults (UTI, aspiration pneumonia, meningitis), viral in children. Fever, WBC >20-25k, bands elevated, CRP >70, lactate >2.\n• **Ischemia/Infarction:** Myocardial infarction, stroke, mesenteric ischemia. High mortality.\n• **Insulin noncompliance (20-30%):** Missed injections, running out of insulin, deliberate reduction, cost/access issues.\n• **Intoxication:** Alcohol withdrawal, cocaine, other drugs. Rare direct DKA cause but common precipitant of noncompliance.\n• **Iatrogenic (10-20%):** Steroid use (high-dose corticosteroids, IVIG), SGLT2 inhibitors, some antipsychotics (clozapine), thiazide diuretics.\n\n**~10% have no identifiable precipitant.** [1]\n\n**Workup steps:**\n1. History: Fever? Missed insulin? Recent medication changes? Alcohol use? Sick days?\n2. Vitals: Fever, tachycardia, hypotension?\n3. Labs from diagnostic workup: WBC, bands, lactate, UA for pyuria/nitrites, blood cultures, CXR\n4. Abdominal exam: Severe pain out of proportion to mild ketoacidosis argues AGAINST DKA as primary cause',
     citation: [1, 2, 3, 7],
     next: 'dka-infection-screen',
+    summary: 'Use "Five Is": Infection (30%), Insulin noncompliance, Ischemia, Intoxication, Iatrogenic (SGLT2i/steroids).',
+    skippable: true,
   },
 
   {
@@ -270,6 +289,7 @@ export const DKA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Any fever in DKA = infection until proven otherwise. Check WBC, lactate, NLR, cultures, UA, CXR.',
   },
 
   {
@@ -307,6 +327,7 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'WBC, procalcitonin, lactate q4-6h. Blood cultures before antibiotics. Repeat lactate in 2-4 hrs. Vancomycin troughs.',
     },
+    summary: 'Start empiric antibiotics immediately — do NOT wait for cultures. CTX + azithro; add vanc if HAP/immunocompromised.',
   },
 
   {
@@ -339,6 +360,7 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-fluid-management',
       },
     ],
+    summary: 'Assess noncompliance (cost/access), SGLT2i/steroids, cardiac ischemia, new-onset DM, or substance use.',
   },
 
   {
@@ -349,6 +371,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**High recurrence risk in noncompliance-triggered DKA — requires intervention:**\n\n**During acute phase:**\n• Provide insulin pen/vial supply before discharge\n• Refer to social work/case management for insulin access programs\n• If cost is barrier: Samples from clinic, 340B pharmacy programs, manufacturer copay assistance programs\n• If access/storage: Distribute to safe location, deliver to home\n\n**Diabetes education:**\n• Reinforce sick-day insulin rules: NEVER stop insulin, even if vomiting\n• Recognition of early DKA symptoms (nausea, abdominal pain, dyspnea)\n• Insulin storage, rotation, injection technique\n\n**Follow-up plan:**\n• Endocrinology or primary care within 1-2 weeks\n• Consider insulin pump if basal-bolus noncompliance (single daily pump may improve adherence)\n• Behavioral health assessment if intentional noncompliance\n\n**Special consideration:** Recurrent DKA (>2 episodes/year) may indicate mental health crisis, substance use, or homelessness — screening essential. [1][5]',
     citation: [1, 5],
     next: 'dka-fluid-management',
+    summary: 'High recurrence risk — ensure insulin supply, sick-day rules, and social work referral before discharge.',
+    skippable: true,
   },
 
   {
@@ -359,6 +383,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Remove or modify offending agent if possible:**\n\n**Steroids:**\n• If high-dose (prednisone >20 mg/day): Taper rapidly if clinically feasible\n• If essential (cancer, autoimmune): Continue, increase insulin doses significantly (may need 10-50% increase or more)\n• Educate on insulin adjustment with steroid taper\n\n**SGLT2 Inhibitors:**\n• **PERMANENTLY discontinue** — euglycemic DKA recurrence risk very high [10][11]\n• Document in allergy section: \"SGLT2i-associated DKA\"\n• Switch to alternative agent (GLP-1 agonist, DPP-4 inhibitor, sulfonylurea if renal function adequate)\n• Counsel on euglycemic DKA risk if SGLT2i restarted\n\n**Antipsychotics:**\n• If clozapine: Consider switch to other agent if DKA recurs\n• Avoid if possible, but if essential for psychiatric stability: Continue with close monitoring\n• Increase insulin doses\n\n**Thiazides & Loop Diuretics:**\n• May worsen hyperglycemia; consider alternative BP agent if possible\n• ACE inhibitor or ARB preferred in diabetes\n\n**Follow-up:** Ensure new medications are not restarted without endocrinology input.',
     citation: [1, 10, 11],
     next: 'dka-fluid-management',
+    summary: 'SGLT2i = permanently discontinue. Steroids = increase insulin significantly. Document as allergy.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -369,6 +395,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**DKA in setting of possible ischemia has very high mortality (~30-50%).**\n\n**Myocardial infarction:**\n• Troponin I or T (high sensitivity preferred) — check at 0, 3, 6 hours\n• Serial EKG\n• Echocardiography if ejection fraction uncertain (affects fluid management)\n• Consider cardiology consultation\n• Management: Cautious fluid resuscitation (HFrEF risk with aggressive fluids), insulin therapy, possible IABP/mechanical support\n\n**Cerebral vascular accident:**\n• Head CT (r/o hemorrhage) if altered MS or focal neuro findings\n• Consider hyperglycemia as risk factor for worse stroke outcome\n• Glucose control essential but avoid overcorrection (>50-70 mg/dL/hr glucose drop)\n\n**Mesenteric ischemia:**\n• Severe abdominal pain with minimal exam findings (pain out of proportion)\n• Elevated lactate >5, worsening metabolic acidosis despite insulin therapy\n• CT angiography abdomen/pelvis if suspicion high\n• Surgery consultation if imaging confirms ischemia\n\n**Mortality drivers:** Ischemic events account for 10-15% of DKA deaths. Early recognition and specialist input reduce mortality.',
     citation: [1, 2, 5],
     next: 'dka-fluid-management',
+    summary: 'DKA + ischemia = 30-50% mortality. Serial troponin, ECG, CT angio if mesenteric ischemia suspected.',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -402,6 +430,7 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'HR, BP, UOP q1-2h. POCUS if HF/ESRD/pregnancy. Switch to "drop and split" when glucose <300.',
     },
+    summary: 'NS bolus 500-1000 mL first, then 150-200 mL/hr. Most patients 5-8L depleted. Caution in HF/ESRD.',
   },
 
   {
@@ -423,6 +452,8 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-drop-split-protocol',
       },
     ],
+    summary: 'At glucose <=300: "Drop and Split" — cut NS in half, add D10W at equal rate. Never delay dextrose.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -433,6 +464,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Continue **normal saline** at 150-200 mL/hr.**\n\nMonitoring:\n• Recheck glucose q1-2h (expect 50-70 mg/dL/hr drop with insulin therapy running)\n• UOP goal: 0.5-1 mL/kg/hr\n• When glucose reaches ≤300 → **IMMEDIATELY switch to "Drop and Split"** (see next node)\n• Do NOT delay dextrose addition — hypoglycemia risk as pH normalizes and insulin continues\n\nCommon error: Continuing NS after glucose drops below 300 → severe iatrogenic hypoglycemia despite ongoing acidosis. This is a critical transition point.\n\nRe-evaluate: Any signs of volume overload (crackles, JVD, pulmonary edema)? Reduce rate to 100 mL/hr. Any hypotension despite fluids? Reassess for cardiogenic shock, sepsis, or need for vasopressors.',
     citation: [1, 5],
     next: 'dka-potassium-check',
+    summary: 'Continue NS at 150-200 mL/hr. Switch to Drop and Split the moment glucose hits 300 — common error point.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -462,6 +495,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1-2h. If glucose <150, increase D10W rate. If glucose >300, switch back to full NS. NEVER stop insulin for low glucose.',
     },
+    summary: 'Cut NS in half, add D10W at equal rate. NEVER stop insulin for low glucose — increase dextrose instead.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -472,6 +507,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Hemodialysis patients often euvolemic or hypervolemic — aggressive fluids cause harm:**\n\n**Assessment:**\n• POCUS or clinical exam: JVD, edema, crackles?\n• Weight compared to dry weight\n• Recent dialysis: When was last session? Any fluid removal?\n\n**Modified fluid strategy:**\n• Very cautious initial bolus: 250-500 mL NS only if hypotensive\n• Maintenance: Minimal — often 50-100 mL/hr NS (smaller total than non-HD DKA)\n• Often can omit separate fluids if on scheduled HD during DKA treatment\n\n**Insulin + dextrose approach:**\n• Start insulin drip per standard protocol (0.1 U/kg/hr)\n• Add [D10W or D5W](#/drug/dextrose/) to provide calories/glucose without volume burden\n• Minimal or no NS — insulin + dextrose often sufficient\n\n**Potassium management:**\n• Very restricted — DO NOT supplement even if K normal (paradoxically rises with acidosis correction)\n• Use [potassium acetate](#/drug/potassium-acetate/DKA) if any supplementation necessary (preferred over KCl to reduce Cl load)\n\n**Dialysis timing:**\n• Consider dialysis during severe DKA (pH <6.9, K >6.5, bicarb <5) for acid/K removal and hemodynamic support\n• Coordinate with nephrology\n\n**Resolution:** Use BOHB <1 mmol/L (not AG normalization) as stopping point.',
     recommendation: 'Minimal fluid resuscitation in HD patient. Insulin + dextrose protocol. Restricted K. Consider dialysis for severe DKA. Coordinate with nephrology.',
     citation: [1, 2, 14],
+    summary: 'HD patient: minimal fluids (risk pulm edema), restrict K+, use BOHB not AG for resolution, consider dialysis.',
+    safetyLevel: 'warning',
     treatment: {
       firstLine: {
         drug: 'Regular insulin IV drip + Dextrose 10%',
@@ -522,6 +559,8 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-insulin-start',
       },
     ],
+    summary: 'HOLD insulin if K+ <3.3 — giving insulin with low K+ causes fatal arrhythmia. Replete K+ first.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -551,6 +590,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous cardiac monitor. K level q1-2h during aggressive repletion. EKG for peaked T-waves, prolonged PR. Do NOT start insulin until K >3.3.',
     },
+    summary: 'KCl 20-40 mEq/hr IV until K+ >3.3. Do NOT start insulin until repleted — fatal arrhythmia risk.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -561,6 +602,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Once K >3.3, insulin infusion can now be started safely.**\n\nBut REMEMBER: Insulin will lower K further. You must:\n• Continue potassium supplementation DURING insulin therapy\n• Target serum K >5 mEq/L during acute phase (normal renal function)\n• Check K q1-2h × 4-6 hrs, then q4h\n• Adjust K supplementation based on trending\n\n**Proceed to DKA insulin protocol (next node).**',
     citation: [1, 5],
     next: 'dka-insulin-start',
+    summary: 'K+ now >3.3 — safe to start insulin, but continue K+ repletion concurrently. Target K+ >5 during treatment.',
   },
 
   {
@@ -590,6 +632,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'Glucose q1-2h. Goal drop 50-70 mg/dL/hr. K level q2h. NEVER stop insulin for low glucose. Give dextrose instead.',
     },
+    summary: 'Regular insulin 0.1 U/kg/hr IV. Goal glucose drop 50-70/hr. NEVER stop insulin — give dextrose instead.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -619,6 +663,7 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'Continue IV drip until DKA resolved. Give basal at least 2 hrs before stopping drip. Glucose q4-6h once on SC insulin only.',
     },
+    summary: 'Give glargine 0.25 U/kg SC within 6-12h of admission — prevents rebound DKA when IV drip stops.',
   },
 
   // =====================================================================
@@ -652,6 +697,7 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'K q1-2h x6h then q4h. Mg/Phos q4-6h. Glucose q1-2h. VBG q2-4h. EKG if K abnormal.',
     },
+    summary: 'Target K+ >5 during treatment. Replace Mg/Phos if low. Give thiamine 100 mg IV on admission.',
   },
 
   {
@@ -673,6 +719,8 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-nagma-treatment',
       },
     ],
+    summary: 'Check for hyperchloremic acidosis (Cl >110) delaying recovery. Predicted final HCO3 = Na - Cl - 10.',
+    safetyLevel: 'warning',
   },
 
   {
@@ -702,6 +750,7 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'BMP q2-4h. Watch sodium for hypernatremia. Continue insulin and K repletion. Goal HCO3 >18-20.',
     },
+    summary: 'IV bicarb for NAGMA once AG <12: isotonic preferred, hypertonic if urgent. Watch for hypernatremia.',
   },
 
   {
@@ -712,6 +761,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**ALL of the following criteria must be met to stop IV insulin and transition to SC insulin:**\n\n**Stopping criteria (modified from ADA 2024):** [1]\n1. **Anion gap <12** (essentially normalized, or approaching normal for chronic renal disease)\n2. **Serum bicarbonate ≥18 mEq/L** (or ≥15-20 if NAGMA present, pH >7.30)\n3. **Basal insulin given** (glargine or equivalent) at least 2 hours prior to stopping drip — ensures 24-hour coverage\n4. **Glucose <250 mg/dL** (well-controlled)\n5. **Patient tolerate oral intake** (able to eat, holding down food/fluids) — critical for transition to meal-associated insulin\n\n**Do NOT stop insulin if:**\n• Any single criterion not met\n• Patient still vomiting — cannot absorb SC insulin\n• Acidosis worsening or not improving\n• K still critically low despite repletion\n\n**Transition protocol:**\n• Once all criteria met, stop IV insulin drip\n• Continue basal glargine (given on admission)\n• Start meal-time insulin: regular insulin or rapid-acting (aspart, lispro) with meals\n• Sliding scale insulin for glucose >150: 2-4 units per 50 mg/dL above 150\n• Target glucose 120-180 mg/dL during hospitalization\n\n**Timing:** Usually 12-24 hours from presentation if no complications. Longer if severe DKA or complications present.',
     citation: [1, 2, 5],
     next: 'dka-disposition-plan',
+    summary: 'Stop IV insulin when: AG <12, HCO3 >=18, glucose <250, tolerating PO, and basal given 2h+ prior.',
   },
 
   // =====================================================================
@@ -726,6 +776,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Euglycemic DKA: glucose 150-250 + BOHB >3 + pH <7.3, often with SGLT2i use.**\n\n**Presentation:**\n• Minimal hyperglycemia (may be euglycemic or only mildly elevated) — easily missed!\n• Nausea, vomiting, dyspnea, abdominal pain\n• Risk factors: SGLT2 inhibitors (primary), insulin pump with reduced basal dose, GLP-1 use, illness with reduced eating\n• Diagnosis: BOHB >3, pH <7.3, low-normal glucose\n\n**Unique management:**\n\n**Fluids:**\n• Start [D10W or D5W](#/drug/dextrose/) immediately — do NOT wait for glucose to drop\n• Euglycemic DKA requires dextrose infusion from the START (unlike classic DKA which waits for glucose 200-300)\n• **Normal saline** at 100-150 mL/hr PLUS [D10W](#/drug/dextrose/) at 100-150 mL/hr\n• Goal: Prevent further glucose drop while treating acidosis\n\n**Insulin:**\n• 0.1 U/kg/hr IV drip (same as classic DKA)\n• Titrate to pH/HCO3 improvement, not glucose\n• Glucose may actually decrease during early treatment (insulin + dextrose in parallel manages this)\n\n**Potassium & Electrolytes:**\n• Same aggressive approach as classic DKA\n• Check K early and often\n\n**Basal insulin:**\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25 U/kg on admission\n\n**CRITICAL: Discontinue SGLT2i permanently** — very high recurrence risk. Document as contraindication. [10][11]\n\n**Disposition:** ICU admission if pH <7.15 or altered mental status. Many cases can be managed on monitored floor bed with closer monitoring.',
     recommendation: 'Start D10W immediately. IV insulin 0.1 U/kg/hr. Aggressive K repletion. Discontinue SGLT2i permanently. Monitor closely for late hypoglycemia.',
     citation: [10, 11, 13],
+    summary: 'Euglycemic DKA: start D10W IMMEDIATELY (do not wait). SGLT2i = permanently discontinue. Easily missed.',
+    safetyLevel: 'critical',
     treatment: {
       firstLine: {
         drug: 'Dextrose 10% (D10W) + Normal saline',
@@ -774,6 +826,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'ABG q30min x2h then q1-2h. High MV (12-18 L/min). Minimize PEEP (0-5 cm H2O). Large ETT (>=7.5).',
     },
+    summary: 'Avoid intubation if possible — loss of hyperventilation worsens acidosis. Use ketamine if unavoidable.',
+    safetyLevel: 'critical',
   },
 
   {
@@ -784,6 +838,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Recurrent DKA (≥2 episodes in 12 months) is a marker of adherence, psychiatric, or social problems with very high mortality (~5-10% per episode).**\n\n**Management differs from first presentation:**\n\n**Acute phase:**\n• Same insulin protocol (0.1 U/kg/hr drip or higher if needed)\n• Aggressive K repletion — maintain K >5 throughout\n• TREAT NAGMA aggressively with IV bicarbonate (more likely to develop in recurrent cases)\n• Higher threshold for ICU admission — coordinate psychiatry/social work early\n\n**Basal insulin intensification:**\n• Significantly uptitrate [insulin glargine](#/drug/insulin-glargine/DKA) at discharge\n• May need 0.4-0.5 U/kg/day (higher than standard new-onset doses)\n• Consider basal-bolus therapy (basal glargine + meal-time rapid-acting insulin)\n• Consider insulin pump if on MDI (some patients adhere better to pump)\n\n**Addressing root cause:**\n• **Psychiatric evaluation:** Screen for depression, bipolar disorder, anxiety — DKA often triggered by psychiatric crisis or substance use\n• **Behavioral health referral:** Therapy, crisis plan, medication optimization\n• **Social work:** Address food insecurity, housing, healthcare access, insurance\n• **Substance use screening:** Alcohol, opioids, stimulants — may precipitate missed insulin doses\n• **Provider continuity:** Assign primary care and endocrinology team to reduce fragmentation\n\n**Education:**\n• Intensive diabetes education (some patients benefit from home health nursing)\n• Sick-day rules written down and reviewed\n• Emergency contact numbers — encourage use before ER visit\n\n**Disposition:** Admission to monitored bed (or ICU if severe). Psychiatry, case management, and endocrinology consults mandatory before discharge. Discharge directly to outpatient support (not home alone).',
     recommendation: 'ICU or monitored admission. Aggressive basal insulin uptitration. Psychiatry evaluation and referral. Social work intervention. Address adherence barriers. Endocrinology continuity.',
     citation: [1, 5],
+    summary: 'Recurrent DKA = psychiatric/social crisis marker. Uptitrate glargine, mandate psych eval and social work.',
   },
 
   {
@@ -813,6 +868,8 @@ export const DKA_NODES: DecisionNode[] = [
       },
       monitoring: 'BOHB for resolution (not AG). Very restricted K supplementation. POCUS for volume. Nephrology co-management.',
     },
+    summary: 'HD DKA: insulin + D10W, minimal NS, restrict K+, low-K dialysate, BOHB <1 for resolution (not AG).',
+    safetyLevel: 'warning',
   },
 
   {
@@ -840,6 +897,7 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-discharge-planning',
       },
     ],
+    summary: 'ICU if pH <7.1, altered MS, shock, ischemia, pregnancy, or ESRD. Most DKA = monitored floor minimum.',
   },
 
   {
@@ -850,6 +908,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**ICU-level DKA management:**\n\n**Monitoring:**\n• Continuous cardiac monitor, pulse oximetry, capnography if intubated\n• Arterial line if shock or severe acidosis (pH <6.9)\n• Hourly vitals, UOP q1h, neuro q1h\n• Labs: VBG/ABG q1-2h × 4h, then q2-4h. BMP q2h × 6h then q4h. Lactate q4h. BOHB q4-6h\n\n**Medications:**\n• [Regular insulin IV drip](#/drug/regular-insulin/DKA): 0.1 U/kg/hr (adjust per protocol)\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25-0.3 U/kg SC daily (given on admission)\n• [Potassium chloride or acetate IV](#/drug/potassium-chloride-iv/DKA): Aggressive repletion (40 mEq/hr if K <3.3, then maintenance per K level)\n• **Normal saline or balanced crystalloid**: IV bolus then maintenance (or switch to D10W once glucose <300)\n• [Magnesium sulfate](#/drug/magnesium-sulfate/DKA): 1-2 g IV once if Mg <1.5\n• [Thiamine](#/drug/thiamine/DKA): 100 mg IV on admission\n• Consider [sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) if pH <6.9 (250 mL isotonic or ampules)\n\n**Consultations:**\n• Endocrinology (mandatory)\n• Nephrology if ESRD/HD or worsening Cr\n• Cardiology if troponin elevated or EKG abnormal\n• Infectious disease if sepsis confirmed\n• Psychiatry if recurrent DKA or suicidal ideation\n\n**Disposition trigger:** When stable (pH >7.25, HCO3 >15, glucose controlled, tolerating PO), stepdown to monitored floor; discharge when all stopping criteria met.',
     recommendation: 'ICU admission. Hourly reassessment. Insulin + aggressive electrolyte repletion. Endocrinology, and specialist consultations as indicated. Serial labs q1-4h.',
     citation: [1, 2, 5],
+    summary: 'ICU orders: insulin drip + glargine, aggressive K+, NS/D10W, thiamine, bicarb if pH <6.9. Labs q1-2h.',
     treatment: {
       firstLine: {
         drug: 'Regular insulin IV drip',
@@ -879,6 +938,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Moderate DKA on monitored medical floor:**\n\n**Monitoring:**\n• Continuous cardiac monitor + continuous pulse oximetry\n• Vitals q2h, UOP q1h\n• Labs: VBG/ABG q2-4h initially, then q4-6h. BMP q2-4h × 6h then q6h. Lactate q4-6h initially.\n• Neuro checks q2-4h (watch for cerebral edema — rare but catastrophic)\n\n**Medications:**\n• [Regular insulin IV drip](#/drug/regular-insulin/DKA): 0.1 U/kg/hr IV (adjust per glucose response)\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25 U/kg SC daily (given on admission)\n• [Potassium chloride or acetate IV](#/drug/potassium-chloride-iv/DKA): 20-40 mEq/hr per K level (goal K >5)\n• **Normal saline** then [D10W](#/drug/dextrose/) per \"drop and split\" protocol\n• [Magnesium sulfate](#/drug/magnesium-sulfate/DKA): 1-2 g IV if Mg low\n• [Thiamine](#/drug/thiamine/DKA): 100 mg IV on admission\n\n**Consultations:**\n• Endocrinology (routine, can consult next business day if needed)\n• Case management/social work (address precipitants, discharge planning)\n• Psychiatry if recurrent DKA or mental health concern\n\n**Diet/Activity:**\n• NPO until tolerating PO and glucose <250\n• Once able to eat: start meal-associated insulin (regular or rapid-acting 2-4U with meals)\n• Add sliding scale (2-4 U per 50 mg/dL glucose >150)\n\n**Discharge criteria:**\n• All DKA stopping criteria met (AG <12, HCO3 >18, basal insulin given 2+ hrs ago, glucose <250, tolerating PO)\n• Stable glucose on SC insulin ×2-4 doses\n• Patient education completed\n• Follow-up arranged (endocrinology within 1-2 weeks, PCP within 1 week)\n• Discharge medications and sick-day rules provided',
     recommendation: 'Admit to monitored floor. Insulin + electrolyte protocol. Endocrinology and case management consults. Discharge when stopping criteria met + patient stable on SC insulin.',
     citation: [1, 2, 5],
+    summary: 'Floor orders: insulin drip, glargine, K+ repletion, D10W protocol, labs q2-4h. Discharge when all criteria met.',
     treatment: {
       firstLine: {
         drug: 'Regular insulin IV drip',
@@ -926,6 +986,7 @@ export const DKA_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'Pump DKA is rapid (4-8h to severe). Check site, reservoir, tubing, alarms. Suspend if any doubt.',
   },
 
   {
@@ -948,6 +1009,7 @@ export const DKA_NODES: DecisionNode[] = [
         next: 'dka-pump-restart-criteria',
       },
     ],
+    summary: 'Suspend pump immediately if malfunction found. Document settings, remove set, start IV insulin drip.',
   },
 
   {
@@ -958,6 +1020,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Pump OFF — manage as standard severe DKA:**\n\n**Acute phase (IV insulin):**\n• [Regular insulin drip](#/drug/regular-insulin/DKA) 0.1 U/kg/hr\n• Aggressive fluid resuscitation (pump DKA often MORE dehydrated)\n• [Potassium](#/drug/potassium-chloride-iv/DKA) repletion per protocol (goal K+ >5 during treatment)\n• Switch to D10W when glucose <300\n\n**Basal insulin bridge:**\n• [Insulin glargine](#/drug/insulin-glargine/DKA) 0.25-0.3 U/kg SC within 6-12 hours\n• This is CRITICAL — prevents rebound DKA when IV stopped\n• If patient was on pump basal ~24 U/day → glargine ~20-24 U (slightly less, adjust for illness)\n\n**Transition options:**\n\n**Option A: Discharge on MDI (multiple daily injections):**\n• Basal: Continue glargine at ~80% of pump total daily basal\n• Bolus: [Insulin lispro](#/drug/insulin-lispro/DKA) or aspart with meals using patient\'s known I:C ratio\n• Correction: Same correction factor patient used on pump\n• Follow-up with endocrinology within 1 week to restart pump\n\n**Option B: Restart pump before discharge:**\n• Only if patient experienced, DKA fully resolved, and clear cause identified/fixed\n• See pump restart criteria\n\n**Documentation:**\n• Record pump settings (basal rates by hour, I:C ratios, correction factor, active insulin time)\n• Include pump brand/model for outpatient team\n• Note suspected cause of failure',
     recommendation: 'Suspend pump. IV insulin 0.1 U/kg/hr. Glargine 0.25 U/kg SC within 6-12h. Transition to MDI or supervised pump restart. Endocrinology follow-up within 1 week.',
     citation: [1, 2, 5, 14],
+    summary: 'Pump off: IV insulin drip + glargine SC bridge. Document pump settings for outpatient endo follow-up.',
     treatment: {
       firstLine: {
         drug: 'Regular insulin IV + Insulin glargine SC',
@@ -987,6 +1050,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**Restarting pump in hospital is ONLY appropriate if ALL criteria met:**\n\n**Required criteria:**\n• ✓ DKA fully resolved (AG <12, HCO3 >18, pH >7.30, glucose <250)\n• ✓ Patient alert, oriented, able to manage pump\n• ✓ Clear cause of failure identified AND corrected\n• ✓ Patient experienced pump user (>6 months on pump)\n• ✓ Endocrinology approves restart\n• ✓ New infusion set placed at DIFFERENT site\n• ✓ Fresh insulin cartridge loaded\n• ✓ Pump settings verified correct\n\n**Contraindications to inpatient pump restart:**\n• ✗ Site infection (needs 48-72h antibiotics before new site)\n• ✗ Recurrent pump DKA (2+ episodes in 12 months)\n• ✗ Patient overwhelmed, fatigued, or unable to focus\n• ✗ Cause unclear — may recur\n• ✗ Psychiatric crisis or intentional noncompliance\n• ✗ No endocrinology input available\n\n**If restarting:**\n• Resume at ~80-90% of usual basal rate (illness increases insulin resistance but also infection risk)\n• Correction boluses via pump\n• Keep glargine dose on board for 12-24h overlap\n• Monitor glucose q1-2h for first 6 hours\n• Patient must have working pump supplies for home\n\n**Discharge instructions:**\n• New site every 2-3 days maximum\n• Check ketones if glucose >300 or nausea/vomiting\n• Sick-day rules: Do NOT suspend pump during illness\n• Have backup insulin pens at home\n• Low threshold to return if symptoms recur',
     recommendation: 'Only restart pump if ALL criteria met. Overlap with glargine x12-24h. Monitor q1-2h x6h. Ensure backup supplies and sick-day education. Endocrinology must approve.',
     citation: [1, 2, 5],
+    summary: 'Restart pump inpatient ONLY if all criteria met, endo approves, and cause clearly fixed. Otherwise MDI.',
   },
 
   {
@@ -997,6 +1061,8 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**If pump appears to be working correctly, DKA was triggered by another cause:**\n\n**Common causes in pump users with functioning pumps:**\n• **Infection** — UTI, pneumonia, skin/soft tissue (most common)\n• **Missed boluses** — meals without boluses (check pump history)\n• **Illness-related insulin resistance** — basal rate inadequate during acute illness\n• **Site absorption issues** — lipohypertrophy, scarring (pump "working" but insulin not absorbing)\n• **Gastroparesis** — delayed gastric emptying causing mismatch between bolus and absorption\n\n**Management:**\n• Continue pump OR switch to IV insulin (either acceptable)\n• If continuing pump:\n  - Increase basal rate by 20-50% for illness\n  - Correction boluses via pump q2-4h\n  - Monitor closely — switch to IV if not improving in 4-6h\n• If switching to IV: Suspend pump, standard IV protocol\n\n**Pump history review (important!):**\n• Download or review last 72h of pump data\n• Look for missed meal boluses, suspended periods, site changes\n• Basal delivery vs programmed — discrepancy = delivery failure\n\n**Treat underlying precipitant per standard DKA protocol.**',
     citation: [1, 2, 5],
     next: 'dka-precipitant-screen',
+    summary: 'Pump working but DKA occurred — check for missed boluses, infection, or site absorption failure.',
+    skippable: true,
   },
 
   {
@@ -1007,6 +1073,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**When pump status unclear or cannot be assessed:**\n\n**Default approach: Suspend pump and start IV insulin**\n\nRationale: IV insulin gives predictable delivery and tight control during critical illness. Pump can be reassessed when patient stable.\n\n**Steps:**\n1. **Suspend pump** — remove infusion set, cap reservoir\n2. **Document pump settings** if accessible (photo of settings screen helpful)\n3. **Start IV insulin** 0.1 U/kg/hr\n4. **Give basal glargine** 0.25 U/kg SC within 6-12h\n5. **Standard DKA protocol** — fluids, K+, monitoring\n\n**When patient stable:**\n• Full pump interrogation (download history)\n• Determine cause of DKA\n• Decide: restart pump vs transition to MDI\n• Endocrinology consultation\n\n**Key point:** Do NOT let pump troubleshooting delay insulin therapy. If any doubt about pump function, start IV insulin immediately.\n\n**Hybrid closed-loop systems (670G, 780G, t:slim Control-IQ, Omnipod 5):**\n• These auto-adjust basal but can still fail\n• Sensor failures cause algorithm to revert to preset basal (may be inadequate)\n• Still suspend and use IV insulin during severe DKA\n• Resume only after full resolution and system check',
     recommendation: 'Suspend pump if any uncertainty. Start IV insulin 0.1 U/kg/hr immediately. Give glargine 0.25 U/kg SC. Full pump assessment when patient stable.',
     citation: [1, 2, 5],
+    summary: 'When in doubt: suspend pump, start IV insulin immediately. Do NOT let troubleshooting delay treatment.',
     treatment: {
       firstLine: {
         drug: 'Regular insulin IV drip',
@@ -1036,6 +1103,7 @@ export const DKA_NODES: DecisionNode[] = [
     body: '**For very mild DKA (pH >7.25, HCO3 >15) in highly reliable patient with excellent support:**\n\n**Discharge checklist (ALL must be met):**\n• ✓ DKA resolved per stopping criteria (AG <12, HCO3 >18, tolerating PO, glucose <250)\n• ✓ Stable on SC basal + bolus insulin ×2-4 doses\n• ✓ Electrolytes normal (K 3.5-5.5, Mg >1.5, Phos >1.5)\n• ✓ Understanding of sick-day rules\n• ✓ Adequate insulin supply (pens, vials, syringes, or pump supplies)\n• ✓ Emergency glucagon kit or similar hypoglycemia rescue\n• ✓ Reliable transportation\n• ✓ Phone access for follow-up calls\n• ✓ Identified prescriber (PCP or endocrinologist)\n\n**Discharge medications:**\n• [Insulin glargine](#/drug/insulin-glargine/maintenance) (basal) — dose from hospitalization\n• Rapid-acting or regular insulin (bolus) — meal-time dosing\n• Metformin or other agents if not contraindicated (often held during acute phase, restart if GFR adequate)\n\n**Discharge education (written):**\n• **Sick-day rules:** Never skip insulin even if unable to eat; use dextrose instead of meal\n• **Hypoglycemia symptoms & glucagon use:** When to call 911 vs treat at home\n• **Hyperglycemia warning signs:** Nausea, dyspnea, fruity breath — seek care immediately\n• **Insulin administration:** Injection technique, storage, expiration\n• **Dietary guidelines:** Regular meals, hydration, carbohydrate consistency\n• **Exercise:** Adjust insulin for activity, carry fast carbs\n\n**Follow-up (CRITICAL):**\n• **Endocrinology:** Appointment within 2-4 weeks\n• **Primary care:** Within 1 week\n• **Diabetes educator:** Within 1-2 weeks (certified educators preferred)\n• **Case management:** Phone call within 24 hours to confirm discharge arrangements\n\n**Documentation:**\n• Precipitant clearly documented\n• Discharge summary includes basal + bolus insulin regimen, K level at discharge, glucose trend\n• Copy to endocrinologist + PCP\n\n**Return precautions (written & verbal):**\n• Nausea/vomiting >2 episodes\n• Dyspnea or chest pain\n• Altered mental status\n• Inability to take insulin or eat for 2+ hours\n• Glucose >400 despite insulin\n• Fever or signs of infection\n• Any DKA symptoms: fruity breath, severe fatigue, abdominal pain',
     recommendation: 'Discharge to home with strong outpatient support. Insulin supply + glucagon kit. Written sick-day rules & warning signs. PCP + endocrinology within 1-2 weeks. Case management follow-up call within 24h.',
     citation: [1, 2, 5, 15],
+    summary: 'Discharge only if all criteria met, insulin supply secured, sick-day rules taught, and follow-up within 1-2 weeks.',
   },
 
 ];

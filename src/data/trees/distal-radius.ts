@@ -34,6 +34,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     body: '[Reduction Steps Summary](#/info/dr-summary) — quick-reference TRAMP checklist to review before reduction.\n\n**"Obtain & Maintain"** — the two questions that guide every fracture decision: [1]\n\n**1. OBTAIN — Is the current position acceptable?**\nIf yes → immobilize and follow up. If no → reduce.\n\n**2. MAINTAIN — Will the fracture shift?**\nIf stable → fiberglass OK. If unstable → plaster cast with proper molding.\n\nThis framework applies to every fracture you encounter. For distal radius, the TRAMP mnemonic provides the systematic reduction technique.\n\n[Pediatric Considerations](#/node/dr-peds) — remodeling potential, acceptable angulation by age, growth plate risks.',
     citation: [1],
     next: 'dr-assess',
+  
+    summary: 'Most common fracture in adults — assess for neurovascular compromise and need for reduction',
   },
 
   {
@@ -61,6 +63,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Fracture Assessment — Is Reduction Needed? — assess clinical status to guide next management decision',
   },
 
   {
@@ -72,6 +76,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     recommendation: 'Stable fracture — immobilize with splint or cast. Ortho follow-up in 5–7 days.',
     confidence: 'recommended',
     citation: [1],
+  
+    summary: 'Stable Fracture — Immobilize Only — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -110,6 +116,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
       monitoring: 'Assess renal function before gentamicin. Update tetanus if indicated. Serial neurovascular exams.',
     },
+  
+    summary: 'Surgical referral: unstable, intra-articular >2mm step-off, open fracture, bilateral, or failed reduction',
   },
 
   // =====================================================================
@@ -140,6 +148,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
         next: 'dr-regional',
       },
     ],
+  
+    summary: 'Analgesia Selection — assess clinical status to guide next management decision',
   },
 
   {
@@ -168,6 +178,9 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       monitoring: 'Wait 5-10 minutes for full anesthetic effect before reduction. Monitor for signs of local anesthetic systemic toxicity (LAST).',
     },
     next: 'dr-traction',
+  
+    summary: 'Hematoma Block Technique — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -197,6 +210,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       monitoring: 'Continuous capnography, pulse oximetry, cardiac monitoring. Dedicated monitoring nurse required. Resuscitation equipment at bedside.',
     },
     next: 'dr-traction',
+  
+    summary: 'Procedural Sedation — review key clinical information before proceeding',
   },
 
   {
@@ -226,6 +241,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       monitoring: 'Monitor for local anesthetic systemic toxicity (LAST). For Bier block: do not release tourniquet before 20 min. Have lipid emulsion available.',
     },
     next: 'dr-traction',
+  
+    summary: 'Regional Anesthesia — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -247,6 +264,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'dr-reduce',
+  
+    summary: 'T — Traction — review key clinical information before proceeding',
   },
 
   {
@@ -264,6 +283,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'dr-apply',
+  
+    summary: 'R — Reduction — review key clinical information before proceeding',
   },
 
   {
@@ -281,6 +302,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'dr-mold',
+  
+    summary: 'A — Apply Splint Materials — review key clinical information before proceeding',
   },
 
   {
@@ -298,6 +321,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'dr-position',
+  
+    summary: 'M — Mold — review key clinical information before proceeding',
   },
 
   {
@@ -315,6 +340,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'dr-post-xray',
+  
+    summary: 'P — Position — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -347,6 +374,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Post-Reduction Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -357,6 +386,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     body: '**Assess what went wrong before trying again.** [1]\n\n**COMMON FAILURES:**\n• Insufficient traction — fragments still impacted\n• Did not exaggerate deformity — periosteum still locked\n• Round cast (poor mold) — no mechanical block to re-displacement\n• Too much padding — mold doesn\'t transmit to bone\n• Moved hands during plaster setting — lost the mold\n\n**BEFORE RE-ATTEMPT:**\n• Remove the current cast/splint completely\n• **Top up analgesia** — additional hematoma block or supplemental sedation\n• Reassess the fracture pattern on the post-reduction films\n• Address the specific failure point\n\n**RE-ATTEMPT THE FULL TRAMP SEQUENCE:**\nDo not skip steps. Start from Traction and work through each step again.\n\n**IF 2 ATTEMPTS FAIL** → consult orthopedics for operative management. Repeated manipulation increases soft tissue swelling and complication risk.',
     citation: [1],
     next: 'dr-traction',
+  
+    summary: 'Re-Attempt Reduction — review key clinical information before proceeding',
   },
 
   {
@@ -368,6 +399,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     recommendation: 'Successful reduction. Discharge with elevation, ice, finger exercises, neurovascular check instructions, and ortho follow-up in 5\u20137 days. Review [Discharge Instructions](#/info/distal-radius-discharge) with patient.',
     confidence: 'recommended',
     citation: [1],
+  
+    summary: 'Disposition & Follow-Up — determine disposition and follow-up plan based on clinical findings',
   },
 
   // =====================================================================
@@ -382,6 +415,8 @@ export const DISTAL_RADIUS_NODES: DecisionNode[] = [
     body: '**Remodeling potential changes what counts as "acceptable."** [1]\n\nChildren\'s fractures can remodel — but ONLY in the plane of joint motion. **Rotation does NOT remodel.** Any malrotation must be corrected.\n\n**ACCEPTABLE ANGULATION BY AGE:**\n• <10 years: up to 15–20° sagittal angulation may remodel\n• 10–16 years: less tolerance — aim for <10° angulation\n• Younger children tolerate more because more growth remaining\n\n**BUCKLE (TORUS) FRACTURES:**\n• Compression failure of one cortex — inherently stable\n• Removable splint for 3–4 weeks, no reduction needed\n• Evidence supports removable splint equal to casting [1]\n\n**GREENSTICK FRACTURES:**\n• Incomplete fracture — one cortex intact\n• May need reduction if significantly angulated\n• Do NOT complete the fracture — the intact cortex provides stability\n\n**GROWTH PLATE RISK:**\n• Delayed reduction increases risk of growth plate injury\n• Physeal fractures (Salter-Harris) → reduce early\n• Radial neck fractures in children: delayed reduction risks permanent growth arrest [1]\n\n**KEY DIFFERENCE:** Children tolerate more angulation but are less forgiving of delays. Reduce promptly if needed.',
     citation: [1],
     next: 'dr-assess',
+  
+    summary: 'Pediatric Considerations — review key clinical information before proceeding',
   },
 
 ];

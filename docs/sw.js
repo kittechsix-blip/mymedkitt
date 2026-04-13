@@ -2,7 +2,7 @@
 // Network-first for code, cache-first for images
 // Ensures updates load immediately without manual cache clearing
 
-const CACHE_NAME = 'medkitt-v490';
+const CACHE_NAME = 'medkitt-v491';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -20,18 +20,14 @@ const ASSETS_TO_CACHE = [
   './components/calculator.js',
   './components/consult-flow.js',
   './components/consult-navigator.js',
-  './components/consult-wizard.js',
   './components/contextual-toolbar.js',
   './components/dashboard.js',
-  './components/spotlight.js',
   './components/decision-card.js',
-  './components/dosing-banner.js',
   './components/drug-store.js',
   './components/expandable-section.js',
   './components/info-page.js',
   './components/lab-interpreter.js',
   './components/overlay-panel.js',
-  './components/quick-fire-mode.js',
   './components/reference-link.js',
   './components/reference-table.js',
   './components/specialty-view.js',
@@ -189,8 +185,6 @@ const ASSETS_TO_CACHE = [
   './data/trees/ct-decision-support.js',
   './data/trees/dfsa-workup.js',
   './data/trees/xylazine-toxicity.js',
-  './data/wizard-consults/acute-stroke.js',
-
   // Models & types
   './models/types.js',
   './types/consult-tree.js',

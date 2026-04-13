@@ -31,6 +31,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '[Delirium Steps Summary](#/info/delirium-summary) — rapid assessment and management pathway.\n\nDelirium is acute brain dysfunction — DSM-5 defines as acute/fluctuating disturbance in attention and cognition. **7-24% of elderly ED patients** have delirium; up to **80% of ICU patients**. Missed diagnosis rate **54-89%**. Mortality comparable to sepsis and MI.\n\nDelirium is a **SYMPTOM** requiring urgent etiology search, not just behavioral management.',
     citation: [1, 3],
     next: 'del-safety',
+  
+    summary: 'Delirium is a medical emergency — always identify and treat the underlying cause',
   },
 
   {
@@ -41,6 +43,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: 'Personal and team safety first. For agitated patients: remove sharps/equipment from reach, ensure adequate staffing (minimum 5 for physical restraint), activate security if needed. Approach calmly, non-threateningly. One person speaks.\n\n[Verbal De-escalation: 10 Elements](#/info/del-deescalation) — AAEP Project BETA guidelines for engaging the agitated patient.\n\nPosition yourself near the exit. Do not corner the patient. Show of force (security presence) is effective nonpharmacological intervention — avoided sedation in 27% of cases in one study.',
     citation: [8],
     next: 'del-rapid-reversible',
+  
+    summary: 'Scene Safety & Team Preparation — review key clinical information before proceeding',
   },
 
   {
@@ -62,6 +66,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         next: 'del-screening',
       },
     ],
+  
+    summary: 'Rapid Reversible Causes — assess clinical status to guide next management decision',
   },
 
   {
@@ -72,6 +78,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: 'Treat the identified cause with standard emergency care:\n\n• **Hypoglycemia:** D50W 25g IV (adults) or D10W 2-5 mL/kg (peds). Recheck glucose in 15 min.\n• **Hypoxia:** Supplemental O2 to SpO2 >94%. Evaluate for pneumonia, PE, CHF.\n• **Opioid toxicity:** [Naloxone](#/drug/naloxone/opioid toxicity) 0.4-2 mg IV/IN. May repeat q2-3 min. Consider infusion if recurrent (2/3 of effective dose per hour).\n• **Hypothermia:** Active warming. Evaluate for underlying cause.\n• **Hypotension:** IV fluid bolus. Evaluate for sepsis, hemorrhage, cardiac cause.\n\nIf mental status does not improve after correction, proceed with full delirium evaluation — multiple precipitants often coexist.',
     citation: [1],
     next: 'del-screening',
+  
+    summary: 'Correct Reversible Cause — review key clinical information before proceeding',
   },
 
   {
@@ -102,6 +110,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Delirium Screening & Subtype Assessment — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -116,6 +126,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: 'RASS -1 to -3. The **most commonly missed** subtype — 32-67% undiagnosed in the ED. **Higher mortality** than hyperactive.\n\nPatients are often dismissed as "tired" or "baseline dementia." Verify with family/prior documentation before attributing to baseline.\n\n**Common causes:** Metabolic derangements, medication effects (opioids, sedatives, anticholinergics), infection (UTI/pneumonia in elderly), dehydration.\n\nAntipsychotics are NOT beneficial — focus on treating the underlying cause.',
     citation: [1, 3, 4],
     next: 'del-etiology',
+  
+    summary: 'Hypoactive Delirium — review key clinical information before proceeding',
   },
 
   {
@@ -126,6 +138,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: 'RASS +1 to +4. Agitation, combativeness, hyperactivity, hallucinations. **Mixed delirium** fluctuates between subtypes — most persistent course.\n\n**Distinguish from primary psychiatric disorder:**\n• Delirium: acute onset, fluctuating, inattention, altered consciousness\n• Primary psychosis: chronic/subacute, organized delusions, intact attention, stable vitals\n• New-onset "psychiatric" symptoms without psychiatric history → assume medical until proven otherwise\n\nMay require immediate pharmacological management — but always search for underlying etiology concurrently.',
     citation: [1, 4],
     next: 'del-etiology',
+  
+    summary: 'Hyperactive / Mixed Delirium — review key clinical information before proceeding',
   },
 
   {
@@ -136,6 +150,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '[Excited Delirium Syndrome](#/info/del-exds-info) — full recognition criteria, pathophysiology, and management.\n\n**Medical emergency** — ~10% case fatality rate. Most deaths from cardiac arrhythmia (PEA, asystole). **6 of 10 criteria = probable ExDS.**\n\nTemperature >104°F is the **single best predictor of death.**\n\n**IMMEDIATE:** Remove from prone position → aggressive cooling → IV access → proceed to ExDS management.',
     citation: [1, 12],
     next: 'del-exds-mgmt',
+  
+    summary: 'Excited Delirium Syndrome — review key clinical information before proceeding',
   },
 
   {
@@ -172,6 +188,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         next: 'del-workup',
       },
     ],
+  
+    summary: 'Etiology Assessment — assess clinical status to guide next management decision',
   },
 
   {
@@ -182,6 +200,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Infection is the most common precipitant** — cited in 16-67% of cases, particularly in the elderly.\n\n**Most common sources:**\n• **Urinary tract infection** — most common infectious cause in elderly. Delirium may be the ONLY presenting sign — fever is absent in up to 50% of elderly patients with UTI.\n• **Pneumonia** — second most common. Cough and dyspnea may be absent. Tachypnea or hypoxia may be the only clue.\n• **Skin/soft tissue infection** — cellulitis, infected wounds, decubitus ulcers\n• **Bacteremia/sepsis** — check lactate, blood cultures\n• **Intra-abdominal** — cholecystitis, appendicitis, diverticulitis, C. diff\n\n**Workup:** CBC, UA with culture, CXR, blood cultures if febrile. Lactate. Consider CT abdomen/pelvis if no clear source. LP if meningeal signs, immunocompromised, or no clear source in elderly with fever.\n\n**Treatment:** Empiric antibiotics based on suspected source. IV fluids for dehydration. Delirium often resolves with treatment of infection, though resolution may lag behind clinical improvement by days.',
     citation: [1, 3],
     next: 'del-nonpharm',
+  
+    summary: 'Infection-Precipitated Delirium — review key clinical information before proceeding',
   },
 
   {
@@ -192,6 +212,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Common metabolic precipitants:**\n\n• **Sodium disorders** — hypo- and hypernatremia. [Sodium Disorders](#/tree/sodium) consult for management.\n• **Hypercalcemia** — malignancy, hyperparathyroidism. "Stones, bones, groans, moans, psychiatric overtones."\n• **Hepatic encephalopathy** — check ammonia level. Lactulose, rifaximin.\n• **Uremia** — BUN/Cr ratio >18 associated with increased delirium risk.\n• **Hypoglycemia / hyperglycemia** — DKA, HHS\n• **Thyroid** — myxedema coma (hypothyroid), thyroid storm (hyperthyroid)\n• **B12 / folate deficiency** — subacute, but worth checking in undifferentiated cases\n• **Hypoxia / hypercarbia** — ABG if respiratory disease or unreliable SpO2\n\n**Workup:** BMP (Na, K, Ca, Mg, Phos, glucose, BUN/Cr), LFTs, ammonia, TSH, VBG/ABG, lactate.\n\n**Predictive markers for delirium:** Elevated serum bicarbonate, elevated glucose, elevated BUN:Cr ratio, low hemoglobin, low chloride.',
     citation: [1, 5],
     next: 'del-nonpharm',
+  
+    summary: 'Metabolic / Endocrine Causes — review key clinical information before proceeding',
   },
 
   {
@@ -202,6 +224,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Structural and neurologic causes of delirium:**\n\n• **Stroke** — both ischemic and hemorrhagic. Delirium can be the presenting symptom, especially posterior circulation strokes.\n• **Subdural hematoma** — especially in elderly on anticoagulants. May present without clear trauma history.\n• **Subarachnoid hemorrhage** — "worst headache of life" may be absent in elderly; delirium may predominate.\n• **Meningitis / encephalitis** — fever + meningeal signs + AMS. [Meningitis/Encephalitis](#/tree/meningitis) consult for workup.\n• **Seizure / postictal state** — consider NCSE if persistent AMS without convulsions. EEG when available.\n• **Space-occupying lesion** — tumor, abscess.\n• **Normal pressure hydrocephalus** — triad: wet, wacky, wobbly (incontinence, dementia, gait disturbance).\n\n**Workup:** CT head non-contrast if: focal neurologic deficits, anticoagulation, trauma history, new-onset seizure. LP if: fever + meningeal signs, immunocompromised, or no clear cause. CT yield for undifferentiated delirium without focal deficits is only ~5%.\n\n**Neurologic exam:** Focus on focal/lateralizing signs, cranial nerves, cerebellar signs (gait, truncal ataxia). Mental status exam: orientation, attention, recall, language.',
     citation: [1, 4],
     next: 'del-nonpharm',
+  
+    summary: 'Intracranial Pathology — review key clinical information before proceeding',
   },
 
   {
@@ -212,6 +236,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Medications are a particularly prevalent cause** — especially in the elderly. Even without new prescriptions, dose changes and OTC interactions can precipitate delirium.\n\n**Beers Criteria high-risk medications:**\n• **Anticholinergics** — diphenhydramine, promethazine, scopolamine, oxybutynin, TCAs\n• **Benzodiazepines** — independent risk factor for delirium\n• **Opioids** — especially meperidine (highest risk)\n• **Sedative-hypnotics** — zolpidem, eszopiclone\n• **H2-receptor antagonists** — ranitidine, famotidine\n• **Corticosteroids** — especially high-dose pulse therapy\n• **Fluoroquinolones** — CNS effects underrecognized\n\n**Intoxication syndromes:**\n• Sympathomimetic (cocaine, meth): agitation, tachycardia, hyperthermia, mydriasis\n• Anticholinergic: "red as a beet, dry as a bone, hot as a hare, blind as a bat, mad as a hatter"\n• Serotonin syndrome: altered mental status + neuromuscular excitability + autonomic instability\n\n**Withdrawal syndromes:**\n• Alcohol: tremor, tachycardia, hallucinations, seizures, DT\n• Benzodiazepine: similar to alcohol withdrawal\n• Opioid: NOT typically delirious, more dysphoria/GI symptoms\n\n**Workup:** Detailed medication reconciliation. Urine drug screen (interpret cautiously — false positives/negatives). Serum ethanol. Acetaminophen/salicylate levels if intentional ingestion suspected.',
     citation: [1, 3],
     next: 'del-nonpharm',
+  
+    summary: 'Toxic / Medication-Related Delirium — review key clinical information before proceeding',
   },
 
   {
@@ -222,6 +248,9 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Directed by history, physical, and differential** — not a shotgun approach. Clinical judgment and common sense are the consensus recommendation.\n\n**For ALL patients with suspected delirium:**\n• Fingerstick glucose (already done)\n• BMP: Na, K, Ca, Mg, glucose, BUN/Cr\n• CBC with differential\n• Urinalysis with culture\n• VBG or ABG with lactate\n• **ECG** — arrhythmia, MI (delirium is the ONLY symptom in up to 5% of elderly STEMI), QTc baseline (needed before antipsychotics)\n\n**Consider based on clinical suspicion:**\n• LFTs, lipase, ammonia — hepatic/abdominal causes\n• TSH — thyroid disorders\n• Blood cultures — if febrile or suspected bacteremia\n• Troponin — if cardiac cause suspected\n• CK — if rhabdomyolysis risk (prolonged agitation, restraints, ExDS)\n• Urine drug screen — co-ingestions, atypical presentations (interpret with caution)\n• Blood gas — if hypercarbia suspected (COPD, hypoventilation)\n\n**Imaging:**\n• CT head non-contrast: if focal neuro deficits, anticoagulated, trauma, new seizure. Yield ~5% in undifferentiated delirium without focal findings, but subacute/chronic findings (hydrocephalus, old infarcts, SDH) may guide care.\n• CXR: if respiratory symptoms or fever\n\n**Lower threshold for LP:** Undifferentiated elderly with fever, immunocompromised, suspected NCSE, or encephalitis.',
     citation: [1, 4, 5],
     next: 'del-med-review',
+  
+    summary: 'Directed Diagnostic Workup — review key clinical information before proceeding',
+    skippable: true,
   },
 
   {
@@ -232,6 +261,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Systematic medication reconciliation** — one of the most easily correctable precipitants.\n\n**Check for:**\n• New medications within past 2 weeks\n• Recent dose changes\n• Drug-drug interactions (CYP inhibitors/inducers)\n• Polypharmacy (≥5 meds independently increases risk)\n• Anticholinergic burden — cumulative effect of multiple low-anticholinergic drugs\n• Recent discontinuation (withdrawal risk)\n\nSee [Precipitating Factors](#/info/del-precipitants) for high-risk medication classes (Beers Criteria).\n\n**Iatrogenic ED/hospital precipitants:** Physical restraints, bladder catheter, ≥3 new medications, sleep disruption, malnutrition.',
     citation: [1, 3],
     next: 'del-nonpharm',
+  
+    summary: 'Medication Review — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -246,6 +277,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**First-line treatment for mild-moderate agitation** in cooperative patients. Also used to prevent iatrogenic delirium.\n\n[Verbal De-escalation: 10 Elements](#/info/del-deescalation) — AAEP Project BETA evidence-based guidelines.\n\n**Environmental modifications:**\n• Reduce excessive stimulation (noise, bright lights, alarms)\n• Reorient patient frequently — clock, calendar, familiar objects\n• Facilitate verbal orientation from family members\n• Provide visual and hearing assistive devices (glasses, hearing aids)\n• Maintain sleep-wake cycle — adequate daytime lighting, minimize nighttime interruptions\n• Ensure adequate hydration and nutrition\n\n**Minimize iatrogenic triggers:**\n• Remove unnecessary lines, leads, and catheters (Foley catheters are a known delirium precipitant)\n• Avoid medications known to precipitate delirium\n• Limit tethering and medical procedures when possible\n• Allow patient mobility within safety bounds\n\n**TADA approach:** Tolerate, Anticipate, Don\'t Agitate — allow patient leeway to mobilize and voice discontent within safety bounds. Stop reorientation when it exacerbates agitation.\n\n**One-to-one observation** — perceived efficacy of 48%. Dedicated sitter for high-risk patients.\n\nFor patients requiring physical restraint, see: [Physical Restraints](#/node/del-restraints)',
     citation: [1, 8],
     next: 'del-pharm-decision',
+  
+    summary: 'Nonpharmacological Interventions — review key clinical information before proceeding',
   },
 
   {
@@ -256,6 +289,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**Temporizing measure only** — physical restraints can paradoxically INCREASE agitation and risk of injury. Associated with significant injuries and death by asphyxiation.\n\n**Indications:**\n• Imminent danger to patient or staff despite verbal de-escalation\n• Violent/severely agitated patient requiring medical workup\n• To facilitate pharmacological management in dangerous agitation\n\n**Proper technique:**\n• Minimum 5-person team (1 per extremity + team leader at head)\n• Remove all objects that could be used as weapons\n• Supine position with **head of bed elevated** to prevent aspiration\n• Team leader controls head while others secure extremities in extension\n• **Soft restraints** preferred over leather (less injury risk)\n• Secure to bed frame, not side rails\n\n**Monitoring requirements:**\n• Reassess q15 minutes: neurovascular checks, position, basic needs\n• Re-evaluate need for restraints q1-2 hours\n• Anticipate basic needs (voiding, hydration, repositioning)\n• **NEVER prone positioning** — risk of positional asphyxia\n• Document indication, type, and monitoring\n\n**Concurrent pharmacological management** should be initiated to facilitate restraint removal as quickly as possible.',
     citation: [1, 8],
     next: 'del-pharm-decision',
+  
+    summary: 'Physical Restraints — review key clinical information before proceeding',
   },
 
   {
@@ -279,6 +314,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         next: 'del-monitoring',
       },
     ],
+  
+    summary: 'Pharmacological Treatment Needed? — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -320,6 +357,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+  
+    summary: 'Patient Population — assess clinical status to guide next management decision',
   },
 
   {
@@ -349,6 +388,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Reassess RASS q15 min. Continuous pulse oximetry and telemetry. ECG for QTc after haloperidol/droperidol. Watch for EPS/dystonia.',
     },
     next: 'del-response',
+  
+    summary: 'Standard Adult Agitation — review key clinical information before proceeding',
   },
 
   {
@@ -378,6 +419,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Reassess RASS q15 min. Continuous pulse oximetry and telemetry. ECG for QTc. Watch for EPS, oversedation, and falls.',
     },
     next: 'del-response',
+  
+    summary: 'Elderly / Geriatric Agitation — review key clinical information before proceeding',
   },
 
   {
@@ -407,6 +450,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Reassess RASS q15 min. Watch for worsening motor symptoms. Extreme caution with any antipsychotic in Lewy body dementia.',
     },
     next: 'del-response',
+  
+    summary: 'Parkinson\ — review key clinical information before proceeding',
   },
 
   {
@@ -436,6 +481,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Continuous pulse oximetry and capnography. Monitor for respiratory depression. Active cooling if hyperthermic. IV fluids aggressively.',
     },
     next: 'del-response',
+  
+    summary: 'Intoxication / Withdrawal Syndromes — review key clinical information before proceeding',
   },
 
   {
@@ -465,6 +512,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Continuous telemetry (anticipate PEA/asystole). Core temp q15 min, target <101F. Large-bore IV x2, aggressive NS. Labs: CK, K+, VBG/lactate, creatinine. ICU mandatory.',
     },
     next: 'del-response',
+  
+    summary: 'Excited Delirium Syndrome — Management — review key clinical information before proceeding',
   },
 
   {
@@ -488,6 +537,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+  
+    summary: 'Treatment Response — assess clinical status to guide next management decision',
   },
 
   // =====================================================================
@@ -521,6 +572,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
       monitoring: 'Continuous pulse oximetry and capnography. Prepare airway equipment. If cumulative haloperidol >20 mg or midazolam >15 mg, reconsider diagnosis.',
     },
     next: 'del-monitoring',
+  
+    summary: 'Treatment Escalation — review key clinical information before proceeding',
   },
 
   {
@@ -532,6 +585,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     body: '**All patients receiving pharmacological sedation require close monitoring:**\n\n**Respiratory:**\n• Continuous pulse oximetry\n• **Capnography (ETCO2) recommended** — detects hypoventilation earlier than SpO2, especially after benzodiazepines\n• Supplemental O2 as needed\n• Have BVM, suction at bedside\n\n**Cardiac:**\n• Continuous telemetry if antipsychotic administered\n• **QTc monitoring:** Obtain ECG post-treatment for haloperidol/droperidol. QTc >500 ms or increase >60 ms from baseline → discontinue agent, correct electrolytes (K, Mg)\n• Monitor for arrhythmia (torsades de pointes risk with typical antipsychotics)\n\n**Neurologic:**\n• Reassess RASS q15 min — target 0 to -1\n• Watch for **extrapyramidal symptoms (EPS):** acute dystonia (neck/jaw rigidity, oculogyric crisis) → treat with diphenhydramine 50 mg IV/IM or benztropine 1-2 mg IV\n• Watch for **akathisia** (restlessness) — can be misdiagnosed as worsening agitation. Do NOT escalate antipsychotic dose.\n\n**General:**\n• Blood pressure, temperature q15-30 min\n• Position: head of bed elevated, lateral positioning if aspiration risk\n• Continue etiology workup while patient is sedated\n• Reassess need for restraints — remove as soon as safe\n• Document all medications, doses, times, and monitoring',
     citation: [1, 2],
     next: 'del-disposition',
+  
+    summary: 'Post-Treatment Monitoring — review key clinical information before proceeding',
   },
 
   // =====================================================================
@@ -564,6 +619,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         next: 'del-discharge',
       },
     ],
+  
+    summary: 'Disposition — assess clinical status to guide next management decision',
   },
 
   {
@@ -575,6 +632,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     citation: [1, 3],
     recommendation: 'Admit for further evaluation and management of delirium. Communicate baseline status, ED interventions, and suspected etiology to admitting team.',
     confidence: 'recommended',
+  
+    summary: 'Admission — determine disposition and follow-up plan based on clinical findings',
   },
 
   {
@@ -586,6 +645,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     citation: [1, 3, 5],
     recommendation: 'Discharge with close follow-up. Ensure caregiver understands return precautions and follow-up plan.',
     confidence: 'recommended',
+  
+    summary: 'Discharge with Follow-Up — determine disposition and follow-up plan based on clinical findings',
   },
 
 ];
