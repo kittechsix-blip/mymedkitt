@@ -25,6 +25,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-syndromic-rx', label: 'Syndromic Rx Picker' },
     ],
     next: 'sti-syndrome-picker',
+
+    summary: 'Syndrome-based empiric treatment — key 2024 updates: doxyPEP, syphilis 3x pregnancy screen, azithromycin no longer for GC',
+    skippable: true,
   },
 
   {
@@ -56,6 +59,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-special-pop',
       },
     ],
+
+    summary: 'Select presenting syndrome — urethral/cervical, genital ulcer, pelvic/regional, or special population screen',
   },
 
   {
@@ -69,6 +74,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
     ],
     next: 'sti-syndrome-picker',
+
+    summary: 'MSM: test all 3 sites; HIV+: same regimens mostly; pregnancy: doxycycline contraindicated; PCN only for syphilis',
+    skippable: true,
   },
 
   {
@@ -90,6 +98,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-testing-overview',
       },
     ],
+
+    summary: 'Empiric treatment if high probability or unreliable follow-up; await results if atypical or treatment failure workup',
   },
 
   {
@@ -103,6 +113,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-syphilis-staging', label: 'Syphilis Staging Tool' },
     ],
     next: 'sti-syndrome-picker',
+
+    summary: 'NAAT is gold standard for GC/CT; syphilis: RPR/VDRL for screening + treponemal for confirmation; HIV 4th gen combo',
+    skippable: true,
   },
 
   {
@@ -113,6 +126,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**For comprehensive sexual assault workup:**\n\n[DFSA Workup Consult](#/tree/dfsa-workup)\n\nIncludes:\n- Forensic specimen collection timelines\n- Consent framework\n- STI prophylaxis (GC, CT, trichomoniasis)\n- Pregnancy prophylaxis\n- HIV PEP assessment\n- Safety and follow-up planning\n\n**Quick STI prophylaxis for sexual assault:**\n- Ceftriaxone 500mg IM x1\n- Doxycycline 100mg BID x 7 days (or azithromycin 1g if pregnant)\n- Metronidazole 2g PO x1',
     citation: [1, 7],
     next: 'sti-syndrome-picker',
+
+    summary: 'Sexual assault: CTX 500mg IM + doxy 100mg BID x 7d + metro 2g PO — see DFSA consult for full protocol',
   },
 
   // =====================================================================
@@ -143,6 +158,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-mgen-workup',
       },
     ],
+
+    summary: 'Differentiate male urethritis vs cervicitis vs recurrent/persistent — guides empiric regimen',
   },
 
   {
@@ -228,6 +245,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'PID if cervical motion/uterine/adnexal tenderness present — escalate to PID treatment if any criterion met',
   },
 
   {
@@ -238,6 +257,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Consider M. genitalium when:**\n- Persistent/recurrent urethritis or cervicitis\n- Initial GC/CT treatment failure\n- NGU with negative GC/CT\n\n**Key facts:**\n- Causes 15-25% of NGU cases\n- **Macrolide resistance: 44-90% in US**\n- Beta-lactams do NOT work (no cell wall)\n- NAAT available at reference labs\n\n**Treatment (resistance testing available):**\n- Macrolide-sensitive: Doxy 100mg BID x 7d, THEN azithromycin 1g day 1, then 500mg daily x 3d (2.5g total)\n- Macrolide-resistant: Doxy 100mg BID x 7d, THEN moxifloxacin 400mg daily x 7d\n\n**Treatment (no resistance testing):**\n- Doxy 100mg BID x 7d, THEN moxifloxacin 400mg daily x 7d\n\n**Test of cure:** 21 days post-treatment if symptoms persist',
     citation: [1, 8],
     next: 'sti-partner-mgmt',
+
+    summary: 'M. genitalium causes 15-25% of NGU — 44-90% macrolide resistant in US; doxy then moxifloxacin if no resistance testing',
   },
 
   {
@@ -251,6 +272,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
     ],
     next: 'sti-syndrome-picker',
+
+    summary: 'Pregnancy: doxycycline CI (use azithromycin); syphilis requires PCN only — desensitize if allergic',
+    safetyLevel: 'warning',
   },
 
   {
@@ -261,6 +285,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Generally same treatment as HIV-negative patients:**\n\n**No changes needed:**\n- Gonorrhea: Ceftriaxone 500mg IM x1\n- Chlamydia: Doxycycline 100mg BID x 7d\n- Syphilis: Benzathine PCN 2.4 MU IM (same staging/dosing)\n\n**Considerations:**\n- HSV: May need higher doses or longer duration; suppressive therapy more strongly recommended\n- Drug interactions: Check ART interactions (especially with fluoroquinolones, azole antifungals)\n- Syphilis: CSF exam recommended if neurologic symptoms, treatment failure, or tertiary disease\n- More aggressive follow-up serology for syphilis\n\n**Testing:**\n- Screen for all STIs at least annually\n- More frequent screening (every 3-6 months) if ongoing risk',
     citation: [1],
     next: 'sti-syndrome-picker',
+
+    summary: 'HIV+: generally same treatment; check ART interactions; more aggressive syphilis follow-up and HSV suppression',
+    skippable: true,
   },
 
   {
@@ -301,6 +328,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Not technically an STI but frequently co-occurs.**\n\n**First-line treatment:**\n- Metronidazole 500mg PO BID x 7 days, OR\n- Metronidazole gel 0.75% intravaginally daily x 5 days, OR\n- Clindamycin cream 2% intravaginally at bedtime x 7 days\n\n**Alternative:**\n- Clindamycin 300mg PO BID x 7 days\n- Secnidazole 2g PO x1\n\n**Partner treatment:**\n- Traditionally NOT recommended\n- **2025 RCT:** Partner treatment reduced recurrence (35% vs 63% at 12 weeks) - consider offering\n\n**Recurrent BV:**\n- Metronidazole gel 0.75% twice weekly for 4-6 months\n\n**Pregnancy:** Treat all symptomatic. Metronidazole safe.',
     citation: [1, 9],
     next: 'sti-syndrome-picker',
+
+    summary: 'BV: metronidazole 500mg BID x 7d — not strictly STI but frequently co-occurs; 2025 RCT supports partner treatment',
+    skippable: true,
   },
 
   // =====================================================================
@@ -341,6 +371,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-ulcer-empiric',
       },
     ],
+
+    summary: 'Ulcer DDx by characteristics: HSV painful/vesicular, syphilis painless/indurated, chancroid painful/purulent, LGV painless',
   },
 
   {
@@ -367,6 +399,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-hsv-suppressive',
       },
     ],
+
+    summary: 'Determine first episode vs recurrent vs frequent recurrences — guides treatment duration and suppressive therapy discussion',
   },
 
   {
@@ -468,6 +502,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-syphilis-staging', label: 'Syphilis Staging Tool' },
     ],
     next: 'sti-syphilis-rx',
+
+    summary: 'Syphilis staging determines treatment — primary/secondary/early latent vs late latent vs tertiary vs neuro',
+    skippable: true,
   },
 
   {
@@ -614,6 +651,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-pharyngeal',
       },
     ],
+
+    summary: 'Select pelvic/regional syndrome — PID, epididymitis, proctitis, or pharyngeal infection',
   },
 
   {
@@ -636,6 +675,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'PID: any 1 of CMT/uterine/adnexal tenderness — hospitalize if pregnant, TOA, severe illness, unable to comply',
   },
 
   {
@@ -707,6 +748,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-epididymitis-enteric',
       },
     ],
+
+    summary: 'Epididymitis etiology by age: <35 STI (GC/CT), >35 enteric bacteria; MSM needs dual coverage; rule out torsion',
   },
 
   {
@@ -858,6 +901,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
         next: 'sti-sexual-assault',
       },
     ],
+
+    summary: 'Select special population for targeted screening and treatment guidance',
   },
 
   {
@@ -871,6 +916,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
     ],
     next: 'sti-pregnancy-mods',
+
+    summary: 'ACOG 2024: syphilis screening 3x (1st visit, 28-32w, delivery); HSV suppression from 36 weeks if history',
   },
 
   {
@@ -884,6 +931,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-doxypep', label: 'DoxyPEP Eligibility' },
     ],
     next: 'sti-doxypep-guide',
+
+    summary: 'MSM: test all 3 sites; doxyPEP 200mg within 72h post-sex reduces syphilis 73-87%, CT 70-88%, GC ~50%',
   },
 
   {
@@ -894,6 +943,9 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Confidentiality:**\n- In most states, minors can consent to STI diagnosis and treatment without parental consent\n- Check your state-specific laws\n- Maintain confidentiality to promote health-seeking behavior\n\n**Consent considerations:**\n- Minor consent laws vary by state\n- Generally, minors can consent to: STI testing/treatment, contraception, prenatal care\n- Document capacity and understanding\n\n**Special considerations:**\n- Screen for trafficking indicators\n- Assess safety of sexual relationships\n- Partner age difference (statutory rape reporting varies by state)\n- Vaccination catch-up (HPV, Hep A, Hep B)\n\n**Treatment:** Same regimens as adults (weight-based dosing if needed)',
     citation: [1, 5],
     next: 'sti-syndrome-picker',
+
+    summary: 'Minor consent in most states; screen for trafficking; same regimens as adults; vaccination catch-up (HPV, HepA/B)',
+    skippable: true,
   },
 
   {
@@ -929,6 +981,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Consider mpox when:**\n- MSM or transgender women with new skin lesions\n- Anyone with genital/perianal ulcers\n- High local mpox incidence\n\n**Clinical features:**\n- Skin lesions (vesicles, pustules, ulcers)\n- Can mimic HSV, syphilis, chancroid\n- May present as proctitis\n- Systemic symptoms (fever, lymphadenopathy)\n\n**Key point: Mpox does NOT rule out STI**\n- 41% of mpox patients reported STI in prior year\n- 38% had HIV at diagnosis\n- TEST FOR BOTH\n\n**Testing:**\n- PCR from lesion swabs (2-3 swabs)\n- Not indicated for asymptomatic screening\n\n**Management:**\n- Mostly supportive care\n- Tecovirimat available (efficacy not proven)\n- Isolation until lesions crusted and healed\n\n**JYNNEOS vaccination** for at-risk MSM, known/suspected exposure.',
     citation: [1, 12],
     next: 'sti-syndrome-picker',
+
+    summary: 'Consider mpox in MSM with genital/perianal lesions — 41% had STI in prior year; TEST FOR BOTH',
   },
 
   // =====================================================================
@@ -946,6 +1000,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
       { id: 'sti-ept-generator', label: 'EPT Generator' },
     ],
     next: 'sti-toc-indications',
+
+    summary: 'Partners within 60 days evaluated + treated; EPT legal in 47 states — CT/doxy, GC/cefixime, trich/metro',
   },
 
   {
@@ -956,6 +1012,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Test of cure (TOC) REQUIRED:**\n- **Pharyngeal gonorrhea** - all cases (7-14 days post-treatment)\n- **Pregnancy** - GC and CT (3-4 weeks post-treatment)\n- **Treatment failure** or persistent symptoms\n- **HIV+** with syphilis - RPR titers\n\n**TOC NOT routinely required:**\n- Uncomplicated urogenital GC/CT in non-pregnant adults\n\n**Reinfection screening (NOT test of cure):**\n- Retest ALL patients with GC/CT at **3 months**\n- Reinfection is common (high reinfection rates from untreated partners)\n\n**Method notes:**\n- NAAT can remain positive for weeks after successful treatment (dead organisms)\n- For TOC, wait at least 7-14 days (pharyngeal) or 3-4 weeks (pregnancy)\n- Culture preferred for pharyngeal TOC when possible',
     citation: [1],
     next: 'sti-reporting',
+
+    summary: 'TOC required for pharyngeal GC (7-14d), pregnancy (3-4w), treatment failure; retest ALL GC/CT at 3 months',
   },
 
   {
@@ -966,6 +1024,8 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     body: '**Nationally notifiable STIs (report to state/local health department):**\n- Syphilis (all stages)\n- Gonorrhea\n- Chlamydia\n- Chancroid\n- HIV\n\n**State-specific reporting:**\n- Requirements vary by state\n- Check local health department guidelines\n- Most labs auto-report positive results\n\n**Contact tracing:**\n- Health department may assist with partner notification\n- Especially important for syphilis clusters\n\n**Antimicrobial resistance reporting:**\n- Report suspected treatment failures (especially gonorrhea)\n- CDC monitors through GISP (Gonococcal Isolate Surveillance Project)',
     citation: [1],
     next: 'sti-followup-summary',
+
+    summary: 'Nationally notifiable: syphilis, GC, CT, chancroid, HIV — report suspected GC treatment failures to CDC/health dept',
   },
 
   {

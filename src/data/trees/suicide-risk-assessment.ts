@@ -35,6 +35,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
       { id: 'safety-plan-builder', label: 'Safety Plan Builder' },
     ],
     next: 'sui-cssrs',
+
+    summary: 'Universal screening is standard of care — ED-SAFE doubled detection, reduced attempts 30%; use C-SSRS',
+    skippable: true,
   },
 
   {
@@ -73,6 +76,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-negative-screen',
       },
     ],
+
+    summary: 'C-SSRS Q1-Q6 in order — Q6 behavior or Q4-Q5 intent/plan = HIGH risk; Q2-Q3 ideation = MODERATE',
+    safetyLevel: 'critical',
   },
 
   {
@@ -98,6 +104,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**This patient is at HIGH risk for suicide.** [5][6]\n\n**Immediate actions:**\n• 1:1 observation / suicide precautions\n• Remove all potential means from room (cords, sharps, medications)\n• Do NOT leave patient alone\n• Contact psychiatric consultation\n\n**Assess for markers of serious intent:**\n• High-lethality method planned (firearm, hanging, jumping)\n• Steps taken to avoid discovery\n• Final acts (note, giving away possessions)\n• Prior high-lethality attempt\n\n**Evaluate for medical stability:**\n• Any ingestion or self-harm requiring medical treatment?\n• Intoxication level — can patient participate in psychiatric evaluation?',
     citation: [5, 6],
     next: 'sui-high-factors',
+
+    summary: 'HIGH risk — immediate 1:1 observation, remove means from room, psychiatric consult, assess lethality of plan',
+    safetyLevel: 'critical',
   },
 
   {
@@ -118,6 +127,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-psych-eval',
       },
     ],
+
+    summary: 'Weigh prior attempt (STRONGEST predictor), means access, support system, protective factors for disposition',
   },
 
   {
@@ -128,6 +139,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Suicidal ideation present but no clear intent or recent behavior.**\n\n**Full assessment required:**\n• Duration and frequency of thoughts\n• Specific method considered?\n• What has prevented acting?\n• Access to means?\n• Support system availability\n• Psychiatric history\n• Substance use\n\n**Key question:** *"What has kept you from acting on these thoughts?"*\n\nThis identifies protective factors and reasons for living. [5][6]',
     citation: [5, 6],
     next: 'sui-moderate-factors',
+
+    summary: 'Ideation without clear intent — full assessment of duration, method, barriers, access, support, and psych history',
   },
 
   {
@@ -150,6 +163,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-safety-plan',
       },
     ],
+
+    summary: 'Balance risk vs protective factors — contract for safety alone has limited value; err toward psych consult if uncertain',
   },
 
   {
@@ -160,6 +175,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Passive ideation (wishes to be dead) without active suicidal thoughts.**\n\n**Still requires:**\n• Full assessment of risk/protective factors\n• Exploration of underlying causes\n• Safety planning\n• Lethal means counseling\n• Outpatient referral\n\n**Consider hospitalization if:**\n• Recent escalation\n• Poor insight\n• Severe depression or psychosis\n• No social support\n• History of rapid escalation in past',
     citation: [5, 6],
     next: 'sui-safety-plan',
+
+    summary: 'Passive ideation still requires full assessment, safety planning, lethal means counseling, and outpatient referral',
   },
 
   // =====================================================================
@@ -177,6 +194,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
       { id: 'safety-plan-builder', label: 'Safety Plan Builder' },
     ],
     next: 'sui-lethal-means',
+
+    summary: '6-step collaborative safety plan WITH patient — warning signs, coping, social contacts, professionals, 988, means restriction',
+    safetyLevel: 'critical',
   },
 
   {
@@ -187,6 +207,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Reducing access to lethal means during crisis saves lives.** [8]\n\n**Firearms (50% of suicides):**\n• Store outside home temporarily (trusted friend, family, gun range, police)\n• Lock in safe with ammunition stored separately\n• Cable lock through action\n• Remove firing pin\n\n**Medications:**\n• Give to family member to dispense\n• Lock in safe or lockbox\n• Dispose of unused medications\n• Limit quantities prescribed\n\n**Other means:**\n• Secure sharps, ropes, cords\n• Car keys to support person if driving into traffic considered\n\n**Involve support person:**\n• Family/friend takes possession or supervises access\n• Educate them on importance\n• Plan follow-up call at 48-72h to verify implementation',
     citation: [8],
     next: 'sui-discharge-criteria',
+
+    summary: 'Firearms = 50% of suicides — temporary storage outside home; involve support person for means restriction',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -212,6 +235,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Consult psychiatry for formal evaluation and disposition recommendation.**\n\n**Prepare for consultant:**\n• C-SSRS results\n• Risk and protective factors identified\n• Collateral information obtained\n• Medical clearance completed\n• Patient\'s stated wishes\n\n**While awaiting consult:**\n• Maintain appropriate observation level\n• Continue supportive care\n• Avoid confrontational approach\n• Allow support person presence if calming',
     citation: [5, 6],
     next: 'sui-psych-decision',
+
+    summary: 'Prepare C-SSRS results, risk/protective factors, collateral, and medical clearance for psychiatric consultant',
   },
 
   {
@@ -234,6 +259,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-partial',
       },
     ],
+
+    summary: 'Disposition based on psychiatry recommendation — admit, discharge with plan, or partial hospitalization/IOP',
   },
 
   {
@@ -264,6 +291,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-discharge-barriers',
       },
     ],
+
+    summary: 'ALL criteria must be met: safety plan, means restricted, support person present, follow-up within 72h, sober',
+    safetyLevel: 'critical',
   },
 
   {
@@ -294,6 +324,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-intox',
       },
     ],
+
+    summary: 'Identify and address specific barriers — no support person, means access, no follow-up, or intoxication',
   },
 
   {
@@ -304,6 +336,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Absence of support increases risk significantly.**\n\n**Options:**\n• Social work consult to identify resources\n• Contact family/friends patient hasn\'t considered\n• Crisis respite programs if available locally\n• Extended ED observation with intensive safety planning\n• Consider admission if truly no support\n\n**Document:**\n• Efforts made to identify support\n• Resources offered\n• Rationale for final disposition',
     citation: [5, 6],
     next: 'sui-discharge-criteria',
+
+    summary: 'Social work consult, crisis respite, extended observation — consider admission if truly no support available',
   },
 
   {
@@ -314,6 +348,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**If patient or family refuses means restriction:**\n\n**For firearms:**\n• Explain that temporary removal saves lives\n• Offer alternatives: gun safe with code held by friend, store at range or PD\n• If patient insists on keeping at home, strongly document counseling provided and refusal\n• Consider whether this refusal indicates higher risk → admission\n\n**Involve family/support:**\n• Can they secure means without patient\'s agreement?\n• Legal implications vary by state\n\n**If means cannot be restricted and risk is elevated:**\n• This is grounds for psychiatric admission or extended observation\n• Document thoroughly',
     citation: [8],
     next: 'sui-discharge-criteria',
+
+    summary: 'Refusal to restrict means may indicate higher risk — grounds for admission or extended observation',
+    safetyLevel: 'warning',
   },
 
   {
@@ -324,6 +361,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Follow-up within 24-72 hours is critical** — highest risk is first 30 days post-discharge.\n\n**Options:**\n• Federally Qualified Health Center (FQHC) — sliding scale\n• Community mental health center\n• Crisis stabilization unit\n• Hospital outpatient psychiatry clinic\n• ED-based case management to establish care\n• Telehealth psychiatry options\n\n**If truly no options:**\n• Schedule phone follow-up with ED\n• Longer observation period in ED\n• Consider admission for stabilization until follow-up arranged',
     citation: [3, 5],
     next: 'sui-discharge-criteria',
+
+    summary: 'FQHC, community mental health, telehealth options — highest risk is first 30 days post-discharge',
   },
 
   {
@@ -334,6 +373,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Patients cannot be accurately assessed for suicide risk while intoxicated.**\n\n**Management:**\n• Observe until clinically sober\n• Re-administer C-SSRS when sober\n• Reassess risk level and protective factors\n• Many patients will have resolution of acute SI with sobriety\n\n**Document:**\n• Initial presentation and SI\n• Reassessment when sober\n• Change in risk level\n\n**Note:** Chronic alcohol or substance use is a risk factor — address even if acute SI resolves.',
     citation: [5, 6],
     next: 'sui-cssrs',
+
+    summary: 'Cannot assess while intoxicated — observe until sober, re-administer C-SSRS; chronic substance use is a risk factor',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -359,6 +401,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     title: 'Documentation Requirements',
     body: '**Joint Commission (NPSG.15.01.01) requirements:** [2]\n\n**Document all of:**\n☐ Validated screening tool used (C-SSRS) and results\n☐ Risk factors identified (list specific ones)\n☐ Protective factors identified\n☐ Collateral obtained (family, records, outpatient providers)\n☐ Mental status examination\n☐ Lethal means assessment and counseling provided\n☐ Risk stratification with rationale\n☐ Safety plan completed (copy in chart)\n☐ Disposition decision and clinical rationale\n☐ Specific follow-up plan with appointment details\n☐ Crisis resources provided\n\n**Sentinel Event Note:**\nSuicide within **7 days** of ED discharge is now a sentinel event (updated 2024). [2]\n\n**Key phrases for documentation:**\n• "Patient denied active suicidal ideation with intent or plan"\n• "Lethal means counseling provided regarding [specific means]"\n• "Safety plan completed collaboratively with patient"',
     citation: [2],
+
+    summary: 'C-SSRS, risk/protective factors, means assessment, safety plan, disposition rationale — suicide within 7 days = sentinel event',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -389,6 +434,8 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
         next: 'sui-cssrs',
       },
     ],
+
+    summary: 'Select population for modified assessment approach — pediatric, geriatric, or veteran',
   },
 
   {
@@ -399,6 +446,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Mental health now 1 in 7 pediatric ED visits.** [5]\n\n**Key differences:**\n• Involve parents/guardians in ALL lethal means counseling\n• Parents often unaware of access to means in home\n• Social media and cyberbullying assessment\n• School performance and peer relationships\n• LGBTQ+ youth at elevated risk — affirming approach essential\n\n**Lethal means in homes with children:**\n• 40% of US homes with children have firearms\n• Many parents underestimate children\'s knowledge of location\n• Ask specifically: "Do you have firearms in the home? Are they locked? Where is the ammunition?"\n\n**Disposition:**\n• Lower threshold for admission given limited coping skills\n• Require parental supervision at all times post-discharge\n• School-based counseling referral',
     citation: [5],
     next: 'sui-cssrs',
+
+    summary: 'Involve parents in ALL means counseling; assess social media/cyberbullying; LGBTQ+ youth at elevated risk',
+    skippable: true,
   },
 
   {
@@ -409,6 +459,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Elderly have highest suicide completion rate.** [5][6]\n\n**Key differences:**\n• 81.9% hospitalization rate for suicidal ideation/self-harm\n• More likely to use highly lethal methods (firearms)\n• Less likely to disclose SI — actively screen\n• Physical illness and chronic pain major contributors\n• Social isolation and loss of independence\n• Cognitive impairment may limit insight\n\n**Assessment:**\n• Depression screening (PHQ-9, GDS)\n• Functional assessment\n• Social support network\n• Caregiver burden if applicable\n\n**Disposition:**\n• Lower threshold for admission\n• Geriatric psychiatry consultation if available\n• Home safety evaluation\n• Visiting nurse or home health referral',
     citation: [5, 6],
     next: 'sui-cssrs',
+
+    summary: 'Highest completion rate — more lethal methods, less likely to disclose; lower threshold for admission',
+    skippable: true,
   },
 
   {
@@ -419,6 +472,9 @@ export const SUICIDE_RISK_NODES: DecisionNode[] = [
     body: '**Veterans have elevated suicide risk.** [5]\n\n**Risk factors:**\n• Combat exposure and moral injury\n• PTSD and TBI\n• Military sexual trauma\n• Transition to civilian life\n• Loss of unit cohesion and identity\n• High firearm ownership\n\n**Assessment:**\n• C-SSRS with attention to PTSD symptoms\n• Lethal means counseling — veterans often own multiple firearms\n• VA connection status\n\n**Resources:**\n• Veterans Crisis Line: 988, then press 1\n• VA Same Day Mental Health Access\n• Vet Centers (community-based, not VA facilities)\n\n**Coordination:**\n• If patient has VA connection, contact VA for care coordination\n• Many veterans prefer VA care — facilitate warm handoff',
     citation: [5],
     next: 'sui-cssrs',
+
+    summary: 'Veterans Crisis Line 988 press 1; high firearm ownership; combat exposure, PTSD, TBI as risk factors',
+    skippable: true,
   },
 
 ];

@@ -43,6 +43,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-older-screen',
       },
     ],
+
+    summary: 'Age-based triage for suspected pediatric UTI — defines UTI criteria and exclusion populations',
   },
 
   {
@@ -53,6 +55,9 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: 'This pathway applies to infants **<48 weeks postmenstrual age** and **>7 days of life** with UTI defined as >50,000 CFU/mL in catheter-obtained specimen.\n\n**Exclusion criteria:**\n• History of Candida infection (consult Infectious Disease)\n• Concomitant bacteremia or meningitis\n• >48 weeks PMA\n• <7 days of age\n\nAlter antibiotic therapy based on culture-specific antimicrobial susceptibility.\n\n**DO NOT repeat urine culture for test of cure UNLESS Candida or ESBL.**',
     citation: [2],
     next: 'uti-neo-abx',
+
+    summary: 'Neonatal UTI pathway for <48wk PMA — exclude Candida, bacteremia, meningitis; do NOT repeat culture for test of cure',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -76,6 +81,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-low-risk',
       },
     ],
+
+    summary: 'Risk-stratify febrile infants 2-24mo for UTI >1% probability — screen all uncircumcised febrile males',
   },
 
   {
@@ -95,6 +102,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-low-risk',
       },
     ],
+
+    summary: 'Screen toilet-trained children with urinary symptoms, prior UTI with fever, or prolonged fever >5 days',
   },
 
   {
@@ -114,6 +123,9 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-ua-neg',
       },
     ],
+
+    summary: 'Catheter or SPA specimen required — bag specimens NOT acceptable for culture',
+    safetyLevel: 'warning',
   },
 
   {
@@ -124,6 +136,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: 'Obtain clean catch urine analysis with micro.\n\nInclude additional tests if STI is being considered.\n\nIf UA positive, **must obtain catheter or clean catch specimen for culture** — bag specimens are not acceptable for culture.\n\n[UTI Definitions & Urinalysis](#/info/uti-definition-info)',
     citation: [1, 3],
     next: 'uti-ua-result-older',
+
+    summary: 'Obtain clean catch UA with micro — must use catheter or clean catch for culture if positive',
   },
 
   {
@@ -143,6 +157,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-ua-neg',
       },
     ],
+
+    summary: 'Assess UA for leukocyte esterase, nitrites, or microscopic WBC/bacteria',
   },
 
   {
@@ -163,6 +179,9 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: '**MUST be obtained from clean catch, catheter, or suprapubic aspirate.**\n\nIf bag sample was previously tested, another specimen must be obtained for culture.\n\nCase manager follow-up on culture results.',
     citation: [1, 3],
     next: 'uti-admit-assess',
+
+    summary: 'Culture MUST come from catheter, SPA, or clean catch — never bag specimen',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -186,6 +205,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-inpatient-abx',
       },
     ],
+
+    summary: 'Admit if ill-appearing, dehydrated, vomiting, social concerns, or failed outpatient treatment',
   },
 
   {
@@ -223,6 +244,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
       },
       monitoring: 'Culture follow-up in 24-48 hours. Adjust antibiotics based on susceptibility results.',
     },
+
+    summary: 'Cephalexin first-line PO; ceftriaxone IM if <6mo or compliance concern; 7-day course (10 if <6mo)',
   },
 
   {
@@ -260,6 +283,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
       },
       monitoring: 'Clinical response at 24-48 hours. Culture susceptibility to guide de-escalation. Transition to PO when tolerating oral intake.',
     },
+
+    summary: 'IV cefazolin first-line; ceftriaxone if CNS concern; transition PO at 24-48h; total 7 days',
   },
 
   {
@@ -279,6 +304,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-neo-rx-comp',
       },
     ],
+
+    summary: 'Classify neonatal UTI as complicated vs uncomplicated based on anatomy, catheter, recent abx, immunosuppression',
   },
 
   {
@@ -300,6 +327,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
       },
       monitoring: 'Culture susceptibility to guide therapy. Do NOT repeat urine culture for test of cure unless Candida or ESBL.',
     },
+
+    summary: 'IV cefazolin then PO cephalexin for 7 days — do NOT repeat culture for test of cure unless Candida/ESBL',
   },
 
   {
@@ -321,6 +350,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
       },
       monitoring: 'Culture susceptibility to guide therapy. Do NOT repeat urine culture for test of cure unless Candida or ESBL.',
     },
+
+    summary: 'Same regimen as uncomplicated but extended to 10-day total course for complicated neonatal UTI',
   },
 
   // =====================================================================
@@ -335,6 +366,9 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: 'Obtain **renal and bladder ultrasound (RBUS)** following UTI treatment completion.\n\n*If fever persists >48 hours after start of antibiotics or unusually severe clinical illness, obtain RBUS sooner.',
     citation: [2, 7],
     next: 'uti-neo-rbus-risk',
+
+    summary: 'Obtain RBUS after neonatal UTI treatment; sooner if fever persists >48h or unusually severe illness',
+    skippable: true,
   },
 
   {
@@ -354,6 +388,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-neo-rbus-check',
       },
     ],
+
+    summary: 'Assess for atypical pathogen, VUR/CAKUT family history, complex course, or prior UTI',
   },
 
   {
@@ -373,6 +409,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-neo-rbus-abnl',
       },
     ],
+
+    summary: 'Assess RBUS for hydronephrosis, parenchymal abnormalities, or size discrepancies',
   },
 
   {
@@ -407,6 +445,9 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: 'Discharge with PCP or ED follow-up in **24–48 hours**.\n\nCase manager follow-up on urine culture.\n\n**If culture positive:** Assess antibiotic susceptibility and adjust as necessary with PCP involvement.\n\n**If culture negative:** Contact PCP with results.',
     citation: [1],
     next: 'uti-imaging',
+
+    summary: 'Discharge with PCP/ED follow-up in 24-48h; adjust antibiotics based on culture susceptibility',
+    skippable: true,
   },
 
   {
@@ -417,6 +458,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
     body: '**Discharge criteria:**\n• Non-toxic appearing\n• Well-hydrated\n• Can tolerate oral antibiotics and fluids\n• Normal genitourinary anatomy\n• RBUS reviewed if performed\n• Quality follow-up within 24–48 hours\n• Clinically stable for home',
     citation: [1, 3],
     next: 'uti-imaging',
+
+    summary: 'Discharge when non-toxic, hydrated, tolerating PO, normal anatomy, and quality follow-up arranged',
   },
 
   {
@@ -436,6 +479,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-complete',
       },
     ],
+
+    summary: 'RBUS for first febrile UTI 2-24mo; also if non-E. coli, family hx, or no improvement at 48h',
   },
 
   {
@@ -455,6 +500,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-complete',
       },
     ],
+
+    summary: 'Assess RBUS for hydronephrosis, parenchymal loss, kidney size discrepancies, or radiologist concern',
   },
 
   {
@@ -474,6 +521,8 @@ export const UTI_PEDS_NODES: DecisionNode[] = [
         next: 'uti-complete',
       },
     ],
+
+    summary: 'VCUG criteria: hydronephrosis, scarring, dilated ureter, non-E. coli pathogen, ESBL, or radiologist recommendation',
   },
 
   {

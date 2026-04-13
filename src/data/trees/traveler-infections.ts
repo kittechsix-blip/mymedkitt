@@ -112,6 +112,8 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
       },
     ],
     citation: [1, 2],
+
+    summary: 'Isolate if respiratory/hemorrhage/rash; calculate incubation period; determine presenting syndrome',
   },
 
   // ==================== FEVER MODULE ====================
@@ -153,6 +155,8 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
       },
     ],
     citation: [1, 2],
+
+    summary: 'Incubation period narrows DDx; eschar = start doxycycline immediately; hepatosplenomegaly = malaria/typhoid',
   },
 
   {
@@ -192,6 +196,9 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [3],
+
+    summary: 'STAT thick/thin smears + RDT, repeat q12-24h x3 if negative — P. falciparum = medical emergency',
+    safetyLevel: 'critical',
   },
 
   {
@@ -241,6 +248,8 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [2, 7, 8],
+
+    summary: 'Classify by syndrome pattern — thrombocytopenia, hepatosplenomegaly, jaundice, eschar, relative bradycardia',
   },
 
   {
@@ -538,6 +547,8 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [6],
+
+    summary: 'Acute <2wk = bacterial/viral, persistent >2wk = parasites; red flags: fever + bloody stools, severe dehydration',
   },
 
   {
@@ -769,6 +780,8 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [1, 2],
+
+    summary: 'Classify rash: maculopapular, petechiae/purpura, eschar, vesicular — measles needs airborne precautions',
   },
 
   {
@@ -967,6 +980,8 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [1, 2],
+
+    summary: 'Respiratory distress + travel = airborne precautions immediately; rule out MERS, avian flu, TB, measles',
   },
 
   {
@@ -1152,6 +1167,9 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
       },
     ],
     citation: [1, 2],
+
+    summary: 'Cerebral malaria, meningococcal meningitis, rabies, Japanese encephalitis — life-threatening causes first',
+    safetyLevel: 'warning',
   },
 
   {
@@ -1375,5 +1393,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 - CDC Travel Notices: https://wwwnc.cdc.gov/travel/notices`,
     options: [],
     citation: [1, 2],
+
+    summary: 'Admit all P. falciparum malaria, meningococcal, severe dengue; low threshold for undifferentiated fever',
   },
 ];

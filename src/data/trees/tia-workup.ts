@@ -42,6 +42,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-canadian-score', label: 'Canadian TIA Score' },
     ],
     next: 'tia-definition',
+
+    summary: 'Resolved focal neuro + negative DWI = true TIA; 90-day stroke risk up to 17.8%, 50% in first 2 days',
   },
 
   {
@@ -53,6 +55,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     images: [{ src: 'images/tia-workup/dwi-acute-infarct.png', alt: 'Axial brain DWI (left) showing bright signal and ADC map (right) showing dark match indicating acute ischemic infarction', caption: 'DWI MRI: restricted diffusion in acute ischemic stroke — the same sequence distinguishing DWI-positive TIA from true TIA (no infarct). ~30-50% of "TIAs" by time criteria are DWI-positive. (CC BY 4.0)' }],
     citation: [1, 2],
     next: 'tia-classic-presentation',
+
+    summary: 'Tissue-based definition: no infarct on DWI MRI — 30-50% of time-based "TIAs" are actually strokes',
+    skippable: true,
   },
 
   {
@@ -63,6 +68,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Red Flags FOR TIA (Against Mimics):**\n\n**Symptom Quality:**\n- **Sudden onset** (maximal at onset, "like a switch")\n- **Negative symptoms** (weakness, numbness, vision loss)\n- **Definite focal deficits** in single vascular territory\n\n**Typical TIA Symptoms:**\n- Unilateral motor weakness\n- Unilateral sensory loss\n- Speech disturbance (aphasia, dysarthria)\n- Monocular vision loss (amaurosis fugax)\n- Hemianopia\n- Ataxia, vertigo with other posterior circulation signs\n\n**Timing:**\n- Duration <1 hour (most <15 minutes)\n- Complete resolution by time of evaluation\n\n**Risk Factors:**\n- Hypertension\n- Diabetes\n- Atrial fibrillation\n- Prior stroke/TIA\n- Carotid stenosis\n- Coronary artery disease [1][3]',
     citation: [1, 3],
     next: 'tia-vascular-territories',
+
+    summary: 'Sudden onset, negative symptoms, focal deficit in single vascular territory, duration <1h, risk factors',
+    skippable: true,
   },
 
   {
@@ -73,6 +81,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Anterior Circulation (Carotid):**\n\n**MCA Territory:**\n- Contralateral face/arm > leg weakness\n- Contralateral sensory loss\n- Aphasia (dominant hemisphere)\n- Neglect (non-dominant hemisphere)\n\n**ACA Territory:**\n- Contralateral leg > arm weakness\n- Personality changes, abulia\n\n**Ophthalmic Artery:**\n- Amaurosis fugax (monocular vision loss)\n- "Curtain coming down" description\n\n**Posterior Circulation (Vertebrobasilar):**\n- Diplopia, dysarthria, dysphagia\n- Crossed deficits (ipsilateral face + contralateral body)\n- Ataxia, vertigo with other brainstem signs\n- Bilateral visual loss\n\n**Key Point:** Symptoms must fit a single vascular territory. Non-anatomic symptoms suggest mimic. [1]',
     citation: [1],
     next: 'tia-mimics',
+
+    summary: 'MCA (face/arm > leg), ACA (leg > arm), ophthalmic (amaurosis), posterior (crossed deficits, diplopia)',
+    skippable: true,
   },
 
   {
@@ -83,6 +94,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Common Mimics:**\n\n| Mimic | Key Differentiating Features |\n|-------|------------------------------|\n| **Migraine with aura** | Gradual spread (5-20 min), positive phenomena (scintillations, tingling), headache follows |\n| **Seizure/Todd\'s** | Convulsive activity, tongue bite, postictal confusion, gradual recovery |\n| **Hypoglycemia** | Rapidly correctable, autonomic symptoms, altered consciousness |\n| **Syncope** | Loss of consciousness, diffuse (not focal), prodrome, rapid recovery |\n| **Vestibular** | Isolated vertigo, positional, Dix-Hallpike positive, no other neuro signs |\n| **TGA** | Isolated memory dysfunction, repetitive questioning, no motor deficits |\n| **Anxiety/panic** | Bilateral symptoms, hyperventilation, prolonged duration |\n\n**Red Flags AGAINST TIA:**\n- Gradual onset or spread\n- Positive phenomena (tingling, scintillations)\n- Loss of consciousness\n- Bilateral symptoms\n- Headache preceding symptoms\n- Non-anatomic distribution [1][3]',
     citation: [1, 3],
     next: 'tia-mimic-question',
+
+    summary: 'Up to 60% of TIA referrals are mimics — migraine, seizure, hypoglycemia, syncope, vestibular, TGA',
   },
 
   {
@@ -97,6 +110,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { label: 'Possible TIA, uncertain', description: 'Atypical features, still warrants workup', next: 'tia-risk-strat-intro' },
       { label: 'Likely mimic', description: 'Features more consistent with mimic', next: 'tia-mimic-workup' },
     ],
+
+    summary: 'Sudden onset + negative symptoms + single territory favors TIA; gradual/positive phenomena favors mimic',
   },
 
   {
@@ -107,6 +122,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Even if mimic suspected, consider:**\n\n**Still perform basic TIA workup if:**\n- Any vascular risk factors present\n- Cannot definitively confirm mimic diagnosis\n- First episode (no prior similar events)\n- Patient/family concerned about stroke\n\n**Minimum evaluation:**\n- Fingerstick glucose\n- ECG (rule out afib)\n- Basic neuro exam\n- CT head if any red flags\n\n**Specific mimic workups:**\n- **Migraine:** History, triggers, prior similar events\n- **Seizure:** Witnesses, tongue bite, postictal state, EEG\n- **Hypoglycemia:** Glucose, response to correction\n- **Vestibular:** HINTS exam, Dix-Hallpike\n- **Syncope:** Orthostatics, ECG, cardiac workup\n\n**When in doubt, treat as TIA.** The consequences of missing a TIA far outweigh over-evaluation. [1][2]',
     citation: [1, 2],
     next: 'tia-risk-strat-intro',
+
+    summary: 'Even if mimic suspected, perform basic workup if any risk factors — consequences of missing TIA outweigh over-evaluation',
   },
 
   // =====================================================================
@@ -125,6 +142,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-canadian-score', label: 'Canadian TIA Score' },
     ],
     next: 'tia-abcd2-score',
+
+    summary: 'Canadian TIA Score preferred (AUC 0.70 vs 0.60), but always identify high-risk features regardless of score',
   },
 
   {
@@ -138,6 +157,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-abcd2', label: 'ABCD2 Calculator' },
     ],
     next: 'tia-canadian-score',
+
+    summary: 'ABCD2 0-7: do NOT rely alone for safe discharge (ACEP Level B) — does not account for mechanism',
+    skippable: true,
   },
 
   {
@@ -151,6 +173,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-canadian-score', label: 'Canadian TIA Calculator' },
     ],
     next: 'tia-high-risk-features',
+
+    summary: '13-variable score with investigation findings — superior to ABCD2, 5 risk tiers from minimal to critical',
+    skippable: true,
   },
 
   {
@@ -161,6 +186,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Admit regardless of risk score if ANY present:**\n\n1. **Crescendo TIA**\n   - >1 TIA within 7 days\n   - Indicates unstable plaque or ongoing embolization\n\n2. **Large Vessel Stenosis >=50%**\n   - Carotid or intracranial\n   - May need urgent intervention\n\n3. **Atrial Fibrillation**\n   - New or known, requires anticoagulation\n   - Cannot safely start DOAC without observation\n\n4. **Acute Infarct on Imaging**\n   - DWI positive = stroke, not TIA\n   - Higher risk even if symptoms resolved\n\n5. **Known Hypercoagulable State**\n   - May need specialized anticoagulation\n\n6. **Cardioembolic Source**\n   - LV thrombus, valvular disease\n\n7. **Fluctuating/Stuttering Symptoms**\n   - Ongoing ischemia concern\n\n8. **Cannot Complete Outpatient Workup <48-72h**\n   - No rapid TIA clinic access [1][2]',
     citation: [1, 2],
     next: 'tia-risk-question',
+
+    summary: 'Admit regardless of score: crescendo TIA, stenosis >=50%, afib, DWI+, hypercoagulable, fluctuating symptoms',
+    safetyLevel: 'warning',
   },
 
   {
@@ -175,6 +203,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { label: 'Moderate-high risk score (no high-risk features)', description: 'Consider observation or admission', next: 'tia-workup-intro', urgency: 'urgent' },
       { label: 'Low risk (score AND features)', description: 'May be discharge candidate with rapid follow-up', next: 'tia-workup-intro' },
     ],
+
+    summary: 'Combine risk score + high-risk features + outpatient workup access for disposition decision',
   },
 
   // =====================================================================
@@ -192,6 +222,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-workup-checklist', label: 'Workup Checklist' },
     ],
     next: 'tia-labs',
+
+    summary: 'STAT glucose + ECG, then labs, brain imaging (CT/MRI), vascular imaging (CTA), cardiac eval',
   },
 
   {
@@ -202,6 +234,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Required Labs:**\n\n| Test | Rationale |\n|------|-----------|\n| **Fingerstick glucose** | Hypoglycemia mimic |\n| **CBC** | Anemia, thrombocytosis, polycythemia |\n| **BMP/CMP** | Electrolytes, renal function (for contrast) |\n| **PT/INR, PTT** | Baseline before anticoagulation |\n| **Lipid panel** | Guides statin therapy |\n| **HbA1c** | Undiagnosed diabetes |\n\n**Consider:**\n| Test | When |\n|------|------|\n| **Troponin** | Cardiac symptoms, concern for MI |\n| **TSH** | Afib detected |\n| **Hypercoagulable panel** | Young patient, no risk factors, cryptogenic |\n\n**Key Finding for Canadian TIA Score:**\n- Glucose >=270 mg/dL = +1.0 points\n- Platelets >=400 = +1.5 points [1][2]',
     citation: [1, 2],
     next: 'tia-brain-imaging',
+
+    summary: 'Glucose, CBC, BMP, coags, lipids, HbA1c — glucose >=270 and platelets >=400 affect Canadian TIA score',
+    skippable: true,
   },
 
   {
@@ -212,6 +247,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Non-Contrast CT Head:**\n- **Role:** Rule out hemorrhage, mass, large established stroke\n- **Limitation:** Low sensitivity for acute ischemic infarct (~16-30%)\n- **Obtain:** Immediately in ED\n\n**MRI with DWI (Preferred):**\n- **Role:** Distinguish true TIA (negative) from minor stroke (positive)\n- **Sensitivity:** ~80-90% for acute infarct in first 24h\n- **Critical Finding:** ~30-50% of clinical "TIAs" have infarct = stroke\n- **Timing:** Ideally within 24 hours of symptom onset\n\n**If DWI Positive:**\n- Patient has had a stroke, not TIA\n- Higher recurrent stroke risk\n- Same treatment approach but changes risk stratification\n\n**AHA 2023:** "When MRI cannot be obtained acutely, it remains reasonable to make a clinical diagnosis of TIA based on negative NCCT and symptom resolution within 24 hours." [1][2]',
     citation: [1, 2],
     next: 'tia-vascular-imaging',
+
+    summary: 'MRI DWI preferred — 30-50% of clinical TIAs have infarct; CT alone has only 16-30% sensitivity',
   },
 
   {
@@ -222,6 +259,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**CTA Head and Neck (Preferred in ED):**\n- Identifies large vessel stenosis, occlusion, dissection\n- ~50% of TIA patients have abnormal cerebrovascular imaging\n- Fast, widely available, high accuracy\n\n**Critical Findings:**\n- Carotid stenosis >=50% (may need urgent intervention)\n- Intracranial stenosis\n- Arterial dissection\n\n**Alternatives:**\n\n| Modality | Pros | Cons |\n|----------|------|------|\n| **Carotid Doppler US** | No contrast, bedside | Limited intracranial view |\n| **MRA** | No radiation, good accuracy | May overestimate stenosis |\n| **Conventional angiography** | Gold standard | Invasive, reserved for discordant results |\n\n**Stenosis Grading (NASCET):**\n- <50%: Medical management\n- 50-69%: Consider CEA/CAS\n- >=70%: CEA/CAS recommended [1][2]',
     citation: [1, 2],
     next: 'tia-cardiac-workup',
+
+    summary: 'CTA head/neck to identify stenosis >=50%, dissection — 50% of TIA patients have abnormal vascular imaging',
   },
 
   {
@@ -232,6 +271,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**ECG (Required):**\n- Detect atrial fibrillation/flutter (~7% of TIA/stroke)\n- Evidence of prior MI, LVH\n- Obtain ASAP, ideally before disposition\n\n**Echocardiography:**\n\n| Type | When | Detects |\n|------|------|---------||\n| **TTE** | All patients eventually | LV thrombus, valvular disease, wall motion abnormalities |\n| **TEE** | Suspected cardioembolic, young patient, no clear etiology | PFO, LA appendage thrombus, aortic arch atheroma |\n| **Bubble study** | Cryptogenic in younger patient | Right-to-left shunt (PFO) |\n\n**Can defer echo to outpatient if:**\n- Low-risk features\n- Rapid follow-up available\n- No afib on ECG\n\n**Extended Cardiac Monitoring:**\n- 24-48h Holter if high clinical suspicion\n- Extended monitoring (14-30 days) if cryptogenic\n- AF detected in additional 5-15% vs ED ECG alone [1][2]',
     citation: [1, 2],
     next: 'tia-workup-complete-question',
+
+    summary: 'ECG detects afib in ~7%; extended monitoring finds 5-15% more; TTE/TEE for cardioembolic source',
   },
 
   {
@@ -247,6 +288,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { label: 'Infarct on imaging (DWI positive)', description: 'This is a stroke, not TIA', next: 'tia-dwi-positive', urgency: 'urgent' },
       { label: 'Workup negative/non-specific', description: 'Consider other etiologies', next: 'tia-etiology-intro' },
     ],
+
+    summary: 'Route by key finding: significant stenosis, afib, DWI+ infarct, or negative workup',
   },
 
   // =====================================================================
@@ -261,6 +304,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Understanding etiology guides treatment:**\n\n| Category | Prevalence | Key Features |\n|----------|------------|---------------|\n| **Large artery atherosclerosis** | 15-25% | Carotid/intracranial stenosis >=50% |\n| **Cardioembolism** | 20-30% | Afib, LV thrombus, valve disease |\n| **Small vessel (lacunar)** | 20-25% | HTN/DM, subcortical location |\n| **Other determined** | 5% | Dissection, hypercoagulable, vasculitis |\n| **Cryptogenic** | 25-40% | No clear etiology after workup |\n\n**Treatment implications:**\n- Large artery: Consider revascularization\n- Cardioembolic: Anticoagulation, not DAPT\n- Small vessel/cryptogenic: DAPT pathway\n- Other: Treat specific cause\n\n**Cryptogenic workup:**\n- Extended cardiac monitoring\n- TEE with bubble study\n- Hypercoagulable panel if young [1][5]',
     citation: [1, 5],
     next: 'tia-etiology-question',
+
+    summary: 'TOAST classification guides treatment — large artery, cardioembolic, small vessel, other, cryptogenic (25-40%)',
+    skippable: true,
   },
 
   {
@@ -278,6 +324,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { label: 'Dissection suspected', description: 'Neck pain, trauma, young patient', next: 'tia-dissection' },
       { label: 'Cryptogenic/unknown', description: 'No clear etiology identified', next: 'tia-cryptogenic' },
     ],
+
+    summary: 'Select most likely mechanism to determine treatment pathway',
   },
 
   {
@@ -288,6 +336,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Carotid Stenosis Management:**\n\n| Stenosis | Management |\n|----------|------------|\n| <50% | Medical management only |\n| 50-69% | Consider CEA/CAS, medical reasonable |\n| >=70% | CEA/CAS recommended if life expectancy >5 years |\n\n**Timing is Critical:**\n- **Within 2 weeks** of TIA for symptomatic stenosis >=50%\n- **CEA preferred over CAS** if within 7 days (lower stroke risk)\n- NNT = 3 if CEA within 2 weeks\n- NNT = 6 if delayed 2-4 weeks\n\n**CEA vs CAS:**\n| | CEA | CAS |\n|---|-----|-----|\n| **Preferred if** | Within 2 weeks, age >70 | High surgical risk, radiation, prior CEA |\n| **Early stroke risk** | 1.4% if within 2 weeks | 8.3% if within first week |\n\n**Intracranial Stenosis:**\n- Medical management preferred (SAMMPRIS trial)\n- Consider intervention only if refractory [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: 'Symptomatic stenosis >=50% needs CEA/CAS within 2 weeks — NNT=3 if done within 2 weeks',
   },
 
   {
@@ -298,6 +348,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Afib is the most common cardioembolic source.**\n\n**Requires anticoagulation, NOT DAPT:**\n\n| Agent | Dose | Notes |\n|-------|------|-------|\n| **Apixaban** (preferred) | 5 mg BID | Lowest bleeding risk |\n| **Rivaroxaban** | 20 mg daily with food | Once daily |\n| **Dabigatran** | 150 mg BID | Reversible with idarucizumab |\n| **Warfarin** | INR 2-3 | If DOAC contraindicated, mechanical valve |\n\n**Dose reductions (apixaban):**\n>=2 of: age >=80, weight <=60 kg, Cr >=1.5 -> 2.5 mg BID\n\n**Timing of Anticoagulation Start:**\n- TIA (no infarct): Can start immediately\n- Minor stroke: 1-3 days\n- Moderate stroke: 3-6 days\n- Large stroke: 12-14 days\n\n**"1-2-3-4 Day Rule"** for DOACs after stroke based on infarct size. [1][5]',
     citation: [1, 5],
     next: 'tia-disposition-intro',
+
+    summary: 'Afib requires anticoagulation NOT DAPT — apixaban preferred, start immediately for TIA without infarct',
+    safetyLevel: 'warning',
   },
 
   {
@@ -308,6 +361,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Patent Foramen Ovale (PFO):**\n\n**When to evaluate:**\n- Cryptogenic stroke/TIA\n- Age <60 years (primary guideline recommendation)\n- Consider in older patients with high-risk PFO features\n\n**High-risk PFO features:**\n- Atrial septal aneurysm\n- Large shunt (>20 microbubbles)\n- Hypermobile septum\n\n**PFO Closure Evidence (REDUCE, CLOSE, DEFENSE-PFO):**\n- HR 0.41 for stroke recurrence vs medical therapy\n- ARR 3.4% at 5 years\n- Greatest benefit in patients <60 with high-risk features\n\n**Other Cardioembolic Sources:**\n- LV thrombus (recent MI, cardiomyopathy) - anticoagulation\n- Mechanical valve - warfarin\n- Infective endocarditis - treat infection, avoid anticoagulation\n- Atrial myxoma - surgical excision [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: 'PFO closure reduces stroke recurrence HR 0.41 in patients <60 with high-risk features',
+    skippable: true,
   },
 
   {
@@ -318,6 +374,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Typical features:**\n- HTN, diabetes as primary risk factors\n- Subcortical or brainstem location on imaging\n- Typical lacunar syndromes:\n  - Pure motor hemiparesis\n  - Pure sensory stroke\n  - Ataxic hemiparesis\n  - Dysarthria-clumsy hand\n  - Sensorimotor stroke\n\n**Treatment:**\n- DAPT pathway (same as large artery without significant stenosis)\n- Aggressive risk factor control:\n  - BP target <130/80\n  - HbA1c target <7%\n  - High-intensity statin\n\n**No benefit from revascularization**\n\n**Prognosis:**\n- Generally lower early recurrence risk than large artery\n- Cumulative white matter disease increases dementia risk [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: 'HTN/DM subcortical pattern — DAPT pathway, aggressive BP <130/80 and HbA1c <7%, no revascularization',
+    skippable: true,
   },
 
   {
@@ -328,6 +387,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**When to Suspect:**\n- Younger patient (<55)\n- Recent trauma or neck manipulation\n- Neck pain or headache\n- Horner\'s syndrome (carotid dissection)\n- CN deficits (vertebral dissection)\n\n**Imaging:**\n- CTA or MRA neck with fat-saturated sequences\n- Look for intramural hematoma, string sign, pseudoaneurysm\n\n**Treatment:**\n- Antiplatelet vs anticoagulation\n- CADISS trial: No difference between ASA and anticoagulation\n- Most centers use antiplatelet therapy\n- Duration: 3-6 months then reassess\n\n**Contraindications to anticoagulation:**\n- Large infarct\n- Intracranial extension\n- Pseudoaneurysm (relative)\n\n**Follow-up imaging** at 3-6 months to assess healing. [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: 'Young patient, neck pain, Horner syndrome — antiplatelet preferred per CADISS trial, 3-6 months',
   },
 
   {
@@ -338,6 +399,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**No clear etiology after routine workup (25-40%)**\n\n**Extended Workup:**\n\n1. **Prolonged cardiac monitoring**\n   - 14-30 day event monitor\n   - Implantable loop recorder (highest yield)\n   - Detects occult afib in 5-15% additional patients\n\n2. **TEE with bubble study**\n   - PFO evaluation\n   - LA appendage thrombus\n   - Aortic arch atheroma\n\n3. **Hypercoagulable workup** (if indicated)\n   - Factor V Leiden\n   - Prothrombin G20210A\n   - Protein C/S, Antithrombin III\n   - Antiphospholipid antibodies\n\n**Indications for hypercoagulable workup:**\n- Age <55 without traditional risk factors\n- History of VTE or recurrent pregnancy loss\n- Family history of thrombosis\n\n**Treatment:** DAPT pathway while awaiting extended workup. [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: '25-40% cryptogenic — extended cardiac monitoring, TEE with bubble study, hypercoagulable panel if indicated',
+    skippable: true,
   },
 
   {
@@ -348,6 +412,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**If DWI shows acute infarct, this is an ischemic stroke, not TIA.**\n\n**Implications:**\n- Higher recurrent stroke risk than true TIA\n- Same acute treatment approach\n- May influence anticoagulation timing if cardioembolic\n\n**For Minor Stroke (NIHSS 0-3):**\n- DAPT pathway still appropriate\n- Same CHANCE/POINT protocols apply\n- 21 days of DAPT then aspirin monotherapy\n\n**Differences from TIA:**\n- Document as "minor ischemic stroke" not TIA\n- May warrant longer observation\n- If cardioembolic: delay anticoagulation per 1-2-3-4 rule\n\n**Continue with treatment pathway below.** [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
+
+    summary: 'DWI positive = ischemic stroke not TIA — higher recurrence risk, same acute treatment, document as stroke',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -365,6 +432,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-dapt-protocol', label: 'DAPT Protocol Calculator' },
     ],
     next: 'tia-dapt-treatment',
+
+    summary: 'Non-cardioembolic = DAPT, cardioembolic = anticoagulation; all get statin + BP management',
   },
 
   {
@@ -397,6 +466,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-dapt-protocol', label: 'DAPT Dosing Calculator' },
     ],
     next: 'tia-statin-treatment',
+
+    summary: 'ASA 162-325mg + clopidogrel 300-600mg load, then 81mg + 75mg daily x 21 days, then ASA monotherapy',
   },
 
   {
@@ -418,6 +489,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       monitoring: 'LFTs at baseline if risk factors. Recheck lipid panel at 4-12 weeks.',
     },
     next: 'tia-bp-treatment',
+
+    summary: 'Atorvastatin 80mg daily — start immediately, do NOT wait for lipid panel, reduces stroke recurrence 16%',
   },
 
   {
@@ -428,6 +501,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Acute Phase (First 24-48 hours):**\n\n**Permissive hypertension** - Do not aggressively lower unless:\n- SBP >220 mmHg or DBP >120 mmHg\n- Hypertensive emergency with end-organ damage\n- Receiving thrombolytics (target <185/110)\n\n**For TIA:** Less concern for penumbra, so can treat elevated BP more aggressively than stroke.\n\n**Long-Term Target:**\n- <130/80 mmHg (AHA/ASA 2021)\n- Initiate/resume antihypertensives before discharge\n\n**Preferred agents:**\n- ACE inhibitor or ARB\n- Thiazide diuretic\n- Combination often needed\n\n**Glucose Management:**\n- Target 140-180 mg/dL acutely\n- Avoid hypoglycemia\n- HbA1c target <7% long-term [1][6]',
     citation: [1, 6],
     next: 'tia-treatment-summary',
+
+    summary: 'Permissive HTN acutely (unless >220/120), long-term target <130/80, avoid hypoglycemia',
   },
 
   {
@@ -438,6 +513,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Non-Cardioembolic (Large artery, small vessel, cryptogenic):**\n- DAPT x 21 days then aspirin monotherapy\n- High-intensity statin\n- BP management (<130/80)\n- Revascularization if symptomatic stenosis >=50%\n\n**Cardioembolic (Afib):**\n- Anticoagulation (DOAC preferred)\n- No DAPT (increased bleeding without benefit)\n- Rate/rhythm control\n- High-intensity statin, BP management\n\n**Dissection:**\n- Antiplatelet (aspirin) for 3-6 months\n- Some centers use anticoagulation\n- Follow-up imaging at 3-6 months\n\n**All patients:**\n- Smoking cessation\n- Weight management\n- Exercise counseling\n- Diabetes control [1][6]',
     citation: [1, 6],
     next: 'tia-disposition-intro',
+
+    summary: 'Non-cardioembolic = DAPT x 21d; afib = DOAC; dissection = antiplatelet 3-6mo; all get statin + BP control',
+    skippable: true,
   },
 
   // =====================================================================
@@ -455,6 +533,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { id: 'tia-disposition', label: 'Disposition Calculator' },
     ],
     next: 'tia-admission-criteria',
+
+    summary: 'EXPRESS trial: rapid assessment (<1 day) = 80% reduction in 90-day stroke risk — speed matters more than setting',
   },
 
   {
@@ -465,6 +545,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Admit if ANY of the following:**\n\n**High-risk features:**\n- Crescendo TIA (>1 in 7 days)\n- Atrial fibrillation requiring anticoagulation initiation\n- Symptomatic carotid stenosis >=50%\n- Acute infarct on DWI\n- Known hypercoagulable state\n- Cardioembolic source identified\n\n**Clinical instability:**\n- Fluctuating or recurrent symptoms\n- Hypertensive emergency\n- Medical comorbidities requiring inpatient management\n- New onset afib with RVR\n\n**Workup/follow-up barriers:**\n- Cannot complete outpatient workup within 48-72 hours\n- No rapid TIA clinic access\n- Patient unable to return promptly\n- ABCD2 2-7 AND workup cannot be completed within 7 days [1][2]',
     citation: [1, 2],
     next: 'tia-observation-criteria',
+
+    summary: 'Admit for crescendo TIA, afib, stenosis >=50%, DWI+, fluctuating symptoms, or no rapid follow-up',
   },
 
   {
@@ -475,6 +557,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Consider 23-hour observation if:**\n\n- Moderate risk (ABCD2 3-5 or Canadian TIA medium risk)\n- All imaging/workup can be completed in observation period\n- Neurology consultation available\n- No high-risk features\n\n**Observation Unit Protocol:**\n\n| Action | Timing |\n|--------|---------|\n| CTA head/neck | Complete |\n| MRI brain with DWI | If available |\n| Continuous telemetry | Ongoing |\n| Echo (TTE) | During obs |\n| Neurology consultation | During obs |\n| Initiate secondary prevention | Immediately |\n\n**Goals during observation:**\n- Complete vascular imaging\n- 24-hour cardiac monitoring\n- Initiate DAPT/anticoagulation per etiology\n- Arrange close outpatient follow-up [1][2]',
     citation: [1, 2],
     next: 'tia-discharge-criteria',
+
+    summary: '23-hour obs for moderate risk — complete CTA, MRI, telemetry, echo, neurology consult during stay',
+    skippable: true,
   },
 
   {
@@ -485,6 +570,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**May discharge from ED if ALL of the following:**\n\n1. **Low-risk score**\n   - ABCD2 0-2 AND Canadian TIA minimal/low risk\n\n2. **No high-risk features on history/exam**\n\n3. **Imaging complete and reassuring:**\n   - CT head negative for hemorrhage/mass\n   - CTA shows no significant stenosis (<50%)\n\n4. **ECG shows no atrial fibrillation**\n\n5. **Reliable rapid outpatient follow-up within 24-48 hours**\n\n6. **Patient can recognize warning signs and return immediately**\n\n7. **Secondary prevention initiated:**\n   - DAPT loaded (ASA + clopidogrel)\n   - Statin started\n\n**Document:**\n- Risk stratification performed\n- Workup completed\n- Follow-up arranged\n- Discharge instructions given [1][2]',
     citation: [1, 2],
     next: 'tia-rapid-clinic',
+
+    summary: 'Discharge if: low-risk score + no high-risk features + CTA <50% + no afib + DAPT loaded + follow-up <48h',
   },
 
   {
@@ -495,6 +582,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**For Safe Outpatient Management:**\n\n**TIMING:** Seen within 24-48 hours (ideally <24 hours)\n\n**WORKUP COMPLETED:**\n- MRI brain with DWI\n- Vascular imaging (if not done in ED)\n- Echocardiogram (TTE, consider TEE if indicated)\n- Extended cardiac monitoring if no AF on ECG\n- Hypercoagulable workup if indicated\n\n**TREATMENT INITIATED:**\n- DAPT or anticoagulation (per etiology)\n- High-intensity statin\n- BP management plan\n- Risk factor modification\n\n**FOLLOW-UP ARRANGED:**\n- Neurology follow-up\n- Vascular surgery if significant stenosis\n- Cardiology if cardiac source\n- PCP for risk factor management\n\n**If rapid TIA clinic NOT available within 48h, admit or observe.** [1][2]',
     citation: [1, 2],
     next: 'tia-return-precautions',
+
+    summary: 'TIA clinic within 24-48h — if unavailable, admit or observe; complete MRI, vascular imaging, echo, cardiac monitoring',
   },
 
   {
@@ -505,6 +594,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Instruct patient to return IMMEDIATELY if:**\n\n**New or worsening symptoms:**\n- Weakness or numbness (especially one-sided)\n- Speech difficulty\n- Vision changes\n- Severe headache\n- Dizziness or loss of balance\n- Confusion\n\n**Stroke warning signs (BE FAST):**\n- **B**alance - sudden dizziness, loss of coordination\n- **E**yes - sudden vision changes\n- **F**ace - facial droop\n- **A**rms - arm weakness\n- **S**peech - slurred speech, difficulty speaking\n- **T**ime - call 911 immediately\n\n**Other concerns:**\n- Symptoms return or worsen\n- Bleeding on antiplatelet therapy\n- Unable to take medications\n- Missed follow-up appointment\n\n**Provide written instructions** with stroke warning signs. [1][2]',
     citation: [1, 2],
     next: 'tia-neuro-consult',
+
+    summary: 'BE FAST stroke warning signs — return immediately for any new weakness, speech, vision, or balance changes',
   },
 
   {
@@ -515,6 +606,9 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     body: '**Consult in ED:**\n- Uncertain diagnosis (TIA vs mimic)\n- Fluctuating or recurrent symptoms\n- Significant large vessel stenosis\n- Consideration for thrombolysis (if symptoms ongoing)\n- Any admission consideration\n- Complex etiology or treatment decisions\n\n**Arrange Outpatient Follow-up:**\n- All TIA patients should see neurology\n- Ideally within 48 hours, maximum 1 week\n- Sooner if any concerning features\n\n**Stroke Center Transfer Criteria:**\n- Symptomatic carotid stenosis requiring urgent intervention\n- Consideration for endovascular intervention\n- Need for TEE or advanced workup not available\n- Neurology expertise not available locally\n- Complex etiology requiring subspecialty evaluation [1][2]',
     citation: [1, 2],
     next: 'tia-disposition-question',
+
+    summary: 'Consult neurology in ED for uncertain diagnosis, fluctuating symptoms, stenosis, or admission consideration',
+    skippable: true,
   },
 
   {
@@ -529,6 +623,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
       { label: 'ED observation (23-hour)', description: 'Moderate risk, can complete workup during obs', next: 'tia-obs-orders', urgency: 'urgent' },
       { label: 'Discharge with rapid TIA clinic', description: 'Low risk, workup complete, follow-up <48h', next: 'tia-discharge-orders' },
     ],
+
+    summary: 'Final disposition based on risk stratification, workup completion, and follow-up availability',
   },
 
   {

@@ -27,6 +27,8 @@ export const TRACH_EMERGENCY_NODES = [
             { id: 'trach-algorithm', label: 'NTSP Algorithm' },
         ],
         next: 'trach-vs-laryngectomy',
+        summary: 'Apply O2 to BOTH face AND stoma — tracheostomy has dual airway, laryngectomy stoma is ONLY airway',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-vs-laryngectomy',
@@ -51,6 +53,7 @@ export const TRACH_EMERGENCY_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Laryngectomy = NO oral airway possible; tracheostomy = dual airway — check bedside sign',
     },
     {
         id: 'laryngectomy-emergency',
@@ -60,6 +63,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**CRITICAL: Stoma is ONLY airway - cannot oxygenate from above**\n\n**Emergency management:**\n1. Apply O2 directly to stoma (pediatric face mask or trach collar)\n2. If not breathing: BVM over stoma with pediatric face mask\n3. Remove any devices/dressings from stoma\n4. Suction stoma gently\n5. If tube present: deflate cuff, remove inner cannula, attempt suction\n\n**If tube removal needed:**\n- Replace with tracheostomy tube or ETT through stoma\n- Size 6.0 cuffed ETT fits most adult stomas\n- Do NOT attempt oral/nasal intubation\n\n**Call ENT/surgeon immediately.** [1][2][3]',
         citation: [1, 2, 3],
         next: 'trach-disposition-ent',
+        summary: 'Stoma is ONLY airway — BVM over stoma, suction, replace with ETT 6.0 through stoma, no oral intubation',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-assessment',
@@ -89,6 +94,7 @@ export const TRACH_EMERGENCY_NODES = [
                 next: 'trach-equipment',
             },
         ],
+        summary: 'Classify problem: obstruction, dislodgement, or bleeding — apply capnography to assess',
     },
     // =====================================================================
     // MODULE 2: TRACHEOSTOMY TYPES & EQUIPMENT
@@ -104,6 +110,8 @@ export const TRACH_EMERGENCY_NODES = [
             { id: 'trach-tube-size', label: 'Tube Sizing Guide' },
         ],
         next: 'trach-tube-types',
+        summary: 'Bedside equipment: spare tube (same + smaller), suction, syringe, stitch cutters, lubricant, BVM',
+        skippable: true,
     },
     {
         id: 'trach-tube-types',
@@ -114,6 +122,8 @@ export const TRACH_EMERGENCY_NODES = [
         citation: [2, 4, 5],
         images: [{ src: 'images/trach-emergency/trach-tube-anatomy.png', alt: 'Diagram of fenestrated and non-fenestrated tracheostomy tubes', caption: 'Trach tube anatomy: fenestrated (speaking valve compatible) vs non-fenestrated — inner cannula removal is first step in obstruction management (Wikimedia Commons, CC BY-SA 4.0)' }],
         next: 'trach-sizing',
+        summary: 'Cuffed vs uncuffed, inner cannula removal first for obstruction, deflate cuff before speaking valve',
+        skippable: true,
     },
     {
         id: 'trach-sizing',
@@ -123,6 +133,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Tracheostomy tube sizing:**\n- **ID (inner diameter):** Corresponds roughly to ETT size (7.0, 8.0, etc.)\n- **OD (outer diameter):** Critical for stoma fit\n- **Length:** Standard vs extended length for obese patients\n\n**Common adult sizes:**\n- Female: 6.0-7.0 ID\n- Male: 7.0-8.0 ID\n- Shiley, Portex, Bivona are common brands (not interchangeable)\n\n**Replacement strategy:**\n- Use same brand/model if possible\n- If unavailable: use one size smaller trach or appropriate ETT\n- **ETT through stoma:** Size ~6.0 cuffed for most adults\n- Do NOT advance ETT too far (risk of right mainstem)\n\n**Lubrication:** Water-soluble only. [2][4][5]',
         citation: [2, 4, 5],
         next: 'trach-assessment',
+        summary: 'Size by ID/OD, ETT 6.0 fits most adult stomas, water-soluble lubricant only',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: OBSTRUCTION MANAGEMENT
@@ -135,6 +147,7 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**NTSP Obstruction Algorithm - work through sequentially:**\n\n**Step 1: Remove any external devices**\n- Speaking valve, cap, HME filter\n- Trach collar or humidity device\n\n**Step 2: Remove inner cannula**\n- Pull out and inspect\n- Reassess ventilation immediately\n\n**Step 3: Pass suction catheter**\n- If passes easily: suction and reassess\n- If cannot pass: complete obstruction present\n\n**Step 4: Deflate cuff (if present)**\n- Allows air to bypass around tube\n- May relieve false passage obstruction\n\n**Step 5: Remove entire tracheostomy tube**\n- If all above fails, remove tube entirely\n- Oxygenate via face or stoma as appropriate\n\n**Use capnography to assess each intervention.** [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'trach-obstruction-decision',
+        summary: 'Sequential: remove devices, remove inner cannula, pass suction, deflate cuff, remove tube — use capnography',
     },
     {
         id: 'trach-obstruction-decision',
@@ -159,6 +172,7 @@ export const TRACH_EMERGENCY_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Reassess after algorithm — capnography waveform present means improving',
     },
     {
         id: 'trach-post-obstruction',
@@ -168,6 +182,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Obstruction cleared - next steps:**\n\n**Immediate:**\n- Replace inner cannula (cleaned or new)\n- Confirm ventilation with capnography\n- Humidification to prevent recurrence\n- Document intervention\n\n**Prevention of recurrence:**\n- Regular inner cannula cleaning/replacement\n- Adequate humidification\n- Regular suctioning PRN\n- Hydration\n\n**If recurrent obstructions:**\n- Consider bronchoscopy to evaluate for granulation tissue\n- ENT/pulmonology consult\n- May need tube downsizing or change [2][4][5]',
         citation: [2, 4, 5],
         next: 'trach-disposition-stable',
+        summary: 'Replace inner cannula, confirm with capnography, humidify to prevent recurrence',
+        skippable: true,
     },
     {
         id: 'trach-obstruction-refractory',
@@ -177,6 +193,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Tube removed but still cannot ventilate - RESCUE AIRWAY**\n\n**If mature stoma (>7 days):**\n1. Insert tracheal dilators to maintain stoma patency\n2. Replace with smaller trach tube or ETT through stoma\n3. Consider fiberoptic guidance\n4. If failure: oral intubation (advance cuff past stoma)\n\n**If fresh stoma (<7 days) - HIGH RISK:**\n1. Do NOT attempt blind reinsertion\n2. Oxygenate via face (BVM, oral intubation)\n3. Occlude stoma during oral ventilation\n4. Call surgeon immediately\n\n**Cannot intubate/cannot oxygenate:**\n- Consider LMA over stoma\n- Emergency front-of-neck access (new cricothyrotomy) [1][2][3]',
         citation: [1, 2, 3],
         next: 'trach-disposition-ent',
+        summary: 'Mature: dilators + smaller tube; fresh: oral intubation ONLY — do NOT blind replace fresh trach',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: DISLODGEMENT
@@ -205,6 +223,8 @@ export const TRACH_EMERGENCY_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Fresh <7d = high risk for false passage, do NOT blind replace; mature >7d = bedside replacement safe',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-fresh-emergency',
@@ -214,6 +234,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**CRITICAL: Blind reinsertion contraindicated in fresh trach**\n\n**Risks of blind reinsertion:**\n- False passage into pretracheal space\n- Subcutaneous emphysema\n- Pneumomediastinum\n- Complete loss of airway\n- Death\n\n**Immediate management:**\n1. Call for help (anesthesia, ENT, surgery)\n2. Oxygenate via FACE: BVM or oral intubation\n3. Occlude stoma with gauze/finger during face ventilation\n4. Advance ETT cuff PAST stoma level\n5. Keep patient calm, positioned upright if possible\n\n**Definitive management:**\n- Surgeon replacement under direct visualization\n- Fiberoptic guidance through stoma\n- OR for difficult cases [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'trach-disposition-ent',
+        summary: 'Blind reinsertion contraindicated — oxygenate via face, occlude stoma, oral intubate past stoma, call surgeon',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-mature-replace',
@@ -223,6 +245,7 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Mature stoma replacement - generally safe bedside procedure:**\n\n**Preparation:**\n1. Gather equipment: same size tube + one size smaller, lubricant, suction\n2. Oxygenate patient well before attempt\n3. Position: slight neck extension, shoulder roll\n4. Deflate cuff completely\n\n**Replacement technique:**\n1. Remove old tube gently along curve\n2. Inspect stoma briefly\n3. Lubricate new tube\n4. Insert along natural tract angle (posterior then inferior)\n5. Inflate cuff, confirm placement with capnography\n6. Secure with ties\n\n**If difficulty:**\n- Use tracheal dilators to open stoma\n- Try one size smaller tube\n- Consider bougie or fiberoptic guidance\n- DO NOT force - may create false passage [2][4][5]',
         citation: [2, 4, 5],
         next: 'trach-confirm-placement',
+        summary: 'Deflate cuff, lubricate, insert along tract, inflate, confirm with capnography — do NOT force',
     },
     {
         id: 'trach-confirm-placement',
@@ -232,6 +255,7 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**ALWAYS confirm proper placement after replacement:**\n\n**Clinical confirmation:**\n- Capnography waveform (GOLD STANDARD)\n- Suction catheter passes easily past tube tip\n- Bilateral chest rise with ventilation\n- Bilateral breath sounds\n\n**DO NOT rely solely on:**\n- Misting in tube (can occur with false passage)\n- Patient phonation\n- Oxygen saturation (delayed indicator)\n\n**If uncertain placement:**\n- Do NOT inflate cuff\n- Oxygenate via face while reassessing\n- Consider fiberoptic through tube to visualize tracheal rings\n- Low threshold for oral intubation if any doubt\n\n**False passage signs:**\n- Increasing resistance to ventilation\n- Subcutaneous emphysema\n- No capnography waveform [1][2][4]',
         citation: [1, 2, 4],
         next: 'trach-disposition-stable',
+        summary: 'Capnography is gold standard — do NOT rely on misting or SpO2 alone, fiberoptic if uncertain',
     },
     // =====================================================================
     // MODULE 5: BLEEDING
@@ -262,6 +286,8 @@ export const TRACH_EMERGENCY_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Late bleeding >72h = sentinel bleed for tracheo-innominate fistula until proven otherwise',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-bleeding-minor',
@@ -271,6 +297,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Minor trach site bleeding:**\n\n**Immediate actions:**\n- Suction to clear blood from airway\n- Direct pressure to stoma site\n- Inspect for obvious source (granulation, skin edge)\n\n**Local hemostasis:**\n- Topical epinephrine (1:1000 on gauze)\n- Hemostatic agents (Surgicel, gelfoam)\n- Silver nitrate cautery for granulation tissue\n- Tranexamic acid-soaked gauze\n\n**Systemic considerations:**\n- Check coagulation (PT/INR, platelets)\n- Hold/reverse anticoagulation if safe\n- Correct coagulopathy\n\n**If bleeding persists:**\n- ENT consultation\n- May need stoma exploration\n- Consider bronchoscopy to evaluate internal source [4][6][7]',
         citation: [4, 6, 7],
         next: 'trach-disposition-stable',
+        summary: 'Suction, direct pressure, topical epi, silver nitrate, TXA gauze — check coags',
+        skippable: true,
     },
     {
         id: 'trach-bleeding-tif-concern',
@@ -280,6 +308,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Tracheo-innominate fistula (TIF) - LIFE-THREATENING**\n\n**Risk factors:**\n- Trach placement 7-21 days ago (peak incidence)\n- Low stoma site (below 4th tracheal ring)\n- High cuff pressure\n- Excessive tube movement\n- Prior radiation\n\n**ANY bleeding 7+ days post-trach = sentinel bleed until proven otherwise**\n\n**Immediate actions:**\n1. Call for HELP (vascular surgery, ENT, OR team)\n2. Type and crossmatch, prepare for massive transfusion\n3. Large bore IV access x2\n4. Prepare for cuff hyperinflation\n5. DO NOT remove tracheostomy tube\n\n**Prepare for hemorrhage control** - escalate if bleeding worsens. [4][6][7][8]',
         citation: [4, 6, 7, 8],
         next: 'trach-bleeding-massive',
+        summary: 'Any bleeding 7+ days post-trach = potential TIF sentinel bleed — call vascular/ENT, do NOT remove tube',
+        safetyLevel: 'critical',
     },
     {
         id: 'trach-bleeding-massive',
@@ -289,6 +319,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**MASSIVE HEMORRHAGE - TIF protocol:**\n\n**Step 1: Hyperinflate the cuff**\n- Inject 50 mL air into cuff (adult)\n- Creates tamponade against innominate artery\n- If uncuffed tube: replace with cuffed ETT\n\n**Step 2: If cuff hyperinflation fails - UTLEY MANEUVER**\n- Insert finger into tracheostomy stoma\n- Apply digital compression of innominate artery against posterior sternum\n- Maintain pressure until OR\n\n**Step 3: Resuscitate**\n- Activate massive transfusion protocol\n- Reverse anticoagulation\n- Aggressive suctioning of blood\n\n**Definitive treatment:**\n- Emergency OR for median sternotomy\n- Innominate artery ligation and resection\n- Cardiothoracic surgery consultation STAT\n\n**Do NOT attempt interventional radiology - mortality too high.** [4][6][7][8]',
         citation: [4, 6, 7, 8],
         next: 'trach-disposition-ent',
+        summary: 'Hyperinflate cuff 50mL, Utley maneuver if fails (finger compression against sternum), emergency sternotomy',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -311,6 +343,7 @@ export const TRACH_EMERGENCY_NODES = [
                 next: 'trach-mature-replace',
             },
         ],
+        summary: 'Fresh <7d: stay sutures, not epithelialized; 7-14d: intermediate caution; percutaneous may take longer',
     },
     {
         id: 'trach-disposition-stable',
@@ -340,6 +373,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**EMCrit "Double-bagging" approach:**\n\n**Apply oxygen to BOTH sites simultaneously:**\n1. Non-rebreather or BVM to face\n2. Tracheostomy collar or pediatric face mask to stoma\n\n**When ventilating via face:**\n- Occlude stoma with gauze or finger\n- Prevents air leak through stoma\n- May need to deflate trach cuff\n\n**When ventilating via stoma:**\n- Occlude nose and mouth\n- Or use tracheostomy BVM adapter\n- Pediatric face mask works well over stoma\n\n**LMA options:**\n- Standard LMA over face for upper airway\n- LMA over stoma can provide rescue ventilation\n\n**CAUTION:** If trach in false passage, BVM through tube may insufflate mediastinum. [1][2][3]',
         citation: [1, 2, 3],
         next: 'trach-assessment',
+        summary: 'Apply O2 to both sites, occlude stoma for face ventilation, pediatric mask over stoma for stoma ventilation',
+        skippable: true,
     },
     {
         id: 'trach-oral-intubation',
@@ -349,6 +384,7 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**When to intubate orally:**\n- Fresh trach dislodgement (< 7 days)\n- Failed stoma replacement\n- Cannot ventilate through stoma\n- Upper airway confirmed patent\n\n**Technique:**\n1. Standard oral intubation approach\n2. Use UNCUT endotracheal tube\n3. Advance cuff PAST the tracheostomy stoma level\n4. Confirm placement with capnography\n5. Occlude stoma to prevent air leak\n\n**Considerations:**\n- May need to deflate trach cuff if still in place\n- Stoma may continue to leak air\n- Apply occlusive dressing to stoma\n- Do NOT remove trach tube unless causing obstruction\n\n**After stabilization:** Surgeon should evaluate stoma and replace trach under controlled conditions. [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'trach-disposition-ent',
+        summary: 'Uncut ETT, advance cuff past stoma level, occlude stoma, confirm with capnography',
     },
     {
         id: 'trach-granulation',
@@ -358,6 +394,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Granulation tissue formation:**\n\n**Causes:**\n- Tube friction against tracheal wall\n- Fenestrated tubes (tissue grows through holes)\n- Chronic irritation\n- Infection\n- High cuff pressure\n\n**Presentation:**\n- Recurrent obstruction\n- Bleeding with suctioning\n- Difficulty passing suction catheter\n- Stridor after tube removal\n\n**Management:**\n- Bronchoscopy for diagnosis and treatment\n- Silver nitrate cautery\n- Laser ablation\n- Consider tube change (non-fenestrated, different size)\n- May require surgical resection\n\n**Prevention:**\n- Proper tube fit\n- Low cuff pressure (<25 cmH2O)\n- Minimize tube manipulation [4][5][9]',
         citation: [4, 5, 9],
         next: 'trach-disposition-ent',
+        summary: 'Fenestrated tubes and chronic irritation cause granulation — bronchoscopy for diagnosis and treatment',
+        skippable: true,
     },
     {
         id: 'trach-stenosis',
@@ -367,6 +405,8 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Post-tracheostomy tracheal stenosis (PTTS):**\n\n**Incidence:** 3-12% develop clinically significant stenosis\n\n**Causes:**\n- High cuff pressure (most common)\n- Infection\n- Excessive tube movement\n- Prolonged intubation before trach\n- Low trach placement\n\n**Presentation:**\n- Failure to wean from ventilator\n- High peak airway pressures\n- Difficulty passing suction catheter\n- Stridor after decannulation\n- Dyspnea on exertion\n\n**Diagnosis:**\n- Bronchoscopy (gold standard)\n- CT neck/chest with 3D reconstruction\n\n**Management:**\n- Dilation (balloon or rigid)\n- Stenting\n- Surgical resection and anastomosis\n- T-tube placement [4][5][9][10]',
         citation: [4, 5, 9, 10],
         next: 'trach-disposition-ent',
+        summary: '3-12% develop stenosis — high cuff pressure most common cause, bronchoscopy is gold standard diagnosis',
+        skippable: true,
     },
 ];
 export const TRACH_EMERGENCY_MODULE_LABELS = [

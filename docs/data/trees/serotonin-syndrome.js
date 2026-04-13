@@ -154,6 +154,7 @@ export const SEROTONIN_SYNDROME_NODES = [
                 next: 'ss-alternative-dx',
             },
         ],
+        summary: 'Compare SS vs NMS features — onset speed, drug class, muscle tone (hyperkinetic vs rigid), reflexes, pupils, CK level',
     },
     {
         id: 'ss-nms-referral',
@@ -201,6 +202,7 @@ export const SEROTONIN_SYNDROME_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Classify severity: mild (tremor, alert), moderate (agitation, temp 38.5-40), severe (temp >40, rigidity, seizures, rhabdo)',
     },
     {
         id: 'ss-mild-tx',
@@ -210,6 +212,8 @@ export const SEROTONIN_SYNDROME_NODES = [
         body: '**Mild Serotonin Syndrome Management:** [1][7]\n\n**1. STOP offending agent(s)**\n• Identify and discontinue ALL serotonergic drugs\n• Review medication list thoroughly\n\n**2. Supportive care:**\n• IV fluids\n• Cardiac monitoring\n• Observation for 6-12 hours\n\n**3. Symptom management:**\n• **Benzodiazepines** for agitation/tremor\n  - Lorazepam 1-2 mg IV or\n  - Diazepam 5-10 mg IV\n\n**4. Cyproheptadine (optional for mild):**\n• Generally not needed for mild cases\n• Consider if symptoms persist\n\n**Resolution:**\n• Most mild cases resolve within **24-72 hours**\n• Half-life of offending drug determines duration',
         citation: [1, 7],
         next: 'ss-dispo-mild',
+        summary: 'Stop serotonergic agents, benzos for agitation/tremor, IV fluids, observe 6-12h — most resolve in 24-72h',
+        skippable: true,
     },
     {
         id: 'ss-moderate-tx',
@@ -222,6 +226,8 @@ export const SEROTONIN_SYNDROME_NODES = [
             { id: 'cyproheptadine-dose', label: 'Cyproheptadine Dosing' },
         ],
         next: 'ss-dispo-moderate',
+        summary: 'Stop agents, high-dose benzos, cyproheptadine 12mg load then 2mg q2h (max 32mg/day), cooling — avoid restraints and antipyretics',
+        safetyLevel: 'warning',
     },
     {
         id: 'ss-severe-tx',
@@ -234,6 +240,8 @@ export const SEROTONIN_SYNDROME_NODES = [
             { id: 'cyproheptadine-dose', label: 'Cyproheptadine Dosing' },
         ],
         next: 'ss-dispo-severe',
+        summary: 'Secure airway (avoid succinylcholine), aggressive cooling, high-dose benzos, paralysis if needed, cyproheptadine via NG',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -246,6 +254,7 @@ export const SEROTONIN_SYNDROME_NODES = [
         body: '**Discharge Considerations:** [7]\n\n**May discharge if:**\n• Symptoms resolving after 6-12 hour observation\n• Vital signs stable and normalizing\n• Able to tolerate PO\n• No ongoing exposure risk\n• Reliable follow-up\n\n**Before discharge:**\n• Confirm offending agent discontinued\n• Educate on drug interactions\n• Provide return precautions\n• Psychiatry follow-up if on psychotropic medications\n\n**Return precautions:**\n• Fever >38.5°C\n• Worsening confusion or agitation\n• Muscle stiffness or tremor\n• Rapid heart rate\n\n**Consider admission if:**\n• Symptoms not improving\n• Unable to discontinue serotonergic medication safely\n• Psychiatric risk (intentional overdose)',
         citation: [7],
         next: 'ss-complete',
+        summary: 'Discharge if resolving after 6-12h observation, stable vitals, tolerating PO — educate on drug interactions, psych follow-up',
     },
     {
         id: 'ss-dispo-moderate',
@@ -255,6 +264,7 @@ export const SEROTONIN_SYNDROME_NODES = [
         body: '**Admission Required:** [7]\n\n**Floor vs Telemetry:**\n• Telemetry bed preferred\n• Continuous cardiac monitoring\n• Frequent neuro checks\n\n**Monitoring:**\n• Vital signs q2-4h\n• Neuro exam q4h (clonus, reflexes, mental status)\n• Temperature trending\n• CK levels if concern for rhabdomyolysis\n\n**Treatment continuation:**\n• Continue benzodiazepines PRN\n• Continue cyproheptadine q6h for 24-48h\n• IV fluids until PO tolerant\n\n**Consults:**\n• Toxicology\n• Psychiatry (medication management)\n\n**Resolution:**\n• Most cases resolve within 24-72 hours\n• MAOIs may take longer (up to 1 week)',
         citation: [7],
         next: 'ss-complete',
+        summary: 'Telemetry admission, continue benzos and cyproheptadine q6h for 24-48h, tox and psych consults — MAOIs may take up to 1 week',
     },
     {
         id: 'ss-dispo-severe',
@@ -264,6 +274,7 @@ export const SEROTONIN_SYNDROME_NODES = [
         body: '**ICU Admission Required:** [7][8]\n\n**ICU level care for:**\n• Temp >40°C\n• Intubation needed\n• Paralysis required for hyperthermia control\n• Hemodynamic instability\n• Rhabdomyolysis with renal failure\n• Seizures\n• DIC\n\n**ICU monitoring:**\n• Continuous vital signs\n• Core temperature\n• Urine output\n• Serial CK, renal function, coags\n• Lactate trending\n\n**Prolonged recovery:**\n• Severe cases may take days to weeks\n• MAOI-related SS has longest duration\n• Watch for complications during recovery\n\n**Mortality:**\n• Untreated severe SS can be fatal\n• Most deaths from hyperthermia complications\n• Early recognition and treatment improves outcomes',
         citation: [7, 8],
         next: 'ss-complete',
+        summary: 'ICU for temp >40, intubation, paralysis, hemodynamic instability, rhabdo with renal failure, DIC — MAOI cases longest duration',
     },
     {
         id: 'ss-complete',

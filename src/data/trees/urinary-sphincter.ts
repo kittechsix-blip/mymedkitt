@@ -29,6 +29,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       { id: 'cauda-equina-red-flags', label: 'Cauda Equina Red Flags' },
     ],
     next: 'sphincter-presentation-type',
+
+    summary: 'Bladder dysfunction + back pain + leg symptoms = cauda equina until proven otherwise',
   },
 
   {
@@ -55,6 +57,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         next: 'sphincter-retention-neuro',
       },
     ],
+
+    summary: 'Determine retention vs incontinence vs mixed — retention with overflow dribbling is common overlap',
   },
 
   {
@@ -85,6 +89,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Overflow (high PVR), urge (detrusor overactivity), neurogenic (back pain, weakness, bowel changes)',
   },
 
   // =====================================================================
@@ -114,6 +120,9 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         next: 'sphincter-etiology',
       },
     ],
+
+    summary: 'Saddle anesthesia, bilateral leg weakness, bowel incontinence, severe back pain = emergent MRI',
+    safetyLevel: 'critical',
   },
 
   {
@@ -148,6 +157,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         next: 'sphincter-postop',
       },
     ],
+
+    summary: 'BPH most common in men >50; check medication list (anticholinergics, opioids); infectious and post-op causes',
   },
 
   {
@@ -177,6 +188,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       monitoring: 'Culture-directed therapy. Urology follow-up. Repeat UA in 2-4 weeks.',
     },
     next: 'sphincter-evaluation',
+
+    summary: 'Prostatitis: do NOT massage prostate (bacteremia); HSV sacral radiculitis causes retention in young patients',
   },
 
   {
@@ -187,6 +200,9 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     body: '**Post-operative urinary retention (POUR):**\n\nIncidence: 5-70% depending on procedure type.\n\n**Risk factors:**\n- Age >60\n- Male sex\n- Pre-existing BPH/LUTS\n- Pelvic/anorectal surgery\n- Spinal anesthesia (especially with morphine)\n- Opioid use\n- Large volume IV fluids\n- Duration of surgery >2 hours\n\n**Management:**\n1. Bladder scan - confirm >300-400 mL\n2. Single in-out catheterization often sufficient\n3. If persistent: Foley catheter x 24-48h\n4. Start tamsulosin if BPH history\n5. Minimize opioids, discontinue anticholinergics\n\n**When to worry:**\n- Persistent >48h despite catheter\n- Neurologic symptoms (rule out epidural hematoma if spinal surgery)\n- Associated abdominal distension (ileus)',
     citation: [1, 6],
     next: 'sphincter-evaluation',
+
+    summary: '5-70% incidence post-op; single in-out cath often sufficient — worry if >48h or neurologic symptoms',
+    skippable: true,
   },
 
   // =====================================================================
@@ -204,6 +220,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       { id: 'pvr-interpretation', label: 'PVR Interpretation' },
     ],
     next: 'sphincter-neuro-exam',
+
+    summary: 'Medication list, prostate exam, perineal sensation, anal wink — bladder US (PVR) is most important test',
   },
 
   {
@@ -214,6 +232,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     body: '**Focused neuro exam for bladder dysfunction:**\n\n**Sensory:**\n- Perineal/saddle sensation (S2-S4)\n- Perianal sensation\n- Lower extremity dermatomes\n\n**Motor:**\n- Bilateral leg strength (hip flexion, knee extension, ankle dorsiflexion)\n- Toe walking and heel walking\n\n**Reflexes:**\n- Patellar (L3-L4)\n- Achilles (S1-S2)\n- Bulbocavernosus reflex (S2-S4): squeeze glans/clitoris, feel anal sphincter contract\n- Anal wink (S2-S4): stroke perianal skin, observe sphincter contraction\n\n**Absent bulbocavernosus + absent anal wink = sacral nerve dysfunction**\n\n**Rectal exam:**\n- Anal tone (decreased in cauda equina)\n- Voluntary squeeze\n- Prostate assessment\n\n**Imaging indications:**\n- Any neurologic findings: emergent MRI lumbar spine\n- Post-traumatic: CT first, then MRI\n- History of malignancy: MRI whole spine',
     citation: [2, 4],
     next: 'sphincter-pvr',
+
+    summary: 'Absent bulbocavernosus + absent anal wink = sacral nerve dysfunction — any findings trigger emergent MRI',
   },
 
   {
@@ -249,6 +269,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'PVR <50mL normal; >300mL = catheterize; >1000mL = high volume with POD risk',
   },
 
   {
@@ -270,6 +292,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     body: '**PVR >1000 mL - increased risk of complications:**\n\n**Obtain labs:**\n- BMP (creatinine often elevated in chronic retention)\n- UA and culture\n\n**Complications to monitor:**\n\n**Post-obstructive diuresis (POD):**\n- Definition: >200 mL/hr x 2+ hours OR >3L in 24h\n- Risk factors: bilateral obstruction, AKI, CHF\n- Management: replace 50-75% of output (NOT 100%)\n\n**Hematuria ex vacuo:**\n- Brief bleeding after rapid decompression\n- Usually self-limited\n- Does NOT require clamping\n\n**Myth debunked:** Rapid drainage is safe. No evidence supports clamping at intervals. Complete drainage does NOT increase complications. [7]',
     citation: [1, 7],
     next: 'sphincter-cath-technique',
+
+    summary: '>1000mL: get BMP, monitor for POD (>200mL/hr); complete drainage is safe — clamping myth debunked',
   },
 
   // =====================================================================
@@ -287,6 +311,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       { id: 'catheter-sizing', label: 'Catheter Sizing Guide' },
     ],
     next: 'sphincter-cath-result',
+
+    summary: 'Coude first-line in older men (curve UP); 16-18Fr standard; lidocaine jelly 2% 10-20mL, wait 5min',
   },
 
   {
@@ -309,6 +335,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Assess success: urine drains immediately with relief vs resistance/blood without urine (false passage)',
   },
 
   {
@@ -338,6 +366,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       monitoring: 'Blood pressure monitoring. TWOC attempt in 3-7 days.',
     },
     next: 'sphincter-5ari',
+
+    summary: 'Tamsulosin 0.4mg at catheterization — improves TWOC success 26% to 48% (OR 2.47)',
   },
 
   {
@@ -348,6 +378,9 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     body: '**5-Alpha reductase inhibitors (5-ARIs):**\n\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n[Dutasteride](#/drug/dutasteride/bph) 0.5 mg daily\n\n**NOT helpful acutely** - effect takes 3-6 months.\n\n**Mechanism:** Blocks conversion of testosterone to DHT, causing prostate shrinkage (20-30% reduction over 6-12 months).\n\n**When to consider:**\n- Large prostate (>40 mL)\n- Recurrent retention episodes\n- PSA >1.5 ng/mL\n\n**Typically started by urology**, not in ED.\n\n**Side effects:**\n- Sexual dysfunction (decreased libido, ED)\n- Decreased ejaculate volume\n- Gynecomastia (rare)\n- Lowers PSA by ~50% (inform urologist)\n\n[Bethanechol](#/drug/bethanechol/urinary retention) - cholinergic agent for atonic bladder, rarely used acutely.',
     citation: [1, 10],
     next: 'sphincter-dispo-decision',
+
+    summary: '5-ARIs take 3-6 months to work — not helpful acutely, typically started by urology for long-term management',
+    skippable: true,
   },
 
   {
@@ -369,6 +402,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       monitoring: 'Urology consult STAT. Pain management. Avoid further blind attempts.',
     },
     next: 'sphincter-dispo-decision',
+
+    summary: 'Coude first, then urology for cystoscopy or suprapubic catheter — avoid further blind attempts',
   },
 
   // =====================================================================
@@ -398,6 +433,9 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       monitoring: 'Emergent MRI. Neurosurgery consult. Serial neuro exams. Foley catheter.',
     },
     next: 'sphincter-ces-imaging',
+
+    summary: 'Emergent MRI + neurosurgery STAT — decompression <24h best outcomes; bladder function has worst recovery',
+    safetyLevel: 'critical',
   },
 
   {
@@ -431,6 +469,9 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
       monitoring: 'MRI whole spine. Oncology, neurosurgery, radiation oncology consults. Serial neuro exams.',
     },
     next: 'sphincter-dispo-decision',
+
+    summary: 'Malignant cord compression: dexamethasone 10mg IV then 4mg q6h + emergent radiation therapy',
+    safetyLevel: 'critical',
   },
 
   {
@@ -474,6 +515,8 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
         next: 'sphincter-discharge',
       },
     ],
+
+    summary: 'Neuro emergency = admit; POD/AKI = admit for monitoring; stable with catheter = discharge with urology follow-up',
   },
 
   {

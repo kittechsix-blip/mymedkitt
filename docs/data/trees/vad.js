@@ -37,6 +37,8 @@ export const VAD_NODES = [
                 next: 'vad-coordinator',
             },
         ],
+        summary: 'No pulse is NORMAL in continuous-flow LVADs — use Doppler MAP, listen for pump hum, contact VAD coordinator',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-coordinator',
@@ -46,6 +48,7 @@ export const VAD_NODES = [
         body: '**Call the VAD center IMMEDIATELY** while beginning assessment.\n\n**Information to gather from patient/family/wallet card:**\n\u2022 Device type (HeartMate 3, HeartMate II, HVAD)\n\u2022 Baseline pump parameters (speed, power, flow, PI)\n\u2022 Current INR target and last INR\n\u2022 Recent device issues or hospitalizations\n\u2022 VAD center contact number\n\u2022 Transplant candidacy status\n\nThe patient and family are often your best resource \u2014 they know their baseline parameters.',
         citation: [1, 3],
         next: 'vad-cabcde',
+        summary: 'Call VAD center IMMEDIATELY — gather device type, baseline parameters, INR target, VAD center number',
     },
     {
         id: 'vad-cabcde',
@@ -67,6 +70,8 @@ export const VAD_NODES = [
                 next: 'vad-map-check',
             },
         ],
+        summary: 'Auscultate for pump hum — absence means pump failure; SpO2 unreliable, use capnography and perfusion signs',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-no-hum',
@@ -76,6 +81,8 @@ export const VAD_NODES = [
         body: '**No hum = pump not running. This is a critical emergency.**\n\n**Immediate troubleshooting:**\n1. Check all connections \u2014 reseat driveline to controller\n2. Swap to backup batteries or connect to AC power\n3. Use patient\'s backup controller if available\n4. If pump cannot be restarted \u2192 patient has native cardiac function only (severely impaired)\n\n**Hemodynamic support:**\n\u2022 [Dobutamine](#/drug/dobutamine/vad rv failure) 2.5-5 mcg/kg/min IV\n\u2022 [Norepinephrine](#/drug/norepinephrine/vad vasopressor) if MAP <60\n\u2022 Volume resuscitation cautiously (risk of RV overload)\n\n**DO NOT clamp the outflow graft** \u2014 causes acute aortic regurgitation and cardiogenic shock.\n\n**Emergent transfer to VAD center required.**\n\n[VAD Alarm Guide](#/info/vad-alarm-guide)',
         citation: [1, 2, 5],
         next: 'vad-dispo-transfer',
+        summary: 'No hum = pump failure — troubleshoot connections/batteries, do NOT clamp outflow graft, start inotropes',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-map-check',
@@ -108,6 +115,7 @@ export const VAD_NODES = [
                 next: 'vad-hypertension',
             },
         ],
+        summary: 'Doppler MAP: cuff + pencil Doppler over brachial; first flow signal = MAP; target 70-90 mmHg',
     },
     // =====================================================================
     // MODULE 2: DEVICE EVALUATION
@@ -144,6 +152,7 @@ export const VAD_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Read and compare controller parameters to baseline — speed, power, flow, PI; do NOT change speed',
     },
     {
         id: 'vad-hypertension',
@@ -153,6 +162,8 @@ export const VAD_NODES = [
         body: '**Hypertension in VAD patients increases hemorrhagic stroke risk and reduces pump efficiency.**\n\nThe LVAD pumps against systemic vascular resistance \u2014 higher afterload = lower flow.\n\n**Goal MAP: 70-80 mmHg** (never >90)\n\n**Treatment:**\n1. [Hydralazine](#/drug/hydralazine/vad hypertension) 10-25 mg PO q6-8h (preferred first-line)\n2. ACE inhibitor or ARB for chronic management\n3. IV nicardipine or clevidipine for acute/severe hypertension\n4. **Avoid IV beta-blockers** \u2014 reduce native cardiac contractility in patients with already-impaired hearts\n\nRecheck MAP in 30-60 minutes.',
         citation: [2, 4, 8],
         next: 'vad-triage',
+        summary: 'MAP >90 increases stroke risk — hydralazine first-line, avoid IV beta-blockers in VAD patients',
+        safetyLevel: 'warning',
     },
     {
         id: 'vad-low-flow',
@@ -175,6 +186,7 @@ export const VAD_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Low flow differential: flat IVC = hypovolemia/bleeding; distended IVC = RV failure, PE, or tamponade',
     },
     {
         id: 'vad-alarm-triage',
@@ -184,6 +196,8 @@ export const VAD_NODES = [
         body: '**Systematic alarm response:**\n\n1. Check all connections \u2014 driveline to controller, controller to power source\n2. Ensure batteries are charged \u2014 swap to backup battery or AC power\n3. Auscultate \u2014 confirm pump hum is present\n4. If controller fault \u2192 use patient\'s backup controller (they should carry one)\n5. **Position patient flat** before any battery swap to prevent suction event\n6. Call VAD coordinator for any alarm you cannot resolve quickly\n\n**[VAD Alarm Guide](#/info/vad-alarm-guide)** for device-specific alarm tables and hazard vs. advisory classification.\n\n**Red/Hazard alarms** = life-threatening, require immediate action.\n**Yellow/Advisory alarms** = important but non-life-threatening.',
         citation: [1, 5, 7],
         next: 'vad-triage',
+        summary: 'Check connections, batteries, pump hum; position flat before battery swap; red alarms = life-threatening',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: COMPLICATION TRIAGE
@@ -236,6 +250,7 @@ export const VAD_NODES = [
                 next: 'vad-arrhythmia',
             },
         ],
+        summary: 'Select most acute VAD complication — GI bleed most common; pump thrombosis and stroke are emergencies',
     },
     {
         id: 'vad-suction',
@@ -245,6 +260,7 @@ export const VAD_NODES = [
         body: '**The LV is too empty \u2014 the pump pulls the septum or ventricular wall against the inflow cannula.**\n\n**Causes:** Hypovolemia, RV failure, tamponade, arrhythmia, excessive pump speed\n\n**Controller signs:** Low flow, power fluctuations, low PI\n\n**Echo findings:** Small LV cavity, septal deviation toward inflow cannula\n\n**Management:**\n1. **Volume challenge:** 250-500 mL NS bolus \u2014 LVADs are preload dependent\n2. HeartMate 3 has automatic low-speed mode when suction detected \u2014 allow it to function\n3. Do NOT increase pump speed (worsens suction)\n4. Assess for underlying cause with bedside echo\n5. If recurrent despite volume \u2192 suspect RV failure\n\n[VAD Echo Findings](#/info/vad-echo-findings)',
         citation: [1, 2, 10],
         next: 'vad-dispo-decision',
+        summary: 'LV too empty pulling septum against cannula — give 250-500mL NS, do NOT increase speed',
     },
     {
         id: 'vad-stroke',
@@ -254,6 +270,8 @@ export const VAD_NODES = [
         body: '**Both ischemic (6.8%) and hemorrhagic (8.4%) strokes are common in VAD patients.**\n\n**Immediate workup:**\n1. STAT CT head (non-contrast) \u2014 determine type\n2. CTA head/neck if ischemic\n3. Check INR \u2014 patients are on [Warfarin](#/drug/warfarin/vad anticoagulation)\n4. Full neurologic exam\n5. Check pump parameters \u2014 high power may indicate underlying thrombosis\n\n**Hemorrhagic stroke:**\n\u2022 Hold all anticoagulation and antiplatelet therapy\n\u2022 Reverse with [Vitamin K](#/drug/vitamin-k/vad warfarin reversal) 10 mg IV + 4-factor PCC\n\u2022 Balance: reversal vs pump thrombosis risk (discuss with VAD team)\n\u2022 Neurosurgery consult\n\n**Ischemic stroke:**\n\u2022 Systemic tPA generally **CONTRAINDICATED** (already anticoagulated)\n\u2022 Mechanical thrombectomy may be an option \u2014 neuro-IR consult\n\u2022 Evaluate for pump thrombosis as embolic source\n\n**MRI is CONTRAINDICATED** in all current LVAD patients.\n\nConsult neurology AND VAD team simultaneously.',
         citation: [2, 11, 12],
         next: 'vad-dispo-transfer',
+        summary: 'STAT CT head — systemic tPA contraindicated; hemorrhagic: reverse with VitK+PCC; MRI contraindicated',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: COMPLICATION MANAGEMENT
@@ -278,6 +296,8 @@ export const VAD_NODES = [
                 next: 'vad-bleeding-minor',
             },
         ],
+        summary: 'GI bleed #1 cause of VAD ED visits — use ONLY leukoreduced irradiated blood to preserve transplant candidacy',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-bleeding-active',
@@ -287,6 +307,8 @@ export const VAD_NODES = [
         body: '**Resuscitation:**\n1. Large-bore IV access, type & crossmatch\n2. Transfuse leukoreduced, irradiated pRBCs \u2014 target Hgb >7 g/dL\n3. **Hold [Warfarin](#/drug/warfarin/vad anticoagulation)**\n4. Anticoagulation reversal (discuss target INR with VAD team):\n   \u2022 [Vitamin K](#/drug/vitamin-k/vad warfarin reversal) 2.5-5 mg IV\n   \u2022 4-factor PCC for life-threatening bleeding\n   \u2022 **Warfarin reversal carries LOW risk for acute pump thrombosis** \u2014 do not withhold in life-threatening bleeding\n5. [Desmopressin](#/drug/desmopressin/vad bleeding) 0.3 mcg/kg IV for acquired vWD\n6. For GI bleeding with suspected AVMs:\n   \u2022 [Octreotide](#/drug/octreotide/vad gi bleeding) 50 mcg IV bolus, then 50 mcg/hr infusion\n   \u2022 Reduces splanchnic flow and inhibits angiogenesis\n7. GI consult for endoscopy\n\n**Targets:** Hgb >7, Fibrinogen >200, Platelets >50K\n\n**Avoid excessive volume resuscitation** \u2014 risk of RV failure.',
         citation: [1, 2, 13, 14],
         next: 'vad-dispo-admit',
+        summary: 'Transfuse leukoreduced/irradiated pRBCs; DDAVP for acquired vWD; octreotide for GI AVMs; warfarin reversal safe',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-bleeding-minor',
@@ -296,6 +318,7 @@ export const VAD_NODES = [
         body: '**Minor bleeding (epistaxis, gingival, small-volume GI, bruising):**\n\n1. Check INR \u2014 often supratherapeutic\n2. Local hemostatic measures (direct pressure, nasal packing)\n3. Consider holding warfarin dose or reducing target INR (discuss with VAD team)\n4. [Desmopressin](#/drug/desmopressin/vad bleeding) 0.3 mcg/kg IV if continued oozing\n5. Labs: CBC, INR, fibrinogen, type & screen\n6. Monitor for 4-6 hours \u2014 VAD bleeding can escalate rapidly\n\n**Disposition depends on source control and hemoglobin stability.**',
         citation: [1, 2],
         next: 'vad-dispo-decision',
+        summary: 'Check INR, local hemostasis, consider DDAVP; monitor 4-6h — VAD bleeding can escalate rapidly',
     },
     {
         id: 'vad-pump-thrombosis',
@@ -305,6 +328,8 @@ export const VAD_NODES = [
         body: '**High power + hemolysis = pump thrombosis until proven otherwise.**\n\nThis is a surgical emergency \u2014 48% six-month mortality without intervention.\n\n[Hemolysis Lab Panel](#/info/vad-hemolysis-labs)\n\n**Diagnosis:**\n\u2022 Power >10 W (HM3) or rising power trend\n\u2022 LDH >2.5\u00D7 upper limit normal (>1,150 IU/L highly suggestive)\n\u2022 Haptoglobin undetectable\n\u2022 Plasma free hemoglobin >40 mg/dL\n\u2022 Dark urine (hemoglobinuria)\n\u2022 Acute kidney injury from free hemoglobin\n\n**ED Management:**\n1. **Heparin anticoagulation:** [Heparin](#/drug/ufh/vad anticoagulation) infusion, target PTT 60-80\n2. Aggressive IV hydration \u2014 protect kidneys from free hemoglobin\n3. Maintain MAP 70-80 (avoid hypertension)\n4. Serial hemolysis labs q4-6h\n5. **Thrombolysis** (VAD team decision only):\n   \u2022 [Alteplase](#/drug/alteplase/vad pump thrombosis) per VAD center protocol\n   \u2022 70% hemolysis resolution without exchange; 10% hemorrhagic stroke risk\n6. **Definitive treatment:** Pump exchange surgery at VAD center\n\n**Transfer to VAD center emergently if not already at one.**',
         citation: [1, 2, 5, 15, 16],
         next: 'vad-dispo-transfer',
+        summary: 'High power + hemolysis = pump thrombosis — heparin drip, IV fluids, emergent VAD center transfer; 48% mortality',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-infection',
@@ -326,6 +351,7 @@ export const VAD_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Classify infection: driveline exit site (most common), pump pocket, or bloodstream/endocarditis',
     },
     {
         id: 'vad-driveline-infection',
@@ -335,6 +361,8 @@ export const VAD_NODES = [
         body: '**Most common VAD infection \u2014 accounts for ~50% of device infections.**\n\n**Assessment:**\n\u2022 Erythema, warmth, tenderness around exit site\n\u2022 Purulent drainage\n\u2022 Exposed velour or cable\n\u2022 Granulation tissue breakdown\n\n**Management:**\n1. Wound culture before antibiotics\n2. Blood cultures \u00D72 (rule out bacteremia)\n3. Local wound care \u2014 cleanse with chlorhexidine, dry dressing\n4. Antibiotics based on severity:\n   \u2022 Superficial: oral anti-staphylococcal agent (cephalexin, TMP-SMX)\n   \u2022 Extending/deep: IV vancomycin + piperacillin-tazobactam\n5. CT abdomen if concern for driveline tract or pocket infection\n6. Immobilize driveline to prevent further trauma\n\n**NEVER pull, manipulate, or rotate the driveline** \u2014 it is surgically anchored, and disruption risks catastrophic bleeding.',
         citation: [1, 2, 17],
         next: 'vad-dispo-decision',
+        summary: 'Wound culture, blood cultures, local care; NEVER pull or rotate the driveline — surgically anchored',
+        safetyLevel: 'warning',
     },
     {
         id: 'vad-bsi',
@@ -344,6 +372,7 @@ export const VAD_NODES = [
         body: '**VAD-related bloodstream infection carries high morbidity and mortality.**\n\n**Management:**\n1. Blood cultures \u00D72 (peripheral sites)\n2. Broad-spectrum IV antibiotics:\n   \u2022 Vancomycin + cefepime or piperacillin-tazobactam\n   \u2022 Add antifungal coverage if prior Candida or prolonged antibiotics\n3. TTE/TEE \u2014 evaluate for vegetations on pump components\n4. CT chest/abdomen \u2014 driveline tract abscess, pump pocket fluid\n5. ID consult for long-term antibiotic plan\n6. VAD team involvement \u2014 may ultimately need pump exchange\n\n**Duration:** Typically 6+ weeks IV antibiotics for device-related BSI.\n\n**Device removal is definitive but may not be feasible** \u2014 suppressive antibiotics are often required indefinitely.',
         citation: [1, 2, 17, 18],
         next: 'vad-dispo-admit',
+        summary: 'Broad-spectrum IV abx, TTE/TEE for vegetations, 6+ weeks therapy; device removal may be needed',
     },
     {
         id: 'vad-rv-failure',
@@ -353,6 +382,8 @@ export const VAD_NODES = [
         body: '**RV failure is the Achilles heel of LVAD therapy.**\n\nThe LVAD only supports the left ventricle. When the LVAD increases LV output, the RV must handle the increased venous return \u2014 and it often cannot.\n\n[VAD Echo Findings](#/info/vad-echo-findings)\n\n**Signs:** Elevated JVP, peripheral edema, ascites, hepatic congestion, low LVAD flow despite adequate speed.\n\n**Management \u2014 optimize the RV triangle (preload, afterload, contractility):**\n\n**1. Preload \u2014 gentle diuresis:**\n\u2022 Avoid aggressive diuresis (reduces LVAD filling)\n\u2022 Avoid volume overload (worsens RV distension)\n\n**2. RV afterload reduction:**\n\u2022 [Milrinone](#/drug/milrinone/vad rv failure) 0.125-0.375 mcg/kg/min (no loading dose in VAD)\n\u2022 Inhaled nitric oxide or epoprostenol if available\n\u2022 Prevent hypoxia and hypercarbia (both increase PVR)\n\n**3. RV contractility:**\n\u2022 [Dobutamine](#/drug/dobutamine/vad rv failure) 2.5-5 mcg/kg/min\n\u2022 Low-dose [Epinephrine](#/drug/epinephrine/vad inotrope) 0.01-0.03 mcg/kg/min\n\n**4. Systemic perfusion:**\n\u2022 [Vasopressin](#/drug/vasopressin/vad rv support) 0.02-0.04 units/min (preferred \u2014 does not increase PVR)\n\u2022 [Norepinephrine](#/drug/norepinephrine/vad vasopressor) if additional MAP support needed\n\n**AVOID intubation/positive pressure ventilation** if possible \u2014 increases RV afterload and can precipitate RV failure spiral.\n\n**Escalation:** RVAD or VA-ECMO at VAD center.',
         citation: [1, 2, 9, 10, 19],
         next: 'vad-dispo-admit',
+        summary: 'RV failure: milrinone for afterload, dobutamine for contractility, vasopressin for MAP; AVOID intubation if possible',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: CARDIAC ARREST
@@ -377,6 +408,7 @@ export const VAD_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'VAD patients may TOLERATE VT/VF — pump maintains flow; assess hemodynamic stability, not just rhythm',
     },
     {
         id: 'vad-arrhythmia-stable',
@@ -386,6 +418,8 @@ export const VAD_NODES = [
         body: '**VT (hemodynamically tolerated):**\n1. Correct electrolytes: K\u207A >4.0, Mg\u00B2\u207A >2.0\n2. [Amiodarone](#/drug/amiodarone/vad arrhythmia) 150 mg IV over 10 min, then 1 mg/min \u00D76h, then 0.5 mg/min \u00D718h\n3. Alternative: [Lidocaine](#/drug/lidocaine/vad vt) 1-1.5 mg/kg IV bolus, then 1-4 mg/min infusion\n4. Interrogate/reprogram ICD if inappropriate shocks\n5. Cardiology/EP consult\n6. Evaluate for reversible causes: ischemia, electrolytes, suction events\n\n**Atrial fibrillation/flutter:**\n\u2022 Rate control cautiously \u2014 **avoid IV beta-blockers** (reduce contractility)\n\u2022 [Amiodarone](#/drug/amiodarone/vad arrhythmia) preferred for rate + rhythm control\n\u2022 Maintain therapeutic anticoagulation\n\n**Cardioversion/defibrillation if needed:**\n\u2022 **Anterior-posterior pad placement** \u2014 avoid pads directly over device or driveline\n\u2022 Standard biphasic energy\n\u2022 Never disconnect LVAD during cardioversion\n\n**All VAD arrhythmias warrant admission for monitoring.**',
         citation: [1, 2, 20, 21],
         next: 'vad-dispo-admit',
+        summary: 'Amiodarone for VT; avoid IV beta-blockers; AP pad placement away from device; all VAD arrhythmias admit',
+        safetyLevel: 'warning',
     },
     {
         id: 'vad-arrest-start',
@@ -395,6 +429,8 @@ export const VAD_NODES = [
         body: '**MODIFIED ACLS \u2014 Critical differences from standard resuscitation.**\n\n[VAD Cardiac Arrest Protocol](#/info/vad-arrest-protocol)\n\n**Step 1 \u2014 Assess perfusion, NOT pulse:**\n\u2022 Responsiveness / consciousness\n\u2022 MAP by Doppler (perfusion if >50)\n\u2022 ETCO\u2082 if intubated (perfusion if >20)\n\u2022 Skin perfusion \u2014 color, temperature, capillary refill\n\n**Step 2 \u2014 Check the pump:**\n\u2022 Auscultate for hum\n\u2022 Check controller \u2014 power, flow, alarms\n\u2022 Troubleshoot: connections, batteries, backup controller\n\n**Step 3 \u2014 When to start chest compressions:**\n\u2022 Patient is **unresponsive** AND\n\u2022 **MAP <50 mmHg** by Doppler AND/OR\n\u2022 **ETCO\u2082 <20 mmHg** AND/OR\n\u2022 Pump is not running (no hum)\n\n**Chest compressions ARE safe** in VAD patients \u2014 AHA endorsed 2017. Autopsy studies show no cannula dislodgement.',
         citation: [1, 22, 23],
         next: 'vad-arrest-defib',
+        summary: 'Assess perfusion NOT pulse; check pump hum/controller; CPR if unresponsive + MAP <50 or ETCO2 <20',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-arrest-defib',
@@ -404,6 +440,8 @@ export const VAD_NODES = [
         body: '**Defibrillation is SAFE in VAD patients.**\n\n**Pad placement:** Anterior-posterior preferred\n\u2022 Do NOT place pads directly over LVAD device or driveline\n\u2022 Standard biphasic energy (200J)\n\u2022 Disconnect from AC power during shock (run on batteries only)\n\u2022 Never disconnect LVAD controller during defibrillation\n\n**ALL standard ACLS medications are permitted:**\n\u2022 [Epinephrine](#/drug/epinephrine/vad arrest) 1 mg IV/IO q3-5 min\n\u2022 [Amiodarone](#/drug/amiodarone/vad arrhythmia) 300 mg IV first dose, 150 mg second dose\n\u2022 [Lidocaine](#/drug/lidocaine/vad vt) 1-1.5 mg/kg as alternative antiarrhythmic\n\n**Additional VAD-specific considerations:**\n\u2022 **Volume resuscitation** \u2014 hypovolemia is a common precipitant\n\u2022 **Bedside echo** \u2014 assess RV/LV size, tamponade, cannula position\n\u2022 Rule out tension pneumothorax, PE, tamponade\n\u2022 If massive PE suspected: [Tenecteplase](#/drug/tenecteplase/vad arrest pe) weight-based dosing',
         citation: [1, 22, 23, 24],
         next: 'vad-arrest-echo',
+        summary: 'Defibrillation safe — AP pads away from device; disconnect AC power; all standard ACLS meds permitted',
+        safetyLevel: 'critical',
     },
     {
         id: 'vad-arrest-echo',
@@ -413,6 +451,7 @@ export const VAD_NODES = [
         body: '**Bedside echo during arrest guides the differential:**\n\n[VAD Echo Findings](#/info/vad-echo-findings)\n\n| Finding | Diagnosis | Action |\n|---------|-----------|--------|\n| Small RV + Small LV | Hypovolemia | Volume resuscitation |\n| Large RV + Small LV | PE, RV infarct | Consider thrombolytics |\n| Large RV + Large LV | Pump thrombosis | Heparin, VAD team |\n| Pericardial effusion | Tamponade | Pericardiocentesis |\n| Small LV, septal shift | Suction event | Volume challenge |\n\n**Reversible causes (Hs and Ts) \u2014 PLUS VAD-specific:**\n\u2022 Hypovolemia / Hemorrhage (most common)\n\u2022 Hydrogen ion (acidosis)\n\u2022 Hypo/Hyperkalemia\n\u2022 Hypothermia\n\u2022 Tension pneumothorax\n\u2022 Tamponade\n\u2022 Thrombosis (pump or coronary)\n\u2022 Toxins\n\u2022 **Device failure** (check power, connections)\n\u2022 **Suction event** (volume challenge)',
         citation: [1, 22, 23],
         next: 'vad-arrest-rosc',
+        summary: 'Echo-guided differential: small RV+LV = hypovolemia; large RV = PE; large both = pump thrombus; effusion = tamponade',
     },
     {
         id: 'vad-arrest-rosc',
@@ -434,6 +473,7 @@ export const VAD_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Assess perfusion restoration: MAP >60, ETCO2 >20, improving consciousness and pump parameters',
     },
     {
         id: 'vad-arrest-refractory',
@@ -473,6 +513,7 @@ export const VAD_NODES = [
                 next: 'vad-dispo-discharge',
             },
         ],
+        summary: 'Nearly ALL VAD ED visits require admission or transfer — discharge is rare and needs explicit VAD team approval',
     },
     {
         id: 'vad-dispo-admit',

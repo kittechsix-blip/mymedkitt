@@ -41,6 +41,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'rv-risk-assessment', label: 'RV Risk Assessment' },
     ],
+
+    summary: 'RV dysfunction patients at extreme risk of peri-intubation arrest — PPV increases RV afterload, sedation drops preload, triggers death spiral',
+    safetyLevel: 'critical',
   },
 
   {
@@ -51,6 +54,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**The Mechanism of Peri-Intubation Arrest in RV Failure:**\n\n**Step 1:** PPV increases RV afterload\n• ↑ Intrathoracic pressure → ↑ pulmonary vascular resistance\n• When airway pressure > PA pressure, pulmonary vessels collapse\n\n**Step 2:** RV dilates\n• Thin-walled RV cannot generate enough pressure\n• Volume backs up → RV enlarges\n\n**Step 3:** Septal shift (D-sign)\n• Dilated RV pushes septum into LV\n• LV becomes "D-shaped" instead of round\n• LV compliance and filling decrease\n\n**Step 4:** LV stroke volume falls\n• Less LV filling → less cardiac output\n• Systemic hypotension develops\n\n**Step 5:** RV ischemia\n• **Critical:** RV is perfused when SBP > PASP\n• When SBP drops below PA pressure, RV becomes ischemic\n• RV ischemia → worse RV function → worsening spiral\n\n**Step 6:** Cardiac arrest\n• Often PEA — the problem is obstructive, not electrical\n• CPR is often futile because the underlying physiology isn\'t fixed [1][2][3]',
     citation: [1, 2, 3],
     next: 'rv-clinical-signs',
+
+    summary: 'RV death spiral: PPV increases afterload, RV dilates, septum shifts into LV (D-sign), CO falls, SBP drops below PASP, RV ischemia, PEA arrest',
+    skippable: true,
   },
 
   // =====================================================================
@@ -65,6 +71,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Physical Exam — Signs of Right Heart Failure:**\n\n| Sign | Significance |\n|------|-------------|\n| **JVD** | Elevated RA pressure |\n| **Peripheral edema** | Systemic venous congestion |\n| **Hepatomegaly / RUQ tenderness** | Congestive hepatopathy |\n| **Ascites** | Advanced RV failure |\n| **Cool extremities** | Poor cardiac output |\n| **Hypotension** | Cardiogenic shock |\n| **Oliguria** | Congestive nephropathy |\n\n**Early Warning Signs:**\n• **Delirium/encephalopathy** — appears EARLIER in RV failure than LV failure\n• Asterixis, myoclonus (congestive encephalopathy)\n\n**ECG Findings:**\n• Right axis deviation\n• RBBB\n• rSR\' in V1\n• S1Q3T3 (classic but not sensitive)\n• ST depression/TWI in right precordial leads\n\n⚠️ **If ANY of these present, perform POCUS before intubation** [1][4]',
     citation: [1, 4],
     next: 'rv-pocus-overview',
+
+    summary: 'Clinical signs: JVD, peripheral edema, hepatomegaly, hypotension — delirium appears EARLIER in RV than LV failure, ECG shows RAD/RBBB/S1Q3T3',
+    skippable: true,
   },
 
   {
@@ -83,6 +92,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'rv-echo-interpreter', label: 'Echo Interpreter' },
     ],
+
+    summary: '60-90 second POCUS: subcostal (wall thickness/IVC), A4C (RV:LV ratio/TAPSE), PSAX (D-sign) — red flags: RV>LV, TAPSE <10, severe D-sign',
   },
 
   {
@@ -96,6 +107,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
       { id: 'rv-tapse', label: 'TAPSE Guide' },
     ],
     next: 'rv-pocus-overview',
+
+    summary: 'A4C: RV:LV ratio (normal <0.6, severe >1.0), TAPSE (normal >17mm, severe <10mm), McConnell sign (22% sens, 97% spec for acute PE)',
+    skippable: true,
   },
 
   {
@@ -106,6 +120,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**PSAX View — Best for D-Sign Assessment**\n\n**Probe Position:**\n• Left parasternal border, 3rd-4th intercostal space\n• Rotate 90° from PLAX (marker toward left shoulder)\n• Level: Papillary muscles (mid-ventricle)\n\n**Normal Appearance:**\n• LV is circular (round like a donut)\n• Septum curves toward RV\n• RV is crescent-shaped, smaller than LV\n\n**D-Sign (Septal Flattening):**\n• Septum flattens or bows INTO the LV\n• LV becomes "D-shaped" instead of "O-shaped"\n• RV pressure pushing septum leftward\n\n**Timing Differentiates Cause:**\n\n| Timing | Cause |\n|--------|-------|\n| **Diastole only** | Volume overload |\n| **Systole AND diastole** | Pressure overload |\n\n**Eccentricity Index:**\n• D2 (parallel to septum) / D1 (perpendicular)\n• Normal = 1.0\n• >1.0 = Septal displacement from RV overload [4][5]',
     citation: [4, 5],
     next: 'rv-pocus-overview',
+
+    summary: 'PSAX D-sign: septum flattening into LV — diastole only = volume overload, systole AND diastole = pressure overload (worse prognosis)',
+    skippable: true,
   },
 
   {
@@ -116,6 +133,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Subcostal View — RV Wall Thickness + IVC**\n\n**Probe Position:**\n• Subxiphoid, angled toward left shoulder\n• Liver as acoustic window\n• Works well in obese/COPD patients and during CPR\n\n**What to Assess:**\n\n**1. RV Wall Thickness:**\n• Measure free wall in diastole\n• **Normal:** 3-5 mm\n• **Thickened (>5mm):** CHRONIC RV pressure overload (PAH, CTEPH)\n• **Normal thickness + dilated:** ACUTE overload (PE)\n\n**This differentiates ACUTE vs CHRONIC:**\n\n| Feature | Acute (PE) | Chronic (PAH) |\n|---------|------------|---------------|\n| RV wall | ≤5 mm | >5 mm |\n| PASP | <60 mmHg | >60 mmHg |\n| RA size | = LA | RA > LA |\n\n**2. IVC Assessment:**\n• Diameter and respiratory variation\n• >2.1 cm with <50% collapse = elevated RA pressure\n\n⚠️ **IVC unreliable in:** PPV, intra-abdominal HTN, heart failure. Use in context. [4][5]',
     citation: [4, 5],
     next: 'rv-pocus-overview',
+
+    summary: 'Subcostal: RV wall >5mm = chronic overload (PAH), normal + dilated = acute (PE) — IVC >2.1cm with <50% collapse = elevated RA pressure',
+    skippable: true,
   },
 
   {
@@ -133,6 +153,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'rv-echo-interpreter', label: 'Echo Interpreter' },
     ],
+
+    summary: 'Interpret POCUS findings: RV>LV or TAPSE <10 = severe/extreme risk, RV dilated + TAPSE 10-17 = moderate risk, normal = standard approach',
   },
 
   {
@@ -143,6 +165,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**🚨 EXTREME PERI-INTUBATION RISK**\n\n**Your Findings Indicate:**\n• RV larger than LV, OR\n• TAPSE <10mm, OR\n• Severe D-sign with systolic flattening\n\n**This Patient Is At Very High Risk of:**\n• Peri-intubation cardiac arrest\n• PEA arrest that is refractory to standard ACLS\n• Death\n\n**Critical Question:**\n**Do you NEED to intubate this patient right now?**\n\n**Options to Consider:**\n\n1. **BiPAP** — Can you avoid intubation?\n   - Allows gradual transition to positive pressure\n   - Reversible if hemodynamics worsen\n   - PREOXI trial: BiPAP reduced cardiac arrest 0.2% vs 1.1%\n\n2. **Awake intubation** — Preserves spontaneous breathing\n   - Ketamine sedation + topicalization\n   - Less hemodynamic perturbation\n   - Strongly consider for known severe PAH\n\n3. **Fully optimized RSI** — If must intubate\n   - Extensive pre-optimization required\n   - Have inhaled pulmonary vasodilator ready\n   - Accept higher risk [1][2][7]',
     citation: [1, 2, 7],
     next: 'rv-optimization-overview',
+
+    summary: 'SEVERE RV: consider BiPAP to avoid intubation, awake intubation for severe PAH, or fully optimized RSI — all options carry high risk',
+    safetyLevel: 'critical',
   },
 
   {
@@ -153,6 +178,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**⚠️ SIGNIFICANT PERI-INTUBATION RISK**\n\n**Your Findings Indicate:**\n• RV dilated but not > LV\n• TAPSE 10-17mm\n• Some D-sign present\n\n**This Patient Is At Elevated Risk of:**\n• Hemodynamic instability during intubation\n• Hypotension requiring escalating vasopressors\n• Potential arrest if not optimized\n\n**Approach:**\n\n1. **Pre-optimization is ESSENTIAL**\n   - Do not rush to intubation\n   - Every minute of preparation reduces risk\n\n2. **Standard RSI with modifications:**\n   - Vasopressors running or push-dose at bedside\n   - BiPAP preoxygenation\n   - Lung-protective ventilation post-intubation\n   - Close hemodynamic monitoring\n\n3. **Have backup plans ready:**\n   - Inhaled pulmonary vasodilator\n   - Escalation pathway (dobutamine, epinephrine infusion)\n   - ECMO evaluation criteria known [1][2]',
     citation: [1, 2],
     next: 'rv-optimization-overview',
+
+    summary: 'Moderate RV: pre-optimization essential, standard RSI with vasopressor support + BiPAP preox + lung-protective vent, have backup plans',
   },
 
   {
@@ -163,6 +190,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**RV Appears Normal**\n\n**Your Findings:**\n• RV:LV ratio <0.6\n• TAPSE >17mm\n• No D-sign\n• Normal RV wall thickness\n\n**Interpretation:**\nRV function is preserved. Standard intubation approach is appropriate.\n\n**Still Consider:**\n• Other causes of physiologically difficult airway (HOP killers)\n• Hypotension\n• Severe hypoxemia\n• Metabolic acidosis\n• Elevated ICP\n\n**Standard Approach:**\n• Preoxygenate (BiPAP or HFNC preferred)\n• RSI with hemodynamically appropriate agents\n• Have vasopressors available (always good practice)\n• Lung-protective ventilation [1]',
     citation: [1],
     next: undefined,
+
+    summary: 'Normal RV: standard intubation approach — still consider other HOP killers (hypotension, hypoxemia, acidosis, elevated ICP)',
+    skippable: true,
   },
 
   // =====================================================================
@@ -177,6 +207,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**The Goal: Optimize BEFORE Induction**\n\nEvery minute spent optimizing reduces peri-intubation risk.\n\n**Optimization Checklist:**\n\n**□ Hemodynamics**\n• Target SBP 120-130 mmHg (anticipate drop)\n• Target MAP ~80 mmHg\n• **SBP must exceed PASP** (prevents RV ischemia)\n\n**□ Vasopressors**\n• Norepinephrine infusion running, OR\n• Push-dose epi + vasopressin at bedside\n\n**□ Oxygenation**\n• BiPAP with 100% FiO₂ for preoxygenation\n• Gradual increase in settings\n• Monitor hemodynamics as you increase pressure\n\n**□ Pulmonary Vasodilators**\n• Have inhaled agent ready for immediate post-intubation\n• iNO, epoprostenol, or nebulized milrinone\n\n**□ Arterial Line**\n• Insert before intubation if time permits\n• Real-time BP during critical period\n\n**□ Volume Status**\n• Do NOT aggressively fluid bolus\n• Small bolus (250mL) OK, large volumes worsen spiral [1][2][8]',
     citation: [1, 2, 8],
     next: 'rv-hemodynamic-targets',
+
+    summary: 'Optimization checklist: SBP 120-130 (>PASP), vasopressors running, BiPAP preoxygenation, pulmonary vasodilator ready, arterial line, small volume only',
   },
 
   {
@@ -190,6 +222,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
       { id: 'rv-hemodynamic-calc', label: 'Hemodynamic Goals' },
     ],
     next: 'rv-vasopressors',
+
+    summary: 'SBP must exceed PASP for RV coronary perfusion — do NOT intubate until BP optimized, anticipate 20-30% drop during induction',
+    safetyLevel: 'critical',
   },
 
   {
@@ -200,6 +235,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Vasopressor Selection for RV Failure:**\n\n| Agent | Mechanism | Role | Notes |\n|-------|-----------|------|-------|\n| **Norepinephrine** | α > β | First-line | Safe peripherally; improves RV coronary perfusion |\n| **Vasopressin** | V1 receptor | First-line alt | ↑ SVR, may ↓ PVR; hard to titrate |\n| **Epinephrine** | β + α | Inotropy needed | β effects dilate pulm vessels; ↑ lactate |\n| **Dobutamine** | β agonist | Inotropy | Start 2 mcg/kg/min; causes hypotension — need vasopressor |\n\n⚠️ **AVOID Phenylephrine**\n• Pure alpha agonist\n• Increases pulmonary vascular resistance\n• Worsens RV afterload\n• Can precipitate RV failure\n\n**Practical Approach:**\n1. Start norepinephrine infusion\n2. Add vasopressin if needed\n3. Add epinephrine or dobutamine if inotropic support needed\n4. Have push-dose at bedside as backup [1][2][8]',
     citation: [1, 2, 8],
     next: 'rv-push-dose',
+
+    summary: 'NE first-line, vasopressin alternative (may decrease PVR), epi for inotropy — AVOID phenylephrine (increases PVR, worsens RV afterload)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -213,6 +251,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
       { id: 'rv-push-dose-calc', label: 'Push-Dose Prep' },
     ],
     next: 'rv-preoxygenation',
+
+    summary: 'Pre-medicate with push-dose epi 10-20mcg + vasopressin 1-2 units just prior to induction — pre-emptive even if not yet hypotensive',
   },
 
   {
@@ -223,6 +263,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Preoxygenation for RV Failure:**\n\n**Why BiPAP Is Preferred:**\n• Allows gradual transition to positive pressure\n• Can monitor hemodynamic response as you increase settings\n• REVERSIBLE if patient decompensates\n• PREOXI trial: BiPAP reduced hypoxemia (9.1% vs 18.5%) and cardiac arrest (0.2% vs 1.1%)\n\n**Technique:**\n\n1. **Start BiPAP:**\n   - FiO₂ 100%\n   - Initial settings: 10/5 or 12/8\n\n2. **Gradually increase:**\n   - Target 18/12 or higher if tolerated\n   - Watch hemodynamics as you increase\n\n3. **Monitor for decompensation:**\n   - If BP drops with increased pressure, back off\n   - This tells you patient is preload-dependent\n\n4. **During apneic period:**\n   - Leave BiPAP mask on during sedation onset\n   - Provides apneic ventilation\n   - Add HFNC under mask for apneic oxygenation during laryngoscopy\n\n**Minimum:** 3 minutes preoxygenation [7][9]',
     citation: [7, 9],
     next: 'rv-pulm-vasodilators',
+
+    summary: 'BiPAP preferred for preoxygenation — allows gradual transition to positive pressure, PREOXI trial showed reduced cardiac arrest (0.2% vs 1.1%)',
+    skippable: true,
   },
 
   {
@@ -233,6 +276,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Have Inhaled Pulmonary Vasodilator Ready**\n\nStart immediately post-intubation — reduces RV afterload.\n\n**Inhaled Agents (Preferred):**\n\n| Agent | Dose | Notes |\n|-------|------|-------|\n| **Inhaled Nitric Oxide** | 20-40 ppm | Gold standard; expensive |\n| **Inhaled Epoprostenol** | 10-50 ng/kg/min | Cost-effective alternative |\n| **Nebulized Milrinone** | 4-5 mg | Fast to set up |\n| **Nebulized Nitroglycerin** | 5 mg | Emergency option; fastest |\n\n**Why Inhaled?**\n• Delivered to ventilated lung units\n• Improves V/Q matching\n• Minimal systemic hypotension\n• Reduces PVR without dropping SVR\n\n**Systemic Options (Adjunct):**\n• Nitroglycerin infusion: 0.5-3 mcg/kg/min\n• Sildenafil: 20 mg PO q8h (if able to take)\n\n**Setup:**\n• Coordinate with RT\n• Have setup at bedside BEFORE intubation\n• Start at maximal dose immediately post-intubation [1][2]',
     citation: [1, 2],
     next: 'rv-intubation-approach',
+
+    summary: 'Have inhaled pulmonary vasodilator at bedside — iNO (gold standard), epoprostenol (cost-effective), nebulized milrinone or nitro (fastest setup)',
   },
 
   // =====================================================================
@@ -250,6 +295,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
       { label: 'Awake intubation', description: 'Preserves spontaneous breathing', next: 'rv-awake-option' },
     ],
     citation: [1, 2],
+
+    summary: 'Choose optimized RSI (full pre-optimization, fast) vs awake intubation (preserves spontaneous breathing, less hemodynamic perturbation)',
   },
 
   {
@@ -260,6 +307,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Induction Agent Selection:**\n\n| Agent | Dose | Advantages | Disadvantages |\n|-------|------|------------|---------------|\n| **Ketamine** | 1-2 mg/kg | Sympathomimetic, bronchodilator | RSI trial: 22% cardiovascular collapse vs 17% etomidate; catecholamine-depleted patients may not respond |\n| **Etomidate** | 0.2-0.3 mg/kg | Hemodynamically stable | Adrenal suppression (likely not significant for single dose) |\n\n**Bottom Line:**\n• Both are reasonable\n• Neither has mortality benefit over the other\n• **Reduce dose in shock states**\n• Individual patient factors matter more than drug choice\n\n**Paralytic:**\n\n✅ **Rocuronium 1.2-1.6 mg/kg**\n• Higher dose ensures rapid, complete paralysis\n• Allows optimal intubating conditions\n\n❌ Avoid succinylcholine in chronic disease (hyperkalemia risk)\n\n**Key Point:**\nDrug choice matters less than optimization. A well-optimized patient tolerates any reasonable induction agent. [7][10]',
     citation: [7, 10],
     next: 'rv-rsi-technique',
+
+    summary: 'Ketamine or etomidate both reasonable — reduce dose in shock, rocuronium 1.2-1.6mg/kg, optimization matters more than drug choice',
+    skippable: true,
   },
 
   {
@@ -270,6 +320,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**RSI Sequence for RV Failure:**\n\n**1. Pre-oxygenate with BiPAP** (minimum 3 minutes, FiO₂ 100%)\n\n**2. Confirm optimization:**\n• SBP >120, MAP ~80\n• Vasopressors running or push-dose ready\n• Inhaled pulmonary vasodilator at bedside\n\n**3. Pre-treat:** Push-dose epi (10-20 mcg) + vasopressin (1-2 units)\n\n**4. Induce:**\n• Ketamine 1-1.5 mg/kg OR etomidate 0.2-0.3 mg/kg\n• Rocuronium 1.2-1.6 mg/kg\n\n**5. Maintain oxygenation:**\n• BiPAP provides apneic ventilation as sedation takes effect\n• HFNC for apneic oxygenation during laryngoscopy\n\n**6. Intubate rapidly** — minimize apnea time\n\n**7. Connect to ventilator immediately**\n• Do NOT aggressively bag\n• Hand-bagging increases intrathoracic pressure\n\n**8. Start inhaled pulmonary vasodilator** at maximal dose\n\n**9. Titrate vasopressors** to maintain targets [1][2][7]',
     citation: [1, 2, 7],
     next: 'rv-post-intubation',
+
+    summary: 'RSI sequence: BiPAP preox, confirm optimization, pre-treat with push-dose epi + vasopressin, induce, intubate rapidly, start inhaled vasodilator',
   },
 
   {
@@ -280,6 +332,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Awake/Spontaneously Breathing Intubation:**\n\n**When to Consider:**\n• Severe RV dysfunction (RV > LV, TAPSE <10mm)\n• Known severe pulmonary hypertension\n• Previous peri-intubation arrest or near-arrest\n• Cooperative patient with reasonable airway\n\n**Advantages:**\n• Preserves spontaneous ventilation\n• Maintains negative intrathoracic pressure longer\n• Less hemodynamic perturbation\n• Gradual transition to PPV\n\n**Technique:**\n\n**1. Sedation:**\n• Ketamine 0.5-1 mg/kg (dissociative dose)\n• Maintains respiratory drive\n• Can repeat 0.25-0.5 mg/kg PRN\n\n**2. Topical anesthesia:**\n• Atomized lidocaine to oropharynx/hypopharynx\n• Consider nerve blocks (glossopharyngeal, SLN)\n\n**3. Intubation:**\n• Video laryngoscopy\n• Pass tube while patient still breathing\n• Confirm placement\n\n**4. Then sedate fully** if needed\n\n**Have backup plan** — if awake fails, convert to RSI [1][2]',
     citation: [1, 2],
     next: 'rv-post-intubation',
+
+    summary: 'Awake intubation: ketamine 0.5-1mg/kg dissociative dose + topical lidocaine, preserves spontaneous ventilation and negative intrathoracic pressure',
   },
 
   // =====================================================================
@@ -294,6 +348,9 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**The Critical 15-30 Minutes**\n\nThis is when patients "insidiously slip into an RV death spiral." Monitor intensively.\n\n**Immediate Actions:**\n\n1. **Connect to ventilator immediately**\n   - Do NOT bag aggressively\n   - Each squeeze increases intrathoracic pressure\n\n2. **Start inhaled pulmonary vasodilator** at maximal dose\n\n3. **Titrate vasopressors** to targets\n\n4. **Set protective ventilation:**\n\n| Parameter | Target | Rationale |\n|-----------|--------|----------|\n| Vt | 6-8 mL/kg IBW | Avoid overdistension |\n| Plateau pressure | <30 cm H₂O | Minimize PVR increase |\n| PEEP | Adequate (avoid atelect) | Recruits lung |\n| FiO₂ | Generous | Avoid hypoxia (vasoconstrictor) |\n| Minute vent | Avoid hypercapnia | CO₂ is pulmonary vasoconstrictor |\n\n**Monitor for:**\n• Declining BP (need more vasopressor)\n• Rising CVP (worsening RV function)\n• Declining SpO₂\n• EtCO₂ dropping (falling cardiac output) [1][2][3]',
     citation: [1, 2, 3],
     next: 'rv-ongoing-management',
+
+    summary: 'Critical 15-30min: do NOT bag aggressively, connect to vent immediately, start inhaled vasodilator, Vt 6-8mL/kg, avoid hypoxia and hypercapnia',
+    safetyLevel: 'critical',
   },
 
   {
@@ -304,6 +361,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**Hemodynamic Targets:**\n\n| Parameter | Target |\n|-----------|--------|\n| MAP | >65 mmHg minimum; higher if CVP elevated |\n| SBP | >> PASP (maintain RV coronary perfusion) |\n| CVP | 8-12 mmHg (moderate filling) |\n| Perfusion pressure | MAP > (60 + CVP) |\n\n**Inotropic Support:**\n\n**Dobutamine:**\n• Start 2 mcg/kg/min, titrate to 10 mcg/kg/min max\n• Easy to titrate\n• Watch for hypotension — have vasopressor ready\n\n**Epinephrine:**\n• If need inotropy + vasopressor\n• Dilates pulmonary vessels (beta effect)\n\n**Milrinone IV:**\n• If tolerated (avoid in severe hypotension)\n• Inotrope + pulmonary vasodilator\n\n**Volume Management:**\n• POCUS reassessment of RV, IVC\n• Generally DIURESE in chronic RV failure\n• Avoid large volume resuscitation\n• Small boluses (250 mL) only if clearly hypovolemic [1][2]',
     citation: [1, 2],
     next: 'rv-ecmo-consideration',
+
+    summary: 'MAP >65, SBP >> PASP for RV perfusion — dobutamine for inotropy (watch for hypotension), generally DIURESE in chronic RV failure',
   },
 
   {
@@ -314,6 +373,8 @@ export const RV_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**When to Consider ECMO:**\n\n**Indications for ECMO Evaluation:**\n• Cardiac index <2.2 L/min/m²\n• PAPI (PA pulsatility index) <1.0\n• Cardiac power output <0.6 W\n• Refractory shock despite optimization\n\n**VA-ECMO for RV Failure:**\n• Provides circulatory support\n• Allows RV rest\n• Bridge to recovery or definitive therapy\n\n**Early Consultation:**\n• If available, involve ECMO team early\n• Don\'t wait until arrest\n• Better outcomes with planned cannulation\n\n**PE-Specific:**\n• Consider catheter-directed therapy\n• Surgical embolectomy\n• ECMO as bridge to intervention\n\n**Prognosis:**\nPatients who arrest with RV failure have very poor outcomes with conventional CPR due to obstructive physiology. Early escalation to ECMO may be only option. [1][2]',
     citation: [1, 2],
     next: undefined,
+
+    summary: 'ECMO evaluation if CI <2.2, PAPI <1.0, refractory shock — better outcomes with planned cannulation, do not wait until arrest',
   },
 
 ];

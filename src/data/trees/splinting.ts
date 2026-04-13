@@ -62,6 +62,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
         next: 'splint-lower-ext',
       },
     ],
+
+    summary: 'Pre-splint neurovascular exam, reduce angulations, apply stockinette then padding, mold with flat palms, post-splint NV check',
   },
 
   // =====================================================================
@@ -97,6 +99,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
         next: 'splint-double-sugar-tong',
       },
     ],
+
+    summary: 'Proximal humerus: sling; shaft: coaptation (U-shape); supracondylar: long arm posterior or double sugar tong',
   },
 
   {
@@ -107,6 +111,9 @@ export const SPLINTING_NODES: DecisionNode[] = [
     body: '**INDICATIONS**\n• Proximal humerus fracture (non-displaced or minimally displaced)\n• Greater tuberosity fracture\n• Shoulder dislocation post-reduction\n\n**MATERIALS**\n• Standard triangular arm sling OR cuff and collar\n• Swathe (elastic bandage around torso) for added stability if needed\n\n**APPLICATION**\n1. Arm rests in sling with elbow at 90° flexion\n2. Forearm supported across the body\n3. Wrist should be neutral (not dangling)\n4. If swathe used: wrap elastic bandage around upper arm and torso to prevent arm abduction\n\n**POSITION**\n• Elbow at 90°, arm adducted against the body\n• Allow gentle pendulum exercises (Codman exercises) after 1–2 days to prevent shoulder stiffness\n\n**PEARLS**\n• PROFHER trial (2015): sling alone is equivalent to surgery for most displaced proximal humerus fractures in adults [9]\n• Ensure padding under axilla if swathe is used — prevents skin breakdown\n• Avoid prolonged full immobilization (>2 weeks) — frozen shoulder risk\n• No imaging needed for isolated greater tuberosity fractures with <5mm displacement',
     citation: [3, 9, 10],
     next: 'splint-humerus',
+
+    summary: 'Sling with arm at 90deg elbow — PROFHER trial: equivalent to surgery for most displaced proximal humerus fractures',
+    skippable: true,
   },
 
   {
@@ -129,6 +136,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-humerus',
+
+    summary: 'U-shape from axilla around elbow to deltoid — transition to functional brace at 1-2wk (98% union rate); check radial nerve',
   },
 
   {
@@ -146,6 +155,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-humerus',
+
+    summary: 'Posterior slab from palmar crease to mid-upper arm at 90deg elbow; extra padding over olecranon and ulnar styloid',
   },
 
   // =====================================================================
@@ -159,6 +170,9 @@ export const SPLINTING_NODES: DecisionNode[] = [
     title: 'Forearm',
     body: '**FRACTURE → SPLINT GUIDE**\n\n• **Olecranon / coronoid** → Long arm posterior splint\n• **Radius/ulna proximal or midshaft** → Long arm posterior, or double sugar tong (unstable/complex)\n• **Radius distal, isolated** → Thumb spica or volar\n• **Radius/ulna distal, complex** → Sugar tong (**A+P preferred at our institution**) [1][2]\n• **Ulna styloid** → Sugar tong (**A+P preferred**) [1][2]\n\n**INSTITUTION PREFERENCE:** A+P (anterior + posterior) splints are preferred over sugar tong for forearm and distal radius/ulna fractures. Two separate plaster slabs — no wrapping around the elbow — provides equivalent stabilization with less bulk and better patient comfort.',
     citation: [1, 2, 3],
+
+    summary: 'A+P splints preferred over sugar tong at our institution — two separate slabs without elbow wrap, better comfort',
+
     options: [
       {
         label: 'Sugar Tong (Single)',
@@ -203,6 +217,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-forearm',
+
+    summary: 'Dorsal hand around elbow to palmar crease; A+P alternative uses two separate slabs without elbow restriction — equivalent stability',
   },
 
   {
@@ -220,6 +236,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-forearm',
+
+    summary: 'Two overlapping U-shaped slabs for maximum upper extremity stability — forearm + arm sugar tong combined; monitor for compartment syndrome',
   },
 
   // =====================================================================
@@ -233,6 +251,9 @@ export const SPLINTING_NODES: DecisionNode[] = [
     title: 'Wrist & Hand',
     body: '**FRACTURE → SPLINT GUIDE**\n\n**Carpal Bones**\n• Scaphoid, trapezium, lunate fracture → Thumb spica [3][6]\n• Lunate dislocation → Sugar tong (**A+P preferred**) [1]\n• Triquetrum, pisiform, trapezoid, capitate, hamate → Volar splint [3]\n\n**Soft Tissue**\n• UCL injury (gamekeeper/skier thumb) → Thumb spica\n• Thumb MCP dislocation → Thumb spica\n• De Quervain tenosynovitis → Thumb spica\n\n**Metacarpals**\n• 1st metacarpal (Bennett, Rolando) → Thumb spica [6]\n• 2nd / 3rd metacarpal → Radial gutter or volar [3]\n• 4th / 5th metacarpal (boxer fracture) → Ulnar gutter [3][6]\n\n**Phalanges**\n• 1st phalanx (thumb) → Thumb spica\n• 2nd / 3rd proximal or middle → Radial gutter or buddy taping\n• 4th / 5th proximal or middle → Ulnar gutter or buddy taping\n• Distal phalanx → Aluminum U-shaped (stack) splint\n\n**BUDDY TAPING:** Tape injured finger to adjacent finger with padding between. Allows protected ROM. Appropriate for stable, non-displaced proximal/middle phalanx fractures.\n\n**ALUMINUM FINGER SPLINT:** Moldable metal splint for distal phalanx fractures and mallet finger. Keep DIP in extension (stack splint). Leave PIP free.',
     citation: [1, 3, 6],
+
+    summary: 'Scaphoid/1st MC: thumb spica; 4th/5th MC (boxer): ulnar gutter at 70-90deg MCP flexion; distal phalanx: aluminum stack splint',
+
     options: [
       {
         label: 'Thumb Spica',
@@ -272,6 +293,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-wrist-hand',
+
+    summary: 'Radial slab including thumb to IP joint in C-position (holding a can); suspected scaphoid with neg XR: splint 10-14d then re-image',
   },
 
   {
@@ -289,6 +312,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-wrist-hand',
+
+    summary: 'Simplest ED splint — volar forearm slab in 15-20deg wrist extension; must NOT extend past proximal palmar crease (blocks MCP flexion)',
   },
 
   {
@@ -306,6 +331,9 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-wrist-hand',
+
+    summary: 'MCP at 70-90deg flexion is CRITICAL — collateral ligaments taut in flexion; immobilizing in extension causes permanent stiffness',
+    safetyLevel: 'warning',
   },
 
   {
@@ -316,6 +344,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
     body: '**INDICATIONS**\n• 2nd metacarpal fracture\n• 3rd metacarpal fracture\n• 2nd / 3rd proximal phalanx fracture\n• 2nd / 3rd middle phalanx fracture (non-displaced)\n\n**MATERIALS**\n• 4-inch plaster or fiberglass (8–10 layers)\n• Stockinette, 2–3 layers Webril, elastic bandage\n• Finger separator padding (cotton between 3rd and 4th fingers)\n\n**APPLICATION**\nMirror image of the ulnar gutter splint, applied to the radial side:\n1. Place cotton padding between 3rd and 4th fingers\n2. Apply stockinette from fingertips (2nd and 3rd digits) to mid-forearm\n3. Apply Webril — **extra padding over radial styloid and 2nd MCP**\n4. Apply plaster slab along the radial side of the forearm and hand, extending from mid-forearm to the fingertips of the 2nd and 3rd digits\n5. Mold plaster around the radial border of the hand\n6. Ensure MCP joints at **70–90° flexion**\n7. IP joints in slight flexion (10–20°)\n8. Secure with elastic bandage\n\n**POSITION**\n• Wrist in 20–30° extension\n• **MCP joints at 70–90° flexion**\n• IP joints in slight flexion\n\n**PEARLS**\n• Same principles as ulnar gutter — MCP flexion is critical to prevent collateral ligament contracture\n• Always check for rotational malignment before splinting\n• 2nd and 3rd metacarpal fractures tolerate LESS angulation than 4th/5th (more rigid carpometacarpal joints)\n• If 2nd or 3rd MC is significantly angulated (>10°) → ortho referral, may need operative fixation\n• Can also use a volar splint for non-displaced 2nd/3rd MC fractures if gutter splint is not available',
     citation: [3, 6],
     next: 'splint-wrist-hand',
+
+    summary: 'Mirror of ulnar gutter on radial side; 2nd/3rd MC tolerate LESS angulation (>10deg needs ortho); always check rotational alignment',
   },
 
   // =====================================================================
@@ -329,6 +359,9 @@ export const SPLINTING_NODES: DecisionNode[] = [
     title: 'Lower Extremity',
     body: '**FRACTURE → SPLINT GUIDE**\n\n• **Distal tibia or distal fibula** → Posterior short leg (± stirrup for added stability) [3][6]\n• **Ankle sprain grade 2/3** → Stirrup splint [3]\n• **Talus, calcaneus, navicular, cuboid, cuneiform** → Posterior short leg [3][6]\n• **Metatarsal (2nd–5th)** → Posterior short leg or hard-soled shoe [3]\n• **Lisfranc** → Posterior short leg (non-weight bearing, ortho follow-up) [6]\n\n**5th METATARSAL SPECIAL CASES:**\n• Zone 1 (tuberosity/pseudo-Jones) → Hard-soled shoe, weight bear as tolerated\n• Zone 2 (Jones fracture, metaphyseal-diaphyseal junction) → Posterior short leg, non-weight bearing, ortho follow-up (high nonunion risk)\n• Zone 3 (shaft stress fracture) → Posterior short leg, non-weight bearing',
     citation: [3, 6],
+
+    summary: 'Posterior short leg for most ankle/foot fractures; stirrup for sprains; Jones fracture (5th MT zone 2) needs NWB and ortho',
+
     options: [
       {
         label: 'Posterior Short Leg',
@@ -358,6 +391,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-lower-ext',
+
+    summary: 'Posterior slab toes to tibial tuberosity at 90deg ankle (neutral) — workhorse lower extremity splint; add stirrup for bimalleolar',
   },
 
   {
@@ -375,6 +410,8 @@ export const SPLINTING_NODES: DecisionNode[] = [
       },
     ],
     next: 'splint-lower-ext',
+
+    summary: 'U-shape medial to lateral under heel at 90deg ankle — prevents inversion/eversion; alone for sprains, add posterior slab for fractures',
   },
 
 ];

@@ -36,6 +36,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     images: [{ src: 'images/rhabdomyolysis/rhabdo-urine.jpg', alt: 'Specimen cup showing dark cola/tea-colored urine from myoglobinuria in confirmed rhabdomyolysis', caption: 'Cola-colored urine from myoglobinuria — clinical hallmark of significant rhabdomyolysis; indication for aggressive IV fluid resuscitation. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 2],
     next: 'rhabdo-severity',
+
+    summary: 'Skeletal muscle breakdown releasing myoglobin, CK, K, phosphate — CK >1000 diagnostic, AKI in 15-55%, classic triad present in <10%',
+    skippable: true,
     calculatorLinks: [
       { id: 'mcmahon-rhabdo', label: 'McMahon Score (AKI Risk)' },
     ],
@@ -67,6 +70,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'CK guides treatment intensity: 1-5K (mild, 2% dialysis), 5-15K (moderate, 3-8%), >15K (severe, 5-14%), >50K (ICU, 9-21%)',
   },
 
   // =====================================================================
@@ -103,6 +108,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         next: 'rhabdo-workup',
       },
     ],
+
+    summary: 'Identify underlying cause — traumatic/crush (compartment risk), exertional (better prognosis), drug-induced, or metabolic/infectious',
   },
 
   {
@@ -113,6 +120,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Statin-induced:**\n• Risk ~0.1% overall, higher with:\n  - High-intensity statins (rosuvastatin, atorvastatin high-dose)\n  - Fibrate combination (avoid gemfibrozil)\n  - CYP3A4 inhibitors (cyclosporine, macrolides, azoles)\n• **Management:** STOP statin immediately. Can rechallenge with different statin after recovery if needed.\n\n**Cocaine/Amphetamines:**\n• Sympathomimetic excess + hyperthermia + vasoconstriction\n• Treat hyperthermia aggressively\n• Avoid beta-blockers (unopposed alpha)\n\n**Alcohol:**\n• Direct myotoxicity + immobilization + electrolyte derangement\n• Check and correct Mg, K, Phos\n\n**NMS/Serotonin Syndrome:**\n• See [Serotonin Syndrome](#/tree/serotonin-syndrome) consult\n• Cooling, benzodiazepines, supportive care\n• Cyproheptadine for serotonin syndrome\n• Dantrolene for NMS with severe rigidity',
     citation: [1, 4],
     next: 'rhabdo-workup',
+
+    summary: 'Statin-induced: stop immediately (rechallenge later OK), cocaine: treat hyperthermia/avoid beta-blockers, NMS/SS: see specific consults',
+    skippable: true,
   },
 
   {
@@ -123,6 +133,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Compartment syndrome requires urgent evaluation in crush/trauma patients.**\n\n**Early signs (6 Ps - unreliable order):**\n• **Pain** - disproportionate, worse with passive stretch\n• **Paresthesias** - nerve ischemia\n• **Pressure** - tense compartment on exam\n• **Pallor** - late sign\n• **Paralysis** - late sign (muscle death)\n• **Pulselessness** - very late sign\n\n**Diagnosis:**\n• Clinical suspicion is paramount\n• Compartment pressure measurement:\n  - Absolute pressure >30 mmHg concerning\n  - Delta pressure (DBP - compartment pressure) <30 mmHg = fasciotomy indicated [5]\n\n**Time-critical:** Delay >6 hours leads to irreversible muscle necrosis.\n\n**Management:**\n• Remove constrictive dressings\n• Keep limb at heart level (NOT elevated)\n• **Urgent orthopedic/surgical consult for fasciotomy**\n• Do NOT wait for pressure measurement if clinical suspicion high',
     citation: [5],
     next: 'rhabdo-workup',
+
+    summary: 'Compartment syndrome: pain with passive stretch, pressure >30mmHg or delta <30mmHg — fasciotomy within 6h, do NOT elevate limb',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -137,6 +150,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Initial labs:**\n\n**Muscle injury markers:**\n• **CK** - most sensitive marker, peaks 24-72h\n• **Myoglobin** - cleared faster than CK, may be negative with high CK\n• LDH, AST (also from muscle, not just liver)\n\n**Renal function:**\n• BUN, Creatinine, GFR\n• Urinalysis: + blood on dipstick but no RBCs = myoglobinuria\n• Urine myoglobin (if available, not necessary for diagnosis)\n\n**Electrolytes (critical):**\n• **Potassium** - life-threatening hyperkalemia possible\n• **Calcium** - often LOW early (Ca deposits in damaged muscle)\n• **Phosphorus** - often HIGH (released from muscle)\n• **Bicarbonate/ABG** - assess for metabolic acidosis\n\n**Other:**\n• CBC, coagulation studies (DIC risk)\n• ECG (hyperkalemia changes)\n• Lactate (if sepsis/shock concern)\n• TSH (hypothyroid myopathy)\n• Toxicology screen if indicated',
     citation: [1, 2],
     next: 'rhabdo-electrolyte-check',
+
+    summary: 'CK, BMP, Ca/Phos/Mg, UA (dipstick + blood but no RBCs = myoglobinuria), ECG for hyperK, LDH/AST from muscle not just liver',
   },
 
   {
@@ -165,6 +180,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         next: 'rhabdo-fluid-resus',
       },
     ],
+
+    summary: 'Check for hyperK (>6 or ECG changes), symptomatic hypocalcemia, and severe acidosis — treat immediately before fluid resuscitation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -231,6 +249,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Aggressive IV fluid resuscitation is the mainstay of treatment.** [1][7]\n\n**Goals:**\n• Maintain urine output **1-3 mL/kg/hr** (some recommend up to 200-300 mL/hr)\n• Early resuscitation (<6 hours) reduces AKI risk\n• Replace volume deficit AND ongoing losses\n\n**Fluid choice - NS vs LR:** [7]\n• **Both are acceptable** per AAST consensus\n• **LR may have advantages:**\n  - Better maintenance of alkaline urine pH\n  - Less hyperchloremic acidosis risk with large volumes\n  - Small K content (4 mEq/L) - clinically insignificant\n• **NS disadvantages:**\n  - Large volumes cause hyperchloremic metabolic acidosis\n  - May counteract urine alkalinization goals\n• **One small RCT (doxylamine rhabdo):** LR had higher urine/serum pH, less bicarbonate needed [7]\n\n**Starting rate:**\n• 400-500 mL/hr initially, then goal-directed\n• Moderate CK (5-15K): 3-6 L/day\n• Severe CK (>15K): >6 L/day or more',
     citation: [1, 7, 8],
     next: 'rhabdo-fluid-choice',
+
+    summary: 'Aggressive IV fluids are the mainstay — target UOP 1-3mL/kg/hr, early resuscitation <6h reduces AKI, LR may have pH advantages over NS',
   },
 
   {
@@ -257,6 +277,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         next: 'rhabdo-special-fluid',
       },
     ],
+
+    summary: 'LR preferred (better pH, less NAGMA with large volumes), K content 4mEq/L is clinically insignificant — NS acceptable alternative',
   },
 
   {
@@ -326,6 +348,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**The role of bicarbonate for urine alkalinization is CONTROVERSIAL.** [9]\n\n**Theory:**\n• Myoglobin is more soluble at alkaline pH\n• Alkaline urine may prevent myoglobin precipitation in tubules\n• Target urine pH >6.5\n\n**Evidence (2025 meta-analysis):** [9]\n• 5 studies analyzed\n• Urine alkalinization NOT significantly effective in:\n  - Preventing AKI (OR 2.11, p=0.3)\n  - Preventing acute renal failure (OR 1.26, p=0.36)\n  - Reducing dialysis need (OR 4.25, p=0.25)\n\n**Bottom line:**\n• **No definitive evidence that bicarbonate is superior to fluids alone**\n• Aggressive fluid resuscitation is the priority\n• Consider bicarbonate only if:\n  - Severe acidosis (pH <7.1)\n  - Very high CK (>30,000) without AKI/oliguria\n  - Not volume overloaded\n\n**If using bicarbonate:**\n• 150 mEq NaHCO3 in 1L D5W at 150-200 mL/hr\n• Target urine pH >6.5\n• Monitor serum pH, K, ionized Ca',
     citation: [9, 10],
     next: 'rhabdo-adjunct-choice',
+
+    summary: 'Bicarbonate for urine alkalinization is NOT proven effective (2025 meta-analysis) — fluids alone sufficient, consider only for pH <7.1',
+    skippable: true,
   },
 
   {
@@ -351,6 +376,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         next: 'rhabdo-monitoring',
       },
     ],
+
+    summary: 'Adjunctive therapy decisions: bicarbonate for severe acidosis, diuretics/dialysis for oliguria, or continue fluids alone',
   },
 
   {
@@ -405,6 +432,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Serial monitoring is essential:**\n\n**Labs:**\n• CK: q6-12h until clearly trending down\n• BMP (K, Cr, bicarb): q6-12h initially\n• Calcium, phosphorus, magnesium: q12-24h\n• Urine output: q1-2h (Foley catheter)\n\n**CK trending:**\n• Peak typically 24-72 hours\n• Should decline by 50% every 48-72 hours\n• Persistent or rising CK suggests ongoing injury\n\n**Volume status:**\n• Daily weights\n• Lung exam, JVD assessment\n• I/O balance\n\n**Compartment syndrome surveillance:**\n• In trauma/crush injury: serial exams q4-6h\n• Pain assessment, compartment palpation\n• Low threshold for pressure measurement\n\n**ECG:**\n• Repeat if K abnormal or changing',
     citation: [1, 2],
     next: 'rhabdo-complications',
+
+    summary: 'Serial CK q6-12h (peak 24-72h, should decline 50% q48-72h), BMP, UOP q1-2h with Foley, ECG if K abnormal — persistent CK = ongoing injury',
   },
 
   {
@@ -415,6 +444,9 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     body: '**Acute Kidney Injury (15-55%):**\n• Peak incidence with CK >15,000\n• Most common cause: myoglobin-induced ATN\n• Usually reversible with supportive care\n• 5-8% require dialysis (higher with severe CK elevation)\n\n**Hyperkalemia:**\n• Can be life-threatening\n• Monitor ECG for peaked T-waves, widened QRS\n• Treat aggressively (see hyperkalemia node)\n\n**Hypocalcemia (early):**\n• Usually asymptomatic, self-limited\n• Only treat if symptomatic\n\n**Hypercalcemia (late/recovery phase):**\n• Calcium mobilizes from damaged muscle\n• Usually self-limited\n\n**Compartment Syndrome:**\n• In crush injury, immobilization\n• Surgical emergency\n\n**DIC (rare):**\n• Check PT, PTT, fibrinogen, D-dimer if suspected\n• Supportive treatment\n\n**Cardiac arrhythmias:**\n• From electrolyte abnormalities\n• Continuous monitoring recommended',
     citation: [1, 2, 5],
     next: 'rhabdo-disposition',
+
+    summary: 'AKI 15-55%, hyperK life-threatening, early hypoCa (do NOT treat unless symptomatic), late hyperCa in recovery, DIC rare but monitor',
+    skippable: true,
   },
 
   // =====================================================================
@@ -446,6 +478,8 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
         next: 'rhabdo-discharge',
       },
     ],
+
+    summary: 'McMahon Score >=6 predicts RRT need — disposition by severity, electrolytes, response to treatment, and comorbidities',
   },
 
   {

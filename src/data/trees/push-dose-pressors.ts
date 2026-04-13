@@ -65,6 +65,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
         next: 'pdp-procedural',
       },
     ],
+
+    summary: 'Push-dose pressors bridge immediate hemodynamic support — epinephrine preferred over phenylephrine, NEVER give 1mg arrest dose to patient with pulse',
+    safetyLevel: 'critical',
   },
 
   {
@@ -75,6 +78,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Hypotension affects ~40% of critically ill patients undergoing emergency intubation** and is independently associated with increased mortality. [4][7]\n\n**Mechanism:** Multifactorial - loss of sympathetic drive, induction agent vasodilation, apnea worsening acidosis, reduced venous return after positive pressure ventilation. [4][7]\n\n**Prevention strategy:** [7]\n1. Optimize preload with IV fluids BEFORE induction\n2. Have push-dose pressor drawn up and at bedside\n3. Start vasopressor infusion peripherally if time permits\n4. Use hemodynamically stable induction agent (ketamine, etomidate)\n5. Use reduced sedative doses in shocked patients\n\n**Evidence:** In one case series of 11 patients receiving PDPs, mean SBP increased 41.3%, DBP 44.3%, and MAP 35.1% with no adverse events. [4]\n\n**Agent selection:** Epinephrine preferred (provides both alpha and beta effects). Phenylephrine may decrease cardiac output due to pure vasoconstriction. [4][7]',
     citation: [4, 7],
     next: 'pdp-epi-prep',
+
+    summary: 'Peri-intubation hypotension in ~40% of critically ill — optimize preload, have push-dose pressor drawn up before induction, epinephrine preferred',
+    skippable: true,
   },
 
   {
@@ -85,6 +91,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**The problem:** Pharmacy-mixed vasopressor drips take 10-15 minutes minimum. Untreated hypotension kills. [1][2]\n\n**Bridge indication:** Push-dose pressors bridge the gap while waiting for continuous infusion or central line placement. [2][3]\n\n**Key points:**\n- Start peripheral vasopressors immediately (SSC 2021: peripheral NE is safe for <6 hours) [9]\n- Push-dose pressors provide temporary support, NOT definitive treatment\n- Continue aggressive volume resuscitation\n- Target MAP >=65 mmHg\n\n**Diastolic BP <40 mmHg** strongly suggests profound vasoplegia - vasopressor needed immediately. [9]\n\n**Agent selection:** \n- **Epinephrine preferred** (inotrope + pressor, especially if cardiac output may be impaired) [1]\n- **Phenylephrine** for pure vasodilatory shock with adequate cardiac output and tachycardia [1][3]',
     citation: [1, 2, 3, 9],
     next: 'pdp-agent-select',
+
+    summary: 'Bridge to infusion while awaiting pharmacy drip — peripheral NE safe <6h per SSC 2021, diastolic <40 suggests severe vasoplegia',
+    skippable: true,
   },
 
   {
@@ -95,6 +104,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Refractory anaphylaxis:** Persistent symptoms despite 2-3 doses of IM epinephrine. Occurs in <1% of cases. [5][10]\n\n**CRITICAL:** Do NOT give cardiac arrest dose (1 mg IV) to patient with a pulse. This is a 61-fold dosing error compared to IM dosing. [5]\n\n**IV Epinephrine Protocol (PulmCrit approach):** [5][10]\n1. Mix 1 mg epinephrine in 100 mL NS = **10 mcg/mL**\n2. Loading: 20 mcg/min x 2 minutes (~40 mcg total)\n3. Maintenance: 10 mcg/min (= 60 mL/hr)\n4. Titrate based on response\n5. **AGGRESSIVELY WEAN** after symptom resolution\n\n**Brown et al 2004:** 19 patients with bee sting anaphylaxis treated with 5-15 mcg/min IV epinephrine - all responded within 5 minutes. [10]\n\n**Peri-arrest:** Push-dose epinephrine 20-50 mcg IV push, repeat every 1-2 minutes. [5]\n\n[Anaphylaxis Consult](#/tree/anaphylaxis)',
     citation: [5, 10],
     next: 'pdp-epi-prep',
+
+    summary: 'Refractory anaphylaxis: IV epi 10-20mcg/min NOT cardiac arrest dose — 61-fold dosing error giving 1mg to patient with pulse',
+    safetyLevel: 'critical',
   },
 
   {
@@ -105,6 +117,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Push-dose epinephrine for symptomatic bradycardia** provides immediate chronotropic and inotropic support. [1][2]\n\n**Indications:**\n- Symptomatic bradycardia with hypotension\n- Bradycardia not responsive to atropine\n- Bridge to transcutaneous or transvenous pacing\n- Beta-blocker or calcium channel blocker toxicity\n\n**Why epinephrine?** Beta-1 agonism provides chronotropy (increased heart rate) AND inotropy (increased contractility). [1]\n\n**Dosing:** Push-dose epinephrine 10-20 mcg IV every 1-5 minutes, titrate to effect. [1][2]\n\n**Phenylephrine is NOT appropriate here** - pure alpha agonist may worsen bradycardia via reflex parasympathetic response. [1][3]\n\n**Definitive treatment:** Transcutaneous pacing, transvenous pacing, epinephrine infusion, or treatment of underlying cause.',
     citation: [1, 2, 3],
     next: 'pdp-epi-prep',
+
+    summary: 'Push-dose epi for symptomatic bradycardia — beta-1 provides chronotropy + inotropy, phenylephrine is NOT appropriate (worsens bradycardia)',
   },
 
   {
@@ -115,6 +129,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Common scenarios:**\n- Post-propofol hypotension (propofol causes vasodilation + negative inotropy)\n- Post-cardioversion transient hypotension\n- Sedation for procedures in hemodynamically fragile patients\n\n**Key principle:** Anticipated transient hypotension can often be managed with a single push-dose, avoiding the need for continuous infusion. [2][3]\n\n**Agent selection:**\n- **Epinephrine:** Preferred for most situations, provides both chronotropy and vasoconstriction [1]\n- **Phenylephrine:** Reasonable for vasodilation with preserved cardiac function and tachycardia [3]\n\n**Prevention:**\n- Pre-hydrate with 250-500 mL crystalloid\n- Use reduced sedation doses\n- Have push-dose pressor drawn up before procedure\n- Consider ketamine for induction (hemodynamically stable)',
     citation: [1, 2, 3],
     next: 'pdp-agent-select',
+
+    summary: 'Procedural hypotension often manageable with single push-dose — pre-hydrate, have pressor drawn up, use hemodynamically stable induction agent',
+    skippable: true,
   },
 
   {
@@ -141,6 +158,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
         next: 'pdp-norepi-prep',
       },
     ],
+
+    summary: 'Epi preferred (inopressor for most), phenylephrine for tachycardia + pure vasodilation, NE emerging but primarily anesthesia',
   },
 
   // =====================================================================
@@ -155,6 +174,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**EXACT DILUTION (EMCrit Method):** [1][2]\n\n**Step 1:** Take a 10 mL syringe filled with 9 mL of normal saline\n\n**Step 2:** Draw up 1 mL from the **cardiac epinephrine amp** (NOT the anaphylaxis amp)\n- Cardiac amp = 1:10,000 = 100 mcg/mL (0.1 mg/mL)\n- Contains 10 mL at 100 mcg/mL\n\n**Step 3:** Mix well (shake syringe)\n\n**Result:** 10 mL of epinephrine at **10 mcg/mL** (1:100,000)\n\n**Memory aid:** This is the same concentration as lidocaine with epinephrine (1:100,000) - very safe for extravasation. [2]\n\n**SAFETY:** Do NOT use pre-filled saline flush syringes - FDA prohibits using these to reconstitute medications (device classification issue). [6]\n\n**Pre-mixed syringes:** If your pharmacy provides pre-mixed epinephrine 10 mcg/mL syringes, use these preferentially to eliminate mixing errors. [6]',
     citation: [1, 2, 6],
     next: 'pdp-epi-dose',
+
+    summary: '1mL cardiac epi (1:10,000) + 9mL NS = 10mcg/mL — same concentration as lido with epi, safe peripherally, LABEL syringe clearly',
+    safetyLevel: 'critical',
     treatment: {
       firstLine: {
         drug: 'Epinephrine (push-dose)',
@@ -179,6 +201,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
       { id: 'epi-infusion', label: 'Epi Infusion Calculator' },
     ],
     next: 'pdp-epi-safety',
+
+    summary: '5-20mcg (0.5-2mL) IV push q1-5min, onset <1min, duration 5-10min — bridge to continuous infusion, reassess MAP after each push',
     treatment: {
       firstLine: {
         drug: 'Epinephrine',
@@ -201,6 +225,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**CRITICAL SAFETY - The 1 mg Error:** [1][2][5]\n\nGiving a full cardiac amp (1 mg = 1000 mcg) to a patient with a pulse can cause:\n- Malignant hypertension\n- Tachyarrhythmias (VT, VF)\n- Myocardial ischemia\n- Intracranial hemorrhage\n- Death\n\n**Prevention:**\n1. ALWAYS dilute the cardiac amp\n2. ALWAYS label the syringe clearly\n3. ALWAYS double-check concentration before each dose\n4. Use pre-mixed syringes when available\n5. Pharmacy oversight of protocols when feasible\n\n**Human error data:** Medication errors occurred in 19% of patients receiving push-dose pressors in one study. One reported case: 50 mg phenylephrine given instead of 50 mcg (1000x overdose). [6]\n\n**Peripheral IV safety:** Push-dose epinephrine at 10 mcg/mL is safe peripherally. This is the same concentration as lidocaine with epinephrine - extravasation is NOT a major concern. [1][2]',
     citation: [1, 2, 5, 6],
     next: 'pdp-epi-efficacy',
+
+    summary: 'Full cardiac amp (1mg=1000mcg) to patient with pulse causes malignant HTN, VT/VF, ICH, death — ALWAYS dilute, ALWAYS label',
+    safetyLevel: 'critical',
   },
 
   {
@@ -211,6 +238,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Evidence for push-dose epinephrine:** [3][6][11]\n\n**Response rates:**\n- 71.8% of patients achieved >25% SBP increase with push-dose epinephrine [11]\n- Mean SBP increase 41.3%, DBP 44.3%, MAP 35.1% in peri-intubation case series [4]\n\n**Predictors of response:** [11]\n- History of CHF associated with better response (OR 11.889)\n- Likely due to inotropic effects beneficial in low-output states\n\n**Advantages over phenylephrine:** [1][6]\n- Provides both alpha AND beta effects (inopressor)\n- Increases cardiac output\n- Drugs circulate faster due to increased CO\n- Safer to mix (cardiac amp is already diluted)\n- Works in bradycardic patients (phenyl may worsen)\n\n**Adverse events:**\n- No serious adverse events in epinephrine cohort in large study [11]\n- Tachycardia (>30% HR increase) may occur\n- Monitor for dysrhythmias',
     citation: [1, 3, 4, 6, 11],
     next: 'pdp-troubleshoot',
+
+    summary: '71.8% achieve >25% SBP increase — CHF patients respond better (inotropic effect), advantages over phenylephrine: alpha + beta effects',
+    skippable: true,
   },
 
   // =====================================================================
@@ -225,6 +255,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**EXACT DILUTION (EMCrit Method):** [1][2]\n\n**Step 1:** Draw up 1 mL of phenylephrine from the vial\n- Vial concentration: 10 mg/mL\n- This equals 10 mg (10,000 mcg)\n\n**Step 2:** Inject into a 100 mL bag of normal saline\n\n**Step 3:** Mix well by inverting bag several times\n\n**Result:** 100 mL of phenylephrine at **100 mcg/mL**\n\n**Step 4:** Draw up into syringe for administration\n- Each 1 mL = 100 mcg\n\n**CAUTION:** Phenylephrine mixing requires more manipulation and has higher error potential than epinephrine. [1][6]\n\n**Pre-mixed syringes:** If your pharmacy provides pre-mixed phenylephrine 100 mcg/mL syringes, use these preferentially. [6]\n\n**Alternative preparation:** Some EDs stock pre-diluted phenylephrine vials (0.1 mg/mL = 100 mcg/mL). Check your formulary.',
     citation: [1, 2, 6],
     next: 'pdp-phenyl-dose',
+
+    summary: '1mL phenylephrine (10mg/mL) in 100mL NS = 100mcg/mL — higher error potential than epi, use pre-mixed syringes when available',
+    safetyLevel: 'warning',
     treatment: {
       firstLine: {
         drug: 'Phenylephrine (push-dose)',
@@ -246,6 +279,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Dosing (from 100 mcg/mL syringe):** [1][2][3]\n\n**Standard dose:** 0.5-2 mL (50-200 mcg) IV push every 3-5 minutes\n\n**Typical starting dose:** 100-200 mcg (1-2 mL)\n\n**Pharmacokinetics:**\n- **Onset:** <1 minute\n- **Duration:** 5-20 minutes (usually effects gone within 5 min)\n- Longer duration than epinephrine in some cases\n\n**Titration:**\n- Start with 100 mcg\n- May increase to 200 mcg if inadequate response\n- Redose every 3-5 minutes as needed\n\n**Clinical context for phenylephrine:** [1][3]\n- Pure alpha-1 agonist (vasoconstriction only)\n- NO chronotropy, NO inotropy\n- May cause reflex bradycardia\n- Best for: vasodilated patient with adequate cardiac output and tachycardia\n- Avoid if: bradycardia, cardiogenic component, impaired contractility\n\n**Response rate:** 55.9% achieved >25% SBP increase (vs 71.8% for epinephrine) [11]',
     citation: [1, 2, 3, 11],
     next: 'pdp-phenyl-safety',
+
+    summary: '50-200mcg (0.5-2mL) IV push q3-5min — pure alpha agonist, no inotropy, may cause reflex bradycardia, 55.9% response rate',
     treatment: {
       firstLine: {
         drug: 'Phenylephrine',
@@ -268,6 +303,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Peripheral IV safety:** [1][2]\n\nPhenylephrine is approved for IM and subcutaneous use, so extravasation from a peripheral IV is NOT a major concern.\n\n**Potential adverse effects:**\n- **Reflex bradycardia** - pure alpha agonism triggers baroreceptor-mediated parasympathetic response\n- **Decreased cardiac output** - increased afterload without inotropy can reduce stroke volume\n- **Hypertension** - overcorrection possible, especially in elderly\n\n**When to AVOID phenylephrine:** [1]\n- Bradycardia (may worsen)\n- Suspected low cardiac output / cardiogenic component\n- Impaired contractility (CHF, cardiomyopathy)\n- When chronotropy is desired\n\n**Medication error risk:** [6]\nHigher error potential than epinephrine:\n- Stock vial is HIGHLY concentrated (10 mg/mL)\n- Requires more dilution steps\n- Case report: 50 mg given instead of 50 mcg (1000x error)\n- Use pre-mixed syringes when available',
     citation: [1, 2, 6],
     next: 'pdp-phenyl-indications',
+
+    summary: 'Avoid phenylephrine in bradycardia, low CO, or impaired contractility — case report of 1000x overdose (50mg vs 50mcg), use pre-mixed',
+    safetyLevel: 'warning',
   },
 
   {
@@ -278,6 +316,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Best indications for phenylephrine over epinephrine:** [1][3]\n\n**1. Hypotension with tachyarrhythmia:**\n- Rapid atrial fibrillation with hypotension\n- SVT with hypotension\n- Sinus tachycardia >130 where additional chronotropy is undesirable\n\n**2. Pure vasodilatory state with preserved cardiac function:**\n- Post-spinal anesthesia hypotension\n- Drug-induced vasodilation (propofol, sedatives)\n- Distributive shock with hyperdynamic circulation\n\n**3. Patient on beta-blockers:**\n- Beta receptors already blocked\n- Alpha-mediated vasoconstriction still effective\n- (Though methylene blue may be better for refractory cases)\n\n**Clinical Pearl:** Even in these scenarios, epinephrine remains a reasonable choice - its beta effects are beneficial in most shock states. Weingart now prefers epinephrine for almost all situations. [1][6]\n\n**When phenylephrine fails:** Consider that cardiac output may be inadequate. Switch to epinephrine or add dobutamine. [1]',
     citation: [1, 3, 6],
     next: 'pdp-troubleshoot',
+
+    summary: 'Best for: tachyarrhythmia with hypotension, pure vasodilation with preserved CO, patient on beta-blockers — Weingart now prefers epi for almost all',
+    skippable: true,
   },
 
   // =====================================================================
@@ -292,6 +333,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Push-dose norepinephrine is LESS COMMON** than push-dose epinephrine or phenylephrine, but emerging evidence supports its safety and efficacy. [8][12]\n\n**Why less common?**\n- Norepinephrine is primarily alpha-1 (like phenylephrine) with some beta-1\n- Epinephrine provides more robust beta effects\n- Mixing is similar complexity to phenylephrine\n- Historical concerns about extravasation (though peripheral use is now accepted)\n\n**Evidence base:** [8][12]\n- Scoping review (2024): 7 RCTs comparing NE to phenylephrine in cesarean section spinal hypotension\n- NE showed LESS bradycardia than phenylephrine\n- Fewer boluses needed to correct hypotension\n- Higher cardiac output and stroke volume maintained\n- No safety concerns with peripheral use at diluted concentrations\n\n**SSC 2021 supports peripheral norepinephrine** for up to 6 hours while central access is obtained. [9]',
     citation: [8, 9, 12],
     next: 'pdp-norepi-dose',
+
+    summary: 'Push-dose NE emerging but less common — less bradycardia than phenylephrine, maintains CO better, peripheral NE safe <6h per SSC 2021',
+    skippable: true,
   },
 
   {
@@ -302,6 +346,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Preparation (if using push-dose NE):**\n\nNorepinephrine stock: typically 4 mg/4 mL (1 mg/mL) or 4 mg/250 mL (16 mcg/mL premix)\n\n**For push-dose use:**\n1. Use a pre-diluted concentration of **16 mcg/mL** or similar\n2. Alternatively: Draw 1 mL of 1 mg/mL NE + 99 mL NS = 10 mcg/mL\n\n**Dosing:**\n- Typical push-dose: 4-8 mcg IV push\n- Cesarean section studies used 4-8 mcg boluses [8][12]\n- May repeat every 1-2 minutes as needed\n\n**Peripheral IV safety:** [8][9][12]\n- Surviving Sepsis Campaign 2021: Peripheral NE is safe for limited duration (<6 hours)\n- Cleveland Clinic study: 51.6% of patients never needed central line\n- Incidence of extravasation complications is LOW at diluted concentrations\n- Have phentolamine available for extravasation management\n\n**Note:** For most ED scenarios, push-dose epinephrine is simpler and equally effective. Push-dose NE is primarily used in anesthesia settings.',
     citation: [8, 9, 12],
     next: 'pdp-norepi-peripheral',
+
+    summary: '4-8mcg IV push q1-2min, use diluted concentration (10-16mcg/mL) — primarily anesthesia settings, epi simpler for most ED scenarios',
     treatment: {
       firstLine: {
         drug: 'Norepinephrine (push-dose)',
@@ -323,6 +369,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**2024-2025 Evidence supports peripheral norepinephrine:** [8][9][12]\n\n**Cleveland Clinic Prospective Study (CHEST 2024):**\n- Implementing peripheral NE protocol avoided 1 CVC day per patient\n- 51.6% of patients never required central line insertion\n- Safe, feasible, and associated with decreased CVC utilization\n\n**2025 Follow-up data:**\n- Peripheral NE appears safe for up to 48 hours\n- Supports SSC guideline that vasopressors should start peripherally rather than delaying for central access\n\n**Systematic Review (2025):**\n- 83 articles reviewed\n- Noradrenaline CAN be administered peripherally\n- Complications (thrombophlebitis, cellulitis, tissue necrosis) are possible but incidence is LOW\n- Phentolamine is first-line for extravasation\n\n**Practical guidance:**\n- Use large-bore IV in proximal location (antecubital preferred)\n- Monitor IV site every 1-2 hours\n- Have phentolamine ready (5-10 mg diluted in 10 mL NS for local infiltration)\n- Transition to central line when stable and practical',
     citation: [8, 9, 12],
     next: 'pdp-troubleshoot',
+
+    summary: 'Peripheral NE safe up to 48h per 2024-25 data — 51.6% never needed central line, use large-bore proximal IV, have phentolamine ready',
+    skippable: true,
   },
 
   // =====================================================================
@@ -359,6 +408,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
         next: 'pdp-transition',
       },
     ],
+
+    summary: 'Systematic troubleshooting: hypovolemia (empty tank), wrong agent (phenyl failing = try epi), acidosis, obstructive causes',
   },
 
   {
@@ -369,6 +420,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Pressors work poorly in an empty tank.** [9]\n\n**POCUS assessment:**\n- IVC collapse on inspiration suggests volume responsiveness\n- Hyperdynamic, empty-appearing LV\n- Passive leg raise increases stroke volume\n\n**Volume resuscitation:**\n- Crystalloid: 500-1000 mL bolus, reassess\n- Blood products if hemorrhagic shock\n- LR preferred for large-volume resuscitation\n\n**Evidence from PRESSURE study:** [4]\nPatients who received >30 mL/kg fluids before phenylephrine required fewer and lower cumulative pressor doses.\n\n**Balance:**\n- Initial resuscitation: 30 mL/kg for sepsis (SSC 2021)\n- After initial resuscitation: be restrictive [9]\n- Most crystalloid extravasates (~95% leaves vasculature)\n- Track net fluid balance - avoid >4-5L net positive\n\n**Key insight:** Adequate preload + vasopressor is more effective than vasopressor alone.',
     citation: [4, 9],
     next: 'pdp-troubleshoot',
+
+    summary: 'Pressors work poorly in empty tank — POCUS IVC, give 500-1000mL crystalloid, >30mL/kg initial sepsis resuscitation then restrict',
   },
 
   {
@@ -379,6 +432,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**When phenylephrine fails, consider switching to epinephrine.** [1][11]\n\n**Reasons phenylephrine may fail:**\n1. **Low cardiac output** - phenylephrine increases afterload without inotropy, can worsen CO\n2. **Bradycardia** - phenylephrine may cause reflex bradycardia\n3. **Septic cardiomyopathy** - needs inotropic support\n4. **Beta-blocker toxicity** - may benefit from combined approach\n\n**Epinephrine advantages:** [1][6]\n- Provides alpha (vasoconstriction) AND beta (inotropy, chronotropy)\n- Increases cardiac output AND perfusion pressure\n- Better response rate: 71.8% vs 55.9% for phenyl [11]\n\n**If epinephrine also failing:**\n- Consider vasopressin (non-catecholamine mechanism)\n- Stress-dose steroids for refractory shock\n- Methylene blue for NO-mediated vasodilation\n- Reassess diagnosis (sepsis mimic? cardiogenic? obstructive?)\n\n[Sepsis Consult](#/tree/sepsis)',
     citation: [1, 6, 11],
     next: 'pdp-troubleshoot',
+
+    summary: 'Phenylephrine failing: likely low CO — epi has 71.8% vs 55.9% response rate, consider vasopressin or methylene blue if refractory',
   },
 
   {
@@ -389,6 +444,9 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**If shock persists despite adequate push-dose pressors + fluids:** [9]\n\n**Reassess diagnosis:**\n- Is this truly distributive shock?\n- Rule out obstructive causes (PE, tamponade, tension PTX)\n- Consider cardiogenic component\n- Sepsis mimics (adrenal crisis, thyroid storm)\n\n**Escalation ladder:**\n1. **Maximize push-dose pressor** (more frequent dosing)\n2. **Start continuous norepinephrine infusion** (can be peripheral)\n3. **Add vasopressin** 0.03-0.04 units/min (non-titratable)\n4. **Stress-dose hydrocortisone** 50 mg IV q6h or 200 mg/day\n5. **Consider methylene blue** 1-2 mg/kg IV for NO-mediated vasodilation\n6. **VA-ECMO** for refractory cardiogenic/mixed shock\n\n**Methylene Blue:** [9]\n- Ibarra-Estrada 2023 RCT: Shorter time to vasopressor discontinuation\n- Inhibits NO synthase, restores vascular tone\n- Consider when on multiple vasopressors + steroids\n\n[Sepsis Consult - Refractory Shock](#/tree/sepsis)',
     citation: [9],
     next: 'pdp-transition',
+
+    summary: 'Refractory shock: escalation ladder — maximize pressor, add vasopressin, stress-dose hydrocortisone, methylene blue, consider VA-ECMO',
+    safetyLevel: 'critical',
   },
 
   {
@@ -399,6 +457,8 @@ export const PUSH_DOSE_PRESSORS_NODES: DecisionNode[] = [
     body: '**Bridge to infusion - the goal of push-dose pressors.** [1][2]\n\n**Timing:**\n- Push-dose is temporary (5-15 minutes max duration as primary therapy)\n- Continuous infusion should be prepared SIMULTANEOUSLY with push-dose administration\n- Once infusion available, transition promptly\n\n**Norepinephrine infusion (first-line for most shock):** [9]\n- Start 0.05 mcg/kg/min (4-6 mcg/min)\n- Titrate by 0.02-0.05 mcg/kg/min to MAP >=65\n- Can start peripherally for up to 6 hours (SSC 2021)\n\n**Epinephrine infusion (for bradycardia/low CO):**\n- Start 0.01-0.05 mcg/kg/min\n- Titrate to effect\n- Increases lactate (expected, often positive prognostic sign)\n\n**Transition technique:**\n1. Start continuous infusion at low rate\n2. Wait 5-10 minutes for steady state\n3. Wean push-dose as infusion takes effect\n4. Up-titrate infusion as needed\n5. Monitor closely during transition period',
     citation: [1, 2, 9],
     next: 'pdp-summary',
+
+    summary: 'Push-dose is 5-15min bridge — prepare continuous infusion simultaneously, start low rate, wait 5-10min, wean push-dose as infusion takes effect',
   },
 
   {

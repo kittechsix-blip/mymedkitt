@@ -118,6 +118,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Definition:** Acute onset of continuous vertigo lasting >24 hours, with nausea/vomiting, head motion intolerance, unsteady gait, and **spontaneous nystagmus** on exam.\n\n**Key differential:**\n• **Vestibular neuritis** (peripheral) — viral inflammation of vestibular nerve\n• **Labyrinthitis** (peripheral) — vestibular neuritis + hearing loss\n• **Posterior circulation stroke** (central) — cerebellar or brainstem infarct\n• **Less common:** MS demyelination, vestibular schwannoma (subacute)\n\n**The critical challenge:** Vestibular neuritis and cerebellar stroke look nearly identical on history. **HINTS exam is more sensitive than early MRI** for distinguishing them (Kattah 2009).\n\n**Before HINTS:** Screen for red flags and central features first. HINTS is only valid in patients with spontaneous nystagmus and NO central findings.',
     citation: [2, 11, 12],
     next: 'vert-central-screen',
+
+    summary: 'AVS = constant vertigo >24h with spontaneous nystagmus — key DDx: vestibular neuritis vs cerebellar stroke, HINTS exam is next',
+    skippable: true,
   },
 
   {
@@ -128,6 +131,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Definition:** Brief episodes of vertigo (seconds to <1 minute) triggered by **head position change** — rolling over in bed, looking up ("top-shelf vertigo"), bending down.\n\n**Classic features:**\n• Episodes <1 minute, often seconds\n• No vertigo between episodes\n• Triggered reliably by specific head positions\n• No hearing loss, no tinnitus\n• No focal neurologic signs\n\n**Most common cause: BPPV** (Benign Paroxysmal Positional Vertigo) — ~85% posterior canal, ~15% horizontal canal, <1% anterior canal.\n\n**Critical pitfall:** Do NOT assume positional = benign. Central positional vertigo (cerebellar lesions) can mimic BPPV. Red flag features: vertical nystagmus on Dix-Hallpike without torsional component, direction-changing nystagmus, or associated neurologic signs → image instead.',
     citation: [7, 17, 19],
     next: 'vert-bppv-history',
+
+    summary: 't-EVS = brief (<1min) positional episodes — most commonly BPPV, but central positional vertigo can mimic it',
+    skippable: true,
   },
 
   {
@@ -138,6 +144,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Definition:** Episodes of vertigo lasting minutes to hours, occurring **without a positional trigger**. Patient is normal between episodes.\n\n**Differential:**\n• **Vestibular migraine** — most common cause; 50% have NO headache with vertigo\n• **Ménière disease** — vertigo + fluctuating hearing loss + tinnitus + aural fullness\n• **TIA (posterior circulation)** — especially in vascular risk patients\n• **Panic attack / anxiety** — diagnosis of exclusion\n• **Cardiac arrhythmia** — rule out with ECG\n\n**The critical question:** Is this vestibular migraine (benign) or TIA (stroke risk)? Vascular risk factors shift the workup toward imaging and secondary prevention.',
     citation: [8, 18, 22],
     next: 'vert-vm-criteria',
+
+    summary: 's-EVS = spontaneous episodes min-hours — vestibular migraine most common, distinguish from TIA in vascular risk patients',
+    skippable: true,
   },
 
   // =====================================================================
@@ -164,6 +173,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-hints-check',
       },
     ],
+
+    summary: 'Screen for Deadly Ds (dysarthria/dysphagia/diplopia/dysmetria) and red flags — ANY positive finding skips HINTS, goes to stroke workup',
+    safetyLevel: 'critical',
   },
 
   {
@@ -175,6 +187,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     citation: [6, 12, 24],
     next: 'vert-stroke-imaging',
     calculatorLinks: [{ id: 'nihss', label: 'NIHSS Calculator' }],
+
+    summary: 'Central features present — activate stroke team, establish last known well, posterior circulation strokes have 35% ED miss rate',
+    safetyLevel: 'critical',
   },
 
   {
@@ -185,6 +200,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '[Imaging Decision Guide](#/info/vertigo-imaging-guide)\n\n**CT head non-contrast is NOT adequate to rule out posterior circulation stroke.**\n• CT sensitivity for acute posterior fossa ischemia: **7-16%**\n• CT is useful only to exclude hemorrhage or mass effect before treatment\n\n**MRI with DWI is the test of choice — but beware:**\n• DWI misses ~**20% of acute posterior circulation strokes in the first 24-48 hours** (Oppenheim 2000, Simonsen 2015)\n• False-negative rate as high as 35% within 6 hours of symptom onset for small strokes\n• **Repeat MRI at 48-72 hours** if first negative and clinical suspicion remains\n\n**Vascular imaging:** CTA head/neck or MRA to evaluate for:\n• Vertebral or basilar artery occlusion / stenosis\n• Vertebral artery dissection (especially with neck pain)\n• PICA / AICA / SCA distribution infarct\n\n**Labs:** CBC, BMP, coags, troponin, lipids, HbA1c. Do NOT delay imaging for labs.',
     citation: [4, 5, 6, 12],
     next: 'vert-stroke-disposition',
+
+    summary: 'CT only 7-16% sensitive for posterior fossa — MRI-DWI misses 20-35% in first 24-48h, repeat at 48-72h if negative with high suspicion',
+    safetyLevel: 'warning',
   },
 
   {
@@ -219,6 +237,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'BPPV History Confirmation',
     body: '**Classic BPPV features (all should be present):**\n• Brief episodes <1 minute (often 5-30 seconds)\n• Triggered by head position change — rolling over, looking up, lying down\n• No vertigo at rest\n• No spontaneous nystagmus\n• No hearing loss, tinnitus, or neurologic signs\n• Onset often on waking or rolling in bed\n\n**Epidemiology:**\n• Most common peripheral vestibular disorder\n• Peak incidence 50-70 years old\n• More common in women\n• Risk factors: head trauma, prolonged recumbency, osteoporosis, vitamin D deficiency\n\n**Mechanism:** Calcium carbonate crystals (otoconia) from the utricle displace into a semicircular canal. Posterior canal involvement is most common (85-90%) because gravity pools particles there in the upright position.\n\nProceed to **Dix-Hallpike test** to confirm and identify which canal.',
     citation: [7, 17, 19],
+
+    summary: 'Classic BPPV: <1min episodes triggered by head position, no hearing loss — posterior canal 85%, confirm with Dix-Hallpike test',
+    skippable: true,
     images: [{ src: 'images/vertigo/canalolithiasis.jpg', alt: 'Canalolithiasis in semicircular canal', caption: 'Canalolithiasis: free-floating otoconia (calcium carbonate crystals) in a semicircular canal — the mechanism of BPPV. Head movement shifts the particles, deflecting the cupula and triggering vertigo. (TnoXX, Wikimedia Commons, CC BY 4.0)' }],
     next: 'vert-dix-hallpike',
   },
@@ -247,6 +268,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-hints-check',
       },
     ],
+
+    summary: 'Dix-Hallpike technique and interpretation — upbeat-torsional = posterior BPPV, pure horizontal = horizontal canal, red flags: pure vertical nystagmus',
+    safetyLevel: 'warning',
   },
 
   {
@@ -261,6 +285,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
       { src: 'images/vertigo/semont-maneuver.svg', alt: 'Semont liberatory maneuver', caption: 'Semont liberatory maneuver: alternative to Epley for posterior canal BPPV. Patient is rapidly moved from sitting to side-lying on the affected side, then swung 180° to the opposite side. (Hariadhi, Wikimedia Commons, CC BY-SA 4.0)' },
     ],
     next: 'vert-verify-cure',
+
+    summary: 'Epley maneuver for posterior canal BPPV — NNT=2 for resolution at 24h, 80-95% success rate, no post-maneuver restrictions needed',
   },
 
   {
@@ -283,6 +309,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-horizontal-bppv',
       },
     ],
+
+    summary: 'Supine roll test for horizontal canal BPPV — geotropic = canalithiasis (more intense side affected), apogeotropic = cupulolithiasis',
   },
 
   {
@@ -293,6 +321,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Do NOT use Epley maneuver** — Epley is specific to the posterior canal.\n\n**Gufoni Maneuver (easier for ED):**\n1. Patient sits upright on exam table\n2. Quickly lay patient on the UNAFFECTED side (for geotropic canalithiasis)\n3. Hold for 1-2 minutes until nystagmus stops\n4. Quickly rotate head 45° toward the floor (nose toward bed)\n5. Hold 1-2 minutes\n6. Return to sitting\n\n**Barbecue Roll (Lempert) Maneuver — alternative:**\n1. Patient supine\n2. Roll patient 90° toward unaffected side (onto side)\n3. Continue rolling 90° to face down (prone)\n4. Continue 90° more to the affected side\n5. Return to supine\n• Hold each position 30-60 seconds\n\n**Success rates:** ~70-80% for canalithiasis, lower for cupulolithiasis. May require repeat sessions over days.\n\n**For cupulolithiasis (apogeotropic):** Modified maneuvers are used to convert to canalithiasis first, then treat with Gufoni/Barbecue.\n\n**If unsuccessful after 2-3 attempts:** vestibular physical therapy referral.',
     citation: [17, 19],
     next: 'vert-verify-cure',
+
+    summary: 'Do NOT use Epley for horizontal canal — use Gufoni or Barbecue Roll maneuver, 70-80% success for canalithiasis',
   },
 
   {
@@ -314,6 +344,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-bppv-failed',
       },
     ],
+
+    summary: 'Wait 15min post-maneuver then repeat Dix-Hallpike — may repeat maneuver 1-2 more times if still positive, 15-30% annual recurrence',
   },
 
   {
@@ -324,6 +356,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Brandt-Daroff Exercises** — home repositioning technique for refractory BPPV.\n\n**Technique:**\n1. Sit on edge of bed with head turned 45° to LEFT\n2. Quickly lie down on RIGHT side (head now facing up)\n3. Hold 30 seconds or until vertigo stops\n4. Return to sitting, hold 30 seconds\n5. Turn head 45° to RIGHT, lie down on LEFT side\n6. Hold 30 seconds, return to sitting\n\n**Regimen:** 5 repetitions per session, 3 sessions per day (morning, afternoon, evening). Continue for **2 weeks or until 2 consecutive days symptom-free**.\n\n**Expected course:**\n• Initial increase in symptoms (due to provocation) — warn patient\n• Gradual reduction over 7-14 days\n• Success rate ~95% with diligent performance\n\n**Vestibular rehabilitation:** Formal PT referral for patients who fail home exercises, elderly patients at fall risk, or those with multiple recurrences. Vestibular-trained PTs can perform advanced maneuvers under Frenzel goggle guidance.',
     citation: [7, 15, 20],
     next: 'vert-bppv-disposition',
+
+    summary: 'Brandt-Daroff home exercises: 5 reps x 3 sessions/day for 2 weeks — 95% success rate, refer vestibular PT if exercises fail',
+    skippable: true,
   },
 
   {
@@ -359,6 +394,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-central-present',
       },
     ],
+
+    summary: 'HINTS only valid with continuous vertigo + spontaneous nystagmus — outperforms early MRI (100% vs 88% sens, Kattah 2009)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -382,6 +420,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess nystagmus: remove fixation first — unidirectional horizontal = peripheral, direction-changing/vertical/pure torsional = central',
   },
 
   {
@@ -404,6 +444,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'COUNTERINTUITIVE: abnormal HIT (catch-up saccade) = peripheral/reassuring, normal HIT = central/worrisome for stroke',
+    safetyLevel: 'critical',
   },
 
   {
@@ -426,6 +469,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Alternate cover test: vertical skew deviation = central lesion (98% specificity), most specific finding in HINTS exam',
   },
 
   {
@@ -448,6 +493,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'HINTS+: new unilateral hearing loss = AICA stroke until proven otherwise — labyrinthine artery involvement, NOT labyrinthitis',
+    safetyLevel: 'critical',
   },
 
   {
@@ -458,6 +506,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**HINTS INFARCT mnemonic — peripheral pattern (all 3 reassuring):**\n• **I**mpulse **N**ormal\n• **F**ast-phase **A**lternating (direction-changing nystagmus)\n• **R**efixation on **C**over **T**est (skew)\n\nFOR peripheral = **unidirectional nystagmus + abnormal HIT + no skew + normal hearing**.\n\n**Diagnostic accuracy (Kattah 2009):**\n• Sensitivity for stroke: **100%**\n• Specificity: **96%**\n• NPV: 100% (within operator expertise)\n• Outperformed early MRI-DWI in first 48 hours\n\n**⚠️ Critical caveats:**\n• Requires training and practice — non-neurologist sensitivity is lower (Nelson 2011 showed residents had poor accuracy)\n• Only valid in true AVS with spontaneous nystagmus\n• Cannot detect strokes that occur in patients without clear AVS presentation\n• Missing HINTS technique subtleties (e.g., not removing fixation) leads to errors\n\n**Diagnosis: Vestibular Neuritis** (if no hearing loss) or **Labyrinthitis** (if hearing loss without central findings — rare, still warrants MRI).\n\n**Presumed etiology:** Reactivation of HSV-1 in the vestibular ganglion. Self-limited over days to weeks.',
     citation: [2, 11, 14, 27],
     next: 'vert-vn-treatment',
+
+    summary: 'All HINTS peripheral: unidirectional nystagmus + abnormal HIT + no skew + normal hearing = vestibular neuritis (100% sensitivity)',
+    skippable: true,
   },
 
   {
@@ -468,6 +519,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**ANY central finding in HINTS** → posterior circulation stroke until proven otherwise.\n\n**Central HINTS findings (any one of):**\n• Direction-changing, vertical, or pure torsional nystagmus\n• Normal HIT (no catch-up saccade) in a patient with AVS\n• Vertical skew deviation\n• New unilateral hearing loss (HINTS+)\n\n**Do NOT be reassured by young age.**\n• Vertebral artery dissection can cause cerebellar stroke in patients in their 30s-40s\n• Neck pain or recent trauma (chiropractic, whiplash) raises dissection suspicion\n• Up to 20% of posterior circulation strokes occur in patients <55\n\n**Immediate actions (same as central screen):**\n• Activate stroke team\n• Last known well time\n• MRI-DWI + MRA/CTA head and neck\n• Continuous monitoring, IV × 2, NPO\n• NIHSS (remember: underscores posterior strokes)\n\nRoute to stroke imaging pathway.',
     citation: [2, 6, 12],
     next: 'vert-stroke-imaging',
+
+    summary: 'ANY central HINTS finding = posterior circulation stroke — vertebral dissection possible even in young patients, do not be reassured by age',
+    safetyLevel: 'critical',
   },
 
   {
@@ -478,6 +532,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Supportive care is the mainstay.** Vestibular neuritis resolves spontaneously over 1-2 weeks as central compensation develops.\n\n**Symptom control (short-term only):**\n• [Ondansetron](#/drug/ondansetron/acute vertigo) 4 mg IV/ODT q6-8h PRN nausea — preferred antiemetic (does not suppress vestibular compensation)\n• [Meclizine](#/drug/meclizine/vertigo) 25 mg PO q8h PRN — **maximum 72 hours** (suppressants delay compensation)\n• [Diazepam](#/drug/diazepam/acute vestibular syndrome) 2-5 mg PO/IV q8-12h PRN for severe refractory symptoms — **maximum 48-72 hours**\n• IV fluids for dehydration from vomiting\n\n**⚠️ Key principle: LIMIT vestibular suppressants to 72 hours.** Longer use prolongs symptom duration and delays recovery.\n\n**Corticosteroids — controversial:**\n• Strupp 2004 methylprednisolone showed improved caloric test recovery but no clear functional benefit\n• GRACE-3 2023 does NOT recommend routine steroids\n• Consider case-by-case in severe presentations within 3 days of onset (methylprednisolone 100 mg PO taper over 21 days) — shared decision making\n\n**Antivirals:** Not indicated (Strupp 2004 valacyclovir showed no benefit).\n\n**Early mobilization and vestibular rehabilitation** are the most effective interventions for recovery.',
     citation: [1, 14, 15],
     next: 'vert-vn-disposition',
+
+    summary: 'Ondansetron preferred antiemetic, meclizine/diazepam max 72h — suppressants delay compensation, steroids controversial, antivirals not indicated',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -492,6 +549,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '[Vestibular Migraine Criteria](#/info/vertigo-migraine-criteria)\n\n**Bárány Society / International Headache Society Criteria (Lempert 2012):**\n\n**Definite Vestibular Migraine requires ALL:**\n1. **≥5 episodes** of vestibular symptoms of moderate or severe intensity lasting 5 minutes to 72 hours\n2. **Current or past history of migraine** with or without aura (ICHD-3 criteria)\n3. **≥50% of vestibular episodes** have at least ONE of the following migrainous features:\n   - Headache with migraine characteristics (unilateral, pulsating, moderate/severe, aggravated by routine activity)\n   - Photophobia AND phonophobia\n   - Visual aura\n4. Not better accounted for by another vestibular or ICHD-3 diagnosis\n\n**Probable Vestibular Migraine:**\n• ≥5 episodes of vestibular symptoms 5 min-72 h\n• Either migraine history OR migrainous features in episodes (not both)\n\n**⚠️ Critical teaching point:**\n**~50% of vestibular migraine attacks occur WITHOUT headache.** The diagnosis is often missed because clinicians expect concurrent headache. Ask about migraine history, photophobia/phonophobia during the episode, and family history of migraine.\n\n**Epidemiology:** Vestibular migraine is the **most common cause of recurrent spontaneous vertigo**, affecting ~1-3% of adults (Neuhauser 2001). More common than Ménière disease.',
     citation: [8, 18, 22],
     next: 'vert-vm-diagnosis',
+
+    summary: 'Vestibular migraine: >=5 episodes + migraine history + migrainous features in >=50% — 50% occur WITHOUT headache, most common recurrent vertigo cause',
+    skippable: true,
   },
 
   {
@@ -513,6 +573,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-sevs-risk',
       },
     ],
+
+    summary: 'Apply Barany criteria checklist — if not met, consider Meniere (requires hearing loss), posterior circulation TIA, panic, or arrhythmia',
   },
 
   {
@@ -523,6 +585,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Acute treatment parallels standard migraine care**, with dopamine antagonists particularly useful due to the dual antiemetic and antimigraine effect.\n\n**First-line (combine):**\n• [Metoclopramide](#/drug/metoclopramide/vestibular migraine) 10 mg IV over 15 min\n• [Diphenhydramine](#/drug/diphenhydramine/vestibular suppressant) 25 mg IV (prevents akathisia from metoclopramide; short-term vestibular symptom relief)\n• IV fluids 1 L NS bolus\n• [Ketorolac](#/drug/ketorolac/headache) 30 mg IV or 15 mg IV if elderly/renal concern\n• Consider [Magnesium sulfate](#/drug/magnesium-sulfate/migraine) 1-2 g IV over 15 min (especially if history of aura)\n\n**Second-line:**\n• [Prochlorperazine](#/drug/prochlorperazine/migraine) 10 mg IV (alternative to metoclopramide)\n• Dexamethasone 10 mg IV/PO to reduce recurrence within 72h\n\n**Triptans — controversial in vestibular migraine:**\n• No strong evidence of efficacy for vestibular symptoms\n• May be tried if patient has known triptan-responsive migraine\n• **Contraindicated** in basilar migraine, hemiplegic migraine, uncontrolled HTN, recent stroke/MI\n\n**Cross-reference:** See [Migraine Consult](#/tree/migraine) for full treatment protocols.\n\n**For suppression of severe vertigo nausea only:** Ondansetron 4 mg IV is adjunctive.',
     citation: [1, 8, 18],
     next: 'vert-vm-disposition',
+
+    summary: 'Acute VM: metoclopramide 10mg IV + diphenhydramine 25mg IV + ketorolac + IV fluids — triptans controversial, magnesium if aura history',
   },
 
   {
@@ -545,6 +609,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-transient-low-risk',
       },
     ],
+
+    summary: 'Assess TIA risk: age >=60, vascular risk factors, focal neuro symptoms, hearing loss, neck pain — recurrent TIAs herald large vessel stroke',
+    safetyLevel: 'warning',
   },
 
   {
@@ -590,6 +657,8 @@ export const VERTIGO_NODES: DecisionNode[] = [
         next: 'vert-vn-discharge',
       },
     ],
+
+    summary: 'Admit if: unable to tolerate PO, intractable vomiting, severe gait instability, elderly with comorbidities, or diagnostic uncertainty',
   },
 
   {
@@ -630,6 +699,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     body: '**Core principle: vestibular suppressants impair central compensation.**\n\nThe brain recovers from peripheral vestibular injury by remapping its reference frame — a process called **central compensation**. This requires sensory input and active movement. Medications that suppress vestibular activity (antihistamines, benzodiazepines, anticholinergics) reduce the afferent signal and **delay recovery**.\n\n**The 72-hour rule:**\n• Use vestibular suppressants only for the acute severe phase\n• Discontinue within 48-72 hours\n• Early mobilization + vestibular rehab is more effective than continued medication\n\n**Drug classes:**\n\n**Antihistamines (H1 antagonists):**\n• [Meclizine](#/drug/meclizine/vertigo) 25 mg PO q8h — first-line symptom relief, max 3-5 days\n• [Diphenhydramine](#/drug/diphenhydramine/vestibular suppressant) 25-50 mg PO/IV — more sedating alternative\n\n**Antiemetics (vestibular-neutral):**\n• [Ondansetron](#/drug/ondansetron/acute vertigo) 4-8 mg IV/ODT — preferred, does not suppress compensation\n• [Metoclopramide](#/drug/metoclopramide/vestibular migraine) 10 mg IV — especially for vestibular migraine\n\n**Benzodiazepines:**\n• [Diazepam](#/drug/diazepam/acute vestibular syndrome) 2-5 mg — rescue only, strict 48-72h limit\n• Falls risk, dependency risk, prolonged vestibular compensation\n\n**Anticholinergics:**\n• [Scopolamine](#/drug/scopolamine/vestibular) 1.5 mg transdermal patch — best for motion-provoked symptoms. Caution in elderly (delirium, falls).\n\n**Chronic vestibular conditions (Meniere, chronic vestibular migraine):**\n• [Betahistine](#/drug/betahistine/vestibular) 16 mg TID (not FDA-approved in US) — histamine agonist, does NOT delay compensation\n• Referral to vestibular specialist for long-term management',
     citation: [1, 10, 15],
     next: 'vert-rehab-referral',
+
+    summary: '72-hour rule: limit suppressants to acute phase only — ondansetron is vestibular-neutral, benzos/antihistamines delay compensation',
+    safetyLevel: 'warning',
   },
 
   {
@@ -639,6 +711,9 @@ export const VERTIGO_NODES: DecisionNode[] = [
     title: 'Vestibular Rehabilitation Guidance',
     body: '**Vestibular rehabilitation therapy (VRT) is the single most effective intervention for persistent peripheral vestibular symptoms.**\n\n**Evidence:**\n• Whitney 2005 and multiple subsequent trials show VRT significantly improves symptoms, balance, and quality of life in vestibular neuritis, BPPV recurrences, PPPD, and post-concussive vestibular dysfunction\n• Earlier initiation = better outcomes\n• Superior to medication for long-term recovery\n\n**Who benefits:**\n• Vestibular neuritis / labyrinthitis (as early as tolerated)\n• Refractory or recurrent BPPV\n• Persistent postural-perceptual dizziness (PPPD)\n• Post-concussive vestibular symptoms\n• Elderly with imbalance / fall risk\n• Bilateral vestibulopathy (rehab vs pharmacotherapy)\n\n**What VRT involves:**\n• Gaze stabilization exercises\n• Habituation exercises\n• Balance retraining\n• Canalith repositioning (for BPPV by specialist)\n• Graduated functional activities\n\n**Referral resources:**\n• **vestibular.org** — directory of certified vestibular therapists\n• Ask local PT clinic about vestibular-trained therapists\n• Academic medical centers often have dedicated vestibular clinics\n\n**ED role:**\n• Identify candidates for VRT\n• Educate patient that PT — not medication — is the key to recovery\n• Provide written referral or request from primary care\n• Emphasize early initiation',
     citation: [1, 14, 15],
+
+    summary: 'Vestibular PT is the single most effective intervention — early initiation improves outcomes, superior to medication long-term',
+    skippable: true,
   },
 ];
 

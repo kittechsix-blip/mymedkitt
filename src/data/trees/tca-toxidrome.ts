@@ -27,6 +27,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Moderate — altered mental status', description: 'Drowsy to obtunded, tachycardia, but no seizures or wide QRS.', next: 'tca-critical' },
       { label: 'Severe / Critical', description: 'Seizure, wide QRS, arrhythmia, hypotension, or coma.', next: 'tca-critical', urgency: 'critical' },
     ],
+
+    summary: 'Na channel blockade → QRS widening → VT/VF; lethal dose only 3-5x therapeutic; alert to arrest within 1 hour',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-mild',
@@ -36,6 +39,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**"Blind as a bat, dry as a bone, hot as a hare, red as a beet, mad as a hatter, full as a flask"** [3][13]\n\n• **Tachycardia** (most common cardiac finding)\n• Mydriasis (dilated pupils)\n• Dry skin and mucous membranes\n• Urinary retention, decreased bowel sounds\n• Hyperthermia\n• Agitation → delirium → coma\n\n**Sinus tachycardia** is the most common ECG finding and may be the only abnormality in mild toxicity [1].\n\n⚠️ Do NOT be reassured by mild symptoms — rapid deterioration is possible. Proceed to ECG assessment immediately.',
     citation: [3, 13],
     next: 'tca-decon',
+
+    summary: 'Anticholinergic toxidrome — sinus tachycardia most common; do NOT be reassured, rapid deterioration possible',
+    skippable: true,
   },
   {
     id: 'tca-critical',
@@ -45,6 +51,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**Initiate immediately:**\n• Continuous cardiac monitoring\n• Two large-bore IVs\n• **12-lead ECG STAT** — most important test [1][3]\n• BMP, blood gas (pH), lactate, glucose\n• Acetaminophen and salicylate levels (coingestion screening)\n• Urine drug screen (false positives common: diphenhydramine, cyclobenzaprine, carbamazepine) [3]\n\n⚠️ **TCA levels are NOT useful** for acute management — do not correlate with toxicity [3][16].\n\nIf QRS already widened: give [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) 1-2 mEq/kg IV push immediately while continuing assessment [4][16].\n\n**If airway compromise or GCS ≤12** → intubate (see intubation considerations below).',
     citation: [1, 3, 4, 16],
     next: 'tca-decon',
+
+    summary: 'ECG STAT, bicarb if QRS wide, TCA levels NOT useful — intubate if GCS ≤12',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-decon',
@@ -58,6 +67,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Airway protected + >2h', description: 'Consider charcoal — anticholinergic effects delay gastric emptying', next: 'tca-ecg' },
       { label: 'Airway NOT protected', description: 'Intubate first or skip charcoal', next: 'tca-intubation' },
     ],
+
+    summary: 'Charcoal 1 g/kg if airway protected — anticholinergic delays gastric emptying so window may extend beyond 2h',
   },
   {
     id: 'tca-intubation',
@@ -67,6 +78,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**Indications:** GCS ≤12, seizures, hypoventilation with respiratory acidosis [16].\n\n⚠️ **CRITICAL: Avoid hypoventilation post-intubation** — respiratory acidosis worsens TCA toxicity by increasing free (unbound) drug, creating a vicious spiral [16][17].\n\n**Before intubation:**\n• Give [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) if QRS wide — allow minutes for CO₂ to blow off\n• Start vasopressor if hypotensive\n\n**Post-intubation:**\n• **Immediately hyperventilate** — target ETCO₂ ~25-30 mmHg while bicarb takes effect [16][17]\n• Sedate with [Propofol](#/drug/propofol/tca refractory seizure) (hemodynamically stable) or benzodiazepine (unstable) — both provide seizure prophylaxis\n• Consider [Activated Charcoal](#/drug/activated-charcoal/tca decontamination) 1 g/kg via NG once airway secured [16]\n\nIntubation should be done by the most experienced operator available.',
     citation: [16, 17],
     next: 'tca-ecg',
+
+    summary: 'CRITICAL: avoid hypoventilation post-intubation — respiratory acidosis worsens toxicity; hyperventilate to ETCO2 25-30',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -86,6 +100,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'QRS 100–160 ms', description: 'Sodium channel blockade — bicarbonate indicated.', next: 'tca-bicarb', urgency: 'urgent' },
       { label: 'QRS > 160 ms', description: 'High risk of VT/VF — aggressive treatment immediately.', next: 'tca-bicarb-aggressive', urgency: 'critical' },
     ],
+
+    summary: 'ECG is the single most important test — QRS >100 ms = seizure risk, >160 ms = VT/VF risk; R wave >3 mm aVR confirms blockade',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-ecg-low',
@@ -95,6 +112,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: 'QRS < 100 ms suggests low risk, but **do not be reassured** — toxicity can develop rapidly [1].\n\n**Still check:**\n• **R wave in aVR >3 mm** — may be positive even with normal QRS. Liebelt 1995 found aVR may be more sensitive than QRS for predicting seizures and arrhythmias [2].\n• R/S ratio >0.7 in aVR\n• Brugada-like pattern (coved ST elevation V1-V3)\n\n**Monitoring plan:**\n• Serial ECGs q15-30 min for first 2 hours [3]\n• Then q2h for minimum 6 total hours of observation\n• Continuous telemetry throughout\n\nIf QRS widens at any point → proceed immediately to bicarbonate protocol.',
     citation: [1, 2, 3],
     next: 'tca-disposition',
+
+    summary: 'QRS <100 ms low risk but can change rapidly — check R wave aVR >3 mm; serial ECGs q15-30 min for 2 hours',
   },
   {
     id: 'tca-avr',
@@ -104,6 +123,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**R wave amplitude >3 mm in lead aVR** is a sensitive marker of sodium channel blockade [2].\n\n• R/S ratio >0.7 in aVR\n• **Terminal 40 ms rightward axis deviation** — the sodium channel blockade preferentially affects the right bundle, causing rightward shift of the terminal QRS vector\n• May be positive even when QRS <100 ms\n\nLiebelt et al (1995): In TCA overdose, aVR findings had **sensitivity 81%** for predicting seizures and arrhythmias — comparable to QRS >100 ms [2].\n\n**Brugada-like pattern:**\n• Coved ST elevation in V1-V3 with RBBB pattern\n• Important NOT to confuse with true Brugada syndrome\n• Pattern resolves with treatment [3]',
     citation: [2, 3],
     next: 'tca-bicarb',
+
+    summary: 'aVR R wave >3 mm: 81% sensitivity for seizures/arrhythmias — may be positive even with normal QRS',
+    skippable: true,
   },
   {
     id: 'tca-ecg-monitor',
@@ -113,6 +135,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**ECG monitoring protocol:**\n• Serial 12-lead ECGs every 15-30 min for first 2 hours [3]\n• Continuous telemetry — minimum 6 hours after last ECG abnormality resolves [5]\n• QRS can widen rapidly — any change mandates reassessment\n\n**QT prolongation:**\n• Present due to K+ channel blockade\n• Less prognostically significant than QRS widening\n• Torsades de pointes is uncommon as long as the patient remains tachycardic [17]\n\n**When to recheck:**\n• After each bicarbonate bolus\n• After any clinical change (seizure, hypotension, arrhythmia)\n• Before any disposition decision',
     citation: [3, 5, 17],
     next: 'tca-bicarb',
+
+    summary: 'Serial ECGs q15-30 min for 2h, then q2h for 6h total — any QRS widening mandates reassessment',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -138,6 +162,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Serial ECG q15-30 min. ABG/VBG q30-60 min. Monitor Na (keep ≤155), K+ (replete aggressively), iCa.',
     },
     next: 'tca-bicarb-goals',
+
+    summary: 'NaHCO3 1-2 mEq/kg IV push q3-5 min until QRS narrows — dual action: sodium loading + alkalosis; no ceiling dose',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-bicarb-aggressive',
@@ -167,6 +194,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Continuous ECG. ABG q30 min. Na ≤155 mEq/L. K+ (replete). Hyperventilate to ETCO2 25-30 if intubated.',
     },
     next: 'tca-bicarb-goals',
+
+    summary: 'QRS >160 ms = high VT/VF risk — aggressive bicarb boluses + hyperventilate if intubated; consider lidocaine early',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-bicarb-goals',
@@ -176,6 +206,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**Target goals** [16][18]:\n• **QRS < 100 ms** (if possible — may not be achievable if severely prolonged)\n• **Serum pH 7.50–7.55** — achieve via bicarb + hyperventilation if intubated [16]\n• **Serum Na ≤ 155 mEq/L** — bicarb amps are extremely hypertonic (1000 mOsm/L) [12]\n\n**Monitor closely** [16]:\n• ABG/VBG q30-60 min to guide therapy\n• Serum K+ — alkalosis causes acute **hypokalemia** (K+ shifts intracellularly). Replete simultaneously [19]\n• Ionized calcium — drops with alkalosis\n• Serial ECGs q15-30 min\n\n⚠️ **Excessive alkalinization (pH >7.55) may increase arrhythmia or seizure risk** [13].\n⚠️ **Paradoxical CNS acidosis** — CO₂ crosses the BBB faster than HCO₃⁻, potentially worsening central effects acutely [16].',
     citation: [12, 13, 16, 18, 19],
     next: 'tca-bicarb-infusion',
+
+    summary: 'Target QRS <100 ms, pH 7.50-7.55, Na ≤155 — replete K+ aggressively; excessive alkalinization (>7.55) increases risk',
+    safetyLevel: 'warning',
   },
   {
     id: 'tca-bicarb-infusion',
@@ -196,6 +229,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Serial ECG q2h. ABG q4-6h. Wean slowly. Watch for rebound QRS widening (TCA t1/2 = 24-36h).',
     },
     next: 'tca-bicarb-refractory',
+
+    summary: 'Maintenance: 150 mEq in 1L D5W; continue until QRS <100 ms for ≥6h — TCA half-life 24-36h, toxicity prolonged',
   },
   {
     id: 'tca-bicarb-refractory',
@@ -209,6 +244,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Hypotension present', description: 'SBP <90 or MAP <65', next: 'tca-hypotension', urgency: 'urgent' },
       { label: 'Stable — continue monitoring', description: 'QRS improving, hemodynamically stable', next: 'tca-seizure' },
     ],
+
+    summary: 'Bicarb-refractory: hypertonic saline 3%, hyperventilation, lidocaine — question diagnosis if no response',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -225,6 +262,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Yes — active seizure', description: 'Treat immediately with benzodiazepines + bicarbonate', next: 'tca-seizure-bzd', urgency: 'critical' },
       { label: 'No seizure activity', description: 'Continue to hemodynamic assessment', next: 'tca-hypotension' },
     ],
+
+    summary: 'Seizures cause acidosis → increases free TCA → worsens cardiac toxicity in lethal positive feedback loop',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-seizure-bzd',
@@ -253,6 +293,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Continuous ECG. Respiratory status. Give bicarb to counter seizure-induced acidosis.',
     },
     next: 'tca-seizure-refractory-q',
+
+    summary: 'BZDs first-line (GABA-A agonist counters TCA GABA antagonism) + simultaneous bicarb for acidosis',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-seizure-refractory-q',
@@ -264,6 +307,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Yes — seizure controlled', description: 'Continue to hemodynamic assessment', next: 'tca-hypotension' },
       { label: 'No — refractory to BZD', description: 'Escalate to second-line agents', next: 'tca-seizure-refractory', urgency: 'critical' },
     ],
+
+    summary: 'Assess BZD response — controlled seizure allows hemodynamic assessment; refractory needs escalation',
   },
   {
     id: 'tca-seizure-refractory',
@@ -292,6 +337,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Continuous EEG if paralyzed. BP closely (propofol). Respiratory status. Serum phenobarbital level.',
     },
     next: 'tca-hypotension',
+
+    summary: 'Propofol or phenobarbital for refractory seizures — do NOT use phenytoin/fosphenytoin (blocks Na channels, may cause arrest)',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-seizure-avoid',
@@ -301,6 +349,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '🚫 **Do NOT use these agents in TCA overdose:**\n\n• **Phenytoin / Fosphenytoin** — blocks sodium channels (Class IB), may worsen cardiac toxicity and precipitate arrhythmias [3][4][6]\n• **Carbamazepine** — sodium channel blocker\n• **Lamotrigine** — sodium channel blocker\n• **Lacosamide** — enhances slow inactivation of sodium channels\n\n**Safe antiepileptics in TCA overdose:**\n• Benzodiazepines (GABA-A agonists — directly counter TCA mechanism)\n• [Phenobarbital](#/drug/phenobarbital/TCA seizure) (GABA-A — different binding site than BZDs)\n• [Propofol](#/drug/propofol/TCA seizure) (GABA-A + NMDA)\n• [Levetiracetam](#/drug/levetiracetam/TCA seizure) (SV2A — no sodium channel activity)\n• [Valproate](#/drug/valproate/TCA seizure) (multiple mechanisms but minimal sodium channel effect)',
     citation: [3, 4, 6],
     next: 'tca-hypotension',
+
+    summary: 'AVOID phenytoin, carbamazepine, lamotrigine, lacosamide — all Na channel blockers; safe: BZDs, phenobarbital, propofol, levetiracetam',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -318,6 +369,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'No — hemodynamically stable', description: 'Proceed to disposition', next: 'tca-disposition' },
       { label: 'Wide-complex tachycardia', description: 'Ventricular arrhythmia management', next: 'tca-vtach', urgency: 'critical' },
     ],
+
+    summary: 'Three mechanisms of hypotension: alpha-1 blockade, Na channel impaired contractility, arrhythmias',
   },
   {
     id: 'tca-fluids',
@@ -327,6 +380,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**Initial fluid bolus:**\n• NS or LR 1-2L IV bolus [3]\n• If isotonic bicarbonate available (150 mEq in 1L D5W), use as the fluid — accomplishes two goals simultaneously [16]\n• **Avoid NS in large volumes** — may promote acidosis. Balanced crystalloid (LR, Plasmalyte) or isotonic bicarb preferred [16].\n\n⚠️ **Patients are often refractory to fluids alone** — most are not hypovolemic [16]. Do not delay vasopressors while waiting for fluid response.\n\n**Give [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) bolus** if not already given — indicated for hypotension not due to hypovolemia [16].',
     citation: [3, 16],
     next: 'tca-vasopressors',
+
+    summary: 'NS/LR 1-2L bolus — patients often refractory to fluids alone; do not delay vasopressors',
   },
   {
     id: 'tca-vasopressors',
@@ -359,6 +414,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Wide-complex tachycardia', description: 'Arrhythmia management needed', next: 'tca-vtach', urgency: 'critical' },
       { label: 'Refractory hypotension', description: 'Not responding to fluids + pressors + bicarb', next: 'tca-lipid', urgency: 'critical' },
     ],
+
+    summary: 'Norepinephrine first-line — alpha agonism counters TCA alpha-blockade; avoid pure beta-agonists',
+    safetyLevel: 'warning',
   },
   {
     id: 'tca-vtach',
@@ -387,6 +445,9 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'Continuous ECG. QRS width. Give bicarb first/simultaneously. Cardiovert if unstable.',
     },
     next: 'tca-lipid',
+
+    summary: 'Wide QRS often sinus tachy NOT VT — bicarb first, lidocaine for Na channel; AVOID amiodarone/Class IA/IC',
+    safetyLevel: 'critical',
   },
   {
     id: 'tca-lipid',
@@ -407,6 +468,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       monitoring: 'ROSC. Hemodynamics. Triglycerides (lipemia may interfere with labs). Consult toxicology.',
     },
     next: 'tca-ecmo',
+
+    summary: 'Lipid emulsion 1.5 mL/kg IV bolus — rescue therapy for cardiac arrest or refractory toxicity only',
   },
   {
     id: 'tca-ecmo',
@@ -416,6 +479,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     body: '**VA-ECMO** is the last resort for refractory TCA cardiac arrest or hemodynamic collapse [9][16][18].\n\n**Key principle:** TCA toxicity is **potentially REVERSIBLE** — aggressive bridge therapy can lead to full neurologic recovery [9][10].\n\n• Contact cardiac surgery/ECMO team EARLY if clinical trajectory suggests need\n• Case reports document full recovery after prolonged resuscitation with ECMO support [9]\n• Bridge therapy while TCA is metabolized and eliminated (half-life 24-36h)\n\n**When to consider:**\n• Cardiac arrest refractory to bicarb + lidocaine + lipid emulsion\n• Refractory shock despite maximum vasopressor support\n• Young patient with reversible cause',
     citation: [9, 10, 16, 18],
     next: 'tca-disposition',
+
+    summary: 'VA-ECMO is last resort — TCA toxicity is REVERSIBLE; bridge therapy can lead to full neurologic recovery',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -433,6 +498,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
       { label: 'Monitored bed', description: 'Asymptomatic, normal ECG, observation needed', next: 'tca-monitor' },
       { label: 'Discharge candidate', description: 'Asymptomatic ×6h, QRS <100ms, normal mental status', next: 'tca-discharge' },
     ],
+
+    summary: 'Psychiatric evaluation MANDATORY for intentional ingestions; disposition based on clinical status',
   },
   {
     id: 'tca-icu',

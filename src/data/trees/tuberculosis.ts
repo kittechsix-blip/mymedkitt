@@ -33,6 +33,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '[TB Steps Summary](#/info/tb-steps-summary) — quick reference.\n\nNearly **2 billion people** (~25% of world population) are infected with *Mycobacterium tuberculosis*. In 2024, an estimated **10.7 million** became ill with TB (131/100,000 incidence), and **1.23 million died**. [1]\n\nPrompt diagnosis facilitates timely treatment and minimizes community transmission. [1]\n\nThis consult covers:\n• ED evaluation and isolation decisions\n• Diagnostic workup (AFB, NAA, culture)\n• Drug-susceptible treatment (RIPE + 4-month regimen)\n• Latent TB treatment\n• Drug-resistant TB (MDR/XDR, BPaL/BPaLM)\n• HIV-TB co-infection management',
     citation: [1],
     next: 'tb-suspicion',
+
+    summary: '2 billion infected globally, 1.23 million deaths/yr — prompt diagnosis reduces transmission',
   },
   {
     id: 'tb-suspicion',
@@ -42,6 +44,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'Suspect pulmonary TB in patients with relevant **clinical manifestations** AND **epidemiologic risk factors**: [1]\n\n**Symptoms:**\n• Cough **>2–3 weeks** duration\n• Lymphadenopathy\n• Fevers, night sweats\n• Weight loss\n• Hemoptysis\n\n**Epidemiologic factors:**\n• History of prior TB infection or disease\n• Known or possible TB exposure\n• Past or present residence in / travel to TB-endemic area\n• Incarceration, homelessness, immigration\n• HIV infection or immunosuppression\n\n**Important:** Patients may report **no symptoms** — suspicion may be raised by incidental findings on unrelated evaluation. [1]\n\n[TB Risk Factors](#/info/tb-risk-factors) — detailed risk factor checklist.',
     citation: [1],
     next: 'tb-isolation',
+
+    summary: 'Cough >2-3wk + epidemiologic risk factors — prior TB, endemic travel, incarceration, HIV, immunosuppression',
+    skippable: true,
   },
   {
     id: 'tb-isolation',
@@ -63,6 +68,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         next: 'tb-specimen-type',
       },
     ],
+
+    summary: 'Airborne isolation (negative pressure, N95) for active cough + risk factors or positive AFB smear',
+    safetyLevel: 'critical',
   },
   {
     id: 'tb-specimen-type',
@@ -88,6 +96,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         next: 'tb-cxr',
       },
     ],
+
+    summary: 'Collect 3 sputum specimens 8+ hours apart (1 early morning) — induced sputum if cannot produce',
   },
   {
     id: 'tb-sputum-collection',
@@ -97,6 +107,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '**Expectorated sputum:**\n• Patient takes deep breaths, coughs forcefully\n• Collect in sterile container\n• Early morning specimen has highest yield\n\n**Induced sputum** (preferred if patient cannot produce):\n• Nebulize with **hypertonic saline (3–5%)**\n• 15–20 minutes of inhalation\n• Yields specimens comparable to bronchoscopy in many studies [1]\n\n**Collect 3 specimens** at least 8 hours apart — sensitivity increases with multiple specimens. [1]\n\n**Important:** Perform specimen collection in airborne isolation (negative pressure room or well-ventilated area with appropriate PPE).',
     citation: [1],
     next: 'tb-cxr',
+
+    summary: 'Deep breaths + forceful cough into sterile container; hypertonic saline 3-5% nebulization if unable to produce',
+    skippable: true,
   },
   {
     id: 'tb-bronch',
@@ -106,6 +119,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '**Indications for bronchoscopy:** [1]\n• Unable to produce sputum (even with induction)\n• Smear-negative sputum with high clinical suspicion\n• Need for tissue sampling\n\n**Bronchoalveolar lavage (BAL):**\n• Directed to affected lobe on imaging\n• Send for AFB smear, NAA testing, and mycobacterial culture\n• Higher yield than sputum in some smear-negative cases\n\n**Post-bronchoscopy sputum** — collect sputum specimen after bronchoscopy (may have higher yield). [1]\n\n**Infection control:** Bronchoscopy is an aerosol-generating procedure — perform in negative pressure room with full airborne precautions.',
     citation: [1],
     next: 'tb-cxr',
+
+    summary: 'BAL directed to affected lobe when sputum-negative — aerosol-generating, full airborne precautions required',
+    skippable: true,
   },
 
   // ===================================================================
@@ -120,6 +136,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     images: [{ src: 'images/tuberculosis/tb-cxr.jpg', alt: 'PA chest X-ray showing bilateral upper lobe infiltrates and right apical cavitation in advanced pulmonary TB', caption: 'Active pulmonary TB — bilateral upper lobe infiltrates with right apical cavitation. Classic pattern in immunocompetent patients. (Public domain)' }],
     citation: [1],
     next: 'tb-afb-naa',
+
+    summary: 'Upper lobe cavitation classic; HIV patients may have atypical/normal CXR — never treat based on CXR alone',
   },
   {
     id: 'tb-afb-naa',
@@ -129,6 +147,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '[AFB/NAA Interpretation Algorithm](#/info/tb-afb-naa-algorithm) — diagnostic decision aid.\n\n**AFB Smear (Ziehl-Neelsen or Fluorochrome):**\n• Rapid result (same day)\n• Sensitivity: **50–80%** for pulmonary TB (higher with cavitary disease)\n• Specificity: limited — positive smear could be non-tuberculous mycobacteria (NTM)\n• Fluorochrome staining is preferred (faster, more sensitive than Ziehl-Neelsen) [1]\n\n**Nucleic Acid Amplification (NAA) Testing:**\n• Rapid molecular detection of *M. tuberculosis* DNA\n• Results in **2–8 hours**\n• Sensitivity: **95–98%** in smear-positive, **60–77%** in smear-negative specimens [1]\n• **A positive NAA** (with or without AFB smear positivity) in a person at risk for TB with no prior treatment history is **considered sufficient for diagnosis** [1]\n\n**GeneXpert MTB/RIF:** Simultaneously detects *M. tuberculosis* AND rifampin resistance — preferred initial test where available. [1]',
     citation: [1],
     next: 'tb-afb-naa-result',
+
+    summary: 'AFB smear rapid but 50-80% sensitive; NAA 95-98% in smear-positive — positive NAA sufficient for diagnosis',
   },
   {
     id: 'tb-afb-naa-result',
@@ -161,6 +181,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         next: 'tb-smear-neg',
       },
     ],
+
+    summary: 'AFB+/NAA+ = treat; AFB-/NAA+ = treat (sufficient); AFB+/NAA- = consider NTM; AFB-/NAA- = clinical judgment',
   },
   {
     id: 'tb-afb-pos-naa-neg',
@@ -170,6 +192,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'When AFB smear is **positive** but NAA is **negative**: [1]\n\n• Most likely explanation: **non-tuberculous mycobacteria (NTM)** rather than TB\n• **Repeat NAA testing** on a new specimen — false-negative NAA can occur\n• Clinical context matters — if TB risk is high, **treat empirically** while awaiting culture\n• If repeat NAA remains negative and clinical suspicion is low → likely NTM\n\n**Do NOT delay isolation** — maintain airborne precautions until TB is excluded.\n\nCulture results (2–6 weeks) will definitively distinguish TB from NTM. [1]',
     citation: [1],
     next: 'tb-culture',
+
+    summary: 'AFB+/NAA- most likely NTM — repeat NAA, maintain isolation, treat empirically if high TB risk',
   },
   {
     id: 'tb-smear-neg',
@@ -179,6 +203,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'When both AFB smear and NAA are **negative**: [1]\n\n• TB is less likely but **not excluded** — smear-negative TB accounts for a significant proportion of cases\n• **Clinical judgment** is essential — if suspicion remains high:\n  → Continue isolation\n  → Repeat sputum collection\n  → Consider bronchoscopy for BAL\n  → Await culture results (2–6 weeks)\n\n• If clinical suspicion is **low** and alternative diagnosis is likely → discontinue isolation\n\n**HIV co-infection:** Smear-negative TB is more common in HIV patients. Consider **urine LAM antigen testing** (lipoarabinomannan) in HIV-positive patients with CD4 <200 — sensitivity ~50–60%, rapid point-of-care result. [1]',
     citation: [1],
     next: 'tb-culture',
+
+    summary: 'Smear-negative TB not excluded — consider bronchoscopy, urine LAM in HIV+ with CD4 <200',
   },
   {
     id: 'tb-culture',
@@ -188,6 +214,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'Culture is the **gold standard** for TB diagnosis and is essential for drug susceptibility testing (DST). [1]\n\n**Conventional culture (Löwenstein-Jensen solid media):**\n• Growth in **3–6 weeks** (slow but highly sensitive)\n• Allows full drug susceptibility testing\n\n**Rapid liquid culture (BACTEC MGIT 960):**\n• Growth detection in **1–3 weeks**\n• Preferred method due to faster time to detection [1]\n\n**Drug Susceptibility Testing (DST):**\n• Test all initial isolates for at least **isoniazid** and **rifampin** resistance\n• Results guide therapy — resistance changes the regimen entirely\n• Molecular DST (GeneXpert, line probe assays) can detect rifampin resistance within hours [1]\n\n**Important:** Culture ALL specimens — even when smear/NAA results are available. Culture provides definitive species identification and full susceptibility data.',
     citation: [1],
     next: 'tb-confirmed',
+
+    summary: 'Culture is gold standard — MGIT 960 detects in 1-3wk; DST on ALL isolates for INH and RIF resistance',
   },
   {
     id: 'tb-confirmed',
@@ -220,6 +248,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Isolate, notify public health, baseline labs, HIV testing — assess for drug resistance risk factors',
   },
 
   // ===================================================================
@@ -252,6 +282,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
       monitoring: 'Monthly sputum cultures until conversion. LFTs at baseline; monthly if risk factors. Visual acuity baseline and monthly (ethambutol). 2-month culture determines continuation phase duration.',
     },
     next: 'tb-2month-check',
+
+    summary: 'INH+RIF+PZA+EMB x2mo then INH+RIF x4mo — add pyridoxine B6 25-50mg daily to prevent neuropathy',
   },
   {
     id: 'tb-2month-check',
@@ -278,6 +310,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: '2-month culture + cavitation determines continuation phase — positive culture or cavity = extend to 9 months',
   },
   {
     id: 'tb-standard-continuation',
@@ -307,6 +341,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'Positive sputum culture at 2 months indicates **higher risk of treatment failure and relapse**. [2]\n\n**Immediate actions:**\n• **Repeat drug susceptibility testing** — rule out acquired resistance\n• **Extend continuation phase** to 7 months (9 months total minimum)\n• Ensure **directly observed therapy** — non-adherence is the most common cause\n• Assess for malabsorption, drug interactions, or incorrect dosing\n\n**If cultures remain positive at 4 months:** [2]\n• Consider treatment failure\n• Repeat DST with expanded panel\n• Consult TB specialist\n• Reassess regimen — may need to transition to drug-resistant TB protocol\n\n**Never add a single drug** to a failing regimen — this promotes resistance. [2]',
     citation: [2],
     next: 'tb-4month-regimen',
+
+    summary: 'Positive at 2mo = repeat DST, ensure DOT, extend to 9mo — never add single drug to failing regimen',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-4month-regimen',
@@ -328,6 +365,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     },
     next: 'tb-hepatotox',
     calculatorLinks: [{ id: 'tb-duration', label: 'Treatment Duration Guide' }],
+
+    summary: 'INH+RPT+MOX+PZA x4mo — strict criteria: non-cavitary, HIV-negative (or CD4>100), no FQ resistance',
+    skippable: true,
   },
   {
     id: 'tb-hepatotox',
@@ -349,6 +389,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'AST/ALT >3x ULN with symptoms OR >5x without = hepatotoxicity — stop hepatotoxic drugs',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-hepatotox-manage',
@@ -383,6 +426,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: 'TB infection (latent TB) = positive TST or IGRA with **no clinical, radiographic, or microbiologic evidence of active disease**. [3]\n\nTreatment of latent TB reduces reactivation risk by up to **90%**. [3]\n\n**Who to treat:** [3]\n• Positive TST or IGRA AND any of:\n  → Close contacts of active TB case\n  → HIV infection\n  → Immunosuppression (TNF-α inhibitors, transplant, chronic steroids ≥15 mg/day prednisone)\n  → Recent TST/IGRA conversion (within 2 years)\n  → Fibrotic changes on CXR consistent with prior untreated TB\n  → Injection drug use\n  → Healthcare workers',
     citation: [3],
     next: 'tb-latent-exclude',
+
+    summary: 'Positive TST/IGRA with no active disease — treatment reduces reactivation risk by up to 90%',
+    skippable: true,
   },
   {
     id: 'tb-latent-exclude',
@@ -392,6 +438,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '**Before starting latent TB treatment, MUST exclude active TB disease:** [3]\n\n**1. Symptom screen:**\n• Cough (any duration), fevers, night sweats, weight loss, hemoptysis\n• Any positive symptom → evaluate for active TB before treating latent\n\n**2. Chest radiography:**\n• Normal CXR → proceed with latent TB treatment\n• Abnormal CXR → sputum for AFB/culture before starting therapy\n• Old fibrotic changes without symptoms → may treat as latent if cultures negative\n\n**3. Assess comorbidities:** [3]\n• Check baseline LFTs if: age >35, hepatitis B/C, HIV, alcohol use, pregnancy/postpartum, or concurrent hepatotoxic meds\n• Document HIV status\n• Evaluate for drug interactions (especially rifamycin-based regimens)',
     citation: [3],
     next: 'tb-latent-regimen',
+
+    summary: 'Must exclude active TB before treating latent — symptom screen, CXR, baseline LFTs if risk factors',
   },
   {
     id: 'tb-latent-regimen',
@@ -422,6 +470,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         next: 'tb-latent-9h',
       },
     ],
+
+    summary: 'Rifamycin-based preferred (shorter, better adherence) — 3HP, 4R, 3HR, or 9H based on patient factors',
   },
   {
     id: 'tb-latent-3hp',
@@ -545,6 +595,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Monoresistant, MDR (INH+RIF), pre-XDR/XDR — resistance changes regimen entirely, expert consultation required',
   },
   {
     id: 'tb-inh-mono',
@@ -575,6 +627,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '**MDR-TB = resistance to at least INH + RIF.** [4]\n\nThis requires **expert consultation** — management should be undertaken by individuals with TB expertise or in close consultation with such individuals. [4]\n\n**Guiding principles:** [4]\n• **Never add a single drug** to a failing regimen\n• Include at least **4–5 effective drugs** in the regimen\n• Use DST results to guide drug selection\n• Prioritize WHO Group A drugs (fluoroquinolones, bedaquiline, linezolid)\n• Duration: typically **9–20 months** depending on regimen\n\n**WHO drug grouping for MDR-TB regimens:** [4,10]\n• **Group A (preferred):** Fluoroquinolones, bedaquiline, linezolid\n• **Group B (add next):** Clofazimine, cycloserine\n• **Group C (when A+B insufficient):** Ethambutol, delamanid, pyrazinamide, imipenem, amikacin\n\n**Two regimen approaches available:**\n→ Abbreviated (BPaL/BPaLM) — 6–9 months\n→ Longer individualized — 15–20 months',
     citation: [4, 10],
     next: 'tb-bpal',
+
+    summary: 'MDR-TB: 4-5 effective drugs, WHO Group A first (FQ, bedaquiline, linezolid) — never add single drug to failing regimen',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-bpal',
@@ -604,6 +659,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     },
     next: 'tb-mdr-result',
     calculatorLinks: [{ id: 'tb-interaction', label: 'Drug Interaction Checker' }],
+
+    summary: 'BPaL x26wk: bedaquiline + pretomanid + linezolid — QTc monitoring monthly, weekly CBC for linezolid',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-mdr-result',
@@ -627,6 +685,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     body: '[HIV-TB Considerations](#/info/tb-hiv-considerations) — ARV interactions reference.\n\nTB treatment in HIV-positive patients requires simultaneous consideration of: [5]\n\n• **Anti-TB regimen** — same RIPE backbone, but drug interactions with ARVs\n• **Antiretroviral therapy (ART)** — timing, drug selection, interaction management\n• **Immune reconstitution inflammatory syndrome (IRIS)** — paradoxical worsening\n• **Duration adjustments** — may need extended therapy\n\n**Key principles:** [5]\n• Start TB treatment immediately\n• Start ART within **2 weeks** if CD4 <50 (unless CNS TB — delay to 8 weeks)\n• Start ART within **8 weeks** for all other CD4 counts\n• **Never delay TB treatment** while waiting for ART',
     citation: [5],
     next: 'tb-hiv-art',
+
+    summary: 'Start TB treatment immediately, ART within 2wk if CD4 <50 (8wk for CNS TB) — never delay TB treatment',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-hiv-art',
@@ -637,6 +698,9 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
     citation: [5],
     calculatorLinks: [{ id: 'tb-interaction', label: 'Drug Interaction Checker' }],
     next: 'tb-hiv-duration',
+
+    summary: 'Rifampin = potent CYP3A4 inducer — dolutegravir 50mg BID, efavirenz standard dose; PIs incompatible',
+    safetyLevel: 'warning',
   },
   {
     id: 'tb-hiv-duration',
@@ -664,6 +728,8 @@ export const TUBERCULOSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Assess clinical response — good = standard duration, poor = extend, paradoxical worsening = suspect IRIS',
   },
   {
     id: 'tb-hiv-monitoring',

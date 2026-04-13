@@ -24,6 +24,8 @@ export const TORSADES_DE_POINTES_NODES = [
         images: [{ src: 'images/torsades/torsades-ecg.png', alt: 'Torsades de Pointes ECG strip showing characteristic sinusoidal waxing and waning QRS amplitude', caption: 'Torsades de Pointes — "twisting of the points" morphology' }],
         citation: [1, 2, 3],
         next: 'tdp-stability',
+        summary: 'Polymorphic VT with prolonged QT — sinusoidal waxing/waning, short-long-short initiation, QTc >500ms doubles risk',
+        skippable: true,
     },
     {
         id: 'tdp-stability',
@@ -36,6 +38,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Unstable', description: 'Hypotension, altered mental status, chest pain', next: 'tdp-unstable', urgency: 'urgent' },
             { label: 'Stable', description: 'Awake, alert, adequate perfusion', next: 'tdp-stable' },
         ],
+        summary: 'Determine pulseless vs unstable vs stable to guide immediate intervention',
     },
     {
         id: 'tdp-pulseless',
@@ -45,6 +48,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Unsynchronized defibrillation** per standard ACLS energy dosing.\n\n**⚠️ Do NOT give amiodarone** — it prolongs QT and will worsen TdP.\n\n**During resuscitation:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) 4 g IV push (can give rapidly in arrest)\n• Standard ACLS otherwise (epinephrine, CPR)\n• Repeat defibrillation as needed\n\n**After ROSC** → proceed to acute management protocol, then [Post-Cardiac Arrest Care](#/tree/post-rosc).\n\n← [Return to Cardiac Arrest Hub](#/tree/cardiac-arrest)',
         citation: [1, 4],
         next: 'tdp-pulseless-rosc',
+        summary: 'Unsynchronized defib, Mg 4g IV push, standard ACLS — do NOT give amiodarone',
+        safetyLevel: 'critical',
     },
     {
         id: 'tdp-pulseless-rosc',
@@ -56,6 +61,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Yes — ROSC achieved', description: 'Pulse restored', next: 'tdp-mg-protocol' },
             { label: 'No — Continue ACLS', description: 'Ongoing arrest', next: 'tdp-pulseless' },
         ],
+        summary: 'Assess for return of spontaneous circulation after defibrillation',
     },
     {
         id: 'tdp-unstable',
@@ -65,6 +71,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Synchronized cardioversion** at standard energy dosing.\n\n**Simultaneously:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) **4 g IV over 20 min** (or faster if actively deteriorating)\n• Stop all QT-prolonging medications\n• Obtain baseline electrolytes STAT (K+, Mg, Ca, iCa)\n\n**⚠️ Do NOT give amiodarone or procainamide.**\n\nAfter initial stabilization → proceed to full magnesium protocol.',
         citation: [1, 2],
         next: 'tdp-mg-protocol',
+        summary: 'Synchronized cardioversion + Mg 4g IV over 20min — stop all QT-prolonging meds, no amiodarone',
+        safetyLevel: 'critical',
     },
     {
         id: 'tdp-stable',
@@ -74,6 +82,7 @@ export const TORSADES_DE_POINTES_NODES = [
         body: 'Patient is hemodynamically stable with TdP on monitor.\n\n**Immediate actions while assessing etiology:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) **4 g IV over 20 min** — start immediately regardless of serum Mg level\n• Stop all potentially QT-prolonging medications\n• STAT electrolytes: K+, Mg, Ca, iCa, phosphate\n• Continuous cardiac monitoring\n• 12-lead ECG for baseline QTc measurement\n\nNow determine the underlying cause — **acquired vs congenital** — as treatment differs significantly.',
         citation: [1, 3],
         next: 'tdp-etiology',
+        summary: 'Start Mg 4g IV regardless of serum level, stop QT drugs, STAT electrolytes, determine acquired vs congenital',
     },
     // =====================================================================
     // MODULE 2: ACQUIRED VS CONGENITAL
@@ -89,6 +98,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Congenital LQTS', description: 'Known or strongly suspected hereditary LQTS', next: 'tdp-congenital' },
             { label: 'Unknown / Uncertain', description: 'Cannot determine etiology acutely', next: 'tdp-unknown' },
         ],
+        summary: 'Acquired (>95% ED) vs congenital LQTS — treatment is fundamentally different',
     },
     {
         id: 'tdp-acquired',
@@ -98,6 +108,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Most common cause of TdP in the ED (>95%).**\n\n**Common triggers:**\n• **Medications** — antiarrhythmics (sotalol, dofetilide), antibiotics (fluoroquinolones, macrolides), antipsychotics (haloperidol, ziprasidone), antiemetics (ondansetron IV), methadone, SSRIs (citalopram)\n• **Electrolytes** — hypokalemia (most important), hypomagnesemia, hypocalcemia\n• **Bradycardia** — any cause (pause-dependent TdP)\n• **Structural heart disease** — CHF with reduced EF\n• **Drug interactions** — CYP3A4/2D6 inhibitors + QT substrate\n\n**Multiple risk factors are additive** — one drug alone may not prolong QT enough, but add hypokalemia + another drug → TdP.\n\nProceed to acute magnesium protocol.',
         citation: [1, 5, 6],
         next: 'tdp-mg-protocol',
+        summary: 'Drugs, electrolytes, bradycardia — multiple risk factors are additive, common ED culprits listed',
+        skippable: true,
     },
     {
         id: 'tdp-congenital',
@@ -107,6 +119,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**CRITICAL: Treatment of congenital LQTS is fundamentally different from acquired.**\n\n**In congenital LQTS:**\n• **Beta-blockers are FIRST-LINE** (nadolol, propranolol) — reduce adrenergic triggers\n• **Isoproterenol is CONTRAINDICATED** — paradoxically prolongs QT and increases TdP risk\n• Triggered by exercise, emotional stress, auditory stimuli (varies by LQTS type)\n\n**Acute management:**\n• IV Magnesium (same dosing as acquired)\n• IV beta-blocker (esmolol or propranolol)\n• Transvenous pacing if bradycardic\n• Avoid ALL sympathomimetics\n\n**Prognosis:** Untreated mortality >50%; with beta-blockers + ICD <10%.',
         citation: [3, 7],
         next: 'tdp-congenital-mgmt',
+        summary: 'Beta-blockers first-line, isoproterenol CONTRAINDICATED — opposite of acquired TdP treatment',
+        safetyLevel: 'critical',
     },
     {
         id: 'tdp-congenital-mgmt',
@@ -126,6 +140,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**When uncertain, treat as acquired (safer default).**\n\n**Reasoning:**\n• Acquired TdP is >95% of cases in the ED\n• Magnesium is beneficial in both acquired and congenital\n• Overdrive pacing is safe in both\n• Isoproterenol is safe in acquired but harmful in congenital — but you will only reach isoproterenol if refractory to Mg + pacing\n\n**Gather history while treating:**\n• Family history of sudden cardiac death or syncope\n• Prior ECGs (was QT prolonged at baseline?)\n• Current medication list — use QT Drug Checker\n• Recent electrolyte panels\n• Age of onset of symptoms',
         citation: [1, 3],
         next: 'tdp-mg-protocol',
+        summary: 'When uncertain treat as acquired — Mg safe in both, gather history while treating',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: ACUTE MANAGEMENT
@@ -138,6 +154,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**The cornerstone of TdP management — give to ALL patients regardless of serum Mg level.**\n\n[Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes)\n\n**EMCrit/Farkas Protocol:**\n• **Bolus:** 4 g IV over 20 min (or faster if pulseless/unstable)\n• **Infusion:** 1 g/hr × 4 hours, then 0.5 g/hr × 20 hours\n• **Target serum Mg:** 3.5–5.0 mg/dL (much higher than standard repletion of >2)\n\n**Why give even if Mg is "normal"?**\n• Serum Mg does not reflect intracellular stores\n• Intracellular Mg depletion suppresses early afterdepolarizations (EADs)\n• Covers drug washout period (dofetilide t½ = 10h, amiodarone much longer)\n\n**Monitor for Mg toxicity:** loss of DTRs (first sign), respiratory depression\n**Antidote:** [Calcium Gluconate](#/drug/calcium-gluconate/hypermagnesemia) 1 g IV\n\n**Renal failure:** use intermittent boluses instead of continuous infusion.',
         citation: [1, 2, 8],
         next: 'tdp-mg-response',
+        summary: 'Mg 4g IV bolus then 1g/hr x4h then 0.5g/hr x20h — target serum Mg 3.5-5.0, give even if "normal"',
+        safetyLevel: 'warning',
     },
     {
         id: 'tdp-mg-response',
@@ -150,6 +168,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Recurrent Episodes', description: 'TdP episodes recurring despite Mg', next: 'tdp-overdrive', urgency: 'urgent' },
             { label: 'Refractory', description: 'Ongoing TdP despite Mg bolus', next: 'tdp-overdrive', urgency: 'critical' },
         ],
+        summary: 'Assess rhythm status after Mg bolus — converting, recurrent, or refractory',
     },
     {
         id: 'tdp-mg-success',
@@ -159,6 +178,7 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**TdP has terminated. Continue magnesium infusion per protocol.**\n\n• Continue Mg infusion: 1 g/hr × 4h → 0.5 g/hr × 20h\n• Target serum Mg 3.5–5.0 mg/dL\n• Monitor serum Mg q2–4h\n\n**Now address the underlying cause:**\n• Stop all QT-prolonging drugs\n• Correct electrolytes aggressively\n• Identify and treat precipitating factors\n\nProceed to drug review and electrolyte correction.',
         citation: [1],
         next: 'tdp-stop-drugs',
+        summary: 'TdP terminated — continue Mg infusion protocol, address underlying cause',
     },
     {
         id: 'tdp-overdrive',
@@ -168,6 +188,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**For TdP refractory to or recurrent despite magnesium.**\n\n**Overdrive Pacing (preferred):**\n• **Transvenous pacing** at 90–110 bpm (up to 140 bpm if needed)\n• Eliminates the short-long-short sequences that trigger TdP\n• Preferred over pharmacologic approach when available\n\n**Pharmacologic Overdrive (bridge to pacing):**\n• [Isoproterenol](#/drug/isoproterenol/torsades de pointes) **1–10 mcg/min IV**, titrate to HR 90–110 bpm\n• Start at 2 mcg/min, increase every 3–5 min\n• **⚠️ ACQUIRED LQTS ONLY** — contraindicated in congenital LQTS\n• May cause hypotension (beta-2 vasodilation) — use norepinephrine if needed\n• Monitor K+ (beta-agonist shifts K+ intracellularly)\n\n**Mechanism:** Increasing heart rate → shortens QT interval → suppresses EADs that trigger TdP.',
         citation: [1, 2, 3],
         next: 'tdp-lidocaine',
+        summary: 'Transvenous pacing 90-110bpm preferred; isoproterenol 1-10mcg/min as bridge — acquired LQTS only',
+        safetyLevel: 'warning',
     },
     {
         id: 'tdp-lidocaine',
@@ -177,6 +199,7 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Lidocaine is one of the few antiarrhythmics SAFE in TdP.**\n\n[Lidocaine](#/drug/lidocaine/torsades de pointes)\n\n• **Loading:** 1–1.5 mg/kg IV push over 2 min\n• **Infusion:** 1–4 mg/min continuous\n• May repeat bolus 0.5–0.75 mg/kg q5–10 min (max 3 mg/kg total)\n\n**Why lidocaine works:**\n• Class IB antiarrhythmic — **shortens** QT interval (unlike Class IA/III which prolong QT)\n• Suppresses triggered activity and early afterdepolarizations\n• Competes for sodium channels without prolonging repolarization\n\n**Use when TdP is refractory to magnesium + overdrive pacing.**',
         citation: [1, 2, 9],
         next: 'tdp-avoid',
+        summary: 'Lidocaine 1-1.5mg/kg IV — Class IB shortens QT, safe in TdP, use if refractory to Mg + pacing',
     },
     {
         id: 'tdp-avoid',
@@ -186,6 +209,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**These drugs prolong QT and WILL worsen TdP:**\n\n• **Amiodarone** — Class III, prolongs QT significantly. The most common error in TdP management.\n• **Procainamide** — Class IA, prolongs QT\n• **Sotalol** — Class III, prolongs QT\n• **Beta-blockers** — in acquired TdP, can worsen pause-dependent mechanism (appropriate in congenital LQTS)\n• **Any Class IA or Class III antiarrhythmic**\n• **Ibutilide, dofetilide, dronedarone, flecainide**\n\n**Safe antiarrhythmics in TdP:**\n• Lidocaine (Class IB — shortens QT)\n• Magnesium (electrolyte/membrane stabilizer)\n\n**If the standard ACLS "VT" protocol is followed with amiodarone, the patient may worsen or die.**',
         citation: [1, 2, 4],
         next: 'tdp-refractory',
+        summary: 'Amiodarone prolongs QT and WILL worsen TdP — most common lethal error in TdP management',
+        safetyLevel: 'critical',
     },
     {
         id: 'tdp-refractory',
@@ -197,6 +222,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Resolved', description: 'Sinus rhythm maintained', next: 'tdp-stop-drugs' },
             { label: 'Still Refractory', description: 'TdP persists despite all measures', next: 'tdp-dispo-refractory', urgency: 'critical' },
         ],
+        summary: 'Assess rhythm after full protocol — Mg + overdrive pacing/isoproterenol + lidocaine',
     },
     // =====================================================================
     // MODULE 4: DRUG & ELECTROLYTE CORRECTION
@@ -209,6 +235,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Review and discontinue ALL medications that prolong QT.**\n\nUse the **QT Drug Checker** tool in the toolbar to search specific medications.\n\n**Most common ED culprits:**\n• **Antiarrhythmics:** amiodarone, sotalol, dofetilide, procainamide\n• **Antibiotics:** fluoroquinolones (moxifloxacin > levofloxacin), macrolides (azithromycin, erythromycin), fluconazole\n• **Antipsychotics:** haloperidol (IV >> oral), droperidol, ziprasidone\n• **Antiemetics:** ondansetron (IV high-dose), droperidol\n• **Antidepressants:** citalopram, escitalopram\n• **Opioids:** methadone (dose-dependent)\n\n**Drug interactions amplify risk:**\n• CYP3A4 inhibitors (azoles, macrolides) + QT substrate\n• Multiple QT drugs concurrently\n• QT drug + hypokalemia/hypomagnesemia',
         citation: [5, 6],
         next: 'tdp-electrolytes',
+        summary: 'Review and stop ALL QT-prolonging meds — antiarrhythmics, FQs, macrolides, antipsychotics, methadone',
+        safetyLevel: 'warning',
     },
     {
         id: 'tdp-electrolytes',
@@ -218,6 +246,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Target electrolyte levels for TdP management:**\n\n**Potassium: >4.5 mEq/L**\n• [KCl IV](#/drug/potassium-chloride-iv/hypokalemia) — most important modifiable risk factor\n• Hypokalemia prolongs QT and is refractory until Mg is corrected\n• Central line preferred for rapid repletion (20 mEq/hr via central, 10 mEq/hr peripheral)\n\n**Magnesium: 3.5–5.0 mg/dL**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/torsades de pointes) — continue infusion per EMCrit protocol\n• Must correct Mg before K+ repletion will be effective\n\n**Calcium: Normalize**\n• [Calcium Gluconate](#/drug/calcium-gluconate/hypocalcemia) if ionized calcium low\n• Hypocalcemia prolongs QT\n\n**Recheck electrolytes every 2 hours** during active management.',
         citation: [1, 8],
         next: 'tdp-risk-factors',
+        summary: 'Target K >4.5, Mg 3.5-5.0, normalize Ca — correct Mg before K repletion will be effective',
+        safetyLevel: 'warning',
     },
     {
         id: 'tdp-risk-factors',
@@ -227,6 +257,8 @@ export const TORSADES_DE_POINTES_NODES = [
         body: '**Non-Modifiable Risk Factors:**\n• Female sex (longer baseline QTc)\n• Age >65 years\n• Congenital LQTS (any type)\n• Structural heart disease (LVH, CHF)\n\n**Modifiable/Treatable Risk Factors:**\n• Hypokalemia (most important)\n• Hypomagnesemia\n• Hypocalcemia\n• Bradycardia (any cause)\n• QT-prolonging medications (especially multiple concurrent)\n• CYP3A4/2D6 inhibitors with QT substrate\n• Heart failure with reduced EF\n• Hepatic/renal insufficiency (impaired drug clearance)\n• IV administration of QT drugs (vs oral — higher peak levels)\n• Rapid infusion rates\n• Diuretic-induced electrolyte losses\n• Hypothermia\n\n**Risk is multiplicative** — a single risk factor rarely causes TdP alone. The combination of drug + electrolyte abnormality + structural heart is the classic scenario.',
         citation: [5, 6, 10],
         next: 'tdp-disposition',
+        summary: 'Risk is multiplicative — drug + electrolyte + structural heart is classic scenario',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -242,6 +274,7 @@ export const TORSADES_DE_POINTES_NODES = [
             { label: 'Recurrent', description: 'Multiple episodes despite Mg, requiring pacing/isoproterenol', next: 'tdp-dispo-recurrent', urgency: 'urgent' },
             { label: 'Refractory', description: 'Persistent TdP despite all measures', next: 'tdp-dispo-refractory', urgency: 'critical' },
         ],
+        summary: 'All TdP patients require ICU — determine level of intervention needed',
     },
     {
         id: 'tdp-dispo-stable',

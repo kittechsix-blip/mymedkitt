@@ -36,6 +36,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**North American venomous snakes:**\n- **Pit vipers (Crotalinae)** — 99% of US venomous bites\n  - Rattlesnakes (50-55%)\n  - Copperheads (30-45%)\n  - Cottonmouths/water moccasins\n- **Coral snakes (Elapidae)** — ~1% of bites\n\n**Immediate Actions:**\n1. Remove jewelry/constrictive items\n2. Immobilize extremity at heart level\n3. Mark leading edge of swelling with time\n4. Large-bore IV access\n5. Baseline labs: CBC, PT/INR, PTT, fibrinogen, BMP, CK, T&S\n\n**DO NOT:**\n- Apply ice or cold water\n- Use tourniquet or constrictive bands\n- Incise and suction ("cut and suck")\n- Give NSAIDs (bleeding risk)\n\n**20-25% of pit viper bites are "dry"** — no venom injected. [1][2]',
     citation: [1, 2],
     next: 'snake-id',
+
+    summary: 'Remove jewelry, immobilize, mark swelling edge with time, baseline labs — do NOT ice, tourniquet, or incise; 20-25% are dry bites',
   },
 
   {
@@ -58,6 +60,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Pit vipers cause significant local swelling; coral snakes cause minimal local but delayed neurotoxicity — treat by presentation if unidentified',
   },
 
   // =====================================================================
@@ -76,6 +80,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       { id: 'snake-severity', label: 'Severity Score' },
     ],
     next: 'snake-pit-severity-grade',
+
+    summary: 'Serial circumference measurements q30-60min; labs requiring antivenom: plt <100K, fibrinogen <100, INR >3, PTT >50',
   },
 
   {
@@ -108,6 +114,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Grade 0-3: dry (fang marks only) to severe (rapid progression, hypotension, coagulopathy); copperheads often mild',
   },
 
   {
@@ -118,6 +126,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**No envenomation detected — observation protocol:**\n\n**Observation Period:**\n- Minimum 8 hours (some recommend 12-24h)\n- Serial exams every 2-4 hours\n- Repeat labs before discharge\n\n**Tetanus prophylaxis** if not current.\n\n**Wound care:**\n- Clean with soap and water\n- No prophylactic antibiotics (unless infection signs)\n\n**Discharge criteria:**\n- No progression of swelling\n- Normal repeat labs\n- No systemic symptoms\n- Able to tolerate PO\n\n**Return precautions:**\n- Progressive swelling\n- Bleeding, bruising\n- Numbness, tingling\n- Difficulty breathing\n\n**20-25% of pit viper bites are dry.** [1][2]',
     citation: [1, 2],
     next: 'snake-dispo-decision',
+
+    summary: 'Observe minimum 8hr, repeat labs before discharge, tetanus prophylaxis — 20-25% of pit viper bites are dry',
+    skippable: true,
   },
 
   {
@@ -139,6 +150,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         next: 'snake-antivenom-decision',
       },
     ],
+
+    summary: 'Copperhead bites often managed without antivenom; rattlesnake bites have lower threshold for antivenom; watch for progression',
   },
 
   {
@@ -152,6 +165,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       { id: 'snake-antivenom', label: 'Antivenom Dosing' },
     ],
     next: 'snake-antivenom-decision',
+
+    summary: 'Antivenom indicated for progressive swelling, systemic toxicity, or lab abnormalities — antivenom treats swelling, NOT fasciotomy',
+
   },
 
   {
@@ -184,6 +200,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous hemodynamic monitoring. Serial labs q4-6h. Airway reassessment for head/neck bites. Watch for progression despite treatment.',
     },
     next: 'snake-antivenom-decision',
+
+    summary: 'High-dose antivenom (8-12 CroFab or 10+ Anavip); treat coagulopathy with antivenom FIRST, blood products only for active bleeding',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -209,6 +228,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         next: 'snake-anavip',
       },
     ],
+
+    summary: 'CroFab (shorter half-life, needs maintenance) vs Anavip (longer half-life, no maintenance); pediatric dose = adult dose',
   },
 
   {
@@ -233,6 +254,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Monitor for anaphylaxis during infusion. Serial exams q30-60 min post-infusion. Repeat labs at 6, 12, 24 hours. Watch for recurrence phenomenon days 2-7.',
     },
     next: 'snake-response-assess',
+
+    summary: 'CroFab 4-6 vials (severe: 8-12) in 250mL NS; start slow 25-50mL/hr x10min then 250mL/hr; maintenance 2 vials at 6/12/18hr',
   },
 
   {
@@ -257,6 +280,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Monitor for anaphylaxis during infusion. Serial exams q30-60 min post-infusion. Repeat labs at 6, 12, 24 hours. Lower recurrence risk than CroFab due to longer half-life.',
     },
     next: 'snake-response-assess',
+
+    summary: 'Anavip 10 vials over 60min; repeat hourly until control; no scheduled maintenance needed; 4 vials PRN for recurrence',
   },
 
   {
@@ -283,6 +308,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         next: 'snake-allergy',
       },
     ],
+
+    summary: 'Assess 30-60min post-infusion: swelling halted, systemic symptoms improving, labs stabilizing = initial control',
   },
 
   {
@@ -315,6 +342,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Serial exams q2-4h. Repeat labs at 6, 12, 24 hours. Watch for recurrence phenomenon - peak risk days 2-7. Follow-up labs days 2-3 and 5-7 if rattlesnake or antivenom given.',
     },
     next: 'snake-special-pops',
+
+    summary: 'CroFab: 32-50% late hematologic recurrence days 2-7; follow-up labs days 2-3 and 5-7 for all rattlesnake/antivenom cases',
   },
 
   {
@@ -344,6 +373,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Serial exams q30-60 min. Repeat labs after each antivenom dose. Monitor for control: swelling halted, systemic symptoms improving, labs stabilizing.',
     },
     next: 'snake-response-assess',
+
+    summary: 'No maximum dose — repeat antivenom until control; persistent coagulopathy = more antivenom, NOT blood products alone',
+    safetyLevel: 'warning',
   },
 
   {
@@ -373,6 +405,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'Continuous monitoring during and after epinephrine administration. When stable, restart antivenom at slower rate with premedication.',
     },
     next: 'snake-special-pops',
+
+    summary: 'Stop infusion, epinephrine 0.3-0.5mg IM; when stable restart at slower rate — antivenom benefit usually outweighs reaction risk',
+    safetyLevel: 'warning',
   },
 
   {
@@ -383,6 +418,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Observation without antivenom:**\n\n**Monitoring:**\n- Serial exams q30-60 min × 4h, then q2h\n- Mark swelling edge with time\n- Circumference measurements at fixed landmarks\n\n**Repeat labs:**\n- At 6 hours (minimum)\n- Before discharge\n\n**Indications to give antivenom:**\n- Swelling crosses major joint\n- Systemic symptoms develop\n- Lab abnormalities:\n  - Platelets < 100,000\n  - Fibrinogen < 100\n  - INR > 3.0\n  - PTT > 50\n\n**Copperhead bites:**\n- Often mild\n- CDU observation 12-24h often sufficient\n- 5% readmission rate [1][2]',
     citation: [1, 2],
     next: 'snake-special-pops',
+
+    summary: 'Serial exams q30-60min x4hr then q2h; repeat labs at 6hr minimum; give antivenom if crosses joint or labs abnormal',
   },
 
   // =====================================================================
@@ -419,6 +456,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         next: 'snake-dispo-decision',
       },
     ],
+
+    summary: 'Screen for pediatric, pregnant, or head/neck bite — each has specific management considerations',
   },
 
   {
@@ -429,6 +468,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Pediatric snake envenomation:**\n\n**Key Point: SAME ANTIVENOM DOSE AS ADULTS**\n- Dosing is based on VENOM amount\n- NOT based on patient weight\n- Children may have more severe effects (smaller body mass dilutes venom less)\n\n**Fluid Volume:**\n- Adjust dilution volume for small children\n- Prevent fluid overload\n- Use smaller volume (100-150 mL) for infants\n\n**Antivenom Safety:**\n- Safe in pediatric and infant populations\n- Benefits outweigh risks\n\n**CroFab Thimerosal:**\n- Theoretical concern\n- Risk of untreated envenomation >> thimerosal risk\n- Do NOT withhold antivenom\n\n**Family counseling:**\n- Reassure about antivenom safety\n- Explain same dosing rationale [3][4]',
     citation: [3, 4],
     next: 'snake-dispo-decision',
+
+    summary: 'SAME antivenom dose as adults — dosing based on venom amount, NOT weight; children may have more severe effects',
   },
 
   {
@@ -439,6 +480,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Pregnant patient with snake envenomation:**\n\n**Key Point: DO NOT WITHHOLD ANTIVENOM**\n- Maternal health and prognosis takes priority\n- Untreated envenomation poses greater fetal risk than antivenom\n- Standard dosing applies\n\n**Fetal Monitoring:**\n- Continuous fetal monitoring\n- OB consultation\n- Monitor for placental abruption (coagulopathy risk)\n\n**Limited Data:**\n- No RCTs in pregnancy (obviously)\n- Case reports support antivenom use\n- Theoretical risks < envenomation risks\n\n**Coagulopathy:**\n- Higher concern for placental complications\n- Lower threshold for antivenom\n- Monitor fibrinogen closely\n\n**Disposition:**\n- Higher threshold for discharge\n- OB follow-up mandatory [3][4]',
     citation: [3, 4],
     next: 'snake-dispo-decision',
+
+    summary: 'Do NOT withhold antivenom in pregnancy — untreated envenomation poses greater fetal risk; monitor for placental abruption',
+    safetyLevel: 'warning',
   },
 
   {
@@ -449,6 +493,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Head, face, or neck bites — high airway risk:**\n\n**Early Intubation Considerations:**\n- Progressive facial/oropharyngeal edema\n- Stridor or voice changes\n- Difficulty managing secretions\n- Concern for rapid progression\n\n**Do NOT wait** for respiratory distress — edema may make later intubation impossible.\n\n**Approach:**\n- Early airway assessment\n- Prepare for difficult airway\n- Have surgical airway available\n- Consider early intubation if ANY airway concerns\n\n**Antivenom:**\n- Give aggressively to reduce swelling\n- Higher initial dose (8-12 vials CroFab)\n\n**Disposition:**\n- ICU admission\n- Close airway monitoring [1][3]',
     citation: [1, 3],
     next: 'snake-dispo-decision',
+
+    summary: 'Early intubation for progressive facial/oropharyngeal edema — do NOT wait for respiratory distress; aggressive antivenom 8-12 vials',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -466,6 +513,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       { id: 'coral-snake', label: 'Coral Snake Protocol' },
     ],
     next: 'snake-coral-antivenom',
+
+    summary: 'Minimal local effects but delayed neurotoxicity (12+ hr) — presynaptic toxin may be irreversible; ALL bites need 24hr ICU',
+    safetyLevel: 'critical',
   },
 
   {
@@ -495,6 +545,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       monitoring: 'ICU monitoring for minimum 24 hours. Neuro checks q1-2h for ptosis, diplopia, dysarthria, dysphagia, limb weakness, respiratory depression. Early intubation for bulbar weakness or declining respiratory effort.',
     },
     next: 'snake-coral-monitor',
+
+    summary: 'NACSA 3-5 vials at first neurotoxicity sign — availability crisis (production stopped 2003); Coralmyn via Poison Control if unavailable',
+    safetyLevel: 'critical',
   },
 
   {
@@ -505,6 +558,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**ICU monitoring for all suspected coral snake bites:**\n\n**Neurotoxicity Signs (may be delayed 12+ hours):**\n- Ptosis (early sign)\n- Diplopia\n- Dysarthria, dysphagia\n- Limb weakness\n- Respiratory depression\n\n**Monitoring:**\n- Neuro checks q1-2h\n- Respiratory monitoring\n- Bedside spirometry if available\n- ABG if respiratory concerns\n\n**Intubation Criteria:**\n- Progressive bulbar weakness\n- Declining respiratory effort\n- Hypoxia or hypercarbia\n- Do NOT wait for respiratory arrest\n\n**Minimum Observation:**\n- 24 hours ICU\n- If symptoms develop → prolonged admission\n- Full recovery possible with supportive care\n\n**Wound Care:**\n- Same as pit viper (clean, tetanus, no antibiotics) [1][6]',
     citation: [1, 6],
     next: 'snake-coral-dispo',
+
+    summary: 'ICU neuro checks q1-2h for ptosis (early sign), diplopia, dysarthria, limb weakness — early intubation for bulbar weakness',
   },
 
   {
@@ -514,6 +569,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     title: 'Coral Snake Disposition',
     body: '**Coral snake disposition:**\n\n**All patients:**\n- ICU admission for minimum 24 hours\n- Cannot be discharged from ED\n\n**If no symptoms at 24 hours:**\n- Discharge with close follow-up\n- Return precautions for delayed symptoms\n\n**If symptoms develop:**\n- Antivenom if available and early\n- Prolonged ICU stay\n- May require weeks of mechanical ventilation\n- Full recovery possible with support\n\n**Poison Control:** 1-800-222-1222\n- Coordinate antivenom acquisition\n- Guidance on investigational alternatives\n- Expert consultation available 24/7\n\n**Documentation:**\n- Time of bite\n- Snake description/photo if available\n- Time of symptom onset\n- All treatments given [6]',
     citation: [6],
+
+    summary: 'All coral snake bites: ICU 24hr minimum; if no symptoms at 24hr may discharge with return precautions; full recovery possible with support',
+
     options: [
       {
         label: 'Return to Overview',
@@ -557,6 +615,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Disposition based on severity, antivenom given, lab trends, and social factors — dry/mild may discharge, moderate/severe admit',
   },
 
   {
@@ -567,6 +627,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Safe for discharge if ALL criteria met:**\n\n**Clinical:**\n- Minimum 8 hours observation (dry bite)\n- Minimum 12-24 hours (mild envenomation)\n- No progression of swelling\n- No systemic symptoms\n- Tolerating PO\n- Adequate pain control with oral medications\n\n**Labs:**\n- Normal or stable repeat labs\n- No unfavorable trends\n\n**Social:**\n- Reliable patient\n- Access to return if needed\n- Understands return precautions\n\n**Discharge Instructions:**\n- Elevate extremity\n- Return for: progressive swelling, bleeding, bruising, numbness, difficulty breathing\n- No NSAIDs\n- Follow-up labs days 2-3 and 5-7 (if rattlesnake or antivenom given)\n\n**5% readmission rate.** [1][2]',
     citation: [1, 2],
     next: 'snake-recurrence-counseling',
+
+    summary: 'Minimum 8hr dry bite, 12-24hr mild; normal repeat labs, no progression, no NSAIDs; 5% readmission rate',
   },
 
   {
@@ -577,6 +639,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**Observation unit admission:**\n\n**Appropriate for:**\n- Mild envenomation without antivenom\n- Copperhead bites (often mild)\n- Stable after initial antivenom\n- Needs extended monitoring\n\n**Monitoring:**\n- Serial exams q2-4h\n- Repeat labs at 6, 12 hours\n- Circumference measurements\n- Pain assessment\n\n**Escalation criteria:**\n- Progression of swelling\n- New systemic symptoms\n- Lab abnormalities\n- Inadequate pain control\n\n**Discharge from CDU:**\n- Stable × 12-24 hours\n- Normal labs\n- Pain controlled with PO meds\n- Follow-up arranged [1][2]',
     citation: [1, 2],
     next: 'snake-recurrence-counseling',
+
+    summary: 'CDU 12-24hr for mild/copperhead without antivenom; serial exams q2-4h, repeat labs at 6 and 12hr',
   },
 
   {
@@ -590,6 +654,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
       { id: 'snake-recurrence', label: 'Recurrence Monitor' },
     ],
     next: 'snake-recurrence-counseling',
+
+    summary: 'Admit for moderate/severe or antivenom-treated; labs q6-12h; watch for late coagulopathy peak days 2-7',
   },
 
   {
@@ -600,6 +666,8 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     body: '**ICU admission criteria:**\n\n**Mandatory ICU:**\n- Airway involvement (head/neck/face bites with edema)\n- Anaphylaxis to antivenom\n- Severe systemic toxicity\n- Hemodynamic instability\n- Coral snake envenomation (any)\n\n**Consider ICU:**\n- Severe coagulopathy\n- Need for blood products\n- Multiple comorbidities\n- Uncertain trajectory\n\n**ICU Management:**\n- Airway monitoring/protection\n- Hemodynamic monitoring\n- Serial labs q4-6h\n- Repeat antivenom as needed\n- Blood products for significant bleeding\n\n**Disposition from ICU:**\n- Stable airway\n- Hemodynamically stable\n- Labs improving\n- Downgrade to floor [1][3]',
     citation: [1, 3],
     next: 'snake-recurrence-counseling',
+
+    summary: 'ICU for airway involvement, anaphylaxis, severe systemic toxicity, hemodynamic instability, or any coral snake bite',
   },
 
   {
@@ -612,6 +680,9 @@ export const SNAKE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'snake-recurrence', label: 'Recurrence Monitor' },
     ],
+
+    summary: 'CroFab recurrence 32-50% at days 2-7; follow-up labs days 2-3 and 5-7; retreat if INR >3, plt <25K, fibrinogen <50',
+
     options: [
       {
         label: 'Complete — Return to Start',

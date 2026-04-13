@@ -216,6 +216,7 @@ export const STROKE_NODES = [
                 next: 'stroke-evt-window',
             },
         ],
+        summary: 'Extended 4.5-9h window requires perfusion imaging — DWI-FLAIR mismatch or CT perfusion with salvageable tissue (core <70mL)',
     },
     {
         id: 'stroke-evt-window',
@@ -237,6 +238,7 @@ export const STROKE_NODES = [
                 next: 'stroke-antiplatelet-start',
             },
         ],
+        summary: 'EVT 6-24h window: DAWN/DEFUSE-3 criteria for anterior (NIHSS >=6, ICA/M1, small core), ATTENTION for basilar up to 24h',
     },
     {
         id: 'stroke-evt-eligible',
@@ -275,6 +277,8 @@ export const STROKE_NODES = [
         body: '>24 hours from last known well.\n\nNot a candidate for IVT or EVT. Focus on:\n\u2022 Antiplatelet initiation\n\u2022 Stroke etiology workup\n\u2022 Secondary prevention\n\u2022 Admission for neuro monitoring and rehab evaluation',
         citation: [1],
         next: 'stroke-antiplatelet-start',
+        summary: 'Beyond 24h — no IVT or EVT, focus on antiplatelet initiation, stroke etiology workup, secondary prevention, and admission',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 4: MINOR / NONDISABLING STROKE
@@ -304,6 +308,7 @@ export const STROKE_NODES = [
                 next: 'stroke-afib',
             },
         ],
+        summary: 'Minor stroke (NIHSS 0-5): MRI preferred, ABCD2 score for risk — high risk gets DAPT, low risk gets single antiplatelet',
     },
     {
         id: 'stroke-dapt',
@@ -385,6 +390,8 @@ export const STROKE_NODES = [
             monitoring: 'BP <180/105 x 24h. Neuro checks q15min x 2h, q30min x 6h, q1h x 16h. No antithrombotics x 24h. NCCT at 24h before starting antiplatelets.',
         },
         next: 'stroke-etiology',
+        summary: 'Post-tPA: BP <180/105 x24h, neuro checks q15min, no antithrombotics x24h, repeat NCCT at 24h before starting antiplatelets',
+        safetyLevel: 'critical',
     },
     {
         id: 'stroke-antiplatelet-start',
@@ -413,6 +420,7 @@ export const STROKE_NODES = [
             monitoring: 'If post-IVT: NCCT at 24h to rule out hemorrhage before starting antiplatelets.',
         },
         next: 'stroke-etiology',
+        summary: 'Aspirin 160-325mg within 24-48h if no IVT, or after 24h NCCT if post-IVT — consider DAPT for high-risk minor stroke',
     },
     {
         id: 'stroke-etiology',
@@ -438,6 +446,7 @@ export const STROKE_NODES = [
                 next: 'stroke-other-prevention',
             },
         ],
+        summary: 'Determine stroke mechanism: telemetry >=24h, echo, carotid/vertebral imaging, lipids, HbA1c — guides secondary prevention',
     },
     {
         id: 'stroke-afib',

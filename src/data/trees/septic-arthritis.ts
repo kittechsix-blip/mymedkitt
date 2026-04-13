@@ -36,6 +36,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     ],
     citation: [1, 2, 3],
     next: 'sa-clinical',
+
+    summary: 'Orthopedic emergency — irreversible cartilage destruction in 8hr; knee most common (50%), bimodal age distribution',
+    skippable: true,
   },
   {
     id: 'sa-clinical',
@@ -45,6 +48,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Classic presentation:**\n- Joint pain (most sensitive symptom)\n- Swelling and effusion\n- Warmth and erythema\n- Limited range of motion (active AND passive)\n- Fever present in **44-97%** (may be absent in elderly/immunocompromised) [1,4]\n\n**Monoarticular in >80% of cases.** [1]\n\n**Physical examination:**\n- Joint held in position of maximal comfort (maximizes joint volume)\n- Hip: flexed, abducted, externally rotated (FABER position)\n- Knee: slightly flexed\n- Inability to bear weight or tolerate passive ROM\n\n**Atypical presentations:** [1]\n- Polyarticular (10-20%): consider gonococcal, S. aureus bacteremia, endocarditis\n- Afebrile: elderly, immunocompromised, chronic infection\n- Minimal swelling: deep joints (hip, shoulder, sacroiliac)',
     citation: [1, 4],
     next: 'sa-pediatric-kocher',
+
+    summary: 'Joint pain + swelling + limited ROM; monoarticular 80%+; fever absent in up to 56% of elderly/immunocompromised',
+    skippable: true,
   },
   {
     id: 'sa-pediatric-kocher',
@@ -57,6 +63,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'kocher-criteria', label: 'Kocher Criteria Calculator' },
     ],
     next: 'sa-adult-predictors',
+
+    summary: 'Kocher criteria for pediatric HIP only: 0 predictors=0.2%, 4=99.6%; CRP is strongest independent factor',
   },
   {
     id: 'sa-adult-predictors',
@@ -69,6 +77,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'newman-criteria', label: 'Newman Criteria' },
     ],
     next: 'sa-ddx',
+
+    summary: 'Kocher has LIMITED adult utility — crystals do NOT exclude infection (1-2% dual diagnosis); all acute monoarthritis is septic until proven otherwise',
+    safetyLevel: 'warning',
   },
   {
     id: 'sa-ddx',
@@ -90,6 +101,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Distinguish native vs prosthetic joint, gout/pseudogout coexistence, and reactive arthritis in differential',
   },
 
   // ===================================================================
@@ -103,6 +116,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Arthrocentesis is the gold standard.** [1]\n\nDo NOT delay arthrocentesis for:\n- Blood tests to return\n- Imaging to be performed\n- Coagulopathy (relative, not absolute contraindication)\n- Overlying cellulitis (approach from unaffected area)\n\n**Labs to order:**\n- CBC, CMP, ESR, CRP\n- Blood cultures (positive in up to 66% of bacterial septic arthritis) [4]\n- Procalcitonin if available\n\n**Serum markers are NOT reliable for diagnosis:** [9]\n- Cannot rule in or rule out septic arthritis\n- CRP >10 mg/L is suggestive but not diagnostic\n- ESR and WBC have poor discriminatory value\n- Mean synovial WBC 70,581 in septic vs 26,758 in non-septic [10]\n\n**Key principle:** Synovial fluid analysis is the diagnostic cornerstone. All other tests are adjunctive.',
     citation: [1, 4, 9, 10],
     next: 'sa-synovial-fluid',
+
+    summary: 'Arthrocentesis is gold standard — do NOT delay for labs, imaging, or coagulopathy; serum markers unreliable for diagnosis',
   },
   {
     id: 'sa-synovial-fluid',
@@ -115,6 +130,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'synovial-wbc', label: 'Synovial WBC Interpreter' },
     ],
     next: 'sa-prior-abx',
+
+    summary: 'WBC >50K only 56% sensitive — 39% culture-positive have <50K; synovial lactate >10 mmol/L is best single test (86% sens, ~100% spec)',
+    safetyLevel: 'warning',
   },
   {
     id: 'sa-prior-abx',
@@ -124,6 +142,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Antibiotics before arthrocentesis alter synovial WBC thresholds.** [12]\n\n**Without prior antibiotics:**\n- Optimal cutoff: >33,000 cells\n- Sensitivity 96%, Specificity 95%\n\n**With prior antibiotics (within 24h):**\n- Optimal cutoff: >16,000 cells\n- Sensitivity 82%, Specificity 76%\n\n**Key implications:**\n- Lower threshold if patient received antibiotics\n- Culture sensitivity reduced >30% if LP >4 hours after antibiotics\n- N. meningitidis can sterilize within 2 hours [13]\n- PCR remains reliable even after antibiotic exposure\n\n**Clinical approach:**\n- If high suspicion and patient on antibiotics, treat empirically\n- Send cultures anyway (may still grow organism)\n- Consider PCR if available',
     citation: [12, 13],
     next: 'sa-gram-stain',
+
+    summary: 'Prior antibiotics lower WBC cutoff to >16K (vs >33K without); culture sensitivity drops >30% if abx given >4hr before tap',
   },
   {
     id: 'sa-gram-stain',
@@ -133,6 +153,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Gram stain:** [1,4]\n- Sensitivity: only 29-50% (identifies organisms in only 1/3 of cases)\n- Specificity: >97%\n- Positive = treat\n- Negative = does NOT rule out infection\n\n**Culture:** [1]\n- Non-gonococcal: >90% positive\n- Gonococcal: only 25-70% positive (fastidious organism)\n- Request specifically if gonococcal suspected\n- Consider blood culture bottles for small volumes\n\n**Microbiology by patient population:** [1,2]\n\n| Organism | Proportion | Population |\n|----------|------------|------------|\n| S. aureus | 50-70% | All ages, most common |\n| Streptococci | 15-20% | Children, elderly |\n| Gram-negatives | 10-20% | Neonates, elderly, IVDU, immunocompromised |\n| N. gonorrhoeae | ~20% | Sexually active young adults |\n| P. aeruginosa | 5-10% | IVDU, immunocompromised |',
     citation: [1, 2, 4],
     next: 'sa-imaging',
+
+    summary: 'Gram stain only 29-50% sensitive — negative does NOT rule out infection; S. aureus is most common organism (50-70%)',
+    skippable: true,
   },
   {
     id: 'sa-imaging',
@@ -142,6 +165,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Plain radiographs:** [1]\n- Limited utility for acute septic arthritis\n- May show: soft tissue swelling, effusion, periarticular osteopenia\n- Useful for: baseline, excluding fracture, detecting osteomyelitis (late)\n- Changes take 10-14 days to appear\n\n**Ultrasound:** [1]\n- Excellent for confirming effusion\n- Guides arthrocentesis (improves success rate)\n- Can detect as little as 1-2 mL fluid\n- Preferred for hip and shoulder aspiration\n\n**MRI:** [1]\n- Most sensitive for early detection\n- Detects effusion, synovial enhancement, adjacent osteomyelitis\n- Useful when clinical suspicion high but initial workup equivocal\n- Should NOT delay treatment\n\n**CT:** Reserved for complex anatomy or procedural planning (sacroiliac, sternoclavicular)',
     citation: [1],
     next: 'sa-pathogen-branch',
+
+    summary: 'US guides aspiration and confirms effusion; MRI most sensitive for early detection; plain films have limited acute utility',
+    skippable: true,
   },
   {
     id: 'sa-pathogen-branch',
@@ -171,6 +197,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Gonococcal clues: young, migratory polyarthritis, tenosynovitis, pustules; non-GC: monoarticular, toxic, purulent',
   },
 
   // ===================================================================
@@ -183,6 +211,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Non-Gonococcal',
     body: '**Empiric regimen for non-gonococcal septic arthritis:** [1,2,15]\n\n**Standard coverage (gram-positive focus):**\n- [Vancomycin](#/drug/vancomycin/septic arthritis) 15-20 mg/kg IV q8-12h\n  - Covers MRSA (up to 50% of S. aureus in some regions)\n  - Target trough 15-20 mcg/mL\n\n**Add gram-negative coverage if:** [1]\n- IVDU (Pseudomonas risk)\n- Immunocompromised\n- Elderly\n- Gram stain shows gram-negative rods\n- Neonates\n\n**Gram-negative options:**\n- [Ceftriaxone](#/drug/ceftriaxone/septic arthritis) 2g IV q24h, OR\n- [Cefepime](#/drug/cefepime/septic arthritis) 2g IV q8h (if Pseudomonas concern), OR\n- [Gentamicin](#/drug/gentamicin/septic arthritis) 5 mg/kg IV q24h\n\n**MSSA confirmed:**\n- De-escalate to [Nafcillin](#/drug/nafcillin/septic arthritis) 2g IV q4h OR [Cefazolin](#/drug/cefazolin/septic arthritis) 2g IV q8h',
     citation: [1, 2, 15],
+
+    summary: 'Vancomycin 15-20mg/kg IV for MRSA coverage; add ceftriaxone 2g for gram-neg risk (IVDU, immunocompromised, elderly)',
+
     treatment: {
       firstLine: {
         drug: 'Vancomycin',
@@ -211,6 +242,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Gonococcal Septic Arthritis (DGI)',
     body: '**Disseminated gonococcal infection (DGI)** presents as: [14,16]\n- Arthritis-dermatitis syndrome (60%): migratory polyarthralgia, tenosynovitis, pustular skin lesions\n- Localized septic arthritis (40%): monoarticular, purulent\n\n**Treatment:** [16]\n- [Ceftriaxone](#/drug/ceftriaxone/gonococcal arthritis) 1g IV/IM q24h\n- Continue until 24-48h after clinical improvement\n- Transition to oral (total 7+ days):\n  - Cefixime 400mg PO BID, OR\n  - Fluoroquinolone (only if susceptibility confirmed)\n\n**MUST co-treat for Chlamydia:** [16]\n- Doxycycline 100mg PO BID x 7 days, OR\n- Azithromycin 1g PO x 1\n\n**Key differences from non-gonococcal:**\n- Often managed WITHOUT surgical drainage\n- Lower WBC in synovial fluid\n- Culture positive only 25-70%\n- Consider NAAT on synovial fluid, urethral/cervical/pharyngeal swabs',
     citation: [14, 16],
+
+    summary: 'Ceftriaxone 1g + doxycycline for chlamydia coverage; often managed WITHOUT surgery; culture positive only 25-70%',
+
     treatment: {
       firstLine: {
         drug: 'Ceftriaxone + Doxycycline',
@@ -231,6 +265,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     title: 'Empiric: Broad Coverage',
     body: '**When uncertain between gonococcal and non-gonococcal:** [1,2,16]\n\n**Empiric regimen:**\n- [Vancomycin](#/drug/vancomycin/septic arthritis) 15-20 mg/kg IV q8-12h\n  PLUS\n- [Ceftriaxone](#/drug/ceftriaxone/septic arthritis) 2g IV q24h\n  PLUS\n- Empiric Chlamydia coverage: Doxycycline 100mg PO BID x 7 days\n\n**This covers:**\n- MRSA and MSSA\n- Streptococci\n- Most gram-negatives\n- N. gonorrhoeae\n- C. trachomatis (empiric PO)\n\n**De-escalate based on:**\n- Culture and sensitivity results\n- Clinical response\n- NAAT results for gonococcal\n\n**Duration:** [1,15]\n- Non-gonococcal: 3-4 weeks total (2 weeks IV, then oral if appropriate)\n- Gonococcal: 7+ days (shorter course)',
     citation: [1, 2, 15, 16],
+
+    summary: 'Vancomycin + ceftriaxone + doxycycline covers MRSA, gram-neg, GC, and chlamydia — de-escalate by cultures',
+
     treatment: {
       firstLine: {
         drug: 'Vancomycin + Ceftriaxone + Doxycycline',
@@ -252,6 +289,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Prosthetic joint infection requires different thresholds and approach.** [17]\n\n**MSIS 2018 Diagnostic Criteria:** [17]\n\n**Major Criteria (definitive):**\n- Two positive cultures of same organism, OR\n- Sinus tract communicating with joint\n\n**Minor Criteria (point-based):**\n- Serum CRP >1 mg/dL (2 points)\n- Serum ESR >30 mm/hr (1 point)\n- D-dimer >860 ng/mL (2 points)\n- Synovial WBC >3,000/uL (3 points) - MUCH lower than native joint\n- Synovial PMN >80% (2 points)\n- Alpha-defensin positive (3 points)\n- Single positive culture (2 points)\n- Positive histology (3 points)\n- Purulence (3 points)\n\n**Score interpretation:** >/=6 = infected; 4-5 = inconclusive; </=3 = not infected\n\n**Management:** Orthopedic surgery consultation required. Options include DAIR (debridement, antibiotics, implant retention), one-stage revision, two-stage revision, or chronic suppression.',
     citation: [17],
     next: 'sa-pji-tx',
+
+    summary: 'Prosthetic joint: synovial WBC >3000 (MUCH lower threshold); MSIS 2018 point-based criteria for diagnosis',
   },
   {
     id: 'sa-pji-tx',
@@ -261,6 +300,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**ED role in prosthetic joint infection:** [17]\n\n**Immediate actions:**\n1. Arthrocentesis (if safe and not planned for OR)\n2. Blood cultures\n3. Empiric antibiotics (after cultures obtained)\n4. Orthopedic surgery consultation\n5. Infectious disease consultation\n\n**Empiric antibiotics:** [17]\n- [Vancomycin](#/drug/vancomycin/septic arthritis) 15-20 mg/kg IV q8-12h\n  PLUS\n- [Cefepime](#/drug/cefepime/septic arthritis) 2g IV q8h (gram-negative coverage including Pseudomonas)\n\n**Special considerations:**\n- Add [Rifampin](#/drug/rifampin/pji) 300-450mg PO BID once sensitivities known (biofilm penetration)\n- Duration: typically 6 weeks IV + prolonged oral suppression\n- Implant retention (DAIR) only for:\n  - Early infection (<3 months post-op)\n  - Acute hematogenous (<3 weeks symptoms)\n  - Stable, well-fixed implant\n  - Susceptible organism',
     citation: [17],
     next: 'sa-admit',
+
+    summary: 'Vancomycin + cefepime for PJI; ortho + ID consult; rifampin for biofilm penetration once sensitivities known',
   },
 
   // ===================================================================
@@ -274,6 +315,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Source control is essential.** Antibiotics alone are insufficient. [1,18]\n\n**Drainage options:** [18]\n\n**1. Serial arthrocentesis (needle aspiration):**\n- Minimally invasive\n- Can repeat daily until effusion resolves\n- Effective for accessible joints (knee, ankle, elbow, wrist)\n- May be sufficient for gonococcal and some streptococcal infections\n\n**2. Arthroscopic irrigation & debridement:**\n- Breaks down loculations\n- Removes necrotic tissue\n- 91% cure rate with systemic antibiotics [18]\n- Better outcomes than arthrotomy in some studies\n\n**3. Arthrotomy (open surgical drainage):**\n- Reserved for: failed arthroscopy, hip, shoulder, SI joint\n- Required if: osteomyelitis, retained hardware, virulent organisms\n\n**Evidence comparison:** [18]\nMultiple studies show no significant difference between serial aspiration and surgical lavage for uncomplicated native joint septic arthritis.',
     citation: [1, 18],
     next: 'sa-drainage-decision',
+
+    summary: 'Antibiotics alone insufficient — serial aspiration, arthroscopy, or arthrotomy; no significant outcome difference between approaches',
   },
   {
     id: 'sa-drainage-decision',
@@ -295,6 +338,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Choose serial aspiration for accessible joints vs surgical drainage for hip/shoulder/SI or failed aspiration',
   },
   {
     id: 'sa-serial-aspiration',
@@ -304,6 +349,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Serial aspiration approach:** [18]\n\n**Technique:**\n- Aspirate joint daily (or BID if rapidly reaccumulating)\n- Document volume removed\n- Send initial fluid for analysis; subsequent taps for culture only if deteriorating\n- Use ultrasound guidance for optimal drainage\n\n**Success indicators:**\n- Decreasing effusion volume\n- Improving synovial WBC count\n- Clinical improvement (pain, ROM, fever)\n\n**When to escalate to surgery:** [18]\n- Effusion persists beyond 5-7 days\n- Synovial WBC not improving\n- Clinical deterioration\n- Loculations identified on imaging\n\n**Joints amenable to serial aspiration:**\n- Knee (most common)\n- Ankle\n- Elbow\n- Wrist\n- Small joints of hands/feet',
     citation: [18],
     next: 'sa-duration',
+
+    summary: 'Aspirate daily until effusion resolves; escalate to surgery if no improvement by 5-7 days or loculations found',
   },
   {
     id: 'sa-surgical-drainage',
@@ -313,6 +360,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Indications for surgical irrigation & debridement:** [1,18]\n\n**Absolute:**\n- Hip joint (difficult to aspirate, high complication rate)\n- Shoulder joint\n- Sternoclavicular/sacroiliac joints\n- Prosthetic joint infection\n- Osteomyelitis coexisting with septic arthritis\n- Failed serial aspiration (no improvement in 5-7 days)\n\n**Relative:**\n- Virulent organism (MRSA, Pseudomonas)\n- Immunocompromised patient\n- Loculated effusion\n- Significant soft tissue involvement\n\n**Arthroscopic vs open:**\n- Arthroscopy preferred for knee (shorter stay, better outcomes) [18]\n- Open arthrotomy for hip, complex cases\n- Repeat I&D if poor response\n\n**Consult orthopedic surgery EARLY** - do not delay for imaging or serial aspiration if surgery clearly indicated.',
     citation: [1, 18],
     next: 'sa-duration',
+
+    summary: 'Hip, shoulder, SI joint require surgical drainage — consult ortho EARLY; do not delay for serial aspiration',
   },
   {
     id: 'sa-gc-drainage',
@@ -322,6 +371,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Gonococcal septic arthritis often managed WITHOUT surgical drainage.** [14,16]\n\n**Typically adequate:**\n- Serial arthrocentesis for initial drainage\n- May need 1-3 aspirations\n- Good response to antibiotics alone\n\n**Consider surgical drainage if:** [14]\n- Purulent effusion with large volume\n- No improvement after 3-4 days of antibiotics\n- Hip or shoulder involvement\n- Immunocompromised patient\n\n**Key differences from non-gonococcal:**\n- Less joint destruction (less aggressive organism)\n- Better prognosis overall\n- Shorter antibiotic duration (7+ days vs 3-4 weeks)\n\n**Partner notification and STI screening required:** [16]\n- HIV testing\n- Syphilis serology\n- Hepatitis B/C screening\n- Notify sexual partners from past 60 days',
     citation: [14, 16],
     next: 'sa-duration',
+
+    summary: 'GC arthritis often managed without surgery — 1-3 aspirations usually sufficient; partner notification and STI screening required',
   },
 
   // ===================================================================
@@ -335,6 +386,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Treatment duration by pathogen:** [1,15]\n\n| Organism | Total Duration | IV Phase |\n|----------|---------------|----------|\n| S. aureus | 3-4 weeks | 2-3 weeks |\n| Streptococci | 2-3 weeks | 1-2 weeks |\n| N. gonorrhoeae | 7-14 days | Until improved |\n| Gram-negatives | 3-4 weeks | 2-3 weeks |\n| P. aeruginosa | 4-6 weeks | 3-4 weeks |\n\n**IV to oral transition criteria:** [15]\n- Clinical improvement (decreasing pain, swelling, fever)\n- Decreasing inflammatory markers (CRP, ESR)\n- Organism susceptible to oral agent with good bioavailability\n- Patient tolerating oral intake\n- Adequate absorption (no GI issues)\n\n**Oral options:** [15]\n- Fluoroquinolones (good bone/joint penetration)\n- TMP-SMX (for MRSA)\n- Doxycycline (some gram-positives)\n- Rifampin (adjunct, not monotherapy)',
     citation: [1, 15],
     next: 'sa-monitoring',
+
+    summary: 'S. aureus 3-4wk, Strep 2-3wk, GC 7-14d, Pseudomonas 4-6wk; IV-to-oral when clinically improving with susceptible oral agent',
+    skippable: true,
   },
   {
     id: 'sa-monitoring',
@@ -344,6 +398,9 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Response assessment:** [1]\n\n**Clinical:**\n- Daily joint exam (effusion, warmth, ROM)\n- Fever curve\n- Pain level\n- Ability to bear weight\n\n**Laboratory:**\n- CRP most useful - rises within hours, normalizes within 1 week with effective treatment [1]\n- ESR slower to normalize (may remain elevated for weeks)\n- WBC less helpful\n- Repeat synovial fluid if poor response\n\n**Expected timeline:**\n- Fever: resolves 48-72h\n- Joint pain: improves 3-5 days\n- CRP: decreasing by day 3-5\n- Full ROM: weeks to months\n\n**Poor response (investigate for):**\n- Wrong antibiotic (resistance, wrong bug)\n- Inadequate drainage\n- Abscess formation\n- Osteomyelitis\n- Drug fever\n- Secondary site of infection',
     citation: [1],
     next: 'sa-dispo',
+
+    summary: 'CRP most useful trend marker — normalizes within 1 week; poor response: wrong antibiotic, inadequate drainage, or abscess',
+    skippable: true,
   },
   {
     id: 'sa-dispo',
@@ -365,6 +422,8 @@ export const SEPTIC_ARTHRITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'ALL suspected septic arthritis requires admission — determine floor vs ICU based on hemodynamic status',
   },
   {
     id: 'sa-admit',

@@ -16,6 +16,7 @@ export const WRIST_INJURIES_NODES = [
             { label: 'Soft tissue injury / uncertain', description: '', next: 'wrist-imaging\n\n**What type of wrist injury?**' },
         ],
         citation: [1, 2],
+        summary: 'Mechanism-based triage: FOOSH, dorsal fall, direct blow, high-energy; assess neurovascular status first',
     },
     // ===================================================================
     // MODULE 1: DISTAL RADIUS FRACTURES
@@ -28,6 +29,8 @@ export const WRIST_INJURIES_NODES = [
         body: '**Three main patterns:**\n\n**1. Colles Fracture (Most Common)**\n• Dorsal angulation + displacement\n• "Dinner fork" deformity\n• FOOSH with wrist dorsiflexion\n• Often with ulnar styloid fracture\n\n**2. Smith Fracture (Reverse Colles)**\n• Volar displacement/angulation\n• "Garden spade" deformity\n• Fall on dorsum of hand\n• **More unstable** — often requires surgery\n\n**3. Barton Fracture**\n• Intra-articular rim fracture (dorsal or volar)\n• **Carpal bones dislocate with rim fragment**\n• Inherently unstable\n• High likelihood of operative fixation\n\n**🚨 ALWAYS assess for:**\n• Neurovascular status (median nerve most at risk)\n• Ulnar styloid fracture (base fractures can disrupt DRUJ)\n• DRUJ stability\n• Acute carpal tunnel syndrome (up to 20% incidence) [1][3]',
         citation: [1, 3],
         next: 'wrist-dr-which-type',
+        summary: 'Colles (dorsal), Smith (volar), Barton (intra-articular rim) — always check median nerve and DRUJ stability',
+        skippable: true,
     },
     {
         id: 'wrist-dr-which-type',
@@ -41,6 +44,7 @@ export const WRIST_INJURIES_NODES = [
             { label: 'Barton (rim fracture + carpal dislocation)', description: '', next: 'wrist-barton\n\n**Fracture pattern?**' },
         ],
         citation: [1],
+        summary: 'Classify by radiograph: Colles (dorsal angulation), Smith (volar), or Barton (rim + carpal dislocation)',
     },
     {
         id: 'wrist-colles',
@@ -92,6 +96,7 @@ export const WRIST_INJURIES_NODES = [
             { label: 'Hamate (hypothenar pain)', description: '', next: 'wrist-hamate\n\n**Which carpal bone is fractured (or suspected)?**' },
         ],
         citation: [7],
+        summary: 'Scaphoid 60-70% of carpal fractures; scaphoid and lunate at high AVN risk due to retrograde blood supply',
     },
     {
         id: 'wrist-scaphoid',
@@ -153,6 +158,8 @@ export const WRIST_INJURIES_NODES = [
         ],
         citation: [14, 15, 16],
         next: 'wrist-peri-reduce',
+        summary: 'Perilunate: capitate dorsal; lunate dislocation: lunate volar into carpal tunnel; 15-50% acute CTS — reduce emergently',
+        safetyLevel: 'critical',
     },
     {
         id: 'wrist-peri-reduce',
@@ -192,6 +199,7 @@ export const WRIST_INJURIES_NODES = [
             { label: 'TFCC tear (ulnar pain, clicking, DRUJ instability)', description: '', next: 'wrist-tfcc\n\n**Which ligament injury is suspected?**' },
         ],
         citation: [21, 22],
+        summary: 'Scapholunate: radial pain, Terry Thomas sign >5mm gap; TFCC: ulnar pain, clicking with rotation',
     },
     {
         id: 'wrist-sl-dissoc',
@@ -232,6 +240,7 @@ export const WRIST_INJURIES_NODES = [
         ],
         citation: [2, 27],
         next: 'wrist-splinting',
+        summary: 'PA + lateral + oblique standard; scaphoid view with ulnar deviation; always check DRUJ on lateral and carpal arcs on PA',
     },
     {
         id: 'wrist-splinting',
@@ -247,6 +256,7 @@ export const WRIST_INJURIES_NODES = [
         ],
         citation: [2, 28, 29, 30],
         next: 'wrist-complications',
+        summary: 'Sugar tong for distal radius; thumb spica for scaphoid (even if XR negative); ulnar gutter for 4th/5th MC',
     },
     // ===================================================================
     // MODULE 6: COMPLICATIONS & REFERRAL
@@ -259,6 +269,8 @@ export const WRIST_INJURIES_NODES = [
         body: '**1. Acute Carpal Tunnel Syndrome**\n• **Incidence:** Up to 20% of wrist fractures; 15-50% of perilunate dislocations\n• **Pathophysiology:** Hematoma, fracture displacement, soft tissue swelling compress median nerve\n• **Presentation:** Median nerve paresthesias (thumb, index, middle, radial half ring finger), thenar weakness (late)\n• **Management:** Urgent carpal tunnel decompression + fracture fixation\n• **Best outcomes:** Decompression within 40 hours of symptom onset\n\n**2. Avascular Necrosis (AVN)**\n• **High-risk fractures:**\n  - **Scaphoid** (especially proximal pole) — retrograde blood supply\n  - **Lunate** (Kienböck disease) — tenuous retrograde blood supply\n• **Prevention:** Early immobilization, appropriate splinting, close follow-up\n• **Late findings:** Increased density, collapse, fragmentation on X-rays\n\n**3. Missed Galeazzi & Monteggia Fracture-Dislocations**\n• **Galeazzi:** Distal radius fracture + DRUJ dislocation\n• **Monteggia:** Proximal ulna fracture + radial head dislocation\n• **Why missed:** Dislocation component overlooked\n• **Recognition tip:** ANY radius/ulna fracture → specifically assess DRUJ and radial head alignment\n• **Consequences:** Chronic pain, malunion, instability, restricted rotation, deformity\n\n**4. Compartment Syndrome**\n• Rare but devastating\n• High-energy trauma, crush injuries, vascular injury\n• **5 Ps:** Pain (out of proportion, with passive stretch), Pressure, Paresthesias, Pallor, Pulselessness (late)\n• **Measurement:** Compartment pressure >30 mmHg absolute or within 30 mmHg of diastolic BP\n• **Management:** Emergent fasciotomy\n\n**5. Complex Regional Pain Syndrome (CRPS)**\n• Chronic complication\n• Disproportionate pain, swelling, temperature changes, skin changes\n• Prevention: Early mobilization when appropriate, adequate analgesia [31][32][33][34]',
         citation: [31, 32, 33, 34],
         next: 'wrist-referral',
+        summary: 'Acute CTS up to 20% of wrist fractures; AVN risk for scaphoid/lunate; always check DRUJ with radius fractures',
+        safetyLevel: 'warning',
     },
     {
         id: 'wrist-referral',

@@ -21,6 +21,9 @@ export const STEMI_NODES: DecisionNode[] = [
     citation: [1, 2, 3, 4],
     images: [{ src: 'images/stemi/vascular-territories.png', alt: 'ECG lead vascular territory map', caption: '12-lead ECG territories: leads map to coronary artery distributions' }],
     next: 'stemi-ecg-pattern',
+
+    summary: '12-lead ECG within 10 min — STEMI is an ECG diagnosis, do NOT wait for troponin; 8.4% ACS without chest pain',
+    skippable: true,
   },
 
   {
@@ -55,6 +58,8 @@ export const STEMI_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Apply STEMI criteria to 12-lead — STE in ≥2 contiguous leads, check V2-V3 sex/age thresholds, look for reciprocal changes',
   },
 
   // =====================================================================
@@ -73,6 +78,9 @@ export const STEMI_NODES: DecisionNode[] = [
       { src: 'images/stemi/lateral-mi.png', alt: 'Lateral STEMI ECG', caption: 'Lateral STEMI: ST elevation in I, aVL, V5, V6' },
     ],
     next: 'stemi-initial-tx',
+
+    summary: 'Activate cath lab immediately — identify territory by STE distribution; inferior STEMI needs right-sided leads',
+    safetyLevel: 'critical',
   },
 
   {
@@ -99,6 +107,8 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-serial',
       },
     ],
+
+    summary: 'V1-V3 depression with upright T waves — obtain posterior leads V7-V9, STE ≥0.5 mm confirms posterior STEMI',
   },
 
   {
@@ -131,6 +141,8 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-nstemi-workup',
       },
     ],
+
+    summary: 'Apply Sgarbossa/modified Smith criteria in LBBB — score ≥3 = 98% specific; LBBB + ischemic symptoms = manage as STEMI',
   },
 
   {
@@ -154,6 +166,8 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-serial',
       },
     ],
+
+    summary: 'aVR STE + diffuse depression — only 10% are acute thrombotic occlusion; hemodynamic instability favors emergent cath',
   },
 
   {
@@ -180,6 +194,8 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-alt-dx',
       },
     ],
+
+    summary: 'Serial ECGs q15-30 min — 8% of STEMIs identified only on repeat; bedside echo 93% sensitive for RWMA',
   },
 
   {
@@ -235,6 +251,9 @@ export const STEMI_NODES: DecisionNode[] = [
       monitoring: 'Continuous cardiac monitoring. BP before each nitroglycerin dose. Avoid morphine unless refractory pain.',
     },
     next: 'stemi-p2y12',
+
+    summary: 'ASA 162-325 mg chewed, NTG SL (avoid if SBP<90/RV infarct/PDE5i), O2 only if SpO2<90, avoid morphine',
+    safetyLevel: 'critical',
   },
 
   {
@@ -285,6 +304,9 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-anticoag',
       },
     ],
+
+    summary: 'Load P2Y12 before PCI — prasugrel CI in prior stroke/TIA; ticagrelor higher ICH risk; clopidogrel variable metabolism',
+    safetyLevel: 'warning',
   },
 
   {
@@ -314,6 +336,8 @@ export const STEMI_NODES: DecisionNode[] = [
       monitoring: 'ACT during PCI. Monitor for bleeding. For fibrinolysis: anticoagulation minimum 48 hours.',
     },
     next: 'stemi-reperfusion-q',
+
+    summary: 'UFH 70-100 units/kg for PCI; bivalirudin if high bleeding risk; enoxaparin for fibrinolysis',
   },
 
   // =====================================================================
@@ -350,6 +374,8 @@ export const STEMI_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'PCI preferred — FMC-to-device ≤90 min local, ≤120 min transfer; fibrinolytics if PCI not available within 120 min',
   },
 
   {
@@ -360,6 +386,8 @@ export const STEMI_NODES: DecisionNode[] = [
     body: '**Goal: First medical contact-to-device \u226490 minutes.**\n\n\u2022 Indicated for symptom onset <12 hours\n\u2022 Between 12\u201324 hours: reasonable if clinical or ECG evidence of ongoing ischemia\n\u2022 >24 hours, asymptomatic, stable: PCI NOT recommended (no benefit) [22]\n\n**Advantages over fibrinolysis:**\n\u2022 Higher infarct artery patency rates\n\u2022 Lower rates of recurrent ischemia, reinfarction, ICH, and death\n\n**Potential complications:** access site problems, contrast reactions, reperfusion arrhythmias, stent thrombosis.\n\n**Reperfusion arrhythmias** are common after successful PCI \u2014 assess next.',
     citation: [5, 22],
     next: 'stemi-complications',
+
+    summary: 'Primary PCI for onset <12h; 12-24h if ongoing ischemia; >24h stable = PCI NOT recommended',
   },
 
   {
@@ -370,6 +398,8 @@ export const STEMI_NODES: DecisionNode[] = [
     body: '**Goal: Total FMC-to-device \u2264120 minutes. DIDO \u226430 minutes.**\n\n\u2022 Consider helicopter EMS to reduce transport time\n\u2022 Continue anticoagulation during transport\n\u2022 Prehospital cath lab activation reduces FMC-to-balloon time\n\u2022 Bypass non-PCI facilities if transport time <30 min to PCI center [5]\n\n**If transfer cannot achieve 120 min:** Switch to fibrinolytic strategy.\n\n**Cardiogenic shock or severe HF:** Transfer immediately regardless of time delay from MI onset. [5]',
     citation: [5, 21],
     next: 'stemi-complications',
+
+    summary: 'DIDO ≤30 min; consider helicopter; switch to fibrinolysis if transfer cannot achieve 120 min',
   },
 
   {
@@ -416,6 +446,9 @@ export const STEMI_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Door-to-needle ≤30 min — tenecteplase preferred; half-dose if >75y; check contraindications first',
+    safetyLevel: 'critical',
   },
 
   {
@@ -445,6 +478,9 @@ export const STEMI_NODES: DecisionNode[] = [
       monitoring: 'Anticoagulation minimum 48h. Transfer to PCI center within 3-24h (NOT within first 2-3h). Monitor reperfusion signs: pain resolution, >50% ST resolution, reperfusion arrhythmias.',
     },
     next: 'stemi-complications',
+
+    summary: 'Anticoag ≥48h post-lytics; transfer for PCI in 3-24h (NOT within first 2-3h); AIVR is benign — do NOT treat',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -479,6 +515,8 @@ export const STEMI_NODES: DecisionNode[] = [
         next: 'stemi-special',
       },
     ],
+
+    summary: 'Screen for cardiogenic shock, RV involvement, reperfusion arrhythmias, AV block, and mechanical complications',
   },
 
   {
@@ -501,6 +539,9 @@ export const STEMI_NODES: DecisionNode[] = [
     citation: [5, 27],
     images: [{ src: 'images/stemi/right-sided-leads.png', alt: 'Right-sided ECG lead placement', caption: 'Right-sided precordial leads (V1R\u2013V6R): mirror standard placement to right chest' }],
     next: 'stemi-special',
+
+    summary: 'RV infarct: STE ≥1 mm V4R — AVOID nitrates/diuretics; volume-dependent, dobutamine if refractory',
+    safetyLevel: 'critical',
   },
 
   {
@@ -511,6 +552,9 @@ export const STEMI_NODES: DecisionNode[] = [
     body: 'Most common reperfusion arrhythmias: PVCs, VT, AIVR, AF, VF. [24]\n\n**AIVR (Accelerated Idioventricular Rhythm):**\n\u2022 Regular wide-complex rhythm, rate 50\u2013110 bpm\n\u2022 Usually a SIGN OF SUCCESSFUL REPERFUSION\n\u2022 Well-tolerated and self-limited\n\u2022 **Do NOT treat with antidysrhythmics** \u2014 may cause hemodynamic collapse\n\u2022 Resolves when sinus rate exceeds ventricular focus\n\n**VT/VF:** Defibrillate per ACLS protocol\n\n**AV block:** Incidence 7% with thrombolytic therapy. Manage bradycardia (atropine, transcutaneous pacing). [25]\n\n**Atrial fibrillation:** Rate control, see [A-Fib RVR](#/tree/afib-rvr) consult if needed.',
     citation: [24, 25],
     next: 'stemi-special',
+
+    summary: 'AIVR is a sign of successful reperfusion — self-limited, do NOT treat with antidysrhythmics',
+    safetyLevel: 'warning',
   },
 
   {
@@ -521,6 +565,9 @@ export const STEMI_NODES: DecisionNode[] = [
     body: '**Women:**\n\u2022 Less likely to present with central chest pain [28]\n\u2022 Same risk factors and treatment as men\n\u2022 CV mortality has remained higher in women since 1980s\n\n**Elderly (>75 years):**\n\u2022 More atypical presentations (dyspnea, syncope, nausea)\n\u2022 Higher complication rate, more contraindications to reperfusion\n\u2022 Age alone is NOT a reason to withhold reperfusion [29]\n\u2022 Consider half-dose tenecteplase if fibrinolysis indicated\n\n**Cocaine-associated STEMI:**\n\u2022 PCI strongly preferred over fibrinolysis (higher ICH risk with lytics)\n\u2022 Benzodiazepines for chest pain, HR, and BP control\n\u2022 **Avoid pure beta-blockers** (unopposed alpha stimulation); consider [Labetalol](#/drug/labetalol/acs) if beta-blockade needed [30]\n\n**Post-cardiac arrest with STEMI:**\n\u2022 Early cath for sustained ROSC with STEMI or new LBBB\n\u2022 2\u20133\u00D7 higher favorable survival with early cath lab access [31]\n\u2022 Consider ECMO for refractory VF/pVT',
     citation: [28, 29, 30, 31],
     next: 'stemi-dispo',
+
+    summary: 'Women: more atypical presentations; elderly: half-dose lytics; cocaine: avoid pure beta-blockers, PCI preferred',
+    skippable: true,
   },
 
   // =====================================================================

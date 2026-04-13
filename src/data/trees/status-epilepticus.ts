@@ -21,6 +21,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     images: [{ src: 'images/status-epilepticus/spike-wave-eeg.png', alt: 'EEG tracing showing 3 Hz generalized spike-and-wave discharges — hallmark pattern of seizure activity', caption: 'EEG: generalized spike-wave discharges. Continuous/recurrent discharges without recovery = status epilepticus. cEEG required to detect non-convulsive SE. (CC BY-SA 2.0)' }],
     citation: [1, 2, 3],
     next: 'se-is-this-se',
+
+    summary: 'SE defined as seizure >5 min or recurrent without recovery — BZDs less effective with delay, 30% morbidity/mortality',
+    skippable: true,
   },
 
   {
@@ -49,6 +52,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         next: 'se-differential',
       },
     ],
+
+    summary: 'Differentiate convulsive SE, subtle SE, NCSE, and mimics — duration, motor features, and consciousness guide triage',
   },
 
   {
@@ -59,6 +64,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     body: '**Airway:** Position in left lateral decubitus if actively seizing. Suction available. Nasopharyngeal airway if needed — do NOT use bite block or oral airway (risk of obstruction and provider injury). Do NOT attempt intubation during active tonic-clonic seizure unless airway compromise.\n\n**Breathing:** High-flow O2 via non-rebreather. Monitor SpO2 continuously. Respiratory failure can occur from seizure itself or from benzodiazepines.\n\n**Circulation:** Cardiac monitor, IV access × 2. Vital signs including temperature.\n\n**Protect from injury** — pad side rails, remove hazards. Do NOT restrain.\n\n**Start the clock** — time from seizure onset drives treatment decisions.',
     citation: [1, 2],
     next: 'se-glucose-labs',
+
+    summary: 'Left lateral position, high-flow O2, dual IV access, start the clock — no bite block, no restraints',
+    safetyLevel: 'critical',
   },
 
   {
@@ -69,6 +77,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     body: '**Fingerstick glucose STAT** — hypoglycemia is a common, easily reversible seizure trigger.\n• If glucose <60 mg/dL: D50W 25 g IV (adults) or D10W 2-5 mL/kg (peds)\n\n[SE Diagnostic Workup](#/info/se-labs) — complete lab panel and imaging guide.\n\n**Priority labs:** BMP (Na, Ca, Mg, Phos), CBC, lactate, VBG, urine drug screen, serum tox, ASM levels (if on therapy), troponin, CK, pregnancy test.\n\n**Imaging:** CT head non-contrast after stabilization — evaluate for structural cause. MRI when stable.\n\n**EEG:** Order early if available — 48% of patients with altered consciousness post-SE have ongoing NCSE on EEG.\n\n**Lumbar puncture:** If signs of meningitis, fever with no clear source, or immunocompromised.',
     citation: [1, 3, 4],
     next: 'se-iv-access',
+
+    summary: 'Fingerstick glucose STAT — D50W if <60; labs, CT, EEG; 48% of altered post-SE have ongoing NCSE',
+    safetyLevel: 'critical',
   },
 
   {
@@ -92,6 +103,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Route determines BZD choice — IV lorazepam preferred, IM midazolam if no IV (RAMPART: non-inferior)',
   },
 
   // =====================================================================
@@ -125,6 +138,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Continuous pulse oximetry, respiratory monitoring. Have BVM and suction at bedside.',
     },
     next: 'se-bzd-response',
+
+    summary: 'Lorazepam 0.1 mg/kg IV max 4 mg, repeat once in 5-10 min — monitor respiratory depression',
+    safetyLevel: 'critical',
   },
 
   {
@@ -154,6 +170,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Continue attempting IV access. Monitor respiratory status.',
     },
     next: 'se-bzd-response',
+
+    summary: 'Midazolam 0.2 mg/kg IM max 10 mg — RAMPART showed 73% termination; continue seeking IV access',
+    safetyLevel: 'critical',
   },
 
   {
@@ -176,6 +195,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess 5 min after BZD — cessation of motor activity AND improving consciousness means success',
   },
 
   {
@@ -200,6 +221,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Special Population?',
     body: 'Before selecting 2nd-line antiseizure medication, identify if the patient belongs to a special population that changes management.\n\nIf none apply, proceed directly to standard 2nd-line ASM selection.',
     citation: [1],
+
+    summary: 'Screen for pregnancy, toxic ingestion, or pediatric age before selecting 2nd-line ASM',
     options: [
       {
         label: 'Pregnant / suspected eclampsia',
@@ -235,6 +258,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Second-Line ASM Selection',
     body: 'BZD-refractory convulsive SE. Administer within **5-10 minutes** of BZD failure.\n\n**ESETT trial (2019):** Levetiracetam, fosphenytoin, and valproate had **equivalent efficacy** (~47% seizure cessation at 60 min). No significant difference in adverse events between the three agents.\n\nChoice should be tailored to patient\'s comorbidities and contraindications.\n\n[2nd-Line ASM Comparison](#/info/se-asm-comparison) — side-by-side efficacy, contraindications, and side effects.',
     citation: [1, 2, 6],
+
+    summary: 'ESETT: levetiracetam, fosphenytoin, valproate equally effective (~47%) — choose by comorbidities',
     options: [
       {
         label: 'Levetiracetam (Keppra)',
@@ -278,6 +303,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'No telemetry required during infusion. Monitor for psychiatric symptoms. Renal function for maintenance dosing.',
     },
     next: 'se-2nd-line-response',
+
+    summary: 'Levetiracetam 60 mg/kg IV max 4500 mg — no cardiac effects, no drug interactions, safe in pregnancy',
   },
 
   {
@@ -299,6 +326,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Check platelets before administration. Monitor ammonia if AMS persists post-seizure. LFTs.',
     },
     next: 'se-2nd-line-response',
+
+    summary: 'Valproate 40 mg/kg IV max 3000 mg — contraindicated in pregnancy, liver disease, mitochondrial disorders',
+    safetyLevel: 'warning',
   },
 
   {
@@ -320,6 +350,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Continuous cardiac monitoring during infusion and for 20 min after. Monitor for hypotension, bradycardia, QT prolongation.',
     },
     next: 'se-2nd-line-response',
+
+    summary: 'Fosphenytoin 20 mg PE/kg IV — requires cardiac monitoring, INEFFECTIVE for drug/alcohol-induced seizures',
+    safetyLevel: 'warning',
   },
 
   {
@@ -342,6 +375,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess 20 min after infusion — persistent seizure = refractory SE, 30-40% fail 2nd-line therapy',
   },
 
   // =====================================================================
@@ -367,6 +402,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Have intubation supplies ready. Monitor respiratory status, BP. High risk of respiratory depression and hypotension.',
     },
     next: 'se-2nd-line-response',
+
+    summary: 'Phenobarbital 15-20 mg/kg IV — high respiratory depression risk, have intubation ready',
+    safetyLevel: 'warning',
   },
 
   {
@@ -399,6 +437,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Continuous EEG monitoring mandatory. Arterial line for BP. Central venous access for vasopressors.',
     },
     next: 'se-rse-infusion',
+
+    summary: 'RSE requires intubation, arterial line, continuous EEG — short-acting paralytic for seizure assessment',
+    safetyLevel: 'critical',
   },
 
   {
@@ -430,6 +471,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         next: 'se-rse-monitoring',
       },
     ],
+
+    summary: 'Select continuous infusion for EEG burst suppression — midazolam, propofol, pentobarbital, or ketamine',
   },
 
   {
@@ -459,6 +502,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Continuous EEG mandatory. Target burst suppression or seizure suppression. Wean 25% every 4-6 hr. If seizures recur, restart effective dose and extend 24h.',
     },
     next: 'se-disposition',
+
+    summary: 'Maintain burst suppression 24-48h, wean 25% q4-6h — SRSE if seizures persist despite 24h anesthesia',
   },
 
   {
@@ -503,6 +548,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Fetal monitoring. OB consultation STAT. Consider emergent delivery. Monitor Mg levels (therapeutic 4-7 mEq/L), reflexes, respiratory status.',
     },
     next: 'se-2nd-line-choice',
+
+    summary: 'Eclampsia: MgSO4 first; epilepsy in pregnancy: prefer levetiracetam, AVOID valproate (Category X)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -532,6 +580,9 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Treat underlying toxidrome. Avoid phenytoin in drug/alcohol-induced SE. High-dose BZD may be needed.',
     },
     next: 'se-2nd-line-choice',
+
+    summary: 'INH toxicity: pyridoxine 5g IV empiric; alcohol withdrawal: BZDs + phenobarbital; phenytoin INEFFECTIVE for drug-induced SE',
+    safetyLevel: 'critical',
   },
 
   {
@@ -569,6 +620,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'Weight estimation formulas provided. Febrile SE most common in children. Phenobarbital first-line for neonatal seizures.',
     },
     next: 'se-2nd-line-choice',
+
+    summary: 'Same algorithm as adults with weight-based dosing — consider pyridoxine-dependent epilepsy in neonates/infants',
   },
 
   // =====================================================================
@@ -594,6 +647,8 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
       monitoring: 'EEG required for diagnosis. Clinical + EEG improvement confirms NCSE. Weigh risks of aggressive treatment against ongoing nonconvulsive activity.',
     },
     next: 'se-iv-access',
+
+    summary: 'NCSE in 48% of altered post-SE patients — requires EEG for diagnosis, BZD trial is diagnostic + therapeutic',
   },
 
   {

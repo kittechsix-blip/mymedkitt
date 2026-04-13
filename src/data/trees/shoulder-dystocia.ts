@@ -31,6 +31,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     body: '[Shoulder Dystocia Steps Summary](#/info/sd-summary) — quick-reference escalation checklist to review before delivery.\n\n**Shoulder dystocia occurs when the baby\'s anterior shoulder becomes impacted behind the mother\'s pubic symphysis after delivery of the fetal head.** The remainder of the baby does not follow the head as it usually does during vaginal delivery.\n\nKEY FACTS\n• Cannot be predicted with any degree of accuracy [1]\n• Cannot be prevented by any specific strategies or maneuvers [1]\n• Occurs in approximately 1.5% of vaginal deliveries [9]\n\nTWO SIGNS OF SHOULDER DYSTOCIA\n**1. Failure to deliver** — The baby\'s body does not emerge with standard traction and maternal pushing after delivery of the fetal head.\n\n**2. The "Turtle Sign"** — The fetal head suddenly retracts back against the mother\'s perineum after emerging from the vagina. The baby\'s cheeks bulge out, resembling a turtle pulling its head back into its shell. This retraction is caused by the anterior shoulder catching on the posterior surface of the maternal pubic bone.',
     citation: [1, 9],
     next: 'sd-initial',
+
+    summary: 'Recognize shoulder dystocia by failure to deliver body after head and turtle sign — anterior shoulder impacted behind pubic symphysis',
+    skippable: true,
   },
 
   // =====================================================================
@@ -45,6 +48,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     body: '**As soon as shoulder dystocia is recognized, the delivering clinician must act immediately and calmly.**\n\nIMMEDIATE ACTIONS\n• **Announce** "shoulder dystocia" clearly to the room\n• **Call for help** — request a second obstetrician if available\n• **Call pediatrics/NICU** — for neonatal evaluation and potential resuscitation\n• **Call anesthesia** — in case procedural intervention is needed\n• **Request extra personnel** — nurses, additional hands\n• **Designate a timekeeper** — call out elapsed time every 30 seconds\n• **Designate a note taker** — record timing of events and maneuvers attempted\n\nTIME WINDOW\n**You have approximately 4–5 minutes** to deliver a previously well-oxygenated term infant before the risk of hypoxic brain injury becomes significant. [2][3]\n\n• Wood (1973): fetal pH drops ~0.04 units per minute during shoulder dystocia [4]\n• Leung (2011): pH drop ~0.01 units per minute; 4–5 min before ischemic neuropathy risk [2]\n• This time frame depends on the oxygenation and acidosis status of the fetus prior to onset\n\nDO NOT PANIC\nBy restraining panic, keeping a cool head, and employing a previously thought-out set of maneuvers, almost all shoulder dystocias can be resolved with excellent results. [1]',
     citation: [1, 2, 3, 4],
     next: 'sd-traction',
+
+    summary: 'Announce shoulder dystocia, call for help, start clock — 4-5 min window before hypoxic brain injury risk',
+    safetyLevel: 'critical',
   },
 
   {
@@ -55,6 +61,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     body: 'Unless a baby falls out of the mother, some traction is always applied to the infant\'s head during delivery. This is standard of care practiced by obstetricians across the United States and described in major obstetrical textbooks (Williams Obstetrics, Stanford Handbook). [1]\n\nAXIAL TRACTION\nPer ACOG (2014): because the infant\'s position within the pelvis is at some angle relative to the horizontal plane, **axial traction is generally applied in the direction below the horizontal plane** (downward axial traction). This is distinguished from downward lateral traction or lateral bending. [1]\n\nON "EXCESSIVE FORCE"\nSome investigators (Allen 1991, Gonik) have attempted to quantify "excessive force" using piezoelectric fingertip sensors. There is no universally accepted threshold. [12]\n\nWhen all maneuvers have been exhausted and the only options are maximal extraction effort, hypoxic neurologic damage, or fetal death — **the risk of brachial plexus or other injury must be accepted** to save the baby\'s life. [1]',
     citation: [1, 12],
     next: 'sd-mcroberts',
+
+    summary: 'Axial traction is standard — no universal threshold for excessive force; accept injury risk to save life if needed',
+    skippable: true,
   },
 
   // =====================================================================
@@ -75,6 +84,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
       },
     ],
     next: 'sd-first-check',
+
+    summary: 'Hyperflex hips onto abdomen + suprapubic pressure to rotate shoulder to oblique diameter — resolves 50-60%',
+    safetyLevel: 'critical',
   },
 
   {
@@ -97,6 +109,8 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Assess if McRoberts + suprapubic resolved dystocia — if not, escalate to rotational maneuvers',
   },
 
   // =====================================================================
@@ -110,6 +124,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     title: 'Wood\'s Screw & Rubin\'s Maneuver',
     body: '**Rotational maneuvers use progressive corkscrew rotation of the posterior shoulder to release the impacted anterior shoulder.**\n\nWOOD\'S SCREW MANEUVER (1943)\n• Apply pressure on the **anterior surface of the posterior shoulder**\n• Progressively rotate the posterior shoulder 180° in a corkscrew fashion\n• This rotates the baby\'s shoulder girdle, freeing the anterior shoulder from behind the symphysis\n\nRUBIN\'S MANEUVER (Variation)\n• Apply pressure on the **posterior surface of the posterior shoulder**\n• This has the advantage of **flexing the shoulders across the chest**, decreasing the bisacromial diameter\n• The reduced shoulder width makes passage through the pelvis easier\n\nBOTH DIRECTIONS\nTry clockwise and counter-clockwise rotation — one direction may succeed where the other fails.\n\nGurewitsch & Allen (2005) suggest rotational maneuvers may place **less stretch on the brachial plexus** than McRoberts or suprapubic pressure. [10]',
     citation: [10, 12],
+
+    summary: 'Corkscrew rotate posterior shoulder 180° (Wood) or flex shoulders across chest (Rubin) — try both directions',
+
     images: [
       {
         src: 'images/shoulder-dystocia/rotational-maneuver.jpg',
@@ -126,6 +143,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     title: 'Delivery of the Posterior Arm',
     body: '**If rotational maneuvers fail, attempt delivery of the posterior arm.** Hoffman (2011) found this maneuver had the highest rate of successful delivery compared to all other maneuvers. [9]\n\nTECHNIQUE\n• Insert hand behind the posterior shoulder of the fetus\n• Locate the posterior arm\n• **Sweep the arm across the fetal chest** and deliver it\n• With the posterior arm delivered, rotate the baby to dislodge the anterior shoulder\n• Complete delivery\n\nRISKS\n• Humeral fracture: 12.4% in Gherman\'s 1998 series (11 of 89 cases) [11]\n• Almost all humeral fractures heal quickly without permanent damage\n• A small price to pay for delivery in a life-threatening situation\n\nEVIDENCE COMPARISON\n• Leung (2011): Rotational methods vs posterior arm — similar success rates, but rotational methods may have less fetal injury (4.4% vs 21%) [2]\n• Hoffman (2011): Posterior arm had highest success rate with no difference in injury rates [9]\n• Spain (2015): No individual maneuver associated with morbidity after adjusting for duration/severity — "use the maneuver most likely to result in successful delivery" [13]',
     citation: [2, 9, 11, 13],
+
+    summary: 'Sweep posterior arm across fetal chest to deliver — highest success rate; 12% humeral fracture risk (acceptable)',
+
     images: [
       {
         src: 'images/shoulder-dystocia/posterior-arm-delivery.jpg',
@@ -155,6 +175,8 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess if rotational maneuvers or posterior arm resolved dystocia — if not, escalate to last resort',
   },
 
   // =====================================================================
@@ -188,6 +210,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
       monitoring: 'Monitor maternal BP and HR. Ensure IV access. Prepare for emergency cesarean section immediately after successful cephalic replacement.',
     },
     next: 'sd-protocols',
+
+    summary: 'Zavanelli (push head back + emergency C-section), all-fours, deliberate clavicle fracture, symphysiotomy — all carry major risk',
+    safetyLevel: 'critical',
   },
 
   {
@@ -198,6 +223,9 @@ export const SHOULDER_DYSTOCIA_NODES: DecisionNode[] = [
     body: '**The most important aspect of resolving shoulder dystocia is having a clear, well-rehearsed sequence of maneuvers in mind before it occurs.** [1]\n\nACOG PROTOCOL (2002, reaffirmed 2015) [1]\n1. McRoberts maneuver + suprapubic pressure\n2. Episiotomy (controversial)\n3. Rotational maneuvers\n4. Delivery of posterior arm\n5. Zavanelli / symphysiotomy if all else fails\n\nGHERMAN USC PROTOCOL (1998) [11]\n1. McRoberts maneuver\n2. Suprapubic pressure\n3. Procto-episiotomy\n4. Wood\'s corkscrew maneuver\n5. Posterior arm extraction\n6. Zavanelli / symphysiotomy\n\nKEY EVIDENCE\n• No maneuver has been clearly shown to be superior to any other [13]\n• The number of maneuvers required correlates with injury rate [6]\n• As fetal weight increases, more maneuvers are typically required [6]\n• CNGOF (Sentilhes 2016): episiotomy is NOT routinely required for shoulder dystocia maneuvers [18]\n\nTHREE KEYS TO SUCCESS\n**1. Recognize** the shoulder dystocia\n**2. Know** the maneuvers\n**3. Implement** them in a calm, controlled, organized fashion [1]',
     citation: [1, 6, 11, 13, 18],
     next: 'sd-resolved',
+
+    summary: 'ACOG protocol sequence: McRoberts → suprapubic → rotational → posterior arm → Zavanelli; rehearse before delivery',
+    skippable: true,
   },
 
   {

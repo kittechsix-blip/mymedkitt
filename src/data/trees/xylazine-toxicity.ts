@@ -43,6 +43,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Skin wounds present', description: 'Necrotic ulcers, non-healing wounds, may or may not be at injection sites', next: 'xyl-wound-assess' },
       { label: 'Withdrawal symptoms', description: 'Restless, anxious, tachycardic — recent cessation of use', next: 'xyl-withdrawal' },
     ],
+
+    summary: 'Alpha-2 agonist NOT reversed by naloxone — still give naloxone because 95% involve fentanyl co-ingestion',
+    safetyLevel: 'critical',
   },
   {
     id: 'xyl-quick-ref',
@@ -52,6 +55,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Mechanism:** Alpha-2 adrenergic agonist (central sympatholysis)\n\n**Street names:** Tranq, Tranq dope, Sleep cut, Zombie drug\n\n**NOT detected by:** Standard urine drug screen\n**Detected by:** GC-MS, LC-MS (7-8 day turnaround), lateral flow test strips\n\n**Half-life:** 23-50 minutes IV, longer with IM/SC\n\n**Key clinical features:**\n• Prolonged sedation DESPITE naloxone\n• Bradycardia + hypotension\n• Hypothermia\n• Hyperglycemia\n• Necrotic skin wounds (even remote from injection sites)\n\n**No antidote:** Atipamezole (alpha-2 antagonist) works in animals but is NOT available for human use [1][2]',
     citation: [1, 2],
     next: 'xyl-start',
+
+    summary: 'Half-life 23-50min; not detected on standard UDS; no antidote exists; prolonged sedation despite naloxone',
+    skippable: true,
   },
   {
     id: 'xyl-oa2a',
@@ -61,6 +67,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**OA2A = Opioid + Alpha-2 Agonist** — the combined toxidrome of fentanyl + xylazine [1].\n\n[Tranq vs Opioid Withdrawal](#/info/xyl-withdrawal-comparison)\n\n| Finding | Pure Opioid | OA2A (Xylazine + Opioid) |\n|---------|-------------|---------------------------|\n| Miosis | ✓ | ✓ |\n| Sedation | ✓ | ✓ (prolonged) |\n| Respiratory depression | ✓ | ✓ |\n| Naloxone response | Full arousal | Respirations improve, stays sedated |\n| Bradycardia | Rare | **Common** |\n| Hypotension | Variable | **Common** |\n| Hypothermia | Rare | **Common** |\n| Hyperglycemia | No | Yes |\n\n**Clinical pearl:** If naloxone improves respirations but the patient doesn\'t wake up — suspect xylazine [1][2].',
     citation: [1, 2],
     next: 'xyl-resp-assess',
+
+    summary: 'OA2A: naloxone improves respirations BUT patient stays sedated — bradycardia, hypotension, hypothermia common',
+    skippable: true,
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -85,6 +94,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Stage 3A — Severe with function', description: 'Exposed bone, possible osteomyelitis, function preserved', next: 'xyl-wound-stage3a', urgency: 'critical' },
       { label: 'Stage 3B — Severe without function', description: 'Exposed bone, osteomyelitis, NO meaningful function', next: 'xyl-wound-stage3b', urgency: 'critical' },
     ],
+
+    summary: 'Wounds NOT always at injection sites — systemic vasoconstriction; 56% MRSA, 37% GAS; do NOT misdiagnose as nec fasc',
+    safetyLevel: 'warning',
   },
   {
     id: 'xyl-wound-stage1',
@@ -94,6 +106,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Philadelphia Consensus Classification [3]:**\n• Partial or full thickness skin loss\n• No exposed tendon, muscle, or bone\n• Preserved function\n\n**Key principle:** **AVOID aggressive debridement**\n• Islands of healthy tissue = healing potential\n• Autolytic debridement preferred (wet-to-dry dressings, hydrogels)\n\n**Local wound care:**\n1. Cleanse with soap and water (or NS)\n2. Sterile non-adherent gauze (Adaptic, Xeroform)\n3. Daily dressing changes\n4. Silver sulfadiazine if signs of infection [3][4]\n\n**Antibiotics if infected:**\n• Signs: erythema >1cm from wound edge, purulence, warmth, tenderness\n• [Wound Antibiotic Selection](#/info/xyl-wound-antibiotics)',
     citation: [3, 4],
     next: 'xyl-wound-antibiotics',
+
+    summary: 'AVOID aggressive debridement — islands of healthy tissue = healing potential; autolytic debridement preferred',
+    safetyLevel: 'warning',
   },
   {
     id: 'xyl-wound-stage2',
@@ -106,6 +121,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { id: 'xyl-wound-antibiotics', label: 'Wound Antibiotic Guide' },
     ],
     next: 'xyl-wound-antibiotics',
+
+    summary: 'Exposed muscle/tendon with preserved function — conservative care, wound VAC; surgery only after 3+ months abstinence',
   },
   {
     id: 'xyl-wound-stage3a',
@@ -126,6 +143,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'Vancomycin troughs, renal function, serial wound exams',
     },
     next: 'xyl-dispo-wound',
+
+    summary: 'Exposed bone with function preserved — surgical consult, IV vanc + pip-tazo, 6 weeks if osteomyelitis confirmed',
+    safetyLevel: 'critical',
   },
   {
     id: 'xyl-wound-stage3b',
@@ -146,6 +166,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'Surgical planning, pre-op optimization',
     },
     next: 'xyl-dispo-wound',
+
+    summary: 'No meaningful function + exposed bone = amputation recommendation; discuss goals of care, document shared decision-making',
+    safetyLevel: 'critical',
   },
   {
     id: 'xyl-wound-antibiotics',
@@ -155,6 +178,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Culture data from Philadelphia XAW series [4]:**\n• **56% MRSA**\n• **37% Group A Streptococcus**\n• Polymicrobial common\n\n**Outpatient (Stage 1, mild Stage 2):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| [TMP-SMX](#/drug/tmp-smx/xylazine) 1-2 DS BID | MRSA | First-line |\n| TMP-SMX + Amoxicillin 500 TID | MRSA + GAS | If cellulitis |\n| Doxycycline 100 BID | MRSA (some) | Alternative if sulfa allergy |\n\n**Inpatient (Stage 2-3 with infection):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| Vancomycin + Pip-Tazo | MRSA, GAS, GN, anaerobes | Severe infection |\n| Vancomycin + Ceftriaxone | MRSA, GAS | If AKI |\n\n**Topical:**\n• **Silver sulfadiazine** — broad spectrum, active 72+ hours\n• Mupirocin — decolonization\n\n**Duration:** 7-10 days (uncomplicated), 6 weeks (osteomyelitis) [3][4]',
     citation: [3, 4],
     next: 'xyl-dispo-wound',
+
+    summary: 'TMP-SMX first-line outpatient for MRSA; add amoxicillin for GAS cellulitis; vanc + pip-tazo for severe/inpatient',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -172,6 +197,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'RR 8-12, sedated', description: 'Depressed but not apneic', next: 'xyl-naloxone', urgency: 'urgent' },
       { label: 'RR >12, adequate', description: 'Breathing OK, assess circulation', next: 'xyl-cv-assess' },
     ],
+
+    summary: 'Xylazine + opioid = synergistic respiratory depression — assess airway/breathing first priority',
   },
   {
     id: 'xyl-naloxone',
@@ -192,6 +219,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'SpO2, respiratory rate, level of consciousness, aspiration risk',
     },
     next: 'xyl-naloxone-response',
+
+    summary: 'Titrate naloxone to RR >12, NOT wakefulness — excess naloxone risks withdrawal with aspiration in sedated patient',
+    safetyLevel: 'critical',
   },
   {
     id: 'xyl-naloxone-response',
@@ -205,6 +235,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Respirations improved, still sedated', description: 'Classic OA2A response — supportive care', next: 'xyl-cv-assess' },
       { label: 'No improvement', description: 'Airway management needed', next: 'xyl-airway', urgency: 'critical' },
     ],
+
+    summary: 'Full arousal = pure opioid; improved breathing but sedated = OA2A; no response to 10mg = non-opioid cause',
   },
   {
     id: 'xyl-airway',
@@ -214,6 +246,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Indications for intubation:**\n• Persistent apnea despite naloxone\n• GCS <8 with aspiration risk\n• Copious secretions/emesis\n• Refractory hypoxia [1]\n\n**Airway approach:**\n1. Position in **recovery position** if spontaneous respirations\n2. **Bag-valve mask** — rescue breaths especially helpful\n3. **Supplemental O₂** via NC or NRB\n4. **Intubation** if above criteria met\n\n**Post-intubation considerations:**\n• Continue supportive care\n• Monitor for bradycardia/hypotension\n• Sedation may be difficult to titrate (already sedated)\n• Plan for prolonged intubation if severe xylazine component',
     citation: [1, 2],
     next: 'xyl-cv-assess',
+
+    summary: 'Recovery position if breathing; BVM for rescue breaths; intubate if persistent apnea, GCS <8, or refractory hypoxia',
   },
   {
     id: 'xyl-cv-assess',
@@ -227,6 +261,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Symptomatic bradycardia', description: 'HR <50 with symptoms', next: 'xyl-bradycardia', urgency: 'urgent' },
       { label: 'Hemodynamically stable', description: 'SBP >90, HR >50, asymptomatic', next: 'xyl-monitoring' },
     ],
+
+    summary: 'Initial peripheral vasoconstriction then central sympatholysis — expect bradycardia + hypotension',
   },
   {
     id: 'xyl-hypotension',
@@ -255,6 +291,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'BP, HR, ECG, glucose, temperature, lactate',
     },
     next: 'xyl-monitoring',
+
+    summary: 'NS/LR bolus first-line; NE for refractory hypotension; avoid pure alpha agonists — worsen tissue perfusion',
   },
   {
     id: 'xyl-bradycardia',
@@ -283,6 +321,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'Continuous cardiac monitoring, BP',
     },
     next: 'xyl-monitoring',
+
+    summary: 'Avoid atropine — risk of hypertensive crisis from unopposed vasoconstriction; dobutamine preferred if treatment needed',
+    safetyLevel: 'critical',
   },
   {
     id: 'xyl-monitoring',
@@ -292,6 +333,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Standard monitoring:**\n• Continuous pulse oximetry\n• Cardiac telemetry\n• Temperature (hypothermia common)\n• Glucose (hyperglycemia common)\n• ECG at baseline (QTc)\n\n**Labs:**\n• BMP (glucose, renal function)\n• VBG/ABG if concern for hypoperfusion\n• Lactate\n• Consider troponin if chest pain\n\n**Duration:**\n• Minimum 4-6 hours post-naloxone\n• Longer if xylazine confirmed/suspected\n• Watch for delayed wound complications\n\n**No antidote exists:** Atipamezole (veterinary alpha-2 antagonist) is NOT available for human use [1][2]',
     citation: [1, 2],
     next: 'xyl-wound-assess',
+
+    summary: 'Monitor SpO2, telemetry, temperature, glucose; minimum 4-6h post-naloxone; no antidote exists for xylazine',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -309,6 +352,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Admit for IV antibiotics', description: 'Infected Stage 2 or Stage 3A', next: 'xyl-admit-obs', urgency: 'urgent' },
       { label: 'Admit for surgical management', description: 'Stage 3B or failed conservative care', next: 'xyl-admit-icu', urgency: 'critical' },
     ],
+
+    summary: 'Discharge Stage 1 with outpatient abx; admit Stage 2 with infection or Stage 3 for IV abx and surgery',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -322,6 +367,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Timeline:** Symptoms begin **8-24 hours** after last use\n\n[Tranq vs Opioid Withdrawal Comparison](#/info/xyl-withdrawal-comparison)\n\n**Xylazine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
     citation: [1, 5],
     next: 'xyl-withdrawal-tx',
+
+    summary: 'Symptoms begin 8-24h after last use; no GI symptoms unlike opioid withdrawal; buprenorphine does NOT treat it',
   },
   {
     id: 'xyl-withdrawal-comparison',
@@ -331,6 +378,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Comparison Table:**\n\n| Symptom | Opioid Withdrawal | Xylazine Withdrawal |\n|---------|-------------------|---------------------|\n| **Onset** | 8-24h (short-acting) | 8-24h |\n| **Duration** | 5-7 days | 3-5 days |\n| **Anxiety/Restlessness** | ✓ | ✓ |\n| **Tachycardia** | ✓ | ✓ |\n| **Hypertension** | ✓ | ✓ |\n| **Diaphoresis** | ✓ | ✓ |\n| **Nausea/Vomiting** | ✓ | ✗ |\n| **Diarrhea** | ✓ | ✗ |\n| **Piloerection** | ✓ | ✗ |\n| **Yawning/Lacrimation** | ✓ | ✗ |\n| **Mydriasis** | ✓ | Variable |\n| **Treated by buprenorphine** | ✓ | ✗ |\n| **Treated by clonidine** | ✓ (adjunct) | ✓ (first-line) |\n\n**No FDA-approved treatment** for xylazine withdrawal [1][5]',
     citation: [1, 5],
     next: 'xyl-withdrawal-tx',
+
+    summary: 'Key difference: opioid withdrawal has GI symptoms and mydriasis; xylazine does not; clonidine treats both',
+    skippable: true,
   },
   {
     id: 'xyl-withdrawal-tx',
@@ -359,6 +409,9 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       monitoring: 'Vital signs q4h, symptom reassessment, sedation level',
     },
     next: 'xyl-moud',
+
+    summary: 'Clonidine 0.1-0.3mg PO q4-6h first-line; hold if SBP <90 or HR <50; dex for severe ICU cases',
+    safetyLevel: 'warning',
   },
   {
     id: 'xyl-moud',
@@ -368,6 +421,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**MOUD = Medications for Opioid Use Disorder**\n\n**Key point:** Xylazine does NOT block buprenorphine binding — MOUD still works for the opioid component [1][5]\n\n**Buprenorphine initiation:**\n• Standard COWS-based protocol\n• Wait for COWS ≥8-12 before dosing\n• Start 2-4 mg SL, titrate up\n\n**Methadone:**\n• Can be started in ED under federal exemption (72-hour rule)\n• Refer to OTP for continuation\n\n**Counseling points:**\n• MOUD treats the opioid craving/withdrawal — NOT xylazine\n• Patients may still feel xylazine withdrawal symptoms\n• Clonidine bridges the gap\n• Harm reduction: xylazine test strips available',
     citation: [1, 5, 6],
     next: 'xyl-dispo-assess',
+
+    summary: 'Xylazine does NOT block buprenorphine — MOUD still works for opioid component; start both simultaneously',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -386,6 +441,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Admit telemetry', description: 'Wound infection, withdrawal management', next: 'xyl-admit-obs', urgency: 'urgent' },
       { label: 'Admit ICU', description: 'Intubated, pressors, severe withdrawal', next: 'xyl-admit-icu', urgency: 'critical' },
     ],
+
+    summary: 'Discharge if stable 4-6h post-naloxone, HR >50, SBP >90, RR >12; admit if persistent depression or infected wounds',
   },
   {
     id: 'xyl-observation',
@@ -395,6 +452,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     body: '**Observation period: 4-6 hours post-naloxone**\n\n**Rationale:**\n• Fentanyl half-life can outlast naloxone\n• Xylazine effects persist longer\n• Watch for recurrent respiratory depression\n\n**Monitoring during observation:**\n• Pulse oximetry continuous\n• Vitals q1h\n• LOC checks\n• Aspiration precautions (elevate HOB)\n\n**Re-dose naloxone if:**\n• RR <12\n• SpO₂ <92%\n• Increasing sedation',
     citation: [1],
     next: 'xyl-discharge',
+
+    summary: 'Observe 4-6h post-naloxone; continuous SpO2 and vitals q1h; re-dose naloxone if RR <12 or SpO2 <92%',
   },
   {
     id: 'xyl-discharge',

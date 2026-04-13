@@ -46,6 +46,7 @@ export const THYROID_NODES = [
                 next: 'thyroid-subclinical',
             },
         ],
+        summary: 'Thyroid emergencies are clinical diagnoses — do NOT delay treatment for labs; sepsis is #1 precipitant for both',
     },
     {
         id: 'thyroid-hypo-confirm',
@@ -65,6 +66,7 @@ export const THYROID_NODES = [
                 next: 'thyroid-subclinical',
             },
         ],
+        summary: 'Decompensated hypothyroidism: AMS (~90%), hypothermia (70-90%), bradycardia (~70%) — 25-50% mortality',
     },
     {
         id: 'thyroid-storm-confirm',
@@ -93,6 +95,7 @@ export const THYROID_NODES = [
                 next: 'thyroid-tox-mild',
             },
         ],
+        summary: 'Thyroid storm = thyrotoxicosis + end-organ dysfunction — Burch-Wartofsky helps frame but is NOT diagnostic',
     },
     {
         id: 'thyroid-tox-mild',
@@ -125,6 +128,8 @@ export const THYROID_NODES = [
         body: '**Airway is the first priority — these patients have a physiologically AND anatomically difficult airway.**\n\n**Anatomic challenges:** macroglossia, posterior pharyngeal myxedema, goiter (tracheal compression, laryngeal deviation), vocal cord edema, reduced neck mobility\n\n**Physiologic challenges:** severe respiratory muscle weakness, depressed central ventilatory drive (CO₂ narcosis), decreased lung elasticity, pleural effusions\n\n**Video laryngoscopy as first-line.** Fiberoptic backup. Surgical airway technically challenging with goiter. If stable + predicted difficult airway → consider awake intubation with ENT/anesthesia standby. [14]\n\n[Airway Management in Thyroid Disease](#/info/thyroid-airway)\n\n**Supportive care (SIMULTANEOUS with hormone therapy):**\n• **Passive rewarming ONLY** — blankets, warm room, warm IV fluids. **NO active rewarming** (heating blankets, forced air) — causes peripheral vasodilation → cardiovascular collapse [3][14]\n• NS bolus for hypotension — careful not to overresuscitate (impaired free water excretion)\n• [Dextrose](#/drug/dextrose/hypoglycemia) for hypoglycemia — follow glucose q2-4h\n• **Avoid sedatives, opioids, antipsychotics** — extreme sensitivity, may precipitate further decompensation [3]',
         citation: [3, 14],
         next: 'thyroid-hypo-steroids',
+        summary: 'Difficult airway (macroglossia, goiter); passive rewarming ONLY — active rewarming causes cardiovascular collapse',
+        safetyLevel: 'critical',
     },
     {
         id: 'thyroid-hypo-steroids',
@@ -153,6 +158,8 @@ export const THYROID_NODES = [
             },
             monitoring: 'Cortisol level, hemodynamics, glucose. Taper when cortisol >18 μg/dL confirmed.',
         },
+        summary: 'Give steroids BEFORE T4 — concomitant adrenal insufficiency in 5-10%; T4 without cortisol can precipitate adrenal crisis',
+        safetyLevel: 'critical',
     },
     {
         id: 'thyroid-hypo-t4',
@@ -162,6 +169,7 @@ export const THYROID_NODES = [
         body: '**[Levothyroxine](#/drug/levothyroxine/decompensated hypothyroidism) — mainstay of thyroid replacement:**\n\n**Loading dose:** 200-400 mcg IV\n• IBCC: 200 mcg for most patients (lower end preferred)\n• ATA guidelines: 200-400 mcg based on severity, age, body weight, cardiac history [5]\n• Use lower end (200 mcg) for: elderly, low body weight, coronary artery disease, arrhythmias\n\n**Maintenance:** 50-100 mcg IV daily (or 1.2 mcg/kg/day IV) [5]\n\n**Why IV?** GI absorption is unreliable in decompensated hypothyroidism (ileus, mucosal edema). Oral levothyroxine should NOT be used for initial treatment. Transition to PO (1.6 mcg/kg/day) once GI function restored. [3][5]\n\n**Safety note:** IV levothyroxine is safe to give empirically. T4 is the inactive pro-hormone — the normal circulating pool is ~1,000 mcg, so even if the diagnosis is wrong, 200-400 mcg won\'t cause harm. [3]',
         citation: [3, 5, 14],
         next: 'thyroid-hypo-t3',
+        summary: 'Levothyroxine 200-400 mcg IV load — oral unreliable in decompensated state; safe to give empirically',
         treatment: {
             firstLine: {
                 drug: 'Levothyroxine',
@@ -202,6 +210,7 @@ export const THYROID_NODES = [
             },
             monitoring: 'T3 levels, clinical response (consciousness, hemodynamics). Stop if T3 elevated or after 48h.',
         },
+        summary: 'T3 is biologically active, faster onset but higher risk — reserve for critically ill; stop after 48h or if T3 elevated',
     },
     // =====================================================================
     // MODULE 3: DECOMPENSATED HYPOTHYROIDISM — MONITORING
@@ -214,6 +223,7 @@ export const THYROID_NODES = [
         body: '**Core labs:**\n• TSH — very high in primary hypothyroidism (most common), low/normal in central (pituitary)\n• Free T4 — should be low; low-normal does not exclude diagnosis [3]\n• Random cortisol — rule out concurrent adrenal insufficiency\n• BMP — hyponatremia (~50%), hypoglycemia, hyperkalemia (rare)\n• CBC — anemia common, leukopenia possible\n• Lactate\n• ABG/VBG — hypercapnia, respiratory acidosis (even without obvious respiratory distress) [3]\n• CK — rhabdomyolysis from hypothermia/immobility\n• Coagulation studies — acquired von Willebrand syndrome possible [3]\n\n**Imaging:**\n• ECG — bradycardia, low voltages, flattened T waves, QT prolongation, heart block [14]\n• CXR — pleural effusions, cardiomegaly\n• Echocardiogram — pericardial effusion, reduced EF\n• Abdominal XR if distended — ileus, megacolon\n\n**Infection workup (sepsis is #1 precipitant):**\n• Blood cultures, UA/UCx, CXR\n• Consider CT head + LP if etiology unclear [14]\n\n[Lab Interpretation Guide](#/info/thyroid-labs)',
         citation: [3, 14],
         next: 'thyroid-hypo-monitoring',
+        summary: 'TSH, fT4, random cortisol, BMP, ABG, CK; infection workup mandatory — sepsis is #1 precipitant',
     },
     {
         id: 'thyroid-hypo-monitoring',
@@ -223,6 +233,8 @@ export const THYROID_NODES = [
         body: '**ICU-level monitoring is mandatory for decompensated hypothyroidism.**\n\n**Monitoring parameters:**\n• Core temperature q1h — goal: passive rewarming to normothermia\n• Continuous cardiac monitoring — bradycardia, QT prolongation, heart block\n• Glucose q2-4h — risk of recurrent hypoglycemia\n• Sodium q4-6h — hyponatremia corrects with T4 therapy; fluid restrict if Na <130\n• Hemodynamics q1h — BP, HR, urine output\n• ABG/VBG if intubated — track CO₂ clearance\n\n**Medications to AVOID:**\n• Sedatives, opioids (extreme sensitivity → respiratory depression)\n• Amiodarone (can worsen hypothyroidism)\n• Diuretics (volume depletion + electrolyte shifts)\n\n**Vasopressor-refractory shock:** May occur — myocardium is profoundly depressed. Vasopressors are unlikely to work until thyroid hormone replacement takes effect. Prioritize thyroid replacement alongside standard resuscitation. Consider T3 if not already started. [3]\n\n**Thyroid labs for monitoring:** Check TSH + fT4 every 1-2 days (trough levels). TSH falls ~50%/week. fT4 should normalize within 4 days. If TSH not trending down → increase T4 dose. [3]',
         citation: [3, 5],
         next: 'thyroid-hypo-dispo',
+        summary: 'ICU monitoring mandatory — avoid sedatives/opioids (extreme sensitivity); vasopressors unlikely to work until T4 takes effect',
+        safetyLevel: 'warning',
     },
     {
         id: 'thyroid-hypo-dispo',
@@ -243,6 +255,7 @@ export const THYROID_NODES = [
                 next: 'thyroid-hypo-floor',
             },
         ],
+        summary: 'Follow clinical parameters (mental status, temperature, hemodynamics) — TSH/fT4 changes lag by days',
     },
     {
         id: 'thyroid-hypo-icu',
@@ -273,6 +286,8 @@ export const THYROID_NODES = [
         body: '**Thyroid storm mimics sepsis — and sepsis can trigger thyroid storm.** Always perform full sepsis workup. [2][14]\n\n**Labs:**\n• TSH, free T4, free T3 (T3 often disproportionately elevated in storm)\n• BMP, CBC with differential, lactate\n• Blood cultures, UA/UCx\n• LFTs (hepatic dysfunction common — if severe, consider congestive hepatopathy from heart failure) [14]\n• Coags + fibrinogen (DIC can occur) [2]\n• CK (rhabdomyolysis)\n• Calcium (hypercalcemia from enhanced bone resorption)\n• Glucose (mild hyperglycemia common from catecholamine-mediated glycogenolysis)\n\n**Critical — ECHO BEFORE beta-blockers:** Up to 38% of thyroid storm patients develop cardiogenic shock. Beta-blockers in decompensated systolic heart failure = cardiac arrest. [2]\n\n**ECG:** Sinus tachycardia (most common), AFib (~15%), VT/VF possible\n**CXR:** Evaluate for pulmonary edema, pneumonia, pleural effusion\n\n**Empiric antibiotics if any concern for infection.** Infection is the #1 trigger. [2][14]',
         citation: [2, 12, 14],
         next: 'thyroid-storm-steroids',
+        summary: 'ECHO BEFORE beta-blockers — 38% develop cardiogenic shock; full sepsis workup, empiric antibiotics if any concern',
+        safetyLevel: 'critical',
     },
     {
         id: 'thyroid-storm-steroids',
@@ -282,6 +297,7 @@ export const THYROID_NODES = [
         body: '**Give early — dual benefit:**\n1. Blocks peripheral T4→T3 conversion (reduces active hormone)\n2. Treats potential concurrent adrenal insufficiency\n\n**IBCC protocol (preferred):**\n• [Hydrocortisone](#/drug/hydrocortisone/thyroid storm) 300 mg IV loading dose, then 100 mg IV q8h [2]\n\n**ATA protocol:**\n• [Hydrocortisone](#/drug/hydrocortisone/thyroid storm) 100 mg IV q8h (no separate load) [8]\n\n**Alternative if HC unavailable:**\n• [Methylprednisolone](#/drug/methylprednisolone/thyroid crisis) 125 mg IV load, then 60 mg IV daily\n\n**Duration:** Continue until clinical improvement (usually 3-5 days), then rapid taper.\n\n**Note:** Data is limited — one retrospective study of 811 patients found no mortality difference with early glucocorticoids in thyroid storm. [2] However, the theoretical benefit + low risk profile supports routine use.',
         citation: [2, 7, 8, 14],
         next: 'thyroid-storm-thionamide',
+        summary: 'Steroids: dual benefit — blocks T4→T3 conversion and treats potential concurrent adrenal insufficiency',
         treatment: {
             firstLine: {
                 drug: 'Hydrocortisone',
@@ -338,6 +354,8 @@ export const THYROID_NODES = [
             },
             monitoring: 'LFTs, CBC (agranulocytosis risk). Monitor for rash, fever, sore throat.',
         },
+        summary: 'Thionamide blocks new synthesis — give BEFORE iodine; PTU mandatory in 1st trimester pregnancy',
+        safetyLevel: 'warning',
     },
     {
         id: 'thyroid-storm-iodine',
@@ -347,6 +365,8 @@ export const THYROID_NODES = [
         body: '**Iodine immediately suppresses thyroid hormone release** via the Wolff-Chaikoff effect. [2]\n\n**TIMING: Give ≥1 hour after thionamide.** Without thionamide on board, iodine can be used as substrate for NEW hormone synthesis — potentially worsening thyrotoxicosis (especially with toxic multinodular goiter or toxic adenoma). [2][8]\n\n**Dosing options:**\n• [SSKI](#/drug/sski/thyroid storm) 5 drops (250 mg) PO q6h\n• Lugol\'s 5% solution 8 drops (0.4 mL) PO q6h — take with food/fluid to avoid gastritis\n\n**Duration:** Up to 10 days (suppressive effect eventually wears off). [2]\n\n**Alternative (if iodine "allergy" claimed):**\n• Lithium carbonate 300 mg PO q8h — blocks thyroid hormone release\n• Note: true iodine allergy does not exist — iodine is an essential element. Allergies are to carrier molecules (shellfish, contrast dye), not iodine itself. [2]',
         citation: [2, 8],
         next: 'thyroid-storm-cholestyramine',
+        summary: 'Iodine MUST wait ≥1h after thionamide — given too early, iodine becomes substrate for MORE hormone synthesis',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'SSKI (Saturated Solution of Potassium Iodide)',
@@ -375,6 +395,8 @@ export const THYROID_NODES = [
         body: '**[Cholestyramine](#/drug/cholestyramine/thyroid storm) 4 g PO q6h**\n\nBinds thyroid hormone in the gut, preventing enterohepatic recirculation. Effective even in endogenous thyrotoxicosis (Graves, toxic adenoma) — not just exogenous overdose. Can reduce T4 levels by an additional 20-30%. [2][16]\n\nIBCC considers this an important adjunct that is often overlooked. Extremely safe (available OTC for diarrhea). [2]\n\n**Drug interaction warning:** Cholestyramine binds many oral medications, reducing their absorption. Separate ALL oral drugs by ≥1 hour before or 2 hours after cholestyramine. This includes the thionamide — coordinate timing carefully. [14]',
         citation: [2, 14, 16],
         next: 'thyroid-storm-hyperthermia',
+        summary: 'Cholestyramine 4g PO q6h — blocks enterohepatic recirculation, reduces T4 20-30%; separate oral meds by 1-2h',
+        skippable: true,
         treatment: {
             firstLine: {
                 drug: 'Cholestyramine',
@@ -395,6 +417,8 @@ export const THYROID_NODES = [
         body: '**[Acetaminophen](#/drug/acetaminophen/fever) 650-1000 mg PO/IV q6h** (max 4g/day)\n\n**Active cooling** for temp >40°C: cooling blankets, ice packs to axillae/groin [2][12]\n\n**AVOID aspirin and NSAIDs** — they displace T4 from thyroxine-binding globulin, increasing free (active) T4 and T3 levels. This can worsen thyrotoxicosis. [14]\n\nHyperthermia is harmful: increases myocardial oxygen demand and can cause rhabdomyolysis, delirium, and organ damage. However, avoid inducing shivering (also increases cardiac workload). [2]',
         citation: [2, 12, 14],
         next: 'thyroid-storm-agitation',
+        summary: 'Acetaminophen for fever — AVOID aspirin/NSAIDs (displace T4 from binding protein, worsen thyrotoxicosis)',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Acetaminophen',
@@ -415,6 +439,7 @@ export const THYROID_NODES = [
         body: 'Agitation worsens hyperthermia and impedes care.\n\n**IBCC preferred: [Olanzapine](#/drug/olanzapine/agitation)** 5-10 mg IM/PO [2]\n• Provides sedation without respiratory depression\n• May have direct antithyroid properties\n\n**Alternatives:**\n• Benzodiazepines (midazolam 2-5 mg IM) — avoid in elderly\n• Dexmedetomidine (ICU setting) — alpha-2 agonist, no respiratory depression\n• Phenobarbital — historical agent, enhances T4 hepatic metabolism\n\n**Avoid haloperidol** — QT prolongation risk is elevated in thyrotoxicosis. Case reports of haloperidol precipitating thyroid storm (dubious but concerning). [2]\n\n**Avoid ketamine** if possible — sympathomimetic properties may worsen tachycardia/hypertension.',
         citation: [2, 18],
         next: 'thyroid-storm-cardiovascular',
+        summary: 'Olanzapine preferred for agitation — avoid haloperidol (QT risk) and ketamine (sympathomimetic)',
         treatment: {
             firstLine: {
                 drug: 'Olanzapine',
@@ -457,6 +482,8 @@ export const THYROID_NODES = [
                 next: 'thyroid-storm-afib',
             },
         ],
+        summary: 'ECHO FIRST before any cardiovascular intervention — up to 38% develop cardiogenic shock; beta-blockers in decompensated HF = arrest',
+        safetyLevel: 'critical',
     },
     {
         id: 'thyroid-storm-bb',
@@ -466,6 +493,8 @@ export const THYROID_NODES = [
         body: '**ONLY if echo confirms preserved ejection fraction and no decompensated heart failure.**\n\n**Traditional ATA/EMP view:** Beta-blockers are first-line for rate/symptom control. Propranolol preferred (also blocks T4→T3 conversion at high doses). [8][14]\n\n**IBCC critical view:** Beta-blockers may be harmful — use for standard accepted indications (hypertension, preserved-EF rate control) rather than reflexively in all thyroid storm. One meta-analysis linked beta-blockers to cardiogenic collapse and cardiac arrest in thyroid storm. [2]\n\n**If using beta-blocker:**\n• [Propranolol](#/drug/propranolol/thyroid storm) 20-40 mg PO q4-6h — start low, titrate to HR <110\n• [Esmolol](#/drug/esmolol/thyroid storm) 250-500 mcg/kg IV load → 50-100 mcg/kg/min infusion — **preferred in unstable patients** (ultra-short acting, immediately titratable, can be stopped if hypotension develops) [2][8]\n\n**Reactive airway disease:** Use cardioselective agent (esmolol, metoprolol) with caution, or calcium-channel blocker (diltiazem, verapamil) for rate control [8]\n\n**KEY: Start low, monitor closely, stop immediately if hypotension develops.**',
         citation: [2, 8, 14],
         next: 'thyroid-storm-dispo',
+        summary: 'ONLY with preserved EF — esmolol preferred (ultra-short, titratable); start low, stop immediately if hypotension',
+        safetyLevel: 'warning',
         treatment: {
             firstLine: {
                 drug: 'Esmolol',
@@ -494,6 +523,8 @@ export const THYROID_NODES = [
         body: '**If EF is reduced or clinical signs of decompensated heart failure: do NOT give beta-blockers.** [2]\n\n**Manage tachycardia by treating the storm:**\n1. Aggressive multimodal thyroid storm treatment (steps 2-7) will reduce heart rate as thyroid hormone levels fall\n2. **[Digoxin](#/drug/digoxin/thyroid)** 0.25-0.5 mg IV — lacks negative inotropic properties. However, thyrotoxicosis increases renal clearance and Vd, so higher doses may be needed and response may be blunted [2]\n3. **Diltiazem** with extreme caution ONLY if rate control is desperate — still carries negative inotropic risk\n4. **Vasopressor selection:** Phenylephrine (pure alpha — no beta stimulation) or vasopressin. Avoid catecholamines that worsen tachycardia (norepinephrine, epinephrine)\n\n**Permissive tachycardia:** Targeting HR <130 may be more realistic and safer than aggressive rate control in decompensated HF + thyroid storm. [2]\n\n**Cardiogenic pulmonary edema:** NIV (BiPAP) for respiratory support. These patients are often intravascularly depleted despite pulmonary edema — diuretics may worsen hemodynamics. [14]',
         citation: [2, 14],
         next: 'thyroid-storm-dispo',
+        summary: 'Reduced EF: NO beta-blockers — treat the storm; digoxin for rate (no negative inotropy); permissive tachy HR <130',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Digoxin',
@@ -517,6 +548,7 @@ export const THYROID_NODES = [
         body: '**AFib occurs in 10-35% of thyroid storm.** Usually resolves spontaneously once thyrotoxicosis is treated (within 8-10 weeks). [14]\n\n**Rate control (depends on EF):**\n• **Preserved EF:** Cautious beta-blocker (esmolol preferred — titratable) or diltiazem\n• **Reduced EF:** Digoxin (reduced effectiveness in thyrotoxicosis but no negative inotropy), amiodarone (contains iodine — give AFTER methimazole; reasonable short-term bridge)\n\n**Magnesium repletion** — good first step. Hyperthyroidism causes hypomagnesemia. [2]\n\n**Anticoagulation:**\n• CHA₂DS₂-VASc score still applies\n• Embolic risk may be elevated in thyrotoxicosis even without traditional risk factors\n• Consider LMWH acutely\n\n**Cardioversion** is usually ineffective until thyroid hormones normalize — defer elective cardioversion. [2]\n\n**Cross-reference:** [A-Fib RVR Consult](#/tree/afib-rvr) for full AFib management pathway',
         citation: [2, 14],
         next: 'thyroid-storm-dispo',
+        summary: 'AFib in 10-35% — usually resolves with storm treatment; cardioversion ineffective until hormones normalize',
     },
     {
         id: 'thyroid-storm-pregnancy',
@@ -526,6 +558,8 @@ export const THYROID_NODES = [
         body: '**Treatment is similar to non-pregnant patients with key modifications:** [15]\n\n[Special Populations Guide](#/info/thyroid-special-pops)\n\n**Thionamide:**\n• **1st trimester: PTU is MANDATORY** — [PTU](#/drug/ptu/thyroid storm pregnancy) methimazole is teratogenic (aplasia cutis, choanal/esophageal atresia, cardiac malformations)\n• **2nd/3rd trimester:** Switch to methimazole (lower hepatotoxicity risk)\n• Use the lowest effective dose — both drugs cross the placenta and can cause fetal hypothyroidism [15]\n\n**Iodine:** Use cautiously — crosses placenta, can cause fetal goiter/hypothyroidism\n\n**Beta-blocker:** Propranolol category C. Use lowest effective dose. Prolonged use associated with IUGR. [15]\n\n**Steroids:** Hydrocortisone — same dosing as non-pregnant\n\n**Additional concerns:**\n• Thyrotoxic heart failure + cardiomyopathy more common in pregnancy from uncontrolled hyperthyroidism [15]\n• Coordinate with OB/MFM\n• Fetal thyroid function monitoring needed\n• Beta-agonist tocolytics are contraindicated\n\n**TSH reference ranges in pregnancy:** Lower TSH normal range (reduce upper limit by ~0.5 mIU/L in 1st trimester). T4/T3 total values increase 50% after 16 weeks due to increased TBG. [15]',
         citation: [15],
         next: 'thyroid-storm-dispo',
+        summary: 'PTU mandatory 1st trimester (methimazole teratogenic); iodine cautiously (fetal goiter risk); coordinate with OB/MFM',
+        safetyLevel: 'critical',
     },
     {
         id: 'thyroid-storm-dispo',
@@ -546,6 +580,7 @@ export const THYROID_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'ALL thyroid storm patients require ICU — mortality 8-25%; improvement expected 24-72h with aggressive multimodal therapy',
     },
     {
         id: 'thyroid-storm-icu',
@@ -592,6 +627,7 @@ export const THYROID_NODES = [
                 next: 'thyroid-subclinical-hyper',
             },
         ],
+        summary: 'Euthyroid sick syndrome in acute illness — do NOT treat; reassess after illness resolves',
     },
     {
         id: 'thyroid-subclinical-treat',

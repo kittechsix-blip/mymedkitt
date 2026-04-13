@@ -22,6 +22,9 @@ const SAH_START: DecisionNode = {
   body: '[SAH Steps Summary](#/info/sah-summary) — quick reference.\n\nSpontaneous SAH (sSAH) results from extravasation of blood into the CSF. **85% are caused by aneurysm rupture.** 10% are nonaneurysmal perimesencephalic hemorrhage (better prognosis).\n\n• Incidence: ~10 per 100,000/year in the US\n• Mortality: ~40% at 1 week; 10-15% die prehospital\n• Misdiagnosis rate: up to 5% on initial ED visit\n• Delayed or missed diagnosis → significantly worse outcomes\n\n**Risk factors:** Hypertension, smoking, heavy alcohol use, cocaine, family history of aSAH, polycystic kidney disease, connective tissue disorders, female sex.',
   citation: [1, 2, 3],
   next: 'sah-presentation',
+
+  summary: 'Spontaneous SAH: 85% aneurysmal, 40% mortality at 1 week, 5% misdiagnosis rate on initial ED visit — delayed diagnosis worsens outcomes',
+  skippable: true,
 };
 
 const SAH_PRESENTATION: DecisionNode = {
@@ -32,6 +35,9 @@ const SAH_PRESENTATION: DecisionNode = {
   body: '**Classic:** Sudden-onset severe headache ("worst headache of my life") peaking within seconds — **thunderclap headache**. Neither sensitive nor specific for SAH.\n\n• 10-16% of thunderclap headaches are SAH\n• 70% present with headache alone, no focal symptoms\n• **Normal neurologic exam in 75%** of aSAH patients\n• Transient LOC in ~25%\n• Vomiting in ~70%; neck stiffness in ~60%\n• Seizures or cranial nerve palsies suggest serious pathology\n\n**Atypical presentations:**\n• Isolated neck/back pain (8% have no headache)\n• General malaise without typical headache\n• Sentinel/warning headache (10-43%) days to weeks before major SAH — **10x higher rebleeding risk**\n\n**Key pearl:** No headache features reliably distinguish SAH from benign causes. Pain responding to analgesics does NOT exclude SAH.',
   citation: [1, 4, 13, 14],
   next: 'sah-ottawa',
+
+  summary: 'Thunderclap headache in 10-16% is SAH, 70% present with headache alone, normal neuro exam in 75% — pain responding to analgesics does NOT exclude SAH',
+  skippable: true,
 };
 
 const SAH_OTTAWA: DecisionNode = {
@@ -56,6 +62,8 @@ const SAH_OTTAWA: DecisionNode = {
       urgency: 'routine',
     },
   ],
+
+  summary: 'Ottawa SAH Rule (100% sensitivity): age >=40, neck pain/stiffness, LOC, exertional onset, thunderclap, limited neck flexion — any present needs workup',
 };
 
 const SAH_LOW_RISK: DecisionNode = {
@@ -80,6 +88,8 @@ const SAH_CT: DecisionNode = {
   title: 'Noncontrast CT Head',
   body: 'The initial test for suspected sSAH is **noncontrast head CT**. CT sensitivity is time-dependent — blood is degraded and diluted by CSF circulation over time.\n\n**CT sensitivity by timing:**\n• Within 6 hours: **98.7%** (meta-analysis of 8,907 patients)\n• Day 0: 92-100%\n• Day 1: 86%\n• Day 2: 76%\n• Day 5: 58%\n\n**Conditions for highest sensitivity (≤6h):**\n• Third-generation or newer scanner\n• Interpreted by attending radiologist\n• Normal neurologic examination\n• Normal hematocrit (anemia may make blood isodense with CSF)\n\n**Key pearl:** A negative CT does not rule out SAH, especially with later presentations.',
   citation: [1, 5, 6],
+
+  summary: 'CT sensitivity: 98.7% within 6h, 86% at day 1, 58% at day 5 — requires 3rd-gen scanner and attending radiologist read for highest sensitivity',
   images: [{ src: 'images/sah/sah-ct.jpg', alt: 'Noncontrast CT head showing subarachnoid hemorrhage', caption: 'SAH on CT: hyperdense blood filling the basal cisterns (star pattern) — CT sensitivity 98% within 6h of onset (Wikimedia Commons, CC BY-SA 3.0)' }],
   next: 'sah-ct-result',
 };
@@ -110,6 +120,8 @@ const SAH_CT_RESULT: DecisionNode = {
       urgency: 'urgent',
     },
   ],
+
+  summary: 'Interpret CT in context of time from onset — positive = confirmed SAH, negative <=6h may rule out, negative >6h needs LP',
 };
 
 const SAH_EARLY_NEG: DecisionNode = {
@@ -133,6 +145,8 @@ const SAH_EARLY_NEG: DecisionNode = {
       urgency: 'urgent',
     },
   ],
+
+  summary: 'ACEP 2019 Level B: negative CT within 6h on 3rd-gen scanner + attending read + normal neuro + no anemia may rule out SAH without LP',
 };
 
 const SAH_LP: DecisionNode = {
@@ -143,6 +157,8 @@ const SAH_LP: DecisionNode = {
   body: '[LP Interpretation Guide](#/info/sah-lp-guide) — detailed reference.\n\nFor patients with negative CT and ongoing suspicion for SAH, LP is the next diagnostic step.\n\n**Technique:**\n• Patient in lateral recumbent position\n• Measure **opening pressure** (elevated >20 cm H₂O in 60% of sSAH)\n• Collect **4 serial tubes** of CSF\n• Send last tube for cell count AND xanthochromia\n\n**Key considerations:**\n• Traumatic tap occurs in 10-15% of patients\n• Xanthochromia takes up to 12 hours to develop\n• If LP performed <12h after onset, accept either RBCs or xanthochromia as positive\n• Finding normal CSF at any time point excludes SAH\n\n**Opening pressure clues:** Elevated → SAH, cerebral venous thrombosis, or idiopathic intracranial hypertension. Decreased → spontaneous intracranial hypotension.',
   citation: [1, 2, 13],
   next: 'sah-lp-results',
+
+  summary: 'LP technique: lateral recumbent, opening pressure, 4 serial tubes, last tube for xanthochromia — xanthochromia takes up to 12h to develop',
 };
 
 const SAH_LP_RESULTS: DecisionNode = {
@@ -172,6 +188,8 @@ const SAH_LP_RESULTS: DecisionNode = {
       urgency: 'routine',
     },
   ],
+
+  summary: 'Xanthochromia or persistent RBCs = SAH, partial clearing = equivocal (get CTA), normal CSF = SAH excluded — visual xanthochromia 93% sens/95% spec',
 };
 
 const SAH_EQUIVOCAL: DecisionNode = {
@@ -195,6 +213,8 @@ const SAH_EQUIVOCAL: DecisionNode = {
       urgency: 'routine',
     },
   ],
+
+  summary: 'Equivocal CSF: get CTA (97-99% sensitivity for aneurysm) — negative CTA with bloody CSF = low risk, consult neurosurgery for shared decision-making',
 };
 
 const SAH_NEGATIVE_WORKUP: DecisionNode = {
@@ -220,6 +240,8 @@ const SAH_CONFIRMED: DecisionNode = {
   body: '**Subarachnoid hemorrhage is confirmed.** Immediately:\n\n• **Obtain neurosurgical consultation** — arrange definitive therapy\n• **Order CTA** (if not already done) to identify the aneurysm\n• Begin ED management and monitoring\n\n**CT hemorrhage patterns:**\n• **Basal cisterns** — typical aneurysmal SAH\n• **Cerebral convexities** — traumatic SAH, or convexal SAH (RCVS if <60y, cerebral amyloid angiopathy if >60y)\n• **Perimesencephalic** — blood around midbrain with normal angiogram; 10% of sSAH, excellent prognosis (98% survive without deficits)\n\n**Aneurysm locations** (85% of sSAH):\n• 70% in anterior communicating, posterior communicating, or middle cerebral arteries\n• Remainder in posterior circulation',
   citation: [2, 3, 14],
   next: 'sah-grading',
+
+  summary: 'SAH confirmed: immediate neurosurgery consult + CTA for aneurysm — 85% aneurysmal (70% in ACA/PCA/MCA), 10% perimesencephalic (excellent prognosis)',
 };
 
 const SAH_GRADING: DecisionNode = {
@@ -234,6 +256,8 @@ const SAH_GRADING: DecisionNode = {
     { id: 'modified-fisher', label: 'Modified Fisher Scale' },
   ],
   next: 'sah-vasospasm-risk',
+
+  summary: 'Hunt & Hess (clinical) and Modified Fisher (CT/vasospasm risk) — grades 4-5 historically 70-90% mortality, improved with modern care',
 };
 
 const SAH_VASOSPASM_RISK: DecisionNode = {
@@ -244,6 +268,8 @@ const SAH_VASOSPASM_RISK: DecisionNode = {
   body: '**Cerebral vasospasm** is a delayed complication developing **days to 2 weeks** post-SAH, with peak incidence at **7-10 days**.\n\n**Risk prediction (Modified Fisher Scale):**\n• Thick clot and intraventricular hemorrhage → highest risk\n• Thin SAH without IVH → lowest risk\n\n**Vasospasm may be:**\n• **Asymptomatic** — detected only on imaging\n• **Symptomatic** — delayed neurologic deterioration causing significant morbidity\n\n**Key management implications:**\n• All confirmed SAH patients should receive [Nimodipine](#/drug/nimodipine/vasospasm prevention) for vasospasm prevention\n• High-grade Fisher patients need closer monitoring and earlier neurosurgical intervention\n• The VASOGRADE scale (combines WFNS + Modified Fisher) further stratifies risk as green/yellow/red',
   citation: [8, 10],
   next: 'sah-initial-mgmt',
+
+  summary: 'Vasospasm peaks days 7-10 — all SAH patients get nimodipine, high Fisher = closer monitoring, VASOGRADE further stratifies risk',
 };
 
 // ───────────────────────────────────────────────
@@ -269,6 +295,8 @@ const SAH_INITIAL_MGMT: DecisionNode = {
     monitoring: 'Serial neurologic examinations. Continuous cardiac monitoring. Monitor for pain control adequacy.',
   },
   next: 'sah-bp-control',
+
+  summary: 'HOB 30 degrees, NPO, continuous cardiac monitoring, acetaminophen for pain — avoid NSAIDs, use opioids cautiously (interfere with neuro exam)',
 };
 
 const SAH_BP_CONTROL: DecisionNode = {
@@ -298,6 +326,9 @@ const SAH_BP_CONTROL: DecisionNode = {
     monitoring: 'Arterial line for continuous BP monitoring. Target SBP <160 mmHg. Avoid nitroprusside (increases ICP).',
   },
   next: 'sah-vasospasm-prev',
+
+  summary: 'Target SBP <160 until aneurysm secured — labetalol or nicardipine IV, avoid nitroprusside (increases ICP), arterial line recommended',
+  safetyLevel: 'critical',
 };
 
 const SAH_VASOSPASM_PREV: DecisionNode = {
@@ -319,6 +350,8 @@ const SAH_VASOSPASM_PREV: DecisionNode = {
     monitoring: 'Monitor BP (may cause hypotension). Peak vasospasm risk days 7-10. IV magnesium and statins NOT effective for prevention.',
   },
   next: 'sah-seizure-mgmt',
+
+  summary: 'Nimodipine 60mg PO q4h x21 days — only proven intervention for vasospasm, oral route only, IV magnesium and statins NOT effective',
 };
 
 const SAH_SEIZURE_MGMT: DecisionNode = {
@@ -340,6 +373,9 @@ const SAH_SEIZURE_MGMT: DecisionNode = {
     monitoring: 'Monitor for seizure activity. Seizures can cause rebleeding from unsecured aneurysm. Reasonable to defer AED initiation to inpatient service if no seizures.',
   },
   next: 'sah-rebleed-prev',
+
+  summary: 'Seizures in up to 20% — levetiracetam preferred over phenytoin (worse outcomes), short course <3 days if prophylaxis used',
+  safetyLevel: 'warning',
 };
 
 const SAH_REBLEED_PREV: DecisionNode = {
@@ -350,6 +386,9 @@ const SAH_REBLEED_PREV: DecisionNode = {
   body: 'Rebleeding is **one of the most devastating complications** after aSAH, with the highest mortality of any complication.\n\n• Cumulative incidence: **8-23%** in first 72 hours\n• **50-90% of episodes occur within first 6 hours** after primary bleed\n• Clinical signs: acute/worsening headache, decreased consciousness, loss of brainstem reflexes, posturing, respiratory arrest, seizures\n\n**Risk factors for rebleeding:**\n• High-grade SAH (Hunt & Hess 4-5)\n• Larger aneurysms\n• Prolonged time to surgery\n• Sentinel/warning bleeds\n• Catheter angiography\n\n**Prevention strategies:**\n• **Early definitive repair** — primary strategy (within 72 hours)\n• **Blood pressure control** — SBP <160 mmHg\n• **Antifibrinolytics** — short courses may reduce rebleeding; discuss with neurosurgical team before initiating\n\n**Rapid diagnosis + early repair** remains the optimal approach.',
   citation: [2, 14],
   next: 'sah-cardiac-comp',
+
+  summary: 'Rebleeding 8-23% in first 72h (50-90% within 6h) — highest mortality of any SAH complication, early repair is primary prevention strategy',
+  safetyLevel: 'critical',
 };
 
 const SAH_CARDIAC_COMP: DecisionNode = {
@@ -360,6 +399,9 @@ const SAH_CARDIAC_COMP: DecisionNode = {
   body: '[SAH ECG Changes](#/info/sah-ecg-changes) — detailed reference.\n\nCardiac abnormalities are **common** following acute sSAH due to catecholamine surge and autonomic stimulation.\n\n**ECG changes (50-100% of patients):**\n• Nonspecific ST-segment and T-wave changes\n• Prolonged QRS, U waves, prolonged QT interval\n• ST elevations mimicking MI — coronary angiography typically normal\n• Serious arrhythmias in <5% (associated with worse outcomes)\n\n**Troponin:** Elevated in 20-40% of acute cases. Indicates cardiopulmonary complications and worse outcomes.\n\n**Neurogenic stunned myocardium (Takotsubo):**\n• Acutely depressed EF (can be as low as 20%)\n• Apical akinesis/ballooning with normal coronary arteries\n• Transient — most recover over several weeks\n• May present with pulmonary edema and ACS symptoms\n\n**Management:** SAH is a **contraindication to thrombolytics and anticoagulants**. Focus on the primary neurologic insult while supporting cardiac dysfunction.',
   citation: [2, 3],
   next: 'sah-definitive',
+
+  summary: 'ECG changes in 50-100%, troponin elevated in 20-40% — neurogenic stunned myocardium (Takotsubo), SAH contraindicates thrombolytics/anticoagulants',
+  safetyLevel: 'warning',
 };
 
 // ───────────────────────────────────────────────
@@ -374,6 +416,9 @@ const SAH_DEFINITIVE: DecisionNode = {
   body: '**Vascular imaging:** Cerebral angiography (DSA) is the gold standard for preoperative planning. CTA has 97-99% sensitivity. Angiography may be negative in 10-20% (perimesencephalic hemorrhage, vasospasm, thrombosed aneurysm).\n\n**Two approaches to aneurysm repair:**\n\n**Endovascular coiling:**\n• ISAT trial (2,143 patients) — improved outcomes vs clipping\n• Slightly higher rebleeding risk\n• Increasing use as first-line approach\n\n**Microvascular clipping:**\n• Higher seizure risk\n• May be necessary for certain aneurysm anatomies\n\n**Timing:** Early treatment within 72 hours is the common approach.\n\nThe choice depends on **aneurysm anatomy, clinician expertise, and patient factors** — best made by a multidisciplinary team.',
   citation: [2, 11],
   next: 'sah-special-pop',
+
+  summary: 'Endovascular coiling (ISAT: improved outcomes) vs microvascular clipping — early treatment within 72h, choice depends on anatomy and expertise',
+  skippable: true,
 };
 
 const SAH_SPECIAL_POP: DecisionNode = {
@@ -384,6 +429,9 @@ const SAH_SPECIAL_POP: DecisionNode = {
   body: '**Pregnant/Postpartum Women:**\n• Pregnancy and postpartum are hypercoagulable states\n• Also consider: ischemic stroke, cerebral venous thrombosis, RCVS, pre-eclampsia, PRES\n• Management principles are the same\n\n**Anticoagulated Patients:**\n• Reverse therapeutic anticoagulation in the acute setting\n• **Do NOT reverse antiplatelet agents** unless neurosurgical procedure is planned — transfusion without benefit increases mortality\n\n**Perimesencephalic Hemorrhage:**\n• 10% of sSAH; blood confined around midbrain on CT\n• Normal angiogram required (DSA is test of choice)\n• **Excellent prognosis** — 98% survive without deficits\n• Fewer complications than aSAH\n\n**Acute Clinical Deterioration:**\n• Repeat CT immediately to identify cause\n• Possible causes: rebleeding, cerebral infarction, acute hydrocephalus, subdural extension\n• These declines are potentially treatable — early identification is key',
   citation: [2, 3],
   next: 'sah-dispo',
+
+  summary: 'Pregnant/postpartum: same principles, also consider CVT/RCVS/preeclampsia — anticoagulated: reverse, but do NOT reverse antiplatelets without surgical plan',
+  skippable: true,
 };
 
 const SAH_DISPO: DecisionNode = {
@@ -407,6 +455,8 @@ const SAH_DISPO: DecisionNode = {
       urgency: 'urgent',
     },
   ],
+
+  summary: 'All confirmed SAH require ICU admission — better outcomes at high-volume centers (OR 0.77 mortality), 90% arrive without GCS deterioration',
 };
 
 const SAH_TRANSFER: DecisionNode = {

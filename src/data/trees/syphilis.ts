@@ -66,6 +66,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Syphilis 80% increase since 2018 — "the great imitator"; route by presentation: lesion, rash, screening, partner, neuro, pregnancy',
   },
 
   {
@@ -76,6 +78,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Exposed contacts of primary/secondary syphilis within the preceding **90 days** should be treated presumptively, even if seronegative. [5][21]\n\nContacts >90 days ago should be tested and treated based on results.\n\n**Contact tracing windows by stage:**\n• Primary syphilis: 3 months + symptom duration\n• Secondary syphilis: 6 months + symptom duration\n• Early latent: 1 year\n\n[Partner Notification & Reporting](#/info/syph-partner-notification)',
     citation: [5, 21],
     next: 'syph-risk-factors',
+
+    summary: 'Partner exposure <90 days: treat presumptively even if seronegative; contact tracing windows vary by stage',
   },
 
   {
@@ -104,6 +108,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         next: 'syph-stage-classify',
       },
     ],
+
+    summary: 'Neurosyphilis can occur at ANY stage — ocular/otosyphilis are clinical diagnoses requiring neurosyphilis-level treatment',
+    safetyLevel: 'critical',
   },
 
   {
@@ -143,6 +150,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Syphilis in pregnancy is a **public health emergency**. Congenital syphilis cases increased 755% from 2012-2022 (3,761 cases in 2022), with 282 stillbirths and infant deaths. [3][10][11]\n\n**Critical rules:**\n• ALL pregnant patients with syphilis must receive **penicillin** — there are **NO adequate alternatives**\n• If PCN-allergic: **desensitization is MANDATORY** (oral protocol preferred, can be done in ED/L&D with monitoring)\n• Vertical transmission risk is highest in primary/secondary syphilis but can occur at any stage\n\n**Screening schedule:**\n• First prenatal visit\n• Beginning of third trimester (28 weeks)\n• At delivery (in high-prevalence areas)\n\n**Jarisch-Herxheimer retext:** Can precipitate preterm labor and fetal distress. Monitor with continuous fetal monitoring × 24h if viable gestational age. [3][12]\n\n[Congenital Syphilis Risks & Signs](#/info/syph-congenital)',
     citation: [3, 10, 11, 12],
     next: 'syph-stage-classify',
+
+    summary: 'Pregnancy: PCN ONLY effective — desensitize if allergic; congenital syphilis up 755%; Jarisch-Herxheimer can cause preterm labor',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -183,6 +193,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         next: 'syph-tertiary',
       },
     ],
+
+    summary: 'Classification determines treatment — stage by clinical findings, serologic history, and time since acquisition',
   },
 
   {
@@ -194,6 +206,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     images: [{ src: 'images/syphilis/primary-chancre.jpg', alt: 'Primary syphilis chancres on penile shaft', caption: 'Primary syphilis — painless, indurated chancres at the inoculation site. CDC/PHIL.' }],
     citation: [1, 14, 15],
     next: 'syph-risk-factors',
+
+    summary: 'Painless indurated chancre at inoculation site, 10-90 days post-exposure — heals spontaneously, often unnoticed',
+    skippable: true,
   },
 
   {
@@ -207,6 +222,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     ],
     citation: [1, 16, 17],
     next: 'syph-risk-factors',
+
+    summary: 'Diffuse rash with palms/soles (50-80%), condylomata lata, mucous patches — hematogenous dissemination 4-10w after chancre',
+    skippable: true,
   },
 
   {
@@ -217,6 +235,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Acquired within the preceding year but **no clinical signs or symptoms**. [1][5]\n\n**Diagnosed when:**\n• Documented seroconversion or 4-fold titer rise within 12 months\n• History of primary/secondary symptoms within 12 months\n• Sex partner with primary, secondary, or early latent syphilis within 12 months\n• Reactive NTT and TT only in persons previously tested seronegative within 12 months\n\n**Clinical significance:**\n• Still sexually transmissible — ~25% may relapse to secondary stage\n• Treatment is same as primary/secondary: single dose benzathine PCN-G',
     citation: [1, 5],
     next: 'syph-risk-factors',
+
+    summary: 'Early latent: <1 year, asymptomatic, still sexually transmissible — same treatment as primary/secondary',
+    skippable: true,
   },
 
   {
@@ -227,6 +248,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Acquired **> 1 year ago** OR unknown duration of infection. [1][5]\n\n**Key points:**\n• Not sexually transmissible (except in pregnancy — can transmit vertically at any stage)\n• Can progress to tertiary syphilis (in ~30% of untreated patients) over years to decades\n• If no documentation of timing, classified as **late latent** (more conservative treatment — 3 weekly doses)\n\n**Evaluate for neurosyphilis if:**\n• Neurologic symptoms present\n• Treatment failure (no 4-fold titer decline)\n• HIV co-infection\n• RPR titer ≥ 1:32\n• Planned treatment with non-penicillin agent (must rule out neurosyphilis first — doxycycline does NOT penetrate CSF) [1]',
     citation: [1, 5, 18],
     next: 'syph-risk-factors',
+
+    summary: 'Late latent >1 year or unknown — not sexually transmissible but can transmit vertically; 3 weekly PCN doses',
+    skippable: true,
   },
 
   {
@@ -237,6 +261,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Occurs in **~30% of untreated** patients, 3-15+ years after initial infection. Now rare in developed countries. [1][19]\n\n**Gummatous syphilis (~15%):**\n• Granulomatous, nodular lesions with necrotic center surrounded by immune cells\n• Found in skin, bone, liver, testes, and other organs\n• Destructive but responds well to treatment\n\n**Cardiovascular syphilis (~10%):**\n• Aortitis, ascending aortic aneurysm, aortic valve insufficiency\n• Coronary ostial stenosis, myocarditis\n• Typically 15-30 years after initial infection\n• Antibiotic treatment does not reverse existing aortic damage — treats active infection\n\n**Neurologic involvement:** Must rule out before treating as non-neurologic tertiary.\n\n[Neurosyphilis Evaluation](#/tree/neurosyphilis)',
     citation: [1, 19],
     next: 'syph-risk-factors',
+
+    summary: 'Tertiary in ~30% untreated: gummatous, cardiovascular (aortitis/aneurysm), or neurologic — must rule out neurosyphilis',
+    skippable: true,
   },
 
   // =====================================================================
@@ -251,6 +278,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Document risk factors to guide testing strategy and counseling. [1][2][14]\n\n**High-risk populations:**\n• **MSM** — highest incidence (56% of primary/secondary cases, rate 240× higher than women)\n• **HIV co-infection** — syphilis facilitates HIV acquisition 2-5× and vice versa\n• **Persons on PrEP** — test at initiation and at least every 6 months (every 3 months for high-risk MSM)\n• **Multiple sexual partners**, sex work, incarceration history\n• **IV drug users** — needle-sharing and higher-risk sexual activity\n• **Prior STI history** — indicates higher-risk exposure\n\n**Co-testing (MANDATORY with syphilis):**\n• HIV Ag/Ab (4th gen combo)\n• Gonorrhea/Chlamydia NAAT (urine or swab)\n• Hepatitis B surface Ag/Ab/core Ab\n• Hepatitis C antibody [24][25]',
     citation: [1, 2, 14, 24, 25],
     next: 'syph-testing-strategy',
+
+    summary: 'MSM 56% of primary/secondary cases; HIV co-infection 2-5x mutual facilitation; mandatory co-testing: HIV, GC/CT, HepB/C',
   },
 
   {
@@ -278,6 +307,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         next: 'syph-poc-testing',
       },
     ],
+
+    summary: 'Two algorithms: traditional (NTT first) or reverse (TT first) — combination of NTT + TT + clinical context determines diagnosis',
   },
 
   {
@@ -288,6 +319,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Standard ED workup:** [22][23]\n\n**Serologic testing:**\n• RPR (quantitative) — nontreponemal test, reflects disease activity\n• Treponemal test (TP-PA or FTA-ABS) — if not already reflexed by lab\n\n**Co-testing:**\n• HIV Ag/Ab combo (4th generation) — mandatory\n• GC/CT NAAT (urine or swab)\n• Hepatitis B surface Ag/Ab/core Ab, Hepatitis C Ab\n\n**If neurologic symptoms:**\n• LP for CSF-VDRL, cell count, protein → [Neurosyphilis Evaluation](#/tree/neurosyphilis)\n\n**Direct detection (if lesion present):**\n• Dark-field microscopy — definitive for primary syphilis (rarely available in EDs)\n• PCR testing — emerging, not yet FDA-approved in US\n\n**Window period:** NTTs become reactive 1-4 weeks after chancre appears. TTs seroconvert slightly earlier. Very early primary syphilis can be **seronegative** — if clinical suspicion is high, treat empirically and repeat serologies in 2-4 weeks. [22][25]',
     citation: [22, 23, 25],
     next: 'syph-test-interpret',
+
+    summary: 'Order RPR (quantitative) + treponemal test + HIV + GC/CT NAAT + HepB/C; very early primary can be seronegative',
   },
 
   {
@@ -298,6 +331,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Rapid treponemal POC tests are becoming available in the US (Syphilis Health Check™, DPP® HIV-syphilis assay). [26][27]\n\n**Performance:**\n• Sensitivity 85-98%, specificity 95-99% for treponemal antibodies\n• Comparable to laboratory-based treponemal testing\n\n**Limitations:**\n• TT positive for life — cannot distinguish active vs treated\n• Still require NTT (RPR) for staging/monitoring\n• Positive → confirm with NTT + different TT\n\n**Dark-field microscopy:** Gold standard for primary chancre diagnosis. Requires immediate examination of fluid from lesion base. Specialized equipment rarely available in EDs.\n\n**PCR-based testing:** Emerging but no FDA-approved tests currently available in the US.',
     citation: [26, 27],
     next: 'syph-test-interpret',
+
+    summary: 'Rapid POC tests 85-98% sensitive — TT positive for life, still need NTT for staging; dark-field rarely available in EDs',
+    skippable: true,
   },
 
   // =====================================================================
@@ -340,6 +376,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Interpret NTT + TT combination — both may be nonreactive in 30% of primary syphilis; 5 result patterns',
   },
 
   {
@@ -350,6 +388,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**Classic positive result** — confirms treponemal infection. [6][22][23]\n\n**No prior treatment:**\n• New diagnosis — stage and treat accordingly\n• RPR ≥1:32 → higher neurosyphilis risk\n\n**Prior treatment:**\n• Compare current vs prior RPR titer\n• **4-fold rise** (e.g., 1:4 → 1:16) = reinfection/failure → re-treat\n• Stable low titer = **serofast state** (~10% of treated patients) — may not need re-treatment\n\n',
     citation: [6, 22, 23, 28],
     next: 'syph-determine-treatment',
+
+    summary: 'NTT+/TT+ = confirmed treponemal infection — compare titers to prior; 4-fold rise = reinfection/failure',
   },
 
   {
@@ -360,6 +400,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Clinical context determines interpretation. [6][22][23]\n\n**Most common: Previously treated**\n• Documented treatment + asymptomatic → no re-treatment\n\n**Very early primary:**\n• TT seroconverts before NTT\n• Chancre present → treat empirically, repeat RPR in 2-4 weeks\n\n**Very late latent:**\n• NTT reverts in ~25% of untreated late latent\n• No documented treatment → treat as late latent\n\n**Reverse algorithm discordance:**\n• Reactive EIA/CIA + nonreactive NTT → confirm with **different TT** (e.g., TP-PA)\n• Second TT reactive → prior treated or late latent\n• Second TT nonreactive → likely false-positive (no treatment if low risk) [29]',
     citation: [6, 22, 23, 29],
     next: 'syph-determine-treatment',
+
+    summary: 'NTT-/TT+: most likely prior treated; may be very early primary or very late latent — clinical context determines',
   },
 
   {
@@ -370,6 +412,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: 'Most likely **biologic false-positive (BFP)** — no syphilis treatment. [6][22][30]\n\n**BFP causes:** Pregnancy, SLE, antiphospholipid syndrome, acute illness, vaccination, IVDU, liver disease, advanced age, HIV\n\n**Action:** No treatment. Consider repeat TT with different assay. Chronic BFP (>6 mo) → autoimmune workup.\n\n⚠️ **Prozone phenomenon:** Very high titers in secondary syphilis can saturate assay → false-negative NTT. If clinically suspected → request **diluted/prozone-checked RPR**.',
     citation: [6, 22, 30],
     next: 'syph-disposition',
+
+    summary: 'NTT+/TT- = likely biologic false positive — no treatment; prozone phenomenon can cause false-negative in secondary',
   },
 
   {
@@ -380,6 +424,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     body: '**No serologic evidence of syphilis.** [6][22][23]\n\n**High suspicion (chancre present):** May be in window period (1-4 wks post-exposure). Treat empirically, repeat serologies in 2-4 wks.\n\n**Recent exposure (<90 days):** Treat presumptively, repeat serologies in 2-4 wks.\n\n**Low suspicion:** Syphilis excluded.',
     citation: [6, 22, 23],
     next: 'syph-disposition',
+
+    summary: 'Both nonreactive: no syphilis or window period — treat empirically if high suspicion, repeat serology in 2-4 weeks',
   },
 
   // =====================================================================
@@ -422,6 +468,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'PCN G is the only proven treatment — regimen determined by stage; Jarisch-Herxheimer is NOT an allergy',
   },
 
   {
@@ -514,6 +562,9 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Azithromycin NOT recommended — documented resistance and failures; desensitization preferred over alternatives',
+    safetyLevel: 'warning',
   },
 
   {
@@ -682,6 +733,8 @@ export const SYPHILIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Most patients discharged after ED treatment — mandatory public health reporting, partner notification, RPR monitoring',
   },
 
   {

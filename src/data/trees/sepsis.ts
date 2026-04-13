@@ -43,6 +43,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Sepsis-3: suspected infection + SOFA increase >=2; septic shock: vasopressors + lactate >2 despite fluids; mortality >=40%',
   },
 
   {
@@ -53,6 +55,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Systematic source identification** — the most valuable method for source detection is a focused history and physical examination. [24][25]\n\n**Common sources of sepsis:** [23]\n• **Pneumonia** (~50%) — respiratory symptoms, CXR, lung POCUS\n• **Urosepsis** (~20%) — dysuria, flank pain, UA, urine culture\n• **Intra-abdominal** (~20%) — cholangitis, C. diff, appendicitis, perforation\n• **Skin/soft tissue** — cellulitis, necrotizing fasciitis, surgical site infection\n• **Endovascular** — line infection, endocarditis\n\n**Do not anchor on minor findings** (e.g., mild UTI or subtle infiltrate) without broader evaluation. Occult abdominal sepsis is common in elderly and diabetic patients. [24]\n\n[Sepsis Mimics & DDx](#/info/sepsis-mimics)',
     citation: [23, 24, 25],
     next: 'sepsis-labs',
+
+    summary: 'Focused H&P for source — pneumonia 50%, urosepsis 20%, intra-abdominal 20%; do not anchor on minor findings',
+    skippable: true,
   },
 
   {
@@ -63,6 +68,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Obtain within 45 minutes** (do NOT delay fluids or antibiotics): [2][24]\n\n**Routine labs:**\n• CBC with differential, BMP, LFTs, coagulation studies (INR, PTT)\n• **Serum lactate** — elevated >2 mmol/L indicates severity [2]\n• **Procalcitonin** — useful for guiding antibiotic de-escalation, NOT for initial diagnosis (pooled sensitivity only 77%) [24]\n• ABG/VBG — assess acid-base status\n\n**Microbiology (BEFORE antibiotics when possible):**\n• **2 sets blood cultures from 2 separate peripheral sites** [2]\n• Do NOT draw through indwelling lines (high false positive rate) [24]\n• Urinalysis and urine culture\n• Sputum gram stain and culture if intubated\n• Culture any suspected source (CSF, ascites, wound, joint)\n\n**Imaging:**\n• Chest radiograph\n• ECG\n• CT abdomen/pelvis if no definite source identified [23]\n• POCUS: cardiac function, IVC, lung, RUQ',
     citation: [2, 23, 24],
     next: 'sepsis-source-id',
+
+    summary: 'Labs within 45min: 2 blood cultures from separate sites before abx, lactate, CBC, BMP, LFTs, coags, CXR, POCUS',
   },
 
   {
@@ -94,6 +101,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         next: 'sepsis-abx-empiric',
       },
     ],
+
+    summary: 'Identify most likely source to guide empiric antibiotics — pulmonary, urinary, intra-abdominal, or skin/endovascular',
   },
 
   {
@@ -116,6 +125,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Classify: sepsis (SOFA >=2 + infection) vs septic shock (vasopressor-dependent MAP >=65 + lactate >2)',
   },
 
   // =====================================================================
@@ -129,6 +140,10 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Airway & Breathing Stabilization',
     body: '**Supplemental O₂** for all patients with hypoxia. Target SpO₂ 90-96%. [24]\n\n**Intubation indications:**\n• Airway protection (encephalopathy, depressed consciousness)\n• Refractory hypoxemia despite high-flow O₂\n• Respiratory failure / increased work of breathing\n• Facilitating procedures (source control)\n\n**Peri-intubation risks in sepsis:**\n• Hemodynamic collapse is common — **optimize MAP before intubation**\n• Push-dose [Phenylephrine](#/drug/phenylephrine/sepsis push dose) 100-200 mcg IV or start [Norepinephrine](#/drug/norepinephrine/septic shock) infusion first\n• Avoid prolonged apnea — use RSI with preoxygenation\n• Consider ketamine for induction (hemodynamically stable)\n\n**Note:** Pulse oximetry may overestimate SpO₂ in patients with darker skin pigmentation. [24]',
     citation: [24],
+
+    summary: 'Optimize MAP before intubation — push-dose phenylephrine or start norepinephrine first; ketamine for induction',
+    safetyLevel: 'critical',
+
     treatment: {
       firstLine: {
         drug: 'Phenylephrine',
@@ -158,6 +173,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'IV Fluid Resuscitation',
     body: '**30 mL/kg IV crystalloid** — start within 1 hour, complete within 3 hours [2][24]\n\n**Fluid choice:** Balanced crystalloid preferred (Lactated Ringer\'s) [24]\n• SMART trial: lower composite of death, new RRT, and persistent renal dysfunction vs 0.9% NaCl [24]\n• **Avoid HES** — 6S trial: increased mortality (51 vs 43%) and RRT (22 vs 16%) [10]\n• **No benefit to albumin** vs crystalloid (SAFE trial) [24]\n\n**Administration:** Boluses of 500 mL, reassess between each [24]\n• Stop if pulmonary edema develops or no further response\n\n**Special populations:**\n• **Obesity (BMI >30):** Use ideal body weight for calculation [24]\n• **Heart failure / ESRD:** Smaller initial bolus acceptable — CMS allows <30 mL/kg if documented [24]\n• **Pneumonia with mild hypotension:** Fluid-conservative approach + early vasopressors may be better [23]\n\n**After initial resuscitation:** Restrict further fluids — most IV crystalloid extravasates (~95% leaves vasculature). [23]\n\n[Fluid Resuscitation Guide](#/info/sepsis-fluid-guide)',
     citation: [2, 8, 9, 10, 23, 24],
+
+    summary: '30 mL/kg LR within 3hr in 500mL boluses — avoid HES (increased mortality); restrict fluids after initial resuscitation',
+
     treatment: {
       firstLine: {
         drug: 'Lactated Ringer\'s',
@@ -199,6 +217,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
         next: 'sepsis-source-ctrl',
       },
     ],
+
+    summary: 'Antibiotics within 1hr — beta-lactam FIRST before vancomycin; pip-tazo, cefepime, or meropenem as backbone',
+    safetyLevel: 'critical',
   },
 
   {
@@ -208,6 +229,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'MRSA Coverage',
     body: '**MRSA risk factors:** [24]\n• Soft tissue infection (especially abscesses)\n• Central line infection / hemodialysis\n• Recent hospitalization or long-term care\n• IV drug use\n• Known MRSA colonization\n• Nosocomial / surgical site infection\n\n**First-line:** [Vancomycin](#/drug/vancomycin/sepsis MRSA) 25-30 mg/kg IV loading dose, then 15-20 mg/kg q8-12h [24]\n• Administer AFTER beta-lactam (beta-lactam first improves survival) [24]\n\n**Alternatives if vancomycin contraindicated:**\n• [Linezolid](#/drug/linezolid/MRSA sepsis) 600 mg IV q12h — covers MRSA pneumonia (unlike daptomycin)\n• [Daptomycin](#/drug/daptomycin/MRSA bacteremia) 6-10 mg/kg IV q24h — for bacteremia/endocarditis, **NOT for pneumonia** (inactivated by pulmonary surfactant) [24]\n\n**De-escalate:** Discontinue vancomycin if no MRSA cultured within 48 hours [24]',
     citation: [24],
+
+    summary: 'Vancomycin 25-30 mg/kg load AFTER beta-lactam — discontinue if no MRSA cultured at 48hr',
+
     treatment: {
       firstLine: {
         drug: 'Vancomycin',
@@ -238,6 +262,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Source control within 6-12 hours** when feasible — undrained foci may not respond to antibiotics alone. [2][24]\n\n**Interventions by source:**\n• **Intravascular catheter infection:** Remove catheter after establishing alternative access\n• **Abscess:** Percutaneous or surgical drainage (including thoracic empyema, joint)\n• **Ascending cholangitis:** ERCP or percutaneous decompression\n• **Nephrolithiasis with obstruction:** Percutaneous nephrostomy or ureteral stent\n• **Bowel perforation/obstruction:** Surgical repair\n• **Necrotizing fasciitis:** Emergent surgical debridement\n• **Fulminant C. diff:** Colectomy\n• **Infected hardware:** Removal when feasible\n\n**Timing:** As soon as possible, but balance risk of intervention vs. patient stability [24]\n\n[Source Control Guide](#/info/sepsis-source-control)',
     citation: [2, 24],
     next: 'sepsis-reassess',
+
+    summary: 'Source control within 6-12hr — remove lines, drain abscesses, ERCP for cholangitis, surgical repair for perforation',
   },
 
   {
@@ -260,6 +286,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Reassess at 1-3hr: MAP, perfusion, UOP, repeat lactate — use dynamic fluid responsiveness measures',
   },
 
   // =====================================================================
@@ -273,6 +301,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Vasopressor Initiation — Norepinephrine',
     body: '**[Norepinephrine](#/drug/norepinephrine/septic shock)** is the **first-line vasopressor** for septic shock. [2][11][24]\n\n**Dosing:** Start 0.05 mcg/kg/min (4-6 mcg/min), titrate by 0.02-0.05 mcg/kg/min to MAP ≥65 mmHg [24]\n\n**Mechanism:** Predominantly alpha-1 agonist (vasoconstriction) with some beta-1 (supports cardiac function). Reduces endothelial permeability. [23]\n\n**Can start peripherally** for <6 hours while obtaining central access (SSC 2021). [2][24]\n\n**Why NOT dopamine?** SOAP-II trial (n=1679): dopamine associated with **increased arrhythmias and mortality** vs norepinephrine. [11]\n\n**MAP target:** ≥65 mmHg initially. [2]\n• 65-Trial: MAP goal >60 mmHg safe in elderly patients [18]\n• SEPSISPAM: MAP 80-85 improved renal outcomes in chronic HTN but increased AF [19]\n\n**Diastolic BP <40 mmHg** strongly suggests vasoplegia — start vasopressor immediately. [23]\n\n[Vasopressor Comparison](#/info/sepsis-vp-comparison)',
     citation: [2, 11, 18, 19, 23, 24],
+
+    summary: 'Norepinephrine first-line vasopressor — start 0.05 mcg/kg/min, can start peripherally for <6hr; NOT dopamine (more arrhythmias)',
+
     treatment: {
       firstLine: {
         drug: 'Norepinephrine',
@@ -339,6 +370,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Add vasopressin 0.03-0.04 units/min early before escalating NE; epinephrine for low CO/bradycardia',
   },
 
   {
@@ -349,6 +382,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Default MAP target:** ≥65 mmHg (SSC 2021) [2]\n\n**Personalized targets:** [23]\n• **Chronic hypertension:** Consider MAP 80-85 mmHg (SEPSISPAM: improved renal outcomes but more AF) [19]\n• **Younger / previously normotensive:** MAP 60-65 may be sufficient (65-Trial) [18]\n• **Elevated CVP or IAP:** Higher MAP may be needed to maintain organ perfusion gradient [23]\n\n**Capillary Refill Time (CRT)** — emerging perfusion target: [16][17]\n• Normal CRT <3 seconds suggests adequate perfusion\n• ANDROMEDA-SHOCK: CRT-guided resuscitation ≥ lactate-guided (improved SOFA at 72h) [16]\n• ANDROMEDA-SHOCK-2: CRT protocol reduced duration of vital organ support by 5% vs usual care [17]\n\n**Vasopressor reduction challenge** (IBCC approach): [23]\n• If on dual vasopressors (NE + vasopressin), consider down-titrating to assess for excessive vasoconstriction\n• Target MAP 60-70 for 1 hour → reassess perfusion\n• Systolic HF patients may benefit from reduced afterload',
     citation: [2, 16, 17, 18, 19, 23],
     next: 'sepsis-fluid-assess',
+
+    summary: 'Default MAP >=65; personalize for chronic HTN (80-85) or normotensive elderly (60-65); CRT <3sec emerging target',
+    skippable: true,
   },
 
   {
@@ -359,6 +395,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**After initial resuscitation, RESTRICT further fluids** — ongoing crystalloid is often harmful. [9][23]\n\n**CLASSIC trial:** Restrictive fluid strategy safe, trend toward less intubation [9]\n• CLASSIC criteria for additional fluid: lactate >4, MAP <50 despite vasopressors, mottling beyond kneecap, UOP <0.1 mL/kg/hr for 2h, or ongoing overt losses [23]\n\n**Dynamic measures** (preferred over static CVP): [24]\n• Passive leg raise with stroke volume measurement (most accurate and broadly available)\n• Respirophasic IVC variation (requires passive ventilation, sinus rhythm)\n• Pulse pressure variation\n• Lung POCUS for B-lines (fluid overload)\n\n**Key concept:** Fluid responsiveness is **NORMAL** — it does not necessarily mean the patient needs fluid. **Absence** of fluid responsiveness is pathological and suggests volume overload. [23]\n\n**Track net fluid balance** — avoid >4-5L net positive in absence of marked hypovolemia. [23]\n\n**Fluid selection if more needed:** LR preferred. If bicarb indicated (pH <7.2, renal failure), use isotonic bicarbonate (150 mEq NaHCO₃ in 1L D5W). [23]',
     citation: [9, 23, 24],
     next: 'sepsis-inotrope',
+
+    summary: 'RESTRICT fluids after initial 30mL/kg — use passive leg raise for assessment; fluid responsiveness is normal, not an indication',
+    skippable: true,
   },
 
   {
@@ -368,6 +407,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Inotrope Consideration',
     body: '**Consider inotropes for septic cardiomyopathy or low cardiac output despite adequate vasopressors.** [24]\n\n**POCUS assessment:** Reduced LVEF, global hypokinesis, elevated E/e\'. [23]\n\n**Clues suggesting need for inotropy:** [23]\n• Pulse pressure <40 mmHg (suggests low stroke volume)\n• Cool extremities despite adequate MAP\n• Heart rate inappropriately low (<80 bpm) for shock\n• Inappropriately normal lactate (suggests low endogenous epinephrine)\n\n**[Dobutamine](#/drug/dobutamine/septic shock inotrope)** 2-5 mcg/kg/min, titrate to max 20 mcg/kg/min [24]\n• First-choice inotrope\n• Beta-1 agonist — increases contractility\n• May cause hypotension (reflex vasodilation) — up-titrate NE if BP drops [23]\n\n**Epinephrine challenge** (alternative): [23]\n• Start 4-5 mcg/min, down-titrate NE if BP rises\n• Preferred when BP is low or lactate is low (<4 mM)\n• Avoid if lactate >5 mM (worsens acidosis)\n\n**Do NOT use inotropes to increase cardiac index to supranormal levels.** [24]\n\n[Septic Cardiomyopathy](#/info/sepsis-cardiomyopathy)',
     citation: [23, 24],
+
+    summary: 'Dobutamine 2-5 mcg/kg/min for septic cardiomyopathy — low pulse pressure, cool extremities despite adequate MAP',
+
     treatment: {
       firstLine: {
         drug: 'Dobutamine',
@@ -420,6 +462,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         next: 'sepsis-mimics-node',
       },
     ],
+
+    summary: 'Reassess for missed source, wrong diagnosis, or inadequate antibiotics — methylene blue as salvage vasopressor',
   },
 
   // =====================================================================
@@ -433,6 +477,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Corticosteroid Therapy',
     body: '**For patients on vasopressors for septic shock:** [2][14][15]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3658): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Timing:** Consider early initiation — antibiotics can trigger Jarisch-Herxheimer reaction; front-loaded steroids may blunt this. [23]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).',
     citation: [2, 14, 15, 23],
+
+    summary: 'Hydrocortisone 50mg IV q6h for vasopressor-dependent shock — reduces shock duration; taper over 2-3 days when off pressors',
+
     treatment: {
       firstLine: {
         drug: 'Hydrocortisone',
@@ -463,6 +510,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Occurs in up to 50% of septic shock patients.** [23]\n\n**Features:**\n• Acute, biventricular myocardial dysfunction\n• **Reversible** within 7-10 days\n• Systemic vasodilation may mask low EF (pseudo-normal LVEF)\n• Low cardiac output with vasopressor-refractory shock\n\n**Diagnosis:** [23]\n• POCUS: LVEF <45%, reduced GLS (<-17%), MAPSE reduction\n• Lateral e\' <8 cm/s strongly predicts mortality\n• Lateral E/e\' >13 cm/s suggests elevated LVEDP\n• Troponin: usually mildly elevated\n• RV dysfunction: TAPSE <16 mm, RV/LV >0.6\n\n**Management:** [23]\n• Avoid excessive vasoconstrictors (NE + vasopressin without inotropy is suboptimal)\n• Inotrope: [Dobutamine](#/drug/dobutamine/septic shock inotrope) or epinephrine\n• Stress-dose steroids (cytokines worsen cardiomyopathy)\n• Treat fever, agitation, shivering (reduce O₂ demand)\n• Thiamine if deficiency possible\n• Fluid removal if congested\n• Consider ECMO for pure cardiogenic failure phenotype\n\n[Septic Cardiomyopathy Details](#/info/sepsis-cardiomyopathy)',
     citation: [23],
     next: 'sepsis-transfusion',
+
+    summary: 'Reversible cardiomyopathy in up to 50% of septic shock — POCUS for LVEF <45%, treat with inotropy not more vasoconstrictors',
+    skippable: true,
   },
 
   {
@@ -473,6 +523,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Restrictive transfusion strategy:** Transfuse for **Hgb ≤7 g/dL** [2][22][24]\n\n**Evidence:** [22][24]\n• **TRISS trial** (n=998): No difference in 28-day mortality between restrictive (Hgb ≤7) vs liberal (Hgb ≤9) strategies in septic shock\n• Restrictive strategy resulted in 50% fewer transfusions with no increase in ischemic events [22]\n\n**Exceptions (consider higher threshold):**\n• Active hemorrhagic shock\n• Acute myocardial ischemia\n• Severe hypoxemia not improving with O₂\n\n**Do NOT transfuse to supranormal hematocrit** — the original EGDT protocol targeted Hct >30, but subsequent trials (ProCESS, ARISE, ProMISE) showed no benefit. [4][5][6][7]',
     citation: [2, 4, 5, 6, 7, 22, 24],
     next: 'sepsis-mimics-node',
+
+    summary: 'Transfuse only for Hgb <=7 g/dL (TRISS) — 50% fewer transfusions with no increased ischemic events',
+    skippable: true,
   },
 
   {
@@ -483,6 +536,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**If the patient is not responding to treatment, reconsider the diagnosis.** Suspect a mimic if: no clear infectious source, procalcitonin unexpectedly low, or atypical course. [23]\n\n**Infectious mimics:**\n• Endocarditis causing valve failure (check echo)\n• Tick-borne illness (anaplasmosis, babesiosis)\n• Invasive candidiasis / aspergillosis (beta-D-glucan, galactomannan)\n• PJP pneumonia (diffuse infiltrates, immunosuppression)\n\n**Endocrine mimics:**\n• [Adrenal crisis](#/tree/adrenal-insufficiency) — vasopressor-refractory, eosinophilia, recent steroid d/c\n• [Thyroid storm](#/tree/thyroid) — tremors, thyromegaly, tachycardia, encephalopathy\n• DKA — hyperglycemia, anion gap (may coexist with sepsis)\n\n**GI mimics:**\n• Mesenteric ischemia — AF, pain out of proportion\n• Pancreatitis, fulminant hepatic failure, decompensated cirrhosis\n\n**Toxicological:** Salicylate intoxication, beta-blocker/CCB overdose, carbon monoxide\n\n**Other:** Anaphylaxis, HLH (ferritin, cytopenias), DRESS/AGEP\n\n[Sepsis Mimics & DDx](#/info/sepsis-mimics)',
     citation: [23],
     next: 'sepsis-special',
+
+    summary: 'If not responding, reconsider diagnosis — adrenal crisis, thyroid storm, PE, mesenteric ischemia, anaphylaxis, HLH',
   },
 
   {
@@ -493,6 +548,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Pregnancy:** [24]\n• Same resuscitation principles apply\n• Physiologic changes (lower BP, higher HR, lower platelets) make recognition harder\n• Higher risk for pneumonia and genitourinary infections\n• Left lateral decubitus positioning after 20 weeks\n• Fetal monitoring when feasible\n\n**Elderly / Frail:** [24]\n• Higher mortality, impaired immune/cardiovascular response\n• 65-Trial: MAP target >60 mmHg safe and may reduce vasopressor exposure [18]\n\n**Cirrhosis:** [23]\n• Baseline hypotension, thrombocytopenia, impaired lactate clearance\n• Higher MAP targets may improve hepatorenal physiology\n• Do not dismiss abnormalities as "baseline"\n\n**End-Stage Renal Disease:** [24]\n• Bacteremia common from intravascular devices\n• **Same initial fluid boluses recommended** despite dialysis status\n• Frequent fluid shifts may limit physiologic response\n\n**Immunosuppressed:**\n• Broader empiric coverage (consider fungal, PJP, atypical organisms)\n• Lower threshold for CT imaging and invasive diagnostics',
     citation: [18, 23, 24],
     next: 'sepsis-monitor',
+
+    summary: 'Pregnancy, elderly, cirrhosis, ESRD, immunosuppressed — same principles with population-specific adjustments',
+    skippable: true,
   },
 
   // =====================================================================
@@ -507,6 +565,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Clinical targets (follow continuously):** [2][24]\n• **MAP ≥65 mmHg** (individualize within 60-70 range)\n• **Urine output ≥0.5 mL/kg/hr** — good UOP is reassuring; low UOP is nonspecific (may be ATN)\n• **Capillary refill time <3 seconds** (ANDROMEDA-SHOCK-2: improved composite outcome) [17]\n• **Perfusion index >1.4-2%** from pulse oximetry (emerging target) [23]\n• **Mentation** improving\n• **Heart rate** — mild tachycardia is appropriate; excessive tachycardia (>140) is harmful\n\n**Laboratory (q6h until improving):** [24]\n• **Serum lactate** — trend toward normalization. Stop checking once clearly falling. [23]\n• Routine labs: platelets, creatinine, LFTs, coagulation\n• Follow-up cultures\n\n**Hemodynamic monitoring:** [24]\n• Dynamic fluid responsiveness preferred over static CVP\n• Arterial line: NOT always necessary (2025 RCT: similar outcomes without arterial catheter) [24]\n• PAC: NOT recommended routinely [24]\n\n**Key insight:** Lactate is NOT an indicator of perfusion or anaerobic metabolism — it is primarily an index of endogenous epinephrine production. Use perfusion targets (CRT, skin, UOP) over lactate targets. [23]',
     citation: [2, 17, 23, 24],
     next: 'sepsis-respond',
+
+    summary: 'CRT <3sec, MAP >=65, UOP >=0.5mL/kg/hr, lactate trending down — lactate is epinephrine index, not perfusion marker',
   },
 
   {
@@ -529,6 +589,8 @@ export const SEPSIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Most respond within 6-24hr — improving MAP, declining lactate, adequate UOP signals de-escalation readiness',
   },
 
   {
@@ -539,6 +601,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Assess daily for de-escalation opportunity.** [24]\n\n**Narrowing (48-72 hours):** [24]\n• When culture and susceptibility results return, narrow to pathogen-directed therapy\n• If no MRSA cultured within 48h → discontinue vancomycin\n• If no pathogen identified (~50% of cases) → use clinical judgment + fixed course of broad-spectrum (3-5 days)\n\n**Duration:** Typically **5-7 days** [24]\n• Longer for: S. aureus bacteremia, endocarditis, osteomyelitis, deep fungal infection, undrained abscess, resistant pathogens, neutropenia\n• Shorter may be appropriate: pyelonephritis with rapid source control, peritonitis with rapid resolution\n\n**Procalcitonin for de-escalation:** [24]\n• Best evidence for guiding discontinuation in **pneumonia and respiratory infections**\n• Meta-analyses: ~1 day shorter antibiotic duration, no mortality benefit or harm\n• NOT recommended for initial diagnosis (sensitivity too low at 77%)\n\n**Extended infusion for beta-lactams** is recommended for maintenance dosing. [23]',
     citation: [23, 24],
     next: 'sepsis-deesc-fluid',
+
+    summary: 'Narrow antibiotics at 48-72hr by cultures; typical course 5-7 days; D/C vancomycin if no MRSA at 48hr',
+    skippable: true,
   },
 
   {
@@ -549,6 +614,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     body: '**Once hemodynamic targets met (usually hours to 1-2 days):** [24]\n\n**Fluid de-escalation:**\n• Reduce rate or stop IV fluids\n• Consider diuretics if fluid overloaded\n• Monitor for cardiogenic and noncardiogenic pulmonary edema (ARDS)\n• Restrictive approach decreases duration of mechanical ventilation and ICU stay [24]\n\n**Vasopressor weaning:** [23]\n• Down-titrate as tolerated — target lowest effective dose\n• If on vasopressin + norepinephrine: wean norepinephrine first (vasopressin has more consistent receptor effects at low doses)\n• Vasopressor reduction challenge: target MAP 60-70 for 1 hour → if perfusion stable, continue lower target\n\n**Steroid taper:** When vasopressors discontinued, taper hydrocortisone over 2-3 days. Do not stop abruptly.\n\n**Key insight:** ICU patients receive ~1.5L/day from infusions and antibiotics alone. Adding enteral nutrition brings this to >2-3L/day. Additional crystalloid boluses are rarely needed after initial resuscitation. [23]',
     citation: [23, 24],
     next: 'sepsis-dispo-icu',
+
+    summary: 'Reduce fluids and vasopressors as tolerated — wean NE first when on dual agents; taper steroids over 2-3 days',
+    skippable: true,
   },
 
   // =====================================================================
@@ -595,6 +663,9 @@ export const SEPSIS_NODES: DecisionNode[] = [
     title: 'Post-Sepsis Care (PICS)',
     body: '**Post-Intensive Care Syndrome (PICS):** Increasingly recognized health burden after sepsis. Significant overlap with "long COVID." [24]\n\n**Domains affected:**\n• **Physical:** Weakness, fatigue, reduced functional capacity\n• **Cognitive:** Memory impairment, difficulty concentrating, executive dysfunction\n• **Psychological:** Depression, anxiety, PTSD\n\n**Incidence:** Up to 50% of ICU sepsis survivors experience long-term impairment.\n\n**ED relevance:**\n• Sepsis is a leading cause of 30-day hospital readmissions [24]\n• Readmission costs exceed those for MI, CHF, COPD, and pneumonia [24]\n\n**Before discharge, address:**\n• Medication reconciliation (stop empiric antibiotics, restart home meds)\n• Rehabilitation referral if prolonged ICU stay\n• Follow-up clinic appointment (PCP + relevant specialists)\n• Patient education about post-sepsis symptoms\n• Goals of care discussion if appropriate',
     citation: [24],
+
+    summary: 'PICS affects up to 50% of ICU survivors — physical, cognitive, psychological; sepsis is leading cause of 30-day readmission',
+    skippable: true,
   },
 ];
 

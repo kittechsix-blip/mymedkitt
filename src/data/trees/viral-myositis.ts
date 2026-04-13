@@ -52,6 +52,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Age-based triage: pediatric BACM has excellent prognosis; adults higher rhabdomyolysis and AKI risk',
   },
 
   {
@@ -88,6 +90,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Benign Acute Childhood Myositis (BACM):**\n\nTypical presentation:\n\u2022 **Age:** Peak 5-9 years (range 2-14)\n\u2022 **Sex:** Male predominance (3:1)\n\u2022 **Timing:** 1-7 days after viral prodrome (often influenza)\n\n**Classic Symptoms:**\n\u2022 Sudden-onset bilateral calf pain (90%)\n\u2022 Refusal to walk or "duck waddle" gait\n\u2022 Calf tenderness to palpation\n\u2022 May have resolving URI symptoms\n\n**Key Features:**\n\u2022 Usually afebrile at presentation\n\u2022 Normal neurologic exam\n\u2022 Symmetric involvement\n\u2022 Self-limited (resolves in 3-5 days)',
     citation: [1, 5],
     next: 'vm-peds-exclude',
+
+    summary: 'BACM: bilateral calf pain, refusal to walk, post-viral prodrome in boys 5-9yo; resolves 3-5 days',
+    skippable: true,
   },
 
   {
@@ -110,6 +115,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         next: 'vm-peds-labs',
       },
     ],
+
+    summary: 'Exclude GBS (ascending weakness), DVT (asymmetric), septic arthritis, osteomyelitis before diagnosing BACM',
+    safetyLevel: 'warning',
   },
 
   {
@@ -120,6 +128,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Adult Viral Myositis:**\n\nUnlike pediatric BACM, adults have higher risk of rhabdomyolysis and AKI.\n\n**Common Presentation:**\n\u2022 Diffuse myalgias (not limited to calves)\n\u2022 Proximal weakness (thighs, shoulders)\n\u2022 Muscle tenderness\n\u2022 May have ongoing fever/constitutional symptoms\n\n**Associated Features:**\n\u2022 Dark urine (myoglobinuria) - concerning sign\n\u2022 Decreased urine output\n\u2022 Fatigue, malaise\n\n**Risk Factors for Severe Course:**\n\u2022 Older age\n\u2022 Pre-existing renal disease\n\u2022 Dehydration\n\u2022 Concurrent medications (statins, fibrates)\n\u2022 Immunocompromised state',
     citation: [3, 7],
     next: 'vm-adult-assess',
+
+    summary: 'Adults: diffuse myalgias, proximal weakness; dark urine = myoglobinuria; higher AKI risk than children',
+    skippable: true,
   },
 
   {
@@ -147,6 +158,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Assess for rhabdomyolysis progression: dark urine, decreased UOP, severe weakness, concurrent statin use',
   },
 
   // =====================================================================
@@ -161,6 +174,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Minimal Workup for Classic BACM:**\n\u2022 **CK (Creatine Kinase):** Elevated, typically 1,000-10,000 U/L\n\u2022 **UA:** Check for myoglobin (blood + on dipstick, no RBCs on micro)\n\u2022 **BMP (optional):** If clinical concern for renal involvement\n\n**Expected Findings in BACM:**\n\u2022 CK elevated (median 1,750 U/L, can reach >100,000)\n\u2022 Normal creatinine (renal function preserved)\n\u2022 Mild transaminitis (AST > ALT, from muscle)\n\u2022 Possible mild leukopenia/thrombocytopenia (viral)\n\n**Important Note:**\n\u2022 CK level does NOT correlate with severity in BACM [5]\n\u2022 Even massive CK elevation rarely causes AKI in children\n\u2022 CK peaks at 2-3 days, normalizes by 7-14 days',
     citation: [1, 5, 8],
     next: 'vm-peds-ck-result',
+
+    summary: 'CK + UA minimum; CK does NOT correlate with severity in BACM; even massive CK rarely causes AKI in children',
   },
 
   {
@@ -188,6 +203,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Risk-stratify by CK level and UA myoglobin — dipstick blood+ with <5 RBCs on micro = myoglobinuria',
   },
 
   {
@@ -198,6 +215,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Outpatient Workup for Mild Symptoms:**\n\n**Basic Labs:**\n\u2022 CK (Creatine Kinase)\n\u2022 BMP (creatinine, potassium)\n\u2022 UA (check for myoglobin)\n\n**If Normal Renal Function + CK <5,000:**\n\u2022 Supportive care at home\n\u2022 PO hydration (2-3L/day)\n\u2022 [Acetaminophen](#/drug/acetaminophen/pain) or [Ibuprofen](#/drug/ibuprofen/viral myositis) for pain\n\u2022 Avoid strenuous activity\n\u2022 Return if dark urine, decreased UOP, or worsening symptoms\n\n**Consider viral testing:**\n\u2022 Influenza (if suggestive history, for oseltamivir consideration)\n\u2022 COVID-19',
     citation: [4, 7],
     next: 'vm-adult-mild-result',
+
+    summary: 'Mild symptoms: CK, BMP, UA; if normal renal and CK <5000, supportive care and PO hydration at home',
   },
 
   {
@@ -225,6 +244,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Interpret mild adult labs: CK <5000 + normal renal = low risk; CK >10000 or AKI = rhabdomyolysis',
   },
 
   {
@@ -235,6 +256,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Complete Workup for Moderate-Severe Symptoms:**\n\n**Standard Labs:**\n\u2022 CBC with differential\n\u2022 CMP (renal function, electrolytes, LFTs)\n\u2022 CK (Creatine Kinase)\n\u2022 UA with microscopy\n\u2022 Serum myoglobin (if available)\n\u2022 Lactate (if ill-appearing)\n\n**Consider:**\n\u2022 ECG (if K+ concerns)\n\u2022 Influenza/COVID testing\n\u2022 TSH (hypothyroid myopathy)\n\u2022 ANA, aldolase (if subacute course, consider inflammatory myopathy)\n\n**CK Thresholds:**\n\u2022 CK >5,000 U/L + dehydration/acidosis: high AKI risk\n\u2022 CK >10,000 U/L: significant rhabdomyolysis\n\u2022 CK >100,000 U/L: severe, high AKI risk regardless of hydration',
     citation: [4, 7, 9],
     next: 'vm-adult-lab-results',
+
+    summary: 'Full panel: CBC, CMP, CK, UA, myoglobin, lactate; CK >100K = severe AKI risk regardless of hydration',
   },
 
   {
@@ -262,6 +285,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Risk-stratify adults: CK >10K or AKI or hyperkalemia = rhabdomyolysis requiring IV fluids and admission',
   },
 
   {
@@ -272,6 +297,8 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**When red flags are present, expand workup:**\n\n**Labs:**\n\u2022 CBC, CMP, CK, UA\n\u2022 ESR, CRP (inflammatory markers)\n\u2022 Blood culture (if febrile)\n\u2022 Procalcitonin (if sepsis concern)\n\n**Imaging as indicated:**\n\u2022 X-ray of affected limb (fracture, osteomyelitis)\n\u2022 Ultrasound (DVT, abscess, joint effusion)\n\u2022 MRI (if osteomyelitis, pyomyositis concern)\n\n**Additional Testing:**\n\u2022 LP (if GBS or meningitis concern)\n\u2022 Nerve conduction studies (GBS)\n\n**Disposition depends on findings:**\n\u2022 If alternative diagnosis confirmed: treat accordingly\n\u2022 If BACM confirmed after workup: manage per risk stratification',
     citation: [1, 6],
     next: 'vm-peds-labs',
+
+    summary: 'Expanded workup for red flags: ESR/CRP, cultures, imaging for fracture/DVT/abscess, LP if GBS concern',
   },
 
   // =====================================================================
@@ -416,6 +443,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Rhabdomyolysis from Viral Myositis**\n\nCK >10,000 U/L OR evidence of AKI OR myoglobinuria requires aggressive management.\n\n**Pathophysiology:**\n\u2022 Muscle cell necrosis releases myoglobin\n\u2022 Myoglobin precipitates in renal tubules\n\u2022 Direct tubular toxicity\n\u2022 Renal vasoconstriction\n\u2022 AKI can occur rapidly\n\n**Complications:**\n\u2022 AKI (21% incidence in rhabdomyolysis)\n\u2022 Hyperkalemia (life-threatening)\n\u2022 Hypocalcemia (early)\n\u2022 Hypercalcemia (recovery phase)\n\u2022 DIC (severe cases)\n\u2022 Compartment syndrome (rare in viral)',
     citation: [4, 9, 10],
     next: 'vm-rhabdo-treatment',
+
+    summary: 'Myoglobin causes direct tubular toxicity and renal vasoconstriction — 21% AKI incidence in rhabdomyolysis',
+    safetyLevel: 'warning',
   },
 
   {
@@ -448,6 +478,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Influenza-Associated Myositis Considerations:**\n\n**Antiviral Therapy:**\n\u2022 [Oseltamivir](#/drug/oseltamivir/influenza) if <48h from symptom onset\n\u2022 May still provide benefit after 48h in severe cases\n\u2022 Dosing: 75 mg PO BID x 5 days (adults)\n\u2022 Pediatric: weight-based dosing\n\n**2024-2025 Season Data:** [2]\n\u2022 BACM incidence 32.7% in hospitalized influenza cases\n\u2022 Influenza B more commonly associated than A\n\u2022 Median CK 2,637 U/L (range 189-129,390)\n\u2022 All had preserved renal function\n\u2022 No ICU admissions or deaths\n\n**Prevention:**\n\u2022 Annual influenza vaccination may reduce BACM incidence\n\u2022 Quadrivalent vaccine preferred',
     citation: [2, 7],
     next: 'vm-peds-low-risk',
+
+    summary: 'Oseltamivir within 48h of onset; influenza B more associated with BACM than A; vaccination reduces incidence',
+    skippable: true,
   },
 
   {
@@ -458,6 +491,9 @@ export const VIRAL_MYOSITIS_NODES: DecisionNode[] = [
     body: '**Conditions Mimicking Viral Myositis:**\n\n**Infectious:**\n\u2022 Pyomyositis (focal, often unilateral)\n\u2022 Necrotizing fasciitis (rapid progression, systemic toxicity)\n\u2022 Trichinosis (eosinophilia, periorbital edema)\n\u2022 Lyme disease (may have rash, arthritis)\n\n**Inflammatory:**\n\u2022 Dermatomyositis (rash, proximal weakness, chronic)\n\u2022 Polymyositis (insidious onset, proximal weakness)\n\u2022 Vasculitis\n\n**Neurologic:**\n\u2022 Guillain-Barre syndrome (ascending weakness, areflexia)\n\u2022 Transverse myelitis (sensory level)\n\u2022 Myasthenia gravis (fatigable weakness, ptosis)\n\n**Other:**\n\u2022 Compartment syndrome (tense compartment, pain with passive stretch)\n\u2022 DVT (unilateral swelling, Homan sign)\n\u2022 Drug-induced myopathy (statins, fibrates, colchicine)',
     citation: [3, 6],
     next: 'vm-start',
+
+    summary: 'Key mimics: GBS (ascending weakness), dermatomyositis (rash), pyomyositis (focal), DVT (unilateral)',
+    skippable: true,
   },
 
 ];

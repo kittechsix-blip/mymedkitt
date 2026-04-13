@@ -34,6 +34,7 @@ export const SYNCOPE_NODES = [
                 next: 'sync-true-syncope',
             },
         ],
+        summary: 'First priority: exclude life-threatening conditions — abnormal vitals, neuro deficit, chest pain, hemorrhage',
     },
     {
         id: 'sync-life-threat',
@@ -69,6 +70,7 @@ export const SYNCOPE_NODES = [
                 next: 'sync-ecg',
             },
         ],
+        summary: 'Syncope commonly causes myoclonic jerks — lateral tongue laceration, >20 rhythmic jerks, prolonged postictal favor seizure',
     },
     {
         id: 'sync-seizure',
@@ -106,6 +108,8 @@ export const SYNCOPE_NODES = [
                 next: 'sync-history',
             },
         ],
+        summary: 'ECG mandatory for ALL syncope — 50% arrhythmic causes detected within 2h; QTc >500 ms = high risk',
+        safetyLevel: 'critical',
     },
     {
         id: 'sync-abnormal-ecg',
@@ -115,6 +119,8 @@ export const SYNCOPE_NODES = [
         body: '**Abnormal ECG is a high-risk feature in all syncope risk stratification tools.** [1,2,10]\n\nECG findings associated with serious cardiac arrhythmias within 30 days: [9]\n• Nonsinus rhythm\n• Mobitz II or third-degree AV block\n• Bundle branch block (especially new LBBB)\n• QTc >460 ms\n• Pre-excitation (WPW)\n• Brugada type 1 pattern\n• Epsilon waves (ARVC)\n• "Dagger" Q waves (HCM)\n• ST depression or T-wave inversions\n\nAtrial fibrillation, IVCD, LVH, and ventricular pacing are independent predictors of mortality. [11]\n\nContinue to history assessment — ECG findings will factor into risk stratification.',
         citation: [1, 9, 10, 11],
         next: 'sync-history',
+        summary: 'Abnormal ECG = high-risk in ALL syncope tools — BBB, QTc >460, pre-excitation, Brugada, epsilon waves',
+        safetyLevel: 'warning',
     },
     {
         id: 'sync-history',
@@ -145,6 +151,7 @@ export const SYNCOPE_NODES = [
                 next: 'sync-risk-stratify',
             },
         ],
+        summary: 'History is the single most important tool — activity, prodrome, duration, medications, cardiac/family history',
     },
     {
         id: 'sync-labs',
@@ -154,6 +161,8 @@ export const SYNCOPE_NODES = [
         body: '**Labs are low-yield unless directed by history/exam.** [1,2]\n\nConsider in patients without clear benign diagnosis:\n• **CBC** — anemia (but initial Hgb may be normal in acute hemorrhage)\n• **BMP** — electrolytes, renal function, glucose\n• **Pregnancy test** — all women of childbearing age\n• **Troponin (hs-cTnT)** — elevated troponin is an independent predictor of 30-day mortality [13]\n• **BNP/NT-proBNP** — elevated BNP confers ~8× increased risk of serious outcomes; may distinguish cardiac from vasovagal [14,15]\n• **Lactate** — if seizure vs syncope unclear (within 2 hours)\n\n**Do NOT routinely obtain:**\n• D-dimer (unless PE otherwise suspected by PERC/Wells)\n• Head CT (unless neuro deficit or head trauma)\n• EEG (unless seizure suspected)\n• Stress testing (unless exertional syncope with ischemia concern)',
         citation: [7, 13, 14, 15, 16],
         next: 'sync-risk-stratify',
+        summary: 'Labs low-yield unless directed — troponin predicts 30-day mortality; do NOT routinely D-dimer or head CT',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: ETIOLOGY CLASSIFICATION
@@ -199,6 +208,7 @@ export const SYNCOPE_NODES = [
         confidence: 'recommended',
         citation: [1, 22, 23, 24],
         next: 'sync-disposition-low',
+        summary: 'Medications cause ~40% of orthostatic syncope — normal orthostatics do NOT predict outcomes in elderly',
     },
     {
         id: 'sync-cardiac-suspect',
@@ -220,6 +230,7 @@ export const SYNCOPE_NODES = [
                 next: 'sync-arrhythmia',
             },
         ],
+        summary: 'Cardiac syncope = highest morbidity — exertional, no prodrome, supine, palpitations, structural disease, abnormal ECG',
     },
     {
         id: 'sync-cardiac-workup',
@@ -229,6 +240,8 @@ export const SYNCOPE_NODES = [
         body: '**Structural heart disease + syncope = HIGH RISK.** [1,2,25]\n\n**Recommended ED workup:**\n• Continuous telemetry monitoring (minimum 6 hours for high-risk) [8]\n• Troponin (hs-cTnT) — elevated is independent predictor of 30-day mortality [13]\n• BNP/NT-proBNP — aids in recognition of cardiac syncope [14,15]\n• Echocardiography — high yield when HF, CAD, abnormal ECG, or elevated biomarkers present [26]\n\n**Consider echocardiography** if:\n• History of heart failure\n• Coronary artery disease\n• Abnormal ECG\n• Elevated hs-cTnT or NT-proBNP\n\nOtherwise, echo has low yield for most syncope patients. [26,27]',
         citation: [1, 8, 13, 14, 15, 26, 27],
         next: 'sync-risk-stratify',
+        summary: 'Structural heart disease + syncope = HIGH RISK — troponin, BNP, echo if HF/CAD/abnormal ECG/elevated biomarkers',
+        safetyLevel: 'warning',
     },
     {
         id: 'sync-arrhythmia',
@@ -238,6 +251,7 @@ export const SYNCOPE_NODES = [
         body: '**Arrhythmias are the most common cause of cardiac syncope** — and typically resolve before ED arrival. [1,2]\n\n**Clues to arrhythmic syncope:**\n• Abrupt onset without prodrome\n• Syncope while sitting or supine\n• Palpitations preceding the event\n• Abnormal ECG (bundle branch block, prolonged QTc, pre-excitation, Brugada pattern)\n• Known cardiac device (pacemaker/ICD)\n\n**ED monitoring:**\n• Continuous telemetry — 50% of arrhythmic causes detected within 2 hours (low-risk); 6 hours (medium/high-risk) [8]\n• Consider early referral for ambulatory monitoring — higher diagnostic yield if initiated within 15 days of event [28]\n\n**If arrhythmia captured on telemetry** → manage per specific rhythm.\n\n**If no arrhythmia detected** → proceed to risk stratification for disposition.',
         citation: [1, 2, 8, 28],
         next: 'sync-risk-stratify',
+        summary: 'Arrhythmias typically resolve before ED — telemetry 2-6h based on risk; ambulatory monitor within 15 days for higher yield',
     },
     // =====================================================================
     // MODULE 4: RISK STRATIFICATION
@@ -271,6 +285,7 @@ export const SYNCOPE_NODES = [
                 next: 'sync-disposition-low',
             },
         ],
+        summary: 'CSRS (best validated) and SFSR for risk stratification — tools do not outperform clinical judgment consistently',
     },
     // =====================================================================
     // MODULE 5: SPECIAL POPULATIONS
@@ -282,6 +297,8 @@ export const SYNCOPE_NODES = [
         title: 'Pediatric Syncope',
         body: '**Approach mirrors adults.** History, exam, and ECG are the most useful components. [34]\n\n**80% of pediatric syncope is neurally mediated** — vast majority have benign etiology. Most cardiac syncope can be diagnosed by history, exam, and ECG. [34]\n\n**Features suggesting cardiac cause in children:**\n• Exertional syncope\n• Syncope without prodrome\n• Syncope while supine\n• Family history of sudden cardiac death\n• Syncope associated with a loud noise → evaluate for **long QT syndrome** [35]\n\n**Common problem:** Excessive testing in pediatric syncope — one study found 58% received head CT with very low yield. 10% are admitted, but very few ultimately diagnosed with cardiac syncope. [36]\n\n**Bottom line:** Unless cardiac features are present, pediatric syncope can be managed conservatively with ECG and PCP follow-up.',
         citation: [34, 35, 36],
+        summary: '80% pediatric syncope is neurally mediated — cardiac features rare; avoid excessive testing (58% get low-yield head CT)',
+        skippable: true,
     },
     {
         id: 'sync-elderly',
@@ -290,6 +307,8 @@ export const SYNCOPE_NODES = [
         title: 'Elderly Syncope',
         body: '**Particularly challenging** — many present with unexplained falls rather than syncope. [37,38]\n\n**Key points:**\n• 25-50% of unexplained falls in elderly may be syncope-related [37,39]\n• Almost half of elderly with dementia referred for unexplained falls receive a syncope diagnosis [40]\n• Neurally mediated syncope is still common in this age group [37]\n• QTc prolongation occurs in 25% of elderly — QTc >500 ms predicts 30-day and 1-year mortality [41,42]\n\n**Hospitalization controversy:**\n• Older adults often have multiple risk factors and worse outcomes overall\n• However, for unexplained syncope WITHOUT a serious ED diagnosis, **hospitalization does not improve 30-day adverse outcomes** [43]\n• Age >65 alone and unexplained syncope are NOT independent predictors of mortality [44,45]\n• Mortality is related primarily to **underlying comorbidities**, not the syncope itself [43,46]\n\nHospitalization may increase likelihood of identifying a serious diagnosis, but does not appear to improve mortality.',
         citation: [37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
+        summary: '25-50% of elderly falls may be syncope — hospitalization does not improve 30-day outcomes; mortality from comorbidities',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -331,6 +350,8 @@ export const SYNCOPE_NODES = [
         title: 'Head CT Is NOT Indicated',
         body: '**ACEP "Choosing Wisely" recommendation:** Avoid head CT in asymptomatic patients with syncope, minimal trauma, and a normal neurologic examination. [16]\n\n**Evidence:**\n• Head CT has very low yield (<0.1%) in determining the cause of syncope [51]\n• Commonly ordered despite lack of utility — one study found 58% of pediatric syncope patients received head CT [36]\n• No neurological symptoms + no head trauma + normal neuro exam = **no head CT needed** [16,51]\n\n**Only obtain head CT if:**\n• Significant head trauma from the fall\n• Neurological deficit on examination\n• Suspicion for SAH (thunderclap headache)',
         citation: [16, 36, 51],
+        summary: 'ACEP Choosing Wisely: no head CT without neuro deficit or head trauma — <0.1% yield for syncope cause',
+        skippable: true,
     },
     {
         id: 'sync-pe-screening',
@@ -339,6 +360,8 @@ export const SYNCOPE_NODES = [
         title: 'Pulmonary Embolism & Syncope',
         body: '**PE is uncommon among syncope patients.** [52,53]\n\nExisting clinical decision rules (PERC) adequately identify syncope patients with PE. [52]\n\n**Routine D-dimer is NOT indicated** in syncope patients without independent indications for PE evaluation. [54,55]\n\n**When to consider PE:**\n• Unexplained persistent tachycardia, hypotension, tachypnea, or hypoxia in ED\n• Recent surgery, immobilization, or other VTE risk factors\n• Syncope + dyspnea + pleuritic chest pain\n\n**Apply standard PE rules** (PERC → Wells → CTPA) only when clinically indicated — do NOT screen all syncope patients for PE.',
         citation: [52, 53, 54, 55],
+        summary: 'Routine D-dimer NOT indicated — PE uncommon in syncope; apply standard PERC/Wells only when clinically suspected',
+        skippable: true,
     },
     {
         id: 'sync-carotid-massage',
@@ -347,6 +370,8 @@ export const SYNCOPE_NODES = [
         title: 'Carotid Sinus Massage',
         body: '**AHA and ESC recommend carotid sinus massage** in patients >40 years with undiagnosed syncope after initial evaluation. [1,2]\n\nDiagnostic in up to 60% of patients (increasing with advanced age). [19]\n\n**Positive result (carotid sinus hypersensitivity):**\n• Syncope reproduced, OR\n• Asystole >3 seconds, OR\n• AV block, OR\n• SBP drop ≥50 mmHg\n\n**Contraindications:**\n• Carotid bruit\n• Known carotid stenosis >70%\n• History of TIA or stroke within 3 months\n• MI within 3 months\n• History of VT or VF\n\n**Complication rate:** ~0.1% neurologic complications — careful patient selection is important. [56]\n\nPerform with **appropriate monitoring and resuscitation equipment** readily available.',
         citation: [1, 2, 19, 56],
+        summary: 'Carotid sinus massage for undiagnosed syncope >40y — diagnostic in up to 60%; contraindicated if carotid bruit/stenosis',
+        skippable: true,
     },
 ];
 // -------------------------------------------------------------------

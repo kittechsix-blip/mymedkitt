@@ -18,6 +18,7 @@ export const TTP_NODES = [
             { id: 'ttp-plasmic', label: 'PLASMIC Score' },
         ],
         next: 'ttp-maha-check',
+        summary: 'MAHA + thrombocytopenia = suspect TTP — >90% mortality without treatment, <10% with prompt TPE',
     },
     {
         id: 'ttp-maha-check',
@@ -43,6 +44,7 @@ export const TTP_NODES = [
                 next: 'ttp-alt-diagnoses',
             },
         ],
+        summary: 'Schistocytes + low platelets + elevated LDH + undetectable haptoglobin + negative Coombs = MAHA',
     },
     {
         id: 'ttp-pending-labs',
@@ -52,6 +54,7 @@ export const TTP_NODES = [
         body: '**Do not delay treatment in critically ill patients.** [3][4]\n\n**While awaiting smear and hemolysis markers:**\n\n**If hemodynamically unstable or neurological symptoms:**\n• Draw ADAMTS13 before any plasma exposure\n• Call hematology emergently\n• Prepare for emergent TPE\n• Consider FFP infusion (30 mL/kg) as bridge if TPE delayed\n\n**If stable:**\n• Expedite peripheral smear review (call lab directly)\n• STAT LDH, haptoglobin results\n• Calculate PLASMIC score once labs available\n\n**Pearl:** A skilled technician/pathologist can confirm schistocytes on smear within 30-60 minutes. Push for urgent smear read. [2]',
         citation: [2, 3, 4],
         next: 'ttp-plasmic',
+        summary: 'If unstable: draw ADAMTS13 before plasma, call hematology, prepare emergent TPE or FFP bridge',
     },
     {
         id: 'ttp-alt-diagnoses',
@@ -95,6 +98,7 @@ export const TTP_NODES = [
                 next: 'ttp-low-plasmic',
             },
         ],
+        summary: 'PLASMIC 6-7 = 72% probability TTP; 5 = 24%; 0-4 = 5% with 98% NPV — guides urgency of TPE',
     },
     {
         id: 'ttp-low-plasmic',
@@ -104,6 +108,8 @@ export const TTP_NODES = [
         body: '**PLASMIC 0-4 has 98% negative predictive value for TTP.** [5]\n\n**More likely diagnoses with low PLASMIC:** [6]\n\n**Hemolytic Uremic Syndrome (HUS):**\n• STEC-HUS (Shiga toxin): bloody diarrhea, severe AKI\n• Atypical HUS (complement-mediated): recurrent, familial\n\n**DIC:**\n• Abnormal coags (prolonged PT/PTT, low fibrinogen)\n• Underlying trigger (sepsis, trauma, malignancy, OB)\n\n**Drug-Induced TMA:** [7]\n• Quinine (most common)\n• Ticlopidine, clopidogrel\n• Cyclosporine, tacrolimus\n• Gemcitabine, mitomycin\n\n**HELLP Syndrome:**\n• Pregnancy (3rd trimester or postpartum)\n• Resolves with delivery\n\n**Malignant Hypertension:**\n• Severe HTN (usually >180/120)\n• End-organ damage\n\n**Still concerned for TTP?**\n• Await ADAMTS13 results\n• Consider hematology consultation\n• If clinical deterioration, treat empirically',
         citation: [5, 6, 7],
         next: 'ttp-ddx-tma',
+        summary: 'Low PLASMIC (0-4) has 98% NPV — consider HUS, DIC, drug-induced TMA, HELLP, malignant HTN instead',
+        skippable: true,
     },
     {
         id: 'ttp-ddx-tma',
@@ -134,6 +140,7 @@ export const TTP_NODES = [
                 next: 'ttp-pregnancy',
             },
         ],
+        summary: 'Normal coags = TTP not DIC; mild Cr (<2) favors TTP over HUS; HELLP resolves with delivery but TTP does not',
     },
     {
         id: 'ttp-dic-pathway',
@@ -163,6 +170,7 @@ export const TTP_NODES = [
         body: '**ADAMTS13 activity <10% is diagnostic of TTP.** [2][4]\n\n**Important:** Draw ADAMTS13 BEFORE any plasma exposure (FFP or TPE). Plasma contains ADAMTS13 and will falsely elevate levels. [4]\n\n**Interpretation:** [2]\n• **<10%:** Severe deficiency = TTP confirmed\n• **10-20%:** Possible TTP — repeat testing, treat if symptomatic\n• **>20%:** TTP unlikely — consider other TMA causes\n\n**Turnaround time:** [4]\n• Send-out test: 2-7 days in most institutions\n• **Do NOT wait for results if PLASMIC 6-7 or clinically critical**\n\n**Anti-ADAMTS13 antibody:** [2]\n• If ADAMTS13 <10%, send inhibitor titer\n• Positive inhibitor = immune TTP (iTTP) — most common\n• Negative inhibitor = consider congenital TTP (rare)\n\n**ISTH 2025 Update:** Confirm ADAMTS13 relapse with 2 consecutive tests <20% within 1-2 weeks. [10]',
         citation: [2, 4, 10],
         next: 'ttp-platelet-warning',
+        summary: 'ADAMTS13 <10% = TTP confirmed — draw BEFORE any plasma exposure to avoid false elevation',
     },
     {
         id: 'ttp-platelet-warning',
@@ -172,6 +180,8 @@ export const TTP_NODES = [
         body: '**Platelet transfusion is CONTRAINDICATED in TTP** except for life-threatening bleeding. [4][11]\n\n**"Adding fuel to the fire"** [11]\n\n**Rationale:**\n• TTP is a prothrombotic state with microvascular platelet aggregation\n• Transfused platelets may worsen microvascular thrombosis\n• Historical reports of sudden death, MI, and stroke after platelet transfusion\n\n**Only transfuse platelets if:** [4]\n• CNS hemorrhage\n• Life-threatening bleeding requiring emergent surgery\n• Discuss with hematology before transfusing\n\n**RBC transfusion is SAFE** for symptomatic anemia. [4]\n\n**Pearl:** Severe thrombocytopenia in TTP rarely causes spontaneous bleeding because platelets are consumed in microthrombi, not hemorrhage.',
         citation: [4, 11],
         next: 'ttp-treatment-decision',
+        summary: 'Platelet transfusion CONTRAINDICATED — "adding fuel to the fire", may cause sudden death/MI/stroke',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: INITIAL TREATMENT
@@ -198,6 +208,7 @@ export const TTP_NODES = [
                 next: 'ttp-ffp-bridge',
             },
         ],
+        summary: 'Initiate TPE within 4-8 hours — reduces mortality from >90% to <10%; start steroids simultaneously',
     },
     {
         id: 'ttp-ffp-bridge',
@@ -207,6 +218,7 @@ export const TTP_NODES = [
         body: '**If TPE will be delayed >4-6 hours:** [3][4]\n\n**FFP Infusion Protocol:**\n• **30 mL/kg** as temporizing measure\n• Provides exogenous ADAMTS13\n• NOT a substitute for TPE — only a bridge\n• Monitor for volume overload\n\n**Practical considerations:**\n• 30 mL/kg ≈ 2.1 L for 70 kg patient\n• May need to give in divided doses\n• Consider diuretics if volume-sensitive\n• Cryo-poor plasma (CPP) is alternative if available\n\n**While infusing FFP:**\n• Start corticosteroids immediately\n• Arrange emergent transfer to TPE-capable facility\n• Call receiving hematologist\n• Document ADAMTS13 drawn pre-FFP\n\n**Pearl:** Do NOT let FFP availability delay transfer. The patient needs TPE.',
         citation: [3, 4],
         next: 'ttp-steroids',
+        summary: 'FFP 30mL/kg as bridge if TPE delayed >4-6h — NOT a substitute for TPE, monitor for volume overload',
     },
     {
         id: 'ttp-tpe-protocol',
@@ -219,6 +231,7 @@ export const TTP_NODES = [
             { id: 'ttp-tpe-volume', label: 'TPE Volume Calculator' },
         ],
         next: 'ttp-steroids',
+        summary: 'Daily TPE 1.0-1.5 plasma volumes until platelets >150k x2 consecutive days — median 7 sessions',
     },
     {
         id: 'ttp-steroids',
@@ -228,6 +241,7 @@ export const TTP_NODES = [
         body: '**Start corticosteroids immediately with TPE.** [3][4]\n\n**Mechanism:** Suppress autoantibody production. [4]\n\n**Dosing options:** [4][12]\n\n| Regimen | Dose | Notes |\n|---------|------|-------|\n| **Standard** | Prednisone 1 mg/kg/day | Most common, continue until remission |\n| **High-dose pulse** | Methylprednisolone 10 mg/kg/day × 3 days → 2.5 mg/kg/day | May improve remission rates |\n| **Pulse (refractory)** | Methylprednisolone 1 g/day × 3 days | For acute deterioration |\n\n**High-dose pulse approach:** [12]\n• Single-center data suggests improved complete remission (66% vs 41%)\n• Consider if neurological/cardiac involvement\n• Transition to oral prednisone after IV pulse\n\n**Duration:**\n• Continue steroids through TPE course\n• Taper after platelet normalization (over 4-8 weeks)\n• Adjust based on ADAMTS13 recovery',
         citation: [3, 4, 12],
         next: 'ttp-adjunctive-decision',
+        summary: 'Prednisone 1mg/kg/day or methylprednisolone pulse — suppresses autoantibody production, start with TPE',
     },
     // =====================================================================
     // MODULE 4: ADJUNCTIVE THERAPY
@@ -256,6 +270,7 @@ export const TTP_NODES = [
                 next: 'ttp-relapse',
             },
         ],
+        summary: 'Caplacizumab now standard for acute iTTP; rituximab for refractory/relapsing cases',
     },
     {
         id: 'ttp-caplacizumab',
@@ -265,6 +280,7 @@ export const TTP_NODES = [
         body: '**Caplacizumab** is an anti-vWF nanobody that prevents platelet aggregation. [13]\n\n**HERCULES Trial Results:** [13]\n• 74% reduction in composite outcome (death, recurrence, thromboembolism)\n• Faster platelet normalization\n• Lower recurrence during treatment\n\n**Dosing:** [13]\n• **Loading:** 10 mg IV before first TPE\n• **Maintenance:** 10 mg SC daily\n• **Duration:** Continue until 30 days after last TPE\n• Can extend up to 28 additional days if ADAMTS13 remains <10%\n\n**Side effects:** [13]\n• Epistaxis (29%)\n• Headache (21%)\n• Gingival bleeding (16%)\n• Mucocutaneous bleeding (monitor closely)\n\n**Cost:** ~$10,000-15,000/dose (discuss with pharmacy early)\n\n**Pearl:** Start caplacizumab with first TPE — do not delay waiting for ADAMTS13 results if clinical picture supports iTTP.',
         citation: [13],
         next: 'ttp-monitoring',
+        summary: 'Anti-vWF nanobody 10mg IV before first TPE then 10mg SC daily — 74% reduction in composite outcome',
     },
     {
         id: 'ttp-refractory',
@@ -274,6 +290,7 @@ export const TTP_NODES = [
         body: '**Refractory TTP:** No response to TPE + steroids by day 5-7. [4][14]\n\n**Criteria for refractory:** [4]\n• Persistent thrombocytopenia despite 5-7 daily TPE\n• No improvement in LDH\n• Clinical deterioration\n• Persistent neurological symptoms\n\n**Escalation strategies:** [4][14]\n\n**1. Add Rituximab:**\n• 375 mg/m² weekly × 4 weeks\n• Alternative: 375 mg/m² × 2 doses within 4 days, + 3rd at day 15\n• **TPE timing:** Hold TPE for ≥4 hours after rituximab infusion to prevent removal\n\n**2. Escalate Steroids:**\n• Methylprednisolone 1 g/day × 3 days\n\n**3. Increase TPE Frequency:**\n• Twice-daily TPE in severe cases\n\n**4. Ensure Caplacizumab Added:**\n• If not already on therapy\n\n**Hematology involvement critical for refractory cases.**',
         citation: [4, 14],
         next: 'ttp-monitoring',
+        summary: 'No response by day 5-7: add rituximab 375mg/m2 weekly, escalate steroids, consider twice-daily TPE',
     },
     {
         id: 'ttp-relapse',
@@ -283,6 +300,7 @@ export const TTP_NODES = [
         body: '**Relapse risk:** 20-50% of patients relapse, most within first 2 years. [15]\n\n**Two types of relapse:** [10][15]\n\n**1. Clinical relapse:**\n• Return of thrombocytopenia + MAHA + ADAMTS13 <10%\n• Treat as acute episode (TPE + steroids + caplacizumab)\n\n**2. ADAMTS13 relapse (biochemical):**\n• ADAMTS13 <20% without clinical symptoms\n• Can be treated preemptively to prevent clinical relapse\n• Rituximab 375 mg/m² × 4 weekly doses\n\n**Early symptoms of relapse:** [15]\n• Lethargy, fatigue (most common early sign)\n• Headache\n• Dark urine\n\n**Monitoring in remission:** [10]\n• ADAMTS13 activity every 3-6 months\n• CBC and hemolysis markers\n• Educate patient on warning symptoms\n\n**Prevention:** Rituximab prophylaxis for patients with persistently low ADAMTS13 during remission. [14]',
         citation: [10, 14, 15],
         next: 'ttp-monitoring',
+        summary: '20-50% relapse risk within 2 years — ADAMTS13 <20% without symptoms can be treated preemptively with rituximab',
     },
     // =====================================================================
     // MODULE 5: SPECIAL POPULATIONS
@@ -306,6 +324,8 @@ export const TTP_NODES = [
                 next: 'ttp-hellp-monitor',
             },
         ],
+        summary: 'HELLP resolves with delivery in 2-3 days; TTP continues to deteriorate postpartum without TPE',
+        safetyLevel: 'warning',
     },
     {
         id: 'ttp-hellp-monitor',
@@ -328,6 +348,7 @@ export const TTP_NODES = [
         body: '**TTP requires ICU admission.** [4]\n\n**Daily monitoring:** [4]\n\n| Parameter | Target |\n|-----------|--------|\n| Platelet count | Normalization (>150k × 2 days) |\n| LDH | Trending toward normal |\n| Hemoglobin | Stabilization |\n| Creatinine | Stability or improvement |\n| Neuro checks | Q4h minimum — no deterioration |\n\n**When to stop TPE:** [4]\n• Platelet count >150 × 10⁹/L for 2 consecutive days\n• LDH normalizing\n• Clinical improvement\n• ADAMTS13 >20% (if available)\n\n**Continue caplacizumab:** [13]\n• 30 days after last TPE\n• Extend if ADAMTS13 remains <10%\n\n**Taper steroids:**\n• After platelet normalization\n• Over 4-8 weeks\n• Monitor for relapse during taper',
         citation: [4, 13],
         next: 'ttp-disposition',
+        summary: 'ICU admission, daily CBC/LDH, neuro checks q4h — stop TPE when platelets >150k x2 consecutive days',
     },
     {
         id: 'ttp-disposition',

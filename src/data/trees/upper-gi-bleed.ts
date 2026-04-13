@@ -39,6 +39,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
       { id: 'aims65', label: 'AIMS65' },
     ],
     next: 'ugib-hemodynamics',
+
+    summary: 'Hemorrhage proximal to Treitz — TXA NOT recommended (HALT-IT: no benefit, increased VTE/seizures)',
   },
 
   {
@@ -61,6 +63,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess SBP, HR, mental status, perfusion — hemodynamic instability triggers resuscitation pathway',
   },
 
   {
@@ -76,6 +80,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
       { id: 'rockall', label: 'Rockall Score' },
     ],
     next: 'ugib-cirrhosis-check',
+
+    summary: 'GBS 0-1 = low risk (<1% need intervention), consider outpatient EGD; AIMS65 >=2 = 31% mortality',
   },
 
   {
@@ -97,6 +103,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
         next: 'ugib-non-variceal',
       },
     ],
+
+    summary: 'Variceal bleeding = 59% of GI bleeds in cirrhotics — changes entire management pathway',
   },
 
   // =====================================================================
@@ -114,6 +122,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
       { id: 'shock-index', label: 'Shock Index' },
     ],
     next: 'ugib-transfusion',
+
+    summary: '2 large-bore IVs, T&C, intubate if GCS <8 — restrictive transfusion Hgb <7 (Villanueva: 45% mortality reduction)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -124,6 +135,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Restrictive Transfusion (Recommended):** [8]\n\n| Threshold | Hgb <7 g/dL |\n|-----------|-------------|\n| Target | 7-8 g/dL |\n| Exception | ACS: target >8 g/dL |\n\n**Why Restrictive?**\n• Excessive transfusion increases portal pressure\n• Worsens variceal bleeding\n• Villanueva: 45% mortality reduction with restrictive approach\n\n**Coagulation Targets:**\n• Platelets >50,000\n• Fibrinogen >150 mg/dL\n• INR: Consider reversal if supratherapeutic\n\n**Special Situations:**\n• **Massive bleeding:** Activate MTP, permissive hypotension\n• **On warfarin:** 4F-PCC if life-threatening; Vitamin K 10mg IV\n• **On DOAC:** Idarucizumab (dabigatran), Andexanet (Xa inhibitors)',
     citation: [8],
     next: 'ugib-cirrhosis-check',
+
+    summary: 'Restrictive: Hgb <7 threshold (except ACS >8) — excessive transfusion increases portal pressure/worsens varices',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -138,6 +152,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Differential Diagnosis:** [1][2]\n\n| Cause | Frequency | Key Features |\n|-------|-----------|---------------|\n| Peptic Ulcer | 35-50% | NSAIDs, aspirin, H. pylori |\n| Erosive Gastritis | 8-15% | NSAIDs, alcohol, stress |\n| Mallory-Weiss | 8-15% | Retching/vomiting first |\n| Esophagitis | 5-15% | GERD history |\n| Dieulafoy Lesion | 1-2% | Large arteriole, intermittent massive bleed |\n| Malignancy | 1-4% | Weight loss, dysphagia |\n| Angiodysplasia | 1-2% | Elderly, CKD, aortic stenosis |\n\n**Labs suggesting upper source:**\n• BUN:Cr ratio >30 (blood protein digestion)\n• Elevated lactate (tissue hypoperfusion)',
     citation: [1, 2],
     next: 'ugib-ppi',
+
+    summary: 'Peptic ulcer 35-50%, erosive gastritis 8-15%, Mallory-Weiss 8-15% — BUN:Cr >30 suggests upper source',
+    skippable: true,
   },
 
   {
@@ -148,6 +165,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Pre-Endoscopy PPI:** [1][9]\n• ACG 2021: No strong recommendation (limited evidence)\n• If used: **Pantoprazole 80 mg IV** or Esomeprazole 80 mg IV\n\n**Post-Endoscopy PPI (High-Risk Ulcers):** [9]\n• **Bolus:** 80 mg IV\n• **Then:** 8 mg/hr infusion x 72h OR 40 mg IV BID-QID x 3 days\n• **Rationale:** Raises gastric pH >6, stabilizes clot\n\n**EMCrit/IBCC Approach:**\n• PPI 40 mg IV Q12h (bolus dosing = infusion efficacy)\n\n**Duration:**\n• High-risk (Rockall ≥6): PPI BID x 14 days\n• Low-risk: PPI daily, transition to PO\n• H. pylori positive: Add eradication therapy',
     citation: [1, 9],
     next: 'ugib-pre-egd',
+
+    summary: 'Pre-EGD: PPI 80mg IV; post-EGD high-risk: 8mg/hr infusion x72h or 40mg IV BID-QID x3 days',
   },
 
   {
@@ -158,6 +177,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Erythromycin (Prokinetic):** [1][10]\n• **Dose:** 250 mg IV over 10-30 min (or 3 mg/kg)\n• **Timing:** 20-90 minutes before EGD\n• **Benefits:**\n  - Improves visualization (OR 3.4)\n  - Reduces repeat endoscopy (OR 0.51)\n  - Shorter hospital stay\n• **Best for:** Active hematemesis, blood on NG lavage\n\n**Pre-EGD Checklist:**\n1. Hemodynamic stabilization\n2. Airway protection (intubate if GCS <8)\n3. Erythromycin 250 mg IV\n4. PPI 40-80 mg IV\n5. Correct coagulopathy if possible\n6. Type and crossmatch ready\n\n**NG Tube:** Optional — does not change outcomes, may help clear stomach',
     citation: [1, 10],
     next: 'ugib-egd-timing',
+
+    summary: 'Erythromycin 250mg IV 20-90min pre-EGD — improves visualization (OR 3.4), reduces repeat endoscopy',
   },
 
   {
@@ -168,6 +189,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Standard Timing:** [1][11]\n• **Within 24 hours** for most patients (ACG 2021)\n• Earlier endoscopy (<12h) NOT shown to improve outcomes\n\n**Urgent EGD (<12 hours):**\n• Hemodynamic instability DESPITE resuscitation\n• Ongoing active bleeding\n• High-risk features\n\n**Emergent EGD (<6 hours):**\n• Massive hemorrhage with persistent shock\n• Suspected variceal bleeding with instability\n\n**When to Skip EGD → Go to IR:**\n• Suspected aortoenteric fistula\n• Exsanguinating duodenal ulcer\n• Failed endoscopic hemostasis\n\n[IMAGE: Duodenal Ulcer — Endoscopic View](#/image/ugib/egd-endoscopy.jpg)',
     citation: [1, 11],
     next: 'ugib-disposition-decision',
+
+    summary: 'Standard within 24h; urgent <12h if unstable despite resuscitation; emergent <6h for massive hemorrhage',
   },
 
   // =====================================================================
@@ -183,6 +206,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     images: [{ src: 'images/upper-gi-bleed/esophageal-varices-banding.png', alt: 'Endoscopic view of esophageal varices with banding device showing large variceal columns', caption: 'Endoscopic band ligation of esophageal varices — definitive endoscopic treatment for variceal hemorrhage. (CC BY-SA 4.0, Kel898)' }],
     citation: [6, 12],
     next: 'ugib-octreotide',
+
+    summary: 'Start vasoactive therapy IMMEDIATELY, restrictive transfusion critical, antibiotics reduce mortality',
   },
 
   {
@@ -246,6 +271,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**CRITICAL: Avoid Over-Resuscitation** [6][8]\n\n**Why less is more:**\n• Excessive fluid increases portal pressure\n• Increased portal pressure worsens variceal bleeding\n• Dilutional coagulopathy\n• Pulmonary edema in cirrhosis\n\n**Targets:**\n• Permissive hypotension: SBP 90-100 mmHg acceptable\n• Hgb 7-8 g/dL (restrictive transfusion critical)\n• Avoid crystalloid boluses if possible\n\n**Blood Products:**\n• pRBCs when Hgb <7\n• FFP only if actively bleeding AND INR >2.0\n• Platelets if <50,000 and actively bleeding\n\n**Coagulation in Cirrhosis:**\n• INR does NOT reliably predict bleeding risk\n• "Rebalanced hemostasis" — pro/anti-coagulant balance',
     citation: [6, 8],
     next: 'ugib-blakemore-indications',
+
+    summary: 'Avoid over-resuscitation — excessive fluids increase portal pressure, target SBP 90-100 acceptable',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -260,6 +288,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Sengstaken-Blakemore or Minnesota Tube:** [14][15]\n\n**Indications:**\n• Massive, exsanguinating variceal bleeding uncontrolled by medical/endoscopic therapy\n• Bridge to TIPS or definitive treatment\n• Last resort when endoscopy unavailable or failed\n• 80-90% effective for temporary control\n\n**Minnesota Tube Preferred** (has esophageal aspiration port)\n\n**Contraindications (Relative):**\n• Esophageal stricture\n• Recent esophageal surgery\n• Large hiatal hernia\n• Severe coagulopathy\n• Recent endoscopic intervention (7-10 days)\n\n[IMAGE: Blakemore vs Minnesota Tube](#/image/ugib/blakemore-tube-comparison.svg)',
     citation: [14, 15],
     next: 'ugib-blakemore-prep',
+
+    summary: 'Last resort for exsanguinating variceal bleeding — 80-90% effective temporary control, bridge to TIPS',
   },
 
   {
@@ -270,6 +300,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Equipment:** [14][15]\n• Sengstaken-Blakemore (3 lumen) or Minnesota tube (4 lumen)\n• 60 mL syringes (Luer-lock and slip-tip)\n• Three-way stopcocks\n• Manometer for pressure monitoring\n• 1000 mL IV bag for traction\n• Water basin for balloon testing\n• Water-soluble lubricant\n\n**Pre-Procedure:**\n1. **INTUBATE THE PATIENT** — aspiration risk is high\n2. Test both balloons underwater — inflate to max, check for leaks\n3. Document baseline pressures at each inflation increment\n4. Position patient supine, HOB elevated 30-45°\n5. Apply topical anesthetic to nares/oropharynx\n6. Lubricate deflated tube\n\n**CRITICAL:** Airway protection is MANDATORY before placement',
     citation: [14, 15],
     next: 'ugib-blakemore-technique',
+
+    summary: 'INTUBATE FIRST — test balloons underwater, CXR before inflation, airway protection is MANDATORY',
+    safetyLevel: 'critical',
   },
 
   {
@@ -280,6 +313,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Insertion (from Roberts & Hedges):** [14]\n\n1. Insert deflated tube orally (preferred) or nasally\n2. Advance to 50-cm mark (past GE junction)\n3. Confirm gastric position: auscultate epigastrium + air injection\n\n**STOP — Obtain CXR to confirm position BEFORE inflation**\n\n**Gastric Balloon Inflation:**\n1. Inflate with 50 mL air initially\n2. Add 50 mL increments to **250-300 mL** (SBT) or **450-500 mL** (Minnesota)\n3. If pressure >15 mmHg above baseline: STOP, deflate, reposition\n4. Double-clamp gastric balloon port\n\n**Apply Traction:**\n1. Pull back until resistance (balloon at GE junction)\n2. Mark tube position at teeth\n3. Apply traction: 0.5-1 kg (500-1000 mL IV bag)\n4. Tape securely\n\n[IMAGE: Blakemore Placement Technique](#/image/ugib/blakemore-placement.svg)',
     citation: [14],
     next: 'ugib-esophageal-balloon',
+
+    summary: 'CXR before inflation, gastric balloon to 250-500mL, traction 0.5-1kg, mark tube position at teeth',
   },
 
   {
@@ -290,6 +325,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Only inflate if gastric tamponade fails:** [14][15]\n\n**Technique:**\n1. Inflate esophageal balloon in 5-10 mmHg increments\n2. Target pressure: **30-40 mmHg**\n3. **NEVER exceed 45 mmHg** (esophageal necrosis/rupture risk)\n4. Monitor pressure continuously with manometer\n\n**Post-Placement:**\n• CXR to confirm final position\n• ICU admission mandatory\n• Continuous vital sign monitoring\n• Tube position checks Q1-2h\n• **Deflate esophageal balloon Q6-8h** to prevent necrosis\n• Maximum inflation time: **24 hours**\n\n**Success Assessment:**\n• Aspirate gastric port — clearing blood = effective\n• Patient stabilizing hemodynamically',
     citation: [14, 15],
     next: 'ugib-blakemore-complications',
+
+    summary: 'Only if gastric tamponade fails — target 30-40mmHg, NEVER exceed 45mmHg, deflate q6-8h, max 24h',
+    safetyLevel: 'critical',
   },
 
   {
@@ -300,6 +338,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Complications:** [14][15]\n\n**Minor:**\n• Nasal/pharyngeal irritation\n• Epistaxis\n• Hoarseness\n\n**Major:**\n• Aspiration pneumonia (most common)\n• Esophageal rupture (up to 6%, often fatal)\n• Esophageal/gastric necrosis\n• Airway obstruction from tube migration\n• Rebleeding on deflation (~50%)\n\n**Catastrophic:**\n• Tracheal compression\n• Tracheoesophageal fistula\n• Cardiopulmonary arrest\n\n**EMERGENCY TUBE REMOVAL:**\nIf airway obstruction from proximal migration:\n**CUT ALL LUMENS** at bifurcation point and remove entire apparatus immediately\n\n**Next Steps:** Consult GI for EGD, IR for TIPS if rebleeding',
     citation: [14, 15],
     next: 'ugib-tips',
+
+    summary: 'Esophageal rupture up to 6%; if airway obstruction from migration CUT ALL LUMENS and remove immediately',
+    safetyLevel: 'critical',
   },
 
   {
@@ -310,6 +351,9 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     body: '**Transjugular Intrahepatic Portosystemic Shunt (TIPS):** [6][16]\n\n**Indications:**\n• Failed endoscopic therapy (2 attempts)\n• Rebleeding despite optimal medical therapy\n• Child-Pugh B/C with active bleeding (early TIPS within 72h)\n• Bridge to transplant\n\n**Early TIPS (<72h):**\n• Consider in high-risk patients (Child-Pugh C or B with active bleeding)\n• Improved survival in select patients\n\n**Contraindications:**\n• Right heart failure\n• Severe hepatic encephalopathy\n• Polycystic liver disease\n• Severe coagulopathy\n\n**Complications:**\n• Hepatic encephalopathy (30%)\n• Shunt stenosis/occlusion\n• Liver failure',
     citation: [6, 16],
     next: 'ugib-disposition-decision',
+
+    summary: 'Early TIPS <72h for Child-Pugh B/C with active bleeding — improved survival in select patients',
+    skippable: true,
   },
 
   // =====================================================================
@@ -345,6 +389,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'GBS 0-1 = outpatient; GBS >=2 = floor; AIMS65 >=2 or unstable = ICU',
   },
 
   {
@@ -390,6 +436,8 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'forrest', label: 'Forrest Classification' },
     ],
+
+    summary: 'Forrest Ia/Ib/IIa = PPI infusion x72h; IIc/III = PO PPI; all patients need H. pylori testing',
   },
 
 ];

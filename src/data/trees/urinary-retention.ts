@@ -37,6 +37,9 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
     ],
     citation: [1, 2],
     next: 'aur-red-flags',
+
+    summary: 'Bladder scan >300mL confirms retention — assess structural, medication, neurogenic, infectious causes',
+    skippable: true,
   },
 
   {
@@ -71,6 +74,9 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         next: 'aur-volume',
       },
     ],
+
+    summary: 'Screen for cauda equina, urethral trauma, and urosepsis before catheterization',
+    safetyLevel: 'critical',
   },
 
   {
@@ -149,6 +155,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         next: 'aur-high-volume',
       },
     ],
+
+    summary: 'Bedside bladder US: <300mL = not retention, 300-1000mL = standard, >1000mL = high volume/POD risk',
   },
 
   {
@@ -170,6 +178,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
     body: 'Volume >1000 mL increases risk of:\n\u2022 **Post-obstructive diuresis (POD)**\n\u2022 Acute kidney injury (if chronic retention)\n\u2022 Hematuria ex vacuo\n\n**Labs to obtain:**\n\u2022 BMP (creatinine, electrolytes)\n\u2022 Urinalysis\n\n**Note on drainage:** Rapid vs gradual drainage is equivalent. Evidence does NOT support clamping at 200-500 mL intervals. Complete drainage is safe and does not increase complications. [6]',
     citation: [1, 6],
     next: 'aur-cath-technique',
+
+    summary: '>1000mL increases POD risk — get BMP, UA; rapid drainage is safe, no need to clamp',
   },
 
   // =====================================================================
@@ -195,6 +205,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         next: 'aur-failed-cath',
       },
     ],
+
+    summary: '16-18Fr standard, coude first-line in older men with BPH, insert to hub before inflating balloon',
   },
 
   {
@@ -217,6 +229,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Document initial volume, send UA/BMP, monitor output for POD (>200mL/hr x2h or >3L/24h)',
   },
 
   // =====================================================================
@@ -243,6 +257,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Try coude tip (curve UP), extra lidocaine jelly, larger or smaller catheter, Seldinger technique',
   },
 
   {
@@ -264,6 +280,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         next: 'aur-suprapubic',
       },
     ],
+
+    summary: 'Urology for cystoscopy-guided placement or suprapubic catheter — avoid further blind attempts',
   },
 
   {
@@ -300,6 +318,9 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
     body: '**Definition:** Urine output >200 mL/hr for 2+ consecutive hours OR >3 L in 24 hours.\n\n**Types:**\n\u2022 **Physiologic POD:** Self-limiting (~24 hours), excretion of retained fluid/solutes\n\u2022 **Pathologic POD:** Persists >48 hours, tubular dysfunction, requires intervention\n\n**Risk factors:**\n\u2022 Bilateral obstruction (or unilateral with solitary kidney)\n\u2022 Chronic retention with elevated creatinine\n\u2022 CHF, edema (excess fluid to mobilize)\n\n**Monitoring:**\n\u2022 Urine output q2h\n\u2022 Vital signs q6-8h\n\u2022 BMP q12-24h (Na, K, Mg, Phos)\n\u2022 Spot urine Na if uncertain type (>40 mEq/L suggests salt-wasting)',
     citation: [6, 8],
     next: 'aur-pod-fluids',
+
+    summary: 'UOP >200mL/hr x2h — physiologic (self-limited ~24h) vs pathologic (>48h); monitor BMP q12-24h',
+    safetyLevel: 'warning',
   },
 
   {
@@ -336,6 +357,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
     body: '**Alpha-blockers (first-line for AUR from BPH):**\n\n[Tamsulosin](#/drug/tamsulosin/urinary retention) 0.4 mg PO daily\n\u2022 Onset: 4-8 hours (some immediate effect)\n\u2022 Selective for alpha-1A receptors (prostate-specific)\n\u2022 Less orthostatic hypotension than non-selective agents\n\u2022 Start AT TIME OF CATHETERIZATION - improves TWOC success\n\u2022 Continue for at least 3-7 days before TWOC attempt\n\n**Evidence:**\nAlpha-blockers increase TWOC success from ~26% to ~48% (OR 2.47) [9]\n\n**5-Alpha Reductase Inhibitors (adjunct):**\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n\u2022 Shrinks prostate over 3-6 months\n\u2022 NOT helpful acutely - effect takes months\n\u2022 May be started by urology for long-term management\n\n**Common medication causes of AUR to discontinue if possible:**\nAnticholinergics, antihistamines, decongestants, opioids, TCAs',
     citation: [1, 9, 10],
     next: 'aur-twoc',
+
+    summary: 'Tamsulosin 0.4mg at catheterization — improves TWOC success from 26% to 48%, onset 4-8h',
   },
 
   {
@@ -346,6 +369,9 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
     body: '**TWOC = removing catheter and assessing ability to void**\n\n**Timing:**\n\u2022 Optimal: After 3-7 days of alpha-blocker therapy\n\u2022 Early TWOC (3 days) has similar success to late (7 days)\n\u2022 Longer catheterization (7 days) has more complications (UTI, leakage)\n\n**TWOC success factors:**\n\u2022 Younger age (<70)\n\u2022 Lower retention volume (<1000 mL)\n\u2022 Identifiable precipitant (medication, constipation)\n\u2022 Alpha-blocker pretreatment\n\n**TWOC failure predictors:**\n\u2022 Age >70\n\u2022 Retention volume >1000 mL\n\u2022 Prostate volume >40 mL\n\u2022 Previous AUR episode\n\n**Procedure:**\n1. Patient takes morning alpha-blocker\n2. Remove catheter in AM\n3. Have patient void when urge develops\n4. Post-void residual (PVR) via bladder scan\n5. Success = void >150 mL with PVR <100 mL',
     citation: [9, 10],
     next: 'aur-causes',
+
+    summary: 'TWOC optimal after 3-7 days of alpha-blocker — success = void >150mL with PVR <100mL',
+    skippable: true,
   },
 
   {
@@ -373,6 +399,8 @@ export const URINARY_RETENTION_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Determine BPH, medication-induced, neurogenic, infectious, or malignant cause for follow-up planning',
   },
 
   {

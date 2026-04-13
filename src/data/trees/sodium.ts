@@ -40,6 +40,8 @@ export const SODIUM_NODES: DecisionNode[] = [
         next: 'na-hyper-assess',
       },
     ],
+
+    summary: 'Confirm sodium result with clinical context — repeat if unexpected or drawn from IV-containing arm',
   },
 
   {
@@ -49,6 +51,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Symptom Severity',
     body: 'Assess for neurological symptoms of hyponatremia. Symptom severity \u2014 not the sodium number alone \u2014 determines urgency of treatment.\n\n**Severe symptoms:**\n\u2022 Seizures\n\u2022 Obtundation or coma\n\u2022 Respiratory arrest\n\n**Moderate symptoms:**\n\u2022 Nausea and vomiting\n\u2022 Confusion or disorientation\n\u2022 Severe headache\n\n**Mild or asymptomatic:**\n\u2022 Subtle cognitive changes, gait instability, or fatigue\n\u2022 Incidental finding on labs',
     citation: [1, 5],
+
+    summary: 'Symptom severity determines urgency — seizures/coma need emergent 3% saline; incidental finding needs slow workup',
+
     options: [
       {
         label: 'Severe or Moderate Symptoms',
@@ -73,6 +78,8 @@ export const SODIUM_NODES: DecisionNode[] = [
     images: [{ src: 'images/sodium/central-pontine-myelinolysis.jpg', alt: 'MRI T2 fat-sat showing trident-shaped increased signal in central pons — osmotic demyelination syndrome (ODS/CPM)', caption: 'Central pontine myelinolysis MRI — "trident" T2 signal in pons from osmotic demyelination. Complication of too-rapid sodium correction (>10 mEq/L in 24h). (CC BY-SA 3.0)' }],
     citation: [1, 3, 8],
     next: 'na-hypo-etiology',
+
+    summary: 'Order serum osm, urine osm, urine sodium simultaneously; give thiamine 100mg IV empirically; check and correct potassium',
   },
 
   {
@@ -82,6 +89,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Serum Osmolality Result',
     body: 'The serum osmolality determines whether this is **true hypotonic hyponatremia** or a non-hypotonic cause.\n\n**Hypotonic (<275 mOsm/kg):** True hyponatremia \u2014 excess water relative to sodium. Proceed to urine osmolality.\n\n**Non-hypotonic (\u2265275 mOsm/kg):** Pseudohyponatremia or translocational hyponatremia. The sodium is artifactually low or diluted by effective osmoles.\n\n[Non-Hypotonic Hyponatremia](#/info/na-non-hypotonic-info) \u2014 detailed explanation of translocational and pseudohyponatremia causes',
     citation: [1, 4],
+
+    summary: 'Serum osm <275 = true hypotonic hyponatremia; >=275 = pseudohyponatremia or translocational (hyperglycemia, mannitol)',
+
     options: [
       {
         label: 'Serum Osm \u2265 275 (Non-Hypotonic)',
@@ -117,6 +127,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Urine Osmolality',
     body: 'Urine osmolality determines whether ADH (vasopressin) is active.\n\n**Urine Osm < 100 mOsm/kg** \u2014 ADH is appropriately suppressed. The kidney is maximally diluting urine. The problem is **excessive water intake or inadequate solute intake** overwhelming the kidney\u2019s diluting capacity.\n\n**Urine Osm > 100 mOsm/kg** \u2014 ADH is active (either appropriately or inappropriately). The kidney is concentrating urine when it should be diluting. Proceed to urine sodium to differentiate causes.',
     citation: [1, 3, 6],
+
+    summary: 'Urine osm <100 = ADH suppressed (water excess); >100 = ADH active (appropriate or inappropriate) — proceed to urine sodium',
+
     options: [
       {
         label: 'Urine Osm < 100 (ADH suppressed)',
@@ -167,6 +180,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Urine Sodium',
     body: 'Urine sodium differentiates **renal sodium losses** from **extrarenal losses** in the setting of ADH-mediated hyponatremia.\n\n**Urine Na < 30 mEq/L** \u2014 The kidney is retaining sodium. Volume depletion (hypovolemic) or edematous states (hypervolemic) with reduced effective arterial blood volume.\n\n**Urine Na > 30 mEq/L** \u2014 The kidney is wasting sodium. SIAD, diuretics, adrenal insufficiency, cerebral salt wasting, or renal failure.\n\n**Caveat:** Diuretics can raise urine Na even in hypovolemic patients. Check urine Na **before** or >48 hours after last diuretic dose if possible.',
     citation: [1, 3],
+
+    summary: 'UNa <30 = kidney retaining sodium (hypovolemic or edematous); UNa >30 = kidney wasting (SIAD, diuretics, adrenal insufficiency)',
+
     options: [
       {
         label: 'Urine Na < 30 mEq/L',
@@ -188,6 +204,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Low UNa \u2014 Volume Assessment',
     body: 'The kidney is retaining sodium, indicating **reduced effective circulating volume.** The key distinction is between true hypovolemia and hypervolemic states with reduced effective arterial blood volume.\n\n**Hypovolemic (dry):**\n\u2022 GI losses (vomiting, diarrhea)\n\u2022 Third-spacing (pancreatitis, burns)\n\u2022 Diaphoresis, insensible losses\n\u2022 Clinical: tachycardia, orthostatic hypotension, poor skin turgor, dry mucous membranes\n\n**Hypervolemic (edematous):**\n\u2022 Heart failure\n\u2022 Cirrhosis\n\u2022 Nephrotic syndrome\n\u2022 Clinical: peripheral edema, ascites, JVD, pulmonary rales',
     citation: [1, 2],
+
+    summary: 'Distinguish hypovolemic (dry: GI losses, third-spacing) from hypervolemic (edematous: CHF, cirrhosis, nephrotic syndrome)',
+
     options: [
       {
         label: 'Hypovolemic (volume depleted)',
@@ -213,6 +232,10 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Emergency Hypertonic Saline',
     body: '**Immediate treatment for severe symptomatic hyponatremia** (seizures, coma, respiratory distress).\n\n[3% Hypertonic Saline](#/drug/hypertonic-saline/severe symptomatic) **100-150 mL IV bolus over 10-20 minutes.** Repeat up to 2 additional times (total 3 boluses) if severe symptoms persist.\n\n**Target:** Raise Na+ by **4-6 mEq/L** in the first 1-2 hours \u2014 this is sufficient to reverse cerebral edema and stop seizures. Each 100 mL bolus of 3% NaCl raises Na+ approximately **2 mEq/L** in a 70 kg adult.\n\n**Peripheral access is acceptable for boluses** \u2014 do NOT delay treatment for central line placement. Central access is preferred only for continuous infusions.\n\n**SALSA Trial (2021):** Bolus 3% NaCl was noninferior to continuous infusion for symptomatic hyponatremia, with lower overcorrection rates.\n\n**Give empirically:** [Thiamine](#/drug/thiamine/hyponatremia) **100 mg IV** now if not already given \u2014 thiamine deficiency increases ODS risk.\n\n**After stabilization:** Recheck Na+ at 1 hour. If symptoms improved, proceed to correction limits.',
     citation: [5, 7, 14],
+
+    summary: '3% NaCl 100-150mL bolus over 10-20min (repeat x2); target 4-6 mEq/L rise in 1-2hr; peripheral access OK; give thiamine',
+    safetyLevel: 'critical',
+
     treatment: {
       firstLine: {
         drug: '3% Hypertonic Saline',
@@ -242,6 +265,10 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Correction Rate Limits',
     body: '**Overcorrection causes osmotic demyelination syndrome (ODS)** \u2014 a devastating and often irreversible pontine and extrapontine injury.\n\n**Maximum correction rates:**\n\u2022 **Standard risk:** \u226410 mEq/L in first 24 hours, \u226418 mEq/L in 48 hours\n\u2022 **High risk for ODS:** \u22648 mEq/L in first 24 hours\n\n[ODS Risk Factors](#/info/na-ods-risk) \u2014 high-risk populations include: Na+ \u2264105, alcohol use disorder, liver disease, malnutrition, hypokalemia, thiamine deficiency\n\n**Key principle:** The goal is to correct enough to stop symptoms (4-6 mEq/L rise), then **slow down.** The acute danger is cerebral edema; the correction danger is ODS.\n\n**If overcorrecting** (Na+ rising faster than target):\n\u2022 [Overcorrection Rescue Protocol](#/info/na-overcorrection) \u2014 [Desmopressin (DDAVP)](#/drug/desmopressin/overcorrection rescue) 2 mcg IV stat + D5W 3 mL/kg/hr to lower Na+ back to safe trajectory\n\n**Monitor:** Check Na+ every 2 hours during active correction. Use a tracking sheet to plot the correction trajectory.\n\n**Concurrent potassium correction counts toward sodium correction** \u2014 if you give 40 mEq KCl, expect Na+ to rise ~1 mEq/L as K+ enters cells and Na+ exits.',
     citation: [1, 5, 7, 15],
+
+    summary: 'Max 10 mEq/L in 24hr (8 for high-risk); overcorrection causes ODS; K+ repletion counts toward Na+ correction (40 mEq KCl ~= +1 Na)',
+    safetyLevel: 'critical',
+
     treatment: {
       firstLine: {
         drug: 'Desmopressin (DDAVP)',
@@ -263,6 +290,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'DDAVP Clamp Strategy',
     body: 'The **DDAVP clamp** (also called "proactive DDAVP" or "DDAVP clamp-and-bolus") is the safest approach to controlled sodium correction.\n\n**How it works:** DDAVP locks the kidneys in a maximally concentrating state (prevents free water excretion). This gives the clinician **complete control** over the correction rate \u2014 Na+ rises only from administered hypertonic saline boluses, not from unpredictable renal water excretion.\n\n[DDAVP Clamp-Bolus Protocol](#/info/na-ddavp-clamp) \u2014 full initiation and monitoring protocol\n\n**Strongest indications for proactive clamp:**\n\u2022 Na+ \u2264120 mEq/L\n\u2022 High ODS risk (alcoholism, liver disease, malnutrition)\n\u2022 Reversible cause likely to self-correct (hypovolemia, diuretics, beer potomania)\n\u2022 Any situation where overcorrection would be catastrophic',
     citation: [1, 7],
+
+    summary: 'DDAVP clamp gives complete correction control — locks kidneys, Na+ rises only from administered 3% boluses',
+
     options: [
       {
         label: 'Start DDAVP Clamp',
@@ -284,6 +314,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'DDAVP Clamp-Bolus Protocol',
     body: '**Step 1 \u2014 Lock the kidneys:**\n[Desmopressin (DDAVP)](#/drug/desmopressin/ddavp clamp) **2 mcg IV q6-8h** (schedule doses around the clock). This prevents all renal free water excretion.\n\n**Step 2 \u2014 Controlled bolus correction:**\n[3% Hypertonic Saline](#/drug/hypertonic-saline/ddavp clamp bolus) **100 mL IV bolus** \u2014 each bolus raises Na+ approximately **2 mEq/L** in a 70 kg adult. Give boluses every 4-6 hours as needed to achieve target correction rate.\n\n**Step 3 \u2014 Monitor:**\n\u2022 Check Na+ **every 2 hours** during active clamp\n\u2022 Track cumulative 24-hour correction on a flow sheet\n\u2022 Target: 4-6 mEq/L rise in first 24 hours for high-risk patients, up to 10 mEq/L for standard risk\n\n**Step 4 \u2014 Discontinue clamp:**\n\u2022 Once Na+ >125 mEq/L and underlying cause addressed\n\u2022 Taper: extend DDAVP interval to q12h for 24 hours, then stop\n\u2022 Continue monitoring Na+ q4-6h for 24 hours after stopping DDAVP\n\n**If Na+ rises too fast despite clamp:** Confirm DDAVP dosing is adequate (urine Osm should be >500). Give **D5W 3 mL/kg/hr** to actively lower Na+ back to safe trajectory.\n\n[DDAVP Clamp-Bolus Protocol](#/info/na-ddavp-clamp) \u2014 expanded protocol with discontinuation guidance',
     citation: [1, 7, 8],
+
+    summary: 'DDAVP 2mcg IV q6-8h locks kidneys; 3% NaCl 100mL boluses q4-6h for controlled correction; Na+ q2h; taper DDAVP to q12h before stopping',
+
     treatment: {
       firstLine: {
         drug: 'Desmopressin (DDAVP)',
@@ -317,6 +350,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'High UNa \u2014 Differential',
     body: 'Urine Na >30 mEq/L with ADH-mediated hyponatremia. The kidney is actively wasting sodium. The three main causes are:\n\n**SIAD (Syndrome of Inappropriate Antidiuresis):**\n\u2022 Most common cause of euvolemic hyponatremia\n\u2022 Euvolemic on exam, urine Osm >100, urine Na >30, low uric acid\n\u2022 [SIAD Causes & Diagnosis](#/info/na-siad-causes) \u2014 medications, malignancy, neurologic, pulmonary\n\n**Diuretic-induced:**\n\u2022 Thiazides >> loops (thiazides impair dilution; loops impair concentration)\n\u2022 May have UNa >30 despite being volume depleted\n\u2022 Check urine Na 48 hours after holding diuretic \u2014 if still >30, not solely diuretic\n\n**Adrenal insufficiency:**\n\u2022 Primary (Addison) or secondary (pituitary)\n\u2022 Cortisol is a tonic inhibitor of ADH \u2014 deficiency \u2192 unopposed ADH secretion\n\u2022 Check AM cortisol and ACTH',
     citation: [1, 3, 6],
+
+    summary: 'High UNa: SIAD (euvolemic, most common), diuretic-induced (thiazides >> loops), or adrenal insufficiency (check cortisol/ACTH)',
+
     options: [
       {
         label: 'SIAD (euvolemic, no diuretic)',
@@ -343,6 +379,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'SIAD Treatment',
     body: '**First-line: Fluid restriction**\n\u2022 Restrict to 800-1000 mL/day total fluid intake\n\u2022 Effective only if urine Osm < 500 AND urine Osm/serum Osm ratio < 1.0\n\u2022 If ratio >1.0, every mL of urine excretes more water than intake replaces \u2014 fluid restriction will fail\n\n**Second-line: Oral urea**\n[Oral Urea](#/drug/oral-urea/siad) **15-30g PO daily** (titrate up to 60g/day). Creates obligate osmotic diuresis. Bitter taste \u2014 mix with orange juice or cola. Ure-Na brand designed for palatability.\n\n**Third-line: Salt tabs + loop diuretic**\n[Sodium Chloride Tablets](#/drug/nacl-tablets/siad) **1-3g PO TID** + [Furosemide](#/drug/furosemide/siad) **20-40 mg PO daily**. The loop diuretic impairs urinary concentration (breaks the medullary gradient), and salt tabs replace renal sodium losses.\n\n**NOT recommended: Vaptans** (tolvaptan, conivaptan). Unpredictable overcorrection risk, hepatotoxicity, expensive, no mortality benefit. European guidelines and IBCC explicitly recommend against.\n\n**Treat the underlying cause:** Discontinue offending medication (SSRIs, carbamazepine, NSAIDs, opioids). Evaluate for occult malignancy if no obvious cause identified. [SIAD Causes & Diagnosis](#/info/na-siad-causes)',
     citation: [6, 8, 9],
+
+    summary: 'Fluid restrict 800-1000mL/day; oral urea 15-30g if restriction fails; vaptans NOT recommended — overcorrection risk, hepatotoxicity',
+
     treatment: {
       firstLine: {
         drug: 'Fluid Restriction',
@@ -494,6 +533,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Hypernatremia Assessment',
     body: 'Hypernatremia (Na+ >145 mEq/L) is **almost always a free water deficit** \u2014 either inadequate intake or excessive loss. Rarely, it results from sodium gain.\n\n**Assess volume status and urine output:**\n\n**Volume depleted (most common):**\n\u2022 Inadequate water intake (altered mental status, intubated, elderly, infant)\n\u2022 GI losses + inadequate replacement\n\u2022 Insensible losses (fever, burns, mechanical ventilation)\n\u2022 Diuretic use without free water replacement\n\n**Polyuria (>3 L/day):**\n\u2022 Diabetes insipidus (central or nephrogenic)\n\u2022 Osmotic diuresis (hyperglycemia, mannitol, urea)\n\u2022 Post-obstructive diuresis\n\n**Volume overloaded (iatrogenic):**\n\u2022 Excessive hypertonic saline, NaHCO\u2083, or high-Na medications\n\u2022 Excess NS resuscitation with inadequate free water\n\n[Hypernatremia Causes](#/info/na-hyper-causes) \u2014 7-category breakdown of all etiologies',
     citation: [2, 10, 13],
+
+    summary: 'Almost always free water deficit — inadequate intake, excessive loss, or rarely sodium gain; assess volume status and urine output',
+
     options: [
       {
         label: 'Volume Depleted',
@@ -520,6 +562,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Diabetes Insipidus Workup',
     body: '**Polyuria with dilute urine (Urine Osm <300 mOsm/kg) suggests diabetes insipidus.**\n\n**Central DI** \u2014 deficient ADH production:\n\u2022 Post-neurosurgery (pituitary), head trauma, brain death\n\u2022 Tumors (craniopharyngioma, metastases)\n\u2022 Autoimmune hypophysitis\n\u2022 **Diagnostic clue:** Urine Osm rises >50% after DDAVP 2 mcg IV trial\n\n**Nephrogenic DI** \u2014 kidney resistant to ADH:\n\u2022 Lithium (most common medication cause \u2014 up to 40% of long-term users)\n\u2022 Hypercalcemia, hypokalemia\n\u2022 Sickle cell disease, amyloidosis\n\u2022 Pregnancy (placental vasopressinase)\n\u2022 **Diagnostic clue:** Urine Osm does NOT rise after DDAVP trial\n\n**DDAVP trial interpretation:**\n\u2022 Give DDAVP 2 mcg IV, measure urine Osm at 0 and 2 hours\n\u2022 >50% rise \u2192 central DI (kidney responds to exogenous ADH)\n\u2022 <50% rise \u2192 nephrogenic DI (kidney does not respond)',
     citation: [10, 12],
+
+    summary: 'Urine osm <300 with polyuria: central DI responds to DDAVP trial (>50% rise); nephrogenic does not; lithium most common med cause',
+
     options: [
       {
         label: 'Central DI',
@@ -541,6 +586,10 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Central DI Treatment',
     body: '**Replace ADH with DDAVP + replace free water deficit.**\n\n**DDAVP replacement:**\n[Desmopressin (DDAVP)](#/drug/desmopressin/central diabetes insipidus) **2 mcg IV q8-12h** (acute inpatient) OR **10 mcg intranasal BID** (stable/outpatient)\n\n**Free water replacement:** Calculate deficit and replace (see next step).\n\n**Post-neurosurgical DI:**\n\u2022 Often a **triphasic response:**\n  1. DI phase (days 1-5): polyuria, rising Na+\n  2. SIAD phase (days 5-10): oliguria, falling Na+ (uncontrolled ADH release from dying neurons)\n  3. Permanent DI (if >80% of neurons destroyed)\n\u2022 **Critical:** Monitor Na+ closely during transitions \u2014 do NOT continue DDAVP blindly into the SIAD phase (will cause dangerous hyponatremia)\n\u2022 Check urine output and Na+ q4-6h in the first 2 weeks post-surgery\n\n**Brain death evaluation:** Central DI with polyuria is a supportive finding but not diagnostic alone. If urine output >300 mL/hr with urine Osm <200, strongly suggestive.',
     citation: [10, 12],
+
+    summary: 'DDAVP replacement + free water deficit correction; post-neurosurgical: watch for triphasic response (DI days 1-5, SIAD days 5-10)',
+    safetyLevel: 'warning',
+
     treatment: {
       firstLine: {
         drug: 'Desmopressin (DDAVP)',
@@ -562,6 +611,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Nephrogenic DI Treatment',
     body: '**The kidney does not respond to ADH \u2014 DDAVP is ineffective.** Treatment relies on reducing solute load and using pharmacologic tricks.\n\n**Step 1 \u2014 Remove the offending agent:**\n\u2022 **Lithium** \u2014 discuss with psychiatry before discontinuing. Amiloride 5-10 mg BID blocks lithium entry into collecting duct cells (partially protective even if lithium continued)\n\u2022 **Hypercalcemia** \u2014 treat aggressively (IV saline, calcitonin, bisphosphonates)\n\u2022 **Hypokalemia** \u2014 correct to >3.5 mEq/L\n\n**Step 2 \u2014 Thiazide paradox:**\n\u2022 Thiazide diuretic (HCTZ 25 mg daily) + amiloride 5 mg BID\n\u2022 **Paradoxical antidiuresis** \u2014 thiazides cause mild volume depletion \u2192 increased proximal tubular reabsorption \u2192 less water delivered to diluting segment \u2192 less urine output\n\u2022 Combined with low-sodium diet (<2g/day) to enhance the effect\n\n**Step 3 \u2014 Large free water volumes:**\n\u2022 Patients may require **10-20 liters/day** of free water intake to keep up with urinary losses\n\u2022 If unable to drink enough: D5W IV to match urine output + ongoing losses\n\u2022 Enteral free water via NG/OG tube if intubated\n\n**NSAIDs** (indomethacin 50 mg TID) can reduce urine output by 25-50% but GI/renal toxicity limits long-term use.',
     citation: [10, 12],
+
+    summary: 'DDAVP ineffective — remove offending agent; thiazide paradox for antidiuresis; may need 10-20 L/day free water intake',
+
     treatment: {
       firstLine: {
         drug: 'Hydrochlorothiazide + Amiloride',
@@ -595,6 +647,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Free Water Deficit & Replacement',
     body: '**Calculate the free water deficit (FWD) to guide replacement volume.**\n\n**Formula:** FWD (liters) = TBW \u00d7 [(Na/140) - 1]\n\u2022 TBW = weight (kg) \u00d7 0.6 (men) or \u00d7 0.5 (women/elderly)\n\u2022 Example: 70 kg male, Na+ 160 \u2192 TBW = 42L, FWD = 42 \u00d7 (160/140 - 1) = **6.0 liters**\n\n**The FWD formula underestimates true deficit** \u2014 it does not account for ongoing losses (insensible, urinary, GI). Add ~1-1.5 L/day for ongoing losses.\n\n**Fluid choice (order of preference):**\n1. **Enteral free water** (PO or NG/OG tube) \u2014 safest, most physiologic\n2. **D5W IV** \u2014 if NPO or insufficient enteral intake (D5W = free water once glucose is metabolized)\n3. **0.45% NaCl** \u2014 only half is free water; use if concurrent volume depletion\n\n**Correction rate:**\n\u2022 **Acute hypernatremia (<48 hours):** Can correct 1 mEq/L/hr safely\n\u2022 **Chronic hypernatremia (>48 hours or unknown):** Maximum **10-12 mEq/L per 24 hours** \u2014 rapid correction risks cerebral edema\n\u2022 Most hypernatremia in hospitalized patients is chronic \u2192 correct slowly\n\n**Replace the deficit over 48-72 hours** \u2014 not in a single bolus. Divide calculated free water evenly.\n\n**Address the underlying cause simultaneously** \u2014 free water alone does not fix DI, ongoing GI losses, or medication causes.',
     citation: [10, 11, 13],
+
+    summary: 'FWD = TBW x (Na/140 - 1); add 1-1.5L/day for ongoing losses; correct chronic over 48-72hr, max 10-12 mEq/L per 24hr',
+
     calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }],
     treatment: {
       firstLine: {
@@ -625,6 +680,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     title: 'Hypernatremia + Volume Overload',
     body: '**Iatrogenic hypernatremia from excessive sodium administration** is increasingly common in ICU patients receiving NS boluses, NaHCO\u2083, and high-sodium medications.\n\n**Causes:**\n\u2022 Large-volume NS resuscitation without free water\n\u2022 NaHCO\u2083 infusions (isotonic bicarb = 150 mEq Na/L)\n\u2022 High-sodium medications (piperacillin-tazobactam = 4.7 mEq Na per gram)\n\u2022 Hypertonic saline overcorrection during hyponatremia treatment\n\n**Management \u2014 natriuretic diuresis + free water:**\n\u2022 [Furosemide](#/drug/furosemide/hypernatremia) **20-40 mg IV** \u2014 produces hypotonic urine (Na+ ~75 mEq/L), removing more sodium than water\n\u2022 Replace urine volume with **D5W or enteral free water** to lower Na+ while diuresing excess sodium\n\u2022 Thiazide + amiloride if loop diuretic insufficient\n\n**Target:** Negative sodium balance (remove more Na+ than you give) while maintaining neutral or positive water balance.\n\n**Switch IV fluids** from NS to D5W or 0.45% NaCl for maintenance. Review all sodium-containing medications and minimize where possible.\n\n**Monitor:** Na+ every 4-6 hours. Strict I&O. Daily weights.',
     citation: [10, 13, 16],
+
+    summary: 'Furosemide produces hypotonic urine (removes more Na than water); replace urine volume with D5W; switch maintenance from NS to D5W',
+
     treatment: {
       firstLine: {
         drug: 'Furosemide',
@@ -665,6 +723,9 @@ export const SODIUM_NODES: DecisionNode[] = [
     body: '**Hypernatremia in elderly patients is almost always chronic and related to impaired thirst or access to water.**\n\n**Why the elderly are vulnerable:**\n\u2022 **Diminished thirst** \u2014 aging blunts the thirst response to hypertonicity\n\u2022 **Reduced total body water** \u2014 TBW factor ~0.45-0.50 (vs 0.60 in younger adults)\n\u2022 **Impaired renal concentrating ability** \u2014 maximum urine Osm declines with age\n\u2022 **Functional limitations** \u2014 dementia, immobility, dependence on caregivers for water access\n\u2022 **Medications** \u2014 diuretics, lithium, laxatives\n\n**Key management differences:**\n\u2022 **Usually chronic** \u2192 correct slowly (max 10-12 mEq/L/day)\n\u2022 **Oral water first** if patient can swallow safely \u2014 200-300 mL PO every 2-4 hours\n\u2022 If unable to drink: **D5W IV** or enteral free water via NG tube\n\u2022 **ICU is usually NOT needed** unless Na+ >160 or hemodynamically unstable\n\u2022 Avoid overdiuresis \u2014 elderly have limited renal reserve\n\n**Discharge planning is critical:**\n\u2022 Ensure caregivers provide regular water access\n\u2022 Set water intake schedule (not reliant on patient requesting water)\n\u2022 Review and minimize diuretics\n\u2022 Follow-up Na+ in 1 week',
     citation: [10, 13, 16],
     next: 'na-hyper-monitoring',
+
+    summary: 'Elderly hypernatremia almost always chronic from impaired thirst — correct slowly; ensure caregiver-driven water schedule on discharge',
+    skippable: true,
   },
 
 ];

@@ -32,6 +32,9 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
     citation: [1, 2],
     calculatorLinks: [{ id: 'rhogam-decision', label: 'RhoGAM Decision Tool' }],
     next: 'rhogam-rh-check',
+
+    summary: '2024 ACOG: RhoGAM NO LONGER routinely recommended before 12 weeks — major practice change, exceptions exist for high-risk scenarios',
+    skippable: true,
   },
 
   {
@@ -64,6 +67,8 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         next: 'rhogam-weak-d',
       },
     ],
+
+    summary: 'Determine Rh(D) status: positive (no RhoGAM), negative unsensitized (candidate), negative sensitized (consult MFM), weak D (genotype)',
   },
 
   {
@@ -96,6 +101,9 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
     body: '**Weak D phenotype** occurs in ~0.2-1% of Caucasians.\n\nSerologic typing may show:\n- Weak positive reaction\n- Discordant results between testing methods\n- "Du" (historical term)\n\n**AABB/ACOG Recommendation:** RHD genotyping to determine if patient needs RhoGAM [5]\n\n**Genotype Interpretation:**\n- **RHD gene present (types 1, 2, 3):** Typically safe, no RhoGAM needed\n- **RHD gene absent or partial:** Treat as Rh-negative, RhoGAM indicated\n\n[Weak D Genotyping Guide](#/info/rhogam-weak-d-genotype)\n\nIf genotyping unavailable, treat as Rh-negative (give RhoGAM when indicated).',
     citation: [5, 6],
     next: 'rhogam-rh-negative',
+
+    summary: 'Weak D: RHD genotyping recommended — types 1/2/3 safe (no RhoGAM), partial D treat as Rh-negative, if genotyping unavailable give RhoGAM',
+    skippable: true,
   },
 
   {
@@ -118,6 +126,8 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         next: 'rhogam-second-third',
       },
     ],
+
+    summary: 'Critical threshold 12 weeks — below 12wk most events do NOT require RhoGAM per 2024 ACOG, above 12wk standard indications apply',
   },
 
   // =====================================================================
@@ -155,6 +165,8 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'First trimester <12wk: RhoGAM NOT routinely recommended — alloimmunization risk <0.1%, fetal RBCs express Rh(D) starting ~7-8wk GA',
   },
 
   {
@@ -226,6 +238,9 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'First trimester exceptions requiring RhoGAM: molar pregnancy, invasive procedures (CVS/amnio), abdominal trauma, significant bleeding',
+    safetyLevel: 'warning',
   },
 
   {
@@ -361,6 +376,8 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         next: 'rhogam-postpartum',
       },
     ],
+
+    summary: 'After 12 weeks: standard RhoGAM recommendations apply — 2024 ACOG changes only affect events before 12 weeks gestation',
   },
 
   {
@@ -443,6 +460,9 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
     citation: [3, 10],
     calculatorLinks: [{ id: 'kb-dosing', label: 'KB Dosing Calculator' }],
     next: 'rhogam-special',
+
+    summary: 'Standard 300mcg covers 30mL fetal blood, MICRhoGAM 50mcg for first trimester only — give IM within 72h, deltoid or gluteal',
+    skippable: true,
   },
 
   // =====================================================================
@@ -479,6 +499,8 @@ export const RHOGAM_EARLY_PREGNANCY_NODES: DecisionNode[] = [
         next: 'rhogam-summary',
       },
     ],
+
+    summary: 'Special scenarios: massive FMH requiring additional doses, KB interpretation for dose calculation, weak D genotyping guidance',
   },
 
   {
