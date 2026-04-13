@@ -21,7 +21,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     images: [{ src: 'images/nstemi/wellens-ecg.jpg', alt: "Wellens' syndrome ECG showing deep symmetric T-wave inversions in V2-V3 during chest pain", caption: "Wellens' syndrome — deep anterior T-wave inversions indicating critical proximal LAD stenosis; a high-risk NSTEMI equivalent. (CC BY-SA 3.0)" }],
     citation: [1, 2],
     next: 'nstemi-initial-anticoag',
-  \n    summary: 'Aspirin chewed, NTG (rule out RV first), serial troponins, ECG within 10min',\n    safetyLevel: 'critical',\n  },
+  },
 
   {
     id: 'nstemi-initial-anticoag',
@@ -61,7 +61,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-risk-stratify',
       },
     ],
-  \n    summary: 'Enoxaparin most; UFH if CrCl<30/PCI<24h; fondaparinux conservative — never switch',\n    safetyLevel: 'warning',\n  },
+  },
 
   {
     id: 'nstemi-risk-stratify',
@@ -82,7 +82,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-timi-stratify',
       },
     ],
-  \n    summary: 'TIMI score determines invasive strategy timing and intensity',\n  },
+  },
 
   // =====================================================================
   // MODULE 2: RISK STRATIFICATION
@@ -116,7 +116,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       },
       monitoring: 'Monitor for bleeding. Assess hemodynamic status continuously. ECG monitoring for arrhythmias.',
     },
-  \n    summary: 'Emergent cath: refractory angina, hemodynamic instability, VT/VF, acute HF',\n    safetyLevel: 'critical',\n  },
+  },
 
   {
     id: 'nstemi-timi-stratify',
@@ -144,7 +144,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
-  \n    summary: 'TIMI 0-2 conservative; 3-4 early invasive 24h; 5-7 very high risk <2h',\n  },
+  },
 
   {
     id: 'nstemi-conservative',
@@ -184,7 +184,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-discharge',
       },
     ],
-  \n    summary: 'TIMI 0-2: medical management, stress test before discharge if stable',\n  },
+  },
 
   // =====================================================================
   // MODULE 3: INVASIVE STRATEGY
@@ -217,7 +217,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       monitoring: 'Monitor for bleeding, dyspnea (ticagrelor side effect). ECG for bradyarrhythmias with ticagrelor.',
     },
     next: 'nstemi-post-pci',
-  \n    summary: 'Cath within 24h for intermediate risk — dual antiplatelet before procedure',\n  },
+  },
 
   {
     id: 'nstemi-delayed-invasive',
@@ -246,7 +246,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       monitoring: 'HR goal <70 bpm. Monitor for bradycardia, hypotension, fatigue, bronchospasm.',
     },
     next: 'nstemi-post-pci',
-  \n    summary: 'Cath within 24-72h acceptable for lower intermediate risk patients',\n  },
+  },
 
   {
     id: 'nstemi-post-pci',
@@ -292,7 +292,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-cabg',
       },
     ],
-  \n    summary: 'Post-PCI: DAPT, statin, beta-blocker, ACEi — verify no complications',\n  },
+  },
 
   {
     id: 'nstemi-cabg',
@@ -303,7 +303,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     recommendation: 'CABG referral. Hold P2Y12 per timing guidelines. Continue aspirin. Restart P2Y12 24\u201348h post-operatively.',
     confidence: 'definitive',
     citation: [1, 2],
-  \n    summary: 'CABG for left main, 3-vessel disease, or failed PCI — hold P2Y12 5-7d pre-op',\n    safetyLevel: 'warning',\n  },
+  },
 
   // =====================================================================
   // MODULE 4: SPECIAL CONSIDERATIONS
@@ -346,7 +346,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-minoca',
       },
     ],
-  \n    summary: 'DAPT minimum 12mo post-DES; 1-6mo post-BMS; longer if tolerated and high risk',\n  },
+  },
 
   {
     id: 'nstemi-minoca',
@@ -357,7 +357,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     recommendation: 'Individualized therapy based on etiology. Cardiac MRI mandatory. Standard ACS regimen may be harmful \u2014 determine etiology first.',
     confidence: 'recommended',
     citation: [1, 11],
-  \n    summary: 'MINOCA: no obstructive CAD — consider spasm, dissection, Takotsubo, myocarditis',\n  },
+  },
 
   // =====================================================================
   // MODULE 5: DISCHARGE & PREVENTION
@@ -390,7 +390,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       monitoring: 'Cr and K+ 1-2 weeks after initiation/titration. Monitor for hypotension, hyperkalemia, cough (ACEi).',
     },
     next: 'nstemi-risk-factors',
-  \n    summary: 'Statin, DAPT, beta-blocker, ACEi — cardiac rehab referral, follow-up 1-2 weeks',\n  },
+  },
 
   {
     id: 'nstemi-risk-factors',
@@ -413,7 +413,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-hf-management',
       },
     ],
-  \n    summary: 'Address modifiable risks: smoking, diabetes, HTN, lipids, weight, activity',\n  },
+  },
 
   {
     id: 'nstemi-triple-therapy',
@@ -443,7 +443,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       },
       monitoring: 'Bleeding assessment (HAS-BLED score). Renal function for DOAC dosing. Avoid triple therapy >1 month if possible.',
     },
-  \n    summary: 'Triple therapy (DAPT + anticoag): minimize duration, use lowest effective doses',\n    safetyLevel: 'warning',\n  },
+  },
 
   {
     id: 'nstemi-hf-management',
@@ -473,7 +473,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
       },
       monitoring: 'K+ and Cr at 3 days, 1 week, then monthly for 3 months. Hold if K+ >5.5 or Cr increases >30%. Contraindicated if K+ >5.0 or CrCl <30.',
     },
-  \n    summary: 'ACS + HF: avoid high-dose fluids, early cath, consider MCS if cardiogenic shock',\n  },
+  },
 
   {
     id: 'nstemi-followup',
@@ -484,7 +484,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     recommendation: 'Cardiology follow-up in 1\u20132 weeks. Cardiac rehab referral. Emphasize DAPT adherence. LDL target <70 mg/dL.',
     confidence: 'recommended',
     citation: [1, 2],
-  \n    summary: 'Cardiology 1-2wk, echo if not done, stress if no cath, cardiac rehab',\n  },
+  },
 
 ];
 
