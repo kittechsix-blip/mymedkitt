@@ -36,6 +36,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
       { id: 'shock-index', label: 'Shock Index' },
     ],
     next: 'cs-recognize',
+    summary: 'Shock spiral: hypotension worsens coronary perfusion',
   },
 
   {
@@ -62,6 +63,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         next: 'cs-at-risk',
       },
     ],
+    summary: 'SBP <90, cold, mottled, oliguria, lactate — SCAI staging',
   },
 
   {
@@ -72,6 +74,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Immediate Actions (EMCrit "Stabilize First"):**\n\n1. **Push-dose pressors** while setting up infusions:\n   • [Epinephrine](#/drug/epinephrine/push-dose) 10-20 mcg IV push (1 mL of 10 mcg/mL)\n   • [Phenylephrine](#/drug/phenylephrine/push-dose) 100-200 mcg if pure vasodilation\n\n2. **Airway:** Avoid intubation if possible — sedation + PPV will crash them further\n   • If must intubate: ketamine + push-dose epi ready\n\n3. **Call for help:** Cardiology, CT surgery, ECMO team\n\n4. **Consider VA-ECMO** if refractory to pressors\n\n**DO NOT** let them sit in hypotensive shock while figuring out the cause. [1][2]',
     citation: [1, 2],
     next: 'cs-etiology',
+    summary: 'Push-dose epi while setting drips — avoid intubation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -82,6 +86,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Patient at risk but not yet in shock:**\n\n• Large anterior STEMI\n• Severe LV dysfunction (EF <30%)\n• Recent high-risk PCI\n• Acute myocarditis\n\n**Proactive Management:**\n• Serial lactates q2-4h\n• Continuous BP monitoring (arterial line preferred)\n• POCUS to track LV function\n• Low threshold for early pressors/inotropes\n• **Do NOT wait for frank hypotension** [1][2]',
     citation: [1, 2],
     next: 'cs-etiology',
+    summary: 'SCAI A: large STEMI or EF <30% — anticipate decline',
+    skippable: true,
   },
 
   {
@@ -112,6 +118,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         next: 'cs-hemodynamics',
       },
     ],
+    summary: 'AMI=cath, ADHF=diuresis, RV=cautious fluids',
   },
 
   {
@@ -122,6 +129,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**STEMI + Shock = Emergent cath lab**\n\n**Critical Path:**\n1. Stabilize hemodynamics (pressors/inotropes)\n2. Activate cath lab immediately\n3. **PCI is definitive therapy** — every minute of delay = worse outcomes\n4. Consider MCS (Impella/IABP) before or during PCI\n\n**Culprit-only PCI** is standard (no multi-vessel in acute setting unless cardiogenic shock precludes identifying culprit)\n\n**Avoid if possible:**\n• Thrombolytics (inferior to PCI, contraindicated if MCS planned)\n• Excess fluids (they are NOT dry)\n• Delaying cath for additional workup [1][2][4]',
     citation: [1, 2, 4],
     next: 'cs-hemodynamics',
+    summary: 'STEMI+shock = emergent cath — PCI definitive',
+    safetyLevel: 'critical',
   },
 
   {
@@ -132,6 +141,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Different phenotype than AMI-shock:**\n\n**Warm Shock (early ADHF):**\n• May be vasodilated initially\n• Treat with diuresis + inotropes\n• Avoid vasopressors unless truly hypotensive\n\n**Cold Shock (late/severe):**\n• True cardiogenic shock\n• Needs inotropes ± vasopressors\n• May need MCS as bridge\n\n**Key:** Identify precipitant:\n• Medication non-compliance\n• Dietary indiscretion\n• New arrhythmia (A-fib with RVR common)\n• Ischemia\n• Infection [1][2]',
     citation: [1, 2],
     next: 'cs-hemodynamics',
+    summary: 'Warm=vasodilated, cold=inotropes — find precipitant',
   },
 
   {
@@ -142,6 +152,8 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**RV failure is a DIFFERENT animal:**\n\n**DO NOT** give aggressive fluids — the RV is preload-dependent but can\'t handle excess volume.\n\n**Management:**\n• **Small fluid boluses** only if clearly hypovolemic (250 mL, reassess)\n• **Norepinephrine** to maintain coronary perfusion\n• **Inotropes:** Dobutamine or milrinone (careful with milrinone — vasodilation)\n• **Reduce RV afterload:** Treat PE if present, optimize ventilation\n• **Avoid intubation** if possible — PPV worsens RV failure\n\n**PAPI (PA Pulsatility Index)** <1.0 = severe RV failure\n\nIf RV MI: **DO NOT give nitrates** [1][2][5]',
     citation: [1, 2, 5],
     next: 'cs-hemodynamics',
+    summary: 'NO aggressive fluids RV — norepinephrine, no nitrates RV MI',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -156,6 +168,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**EMCrit Approach — Phenotype Your Patient:**\n\n**Use POCUS to determine:**\n• LV function (EPSS, visual EF)\n• RV size and function\n• IVC (preload status)\n• Pericardial effusion\n• B-lines (pulmonary edema)\n\n**Cardiac Power Output (CPO):**\n> CPO = (MAP × CO) / 451\n\n**CPO <0.6 W = severe cardiogenic shock**\n\n**Invasive Monitoring (PA catheter):**\n• Consider in refractory shock\n• Helps guide therapy when clinical assessment unclear\n• CI <2.2, PCWP >18 = classic cardiogenic shock [1][2][3]',
     citation: [1, 2, 3],
     next: 'cs-wet-dry',
+    summary: 'POCUS: LV, RV, IVC, B-lines — CPO <0.6W = severe',
   },
 
   {
@@ -181,6 +194,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         next: 'cs-warm-wet',
       },
     ],
+    summary: 'Cold+Wet = inotropes — Cold+Dry may need fluids',
   },
 
   {
@@ -191,6 +205,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Uncommon in true cardiogenic shock — consider:**\n\n• RV infarct (preload-dependent)\n• Hypovolemia + poor cardiac function\n• Post-diuresis overshoot\n\n**Management:**\n• Small fluid challenge (250 mL NS, reassess)\n• If no improvement with fluids → inotropes\n• **Do NOT over-resuscitate** — the heart can\'t handle it [1][2]',
     citation: [1, 2],
     next: 'cs-initial-rx',
+    summary: 'Consider RV infarct — 250mL challenge then reassess',
   },
 
   {
@@ -201,6 +216,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**This is decompensated HF, not yet cardiogenic shock:**\n\n**Treatment:**\n• Aggressive diuresis (IV furosemide)\n• Vasodilators if BP tolerates (nitroprusside, nitroglycerin)\n• Treat precipitant (A-fib, ischemia, etc.)\n\n**Monitor closely** — can progress to cold and wet (true shock).\n\nIf SBP <90 or declining perfusion → transition to cardiogenic shock pathway. [1][2]',
     citation: [1, 2],
     next: 'cs-initial-rx',
+    summary: 'Decompensated HF — diurese, vasodilators if BP OK',
   },
 
   // =====================================================================
@@ -215,6 +231,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**EMCrit "Big Picture":**\n> Stabilize first, diagnose second, but don\'t forget the diagnosis.\n\n**Immediate Actions:**\n1. **Arterial line** — cuff pressures are unreliable in shock\n2. **Central line** — for pressors/inotropes\n3. **Foley** — monitor UOP as perfusion marker\n4. **Labs:** Lactate, troponin, BNP, CBC, BMP, LFTs, coags\n5. **ECG + POCUS** — immediately\n\n**Oxygenation:**\n• High-flow nasal cannula preferred over intubation\n• If must intubate: ketamine, avoid propofol, have pressors ready\n• PPV can worsen hemodynamics [1][2]',
     citation: [1, 2],
     next: 'cs-pressors',
+    summary: 'Art line, central, Foley, ECG + POCUS immediately',
   },
 
   // =====================================================================
@@ -248,6 +265,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
       monitoring: 'Arterial line, cardiac output monitoring, lactate clearance',
     },
     next: 'cs-pressor-choice',
+    summary: 'Norepi first — dobutamine if CI low, avoid pure vasoconstrictors',
   },
 
   {
@@ -268,6 +286,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Match drug to phenotype — escalating = consider MCS',
   },
 
   {
@@ -278,6 +297,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**Once stabilized, optimize:**\n\n**Preload:**\n• Avoid excess fluids in LV failure\n• Consider gentle diuresis if wet\n• Small boluses only if clearly dry\n\n**Afterload:**\n• Avoid excessive vasoconstriction\n• IABP reduces afterload (if placed)\n\n**Rate/Rhythm:**\n• Treat arrhythmias aggressively\n• A-fib with RVR → rate control\n• Bradycardia → pacing\n\n**Metabolic:**\n• Correct acidosis (improves catecholamine responsiveness)\n• Correct electrolytes (K+, Mg2+, Ca2+)\n• Treat anemia (Hgb <7-8 impairs O2 delivery) [1][2]',
     citation: [1, 2],
     next: 'cs-mcs-decision',
+    summary: 'Optimize preload, afterload, rhythm, acidosis, lytes',
   },
 
   // =====================================================================
@@ -302,6 +322,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'MCS early: escalating pressors, lactate, CPO <0.6W',
   },
 
   {
@@ -316,6 +337,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
       { id: 'ecmo-ecpr-criteria', label: 'VA-ECMO Criteria' },
     ],
     next: 'cs-ecmo',
+    summary: 'IABP 0.5L, Impella 3-4L, ECMO full — match need',
   },
 
   {
@@ -326,6 +348,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     body: '**VA-ECMO = Full cardiopulmonary support**\n\n**Indications:**\n• Refractory cardiogenic shock despite medical + MCS\n• Biventricular failure\n• Cardiac arrest with suspected reversible cause\n• Bridge to transplant/LVAD/recovery\n\n**Contraindications:**\n• Irreversible neurologic injury\n• Unwitnessed arrest with prolonged downtime\n• Terminal illness\n• Severe aortic regurgitation (relative)\n\n**Complications:**\n• Limb ischemia (monitor distal perfusion)\n• LV distension (may need Impella for venting)\n• Bleeding, thrombosis\n• North-South syndrome (differential hypoxia)\n\n**ECMO is a bridge, not a destination.** [1][2][7]',
     citation: [1, 2, 7],
     next: 'cs-disposition',
+    summary: 'VA-ECMO biventricular/refractory — bridge not destination',
   },
 
   // =====================================================================
@@ -355,6 +378,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'All cardiogenic shock = ICU — transfer if no MCS',
   },
 
   {
@@ -366,6 +390,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     recommendation: 'Admit to CCU/CICU for continued resuscitation and monitoring. Cardiology consultation required.',
     confidence: 'recommended',
     citation: [1, 2],
+    summary: 'CCU art line, central, lactates — MAP >65, clearance',
   },
 
   {
@@ -377,6 +402,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     recommendation: 'Transfer to facility with MCS/ECMO capability. Stabilize hemodynamics before transport.',
     confidence: 'recommended',
     citation: [1, 2],
+    summary: 'Stabilize, send data — do not delay for workup',
   },
 
   {
@@ -388,6 +414,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     recommendation: 'Emergent cardiac catheterization for revascularization. Continue hemodynamic support throughout.',
     confidence: 'definitive',
     citation: [1, 2, 4],
+    summary: 'AMI+shock = emergent PCI — ASA, heparin, pressors',
   },
 
 ];

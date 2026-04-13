@@ -17,6 +17,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         ],
         citation: [1, 2, 3],
         next: 'mtp-indications',
+        summary: 'Activate early — gestalt + ABC >=2, no wait for labs',
     },
     {
         id: 'mtp-indications',
@@ -56,6 +57,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
                 next: 'mtp-surgical',
             },
         ],
+        summary: 'Trauma, GI, PPH, AAA — ABC >=2 predicts MTP need',
     },
     {
         id: 'mtp-trauma-assess',
@@ -65,6 +67,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Activate MTP if ANY of the following:**\n• [ABC Score](#/calculator/abc-score) ≥2\n• [Shock Index](#/calculator/shock-index) >1.0 with evidence of hemorrhage\n• SBP <90 mmHg with suspected hemorrhage\n• Penetrating torso trauma with hypotension\n• Clinical gestalt: "this patient is bleeding out"\n\n**ABC Score components:**\n• Penetrating mechanism (+1)\n• SBP ≤90 mmHg on arrival (+1)\n• HR ≥120 bpm on arrival (+1)\n• Positive FAST exam (+1)\n\n**Score ≥2:** Sensitivity 75%, Specificity 86% for MTP need. [4,5]',
         citation: [4, 5],
         next: 'mtp-initial-resus',
+        summary: 'ABC: penetrating+SBP<=90+HR>=120+FAST — >=2 activate',
     },
     {
         id: 'mtp-gi-bleed',
@@ -74,6 +77,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Activate MTP for GI bleed if:**\n• Hemodynamic instability despite initial resuscitation\n• Ongoing transfusion requirement >2 units pRBCs/hour\n• Active hematemesis or hematochezia with shock\n• [Shock Index](#/calculator/shock-index) >1.0\n\n**Key differences from trauma:**\n• Often older patients with comorbidities\n• Anticoagulation is common — may need reversal\n• Endoscopy is definitive treatment\n• Call GI early — intervention stops bleeding\n\n**Glasgow-Blatchford Score** helps risk stratify — score ≥6 indicates high-risk bleed. [6]',
         citation: [6],
         next: 'mtp-initial-resus',
+        summary: 'Unstable or >2 units/hr — GI early, endoscopy stops it',
     },
     {
         id: 'mtp-pph',
@@ -83,6 +87,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Definition:** Blood loss ≥1000 mL OR signs of hypovolemia regardless of volume. [7]\n\n**Activate MTP for PPH if:**\n• EBL >1500 mL with ongoing bleeding\n• Hemodynamic instability\n• Coagulopathy developing (oozing from IV sites, mucosa)\n\n**Critical actions in parallel:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/pph) 1 g IV over 10 min (WOMAN trial — give within 3h of delivery) [8]\n• Uterine massage\n• Oxytocin (Pitocin) 40 units in 1L NS at 250 mL/h\n• Methylergonovine (Methergine) 0.2 mg IM (avoid if HTN)\n• Carboprost (Hemabate) 250 mcg IM q15-90min (avoid if asthma)\n• Misoprostol (Cytotec) 800-1000 mcg PR/SL\n• Tamponade: Bakri balloon, uterine packing\n• Surgical: B-Lynch suture, uterine artery ligation, hysterectomy\n\n**Rh considerations:** Give O-negative pRBCs initially if Rh status unknown. [7,8]',
         citation: [7, 8],
         next: 'mtp-initial-resus',
+        summary: 'TXA 1g within 3hrs + massage + uterotonics simultaneously',
+        safetyLevel: 'critical',
     },
     {
         id: 'mtp-vascular',
@@ -92,6 +98,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Immediate priorities:**\n• Activate MTP immediately — these patients die from exsanguination\n• Permissive hypotension: target SBP 80-90 mmHg (conscious)\n• Avoid over-resuscitation — "popping the clot"\n• Call vascular surgery STAT\n\n**Blood pressure targets:**\n• Ruptured AAA: SBP 70-90 mmHg until aortic control [9]\n• Balance: too low = end-organ damage; too high = accelerated bleeding\n\n**Blood products:**\n• Start 1:1:1 ratio immediately\n• Keep blood warm — hypothermia worsens coagulopathy\n• Anticipate massive transfusion — have 6+ units ready',
         citation: [9],
         next: 'mtp-initial-resus',
+        summary: 'AAA: permissive SBP 70-90 until aortic control',
+        safetyLevel: 'critical',
     },
     {
         id: 'mtp-surgical',
@@ -101,6 +109,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Intraoperative MTP activation criteria:**\n• Estimated blood loss >50% of blood volume\n• Ongoing transfusion >4 units pRBCs in 1 hour\n• Unable to achieve surgical hemostasis\n• Developing coagulopathy (microvascular bleeding)\n\n**Communication is critical:**\n• Blood bank notification\n• Anesthesia — maintain normothermia\n• Nursing — prepare MTP cooler workflow\n• Consider cell saver if available\n\n**Damage control surgery:** Abbreviated operation → packing → ICU resuscitation → return to OR',
         citation: [1, 2],
         next: 'mtp-initial-resus',
+        summary: 'Damage control: stop bleeding, contamination, ICU, return OR',
     },
     {
         id: 'mtp-initial-resus',
@@ -110,6 +119,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Immediate actions (first 5 minutes):**\n• Large-bore IV access: 2 × 16-18G peripheral or IO access\n• Type and crossmatch STAT (use rapid sample tube if available)\n• Activate MTP per hospital protocol\n• Crystalloid: 1-2 L LR or NS (avoid excessive crystalloid — dilutional coagulopathy) [10]\n• Consider permissive hypotension (SBP 80-90) in trauma, except TBI [9]\n\n**Adjuncts:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/mtp) 1 g IV over 10 min (if within 3h of injury) [11]\n• [Calcium Chloride](#/drug/calcium-chloride/mtp) 1 g IV if anticipating massive transfusion (citrate chelates calcium)\n• Warm fluids — prevent hypothermia\n\n**Labs to send:**\n• CBC, BMP, coags (PT/INR, PTT, fibrinogen)\n• ABG with lactate\n• TEG/ROTEM if available',
         citation: [9, 10, 11],
         next: 'mtp-products',
+        summary: 'Large IVx2/IO, max 1-2L crystalloid — TXA within 3hrs',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2 — Blood Product Administration
@@ -123,6 +134,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         citation: [12, 13],
         calculatorLinks: [{ id: 'mtp-component', label: 'MTP Component Calculator' }],
         next: 'mtp-cooler-contents',
+        summary: 'PROPPR: 1:1:1 (pRBC:FFP:plt) improved hemostasis',
     },
     {
         id: 'mtp-cooler-contents',
@@ -132,6 +144,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Initial MTP cooler (typical):**\n• 6 units pRBCs (O-negative initially, then type-specific)\n• 6 units FFP (AB plasma is universal donor)\n• 1 apheresis platelet pack (or 6 random donor units)\n\n**Subsequent coolers:**\n• Released q15-30 min as long as MTP active\n• Switch to type-specific blood ASAP (preserves O-negative supply)\n• Communicate ongoing needs to blood bank\n\n**Additional products to consider:**\n• Cryoprecipitate: 10 units if fibrinogen <150 mg/dL\n• Factor VIIa: Not routinely recommended (increased thrombosis, no mortality benefit) [14]',
         citation: [14],
         next: 'mtp-calcium',
+        summary: '6 pRBC + 6 FFP + 1 plt — switch type-specific ASAP',
     },
     {
         id: 'mtp-calcium',
@@ -142,6 +155,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         citation: [15],
         calculatorLinks: [{ id: 'calcium-replacement', label: 'Calcium Replacement Calculator' }],
         next: 'mtp-txa',
+        summary: 'CaCl 1g per 4 units — citrate chelation causes dysfunction',
+        safetyLevel: 'warning',
     },
     {
         id: 'mtp-txa',
@@ -151,6 +166,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Critical timing: Give within 3 hours of injury/onset!** [11]\n\n**CRASH-2 Trial:** TXA given within 3h reduced death from bleeding (4.9% vs 5.7%). Given after 3h, TXA INCREASED mortality (4.4% vs 3.1%). [11]\n\n**Dosing:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/mtp) 1 g IV over 10 min, then 1 g IV over 8 hours\n• For PPH: 1 g IV over 10 min (repeat if bleeding continues after 30 min) [8]\n\n**Mechanism:** Inhibits plasmin → prevents clot breakdown (antifibrinolytic)\n\n**Contraindications:**\n• Known hypersensitivity\n• Active thromboembolic disease (relative)\n• DIC with predominant thrombosis (relative)\n\n**Do NOT delay MTP activation to give TXA — give concurrently.**',
         citation: [8, 11],
         next: 'mtp-abo-q',
+        summary: '1g IV 10min then 1g 8hrs — MUST within 3hrs, harmful after',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3 — ABO Compatibility & Emergency Release
@@ -183,6 +200,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
                 next: 'mtp-rhogam',
             },
         ],
+        summary: 'Emergency release, type-specific, crossmatch tiers',
     },
     {
         id: 'mtp-abo-chart',
@@ -192,6 +210,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**pRBC Compatibility (based on recipient type):**\n• Type O: Can receive O only (universal donor)\n• Type A: Can receive A, O\n• Type B: Can receive B, O\n• Type AB: Can receive A, B, AB, O (universal recipient)\n\n**Plasma/FFP Compatibility (opposite of RBCs):**\n• Type AB: Universal donor (no anti-A or anti-B antibodies)\n• Type A: Can give to A, AB\n• Type B: Can give to B, AB\n• Type O: Can give to O only (has both anti-A and anti-B)\n\n**Platelet Compatibility:**\n• ABO-identical preferred but not required\n• Minor ABO incompatibility generally tolerated\n• Rh matching preferred for Rh-negative females of childbearing age\n\n[Emergency Blood Selection Tool](#/calculator/emergency-blood-selection)',
         calculatorLinks: [{ id: 'emergency-blood-selection', label: 'Emergency Blood Selection Tool' }],
         next: 'mtp-abo-q',
+        summary: 'pRBC: O donor — Plasma: AB donor — opposite rules',
+        skippable: true,
     },
     {
         id: 'mtp-emergency-release',
@@ -201,6 +221,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Three tiers of blood availability:** [16]\n\n**1. Emergency release (uncrossmatched) — Available immediately:**\n• O-negative pRBCs: Universal for emergencies\n• Low-titer O whole blood (if available): Preferred by some centers\n• AB plasma: Universal donor\n\n**2. Type-specific (ABO-Rh matched) — Available in ~10-15 min:**\n• Once patient ABO/Rh typed (automated, ~5 min)\n• Preferred over O-neg when available (preserves supply)\n• Small risk of alloantibodies if prior transfusions/pregnancy\n\n**3. Fully crossmatched — Available in ~45-60 min:**\n• Screens for alloantibodies\n• Not practical for massive hemorrhage\n• Reserve for non-emergent transfusion\n\n**Bottom line:** Start with O-neg/emergency release → Switch to type-specific ASAP',
         citation: [16],
         next: 'mtp-abo-q',
+        summary: 'O-neg immediate, type-specific 10-15min, crossmatch 45-60',
+        skippable: true,
     },
     {
         id: 'mtp-rh',
@@ -210,6 +232,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**When to use O-negative vs O-positive pRBCs:**\n\n**O-negative (Rh-negative) — Use for:**\n• Females of childbearing potential (age <50) with unknown Rh status\n• Pregnant patients\n• Known Rh-negative patients\n• Children with unknown type\n\n**O-positive (Rh-positive) — Acceptable for:**\n• Males of any age\n• Females >50 years (post-menopausal)\n• Known Rh-positive patients\n\n**Why this matters:**\n• O-negative blood is scarce (~7% of population)\n• Rh sensitization risk is only relevant for future pregnancy\n• A single Rh-positive transfusion can cause alloimmunization\n• Alloimmunization → hemolytic disease of fetus in future pregnancy\n\n[Emergency Blood Selection Tool](#/calculator/emergency-blood-selection)',
         calculatorLinks: [{ id: 'emergency-blood-selection', label: 'Emergency Blood Selection Tool' }],
         next: 'mtp-abo-q',
+        summary: 'O-neg females <50 unknown Rh — O-pos males/postmenopausal OK',
     },
     {
         id: 'mtp-rhogam',
@@ -219,6 +242,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**When to give RhoGAM (Rh Immune Globulin):**\n\nRh-negative female of childbearing age who receives Rh-positive blood products.\n\n**Dosing:**\n• [RhoGAM](#/drug/rhogam/mtp) 300 mcg IM covers ~15 mL of Rh-positive RBCs (~30 mL whole blood)\n• For larger exposures: 300 mcg per 15 mL RBCs transfused\n• Give within 72 hours of exposure (earlier is better)\n\n**Calculating dose for massive transfusion:**\n• If patient received 10 units Rh-positive pRBCs (~2000 mL total, ~1400 mL RBCs)\n• Dose needed: ~1400 mL ÷ 15 mL = ~93 vials (not practical)\n• Consult hematology for large exposures — may need IV Rh immune globulin\n\n**Prevention is better:**\n• Use O-negative blood for Rh-unknown females <50\n• Switch to type-specific once Rh status confirmed\n• If Rh-positive blood given emergently, give RhoGAM afterward [17]',
         citation: [17],
         next: 'mtp-teg-q',
+        summary: 'RhoGAM 300mcg/15mL Rh-pos — large = hematology consult',
     },
     // =====================================================================
     // MODULE 4 — TEG/ROTEM Interpretation
@@ -247,6 +271,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
                 next: 'mtp-teg-guided',
             },
         ],
+        summary: 'TEG/ROTEM 10-15min real-time clot — guides components',
     },
     {
         id: 'mtp-teg-normal',
@@ -256,6 +281,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**TEG Parameters:**\n• R-time (reaction time): 5-10 min — time to initial fibrin formation\n• K-time (kinetics): 1-3 min — time to achieve certain clot strength (20 mm)\n• Alpha angle: 53-72° — rate of clot strengthening\n• MA (maximum amplitude): 50-70 mm — clot strength (platelet + fibrin)\n• LY30 (lysis at 30 min): 0-3% — clot stability/fibrinolysis\n\n**ROTEM Parameters (approximate equivalents):**\n• CT (clotting time) ≈ R-time: 38-79 sec (EXTEM)\n• CFT (clot formation time) ≈ K-time: 34-159 sec\n• Alpha angle: 63-83°\n• MCF (maximum clot firmness) ≈ MA: 50-72 mm\n• ML (maximum lysis): 0-15%\n\n[TEG/ROTEM Interpreter](#/calculator/teg-interpreter)',
         calculatorLinks: [{ id: 'teg-interpreter', label: 'TEG/ROTEM Interpreter' }],
         next: 'mtp-teg-q',
+        summary: 'R 5-10, MA 50-70, LY30 0-3% — know normals',
+        skippable: true,
     },
     {
         id: 'mtp-teg-interpret',
@@ -276,6 +303,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
             monitoring: 'Repeat TEG/ROTEM q30-60 min during active MTP. Target MA >50 mm, LY30 <3%, R <10 min.',
         },
         calculatorLinks: [{ id: 'teg-interpreter', label: 'TEG/ROTEM Interpreter' }],
+        summary: 'Long R=FFP, low MA=plt, high LY30=TXA — targeted',
     },
     {
         id: 'mtp-teg-guided',
@@ -285,6 +313,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**TEG/ROTEM-guided vs empiric 1:1:1:**\n\n**Empiric 1:1:1 approach:**\n• Simple, fast, no delay waiting for results\n• May over-transfuse some components\n• Standard of care when TEG/ROTEM unavailable\n\n**Goal-directed approach:**\n• Give specific products based on TEG/ROTEM results\n• May reduce total blood product usage\n• Requires trained interpretation and available testing [19]\n\n**Hybrid approach (pragmatic):**\n• Start with 1:1:1 during initial resuscitation\n• Obtain TEG/ROTEM as soon as practical\n• Adjust ongoing transfusion based on results\n• Continue 1:1:1 if TEG/ROTEM not available\n\n**Targets during MTP:**\n• Fibrinogen >150-200 mg/dL (or FIBTEM MCF >10 mm)\n• Platelets >50,000 (>100,000 for CNS or eye injury)\n• PT/INR near normal (or R-time <10 min)\n• No hyperfibrinolysis (LY30 <3%)',
         citation: [19],
         next: 'mtp-termination-q',
+        summary: 'Start 1:1:1, adjust with TEG when available',
     },
     // =====================================================================
     // MODULE 5 — MTP Termination & Complications
@@ -317,6 +346,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
                 next: 'mtp-postlabs',
             },
         ],
+        summary: 'MTP termination, transition, complications',
     },
     {
         id: 'mtp-when-stop',
@@ -326,6 +356,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Criteria for MTP deactivation:**\n• Surgical/procedural bleeding control achieved\n• Hemodynamic stability without ongoing transfusion (MAP >65, HR <100)\n• Lactate trending down\n• Base deficit improving\n• No clinical evidence of ongoing hemorrhage\n• TEG/ROTEM normalizing (if available)\n\n**Communication:**\n• Notify blood bank that MTP is terminated\n• Cancel pending coolers\n• Return unused products to blood bank promptly\n\n**Do NOT stop MTP prematurely:**\n• Patient may appear stable but still be compensating\n• Watch for rebleeding in first 6-12 hours\n• Keep type-specific blood available in blood bank',
         citation: [1, 2],
         next: 'mtp-termination-q',
+        summary: 'Stop: controlled + stable + lactate trending down',
     },
     {
         id: 'mtp-transition',
@@ -334,6 +365,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         title: 'Transition to Maintenance',
         body: '**Post-MTP management:**\n\n**Hemoglobin target:**\n• Most patients: Hgb 7-8 g/dL\n• Active coronary disease: Hgb 8-9 g/dL\n• Ongoing bleeding: Higher threshold\n\n**Coagulation targets:**\n• INR <1.5\n• Fibrinogen >150-200 mg/dL\n• Platelets >50,000 (>100,000 for CNS injury)\n• iCa >1.0 mmol/L\n\n**Rewarming:**\n• Target core temp >36°C\n• Active warming: Bair Hugger, warm IV fluids, warm blankets\n• Hypothermia impairs coagulation even with normal factor levels\n\n**Reversal of anticoagulation:**\n• If patient was anticoagulated, ensure adequate reversal\n• See [Anticoagulant Reversal](#/tree/anticoag-reversal) consult\n\n**ICU admission:** All MTP patients require ICU-level monitoring',
         next: 'mtp-termination-q',
+        summary: 'Hgb>7, INR<1.5, fib>150, plt>50k, rewarm>36C',
     },
     {
         id: 'mtp-complications',
@@ -343,6 +375,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Lethal triad of trauma:** Hypothermia + Acidosis + Coagulopathy [20]\n\n**Hypothermia:**\n• Core temp <36°C impairs clotting enzymes\n• Warm all products, active rewarming\n\n**Hypocalcemia:**\n• Citrate in blood products chelates calcium\n• Monitor iCa, give CaCl 1 g per 4 units\n• Symptoms: hypotension, arrhythmia, tetany\n\n**Hyperkalemia:**\n• Stored blood has elevated K+ (cell lysis)\n• Older units have more K+\n• Monitor K+, treat if symptomatic or >6.0\n\n**Citrate toxicity:**\n• Liver metabolizes citrate → bicarbonate\n• Overwhelmed liver → citrate accumulation → hypocalcemia + metabolic alkalosis (late)\n\n**TACO (Transfusion-Associated Circulatory Overload):**\n• Pulmonary edema from volume\n• Elderly, cardiac patients at highest risk\n• Treatment: diuresis, slow transfusion rate\n\n**TRALI (Transfusion-Related Acute Lung Injury):**\n• Non-cardiogenic pulmonary edema\n• Occurs within 6h of transfusion\n• Treatment: supportive, may need intubation [21]',
         citation: [20, 21],
         next: 'mtp-termination-q',
+        summary: 'Lethal triad: hypothermia + acidosis + coagulopathy',
+        safetyLevel: 'warning',
     },
     {
         id: 'mtp-postlabs',
@@ -362,6 +396,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
             },
             monitoring: 'CBC, coags, fibrinogen, BMP, ABG q1-4h based on stability. TEG/ROTEM for ongoing coagulopathy.',
         },
+        summary: 'Labs q1h — watch rebleeding 6-24hrs',
     },
     // =====================================================================
     // Additional Decision Support Nodes
@@ -374,6 +409,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Concept:** Accept lower-than-normal BP to avoid "popping the clot" with aggressive fluid resuscitation. [9]\n\n**Target SBP:**\n• Trauma without TBI: 80-90 mmHg\n• Ruptured AAA: 70-90 mmHg until aortic control\n• GI bleed: 90-100 mmHg\n\n**EXCEPTIONS — Target higher BP:**\n• Traumatic brain injury: SBP >100-110 mmHg (avoid secondary brain injury)\n• Spinal cord injury: MAP >85 mmHg\n• Elderly with chronic hypertension: individualize\n\n**Evidence:**\n• Multiple RCTs show benefit in trauma\n• Less crystalloid = less dilutional coagulopathy\n• Less mechanical disruption of fresh clot\n\n**Practical approach:**\n• Minimize crystalloid (max 1-2 L)\n• Prioritize blood products over crystalloid\n• Accept altered mental status if no TBI (will improve with resuscitation)',
         citation: [9, 10],
         next: 'mtp-initial-resus',
+        summary: 'SBP 80-90 except TBI >100-110 — minimize crystalloid',
     },
     {
         id: 'mtp-damage-control',
@@ -383,6 +419,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         body: '**Three pillars of damage control resuscitation:**\n\n**1. Permissive hypotension**\n• Target SBP 80-90 mmHg (except TBI)\n• Minimize crystalloid\n\n**2. Hemostatic resuscitation**\n• 1:1:1 ratio blood products\n• TXA within 3 hours\n• Calcium replacement\n• Warm products\n\n**3. Damage control surgery**\n• Abbreviated initial operation (stop bleeding, limit contamination)\n• Temporary abdominal closure\n• ICU resuscitation (correct coagulopathy, hypothermia, acidosis)\n• Return to OR in 24-48h for definitive repair [22]\n\n**Why this matters:**\nHistorically, long initial operations led to "death spiral" — ongoing blood loss + hypothermia + acidosis + coagulopathy. Damage control approach improved survival in severe trauma.',
         citation: [22],
         next: 'mtp-products',
+        summary: 'Permissive + hemostatic + damage control surgery',
     },
     {
         id: 'mtp-special-pops',

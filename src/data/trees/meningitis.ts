@@ -33,6 +33,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     body: '[Meningitis/Encephalitis Steps Summary](#/info/mening-steps-summary) — quick reference.\n\nInfectious meningitis and encephalitis are life-threatening conditions requiring **time-critical empiric treatment**. Untreated bacterial meningitis approaches **100% mortality**; even with therapy, mortality is **14\u201325%**. [1,3,5]\n\nHerpes simplex encephalitis mortality was **70%** prior to antiviral therapy; now **~9%** with treatment. [7]\n\n\u2022 **Meningitis** = inflammation of meninges and subarachnoid space\n\u2022 **Encephalitis** = inflammation of brain parenchyma itself\n\u2022 Focal neurological deficits indicate brain tissue involvement (encephalitis) [8]\n\n**Key principle:** Empiric antimicrobials must be given **within 1 hour** of suspicion \u2014 do NOT delay for imaging or LP. [1,19]',
     citation: [1, 3, 5, 7, 8, 19],
     next: 'mening-clinical',
+    summary: 'Untreated = 100% mortality — abx within 1 HOUR',
+    safetyLevel: 'critical',
   },
   {
     id: 'mening-clinical',
@@ -42,6 +44,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     body: 'The classic triad of **fever, neck stiffness, and altered mental status** is present in only **44\u201366%** of bacterial meningitis cases. [3,5]\n\nHowever, when **headache** is added as a 4th symptom:\n\u2022 At least **2 of 4** symptoms are present in **95%** of cases [5]\n\u2022 At least **1 of 4** is present in **99\u2013100%** of cases [5]\n\n**Stated differently:** Absence of ALL 4 symptoms (headache, fever, neck stiffness, altered mental status) effectively **rules out** meningitis/encephalitis. [9]\n\n**Individual symptom frequencies in ABM:**\n\u2022 Headache: 84\u201387%\n\u2022 Fever: 78%\n\u2022 Neck stiffness: 73\u201383%\n\u2022 Altered mental status (GCS <14): 79\u201380% [5]\n\n**Risk factors to elicit:** Immunocompromise (HIV, transplant, immunosuppressants), recent neurosurgery, CSF leaks, basilar skull fracture, recent otitis/sinusitis, herpes history, travel/geographic exposure, animal/insect contact, vaccination status. [9,22,25]',
     citation: [3, 5, 9, 22, 25],
     next: 'mening-exam',
+    summary: 'ALL 4 absent = 99% rules out meningitis',
   },
   {
     id: 'mening-exam',
@@ -52,6 +55,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     images: [{ src: 'images/meningitis/meningococcemia-petechiae.jpg', alt: 'Hand showing non-blanching petechial and purpuric rash of meningococcemia', caption: 'Meningococcemia — non-blanching petechiae/purpura. Presence mandates immediate antibiotics before LP. (Public domain)' }],
     citation: [6, 8, 9, 13],
     next: 'mening-focal-deficits',
+    summary: 'Kernig/Brudzinski 2% sens — petechiae = meningococcus',
   },
   {
     id: 'mening-focal-deficits',
@@ -73,6 +77,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
         next: 'mening-ct-decision',
       },
     ],
+    summary: 'Focal = encephalitis — acyclovir + CT before LP',
   },
 
   // ===================================================================
@@ -97,6 +102,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Renal function (BUN/Cr) daily; ensure adequate hydration to prevent crystalluria',
     },
     next: 'mening-abx-then-ct',
+    summary: 'Acyclovir 10mg/kg q8h — HSV 70% vs 9% treated',
+    safetyLevel: 'critical',
   },
   {
     id: 'mening-ct-decision',
@@ -118,6 +125,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
         next: 'mening-lp-direct',
       },
     ],
+    summary: 'CT before LP only GCS<=12, papilledema, focal, seizures',
   },
   {
     id: 'mening-abx-then-ct',
@@ -127,6 +135,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     body: '**CRITICAL:** Start empiric antibiotics and [Dexamethasone](#/drug/dexamethasone/meningitis) BEFORE CT imaging. Do NOT delay treatment for any diagnostic test. [1,19,20]\n\nDelayed antibiotics correlate with disease progression and **increased mortality**. [19,20]\n\nAfter CT:\n\u2022 If no mass lesion or contraindication \u2192 proceed to LP\n\u2022 If mass lesion found \u2192 neurosurgical consultation; continue empiric treatment\n\n**Blood cultures** should be drawn before antibiotics when possible (66% yield in ABM). [5]',
     citation: [1, 5, 19, 20],
     next: 'mening-lp-technique',
+    summary: 'Abx + dexa BEFORE CT — never delay for diagnostics',
+    safetyLevel: 'critical',
   },
   {
     id: 'mening-lp-direct',
@@ -136,6 +146,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     body: 'No indications for CT before LP \u2014 proceed directly.\n\n**Start empiric antibiotics within 1 hour** of suspicion, ideally immediately after LP. [1]\n\nIf LP will be delayed for any reason, start antibiotics **first** \u2014 never wait. Antibiotics before LP reduce culture sensitivity but PCR remains reliable for days. [11,12]\n\n**Blood cultures** should be drawn before antibiotics (66% yield in ABM). [5]',
     citation: [1, 5, 11, 12],
     next: 'mening-lp-technique',
+    summary: 'No CT needed — LP directly, abx within 1 hour',
   },
   {
     id: 'mening-lp-technique',
@@ -146,6 +157,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     citation: [5, 14, 23],
     calculatorLinks: [{ id: 'csf-correction', label: 'CSF Traumatic Tap Correction' }],
     next: 'mening-empiric-timing',
+    summary: '4 tubes up to 15mL — larger volumes improve yield',
   },
 
   // ===================================================================
@@ -159,6 +171,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     body: '[Empiric Antimicrobial Table](#/info/mening-abx-table) \u2014 full regimens by risk category.\n\n**Antibiotics within 1 HOUR of suspicion.** [1]\n\nA retrospective study of 269 ABM episodes over 25 years demonstrated that delayed antibiotics correlated with **disease progression and increased mortality**. [19]\n\nAnother study of 119 ABM patients showed an **incremental association** between longer delays to antimicrobials and mortality. [20]\n\n**For ALL suspected bacterial meningitis:**\n\u2022 [Dexamethasone](#/drug/dexamethasone/meningitis) 0.15 mg/kg IV q6h \u00d7 2\u20134 days \u2014 give WITH or up to 15\u201320 min BEFORE first antibiotic dose [1,21]\n\u2022 Add [Acyclovir](#/drug/acyclovir/encephalitis) 10 mg/kg IV q8h if ANY encephalitis features [7]',
     citation: [1, 7, 19, 20, 21],
     next: 'mening-risk-stratify',
+    summary: 'Delayed abx = mortality — dexa WITH or BEFORE 1st dose',
+    safetyLevel: 'critical',
   },
   {
     id: 'mening-risk-stratify',
@@ -192,6 +206,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: '>=50, pregnant, immunocomp = add ampicillin Listeria',
   },
   {
     id: 'mening-tx-standard',
@@ -220,6 +235,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; daily neuro checks',
     },
     next: 'mening-blood-tests',
+    summary: 'Ceftriaxone + vanc + dexa 0.15mg/kg q6h',
   },
   {
     id: 'mening-tx-expanded',
@@ -248,6 +264,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; daily neuro checks',
     },
     next: 'mening-blood-tests',
+    summary: 'Add ampicillin 2g q4h — >=50, pregnant, immunocomp',
+    safetyLevel: 'warning',
   },
   {
     id: 'mening-tx-nosocomial',
@@ -276,6 +294,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Vancomycin trough levels (goal 15-20 mcg/mL); renal function; repeat LP if poor response',
     },
     next: 'mening-blood-tests',
+    summary: 'Post-neurosurg: vanc + cefepime/meropenem',
   },
   {
     id: 'mening-tx-crypto',
@@ -296,6 +315,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Renal function and electrolytes daily (amphotericin nephrotoxicity); flucytosine levels if available; serial LPs for elevated ICP',
     },
     next: 'mening-blood-tests',
+    summary: 'HIV subacute: ampho + flucytosine — check OP',
+    safetyLevel: 'critical',
   },
 
   // ===================================================================
@@ -461,6 +482,8 @@ export const MENINGITIS_NODES: DecisionNode[] = [
       monitoring: 'Blood glucose (steroid-induced hyperglycemia); GI bleeding risk; reassess when pathogen identified',
     },
     next: 'mening-dispo',
+    summary: 'Dexa q6h 2-4d — STOP if Listeria or Crypto',
+    safetyLevel: 'warning',
   },
   {
     id: 'mening-dispo',

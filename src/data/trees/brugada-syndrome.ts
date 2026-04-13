@@ -26,6 +26,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-drugs-avoid', label: 'Drugs to Avoid' },
     ],
     next: 'brugada-presentation',
+    summary: 'Inherited channelopathy SCD risk — Type 1 coved ST >=2mm V1-V3 diagnostic',
   },
   {
     id: 'brugada-presentation',
@@ -40,6 +41,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { label: 'Incidental ECG finding', description: 'Asymptomatic, ECG abnormality noted', next: 'brugada-ecg-patterns' },
       { label: 'Known Brugada with complication', description: 'Fever, ICD shocks, medication concern', next: 'brugada-known-complication' },
     ],
+    summary: 'Arrest, syncope rest/sleep, or incidental ECG — determine type',
   },
 
   // ===================================================================
@@ -61,6 +63,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-shanghai', label: 'Shanghai Score' },
     ],
     next: 'brugada-phenocopy-check',
+    summary: 'Only Type 1 coved diagnostic — high precordial leads increase sensitivity',
+    skippable: true,
   },
   {
     id: 'brugada-phenocopy-check',
@@ -74,6 +78,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { label: 'No — true Brugada suspected', description: 'Continue workup', next: 'brugada-shanghai-assessment' },
       { label: 'Unclear — need workup', description: 'Labs and imaging needed', next: 'brugada-phenocopy-workup' },
     ],
+    summary: 'Rule out hyperK, PE, hypothermia, MI — phenocopy resolves with treatment',
   },
   {
     id: 'brugada-phenocopy-manage',
@@ -83,6 +88,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Brugada Phenocopy — Treat Underlying Cause**\n\n**Management:**\n• Correct the underlying condition\n• ECG pattern should resolve\n• Repeat ECG after correction\n\n**If phenocopy:**\n• No long-term Brugada management needed\n• No ICD indication\n• No drug restrictions\n\n**If pattern persists after correction:**\n• May have true BrS unmasked by stressor\n• Proceed with Brugada evaluation\n• EP consultation recommended\n\n**Document:**\n• Pre- and post-treatment ECGs\n• Clear diagnosis of phenocopy vs true BrS',
     citation: [4],
     next: undefined,
+    summary: 'Treat cause, repeat ECG — if resolves, no Brugada management needed',
+    skippable: true,
   },
   {
     id: 'brugada-phenocopy-workup',
@@ -92,6 +99,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Labs to rule out phenocopies:**\n\n• BMP (K+, Na+, Ca++, glucose)\n• Magnesium\n• ABG/VBG (acidosis)\n• Troponin (MI)\n• D-dimer if PE suspected\n\n**Imaging:**\n• CXR (pneumothorax, mediastinal mass)\n• Echo (RV strain, pericardial effusion)\n\n**Temperature:**\n• Check for hypothermia or fever\n\n**If all negative:**\n• True Brugada syndrome likely\n• Proceed with Shanghai score assessment\n\n**If positive:**\n• Treat condition, repeat ECG\n• Pattern should resolve',
     citation: [3, 4],
     next: 'brugada-shanghai-assessment',
+    summary: 'BMP, Mg, ABG, troponin, CXR, echo — rule out mimics',
+    skippable: true,
   },
   {
     id: 'brugada-shanghai-assessment',
@@ -104,6 +113,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-shanghai', label: 'Shanghai Score' },
     ],
     next: 'brugada-risk-stratification',
+    summary: 'Shanghai >=3.5 = probable/definite BrS — systematic scoring',
+    skippable: true,
   },
 
   // ===================================================================
@@ -117,6 +128,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Syncope in suspected Brugada:**\n\n**High-risk features (arrhythmic syncope):**\n• Occurs at rest or during sleep\n• No prodrome (sudden loss of consciousness)\n• Associated with palpitations\n• Brief duration\n• Nocturnal occurrence\n\n**Lower-risk features:**\n• Clear vasovagal trigger\n• Typical prodrome (nausea, diaphoresis)\n• Prolonged standing\n• Situational (micturition, defecation)\n\n**If Type 1 ECG + arrhythmic syncope:**\n• **High-risk combination**\n• ICD discussion warranted (Class IIa)\n• Admit for monitoring\n• EP consultation',
     citation: [1, 5],
     next: 'brugada-risk-stratification',
+    summary: 'Rest/sleep syncope without prodrome = high-risk arrhythmic syncope',
   },
   {
     id: 'brugada-arrest',
@@ -126,6 +138,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Cardiac arrest with suspected Brugada:**\n\n**Immediate management:**\n• Standard ACLS\n• Post-arrest care if ROSC\n\n**⚠️ AVOID in resuscitation:**\n• Amiodarone (may worsen BrS)\n• Procainamide\n• Flecainide\n\n**If VF refractory:**\n• Consider isoproterenol (suppresses VF in BrS)\n\n**Post-ROSC:**\n• 12-lead ECG (Type 1 pattern?)\n• Continuous monitoring\n• Check temperature (fever-induced?)\n• EP consultation STAT\n\n**ICD indication:**\n• **Class I** — Survivors of cardiac arrest from VF\n• Essentially all survivors should receive ICD',
     citation: [1, 5],
     next: 'brugada-risk-stratification',
+    summary: 'AVOID amiodarone Brugada VF — isoproterenol for refractory',
+    safetyLevel: 'critical',
   },
   {
     id: 'brugada-risk-stratification',
@@ -139,6 +153,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { label: 'Intermediate risk (symptoms, family hx)', description: 'Risk/benefit discussion', next: 'brugada-intermediate-risk' },
       { label: 'Low risk (asymptomatic, drug-induced only)', description: 'Observation appropriate', next: 'brugada-low-risk' },
     ],
+    summary: 'Prior arrest highest — Type 1 + arrhythmic syncope = ICD discussion',
   },
   {
     id: 'brugada-icd-indication',
@@ -148,6 +163,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**ICD Recommendations (2022 ESC Guidelines):**\n\n**Class I (Definite):**\n• Survivors of cardiac arrest from VF/sustained VT\n• Documented spontaneous sustained VT\n\n**Class IIa (Reasonable):**\n• Spontaneous Type 1 ECG + arrhythmic syncope\n• Spontaneous Type 1 ECG + ≥2 multiparametric risk factors\n\n**Class III (Not Recommended):**\n• Asymptomatic with drug-induced only pattern\n• Type 2/3 pattern alone\n\n**Disposition:**\n• Admit to telemetry\n• EP consultation for ICD discussion\n• Continue cardiac monitoring\n• Aggressive fever control if present',
     citation: [1, 5],
     next: 'brugada-disposition',
+    summary: 'ICD Class I VF/VT survivors — IIa Type 1 + arrhythmic syncope',
   },
   {
     id: 'brugada-intermediate-risk',
@@ -157,6 +173,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Intermediate risk Brugada — shared decision making:**\n\n**Options:**\n\n**1. ICD implantation**\n• Definitive protection against SCD\n• Complications: inappropriate shocks, infection, lead issues\n• Lifelong device management\n\n**2. Quinidine therapy**\n• Class IIa indication\n• 88% effective at suppressing VF induction\n• Side effects: GI, thrombocytopenia\n• Availability issues in some regions\n\n**3. Close surveillance**\n• Lifestyle modifications\n• Aggressive fever treatment\n• Drug avoidance\n• Regular EP follow-up\n• Consider implantable loop recorder\n\n**Factors favoring ICD:**\n• Spontaneous Type 1 (not drug-induced)\n• Strong family history SCD\n• Syncope of any type\n• QRS fragmentation on ECG',
     citation: [5, 6],
     next: 'brugada-disposition',
+    summary: 'ICD vs quinidine vs surveillance — Type 1 favors ICD',
+    skippable: true,
   },
   {
     id: 'brugada-low-risk',
@@ -169,6 +187,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-drugs-avoid', label: 'Drugs to Avoid' },
     ],
     next: 'brugada-disposition',
+    summary: 'Asymptomatic ~0.5%/yr — fever treatment and drug avoidance list',
+    skippable: true,
   },
 
   // ===================================================================
@@ -187,6 +207,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { label: 'Electrical storm', description: '≥3 VF/VT episodes per day', next: 'brugada-storm' },
       { label: 'Medication concern', description: 'Exposed to contraindicated drug', next: 'brugada-drug-exposure' },
     ],
+    summary: 'Known Brugada: fever, ICD shocks, storm, or drug exposure',
   },
   {
     id: 'brugada-fever',
@@ -196,6 +217,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**Fever in Brugada Syndrome — TREAT AGGRESSIVELY**\n\n**Why fever is dangerous:**\n• Temperature-sensitive sodium channels (SCN5A)\n• Fever unmasks Type 1 pattern 20× more frequently\n• 40% recurrence rate with subsequent fevers\n• Can trigger VF\n\n**Management protocol:**\n\n**1. Aggressive antipyresis:**\n• Acetaminophen 1000 mg q6h (IV if available)\n• Ibuprofen 400-600 mg q6h (if no contraindications)\n• **Do not wait for high fever — treat early**\n\n**2. External cooling if refractory:**\n• Cooling blankets\n• Ice packs to axillae/groin\n• Arctic Sun device if available\n\n**3. Continuous cardiac monitoring**\n\n**4. Treat underlying cause** (infection, etc.)\n\n**Admission criteria:**\n• Febrile patient without ICD → ADMIT\n• New Type 1 pattern with fever → ADMIT\n• History of fever-triggered events → ADMIT',
     citation: [7, 8],
     next: 'brugada-disposition',
+    summary: 'Fever unmasks Type 1 20x — antipyretics and cooling aggressively',
+    safetyLevel: 'warning',
   },
   {
     id: 'brugada-icd-shocks',
@@ -208,6 +231,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { label: '1-2 shocks', description: 'May be appropriate therapy', next: 'brugada-few-shocks' },
       { label: '≥3 shocks (electrical storm)', description: 'Urgent intervention needed', next: 'brugada-storm' },
     ],
+    summary: 'Device interrogation needed — appropriate vs inappropriate changes mgmt',
   },
   {
     id: 'brugada-few-shocks',
@@ -217,6 +241,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     body: '**1-2 ICD shocks — evaluation:**\n\n**Immediate:**\n• Continuous cardiac monitoring\n• 12-lead ECG\n• Check temperature (fever?)\n• Review medications\n• Magnet available at bedside\n\n**Device interrogation (EP/cardiology):**\n• Confirm appropriate vs inappropriate\n• Review stored episodes\n• Check lead integrity\n\n**If appropriate shocks (VF terminated):**\n• Assess for triggers (fever, drugs, ischemia)\n• May need medication adjustment\n• Admit for observation\n\n**If inappropriate shocks (SVT, artifact, lead issue):**\n• Address underlying cause\n• May need reprogramming\n• Consider lead revision if fractured',
     citation: [8],
     next: 'brugada-disposition',
+    summary: '1-2 shocks: telemetry, ECG, temp, meds review, await interrogation',
   },
   {
     id: 'brugada-storm',
@@ -229,6 +254,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-vf-storm', label: 'VF Storm Protocol' },
     ],
     next: 'brugada-disposition',
+    summary: 'Isoproterenol for storm — NO beta-blockers or amiodarone',
+    safetyLevel: 'critical',
   },
   {
     id: 'brugada-drug-exposure',
@@ -241,6 +268,8 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-drugs-avoid', label: 'Drugs to Avoid' },
     ],
     next: 'brugada-disposition',
+    summary: 'Stop agent, continuous monitoring — duration per drug half-life',
+    safetyLevel: 'warning',
   },
 
   // ===================================================================
@@ -257,6 +286,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
       { id: 'brugada-drugs-avoid', label: 'Drugs to Avoid' },
     ],
     next: undefined,
+    summary: 'Admit: arrest, storm, febrile no ICD, Type 1+syncope, drug list',
   },
 ];
 

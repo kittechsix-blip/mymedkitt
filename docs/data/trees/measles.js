@@ -14,6 +14,7 @@ export const MEASLES_NODES = [
         body: '**Suspect Measles When:**\n\n- Fever (often >104F/40C)\n- Classic triad: **Cough, Coryza, Conjunctivitis** (the 3 Cs)\n- Maculopapular rash spreading cephalocaudally\n- Recent travel or exposure history\n- Unvaccinated or under-vaccinated patient\n\n**Prodrome (2-4 days before rash):**\n- High fever, malaise\n- 3 Cs develop progressively\n- Koplik spots (pathognomonic) may appear 1-2 days before rash\n\n**Epidemiology:**\n- R0 = 12-18 (extremely contagious)\n- 90% attack rate in susceptible household contacts\n- Contagious 4 days before to 4 days after rash onset\n\n**IMMEDIATE ACTION:** If measles suspected, initiate **airborne isolation** before further workup.',
         citation: [1, 2, 3],
         next: 'measles-isolation',
+        summary: 'Fever + 3 Cs + rash — airborne isolation BEFORE workup',
     },
     // =====================================================================
     // MODULE 2: ISOLATION
@@ -26,6 +27,8 @@ export const MEASLES_NODES = [
         body: '**IMMEDIATE ISOLATION REQUIRED**\n\n**Room Requirements:**\n- Negative-pressure airborne infection isolation room (AIIR)\n- Minimum 6 air changes per hour (12 preferred)\n- Direct exhaust to outside or HEPA filtration\n\n**PPE for ALL Staff Entering:**\n- N95 respirator (fit-tested) or PAPR\n- Gown and gloves\n- Eye protection if splash risk\n\n**Patient Transport:**\n- Patient wears surgical mask\n- Minimize transport; notify receiving areas\n- Direct route avoiding waiting areas\n\n**Duration:**\n- Maintain isolation for **4 days after rash onset** (immunocompetent)\n- Immunocompromised: duration of illness\n\n**Public Health:**\n- Report to local health department IMMEDIATELY (do not wait for lab confirmation)',
         citation: [1, 2, 4],
         next: 'measles-immunity-check',
+        summary: 'AIIR, N95, report health dept IMMEDIATELY',
+        safetyLevel: 'critical',
     },
     {
         id: 'measles-immunity-check',
@@ -49,6 +52,7 @@ export const MEASLES_NODES = [
                 next: 'measles-clinical-dx',
             },
         ],
+        summary: '2 MMR, pos IgG, prior disease, or born before 1957',
     },
     {
         id: 'measles-immune-reassess',
@@ -58,6 +62,8 @@ export const MEASLES_NODES = [
         body: '**Patient Has Evidence of Immunity**\n\nVaccine effectiveness is 93% (1 dose) to 97% (2 doses). Breakthrough measles is rare but possible.\n\n**Alternative Diagnoses to Consider:**\n- Drug hypersensitivity reaction (no prodrome, recent drug exposure)\n- Roseola infantum (usually <3 years, high fever resolves as rash appears)\n- Rubella (milder, lymphadenopathy prominent)\n- Parvovirus B19 (slapped cheek appearance)\n- Kawasaki disease (in children)\n- Scarlet fever (sandpaper rash, strep pharyngitis)\n\n**If Clinical Suspicion Remains High:**\n- Maintain isolation pending testing\n- Send confirmatory labs (next screen)\n\nPrognosis in vaccinated individuals is typically milder if breakthrough occurs.',
         citation: [1, 6],
         next: 'measles-clinical-dx',
+        summary: '97% effective — DDx: drug rxn, roseola, rubella',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: CLINICAL ASSESSMENT
@@ -71,6 +77,7 @@ export const MEASLES_NODES = [
         images: [{ src: 'images/measles/koplik-spots.jpg', alt: 'Koplik spots on buccal mucosa — irregular white lesions on erythematous base near upper molar', caption: 'Koplik spots — pathognomonic for measles; appear 1-2 days before rash. "Salt grains on a red background." (CC BY-SA 4.0)' }],
         citation: [2, 6, 7],
         next: 'measles-lab-confirm',
+        summary: 'Koplik spots pathognomonic — buccal mucosa before rash',
     },
     {
         id: 'measles-lab-confirm',
@@ -80,6 +87,8 @@ export const MEASLES_NODES = [
         body: '**Required for ALL Suspected Cases**\n\n**Serologic Testing:**\n- Measles-specific IgM antibody\n- Sensitivity 83-89%, specificity 95-99%\n- May be negative first 72 hours after rash (false negative)\n- Obtain during rash or within 30 days\n\n**RT-PCR Testing (Preferred):**\n- Higher early sensitivity (94%), specificity 99%\n- Specimens: nasopharyngeal/throat swab AND urine\n- Urine + NP swab together improves sensitivity\n- Allows genotyping for outbreak investigation\n\n**Specimen Collection:**\n- NP or OP swab in viral transport media\n- Urine: 50-100mL clean catch\n- Collect within 7 days of rash onset (optimal sensitivity)\n\n**Contact your state/local health department for testing coordination.**',
         citation: [1, 2, 8],
         next: 'measles-severity',
+        summary: 'PCR preferred early — NP + urine within 7d rash',
+        skippable: true,
     },
     {
         id: 'measles-severity',
@@ -101,6 +110,7 @@ export const MEASLES_NODES = [
                 next: 'measles-supportive',
             },
         ],
+        summary: 'High risk: <5yo, >20yo, pregnant, immunocompromised',
     },
     // =====================================================================
     // MODULE 4: TREATMENT
@@ -113,6 +123,7 @@ export const MEASLES_NODES = [
         body: '**Hospitalization Required**\n\n**Supportive Care:**\n- IV fluids for dehydration\n- Supplemental oxygen PRN (target SpO2 >= 92%)\n- Antipyretics for fever control\n- Continuous monitoring\n\n**Vitamin A - MANDATORY for Hospitalized Patients:**\n- Reduces mortality and pneumonia-specific mortality\n- See [Vitamin A Dosing](#/drug/vitamin-a-measles)\n\n**Monitoring:**\n- Watch for respiratory deterioration (pneumonia)\n- Neurologic status changes (encephalitis)\n- Signs of superimposed bacterial infection\n\n**No Specific Antiviral Therapy:**\n- Ribavirin has in-vitro activity but lacks clinical data\n- Reserved for severe/immunocompromised - infectious disease consult\n\n**Antibiotics:** Only for documented secondary bacterial infection, NOT prophylactic.',
         citation: [1, 2, 4, 9],
         next: 'measles-vitamin-a',
+        summary: 'Hospitalize — Vitamin A MANDATORY for all inpatients',
     },
     {
         id: 'measles-supportive',
@@ -122,6 +133,7 @@ export const MEASLES_NODES = [
         body: '**Outpatient Management:**\n\n**Supportive Measures:**\n- Adequate oral hydration\n- Antipyretics (acetaminophen or ibuprofen) for fever/discomfort\n- Rest\n- Dim lighting if photophobia present\n\n**Vitamin A Supplementation:**\n- Consider for all children with measles, even in US\n- Especially if: malnutrition risk, recent immigrant, vitamin A deficiency suspected\n- See [Vitamin A Dosing](#/drug/vitamin-a-measles)\n\n**What NOT to Give:**\n- Antibiotics (unless bacterial superinfection documented)\n- Steroids (no benefit, may prolong viral shedding)\n- Antivirals (no proven efficacy for outpatient measles)\n\n**Isolation at Home:**\n- Strict home isolation for 4 days after rash onset\n- Avoid contact with susceptible individuals',
         citation: [1, 2, 4],
         next: 'measles-vitamin-a',
+        summary: 'Outpatient: hydration, antipyretics — NO abx or steroids',
     },
     {
         id: 'measles-vitamin-a',
@@ -134,6 +146,8 @@ export const MEASLES_NODES = [
             { id: 'measles-vitamin-a', label: 'Vitamin A Dosing' },
         ],
         next: 'measles-complications',
+        summary: '200,000 IU Day 1+2 — reduces mortality 64%',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5: COMPLICATIONS & PEP
@@ -164,6 +178,7 @@ export const MEASLES_NODES = [
                 next: 'measles-sspe-info',
             },
         ],
+        summary: 'Pneumonia #1 death — encephalitis 1/1000, 25% mortality',
     },
     {
         id: 'measles-pneumonia',
@@ -173,6 +188,7 @@ export const MEASLES_NODES = [
         body: '**Pneumonia - Leading Cause of Measles Death**\n\n**Types:**\n1. **Primary viral (giant cell) pneumonia** - severe, may require ICU\n2. **Secondary bacterial pneumonia** - more common, treatable\n\n**Workup:**\n- CXR (interstitial infiltrates vs lobar consolidation)\n- CBC, procalcitonin\n- Blood cultures\n- Sputum culture if productive\n- Consider respiratory viral panel (co-infection)\n\n**Treatment:**\n- Oxygen therapy (target SpO2 >= 92%)\n- IV fluids\n- Vitamin A (if not already given)\n- **Antibiotics for bacterial superinfection:**\n  - Cover S. pneumoniae, S. aureus, H. influenzae\n  - Ampicillin-sulbactam or ceftriaxone + vancomycin if MRSA concern\n\n**Disposition:**\n- Admit to AIIR\n- ICU if respiratory failure imminent',
         citation: [1, 2, 9],
         next: 'measles-pep-question',
+        summary: 'Abx only documented bacterial superinfection',
     },
     {
         id: 'measles-encephalitis',
@@ -182,6 +198,8 @@ export const MEASLES_NODES = [
         body: '**Acute Post-Measles Encephalitis**\n\n**Incidence:** 1 in 1,000 cases\n\n**Timing:** 3-10 days after rash onset\n\n**Presentation:**\n- Fever recrudescence\n- Headache, altered mental status\n- Seizures (50%)\n- Focal neurologic deficits\n- Ataxia\n\n**Workup:**\n- CT head (rule out other causes)\n- LP (lymphocytic pleocytosis, elevated protein)\n- MRI brain (periventricular demyelination)\n- EEG (diffuse slowing, epileptiform activity)\n\n**Treatment:**\n- Supportive care\n- Seizure management\n- ICP monitoring if indicated\n- No proven specific therapy\n\n**Prognosis:**\n- 25% mortality\n- 25% permanent neurologic sequelae (hearing loss, cognitive impairment, motor deficits)\n- 50% full recovery',
         citation: [1, 2, 11],
         next: 'measles-sspe-info',
+        summary: '3-10d: seizures, AMS — 25% mortality, 25% permanent',
+        safetyLevel: 'critical',
     },
     {
         id: 'measles-sspe-info',
@@ -191,6 +209,8 @@ export const MEASLES_NODES = [
         body: '**Subacute Sclerosing Panencephalitis (SSPE)**\n\n**A devastating late complication (7-10 years after infection)**\n\n**Incidence:**\n- Historical estimate: 1 in 100,000 cases\n- More recent data: may be as high as 1 in 609 for infants <15 months\n- Higher risk: measles infection at age <2 years\n\n**Pathophysiology:**\n- Persistent measles virus infection in CNS\n- Progressive inflammatory and neurodegenerative process\n\n**Clinical Course:**\n- Stage I: Behavioral changes, cognitive decline\n- Stage II: Myoclonic jerks, seizures, dementia\n- Stage III: Rigidity, autonomic instability\n- Stage IV: Coma, death\n\n**Prognosis:**\n- Nearly always fatal within 1-3 years\n- No effective treatment\n\n**Prevention:** Only through measles vaccination\n\n*SSPE is caused only by wild-type measles, NOT vaccine strains.*',
         citation: [11, 12],
         next: 'measles-pep-question',
+        summary: '7-10yrs fatal — vaccination only prevention',
+        skippable: true,
     },
     {
         id: 'measles-pep-question',
@@ -211,6 +231,7 @@ export const MEASLES_NODES = [
                 next: 'measles-public-health',
             },
         ],
+        summary: 'Identify exposed susceptible — virus airborne 2hrs',
     },
     {
         id: 'measles-pep-timing',
@@ -239,6 +260,7 @@ export const MEASLES_NODES = [
                 next: 'measles-pep-late',
             },
         ],
+        summary: 'MMR 72hrs or IG 6 days — timing determines PEP',
     },
     {
         id: 'measles-pep-mmr',
@@ -248,6 +270,7 @@ export const MEASLES_NODES = [
         body: '**MMR Vaccine PEP (within 72 hours of exposure)**\n\n**Eligible Patients:**\n- Age >= 6 months (off-label 6-11 months during outbreak)\n- No contraindications to live vaccine\n- Not pregnant\n- Not severely immunocompromised\n\n**Dosing:**\n- Standard MMR dose subcutaneous\n- If age 6-11 months: dose does NOT count toward routine series (revaccinate at 12-15 months)\n- If age >= 12 months: counts as first dose\n\n**NOT Eligible for MMR (use IG instead):**\n- Infants <6 months\n- Pregnant women\n- Severely immunocompromised:\n  - CD4 <15% (children <=5 years)\n  - CD4 <200 or <15% (>5 years)\n  - Active chemotherapy\n  - Transplant recipients on immunosuppression\n\n**Quarantine:** 21 days from last exposure (whether or not PEP given)',
         citation: [1, 5],
         next: 'measles-public-health',
+        summary: 'MMR >=6mo 72hrs — NOT pregnant, immunocomp, <6mo',
     },
     {
         id: 'measles-pep-ig',
@@ -257,6 +280,7 @@ export const MEASLES_NODES = [
         body: '**Immune Globulin PEP (within 6 days of exposure)**\n\n**Intramuscular IG (IGIM):**\n- Dose: 0.5 mL/kg (max 15 mL)\n- Indicated for:\n  - Infants <6 months of age\n  - Infants 6-11 months if >72 hours post-exposure\n\n**Intravenous IG (IVIG):**\n- Dose: 400 mg/kg\n- Indicated for:\n  - Pregnant women (any trimester)\n  - Severely immunocompromised patients\n  - When IGIM volume would be excessive\n\n**Post-IG Vaccination:**\n- Wait 6 months after IGIM before MMR\n- Wait 8 months after IVIG before MMR\n\n**Quarantine Duration:**\n- Without IG: 21 days from last exposure\n- With IG: **28 days** from last exposure (incubation may be prolonged)\n\n**Healthcare Workers:** Exclude from work day 5-21 (or 28 if IG given) after exposure',
         citation: [1, 4, 5],
         next: 'measles-public-health',
+        summary: 'IGIM infants, IVIG pregnant/immunocomp within 6 days',
     },
     {
         id: 'measles-pep-late',
@@ -266,6 +290,7 @@ export const MEASLES_NODES = [
         body: '**Outside PEP Window**\n\nNeither MMR nor IG will prevent infection if >6 days since exposure.\n\n**Management:**\n- Educate about symptoms to watch for\n- Instruct to self-isolate at first sign of illness\n- Provide clear return precautions\n- Coordinate with public health for monitoring\n\n**Symptom Watch:**\n- Fever, cough, runny nose, red eyes\n- Rash starting on face\n- Incubation: typically 10-14 days (rash ~14 days post-exposure)\n\n**If Symptoms Develop:**\n- Call ahead before presenting to healthcare\n- Wear mask\n- Inform triage of measles exposure\n\n**Consider MMR vaccination** to protect against future exposures (if not contraindicated).',
         citation: [1, 5],
         next: 'measles-public-health',
+        summary: 'Beyond 6d: neither effective — educate, self-isolate',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION & PUBLIC HEALTH
@@ -278,6 +303,7 @@ export const MEASLES_NODES = [
         body: '**MANDATORY IMMEDIATE REPORTING**\n\nMeasles is a nationally notifiable disease requiring IMMEDIATE reporting.\n\n**Report to:**\n- Local health department (same day)\n- State epidemiologist\n- CDC via state health department\n\n**Information to Report:**\n- Patient demographics\n- Vaccination history\n- Travel history (2-3 weeks before symptom onset)\n- Exposure history\n- Contact list for tracing\n- Laboratory results (when available)\n\n**Contact Tracing:**\n- All contacts from 4 days before rash to present\n- Public health will coordinate contact investigation\n- Healthcare facility exposure assessment\n\n**Outbreak Definition:** >= 3 cases linked in time and place\n\n**Do NOT wait for lab confirmation to report suspected cases.**',
         citation: [1, 2],
         next: 'measles-disposition',
+        summary: 'MANDATORY reporting — do NOT wait for lab confirm',
     },
     {
         id: 'measles-disposition',
@@ -299,6 +325,7 @@ export const MEASLES_NODES = [
                 next: 'measles-discharge',
             },
         ],
+        summary: 'Admit respiratory, dehydrated, AMS, high-risk, no isolation',
     },
     {
         id: 'measles-admit',
@@ -309,6 +336,7 @@ export const MEASLES_NODES = [
         recommendation: 'Admit to AIIR. Vitamin A, supportive care. ID and public health notification.',
         confidence: 'definitive',
         citation: [1, 2, 4, 9],
+        summary: 'AIIR, Vit A, ID consult, public health — N95 staff',
     },
     {
         id: 'measles-discharge',
@@ -319,6 +347,7 @@ export const MEASLES_NODES = [
         recommendation: 'Discharge with 4-day strict home isolation. Return precautions for respiratory distress, dehydration, or neurologic changes.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Home isolation 4d post-rash — no school/work/public',
     },
 ];
 export const MEASLES_NODE_COUNT = MEASLES_NODES.length;

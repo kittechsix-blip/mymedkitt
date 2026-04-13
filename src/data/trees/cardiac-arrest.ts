@@ -39,6 +39,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
         next: 'ca-confirm',
       },
     ],
+    summary: 'Check obvious death — lividity, rigor, decomposition, DNAR',
   },
 
   {
@@ -50,6 +51,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     recommendation: 'Document signs of obvious death. Do not initiate CPR. Time of death = time of discovery.',
     confidence: 'definitive',
     citation: [5, 7],
+    summary: 'Document obvious death — do not initiate CPR',
   },
 
   {
@@ -60,6 +62,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**Confirm arrest in ≤10 seconds:**\n• No pulse (carotid)\n• No breathing or only agonal gasps\n\n**Begin CPR immediately.** Do not delay for equipment.\n\n**Quick pulse check:** ≤10 seconds. If unsure — start CPR. It is better to perform CPR on a patient with a pulse than to withhold it from a patient without one.\n\n**Activate the team:**\n• Call for defibrillator/AED\n• Assign roles: compressor, airway, timer, medications, recorder\n• Designate a team leader',
     citation: [5, 6],
     next: 'ca-cpr-start',
+    summary: 'Confirm <=10sec — unsure = start CPR',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -74,6 +78,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**High-quality CPR checklist:**\n• **Rate:** 100-120 compressions/min\n• **Depth:** 2-2.4 inches (5-6 cm) in adults\n• **Full recoil** — allow complete chest recoil between compressions\n• **Minimize interruptions** — <10 sec for rhythm checks and shocks\n• **Rotate compressor** every 2 minutes (or sooner if fatigued)\n\n**Monitoring:**\n• Attach waveform **ETCO2 immediately** after airway secured\n• ETCO2 >20 mmHg = adequate CPR quality [1]\n\n**Access:**\n• Attempt large-bore peripheral IV\n• **IO within 60 sec** if no IV — tibial plateau preferred in adults',
     citation: [1, 5, 8],
     next: 'ca-airway',
+    summary: '100-120/min, 5-6cm, full recoil — ETCO2 >20 = good quality',
+    safetyLevel: 'critical',
   },
 
   {
@@ -84,6 +90,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**Initial airway:**\n• **BVM first** — adequate oxygenation without interrupting compressions\n• Defer intubation early in the resuscitation — CPR quality is the priority\n• OPA/NPA adjuncts as needed\n\n**Advanced airway (when ready):**\n• If intubated → attach **waveform capnography** immediately\n• **Continuous compressions** with advanced airway — no 30:2 cycles\n• Ventilate every 6 seconds (10 breaths/min)\n• Avoid hyperventilation — increases intrathoracic pressure, decreases venous return\n\n**Supraglottic airway** (iGel, King LT) is an acceptable alternative to ETT during CPR [5][6]',
     citation: [5, 6],
     next: 'ca-rhythm-check',
+    summary: 'BVM first — defer intubation, continuous with advanced airway',
   },
 
   {
@@ -105,6 +112,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
         next: 'ca-nonshockable-branch',
       },
     ],
+    summary: '<10sec pause at 2min — shockable vs non-shockable',
   },
 
   {
@@ -128,6 +136,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
         next: 'ca-tdp-link',
       },
     ],
+    summary: 'VF vs pVT vs TdP — NO amiodarone for Torsades',
   },
 
   // =====================================================================
@@ -142,6 +151,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: 'VF identified → proceed to VF/VT Arrest Protocol for shock-first approach, antiarrhythmics, DSD, and ECPR.\n\n[VF/VT Arrest Protocol](#/tree/refractory-vfvt)',
     citation: [5, 12, 16],
     next: 'ca-universal',
+    summary: 'VF — VF/VT protocol for shock-first approach',
   },
 
   {
@@ -152,6 +162,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: 'Pulseless VT → check for polymorphic features and QTc.\n\n[Ventricular Tachycardia Protocol](#/tree/ventricular-tachycardia)',
     citation: [5],
     next: 'ca-universal',
+    summary: 'Pulseless VT — check polymorphic and QTc first',
   },
 
   {
@@ -162,6 +173,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: 'Polymorphic VT with prolonged QTc = Torsades de Pointes.\n\n**\u26a0\ufe0f Do NOT give amiodarone** — it prolongs QT and will worsen TdP.\n\n[Torsades de Pointes Protocol](#/tree/torsades-de-pointes)',
     citation: [5, 16],
     next: 'ca-universal',
+    summary: 'Torsades: Mg 2g IV — amiodarone CONTRAINDICATED',
+    safetyLevel: 'critical',
   },
 
   {
@@ -181,6 +194,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
         next: 'ca-brady-link',
       },
     ],
+    summary: 'PEA needs POCUS — asystole confirm 2 leads',
   },
 
   {
@@ -191,6 +205,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: 'PEA identified → POCUS at first pulse check is critical. Look for cardiac activity, tamponade, RV dilation, and other reversible causes.\n\n[PEA Arrest Protocol](#/tree/pea-arrest)',
     citation: [2, 9],
     next: 'ca-universal',
+    summary: 'PEA: POCUS — tamponade, RV dilation, absent sliding',
   },
 
   {
@@ -202,6 +217,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     citation: [5, 6],
     images: [{ src: 'images/cardiac-arrest/asystole-ecg.png', alt: 'Asystole ECG — flatline rhythm strip', caption: 'Asystole: no electrical activity — NON-SHOCKABLE. Continue CPR, treat reversible causes (H\'s and T\'s)' }],
     next: 'ca-universal',
+    summary: 'Asystole: confirm 2 leads — consider pacing',
   },
 
   // =====================================================================
@@ -216,6 +232,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**ETCO2 targets (waveform capnography):**\n• **>20 mmHg** = adequate CPR quality\n• **<10 mmHg after 20 min** = consider termination of resuscitation\n• **Sudden jump >10 mmHg** = likely ROSC — check pulse\n\n**CPR quality optimization:**\n• Use compression feedback device if available\n• Rotate compressor every 2 minutes\n• Minimize interruptions — all pauses <10 sec\n• Real-time ETCO2 as compression quality metric [1][5]\n\n[ETCO\u2082 in Cardiac Arrest](#/info/ca-etco2-guide)',
     citation: [1, 5, 8],
     next: 'ca-access',
+    summary: 'ETCO2 >20=good, <10 20min=TOR, sudden jump=ROSC',
   },
 
   {
@@ -226,6 +243,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**Access priority (do not delay CPR):**\n1. **Large-bore peripheral IV** — antecubital preferred, follow with 20 mL flush\n2. **External jugular (EJ)** — if peripheral access fails\n3. **IO** — if no IV within 60 seconds\n\n**IO sites:**\n• **Proximal tibia** (tibial plateau) — preferred in adults\n• **Proximal humerus** — alternative, faster drug delivery to central circulation\n• **Distal tibia** — pediatric alternative\n\n**Key:** IO drug delivery is equivalent to IV in cardiac arrest. Do not delay medications for central line placement [5][8].',
     citation: [5, 8],
     next: 'ca-epi',
+    summary: 'IO 60sec if no IV — tibial preferred, equals IV',
   },
 
   {
@@ -247,6 +265,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous rhythm, ETCO2, pulse checks every 2 min',
     },
+    summary: '1mg q3-5min: non-shockable 1st cycle, shockable after 2nd',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -261,6 +281,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**Search for reversible causes at EVERY pulse check.**\n\n**The 5 H\'s:**\n• **Hypoxia** — POCUS: lung sliding, B-lines. Rx: secure airway, FiO2 100%\n• **Hypovolemia** — POCUS: flat IVC, no cardiac activity. Rx: volume, blood\n• **H+ (Acidosis)** — wide QRS, prolonged arrest. Rx: NaHCO3 1-2 mEq/kg\n• **Hypo/HyperK** — peaked T\'s, sine wave (hyperK); flat T\'s, U waves (hypoK). Rx: calcium, insulin/dextrose\n• **Hypothermia** — core temp <30\u00b0C. Rx: active rewarming, prolonged resuscitation\n\n**The 5 T\'s:**\n• **Tension PTX** — POCUS: absent lung sliding. Rx: needle decompression → chest tube\n• **Tamponade** — POCUS: pericardial effusion + RV collapse. Rx: pericardiocentesis\n• **Thrombosis (PE)** — POCUS: RV dilation, McConnell\'s sign. Rx: tPA, surgical/catheter embolectomy\n• **Thrombosis (MI)** — consider emergent cath. Rx: PCI if available\n• **Toxins** — wide QRS (TCA/Na-channel), bradycardia (beta/CCB). Rx: specific antidotes\n\n[H\'s & T\'s Quick Reference](#/info/ca-hs-ts-table)',
     citation: [1, 4, 5, 11],
     next: 'ca-pocus-arrest',
+    summary: 'Reversible causes EVERY check — hyperK and tension PTX priority',
+    safetyLevel: 'critical',
   },
 
   {
@@ -271,6 +293,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**POCUS during pulse checks ONLY** — do NOT interrupt compressions.\n\n**Timing:** <10 seconds during scheduled pulse/rhythm checks.\n\n**RUSH Exam targets:**\n• **Cardiac activity** — any wall motion? (prognostic)\n• **Tamponade** — pericardial effusion + RV diastolic collapse\n• **RV dilation** — RV:LV >1:1 suggests massive PE\n• **Absent lung sliding** — tension pneumothorax\n• **IVC** — flat/empty suggests hypovolemia\n\n**Prognostic value:**\n• **No cardiac activity** after adequate resuscitation = strong futility signal [4][10][11]\n• Cardiac standstill on initial POCUS: survival <2% in OHCA\n• Organized cardiac activity without pulse: 10-15% survival',
     citation: [4, 10, 11],
     next: 'ca-special-meds',
+    summary: 'POCUS checks ONLY <10sec — no activity = futility signal',
   },
 
   {
@@ -281,6 +304,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**Beyond epinephrine — give when indicated:**\n\n• **Sodium bicarbonate** 1-2 mEq/kg IV:\n  Wide QRS / TCA toxicity, known hyperkalemia, prolonged arrest, pre-existing metabolic acidosis\n\n• **Calcium** (1g calcium gluconate or 1g calcium chloride IV):\n  Hyperkalemia, calcium channel blocker OD, hypermagnesemia\n\n• **Magnesium sulfate** 2g IV over 1-2 min:\n  Refractory VF, torsades de pointes (polymorphic VT + long QT)\n\n• **Lipid emulsion** (Intralipid 20%) 1.5 mL/kg bolus:\n  Local anesthetic systemic toxicity (LAST)\n\n**Do NOT routinely give NaHCO3 or calcium** — only for specific indications above [5][8].',
     citation: [5, 8],
     next: 'ca-rosc',
+    summary: 'NaHCO3 wide QRS, Ca CCB, Mg TdP, Intralipid LAST',
   },
 
   // =====================================================================
@@ -296,6 +320,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     recommendation: 'Immediate 12-lead ECG, avoid hypoxia and hypotension, initiate TTM, emergent cath if STEMI. ICU admission.',
     confidence: 'definitive',
     citation: [5, 14, 17, 18],
+    summary: '12-lead, SpO2 92-98%, SBP >90, TTM, electrolytes',
   },
 
   {
@@ -306,6 +331,8 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**BLS Termination Rule (all must be present):**\n• Arrest not witnessed by EMS\n• No bystander CPR\n• No AED shock delivered\n• No ROSC before transport\n\n**ALS Termination Rule (BLS criteria PLUS):**\n• No ROSC before transport\n• No shocks delivered by EMS\n\n**ETCO2 Guidance:**\n• **ETCO2 <10 mmHg after 20 min** of high-quality CPR → very low survival probability\n• Combined with no cardiac activity on POCUS = near-zero survival [1][3]\n\n**These are guidelines, not mandates.** Clinical judgment supersedes. Consider prolonging resuscitation for: hypothermia, toxin ingestion, young patients, PE (may respond to tPA).\n\n[Termination of Resuscitation](#/info/ca-tor-rules)',
     citation: [1, 3, 5, 13],
     next: 'ca-no-activity',
+    summary: 'ETCO2 <10 20min + no cause + no activity = near-zero',
+    safetyLevel: 'warning',
   },
 
   {
@@ -316,6 +343,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     body: '**No cardiac activity on POCUS after adequate resuscitation = strong futility signal.**\n\nCombined with ETCO2 <10 mmHg after 20 minutes = near-zero survival probability (EMCrit) [1][4][11].\n\n**Before termination, confirm:**\n• Adequate CPR quality maintained (ETCO2 was >20 at some point)\n• All reversible causes considered and treated\n• No hypothermia (warm the patient before declaring death)\n• No toxin ingestion requiring prolonged resuscitation\n• ECPR not available or not indicated\n\nIf all criteria met and team consensus → proceed to termination.',
     citation: [1, 4, 11],
     next: 'ca-code-called',
+    summary: 'Adequate CPR confirmed, causes treated, no hypothermia',
   },
 
   {
@@ -327,6 +355,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     recommendation: 'Document all interventions, ETCO2 values, and reasoning for termination.',
     confidence: 'definitive',
     citation: [5, 7, 13],
+    summary: 'Document time, interventions, ETCO2, TOR reasoning',
   },
 
 ];

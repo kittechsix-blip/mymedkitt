@@ -33,6 +33,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     ],
     citation: [1, 2, 3],
     next: 'brady-confirm',
+    summary: 'Confirm asystole in 2 leads — low gain and lead disconnect mimic flatline',
   },
 
   {
@@ -56,6 +57,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
       },
     ],
     citation: [2],
+    summary: 'Asystole vs extreme bradycardia — determines TCP vs CPR-first pathway',
   },
 
   // =====================================================================
@@ -70,6 +72,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**Asystole is a non-shockable rhythm — do NOT defibrillate.**\n\n• **CPR immediately** — high-quality compressions\n• [Epinephrine](#/drug/epinephrine/cardiac arrest) 1mg IV/IO ASAP, repeat q3-5 min\n• TCP rarely effective in true asystole — pacing spikes without capture\n• Search aggressively for reversible causes (H\'s and T\'s)\n\n**Futility signal:**\n• ETCO2 <10 mmHg after 20 min of CPR → consider termination of resuscitation',
     citation: [2, 5, 6],
     next: 'brady-causes',
+    summary: 'Asystole is non-shockable — CPR + epi ASAP, TCP rarely captures',
+    safetyLevel: 'critical',
   },
 
   {
@@ -80,6 +84,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**Transcutaneous pacing immediately — don\'t wait for medications.**\n\n**Setup:**\n• Rate: 60-80 bpm\n• Start at 0 mA → increase until electrical capture (usually 50-100 mA)\n• AP pad position preferred (anterior: left parasternal, posterior: left infrascapular)\n\n**Confirm electrical capture:**\n• Pacer spike followed by wide QRS complex on monitor\n• Each spike produces a QRS — not just artifact\n\n**Bridge medication:**\n• [Epinephrine](#/drug/epinephrine/bradycardia) infusion 2-10 mcg/min while setting up pacing\n\n**If conscious patient → sedation required** (TCP is extremely painful)',
     citation: [2, 7, 8, 9],
     next: 'brady-capture',
+    summary: 'Start TCP immediately — rate 60-80, increase mA until electrical capture',
+    safetyLevel: 'critical',
   },
 
   {
@@ -108,6 +114,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
       },
     ],
     citation: [8, 9],
+    summary: 'Electrical capture alone insufficient — confirm pulse or POCUS contractility',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -122,6 +130,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**No mechanical capture despite electrical:**\n• Increase mA (up to max output)\n• Reposition pads — try AP position if using anterolateral\n• Ensure good skin contact (shave chest hair, dry skin)\n\n**If conscious patient — sedation for pacing:**\n• [Ketamine](#/drug/ketamine/procedural sedation) 1-2 mg/kg IV\n• [Fentanyl](#/drug/fentanyl/procedural) 1-2 mcg/kg IV\n\n**If no electrical capture at max output:**\n• Proceed to medications while arranging transvenous pacing\n• Consider that myocardium may be non-viable (prolonged arrest, severe hyperK)',
     citation: [2, 8],
     next: 'brady-atropine',
+    summary: 'Reposition pads AP, increase mA, sedate conscious patients for TCP pain',
   },
 
   {
@@ -132,6 +141,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '[Atropine](#/drug/atropine/bradycardia) 1mg IV q3-5 min, max 3 doses (3mg total)\n\n**Effective in:**\n• Sinus bradycardia\n• AV nodal block (1° AVB, Mobitz I)\n\n**Limited efficacy in:**\n• Infranodal block (Mobitz II, 3° AVB) — block is below the vagal innervation\n• Transplanted hearts — denervated, no vagal tone to reverse\n• Wide-complex escape rhythms\n\n**Do NOT delay pacing for atropine** — atropine is an adjunct, not a substitute for pacing',
     citation: [2, 5, 6, 7],
     next: 'brady-epi-infusion',
+    summary: 'Atropine 1mg IV q3-5min max 3mg — ineffective for infranodal block',
   },
 
   {
@@ -142,6 +152,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**First-line:**\n• [Epinephrine](#/drug/epinephrine/bradycardia) infusion 2-10 mcg/min IV — titrate to HR >60 and adequate perfusion\n\n**Alternative (if epi unavailable):**\n• [Dopamine](#/drug/dopamine/bradycardia) 5-20 mcg/kg/min IV infusion\n\n**For denervated hearts (transplant):**\n• Isoproterenol 2-10 mcg/min — direct beta-agonist, bypasses vagal pathway\n\n**Key points:**\n• These are bridges to definitive pacing — not endpoints\n• Titrate to clinical effect (HR, BP, mental status)\n• Push-dose epi (10-20 mcg IV bolus) as temporizing measure while starting drip',
     citation: [2, 5, 7],
     next: 'brady-causes',
+    summary: 'Epinephrine 2-10 mcg/min bridge — titrate to HR >60 and adequate perfusion',
   },
 
   // =====================================================================
@@ -156,6 +167,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: 'Treatable causes of bradycardic arrest:\n\n• **Hyperkalemia** (wide QRS, peaked T): [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV + bicarb + insulin/dextrose\n• **Hypothermia**: active rewarming, defer pacing until >30°C (myocardium irritable below 30°C)\n• **Drug toxicity**: beta blocker → [Glucagon](#/drug/glucagon/beta blocker overdose) 3-10mg IV; Ca channel blocker → calcium + high-dose insulin; Digoxin → [DigiFab](#/drug/digifab/digoxin toxicity)\n• **AV block** (complete): temporary pacing bridge → TVP → permanent pacer\n• **Hypoxia**: airway + oxygenation first\n• **Myocardial infarction**: inferior STEMI → right-sided ECG\n\n**Remember:** Treat the cause, not just the rhythm',
     citation: [2, 3, 5, 10],
     next: 'brady-cause-check',
+    summary: 'HyperK: calcium gluconate 1g IV stat — hypothermia: rewarm >30C before pacing',
+    safetyLevel: 'critical',
   },
 
   {
@@ -178,6 +191,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
       },
     ],
     citation: [2],
+    summary: 'Reversible cause found? Treat cause while maintaining pacing and medications',
   },
 
   {
@@ -188,6 +202,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: 'Continue treating identified cause while maintaining pacing/medications.\n\n• Reassess rhythm and hemodynamics after each intervention\n• If **hyperkalemia** suspected, treat empirically even before labs return — calcium gluconate has minimal downside\n• Monitor for response: narrowing QRS, improving rate, return of pulse\n• May need to treat multiple causes simultaneously',
     citation: [2, 5],
     next: 'brady-tvp',
+    summary: 'Treat empirically — calcium gluconate minimal downside even if hyperK unconfirmed',
   },
 
   // =====================================================================
@@ -202,6 +217,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**Transvenous pacing (TVP)** — definitive temporary pacing:\n\n**Access:**\n• Right internal jugular (RIJ) — preferred, direct line to RV\n• Femoral vein — alternative, easier access during CPR\n\n**Placement:**\n• RV apex or RVOT\n• Confirm capture on monitor AND by pulse/POCUS\n\n**Emergency TVP:**\n• Float without fluoroscopy if patient unstable\n• Use balloon-tipped catheter for flow-directed placement\n• Confirm position with echocardiography\n\n**Consult:**\n• Cardiology/EP for placement and permanent pacing evaluation',
     citation: [7, 8],
     next: 'brady-rosc-check',
+    summary: 'Transvenous pacing via RIJ preferred — float without fluoro if unstable',
+    skippable: true,
   },
 
   {
@@ -212,6 +229,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: 'TCP capture achieved — stabilize and plan:\n\n• **Monitor closely** — TCP can lose capture with patient movement\n• Prepare for **transvenous pacing** as definitive therapy\n• Continue medications as bridge (epi or dopamine infusion)\n• Identify and treat underlying cause\n• **Cardiology consult** for permanent pacing evaluation\n\n**Do not remove TCP pads** — keep as backup even after TVP placed',
     citation: [7, 8],
     next: 'brady-rosc-check',
+    summary: 'Keep TCP pads as backup even after TVP — prepare for definitive pacing',
   },
 
   {
@@ -239,6 +257,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
       },
     ],
     citation: [2, 3],
+    summary: 'ROSC vs deterioration vs TOR — determine next pathway at each pulse check',
   },
 
   {
@@ -250,6 +269,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     recommendation: 'Post-ROSC care: maintain pacing, 12-lead ECG, identify cause, cardiology consult.',
     confidence: 'definitive',
     citation: [2, 3],
+    summary: 'Post-ROSC: 12-lead ECG, maintain pacing, TTM, cardiology for permanent pacer',
   },
 
   {
@@ -260,6 +280,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**Re-arrest — return to CPR immediately.**\n\n• Reassess pacing capture — may have lost contact\n• Increase mA if electrical capture lost\n• Reassess reversible causes — something was missed or undertreated\n• Consider ECPR if available and criteria met\n• Continue epinephrine 1mg IV/IO q3-5 min',
     citation: [2],
     next: 'brady-tcp',
+    summary: 'Re-arrest: resume CPR, check pacing capture, reassess reversible causes',
+    safetyLevel: 'critical',
   },
 
   {
@@ -270,6 +292,8 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     body: '**Asystole is the strongest futility signal in cardiac arrest.**\n\nConsider TOR when:\n• ETCO2 <10 mmHg after 20 min of high-quality CPR\n• No reversible cause identified\n• No cardiac activity on POCUS (cardiac standstill)\n• No response to pacing, medications, or cause-directed therapy\n\n**EXCEPTION — Hypothermia:**\n• Rewarm to >30°C before declaring futility\n• **"Not dead until warm and dead"**\n• Active rewarming: warm IV fluids, forced air, lavage, ECMO rewarming\n\n[TOR Rules](#/info/ca-tor-rules)',
     citation: [2, 3, 10],
     next: 'brady-code-called',
+    summary: 'ETCO2 <10 after 20min = strong futility — exception: hypothermia, warm first',
+    safetyLevel: 'warning',
   },
 
   {
@@ -281,6 +305,7 @@ export const BRADYCARDIC_ARREST_NODES: DecisionNode[] = [
     recommendation: 'Document resuscitation timeline, pacing parameters, ETCO2 values, and termination rationale.',
     confidence: 'definitive',
     citation: [2],
+    summary: 'Document resuscitation timeline, pacing parameters, ETCO2, TOR rationale',
   },
 
 ];

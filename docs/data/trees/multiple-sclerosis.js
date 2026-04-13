@@ -29,6 +29,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { id: 'ms-mcdonald', label: 'McDonald Criteria' },
         ],
         next: 'ms-presentation-type',
+        summary: 'New-onset, relapse, or complication — relapse vs pseudo',
     },
     {
         id: 'ms-presentation-type',
@@ -43,6 +44,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'Transverse myelitis / cord symptoms', description: 'Sensory level, weakness, bladder dysfunction', next: 'ms-tm-start', urgency: 'critical' },
             { label: 'MS complication / DMT concern', description: 'Infection, baclofen issues, DMT side effects', next: 'ms-complications-menu' },
         ],
+        summary: 'Scenario determines urgency and approach',
     },
     {
         id: 'ms-new-onset',
@@ -52,6 +54,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Clues to MS in the ED:**\n\n• Young adult with unexplained neurological symptoms\n• Symptoms that "don\'t fit" traditional neuro patterns\n• History of prior unexplained neuro episodes (even if resolved)\n• Symptoms that wax and wane\n• Family history of MS\n\n**Common First Presentations:**\n• **Optic neuritis** (25%)\n• Sensory symptoms (numbness, paresthesias)\n• Motor symptoms (weakness, clumsiness)\n• Brainstem/cerebellar (diplopia, ataxia, vertigo)\n• Lhermitte sign (electric shock down spine with neck flexion)\n\n⚠️ **ED Pitfalls:**\n• **Don\'t diagnose MS in the ED** — requires neurology workup\n• **Don\'t assume symptoms are MS** without excluding emergencies\n• **Don\'t miss cord compression** — MRI before steroids\n\n**ED Action:**\n1. Rule out emergencies (cord compression, stroke, infection)\n2. MRI brain ± spine with gadolinium\n3. Neurology consultation\n4. Usually requires admission for workup [1][3]',
         citation: [1, 3],
         next: 'ms-mri-indications',
+        summary: 'No MS Dx in ED — emergencies first, MRI, neuro consult',
     },
     // =====================================================================
     // MODULE 2: ASSESSMENT - KNOWN MS
@@ -67,6 +70,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { id: 'ms-relapse-vs-pseudo', label: 'Relapse vs Pseudo' },
         ],
         next: 'ms-pseudoexacerbation',
+        summary: 'UA CBC CXR ALL worsening — UTI #1 pseudo cause',
     },
     {
         id: 'ms-pseudoexacerbation',
@@ -79,6 +83,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'No — no trigger identified', description: 'Evaluate for true relapse', next: 'ms-true-relapse-eval' },
             { label: 'Unsure — need workup', description: 'Check UA, labs, temperature', next: 'ms-known-assessment' },
         ],
+        summary: 'Pseudo: EXISTING worse + trigger — relapse: NEW >24hrs',
     },
     {
         id: 'ms-pseudo-management',
@@ -88,6 +93,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Management of Pseudoexacerbation:**\n\n**1. Treat the Underlying Trigger:**\n• **UTI:** Empiric antibiotics (consider resistance patterns)\n• **Fever:** Antipyretics, identify source\n• **Heat exposure:** Cooling measures, avoid triggers\n• **Metabolic:** Correct abnormalities\n\n**2. Reassess After Trigger Resolved:**\n• Neurological deficits should improve within 24-48 hours\n• If deficits PERSIST after fever/infection resolved → likely true relapse\n\n**3. Steroids:**\n• **NOT indicated** for pseudoexacerbation\n• Wait until trigger treated and symptoms reassessed\n• Consider steroids if deficits persist 24-48h after infection treated\n\n**4. Disposition:**\n• Mild infection + stable neuro status → may discharge with close follow-up\n• Significant infection or uncertain → admission\n• Arrange neurology follow-up within 1-2 weeks [4][5]',
         citation: [4, 5],
         next: 'ms-disposition',
+        summary: 'Treat trigger — steroids NOT for pseudo',
     },
     {
         id: 'ms-true-relapse-eval',
@@ -97,6 +103,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Definition of MS Relapse:**\n\nNew or worsening neurological symptoms lasting **>24 hours** in the **absence of fever or infection**.\n\n**Relapse Characteristics:**\n• Symptoms develop over hours to days\n• Peak within 2-4 weeks\n• Gradual improvement over weeks to months\n• May leave residual deficits\n\n**Symptoms Suggesting True Relapse:**\n• NEW focal neurological deficit\n• Not explained by infection or metabolic cause\n• Consistent with CNS demyelination\n\n**When to Get MRI:**\n• New or atypical symptoms\n• First relapse in >1 year\n• Concern for cord involvement\n• Diagnostic uncertainty\n• Before starting PLEX\n\n**Note:** Routine MRI not required for every relapse in patients with established MS and typical symptoms [1][6]',
         citation: [1, 6],
         next: 'ms-relapse-severity',
+        summary: 'New deficit >24hrs no infection = relapse — MRI first',
     },
     {
         id: 'ms-relapse-severity',
@@ -109,6 +116,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'Moderate relapse', description: 'Functional impairment, ambulatory with difficulty', next: 'ms-steroid-protocol' },
             { label: 'Severe relapse', description: 'Unable to ambulate, bladder issues, brainstem/respiratory', next: 'ms-severe-relapse' },
         ],
+        summary: 'Mild=sensory, mod=impaired, severe=no ambulation',
     },
     // =====================================================================
     // MODULE 3: ACUTE RELAPSE TREATMENT
@@ -133,6 +141,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             monitoring: 'Blood glucose if diabetic. Watch for insomnia, mood changes.',
         },
         next: 'ms-disposition',
+        summary: 'Sensory may observe — oral methylpred option',
+        skippable: true,
     },
     {
         id: 'ms-steroid-protocol',
@@ -154,6 +164,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             monitoring: 'Blood glucose BID-TID. Mood/sleep monitoring. GI symptoms.',
         },
         next: 'ms-steroid-precautions',
+        summary: 'IV methylpred 1000mg 3-5d — speeds recovery not prevention',
     },
     {
         id: 'ms-steroid-precautions',
@@ -162,6 +173,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'Steroid Precautions & Side Effects',
         body: '**Contraindications/Cautions:**\n\n**Relative Contraindications:**\n• Uncontrolled diabetes (may still use with glucose monitoring)\n• Active infection (treat infection first)\n• Psychiatric history (steroids can trigger psychosis/mania)\n• GI ulcer disease (add PPI)\n• Uncontrolled hypertension\n\n**Common Side Effects (short-term):**\n• Insomnia (very common)\n• Hyperglycemia\n• Mood changes (euphoria, irritability, anxiety)\n• Metallic taste during infusion\n• Facial flushing\n• Fluid retention\n\n**Serious Side Effects (rare with short course):**\n• Psychosis\n• Avascular necrosis (with repeated courses)\n• Infection\n\n**Management Tips:**\n• Give morning dose to minimize insomnia\n• Check fingerstick glucose BID-TID\n• Sliding scale insulin PRN\n• PPI if GI risk factors\n• Warn patient about mood/sleep effects',
         next: 'ms-steroid-response',
+        summary: 'Glucose, infection screen, psych — morning dosing',
+        skippable: true,
     },
     {
         id: 'ms-severe-relapse',
@@ -171,6 +184,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Severe Relapse Management:**\n\n**Admission Criteria:**\n• Unable to ambulate safely\n• Bladder retention (check PVR, Foley PRN)\n• Brainstem involvement (dysphagia, respiratory)\n• Severe visual loss\n• Concern for cord compression\n• Unable to care for self\n\n**Treatment:**\n1. **IV Methylprednisolone 1000 mg daily × 5 days**\n2. MRI brain ± spine (if not recent)\n3. Neurology consult\n4. PT/OT evaluation\n5. Monitor for complications\n\n**If Steroid-Refractory:**\nConsider **plasmapheresis (PLEX)** if no improvement after 3-5 days of IV steroids.\n\n**ICU Considerations:**\n• Brainstem lesions with dysphagia → aspiration risk\n• High cervical lesions → respiratory monitoring\n• Severe bulbar symptoms → airway protection [6][8]',
         citation: [6, 8],
         next: 'ms-plex',
+        summary: 'Admit: no ambulate, bladder, brainstem — 5d then PLEX',
     },
     {
         id: 'ms-steroid-response',
@@ -183,6 +197,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'No improvement / refractory', description: 'Persistent deficits despite 3-5 days steroids', next: 'ms-plex' },
             { label: 'Worsening', description: 'Getting worse despite treatment', next: 'ms-plex' },
         ],
+        summary: '3-5d improvement, max 2-3wk — no response = PLEX',
     },
     {
         id: 'ms-plex',
@@ -192,6 +207,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Plasmapheresis for MS Relapse:**\n\n**Indications:**\n• Steroid-refractory relapse (no improvement after 3-5 days IV methylprednisolone)\n• Severe/fulminant relapse\n• Contraindication to high-dose steroids\n\n**Protocol:**\n• 5-7 exchanges over 10-14 days\n• 1-1.5 plasma volumes per exchange\n• Albumin or FFP as replacement fluid\n\n**Evidence:**\n• AAN 2011: "Probably effective" for steroid-refractory relapses (Level B)\n• Response rates: 40-90%\n• Better outcomes with earlier initiation\n\n**Predictors of PLEX Response:**\n• Younger age\n• Female sex\n• Earlier initiation\n• Preserved reflexes\n• Less severe at baseline\n\n**Logistics:**\n• Requires vascular access (central line or large-bore PIV)\n• Usually inpatient\n• Neurology + apheresis/hematology consultation [8]',
         citation: [8],
         next: 'ms-disposition',
+        summary: '5-7 exchanges refractory — earlier = better',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 4: OPTIC NEURITIS
@@ -207,6 +224,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { id: 'ms-ontt-risk', label: 'ON → MS Risk' },
         ],
         next: 'ms-on-workup',
+        summary: 'Painful vision + RAPD + dyschromatopsia — check color/pupils',
     },
     {
         id: 'ms-on-workup',
@@ -216,6 +234,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**ED Workup for Optic Neuritis:**\n\n**1. MRI Brain with and without Gadolinium:**\n• Evaluate for demyelinating lesions\n• Optic nerve enhancement\n• Predicts MS conversion risk\n\n**MRI Findings and MS Risk (ONTT 15-year follow-up):**\n\n| Baseline Brain MRI | 15-Year MS Risk |\n|-------------------|-----------------|\n| Normal (0 lesions) | **25%** |\n| ≥1 lesion | **72%** |\n\n**2. Additional Studies (based on presentation):**\n• AQP4 antibody (NMO workup)\n• MOG antibody\n• LP if atypical features\n• ESR, ANA, ACE (if atypical)\n\n**Features Suggesting Alternative Diagnosis:**\n• Bilateral simultaneous\n• No pain\n• Severe disc edema with hemorrhages\n• No recovery after 4 weeks\n• Progression beyond 2 weeks\n• Age >50 or <15 [9][10]',
         citation: [9, 10],
         next: 'ms-on-treatment',
+        summary: 'MRI >=1 lesion = 72% MS risk vs 25% normal',
     },
     {
         id: 'ms-on-treatment',
@@ -237,6 +256,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             monitoring: 'Visual acuity daily during treatment. Blood glucose monitoring (steroid-induced hyperglycemia). Ophthalmology follow-up within 24-48h, neurology within 1-2 weeks.',
         },
         next: 'ms-on-disposition',
+        summary: 'NEVER oral pred ALONE — doubles recurrence per ONTT',
+        safetyLevel: 'critical',
     },
     {
         id: 'ms-on-disposition',
@@ -245,6 +266,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'Optic Neuritis — Disposition',
         body: '**Disposition:**\n\n**Admit if:**\n• Severe vision loss (NLP or light perception only)\n• Bilateral optic neuritis (atypical — consider NMO)\n• Concern for alternative diagnosis\n• Unable to arrange outpatient IV steroids\n• New MS diagnosis requiring workup\n\n**Discharge with Close Follow-up if:**\n• Typical presentation\n• Mild-moderate vision loss\n• Can receive outpatient IV steroids (infusion center)\n• Reliable follow-up with ophthalmology AND neurology\n\n**Consultations:**\n• **Ophthalmology** — urgent (within 24-48h)\n• **Neurology** — within 1-2 weeks for MS workup\n\n**Prognosis:**\n• Visual recovery typically begins within 2-3 weeks\n• Maximum recovery by 6-12 months\n• 95% achieve 20/40 or better\n• Recurrence in same or other eye: 28% at 5 years',
         next: 'ms-disposition',
+        summary: 'Admit severe/bilateral — outpatient IV if typical',
     },
     // =====================================================================
     // MODULE 5: TRANSVERSE MYELITIS
@@ -257,6 +279,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '⚠️ **EMERGENT MRI SPINE REQUIRED**\n\nMust rule out **cord compression** before treating.\n\n**Classic Presentation:**\n• **Sensory level** — numbness/tingling below dermatomal level\n• **Weakness** — paraparesis or paraplegia\n• **Bladder dysfunction** — retention or incontinence\n• **Back pain** at level of lesion\n• Develops over hours to days\n\n**Exam Findings:**\n• Bilateral (often asymmetric) weakness\n• Hyperreflexia below lesion (may be areflexia initially = spinal shock)\n• Sensory level to pinprick/temperature\n• Positive Babinski\n• Check post-void residual (bladder scan)\n\n**Differential Diagnosis:**\n• **Cord compression** (tumor, abscess, hematoma)\n• **MS** (partial myelitis, <2 segments)\n• **NMOSD** (longitudinally extensive, ≥3 segments)\n• **ADEM** (post-infectious, children)\n• **MOG-antibody disease**\n• **Infarct** (anterior spinal artery)\n• **Infectious** (viral, bacterial, TB) [11][12]',
         citation: [11, 12],
         next: 'ms-tm-mri',
+        summary: 'EMERGENT MRI spine — exclude compression before treating',
+        safetyLevel: 'critical',
     },
     {
         id: 'ms-tm-mri',
@@ -266,6 +290,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**STAT MRI Spine (entire spine) + Brain:**\n\n**Order:**\n• MRI cervical, thoracic, lumbar spine WITH gadolinium\n• MRI brain with gadolinium (evaluate for MS lesions)\n\n**MRI Findings Distinguish Causes:**\n\n| Condition | MRI Findings |\n|-----------|-------------|\n| **MS** | Partial myelitis (<2 segments), peripheral/asymmetric, brain lesions |\n| **NMOSD** | Longitudinally extensive (≥3 segments), central cord, AQP4+ |\n| **ADEM** | Diffuse, bilateral large lesions, children, monophasic |\n| **MOG-Ab** | Conus involvement, bilateral ON, longitudinal |\n| **Cord compression** | Mass effect, requires urgent surgery |\n| **Infarct** | Anterior 2/3 of cord, owl eyes on axial |\n\n**MS vs NMOSD is CRITICAL:**\nSome MS DMTs (interferon-beta, fingolimod) can **WORSEN** NMOSD. Do not start DMTs until diagnosis clarified. [11][12]',
         citation: [11, 12],
         next: 'ms-tm-workup',
+        summary: 'MS <2seg, NMOSD >=3 longitudinal — critical distinction',
     },
     {
         id: 'ms-tm-workup',
@@ -274,6 +299,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'Transverse Myelitis — Additional Workup',
         body: '**Laboratory Workup:**\n\n**Essential:**\n• AQP4 antibody (aquaporin-4, NMO-IgG)\n• MOG antibody\n• CBC, BMP, LFTs\n• B12, folate\n• HIV, RPR\n• ESR, CRP\n\n**Lumbar Puncture:**\n• Cell count with differential\n• Protein, glucose\n• Oligoclonal bands, IgG index\n• Cytology if concern for malignancy\n• Viral PCR panel if infectious concern\n\n**CSF Patterns:**\n\n| Condition | CSF Profile |\n|-----------|------------|\n| **MS** | OCBs present, mild pleocytosis (<50), mildly elevated protein |\n| **NMOSD** | Often no OCBs, can have high pleocytosis (>50), elevated protein |\n| **Infectious** | Pleocytosis, may have low glucose |\n| **GBS** | Albuminocytologic dissociation (high protein, normal cells) |',
         next: 'ms-tm-treatment',
+        summary: 'AQP4 MOG antibodies — determines safe DMT choices',
     },
     {
         id: 'ms-tm-treatment',
@@ -295,6 +321,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             monitoring: 'Neurological exam q4-6h for progression. Monitor respiratory function if cervical lesion. Serial bladder scans if retention concern.',
         },
         next: 'ms-nmosd-vs-ms',
+        summary: 'Methylpred after MRI clear — PLEX if severe/refractory',
     },
     {
         id: 'ms-nmosd-vs-ms',
@@ -304,6 +331,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Why This Matters:**\n\nSome MS DMTs can **WORSEN** NMOSD:\n• Interferon-beta\n• Fingolimod\n• Natalizumab (uncertain)\n\n**Key Differentiating Features:**\n\n| Feature | MS | NMOSD |\n|---------|-----|-------|\n| Cord lesions | Short (<2 segments) | Long (≥3 segments) |\n| Cord location | Peripheral, asymmetric | Central cord |\n| Brain lesions | Periventricular | Less common, or in AQP4-rich areas |\n| Optic neuritis | Usually unilateral | Often bilateral, severe |\n| OCBs in CSF | Present (95%) | Often absent |\n| AQP4 antibody | Negative | Positive (70-80%) |\n| Recovery | Usually good | Often poor |\n\n**ED Action:**\n• Order AQP4 and MOG antibodies\n• Consult neurology before starting DMT\n• Steroids are safe for both conditions acutely\n• Document uncertainty in chart [13]',
         citation: [13],
         next: 'ms-disposition',
+        summary: 'Interferon/fingolimod WORSEN NMOSD — clarify Dx first',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: COMPLICATIONS
@@ -321,6 +350,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'DMT side effects / PML concern', description: 'Natalizumab, fingolimod, other DMT issues', next: 'ms-dmt-menu' },
             { label: 'Spasticity / pain crisis', description: 'Severe spasms, neuropathic pain', next: 'ms-spasticity' },
         ],
+        summary: 'UTI pseudo, baclofen withdrawal, resp failure, DMTs',
     },
     {
         id: 'ms-infection',
@@ -330,6 +360,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**UTI is the #1 Cause of Pseudoexacerbation**\n\n**Why MS Patients are at Risk:**\n• Neurogenic bladder (retention, incomplete emptying)\n• Chronic catheterization\n• Immunosuppression from DMTs\n\n**ED Approach:**\n1. Check UA + urine culture in ALL MS patients with symptom worsening\n2. Treat UTI aggressively\n3. Reassess neuro status after fever resolves\n4. Only attribute to MS relapse if deficits persist 24-48h after infection treated\n\n**Lymphopenia Risk:**\nMany DMTs cause lymphopenia (fingolimod, dimethyl fumarate, cladribine, ocrelizumab).\n\n**If ALC <500:**\n• Increased infection risk\n• Lower threshold for broad-spectrum antibiotics\n• Consider opportunistic infections\n• Contact prescribing neurologist [5][14]',
         citation: [5, 14],
         next: 'ms-pseudo-management',
+        summary: 'UTI #1 trigger — ALC <500 = broad abx',
     },
     {
         id: 'ms-baclofen-withdrawal',
@@ -359,6 +390,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             monitoring: 'ICU monitoring. Core temperature q1h. CPK q6h (rhabdomyolysis). Mental status checks. If intrathecal pump — neurosurgery consult for pump evaluation.',
         },
         next: 'ms-disposition',
+        summary: 'Life-threatening: hyperthermia, rigidity — restore + ICU',
+        safetyLevel: 'critical',
     },
     {
         id: 'ms-respiratory',
@@ -368,6 +401,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Respiratory Failure in MS:**\n\nRare but serious — accounts for ~47% of MS deaths.\n\n**Causes:**\n• Acute brainstem demyelinating plaque\n• High cervical cord lesion (C3-C5 = phrenic nerve)\n• Diaphragmatic weakness\n• Aspiration (bulbar dysfunction)\n• Central sleep apnea (brainstem lesions)\n\n**Clinical Features:**\n• Rapid shallow breathing\n• Abdominal paradox (paradoxical inward movement on inspiration)\n• Dyspnea, orthopnea\n• Confusion (from hypercarbia)\n• Weak cough\n\n**ED Management:**\n1. ABG — look for hypercarbia\n2. Bedside spirometry if available (FVC <20 mL/kg = concerning)\n3. **Low threshold for intubation** if respiratory muscle weakness\n4. High-dose IV methylprednisolone\n5. Consider plasmapheresis for fulminant cases\n6. **ICU admission**\n7. Neurology and pulmonology consult [16]',
         citation: [16],
         next: 'ms-disposition',
+        summary: 'Brainstem/cervical = resp failure — low intubation threshold',
+        safetyLevel: 'critical',
     },
     {
         id: 'ms-spasticity',
@@ -376,6 +411,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'Spasticity / Pain Crisis',
         body: '**Spasticity Management:**\n\n**Acute Management:**\n• [Baclofen](#/drug/baclofen/spasticity) 5-10 mg PO TID (start low, titrate)\n• [Tizanidine](#/drug/tizanidine/spasticity) 2-4 mg PO TID (watch for hypotension, sedation)\n• [Diazepam](#/drug/diazepam/spasticity) 2-5 mg PO/IV TID (for acute relief)\n\n**For Severe Spasticity Crisis:**\n• Benzodiazepines IV\n• Rule out baclofen withdrawal\n• Look for trigger (UTI, constipation, skin issue)\n• Neurology consult\n\n**Neuropathic Pain:**\n• Gabapentin 100-300 mg TID (titrate)\n• Pregabalin 50-75 mg BID (titrate)\n• TCAs (amitriptyline, nortriptyline)\n• Carbamazepine (for trigeminal neuralgia)\n\n**Paroxysmal Symptoms (brief, stereotyped):**\n• Tonic spasms, Lhermitte sign, paroxysmal dysarthria\n• Respond to carbamazepine or oxcarbazepine',
         next: 'ms-disposition',
+        summary: 'Baclofen mainstay — NEVER stop abruptly',
     },
     // =====================================================================
     // MODULE 7: DMT SIDE EFFECTS
@@ -393,6 +429,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
             { label: 'Rebound after stopping DMT', description: 'Severe relapse after stopping fingolimod/natalizumab', next: 'ms-rebound' },
             { label: 'Other DMT concern', description: 'General DMT side effects', next: 'ms-dmt-general' },
         ],
+        summary: 'PML natalizumab = urgent MRI + JCV PCR',
     },
     {
         id: 'ms-pml',
@@ -402,6 +439,8 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '⚠️ **HOLD STEROIDS IF PML SUSPECTED**\n\n**What is PML?**\nFatal opportunistic brain infection caused by JC virus reactivation in immunocompromised patients.\n\n**Risk by DMT:**\n• **Natalizumab:** 1/100 to 1/1000 (HIGHEST risk)\n• Fingolimod: ~1/18,000\n• Dimethyl fumarate: ~1/50,000 (if prolonged lymphopenia)\n• Ocrelizumab: Rare case reports\n\n**Risk Factors (Natalizumab):**\n• JCV antibody positive (especially high index)\n• Prior immunosuppressant use\n• Duration >2 years\n\n**Clinical Presentation:**\n• Subacute neurological deficits (NOT like typical MS relapse)\n• **Progressive over weeks** (vs hours-days for relapse)\n• Cognitive decline, confusion\n• Visual field defects\n• Ataxia, hemiparesis\n• Seizures\n\n**ED Action:**\n1. **Do NOT give steroids** (can worsen PML)\n2. Urgent MRI brain\n3. LP for JCV PCR\n4. Neurology consult STAT\n5. Stop DMT [17]',
         citation: [17],
         next: 'ms-disposition',
+        summary: 'Progressive unlike relapse — hold steroids, MRI+JCV stat',
+        safetyLevel: 'critical',
     },
     {
         id: 'ms-fingolimod-cardiac',
@@ -447,6 +486,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         body: '**Relapse Risk Pattern:**\n\n| Period | Relapse Rate |\n|--------|-------------|\n| Pre-pregnancy | Baseline |\n| Pregnancy | **Decreased** (protective) |\n| 1st trimester | ↓↓ |\n| 3rd trimester | ↓↓↓ |\n| **Postpartum (0-3 mo)** | **↑↑ REBOUND** |\n\n**Key Points:**\n• Pregnancy is relatively protective\n• **Postpartum period is HIGH-RISK** (first 3 months)\n• ~37% relapse within 6 months postpartum\n• Exclusive breastfeeding may be protective\n\n**Treatment Considerations:**\n• Steroids: Category C but generally acceptable for severe relapses\n• MRI: Avoid gadolinium if possible; non-contrast OK\n• DMTs: Most stopped before conception\n  - Glatiramer: May continue\n  - Interferon-beta: Possibly safe\n  - Others: Stop before conception\n\n**Consult:**\n• Neurology + OB/maternal-fetal medicine [19]',
         citation: [19],
         next: 'ms-disposition',
+        summary: 'Postpartum 3mo highest relapse — DMTs contraindicated',
     },
     {
         id: 'ms-mri-indications',
@@ -455,6 +495,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'MRI Indications in MS',
         body: '**When to Order MRI in the ED:**\n\n**ALWAYS (emergent):**\n• Concern for cord compression\n• New sensory level or paraparesis\n• Rapidly progressive symptoms\n• Atypical presentation\n\n**Recommended:**\n• New-onset symptoms suspicious for MS\n• First relapse in >1 year\n• New neurological deficit not seen before\n• Before PLEX\n• Uncertainty about diagnosis\n\n**NOT Routinely Needed:**\n• Typical relapse in established MS patient\n• Similar symptoms to prior relapses\n• Pseudoexacerbation with clear trigger\n\n**MRI Protocol:**\n• Brain: T1, T2/FLAIR, DWI, gadolinium\n• Spine: If cord symptoms (entire spine)\n\n**MS-Specific Findings:**\n• Dawson fingers (periventricular lesions perpendicular to ventricles)\n• Ovoid lesions >3mm\n• Gadolinium enhancement = active inflammation\n• Black holes (T1 hypointense) = axonal loss',
         next: 'ms-known-assessment',
+        summary: 'MRI before steroids if compression or alt Dx concern',
     },
     {
         id: 'ms-disposition',
@@ -463,6 +504,7 @@ export const MULTIPLE_SCLEROSIS_NODES = [
         title: 'MS Disposition',
         body: '**Admission Criteria:**\n• Severe functional impairment (unable to ambulate)\n• New diagnosis requiring workup\n• IV steroid therapy needed (if outpatient not available)\n• Brainstem involvement or respiratory concern\n• Bladder retention requiring catheterization\n• Cord symptoms requiring emergent MRI\n• Unable to exclude cord compression\n• Baclofen withdrawal or pump malfunction\n• Social factors preventing safe discharge\n\n**Discharge Criteria:**\n• Mild relapse with preserved function\n• Established diagnosis with typical pattern\n• Can receive oral steroids or outpatient IV\n• Safe home environment\n• Reliable follow-up arranged\n\n**Follow-up:**\n• Neurology: Within 1-2 weeks for relapse; urgent if new diagnosis\n• Ophthalmology: Within 24-48h for optic neuritis\n• PCP: Steroid side effect monitoring\n\n**Return Precautions:**\n• Worsening weakness or numbness\n• New vision changes\n• Difficulty walking or balance problems\n• Bladder dysfunction\n• Difficulty breathing or swallowing\n• High fever',
         recommendation: 'Disposition based on relapse severity, functional status, and ability to arrange outpatient treatment. All new MS diagnoses and severe relapses require admission. Mild relapses in established patients may be managed outpatient with close neurology follow-up.',
+        summary: 'Admit: severe, cord, respiratory, baclofen withdrawal',
     },
 ];
 export const MULTIPLE_SCLEROSIS_MODULE_LABELS = [

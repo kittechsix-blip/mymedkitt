@@ -41,6 +41,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'ces-screening', label: 'CES Screen' },
     ],
+    summary: 'Ask EVERY back pain: bladder, bowel, saddle — easily missed',
   },
 
   {
@@ -51,6 +52,8 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Ask EVERY back pain patient these questions:**\n\n**Bladder:**\n• "Any trouble starting or stopping urination?"\n• "Feeling like you can\'t fully empty?"\n• "Any loss of bladder control?"\n\n**Bowel:**\n• "Any loss of bowel control?"\n• "Can you feel when your rectum is full?"\n\n**Sensation:**\n• "Any numbness around your genitals or bottom?"\n• "Can you feel yourself wipe after using the bathroom?"\n\n**Motor:**\n• "Any weakness in both legs?"\n• "Difficulty walking?" (new gait disturbance)\n\n**Sexual (if appropriate):**\n• "Any new loss of sensation during intimacy?"\n\n| Finding | Odds Ratio for CES |\n|---------|-------------------|\n| Severe bilateral neuro deficit | **15x** |\n| Loss of rectal fullness sensation | **>10x** |\n| PVR >500 mL + bilateral sciatica | **48x** |\n| Absent bilateral ankle reflexes | **High** |\n\n**If ANY positive → immediate workup** [1][3]',
     citation: [1, 3],
     next: 'ces-exam',
+    summary: 'PVR >500 + bilateral = 48x CES odds — any pos = workup',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -68,6 +71,8 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
       { id: 'ces-pvr', label: 'PVR Interpretation' },
     ],
     next: 'ces-exam-decision',
+    summary: 'BCR intact = CES excluded 100% sens — absent = workup',
+    safetyLevel: 'warning',
   },
 
   {
@@ -82,6 +87,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
       { label: 'Low suspicion', description: 'Unilateral, intact exam, no red flags', next: 'ces-low-suspicion' },
     ],
     citation: [1, 4],
+    summary: 'Synthesize BCR, tone, PVR, bilateral — high = emergent MRI',
   },
 
   {
@@ -92,6 +98,9 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Bedside Bladder Ultrasound Protocol:**\n\n1. Have patient void (attempt to empty completely)\n2. Scan bladder within 10 minutes\n3. Measure in 3 dimensions, calculate volume\n\n**Interpretation:**\n\n| PVR Volume | Interpretation | Action |\n|------------|----------------|--------|\n| <100 mL | Normal | Reassuring if exam otherwise normal |\n| 100-200 mL | Borderline | NPV 97% — consider other findings |\n| 200-500 mL | Elevated | 43% probability CES — urgent imaging |\n| >500 mL | Retention | With bilateral sciatica: 48x odds of CES |\n\n**⚠️ CRITICAL CAVEAT:**\n**50% of CES-Incomplete (CES-I) have PVR <200 mL!**\n\nDo NOT use low PVR alone to exclude CES if:\n• Patient has bilateral symptoms\n• Saddle anesthesia present\n• Bowel symptoms present\n• BCR is absent\n\n**PVR is helpful when POSITIVE, less reliable when negative** [4][5]',
     citation: [4, 5],
     next: 'ces-exam-decision',
+    summary: 'PVR >500 high prob — but 50% CES-I have <200',
+    skippable: true,
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -109,6 +118,8 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
       { id: 'ces-timing', label: 'Surgery Timing' },
     ],
     next: 'ces-imaging-result',
+    summary: 'MRI 4hrs — neurosurgery PARALLEL not sequential',
+    safetyLevel: 'critical',
   },
 
   {
@@ -123,6 +134,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
       { label: 'Negative imaging, low suspicion', description: 'Reassuring imaging matches reassuring exam', next: 'ces-low-suspicion' },
     ],
     citation: [1, 5],
+    summary: 'Compression = surgery — negative + suspicion = do not DC',
   },
 
   {
@@ -133,6 +145,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**When imaging doesn\'t match clinical picture:**\n\n**Consider:**\n1. **Repeat imaging** — dynamic compression may need flexion/extension views\n2. **Spinal infarction** — may not show on initial MRI; DWI sequences helpful\n3. **Conus medullaris syndrome** — higher lesion, different imaging plane needed\n4. **Aortic dissection** — can present with leg weakness; consider CT angio\n5. **Guillain-Barré** — ascending weakness; CSF analysis, nerve conduction\n\n**Management:**\n• Admit for observation\n• Serial neuro exams q4-6h\n• Neurology consultation\n• Consider repeat MRI in 24-48h if symptoms persist\n• Low threshold for LP if infection suspected\n\n**Do NOT discharge** patients with bilateral neuro deficits and bladder symptoms just because MRI is negative [1][6]',
     citation: [1, 6],
     next: 'ces-disposition',
+    summary: 'Neg MRI + bilateral + bladder = admit, repeat MRI',
   },
 
   // =====================================================================
@@ -147,6 +160,8 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Two Types with Different Urgency:**\n\n**CES-Incomplete (CES-I) — TRUE EMERGENCY**\n• Altered urinary sensation\n• Difficulty voiding, weak stream\n• **But CAN still void** (even if difficult)\n• ~40% of presentations\n• **Better prognosis if treated urgently**\n• **Goal:** Prevent progression to CES-R\n• **Surgery timing:** <24 hours strongly recommended\n\n**CES-Retention (CES-R) — LESS TIME-SENSITIVE**\n• **Painless urinary retention**\n• Overflow incontinence\n• Complete loss of bladder control\n• ~60% of presentations\n• **More guarded prognosis** — damage often permanent\n• **Surgery:** Still indicated, but not as time-critical\n\n**Key Concept:**\n• CES-I → CES-R is **irreversible progression**\n• Operating on CES-I before it becomes CES-R = best outcomes\n• Bladder function at time of surgery = strongest predictor of recovery [2][6]',
     citation: [2, 6],
     next: 'ces-surgery',
+    summary: 'CES-I TRUE emergency — surgery <24hrs prevents Retention',
+    safetyLevel: 'critical',
   },
 
   {
@@ -157,6 +172,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Surgical Decompression is Definitive Treatment**\n\n**Timing Evidence:**\n\n| Timing | Outcome Data |\n|--------|-------------|\n| <24 hours | Superior outcomes (NISC database) |\n| 24-48 hours | Acceptable but inferior to <24h |\n| >48 hours | 9.6x mortality, 2.4x non-routine discharge |\n\n**Pre-Surgical Management:**\n1. **Foley catheter** — document PVR, sensation to insertion, catheter tug test\n2. **Steroids** (if inflammatory cause suspected):\n   • [Dexamethasone](#/drug/dexamethasone/CES) 10-16 mg IV at diagnosis\n   • Strongest evidence in abscess, tumor; weak in disc herniation\n3. **NPO** — prepare for OR\n4. **Pain control** — multimodal, avoid excessive opioids affecting neuro exam\n\n**Surgical Procedure:**\n• Laminectomy with discectomy (most common for disc herniation)\n• Abscess drainage if infectious cause\n• Tumor resection/debulking if malignancy\n\n**Post-op Monitoring:**\n• Serial neuro exams\n• Bladder function recovery may take weeks-months\n• Some patients have permanent deficits despite timely surgery [2][6][7]',
     recommendation: 'Emergent neurosurgery consultation. Surgery within 24 hours for CES-I, as soon as feasible for CES-R. Foley placement with documented sensation. Consider steroids for inflammatory causes.',
     citation: [2, 6, 7],
+    summary: '>48hrs: 9.6x mortality — Foley, sensation, steroids',
   },
 
   // =====================================================================
@@ -171,6 +187,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**When findings are concerning but not classic:**\n\n**Examples:**\n• Isolated perianal numbness, otherwise normal exam\n• Borderline PVR (200-400 mL) without bilateral symptoms\n• Unilateral sciatica with vague bladder symptoms\n• BCR equivocal or unable to assess\n\n**Management:**\n1. **Urgent MRI** — within 4-6 hours (same day)\n2. **Serial exams** — q2-4h while awaiting imaging\n3. **Neurology or neurosurgery consultation** — low threshold\n4. **Document carefully** — CES is high medicolegal risk\n\n**If MRI negative:**\n• Observation 6-12 hours with serial exams\n• Clear discharge instructions with red flags\n• Return precautions in writing\n• Follow-up with spine specialist within 1 week\n\n**If ANY worsening** → upgrade to emergent workup [1][3]',
     citation: [1, 3],
     next: 'ces-disposition',
+    summary: 'Urgent MRI 4-6hrs, exams q2-4h — upgrade if worse',
   },
 
   {
@@ -181,6 +198,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Low suspicion criteria (ALL must be present):**\n• ✅ Unilateral leg pain only\n• ✅ Normal rectal tone\n• ✅ Intact BCR (if tested)\n• ✅ Normal PVR (<100-200 mL)\n• ✅ No saddle anesthesia\n• ✅ No bladder/bowel symptoms\n• ✅ Able to ambulate\n\n**Outpatient Management:**\n• NSAIDs / acetaminophen for pain\n• Activity as tolerated\n• Physical therapy referral\n• Spine clinic follow-up if symptoms persist >4-6 weeks\n\n**MUST PROVIDE WRITTEN RETURN PRECAUTIONS:**\n\n🚨 **Return immediately if:**\n• Numbness around genitals or bottom (saddle area)\n• Difficulty urinating or loss of bladder control\n• Loss of bowel control\n• Weakness in BOTH legs\n• Worsening or new symptoms\n\n**Document that patient understands** and received written instructions [1]',
     recommendation: 'Discharge with strict return precautions. Written red flag instructions mandatory. Spine clinic follow-up if persistent symptoms.',
     citation: [1],
+    summary: 'Unilateral + intact + normal PVR = outpatient + written precautions',
   },
 
   // =====================================================================
@@ -200,6 +218,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
       { label: 'Transfer', description: 'No neurosurgery capability at this facility', next: 'ces-transfer' },
     ],
     citation: [1],
+    summary: 'Confirmed=surgery, concerning=admit, low=written precautions',
   },
 
   {
@@ -210,6 +229,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**Indications for observation despite negative imaging:**\n• High clinical suspicion with negative MRI\n• Equivocal exam findings\n• Unable to obtain MRI (CT only available)\n• Patient unreliable for return precautions\n\n**Observation Protocol:**\n• Serial neuro exams q4-6h\n• Strict I/O with bladder scans\n• Low threshold for repeat imaging\n• Neurology consultation\n• Upgrade to emergent workup if ANY deterioration\n\n**Duration:**\n• Minimum 12-24 hours\n• Until confident CES excluded or alternative diagnosis made',
     recommendation: 'Admit to monitored bed. Serial neuro exams q4-6h. Bladder scans. Low threshold for repeat MRI. Neurology consult.',
     citation: [1, 6],
+    summary: 'Neuro q4-6h, bladder scans, repeat MRI threshold low',
   },
 
   {
@@ -220,6 +240,7 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**When to transfer:**\n• CES confirmed or highly suspected\n• No neurosurgery at this facility\n• No MRI available and high clinical suspicion\n\n**Pre-transfer:**\n1. Stabilize patient\n2. Place Foley catheter (document sensation)\n3. Start steroids if indicated\n4. Pain control\n5. NPO for potential surgery\n6. Send all imaging with patient\n\n**Communication:**\n• Direct physician-to-physician handoff\n• Emphasize time-sensitivity (surgery <24h goal)\n• Confirm accepting neurosurgeon\n\n**Do NOT delay transfer** for additional workup if CES is suspected and no surgical capability [7]',
     recommendation: 'Emergent transfer to neurosurgical center. Foley placed, steroids given if indicated, imaging sent. Direct MD-to-MD handoff.',
     citation: [7],
+    summary: 'Transfer no neurosurg — Foley, steroids, MD handoff',
   },
 
   {
@@ -230,6 +251,8 @@ export const CAUDA_EQUINA_NODES: DecisionNode[] = [
     body: '**How CES Gets Missed:**\n\n| Pitfall | Solution |\n|---------|----------|\n| Don\'t ask about bladder/bowel | Mandatory screening ALL back pain |\n| Miss saddle anesthesia | Always test perineal sensation |\n| Rely on normal PVR | 50% of CES-I have PVR <200 mL |\n| "Just chronic back pain" | Escalate NEW symptoms in chronic patients |\n| Wait for MRI result to call surgery | Parallel process — call while imaging |\n| Negative exam = no CES | Symptoms trump exam; no single finding excludes |\n| Discharge without written precautions | Always document red flags given |\n\n**Medicolegal Reality:**\n• CES is one of the most common causes of spinal malpractice suits\n• Documentation of screening questions is protective\n• "I asked and patient denied" is better than nothing documented\n• Low threshold for imaging in equivocal cases [1][3]',
     citation: [1, 3],
     next: 'ces-start',
+    summary: 'Not asking bladder/bowel = top spinal malpractice cause',
+    skippable: true,
   },
 
 ];

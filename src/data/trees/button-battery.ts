@@ -69,6 +69,8 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'battery-risk-stratification', label: 'Battery Risk Stratification' },
     ],
+    summary: 'Esophageal injury 15 MIN — STAT X-ray, NPO until located',
+    safetyLevel: 'critical',
   },
   {
     id: 'battery-symptomatic',
@@ -94,6 +96,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - Prepare for emergent endoscopy`,
     citation: [1, 6],
     next: 'battery-start',
+    summary: 'Drooling, dysphagia, hematemesis = emergent, NO vomiting induction',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -127,6 +130,8 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - Dysphagia preventing safe swallowing`,
     citation: [1, 2, 5],
     next: 'battery-esophageal-removal',
+    summary: 'Remove within 2 HRS — honey delays but does not prevent injury',
+    safetyLevel: 'critical',
   },
   {
     id: 'battery-esophageal-removal',
@@ -158,6 +163,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - NPO initially → clear liquids when stable`,
     citation: [1, 7],
     next: 'battery-complications',
+    summary: 'OR preferred — do NOT delay for NPO status',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -194,6 +200,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'battery-risk-stratification', label: 'Battery Risk Stratification' },
     ],
+    summary: 'Risk: <6yo+>=15mm or >=20mm = high risk for endoscopy',
   },
   {
     id: 'battery-gastric-high',
@@ -221,6 +228,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - Early removal reduces injury risk`,
     citation: [1, 6],
     next: 'battery-disposition',
+    summary: 'X-ray day 4 — still in stomach = endoscopic removal',
   },
   {
     id: 'battery-gastric-low',
@@ -250,6 +258,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - Battery confirmed passed in stool`,
     citation: [1, 3],
     next: 'battery-disposition',
+    summary: 'Home, inspect stools — X-ray day 10-14 if unconfirmed',
   },
   {
     id: 'battery-gastric-20mm',
@@ -273,6 +282,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
 - Earlier intervention reduces complication risk`,
     citation: [1, 4],
     next: 'battery-disposition',
+    summary: '>=20mm: GI consult, X-ray 48hrs — remove if past pylorus',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -306,6 +316,7 @@ Once past the stomach, serious complications are rare.
 - Small intestine transit usually complete within 72 hours`,
     citation: [1, 3],
     next: 'battery-disposition',
+    summary: 'Past stomach = low risk — most pass 4-7 days',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -340,6 +351,8 @@ Once past the stomach, serious complications are rare.
       { label: 'Suspected perforation/mediastinitis', next: 'battery-perforation' },
       { label: 'Post-removal monitoring', next: 'battery-post-removal' },
     ],
+    summary: 'AEF up to 28 DAYS — sentinel bleed precedes catastrophe',
+    safetyLevel: 'critical',
   },
   {
     id: 'battery-aef',
@@ -373,6 +386,8 @@ Once past the stomach, serious complications are rare.
 - Requires prolonged monitoring post-removal`,
     citation: [7],
     next: 'battery-disposition',
+    summary: 'AEF catastrophic — CTA, CT surgery, MTP standby',
+    safetyLevel: 'critical',
   },
   {
     id: 'battery-perforation',
@@ -402,6 +417,7 @@ Once past the stomach, serious complications are rare.
 - [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/mediastinitis) 4.5g IV q6h`,
     citation: [6, 7],
     next: 'battery-disposition',
+    summary: 'Pneumomediastinum + fever = mediastinitis — broad abx',
   },
   {
     id: 'battery-post-removal',
@@ -432,6 +448,7 @@ Once past the stomach, serious complications are rare.
 - May need esophagram/EGD at 2-4 weeks to assess healing`,
     citation: [1, 6],
     next: 'battery-disposition',
+    summary: 'Admit esophageal 24-48hrs — CTA if mid-esophageal',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -467,6 +484,7 @@ Once past the stomach, serious complications are rare.
 - Battery identification by imprint code
 - Real-time management guidance`,
     citation: [1],
+    summary: 'Admit esophageal, discharge asymptomatic gastric/distal',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -493,5 +511,7 @@ Once past the stomach, serious complications are rare.
 - Time to removal is the critical factor`,
     citation: [1, 3],
     next: 'battery-start',
+    summary: 'NO vomiting, charcoal, NPO delay, or blind balloon',
+    safetyLevel: 'warning',
   },
 ];

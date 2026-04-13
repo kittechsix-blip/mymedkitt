@@ -13,6 +13,7 @@ export const BURNS_NODES = [
         body: '[Burns Steps Summary](#/info/burns-summary) — stepwise approach to burn assessment and management.\n\nThis consult covers the **7-module approach** to burn management: initial assessment, TBSA calculation, fluid resuscitation, airway and inhalation injury, escharotomy, chemical burns, and wound care with disposition planning.\n\n**Burns are trauma patients first.** Complete a primary survey (ABCDE) before focusing on burn-specific assessment. Up to 10% of burn patients have associated traumatic injuries that may take priority. Maintain a low threshold for intubation with any signs of airway involvement — edema progresses rapidly and the window for safe intubation closes within hours.',
         citation: [1, 2],
         next: 'burn-type',
+        summary: 'Burns = trauma first — ABCDE before burn-specific assessment',
     },
     {
         id: 'burn-type',
@@ -38,6 +39,7 @@ export const BURNS_NODES = [
                 next: 'burn-radiation',
             },
         ],
+        summary: 'Mechanism determines protocols — thermal, chemical, electrical, radiation',
     },
     {
         id: 'burn-electrical',
@@ -47,6 +49,8 @@ export const BURNS_NODES = [
         body: '**Electrical burns cause internal damage far exceeding external appearance.** Current follows the path of least resistance: nerve > blood vessel > muscle > skin > tendon > fat > bone.\n\n**High voltage (>1000V):**\n• Entry/exit wounds — look for both\n• Deep tissue necrosis along current path\n• Rhabdomyolysis — aggressive IVF, target UOP 1-1.5 mL/kg/hr\n• Compartment syndrome risk (especially forearm, leg)\n• Cardiac: dysrhythmias, myocardial injury\n• Vascular thrombosis — delayed presentation possible\n• Spinal cord injury (transient or permanent)\n\n**Low voltage (<1000V):**\n• Household current (120-240V) — typically hand contact burns\n• Cardiac monitoring × 4-6h if any LOC, abnormal ECG, or arrhythmia\n• Oral commissure burns in children (biting cords) — delayed labial artery hemorrhage at 5-7 days\n\n**Lightning:**\n• Flashover effect — current travels over body surface\n• Cardiac arrest: **asystole > VF** (reverse of typical arrest)\n• Tympanic membrane rupture (50%)\n• Fixed dilated pupils from autonomic dysfunction — do NOT use as prognostic sign\n• Keraunoparalysis (transient lower extremity paralysis)\n\n**Labs:** CK, myoglobin, BMP (hyperkalemia from rhabdo), lactate, UA (myoglobinuria), troponin, 12-lead ECG.\n\nIf rhabdomyolysis with hyperkalemia → [Potassium Disorders](#/tree/potassium)',
         citation: [2, 9],
         next: 'burn-primary-survey',
+        summary: 'Internal > visible — rhabdo, compartment syndrome, dysrhythmias',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-radiation',
@@ -57,6 +61,7 @@ export const BURNS_NODES = [
         recommendation: 'Radiation burns are rare. Contact REAC/TS (865-576-1005). Decontaminate first — remove clothing (90% decontamination). Treat wound as thermal burn. Monitor for delayed effects.',
         confidence: 'consider',
         citation: [2],
+        summary: 'REAC/TS 865-576-1005 — decontaminate before treating, remove clothing',
     },
     {
         id: 'burn-primary-survey',
@@ -66,6 +71,8 @@ export const BURNS_NODES = [
         body: '**A — Airway:** Facial burns, soot in nares/oropharynx, singed nasal/facial hair, hoarse voice, stridor → **early intubation.** Airway edema peaks at 12-24h. If you are considering intubation, do it now — the airway will only get worse.\n\n**B — Breathing:** Circumferential chest burns may restrict ventilation → escharotomy. Assess for inhalation injury. Auscultate for wheezing, stridor.\n\n**C — Circulation:** Establish large-bore IV access — can go through burned skin if necessary. IO access if IV not obtainable. Begin fluid resuscitation early. Circumferential extremity burns → monitor pulses.\n\n**D — Disability:** Enclosed space → suspect CO and cyanide poisoning. Assess GCS. Hypoxia may present as agitation.\n\n**E — Exposure/Environment:** Remove ALL clothing and jewelry (rings, watches — edema will make removal impossible later). Cover with clean dry sheets. **Prevent hypothermia** — burns patients lose thermoregulation. Warm IV fluids, warm room, blankets.\n\n[Prehospital Burn Considerations](#/info/burns-prehospital)',
         citation: [1, 2, 16],
         next: 'burn-inhalation-screen',
+        summary: 'Early intubation ANY airway concern — edema peaks 12-24h',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-inhalation-screen',
@@ -85,6 +92,7 @@ export const BURNS_NODES = [
             },
         ],
         citation: [1, 8],
+        summary: 'Inhalation increases mortality 20-60% and fluid requirements 30-50%',
     },
     {
         id: 'burn-depth',
@@ -95,6 +103,8 @@ export const BURNS_NODES = [
         images: [{ src: 'images/burns/burns-depth.png', alt: 'Burn depth classification cross-section', caption: 'Five-tier burn depth classification showing skin layers affected' }],
         citation: [2, 3, 23],
         next: 'burn-tbsa-age',
+        summary: 'Capillary refill: brisk=superficial, sluggish=deep, absent=full',
+        skippable: true,
     },
     {
         id: 'burn-tbsa-age',
@@ -112,6 +122,7 @@ export const BURNS_NODES = [
                 next: 'burn-tbsa-peds',
             },
         ],
+        summary: 'Only partial and full thickness count — superficial NOT included',
     },
     // =====================================================================
     // MODULE 2: TBSA CALCULATION
@@ -126,6 +137,8 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'tbsa-adult', label: 'TBSA Calculator (Adult)' }],
         citation: [2, 20],
         next: 'burn-tbsa-result',
+        summary: 'Rule of 9s: head 9%, arm 9%, trunk 18%, leg 18%, palm 1%',
+        skippable: true,
     },
     {
         id: 'burn-tbsa-peds',
@@ -140,6 +153,8 @@ export const BURNS_NODES = [
         calculatorLinks: [{ id: 'tbsa-peds', label: 'TBSA Calculator (Peds)' }],
         citation: [2, 20, 23],
         next: 'burn-tbsa-result',
+        summary: 'Lund-Browder for <=14yo — larger head, smaller legs',
+        skippable: true,
     },
     {
         id: 'burn-tbsa-result',
@@ -161,6 +176,7 @@ export const BURNS_NODES = [
                 next: 'burn-fluids-severe',
             },
         ],
+        summary: 'Adults >=20% or peds >=10% TBSA need resuscitation formulas',
     },
     {
         id: 'burn-minor-fluids',
@@ -170,6 +186,7 @@ export const BURNS_NODES = [
         body: '**No formal resuscitation formula is needed** for minor burns (adults <20% TBSA, children <10% TBSA).\n\n**Fluid strategy:**\n• Encourage **oral fluid intake** — patients with intact GI function and small burns can self-hydrate\n• IV maintenance fluids if NPO or unable to tolerate PO\n• Standard maintenance rate: 4-2-1 rule (4 mL/kg/hr first 10kg, 2 mL/kg/hr next 10kg, 1 mL/kg/hr thereafter)\n\n**Monitoring:**\n• Urine output goal: 0.5-1 mL/kg/hr (adults), 1-1.5 mL/kg/hr (children)\n• Monitor oral intake — dehydration risk is underappreciated in minor burns\n• If patient cannot maintain adequate PO intake, consider IV supplementation\n\n**Note:** Patients with inhalation injury, extremes of age, or significant comorbidities may require more aggressive hydration even with smaller TBSA burns.',
         citation: [2, 4],
         next: 'burn-wound-care',
+        summary: 'Minor: PO fluids, IV maintenance if NPO — no formula needed',
     },
     {
         id: 'burn-palms-scatter',
@@ -179,6 +196,8 @@ export const BURNS_NODES = [
         body: '**The patient\'s palm (including fingers) approximates 1% TBSA.** This method supplements the Rule of 9\'s for scattered or irregular burn patterns.\n\n**When to use:**\n• Burns covering <15% TBSA — count the number of palms the burn area covers\n• Burns covering >85% TBSA — count unburned areas and subtract from 100%\n• Scattered or patchy burns where Rule of 9\'s regional estimates are imprecise\n\n**Technique:**\n• Use the **patient\'s** palm size, not the examiner\'s\n• Include all fingers held together\n• Mentally "stamp" the palm over burned areas and count\n\n**Limitations:** Interobserver variability is moderate. Most accurate when used consistently by one examiner. Digital apps (e.g., EasyTBSA) may improve accuracy.',
         citation: [20],
         next: 'burn-tbsa-result',
+        summary: 'Patient palm = 1% TBSA for scattered burns',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: FLUID RESUSCITATION
@@ -204,6 +223,7 @@ export const BURNS_NODES = [
             },
         ],
         citation: [2, 15, 18],
+        summary: 'Calculate from TIME OF BURN not ED arrival — LR, titrate to UOP',
     },
     {
         id: 'burn-fluids-severe',
@@ -226,6 +246,8 @@ export const BURNS_NODES = [
             },
         ],
         citation: [2, 15, 18],
+        summary: '>=40% TBSA: fluid creep risk — early colloid at 8-12h',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-rule-of-10',
@@ -247,6 +269,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'UOP target 0.5-1 mL/kg/hr. Adjust by 20% up or down based on UOP. Foley catheter required.',
         },
+        summary: '%TBSA x 10 = mL/hr LR — add 100/hr per 10kg over 80kg',
     },
     {
         id: 'burn-parkland',
@@ -276,6 +299,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'UOP target 0.5-1 mL/kg/hr (adults), 1-1.5 mL/kg/hr (peds). Titrate by 20%. Foley catheter required.',
         },
+        summary: '4mL x %TBSA x kg = 24h — half first 8h, half next 16h',
     },
     {
         id: 'burn-dsmc-moderate',
@@ -305,6 +329,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'UOP target 0.5-1.0 mL/kg/hr. Mandatory q1h nursing documentation. Adjust rate by 20% based on UOP.',
         },
+        summary: 'Dell-Seton: 2 mL/kg/% first 8h + colloid hour 8 — less creep',
     },
     {
         id: 'burn-dsmc-severe',
@@ -334,6 +359,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'UOP target 0.5-1.0 mL/kg/hr. Aggressive q1h titration. Watch for fluid creep signs (abdominal/orbital compartment).',
         },
+        summary: '>=40%: LR + FFP from start — replaces plasma proteins',
     },
     {
         id: 'burn-fluids-monitoring',
@@ -343,6 +369,8 @@ export const BURNS_NODES = [
         body: '**Urine output is the primary endpoint** for titrating burn resuscitation. All formulas are starting points — clinical response determines the actual rate.\n\n**UOP targets:**\n• Adults: **0.5-1.0 mL/kg/hr**\n• Children: **1.0-1.5 mL/kg/hr**\n• Electrical burns / myoglobinuria: **1.0-1.5 mL/kg/hr** (adults) to prevent renal tubular obstruction\n\n**Titration rules:**\n• UOP below target → increase rate by **20%** q1h\n• UOP above target → decrease rate by **20%** q1h\n• Do NOT bolus crystalloid to "catch up" — this drives fluid creep\n• If UOP remains <0.5 despite 150% predicted volume → consider colloid, vasopressors, or reassess TBSA\n\n**Fluid creep warning signs:**\n• Rising bladder pressures (>20 mmHg = intra-abdominal hypertension)\n• Increasing peak airway pressures in ventilated patients\n• Progressive extremity edema with loss of pulses\n• Orbital compartment syndrome (proptosis, elevated IOP)\n\n**Laboratory monitoring (q4-6h):**\n• BMP (sodium, potassium, bicarb)\n• Lactate (trending improvement = adequate resuscitation)\n• Hematocrit (rising Hct = hemoconcentration from inadequate resuscitation)\n• Glucose (especially pediatric patients)\n• Base deficit (trending)',
         citation: [2, 15, 18],
         next: 'burn-fluids-peds',
+        summary: 'UOP 0.5-1 mL/kg/hr — adjust 20%/hr, never bolus to catch up',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-fluids-peds',
@@ -371,6 +399,8 @@ export const BURNS_NODES = [
             },
             monitoring: 'UOP 1.0-1.5 mL/kg/hr. Glucose on arrival and q2-4h. D10 bolus 2-4 mL/kg if glucose <60.',
         },
+        summary: '<30kg: BOTH maintenance AND resuscitation fluids — glucose q2-4h',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: AIRWAY & INHALATION INJURY
@@ -393,6 +423,8 @@ export const BURNS_NODES = [
             },
         ],
         citation: [1, 8],
+        summary: 'Hard signs = intubate now — if doubt, intubate early',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-intubation',
@@ -421,6 +453,8 @@ export const BURNS_NODES = [
             },
             monitoring: 'End-tidal CO2, pulse oximetry, blood pressure. Verify ETT position with CXR.',
         },
+        summary: 'Largest ETT, ketamine — sux contraindicated after 24hrs',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-airway-soft',
@@ -430,6 +464,7 @@ export const BURNS_NODES = [
         body: '**Serial airway exams are mandatory** when soft signs are present without indication for immediate intubation.\n\n**Monitoring protocol:**\n• Re-examine airway **q30-60 minutes** for the first 6-12 hours\n• Direct visualization of oropharynx — assess for progressive edema\n• Voice quality changes (hoarseness, muffled voice)\n• Work of breathing, stridor, wheezing\n• Pulse oximetry (continuous) and serial ABGs\n\n**Peak edema occurs at 12-24 hours.** Patients may appear stable initially but deteriorate rapidly. Airway edema from fluid resuscitation compounds thermal edema.\n\n**Keep intubation equipment at bedside:**\n• Video laryngoscopy\n• Multiple ETT sizes\n• Bougie\n• Surgical airway kit\n• Suction\n\n**Head of bed at 30°** — reduces facial and airway edema.\n\n**Transition to intubation if ANY of:**\n• Progressive voice changes\n• New stridor\n• Increasing work of breathing\n• Worsening oropharyngeal edema on exam\n• Anticipated transport (intubate before transfer if any concern)',
         citation: [1, 8],
         next: 'burn-co-assess',
+        summary: 'Re-examine q30-60min — peak edema 12-24hrs, intubation kit ready',
     },
     {
         id: 'burn-co-assess',
@@ -453,6 +488,8 @@ export const BURNS_NODES = [
             },
         ],
         citation: [5, 6],
+        summary: 'Pulse ox UNRELIABLE — co-oximetry required, PaO2 appears normal',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-co-treatment',
@@ -481,6 +518,8 @@ export const BURNS_NODES = [
             },
             monitoring: 'Serial co-oximetry q2h until normalized. Continuous cardiac monitoring. Troponin, ECG.',
         },
+        summary: '100% O2 — half-life 90min vs 320 room air, HBO for LOC',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-co-mild',
@@ -501,6 +540,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'Co-oximetry q2h until normalized. Continuous cardiac monitoring. Serial neuro exams (orientation, cognition, gait).',
         },
+        summary: 'COHb <25%: O2 NRB >=6hrs — counsel delayed neuropsych syndrome',
     },
     {
         id: 'burn-cyanide',
@@ -520,6 +560,8 @@ export const BURNS_NODES = [
             },
         ],
         citation: [7, 10],
+        summary: 'Enclosed fire + lactate >8 + AMS = cyanide — do not wait for levels',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-cyanide-rx',
@@ -548,6 +590,8 @@ export const BURNS_NODES = [
             },
             monitoring: 'Lactate (should decrease with successful treatment). Hemodynamic status. Mental status improvement.',
         },
+        summary: 'Hydroxocobalamin 5g IV 15min — NO sodium nitrite with CO',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: ESCHAROTOMY
@@ -573,6 +617,7 @@ export const BURNS_NODES = [
             },
         ],
         citation: [11, 12],
+        summary: 'Circumferential deep = tourniquet — compartment syndrome 4-6hrs',
     },
     {
         id: 'burn-eschar-extremity',
@@ -582,6 +627,8 @@ export const BURNS_NODES = [
         body: '[Escharotomy Technique](#/info/burns-escharotomy)\n\n**The 6 P\'s of compartment syndrome** (though in burn eschar, pain may be absent due to nerve damage):\n• **Pain** — pain out of proportion, pain with passive stretch (unreliable in full-thickness)\n• **Pressure** — tense, firm compartment\n• **Paresthesias** — numbness, tingling (early sign)\n• **Pallor** — pale or cyanotic distal extremity\n• **Pulselessness** — LATE finding. Do not wait for this.\n• **Paralysis** — LATE finding indicating muscle ischemia\n\n**Objective measures:**\n• **Doppler ultrasound** — loss of arterial signal in digital arteries is the most reliable non-invasive indicator\n• **Pulse oximetry** — loss of plethysmographic waveform in a burned digit\n• **Compartment pressure** — >30 mmHg or within 30 mmHg of diastolic\n• **Capillary refill** — >3 seconds in burned tissue (difficult to assess)\n\n**Indications for escharotomy:**\n• Absent or diminishing distal pulses/Doppler signals\n• Progressive paresthesias or neurologic deficit\n• Compartment pressures >30 mmHg\n• Increasing pain (if sensation preserved)\n\n**Do NOT wait for pulselessness** — by the time pulses are lost, irreversible ischemia may have occurred.',
         citation: [11, 12, 13, 14],
         next: 'burn-eschar-technique',
+        summary: 'Do NOT wait pulselessness — absent Doppler = escharotomy now',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-eschar-technique',
@@ -592,6 +639,8 @@ export const BURNS_NODES = [
         images: [{ src: 'images/burns/burns-escharotomy-lines.png', alt: 'Escharotomy incision lines', caption: 'Incision lines with neurovascular structures to avoid' }],
         citation: [11, 12, 14, 21, 22],
         next: 'burn-transfer',
+        summary: 'Mid-axial incisions through eschar to subQ — avoid ulnar nerve',
+        skippable: true,
     },
     {
         id: 'burn-eschar-chest',
@@ -601,6 +650,8 @@ export const BURNS_NODES = [
         body: '[Escharotomy Technique](#/info/burns-escharotomy)\n\n**Circumferential chest burns restrict chest wall excursion**, leading to progressive respiratory failure. In ventilated patients, this manifests as rising peak airway pressures and decreasing tidal volumes.\n\n**Indications:**\n• Rising peak airway pressures (ventilated patients)\n• Decreased chest wall compliance\n• Hypoxia or hypercarbia despite adequate ventilator settings\n• Visible restriction of chest wall movement\n\n**Technique — bilateral anterior axillary line incisions:**\n1. **Bilateral vertical incisions** along the anterior axillary lines from the clavicle to the costal margin\n2. **Transverse connecting incision** along the costal margin (creating an "H" or clamshell pattern)\n3. For severe restriction, add a **transverse subclavicular incision** connecting the two vertical incisions\n4. Incise through eschar to subcutaneous fat — the chest wall should visibly expand\n5. Immediately reassess ventilation (tidal volumes, peak pressures, SpO2)\n\n**If abdomen is also involved:** Extend incisions inferiorly to the inguinal ligaments to decompress the abdominal wall — abdominal compartment syndrome from burn edema + massive fluid resuscitation.',
         citation: [11, 12, 21],
         next: 'burn-transfer',
+        summary: 'Anterior axillary incisions clavicle to costal margin',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-eschar-fasciotomy',
@@ -611,6 +662,7 @@ export const BURNS_NODES = [
         recommendation: 'Fasciotomy requires OR and surgical consultation. Indicated when escharotomy fails to restore perfusion, in electrical burns with deep compartment involvement, or when compartment pressures remain >30 mmHg post-escharotomy.',
         confidence: 'recommended',
         citation: [11, 12],
+        summary: 'Fasciotomy if escharotomy fails — especially electrical burns',
     },
     // =====================================================================
     // MODULE 6: CHEMICAL BURNS
@@ -645,6 +697,8 @@ export const BURNS_NODES = [
             },
         ],
         citation: [9, 19],
+        summary: 'Water >=20-30min — exception: elemental metals',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-chem-acid',
@@ -654,6 +708,7 @@ export const BURNS_NODES = [
         body: '**Acids cause coagulation necrosis** — proteins denature and form a coagulum that limits penetration depth. This is why acid burns are generally less destructive than alkali burns of equivalent concentration.\n\n**Treatment:**\n• **Copious water irrigation for 20-30 minutes** — begin immediately\n• **Do NOT attempt to neutralize** — exothermic reaction will cause additional thermal injury\n• Monitor wound pH with litmus paper — irrigate until tissue pH is **7.0-7.5**\n• Remove all contaminated clothing during irrigation\n\n**Specific acids:**\n• **Sulfuric acid (H2SO4):** Battery acid, drain cleaners. Exothermic on water contact — irrigate copiously despite heat generation\n• **Hydrochloric acid (HCl):** Pool chemicals, masonry. Standard irrigation protocol\n• **Nitric acid (HNO3):** Industrial. Yellow-stained tissue (xanthoproteic reaction). Standard irrigation\n• **Phenol (carbolic acid):** Industrial solvent. Poorly water-soluble — irrigate with low-molecular-weight PEG (polyethylene glycol) if available, otherwise copious water. Risk of systemic toxicity (seizures, cardiac dysrhythmias, hepatorenal failure)\n\n**Ocular acid exposure:** Irrigate with NS or balanced salt solution for at least 30 minutes. Check pH at 10-minute intervals. Emergency ophthalmology consult.',
         citation: [9, 19],
         next: 'burn-chem-wound-care',
+        summary: 'Coagulation necrosis — irrigate 20-30min, do NOT neutralize',
     },
     {
         id: 'burn-chem-alkali',
@@ -663,6 +718,8 @@ export const BURNS_NODES = [
         body: '**Alkali burns cause liquefaction necrosis — more dangerous and penetrating than acid burns.** Alkalis saponify fats and dissolve proteins, allowing progressive deep tissue penetration. The injury continues to deepen until the agent is completely removed.\n\n**Treatment:**\n• **Prolonged irrigation: 30-60+ minutes** (longer than acid burns)\n• Alkali binds to tissue — copious, prolonged irrigation is essential to wash out residual chemical\n• Monitor pH — irrigate until tissue pH reaches **7.0-7.5**\n• Multiple irrigation cycles may be needed — recheck pH 15 minutes after stopping\n\n**Specific alkalis:**\n• **Sodium hydroxide (NaOH/lye):** Oven cleaners, drain openers. Extremely destructive. Prolonged irrigation.\n• **Calcium hydroxide (cement/lime):** Construction workers. **Brush off dry cement FIRST**, then irrigate. Cement continues to burn while wet against skin. Chrome content can cause contact dermatitis.\n• **Ammonia (NH3):** Industrial, cleaning products. Highly volatile — inhalation injury risk. Irrigate eyes and skin copiously.\n• **Sodium hypochlorite (bleach):** Household concentration (3-6%) usually causes only irritation. Industrial concentration (10-15%) can cause significant burns.\n\n**Ocular alkali exposure is an EMERGENCY** — alkali penetrates rapidly through the cornea. Irrigate immediately and continuously for ≥30 min with NS. Emergency ophthalmology consult. Worse prognosis than acid exposure.',
         citation: [9, 19],
         next: 'burn-chem-wound-care',
+        summary: 'Liquefaction necrosis deeper — irrigate 30-60+ min',
+        safetyLevel: 'warning',
     },
     {
         id: 'burn-chem-hf',
@@ -691,6 +748,8 @@ export const BURNS_NODES = [
             },
             monitoring: 'Continuous cardiac monitoring (QT, QRS, bradycardia). Serial Ca, Mg, K q2-4h. Give IV calcium gluconate 10% if serum Ca <8 or symptomatic.',
         },
+        summary: 'HF binds Ca/Mg fatal hypocalcemia — calcium gluconate + cardiac monitor',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-chem-metals',
@@ -700,6 +759,8 @@ export const BURNS_NODES = [
         body: '**Elemental metals react violently with water** — standard irrigation can worsen the injury. Agent-specific management is critical.\n\n**Sodium (Na), Potassium (K), Lithium (Li):**\n• **WATER REACTIVE** — produces exothermic reaction, hydrogen gas (explosion risk), and alkali byproduct\n• **Step 1:** Cover with **mineral oil** to prevent further reaction with air moisture\n• **Step 2:** Mechanically remove all visible metal fragments with forceps while submerged in mineral oil\n• **Step 3:** Once ALL metal is removed, THEN irrigate copiously with water\n• Do NOT irrigate until metal is removed\n\n**White phosphorus:**\n• **Burns in air** — self-ignites when dry\n• **Keep wound SUBMERGED in water** or covered with saline-soaked dressings continuously\n• Remove visible particles with forceps under water — they will glow in a darkened room\n• **1% copper sulfate solution** can be applied briefly to aid identification (turns particles black) — limit exposure to prevent copper toxicity\n• Debridement under water immersion in OR\n• Risk of systemic phosphorus toxicity: hepatorenal failure, hypocalcemia\n\n**Magnesium:**\n• Burns intensely, reacts with water (produces hydrogen gas)\n• **Smother with sand, dry chemical, or Class D fire extinguisher**\n• Once burning stops, irrigate with copious water\n• Risk of systemic hypomagnesemia paradoxically low (metal form, not ionic)',
         citation: [9, 19],
         next: 'burn-chem-wound-care',
+        summary: 'Na/K/Li water-reactive — mineral oil, remove metal FIRST',
+        safetyLevel: 'critical',
     },
     {
         id: 'burn-chem-unknown',
@@ -709,6 +770,7 @@ export const BURNS_NODES = [
         body: '**When the chemical agent is unknown, default to copious water irrigation** — this is the safest approach for the vast majority of chemical exposures.\n\n**Immediate actions:**\n1. **PPE for providers** — double glove, gown, eye protection, N95 minimum. If vapor hazard suspected, move to well-ventilated area or use PAPR.\n2. **Remove all clothing** — bag and label for hazmat identification\n3. **Copious water irrigation for 30+ minutes** — assume the worst-case scenario until agent is identified\n4. **Monitor pH** of wound surface — continue irrigating until pH 7.0-7.5\n\n**Agent identification resources:**\n• **Poison Control: 1-800-222-1222** — 24/7, can assist with chemical identification and treatment guidance\n• SDS (Safety Data Sheets) — request from employer/workplace if occupational exposure\n• Container labels, if available\n• CHEMTREC: 1-800-424-9300 (hazmat transport emergencies)\n\n**The only time to withhold water:** If you strongly suspect elemental reactive metals (Na, K, Li) — these will be obvious as the metal reacts visibly with water. In all other cases, irrigate first and identify later.',
         citation: [9],
         next: 'burn-chem-wound-care',
+        summary: 'Default copious water — Poison Control 1-800-222-1222',
     },
     {
         id: 'burn-chem-wound-care',
@@ -718,6 +780,7 @@ export const BURNS_NODES = [
         body: '**After thorough decontamination, manage the chemical burn wound as you would a thermal burn of equivalent depth.**\n\n**Important considerations specific to chemical burns:**\n\n**Depth may be underestimated initially.** Chemical burns often appear superficial on presentation but progress significantly over **24-72 hours**, especially alkali burns. Reassess depth at 48-72h before final wound management decisions.\n\n**Document the agent, concentration, duration of contact, and area involved.** This information is critical for burn center consultation and ongoing management.\n\n**Wound assessment after decontamination:**\n• Assess burn depth using same criteria as thermal burns\n• Calculate TBSA (same rules — only count partial/full thickness)\n• If TBSA meets resuscitation threshold → fluid resuscitation as per thermal burn protocols\n\n**Systemic toxicity screen** — some chemicals have significant systemic effects beyond the local burn:\n• HF acid → hypocalcemia, hypomagnesemia, hyperkalemia\n• Phenol → hepatorenal toxicity, seizures, cardiac dysrhythmias\n• Phosphorus → hepatorenal failure, hypocalcemia\n• Chromic acid → renal failure\n• Formic acid → metabolic acidosis, hemolysis\n\nProceed to wound care and dressing selection.',
         citation: [9, 19],
         next: 'burn-wound-care',
+        summary: 'After decontamination = thermal burn protocol — depth progresses 24-72h',
     },
     // =====================================================================
     // MODULE 7: WOUND CARE & DISPOSITION
@@ -730,6 +793,7 @@ export const BURNS_NODES = [
         body: '[Burn Dressing Guide](#/info/burns-dressing-guide)\n\n**Step 1 — Cool the burn:** Apply cool (not ice-cold) running water for **20 minutes** within the first 3 hours of injury. This is the **single most effective first aid measure** — reduces pain, limits burn depth progression, and improves outcomes at 30 days. Do NOT use ice (causes vasoconstriction and frostbite risk).\n\n**Step 2 — Clean the wound:**\n• Gentle irrigation with NS or clean lukewarm water\n• Remove loose debris and necrotic tissue\n• Debride ruptured blisters — leave intact blisters that are small, tense, and not in a functional area\n• Large, flaccid, or contaminated blisters should be debrided\n• Gentle scrub with gauze if needed\n\n**Step 3 — Avoid harmful home remedies:**\n• **No butter, toothpaste, egg whites, or "folk" remedies** — these trap heat and introduce bacteria\n• **No ice application** — causes vasoconstriction and secondary injury\n• **No adhesive bandages directly on burns** — use nonadherent dressings only\n\n**Tetanus prophylaxis:** Update if >5 years since last dose or unknown status. Tdap preferred if not previously received.',
         citation: [3, 4, 16, 17],
         next: 'burn-dressings',
+        summary: 'Cool water 20min within 3hrs — no ice, no butter, debride blisters',
     },
     {
         id: 'burn-dressings',
@@ -758,6 +822,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'Daily wound assessment. Watch for signs of infection (increasing erythema, purulence, fever).',
         },
+        summary: 'Bacitracin superficial, silver foam deep partial, SSD avoid face',
     },
     {
         id: 'burn-pain',
@@ -786,6 +851,7 @@ export const BURNS_NODES = [
             },
             monitoring: 'Pain scores. Respiratory rate and sedation level with opioids. Consider ketamine 1-2 mg/kg IV for procedural sedation.',
         },
+        summary: 'Multimodal: APAP + NSAID base, opioids moderate-severe',
     },
     {
         id: 'burn-transfer',
@@ -795,6 +861,7 @@ export const BURNS_NODES = [
         body: '**American Burn Association (ABA) criteria for burn center referral:**\n\n1. **Partial thickness burns >10% TBSA**\n2. **Burns involving face, hands, feet, genitalia, perineum, or major joints**\n3. **Full thickness (3rd degree) burns of any size**\n4. **Electrical burns** (including lightning)\n5. **Chemical burns**\n6. **Inhalation injury**\n7. **Burns in patients with significant comorbidities** (diabetes, immunosuppression, etc.)\n8. **Burns with concomitant trauma** where the burn is the greater risk\n9. **Burns in children** at hospitals without pediatric burn capability\n10. **Burns requiring social, emotional, or rehabilitative intervention** (suspected abuse, psychiatric, long-term rehab)\n\n**Contact the burn center early** — even before all initial assessment is complete. Early communication facilitates bed availability and transport coordination.\n\n**Pre-transfer management:**\n• Continue IV fluid resuscitation — do NOT stop or reduce during transport\n• **Clean, dry dressings** for transport (no wet dressings — hypothermia risk during transport)\n• Warming measures — warm blankets, warm IV fluids, warm ambulance\n• Elevate burned extremities above heart level\n• Document all medications, fluids given, urine output, and interventions\n• Send copies of labs, imaging, and clinical notes',
         citation: [2, 16],
         next: 'burn-disposition',
+        summary: 'ABA: >20% TBSA, full >5%, face/hands/feet/genitalia/joints',
     },
     {
         id: 'burn-disposition',
@@ -816,6 +883,7 @@ export const BURNS_NODES = [
                 next: 'burn-discharge-result',
             },
         ],
+        summary: 'Admit: >=10% TBSA, inhalation, electrical, age extremes, abuse',
     },
     {
         id: 'burn-transfer-result',

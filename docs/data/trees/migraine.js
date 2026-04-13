@@ -20,6 +20,7 @@ export const MIGRAINE_NODES = [
             { id: 'ottawa-sah', label: 'Ottawa SAH Rule' },
         ],
         next: 'migraine-red-flags',
+        summary: 'Secondary causes FIRST — SNNOOP10 red flags every headache',
     },
     {
         id: 'migraine-red-flags',
@@ -41,6 +42,7 @@ export const MIGRAINE_NODES = [
                 next: 'migraine-diagnosis',
             },
         ],
+        summary: 'Thunderclap, worst, deficit, fever+stiff = workup first',
     },
     {
         id: 'migraine-secondary-workup',
@@ -50,6 +52,7 @@ export const MIGRAINE_NODES = [
         body: '**Red flag present — evaluate for dangerous secondary causes:**\n\n**Thunderclap headache:**\n- CT head non-contrast (sens ~95% for SAH within 6h)\n- If CT negative + high suspicion → LP (xanthochromia)\n- Consider CTA for aneurysm, RCVS, CVT\n\n**Fever + neck stiffness:**\n- LP for meningitis (unless contraindicated)\n- Blood cultures, empiric antibiotics if delayed LP\n\n**New neuro deficit:**\n- CT head → MRI if CT negative\n- Consider stroke workup\n\n**Age >50, new headache:**\n- ESR, CRP for giant cell arteritis (GCA)\n- Temporal artery biopsy if high suspicion\n\n**Papilledema:**\n- CT/MRI for mass, hydrocephalus\n- LP for opening pressure (IIH)\n\n**If workup negative** → return to migraine pathway.\n\n[SAH Consult](#/consult/sah) | [Meningitis Consult](#/consult/meningitis) | [Stroke Consult](#/consult/stroke)',
         citation: [1, 2],
         next: 'migraine-diagnosis',
+        summary: 'Thunderclap CT 6hrs 95% SAH — negative = LP xanthochromia',
     },
     // =====================================================================
     // MODULE 2: DIAGNOSIS
@@ -81,6 +84,7 @@ export const MIGRAINE_NODES = [
                 next: 'migraine-other-primary',
             },
         ],
+        summary: 'ICHD-3: >=5 attacks, 4-72h, 2/4 features + N/V or phono',
     },
     {
         id: 'migraine-other-primary',
@@ -90,6 +94,8 @@ export const MIGRAINE_NODES = [
         body: '**If not migraine, consider:**\n\n**Tension-Type Headache:**\n- Bilateral, pressing/tightening (non-pulsating)\n- Mild-moderate intensity\n- NOT aggravated by routine activity\n- No nausea/vomiting\n- Treatment: NSAIDs, acetaminophen\n\n**Cluster Headache (Trigeminal Autonomic Cephalalgia):**\n- Severe unilateral orbital/supraorbital pain\n- Duration 15-180 min, up to 8/day\n- Ipsilateral autonomic features (tearing, rhinorrhea, ptosis, miosis)\n- Treatment: 100% O₂ 12-15 L/min x 15 min, sumatriptan SC\n\n**Medication Overuse Headache:**\n- Headache ≥15 days/month\n- Regular overuse of acute headache meds ≥3 months\n- Treatment: Withdraw offending medication, bridge therapy\n\nIf atypical features → reassess for secondary causes.',
         citation: [1],
         next: 'migraine-severity',
+        summary: 'Tension bilateral, cluster orbital autonomic',
+        skippable: true,
     },
     {
         id: 'migraine-severity',
@@ -122,6 +128,7 @@ export const MIGRAINE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Mild oral, mod/severe IV cocktail, status >72hrs',
     },
     // =====================================================================
     // MODULE 3: FIRST-LINE TREATMENT
@@ -161,6 +168,7 @@ export const MIGRAINE_NODES = [
             monitoring: 'Reassess in 1-2 hours; escalate to parenteral therapy if no improvement',
         },
         next: 'migraine-response-check',
+        summary: 'NSAID + triptan best — triptan CI in CAD/stroke',
     },
     {
         id: 'migraine-first-line',
@@ -200,6 +208,7 @@ export const MIGRAINE_NODES = [
             monitoring: 'Reassess at 30-60 min; monitor for akathisia, dystonia, sedation',
         },
         next: 'migraine-response-check',
+        summary: 'Diphenhydramine FIRST, prochlorperazine 15min + ketorolac',
     },
     {
         id: 'migraine-status',
@@ -236,6 +245,7 @@ export const MIGRAINE_NODES = [
             monitoring: 'Monitor for DHE side effects: nausea, chest tightness, leg cramps; telemetry if DHE protocol',
         },
         next: 'migraine-response-check',
+        summary: 'Status >72h: hydration + cocktail + dexa + consider DHE',
     },
     {
         id: 'migraine-response-check',
@@ -262,6 +272,7 @@ export const MIGRAINE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: '30-60min: good=DC, none=rescue or nerve block',
     },
     // =====================================================================
     // MODULE 4: RESCUE THERAPY
@@ -295,6 +306,7 @@ export const MIGRAINE_NODES = [
                 next: 'migraine-spg-block',
             },
         ],
+        summary: 'GON block Level A, SC triptan B — AVOID opioids',
     },
     {
         id: 'migraine-triptan-rescue',
@@ -331,6 +343,7 @@ export const MIGRAINE_NODES = [
             monitoring: 'Observe for chest tightness (usually benign triptan sensation); contraindicated if vascular disease',
         },
         next: 'migraine-response-rescue',
+        summary: 'Sumatriptan 6mg SC — CI CAD, stroke, HTN',
     },
     {
         id: 'migraine-valproate',
@@ -391,6 +404,7 @@ export const MIGRAINE_NODES = [
             monitoring: 'Observe 15 min post-procedure; watch for vasovagal, local hematoma; reassess pain at 30 min',
         },
         next: 'migraine-response-rescue',
+        summary: '3mL bupivacaine 0.5% occipital — no systemic effects',
     },
     {
         id: 'migraine-spg-block',
@@ -493,6 +507,7 @@ export const MIGRAINE_NODES = [
             },
             monitoring: 'Return if thunderclap headache, fever/neck stiffness, neuro changes, or significantly different headache pattern',
         },
+        summary: 'Dexa 10mg IV before DC — NNT=9 recurrence prevention',
     },
 ];
 export const MIGRAINE_NODE_COUNT = MIGRAINE_NODES.length;

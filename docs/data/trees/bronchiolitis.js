@@ -15,6 +15,7 @@ export const BRONCHIOLITIS_NODES = [
         images: [{ src: 'images/bronchiolitis/bronchiolitis-cxr.jpg', alt: 'Infant AP chest X-ray showing bilateral hyperinflation, flattened diaphragms, and perihilar peribronchial streaking in bronchiolitis', caption: 'Bronchiolitis CXR — hyperinflation and peribronchial thickening. CXR is NOT routinely indicated but shows classic radiographic changes when ordered. (CC BY 2.0, Di Nardo et al.)' }],
         citation: [1, 2],
         next: 'bronch-exclude',
+        summary: 'Age 28d-24mo, first wheeze, increased WOB — CXR and albuterol NOT indicated',
     },
     {
         id: 'bronch-exclude',
@@ -36,6 +37,7 @@ export const BRONCHIOLITIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Exclude CHD, chronic lung, immunodeficiency, recurrent wheeze from pathway',
     },
     {
         id: 'bronch-excluded',
@@ -46,6 +48,7 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'Individualized management required. Consider subspecialty consult.',
         confidence: 'recommended',
         citation: [1],
+        summary: 'Comorbidities need individualized management — not standard pathway',
     },
     // =====================================================================
     // MODULE 2: SEVERITY & INITIAL INTERVENTIONS
@@ -76,6 +79,7 @@ export const BRONCHIOLITIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'BAS calculator before and after every intervention for objective scoring',
     },
     {
         id: 'bronch-mild',
@@ -85,6 +89,7 @@ export const BRONCHIOLITIS_NODES = [
         body: '**Interventions:**\n\u2022 Nasal suction using nasal aspirator (gentle, superficial \u2014 **NOT** deep suction beyond nasopharynx)\n\u2022 Reposition for comfort\n\u2022 Assess hydration status and encourage PO fluids\n\n**Document BAS score before and after interventions.**\n\nObserve for 1\u20132 hours, then reassess.\n\nSee [NOT Recommended Interventions](#/info/bronch-not-recommended).',
         citation: [1, 2],
         next: 'bronch-mild-reassess',
+        summary: 'Gentle nasal suction + PO fluids + observe 1-2hrs — no meds needed',
     },
     {
         id: 'bronch-moderate',
@@ -94,6 +99,7 @@ export const BRONCHIOLITIS_NODES = [
         body: '**NOTIFY PROVIDER**\n\n**Interventions:**\n\u2022 Nasal suction using nasal aspirator\n\u2022 Rehydration (IV if unable to tolerate PO)\n\u2022 Supplemental O\u2082 via nasal cannula or simple mask\n\u2022 Target SpO\u2082 \u226590% awake or \u226588% asleep\n\n**Document BAS score before and after interventions.**\n\nSee [NOT Recommended Interventions](#/info/bronch-not-recommended).',
         citation: [1, 2],
         next: 'bronch-resp-check',
+        summary: 'Notify provider — suction, O2, IV if poor PO, target SpO2 >=90%',
     },
     {
         id: 'bronch-severe',
@@ -103,6 +109,8 @@ export const BRONCHIOLITIS_NODES = [
         body: '**NOTIFY PROVIDER IMMEDIATELY**\n\n**Interventions:**\n\u2022 Nasal suction using nasal aspirator\n\u2022 Supplemental O\u2082 \u2014 prepare for HFNC initiation\n\u2022 Assess dehydration \u2014 IV fluid resuscitation if needed\n\u2022 Continuous monitoring\n\u2022 Place PIV if not already done\n\nProceed directly to HFNC initiation.',
         citation: [1, 2, 3],
         next: 'bronch-hfnc-init',
+        summary: 'HFNC immediately — IV access, continuous monitoring, notify stat',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 3: RESPONSE & RESPIRATORY SUPPORT
@@ -126,6 +134,7 @@ export const BRONCHIOLITIS_NODES = [
                 next: 'bronch-moderate',
             },
         ],
+        summary: 'Reassess 1-2hrs — SpO2 >=90% RA and feeding well qualifies discharge',
     },
     {
         id: 'bronch-resp-check',
@@ -152,6 +161,7 @@ export const BRONCHIOLITIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'After suction + O2 — discharge, NC admit, or escalate HFNC',
     },
     {
         id: 'bronch-hfnc-init',
@@ -161,6 +171,7 @@ export const BRONCHIOLITIS_NODES = [
         body: '**Starting Flow Rates:**\n\u2022 <7 kg: **4 LPM**\n\u2022 \u22657 kg: **6 LPM**\n\nStart FiO\u2082 at 21%, titrate to maintain SpO\u2082 \u226590%.\n\nPatient must be watched for at least **30 minutes** in the ED after starting HFNC.\n\nContinuous pulse oximetry required.\n\n**Feeding:** NPO for ~1 hour to assess response.\n\nSee [HFNC Protocol Reference](#/info/bronch-hfnc-protocol) for full details including contraindications and max flow rates.',
         citation: [2, 3],
         next: 'bronch-hfnc-assess',
+        summary: 'HFNC: <7kg 4 LPM, >=7kg 6 LPM — FiO2 21% titrate SpO2 >=90%',
     },
     {
         id: 'bronch-hfnc-assess',
@@ -183,6 +194,7 @@ export const BRONCHIOLITIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'BAS q15min on HFNC — suction first if >=9 then reassess',
     },
     {
         id: 'bronch-hfnc-stable',
@@ -192,6 +204,7 @@ export const BRONCHIOLITIS_NODES = [
         body: '**Monitoring:**\n\u2022 Continuous pulse oximetry\n\u2022 BAS Q4h or per PEWS score\n\u2022 Document HR, RR, pulse ox\n\u2022 Suction PRN + BAS Q4h\n\n**Feeding:**\n\u2022 Mild BAS \u2192 May resume PO (first feed observed by staff)\n\u2022 Moderate to severe BAS \u2192 Consider NG feeds\n\nMust be **stable for \u22654 hours** on maintenance phase before weaning.\n\nSee [HFNC Weaning Protocol](#/info/bronch-hfnc-weaning) and [Feeding Guidelines](#/info/bronch-feeding).',
         citation: [3],
         next: 'bronch-wean-check',
+        summary: 'Stable HFNC: monitoring, BAS q4h, must be stable >=4hrs before wean',
     },
     {
         id: 'bronch-hfnc-escalate',
@@ -219,6 +232,8 @@ export const BRONCHIOLITIS_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Increase 2 LPM if not max — PICU if worsening >60min or apnea',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: DISPOSITION
@@ -242,6 +257,7 @@ export const BRONCHIOLITIS_NODES = [
                 next: 'bronch-hfnc-stable',
             },
         ],
+        summary: 'Stable >=4hrs HFNC maintenance required before wean attempt',
     },
     {
         id: 'bronch-ed-dc',
@@ -252,6 +268,7 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'Discharge with education. Parents should demonstrate nasal suction technique. Follow up with PCP in 1\u20132 days.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Discharge: SpO2 >=90% RA, RR <60, feeding well, parents suction demo',
     },
     {
         id: 'bronch-admit-acu',
@@ -262,6 +279,7 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'Admit to acute care unit. Continue supportive care. Wean HFNC when stable \u22654 hours.',
         confidence: 'recommended',
         citation: [1, 2, 3],
+        summary: 'Admit ongoing O2/HFNC — BAS q4h, suction PRN, feeding assessment',
     },
     {
         id: 'bronch-admit-high',
@@ -272,6 +290,7 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'Admit to high acuity unit. Continuous monitoring. Reassess Q15min. Escalate to PICU if worsening.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'High acuity — worsening despite flow increases, lower PICU threshold',
     },
     {
         id: 'bronch-picu',
@@ -282,6 +301,8 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'PICU admission or transfer. Critical care consult immediately.',
         confidence: 'definitive',
         citation: [1, 2, 3],
+        summary: 'PICU: worsening >60min, apnea, PPV, FiO2 >50%, severe dehydration',
+        safetyLevel: 'critical',
     },
     {
         id: 'bronch-inpt-dc',
@@ -292,6 +313,7 @@ export const BRONCHIOLITIS_NODES = [
         recommendation: 'Discharge when SpO\u2082 \u226590% on room air for \u22652 continuous hours, feeding adequately, and parents confident in home care.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Inpatient DC: SpO2 >=90% RA >=2 continuous hrs, RR <60, PO OK',
     },
 ];
 export const BRONCHIOLITIS_NODE_COUNT = BRONCHIOLITIS_NODES.length;

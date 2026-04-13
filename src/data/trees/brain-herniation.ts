@@ -41,6 +41,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hern-icp', label: 'ICP Calc' },
     ],
+    summary: 'Anisocoria + altered consciousness = assume herniation — treat before CT',
+    safetyLevel: 'critical',
   },
 
   {
@@ -51,6 +53,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Immediate Actions (parallel, not sequential):**\n\n**1. AIRWAY**\n• Intubate if GCS ≤8\n• Avoid hypoxia (SaO2 >95%)\n• Avoid hypotension during RSI\n\n**2. HYPEROSMOLAR THERAPY (choose one)**\n• [Mannitol 20%](#/drug/mannitol/herniation) **1 g/kg IV** over 15-20 min\n• [Hypertonic saline 3%](#/drug/hypertonic-saline/herniation) **250-500 mL IV** bolus\n\n**3. POSITIONING**\n• Head of bed **30 degrees**\n• Head **midline** (no rotation)\n• Loosen cervical collar if present\n\n**4. HYPERVENTILATION (temporizing)**\n• Target PaCO2 **32-35 mmHg**\n• **Maximum 2 hours** — causes ischemia if prolonged\n• Bridge to definitive therapy only\n\n**5. CALL NEUROSURGERY STAT**\n• While doing above interventions\n• Prep for emergent CT and possible OR\n\n**6. BLOOD PRESSURE**\n• Target SBP >100-110 mmHg\n• Avoid hypotension aggressively [1][3][4]',
     citation: [1, 3, 4],
     next: 'hern-osmolar',
+    summary: 'Parallel: intubate, osmolar therapy, HOB 30, hyperventilate, call neurosurgery',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -70,6 +74,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       { label: 'Proceed to management', description: 'Skip to treatment', next: 'hern-osmolar' },
     ],
     citation: [1, 2],
+    summary: 'Five herniation types — uncal most common trauma, tonsillar most fatal',
+    skippable: true,
   },
 
   {
@@ -80,6 +86,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Most Common Herniation Type**\n\n**Mechanism:**\n• Temporal lobe uncus herniates through tentorial notch\n• Compresses CN III and midbrain\n\n**Classic Progression:**\n\n**Stage 1 — Early:**\n• Ipsilateral pupil dilation (CN III compression)\n• May be subtle initially\n• Consciousness may be preserved\n\n**Stage 2 — Progressive:**\n• Pupil becomes fixed and dilated\n• "Down and out" eye position\n• Ptosis\n• Contralateral hemiparesis\n\n**Stage 3 — Late:**\n• Bilateral pupil dilation\n• Decerebrate posturing\n• Loss of consciousness\n• Respiratory failure\n\n**Kernohan Notch Phenomenon:**\n• Ipsilateral hemiparesis (false localizing sign)\n• Contralateral cerebral peduncle compressed against opposite tentorial edge\n\n**Common Causes:**\n• Epidural hematoma\n• Subdural hematoma\n• Temporal lobe mass/hemorrhage [1][2]',
     citation: [1, 2],
     next: 'hern-osmolar',
+    summary: 'Ipsilateral dilated pupil to bilateral — Kernohan notch false localizing',
+    skippable: true,
   },
 
   {
@@ -90,6 +98,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Bilateral Descent Through Tentorial Notch**\n\n**Mechanism:**\n• Diffuse bilateral cerebral edema\n• Bilateral mass effect\n• Diencephalon/midbrain descends centrally\n\n**Classic Progression:**\n\n**Early (Diencephalic):**\n• Altered consciousness\n• Small, reactive pupils (bilateral)\n• Cheyne-Stokes respirations\n• Decorticate posturing\n\n**Late (Midbrain/Pons):**\n• Midposition, fixed pupils\n• Decerebrate posturing\n• Central neurogenic hyperventilation\n\n**Terminal (Medullary):**\n• Dilated, fixed pupils\n• Flaccid paralysis\n• Ataxic/agonal respirations\n• Cardiovascular collapse\n\n**Duret Hemorrhage:**\n• Pontine artery rupture from downward pressure\n• Usually fatal\n• Appears as midbrain/pons hemorrhage on CT\n\n**Common Causes:**\n• Diffuse cerebral edema\n• Large frontal/parietal masses\n• Hydrocephalus [1][2]',
     citation: [1, 2],
     next: 'hern-osmolar',
+    summary: 'Bilateral small pupils then midposition fixed — Duret hemorrhage fatal',
+    skippable: true,
   },
 
   {
@@ -103,6 +113,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       { id: 'hern-cushing', label: 'Cushing Check' },
     ],
     next: 'hern-osmolar',
+    summary: 'Cushing triad = imminent medullary compression — HTN + brady + irregular resp',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -117,6 +129,9 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Non-contrast CT Head is First-Line**\n\n**Midline Shift (MLS):**\n\n| Shift | Significance |\n|-------|-------------|\n| 0-3 mm | Normal/minimal |\n| 3-5 mm | Concerning — close monitoring |\n| **>5 mm** | **CRITICAL — emergent neurosurgery** |\n| >11 mm (at IVF) | Strongest predictor of herniation (OR 10) |\n\n**Other Critical CT Signs:**\n\n| Finding | Implication |\n|---------|-------------|\n| Basal cistern effacement | ICP critically elevated |\n| Hematoma >60 mL | High herniation risk |\n| Hydrocephalus | May need emergent EVD |\n| Sulcal effacement | Diffuse edema |\n| Uncal displacement | Active uncal herniation |\n| Tonsils below FM | Tonsillar herniation |\n| Duret hemorrhage | Often fatal — midbrain bleed |\n\n**Caveat:** ~1 in 1500 neurologically normal patients have imaging signs of herniation. Always correlate with clinical exam! [5][6]',
     citation: [5, 6],
     next: 'hern-imaging-findings',
+    summary: 'Midline shift >5mm CT = neurosurgery stat for emergent evacuation',
+    skippable: true,
+    safetyLevel: 'critical',
   },
 
   {
@@ -131,6 +146,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       { label: 'Minimal/no mass effect', description: 'Reassuring CT', next: 'hern-monitoring' },
     ],
     citation: [5, 6],
+    summary: 'CT surgical vs medical — MLS >5mm or hematoma >60mL needs OR',
   },
 
   // =====================================================================
@@ -153,6 +169,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       { id: 'hern-mannitol-dose', label: 'Mannitol Dose' },
       { id: 'hern-hts-dose', label: 'HTS Dose' },
     ],
+    summary: 'Mannitol 1g/kg or 3% HTS 250mL — HTS preferred if hypotensive',
   },
 
   {
@@ -175,6 +192,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       monitoring: 'Osmolarity q6h, urine output, BP, pupils/motor exam q15-30min. Hold if serum osm >320 mOsm/L.',
     },
     next: 'hern-positioning',
+    summary: 'Mannitol 1g/kg IV 15-20min — hold if serum osm >320 or hypotensive',
   },
 
   {
@@ -197,6 +215,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
       monitoring: 'Serum Na q2-4h (target 145-155), pupils/motor exam q15-30min. Watch for hyperchloremic acidosis with repeated doses.',
     },
     next: 'hern-positioning',
+    summary: '3% HTS 250-500mL bolus — target Na 145-155 for ICP control',
   },
 
   {
@@ -207,6 +226,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Simple Interventions That Reduce ICP:**\n\n**Head Position:**\n• **Head of bed 30 degrees** — improves venous drainage\n• **Head midline** — avoid neck rotation (compresses jugular)\n• Loosen cervical collar if present (impedes venous outflow)\n\n**Oxygenation:**\n• Maintain **SaO2 >95%**\n• Target **PaO2 >80 mmHg**\n• Hypoxia worsens cerebral edema\n\n**Ventilation:**\n• **Normocapnia** (PaCO2 35-45) when stable\n• Hyperventilation only for acute herniation (see next)\n\n**Temperature:**\n• Treat fever aggressively\n• Target normothermia (36-37°C)\n• Hyperthermia increases metabolic demand\n\n**Sedation (if intubated):**\n• Adequate sedation/analgesia\n• Avoid coughing, straining\n• Consider paralysis if ICP refractory\n\n**Blood Pressure:**\n• Avoid hypotension\n• Target SBP >100-110 mmHg\n• CPP = MAP - ICP (goal CPP >60) [3][7]',
     citation: [3, 7],
     next: 'hern-hypervent',
+    summary: 'HOB 30, head midline, loosen C-collar — simple interventions reduce ICP',
   },
 
   {
@@ -217,6 +237,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**TEMPORIZING MEASURE ONLY**\n\n**When to Use:**\n• Acute herniation with clinical signs\n• Bridge to surgery or osmolar therapy\n• Impending herniation despite other interventions\n\n**Target:**\n• **PaCO2 32-35 mmHg** (mild hypocapnia)\n• Do NOT go below 25 mmHg\n\n**Duration:**\n• **Maximum 2 hours**\n• Shorter is better\n\n**Why It\'s Dangerous Long-Term:**\n• Causes cerebral vasoconstriction\n• Reduces cerebral blood flow\n• Leads to cerebral **ischemia** if prolonged\n• Effect wanes as brain adapts (rebound ICP elevation)\n\n**When NOT to Use:**\n• Prophylactically\n• First 24 hours post-injury (unless herniation)\n• As primary/sustained therapy\n\n**Key Point:**\n• Hyperventilation is a **BRIDGE** — not a destination\n• Must be weaned once definitive therapy initiated [3][7][8]',
     citation: [3, 7, 8],
     next: 'hern-bp-targets',
+    summary: 'PaCO2 32-35 BRIDGE ONLY max 2hrs — prolonged causes ischemia',
+    safetyLevel: 'warning',
   },
 
   {
@@ -227,6 +249,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Avoid Hypotension — It Kills Brain Cells**\n\n**Emergency Phase (ED) Targets:**\n\n| Age | Minimum SBP |\n|-----|-------------|\n| 15-49 years | >110 mmHg |\n| 50-69 years | >100 mmHg |\n| >70 years | >110 mmHg |\n\n**ICU Phase (with ICP monitoring):**\n• Target **CPP 60-70 mmHg**\n• CPP = MAP - ICP\n• If ICP unknown, use MAP >80 mmHg\n\n**Why BP Matters:**\n• Single episode of SBP <90 = doubles mortality\n• Cerebral autoregulation impaired in TBI\n• Brain perfusion depends on adequate MAP\n\n**Vasopressors if Needed:**\n• [Norepinephrine](#/drug/norepinephrine/neuro) preferred\n• Avoid pure α-agonists if bradycardic\n• Target MAP, not just SBP\n\n**Caution:**\n• Don\'t overcorrect — HTN may be Cushing response\n• Treat underlying cause (herniation) rather than just lowering BP [7][9]',
     citation: [7, 9],
     next: 'hern-surgery',
+    summary: 'Single SBP <90 doubles mortality — maintain MAP >80, CPP >60',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -241,6 +265,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**CALL NEUROSURGERY STAT For:**\n\n**Imaging Indications:**\n• Midline shift >5 mm\n• Epidural hematoma with any mass effect\n• Subdural hematoma >10 mm or MLS >5 mm\n• Cerebellar hemorrhage >3 cm\n• Obstructive hydrocephalus (may need EVD)\n• Depressed skull fracture\n\n**Clinical Indications:**\n• Anisocoria + altered consciousness\n• Cushing triad\n• New/progressive posturing\n• Rapid neurological decline\n• GCS ≤8 with surgical lesion\n\n**Surgical Options:**\n\n| Procedure | Indication |\n|-----------|------------|\n| **Craniotomy** | Hematoma evacuation |\n| **EVD** | Hydrocephalus, ICP monitoring |\n| **Decompressive craniectomy** | Refractory ICP, malignant edema |\n\n**Decompressive Craniectomy Criteria:**\n• Refractory ICP >40 mmHg despite maximal medical therapy\n• Age <60 (better outcomes)\n• Within 24-48h of injury for best results\n• Team decision — reduces mortality but may not improve function [6][10]',
     recommendation: 'Emergent neurosurgery consultation. Prep for OR. Continue ICP management while awaiting surgery. EVD if hydrocephalus.',
     citation: [6, 10],
+    summary: 'MLS >5mm, EDH mass effect, SDH >10mm, cerebellar >3cm = OR',
   },
 
   // =====================================================================
@@ -255,6 +280,7 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**When to Place ICP Monitor/EVD:**\n\n**GCS ≤8 + Abnormal CT:**\n• Hematoma, contusion, edema\n• Herniation signs\n• Basal cistern compression\n\n**GCS ≤8 + Normal CT if ≥2 of:**\n• Age >40 years\n• Motor posturing\n• SBP <90 mmHg\n\n**Other Indications:**\n• Hydrocephalus (EVD for drainage + monitoring)\n• SAH with poor grade\n• ICH with intraventricular extension\n• Post-craniotomy with swelling\n\n**Treatment Thresholds:**\n\n| ICP | Action |\n|-----|--------|\n| >20-22 mmHg | Initiate tier 1 therapy |\n| >25-30 mmHg | Escalate therapy |\n| >40 mmHg | Consider decompressive craniectomy |\n\n**CPP Goal:** >60 mmHg (60-70 optimal) [7][9]',
     citation: [7, 9],
     next: 'hern-reassess',
+    summary: 'ICP monitor GCS <=8 + abnormal CT — treat >20-22, craniectomy >40',
   },
 
   {
@@ -265,6 +291,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**After Each Intervention, Reassess in 15-30 min:**\n\n**Pupillary Exam:**\n• Size, reactivity\n• Anisocoria improving or worsening?\n• Document with pupillometer if available\n\n**Motor Response:**\n• GCS motor component\n• Posturing type (decorticate → decerebrate = worsening)\n• Laterality changes\n\n**Vital Signs:**\n• BP trend (Cushing response?)\n• Heart rate\n• Respiratory pattern\n\n**ICP (if monitored):**\n• Absolute value\n• Trend\n• Waveform (A-waves = bad)\n• CPP calculation\n\n**Repeat Imaging If:**\n• Clinical deterioration\n• No improvement with treatment\n• New neurological findings\n• Pre-operative planning\n\n**Document Everything:**\n• Time of exam\n• Pupil size/reactivity\n• GCS breakdown\n• Interventions given and timing [1][7]',
     citation: [1, 7],
     next: 'hern-prognosis',
+    summary: 'Pupils and motor q15-30min after each intervention — document trend',
+    skippable: true,
   },
 
   {
@@ -275,6 +303,8 @@ export const BRAIN_HERNIATION_NODES: DecisionNode[] = [
     body: '**Poor Prognostic Signs:**\n• Bilateral fixed and dilated pupils\n• GCS 3 with loss of brainstem reflexes\n• Duret hemorrhage on CT\n• Age >65 with severe TBI\n• Refractory ICP despite maximal therapy\n\n**When to Discuss Goals:**\n• Persistent herniation despite treatment\n• Brainstem reflexes absent\n• Family present and stable\n\n**Brain Death Evaluation:**\n• Clinical exam for brainstem reflexes\n• Apnea test\n• Confirmatory testing if needed\n• Follow institutional protocol\n\n**Key Points:**\n• Early aggressive treatment = best chance\n• Age and initial GCS are strong predictors\n• Decompressive craniectomy saves lives but may not restore function\n• Family communication is critical\n• Involve palliative care early if prognosis poor [1][10]',
     citation: [1, 10],
     next: 'hern-start',
+    summary: 'Bilateral fixed + GCS 3 + lost brainstem reflexes = poor prognosis',
+    skippable: true,
   },
 
 ];

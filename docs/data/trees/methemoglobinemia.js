@@ -24,6 +24,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { label: 'Severe / Critical', description: 'Seizures, coma, arrhythmias, cardiovascular collapse', next: 'methb-severe', urgency: 'critical' },
             { label: 'Asymptomatic / Incidental', description: 'Elevated MetHb on labs, no symptoms', next: 'methb-asymptomatic' },
         ],
+        summary: 'Cyanosis no O2 response + SpO2 82-86% — brown blood',
     },
     {
         id: 'methb-mild',
@@ -33,6 +34,8 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Typical symptoms:**\n- Cyanosis (may be subtle)\n- Headache\n- Fatigue, malaise\n- Mild dyspnea on exertion\n\n**Key finding:** Cyanosis that does NOT improve with supplemental O2. [1]\n\n**Pulse oximetry:** Reads falsely in the 80s because MetHb absorbs light at wavelengths similar to both oxy- and deoxyhemoglobin. SpO2 plateaus at ~82-86% regardless of true oxygenation. [1][3]\n\n**Brown blood test:** Place drop of blood on white gauze. Normal deoxygenated blood turns red when exposed to air. MetHb blood **stays chocolate brown**. [1][2]\n\n**Proceed to diagnosis and identify causative agent.**',
         citation: [1, 2, 3],
         next: 'methb-causes',
+        summary: '10-20%: pulse ox falsely 82-86% regardless',
+        skippable: true,
     },
     {
         id: 'methb-moderate',
@@ -45,6 +48,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { id: 'methb-functional-hb', label: 'Functional Hb Calculator' },
         ],
         next: 'methb-causes',
+        summary: '20-40%: confusion, dyspnea — functional Hb = capacity',
     },
     {
         id: 'methb-severe',
@@ -54,6 +58,8 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**CRITICAL - Immediate intervention required**\n\n**Symptoms:**\n- Seizures\n- Coma\n- Cardiac arrhythmias\n- Myocardial ischemia\n- Cardiovascular collapse\n- Death (usually >70%)\n\n**Immediate actions:**\n1. **High-flow O2** via NRB - increases dissolved plasma O2\n2. **IV access** - prepare for methylene blue\n3. **Cardiac monitoring** - treat arrhythmias per ACLS\n4. **Draw co-oximetry STAT** (venous or arterial)\n5. **Give [Methylene Blue](#/drug/methylene-blue/methemoglobinemia)** empirically if high clinical suspicion\n\n**Do NOT wait for lab confirmation** if patient is critically ill. Methylene blue is both diagnostic and therapeutic. [1][2]',
         citation: [1, 2],
         next: 'methb-treatment-decision',
+        summary: '>40%: seizures, coma — MB empirically, no wait',
+        safetyLevel: 'critical',
     },
     {
         id: 'methb-asymptomatic',
@@ -63,6 +69,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Incidental finding on co-oximetry:**\n\n**Normal MetHb levels:**\n- Non-smoker: <2%\n- Smoker: up to 3-4%\n\n**If MetHb elevated but patient is asymptomatic:**\n1. Confirm no subtle symptoms (formal neuro exam)\n2. Identify and remove causative agent\n3. High-flow O2 via NRB\n4. Serial MetHb levels q2-4h to confirm declining\n5. Monitor for symptom development\n\n**Treatment threshold:** [1][2]\n- **Symptomatic:** Treat regardless of level\n- **Asymptomatic but MetHb >30%:** Strongly consider treatment\n- **Asymptomatic MetHb 20-30%:** Consider treatment, especially with comorbidities\n\nMost mild cases resolve with removal of offending agent + supportive care.',
         citation: [1, 2],
         next: 'methb-causes',
+        summary: 'Remove cause, O2, co-oximetry q2-4h until declining',
     },
     // =====================================================================
     // MODULE 2: ETIOLOGY & DIAGNOSIS
@@ -75,6 +82,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '[Causative Agents List](#/info/methb-agents)\n\n**Most common drug causes:** [1][2][4]\n\n**Local anesthetics:**\n- **Benzocaine** (most common cause - Hurricaine spray, Cetacaine)\n- Prilocaine (EMLA cream)\n- Lidocaine (less common but reported)\n- Articaine\n\n**Antimicrobials:**\n- **Dapsone** (most frequent overall in retrospective studies) [4]\n- Trimethoprim-sulfamethoxazole\n- Nitrofurantoin\n\n**Nitrates/Nitrites:**\n- Nitroglycerin, nitroprusside\n- Amyl nitrite (poppers)\n- Sodium nitrite (suicide attempts, meat preservatives)\n- Well water contamination (infants)\n- Inhaled nitric oxide\n\n**Others:**\n- Phenazopyridine (Pyridium/AZO)\n- Metoclopramide\n- Rasburicase\n- Aniline dyes\n- Naphthalene (mothballs)',
         citation: [1, 2, 4],
         next: 'methb-workup',
+        summary: 'Benzocaine, dapsone, nitrates — identify and remove',
     },
     {
         id: 'methb-workup',
@@ -84,6 +92,8 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Essential testing:**\n\n**1. Co-oximetry (GOLD STANDARD):** [1][2]\n- Directly measures MetHb percentage\n- **Venous or arterial - both accurate**\n- Standard pulse ox and ABG O2 sat CANNOT detect MetHb\n\n**2. ABG/VBG:**\n- PaO2 is **NORMAL** (dissolved O2 unaffected)\n- Calculated O2 sat is **NORMAL** (falsely reassuring!)\n- Creates classic **"saturation gap"**: Normal PaO2 + low SpO2 = MetHb [1]\n\n**3. Additional labs:**\n- CBC (assess baseline Hb - functional Hb = total Hb x [1 - MetHb%])\n- BMP\n- Lactate (tissue hypoxia marker)\n- G6PD level (affects treatment choice - can send but do NOT delay treatment)\n- Reticulocyte count (hemolysis screen)\n\n**4. Bedside test:**\n- Place blood on white gauze - chocolate brown color that does NOT turn red = MetHb [1][2]\n\n**5. Detailed medication/exposure history**',
         citation: [1, 2],
         next: 'methb-treatment-decision',
+        summary: 'Co-oximetry gold standard — pulse ox CANNOT detect',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 3: METHYLENE BLUE TREATMENT
@@ -101,6 +111,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { label: 'Uncertain - High-risk ethnicity', description: 'African, Mediterranean, Middle Eastern, Asian descent', next: 'methb-g6pd-uncertain' },
             { label: 'Not indicated - mild case', description: 'MetHb <20%, asymptomatic, stable', next: 'methb-supportive' },
         ],
+        summary: 'Treat >30% or symptomatic — G6PD check but NO delay',
     },
     {
         id: 'methb-mb-protocol',
@@ -124,6 +135,8 @@ export const METHEMOGLOBINEMIA_NODES = [
             monitoring: 'Co-oximetry at 30-60 min post-dose. Serial MetHb levels q2-4h. Monitor for hemolysis if G6PD status unknown.',
         },
         next: 'methb-mb-refractory',
+        summary: 'MB 1-2mg/kg IV 5min — max 7mg/kg, more = worse',
+        safetyLevel: 'critical',
     },
     {
         id: 'methb-mb-refractory',
@@ -138,6 +151,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { label: 'Rebound MetHb', description: 'Initial response but MetHb rising again', next: 'methb-rebound' },
             { label: 'Refractory severe case', description: 'Critical despite treatment', next: 'methb-rescue', urgency: 'critical' },
         ],
+        summary: 'No response 30-60min: G6PD, exposure, sulfhemoglobin',
     },
     {
         id: 'methb-rebound',
@@ -166,6 +180,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             monitoring: 'Serial MetHb q4-6h for minimum 24-48 hours. Watch for rebound.',
         },
         next: 'methb-disposition',
+        summary: 'Dapsone rebound — MB repeat + charcoal + cimetidine',
     },
     // =====================================================================
     // MODULE 4: G6PD DEFICIENCY & ALTERNATIVE THERAPIES
@@ -181,6 +196,8 @@ export const METHEMOGLOBINEMIA_NODES = [
             { id: 'methb-g6pd-risk', label: 'G6PD Risk Assessment' },
         ],
         next: 'methb-alternatives',
+        summary: 'MB CONTRAINDICATED G6PD — oxidant causing hemolysis',
+        safetyLevel: 'critical',
     },
     {
         id: 'methb-g6pd-uncertain',
@@ -194,6 +211,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { label: 'Moderate - use alternatives', description: 'Stable enough to avoid MB risk', next: 'methb-alternatives', urgency: 'urgent' },
             { label: 'Mild - supportive care', description: 'Not yet meeting treatment threshold', next: 'methb-supportive' },
         ],
+        summary: 'Unknown G6PD: MB if critical — African tolerate better',
     },
     {
         id: 'methb-alternatives',
@@ -222,6 +240,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             monitoring: 'Serial co-oximetry. H&H for hemolysis. Renal function if high-dose ascorbic acid.',
         },
         next: 'methb-rescue',
+        summary: 'G6PD-safe: ascorbic acid IV or exchange transfusion',
     },
     {
         id: 'methb-rescue',
@@ -231,6 +250,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Severe refractory methemoglobinemia:** [5][8]\n\n**Exchange transfusion is the definitive rescue therapy**\n\n**Indications:**\n- MetHb >70%\n- MetHb >50% with hemodynamic instability\n- Failure of methylene blue (confirmed or G6PD-related)\n- Combined MetHb + severe hemolysis\n\n**Exchange transfusion:**\n- Removes dysfunctional RBCs containing MetHb\n- Replaces with normal donor RBCs\n- Works regardless of G6PD status or enzyme deficiencies\n- May require exchange of 1-2 blood volumes\n- Consult hematology/blood bank urgently\n\n**Hyperbaric oxygen:** [9]\n- Bridges oxygenation while arranging definitive therapy\n- Does not directly reduce MetHb\n- Consider if HBO available locally\n\n**Supportive care:**\n- Maximize supplemental O2\n- Intubate if respiratory failure\n- Treat arrhythmias per ACLS\n- Vasopressors if hypotensive\n\n**Poison Control: 1-800-222-1222**',
         citation: [5, 8, 9],
         next: 'methb-disposition',
+        summary: 'Exchange transfusion >70% or refractory — any G6PD',
     },
     // =====================================================================
     // MODULE 5: SPECIAL POPULATIONS
@@ -243,6 +263,8 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Infants (<6 months) are HIGH RISK:** [10][11]\n\n**Why infants are vulnerable:**\n- Lower NADH-cytochrome b5 reductase activity (50% of adult)\n- Fetal hemoglobin (HbF) oxidizes more easily\n- Higher gastric pH allows nitrate-to-nitrite conversion by bacteria\n- Higher fluid intake relative to body weight\n\n**Common causes in infants:**\n- **Well water contaminated with nitrates** (>10 mg/L)\n- Formula prepared with high-nitrate water\n- Homemade vegetable purees (spinach, beets, carrots)\n- Diarrheal illness (enhances bacterial nitrate conversion)\n\n**"Blue baby syndrome":**\n- Cyanosis after feeding\n- Often associated with GI upset (diarrhea, vomiting)\n- Well water exposure in history\n\n**Treatment:**\n- Same methylene blue dosing: 1-2 mg/kg IV\n- If diarrhea/acidosis: aggressive hydration + acidosis correction may help\n- Remove nitrate source\n- Test well water',
         citation: [10, 11],
         next: 'methb-disposition',
+        summary: '<6mo high risk — lower enzymes, well water nitrates',
+        skippable: true,
     },
     {
         id: 'methb-pregnancy',
@@ -252,6 +274,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Pregnancy considerations:** [2][5]\n\n**Fetal vulnerability:**\n- Fetal hemoglobin (HbF) is more susceptible to oxidation\n- Fetal MetHb levels may be higher than maternal\n- Fetal hypoxia risk even with mild maternal MetHb\n\n**Treatment:**\n\n**Methylene blue in pregnancy:**\n- Category X via intra-amniotic injection (teratogenic)\n- **IV administration:** Risk less defined, likely safer than intra-amniotic\n- **In life-threatening acquired MetHb: use methylene blue** [5]\n- Theoretical risks likely outweighed by maternal/fetal death from severe MetHb\n\n**Alternative approach:**\n- Calculate **functional hemoglobin** (Total Hb x [1 - MetHb%])\n- If functional Hb adequate: consider supportive care + ascorbic acid\n- Simple transfusion to increase functional Hb\n- Exchange transfusion if severe\n\n**IBCC recommendation:** "In life-threatening acquired methemoglobinemia, methylene blue should probably be used." [5]\n\n**OB consultation** for fetal monitoring.',
         citation: [2, 5],
         next: 'methb-disposition',
+        summary: 'MB IV if life-threatening — fetal Hb more susceptible',
     },
     {
         id: 'methb-supportive',
@@ -261,6 +284,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**For mild methemoglobinemia not meeting treatment threshold:**\n\n**Supportive measures:**\n1. **Remove offending agent** - most important step\n2. **High-flow O2** via NRB (increases dissolved plasma O2)\n3. **IV fluids** as needed\n4. **Cardiac monitoring**\n\n**Natural resolution:**\n- Normal NADH-cytochrome b5 reductase reduces MetHb at ~15%/hour\n- Most mild cases resolve within 24-48 hours after removing cause\n\n**Monitoring:**\n- Serial co-oximetry q2-4h until declining\n- Watch for symptom development\n- If MetHb rises or symptoms develop: escalate to methylene blue\n\n**GI decontamination:**\n- Activated charcoal if recent ingestion (<1-2 hours)\n- Consider MDAC for dapsone, phenazopyridine, aniline dyes\n\n**Observation period:**\n- Minimum 4-6 hours for short-acting agents\n- 24-48 hours for dapsone or agents with rebound potential',
         citation: [1, 2],
         next: 'methb-disposition',
+        summary: 'Remove agent + O2 — natural reduction ~15%/hr',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -277,6 +301,7 @@ export const METHEMOGLOBINEMIA_NODES = [
             { label: 'Observation', description: 'Mild-moderate, responding, needs monitoring', next: 'methb-observation' },
             { label: 'Discharge', description: 'Resolved, asymptomatic, no rebound risk', next: 'methb-discharge' },
         ],
+        summary: 'ICU: >30%, MB, dapsone, G6PD, or unstable',
     },
     {
         id: 'methb-icu',
@@ -287,6 +312,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         recommendation: 'ICU admission with continuous monitoring, serial co-oximetry, and observation for rebound or hemolysis.',
         confidence: 'definitive',
         citation: [1, 2, 4],
+        summary: 'Co-ox q2-4h, hemolysis markers — 24-48h dapsone',
     },
     {
         id: 'methb-observation',
@@ -297,6 +323,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         recommendation: 'Observation with serial co-oximetry until MetHb <5% and asymptomatic. Escalate if worsening.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Co-ox q4h until <5% — ICU if worsening',
     },
     {
         id: 'methb-discharge',
@@ -307,6 +334,7 @@ export const METHEMOGLOBINEMIA_NODES = [
         recommendation: 'Discharge with avoidance of offending agent and return precautions. Follow-up in 3-5 days.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Asymptomatic, <5%, cause removed, no rebound = safe',
     },
     {
         id: 'methb-summary',
@@ -316,6 +344,8 @@ export const METHEMOGLOBINEMIA_NODES = [
         body: '**Critical takeaways:**\n\n**1. Recognition:**\n- Cyanosis unresponsive to O2 + SpO2 plateau at 82-86%\n- Chocolate brown blood that stays brown\n- PaO2-SpO2 "saturation gap"\n\n**2. Diagnosis:**\n- Co-oximetry (venous or arterial) - standard pulse ox CANNOT detect MetHb\n- Identify causative agent (benzocaine, dapsone, nitrates most common)\n\n**3. Treatment:**\n- **Methylene blue 1-2 mg/kg IV** over 5 min (first-line)\n- Response in 30-60 minutes\n- Contraindicated in G6PD deficiency\n\n**4. G6PD deficiency:**\n- Use ascorbic acid IV or exchange transfusion\n- Methylene blue causes hemolysis in G6PD patients\n\n**5. Rebound:**\n- Common with dapsone (long half-life, enterohepatic circulation)\n- MDAC + cimetidine to reduce rebound\n\n**6. Special populations:**\n- Infants: vulnerable due to immature enzyme systems\n- Pregnancy: use methylene blue for life-threatening MetHb\n\n**Poison Control: 1-800-222-1222**',
         citation: [1, 2, 5, 6],
         next: 'methb-start',
+        summary: 'Co-ox Dx, MB first, no G6PD, dapsone rebounds',
+        skippable: true,
     },
 ];
 export const METHEMOGLOBINEMIA_NODE_COUNT = 23;

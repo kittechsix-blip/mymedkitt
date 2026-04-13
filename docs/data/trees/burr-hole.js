@@ -31,6 +31,7 @@ export const BURR_HOLE_NODES = [
         calculatorLinks: [
             { id: 'bh-indication-check', label: 'Indication Check' },
         ],
+        summary: 'Last resort — will patient die before reaching neurosurgery?',
     },
     {
         id: 'bh-indications',
@@ -47,6 +48,8 @@ export const BURR_HOLE_NODES = [
         calculatorLinks: [
             { id: 'bh-indication-check', label: 'Indication Check' },
         ],
+        summary: 'CT hematoma + GCS <8 + anisocoria + no neurosurg 2hrs',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-contraindications',
@@ -59,6 +62,7 @@ export const BURR_HOLE_NODES = [
             { label: 'Contraindication present', description: 'Medical management + transfer', next: 'bh-medical-management' },
         ],
         citation: [1, 2],
+        summary: 'GCS 3 bilateral fixed = non-survivable — do not drill',
     },
     {
         id: 'bh-medical-management',
@@ -80,6 +84,7 @@ export const BURR_HOLE_NODES = [
             monitoring: 'Serum osmolality, sodium, urine output. Caution in hypotension.',
         },
         next: 'bh-transfer',
+        summary: 'Mannitol or HTS while preparing — HOB 30, avoid hypotension',
     },
     {
         id: 'bh-transfer',
@@ -89,6 +94,7 @@ export const BURR_HOLE_NODES = [
         body: '**Transfer is Almost Always Preferred**\n\nEven if neurosurgery is 2-3 hours away, transfer with aggressive medical management is often better than non-neurosurgeon drilling.\n\n**During Transport:**\n• Continuous osmotherapy\n• Close neurologic monitoring (GCS, pupils q15 min)\n• Maintain normocapnia (or brief hyperventilation for acute changes)\n• Pre-hospital notification to receiving facility\n\n**Consider Telemedicine:**\n• Video consult with neurosurgeon during transport\n• If drilling becomes necessary, remote guidance available\n\n**Indications to Turn Back:**\n• New bilateral fixed pupils\n• Loss of all brainstem reflexes\n• Cardiac arrest without ROSC\n\n**Documentation:**\n• Time of injury\n• GCS progression\n• Pupil changes with times\n• Medications given\n• CT findings [1]',
         citation: [1],
         next: undefined,
+        summary: 'Transfer usually preferred over non-neurosurgeon drilling',
     },
     // =====================================================================
     // MODULE 2: ANATOMY & LANDMARKS
@@ -101,6 +107,8 @@ export const BURR_HOLE_NODES = [
         body: '**Critical Anatomy for Burr Hole Placement**\n\n![Burr Hole Landmarks](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/Burr_hole.JPG/300px-Burr_hole.JPG)\n*Image: WikEM - Burr hole landmarks*\n\n**Key Craniometric Points:**\n\n| Location | Landmark | Target |\n|----------|----------|--------|\n| **Temporal** | 2 FB above & anterior to tragus | Most common EDH (75%) |\n| **Frontal** | 10 cm above eye, mid-pupillary | Frontal hematomas |\n| **Parietal** | 4 FB posterior & superior to EAC | Convexity lesions |\n| **Kocher\'s** | 11 cm from glabella, 3 cm lateral | Ventriculostomy |\n\n*FB = finger-breadths; EAC = external auditory canal*\n\n**Why These Points?**\n• Avoid major vascular structures\n• Correspond to thinner skull areas\n• Provide access to common hematoma locations [1][2][5]',
         citation: [1, 2, 5],
         next: 'bh-anatomy-landmarks',
+        summary: 'Temporal 2 FB above tragus — 75% EDH temporal region',
+        skippable: true,
     },
     {
         id: 'bh-anatomy-landmarks',
@@ -110,6 +118,8 @@ export const BURR_HOLE_NODES = [
         body: '**Temporal Point (Most Common for EDH):**\n\n📍 **Location:** 2 finger-breadths (3-4 cm) ABOVE and ANTERIOR to the tragus\n• Above the zygomatic arch\n• Corresponds to pterion region\n• Overlies middle meningeal artery territory\n\n**Why Temporal?**\n• 75% of adult EDH occur in temporal region\n• Middle meningeal artery is the most common source\n• Relatively thin bone (easier drilling)\n\n---\n\n**Frontal Point:**\n\n📍 **Location:** 10 cm above the supraorbital ridge in the mid-pupillary line\n• Approximately 3 cm lateral to midline\n• Access to frontal hematomas\n\n---\n\n**Parietal Point:**\n\n📍 **Location:** 4 finger-breadths (6-8 cm) POSTERIOR and SUPERIOR to external auditory canal\n• Over the parietal eminence\n• Access to convexity lesions\n\n---\n\n**⚠️ DANGER ZONES:**\n\n🚫 **Sagittal Sinus:** Stay ≥3 cm lateral to midline\n🚫 **Asterion:** Over transverse/sigmoid sinus in 61-66%\n🚫 **Pterion:** Thin bone, but MMA runs deep — be careful [1][5]',
         citation: [1, 5],
         next: 'bh-side-selection',
+        summary: '>=3cm lateral to midline avoids sagittal sinus',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-side-selection',
@@ -125,6 +135,7 @@ export const BURR_HOLE_NODES = [
         calculatorLinks: [
             { id: 'bh-side-selector', label: 'Side Selection' },
         ],
+        summary: 'Ipsilateral dilated pupil >85% correct — CT-guided preferred',
     },
     // =====================================================================
     // MODULE 3: EQUIPMENT
@@ -141,6 +152,7 @@ export const BURR_HOLE_NODES = [
             { label: 'Minimal equipment only', description: 'Austere/field conditions', next: 'bh-austere-equipment' },
         ],
         citation: [1, 6],
+        summary: 'CLUTCH drill auto-disengages inner table — critical safety',
     },
     {
         id: 'bh-clutch-importance',
@@ -150,6 +162,8 @@ export const BURR_HOLE_NODES = [
         body: '**The Clutch is the Most Important Safety Feature**\n\n**How It Works:**\n• Drill bit automatically DISENGAGES when it penetrates the inner table\n• Detects the sudden drop in resistance\n• Prevents "plunging" into brain tissue\n\n**This is What Allows Non-Neurosurgeons to Perform This Procedure**\n\n**Proper Clutch Drill Technique:**\n1. Position drill perpendicular to skull\n2. Apply firm, STEADY downward pressure\n3. Drill CONTINUOUSLY until spindle stops\n4. ⚠️ **DO NOT stop and restart** — difficult to re-engage clutch\n5. Irrigate with saline during drilling\n\n**Common Clutch Bits:**\n• Codman 26-1221 (14mm perforator)\n• Midas Rex perforator\n• Aesculap perforator\n\n**If Clutch Bit Unavailable:**\n• See [No Clutch Technique](#bh-no-clutch-technique)\n• Much higher risk — requires two-bit technique [1][6]',
         citation: [1, 6],
         next: 'bh-pre-procedure',
+        summary: 'Do NOT stop/restart — continuous drill until spindle stops',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-no-clutch-technique',
@@ -159,6 +173,8 @@ export const BURR_HOLE_NODES = [
         body: '**⚠️ Higher Risk — Only If Clutch Unavailable**\n\n**Two-Bit Technique:**\n\n**Step 1: Perforator Bit (Outer Table Only)**\n• Use sharp perforator bit\n• Drill through OUTER table only\n• Stop when you feel decreased resistance\n• This is the diploe (spongy middle layer)\n\n**Step 2: Switch to Blunt Burr**\n• Remove perforator bit\n• Insert blunt/ball burr\n• Gently enlarge hole through inner table\n• Use irrigation to visualize\n• Stop immediately when dura visible\n\n**Critical Points:**\n• NEVER continue with perforator through inner table\n• Blunt burr reduces (but doesn\'t eliminate) plunge risk\n• Consider hand-cranked drill for better tactile feedback\n• Have assistant stabilize head\n\n**Alternative — EZ-IO (Case Reports Only):**\n• 25mm (blue) needle\n• Technique described by Marc Grossman on EMCrit\n• Last resort when no drill available [6][7]',
         citation: [6, 7],
         next: 'bh-pre-procedure',
+        summary: 'Two-bit: perforator outer, blunt burr inner table',
+        safetyLevel: 'warning',
     },
     {
         id: 'bh-austere-equipment',
@@ -168,6 +184,8 @@ export const BURR_HOLE_NODES = [
         body: '**Minimal Equipment for Field Conditions:**\n\n**Absolute Minimum:**\n• Cutting instrument (scalpel, knife)\n• Drill of ANY kind with bit\n• Something to retract scalp\n• Irrigation (saline, clean water)\n• Sterile (or cleanest available) dressing\n\n**Improvised Equipment:**\n• **Drill:** Cordless power drill with clean bit\n• **Retractor:** Bent spoon handles, improvised hooks\n• **Hemostasis:** Direct pressure, cautery if available\n\n**EZ-IO Technique (Marc Grossman, EMCrit):**\n• 25mm (blue) EZ-IO needle\n• Drill into skull at safe landmark\n• Remove needle, irrigate\n• Small hole, may need multiple\n• Case reports of successful use\n\n**Risk Assessment:**\n• Without clutch drill, cortical injury risk is HIGH\n• Only proceed if patient will certainly die otherwise\n• Document circumstances carefully [6][7]',
         citation: [6, 7],
         next: 'bh-pre-procedure',
+        summary: 'EZ-IO 25mm last resort — higher cortical injury risk',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 4: PROCEDURE TECHNIQUE
@@ -180,6 +198,7 @@ export const BURR_HOLE_NODES = [
         body: '**Preparation Checklist:**\n\n**□ Airway & Ventilation:**\n• Intubate, sedate, paralyze\n• C-spine immobilization if trauma\n• Target EtCO₂ 35-40 mmHg\n• SpO₂ >94%\n\n**□ Osmotherapy (Start Now):**\n• Mannitol 0.5-1 g/kg IV OR\n• Hypertonic saline 23.4% 30mL\n\n**□ Positioning:**\n• Supine, head elevated above chest\n• Rotate head 30-40° off midline (operative side UP)\n• Generous shoulder bump\n• **Mark midline and incision site BEFORE draping**\n\n**□ Site Preparation:**\n• Shave 5 cm strip at incision site\n• Prep with chlorhexidine or betadine\n• Infiltrate local with epinephrine (if not under GA)\n\n**□ Antibiotics:**\n• Cefazolin 2g IV or Ceftriaxone 2g IV\n\n**□ Telemedicine:**\n• Connect with neurosurgeon if available\n• Video guidance during procedure [1][6]',
         citation: [1, 6],
         next: 'bh-incision',
+        summary: 'Intubate, osmotherapy, mark midline BEFORE draping, antibiotics',
     },
     {
         id: 'bh-incision',
@@ -189,6 +208,7 @@ export const BURR_HOLE_NODES = [
         body: '**Scalp Incision:**\n\n**Incision Type:**\n• **3-4 cm VERTICAL incision** (linear)\n• Directly down to bone\n• Vertical orientation minimizes vascular injury\n\n**For Temporal Approach:**\n• 2 FB above and anterior to tragus\n• Stay above zygomatic arch\n• Avoid superficial temporal artery (runs anterior)\n\n**Technique:**\n1. Incise skin and subcutaneous tissue\n2. Continue through galea aponeurotica\n3. Incise periosteum (pericranium)\n4. Expose bone directly\n\n**Hemostasis:**\n• Scalp bleeds profusely\n• Apply pressure to wound edges\n• Raney clips if available\n• Electrocautery to individual bleeders\n• Continue — don\'t delay for perfect hemostasis\n\n**Pearl:**\n• Scalp bleeding is impressive but not life-threatening\n• Focus on the brain, not the scalp [1][6]',
         citation: [1, 6],
         next: 'bh-exposure',
+        summary: '3-4cm vertical to bone — scalp bleeding not life-threatening',
     },
     {
         id: 'bh-exposure',
@@ -198,6 +218,7 @@ export const BURR_HOLE_NODES = [
         body: '**Skull Exposure:**\n\n**Clear the Periosteum:**\n• Use scalpel handle or gauze to push periosteum from bone\n• Create 2-3 cm clear area around planned drill site\n• Periosteum is adherent — requires firm scraping\n\n**Insert Retractor:**\n• Place self-retaining retractor (Weitlaner)\n• Retract scalp edges\n• Should see clean, white bone\n\n**Verify Landmark:**\n• Confirm position relative to anatomical landmarks\n• If CT available, correlate with imaging\n• Adjust if needed BEFORE drilling\n\n**Skull Appearance:**\n• Normal: White, smooth outer table\n• Fractured: May see crack, step-off, or blood oozing\n• If fracture present, drill ADJACENT to (not through) fracture\n\n**Prepare for Drilling:**\n• Have suction ready\n• Saline irrigation available\n• Assistant stabilizes patient\'s head [1][6]',
         citation: [1, 6],
         next: 'bh-drill-technique',
+        summary: 'Clear periosteum, retractor, verify landmark before drilling',
     },
     {
         id: 'bh-drill-technique',
@@ -207,6 +228,8 @@ export const BURR_HOLE_NODES = [
         body: '**Burr Hole Drilling Technique:**\n\n⚠️ **CRITICAL: Use Clutch Bit If Available**\n\n**Clutch Drill Technique:**\n\n1. **Position:** Drill PERPENDICULAR to skull surface\n\n2. **Pressure:** Apply firm, STEADY downward pressure\n   • Assistant stabilizes head from opposite side\n\n3. **Irrigation:** Apply saline during drilling\n   • Prevents thermal injury\n   • Clears bone dust\n   • Improves visualization\n\n4. **Drill Continuously:** Do NOT stop and restart\n   • Clutch disengages when inner table penetrated\n   • Stopping makes re-engagement difficult\n\n5. **Feel for Clutch Engagement:**\n   • Initial resistance (outer table)\n   • Brief easier drilling (diploe)\n   • Clutch STOPS spindle at inner table\n\n6. **Remove Drill:** Lift straight up\n   • Do NOT angle — can tear dura\n\n**Completed Hole:**\n• ~14mm diameter\n• Should see dura (bluish-gray membrane)\n• May see blood if hematoma present [1][6]',
         citation: [1, 6],
         next: 'bh-evacuate-edh',
+        summary: 'Perpendicular, steady, irrigate — clutch stops at inner table',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-evacuate-edh',
@@ -221,6 +244,7 @@ export const BURR_HOLE_NODES = [
             { label: 'Brain tissue visible', description: 'Dural tear — close immediately', next: 'bh-dural-tear' },
         ],
         citation: [1, 6],
+        summary: 'Dark blood=EDH, bluish dura=SDH, normal=wrong site, brain=stop',
     },
     {
         id: 'bh-edh-drainage',
@@ -230,6 +254,8 @@ export const BURR_HOLE_NODES = [
         body: '**Evacuating Epidural Hematoma:**\n\n**What to Expect:**\n• Dark, clotted blood between skull and dura\n• May drain spontaneously under pressure\n• Often partially clotted — won\'t all drain through hole\n\n**Technique:**\n\n1. **Allow Spontaneous Drainage:**\n   • Blood under pressure will drain on its own\n   • Do NOT suction aggressively\n\n2. **Gentle Irrigation:**\n   • Use saline to flush clot\n   • Helps liquefy and evacuate\n\n3. **Gentle Suction:**\n   • Use low suction\n   • ⚠️ **NEVER suction brain tissue**\n   • If dura bulges into hole, stop suctioning\n\n4. **Blunt Hook Evacuation:**\n   • Gently break up clot\n   • Remove accessible clot\n   • Do NOT explore beyond visible area\n\n**Incomplete Evacuation:**\n• Some clot will remain — this is expected\n• Goal is decompression, not complete removal\n• Patient still needs definitive craniotomy [1][6]',
         citation: [1, 6],
         next: 'bh-hemostasis',
+        summary: 'Spontaneous drainage — NEVER suction brain tissue',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-sdh-drainage',
@@ -239,6 +265,8 @@ export const BURR_HOLE_NODES = [
         body: '**Evacuating Subdural Hematoma:**\n\n**Subdural = Blood UNDER Dura**\n\nMust open dura to drain.\n\n**Technique:**\n\n1. **Tent the Dura:**\n   • Use sharp hook to lift dura\n   • Elevate a small tent of dura membrane\n   • Do NOT plunge through\n\n2. **Incise Dura:**\n   • Use #15 scalpel blade\n   • Make small CRUCIATE incision (+)\n   • Careful — brain is immediately deep to dura\n\n3. **Drain Hematoma:**\n   • Subdural blood is often more liquid than EDH\n   • Will drain when dura opened\n   • Gentle irrigation to assist\n\n4. **DO NOT:**\n   • ❌ Make large dural incision\n   • ❌ Insert instruments into subdural space\n   • ❌ Suction brain tissue\n   • ❌ Explore blindly\n\n**Acute SDH Often Clotted:**\n• Chronic SDH = liquid, drains easily\n• Acute SDH = clotted, may not drain well\n• This is a limitation of burr hole for acute SDH [1][6]',
         citation: [1, 6],
         next: 'bh-hemostasis',
+        summary: 'Tent dura, cruciate incision — do NOT explore subdural',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-no-blood',
@@ -251,6 +279,8 @@ export const BURR_HOLE_NODES = [
             { label: 'Single additional burr hole', description: 'Strong suspicion, different location', next: 'bh-second-hole' },
         ],
         citation: [1, 6],
+        summary: 'No blood: close and transport — max 2 holes, no hunting',
+        safetyLevel: 'warning',
     },
     {
         id: 'bh-second-hole',
@@ -260,6 +290,7 @@ export const BURR_HOLE_NODES = [
         body: '**Placing a Second Burr Hole:**\n\n**When to Consider:**\n• CT showed hematoma but first hole was misplaced\n• Clinical suspicion very high\n• Different anatomical location makes sense\n\n**Maximum: 2 Burr Holes**\n• More than 2 = unacceptable complication risk\n• If 2 holes negative, close and transport\n\n**Location Options:**\n\n1. **If first was temporal → try parietal**\n   • 4 FB posterior and superior to EAC\n\n2. **If first was frontal → try temporal**\n   • 2 FB above and anterior to tragus\n\n3. **Opposite side (ONLY if clinical signs suggest)**\n   • False localizing signs in 15%\n   • Pupil dilation can be contralateral rarely\n\n**Technique:**\n• Same preparation and drilling technique\n• Same assessment of findings\n• If still no blood → close both and transport [1][6]',
         citation: [1, 6],
         next: 'bh-evacuate-edh',
+        summary: 'Max 2 holes — both negative = close and transport',
     },
     {
         id: 'bh-dural-tear',
@@ -269,6 +300,8 @@ export const BURR_HOLE_NODES = [
         body: '**Brain Tissue Visible = STOP**\n\n**This Means:**\n• Dura was torn during drilling\n• Brain cortex is exposed\n• Risk of cortical injury with further manipulation\n\n**Immediate Actions:**\n\n1. **STOP all drilling/instrumentation**\n\n2. **Do NOT explore further**\n\n3. **Irrigate Gently:**\n   • Saline irrigation to clean debris\n   • Remove bone fragments if visible\n\n4. **Cover with Saline-Soaked Gauze:**\n   • Keep brain moist\n   • Prevent desiccation injury\n\n5. **Close Scalp Over Defect:**\n   • Loose approximation\n   • Do NOT pack tightly\n\n6. **Transport IMMEDIATELY:**\n   • Patient needs neurosurgical evaluation\n   • Document the complication\n\n**Prognosis:**\n• Small dural tears may have minimal consequence\n• Brain exposure requires antibiotics and observation [1][6]',
         citation: [1, 6],
         next: 'bh-wound-closure',
+        summary: 'Brain visible = STOP — wet gauze, close, transport',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-hemostasis',
@@ -278,6 +311,7 @@ export const BURR_HOLE_NODES = [
         body: '**Achieving Hemostasis:**\n\n**Identify Bleeding Source:**\n\n**Middle Meningeal Artery:**\n• Arterial pumping from dura or bone\n• Most common cause of EDH\n• Runs in groove on inner skull\n\n**Treatment:**\n• Bipolar electrocautery if visible\n• Bone wax into foramen spinosum\n• May need to extend bone opening\n\n**Bone Edge Bleeding:**\n• Oozing from diploe (spongy bone)\n• Treatment: Bone wax\n• Pack firmly into bleeding bone edges\n\n**Venous Oozing:**\n• Dural surface oozing\n• Treatment: Gelfoam or Surgicel\n• Apply with gentle pressure\n• Do NOT pack tightly against brain\n\n**Scalp Bleeding:**\n• Can be impressive but not dangerous\n• Electrocautery to individual vessels\n• Raney clips if available\n• Will stop with closure [1][6]',
         citation: [1, 6],
         next: 'bh-extend-craniotomy',
+        summary: 'Bone wax bone edge, bipolar MMA, Gelfoam dural ooze',
     },
     {
         id: 'bh-extend-craniotomy',
@@ -290,6 +324,7 @@ export const BURR_HOLE_NODES = [
             { label: 'Need to extend', description: 'Inadequate drainage, ongoing bleeding', next: 'bh-craniectomy-technique' },
         ],
         citation: [1, 6],
+        summary: 'Extend only if drainage inadequate — increases risk',
     },
     {
         id: 'bh-craniectomy-technique',
@@ -299,6 +334,8 @@ export const BURR_HOLE_NODES = [
         body: '**Craniectomy Technique:**\n\n⚠️ **Significantly Higher Risk — Only If Necessary**\n\n**Step 1: Second Burr Hole**\n• Place 3-4 cm from first hole\n• Ideally along planned craniotomy line\n• Same drilling technique\n\n**Step 2: Connect Holes with Rongeur**\n• Use Leksell or Kerrison rongeur\n• Nibble bone between holes\n• Protect dura with Penfield #4 as you go\n• Work slowly — do NOT tear dura\n\n**Step 3: Remove Bone**\n• Lift connecting bone bridge\n• Creates window for better access\n• Size: 4-6 cm typically adequate\n\n**Step 4: Evacuate Under Direct Vision**\n• Now have better access to clot\n• Can visualize bleeding sources\n• Bipolar electrocautery for hemostasis\n\n**Bone Flap:**\n• Save bone flap (can be replaced later)\n• Or leave decompressive craniectomy\n• Neurosurgeon will decide at definitive surgery [1][6]',
         citation: [1, 6],
         next: 'bh-wound-closure',
+        summary: 'Connect holes with rongeur — protect dura with Penfield',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: WOUND CLOSURE & COMPLICATIONS
@@ -311,6 +348,8 @@ export const BURR_HOLE_NODES = [
         body: '**Closing the Wound:**\n\n⚠️ **CRITICAL: DO NOT Tamponade**\n\n**Loose Dressing ONLY:**\n• Tight packing INCREASES ICP\n• Can cause secondary brain injury\n• Gentle coverage is sufficient\n\n**Closure Technique:**\n\n1. **If Ongoing Hemorrhage:**\n   • Leave self-retaining retractor in place\n   • Cover with saline-moistened gauze\n   • Transport with wound open\n\n2. **If Hemostasis Achieved:**\n   • Irrigate wound thoroughly\n   • Approximate scalp loosely\n   • Interrupted nylon or staples\n   • Do NOT close tightly\n\n3. **Dressing:**\n   • Non-adherent gauze over wound\n   • Loose wrap\n   • Do NOT apply pressure dressing\n\n**If Brain Herniating Through Defect:**\n• This indicates severe edema\n• Close scalp IMMEDIATELY\n• May need additional osmotherapy\n• Transport urgently [1][6]',
         citation: [1, 6],
         next: 'bh-complications',
+        summary: 'LOOSE dressing only — tight packing INCREASES ICP',
+        safetyLevel: 'critical',
     },
     {
         id: 'bh-complications',
@@ -320,6 +359,8 @@ export const BURR_HOLE_NODES = [
         body: '**Intraoperative Complications:**\n\n| Complication | Cause | Management |\n|--------------|-------|------------|\n| **Cortical Injury** | Drill plunge | Use clutch bit; stop if brain seen |\n| **MMA Bleeding** | Temporal drilling | Bipolar; bone wax in foramen |\n| **Sagittal Sinus** | Too medial | Stay ≥3 cm lateral; direct pressure |\n| **Dural Tear** | Aggressive instrumentation | Cover with dural substitute |\n| **Scalp Bleeding** | Incision | Electrocautery, pressure, clips |\n\n**Post-Procedure Complications:**\n\n| Complication | Rate | Notes |\n|--------------|------|-------|\n| **Infection/Meningitis** | 0.2-0.3% | Prophylactic antibiotics reduce risk |\n| **CSF Leak** | Variable | Higher with dural breach |\n| **Rebleeding** | Common | Patient needs definitive craniotomy |\n| **Cerebral Edema** | Expected | Peaks 48-72h |\n| **Seizures** | Variable | Consider prophylaxis |\n\n**Overall Major Complication Rate:** ~2.5% [1][6][8]',
         citation: [1, 6, 8],
         next: 'bh-post-procedure',
+        summary: '2.5% major rate — cortical injury and sagittal sinus feared',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: POST-PROCEDURE CARE
@@ -332,6 +373,7 @@ export const BURR_HOLE_NODES = [
         body: '**Immediate Post-Procedure:**\n\n**Remember: This is a BRIDGE, Not a Cure**\n\nPatient still requires:\n• Definitive neurosurgical craniotomy\n• ICU-level care\n• Ongoing ICP management\n\n**Immediate Actions:**\n\n1. **Antibiotics:**\n   • Continue cefazolin 2g IV q8h or ceftriaxone 1g IV q24h\n   • Meningitis prophylaxis\n\n2. **Arrange Immediate Transport:**\n   • Neurosurgical center\n   • Air transport if available and faster\n   • Pre-notify receiving facility\n\n3. **Neuroprotection Bundle:**\n   • Head elevated 30°, midline\n   • MAP >80-90 mmHg\n   • SpO₂ >94%\n   • Normocapnia (EtCO₂ 35-40)\n   • Normothermia\n   • Glucose 140-180 mg/dL\n\n4. **Seizure Prophylaxis:**\n   • Levetiracetam 500mg IV BID\n   • For supratentorial injuries [3][4]',
         citation: [3, 4],
         next: 'bh-monitoring',
+        summary: 'BRIDGE not cure — needs definitive craniotomy',
     },
     {
         id: 'bh-monitoring',
@@ -341,6 +383,7 @@ export const BURR_HOLE_NODES = [
         body: '**Monitoring During Transport:**\n\n**Serial Neurologic Checks (q15 min):**\n• GCS\n• Pupil size and reactivity\n• Motor response to commands\n\n**Signs of Re-Expansion/Deterioration:**\n• Declining GCS\n• New or worsening anisocoria\n• New seizure\n• Cushing\'s triad (late sign)\n\n**If Patient Deteriorates:**\n\n1. **Brief Hyperventilation:**\n   • EtCO₂ 30-35 mmHg\n   • Maximum 5-10 minutes\n   • Temporizing measure only\n\n2. **Additional Osmotherapy:**\n   • Mannitol 0.5 g/kg IV\n   • Or hypertonic saline\n\n3. **Notify Receiving Facility:**\n   • May need OR on arrival\n   • Update ETA and clinical status\n\n**Documentation for Receiving Team:**\n• Procedure performed\n• Findings (hematoma type, amount drained)\n• Complications\n• Current medications\n• GCS/pupil progression [3][4]',
         citation: [3, 4],
         next: 'bh-documentation',
+        summary: 'GCS pupils q15min — hyperventilate only acute pupil changes',
     },
     {
         id: 'bh-documentation',
@@ -350,6 +393,7 @@ export const BURR_HOLE_NODES = [
         body: '**Critical Documentation:**\n\n**Pre-Procedure:**\n• Time of injury (if known)\n• GCS progression with times\n• Pupil changes with times\n• Herniation signs\n• CT findings (if available)\n• Time neurosurgery unavailable\n• Medical management provided\n\n**Consent/Indication:**\n• Emergency procedure performed under implied consent\n• Life-threatening emergency\n• No neurosurgical alternative available\n• Expected outcome without intervention: death\n\n**Procedure:**\n• Time of incision\n• Location of burr hole(s)\n• Equipment used\n• Findings (EDH, SDH, volume estimate)\n• Complications\n• Hemostasis achieved\n\n**Post-Procedure:**\n• Neurologic response to decompression\n• Current GCS and pupils\n• Antibiotics given\n• Transfer destination and ETA\n\n**This documentation is critical for:**\n• Medicolegal protection\n• Receiving neurosurgeon\n• Quality improvement [1]',
         citation: [1],
         next: undefined,
+        summary: 'Document indication, herniation, procedure — medicolegal critical',
     },
 ];
 export const BURR_HOLE_MODULE_LABELS = [
