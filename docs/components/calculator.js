@@ -30162,6 +30162,375 @@ const TTP_TMA_DDX_CALCULATOR = {
         };
     },
 };
+// =====================================================================
+// OCULAR POCUS CALCULATORS
+// =====================================================================
+const OPOCUS_RUPTURE_SCREEN_CALCULATOR = {
+    id: 'opocus-rupture-screen',
+    title: 'Globe Rupture Screen',
+    subtitle: 'Pre-scan safety check',
+    description: 'Screen for globe rupture signs before performing ocular ultrasound. ANY positive finding = do NOT scan, protect eye, emergent ophthalmology.',
+    results: [],
+    thresholdNote: '',
+    citations: ['ACEP Sonoguide. Ocular Ultrasound. 2024.', 'EB Medicine. Ocular Emergencies. 2024.'],
+    fields: [
+        { name: 'teardrop', label: 'Teardrop/peaked pupil', type: 'toggle', points: 10 },
+        { name: 'shallow-ac', label: 'Shallow anterior chamber', type: 'toggle', points: 10 },
+        { name: 'uveal-tissue', label: 'Visible uveal tissue through wound', type: 'toggle', points: 10 },
+        { name: 'scleral-lac', label: 'Full-thickness scleral laceration', type: 'toggle', points: 10 },
+        { name: 'hypotony', label: 'Soft globe on palpation (hypotony)', type: 'toggle', points: 10 },
+        { name: 'severe-sch', label: '360° subconjunctival hemorrhage', type: 'toggle', points: 5 },
+        { name: 'severe-va', label: 'Severely reduced visual acuity (LP/NLP)', type: 'toggle', points: 3 },
+    ],
+    computeResult(values) {
+        const findings = [];
+        if (values['teardrop'])
+            findings.push('Teardrop pupil');
+        if (values['shallow-ac'])
+            findings.push('Shallow AC');
+        if (values['uveal-tissue'])
+            findings.push('Uveal extrusion');
+        if (values['scleral-lac'])
+            findings.push('Scleral laceration');
+        if (values['hypotony'])
+            findings.push('Hypotony');
+        if (values['severe-sch'])
+            findings.push('360° SCH');
+        if (values['severe-va'])
+            findings.push('Severe VA loss');
+        const highRisk = values['teardrop'] || values['shallow-ac'] || values['uveal-tissue'] || values['scleral-lac'] || values['hypotony'];
+        if (highRisk) {
+            return {
+                value: 'STOP',
+                label: '⚠️ DO NOT SCAN — Rupture Suspected',
+                description: `**GLOBE RUPTURE SUSPECTED**\n\nFindings: ${findings.join(', ')}\n\n**IMMEDIATE ACTIONS:**\n1. Do NOT scan or apply ANY pressure\n2. Place rigid eye shield (tape to forehead)\n3. NPO — patient will need OR\n4. Antiemetics (prevent IOP spike)\n5. IV antibiotics (Vanc + Ceftaz or Levo)\n6. Update tetanus\n7. Emergent ophthalmology consult\n\n**Do NOT:**\n• Apply eye patch (use rigid shield only)\n• Attempt to remove foreign body\n• Check IOP\n• Instill any eye drops`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (findings.length > 0) {
+            return {
+                value: 'CAUTION',
+                label: 'Low-moderate risk — proceed with caution',
+                description: `**Some concerning features present:**\n${findings.join(', ')}\n\n**May proceed with scan if:**\n• Clinical suspicion for rupture is LOW\n• Mechanism does not suggest penetration\n\n**Technique:**\n• Use extra gel standoff\n• MINIMAL pressure\n• If any resistance or patient pain: STOP\n\n**If uncertain:** Do NOT scan. Protect eye, consult ophthalmology.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'SAFE',
+            label: 'No rupture signs — safe to scan',
+            description: '**No clinical signs of globe rupture**\n\n**Safe to proceed with ocular ultrasound**\n\n**Technique reminders:**\n• High-frequency linear probe\n• Copious gel over closed lid\n• MINIMAL pressure (rest on gel, not lid)\n• Scan systematically: AC → lens → vitreous → retina → ONSD',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const OPOCUS_RD_VS_PVD_CALCULATOR = {
+    id: 'opocus-rd-vs-pvd',
+    title: 'RD vs PVD',
+    subtitle: 'Differentiate retinal from vitreous detachment',
+    description: 'Distinguish retinal detachment (surgical emergency) from posterior vitreous detachment (outpatient follow-up) based on ultrasound findings.',
+    results: [],
+    thresholdNote: '',
+    citations: ['POCUS 101. Ocular Ultrasound. 2024.', 'ACEP Now. Point-of-Care Ocular US. 2023.'],
+    fields: [
+        {
+            name: 'shape',
+            label: 'Membrane shape',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'V-shaped or tent-shaped', points: 10 },
+                { label: 'Undulating, free-floating', points: 0 },
+                { label: 'Funnel/morning glory (total)', points: 15 },
+            ],
+        },
+        {
+            name: 'attachment',
+            label: 'Attachment to optic disc',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Tethered to optic disc', points: 10 },
+                { label: 'Floats freely, not attached', points: 0 },
+                { label: 'Cannot clearly assess', points: 3 },
+            ],
+        },
+        {
+            name: 'movement',
+            label: 'Movement after eye stops',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Stops when eye stops (restricted)', points: 10 },
+                { label: 'Continues undulating after eye stops', points: 0 },
+                { label: 'Cannot clearly assess', points: 3 },
+            ],
+        },
+        {
+            name: 'thickness',
+            label: 'Membrane thickness',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Thick, highly echogenic', points: 5 },
+                { label: 'Thin, less echogenic', points: 0 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const shape = values['shape'] || 0;
+        const attachment = values['attachment'] || 0;
+        const movement = values['movement'] || 0;
+        const thickness = values['thickness'] || 0;
+        const score = shape + attachment + movement + thickness;
+        if (score >= 25 || shape >= 10) {
+            return {
+                value: 'RD',
+                label: '⚠️ RETINAL DETACHMENT — Surgical Emergency',
+                description: '**RETINAL DETACHMENT IDENTIFIED**\n\n**Key findings:**\n• V-shaped or funnel membrane\n• Tethered to optic disc (anatomic constraint)\n• Restricted movement ("leashed")\n\n**IMMEDIATE ACTIONS:**\n1. Emergent ophthalmology consult\n2. Position with detached area DOWN\n3. Bilateral eye patching (reduce movement)\n4. Determine if macula-on vs macula-off\n\n**Timing:**\n• **Macula-ON:** Surgery within 24 hours\n• **Macula-OFF:** Within 72 hours\n\n**Do NOT discharge without ophtho eval.**',
+                colorVar: '--color-danger',
+            };
+        }
+        if (score <= 6 && shape === 0 && attachment === 0 && movement === 0) {
+            return {
+                value: 'PVD',
+                label: 'PVD — Outpatient Follow-Up',
+                description: '**POSTERIOR VITREOUS DETACHMENT**\n\n**Key findings:**\n• Undulating membrane floating freely\n• NOT attached to optic disc\n• Continues moving after eye stops ("seaweed in water")\n\n**PVD is usually benign BUT:**\n• 10-15% have concurrent retinal tear/detachment\n• Needs outpatient ophtho within 24-48h\n\n**Discharge instructions:**\n• Return for: increased floaters, new flashes, curtain/shadow vision, decreased acuity\n\n**Higher risk:** High myopia, prior surgery, family Hx RD',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'UNCERTAIN',
+            label: 'Indeterminate — treat as RD',
+            description: '**CANNOT CLEARLY DIFFERENTIATE**\n\n**When uncertain: Treat as RD**\n\n**Recommended approach:**\n1. Ophthalmology consultation\n2. Protect eye, limit movement\n3. Formal dilated fundus exam needed\n\n**Clinical pearl:**\nThe consequence of missing RD far outweighs unnecessary consultation.\n\n"If you can\'t tell, call."',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const OPOCUS_ONSD_CALCULATOR = {
+    id: 'opocus-onsd-calc',
+    title: 'ONSD Calculator',
+    subtitle: 'Optic nerve sheath diameter for ICP',
+    description: 'Interpret optic nerve sheath diameter measurement as surrogate for elevated intracranial pressure.',
+    results: [],
+    thresholdNote: '',
+    citations: ['Dubourg J, et al. Intensive Care Med. 2011.', 'Robba C, et al. Intensive Care Med. 2018.'],
+    fields: [
+        {
+            name: 'age-group',
+            label: 'Age group',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Adult (>15 years)', points: 1 },
+                { label: 'Child (1-15 years)', points: 2 },
+                { label: 'Infant (<1 year)', points: 3 },
+            ],
+        },
+        { name: 'onsd-r', label: 'Right eye ONSD (mm)', type: 'number', points: 0, unit: 'mm', description: 'Measured 3mm behind globe' },
+        { name: 'onsd-l', label: 'Left eye ONSD (mm)', type: 'number', points: 0, unit: 'mm', description: 'Measured 3mm behind globe' },
+    ],
+    computeResult(values) {
+        const ageGroup = values['age-group'] || 1;
+        const onsdR = values['onsd-r'] || 0;
+        const onsdL = values['onsd-l'] || 0;
+        if (onsdR <= 0 && onsdL <= 0) {
+            return {
+                value: '--',
+                label: 'Enter ONSD measurements',
+                description: '**ONSD Measurement Technique:**\n\n1. Linear probe, sagittal plane\n2. Marker superior\n3. Measure **3mm posterior to globe**\n4. Outer edge to outer edge\n5. Perpendicular to long axis of nerve\n6. Measure BOTH eyes\n\n**Report average or highest value**',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const validMeasurements = [onsdR, onsdL].filter(v => v > 0);
+        const avgONSD = validMeasurements.reduce((a, b) => a + b, 0) / validMeasurements.length;
+        const maxONSD = Math.max(onsdR, onsdL);
+        let threshold;
+        let ageLabel;
+        if (ageGroup === 3) {
+            threshold = 4.0;
+            ageLabel = 'Infant (<1y)';
+        }
+        else if (ageGroup === 2) {
+            threshold = 4.5;
+            ageLabel = 'Child (1-15y)';
+        }
+        else {
+            threshold = 5.0;
+            ageLabel = 'Adult';
+        }
+        const display = validMeasurements.length === 2
+            ? `R: ${onsdR.toFixed(1)}mm | L: ${onsdL.toFixed(1)}mm\nAvg: ${avgONSD.toFixed(1)}mm | Max: ${maxONSD.toFixed(1)}mm`
+            : `${avgONSD.toFixed(1)} mm`;
+        if (maxONSD > threshold + 0.8) {
+            return {
+                value: `${maxONSD.toFixed(1)}mm`,
+                label: '⚠️ ELEVATED — High likelihood ICP',
+                description: `**ONSD SIGNIFICANTLY ELEVATED**\n\n${display}\n\n**Age group:** ${ageLabel}\n**Threshold:** >${threshold}mm\n\n**Strongly suggests ICP >20 mmHg (PPV 88-93%)**\n\n**ACTIONS:**\n1. HOB 30°\n2. Avoid hypoxia/hypercapnia\n3. CT Head urgently\n4. Neurosurgery consult\n\n**If herniation signs:**\n• Mannitol 1-1.5 g/kg IV\n• OR hypertonic saline 23.4% 30mL\n• Brief hyperventilation PCO2 30-35`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (maxONSD >= threshold) {
+            return {
+                value: `${maxONSD.toFixed(1)}mm`,
+                label: 'BORDERLINE — Correlate clinically',
+                description: `**ONSD BORDERLINE ELEVATED**\n\n${display}\n\n**Age group:** ${ageLabel}\n**Threshold:** >${threshold}mm\n\n**Interpretation:**\n• May represent early/mild ICP elevation\n• Clinical correlation essential\n\n**Next steps:**\n• CT head if not done\n• Consider LP with opening pressure\n• Serial ONSD monitoring\n• Neurology/Neurosurgery consultation\n\n**Trend is more valuable than single measurement**`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `${avgONSD.toFixed(1)}mm`,
+            label: 'NORMAL — Elevated ICP unlikely',
+            description: `**ONSD NORMAL**\n\n${display}\n\n**Age group:** ${ageLabel}\n**Threshold:** >${threshold}mm\n\n**Interpretation:**\n• Elevated ICP is unlikely (NPV 95%+)\n• Does not completely exclude ICP elevation\n\n**If high clinical suspicion persists:**\n• CT head, LP\n• Serial ONSD\n• Formal ophthalmology fundoscopy`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const OPOCUS_CHECKLIST_CALCULATOR = {
+    id: 'opocus-checklist',
+    title: 'Ocular POCUS Checklist',
+    subtitle: 'Systematic scan documentation',
+    description: 'Systematic checklist for ocular ultrasound examination ensuring all structures assessed.',
+    results: [],
+    thresholdNote: '',
+    citations: ['ACEP Sonoguide. 2024.'],
+    fields: [
+        { name: 'ac', label: 'Anterior chamber assessed', type: 'toggle', points: 1, description: 'Depth, hyphema, foreign body' },
+        { name: 'iris', label: 'Iris/pupil evaluated', type: 'toggle', points: 1, description: 'Shape, position' },
+        { name: 'lens', label: 'Lens position documented', type: 'toggle', points: 1, description: 'Dislocation, clarity' },
+        { name: 'vitreous', label: 'Vitreous assessed', type: 'toggle', points: 1, description: 'Anechoic vs echoes' },
+        { name: 'retina', label: 'Retina attachment evaluated', type: 'toggle', points: 1, description: 'RD, PVD assessment' },
+        { name: 'onsd', label: 'ONSD measured (if indicated)', type: 'toggle', points: 1, description: '3mm behind globe, bilateral' },
+        { name: 'dynamic', label: 'Dynamic assessment performed', type: 'toggle', points: 1, description: 'Eye movement to differentiate RD/PVD' },
+    ],
+    computeResult(values) {
+        const items = [
+            { key: 'ac', label: 'Anterior Chamber' },
+            { key: 'iris', label: 'Iris/Pupil' },
+            { key: 'lens', label: 'Lens Position' },
+            { key: 'vitreous', label: 'Vitreous' },
+            { key: 'retina', label: 'Retina' },
+            { key: 'onsd', label: 'ONSD' },
+            { key: 'dynamic', label: 'Dynamic Assessment' },
+        ];
+        const completed = items.filter(i => values[i.key]).map(i => `✓ ${i.label}`);
+        const incomplete = items.filter(i => !values[i.key]).map(i => `○ ${i.label}`);
+        const count = completed.length;
+        const total = items.length;
+        if (count === total) {
+            return {
+                value: 'COMPLETE',
+                label: 'Full systematic exam documented',
+                description: `**OCULAR POCUS COMPLETE**\n\n${completed.join('\n')}\n\n**Documentation complete.**\n\nRemember to document:\n• Any abnormal findings\n• ONSD measurement values\n• Interpretation and clinical correlation`,
+                colorVar: '--color-primary',
+            };
+        }
+        if (count >= 5) {
+            return {
+                value: `${count}/${total}`,
+                label: 'Nearly complete — consider finishing',
+                description: `**COMPLETED:**\n${completed.join('\n')}\n\n**REMAINING:**\n${incomplete.join('\n')}\n\nConsider completing remaining items for thorough documentation.`,
+                colorVar: '--color-info',
+            };
+        }
+        return {
+            value: `${count}/${total}`,
+            label: 'Partial exam — complete systematic scan',
+            description: `**COMPLETED:**\n${completed.length > 0 ? completed.join('\n') : 'None'}\n\n**REMAINING:**\n${incomplete.join('\n')}\n\n**Systematic approach:**\n1. Anterior chamber\n2. Iris/pupil\n3. Lens\n4. Vitreous\n5. Retina\n6. ONSD\n7. Dynamic assessment`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const OPOCUS_VH_GRADE_CALCULATOR = {
+    id: 'opocus-vh-grade',
+    title: 'Vitreous Hemorrhage',
+    subtitle: 'Grade and disposition',
+    description: 'Grade vitreous hemorrhage severity and determine appropriate disposition.',
+    results: [],
+    thresholdNote: '',
+    citations: ['EMRA Ultrasound Guide. 2024.'],
+    fields: [
+        {
+            name: 'density',
+            label: 'Hemorrhage density',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Mild — scattered echoes, can see retina', points: 1 },
+                { label: 'Moderate — dense echoes, partial retinal view', points: 2 },
+                { label: 'Severe — complete obscuration of posterior segment', points: 3 },
+            ],
+        },
+        {
+            name: 'swirl',
+            label: 'Swirling with eye movement',
+            type: 'toggle',
+            points: 0,
+            description: '"Washing machine sign" — characteristic of VH',
+        },
+        {
+            name: 'layering',
+            label: 'Blood layering inferiorly',
+            type: 'toggle',
+            points: 0,
+            description: 'Suggests significant hemorrhage volume',
+        },
+        {
+            name: 'acute',
+            label: 'Acute onset vision loss',
+            type: 'toggle',
+            points: 0,
+        },
+    ],
+    computeResult(values) {
+        const density = values['density'] || 0;
+        const swirl = values['swirl'] || 0;
+        const layering = values['layering'] || 0;
+        const acute = values['acute'] || 0;
+        const features = [];
+        if (density === 1)
+            features.push('Mild density (retina visible)');
+        if (density === 2)
+            features.push('Moderate density (partial retinal view)');
+        if (density === 3)
+            features.push('Dense VH (retina obscured)');
+        if (swirl)
+            features.push('Swirling pattern');
+        if (layering)
+            features.push('Inferior layering');
+        if (acute)
+            features.push('Acute vision loss');
+        if (density >= 3 || (acute && density >= 2)) {
+            return {
+                value: 'SEVERE',
+                label: 'Emergent Ophthalmology Consult',
+                description: `**SEVERE VITREOUS HEMORRHAGE**\n\n**Findings:** ${features.join(', ')}\n\n**Key concern:** Cannot visualize retina = cannot rule out retinal detachment\n\n**ACTION:**\n• Emergent ophthalmology consultation\n• Cannot exclude concurrent retinal tear/detachment\n• May need vitrectomy\n\n**Common causes:**\n• Diabetic retinopathy\n• Retinal tear\n• Trauma\n• PVD with vessel traction`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (density === 2) {
+            return {
+                value: 'MODERATE',
+                label: 'Urgent Ophthalmology (Same Day)',
+                description: `**MODERATE VITREOUS HEMORRHAGE**\n\n**Findings:** ${features.join(', ')}\n\n**Partial retinal view — concerning but can partially assess**\n\n**Disposition:**\n• Urgent ophthalmology same day\n• May need dilated exam\n• Evaluate for underlying cause\n\n**Patient instructions:**\n• HOB elevated (allows blood to layer inferiorly)\n• Avoid strenuous activity`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (density === 1) {
+            return {
+                value: 'MILD',
+                label: 'Outpatient Ophthalmology 24-48h',
+                description: `**MILD VITREOUS HEMORRHAGE**\n\n**Findings:** ${features.join(', ')}\n\n**Retina visible — can adequately assess for RD**\n\n**Disposition:**\n• Outpatient ophthalmology 24-48 hours\n• Return precautions for worsening vision\n• Evaluate underlying etiology (DM, HTN)\n\n**Patient instructions:**\n• HOB elevated at night\n• Avoid straining, heavy lifting`,
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select hemorrhage density',
+            description: 'Select the density of vitreous hemorrhage to determine disposition.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -30629,6 +30998,12 @@ const CALCULATORS = {
     'wrist-druj-stability': WRIST_DRUJ_STABILITY,
     'wrist-cts-risk': WRIST_CARPAL_TUNNEL_RISK,
     'wrist-splint-selector': WRIST_SPLINT_SELECTOR,
+    // Ocular POCUS
+    'opocus-rupture-screen': OPOCUS_RUPTURE_SCREEN_CALCULATOR,
+    'opocus-rd-vs-pvd': OPOCUS_RD_VS_PVD_CALCULATOR,
+    'opocus-onsd-calc': OPOCUS_ONSD_CALCULATOR,
+    'opocus-checklist': OPOCUS_CHECKLIST_CALCULATOR,
+    'opocus-vh-grade': OPOCUS_VH_GRADE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

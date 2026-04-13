@@ -1119,6 +1119,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'mannitol', label: 'Mannitol', icon: '💉', action: 'calculator', target: 'hern-mannitol-dose' },
         { id: 'hts', label: 'HTS Dose', icon: '🧪', action: 'calculator', target: 'hern-hts-dose' },
     ],
+    // ---------------------------------------------------------------
+    // Ocular POCUS
+    // ---------------------------------------------------------------
+    'ocular-pocus': [
+        { id: 'rupture', label: 'Rupture?', icon: '⚠️', action: 'calculator', target: 'opocus-rupture-screen' },
+        { id: 'rd-pvd', label: 'RD vs PVD', icon: '👁️', action: 'calculator', target: 'opocus-rd-vs-pvd' },
+        { id: 'onsd', label: 'ONSD', icon: '🧠', action: 'calculator', target: 'opocus-onsd-calc' },
+        { id: 'vh', label: 'VH Grade', icon: '🩸', action: 'calculator', target: 'opocus-vh-grade' },
+        { id: 'checklist', label: 'Checklist', icon: '✅', action: 'calculator', target: 'opocus-checklist' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
