@@ -30531,6 +30531,346 @@ const OPOCUS_VH_GRADE_CALCULATOR = {
         };
     },
 };
+// =====================================================================
+// DIPLOPIA CALCULATORS
+// =====================================================================
+const DIPLOPIA_MONO_VS_BINO_CALCULATOR = {
+    id: 'diplopia-mono-vs-bino',
+    title: 'Monocular vs Binocular',
+    subtitle: 'First step in diplopia evaluation',
+    description: 'Differentiate monocular (ocular) from binocular (neurologic) diplopia.',
+    results: [],
+    thresholdNote: '',
+    citations: ['ACEP Now. Evaluate Diplopia. 2024.', 'emDocs. Diplopia Evaluation. 2024.'],
+    fields: [
+        {
+            name: 'cover-test',
+            label: 'Does diplopia resolve when EITHER eye is covered?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'YES - Resolves when either eye covered', points: 10 },
+                { label: 'NO - Persists with one eye covered', points: 0 },
+            ],
+        },
+        {
+            name: 'pinhole',
+            label: 'If monocular, does it improve with pinhole?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not applicable (binocular)', points: 0 },
+                { label: 'Yes - improves with pinhole', points: 1 },
+                { label: 'No - does not improve', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const coverTest = values['cover-test'] || 0;
+        const pinhole = values['pinhole'] || 0;
+        if (coverTest === 10) {
+            return {
+                value: 'BINOCULAR',
+                label: '⚠️ Binocular Diplopia - Needs Neuro Workup',
+                description: '**BINOCULAR DIPLOPIA**\n\nDiplopia resolves when either eye is covered.\n\n**This indicates ocular misalignment - potential neurologic emergency.**\n\n**Next Steps:**\n1. Determine direction (horizontal vs vertical)\n2. Systematic CN exam\n3. Check for red flags\n4. Imaging based on findings\n\n**Can\'t Miss Diagnoses:**\n• PCommA aneurysm (CN III + pupil)\n• Stroke (posterior circulation)\n• Myasthenia gravis\n• Giant cell arteritis (age >50)\n• Cavernous sinus thrombosis',
+                colorVar: '--color-danger',
+            };
+        }
+        if (pinhole === 1) {
+            return {
+                value: 'MONOCULAR',
+                label: 'Monocular - Likely Refractive',
+                description: '**MONOCULAR DIPLOPIA - REFRACTIVE CAUSE**\n\nDiplopia persists with opposite eye covered AND improves with pinhole.\n\n**Most likely:**\n• Uncorrected refractive error\n• Astigmatism\n\n**NOT a neurologic emergency.**\n\n**Disposition:**\n• Outpatient ophthalmology/optometry\n• Glasses/contact lens refraction\n• No emergent workup needed',
+                colorVar: '--color-primary',
+            };
+        }
+        if (coverTest === 0) {
+            return {
+                value: 'MONOCULAR',
+                label: 'Monocular - Ocular Cause',
+                description: '**MONOCULAR DIPLOPIA - OCULAR CAUSE**\n\nDiplopia persists with opposite eye covered.\n\n**Common Causes:**\n• Cataract\n• Corneal irregularity (dry eye, keratoconus)\n• Lens subluxation (trauma, Marfan)\n• Macular pathology\n\n**NOT a neurologic emergency.**\n\n**Disposition:**\n• Outpatient ophthalmology\n• If recent trauma + lens concern: same-day ophtho\n• Artificial tears for dry eye',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Perform cover test',
+            description: 'Cover one eye at a time and ask if diplopia resolves.',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
+const DIPLOPIA_CN3_RISK_CALCULATOR = {
+    id: 'diplopia-cn3-risk',
+    title: 'CN III Palsy Risk',
+    subtitle: 'Aneurysm vs microvascular assessment',
+    description: 'Assess risk of compressive etiology (aneurysm) in CN III palsy.',
+    results: [],
+    thresholdNote: '',
+    citations: ['AAO. Acquired Isolated Third Nerve Palsy. 2024.', 'StatPearls. CN III Palsy. 2024.'],
+    fields: [
+        { name: 'pupil', label: 'Pupil involvement (dilated, unreactive)', type: 'toggle', points: 30 },
+        { name: 'pain', label: 'Associated pain or headache', type: 'toggle', points: 15 },
+        { name: 'complete', label: 'Complete palsy (full ptosis + down-and-out)', type: 'toggle', points: 10 },
+        { name: 'young', label: 'Age <50 years', type: 'toggle', points: 10 },
+        { name: 'no-vrf', label: 'No vascular risk factors (no DM, HTN)', type: 'toggle', points: 10 },
+        { name: 'progressive', label: 'Progressive worsening', type: 'toggle', points: 15 },
+        { name: 'other-cn', label: 'Other cranial nerve involvement', type: 'toggle', points: 20 },
+    ],
+    computeResult(values) {
+        const findings = [];
+        if (values['pupil'])
+            findings.push('Pupil involved');
+        if (values['pain'])
+            findings.push('Pain/headache');
+        if (values['complete'])
+            findings.push('Complete palsy');
+        if (values['young'])
+            findings.push('Age <50');
+        if (values['no-vrf'])
+            findings.push('No vascular RF');
+        if (values['progressive'])
+            findings.push('Progressive');
+        if (values['other-cn'])
+            findings.push('Multiple CN');
+        const score = (values['pupil'] ? 30 : 0) + (values['pain'] ? 15 : 0) + (values['complete'] ? 10 : 0) +
+            (values['young'] ? 10 : 0) + (values['no-vrf'] ? 10 : 0) + (values['progressive'] ? 15 : 0) +
+            (values['other-cn'] ? 20 : 0);
+        if (values['pupil'] || score >= 40) {
+            return {
+                value: 'HIGH RISK',
+                label: '⚠️ HIGH Risk - Emergent CTA Required',
+                description: `**HIGH RISK FOR COMPRESSIVE ETIOLOGY**\n\nFindings: ${findings.join(', ')}\n\n**⚠️ EMERGENT CTA HEAD REQUIRED**\n\n**Key concern:** PCommA aneurysm\n• Rupture carries 50% mortality\n• Pupil involvement = external compression until proven otherwise\n\n**Important caveats:**\n• Up to 36% of compressive lesions are initially pupil-sparing\n• Up to 20% of ischemic lesions involve pupil\n\n**Bottom line:** ALL CN III palsies need CTA regardless of pupil.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (score >= 20) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate Risk - CTA Still Recommended',
+                description: `**MODERATE RISK**\n\nFindings: ${findings.join(', ')}\n\n**CTA recommended** even without pupil involvement.\n\n**The "rule of the pupil" has limitations:**\n• Not 100% reliable\n• Pupil involvement can be delayed 5-7 days\n• Consequences of missing aneurysm are severe\n\n**If CTA negative:**\n• Consider MRI/MRA if high suspicion\n• Close follow-up for any changes\n• Return if pupil becomes involved`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'LOWER RISK',
+            label: 'Lower Risk - But CTA Still Indicated',
+            description: `**LOWER RISK - LIKELY MICROVASCULAR**\n\n**Classic microvascular pattern:**\n• Age >50\n• Vascular risk factors (DM, HTN)\n• Pupil-sparing\n• Isolated CN III\n\n**However:**\n⚠️ **ALL acute CN III palsies warrant CTA**\n\n**If CTA negative:**\n• Can discharge with close follow-up\n• Expect improvement in 2-3 months\n• Return immediately if pupil involvement develops`,
+            colorVar: '--color-info',
+        };
+    },
+};
+const DIPLOPIA_3STEP_CALCULATOR = {
+    id: 'diplopia-3step',
+    title: 'Parks-Bielschowsky',
+    subtitle: '3-Step test for CN IV palsy',
+    description: 'Isolate the paretic muscle in vertical diplopia using the 3-step test.',
+    results: [],
+    thresholdNote: '',
+    citations: ['EyeWiki. Three Step Test. 2024.', 'StatPearls. Trochlear Nerve Palsy. 2024.'],
+    fields: [
+        {
+            name: 'step1',
+            label: 'Step 1: Which eye is higher in primary gaze?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Right eye higher (right hypertropia)', points: 1 },
+                { label: 'Left eye higher (left hypertropia)', points: 2 },
+            ],
+        },
+        {
+            name: 'step2',
+            label: 'Step 2: Hypertropia worse in which gaze?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Worse looking RIGHT', points: 1 },
+                { label: 'Worse looking LEFT', points: 2 },
+            ],
+        },
+        {
+            name: 'step3',
+            label: 'Step 3: Hypertropia worse with which head tilt?',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Worse with RIGHT head tilt', points: 1 },
+                { label: 'Worse with LEFT head tilt', points: 2 },
+            ],
+        },
+    ],
+    computeResult(values) {
+        const step1 = values['step1'] || 0;
+        const step2 = values['step2'] || 0;
+        const step3 = values['step3'] || 0;
+        if (!step1 || !step2 || !step3) {
+            return {
+                value: '--',
+                label: 'Complete all 3 steps',
+                description: '**Parks-Bielschowsky 3-Step Test:**\n\n**Step 1:** Identify which eye is higher (hypertropic) in primary gaze\n\n**Step 2:** Determine if hypertropia worsens in right or left gaze\n\n**Step 3:** Bielschowsky head tilt test - tilt head to each shoulder, note which worsens hypertropia',
+                colorVar: '--color-text-muted',
+            };
+        }
+        // Right hypertropia (step1=1), worse in LEFT gaze (step2=2), worse with RIGHT tilt (step3=1) = RIGHT CN IV
+        // Left hypertropia (step1=2), worse in RIGHT gaze (step2=1), worse with LEFT tilt (step3=2) = LEFT CN IV
+        let result = '';
+        let explanation = '';
+        if (step1 === 1 && step2 === 2 && step3 === 1) {
+            result = 'RIGHT CN IV PALSY';
+            explanation = '**RIGHT SUPERIOR OBLIQUE PALSY**\n\n✓ Right hypertropia\n✓ Worse in LEFT gaze\n✓ Worse with RIGHT head tilt\n\nThis is the classic pattern for RIGHT CN IV palsy.';
+        }
+        else if (step1 === 2 && step2 === 1 && step3 === 2) {
+            result = 'LEFT CN IV PALSY';
+            explanation = '**LEFT SUPERIOR OBLIQUE PALSY**\n\n✓ Left hypertropia\n✓ Worse in RIGHT gaze\n✓ Worse with LEFT head tilt\n\nThis is the classic pattern for LEFT CN IV palsy.';
+        }
+        else if (step1 === 1 && step2 === 1 && step3 === 2) {
+            result = 'LEFT IR or RIGHT SO';
+            explanation = '**Pattern suggests LEFT inferior rectus OR RIGHT superior oblique weakness.**\n\nFurther testing (forced ductions, muscle sequelae) needed to differentiate.\n\nIf no restriction: likely CN IV palsy.\nIf restriction present: consider thyroid eye disease or orbital pathology.';
+        }
+        else if (step1 === 2 && step2 === 2 && step3 === 1) {
+            result = 'RIGHT IR or LEFT SO';
+            explanation = '**Pattern suggests RIGHT inferior rectus OR LEFT superior oblique weakness.**\n\nFurther testing needed to differentiate.';
+        }
+        else {
+            result = 'ATYPICAL';
+            explanation = `**ATYPICAL PATTERN**\n\nResults:\n• Step 1: ${step1 === 1 ? 'Right' : 'Left'} hypertropia\n• Step 2: Worse in ${step2 === 1 ? 'right' : 'left'} gaze\n• Step 3: Worse with ${step3 === 1 ? 'right' : 'left'} head tilt\n\nThis pattern does not fit classic CN IV palsy.\n\n**Consider:**\n• Bilateral CN IV palsy\n• Restrictive strabismus (thyroid)\n• CN III palsy\n• Skew deviation (brainstem lesion)`;
+        }
+        return {
+            value: result,
+            label: result,
+            description: explanation + '\n\n**Sensitivity:** ~75% for unilateral superior oblique palsy\n\n**Next steps:**\n• If classic pattern + trauma history: likely microvascular or traumatic CN IV\n• If no clear cause: MRI with contrast',
+            colorVar: result.includes('CN IV') ? '--color-primary' : '--color-warning',
+        };
+    },
+};
+const DIPLOPIA_EXAM_CHECKLIST_CALCULATOR = {
+    id: 'diplopia-exam-checklist',
+    title: 'Diplopia Exam',
+    subtitle: 'Systematic examination checklist',
+    description: 'Ensure complete diplopia examination with all key elements.',
+    results: [],
+    thresholdNote: '',
+    citations: ['EB Medicine. Abnormal Vision. 2024.'],
+    fields: [
+        { name: 'pupils', label: 'Pupils assessed (size, reactivity, APD)', type: 'toggle', points: 1 },
+        { name: 'eom', label: 'Extraocular movements (H-pattern)', type: 'toggle', points: 1 },
+        { name: 'lids', label: 'Eyelids examined (ptosis, fatigability)', type: 'toggle', points: 1 },
+        { name: 'cover', label: 'Cover-uncover test performed', type: 'toggle', points: 1 },
+        { name: 'proptosis', label: 'Proptosis assessment', type: 'toggle', points: 1 },
+        { name: 'sensation', label: 'Facial sensation (V1, V2)', type: 'toggle', points: 1 },
+        { name: 'fundus', label: 'Fundoscopy (papilledema check)', type: 'toggle', points: 1 },
+        { name: 'neuro', label: 'Other neurological exam', type: 'toggle', points: 1 },
+    ],
+    computeResult(values) {
+        const items = [
+            { key: 'pupils', label: 'Pupils' },
+            { key: 'eom', label: 'EOMs' },
+            { key: 'lids', label: 'Lids' },
+            { key: 'cover', label: 'Cover test' },
+            { key: 'proptosis', label: 'Proptosis' },
+            { key: 'sensation', label: 'Sensation' },
+            { key: 'fundus', label: 'Fundoscopy' },
+            { key: 'neuro', label: 'Neuro exam' },
+        ];
+        const completed = items.filter(i => values[i.key]).map(i => `✓ ${i.label}`);
+        const missing = items.filter(i => !values[i.key]).map(i => `○ ${i.label}`);
+        const count = completed.length;
+        if (count === 8) {
+            return {
+                value: 'COMPLETE',
+                label: 'Full exam documented',
+                description: `**COMPLETE DIPLOPIA EXAM**\n\n${completed.join('\n')}\n\n**Key findings to document:**\n• Pupil size and reactivity\n• Direction of diplopia\n• Which movements limited\n• Presence/absence of ptosis\n• Papilledema status`,
+                colorVar: '--color-primary',
+            };
+        }
+        const critical = ['pupils', 'eom', 'fundus'].filter(k => !values[k]);
+        if (critical.length > 0) {
+            return {
+                value: `${count}/8`,
+                label: `⚠️ Missing critical elements`,
+                description: `**INCOMPLETE - CRITICAL ELEMENTS MISSING**\n\n**Must assess:**\n${critical.includes('pupils') ? '• PUPILS - essential for CN III evaluation\n' : ''}${critical.includes('eom') ? '• EOMs - core of diplopia exam\n' : ''}${critical.includes('fundus') ? '• FUNDOSCOPY - rule out papilledema\n' : ''}\n**Completed:**\n${completed.join('\n')}\n\n**Still needed:**\n${missing.join('\n')}`,
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: `${count}/8`,
+            label: 'Partial exam - consider completing',
+            description: `**COMPLETED:**\n${completed.join('\n')}\n\n**REMAINING:**\n${missing.join('\n')}`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const DIPLOPIA_LOCALIZE_CALCULATOR = {
+    id: 'diplopia-localize',
+    title: 'Localize Lesion',
+    subtitle: 'Multiple CN involvement patterns',
+    description: 'Localize the lesion based on which cranial nerves are involved.',
+    results: [],
+    thresholdNote: '',
+    citations: ['StatPearls. Cavernous Sinus Thrombosis. 2024.', 'EB Medicine. 2024.'],
+    fields: [
+        { name: 'cn2', label: 'CN II - Vision loss', type: 'toggle', points: 0 },
+        { name: 'cn3', label: 'CN III - Ptosis, down-and-out, pupil', type: 'toggle', points: 0 },
+        { name: 'cn4', label: 'CN IV - Vertical diplopia, head tilt', type: 'toggle', points: 0 },
+        { name: 'v1', label: 'V1 - Forehead/eye sensation loss', type: 'toggle', points: 0 },
+        { name: 'v2', label: 'V2 - Cheek sensation loss', type: 'toggle', points: 0 },
+        { name: 'cn6', label: 'CN VI - Cannot abduct eye', type: 'toggle', points: 0 },
+        { name: 'horner', label: 'Horner syndrome (ptosis, miosis, anhydrosis)', type: 'toggle', points: 0 },
+        { name: 'proptosis', label: 'Proptosis present', type: 'toggle', points: 0 },
+    ],
+    computeResult(values) {
+        const cn2 = values['cn2'];
+        const cn3 = values['cn3'];
+        const cn4 = values['cn4'];
+        const v1 = values['v1'];
+        const v2 = values['v2'];
+        const cn6 = values['cn6'];
+        const motorsInvolved = [cn3, cn4, cn6].filter(Boolean).length;
+        const sensoryInvolved = [v1, v2].filter(Boolean).length;
+        // Orbital apex: CN II + motor nerves
+        if (cn2 && motorsInvolved >= 1) {
+            return {
+                value: 'ORBITAL APEX',
+                label: '⚠️ Orbital Apex Syndrome',
+                description: '**ORBITAL APEX SYNDROME**\n\n**Key finding:** Vision loss (CN II) + ocular motor deficits\n\n**Contents of orbital apex:**\n• Optic nerve (CN II)\n• CN III, IV, VI\n• V1 (ophthalmic division)\n\n**Differentiates from cavernous sinus:** Vision loss!\n\n**Causes:**\n• Infection (sinusitis extension)\n• Tumor\n• Inflammation\n• Trauma\n\n**Workup:**\n• MRI with contrast (focus on apex)\n• Consider CT for bony detail\n• ESR/CRP\n• Consider LP',
+                colorVar: '--color-danger',
+            };
+        }
+        // Cavernous sinus: multiple motors + sensory, NO vision loss
+        if (motorsInvolved >= 2 || (motorsInvolved >= 1 && sensoryInvolved >= 1)) {
+            return {
+                value: 'CAVERNOUS SINUS',
+                label: '⚠️ Cavernous Sinus Syndrome',
+                description: '**CAVERNOUS SINUS SYNDROME**\n\n**Contents of cavernous sinus:**\n• CN III, IV, VI (motor)\n• V1, V2 (sensory)\n• Sympathetics (Horner)\n• Internal carotid artery\n\n**CN II is NOT in cavernous sinus** (differentiates from orbital apex)\n\n**Causes:**\n• **Thrombosis** (septic or aseptic)\n• Carotid-cavernous fistula\n• Tumor (meningioma, pituitary)\n• Tolosa-Hunt (inflammatory)\n\n**Red flags for septic CST:**\n• Fever\n• Periorbital swelling\n• Recent sinusitis/dental infection\n\n**Workup:** MRI/MRA, CTV/MRV if thrombosis suspected',
+                colorVar: '--color-danger',
+            };
+        }
+        // Superior orbital fissure
+        if (motorsInvolved >= 1 && v1 && !cn2) {
+            return {
+                value: 'SUP ORBITAL FISSURE',
+                label: 'Superior Orbital Fissure Syndrome',
+                description: '**SUPERIOR ORBITAL FISSURE SYNDROME**\n\n**Location:** Between cavernous sinus and orbital apex\n\n**Contents:**\n• CN III, IV, VI\n• V1 only (not V2)\n\n**Differentiating features:**\n• No vision loss (vs orbital apex)\n• No V2 involvement (vs cavernous sinus)\n\n**Causes:**\n• Trauma\n• Tumor\n• Inflammation\n\n**Workup:** MRI with thin cuts through fissure',
+                colorVar: '--color-warning',
+            };
+        }
+        if (motorsInvolved === 1 && !sensoryInvolved && !cn2) {
+            return {
+                value: 'ISOLATED PALSY',
+                label: 'Isolated Cranial Nerve Palsy',
+                description: '**ISOLATED CRANIAL NERVE PALSY**\n\nSingle nerve involved without other cranial nerve findings.\n\n**Most common causes:**\n• Microvascular (diabetes, HTN)\n• Aneurysm (especially CN III)\n• Trauma\n• Tumor (rare)\n\n**Workup depends on which nerve:**\n• CN III: CTA mandatory\n• CN IV: MRI if no trauma/vascular RF\n• CN VI: MRI if <50 or no vascular RF\n\nSee specific nerve sections.',
+                colorVar: '--color-info',
+            };
+        }
+        return {
+            value: '--',
+            label: 'Select involved structures',
+            description: '**Mark which cranial nerves/structures are affected to help localize the lesion.**\n\nMultiple nerve involvement suggests:\n• Cavernous sinus (III, IV, V1, V2, VI)\n• Orbital apex (II + motors)\n• Superior orbital fissure (III, IV, V1, VI)',
+            colorVar: '--color-text-muted',
+        };
+    },
+};
 const CALCULATORS = {
     // TIA Workup
     'tia-abcd2': TIA_ABCD2_CALCULATOR,
@@ -31004,6 +31344,12 @@ const CALCULATORS = {
     'opocus-onsd-calc': OPOCUS_ONSD_CALCULATOR,
     'opocus-checklist': OPOCUS_CHECKLIST_CALCULATOR,
     'opocus-vh-grade': OPOCUS_VH_GRADE_CALCULATOR,
+    // Diplopia
+    'diplopia-mono-vs-bino': DIPLOPIA_MONO_VS_BINO_CALCULATOR,
+    'diplopia-cn3-risk': DIPLOPIA_CN3_RISK_CALCULATOR,
+    'diplopia-3step': DIPLOPIA_3STEP_CALCULATOR,
+    'diplopia-exam-checklist': DIPLOPIA_EXAM_CHECKLIST_CALCULATOR,
+    'diplopia-localize': DIPLOPIA_LOCALIZE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

@@ -1129,6 +1129,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'vh', label: 'VH Grade', icon: '🩸', action: 'calculator', target: 'opocus-vh-grade' },
         { id: 'checklist', label: 'Checklist', icon: '✅', action: 'calculator', target: 'opocus-checklist' },
     ],
+    // ---------------------------------------------------------------
+    // Diplopia
+    // ---------------------------------------------------------------
+    'diplopia': [
+        { id: 'mono-bino', label: 'Mono/Bino', icon: '👁️', action: 'calculator', target: 'diplopia-mono-vs-bino' },
+        { id: 'cn3-risk', label: 'CN III Risk', icon: '⚠️', action: 'calculator', target: 'diplopia-cn3-risk' },
+        { id: '3step', label: '3-Step', icon: '📐', action: 'calculator', target: 'diplopia-3step' },
+        { id: 'exam', label: 'Exam', icon: '✅', action: 'calculator', target: 'diplopia-exam-checklist' },
+        { id: 'localize', label: 'Localize', icon: '🎯', action: 'calculator', target: 'diplopia-localize' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

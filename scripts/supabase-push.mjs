@@ -140,6 +140,7 @@ const TREE_REGISTRY = {
   'crao':                 { prefix: 'CRAO',                   entryNodeId: 'crao-start',     categoryId: 'ophthalmology' },
   'globe-rupture':        { prefix: 'GLOBE_RUPTURE',          entryNodeId: 'globe-start',    categoryId: 'ophthalmology' },
   'ocular-pocus':         { prefix: 'OCULAR_POCUS',           entryNodeId: 'opocus-start',   categoryId: 'ophthalmology' },
+  'diplopia':             { prefix: 'DIPLOPIA',               entryNodeId: 'diplopia-start', categoryId: 'ophthalmology' },
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',      entryNodeId: 'ow-start',       categoryId: 'toxicology' },
   'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',     entryNodeId: 'aws-start',      categoryId: 'toxicology' },
   'anticoag-reversal':    { prefix: 'ANTICOAG_REVERSAL',      entryNodeId: 'acr-start',      categoryId: 'heme-onc' },

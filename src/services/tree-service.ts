@@ -235,6 +235,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'crao': async () => (await import('../data/trees/crao.js')).CRAO_CRITICAL_ACTIONS,
     'globe-rupture': async () => (await import('../data/trees/globe-rupture.js')).GLOBE_RUPTURE_CRITICAL_ACTIONS,
     'ocular-pocus': async () => (await import('../data/trees/ocular-pocus.js')).OCULAR_POCUS_CRITICAL_ACTIONS,
+    'diplopia': async () => (await import('../data/trees/diplopia.js')).DIPLOPIA_CRITICAL_ACTIONS,
     'urinary-retention': async () => (await import('../data/trees/urinary-retention.js')).URINARY_RETENTION_CRITICAL_ACTIONS,
     'caustic-ingestion': async () => (await import('../data/trees/caustic-ingestion.js')).CAUSTIC_INGESTION_CRITICAL_ACTIONS,
     'epistaxis': async () => (await import('../data/trees/epistaxis.js')).EPISTAXIS_CRITICAL_ACTIONS,
@@ -623,6 +624,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'ocular-pocus': async () => {
       const m = await import('../data/trees/ocular-pocus.js');
       return { nodes: m.OCULAR_POCUS_NODES, entryNodeId: 'opocus-start', categoryId: 'ophthalmology', moduleLabels: m.OCULAR_POCUS_MODULE_LABELS, citations: m.OCULAR_POCUS_CITATIONS, criticalActions: m.OCULAR_POCUS_CRITICAL_ACTIONS };
+    },
+    'diplopia': async () => {
+      const m = await import('../data/trees/diplopia.js');
+      return { nodes: m.DIPLOPIA_NODES, entryNodeId: 'diplopia-start', categoryId: 'ophthalmology', moduleLabels: m.DIPLOPIA_MODULE_LABELS, citations: m.DIPLOPIA_CITATIONS, criticalActions: m.DIPLOPIA_CRITICAL_ACTIONS };
     },
     'urinary-retention': async () => {
       const m = await import('../data/trees/urinary-retention.js');
