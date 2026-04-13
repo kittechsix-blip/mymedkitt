@@ -1139,6 +1139,19 @@ const TOOLBAR_CONFIGS = {
         { id: 'exam', label: 'Exam', icon: '✅', action: 'calculator', target: 'diplopia-exam-checklist' },
         { id: 'localize', label: 'Localize', icon: '🎯', action: 'calculator', target: 'diplopia-localize' },
     ],
+    // ---------------------------------------------------------------
+    // Pacemaker / ICD Emergencies
+    // ---------------------------------------------------------------
+    'pacemaker': [
+        { id: 'device-id', label: 'Device ID', icon: '📱', action: 'calculator', target: 'pm-device-id' },
+        { id: 'nbg', label: 'NBG Code', icon: '🔤', action: 'calculator', target: 'pm-nbg-decoder' },
+        { id: 'malfunction', label: 'Malfunction', icon: '⚠️', action: 'calculator', target: 'pm-malfunction-id' },
+        { id: 'magnet', label: 'Magnet Rate', icon: '🧲', action: 'calculator', target: 'pm-magnet-rate' },
+        { id: 'sgarbossa', label: 'Sgarbossa', icon: '📈', action: 'calculator', target: 'pm-sgarbossa' },
+        { id: 'tcp', label: 'TCP', icon: '⚡', action: 'calculator', target: 'pm-tcp-settings' },
+        { id: 'ecg', label: 'Paced ECG', icon: '💓', action: 'calculator', target: 'pm-ecg-pattern' },
+        { id: 'icd-storm', label: 'ICD Storm', icon: '🌩️', action: 'calculator', target: 'pm-icd-storm' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

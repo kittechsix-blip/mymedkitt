@@ -160,6 +160,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'tdp-start',
             },
             {
+                id: 'pacemaker',
+                title: 'Pacemaker & ICD Emergencies',
+                subtitle: 'Device Basics → Malfunction → ECG Interpretation → Magnet Use → ICD Emergencies → Defibrillation → Temp Pacing',
+                categoryId: 'cardiology',
+                version: '1.0',
+                nodeCount: 42,
+                entryNodeId: 'pm-start',
+            },
+            {
                 id: 'cardiac-arrest',
                 title: 'Cardiac Arrest — General Approach',
                 subtitle: 'Scene Assessment → CPR → Rhythm → Reversible Causes → ROSC / TOR',

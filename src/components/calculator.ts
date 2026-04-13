@@ -31993,7 +31993,749 @@ const DIPLOPIA_LOCALIZE_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// PACEMAKER / ICD CALCULATORS
+// =====================================================================
+
+const PM_DEVICE_ID_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-device-id',
+  title: 'Device Identification',
+  subtitle: 'Identify device type from CXR and exam',
+  description: 'Identify pacemaker vs ICD vs CRT from chest X-ray and physical exam features.',
+  results: [],
+  thresholdNote: '',
+  citations: ['UpToDate. Pacemaker/ICD Emergencies. 2024.', 'LITFL. Cardiac Devices. 2024.'],
+  fields: [
+    {
+      name: 'leads',
+      label: 'Number of leads on CXR',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '1 lead', points: 1 },
+        { label: '2 leads', points: 2 },
+        { label: '3 leads', points: 3 },
+      ],
+    },
+    {
+      name: 'shock-coil',
+      label: 'Thick shock coil visible on lead(s)',
+      type: 'toggle',
+      points: 0,
+      description: 'ICD leads have visible thick coils (1-2 per lead)',
+    },
+    {
+      name: 'location',
+      label: 'Generator location',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Left pectoral (standard)', points: 0 },
+        { label: 'Right pectoral', points: 1 },
+        { label: 'Abdominal', points: 2 },
+      ],
+    },
+    {
+      name: 'card',
+      label: 'Patient has device ID card',
+      type: 'toggle',
+      points: 0,
+    },
+  ],
+  computeResult(values) {
+    const leads = values['leads'] || 0;
+    const hasCoil = values['shock-coil'];
+    const location = values['location'] || 0;
+    const hasCard = values['card'];
+
+    const features: string[] = [];
+    features.push(`${leads} lead(s)`);
+    if (hasCoil) features.push('Shock coil present');
+    if (location === 1) features.push('Right-sided');
+    if (location === 2) features.push('Abdominal');
+
+    let device = 'Unknown';
+    let explanation = '';
+
+    if (hasCard) {
+      return {
+        value: 'ID CARD',
+        label: 'Use Device ID Card',
+        description: `**Device ID card available** - most reliable source.\n\n**Card contains:**\n• Manufacturer\n• Model number\n• Lead info\n• Programmed settings\n• Emergency contacts\n\n**If card not available:**\nCall manufacturer 24/7 hotlines or use CXR pattern.\n\n**Manufacturer hotlines:**\n• Medtronic: 800-328-2518\n• Abbott/SJM: 800-722-3774\n• Boston Scientific: 800-227-3422\n• Biotronik: 800-547-0394`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (hasCoil) {
+      if (leads === 3) {
+        device = 'CRT-D (Defibrillator + CRT)';
+        explanation = 'Biventricular pacing with defibrillation capability. Has RA, RV (with coil), and coronary sinus leads.';
+      } else if (leads === 2) {
+        device = 'Dual-Chamber ICD';
+        explanation = 'Atrial and ventricular leads. RV lead has shock coil for defibrillation.';
+      } else {
+        device = 'Single-Chamber ICD';
+        explanation = 'Single RV lead with shock coil. Sensing and pacing in ventricle, shock capability.';
+      }
+    } else {
+      if (leads === 3) {
+        device = 'CRT-P (Pacemaker Only)';
+        explanation = 'Biventricular pacemaker without shock capability. RA, RV, and CS leads for cardiac resynchronization.';
+      } else if (leads === 2) {
+        device = 'Dual-Chamber Pacemaker';
+        explanation = 'Atrial and ventricular leads. Most common configuration. Usually DDD mode.';
+      } else if (leads === 1) {
+        device = 'Single-Chamber Pacemaker';
+        explanation = 'Single lead in either atrium (AAI) or ventricle (VVI). Often VVI for chronic AFib.';
+      }
+    }
+
+    return {
+      value: device,
+      label: device,
+      description: `**Likely Device:** ${device}\n\n${explanation}\n\n**Features:** ${features.join(', ')}\n\n**Key Points:**\n• ICD shock coils appear as thick segments on the lead\n• CRT devices have a 3rd lead in the coronary sinus (lateral position)\n• Right-sided generators may be for vascular access issues\n• Abdominal placement common in children or with complex anatomy\n\n**If uncertain:** Call manufacturer hotline with model number (visible on device via fluoroscopy or card).`,
+      colorVar: hasCoil ? '--color-danger' : '--color-primary',
+    };
+  },
+};
+
+const PM_NBG_DECODER_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-nbg-decoder',
+  title: 'NBG Pacemaker Code',
+  subtitle: 'Decode pacemaker mode',
+  description: 'Decode the 5-position NBG/NASPE pacemaker code.',
+  results: [],
+  thresholdNote: '',
+  citations: ['Heart Rhythm Society. 2024.', 'UpToDate. Pacemaker Codes. 2024.'],
+  fields: [
+    {
+      name: 'pos1',
+      label: 'Position I: Chamber PACED',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'O - None', points: 0 },
+        { label: 'A - Atrium', points: 1 },
+        { label: 'V - Ventricle', points: 2 },
+        { label: 'D - Dual (A+V)', points: 3 },
+      ],
+    },
+    {
+      name: 'pos2',
+      label: 'Position II: Chamber SENSED',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'O - None', points: 0 },
+        { label: 'A - Atrium', points: 1 },
+        { label: 'V - Ventricle', points: 2 },
+        { label: 'D - Dual (A+V)', points: 3 },
+      ],
+    },
+    {
+      name: 'pos3',
+      label: 'Position III: RESPONSE to sensing',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'O - None (asynchronous)', points: 0 },
+        { label: 'I - Inhibited', points: 1 },
+        { label: 'T - Triggered', points: 2 },
+        { label: 'D - Dual (I+T)', points: 3 },
+      ],
+    },
+    {
+      name: 'pos4',
+      label: 'Position IV: Rate response',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'O - None', points: 0 },
+        { label: 'R - Rate responsive', points: 1 },
+      ],
+    },
+  ],
+  computeResult(values) {
+    const pos1 = values['pos1'] || 0;
+    const pos2 = values['pos2'] || 0;
+    const pos3 = values['pos3'] || 0;
+    const pos4 = values['pos4'] || 0;
+
+    const letters1 = ['O', 'A', 'V', 'D'];
+    const letters2 = ['O', 'A', 'V', 'D'];
+    const letters3 = ['O', 'I', 'T', 'D'];
+    const letters4 = ['O', 'R'];
+
+    const code = `${letters1[pos1]}${letters2[pos2]}${letters3[pos3]}${pos4 > 0 ? letters4[pos4] : ''}`;
+
+    let description = '';
+    let clinical = '';
+
+    if (pos3 === 0) {
+      clinical = '⚠️ **ASYNCHRONOUS MODE** - Paces without sensing. Used with magnet or interference protection.';
+    }
+
+    if (code === 'VVI' || code === 'VVIR') {
+      description = 'Single-chamber ventricular pacing. Paces ventricle when no ventricular activity sensed. Common in AFib patients.';
+      clinical += '\n\n**Use:** Chronic AFib, basic backup pacing.';
+    } else if (code === 'AAI' || code === 'AAIR') {
+      description = 'Single-chamber atrial pacing. Paces atrium when no atrial activity sensed. Requires intact AV conduction.';
+      clinical += '\n\n**Use:** Sick sinus syndrome with intact AV node.';
+    } else if (code === 'DDD' || code === 'DDDR') {
+      description = 'Dual-chamber pacing and sensing. Most versatile mode. Preserves AV synchrony.';
+      clinical += '\n\n**Use:** Most common mode. AV block, sick sinus.';
+    } else if (code === 'VOO') {
+      description = 'Asynchronous ventricular pacing. No sensing - paces at fixed rate regardless of intrinsic activity.';
+      clinical += '\n\n**MAGNET MODE** for single-chamber ventricular pacemaker.';
+    } else if (code === 'DOO') {
+      description = 'Asynchronous dual-chamber pacing. Paces atrium and ventricle at fixed rate without sensing.';
+      clinical += '\n\n**MAGNET MODE** for dual-chamber pacemaker.';
+    } else if (code === 'VDD' || code === 'VDDR') {
+      description = 'Senses both chambers but only paces ventricle. Single lead with atrial sensing.';
+      clinical += '\n\n**Use:** AV block with normal sinus function. Allows AV synchrony with single lead.';
+    }
+
+    if (!description) {
+      description = 'Custom or less common pacing mode.';
+    }
+
+    const rateResponse = pos4 === 1 ? '\n\n**Rate Response (R):** Device increases rate with activity (accelerometer or minute ventilation sensor).' : '';
+
+    return {
+      value: code,
+      label: `Mode: ${code}`,
+      description: `**${code}**\n\n${description}${clinical}${rateResponse}\n\n**Position breakdown:**\n• I (${letters1[pos1]}): Paces ${pos1 === 0 ? 'nothing' : pos1 === 1 ? 'atrium' : pos1 === 2 ? 'ventricle' : 'both'}\n• II (${letters2[pos2]}): Senses ${pos2 === 0 ? 'nothing' : pos2 === 1 ? 'atrium' : pos2 === 2 ? 'ventricle' : 'both'}\n• III (${letters3[pos3]}): Response is ${pos3 === 0 ? 'none (asynchronous)' : pos3 === 1 ? 'inhibited' : pos3 === 2 ? 'triggered' : 'dual'}\n• IV (${letters4[pos4]}): Rate response ${pos4 === 0 ? 'off' : 'on'}`,
+      colorVar: pos3 === 0 ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+const PM_MALFUNCTION_ID_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-malfunction-id',
+  title: 'Malfunction Type',
+  subtitle: 'Identify pacemaker malfunction from ECG',
+  description: 'Identify the type of pacemaker malfunction based on ECG findings.',
+  results: [],
+  thresholdNote: '',
+  citations: ['LITFL. Pacemaker Malfunction. 2024.', 'EMCrit. Cardiac Devices. 2024.'],
+  fields: [
+    {
+      name: 'spikes',
+      label: 'Pacing spikes visible?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Yes - spikes present', points: 1 },
+        { label: 'No - no spikes seen', points: 0 },
+        { label: 'Intermittent spikes', points: 2 },
+      ],
+    },
+    {
+      name: 'capture',
+      label: 'Is there capture after spikes?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Not applicable (no spikes)', points: 0 },
+        { label: 'Yes - QRS follows each spike', points: 1 },
+        { label: 'No - spikes without QRS', points: 2 },
+        { label: 'Intermittent capture', points: 3 },
+      ],
+    },
+    {
+      name: 'intrinsic',
+      label: 'Intrinsic rhythm present?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No intrinsic rhythm', points: 0 },
+        { label: 'Intrinsic rhythm present', points: 1 },
+        { label: 'Spike INTO QRS (inappropriate)', points: 2 },
+      ],
+    },
+    {
+      name: 'rate',
+      label: 'Pacing rate',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Normal programmed rate', points: 0 },
+        { label: 'Slower than expected', points: 1 },
+        { label: 'Faster than expected', points: 2 },
+        { label: 'Irregular', points: 3 },
+      ],
+    },
+  ],
+  computeResult(values) {
+    const spikes = values['spikes'] || 0;
+    const capture = values['capture'] || 0;
+    const intrinsic = values['intrinsic'] || 0;
+    const rate = values['rate'] || 0;
+
+    // Failure to pace: No spikes when should be present
+    if (spikes === 0) {
+      return {
+        value: 'FAILURE TO PACE',
+        label: '⚠️ Failure to Pace',
+        description: '**FAILURE TO PACE (Output Failure)**\n\nNo pacing spikes when expected.\n\n**Causes:**\n• **Lead fracture** or insulation break\n• **Lead dislodgement**\n• **Battery depletion** (EOL)\n• **Oversensing** (device inhibited by noise)\n• **Component failure**\n\n**ECG Findings:**\n• Absent pacing spikes\n• Underlying rhythm (if any) without pacer support\n\n**Immediate Actions:**\n1. Apply magnet (eliminates oversensing)\n2. If still no output → lead/device failure\n3. CXR for lead position\n4. Transcutaneous pacing if symptomatic\n\n**If magnet restores pacing:** Oversensing\n**If magnet does not help:** Hardware failure',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Failure to capture: Spikes without QRS
+    if (capture === 2) {
+      return {
+        value: 'FAILURE TO CAPTURE',
+        label: '⚠️ Failure to Capture',
+        description: '**FAILURE TO CAPTURE**\n\nPacing spikes present but no myocardial response.\n\n**Causes:**\n• **Lead dislodgement** (most common)\n• **Lead fracture/perforation**\n• **Elevated capture threshold**\n  - MI (scar at lead tip)\n  - Electrolyte abnormality (hyperkalemia!)\n  - Antiarrhythmics (flecainide, propafenone)\n• **Battery depletion**\n\n**ECG Findings:**\n• Pacing spikes NOT followed by P wave or QRS\n\n**Immediate Actions:**\n1. **Check K+** - treat hyperkalemia first!\n2. CXR for lead position\n3. Increase output (if programmable)\n4. TCP if hemodynamically unstable\n\n**Pearl:** Hyperkalemia can cause failure to capture before significant ECG changes.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Failure to sense (undersensing): Spike into QRS
+    if (intrinsic === 2) {
+      return {
+        value: 'UNDERSENSING',
+        label: '⚠️ Undersensing (Failure to Sense)',
+        description: '**UNDERSENSING (Failure to Sense)**\n\nDevice fails to detect intrinsic cardiac activity → paces inappropriately.\n\n**ECG Finding:**\n• Pacing spike falling INTO native QRS complex\n• Pacing spike during refractory period\n\n**Causes:**\n• **Lead dislodgement**\n• **Low amplitude intrinsic signal**\n• **Sensitivity programmed too low**\n• **Lead insulation failure**\n• **New MI** (decreased signal amplitude)\n\n**Risks:**\n• R-on-T phenomenon → VT/VF (rare but dangerous)\n\n**Actions:**\n1. Reprogram sensitivity (if available)\n2. CXR for lead position\n3. Device interrogation\n4. Usually not immediately life-threatening\n\n**Note:** Magnet does NOT help - it makes device asynchronous (more undersensing).',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Oversensing
+    if (spikes === 2 || rate === 3) {
+      return {
+        value: 'OVERSENSING',
+        label: 'Oversensing (Inappropriate Inhibition)',
+        description: '**OVERSENSING**\n\nDevice senses non-cardiac signals and inappropriately inhibits pacing.\n\n**ECG Finding:**\n• Intermittent or absent pacing\n• Pauses when pacer should fire\n• May correlate with muscle activity\n\n**Causes:**\n• **Myopotentials** (pectoral muscle)\n• **T-wave oversensing**\n• **EMI** (electrocautery, MRI)\n• **Lead fracture** (make-break signals)\n• **Diaphragmatic sensing**\n\n**Actions:**\n1. **Apply magnet** → asynchronous mode\n2. If pacing resumes with magnet = confirms oversensing\n3. Reprogram sensitivity\n4. CXR to evaluate leads\n\n**Magnet eliminates oversensing** by converting to asynchronous mode.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Normal function
+    if (spikes === 1 && capture === 1) {
+      return {
+        value: 'NORMAL',
+        label: 'Normal Pacemaker Function',
+        description: '**NORMAL PACEMAKER FUNCTION**\n\n✓ Pacing spikes present\n✓ Appropriate capture (QRS follows spikes)\n✓ No inappropriate sensing\n\n**Normal findings:**\n• Spike followed by QRS (ventricular pacing)\n• Spike followed by P wave (atrial pacing)\n• Inhibition during intrinsic beats (proper sensing)\n• Regular pacing intervals\n\n**Paced QRS appearance:**\n• LBBB morphology (RV apical lead)\n• RBBB morphology (LV/septal lead or CRT)\n\n**If clinical concern persists:**\n• Formal device interrogation\n• Check battery status\n• Evaluate lead impedances',
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Complete the assessment',
+      description: '**Answer all questions to identify malfunction type.**\n\n**Malfunction Types:**\n1. **Failure to pace:** No spikes\n2. **Failure to capture:** Spikes without capture\n3. **Undersensing:** Spikes into native QRS\n4. **Oversensing:** Inappropriate inhibition',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
+const PM_TCP_SETTINGS_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-tcp-settings',
+  title: 'TCP Settings',
+  subtitle: 'Transcutaneous pacing parameters',
+  description: 'Guide for transcutaneous pacing settings and confirmation.',
+  results: [],
+  thresholdNote: '',
+  citations: ['ACLS. Bradycardia Algorithm. 2024.', 'Roberts & Hedges. 2024.'],
+  fields: [
+    {
+      name: 'indication',
+      label: 'Indication for pacing',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Symptomatic bradycardia', points: 1 },
+        { label: 'High-grade AV block', points: 2 },
+        { label: 'Pacemaker failure', points: 3 },
+        { label: 'Overdrive pacing (torsades)', points: 4 },
+      ],
+    },
+    {
+      name: 'consciousness',
+      label: 'Patient conscious?',
+      type: 'toggle',
+      points: 0,
+      description: 'Conscious patients require sedation/analgesia',
+    },
+    {
+      name: 'capture-confirmed',
+      label: 'Capture confirmed?',
+      type: 'toggle',
+      points: 0,
+      description: 'QRS after each spike + pulse check',
+    },
+  ],
+  computeResult(values) {
+    const indication = values['indication'] || 0;
+    const conscious = values['consciousness'];
+    const captured = values['capture-confirmed'];
+
+    let rateTarget = '60-70 bpm';
+    if (indication === 4) {
+      rateTarget = '90-110 bpm (overdrive)';
+    }
+
+    const sedation = conscious ? '\n\n**⚠️ SEDATION REQUIRED:**\n• Fentanyl 25-50 mcg IV\n• Midazolam 1-2 mg IV\n• Or ketamine 0.25-0.5 mg/kg\n\nTCP is painful - sedate before or immediately after starting.' : '';
+
+    const captureNote = captured
+      ? '\n\n**✓ CAPTURE CONFIRMED**\n• Maintain current settings\n• Document threshold\n• Prepare for TVP if prolonged pacing needed'
+      : '\n\n**CONFIRM CAPTURE:**\n1. Look for wide QRS after each spike\n2. Palpate pulse (femoral preferred)\n3. Check BP\n4. Pulse ox waveform\n\n⚠️ **Muscle twitching ≠ capture!**';
+
+    return {
+      value: 'TCP',
+      label: 'TCP Settings Guide',
+      description: `**TRANSCUTANEOUS PACING**\n\n**Initial Settings:**\n• **Rate:** ${rateTarget}\n• **Output:** Start at 0 mA, increase until capture\n• Typical threshold: **40-80 mA**\n• Max: 200 mA\n\n**Pad Placement:**\n• **Anterior-Posterior preferred**\n  - Anterior: Left of sternum at V3\n  - Posterior: Left of spine below scapula\n• Alternative: Anterior-Lateral${sedation}${captureNote}\n\n**Troubleshooting No Capture:**\n1. Increase output (max 200 mA)\n2. Reposition pads\n3. Ensure good skin contact\n4. Different pad positions\n5. Check cable connections\n\n**Remember:**\n• TCP is a bridge - plan for TVP or drug therapy\n• Confirm mechanical capture (pulse), not just electrical`,
+      colorVar: captured ? '--color-primary' : '--color-warning',
+    };
+  },
+};
+
+const PM_MAGNET_RATE_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-magnet-rate',
+  title: 'Magnet Rate',
+  subtitle: 'Expected magnet rates by manufacturer',
+  description: 'Reference for magnet rates by pacemaker/ICD manufacturer.',
+  results: [],
+  thresholdNote: '',
+  citations: ['LITFL. Pacemaker Magnet. 2024.', 'EMCrit. Cardiac Devices. 2024.'],
+  fields: [
+    {
+      name: 'manufacturer',
+      label: 'Manufacturer',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Unknown / Select', points: 0 },
+        { label: 'Medtronic', points: 1 },
+        { label: 'Boston Scientific (Guidant)', points: 2 },
+        { label: 'Abbott (St. Jude)', points: 3 },
+        { label: 'Biotronik', points: 4 },
+        { label: 'MicroPort (LivaNova/Sorin)', points: 5 },
+      ],
+    },
+    {
+      name: 'device-type',
+      label: 'Device type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Pacemaker', points: 1 },
+        { label: 'ICD', points: 2 },
+      ],
+    },
+  ],
+  computeResult(values) {
+    const mfr = values['manufacturer'] || 0;
+    const deviceType = values['device-type'] || 0;
+
+    const rates: Record<number, { pacer: string; icd: string }> = {
+      1: { pacer: '85 bpm (DOO/VOO)', icd: 'Disables shocks only' },
+      2: { pacer: '100 bpm (DOO/VOO)', icd: 'Disables shocks only' },
+      3: { pacer: '98.6 bpm (DOO/VOO)', icd: 'Disables shocks only' },
+      4: { pacer: '90 bpm (DOO/VOO)', icd: 'Disables shocks only' },
+      5: { pacer: '96 bpm (DOO/VOO)', icd: 'Disables shocks only' },
+    };
+
+    const mfrNames = ['', 'Medtronic', 'Boston Scientific', 'Abbott (St. Jude)', 'Biotronik', 'MicroPort'];
+
+    if (mfr === 0 || deviceType === 0) {
+      return {
+        value: '--',
+        label: 'Select manufacturer and device type',
+        description: '**MAGNET RATES BY MANUFACTURER:**\n\n| Manufacturer | Pacemaker Rate |\n|--------------|---------------|\n| Medtronic | 85 bpm |\n| Boston Scientific | 100 bpm |\n| Abbott/St. Jude | 98.6 bpm |\n| Biotronik | 90 bpm |\n| MicroPort | 96 bpm |\n\n**MAGNET ON PACEMAKER:**\n→ Converts to asynchronous mode (VOO/DOO)\n→ Paces at fixed rate regardless of intrinsic rhythm\n\n**MAGNET ON ICD:**\n→ **ONLY disables shock therapy**\n→ Pacing function unchanged\n→ Does NOT convert to asynchronous pacing',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const rate = rates[mfr];
+    const mfrName = mfrNames[mfr];
+
+    if (deviceType === 1) {
+      return {
+        value: rate.pacer,
+        label: `${mfrName}: ${rate.pacer}`,
+        description: `**${mfrName} PACEMAKER - MAGNET RESPONSE**\n\n**Expected rate:** ${rate.pacer}\n\n**Magnet Effect:**\n• Converts to asynchronous mode (DOO or VOO)\n• Fixed rate pacing regardless of intrinsic rhythm\n• Eliminates oversensing\n• No competitive inhibition\n\n**When to use:**\n• Suspected oversensing\n• EMI interference\n• Confirm pacemaker function\n\n**⚠️ Caution:**\n• May cause R-on-T if intrinsic rhythm present\n• Remove magnet once assessment complete\n\n**Battery Status:**\nMagnet rate may indicate battery status:\n• Faster rate = adequate battery\n• Slower rate = battery depletion`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: 'ICD MAGNET',
+      label: `${mfrName} ICD: Disables Shocks`,
+      description: `**${mfrName} ICD - MAGNET RESPONSE**\n\n**⚠️ MAGNET ON ICD:**\n• **Disables shock therapy ONLY**\n• Pacing function UNCHANGED\n• Does NOT convert to asynchronous mode\n\n**ICD magnet is for:**\n• Inappropriate shocks\n• ICD storm\n• End-of-life situations\n• Pre-procedure (to prevent inappropriate shocks during cautery)\n\n**Key Difference from Pacemaker:**\n| Device | Magnet Effect |\n|--------|---------------|\n| Pacemaker | Asynchronous pacing |\n| ICD | Shock therapy disabled |\n\n**To confirm magnet working on ICD:**\nMost ICDs emit audible tones when magnet applied.\n\n**Note:** Some ICDs can be programmed to ignore magnet.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+const PM_SGARBOSSA_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-sgarbossa',
+  title: 'Modified Sgarbossa',
+  subtitle: 'STEMI detection in paced rhythm',
+  description: 'Apply modified Sgarbossa criteria for STEMI in ventricular paced rhythm.',
+  results: [],
+  thresholdNote: '',
+  citations: ['Smith SW. Modified Sgarbossa. 2012.', 'LITFL. Sgarbossa Criteria. 2024.'],
+  fields: [
+    {
+      name: 'concordant-ste',
+      label: 'Concordant ST elevation ≥1 mm',
+      type: 'toggle',
+      points: 5,
+      description: 'ST elevation in same direction as QRS (most specific)',
+    },
+    {
+      name: 'concordant-std',
+      label: 'Concordant ST depression ≥1 mm in V1-V3',
+      type: 'toggle',
+      points: 3,
+      description: 'ST depression in V1-V3 (posterior STEMI)',
+    },
+    {
+      name: 'discordant',
+      label: 'Excessive discordant ST elevation',
+      type: 'toggle',
+      points: 0,
+      description: 'ST elevation ≥25% of S-wave depth (Modified Sgarbossa)',
+    },
+  ],
+  computeResult(values) {
+    const concordantSTE = values['concordant-ste'];
+    const concordantSTD = values['concordant-std'];
+    const discordant = values['discordant'];
+
+    const findings: string[] = [];
+    if (concordantSTE) findings.push('Concordant STE ≥1mm');
+    if (concordantSTD) findings.push('Concordant STD V1-V3');
+    if (discordant) findings.push('Excessive discordant STE');
+
+    if (concordantSTE) {
+      return {
+        value: 'STEMI',
+        label: '⚠️ STEMI - Activate Cath Lab',
+        description: `**STEMI DETECTED - CONCORDANT ST ELEVATION**\n\n**Findings:** ${findings.join(', ')}\n\n**Concordant STE is the most specific finding** (>90% specific)\n\n**"Concordant" means:**\nST segment in SAME direction as majority of QRS.\n• If QRS mostly negative (S wave) → STE is concordant\n• If QRS mostly positive (R wave) → STE is concordant\n\n**Action:**\n• Activate cardiac cath lab\n• Standard STEMI management\n• Aspirin, heparin, P2Y12 inhibitor\n\n**Paced rhythm does NOT preclude cath lab activation when Sgarbossa criteria met.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (concordantSTD) {
+      return {
+        value: 'STEMI',
+        label: '⚠️ Posterior STEMI',
+        description: `**POSTERIOR STEMI LIKELY**\n\n**Findings:** ${findings.join(', ')}\n\n**ST depression V1-V3 in paced rhythm** suggests posterior wall ischemia.\n\n**Action:**\n• Consider posterior leads (V7-V9)\n• Activate cath lab\n• Treat as STEMI equivalent\n\n**Note:** This criterion is present in original Sgarbossa (3 points).`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (discordant) {
+      return {
+        value: 'STEMI',
+        label: '⚠️ STEMI - Excessive Discordance',
+        description: `**STEMI DETECTED - MODIFIED SGARBOSSA**\n\n**Findings:** ${findings.join(', ')}\n\n**Modified Smith Rule:**\nST elevation ≥25% of the depth of the S-wave = STEMI\n\n**How to measure:**\n1. Find lead with deepest S wave\n2. Measure S wave depth (mm)\n3. Measure ST elevation (mm)\n4. If STE/S ≥ 0.25 → STEMI\n\n**Example:**\nS wave = 20mm, STE = 5mm\n5/20 = 0.25 → STEMI\n\n**Action:**\n• Activate cath lab\n• Standard STEMI management\n\n**This replaces the old "5mm discordant" rule which was less sensitive.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: 'NEG',
+      label: 'Sgarbossa Negative',
+      description: `**SGARBOSSA CRITERIA NEGATIVE**\n\nNo definite STEMI by modified Sgarbossa.\n\n**Important:**\n• Negative Sgarbossa does NOT rule out ACS\n• Sensitivity ~80% - some STEMIs missed\n• Clinical judgment still applies\n\n**If high clinical suspicion:**\n• Serial ECGs\n• Troponins\n• Consider cath lab activation despite negative criteria\n• Discuss with cardiology\n\n**MODIFIED SGARBOSSA CRITERIA:**\n1. Concordant STE ≥1mm in any lead ✓\n2. Concordant STD ≥1mm in V1-V3 ✓\n3. Excessively discordant STE ≥25% of S wave ✓\n\n(Original criteria used 5mm for #3, but ratio is more sensitive)`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const PM_ECG_PATTERN_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-ecg-pattern',
+  title: 'Paced ECG Pattern',
+  subtitle: 'Identify normal paced morphology',
+  description: 'Identify expected paced QRS morphology based on lead position.',
+  results: [],
+  thresholdNote: '',
+  citations: ['LITFL. Paced ECG. 2024.', 'EMCrit. Cardiac Devices. 2024.'],
+  fields: [
+    {
+      name: 'qrs-morph',
+      label: 'QRS morphology',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'LBBB pattern (V1 negative, V6 positive)', points: 1 },
+        { label: 'RBBB pattern (V1 positive, V6 negative)', points: 2 },
+        { label: 'Mixed / uncertain', points: 3 },
+      ],
+    },
+    {
+      name: 'axis',
+      label: 'QRS axis',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Left axis deviation', points: 1 },
+        { label: 'Normal axis', points: 2 },
+        { label: 'Right axis deviation', points: 3 },
+        { label: 'Extreme axis', points: 4 },
+      ],
+    },
+    {
+      name: 'device-type',
+      label: 'Known device type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Unknown', points: 0 },
+        { label: 'RV pacemaker/ICD', points: 1 },
+        { label: 'CRT (biventricular)', points: 2 },
+        { label: 'His-bundle pacing', points: 3 },
+      ],
+    },
+  ],
+  computeResult(values) {
+    const morph = values['qrs-morph'] || 0;
+    const axis = values['axis'] || 0;
+    const device = values['device-type'] || 0;
+
+    if (morph === 0) {
+      return {
+        value: '--',
+        label: 'Select QRS morphology',
+        description: '**EXPECTED PACED ECG PATTERNS:**\n\n**RV Apical Pacing (most common):**\n• LBBB morphology\n• Left axis deviation\n• Negative in V1, positive in V6\n\n**RV Septal Pacing:**\n• LBBB morphology\n• Normal or left axis\n• Narrower QRS than apical\n\n**CRT (Biventricular):**\n• Variable morphology\n• Often RBBB-like or narrower LBBB\n• Should narrow the native QRS\n\n**His-Bundle Pacing:**\n• Normal QRS morphology\n• Narrow QRS (physiologic activation)',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    if (morph === 1 && (axis === 1 || axis === 2)) {
+      return {
+        value: 'RV APEX',
+        label: 'Typical RV Apical Pacing',
+        description: '**TYPICAL RV APICAL PACING**\n\n**LBBB morphology with left axis** = expected for RV apical lead.\n\n**Why LBBB?**\nPacing from RV apex → activation spreads left-to-right → mimics LBBB.\n\n**Expected features:**\n• QRS typically 140-200 ms (wider than native LBBB)\n• Negative in V1\n• Positive in I, aVL, V5-V6\n• Left axis deviation (superior)\n• Discordant ST-T changes (opposite QRS)\n\n**This is NORMAL for RV pacing.**\n\n**If QRS changed from baseline:**\n• Consider lead dislodgement\n• New conduction abnormality\n• Compare to prior ECGs',
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (morph === 2) {
+      const crtNote = device === 2
+        ? '\n\n**CRT Device Confirmed:**\nRBBB-like pattern can be normal for CRT.\nCompare to prior ECGs for baseline.'
+        : '\n\n**⚠️ Consider:**\n• CRT device (normal)\n• Lead dislodgement to LV/septum\n• Lead perforation\n• His-bundle pacing\n\n**Get CXR** to evaluate lead position.';
+
+      return {
+        value: 'LV/CRT',
+        label: 'LV or CRT Pacing Pattern',
+        description: `**RBBB MORPHOLOGY - ATYPICAL FOR STANDARD RV PACING**\n\n**RBBB pattern suggests:**\n• CRT device (LV lead pacing)\n• Septal or His-bundle position\n• Lead malposition${crtNote}`,
+        colorVar: device === 2 ? '--color-primary' : '--color-warning',
+      };
+    }
+
+    if (axis === 4) {
+      return {
+        value: 'ABNORMAL',
+        label: '⚠️ Extreme Axis - Evaluate Lead Position',
+        description: '**EXTREME AXIS DEVIATION**\n\nExtreme/northwest axis in paced rhythm is unusual.\n\n**Consider:**\n• Lead dislodgement\n• Lead perforation\n• Inadvertent LV pacing\n• Old MI with scar affecting activation\n\n**Actions:**\n1. CXR to evaluate lead position\n2. Compare to prior ECGs\n3. Device interrogation\n4. Echocardiogram if perforation suspected',
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: 'VARIABLE',
+      label: 'Variable Pacing Pattern',
+      description: '**PACED ECG PATTERN**\n\nMorphology depends on:\n• Lead position (apex vs septum vs His)\n• Single vs biventricular pacing\n• Fusion with intrinsic conduction\n\n**Key points:**\n• RV apex = LBBB + left axis\n• CRT = variable, often narrower\n• His-bundle = near-normal QRS\n\n**Always compare to baseline** when available.\n\n**Concerning changes:**\n• New axis shift\n• QRS morphology change\n• New conduction delay',
+      colorVar: '--color-info',
+    };
+  },
+};
+
+const PM_ICD_STORM_CALCULATOR: CalculatorDefinition = {
+  id: 'pm-icd-storm',
+  title: 'ICD Storm Protocol',
+  subtitle: 'Manage ≥3 shocks in 24 hours',
+  description: 'Protocol for managing ICD storm (electrical storm).',
+  results: [],
+  thresholdNote: '',
+  citations: ['ACLS Guidelines. 2024.', 'EMCrit. ICD Storm. 2024.'],
+  fields: [
+    {
+      name: 'shock-count',
+      label: 'Number of shocks in 24 hours',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '1-2 shocks', points: 1 },
+        { label: '3+ shocks (ICD Storm)', points: 2 },
+        { label: 'Ongoing shocks', points: 3 },
+      ],
+    },
+    {
+      name: 'appropriate',
+      label: 'Shocks appear appropriate (for VT/VF)?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Yes - treating real arrhythmia', points: 1 },
+        { label: 'No - inappropriate shocks', points: 2 },
+        { label: 'Uncertain', points: 0 },
+      ],
+    },
+    {
+      name: 'magnet-applied',
+      label: 'Magnet applied',
+      type: 'toggle',
+      points: 0,
+      description: 'Magnet over ICD disables shock therapy',
+    },
+  ],
+  computeResult(values) {
+    const shockCount = values['shock-count'] || 0;
+    const appropriate = values['appropriate'] || 0;
+    const magnetApplied = values['magnet-applied'];
+
+    if (shockCount === 3 || (shockCount === 2 && !magnetApplied)) {
+      return {
+        value: 'ICD STORM',
+        label: '⚠️ ICD Storm - Immediate Action',
+        description: `**ICD STORM (Electrical Storm)**\n\n≥3 appropriate ICD shocks within 24 hours.\n\n**IMMEDIATE MANAGEMENT:**\n\n**1. APPLY MAGNET** ${magnetApplied ? '✓' : '← DO THIS NOW'}\n• Place over ICD generator\n• Disables shocks (not pacing)\n• Tape in place\n\n**2. SEDATE**\n• Midazolam 2-5 mg IV\n• Fentanyl 50-100 mcg IV\n• Consider propofol if intubated\n\n**3. BETA-BLOCKER** (cornerstone)\n• **Esmolol** 500 mcg/kg bolus → 50-200 mcg/kg/min drip\n• Or **Metoprolol** 5 mg IV q5min x3\n• Or **Propranolol** 1-3 mg IV\n\n**4. AMIODARONE**\n• 150 mg IV over 10 min\n• Then 1 mg/min x 6h → 0.5 mg/min\n\n**5. TREAT REVERSIBLE CAUSES:**\n• Electrolytes (K+, Mg2+)\n• Ischemia (STEMI?)\n• Heart failure\n• Drugs/toxins\n\n**6. CALL EP CARDIOLOGY** for device reprogramming`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (appropriate === 2) {
+      return {
+        value: 'INAPPROPRIATE',
+        label: '⚠️ Inappropriate Shocks',
+        description: '**INAPPROPRIATE ICD SHOCKS**\n\nDevice shocking when it shouldn\'t.\n\n**Common Causes:**\n• **SVT** (AFib, flutter) misinterpreted as VT\n• **T-wave oversensing**\n• **Lead fracture** (noise)\n• **EMI** (external interference)\n• **Double-counting** (paced QRS + T-wave)\n\n**MANAGEMENT:**\n\n**1. APPLY MAGNET**\nStops further shocks immediately.\n\n**2. REASSURE PATIENT**\nInappropriate shocks are terrifying.\n\n**3. Treat underlying cause:**\n• Rate control for AFib\n• Remove EMI source\n\n**4. EP CONSULTATION**\nDevice reprogramming needed.\n\n**Note:** Inappropriate shocks are NOT treating real arrhythmias, so stopping them with magnet is safe.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (shockCount === 1) {
+      return {
+        value: 'SINGLE SHOCK',
+        label: 'Single/Few Shocks - Evaluate',
+        description: '**1-2 ICD SHOCKS**\n\nNot technically "storm" but needs evaluation.\n\n**Assess:**\n1. Was shock appropriate?\n   - Did patient feel palpitations before?\n   - Telemetry shows VT/VF?\n\n2. What triggered it?\n   - Activity\n   - Ischemia\n   - Electrolyte abnormality\n\n**Workup:**\n• ECG\n• Electrolytes (K+, Mg2+)\n• Troponin if ischemia suspected\n• Device interrogation\n\n**Most single shocks are appropriate** and treating real arrhythmia.\n\n**Red flags:**\n• Multiple shocks\n• No preceding symptoms\n• During exercise (catecholaminergic VT)',
+        colorVar: '--color-info',
+      };
+    }
+
+    return {
+      value: '--',
+      label: 'Select shock count',
+      description: '**ICD SHOCK EVALUATION**\n\n**Definitions:**\n• **ICD Storm:** ≥3 appropriate shocks in 24h\n• **Inappropriate shocks:** Shocks for non-VT/VF\n\n**First question:** Is there an underlying arrhythmia?\n\n**If real VT/VF:** Treat with beta-blocker + amiodarone\n**If no arrhythmia:** Likely inappropriate - apply magnet',
+      colorVar: '--color-text-muted',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Pacemaker / ICD
+  'pm-device-id': PM_DEVICE_ID_CALCULATOR,
+  'pm-nbg-decoder': PM_NBG_DECODER_CALCULATOR,
+  'pm-malfunction-id': PM_MALFUNCTION_ID_CALCULATOR,
+  'pm-tcp-settings': PM_TCP_SETTINGS_CALCULATOR,
+  'pm-magnet-rate': PM_MAGNET_RATE_CALCULATOR,
+  'pm-sgarbossa': PM_SGARBOSSA_CALCULATOR,
+  'pm-ecg-pattern': PM_ECG_PATTERN_CALCULATOR,
+  'pm-icd-storm': PM_ICD_STORM_CALCULATOR,
   // TIA Workup
   'tia-abcd2': TIA_ABCD2_CALCULATOR,
   'tia-canadian-score': TIA_CANADIAN_SCORE_CALCULATOR,
