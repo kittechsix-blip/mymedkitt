@@ -346,6 +346,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     title: 'Epinephrine',
     body: 'EPINEPHRINE — Neonatal Resuscitation [1][2][3]\n\n[Epinephrine](#/drug/epinephrine/neonatal resuscitation)\n\n**IV/IO (preferred):**\n• **0.01–0.03 mg/kg** of 1:10,000 (= 0.1–0.3 mL/kg)\n• Repeat every **3–5 minutes** as needed\n\n**ET (if no IV/IO access):**\n• **0.05–0.1 mg/kg** of 1:10,000 (= 0.5–1 mL/kg)\n• Higher dose needed via ET — absorption is unpredictable\n• Switch to IV/IO route as soon as access established\n\n**IV/IO is ALWAYS preferred over ET.** Establish UVC access as quickly as possible.\n\n**Preparation:**\n• Use **1:10,000 concentration** (0.1 mg/mL)\n• Pre-draw doses in labeled syringes\n• Flush with 1–3 mL NS after IV administration\n\n**Continue CPR between doses.** Do not stop compressions to give epinephrine. [1][2]',
     citation: [1, 2, 3],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     next: 'nrp-uvc',
     summary: 'Epinephrine 0.01-0.03 mg/kg IV/IO of 1:10,000 q3-5min — IV/IO preferred over ET; flush with NS; continue CPR between doses',
     safetyLevel: 'critical',
@@ -426,6 +427,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     title: 'Volume Resuscitation',
     body: 'VOLUME & GLUCOSE RESUSCITATION [1][2]\n\n**Hypovolemia — clinical signs:**\n• Pallor despite adequate oxygenation\n• Weak pulses\n• Poor response to resuscitation\n• Known maternal hemorrhage or placental abruption\n\n**Normal saline:**\n• **10 mL/kg** IV/IO — infuse over 5–10 minutes\n• May repeat if needed\n\n**O-negative pRBCs:**\n• **10 mL/kg** — for acute blood loss (abruption, cord avulsion)\n• Uncrossmatched O-negative\n\n**D10W (10% Dextrose):**\n• **2 mL/kg** IV — for hypoglycemia (glucose <40 mg/dL)\n• Neonates have limited glycogen stores — check glucose early\n\n**Naloxone:**\n• **No longer routinely recommended** in neonatal resuscitation\n• PPV is the treatment for respiratory depression, regardless of cause [1]\n\nReassess after volume — if HR improving → continue PPV → post-resuscitation care.',
     citation: [1, 2],
+    calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
     next: 'nrp-postresus',
     summary: 'NS 10 mL/kg IV over 5-10 min for hypovolemia; O-neg pRBCs 10 mL/kg for blood loss; D10W 2 mL/kg for hypoglycemia; naloxone NOT recommended',
     treatment: {
@@ -473,6 +475,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     recommendation: 'Post-resuscitation: APGAR at 1/5/10 min, maintain normothermia (36.5-37.5°C), check glucose, NICU transfer for any neonate requiring PPV or more. Therapeutic hypothermia eligibility: ≥36 wk, mod-severe HIE, within 6 hours. Team debrief.',
     confidence: 'definitive',
     citation: [1, 2],
+    calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
     treatment: {
       firstLine: {
         drug: 'D10W (10% Dextrose)',

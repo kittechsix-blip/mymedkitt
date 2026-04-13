@@ -118,6 +118,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'IV Lorazepam (First-Line)',
     body: '[Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg/dose), push over 2 min.\n\n**May repeat once** in 5-10 minutes if seizure persists. Total max: 8 mg.\n\n**Alternative if lorazepam unavailable:**\n• [Diazepam](#/drug/diazepam/status epilepticus iv) 0.15-0.2 mg/kg IV (max 10 mg), repeat once\n\nLorazepam is preferred over diazepam — higher seizure termination rate (65% vs 56%) and longer duration of action.\n\n**Monitor for respiratory depression** — have bag-valve mask and suction at bedside. Patients who received multiple BZD doses from EMS are at higher risk.',
     citation: [1, 2, 5],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Lorazepam',
@@ -150,6 +151,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'IM Midazolam (No IV Access)',
     body: '[Midazolam](#/drug/midazolam/status epilepticus im) 0.2 mg/kg IM (max 10 mg) into deltoid or vastus lateralis.\n\n**RAMPART trial:** IM midazolam terminated seizures in 73% vs 63% for IV lorazepam (p<.001). Faster time to treatment offset the slightly slower IM onset.\n\n**Weight-based dosing:**\n• ≥40 kg: 10 mg IM\n• 13-40 kg: 5 mg IM\n\n**Alternative routes:**\n• Intranasal midazolam: 0.2 mg/kg via mucosal atomizer (less effective than IM per Guterman et al)\n• [Diazepam](#/drug/diazepam/status epilepticus rectal) 0.2-0.5 mg/kg PR (max 20 mg) — no longer recommended as first-line\n\n**Continue attempting IV access** — will be needed for 2nd-line agents if BZD fails.',
     citation: [1, 5],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Midazolam',
@@ -291,6 +293,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Levetiracetam (Keppra)',
     body: '[Levetiracetam](#/drug/levetiracetam/status epilepticus) 60 mg/kg IV (max 4500 mg) over 10-15 min.\n\n**ESETT:** 47% seizure termination at 60 min (equivalent to fosphenytoin and valproate).\n\n**Advantages:**\n• No cardiac effects — no telemetry requirement during infusion\n• No hepatic metabolism — no drug interactions\n• Safe in renal impairment (dose adjust if CrCl <50)\n• Safe in pregnancy (Category C, low teratogenicity — preferred 2nd line in pregnant patients)\n• Minimal drug-drug interactions\n\n**Side effects:** Psychiatric symptoms (irritability, agitation), drowsiness. Use with caution in patients with mood disorders.',
     citation: [1, 6, 7],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Levetiracetam (Keppra)',
@@ -314,6 +317,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Valproate Sodium (Depacon)',
     body: '[Valproate](#/drug/valproate/status epilepticus) 40 mg/kg IV (max 3000 mg) over 10 min.\n\n**ESETT:** 46% seizure termination at 60 min.\n\n**Contraindicated in:**\n• Pregnancy (teratogenic — neural tube defects, Category X)\n• Hepatic disease / liver failure\n• Mitochondrial disorders (Alpers syndrome — fatal hepatotoxicity)\n• Known or suspected urea cycle disorders\n• Pancreatitis\n\n**Cautions:**\n• Thrombocytopenia / coagulopathy — check platelets\n• May cause hyperammonemia — check ammonia if altered mental status persists after seizure cessation\n• Well-tolerated even with larger doses and faster rates of infusion',
     citation: [1, 6, 7],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Valproate Sodium (Depacon)',
@@ -338,6 +342,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Fosphenytoin (Cerebyx)',
     body: '[Fosphenytoin](#/drug/fosphenytoin/status epilepticus) 20 mg PE/kg IV (max 1500 mg PE) at max rate 150 mg PE/min.\n\n**ESETT:** 45% seizure termination at 60 min.\n\n**Requires cardiac monitoring** during and for 20 min after infusion — risk of:\n• Hypotension\n• Cardiac arrhythmia (bradycardia, QT prolongation)\n• AV block\n\n**INEFFECTIVE** for drug/alcohol-induced seizures — phenytoin\'s selective action on voltage-gated sodium channels is insufficient for diffuse CNS toxicity.\n\n**Contraindicated in:**\n• Sinus bradycardia, SA/AV block, Adams-Stokes syndrome\n• Decompensated heart failure\n\n**Note:** Fosphenytoin (water-soluble prodrug) is preferred over phenytoin — no risk of purple glove syndrome, can be given IM. Dosed in **PE (phenytoin equivalents)**.',
     citation: [1, 6, 7],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Fosphenytoin (Cerebyx)',
@@ -390,6 +395,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Phenobarbital',
     body: '[Phenobarbital](#/drug/phenobarbital/status epilepticus) 15-20 mg/kg IV at max rate 50-100 mg/min. Max single dose: 2000 mg.\n\n**Use when ESETT agents (levetiracetam, valproate, fosphenytoin) are unavailable** or contraindicated.\n\n**Significant risks:**\n• Respiratory depression — may precipitate need for intubation\n• Hypotension\n• Excessive sedation\n\n**Have intubation supplies ready** before administration.\n\n**Also first-line for:**\n• Neonatal seizures\n• Benzodiazepine-resistant alcohol withdrawal seizures\n\nWhen benzodiazepines are completely unavailable, [phenobarbital](#/drug/phenobarbital/status epilepticus) IV 15-20 mg/kg may be used as first-line emergent therapy.',
     citation: [1, 2],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Phenobarbital',
@@ -425,6 +431,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     title: 'Refractory SE — Intubation & Preparation',
     body: '**Refractory SE (RSE)** = failure of first-line BZD AND adequate second-line ASM.\n\nOccurs in ~30-40% of SE presentations.\n\n**Immediate actions:**\n• Secure airway with rapid sequence intubation\n• Avoid prolonged paralysis — use short-acting agent (succinylcholine preferred over rocuronium) to allow clinical seizure assessment\n• Arterial line for continuous BP monitoring\n• Central venous access for vasopressors if needed\n• **Continuous EEG monitoring — MANDATORY** (cannot assess seizure activity in paralyzed/sedated patient)\n\n[RSE Management Principles](#/info/se-rse-principles) — intubation considerations, EEG targets, weaning protocol.\n\n**Consider adding another 2nd-line ASM** (e.g., [Lacosamide](#/drug/lacosamide/status epilepticus) 200-400 mg IV) as adjunct before or concurrent with anesthetic infusion.',
     citation: [1, 2, 8],
+    calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Dose' }],
     treatment: {
       firstLine: {
         drug: 'Lacosamide (adjunct)',

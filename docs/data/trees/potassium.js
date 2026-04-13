@@ -487,6 +487,7 @@ export const POTASSIUM_NODES = [
         title: 'HypoPP: Acute Attack Management',
         body: '**CRITICAL: This is NOT true K+ depletion \u2014 aggressive replacement causes dangerous rebound hyperkalemia.**\n\n[Potassium Chloride Oral](#/drug/potassium-chloride-oral) **1 mEq/kg oral** (~60 mEq for 60 kg patient)\n\u2022 Use **immediate-release or liquid** formulation ONLY\n\u2022 **AVOID slow-release** KCl \u2014 too slow and unpredictable\n\u2022 If no improvement in 30 min \u2192 0.3 mEq/kg additional dose\n\u2022 Monitor K+ every 30 minutes\n\n**For severe attacks requiring IV:**\n\u2022 Max rate 0.3 mEq/kg/hr with continuous cardiac monitoring\n\n**AVOID:**\n\u2022 Glucose-containing fluids (worsens intracellular shift)\n\u2022 Corticosteroids (known trigger)\n\u2022 Aggressive IV KCl (rebound hyperkalemia)\n\n**Resolution of weakness may lag behind K+ normalization.**',
         citation: [17, 18],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Potassium Chloride Oral (immediate-release)',

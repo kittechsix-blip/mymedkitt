@@ -163,6 +163,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     title: 'Wide Complex PEA',
     body: '**Wide complex PEA — think sodium channel blockade.**\n\n**Common causes:**\n• Hyperkalemia (peaked T waves, sine wave)\n• TCA overdose\n• Sodium channel blocker toxicity (flecainide, procainamide)\n• Severe metabolic acidosis\n• Hypermagnesemia\n\n**Empiric treatment — give immediately:**\n• NaHCO₃ 1-2 mEq/kg IV push\n• [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV (or calcium chloride via central line)\n• [Lipid Emulsion](#/drug/lipid-emulsion/tca toxicity) if TCA or lipophilic drug suspected\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
     citation: [1, 2, 10],
+    calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
     next: 'pea-causes-wide',
     images: [{ src: 'images/cardiac-arrest/wide-pea-ecg.png', alt: 'Wide complex PEA ECG', caption: 'Wide QRS >120ms — sodium channel blockade pattern' }],
 
@@ -241,6 +242,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     title: 'TCA / Na Channel Blocker Toxicity',
     body: '**TCA/Na channel blocker toxicity in arrest:**\n\n**1. Sodium Bicarbonate:**\n• [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca toxicity) 1-2 mEq/kg IV push\n• Target pH 7.45-7.55\n• Repeat q5 min if QRS still wide\n\n**2. Lipid Emulsion (if refractory):**\n• [Lipid Emulsion](#/drug/lipid-emulsion/tca toxicity) 20% 1.5 mL/kg IV bolus\n• Follow with 0.25 mL/kg/min infusion\n\n**Do NOT use:**\n• Class IA/IC antiarrhythmics\n• Physostigmine in arrest\n\n**Continue CPR — prolonged resuscitation may be successful** in toxicologic arrests.',
     citation: [1, 5],
+    calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
     next: 'pea-cpr',
 
     summary: 'NaHCO3 1-2 mEq/kg IV push, target pH 7.45-7.55; lipid emulsion 20% if refractory; prolonged resus may succeed in tox',

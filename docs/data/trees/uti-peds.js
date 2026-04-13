@@ -188,6 +188,7 @@ export const UTI_PEDS_NODES = [
         title: 'ED/Outpatient Antibiotic Management',
         body: '**First Line:** [Cephalexin](#/drug/cephalexin) 50 mg/kg/day divided TID–QID | Max 1 g/dose\n\n**Alternative:** [Amoxicillin-Clavulanate](#/drug/amoxicillin-clavulanate) 20–40 mg/kg/day divided BID | Max 875 mg/dose\n\n**If IgE-mediated allergy to penicillins AND cephalosporins:** [Ciprofloxacin](#/drug/ciprofloxacin) 20 mg/kg/day divided BID | Max 750 mg/dose\n\n**Medication intolerant, concern for compliance, or age <6 months:** Consider single dose [Ceftriaxone](#/drug/ceftriaxone/pediatric uti) 75 mg/kg IV or IM prior to discharge | Max 2 g/dose\n\n**Total duration:**\n• <6 months: IV + PO = **10 days**\n• ≥6 months: IV + PO = **7 days**\n\nTMP-SMX should be used with caution — only 71% susceptible among E. coli isolates.',
         citation: [1, 3],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'uti-ed-followup',
         treatment: {
             firstLine: {
@@ -225,6 +226,7 @@ export const UTI_PEDS_NODES = [
         title: 'Inpatient Antibiotic Management',
         body: '**First Line:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h | Max 2 g/dose\n\n**If IgE-mediated allergy to penicillins AND cephalosporins:** Aztreonam 90 mg/kg/day divided q8h | Max 2 g/dose, plus Gentamicin 5–7 mg/kg/day q24h\n\n**If concern for CNS involvement:** [Ceftriaxone](#/drug/ceftriaxone/pediatric uti) 100 mg/kg/day divided q12h | Max 2 g/dose\n\n**Transition criteria:** 24–48 hours of IV therapy with clinical improvement. Assess susceptibility and narrow spectrum.\n\n**Total IV + PO = 7 days.**',
         citation: [1, 3, 4],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'uti-inpatient-dc',
         treatment: {
             firstLine: {
@@ -281,6 +283,7 @@ export const UTI_PEDS_NODES = [
         title: 'Neonatal UTI — Uncomplicated Treatment',
         body: '**IV:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h\n\n**Transition to PO** if term (by PMA), once sensitivities completed:\n[Cephalexin](#/drug/cephalexin)\n• ≤28 days of life: 75 mg/kg/day divided q8h\n• ≥29 days of life: 100 mg/kg/day divided q6h\n\n**Duration: 7 days**\n\nAlter therapy based on culture susceptibility.\n\n**DO NOT repeat urine culture for test of cure unless Candida or ESBL.**',
         citation: [2],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'uti-neo-imaging',
         treatment: {
             firstLine: {
@@ -302,6 +305,7 @@ export const UTI_PEDS_NODES = [
         title: 'Neonatal UTI — Complicated Treatment',
         body: 'Same antibiotic regimen as uncomplicated but **Duration: 10 days**.\n\n**IV:** [Cefazolin](#/drug/cefazolin) 50 mg/kg/day divided q8h\n\n**Transition to PO:**\n[Cephalexin](#/drug/cephalexin)\n• ≤28 days of life: 75 mg/kg/day divided q8h\n• ≥29 days of life: 100 mg/kg/day divided q6h\n\nAlter therapy based on culture susceptibility.\n\n**DO NOT repeat urine culture unless Candida or ESBL.**',
         citation: [2],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'uti-neo-imaging',
         treatment: {
             firstLine: {

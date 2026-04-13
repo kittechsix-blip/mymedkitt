@@ -178,6 +178,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Anaphylaxis Protocol',
         body: '**TREAT AS ANAPHYLAXIS — Epinephrine is first-line.** [3][4]\n\n**Epinephrine:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis) 0.3-0.5 mg IM (1 mg/mL) into anterolateral thigh\n• Repeat every 5-20 minutes, up to 3 doses\n• Pediatric: 0.01 mg/kg IM (max 0.3 mg)\n• **Refractory:** IV epinephrine drip 1-4 mcg/min (0.01-0.02 mcg/kg/min)\n• **"Dirty" drip:** 1 mg epinephrine in 1 L NS = 1 mcg/mL, run wide open\n\n**Adjuncts:**\n• **H1 blocker:** [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg IV + [Cetirizine](#/drug/cetirizine/angioedema) 10 mg PO\n• **H2 blocker:** [Famotidine](#/drug/famotidine/angioedema) 20 mg IV\n• **Corticosteroid:** [Methylprednisolone](#/drug/methylprednisolone/angioedema) 125 mg IV (adjunct — limited evidence for angioedema, but commonly given) [4]\n• **IV crystalloid** if hypotensive\n\n**On beta-blocker + refractory hypotension:**\n• [Glucagon](#/drug/glucagon/anaphylaxis) 1-5 mg IV every 5 minutes\n• Increases cAMP independent of adrenergic receptors [3]',
         citation: [3, 4],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         recommendation: 'Full anaphylaxis protocol. Observe minimum 4-6 hours. Biphasic reaction risk.',
         treatment: {
             firstLine: {
@@ -310,6 +311,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'HAE — Acute Treatment',
         body: '**First-line: C1-INH replacement therapy.** [11][12][13]\n\n**C1-INH concentrates:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV push at 4 mL/min — preferred. FDA approved for acute HAE. Median symptom relief: 0.46 hours. 99% attack resolution with single dose. [11]\n• [Ruconest](#/drug/ruconest/hereditary angioedema) 50 units/kg IV (<84 kg) or 4200 units (≥84 kg) — recombinant C1-INH from transgenic rabbits. Contraindicated if rabbit allergy. Median relief: 66 min. [13]\n\n**Alternative targeted therapies:**\n• [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ in abdomen — bradykinin B2 receptor antagonist. Repeat q6h, max 3 doses/24h. [14][15]\n• [Ecallantide](#/drug/ecallantide/hereditary angioedema) 30 mg SQ (3 × 10 mg at separate sites, ≥2.5" apart) — kallikrein inhibitor. ~4% anaphylaxis risk — administer in healthcare setting only. Ages ≥12. [18]\n\n**Adjunctive / if targeted therapy unavailable:**\n• [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) 1 g IV — antifibrinolytic, interrupts kallikrein amplification spiral. Effective for all HAE types. [25]\n• [Aminocaproic Acid](#/drug/aminocaproic-acid/angioedema) 4-5 g IV — alternative antifibrinolytic\n• [Fresh Frozen Plasma](#/drug/ffp/angioedema) 2-4 units — last resort (contains C1-INH but also kallikrein substrates — theoretical worsening risk) [19]\n\n**HAE with normal C1-INH (Type 3):** C1-INH concentrate efficacy is variable. Icatibant and TXA may be more effective. [25]',
         citation: [11, 12, 13, 14, 15, 18, 19, 25],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         recommendation: 'C1-INH concentrate is first-line for HAE Types 1 and 2. Icatibant or ecallantide as alternatives. TXA if targeted therapy unavailable.',
         treatment: {
             firstLine: {
@@ -349,6 +351,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Acquired Angioedema (AAE)',
         body: '**Very rare (~1.5 per million).** Acquired C1-INH deficiency, typically presents after age 40. [5]\n\n**Associated with:**\n• Lymphoproliferative disorders (CLL, non-Hodgkin lymphoma, Waldenstrom, MGUS)\n• Autoimmune disease (lupus — anti-C1-INH autoantibodies)\n\n**Lab findings:**\n• Low C4 (same as HAE)\n• Low C1-INH level or function (same as HAE)\n• **LOW C1q** — THIS distinguishes AAE from HAE (C1q is normal in HAE) [5][25]\n• Paraprotein often present\n\n**Treatment:** Same as HAE — [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV, [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ, or [Tranexamic Acid](#/drug/tranexamic-acid/angioedema). [25]\n\n**Must screen for underlying malignancy** — refer to hematology/oncology.',
         citation: [5, 25],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         recommendation: 'Treat as HAE. Low C1q distinguishes AAE from HAE. Screen for lymphoproliferative disorder.',
         treatment: {
             firstLine: {
@@ -378,6 +381,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Post-tPA Angioedema',
         body: '**Incidence: 0.9-7.9% after alteplase administration.** tPA increases kinins in plasma. [5]\n\n**Management:**\n• Consider stopping tPA infusion if airway is threatened — weigh stroke severity vs airway risk\n• [Icatibant](#/drug/icatibant/acei angioedema) 30 mg SQ (case reports of benefit)\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV (case reports)\n• [Fresh Frozen Plasma](#/drug/ffp/angioedema) 2 units if targeted therapy unavailable\n\n**AVOID Tranexamic Acid — contraindicated in acute ischemic stroke** (thrombotic risk in setting of ongoing cerebral ischemia).\n\nContinue standard stroke management. Secure airway if needed.',
         citation: [5],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         recommendation: 'Consider stopping tPA. Icatibant or C1-INH if available. AVOID TXA in acute stroke.',
         treatment: {
             firstLine: {
@@ -417,6 +421,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Pediatric HAE',
         body: '**50-75% of HAE patients have first attack by age 12.** Mean age of onset: 5-11 years. [5][24]\n\n**Special considerations:**\n• Smaller airway diameter → laryngeal edema leads to asphyxia faster than adults\n• Fiberoptic laryngoscopy more technically difficult (lower compliance)\n• 43.7% of pediatric HAE ED visits present with respiratory distress [24]\n\n**Abdominal presentations common:**\n• Colicky abdominal pain mimicking acute abdomen (appendicitis, intussusception)\n• **Abdominal ultrasound preferred** — radiation-sparing, can identify bowel wall edema and intussusception (which is associated with HAE) [24]\n\n**Treatment:**\n• C1-INH replacement preferred — [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV (FDA approved for pediatric HAE) [24]\n• Limited ecallantide data in patients <12 years old\n• [Icatibant](#/drug/icatibant/hereditary angioedema) — FDA approved for ≥18 years only',
         citation: [5, 24],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         recommendation: 'Smaller airway = faster compromise. C1-INH concentrate preferred. US over CT for abdominal symptoms.',
         treatment: {
             firstLine: {
@@ -446,6 +451,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Pregnancy & Lactation',
         body: 'Physiologic changes in pregnancy can **mitigate, aggravate, or have no effect** on underlying HAE — variable and unpredictable. [5]\n\n**Preferred acute treatment:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV — plasma-derived C1-INH, considered safest option [5]\n\n**If Berinert unavailable:**\n• [Ruconest](#/drug/ruconest/hereditary angioedema) (recombinant C1-INH) — recommended if plasma-derived C1-INH not available and no rabbit allergy [5]\n• [Icatibant](#/drug/icatibant/hereditary angioedema) — for life-threatening attacks only when C1-INH unavailable. Recent small studies suggest safety in pregnancy. [5]\n\n**Estrogens can exacerbate bradykinin signaling** — estrogen-containing products may worsen HAE.',
         citation: [5],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         recommendation: '[Berinert](#/drug/berinert/hae pregnancy) 20 units/kg IV is preferred in pregnancy. [Ruconest](#/drug/ruconest/hereditary angioedema) or [Icatibant](#/drug/icatibant/hereditary angioedema) only if C1-INH unavailable.',
         treatment: {
             firstLine: {
@@ -488,6 +494,7 @@ export const ANGIOEDEMA_NODES = [
         title: 'Abdominal — Treatment',
         body: '**Treat the underlying angioedema — symptom improvement confirms the diagnosis.** [5]\n\n**For known/suspected HAE:**\n• [Berinert](#/drug/berinert/hereditary angioedema) 20 units/kg IV — improvement in symptoms supports the diagnosis\n• Alternative: [Icatibant](#/drug/icatibant/hereditary angioedema) 30 mg SQ or [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) 1 g IV\n\n**In patients with known HAE and typical recurrent abdominal episodes:**\n• Reasonable to defer imaging if clinical picture is consistent with prior episodes AND patient improves with targeted therapy [4]\n\n**Avoid unnecessary surgical exploration** — angioedema-related bowel edema resolves with treatment.\n\n**If diagnosis uncertain:** Standard acute abdomen workup remains appropriate. Send C4 level if HAE suspected.',
         citation: [4, 5],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         recommendation: 'Treat underlying angioedema. Symptom improvement confirms diagnosis. Avoid unnecessary surgery.',
         treatment: {
             firstLine: {

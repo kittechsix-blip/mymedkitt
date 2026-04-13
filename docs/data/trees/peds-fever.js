@@ -57,6 +57,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'ADMIT to inpatient or PICU. Full sepsis workup with age-appropriate empiric antibiotics. Add [Acyclovir](#/drug/acyclovir) if <21 days or HSV risk factors.',
         confidence: 'definitive',
         citation: [1, 2, 5],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone + Vancomycin',
@@ -140,6 +141,7 @@ export const PEDS_FEVER_NODES = [
         title: 'Add HSV Coverage',
         body: '**Add [Acyclovir](#/drug/acyclovir) 20 mg/kg IV q8h**\n\nHSV TESTING TO ORDER\n\u2022 HSV PCR \u2014 blood (plasma)\n\u2022 HSV PCR \u2014 CSF (from held tube #4)\n\u2022 Surface cultures: conjunctiva, throat, nasopharynx, rectum\n\u2022 Vesicle fluid: viral culture + PCR (if lesions present)\n\u2022 AST, ALT (hepatic involvement screen)\n\nDURATION\n\u2022 Minimum 5 doses or until HSV PCR results negative\n\u2022 If PCR not resulted after 5 doses \u2192 contact Infectious Disease\n\u2022 Ensure adequate hydration (crystalline nephropathy risk)',
         citation: [1, 3],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'pf-neo-age',
         summary: 'Acyclovir 20 mg/kg IV q8h; order HSV PCR blood + CSF, surface cultures; minimum 5 doses or until PCR negative',
         safetyLevel: 'critical',
@@ -194,6 +196,7 @@ export const PEDS_FEVER_NODES = [
         title: 'Meningitis Protocol',
         body: '**Escalate to meningitic dosing based on age:**\n\n**0\u20137 DAYS**\n\u2022 [Ampicillin](#/drug/ampicillin) 100 mg/kg IV q8h (meningitic dose)\n\u2022 Add [Cefepime](#/drug/cefepime) 50 mg/kg IV q12h\n\u2022 Discontinue [Gentamicin](#/drug/gentamicin)\n\u2022 Consider [Acyclovir](#/drug/acyclovir) if not already started\n\n**8\u201321 DAYS**\n\u2022 [Ceftriaxone](#/drug/ceftriaxone/pediatric meningitis) 50 mg/kg IV q12h (meningitic dose)\n\u2022 Add [Ampicillin](#/drug/ampicillin) 75 mg/kg IV q6h (meningitic dose)\n\u2022 Consider [Acyclovir](#/drug/acyclovir) if not already started\n\nSee [Antimicrobial Dosing Reference](#/info/pf-abx-dosing) for complete dosing.',
         citation: [1, 6],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         next: 'pf-neo-admit',
         summary: 'Escalate to meningitic dosing; 0-7d: ampicillin 100 mg/kg + cefepime; 8-21d: ceftriaxone q12h + ampicillin q6h',
         safetyLevel: 'critical',
@@ -207,6 +210,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Admit to inpatient. Continue age-appropriate empiric antibiotics. If cultures negative at 24\u201336h and infant is well-appearing, discontinue antibiotics.',
         confidence: 'definitive',
         citation: [1, 5, 7],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone + Ampicillin',
@@ -317,6 +321,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'ADMIT. Start meningitic-dose antibiotics immediately. Consider HSV coverage. Repeat LP in 24\u201348h if organism identified to document sterilization.',
         confidence: 'definitive',
         citation: [1, 6],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone + Ampicillin',
@@ -366,6 +371,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'ADMIT. Start IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Step down to oral [Cephalexin](#/drug/cephalexin/pediatric UTI) when tolerating PO and clinically improving. Total 10-day course.',
         confidence: 'definitive',
         citation: [1, 8],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Cefazolin',
@@ -415,6 +421,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Disposition based on inflammatory marker status and shared decision-making. Ensure 24-hour follow-up regardless of disposition. Culture callback system in place.',
         confidence: 'recommended',
         citation: [1, 4, 7, 9],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone',
@@ -512,6 +519,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'ADMIT. Start meningitic-dose [Ceftriaxone](#/drug/ceftriaxone/pediatric meningitis) + [Vancomycin](#/drug/vancomycin/pediatric meningitis). Consider HSV coverage. Obtain Vancomycin trough before 4th dose (goal 15\u201320 mcg/mL).',
         confidence: 'definitive',
         citation: [1, 6],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone + Vancomycin',
@@ -561,6 +569,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'ADMIT. Start IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Step down to oral [Cephalexin](#/drug/cephalexin/pediatric UTI) when tolerating PO and clinically improving. Total 10-day course.',
         confidence: 'definitive',
         citation: [1, 8],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Cefazolin',
@@ -610,6 +619,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Disposition based on shared decision-making. Give [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) x1 if discharging. Ensure 24-hour follow-up and culture callback system.',
         confidence: 'recommended',
         citation: [1, 4, 7, 9],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone',
@@ -631,6 +641,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Low risk for SBI. If UTI: oral Cephalexin and home. If no UTI: no antibiotics, home observation with 24-hour follow-up.',
         confidence: 'recommended',
         citation: [1, 4, 7, 9],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Cephalexin',
@@ -741,6 +752,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Assess WBC count. If abnormal, give empiric [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) x1 and ensure 24-hour follow-up. Culture callback system in place.',
         confidence: 'recommended',
         citation: [1, 5, 6],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Ceftriaxone',
@@ -762,6 +774,7 @@ export const PEDS_FEVER_NODES = [
         recommendation: 'Treat UTI based on clinical status. Well-appearing: oral [Cephalexin](#/drug/cephalexin/pediatric UTI) or [Ceftriaxone](#/drug/ceftriaxone/pediatric UTI) x1 + oral. Ill: IV [Cefazolin](#/drug/cefazolin/pediatric UTI). Total 10-day course. Follow up urine culture.',
         confidence: 'definitive',
         citation: [1, 8],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
                 drug: 'Cephalexin',

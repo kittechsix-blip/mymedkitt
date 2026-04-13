@@ -238,6 +238,7 @@ export const CROUP_NODES: DecisionNode[] = [
     body: '**Admission criteria:**\n\u2022 Persistent stridor at rest despite dexamethasone + epinephrine\n\u2022 Requiring multiple doses of nebulized epinephrine\n\u2022 Significant respiratory distress\n\u2022 Unable to tolerate oral fluids\n\u2022 Young infant (<6 months) with moderate-severe croup\n\u2022 Unreliable follow-up or social concerns\n\n**Inpatient management:**\n\u2022 Continuous pulse oximetry\n\u2022 PRN nebulized epinephrine\n\u2022 Minimize agitation \u2014 keep parent at bedside\n\u2022 Reassess for alternative diagnoses if not improving: **bacterial tracheitis** (progressive toxicity, purulent secretions, radiographic findings) [4]\n\u2022 **Antibiotics only for suspected bacterial complications** \u2014 not routine for croup',
     recommendation: 'Admit for continued monitoring and PRN nebulized epinephrine. Minimize agitation. Continuous pulse oximetry. Reassess if failing to improve \u2014 consider bacterial tracheitis or other causes. Most admitted children improve within 24-48 hours.',
     citation: [2, 4],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
     treatment: {
       firstLine: {
         drug: 'Racemic Epinephrine',
@@ -249,7 +250,7 @@ export const CROUP_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous pulse oximetry. Reassess respiratory status after each epinephrine dose. Most children improve within 24-48 hours.',
     },
-  
+
     summary: 'Persistent stridor despite dex + epi, unable to tolerate PO, <6mo with moderate-severe = admit',
   },
 

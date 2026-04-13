@@ -48,6 +48,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Immediate Life Threat',
         body: 'Patient is an **immediate danger** — actively violent, weapon, or excited delirium features.\n\n**Restrain + Sedate simultaneously:**\n\n• Physical restraint per [Restraint Protocol](#/info/comb-restraint-protocol) while administering IM sedation\n• [Ketamine](#/drug/ketamine/acute agitation) 4 mg/kg IM — fastest reliable sedation (onset 3–5 min)\n• OR [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM + [Haloperidol](#/drug/haloperidol/acute agitation) 10 mg IM\n• Prepare for intubation — have RSI equipment at bedside\n• Once controlled, proceed to assessment and etiology workup',
         citation: [1, 4, 5],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         next: 'comb-severe-response',
         summary: 'Immediate Life Threat — review key clinical information before proceeding',
     },
@@ -523,6 +524,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Severe Agitation — Withdrawal',
         body: '**Benzos are mandatory** — treat the underlying GABA deficit.\n\n• [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM if no IV access\n• [Lorazepam](#/drug/lorazepam/alcohol withdrawal) 2–4 mg IV\n• [Diazepam](#/drug/diazepam/alcohol withdrawal) 10–20 mg IV q5–10 min\n\nWithdrawal patients may need very large cumulative benzo doses.\n\n[Phenobarbital](#/drug/phenobarbital/alcohol withdrawal) is an excellent adjunct — longer duration, more reliable serum levels. See [Alcohol Withdrawal](#/tree/alcohol-withdrawal) consult.\n\n**Antipsychotics are NOT adequate as monotherapy** — they do not address the GABA deficit and lower seizure threshold.',
         citation: [2, 7, 8],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         next: 'comb-severe-response',
         treatment: {
             firstLine: {
@@ -603,6 +605,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Refractory Agitation',
         body: 'Patient not responding to standard combination therapy.\n\n**Reconsider diagnosis** — is there an untreated medical cause? Hypoglycemia, hypoxia, head injury, sepsis?\n\n**Escalation options:**\n\n**1. [Ketamine](#/drug/ketamine/acute agitation)** 4 mg/kg IM or 1–2 mg/kg IV\n• Fastest, most reliable. Onset 3–5 min IM.\n• Prepare for intubation. Avoid in elderly and known schizophrenia.\n• If given after other sedatives, reduce dose by 50%.\n\n**2. [Dexmedetomidine](#/drug/dexmedetomidine/refractory agitation)** IV infusion 0.2–1.5 mcg/kg/hr\n• Alpha-2 agonist — no respiratory depression\n• Slower onset. Requires cardiac monitoring (bradycardia risk).\n\n**3. RSI and intubation** if unable to protect airway or need definitive control\n• This is a management endpoint, not a failure.',
         citation: [1, 4, 5, 10],
+        calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],
         next: 'comb-restraint-needed',
         treatment: {
             firstLine: {

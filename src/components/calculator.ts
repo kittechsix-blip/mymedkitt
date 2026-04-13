@@ -32725,7 +32725,223 @@ const PM_ICD_STORM_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// WEIGHT-BASED DOSE CALCULATORS
+// =====================================================================
+
+const WEIGHT_DOSE_CALCULATOR: CalculatorDefinition = {
+  id: 'weight-dose',
+  title: 'Weight-Based Dose Calculator',
+  subtitle: 'Calculate doses from mg/kg',
+  description: 'Universal weight-based medication dose calculator. Enter patient weight and dose per kg to calculate total dose.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Patient weight in kilograms' },
+    { name: 'dosePerKg', label: 'Dose per kg', type: 'number', points: 0, valueIsPoints: true, description: 'mg/kg (or mcg/kg, mL/kg, units/kg)' },
+    {
+      name: 'unit',
+      label: 'Unit',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'mg/kg', points: 1 },
+        { label: 'mcg/kg', points: 2 },
+        { label: 'mL/kg', points: 3 },
+        { label: 'units/kg', points: 4 },
+        { label: 'mEq/kg', points: 5 },
+        { label: 'g/kg', points: 6 },
+      ],
+    },
+    { name: 'maxDose', label: 'Maximum Dose (optional)', type: 'number', points: 0, valueIsPoints: true, description: 'Cap the calculated dose at this maximum' },
+  ],
+  results: [],
+  thresholdNote: 'Always verify weight-based calculations with pharmacy resources. Pediatric doses may have different maximums than adults.',
+  citations: ['Lexicomp Pediatric & Neonatal Dosage Handbook. 2024.'],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const dosePerKg = values['dosePerKg'] || 0;
+    const unitType = values['unit'] || 1;
+    const maxDose = values['maxDose'] || 0;
+
+    if (weight <= 0) {
+      return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg to calculate dose.', colorVar: '--color-text-muted' };
+    }
+    if (dosePerKg <= 0) {
+      return { value: '--', label: 'Enter dose/kg', description: 'Enter the dose per kg to calculate total dose.', colorVar: '--color-text-muted' };
+    }
+
+    const unitLabels: Record<number, string> = { 1: 'mg', 2: 'mcg', 3: 'mL', 4: 'units', 5: 'mEq', 6: 'g' };
+    const unitPerKgLabels: Record<number, string> = { 1: 'mg/kg', 2: 'mcg/kg', 3: 'mL/kg', 4: 'units/kg', 5: 'mEq/kg', 6: 'g/kg' };
+    const unitLabel = unitLabels[unitType] || 'mg';
+    const unitPerKgLabel = unitPerKgLabels[unitType] || 'mg/kg';
+
+    let calculatedDose = Math.round(weight * dosePerKg * 100) / 100;
+    let capped = false;
+    if (maxDose > 0 && calculatedDose > maxDose) {
+      calculatedDose = maxDose;
+      capped = true;
+    }
+
+    const description = `**CALCULATION:**\n${weight} kg × ${dosePerKg} ${unitPerKgLabel} = **${Math.round(weight * dosePerKg * 100) / 100} ${unitLabel}**${capped ? `\n\n⚠️ **CAPPED** at maximum dose: ${maxDose} ${unitLabel}` : ''}`;
+
+    return {
+      value: `${calculatedDose} ${unitLabel}`,
+      label: 'Calculated Dose',
+      description,
+      colorVar: capped ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
+const PEDS_DOSE_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-dose',
+  title: 'Pediatric Dose Calculator',
+  subtitle: 'Common pediatric medications',
+  description: 'Quick reference for common pediatric weight-based medications. Select the drug and enter weight.',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Patient weight in kilograms' },
+    {
+      name: 'drug',
+      label: 'Medication',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '-- Resuscitation --', points: 0 },
+        { label: 'Epinephrine (cardiac arrest) 0.01 mg/kg', points: 1 },
+        { label: 'Epinephrine (anaphylaxis) 0.01 mg/kg IM', points: 2 },
+        { label: 'Atropine 0.02 mg/kg', points: 3 },
+        { label: 'Adenosine (1st) 0.1 mg/kg', points: 4 },
+        { label: 'Adenosine (2nd) 0.2 mg/kg', points: 5 },
+        { label: 'Amiodarone 5 mg/kg', points: 6 },
+        { label: 'NS/LR Bolus 20 mL/kg', points: 7 },
+        { label: 'Blood 10 mL/kg', points: 8 },
+        { label: '-- Seizures --', points: 0 },
+        { label: 'Lorazepam 0.1 mg/kg IV', points: 10 },
+        { label: 'Midazolam 0.2 mg/kg IN', points: 11 },
+        { label: 'Midazolam 0.1 mg/kg IV', points: 12 },
+        { label: 'Diazepam 0.2 mg/kg PR', points: 13 },
+        { label: 'Levetiracetam 60 mg/kg', points: 14 },
+        { label: 'Fosphenytoin 20 PE/kg', points: 15 },
+        { label: '-- Antibiotics --', points: 0 },
+        { label: 'Ceftriaxone 50 mg/kg', points: 20 },
+        { label: 'Ceftriaxone 100 mg/kg (meningitis)', points: 21 },
+        { label: 'Ampicillin 50 mg/kg', points: 22 },
+        { label: 'Vancomycin 15 mg/kg', points: 23 },
+        { label: 'Cephalexin 25 mg/kg', points: 24 },
+        { label: 'Amoxicillin 25 mg/kg', points: 25 },
+        { label: 'Azithromycin 10 mg/kg', points: 26 },
+        { label: 'Gentamicin 2.5 mg/kg', points: 27 },
+        { label: '-- Sedation/Analgesia --', points: 0 },
+        { label: 'Ketamine 1.5 mg/kg IV', points: 30 },
+        { label: 'Ketamine 4 mg/kg IM', points: 31 },
+        { label: 'Fentanyl 1 mcg/kg IV', points: 32 },
+        { label: 'Morphine 0.1 mg/kg IV', points: 33 },
+        { label: '-- Respiratory --', points: 0 },
+        { label: 'Dexamethasone 0.6 mg/kg (croup)', points: 40 },
+        { label: 'Dexamethasone 0.15 mg/kg', points: 41 },
+        { label: 'Methylprednisolone 2 mg/kg', points: 42 },
+        { label: 'Racemic Epinephrine 0.5 mL (not wt-based)', points: 43 },
+        { label: '-- Other --', points: 0 },
+        { label: 'Ondansetron 0.15 mg/kg', points: 50 },
+        { label: 'Ibuprofen 10 mg/kg', points: 51 },
+        { label: 'Acetaminophen 15 mg/kg', points: 52 },
+        { label: 'Diphenhydramine 1.25 mg/kg', points: 53 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Always verify with pharmacy. Maximum doses apply to most medications.',
+  citations: ['Lexicomp Pediatric & Neonatal Dosage Handbook. 2024.', 'PALS Provider Manual. AHA. 2020.'],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const drugId = values['drug'] || 0;
+
+    if (weight <= 0) {
+      return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg to calculate dose.', colorVar: '--color-text-muted' };
+    }
+    if (drugId === 0) {
+      return { value: '--', label: 'Select medication', description: 'Select a medication from the list.', colorVar: '--color-text-muted' };
+    }
+
+    interface DrugInfo {
+      name: string;
+      dosePerKg: number;
+      unit: string;
+      maxDose: number;
+      maxUnit: string;
+      route: string;
+      notes?: string;
+    }
+
+    const drugs: Record<number, DrugInfo> = {
+      // Resuscitation
+      1: { name: 'Epinephrine (cardiac arrest)', dosePerKg: 0.01, unit: 'mg', maxDose: 1, maxUnit: 'mg', route: 'IV/IO', notes: '= 0.1 mL/kg of 1:10,000. Repeat q3-5min.' },
+      2: { name: 'Epinephrine (anaphylaxis)', dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, maxUnit: 'mg', route: 'IM', notes: '= 0.01 mL/kg of 1:1,000 (1 mg/mL). Anterolateral thigh.' },
+      3: { name: 'Atropine', dosePerKg: 0.02, unit: 'mg', maxDose: 0.5, maxUnit: 'mg', route: 'IV/IO', notes: 'Min dose 0.1 mg. May repeat once.' },
+      4: { name: 'Adenosine (1st dose)', dosePerKg: 0.1, unit: 'mg', maxDose: 6, maxUnit: 'mg', route: 'Rapid IV push', notes: 'Follow immediately with 5-10 mL NS flush.' },
+      5: { name: 'Adenosine (2nd dose)', dosePerKg: 0.2, unit: 'mg', maxDose: 12, maxUnit: 'mg', route: 'Rapid IV push', notes: 'Follow immediately with 5-10 mL NS flush.' },
+      6: { name: 'Amiodarone', dosePerKg: 5, unit: 'mg', maxDose: 300, maxUnit: 'mg', route: 'IV/IO', notes: 'For VF/pVT. May repeat twice.' },
+      7: { name: 'NS/LR Fluid Bolus', dosePerKg: 20, unit: 'mL', maxDose: 1000, maxUnit: 'mL', route: 'IV/IO', notes: 'May repeat. Reassess after each bolus.' },
+      8: { name: 'pRBC Transfusion', dosePerKg: 10, unit: 'mL', maxDose: 500, maxUnit: 'mL', route: 'IV', notes: 'Expect ~1 g/dL Hgb rise per 10 mL/kg.' },
+      // Seizures
+      10: { name: 'Lorazepam', dosePerKg: 0.1, unit: 'mg', maxDose: 4, maxUnit: 'mg', route: 'IV', notes: 'May repeat x1 in 5-10 min.' },
+      11: { name: 'Midazolam (intranasal)', dosePerKg: 0.2, unit: 'mg', maxDose: 10, maxUnit: 'mg', route: 'IN', notes: 'Use concentrated 5 mg/mL. Split between nares.' },
+      12: { name: 'Midazolam (IV)', dosePerKg: 0.1, unit: 'mg', maxDose: 5, maxUnit: 'mg', route: 'IV', notes: 'May repeat x1.' },
+      13: { name: 'Diazepam (rectal)', dosePerKg: 0.2, unit: 'mg', maxDose: 20, maxUnit: 'mg', route: 'PR', notes: 'May repeat x1 in 10 min.' },
+      14: { name: 'Levetiracetam', dosePerKg: 60, unit: 'mg', maxDose: 4500, maxUnit: 'mg', route: 'IV', notes: 'Infuse over 15 min. First-line for status.' },
+      15: { name: 'Fosphenytoin', dosePerKg: 20, unit: 'PE', maxDose: 1500, maxUnit: 'PE', route: 'IV', notes: 'PE = phenytoin equivalents. Infuse at 3 PE/kg/min.' },
+      // Antibiotics
+      20: { name: 'Ceftriaxone', dosePerKg: 50, unit: 'mg', maxDose: 2000, maxUnit: 'mg', route: 'IV/IM', notes: 'Standard dose. Once daily.' },
+      21: { name: 'Ceftriaxone (meningitis)', dosePerKg: 100, unit: 'mg', maxDose: 4000, maxUnit: 'mg', route: 'IV', notes: 'Meningitic dose. Give q12h (divide daily dose).' },
+      22: { name: 'Ampicillin', dosePerKg: 50, unit: 'mg', maxDose: 2000, maxUnit: 'mg', route: 'IV', notes: 'Per dose. Usually q6h dosing.' },
+      23: { name: 'Vancomycin', dosePerKg: 15, unit: 'mg', maxDose: 1000, maxUnit: 'mg', route: 'IV', notes: 'Per dose. Infuse over 60 min. Target trough 10-20.' },
+      24: { name: 'Cephalexin', dosePerKg: 25, unit: 'mg', maxDose: 500, maxUnit: 'mg', route: 'PO', notes: 'Per dose. Usually TID-QID dosing.' },
+      25: { name: 'Amoxicillin', dosePerKg: 25, unit: 'mg', maxDose: 500, maxUnit: 'mg', route: 'PO', notes: 'Per dose. High-dose: 40-45 mg/kg/dose.' },
+      26: { name: 'Azithromycin', dosePerKg: 10, unit: 'mg', maxDose: 500, maxUnit: 'mg', route: 'PO/IV', notes: 'Day 1 dose. Days 2-5: 5 mg/kg (max 250 mg).' },
+      27: { name: 'Gentamicin', dosePerKg: 2.5, unit: 'mg', maxDose: 120, maxUnit: 'mg', route: 'IV', notes: 'Traditional dosing q8h. Once-daily: 5-7 mg/kg.' },
+      // Sedation/Analgesia
+      30: { name: 'Ketamine (IV PSA)', dosePerKg: 1.5, unit: 'mg', maxDose: 100, maxUnit: 'mg', route: 'IV', notes: 'Procedural sedation. Give over 1-2 min.' },
+      31: { name: 'Ketamine (IM)', dosePerKg: 4, unit: 'mg', maxDose: 300, maxUnit: 'mg', route: 'IM', notes: 'When IV access unavailable.' },
+      32: { name: 'Fentanyl', dosePerKg: 1, unit: 'mcg', maxDose: 100, maxUnit: 'mcg', route: 'IV', notes: 'Titrate for pain. IN: 1.5-2 mcg/kg (max 100 mcg).' },
+      33: { name: 'Morphine', dosePerKg: 0.1, unit: 'mg', maxDose: 10, maxUnit: 'mg', route: 'IV', notes: 'Titrate for pain. May repeat q5-10min PRN.' },
+      // Respiratory
+      40: { name: 'Dexamethasone (croup)', dosePerKg: 0.6, unit: 'mg', maxDose: 16, maxUnit: 'mg', route: 'PO/IV/IM', notes: 'Single dose. PO preferred if tolerating.' },
+      41: { name: 'Dexamethasone (general)', dosePerKg: 0.15, unit: 'mg', maxDose: 10, maxUnit: 'mg', route: 'IV/PO', notes: 'Standard anti-inflammatory dose.' },
+      42: { name: 'Methylprednisolone', dosePerKg: 2, unit: 'mg', maxDose: 125, maxUnit: 'mg', route: 'IV', notes: 'Asthma/reactive airway. May repeat q6h.' },
+      43: { name: 'Racemic Epinephrine', dosePerKg: 0.5, unit: 'mL', maxDose: 0.5, maxUnit: 'mL', route: 'Nebulized', notes: 'Fixed dose 0.5 mL of 2.25% solution.' },
+      // Other
+      50: { name: 'Ondansetron', dosePerKg: 0.15, unit: 'mg', maxDose: 4, maxUnit: 'mg', route: 'IV/PO/ODT', notes: 'May repeat q6-8h. Max 3 doses/day.' },
+      51: { name: 'Ibuprofen', dosePerKg: 10, unit: 'mg', maxDose: 400, maxUnit: 'mg', route: 'PO', notes: 'May repeat q6-8h. Max daily: 40 mg/kg or 2400 mg.' },
+      52: { name: 'Acetaminophen', dosePerKg: 15, unit: 'mg', maxDose: 1000, maxUnit: 'mg', route: 'PO/PR', notes: 'May repeat q4-6h. Max daily: 75 mg/kg or 4000 mg.' },
+      53: { name: 'Diphenhydramine', dosePerKg: 1.25, unit: 'mg', maxDose: 50, maxUnit: 'mg', route: 'IV/PO', notes: 'May repeat q6h. Total daily max: 300 mg.' },
+    };
+
+    const drug = drugs[drugId];
+    if (!drug) {
+      return { value: '--', label: 'Category header', description: 'Please select a specific medication.', colorVar: '--color-text-muted' };
+    }
+
+    let calculatedDose = Math.round(weight * drug.dosePerKg * 100) / 100;
+    let capped = false;
+    if (calculatedDose > drug.maxDose) {
+      calculatedDose = drug.maxDose;
+      capped = true;
+    }
+
+    const description = `**${drug.name}**\n\n**Dose:** ${drug.dosePerKg} ${drug.unit}/kg × ${weight} kg = ${Math.round(weight * drug.dosePerKg * 100) / 100} ${drug.unit}${capped ? `\n\n⚠️ **CAPPED** at max: ${drug.maxDose} ${drug.maxUnit}` : ''}\n\n**Route:** ${drug.route}\n\n**Final Dose:** **${calculatedDose} ${drug.unit}** ${drug.route}${drug.notes ? `\n\n**Note:** ${drug.notes}` : ''}`;
+
+    return {
+      value: `${calculatedDose} ${drug.unit}`,
+      label: drug.name,
+      description,
+      colorVar: capped ? '--color-warning' : '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Weight-Based Dosing
+  'weight-dose': WEIGHT_DOSE_CALCULATOR,
+  'peds-dose': PEDS_DOSE_CALCULATOR,
   // Pacemaker / ICD
   'pm-device-id': PM_DEVICE_ID_CALCULATOR,
   'pm-nbg-decoder': PM_NBG_DECODER_CALCULATOR,
