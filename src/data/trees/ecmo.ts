@@ -64,6 +64,7 @@ export const ECMO_NODES: DecisionNode[] = [
         next: 'ecmo-selection-decision',
       },
     ],
+    summary: 'VV-ECMO = oxygenation only (needs good heart), VA-ECMO = oxygenation + circulatory support',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -94,6 +95,8 @@ export const ECMO_NODES: DecisionNode[] = [
         next: 'ecmo-assessment',
       },
     ],
+    summary: 'When in doubt between VV and VA, go VA — VA supports both heart and lungs',
+    safetyLevel: 'warning',
   },
 
   {
@@ -104,6 +107,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**Rapid bedside assessment to determine VV vs VA:**\n\n**ECHO findings favoring VV-ECMO:**\n• LVEF >35-40%\n• No significant RV dilation/dysfunction\n• Normal or near-normal cardiac output\n• No significant valvular disease\n\n**ECHO findings favoring VA-ECMO:**\n• LVEF <25-30%\n• Severe RV dysfunction\n• Global hypokinesis\n• Severe MR/AR (relative contraindication)\n\n**Hemodynamic parameters:**\n| Parameter | VV Candidate | VA Candidate |\n|-----------|--------------|---------------|\n| MAP | >65 on low pressors | <65 or high pressors |\n| CI | >2.2 L/min/m² | <2.0 L/min/m² |\n| ScvO₂ | >70% | <60% |\n| Lactate | <4 | >4, rising |\n\n**Clinical gestalt:**\n• If the patient "looks shocky" and has multiorgan failure → lean VA\n• If only lungs are failing → VV',
     citation: [1, 3, 4],
     next: 'ecmo-selection-decision',
+    summary: 'Echo: LVEF >35% + CI >2.2 + low pressors = VV candidate; LVEF <25% + high pressors = VA',
+    skippable: true,
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -121,6 +126,7 @@ export const ECMO_NODES: DecisionNode[] = [
       { id: 'ecmo-murray-score', label: 'Murray Lung Injury Score' },
     ],
     next: 'ecmo-vv-timing',
+    summary: 'VV-ECMO for P/F <80 on FiO2 100% despite prone/optimal vent — lungs must be recoverable',
   },
 
   {
@@ -131,6 +137,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**CALL THE ECMO CENTER EARLY** — don\'t wait until the patient is moribund [2][6].\n\n**Dr. Augustin\'s guidance (CV-EMCrit):**\n\n**Call for referral when:**\n• Young patient with single organ failure\n• Reversible cause of respiratory failure\n• Failing conventional management\n• Mechanical ventilation <7 days (ideally)\n\n**EOLIA/CESAR trial thresholds:**\n• P/F <80 despite optimization\n• pH <7.25 with rising PaCO₂\n• Murray score ≥3.0\n• Uncompensated hypercapnia with pH <7.20\n\n**Mortality increases sharply with:**\n• MV >7 days before ECMO: 77% mortality vs 38% if <7 days [6]\n• Pplat >30 + FiO₂ >90% for >7 days\n• Multi-organ failure\n\n**What to optimize before calling:**\n• Prone positioning (if not contraindicated)\n• Neuromuscular blockade\n• Conservative fluid management\n• Lung-protective ventilation\n\n**DON\'T delay the call waiting for everything to fail.**',
     citation: [2, 5, 6],
     next: 'ecmo-vv-flow',
+    summary: 'Call ECMO center EARLY — mortality doubles if MV >7 days before ECMO initiation',
+    safetyLevel: 'warning',
   },
 
   {
@@ -141,6 +149,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '[VV-ECMO Circuit Visualization](#/info/ecmo-vv-circuit)\n\n**How VV-ECMO works:**\n\n**Blood flow:**\n1. Deoxygenated blood **drained** from venous system (usually femoral vein → IVC)\n2. Passes through **membrane oxygenator** (adds O₂, removes CO₂)\n3. **Returned** to venous system (usually IJ → SVC/RA junction)\n4. Oxygenated blood flows through native heart → lungs → systemic circulation\n\n**The heart still does ALL the pumping** — VV-ECMO only provides gas exchange.\n\n**Typical cannulation (Femorojugular):**\n• **Drainage cannula:** Femoral vein, tip at IVC/RA junction (near hepatic veins)\n• **Return cannula:** Right IJ, tip at SVC/RA junction\n• **Optimal separation:** 8-15 cm to minimize recirculation [1]\n\n**Alternative: Dual-lumen Avalon cannula**\n• Single IJ cannula\n• Drains from SVC and IVC, returns to RA directed at tricuspid valve\n• Technically challenging, requires fluoroscopy/TEE\n\n**Initial flow target:** BSA × 1.8 L/min/m² (typically ~5 L/min)',
     citation: [1, 2],
     next: 'ecmo-vv-settings',
+    summary: 'VV circuit: femoral drain to IVC/RA, return via IJ — heart still does ALL the pumping',
+    skippable: true,
   },
 
   {
@@ -162,6 +172,7 @@ export const ECMO_NODES: DecisionNode[] = [
       monitoring: 'PTT or anti-Xa q6h until stable. Daily fibrinogen, platelets, Hgb. Monitor for circuit thrombosis.',
     },
     next: 'ecmo-vv-recirculation',
+    summary: 'Rest lungs: PEEP ≥10, Pplat <25, RR 5-10, Vt ~4cc/kg — ECMO handles gas exchange',
   },
 
   {
@@ -172,6 +183,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '[Recirculation Troubleshooting](#/calc/ecmo-recirculation)\n\n**Recirculation** = oxygenated blood returns to the circuit before reaching the systemic circulation [1][7].\n\n**Problem:** ECMO is oxygenating its own output, not the patient\'s blood.\n\n**Signs of significant recirculation:**\n• Poor systemic oxygenation despite high ECMO flow/FiO₂\n• Pre-membrane saturation (SpreO₂) >75-80%\n• Post-membrane saturation normal (SpostO₂ ~100%)\n• Patient saturation remains low\n\n**Calculating recirculation:**\n\n```\nRecirculation = (SpreO₂ - SvO₂) / (SpostO₂ - SvO₂) × 100%\n```\n\n**Causes:**\n• Cannulas too close together (<8 cm)\n• Excessive ECMO flow relative to cardiac output\n• Cannula malposition (return directed at drainage)\n\n**Fixes:**\n• Reposition cannulas (increase separation)\n• Decrease ECMO flow (if tolerated)\n• Increase native cardiac output (reduce sedation, add inotrope)\n• Consider dual-lumen cannula (Avalon) or reconfigure\n\n**Acceptable recirculation:** <10-15%',
     citation: [1, 7],
     next: 'ecmo-contraindications',
+    summary: 'Poor patient SpO2 despite good ECMO flows — check cannula separation and recirculation',
+    skippable: true,
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -189,6 +202,7 @@ export const ECMO_NODES: DecisionNode[] = [
       { id: 'ecmo-scai-stages', label: 'SCAI Shock Stages' },
     ],
     next: 'ecmo-va-timing',
+    summary: 'VA-ECMO for refractory cardiogenic shock, massive PE, electrical storm, or toxic OD',
   },
 
   {
@@ -199,6 +213,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**Early initiation improves outcomes** [3][4][8].\n\n**Key timing data:**\n• Each 12-hour delay from admission to VA-ECMO initiation increases adjusted in-hospital mortality by **6%** [8]\n• Initiation after 24 hours associated with worse outcomes\n• Don\'t wait until all other options have failed\n\n**When to consider VA-ECMO:**\n\n**SCAI Shock Stage C (Classic):**\n• Hypotension requiring vasopressors\n• Signs of hypoperfusion (lactate 2-4, Cr rising)\n• May still respond to escalating support\n\n**SCAI Shock Stage D (Deteriorating):**\n• Failing to respond to initial interventions\n• Requiring multiple/escalating pressors\n• Lactate >4 and rising\n• **THIS IS THE TIME TO CALL**\n\n**SCAI Shock Stage E (Extremis):**\n• Near-arrest or arrest\n• Refractory to maximal support\n• May be too late — but VA-ECMO can still be attempted\n\n**Call the ECMO team at Stage D, not Stage E.**',
     citation: [3, 4, 8],
     next: 'ecmo-va-flow',
+    summary: 'Each 12h delay increases mortality 6% — call ECMO team at SCAI Stage D, not Stage E',
+    safetyLevel: 'critical',
   },
 
   {
@@ -209,6 +225,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '[VA-ECMO Circuit Visualization](#/info/ecmo-va-circuit)\n\n**How VA-ECMO works:**\n\n**Blood flow:**\n1. Deoxygenated blood **drained** from venous system (femoral vein → IVC/RA)\n2. Passes through **centrifugal pump** (provides forward flow)\n3. Passes through **membrane oxygenator** (gas exchange)\n4. **Returned** to arterial system (femoral artery → aorta)\n5. ECMO flow is **retrograde** in peripheral VA-ECMO\n\n**The ECMO circuit does the work of the heart AND lungs.**\n\n**Peripheral cannulation (Femoral-Femoral):**\n• **Drainage:** Femoral vein, tip at IVC/RA junction\n• **Return:** Femoral artery, tip in common iliac or distal aorta\n• **Distal perfusion cannula:** ESSENTIAL to prevent limb ischemia\n\n**Central cannulation (surgical):**\n• Direct aortic and right atrial cannulation\n• Essentially cardiopulmonary bypass\n• Used post-cardiotomy or when peripheral access not possible\n• Nearly all central VA-ECMO patients get LV vent\n\n**Initial flow target:** BSA × 2.4 L/min/m² (typically ~4-5 L/min)',
     citation: [1, 3],
     next: 'ecmo-va-settings',
+    summary: 'VA circuit: femoral vein drain, femoral artery return — MUST place distal perfusion cannula',
+    safetyLevel: 'warning',
   },
 
   {
@@ -219,6 +237,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**ECMO circuit settings:**\n\n**Flow:** Start at BSA × 2.4 L/min/m²\n• Typical adult: 4-5 L/min\n• Target: MAP >65, lactate clearing, adequate perfusion\n• May need 80-100% of cardiac output initially\n\n**Sweep gas:** Similar to VV — titrate to PaCO₂ goal\n\n**FiO₂ on circuit:** 100% initially\n\n---\n\n**Ventilator settings during VA-ECMO:**\n\nUnlike VV-ECMO, the native lungs still receive blood flow from the recovering heart.\n\n| Parameter | Target |\n|-----------|--------|\n| PEEP | 8-10 cm |\n| RR | 10-12/min |\n| Vt | 6-8 cc/kg |\n| FiO₂ | Titrate to SpO₂ |\n\n**Anticoagulation:** Same as VV — PTT 50-70 or anti-Xa 0.3-0.5\n\n---\n\n**Critical VA-ECMO monitoring:**\n\n• **Right radial arterial line** — monitor for differential hypoxemia\n• **Pulse oximeter on RIGHT hand/ear** — cerebral/coronary oxygenation\n• **Distal limb perfusion** — check hourly, NIRS if available\n• **LV distension** — echo for aortic valve opening, MR, LV thrombus',
     citation: [1, 3, 4],
     next: 'ecmo-va-harlequin',
+    summary: 'Right radial arterial line mandatory for VA-ECMO — monitors for differential hypoxemia',
+    safetyLevel: 'warning',
   },
 
   {
@@ -229,6 +249,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '[Harlequin Syndrome Management](#/calc/ecmo-harlequin)\n\n**Harlequin Syndrome = Differential Hypoxemia** [7][9]\n\nAlso called North-South Syndrome or dual-circulation syndrome.\n\n**What happens:**\nIn peripheral (femoral) VA-ECMO, as the native heart recovers:\n• Heart ejects **deoxygenated blood** (if lungs still failing) → goes to **upper body** (coronaries, brain)\n• ECMO returns **oxygenated blood** retrograde → goes to **lower body**\n• **Mixing zone** in descending aorta\n\n**Result:** Upper body hypoxia, lower body well-oxygenated.\n\n**Clinical recognition:**\n• Right hand SpO₂ <90% (upper body)\n• Left foot SpO₂ normal (lower body)\n• Cerebral NIRS low\n• Upper body appears cyanotic, lower body pink\n\n**Dangers:**\n• **Coronary hypoxia** → ischemia, arrhythmia\n• **Cerebral hypoxia** → stroke, encephalopathy\n\n**Management options:**\n1. **Optimize native lung function** (recruitment, FiO₂, PEEP)\n2. **Increase ECMO flow** (push mixing zone proximally)\n3. **Convert to VAV-ECMO** — add venous return cannula to RA via IJ\n4. **Central cannulation** (surgical)\n5. **Dual circuit VA + VV** (resource-intensive)\n\n**Prevention:** Early recognition, right radial arterial line.',
     citation: [7, 9],
     next: 'ecmo-va-lv-distension',
+    summary: 'Upper body cyanosis + lower body pink = Harlequin syndrome — coronary/cerebral hypoxia risk',
+    safetyLevel: 'critical',
   },
 
   {
@@ -239,6 +261,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**LV distension is a serious VA-ECMO complication** [1][3].\n\n**Mechanism:**\n• VA-ECMO increases afterload (retrograde arterial flow)\n• Failing LV cannot eject against increased afterload\n• Blood accumulates in LV → distension → pulmonary edema\n• Aortic valve may not open → stasis → LV thrombus\n\n**Signs of LV distension:**\n• Pulmonary edema on CXR (worsening)\n• Aortic valve not opening on echo\n• Severe MR\n• Rising pulmonary artery pressures\n• Blood-tinged secretions from ETT\n\n**Management options:**\n\n**1. Optimize inotropy:**\n• Low-dose dobutamine or milrinone\n• Help LV eject, open aortic valve\n\n**2. Reduce ECMO flow:**\n• Allow more native cardiac output\n• Only if patient tolerates\n\n**3. LV venting (interventional/surgical):**\n• **Impella** (percutaneous LV → aorta)\n• **Intra-aortic balloon pump** (modest effect)\n• **Surgical LV vent** (direct LV cannula)\n• **Atrial septostomy** (decompress LA)\n\n**Prevention:** Echo daily, monitor for aortic valve opening.\n\n**If AV not opening >24-48h → high risk of LV thrombus.**',
     citation: [1, 3],
     next: 'ecmo-contraindications',
+    summary: 'LV distension: aortic valve not opening on echo — may need Impella or surgical LV vent',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -255,6 +279,7 @@ export const ECMO_NODES: DecisionNode[] = [
       { id: 'ecmo-ecpr-criteria', label: 'ECPR Candidacy Checklist' },
     ],
     next: 'ecmo-ecpr-logistics',
+    summary: 'ECPR for witnessed arrest, shockable rhythm, <60min CPR, reversible cause — 31.5% good neuro outcomes',
   },
 
   {
@@ -265,6 +290,7 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**ECPR requires preparation and rapid deployment** [8].\n\n**Time is critical:**\n• Every 10 min of CPR without ECMO = worse outcomes\n• Target: cannulation within 60 minutes of arrest\n• Have team pre-notified if considering ECPR\n\n**Cannulation during CPR:**\n• Continue chest compressions during cannulation\n• Mechanical CPR device (LUCAS) helpful\n• Femoral-femoral cannulation (percutaneous or cut-down)\n• Ultrasound-guided access\n\n**Immediate post-cannulation:**\n• Confirm flows (target 4-5 L/min)\n• Check perfusion (lactate, ETCO₂ improving)\n• Arterial line if not already\n• Address cause: cath lab for STEMI, CT for PE, etc.\n\n**Temperature management:**\n• Circuit allows precise temperature control\n• Target 33-36°C for post-arrest care\n• Avoid hyperthermia\n\n**Prognostication:**\n• Do NOT prognosticate in first 72 hours\n• Allow rewarming and sedation washout\n• Serial neuro exams, EEG, imaging\n\n**Withdrawal decision:**\n• If no neurologic recovery after adequate assessment\n• If underlying cause non-recoverable\n• Family involvement essential',
     citation: [3, 8],
     next: 'ecmo-contraindications',
+    summary: 'Target cannulation within 60min of arrest — continue mechanical CPR during cannulation',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -278,6 +304,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**Patient selection is critical** — inappropriate candidacy is a leading cause of poor ECMO outcomes [1][2][6].\n\n**ABSOLUTE CONTRAINDICATIONS:**\n\n• **Irreversible underlying disease** — no recovery possible, not a transplant candidate\n• **Advanced malignancy** with poor prognosis\n• **Severe irreversible neurologic injury** (massive stroke, anoxic brain injury)\n• **Unwitnessed arrest** with prolonged downtime and no signs of life\n• **Uncontrolled bleeding** or absolute contraindication to anticoagulation\n\n**RELATIVE CONTRAINDICATIONS:**\n\n**VV-ECMO specific:**\n• Mechanical ventilation >7-10 days with Pplat >30 + FiO₂ >90%\n• Multi-organ failure (high SOFA score)\n• Severe immunosuppression (varies by etiology)\n• Pulmonary hypertension (mPAP >50) — consider VA instead\n\n**VA-ECMO specific:**\n• Severe aortic regurgitation (LV distension risk)\n• Severe peripheral vascular disease (cannulation difficulty)\n• Aortic dissection (type A with branch involvement)\n\n**GENERAL relative contraindications:**\n• Advanced age (>70-75, institution-dependent)\n• Frailty (Clinical Frailty Scale ≥4)\n• Pre-existing organ dysfunction (cirrhosis, ESRD without transplant plan)\n• Prolonged CPR without ROSC\n• Morbid obesity (technical difficulty)',
     citation: [1, 2, 6],
     next: 'ecmo-cannulation',
+    summary: 'Absolute: irreversible disease, severe neuro injury. VA-specific: severe aortic regurgitation',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -307,6 +335,7 @@ export const ECMO_NODES: DecisionNode[] = [
         next: 'ecmo-complications',
       },
     ],
+    summary: 'Select VV vs VA cannulation configuration based on clinical scenario',
   },
 
   {
@@ -317,6 +346,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**Femorojugular (most common):**\n\n**Drainage cannula (femoral vein):**\n• Size: 21-25 Fr (based on patient size)\n• Tip position: IVC/RA junction, near hepatic veins\n• Multi-stage design for better drainage\n\n**Return cannula (right IJ):**\n• Size: 17-21 Fr\n• Tip position: SVC/RA junction\n• Must be 8-15 cm from drainage cannula to minimize recirculation\n\n**Confirmation:**\n• CXR: verify tip positions\n• Echo: confirm cannula placement, rule out complications\n\n---\n\n**Dual-lumen (Avalon/Crescent):**\n\n• Single cannula via right IJ\n• Drains from both SVC and IVC\n• Returns oxygenated blood directed at tricuspid valve\n• Size: 27-31 Fr\n• **Advantages:** Single access site, mobilization easier\n• **Disadvantages:** Technically challenging insertion, requires fluoroscopy/TEE, malposition risk\n\n---\n\n**Femoral-femoral VV:**\n• Both cannulas via femoral veins\n• Higher recirculation risk\n• Reserve for when IJ not accessible',
     citation: [1, 2],
     next: 'ecmo-complications',
+    summary: 'Femorojugular most common for VV — maintain 8-15cm separation to minimize recirculation',
+    skippable: true,
   },
 
   {
@@ -327,6 +358,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**Peripheral femoral-femoral (most common):**\n\n**Drainage cannula (femoral vein):**\n• Size: 21-25 Fr\n• Tip: IVC/RA junction\n\n**Return cannula (femoral artery):**\n• Size: 15-19 Fr (smaller to reduce vascular injury)\n• Tip: Common iliac artery or distal aorta\n\n**⚠️ DISTAL PERFUSION CANNULA — ESSENTIAL:**\n• 6-8 Fr sheath placed in SFA distal to arterial cannula\n• Spliced into arterial return line\n• Prevents limb ischemia (compartment syndrome, amputation)\n• Check distal pulses, NIRS monitoring\n\n---\n\n**Central cannulation (surgical):**\n\n• Direct RA drainage, aortic return\n• Requires sternotomy/thoracotomy\n• Used post-cardiotomy, when peripheral access impossible\n• LV vent typically placed simultaneously\n\n---\n\n**Subclavian/axillary artery return:**\n\n• Alternative to femoral arterial return\n• Provides antegrade flow to brain/coronaries\n• Avoids limb ischemia and differential hypoxemia\n• Technically more challenging, higher stroke risk\n\n**Hybrid configurations (VAV, VV-A):** For combined support needs.',
     citation: [1, 3],
     next: 'ecmo-complications',
+    summary: 'Femoral-femoral for VA — distal perfusion cannula ESSENTIAL to prevent limb ischemia',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -340,6 +373,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '[ECMO Troubleshooting Guide](#/calc/ecmo-troubleshooting)\n\n**ECMO is life-saving but high-risk** — complications are common [1][2].\n\n**BLEEDING (30-50%):**\n• Anticoagulation + acquired vWF deficiency + platelet consumption\n• Cannulation sites, GI, intracranial, pulmonary\n• Management: reduce anticoagulation, transfuse, consider TXA\n\n**THROMBOSIS (10-20%):**\n• Circuit clots (oxygenator, pump head)\n• Patient clots (DVT, PE, stroke, limb)\n• Balance anticoagulation carefully\n\n**LIMB ISCHEMIA (VA-ECMO, 10-20%):**\n• Femoral artery cannula obstructs flow\n• **Distal perfusion cannula is essential**\n• Monitor: pulses, NIRS, compartment checks\n\n**HEMOLYSIS:**\n• Pump shear stress, kinking, high RPM\n• Monitor: LDH, plasma-free Hgb, haptoglobin\n\n**INFECTION (10-30%):**\n• Cannula site infections, bacteremia\n• Monitor daily, low threshold for cultures\n\n**NEUROLOGIC (10-15%):**\n• Stroke (ischemic or hemorrhagic)\n• Hypoxic injury (differential hypoxemia in VA)\n• Seizures\n\n**AIR EMBOLISM:**\n• Rare but catastrophic\n• Circuit breach, access disconnection\n\n**RENAL FAILURE:**\n• Often pre-existing, worsened by ECMO\n• CRRT can be integrated into circuit',
     citation: [1, 2],
     next: 'ecmo-scores',
+    summary: 'Bleeding 30-50%, thrombosis 10-20%, limb ischemia 10-20%, neurologic 10-15%',
+    skippable: true,
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -358,6 +393,8 @@ export const ECMO_NODES: DecisionNode[] = [
       { id: 'ecmo-murray-score', label: 'Murray Score' },
     ],
     next: 'ecmo-communication',
+    summary: 'RESP score predicts VV survival, SAVE score predicts VA survival — aid but do not determine candidacy',
+    skippable: true,
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -371,6 +408,8 @@ export const ECMO_NODES: DecisionNode[] = [
     body: '**When calling for ECMO consultation, have this information ready:**\n\n**Patient basics:**\n• Age, weight, height (for BSA)\n• Chief complaint, timeline of deterioration\n• Comorbidities (especially vascular disease, bleeding risk, frailty)\n\n**Respiratory parameters (if VV):**\n• P/F ratio, FiO₂, PEEP, Pplat\n• Vent settings and duration of mechanical ventilation\n• ABG: pH, PaCO₂, PaO₂\n• Prone positioning attempted? Response?\n• Chest imaging findings\n\n**Hemodynamic parameters (if VA):**\n• MAP, HR, rhythm\n• Vasopressor doses (norepi, epi, vaso, etc.)\n• Lactate and trend\n• ScvO₂ or SvO₂ if available\n• ECHO findings (EF, RV function, valves)\n• SCAI shock stage\n\n**Reversibility assessment:**\n• What is the underlying cause?\n• Is it potentially reversible?\n• What is the exit strategy? (recovery, LVAD, transplant, comfort)\n\n**Scores (if calculated):**\n• RESP score (VV)\n• SAVE score (VA)\n• Murray score\n\n**Access assessment:**\n• Vascular access (existing lines, peripheral pulses)\n• Any contraindications to anticoagulation',
     citation: [1, 6],
     next: 'ecmo-disposition',
+    summary: 'Have P/F ratio, pressor doses, lactate trend, echo findings, and exit strategy ready for ECMO call',
+    skippable: true,
   },
 
   {
@@ -399,6 +438,7 @@ export const ECMO_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'ECMO patients require specialized ICU — arrange transfer if not available locally',
   },
 
   {
@@ -410,6 +450,7 @@ export const ECMO_NODES: DecisionNode[] = [
     recommendation: 'Proceed with ECMO cannulation per institutional protocol. ICU admission with ECMO team management.',
     confidence: 'definitive',
     citation: [1, 2],
+    summary: 'Pre-cannulation: consent, blood products ready, anticoagulation plan, goals of care discussed',
   },
 
   {
@@ -421,6 +462,7 @@ export const ECMO_NODES: DecisionNode[] = [
     recommendation: 'Not an ECMO candidate. Continue conventional management or transition to comfort care based on goals of care discussion.',
     confidence: 'definitive',
     citation: [1, 2],
+    summary: 'Document contraindications, ECMO team discussion, and goals of care — continue max conventional therapy',
   },
 
   {
@@ -432,6 +474,7 @@ export const ECMO_NODES: DecisionNode[] = [
     recommendation: 'Transfer to ECMO center after discussion with receiving team. Optimize patient for transport. Consider mobile ECMO if available.',
     confidence: 'definitive',
     citation: [1, 6],
+    summary: 'Contact ECMO center early — mobile ECMO teams can cannulate at referring hospital',
   },
 ];
 

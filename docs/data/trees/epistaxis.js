@@ -31,6 +31,7 @@ export const EPISTAXIS_NODES = [
             },
         ],
         next: 'epi-stability',
+        summary: '90% anterior (Kiesselbach plexus) — assess hemodynamics, history, and anticoagulant use',
     },
     {
         id: 'epi-stability',
@@ -52,6 +53,7 @@ export const EPISTAXIS_NODES = [
                 next: 'epi-initial-measures',
             },
         ],
+        summary: 'Assess hemodynamic stability — tachycardia, hypotension, or active hemorrhage = unstable',
     },
     {
         id: 'epi-resuscitate',
@@ -61,6 +63,8 @@ export const EPISTAXIS_NODES = [
         body: '**Simultaneous resuscitation and hemorrhage control:**\n\n\u2022 Large-bore IV access x 2\n\u2022 NS bolus 500-1000 mL\n\u2022 Type and crossmatch\n\u2022 CBC, BMP, coagulation studies\n\u2022 Consider transfusion if Hgb <7 g/dL or ongoing hemorrhage\n\n**While resuscitating:**\n\u2022 Apply firm compression to bilateral nares (pinch fleshy part below nasal bones)\n\u2022 Patient upright with head slightly forward (reduces swallowing blood)\n\u2022 Suction oropharynx if needed\n\n**Early ENT notification** for unstable epistaxis - may require OR intervention.',
         citation: [1, 3],
         next: 'epi-initial-measures',
+        summary: 'Two large-bore IVs, type and crossmatch, compress nares while resuscitating — early ENT notification',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2: LOCALIZATION
@@ -80,6 +84,7 @@ export const EPISTAXIS_NODES = [
             },
         ],
         next: 'epi-localize',
+        summary: 'Firm compression of FLESHY part (not bony bridge) x 15-20min + oxymetazoline spray',
     },
     {
         id: 'epi-localize',
@@ -111,6 +116,7 @@ export const EPISTAXIS_NODES = [
                 next: 'epi-controlled-disposition',
             },
         ],
+        summary: 'After vasoconstriction: visualize source — posterior if blood in oropharynx, no anterior source',
     },
     // =====================================================================
     // MODULE 3: TREATMENT
@@ -134,6 +140,8 @@ export const EPISTAXIS_NODES = [
                 next: 'epi-anterior-pack',
             },
         ],
+        summary: 'Silver nitrate from periphery to center, 5-10 sec — NEVER cauterize both sides of septum',
+        safetyLevel: 'warning',
     },
     {
         id: 'epi-anterior-pack',
@@ -164,6 +172,7 @@ export const EPISTAXIS_NODES = [
             monitoring: 'Monitor for continued bleeding, pack displacement, or signs of posterior bleed. Antibiotic prophylaxis controversial but often given (cephalexin or amox-clav).',
         },
         next: 'epi-pack-check',
+        summary: 'Inflatable balloon or expanding sponge preferred — apply topical TXA or oxymetazoline to packing',
     },
     {
         id: 'epi-pack-check',
@@ -185,6 +194,7 @@ export const EPISTAXIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Observe 15-30min post-packing — check posterior pharynx for ongoing bleeding',
     },
     {
         id: 'epi-posterior',
@@ -194,6 +204,8 @@ export const EPISTAXIS_NODES = [
         body: '**Posterior bleeds are more serious** - often require admission and ENT intervention.\n\n**Risk factors:**\n\u2022 Age >50\n\u2022 Hypertension\n\u2022 Anticoagulation\n\u2022 Bleeding disorders\n\u2022 Hereditary hemorrhagic telangiectasia (HHT)\n\n**Source:** Usually sphenopalatine artery (branch of internal maxillary)\n\n**Call ENT early** - 18% of posterior epistaxis patients require surgical intervention.\n\n**Options:**\n1. Dual-balloon device (Epistat, Rapid Rhino Epistaxis)\n2. Foley catheter technique\n3. Surgical intervention (endoscopic sphenopalatine artery ligation, embolization)',
         citation: [3, 4, 8],
         next: 'epi-posterior-pack',
+        summary: 'Posterior bleeds are more serious — 18% need surgery, call ENT early',
+        safetyLevel: 'warning',
     },
     {
         id: 'epi-posterior-pack',
@@ -224,6 +236,8 @@ export const EPISTAXIS_NODES = [
             monitoring: 'Continuous SpO2 monitoring. Watch for hypoxia, arrhythmias. ENT within 24h for definitive management.',
         },
         next: 'epi-posterior-disposition',
+        summary: 'Dual-balloon device or Foley catheter — inflate posterior balloon first, then anterior',
+        safetyLevel: 'warning',
     },
     {
         id: 'epi-posterior-disposition',
@@ -252,6 +266,8 @@ export const EPISTAXIS_NODES = [
             },
             monitoring: 'Continuous SpO2. Serial H/H. Watch for rebleeding, hypoxia, aspiration.',
         },
+        summary: 'ALL posterior packs require admission with continuous SpO2 and ENT consultation',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: ANTICOAGULATION MANAGEMENT
@@ -285,6 +301,7 @@ export const EPISTAXIS_NODES = [
                 next: 'epi-controlled-disposition',
             },
         ],
+        summary: 'Assess anticoagulant/antiplatelet status — 50-60% of ED epistaxis patients are on antithrombotics',
     },
     {
         id: 'epi-warfarin',
@@ -307,6 +324,8 @@ export const EPISTAXIS_NODES = [
             monitoring: 'Repeat INR at 24h. Reassess anticoagulation need with prescribing physician.',
         },
         next: 'epi-controlled-disposition',
+        summary: 'Do NOT routinely reverse warfarin — local hemostasis first, Vitamin K only if supratherapeutic',
+        safetyLevel: 'warning',
     },
     {
         id: 'epi-doac',
@@ -329,6 +348,7 @@ export const EPISTAXIS_NODES = [
             monitoring: 'Resume DOAC 24-48h after bleeding controlled. Coordinate with prescribing physician.',
         },
         next: 'epi-controlled-disposition',
+        summary: 'DOACs cause less severe epistaxis than warfarin — local hemostasis, hold 1-2 doses if severe',
     },
     {
         id: 'epi-antiplatelet',
@@ -359,6 +379,7 @@ export const EPISTAXIS_NODES = [
             monitoring: 'If holding antiplatelet: coordinate with cardiology. Watch for thrombotic complications.',
         },
         next: 'epi-controlled-disposition',
+        summary: 'Topical TXA especially helpful for antiplatelet patients — generally do NOT hold antiplatelets',
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -387,6 +408,7 @@ export const EPISTAXIS_NODES = [
                 next: 'epi-admit-anterior',
             },
         ],
+        summary: 'Determine: no pack (discharge), anterior pack (ENT follow-up 24-48h), or admission',
     },
     {
         id: 'epi-discharge-no-pack',
@@ -397,6 +419,7 @@ export const EPISTAXIS_NODES = [
         recommendation: 'Discharge with prevention instructions and return precautions. PCP follow-up in 1-2 weeks. ENT if recurrent.',
         confidence: 'definitive',
         citation: [1, 2],
+        summary: 'Saline spray, petroleum jelly BID, humidifier, avoid nose picking — return if not controlled in 20 min',
     },
     {
         id: 'epi-discharge-with-pack',
@@ -425,6 +448,7 @@ export const EPISTAXIS_NODES = [
             },
             monitoring: 'ENT follow-up in 24-48h for pack removal. Return if bleeding, fever, or difficulty breathing.',
         },
+        summary: 'Antibiotic prophylaxis while packed, mandatory ENT follow-up at 24-48h for pack removal',
     },
     {
         id: 'epi-admit-anterior',
@@ -446,6 +470,7 @@ export const EPISTAXIS_NODES = [
             },
             monitoring: 'Serial H/H. Continuous SpO2 if posterior pack. ENT for pack management.',
         },
+        summary: 'Admit if Hgb <8, unable to achieve hemostasis, high-risk anticoagulation, or coagulopathy',
     },
     {
         id: 'epi-ent-triggers',
@@ -455,6 +480,8 @@ export const EPISTAXIS_NODES = [
         body: '**Emergent ENT consultation:**\n\u2022 Posterior epistaxis (any)\n\u2022 Uncontrolled bleeding despite anterior packing\n\u2022 Hemodynamic instability\n\u2022 Need for surgical intervention (ligation, embolization)\n\n**Urgent ENT consultation:**\n\u2022 Bilateral anterior packs\n\u2022 Recurrent epistaxis (>2 episodes)\n\u2022 Suspected septal abnormality\n\u2022 Suspected HHT (hereditary hemorrhagic telangiectasia)\n\n**Outpatient ENT referral:**\n\u2022 Recurrent anterior epistaxis\n\u2022 Nasal mass or abnormality on exam\n\u2022 Family history of bleeding disorders\n\u2022 Chronic nasal obstruction',
         citation: [1, 2, 3],
         next: 'epi-controlled-disposition',
+        summary: 'Emergent ENT for posterior or uncontrolled bleeding; urgent for bilateral packs or recurrent episodes',
+        skippable: true,
     },
     {
         id: 'epi-htn-management',
@@ -463,6 +490,8 @@ export const EPISTAXIS_NODES = [
         title: 'Hypertension and Epistaxis',
         body: '**Common misconception:** Hypertension CAUSES epistaxis.\n\n**Reality:**\n\u2022 Epistaxis causes anxiety which raises BP\n\u2022 HTN may exacerbate but rarely initiates bleeding\n\u2022 BP usually normalizes after bleeding controlled\n\n**Management:**\n1. **Control the bleeding first** - local hemostasis is the priority\n2. Recheck BP after hemorrhage controlled and patient calm\n3. If BP remains severely elevated (>180/120) after bleeding controlled, consider oral antihypertensive\n4. Do NOT delay local treatment to manage BP\n5. Do NOT use IV antihypertensives for epistaxis (may cause hypotension)\n\n**AAO-HNS guideline:** Elevated BP should not alter immediate management of epistaxis. [1]',
         citation: [1, 2],
+        summary: 'HTN rarely causes epistaxis — BP usually normalizes after bleeding controlled, treat bleeding first',
+        skippable: true,
     },
     {
         id: 'epi-topical-txa',
@@ -470,6 +499,8 @@ export const EPISTAXIS_NODES = [
         module: 3,
         title: 'Topical TXA in Epistaxis',
         body: '**Topical Tranexamic Acid:**\n[Tranexamic Acid](#/drug/tranexamic-acid/epistaxis) 500 mg in 5 mL solution applied via pledget.\n\n**Evidence:**\n\u2022 RCT (124 patients on antiplatelets): TXA vs anterior packing\n  - Faster hemostasis at 10 min\n  - Less rebleeding at 24h and 1 week\n  - Shorter ED stay\n  - Higher patient satisfaction [5]\n\n\u2022 NoPAC trial: TXA vs placebo for epistaxis uncontrolled with first aid\n  - No significant difference in this population [6]\n\n**Interpretation:**\nTXA may be most useful:\n\u2022 In antiplatelet/anticoagulated patients\n\u2022 As adjunct to packing\n\u2022 Before proceeding to more invasive interventions\n\n**Application:**\nSoak dental roll or cotton pledget in TXA solution, insert into bleeding nostril, hold with compression x 10-20 min.',
+        summary: 'Topical TXA on pledget x 10-20min — faster hemostasis in antiplatelet patients than packing alone',
+        skippable: true,
         citation: [5, 6],
     },
 ];

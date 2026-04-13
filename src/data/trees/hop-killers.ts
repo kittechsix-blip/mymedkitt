@@ -38,6 +38,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-hypotensive-intubation', label: 'Hypotensive Intubation Guide' },
     ],
     next: 'hop-screen',
+    summary: 'Screen for 6 peri-intubation killers BEFORE RSI: hypotension, hypoxia, acidosis, RV failure, metabolic, ICP',
+    safetyLevel: 'critical',
   },
 
   {
@@ -91,6 +93,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Systematic assessment: BP, SpO2, pH, RV function, K+/Ca2+, ICP signs — fix BEFORE paralysis',
+    safetyLevel: 'critical',
   },
 
   {
@@ -106,6 +110,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-acidotic-intubation', label: 'Acidotic Guide' },
     ],
     next: 'hop-screen',
+    summary: 'Multiple killers present = highest risk — address each systematically before induction',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -123,6 +129,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-hypotensive-intubation', label: 'Hypotensive Intubation Calculator' },
     ],
     next: 'hop-hypotension-prep',
+    summary: 'Hypotension + induction agents = cardiac arrest risk — volume resuscitate and start pressors BEFORE RSI',
+    safetyLevel: 'critical',
   },
 
   {
@@ -133,6 +141,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Optimize BEFORE Intubation:**\n\n| Target | Goal | Why |\n|--------|------|-----|\n| **MAP** | > 65 mmHg (ideally > 75) | Buffer for post-induction drop |\n| **SBP** | > 140 mmHg | Provides hemodynamic reserve |\n| **Volume** | 1-2L crystalloid if hypovolemic | Optimize preload |\n| **Access** | 2 large-bore proximal IVs | Rapid fluid/pressor access |\n| **Pressors** | Running BEFORE induction | Already infusing, not scrambling |\n\n**IVC Collapsibility Index:**\n- > 40-45% predicts post-induction hypotension\n- High suspicion for preload dependence\n\n**Never intubate unprepared - have push-dose pressors drawn and ready.**',
     citation: [2, 3],
     next: 'hop-hypotension-rocketamine',
+    summary: 'Push-dose epinephrine ready, norepinephrine running, 500mL fluid bolus before blade touches lip',
+    safetyLevel: 'critical',
   },
 
   {
@@ -146,6 +156,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-hypotensive-intubation', label: 'Calculate Doses' },
     ],
     next: 'hop-hypotension-pressors',
+    summary: 'Rocketamine (ketamine + rocuronium) preserves hemodynamics — avoid propofol in hypotension',
+    safetyLevel: 'critical',
   },
 
   {
@@ -156,6 +168,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Epinephrine (Preferred):**\n\n**Preparation:**\n1. Draw 1 mL cardiac epinephrine (1:10,000 = 100 mcg/mL)\n2. Add to 9 mL NS in 10 mL syringe\n3. Mix thoroughly\n4. Final concentration: **10 mcg/mL**\n\n**Dosing:**\n- 0.5-2 mL (5-20 mcg) IV push q2-5 min PRN\n- Prophylactic: 5 mcg (0.5 mL) with induction meds\n- Onset: < 1 min | Duration: ~5 min\n\n**Phenylephrine (if tachycardia a concern):**\n- 1 mL (10 mg/mL) + 99 mL NS = 100 mcg/mL\n- Dose: 50-200 mcg IV push q2-5 min\n\n**NEVER give code-dose epinephrine (1 mg) to patients with a pulse!**',
     citation: [2, 3],
     next: 'hop-hypotension-post',
+    summary: 'Push-dose epi 10-20 mcg q2-5min for post-induction hypotension — have vasopressor infusion ready',
+    safetyLevel: 'critical',
   },
 
   {
@@ -170,6 +184,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-hypotensive-intubation', label: 'Hypotensive Intubation Guide' },
     ],
+    summary: 'Post-intubation MAP target ≥65 — immediate vasopressor bolus if BP drops after induction',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -187,6 +203,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-hypoxic-intubation', label: 'NODESAT & DSI Calculator' },
     ],
     next: 'hop-hypoxia-nodesat',
+    summary: 'Desaturation during apneic period is the most common peri-intubation emergency',
+    safetyLevel: 'critical',
   },
 
   {
@@ -197,6 +215,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**N-O-D-E-S-A-T:**\n\n| Letter | Intervention | Details |\n|--------|--------------|--------|\n| **N** | Nasal O2 | 15 lpm NC or HFNC 60 lpm |\n| **O** | Optimal positioning | Head elevated, ramped |\n| **D** | Delayed Sequence Intubation | If patient won\'t cooperate |\n| **E** | End-tidal CO2 | Baseline before paralysis |\n| **S** | Suction ready | At hand, tested |\n| **A** | Apneic oxygenation | NC stays on during laryngoscopy |\n| **T** | Two-person BVM | For rescue ventilation |\n\n**Rule of 15s (Preoxygenation):**\n- NC at 15 lpm + NRB at 15 lpm\n- OR NC at 15 lpm + CPAP/BiPAP up to 15 cmH2O\n- Minimum 3 minutes preoxygenation if stable',
     citation: [4, 5],
     next: 'hop-hypoxia-dsi',
+    summary: 'Preoxygenate for 3-5 min: NRB 15L + NC 15L (dual oxygenation) — target SpO2 >95% before paralysis',
+    safetyLevel: 'critical',
   },
 
   {
@@ -210,6 +230,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-hypoxic-intubation', label: 'DSI Protocol Calculator' },
     ],
     next: 'hop-hypoxia-apneic',
+    summary: 'Delayed sequence intubation: ketamine dissociation first, then preoxygenate the compliant patient',
   },
 
   {
@@ -220,6 +241,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Keep NC in place during laryngoscopy - this is the key intervention.**\n\n| Method | Flow Rate | Evidence |\n|--------|-----------|----------|\n| Standard NC | 15 lpm | Effective, widely available |\n| HFNC | 60 lpm | Longer safe apnea (11 vs 7 min), no superiority for preventing desaturation |\n\n**HFNC Settings (if available):**\n- Flow: 60 lpm\n- FiO2: 100%\n- Provides moderate PEEP + dead space washout\n\n**Evidence for DSI:**\n- RCT: Peri-intubation hypoxemia 8% (DSI) vs 35% (standard RSI), p < 0.001\n- First-pass success: 83% vs 69%, p = 0.02\n- Adjusted OR for hypoxemia with standard RSI: 6.8 (95% CI 2.8-16.5)',
     citation: [4, 5],
     next: 'hop-hypoxia-result',
+    summary: 'NC at 15 L/min during apnea — extends safe apnea time by 3-5 minutes',
+    skippable: true,
   },
 
   {
@@ -234,6 +257,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-hypoxic-intubation', label: 'NODESAT Calculator' },
     ],
+    summary: 'If SpO2 <93% during attempt: BVM ventilate, reposition, reattempt — abort if cannot ventilate',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -251,6 +276,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-acidotic-intubation', label: 'Acidotic Intubation Calculator' },
     ],
     next: 'hop-acidosis-winters',
+    summary: 'Severe metabolic acidosis + apnea = lethal cardiac arrest — match pre-intubation minute ventilation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -264,6 +291,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-acidotic-intubation', label: 'Winter\'s Calculator' },
     ],
     next: 'hop-acidosis-vapox',
+    summary: 'Calculate expected PaCO2 with Winter\'s formula — post-intubation ventilator must match this',
+    safetyLevel: 'critical',
   },
 
   {
@@ -274,6 +303,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Ventilator-Assisted Pre-Oxygenation:**\n\n**Equipment:**\n- ICU ventilator at bedside (NOT a BiPAP machine)\n- NIV mask\n- Someone who can adjust vent in real time\n\n**Pre-Intubation Settings (Pseudo-NIV Phase):**\n\n| Parameter | Setting | Rationale |\n|-----------|---------|----------|\n| Mode | SIMV | Allows spontaneous breaths |\n| TV | 550 mL (8 mL/kg IBW) | Standard |\n| FiO2 | 100% | Maximize oxygenation |\n| Flow Rate | 30 lpm | Slow to prevent gastric insufflation |\n| PSV | 5-15 cmH2O | Augments spontaneous breaths |\n| PEEP | 5 cmH2O (↑ to 15 if SpO2 stable) | Maintain oxygenation |\n| RR | **0** | Patient breathing spontaneously |\n\n**Attach ETCO2 monitoring - document baseline value.**',
     citation: [6],
     next: 'hop-acidosis-induction',
+    summary: 'VAPOX: Vent to Avoid Peri-intubation Oxygen Desaturation and X-tra CO2 retention',
+    skippable: true,
   },
 
   {
@@ -284,6 +315,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**After pushing induction + paralytic:**\n\n1. **Increase RR to 12** on ventilator\n2. **Perform jaw thrust** to maintain airway\n3. **Wait 45 seconds** for medication onset\n4. **The ventilator is breathing for the patient** through the NIV mask during apneic window\n\n**This is the key innovation:** You\'re not truly apneic because the vent is providing breaths through the mask while you wait for paralytic onset.\n\n**Once intubated, immediately:**\n- Increase RR to match pre-intubation hyperventilation\n- Target ETCO2 at least as low as it was before intubation',
     citation: [6],
     next: 'hop-acidosis-vent',
+    summary: 'Ketamine preferred — avoid propofol (vasodilation worsens acidosis hemodynamics)',
   },
 
   {
@@ -298,6 +330,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-acidotic-intubation', label: 'Vent Settings Calculator' },
     ],
+    summary: 'Set RR 20-30 to match pre-intubation compensatory minute ventilation — never start at RR 12',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -315,6 +349,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-rv-failure-intubation', label: 'RV Failure Intubation Guide' },
     ],
     next: 'hop-rv-avoid',
+    summary: 'RV failure + positive pressure ventilation = cardiac arrest — minimize PEEP and intrathoracic pressure',
+    safetyLevel: 'critical',
   },
 
   {
@@ -325,6 +361,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**AVOID INTUBATION IF AT ALL POSSIBLE**\n\nIntubation is truly a last resort in RV failure patients.\n\n**First, try:**\n- NIV/CPAP\n- Basic airway maneuvers\n- Treat underlying cause (thrombolytics for PE, diuresis)\n\n**Avoid These (Worsen RV Failure):**\n\n| Avoid | Why |\n|-------|-----|\n| **Hypoxia** | Pulmonary vasoconstriction |\n| **Hypercarbia** | Pulmonary vasoconstriction |\n| **Acidosis** | Pulmonary vasoconstriction |\n| **Propofol** | Drops SVR dramatically |\n| **Excessive fluid** | Worsens RV distension |\n| **High PEEP** | Increases RV afterload |\n\n**Consider awake intubation** - Maintains spontaneous ventilation and endogenous catecholamines.',
     citation: [7],
     next: 'hop-rv-prep',
+    summary: 'Avoid hyperinflation, high PEEP, hypoxia, and acidosis — all worsen PVR and crash the RV',
+    safetyLevel: 'critical',
   },
 
   {
@@ -338,6 +376,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-rv-failure-intubation', label: 'RV Failure Calculator' },
     ],
     next: 'hop-rv-induction',
+    summary: 'Start vasopressors before intubation, have push-dose epi ready, gentle BVM ventilation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -348,6 +388,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Awake Intubation Probably Preferred** - Maintains spontaneous ventilation and endogenous catecholamines.\n\n**If RSI Required:**\n- **Ketamine 0.5 mg/kg** (maintains SVR)\n- **Vasopressors infusing BEFORE induction**\n- **Push-dose epinephrine WITH induction meds**\n\n**Pulmonary Vasodilators (consider immediately post-intubation):**\n\n| Agent | Route | Dose | Notes |\n|-------|-------|------|-------|\n| **Inhaled nitric oxide** | Via ventilator | 20-40 ppm | Expensive but effective |\n| **Inhaled epoprostenol** | Via ventilator | 50 ng/kg/min | Alternative to NO |\n| **IV nitroglycerin** | Infusion | 10-200 mcg/min | Reduces preload and PVR |',
     citation: [7],
     next: 'hop-rv-vent',
+    summary: 'Ketamine for RV failure — maintain SVR, avoid myocardial depression',
   },
 
   {
@@ -362,6 +403,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-rv-failure-intubation', label: 'RV Failure Intubation Guide' },
     ],
+    summary: 'Low PEEP (≤5), low Vt, avoid breath-stacking — permissive hypercapnia acceptable',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -379,6 +422,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-metabolic-intubation', label: 'Metabolic Intubation Calculator' },
     ],
     next: 'hop-metabolic-treatment',
+    summary: 'Hyperkalemia + succinylcholine = lethal — always use rocuronium if K+ elevated',
+    safetyLevel: 'critical',
   },
 
   {
@@ -389,6 +434,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Stabilize the membrane and shift K+ BEFORE intubation:**\n\n| Intervention | Dose | Onset | Duration | Mechanism |\n|--------------|------|-------|----------|----------|\n| **Calcium gluconate** | 1-2 g IV over 5-10 min | 1-3 min | 30-60 min | Membrane stabilization |\n| **Calcium chloride** | 1 g IV (central line) | 1-3 min | 30-60 min | 3x more elemental Ca |\n| **Regular insulin** | 10 units IV | 15-30 min | 4-6 hours | Intracellular K+ shift |\n| **Dextrose 50%** | 50 mL (25g) IV | -- | -- | Prevent hypoglycemia |\n| **Albuterol** | 10-20 mg nebulized | 15-30 min | 2-4 hours | Intracellular K+ shift |\n\n**Calcium FIRST** - Stabilizes myocardium within minutes while other therapies take effect.',
     citation: [8],
     next: 'hop-metabolic-paralytic',
+    summary: 'Calcium, insulin/dextrose, bicarb BEFORE induction if severe hyperkalemia — correct hypocalcemia too',
+    safetyLevel: 'critical',
   },
 
   {
@@ -403,6 +450,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-metabolic-intubation', label: 'Metabolic Intubation Guide' },
     ],
+    summary: 'Rocuronium 1.2 mg/kg — NEVER succinylcholine in hyperkalemia, burns, crush, or neuromuscular disease',
+    safetyLevel: 'critical',
   },
 
   {
@@ -416,6 +465,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-elevated-icp-intubation', label: 'Elevated ICP Calculator' },
     ],
     next: 'hop-icp-ketamine',
+    summary: 'Elevated ICP: prevent secondary brain injury during intubation — avoid hypotension and hypoxia',
+    safetyLevel: 'critical',
   },
 
   {
@@ -426,6 +477,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Traditional Teaching:** Ketamine raises ICP and is contraindicated in TBI.\n\n**Current Evidence:** This is NOT supported by modern studies.\n\n| Finding | Source |\n|---------|--------|\n| Ketamine does NOT increase ICP | Zeiler et al. systematic review |\n| Safe in intubated AND non-intubated TBI | Multiple studies |\n| May be neuroprotective | NMDA receptor antagonism |\n| Maintains hemodynamic stability | Critical for CPP |\n\n**2024-2025 Evidence:**\n- Meta-analysis: Ketamine does NOT increase ICP (RR 0.67, 95% CI 0.45-1.01)\n- Ketamine gaining recognition for neuroprotection via NMDA antagonism\n- Inhibits spreading depolarizations\n\n**In hypotensive TBI patient:** Ketamine is PREFERRED (maintains BP = maintains CPP).',
     citation: [9],
     next: 'hop-icp-induction',
+    summary: 'Ketamine is safe in elevated ICP (debunked myth) — maintains hemodynamics and cerebral perfusion',
   },
 
   {
@@ -436,6 +488,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     body: '**Agent Options:**\n\n| Agent | Dose | Considerations |\n|-------|------|----------------|\n| **Etomidate** | 0.3 mg/kg | Traditional choice, minimal hemodynamic effect |\n| **Ketamine** | 0.5-1 mg/kg | Safe in TBI, maintains hemodynamics |\n| **Propofol** | 1-2 mg/kg | Reduces ICP but causes hypotension |\n| **Propofol/Ketamine** | 75%/25% | Balanced approach |\n\n**Pretreatment:**\n- **Fentanyl 3-5 mcg/kg IV** 3-5 minutes before laryngoscopy (blunts sympathetic response)\n- Have push-dose pressors ready (hypotension risk)\n\n**Lidocaine 1.5 mg/kg IV:**\n- Evidence for benefit is LIMITED\n- Not routinely recommended\n\n**Paralytic:** Both rocuronium and succinylcholine acceptable. Transient ICP rise from succinylcholine is NOT clinically significant.',
     citation: [9],
     next: 'hop-icp-post',
+    summary: 'Blunt sympathetic response: lidocaine 1.5mg/kg or fentanyl 3mcg/kg before laryngoscopy',
   },
 
   {
@@ -450,6 +503,8 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'hop-elevated-icp-intubation', label: 'Elevated ICP Intubation Guide' },
     ],
+    summary: 'Post-intubation: HOB 30 degrees, midline head, target PaCO2 35-40, MAP >80',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -473,6 +528,7 @@ export const HOP_KILLERS_NODES: DecisionNode[] = [
       { id: 'hop-metabolic-intubation', label: 'Metabolic' },
       { id: 'hop-elevated-icp-intubation', label: 'Elevated ICP' },
     ],
+    summary: 'Fix killers BEFORE paralysis — hypotension, hypoxia, acidosis, RV failure, metabolic, ICP',
   },
 ];
 

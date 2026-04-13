@@ -35,6 +35,8 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-no-travel',
       },
     ],
+    summary: 'Travel to endemic area + fever = malaria until proven otherwise — thick/thin smear STAT',
+    safetyLevel: 'critical',
   },
 
   {
@@ -45,6 +47,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     body: '**Classic presentation:** [1][2]\n• **Fever** (paroxysmal or continuous) — most common symptom\n• **Rigors, chills, sweats** — may occur in cycles\n• **Headache, myalgias, malaise** — nonspecific\n• **Nausea, vomiting, diarrhea** — common\n\n**Incubation period:** [4]\n• *P. falciparum:* 7-14 days (most within 30 days)\n• *P. vivax/ovale:* 12-18 days (can be >6 months due to dormant liver stages)\n• *P. malariae:* 18-40 days\n• *P. knowlesi:* 9-12 days\n\n**Red flags for severe disease:** [5]\n• Altered mentation, seizures\n• Respiratory distress, hypoxemia\n• Hypotension, shock\n• Jaundice, dark urine (hemolysis)\n• Severe anemia\n• Acute kidney injury, oliguria\n\n[Species Comparison Table](#/info/mal-species-table)',
     citation: [1, 2, 4, 5],
     next: 'mal-diagnostics',
+    summary: 'Symptoms typically 7-30 days after travel — P. vivax/ovale may present months to years later',
   },
 
   {
@@ -56,6 +59,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     recommendation: 'Malaria is unlikely without endemic area exposure. Pursue alternative febrile illness workup. If suspicion persists, obtain blood smears and consult infectious disease.',
     confidence: 'recommended',
     citation: [4],
+    summary: 'No travel history: consider airport malaria, transfusion-transmitted, or congenital malaria',
+    skippable: true,
   },
 
   // =====================================================================
@@ -74,6 +79,7 @@ export const MALARIA_NODES: DecisionNode[] = [
       { id: 'parasitemia-calc', label: 'Parasitemia %' },
     ],
     next: 'mal-species',
+    summary: 'Thick smear (sensitive) and thin smear (speciation) — RDT as adjunct, not replacement',
   },
 
   {
@@ -106,6 +112,8 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-pending-species',
       },
     ],
+    summary: 'Species identification determines treatment: P. falciparum is most lethal, requires different therapy',
+    safetyLevel: 'warning',
   },
 
   {
@@ -116,6 +124,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     body: '**If RDT positive or high clinical suspicion but species ID pending:** [4][6]\n\n**Do NOT delay treatment** — initiate empiric therapy based on:  \n1. Geographic region of travel (resistance patterns)  \n2. Clinical severity  \n3. Most likely species\n\n**Empiric approach:**\n• **Severe malaria** (any species) → IV artesunate immediately [5][6]\n• **Uncomplicated, travel to Africa or Papua New Guinea** → assume *P. falciparum* → artemether-lumefantrine (Coartem) or atovaquone-proguanil (Malarone) [6][7]\n• **Uncomplicated, travel to Central/South America or Asia** → consider vivax/ovale → hold primaquine until G6PD results and species confirmed [4]\n\n**Reassess when species ID available** — adjust therapy as needed.\n\n**Call CDC Malaria Hotline for guidance:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (after hours). [6]',
     citation: [4, 5, 6, 7],
     next: 'mal-severity',
+    summary: 'If species unknown, treat as P. falciparum (most dangerous) until speciation available',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -146,6 +156,8 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-uncomplicated',
       },
     ],
+    summary: 'Severe malaria criteria: AMS, seizures, severe anemia, parasitemia >5%, acidosis, renal/hepatic failure',
+    safetyLevel: 'critical',
   },
 
   {
@@ -178,6 +190,8 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'ICU monitoring. Glucose q4-6h. Repeat blood smears q12-24h. Monitor for delayed hemolysis (CBC weekly × 4 weeks post-treatment).',
     },
     next: 'mal-complications',
+    summary: 'IV artesunate is first-line for severe malaria — available from CDC Malaria Hotline 770-488-7788',
+    safetyLevel: 'critical',
   },
 
   {
@@ -188,6 +202,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     body: '**Cerebral malaria** (impaired consciousness, seizures): [5]\n• Supportive care — maintain airway, prevent aspiration\n• Treat seizures: benzodiazepines first-line\n• Avoid steroids (HARM, not help — increases mortality) [5]\n• Neurologic sequelae occur in ~10% (cognitive deficits, motor dysfunction)\n\n**Hypoglycemia** (glucose <40 mg/dL): [5]\n• Common in severe malaria and pregnancy\n• Monitor glucose q4-6h\n• Dextrose boluses PRN, consider D10 infusion\n• Risk highest with quinine/quinidine (stimulates insulin release)\n\n**Acute kidney injury:** [5]\n• Fluid resuscitation — avoid overload (ARDS risk)\n• Dialysis if severe (volume overload, uremia, refractory hyperkalemia)\n• Reversible in most cases\n\n**Severe anemia (Hgb <7 g/dL):** [5]\n• Blood transfusion — liberal threshold in severe malaria\n• Monitor for delayed hemolysis post-artesunate\n\n**ARDS / pulmonary edema:** [5]\n• Restrictive fluid strategy\n• Mechanical ventilation if needed\n• Mortality high once ARDS develops (~50%)\n\n**Acidosis:** [5]\n• Correct underlying cause (fluid resuscitation, source control)\n• Bicarbonate generally NOT recommended unless pH <7.1\n\n**Shock / circulatory collapse:** [5]\n• Fluid resuscitation (crystalloid)\n• Vasopressors if fluid-refractory\n• High mortality — aggressive ICU management',
     citation: [5],
     next: 'mal-disposition',
+    summary: 'Cerebral malaria, ARDS, DIC, splenic rupture, severe anemia — ICU monitoring for all severe cases',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -223,6 +239,7 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-malariae-knowlesi',
       },
     ],
+    summary: 'Uncomplicated P. falciparum: ACT (artemether-lumefantrine) or atovaquone-proguanil for 3 days',
   },
 
   {
@@ -252,6 +269,7 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'Repeat blood smears day 3 and day 7 (or until negative). Admit for observation — risk of progression to severe malaria.',
     },
     next: 'mal-monitoring',
+    summary: 'Artemether-lumefantrine (Coartem) 4 tabs at 0, 8h, 24, 36, 48, 60h — give with fatty food',
   },
 
   {
@@ -273,6 +291,8 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'Repeat blood smears day 3 and 7. Watch for treatment failure (persistent/rising parasitemia). If failure: switch to ACT.',
     },
     next: 'mal-monitoring',
+    summary: 'Chloroquine-sensitive regions: only Central America west of Panama Canal and some Caribbean islands',
+    skippable: true,
   },
 
   {
@@ -305,6 +325,8 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'G6PD test before primaquine. CBC if G6PD-deficient on weekly primaquine. Repeat smears day 7 to confirm clearance.',
     },
     next: 'mal-primaquine',
+    summary: 'P. vivax/ovale: chloroquine + primaquine for radical cure (hypnozoite eradication) — check G6PD first',
+    safetyLevel: 'warning',
   },
 
   {
@@ -318,6 +340,8 @@ export const MALARIA_NODES: DecisionNode[] = [
       { id: 'primaquine-safety', label: 'Primaquine Safety' },
     ],
     next: 'mal-monitoring',
+    summary: 'Primaquine: check G6PD BEFORE starting — hemolytic anemia in G6PD-deficient patients',
+    safetyLevel: 'critical',
   },
 
   {
@@ -347,6 +371,8 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'Repeat smears q12-24h for P. knowlesi (can progress rapidly). Admit for observation.',
     },
     next: 'mal-monitoring',
+    summary: 'P. malariae: chloroquine effective. P. knowlesi: can cause severe disease, treat as falciparum',
+    skippable: true,
   },
 
   {
@@ -357,6 +383,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     body: '**Follow-up blood smears:** [4][6]\n• **Day 3:** Parasitemia should be declining or cleared\n• **Day 7:** Should be negative (if still positive → treatment failure)\n• **Day 14 and 28:** Confirm sustained clearance\n\n**Treatment failure** (persistent or recurrent parasitemia): [4][6]\n• Consider drug resistance\n• Consult infectious disease\n• Switch to alternative regimen\n• If initial chloroquine used: switch to ACT\n• If initial ACT used: consider quinine + doxycycline or atovaquone-proguanil\n\n**Post-treatment monitoring:** [8][13]\n• **Post-artesunate delayed hemolysis:** CBC weekly × 4 weeks after IV artesunate (occurs in ~10-15%) [8]\n• **Vivax/ovale relapse:** Can occur months after treatment if primaquine not given or inadequate\n\n**Patient education:** [4]\n• Complete full course of therapy\n• Return if fever recurs\n• For vivax/ovale: importance of primaquine to prevent relapse\n• Avoid mosquito bites if returning to endemic area\n\n**Prophylaxis counseling for future travel:** [4]\n• Discuss chemoprophylaxis options (atovaquone-proguanil, doxycycline, mefloquine)\n• Insecticide-treated bed nets, DEET, permethrin-treated clothing\n• Avoid outdoor exposure dusk to dawn (peak *Anopheles* feeding time)',
     citation: [4, 6, 8, 13],
     next: 'mal-special-pops',
+    summary: 'Serial parasitemia at 0, 12, 24, 48, 72h — should decline by 75% at 48h on effective treatment',
   },
 
   // =====================================================================
@@ -392,6 +419,8 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-disposition',
       },
     ],
+    summary: 'Pregnancy, pediatrics, and immunocompromised patients need modified treatment — consult ID',
+    safetyLevel: 'warning',
   },
 
   {
@@ -421,6 +450,9 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'Glucose q4-6h. Fetal monitoring. Admit all pregnant patients. Defer primaquine until postpartum.',
     },
     next: 'mal-disposition',
+    summary: 'Severe malaria in pregnancy: IV artesunate (all trimesters). Uncomplicated: quinine + clindamycin 1st trimester',
+    skippable: true,
+    safetyLevel: 'warning',
   },
 
   {
@@ -450,6 +482,9 @@ export const MALARIA_NODES: DecisionNode[] = [
       monitoring: 'Glucose q4-6h. Admit <5 years with P. falciparum. Repeat smears day 3, 7.',
     },
     next: 'mal-disposition',
+    summary: 'Pediatric malaria: same drugs, weight-based dosing — children decompensate faster than adults',
+    skippable: true,
+    safetyLevel: 'warning',
   },
 
   {
@@ -460,6 +495,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     body: '**Chemoprophylaxis failure** can occur due to: [4][18]\n• Non-adherence (most common)\n• Drug-resistant parasites\n• Inadequate dosing\n• Prophylaxis stopped too early (needs to continue 4 weeks after leaving endemic area for most drugs)\n• Wrong prophylaxis for region (e.g., chloroquine in chloroquine-resistant area)\n\n[Post-Exposure Prophylaxis Failure](#/info/mal-prophylaxis-failure)\n\n**Treatment approach:** [4][6][18]\n• **Do NOT use the same drug for treatment** that was used for prophylaxis (resistance likely)\n• If on atovaquone-proguanil prophylaxis → use artemether-lumefantrine or quinine + doxycycline\n• If on doxycycline prophylaxis → use atovaquone-proguanil or artemether-lumefantrine\n• If on mefloquine prophylaxis → use atovaquone-proguanil or artemether-lumefantrine\n• If severe malaria: IV artesunate regardless of prophylaxis used [6]\n\n**Prophylaxis options by drug class:** [4]\n• Atovaquone-proguanil (Malarone): highly effective, well-tolerated, expensive\n• Doxycycline: inexpensive, effective, requires daily dosing, GI side effects, photosensitivity\n• Mefloquine: weekly dosing, effective, but neuropsychiatric side effects (black box warning)\n• Chloroquine: only for chloroquine-sensitive regions (rare)\n\n**CDC guidance:** Call CDC Malaria Hotline for complex cases (770-488-7788). [6]',
     citation: [4, 6, 18],
     next: 'mal-disposition',
+    summary: 'Prophylaxis failure does not exclude malaria — breakthrough infections occur with all prophylactic agents',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -491,6 +528,7 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-dispo-outpatient',
       },
     ],
+    summary: 'Admit severe malaria to ICU. Uncomplicated: consider observation vs discharge with reliable follow-up',
   },
 
   {
@@ -502,6 +540,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     recommendation: 'ICU admission for severe malaria. IV artesunate via CDC IND protocol. Close monitoring for complications. CBC weekly × 4 weeks post-discharge for delayed hemolysis surveillance.',
     confidence: 'definitive',
     citation: [5, 6, 8],
+    summary: 'ICU for severe malaria: IV artesunate, exchange transfusion if parasitemia >10%, serial smears',
   },
 
   {
@@ -513,6 +552,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     recommendation: 'Floor admission for close observation. All P. falciparum requires admission due to risk of rapid progression. Monitor blood smears, glucose, CBC, renal function. Discharge when afebrile >24h and parasitemia clearing.',
     confidence: 'definitive',
     citation: [4, 6],
+    summary: 'Floor admission for moderate cases: oral ACT, serial parasitemia, can convert to outpatient',
   },
 
   {
@@ -524,6 +564,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     recommendation: 'Outpatient management ONLY for uncomplicated vivax/ovale/malariae with reliable follow-up. Complete chloroquine + primaquine (if G6PD normal). MANDATORY blood smears day 3, 7, 28. Return precautions for fever, dyspnea, confusion, dark urine.',
     confidence: 'recommended',
     citation: [4, 9],
+    summary: 'Outpatient only if uncomplicated, reliable follow-up, oral intake tolerated, parasitemia <2%',
   },
 
 ];

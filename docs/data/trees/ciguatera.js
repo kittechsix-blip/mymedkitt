@@ -36,6 +36,7 @@ export const CIGUATERA_NODES = [
         body: 'Ciguatera is the most common nonbacterial seafood poisoning worldwide, affecting 50,000-500,000 people annually. Caused by ciguatoxin from dinoflagellates that bioaccumulate in reef fish.\n\nKEY FEATURES\n\u2022 GI symptoms (early) + neurological symptoms (characteristic)\n\u2022 Pathognomonic: HOT-COLD REVERSAL (cold feels burning, hot feels cold)\n\u2022 Cardiovascular instability in 20-40%\n\u2022 No rapid lab test \u2014 clinical diagnosis\n\nTOXIN CHARACTERISTICS\n\u2022 Heat-stable: cooking does not destroy it\n\u2022 Lipid-soluble: concentrates in fish tissue\n\u2022 No taste, smell, or visual indicators\n\u2022 Larger fish (>5-6 lbs) accumulate more toxin\n\nGEOGRAPHIC RISK\n\u2022 Caribbean, Pacific Islands, Hawaii, Florida Keys\n\u2022 Expanding range due to warming oceans\n\u2022 Can occur anywhere contaminated fish is shipped',
         citation: [1, 4],
         next: 'cig-history',
+        summary: 'Most common nonbacterial seafood poisoning — heat-stable toxin, no rapid test, clinical diagnosis',
     },
     {
         id: 'cig-history',
@@ -65,6 +66,7 @@ export const CIGUATERA_NODES = [
                 next: 'cig-differential',
             },
         ],
+        summary: 'Confirm reef fish consumption within 72 hours — barracuda, grouper, snapper highest risk',
     },
     {
         id: 'cig-unknown-fish',
@@ -74,6 +76,7 @@ export const CIGUATERA_NODES = [
         body: 'If fish species unknown, assess risk based on geographic source and preparation.\n\nHIGHEST RISK (Avoid entirely)\n\u2022 Barracuda \u2014 most common culprit\n\u2022 Moray eel\n\u2022 Amberjack\n\nHIGH RISK\n\u2022 Grouper, Red snapper, Sea bass\n\u2022 Sturgeon, Parrotfish, Surgeonfish\n\u2022 Kingfish, Jack, Hogfish\n\nRISK FACTORS\n\u2022 Fish >5-6 lbs (larger = more toxin)\n\u2022 Fish head, liver, roe, intestines (highest concentration)\n\u2022 Reef-caught vs. open ocean\n\u2022 Tropical/subtropical source\n\nLOW RISK\n\u2022 Pelagic fish (tuna, mahi-mahi, salmon)\n\u2022 Shellfish (different toxins)\n\nIf recent tropical reef fish consumption with compatible symptoms, treat as presumptive ciguatera.',
         citation: [1, 4, 8],
         next: 'cig-symptoms',
+        summary: 'Highest risk: barracuda, moray eel, amberjack — fish >5-6 lbs accumulate more toxin',
     },
     {
         id: 'cig-differential',
@@ -83,6 +86,8 @@ export const CIGUATERA_NODES = [
         body: 'Without fish exposure history, consider alternative diagnoses.\n\nOTHER MARINE TOXINS\n\u2022 Scombroid: histamine-like (flushing, urticaria, rapid onset)\n\u2022 Shellfish poisoning: paralytic, amnestic, neurotoxic\n\u2022 Tetrodotoxin: pufferfish (rapid paralysis)\n\nINFECTIOUS\n\u2022 Vibrio, Salmonella, Campylobacter\n\u2022 Norovirus (outbreak pattern)\n\nNEUROLOGICAL\n\u2022 Guillain-Barr\u00e9 (ascending weakness)\n\u2022 Multiple sclerosis (chronic cases)\n\u2022 Botulism (descending paralysis)\n\nOTHER\n\u2022 Organophosphate poisoning\n\u2022 Anxiety/panic disorder (chronic phase)\n\nKey differentiator: HOT-COLD REVERSAL is essentially pathognomonic for ciguatera.',
         citation: [2, 6],
         next: 'cig-symptoms',
+        summary: 'Hot-cold reversal is essentially pathognomonic — distinguishes from scombroid, shellfish, GBS',
+        skippable: true,
     },
     {
         id: 'cig-symptoms',
@@ -114,6 +119,7 @@ export const CIGUATERA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'GI symptoms first (1-2h), neurological follow (6-24h), cardiovascular in 20-40%',
     },
     {
         id: 'cig-gi-only',
@@ -123,6 +129,7 @@ export const CIGUATERA_NODES = [
         body: 'Early presentation with primarily GI symptoms. Neurological symptoms often develop over the next 12-24 hours.\n\nTYPICAL GI SYMPTOMS\n\u2022 Nausea and vomiting (onset 1-2 hours)\n\u2022 Watery diarrhea (can be profuse)\n\u2022 Abdominal cramping\n\u2022 Duration: 1-4 days typically\n\nMANAGEMENT\n\u2022 IV fluids for dehydration\n\u2022 Antiemetics (ondansetron 4-8 mg IV/PO)\n\u2022 Monitor for neurological symptom development\n\nIMPORTANT: Ask specifically about:\n\u2022 Tingling around lips/tongue\n\u2022 Temperature perception changes\n\u2022 Weakness or fatigue\n\nThese suggest evolving neurological involvement.',
         citation: [1, 8],
         next: 'cig-treatment',
+        summary: 'Early GI presentation — IV fluids, antiemetics, monitor for neurological symptom development',
     },
     // =====================================================================
     // MODULE 2: SEVERITY ASSESSMENT
@@ -151,6 +158,7 @@ export const CIGUATERA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Ask specifically about hot-cold reversal — patients may not volunteer this pathognomonic symptom',
     },
     {
         id: 'cig-neuro-mild',
@@ -160,6 +168,7 @@ export const CIGUATERA_NODES = [
         body: 'Mild sensory symptoms without motor involvement.\n\nTYPICAL SYMPTOMS\n\u2022 Perioral paresthesias (tingling lips/tongue)\n\u2022 Distal extremity paresthesias\n\u2022 Mild headache\n\u2022 Metallic taste\n\nEXPECTED COURSE\n\u2022 May worsen over first 24-48 hours\n\u2022 Usually resolves within 1-2 weeks\n\u2022 Some patients develop chronic symptoms\n\nTREATMENT\n\u2022 Supportive care\n\u2022 Consider amitriptyline 25 mg PO daily for neuropathic symptoms\n\u2022 NSAIDs for myalgias/headache\n\nMONITOR FOR PROGRESSION\n\u2022 Hot-cold reversal development\n\u2022 Motor weakness\n\u2022 Cardiac symptoms',
         citation: [2, 6],
         next: 'cig-treatment',
+        summary: 'Mild sensory only: perioral tingling, distal paresthesias — usually resolves in 1-2 weeks',
     },
     {
         id: 'cig-neuro-moderate',
@@ -169,6 +178,7 @@ export const CIGUATERA_NODES = [
         body: 'Classic ciguatera presentation with hot-cold reversal and sensory symptoms.\n\nPATHOGNOMONIC: HOT-COLD REVERSAL\n\u2022 Cold objects feel burning hot\n\u2022 Hot objects feel cold\n\u2022 Present in ~80% if specifically asked\n\u2022 May persist for months\n\nOTHER SYMPTOMS\n\u2022 Diffuse paresthesias\n\u2022 Myalgias, arthralgias\n\u2022 Severe fatigue\n\u2022 Pruritus (itching)\n\u2022 Cold allodynia (burning pain on cold contact)\n\nTREATMENT\n\u2022 Consider IV mannitol if within 72 hours\n\u2022 Amitriptyline 25-50 mg daily\n\u2022 Gabapentin 300-400 mg TID for neuropathic pain\n\u2022 Antihistamines for pruritus\n\nThese patients often have prolonged recovery (weeks to months).',
         citation: [2, 5, 6],
         next: 'cig-mannitol',
+        summary: 'Hot-cold reversal in ~80% — consider IV mannitol within 72h, amitriptyline for neuropathy',
     },
     {
         id: 'cig-neuro-severe',
@@ -179,6 +189,7 @@ export const CIGUATERA_NODES = [
         recommendation: 'ADMIT TO ICU/MONITORED BED\n\nSEVERE NEUROLOGICAL FEATURES\n\u2022 Ataxia or incoordination\n\u2022 Motor weakness (may mimic GBS)\n\u2022 Altered mental status\n\u2022 Seizures (rare but reported)\n\u2022 Respiratory compromise\n\nIMMEDIATE MANAGEMENT\n\u2022 Continuous cardiac monitoring\n\u2022 Frequent neuro checks\n\u2022 Consider IV mannitol 1 g/kg over 30-45 min\n\u2022 Airway assessment \u2014 intubation if respiratory muscle weakness\n\nWORKUP\n\u2022 ECG (assess for bradycardia, QT prolongation)\n\u2022 Basic metabolic panel\n\u2022 Consider LP if meningitis in differential\n\u2022 MRI brain if symptoms atypical\n\nNEUROLOGY CONSULTATION if motor weakness or altered mental status.',
         confidence: 'definitive',
         citation: [2, 6],
+        summary: 'Ataxia, weakness, or AMS = ICU admission — airway assessment, continuous cardiac monitoring',
     },
     {
         id: 'cig-cardiac-assess',
@@ -211,6 +222,7 @@ export const CIGUATERA_NODES = [
                 next: 'cig-chest-pain',
             },
         ],
+        summary: 'Cardiovascular toxicity in 20-40% — bradycardia most common, usually responds to atropine',
     },
     {
         id: 'cig-bradycardia',
@@ -220,6 +232,9 @@ export const CIGUATERA_NODES = [
         body: 'Bradycardia is the most common cardiovascular manifestation (67% of cardiac cases). Usually responds to atropine.\n\nMECHANISM\n\u2022 Ciguatoxin opens sodium channels\n\u2022 Vagal stimulation predominates\n\u2022 Direct cardiac ion channel effects\n\nMANAGEMENT\n\nASYMPTOMATIC (HR 40-50)\n\u2022 Monitor on telemetry\n\u2022 IV access\n\u2022 Observe for progression\n\nSYMPTOMATIC (HR <40 or symptoms)\n\u2022 Atropine 0.5-1 mg IV push\n\u2022 May repeat q3-5 min to max 3 mg\n\u2022 Transcutaneous pacing if refractory\n\nAVOID\n\u2022 Beta-blockers\n\u2022 Calcium channel blockers\n\u2022 These worsen bradycardia\n\nMost bradycardia resolves within 2-5 days.',
         citation: [1, 8],
         next: 'cig-treatment',
+        summary: 'Atropine 0.5-1 mg IV for symptomatic bradycardia — AVOID beta-blockers and CCBs',
+        skippable: true,
+        safetyLevel: 'warning',
     },
     {
         id: 'cig-hypotension',
@@ -229,6 +244,7 @@ export const CIGUATERA_NODES = [
         body: 'Hypotension occurs in up to 75% of patients with cardiovascular involvement. Usually responds to fluids.\n\nMANAGEMENT\n\nFIRST-LINE: IV Fluids\n\u2022 NS or LR 20 mL/kg bolus over 30 min\n\u2022 Repeat as needed\n\u2022 Monitor urine output\n\nREFRACTORY HYPOTENSION\n\u2022 Norepinephrine if persistent shock\n\u2022 Consider concurrent bradycardia (treat with atropine)\n\u2022 Rule out other causes (sepsis, bleeding)\n\nMONITORING\n\u2022 Continuous cardiac monitoring\n\u2022 Serial BPs q15 min until stable\n\u2022 Strict I/Os\n\nMost hypotension resolves within 2-5 days with supportive care.',
         citation: [1],
         next: 'cig-treatment',
+        summary: 'NS/LR 20 mL/kg bolus first — NE only if persistent shock after fluids',
     },
     {
         id: 'cig-chest-pain',
@@ -238,6 +254,7 @@ export const CIGUATERA_NODES = [
         body: 'Chest pain, palpitations, and dyspnea can occur without hemodynamic compromise.\n\nWORKUP\n\u2022 12-lead ECG (assess rhythm, QT interval)\n\u2022 Troponin (ciguatoxin can cause myocardial injury)\n\u2022 Continuous monitoring\n\nECG FINDINGS TO WATCH\n\u2022 Sinus bradycardia (most common)\n\u2022 AV blocks (rare)\n\u2022 QT prolongation\n\u2022 T-wave inversions\n\nMANAGEMENT\n\u2022 Observation with telemetry\n\u2022 Treat symptoms supportively\n\u2022 Consider admission if ECG abnormal or troponin elevated\n\nMost cardiac symptoms resolve within 2-5 days.',
         citation: [1],
         next: 'cig-treatment',
+        summary: 'ECG and troponin — ciguatoxin can cause direct myocardial injury and QT prolongation',
     },
     {
         id: 'cig-severe',
@@ -248,6 +265,7 @@ export const CIGUATERA_NODES = [
         recommendation: 'ADMIT TO ICU\n\nIMMEDIATE INTERVENTIONS\n\u2022 Continuous cardiac monitoring\n\u2022 Large-bore IV access\n\u2022 Airway assessment\n\nFOR BRADYCARDIA\n\u2022 Atropine 0.5-1 mg IV, repeat q3-5 min to max 3 mg\n\u2022 Transcutaneous pacing if refractory\n\nFOR HYPOTENSION\n\u2022 NS/LR 20 mL/kg bolus\n\u2022 Norepinephrine if persistent shock\n\nCONSIDER IV MANNITOL\n\u2022 1 g/kg over 30-45 minutes\n\u2022 If within 72 hours of ingestion\n\u2022 Monitor renal function and osmolality\n\nNEURO MONITORING\n\u2022 Frequent neuro checks\n\u2022 Seizure precautions\n\u2022 Respiratory status (may need intubation)\n\nMortality is <1% but severe cases can progress rapidly in first 24 hours.',
         confidence: 'definitive',
         citation: [1, 5, 7],
+        summary: 'Multi-system: ICU for continuous monitoring — atropine for bradycardia, fluids for hypotension, consider mannitol',
     },
     // =====================================================================
     // MODULE 3: ED TREATMENT
@@ -260,6 +278,8 @@ export const CIGUATERA_NODES = [
         body: 'Treatment is primarily supportive. No antidote exists.\n\nALL PATIENTS\n\u2022 IV access and fluids for dehydration\n\u2022 Antiemetics: ondansetron 4-8 mg IV/PO q4-6h\n\u2022 Cardiac monitoring if any cardiovascular symptoms\n\nGI DECONTAMINATION\n\u2022 Activated charcoal: consider if within 3-4 hours (limited evidence)\n\u2022 AVOID ipecac and lavage\n\nPAIN/NEUROPATHY\n\u2022 Acetaminophen, NSAIDs for myalgias/headache\n\u2022 Amitriptyline 25-50 mg PO daily for neuropathic symptoms\n\u2022 Gabapentin 300-400 mg TID if severe paresthesias\n\nPRURITUS\n\u2022 Diphenhydramine 25-50 mg IV/PO q4-6h\n\u2022 Cool compresses for dysesthesias\n\nAVOID\n\u2022 Opiates (worsen GI and neuro symptoms)\n\u2022 Barbiturates\n\u2022 Beta-blockers, calcium channel blockers',
         citation: [1, 4, 7],
         next: 'cig-mannitol',
+        summary: 'No antidote exists — supportive care with IV fluids, antiemetics, cardiac monitoring',
+        skippable: true,
     },
     {
         id: 'cig-mannitol',
@@ -279,6 +299,7 @@ export const CIGUATERA_NODES = [
                 next: 'cig-dispo',
             },
         ],
+        summary: 'Mannitol evidence is mixed — best within 72h, monitor osmolality and renal function closely',
     },
     {
         id: 'cig-mannitol-protocol',
@@ -288,6 +309,7 @@ export const CIGUATERA_NODES = [
         body: 'IV mannitol may reduce neurological symptoms if given early.\n\nDOSING\n\u2022 25% mannitol 1.0 g/kg IV over 30-45 minutes\n\u2022 May repeat in 3-4 hours if partial response\n\u2022 Maximum 2 doses in 24 hours\n\nMONITORING (REQUIRED)\n\u2022 Strict intake/output\n\u2022 Serum osmolality (keep <320 mOsm/kg)\n\u2022 Electrolytes q4-6 hours\n\u2022 Renal function\n\nCONTRAINDICATIONS\n\u2022 Oliguric or anuric renal failure\n\u2022 Severe dehydration (correct first)\n\u2022 Pulmonary edema or CHF\n\u2022 Active intracranial hemorrhage\n\nFLUID REPLACEMENT\n\u2022 Replace urine output with isotonic crystalloid\n\u2022 Mannitol causes significant diuresis\n\nEvidence: Palafox 1988 case series showed benefit; Schnorf 2002 RCT showed no difference vs saline. Still considered reasonable if given early.',
         citation: [3, 5, 7],
         next: 'cig-dispo',
+        summary: 'Mannitol 1 g/kg IV over 30-45 min — max 2 doses in 24h, keep osmolality <320, replace UOP',
     },
     // =====================================================================
     // MODULE 4: DISPOSITION & CHRONIC CARE
@@ -315,6 +337,7 @@ export const CIGUATERA_NODES = [
                 next: 'cig-admit',
             },
         ],
+        summary: 'Discharge if stable vitals, mild symptoms, tolerating PO; admit if cardiac or severe neuro',
     },
     {
         id: 'cig-discharge',
@@ -325,6 +348,7 @@ export const CIGUATERA_NODES = [
         recommendation: 'DISCHARGE CRITERIA MET\n\u2022 Normal vital signs\n\u2022 No severe neurological symptoms\n\u2022 No cardiovascular instability\n\u2022 Tolerating oral fluids\n\u2022 Safe discharge environment\n\nDISCHARGE MEDICATIONS\n\u2022 Antiemetic PRN (ondansetron ODT)\n\u2022 Amitriptyline 25 mg PO qHS for neuropathic symptoms\n\u2022 NSAIDs PRN for myalgias\n\nSTRICT AVOIDANCE (6+ months minimum)\n\u2022 ALL fish and seafood (risk of sensitization)\n\u2022 Alcohol (triggers symptom recurrence)\n\u2022 Caffeine, nuts, chocolate (reported triggers)\n\nFOLLOW-UP\n\u2022 PCP within 48-72 hours\n\u2022 Neurology if symptoms persist >2 weeks\n\nRETURN PRECAUTIONS\n\u2022 Worsening neurological symptoms\n\u2022 Bradycardia or palpitations\n\u2022 Syncope or near-syncope\n\u2022 Inability to tolerate fluids',
         confidence: 'recommended',
         citation: [1, 4],
+        summary: 'Avoid ALL fish, alcohol, caffeine, nuts for 6+ months — amitriptyline for neuropathy, PCP follow-up',
     },
     {
         id: 'cig-observe',
@@ -335,6 +359,7 @@ export const CIGUATERA_NODES = [
         recommendation: 'ADMIT TO OBSERVATION (23-hour)\n\nINDICATIONS\n\u2022 Moderate neurological symptoms\n\u2022 Requiring IV hydration\n\u2022 Mannitol administered\n\u2022 Mild cardiovascular symptoms\n\u2022 Unreliable follow-up\n\nMONITORING\n\u2022 Continuous cardiac monitoring for first 6-12 hours\n\u2022 Serial vitals q2-4h\n\u2022 Neuro checks q4h\n\u2022 Strict I/Os (especially if mannitol given)\n\nDISCHARGE WHEN\n\u2022 Stable vitals x 6 hours\n\u2022 Symptoms improving or stable\n\u2022 Tolerating PO\n\u2022 No cardiac arrhythmias\n\nProvide same discharge instructions and avoidance list as outpatient discharge.',
         confidence: 'recommended',
         citation: [1],
+        summary: 'Admit 23-hour observation — continuous cardiac monitoring, serial vitals, neuro checks',
     },
     {
         id: 'cig-admit',
@@ -345,6 +370,7 @@ export const CIGUATERA_NODES = [
         recommendation: 'ADMIT TO TELEMETRY OR ICU\n\nADMISSION CRITERIA\n\u2022 Bradycardia requiring atropine\n\u2022 Hypotension requiring IV fluids or vasopressors\n\u2022 Respiratory symptoms\n\u2022 Seizures or altered mental status\n\u2022 Severe dehydration\n\u2022 Syncope with hemodynamic changes\n\u2022 ECG abnormalities\n\u2022 Pregnancy\n\nMONITORING\n\u2022 Continuous cardiac monitoring x 24-48 hours minimum\n\u2022 Serial vitals q1h initially\n\u2022 Neuro checks q2h\n\u2022 Repeat ECG if initial abnormal\n\u2022 Serial electrolytes\n\nCONSULTS\n\u2022 Toxicology (if available)\n\u2022 Cardiology if arrhythmias\n\u2022 Neurology if motor weakness or AMS\n\nMost severe cases stabilize within 24-48 hours.',
         confidence: 'definitive',
         citation: [1, 2],
+        summary: 'Admit telemetry/ICU — continuous cardiac monitoring 24-48h, consult tox/neuro/cards as needed',
     },
     {
         id: 'cig-chronic',
@@ -354,5 +380,7 @@ export const CIGUATERA_NODES = [
         body: 'For patients with persistent symptoms >2 weeks.\n\nCHRONIC SYMPTOMS (3-20% of patients)\n\u2022 Fatigue (most common)\n\u2022 Persistent paresthesias\n\u2022 Myalgias, arthralgias\n\u2022 Cognitive difficulties\n\u2022 Depression, mood changes\n\u2022 Duration: months to years\n\nSENSITIZATION PHENOMENON\n\u2022 Symptoms recur with:\n  \u2014 Any fish consumption (even safe species)\n  \u2014 Alcohol (even years later)\n  \u2014 Caffeine, nuts, chocolate\n\u2022 May persist for 6-12+ months\n\nLONG-TERM MANAGEMENT\n\u2022 Amitriptyline 25-50 mg daily (fatigue, pain, mood)\n\u2022 Gabapentin 300-400 mg TID (neuropathy)\n\u2022 SSRIs for depression (fluoxetine)\n\u2022 Strict dietary avoidance\n\nREFERRALS\n\u2022 Neurology if symptoms persist\n\u2022 Toxicology for chronic management\n\u2022 Psychiatry if significant depression/anxiety',
         citation: [2, 6],
         next: 'cig-start',
+        summary: 'Chronic ciguatera (3-20%): persistent fatigue, paresthesias, cognitive issues — sensitization for months to years',
+        skippable: true,
     },
 ];

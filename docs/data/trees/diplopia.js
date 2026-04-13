@@ -25,6 +25,7 @@ export const DIPLOPIA_NODES = [
             { id: 'diplopia-mono-vs-bino', label: 'Mono vs Bino' },
         ],
         next: 'diplopia-classify',
+        summary: 'First determine monocular vs binocular — cover each eye; monocular = ocular cause, binocular = neurological',
     },
     {
         id: 'diplopia-classify',
@@ -46,6 +47,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-monocular',
             },
         ],
+        summary: 'Diplopia Type — assess clinical status to guide next management decision',
     },
     {
         id: 'diplopia-monocular',
@@ -60,6 +62,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Monocular diplopia persists with one eye covered — refractive error, cataract, corneal issue; rarely emergent',
     },
     {
         id: 'diplopia-direction',
@@ -91,6 +94,7 @@ export const DIPLOPIA_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Diplopia Direction — assess clinical status to guide next management decision',
     },
     {
         id: 'diplopia-horizontal',
@@ -100,6 +104,7 @@ export const DIPLOPIA_NODES = [
         body: '**Horizontal diplopia suggests CN III or CN VI involvement.**\n\n**Quick Localization:**\n\n| Finding | Likely Nerve |\n|---------|-------------|\n| Cannot look OUTWARD (abduct) | **CN VI** |\n| Cannot look INWARD (adduct) + ptosis | **CN III** |\n| Cannot look INWARD only | INO (MLF lesion) |\n\n**CN VI (Abducens):**\n• Esotropia (eye turned in)\n• Face turn toward affected side\n• Diplopia worse at distance\n\n**CN III (Oculomotor):**\n• Eye "down and out"\n• Ptosis\n• +/- pupil dilation\n\n**Proceed to detailed examination.** [3][4]',
         citation: [3, 4],
         next: 'diplopia-exam',
+        summary: 'Horizontal Diplopia — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-vertical',
@@ -109,6 +114,7 @@ export const DIPLOPIA_NODES = [
         body: '**Vertical diplopia suggests CN III or CN IV involvement.**\n\n**Quick Localization:**\n\n| Finding | Likely Nerve |\n|---------|-------------|\n| Eye down and out + ptosis | **CN III** |\n| Head tilt, hypertropia worse with adduction | **CN IV** |\n| Thyroid history, proptosis | Thyroid eye disease |\n\n**CN IV (Trochlear):**\n• Superior oblique palsy\n• Compensatory head tilt to opposite shoulder\n• Hypertropia worse with:\n  - Adduction (looking toward nose)\n  - Ipsilateral head tilt\n\n**CN III (Oculomotor):**\n• "Down and out" position\n• Usually has ptosis\n• Check pupil!\n\n**Proceed to detailed examination.** [3][5]',
         citation: [3, 5],
         next: 'diplopia-exam',
+        summary: 'Vertical Diplopia — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-exam',
@@ -121,6 +127,7 @@ export const DIPLOPIA_NODES = [
             { id: 'diplopia-exam-checklist', label: 'Exam Checklist' },
         ],
         next: 'diplopia-identify-nerve',
+        summary: 'Diplopia Examination — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-identify-nerve',
@@ -166,6 +173,7 @@ export const DIPLOPIA_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Identify Affected Nerve — assess clinical status to guide next management decision',
     },
     // =====================================================================
     // MODULE 2: CN III PALSY
@@ -185,6 +193,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-cn3-pupil',
+        summary: 'CN III Palsy Overview — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-pupil',
@@ -197,6 +206,7 @@ export const DIPLOPIA_NODES = [
             { id: 'diplopia-cn3-risk', label: 'CN III Risk' },
         ],
         next: 'diplopia-cn3-workup',
+        summary: 'The Pupil in CN III Palsy — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-workup',
@@ -206,6 +216,7 @@ export const DIPLOPIA_NODES = [
         body: '**Emergent Workup for ALL CN III Palsies:**\n\n**Imaging:**\n\n| Test | When | Sensitivity |\n|------|------|-------------|\n| **CTA Head** | ALL CN III palsies | >95% for aneurysm >3mm |\n| MRI/MRA | CTA negative, high suspicion | Better for small lesions |\n| DSA (catheter angio) | CTA/MRA negative, very high suspicion | Gold standard (~1% stroke risk) |\n\n**CTA Sensitivity for PCommA Aneurysm:**\n• Aneurysms <5mm: **99.4-99.8%**\n• Specificity: **99.1-99.6%**\n\n**Labs:**\n• Glucose, HbA1c (if microvascular suspected after negative imaging)\n• **ESR/CRP if age >50** (GCA screen)\n\n**If CTA NEGATIVE:**\n• Age >50 with vascular risk factors → can observe closely\n• Age <50 OR no vascular risk factors → MRI/MRA\n• Pupil involvement → MRI/MRA, consider DSA\n• Any progression → repeat imaging [3][4][6]',
         citation: [3, 4, 6],
         next: 'diplopia-cn3-disposition',
+        summary: 'CN III Palsy Workup — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-disposition',
@@ -239,6 +250,7 @@ export const DIPLOPIA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'CN III Palsy Disposition — assess clinical status to guide next management decision',
     },
     {
         id: 'diplopia-cn3-aneurysm',
@@ -253,6 +265,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'PCommA Aneurysm Found — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-microvascular',
@@ -267,6 +280,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Microvascular CN III Palsy — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-further',
@@ -281,6 +295,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'CN III - Further Workup — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn3-other',
@@ -295,6 +310,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'CN III - Other Pathology — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 3: CN IV PALSY
@@ -314,6 +330,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-cn4-exam',
+        summary: 'CN IV Palsy Overview — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn4-exam',
@@ -333,6 +350,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-cn4-workup',
+        summary: 'Parks-Bielschowsky 3-Step Test — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn4-workup',
@@ -342,6 +360,7 @@ export const DIPLOPIA_NODES = [
         body: '**CN IV Palsy Workup:**\n\n**History:**\n• Recent head trauma? (even minor)\n• Old photos showing head tilt? (suggests congenital)\n• Vascular risk factors?\n\n**When to Image:**\n\n| Scenario | Imaging |\n|----------|--------|\n| Trauma history | CT head |\n| Age >50 + vascular RF + isolated | Can observe, image if no improvement 2-3 months |\n| Age <50 OR no vascular RF | MRI with contrast |\n| Progressive or bilateral | MRI with contrast |\n| Other neurological findings | MRI with contrast |\n\n**Labs:**\n• ESR/CRP if age >50 (GCA screen)\n• Glucose, HbA1c if suspected microvascular\n\n**Bilateral CN IV Palsy Features:**\n• Alternating hypertropia (switches with gaze)\n• Positive Bielschowsky to BOTH shoulders\n• Large V-pattern esotropia\n• Common after trauma (contrecoup injury) [5][7]',
         citation: [5, 7],
         next: 'diplopia-cn4-disposition',
+        summary: 'CN IV Palsy Workup — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn4-disposition',
@@ -356,6 +375,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'CN IV Palsy Disposition — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 4: CN VI PALSY
@@ -375,6 +395,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-cn6-workup',
+        summary: 'CN VI Palsy Overview — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn6-workup',
@@ -384,6 +405,7 @@ export const DIPLOPIA_NODES = [
         body: '**CN VI Palsy Workup:**\n\n**Critical Step - Fundoscopy:**\n• **Papilledema?** → Emergent imaging for elevated ICP\n• CN VI as false localizing sign in ~33% of IIH patients\n\n**Imaging Based on Risk:**\n\n| Patient | Recommendation |\n|---------|---------------|\n| Age >50, vascular RF, isolated, no papilledema | Can observe; image if no improvement 2-3 months |\n| Age <50 | MRI with contrast |\n| No vascular risk factors | MRI with contrast |\n| **ALL children** | **Emergent MRI** (higher malignancy risk) |\n| Papilledema present | **Emergent CT/MRI** |\n| Other CN involvement | MRI with contrast |\n| Progressive or bilateral | MRI with contrast |\n\n**Labs:**\n• **ESR/CRP if age >50** (GCA screen)\n• Glucose, HbA1c\n• LP (if papilledema to measure opening pressure) [3][8]',
         citation: [3, 8],
         next: 'diplopia-cn6-disposition',
+        summary: 'CN VI Palsy Workup — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn6-disposition',
@@ -417,6 +439,7 @@ export const DIPLOPIA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'CN VI Palsy Findings — assess clinical status to guide next management decision',
     },
     {
         id: 'diplopia-cn6-icp',
@@ -431,6 +454,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'CN VI + Elevated ICP — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn6-peds',
@@ -445,6 +469,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Pediatric CN VI Palsy — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn6-microvascular',
@@ -459,6 +484,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Microvascular CN VI Palsy — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cn6-pathology',
@@ -473,6 +499,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'CN VI - Pathology Found — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 5: INO & BRAINSTEM / SPECIAL SCENARIOS
@@ -492,6 +519,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-ino-workup',
+        summary: 'Internuclear Ophthalmoplegia (INO) — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-ino-workup',
@@ -506,6 +534,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'INO Workup & Disposition — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-multiple',
@@ -518,6 +547,7 @@ export const DIPLOPIA_NODES = [
             { id: 'diplopia-localize', label: 'Localize Lesion' },
         ],
         next: 'diplopia-cavernous',
+        summary: 'Multiple Cranial Nerve Palsies — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-cavernous',
@@ -543,6 +573,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Cavernous Sinus Thrombosis — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-mg',
@@ -559,6 +590,7 @@ export const DIPLOPIA_NODES = [
             },
         ],
         next: 'diplopia-mg-disposition',
+        summary: 'Myasthenia Gravis — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-mg-disposition',
@@ -573,6 +605,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'MG Disposition — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 6: RED FLAGS, GCA, & DISPOSITION
@@ -585,6 +618,7 @@ export const DIPLOPIA_NODES = [
         body: '**⚠️ EMERGENT Red Flags in Diplopia ⚠️**\n\n| Finding | Concern |\n|---------|--------|\n| **Pupil involvement + CN III** | PCommA aneurysm |\n| **Pain + CN III palsy** | Aneurysm, cavernous sinus |\n| **Thunderclap headache** | SAH |\n| **Progressive symptoms** | Compressive lesion |\n| **Multiple CN palsies** | Cavernous sinus, orbital apex |\n| **Proptosis** | Mass, CST, CCF |\n| **Papilledema** | Elevated ICP |\n| **Associated neuro deficits** | Brainstem stroke |\n| **V1/V2 sensory loss** | Cavernous sinus |\n| **Fever + eye findings** | Septic CST |\n| **Child with CN VI palsy** | Tumor until proven otherwise |\n\n**"Dangerous Ds" of Posterior Stroke:**\n• **D**iplopia\n• **D**ysarthria\n• **D**ysphagia\n• **D**ysmetria\n• **D**ystaxia\n\n**Posterior strokes missed 2-3x more often than anterior!** [1][2][14]',
         citation: [1, 2, 14],
         next: 'diplopia-gca',
+        summary: 'Diplopia Red Flags — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-gca',
@@ -613,6 +647,7 @@ export const DIPLOPIA_NODES = [
             monitoring: 'ESR/CRP weekly initially. Symptom response. Vision checks. Arrange temporal artery biopsy within 2 weeks.',
         },
         next: 'diplopia-disposition',
+        summary: 'Giant Cell Arteritis Screen — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-disposition',
@@ -645,6 +680,7 @@ export const DIPLOPIA_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'CN III with pupil involvement: emergent CTA; isolated CN IV or VI: outpatient MRI and neuro follow-up',
     },
     {
         id: 'diplopia-dispo-admit',
@@ -659,6 +695,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Admit for Diplopia — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-dispo-mono',
@@ -673,6 +710,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Discharge - Monocular — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-dispo-micro',
@@ -687,6 +725,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Discharge - Microvascular — review key clinical information before proceeding',
     },
     {
         id: 'diplopia-dispo-followup',
@@ -701,6 +740,7 @@ export const DIPLOPIA_NODES = [
                 next: 'diplopia-start',
             },
         ],
+        summary: 'Discharge - Close Follow-up — review key clinical information before proceeding',
     },
 ];
 export const DIPLOPIA_MODULE_LABELS = [

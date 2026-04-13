@@ -27,6 +27,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         ],
         citation: [1, 2, 3, 4],
         next: 'dni-presentation',
+        summary: 'Deep neck infections can obstruct airway within hours — assess airway stability immediately',
     },
     {
         id: 'dni-presentation',
@@ -36,6 +37,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Common presenting symptoms:** [1,5]\n- Neck pain and swelling (unilateral or bilateral)\n- Odynophagia and dysphagia\n- Fever and malaise\n- Trismus (inability to open mouth)\n- Voice changes (hot potato voice)\n- Drooling\n\n**RED FLAGS indicating severe disease:** [2,5]\n- **Stridor** or respiratory distress\n- **Tripod positioning**\n- **Crepitus** (subcutaneous emphysema)\n- Bilateral neck swelling ("bull neck")\n- Floor of mouth elevation\n- Rapidly progressing symptoms\n\n**Physical exam findings:**\n- Neck erythema, induration, tenderness\n- Fluctuance (suggests abscess)\n- Dental caries or periapical abscess\n- Tonsillar asymmetry or bulging\n- Limited neck mobility (torticollis)',
         citation: [1, 2, 5],
         next: 'dni-airway-assess',
+        summary: 'Clinical Presentation — review key clinical information before proceeding',
     },
     {
         id: 'dni-airway-assess',
@@ -60,6 +62,7 @@ export const DEEP_NECK_INFECTION_NODES = [
                 next: 'dni-anatomic-spaces',
             },
         ],
+        summary: 'Airway Assessment — assess clinical status to guide next management decision',
     },
     // ===================================================================
     // MODULE 2: Anatomic Spaces & Specific Syndromes
@@ -72,6 +75,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**The neck contains interconnected fascial compartments that facilitate infection spread.** [1,7]\n\n**Superficial space:**\n- Between skin and investing fascia\n- Limited clinical significance\n\n**Deep cervical spaces:**\n- **Submandibular** (includes sublingual & submental)\n- **Parapharyngeal** (lateral to pharynx)\n- **Retropharyngeal** (posterior to pharynx, anterior to prevertebral fascia)\n- **Danger space** (between alar and prevertebral fascia)\n- **Prevertebral** (covers vertebral column)\n\n**"Danger space"** extends from skull base to diaphragm - permits rapid spread of infection into mediastinum. [1,7]\n\n**Clinical significance:** The anatomic space involved determines clinical presentation, complications, and management approach.',
         citation: [1, 7],
         next: 'dni-syndrome-branch',
+        summary: 'Neck Fascial Spaces — review key clinical information before proceeding',
     },
     {
         id: 'dni-syndrome-branch',
@@ -111,6 +115,7 @@ export const DEEP_NECK_INFECTION_NODES = [
                 next: 'dni-pta',
             },
         ],
+        summary: 'Clinical Syndrome — assess clinical status to guide next management decision',
     },
     {
         id: 'dni-ludwig',
@@ -143,6 +148,8 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Serial airway exams; WBC/CRP trending; repeat imaging if no improvement at 48-72 hours',
         },
         next: 'dni-ludwig-airway',
+        summary: 'Ludwig angina: bilateral submandibular cellulitis — tongue elevation can cause airway obstruction within hours',
+        safetyLevel: 'critical',
     },
     {
         id: 'dni-ludwig-airway',
@@ -152,6 +159,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Airway management is the #1 priority in Ludwig angina.** [5,6,9]\n\n**Direct laryngoscopy will often fail** due to:\n- Tongue elevation and posterior displacement\n- Board-like induration of floor of mouth\n- Trismus limiting mouth opening\n- Distorted anatomy\n\n**Preferred approach: Awake fiberoptic intubation** [6]\n- Maintain spontaneous respiration\n- Patient upright or semi-recumbent\n- Topical anesthesia (avoid nerve blocks due to distorted anatomy)\n- Nasal approach often preferred\n\n**Backup preparations BEFORE any airway attempt:**\n- Surgical airway tray at bedside (cricothyrotomy/tracheostomy)\n- ENT/Anesthesia on standby\n- Mark neck landmarks before attempt\n- Awake tracheostomy may be primary approach in severe cases\n\n**Warning:** Sedation/paralysis can cause complete airway collapse and make both intubation AND surgical airway extremely difficult.',
         citation: [5, 6, 9],
         next: 'dni-antibiotics',
+        summary: 'Ludwig Angina: Airway Priority — review key clinical information before proceeding',
     },
     {
         id: 'dni-retropharyngeal',
@@ -180,6 +188,7 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Airway assessment; fever curve; WBC/CRP; repeat CT if no improvement 48-72h',
         },
         next: 'dni-retro-management',
+        summary: 'Retropharyngeal abscess: posterior pharyngeal bulge — CT with contrast, ENT consultation for drainage',
     },
     {
         id: 'dni-retro-management',
@@ -189,6 +198,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Imaging:** [8,10,11]\n- **CT neck with IV contrast** is gold standard\n- Sensitivity ~100%, specificity ~45% (often overcalls abscess)\n- Ultrasound in peds: 89% sensitivity, 100% specificity\n\n**Medical vs Surgical:** [8]\n- **Medical management** successful in many children with small collections (<2 cm)\n- **Surgical drainage** required if:\n  - Large abscess (>2 cm hypodense focus)\n  - Failure to improve on IV antibiotics (48-72 hours)\n  - Airway compromise\n  - Extensive involvement\n\n**Drainage approach:**\n- Transcervical (external) approach for most adults and large abscesses\n- Transoral approach in select cases\n\n**Complications:** [10]\n- Airway obstruction\n- Aspiration (if rupture occurs)\n- Mediastinal extension\n- Atlantoaxial subluxation (Grisel syndrome)\n- Jugular vein thrombosis',
         citation: [8, 10, 11],
         next: 'dni-antibiotics',
+        summary: 'Retropharyngeal Abscess Management — review key clinical information before proceeding',
     },
     {
         id: 'dni-parapharyngeal',
@@ -209,6 +219,7 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Serial neck exams; drain output; WBC/CRP trending; vascular imaging if concern for vessel involvement',
         },
         next: 'dni-antibiotics',
+        summary: 'Parapharyngeal abscess can erode into carotid — CT with contrast mandatory, ENT for drainage',
     },
     {
         id: 'dni-lemierre',
@@ -218,6 +229,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Lemierre syndrome: septic thrombophlebitis of the internal jugular vein.** [12,13]\n\nAlso called "postanginal sepsis" or "the forgotten disease."\n\n**Classic tetrad:**\n1. Recent oropharyngeal infection (pharyngitis/tonsillitis)\n2. Bacteremia (typically *Fusobacterium necrophorum*)\n3. Internal jugular vein thrombophlebitis\n4. Septic emboli (lung most common)\n\n**Clinical course:** [12]\n- Pharyngitis 4-7 days before systemic illness\n- Persistent/recurrent high fever\n- Lateral neck pain/swelling (IJV region)\n- "Cord sign": palpable tender cord at mandibular angle (25-45%)\n- Pulmonary symptoms (cough, pleuritic pain, hemoptysis)\n\n**Organism:** *Fusobacterium necrophorum* in >90% of cases. [13]\n\n**Imaging:** [12]\n- CT neck with contrast: IJV thrombosis, perivenous enhancement\n- MRI/MRV: highest sensitivity (97%)\n- Chest CT: septic pulmonary emboli, cavitary lesions',
         citation: [12, 13],
         next: 'dni-lemierre-tx',
+        summary: 'Lemierre Syndrome — review key clinical information before proceeding',
     },
     {
         id: 'dni-lemierre-tx',
@@ -246,6 +258,7 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Serial CT neck/chest for clot progression; blood cultures; pulmonary imaging for emboli; consider anticoagulation if progression',
         },
         next: 'dni-complications',
+        summary: 'Lemierre Syndrome Treatment — review key clinical information before proceeding',
     },
     {
         id: 'dni-pta',
@@ -274,6 +287,7 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Symptom resolution; ability to tolerate PO; watch for extension to deeper spaces',
         },
         next: 'dni-imaging',
+        summary: 'Peritonsillar abscess: unilateral swelling, uvula deviation, trismus — needle aspiration or I&D',
     },
     // ===================================================================
     // MODULE 3: Airway Management
@@ -286,6 +300,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**AIRWAY IS THE ABSOLUTE PRIORITY.** [5,6]\n\nDeep neck infections create a "cannot intubate, cannot oxygenate" scenario risk.\n\n**General principles:**\n1. Maintain spontaneous ventilation as long as possible\n2. Avoid sedation/paralysis (can cause complete collapse)\n3. Have surgical airway immediately available\n4. Expert help (ENT, Anesthesia) if time permits\n5. Mark cricothyroid membrane BEFORE any attempt\n\n**Preferred: Awake fiberoptic intubation** [6]\n- Patient sitting upright if tolerated\n- Topical anesthesia (atomized lidocaine)\n- Nasal approach often preferred\n- Maintain eye contact and communication\n\n**Alternative: Awake tracheostomy**\n- May be primary approach in severe Ludwig angina\n- Performed under local anesthesia\n- ENT/Trauma surgery team\n\n**Last resort: Surgical airway (cricothyrotomy)**\n- Landmarks may be obscured by swelling\n- Prepare and mark before other attempts',
         citation: [5, 6],
         next: 'dni-airway-algorithm',
+        summary: 'Emergent Airway Management — review key clinical information before proceeding',
     },
     {
         id: 'dni-airway-algorithm',
@@ -295,6 +310,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**STEP 1: Assess stability**\n- Can patient maintain airway currently?\n- Rapidly progressive or stable?\n\n**STEP 2: Prepare (regardless of stability)**\n- Call ENT/Anesthesia early\n- Surgical airway tray at bedside\n- Mark cricothyroid membrane\n- Suction ready\n\n**STEP 3: Choose approach** [6]\n\n**If time permits (stable but at risk):**\n- Awake fiberoptic intubation in OR with ENT/Anesthesia\n- Double setup: FOI with tracheostomy ready\n\n**If imminent collapse:**\n- Awake tracheostomy under local, OR\n- Cricothyrotomy if cannot delay\n\n**AVOID unless absolutely necessary:**\n- RSI (risk of complete collapse)\n- Direct laryngoscopy (poor visualization)\n- Blind nasal intubation (risk of abscess rupture)\n\n**Post-intubation:** Do NOT remove until swelling resolves (may be several days).',
         citation: [6],
         next: 'dni-imaging',
+        summary: 'Airway Decision Algorithm — review key clinical information before proceeding',
     },
     {
         id: 'dni-imaging',
@@ -304,6 +320,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**CT neck with IV contrast is the gold standard.** [1,7,11]\n\n**Indications for emergent CT:**\n- Clinical suspicion of deep neck infection\n- Delineate extent of disease\n- Identify drainable collections\n- Evaluate for complications (vascular, mediastinal)\n\n**CT findings:** [11]\n- Rim-enhancing hypodense collection (abscess)\n- **Scalloping** of abscess wall = purulence at surgery\n- Soft tissue swelling and fat stranding\n- Obliteration of fat planes\n- Gas within soft tissues (necrotizing infection)\n- Airway narrowing or deviation\n\n**CT limitations:**\n- Sensitivity 100%, specificity 45% for abscess vs phlegmon [10]\n- May overestimate abscess; clinical correlation essential\n\n**Lateral neck X-ray (screening):**\n- Prevertebral soft tissue width >7 mm at C2 or >22 mm at C6\n- Limited utility; CT preferred\n\n**MRI:** Superior soft tissue detail but impractical in acute setting.',
         citation: [1, 7, 10, 11],
         next: 'dni-antibiotics',
+        summary: 'CT neck with IV contrast is imaging of choice — assess extent, identify drainable collections',
     },
     // ===================================================================
     // MODULE 4: Antibiotic Therapy
@@ -316,6 +333,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Deep neck infections are polymicrobial.** [1,4]\n\n**Common organisms:**\n- **Streptococci** (Group A, viridans group)\n- **Staphylococci** (including MRSA in some populations)\n- **Anaerobes** (Bacteroides, Fusobacterium, Peptostreptococcus)\n- **Eikenella corrodens** (oral flora)\n\n**Empiric coverage must include:**\n- Gram-positive organisms\n- Gram-negative organisms\n- Anaerobic coverage\n\n**First-line regimens:** [1,4,5]\n- [Ampicillin-sulbactam](#/drug/ampicillin-sulbactam/dni) 3g IV q6h, OR\n- [Clindamycin](#/drug/clindamycin/dni) 900 mg IV q8h (if PCN allergy)\n\n**Add MRSA coverage if:** [1]\n- Healthcare-associated infection\n- MRSA colonization/history\n- Immunocompromised\n- Injection drug use\n- Failure to improve on initial therapy\n\n**MRSA coverage:** [Vancomycin](#/drug/vancomycin/dni) 15-20 mg/kg IV q8-12h',
         citation: [1, 4, 5],
         next: 'dni-abx-severe',
+        summary: 'Unasyn 3g IV q6h or clindamycin + ceftriaxone — cover oral flora including anaerobes',
     },
     {
         id: 'dni-abx-severe',
@@ -344,6 +362,7 @@ export const DEEP_NECK_INFECTION_NODES = [
             monitoring: 'Vancomycin troughs 15-20; lactate; procalcitonin; daily surgical assessment; CT for progression',
         },
         next: 'dni-surgical',
+        summary: 'Severe/Necrotizing Infections — review key clinical information before proceeding',
     },
     {
         id: 'dni-surgical',
@@ -353,6 +372,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Surgery is required for most deep neck abscesses.** [1,2,3]\n\n**Indications for surgical drainage:**\n- Frank abscess on imaging (rim-enhancing collection)\n- Clinical fluctuance\n- Failure to improve after 48-72 hours of IV antibiotics\n- Airway compromise\n- Necrotizing infection\n- Mediastinal extension\n\n**Surgical approach:** [1]\n- External transcervical incision and drainage most common\n- Wide debridement for necrotizing infections\n- Multiple drain placement\n- May require repeat operations\n\n**Cases potentially managed medically:** [10]\n- Small phlegmon without abscess\n- Small pediatric retropharyngeal abscess (<2 cm)\n- Early presentation with rapid response to antibiotics\n\n**Key principle:** Low threshold for surgery. Antibiotics alone are often inadequate for established abscesses.',
         citation: [1, 2, 3, 10],
         next: 'dni-complications',
+        summary: 'ENT consultation for all deep neck infections — I&D if drainable collection on CT',
     },
     // ===================================================================
     // MODULE 5: Complications
@@ -365,6 +385,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Deep neck infections can rapidly progress to fatal complications.** [2,3]\n\n**Descending necrotizing mediastinitis:**\n- Extension via danger space or carotid sheath\n- Mortality 40-60% even with aggressive treatment\n- Requires thoracic surgery consultation\n- CT chest to evaluate extent\n\n**Airway obstruction:**\n- Most common cause of death in Ludwig angina\n- Can occur rapidly with minimal warning\n\n**Sepsis/Septic shock:**\n- Multi-organ failure\n- DIC\n\n**Vascular complications:** [12]\n- Internal jugular vein thrombosis (Lemierre)\n- Carotid artery erosion/pseudoaneurysm\n- Septic emboli (pulmonary, systemic)\n\n**Other:** [2]\n- Aspiration (from abscess rupture)\n- Pericarditis, empyema\n- Osteomyelitis (vertebral, mandibular)',
         citation: [2, 3, 12],
         next: 'dni-mediastinitis',
+        summary: 'Watch for mediastinitis, Lemierre syndrome, carotid erosion, airway compromise',
     },
     {
         id: 'dni-mediastinitis',
@@ -374,6 +395,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**The most feared complication of deep neck infection.** [2,3]\n\nInfection spreads from cervical spaces into the mediastinum via:\n- Danger space (alar to prevertebral fascia)\n- Carotid sheath\n- Pretracheal space\n\n**Clinical predictors of DNM:** [3]\n- Age >=55 years\n- Neutrophil-to-lymphocyte ratio >=13\n- CRP >=30 mg/dL\n- Diabetes mellitus\n\n**Clinical findings:**\n- Chest pain and dyspnea\n- Subcutaneous emphysema extending to chest\n- Rapidly deteriorating sepsis\n- Pericardial/pleural effusions\n\n**Diagnosis:** CT chest with contrast\n\n**Management:** [2,3]\n- Aggressive surgical debridement (often thoracotomy/sternotomy)\n- Broad-spectrum antibiotics\n- ICU admission\n- Cardiothoracic surgery involvement\n- May require multiple operations\n\n**Mortality:** 16-41% with aggressive modern management. [3]',
         citation: [2, 3],
         next: 'dni-consultants',
+        summary: 'Descending Necrotizing Mediastinitis — review key clinical information before proceeding',
     },
     {
         id: 'dni-consultants',
@@ -383,6 +405,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         body: '**Deep neck infections require a multidisciplinary team.** [1,2]\n\n**Essential consultations:**\n\n**ENT (Otolaryngology):**\n- All deep neck infections\n- Surgical drainage planning\n- Airway management assistance\n\n**Anesthesia:**\n- Difficult airway planning\n- Awake fiberoptic intubation\n\n**Infectious Disease:**\n- Complex antibiotic regimens\n- Prolonged therapy planning\n- Culture guidance\n\n**Additional consultations as needed:**\n- **Oral/Maxillofacial Surgery:** Odontogenic source, Ludwig angina\n- **Cardiothoracic Surgery:** Mediastinal extension\n- **Interventional Radiology:** CT-guided drainage, vascular complications\n- **Critical Care:** Severe sepsis, post-operative management\n\n**Early consultation improves outcomes.**',
         citation: [1, 2],
         next: 'dni-dispo-branch',
+        summary: 'Multidisciplinary Consultation — review key clinical information before proceeding',
     },
     // ===================================================================
     // MODULE 6: Disposition
@@ -413,6 +436,7 @@ export const DEEP_NECK_INFECTION_NODES = [
                 next: 'dni-dispo-discharge',
             },
         ],
+        summary: 'Disposition — assess clinical status to guide next management decision',
     },
     {
         id: 'dni-dispo-icu',
@@ -423,6 +447,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         recommendation: 'ICU admission for airway monitoring, IV antibiotics, and close observation. ENT/surgical team involvement for source control.',
         confidence: 'definitive',
         citation: [2],
+        summary: 'ICU Admission — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'dni-dispo-floor',
@@ -433,6 +458,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         recommendation: 'Admit to surgical ward for IV antibiotics, drain management, and serial monitoring. Involve ENT/oral surgery for source control.',
         confidence: 'recommended',
         citation: [1],
+        summary: 'Surgical Ward Admission — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'dni-dispo-discharge',
@@ -443,6 +469,7 @@ export const DEEP_NECK_INFECTION_NODES = [
         recommendation: 'Discharge with oral antibiotics and close ENT follow-up. Return precautions for any signs of progression or airway concerns.',
         confidence: 'consider',
         citation: [14],
+        summary: 'Discharge Criteria (PTA only) — determine disposition and follow-up plan based on clinical findings',
     },
 ];
 export const DEEP_NECK_INFECTION_NODE_COUNT = DEEP_NECK_INFECTION_NODES.length;

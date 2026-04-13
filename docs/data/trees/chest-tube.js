@@ -25,6 +25,7 @@ export const CHEST_TUBE_NODES = [
         body: 'This consult covers pneumothorax management and chest tube thoracostomy \u2014 from indications through insertion technique and post-procedure care.\n\nChest tubes were once a bedrock procedure for EM, resuscitation, and critical care. They are becoming increasingly unnecessary as evidence supports conservative management in many scenarios previously considered automatic indications.\n\nKEY EVIDENCE SHIFTING PRACTICE\n\u2022 Traumatic PTX: observation safe for <35 mm on CT in stable patients not on positive pressure ventilation [3]\n\u2022 Spontaneous PTX: conservative management non-inferior to intervention for moderate PSP (Brown et al, NEJM 2020) [1]\n\u2022 Occult PTX on ventilator: selective observation supported (OPTICC trial) [4]\n\u2022 Hemothorax: pigtail catheters comparable to large-bore in select cases (PCAT trial) [5]\n\u2022 Empyema: small-bore tubes have similar outcomes to large-bore [7]\n\nFor ultrasound diagnosis of pneumothorax, see [Pneumothorax POCUS](#/tree/pneumothorax).',
         citation: [1, 3, 4, 5, 7, 22],
         next: 'ctube-indication',
+        summary: 'Evidence shifting practice — conservative management safe for many previously automatic indications',
     },
     {
         id: 'ctube-indication',
@@ -47,6 +48,7 @@ export const CHEST_TUBE_NODES = [
                 next: 'ctube-empyema',
             },
         ],
+        summary: 'Classify indication: pneumothorax, hemothorax, or empyema — determines management pathway',
     },
     {
         id: 'ctube-ptx-type',
@@ -78,6 +80,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Classify PTX type — tension is clinical diagnosis, do NOT delay for imaging',
     },
     {
         id: 'ctube-tension',
@@ -87,6 +90,8 @@ export const CHEST_TUBE_NODES = [
         body: 'Clinical diagnosis \u2014 do NOT delay for imaging.\n\nSigns: hypotension, tachycardia, JVD, tracheal deviation (late sign), absent breath sounds, decreased SpO2, obstructive shock.\n\nNEEDLE DECOMPRESSION (temporizing)\n\u2022 14-16 gauge angiocatheter\n\u2022 2nd intercostal space, midclavicular line (traditional) OR 4th-5th intercostal space, anterior axillary line (preferred \u2014 thinner chest wall, higher success rate)\n\u2022 Insert perpendicular over superior rib edge\n\u2022 Rush of air confirms tension\n\u2022 Leave catheter in place\n\nFINGER THORACOSTOMY (more reliable)\n\u2022 Same site as chest tube (5th ICS, mid-axillary line, triangle of safety)\n\u2022 Blunt dissection into pleural space with finger sweep\n\u2022 Provides more reliable decompression than needle\n\nProceed immediately to definitive chest tube placement.',
         citation: [21, 22],
         next: 'ctube-anatomy',
+        summary: 'Needle decompression 4th-5th ICS anterior axillary line — finger thoracostomy more reliable',
+        safetyLevel: 'critical',
     },
     {
         id: 'ctube-traumatic',
@@ -114,6 +119,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Small traumatic PTX <35mm on CT: observation safe in stable patients not on PPV',
     },
     {
         id: 'ctube-traumatic-observe',
@@ -124,6 +130,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Admit for observation. Repeat imaging at 6 hours and prior to discharge. Supplemental O2 may accelerate reabsorption. Convert to chest tube if: progression on imaging, worsening symptoms, or new requirement for positive pressure ventilation.',
         confidence: 'recommended',
         citation: [3, 21],
+        summary: 'Admit for observation — repeat imaging at 6h and before discharge, convert if progresses',
     },
     {
         id: 'ctube-ventilator',
@@ -145,6 +152,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'OPTICC trial: selective observation of occult PTX on ventilator is safe with close monitoring',
     },
     {
         id: 'ctube-ventilator-observe',
@@ -155,6 +163,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Close ICU monitoring. Serial imaging. Low threshold for chest tube if any progression. Communicate with respiratory therapy. Avoid increases in PEEP if possible. Immediate intervention if signs of tension.',
         confidence: 'consider',
         citation: [4],
+        summary: 'Close ICU monitoring — low threshold for chest tube if any progression, avoid PEEP increases',
     },
     {
         id: 'ctube-psp',
@@ -181,6 +190,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Brown NEJM 2020: conservative management non-inferior — 98.5% resolution at 8 weeks',
     },
     {
         id: 'ctube-psp-conservative',
@@ -191,6 +201,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Observe 3-6 hours with repeat CXR. Supplemental O2 accelerates reabsorption (rate increases from ~1.25%/day to ~4%/day with high-flow O2). If stable or improving: discharge with outpatient follow-up in 2-4 weeks. No air travel or diving until confirmed resolution. Smoking cessation counseling (strongest modifiable risk factor). Return immediately for worsening dyspnea. Recurrence rate: ~30% at 1 year.',
         confidence: 'recommended',
         citation: [1, 20],
+        summary: 'PSP \u2014 Conservative Management — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'ctube-aspiration',
@@ -211,6 +222,7 @@ export const CHEST_TUBE_NODES = [
             monitoring: 'Monitor for local anesthetic systemic toxicity (LAST): perioral numbness, tinnitus, altered mental status, seizures.',
         },
         next: 'ctube-aspiration-result',
+        summary: 'Needle Aspiration — review key clinical information before proceeding',
     },
     {
         id: 'ctube-aspiration-result',
@@ -231,6 +243,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Aspiration Response — assess clinical status to guide next management decision',
     },
     {
         id: 'ctube-aspiration-success',
@@ -241,6 +254,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Observe 4-6 hours post-aspiration. Repeat CXR before discharge. If stable: discharge with 2-4 week follow-up. No air travel or diving until confirmed resolution. Smoking cessation (strongest modifiable risk factor). Recurrence: ~30% at 1 year. After 2nd ipsilateral episode, strongly recommend surgical pleurodesis (VATS).',
         confidence: 'definitive',
         citation: [1, 20],
+        summary: 'Aspiration Successful — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'ctube-ssp',
@@ -262,6 +276,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Secondary Spontaneous Pneumothorax — assess clinical status to guide next management decision',
     },
     {
         id: 'ctube-ssp-observe',
@@ -272,6 +287,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Admit for observation with supplemental O2. Serial CXR at 6 and 24 hours. Low threshold for chest tube if any worsening. Pulmonology consult for underlying disease management. Consider pleurodesis discussion for recurrence prevention.',
         confidence: 'consider',
         citation: [8, 22],
+        summary: 'SSP \u2014 Observation with Caution — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'ctube-hemothorax',
@@ -281,6 +297,7 @@ export const CHEST_TUBE_NODES = [
         body: 'Chest tube indicated for hemothorax. The PCAT trial demonstrated pigtail catheters may be comparable to large-bore tubes in select cases, but large-bore (28-36 Fr) remains standard for traumatic hemothorax to ensure adequate drainage of blood and clot.\n\nTube size: 28 Fr minimum for hemothorax. 28-36 Fr recommended.',
         citation: [5, 21, 22],
         next: 'ctube-anatomy',
+        summary: 'Hemothorax — review key clinical information before proceeding',
     },
     {
         id: 'ctube-empyema',
@@ -290,6 +307,7 @@ export const CHEST_TUBE_NODES = [
         body: 'Chest tube indicated for empyema/parapneumonic effusion requiring drainage. Small-bore tubes (10-14 Fr) have similar clinical outcomes to large-bore for pleural infection drainage (Rahman et al). BTS Pleural Disease Guideline 2010 supports image-guided small-bore catheter as first-line.\n\nIf loculated: consider intrapleural fibrinolytics (tPA + DNase) or VATS.',
         citation: [6, 7, 8],
         next: 'ctube-anatomy',
+        summary: 'Empyema / Pleural Infection — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 2: PREPARATION
@@ -314,6 +332,7 @@ export const CHEST_TUBE_NODES = [
             },
         ],
         next: 'ctube-tube-size',
+        summary: 'Insertion Site \u2014 Triangle of Safety — review key clinical information before proceeding',
     },
     {
         id: 'ctube-tube-size',
@@ -340,6 +359,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Tube Size Selection — assess clinical status to guide next management decision',
     },
     {
         id: 'ctube-pigtail',
@@ -349,6 +369,7 @@ export const CHEST_TUBE_NODES = [
         body: 'Small-bore pigtail catheters (10-14 Fr) placed via modified Seldinger technique (e.g., Thal-Quik).\n\nADVANTAGES\n\u2022 Less pain on insertion and while indwelling\n\u2022 Equivalent efficacy for simple pneumothorax\n\u2022 Faster insertion\n\u2022 Lower complication rate\n\nPROCEDURE\n1. Position, prep, drape (same landmarks as standard)\n2. Local anesthesia to skin, subcutaneous tissue, periosteum, parietal pleura\n3. Small skin incision (just enough for catheter)\n4. Insert introducing needle with syringe attached\n5. Aspirate as you advance \u2014 rush of air confirms pleural space entry\n6. Advance guidewire through needle, remove needle\n7. Dilate tract over guidewire\n8. Thread pigtail catheter over guidewire into pleural space\n9. Remove guidewire, confirm pigtail is curled\n10. Connect to drainage system (water seal or Heimlich valve)\n11. Secure with suture and occlusive dressing\n12. Confirm placement with CXR\n\nNOT appropriate for: hemothorax, empyema with thick fluid, or bronchopleural fistula.',
         citation: [22],
         next: 'ctube-post-cxr',
+        summary: 'Pigtail Catheter \u2014 Seldinger Technique — review key clinical information before proceeding',
     },
     {
         id: 'ctube-equipment',
@@ -358,6 +379,7 @@ export const CHEST_TUBE_NODES = [
         body: 'EQUIPMENT FOR TUBE THORACOSTOMY\n\nSet up on a large surface \u2014 not a mayo stand.\n\nSTERILE SUPPLIES\n\u2022 Chest tube (selected size)\n\u2022 Scalpel (#10 blade)\n\u2022 Large curved Kelly clamp\n\u2022 Needle driver and pickups with teeth\n\u2022 Size 2 Ethibond suture or 0-silk\n\u2022 Sterile chlorhexidine prep and drapes\n\u2022 Sterile gloves + gown\n\nANESTHESIA\n\u2022 30 mL bottle of 2% lidocaine with epinephrine\n\u2022 20 mL syringe with draw needle\n\u2022 22-gauge 1.5" needle for injection\n\nDRAINAGE\n\u2022 Pleur-Evac or equivalent closed drainage system (prepared and ready)\n\nOTHER\n\u2022 Soft restraint (for arm positioning)\n\u2022 Roll of 2-3" cloth or silk tape\n\u2022 2 medium Tegaderms\n\u2022 Multiple 4x4 gauze pads',
         citation: [22],
         next: 'ctube-positioning',
+        summary: 'Equipment — review key clinical information before proceeding',
     },
     {
         id: 'ctube-positioning',
@@ -367,6 +389,7 @@ export const CHEST_TUBE_NODES = [
         body: 'POSITIONING\n\u2022 Bring patient to the edge of the bed (ipsilateral side)\n\u2022 Incision site near the level of the xiphoid process\n\u2022 Ipsilateral arm up: restrain or have patient place hand behind head (exposes axilla and triangle of safety)\n\u2022 Sit up to 45\u00b0 if possible (supine acceptable for unstable patients)\n\nPREP AND DRAPE\n\u2022 Wide prep with chlorhexidine\n\u2022 Drape to maintain visibility of landmarks after sterile field is established \u2014 confirm you can still see your landmarks after draping\n\u2022 Account for breast tissue in female patients \u2014 it may shift the apparent landmarks',
         citation: [22],
         next: 'ctube-anesthesia',
+        summary: 'Patient Positioning — review key clinical information before proceeding',
     },
     {
         id: 'ctube-anesthesia',
@@ -395,6 +418,7 @@ export const CHEST_TUBE_NODES = [
             monitoring: 'Monitor for local anesthetic systemic toxicity (LAST): perioral numbness, tinnitus, altered mental status, seizures. Have lipid emulsion available. For procedural sedation: continuous pulse oximetry, ETCO2, and BP monitoring.',
         },
         next: 'ctube-ppe',
+        summary: 'Anesthesia — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 3: INSERTION
@@ -406,6 +430,7 @@ export const CHEST_TUBE_NODES = [
         title: 'PPE & Mental Preparation',
         body: 'PPE\n\u2022 Double glove\n\u2022 Face and eye protection\n\u2022 Hat and gown if available (always for non-emergent cases)\n\nMENTAL PREPARATION\n\u2022 Pause. Breathe.\n\u2022 Visualize each step before beginning. If you cannot visualize it, review the steps before proceeding.\n\u2022 This is a controlled procedure \u2014 deliberate technique prevents complications.',
         next: 'ctube-cut',
+        summary: 'PPE & Mental Preparation — review key clinical information before proceeding',
     },
     {
         id: 'ctube-cut',
@@ -415,6 +440,7 @@ export const CHEST_TUBE_NODES = [
         body: 'SCALPEL TECHNIQUE\n\u2022 Hold scalpel like a pencil for control\n\u2022 Make a 3-4 cm transverse incision through the skin\n\nKEY POINTS\n\u2022 Make the skin incision ONE intercostal space BELOW the intended pleural entry point. This creates a subcutaneous tunnel that reduces air leak after tube removal.\n\u2022 In female patients, account for breast tissue \u2014 it may shift the apparent intercostal space.\n\u2022 In obese patients, a longer incision may be needed to reach the chest wall. Anticipate a deeper dissection tract.',
         citation: [18, 22],
         next: 'ctube-dissection',
+        summary: 'The Incision — review key clinical information before proceeding',
     },
     {
         id: 'ctube-dissection',
@@ -424,6 +450,7 @@ export const CHEST_TUBE_NODES = [
         body: 'TECHNIQUE: PUSH IN, SPREAD, CHECK\n\nUsing the curved Kelly clamp:\n1. Dissect through subcutaneous tissue toward the superior edge of the rib ONE space above the skin incision\n2. Advance the CLOSED clamp through the intercostal muscles directly over the top of the rib\n3. Stay ABOVE the rib to avoid the neurovascular bundle (though it runs variably)\n4. Push through the parietal pleura with controlled force \u2014 you will feel a distinct pop\n5. Open the clamp widely to create the tract\n6. Rush of air or fluid confirms entry into the pleural space',
         citation: [22],
         next: 'ctube-finger-sweep',
+        summary: 'Blunt Dissection — review key clinical information before proceeding',
     },
     {
         id: 'ctube-finger-sweep',
@@ -433,6 +460,7 @@ export const CHEST_TUBE_NODES = [
         body: 'FINGER SWEEP\nInsert a gloved finger through the tract into the pleural space. Sweep gently to confirm:\n1. You are in the pleural space (not subcutaneous, not subdiaphragmatic)\n2. No adhesions that would impede tube passage\n3. No organs palpable (lung, diaphragm, liver/spleen)\n\nRIB FRACTURES = DANGER\nIn trauma patients with rib fractures at the insertion site, fractured rib edges can lacerate the finger or impede safe dissection. Exercise extreme caution. Consider an adjacent interspace if needed.',
         citation: [22],
         next: 'ctube-tube-insert',
+        summary: 'Finger Sweep & Safety Check — review key clinical information before proceeding',
     },
     {
         id: 'ctube-tube-insert',
@@ -442,6 +470,7 @@ export const CHEST_TUBE_NODES = [
         body: 'DO NOT USE TROCARS \u2014 EVER.\nTrocar insertion has an unacceptable rate of visceral injury. All chest tubes should be placed by blunt dissection.\n\nTUBE PREPARATION\n1. Place two clamps on the tube\n2. Cut the distal end at a slant (if not pre-cut)\n\nINSERTION\n\u2022 Clamp the tube tip with Kelly clamp OR guide with finger (with or without finger guidance \u2014 both are acceptable)\n\u2022 Direct the tube POSTERIORLY and APICALLY for pneumothorax (air rises anteriorly)\n\u2022 Direct POSTERIORLY and INFERIORLY for hemothorax (fluid layers dependently)\n\u2022 Advance until the last hole (proximal/sentinel hole) is well inside the chest wall\n\u2022 Chest tube depth is marked from the proximal hole \u2014 note insertion depth at the skin\n\nANGLE MATTERS\nIncreased angle of insertion (perpendicular to chest wall rather than tangential) is associated with higher complication rates [18]. Aim for a tangential trajectory along the chest wall.\n\nBOUGIE OR TUBE EXCHANGER\nCan be used to guide tube insertion through a difficult tract.',
         citation: [18, 22],
         next: 'ctube-confirm',
+        summary: 'Tube Insertion — review key clinical information before proceeding',
     },
     {
         id: 'ctube-confirm',
@@ -458,6 +487,7 @@ export const CHEST_TUBE_NODES = [
             },
         ],
         next: 'ctube-secure',
+        summary: 'Confirm Placement & Check for Kinking — review key clinical information before proceeding',
     },
     {
         id: 'ctube-secure',
@@ -467,6 +497,7 @@ export const CHEST_TUBE_NODES = [
         body: 'SUTURE\n\u2022 Use a large horizontal mattress suture (size 2 Ethibond or 0-silk) through the skin adjacent to the tube\n\u2022 Tie securely, leaving long tails\n\u2022 Wrap the tails around the tube and tie again (Roman sandal / mesentery technique)\n\u2022 Place a separate drain stitch (stay suture) for wound closure after tube removal\n\nDRESSING\n\u2022 Petroleum gauze around the tube at the skin entry (air-tight seal)\n\u2022 Cover with 4x4 gauze pads\n\u2022 Secure with 2-3" silk/cloth tape\n\u2022 Apply Tegaderms over the dressing edges\n\u2022 Write date, time, and insertion depth on the dressing with marker\n\nCONNECT DRAINAGE\n\u2022 Connect to Pleur-Evac or equivalent closed drainage system\n\u2022 Ensure all connections are tight\n\u2022 Verify air and/or fluid drainage\n\u2022 Never clamp a functioning chest tube without explicit attending instruction',
         citation: [22],
         next: 'ctube-post-cxr',
+        summary: 'Securing & Connecting Drainage — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 4: MANAGEMENT
@@ -496,6 +527,7 @@ export const CHEST_TUBE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Post-Insertion Chest Radiograph — assess clinical status to guide next management decision',
     },
     {
         id: 'ctube-malposition',
@@ -506,6 +538,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Options: (1) Pull back under sterile technique if too deep, (2) Place a second tube, (3) Consult thoracic surgery. Repeat CXR after any adjustment.',
         confidence: 'consider',
         citation: [11, 13, 22],
+        summary: 'Tube Malposition — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'ctube-massive-hemothorax',
@@ -516,6 +549,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Activate massive transfusion protocol. Emergent thoracic surgery consultation. Continue chest tube drainage. Autotransfuse via autotransfusion system if available. This is a surgical emergency.',
         confidence: 'definitive',
         citation: [14, 21],
+        summary: 'Massive Hemothorax \u2014 Surgical Indication — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'ctube-drainage',
@@ -532,6 +566,7 @@ export const CHEST_TUBE_NODES = [
             },
         ],
         next: 'ctube-suction',
+        summary: 'Drainage System Management — review key clinical information before proceeding',
     },
     {
         id: 'ctube-suction',
@@ -541,6 +576,7 @@ export const CHEST_TUBE_NODES = [
         body: 'SUCTION IS NOT ROUTINELY NECESSARY\n\n\u2022 You do not need suction for initial management, CT transport, or patient transfer\n\u2022 Suction should be reserved for: failure of lung re-expansion on water seal, persistent large air leak, or specific clinical situations\n\u2022 When used: low-pressure suction, typically -20 cmH2O\n\nBY INDICATION\n\u2022 Primary spontaneous PTX: water seal or Heimlich valve first. Suction only if lung fails to re-expand [1, 20]\n\u2022 Traumatic PTX: low-pressure suction may reduce hospital stay and tube duration. Especially important if patient is on positive pressure ventilation [21]\n\u2022 Secondary spontaneous PTX: evidence limited, clinical judgment\n\nSWITCHING OUT SYSTEMS\nShould be able to swap to a new Pleur-Evac at the level of the drainage system connection without losing the tube.',
         citation: [1, 20, 21, 22],
         next: 'ctube-air-leak',
+        summary: 'Suction vs Water Seal — review key clinical information before proceeding',
     },
     {
         id: 'ctube-air-leak',
@@ -550,6 +586,7 @@ export const CHEST_TUBE_NODES = [
         body: 'AIR LEAK QUANTIFICATION\nThe water seal chamber has graded markings to quantify the size of an air leak.\n\nCHECK FOR TIDALING\nTurn off suction and observe if the water column (or ball indicator) moves up and down with respiration. Tidaling = patent tube with communication to the pleural space. Absent tidaling = tube may be blocked, kinked, or lung fully expanded.\n\nTESTING FOR AIR LEAK\n1. Clamp the suction tubing (disconnect from vacuum)\n2. Ask the patient to cough (generates negative intrathoracic pressure)\n3. Release and observe the water seal chamber\n4. Bubbles = active air leak\n\nTROUBLESHOOTING\n\u2022 If air leak is at the system rather than the lung: clamp or kink tube at the chest wall \u2014 if bubbling stops, the leak is in the external system; if it continues, the leak is pulmonary\n\u2022 Check all connections for loose fittings\n\nDO NOT STRIP THE CHEST TUBE\nStripping (milking) generates excessive negative pressure (-300 to -400 cmH2O) and can cause lung injury. There is no evidence it improves drainage.\n\nDO NOT CLAMP the chest tube without explicit instruction from the primary team. Clamping a tube with an ongoing air leak risks tension pneumothorax.',
         citation: [16, 22],
         next: 'ctube-antibiotics',
+        summary: 'Air Leak Assessment & Troubleshooting — review key clinical information before proceeding',
     },
     {
         id: 'ctube-antibiotics',
@@ -578,6 +615,7 @@ export const CHEST_TUBE_NODES = [
             monitoring: 'Monitor for signs of surgical site infection: erythema, purulent drainage, fever. Daily reassessment of tube site.',
         },
         next: 'ctube-removal-criteria',
+        summary: 'Antibiotics & Ongoing Care — review key clinical information before proceeding',
     },
     {
         id: 'ctube-removal-criteria',
@@ -587,6 +625,7 @@ export const CHEST_TUBE_NODES = [
         body: 'CRITERIA FOR CHEST TUBE REMOVAL \u2014 all must be met:\n1. Lung fully re-expanded on CXR\n2. No air leak (no bubbling in water seal)\n3. Fluid output <100 mL/day\n4. Patient clinically stable\n\nWATER SEAL TRIAL\n\u2022 Place tube to water seal (disconnect suction) for a trial period\n\u2022 A normal CXR obtained 3 hours after placing on water seal effectively excludes development of a clinically significant pneumothorax [16]\n\u2022 If lung remains expanded and no air leak recurs: proceed to removal\n\nTIMING\nNo significant difference in recurrence of pneumothorax based on respiratory cycle timing of removal (end-expiration vs end-inspiration) [15]. One small study showed no difference.',
         citation: [15, 16],
         next: 'ctube-removal',
+        summary: 'Removal Criteria — review key clinical information before proceeding',
     },
     {
         id: 'ctube-removal',
@@ -615,6 +654,7 @@ export const CHEST_TUBE_NODES = [
             monitoring: 'Monitor respiratory status and sedation level. Have naloxone available.',
         },
         next: 'ctube-disposition',
+        summary: 'Removal Technique — review key clinical information before proceeding',
     },
     {
         id: 'ctube-disposition',
@@ -625,6 +665,7 @@ export const CHEST_TUBE_NODES = [
         recommendation: 'Discharge with follow-up CXR in 2-4 weeks. Smoking cessation and activity restrictions. Pulmonology referral if recurrent or SSP. Review [Discharge Instructions](#/info/chest-tube-discharge) with patient.',
         confidence: 'definitive',
         citation: [1, 22],
+        summary: 'Disposition & Follow-Up — determine disposition and follow-up plan based on clinical findings',
     },
 ];
 export const CHEST_TUBE_NODE_COUNT = CHEST_TUBE_NODES.length;

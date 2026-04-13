@@ -24,6 +24,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: '[First Trimester Emergency Steps](#/info/ft-summary) — quick reference.\n\nED approach to pregnancy-related emergencies in the **first trimester** (<14 weeks).\n\nCommon presentations:\n• **Vaginal bleeding** — miscarriage (7-27%), ectopic pregnancy (2%)\n• **Nausea/vomiting** — NVP (85%), hyperemesis gravidarum (3%)\n• **Dysuria/flank pain** — UTI, asymptomatic bacteriuria, pyelonephritis\n• **Abdominal pain** — appendicitis, ovarian torsion, ectopic\n\n**Step 1: Pregnancy test** in ALL reproductive-age women with abdominal pain or vaginal bleeding. [1]',
         citation: [1, 2],
         next: 'ft-stability',
+        summary: 'Pregnancy test ALL reproductive-age women with abdominal pain or vaginal bleeding',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-stability',
@@ -43,6 +45,8 @@ export const FIRST_TRIMESTER_NODES = [
                 next: 'ft-stable-branch',
             },
         ],
+        summary: 'Paradoxical bradycardia may occur with hemoperitoneum — do not be reassured by normal HR',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-unstable-ectopic',
@@ -52,6 +56,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: '**Unstable first trimester patient = ruptured ectopic until proven otherwise.** [1]\n\n**Immediate actions:**\n• 2 large-bore IVs, aggressive fluid resuscitation\n• Type & crossmatch, activate MTP if needed\n• **Bedside FAST exam** — free intraperitoneal fluid?\n• **Bedside pelvic ultrasound** — IUP present?\n\n**If free fluid + no IUP → ruptured ectopic:**\n• O-negative blood transfusion\n• **Emergent OB consult for surgical intervention**\n• Do NOT delay for beta-hCG or formal imaging\n\n94% of all ectopic pregnancy-related deaths are from hemorrhagic shock due to rupture. [2]\n\nRupture can occur at **very low beta-hCG levels**. Beta-hCG <1500 mIU/mL carries 2× higher risk of ectopic. [4]',
         citation: [1, 2, 4],
         next: 'ft-ectopic-surgical',
+        summary: 'Unstable first trimester = ruptured ectopic until proven otherwise — emergent OB, do NOT delay',
+        safetyLevel: 'critical',
     },
     {
         id: 'ft-stable-branch',
@@ -82,6 +88,7 @@ export const FIRST_TRIMESTER_NODES = [
                 next: 'ft-appendicitis',
             },
         ],
+        summary: 'Determine chief complaint: vaginal bleeding/pain, nausea/vomiting, dysuria, or RLQ pain',
     },
     // =====================================================================
     // MODULE 2: ECTOPIC PREGNANCY
@@ -123,6 +130,7 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Bedside TVUS + quant hCG — EP has 99.96% NPV for ectopic when IUP identified on bedside US',
     },
     {
         id: 'ft-iup-confirmed',
@@ -143,6 +151,8 @@ export const FIRST_TRIMESTER_NODES = [
                 next: 'ft-nonob-branch',
             },
         ],
+        summary: 'IUP confirmed rules out ectopic in general population — ART patients: 1 in 100 heterotopic risk',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-pul',
@@ -152,6 +162,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'No IUP visualized. Beta-hCG below the **discriminatory zone**.\n\n**Discriminatory zone:** ACOG recommends conservatively ≥3500 mIU/mL (transvaginal US). Below this, a normal IUP may simply be too early to visualize. [8]\n\n**Serial beta-hCG monitoring:**\n• Normal viable IUP: beta-hCG rises **≥53% in 48 hours** [9]\n• Slower rise or plateau: concerning for ectopic or nonviable IUP\n• Declining levels: may indicate completed miscarriage\n\n**CRITICAL:** One-third of patients eventually diagnosed with ectopic had a beta-hCG rise of ≥53% at 48h, and 20% had decline mimicking miscarriage. [10]\n\n**Trends CANNOT reliably exclude ectopic.** Continue serial monitoring until definitive diagnosis.',
         citation: [8, 9, 10],
         next: 'ft-dispo-pul',
+        summary: 'Pregnancy of unknown location — serial hCG q48h, but 1/3 of ectopics have normal hCG rise',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-no-iup-high',
@@ -161,6 +173,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'Beta-hCG **≥3500 mIU/mL** with no IUP visualized.\n\nThis strongly suggests a **nonviable pregnancy** — either:\n• Nonviable IUP (missed miscarriage, complete miscarriage)\n• Ectopic pregnancy\n\n**Does not definitively diagnose ectopic.** OB consultation recommended for further evaluation and management.\n\nPatient should have close follow-up with serial beta-hCG and ultrasound until diagnosis is established.',
         citation: [8],
         next: 'ft-ectopic-confirmed',
+        summary: 'hCG ≥3500 with no IUP = nonviable pregnancy (ectopic or missed miscarriage) — OB consult',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-ectopic-confirmed',
@@ -182,6 +196,7 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Confirmed ectopic — determine medical (methotrexate) vs surgical management with OB',
     },
     {
         id: 'ft-ectopic-medical',
@@ -211,6 +226,7 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Serial beta-hCG on day 4 and day 7. Expect 15% decline between day 4 and 7. Weekly beta-hCG until undetectable. Avoid NSAIDs, folic acid, intercourse, and alcohol during treatment.',
         },
+        summary: 'Methotrexate 50mg/m2 IM if stable, no fetal cardiac activity, hCG <5000, reliable follow-up',
     },
     {
         id: 'ft-ectopic-surgical',
@@ -221,6 +237,8 @@ export const FIRST_TRIMESTER_NODES = [
         recommendation: 'Emergent OB surgical consultation. Salpingostomy or salpingectomy. Laparotomy for ruptured ectopic with hemoperitoneum.',
         confidence: 'definitive',
         citation: [1, 13],
+        summary: 'Emergent salpingectomy for ruptured ectopic or unstable patient — do NOT delay for workup',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: MISCARRIAGE
@@ -256,6 +274,7 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Classify by os status and US: threatened, complete, incomplete/missed, or septic abortion',
     },
     {
         id: 'ft-threatened',
@@ -265,6 +284,7 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'Vaginal bleeding with a **viable IUP** (closed cervical os, fetal cardiac activity detected).\n\n**Prognosis:** If fetal cardiac activity is present, only **3.4%** progress to miscarriage. However, heavy bleeding may increase this to 11-18%. [15]\n\nSpotting alone has no significant increase in miscarriage risk (OR 1.1). Heavy bleeding + pain increases risk (OR 3.0). [15]\n\n**Management:**\n• Reassurance — most will have normal pregnancy\n• No evidence supports bed rest\n• Strict return precautions\n• Close OB follow-up\n\n**NOTE:** 2-fold increased risk of subsequent adverse outcomes (preterm birth, low birth weight) — ensure OB is aware. [16]',
         citation: [15, 16],
         next: 'ft-rh-rhogam',
+        summary: 'Viable IUP + closed os: only 3.4% progress to miscarriage if cardiac activity present',
     },
     {
         id: 'ft-complete',
@@ -274,6 +294,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'All products of conception have passed. Uterus is empty on ultrasound. Cervical os is closed.\n\n**Management:**\n• Confirm with ultrasound — empty uterus, closed os\n• No further ED intervention needed\n• Serial beta-hCG should trend to zero\n• OB follow-up for confirmation of completed miscarriage\n• Emotional support and grief resources\n\n[Managing Communication Around Pregnancy Loss](#/info/ft-miscarriage-communication)',
         citation: [1],
         next: 'ft-rh-rhogam',
+        summary: 'Empty uterus, closed os — confirm on US, serial hCG to zero, emotional support',
+        skippable: true,
     },
     {
         id: 'ft-nonviable-mgmt',
@@ -300,6 +322,7 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Expectant (50-80% complete in 7-10d), medical (misoprostol 91%), or surgical (D&C) — OB decides',
     },
     {
         id: 'ft-expectant',
@@ -309,6 +332,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'Allow natural passage of products of conception.\n\n**Success rate:** 50-80% will have complete miscarriage within **7-10 days**.\n\nHigher success in incomplete miscarriage (already-open os) vs missed miscarriage.\n\nUp to **40%** of patients initially managed expectantly or medically may ultimately require unplanned surgical management. [19]\n\n**Counsel patient:**\n• Expect cramping and bleeding (may be heavy)\n• Return to ED if soaking >1 pad/hour for 2+ hours, fever, or lightheadedness\n• OB follow-up within 1 week\n\n[Miscarriage Discharge Instructions](#/info/ft-miscarriage-discharge)',
         citation: [17, 19],
         next: 'ft-rh-rhogam',
+        summary: 'Expect cramping and heavy bleeding — 40% may ultimately need unplanned surgical management',
+        skippable: true,
     },
     {
         id: 'ft-medical-miscarriage',
@@ -337,6 +362,8 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'OB follow-up in 7-14 days with ultrasound to confirm complete passage. Return to ED for soaking >1 pad/hour for 2+ hours, fever >100.4F, or severe pain.',
         },
+        summary: 'Misoprostol 800mcg intravaginally — 91% effective in 7 days, expect significant cramping',
+        skippable: true,
     },
     {
         id: 'ft-surgical-miscarriage',
@@ -346,6 +373,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: '**Dilation & Curettage (D&C)** — most effective option.\n\n**Indications:**\n• Hemodynamic instability or significant hemorrhage (MANDATORY)\n• Patient preference\n• Failed medical or expectant management\n• Septic abortion\n\n**Advantages:**\n• Lowest rates of incomplete miscarriage, bleeding, and need for transfusion [17]\n• Definitive and rapid\n\nArranged through OB consultation — typically same-day or next-day procedure.\n\nConsider sending products to pathology for analysis, especially in recurrent miscarriage.',
         citation: [17, 18],
         next: 'ft-rh-rhogam',
+        summary: 'D&C mandatory for hemorrhage or hemodynamic instability — lowest incomplete miscarriage rate',
+        skippable: true,
     },
     {
         id: 'ft-septic',
@@ -375,6 +404,8 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Continuous vitals monitoring. Lactate, CBC, BMP q6-8h. Blood cultures before antibiotics. ICU admission if septic shock (vasopressors required).',
         },
+        summary: 'Septic abortion: emergent broad-spectrum IV antibiotics AND surgical evacuation — do NOT delay',
+        safetyLevel: 'critical',
     },
     {
         id: 'ft-rh-rhogam',
@@ -403,6 +434,8 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Document Rh status and antibody screen in chart. Ensure OB aware for repeat dosing at 28 weeks if pregnancy continues.',
         },
+        summary: 'RhoGAM for Rh-negative patients with bleeding — 50mcg IM for first trimester, within 72h',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: NVP / HYPEREMESIS
@@ -427,6 +460,7 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'NVP affects 85% — assess if tolerating PO. Hyperemesis gravidarum (3%) needs IV rehydration',
     },
     {
         id: 'ft-nvp-oral',
@@ -447,6 +481,7 @@ export const FIRST_TRIMESTER_NODES = [
                 next: 'ft-nvp-oral-step2',
             },
         ],
+        summary: 'First-line: pyridoxine 10-25mg TID + doxylamine 12.5mg TID — superior to B6 alone',
     },
     {
         id: 'ft-nvp-oral-step2',
@@ -468,6 +503,8 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Add dimenhydrinate, diphenhydramine, prochlorperazine, or promethazine to first-line therapy',
+        skippable: true,
     },
     {
         id: 'ft-nvp-iv',
@@ -489,6 +526,8 @@ export const FIRST_TRIMESTER_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'IV fluids with dextrose (check thiamine first), ondansetron 4mg IV, metoclopramide if refractory',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-hg-admit',
@@ -518,6 +557,7 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Daily BMP for electrolytes. Replete K, Mg, Phos as needed. Daily weights. Strict I/Os. Urine ketones daily. Consider TPN consult if refractory >5-7 days.',
         },
+        summary: 'Admit hyperemesis gravidarum: unable to tolerate PO, ketonuria, electrolyte derangement, >5% weight loss',
     },
     // =====================================================================
     // MODULE 5: NONOBSTETRIC EMERGENCIES
@@ -547,6 +587,8 @@ export const FIRST_TRIMESTER_NODES = [
                 next: 'ft-appendicitis',
             },
         ],
+        summary: 'Evaluate non-bleeding complaint: NVP, UTI, appendicitis, or other with known IUP',
+        skippable: true,
     },
     {
         id: 'ft-uti-eval',
@@ -583,6 +625,8 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Repeat urine culture 1-2 weeks after treatment to confirm eradication. Monthly urine cultures for remainder of pregnancy.',
         },
+        summary: 'Treat ALL asymptomatic bacteriuria in pregnancy — untreated leads to pyelo in 20-40%',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-pyelo',
@@ -620,6 +664,8 @@ export const FIRST_TRIMESTER_NODES = [
             },
             monitoring: 'Vitals q4h. Daily BMP and CBC. Urine output monitoring. Transition to oral cephalexin 500 mg QID or per sensitivities when afebrile 48h.',
         },
+        summary: 'Pyelonephritis in pregnancy: admit for IV antibiotics — high risk of preterm labor and sepsis',
+        safetyLevel: 'warning',
     },
     {
         id: 'ft-appendicitis',
@@ -629,6 +675,8 @@ export const FIRST_TRIMESTER_NODES = [
         body: 'Most common surgical problem in pregnancy, though pregnant women are actually **less likely** to have appendicitis than age-matched nonpregnant women. [30]\n\n**Despite traditional teaching, RLQ pain is the most common location** at all gestational ages. [31]\n\nPeritonitis is more common in pregnant patients with appendicitis (OR 1.3). Peritonitis → 4× higher rate of preterm birth. [32]\n\n**Imaging algorithm:**\n1. **Ultrasound first** — but visualization rate as low as 7%, sensitivity only 18% [33]\n2. **MRI without contrast** — 94% sensitivity, 97% specificity. First trimester MRI is safe (no fetal risk to age 4). [34, 35]\n3. **CT abdomen/pelvis** — if US indeterminate and MRI unavailable. Single study does NOT exceed threshold for fetal harm. Discuss risks/benefits with patient. [36]\n\n**AVOID gadolinium** — associated with stillbirth, neonatal death, and rheumatologic conditions. [35]\n\n[Imaging Safety in Pregnancy](#/info/ft-imaging-safety)\n\n**Treatment: surgical.** No data support antibiotics-only strategy in pregnancy. All patients need surgical consultation. [1]',
         citation: [30, 31, 32, 33, 34, 35, 36],
         next: 'ft-dispo-general',
+        summary: 'MRI preferred over CT for appendicitis in pregnancy — perforation rate higher due to delayed dx',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -642,6 +690,7 @@ export const FIRST_TRIMESTER_NODES = [
         recommendation: 'Discharge with 48-hour beta-hCG recheck and ultrasound. Strict return precautions. Continue serial monitoring until definitive diagnosis.',
         confidence: 'definitive',
         citation: [1, 8],
+        summary: 'PUL requires strict ectopic precautions and serial hCG q48h until definitive diagnosis',
     },
     {
         id: 'ft-dispo-miscarriage',
@@ -652,6 +701,7 @@ export const FIRST_TRIMESTER_NODES = [
         recommendation: 'Discharge with management plan, pain control, grief resources, and OB follow-up in 1-2 weeks.',
         confidence: 'recommended',
         citation: [1, 37],
+        summary: 'OB follow-up within 1-2 weeks, return for soaking >1 pad/hr, fever, or severe pain',
     },
     {
         id: 'ft-dispo-nvp',
@@ -662,6 +712,7 @@ export const FIRST_TRIMESTER_NODES = [
         recommendation: 'Discharge with pyridoxine ± doxylamine. Generic prescriptions preferred for cost savings. OB follow-up in 1 week.',
         confidence: 'recommended',
         citation: [22],
+        summary: 'Discharge with B6 + doxylamine prescription, small frequent meals, ginger, return if unable to keep fluids down',
     },
     {
         id: 'ft-dispo-general',
@@ -672,6 +723,7 @@ export const FIRST_TRIMESTER_NODES = [
         recommendation: 'Disposition based on diagnosis and clinical stability. Ensure OB follow-up for all pregnant patients.',
         confidence: 'recommended',
         citation: [1],
+        summary: 'Disposition based on diagnosis and stability — ensure OB follow-up for all first trimester emergencies',
     },
 ];
 export const FIRST_TRIMESTER_MODULE_LABELS = [

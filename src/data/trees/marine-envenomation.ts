@@ -68,6 +68,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'marine-creature-id', label: 'Creature Identification Tool' },
     ],
+    summary: 'Identify organism type to guide specific treatment — heat vs vinegar vs antivenom approaches differ',
   },
   {
     id: 'marine-toxidrome',
@@ -91,6 +92,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Global coastal: Stingrays, sea urchins`,
     citation: [1, 12],
     next: 'marine-start',
+    summary: 'Two major toxidromes: nematocyst (cnidarian/jellyfish) vs venomous spine (fish/urchin/stingray)',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -128,6 +130,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
       { label: 'Bluebottle / Man-of-War', next: 'marine-bluebottle' },
       { label: 'Other jellyfish (local symptoms only)', next: 'marine-jelly-minor' },
     ],
+    summary: 'Jellyfish stings: remove tentacles with forceps, rinse with vinegar (acetic acid) — NOT fresh water',
+    safetyLevel: 'warning',
   },
   {
     id: 'marine-box-jelly',
@@ -162,6 +166,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
     images: [{ src: 'images/marine-envenomation/box-jellyfish.png', alt: 'Box jellyfish (Chironex sp.) — cube-shaped bell with tentacles', caption: 'Box jellyfish (Chironex sp.) — cube-shaped bell, potent venom. CC BY-SA 2.0.' }],
     citation: [1, 4, 5, 6],
     next: 'marine-systemic',
+    summary: 'Box jellyfish (Chironex): potentially lethal — flood with vinegar, antivenom for severe envenomation',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-irukandji',
@@ -201,6 +207,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
       { id: 'marine-irukandji-severity', label: 'Irukandji Severity Score' },
     ],
     next: 'marine-systemic',
+    summary: 'Irukandji syndrome: delayed severe pain, hypertension, heart failure — IV magnesium for pain and HTN',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-bluebottle',
@@ -225,6 +233,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Return precautions for infection or worsening symptoms`,
     citation: [1, 3],
     next: 'marine-disposition',
+    summary: 'Bluebottle/Portuguese man-of-war: hot water immersion (not vinegar) — vinegar may worsen bluebottle stings',
+    safetyLevel: 'warning',
   },
   {
     id: 'marine-jelly-minor',
@@ -252,6 +262,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Return precautions for infection or systemic symptoms`,
     citation: [1, 2],
     next: 'marine-disposition',
+    summary: 'Minor jellyfish stings: vinegar, remove tentacles, hot water immersion, NSAIDs for pain',
+    skippable: true,
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -290,6 +302,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'marine-hot-water', label: 'Hot Water Immersion Timer' },
     ],
+    summary: 'Venomous fish spines: hot water immersion (45°C/113°F x 30-90 min) denatures heat-labile venom',
   },
   {
     id: 'marine-stingray',
@@ -319,6 +332,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Retained barb near joints or neurovascular structures`,
     citation: [9, 10],
     next: 'marine-disposition',
+    summary: 'Stingray: hot water immersion, explore wound for retained barb, irrigate copiously, antibiotics',
+    safetyLevel: 'warning',
   },
   {
     id: 'marine-stonefish',
@@ -350,6 +365,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - [Stonefish Antivenom](#/drug/stonefish-antivenom/envenomation): 1 amp per 2 punctures (max 3)`,
     citation: [3, 8, 10],
     next: 'marine-systemic',
+    summary: 'Stonefish: most venomous fish — hot water immersion, antivenom available for severe cases',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-lionfish',
@@ -378,6 +395,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Follow up in 48-72 hours for wound check`,
     citation: [8],
     next: 'marine-disposition',
+    summary: 'Lionfish: hot water immersion effective, rarely systemic — wound care and pain management',
+    skippable: true,
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -403,6 +422,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
       { label: 'Cone Snail', next: 'marine-cone' },
       { label: 'Sea Snake', next: 'marine-seasnake' },
     ],
+    summary: 'Other marine organisms: sea urchins, octopus, cone snails, sea snakes — species-specific treatment',
   },
   {
     id: 'marine-urchin',
@@ -431,6 +451,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Otherwise discharge with wound care instructions`,
     citation: [1],
     next: 'marine-disposition',
+    summary: 'Sea urchin spines: hot water soak, remove visible spines — deeply embedded spines may need surgical removal',
+    skippable: true,
   },
   {
     id: 'marine-octopus',
@@ -462,6 +484,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Full recovery expected with adequate respiratory support`,
     citation: [1, 11, 12],
     next: 'marine-systemic',
+    summary: 'Blue-ringed octopus: tetrodotoxin causes ascending paralysis — no antivenom, supportive care and intubation',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-cone',
@@ -487,6 +511,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - Monitor for cardiovascular instability`,
     citation: [1, 12],
     next: 'marine-systemic',
+    summary: 'Cone snail: conotoxin causes neuromuscular paralysis — pressure immobilization, prepare for intubation',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-seasnake',
@@ -522,6 +548,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - [Sea Snake Antivenom](#/drug/sea-snake-antivenom/envenomation): 1 vial IV (1:10 dilution)`,
     citation: [1, 12],
     next: 'marine-systemic',
+    summary: 'Sea snake: delayed myotoxicity and neurotoxicity — observe 8h minimum, antivenom if symptomatic',
+    safetyLevel: 'critical',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -558,6 +586,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
       { label: 'Anaphylaxis management', next: 'marine-anaphylaxis' },
       { label: 'Continue to disposition', next: 'marine-disposition' },
     ],
+    summary: 'Systemic envenomation: anaphylaxis, cardiovascular collapse, respiratory failure — standard resuscitation',
+    safetyLevel: 'critical',
   },
   {
     id: 'marine-anaphylaxis',
@@ -585,6 +615,8 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 - [Methylprednisolone](#/drug/methylprednisolone/anaphylaxis): 125mg IV`,
     citation: [1],
     next: 'marine-disposition',
+    summary: 'Anaphylaxis from marine envenomation: epinephrine 0.3-0.5mg IM, standard anaphylaxis protocol',
+    safetyLevel: 'critical',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -615,6 +647,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
       { label: 'Discharge instructions', next: 'marine-discharge' },
       { label: 'Admission criteria', next: 'marine-admit' },
     ],
+    summary: 'Admit for systemic symptoms, cardiovascular instability, or need for antivenom — observe 4-6h minimum',
   },
   {
     id: 'marine-discharge',
@@ -645,6 +678,7 @@ Deep punctures, contaminated wounds, stingray injuries, immunocompromised
 *Covers: Staph, Strep, Vibrio species*`,
     citation: [1, 9],
     recommendation: 'Provide written wound care instructions and ensure patient understands return precautions.',
+    summary: 'Discharge minor stings with wound care instructions, tetanus update, and return precautions',
   },
   {
     id: 'marine-admit',
@@ -678,5 +712,6 @@ Deep punctures, contaminated wounds, stingray injuries, immunocompromised
     calculatorLinks: [
       { id: 'marine-admission-criteria', label: 'Admission Decision Tool' },
     ],
+    summary: 'Admit for antivenom, systemic envenomation, or wound complications — ICU for cardiovascular instability',
   },
 ];

@@ -30,6 +30,8 @@ export const GLOBE_RUPTURE_NODES = [
             { id: 'globe-ots', label: 'OTS Calculator' },
         ],
         next: 'globe-mechanism',
+        summary: 'Once suspected: PROTECT eye with rigid shield, do NOT manipulate, call ophthalmology immediately',
+        safetyLevel: 'critical',
     },
     {
         id: 'globe-mechanism',
@@ -68,6 +70,7 @@ export const GLOBE_RUPTURE_NODES = [
                 next: 'globe-exam',
             },
         ],
+        summary: 'High-risk mechanisms: metal-on-metal, high-velocity projectile, penetrating objects warrant high suspicion',
     },
     // =====================================================================
     // MODULE 2: EXAMINATION
@@ -83,6 +86,8 @@ export const GLOBE_RUPTURE_NODES = [
             { id: 'globe-exam', label: 'Exam Findings' },
         ],
         next: 'globe-teardrop',
+        summary: 'If obvious rupture (extruding contents, peaked pupil), STOP examining and shield immediately',
+        safetyLevel: 'critical',
     },
     {
         id: 'globe-teardrop',
@@ -92,6 +97,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**The Teardrop Pupil:**\n\nThe iris is drawn toward the corneal/scleral defect, causing:\n- Pupil stretches toward the wound\n- Pupil "points" at the injury site\n- Creates characteristic teardrop shape\n\n**Why This Happens:**\n- Aqueous humor leaking out\n- Pressure gradient pulls iris toward defect\n- Iris may prolapse through the wound\n\n**Clinical Pearl:**\nIn penetrating injury, the teardrop points toward the corneal laceration where contents are escaping.\n\n**Rupture Hotspots:**\nSclera is thinnest at rectus muscle insertions (equatorial zone). This is where blunt ruptures commonly occur.\n\n**If You See This:**\n- STOP examining\n- Shield immediately\n- Call ophthalmology [1][2]',
         citation: [1, 2],
         next: 'globe-seidel',
+        summary: 'Teardrop pupil is pathognomonic — iris drawn toward wound site, stop exam and shield',
+        skippable: true,
     },
     {
         id: 'globe-seidel',
@@ -101,6 +108,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**Seidel Test — Detecting Aqueous Leak**\n\n**Technique:**\n1. Apply concentrated fluorescein strip to suspected wound\n2. Examine under cobalt blue light (slit lamp or Wood\'s lamp)\n3. Watch for streaming pattern\n\n**Interpretation:**\n\n| Result | Appearance |\n|--------|------------|\n| **Positive** | Dark orange dye turns bright green as aqueous dilutes it; streaming |\n| **Negative** | Dye remains orange, no streaming |\n\n**⚠️ IMPORTANT:**\n- **CONTRAINDICATED** if globe obviously ruptured\n- Negative Seidel does NOT rule out open globe\n- Wound may be self-sealed\n- Posterior ruptures won\'t show positive Seidel\n\n**When to Do:**\n- Subtle presentation\n- No obvious rupture signs\n- Small suspected corneal laceration [1][3]',
         citation: [1, 3],
         next: 'globe-confirm-dx',
+        summary: 'Seidel test: fluorescein streaming = aqueous leak — contraindicated if obvious rupture',
+        skippable: true,
     },
     {
         id: 'globe-confirm-dx',
@@ -128,6 +137,7 @@ export const GLOBE_RUPTURE_NODES = [
                 next: 'globe-closed-injury',
             },
         ],
+        summary: 'If ANY doubt, treat as open globe until proven otherwise — CT orbits to confirm',
     },
     {
         id: 'globe-closed-injury',
@@ -137,6 +147,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**If Low Suspicion for Open Globe:**\n\nConsider other traumatic ocular injuries:\n\n| Condition | Key Features |\n|-----------|-------------|\n| Corneal abrasion | Fluorescein uptake, pain, FB sensation |\n| Hyphema | Blood in AC, may need IOP monitoring |\n| Traumatic iritis | Ciliary flush, photophobia, cells/flare |\n| Vitreous hemorrhage | No fundus view, floaters |\n| Retinal detachment | Curtain vision loss, flashes, floaters |\n| Orbital fracture | Diplopia, enophthalmos, infraorbital numbness |\n\n**When Still Uncertain:**\n- CT orbits to evaluate\n- Ophthalmology consultation\n- Close follow-up\n\n**If ANY doubt, treat as open globe until proven otherwise.** [1][2]',
         citation: [1, 2],
         next: 'globe-protect',
+        summary: 'Consider hyphema, corneal abrasion, retinal detachment, orbital fracture if low suspicion',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: ED MANAGEMENT
@@ -168,6 +180,8 @@ export const GLOBE_RUPTURE_NODES = [
             monitoring: 'Monitor for nausea/vomiting; repeat dosing PRN to maintain IOP control',
         },
         next: 'globe-donot',
+        summary: 'Rigid shield (Fox shield or cut cup), HOB 30 degrees, antiemetics to prevent IOP spikes',
+        safetyLevel: 'critical',
     },
     {
         id: 'globe-donot',
@@ -177,6 +191,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**CONTRAINDICATED in Open Globe:**\n\n| Action | Why |\n|--------|-----|\n| **Tonometry** | Pressure on globe |\n| **Forced lid retraction** | Pressure on globe |\n| **Eye patch** | Compression |\n| **Ocular ultrasound** | Probe pressure |\n| **MRI** | Metallic IOFB = catastrophe |\n| **Remove FB** | Do in OR under control |\n| **Fluorescein** (if obvious) | Delays care |\n\n**Anesthesia Concerns:**\n\n| Agent | Issue |\n|-------|-------|\n| **Succinylcholine** | Raises IOP up to 10 mmHg |\n| **Ketamine** | Extraocular muscle contraction, raises IOP |\n\n**If RSI needed:** Use rocuronium instead of succinylcholine.\n\n**Regional Anesthesia:**\n- Retrobulbar/peribulbar blocks CONTRAINDICATED\n- Injection pressure can expulse contents [1][4]',
         citation: [1, 4],
         next: 'globe-antibiotics',
+        summary: 'NO tonometry, NO forced lid retraction, NO patch, NO ultrasound, NO MRI, NO succinylcholine',
+        safetyLevel: 'critical',
     },
     {
         id: 'globe-antibiotics',
@@ -213,6 +229,8 @@ export const GLOBE_RUPTURE_NODES = [
             monitoring: 'Renal function (especially with vancomycin/gentamicin), vancomycin trough 15-20 mcg/mL, signs of endophthalmitis (worsening pain, vision, hypopyon)',
         },
         next: 'globe-tetanus',
+        summary: 'Vancomycin + ceftazidime IV — reduces endophthalmitis from 6.8% to <1%',
+        safetyLevel: 'warning',
     },
     {
         id: 'globe-tetanus',
@@ -241,6 +259,7 @@ export const GLOBE_RUPTURE_NODES = [
             monitoring: 'Document tetanus history; no specific monitoring needed for vaccine',
         },
         next: 'globe-imaging',
+        summary: 'Update tetanus, adequate IV analgesia, complete all 9 ED management steps before ophth consult',
     },
     // =====================================================================
     // MODULE 4: IMAGING & IOFB
@@ -253,6 +272,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**CT Orbits — First-Line Imaging**\n\n**Protocol:**\n- Non-contrast\n- Thin cuts (1-1.5 mm)\n- Axial, coronal, sagittal reformats\n\n**CT Detects:**\n\n| Material | Detection |\n|----------|----------|\n| Metal | >0.06 mm |\n| Glass | >1.8 mm |\n| Stone | Good |\n\n**CT May Miss:**\n- Wood\n- Plastic\n- Small vegetable matter\n\n**MRI:**\n- **ABSOLUTELY CONTRAINDICATED** if any suspicion of metallic FB\n- Magnet can mobilize metal, destroy eye\n\n**Plain X-Ray:**\n- Obsolete, replaced by CT\n\n**Ultrasound:**\n- AVOID in open globe (probe pressure)\n- Can use post-repair to assess retina\n\nIOFB present in up to 40% of penetrating injuries. [1][2]',
         citation: [1, 2],
         next: 'globe-iofb',
+        summary: 'CT orbits non-contrast thin cuts — MRI ABSOLUTELY CONTRAINDICATED if metallic FB suspected',
+        safetyLevel: 'critical',
     },
     {
         id: 'globe-iofb',
@@ -262,6 +283,9 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**IOFB — High-Risk for Complications**\n\n**Common Mechanisms:**\n- Metal-on-metal hammering\n- Grinding without eye protection\n- Explosion/blast\n- Lawn equipment (mowers, weed whackers)\n\n**Materials & Prognosis:**\n\n| Material | Toxicity | Notes |\n|----------|----------|-------|\n| Iron/Steel | High (siderosis) | Rust toxicity, retinal damage |\n| Copper | High (chalcosis) | Rapid inflammation |\n| Lead | Moderate | Encapsulates |\n| Glass | Inert | Can be observed if small |\n| Plastic | Inert | Usually tolerated |\n| Wood/Organic | HIGH | Infection, abscess risk |\n\n**Siderosis Bulbi:**\n- Iron IOFB causes progressive retinal/lens toxicity\n- Develops over weeks-months\n- All iron FBs must be removed\n\n**Chalcosis:**\n- Copper causes rapid sterile inflammation\n- Can mimic endophthalmitis\n- Urgent removal required [1][2]',
         citation: [1, 2],
         next: 'globe-ots',
+        summary: 'Iron/copper IOFBs cause progressive retinal toxicity and must be removed — organic FBs = high infection risk',
+        skippable: true,
+        safetyLevel: 'warning',
     },
     {
         id: 'globe-ots',
@@ -274,6 +298,8 @@ export const GLOBE_RUPTURE_NODES = [
             { id: 'globe-ots', label: 'OTS Calculator' },
         ],
         next: 'globe-ots-outcomes',
+        summary: 'Ocular Trauma Score predicts 6-month visual outcome — 80% accuracy, not for enucleation decisions',
+        skippable: true,
     },
     {
         id: 'globe-ots-outcomes',
@@ -283,6 +309,8 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**OTS Categories & Expected Outcomes:**\n\n| Score | OTS | NLP | LP/HM | 1/200-19/200 | 20/200-20/50 | ≥20/40 |\n|-------|-----|-----|-------|--------------|--------------|--------|\n| 0-44 | 1 | 73% | 17% | 7% | 2% | 1% |\n| 45-65 | 2 | 28% | 26% | 18% | 13% | 15% |\n| 66-80 | 3 | 2% | 11% | 15% | 28% | 44% |\n| 81-91 | 4 | 1% | 2% | 2% | 21% | 74% |\n| 92-100 | 5 | 0% | 1% | 2% | 5% | 92% |\n\n**Interpretation:**\n- OTS 1 (worst): 73% chance of NLP at 6 months\n- OTS 5 (best): 92% chance of 20/40 or better\n\n**Key Point:**\nEven OTS 1 has some chance of functional vision. Surgical repair should be attempted in virtually all cases. [1][6]',
         citation: [1, 6],
         next: 'globe-consult',
+        summary: 'Even OTS 1 has some chance of functional vision — surgical repair should be attempted in almost all cases',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -295,6 +323,7 @@ export const GLOBE_RUPTURE_NODES = [
         body: '**EMERGENT Ophthalmology Consultation**\n\nCall immediately upon suspicion/diagnosis.\n\n**Timing of Repair:**\n- Ideal: Within 12-24 hours\n- Delay increases:\n  - Endophthalmitis risk\n  - Choroidal hemorrhage risk\n  - Sympathetic ophthalmia risk\n\n**What Ophthalmology Needs to Know:**\n- Mechanism of injury\n- Time of injury\n- Visual acuity (document!)\n- Exam findings\n- CT results\n- IOFB suspected?\n- Antibiotics given\n- Tetanus status\n\n**If No Ophthalmology Available:**\n- Transfer to facility with OR capability\n- Ensure shield in place\n- Continue antibiotics\n- Document all findings [1][2]',
         citation: [1, 2],
         next: 'globe-dispo',
+        summary: 'Emergent ophthalmology — ideal repair within 12-24h, transfer if no OR capability',
     },
     {
         id: 'globe-dispo',
@@ -307,6 +336,7 @@ export const GLOBE_RUPTURE_NODES = [
             { id: 'globe-dispo', label: 'Disposition Tool' },
         ],
         next: 'globe-prognosis',
+        summary: 'ALL open globe injuries are admitted for OR repair, IV antibiotics, and ophthalmology management',
     },
     {
         id: 'globe-prognosis',
@@ -321,6 +351,8 @@ export const GLOBE_RUPTURE_NODES = [
                 next: 'globe-start',
             },
         ],
+        summary: 'Zone 1 (cornea only) + good initial VA = best prognosis; sympathetic ophthalmia is rare but devastating',
+        skippable: true,
     },
 ];
 export const GLOBE_RUPTURE_MODULE_LABELS = [

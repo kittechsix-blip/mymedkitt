@@ -33,6 +33,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
       { id: 'laryngeal-airway', label: 'Airway Decision Tool' },
     ],
     next: 'larynx-mechanism',
+    summary: 'Laryngeal trauma: airway loss can be rapid and unpredictable — prepare for surgical airway immediately',
+    safetyLevel: 'critical',
   },
 
   {
@@ -43,6 +45,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Blunt Trauma:**\n• Motor vehicle accidents (historically most common, reduced with seatbelts/airbags)\n• **Clothesline injuries** — rider strikes horizontal object; high-velocity crush against C-spine; often cricotracheal separation + bilateral RLN injury\n• Direct blows — assault, sports, steering wheel impact\n• **Strangulation/hanging** — compression of all neck structures [1][3]\n\n**Penetrating Trauma:**\n• Knife wounds, gunshot wounds\n• Higher risk of vascular injury\n• Often requires emergent surgical exploration [1]',
     citation: [1, 3],
     next: 'larynx-signs',
+    summary: 'Blunt (clothesline, MVC, strangulation) vs penetrating — both can rapidly compromise airway',
   },
 
   {
@@ -68,6 +71,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
         next: 'larynx-observation',
       },
     ],
+    summary: 'Hoarseness, subcutaneous emphysema, stridor, dysphagia, anterior neck tenderness = laryngeal injury',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -82,6 +87,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**CRITICAL: DO NOT PARALYZE**\n\n**RSI is contraindicated:**\n• Paralysis removes spontaneous ventilation\n• If intubation fails → no backup (can\'t mask, can\'t wake)\n• Laryngeal manipulation can create false passage or complete obstruction\n• Risk of "can\'t intubate, can\'t oxygenate" (CICO) [1][2]\n\n**Preferred approach:**\n1. **Awake tracheostomy** (surgical airway of choice)\n2. Call anesthesia, ENT, trauma surgery NOW\n3. Prepare surgical airway kit at bedside',
     citation: [1, 2],
     next: 'larynx-airway-options',
+    summary: 'Airway distress: prepare for surgical airway — intubation may worsen injury or create false passage',
+    safetyLevel: 'critical',
   },
 
   {
@@ -107,6 +114,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'Airway approach depends on stability: awake FOI, awake trach, or emergent surgical airway',
+    safetyLevel: 'critical',
   },
 
   {
@@ -117,6 +126,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Procedure:**\n1. Local anesthesia to anterior neck\n2. Patient maintains spontaneous ventilation\n3. Vertical incision, identify trachea below injury\n4. Confirm placement with ETCO₂, breath sounds\n\n**Double setup:**\nHave both ENT and anesthesia present. Prepare simultaneously for:\n• Awake fiberoptic intubation\n• Awake tracheostomy\n\n**Post-trach:** Continue resuscitation, CT imaging when stable [1][2]',
     citation: [1, 2],
     next: 'larynx-imaging',
+    summary: 'Awake tracheostomy is gold standard for laryngeal trauma airway — avoids passing through injury site',
+    safetyLevel: 'critical',
   },
 
   {
@@ -138,6 +149,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Cricothyrotomy risks further laryngeal damage — tracheostomy preferred if any time available',
+    safetyLevel: 'critical',
   },
 
   {
@@ -148,6 +161,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**When cricothyrotomy is contraindicated:**\n\nProceed directly to tracheostomy **below the level of injury**.\n\n**Technique (emergent):**\n1. Vertical midline incision from cricoid to sternal notch\n2. Blunt dissection to trachea\n3. Identify intact trachea below injury\n4. Incision between tracheal rings\n5. Insert trach tube, confirm with ETCO₂\n\n**If tracheal transection:** May need to retrieve distal trachea from mediastinum [1]',
     citation: [1],
     next: 'larynx-imaging',
+    summary: 'Emergent tracheostomy by ENT/surgery when airway is failing — cricothyrotomy as absolute last resort',
+    safetyLevel: 'critical',
   },
 
   {
@@ -158,6 +173,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Standard surgical cricothyrotomy:**\n1. Identify cricothyroid membrane\n2. Vertical skin incision\n3. Horizontal stab through membrane\n4. Bougie insertion\n5. 6.0 ETT or trach tube over bougie\n6. Confirm with ETCO₂\n\n**Post-procedure:**\n• Secure airway\n• Continue trauma evaluation\n• CT imaging when stable\n• ENT consult for definitive management [1]',
     citation: [1],
     next: 'larynx-imaging',
+    summary: 'Cricothyrotomy only if cannot ventilate and trach not immediately available — may worsen injury',
+    safetyLevel: 'critical',
   },
 
   {
@@ -168,6 +185,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Indications:**\n• Stable airway but concern for laryngeal injury\n• Need to assess before tracheostomy decision\n\n**Technique:**\n1. Topicalize airway (lidocaine nebulizer, atomizer)\n2. Maintain spontaneous ventilation\n3. Advance fiberoptic scope through nose or mouth\n4. Assess laryngeal injury\n5. If passable → advance ETT\n6. If not passable → proceed to tracheostomy\n\n**Have surgical airway kit ready** — prepared to convert if needed [2]',
     citation: [2],
     next: 'larynx-imaging',
+    summary: 'Awake fiberoptic intubation: visualize injury, pass tube under direct vision — if anatomy allows',
   },
 
   {
@@ -178,6 +196,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Performed early in stable patients:**\n• Assesses mucosal integrity, hematoma, vocal cord mobility\n• Can miss injuries masked by edema (repeat after swelling resolves)\n\n**Findings that suggest significant injury:**\n• Mucosal lacerations\n• Vocal cord immobility\n• Arytenoid dislocation\n• Epiglottic hematoma\n• Exposed cartilage\n\n**If normal:** Proceed to CT imaging [1][2]',
     citation: [1, 2],
     next: 'larynx-imaging',
+    summary: 'Bedside flexible laryngoscopy by ENT to assess injury severity and guide airway management',
   },
 
   // =====================================================================
@@ -192,6 +211,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '| Grade | Findings | Airway |\n|-------|----------|--------|\n| **I** | Minor hematoma/laceration, no fracture | Stable |\n| **II** | Edema, hematoma, nondisplaced fracture, minor mucosal disruption | Variable |\n| **III** | Massive edema, displaced fractures, exposed cartilage, vocal cord immobility | Compromised |\n| **IV** | Severe disruption, unstable fractures, extensive mucosal injury, anterior commissure involvement | Severely compromised |\n| **V** | Complete laryngotracheal separation | Critical |\n\n**Epidemiology:**\n• Grade I: 52% of cases\n• Grade II: 37-45%\n• Grades III-V: Minority but highest morbidity/mortality [1][2]',
     citation: [1, 2],
     next: 'larynx-management-by-grade',
+    summary: 'Schaefer-Fuhrman classification grades I-V guides management: observation vs OR vs emergent airway',
   },
 
   // =====================================================================
@@ -206,6 +226,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**CT Neck with IV Contrast (Gold Standard):**\n• Only perform if airway is stable or secured\n• Identifies: soft tissue edema, hematoma, cartilage fractures, cricoarytenoid dislocation\n• Low threshold for imaging — subtle CT findings may indicate significant injury [1]\n\n**CT Angiography:**\n• Add for penetrating trauma or suspected vascular injury\n• Assess carotid/vertebral dissection\n\n**Direct Laryngoscopy + Esophagoscopy:**\n• Performed in OR after airway secured\n• Complete assessment of endolaryngeal and esophageal injuries [1][2]',
     citation: [1, 2],
     next: 'larynx-classification',
+    summary: 'CT neck with contrast for stable patients — assess cartilage fractures, soft tissue injury, vascular',
   },
 
   // =====================================================================
@@ -240,6 +261,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Grade I-II: observation. Grade III-IV: OR repair within 24h. Grade V: emergent surgical airway',
   },
 
   {
@@ -262,6 +284,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Serial laryngoscopy, watch for progression',
     },
+    summary: 'Grade I: minor edema, no fracture — observe 24h with humidified air, HOB elevated, voice rest',
+    skippable: true,
   },
 
   {
@@ -284,6 +308,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
       },
       monitoring: 'Serial exams, ICU observation, watch for progression',
     },
+    summary: 'Grade II: edema with non-displaced fracture — admit, observe, ENT follow-up within 24h',
+    skippable: true,
   },
 
   {
@@ -295,6 +321,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Surgical management within 24-48 hours. Tracheostomy, ORIF of fractures, mucosal repair.',
     confidence: 'definitive',
     citation: [1, 2],
+    summary: 'Grade III-IV: displaced fractures, exposed cartilage — OR exploration and repair within 24h',
+    safetyLevel: 'warning',
   },
 
   {
@@ -306,6 +334,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'Emergent tracheostomy below injury, immediate surgical repair. Highest mortality category.',
     confidence: 'definitive',
     citation: [1, 2],
+    summary: 'Grade V: complete laryngeal disruption — emergent surgical airway and OR reconstruction',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -320,6 +350,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '**Delayed presentation warning:**\n• Initially mild symptoms may accompany severe injury\n• Edema and hematoma can progress over hours to days\n\n**For asymptomatic patients with mechanism:**\n• Flexible laryngoscopy\n• CT neck if any suspicion\n• Observation 6-12 hours minimum\n\n**Discharge only if:**\n• Normal flexible laryngoscopy\n• No airway symptoms\n• Reliable patient with close follow-up [1][2]',
     citation: [1, 2],
     next: 'larynx-associated',
+    summary: 'Observation protocol: HOB 30 degrees, humidified air, voice rest, serial airway assessments',
+    skippable: true,
   },
 
   {
@@ -330,6 +362,8 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     body: '| Injury | Incidence | Workup |\n|--------|-----------|--------|\n| Intracranial | 13-15% | CT head |\n| Skull base/facial fractures | 21% | CT face |\n| C-spine fractures | **8%** | CT c-spine, maintain precautions |\n| Esophageal/pharyngeal | 3% | Esophagoscopy, contrast swallow |\n| Vascular | Variable | CT angiography |\n\n**Maintain c-spine precautions** until cleared — 8% have associated cervical spine injuries [1][2]',
     citation: [1, 2],
     next: 'larynx-consults',
+    summary: 'Check for associated injuries: C-spine, vascular (carotid/vertebral), esophageal, recurrent laryngeal nerve',
+    safetyLevel: 'warning',
   },
 
   {
@@ -341,6 +375,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     recommendation: 'ENT consult for all suspected laryngeal injuries. ICU admission for significant injuries.',
     confidence: 'definitive',
     citation: [1, 2],
+    summary: 'ENT and/or trauma surgery consultation for all confirmed laryngeal injuries — early involvement critical',
   },
 
 ];

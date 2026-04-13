@@ -37,6 +37,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-hyperkalemia', label: 'Hyperkalemia Protocol' },
     ],
     next: 'hd-triage-question',
+    summary: 'Dialysis emergencies: hyperkalemia, access complications, infections, fluid overload, uremia',
   },
   {
     id: 'hd-triage-question',
@@ -52,6 +53,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { label: 'Volume overload / Dyspnea', description: 'SOB, edema, HTN', next: 'hd-overload-main' },
       { label: 'Uremic symptoms', description: 'AMS, bleeding, pericarditis', next: 'hd-uremia-main' },
     ],
+    summary: 'Triage by presentation: electrolyte emergency, access issue, infection, overload, or uremic syndrome',
   },
 
   // ===================================================================
@@ -68,6 +70,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-hyperkalemia', label: 'Hyperkalemia Protocol' },
     ],
     next: 'hd-hyperkalemia-ecg',
+    summary: 'Hyperkalemia is the most common lethal dialysis emergency — check ECG immediately',
+    safetyLevel: 'critical',
   },
   {
     id: 'hd-hyperkalemia-ecg',
@@ -81,6 +85,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { label: 'No — ECG normal, K+ 5.5-6.5', description: 'Moderate hyperkalemia', next: 'hd-hyperkalemia-moderate' },
       { label: 'No — ECG normal, K+ <5.5', description: 'Mild hyperkalemia', next: 'hd-hyperkalemia-mild' },
     ],
+    summary: 'ECG changes: peaked T-waves → wide QRS → sine wave → arrest — treat ECG, not just K+ level',
+    safetyLevel: 'critical',
   },
   {
     id: 'hd-hyperkalemia-severe',
@@ -93,6 +99,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-hyperkalemia', label: 'Hyperkalemia Protocol' },
     ],
     next: 'hd-electrolyte-disposition',
+    summary: 'Calcium gluconate 1g IV first, then insulin/dextrose, albuterol neb — emergent dialysis for definitive tx',
+    safetyLevel: 'critical',
   },
   {
     id: 'hd-hyperkalemia-moderate',
@@ -102,6 +110,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**K+ 5.5-6.5, no ECG changes:**\n\n**Management:**\n\n**1. Continuous cardiac monitoring**\n\n**2. Shift therapy:**\n• Insulin 10 units IV + D50 25g\n• Albuterol 10-20 mg nebulized (additive)\n\n**3. Contact nephrology:**\n• Arrange urgent dialysis\n• May need same-day HD\n\n**Consider calcium gluconate if:**\n• K+ trending up\n• Recent missed dialysis\n• High-risk patient\n\n**Repeat K+ in 1-2 hours**\n\n**Do NOT delay dialysis** — shift therapy is temporary',
     citation: [3, 4],
     next: 'hd-electrolyte-disposition',
+    summary: 'Insulin 10U + D50 1 amp, kayexalate controversial, arrange urgent dialysis within hours',
   },
   {
     id: 'hd-hyperkalemia-mild',
@@ -111,6 +120,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**K+ <5.5, no symptoms, normal ECG:**\n\n**Management:**\n• Continuous cardiac monitoring\n• Repeat K+ in 2-4 hours\n• Diet review with patient\n• Schedule urgent dialysis if trending up\n• Contact nephrology for HD timing\n\n**Patient education:**\n• High-K foods to avoid (bananas, oranges, tomatoes, potatoes)\n• Importance of dialysis adherence\n• Salt substitutes often contain KCl\n\n**Disposition:**\n• May discharge if stable, HD scheduled within 24h\n• Ensure reliable follow-up\n• Clear return precautions',
     citation: [3],
     next: 'hd-electrolyte-disposition',
+    summary: 'Mild hyperK in dialysis patients often manageable with next scheduled session — verify timing',
+    skippable: true,
   },
   {
     id: 'hd-electrolyte-disposition',
@@ -120,6 +131,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Disposition based on severity:**\n\n**ADMIT:**\n• Any ECG changes\n• K+ >6.5 mEq/L\n• Symptomatic (weakness, palpitations)\n• Multiple missed HD sessions\n• Unable to arrange urgent outpatient HD\n• Refractory to initial treatment\n\n**May discharge if:**\n• K+ <6.0, no symptoms, normal ECG\n• Dialysis scheduled within 24 hours\n• Reliable patient with good HD adherence history\n• Clear return precautions understood\n\n**Always document:**\n• Dialysis schedule arranged\n• Nephrology contacted\n• Patient education provided',
     citation: [2, 3],
     next: undefined,
+    summary: 'Emergent dialysis for severe hyperK, symptomatic hypo/hypernatremia, or refractory metabolic acidosis',
   },
 
   // ===================================================================
@@ -138,6 +150,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { label: 'Access site infection', description: 'Redness, warmth, drainage', next: 'hd-infection-main' },
       { label: 'Arm swelling or steal syndrome', description: 'Ischemic symptoms, edema', next: 'hd-access-steal' },
     ],
+    summary: 'AV fistula/graft complications: bleeding, clotted access, steal syndrome, pseudoaneurysm',
   },
   {
     id: 'hd-access-bleeding',
@@ -150,6 +163,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-access-emergency', label: 'Access Emergency Guide' },
     ],
     next: 'hd-access-disposition',
+    summary: 'Direct pressure 10-20 min — if uncontrolled, consider thrombotic hemostatic agent, vascular surgery',
+    safetyLevel: 'warning',
   },
   {
     id: 'hd-access-clotted',
@@ -162,6 +177,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-access-emergency', label: 'Access Emergency Guide' },
     ],
     next: 'hd-access-disposition',
+    summary: 'No thrill or bruit = clotted — interventional radiology for thrombectomy, temporary dialysis catheter',
   },
   {
     id: 'hd-access-steal',
@@ -171,6 +187,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Dialysis-Associated Steal Syndrome (DASS):**\n\n**Signs:**\n• Pale, cool hand distal to access\n• Pain, paresthesias, weakness\n• Symptoms worse DURING dialysis\n• Diminished pulses distally\n• May progress to tissue loss\n\n**Severity grading:**\n\n**Mild:** Cool hand, no rest pain\n→ Monitor, conservative management\n\n**Moderate:** Rest pain present\n→ Urgent vascular surgery referral\n\n**Severe:** Tissue loss, ulceration\n→ Emergent vascular surgery\n\n**Central venous stenosis:**\n• Unilateral arm/facial swelling\n• Collateral veins on chest\n• Usually history of prior catheter\n• IR consultation for venoplasty',
     citation: [5, 6],
     next: 'hd-access-disposition',
+    summary: 'Steal syndrome: hand ischemia distal to access — pain, coolness, pallor, vascular surgery urgently',
+    safetyLevel: 'warning',
   },
   {
     id: 'hd-access-disposition',
@@ -180,6 +198,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Disposition for access complications:**\n\n**ADMIT:**\n• Hemodynamic instability from bleeding\n• Unable to control bleeding\n• Severe steal syndrome (tissue loss)\n• Need for emergent temp catheter and HD\n• Access infection (see infection pathway)\n\n**Urgent outpatient management:**\n• Clotted access (if HD can wait 24-48h)\n• Mild steal syndrome\n• Stable post-bleeding\n\n**Key contacts:**\n• Vascular surgery (clotted access, steal)\n• Interventional radiology (thrombectomy, venoplasty)\n• Nephrology (HD scheduling, temp access)\n• HD unit (routine follow-up)\n\n**Document:**\n• Access type and location\n• Current patency (thrill/bruit present?)\n• Alternative access options',
     citation: [5],
     next: undefined,
+    summary: 'Vascular surgery or IR for access complications — temporary catheter if urgent dialysis needed',
   },
 
   // ===================================================================
@@ -193,6 +212,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Catheter-related bloodstream infection (CRBSI):**\n\n**Risk hierarchy:**\n• Non-tunneled catheter > Tunneled catheter > AVG > AVF\n\n**Assessment:**\n• Blood cultures × 2 (peripheral + through catheter)\n• Exit site exam (erythema, purulence)\n• Tunnel exam (track erythema)\n• Signs of metastatic infection\n\n**Empiric antibiotics (IDSA guidelines):**\n• **Vancomycin 25 mg/kg** (dose after HD)\n  — Covers MRSA, coag-negative staph\n• **PLUS gram-negative coverage:**\n  — Cefepime 2g IV, OR\n  — Gentamicin (nephrology dosing)\n\n**⚠️ Most antibiotics dosed AFTER dialysis**\n\n**Remove catheter if:**\n• Septic shock\n• Tunnel infection\n• Persistent bacteremia >72h on antibiotics\n• Metastatic infection (endocarditis, osteo)\n• S. aureus or fungemia',
     citation: [7, 8],
     next: 'hd-infection-endocarditis',
+    summary: 'Blood cultures through catheter AND peripheral — start vancomycin + gram-negative coverage empirically',
+    safetyLevel: 'warning',
   },
   {
     id: 'hd-infection-endocarditis',
@@ -202,6 +223,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Consider endocarditis in HD patients with bacteremia:**\n\n**High-risk features:**\n• S. aureus bacteremia (up to 25% have IE)\n• Prolonged bacteremia\n• New murmur\n• Embolic phenomena\n• Persistent fevers on antibiotics\n\n**Workup:**\n• TTE (initial screening)\n• TEE (if TTE negative and high suspicion)\n• Repeat blood cultures to document clearance\n\n**Duration of antibiotics:**\n• Uncomplicated CRBSI: 2-3 weeks\n• S. aureus without IE: 4 weeks\n• Endocarditis: 6 weeks\n\n**Disposition:**\n• Admit all suspected CRBSI\n• Contact nephrology for HD without catheter (temp access)\n• ID consultation recommended for S. aureus',
     citation: [7, 8],
     next: undefined,
+    summary: 'Dialysis patients have 50x higher endocarditis risk — echo if blood cultures positive or new murmur',
+    safetyLevel: 'warning',
   },
   {
     id: 'hd-overload-main',
@@ -211,6 +234,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Volume overload in ESRD:**\n\n**⚠️ Diuretics often ineffective (no UOP)**\n\n**EMERGENT DIALYSIS is definitive treatment**\n\n**Temporizing measures:**\n\n**Oxygenation:**\n• High-flow O₂\n• NIPPV (BiPAP preferred)\n• Intubation if failing\n\n**Reduce preload:**\n• Nitrates (NTG 400 mcg SL → drip 50-200 mcg/min)\n• Positioning (upright)\n\n**Diuretics?**\n• Generally ineffective in ESRD\n• High-dose furosemide (160-200 mg IV) MAY work if residual function\n• Do not delay dialysis waiting for diuretics\n\n**HTN emergency with overload:**\n• Nitroprusside or nicardipine drip\n• Target 20-25% MAP reduction in first hour\n• Avoid fluid boluses',
     citation: [9, 10],
     next: 'hd-overload-disposition',
+    summary: 'Fluid overload in missed dialysis: BiPAP, nitroglycerin, arrange emergent dialysis for ultrafiltration',
   },
   {
     id: 'hd-overload-disposition',
@@ -220,6 +244,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Volume overload disposition:**\n\n**Emergent dialysis indications:**\n• Severe pulmonary edema (hypoxic)\n• HTN emergency with encephalopathy\n• Refractory to medical management\n\n**Admit for dialysis:**\n• Moderate pulmonary edema\n• Significant O₂ requirement\n• Unable to arrange same-day outpatient HD\n• Missed multiple HD sessions\n\n**May discharge if:**\n• Mild symptoms resolving\n• Room air saturation\n• HD scheduled within 24 hours\n• Reliable patient\n\n**Education:**\n• Fluid and sodium restriction\n• Daily weights\n• HD adherence\n• When to return (SOB, can\'t lie flat)',
     citation: [9, 10],
     next: undefined,
+    summary: 'Admit for emergent dialysis if severe pulmonary edema or not responding to medical management',
   },
 
   // ===================================================================
@@ -237,6 +262,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { label: 'Pericarditis', description: 'Chest pain, friction rub', next: 'hd-uremic-pericarditis' },
       { label: 'Uremic bleeding', description: 'GI bleed, prolonged bleeding', next: 'hd-uremic-bleeding' },
     ],
+    summary: 'Uremic syndrome: encephalopathy, pericarditis, bleeding diathesis — all require emergent dialysis',
+    safetyLevel: 'warning',
   },
   {
     id: 'hd-uremic-encephalopathy',
@@ -249,6 +276,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-dds-prevention', label: 'DDS Prevention' },
     ],
     next: 'hd-uremia-disposition',
+    summary: 'Uremic encephalopathy: asterixis, confusion, seizures — dialysis is the treatment',
+    skippable: true,
   },
   {
     id: 'hd-uremic-pericarditis',
@@ -258,6 +287,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Uremic Pericarditis — DO NOT ANTICOAGULATE**\n\n**Presentation:**\n• Pleuritic chest pain (worse supine, better sitting)\n• Pericardial friction rub (pathognomonic)\n• ECG: diffuse ST elevation, PR depression\n• May progress to tamponade\n\n**⚠️ Critical distinction:**\n• Uremic pericarditis → hemorrhagic effusion risk\n• **Do NOT anticoagulate**\n• **Dialyze WITHOUT heparin**\n\n**Assessment:**\n• Echocardiogram (effusion size, tamponade?)\n• Hemodynamics (pulsus paradoxus?)\n\n**Management:**\n• Emergent dialysis (WITHOUT heparin)\n• Daily or intensive dialysis initially\n• NSAIDs contraindicated in ESRD\n• Colchicine may be used cautiously\n\n**If tamponade:**\n• Emergent pericardiocentesis\n• Surgical drainage if recurrent',
     citation: [11, 13],
     next: 'hd-uremia-disposition',
+    summary: 'Uremic pericarditis: NO anticoagulation during dialysis — hemorrhagic pericarditis risk',
+    safetyLevel: 'critical',
   },
   {
     id: 'hd-uremic-bleeding',
@@ -267,6 +298,8 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Uremic Platelet Dysfunction:**\n\n**Mechanism:**\n• Uremic toxins impair platelet function\n• Normal platelet count, prolonged bleeding time\n\n**Presentation:**\n• Prolonged bleeding from venipuncture\n• GI bleeding\n• Epistaxis\n• Ecchymoses\n\n**Management:**\n\n**Acute treatment:**\n• **DDAVP 0.3 mcg/kg IV** over 20-30 min\n  — Onset: 1 hour, duration 4-8 hours\n  — Releases vWF from endothelium\n  — Tachyphylaxis with repeated doses\n\n**For prolonged effect:**\n• Conjugated estrogens 0.6 mg/kg/day IV × 5 days\n  — Onset: 6 hours, duration 2 weeks\n\n**Emergent dialysis** if severe bleeding\n\n**Transfuse:**\n• pRBCs as needed\n• Platelets less helpful (will become dysfunctional)\n• Cryoprecipitate (contains vWF)',
     citation: [11, 14],
     next: 'hd-uremia-disposition',
+    summary: 'Uremic bleeding: DDAVP 0.3 mcg/kg IV for acute control, dialysis for definitive treatment',
+    skippable: true,
   },
   {
     id: 'hd-uremia-disposition',
@@ -279,6 +312,7 @@ export const HD_EMERGENCIES_NODES: DecisionNode[] = [
       { id: 'hd-dds-prevention', label: 'DDS Prevention' },
     ],
     next: undefined,
+    summary: 'All uremic emergencies require admission for dialysis and monitoring',
   },
 ];
 

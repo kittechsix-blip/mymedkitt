@@ -35,6 +35,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '[Hemophilia Steps Summary](#/info/hemo-summary) — quick reference.\n\nHemophilia A (factor VIII deficiency) and B (factor IX deficiency) are X-linked bleeding disorders. Combined incidence: 1 per 5000 male births. Hemophilia A is 4× more common than B. [1]\n\nvon Willebrand disease (vWD) is the most common inherited bleeding disorder, affecting up to 1% of the population. Unlike hemophilia, vWD affects both sexes equally. [3]\n\n**30% of hemophilia cases are de novo mutations with no family history.** [1]\n\n• Hemophilia: spontaneous joint/muscle bleeds, ICH, post-surgical hemorrhage\n• vWD: mucosal bleeding, epistaxis, menorrhagia, post-surgical bleeding',
     citation: [1, 3, 10],
     next: 'hemo-dx-status',
+    summary: 'Treat FIRST, test later — give factor replacement before imaging or definitive diagnosis',
+    safetyLevel: 'critical',
   },
   {
     id: 'hemo-dx-status',
@@ -48,6 +50,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Known von Willebrand disease', description: 'Proceed to vWD management', next: 'hemo-vwd' },
       { label: 'Suspected bleeding disorder', description: 'New presentation — workup needed', next: 'hemo-workup' },
     ],
+    summary: 'Determine if known hemophilia or new suspected bleeding disorder — treatment first, diagnosis second',
   },
   {
     id: 'hemo-workup',
@@ -57,6 +60,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '**Initial screening labs:**\n• CBC with platelet count\n• PT (prothrombin time)\n• PTT (partial thromboplastin time)\n• Fibrinogen level\n\n[Differential Diagnosis by Lab Pattern](#/info/hemo-coag-cascade)\n\n**If isolated prolonged PTT** → order factor VIII and IX levels\n**If PTT normal + mucosal bleeding** → consider vWD panel (vWF:Ag, vWF:RCo, factor VIII)\n\n**Caution:** vWF is an acute phase reactant — false negatives are common during acute illness. Repeat testing outpatient if suspicion remains high despite negative ED labs. [3][10]',
     citation: [1, 3, 10],
     next: 'hemo-workup-results',
+    summary: 'CBC, PT/INR, PTT, fibrinogen — hemophilia: prolonged PTT with normal PT, correct with mixing study',
+    skippable: true,
   },
   {
     id: 'hemo-workup-results',
@@ -70,6 +75,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Normal PTT + mucosal bleeding', description: 'Consider vWD — send vWF panel', next: 'hemo-vwd' },
       { label: 'Prolonged PT and PTT', description: 'Rare factor deficiency or combined defect', next: 'hemo-rare' },
     ],
+    summary: 'Isolated prolonged PTT: hemophilia A or B. PTT + PT prolonged: DIC, liver disease, or severe deficiency',
   },
   {
     id: 'hemo-severity',
@@ -79,6 +85,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '**Severity is defined by baseline clotting factor activity level:**\n\n• **Severe (<1%)** — spontaneous bleeds, multiple per month, joints and soft tissue. 35% of hemophilia A, 60% of hemophilia B. [5]\n• **Moderate (1–5%)** — bleeds with mild trauma, 4–6 per year [5]\n• **Mild (5–40%)** — bleeds with surgery/significant trauma only. May not be diagnosed until adulthood. [10]\n\n**If severity is unknown, assume severe for the purpose of factor dosing.** [10]\n\nProceed to bleed-specific management.',
     citation: [5, 10],
     next: 'hemo-bleed-type',
+    summary: 'Severity by factor level: severe <1%, moderate 1-5%, mild 5-40% — guides replacement dosing',
   },
 
   // ===================================================================
@@ -98,6 +105,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Head trauma / ICH', description: 'Life-threatening — factor BEFORE imaging', next: 'hemo-ich', urgency: 'critical' },
       { label: 'Mucosal bleeding', description: 'Oral, epistaxis, post-dental', next: 'hemo-mucosal' },
     ],
+    summary: 'Classify bleed severity: life-threatening (ICH, neck), major (hemarthrosis, muscle), or mucosal/minor',
   },
   {
     id: 'hemo-bleed-type-2',
@@ -112,6 +120,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Major trauma', description: 'Significant mechanism of injury', next: 'hemo-trauma', urgency: 'critical' },
       { label: 'Special populations', description: 'Inhibitors, mild hemophilia A, neonates', next: 'hemo-special' },
     ],
+    summary: 'Additional bleed types: GI hemorrhage, hematuria, trauma — each requires specific factor targets',
   },
   {
     id: 'hemo-hemarthrosis',
@@ -134,6 +143,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Check factor levels 30-60 min post-infusion for major bleeds. Monitor for rebleeding.',
     },
+    summary: 'Hemarthrosis: factor to 30-50%, ice, immobilize — do NOT aspirate unless ruling out septic joint',
   },
   {
     id: 'hemo-muscle',
@@ -146,6 +156,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Iliopsoas hemorrhage', description: 'Hip flexion contracture, groin/thigh pain, femoral paresthesia', next: 'hemo-iliopsoas', urgency: 'urgent' },
       { label: 'Other muscle / soft tissue', description: 'Extremity, trunk, superficial', next: 'hemo-muscle-tx' },
     ],
+    summary: 'Classify muscle bleed: superficial vs deep (iliopsoas, forearm compartment) — deep = emergent',
   },
   {
     id: 'hemo-muscle-tx',
@@ -168,6 +179,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Monitor for compartment syndrome, nerve compression, hemoglobin. Check factor levels for major bleeds.',
     },
+    summary: 'Muscle bleed: factor to 40-60%, ice, rest — monitor for compartment syndrome if extremity',
+    safetyLevel: 'warning',
   },
   {
     id: 'hemo-iliopsoas',
@@ -190,6 +203,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Check factor levels q12-24h. Monitor hemoglobin for occult blood loss. Daily clinical assessment.',
     },
+    summary: 'Iliopsoas hemorrhage: factor to 80-100%, CT confirmation, may need ICU — mimics appendicitis',
+    safetyLevel: 'critical',
   },
   {
     id: 'hemo-ich',
@@ -212,6 +227,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Check factor levels 30-60 min post-infusion, then q12-24h. ICU admission. Neurosurgery consult.',
     },
+    summary: 'ICH in hemophilia: factor to 100% BEFORE CT — intracranial hemorrhage until proven otherwise',
+    safetyLevel: 'critical',
   },
   {
     id: 'hemo-mucosal',
@@ -250,6 +267,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Monitor for continued bleeding. Check urinalysis before antifibrinolytics.',
     },
+    summary: 'Mucosal bleeding: factor to 30-50% + TXA — epistaxis, oral, GU bleeding often respond well',
   },
   {
     id: 'hemo-gi',
@@ -272,6 +290,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Factor levels q12-24h. GI consult for source identification. Monitor hemoglobin.',
     },
+    summary: 'GI hemorrhage: factor to 80-100% + standard GI bleed workup — endoscopy after factor replacement',
   },
   {
     id: 'hemo-hematuria',
@@ -294,6 +313,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Vigorous hydration 1.5x maintenance x 48h. Urology consult. Monitor urine output and hemoglobin.',
     },
+    summary: 'Hematuria: factor to 50%, IV fluids, avoid TXA (risk of ureteral clot obstruction)',
+    safetyLevel: 'warning',
   },
   {
     id: 'hemo-trauma',
@@ -316,6 +337,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Factor levels 30-60 min post-infusion, then q12-24h. Type and crossmatch, CBC, coags. Hematology + trauma surgery consult.',
     },
+    summary: 'Trauma in hemophilia: factor to 100% immediately — standard trauma workup, activate MTP if needed',
+    safetyLevel: 'critical',
   },
 
   // ===================================================================
@@ -331,6 +354,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     citation: [2, 10, 11],
     next: 'hemo-factor-type',
     calculatorLinks: [{ id: 'factor-dosing', label: 'Factor Dosing Calculator' }],
+    summary: 'Factor VIII: dose = weight × desired rise × 0.5. Factor IX: weight × desired rise × 1.0',
   },
   {
     id: 'hemo-factor-type',
@@ -342,6 +366,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Hemophilia A (Factor VIII deficiency)', next: 'hemo-fviii-dosing' },
       { label: 'Hemophilia B (Factor IX deficiency)', next: 'hemo-fix-dosing' },
     ],
+    summary: 'Determine factor type: VIII (hemophilia A, 80%) vs IX (hemophilia B, 20%) — different dosing',
   },
   {
     id: 'hemo-fviii-dosing',
@@ -351,6 +376,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '**Formula:** Dose (units) = (Target% − Baseline%) ÷ 2 × Weight (kg)\n\n**1 unit/kg raises factor VIII by ~2%** [2]\n\n**Examples at 70 kg (assuming baseline 0%):**\n• Target 50% → 1,750 units\n• Target 80% → 2,800 units\n• Target 100% → 3,500 units\n\n**Half-life: 8–12 hours** — redose q8–12h for sustained coverage [2]\n\n**Products:** [Factor VIII](#/drug/factor-viii/hemophilia a)\n• Recombinant: Advate, Kogenate, Xyntha, Eloctate (extended half-life), Jivi, Adynovate\n• Plasma-derived: Humate-P (also contains vWF), Koate-DVI\n\n**Switching brands is acceptable in emergencies** — no clear evidence that switching increases inhibitor risk. [10]',
     citation: [2, 10, 11],
     next: 'hemo-products',
+    summary: 'Factor VIII: 1 IU/kg raises level ~2%. Half-life 8-12h. Dose = weight × target rise × 0.5',
+    skippable: true,
   },
   {
     id: 'hemo-fix-dosing',
@@ -360,6 +387,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '**Formula:** Dose (units) = (Target% − Baseline%) × Weight (kg)\n\n**1 unit/kg raises factor IX by ~1%** [2]\n\n**Examples at 70 kg (assuming baseline 0%):**\n• Target 50% → 3,500 units\n• Target 80% → 5,600 units\n• Target 100% → 7,000 units\n\n**Half-life: 18–24 hours** — redose q18–24h [2]\n\n**Products:** [Factor IX](#/drug/factor-ix/hemophilia b)\n• Recombinant: BeneFIX, Alprolix (extended half-life), Rixubis, Rebinyn, Idelvion\n• Plasma-derived: AlphaNine SD, Mononine\n\n**Switching brands is acceptable in emergencies.** [10]',
     citation: [2, 10, 11],
     next: 'hemo-products',
+    summary: 'Factor IX: 1 IU/kg raises level ~1%. Half-life 18-24h. Dose = weight × target rise × 1.0',
+    skippable: true,
   },
   {
     id: 'hemo-products',
@@ -369,6 +398,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '**Product switching:**\nNo clear evidence that switching factor brands increases inhibitor risk. In emergencies where the patient\'s specific brand is unavailable, use an alternative brand. Prefer recombinant over plasma-derived when switching. [10]\n\n**Resource-limited settings (no factor concentrate available):** [10]\n• **Hemophilia A:** Cryoprecipitate — 1 bag per 6 kg body weight (max 10 bags). Contains high levels of factor VIII and vWF.\n• **Hemophilia B:** Fresh frozen plasma (FFP) — 15 mL/kg initial dose.\n• **Severe vWD:** Cryoprecipitate at same dosing as hemophilia A.\n\n**Extended half-life products:** [11]\n• Eloctate (factor VIII-Fc fusion) — ~1.5× longer half-life\n• Alprolix (factor IX-Fc fusion) — ~3× longer half-life\n• Patients on these may have different prophylaxis schedules\n\n**Emicizumab (Hemlibra):** Bispecific antibody for hemophilia A prophylaxis. Does NOT treat acute bleeds — still requires factor VIII or bypassing agents for acute hemorrhage. [11]',
     citation: [2, 10, 11],
     next: 'hemo-dispo',
+    summary: 'Use recombinant products when available — plasma-derived as alternative, cryoprecipitate for FVIII only',
+    skippable: true,
   },
 
   // ===================================================================
@@ -388,6 +419,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Neonate with suspected hemophilia', description: 'New presentation, circumcision bleeding, ICH', next: 'hemo-neonates' },
       { label: 'Return to bleed management', description: 'No special consideration', next: 'hemo-bleed-type' },
     ],
+    summary: 'Special populations: inhibitors, mild hemophilia A (DDAVP option), neonates, vWD',
   },
   {
     id: 'hemo-inhibitor-assess',
@@ -401,6 +433,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'High titer (≥5 BU/mL)', description: 'Requires bypassing agents', next: 'hemo-high-inhibitor', urgency: 'urgent' },
       { label: 'Unknown — treat as high titer', description: 'Safer assumption when titer unknown', next: 'hemo-high-inhibitor', urgency: 'urgent' },
     ],
+    summary: 'Poor response to factor replacement? Check for inhibitor antibody — changes management completely',
+    safetyLevel: 'critical',
   },
   {
     id: 'hemo-low-inhibitor',
@@ -430,6 +464,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Check post-infusion factor level at 30-60 min. Hematology consult mandatory.',
     },
+    summary: 'Low-titer inhibitor (<5 BU): can use high-dose factor to overwhelm antibody — monitor response',
   },
   {
     id: 'hemo-high-inhibitor',
@@ -459,6 +494,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Clinical response. Hematology consult mandatory. For refractory bleeds, sequential alternating FEIBA + rFVIIa q6h.',
     },
+    summary: 'High-titer inhibitor (≥5 BU): bypassing agents required — FEIBA 50-100 U/kg or rFVIIa 90 mcg/kg',
+    safetyLevel: 'critical',
   },
   {
     id: 'hemo-mild-a',
@@ -488,6 +525,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Restrict fluids to maintenance x24h (water retention risk). Monitor electrolytes with multiple doses. Use NS if IV fluids needed.',
     },
+    summary: 'DDAVP for mild hemophilia A: releases stored FVIII — test dose response. No effect in hemophilia B',
   },
   {
     id: 'hemo-neonates',
@@ -498,6 +536,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'High suspicion in neonates with unusual bleeding. 30% have no family history. Screen with CBC, PT/PTT, factor levels.',
     confidence: 'recommended',
     citation: [10],
+    summary: 'Neonatal hemophilia: ICH from delivery, circumcision bleeding — factor replacement same principles',
+    safetyLevel: 'warning',
   },
 
   // ===================================================================
@@ -512,6 +552,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     body: '[vWF Dosing Reference](#/info/hemo-vwf-dosing)\n\n**Most common inherited bleeding disorder** — prevalence up to 1%, but only ~10% are symptomatic. [3]\n\n**vWF functions:** [10]\n1. Platelet adhesion to injured vessel wall (GPIb/IX binding)\n2. Platelet aggregation (GPIIb/IIIa interaction)\n3. Stabilizes factor VIII in circulation (prevents degradation by protein C)\n\n**Types:**\n• **Type 1 (80%)** — quantitative deficiency, vWF:Ag <30–40%\n• **Type 2A (10%)** — qualitative defect, can\'t form HMW multimers\n• **Type 2B** — gain-of-function, excess platelet binding → thrombocytopenia\n• **Type 2M** — structural defects\n• **Type 2N** — can\'t bind factor VIII → mimics hemophilia A\n• **Type 3 (<1 in 1M)** — undetectable vWF, severe bleeding like hemophilia\n\n**Testing:** vWF:Ag, vWF:RCo, factor VIII level. **Caution:** vWF is an acute phase reactant — false negatives common during acute illness. [3]',
     citation: [3, 4, 10],
     next: 'hemo-vwd-bleed',
+    summary: 'Von Willebrand disease: most common inherited bleeding disorder — autosomal dominant, types 1-3',
   },
   {
     id: 'hemo-vwd-bleed',
@@ -525,6 +566,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Major bleed or surgery', description: 'Significant hemorrhage, operative', next: 'hemo-vwd-major' },
       { label: 'Menorrhagia', description: 'Heavy menstrual bleeding', next: 'hemo-vwd-menorrhagia' },
     ],
+    summary: 'Classify vWD bleed severity: minor (mucosal) vs major (surgical, ICH) — guides treatment intensity',
   },
   {
     id: 'hemo-vwd-minor',
@@ -537,6 +579,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Yes — known DDAVP responder', description: 'Documented response', next: 'hemo-vwd-ddavp' },
       { label: 'No / unknown / Type 2B or 3', description: 'Use vWF concentrate', next: 'hemo-vwd-concentrate-minor' },
     ],
+    summary: 'Minor vWD bleed: determine if DDAVP-responsive (Type 1 usually yes, Type 2B/3 contraindicated)',
   },
   {
     id: 'hemo-vwd-ddavp',
@@ -566,6 +609,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Restrict fluids to maintenance x24h. Monitor serum electrolytes with multiple doses. Use NS if IV fluids needed.',
     },
+    summary: 'DDAVP 0.3 mcg/kg IV/SQ for vWD Type 1 minor bleeds — releases stored vWF and FVIII',
   },
   {
     id: 'hemo-vwd-concentrate-minor',
@@ -587,6 +631,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Daily trough vWF:RCo and factor VIII levels. Monitor for thrombotic complications with prolonged therapy.',
     },
+    summary: 'vWF concentrate (Humate-P) for DDAVP-unresponsive minor bleeds — dose 40-60 IU/kg',
+    skippable: true,
   },
   {
     id: 'hemo-vwd-major',
@@ -608,6 +654,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Daily trough vWF:RCo and factor VIII levels. Monitor for thrombotic complications. Admission required.',
     },
+    summary: 'Major vWD bleed: vWF concentrate 60-80 IU/kg, maintain through levels >50% for 7-14 days',
+    safetyLevel: 'warning',
   },
   {
     id: 'hemo-vwd-menorrhagia',
@@ -645,6 +693,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Check urinalysis before antifibrinolytics. Consider DDAVP if documented responder. Screen family members.',
     },
+    summary: 'vWD menorrhagia: TXA + OCP first-line, DDAVP or vWF concentrate for severe cases',
+    skippable: true,
   },
 
   // ===================================================================
@@ -662,6 +712,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Minor bleed — consider discharge', description: 'Hemarthrosis, minor mucosal, hematuria (resolved)', next: 'hemo-discharge' },
       { label: 'Moderate-severe bleed — admit', description: 'ICH, iliopsoas, GI, major trauma, muscle with complications', next: 'hemo-admit' },
     ],
+    summary: 'Disposition based on bleed severity and factor response — discharge minor, admit major',
   },
   {
     id: 'hemo-discharge',
@@ -672,6 +723,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'Discharge if bleeding controlled, reliable family, hematologist contact, follow-up in 24–48h.',
     confidence: 'recommended',
     citation: [2, 10],
+    summary: 'Discharge minor bleeds with factor access confirmed, hematology follow-up within 24-48h',
   },
   {
     id: 'hemo-admit',
@@ -682,6 +734,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
     recommendation: 'Admit for ICH (ICU), iliopsoas, GI bleed, major trauma, inhibitor patients, or unreliable follow-up. Hematology consult.',
     confidence: 'recommended',
     citation: [2, 10],
+    summary: 'Admit life-threatening bleeds, inhibitor patients, and bleeds requiring serial factor dosing',
   },
   {
     id: 'hemo-rare',
@@ -703,6 +756,8 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       },
       monitoring: 'Hematology consult urgently. Specific factor assays. Type and crossmatch. Monitor PT/PTT response.',
     },
+    summary: 'Rare bleeding disorders (factor XI, XIII, etc.): hematology consult, FFP or specific concentrate',
+    skippable: true,
   },
 ];
 

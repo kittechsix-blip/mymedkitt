@@ -66,6 +66,8 @@ export const CO_TOXICITY_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Pulse ox is FALSELY NORMAL — must use co-oximetry; think CO for household cluster with flu symptoms',
+        safetyLevel: 'warning',
     },
     {
         id: 'co-recognition',
@@ -76,6 +78,8 @@ export const CO_TOXICITY_NODES = [
         images: [{ src: 'images/co-toxicity/co-symptoms.jpg', alt: 'Diagram listing carbon monoxide poisoning symptom severity by carboxyhemoglobin level from mild to fatal', caption: 'CO poisoning symptom spectrum by COHb level — headache/nausea at low levels progressing to seizure/coma. SpO2 is FALSELY NORMAL. (Public domain/CC0)' }],
         citation: [1, 2, 3],
         next: 'co-workup',
+        summary: 'Cherry red skin is RARE and usually postmortem — nonspecific symptoms mimic viral illness',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 2: CLINICAL SEVERITY
@@ -88,6 +92,7 @@ export const CO_TOXICITY_NODES = [
         body: '**Typical symptoms:**\n• Headache (most common complaint, often described as "throbbing")\n• Nausea and vomiting\n• Dizziness, lightheadedness\n• Fatigue, malaise\n• Difficulty concentrating\n\n**Physical exam:** Usually unremarkable. Patient is alert and oriented. Vital signs may be normal or show mild tachycardia.\n\n⚠️ **Important:** COHb level does NOT correlate well with symptoms or prognosis. A patient with COHb of 15% may be more symptomatic than one with 25%. More important prognostic factors: [2][3]\n• **Duration of exposure**\n• **Loss of consciousness** (even briefly)\n• **Neurologic symptoms** (confusion, ataxia)\n• **Age >36 years**\n\nMild symptoms with no LOC and no neurologic findings = favorable prognosis with NBO therapy.',
         citation: [2, 3],
         next: 'co-workup',
+        summary: 'COHb 10-20%: headache/nausea — level does NOT correlate with prognosis, LOC is more predictive',
     },
     {
         id: 'co-moderate',
@@ -97,6 +102,8 @@ export const CO_TOXICITY_NODES = [
         body: '**Symptoms:**\n• Confusion, disorientation, impaired judgment\n• Syncope or near-syncope\n• Chest pain (myocardium is highly sensitive to hypoxia)\n• Dyspnea, tachypnea\n• Tachycardia, palpitations\n• Visual disturbances\n• Ataxia, weakness\n\n**Physical exam:**\n• Altered mental status (GCS may be decreased)\n• Tachycardia\n• Tachypnea\n• May have ECG changes (ischemia, arrhythmias)\n\n⚠️ **Any loss of consciousness — even transient — is an indication for HBO evaluation.** [3][4]\n\n**Cardiac effects:** CO causes direct myocardial toxicity AND reduces oxygen delivery. Troponin elevation is common and correlates with worse outcomes. [2]',
         citation: [2, 3, 4],
         next: 'co-workup',
+        summary: 'Any LOC (even transient) = HBO evaluation — troponin elevation correlates with worse outcomes',
+        safetyLevel: 'warning',
     },
     {
         id: 'co-severe',
@@ -106,6 +113,8 @@ export const CO_TOXICITY_NODES = [
         body: '**⚠️ CRITICAL — Immediate intervention required**\n\n**Symptoms:**\n• Seizures\n• Coma (GCS ≤8)\n• Cardiac arrhythmias (VT, VF, heart block)\n• Myocardial infarction\n• Cardiovascular collapse\n• Respiratory failure\n• Death\n\n**Immediate actions:**\n1. **100% O2 via NRB or BVM** — do not wait for COHb confirmation\n2. **Intubate** if GCS ≤8 or airway compromise\n3. **Cardiac monitoring** — treat arrhythmias per ACLS\n4. **12-lead ECG** — look for ischemia\n5. **Contact hyperbaric center immediately**\n\n⚠️ **COHb level may be misleadingly low** if significant time has elapsed since exposure or if patient received O2 en route. Treat based on clinical presentation, NOT just COHb level. [1][3]\n\n**HBO is strongly indicated** for severe toxicity. Begin transfer arrangements early.',
         citation: [1, 3],
         next: 'co-workup',
+        summary: 'Seizures/coma/arrhythmias: immediate 100% O2, intubate if GCS ≤8, contact hyperbaric center NOW',
+        safetyLevel: 'critical',
     },
     {
         id: 'co-asymptomatic',
@@ -115,6 +124,7 @@ export const CO_TOXICITY_NODES = [
         body: '**Incidentally elevated COHb without symptoms:**\n\n**Normal COHb levels:**\n• Non-smoker: <3%\n• Smoker: up to 10% (can be higher in heavy smokers)\n• Urban environment: may have slightly elevated baseline [1]\n\n**If COHb is elevated but patient is asymptomatic:**\n1. Confirm no subtle neurologic symptoms (formal cognitive testing)\n2. Identify and remove from CO source\n3. Apply 100% O2 via NRB\n4. Repeat COHb in 2-4 hours to confirm declining\n5. ECG and troponin to assess cardiac effects\n\n**Low-risk if:**\n• No symptoms\n• No LOC history\n• COHb <10% in non-smoker\n• Normal ECG and troponin\n• Clear source identified and eliminated\n\n**Still need observation** until COHb normalizes (<3%) and asymptomatic.',
         citation: [1],
         next: 'co-workup',
+        summary: 'Incidental elevated COHb: confirm no subtle neuro symptoms, identify source, 100% O2 until <3%',
     },
     // =====================================================================
     // MODULE 3: DIAGNOSTIC WORKUP
@@ -130,6 +140,7 @@ export const CO_TOXICITY_NODES = [
             { id: 'co-level', label: 'COHb Level Interpretation' },
         ],
         next: 'co-treatment-start',
+        summary: 'Venous COHb (co-oximetry), ECG, troponin, BMP, lactate — pregnancy test in women of childbearing age',
     },
     // =====================================================================
     // MODULE 4: TREATMENT - OXYGEN THERAPY
@@ -162,6 +173,7 @@ export const CO_TOXICITY_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Start 100% O2 immediately — half-life drops from 4-6h (room air) to 60-90min (NRB) to 20-30min (HBO)',
     },
     {
         id: 'co-nbo-protocol',
@@ -182,6 +194,7 @@ export const CO_TOXICITY_NODES = [
             monitoring: 'COHb q2-4h, continuous cardiac monitoring, serial neuro checks, ECG if cardiac symptoms.',
         },
         next: 'co-disposition',
+        summary: 'NRB 15 L/min until COHb <5% AND asymptomatic — reassess for HBO if symptoms persist at 4-6h',
     },
     {
         id: 'co-intubation',
@@ -191,6 +204,7 @@ export const CO_TOXICITY_NODES = [
         body: '**Intubation indications:**\n• GCS ≤8\n• Respiratory failure (hypoxemia, hypercarbia, fatigue)\n• Airway compromise (secretions, vomiting, burns)\n• Unable to tolerate NRB mask\n• Need for transfer to HBO facility\n\n**Post-intubation:**\n• **FiO2 100%** — continue high-flow oxygen\n• Ventilator settings: target normal PaCO2 (avoid hyperventilation)\n• PEEP as needed for oxygenation\n\n**If fire/smoke inhalation:**\n• Assess for thermal airway injury (singed nasal hairs, facial burns, carbonaceous sputum)\n• Early intubation for airway edema concern\n• Consider bronchoscopy if significant inhalation injury\n\n**HBO while intubated:**\n• Intubation is NOT a contraindication to HBO\n• Most HBO chambers can accommodate intubated patients\n• Contact receiving hyperbaric facility early [3][4]',
         citation: [3, 4],
         next: 'co-hbo-criteria',
+        summary: 'Intubate for GCS ≤8 or respiratory failure — continue FiO2 100%, HBO is NOT contraindicated while intubated',
     },
     // =====================================================================
     // MODULE 5: HYPERBARIC OXYGEN (HBO) THERAPY
@@ -229,6 +243,7 @@ export const CO_TOXICITY_NODES = [
                 next: 'co-hbo-contact',
             },
         ],
+        summary: 'HBO if: LOC, COHb >25%, neuro symptoms, cardiac ischemia, pregnancy COHb >15%, persistent symptoms',
     },
     {
         id: 'co-hbo-protocol',
@@ -238,6 +253,8 @@ export const CO_TOXICITY_NODES = [
         body: '**HBO mechanism:** [3][4]\n• Accelerates CO elimination (half-life ~20-30 min)\n• Increases dissolved O2 in plasma\n• Reduces cerebral edema\n• May prevent/reduce delayed neurologic sequelae (DNS)\n\n**Standard HBO protocol:**\n• Pressure: **2.5-3 ATA**\n• Duration: **90-120 minutes** per session\n• Sessions: **1-3 treatments** (controversial; some give single treatment, others repeat x3)\n\n**Timing matters:**\n• **Most effective within 6 hours** of exposure\n• **May still help up to 24 hours** after exposure\n• Beyond 24 hours: benefit uncertain but may still consider for severe cases [4]\n\n**Relative contraindications:**\n• Untreated pneumothorax (absolute)\n• Active bleomycin or doxorubicin chemotherapy\n• Severe COPD with CO2 retention\n• Claustrophobia (can sedate)\n\n**Continue 100% O2** during transport to HBO facility.',
         citation: [3, 4],
         next: 'co-hbo-contact',
+        summary: 'HBO at 2.5-3 ATA for 90-120 min — most effective within 6h, may help up to 24h',
+        skippable: true,
     },
     {
         id: 'co-hbo-contact',
@@ -247,6 +264,7 @@ export const CO_TOXICITY_NODES = [
         body: '**Contact hyperbaric center EARLY** — transfer arrangements take time.\n\n**Information to provide:**\n• Patient age, weight\n• Time and source of CO exposure\n• Peak COHb level and current level\n• Any loss of consciousness\n• Neurologic symptoms\n• Cardiac involvement (troponin, ECG)\n• Pregnancy status\n• Metabolic acidosis (pH, lactate)\n• Airway status (intubated?)\n• Time since exposure began\n\n**Hyperbaric center locator:**\n• **Divers Alert Network (DAN):** 1-919-684-9111 (24/7)\n• **Undersea & Hyperbaric Medical Society:** www.uhms.org\n• Contact your regional poison control: **1-800-222-1222**\n\n⚠️ **Do not delay transfer** — continue 100% O2 during transport. HBO benefit decreases with time since exposure.',
         citation: [4],
         next: 'co-dns',
+        summary: 'DAN hotline 1-919-684-9111 (24/7) — provide COHb, LOC history, neuro and cardiac status',
     },
     // =====================================================================
     // MODULE 6: SPECIAL POPULATIONS
@@ -285,6 +303,8 @@ export const CO_TOXICITY_NODES = [
             monitoring: 'Lactate (should decrease after treatment), blood pressure, mental status. COHb unreliable for ~24h post-administration.',
         },
         next: 'co-hbo-criteria',
+        summary: 'Suspect cyanide if smoke + AMS/hypotension/lactate >10 — hydroxocobalamin 5g IV empirically',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 7: DELAYED NEUROLOGIC SEQUELAE (DNS)
@@ -297,6 +317,8 @@ export const CO_TOXICITY_NODES = [
         body: '**DNS occurs in 10-30% of patients** with significant CO exposure. [2][3]\n\n**Timeline:** Symptoms appear **2-40 days** after apparent recovery (most within 2-3 weeks).\n\n**Manifestations:**\n• Cognitive impairment (memory, concentration, executive function)\n• Personality changes (irritability, apathy, depression)\n• Movement disorders (parkinsonism, chorea)\n• Gait disturbances\n• Incontinence\n• Dementia-like syndrome\n\n**Risk factors for DNS:**\n• Loss of consciousness during exposure\n• Age >36 years\n• Prolonged exposure\n• Higher COHb levels\n• Metabolic acidosis\n• Delay in treatment\n\n**HBO may reduce DNS risk** — this is one of the primary rationales for HBO therapy, though evidence remains somewhat controversial. Weaver 2002 trial showed HBO reduced cognitive sequelae at 6 weeks and 12 months. [4]\n\n**Follow-up:** Neuropsychological testing recommended for patients with significant exposures. Symptoms may be permanent but some patients recover over months.',
         citation: [2, 3, 4],
         next: 'co-disposition',
+        summary: 'Delayed neurologic sequelae in 10-30% at 2-40 days — cognitive, personality, movement disorders',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 8: DISPOSITION
@@ -326,6 +348,7 @@ export const CO_TOXICITY_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Discharge only if COHb <5%, asymptomatic, normal ECG/troponin, no LOC, source eliminated',
     },
     {
         id: 'co-discharge',
@@ -336,6 +359,7 @@ export const CO_TOXICITY_NODES = [
         recommendation: 'Discharge with CO detector counseling and return precautions for delayed neurologic symptoms.',
         confidence: 'recommended',
         citation: [1, 3],
+        summary: 'Install CO detectors, do NOT return home until inspected — return for headache, confusion, memory changes',
     },
     {
         id: 'co-admit',
@@ -346,6 +370,7 @@ export const CO_TOXICITY_NODES = [
         recommendation: 'Admit for continued oxygen therapy, cardiac monitoring, and serial COHb levels.',
         confidence: 'recommended',
         citation: [1, 3],
+        summary: 'Admit for persistent symptoms, cardiac involvement, LOC history, or social concerns (intentional)',
     },
     {
         id: 'co-summary',
@@ -355,6 +380,7 @@ export const CO_TOXICITY_NODES = [
         body: '**Critical points to remember:**\n\n**1. Pulse ox is FALSELY NORMAL** — must use co-oximetry.\n\n**2. Classic symptoms are nonspecific** — headache, nausea, dizziness mimic many conditions.\n\n**3. "Occult CO"** — think CO when multiple household members have flu-like symptoms.\n\n**4. Start 100% O2 immediately** — do not wait for labs.\n\n**5. COHb level does NOT correlate with prognosis** — LOC and neuro symptoms are more predictive.\n\n**6. HBO indications:** LOC, COHb >25%, neurologic symptoms, cardiac involvement, pregnancy with COHb >15%, persistent symptoms after 4-6h NBO.\n\n**7. Pregnancy = lower threshold** — fetal Hb binds CO more tightly, elimination takes 5× longer.\n\n**8. Fire victims** — consider cyanide co-intoxication (hydroxocobalamin 5g IV if AMS/hypotension/lactate >10).\n\n**9. DNS occurs in 10-30%** — warn patients about delayed cognitive/personality changes at 2-40 days.\n\n**10. Prevention:** CO detectors save lives.',
         citation: [1, 2, 3, 4],
         next: 'co-start',
+        summary: 'Critical: pulse ox falsely normal, start O2 immediately, HBO for LOC/COHb >25%/neuro/cardiac/pregnancy',
     },
 ];
 export const CO_TOXICITY_NODE_COUNT = CO_TOXICITY_NODES.length;

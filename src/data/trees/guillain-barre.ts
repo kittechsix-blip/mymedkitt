@@ -33,6 +33,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [1, 2, 3],
     calculatorLinks: [{ id: 'gbs-variants', label: 'GBS Variants' }],
     next: 'gbs-presentation',
+    summary: 'Ascending symmetric weakness with areflexia — 3-5% mortality from respiratory failure or PE',
   },
 
   {
@@ -60,6 +61,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
         next: 'gbs-variants',
       },
     ],
+    summary: 'Bulbar symptoms (dysphagia, weak cough) or rapid progression = immediate respiratory assessment',
+    safetyLevel: 'critical',
   },
 
   {
@@ -71,6 +74,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [1, 2, 4],
     calculatorLinks: [{ id: 'gbs-variants', label: 'GBS Variants' }],
     next: 'gbs-respiratory-monitoring',
+    summary: 'AIDP most common (90%); AMAN post-Campylobacter; Miller Fisher = ataxia + areflexia + ophthalmoplegia',
+    skippable: true,
   },
 
   {
@@ -82,6 +87,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [2, 4],
     calculatorLinks: [{ id: 'gbs-variants', label: 'GBS Variants' }],
     next: 'gbs-respiratory-monitoring',
+    summary: 'Pharyngeal-cervical-brachial variant: high respiratory failure risk despite preserved leg strength',
+    skippable: true,
   },
 
   // =====================================================================
@@ -100,6 +107,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
       { id: 'gbs-egris', label: 'EGRIS Score' },
     ],
     next: 'gbs-egris',
+    summary: 'The 20/30/40 rule: FVC <20 mL/kg, NIF weaker than -30, FVC decline >30% = prepare for intubation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -111,6 +120,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [2, 3],
     calculatorLinks: [{ id: 'gbs-egris', label: 'EGRIS Score' }],
     next: 'gbs-resp-decision',
+    summary: 'EGRIS score 5-7 = 65% chance of needing mechanical ventilation in first week',
+    skippable: true,
   },
 
   {
@@ -140,6 +151,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Early elective intubation is safer than emergent — patients may appear comfortable with critically low reserve',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -155,6 +168,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [1, 2, 4],
     calculatorLinks: [{ id: 'gbs-lp-interp', label: 'LP Interpretation' }],
     next: 'gbs-imaging',
+    summary: 'LP: albuminocytologic dissociation (elevated protein, normal WBC) — may be normal in first week',
   },
 
   {
@@ -165,6 +179,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**MRI spine with contrast:**\n- Primary role: **rule out compressive lesion** (cord compression, epidural abscess)\n- GBS findings: nerve root enhancement (especially cauda equina)\n- Enhancement may be absent early\n- Not required for diagnosis but helps exclude mimics\n\n**GBS mimics to consider:**\n- Transverse myelitis (sensory level, MRI cord signal)\n- Cord compression (back pain, sensory level)\n- Myasthenia gravis (fatigable weakness, ocular predominant)\n- Botulism (descending paralysis, pupil involvement, recent food exposure)\n- Tick paralysis (find the tick!)\n- Critical illness polyneuropathy (ICU setting)\n- Hypokalemia, hypophosphatemia\n- Porphyria (abdominal pain, psychiatric symptoms)\n\n**Electrocardiogram:**\n- Baseline for autonomic dysfunction\n- Monitor for arrhythmias\n\n**Pulmonary function tests:**\n- Bedside FVC and NIF (already covered)\n- Formal PFTs not required in acute setting',
     citation: [1, 2],
     next: 'gbs-treatment-decision',
+    summary: 'MRI spine to rule out compressive lesion — tick paralysis, botulism, MG are key mimics',
+    skippable: true,
   },
 
   // =====================================================================
@@ -180,6 +196,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     citation: [1, 2, 5],
     calculatorLinks: [{ id: 'gbs-ivig-plex', label: 'IVIG vs PLEX' }],
     next: 'gbs-treatment-choice',
+    summary: 'Start IVIG or plasmapheresis within 2 weeks of onset — do NOT combine both, do NOT use steroids',
+    safetyLevel: 'critical',
   },
 
   {
@@ -206,6 +224,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
         next: 'gbs-supportive',
       },
     ],
+    summary: 'IVIG easier (peripheral IV, more available); PLEX may be faster in severe cases — equal efficacy',
   },
 
   {
@@ -228,6 +247,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     },
     calculatorLinks: [{ id: 'gbs-ivig-plex', label: 'IVIG vs PLEX' }],
     next: 'gbs-treatment-response',
+    summary: 'IVIG 0.4 g/kg/day x 5 days — check IgA level first (anaphylaxis risk if IgA deficient)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -250,6 +271,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     },
     calculatorLinks: [{ id: 'gbs-ivig-plex', label: 'IVIG vs PLEX' }],
     next: 'gbs-treatment-response',
+    summary: 'Plasmapheresis: 5 exchanges over 1-2 weeks — requires central line and specialized equipment',
+    skippable: true,
   },
 
   {
@@ -260,6 +283,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**Expected response:**\n- Clinical improvement typically begins within 1-2 weeks of completing treatment\n- Maximum improvement may take 6-12 months\n- 80% walk independently at 6 months\n\n**Treatment-related fluctuation (TRF):**\n- Worsening after initial improvement, occurring within 8 weeks\n- Occurs in ~10% of patients\n- May repeat same treatment (IVIG or PLEX)\n\n**No response to initial treatment:**\n- Consider switching modality (IVIG to PLEX or vice versa)\n- Re-evaluate diagnosis (is this really GBS?)\n- Consider CIDP if progression >8 weeks\n\n**Relapse (after 8 weeks):**\n- Consider CIDP (chronic inflammatory demyelinating polyneuropathy)\n- Requires different treatment approach (maintenance immunotherapy)\n\n**Do NOT give steroids** - evidence shows they are ineffective and may delay recovery.',
     citation: [1, 2, 5],
     next: 'gbs-supportive',
+    summary: '10% have treatment-related fluctuation — may repeat same treatment, never use steroids',
+    skippable: true,
   },
 
   // =====================================================================
@@ -274,6 +299,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**DVT Prophylaxis - HIGH PRIORITY:**\n- GBS patients are immobile and high risk for VTE\n- Pharmacologic prophylaxis: enoxaparin or heparin\n- Mechanical: SCDs, graduated compression stockings\n- Continue until ambulatory\n\n**Pain Management:**\n- Neuropathic pain is common and often severe\n- [Gabapentin](#/drug/gabapentin/neuropathic pain) 300-900 mg TID\n- [Pregabalin](#/drug/pregabalin/neuropathic pain) 75-150 mg BID\n- NSAIDs and acetaminophen for musculoskeletal pain\n- Opioids may be needed but use cautiously (respiratory depression)\n\n**Autonomic Dysfunction Monitoring:**\n- Blood pressure lability (hypertension AND hypotension)\n- Cardiac arrhythmias (continuous telemetry)\n- Urinary retention (may need Foley catheter)\n- Constipation/ileus\n- Treatment: supportive, short-acting agents for BP control\n\n**Early Rehabilitation:**\n- PT/OT consultation on admission\n- Passive range of motion to prevent contractures\n- Position changes to prevent pressure ulcers\n- Early mobilization when stable',
     citation: [1, 2],
     next: 'gbs-nutrition-psych',
+    summary: 'DVT prophylaxis is HIGH PRIORITY — immobile patients at major VTE risk. Gabapentin for pain',
   },
 
   {
@@ -284,6 +310,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**Nutritional Support:**\n- Assess swallowing before oral intake (bulbar involvement)\n- Speech therapy evaluation for dysphagia\n- NG tube if unable to swallow safely\n- Early consideration of PEG if prolonged intubation expected\n- Adequate calories for healing and rehabilitation\n\n**Psychological Support - CRITICAL:**\n- GBS causes sudden, profound paralysis in previously healthy individuals\n- Patients are often fully alert and aware of their condition\n- Anxiety and depression are extremely common\n- Fear of permanent disability\n- Explain prognosis honestly: most patients recover significantly\n\n**Communication strategies for intubated patients:**\n- Letter boards, eye-gaze devices\n- Yes/no questions with eye blinks or movements\n- Regular orientation and reassurance\n- Family involvement in care\n\n**Screen for:**\n- Depression\n- Anxiety/panic\n- ICU delirium\n- PTSD (in recovery phase)',
     citation: [1, 2],
     next: 'gbs-autonomic',
+    summary: 'Assess swallowing before PO, psychological support critical — patients are fully aware of paralysis',
+    skippable: true,
   },
 
   {
@@ -294,6 +322,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**Autonomic involvement occurs in 70% of GBS patients.**\n\n**Cardiovascular:**\n- Continuous telemetry monitoring\n- Sinus tachycardia (most common)\n- Bradycardia, asystole (may be fatal)\n- Blood pressure lability: alternating hypertension and hypotension\n- Avoid triggers: suctioning, turning, bladder distension\n\n**Management principles:**\n- Use short-acting agents for BP control\n- Avoid long-acting antihypertensives (risk of rebound hypotension)\n- Caution with beta-blockers (may unmask bradycardia)\n- Volume resuscitation for hypotension\n- Atropine and transcutaneous pacing available for bradycardia\n\n**GI dysfunction:**\n- Ileus, constipation common\n- Bowel regimen from admission\n- May need prokinetic agents\n\n**GU dysfunction:**\n- Urinary retention common\n- Check post-void residual\n- Foley catheter if significant retention\n\n**Other:**\n- Excessive sweating\n- Pupillary abnormalities\n- Syndrome of inappropriate ADH (SIADH)',
     citation: [1, 2],
     next: 'gbs-intubation',
+    summary: 'Autonomic dysfunction in 70% — bradycardia can be fatal, use short-acting BP agents only',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -320,6 +350,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     },
     calculatorLinks: [{ id: 'gbs-intubation', label: 'Intubation Checklist' }],
     next: 'gbs-vent-management',
+    summary: 'AVOID succinylcholine (lethal hyperkalemia from denervated muscle) — use rocuronium 1.2 mg/kg',
+    safetyLevel: 'critical',
   },
 
   {
@@ -330,6 +362,8 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**Ventilator settings:**\n- Lung-protective ventilation\n- Tidal volume 6-8 mL/kg IBW\n- PEEP as needed for oxygenation\n- GBS is primarily a ventilatory failure (muscle weakness), not oxygenation failure\n\n**Weaning considerations:**\n- May require weeks to months of ventilator support\n- Daily SBT when clinically improving\n- Track NIF and vital capacity recovery\n- Weaning success correlates with clinical neurological recovery\n\n**Tracheostomy:**\n- Consider early if no improvement expected within 2 weeks\n- Typically performed at 2-3 weeks if still ventilator-dependent\n- Facilitates weaning, comfort, oral care\n- Does not affect overall outcome\n\n**Sedation:**\n- Minimize sedation when possible\n- Patients often cognitively intact and aware\n- Communicate with patient, explain procedures\n- Consider pain control needs (neuropathic pain persists)\n\n**Complications to monitor:**\n- VAP (ventilator-associated pneumonia)\n- Atelectasis\n- Critical illness polyneuropathy/myopathy superimposed\n- DVT/PE despite prophylaxis',
     citation: [1, 2],
     next: 'gbs-disposition',
+    summary: 'GBS is ventilatory failure (muscle weakness), not oxygenation failure — may need weeks on vent',
+    skippable: true,
   },
 
   // =====================================================================
@@ -344,6 +378,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     body: '**ALL suspected GBS patients require admission.**\n\n**ICU admission criteria (most GBS patients):**\n- Any respiratory compromise or declining FVC/NIF\n- Bulbar symptoms\n- Autonomic dysfunction\n- Rapidly progressive weakness\n- EGRIS score >=3\n\n**Step-down/floor admission:**\n- Stable, mild weakness\n- Normal respiratory parameters after 24-48h observation\n- No bulbar or autonomic involvement\n- Still requires Q4-6h FVC/NIF monitoring\n\n**Discharge from ED:**\n- Rarely appropriate\n- Only if very mild symptoms AND:\n  - Normal respiratory function\n  - No progression over observation period\n  - Reliable follow-up within 24-48h\n  - Clear return precautions given\n  - Low threshold to return for any worsening\n\n**Specialist consultation:**\n- Neurology (all cases)\n- Pulmonology/critical care if respiratory involvement\n- PM&R for rehabilitation planning',
     citation: [1, 2],
     next: 'gbs-prognosis',
+    summary: 'ALL suspected GBS patients require admission — most need ICU for respiratory and autonomic monitoring',
   },
 
   // =====================================================================
@@ -359,6 +394,7 @@ export const GUILLAIN_BARRE_NODES: DecisionNode[] = [
     recommendation: 'Admit all suspected GBS patients. ICU for respiratory/bulbar/autonomic involvement. Start IVIG or PLEX within 2 weeks of symptom onset. Monitor FVC/NIF Q4-6h. Avoid succinylcholine if intubation needed. Most patients recover - communicate prognosis optimistically but honestly.',
     confidence: 'recommended',
     citation: [1, 2, 3],
+    summary: '80% walk independently at 6 months — poor prognosis if age >60, rapid progression, axonal variant',
   },
 
 ];

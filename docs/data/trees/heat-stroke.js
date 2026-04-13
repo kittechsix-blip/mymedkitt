@@ -20,6 +20,8 @@ export const HEAT_STROKE_NODES = [
             { id: 'fluid-calculator', label: 'Fluid Calculator' },
         ],
         next: 'hs-recognize',
+        summary: 'Heat stroke: core temp >40°C + AMS — COOL FIRST, then workup. Every minute of delay increases mortality',
+        safetyLevel: 'critical',
     },
     {
         id: 'hs-recognize',
@@ -45,6 +47,7 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Distinguish heat stroke (temp >40°C + AMS) from heat exhaustion (temp <40°C, no AMS)',
     },
     {
         id: 'hs-exhaustion',
@@ -67,6 +70,8 @@ export const HEAT_STROKE_NODES = [
             monitoring: 'Serial temp checks, mental status assessment every 15-30 minutes',
         },
         next: 'hs-discharge-criteria',
+        summary: 'Heat exhaustion (temp <40°C, no AMS): oral rehydration, cool environment, observe for progression',
+        skippable: true,
     },
     {
         id: 'hs-discharge-criteria',
@@ -79,6 +84,8 @@ export const HEAT_STROKE_NODES = [
             { id: 'heat-discharge-safe', label: 'Discharge Safety Checklist' },
         ],
         next: 'hs-cooling-start',
+        summary: 'Heat exhaustion discharge: normal vitals, tolerating PO, AMS resolved, reliable environment',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: RAPID COOLING
@@ -91,6 +98,8 @@ export const HEAT_STROKE_NODES = [
         body: '**"Cool first, transport second"** — begin cooling IMMEDIATELY. [1]\n\n**Target:** Core temp <39°C (102.2°F) within 30 minutes.\n• Mortality near-zero if cooled within 30 min\n• Mortality >50% if cooling delayed >2 hours [1][2]\n\n**Remove all clothing** and begin aggressive cooling while simultaneously establishing IV access and monitoring.\n\n**Do NOT delay cooling for:**\n• IV access\n• Labs\n• Imaging\n• Transport [1][3]',
         citation: [1, 2, 3],
         next: 'hs-cooling-method',
+        summary: 'Start cooling IMMEDIATELY — every minute above 40°C increases organ damage and mortality',
+        safetyLevel: 'critical',
     },
     {
         id: 'hs-cooling-method',
@@ -116,6 +125,7 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Select cooling method: ice water immersion (gold standard) > evaporative > ice packs',
     },
     {
         id: 'hs-immersion',
@@ -136,6 +146,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'Continuous rectal temp probe, cardiac monitoring. Target: <39°C within 30 min.',
         },
+        summary: 'Ice water immersion: whole body in ice water bath — cooling rate 0.2°C/min, most effective method',
+        safetyLevel: 'critical',
     },
     {
         id: 'hs-evaporative',
@@ -164,6 +176,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'Continuous rectal temp. Target: <39°C within 30 min.',
         },
+        summary: 'Evaporative cooling: undress, mist with tepid water, high-flow fans — if immersion not available',
+        skippable: true,
     },
     {
         id: 'hs-ice-packs',
@@ -184,6 +198,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'Continuous rectal temp. Target: <39°C within 30 min — may not be achievable with this method.',
         },
+        summary: 'Ice packs to neck, axillae, groin as adjunct — least effective alone, use with other methods',
+        skippable: true,
     },
     {
         id: 'hs-cooling-endpoint',
@@ -193,6 +209,8 @@ export const HEAT_STROKE_NODES = [
         body: '**Stop active cooling at core temp 39°C (102.2°F)** [1][2]\n\n**Why 39°C?**\n• Temperature will continue to drift down after cooling stops (afterdrop)\n• Overcooling → shivering → heat generation → rebound hyperthermia\n• Hypothermia (<35°C) causes coagulopathy and arrhythmias\n\n**After reaching 39°C:**\n• Remove from ice bath / stop misting\n• Dry patient\n• Cover with light sheet\n• Continue rectal temp monitoring every 5-15 min\n\n**If temp rebounds >39°C:** Resume cooling. [1]',
         citation: [1, 2],
         next: 'hs-resuscitation',
+        summary: 'Stop cooling at 38.5-39°C to prevent overshoot hypothermia — continue core temp monitoring',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 3: RESUSCITATION
@@ -216,6 +234,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'MAP >65, UOP >0.5 mL/kg/hr. POCUS for fluid responsiveness.',
         },
+        summary: 'Aggressive IV fluids for dehydration — avoid overcooled fluids through IV (peripheral vasoconstriction)',
+        skippable: true,
     },
     {
         id: 'hs-airway',
@@ -235,6 +255,7 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Assess airway in severe AMS — intubate for GCS <8 or inability to protect airway',
     },
     {
         id: 'hs-intubation',
@@ -255,6 +276,7 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'Continue active cooling post-intubation. Target normocapnia.',
         },
+        summary: 'Intubate for airway protection in severe AMS — continue cooling after intubation',
     },
     {
         id: 'hs-seizures',
@@ -274,6 +296,8 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Benzodiazepines first-line for heat stroke seizures — seizure activity generates more heat',
+        safetyLevel: 'warning',
     },
     {
         id: 'hs-seizure-rx',
@@ -302,6 +326,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'Respiratory status, continue cooling. EEG if refractory.',
         },
+        summary: 'Benzodiazepines first-line for heat stroke seizures — seizure activity generates more heat',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: COMPLICATIONS
@@ -314,6 +340,8 @@ export const HEAT_STROKE_NODES = [
         body: '**Multi-organ dysfunction is common** — heat stroke is a systemic inflammatory response. [1][2][3]\n\n**Common complications:**\n• **Rhabdomyolysis** — CK >5x normal, especially exertional\n• **AKI** — from hypovolemia, rhabdomyolysis, direct thermal injury\n• **DIC** — coagulopathy, bleeding\n• **Hepatic failure** — can be delayed 24-72 hours\n• **ARDS** — from capillary leak\n• **Cardiac dysfunction** — arrhythmias, myocardial injury\n\n**Labs to order:**\n• CBC, CMP, LFTs, coags, lactate\n• CK (repeat q6-12h if elevated)\n• UA with myoglobin\n• ABG/VBG [2][3]',
         citation: [1, 2, 3],
         next: 'hs-rhabdo',
+        summary: 'Heat stroke complications: rhabdo, DIC, hepatic failure (peaks 48-72h), AKI, ARDS',
+        safetyLevel: 'warning',
     },
     {
         id: 'hs-rhabdo',
@@ -338,6 +366,8 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'CK >5000 = significant rhabdomyolysis — aggressive IV fluids targeting UOP 200-300 mL/hr',
+        safetyLevel: 'warning',
     },
     {
         id: 'hs-rhabdo-rx',
@@ -366,6 +396,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'CK q6-12h, Cr, K+. Watch for compartment syndrome.',
         },
+        summary: 'CK >5000: aggressive IV fluids targeting UOP 200-300 mL/hr — bicarb controversial',
+        safetyLevel: 'warning',
     },
     {
         id: 'hs-rhabdo-severe',
@@ -386,6 +418,8 @@ export const HEAT_STROKE_NODES = [
             },
             monitoring: 'CK q6h, Cr, K+, ABG. Continuous cardiac monitoring for hyperkalemia.',
         },
+        summary: 'CK >15,000 or rising: continuous IV fluids, monitor for compartment syndrome and AKI',
+        safetyLevel: 'critical',
     },
     {
         id: 'hs-coags',
@@ -395,6 +429,8 @@ export const HEAT_STROKE_NODES = [
         body: '**DIC is common in severe heat stroke** — direct thermal injury to endothelium + systemic inflammation. [2][3]\n\n**Labs:**\n• PT/INR, PTT, fibrinogen, D-dimer\n• Platelet count\n\n**Treatment:**\n• Supportive — treat underlying heat stroke\n• FFP if INR >2 AND bleeding\n• Platelets if <50,000 AND bleeding\n• Cryoprecipitate if fibrinogen <100 AND bleeding\n• TXA 1g IV if significant hemorrhage\n\n**Do NOT give platelets or FFP prophylactically** without active bleeding. [2]',
         citation: [2, 3],
         next: 'hs-disposition',
+        summary: 'DIC: transfuse products as needed — coagulopathy typically resolves with temperature correction',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -422,6 +458,7 @@ export const HEAT_STROKE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'ALL heat stroke patients require ICU admission — multi-organ failure may develop over 24-72h',
     },
     {
         id: 'hs-admit-floor',
@@ -432,6 +469,7 @@ export const HEAT_STROKE_NODES = [
         recommendation: 'Admit to telemetry/step-down unit. Continue monitoring for delayed complications.',
         confidence: 'recommended',
         citation: [2, 3],
+        summary: 'Floor admission for mild heat stroke: resolved AMS, normal labs, observation for delayed complications',
     },
     {
         id: 'hs-admit-icu',
@@ -442,6 +480,7 @@ export const HEAT_STROKE_NODES = [
         recommendation: 'ICU admission for ongoing critical care. High risk for multi-organ dysfunction.',
         confidence: 'definitive',
         citation: [2, 3],
+        summary: 'ICU for severe heat stroke: persistent AMS, rhabdo, DIC, organ failure, or cooling failure',
     },
 ];
 export const HEAT_STROKE_NODE_COUNT = HEAT_STROKE_NODES.length;

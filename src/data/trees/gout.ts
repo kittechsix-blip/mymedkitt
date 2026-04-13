@@ -39,6 +39,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-vs-septic', label: 'Gout vs Septic Differentiator' },
     ],
     next: 'gout-presentation',
+    summary: 'Acute gout: rapid-onset monoarticular pain, MTP1 most common — rule out septic joint',
   },
 
   {
@@ -50,6 +51,8 @@ export const GOUT_NODES: DecisionNode[] = [
     citation: [1, 3],
     images: [{ src: 'images/gout/gout-podagra.jpg', alt: 'Acute gouty arthritis of the first metatarsophalangeal joint (podagra)', caption: 'Podagra: classic first MTP joint involvement with overlying erythema and swelling — present in 50% of first gout attacks (Wikimedia Commons, CC BY-SA 3.0)' }],
     next: 'gout-vs-pseudogout-clinical',
+    summary: 'Classic podagra (MTP1) but any joint possible — rapid onset, erythema, exquisite tenderness',
+    skippable: true,
   },
 
   {
@@ -60,6 +63,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Joint patterns differ:**\n\n| Feature | Gout | Pseudogout (CPPD) |\n|---------|------|------------------|\n| **Peak age** | 40-60 years | >60 years |\n| **Sex** | Male predominant | Equal |\n| **#1 joint** | 1st MTP (podagra) | Knee |\n| **Wrist** | Less common | Common (TFCC) |\n| **Polyarticular** | Chronic/severe | Common ("pseudo-RA") |\n| **Tophi** | Yes | No |\n| **Serum urate** | Usually elevated | Normal |\n| **Chondrocalcinosis** | No | Yes (X-ray) |\n\n**CPPD triggers:**\n- Recent surgery, trauma, or acute illness\n- Often presents as "post-operative knee swelling"\n\n**Key point:** Clinically indistinguishable from gout or septic arthritis. Synovial fluid crystal analysis is the only definitive test. [4][5]',
     citation: [4, 5],
     next: 'gout-when-aspirate',
+    summary: 'Gout: MTP1, younger men. Pseudogout: larger joints (knee/wrist), elderly, chondrocalcinosis on XR',
+    skippable: true,
   },
 
   {
@@ -74,6 +79,8 @@ export const GOUT_NODES: DecisionNode[] = [
       { label: 'Known gout, classic presentation', description: 'Can consider empiric treatment', next: 'gout-acr-eular-intro' },
       { label: 'Suspected septic arthritis', description: 'Requires aspiration and cultures', next: 'gout-septic-concern', urgency: 'critical' },
     ],
+    summary: 'Aspirate if first episode, fever, immunocompromised, or diagnostic uncertainty vs septic joint',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -88,6 +95,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Joint aspiration provides:**\n1. Crystal identification (definitive diagnosis)\n2. Gram stain and culture (rule out septic arthritis)\n3. Cell count and differential\n4. Therapeutic relief\n\n**Send for:**\n- Cell count with differential\n- Gram stain\n- Culture (aerobic, consider anaerobic if high risk)\n- Crystal analysis under polarized microscopy\n- Glucose (optional, compare to serum)\n- Lactate (if available)\n\n**Technique considerations:**\n- Use sterile technique\n- Aspirate as much fluid as possible\n- If single joint with significant effusion, can inject corticosteroid after aspiration [1][6]',
     citation: [1, 6],
     next: 'gout-synovial-interpretation',
+    summary: 'Joint aspiration indicated when septic joint cannot be excluded clinically',
+    skippable: true,
   },
 
   {
@@ -101,6 +110,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-synovial-interpreter', label: 'Synovial Fluid Interpreter' },
     ],
     next: 'gout-acr-eular-intro',
+    summary: 'Negatively birefringent needle crystals = gout; positively birefringent rhomboid = pseudogout',
   },
 
   {
@@ -114,6 +124,8 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-acr-eular', label: 'ACR/EULAR Gout Calculator' },
     ],
     next: 'gout-serum-urate',
+    summary: 'ACR/EULAR 2015 criteria: clinical scoring when aspiration not performed — sensitivity 92%, specificity 89%',
+    skippable: true,
   },
 
   {
@@ -124,6 +136,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Serum urate is supportive but not diagnostic.**\n\n**Important caveats:**\n- Urate can be NORMAL during acute flare (up to 40% of cases)\n- Inflammatory cytokines promote urate excretion\n- Low urate (<4 mg/dL) makes gout UNLIKELY (-4 points)\n- High urate is not specific (asymptomatic hyperuricemia is common)\n\n**Interpretation:**\n\n| Level | Interpretation | Points |\n|-------|----------------|--------|\n| <4 mg/dL | Gout unlikely | -4 |\n| 4-6 mg/dL | Nonspecific | 0 |\n| 6-8 mg/dL | Supports gout | +2 |\n| 8-10 mg/dL | Strongly supports | +3 |\n| >=10 mg/dL | Very high | +4 |\n\n**Bottom line:** Do not rule out gout based on normal urate during acute attack. Check level 2-4 weeks after flare resolution for true baseline. [3][8]',
     citation: [3, 8],
     next: 'gout-imaging',
+    summary: 'Serum urate may be NORMAL during acute flare — does not rule out gout',
+    safetyLevel: 'warning',
   },
 
   {
@@ -134,6 +148,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**X-ray:**\n- Often normal in early gout\n- Chronic gout: "rat bite" erosions with overhanging edges, sclerotic margins\n- Preserved joint space until late disease\n- Soft tissue tophi may calcify\n\n**Ultrasound:**\n- **Double contour sign:** Hyperechoic band on articular cartilage surface (urate deposition)\n- Sensitivity ~77%, Specificity ~95% when present\n- Operator-dependent, requires experience\n- Can visualize tophi and effusions\n\n**Dual-energy CT (DECT):**\n- Gold standard for urate detection\n- Color-codes urate deposits\n- Not widely available in ED\n- Useful for atypical presentations or diagnostic uncertainty\n\n**Imaging for ACR/EULAR criteria:**\n- Double contour sign OR DECT urate = +4 points\n- Radiographic erosion (gout-specific) = +4 points [3][8]',
     citation: [3, 8],
     next: 'gout-crystals-confirmed',
+    summary: 'XR for baseline, US for double contour sign, DECT for tophi — rarely needed acutely in ED',
+    skippable: true,
   },
 
   // =====================================================================
@@ -153,6 +169,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { label: 'No crystals seen', description: 'Negative but clinical suspicion remains', next: 'gout-empiric-treatment' },
       { label: 'Crystal analysis not performed', description: 'Empiric treatment based on clinical criteria', next: 'gout-empiric-treatment' },
     ],
+    summary: 'Crystal analysis determines gout vs pseudogout and guides treatment approach',
   },
 
   {
@@ -163,6 +180,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**MSU crystal-proven gout.**\n\n**Acute flare management:**\n1. Initiate anti-inflammatory therapy immediately\n2. Choice depends on contraindications (see next section)\n3. Topical ice is helpful adjuvant\n4. Continue any existing ULT (do not stop during flare)\n\n**Long-term considerations (for outpatient):**\n- ULT (allopurinol, febuxostat) reduces flare frequency\n- Can initiate ULT during acute flare (controversial but ACR 2020 conditional recommendation)\n- If starting ULT, prophylaxis with low-dose colchicine or NSAID\n- Target serum urate <6 mg/dL (or <5 mg/dL if severe/tophaceous)\n\n**Rheumatology referral indications:**\n- Tophaceous gout\n- Refractory to standard therapy\n- Frequent flares despite ULT\n- Chronic kidney disease complicating management\n- Intolerance to multiple agents [1][2]',
     citation: [1, 2],
     next: 'gout-treatment-assessment',
+    summary: 'Gout confirmed: initiate anti-inflammatory therapy, do NOT start/stop allopurinol during flare',
+    safetyLevel: 'warning',
   },
 
   {
@@ -173,6 +192,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**CPP crystal-proven pseudogout (CPPD).**\n\n**Key differences from gout:**\n- **No urate-lowering therapy** - no medication dissolves CPP crystals\n- Often associated with underlying metabolic disease\n- Treatment is symptom-directed only\n\n**Secondary causes to screen for:**\n\n| Condition | Test |\n|-----------|------|\n| Hyperparathyroidism | Calcium, PTH |\n| Hemochromatosis | Ferritin, transferrin sat |\n| Hypomagnesemia | Magnesium |\n| Hypothyroidism | TSH |\n| Hypophosphatasia | Alkaline phosphatase |\n\n**Consider screening in:**\n- Age <55 years\n- Recurrent attacks\n- Polyarticular presentation\n- Unusual joint involvement\n\n**Imaging finding:** Chondrocalcinosis (linear calcifications in cartilage, especially knee meniscus, wrist TFCC, pubic symphysis) [4][5]',
     citation: [4, 5],
     next: 'cppd-treatment',
+    summary: 'CPPD (pseudogout) confirmed: treat same as gout (NSAIDs/steroids), investigate secondary causes',
+    skippable: true,
   },
 
   {
@@ -183,6 +204,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Acute CPPD treatment is similar to gout:**\n\n**Preferred for monoarticular:**\n- Joint aspiration + intra-articular corticosteroid\n- Triamcinolone 20-40 mg for large joints (knee)\n- 10-20 mg for medium joints (ankle, wrist)\n\n**Systemic options:**\n- NSAIDs (same dosing as gout)\n- Colchicine (same dosing as gout)\n- Oral corticosteroids (same dosing as gout)\n\n**Chronic/recurrent CPPD:**\n- Colchicine 0.6 mg daily may reduce flare frequency\n- Low-dose NSAIDs for maintenance\n- IL-1 inhibitors (anakinra) for refractory cases\n\n**Key point:** Treat secondary causes if identified (correct hyperparathyroidism, hemochromatosis, hypomagnesemia). This may reduce flare frequency but will not dissolve existing crystals. [4][5]',
     citation: [4, 5],
     next: 'gout-treatment-assessment',
+    summary: 'CPPD treatment: NSAIDs, colchicine, or steroids — same agents as gout, similar dosing',
+    skippable: true,
   },
 
   {
@@ -196,6 +219,8 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-vs-septic', label: 'Gout vs Septic Differentiator' },
     ],
     next: 'gout-treatment-assessment',
+    summary: 'Septic joint is the critical mimicker — aspirate if febrile, immunocompromised, or prosthetic joint',
+    safetyLevel: 'critical',
   },
 
   {
@@ -206,6 +231,7 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**When empiric treatment is appropriate:**\n\n- Classic podagra with known gout history\n- ACR/EULAR score >=8 (high probability)\n- Low suspicion for septic arthritis\n- Aspiration not feasible\n\n**If treating empirically:**\n- Choose agent based on contraindications\n- Reassess in 24-48 hours\n- If no improvement, reconsider diagnosis\n- Lower threshold for aspiration if treatment fails\n\n**Document:**\n- Clinical rationale for empiric treatment\n- ACR/EULAR criteria met\n- Red flags assessed and absent\n- Follow-up plan [1][6]',
     citation: [1, 6],
     next: 'gout-treatment-assessment',
+    summary: 'Empiric treatment reasonable for classic presentation with prior confirmed gout history',
   },
 
   // =====================================================================
@@ -223,6 +249,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-treatment-selector', label: 'Treatment Selector' },
     ],
     next: 'gout-contraindication-screen',
+    summary: 'Acute flare treatment: NSAIDs, colchicine, or steroids — choose based on comorbidities and contraindications',
   },
 
   {
@@ -239,6 +266,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { label: 'Single joint with effusion', description: 'Consider IA steroid', next: 'gout-ia-steroid' },
       { label: 'Refractory or all agents contraindicated', description: 'Consider IL-1 inhibitor', next: 'gout-il1-inhibitor' },
     ],
+    summary: 'Screen for NSAID (CKD, GI bleed, CHF), colchicine (CKD, liver), and steroid contraindications',
   },
 
   {
@@ -268,6 +296,7 @@ export const GOUT_NODES: DecisionNode[] = [
       monitoring: 'Reassess pain at 48-72h. Continue until complete resolution.',
     },
     next: 'gout-treatment-monitoring',
+    summary: 'Indomethacin 50mg TID or naproxen 500mg BID x 5-7 days — avoid in CKD, GI bleed, CHF',
   },
 
   {
@@ -292,6 +321,8 @@ export const GOUT_NODES: DecisionNode[] = [
       { id: 'gout-colchicine-dosing', label: 'Colchicine Dosing Calculator' },
     ],
     next: 'gout-treatment-monitoring',
+    summary: 'Low-dose colchicine: 1.2mg then 0.6mg 1h later — old high-dose regimen is toxic, do NOT use',
+    safetyLevel: 'warning',
   },
 
   {
@@ -321,6 +352,7 @@ export const GOUT_NODES: DecisionNode[] = [
       monitoring: 'Monitor glucose in diabetics. Reassess at 48-72h.',
     },
     next: 'gout-treatment-monitoring',
+    summary: 'Prednisone 40mg daily x 5 days — preferred for CKD, anticoagulated, or NSAID-intolerant patients',
   },
 
   {
@@ -342,6 +374,8 @@ export const GOUT_NODES: DecisionNode[] = [
       monitoring: 'Reassess joint in 24-48h. Return if fever or worsening.',
     },
     next: 'gout-treatment-monitoring',
+    summary: 'Intra-articular triamcinolone 20-40mg ideal for monoarticular gout — confirms joint and treats simultaneously',
+    skippable: true,
   },
 
   {
@@ -363,6 +397,8 @@ export const GOUT_NODES: DecisionNode[] = [
       monitoring: 'Monitor CBC for neutropenia. Watch for injection site reactions.',
     },
     next: 'gout-treatment-monitoring',
+    summary: 'Anakinra 100mg SQ daily x 3 days for refractory gout failing all first-line agents',
+    skippable: true,
   },
 
   {
@@ -373,6 +409,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Expected timeline:**\n- Improvement within 24-48 hours\n- Pain significantly reduced by 72 hours\n- Resolution within 7-14 days\n\n**If no improvement in 48-72 hours:**\n1. Reconsider diagnosis (septic arthritis?)\n2. Verify adequate dosing\n3. Consider aspiration if not done\n4. May add second agent (combination therapy)\n\n**Combination therapy options:**\n- Colchicine + NSAID\n- Colchicine + steroid\n- IA steroid + systemic agent\n\n**Continue treatment:**\n- Until complete resolution of symptoms\n- Do not stop early (leads to prolonged/recurrent flare)\n- Taper steroids if used >10 days [1][2]',
     citation: [1, 2],
     next: 'gout-dispo-assessment',
+    summary: 'Monitor pain response, reassess in 24-48h — if not improving, reconsider diagnosis (septic joint?)',
+    skippable: true,
   },
 
   // =====================================================================
@@ -391,6 +429,7 @@ export const GOUT_NODES: DecisionNode[] = [
       { label: 'Admission for observation', description: 'Septic arthritis not excluded, pending cultures', next: 'gout-admission-orders', urgency: 'urgent' },
       { label: 'Rheumatology consultation', description: 'Complex case, refractory, or multiple contraindications', next: 'gout-rheum-consult' },
     ],
+    summary: 'Most gout discharges home — admit if septic joint concern, severe renal failure, or unable to take PO',
   },
 
   {
@@ -402,6 +441,7 @@ export const GOUT_NODES: DecisionNode[] = [
     recommendation: 'Discharge with prescribed anti-inflammatory medication. Return precautions for fever, worsening symptoms, or no improvement in 48-72 hours. Follow up with PCP or rheumatology in 1-2 weeks to discuss long-term management.',
     confidence: 'recommended',
     citation: [1, 2],
+    summary: 'Discharge with pain control, avoid alcohol and purine-rich foods during flare, rheumatology/PCP follow-up',
   },
 
   {
@@ -423,6 +463,7 @@ export const GOUT_NODES: DecisionNode[] = [
       monitoring: 'Serial exams. Monitor glucose. Transition to PO when tolerating diet.',
     },
     next: 'gout-discharge-instructions',
+    summary: 'Admit if septic joint suspected, severe comorbidities, or inability to control pain outpatient',
   },
 
   {
@@ -433,6 +474,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**Indications for rheumatology referral:**\n\n**Urgent (ED consultation):**\n- Diagnostic uncertainty (gout vs septic vs other)\n- Polyarticular involvement with systemic symptoms\n- Refractory to standard therapy\n- Multiple contraindications requiring IL-1 inhibitor\n\n**Outpatient referral:**\n- Tophaceous gout\n- Frequent flares (>=2/year) despite ULT\n- Chronic kidney disease complicating management\n- Intolerance to multiple agents\n- Serum urate not at goal despite max ULT\n- Suspected secondary causes of hyperuricemia\n\n**Information for consultant:**\n- Duration and frequency of attacks\n- Prior treatments and responses\n- Crystal confirmation (if available)\n- Current medications\n- Renal function and comorbidities [1][2]',
     citation: [1, 2],
     next: 'gout-ult-counseling',
+    summary: 'Rheumatology for recurrent flares, tophaceous gout, or ULT initiation guidance',
+    skippable: true,
   },
 
   {
@@ -443,6 +486,8 @@ export const GOUT_NODES: DecisionNode[] = [
     body: '**ULT is for long-term prevention, not acute treatment.**\n\n**Indications for ULT (outpatient decision):**\n- Tophaceous gout\n- >=2 flares per year\n- CKD stage 3 or worse\n- Urolithiasis\n- First flare with serum urate >=9 mg/dL\n\n**Starting ULT:**\n- Can start during acute flare (ACR 2020 conditional recommendation)\n- If starting during flare, must provide anti-inflammatory prophylaxis\n- "Start low, go slow" (allopurinol 100 mg daily, increase by 100 mg q2-4 weeks)\n- Target serum urate <6 mg/dL (or <5 mg/dL if severe)\n\n**Prophylaxis when starting ULT:**\n- Duration: At least 3-6 months (longer if tophi present)\n- Options: Colchicine 0.6 mg daily or BID, low-dose NSAID, low-dose prednisone\n\n**Patient counseling:**\n- Flares may initially increase when starting ULT (mobilization of tissue urate)\n- Continue ULT through flares (stopping prolongs disease)\n- Long-term adherence is key to preventing attacks and complications [1][2]',
     citation: [1, 2],
     next: 'gout-summary',
+    summary: 'Do NOT start allopurinol in ED — ULT initiation triggers flares, needs outpatient titration',
+    safetyLevel: 'warning',
   },
 
   {
@@ -454,6 +499,7 @@ export const GOUT_NODES: DecisionNode[] = [
     recommendation: 'Acute gout/CPPD: Treat with NSAIDs, colchicine, or steroids based on contraindications. Discharge most cases with follow-up in 1-2 weeks. Consider rheumatology referral for tophaceous, refractory, or complex cases.',
     confidence: 'recommended',
     citation: [1, 2, 3],
+    summary: 'Gout ED summary: rule out septic joint, treat pain aggressively, do NOT start/stop ULT during flare',
   },
 
 ];

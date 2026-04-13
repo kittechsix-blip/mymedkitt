@@ -35,6 +35,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     images: [{ src: 'images/le-fort-fracture/lefort-classification.png', alt: 'Le Fort fracture classification — I, II, III fracture lines on facial skeleton', caption: 'Le Fort classification: I = horizontal (maxilla), II = pyramidal (nose + orbit), III = craniofacial disjunction. CC BY 3.0.' }],
     citation: [1, 2],
     next: 'lefort-exam',
+    summary: 'Le Fort fractures: airway and hemorrhage are the immediate threats — secure airway first',
+    safetyLevel: 'critical',
   },
 
   {
@@ -45,6 +47,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Mobility Testing:** [1][2]\n\nPlace fingers on nasal bridge while mobilizing maxillary central incisors with other hand:\n\n| Finding | Fracture Type |\n|---------|---------------|\n| Only maxilla moves | **Le Fort I** |\n| Maxilla + nose move together | **Le Fort II** |\n| Entire midface + zygoma move | **Le Fort III** |\n\n**Memory Aid:**\n• Le Fort I = "Speak no evil" (involves mouth)\n• Le Fort II = "See no evil" (involves orbits)\n• Le Fort III = "Hear no evil" (involves zygoma near ears)\n\n**Which Le Fort pattern is present?**',
     citation: [1, 2],
     next: 'lefort-type-question',
+    summary: 'Exam: midface mobility test — grasp anterior maxilla and check for movement at each level',
   },
 
   {
@@ -76,6 +79,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
         next: 'lefort-mixed',
       },
     ],
+    summary: 'Classify Le Fort level: I (floating palate), II (pyramidal), III (craniofacial disjunction)',
   },
 
   {
@@ -86,6 +90,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Also called:** Guerin Fracture, Floating Palate [1][2]\n\n**Fracture Line:**\nTransverse through maxilla above tooth roots, crossing:\n• Lateral nasal walls\n• Inferior maxillary sinus walls\n• Pterygoid plates\n\n**Unique Identifier:** Fracture of anterolateral margin of nasal fossa\n\n**Clinical Signs:**\n• Swollen upper lip\n• Anterior open bite malocclusion\n• Ecchymosis of maxillary buccal vestibule and palate\n• Mobile dental arch\n• Epistaxis\n\n**Mechanism:** Downward force applied below the nose\n\n[IMAGE: Le Fort I Anatomy](#/image/lefort-1-anatomy)',
     citation: [1, 2],
     next: 'lefort-airway-check',
+    summary: 'Le Fort I: transverse maxillary fracture — floating palate, mobile alveolar ridge',
+    skippable: true,
   },
 
   {
@@ -96,6 +102,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Also called:** Pyramidal Fracture [1][2][3]\n\n**Fracture Line:**\nPyramid-shaped with base at teeth, apex at nasofrontal suture:\n• Nasal bones\n• Medial orbital walls\n• Orbital floor\n• Infraorbital rims\n• Lateral maxillary walls\n• Pterygoid plates\n\n**Unique Identifier:** Fracture of inferior orbital rim\n\n**Clinical Signs:**\n• Significant facial deformity and swelling\n• Bilateral periorbital edema and ecchymosis ("raccoon eyes")\n• Step-off at infraorbital rim (palpable)\n• Infraorbital nerve paresthesia (upper lip, nose)\n• Epistaxis\n• Possible CSF rhinorrhea\n• Diplopia (orbital floor involvement)\n\n⚠️ **Le Fort II is associated with increased mortality** compared to isolated facial fractures.\n\n[IMAGE: Le Fort II Anatomy](#/image/lefort-2-anatomy)',
     citation: [1, 2, 3],
     next: 'lefort-airway-check',
+    summary: 'Le Fort II: pyramidal fracture through nasal bridge and orbital floor — CSF leak risk',
+    safetyLevel: 'warning',
   },
 
   {
@@ -106,6 +114,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Also called:** Floating Face [1][2][3]\n\n**Fracture Line:**\nTransverse through:\n• Nasofrontal suture\n• Medial and lateral orbital walls\n• Zygomaticofrontal suture\n• Zygomatic arches\n• Pterygoid plates\n\n**Unique Identifier:** Zygomatic arch fracture\n\n**Clinical Signs:**\n• Complete craniofacial disjunction\n• "Dish-face deformity" — facial elongation and flattening\n• Bilateral periorbital edema and severe ecchymosis\n• Traumatic telecanthus (increased intercanthal distance)\n• Orbital hooding, enophthalmos\n• Mastoid ecchymosis (Battle sign) if basilar skull involved\n• CSF rhinorrhea/otorrhea (highest leak rate)\n• Hemotympanum\n• Anosmia\n• Severe epistaxis\n\n⚠️ **43.5% eventually require tracheostomy**\n\n[IMAGE: Le Fort III Anatomy](#/image/lefort-3-anatomy)',
     citation: [1, 2, 3],
     next: 'lefort-airway-check',
+    summary: 'Le Fort III: craniofacial disjunction — entire face separates from skull, highest CSF leak risk',
+    safetyLevel: 'critical',
   },
 
   {
@@ -116,6 +126,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Mixed patterns occur in 56.5% of cases** [1]\n\nPatients often have:\n• Different Le Fort levels on each side\n• Combinations of fracture types\n• Asymmetric involvement\n\n**Management Principle:**\nTreat to the HIGHEST level present.\n\nExample: Le Fort II on left + Le Fort III on right → Manage as Le Fort III\n\n**CT with 3D reconstruction** is essential for accurate classification and surgical planning.',
     citation: [1],
     next: 'lefort-airway-check',
+    summary: 'Mixed patterns common — different Le Fort levels on each side, complicating surgical planning',
+    skippable: true,
   },
 
   // =====================================================================
@@ -142,6 +154,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
         next: 'lefort-hemorrhage-check',
       },
     ],
+    summary: 'Assess airway: blood, edema, displaced fragments can rapidly obstruct — plan for difficult airway',
+    safetyLevel: 'critical',
   },
 
   {
@@ -155,6 +169,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
       { id: 'lemon-score', label: 'LEMON Score' },
     ],
     next: 'lefort-airway-approach',
+    summary: 'Oral intubation preferred — do NOT nasally intubate Le Fort II/III (cribriform plate disruption risk)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -165,6 +181,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Positioning:** [4][5]\n• Maintain C-spine precautions (inline stabilization)\n• Slight reverse Trendelenburg if possible (reduces bleeding)\n• Suction IMMEDIATELY available\n\n**Technique:**\n1. Preoxygenation — maximize before attempt\n2. Video laryngoscopy with large-bore suction\n3. Have assistant apply manual reduction of midface if needed\n4. Limit to 1-2 attempts before surgical airway\n\n**Double Setup:**\n✓ Cricothyrotomy kit OPEN on table\n✓ Scalpel in hand of assistant\n✓ Bougie ready\n✓ 6.0 cuffed ETT ready for cric\n\n**RSI Medications:**\n• Ketamine 1-2 mg/kg (maintains respiratory drive if needed for awake)\n• Rocuronium 1.2 mg/kg (full dose for rapid onset)\n• Avoid succinylcholine if concern for hyperkalemia (crush injury)\n\n[IMAGE: Double Setup for Difficult Airway](#/image/double-setup)',
     citation: [4, 5],
     next: 'lefort-hemorrhage-check',
+    summary: 'If oral intubation fails: surgical airway — avoid nasotracheal, avoid blind nasal passage in all Le Forts',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -191,6 +209,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
         next: 'lefort-csf',
       },
     ],
+    summary: 'Massive midface hemorrhage common — posterior nasal packing, Foley balloon, prepare for intervention',
+    safetyLevel: 'critical',
   },
 
   {
@@ -201,6 +221,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Stepwise Approach:** [6][7]\n\n**1. Direct Pressure & Hemostatic Sutures**\n• Control lacerations\n• Pack oral cavity if needed\n\n**2. Anterior Nasal Packing**\n• Gauze soaked in 1:10,000 epinephrine\n• Commercial devices (Rapid Rhino, Merocel)\n• Can leave up to 48 hours\n\n**3. Posterior Nasal Packing / Balloon Tamponade**\n• Foley catheter: Insert through nose, inflate balloon (10-15 mL) in nasopharynx, apply anterior traction and secure\n• Double-balloon catheters: 70% success rate\n• Overall success: 48-83%\n• ⚠️ **Caution:** Risk of malposition intracranially if skull base fractured\n• **Requires:** Admission, telemetry (nasal-cardiac reflex), sometimes intubation\n\n[IMAGE: Posterior Nasal Packing Technique](#/image/posterior-packing)',
     citation: [6, 7],
     next: 'lefort-hemorrhage-refractory',
+    summary: 'Anterior + posterior nasal packing — Foley catheter inflated in nasopharynx for posterior bleeding',
   },
 
   {
@@ -211,6 +232,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**If Packing Fails:** [6][7]\n\n**Interventional Radiology Embolization:**\n• Superselective embolization of maxillary artery branches\n• ~90% success rate\n• Less invasive than open ligation\n• Complications: Monocular blindness, stroke (rare but serious ~2%)\n\n**Surgical Ligation:**\n• Endoscopic sphenopalatine artery ligation: >85% success\n• Lower complication risk than embolization\n• Requires OR, general anesthesia\n\n**Manual Reduction:**\n• In extremis, manually reducing displaced maxilla forward can temporize bleeding\n• Grasp maxilla through mouth, pull anteriorly\n\n**Tranexamic Acid:**\nConsider TXA 1g IV if significant hemorrhage (off-label but reasonable in trauma).',
     citation: [6, 7],
     next: 'lefort-csf',
+    summary: 'Refractory hemorrhage: interventional radiology for embolization — call early, do not wait',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -225,6 +248,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**CSF Rhinorrhea/Otorrhea:** [2][3]\nIndicates skull base/cribriform plate fracture.\n\n**Detection:**\n• **Halo test:** Clear fluid diffusing around blood drop on filter paper\n• ⚠️ **Nonspecific** — mucus and tears can also create halos\n• **Confirmatory:** Beta-2 transferrin or beta-trace protein in fluid\n\n**Associated with:**\n• 40.7% have concurrent skull fracture\n• Highest leak rate in Le Fort III\n\n**Management if CSF Leak:**\n• Neurosurgery consult\n• Head of bed elevation\n• Avoid nose blowing, straining\n• Prophylactic antibiotics controversial — discuss with neurosurgery',
     citation: [2, 3],
     next: 'lefort-cspine',
+    summary: 'Test for CSF leak: halo sign on gauze, beta-2 transferrin — do NOT pack nose if CSF rhinorrhea',
+    safetyLevel: 'critical',
   },
 
   {
@@ -235,6 +260,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**C-Spine Injury:** [3]\n• **Incidence:** 1.4-5.4% have cervical spine injuries\n• C5-C7 commonly involved\n• Maintain inline stabilization until cleared\n• Le Fort III has highest association with C-spine injury\n\n**Associated Injuries:** [3]\n\n| Injury | Incidence |\n|--------|-----------||\n| Skull fracture | 40.7% |\n| Traumatic brain injury | 5.4-10% |\n| Cervical spine injury | 1.4-5.4% |\n| Ocular injury | 24-28% |\n| Mandibular fracture | Common |\n| Dental avulsion | Common |\n\n⚠️ Le Fort III has highest association with cervical spine, intracranial, and neck vascular injuries.',
     citation: [3],
     next: 'lefort-imaging',
+    summary: 'C-spine injury in 10% of midface fractures — immobilize until cleared',
+    safetyLevel: 'warning',
   },
 
   {
@@ -245,6 +272,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**CT Face (Gold Standard):** [2][8]\n• Fine-cut CT (2-3mm slices)\n• Axial, coronal, and sagittal planes\n• Both bone and soft tissue windows\n\n**Key Findings to Identify:**\n• Pterygoid plate fractures (mandatory for diagnosis)\n• Anterolateral nasal fossa (Le Fort I)\n• Inferior orbital rim (Le Fort II)\n• Zygomatic arch (Le Fort III)\n\n**3D Reconstruction:**\n• Best method for classifying Le Fort fractures\n• Essential for surgical planning\n• Helps communicate injury extent\n\n**Additional Required Imaging:**\n• **CT Head:** Required — 40.7% have skull fractures, 5.4% TBI\n• **CT C-spine:** Required — maintain immobilization until cleared\n• **CT Angiography:** Consider if penetrating trauma or suspicion of major vascular injury\n\n[IMAGE: Le Fort CT Findings](#/image/lefort-ct)',
     citation: [2, 8],
     next: 'lefort-ocular',
+    summary: 'CT face with 3D reconstruction — defines fracture pattern for surgical planning',
   },
 
   {
@@ -258,6 +286,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
       { id: 'lateral-canthotomy', label: 'Lateral Canthotomy' },
     ],
     next: 'lefort-antibiotics',
+    summary: 'Ophthalmology consult for orbital floor involvement — check VA, pupil reactivity, EOM',
+    safetyLevel: 'warning',
   },
 
   {
@@ -268,6 +298,8 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Indications:** [9]\n• Fractures communicating with sinuses or oral cavity (most Le Fort fractures)\n• CSF leak\n• Open wounds\n\n**Regimen:**\n• No evidence supports continuation beyond 24 hours post-operatively\n• Consider patient risk factors (elderly, diabetic, immunocompromised, smoker)\n\n**Typical Choices:**\n\n**Ampicillin-sulbactam (Unasyn)**\n• 3g IV q6h\n\n**OR if penicillin allergic:**\n\n**Ceftriaxone + Metronidazole**\n• Ceftriaxone 1-2g IV daily\n• Metronidazole 500mg IV q8h\n\n**Additional Medications:**\n• **Tetanus:** Update if indicated\n• **Steroids:** Reduce postoperative edema (per surgery)\n• **Analgesia:** Titrate IV opioids as needed',
     citation: [9],
     next: 'lefort-disposition',
+    summary: 'Antibiotics if CSF leak or open fracture — avoid nasal instrumentation with CSF rhinorrhea',
+    skippable: true,
   },
 
   // =====================================================================
@@ -282,6 +314,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Most Le Fort fractures require admission.** [3][9]\n\n**ICU Admission Indications:**\n• Airway compromise or high risk of deterioration\n• Intubated patient\n• Active hemorrhage requiring ongoing management\n• Significant TBI\n• Hemodynamic instability\n• CSF leak with skull base fracture\n\n**Floor Admission:**\n• Stable Le Fort I or II without airway concerns\n• No active bleeding\n• No significant associated injuries\n• IV antibiotics for open/sinus fractures\n\n**Surgical Timing:** [9]\n• **Ideal:** 7-14 days post-injury (allows edema to subside)\n• **Earlier if:** Airway compromise, persistent hemorrhage, globe injury\n• **Emergent:** Airway obstruction, uncontrolled hemorrhage, orbital compartment syndrome',
     citation: [3, 9],
     next: 'lefort-consults',
+    summary: 'Admit all Le Fort fractures — OR for reduction and fixation, monitor for complications',
   },
 
   {
@@ -292,6 +325,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     body: '**Required Consults:**\n\n| Specialty | When |\n|-----------|------|\n| **OMFS / Facial Trauma Surgery** | All Le Fort fractures |\n| **Neurosurgery** | CSF leak, skull base fracture, intracranial hemorrhage |\n| **Ophthalmology** | Orbital involvement, visual complaints, periocular injury |\n| **Trauma Surgery** | Polytrauma, associated injuries |\n| **ENT** | Complex nasal/sinus involvement |\n| **Interventional Radiology** | Refractory hemorrhage |\n\n**Discharge Considerations (Rare):**\n• Stable, minimally displaced Le Fort I\n• Full dentition (natural MMF possible)\n• No airway concerns\n• Reliable follow-up within 24-48 hours with OMFS\n• Return precautions for airway deterioration',
     citation: [3, 9],
     next: 'lefort-summary-end',
+    summary: 'OMFS or plastic surgery for fixation, ENT for nasal packing, ophthalmology for orbital involvement',
   },
 
   {
@@ -301,6 +335,7 @@ export const LE_FORT_FRACTURE_NODES: DecisionNode[] = [
     title: 'Le Fort Fracture — Summary',
     body: '**Key Takeaways:**\n\n✓ All Le Fort fractures involve pterygoid plates\n✓ NEVER nasally intubate Le Fort II/III\n✓ Double setup: Cric kit OPEN when intubating\n✓ C-spine injury until proven otherwise\n✓ 40.7% have associated skull fractures\n✓ Le Fort II has increased mortality\n✓ OMFS consult for all Le Fort fractures\n✓ Surgery typically 7-14 days post-injury\n\n**Disposition:**\n• Most require admission\n• ICU if airway concern, active hemorrhage, or TBI\n• Discharge rare — only stable Le Fort I with close follow-up',
     recommendation: 'Admit for observation. OMFS consult. CT face with 3D reconstruction. CT head and C-spine. Ophthalmology if orbital involvement.',
+    summary: 'Priorities: secure airway (no nasal), control hemorrhage, check for CSF leak, admit for OR repair',
   },
 ];
 

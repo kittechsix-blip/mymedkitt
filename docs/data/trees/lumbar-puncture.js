@@ -30,6 +30,8 @@ export const LUMBAR_PUNCTURE_NODES = [
             { id: 'lp-ct-criteria-calc', label: 'CT Before LP Criteria' },
         ],
         next: 'lp-indication-type',
+        summary: 'LP indications: suspected meningitis, SAH workup, IIH diagnosis — do NOT delay abx for LP',
+        safetyLevel: 'critical',
     },
     {
         id: 'lp-indication-type',
@@ -43,6 +45,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Pseudotumor / IIH', description: 'Headache, papilledema, suspected elevated ICP', next: 'lp-iih-indication' },
             { label: 'Other diagnostic', description: 'MS, GBS, NPH tap test, neoplastic workup', next: 'lp-ct-criteria' },
         ],
+        summary: 'Determine LP indication to guide urgency, CT need, and CSF testing priorities',
     },
     {
         id: 'lp-meningitis-urgency',
@@ -64,6 +67,8 @@ export const LUMBAR_PUNCTURE_NODES = [
             monitoring: 'Blood cultures, CSF cultures, glucose. Adjust abx based on Gram stain and sensitivities.',
         },
         next: 'lp-ct-criteria',
+        summary: 'Suspected meningitis: give antibiotics FIRST, then CT if needed, then LP — never delay abx for LP',
+        safetyLevel: 'critical',
     },
     {
         id: 'lp-sah-workup',
@@ -73,6 +78,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**LP for SAH when CT head is NEGATIVE but clinical suspicion remains high**\n\n**When is LP indicated?**\n• Thunderclap headache (peak intensity <1 minute)\n• "Worst headache of life"\n• CT head negative or non-diagnostic\n• Timing: LP most useful **>12 hours** after headache onset (allows xanthochromia to develop)\n\n**CT Sensitivity for SAH:**\n| Time from headache | CT sensitivity |\n|-------------------|----------------|\n| <6 hours | 98-100% |\n| 6-12 hours | 95-98% |\n| 12-24 hours | 93% |\n| 2-5 days | 75-85% |\n| >5 days | <50% |\n\n**Modern approach (per AHA):**\n• High-resolution CT + experienced neuroradiologist within 6 hours = near 100% sensitive\n• Some centers skip LP if CT negative <6 hours\n• Clinical judgment required — if ANY doubt, do the LP\n\n**LP Timing for Xanthochromia:**\n• **Bilirubin (definitive SAH):** Requires >9-10 hours post-hemorrhage\n• **Oxyhemoglobin:** Detectable at 2-4 hours but can occur with traumatic tap\n• **Ideal LP timing:** 12+ hours after headache onset [5][6]',
         citation: [5, 6],
         next: 'lp-ct-criteria',
+        summary: 'SAH workup: LP only if CT negative and <6h from onset (CTA may replace LP in modern practice)',
     },
     {
         id: 'lp-iih-indication',
@@ -82,6 +88,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Idiopathic Intracranial Hypertension (IIH)**\n\nLP is both DIAGNOSTIC and THERAPEUTIC in IIH.\n\n**Diagnostic Criteria (Modified Dandy):**\n1. Signs/symptoms of elevated ICP (headache, papilledema, pulsatile tinnitus, visual obscurations)\n2. No localizing neurological signs (except VI nerve palsy)\n3. Normal neuroimaging (MRI preferred; venous imaging to exclude CVST)\n4. **Opening pressure ≥25 cm H₂O** (adults), ≥28 cm H₂O (children)\n5. Normal CSF composition\n\n**Therapeutic LP in IIH:**\n• High-volume tap: Remove **30-50 mL CSF**\n• Target closing pressure: 10-15 cm H₂O\n• Provides IMMEDIATE symptom relief (headache, vision)\n• Temporary measure — recurs without medical management (acetazolamide) or shunting\n\n**MUST exclude mass lesion before LP in suspected IIH**\n\nProceed to pre-procedure assessment. [7]',
         citation: [7],
         next: 'lp-ct-criteria',
+        summary: 'IIH: measure opening pressure in lateral decubitus — elevated if >25 cmH2O in adults',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: PRE-PROCEDURE ASSESSMENT
@@ -97,6 +105,8 @@ export const LUMBAR_PUNCTURE_NODES = [
             { id: 'lp-ct-criteria-calc', label: 'CT Before LP Calculator' },
         ],
         next: 'lp-ct-decision',
+        summary: 'CT before LP if: immunocompromised, CNS disease, new seizure, papilledema, focal deficit, GCS <15',
+        safetyLevel: 'warning',
     },
     {
         id: 'lp-ct-decision',
@@ -109,6 +119,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'CT NOT required', description: 'No criteria present — safe to proceed with LP', next: 'lp-coag-check' },
             { label: 'Unsure / borderline', description: 'Clinical judgment favors imaging', next: 'lp-ct-obtain' },
         ],
+        summary: 'No CT criteria met: proceed directly to LP — do not delay for unnecessary imaging',
     },
     {
         id: 'lp-ct-obtain',
@@ -118,6 +129,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Order CT Head WITHOUT Contrast**\n\n**Look for:**\n• Mass lesion with midline shift\n• Obstructive hydrocephalus\n• Loss of basal cisterns\n• Posterior fossa mass\n• Cerebral edema\n• SAH (if indicated)\n\n**Absolute contraindications to LP on CT:**\n• Significant midline shift (>5mm)\n• Loss of suprachiasmatic or quadrigeminal cisterns\n• Posterior fossa mass\n• Obstructive hydrocephalus\n\n**If CT shows any of the above:**\n• **DO NOT perform LP** — risk of herniation\n• Neurosurgery consult\n• Empiric treatment based on clinical syndrome\n\n**If CT is NORMAL or shows only diffuse edema:**\n• LP can proceed with caution\n• Clinical judgment still required\n• Consider smaller gauge needle, minimal CSF removal\n\n⚠️ **Remember: CT should NOT delay empiric antibiotics in suspected bacterial meningitis** [3][8]',
         citation: [3, 8],
         next: 'lp-coag-check',
+        summary: 'Give antibiotics BEFORE CT — CT is to rule out mass effect/herniation risk, not to diagnose meningitis',
+        safetyLevel: 'critical',
     },
     {
         id: 'lp-coag-check',
@@ -127,6 +140,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Coagulation Thresholds for LP** [9][10]\n\n| Parameter | Traditional | Evidence-Based |\n|-----------|------------|----------------|\n| **Platelets** | >50,000/mm³ | **>40,000 safe**; >20,000 per 2025 AABB |\n| **INR** | <1.5 | <1.4 per ASRA |\n| **PTT** | <40 sec | <39 sec |\n\n**Key evidence:**\n• Study of 900 LPs: PLT <50,000 did NOT show higher adverse events\n• Pediatric study (199 children, PLT ~20,000): NO epidural hematomas\n• Spinal hematoma remains **extremely rare** even with mild-moderate coagulopathy\n\n**Anticoagulant Management:**\n\n| Agent | Wait Time |\n|-------|----------|\n| Warfarin | Hold 5 days; target INR <1.4 |\n| Dabigatran | 72h (96-120h if CrCl <50) |\n| Rivaroxaban/Apixaban | 72h |\n| UFH | 4-6 hours; check aPTT |\n| LMWH (therapeutic) | 24 hours |\n| LMWH (prophylactic) | 12 hours |\n| Aspirin alone | No delay required |\n| Clopidogrel | Hold 5-7 days if possible |\n\n**In suspected bacterial meningitis:** Risk-benefit may favor LP even with mild coagulopathy — discuss with attending. [9][10]',
         citation: [9, 10],
         next: 'lp-coag-decision',
+        summary: 'Check INR and platelets — INR >1.5 or platelets <50K are relative contraindications',
     },
     {
         id: 'lp-coag-decision',
@@ -139,6 +153,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Mild coagulopathy', description: 'PLT 20-40k or INR 1.5-2.0 — proceed with caution', next: 'lp-coag-mild', urgency: 'urgent' },
             { label: 'Severe coagulopathy', description: 'PLT <20k, INR >2.0, active anticoagulation', next: 'lp-coag-severe', urgency: 'critical' },
         ],
+        summary: 'Determine if coagulopathy needs correction before LP vs proceeding with caution',
     },
     {
         id: 'lp-coag-mild',
@@ -148,6 +163,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**PLT 20,000-40,000 or INR 1.5-2.0**\n\n**Risk-benefit assessment:**\n• Spinal hematoma is rare even in this range\n• Suspected bacterial meningitis: benefit likely outweighs risk\n• Elective LP: consider correction first\n\n**Risk reduction strategies:**\n• Use smallest gauge needle practical (22-25G)\n• Single attempt if possible (avoid multiple passes)\n• Atraumatic (pencil-point) needle preferred\n• Avoid antiplatelet/anticoagulant post-procedure for 24h\n\n**Platelet transfusion thresholds:**\n• AABB 2025: PLT >20,000 may be sufficient for diagnostic LP\n• Traditional: Transfuse to >50,000 if time allows\n• In meningitis: Do NOT delay LP for platelet transfusion\n\n**Post-procedure monitoring:**\n• Monitor for back pain, leg weakness, urinary retention\n• Low threshold for MRI spine if symptoms develop',
         citation: [9, 10],
         next: 'lp-consent-prep',
+        summary: 'Mild coagulopathy (INR 1.5-2, plt 50-100K): proceed with smallest needle, apply pressure after',
+        skippable: true,
     },
     {
         id: 'lp-coag-severe',
@@ -157,6 +174,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**PLT <20,000, INR >2.0, or Active Anticoagulation**\n\n**Options:**\n\n1. **Correct coagulopathy first (if time allows):**\n   • Platelet transfusion (target >50,000)\n   • Vitamin K + PCC for warfarin (FFP slower)\n   • Idarucizumab for dabigatran\n   • Andexanet alfa for Factor Xa inhibitors\n   • Wait for DOAC clearance (72h+)\n\n2. **Proceed despite risk (bacterial meningitis):**\n   • Discuss with attending\n   • Document risk-benefit discussion\n   • Use smallest needle, single attempt\n   • Close monitoring post-procedure\n\n3. **Empiric treatment without LP:**\n   • Treat based on clinical syndrome\n   • Blood cultures often yield organism\n   • LP when coagulation corrected\n\n**⚠️ In suspected bacterial meningitis:**\n• Mortality from untreated meningitis >> risk of spinal hematoma\n• Err on the side of treatment\n• Some experts proceed regardless of coagulation status [9][10]',
         citation: [9, 10],
         next: 'lp-consent-prep',
+        summary: 'Severe coagulopathy: correct before LP — FFP for INR, platelets for thrombocytopenia, hold anticoagulants',
+        safetyLevel: 'warning',
     },
     {
         id: 'lp-consent-prep',
@@ -165,6 +184,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         title: 'Consent & Preparation',
         body: '**Informed Consent — Discuss:**\n• Indication for procedure\n• Alternative options\n• Risks: PDPH (10-30%), back pain (35%), bleeding, infection, nerve injury, herniation (rare)\n• Benefits: Diagnosis and/or treatment\n\n**Equipment Checklist:**\n☐ LP tray (commercially prepared or assembled)\n☐ Sterile gloves, drapes, prep solution\n☐ **Spinal needle** (22-25G atraumatic preferred)\n☐ Local anesthetic (1% lidocaine, 25G needle for infiltration)\n☐ Manometer with 3-way stopcock (for opening pressure)\n☐ Collection tubes (4 tubes, labeled 1-4)\n☐ Sterile gauze, bandage\n☐ Face mask (operator and assistant)\n\n**Standard LP Collection:**\n• Tube 1: Cell count and differential (1-2 mL)\n• Tube 2: Protein, glucose (1-2 mL)\n• Tube 3: Gram stain, culture, other (2-3 mL)\n• Tube 4: Cell count (1-2 mL) — compare to tube 1 for traumatic tap\n• Additional: Cryptococcal Ag, oligoclonal bands, cytology as indicated',
         next: 'lp-position-choice',
+        summary: 'Consent, position, and prepare equipment — atraumatic needle reduces post-LP headache by 50%',
     },
     // =====================================================================
     // MODULE 3: POSITIONING & EQUIPMENT
@@ -179,6 +199,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Lateral decubitus', description: 'Standard position — required for opening pressure', next: 'lp-lateral-position' },
             { label: 'Sitting', description: 'For difficult landmarks, obesity — cannot measure OP accurately', next: 'lp-sitting-position' },
         ],
+        summary: 'Lateral decubitus for opening pressure measurement; sitting for easier access in obese patients',
     },
     {
         id: 'lp-lateral-position',
@@ -189,6 +210,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-lateral-position.jpg', alt: 'Lateral decubitus position for lumbar puncture showing proper spine alignment', caption: 'Lateral decubitus: Spine parallel to bed edge, shoulders/hips stacked, knees to chest. For OP measurement: legs extended, patient relaxed. (Wikimedia Commons, CC BY-SA 4.0)' }],
         citation: [1, 2],
         next: 'lp-needle-selection',
+        summary: 'Lateral decubitus: fetal position, line up shoulders and hips — back at edge of bed, perpendicular',
+        skippable: true,
     },
     {
         id: 'lp-sitting-position',
@@ -199,6 +222,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-sitting-position.jpg', alt: 'Sitting position for lumbar puncture', caption: 'Sitting position: Patient leans forward over pillow, arches lower back. Wider interspinous spaces but cannot measure OP. (Wikimedia Commons, CC BY-SA 4.0)' }],
         citation: [1, 2],
         next: 'lp-needle-selection',
+        summary: 'Sitting: patient hunched forward hugging pillow — easier landmark identification but no OP measurement',
+        skippable: true,
     },
     {
         id: 'lp-needle-selection',
@@ -208,6 +233,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Needle Types:** [1][11]\n\n| Type | Tip | PDPH Rate | Notes |\n|------|-----|-----------|-------|\n| **Quincke** | Cutting/beveled | 15-30% | Tactile "dura click"; easier insertion |\n| **Whitacre** | Pencil-point (blunt) | ~4% | Atraumatic; side port; spreads fibers |\n| **Sprotte** | Pencil-point | ~4% | Atraumatic; larger side port |\n\n**⚠️ USE ATRAUMATIC (pencil-point) NEEDLES when available**\n• Dramatically reduces PDPH (4% vs 15-30%)\n• Whitacre or Sprotte preferred\n\n**Gauge Selection:**\n\n| Gauge | PDPH Risk | Use |\n|-------|-----------|-----|\n| 20G | Higher | Therapeutic drainage, fluoroscopy |\n| **22G** | Moderate | **Standard diagnostic LP** |\n| 25G | Lower | If skill allows; diagnostic |\n| 27G | Lowest (~1.7%) | Obstetric anesthesia |\n\n**Length:**\n• Standard: 3.5 inches (8.9 cm) — most patients\n• Long: 5-6 inches — **obese patients**\n\n**Depth to subarachnoid space:**\n• Normal BMI: ~44 mm\n• Overweight: ~51 mm\n• Obese: ~64 mm\n\n**Bevel Orientation (Quincke):**\n• Position bevel **PARALLEL** to longitudinal dural fibers (perpendicular to spine)\n• Reduces PDPH by spreading rather than cutting fibers [1][11]',
         citation: [1, 11],
         next: 'lp-landmark-id',
+        summary: 'Use atraumatic (Sprotte/Whitacre) needle 22G — reduces PDPH from 12% to 6% vs cutting needle',
+        safetyLevel: 'warning',
     },
     {
         id: 'lp-landmark-id',
@@ -218,6 +245,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-landmarks.jpg', alt: 'Lumbar puncture landmarks showing Tuffier line at L4 level', caption: 'Intercristal (Tuffier\'s) line connects iliac crests at L4 level. LP performed at L3-L4 or L4-L5 interspace. (Wikimedia Commons, CC BY-SA 4.0)' }],
         citation: [1, 2],
         next: 'lp-approach-choice',
+        summary: 'Tuffier line (iliac crests) = L4 spinous process — enter at L3-4 or L4-5 interspace',
     },
     {
         id: 'lp-approach-choice',
@@ -229,6 +257,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Midline approach', description: 'Standard technique — through interspinous space', next: 'lp-midline-start' },
             { label: 'Paramedian approach', description: '30-40% higher success — avoids ligaments', next: 'lp-paramedian-start' },
         ],
+        summary: 'Midline approach is standard; paramedian for elderly or difficult anatomy (calcified ligaments)',
     },
     // =====================================================================
     // MODULE 4: MIDLINE TECHNIQUE
@@ -242,6 +271,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-midline-anatomy.png', alt: 'Lumbar puncture midline approach showing needle trajectory through interspinous space into subarachnoid space', caption: 'Midline approach: Needle enters through interspinous ligaments, traverses ligamentum flavum and dura to reach subarachnoid space containing CSF. (Blausen Medical, CC BY 3.0)' }],
         citation: [1, 2],
         next: 'lp-midline-insertion',
+        summary: 'Midline: anesthetize skin and subcutaneous tissue, then advance needle with stylet',
+        skippable: true,
     },
     {
         id: 'lp-midline-insertion',
@@ -252,6 +283,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-midline-technique.jpg', alt: 'Midline LP technique showing needle angle 15 degrees cephalad', caption: 'Midline approach: Needle 15° cephalad, through interspinous space. Feel for "pop" of ligamentum flavum, then dura. (OpenStax, CC BY 4.0)' }],
         citation: [1, 2],
         next: 'lp-csf-obtained',
+        summary: 'Advance toward umbilicus with slight cephalad angle — feel pop through ligamentum flavum and dura',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: PARAMEDIAN TECHNIQUE
@@ -264,6 +297,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '[Paramedian LP Step-by-Step Guide](#/info/lp-paramedian-steps)\n\n**Why Paramedian?** [2][12]\n• **30-40% higher first-attempt success** than midline\n• Avoids supraspinous and interspinous ligaments (often calcified in elderly)\n• Does NOT require full spine flexion\n• Wider interlaminar space than interspinous space\n• Lower PDPH incidence (oblique track creates flap-valve closure)\n• Less back pain post-procedure\n\n**Best for:**\n• Age >50 (calcified ligaments)\n• Failed midline attempts\n• Severe degenerative changes\n• Kyphosis or scoliosis\n• Patients who cannot flex spine\n• Sitting position (where full flexion is limited)\n\n**Not recommended for:**\n• Severely obese patients (longer needle path, difficult manipulation)\n\n**Layers traversed (paramedian):**\n1. Skin\n2. Subcutaneous tissue\n3. Paraspinal muscles\n4. **Ligamentum flavum** (main resistance)\n5. Epidural space\n6. **Dura mater**\n7. Subarachnoid space [2][12]',
         citation: [2, 12],
         next: 'lp-paramedian-insertion',
+        summary: 'Paramedian: enter 1-1.5cm lateral to midline, angle medially toward spinous process',
+        skippable: true,
     },
     {
         id: 'lp-paramedian-insertion',
@@ -274,6 +309,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         images: [{ src: 'images/lumbar-puncture/lp-paramedian-technique.jpg', alt: 'Paramedian LP technique showing entry point 1-1.5cm lateral to midline', caption: 'Paramedian approach: Entry 1-1.5cm lateral, angled 10-30° cephalad and 10-20° medially. Bypasses supraspinous/interspinous ligaments. (OpenStax, CC BY 4.0)' }],
         citation: [2, 12],
         next: 'lp-csf-obtained',
+        summary: 'Paramedian avoids supraspinous and interspinous ligaments — useful in elderly with calcification',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: OPENING PRESSURE & CSF COLLECTION
@@ -288,6 +325,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Yes — measure opening pressure', description: 'IIH, SAH, meningitis — OP is diagnostic', next: 'lp-op-technique' },
             { label: 'No — collect CSF only', description: 'MS workup, GBS, etc. — OP not critical', next: 'lp-csf-collection' },
         ],
+        summary: 'CSF obtained: measure opening pressure first, then collect tubes in order (1-4)',
     },
     {
         id: 'lp-op-technique',
@@ -300,6 +338,8 @@ export const LUMBAR_PUNCTURE_NODES = [
             { id: 'lp-op-interpreter', label: 'Opening Pressure Interpreter' },
         ],
         next: 'lp-op-interpretation',
+        summary: 'Opening pressure: patient relaxed in lateral decubitus, legs extended after needle placed',
+        skippable: true,
     },
     {
         id: 'lp-op-interpretation',
@@ -309,6 +349,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Normal Opening Pressure:** [1][13]\n\n| Population | Normal Range |\n|------------|-------------|\n| Adults | 6-25 cm H₂O |\n| Children | <28 cm H₂O |\n| Population mean | ~18 cm H₂O |\n\n**Elevated OP (>25 cm H₂O):**\n• Idiopathic intracranial hypertension (IIH)\n• Meningitis (bacterial, fungal, TB)\n• SAH (elevated in ~60%)\n• Cerebral venous sinus thrombosis\n• Mass lesion/tumor\n• Hydrocephalus\n• Hypertensive/hepatic encephalopathy\n\n**Low OP (<6 cm H₂O):**\n• CSF leak (post-LP, traumatic, spontaneous)\n• Dehydration/hypovolemia\n• Intracranial hypotension syndrome\n\n**Therapeutic Drainage (IIH):**\n• Remove 30-50 mL CSF\n• Target closing pressure: 10-15 cm H₂O\n• Provides immediate symptom relief [1][13]',
         citation: [1, 13],
         next: 'lp-csf-collection',
+        summary: 'Normal OP: 6-20 cmH2O in adults. >25 cmH2O elevated (IIH, meningitis). <6 cmH2O suggests CSF leak',
+        skippable: true,
     },
     {
         id: 'lp-csf-collection',
@@ -317,6 +359,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         title: 'CSF Collection',
         body: '**Standard Collection:**\n\n| Tube | Contents | Volume | Tests |\n|------|----------|--------|-------|\n| **1** | First CSF | 1-2 mL | Cell count, differential |\n| **2** | | 1-2 mL | Protein, glucose |\n| **3** | | 2-3 mL | Gram stain, culture, PCR |\n| **4** | Last CSF | 1-2 mL | Cell count (compare to tube 1) |\n\n**Additional tests as indicated:**\n• Cryptococcal antigen (fungal meningitis)\n• Oligoclonal bands, IgG index (MS)\n• Cytology (leptomeningeal carcinomatosis)\n• VDRL (neurosyphilis)\n• AFB smear/culture (TB meningitis)\n• Adenosine deaminase (ADA) — TB\n• Viral PCR panel (HSV, enterovirus)\n\n**Routine Collection Volume:**\n• Diagnostic LP: 8-15 mL total\n• CSF regenerates ~20 mL/hour\n• Safe to remove up to 30-40 mL (adults)\n\n**Closing the Procedure:**\n1. **Replace stylet** before withdrawing needle (reduces PDPH)\n2. Withdraw needle smoothly\n3. Apply pressure with sterile gauze\n4. Small bandage over site\n5. Patient may lie flat or ambulante (bed rest NOT proven to prevent PDPH)',
         next: 'lp-csf-analysis-intro',
+        summary: 'Tube 1: cell count + diff. Tube 2: glucose + protein. Tube 3: special studies. Tube 4: repeat cell count',
     },
     // =====================================================================
     // MODULE 7: CSF ANALYSIS
@@ -332,6 +375,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { id: 'lp-lab-interpreter', label: 'CSF Lab Interpreter' },
         ],
         next: 'lp-csf-patterns',
+        summary: 'CSF interpretation: WBC count, protein, glucose, Gram stain — pattern differentiates bacterial vs viral',
     },
     {
         id: 'lp-csf-patterns',
@@ -341,6 +385,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**CSF Patterns:** [4][14]\n\n| Condition | WBC | Type | Protein | Glucose |\n|-----------|-----|------|---------|--------|\n| **Bacterial** | 100-10,000+ | PMN | 100-500+ | <40 (low) |\n| **Viral** | 5-1000 | Lymph | Normal-150 | Normal |\n| **TB** | 100-500 | Lymph | 100-500 | <45 (low) |\n| **Fungal** | 20-500 | Lymph | 50-500 | Low |\n| **SAH** | Variable | RBC+WBC | Elevated | Normal |\n| **GBS** | 0-10 | — | 45-200+ | Normal |\n| **MS** | 0-50 | Lymph | Normal-100 | Normal |\n\n**Bacterial Meningitis Clues:**\n• CSF:blood glucose ratio <0.36\n• Lactate >35 mg/dL\n• Gram stain positive in 60-90%\n\n**TB Meningitis Clues:**\n• ADA >10 IU/L\n• Lymphocyte predominance\n• Low glucose (ratio <0.5)\n• AFB smear often negative (20-40% sensitive)\n\n**GBS (Albuminocytologic Dissociation):**\n• Elevated protein with normal or near-normal WBC\n• Classic finding, though not always present early [4][14]',
         citation: [4, 14],
         next: 'lp-traumatic-vs-sah',
+        summary: 'Bacterial: high WBC (PMNs), low glucose, high protein. Viral: lymphocytes, normal glucose, mild protein elevation',
+        safetyLevel: 'warning',
     },
     {
         id: 'lp-traumatic-vs-sah',
@@ -350,6 +396,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Distinguishing Traumatic LP from SAH:** [5][6]\n\n**Classic Teaching (Tube 1 vs Tube 4):**\n• Traumatic tap: RBC decreases tube 1 → tube 4\n• True SAH: RBC count remains constant\n\n⚠️ **Reality: RBC clearing is UNRELIABLE**\n• Clearing to zero/near-zero = strong evidence for traumatic tap\n• Partial clearing (25% reduction) occurs in BOTH traumatic tap AND SAH\n• Stable RBC count = concerning for SAH\n\n**XANTHOCHROMIA is the KEY:**\n\n| Finding | Interpretation |\n|---------|---------------|\n| **Bilirubin present** | DEFINITIVE SAH (requires >9-10h to develop) |\n| Oxyhemoglobin only | Non-specific (occurs 2-4h post-bleed or traumatic) |\n| No xanthochromia | SAH unlikely if LP >12h after headache |\n\n**Best Approach:**\n• <2000 RBC/µL + NO xanthochromia = SAH excluded (100% sensitive)\n• <5 RBC in final tube = SAH clearly excluded\n• Xanthochromia present (LP >12h post-headache) = SAH confirmed\n• Erythrophagocytosis or hemosiderin macrophages = SAH\n\n**CSF Correction Formulas (Traumatic Tap):**\n• Corrected WBC = Observed WBC − (Blood WBC × CSF RBC / Blood RBC)\n• Simplified: Subtract 1 WBC per 500-1000 RBC\n• Protein: Subtract 1 mg/dL per 1000 RBC [5][6]',
         citation: [5, 6],
         next: 'lp-complications-intro',
+        summary: 'Traumatic tap: RBCs decrease tube 1 to 4. SAH: RBCs same all tubes + xanthochromia after 12h',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 8: COMPLICATIONS & POST-PROCEDURE
@@ -366,6 +414,7 @@ export const LUMBAR_PUNCTURE_NODES = [
             { label: 'Failed LP', description: 'Unable to obtain CSF', next: 'lp-failed' },
             { label: 'Other complication', description: 'Bleeding, nerve symptoms, infection concern', next: 'lp-other-complications' },
         ],
+        summary: 'Post-LP complications: headache (most common), infection, bleeding, nerve injury, herniation (rare)',
     },
     {
         id: 'lp-pdph-management',
@@ -375,6 +424,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**PDPH Characteristics:** [11][15]\n• Bilateral frontal or occipital headache\n• **POSITIONAL:** Worse upright, better supine\n• Onset: Usually within 5 days of LP\n• Associated: Nausea, neck stiffness, photophobia, tinnitus\n\n**Incidence:**\n• Cutting needles (Quincke): 15-30%\n• Atraumatic needles (Whitacre): ~4%\n• Risk factors: Female, young (18-40), low BMI, pregnancy, history of headaches\n\n**Treatment:**\n\n**1. Conservative (first-line):**\n• Bed rest (symptom relief)\n• Hydration\n• **Caffeine** 300-500 mg PO (or caffeine sodium benzoate 500 mg IV)\n• Analgesics (NSAIDs, acetaminophen)\n• Usually resolves in 1-2 weeks\n\n**2. Pharmacologic (adjuncts):**\n• Pregabalin\n• Hydrocortisone\n• Aminophylline IV\n\n**3. Epidural Blood Patch (definitive):**\n• Gold standard for severe/refractory PDPH\n• Inject **15-20 mL autologous blood** into epidural space\n• Success rate: **75-95%**\n• 20-30% require second patch\n• Usually performed by anesthesia [11][15]',
         citation: [11, 15],
         next: 'lp-disposition',
+        summary: 'Post-dural puncture headache: positional (worse upright), caffeine, analgesics — blood patch if refractory',
     },
     {
         id: 'lp-failed',
@@ -384,6 +434,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Failed LP — Options:**\n\n**1. Reassess technique:**\n• Confirm landmarks (consider US)\n• Try different interspace (L3-L4 vs L4-L5)\n• Optimize positioning (more flexion)\n• Try sitting position if in lateral\n\n**2. Try PARAMEDIAN approach:**\n• 30-40% higher success than midline\n• Especially useful if calcified ligaments\n\n**3. Ultrasound guidance:**\n• Mark midline and depth\n• First-attempt success: 87% (US) vs 50% (landmark)\n• Especially useful in obese patients\n\n**4. Fluoroscopy-guided LP:**\n• Performed by interventional radiology\n• Gold standard for difficult anatomy\n• Indicated after failed bedside attempts\n\n**5. Alternative diagnosis:**\n• If meningitis suspected: Treat empirically, try LP later\n• Blood cultures may yield organism\n• Consider empiric treatment based on clinical syndrome\n\n**Maximum attempts:**\n• No strict rule, but multiple attempts increase PDPH risk\n• Consider stopping after 3-4 failed attempts\n• Consult IR or anesthesia for assistance [1]',
         citation: [1],
         next: 'lp-disposition',
+        summary: 'Failed LP: reposition, try one level up/down, use ultrasound guidance, or paramedian approach',
     },
     {
         id: 'lp-other-complications',
@@ -393,6 +444,8 @@ export const LUMBAR_PUNCTURE_NODES = [
         body: '**Rare but Serious Complications:** [1][9]\n\n**Epidural/Spinal Hematoma:**\n• Incidence: 0.20-0.23% (very rare)\n• Symptoms: Back pain, progressive weakness, sensory changes, urinary retention\n• Diagnosis: **MRI spine URGENT**\n• Treatment: Emergent neurosurgery consult, surgical decompression if deficit\n\n**Brain Herniation:**\n• Risk: Mass lesion, elevated ICP\n• Prevention: Follow CT criteria\n• Signs: Rapid deterioration, pupil changes, posturing\n• Management: Emergent neurosurgery, ICP management\n\n**Infection (Iatrogenic Meningitis):**\n• Usually from operator\'s oral flora (streptococci)\n• Prevention: Sterile technique, face mask\n• If suspected: Re-LP, cultures, empiric antibiotics\n\n**Nerve Root Irritation:**\n• Radicular pain/paresthesias during procedure\n• Usually transient\n• Withdraw needle slightly, redirect\n\n**Subdural Hematoma (Rare):**\n• Can occur with significant CSF leak\n• Presents with headache, altered mental status\n• CT head diagnostic [1][9]',
         citation: [1, 9],
         next: 'lp-disposition',
+        summary: 'Epidural hematoma, infection, nerve root injury — all rare but require awareness and documentation',
+        skippable: true,
     },
     {
         id: 'lp-disposition',
@@ -401,6 +454,7 @@ export const LUMBAR_PUNCTURE_NODES = [
         title: 'LP Complete — Disposition',
         body: '**Post-LP Disposition:**\n\n**Based on CSF Results:**\n• **Bacterial meningitis:** ICU admission, IV antibiotics, dexamethasone\n• **Viral meningitis:** Usually supportive care, may discharge stable patients\n• **SAH confirmed:** Neurosurgery consult, angiography, ICU\n• **IIH:** Neurology follow-up, acetazolamide, weight loss counseling\n• **MS/GBS workup:** Neurology admission for further evaluation\n\n**Discharge Instructions (Uncomplicated LP):**\n• Return for: Severe headache (positional), leg weakness, numbness, urinary issues, fever\n• May resume normal activity\n• Hydration encouraged\n• Mild back soreness expected (35%)\n\n**PDPH Management if Develops:**\n• Conservative: Caffeine, rest, hydration\n• If severe/persistent (>48h): Consider epidural blood patch\n\n**Follow-up:**\n• CSF culture results: 24-72 hours\n• Cytology: 2-3 days\n• Subspecialty follow-up as indicated',
         recommendation: 'LP complete. Disposition based on clinical indication and CSF results. Educate patient on return precautions including positional headache, leg weakness, and urinary symptoms.',
+        summary: 'Disposition based on indication and CSF results — admit meningitis, discharge SAH rule-out if negative',
     },
 ];
 export const LUMBAR_PUNCTURE_MODULE_LABELS = [

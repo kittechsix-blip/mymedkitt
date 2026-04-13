@@ -32,6 +32,7 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-nexus', label: 'NEXUS Criteria' },
             { id: 'cspine-ccr', label: 'Canadian C-Spine Rule' },
         ],
+        summary: 'Assume c-spine injury until cleared — secondary injury from hypotension/hypoxemia may exceed primary',
     },
     // =====================================================================
     // MODULE 2: CLINICAL DECISION RULES
@@ -47,6 +48,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'Apply NEXUS Criteria', description: 'Alternative — simpler', next: 'cspine-nexus' },
         ],
         citation: [3, 4],
+        summary: 'CCR preferred over NEXUS — sensitivity 99-100% vs 94%, fewer missed injuries',
     },
     {
         id: 'cspine-ccr',
@@ -74,6 +76,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'No low-risk factors', description: 'Imaging required', next: 'cspine-imaging', urgency: 'urgent' },
         ],
         citation: [3],
+        summary: 'Low-risk factor present allows ROM assessment — simple rear-end MVC, ambulatory, delayed pain',
     },
     {
         id: 'cspine-ccr-rom',
@@ -86,6 +89,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'Unable to rotate 45°', description: 'Imaging required', next: 'cspine-imaging', urgency: 'urgent' },
         ],
         citation: [3],
+        summary: 'Patient ACTIVELY rotates 45° each direction — do NOT passively manipulate the neck',
     },
     {
         id: 'cspine-nexus',
@@ -110,6 +114,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**C-Spine Cleared by Clinical Decision Rule**\n\n✅ No imaging required\n✅ Remove cervical collar\n\n**Document:**\n• Which rule used (CCR preferred)\n• All criteria assessed\n• ROM if applicable\n\n**Discharge Instructions:**\n• Return if symptoms worsen\n• New numbness, tingling, weakness = return immediately\n• Ibuprofen/acetaminophen for pain\n• Activity as tolerated [3][4]',
         citation: [3, 4],
         next: undefined,
+        summary: 'Clinically cleared — remove collar, document which rule used, discharge with precautions',
     },
     // =====================================================================
     // MODULE 3: IMAGING
@@ -128,6 +133,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'CT negative — neurologic deficit', description: 'Get MRI urgently', next: 'cspine-sci-syndromes', urgency: 'critical' },
         ],
         citation: [5, 6],
+        summary: 'CT c-spine is primary modality — if injury found, image full thoracolumbar spine',
     },
     {
         id: 'cspine-persistent-pain',
@@ -137,6 +143,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**CT Negative with Persistent Pain**\n\n**Options:**\n\n1. **Continue collar + repeat exam**\n   - Reassess in 24-48 hours\n   - If resolves → clear\n\n2. **MRI within 72 hours**\n   - Most sensitive for ligamentous injury\n   - Shows abnormalities in ~25% with negative CT\n   - More useful after initial inflammation\n\n3. **Flexion-extension films**\n   - Only if cooperative and no neurologic symptoms\n   - Can identify dynamic instability\n\n**EAST Recommendation:**\nIn low-risk patients with isolated neck pain and negative CT, clinical clearance is reasonable with close follow-up [6]',
         citation: [6],
         next: undefined,
+        summary: 'Negative CT with persistent pain — MRI within 72h shows abnormalities in 25%',
     },
     {
         id: 'cspine-obtunded',
@@ -146,6 +153,9 @@ export const CERVICAL_SPINE_NODES = [
         body: '**C-Spine Clearance in Obtunded Patient**\n\n**EAST 2022 Guidelines:**\n\n✅ **High-quality negative CT alone is sufficient for collar removal**\n\n**Rationale:**\n• CT has very high NPV for unstable injuries\n• MRI adds mostly low-significance findings\n• Transport risks for MRI often outweigh benefits\n• **Collar complications increase 66% per day**\n\n**When to consider MRI:**\n• Focal neurologic deficit present\n• Concerning mechanism with high suspicion\n• Unable to obtain adequate CT\n\n**Protocol:**\n1. High-quality CT C-spine with reconstructions\n2. No focal neurologic deficit on exam\n3. → Remove collar [6]',
         citation: [6],
         next: 'cspine-imaging',
+        summary: 'EAST 2022: high-quality negative CT alone sufficient for collar removal in obtunded patients',
+        skippable: true,
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: UPPER C-SPINE (C0-C2)
@@ -166,6 +176,7 @@ export const CERVICAL_SPINE_NODES = [
         calculatorLinks: [
             { id: 'cspine-injury-id', label: 'Injury Identifier' },
         ],
+        summary: '50% of cervical fractures at C1-C2 — always check both levels when one is injured',
     },
     {
         id: 'cspine-odontoid',
@@ -178,6 +189,7 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-odontoid-class', label: 'Odontoid Classification' },
         ],
         next: 'cspine-disposition',
+        summary: 'Most common c-spine fracture in elderly — Type II has 22% 2-year mortality in elderly',
     },
     {
         id: 'cspine-jefferson',
@@ -187,6 +199,8 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Jefferson Fracture — C1 Burst**\n\nAxial loading injury causing burst of the atlas ring.\n\n**Gehweiler Classification:**\n\n| Type | Description |\n|------|-------------|\n| 1 | Anterior arch fracture |\n| 2 | Posterior arch fracture |\n| 3 | Both arches (classic Jefferson) |\n| 4 | Lateral mass fracture |\n| 5 | Transverse process fracture |\n\n**Stability Assessment:**\n• **Stable:** Lateral mass displacement <7mm, transverse ligament intact\n• **Unstable:** Lateral mass displacement ≥7mm OR transverse ligament disruption\n\n**Treatment:**\n• Stable → Rigid collar 8-12 weeks\n• Unstable → Halo or surgical fixation\n\n⚠️ **50% have associated C2 fractures** — always check odontoid [7][9]',
         citation: [7, 9],
         next: 'cspine-disposition',
+        summary: 'C1 burst: lateral mass displacement ≥7mm = unstable — 50% have associated C2 fractures',
+        skippable: true,
     },
     {
         id: 'cspine-hangman',
@@ -199,6 +213,8 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-hangman-class', label: 'Levine-Edwards Class' },
         ],
         next: 'cspine-disposition',
+        summary: 'Type IIa: DO NOT apply traction — flexion injury worsened by distraction',
+        safetyLevel: 'critical',
     },
     {
         id: 'cspine-aod',
@@ -208,6 +224,8 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Atlanto-Occipital Dislocation (AOD)**\n\n**Often fatal** — survivors have severe neurologic injury.\n\n**Diagnosis:**\n• Powers ratio (CT)\n• Basion-dental interval\n• Harris lines\n\n**Immediate Management:**\n1. Rigid immobilization\n2. Avoid neck manipulation\n3. **EMERGENCY spine surgery consultation**\n\n**Treatment:**\nSurgical occipitocervical fusion required\n\n**Prognosis:**\nVery poor — most fatal at scene. Survivors usually have significant permanent deficit [7]',
         citation: [7],
         next: 'cspine-disposition',
+        summary: 'Atlanto-occipital dislocation — often fatal, emergency surgical fusion if survived',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: SUBAXIAL INJURIES (C3-C7)
@@ -223,6 +241,8 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-slic', label: 'SLIC Calculator' },
         ],
         next: 'cspine-disposition',
+        summary: 'SLIC score ≥5 = surgical stabilization — assess morphology, ligaments, neuro status',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: SPINAL CORD SYNDROMES
@@ -241,6 +261,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'Proprioception/vibration loss only', description: 'Posterior cord syndrome', next: 'cspine-posterior-cord' },
         ],
         citation: [12, 13],
+        summary: 'Identify SCI pattern by motor/sensory distribution — determines prognosis and management',
     },
     {
         id: 'cspine-complete-sci',
@@ -250,6 +271,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Complete Cord Transection**\n\n**Findings:**\n• Total loss of motor function below level\n• Total loss of sensory function below level\n• Absent rectal tone\n• Flaccid paralysis initially (spinal shock)\n\n**Spinal Shock:**\n• Lasts hours to weeks\n• Areflexia below lesion\n• Resolution: Return of bulbocavernosus reflex\n• After shock resolves → spasticity develops\n\n**Prognosis:**\n• Poor for functional recovery\n• <5% regain meaningful motor function\n• Focus on rehabilitation and complication prevention [12][13]',
         citation: [12, 13],
         next: 'cspine-sci-resuscitation',
+        summary: 'Complete cord: total loss below level — <5% regain meaningful motor, focus on rehab',
     },
     {
         id: 'cspine-central-cord',
@@ -259,6 +281,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Central Cord Syndrome — Most Common Incomplete SCI**\n\n**Classic Presentation:**\n• **Upper extremity weakness > lower extremity**\n• Cape distribution sensory loss\n• Bladder dysfunction (retention > incontinence)\n• Variable motor/sensory patterns\n\n**Mechanism:**\nHyperextension in elderly with pre-existing cervical stenosis or spondylosis\n\n**Pathophysiology:**\nCentral cord (arm fibers) more affected than lateral (leg fibers)\n\n**Prognosis:**\n✅ **Most favorable of incomplete injuries**\n• Recovery sequence: Legs → Proximal arms → Hands → Bladder\n• Younger patients have better outcomes\n• 75% regain some ambulatory function\n\n**Treatment:**\n• Early surgery (≤24 hours) may improve outcomes\n• Conservative if no compression/instability [12][13][14]',
         citation: [12, 13, 14],
         next: 'cspine-sci-resuscitation',
+        summary: 'Central cord: UE weakness > LE — BEST incomplete prognosis, 75% regain ambulation',
     },
     {
         id: 'cspine-anterior-cord',
@@ -268,6 +291,8 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Anterior Cord Syndrome — Worst Prognosis of Incomplete**\n\n**Findings:**\n• **Motor paralysis** (corticospinal tracts)\n• **Loss of pain and temperature** (spinothalamic tracts)\n• **Preserved proprioception and vibration** (dorsal columns intact)\n\n**Causes:**\n• Anterior spinal artery occlusion\n• Burst fracture with anterior cord compression\n• Aortic surgery complication\n• Disc herniation\n\n**Prognosis:**\n❌ **Worst of incomplete injuries**\n• Only 10-20% recover functional motor\n• Even with good sensory recovery, motor often poor [12][13]',
         citation: [12, 13],
         next: 'cspine-sci-resuscitation',
+        summary: 'Anterior cord: motor + pain/temp loss, preserved proprioception — WORST incomplete prognosis',
+        skippable: true,
     },
     {
         id: 'cspine-brown-sequard',
@@ -277,6 +302,8 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Brown-Séquard Syndrome — Best Prognosis**\n\nCord hemisection.\n\n**Findings:**\n\n**Ipsilateral (same side as lesion):**\n• Motor paralysis\n• Loss of proprioception and vibration\n\n**Contralateral (opposite side):**\n• Loss of pain and temperature (1-2 levels below injury)\n\n**Causes:**\n• Penetrating trauma (knife, bullet)\n• Lateral mass fracture with cord compression\n• Tumor, epidural hematoma\n\n**Prognosis:**\n✅ **Best prognosis of all incomplete injuries**\n• 75-90% regain ambulatory function\n• Recovery continues up to 2 years\n• Most recover bladder/bowel function [12][13]',
         citation: [12, 13],
         next: 'cspine-sci-resuscitation',
+        summary: 'Hemisection: ipsilateral motor, contralateral pain/temp — BEST overall prognosis, 75-90% ambulatory',
+        skippable: true,
     },
     {
         id: 'cspine-posterior-cord',
@@ -286,6 +313,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Posterior Cord Syndrome — Rare**\n\n**Findings:**\n• **Loss of proprioception and vibration** (dorsal columns)\n• Motor preserved\n• Pain and temperature preserved\n• Sensory ataxia\n\n**Causes:**\n• Posterior spinal artery infarct\n• Tabes dorsalis (syphilis)\n• B12 deficiency (subacute combined degeneration)\n• Multiple sclerosis\n\n**Clinical:**\n• Patients can\'t sense position in space\n• Romberg positive\n• Wide-based gait\n\nRare as pure syndrome from trauma [12]',
         citation: [12],
         next: 'cspine-sci-resuscitation',
+        summary: 'Rare: proprioception/vibration loss only — sensory ataxia, Romberg positive',
     },
     // =====================================================================
     // MODULE 7: SCI MANAGEMENT
@@ -301,6 +329,8 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-map-goals', label: 'MAP Goals' },
         ],
         next: 'cspine-steroids',
+        summary: 'MAP 85-90 mmHg for 3-7 days — NE first-line, AVOID phenylephrine alone',
+        safetyLevel: 'warning',
     },
     {
         id: 'cspine-steroids',
@@ -310,6 +340,9 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Methylprednisolone in Acute SCI**\n\n🔴 **NOT RECOMMENDED — STRONGLY DISCOURAGED**\n\n**Evidence:**\n• No Level I/II evidence of benefit\n• NASCIS trials heavily criticized\n• No FDA approval for this indication\n\n**AANS/CNS Guidelines:**\n> "Administration of methylprednisolone for the treatment of acute spinal cord injury is not recommended."\n\n**Risks:**\n• Increased infection\n• Wound complications\n• GI bleeding\n• Possible increased mortality\n\n**Bottom Line:**\nDo not give steroids for acute traumatic SCI. If asked by consulting service, cite AANS/CNS guidelines. [1][16]',
         citation: [1, 16],
         next: 'cspine-sci-surgery',
+        summary: 'Methylprednisolone STRONGLY DISCOURAGED for acute SCI — no benefit, increased complications',
+        skippable: true,
+        safetyLevel: 'critical',
     },
     {
         id: 'cspine-sci-surgery',
@@ -319,6 +352,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Surgical Decompression Timing**\n\n**Early Surgery (<24 hours):**\n• Associated with improved neurologic outcomes\n• Especially for incomplete injuries\n• STASCIS trial: 2-grade improvement more likely\n\n**Indications for Urgent Surgery:**\n• Progressive neurologic deterioration\n• Unstable fractures\n• Persistent cord compression\n• Incomplete injury with compression\n\n**Consult Neurosurgery/Spine Immediately:**\n• Any spinal cord injury\n• Unstable fractures\n• Uncertain stability\n\n**DVT Prophylaxis:**\n• Initiate within 72 hours (24h post-op if surgery)\n• Chemical + mechanical\n• 15% VTE rate despite prophylaxis\n• Prophylactic IVC filters NOT recommended [1][17]',
         citation: [1, 17],
         next: 'cspine-disposition',
+        summary: 'Early decompression <24h improves outcomes — DVT prophylaxis within 72h mandatory',
     },
     // =====================================================================
     // MODULE 8: SPECIAL POPULATIONS & DISPOSITION
@@ -334,6 +368,8 @@ export const CERVICAL_SPINE_NODES = [
             { id: 'cspine-pecarn', label: 'PECARN C-Spine' },
         ],
         next: 'cspine-start',
+        summary: 'PECARN 2024: GCS 3-8 = CT, altered mental status = x-ray, none = clinical clearance',
+        safetyLevel: 'warning',
     },
     {
         id: 'cspine-disposition',
@@ -347,6 +383,7 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'Discharge with collar', description: 'Stable, outpatient follow-up', next: 'cspine-discharge' },
         ],
         citation: [1],
+        summary: 'SCI/high cervical: ICU for MAP monitoring; stable fracture: floor; cleared: discharge with collar',
     },
     {
         id: 'cspine-icu-checklist',
@@ -356,6 +393,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**ICU Admission for C-Spine/SCI**\n\n**Orders:**\n□ Continuous arterial line monitoring\n□ MAP goal 85-90 mmHg\n□ Norepinephrine infusion PRN\n□ Foley catheter (neurogenic bladder)\n□ NG tube if high cervical (ileus common)\n□ DVT prophylaxis within 72 hours\n□ Respiratory monitoring (PFTs if C2-C4)\n□ Q1h neuro checks\n\n**Consults:**\n□ Neurosurgery or Orthopedic Spine\n□ PM&R for rehab planning\n□ Respiratory therapy\n\n**Avoid:**\n❌ Phenylephrine alone (worsens bradycardia)\n❌ Steroids\n❌ Excessive fluids (pulmonary edema)',
         citation: [1],
         next: undefined,
+        summary: 'Arterial line, MAP 85-90, NE infusion, Foley, NG tube, DVT prophylaxis, q1h neuro checks',
     },
     {
         id: 'cspine-floor-checklist',
@@ -365,6 +403,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Floor Admission for Stable C-Spine Injury**\n\n**Orders:**\n□ Hard cervical collar at all times\n□ Log-roll precautions for repositioning\n□ Neuro checks Q4h\n□ DVT prophylaxis\n□ Pain management\n□ Stool softener (avoid straining)\n\n**Consults:**\n□ Spine surgery for operative planning\n□ PT/OT evaluation\n\n**Education:**\n□ Do not remove collar\n□ Report any new weakness, numbness, or changes',
         citation: [1],
         next: undefined,
+        summary: 'Hard collar at all times, log-roll, neuro checks q4h, DVT prophylaxis, pain management',
     },
     {
         id: 'cspine-discharge',
@@ -374,6 +413,7 @@ export const CERVICAL_SPINE_NODES = [
         body: '**Discharge Instructions — Stable C-Spine Fracture**\n\n**Collar:**\n• Wear rigid collar at ALL times except brief showers\n• Keep collar on while sleeping\n• Follow-up in 1-2 weeks with spine surgery\n\n**Activity:**\n• No heavy lifting (>10 lbs)\n• No contact sports\n• Limit neck rotation\n• May work if sedentary job\n\n**Return IMMEDIATELY if:**\n• New numbness or tingling\n• New weakness in arms or legs\n• Loss of bladder/bowel control\n• Worsening pain despite medication\n• Difficulty breathing\n\n**Follow-up:**\n□ Spine surgery: 1-2 weeks\n□ Repeat imaging as directed\n□ Primary care for wound check if applicable',
         citation: [1],
         next: undefined,
+        summary: 'Rigid collar at ALL times, no heavy lifting, return for new numbness/weakness/incontinence',
     },
 ];
 export const CERVICAL_SPINE_MODULE_LABELS = [

@@ -55,6 +55,8 @@ export const IRON_OD_NODES = [
                 next: 'iron-unknown',
             },
         ],
+        summary: 'Iron OD: >60 mg/kg elemental iron is potentially lethal — toxicity peaks at 6-24 hours',
+        safetyLevel: 'critical',
     },
     {
         id: 'iron-minimal',
@@ -64,6 +66,8 @@ export const IRON_OD_NODES = [
         body: '**Elemental iron <20 mg/kg is unlikely to cause significant toxicity.** [1][4]\n\n**Management:**\n- **No GI decontamination needed**\n- **No labs required** if asymptomatic\n- Observe for 6 hours from time of ingestion\n- Discharge if remains asymptomatic with no GI symptoms\n\n**Reasons to upgrade concern:**\n- Development of any GI symptoms (nausea, vomiting, diarrhea, abdominal pain)\n- Blood in stool\n- Altered mental status\n- Unreliable history\n\n**Return precautions:** Vomiting, bloody stool, abdominal pain, lethargy, confusion.\n\n**Poison Control: 1-800-222-1222**',
         citation: [1, 4],
         next: 'iron-dispo-observe',
+        summary: '<20 mg/kg elemental iron: minimal toxicity expected — observe 6h, discharge if asymptomatic',
+        skippable: true,
     },
     {
         id: 'iron-unknown',
@@ -73,6 +77,7 @@ export const IRON_OD_NODES = [
         body: '**Unable to calculate elemental iron dose - treat based on clinical presentation and labs.** [1][2]\n\n**Immediate actions:**\n- Draw serum iron level at 4-6 hours post-ingestion\n- Abdominal X-ray (iron tablets are radiopaque, but not all formulations visible)\n- Full labs: CBC, BMP, LFTs, coags, lactate, type & screen\n- ABG/VBG if symptomatic\n\n**Clinical indicators of significant ingestion:**\n- Persistent vomiting\n- Hematemesis or bloody diarrhea\n- Abdominal pain\n- Altered mental status\n- Metabolic acidosis\n\n**When in doubt, assume significant ingestion** and manage aggressively. Err on the side of caution with pediatric patients.',
         citation: [1, 2],
         next: 'iron-workup',
+        summary: 'Unknown ingestion amount: treat as potentially significant — 6h observation minimum, check serum iron',
     },
     // =====================================================================
     // MODULE 2: CLASSIC STAGES OF IRON POISONING
@@ -88,6 +93,8 @@ export const IRON_OD_NODES = [
             { id: 'iron-stages', label: 'Classic Stages Quick Reference' },
         ],
         next: 'iron-workup',
+        summary: 'Phase 1 (0-6h): GI. Phase 2 (6-24h): deceptive calm. Phase 3 (12-48h): shock and organ failure',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: DIAGNOSTIC WORKUP
@@ -100,6 +107,7 @@ export const IRON_OD_NODES = [
         body: '**Elemental iron 20-60 mg/kg - potential for significant toxicity.** [1][2]\n\n**Immediate actions:**\n- IV access\n- Draw serum iron level at 4-6 hours post-ingestion (peak level)\n- Abdominal X-ray - radiopaque tablets may be visible\n- Labs: CBC, BMP, LFTs, coags, lactate, type & screen\n- ABG/VBG if any symptoms present\n\n**Observe closely for Stage 1 symptoms:**\n- Nausea, vomiting, diarrhea\n- Abdominal pain\n- GI bleeding\n\n**Consider GI decontamination** if significant pill burden on X-ray or recent ingestion of large amounts.',
         citation: [1, 2],
         next: 'iron-workup',
+        summary: 'Moderate (20-60 mg/kg): obtain serum iron at 4-6h, abdominal XR, BMP, CBC, coags, LFTs',
     },
     {
         id: 'iron-severe-eval',
@@ -109,6 +117,8 @@ export const IRON_OD_NODES = [
         body: '**Elemental iron >60 mg/kg - expect serious systemic toxicity.** [1][2][3]\n\n**Immediate actions:**\n- Large bore IV access x2\n- Aggressive IV fluid resuscitation\n- Type & screen (may need transfusion)\n- Draw serum iron level at 4-6 hours post-ingestion\n- Abdominal X-ray\n- Labs: CBC, BMP, LFTs, coags, lactate, ABG\n\n**Anticipate:**\n- GI hemorrhage - prepare for blood products\n- Metabolic acidosis - may need bicarbonate\n- Cardiovascular collapse\n- Need for deferoxamine\n- Possible whole bowel irrigation\n\n**Call Poison Control early: 1-800-222-1222**\n\nThese patients need ICU admission.',
         citation: [1, 2, 3],
         next: 'iron-workup',
+        summary: 'Severe (>60 mg/kg): aggressive resuscitation, early deferoxamine, monitor for organ failure',
+        safetyLevel: 'critical',
     },
     {
         id: 'iron-workup',
@@ -144,6 +154,7 @@ export const IRON_OD_NODES = [
                 next: 'iron-gi-decon',
             },
         ],
+        summary: 'STAT labs: serum iron (4-6h peak), BMP, CBC, coags, LFTs, VBG — abdominal XR for radiopaque tablets',
     },
     {
         id: 'iron-low-level',
@@ -153,6 +164,8 @@ export const IRON_OD_NODES = [
         body: '**Serum iron <350 mcg/dL at 4-6 hours post-ingestion suggests minimal toxicity.** [1][2]\n\n**Management:**\n- Supportive care\n- IV fluids for hydration\n- Antiemetics PRN\n- Serial clinical reassessment\n\n**No deferoxamine needed** for levels <350 mcg/dL in absence of symptoms.\n\n**Reasons to escalate treatment:**\n- Persistent GI symptoms despite level <350\n- GI hemorrhage\n- Metabolic acidosis\n- Altered mental status\n- Clinical deterioration\n\n**If asymptomatic with level <350:**\n- 6-hour observation\n- Repeat labs at 6 hours if any concern\n- Discharge if remains well',
         citation: [1, 2],
         next: 'iron-dispo-observe',
+        summary: 'Serum iron <350: generally non-toxic — observe, supportive care, discharge if asymptomatic at 6h',
+        skippable: true,
     },
     {
         id: 'iron-moderate-level',
@@ -162,6 +175,7 @@ export const IRON_OD_NODES = [
         body: '**Serum iron 350-500 mcg/dL indicates moderate toxicity.** [1][2]\n\n**Management:**\n- IV fluids - aggressive hydration\n- Antiemetics\n- Serial labs q4-6h (iron level, CBC, BMP, coags, lactate)\n- Close monitoring for progression\n\n**Consider deferoxamine if ANY of the following:** [1][2]\n- Symptomatic (persistent vomiting, diarrhea, abdominal pain)\n- Metabolic acidosis (even mild)\n- Signs of systemic toxicity (lethargy, tachycardia)\n- Level trending upward\n- Clinical deterioration\n\n**Admit for observation** - these patients can deteriorate during the "latent phase."',
         citation: [1, 2],
         next: 'iron-deferoxamine',
+        summary: 'Serum iron 350-500: moderate toxicity — IV fluids, monitor closely, consider WBI if tablets visible on XR',
     },
     {
         id: 'iron-high-level',
@@ -171,6 +185,8 @@ export const IRON_OD_NODES = [
         body: '**Serum iron >500 mcg/dL = severe poisoning. Deferoxamine is indicated.** [1][2][3]\n\n**Immediate actions:**\n- Start deferoxamine\n- Aggressive IV fluid resuscitation\n- ICU admission\n- Serial labs q4h\n- Prepare for cardiovascular collapse\n\n**Clinical features to expect:**\n- Hemorrhagic gastroenteritis\n- Metabolic acidosis (high anion gap)\n- Coagulopathy\n- Cardiovascular instability\n- Altered mental status\n\n**Call Poison Control: 1-800-222-1222**\n\nThese patients are critically ill.',
         citation: [1, 2, 3],
         next: 'iron-deferoxamine',
+        summary: 'Serum iron >500: severe toxicity — start deferoxamine 15 mg/kg/hr, ICU admission',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: GI DECONTAMINATION
@@ -202,6 +218,8 @@ export const IRON_OD_NODES = [
                 next: 'iron-endoscopy',
             },
         ],
+        summary: 'Activated charcoal does NOT bind iron — WBI with GoLYTELY is the only effective GI decontamination',
+        safetyLevel: 'warning',
     },
     {
         id: 'iron-wbi',
@@ -222,6 +240,7 @@ export const IRON_OD_NODES = [
             monitoring: 'Serial abdominal X-rays to confirm pill clearance. Monitor for vomiting, distension, electrolyte abnormalities.',
         },
         next: 'iron-workup',
+        summary: 'WBI: GoLYTELY 1-2 L/hr (adult) via NG until clear effluent and no tablets on repeat XR',
     },
     {
         id: 'iron-endoscopy',
@@ -231,6 +250,8 @@ export const IRON_OD_NODES = [
         body: '**Endoscopic removal may be needed for iron bezoars or large pill concretions.** [1][2]\n\n**Indications:**\n- Large pill mass visible on X-ray\n- Failed whole bowel irrigation\n- Bezoar formation\n- Gastric concretion with ongoing absorption\n\n**Considerations:**\n- Iron tablets can coalesce into hard concretions\n- Mucosal injury may complicate endoscopy\n- Risk of perforation with friable GI mucosa\n- May require surgical consultation\n\n**Surgical removal** is rarely needed but may be considered for:\n- Massive concretion\n- Failed endoscopy\n- Perforation\n- Ongoing clinical deterioration despite aggressive management\n\n**Consult GI and/or surgery early** for patients with large pill burdens.',
         citation: [1, 2],
         next: 'iron-workup',
+        summary: 'Endoscopic removal for massive tablet load not clearing with WBI — rarely needed',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: DEFEROXAMINE THERAPY
@@ -258,6 +279,8 @@ export const IRON_OD_NODES = [
                 next: 'iron-moderate-level',
             },
         ],
+        summary: 'Deferoxamine 15 mg/kg/hr IV continuous — start if serum iron >500 or shock/metabolic acidosis',
+        safetyLevel: 'critical',
     },
     {
         id: 'iron-dfo-dosing',
@@ -286,6 +309,7 @@ export const IRON_OD_NODES = [
             monitoring: 'BP closely during infusion (hypotension). Urine output. Serial iron levels, lactate, ABG. Continue until clinically improved.',
         },
         next: 'iron-dfo-duration',
+        summary: 'Deferoxamine 15 mg/kg/hr continuous IV — max 6-8 g/day, vin rosé urine = chelation working',
     },
     {
         id: 'iron-dfo-duration',
@@ -295,6 +319,8 @@ export const IRON_OD_NODES = [
         body: '**Continue deferoxamine until ALL criteria are met:** [1][2][3]\n\n✅ Patient clinically improved\n✅ Resolution of metabolic acidosis\n✅ Serum iron normalized (<350 mcg/dL)\n✅ Resolution of GI symptoms\n✅ Hemodynamic stability\n\n**Typical duration:** 24-48 hours [2]\n\n**DO NOT use "vin rose" urine color to stop therapy** - it is unreliable. [2]\n\n**Side effects:** [1][2]\n- **Hypotension** - most common, infuse slowly\n- **ARDS** - associated with prolonged infusion (>24 hours)\n- **Yersinia sepsis** - iron is a growth factor for Yersinia; deferoxamine-iron complex provides iron to bacteria [2]\n- Tachycardia\n- Urticaria\n- Visual/auditory disturbances (with chronic use)\n\n**Prolonged deferoxamine (>24 hours):**\n- Increased risk of ARDS\n- Balance ongoing need against this risk\n- Consider if patient not improving despite 24 hours of chelation',
         citation: [1, 2, 3],
         next: 'iron-rescue',
+        summary: 'Stop deferoxamine when urine clears, patient improves, and iron <350 — limit to <24h if possible',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 6: RESCUE THERAPIES
@@ -325,6 +351,7 @@ export const IRON_OD_NODES = [
                 next: 'iron-supportive',
             },
         ],
+        summary: 'Refractory iron toxicity: consider exchange transfusion or dialysis (removes deferoxamine-iron complex)',
     },
     {
         id: 'iron-exchange',
@@ -334,6 +361,8 @@ export const IRON_OD_NODES = [
         body: '**Exchange transfusion removes iron-laden blood and replaces with fresh blood.** [2]\n\n**Indications:**\n- Pediatric massive ingestion with refractory shock\n- Cardiovascular collapse not responding to deferoxamine + fluids + pressors\n- Profound metabolic acidosis not improving\n\n**Logistics:**\n- Requires large bore central venous access\n- Typically performed in ICU or PICU\n- Consult hematology/transfusion medicine\n- May exchange 1-2 blood volumes\n\n**Limitations:**\n- Resource-intensive\n- Requires adequate blood bank supply\n- Complications: hypothermia, hypocalcemia, coagulopathy\n\n**This is a salvage therapy for the most severe cases.**',
         citation: [2],
         next: 'iron-dispo-icu',
+        summary: 'Exchange transfusion for massive ingestions not responding to deferoxamine — rarely needed',
+        skippable: true,
     },
     {
         id: 'iron-dialysis',
@@ -343,6 +372,8 @@ export const IRON_OD_NODES = [
         body: '**Hemodialysis has a LIMITED role in iron poisoning.** [2][3]\n\n**What dialysis does:**\n- Removes ferrioxamine (deferoxamine-iron complex)\n- Does NOT remove free iron (protein-bound)\n- Corrects severe metabolic acidosis\n- Supports renal failure\n\n**Indications:**\n- Renal failure preventing ferrioxamine excretion\n- ARDS developing from prolonged deferoxamine (>24h)\n- Severe refractory metabolic acidosis\n- Volume overload from aggressive resuscitation\n\n**Dialysis is NOT a substitute for deferoxamine** - continue chelation during dialysis.\n\n**CRRT (continuous renal replacement therapy):**\n- Alternative for hemodynamically unstable patients\n- Slower solute clearance but better tolerated',
         citation: [2, 3],
         next: 'iron-dispo-icu',
+        summary: 'Hemodialysis removes deferoxamine-iron complex (ferrioxamine) — consider in renal failure',
+        skippable: true,
     },
     {
         id: 'iron-supportive',
@@ -352,6 +383,7 @@ export const IRON_OD_NODES = [
         body: '**Comprehensive supportive care is essential.** [1][2]\n\n**Fluid resuscitation:**\n- Aggressive crystalloid for hypovolemia\n- GI losses can be massive\n- Target adequate urine output\n\n**Blood products:**\n- PRBCs for anemia from GI bleeding\n- FFP/platelets for coagulopathy\n- Type & screen early - may need multiple units\n\n**Vasopressors:**\n- Norepinephrine first-line for refractory shock\n- May need multiple agents\n\n**Glucose:**\n- Monitor for hypoglycemia (hepatic failure)\n- D10W infusion if needed\n\n**Acidosis:**\n- Bicarbonate for pH <7.1 (controversial, supportive)\n- Address underlying cause (resuscitation, deferoxamine)\n\n**Serial labs:**\n- Iron level q4-6h until normalizing\n- CBC, BMP, LFTs, coags, lactate\n- ABG for acidosis monitoring',
         citation: [1, 2],
         next: 'iron-dispo-icu',
+        summary: 'Aggressive IV fluids for GI losses, correct coagulopathy, monitor for hepatic failure at 48-72h',
     },
     // =====================================================================
     // MODULE 7: DISPOSITION
@@ -365,6 +397,7 @@ export const IRON_OD_NODES = [
         recommendation: 'Discharge after 6-hour asymptomatic observation. Provide return precautions and safety counseling.',
         confidence: 'recommended',
         citation: [1, 4],
+        summary: 'Observe 6h minimum for all >20 mg/kg ingestions — discharge if asymptomatic with normal labs',
     },
     {
         id: 'iron-dispo-admit',
@@ -375,6 +408,7 @@ export const IRON_OD_NODES = [
         recommendation: 'Admit for serial monitoring. Low threshold for ICU transfer if clinical deterioration.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Admit moderate toxicity: persistent GI symptoms, elevated serum iron, or WBI in progress',
     },
     {
         id: 'iron-dispo-icu',
@@ -385,6 +419,7 @@ export const IRON_OD_NODES = [
         recommendation: 'ICU admission for close monitoring and aggressive treatment. Continue deferoxamine until all stopping criteria met.',
         confidence: 'definitive',
         citation: [1, 2, 3],
+        summary: 'ICU for severe toxicity: deferoxamine infusion, shock, metabolic acidosis, or organ failure',
     },
 ];
 export const IRON_OD_NODE_COUNT = IRON_OD_NODES.length;

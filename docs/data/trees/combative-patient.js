@@ -14,6 +14,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '[Combative Patient Steps Summary](#/info/comb-summary)\n\n**Scene Safety First**\n\n• Remove sharps and potential weapons from reach\n• Ensure adequate staffing — minimum 5 people for physical restraint\n• Activate security — show of force avoids need for sedation in up to 27% of cases\n• Position yourself near the exit\n• One person communicates — everyone else listens\n• ABCs, vitals, fingerstick glucose when safe to obtain\n\n[De-escalation Checklist](#/info/comb-deescalation)',
         citation: [1, 2],
         next: 'comb-redirectable',
+        summary: 'Combative Patient — review key clinical information before proceeding',
     },
     {
         id: 'comb-redirectable',
@@ -38,6 +39,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Is the Patient Redirectable? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-immediate-threat',
@@ -47,6 +49,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: 'Patient is an **immediate danger** — actively violent, weapon, or excited delirium features.\n\n**Restrain + Sedate simultaneously:**\n\n• Physical restraint per [Restraint Protocol](#/info/comb-restraint-protocol) while administering IM sedation\n• [Ketamine](#/drug/ketamine/acute agitation) 4 mg/kg IM — fastest reliable sedation (onset 3–5 min)\n• OR [Midazolam](#/drug/midazolam/acute agitation) 5 mg IM + [Haloperidol](#/drug/haloperidol/acute agitation) 10 mg IM\n• Prepare for intubation — have RSI equipment at bedside\n• Once controlled, proceed to assessment and etiology workup',
         citation: [1, 4, 5],
         next: 'comb-severe-response',
+        summary: 'Immediate Life Threat — review key clinical information before proceeding',
     },
     {
         id: 'comb-oral-willing',
@@ -70,6 +73,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Will Patient Accept Oral Medication? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-special-pop',
@@ -96,6 +100,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-parkinsons',
             },
         ],
+        summary: 'Special Population? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-elderly',
@@ -124,6 +129,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG for QTc after antipsychotic. Continuous pulse ox. Watch for dystonia, akathisia, oversedation.',
         },
+        summary: 'Elderly Patient (Age ≥65) — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-pregnant',
@@ -152,6 +158,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'Fetal heart tones after sedation. OB consult. Left lateral tilt positioning. Continuous pulse ox.',
         },
+        summary: 'Pregnant Patient — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-parkinsons',
@@ -180,6 +187,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'Watch for worsening motor symptoms. Early neurology consult. Avoid typical antipsychotics.',
         },
+        summary: 'Likely Etiology? — determine disposition and follow-up plan based on clinical findings',
     },
     // ===================================================================
     // MODULE 2: Mild-Moderate Agitation
@@ -213,6 +221,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-mild-undiff',
             },
         ],
+        summary: 'Likely Etiology? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-mild-psych',
@@ -241,6 +250,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG for QTc after antipsychotic. Watch for dystonia, akathisia. Continuous pulse ox if IM given.',
         },
+        summary: 'Psychiatric Disorder — Mild/Moderate — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-mild-etoh',
@@ -269,6 +279,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG for QTc. Avoid benzos (potentiate CNS depression with alcohol). Distinguish intoxication from withdrawal.',
         },
+        summary: 'Alcohol Intoxication — Mild/Moderate — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-mild-etoh-wd',
@@ -297,6 +308,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'CIWA scoring. Thiamine 100-500 mg IV before glucose. Antipsychotics NOT adequate alone.',
         },
+        summary: 'Alcohol / Sedative Withdrawal — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-mild-undiff',
@@ -315,6 +327,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-mild-stimulant',
             },
         ],
+        summary: 'Drug Intoxication / Undifferentiated — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-mild-anticholinergic',
@@ -343,6 +356,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG before physostigmine (QRS >120 ms = contraindicated). Pre-treat with glycopyrrolate 0.2 mg IV. Watch for cholinergic excess.',
         },
+        summary: 'Anticholinergic Delirium — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-mild-stimulant',
@@ -371,6 +385,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'Continuous pulse ox. Temperature monitoring (stimulants impair thermoregulation). Seizure precautions.',
         },
+        summary: 'Sympathomimetic / Undifferentiated Agitation — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-response-mild',
@@ -397,6 +412,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Response to Initial Treatment? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-mild-redose',
@@ -406,6 +422,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '**Redose** same agent at equal or slightly higher dose after appropriate interval:\n• Antipsychotics: ≥20 min between doses\n• Benzodiazepines: ≥10 min between doses\n\n**OR add a second class:**\n• If antipsychotic alone failed → add a benzodiazepine\n• If benzo alone failed → add an antipsychotic\n\n**⚠️ Exception:** If olanzapine IM was given, do NOT add parenteral benzo — switch to haloperidol first, then add benzo.\n\nCombination therapy is more effective than monotherapy. If still no response after 2 redoses, escalate to severe agitation pathway.',
         citation: [1, 2, 3],
         next: 'comb-response-mild',
+        summary: 'Redose or Add Second Agent — review key clinical information before proceeding',
     },
     // ===================================================================
     // MODULE 3: Severe Agitation
@@ -439,6 +456,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-severe-anticholinergic',
             },
         ],
+        summary: 'Severe Agitation — Etiology — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-severe-combo',
@@ -467,6 +485,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG for QTc after antipsychotic. Continuous pulse ox, capnography if available. BVM at bedside.',
         },
+        summary: 'Combination Therapy — Severe Agitation — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-severe-etoh',
@@ -495,6 +514,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'Respiratory monitoring critical (benzos potentiate CNS depression with alcohol). ECG for QTc. Distinguish intoxication from withdrawal.',
         },
+        summary: 'Severe Agitation — Alcohol Intoxication — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-severe-withdrawal',
@@ -523,6 +543,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'CIWA scoring. Thiamine before glucose. Seizure precautions. Antipsychotics NOT adequate alone.',
         },
+        summary: 'Severe Agitation — Withdrawal — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-severe-anticholinergic',
@@ -551,6 +572,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'ECG before physostigmine. Seizure precautions. Active cooling if hyperthermic. No antipsychotics.',
         },
+        summary: 'Severe Anticholinergic Agitation — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-severe-response',
@@ -572,6 +594,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Response to Treatment? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-refractory',
@@ -600,6 +623,7 @@ export const COMBATIVE_PATIENT_NODES = [
             },
             monitoring: 'Prepare for intubation with ketamine. RSI equipment at bedside. Cardiac monitoring for dexmedetomidine.',
         },
+        summary: 'Refractory Agitation — determine disposition and follow-up plan based on clinical findings',
     },
     // ===================================================================
     // MODULE 4: Restraints
@@ -628,6 +652,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-restraint-monitoring',
             },
         ],
+        summary: 'Physical Restraints Needed? — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-restraint-type',
@@ -637,6 +662,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: 'Select the **least restrictive** option that ensures safety:\n\n• **Soft limb restraints (4-point)** — Standard for acute agitation. Allows IV access, monitoring.\n• **Mittens / hand covers** — Supplement limb restraints when patient removing IVs/tubes.\n• **Vest / torso restraints** — Prevents sitting up. ⚠️ Asphyxiation risk — monitor closely.\n• **Hard restraints (leather)** — Extreme agitation. Increased injury risk. Reserve for refractory cases.\n• **Spit mask / hood** — Spitting/biting (biosafety). Must allow adequate ventilation.\n\n[Restraint Protocol](#/info/comb-restraint-protocol)',
         citation: [11],
         next: 'comb-restraint-apply',
+        summary: 'Restraint Type Selection — review key clinical information before proceeding',
     },
     {
         id: 'comb-restraint-apply',
@@ -646,6 +672,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '**Team approach — minimum 5 people** (1 per limb + 1 team leader).\n\nTeam leader does NOT touch patient — directs and monitors.\n\n**Application order:**\n1. Arms first (greatest threat)\n2. Then legs\n3. Each limb secured to **bed frame** (not side rails)\n\n**Positioning:**\n• Patient **supine** — NEVER prone (asphyxiation risk)\n• Diagonal pattern: R wrist → R upper rail, L wrist → L lower rail\n• Head of bed elevated\n\n**NEVER:**\n• Hogtie (wrists/ankles bound together behind back)\n• Stack mattresses on patient\n• Place knee on chest or back\n• Leave restrained patient unmonitored\n\nRemove watches, glasses, potential weapons from reach. **Always administer chemical sedation concurrently.**',
         citation: [2, 11],
         next: 'comb-restraint-monitoring',
+        summary: 'Restraint Application — review key clinical information before proceeding',
     },
     {
         id: 'comb-restraint-monitoring',
@@ -655,6 +682,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '**Every 15 minutes:**\n• Circulation checks — distal pulses, capillary refill\n• Sensation and skin integrity under restraints\n• Respiratory status\n• Offer food, water, toileting\n\n**Every 1–2 hours:**\n• Physician reassessment — document ongoing need\n• Attempt to release one limb at a time as patient calms\n\n**Order time limits:**\n• Adults (≥18): 4 hours maximum per order\n• Adolescents (9–17): 2 hours\n• Children (<9): 1 hour\n\n**Face-to-face evaluation** by physician within 1 hour of restraint initiation.\n\n**Remove restraints** as soon as patient is calm enough to be safe. Partial release (1 limb at a time) to test tolerance.',
         citation: [2, 11],
         next: 'comb-restraint-result',
+        summary: 'Restraint Monitoring & Documentation — review key clinical information before proceeding',
     },
     {
         id: 'comb-restraint-result',
@@ -664,6 +692,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '**Required documentation (Joint Commission):**\n\n1. Behavior necessitating restraints\n2. Less restrictive alternatives attempted (verbal de-escalation, PO meds)\n3. Type of restraint applied\n4. Time applied\n5. Names of all staff involved\n6. Neurovascular checks q15 min (documented)\n7. Physician face-to-face evaluation within 1 hour\n8. Physician reassessment q1–2h (documented)\n9. Ongoing need assessment at each check\n10. Patient notification of behavior criteria for discontinuation\n11. Family notification (if applicable)\n12. Time of removal and total duration\n13. Post-restraint debriefing with patient and staff\n14. Revisions to care plan\n\n**Most common regulatory citations** relate to incomplete restraint documentation.',
         citation: [11],
         next: 'comb-post-monitoring',
+        summary: 'Restraint Documentation Checklist — determine disposition and follow-up plan based on clinical findings',
     },
     // ===================================================================
     // MODULE 5: Post-Sedation Care
@@ -676,6 +705,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: '**ALL patients receiving pharmacological sedation require:**\n\n**Respiratory:**\n• Continuous pulse oximetry\n• Capnography (ETCO₂) if available — detects hypoventilation before SpO₂ drops\n• BVM and suction at bedside\n• Head of bed elevated\n\n**Cardiac:**\n• Continuous telemetry if antipsychotic given\n• **ECG** — obtain after haloperidol or droperidol for QTc\n• QTc >500 ms or increase >60 ms → discontinue agent, correct K⁺ and Mg²⁺\n\n**Neurologic:**\n• Watch for **dystonia** — treat with [Diphenhydramine](#/drug/diphenhydramine/acute dystonia) 50 mg IV/IM or [Benztropine](#/drug/benztropine/acute dystonia) 1–2 mg IV\n• Watch for **akathisia** (restlessness mistaken for worsening agitation) — do NOT escalate antipsychotic, give benzo\n\n**Labs:** CK if prolonged agitation or restraints (rhabdomyolysis). Temperature — rectal/core if concern for hyperthermia.',
         citation: [1, 2, 5],
         next: 'comb-eval-workup',
+        summary: 'Post-Sedation Monitoring — review key clinical information before proceeding',
     },
     {
         id: 'comb-eval-workup',
@@ -685,6 +715,7 @@ export const COMBATIVE_PATIENT_NODES = [
         body: 'Once safely sedated, complete the diagnostic workup. **Do not attribute agitation to "psych" until medical causes are excluded.**\n\n**All patients:**\n• Fingerstick glucose (recheck)\n• BMP, CBC, VBG with lactate\n• ECG\n• Urine drug screen (interpret cautiously)\n\n**Consider based on presentation:**\n• CT head — trauma, anticoagulation, focal deficits\n• CXR — aspiration, pneumonia\n• Blood cultures — if febrile\n• Ammonia — liver disease\n• TSH\n• CK, renal function — rhabdomyolysis from prolonged agitation\n• Serum EtOH\n• Acetaminophen / salicylate levels — if intentional ingestion\n• LP — meningeal signs, immunocompromised',
         citation: [1, 2],
         next: 'comb-disposition',
+        summary: 'Medical Evaluation — review key clinical information before proceeding',
     },
     {
         id: 'comb-disposition',
@@ -716,6 +747,7 @@ export const COMBATIVE_PATIENT_NODES = [
                 next: 'comb-dispo-discharge',
             },
         ],
+        summary: 'Disposition — assess clinical status to guide next management decision',
     },
     {
         id: 'comb-dispo-icu',
@@ -724,6 +756,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'ICU Admission',
         body: '**Indications:**\n• Intubation/RSI for airway protection\n• Refractory agitation requiring continuous sedation infusion\n• Hemodynamic instability\n• Rhabdomyolysis (CK >5000)\n• Excited delirium features — hyperthermia, metabolic acidosis\n• QTc >500 ms with arrhythmia risk\n\n**Handoff:**\n• Medications given (drug, dose, time, response)\n• Current drips\n• Restraint status and monitoring schedule\n• Pending workup results',
         citation: [1, 4],
+        summary: 'ICU Admission — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-dispo-admit',
@@ -732,6 +765,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Floor / Observation Admission',
         body: '**Indications:**\n• Ongoing alcohol withdrawal requiring serial benzo dosing\n• Active medical workup — imaging, labs pending\n• Need for continued restraints or q1–2h reassessment\n• Unclear etiology requiring monitoring\n\n**Handoff:**\n• Last sedation dose and time\n• Restraint status and next check time\n• Monitoring requirements (telemetry, pulse ox)\n• Pending studies',
         citation: [1, 2],
+        summary: 'Floor / Observation Admission — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-dispo-psych',
@@ -740,6 +774,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Psychiatric Evaluation',
         body: '**Only after medical causes excluded.**\n\n**Required before psych eval:**\n• Vitals normal\n• Labs unremarkable (or explained)\n• Patient at baseline mental status from medical standpoint\n\n**Refer for:**\n• Suicidal ideation\n• Psychotic decompensation\n• Grave disability\n\nIf patient is medically cleared but still requires chemical restraint, they are NOT ready for psychiatric evaluation — continue medical management.\n\nDocument medical clearance checklist.',
         citation: [1, 2],
+        summary: 'Psychiatric Evaluation — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'comb-dispo-discharge',
@@ -748,6 +783,7 @@ export const COMBATIVE_PATIENT_NODES = [
         title: 'Discharge',
         body: '**Criteria:**\n• Agitation resolved, at baseline mental status\n• Vitals stable\n• No medical cause requiring admission\n• Safe disposition — not intoxicated, has support\n\n**Minimum 1 hour observation** after last sedation dose.\n\nEnsure patient can ambulate safely.\n\n**Provide:**\n• If EtOH-related: substance use resources, discuss AUD treatment\n• If psychiatric: safety plan, outpatient follow-up\n\nDocument: medications given, duration of observation, mental status at discharge, disposition plan.',
         citation: [1, 2],
+        summary: 'Discharge — determine disposition and follow-up plan based on clinical findings',
     },
 ];
 export const COMBATIVE_PATIENT_NODE_COUNT = COMBATIVE_PATIENT_NODES.length;

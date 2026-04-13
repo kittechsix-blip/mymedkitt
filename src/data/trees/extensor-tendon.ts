@@ -54,6 +54,7 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
         next: 'ext-splint-overview',
       },
     ],
+    summary: 'ED-repairable zones: I, II, IV, V, VI. Refer zones III, VII, VIII to hand surgery',
   },
 
   // =====================================================================
@@ -75,6 +76,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-exam-pearls',
+    summary: 'Test extension against resistance at each joint — 90% laceration can still allow gravity extension',
+    safetyLevel: 'warning',
   },
 
   {
@@ -85,6 +88,9 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Critical Pitfalls:**\n\n- **Up to 90% tendon laceration can still allow gravity-dependent extension** - always test against resistance [3]\n- **Position of injury matters** - examine with joint in the position it was when injured\n- **Zone V over MCP** - treat as human bite until proven otherwise ("fight bite")\n\n**When to Suspect Partial Injury:**\n- Pain with extension against resistance\n- Weak extension compared to contralateral side\n- Visible tendon damage on wound exploration\n\n**Repair Thresholds:**\n| Injury | Management |\n|--------|------------|\n| <50% tendon | Splint x 6 weeks |\n| >50% tendon | Surgical repair (ED or OR) |\n| Complete laceration | Surgical repair |\n\n**Imaging:**\n- X-ray to rule out fracture/foreign body\n- High-resolution ultrasound more accurate than exam or MRI for detecting tendon injury [6]\n- MRI rarely needed in acute setting',
     citation: [3, 5, 6],
     next: 'ext-start',
+    summary: 'Zone V over MCP = fight bite until proven otherwise. Always test against resistance, not just gravity',
+    skippable: true,
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -140,6 +146,7 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
         next: 'ext-zone-6-8',
       },
     ],
+    summary: 'Odd zones overlie joints, even zones between joints — classification guides repair and referral',
   },
 
   {
@@ -157,6 +164,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-zones',
+    summary: 'Mallet finger: stack splint DIP in hyperextension x 8 weeks continuous — PIP must be free',
+    skippable: true,
   },
 
   {
@@ -167,6 +176,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Anatomy:** Lateral bands merge with central slip contribution at middle phalanx level.\n\n**ED Management:**\n\n**Partial Laceration (<50%):**\n- Wound care\n- Splint in extension x 3-4 weeks\n- Hand surgery follow-up\n\n**Complete or >50% Laceration:**\n- May repair in ED\n- Figure-of-8 sutures with 4-0 or 5-0 non-absorbable braided suture\n- Avoid shortening - can cause extension lag\n- Splint DIP in slight extension\n\n**Pearls:**\n- Tendons thin at this level - may not hold core sutures well\n- Use horizontal mattress or figure-of-8 rather than Kessler\n- Extension splint x 6 weeks post-repair',
     citation: [1, 5, 9],
     next: 'ext-zones',
+    summary: 'Zone II: figure-of-8 sutures for >50% laceration, splint DIP in extension x 6 weeks',
+    skippable: true,
   },
 
   {
@@ -184,6 +195,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-zones',
+    summary: 'Zone III (boutonniere): REFER to hand surgery — missed injuries cause PIP flexion + DIP hyperextension',
+    safetyLevel: 'warning',
   },
 
   {
@@ -194,6 +207,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Anatomy:** Broad extensor expansion with contributions from intrinsic muscles.\n\n**ED Management:**\n\n**May repair in ED** - relatively straightforward anatomy [4][5]\n\n**Partial (<50%):**\n- Splint x 3-4 weeks\n- Hand therapy follow-up\n\n**Complete or >50%:**\n- Modified Kessler or Bunnell stitch with 4-0 or 5-0 non-absorbable\n- Can use 2 figure-of-8 sutures side-by-side for broad tendon\n- Volar splint with wrist 30-45 degrees extension\n- MCP neutral, PIP/DIP free\n\n**Splinting Position:**\n- Wrist: 30-45 degrees extension\n- MCP: neutral to slight flexion\n- IP joints: free for motion\n\n**Follow-up:**\n- Hand surgery within 7 days\n- Hand therapy for early mobilization protocols',
     citation: [4, 5, 9],
     next: 'ext-zones',
+    summary: 'Zone IV: modified Kessler or Bunnell stitch — wrist 30-45 ext, MCP neutral splint x 6 weeks',
+    skippable: true,
   },
 
   {
@@ -211,6 +226,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-zones',
+    summary: 'Zone V MCP: ANY laceration from punch = fight bite — irrigate, do NOT close, antibiotics, hand surgery',
+    safetyLevel: 'critical',
   },
 
   {
@@ -221,6 +238,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**ZONE VI - Dorsum of Hand**\n\n**May repair in ED** - often technically easy [4][5]\n\n- Juncturae tendinae connect adjacent tendons\n- Juncturae minimize tendon retraction after laceration\n- Multiple tendons may be involved\n\n**Repair:**\n- Modified Bunnell stitch with 4-0 non-absorbable\n- Excellent prognosis with primary repair\n\n**Splint:** Wrist 30 degrees, MCP neutral\n\n---\n\n**ZONE VII - Wrist/Retinaculum**\n\n**REFER TO HAND SURGERY** [4][5]\n\n- Extensor retinaculum covers tendons in 6 compartments\n- High risk of adhesion formation\n- Retinaculum release/repair requires OR expertise\n- Risk of tendon bowstringing if retinaculum not properly managed\n\n**ED Management:**\n- Irrigate, debride\n- Loosely close skin\n- Volar splint in extension\n- Urgent hand surgery referral\n\n---\n\n**ZONE VIII - Distal Forearm**\n\n**REFER TO HAND SURGERY** [4][5]\n\n- Muscle-tendon junction (musculotendinous junction)\n- Multiple tendons likely involved\n- Muscle bellies require figure-of-8 mattress sutures\n- Complex repair requiring OR\n\n**ED Management:**\n- Same as Zone VII\n- Static immobilization: Wrist 45 degrees extension x 4-5 weeks',
     citation: [4, 5, 9],
     next: 'ext-zones',
+    summary: 'Zone VI: ED-repairable. Zones VII-VIII: REFER — retinaculum/muscle-tendon junction complexity',
+    skippable: true,
   },
 
   // =====================================================================
@@ -259,6 +278,7 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
         next: 'ext-dermatotenodesis',
       },
     ],
+    summary: 'Use 4-0/5-0 braided non-absorbable suture — repair within 5 days for best outcomes (97.8% ROM)',
   },
 
   {
@@ -276,6 +296,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-repair-overview',
+    summary: 'Modified Kessler: locking loop core suture for zones IV-VI, knot buried between tendon ends',
+    skippable: true,
   },
 
   {
@@ -293,6 +315,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-repair-overview',
+    summary: 'Modified Bunnell: crisscross pattern, good purchase in flat tendons — zones V-VI',
+    skippable: true,
   },
 
   {
@@ -310,6 +334,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-repair-overview',
+    summary: 'Figure-of-8: simplest technique, works for all zones especially thin distal tendons',
+    skippable: true,
   },
 
   {
@@ -327,6 +353,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-repair-overview',
+    summary: 'Dermatotenodesis: combined skin + tendon repair for Zone I open mallet injuries',
+    skippable: true,
   },
 
   // =====================================================================
@@ -344,6 +372,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       { id: 'extensor-splint-guide', label: 'Splint Protocol Guide' },
     ],
     next: 'ext-splint-types',
+    summary: 'Continuous extension critical — any flexion at repair site disrupts healing and restarts the clock',
+    safetyLevel: 'warning',
   },
 
   {
@@ -361,6 +391,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
       },
     ],
     next: 'ext-splint-early-motion',
+    summary: 'Stack splint for Zone I, finger splint for II-III, volar wrist/hand splint for IV-VIII',
+    skippable: true,
   },
 
   {
@@ -371,6 +403,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Static vs Dynamic vs Early Active Motion**\n\nResearch shows early controlled mobilization improves short-term outcomes compared to static immobilization. [9][12]\n\n**Static Immobilization:**\n- Traditional approach\n- 64% good/excellent results\n- Higher adhesion rates\n- Appropriate when hand therapy not available\n\n**Early Passive Motion (Dynamic Splinting):**\n- Outrigger splint holds fingers in extension\n- Allows active flexion against resistance\n- Requires dedicated hand therapy\n- Better outcomes but resource-intensive\n\n**Early Active Motion (EAM):**\n- Most cost-effective for Zones III-VI\n- Relative motion splint: Injured finger 15-20 degrees less motion than adjacent\n- 90% recovery in compliant patients\n- Requires patient compliance and therapist monitoring\n\n**ED Disposition:**\n- Static splinting appropriate for ED discharge\n- Early motion protocols initiated at hand therapy follow-up\n- All repairs need hand surgery F/U within 7 days',
     citation: [9, 12],
     next: 'ext-start',
+    summary: 'Static splinting for ED discharge — early motion protocols initiated at hand therapy follow-up',
+    skippable: true,
   },
 
   // =====================================================================
@@ -401,6 +435,7 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
         next: 'ext-complications',
       },
     ],
+    summary: 'ALL extensor tendon injuries need hand surgery follow-up within 7 days',
   },
 
   {
@@ -411,6 +446,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Zones Appropriate for ED Repair:** [4][5]\n\n| Zone | Condition |\n|------|----------|\n| I | Closed or open mallet (splint or dermatotenodesis) |\n| II | >50% laceration |\n| IV | Clean, sharp laceration |\n| V | Clean, sharp laceration (NOT fight bite) |\n| VI | Clean, any laceration |\n\n**Prerequisites for ED Repair:**\n- Adequate lighting, analgesia, tourniquet\n- Appropriate suture material available\n- Physician comfortable with technique\n- Ability to splint appropriately\n- Reliable follow-up confirmed\n\n**Relative Contraindications:**\n- Delayed presentation (>7 days) - may still attempt if wound clean\n- Significant contamination\n- Extensive tissue loss\n- Associated fracture requiring fixation\n- Tendon retraction beyond wound\n\n**Post-Repair Instructions:**\n- Tetanus update if needed\n- Keep splint dry and in place\n- Elevate hand above heart level\n- Return for worsening pain, swelling, drainage\n- Hand surgery follow-up in 7 days',
     citation: [4, 5],
     next: 'ext-disposition',
+    summary: 'ED repair zones I, II, IV, V (not bite), VI — confirm adequate equipment and reliable follow-up',
+    skippable: true,
   },
 
   {
@@ -421,6 +458,7 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Mandatory Hand Surgery Referral:** [4][5]\n\n| Indication | Reason |\n|------------|--------|\n| Zone III (PIP) | Complex anatomy, boutonniere risk |\n| Zone VII (Wrist) | Retinaculum management, adhesion risk |\n| Zone VIII (Forearm) | Multiple structures, muscle repair |\n| Fight bite (Zone V) | Contamination, infection risk |\n| Open fracture | Concurrent fixation needed |\n| Neurovascular injury | Multistructure repair |\n| Extensive skin loss | May need grafting |\n| Thumb injuries | Specialized repair |\n| Elite athletes | Optimal repair critical |\n| Immunocompromised | Higher infection risk |\n\n**ED Management for Referral Cases:**\n\n1. Irrigate thoroughly (500-1000 mL saline)\n2. Debride devitalized tissue\n3. Loosely approximate skin (do NOT close tightly)\n4. Volar resting splint in extension\n5. Antibiotics if contaminated:\n   - Amoxicillin-clavulanate 875/125 mg BID x 5-7 days\n6. Tetanus update\n7. Urgent hand surgery follow-up (24-72 hours)\n\n**Fight Bite - Leave Wound OPEN**',
     citation: [4, 5, 11],
     next: 'ext-disposition',
+    summary: 'Refer zones III, VII, VIII, fight bites, open fractures — irrigate, splint, urgent hand surgery 24-72h',
   },
 
   {
@@ -431,6 +469,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**Common Complications by Zone** [3][9][10]\n\n**Zone I-II:**\n- Swan neck deformity (DIP hyperextension, PIP flexion)\n- Mallet recurrence\n- Skin ulceration from splint\n\n**Zone III:**\n- Boutonniere deformity (PIP flexion, DIP hyperextension)\n- Most common long-term complication if missed/undertreated\n\n**Zone IV-VI:**\n- Adhesion formation (most common overall)\n- Extensor lag\n- Loss of flexion (impacts grip more than extension loss)\n- Tendon rupture (0.2-1.7%)\n\n**Zone VII-VIII:**\n- Adhesions to retinaculum\n- Tendon bowstringing\n- Reduced ROM\n\n**Reoperation Rates:**\n- Tenolysis for adhesions: 0-17%\n- Higher with static immobilization vs early motion protocols\n\n**Prognostic Factors:**\n- Repair within 5 days: 97.8% ROM vs 89.5% if >5 days [12]\n- Early mobilization improves outcomes\n- Patient compliance critical\n- Children heal better than adults despite prolonged immobilization\n\n**Miller Outcome Criteria:**\n- Excellent: No extension lag\n- Good: <10 degrees lag\n- Fair: 11-45 degrees lag\n- Poor: >45 degrees lag',
     citation: [3, 9, 10, 12],
     next: 'ext-disposition',
+    summary: 'Adhesion formation most common — boutonniere deformity if Zone III missed, tendon rupture 0.2-1.7%',
+    skippable: true,
   },
 
   {
@@ -441,6 +481,8 @@ export const EXTENSOR_TENDON_NODES: DecisionNode[] = [
     body: '**ED Repair Decision Matrix:**\n\n| Zone | Location | ED Repair? | Technique | Splint Position |\n|------|----------|------------|-----------|------------------|\n| I | DIP | Yes | Stack splint/Dermatotenodesis | DIP ext, PIP free |\n| II | Mid phalanx | Yes | Figure-of-8 | DIP extension |\n| III | PIP | **NO** | Refer | PIP ext, DIP free |\n| IV | Prox phalanx | Yes | Kessler | Wrist 30, MCP 0 |\n| V | MCP | Conditional* | Kessler/Bunnell | Wrist 45, MCP 20 |\n| VI | Hand | Yes | Bunnell | Wrist 30, MCP 0 |\n| VII | Wrist | **NO** | Refer | Wrist ext |\n| VIII | Forearm | **NO** | Refer | Wrist ext |\n\n*Zone V: Only if clean, sharp laceration. Fight bites require irrigation, leave open, antibiotics, referral.\n\n**Suture Selection:**\n- Hand (Zone VI): 3-0 to 4-0 braided non-absorbable\n- Fingers (Zones I-V): 4-0 to 5-0 braided non-absorbable\n\n**Universal Follow-Up:**\n- ALL injuries need hand surgery F/U within 7 days\n- Hand therapy referral for rehabilitation\n\n**Timing Matters:**\n- Repair within 5 days optimal\n- Delayed repair up to 7 days acceptable with good wound care',
     citation: [1, 2, 3, 4, 5],
     next: 'ext-start',
+    summary: 'Quick reference: zone-by-zone repair decisions, suture selection, splint positions, and follow-up',
+    skippable: true,
   },
 
 ];

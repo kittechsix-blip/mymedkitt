@@ -34,6 +34,8 @@ export const HYPOTHERMIA_NODES = [
             { id: 'hypo-ecmo-transport', label: 'ECMO Transport' },
         ],
         next: 'hypo-temp-measurement',
+        summary: 'Core temp measurement is essential — peripheral thermometers are unreliable in hypothermia',
+        safetyLevel: 'warning',
     },
     {
         id: 'hypo-temp-measurement',
@@ -43,6 +45,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Accurate core temperature is ESSENTIAL** — guides all decisions.\n\n**Preferred (most accurate):**\n- **Esophageal probe** — gold standard in intubated patients\n- **Rectal probe** — acceptable, but lags during rapid temp changes\n- **Bladder probe** — acceptable\n\n**DO NOT USE:**\n- Oral thermometry (unreliable)\n- Axillary (unreliable)\n- Temporal/forehead (grossly inaccurate)\n- Tympanic (may be falsely low if ear frozen)\n\n**If no core temp available:** Use Swiss Staging System based on clinical signs. [1][2][3]',
         citation: [1, 2, 3],
         next: 'hypo-classify',
+        summary: 'Esophageal or bladder probe for core temp — rectal temp lags behind core by 15-30 min',
+        skippable: true,
     },
     {
         id: 'hypo-classify',
@@ -77,6 +81,7 @@ export const HYPOTHERMIA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Mild 32-35°C, moderate 28-32°C, severe <28°C — management escalates with severity',
     },
     // =====================================================================
     // MODULE 2: RESUSCITATION DECISIONS
@@ -89,6 +94,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Check pulse for 30-45 seconds** — pulse may be very slow and difficult to detect.\n\n**Before starting CPR, check for HARD CONTRAINDICATIONS:**\n\n**DO NOT RESUSCITATE if:**\n- ❌ Chest wall frozen solid (incompressible)\n- ❌ Obvious lethal injuries (decapitation, truncal transection)\n- ❌ Decomposition\n- ❌ Avalanche burial >35 min WITH airway packed with snow AND asystole\n- ❌ Potassium >12 mEq/L (no survivors)\n\n**These are NOT contraindications:**\n- ✓ Muscular rigidity\n- ✓ Fixed/dilated pupils\n- ✓ Prolonged down time\n- ✓ Very low temperature [1][2][4]',
         citation: [1, 2, 4],
         next: 'hypo-arrest-contraindications',
+        summary: 'Hypothermic arrest: do NOT declare dead until warm and dead (core temp >32°C) — prolonged CPR indicated',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-arrest-contraindications',
@@ -110,6 +117,8 @@ export const HYPOTHERMIA_NODES = [
                 next: 'hypo-futile',
             },
         ],
+        summary: 'Contraindications to resuscitation: obviously lethal injuries, frozen chest (incompressible), DNR, or K+ >12',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-futile',
@@ -120,6 +129,8 @@ export const HYPOTHERMIA_NODES = [
         recommendation: 'Resuscitation not indicated due to confirmed futility criteria.',
         confidence: 'definitive',
         citation: [1, 2, 4],
+        summary: 'K+ >12 mmol/L is incompatible with life in hypothermia — reasonable to terminate resuscitation',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: HYPOTHERMIC CARDIAC ARREST MANAGEMENT
@@ -132,6 +143,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Start CPR immediately if no hard contraindications.**\n\n**CPR modifications:**\n- Standard compression rate and depth\n- **Mechanical CPR strongly preferred** for prolonged resuscitation/transport\n- **Intermittent CPR acceptable** if continuous not possible (unique to hypothermia)\n\n**Gentle handling:**\n- Physical manipulation can precipitate VF\n- Move patient horizontally\n- Avoid rough movements\n\n**Rhythm check:**\n- VF/VT → Attempt defibrillation (see next)\n- Asystole/PEA → Continue CPR, focus on rewarming [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'hypo-arrest-defib',
+        summary: 'Start CPR, withhold meds and defib until core >30°C — one shock attempt if VF, then rewarm first',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-arrest-defib',
@@ -141,6 +154,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**VF/VT detected → Attempt defibrillation**\n\n**Temperature-based approach:**\n\n| Core Temp | Defibrillation Strategy |\n|-----------|------------------------|\n| **<30°C** | Attempt 1-3 shocks max, then DEFER until rewarmed |\n| **30-35°C** | Resume standard defibrillation attempts |\n| **>35°C** | Standard ACLS |\n\n**Why limit shocks below 30°C:**\n- Severely hypothermic myocardium is refractory to defibrillation\n- Repeated shocks unlikely to convert and may cause myocardial damage\n- Energy better spent on rewarming\n\n**European approach:** Maximum 3 shocks below 30°C, then wait for rewarming\n**AHA approach:** May be reasonable to continue if no response [1][2][4]',
         citation: [1, 2, 4],
         next: 'hypo-arrest-drugs',
+        summary: 'One defibrillation attempt for VF if temp >30°C — if unsuccessful, defer until core temp >30°C',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-arrest-drugs',
@@ -150,6 +165,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Drugs accumulate in hypothermia** — hepatic metabolism markedly reduced.\n\n| Core Temp | Drug Strategy |\n|-----------|---------------|\n| **<30°C** | **WITHHOLD** all vasopressors and antiarrhythmics |\n| **30-35°C** | **DOUBLE intervals** — epinephrine q6-10 min (not q3-5 min) |\n| **≥35°C** | Standard ACLS dosing |\n\n**Why withhold below 30°C:**\n- Effects that last seconds at 37°C can last 5+ minutes at low temps\n- Risk of drug toxicity when patient rewarms\n- Focus should be on REWARMING, not drugs\n\n**Vasopressors in non-arrest hypothermia:**\n- Generally ineffective below 30°C\n- Vasoconstriction impairs rewarming [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'hypo-arrest-ecmo-decision',
+        summary: 'Withhold ACLS drugs until core temp >30°C — drugs accumulate and may cause toxicity',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-arrest-ecmo-decision',
@@ -172,6 +189,7 @@ export const HYPOTHERMIA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'ECMO for hypothermic arrest with no signs of life and K+ <12 — best outcomes for rewarming',
     },
     // =====================================================================
     // MODULE 4: ECMO TRANSPORT
@@ -184,6 +202,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Transport to ECMO center EVEN IF NOT CLOSEST HOSPITAL.**\n\n**Pre-transport:**\n1. Calculate HOPE score (≥10% survival → proceed)\n2. Obtain K+ (must be <12 mEq/L)\n3. Activate ECMO team at receiving center\n4. Apply mechanical CPR device if available\n\n**During transport:**\n- **Continuous CPR** — do not stop for loading/unloading\n- **Mechanical CPR preferred** — consistent quality during movement\n- **Horizontal positioning** — avoid orthostatic stress\n- **Gentle handling** — rough movement can precipitate VF\n- **Begin rewarming** — warm IV fluids, heated blankets to TRUNK only [1][2][4][5]',
         citation: [1, 2, 4, 5],
         next: 'hypo-transport-details',
+        summary: 'Transport to ECMO center with continuous CPR — coordinate with receiving center early',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-transport-details',
@@ -193,6 +213,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**ECMO Transport Checklist:**\n\n☐ **HOPE score calculated** — document survival probability\n☐ **K+ confirmed <12 mEq/L** — non-hemolyzed sample\n☐ **ECMO team notified** — ETA and patient status\n☐ **Mechanical CPR applied** — LUCAS, AutoPulse, or similar\n☐ **Core temp probe in place** — continuous monitoring\n☐ **Warm IV fluids running** — 40-43°C crystalloid\n☐ **Heated blankets to trunk** — avoid extremities (afterdrop risk)\n☐ **Patient secured horizontally**\n☐ **Team briefed** — continuous CPR, gentle handling\n\n**DO NOT rewarm extremities** — cold blood return causes afterdrop and arrhythmias. [1][2][4][5]',
         citation: [1, 2, 4, 5],
         next: 'hypo-transport-continue',
+        summary: 'Transport checklist: continuous CPR, warm IV fluids, core temp monitoring, receiving team notified',
+        skippable: true,
     },
     {
         id: 'hypo-transport-continue',
@@ -202,6 +224,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Continuous CPR is critical** — but intermittent is acceptable if continuous impossible.\n\n**Monitor for:**\n- VF conversion (pause briefly to check rhythm)\n- ROSC (check pulse q5 min during CPR pauses)\n- Core temp changes\n\n**If ROSC during transport:**\n- Continue rewarming\n- Standard post-arrest care\n- Still transport to ECMO center (may need ECMO for rewarming or cardiogenic shock)\n\n**Arriving at ECMO center:**\n- Handoff to ECMO team\n- Provide HOPE score, K+, down time, CPR quality\n- ECMO cannulation proceeds under ongoing CPR [1][2][4][5]',
         citation: [1, 2, 4, 5],
         next: 'hypo-ecmo-rewarming',
+        summary: 'Continue CPR during transport — mechanical CPR device (LUCAS) preferred for transport',
+        skippable: true,
     },
     {
         id: 'hypo-ecmo-rewarming',
@@ -211,6 +235,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**VA-ECMO rewarming protocol:**\n\n**Rewarming rate:** 6-10°C/hour (fastest available method)\n\n**Target:** Core temp 32-34°C initially, then slow to 36-37°C\n\n**During ECMO rewarming:**\n- Monitor K+ frequently (shifts out of cells during rewarming)\n- Watch for reperfusion injury\n- Anticipate coagulopathy correction as temp normalizes\n- Gradual weaning as cardiac function recovers\n\n**Post-ECMO:**\n- Targeted temperature management per post-arrest protocols\n- Neuro-prognostication delayed ≥72 hours\n- Many patients recover excellent neurological function [1][4][5]',
         citation: [1, 4, 5],
         next: 'hypo-disposition',
+        summary: 'ECMO is gold standard for hypothermic arrest — rewarms at 1-2°C per 3-5 min with circulatory support',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: NON-ECMO REWARMING
@@ -223,6 +249,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**When ECMO unavailable, use aggressive invasive techniques:**\n\n**Thoracic lavage (most effective non-ECMO method):**\n- Rewarming rate: 3-6°C/hour\n- Bilateral chest tubes\n- Instill 300-500 mL warmed (42°C) crystalloid via anterior tube\n- Drain via posterolateral tube\n- Cycle q15 min or continuous flow\n\n**Peritoneal lavage:**\n- Rewarming rate: 3-4°C/hour\n- 40-42°C crystalloid\n- Continuous or intermittent drainage\n\n**Combine with:**\n- Warm IV fluids (40-43°C)\n- Heated humidified O2\n- Active external warming to TRUNK [1][2][3]',
         citation: [1, 2, 3],
         next: 'hypo-thoracic-lavage',
+        summary: 'Invasive rewarming without ECMO: warm IV fluids 42°C, bladder lavage, thoracic lavage',
+        skippable: true,
     },
     {
         id: 'hypo-thoracic-lavage',
@@ -232,6 +260,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Procedure:**\n\n1. **Bilateral chest tube insertion**\n   - Anterior tube (2nd-3rd ICS MCL) for INSTILLATION\n   - Posterolateral tube (5th ICS MAL) for DRAINAGE\n\n2. **Fluid preparation**\n   - Warm crystalloid to 42°C (use fluid warmer or microwave)\n   - LR or NS acceptable\n\n3. **Instillation**\n   - Infuse 300-500 mL via anterior tube\n   - Clamp for 15 minutes\n   - Unclamp and drain via posterior tube\n   - Repeat cycle\n\n4. **Alternative: continuous flow**\n   - Requires two-tube system per hemithorax\n   - Higher flow rates possible\n\n**Monitor:** Core temp, chest tube output, lung sounds [1][2][3]',
         citation: [1, 2, 3],
         next: 'hypo-arrest-terminate',
+        summary: 'Thoracic lavage: bilateral chest tubes, warm saline in one side, drain from other — 3°C/h rewarming',
+        skippable: true,
     },
     {
         id: 'hypo-arrest-terminate',
@@ -241,6 +271,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**When to stop resuscitation:**\n\n**Continue CPR until:**\n- ROSC achieved, OR\n- **Core temp ≥32°C with persistent asystole** = can consider termination, OR\n- K+ confirmed >12 mEq/L during resuscitation, OR\n- Other contraindication identified\n\n**"Warm and dead" = 32°C minimum**\n\n**Do NOT terminate based on:**\n- Prolonged down time alone\n- Fixed/dilated pupils\n- Muscular rigidity\n- Multiple failed defibrillations (while still cold)\n\n**Documentation:** Core temp at termination, total resuscitation time, reason for termination. [1][2][4]',
         citation: [1, 2, 4],
         next: 'hypo-disposition',
+        summary: 'Terminate resuscitation if K+ >12, incompressible chest, or obvious lethal injuries',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: NON-ARREST MANAGEMENT
@@ -264,6 +296,7 @@ export const HYPOTHERMIA_NODES = [
             monitoring: 'Core temp q30-60 min, cardiac monitoring, serial neuro checks.',
         },
         next: 'hypo-mild-monitoring',
+        summary: 'Mild (32-35°C): passive external rewarming, warm blankets, warm environment, warm PO fluids',
     },
     {
         id: 'hypo-mild-monitoring',
@@ -285,6 +318,7 @@ export const HYPOTHERMIA_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Monitor during rewarming: serial core temp, ECG, glucose, electrolytes — watch for arrhythmias',
     },
     {
         id: 'hypo-mild-dispo',
@@ -295,6 +329,7 @@ export const HYPOTHERMIA_NODES = [
         recommendation: 'Mild hypothermia with good response — may discharge if criteria met.',
         confidence: 'recommended',
         citation: [1, 2, 3],
+        summary: 'Discharge mild hypothermia if rewarmed >36°C, normal ECG, stable vitals, warm safe environment',
     },
     {
         id: 'hypo-moderate-mgmt',
@@ -323,6 +358,7 @@ export const HYPOTHERMIA_NODES = [
             monitoring: 'Continuous cardiac monitor, core temp q15-30 min, K+.',
         },
         next: 'hypo-moderate-complications',
+        summary: 'Moderate (28-32°C): active external rewarming — Bair Hugger, warm IV fluids (42°C), continuous monitoring',
     },
     {
         id: 'hypo-moderate-complications',
@@ -332,6 +368,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**ECG changes:**\n- Sinus bradycardia (universal)\n- Prolonged PR, QRS, QT\n- J waves (Osborn waves) — pathognomonic below 32°C\n- Atrial fibrillation (common)\n- VF risk increases as QRS widens\n\n**Coagulopathy:**\n- Platelet dysfunction + enzyme inhibition below 35°C\n- Lab PT/aPTT run at 37°C — won\'t detect hypothermic coagulopathy\n- Primary treatment: REWARM\n\n**Electrolytes:**\n- Cooling: Hypokalemia (intracellular shift), hyperglycemia\n- Rewarming: **HYPERKALEMIA** (K+ shifts back out)\n- **Do NOT aggressively replace K+ during hypothermia!** [1][2][3]',
         citation: [1, 2, 3],
         next: 'hypo-moderate-dispo',
+        summary: 'Moderate hypothermia complications: afterdrop, rewarming arrhythmias, coagulopathy — handle gently',
+        safetyLevel: 'warning',
     },
     {
         id: 'hypo-moderate-dispo',
@@ -342,6 +380,7 @@ export const HYPOTHERMIA_NODES = [
         recommendation: 'Admit all moderate hypothermia patients. ICU if unstable or arrhythmias.',
         confidence: 'definitive',
         citation: [1, 2, 3],
+        summary: 'Admit all moderate hypothermia for monitoring — ICU if arrhythmias or complications',
     },
     {
         id: 'hypo-severe-mgmt',
@@ -351,6 +390,8 @@ export const HYPOTHERMIA_NODES = [
         body: '**Swiss Stage HT-III: Unconscious, vital signs present**\n\n**EXTREME VF RISK — handle as if "cardiac time bomb"**\n\n**Immediate management:**\n- Minimize all movement\n- Horizontal positioning only\n- Continuous cardiac monitoring\n- Secure airway if GCS ≤8 (RSI acceptable, ketamine preferred)\n- Active internal rewarming required\n\n**If hemodynamically stable:**\n- Warm IV fluids + heated O2 + forced air warming\n- Prepare for ECMO if available\n\n**If hemodynamically unstable:**\n- ECMO strongly preferred\n- If no ECMO: thoracic lavage + peritoneal lavage [1][2][3][4]',
         citation: [1, 2, 3, 4],
         next: 'hypo-severe-decision',
+        summary: 'Severe (<28°C): active internal rewarming, handle extremely gently — rough movement triggers VF',
+        safetyLevel: 'critical',
     },
     {
         id: 'hypo-severe-decision',
@@ -379,6 +420,7 @@ export const HYPOTHERMIA_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'ECMO for unstable severe hypothermia — invasive rewarming if ECMO unavailable',
     },
     // =====================================================================
     // DISPOSITION
@@ -392,6 +434,7 @@ export const HYPOTHERMIA_NODES = [
         recommendation: 'ICU admission for post-rewarming monitoring. Investigate underlying cause. Delayed neuro-prognostication.',
         confidence: 'definitive',
         citation: [1, 2, 3, 4],
+        summary: 'ICU for moderate-severe hypothermia. Discharge mild only if reliable follow-up and warm environment',
     },
 ];
 export const HYPOTHERMIA_MODULE_LABELS = [

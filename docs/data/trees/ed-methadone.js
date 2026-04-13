@@ -16,6 +16,7 @@ export const ED_METHADONE_NODES = [
         citation: [1, 2, 3],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'meth-scenario',
+        summary: '72-hour rule allows any DEA provider to administer/dispense 3-day methadone for withdrawal',
     },
     {
         id: 'meth-scenario',
@@ -45,6 +46,7 @@ export const ED_METHADONE_NODES = [
                 next: 'meth-inpatient',
             },
         ],
+        summary: 'Determine: established OTP patient, new initiation candidate, unclear dose, or inpatient bridging',
     },
     {
         id: 'meth-init-screen',
@@ -66,6 +68,8 @@ export const ED_METHADONE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Exclude AMS, respiratory depression, QTc >500, active sedative intoxication before initiation',
+        safetyLevel: 'warning',
     },
     {
         id: 'meth-vs-bup',
@@ -87,6 +91,7 @@ export const ED_METHADONE_NODES = [
                 next: 'meth-bup-redirect',
             },
         ],
+        summary: 'Buprenorphine generally preferred — methadone when fentanyl use or prior bup induction failures',
     },
     {
         id: 'meth-bup-redirect',
@@ -97,6 +102,7 @@ export const ED_METHADONE_NODES = [
         recommendation: 'Buprenorphine is first-line for most ED MOUD initiations. See Opioid Withdrawal consult for protocols.',
         confidence: 'recommended',
         citation: [6],
+        summary: 'Buprenorphine is safer (partial agonist ceiling), no OTP required, better evidence for ED initiation',
     },
     // ===================================================================
     // MODULE 2 - Verification (5 nodes)
@@ -108,6 +114,8 @@ export const ED_METHADONE_NODES = [
         title: 'OTP Dose Verification',
         body: '**Guest dosing** = administering methadone to a patient who is already enrolled in an OTP but cannot access their usual clinic.\n\n**Verification is critical.** Patients may:\n- Overstate their dose (risk of respiratory depression)\n- Have been discharged from their program\n- Have last-dosed more recently than reported\n\n**To verify:**\n1. Call the OTP directly (patient should have clinic contact info)\n2. Confirm: current enrollment, last dose date, and current daily dose\n3. Document the verification in the chart\n\n**If OTP is closed** (weekend/holiday): proceed to "Unable to Verify" pathway.',
         next: 'meth-verify-result',
+        summary: 'Always verify dose with OTP before guest dosing — patients may overstate dose',
+        safetyLevel: 'warning',
     },
     {
         id: 'meth-verify-result',
@@ -133,6 +141,7 @@ export const ED_METHADONE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Determine if OTP verified the dose, clinic is closed, or patient is not enrolled',
     },
     {
         id: 'meth-unclear-dose',
@@ -141,6 +150,8 @@ export const ED_METHADONE_NODES = [
         title: 'Uncertain Methadone Dose',
         body: 'When a patient claims to be on methadone maintenance but dose cannot be verified:\n\n**Do NOT administer the patient\'s claimed full dose.** Risk of respiratory depression if dose is overstated.\n\n**Safe approach:**\n- Give conservative dose (20-30 mg) regardless of claimed dose\n- Explain rationale to patient\n- Document inability to verify\n- Arrange OTP follow-up for proper dosing\n\n**Red flags for dose overstatement:**\n- Very high claimed dose (>120 mg) without tolerance signs\n- No withdrawal symptoms despite claiming to have missed doses\n- History of methadone diversion\n- Recent incarceration or hospitalization (tolerance may have decreased)',
         next: 'meth-unverified-dose',
+        summary: 'When dose unverified, give conservative 20-30mg regardless of claimed dose — safety first',
+        safetyLevel: 'warning',
     },
     {
         id: 'meth-not-enrolled',
@@ -151,6 +162,8 @@ export const ED_METHADONE_NODES = [
         recommendation: 'Patient not enrolled in OTP. Treat as new initiation (max 30 mg) or consider buprenorphine. Do not give high-dose methadone without verified tolerance.',
         confidence: 'definitive',
         citation: [4],
+        summary: 'Not enrolled in OTP — treat as new initiation (max 30mg) or consider buprenorphine instead',
+        safetyLevel: 'warning',
     },
     {
         id: 'meth-inpatient',
@@ -161,6 +174,7 @@ export const ED_METHADONE_NODES = [
         recommendation: 'Continue verified methadone dose during hospitalization. Coordinate discharge with OTP. Do not abruptly discontinue.',
         confidence: 'definitive',
         citation: [2, 8],
+        summary: 'Continue verified methadone during hospitalization — abrupt discontinuation causes severe withdrawal',
     },
     // ===================================================================
     // MODULE 3 - Dosing (7 nodes)
@@ -185,6 +199,7 @@ export const ED_METHADONE_NODES = [
             },
             monitoring: 'Observe 30 minutes. ECG if dose >100 mg or other QTc risk factors. Document OTP verification.',
         },
+        summary: 'Administer verified OTP dose, observe 30 min, may return daily for up to 72h',
     },
     {
         id: 'meth-unverified-dose',
@@ -215,6 +230,7 @@ export const ED_METHADONE_NODES = [
             },
             monitoring: 'COWS score before and after dosing. Respiratory rate, SpO2, sedation level. Observe 30 min minimum.',
         },
+        summary: 'Give 30mg PO when unverified — may add 10mg after 2-4h if COWS still elevated (max 40mg Day 1)',
     },
     {
         id: 'meth-init-dose',
@@ -225,6 +241,7 @@ export const ED_METHADONE_NODES = [
         citation: [2, 3, 4, 11],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'meth-init-protocol',
+        summary: 'Standard starting dose 30mg PO — reduce to 20mg if recent opioid use or concurrent sedatives',
     },
     {
         id: 'meth-init-protocol',
@@ -246,6 +263,7 @@ export const ED_METHADONE_NODES = [
             },
             monitoring: 'COWS before and after dosing. Respiratory rate q1h x 4h after first dose. SpO2. Sedation level. QTc if risk factors.',
         },
+        summary: 'Day 1: 30mg (max 40mg), Days 2-3: 40mg — must link to OTP within 72 hours',
     },
     {
         id: 'meth-rapid-titration',
@@ -256,6 +274,8 @@ export const ED_METHADONE_NODES = [
         citation: [11, 12],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'meth-monitoring',
+        summary: 'Fentanyl-era rapid titration: 30mg start, 10mg increments — typical effective range 50-70mg',
+        skippable: true,
     },
     {
         id: 'meth-alt-approach',
@@ -266,6 +286,7 @@ export const ED_METHADONE_NODES = [
         recommendation: 'If methadone contraindicated: consider buprenorphine (preferred) or symptomatic treatment with non-opioid adjuncts.',
         confidence: 'recommended',
         citation: [6],
+        summary: 'If methadone contraindicated: buprenorphine preferred, or clonidine + symptomatic management',
     },
     {
         id: 'meth-dosing-special',
@@ -274,6 +295,9 @@ export const ED_METHADONE_NODES = [
         title: 'Special Populations',
         body: '**Pregnancy:**\n- Methadone is preferred over buprenorphine in pregnancy (longer track record)\n- Do NOT discontinue methadone in pregnant patients (risk of fetal distress, preterm labor)\n- Continue home dose and coordinate with OB and OTP\n- Higher doses often needed in third trimester (increased metabolism)\n\n**Hepatic impairment:**\n- Reduce dose by 50% in severe liver disease\n- Monitor for accumulation (long half-life)\n\n**Renal impairment:**\n- Minimal dose adjustment needed (hepatic metabolism)\n- Monitor for accumulation in severe CKD\n\n**Elderly:**\n- Start low (10-20 mg)\n- Slower titration\n- Higher risk of respiratory depression\n- QTc monitoring more important',
         next: 'meth-monitoring',
+        summary: 'Pregnancy: methadone preferred, do NOT discontinue. Liver disease: reduce dose 50%',
+        skippable: true,
+        safetyLevel: 'warning',
     },
     // ===================================================================
     // MODULE 4 - Monitoring (5 nodes)
@@ -286,6 +310,7 @@ export const ED_METHADONE_NODES = [
         body: '**Post-dose monitoring:**\n- Respiratory rate: q15-30 min x 2h, then q1h x 2h\n- SpO2: continuous or q30 min\n- Sedation: assess response to verbal/tactile stimuli\n- COWS score: before and 2-4 hours after dosing\n\n**Observation duration:**\n- First dose: minimum 2-4 hours\n- Subsequent doses: minimum 30-60 minutes if patient known tolerant\n- Guest dosing (verified): 30 minutes minimum\n\n**Red flags requiring intervention:**\n- RR < 10\n- SpO2 < 92%\n- Excessive sedation (difficult to arouse)\n- Slurred speech, ataxia',
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'meth-qtc-risk',
+        summary: 'Monitor RR q15-30min x 2h, SpO2 continuous, COWS before and 2-4h after dosing',
     },
     {
         id: 'meth-qtc-risk',
@@ -295,6 +320,9 @@ export const ED_METHADONE_NODES = [
         body: '**Methadone prolongs QTc in a dose-dependent manner.** [13]\n\n**When to obtain ECG:**\n- Dose > 100 mg/day\n- Combining with other QT-prolonging drugs\n- History of cardiac disease, syncope, or arrhythmia\n- Family history of long QT syndrome\n- Electrolyte abnormalities (hypoK, hypoMg)\n\n**When ECG NOT required:**\n- Single dose <= 40 mg in otherwise healthy patient\n- Known stable maintenance dose without prior QTc issues\n- Guest dosing at verified usual dose\n\n**QTc thresholds:**\n- < 450 ms: Low risk\n- 450-499 ms: Moderate risk (discuss risks/benefits, monitor)\n- >= 500 ms: High risk (avoid methadone if possible, cardiology consult)',
         citation: [13, 14],
         next: 'meth-qtc-meds',
+        summary: 'ECG if dose >100mg or QT-prolonging drugs — QTc ≥500ms: avoid methadone, cardiology consult',
+        skippable: true,
+        safetyLevel: 'warning',
     },
     {
         id: 'meth-qtc-meds',
@@ -304,6 +332,8 @@ export const ED_METHADONE_NODES = [
         body: '**Common QT-prolonging medications in OUD patients:**\n\n- **Ondansetron** (often used for withdrawal nausea)\n- **Loperamide** (especially at high/abused doses)\n- **Antipsychotics:** haloperidol, quetiapine, ziprasidone\n- **Antidepressants:** citalopram, escitalopram, amitriptyline\n- **Antibiotics:** fluoroquinolones, azithromycin\n- **Antiemetics:** prochlorperazine, promethazine\n\n**CYP3A4 inhibitors (increase methadone levels):**\n- Fluconazole, ketoconazole\n- Erythromycin, clarithromycin\n- Ritonavir, other HIV PIs\n- Grapefruit juice\n\n**CYP3A4 inducers (decrease methadone levels):**\n- Rifampin (most significant)\n- Phenytoin, carbamazepine, phenobarbital\n- Efavirenz, nevirapine',
         citation: [13],
         next: 'meth-resp-depression',
+        summary: 'Common QTc interactions: ondansetron, antipsychotics, fluoroquinolones, CYP3A4 inhibitors',
+        skippable: true,
     },
     {
         id: 'meth-resp-depression',
@@ -312,6 +342,8 @@ export const ED_METHADONE_NODES = [
         title: 'Respiratory Depression Management',
         body: '**Methadone respiratory depression:**\n- May be delayed (peak effect 3-4h after PO dosing)\n- Prolonged (half-life 8-59 hours)\n- No ceiling effect (unlike buprenorphine)\n\n**If respiratory depression occurs:**\n1. Stimulate patient, support airway\n2. **Naloxone** - but be prepared for prolonged infusion\n3. Initial: 0.04-0.4 mg IV (titrate to RR, not full reversal)\n4. Infusion may be needed: 0.25-0.5 mg/hour\n5. Monitor for at least 8-12 hours after last methadone dose\n\n**Avoid full reversal** if possible - precipitates severe withdrawal and likely patient leaving AMA.\n\n**Prevention:**\n- Conservative dosing when dose unverified\n- Extended observation after first dose\n- Caution with concurrent sedatives',
         next: 'meth-disposition',
+        summary: 'Methadone respiratory depression may be DELAYED (peak 3-4h) and PROLONGED (t1/2 8-59h)',
+        safetyLevel: 'critical',
     },
     {
         id: 'meth-overdose',
@@ -333,6 +365,8 @@ export const ED_METHADONE_NODES = [
             },
             monitoring: 'Continuous cardiac monitoring. RR, SpO2, sedation level. QTc monitoring. Electrolytes (K+, Mg2+). Observe minimum 8-12 hours.',
         },
+        summary: 'Titrate naloxone to RR not full reversal — continuous infusion often needed, observe 8-24h',
+        safetyLevel: 'critical',
     },
     // ===================================================================
     // MODULE 5 - Disposition & OTP Linkage (6 nodes)
@@ -356,6 +390,7 @@ export const ED_METHADONE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Assess stability for discharge with OTP plan vs observation/admission for high-risk features',
     },
     {
         id: 'meth-discharge',
@@ -366,6 +401,7 @@ export const ED_METHADONE_NODES = [
         recommendation: 'Discharge with OTP appointment within 72 hours. May dispense up to 3-day supply. Provide naloxone and clear return precautions.',
         confidence: 'definitive',
         citation: [2, 3, 9],
+        summary: 'Discharge with OTP appointment within 72h, naloxone kit, and clear return precautions',
     },
     {
         id: 'meth-admit',
@@ -376,6 +412,7 @@ export const ED_METHADONE_NODES = [
         recommendation: 'Admit for respiratory depression, QTc >500 ms, or inability to safely discharge. Continue methadone, do not abruptly stop.',
         confidence: 'recommended',
         citation: [8],
+        summary: 'Admit if respiratory concerns, QTc prolongation, polysubstance use, or social instability',
     },
     {
         id: 'meth-linkage-barriers',
@@ -383,6 +420,8 @@ export const ED_METHADONE_NODES = [
         module: 5,
         title: 'Linkage Barriers',
         body: '**Common barriers to OTP linkage:**\n\n- **Transportation:** OTPs require daily in-person visits initially\n- **Capacity:** Wait lists at many programs\n- **Hours:** Most open early morning only\n- **Cost:** Insurance, Medicaid coverage varies\n- **Distance:** Rural areas may have limited OTP access\n\n**Predictors of successful 72-hour linkage:** [15]\n- OTP enrollment at time of ED visit (OR 2.63)\n- Higher methadone dose (OR 1.20 per 10 mg)\n- Discharge to post-acute care facility (OR 2.12)\n\n**Negative predictor:**\n- Co-use of opioids and stimulants (OR 0.48)\n\n**If linkage not possible within 72 hours:** Buprenorphine may be better option (can prescribe longer bridge without OTP requirement).',
+        summary: 'Common OTP linkage barriers: transportation, wait lists, hours, cost — buprenorphine if linkage impossible',
+        skippable: true,
         citation: [15],
         next: 'meth-documentation',
     },
@@ -392,6 +431,8 @@ export const ED_METHADONE_NODES = [
         module: 5,
         title: 'Documentation Requirements',
         body: '**Required documentation for 72-hour rule use:**\n\n1. Clinical indication for methadone (opioid withdrawal, OUD)\n2. COWS score before and after treatment\n3. Doses administered (with times)\n4. Doses dispensed for take-home (if any)\n5. OTP referral made (program name, appointment date/time)\n6. Patient counseling performed (overdose risk, safe storage, naloxone)\n7. Statement that methadone was provided under 21 CFR 1306.07(b)\n\n**For guest dosing:**\n- Document OTP name and phone number\n- Name of person who verified dose\n- Verified dose amount and last dose date\n\n**Prescription (if dispensing):**\n- "Methadone 40 mg PO daily x 2 days for opioid withdrawal under 21 CFR 1306.07(b)"',
+        summary: 'Document 72-hour rule use, COWS scores, doses given/dispensed, and OTP referral in chart',
+        skippable: true,
         next: 'meth-harm-reduction',
     },
     {
@@ -401,6 +442,8 @@ export const ED_METHADONE_NODES = [
         title: 'Harm Reduction & Education',
         body: '**Before discharge:**\n\n1. **Naloxone** - prescribe or provide\n2. **Overdose risk counseling:**\n   - Tolerance decreases rapidly during abstinence\n   - Risk of overdose highest in first 2 weeks of treatment\n   - Never use alone\n   - Avoid mixing with benzodiazepines, alcohol\n3. **Fentanyl test strips** if available\n4. **Safe storage:**\n   - Methadone is extremely dangerous to opioid-naive individuals\n   - Keep locked away from children and others\n   - Single dose can be fatal to a child\n5. **SAMHSA Helpline:** 1-800-662-4357\n6. **Return to ED** if unable to reach OTP appointment',
         recommendation: 'Provide naloxone, overdose risk counseling, safe storage education. SAMHSA helpline: 1-800-662-4357.',
+        summary: 'Prescribe naloxone, counsel on overdose risk and safe storage — methadone lethal to opioid-naive',
+        safetyLevel: 'warning',
         confidence: 'definitive',
         citation: [6, 9],
     },

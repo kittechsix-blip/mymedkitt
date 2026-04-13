@@ -25,6 +25,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '[Airway Steps Summary](#/info/dab-summary) — rapid-reference stepwise pathway.\n\n**Bougie-first intubation** achieves **98% first-pass success** vs 87% with stylet in difficult airways (BEAM trial, JAMA 2018). The benefit is strongest in poor laryngoscopic views (CL III–IV): RR **1.60** for first-pass success.\n\n**Critical context:** The BOUGIE trial (JAMA 2021) showed no benefit at sites with low bougie experience (median 10 prior uses) — **operator skill, not device alone, drives success.** Video laryngoscopy adds 14.3% absolute improvement in first-pass success over direct laryngoscopy (DEVICE trial, NEJM 2023).\n\n**Before paralysis:** Assess predicted difficulty using validated mnemonics. Have backup equipment at bedside — including surgical airway kit — before induction.',
         citation: [1, 2, 3, 5],
         next: 'dab-lemon',
+        summary: 'Difficult Airway — Bougie-First Approach — review key clinical information before proceeding',
     },
     {
         id: 'dab-lemon',
@@ -39,6 +40,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         ],
         calculatorLinks: [{ id: 'lemon-score', label: 'LEMON Score Calculator' }],
         next: 'dab-backup',
+        summary: 'LEMON — Difficult Intubation Assessment — review key clinical information before proceeding',
     },
     {
         id: 'dab-backup',
@@ -48,6 +50,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**MOANS — Difficult Bag-Mask Ventilation:**\n• **M**ask seal — beard, blood, disrupted anatomy\n• **O**besity/Obstruction — BMI >26, angioedema, Ludwig\n• **A**ge >55\n• **N**o teeth — edentulous (leave dentures in for seal)\n• **S**tiff lungs / Sleep apnea — COPD, ARDS, asthma\n\n**RODS — Difficult Supraglottic Airway:**\n• **R**estricted mouth opening (<2 cm)\n• **O**bstruction (supraglottic mass, edema)\n• **D**isrupted/distorted anatomy\n• **S**tiff lungs / cervical Spine immobility\n\n**SHORT — Difficult Cricothyrotomy:**\n• **S**urgery — prior neck surgery\n• **H**ematoma / infection in neck\n• **O**besity / fixed flexion\n• **R**adiation to neck (fibrosis)\n• **T**umor involving airway\n\n**No absolute contraindications exist for emergency cricothyrotomy.**',
         citation: [7, 14],
         next: 'dab-predicted',
+        summary: 'Backup Plan Assessment — MOANS / RODS / SHORT — review key clinical information before proceeding',
     },
     {
         id: 'dab-predicted',
@@ -81,6 +84,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Predicted Difficulty Level — assess clinical status to guide next management decision',
     },
     // =====================================================================
     // MODULE 2: APPROACH DECISION
@@ -93,6 +97,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '[RSI Drug Quick Reference](#/info/dab-rsi-drugs)\n\n**Positioning:** Ear-to-sternal-notch alignment (NOT just "sniffing position"). External auditory meatus at or above sternal notch. Obese patients need significant ramping.\n\n**Preoxygenation:** 3-5 min NRB or flush-rate O2. Apneic oxygenation with 15 L/min NC during laryngoscopy.\n\n**Induction (choose one):**\n• [Ketamine](#/drug/ketamine/rsi induction) **1.5-2 mg/kg IV** — hemodynamically supportive, preferred in hypotension\n• [Etomidate](#/drug/etomidate/rsi induction) **0.3 mg/kg IV** — hemodynamically neutral\n• [Propofol](#/drug/propofol/rsi induction) **1.5-2.5 mg/kg IV** — causes hypotension, reduce dose if fragile\n\n**Paralytic (choose one):**\n• [Succinylcholine](#/drug/succinylcholine/rsi) **1.5 mg/kg IV** — fastest onset (30-60s), short duration (3-8 min)\n• [Rocuronium](#/drug/rocuronium/rsi) **1.2 mg/kg IV** — no contraindications to succinylcholine, reversible with sugammadex\n\n**Bougie at bedside** for immediate use if Grade IIb+ view encountered.',
         citation: [1, 3, 4, 15, 16],
         next: 'dab-rsi-complete',
+        summary: 'Standard RSI — Bougie Available as Rescue — review key clinical information before proceeding',
     },
     {
         id: 'dab-bougie-rsi',
@@ -102,6 +107,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '[RSI Drug Quick Reference](#/info/dab-rsi-drugs)\n\n**Predicted difficult airway — plan bougie-first from the start.**\n\n**Positioning:** Ear-to-sternal-notch alignment. Face plane parallel to ceiling.\n\n**Equipment at bedside:**\n• 15 Fr × 60 cm **coude-tip bougie** (Frova or SunMed)\n• Video laryngoscope (standard geometry preferred for bougie — C-MAC or standard GlideScope)\n• ETT: 7.0-7.5 mm (women), 7.5-8.0 mm (men), lubricated\n• Backup: second ETT, i-gel SGA, surgical airway kit (#10 scalpel + 6.0 ETT)\n\n**RSI drugs — same as standard:**\n• [Ketamine](#/drug/ketamine/rsi induction) **1.5-2 mg/kg IV** or [Etomidate](#/drug/etomidate/rsi induction) **0.3 mg/kg IV**\n• [Rocuronium](#/drug/rocuronium/rsi) **1.2 mg/kg IV** (preferred — longer working time for difficult airway) or [Succinylcholine](#/drug/succinylcholine/rsi) **1.5 mg/kg IV**\n\n**Optional pretreatment (3 min before induction):**\n• [Fentanyl](#/drug/fentanyl/rsi pretreatment) 1-3 mcg/kg IV — blunts sympathetic response (elevated ICP, aortic dissection)\n• [Lidocaine](#/drug/lidocaine/rsi pretreatment) 1.5 mg/kg IV — elevated ICP (weak evidence)',
         citation: [1, 2, 3, 4, 15, 16, 17],
         next: 'dab-rsi-complete',
+        summary: 'Bougie-First RSI Protocol — review key clinical information before proceeding',
     },
     {
         id: 'dab-awake',
@@ -111,6 +117,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Awake intubation** comprises <2-3% of all ED intubations. Consider when:\n\n• Predicted difficult intubation **AND** difficult mask ventilation\n• Predicted difficult intubation **AND** cannot tolerate brief apnea\n• Predicted difficult intubation **AND** difficult surgical airway\n• Known history of failed intubation\n• Upper airway obstruction with maintained spontaneous ventilation\n• Severe hemodynamic instability (fear of irreversible compromise with RSI)\n• Significant facial/neck trauma with distorted anatomy\n\n**Only absolute contraindication:** Patient refusal\n\n**Call for help early:**\n• Anesthesiology for awake fiberoptic intubation\n• ENT for potential surgical airway\n• Trauma surgery backup\n\nIf awake intubation not feasible and RSI required despite high risk, proceed to bougie-first RSI with surgical airway kit open at bedside.',
         citation: [7, 8],
         next: 'dab-bougie-rsi',
+        summary: 'Awake Intubation — When to Consider — review key clinical information before proceeding',
     },
     {
         id: 'dab-rsi-complete',
@@ -138,6 +145,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Laryngoscopic View — Cormack-Lehane Grade — assess clinical status to guide next management decision',
     },
     // =====================================================================
     // MODULE 3: PRIMARY BOUGIE TECHNIQUE
@@ -150,6 +158,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '| Item | Specification |\n|------|---------------|\n| **Bougie** | 15 Fr × 60 cm coude-tip (Frova or SunMed) |\n| **Laryngoscope** | Video preferred (DEVICE trial: 85% vs 71% first-pass). C-MAC or standard geometry GlideScope for bougie compatibility |\n| **ETT** | 7.0-7.5 mm (women), 7.5-8.0 mm (men), pre-lubricated |\n| **Backup** | Second ETT, i-gel SGA (size 3: 30-60 kg, size 4: 50-90 kg, size 5: >90 kg), surgical airway kit |\n\n**Do NOT preload** the bougie through the ETT — it restricts maneuverability. (EMCrit 388: "Nope!!!")\n\n**Coude tip orientation:** The angled tip must face **anteriorly** (toward ceiling / patient\'s nose). Most bougies have a visual indicator for tip direction.',
         citation: [3, 17],
         next: 'dab-technique',
+        summary: 'Bougie Equipment Setup — review key clinical information before proceeding',
     },
     {
         id: 'dab-technique',
@@ -159,6 +168,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**1. Laryngoscopy** — Obtain best possible view. Identify epiglottis or cords.\n\n**2. Insert bougie** — Coude tip anterior, advance along midline under epiglottis into trachea.\n• CL III view: advance bougie behind epiglottis tip (blind pass beneath)\n\n**3. Confirm tracheal placement:**\n• **Tracheal clicks** — felt at ~15-25 cm (unreliable — do not rely solely)\n• **Hold-up sign** — bougie meets resistance at ~30-35 cm (carina). In esophagus, advances freely past 40 cm.\n\n**4. Railroad ETT:**\n• Slide pre-lubricated ETT over bougie\n• **90° counterclockwise rotation** of ETT if it catches on arytenoids\n• **Maintain laryngoscopy** during advancement — keep view until tube passes cords\n\n**5. Remove bougie** once ETT at appropriate depth.\n\n**6. Confirm** with waveform capnography immediately.',
         citation: [1, 16, 17],
         next: 'dab-adjuncts',
+        summary: 'Bougie Insertion — Step by Step — review key clinical information before proceeding',
     },
     {
         id: 'dab-adjuncts',
@@ -168,6 +178,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Adjunct maneuvers:**\n• **Jaw thrust** by assistant — lifts mandible, improves view\n• **External Laryngeal Manipulation (ELM):** Operator-directed movement of larynx to optimize view (superior to BURP)\n• **BURP** (Backward, Upward, Rightward Pressure): assistant applies to thyroid cartilage\n\n**Common errors (EMCrit 388 — Weingart/Barnicle/Driver):**\n• ❌ Preloading bougie through ETT\n• ❌ Not maintaining coude tip anterior orientation\n• ❌ Advancing too aggressively (esophageal placement)\n• ❌ Failing to rotate ETT when it catches on arytenoids\n• ❌ Removing laryngoscope before ETT passes cords\n• ❌ Relying on tracheal clicks alone for confirmation\n\n**ETT depth check:** 21 cm at teeth (women), 23 cm at teeth (men).',
         citation: [17],
         next: 'dab-attempt-result',
+        summary: 'Key Adjuncts & Common Errors — review key clinical information before proceeding',
     },
     {
         id: 'dab-attempt-result',
@@ -188,6 +199,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'ETT Passed Successfully? — assess clinical status to guide next management decision',
     },
     {
         id: 'dab-max-attempts',
@@ -215,6 +227,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Attempt Count — Escalation Decision — assess clinical status to guide next management decision',
     },
     // =====================================================================
     // MODULE 4: CONFIRMATION
@@ -227,6 +240,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Confirmation hierarchy (most to least reliable):**\n\n**1. Waveform Capnography (GOLD STANDARD)**\n• Sensitivity: 100% (non-arrest), 96.8% (cardiac arrest)\n• Specificity: 99-100%\n• Look for **sustained 4-phase waveform** × 5-6 breaths\n• Brief CO₂ from esophageal placement tapers after 2-3 breaths — must be sustained\n• **False negatives:** cardiac arrest (low pulmonary blood flow), massive PE\n• **Mandatory** per AHA/ACEP/ASA guidelines\n\n**2. Esophageal Detector Device (EDD) — Adjunct Only**\n• Bulb re-inflates rapidly in trachea (rigid rings), stays collapsed in esophagus\n• In-hospital sensitivity 99-100%; pre-hospital only 50-80%\n• Cardiac arrest: sensitivity drops to 70-73%\n\n**3. Clinical Confirmation:**\n• Bilateral breath sounds, symmetric chest rise\n• Misting of ETT\n• Absence of epigastric sounds or gastric distension\n\n**4. Depth Check:** 21 cm (women), 23 cm (men) at teeth',
         citation: [12, 13],
         next: 'dab-etco2-check',
+        summary: 'Tube Confirmation — Algorithm — review key clinical information before proceeding',
     },
     {
         id: 'dab-etco2-check',
@@ -254,6 +268,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Sustained ETCO₂ Waveform? — assess clinical status to guide next management decision',
     },
     {
         id: 'dab-confirmed',
@@ -263,6 +278,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Tube placement confirmed by waveform capnography.**\n\n**Immediate post-intubation:**\n• **Secure tube** — commercial holder or tape\n• **Depth check:** 21 cm at teeth (women), 23 cm at teeth (men)\n• **CXR** — confirm position, rule out right mainstem, pneumothorax\n• **Continuous waveform capnography** monitoring\n\n**Ventilator settings (initial):**\n• Mode: AC/VC or AC/PC\n• TV: 6-8 mL/kg IBW (lung-protective)\n• RR: 14-18\n• FiO₂: 100% initially, wean to SpO₂ 92-96%\n• PEEP: 5 cm H₂O (titrate as needed)\n\n**Post-intubation sedation:**\n• [Ketamine](#/drug/ketamine/procedural sedation) 0.5-2 mg/kg/hr infusion, or\n• [Propofol](#/drug/propofol/refractory se) 5-50 mcg/kg/min, or\n• [Fentanyl](#/drug/fentanyl/burn pain) 25-100 mcg/hr + midazolam\n\n**Continue paralytic only if needed** (e.g., ARDS proning, ventilator dyssynchrony).',
         recommendation: 'Tube confirmed. Secure, verify depth, obtain CXR, initiate sedation and lung-protective ventilation.',
         citation: [3, 12],
+        summary: 'Tube Confirmed — Post-Intubation Management — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'dab-no-etco2',
@@ -272,6 +288,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**No sustained ETCO₂ waveform = esophageal placement until proven otherwise.**\n\n**Immediate actions:**\n1. **Remove the tube** — do not delay\n2. **Mask ventilate** with BVM — two-person technique preferred\n3. **Apneic oxygenation** — 15 L/min NC during prep for next attempt\n4. **Reassess:** How many attempts? Can you oxygenate?\n\n**If this was attempt #3 or patient is desaturating → proceed to Failed Airway Rescue.**',
         citation: [12, 7],
         next: 'dab-max-attempts',
+        summary: 'No ETCO₂ — Esophageal Intubation — review key clinical information before proceeding',
     },
     // =====================================================================
     // MODULE 5: FAILED AIRWAY RESCUE
@@ -284,6 +301,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Declare: "This is a failed airway."** Communicate clearly to entire team.\n\n**The Vortex Approach** — three upper airway "lifelines":\n1. **Face mask** (BVM)\n2. **Supraglottic airway** (SGA / LMA)\n3. **Endotracheal tube** (ETT)\n\n**Green Zone** = adequate oxygenation by ANY lifeline. Time to think, plan, call for help.\n\n**CICO** (Can\'t Intubate, Can\'t Oxygenate) = ALL three lifelines failed after best effort. → **Immediate front-of-neck access (eFONA).**\n\n2024 Canadian Airway Focus Group update: trigger changed from CICO to **CICV** (Can\'t Intubate, Can\'t Ventilate) — do not wait for desaturation to declare and act.\n\n**The hardest part is making the decision to cut** — procedures performed too late are the primary cause of bad outcomes.',
         citation: [6, 7, 11, 18],
         next: 'dab-can-oxygenate',
+        summary: 'Failed Airway — Vortex Approach — review key clinical information before proceeding',
     },
     {
         id: 'dab-can-oxygenate',
@@ -305,6 +323,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Can You Oxygenate? — assess clinical status to guide next management decision',
     },
     {
         id: 'dab-cico-green',
@@ -314,6 +333,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**You can oxygenate — you have time.** Use it wisely.\n\n**SGA Rescue:**\n• **i-gel preferred** (no cuff inflation needed, faster placement)\n• LMA Supreme/ProSeal as alternative\n• Sizing: size 3 (30-60 kg), size 4 (50-90 kg), size 5 (>90 kg)\n• Success rate: >95% for ventilation rescue after failed intubation\n\n**While oxygenating via SGA:**\n• Call for help — anesthesiology, ENT\n• Consider awake technique if patient can be woken\n• Consider intubation through SGA (fiberoptic)\n• Prepare surgical airway kit as backup\n• **Do NOT make repeated blind intubation attempts** — each attempt worsens airway',
         citation: [7, 11],
         next: 'dab-sga-result',
+        summary: 'CI/CO — Green Zone Rescue — review key clinical information before proceeding',
     },
     {
         id: 'dab-sga-result',
@@ -335,6 +355,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'SGA Ventilation Successful? — assess clinical status to guide next management decision',
     },
     {
         id: 'dab-sga-success',
@@ -344,6 +365,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**SGA is maintaining oxygenation — stable for now.**\n\n**Next steps:**\n• **Maintain SGA** and continuous monitoring\n• Consult anesthesiology and/or ENT urgently\n• Consider intubation through SGA via fiberoptic scope\n• If patient can be awakened — consider awake intubation\n• Prepare surgical airway kit at bedside\n• Document failed airway — notify all future providers\n\n**Disposition:** ICU admission with airway plan documented. The SGA is a bridge, not a definitive airway for most situations.',
         recommendation: 'SGA maintaining oxygenation. Consult anesthesiology/ENT for definitive airway plan. ICU admission.',
         citation: [7, 11],
+        summary: 'SGA Bridge — Plan Definitive Airway — determine disposition and follow-up plan based on clinical findings',
     },
     // =====================================================================
     // MODULE 6: SURGICAL AIRWAY
@@ -356,6 +378,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '[Scalpel-Finger-Bougie Cric Steps](#/info/dab-cric-steps)\n\n**Announce: "Can\'t intubate, can\'t oxygenate — performing cricothyrotomy."**\n\n**NAP4 Audit (Cook 2011):**\n• Needle cricothyrotomy: **60% failure rate**\n• Surgical cricothyrotomy: **100% success rate**\n• DAS 2015 explicitly recommends **scalpel-bougie technique over needle/cannula**\n\n**Equipment:**\n| Item | Specification |\n|------|---------------|\n| **Scalpel** | #10 blade (broad — matches tracheal tube width) |\n| **Bougie** | Standard 15 Fr coude-tip, lubricated |\n| **ETT** | **6.0 mm cuffed** (DAS guideline) |\n| **Other** | 10 mL syringe (cuff), capnography, ties for securing |\n\nAssign second provider to continue rescue oxygenation attempts while you perform the procedure.',
         citation: [6, 7, 19],
         next: 'dab-cric-landmarks',
+        summary: 'CICO — Emergency Cricothyrotomy — review key clinical information before proceeding',
     },
     {
         id: 'dab-cric-landmarks',
@@ -368,6 +391,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
             { src: './images/difficult-airway/laryngeal-handshake.png', alt: 'Laryngeal handshake technique — non-dominant hand stabilizes larynx with thumb and third finger grasping thyroid cartilage, index finger palpating CTM', caption: 'Laryngeal Handshake' },
         ],
         next: 'dab-cric-technique',
+        summary: 'Cricothyroid Membrane — Identification — review key clinical information before proceeding',
     },
     {
         id: 'dab-cric-technique',
@@ -380,6 +404,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
             { src: './images/difficult-airway/vertical-incision.png', alt: 'Vertical skin incision over cricothyroid membrane with scalpel and bougie placement — simulation model demonstrating landmark identification and incision technique', caption: 'Vertical Incision' },
         ],
         next: 'dab-cric-confirm',
+        summary: 'Scalpel-Finger-Bougie Technique — review key clinical information before proceeding',
     },
     {
         id: 'dab-cric-confirm',
@@ -401,6 +426,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'ETCO₂ Confirmed After Cric? — assess clinical status to guide next management decision',
     },
     {
         id: 'dab-cric-post',
@@ -410,6 +436,7 @@ export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
         body: '**Surgical airway confirmed by waveform capnography.**\n\n**Immediate:**\n• **Secure tube with ties** (not tape — blood on skin prevents adhesion)\n• **CXR** — confirm position, rule out pneumothorax\n• **Continuous waveform capnography** monitoring\n• Monitor for: subcutaneous emphysema, bleeding, posterior wall perforation\n\n**ICU management:**\n• Convert to formal tracheostomy within **24-72 hours** — consult ENT/surgery\n• Document: reason for surgical airway, number of attempts, complications\n• Ventilator settings: lung-protective as per standard post-intubation\n\n**Notify all future providers:** Patient had a failed airway requiring surgical cricothyrotomy. Future intubations require advanced planning and experienced airway management.',
         recommendation: 'Surgical airway successful. Secure with ties, CXR, continuous capnography. Consult ENT for conversion to tracheostomy within 24-72h. ICU admission.',
         citation: [6, 7],
+        summary: 'Post-Cricothyrotomy Management — determine disposition and follow-up plan based on clinical findings',
     },
 ];
 export const DIFFICULT_AIRWAY_BOUGIE_NODE_COUNT = DIFFICULT_AIRWAY_BOUGIE_NODES.length;

@@ -35,6 +35,7 @@ export const HIV_NODES: DecisionNode[] = [
     body: '[HIV ED Management Steps Summary](#/info/hiv-steps-summary) — quick reference.\n\nHIV is now a manageable chronic disease with HAART, but ~14% of HIV-infected persons remain unaware of their status, driving continued transmission. [1] Approximately 80% of new transmissions are from persons not yet diagnosed or not in regular care.\n\nThe ED plays a critical role in:\n• Identifying undiagnosed HIV infection\n• Managing complications of chronic HIV and its treatment\n• Initiating [PEP](#/tree/pep) for potential exposures\n• Referring candidates for PrEP\n\n**Key first step:** Determine the patient\'s HIV disease status — this drives the entire differential diagnosis.',
     citation: [1, 2, 3],
     next: 'hiv-scenario',
+    summary: 'Assess HIV status and presentation: new diagnosis, well-controlled, immunocompromised, or prevention',
   },
 
   {
@@ -71,6 +72,7 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-screening',
       },
     ],
+    summary: 'Determine clinical scenario to guide evaluation and management approach',
   },
 
   {
@@ -93,6 +95,7 @@ export const HIV_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'CD4 count and viral load guide risk stratification — CD4 <200 = AIDS, high OI risk',
   },
 
   {
@@ -103,6 +106,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '[HIV Testing & Screening Guide](#/info/hiv-testing-guide) — universal vs risk-based approach.\n\n**CDC (2006):** Routine opt-out HIV screening for ages 13-64 in healthcare settings where undiagnosed prevalence ≥0.1%. [3]\n**USPSTF (Grade A):** Routine screening ages 15-65. [7]\n**ACEP:** Endorsed ED HIV testing since 2007. [8]\n\n**High-risk patients who should NOT be missed:**\n• Sexually active MSM\n• Persons who inject drugs and their sex partners\n• Persons who exchange sex for money or drugs\n• Sex partners of HIV-infected persons\n• Patients with new STI diagnosis\n\n**Testing technology:**\n• **Fourth-generation (preferred):** Detects HIV antibody + p24 antigen — can identify infection as early as **2 weeks** post-exposure [9]\n• Rapid point-of-care tests available (fingerstick slightly less accurate than lab-based)\n• If acute infection suspected and 4th-gen test negative → **must send HIV viral load**\n\nA 2018 study of >200,000 ED patients showed 0.4% new-diagnosis yield with nontargeted 4th-gen screening, of which 14.5% were acute HIV. [9]',
     citation: [3, 7, 8, 9],
     next: 'hiv-scenario',
+    summary: 'ED HIV screening: opt-out testing recommended for all adults 15-65 — 4th gen Ag/Ab preferred',
+    skippable: true,
   },
 
   // =====================================================================
@@ -117,6 +122,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '[Acute Seroconversion Features](#/info/hiv-seroconversion-features) — clinical presentation guide.\n\nAfter HIV exposure, local viral replication occurs over several days before entering the bloodstream with high viremia. **75-90% of patients** develop an acute illness during seroconversion. [1]\n\n**Classic presentation:**\n• Fever, headache, malaise\n• Sore throat (**without exudate**)\n• Lymphadenopathy (generalized)\n• GI symptoms (nausea, diarrhea)\n\n**More distinctive features:**\n• Genital or mucocutaneous ulcers\n• Nondescript **macular rash** (face, trunk, upper extremities) — mimics viral exanthem\n• **Notably absent:** respiratory or pulmonary symptoms\n\nCD4 count may drop acutely during seroconversion, rarely causing OIs (e.g., thrush). CD4 typically rebounds once the body gains some viral control.\n\nThe syndrome lasts **weeks** and patients frequently seek ED evaluation.',
     citation: [1],
     next: 'hiv-seroconversion-testing',
+    summary: 'Acute seroconversion: fever + rash + lymphadenopathy WITHOUT respiratory symptoms — high viral load',
+    safetyLevel: 'warning',
   },
 
   {
@@ -127,6 +134,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Diagnosis of acute seroconversion is challenging:**\n\n• Third-generation (antibody-only) tests may miss early infection — **no longer recommended as first-line**\n• **Fourth-generation tests** (antibody + p24 antigen) can often identify infection as early as **2 weeks** post-exposure — preferred initial test [9]\n• Early infection can still be missed within 2 weeks of exposure\n\n**Critical rule:** When acute infection is suspected and 4th-gen test is NEGATIVE → **order HIV viral load.** [9]\n\n**Why diagnosis matters:**\n• Patients with acute infection have **extremely high viral loads** and are more infectious than at any other stage\n• Identification allows prompt referral and rapid ART initiation\n• Undetectable = untransmittable (U=U) — the PARTNER 2 study showed zero transmissions when HIV+ partner had undetectable VL [10, 11]\n\n**Window periods:**\n• 4th-gen test: ~2 weeks\n• 3rd-gen antibody test: ~3-4 weeks\n• Viral load: ~10 days (earliest detection)',
     citation: [1, 9, 10, 11],
     next: 'hiv-new-diagnosis',
+    summary: 'Standard antibody test may be negative early — order 4th gen Ag/Ab or viral load for acute infection',
+    skippable: true,
   },
 
   {
@@ -157,6 +166,7 @@ export const HIV_NODES: DecisionNode[] = [
     },
     confidence: 'recommended',
     citation: [1, 12, 13],
+    summary: 'New HIV diagnosis in ED: baseline labs, PCP referral within 72h, consider same-day ART start',
   },
 
   // =====================================================================
@@ -207,6 +217,7 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-weakness',
       },
     ],
+    summary: 'Well-controlled HIV patients have unique complications: CV, renal, neuro, metabolic — not just OIs',
   },
 
   {
@@ -217,6 +228,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Well-controlled HIV patients** develop **traditional pulmonary infections** of immunocompetent patients. **Streptococcus pneumoniae** is the most common cause of bacterial pneumonia — treatment does not differ from non-HIV patients. [15, 16]\n\n**Disposition** can mirror practice for non-HIV patients, as well-controlled patients have similar pneumonia mortality. CURB-65 can be applied, though one small study found higher mortality with scores ≥2 AND CD4 <200. [17]\n\n**COPD** is an increasing concern:\n• HIV patients smoke at **2× the rate** of the general population [18]\n• Lung injury from prior OIs and drug effects contribute\n• Chronic HIV may be an independent risk factor [19]\n• Treatment is the same as for non-HIV patients\n\n**Venous thromboembolism / PE:**\n• Chronic inflammatory state → **hypercoagulability** → higher VTE rates [20, 21]\n• Consider PE with pleuritic chest pain, dyspnea — even if COPD is known\n• PERC criteria may not be validated for HIV patients (HIV status not reported in original study)\n\n**Key pitfall:** Do not anchor on COPD for an HIV patient with pleuritic chest pain — consider PE.',
     citation: [15, 16, 17, 18, 19, 20, 21],
     next: 'hiv-disposition',
+    summary: 'Respiratory complaints: community-acquired pneumonia more common than PJP in controlled HIV',
+    skippable: true,
   },
 
   {
@@ -227,6 +240,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: 'HIV patients have **increased cardiovascular risk** from multiple factors: traditional risk factors, chronic inflammatory state, and medication effects (metabolic syndrome, abacavir MI association). [22, 23]\n\n**Acute coronary syndromes:**\n• HIV and some treatments are associated with CAD **absent traditional risk factors**\n• Abacavir has been associated with MI in retrospective studies (not yet confirmed prospectively) [24, 25]\n• Do NOT dismiss ACS in younger HIV patients — age alone does not rule it out\n\n**Heart failure:**\n• Prevalence 7.2% in HIV vs 4.4% in controls (P <.0001) [26]\n• Hazard ratio 3.2 for developing HF compared to non-HIV patients [27]\n• Only slightly lower rates even in patients on ARVs\n\n**Venous thromboembolism:**\n• 2.6 per 1000 patient-years [28]\n• Risk factors: CD4 <200, VL >100,000, current/recent OIs [29]\n• Chronic inflammatory state is the primary driver\n\n**Management:** Standard evidence-based protocols. Be aware of **drug interactions** between ARVs and anticoagulants, statins, and antiarrhythmics — especially with PI-based regimens.',
     citation: [22, 23, 24, 25, 26, 27, 28, 29],
     next: 'hiv-disposition',
+    summary: 'HIV patients have 2x MI risk — PIs cause metabolic syndrome, consider ACS evaluation',
+    skippable: true,
   },
 
   {
@@ -237,6 +252,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Guide evaluation by CD4 count.** Even well-controlled HIV carries slightly higher cerebrovascular risk.\n\n**Stroke:**\n• Risk ratio **2.56** (95% CI 1.43-4.61) compared to non-HIV [30]\n• Multifactorial: inflammatory state, atherosclerosis, smoking, metabolic medication effects\n• Follow standard evidence-based stroke algorithms\n\n**HIV-associated neurocognitive disorder (HAND):**\n• Most frequently identified neurologic disorder in HIV\n• Subacute cognitive deficits, central motor abnormalities, behavioral changes\n• Does NOT meet criteria for dementia\n• Rates decrease with longer periods of undetectable virus [31]\n\n**CNS OIs** (toxo, crypto, PML) are rare with well-controlled disease but increase dramatically with CD4 <200 → see [Immunocompromised pathway](#/node/hiv-cns-oi)\n\n**Imaging considerations:**\n• Immunocompetent HIV patient with headache probably does not need CT\n• But if CD4 is decreasing → CNS OIs and malignancy risk increases → neuroimaging indicated\n• CT may require **contrast** to identify infections or lymphoma\n• MRI provides better identification of smaller lesions and leptomeningeal enhancement\n• LP required if meningitis suspected',
     citation: [30, 31],
     next: 'hiv-disposition',
+    summary: 'Neuro complaints: HAND (HIV-associated neurocognitive disorder), also stroke risk increased',
+    skippable: true,
   },
 
   {
@@ -247,6 +264,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Diarrhea** is one of the most common HIV presentations in the ED. Up to **60% of patients on treatment** report an episode in the prior month. [32]\n\n**In well-controlled patients, OIs are rarely the cause.** More common etiologies:\n• **Medication side effect** — leading diagnosis for isolated diarrhea [33]\n• HIV enteropathy\n• Same pathogens that affect non-HIV individuals\n\n**Critical exception: C. difficile** — more common in HIV than non-HIV patients. Careful history for recent antibiotics or hospitalizations. [34]\n\n**Hepatobiliary disease:**\n• **61% of HIV patients are co-infected with HCV** in a large US analysis [35]\n• 10% co-infected with HBV [36]\n• Nearly all ARVs have hepatotoxicity potential, worsened by viral hepatitis co-infection\n• ED visit is an opportunity to **screen for HCV** in HIV patients not previously tested\n\n**Atazanavir** (PI) inhibits UDP-glucuronosyltransferase → **indirect hyperbilirubinemia and jaundice** — benign, resolves when drug is stopped.\n\n**Key pitfall:** Do not assume diarrhea is always a medication side effect — exclude C. difficile and assess for red flags.',
     citation: [32, 33, 34, 35, 36],
     next: 'hiv-disposition',
+    summary: 'GI issues common — consider medication side effects and opportunistic infections if CD4 low',
+    skippable: true,
   },
 
   {
@@ -257,6 +276,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: 'Renal disease can be caused by HIV infection itself AND nephrotoxic medications.\n\n**Tenofovir disoproxil fumarate (TDF) nephrotoxicity:**\n• Can cause **Fanconi syndrome** — polyuria, polydipsia, dehydration [37]\n• Labs: elevated creatinine, reduced GFR, acidemia, hypochloremia, hypokalemia, hypophosphatemia\n• UA: glucosuria, proteinuria\n• Higher risk in patients with pre-existing renal impairment\n• **TAF (tenofovir alafenamide)** has reduced risk — better renal biomarkers out to 144 weeks [38]\n• Withhold TDF and other nephrotoxins (e.g., ibuprofen) while resuscitating\n\n**PI-associated nephrolithiasis (CRITICAL for ED):**\n• [Atazanavir](#/drug/atazanavir/nephrolithiasis) and indinavir cause kidney stones\n• PIs have poor solubility + significant urinary excretion → stone formation\n• **Stones are RADIOLUCENT** if composed purely of drug metabolites [39, 40]\n• May NOT be visible on standard noncontrast CT\n• Look for **secondary signs**: hydroureter, perinephric stranding\n• If ongoing symptoms → urology consult for ureteroscopy\n• Discuss with HIV provider regarding medication adjustment\n\n**AKI treatment** is the same as for non-HIV patients.',
     citation: [37, 38, 39, 40],
     next: 'hiv-disposition',
+    summary: 'HIV nephropathy and tenofovir nephrotoxicity — check creatinine and urinalysis',
+    skippable: true,
   },
 
   {
@@ -267,6 +288,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '[HIV System-Based Complications](#/info/hiv-system-complications) — comprehensive reference.\n\n**Hematologic:**\n• Cytopenias of all cell lines common — bone marrow suppression in uncontrolled HIV\n• Medication-induced anemia often macrocytic (diagnosis of exclusion) [28]\n• Higher VTE rates (2.6/1000 patient-years)\n• Evaluate for thrombotic thrombocytopenic purpura (TTP) if hemolytic anemia + thrombocytopenia [41]\n\n**Endocrine & Metabolic:**\n• Metabolic syndrome: dyslipidemia, insulin resistance, truncal obesity (HIV-associated lipodystrophy) [42, 43]\n• Thyrotoxicosis/Graves disease with immune reconstitution (IRIS) — 8-33 months after starting HAART [44]\n• Glucocorticoid deficiency from adrenal involvement in AIDS — consider in hypotensive AIDS patients\n• Diabetes: both ARVs (especially PIs) and chronic inflammation increase risk [45]\n\n**Musculoskeletal:**\n• Lower bone mineral density → increased **fracture risk** [46, 47]\n• Higher rates of **avascular necrosis** — HIV and ARVs both implicated\n• As CD4 drops: spinal infections, osteomyelitis, discitis, atypical organisms (TB, NTM) [48]\n\n**Psychiatric:**\n• Depression, anxiety, substance use disorders are highly prevalent [49]\n• **Demoralization syndrome** — similar to depression but without anhedonia; does NOT respond to antidepressants\n• New-onset mania → evaluate for organic etiology (especially in untreated disease)\n• Screen all HIV patients for suicidal/homicidal ideation\n\n**Dermatologic:**\n• Drug-related skin reactions common → medication noncompliance [50]\n• Folliculitis (MRSA most common pathogen), HSV, HPV warts, seborrheic dermatitis, molluscum\n• Disseminated VZV in poorly controlled HIV — can cross dermatomes, may be superinfected',
     citation: [28, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
     next: 'hiv-disposition',
+    summary: 'Endocrine, MSK, psych, derm complications common in long-term HIV — screen broadly',
+    skippable: true,
   },
 
   {
@@ -277,6 +300,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Weakness is one of the most challenging presentations** in HIV patients.\n\nCommon causes of weakness in non-HIV patients are also common in HIV:\n• **Sepsis** — from any source\n• **Metabolic:** Hypoglycemia, electrolyte derangements (K+, Ca2+, Na+)\n• **Carbon monoxide poisoning** (in winter months)\n• **Anemia** — medication-induced or HIV-related\n\n**HIV-specific considerations:**\n• **OIs** (if CD4 <200 or unknown) — PJP, TB, disseminated MAC\n• **Medication adverse effects** — lactic acidosis (rare with current NRTIs), Fanconi syndrome (TDF)\n• **Adrenal insufficiency** — consider in AIDS patients with hypotension\n• **Malignancy** — lymphoma, Kaposi sarcoma\n\n**Workup:**\n• CBC, BMP (glucose, K+, Ca2+, Na+), hepatic function, lactate, VBG\n• If CD4 unknown or <200: expand workup (cultures, CXR, CT as indicated)\n• Consider serum lactic acid if anion gap metabolic acidosis or severe illness\n• CD4 and viral load (results not available for ED decisions but guide outpatient management)\n\n**HIV patients receive ~4.5 lab tests per ED visit** compared to 3.5 for non-HIV patients. [4]',
     citation: [4, 14],
     next: 'hiv-disposition',
+    summary: 'Weakness in HIV: GBS, myopathy (AZT), neuropathy, or deconditioning — workup based on pattern',
+    skippable: true,
   },
 
   // =====================================================================
@@ -314,6 +339,8 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-other-oi',
       },
     ],
+    summary: 'CD4 <200: evaluate for PJP, toxo, crypto, CMV, MAC — OI risk by CD4 threshold guides workup',
+    safetyLevel: 'warning',
   },
 
   {
@@ -350,6 +377,8 @@ export const HIV_NODES: DecisionNode[] = [
       },
     ],
     next: 'hiv-immunocompromised-disposition',
+    summary: 'PJP: bilateral ground-glass opacities, LDH elevated, hypoxia with exertion — TMP-SMX + steroids if PaO2 <70',
+    safetyLevel: 'warning',
   },
 
   {
@@ -379,6 +408,8 @@ export const HIV_NODES: DecisionNode[] = [
       monitoring: 'ID consultation required. Daily neuro checks. Serial LPs for cryptococcal meningitis (opening pressure). CBC, renal function, LFTs. MRI at 2 weeks for toxo response assessment.',
     },
     next: 'hiv-immunocompromised-disposition',
+    summary: 'Toxoplasmosis (ring-enhancing lesions) vs CNS lymphoma (PET/thallium scan differentiates)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -408,6 +439,8 @@ export const HIV_NODES: DecisionNode[] = [
       monitoring: 'ID consultation. Stool studies, C. diff toxin. CMV viral load for CMV disease. Blood cultures for MAC (AFB). Monitor for ganciclovir myelosuppression.',
     },
     next: 'hiv-immunocompromised-disposition',
+    summary: 'Cryptosporidium, CMV colitis, MAC — stool studies and colonoscopy based on CD4 and symptoms',
+    skippable: true,
   },
 
   {
@@ -437,6 +470,8 @@ export const HIV_NODES: DecisionNode[] = [
       monitoring: 'Ophthalmology consultation for suspected CMV retinitis. ID consultation for all OIs. Weekly dilated fundoscopic exams during induction for CMV. Monitor for ganciclovir myelosuppression.',
     },
     next: 'hiv-immunocompromised-disposition',
+    summary: 'CMV retinitis (CD4 <50), cryptococcal meningitis, disseminated MAC — systemic approach by CD4',
+    skippable: true,
   },
 
   {
@@ -467,6 +502,7 @@ export const HIV_NODES: DecisionNode[] = [
     },
     confidence: 'recommended',
     citation: [1, 14],
+    summary: 'Admit for new OIs, severe presentations, or inability to take PO — avoid IRIS if starting ART',
   },
 
   // =====================================================================
@@ -513,6 +549,8 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-drug-interactions',
       },
     ],
+    summary: '5 ARV drug classes — ED-relevant adverse effects and drug interactions for each class',
+    skippable: true,
   },
 
   {
@@ -523,6 +561,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: 'NRTIs/NtRTIs inhibit reverse transcription of HIV RNA into DNA. Current drugs are relatively well tolerated. [12]\n\n**Tenofovir disoproxil fumarate (TDF):**\n• **Fanconi syndrome** — polyuria, polydipsia, dehydration, elevated creatinine [37]\n• Labs: acidemia, hypokalemia, hypophosphatemia, glucosuria, proteinuria\n• Bone density loss and fractures\n• **TAF** (tenofovir alafenamide) has reduced renal and bone toxicity [38]\n\n**Abacavir:**\n• **Hypersensitivity reaction** in 3-5% — fever, rash, GI/respiratory symptoms, usually within first 6 weeks [52]\n• Associated with **HLA-B*5701 allele** — screening is mandatory before starting\n• If HLA-B*5701 positive → abacavir is **contraindicated**\n• **NEVER rechallenge** after hypersensitivity — can be fatal\n• Retrospective association with **myocardial infarction** (not confirmed prospectively) [24, 25]\n\n**Class effects (rare with current drugs):**\n• GI upset, nausea, headache, insomnia\n• Lactic acidosis — extremely rare with current regimens\n• Transaminitis — rare\n\n**For PrEP:** Both TDF/FTC and TAF/FTC are FDA-approved. TAF/FTC is NOT approved for use in heterosexual women (not studied). [53, 54]',
     citation: [12, 24, 25, 37, 38, 52, 53, 54],
     next: 'hiv-med-overview',
+    summary: 'NRTIs: lactic acidosis (rare but fatal), tenofovir renal toxicity, AZT myelosuppression',
+    skippable: true,
   },
 
   {
@@ -533,6 +573,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: 'NNRTIs directly bind and inactivate HIV reverse transcriptase. Examples: efavirenz, rilpivirine, doravirine, nevirapine, etravirine.\n\n**Efavirenz — neuropsychiatric effects:**\n• Vivid dreams, nightmares, insomnia, confusion (often resolve after first weeks) [55]\n• **Severe cases:** psychosis, suicidal ideation, attempted/completed suicide\n• **Immediate discontinuation** if severe psychosis or suicidality\n• Often avoided in patients with psychiatric history\n• Rilpivirine: may cause insomnia/depression but lower risk than efavirenz [13]\n\n**Doravirine (newest NNRTI):**\n• Fewer CNS adverse events than efavirenz [56, 57]\n• Favorable lipid profile\n• Most commonly used in treatment-experienced patients with limited options\n\n**Skin reactions (all NNRTIs):**\n• Rash, GI upset, headache, dizziness — common\n• Infrequently: **Stevens-Johnson syndrome, toxic epidermal necrolysis, erythema multiforme** (more common with nevirapine)\n\n**Nevirapine — hepatotoxicity:**\n• FDA black box warning (2000)\n• Most frequent in first 6 weeks\n• Higher risk: chronic hepatitis, female CD4 >250, male CD4 >400 [12, 13]\n• Can cause liver failure',
     citation: [12, 13, 55, 56, 57],
     next: 'hiv-med-overview',
+    summary: 'NNRTIs: hepatotoxicity (nevirapine), neuropsychiatric effects (efavirenz), rash',
+    skippable: true,
   },
 
   {
@@ -543,6 +585,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: 'PIs prevent cleavage of essential polyproteins needed for mature HIV virion production. Most common today: **atazanavir** and **darunavir**, used with a booster (low-dose ritonavir or cobicistat). [13]\n\n**Common side effects:** Nausea, diarrhea, abdominal discomfort.\n\n**Metabolic effects:**\n• Lipodystrophy (central fat accumulation, peripheral wasting)\n• Dyslipidemia, hypertriglyceridemia\n• Type 2 diabetes (less common with lower-dose ritonavir boosting)\n• Rarely: pancreatitis from hypertriglyceridemia\n\n**[Atazanavir](#/drug/atazanavir/hiv jaundice):**\n• Inhibits UDP-glucuronosyltransferase → **indirect hyperbilirubinemia and jaundice** — benign, resolves on discontinuation\n• **RADIOLUCENT kidney stones** — PIs have poor solubility and significant urinary excretion [39, 40]\n• Stones may NOT be seen on noncontrast CT — look for hydroureter, perinephric stranding\n• Requires **acidic environment** for absorption → PPIs and H2 blockers may interfere\n\n**Drug interactions (CRITICAL):**\n• PIs (especially boosted with ritonavir/cobicistat) inhibit **CYP3A4** → major interactions with anticoagulants, statins, corticosteroids, antiarrhythmics, antiepileptics, antidepressants [13]\n• Much higher interaction risk than INSTI or NNRTI regimens\n• See [Drug Interactions](#/node/hiv-drug-interactions)',
     citation: [13, 39, 40],
     next: 'hiv-med-overview',
+    summary: 'PIs: atazanavir = radiolucent kidney stones (invisible on CT), CYP3A4 drug interactions',
+    safetyLevel: 'warning',
   },
 
   {
@@ -553,6 +597,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**Integrase strand transfer inhibitors (INSTIs):** Block incorporation of viral DNA into host cell DNA. First-line for most patients. [12, 13]\n\nExamples: [Biktarvy](#/drug/biktarvy/hiv treatment) (bictegravir), [Dolutegravir](#/drug/dolutegravir/hiv pep), elvitegravir/cobicistat, raltegravir.\n\n**Generally very well tolerated** — rare discontinuations in clinical trials.\n• ~90% of patients attain and maintain undetectable VL through 96 weeks [58]\n• Raltegravir has the lowest drug interaction risk\n• Elvitegravir requires cobicistat booster → higher drug interaction risk and GI intolerance\n\n**Dolutegravir pregnancy concern:**\n• Initial Botswana data showed 4 neural tube defects in dolutegravir-exposed pregnancies [59]\n• Subsequent studies: risk exists but is lower than initially feared\n• **Review guidelines before using dolutegravir for PEP in women of childbearing age**\n\n**Entry inhibitors (rarely used):**\n• **Enfuvirtide** — injection site nodules; largely replaced by INSTIs\n• **Maraviroc** — CCR5 blocker; rare hepatotoxicity, hypotension with renal impairment\n• **Ibalizumab** — monoclonal antibody; hypersensitivity risk during/after infusion\n• Reserved for treatment-experienced patients with limited options',
     citation: [12, 13, 58, 59],
     next: 'hiv-med-overview',
+    summary: 'INSTIs: best tolerated class — insomnia, weight gain, rarely CPK elevation',
+    skippable: true,
   },
 
   {
@@ -583,6 +629,8 @@ export const HIV_NODES: DecisionNode[] = [
     },
     confidence: 'definitive',
     citation: [1, 36],
+    summary: 'Stopping tenofovir/emtricitabine/lamivudine can cause fatal HBV reactivation — never abruptly stop',
+    safetyLevel: 'critical',
   },
 
   {
@@ -593,6 +641,8 @@ export const HIV_NODES: DecisionNode[] = [
     body: '**PI-based regimens** (especially boosted with ritonavir or cobicistat) carry the highest risk of drug interactions through **CYP3A4 inhibition**. [13]\n\n**High-risk combinations in the ED:**\n• **Anticoagulants** — warfarin, DOACs: altered metabolism\n• **Statins** — lovastatin and simvastatin contraindicated with PIs; use atorvastatin/rosuvastatin with dose adjustment\n• **Corticosteroids** — fluticasone + ritonavir → iatrogenic Cushing syndrome\n• **Antiarrhythmics** — amiodarone, flecainide, lidocaine: levels may be dangerously altered\n• **Antiepileptics** — carbamazepine, phenytoin: bidirectional interactions\n• **Antimalarials, antidepressants** — various interactions\n\n**INSTI-based regimens** have fewer interactions but:\n• Dolutegravir/bictegravir: chelation with polyvalent cations (antacids, Ca2+, Fe2+)\n• Dolutegravir increases metformin levels\n\n**Atazanavir absorption** requires acidic environment — PPIs and H2 blockers interfere.\n\n**Before prescribing any new medication** to an HIV patient on PIs:\n• Use an HIV drug interaction checker\n• When in doubt, consult pharmacy or infectious disease\n\n**Key ED takeaway:** Always check drug interactions when prescribing to HIV patients, especially those on PI-based or cobicistat-boosted regimens.',
     citation: [13],
     next: 'hiv-med-overview',
+    summary: 'PIs inhibit CYP3A4 — dangerous interactions with benzodiazepines, statins, PDE5 inhibitors',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -619,6 +669,7 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-prep-referral',
       },
     ],
+    summary: 'PEP within 72h of exposure, PrEP for ongoing risk — cross-link to PEP consult for protocols',
   },
 
   {
@@ -648,6 +699,8 @@ export const HIV_NODES: DecisionNode[] = [
       monitoring: 'Baseline HIV test (must be negative). Follow-up at 4-6 weeks and 3 months for repeat HIV testing. Emphasize adherence - <25% complete full 28-day course. Arrange follow-up within 3-7 days.',
     },
     next: 'hiv-disposition',
+    summary: 'PEP: Biktarvy or TDF/FTC + dolutegravir x 28 days — start within 72h, ideally within 2h',
+    skippable: true,
   },
 
   {
@@ -678,6 +731,8 @@ export const HIV_NODES: DecisionNode[] = [
     },
     confidence: 'recommended',
     citation: [53, 54, 62, 63, 64],
+    summary: 'PrEP referral for ongoing risk: daily oral or long-acting injectable cabotegravir every 2 months',
+    skippable: true,
   },
 
   {
@@ -699,6 +754,7 @@ export const HIV_NODES: DecisionNode[] = [
         next: 'hiv-discharge',
       },
     ],
+    summary: 'Determine: admission for acute illness vs discharge with close ID/PCP follow-up',
   },
 
   {
@@ -710,6 +766,7 @@ export const HIV_NODES: DecisionNode[] = [
     recommendation: 'Admit for OI workup/treatment, acute illness, or inability to manage outpatient. Continue HAART, consult ID, check CD4/VL, screen HBV/HCV. Social work for linkage to care.',
     confidence: 'recommended',
     citation: [1, 14],
+    summary: 'Admit for new OIs, severe dehydration, altered mental status, or inability to tolerate PO meds',
   },
 
   {
@@ -721,6 +778,7 @@ export const HIV_NODES: DecisionNode[] = [
     recommendation: 'Discharge with continued HAART. Follow up with HIV provider. Link to care if not engaged. Offer HIV testing if untested. Refer for PEP/PrEP as indicated. Review [Discharge Instructions](#/info/hiv-ed-discharge) with patient.',
     confidence: 'recommended',
     citation: [1],
+    summary: 'Discharge with ID/PCP follow-up within 72h, medication reconciliation, and adherence counseling',
   },
 
 ];

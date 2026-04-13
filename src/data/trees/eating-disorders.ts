@@ -27,6 +27,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'bmi-severity', label: 'BMI Severity Classification' },
     ],
     next: 'ed-type-assessment',
+    summary: 'Screen all ED patients with unexplained electrolyte abnormalities or weight loss for eating disorders',
   },
   {
     id: 'ed-type-assessment',
@@ -40,6 +41,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { label: 'Bulimia / Purging Behaviors', description: 'Binge-purge, often normal weight', next: 'ed-bn-assessment' },
       { label: 'ARFID / Other', description: 'No body image disturbance, sensory avoidance', next: 'ed-arfid-assessment' },
     ],
+    summary: 'Classify as anorexia nervosa, bulimia nervosa, or ARFID — guides medical workup',
   },
   {
     id: 'ed-an-vitals',
@@ -52,6 +54,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'qtc-calculator', label: 'QTc Calculator' },
     ],
     next: 'ed-complications',
+    summary: 'AN vital sign red flags: HR <40, SBP <90, temp <35.5°C, BMI <13 — high mortality risk',
+    safetyLevel: 'critical',
   },
   {
     id: 'ed-bn-assessment',
@@ -64,6 +68,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'electrolyte-replacement', label: 'Electrolyte Replacement Guide' },
     ],
     next: 'ed-complications',
+    summary: 'Bulimia: hypokalemia most common, metabolic alkalosis from vomiting, QTc risk from low K+',
+    safetyLevel: 'warning',
   },
   {
     id: 'ed-arfid-assessment',
@@ -73,6 +79,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     body: '**ARFID (Avoidant/Restrictive Food Intake Disorder)** is characterized by nutritional deficiency without body image disturbance [3].\n\n**Diagnostic Criteria:**\n- Eating disturbance leading to:\n  - Significant weight loss or failure to gain\n  - Significant nutritional deficiency\n  - Dependence on enteral feeding or supplements\n  - Marked interference with psychosocial functioning\n- NOT explained by food scarcity or cultural practice\n- NOT due to AN/BN (no body image disturbance)\n- NOT better explained by medical condition\n\n**Common Presentations:**\n- Sensory sensitivity (textures, colors, smells)\n- Fear of choking or vomiting after food trauma\n- General lack of interest in eating\n- Highly selective/restrictive diet\n\n**Medical Complications:**\n- Same malnutrition complications as AN\n- Specific deficiencies based on avoided foods\n- Growth failure in children\n\n**Key Difference from AN:** No fear of weight gain, no distorted body image.',
     citation: [3],
     next: 'ed-complications',
+    summary: 'ARFID: nutritional deficiency without body image distortion — same malnutrition complications as AN',
+    skippable: true,
   },
 
   // =====================================================================
@@ -91,6 +99,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { label: 'Refeeding Syndrome Risk', description: 'Severely malnourished, about to initiate nutrition', next: 'ed-refeeding', urgency: 'critical' },
       { label: 'Stable - Proceed to Risk Stratification', description: 'No acute medical emergency', next: 'ed-risk-strat' },
     ],
+    summary: 'Identify primary complication: cardiac instability, electrolytes, or refeeding syndrome risk',
   },
   {
     id: 'ed-cardiac',
@@ -103,6 +112,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'qtc-calculator', label: 'QTc Calculator' },
     ],
     next: 'ed-risk-strat',
+    summary: 'Bradycardia <50 or QTc >500ms — admit to telemetry, correct electrolytes first',
+    safetyLevel: 'critical',
   },
   {
     id: 'ed-electrolytes',
@@ -134,6 +145,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'electrolyte-replacement', label: 'Electrolyte Replacement Guide' },
     ],
     next: 'ed-risk-strat',
+    summary: 'Correct hypokalemia, hypomagnesemia, and hypophosphatemia before refeeding',
+    safetyLevel: 'critical',
   },
   {
     id: 'ed-refeeding',
@@ -165,6 +178,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'refeeding-risk', label: 'Refeeding Risk Calculator' },
     ],
     next: 'ed-risk-strat',
+    summary: 'Refeeding syndrome risk: start low-calorie feeds, monitor phosphate q12h for 72h',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -186,6 +201,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { label: 'Moderate Risk', description: 'Concerning but no critical findings', next: 'ed-acute-mgmt', urgency: 'urgent' },
       { label: 'Lower Risk', description: 'Medically stable, consider outpatient', next: 'ed-psych-assess' },
     ],
+    summary: 'Risk stratify using MARSIPAN criteria: BMI, vitals, electrolytes, ECG — determines disposition',
   },
   {
     id: 'ed-bmi-classification',
@@ -198,6 +214,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'bmi-severity', label: 'BMI Severity Classification' },
     ],
     next: 'ed-acute-mgmt',
+    summary: 'BMI severity: <15 high risk, <13 extreme risk — correlates with medical instability',
+    skippable: true,
   },
 
   // =====================================================================
@@ -211,6 +229,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     body: '**ED management priorities** for medically unstable eating disorder patients [1][2][4].\n\n**Initial Stabilization:**\n1. **Cardiac monitoring:** Continuous telemetry\n2. **IV access:** Two large-bore IVs\n3. **Labs:** BMP, Mg2+, Phos, CBC, LFTs, glucose, ECG\n4. **Fluids:** Cautious - avoid rapid volume expansion (CHF risk)\n\n**Specific Interventions:**\n\n| Problem | Intervention |\n|---------|-------------|\n| Bradycardia <40 | Monitor, rewarming, atropine rarely needed |\n| Hypotension | Cautious fluids (250mL boluses), avoid vasopressors |\n| Hypothermia | Passive rewarming (blankets), warm IV fluids |\n| Hypoglycemia | D10W or D50 bolus, then D5 maintenance |\n| QTc >450ms | Correct K+, Mg2+, Phos; avoid QTc-prolonging drugs |\n\n**Medication Cautions:**\n- Avoid SSRIs acutely (QTc prolongation when malnourished)\n- Avoid metoclopramide (QTc, dystonias)\n- Use ondansetron cautiously (QTc)\n- Avoid laxatives (reinforces purging)\n\n**Do NOT delay refeeding** for mild electrolyte abnormalities - correct and feed simultaneously.',
     citation: [1, 2, 4],
     next: 'ed-electrolyte-replacement',
+    summary: 'Medical stabilization takes precedence over psychiatric disposition — correct lethal derangements first',
+    safetyLevel: 'warning',
   },
   {
     id: 'ed-electrolyte-replacement',
@@ -250,6 +270,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'electrolyte-replacement', label: 'Electrolyte Replacement Guide' },
     ],
     next: 'ed-refeeding-protocol',
+    summary: 'Replace K+ before refeeding, Mg2+ before K+ (Mg depletion causes K+ wasting), check phosphate',
+    safetyLevel: 'critical',
   },
   {
     id: 'ed-refeeding-protocol',
@@ -281,6 +303,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'refeeding-risk', label: 'Refeeding Risk Calculator' },
     ],
     next: 'ed-cardiac-monitoring',
+    summary: 'Start 10-20 kcal/kg/day, advance slowly over 5-7 days, replace phosphate aggressively',
+    safetyLevel: 'critical',
   },
   {
     id: 'ed-cardiac-monitoring',
@@ -293,6 +317,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { id: 'qtc-calculator', label: 'QTc Calculator' },
     ],
     next: 'ed-psych-assess',
+    summary: 'Continuous telemetry if QTc >450ms, HR <40, or electrolyte derangement — arrhythmia risk',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -310,6 +336,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { label: 'Treatment Refusal', description: 'Refusing medical care or nutrition', next: 'ed-capacity', urgency: 'urgent' },
       { label: 'Cooperative, No Acute Risk', description: 'Accepting treatment, no self-harm risk', next: 'ed-involuntary' },
     ],
+    summary: 'Psychiatric assessment after medical stabilization — assess suicidality, capacity, and motivation',
+    safetyLevel: 'warning',
   },
   {
     id: 'ed-suicide-risk',
@@ -319,6 +347,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     body: '**Suicide risk assessment** is critical in eating disorder patients [5].\n\n**Risk Factors Specific to Eating Disorders:**\n- Prior suicide attempts (strongest predictor)\n- Purging behaviors (higher risk than restrictive AN)\n- Comorbid depression, substance use, personality disorder\n- Recent weight restoration (paradoxically increases risk)\n- Treatment dropout\n- Longer duration of illness\n\n**Assessment Questions:**\n- "Have you had thoughts of hurting yourself or ending your life?"\n- "Do you have a plan? Access to means?"\n- "What has stopped you from acting on these thoughts?"\n- "How would you rate your safety right now on a scale of 1-10?"\n\n**Immediate Actions:**\n- 1:1 observation\n- Remove means (sharps, cords, medications)\n- Psychiatric consultation\n- Safety plan documentation\n- Consider involuntary hold if imminent risk\n\n**Documentation:**\n- Risk level (low/moderate/high/imminent)\n- Risk and protective factors\n- Means restriction counseling\n- Plan for monitoring and disposition',
     citation: [5],
     next: 'ed-disposition',
+    summary: 'Eating disorders carry high suicide risk — formal safety assessment on all presentations',
+    safetyLevel: 'warning',
   },
   {
     id: 'ed-capacity',
@@ -328,6 +358,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     body: '**Capacity assessment** is essential when patients refuse treatment [5].\n\n**Four Components of Capacity:**\n1. **Understanding:** Can explain the diagnosis and proposed treatment\n2. **Appreciation:** Recognizes how illness applies to their situation\n3. **Reasoning:** Can weigh risks/benefits, compare alternatives\n4. **Expression:** Can communicate a stable choice\n\n**Factors That Impair Capacity in AN:**\n- Severe malnutrition affects cognition\n- Anosognosia (inability to recognize illness severity)\n- Depression/anxiety cloud judgment\n- Obsessional thinking about weight/food\n\n**If Patient Refuses Treatment:**\n\n**Medical Emergency (imminent life threat):**\n- Treat without consent under emergency doctrine\n- Document the emergency clearly\n- Examples: K+ <2.5, HR <30, glucose <50\n\n**Not Immediate Emergency:**\n- Formal capacity evaluation\n- Psychiatry consult\n- If lacks capacity: seek surrogate decision-maker or court order\n- If has capacity: document informed refusal, offer alternatives\n\n**Consider Involuntary Commitment** if:\n- Lacks capacity AND\n- Imminent danger to self AND\n- Less restrictive alternatives exhausted',
     citation: [5],
     next: 'ed-involuntary',
+    summary: 'Assess decision-making capacity — severe malnutrition can impair cognition and judgment',
+    skippable: true,
   },
   {
     id: 'ed-involuntary',
@@ -337,6 +369,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     body: '**Involuntary psychiatric hold** may be necessary for life-saving treatment [5].\n\n**Criteria for Involuntary Hold (vary by state):**\n1. Mental illness present (eating disorder qualifies)\n2. Imminent danger to self (medical instability or suicide risk)\n3. Unable to provide for basic needs (nutrition)\n4. Less restrictive alternatives insufficient\n\n**Medical Criteria Supporting Involuntary Hold:**\n- BMI <13 with refusal to eat\n- Life-threatening electrolyte abnormalities\n- Cardiac instability (HR <40, QTc >500)\n- Inability to recognize severity of illness\n\n**Process:**\n1. Document medical necessity thoroughly\n2. Psychiatry consultation\n3. Complete state-specific hold paperwork\n4. Arrange appropriate level of care (medical unit with psych support)\n5. Legal review within statutory timeframe\n\n**Ethical Considerations:**\n- Autonomy vs. beneficence\n- Preserving life allows future autonomous decisions\n- Malnutrition impairs the very cognition needed for capacity\n- Most patients later grateful for intervention\n\n**Court-ordered treatment** may be needed for extended medical treatment against patient wishes.',
     citation: [5],
     next: 'ed-disposition',
+    summary: 'Involuntary treatment may be needed if life-threatening refusal of care and lacks capacity',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -354,6 +388,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
       { label: 'Psychiatric Admission', description: 'Suicide risk or treatment refusal', next: 'ed-psych-admit', urgency: 'urgent' },
       { label: 'Outpatient with Close Follow-up', description: 'Medically and psychiatrically stable', next: 'ed-outpatient' },
     ],
+    summary: 'Admit if BMI <15, HR <50, K+ <3.0, QTc >500, orthostatic, or refeeding risk',
   },
   {
     id: 'ed-medical-admit',
@@ -364,6 +399,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     recommendation: 'Medical admission with telemetry, refeeding protocol, and psychiatric consultation. Target HR >50, QTc <450ms, normal electrolytes before discharge. Arrange appropriate step-down level of care.',
     confidence: 'recommended',
     citation: [1, 2],
+    summary: 'Medical admission: HR <50, QTc >450, K+ <3.0, BMI <15, orthostatic, refeeding risk',
+    safetyLevel: 'warning',
   },
   {
     id: 'ed-psych-admit',
@@ -374,6 +411,7 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     recommendation: 'Psychiatric admission after medical clearance. Ensure HR >50, QTc <450ms, stable electrolytes. Document risk assessment and recommended treatment level. Coordinate medical monitoring post-discharge.',
     confidence: 'recommended',
     citation: [1, 5],
+    summary: 'Psychiatric admission if medically stable but high self-harm risk or unable to maintain nutrition',
   },
   {
     id: 'ed-outpatient',
@@ -387,6 +425,8 @@ export const EATING_DISORDERS_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'marsipan-risk', label: 'MARSIPAN Risk Assessment' },
     ],
+    summary: 'Outpatient only if medically stable, eating disorder team in place, and reliable follow-up',
+    skippable: true,
   },
 ];
 

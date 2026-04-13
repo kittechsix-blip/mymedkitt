@@ -43,6 +43,7 @@ export const HFNC_NODES = [
                 next: 'hfnc-immunocompromised',
             },
         ],
+        summary: 'HFNC for hypoxemic respiratory failure, post-extubation, pre-oxygenation — select indication',
     },
     {
         id: 'hfnc-hypoxemic',
@@ -52,6 +53,8 @@ export const HFNC_NODES = [
         body: '**FLORALI Trial Evidence (Frat 2015):** [5]\n- 310 patients with acute hypoxemic respiratory failure (PaO2/FiO2 <300)\n- HFNC vs NIV vs standard O2\n- **No difference in intubation rate overall**\n- **Subgroup PaO2/FiO2 ≤200:** HFNC significantly reduced intubation (38% vs 47% vs 50%)\n- **90-day mortality:** HFNC 12% vs standard O2 23% vs NIV 28%\n\n**Why HFNC > NRB for severe hypoxemia:** [1][4]\n- NRB maxes at 10-15 L/min - patients with high minute ventilation entrain room air\n- HFNC at 60 L/min meets or exceeds patient inspiratory demand\n- Dead space washout improves ventilatory efficiency\n- PEEP effect recruits atelectatic lung\n\n**Key Principle:** HFNC is arguably **front-line therapy** for parenchymal lung disease (pneumonia, ARDS). The FLORALI trial showed superiority over NIV in acute lung injury. [1][5]',
         citation: [1, 4, 5],
         next: 'hfnc-setup',
+        summary: 'HFNC superior to conventional O2 for hypoxemic respiratory failure — FLORALI trial: reduced intubation',
+        skippable: true,
     },
     {
         id: 'hfnc-post-extubation',
@@ -61,6 +64,8 @@ export const HFNC_NODES = [
         body: '**Evidence for Post-Extubation HFNC:** [6][7]\n\n**Hernandez 2016 (High-Risk Patients):**\n- HFNC vs NIV in high-risk extubation patients\n- Non-inferior for reintubation at 72h (22.8% vs 19.1%)\n- Better tolerated, fewer complications\n\n**Maggiore 2014:**\n- HFNC at 50 L/min vs standard O2 post-extubation\n- Better oxygenation at all time points\n- Lower reintubation rate (4% vs 21%)\n\n**Current Practice:** [1][7]\n- HFNC preferred over standard O2 for most post-extubation patients\n- Consider NIV only for hypercapnic respiratory failure (COPD)\n- Start at 50-60 L/min immediately post-extubation\n- Wean flow as tolerated\n\n**Titration:** Increase flow rate as high as patient tolerates - higher flow = more dead space washout = less work of breathing.',
         citation: [1, 6, 7],
         next: 'hfnc-setup',
+        summary: 'HFNC non-inferior to NIV for post-extubation support in high-risk patients',
+        skippable: true,
     },
     {
         id: 'hfnc-preoxygenation',
@@ -70,6 +75,8 @@ export const HFNC_NODES = [
         body: '**Pre-Oxygenation for RSI:** [8][9]\n- Standard approach: NRB or BVM for 3-5 minutes\n- **HFNC advantage:** 60 L/min flow maintains high FiO2, washes out nitrogen\n- Can continue during laryngoscopy (apneic oxygenation)\n\n**Apneic Oxygenation:** [8]\n- Leave nasal cannula at 15-60 L/min during intubation attempt\n- Extends safe apnea time by 2-4 minutes\n- Particularly valuable in difficult airways\n\n**Evidence is Mixed:** [9]\n- FELLOW trial (2017): No difference in lowest SpO2 during intubation\n- However, sicker patients and those requiring multiple attempts may benefit\n\n**Practical Approach:**\n- Use standard NC at 15 L/min or HFNC at 60 L/min during laryngoscopy\n- Ensure head-up positioning (20-30 degrees)\n- Continue oxygen flow throughout attempt\n- Benefit most pronounced in patients with limited oxygen reserves',
         citation: [8, 9],
         next: 'hfnc-setup',
+        summary: 'HFNC during RSI provides apneic oxygenation — continue during laryngoscopy at 60 L/min',
+        skippable: true,
     },
     {
         id: 'hfnc-chf',
@@ -79,6 +86,8 @@ export const HFNC_NODES = [
         body: '**HFNC vs CPAP/BiPAP in Cardiogenic Pulmonary Edema:**\n\n**Key Consideration:** CPAP/BiPAP provides higher PEEP (~10-15 cm H2O) vs HFNC (~3-5 cm H2O). For **SCAPE (Sympathetic Crashing Acute Pulmonary Edema)**, BiPAP remains first-line. [10]\n\n**When to Consider HFNC in CHF:**\n- Mild-moderate pulmonary edema (not SCAPE)\n- BiPAP intolerance (claustrophobia, facial trauma)\n- Post-diuresis maintenance\n- Bridge while setting up BiPAP\n\n**HFNC Settings for CHF:**\n- Start 40-60 L/min\n- FiO2 titrate to SpO2 92-96%\n- Monitor for improvement vs escalation need\n\n**Escalation Criteria:**\n- Persistent RR >30 despite HFNC\n- SpO2 <90% on HFNC 60 L/min, FiO2 100%\n- Worsening work of breathing\n- Accessory muscle use, tripoding\n\n**Transition to BiPAP** if not improving within 15-30 minutes. [10]\n\n[CHF Exacerbation Consult](#/tree/chf-exacerbation)',
         citation: [10],
         next: 'hfnc-setup',
+        summary: 'NIV (BiPAP) is first-line for CHF exacerbation — HFNC if NIV intolerance',
+        skippable: true,
     },
     {
         id: 'hfnc-immunocompromised',
@@ -88,6 +97,8 @@ export const HFNC_NODES = [
         body: '**Meta-Analysis Evidence (Azoulay 2010, Frat 2015):** [5][11]\n- Immunocompromised patients with ARF have high mortality\n- Intubation associated with increased mortality risk\n- Avoiding intubation improves outcomes\n\n**HFNC Advantages:** [11][12]\n- Reduced intubation rate vs standard O2 and NIV in meta-analyses\n- Better tolerated for prolonged periods\n- Allows oral intake and communication\n- Lower infection risk than NIV (no rebreathing)\n\n**Specific Populations:**\n- **Hematologic malignancy:** HFNC may delay or prevent intubation\n- **Post-transplant:** Consider infection control precautions\n- **HIV/AIDS:** Same indications as immunocompetent\n\n**COVID-19:** [12]\n- HFNC successful in ~53% of hospitalized COVID patients\n- ROX index predictive of success (>4.88 at 12h = good prognosis)\n- Mortality lower in HFNC responders\n- Aerosol generation concerns led to early NIV preference - now reconsidered\n\n**Caution:** Close monitoring essential - delayed intubation associated with worse outcomes.',
         citation: [5, 11, 12],
         next: 'hfnc-setup',
+        summary: 'HFNC reduces intubation rate in immunocompromised patients with respiratory failure',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: DEVICE SETTINGS
@@ -103,6 +114,7 @@ export const HFNC_NODES = [
             { id: 'hfnc-settings', label: 'Initial Settings Guide' },
         ],
         next: 'hfnc-titration',
+        summary: 'Start flow 30-40 L/min, FiO2 to maintain SpO2 >92%, temp 37°C — titrate up to 60 L/min',
     },
     {
         id: 'hfnc-titration',
@@ -112,6 +124,8 @@ export const HFNC_NODES = [
         body: '**Flow Rate Titration:** [1][2]\n\n**Increasing Flow (20 -> 60 L/min):**\n- Primary benefit: Dead space washout, reduced WOB\n- Secondary benefit: Modest PEEP increase (~1 cm H2O per 10 L/min)\n- Oxygenation benefit minimal above baseline matching inspiratory demand\n\n**When to Increase Flow:**\n- RR >25 despite adequate SpO2\n- Accessory muscle use\n- Patient reports dyspnea\n- Speaking in short sentences\n\n**FiO2 Titration:**\n- Start 50-60% for moderate hypoxemia\n- Start 100% for severe hypoxemia, titrate down as able\n- Target SpO2 92-96% (avoid hyperoxia)\n\n**Temperature:**\n- 37C optimal for mucosal comfort and humidification\n- 34C if patient reports discomfort\n- Lower temperatures reduce humidification effectiveness\n\n**Weaning Parameters:** [1]\nPatient ready for standard NC when tolerating:\n- Flow 20 L/min\n- FiO2 50%\n- RR <25\n- No accessory muscle use\n\nTrial standard NC at 6 L/min (~40-50% FiO2).',
         citation: [1, 2],
         next: 'hfnc-comparison',
+        summary: 'Titrate flow first for work of breathing, then FiO2 for oxygenation target',
+        skippable: true,
     },
     {
         id: 'hfnc-comparison',
@@ -121,6 +135,8 @@ export const HFNC_NODES = [
         body: '**Comparison of Oxygen Delivery Devices:** [1][4]\n\n| Feature | Standard NC | NRB | HFNC | NIV |\n|---------|------------|-----|------|-----|\n| Max Flow | 6 L/min | 15 L/min | 60-70 L/min | N/A |\n| FiO2 | ~40% | ~60-70% | ~100% | ~100% |\n| PEEP | None | None | 3-5 cm H2O | 5-15 cm H2O |\n| Dead Space Washout | No | No | Yes | Variable |\n| Humidification | No | No | Yes (heated) | Yes |\n| Tolerability | Good | Fair | Good | Poor |\n| Eating/Talking | Yes | No | Yes | No |\n\n**Why NRB Should Be Abandoned:** [4]\n- Flow rate (10-15 L/min) insufficient for patients with high minute ventilation\n- Room air entrainment reduces actual FiO2 to 60-70%\n- Risk of CO2 rebreathing at low flow rates\n- Covers face, interferes with communication\n- Aspiration risk, pressure injury potential\n- **If patient needs NRB, they likely need HFNC or higher level of care**\n\n**Key Concept:** HFNC bridges the gap between standard O2 and NIV. For parenchymal lung disease (pneumonia, ARDS), HFNC may be superior to NIV.',
         citation: [1, 4],
         next: 'hfnc-rox-monitoring',
+        summary: 'HFNC vs NIV vs conventional O2: HFNC provides 3-5 cmH2O PEEP at 60 L/min flow',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: MONITORING & ROX INDEX
@@ -136,6 +152,8 @@ export const HFNC_NODES = [
             { id: 'rox-index', label: 'ROX Index Calculator' },
         ],
         next: 'hfnc-rox-timing',
+        summary: 'ROX index = (SpO2/FiO2)/RR — monitor at 2h, 6h, 12h to predict HFNC success vs failure',
+        safetyLevel: 'warning',
     },
     {
         id: 'hfnc-rox-timing',
@@ -165,6 +183,8 @@ export const HFNC_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'ROX ≥4.88 at 12h = low intubation risk. ROX <3.85 at any time = high failure risk, escalate',
+        safetyLevel: 'warning',
     },
     {
         id: 'hfnc-success',
@@ -174,6 +194,7 @@ export const HFNC_NODES = [
         body: '**ROX ≥4.88 indicates low risk of HFNC failure** [13][14]\n\n**Continue Current Therapy:**\n- Maintain HFNC at current settings\n- Reassess ROX every 4-6 hours\n- Monitor for improvement vs stability\n\n**Signs of Improvement:**\n- RR decreasing (<25)\n- Able to speak in full sentences\n- Reduced accessory muscle use\n- SpO2 maintained on lower FiO2\n- Patient reports comfort\n\n**Weaning Strategy:** [1]\n1. **Wean FiO2 first** - target SpO2 92-96%\n2. **Then wean flow** - decrease by 10 L/min increments\n3. **Ready for standard NC when:** Flow 20 L/min + FiO2 50%\n4. **Trial standard NC** at 6 L/min\n5. **If tolerated 2-4 hours** - continue standard O2 or room air\n\n**Caution:** Do not wean too aggressively. HFNC failure after initial success associated with worse outcomes.',
         citation: [1, 13, 14],
         next: 'hfnc-disposition',
+        summary: 'HFNC success: improved RR, reduced WOB, rising ROX index, stable SpO2 on lower FiO2',
     },
     {
         id: 'hfnc-grayzone',
@@ -183,6 +204,7 @@ export const HFNC_NODES = [
         body: '**ROX 3.85-4.88 = Indeterminate Risk** [13]\n\nAt 12 hours, only 11% of patients fall in this zone. Among them, 33% ultimately required intubation.\n\n**Management:**\n1. **Optimize HFNC settings:**\n   - Increase flow to 60 L/min if not already\n   - Ensure FiO2 appropriate for target SpO2\n   - Check nasal cannula fit\n\n2. **Address reversible factors:**\n   - Secretion clearance\n   - Positioning (head of bed elevation)\n   - Treat underlying cause (antibiotics, bronchodilators)\n   - Ensure adequate analgesia if pain limiting breathing\n\n3. **Reassess in 1-2 hours:**\n   - Recalculate ROX\n   - Assess trend (improving vs worsening)\n   - Evaluate work of breathing\n\n4. **Escalation discussion:**\n   - Early ICU consult if not already in ICU\n   - Discuss intubation plan with patient/family\n   - Have NIV available as bridge if needed\n\n**Key Principle:** Gray zone patients require vigilance. Trend matters more than single value.',
         citation: [13],
         next: 'hfnc-rox-timing',
+        summary: 'ROX 3.85-4.88: grey zone — reassess hourly, prepare for escalation if declining trend',
     },
     // =====================================================================
     // MODULE 4: ESCALATION CRITERIA
@@ -198,6 +220,8 @@ export const HFNC_NODES = [
             { id: 'hfnc-escalation', label: 'Failure Criteria Checker' },
         ],
         next: 'hfnc-escalation-options',
+        summary: 'HFNC failure: ROX declining, RR >35, persistent accessory muscle use, worsening ABG — do NOT delay intubation',
+        safetyLevel: 'critical',
     },
     {
         id: 'hfnc-escalation-options',
@@ -219,6 +243,8 @@ export const HFNC_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Escalation: NIV trial (if appropriate) or intubation — delayed intubation increases mortality',
+        safetyLevel: 'critical',
     },
     {
         id: 'hfnc-niv-trial',
@@ -228,6 +254,8 @@ export const HFNC_NODES = [
         body: '**NIV Settings After HFNC Failure:** [1][2]\n\n**Initial BiPAP Settings:**\n- IPAP: 12-16 cm H2O\n- EPAP: 8-10 cm H2O\n- FiO2: 100% initially, titrate down\n- Rise time: 150-200 ms\n\n**CPAP (for CHF):**\n- Start 8-10 cm H2O\n- Titrate up to 15-20 cm H2O as needed\n- FiO2 to maintain SpO2 92-96%\n\n**Monitoring on NIV:**\n- Reassess within 1-2 hours\n- If no improvement, proceed to intubation\n- Do not delay intubation for prolonged NIV trial\n\n**Contraindications to NIV:**\n- Altered mental status (GCS <10)\n- Hemodynamic instability\n- Copious secretions\n- Facial trauma or surgery\n- High aspiration risk\n- Inability to cooperate\n\n**Failure of NIV:** If no improvement within 1-2 hours or any contraindication develops, proceed to intubation immediately.',
         citation: [1, 2],
         next: 'hfnc-disposition',
+        summary: 'NIV trial appropriate for COPD or CHF — if no improvement in 1-2h, proceed to intubation',
+        skippable: true,
     },
     {
         id: 'hfnc-intubation',
@@ -237,6 +265,7 @@ export const HFNC_NODES = [
         body: '**Intubation Considerations:** [1][8]\n\n**Pre-Intubation Optimization:**\n- Continue HFNC during preparation (apneic oxygenation benefit)\n- Head-up positioning 20-30 degrees\n- Preoxygenate 3-5 minutes at max HFNC settings\n- Have vasopressors ready (push-dose epinephrine or norepinephrine)\n\n**Induction Agent Selection:**\n- **Ketamine:** 1-2 mg/kg IV - preserves hemodynamics, bronchodilation\n- **Etomidate:** 0.3 mg/kg IV - hemodynamically neutral\n- **Propofol:** 1-2 mg/kg IV - caution with hypotension\n\n**Apneic Oxygenation:** [8]\n- Leave nasal cannula (standard or HFNC) at 15-60 L/min during attempt\n- Extends safe apnea time\n\n**Post-Intubation:**\n- Lung-protective ventilation (6-8 mL/kg IBW)\n- PEEP titration per ARDSNet or driving pressure\n- Target SpO2 92-96%, avoid hyperoxia\n- Early sedation optimization\n\n[Push-Dose Pressors](#/tree/push-dose-pressors)',
         citation: [1, 8],
         next: 'hfnc-disposition',
+        summary: 'Continue HFNC at 60 L/min during intubation for apneic oxygenation — do not disconnect',
     },
     // =====================================================================
     // MODULE 5: SPECIAL POPULATIONS
@@ -249,6 +278,8 @@ export const HFNC_NODES = [
         body: '**COPD Considerations:** [2][17]\n\n**Traditional Teaching:** NIV is first-line for COPD exacerbation with hypercapnia.\n\n**Emerging Role of HFNC in COPD:**\n- May be effective for mild-moderate exacerbations\n- Better tolerated than NIV for prolonged use\n- Dead space washout improves CO2 clearance\n- Less effective than NIV for severe hypercapnia (pH <7.25)\n\n**ROX Index in COPD:** [17]\n- ROX index was developed in pneumonia patients\n- Predictive value less clear in COPD\n- Use clinical judgment alongside ROX\n\n**When to Use HFNC in COPD:**\n- Mild hypercapnia (pH >7.35, PCO2 45-55)\n- NIV intolerance\n- Stable COPD with hypoxemia\n- Weaning from NIV\n\n**When to Use NIV in COPD:**\n- Moderate-severe hypercapnia (pH <7.35, PCO2 >55)\n- COPD-CHF overlap with pulmonary edema\n- Prior successful NIV use\n\n**Key Point:** Do not use HFNC as substitute for NIV in severe hypercapnic respiratory failure.',
         citation: [2, 17],
         next: 'hfnc-disposition',
+        summary: 'COPD: NIV (BiPAP) remains first-line — HFNC as alternative if NIV-intolerant',
+        skippable: true,
     },
     {
         id: 'hfnc-obesity',
@@ -258,6 +289,8 @@ export const HFNC_NODES = [
         body: '**Obese Patients Present Unique Challenges:** [1][2]\n\n**Physiological Considerations:**\n- Reduced FRC due to abdominal pressure on diaphragm\n- Increased atelectasis, especially when supine\n- Higher oxygen consumption\n- Difficult airway risk if intubation needed\n\n**HFNC Benefits in Obesity:**\n- PEEP effect helps recruit atelectatic lung\n- Better tolerated than NIV mask on obese face\n- Continuous O2 delivery during apneic periods\n\n**Positioning:** [1]\n- **Reverse Trendelenburg** or sitting upright essential\n- Supine position worsens atelectasis and hypoxemia\n- 30-45 degree head elevation minimum\n\n**HFNC Settings:**\n- Higher flow rates often needed (50-70 L/min)\n- FiO2 titrate to SpO2 92-96%\n\n**Escalation Threshold:**\n- Lower threshold for NIV trial due to atelectasis component\n- BiPAP may recruit lung more effectively\n- Early intubation if needed - difficult airway anticipated\n\n**Key Point:** Positioning is critical in obese patients. Reverse Trendelenburg dramatically improves oxygenation.',
         citation: [1, 2],
         next: 'hfnc-disposition',
+        summary: 'Obese patients may need higher flows (60 L/min) and elevated HOB for adequate PEEP effect',
+        skippable: true,
     },
     {
         id: 'hfnc-pediatrics',
@@ -267,6 +300,8 @@ export const HFNC_NODES = [
         body: '**Pediatric HFNC Applications:** [18]\n\n**Bronchiolitis:**\n- Most studied pediatric indication\n- HFNC reduces need for ICU admission\n- May prevent intubation in moderate-severe bronchiolitis\n\n**Flow Rate by Age:**\n| Age | Starting Flow | Max Flow |\n|-----|--------------|----------|\n| Infant | 2 L/kg/min | 2 L/kg/min (max ~8 L/min) |\n| 1-5 years | 1-2 L/kg/min | Up to 20-25 L/min |\n| >5 years | 1 L/kg/min | Up to 50 L/min |\n\n**Pediatric Considerations:**\n- Smaller nasal cannula sizes available\n- Temperature tolerance varies (may need 34C)\n- Close monitoring essential (children decompensate quickly)\n- Family anxiety - explain device and expected sounds\n\n**Failure Indicators:**\n- Increasing RR or WOB after 1-2 hours\n- Declining mental status\n- Poor feeding\n- Apnea\n\n**Note:** Pediatric ROX index not well validated - use clinical judgment.',
         citation: [18],
         next: 'hfnc-disposition',
+        summary: 'Pediatric flows: 2 L/kg/min max — bronchiolitis has strongest evidence for pediatric HFNC',
+        skippable: true,
     },
     {
         id: 'hfnc-dnr-comfort',
@@ -276,6 +311,8 @@ export const HFNC_NODES = [
         body: '**HFNC as Comfort Measure:** [1]\n\n**Advantages for Comfort Care:**\n- Reduces dyspnea without invasive intervention\n- Allows communication with family\n- Permits oral intake\n- More comfortable than NRB mask\n- Maintains dignity\n\n**Settings for Comfort:**\n- Titrate to patient comfort, not SpO2 goals\n- Lower flow rates may be sufficient\n- Humidity provides comfort for dry airways\n\n**Goals of Care Discussion:**\n- HFNC is **not** life-sustaining in same way as intubation\n- Can be consistent with comfort-focused care\n- Clarify that HFNC does not prevent natural death from respiratory failure\n- Can be discontinued if patient declines further\n\n**Family Expectations:**\n- Explain device will ease breathing but not cure disease\n- Patient can still speak, eat, interact\n- May provide time for family presence\n- Death from respiratory failure will still occur if that is disease trajectory\n\n**Documentation:** Clearly document goals of care, HFNC rationale, and that this is consistent with comfort-focused approach.',
         citation: [1],
         next: 'hfnc-disposition',
+        summary: 'HFNC appropriate for comfort care in DNR/DNI patients — reduces dyspnea without intubation',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -292,6 +329,7 @@ export const HFNC_NODES = [
         calculatorLinks: [
             { id: 'rox-index', label: 'ROX Index Calculator' },
         ],
+        summary: 'ICU admission for HFNC — requires continuous monitoring and rapid escalation capability',
     },
     {
         id: 'hfnc-summary',
@@ -303,6 +341,7 @@ export const HFNC_NODES = [
         calculatorLinks: [
             { id: 'rox-index', label: 'ROX Index Calculator' },
         ],
+        summary: 'HFNC: start 30-40 L/min, titrate to 60, monitor ROX index, escalate early if failing',
     },
 ];
 // =====================================================================

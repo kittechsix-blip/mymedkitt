@@ -14,6 +14,8 @@ export const ICH_NODES = [
         body: '[ICH Steps Summary](#/info/ich-summary) — time-critical hemorrhage management.\n\nSpontaneous ICH accounts for 10–15% of all strokes with ~40% 30-day mortality. Early hemostatic therapy, BP control, and neurosurgical consultation are the cornerstones of acute management.\n\n**Immediate actions:**\n• Non-contrast CT head — confirm diagnosis, estimate hematoma volume\n• Establish IV access ×2\n• Activate stroke/neurosurgery team\n• NPO (potential surgical candidate)\n\n**Do NOT delay anticoagulant reversal while awaiting labs** — empiric reversal should be given immediately if clinical suspicion of anticoagulant use is high.',
         citation: [1, 2],
         next: 'ich-labs',
+        summary: 'ICH: reverse anticoagulation AND lower BP simultaneously — time-critical interventions',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-labs',
@@ -24,6 +26,7 @@ export const ICH_NODES = [
         images: [{ src: 'images/ich/ich-basal-ganglia-ct.png', alt: 'CT head showing basal ganglia intracranial hemorrhage', caption: 'Basal ganglia ICH: hyperdense (white) blood on noncontrast CT — most common spontaneous ICH location (Wikimedia Commons, CC BY 4.0)' }],
         citation: [1, 2, 3],
         next: 'ich-anticoag',
+        summary: 'STAT: CBC, coags (PT/INR, PTT), BMP, type and screen — check antithrombotic medication list',
     },
     // =====================================================================
     // MODULE 2: COAGULATION OPTIMIZATION
@@ -66,6 +69,8 @@ export const ICH_NODES = [
                 next: 'ich-coag-adj',
             },
         ],
+        summary: 'Determine anticoagulant type: warfarin, dabigatran, Xa inhibitor, heparin, or antiplatelet',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-warfarin-rev',
@@ -94,6 +99,8 @@ export const ICH_NODES = [
             monitoring: 'Recheck INR 15-30 min post-PCC. If still >1.4, repeat PCC. Recheck INR at 6h (Vitamin K sustains correction).',
         },
         next: 'ich-bp',
+        summary: '4-factor PCC 25-50 IU/kg + Vitamin K 10mg IV — target INR <1.4 within 4 hours',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-dabi-rev',
@@ -122,6 +129,8 @@ export const ICH_NODES = [
             monitoring: 'Clinical assessment of bleeding. Thrombin time or dilute thrombin time if available. Repeat CT at 6h.',
         },
         next: 'ich-bp',
+        summary: 'Idarucizumab 5g IV for dabigatran reversal — immediate effect, one-time dose',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-xa-rev',
@@ -150,6 +159,8 @@ export const ICH_NODES = [
             monitoring: 'Anti-Xa levels if available (not required before treatment). Repeat CT at 6h. Monitor for thrombotic complications post-reversal.',
         },
         next: 'ich-bp',
+        summary: 'Andexanet alfa or 4-factor PCC 50 IU/kg for Xa inhibitor reversal — PCC if andexanet unavailable',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-heparin-rev',
@@ -178,6 +189,8 @@ export const ICH_NODES = [
             monitoring: 'Check PTT 15 min after protamine. Fibrinogen level for tPA-associated ICH.',
         },
         next: 'ich-bp',
+        summary: 'Protamine sulfate 1mg per 100U heparin given in last 2-3h — max 50mg, watch for anaphylaxis',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-coag-adj',
@@ -206,6 +219,8 @@ export const ICH_NODES = [
             monitoring: 'Platelet count (target >100,000). Fibrinogen level (target >200 mg/dL, supplement with cryoprecipitate if low).',
         },
         next: 'ich-bp',
+        summary: 'Platelets if <100K, cryoprecipitate if fibrinogen <200 — TXA may reduce hematoma expansion',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: BLOOD PRESSURE MANAGEMENT
@@ -237,6 +252,8 @@ export const ICH_NODES = [
             monitoring: 'Arterial line preferred. BP q5min during titration. Neuro checks q1h. Target SBP 130-150.',
         },
         next: 'ich-location',
+        summary: 'Target SBP 130-150 in first 6h (INTERACT2) — nicardipine or clevidipine infusion preferred',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: SURGICAL CONSIDERATIONS
@@ -267,6 +284,7 @@ export const ICH_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Location guides neurosurgical consultation: supratentorial vs cerebellar vs intraventricular',
     },
     {
         id: 'ich-supra-surg',
@@ -276,6 +294,7 @@ export const ICH_NODES = [
         body: '**Evidence for surgical evacuation is limited:**\n\n**STITCH-I Trial** (1,033 patients): No benefit from early surgery overall. Possible trend toward benefit for hematomas within 1 cm of cortical surface and lobar hemorrhage with GCS 9–12.\n\n**STITCH-II Trial** (601 patients): Focused on predicted surgical benefit subgroup — still no significant difference vs conservative management.\n\n**Possible indications for craniotomy:**\n• Large hematoma with significant midline shift\n• Elevated ICP refractory to medical management\n• Hemorrhage secondary to resectable lesion (AVM, tumor)\n• Lobar location, no IVH extension, very early presentation\n\n**Emerging:** Minimally invasive surgery (MISTIE III) — may be more promising than traditional craniotomy.\n\n**Decompressive hemicraniectomy:** Consider for massive edema with impending herniation when other options exhausted.\n\nConsult neurosurgery for all supratentorial ICH — even if medical management planned initially.',
         citation: [9, 10, 11],
         next: 'ich-seizures',
+        summary: 'Supratentorial ICH: neurosurgery for large (>30mL), superficial, or deteriorating — deep basal ganglia usually conservative',
     },
     {
         id: 'ich-cerebellar-surg',
@@ -285,6 +304,8 @@ export const ICH_NODES = [
         body: '**The cerebellum is unique — patients may deteriorate rapidly (12–24h).**\n\nRisks of cerebellar hemorrhage:\n• Direct brainstem compression → catastrophic damage\n• 4th ventricle compression → obstructive hydrocephalus\n• Upward transtentorial herniation\n\n**Paradox:** Cerebellar ICH patients tend to have better prognosis than other ICH types IF timely surgical intervention is performed.\n\n**AHA/ASA 2022 — Immediate surgical evacuation if:**\n• Hematoma volume **>15 mL**\n• Neurological deterioration\n• Brainstem compression\n• Hydrocephalus\n\n**Important:** Ventriculostomy (EVD) alone without posterior fossa decompression is **NOT recommended** — increases risk of upward transtentorial herniation.\n\nEVD pressure may not accurately reflect posterior fossa pressure.\n\nConsult neurosurgery **immediately** — this is a time-critical surgical emergency.',
         citation: [1, 2],
         next: 'ich-seizures',
+        summary: 'Cerebellar ICH >3cm or hydrocephalus = emergent surgical evacuation — rapid herniation risk',
+        safetyLevel: 'critical',
     },
     {
         id: 'ich-ivh-evd',
@@ -294,6 +315,8 @@ export const ICH_NODES = [
         body: '**IVH occurs in >40% of ICH patients and worsens prognosis.**\n\nComplications:\n• Hydrocephalus and elevated ICP\n• Central (neurogenic) fever\n\n**External Ventricular Drain (EVD):**\n• **Indicated** for hydrocephalus contributing to reduced consciousness\n• Ideal candidate: initially well, then develops hydrocephalus with neuroworsening\n• **Caveat:** EVD increases survival but may not increase rate of good neurologic outcome\n\n**Intraventricular tPA (CLEAR III Trial):**\n• 500 patients randomized to intraventricular tPA vs saline via EVD\n• Improved survival but did NOT increase good functional outcomes\n• May be considered when: predominantly IVH without large parenchymal hematoma, and hydrocephalus might resolve with clot dissolution\n\nConsult neurosurgery for EVD placement. Monitor ICP continuously.',
         citation: [1, 12, 13],
         next: 'ich-seizures',
+        summary: 'Intraventricular hemorrhage with hydrocephalus: emergent EVD placement by neurosurgery',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 5: ICU MANAGEMENT
@@ -317,6 +340,7 @@ export const ICH_NODES = [
             monitoring: 'Continuous EEG if impaired consciousness disproportionate to CT, unexplained mental status changes, or witnessed seizure.',
         },
         next: 'ich-icp-fever',
+        summary: 'Treat clinical seizures with levetiracetam — prophylactic AEDs controversial (AHA says consider)',
     },
     {
         id: 'ich-icp-fever',
@@ -326,6 +350,8 @@ export const ICH_NODES = [
         body: '**Intracranial Pressure:**\n• ICP elevation from mass effect, perihematomal edema, and/or obstructive hydrocephalus\n• **Edema peaks at ~5–6 days** — anticipate delayed neurological deterioration\n• Boluses of hypertonic saline or hypertonic bicarbonate for acute ICP crisis (bridge to EVD or surgery)\n• Routine hypertonic saline not supported by evidence\n\n**Sodium:**\n• Avoid hyponatremia or rapid decreases in sodium — worsens cerebral edema\n• Target Na >135 mEq/L\n\n**Fever:**\n• Treat aggressively with [acetaminophen](#/drug/acetaminophen/fever) — also provides analgesic benefit\n• **Neurogenic fever** may occur, especially with IVH extension — diagnosis of exclusion\n• Work up infection first (blood/urine cultures, CXR)\n• For refractory neurogenic fever: bromocriptine\n• INTREPID trial: automated surface cooling does NOT improve outcomes — do not use enforced normothermia devices routinely',
         citation: [1, 16],
         next: 'ich-dvt',
+        summary: 'Fever worsens ICH outcomes — target normothermia aggressively with acetaminophen and cooling',
+        safetyLevel: 'warning',
     },
     {
         id: 'ich-dvt',
@@ -354,6 +380,7 @@ export const ICH_NODES = [
             monitoring: 'Serial CT to confirm hemorrhage stability before starting chemical prophylaxis. Monitor for signs of DVT/PE.',
         },
         next: 'ich-disposition',
+        summary: 'Start DVT prophylaxis (pneumatic compression) immediately — pharmacologic prophylaxis after 48h if stable',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION & PROGNOSIS
@@ -371,6 +398,7 @@ export const ICH_NODES = [
             { id: 'ich-score', label: 'ICH Score' },
             { id: 'func-score', label: 'FUNC Score' },
         ],
+        summary: 'ICU admission for all ICH — neuro checks q1h, repeat CT at 6h or with clinical change',
     },
 ];
 export const ICH_NODE_COUNT = ICH_NODES.length;

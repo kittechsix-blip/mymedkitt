@@ -28,6 +28,7 @@ export const CVST_NODES = [
             { id: 'iscvt-rs', label: 'ISCVT Risk Score' },
         ],
         next: 'cvst-clinical-syndrome',
+        summary: 'CVST: 0.5-3% of all strokes — primarily young women, headache in >90%, seizures in 20-40%',
     },
     {
         id: 'cvst-clinical-syndrome',
@@ -42,6 +43,7 @@ export const CVST_NODES = [
             { label: 'Encephalopathy/Altered mental status', description: 'Confusion, stupor, bilateral signs', next: 'cvst-diagnosis', urgency: 'critical' },
             { label: 'Seizure presentation', description: 'New-onset seizures ± other features', next: 'cvst-seizure-management' },
         ],
+        summary: 'Identify dominant syndrome: isolated intracranial HTN, focal deficit, encephalopathy, or seizure',
     },
     {
         id: 'cvst-seizure-management',
@@ -51,6 +53,7 @@ export const CVST_NODES = [
         body: '**Acute seizure treatment:**\n• Standard seizure protocol — [Lorazepam](#/drug/lorazepam/seizure) 4mg IV, then load AED\n• [Levetiracetam](#/drug/levetiracetam/seizure) 60mg/kg IV (max 4500mg) preferred\n\n**Key points on seizure prophylaxis:** [1,5]\n\n**Primary prophylaxis (no prior seizures): NOT RECOMMENDED**\n• Weak evidence, potential harm\n• Canadian Stroke Best Practices: strong recommendation against\n\n**After first seizure:**\n• Initiate anti-seizure medication\n• Continue for patients with supratentorial lesions\n\n**Seizure risk factors:**\n• Supratentorial lesions\n• Motor deficits\n• Superior sagittal sinus involvement\n• Cortical vein thrombosis\n• Hemorrhagic transformation',
         citation: [1, 5],
         next: 'cvst-diagnosis',
+        summary: 'No seizure prophylaxis unless seizure already occurred — levetiracetam preferred after first seizure',
     },
     // ===================================================================
     // MODULE 2: Diagnosis
@@ -63,6 +66,8 @@ export const CVST_NODES = [
         body: '**D-dimer role:** [2,3]\n• Sensitivity: 83-97.8%\n• NPV: 95-99.8%\n• **Measure BEFORE imaging UNLESS:**\n  — Isolated headache presentation\n  — Symptoms >1 week (higher false-negative rate)\n\n**Critical limitation:** Up to 10% of CVST patients have normal D-dimer\n\n**Imaging modalities (ranked):**\n\n**1. MRI + MRV (Gold Standard)**\n• Most sensitive for CVT diagnosis\n• TOF-MRV does not require contrast\n• GRE/SWI detects cortical vein thrombosis\n\n**2. CT + CTV**\n• Reliable alternative when MRI unavailable\n• Sensitivity 79% | Specificity 90%\n• **Empty delta sign:** contrast outlines thrombosed SSS\n\n**3. DSA** — reserved for inconclusive non-invasive imaging',
         citation: [2, 3],
         next: 'cvst-imaging-findings',
+        summary: 'D-dimer NPV 95-99.8% but 10% of CVST have normal D-dimer — MRI+MRV gold standard, CT+CTV acceptable',
+        safetyLevel: 'warning',
     },
     {
         id: 'cvst-imaging-findings',
@@ -73,6 +78,7 @@ export const CVST_NODES = [
         images: [{ src: 'images/cvst/cvst-mri.jpg', alt: 'MRI showing cerebral venous sinus thrombosis with absent flow void in superior sagittal sinus', caption: 'CVST MRI — loss of normal flow void in the superior sagittal sinus indicating thrombus (subacute phase: T1 hyperintense). (Public domain)' }],
         citation: [2],
         next: 'cvst-confirmed',
+        summary: 'Acute: T1 iso/T2 hypo; subacute: T1/T2 hyperintense — CT empty delta sign in SSS thrombosis',
     },
     {
         id: 'cvst-confirmed',
@@ -85,6 +91,7 @@ export const CVST_NODES = [
             { label: 'Yes — ICH present', description: 'Hemorrhagic venous infarction or parenchymal bleeding', next: 'cvst-ich-anticoag' },
             { label: 'No — No hemorrhage', description: 'Thrombosis without parenchymal bleeding', next: 'cvst-risk-stratification' },
         ],
+        summary: 'CVST confirmed — assess location, parenchymal involvement, and hemorrhage before starting treatment',
     },
     {
         id: 'cvst-ich-anticoag',
@@ -94,6 +101,8 @@ export const CVST_NODES = [
         body: '**CRITICAL CONCEPT:** [1,2,4]\n\n**Intracranial hemorrhage secondary to CVST is NOT a contraindication to anticoagulation.**\n\n**Rationale:**\n• ICH in CVST is a consequence of venous congestion, not the cause\n• Anticoagulation treats the underlying thrombosis\n• Hemorrhage extension risk is lower than risk of untreated CVST\n\n**Evidence:**\n• ISCVT study: No difference in hemorrhage extension with anticoagulation\n• Multiple observational studies support safety\n• AHA/ASA and ESO guidelines: Strong recommendation FOR anticoagulation despite ICH\n\n**Proceed to anticoagulation** — do not withhold based on ICH presence.',
         citation: [1, 2, 4],
         next: 'cvst-risk-stratification',
+        summary: 'ICH in CVST is NOT a contraindication to anticoagulation — hemorrhage is consequence of venous congestion',
+        safetyLevel: 'critical',
     },
     // ===================================================================
     // MODULE 3: Risk Stratification
@@ -110,6 +119,8 @@ export const CVST_NODES = [
             { id: 'iscvt-rs', label: 'ISCVT Risk Score' },
         ],
         next: 'cvst-treatment',
+        summary: 'CVT-GS score: mild 0-2 (1.1% mortality), moderate 3-7 (19.6%), severe 8-13 (61.4%)',
+        skippable: true,
     },
     // ===================================================================
     // MODULE 4: Treatment
@@ -141,6 +152,7 @@ export const CVST_NODES = [
             monitoring: 'Clinical neuro checks q1-2h initially. Daily CBC for HIT surveillance. Anti-Xa levels if using LMWH in renal impairment.',
         },
         next: 'cvst-oral-anticoag',
+        summary: 'Enoxaparin 1 mg/kg SC q12h immediately — do NOT delay, even with ICH present',
     },
     {
         id: 'cvst-oral-anticoag',
@@ -150,6 +162,7 @@ export const CVST_NODES = [
         body: '**Timing:** After 5-15 days of parenteral therapy [1,3]\n\n**Options:**\n\n**DOACs (increasingly favored):**\n• Better safety profile than warfarin\n• No INR monitoring required\n• [Rivaroxaban](#/drug/rivaroxaban/cvst) 20mg daily with food\n• [Apixaban](#/drug/apixaban/cvst) 5mg BID\n\n**Warfarin:**\n• INR target: 2-3\n• Requires bridging with LMWH/UFH\n• Use when DOACs contraindicated\n\n**DOAC Contraindications:**\n• **Pregnancy** (teratogenic, crosses placenta)\n• **Antiphospholipid syndrome** (inferior efficacy)\n• **Severe renal impairment**',
         citation: [1, 3],
         next: 'cvst-duration',
+        summary: 'Transition to DOAC (rivaroxaban/apixaban) after 5-15 days — contraindicated in pregnancy and APS',
     },
     {
         id: 'cvst-duration',
@@ -159,6 +172,7 @@ export const CVST_NODES = [
         body: '**Duration depends on etiology:** [1,3]\n\n| Scenario | Duration |\n|----------|----------|\n| **Transient/reversible risk factor** | 3 months |\n| **Idiopathic or mild thrombophilia** | 6-12 months |\n| **Severe thrombophilia** | Indefinite |\n| **Recurrent CVST** | Indefinite |\n| **Active malignancy** | Duration of active disease |\n\n**Transient risk factors:**\n• OCP use (discontinue and reassess)\n• Pregnancy/puerperium\n• Recent surgery/trauma\n• Acute infection\n• Dehydration\n\n**Severe thrombophilia:**\n• Antiphospholipid syndrome\n• Homozygous Factor V Leiden\n• Protein C/S deficiency\n• Antithrombin III deficiency',
         citation: [1, 3],
         next: 'cvst-escalation',
+        summary: 'Transient risk factor: 3 months; idiopathic: 6-12 months; severe thrombophilia: indefinite',
     },
     {
         id: 'cvst-escalation',
@@ -171,6 +185,7 @@ export const CVST_NODES = [
             { label: 'Stable — Continue anticoagulation', description: 'No neurologic decline', next: 'cvst-special-populations' },
             { label: 'Deteriorating — Consider escalation', description: 'Progressive decline despite therapy', next: 'cvst-endovascular', urgency: 'critical' },
         ],
+        summary: 'Monitor for deterioration despite anticoagulation — endovascular or craniectomy if declining',
     },
     {
         id: 'cvst-endovascular',
@@ -180,6 +195,7 @@ export const CVST_NODES = [
         body: '**Reserved for:** [1,2]\n1. Neurological deterioration despite adequate anticoagulation\n2. Absolute contraindication to anticoagulation\n3. Extensive thrombosis with severe deficit\n4. Deep venous system involvement with altered mental status\n\n**Modalities:**\n• Catheter-directed thrombolysis\n• Mechanical thrombectomy\n• Combined approach\n\n**Evidence:** Very low quality — ESO states "cannot provide a recommendation"\n\n**Consider if:**\n• Multiple sinuses involved\n• Deep venous system thrombosis\n• Rapid clinical deterioration\n• Poor response to anticoagulation',
         citation: [1, 2],
         next: 'cvst-craniectomy',
+        summary: 'Reserved for neurologic deterioration despite adequate anticoagulation — very low quality evidence',
     },
     {
         id: 'cvst-craniectomy',
@@ -189,6 +205,8 @@ export const CVST_NODES = [
         body: '**Life-saving intervention for malignant CVST:** [6]\n\n**Indications:**\n• Clinical signs of herniation (3rd nerve palsy, GCS decline)\n• CT showing:\n  — Midline shift ≥5 mm\n  — Effacement of basal cisterns\n  — Significant mass effect from hemorrhagic venous infarction\n\n**Outcomes:**\n• >50% favorable outcomes\n• ~20% mortality\n• Better than medical management alone for malignant course\n\n**Post-operative anticoagulation:**\n• Resume heparin 12 hours post-op at **half-dose**\n• Full dose at 24 hours\n• Continue anticoagulation per standard CVST protocol',
         citation: [6],
         next: 'cvst-special-populations',
+        summary: 'Decompressive craniectomy if herniation or midline shift ≥5mm — >50% favorable outcomes',
+        safetyLevel: 'critical',
     },
     // ===================================================================
     // MODULE 5: Special Populations
@@ -206,6 +224,7 @@ export const CVST_NODES = [
             { label: 'OCP/estrogen user', next: 'cvst-ocp' },
             { label: 'None — Standard management', next: 'cvst-disposition' },
         ],
+        summary: 'Pregnancy: LMWH only (DOACs teratogenic); malignancy: LMWH preferred; OCP: discontinue estrogen',
     },
     {
         id: 'cvst-pregnancy',
@@ -215,6 +234,8 @@ export const CVST_NODES = [
         body: '**Anticoagulation:** [7]\n• **LMWH throughout pregnancy** (does not cross placenta)\n• [Enoxaparin](#/drug/enoxaparin/pregnancy) 1 mg/kg SC q12h\n• Continue ≥6 weeks postpartum (minimum 3 months total)\n\n**CONTRAINDICATED:**\n• **DOACs** — teratogenic, excreted in breast milk\n• **Warfarin** — first trimester teratogenicity (nasal hypoplasia, stippled epiphyses)\n\n**Delivery considerations:**\n• Vaginal delivery is safe if facilitated by responsive team\n• C-section not routinely required\n• Neuraxial anesthesia: Contraindicated if herniation risk\n  — Timing depends on anticoagulation (hold LMWH 24h prior)\n\n**Future pregnancies:**\n• CVST alone is NOT a contraindication to future pregnancy\n• Prophylactic LMWH during pregnancy and 6 weeks postpartum\n• Avoid estrogen-containing contraceptives',
         citation: [7],
         next: 'cvst-disposition',
+        summary: 'LMWH throughout pregnancy + ≥6 weeks postpartum — DOACs and warfarin contraindicated in pregnancy',
+        safetyLevel: 'warning',
     },
     {
         id: 'cvst-malignancy',
@@ -224,6 +245,8 @@ export const CVST_NODES = [
         body: '**~6% of CVST cases have coexisting malignancy** [8]\n\n**Treatment:**\n• **LMWH preferred** for initial and long-term therapy\n• Used in 71-74% of cancer-associated CVST cases\n• DOACs: Insufficient evidence in malignancy-related CVST\n\n**Duration:**\n• Minimum 3 months\n• Duration of active malignancy\n• Consider indefinite if high recurrence risk\n\n**Prognosis considerations:**\n• Higher intracranial hemorrhage risk (13-fold in brain cancer)\n• Prior CVST does NOT negatively impact cancer survival\n• Treat underlying malignancy concurrently',
         citation: [8],
         next: 'cvst-disposition',
+        summary: 'LMWH preferred for cancer-associated CVST — continue for duration of active malignancy',
+        skippable: true,
     },
     {
         id: 'cvst-ocp',
@@ -233,6 +256,7 @@ export const CVST_NODES = [
         body: '**OCP-associated CVST risk:** [1,7]\n• OR 7.59 (95% CI 3.82-15.09) vs non-users\n• Third-generation pills (desogestrel, gestodene): Highest risk\n\n**Post-CVST contraception:**\n\n**DISCONTINUE:**\n• All estrogen-containing contraceptives\n• Combined OCPs\n• Estrogen patches/rings\n\n**SAFE ALTERNATIVES:**\n• **Progestin-only methods:**\n  — Levonorgestrel IUD (Mirena)\n  — Progestin-only pills (norethindrone)\n  — Depo-Provera (medroxyprogesterone)\n• **Non-hormonal:**\n  — Copper IUD\n  — Barrier methods\n\n**Counsel on:** Risk of future pregnancies (safe with prophylaxis), importance of thrombophilia workup',
         citation: [1, 7],
         next: 'cvst-disposition',
+        summary: 'Discontinue ALL estrogen-containing contraceptives — safe alternatives: progestin-only or copper IUD',
     },
     // ===================================================================
     // MODULE 6: Disposition
@@ -249,6 +273,7 @@ export const CVST_NODES = [
         calculatorLinks: [
             { id: 'cvt-gs', label: 'CVT-GS Score' },
         ],
+        summary: 'All CVST patients require admission — ICU if AMS or high CVT-GS; neuro unit if stable',
     },
 ];
 export const CVST_NODE_COUNT = CVST_NODES.length;

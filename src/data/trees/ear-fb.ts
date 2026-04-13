@@ -54,6 +54,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     ],
     citation: [1, 3, 4],
     next: 'earfb-triage',
+    summary: 'First removal attempt has highest success (65-78%) — plan technique before starting',
   },
 
   {
@@ -87,6 +88,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-assess',
       },
     ],
+    summary: 'Screen for button battery, live insect, or TM perforation before attempting removal',
   },
 
   {
@@ -98,6 +100,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'IMMEDIATE ACTIONS:\n• Do NOT irrigate (water accelerates damage)\n• Keep ear dry\n• Emergent ENT consultation\n• If ENT unavailable, attempt gentle removal with alligator forceps or magnetic tool\n• Do NOT delay for imaging if diagnosis is clear\n\nDAMAGE MECHANISM:\n• Electrical current generation between poles\n• Hydroxide production → tissue necrosis\n• Can erode through EAC within hours\n\nCOMPLICATIONS:\n• Canal stenosis\n• TM perforation\n• Ossicular damage\n• Facial nerve injury\n\nDISPOSITION: ENT follow-up within 24 hours even after successful removal.',
     confidence: 'definitive',
     citation: [1, 8],
+    summary: 'Button battery causes necrosis in 1-2h — do NOT irrigate, emergent ENT removal',
+    safetyLevel: 'critical',
   },
 
   {
@@ -108,6 +112,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Kill the insect before attempting extraction. This reduces patient distress and prevents further injury from insect movement.\n\nPREFERRED AGENT: Mineral Oil\n• Fill canal with mineral oil drops\n• Insect dies quietly (no thrashing)\n• Wait 1-2 minutes before extraction\n\nALTERNATIVE AGENTS:\n• 2% lidocaine (may cause initial thrashing)\n• Alcohol (effective but can cause discomfort)\n• Warm vegetable oil\n\nAVOID:\n• Water alone (insects may survive longer)\n• Hot liquids (risk of burns)\n\nAfter the insect is dead, proceed to extraction using irrigation, forceps, or suction.',
     citation: [7],
     next: 'earfb-classify',
+    summary: 'Fill canal with mineral oil to kill insect quietly before extraction attempt',
+    skippable: true,
   },
 
   {
@@ -119,6 +125,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'REFER TO ENT — do not attempt removal.\n\nSIGNS OF TM PERFORATION:\n• Vertigo or nystagmus\n• Sudden hearing loss\n• Bleeding from canal\n• Severe pain at time of FB insertion\n• Object appears to be touching/impacting TM\n• Poor visualization of depth\n\nWHY REFER:\n• Risk of ossicular chain damage\n• Risk of middle ear contamination\n• Operative microscope provides better visualization\n• May need formal tympanoplasty\n\nIF OTOTOXIC DROPS NEEDED:\n• Avoid aminoglycosides (neomycin, tobramycin)\n• Avoid polymyxin B\n• Safe: ofloxacin, ciprofloxacin/dexamethasone',
     confidence: 'definitive',
     citation: [1, 3],
+    summary: 'Suspected TM perforation — do NOT attempt removal, refer to ENT',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -133,6 +141,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Proper assessment is critical for first-attempt success.\n\nVISUALIZATION:\n• Use otoscope with largest speculum that fits\n• Ensure adequate lighting\n• Pull pinna up and back (adults) or down and back (children)\n• Document object type, size, location, TM status\n\nCONTRAINDICATION CHECK:\n• TM perforation or suspected damage\n• Object touching/impacting TM\n• Sharp object adjacent to TM\n• Multiple prior failed attempts\n• Uncooperative patient without sedation option\n\nPATIENT PREPARATION:\n• Position: supine or sitting with head turned\n• Consider papoose board for young children\n• Procedural sedation if needed (ketamine preferred)\n• Ensure suction and backup equipment ready',
     citation: [2, 4, 5],
     next: 'earfb-classify',
+    summary: 'Visualize with otoscope, check for TM damage, prepare patient and backup equipment',
+    skippable: true,
   },
 
   {
@@ -173,6 +183,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-tech-other',
       },
     ],
+    summary: 'Classify FB type to determine optimal removal technique',
   },
 
   // =====================================================================
@@ -187,6 +198,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'STEP 1: KILL THE INSECT (if alive)\n• Mineral oil drops — fill canal, wait 1-2 minutes\n• Insect dies quietly, reducing trauma\n\nSTEP 2: EXTRACTION OPTIONS\n\nIrrigation (after killing):\n• Insect may float out with gentle irrigation\n• Use body-temp water, low pressure\n\nAlligator Forceps:\n• Grasp leg, wing, or body segment\n• Slow, gentle withdrawal\n• May need to remove in pieces\n\nSuction:\n• Soft-tipped catheter\n• Good for fragmented insects\n• Avoid traumatizing canal\n\nRight-Angle Hook:\n• If body intact, scoop gently behind\n• Rotate to position behind FB\n• Withdraw slowly\n\nTIPS:\n• Have suction ready for fragments\n• Expect partial removal — may need multiple passes\n• Document species if possible (rarely clinically relevant)',
     citation: [6, 7],
     next: 'earfb-attempt',
+    summary: 'Kill insect first with mineral oil, then irrigate or use forceps to extract',
+    skippable: true,
   },
 
   {
@@ -197,6 +210,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Hard, round objects are challenging because forceps slip. Use curette or hook techniques.\n\nPRIMARY TECHNIQUE: Right-Angle Hook or Curette\n• Advance hook/curette BEHIND the object\n• Rotate to position tip posterior to FB\n• Apply gentle posterior-to-anterior traction\n• Scoop slowly and withdraw\n\nALTERNATIVE: Suction\n• If object is small, smooth, and loose\n• Soft-tipped catheter may adhere\n• Works best for <3 mm objects\n\nCYANOACRYLATE (GLUE) METHOD:\n• Apply small amount to blunt end of cotton swab\n• Insert into canal, contact FB\n• Hold steady 60 seconds (patient cooperation critical)\n• Withdraw swab + FB together\n• Avoid contact with canal skin\n• Success rate lower (~19%) but useful for stuck objects\n\nAVOID: Alligator forceps (slippage risk pushes object deeper)',
     citation: [3, 5],
     next: 'earfb-attempt',
+    summary: 'Use curette or hook behind sphere — avoid forceps which push round objects deeper',
+    skippable: true,
   },
 
   {
@@ -207,6 +222,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Soft, compressible objects (cotton, foam, paper) are best removed with grasping instruments.\n\nPRIMARY TECHNIQUE: Alligator Forceps\n• Grasp edge or protruding surface\n• Gentle traction — avoid crushing\n• May need multiple passes if object fragments\n\nALTERNATIVE: Suction\n• Soft-tipped catheter\n• Good for loose, fluffy material\n• May need to use with forceps for adherent material\n\nRIGHT-ANGLE HOOK:\n• Can work if you can get behind the object\n• Risk of pushing deeper if object compresses\n\nCONTRAINDICATED: Irrigation\n• Spongy materials absorb water and SWELL\n• Can convert easy removal to impaction\n• Never irrigate cotton, foam, sponge, or paper\n\nTIPS:\n• Work slowly — these objects fragment easily\n• Have multiple instruments ready\n• Suction standing by for loose pieces',
     citation: [1, 4],
     next: 'earfb-attempt',
+    summary: 'Grasp with alligator forceps — do NOT irrigate soft materials (they swell)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -217,6 +234,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Seeds, beans, food particles, and plant material require DRY extraction — they swell with moisture.\n\nCONTRAINDICATED: Irrigation\n• Organic material absorbs water\n• Swelling impairs removal\n• Can convert simple FB to impaction\n\nPRIMARY TECHNIQUE: Alligator Forceps\n• Grasp firmly but avoid crushing\n• Seeds may be slippery — may need multiple attempts\n• If object crushes, remove pieces\n\nALTERNATIVE: Right-Angle Hook\n• Get behind the object\n• Scoop anteriorly\n• Works well for smooth seeds\n\nSUCTION:\n• Useful for small particles or fragments\n• May need in combination with forceps\n\nSPECIAL CONSIDERATIONS:\n• Beans can swell 2-3x original size if wet\n• Popcorn kernels may fragment\n• Seeds may have sharp edges\n• If organic FB has been in place >24 hours, may have significant swelling already',
     citation: [1, 6],
     next: 'earfb-attempt',
+    summary: 'Organic material swells with water — use DRY extraction only, never irrigate',
+    safetyLevel: 'warning',
   },
 
   {
@@ -227,6 +246,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Sand, dirt, small debris — irrigation is usually the best approach.\n\nPRIMARY TECHNIQUE: Irrigation\n• 20-50 mL syringe with 14-16 gauge plastic catheter\n• Body-temperature water or saline\n• Patient head tilted, affected ear up\n• Direct stream along superior canal wall\n• Catch effluent in basin\n\nTECHNIQUE TIPS:\n• Lukewarm water only (cold causes vertigo)\n• Low pressure — avoid Waterpik (too forceful)\n• Multiple passes may be needed\n• 65% first-pass success rate\n\nCONTRAINDICATIONS TO IRRIGATION:\n• TM perforation (known or suspected)\n• Soft/organic material (will swell)\n• Button battery (water accelerates damage)\n• Prior ear surgery with tympanostomy tubes\n\nALTERNATIVE:\n• Suction catheter for visible particles\n• Curette for adherent debris',
     citation: [1, 3],
     next: 'earfb-attempt',
+    summary: 'Irrigate with body-temp water for small particles — contraindicated if TM perforation',
+    skippable: true,
   },
 
   {
@@ -237,6 +258,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Hearing aid components, earbud tips, and irregular objects require individualized approach.\n\nASSESSMENT:\n• Does it contain a battery? → Treat as button battery emergency\n• Is it soft or hard?\n• Can you grasp an edge?\n• How deep is it?\n\nHEARING AID COMPONENTS:\n• May have battery inside — check carefully\n• Usually plastic — alligator forceps appropriate\n• May be custom-molded to canal shape\n\nEARBUD TIPS:\n• Soft silicone — alligator forceps\n• May tear — be prepared for fragments\n• Suction as backup\n\nIRREGULAR HARD OBJECTS:\n• Assess for graspable edge\n• Forceps if edge present\n• Hook/curette if need to get behind\n• Cyanoacrylate for flat, smooth surfaces\n\nIF UNABLE TO REMOVE:\n• Low threshold for ENT referral\n• Complex objects often need operative microscope',
     citation: [1, 4],
     next: 'earfb-attempt',
+    summary: 'Check hearing aid parts for batteries — low threshold for ENT referral on complex objects',
+    skippable: true,
   },
 
   // =====================================================================
@@ -271,6 +294,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-complication',
       },
     ],
+    summary: 'Limit to 1-2 attempts — each subsequent try has lower success due to edema and bleeding',
+    safetyLevel: 'warning',
   },
 
   {
@@ -281,6 +306,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Successful removal — document and provide aftercare instructions.\n\nPOST-PROCEDURE EXAM:\n• Inspect canal for laceration or abrasion\n• Visualize TM — document integrity\n• Test hearing (finger rub or whisper test)\n\nAFTERCARE:\n• Keep ear dry for 24-48 hours\n• Otic antibiotic drops if canal trauma present (ofloxacin or ciprodex)\n• Pain control: acetaminophen or ibuprofen PRN\n\nRETURN PRECAUTIONS:\n• Increasing pain\n• Drainage from ear\n• Hearing loss\n• Dizziness or vertigo\n\nFOLLOW-UP:\n• Not routinely needed if uncomplicated\n• ENT referral if: canal laceration, TM concern, hearing change\n\nPREVENTION COUNSELING:\n• Do not insert objects in ear\n• Cotton swabs should not enter canal\n• Ear candles are ineffective and dangerous',
     citation: [1, 2],
     next: 'earfb-dispo',
+    summary: 'Inspect canal and TM post-removal, prescribe otic drops if canal trauma present',
+    skippable: true,
   },
 
   {
@@ -306,6 +333,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-attempt',
       },
     ],
+    summary: 'Assess residual material — small fragments may self-clear, significant residual needs ENT',
   },
 
   {
@@ -317,6 +345,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'MANAGEMENT:\n• Document residual material\n• Otic antibiotic drops x 5-7 days\n• Keep ear dry\n• Return if symptoms develop\n\nFOLLOW-UP:\n• ENT follow-up in 1-2 weeks\n• May need cerumen removal to assess\n\nRETURN PRECAUTIONS:\n• Pain, drainage, or hearing change\n\nMost small organic fragments will exfoliate with cerumen over 1-2 weeks.',
     confidence: 'recommended',
     citation: [1],
+    summary: 'Minimal residual fragments — otic antibiotic drops, ENT follow-up in 1-2 weeks',
   },
 
   {
@@ -327,6 +356,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Unable to remove after 1-2 attempts. Do NOT continue — ENT referral is indicated.\n\nWHY STOP:\n• Each attempt causes more edema and bleeding\n• Patient cooperation deteriorates\n• Risk of pushing object deeper\n• Risk of TM or canal injury increases\n• First attempt success: 65-78%\n• After 2+ failed attempts: <20%\n\nDOCUMENT:\n• Object type and location\n• Techniques attempted\n• Reason for failure\n• Canal and TM status post-attempt\n\n75% of EAC foreign bodies are removable in ED.\n23% require operative removal under microscopy.',
     citation: [3, 4],
     next: 'earfb-ent-referral',
+    summary: 'Stop after 1-2 failed attempts — success drops below 20%, refer to ENT',
+    safetyLevel: 'warning',
   },
 
   {
@@ -357,6 +388,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-comp-intolerance',
       },
     ],
+    summary: 'Identify complication type — canal bleeding, TM perforation, deeper impaction, or intolerance',
   },
 
   {
@@ -368,6 +400,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'IMMEDIATE MANAGEMENT:\n• Apply gentle pressure with cotton ball\n• Assess depth and extent of laceration\n• Visualize TM if possible\n\nIF MINOR LACERATION:\n• Otic antibiotic drops (ofloxacin or ciprodex) x 7 days\n• Keep ear dry x 1 week\n• Pain control PRN\n• ENT follow-up if not healing at 1 week\n\nIF SIGNIFICANT LACERATION:\n• Stop removal attempt\n• ENT referral — may need operative removal\n• Antibiotic drops until seen by ENT\n\nFOREIGN BODY STILL PRESENT?\n• If FB still in place, refer to ENT\n• Do not continue attempts through active bleeding',
     confidence: 'recommended',
     citation: [3, 8],
+    summary: 'Canal laceration — apply pressure, otic antibiotic drops, stop if significant bleeding',
   },
 
   {
@@ -379,6 +412,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'STOP REMOVAL IMMEDIATELY.\n\nASSESSMENT:\n• Document symptoms: vertigo, tinnitus, hearing loss\n• Attempt visualization of TM (may be obscured)\n• Note time of suspected injury\n\nMANAGEMENT:\n• Keep ear DRY — no drops unless ENT-directed\n• No ototoxic drops (aminoglycosides, polymyxin)\n• If drops needed: ofloxacin or ciprofloxacin/dex only\n• Pain control as needed\n\nDISPOSITION:\n• Urgent ENT referral (within 24-48 hours)\n• Audiometry will be needed\n• Small perforations often heal spontaneously\n• Large perforations may need tympanoplasty\n\nFOREIGN BODY:\n• ENT will remove under controlled conditions\n• Do NOT continue attempts',
     confidence: 'definitive',
     citation: [1, 3],
+    summary: 'Stop removal immediately if TM injury suspected — urgent ENT within 24-48h',
+    safetyLevel: 'critical',
   },
 
   {
@@ -390,6 +425,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'STOP — DO NOT ATTEMPT FURTHER REMOVAL.\n\nRISKS OF CONTINUED ATTEMPTS:\n• TM perforation\n• Ossicular chain injury\n• Hearing loss\n• Object entry into middle ear\n\nMANAGEMENT:\n• Document new position\n• Keep ear dry\n• Urgent ENT referral\n\nENT WILL:\n• Use operative microscope for visualization\n• Have controlled environment for extraction\n• May use tympanomeatal flap approach\n• Can manage complications immediately\n\nThe deeper the object, the higher the complication risk. Do not attempt removal of objects at or near the TM.',
     confidence: 'definitive',
     citation: [3, 4],
+    summary: 'Object pushed deeper against TM — STOP all attempts, urgent ENT referral',
+    safetyLevel: 'critical',
   },
 
   {
@@ -400,6 +437,8 @@ export const EAR_FB_NODES: DecisionNode[] = [
     body: 'Patient unable to cooperate for safe removal.\n\nOPTIONS:\n\n1. PROCEDURAL SEDATION (if appropriate setting)\n• Ketamine preferred — maintains airway reflexes\n• Allows controlled removal attempt\n• Consider if object is easily accessible\n\n2. GENERAL ANESTHESIA (ENT referral)\n• For pediatric patients\n• For anxious/uncooperative adults\n• For complex or deep objects\n• For failed sedation attempt\n\n3. DELAY AND RETRY (select cases)\n• If object is stable and non-urgent\n• Can attempt again with better preparation\n• Not appropriate for batteries or sharp objects\n\nPEDIATRIC CONSIDERATIONS:\n• Papoose board alone often insufficient\n• Parental assistance limited value\n• Sedation preferred if >1 attempt needed\n• Low threshold for ENT referral',
     citation: [2, 5],
     next: 'earfb-ent-referral',
+    summary: 'Consider procedural sedation (ketamine) or ENT referral for uncooperative patients',
+    skippable: true,
   },
 
   {
@@ -411,6 +450,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'TIMING:\n• EMERGENT: Button battery\n• URGENT (same day): TM perforation, deep impaction, failed removal with complications\n• ROUTINE (1-3 days): Failed removal without complications, patient intolerance\n\nWHAT TO COMMUNICATE:\n• Object type and location\n• Techniques attempted\n• Complications encountered\n• Current canal and TM status\n• Patient cooperation level\n\nWHILE AWAITING ENT:\n• Keep ear dry\n• Antibiotic drops if canal trauma\n• Pain control PRN\n• Return precautions for worsening symptoms\n\nDOCUMENTATION:\n• Object description and visualized location\n• Techniques attempted (including anesthesia used)\n• Complications or concerns\n• Post-procedure canal/TM exam\n• Reason for referral',
     confidence: 'definitive',
     citation: [1, 3, 4],
+    summary: 'ENT referral: emergent for battery, urgent for complications, routine for failed removal',
   },
 
   {
@@ -431,6 +471,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
         next: 'earfb-discharge-followup',
       },
     ],
+    summary: 'Determine discharge with or without ENT follow-up based on complications',
   },
 
   {
@@ -442,6 +483,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'DISCHARGE INSTRUCTIONS:\n\nEAR CARE:\n• Keep ear dry for 24-48 hours\n• No swimming or submerging ear\n• Avoid inserting anything in ear (including Q-tips)\n\nMEDICATIONS:\n• Acetaminophen or ibuprofen for discomfort PRN\n• No routine antibiotic drops needed if canal intact\n\nRETURN IF:\n• Increasing pain\n• Drainage from ear (pus, blood)\n• Hearing change\n• Dizziness or ringing\n• Fever\n\nFOLLOW-UP:\n• None routinely needed\n• See PCP if concerns at 1 week\n\nPREVENTION:\n• Do not insert objects in ear\n• Q-tips for outer ear only\n• Hearing protection when appropriate',
     confidence: 'recommended',
     citation: [1],
+    summary: 'Keep ear dry 24-48h, no Q-tips in canal, return for pain or drainage',
   },
 
   {
@@ -453,6 +495,7 @@ export const EAR_FB_NODES: DecisionNode[] = [
     recommendation: 'DISCHARGE WITH ENT APPOINTMENT:\n\nINDICATIONS:\n• Canal laceration or significant trauma\n• Concern for residual material\n• Hearing complaint post-procedure\n• TM appearance abnormal\n\nMEDICATIONS:\n• Otic antibiotic drops (ofloxacin 0.3% or ciprofloxacin/dex) BID x 7 days\n• Pain control PRN\n\nPRECAUTIONS:\n• Keep ear dry\n• No swimming until cleared by ENT\n• Return for worsening symptoms\n\nTIMING:\n• ENT appointment within 1-2 weeks\n• Sooner if symptoms worsen\n\nDOCUMENT:\n• Reason for specialty follow-up\n• Current status of canal and TM\n• What ENT should re-evaluate',
     confidence: 'recommended',
     citation: [1, 3],
+    summary: 'Otic antibiotic drops BID x 7 days, ENT follow-up in 1-2 weeks for canal trauma',
   },
 
 ];

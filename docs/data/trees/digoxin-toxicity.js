@@ -34,6 +34,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { label: 'Chronic Toxicity', description: 'Elderly, renal failure, drug interactions — insidious onset', next: 'dig-chronic' },
             { label: 'Unknown / Mixed', description: 'Unclear history or acute-on-chronic', next: 'dig-unknown' },
         ],
+        summary: 'Digoxin toxicity: narrow therapeutic index — classic triad: GI symptoms, visual changes, arrhythmias',
     },
     {
         id: 'dig-acute',
@@ -43,6 +44,8 @@ export const DIGOXIN_TOXICITY_NODES = [
         body: '**Acute ingestion** — intentional overdose, suicidal, or accidental (pediatric) [2][4].\n\n[Acute vs Chronic Comparison](#/info/dig-acute-chronic)\n\n**Characteristics:**\n• **High digoxin level** (often >10 ng/mL in significant ingestions)\n• **Normal or LOW potassium** initially — Na+/K+-ATPase still functional extracardially\n• **Minimal symptoms initially** — may feel fine despite lethal levels\n• **Hyperkalemia = DANGER** — indicates Na+/K+-ATPase poisoning, poor prognosis [3][4]\n\n**Key point:** Acute patients may appear deceptively well before sudden cardiovascular collapse.\n\n**Peak effect:** 6-12 hours post-ingestion (longer with sustained-release formulations).\n\n**Volume of distribution:** Large (5-7 L/kg) — hemodialysis is NOT effective [2].',
         citation: [2, 3, 4],
         next: 'dig-ecg',
+        summary: 'Acute Digoxin Toxicity — review key clinical information before proceeding',
+        skippable: true,
     },
     {
         id: 'dig-chronic',
@@ -55,6 +58,8 @@ export const DIGOXIN_TOXICITY_NODES = [
             { id: 'dig-drug-interactions', label: 'Drug Interactions Reference' },
         ],
         next: 'dig-ecg',
+        summary: 'Chronic Digoxin Toxicity — review key clinical information before proceeding',
+        skippable: true,
     },
     {
         id: 'dig-unknown',
@@ -64,6 +69,8 @@ export const DIGOXIN_TOXICITY_NODES = [
         body: '**When history is unclear:**\n\nTreat as **chronic toxicity** if:\n• Patient is on maintenance digoxin therapy\n• Elderly with renal insufficiency\n• Any predisposing factors present\n\nTreat as **acute toxicity** if:\n• Evidence of intentional ingestion\n• Pediatric accidental ingestion\n• Very high digoxin level (>10 ng/mL) in previously non-digitalized patient\n\n**General approach:**\n• Labs: digoxin level, K+, Mg²⁺, Ca²⁺, BMP, BNP\n• 12-lead ECG immediately\n• Continuous cardiac monitoring\n• If any concern for significant toxicity → prepare DigiFab\n\nWhen in doubt, **err on the side of treatment** — digoxin toxicity is highly reversible with DigiFab.',
         citation: [2, 4],
         next: 'dig-ecg',
+        summary: 'Unknown or Mixed Presentation — review key clinical information before proceeding',
+        skippable: true,
     },
     // ═══════════════════════════════════════════════════════════════
     // MODULE 2: ECG Findings
@@ -85,6 +92,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { label: 'Bradyarrhythmia present', description: 'Sinus brady, AV block, junctional rhythm', next: 'dig-brady', urgency: 'urgent' },
             { label: 'Tachyarrhythmia present', description: 'PAT with block, bidirectional VT, accelerated junctional', next: 'dig-tachy', urgency: 'critical' },
         ],
+        summary: 'Classic ECG: scooped ST depression (Salvador Dali mustache) — ANY arrhythmia possible, bidirectional VT pathognomonic',
     },
     {
         id: 'dig-brady',
@@ -105,6 +113,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Continuous ECG. Prepare for pacing if atropine fails. Have DigiFab ready.',
         },
         next: 'dig-risk-strat',
+        summary: 'Bradyarrhythmias in Digoxin Toxicity — review key clinical information before proceeding',
     },
     {
         id: 'dig-tachy',
@@ -133,6 +142,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Continuous ECG. Avoid cardioversion if possible. Prepare DigiFab.',
         },
         next: 'dig-risk-strat',
+        summary: 'Tachyarrhythmias in Digoxin Toxicity — review key clinical information before proceeding',
     },
     // ═══════════════════════════════════════════════════════════════
     // MODULE 3: Risk Stratification
@@ -149,6 +159,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { label: 'K+ 5.0-5.5 mEq/L', description: 'Mildly elevated — monitor closely', next: 'dig-treatment', urgency: 'urgent' },
             { label: 'K+ > 5.5 mEq/L', description: 'Significant hyperkalemia — DigiFab indicated', next: 'dig-hyperkalemia', urgency: 'critical' },
         ],
+        summary: 'Risk Stratification — assess clinical status to guide next management decision',
     },
     {
         id: 'dig-hyperkalemia',
@@ -158,6 +169,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         body: '⚠️ **Hyperkalemia (K+ >5.5) in digoxin toxicity is a CRITICAL finding** [3][4].\n\nIn acute toxicity: Indicates severe Na+/K+-ATPase inhibition — potassium cannot enter cells.\n\nPre-DigiFab mortality with K+ >5.5 was >50%. DigiFab has dramatically improved survival [3].\n\n**Management:**\n\n**DO give:**\n• **DigiFab** — definitive treatment, rapidly lowers K+ by restoring pump function\n• **Sodium bicarbonate** — shifts K+ intracellularly\n• **Insulin/glucose** — shifts K+ intracellularly\n• **Albuterol nebulizer** — shifts K+ intracellularly\n\n🚫 **AVOID or use CAUTIOUSLY:**\n• **Calcium** — traditionally avoided due to "stone heart" theory (cardiac tetany). This is largely debunked in recent literature, but most toxicologists still recommend caution. If life-threatening hyperkalemia with cardiac instability, low-dose CaCl₂ may be reasonable [4].\n\n**Bottom line:** Give DigiFab promptly — it treats both the digoxin toxicity AND the hyperkalemia.',
         citation: [3, 4],
         next: 'dig-fab',
+        summary: 'Hyperkalemia in Digoxin Toxicity — review key clinical information before proceeding',
     },
     // ═══════════════════════════════════════════════════════════════
     // MODULE 4: Treatment
@@ -173,6 +185,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { label: 'Mild toxicity — supportive care', description: 'Minor symptoms, no significant arrhythmia, K+ normal', next: 'dig-supportive' },
             { label: 'DigiFab indicated', description: 'Life-threatening arrhythmia, K+ >5.5, hemodynamic instability, or high level', next: 'dig-fab', urgency: 'critical' },
         ],
+        summary: 'Treatment Overview — assess clinical status to guide next management decision',
     },
     {
         id: 'dig-supportive',
@@ -193,6 +206,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Continuous telemetry. Serial K+, Mg2+, digoxin level. Repeat ECG with changes.',
         },
         next: 'dig-dispo',
+        summary: 'Avoid all Class Ia/Ic antiarrhythmics — no procainamide; activated charcoal within 1-2h if acute ingestion',
     },
     {
         id: 'dig-avoid',
@@ -202,6 +216,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         body: '🚫 **Avoid or use with extreme caution:**\n\n**Cardioversion:**\n• Can precipitate **refractory ventricular fibrillation** in digitalis-toxic heart [2]\n• If absolutely necessary (hemodynamically unstable VT/VF), use **lowest effective energy**\n• Have DigiFab ready before attempting\n\n**Calcium:**\n• Traditional teaching: avoid due to "stone heart" phenomenon (cardiac tetany from combined digoxin + Ca²⁺ effects)\n• Recent evidence suggests this is overstated — calcium is probably safe in small doses [4]\n• Most toxicologists still recommend **avoiding calcium unless life-threatening hyperkalemia with cardiac arrest**\n• If given: use low dose, give slowly, have DigiFab ready\n\n**Temporary pacing:**\n• Can trigger VF in sensitized myocardium\n• If needed: transvenous preferred, use lowest capture threshold\n• Ideally defer until after DigiFab\n\n**Beta-blockers and calcium channel blockers:**\n• Worsen bradycardia and AV block — hold these medications',
         citation: [2, 4],
         next: 'dig-fab',
+        summary: 'Treatments to Avoid — review key clinical information before proceeding',
     },
     // ═══════════════════════════════════════════════════════════════
     // MODULE 5: DigiFab (Digoxin Immune Fab)
@@ -217,6 +232,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { id: 'dig-fab-dosing', label: 'DigiFab Dosing Calculator' },
         ],
         next: 'dig-fab-dosing',
+        summary: 'DigiFab — Indications — review key clinical information before proceeding',
     },
     {
         id: 'dig-fab-dosing',
@@ -253,6 +269,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Clinical response (arrhythmia resolution, K+ normalization). Do NOT follow digoxin levels.',
         },
         next: 'dig-fab-post',
+        summary: 'DigiFab Dosing — Known Ingestion — review key clinical information before proceeding',
     },
     {
         id: 'dig-fab-level',
@@ -273,6 +290,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Clinical response. K+ normalization. Arrhythmia resolution. Do NOT follow dig levels.',
         },
         next: 'dig-fab-post',
+        summary: 'DigiFab Dosing — Known Serum Level — review key clinical information before proceeding',
     },
     {
         id: 'dig-fab-empiric',
@@ -294,6 +312,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             monitoring: 'Clinical response. K+ normalization. Watch for rapid reversal in chronic (may unmask underlying arrhythmia).',
         },
         next: 'dig-fab-post',
+        summary: 'DigiFab Dosing — Empiric — review key clinical information before proceeding',
     },
     {
         id: 'dig-fab-post',
@@ -303,6 +322,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         body: '**After DigiFab administration:**\n\n**Response timeline:**\n• Initial response: 30-60 minutes\n• Full effect: may take up to 4 hours\n• Duration: 15-20 hour half-life (renal elimination) [3]\n\n**Repeat dosing:**\n• May repeat in 1-2 hours if inadequate clinical response\n• Consider if: persistent arrhythmia, persistent hyperkalemia, recurrent symptoms\n\n**Digoxin levels post-Fab:**\n• **MEANINGLESS** — standard assays measure TOTAL digoxin (bound + free)\n• Levels will appear falsely elevated for days\n• Follow clinical response, not levels [3]\n\n**Rebinding toxicity:**\n• Rare — can occur if Fab is renally cleared faster than digoxin redistributes\n• More common with massive ingestions\n• May need additional Fab doses\n\n**Allergic reactions:**\n• Rare (<1%), can occur in patients with sheep protein allergy or prior Fab exposure\n• Have epinephrine available',
         citation: [3],
         next: 'dig-dispo',
+        summary: 'Post-DigiFab Management — review key clinical information before proceeding',
     },
     // ═══════════════════════════════════════════════════════════════
     // MODULE 6: Disposition
@@ -318,6 +338,7 @@ export const DIGOXIN_TOXICITY_NODES = [
             { label: 'ICU admission', description: 'Any significant arrhythmia, DigiFab given, hemodynamic compromise, K+ >5.5', next: 'dig-icu', urgency: 'critical' },
             { label: 'Telemetry / Step-down', description: 'Mild symptoms, stable, normal K+, no significant arrhythmia', next: 'dig-tele' },
         ],
+        summary: 'Disposition — assess clinical status to guide next management decision',
     },
     {
         id: 'dig-icu',
@@ -328,6 +349,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         recommendation: 'ICU admission with continuous cardiac monitoring for minimum 24 hours. Serial electrolytes. Watch for rebinding toxicity in massive ingestions.',
         confidence: 'definitive',
         citation: [2, 3],
+        summary: 'ICU Admission — determine disposition and follow-up plan based on clinical findings',
     },
     {
         id: 'dig-tele',
@@ -338,6 +360,7 @@ export const DIGOXIN_TOXICITY_NODES = [
         recommendation: 'Telemetry admission with continuous monitoring for 12-24 hours. Serial electrolytes. Hold digoxin. Escalate to ICU for any arrhythmia or hemodynamic change.',
         confidence: 'recommended',
         citation: [2],
+        summary: 'Telemetry / Monitored Bed — determine disposition and follow-up plan based on clinical findings',
     },
 ];
 export const DIGOXIN_TOXICITY_NODE_COUNT = DIGOXIN_TOXICITY_NODES.length;

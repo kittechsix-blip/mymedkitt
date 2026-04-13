@@ -30,6 +30,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
             { id: 'ipv-safety-plan', label: 'IPV Safety Planning' },
         ],
         next: 'cad-mechanism',
+        summary: 'Non-fatal strangulation is a major risk factor — symptoms may delay 24-72 hours',
     },
     {
         id: 'cad-mechanism',
@@ -53,6 +54,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
                 next: 'cad-spontaneous',
             },
         ],
+        summary: 'Strangulation is leading predictor of future homicide in IPV — always screen',
     },
     // =====================================================================
     // MODULE 2: STRANGULATION ASSESSMENT
@@ -65,6 +67,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Strangulation Assessment is CRITICAL**\n\n**Ask directly:** "Has anyone ever choked you or put hands around your neck?"\n\n**Physical Exam Findings:**\n• May be minimal or absent (50% have no visible injury)\n• Petechiae (face, conjunctivae, behind ears)\n• Ligature marks\n• Neck erythema, abrasions, contusions\n• Hoarseness, voice changes\n• Difficulty swallowing\n• Neck pain\n\n**Neurologic Symptoms (concerning for dissection):**\n• Headache (especially unilateral)\n• Neck pain\n• Horner syndrome (ptosis, miosis, anhidrosis)\n• Stroke symptoms (weakness, speech changes)\n• Vision changes [1][2][3]',
         citation: [1, 2, 3],
         next: 'cad-red-flags',
+        summary: 'Ask directly about choking — 50% have no visible injury, exam may be normal',
+        safetyLevel: 'warning',
     },
     {
         id: 'cad-red-flags',
@@ -89,6 +93,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'LOC during strangulation = high-risk for arterial injury — immediate CTA needed',
+        safetyLevel: 'warning',
     },
     {
         id: 'cad-stroke',
@@ -98,6 +104,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Dissection-related stroke is an emergency:**\n\n**Presentation:**\n• Unilateral headache → neurologic symptoms\n• May be hours to days after injury\n• Young patient with stroke = think dissection\n\n**Immediate Actions:**\n1. Activate stroke protocol\n2. CT head (rule out hemorrhage)\n3. CTA head/neck (dissection + occlusion)\n4. Consider thrombolysis if within window\n5. Neurology consultation emergent\n\n**NIHSS assessment** — document baseline [1][4][5]',
         citation: [1, 4, 5],
         next: 'cad-imaging',
+        summary: 'Young patient with stroke = think dissection — activate stroke protocol immediately',
+        safetyLevel: 'critical',
     },
     {
         id: 'cad-trauma',
@@ -107,6 +115,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Trauma-related Dissection:**\n\n**Mechanisms:**\n• Hyperextension/rotation injuries\n• Direct blow to neck\n• Seatbelt injuries\n• Sports (martial arts, football)\n\n**Memphis Criteria for CTA screening:**\n• Cervical spine fracture\n• Neurologic deficit not explained by imaging\n• Horner syndrome\n• LeFort II/III fracture\n• Skull base fracture involving carotid canal\n• DAI with GCS <6\n\n**Consider imaging liberally** in neck trauma. [1][4]',
         citation: [1, 4],
         next: 'cad-imaging',
+        summary: 'Use Memphis criteria for CTA screening — c-spine fracture, deficit, Horner syndrome',
+        skippable: true,
     },
     {
         id: 'cad-spontaneous',
@@ -116,6 +126,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Spontaneous Dissection:**\n\n**Risk Factors:**\n• Connective tissue disorders (Ehlers-Danlos, Marfan)\n• Fibromuscular dysplasia\n• Hypertension\n• Recent infection\n• Migraine\n\n**Classic Presentation:**\n• Sudden severe unilateral headache/neck pain\n• Ipsilateral Horner syndrome\n• ± Stroke symptoms\n\n**Minor Trauma Triggers:**\n• Chiropractic manipulation\n• Vigorous coughing/sneezing\n• Yoga positions\n• Roller coasters\n• Hair salon sinks (hyperextension) [1][4]',
         citation: [1, 4],
         next: 'cad-imaging',
+        summary: 'Classic triad: sudden unilateral headache, ipsilateral Horner, plus/minus stroke symptoms',
     },
     {
         id: 'cad-low-risk',
@@ -125,6 +136,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Even "low-risk" strangulation requires:**\n\n1. **Documentation:**\n   • Detailed history of event\n   • Photograph any visible injuries\n   • Document negative findings too\n\n2. **Safety Assessment:**\n   • IPV screening\n   • Safety planning\n   • Social work consultation\n   • Domestic violence resources\n\n3. **Return Precautions:**\n   • Headache, vision changes, weakness\n   • Voice changes, difficulty swallowing\n   • Any neurologic symptoms\n   • Return immediately if any concerns\n\n**Consider delayed imaging** if any symptoms develop. [2][3]',
         citation: [2, 3],
         next: 'cad-safety',
+        summary: 'Even low-risk strangulation needs documentation, safety assessment, and return precautions',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 3: IMAGING
@@ -137,6 +150,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**CTA Head and Neck — Gold standard for screening**\n\n**Imaging Findings:**\n\n| Finding | Description |\n|---------|--------------|\n| Intimal flap | Linear filling defect |\n| Intramural hematoma | Crescent sign |\n| Stenosis | Narrowing of lumen |\n| Occlusion | Complete blockage |\n| Pseudoaneurysm | Focal dilation |\n| String sign | Tapered stenosis |\n\n**MRA/MRI:**\n• Alternative if CTA contraindicated\n• T1 fat-sat shows intramural hematoma\n• May miss subtle dissection\n\n**Digital Subtraction Angiography:**\n• Gold standard but invasive\n• Reserved for equivocal cases [1][4][5]',
         citation: [1, 4, 5],
         next: 'cad-imaging-result',
+        summary: 'CTA head and neck is gold standard — look for intimal flap, hematoma, stenosis, string sign',
     },
     {
         id: 'cad-imaging-result',
@@ -161,6 +175,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Positive CTA = consult neurology and start antithrombotic therapy promptly',
     },
     {
         id: 'cad-negative',
@@ -170,6 +185,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**CTA Negative — Next Steps:**\n\n**If high clinical suspicion:**\n• Consider MRA (more sensitive for intramural hematoma)\n• Repeat imaging in 24-48h if symptoms persist\n• Observation with serial exams\n\n**If low clinical suspicion:**\n• Close follow-up\n• Strict return precautions\n• Primary care follow-up within 1 week\n\n**Documentation:**\n• Clinical decision-making\n• Return precautions given\n• Safety planning if strangulation [1][4]',
         citation: [1, 4],
         next: 'cad-safety',
+        summary: 'Negative CTA with high suspicion — consider MRA or repeat imaging in 24-48h',
     },
     // =====================================================================
     // MODULE 4: TREATMENT
@@ -201,6 +217,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
             monitoring: 'Repeat vascular imaging at 3-6 months',
         },
         next: 'cad-endovascular',
+        summary: 'CADISS trial: antiplatelet = anticoagulation — prefer aspirin for lower bleeding risk',
     },
     {
         id: 'cad-endovascular',
@@ -210,6 +227,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Endovascular Therapy:**\n\n**Stenting:**\n• Rarely needed acutely\n• Consider for:\n  - Symptomatic pseudoaneurysm\n  - Recurrent TIA despite antithrombotic therapy\n  - Expanding dissection\n\n**Surgical Repair:**\n• Very rarely indicated\n• Consider for failed endovascular therapy\n• Pseudoaneurysm with mass effect\n\n**Most dissections heal spontaneously** with medical therapy alone. [1][4][6]',
         citation: [1, 4, 6],
         next: 'cad-stroke-treatment',
+        summary: 'Most dissections heal spontaneously — stenting rarely needed acutely',
     },
     {
         id: 'cad-stroke-treatment',
@@ -219,6 +237,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Acute Stroke Management:**\n\n**Thrombolysis (tPA):**\n• NOT contraindicated in dissection-related stroke\n• Standard criteria apply\n• 4.5-hour window\n\n**Thrombectomy:**\n• For large vessel occlusion\n• Up to 24 hours in selected patients\n• May be technically challenging at dissection site\n\n**Post-Acute:**\n• Antithrombotic therapy (antiplatelet or anticoagulation)\n• Blood pressure management\n• Rehab services\n\n**Avoid hypotension** — may worsen ischemia in setting of stenosis. [1][4][5]',
         citation: [1, 4, 5],
         next: 'cad-complications',
+        summary: 'tPA is NOT contraindicated in dissection-related stroke — standard criteria apply',
     },
     // =====================================================================
     // MODULE 5: COMPLICATIONS
@@ -231,6 +250,8 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Complications of Cervical Artery Dissection:**\n\n| Complication | Incidence |\n|--------------|----------|\n| Stroke | 10-25% |\n| Permanent neurologic deficit | ~10% |\n| Recurrent dissection | 2% at 1 year |\n| Death | <5% |\n\n**Prognosis:**\n• Most dissections heal within 3-6 months\n• ~85% have good functional outcome\n• Recurrence risk low but present\n\n**Follow-up Imaging:**\n• Repeat CTA/MRA at 3-6 months\n• Assess for recanalization vs. persistence\n• Guide duration of antithrombotic therapy [1][4]',
         citation: [1, 4],
         next: 'cad-safety',
+        summary: 'Stroke risk 10-25%, most dissections heal in 3-6 months — repeat imaging at 3-6 months',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -243,6 +264,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         body: '**Intimate Partner Violence Safety Assessment:**\n\n**Screen ALL strangulation patients:**\n• "Are you safe at home?"\n• "Is the person who did this going to be there when you leave?"\n• "Do you have a safe place to go?"\n\n**Resources:**\n• Social work consultation\n• Domestic violence advocate\n• National DV Hotline: 1-800-799-7233\n• Safety planning\n\n**Documentation for legal purposes:**\n• Detailed mechanism\n• Exam findings (photograph if possible)\n• Patient quotes in their words\n• Time since assault\n\n**Strangulation is a strong predictor of future homicide.** [2][3]',
         citation: [2, 3],
         next: 'cad-disposition',
+        summary: 'Screen ALL strangulation patients for IPV — social work, safety plan, DV hotline',
     },
     {
         id: 'cad-disposition',
@@ -266,6 +288,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
                 next: 'cad-discharge',
             },
         ],
+        summary: 'Confirmed dissection: admit; stroke: stroke unit; high-risk strangulation: observe',
     },
     {
         id: 'cad-admit',
@@ -276,6 +299,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         recommendation: 'Admit for monitoring and antithrombotic therapy. Neurology consultation required.',
         confidence: 'definitive',
         citation: [1, 4],
+        summary: 'Neurology consult mandatory — initiate antithrombotic per neurology recommendation',
     },
     {
         id: 'cad-observe',
@@ -286,6 +310,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         recommendation: 'Observation with serial neurologic exams. Social work evaluation for safety planning.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Serial neuro checks q2h, social work evaluation, safety planning, await imaging',
     },
     {
         id: 'cad-discharge',
@@ -296,6 +321,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         recommendation: 'Discharge with strict return precautions. Safety planning if IPV-related.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Return immediately for headache, weakness, vision or speech changes — follow-up in 1 week',
     },
 ];
 export const CERVICAL_ARTERY_DISSECTION_MODULE_LABELS = [

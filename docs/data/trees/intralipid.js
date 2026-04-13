@@ -17,6 +17,8 @@ export const INTRALIPID_NODES = [
             { id: 'ile-dosing', label: 'ILE Dose Calculator' },
         ],
         next: 'ile-mechanism',
+        summary: 'Intralipid (ILE) for lipophilic drug toxicity with cardiovascular collapse — rescue therapy',
+        safetyLevel: 'critical',
     },
     {
         id: 'ile-mechanism',
@@ -26,6 +28,8 @@ export const INTRALIPID_NODES = [
         body: '**Three proposed mechanisms:** [3][5]\n\n**1. Lipid Sink (Partitioning)**\n- Lipid emulsion creates an expanded lipid compartment in plasma\n- Lipophilic drugs redistribute from tissues (heart, brain) into this compartment\n- Most supported for highly lipophilic agents (log P > 2): bupivacaine, amitriptyline, verapamil\n\n**2. Metabolic/Energetic Effect**\n- Provides fatty acids as alternative fuel source for myocardium\n- May restore mitochondrial function impaired by local anesthetics\n- Explains cardiotonic effects seen even without measurable drug sequestration\n\n**3. Direct Cardiotonic**\n- Increases intracellular calcium in cardiomyocytes\n- Independent positive inotropic effect\n- May work synergistically with catecholamines\n\n**Lipophilicity determines response:**\n| Drug | Log P | Expected ILE Response |\n|------|-------|----------------------|\n| Bupivacaine | 3.4 | Excellent |\n| Amitriptyline | 4.9 | Good |\n| Verapamil | 3.8 | Good |\n| Metoprolol | 1.9 | Modest |\n| Atenolol | 0.2 | Poor |',
         citation: [3, 5],
         next: 'ile-indications-question',
+        summary: 'ILE creates "lipid sink" absorbing lipophilic drugs + provides energy substrate to myocardium',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: INDICATIONS
@@ -68,6 +72,7 @@ export const INTRALIPID_NODES = [
                 next: 'ile-other',
             },
         ],
+        summary: 'Strongest evidence: local anesthetic systemic toxicity (LAST). Consider for CCB, BB, TCA toxicity',
     },
     {
         id: 'ile-last',
@@ -77,6 +82,8 @@ export const INTRALIPID_NODES = [
         body: '**ILE is the standard of care for LAST** per ASRA and AHA guidelines. [1][4]\n\n**Recognition:**\n- **CNS toxicity (early):** Perioral numbness, metallic taste, tinnitus, agitation, confusion, seizures\n- **Cardiovascular toxicity:** Hypotension, bradycardia, wide QRS, VT/VF, asystole\n- May progress rapidly from CNS to CV collapse\n- Bupivacaine is most cardiotoxic; lidocaine has higher CNS:CV toxicity ratio\n\n**When to give ILE:**\n- **At first signs of severe toxicity:** Do NOT wait for cardiac arrest\n- Seizures refractory to benzodiazepines\n- Significant hemodynamic instability\n- Any cardiac arrhythmia\n- Cardiac arrest\n\n**ASRA checklist:** [1]\n1. Stop LA injection immediately\n2. Call for help and ILE\n3. Airway management (100% O2)\n4. [Midazolam](#/drug/midazolam/seizure) for seizures (avoid propofol initially)\n5. Begin ILE per protocol\n6. If arrest: start CPR, may need prolonged resuscitation\n\n[LAST Treatment Checklist](https://asra.com/docs/default-source/guidelines-articles/local-anesthetic-systemic-toxicity-rgb.pdf)',
         citation: [1, 4],
         next: 'ile-dosing-protocol',
+        summary: 'LAST (bupivacaine, lidocaine toxicity): ILE is first-line alongside standard ACLS — start immediately',
+        safetyLevel: 'critical',
     },
     {
         id: 'ile-ccb',
@@ -86,6 +93,7 @@ export const INTRALIPID_NODES = [
         body: '**ILE for refractory CCB toxicity** - use AFTER standard therapies. [6][7]\n\n**First-line treatments (do these first):**\n1. Aggressive IV fluids\n2. IV calcium (calcium chloride 1-2 g or gluconate 3-6 g)\n3. High-dose insulin-euglycemic therapy (HIET) - see [CCB Overdose](#/tree/ccb-od)\n4. Vasopressors (norepinephrine, epinephrine)\n5. Glucagon if concurrent beta-blocker\n\n**When to add ILE:**\n- Shock refractory to fluids + calcium + HIET + vasopressors\n- Cardiac arrest\n- PEA arrest unresponsive to standard ACLS\n\n**Evidence:** [7][8]\n- Case reports and animal models support use\n- One 3-year retrospective: 80% response rate in CCB/BB toxicity treated with ILE\n- No RCTs exist - expert consensus only\n\n**Highly lipophilic CCBs (better ILE candidates):**\n- Verapamil (log P 3.8)\n- Diltiazem (log P 2.8)\n- Amlodipine (log P 3.0)\n\n**ACMT position:** ILE is reasonable for serious instability from highly lipophilic agents.',
         citation: [6, 7, 8],
         next: 'ile-dosing-protocol',
+        summary: 'CCB overdose with shock: ILE as adjunct to HIET, vasopressors, and calcium — not first-line',
     },
     {
         id: 'ile-bb',
@@ -95,6 +103,7 @@ export const INTRALIPID_NODES = [
         body: '**ILE for refractory beta-blocker toxicity** - use AFTER standard therapies. [6][9]\n\n**First-line treatments (do these first):**\n1. IV fluids for preload optimization\n2. Glucagon 3-10 mg IV bolus, then infusion 2-5 mg/hr\n3. Calcium (calcium chloride or gluconate)\n4. High-dose insulin-euglycemic therapy (HIET)\n5. Vasopressors (epinephrine preferred for inotropy)\n6. Transcutaneous pacing if bradycardia\n\nSee [Beta-Blocker Overdose](#/tree/beta-blocker-od)\n\n**When to add ILE:**\n- Shock refractory to glucagon + HIET + vasopressors\n- Cardiac arrest\n- Consider earlier for highly lipophilic agents (propranolol)\n\n**Evidence:** [9]\n- Animal models and case reports support efficacy\n- Best evidence for propranolol (most lipophilic, log P 3.5)\n- Less clear benefit for hydrophilic agents (atenolol, sotalol)\n\n**Lipophilic beta-blockers (better ILE candidates):**\n- Propranolol (log P 3.5)\n- Labetalol (log P 2.3)\n- Carvedilol (log P 4.2)\n\n**Hydrophilic beta-blockers (unlikely to benefit):**\n- Atenolol (log P 0.2)\n- Sotalol (log P -0.6)',
         citation: [6, 9],
         next: 'ile-dosing-protocol',
+        summary: 'Beta-blocker overdose: ILE for propranolol and other lipophilic BB — use after glucagon and HIET fail',
     },
     {
         id: 'ile-tca',
@@ -104,6 +113,8 @@ export const INTRALIPID_NODES = [
         body: '**ILE for refractory TCA toxicity** - controversial, use after bicarbonate. [6][10]\n\n**First-line treatment is sodium bicarbonate:**\n- Target serum pH 7.50-7.55\n- QRS narrowing is the treatment endpoint\n- Bolus 1-2 mEq/kg, then infusion\n- See [TCA Overdose](#/tree/tca-toxidrome)\n\n**When to consider ILE:**\n- Cardiac arrest refractory to bicarbonate\n- Hemodynamic collapse despite maximal therapy\n- Wide QRS with refractory hypotension\n\n**Evidence is mixed:** [10][11]\n- One swine model showed ILE equivalent to bicarbonate (not superior)\n- Case reports of ROSC with ILE in refractory TCA arrest\n- No proven benefit over bicarbonate as first-line\n\n**TCAs are highly lipophilic (log P 4-5):**\n- Amitriptyline (log P 4.9)\n- Nortriptyline (log P 4.5)\n- Desipramine (log P 4.0)\n\n**ACMT position:** [6]\n"ILE is reasonable to consider in cardiac arrest from TCA overdose when sodium bicarbonate has been administered."',
         citation: [6, 10, 11],
         next: 'ile-dosing-protocol',
+        summary: 'TCA overdose: sodium bicarbonate remains first-line — ILE as rescue for refractory cardiovascular collapse',
+        skippable: true,
     },
     {
         id: 'ile-other',
@@ -113,6 +124,8 @@ export const INTRALIPID_NODES = [
         body: '**Case reports support ILE use for various lipophilic agents:** [6][12]\n\n**Reported successes:**\n- Diphenhydramine (cardiac arrest)\n- Bupropion (refractory seizures, cardiac arrest)\n- Clomipramine\n- Quetiapine\n- Cocaine (with concurrent local anesthetic effects)\n- Flecainide\n- Lamotrigine\n\n**General principle:**\nConsider ILE when:\n1. Agent is highly lipophilic (log P > 2)\n2. Life-threatening toxicity present\n3. Standard antidotes have failed or are unavailable\n4. Cardiac arrest has occurred\n\n**ACMT position statement:** [6]\n"In circumstances where there is serious hemodynamic, or other, instability from a xenobiotic with a high degree of lipid solubility, lipid resuscitation therapy is viewed as a reasonable consideration for therapy, even if the patient is not in cardiac arrest."\n\n**What ILE is NOT indicated for:**\n- Routine overdose without hemodynamic compromise\n- Hydrophilic drug toxicity (digoxin, lithium, salicylates)\n- As alternative to specific antidotes (e.g., DigiFab for digoxin)',
         citation: [6, 12],
         next: 'ile-dosing-protocol',
+        summary: 'Other lipophilic agents: consider ILE for diphenhydramine, haloperidol, amiodarone toxicity as rescue',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: DOSING PROTOCOL
@@ -139,6 +152,8 @@ export const INTRALIPID_NODES = [
             },
             monitoring: 'Hemodynamics (BP, HR, rhythm), clinical response, triglycerides if prolonged use.',
         },
+        summary: 'Bolus 1.5 mL/kg 20% lipid over 1 min, then infusion 0.25 mL/kg/min — may repeat bolus x2',
+        safetyLevel: 'critical',
     },
     {
         id: 'ile-admin-details',
@@ -148,6 +163,8 @@ export const INTRALIPID_NODES = [
         body: '**Practical considerations:** [1][2]\n\n**IV Access:**\n- Peripheral IV is acceptable (20% lipid emulsion is safe peripherally)\n- Central line preferred if available but DO NOT delay for access\n- Large bore (18G or larger) recommended for rapid bolus\n\n**Administration:**\n- Draw up in large syringes (60 mL) for bolus\n- Use IV tubing (not a pump) for initial bolus to ensure rapid delivery\n- Switch to pump for infusion phase\n- Bolus should be given over 1 minute (not slower)\n\n**Compatible lines:**\n- Can run through same line as crystalloids\n- Avoid mixing with other medications if possible\n- Flush line before/after if alternating with pressors\n\n**Storage:**\n- Room temperature or refrigerated\n- Protect from light if stored long-term\n- Check expiration date\n- Should be available in OR, ED, procedural areas\n\n**Standard supply:** Most hospitals stock 500 mL bags of 20% lipid emulsion in OR and pharmacy.',
         citation: [1, 2],
         next: 'ile-cpr-modifications',
+        summary: 'Use 20% lipid emulsion via large-bore IV — can give via peripheral or central line',
+        skippable: true,
     },
     {
         id: 'ile-cpr-modifications',
@@ -157,6 +174,8 @@ export const INTRALIPID_NODES = [
         body: '**LAST-associated cardiac arrest has unique considerations:** [1][4]\n\n**Epinephrine dosing:**\n- Use **smaller doses** than standard ACLS (<1 mcg/kg)\n- Start with 10-100 mcg IV, NOT 1 mg\n- High-dose epinephrine may worsen arrhythmias and reduce ILE efficacy\n- ASRA: "Avoid epinephrine doses >1 mcg/kg"\n\n**Avoid:**\n- **Vasopressin** - may worsen outcomes in LA toxicity\n- **Calcium channel blockers** - contraindicated\n- **Beta-blockers** - contraindicated\n- **Lidocaine or local anesthetics** - will worsen toxicity\n- **Propofol** for seizures initially (lipid vehicle, cardiac depression)\n\n**Prolonged resuscitation:**\n- LAST patients may have ROSC after 60+ minutes of CPR\n- ILE provides ongoing drug sequestration\n- Continue CPR longer than usual before terminating\n- Consider ECMO/ECPR if available\n\n**Defibrillation:**\n- Standard joules for VF/VT\n- May require multiple shocks as ILE takes effect\n- ILE does not interfere with defibrillation',
         citation: [1, 4],
         next: 'ile-monitoring',
+        summary: 'During cardiac arrest: continue CPR, give ILE bolus, avoid vasopressin (impairs lipid distribution)',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: MONITORING & ENDPOINTS
@@ -169,6 +188,8 @@ export const INTRALIPID_NODES = [
         body: '**Real-time monitoring:** [1][2]\n\n**Hemodynamics:**\n- Continuous cardiac monitoring (rhythm, rate)\n- Arterial line if available (BP, waveform)\n- Pulse oximetry\n- Capnography (ROSC detection, ventilation)\n\n**Clinical response markers:**\n- ROSC (in arrest)\n- Blood pressure improvement (MAP >65)\n- Heart rate normalization\n- QRS narrowing (if widened)\n- Resolution of seizures\n- Improved mentation\n\n**When to repeat bolus:**\n- Persistent hemodynamic instability\n- Recurrent arrhythmias\n- No response after 5 minutes\n- May repeat 1-2 additional times\n\n**Duration:**\n- Continue infusion for **at least 15-30 minutes** after stability achieved\n- Some sources recommend up to 60 minutes post-stability\n- Lipophilic drugs may redistribute from lipid compartment as ILE is metabolized\n- Watch for "recrudescence" - return of toxicity after ILE stopped',
         citation: [1, 2],
         next: 'ile-endpoints',
+        summary: 'Monitor BP, HR, ECG, and mental status — expect improvement within 15-30 min of bolus',
+        skippable: true,
     },
     {
         id: 'ile-endpoints',
@@ -178,6 +199,8 @@ export const INTRALIPID_NODES = [
         body: '**When to stop ILE:** [1][2]\n\n**Clinical stability achieved:**\n- Stable blood pressure (MAP >65) for 15+ minutes\n- Stable heart rate and rhythm\n- Resolution of neurologic symptoms\n- No recurrence of toxicity\n\n**Maximum dose reached:**\n- ~12 mL/kg in first 30 minutes\n- Continuing beyond this increases adverse effect risk\n- If still unstable: consider ECMO, other rescue therapies\n\n**Weaning protocol:**\n- Once stable 15-30 minutes, decrease infusion rate by 50%\n- Observe for recurrence\n- Stop if remains stable for additional 15 minutes\n- Monitor for 4-6 hours minimum after discontinuation\n\n**Recrudescence:**\n- Toxicity may return as ILE metabolized (6-12 hours)\n- Particularly with long-acting agents (bupivacaine, extended-release CCB)\n- Consider restarting ILE if symptoms recur\n- Admit to monitored setting',
         citation: [1, 2],
         next: 'ile-lab-interference',
+        summary: 'Stop infusion when hemodynamically stable — max total dose 10 mL/kg over first 30 minutes',
+        safetyLevel: 'warning',
     },
     {
         id: 'ile-lab-interference',
@@ -187,6 +210,8 @@ export const INTRALIPID_NODES = [
         body: '**ILE causes significant lab interference:** [2][13]\n\n**Lipemia affects these assays:**\n- Electrolytes (falsely elevated or decreased)\n- Troponin (may be falsely elevated)\n- Liver enzymes\n- Lipase\n- Drug levels (may be undetectable or falsely low)\n- Glucose (variable)\n- Magnesium\n\n**Practical approach:**\n- Draw labs BEFORE ILE if possible\n- Note on lab orders that patient received ILE\n- Use point-of-care testing for glucose if available\n- Labs typically normalize 12-24 hours after ILE stopped\n- Triglyceride levels will be markedly elevated\n\n**Monitoring despite interference:**\n- Clinical assessment takes priority\n- Trend values rather than absolute numbers\n- VBG/ABG pH and lactate less affected\n- Repeat labs in 12-24 hours once lipemia clears\n\n**Triglycerides:**\n- Expected to be markedly elevated (>1000 mg/dL)\n- Not a contraindication to additional ILE if clinically needed\n- Check before discharge to ensure clearing',
         citation: [2, 13],
         next: 'ile-complications',
+        summary: 'ILE causes lipemia interfering with BMP, LFTs, coags, troponin — send labs BEFORE or wait 2-4h',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5: COMPLICATIONS & DISPOSITION
@@ -199,6 +224,8 @@ export const INTRALIPID_NODES = [
         body: '**ILE is generally safe in acute use, but complications can occur:** [2][6][13]\n\n**Reported adverse effects:**\n\n**Pulmonary:**\n- ARDS (rare, typically with massive doses)\n- Fat embolism syndrome (very rare)\n- Impaired oxygenation\n\n**Metabolic:**\n- Hypertriglyceridemia (expected, usually transient)\n- Acute pancreatitis (rare, dose-related)\n- Hyperglycemia\n\n**Hematologic:**\n- Fat overload syndrome (hepatosplenomegaly, coagulopathy, seizures)\n- Only reported with prolonged infusions >12 mL/kg\n\n**Drug interactions:**\n- May interfere with vasopressor efficacy\n- Propofol is also a lipid emulsion (avoid concurrent use if possible)\n- May affect drug clearance and half-lives\n\n**Contraindications are RELATIVE in cardiac arrest:**\n- Egg/soy allergy - theoretical, NOT contraindication in arrest\n- Severe hyperlipidemia (TG >400) - relative contraindication\n- Proceed with ILE in life-threatening toxicity regardless',
         citation: [2, 6, 13],
         next: 'ile-special-pops',
+        summary: 'Complications: lipemia, pancreatitis (rare), ARDS (very rare), lab interference — generally well-tolerated',
+        skippable: true,
     },
     {
         id: 'ile-special-pops',
@@ -208,6 +235,8 @@ export const INTRALIPID_NODES = [
         body: '**Pediatrics:** [1][14]\n- Same dosing: 1.5 mL/kg bolus, 0.25 mL/kg/min infusion\n- Use pump for precise dosing in small children\n- Maximum dose 12 mL/kg applies\n- LAST can occur in children receiving nerve blocks\n\n**Pregnancy:** [1]\n- ILE is indicated for maternal LAST\n- Treat mother first (fetal survival depends on maternal resuscitation)\n- No specific dose adjustments\n- Consider early cesarean if near term and maternal arrest\n\n**Obesity:**\n- Use ideal body weight or lean body mass for dosing\n- Actual body weight may lead to overdosing\n- For cardiac arrest, may use actual weight initially\n\n**Renal/Hepatic impairment:**\n- No dose adjustment needed for acute rescue\n- Lipid clearance may be delayed\n- Monitor triglycerides if prolonged infusion needed\n\n**Elderly:**\n- No specific dose adjustment\n- May have delayed lipid clearance\n- Higher risk of fat overload with prolonged use',
         citation: [1, 14],
         next: 'ile-disposition',
+        summary: 'Pediatric dosing same mL/kg as adult. Pregnancy: ILE is safe. Soy allergy: theoretical risk, give anyway in arrest',
+        skippable: true,
     },
     {
         id: 'ile-disposition',
@@ -235,6 +264,7 @@ export const INTRALIPID_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Determine disposition based on clinical response and underlying toxicity',
     },
     {
         id: 'ile-dispo-stable',
@@ -245,6 +275,7 @@ export const INTRALIPID_NODES = [
         recommendation: 'ICU or monitored admission for minimum 4-6 hours. Watch for recrudescence as ILE is metabolized. Discharge once clinically stable and labs clearing.',
         confidence: 'definitive',
         citation: [1],
+        summary: 'Stable after ILE: ICU admission for observation, repeat labs in 4-6h when lipemia clears',
     },
     {
         id: 'ile-dispo-icu',
@@ -255,6 +286,7 @@ export const INTRALIPID_NODES = [
         recommendation: 'ICU admission with continued hemodynamic support. Continue vasopressors, consider ongoing ILE infusion. Toxicology consultation recommended.',
         confidence: 'definitive',
         citation: [1, 2],
+        summary: 'ICU for ongoing vasopressor requirement or persistent toxicity — may need repeat ILE dosing',
     },
     {
         id: 'ile-dispo-refractory',
@@ -276,6 +308,8 @@ export const INTRALIPID_NODES = [
             },
             monitoring: 'ECMO flows, oxygenation, anticoagulation per protocol.',
         },
+        summary: 'Refractory cardiovascular collapse: consider ECMO if available — ILE buys time for definitive care',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // SUMMARY NODE (linked from entry)
@@ -290,6 +324,7 @@ export const INTRALIPID_NODES = [
         calculatorLinks: [
             { id: 'ile-dosing', label: 'ILE Dose Calculator' },
         ],
+        summary: 'ILE: 1.5 mL/kg bolus → 0.25 mL/kg/min infusion, max 10 mL/kg in 30 min — strongest for LAST',
     },
 ];
 // =====================================================================

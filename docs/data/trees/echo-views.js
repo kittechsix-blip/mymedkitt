@@ -30,6 +30,7 @@ export const ECHO_VIEWS_NODES = [
         ],
         citation: [1, 2],
         next: 'echo-plax',
+        summary: 'FoCUS provides rapid LV function, pericardial effusion, RV strain, and IVC assessment',
     },
     // =====================================================================
     // MODULE 2: PARASTERNAL LONG AXIS (PLAX)
@@ -46,6 +47,8 @@ export const ECHO_VIEWS_NODES = [
         ],
         citation: [2, 3],
         next: 'echo-plax-assess',
+        summary: 'PLAX: 3rd-4th ICS, marker toward left hip — remember the 3 L\'s rule',
+        skippable: true,
     },
     {
         id: 'echo-plax-assess',
@@ -55,6 +58,8 @@ export const ECHO_VIEWS_NODES = [
         body: '**Key findings to assess:**\n\n**1. Pericardial effusion**\n• Anechoic stripe between epicardium and pericardium\n• Posterior effusion most common location\n• Size: small (<10mm), moderate (10–20mm), large (>20mm)\n\n**2. LV function**\n• Visual estimation of global squeeze\n• [EPSS measurement](#/info/epss-measurement) for quantitative assessment\n• Normal EF: walls move in >50% during systole\n\n**3. RV size**\n• RVOT should be <2/3 of LV diameter\n• Enlarged RV suggests right heart strain\n\n**4. Aortic root**\n• Normally <4 cm\n• Look for dissection flap if indicated\n\n**5. Wall motion abnormalities**\n• Regional hypokinesis suggests ischemia',
         citation: [2, 3],
         next: 'echo-psax',
+        summary: 'Assess pericardial effusion, LV function, RV size, aortic root, wall motion',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: PARASTERNAL SHORT AXIS (PSAX)
@@ -68,6 +73,8 @@ export const ECHO_VIEWS_NODES = [
         images: [{ src: 'images/echo-views/psax-anatomy.png', alt: 'Parasternal short axis transverse cross-section anatomy with labeled structures alongside ultrasound image at papillary muscle level', caption: 'PSAX at papillary muscle level — LV should appear circular ("O" shape). RV wraps around LV anteriorly.' }],
         citation: [2, 3],
         next: 'echo-psax-assess',
+        summary: 'PSAX: rotate 90 degrees clockwise from PLAX, marker toward left shoulder',
+        skippable: true,
     },
     {
         id: 'echo-psax-assess',
@@ -77,6 +84,8 @@ export const ECHO_VIEWS_NODES = [
         body: '**Key findings to assess:**\n\n**1. D-sign (septal flattening)**\n• Normal LV is circular ("O" shape)\n• Pressure overload → D-shape (RV pressure pushes septum)\n• Seen in massive PE, pulmonary hypertension\n• Flattening during systole = pressure overload\n• Flattening during diastole = volume overload\n\n**2. Wall motion**\n• All walls should contract symmetrically\n• Regional hypokinesis/akinesis → coronary territory infarction\n\n**3. LV function**\n• Watch the "squeeze" at papillary muscle level\n• Walls should thicken and move inward\n\n**4. RV size**\n• Compare RV to LV — RV wraps around LV\n• Enlarged RV suggests right heart strain',
         citation: [2, 4],
         next: 'echo-a4c',
+        summary: 'D-sign = RV pressure overload (PE/pulm HTN), assess wall motion and LV squeeze',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: APICAL 4-CHAMBER (A4C)
@@ -90,6 +99,8 @@ export const ECHO_VIEWS_NODES = [
         images: [{ src: 'images/echo-views/a4c-anatomy.png', alt: 'Apical 4-chamber long-axis anatomical cross-section with labeled structures alongside ultrasound image showing all four chambers', caption: 'A4C view: all 4 chambers, mitral and tricuspid valves. Apex at top of screen, RV to the left of LV.' }],
         citation: [2, 3],
         next: 'echo-a4c-assess',
+        summary: 'A4C: cardiac apex 5th-6th ICS, probe nearly horizontal pointing toward right shoulder',
+        skippable: true,
     },
     {
         id: 'echo-a4c-assess',
@@ -99,6 +110,8 @@ export const ECHO_VIEWS_NODES = [
         body: '**Key findings to assess:**\n\n**1. RV:LV ratio**\n• Normal: RV < 0.6 × LV size\n• RV = LV suggests moderate RV dilation\n• RV > LV suggests severe RV dilation (massive PE)\n\n**2. McConnell sign**\n• RV free wall akinesis WITH apical sparing\n• Highly specific for acute PE\n• The apex "winks" while the rest of RV doesn\'t move\n\n**3. TAPSE (tricuspid annular plane systolic excursion)**\n• M-mode through lateral tricuspid annulus\n• Normal ≥17 mm\n• <17 mm = RV dysfunction\n\n**4. Global LV function**\n• Visual estimation of ejection fraction\n• Compare to A2C view for comprehensive assessment\n\n**5. Pericardial effusion**\n• May see circumferential effusion from this view\n• RA/RV diastolic collapse = tamponade physiology',
         citation: [2, 4, 5],
         next: 'echo-subcostal',
+        summary: 'RV:LV ratio >1 = massive PE, McConnell sign (apical sparing) highly specific for PE',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5: SUBCOSTAL AND IVC
@@ -112,6 +125,8 @@ export const ECHO_VIEWS_NODES = [
         images: [{ src: 'images/echo-views/subxiphoid-view.png', alt: 'Subxiphoid 4-chamber view showing liver, right ventricle, left ventricle, and atria on ultrasound with labeled anatomy diagram', caption: 'Subxiphoid view: liver provides acoustic window. RV is closest to probe (nearest transducer = top of screen).' }],
         citation: [1, 2],
         next: 'echo-subcostal-assess',
+        summary: 'Subcostal: best view for pericardial effusion, use when poor parasternal/apical windows',
+        skippable: true,
     },
     {
         id: 'echo-subcostal-assess',
@@ -121,6 +136,8 @@ export const ECHO_VIEWS_NODES = [
         body: '**Key findings:**\n\n**1. Pericardial effusion**\n• Often the BEST view for posterior effusion\n• Look for anechoic stripe between heart and liver\n• Effusion will be between epicardium and bright pericardial line\n\n**2. Tamponade physiology**\n• RA systolic collapse (very sensitive)\n• RV diastolic collapse (very specific)\n• Swinging heart in large effusion\n\n**3. Global cardiac function**\n• Often easier to see in patients with poor windows\n\n**Pitfall:** Pericardial fat pad can mimic effusion — fat is slightly echogenic, effusion is anechoic.',
         citation: [1, 4],
         next: 'echo-ivc',
+        summary: 'Tamponade: RA systolic collapse (sensitive), RV diastolic collapse (specific)',
+        safetyLevel: 'critical',
     },
     {
         id: 'echo-ivc',
@@ -131,6 +148,7 @@ export const ECHO_VIEWS_NODES = [
         images: [{ src: 'images/echo-views/ivc-labeled.png', alt: 'Ultrasound showing IVC entering the right atrium with hepatic vein labeled', caption: 'IVC view from subcostal: measure diameter 2–3 cm from RA junction. Hepatic vein confluence visible.' }],
         citation: [4, 5],
         next: 'echo-summary',
+        summary: 'IVC >2.1cm with <50% collapse = elevated CVP; <2.1cm with >50% collapse = volume responsive',
     },
     {
         id: 'echo-summary',
@@ -142,6 +160,7 @@ export const ECHO_VIEWS_NODES = [
         recommendation: 'Complete 5-view focused cardiac ultrasound. Integrate findings with clinical presentation. Formal echocardiography recommended for complex cases or when findings significantly change management.',
         confidence: 'recommended',
         citation: [1, 2, 3, 4, 5],
+        summary: 'Complete 5-view FoCUS checklist: effusion, LV function, RV strain, volume status',
     },
 ];
 export const ECHO_VIEWS_NODE_COUNT = ECHO_VIEWS_NODES.length;

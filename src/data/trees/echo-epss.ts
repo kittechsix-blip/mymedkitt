@@ -30,6 +30,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
     body: '**E-point septal separation (EPSS) >7 mm is a validated threshold for detecting reduced left ventricular ejection fraction (LVEF).** [1][2][3]\n\nThis measurement provides an objective, rapid assessment that complements visual estimation of cardiac function.\n\nWHAT IS EPSS?\nEPSS measures the shortest distance between the anterior mitral valve leaflet at its peak opening (E-point) and the interventricular septum during early diastole. A wider gap suggests reduced LV contractility and/or LV dilation.\n\nCLINICAL SIGNIFICANCE\n• EPSS >7 mm → suggests LVEF <50% (reduced systolic function)\n• EPSS >10 mm → indicates more severe dysfunction [2][4]\n• **100% sensitivity for severe systolic dysfunction (LVEF ≤30%) when >7 mm** [2]\n• Specificity is moderate (52%) — best when combined with other echo findings [5]\n\nIMPORTANT LIMITATIONS\n**EPSS may be inaccurate in:** aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy, and non-sinus rhythms. [3] The measurement remains valid even with abnormal septal motion, including paradoxical septal movement. [6][7]\n\n**Pediatric thresholds:** 6.0 mm for children overall, 4.9 mm for children 0–3 years old. [8]',
     citation: [1, 2, 3, 4, 5, 6, 7, 8],
     next: 'epss-plax',
+    summary: 'EPSS >7mm suggests LVEF <50%, invalid in AR, MS, HCM, or non-sinus rhythms',
   },
 
   // =====================================================================
@@ -51,6 +52,8 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
       },
     ],
     next: 'epss-mmode',
+    summary: 'Probe at 3rd-4th ICS near sternum, marker toward left hip — visualize septum, MV, LV',
+    skippable: true,
   },
 
   // =====================================================================
@@ -72,6 +75,8 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
       },
     ],
     next: 'epss-measure',
+    summary: 'Place M-mode cursor through mitral valve leaflet tips perpendicular to septum',
+    skippable: true,
   },
 
   {
@@ -94,6 +99,8 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
       },
     ],
     next: 'epss-interpret',
+    summary: 'Measure shortest distance from E-point peak to septum during early diastole',
+    skippable: true,
   },
 
   // =====================================================================
@@ -133,6 +140,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'EPSS <7mm = normal, 7-10mm = grey zone (check B-lines/IVC), >10mm = reduced EF',
   },
 
   {
@@ -144,6 +152,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
     recommendation: 'EPSS < 7 mm — normal systolic function likely. Correlate with clinical presentation and other echo views. If suspicion for dysfunction persists, obtain formal echocardiography.',
     confidence: 'recommended',
     citation: [1, 2, 3, 5, 8, 9],
+    summary: 'EPSS <7mm — normal systolic function likely, correlate clinically',
   },
 
   {
@@ -155,6 +164,8 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
     recommendation: 'EPSS > 10 mm — high likelihood of severe systolic dysfunction (LVEF ≤30%). Consider formal echo, initiate heart failure workup, and manage per clinical presentation.',
     confidence: 'definitive',
     citation: [2, 3, 4, 5, 8],
+    summary: 'EPSS >10mm — 100% sensitivity for LVEF ≤30%, initiate heart failure workup',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -193,6 +204,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
         next: 'epss-indeterminate',
       },
     ],
+    summary: 'EPSS 7-10mm grey zone — scan for B-lines and assess IVC to clarify',
   },
 
   {
@@ -204,6 +216,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
     recommendation: 'EPSS in grey zone with fluid overload signs — likely reduced systolic function. Recommend formal echocardiography and heart failure workup.',
     confidence: 'recommended',
     citation: [1, 2, 3, 5, 8, 9],
+    summary: 'Grey zone EPSS + B-lines or plethoric IVC — likely reduced EF, get formal echo',
   },
 
   {
@@ -215,6 +228,7 @@ export const ECHO_EPSS_NODES: DecisionNode[] = [
     recommendation: 'EPSS in grey zone without fluid overload — indeterminate. Correlate clinically and consider formal echocardiography. MAPSE and fractional shortening may provide additional data points.',
     confidence: 'consider',
     citation: [1, 2, 3, 5, 8, 9],
+    summary: 'Grey zone EPSS without overload signs — indeterminate, consider MAPSE or formal echo',
   },
 
 ];

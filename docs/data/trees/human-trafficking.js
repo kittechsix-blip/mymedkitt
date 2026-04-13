@@ -30,6 +30,7 @@ export const HUMAN_TRAFFICKING_NODES = [
             { id: 'hotline-resources', label: 'Hotline & Resources' },
         ],
         next: 'ht-who',
+        summary: 'ED may be the only healthcare contact for trafficking victims — screen with universal protocol',
     },
     {
         id: 'ht-who',
@@ -39,6 +40,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Trafficking affects all demographics:**\n\n**Vulnerable populations:**\n• Runaway/homeless youth\n• LGBTQ+ youth (especially those rejected by family)\n• Foster care involvement\n• History of abuse/neglect\n• Undocumented immigrants\n• Substance use disorders\n• Intellectual/developmental disabilities\n• Economic vulnerability\n\n**Traffickers can be:**\n• Intimate partners\n• Family members\n• Employers\n• "Boyfriends" / Romeo pimps\n• Organized criminal networks\n\n**Both domestic and international** — US citizens are commonly trafficked within the US. [1][2][3]',
         citation: [1, 2, 3],
         next: 'ht-barriers',
+        summary: 'Trafficking affects all demographics — children, immigrants, runaways, LGBTQ youth at highest risk',
+        skippable: true,
     },
     {
         id: 'ht-barriers',
@@ -48,6 +51,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Why victims don\'t disclose:**\n\n| Barrier | Manifestation |\n|---------|---------------|\n| **Fear** | Of trafficker, law enforcement, deportation |\n| **Shame** | Self-blame, stigma, family rejection |\n| **Distrust** | Of authorities, healthcare providers |\n| **Trauma bonding** | May not see self as victim |\n| **Control** | Trafficker may be present in ED |\n| **Debt bondage** | Believe they owe trafficker money |\n| **Threats** | To self, family members |\n| **Isolation** | No support network, language barriers |\n\n**They may not identify as "trafficked"** — use concrete questions about experiences, not labels. [1][2]',
         citation: [1, 2],
         next: 'ht-red-flags',
+        summary: 'Victims may not self-identify due to fear, shame, language barriers, or controller presence',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: RED FLAGS
@@ -60,6 +65,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Physical findings:**\n• Multiple STIs, especially in young patients\n• Recurrent UTIs, pelvic pain\n• Signs of physical abuse (bruises, burns, scars)\n• **Tattoos/brands** (names, barcodes, "Daddy")\n• Poor dental health\n• Malnourishment despite appearing well-dressed\n• Untreated chronic conditions\n\n**Pregnancy-related:**\n• Multiple pregnancies, especially in teens\n• No prenatal care\n• Multiple abortions\n• Doesn\'t know gestational age\n\n**Injuries:**\n• Inconsistent with stated mechanism\n• Delayed presentation\n• Multiple stages of healing [1][2][4]',
         citation: [1, 2, 4],
         next: 'ht-behavioral',
+        summary: 'Red flags: controlling companion, inconsistent history, multiple STIs, branding/tattoos, fear of authority',
     },
     {
         id: 'ht-behavioral',
@@ -69,6 +75,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Behavioral indicators:**\n\n| Red Flag | What You See |\n|----------|-------------|\n| **Controlling companion** | Answers questions for patient, won\'t leave room |\n| **Scripted responses** | Rehearsed history, inconsistent details |\n| **Fearful demeanor** | Avoids eye contact, hypervigilant |\n| **No control over ID/money** | Someone else holds documents |\n| **Doesn\'t know location** | Can\'t say where they live/work |\n| **Inconsistent history** | Story doesn\'t match presentation |\n| **Older "boyfriend"** | Especially with young patients |\n\n**Work-related:**\n• Long hours, no days off\n• Lives at workplace\n• Owes employer money\n• Not allowed to leave\n• No control over earnings [1][2][3]',
         citation: [1, 2, 3],
         next: 'ht-question',
+        summary: 'Behavioral clues: evasive answers, looking to companion for answers, fearful affect, inappropriate dress',
+        skippable: true,
     },
     {
         id: 'ht-question',
@@ -92,6 +100,7 @@ export const HUMAN_TRAFFICKING_NODES = [
                 next: 'ht-universal',
             },
         ],
+        summary: 'Determine if trafficking indicators are present to guide screening approach',
     },
     // =====================================================================
     // MODULE 3: SAFE SCREENING
@@ -104,6 +113,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Safe separation is essential for screening:**\n\n**Strategies:**\n• "It\'s hospital policy to examine patients privately"\n• "We need to take the patient to X-ray/CT"\n• "The patient needs to use the restroom"\n• Have security present but unobtrusive\n\n**If companion resists:**\n• Document the resistance\n• Involve security/social work\n• Do NOT confront the companion\n• Prioritize patient safety\n\n**Never screen in front of the companion** — this puts the patient at risk.\n\n**If unable to separate:** Document the situation and attempt again before discharge. [1][2][5]',
         citation: [1, 2, 5],
         next: 'ht-screen',
+        summary: 'MUST interview patient alone — separate from companion, use professional interpreter not companion',
+        safetyLevel: 'warning',
     },
     {
         id: 'ht-universal',
@@ -113,6 +124,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Consider routine screening for high-risk presentations:**\n\n**Normalize the questions:**\n> "I ask everyone these questions to make sure they\'re safe..."\n\n**High-yield presentations for screening:**\n• Sexual assault\n• STI evaluation (especially adolescents)\n• Pregnancy in minors\n• Psychiatric complaints in young patients\n• Substance use in young patients\n• Injuries with inconsistent history\n\n**Universal screening removes stigma** — patient doesn\'t feel singled out. [1][2]',
         citation: [1, 2],
         next: 'ht-screen',
+        summary: 'Universal screening: frame as routine, non-judgmental, explain confidentiality, use validated tools',
+        skippable: true,
     },
     {
         id: 'ht-screen',
@@ -122,6 +135,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Trauma-informed screening:**\n\n**Environment questions:**\n> "Where do you sleep at night?"\n> "Is there anyone who controls where you go?"\n> "Do you feel safe at home?"\n\n**Work questions:**\n> "Can you leave your job if you want to?"\n> "Has anyone ever threatened you to make you work?"\n> "Do you owe your employer money?"\n\n**Control questions:**\n> "Does anyone hold your ID or documents?"\n> "Are you free to come and go as you wish?"\n> "Has anyone ever made you do something you didn\'t want to do?"\n\n**For adolescents:**\n> "Has anyone ever asked you to have sex in exchange for something?"\n> "Has anyone ever taken pictures of you?" [1][2][4]',
         citation: [1, 2, 4],
         next: 'ht-positive',
+        summary: 'Validated screening questions: "Has anyone ever made you do something you didn\'t want to do?"',
+        skippable: true,
     },
     {
         id: 'ht-positive',
@@ -145,6 +160,8 @@ export const HUMAN_TRAFFICKING_NODES = [
                 next: 'ht-negative',
             },
         ],
+        summary: 'Positive screen: assess safety, provide resources, do NOT force disclosure or pressure to report',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: RESPONSE
@@ -157,6 +174,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Trauma-informed response:**\n\n**DO:**\n• Believe them\n• Stay calm and supportive\n• Emphasize it\'s not their fault\n• Respect their autonomy\n• Offer help but don\'t force it\n• Maintain confidentiality as much as possible\n\n**SAY:**\n> "Thank you for trusting me with this."\n> "This is not your fault."\n> "You deserve to be safe."\n> "There are people who can help if you want."\n\n**DON\'T:**\n• Express shock or judgment\n• Promise outcomes you can\'t guarantee\n• Make them repeat story multiple times\n• Contact law enforcement without consent (unless minor) [1][2][5]',
         citation: [1, 2, 5],
         next: 'ht-wants-help',
+        summary: 'Trauma-informed response: believe the patient, validate experience, assess immediate safety needs',
     },
     {
         id: 'ht-wants-help',
@@ -181,6 +199,7 @@ export const HUMAN_TRAFFICKING_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'If patient wants help: social work, law enforcement (if consents), safe housing, National Hotline',
     },
     {
         id: 'ht-activate',
@@ -190,6 +209,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Immediate steps when patient wants help:**\n\n1. **Safety first:**\n   • Keep patient in private area\n   • Do not let companion know\n   • Consider security presence\n\n2. **Activate resources:**\n   • Social work (immediately)\n   • Hospital\'s trafficking response team (if exists)\n   • Contact local anti-trafficking organization\n\n3. **National Hotline:**\n   • **1-888-373-7888** (National Human Trafficking Hotline)\n   • Text "HELP" to 233733 (BeFree)\n   • 24/7, confidential, multiple languages\n\n4. **Safety planning:**\n   • Where will they go?\n   • Emergency shelter?\n   • Law enforcement involvement (patient\'s choice except for minors) [1][2][5]',
         citation: [1, 2, 5],
         next: 'ht-resources',
+        summary: 'Activate hospital trafficking protocol, social work, and security if patient is in immediate danger',
+        safetyLevel: 'warning',
     },
     {
         id: 'ht-not-ready',
@@ -199,6 +220,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**When patient isn\'t ready to leave:**\n\n**This is normal and expected.**\n\n**Your role:**\n• Plant seeds for the future\n• Provide resources they can hide\n• Treat their medical needs\n• Let them know the door is always open\n\n**Provide discreetly:**\n• Hotline number (on small card, band-aid wrapper, etc.)\n• Your contact information\n• Information about local resources\n\n**Say:**\n> "I understand you\'re not ready right now. That\'s okay."\n> "Here is a number you can call anytime."\n> "You can always come back here."\n\n**They may need multiple contacts before they\'re ready.** [1][2]',
         citation: [1, 2],
         next: 'ht-resources',
+        summary: 'Not ready to disclose: provide hotline number discreetly, safety plan, and offer to help in future',
     },
     {
         id: 'ht-minor',
@@ -208,6 +230,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**MINORS: Mandatory reporting applies**\n\n**Key points:**\n• ANY commercial sex involving a minor is trafficking (no force/fraud/coercion required)\n• **Mandatory reporting to CPS/law enforcement**\n• Does not require patient consent\n• Document thoroughly\n\n**Process:**\n1. Notify social work immediately\n2. Contact CPS hotline\n3. Law enforcement notification (may be same call)\n4. Keep child safe in hospital\n5. Do NOT release to suspected trafficker\n\n**If trafficker is parent/guardian:**\n• CPS involvement essential\n• May need to involve security/LE to prevent removal\n• Hospital can refuse to release if safety concern [1][2][3]',
         citation: [1, 2, 3],
         next: 'ht-documentation',
+        summary: 'Minor trafficking: MANDATORY reporting in all states — notify CPS regardless of patient\'s wishes',
+        safetyLevel: 'critical',
     },
     {
         id: 'ht-uncertain',
@@ -217,6 +241,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**When you\'re not sure:**\n\n**Still provide resources:**\n• Offer information about trafficking hotline\n• Provide domestic violence resources\n• Give return instructions\n\n**Document:**\n• Red flags observed\n• Screening attempted\n• Barriers encountered\n• Resources provided\n\n**Consider:**\n• Admission for observation if medical indication\n• Social work consultation\n• Repeat screening attempt before discharge\n\n**Trust your instincts** — if something feels wrong, involve social work. [1][2]',
         citation: [1, 2],
         next: 'ht-documentation',
+        summary: 'If uncertain but suspicious: document observations, consult social work, provide resources just in case',
     },
     {
         id: 'ht-negative',
@@ -226,6 +251,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**When screening is negative:**\n\n**Still document:**\n• That screening occurred\n• Patient\'s responses\n• No indicators identified\n\n**Provide safety resources anyway:**\n• "Here\'s a number anyone can call if they ever feel unsafe"\n• Normalize offering resources\n\n**Return precautions:**\n• If situation changes, come back\n• ED is always available\n\n**Be aware:** Patients may deny trafficking even if it\'s occurring. One negative screen doesn\'t mean never follow up. [1][2]',
         citation: [1, 2],
         next: 'ht-documentation',
+        summary: 'Screen negative: trust but maintain awareness — provide general DV/safety resources regardless',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: RESOURCES
@@ -238,6 +265,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**National Resources:**\n\n**National Human Trafficking Hotline:**\n• **1-888-373-7888**\n• Text "HELP" to 233733 (BeFree)\n• Chat: humantraffickinghotline.org\n• 24/7, confidential, 200+ languages\n\n**Other Resources:**\n• **HEAL Trafficking** (healtrafficking.org) — healthcare provider resources\n• **Polaris Project** (polarisproject.org) — comprehensive services\n• **Office for Victims of Crime** — victim services referrals\n• **FBI** — for federal trafficking cases\n\n**Local Resources:**\n• Document your hospital\'s response protocol\n• Know your local anti-trafficking organizations\n• Identify local emergency shelters [1][2][5]',
         citation: [1, 2, 5],
         next: 'ht-documentation',
+        summary: 'National Human Trafficking Hotline: 1-888-373-7888 or text 233733 — 24/7 multilingual services',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: DOCUMENTATION
@@ -250,6 +279,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         body: '**Document carefully — it may be used legally:**\n\n**Include:**\n• Red flags identified\n• Screening questions asked and responses\n• Physical exam findings (photograph if patient consents)\n• Patient\'s own words (in quotes)\n• Demeanor and affect\n• Companion behavior (if applicable)\n• Resources provided\n• Reporting (CPS, LE if applicable)\n\n**Be specific:**\n• "Patient states boyfriend controls her phone and money"\n• Not: "Possible trafficking victim"\n\n**Confidentiality:**\n• Be aware of who can access records\n• Patient may not want trafficker to know\n• Discuss with patient what will be documented [1][2]',
         citation: [1, 2],
         next: 'ht-disposition',
+        summary: 'Document findings objectively using medical terminology — photographs with consent, body maps',
+        safetyLevel: 'warning',
     },
     {
         id: 'ht-disposition',
@@ -273,6 +304,8 @@ export const HUMAN_TRAFFICKING_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Safety is priority — do NOT discharge to trafficker, coordinate with social work and safe placement',
+        safetyLevel: 'critical',
     },
     {
         id: 'ht-admit',
@@ -283,6 +316,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         recommendation: 'Admit for safety while coordinating resources. Restrict visitor access. Social work essential.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Admit if medical indication AND safety concern — provides time for social work intervention',
     },
     {
         id: 'ht-discharge',
@@ -293,6 +327,7 @@ export const HUMAN_TRAFFICKING_NODES = [
         recommendation: 'Discharge with resources and return instructions. Patient declined intervention at this time.',
         confidence: 'recommended',
         citation: [1, 2],
+        summary: 'Discharge only to safe environment — provide discreet hotline card, safety plan, follow-up resources',
     },
     {
         id: 'ht-minor-dispo',
@@ -303,6 +338,8 @@ export const HUMAN_TRAFFICKING_NODES = [
         recommendation: 'Mandatory CPS and law enforcement notification. Do NOT release minor to suspected trafficker.',
         confidence: 'definitive',
         citation: [1, 2, 3],
+        summary: 'Minor: CPS involvement mandatory, do NOT discharge to suspected trafficker — admit if needed for safety',
+        safetyLevel: 'critical',
     },
 ];
 export const HUMAN_TRAFFICKING_MODULE_LABELS = [

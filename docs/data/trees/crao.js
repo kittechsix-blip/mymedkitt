@@ -28,6 +28,8 @@ export const CRAO_NODES = [
             { id: 'crao-window', label: 'tPA Window' },
         ],
         next: 'crao-symptom-onset',
+        summary: 'CRAO is a CNS stroke — 30%+ have concurrent cerebral ischemia, stroke risk peaks days 1-7',
+        safetyLevel: 'warning',
     },
     {
         id: 'crao-symptom-onset',
@@ -59,6 +61,7 @@ export const CRAO_NODES = [
                 next: 'crao-exam',
             },
         ],
+        summary: 'Document precise onset time — retinal damage irreversible at 90-100 min, tPA window 4.5h',
     },
     // =====================================================================
     // MODULE 2: EXAM/FUNDOSCOPY
@@ -71,6 +74,7 @@ export const CRAO_NODES = [
         body: '**1. Visual Acuity:**\n- Often counting fingers (CF) or hand motion (HM)\n- May be light perception (LP) or no light perception (NLP)\n- Document in affected and unaffected eye\n\n**2. Pupil Exam (CRITICAL):**\n\n**Afferent Pupillary Defect (APD) / Marcus Gunn:**\n- Swinging flashlight test\n- Affected pupil DILATES when light swings to it\n- **92-98% sensitive** for asymmetric afferent pathway disease\n\n**Key Point:** If NO APD with "complete" vision loss, reconsider diagnosis.\n\n**3. Visual Fields:**\n- Usually dense central/total field loss\n- If peripheral sparing, may have cilioretinal artery preservation\n\n**4. External Eye:**\n- Usually normal\n- No injection, no pain [1][2][3]',
         citation: [1, 2, 3],
         next: 'crao-fundoscopy',
+        summary: 'APD present in 92-98% — if NO APD with complete vision loss, reconsider the diagnosis',
     },
     {
         id: 'crao-fundoscopy',
@@ -84,6 +88,7 @@ export const CRAO_NODES = [
             { id: 'crao-fundus', label: 'Fundus Findings' },
         ],
         next: 'crao-confirm-dx',
+        summary: 'Cherry-red spot in 90% — pale retina from ischemic swelling, fovea visible through thin retinal layers',
     },
     {
         id: 'crao-confirm-dx',
@@ -110,6 +115,7 @@ export const CRAO_NODES = [
                 next: 'crao-differential',
             },
         ],
+        summary: 'APD + cherry-red spot + sudden painless monocular loss = classic CRAO — proceed to GCA evaluation',
     },
     {
         id: 'crao-differential',
@@ -119,6 +125,7 @@ export const CRAO_NODES = [
         body: '**CRAO Mimics:**\n\n| Condition | Key Differentiators |\n|-----------|---------------------|\n| **CRVO** | "Blood and thunder" - hemorrhages, dilated tortuous veins |\n| **Optic neuritis** | **PAINFUL** (especially with EOM), younger patients |\n| **Retinal detachment** | "Curtain" field loss, floaters, flashes |\n| **GCA/AION** | May look similar; check GCA symptoms |\n| **Vitreous hemorrhage** | No fundus view, diabetes/trauma history |\n| **Cortical stroke** | Bilateral, homonymous defect |\n\n**Key Questions:**\n- Is there pain? (CRAO = painless)\n- Is it monocular? (CRAO = one eye)\n- Was onset sudden? (CRAO = seconds)\n\nIf CRAO features absent, pursue alternative workup. [1][3]',
         citation: [1, 3],
         next: 'crao-age-check',
+        summary: 'CRAO is painless — pain suggests GCA or optic neuritis; bilateral suggests cortical stroke',
     },
     {
         id: 'crao-brao',
@@ -128,6 +135,7 @@ export const CRAO_NODES = [
         body: '**BRAO — Partial Vision Loss:**\n\n**Presentation:**\n- Altitudinal or sectoral field defect\n- May be asymptomatic if small area\n- Less severe vision loss than CRAO\n\n**Fundoscopy:**\n- Whitening along distribution of occluded branch\n- May see embolus at bifurcation\n- Cherry-red spot usually absent\n\n**Management:**\n- Less emergent than CRAO\n- Still requires stroke workup\n- Same embolic sources\n- Same admission criteria\n\n**Prognosis:**\n- Better visual recovery than CRAO\n- 80% recover to 20/40 or better\n\n**Still warrants:** GCA evaluation, stroke workup, admission. [1][2]',
         citation: [1, 2],
         next: 'crao-age-check',
+        summary: 'Branch RAO: partial field loss, 80% recover to 20/40 — still requires stroke workup and admission',
     },
     // =====================================================================
     // MODULE 3: GCA EVALUATION
@@ -151,6 +159,8 @@ export const CRAO_NODES = [
                 next: 'crao-stroke-protocol',
             },
         ],
+        summary: 'Must rule out GCA in ALL patients ≥50 — arteritic CRAO needs steroids, NOT tPA',
+        safetyLevel: 'warning',
     },
     {
         id: 'crao-gca-symptoms',
@@ -160,6 +170,7 @@ export const CRAO_NODES = [
         body: '**GCA Symptoms to Ask About:**\n\n| Symptom | Sensitivity |\n|---------|-------------|\n| Headache (new) | 76% |\n| Scalp tenderness | 34% |\n| Jaw claudication | 50% |\n| Temporal artery abnormality | 65% |\n| Polymyalgia symptoms | 40% |\n| Constitutional (fever, weight loss, fatigue) | 40% |\n\n**Jaw Claudication:**\n- Pain/fatigue with chewing\n- **Most specific symptom (LR+ = 4.2)**\n\n**Key Exam:**\n- Palpate temporal arteries\n- Look for tenderness, nodularity, decreased pulse\n\n**GCA Labs:**\n- **ESR** (usually >50, can be >100)\n- **CRP** (more sensitive than ESR, 98.6%)\n- **Platelets** (thrombocytosis >400k more specific)\n\n**Both ESR + CRP elevated = 99% sensitive** [1][4]',
         citation: [1, 4],
         next: 'crao-gca-decision',
+        summary: 'Jaw claudication most specific (LR+ 4.2) — both ESR + CRP elevated = 99% sensitive for GCA',
     },
     {
         id: 'crao-gca-decision',
@@ -186,6 +197,7 @@ export const CRAO_NODES = [
                 next: 'crao-gca-uncertain',
             },
         ],
+        summary: 'If GCA suspected, start IV methylprednisolone 1000mg immediately — do NOT wait for biopsy',
     },
     {
         id: 'crao-gca-treatment',
@@ -214,6 +226,8 @@ export const CRAO_NODES = [
             monitoring: 'Blood glucose, blood pressure, electrolytes. Watch for steroid-induced hyperglycemia. Rheumatology follow-up for taper guidance.',
         },
         next: 'crao-dispo',
+        summary: 'IV methylpred 1000mg daily x 3-5d — fellow eye at risk (25-50% bilateral within days-weeks)',
+        safetyLevel: 'critical',
     },
     {
         id: 'crao-gca-uncertain',
@@ -234,6 +248,8 @@ export const CRAO_NODES = [
             monitoring: 'ESR, CRP trending. Blood glucose. Arrange temporal artery biopsy within 2 weeks.',
         },
         next: 'crao-stroke-protocol',
+        summary: 'When uncertain: start steroids empirically — risk of fellow eye loss outweighs steroid risks',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 4: TREATMENT
@@ -249,6 +265,7 @@ export const CRAO_NODES = [
             { id: 'crao-window', label: 'tPA Window' },
         ],
         next: 'crao-tpa-decision',
+        summary: 'Activate code stroke — CT head, labs, ECG; do NOT delay for ocular massage or eye drops',
     },
     {
         id: 'crao-tpa-decision',
@@ -275,6 +292,7 @@ export const CRAO_NODES = [
                 next: 'crao-gca-treatment',
             },
         ],
+        summary: 'tPA candidate if ≤4.5h, non-arteritic, no contraindications, CT negative — same as stroke protocol',
     },
     {
         id: 'crao-tpa-treatment',
@@ -303,6 +321,9 @@ export const CRAO_NODES = [
             monitoring: 'Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. BP goal <180/105. No antiplatelet/anticoagulant x 24h. Monitor for signs of ICH.',
         },
         next: 'crao-workup',
+        summary: 'tPA 0.9 mg/kg (max 90mg) — NNT 4 for visual recovery within 4.5h window, 50% recovery rate',
+        skippable: true,
+        safetyLevel: 'critical',
     },
     {
         id: 'crao-other-treatments',
@@ -312,6 +333,8 @@ export const CRAO_NODES = [
         body: '**Traditional Treatments (Limited/No Evidence):**\n\n| Treatment | Evidence |\n|-----------|----------|\n| Ocular massage | **No proven benefit** |\n| Anterior chamber paracentesis | **No proven benefit** |\n| Carbogen inhalation | **No proven benefit** |\n| IOP-lowering drops | **No proven benefit** |\n\n**2009 Cochrane Review:** None of these "conservative" treatments showed benefit over observation.\n\n**Hyperbaric Oxygen (HBO):**\n- May help if <12 hours (best if <2 hours)\n- Protocol: 2-2.5 atm × 90 minutes\n- Mixed evidence, limited availability\n- Consider if within window and available\n\n**Focus on:**\n1. Secondary prevention (stroke risk high)\n2. Embolic source workup\n3. Risk factor modification [1][2]',
         citation: [1, 2],
         next: 'crao-workup',
+        summary: 'Ocular massage, paracentesis, IOP drops have NO proven benefit — focus on secondary prevention',
+        skippable: true,
     },
     {
         id: 'crao-workup',
@@ -321,6 +344,7 @@ export const CRAO_NODES = [
         body: '**All CRAO Patients Need Stroke Workup:**\n\n**Imaging:**\n- [ ] **MRI brain with DWI** — 20-32% have concurrent brain infarcts\n- [ ] **Carotid ultrasound/doppler** — stenosis, plaque\n- [ ] **MRA head/neck** — comprehensive vascular assessment\n\n**Cardiac:**\n- [ ] **Echocardiogram** (TTE, consider TEE)\n- [ ] **Telemetry** — continuous monitoring\n- [ ] **Holter monitor** — paroxysmal AFib detection\n\n**Labs:**\n- CBC, BMP, lipid panel, HbA1c\n- ESR, CRP (if not done)\n- Hypercoagulable workup (if young or recurrent)\n\n**Why Admit?**\n- 30%+ have concurrent cerebral ischemia\n- High stroke/MI risk in days following CRAO\n- Need comprehensive embolic workup [1][2]',
         citation: [1, 2],
         next: 'crao-dispo',
+        summary: 'All CRAO need MRI brain (20-32% have concurrent infarcts), carotid US, echo, telemetry for AFib',
     },
     // =====================================================================
     // MODULE 5: DISPOSITION
@@ -336,6 +360,8 @@ export const CRAO_NODES = [
             { id: 'crao-dispo', label: 'Disposition Tool' },
         ],
         next: 'crao-secondary-prevention',
+        summary: 'ALL CRAO patients should be admitted — stroke unit for embolic workup and secondary prevention',
+        skippable: true,
     },
     {
         id: 'crao-secondary-prevention',
@@ -364,6 +390,7 @@ export const CRAO_NODES = [
             monitoring: 'LDL goal <70 mg/dL. Check LFTs at baseline and 4-12 weeks. Monitor for myalgias. BP goal <130/80.',
         },
         next: 'crao-prognosis',
+        summary: 'Aspirin 81-325mg daily + high-intensity statin — anticoagulation if AFib confirmed',
     },
     {
         id: 'crao-prognosis',
@@ -378,6 +405,8 @@ export const CRAO_NODES = [
                 next: 'crao-start',
             },
         ],
+        summary: 'Untreated: 93% remain ≤20/400; with tPA <4.5h: 50% improve; 5-year mortality 40%',
+        skippable: true,
     },
 ];
 export const CRAO_MODULE_LABELS = [
