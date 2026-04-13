@@ -65,6 +65,8 @@ export const NAT_SCREENING_NODES = [
         calculatorLinks: [
             { id: 'nat-ten4-facesp', label: 'TEN-4-FACESp Calculator' },
         ],
+        summary: '25% of abused children have prior unrecognized injuries — bruising in non-mobile infants is rare (<0.6% accidental)',
+        safetyLevel: 'critical',
     },
     {
         id: 'nat-comprehensive',
@@ -94,6 +96,7 @@ export const NAT_SCREENING_NODES = [
 - Do NOT conduct investigative interview (CPS role)`,
         citation: [5, 7],
         next: 'nat-imaging',
+        summary: 'Full workup: head-to-toe exam, skeletal survey <2yr, head CT <1yr, labs, ophthalmology, social work, mandatory CPS report',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 1 — TEN-4-FACESp Assessment
@@ -128,6 +131,7 @@ export const NAT_SCREENING_NODES = [
         calculatorLinks: [
             { id: 'nat-ten4-facesp', label: 'TEN-4-FACESp Calculator' },
         ],
+        summary: 'TEN-4-FACESp: Torso/Ear/Neck bruise or any bruise ≤4.99mo + Frenulum/Jaw/Cheek/Eyelid/Subconjunctival/Patterned — 96% sensitive',
     },
     {
         id: 'nat-ten4-action',
@@ -157,6 +161,7 @@ export const NAT_SCREENING_NODES = [
             { label: 'TEN-4-FACESp Negative, still concerned', next: 'nat-comprehensive' },
             { label: 'TEN-4-FACESp Negative, low suspicion', next: 'nat-low-suspicion' },
         ],
+        summary: 'ANY positive TEN-4-FACESp = initiate full NAT workup + CPS; does NOT distinguish bleeding disorders — always screen coags',
     },
     {
         id: 'nat-low-suspicion',
@@ -184,6 +189,7 @@ export const NAT_SCREENING_NODES = [
 - Clear discharge instructions`,
         citation: [5],
         next: 'nat-disposition',
+        summary: 'Even with low suspicion: document complete exam, location/size of injuries, caregiver explanation, consistency assessment',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 2 — Fractures
@@ -219,6 +225,8 @@ export const NAT_SCREENING_NODES = [
 - Distal extremity fractures`,
         citation: [4, 6],
         next: 'nat-skeletal-survey',
+        summary: 'Rib fractures 96% abuse in infants; 100% of humeral fractures in <18mo are abusive; multiple fractures in different healing stages',
+        safetyLevel: 'critical',
     },
     {
         id: 'nat-skeletal-survey',
@@ -248,6 +256,7 @@ export const NAT_SCREENING_NODES = [
 - High clinical suspicion with normal survey`,
         citation: [5, 6],
         next: 'nat-imaging',
+        summary: 'Mandatory skeletal survey all children <2yr — repeat at 10-14 days if negative but high suspicion (healing-only fractures)',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 2 — Abusive Head Trauma
@@ -284,6 +293,8 @@ export const NAT_SCREENING_NODES = [
 - Grades 3A/3B highly specific for abuse`,
         citation: [3, 8],
         next: 'nat-aht-imaging',
+        summary: 'AHT: multiple SDH locations, retinal hemorrhages (grade 3A/3B highly specific) — head CT mandatory for all <1yr suspected abuse',
+        safetyLevel: 'critical',
     },
     {
         id: 'nat-aht-imaging',
@@ -316,6 +327,7 @@ export const NAT_SCREENING_NODES = [
 - Document retinal hemorrhage location, extent, character`,
         citation: [3, 8],
         next: 'nat-labs',
+        summary: 'MRI brain + C-spine if CT abnormal (75% have unsuspected spinal injuries); ophthalmology within 24-48h; do NOT date SDH',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 3 — Imaging Summary
@@ -350,6 +362,8 @@ export const NAT_SCREENING_NODES = [
 - NOT applicable when abuse suspected`,
         citation: [5, 6],
         next: 'nat-labs',
+        summary: 'Imaging summary: skeletal survey <2yr, head CT <1yr, MRI for AHT, repeat survey 10-14d — do NOT use PECARN rules for abuse',
+        safetyLevel: 'warning',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 3 — Laboratory Workup
@@ -386,6 +400,7 @@ export const NAT_SCREENING_NODES = [
 - Negative labs do NOT exclude abuse`,
         citation: [5, 7],
         next: 'nat-documentation',
+        summary: 'Coag studies (CBC, PT, aPTT, Factor VIII/IX, vWF) for all bruising/ICH; metabolic bone disease screen for fractures',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 4 — Documentation & Reporting
@@ -421,6 +436,7 @@ export const NAT_SCREENING_NODES = [
 - Prior visits for similar concerns`,
         citation: [5, 7],
         next: 'nat-reporting',
+        summary: 'Body diagrams/photos (no permission required), interview caregivers SEPARATELY with direct quotations, note inconsistencies',
     },
     {
         id: 'nat-reporting',
@@ -455,6 +471,8 @@ export const NAT_SCREENING_NODES = [
 **CPS Hotline:** [Check state-specific number]`,
         citation: [5],
         next: 'nat-disposition',
+        summary: 'ALL 50 states require reporting — suspicion sufficient, diagnosis NOT required; good faith reports protected from liability',
+        safetyLevel: 'critical',
     },
     // ─────────────────────────────────────────────────────────────────────────────
     // MODULE 5 — Disposition
@@ -536,5 +554,6 @@ export const NAT_SCREENING_NODES = [
 - Thorough workup protects child AND family`,
         citation: [5],
         next: 'nat-start',
+        summary: 'Mimics: hemophilia, vWD, ITP, OI, rickets, glutaric aciduria, Mongolian spots — thorough workup protects child AND family',
     },
 ];

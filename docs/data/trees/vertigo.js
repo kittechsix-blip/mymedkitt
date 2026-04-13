@@ -15,6 +15,8 @@ export const VERTIGO_NODES = [
         citation: [1, 11],
         images: [{ src: 'images/vertigo/semicircular-canals.svg', alt: 'Human ear anatomy with semicircular canals', caption: 'Human ear anatomy: three semicircular canals (posterior, horizontal, superior), cochlea, utricle, and saccule. Posterior canal BPPV is most common (~85%). (Chittka & Brockmann, Wikimedia Commons, CC BY 2.5)' }],
         next: 'vert-true-vertigo',
+        summary: 'TITRATE approach: classify dizziness by timing and triggers, not symptom quality — distinguish BPPV, vestibular neuritis, posterior stroke',
+        skippable: true,
     },
     {
         id: 'vert-true-vertigo',
@@ -35,6 +37,7 @@ export const VERTIGO_NODES = [
                 next: 'vert-non-vertigo-exit',
             },
         ],
+        summary: 'Differentiate true vertigo (illusory motion) from presyncope/disequilibrium — patient descriptors are unreliable',
     },
     {
         id: 'vert-vitals-check',
@@ -55,6 +58,7 @@ export const VERTIGO_NODES = [
                 next: 'vert-non-vertigo-exit',
             },
         ],
+        summary: 'Check orthostatic vitals before assuming vestibular cause — POTS and orthostatic hypotension masquerade as vertigo',
     },
     {
         id: 'vert-non-vertigo-exit',
@@ -89,6 +93,7 @@ export const VERTIGO_NODES = [
                 next: 'vert-sevs-path',
             },
         ],
+        summary: 'Classify vertigo by timing/triggers: AVS (constant hours-days), t-EVS (brief positional), s-EVS (spontaneous episodic)',
     },
     {
         id: 'vert-avs-path',

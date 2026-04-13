@@ -26,6 +26,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         body: '[Opioid Withdrawal Steps Summary](#/info/ow-summary)\n\nOpioid withdrawal is rarely life-threatening on its own — but it is profoundly uncomfortable, drives patients back to opioid use, and the resulting loss of tolerance makes subsequent overdose frequently fatal. **5.5% of patients surviving an opioid overdose die within 1 year.** [1][2]\n\nThe ED may be the only healthcare touchpoint for patients with opioid use disorder (OUD). ED-initiated medication for OUD (MOUD) significantly improves engagement in treatment and reduces mortality. [3]',
         citation: [1, 2, 3],
         next: 'ow-recognize',
+        summary: 'OW rarely life-threatening but drives relapse and fatal overdose (5.5% die within 1yr) — ED-initiated MOUD improves treatment engagement and survival',
+        skippable: true,
     },
     {
         id: 'ow-recognize',
@@ -37,6 +39,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         citation: [4, 5],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'ow-cows-result',
+        summary: 'Mydriasis, yawning, diaphoresis, piloerection, rhinorrhea, GI symptoms onset 4-12h post short-acting; use COWS score to quantify severity',
     },
     {
         id: 'ow-cows-result',
@@ -46,6 +49,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         body: 'What is the COWS score?',
         citation: [5],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        summary: 'COWS guides treatment: 0-4 observe, 5-12 consider MOUD or symptomatic, 13-24 initiate agonist therapy, 25+ aggressive treatment',
         options: [
             {
                 label: 'No Withdrawal (0–4)',
@@ -99,6 +103,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
                 next: 'ow-adjuncts',
             },
         ],
+        summary: 'Mild withdrawal — can initiate buprenorphine if COWS ≥8 and patient interested, otherwise symptomatic adjuncts',
     },
     // ===================================================================
     // MODULE 2 — Differential & Workup (4 nodes)
@@ -111,6 +116,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         body: '**Laboratory Studies:**\n• Most patients can be managed without labs\n• **BMP** if significant vomiting or diarrhea — check for hypokalemia and hypomagnesemia (QT risk with methadone/ondansetron)\n• Urine drug screen: low utility in acute management (many synthetic opioids not detected on standard 5-panel) [6]\n\n**ECG:**\n• If methadone use (current or planned)\n• If combining QT-prolonging medications\n• If electrolyte derangements suspected\n\n[Differential Diagnosis](#/info/ow-ddx)\n[QT Prolongation Risk](#/info/ow-qt-risk)',
         citation: [6],
         next: 'ow-ddx-screen',
+        summary: 'Labs often unnecessary; BMP if significant vomiting/diarrhea (QT risk); UDS low utility (synthetics not detected); ECG if methadone or QT-prolonging meds',
     },
     {
         id: 'ow-ddx-screen',
@@ -119,6 +125,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         title: 'Is This Opioid Withdrawal?',
         body: 'Key differentiators: piloerection, yawning, and lacrimation are **highly specific** for opioid withdrawal. Seizures and hyperthermia are **never** seen in uncomplicated opioid withdrawal. [4]',
         citation: [4],
+        summary: 'Piloerection, yawning, lacrimation highly specific for OW; seizures and hyperthermia are NEVER seen — those suggest ethanol/sedative withdrawal',
+        safetyLevel: 'warning',
         options: [
             {
                 label: 'Clear opioid withdrawal',
@@ -181,6 +189,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Determine if withdrawal from interruption (standard treatment) or precipitated by antagonist (different management based on agent half-life)',
     },
     {
         id: 'ow-agonist-choice',
@@ -189,6 +198,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         title: 'Treatment Pathway',
         body: 'Opioid agonist therapy is preferred over non-opioid adjuncts. **Buprenorphine is the first-line choice** for most patients. [3][7]\n\n[Medications for Opioid Withdrawal](#/info/ow-meds-compare)',
         citation: [3, 7],
+        summary: 'Buprenorphine is first-line for most patients — safe partial agonist, no QT risk; methadone for high tolerance or current methadone patients',
         options: [
             {
                 label: 'Buprenorphine (preferred)',
@@ -214,6 +224,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         title: 'Buprenorphine Initiation',
         body: 'Choose the induction strategy based on the clinical scenario.\n\n[Buprenorphine Initiation Guide](#/info/ow-bup-guide)',
         citation: [8, 9, 10],
+        summary: 'Choose induction strategy: standard (COWS≥8, 8mg SL), microdosing (fentanyl/methadone patients, avoids precipitated WD), or wait if COWS<8',
         options: [
             {
                 label: 'COWS ≥ 8 — Standard induction',
@@ -291,6 +302,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         citation: [13],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'ow-bup-protocol',
+        summary: 'COWS <8 too early for standard induction — reassess q1-2h, many experts recommend COWS≥13 for fentanyl-dependent; consider microdosing as alternative',
+        safetyLevel: 'warning',
     },
     {
         id: 'ow-methadone',
@@ -331,6 +344,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         title: 'Non-Opioid Adjunctive Therapy',
         body: 'For patients who **decline opioid agonist therapy** or as **add-on** to buprenorphine/methadone for residual symptoms.\n\nTarget specific symptom clusters with the agents below. Can combine multiple adjuncts safely, but monitor for QT prolongation if using ondansetron + loperamide + methadone together.',
         next: 'ow-adjuncts-rx',
+        summary: 'Non-opioid adjuncts for declining agonist therapy or as add-on — target autonomic, GI, anxiety symptoms; monitor QT if combining multiple agents',
+        skippable: true,
     },
     {
         id: 'ow-adjuncts-rx',
@@ -370,6 +385,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
         body: '**Combination approach is often optimal:** Opioid agonist therapy (buprenorphine or methadone) addresses the core withdrawal, while adjuncts target residual GI, autonomic, and musculoskeletal symptoms.\n\nReassess COWS after treatment to gauge therapeutic response and guide disposition.',
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'ow-disposition',
+        summary: 'Combination opioid agonist + adjuncts is optimal — reassess COWS after treatment to gauge response and guide disposition',
     },
     // ===================================================================
     // MODULE 5 — Precipitated Withdrawal (3 nodes)
@@ -381,6 +397,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         title: 'Precipitating Agent',
         body: 'Withdrawal was precipitated by an opioid antagonist. Management depends on the half-life of the precipitating agent.\n\nIatrogenic (precipitated) withdrawal can produce sudden **catecholamine surges and hemodynamic instability** that may be life-threatening — unlike naturally occurring opioid withdrawal. [4]',
         citation: [4],
+        summary: 'Precipitated withdrawal can cause hemodynamic instability unlike natural OW — management depends on antagonist half-life (naloxone vs naltrexone)',
+        safetyLevel: 'warning',
         options: [
             {
                 label: 'Naloxone (short-acting)',
@@ -475,6 +493,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Most OW patients dischargeable after symptom management — admit for hemodynamic instability, intractable GI, naltrexone-precipitated WD, or pregnancy',
     },
     {
         id: 'ow-discharge',

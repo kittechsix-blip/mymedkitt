@@ -17,6 +17,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         ],
         citation: [1, 2, 3],
         next: 'osteo-clinical',
+        summary: 'AHO peak at 12-24mo; empiric abx within 1h if ill-appearing; cultures before abx but do not delay treatment',
     },
     {
         id: 'osteo-clinical',
@@ -26,6 +27,8 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         body: '**Typical presentation varies by age:**\n\n**Infants (<12 months):**\n- Pseudoparalysis (refusal to move limb)\n- Irritability when handled\n- May lack fever\n- Higher risk of joint involvement (transphyseal vessels) [2]\n\n**Toddlers/Preschool (1-5 years):**\n- Limp or refusal to bear weight\n- Localized pain, swelling, warmth\n- Fever (present in ~78% of AHO) [4]\n- *Kingella kingae* predominates in this age group [5]\n\n**School-age/Adolescents:**\n- Localized bone pain and tenderness\n- Fever, malaise\n- Point tenderness over metaphysis\n- May have overlying soft tissue swelling [4]\n\n**Most common sites:** Femur, tibia, humerus (metaphyses of long bones). [1]',
         citation: [1, 2, 4, 5],
         next: 'osteo-septic-arthritis',
+        summary: 'Infants: pseudoparalysis, irritability; toddlers: limp, Kingella predominates; school-age: localized bone pain, metaphyseal tenderness',
+        skippable: true,
     },
     {
         id: 'osteo-septic-arthritis',
@@ -50,6 +53,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
                 next: 'osteo-special-populations',
             },
         ],
+        summary: 'Kocher criteria: fever, NWB, ESR >40, WBC >12k; osteomyelitis and septic arthritis can coexist especially in infants',
     },
     {
         id: 'osteo-joint-aspiration',
@@ -59,6 +63,8 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         body: '**Septic arthritis is an orthopedic emergency** requiring urgent drainage to prevent cartilage destruction and growth disturbance. [6,8]\n\n**Joint aspiration findings suggesting septic arthritis:**\n- WBC >50,000/mcL (often >100,000)\n- >90% PMNs\n- Low glucose\n- Positive Gram stain (40-70% sensitive) [8]\n\n**Management:**\n- Emergent orthopedic consultation\n- Joint washout/arthrotomy (especially hip)\n- Empiric antibiotics covering *S. aureus*\n\n**Note:** In children <5 years, send synovial fluid for *Kingella kingae* PCR - culture is insensitive for this fastidious organism. [5,9]',
         citation: [5, 6, 8, 9],
         next: 'osteo-special-populations',
+        summary: 'Septic arthritis is ortho emergency; WBC >50k in synovial fluid; send Kingella PCR for age <5yr; emergent joint washout',
+        safetyLevel: 'critical',
     },
     {
         id: 'osteo-special-populations',
@@ -103,6 +109,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         body: '**Salmonella is disproportionately common** in sickle cell patients due to functional asplenia and bowel ischemia. [10,11]\n\n**Pathogen distribution in SCD osteomyelitis:**\n- *Salmonella* spp: 50-80%\n- *S. aureus*: 25-35%\n- Other gram-negatives: 10% [10]\n\n**Diagnostic challenge:** Bone infarction (vaso-occlusive crisis) mimics osteomyelitis. Key distinguishing features:\n- Fever >72 hours favors osteomyelitis\n- Multiple symmetric sites favor infarction\n- Single asymmetric site favors infection [10]\n\n**MRI** is the imaging modality of choice to differentiate. [1,10]\n\n**Empiric coverage:** Must include **both** *S. aureus* AND *Salmonella* coverage. [10,11]\n\nSee [Sickle Cell Consult](#/tree/sickle-cell) for comprehensive management.',
         citation: [1, 10, 11],
         next: 'osteo-workup',
+        summary: 'Sickle cell: Salmonella + S. aureus; immunocompromised: broad spectrum + fungi; puncture wound: Pseudomonas',
     },
     {
         id: 'osteo-immunocompromised',
@@ -130,6 +137,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         body: '**Recommended labs:** [1,3,4]\n\n**Inflammatory markers:**\n- **CRP:** Most useful for monitoring response. May be normal early or in walled-off *S. aureus* infections. Peaks at 2-4 days, normalizes in 9-12 days with appropriate treatment. [3,4]\n- **ESR:** Less dynamic; remains elevated longer. Useful baseline.\n- **Procalcitonin:** >2.0 ng/mL highly specific for invasive bacterial infection. [3]\n\n**WBC count:** Often normal (mean ~10,000). Poor sensitivity for osteomyelitis. [3,4]\n\n**Blood cultures:** Obtain in ALL patients before antibiotics.\n- Positive in ~40-66% of AHO cases [4]\n- May be the only positive culture if bone biopsy not performed\n\n**Serum glucose:** For comparison with bone/joint fluid if aspirated.',
         citation: [1, 3, 4],
         next: 'osteo-imaging',
+        summary: 'CRP most useful for monitoring; blood cultures in ALL patients; WBC often normal; procalcitonin >2.0 specific for invasive infection',
     },
     {
         id: 'osteo-imaging',
@@ -155,6 +163,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
                 next: 'osteo-multifocal',
             },
         ],
+        summary: 'MRI gold standard (97% sensitive); X-ray changes take 10-14 days; bone scan for multifocal screening; US detects subperiosteal abscess',
     },
     {
         id: 'osteo-mri-findings',
@@ -194,6 +203,8 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         body: '**Most common pathogens by age group:** [1,2,5,9]\n\n**<3 months (Neonates):**\n- *Staphylococcus aureus*\n- Group B *Streptococcus*\n- Gram-negative bacilli (*E. coli*, *Klebsiella*)\n\n**3 months - 4 years:**\n- **Kingella kingae** (predominant in many regions) [5,9]\n- *Staphylococcus aureus*\n- *Streptococcus pyogenes* (GAS)\n\n**>4 years:**\n- *Staphylococcus aureus* (most common overall)\n- MRSA in areas with high prevalence\n- *Streptococcus pyogenes*\n\n**Special situations:**\n- Sickle cell: *Salmonella*, *S. aureus* [10]\n- Puncture wound: *Pseudomonas* [12]\n- Immunocompromised: Broader spectrum including fungi [12]',
         citation: [1, 2, 5, 9, 10, 12],
         next: 'osteo-mrsa-risk',
+        summary: '<3mo: S. aureus, GBS, gram-neg; 3mo-4yr: Kingella kingae predominant; >4yr: S. aureus most common overall',
+        skippable: true,
     },
     {
         id: 'osteo-mrsa-risk',
@@ -364,6 +375,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
             { id: 'iv-oral-transition', label: 'IV-to-Oral Criteria' },
         ],
         next: 'osteo-oral-regimens',
+        summary: 'PIDS/IDSA: early oral transition safe; criteria: afebrile 24-48h, tolerating PO, CRP decreasing; typical IV 2-7 days',
     },
     {
         id: 'osteo-oral-regimens',

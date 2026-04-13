@@ -34,6 +34,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: '[Algorithm — Quick Reference](#/node/nrp-algorithm-ref)\n[Setup and Tools — Quick Reference](#/node/nrp-setup-ref)\n[NRP Steps Summary](#/info/nrp-summary) — quick-reference checklist for neonatal resuscitation.\n\n**Neonatal resuscitation** follows a systematic, stepwise approach from initial assessment through advanced interventions.\n\n**Key statistics:** [1]\n• ~90% of newborns transition without intervention beyond warmth, drying, and stimulation\n• ~10% need early support (PPV, supplemental O2)\n• <1% need extensive resuscitation (CPR + medications)\n\n**Modules:**\n• Module 1: Preparation & Initial Assessment — team, equipment, cord management, initial evaluation\n• Module 2: Initial Steps — Golden 30 Seconds (warm, dry, position, stimulate, clear)\n• Module 3: Positive Pressure Ventilation — PPV technique, corrective steps, advanced airway\n• Module 4: Chest Compressions — CPR technique, intubation\n• Module 5: Medications & Vascular Access — epinephrine, UVC, volume resuscitation\n• Module 6: Post-Resuscitation — APGAR, normothermia, NICU transfer\n\n**Cross-links:**\n• [Precipitous Delivery](#/tree/precip-delivery) — ED delivery management\n• [Shoulder Dystocia](#/tree/shoulder-dystocia) — if turtle sign during delivery',
     citation: [1, 2],
     next: 'nrp-preparation',
+    summary: 'Stepwise NRP overview — 90% need no intervention, 10% need PPV/O2, <1% need CPR + meds; 6 modules from prep to post-resus',
+    skippable: true,
   },
 
   {
@@ -51,6 +53,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'nrp-cord-mgmt',
+    summary: 'Assign team roles, prep radiant warmer, T-piece resuscitator, pulse ox (right hand), 3-lead ECG, suction, UVC kit, epinephrine',
   },
 
   {
@@ -61,6 +64,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'DELAYED CORD CLAMPING (DCC) — 2025 GUIDELINES [1][5]\n\n**Vigorous term/late preterm:**\n• DCC **30–60 seconds** recommended\n• Improves placental transfusion, iron stores, and hemoglobin\n\n**Non-vigorous ≥35 weeks:**\n• **Intact cord milking (ICM)** may be reasonable (compared to immediate clamping)\n• Milk cord toward baby 3–4 times over 2 seconds\n\n**Preterm 28–34 weeks:**\n• ICM when DCC isn\'t possible\n\n**<28 weeks:**\n• ICM is **NOT recommended** — risk of intraventricular hemorrhage\n\n**Clamp immediately if:**\n• Baby needs resuscitation and can\'t wait\n• Placental abruption, cord avulsion, or other emergency\n\n**Communicate cord management plan to the team before delivery.** [5]',
     citation: [1, 5],
     next: 'nrp-preterm',
+    summary: 'DCC 30-60 sec for vigorous term; intact cord milking if non-vigorous ≥35wk; NO milking <28wk (IVH risk); clamp immediately if resus needed',
   },
 
   {
@@ -71,6 +75,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'PRETERM ASSESSMENT [1][2]\n\n**Viability assessment:**\n• Dating most accurate in 1st trimester (±3–5 days)\n• Later dating accuracy: ±1–2 weeks\n• U/S: BPD + femur length for estimation\n\n**Preterm-specific needs:**\n• **Plastic wrap <32 weeks** — cover body (not face) to prevent heat loss\n• **Higher starting FiO2** — 21–30% for ≥35 wk, 21–30% for <35 wk (titrate to SpO2 targets)\n• **Temperature is critical** — hypothermia worsens all outcomes\n• **Surfactant** may be needed if <32 wk (NICU decision)\n\n**Gestational age estimation if unknown:**\n• Weight: ~500g at 23–24 wk, ~1000g at 28 wk, ~1500g at 32 wk, ~2500g at 37 wk\n• Sole creases, ear cartilage, breast tissue for Ballard score (post-resuscitation)\n\n**Both hypothermia AND hyperthermia worsen outcomes.** Target normothermia (36.5–37.5°C) for all infants. [1]',
     citation: [1, 2],
     next: 'nrp-initial-eval',
+    summary: 'Plastic wrap <32wk, higher starting FiO2 for preterm, temperature is critical — both hypo/hyperthermia worsen outcomes',
+    skippable: true,
   },
 
   {
@@ -93,6 +99,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'Three questions at birth: term gestation? breathing/crying? good tone? — Yes to ALL = routine care, No to ANY = initial steps',
   },
 
   {
@@ -118,6 +125,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'INITIAL STEPS — Complete within 30 seconds [1][2][3]\n\n**W — WARM**\n• Radiant heater ON — **NO blankets on top** (blocks radiant heat)\n• Plastic wrap for <32 weeks\n\n**D — DRY**\n• Vigorously dry with warm towels\n• Remove wet towels — replace with dry\n\n**P — POSITION**\n• **Sniffing position** — slight neck extension to open airway\n• Shoulder roll if needed for neutral alignment\n\n**S — STIMULATE**\n• **Flick the soles of the feet**\n• **Rub the back** — up and down along the spine\n• Primary apnea always responds to stimulation\n\n**C — CLEAR AIRWAY (PRN)**\n• Suction **mouth then nose** ("M before N")\n• Avoid vigorous or deep suctioning — causes bradycardia via vagal stimulation\n• Only suction if secretions are obstructing the airway',
     citation: [1, 2, 3],
     next: 'nrp-meconium',
+    summary: 'Golden 30 seconds: Warm (radiant heater), Dry, Position (sniffing), Stimulate (flick soles/rub back), Clear airway PRN — mouth before nose',
+    safetyLevel: 'critical',
   },
 
   {
@@ -128,6 +137,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'MECONIUM MANAGEMENT (2025 Update) [1][6]\n\n**Vigorous baby + meconium:**\n• Proceed with normal initial steps\n• No special suctioning needed\n\n**Non-vigorous baby + meconium:**\n• **Do NOT delay PPV for suctioning** (2025 guideline change)\n• Begin PPV as indicated — ventilation is the priority\n• ET suctioning **only if airway is obstructed** (visible thick meconium blocking airway)\n\n**Meconium aspirator** is no longer routinely recommended — it delays time to PPV without proven benefit. [1][6]\n\n**Key teaching point:** "Primary apnea responds to stimulation. **Secondary apnea does NOT** — it requires PPV." [2]',
     citation: [1, 2, 6],
     next: 'nrp-golden30-eval',
+    summary: 'Do NOT delay PPV for meconium suctioning (2025 change) — ventilation is priority; ET suction only if visible thick meconium blocks airway',
+    safetyLevel: 'critical',
   },
 
   {
@@ -156,6 +167,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'After initial steps assess breathing, HR, tone, color — breathing+HR≥100 = good, labored = CPAP, apnea/HR<100 = PPV now',
   },
 
   {
@@ -166,6 +178,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'SUPPLEMENTAL O2 / CPAP [1][2]\n\n**Pulse oximetry** — apply to **right hand/wrist** (preductal)\n• Do NOT use left hand or feet (postductal — lower readings are normal)\n\n**SpO2 targets by minute of life:** [1]\n• 1 min: 60–65%\n• 2 min: 65–70%\n• 3 min: 70–75%\n• 4 min: 75–80%\n• 5 min: 80–85%\n• 10 min: 85–95%\n\n**Labored breathing with adequate HR:**\n• Start **CPAP 5–6 cmH2O** via mask\n• Supplement O2 to meet SpO2 targets\n• Avoid hyperoxia — titrate FiO2 down as saturations improve\n\n**If worsening or HR drops <100 → proceed to PPV**\n\nContinue monitoring. Most babies with labored breathing improve with CPAP alone.',
     citation: [1, 2],
     next: 'nrp-postresus',
+    summary: 'SpO2 on RIGHT hand (preductal), CPAP 5-6 cmH2O for labored breathing, titrate O2 to targets — avoid hyperoxia',
   },
 
   // =====================================================================
@@ -180,6 +193,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'PPV — The Most Important Intervention in NRP [1][2][3]\n\n**T-piece resuscitator preferred** (2025) — provides consistent PIP and PEEP. Self-inflating bag acceptable if T-piece unavailable. [1]\n\n**TECHNIQUE:**\n• **C-E grip** — C fingers seal mask, E fingers lift jaw\n• **Mask seal** — covers mouth and nose, not eyes\n• **Sniffing position** — slight neck extension\n• **PIP** 20–25 cmH2O (avoid barotrauma)\n• **Rate** 40–60/min ("squeeze—release—release")\n• **FiO2** start at 21% for ≥35 weeks; 21–30% for <35 weeks\n• **Confirm chest rise** and bilateral breath sounds\n\n**SpO2 TARGETS by minute:** [1]\n• 1 min: 60–65% → 2 min: 65–70% → 3 min: 70–75%\n• 4 min: 75–80% → 5 min: 80–85% → 10 min: 85–95%\n• Monitor on right hand/wrist (preductal)\n• **Avoid hyperoxia** — titrate FiO2 to targets\n\n**Ventilation is the single most important intervention.** Most neonatal bradycardia is caused by inadequate ventilation. [2]',
     citation: [1, 2, 3],
     next: 'nrp-spo2-targets',
+    summary: 'PPV is most important intervention — T-piece preferred, C-E grip, PIP 20-25, rate 40-60/min, FiO2 21% for ≥35wk, confirm chest rise',
+    safetyLevel: 'critical',
   },
 
   {
@@ -190,6 +205,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'PREDUCTAL SpO2 TARGETS [1][2]\n\nMonitor on **right hand/wrist** (preductal — above the ductus arteriosus).\n\n**Target SpO2 by minute of life:**\n• 1 min: 60–65%\n• 2 min: 65–70%\n• 3 min: 70–75%\n• 4 min: 75–80%\n• 5 min: 80–85%\n• 10 min: 85–95%\n\n**Why preductal?** The right hand receives blood from the aorta BEFORE the ductus arteriosus. Left hand and feet receive mixed blood — lower SpO2 is expected and doesn\'t indicate poor oxygenation.\n\n**Titrate FiO2:**\n• Below target → increase FiO2 by 10–20%\n• Above target → decrease FiO2 by 10–20%\n• **Avoid hyperoxia** — especially in premature infants (retinopathy risk)\n\n**Cardiac monitor** (3-lead ECG) provides the most accurate HR — more reliable than pulse oximetry waveform during resuscitation. [1]',
     citation: [1, 2],
     next: 'nrp-ppv-eval',
+    summary: 'Monitor SpO2 on RIGHT hand only (preductal) — targets: 1min 60-65%, 5min 80-85%, 10min 85-95%; cardiac monitor most accurate HR',
   },
 
   {
@@ -212,6 +228,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+    summary: 'After 30 sec effective PPV check HR — ≥100 = improving, <100 = apply MR SOPA corrective steps',
   },
 
   {
@@ -222,6 +239,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'MR SOPA — Corrective Steps for Ineffective Ventilation [1][2]\n\nIf HR is not improving with PPV, systematically troubleshoot:\n\n**M — Mask adjust**\n• Reapply mask — ensure tight seal, no air leak\n• Reposition C-E grip\n\n**R — Reposition**\n• Sniffing position — slight neck extension\n• Shoulder roll for alignment\n\n**S — Suction**\n• Suction mouth then nose\n• Clear any secretions obstructing airway\n\n**O — Open mouth**\n• Open baby\'s mouth slightly\n• Jaw thrust if needed\n\n**P — Pressure increase**\n• Increase PIP by 5 cmH2O increments\n• Up to 30–40 cmH2O if needed for chest rise\n\n**A — Alternative airway**\n• Consider ETT intubation or LMA (supraglottic airway)\n• LMA may be used for ≥34 weeks, >2 kg (2025 update) [1]\n\nIf still no improvement after corrective steps → proceed to advanced airway.',
     citation: [1, 2],
     next: 'nrp-advanced-airway',
+    summary: 'MR SOPA: Mask adjust, Reposition, Suction, Open mouth, Pressure increase (by 5 cmH2O), Alternative airway (ETT/LMA)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -232,6 +251,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'ADVANCED AIRWAY — ETT or LMA [1][2]\n\n**ETT Intubation:**\n• Use **cardiac monitor** to confirm HR before and after\n• **Attempt limit:** 30 seconds per attempt — ventilate between attempts\n• Confirm placement: chest rise, bilateral breath sounds, CO2 detector\n• Secure tube — neonatal ETTs are extremely easy to dislodge\n\n**LMA / Supraglottic Airway (2025 update):**\n• May use as **initial interface** for ≥34 weeks, >2 kg [1]\n• Faster to place than ETT\n• Cannot suction through LMA — switch to ETT if tracheal suctioning needed\n\n**When to intubate:**\n• Failed PPV despite corrective steps\n• Need for chest compressions (intubation required before CPR)\n• Prolonged PPV anticipated\n• Tracheal suctioning for airway obstruction\n• Special circumstances: CDH (congenital diaphragmatic hernia)\n\nSee ETT sizing reference →',
     citation: [1, 2],
     next: 'nrp-ett-sizing',
+    summary: 'ETT or LMA for failed PPV — 30 sec attempt limit, LMA for ≥34wk >2kg (2025), intubate before CPR and for tracheal suctioning',
   },
 
   {
@@ -249,6 +269,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'nrp-hr60-check',
+    summary: 'ETT size = GA(wk)/10; depth at lip = 6 + weight(kg); Miller 0 for most neonates, Miller 00 for extreme preterm',
   },
 
   {
@@ -271,6 +292,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         next: 'nrp-postresus',
       },
     ],
+    summary: 'HR <60 despite confirmed effective ventilation = initiate chest compressions — must secure airway first',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -285,6 +308,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'NEONATAL CPR [1][2][3]\n\n**MUST secure airway first** — intubate or place LMA before starting compressions.\n\n**Technique — 2-thumb encircling:**\n• Both thumbs on **lower third of sternum**, just below the nipple line\n• Wrap fingers around the chest\n• Compress **1/3 of anteroposterior diameter**\n\n**Compression-to-ventilation ratio: 3:1**\n• "One—two—three—breathe" (120 events/min = 90 compressions + 30 breaths)\n• This is DIFFERENT from pediatric/adult CPR (15:2 or 30:2)\n\n**During CPR:**\n• Increase to **100% FiO2**\n• Establish vascular access: **UVC preferred** (fastest), IO as alternative\n• Prepare epinephrine\n\n**Goal: HR >60 bpm**\n• Reassess every 60 seconds\n• Once HR >60 → stop compressions, continue PPV\n• If HR remains <60 after 60 seconds of CPR → epinephrine [1][2]',
     citation: [1, 2, 3],
     next: 'nrp-cpr-eval',
+    summary: '3:1 ratio (90 compressions + 30 breaths), 2-thumb encircling, lower third sternum, 100% FiO2, establish UVC, prepare epinephrine',
+    safetyLevel: 'critical',
   },
 
   {
@@ -307,6 +332,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'After 60 sec CPR reassess HR — ≥60 stop compressions and continue PPV, still <60 = epinephrine',
   },
 
   // =====================================================================
@@ -321,6 +347,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'EPINEPHRINE — Neonatal Resuscitation [1][2][3]\n\n[Epinephrine](#/drug/epinephrine/neonatal resuscitation)\n\n**IV/IO (preferred):**\n• **0.01–0.03 mg/kg** of 1:10,000 (= 0.1–0.3 mL/kg)\n• Repeat every **3–5 minutes** as needed\n\n**ET (if no IV/IO access):**\n• **0.05–0.1 mg/kg** of 1:10,000 (= 0.5–1 mL/kg)\n• Higher dose needed via ET — absorption is unpredictable\n• Switch to IV/IO route as soon as access established\n\n**IV/IO is ALWAYS preferred over ET.** Establish UVC access as quickly as possible.\n\n**Preparation:**\n• Use **1:10,000 concentration** (0.1 mg/mL)\n• Pre-draw doses in labeled syringes\n• Flush with 1–3 mL NS after IV administration\n\n**Continue CPR between doses.** Do not stop compressions to give epinephrine. [1][2]',
     citation: [1, 2, 3],
     next: 'nrp-uvc',
+    summary: 'Epinephrine 0.01-0.03 mg/kg IV/IO of 1:10,000 q3-5min — IV/IO preferred over ET; flush with NS; continue CPR between doses',
+    safetyLevel: 'critical',
     treatment: {
       firstLine: {
         drug: 'Epinephrine',
@@ -357,6 +385,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'nrp-persistent',
+    summary: 'UVC: catheterize the single large VEIN (not arteries), 5Fr term/3.5Fr preterm, insert only 2-4 cm until blood return, prime with NS',
   },
 
   {
@@ -386,6 +415,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+    summary: 'Persistent HR <60 after epi — consider hypovolemia, pneumothorax, equipment failure; >20 min without response consider discontinuation',
+    safetyLevel: 'critical',
   },
 
   {
@@ -396,6 +427,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     body: 'VOLUME & GLUCOSE RESUSCITATION [1][2]\n\n**Hypovolemia — clinical signs:**\n• Pallor despite adequate oxygenation\n• Weak pulses\n• Poor response to resuscitation\n• Known maternal hemorrhage or placental abruption\n\n**Normal saline:**\n• **10 mL/kg** IV/IO — infuse over 5–10 minutes\n• May repeat if needed\n\n**O-negative pRBCs:**\n• **10 mL/kg** — for acute blood loss (abruption, cord avulsion)\n• Uncrossmatched O-negative\n\n**D10W (10% Dextrose):**\n• **2 mL/kg** IV — for hypoglycemia (glucose <40 mg/dL)\n• Neonates have limited glycogen stores — check glucose early\n\n**Naloxone:**\n• **No longer routinely recommended** in neonatal resuscitation\n• PPV is the treatment for respiratory depression, regardless of cause [1]\n\nReassess after volume — if HR improving → continue PPV → post-resuscitation care.',
     citation: [1, 2],
     next: 'nrp-postresus',
+    summary: 'NS 10 mL/kg IV over 5-10 min for hypovolemia; O-neg pRBCs 10 mL/kg for blood loss; D10W 2 mL/kg for hypoglycemia; naloxone NOT recommended',
     treatment: {
       firstLine: {
         drug: 'Normal Saline (0.9% NaCl)',
@@ -472,6 +504,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'nrp-start',
+    summary: 'NRP algorithm quick-reference flowchart — birth assessment through initial steps, PPV, CPR, and epinephrine with SpO2 targets',
+    skippable: true,
   },
 
   {
@@ -488,6 +522,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'nrp-start',
+    summary: 'Equipment sizing and setup reference — term vs preterm numbers, UVC anatomy, monitoring placement',
+    skippable: true,
   },
 
 ];

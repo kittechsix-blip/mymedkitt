@@ -28,6 +28,8 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**US/Developed Countries:**\n| Cause | Frequency |\n|-------|----------|\n| Bronchiectasis | 20-30% |\n| Bronchogenic CA | 20-25% |\n| Chronic bronchitis | 15-20% |\n| Pneumonia | 10-15% |\n| Mycetoma/aspergilloma | 5-10% |\n\n**Worldwide:** TB is most common (7-85% by region) [1][2]\n\n**Other causes:**\n• Vascular: PE, pulmonary AVM, Rasmussen aneurysm (TB)\n• Iatrogenic: Post-biopsy, PA catheter perforation\n• Autoimmune: Goodpasture, GPA (Wegener), DAH\n• Cardiac: Mitral stenosis\n\n**Source:** ~90% from bronchial arteries (systemic pressure), 5% pulmonary, 5% collaterals [1]',
         citation: [1, 2],
         next: 'hemo-initial',
+        summary: 'Bronchiectasis/lung CA most common in US, TB worldwide — 90% from bronchial arteries at systemic pressure',
+        skippable: true,
     },
     {
         id: 'hemo-initial',
@@ -52,6 +54,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'O2, large-bore IVx2, T&C, STAT CXR to lateralize — route by stability: stable workup, unstable airway, or arrest',
     },
     {
         id: 'hemo-stable-workup',
@@ -61,6 +64,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**CT Chest with IV Contrast** (bronchial artery protocol preferred)\n• CT before bronchoscopy has superior yield (~75% vs ~50%) [2]\n• Identifies source, etiology, bronchial artery anatomy for IR\n\n**While awaiting CT:**\n• Continuous SpO₂ monitoring\n• Have airway equipment ready\n• Position patient if side known\n• Start [TXA](#/drug/txa/hemoptysis) empirically\n\n**Low threshold to escalate** — edema/clot can compromise airway rapidly [1][2]',
         citation: [1, 2],
         next: 'hemo-medical-start',
+        summary: 'CTA bronchial artery protocol before bronchoscopy (75% vs 50% yield) — start TXA empirically, low threshold to escalate',
     },
     // =====================================================================
     // MODULE 2: AIRWAY (A = Airway, B = Block)
@@ -73,6 +77,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Lateral decubitus with bleeding lung DOWN**\n• Uses gravity to prevent spillage into unaffected lung\n• Apply as soon as bleeding is lateralized\n• Prioritize lung protection over V/Q matching [1]\n\n**If side unknown:** Patient upright or semi-recumbent to minimize aspiration.\n\n**Up to 35% plasma volume** can extravasate during severe hemoptysis — lay flat only after hemorrhage control or intubation.',
         citation: [1, 2],
         next: 'hemo-airway-decision',
+        summary: 'Bleeding side DOWN — uses gravity to protect good lung; up to 35% plasma volume can extravasate',
     },
     {
         id: 'hemo-airway-decision',
@@ -92,6 +97,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Intubation for ineffective cough, SpO2 <90%, AMS, hemodynamic instability, or procedural airway control',
     },
     {
         id: 'hemo-ett-selection',
@@ -101,6 +107,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Use LARGE ETT:**\n| Patient | Minimum ETT |\n|---------|-------------|\n| Average/tall men | 9.0 mm |\n| Average women | 8.0-8.5 mm |\n| General rule | ≥8.5 mm ID |\n\n**Rationale:** Facilitates bronchoscopy, endobronchial blocker placement, and suctioning [1][2]\n\n**Why NOT double-lumen ETT:**\n• Difficult emergent placement\n• Narrow lumens clog with blood\n• Cannot pass therapeutic bronchoscope\n• Only 7% of physicians advocate for initial DLT [2]',
         citation: [1, 2],
         next: 'hemo-lung-isolation',
+        summary: 'Use LARGE ETT ≥8.5mm — facilitates bronchoscopy/blocker/suctioning; avoid double-lumen (clogs, narrow, difficult)',
     },
     {
         id: 'hemo-lung-isolation',
@@ -110,6 +117,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Option 1: Mainstem Intubation**\n• Advance ETT into unaffected bronchus\n• Use bougie with 1/4 turn technique\n• Right mainstem easier to cannulate\n\n**Option 2: Endobronchial Blocker** (preferred)\n• Options: Arndt, Cohen, EZ-Blocker, Fuji Uniblocker\n• Can isolate lobar/segmental bronchus (vs whole lung)\n• Temporizing measure for 48-72 hours [1]\n\n**Confirmation:** Fiberoptic bronchoscopy through ETT to verify position [2]',
         citation: [1, 2],
         next: 'hemo-medical-start',
+        summary: 'Mainstem intubation or endobronchial blocker to isolate bleeding lung — confirm position with fiberoptic bronchoscopy',
     },
     {
         id: 'hemo-arrest',
@@ -119,6 +127,8 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Immediate actions:**\n1. Intubate with large ETT (≥8.5 mm)\n2. If side known: advance ETT into contralateral mainstem bronchus\n3. Suction aggressively\n4. Standard ACLS resuscitation\n\n**Consider:**\n• Emergent rigid bronchoscopy if available\n• VA-ECMO if refractory arrest from reversible cause\n• Emergent thoracotomy (massive trauma with hemothorax source)\n\n**Treat the underlying cause** — this is a potentially reversible etiology [1]',
         citation: [1],
         next: 'hemo-medical-start',
+        summary: 'Arrest: intubate with large ETT → advance into contralateral mainstem if side known → aggressive suction → ACLS',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: STABILIZATION (C = Cause a Clot)
@@ -131,6 +141,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Hemostatic therapies:**\n1. [Tranexamic Acid (TXA)](#/drug/txa/hemoptysis) — first-line\n2. Cold saline lavage\n3. Topical vasoconstrictors (bronchoscopic)\n4. Coagulopathy reversal\n\n**Pneumonic: The 5 C\'s** [2]\n• **C**ompression (wedge, balloon)\n• **C**old (ice saline lavage)\n• **C**oagulants (TXA, thrombin)\n• **C**austeries (APC, electrocautery)\n• **C**onstriction (vasoconstrictors)',
         citation: [1, 2],
         next: 'hemo-txa',
+        summary: 'The 5 Cs: Compression, Cold, Coagulants (TXA), Causteries, Constriction (vasoconstrictors)',
     },
     {
         id: 'hemo-txa',
@@ -151,6 +162,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
             },
             monitoring: 'Bleeding volume, respiratory status, clot formation',
         },
+        summary: 'Nebulized TXA 1000mg load → 500mg q8h preferred; IV 500mg TID alternative; 96% resolution within 5 days in RCT',
     },
     {
         id: 'hemo-lavage',
@@ -160,6 +172,8 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Technique (bronchoscopic):**\n• 50 mL aliquots of saline at 4°C\n• Average total: ~500 mL until bleeding stops\n• Mechanism: vasoconstriction\n\n**Adverse effect:** Transient sinus bradycardia [2]\n\n**Topical Vasoconstrictors:**\n| Agent | Dose |\n|-------|------|\n| [Epinephrine](#/drug/epinephrine/hemoptysis topi) | 2 mL of 1:10,000 (0.1 mg/mL) |\n| [Phenylephrine](#/drug/phenylephrine/hemoptysis) | 5 mL of 80-100 mcg/mL |\n\n**Caution with epinephrine:** Risk of fatal arrhythmia reported [2]',
         citation: [2],
         next: 'hemo-coag-reversal',
+        summary: 'Cold saline 50mL aliquots at 4°C via bronchoscope — topical epi 1:10,000 for vasoconstriction (arrhythmia risk)',
+        safetyLevel: 'warning',
     },
     {
         id: 'hemo-coag-reversal',
@@ -188,6 +202,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
                 next: 'hemo-bronchoscopy',
             },
         ],
+        summary: 'Check for anticoagulant/antiplatelet use — route to agent-specific reversal or proceed to bronchoscopy',
     },
     {
         id: 'hemo-warfarin-reversal',
@@ -293,6 +308,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
                 next: 'hemo-icu-admit',
             },
         ],
+        summary: 'Flexible bronchoscopy first for localization (93% success), rigid if therapeutic intervention needed for massive bleeding',
     },
     {
         id: 'hemo-bae',
@@ -302,6 +318,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**First-line definitive therapy for most patients** [1][2]\n\n**Success rates:**\n• Technical success: 92-97%\n• Clinical success: 70-93%\n• Recurrence: 10-58% (varies by etiology)\n• Major complication rate: 0.1%\n\n**Embolization materials:**\n• PVA particles (355-500 µm) — CIRSE recommended\n• N-butyl cyanoacrylate (NBCA) — lowest recurrence\n• Coils, Gelfoam\n\n**High recurrence risk:**\n• Aspergilloma/mycetoma (highest)\n• Tuberculosis\n• Bronchiectasis\n• Non-bronchial collateral supply [2]',
         citation: [1, 2],
         next: 'hemo-surgery-consider',
+        summary: 'BAE first-line definitive therapy — 92-97% technical success; recurrence 10-58% (highest with aspergilloma/TB)',
     },
     {
         id: 'hemo-surgery-consider',
@@ -321,6 +338,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Surgery if BAE fails or recurrent — lobectomy preferred over pneumonectomy (2x mortality); emergency surgery 10-40% mortality',
     },
     {
         id: 'hemo-surgery',
@@ -343,6 +361,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         body: '**Vasopressin analogues (case reports only):**\n• [Terlipressin](#/drug/terlipressin/hemoptysis) (Glypressin) — IV or endobronchial\n• Endobronchial has similar efficacy with 251x lower plasma concentration\n• [Desmopressin](#/drug/desmopressin/hemoptysis) — used in CF, leptospirosis\n\n**Bronchoscopic hemostatic agents:**\n• Oxidized regenerated cellulose (Surgicel)\n• Thrombin/fibrin glue\n• Argon plasma coagulation (APC)\n• Electrocautery, laser [2]',
         citation: [2],
         next: 'hemo-icu-admit',
+        summary: 'Vasopressin analogues (case reports only), bronchoscopic hemostatic agents: Surgicel, fibrin glue, APC, electrocautery',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION

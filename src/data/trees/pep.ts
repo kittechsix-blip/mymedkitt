@@ -86,6 +86,8 @@ export const PEP_NODES: DecisionNode[] = [
         next: 'pep-late',
       },
     ],
+    summary: 'PEP must start within 72 hours — efficacy decreases with delay, not recommended after window',
+    safetyLevel: 'critical',
   },
 
   {
@@ -121,6 +123,7 @@ export const PEP_NODES: DecisionNode[] = [
         next: 'pep-positive',
       },
     ],
+    summary: 'Confirm exposed patient is HIV-negative or unknown — PEP only for HIV-negative individuals',
   },
 
   {
@@ -154,6 +157,7 @@ export const PEP_NODES: DecisionNode[] = [
         next: 'pep-source-neg',
       },
     ],
+    summary: 'Assess source HIV status — U=U if undetectable, but PEP still offered per patient preference',
   },
 
   {
@@ -179,6 +183,8 @@ export const PEP_NODES: DecisionNode[] = [
     body: '**Do not delay PEP for test results.** Start medications now; adjust later based on labs.\n\nBASELINE LABS\n\u2022 HIV Ag/Ab combo (4th gen)\n\u2022 Hepatitis B [surface Ag](#/info/hbv-serology), [surface Ab](#/info/hbv-serology), [core Ab](#/info/hbv-serology)\n\u2022 Hepatitis C Ab\n\u2022 BMP (creatinine for renal dosing)\n\u2022 CBC\n\u2022 Pregnancy test (if applicable)\n\u2022 STI screening (GC/CT, syphilis RPR)\n\nFor occupational exposures, also test the source patient for HIV, HBV, and HCV.',
     citation: [1, 2, 6],
     next: 'pep-special',
+    summary: 'Do not delay PEP for labs — start meds now, draw baseline HIV/HBV/HCV/BMP/CBC/pregnancy/STI',
+    safetyLevel: 'critical',
   },
 
   {
@@ -204,6 +210,7 @@ export const PEP_NODES: DecisionNode[] = [
         next: 'pep-regimen',
       },
     ],
+    summary: 'Screen for pregnancy or renal impairment — affects regimen selection and dosing',
   },
 
   {
@@ -233,6 +240,8 @@ export const PEP_NODES: DecisionNode[] = [
       monitoring: 'HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; renal function at 2 weeks; OB/HIV specialist follow-up',
     },
     next: 'pep-regimen',
+    summary: 'Biktarvy safe in pregnancy — avoid efavirenz, OB/HIV specialist follow-up recommended',
+    safetyLevel: 'warning',
   },
 
   {
@@ -262,6 +271,8 @@ export const PEP_NODES: DecisionNode[] = [
       monitoring: 'BMP at baseline and 2 weeks; HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; monitor for nephrotoxicity',
     },
     next: 'pep-regimen',
+    summary: 'Use TAF-based regimen for CrCl <50, avoid Biktarvy if CrCl <30 — consult ID/pharmacy',
+    safetyLevel: 'warning',
   },
 
   {
@@ -291,6 +302,8 @@ export const PEP_NODES: DecisionNode[] = [
       monitoring: 'HIV Ag/Ab at baseline, 4-6 weeks, and 3 months; adherence check at 2 weeks; renal function if TDF used',
     },
     next: 'pep-followup',
+    summary: 'Biktarvy 1 tab daily x28d preferred — prescribe full course from ED, not starter packs',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================

@@ -25,6 +25,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
         images: [{ src: 'images/myasthenia-gravis/mg-ptosis-diplopia.jpg', alt: 'Patient with myasthenia gravis showing bilateral ptosis and strabismus attempting to look upward — classic fatigable ocular muscle weakness', caption: 'Myasthenic crisis — bilateral ptosis and diplopia from fatigable ocular muscle weakness. Present in 85% at onset. Respiratory compromise (FVC <20 mL/kg or NIF worse than -30 cmH₂O) defines crisis requiring intubation. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 4],
         next: 'mg-mgfa-class',
+        summary: 'Autoimmune NMJ disorder — fatigable weakness (worse with use, better with rest), 85% present with ocular symptoms first',
     },
     {
         id: 'mg-mgfa-class',
@@ -35,6 +36,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         citation: [1],
         calculatorLinks: [{ id: 'mg-mgfa', label: 'MGFA Classification' }],
         next: 'mg-is-crisis',
+        summary: 'MGFA Class I-V: ocular → mild generalized → moderate → severe → intubation; higher class = higher crisis risk',
+        skippable: true,
     },
     {
         id: 'mg-is-crisis',
@@ -63,6 +66,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
                 next: 'mg-diagnostics',
             },
         ],
+        summary: 'Assess for crisis: FVC <15-20 mL/kg, NIF weaker than -20 to -25, staccato speech, severe bulbar weakness',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2: MYASTHENIC CRISIS
@@ -75,6 +80,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
         body: '**Myasthenic crisis** = respiratory failure requiring mechanical ventilation in a patient with MG.\n\n**Epidemiology:**\n• **15-20%** of MG patients will experience crisis\n• Modern mortality: **4-8%** (down from 40% historically)\n• Mean ICU stay: 2 weeks\n\n**Common triggers:**\n• Infection (most common — 40%)\n• Surgery (especially thymectomy)\n• Medication changes (starting/stopping immunotherapy)\n• Non-compliance with pyridostigmine or immunosuppressants\n• Pregnancy/postpartum\n• Offending medications (see Drug Triggers module)\n\n**Key differences from GBS:**\n• MG: fluctuating weakness, history of MG, may respond to pyridostigmine\n• GBS: progressive ascending weakness, sensory symptoms, no fluctuation\n\n**Immediate actions:**\n• Airway assessment — intubation threshold is LOW\n• Serial FVC/NIF measurements q2-4h\n• ICU admission\n• Identify and treat trigger',
         citation: [2, 3],
         next: 'mg-crisis-vs-cholinergic',
+        summary: '15-20% of MG patients will crisis — infection is most common trigger (40%); modern mortality 4-8%; low intubation threshold',
     },
     // =====================================================================
     // MODULE 3: CHOLINERGIC CRISIS — CRITICAL DIFFERENTIATION
@@ -107,6 +113,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'CRITICAL distinction: myasthenic (DRY, mydriasis) vs cholinergic (WET, SLUDGE/BBB, miosis) — treatment is OPPOSITE',
+        safetyLevel: 'critical',
     },
     {
         id: 'mg-cholinergic-treatment',
@@ -127,6 +135,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'STOP all anticholinesterase medications. Airway management priority. Cardiac monitoring for bradycardia.',
         },
         next: 'mg-airway',
+        summary: 'Cholinergic crisis: STOP all anticholinesterase + atropine 0.5-1mg IV for muscarinic effects; resolves as drug clears',
+        safetyLevel: 'critical',
     },
     {
         id: 'mg-uncertain-crisis',
@@ -155,6 +165,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Reassess in 30-60 min. Watch for resolution of cholinergic signs vs persistent weakness.',
         },
         next: 'mg-airway',
+        summary: 'If uncertain: STOP all anticholinesterase (safe for both), support airway, atropine for secretions, reassess in 30-60min',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: DIAGNOSTIC WORKUP
@@ -168,6 +180,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
         citation: [1, 4],
         calculatorLinks: [{ id: 'mg-ice-test', label: 'Ice Pack Test' }],
         next: 'mg-triggers',
+        summary: 'Ice pack test 80% sensitive for ocular MG; AChR antibodies 85% in generalized; all need CT chest for thymoma (10-15%)',
     },
     // =====================================================================
     // MODULE 5: DRUG-INDUCED EXACERBATION
@@ -181,6 +194,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         citation: [3, 4],
         calculatorLinks: [{ id: 'mg-drugs-avoid', label: 'Drugs to Avoid' }],
         next: 'mg-treatment-acute',
+        summary: 'AVOID: aminoglycosides, FQs, beta-blockers, IV magnesium, NMBs at full dose — safe: PCNs, cephalosporins, carbapenems',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: TREATMENT — ACUTE
@@ -193,6 +208,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
         body: '**Acute MG treatment has two components:**\n\n**1. Symptomatic therapy:**\n• [Pyridostigmine (Mestinon)](#/drug/pyridostigmine) — improves transmission at NMJ\n• Does NOT modify disease course\n• May need to HOLD if concern for cholinergic crisis\n\n**2. Immunotherapy:**\n• **Rapid-acting:** IVIG, plasmapheresis (PLEX)\n• **Slower-acting:** Corticosteroids, steroid-sparing agents\n\n**Treatment selection depends on:**\n• Severity (mild vs moderate-severe vs crisis)\n• Urgency (stable vs rapidly worsening)\n• Comorbidities (diabetes, infection risk)\n\n**Approach by severity:**\n• **Ocular only:** Pyridostigmine ± low-dose prednisone\n• **Mild generalized:** Pyridostigmine + prednisone\n• **Moderate-severe:** Pyridostigmine + IVIG or PLEX + steroids\n• **Crisis:** IVIG or PLEX (first) + hold pyridostigmine if cholinergic concern + ICU',
         citation: [1, 3],
         next: 'mg-pyridostigmine',
+        summary: 'Two components: pyridostigmine (symptomatic) + immunotherapy (IVIG/PLEX rapid-acting, steroids slower); severity guides selection',
     },
     {
         id: 'mg-pyridostigmine',
@@ -222,6 +238,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Watch for cholinergic side effects. STOP if SLUDGE symptoms develop.',
         },
         next: 'mg-ivig-plex',
+        summary: 'Pyridostigmine 30-60mg q4-6h — symptomatic only, does NOT modify disease; max 480-600mg/day, watch for cholinergic crisis',
     },
     {
         id: 'mg-ivig-plex',
@@ -248,6 +265,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
                 next: 'mg-steroids',
             },
         ],
+        summary: 'IVIG vs PLEX equally effective — IVIG easier logistics, PLEX faster onset; choice depends on availability/patient factors',
     },
     {
         id: 'mg-ivig-dosing',
@@ -268,6 +286,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Watch for headache, fever, thrombosis. Monitor renal function. Effect lasts 3-6 weeks.',
         },
         next: 'mg-steroids',
+        summary: 'IVIG 2g/kg total (0.4g/kg/d x5 or 1g/kg/d x2) — onset 2-5d, check IgA first (anaphylaxis if deficient), thrombosis risk',
     },
     {
         id: 'mg-plex-dosing',
@@ -288,6 +307,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Monitor for hypotension during procedure. Check calcium (citrate toxicity). Watch line site for infection.',
         },
         next: 'mg-steroids',
+        summary: 'PLEX 5 exchanges over 10-14d — faster onset 1-2d; requires central venous access, watch for citrate toxicity/hypotension',
     },
     {
         id: 'mg-steroids',
@@ -316,6 +336,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Monitor for initial worsening × 2 weeks. Blood glucose. Consider PPI and calcium/vitamin D supplementation.',
         },
         next: 'mg-airway',
+        summary: 'Steroids cause INITIAL WORSENING in up to 50% — start in hospital with IVIG/PLEX cover for moderate-severe disease',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 7: AIRWAY MANAGEMENT
@@ -339,6 +361,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
             monitoring: 'Serial FVC/NIF q2-4h until stable. Low threshold for intubation. Anticipate difficult weaning.',
         },
         next: 'mg-thymectomy',
+        summary: 'Rocuronium 1/3 to 1/2 dose (0.3-0.5 mg/kg) — MG patients VERY sensitive; sugammadex available; avoid succinylcholine',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 8: THYMECTOMY
@@ -351,6 +375,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         body: '**Indications for thymectomy:**\n\n**Definite indication:**\n• Thymoma (any stage) — must resect for oncologic reasons\n• Present in 10-15% of MG patients\n\n**Strong indication (MGTX trial):**\n• Generalized MG, age 18-65, AChR antibody positive\n• Even WITHOUT thymoma\n• MGTX trial showed: thymectomy + prednisone > prednisone alone\n• Better clinical status, lower prednisone requirements at 3 years\n\n**Less clear benefit:**\n• Ocular MG only\n• MuSK-positive MG (thymus usually normal)\n• Age >65 (less thymic tissue)\n• Seronegative MG\n\n**Timing:**\n• **Elective procedure** — NOT emergent\n• Stabilize medically first (optimize with IVIG/PLEX + steroids)\n• Do NOT operate during crisis\n• Wait until FVC stable and patient off ventilator\n\n**Surgical approach:**\n• Video-assisted thoracoscopic surgery (VATS) or robotic\n• Median sternotomy for larger thymomas\n\n**Post-op:** Monitor closely — up to 30% experience post-thymectomy crisis.',
         citation: [1, 5],
         next: 'mg-disposition',
+        summary: 'Thymectomy for thymoma (any stage) or generalized AChR+ MG age 18-65 — elective, stabilize first, do NOT operate in crisis',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 9: DISPOSITION
@@ -381,6 +407,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
                 next: 'mg-dispo-outpatient',
             },
         ],
+        summary: 'Disposition by severity: ICU for crisis/intubated, monitored bed for worsening, outpatient for stable ocular/mild',
     },
     {
         id: 'mg-dispo-icu',

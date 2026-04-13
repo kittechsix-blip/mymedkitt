@@ -20,6 +20,8 @@ export const PE_PREGNANCY_NODES = [
             { id: 'lmwh-dosing', label: 'LMWH Pregnancy Dosing' },
         ],
         next: 'pep-presentation',
+        summary: 'PE causes 10% maternal deaths; 5-10x VTE risk in pregnancy; symptoms overlap normal pregnancy; missing PE worse than radiation',
+        skippable: true,
     },
     {
         id: 'pep-presentation',
@@ -29,6 +31,8 @@ export const PE_PREGNANCY_NODES = [
         body: '**Symptoms of PE in Pregnancy:**\n\n| Symptom | Frequency | Notes |\n|---------|-----------|-------|\n| Dyspnea | 70-80% | Common in normal pregnancy too |\n| Pleuritic chest pain | 50-70% | More specific |\n| Cough | 20-40% | |\n| Hemoptysis | 5-15% | Highly specific |\n| Syncope | 5-10% | Suggests massive PE |\n| Unilateral leg swelling | 30-50% | Suggests concurrent DVT |\n\n**Red Flags for Massive PE:**\n• Hypotension (SBP <90)\n• Syncope\n• Severe hypoxia\n• RV dysfunction on POCUS\n• Cardiac arrest [1][2][3]',
         citation: [1, 2, 3],
         next: 'pep-risk-assess',
+        summary: 'Dyspnea 70-80%, pleuritic pain 50-70%; red flags: hypotension, syncope, severe hypoxia, RV dysfunction',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: RISK STRATIFICATION
@@ -51,6 +55,7 @@ export const PE_PREGNANCY_NODES = [
                 next: 'pep-clinical-prob',
             },
         ],
+        summary: 'Classify massive (SBP <90, shock), submassive (stable + RV dysfunction), or low-risk to guide treatment',
     },
     {
         id: 'pep-massive',
@@ -61,6 +66,8 @@ export const PE_PREGNANCY_NODES = [
         images: [{ src: 'images/pe-pregnancy/saddle-pe-ct.png', alt: 'CT pulmonary angiogram showing saddle embolus straddling the main pulmonary artery bifurcation with bilateral filling defects', caption: 'Saddle PE on CT-PA — massive embolus at pulmonary artery bifurcation. CTPA preferred over V/Q in most pregnant patients (radiation exposure lower than V/Q lung scan). (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 2, 4],
         next: 'pep-thrombolysis',
+        summary: 'UFH bolus 80 U/kg, vasopressors, bedside POCUS for RV dilation; treat empirically if POCUS positive',
+        safetyLevel: 'critical',
     },
     {
         id: 'pep-clinical-prob',
@@ -70,6 +77,7 @@ export const PE_PREGNANCY_NODES = [
         body: '**YEARS Algorithm (validated in pregnancy):**\n\n**YEARS Criteria:**\n1. Clinical signs of DVT\n2. Hemoptysis\n3. PE most likely diagnosis\n\n**Interpretation:**\n• 0 criteria + D-dimer <1000 → PE excluded\n• 1+ criteria + D-dimer <500 → PE excluded\n• Otherwise → Imaging required\n\n**D-dimer in Pregnancy:**\n• Normally rises throughout pregnancy\n• Trimester-adjusted cutoffs less useful\n• YEARS algorithm uses fixed thresholds\n• Consider clinical probability heavily [1][3][5]',
         citation: [1, 3, 5],
         next: 'pep-workup',
+        summary: 'YEARS algorithm validated in pregnancy; 0 criteria + D-dimer <1000 excludes PE; fixed thresholds not trimester-adjusted',
     },
     // =====================================================================
     // MODULE 3: DIAGNOSIS
@@ -95,6 +103,7 @@ export const PE_PREGNANCY_NODES = [
                 next: 'pep-leg-us',
             },
         ],
+        summary: 'CTPA vs V/Q vs leg US; both far below teratogenic threshold (50-100 mGy); CTPA preferred for sensitivity',
     },
     {
         id: 'pep-ctpa',
@@ -118,6 +127,7 @@ export const PE_PREGNANCY_NODES = [
                 next: 'pep-inconclusive',
             },
         ],
+        summary: 'Positive CTPA: treat immediately; negative: high NPV; inconclusive: consider V/Q or empiric treatment',
     },
     {
         id: 'pep-vq',
@@ -127,6 +137,8 @@ export const PE_PREGNANCY_NODES = [
         body: '**V/Q Scan Interpretation:**\n\n| Result | Interpretation |\n|--------|---------------|\n| Normal | PE excluded |\n| High probability | Treat as PE |\n| Non-diagnostic | Need additional testing |\n\n**Limitations:**\n• High rate of non-diagnostic scans (up to 25-50%)\n• Cannot evaluate other diagnoses\n• Ventilation phase can be omitted (perfusion-only) to reduce radiation\n\n**If non-diagnostic:** Proceed to CTPA or empiric anticoagulation based on clinical probability. [1][2]',
         citation: [1, 2],
         next: 'pep-treatment',
+        summary: 'High rate of non-diagnostic V/Q scans (25-50%); if non-diagnostic proceed to CTPA or empiric anticoagulation',
+        skippable: true,
     },
     {
         id: 'pep-leg-us',
@@ -136,6 +148,8 @@ export const PE_PREGNANCY_NODES = [
         body: '**Strategy: If DVT symptoms present, start with leg US**\n\n**Rationale:**\n• If DVT found → treat as VTE (no need for chest imaging)\n• Avoids radiation entirely\n• Approximately 30-50% of PE patients have concurrent DVT\n\n**If DVT found:**\n• Begin anticoagulation\n• Treatment is same as for PE (LMWH in pregnancy)\n• May still need chest imaging if suspicious for massive PE\n\n**If DVT negative but PE still suspected:**\n• Proceed to CTPA or V/Q\n• Negative leg US does not rule out PE [1][2]',
         citation: [1, 2],
         next: 'pep-treatment',
+        summary: 'DVT found avoids chest radiation; 30-50% of PE patients have concurrent DVT; negative leg US does not exclude PE',
+        skippable: true,
     },
     {
         id: 'pep-negative',
@@ -155,6 +169,7 @@ export const PE_PREGNANCY_NODES = [
         body: '**Options for inconclusive results:**\n\n1. **Serial leg ultrasounds** (days 1, 3, 7)\n2. **Alternative imaging** (V/Q if CTPA inconclusive, vice versa)\n3. **Empiric anticoagulation** if clinical probability high\n4. **Repeat CTPA** with optimized protocol\n\n**High clinical suspicion → Treat empirically**\n\nBetter to anticoagulate a patient who may not have PE than to miss a PE in a pregnant patient. [1][2]',
         citation: [1, 2],
         next: 'pep-treatment',
+        summary: 'If high clinical suspicion with inconclusive imaging, treat empirically; serial leg US or alternative imaging',
     },
     // =====================================================================
     // MODULE 4: TREATMENT
@@ -167,6 +182,8 @@ export const PE_PREGNANCY_NODES = [
         body: '**LMWH is the treatment of choice in pregnancy**\n\n**Why LMWH over other options:**\n• Does not cross placenta\n• No fetal teratogenicity\n• Predictable dosing\n• Can be self-administered at home\n\n**DOACs are CONTRAINDICATED** — cross placenta, teratogenic\n\n**Warfarin CONTRAINDICATED** in 1st trimester — teratogenic (warfarin embryopathy)\n\n**UFH** — reserved for massive PE or peripartum period [1][2][6]',
         citation: [1, 2, 6],
         next: 'pep-lmwh-dosing',
+        summary: 'LMWH is treatment of choice; DOACs and warfarin contraindicated in pregnancy; UFH reserved for massive PE',
+        safetyLevel: 'critical',
     },
     {
         id: 'pep-lmwh-dosing',
@@ -195,6 +212,7 @@ export const PE_PREGNANCY_NODES = [
             monitoring: 'Anti-Xa levels 4h post-dose, target 0.6-1.0 U/mL',
         },
         next: 'pep-severity',
+        summary: 'Enoxaparin 1 mg/kg SC BID; monitor anti-Xa monthly; hold 24h before delivery; 6 weeks postpartum minimum',
     },
     {
         id: 'pep-severity',
@@ -219,6 +237,7 @@ export const PE_PREGNANCY_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'RV dilation, elevated troponin/BNP indicate submassive; determines whether thrombolysis should be considered',
     },
     {
         id: 'pep-low-risk',
@@ -228,6 +247,7 @@ export const PE_PREGNANCY_NODES = [
         body: '**Low-risk PE in pregnancy:**\n\n• Hemodynamically stable\n• No RV dysfunction\n• Normal biomarkers\n\n**Management:**\n• Therapeutic LMWH\n• Can often be managed outpatient after initial stabilization\n• Close obstetric follow-up\n• Monitor for bleeding complications\n\n**Outpatient criteria:**\n• Reliable patient\n• Able to self-administer injections\n• No other high-risk features\n• Close follow-up arranged [1][2]',
         citation: [1, 2],
         next: 'pep-disposition',
+        summary: 'Therapeutic LMWH; may manage outpatient if reliable patient can self-administer injections with close follow-up',
     },
     {
         id: 'pep-submassive',
@@ -237,6 +257,7 @@ export const PE_PREGNANCY_NODES = [
         body: '**Submassive PE in pregnancy requires ICU monitoring:**\n\n**Management:**\n• Therapeutic anticoagulation (UFH or LMWH)\n• Continuous cardiac monitoring\n• Serial echocardiography\n• Watch for deterioration\n\n**Thrombolysis considerations:**\n• NOT routine for submassive PE in pregnancy\n• Consider if clinical deterioration\n• Consider catheter-directed therapy as alternative\n\n**Consult:**\n• Pulmonology\n• Cardiology\n• MFM (Maternal-Fetal Medicine) [1][2][4]',
         citation: [1, 2, 4],
         next: 'pep-disposition',
+        summary: 'ICU monitoring; thrombolysis NOT routine for submassive; catheter-directed therapy as alternative if deteriorating',
     },
     // =====================================================================
     // MODULE 5: THROMBOLYSIS
@@ -249,6 +270,8 @@ export const PE_PREGNANCY_NODES = [
         body: '**Thrombolysis is NOT contraindicated in pregnancy** when indicated for massive PE.\n\n**Indications:**\n• Massive PE with hemodynamic instability\n• Cardiac arrest from PE\n• Impending cardiovascular collapse\n\n**Risks:**\n• Maternal hemorrhage (especially if near delivery)\n• Placental abruption\n• Fetal loss\n\n**Risk-Benefit:**\n• Maternal death from untreated massive PE: 25-65%\n• Maternal mortality justifies thrombolysis risk\n• Fetal survival depends on maternal survival\n\n**tPA does NOT cross placenta** [1][2][4]',
         citation: [1, 2, 4],
         next: 'pep-tpa-dosing',
+        summary: 'Thrombolysis NOT contraindicated in pregnancy for massive PE; maternal death 25-65% if untreated; tPA does not cross placenta',
+        safetyLevel: 'critical',
     },
     {
         id: 'pep-tpa-dosing',
@@ -269,6 +292,8 @@ export const PE_PREGNANCY_NODES = [
             monitoring: 'Close hemodynamic monitoring, watch for bleeding complications',
         },
         next: 'pep-disposition',
+        summary: 'Alteplase 100 mg IV over 2h or 50 mg bolus in arrest; hold anticoagulation 2-4h post-tPA then restart UFH',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -295,6 +320,7 @@ export const PE_PREGNANCY_NODES = [
                 next: 'pep-discharge',
             },
         ],
+        summary: 'Disposition by severity: low-risk may discharge with LMWH; submassive/massive require ICU admission',
     },
     {
         id: 'pep-icu',

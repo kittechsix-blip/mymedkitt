@@ -40,6 +40,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'peds-arth-pattern-matcher', label: 'Age/Pattern Differential' },
     ],
     next: 'peds-arth-sick-well',
+
+    summary: 'Big 6 not to miss: septic arthritis, osteomyelitis, malignancy, SCFE, NAI, inflammatory arthritis; pain>swelling = infection/malignancy',
   },
 
   {
@@ -54,6 +56,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { label: 'WELL-appearing', description: 'Afebrile or low-grade, active, will bear weight', next: 'peds-arth-joint-count' },
       { label: 'Hip pain specifically', description: 'Hip/groin/thigh pain (any appearance)', next: 'peds-arth-hip-approach' },
     ],
+
+    summary: 'Sick vs well appearance drives urgency; ill + fever + refuses weight-bearing = septic arthritis until proven otherwise',
   },
 
   {
@@ -68,6 +72,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { label: '2-4 joints (oligoarticular)', description: 'Few joints affected', next: 'peds-arth-oligo-eval' },
       { label: '5+ joints (polyarticular)', description: 'Many joints affected', next: 'peds-arth-poly-eval' },
     ],
+
+    summary: 'Mono = septic until proven otherwise; oligo (2-4) = JIA, reactive, HSP; poly (5+) = JIA, viral, ARF',
   },
 
   {
@@ -81,6 +87,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { label: 'Acute (<2 weeks)', description: 'Recent onset symptoms', next: 'peds-arth-acute-mono' },
       { label: 'Subacute/Chronic (>2 weeks)', description: 'Prolonged symptoms', next: 'peds-arth-chronic-eval' },
     ],
+
+    summary: 'Acute <2wk: focus on infection; chronic >6wk: JIA by definition; duration guides differential and urgency',
   },
 
   {
@@ -110,6 +118,7 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hip Pain: The Classic Pediatric Dilemma',
+    summary: 'Transient synovitis vs septic hip is defining ED challenge; FABER position of comfort; ultrasound effusion does not differentiate',
     body: '**Transient synovitis vs septic hip is the defining ED challenge.**\n\n**Both present with:**\n- Atraumatic, acutely irritable hip\n- Limp or refusal to bear weight\n- Limited range of motion\n- Possible effusion on ultrasound\n\n**Position of comfort:**\n- Hip held in flexion, abduction, external rotation (FABER)\n- This position maximizes joint capsule volume\n\n**Ultrasound findings:**\n- Effusion present in BOTH conditions\n- Effusion >5mm capsule-to-bone OR >2mm compared to other side\n- **Effusion does NOT differentiate** - present in 46-86% of transient synovitis\n\n**Age distribution:**\n- **Transient synovitis:** 3-8 years (peak 4-5 years)\n- **Septic arthritis:** Any age, peak <3 years\n\n**History clue:** Recent viral URI in transient synovitis (in ~1/3 of cases)\n\n**ALWAYS examine the knee** when evaluating hip pain - referred pain is common. [1][4][5]',
     citation: [1, 4, 5],
     calculatorLinks: [
@@ -135,6 +144,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { label: '1-2 criteria', description: 'Intermediate risk (3-40%)', next: 'peds-arth-intermediate-hip' },
       { label: '3-4+ criteria', description: 'High risk (>93%)', next: 'peds-arth-septic-workup', urgency: 'critical' },
     ],
+
+    summary: 'Kocher: 0=<0.2%, 1=3%, 2=40%, 3=93%, 4=99.6%; CRP >20 strongest predictor; CRP <20 + weight-bearing = <1% risk',
   },
 
   {
@@ -200,6 +211,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Septic arthritis is an orthopedic emergency. Time to treatment matters.**\n\n**Cartilage destruction begins within 8 hours of infection.**\n\n**Diagnostic workup:**\n1. **Labs:** CBC, ESR, CRP, blood culture, BMP\n2. **Imaging:** Ultrasound (confirms effusion), X-ray (baseline, rule out fracture/tumor)\n3. **Arthrocentesis:** Cell count, Gram stain, culture, PCR if available\n\n**Consults:**\n- **Orthopedics:** STAT for operative planning\n- **Pediatrics/ID:** For antibiotic guidance if complex case\n\n**Do NOT delay antibiotics** for aspiration if patient is septic. Blood cultures + empiric antibiotics can proceed while arranging OR drainage.\n\n**Hip vs other joints:**\n- **Hip:** Typically requires OR drainage (closed space, difficult aspiration)\n- **Knee:** May be managed with serial aspirations + antibiotics (controversial)\n- Decision often institution/surgeon-dependent\n\n**Age-based pathogen considerations:**\n- <3 months: GBS, S. aureus, gram-negatives, N. gonorrhoeae\n- 3 months-5 years: **Kingella kingae**, S. aureus, Strep species\n- >5 years: S. aureus, Strep pyogenes, N. gonorrhoeae (adolescents) [1][4][7]',
     citation: [1, 4, 7],
     next: 'peds-arth-empiric-abx',
+
+    summary: 'Cartilage destruction within 8h; ortho STAT for OR drainage; do NOT delay abx for aspiration if septic; age-based pathogens',
+    safetyLevel: 'critical',
   },
 
   {
@@ -229,6 +243,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       monitoring: 'Blood cultures daily until negative. CRP trending. Orthopedic follow-up. Consider ID consult for complex cases.',
     },
     next: 'peds-arth-septic-dispo',
+
+    summary: 'Low MRSA: cefazolin; high MRSA: vancomycin; <5yr add Kingella coverage; vancomycin does NOT cover Kingella',
+    safetyLevel: 'warning',
   },
 
   {
@@ -290,6 +307,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Arthritis lasting >6 weeks suggests inflammatory arthritis, most commonly JIA.**\n\n**Juvenile Idiopathic Arthritis (JIA):**\n- Most common chronic rheumatic disease in children\n- Arthritis of unknown etiology before age 16\n- Persisting for at least 6 weeks\n- Diagnosis of exclusion (rule out infection, malignancy, other)\n\n**When to suspect JIA in the ED:**\n- **Chronic symptoms** (>6 weeks)\n- **Morning stiffness** that improves with activity\n- **Swelling > pain** (opposite of septic arthritis)\n- **No fever** (except systemic JIA)\n- **Normal or mildly elevated** inflammatory markers\n- **Not acutely toxic-appearing**\n\n**ED role:**\n1. Rule out infection and malignancy\n2. Start symptom management\n3. Arrange rheumatology referral\n4. Screen for uveitis if indicated\n\n**Do NOT start steroids** without rheumatology input (can mask malignancy). [2][3]',
     citation: [2, 3],
     next: 'peds-arth-jia-subtypes',
+
+    summary: 'JIA: arthritis >6wk, age <16, diagnosis of exclusion; swelling>pain, morning stiffness, no fever; do NOT start steroids without rheum',
+    safetyLevel: 'warning',
   },
 
   {
@@ -303,6 +323,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'peds-arth-pattern-matcher', label: 'JIA Pattern Matcher' },
     ],
     next: 'peds-arth-jia-ed-mgmt',
+
+    summary: '7 JIA subtypes; oligoarticular most common (ANA+ = uveitis risk); systemic JIA has quotidian fever + MAS risk',
+    skippable: true,
   },
 
   {
@@ -380,6 +403,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**Arthritis occurring after infectious trigger - sterile joint inflammation.**\n\n**Post-Viral Reactive Arthritis:**\n- Most common infectious cause in children\n- Concurrent with or 2-4 weeks post-infection\n- Common viruses: parvovirus B19, rubella, EBV, hepatitis B\n- Self-limiting, resolves in ~6 weeks\n- Treatment: NSAIDs, supportive care\n\n**Post-Enteric Reactive Arthritis:**\n- Salmonella, Shigella, Campylobacter, Yersinia\n- Onset 1-4 weeks after GI illness\n- Oligoarthritis, lower extremity predominant\n- HLA-B27 association\n- May become chronic\n\n**Lyme Arthritis:**\n- Late manifestation of Lyme disease\n- Large joint (knee most common)\n- Minimal pain with significant swelling\n- Requires antibiotic treatment\n\n**Post-Streptococcal:**\n- PSRA vs Acute Rheumatic Fever (ARF)\n- Critical distinction for management\n- See next node for differentiation [9][10]',
     citation: [9, 10],
     next: 'peds-arth-psra-vs-arf',
+
+    summary: 'Post-infectious arthritis: viral (self-limiting), post-enteric, Lyme (abx needed), post-strep (differentiate PSRA vs ARF)',
+    skippable: true,
   },
 
   {
@@ -393,6 +419,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'peds-arth-jones', label: 'Jones Criteria Calculator' },
     ],
     next: 'peds-arth-arf-workup',
+
+    summary: 'PSRA: non-migratory, slow NSAID response; ARF: migratory, dramatic NSAID response, risk of carditis; Jones criteria for ARF dx',
   },
 
   {
@@ -493,6 +521,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'peds-arth-malignancy-flags', label: 'Malignancy Red Flag Checker' },
     ],
     next: 'peds-arth-malignancy-workup',
+
+    summary: 'Leukemia mimics arthritis in 25-43%; night pain, pain>swelling, thrombocytopenia, HSM/LAD are key red flags',
+    safetyLevel: 'warning',
   },
 
   {
@@ -506,6 +537,9 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
       { id: 'peds-arth-malignancy-flags', label: 'Malignancy Red Flag Checker' },
     ],
     next: 'peds-arth-mimics',
+
+    summary: 'HSM/LAD + MSK = immediate eval; CBC + peripheral smear + LDH/uric acid; do NOT start steroids (masks malignancy)',
+    safetyLevel: 'critical',
   },
 
   {
@@ -516,6 +550,8 @@ export const PEDIATRIC_ARTHRITIS_NODES: DecisionNode[] = [
     body: '**These orthopedic conditions present with joint/limb pain and are commonly missed.**\n\n**SCFE (Slipped Capital Femoral Epiphysis):**\n- **Age:** 8-15 years (girls ~12, boys ~13)\n- **Risk factors:** Obesity, male, African American\n- Presents with hip, groin, thigh, or **KNEE** pain\n- Externally rotated leg, obligate external rotation with flexion\n- **X-ray:** AP and frog-leg lateral (if stable)\n- **EMERGENCY if unstable** - non-weight bearing, NWB immediately\n\n**Legg-Calve-Perthes Disease:**\n- **Age:** 4-8 years\n- Idiopathic AVN of femoral head\n- Insidious onset limp, hip/groin/knee pain\n- Limited internal rotation and abduction\n- **X-ray may be normal early** - MRI more sensitive\n\n**Osteomyelitis:**\n- Can present as joint pain (especially near joints)\n- Point tenderness over bone (not just joint)\n- May have low-grade or no fever\n- **X-ray normal for 1-2 weeks** - MRI is definitive\n\n**Growing Pains:**\n- Age 3-12 years\n- Bilateral lower limbs (NOT joints)\n- Evening/night only (never morning)\n- Child does NOT limp\n- Normal exam\n- Diagnosis of exclusion [12][13]',
     citation: [12, 13],
     next: 'peds-arth-scfe-check',
+
+    summary: 'SCFE: obese adolescent, obligate external rotation; Perthes: age 4-8, AVN; growing pains: bilateral, evening/night only, normal exam',
   },
 
   {

@@ -37,6 +37,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-rupture-screen', label: 'Rupture Screen' },
     ],
     next: 'opocus-technique',
+    summary: 'Indications: acute vision loss, trauma (exclude rupture first), elevated ICP, cannot visualize fundus; ABSOLUTE CI: suspected globe rupture',
+    safetyLevel: 'critical',
   },
 
   {
@@ -54,6 +56,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-systematic',
+    summary: 'High-frequency linear probe 7.5-15 MHz, copious gel standoff, MINIMAL pressure, transverse (marker temporal) and longitudinal planes, depth 4-5cm',
   },
 
   {
@@ -67,6 +70,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-checklist', label: 'Scan Checklist' },
     ],
     next: 'opocus-normal',
+    summary: 'Scan 6 structures systematically: anterior chamber, iris/pupil, lens, vitreous, retina, optic nerve — dynamic assessment differentiates PVD from RD',
   },
 
   // =====================================================================
@@ -88,6 +92,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-pathology-decision',
+    summary: 'Normal: anechoic vitreous, biconvex lens, retina adherent to wall — any echogenicity in vitreous is abnormal',
+    skippable: true,
   },
 
   {
@@ -97,6 +103,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     title: 'What Are You Evaluating For?',
     body: '**Select the primary indication for ocular ultrasound:**',
     citation: [1, 2],
+    summary: 'Select primary indication: vision loss/floaters (RD vs PVD), elevated ICP (ONSD), eye trauma, or CRAO',
     options: [
       {
         label: 'Acute Vision Loss / Floaters',
@@ -135,6 +142,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-rd-vs-pvd', label: 'RD vs PVD' },
     ],
     next: 'opocus-rd-findings',
+    summary: 'Three main findings: RD (V-shaped, tethered to disc), PVD (undulating, floats freely), VH (diffuse echoes, swirling) — RD is surgical emergency',
   },
 
   // =====================================================================
@@ -156,6 +164,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-pvd-findings',
+    summary: 'RD: V-shaped/tent-shaped, tethered at optic disc, thick hyperechoic, restricted movement — macula-on = emergent surgery within 24h',
+    safetyLevel: 'critical',
   },
 
   {
@@ -173,6 +183,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-rd-pvd-comparison',
+    summary: 'PVD: thin undulating membrane NOT tethered to disc, "seaweed in water" motion, continues moving after eye stops — usually benign but 10-15% have concurrent RD',
   },
 
   {
@@ -193,6 +204,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-vitreous-hemorrhage',
+    summary: 'Key: RD tethered to disc (leashed), PVD floats freely (jellyfish); uncertain = treat as RD and consult ophthalmology',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -214,6 +227,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-other-pathology',
+    summary: 'VH: diffuse echogenic particles "snowstorm" pattern, swirling with eye movement — cannot see retina = cannot rule out RD, consult ophthalmology',
   },
 
   {
@@ -231,6 +245,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-onsd-indication',
+    summary: 'Additional findings: lens dislocation (Marfan, trauma), IOFB (hyperechoic with shadow, no MRI if metallic), choroidal detachment (dome-shaped, not to disc)',
   },
 
   // =====================================================================
@@ -245,6 +260,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     body: '**Optic Nerve Sheath Diameter (ONSD) — Non-Invasive ICP Surrogate:**\n\n**Why It Works:**\n• Optic nerve is a direct extension of the CNS\n• Optic nerve sheath is continuous with dura mater\n• Increased ICP → CSF distension of optic nerve sheath\n• Changes within minutes of ICP elevation\n\n**Indications:**\n• Suspected elevated ICP\n• Idiopathic intracranial hypertension (IIH)\n• Trauma — cannot obtain CT immediately\n• Post-LP headache assessment\n• Monitoring during neurocritical care\n\n**Advantages:**\n• Non-invasive\n• Bedside, rapid (<5 minutes)\n• No radiation\n• Repeatable for monitoring\n• Can detect papilledema before fundoscopic changes\n\n**Limitations:**\n• Cannot give absolute ICP value\n• Operator dependent\n• Conditions affecting ONSD: prior optic neuritis, glaucoma, optic nerve tumors [1][4][8][9]',
     citation: [1, 4, 8, 9],
     next: 'opocus-onsd-measure',
+    summary: 'ONSD is direct CNS extension — elevated ICP distends sheath within minutes, non-invasive bedside surrogate, repeatable for monitoring',
+    skippable: true,
   },
 
   {
@@ -265,6 +282,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-onsd-interpret',
+    summary: 'Measure 3mm behind globe, outer edge to outer edge, bilateral average — adult >5.0mm, child >4.5mm, infant >4.0mm = elevated ICP',
+    safetyLevel: 'critical',
   },
 
   {
@@ -274,6 +293,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     title: 'ONSD Result',
     body: '**What is the measured ONSD?**\n\nMeasure bilateral and use average or highest value.',
     citation: [1, 4, 8],
+    summary: 'Interpret ONSD: <5.0mm normal, 5.0-5.8mm borderline correlate clinically, >5.8mm strongly suggests ICP>20; age-specific thresholds for peds',
     options: [
       {
         label: 'ONSD < 5.0 mm (Adult)',
@@ -308,6 +328,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     body: '**ONSD <5.0 mm — Elevated ICP Unlikely:**\n\n**Interpretation:**\n• Normal optic nerve sheath diameter\n• Elevated ICP is unlikely but not excluded\n• High negative predictive value (95%+)\n\n**Clinical Integration:**\n• ONSD is a screening tool, not definitive\n• If high clinical suspicion despite normal ONSD:\n  - Consider CT head, LP\n  - Serial ONSD monitoring\n  - Formal ophthalmology fundoscopy\n\n**False Negatives Can Occur:**\n• Early/mild ICP elevation\n• Prior optic nerve sheath surgery\n• Anatomic variants\n\n**Recommendation:**\n• Normal ONSD in low-suspicion patient = reassuring\n• Normal ONSD in high-suspicion patient = continue workup [4][8][9]',
     citation: [4, 8, 9],
     next: 'opocus-trauma',
+    summary: 'ONSD <5.0mm: elevated ICP unlikely (95%+ NPV) — if high clinical suspicion despite normal ONSD, continue workup with CT/LP',
   },
 
   {
@@ -321,6 +342,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-onsd-calc', label: 'ONSD Calculator' },
     ],
     next: 'opocus-trauma',
+    summary: 'ONSD 5.0-5.8mm grey zone — repeat measurement, bilateral assessment, clinical correlation; trends more informative than single value',
   },
 
   {
@@ -353,6 +375,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       monitoring: 'Serial ONSD q15-30 min, serial neuro exams, serum osmolality (goal <320), Na+ q4h if using HTS.',
     },
     next: 'opocus-trauma',
+    summary: 'ONSD >5.8mm: PPV 88-93% for ICP>20 — HOB 30°, avoid hypoxia/hypercapnia, CT head, neurosurgery, mannitol or hypertonic saline if herniating',
+    safetyLevel: 'critical',
   },
 
   {
@@ -366,6 +390,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-onsd-calc', label: 'ONSD Calculator' },
     ],
     next: 'opocus-trauma',
+    summary: 'Pediatric thresholds: infant <1yr ≥4.0mm, child 1-15yr ≥4.5mm, adult >15yr ≥5.0mm — open fontanelle may buffer ICP in infants',
   },
 
   // =====================================================================
@@ -383,6 +408,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       { id: 'opocus-rupture-screen', label: 'Rupture Screen' },
     ],
     next: 'opocus-trauma-findings',
+    summary: 'FIRST rule out globe rupture before scanning — teardrop pupil, shallow AC, visible uveal tissue = rigid shield, NO pressure, emergent ophthalmology',
+    safetyLevel: 'critical',
   },
 
   {
@@ -400,6 +427,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
       },
     ],
     next: 'opocus-crao',
+    summary: 'Traumatic findings: hyphema (blood in AC), lens dislocation, IOFB (CT if metallic, no MRI), traumatic RD — globe rupture on US = already scanned too much',
   },
 
   {
@@ -410,6 +438,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     body: '**Central Retinal Artery Occlusion — POCUS Role:**\n\n**Primary Diagnosis is Clinical:**\n• Painless, sudden monocular vision loss\n• Cherry-red spot on fundoscopy\n• APD (afferent pupillary defect)\n\n**POCUS Utility:**\n• Confirm diagnosis when fundoscopy limited\n• May see echogenic emboli in central retinal artery (rare)\n• Rule out other pathology (RD, VH, lens dislocation)\n• Assess for vitreous hemorrhage\n\n**Sonographic Findings:**\n• Usually **NORMAL appearing** on standard ultrasound\n• Rarely: hyperechoic spot at CRA = embolus (highly specific but insensitive)\n• Retina itself may appear slightly thickened (edema)\n\n**Color Doppler (if available):**\n• Absent or reduced flow in central retinal artery\n• Helps confirm diagnosis but not routinely available\n\n**Clinical Pearl:**\nOcular POCUS in CRAO is primarily to **rule out other causes** of vision loss rather than confirm CRAO. The diagnosis is clinical. [1][5][11]',
     citation: [1, 5, 11],
     next: 'opocus-disposition',
+    summary: 'CRAO diagnosis is clinical (painless sudden vision loss, cherry-red spot, APD) — POCUS primarily rules out other causes, rarely sees embolus',
   },
 
   {
@@ -419,6 +448,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     title: 'Ocular POCUS Disposition',
     body: '**What were the primary findings?**',
     citation: [1, 2],
+    summary: 'Disposition based on primary finding: RD emergent, PVD outpatient, VH severity-dependent, elevated ONSD urgent workup',
     options: [
       {
         label: 'Retinal Detachment',
@@ -464,6 +494,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     title: 'Retinal Detachment Disposition',
     body: '**⚠️ RETINAL DETACHMENT = SURGICAL EMERGENCY ⚠️**\n\n**Immediate Actions:**\n1. **Emergent ophthalmology consultation**\n2. Position patient with detached area down (if known)\n3. Bilateral eye patching (reduces eye movement)\n4. Keep patient calm, minimal head movement\n\n**Timing:**\n• **Macula-ON (central vision intact):** EMERGENT surgery within 24 hours\n• **Macula-OFF (central vision already lost):** Urgent surgery within 72 hours\n\n**Do NOT:**\n• Discharge without ophthalmology evaluation\n• Delay consultation\n\n**Consult Information:**\n• Symptom onset time\n• Extent of visual field loss\n• Whether central vision is affected\n• History of prior eye surgery, high myopia\n\n**Prognosis:**\n• Macula-on with prompt surgery: good visual outcome\n• Macula-off: central vision recovery less likely [2][5][6]',
     citation: [2, 5, 6],
+    summary: 'RD surgical emergency — emergent ophthalmology, position detached area down, bilateral patching; macula-on within 24h, macula-off within 72h',
+    safetyLevel: 'critical',
     options: [
       {
         label: 'Complete — Return to Start',
@@ -477,6 +509,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'PVD Disposition',
+    summary: 'PVD usually benign — ophthalmology follow-up 24-48h, return precautions for sudden floaters/flashes/curtain/vision loss (10-15% have concurrent RD)',
     body: '**Posterior Vitreous Detachment — Outpatient Follow-Up:**\n\n**PVD is Usually Benign:**\n• Common with age (50% by age 50, 75% by age 75)\n• Causes floaters and photopsia (flashes)\n• Does NOT require emergent treatment\n\n**However, 10-15% Have Concurrent Retinal Tear/Detachment:**\n\n**Discharge with:**\n• Ophthalmology follow-up within **24-48 hours**\n• Detailed return precautions\n\n**Return Precautions:**\n• **Sudden increase in floaters**\n• **New flashes of light**\n• **Curtain or shadow in vision**\n• **Decrease in visual acuity**\n\n**Higher Risk for Concurrent RD:**\n• High myopia\n• Prior cataract surgery\n• Family history of RD\n• Prior RD in other eye\n• Trauma mechanism\n\n**Document:** POCUS findings, patient counseled on return precautions. [3][5]',
     citation: [3, 5],
     options: [
@@ -492,6 +525,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Vitreous Hemorrhage Disposition',
+    summary: 'VH: cannot see retina = cannot rule out RD; mild outpatient 24-48h, moderate same-day, dense emergent ophthalmology consult',
     body: '**Vitreous Hemorrhage — Needs Ophthalmology:**\n\n**Why Urgent:**\n• Cannot visualize retina = cannot rule out retinal tear/detachment\n• VH may be from traction on retinal vessel during RD\n• Dense VH with acute vision loss = ophthalmology consult\n\n**Disposition by Severity:**\n\n| VH Severity | Retina Visible? | Disposition |\n|-------------|-----------------|-------------|\n| Mild | Yes, can see | Outpatient ophtho 24-48h |\n| Moderate | Partially | Urgent ophtho same day |\n| Dense | No | Emergent ophtho consult |\n\n**Causes to Consider:**\n• Diabetic retinopathy\n• Retinal tear with vessel disruption\n• Posterior vitreous detachment\n• Trauma\n• Retinal vein occlusion\n\n**Patient Instructions:**\n• Keep head elevated (allows blood to layer inferiorly)\n• Avoid strenuous activity\n• Urgent ophthalmology follow-up [1][3][5]',
     citation: [1, 3, 5],
     options: [
@@ -507,6 +541,8 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Globe Rupture — Emergent',
+    summary: 'Globe rupture: rigid shield (not patch), NPO, antiemetics, vancomycin + ceftazidime IV, tetanus, emergent ophthalmology — NO pressure/drops/IOP check',
+    safetyLevel: 'critical',
     body: '**⚠️ GLOBE RUPTURE = SURGICAL EMERGENCY ⚠️**\n\n**Immediate Actions:**\n\n1. **STOP any eye manipulation**\n2. **Rigid eye shield** — tape to forehead, do NOT press on orbit\n3. **NPO** — patient will need OR\n4. **Antiemetics** — prevent vomiting which increases IOP\n5. **Pain control** — avoid crying/straining\n6. **Update tetanus**\n7. **Broad-spectrum antibiotics** — prevent endophthalmitis\n   • Vancomycin 1g IV + Ceftazidime 2g IV\n   • Or Levofloxacin 750mg IV if history of rapid surgery\n8. **Emergent ophthalmology consultation**\n\n**Do NOT:**\n• Apply any pressure to the eye\n• Apply eye patch (use rigid shield)\n• Attempt to remove foreign body\n• Check IOP\n• Instill eye drops\n\n**CT Orbit:**\n• Thin-cut CT to assess extent, IOFB\n• No MRI if metallic FB suspected\n\n**Prognosis depends on:** Wound location, extent, presenting vision [2][7]',
     citation: [2, 7],
     treatment: {
@@ -541,6 +577,7 @@ export const OCULAR_POCUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Normal Ocular POCUS',
+    summary: 'Normal POCUS does not exclude all pathology — small peripheral tears, subtle CRAO, corneal disease may be missed; persistent symptoms need ophthalmology',
     body: '**Normal Ocular Ultrasound:**\n\n**Findings:**\n• Normal anterior chamber depth\n• Lens in normal position\n• Vitreous anechoic (no hemorrhage, no detachment)\n• Retina adherent to globe wall\n• ONSD within normal limits\n\n**Clinical Correlation:**\n• POCUS normal does NOT exclude all pathology\n• Small peripheral retinal tears may be missed\n• Subtle CRAO may appear normal on standard B-scan\n• Corneal pathology requires slit lamp\n\n**If Vision Loss Persists:**\n• Formal ophthalmology evaluation\n• Consider other causes: optic neuritis, cortical vision loss, CRAO, NAION\n\n**Documentation:**\n• Document structures assessed\n• Note normal findings\n• Include ONSD measurement if obtained\n\n**Disposition:**\n• Depends on clinical context\n• Normal POCUS with persistent symptoms = outpatient ophthalmology referral [1][2]',
     citation: [1, 2],
     options: [

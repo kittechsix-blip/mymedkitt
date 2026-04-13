@@ -26,6 +26,7 @@ export const PEA_ARREST_NODES = [
         ],
         citation: [1, 2, 5],
         next: 'pea-pocus',
+        summary: 'Organized rhythm with no pulse; begin CPR, attach ETCO2, POCUS at first pulse check, identify reversible causes',
     },
     {
         id: 'pea-pocus',
@@ -35,6 +36,7 @@ export const PEA_ARREST_NODES = [
         body: '[RUSH Exam in Arrest](#/info/pea-rush-protocol)\n\n**Perform RUSH exam during pulse check (<10 sec):**\n\n**Pump** (cardiac):\n• Cardiac activity present?\n• RV dilation (RV > LV)?\n• Pericardial effusion with RV diastolic collapse?\n\n**Lungs:**\n• Absent lung sliding → tension pneumothorax?\n\n**Tank** (volume):\n• IVC collapsed → hypovolemia?\n• IVC plethoric → obstructive cause?\n\n**Pipes:**\n• Abdominal aorta → AAA?\n\nPOCUS findings direct specific treatment — do not delay CPR for prolonged imaging.',
         citation: [3, 6, 11],
         next: 'pea-activity',
+        summary: 'RUSH exam at pulse check: pump (cardiac motion, RV dilation, effusion), lungs (sliding), tank (IVC), pipes (aorta)',
     },
     {
         id: 'pea-activity',
@@ -56,6 +58,7 @@ export const PEA_ARREST_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'PREM (motion present) = pseudo-PEA/profound shock; PRES (standstill) = true PEA with poor prognosis',
     },
     // =====================================================================
     // MODULE 2: PREM (PSEUDO-PEA) vs PRES (TRUE PEA)
@@ -80,6 +83,7 @@ export const PEA_ARREST_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Weingart chain: 4 tools to assess perfusion — POCUS pulse, arterial line, SpO2 waveform, ETCO2 >30-40',
     },
     {
         id: 'pea-shock-mgmt',
@@ -89,6 +93,8 @@ export const PEA_ARREST_NODES = [
         body: '**Stop chest compressions** — this patient has cardiac output. CPR during contractility may actually impair output.\n\n**Vasopressor strategy (choose one):**\n• [Norepinephrine](#/drug/norepinephrine/post-rosc) 10-50 mcg/min IV infusion — **first choice** if drip ready\n• **Push-dose epinephrine:** 5-20 mcg IV q1-5 min (10 mcg/mL dilution) — bridge while starting drip\n• [Vasopressin](#/drug/vasopressin/post-rosc) 20 IU IV bolus — bridge to norepinephrine\n\n**⚠️ Do NOT give full-dose epi 1mg** — beta-adrenergic effects (tachycardia, increased O₂ demand) may be harmful in pseudo-PEA.\n\n**Simultaneously:**\n• **Volume** — wide-open IV fluids\n• Correct hypoxemia\n• Search for cause: POCUS (cardiac, lung, abdomen), ECG, blood gas electrolytes, EMS/collateral history\n• Target MAP ≥60 mmHg\n\n**If patient deteriorates to pulseless with no perfusion signs → resume CPR and standard ACLS.**',
         citation: [12, 13, 14],
         next: 'pea-qrs-width',
+        summary: 'Stop CPR if perfusion present; norepinephrine or push-dose epi 5-20 mcg; do NOT give full-dose 1mg epi in pseudo-PEA',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-no-activity',
@@ -98,6 +104,8 @@ export const PEA_ARREST_NODES = [
         body: '**PRES (Pulseless Rhythm with Echocardiographic Standstill) = true PEA.**\n\nNo visible wall motion despite organized electrical activity — very poor prognosis.\n\n**Check for fine VF:**\n• Increase gain settings on monitor\n• Confirm lead placement\n• If fine VF identified → defibrillate\n\n**Rule out agonal rhythm** — wide, slow complexes with no mechanical activity is near-terminal.\n\n**Prolonged PRES** after adequate resuscitation is the strongest futility signal (EMCrit).\n\n**Continue:**\n• High-quality CPR\n• [Epinephrine](#/drug/epinephrine/cardiac arrest) 1mg IV/IO q3-5 min (standard ACLS — true PEA)\n• Aggressively search for reversible causes\n• Reassess for development of PREM (cardiac motion) each cycle\n\n[TOR Rules](#/info/ca-tor-rules)',
         citation: [1, 4, 8],
         next: 'pea-cpr',
+        summary: 'No wall motion = very poor prognosis; check for fine VF; epi 1mg IV q3-5min; prolonged PRES is strongest futility signal',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: WIDE VS. NARROW COMPLEX PEA
@@ -123,6 +131,7 @@ export const PEA_ARREST_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Wide QRS: think sodium channel blockade (hyperK, TCA); narrow QRS: think mechanical/RV problem (tamponade, tension PTX, PE)',
     },
     {
         id: 'pea-wide',
@@ -133,6 +142,8 @@ export const PEA_ARREST_NODES = [
         citation: [1, 2, 10],
         next: 'pea-causes-wide',
         images: [{ src: 'images/cardiac-arrest/wide-pea-ecg.png', alt: 'Wide complex PEA ECG', caption: 'Wide QRS >120ms — sodium channel blockade pattern' }],
+        summary: 'Empiric NaHCO3 1-2 mEq/kg IV push + calcium gluconate 1g IV immediately; lipid emulsion if TCA suspected',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-narrow',
@@ -142,6 +153,7 @@ export const PEA_ARREST_NODES = [
         body: '**Narrow complex PEA — think mechanical / RV problem (pseudo-PEA).**\n\nNarrow QRS = myocardium is electrically intact. The problem is mechanical obstruction to RV inflow or outflow.\n\n**Common causes:**\n• Cardiac tamponade\n• Tension pneumothorax\n• Mechanical hyperinflation / auto-PEEP\n• Massive pulmonary embolism\n• Profound hypovolemia\n\n**First-line treatment: wide-open IV fluids** — narrow-complex PEA is frequently fluid-responsive.\n\nPOCUS findings direct cause-specific intervention.\n\n**Note:** Calcium and bicarb are unlikely to help in narrow-complex PEA — save for wide QRS.\n\n[Wide vs. Narrow PEA](#/info/pea-wide-narrow)',
         citation: [1, 2, 11],
         next: 'pea-causes-narrow',
+        summary: 'Myocardium electrically intact; mechanical obstruction to RV; first-line: wide-open IV fluids; calcium/bicarb unlikely to help',
     },
     // =====================================================================
     // MODULE 4: TREATABLE CAUSES — POCUS-GUIDED
@@ -177,6 +189,7 @@ export const PEA_ARREST_NODES = [
                 next: 'pea-cpr',
             },
         ],
+        summary: 'Identify hyperkalemia, TCA/Na channel blocker toxicity, or severe acidosis as reversible cause of wide complex PEA',
     },
     {
         id: 'pea-hyperK',
@@ -186,6 +199,8 @@ export const PEA_ARREST_NODES = [
         body: '**Hyperkalemia — membrane stabilization + potassium shifting:**\n\n**1. Calcium (membrane stabilizer):**\n• [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV over 2-3 min\n• [Calcium Chloride](#/drug/calcium-chloride/hyperkalemia) 1g IV (central preferred — 3× more elemental Ca²⁺)\n\n**2. Insulin + Dextrose (shift K⁺ intracellular):**\n• Regular insulin 10 units IV\n• D50 50 mL IV\n\n**3. Albuterol (shift K⁺):**\n• 10-20 mg nebulized (continuous)\n\n**4. NaHCO₃ (if acidotic):**\n• 50-100 mEq IV\n\n**Continue high-quality CPR throughout.**',
         citation: [5, 10],
         next: 'pea-cpr',
+        summary: 'Calcium for membrane stabilization, then insulin+D50 and albuterol for K shift, NaHCO3 if acidotic',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-tca',
@@ -195,6 +210,8 @@ export const PEA_ARREST_NODES = [
         body: '**TCA/Na channel blocker toxicity in arrest:**\n\n**1. Sodium Bicarbonate:**\n• [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca toxicity) 1-2 mEq/kg IV push\n• Target pH 7.45-7.55\n• Repeat q5 min if QRS still wide\n\n**2. Lipid Emulsion (if refractory):**\n• [Lipid Emulsion](#/drug/lipid-emulsion/tca toxicity) 20% 1.5 mL/kg IV bolus\n• Follow with 0.25 mL/kg/min infusion\n\n**Do NOT use:**\n• Class IA/IC antiarrhythmics\n• Physostigmine in arrest\n\n**Continue CPR — prolonged resuscitation may be successful** in toxicologic arrests.',
         citation: [1, 5],
         next: 'pea-cpr',
+        summary: 'NaHCO3 1-2 mEq/kg IV push, target pH 7.45-7.55; lipid emulsion 20% if refractory; prolonged resus may succeed in tox',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-acidosis',
@@ -204,6 +221,7 @@ export const PEA_ARREST_NODES = [
         body: '**Severe metabolic acidosis in arrest:**\n\n**Treatment:**\n• NaHCO₃ 1 mEq/kg IV push\n• Address underlying cause (DKA, sepsis, toxic ingestion)\n• Ensure adequate ventilation — respiratory compensation is critical\n\n**Common causes:**\n• DKA / metabolic emergency\n• Lactic acidosis (sepsis, shock)\n• Toxic alcohol ingestion (methanol, ethylene glycol)\n• Salicylate toxicity\n\n**Note:** NaHCO₃ in arrest is most beneficial when acidosis or hyperkalemia is the likely cause.',
         citation: [5, 9],
         next: 'pea-cpr',
+        summary: 'NaHCO3 1 mEq/kg IV push; address underlying cause (DKA, sepsis, toxic alcohol); ensure adequate ventilation',
     },
     {
         id: 'pea-causes-narrow',
@@ -249,6 +267,7 @@ export const PEA_ARREST_NODES = [
                 next: 'pea-cpr',
             },
         ],
+        summary: 'POCUS-guided: tamponade, tension PTX, massive PE, hypovolemia, or auto-PEEP — each has specific intervention',
     },
     {
         id: 'pea-autopeep',
@@ -258,6 +277,7 @@ export const PEA_ARREST_NODES = [
         body: '**Mechanical hyperinflation (auto-PEEP) — RV inflow obstruction from air trapping.**\n\n**Clues:**\n• Ventilated patient (especially asthma, COPD)\n• Hyperexpanded chest, bilateral air entry\n• Progressive hypotension preceding arrest\n• Absent lung sliding may be BILATERAL (distinguish from tension PTX)\n\n**Immediate treatment:**\n• **Disconnect ventilator** — allow passive exhalation for 10-15 seconds\n• Manually compress chest to assist exhalation\n• Reduce respiratory rate and tidal volume\n• Increase expiratory time (I:E ratio 1:4 or 1:5)\n\n**If no improvement:**\n• Consider bilateral needle decompression (tension PTX may coexist)\n• Reduce PEEP to zero temporarily\n\n**Key concept:** External cardiac compression may worsen auto-PEEP — cannot compress a hyperinflated chest effectively. Fixing the ventilator problem may restore circulation.',
         citation: [2, 5],
         next: 'pea-cpr',
+        summary: 'Disconnect ventilator for 10-15 sec to decompress; reduce RR and TV; bilateral needle decompression if no improvement',
     },
     {
         id: 'pea-tamponade',
@@ -267,6 +287,8 @@ export const PEA_ARREST_NODES = [
         body: '**Tamponade: pericardial effusion + RV diastolic collapse → emergent pericardiocentesis.**\n\n**Procedure:**\n• Subxiphoid approach preferred in arrest\n• Ultrasound-guided if possible\n• Even small volume aspiration (20-30 mL) can restore cardiac output\n\n**Technique:**\n• 18g spinal needle or angiocath\n• Aim toward left shoulder\n• Aspirate while advancing under real-time POCUS guidance\n\n**Post-procedure:**\n• Leave catheter for continued drainage if needed\n• Cardiothoracic surgery consult\n\n**Do NOT delay** for formal echo or OR — this is a bedside procedure in arrest.',
         citation: [4, 5, 11],
         next: 'pea-cpr',
+        summary: 'Emergent pericardiocentesis subxiphoid; even 20-30 mL aspiration can restore cardiac output; do not delay for formal echo',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-tension',
@@ -276,6 +298,8 @@ export const PEA_ARREST_NODES = [
         body: '**Tension PTX: absent lung sliding on POCUS → immediate decompression.**\n\n**Needle decompression:**\n• 2nd ICS midclavicular line (traditional)\n• 4th/5th ICS anterior axillary line (newer guidance — higher success)\n• Use 14g angiocath, minimum 5 cm length\n\n**DO NOT wait for CXR** — this is a clinical/POCUS diagnosis in arrest.\n\n**Follow with:**\n• Finger thoracostomy or chest tube\n• [Chest Tube Consult](#/tree/chest-tube)\n\n**Bilateral tension PTX** should be considered in trauma arrest — decompress both sides.',
         citation: [5, 7],
         next: 'pea-cpr',
+        summary: 'Needle decompression 2nd ICS MCL or 4th-5th ICS AAL; do NOT wait for CXR; follow with finger thoracostomy or chest tube',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-massive-pe',
@@ -285,6 +309,8 @@ export const PEA_ARREST_NODES = [
         body: '**Massive PE: RV dilation + McConnell sign → thrombolytics in arrest.**\n\n**Treatment:**\n• [Alteplase](#/drug/alteplase/massive pe) 50 mg IV push (half systemic dose)\n• Continue CPR for **60-90 minutes** after lytic administration — do not stop early\n• Heparin bolus after alteplase if ROSC achieved\n\n**Alternative:**\n• Consider ECPR (extracorporeal CPR) if available and appropriate\n\n**Key points:**\n• McConnell sign = RV free wall akinesis with apical sparing\n• Thrombolytics in arrest are NOT contraindicated by CPR\n• Prolonged resuscitation justified after lytic therapy\n\n[PE Treatment](#/tree/pe-treatment)',
         citation: [5, 7, 9],
         next: 'pea-cpr',
+        summary: 'Alteplase 50 mg IV push; continue CPR 60-90 min after lytic; thrombolytics NOT contraindicated by CPR',
+        safetyLevel: 'critical',
     },
     {
         id: 'pea-hypovolemia',
@@ -294,6 +320,7 @@ export const PEA_ARREST_NODES = [
         body: '**Hypovolemia: collapsed IVC → rapid volume resuscitation.**\n\n**Immediate actions:**\n• Rapid 1-2L crystalloid IV bolus\n• IO access if IV access delayed\n• Identify and address bleeding source\n\n**If hemorrhagic:**\n• Activate massive transfusion protocol\n• Permissive hypotension target (SBP 80-90) once ROSC\n• TXA 1g IV if within 3 hours of injury\n\n**If non-hemorrhagic:**\n• Sepsis → broad-spectrum antibiotics\n• Anaphylaxis → [Epinephrine](#/drug/epinephrine/anaphylaxis) IM\n• Adrenal crisis → hydrocortisone 100 mg IV',
         citation: [5, 7],
         next: 'pea-cpr',
+        summary: 'Rapid 1-2L crystalloid; if hemorrhagic: MTP + TXA; if sepsis: broad-spectrum abx; if anaphylaxis: IM epinephrine',
     },
     // =====================================================================
     // MODULE 5: CPR CYCLE + MEDICATIONS
@@ -306,6 +333,7 @@ export const PEA_ARREST_NODES = [
         body: '**CPR quality metrics:**\n• Rate 100-120/min, depth 2-2.4 inches\n• Full chest recoil between compressions\n• Minimize interruptions (<10 sec for pulse/rhythm checks)\n• Rotate compressor every 2 minutes\n\n**ETCO₂ monitoring:**\n• Target ETCO₂ >20 mmHg during CPR\n• ETCO₂ <10 mmHg after 20 min = strong predictor of non-survival → consider TOR\n• Sudden ETCO₂ jump >10 above baseline = possible ROSC — check pulse\n\n**Rhythm check every 2 minutes:**\n• Assess rhythm + POCUS simultaneously\n• If VF/VT develops → defibrillate (PEA can degenerate or convert)',
         citation: [5, 7, 9],
         next: 'pea-epi',
+        summary: 'Rate 100-120/min, depth 2-2.4in; ETCO2 >20 target; ETCO2 <10 after 20min predicts non-survival; sudden jump suggests ROSC',
     },
     {
         id: 'pea-epi',
@@ -315,6 +343,8 @@ export const PEA_ARREST_NODES = [
         body: '**[Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO:**\n\n• Give **as soon as possible** after 1st CPR cycle in true PEA (PRES)\n• Repeat every **3-5 minutes**\n• **Consider limiting to ≤3 total doses** — higher cumulative doses associated with worse neurological outcomes (PARAMEDIC-2)\n\n**Administration:**\n• IV/IO push followed by 20 mL flush\n• Elevate extremity briefly after push\n\n**⚠️ Epinephrine harm in PEA:**\n• Beta-adrenergic effects (tachycardia, ↑ O₂ demand) may worsen ischemia\n• Higher total epi doses associated with worse neurologically intact survival\n• In **pseudo-PEA (PREM)** — do NOT give 1mg epi. Use titratable vasopressors instead (norepi infusion, push-dose epi 5-20 mcg, or vasopressin)\n\n**If EMS has already given ≥3 doses:** consider withholding further epi in the ED and focusing on cause-specific treatment.',
         citation: [5, 7, 9],
         next: 'pea-rosc-check',
+        summary: 'Epi 1mg IV/IO q3-5min in true PEA; limit to 3 doses (PARAMEDIC-2); in pseudo-PEA use titratable vasopressors instead',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 6: ROSC / TOR
@@ -345,6 +375,7 @@ export const PEA_ARREST_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'At 2-minute check: assess for ROSC (pulse, rising ETCO2), continue CPR, or consider termination criteria',
     },
     {
         id: 'pea-rosc',
@@ -363,6 +394,7 @@ export const PEA_ARREST_NODES = [
         body: '**Continue CPR cycles.**\n\n**Each cycle — reassess:**\n• Re-evaluate reversible causes (Hs and Ts)\n• Repeat POCUS — has anything changed?\n• Consider whether new information changes management\n• Reassess ETCO₂ trend\n\n**Consider:**\n• Has the rhythm changed? (PEA → VF/VT → defibrillate)\n• New information from labs, history, or imaging?\n• Any untreated reversible cause?',
         citation: [5],
         next: 'pea-activity',
+        summary: 'Re-evaluate reversible causes each cycle; repeat POCUS; check for rhythm change to VF/VT (defibrillate if so)',
     },
     {
         id: 'pea-tor',
@@ -372,6 +404,7 @@ export const PEA_ARREST_NODES = [
         body: '**Consider TOR when ALL of the following are present:**\n\n• No ROSC after adequate resuscitation\n• No cardiac activity on POCUS (multiple checks)\n• ETCO₂ <10 mmHg after 20 minutes of CPR\n• No reversible cause identified or all reversible causes treated\n• BLS/ALS TOR rules met\n\n**Factors favoring continued resuscitation:**\n• Toxicologic arrest (prolonged resus may succeed)\n• Hypothermia ("not dead until warm and dead")\n• Young patient with potentially reversible cause\n• Post-lytic therapy (continue 60-90 min)\n\n[TOR Rules](#/info/ca-tor-rules)',
         citation: [1, 5, 8],
         next: 'pea-code-called',
+        summary: 'TOR when: no ROSC, no POCUS activity, ETCO2 <10 at 20min, no reversible cause; continue for tox, hypothermia, post-lytic',
     },
     {
         id: 'pea-code-called',

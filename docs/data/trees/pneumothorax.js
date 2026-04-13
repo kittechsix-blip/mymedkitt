@@ -23,6 +23,8 @@ export const PNEUMOTHORAX_NODES = [
         body: 'Point-of-care ultrasound (POCUS) is highly sensitive and specific for pneumothorax detection, especially in supine trauma patients. Can detect as little as **20-50 mL of air**.\n\n**Indications:**\n• Chest trauma\n• Sudden dyspnea\n• Pleuritic chest pain\n• Decreased breath sounds\n• Subcutaneous emphysema\n• Post-procedure evaluation',
         citation: [1, 2],
         next: 'pocus-technique',
+        summary: 'POCUS detects 20-50 mL air — indicated for chest trauma, sudden dyspnea, decreased breath sounds',
+        skippable: true,
     },
     {
         id: 'pocus-technique',
@@ -33,6 +35,8 @@ export const PNEUMOTHORAX_NODES = [
         citation: [2, 3],
         images: [{ src: 'images/pneumothorax/us-anatomy.jpg', alt: 'Lung ultrasound anatomy — pleural line, rib shadows, A-lines', caption: 'POCUS anatomy: rib shadows (R), pleural line (P), and A-lines (horizontal reverberation artifacts). Normal lung sliding occurs at the pleural line.' }],
         next: 'lung-sliding-assessment',
+        summary: 'Linear probe at 2nd-4th ICS MCL, M-mode confirmation, part of eFAST in trauma',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: FINDINGS INTERPRETATION
@@ -62,6 +66,7 @@ export const PNEUMOTHORAX_NODES = [
                 next: 'trauma-efast',
             },
         ],
+        summary: 'Lung sliding + B-lines = no PTX; absent sliding + barcode sign = possible PTX, find lung point',
     },
     {
         id: 'normal-findings',
@@ -84,6 +89,7 @@ export const PNEUMOTHORAX_NODES = [
         citation: [2, 3],
         images: [{ src: 'images/pneumothorax/m-mode-barcode.png', alt: 'M-mode barcode sign — stratosphere sign indicating absent lung sliding', caption: 'Barcode/stratosphere sign: horizontal parallel lines throughout M-mode image. Replaces normal seashore sign, indicating absent lung sliding. Suggests but does not confirm PTX — look for lung point.' }],
         next: 'lung-point',
+        summary: 'Absent sliding alone is not diagnostic — rule out mainstem intubation, adhesions, apnea, ARDS',
     },
     {
         id: 'lung-point',
@@ -107,6 +113,7 @@ export const PNEUMOTHORAX_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Lung point is pathognomonic for PTX (100% specificity) — slide probe laterally to find border',
     },
     {
         id: 'confirmed-ptx',
@@ -116,6 +123,7 @@ export const PNEUMOTHORAX_NODES = [
         body: '**POCUS confirmed pneumothorax** (lung point = 100% specificity).\n\n**Size estimation by lung point location:**\n• Anterior chest only → **Small**\n• Extends to mid-axillary line → **Moderate**\n• Extends posteriorly → **Large**',
         citation: [2, 4],
         next: 'tension-assessment',
+        summary: 'PTX confirmed — estimate size by lung point location: anterior=small, mid-axillary=moderate, posterior=large',
     },
     {
         id: 'no-lung-point',
@@ -125,6 +133,8 @@ export const PNEUMOTHORAX_NODES = [
         body: 'If absent lung sliding throughout the **entire hemithorax** without a lung point, suspect **massive pneumothorax** with complete lung collapse.\n\n**Confirm with CXR** — assess for mediastinal shift.\n\nIf hemodynamically unstable → treat as tension pneumothorax.',
         citation: [2, 3],
         next: 'tension-assessment',
+        summary: 'No lung point = suspect massive PTX with complete collapse — if unstable, treat as tension',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: MANAGEMENT
@@ -149,6 +159,8 @@ export const PNEUMOTHORAX_NODES = [
                 next: 'stable-ptx-management',
             },
         ],
+        summary: 'Hypotension + JVD + tracheal deviation = tension — do NOT wait for imaging, decompress now',
+        safetyLevel: 'critical',
     },
     {
         id: 'needle-decompression',
@@ -179,6 +191,7 @@ export const PNEUMOTHORAX_NODES = [
                 next: 'large-ptx',
             },
         ],
+        summary: 'Obtain CXR/CT for size — BTS method measures at apex, guides chest tube vs observation decision',
     },
     {
         id: 'small-ptx',
@@ -207,6 +220,7 @@ export const PNEUMOTHORAX_NODES = [
         body: 'In trauma, pneumothorax evaluation is part of the **eFAST exam**.\n\n**Key points:**\n• Supine position — air rises **anteriorly**\n• Up to **50% of pneumothoraces** are occult on initial CXR but visible on CT\n• POCUS detects occult PTX missed on supine CXR\n\n**Occult PTX management:**\n• Observation appropriate for small, stable occult PTX\n• Consider chest tube if **positive pressure ventilation** planned or PTX enlarging',
         citation: [1, 4, 5],
         next: 'lung-sliding-assessment',
+        summary: 'Supine trauma — air rises anteriorly, 50% of PTX occult on CXR; chest tube if positive pressure ventilation planned',
     },
 ];
 export const PNEUMOTHORAX_MODULE_LABELS = [

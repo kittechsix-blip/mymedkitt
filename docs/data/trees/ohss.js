@@ -31,6 +31,8 @@ export const OHSS_NODES = [
             { id: 'ohss-admission', label: 'Admission Criteria' },
         ],
         next: 'ohss-history',
+        summary: 'Iatrogenic IVF complication from VEGF-mediated capillary leak — early (3-7d post-hCG) or late (12-17d); can mimic acute abdomen, life-threatening if severe',
+        skippable: true,
     },
     {
         id: 'ohss-history',
@@ -40,6 +42,7 @@ export const OHSS_NODES = [
         body: '**Essential history for suspected OHSS:** [1,2]\n\n**IVF/ART Timeline:**\n- Date of last menstrual period\n- Date of hCG trigger injection\n- Date of oocyte retrieval (egg retrieval)\n- Did embryo transfer occur? (affects management)\n- Has she had a positive pregnancy test?\n\n**Risk Factors for OHSS:** [1,3]\n| Factor | Risk Increase |\n|--------|---------------|\n| Young age (<35) | High |\n| Low BMI | High |\n| PCOS | Very high |\n| High antral follicle count | High |\n| Previous OHSS | Very high |\n| High estradiol (>3500 pg/mL) | High |\n| Large number of follicles (>14) | High |\n\n**Ask about:**\n- Medications (gonadotropins, hCG, clomiphene, letrozole)\n- Prior OHSS episodes\n- Amount and timing of fluid intake\n- Urine output (oliguria is concerning)',
         citation: [1, 2, 3],
         next: 'ohss-presentation',
+        summary: 'Key history: hCG trigger date, oocyte retrieval date, embryo transfer status, pregnancy test; risk factors: young, low BMI, PCOS, prior OHSS',
     },
     {
         id: 'ohss-presentation',
@@ -49,6 +52,7 @@ export const OHSS_NODES = [
         body: '**Signs and Symptoms of OHSS:** [1,2,3]\n\n**Abdominal Symptoms (most common):**\n- Bloating and abdominal distension\n- Abdominal pain (lower, bilateral)\n- Nausea and vomiting\n- Diarrhea\n\n**Respiratory Symptoms:**\n- Dyspnea (pleural effusion or ARDS)\n- Decreased breath sounds at bases\n- Tachypnea\n\n**Systemic Signs:**\n- Weight gain (>1 kg/day from third-spacing)\n- Decreased urine output (<500 mL/24h)\n- Hypotension (intravascular depletion)\n- Tachycardia\n\n**Physical Exam Findings:**\n- Enlarged, tender ovaries (can be 10-12 cm or larger)\n- Ascites (shifting dullness, fluid wave)\n- Peripheral edema\n- Pleural effusion (usually right-sided)\n\n**Caution:** Avoid aggressive pelvic exam - enlarged ovaries are fragile and prone to torsion or rupture.',
         citation: [1, 2, 3],
         next: 'ohss-ddx',
+        summary: 'Bloating, bilateral lower pain, N/V, weight gain >1kg/day, oliguria, hypotension, tachycardia — avoid aggressive pelvic exam (fragile ovaries)',
     },
     {
         id: 'ohss-ddx',
@@ -58,6 +62,8 @@ export const OHSS_NODES = [
         body: '**Must rule out before diagnosing OHSS:** [2,3]\n\n**Critical to Exclude:**\n\n**Ovarian Torsion:** [4]\n- Sudden, severe unilateral pain\n- Nausea/vomiting\n- Absent or decreased Doppler flow to ovary\n- OHSS increases torsion risk (enlarged, heavy ovaries)\n\n**Ectopic Pregnancy:**\n- Positive pregnancy test + pelvic pain\n- Ultrasound showing no intrauterine pregnancy\n- Can coexist with OHSS (heterotopic pregnancy)\n\n**Ruptured Ovarian Cyst:**\n- Acute onset pain\n- Free fluid in pelvis\n- May need surgical intervention if hemorrhagic\n\n**Other Considerations:**\n- Appendicitis\n- Pelvic inflammatory disease\n- Peritonitis from other causes\n- Pulmonary embolism (OHSS is hypercoagulable state)\n\n**Key:** Always get pelvic ultrasound. Always check pregnancy test.',
         citation: [2, 3, 4],
         next: 'ohss-branch-severity',
+        summary: 'Exclude torsion (sudden unilateral pain, absent Doppler), ectopic pregnancy, ruptured cyst, PE — always get pelvic US and pregnancy test',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 2: CLASSIFICATION
@@ -69,6 +75,7 @@ export const OHSS_NODES = [
         title: 'Severity Assessment',
         body: '**Classify OHSS severity based on clinical and laboratory findings.** [1,5]\n\nSeverity determines disposition and management intensity.\n\n**Select the severity category that best matches patient presentation:**',
         citation: [1, 5],
+        summary: 'Classify severity to determine disposition: mild (outpatient), moderate (may need admission), severe (Hct>45%, admit), critical (ICU)',
         options: [
             {
                 label: 'Mild OHSS',
@@ -103,6 +110,8 @@ export const OHSS_NODES = [
         body: '**Mild OHSS Classification:** [1,5]\n\n**Clinical Features:**\n- Abdominal bloating and discomfort\n- Mild abdominal pain\n- Ovarian size <8 cm on ultrasound\n\n**Laboratory Findings:**\n- Normal hematocrit (<45%)\n- Normal WBC (<15,000)\n- Normal creatinine\n- No electrolyte abnormalities\n\n**Ultrasound:**\n- Mildly enlarged ovaries\n- No or minimal free fluid\n\n**Prognosis:**\n- Self-limiting in 7-10 days\n- Can be managed outpatient\n- Rarely progresses if not pregnant\n\n**Management:** Supportive care, oral hydration, activity restriction',
         citation: [1, 5],
         next: 'ohss-pathophys',
+        summary: 'Mild: bloating, mild pain, ovaries <8cm, normal labs — self-limiting 7-10 days, outpatient supportive care',
+        skippable: true,
     },
     {
         id: 'ohss-moderate',
@@ -112,6 +121,7 @@ export const OHSS_NODES = [
         body: '**Moderate OHSS Classification:** [1,5]\n\n**Clinical Features:**\n- Moderate abdominal pain\n- Nausea and vomiting\n- Abdominal distension\n- Weight gain 2-5 kg\n\n**Laboratory Findings:**\n- Hematocrit may be elevated (but <45%)\n- WBC 10,000-15,000\n- Normal or mildly elevated creatinine\n\n**Ultrasound:**\n- Ovarian size 8-12 cm\n- Ultrasound evidence of ascites\n\n**Key Features Distinguishing from Severe:**\n- No significant hemoconcentration\n- Urine output maintained\n- No respiratory symptoms\n\n**Management:** May require brief hospitalization. IV fluids, close monitoring.',
         citation: [1, 5],
         next: 'ohss-pathophys',
+        summary: 'Moderate: N/V, ovaries 8-12cm, US ascites, Hct may be elevated but <45% — may require brief hospitalization for IV fluids',
     },
     {
         id: 'ohss-severe',
@@ -121,6 +131,8 @@ export const OHSS_NODES = [
         body: '**Severe OHSS Classification:** [1,5,6]\n\n**Clinical Features:**\n- Tense ascites\n- Severe abdominal pain\n- Persistent nausea/vomiting\n- Oliguria (<500 mL/24h or <30 mL/h)\n- Dyspnea (pleural effusion)\n- Weight gain >5 kg\n\n**Laboratory Findings - KEY MARKERS:**\n| Finding | Value | Significance |\n|---------|-------|---------------|\n| Hematocrit | >45% | Hemoconcentration |\n| WBC | >15,000 | Inflammation |\n| Creatinine | >1.0-1.6 mg/dL | Prerenal AKI |\n| Na+ | <135 | Dilutional |\n| K+ | >5.0 | Reduced clearance |\n| Albumin | <3.0 | Capillary leak |\n\n**Ultrasound:**\n- Ovaries >12 cm\n- Significant ascites\n- Possible pleural effusion\n\n**THIS IS A MEDICAL EMERGENCY - ADMIT TO HOSPITAL**',
         citation: [1, 5, 6],
         next: 'ohss-pathophys',
+        summary: 'Severe: Hct >45%, oliguria, tense ascites, dyspnea, ovaries >12cm — MEDICAL EMERGENCY requiring hospitalization',
+        safetyLevel: 'critical',
     },
     {
         id: 'ohss-critical',
@@ -130,6 +142,8 @@ export const OHSS_NODES = [
         body: '**Critical OHSS - Life-Threatening:** [1,5,6]\n\n**Defining Features:**\n\n**Thromboembolic Events:**\n- DVT, PE (most common)\n- Arterial thrombosis (stroke, MI) - RARE but described\n- VTE risk 10-100x increased\n\n**Acute Respiratory Distress Syndrome (ARDS):**\n- Severe hypoxia requiring high-flow O2 or intubation\n- Bilateral infiltrates on CXR\n\n**Renal Failure:**\n- Creatinine >1.6 mg/dL\n- Oliguria/anuria despite fluids\n- May require hemodialysis\n\n**Anasarca:**\n- Massive total body edema\n- Significant ascites requiring repeated paracentesis\n\n**Laboratory:**\n- Hematocrit >55%\n- Creatinine >1.6\n- Hyponatremia <125\n\n**REQUIRES ICU ADMISSION**\nConsult: REI, Nephrology, Pulm/Critical Care, Hematology',
         citation: [1, 5, 6],
         next: 'ohss-pathophys',
+        summary: 'Critical: VTE (10-100x risk), ARDS, renal failure (Cr>1.6), anasarca, Hct>55% — requires ICU with multidisciplinary consults',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: PATHOPHYSIOLOGY
@@ -142,6 +156,8 @@ export const OHSS_NODES = [
         body: '**Understanding the mechanism guides treatment:** [1,6,7]\n\n**The VEGF Cascade:**\n1. hCG administration triggers massive ovarian VEGF release\n2. VEGF increases vascular permeability\n3. Capillary leak causes third-spacing of fluid\n4. Intravascular depletion despite total body fluid overload\n\n**Key Pathophysiologic Events:**\n\n**Third-Spacing:**\n- Fluid shifts to peritoneal cavity (ascites)\n- Pleural effusions (usually right-sided)\n- Pericardial effusion (rare)\n\n**Hemoconcentration:**\n- Plasma volume depletion\n- Elevated Hct (>45% indicates severe disease)\n- Increased blood viscosity\n\n**Hypercoagulability:** [8]\n- Hemoconcentration + estrogen = VTE risk\n- BOTH arterial AND venous thrombosis\n- Sites: cerebral, coronary, extremity, PE\n\n**Renal Effects:**\n- Prerenal AKI from volume depletion\n- Reduced GFR\n- Ascites can cause abdominal compartment syndrome',
         citation: [1, 6, 7, 8],
         next: 'ohss-why-no-diuretics',
+        summary: 'VEGF-mediated capillary leak causes third-spacing with intravascular depletion — hemoconcentration drives VTE risk (both arterial and venous)',
+        skippable: true,
     },
     {
         id: 'ohss-why-no-diuretics',
@@ -151,6 +167,8 @@ export const OHSS_NODES = [
         body: '**Critical Concept: Do NOT give diuretics for OHSS ascites!** [1,2,6]\n\n**The Paradox:**\n- Patient appears fluid-overloaded (ascites, edema, weight gain)\n- BUT intravascular space is severely DEPLETED\n- Giving diuretics worsens hemoconcentration and VTE risk\n\n**What happens with diuretics:**\n1. Further intravascular volume depletion\n2. Worsening hemoconcentration (Hct rises)\n3. Increased VTE risk\n4. Worsening renal function\n5. Electrolyte abnormalities\n\n**Correct Approach:**\n- Volume expansion with IV fluids\n- Paracentesis for symptomatic ascites relief\n- Support renal function with adequate preload\n\n**Exception:** Diuretics may be considered ONLY after:\n- Adequate intravascular volume restored (Hct normalizing)\n- In consultation with REI/nephrology\n- Patient in recovery phase',
         citation: [1, 2, 6],
         next: 'ohss-ed-management',
+        summary: 'Do NOT give diuretics — patient appears fluid-overloaded but intravascular space is DEPLETED; diuretics worsen hemoconcentration and VTE risk',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: ED MANAGEMENT
@@ -163,6 +181,7 @@ export const OHSS_NODES = [
         body: '**ED Management Goals:** [1,2,3]\n\n**1. Volume Resuscitation:**\n- Replace intravascular volume\n- Target: UOP >0.5-1 mL/kg/hr\n- Monitor Hct (goal: normalize from elevated baseline)\n\n**2. Pain Control:**\n- Acetaminophen (safe in pregnancy)\n- Opioids as needed (avoid NSAIDs - renal risk)\n\n**3. Prevent Complications:**\n- VTE prophylaxis\n- Monitor for torsion, rupture, ARDS\n\n**4. Supportive Care:**\n- Antiemetics\n- Electrolyte management\n- Respiratory support if needed\n\n**Initial Workup:**\n- CBC, CMP, LFTs\n- Coagulation studies (PT/INR, PTT, fibrinogen)\n- Urinalysis\n- Pregnancy test (hCG)\n- Pelvic ultrasound with Doppler\n- CXR if respiratory symptoms\n\n**Contact REI clinic** - even after hours, they have on-call coverage',
         citation: [1, 2, 3],
         next: 'ohss-fluid-management',
+        summary: 'ED goals: volume resuscitation (UOP>0.5-1 mL/kg/hr), pain control (no NSAIDs), VTE prophylaxis, contact REI clinic even after hours',
     },
     {
         id: 'ohss-fluid-management',
@@ -191,6 +210,7 @@ export const OHSS_NODES = [
             monitoring: 'Strict I/O, daily weights, Hct q6-12h, BMP daily, UOP hourly.',
         },
         next: 'ohss-pain-antiemetics',
+        summary: 'NS/LR 1-2L bolus then reassess; albumin 25% 50-100g for severe hemoconcentration; target UOP>30-50 mL/hr, Hct<40-45%; avoid excessive fluids',
     },
     {
         id: 'ohss-pain-antiemetics',
@@ -200,6 +220,8 @@ export const OHSS_NODES = [
         body: '**Symptom Management in OHSS:** [1,2]\n\n**Pain Control:**\n\n**AVOID NSAIDs:**\n- NSAIDs can worsen renal function\n- Already at risk for prerenal AKI\n- Avoid ibuprofen, ketorolac, naproxen\n\n**Safe Options:**\n- [Acetaminophen](#/drug/acetaminophen/pregnancy) 650-1000 mg PO/IV q6h\n- Opioids for severe pain (hydromorphone, morphine)\n- Heating pad for comfort\n\n**Antiemetics:**\n- [Ondansetron](#/drug/ondansetron/pregnancy) 4-8 mg IV/PO q8h\n- Metoclopramide 10 mg IV/PO q6h (promotes gastric emptying)\n- Prochlorperazine 10 mg IV/IM q6h\n\n**Caution with antiemetics in pregnancy:**\n- Ondansetron: Generally safe, some concern for cardiac defects in 1st trimester (low absolute risk)\n- Metoclopramide: Consider for prolonged vomiting\n\n**Note:** These patients may become pregnant - use pregnancy-safe medications.',
         citation: [1, 2],
         next: 'ohss-paracentesis',
+        summary: 'Avoid NSAIDs (renal risk); acetaminophen and opioids safe; ondansetron for nausea — use pregnancy-safe medications as patients may be pregnant',
+        safetyLevel: 'warning',
     },
     {
         id: 'ohss-paracentesis',
@@ -209,6 +231,7 @@ export const OHSS_NODES = [
         body: '**Therapeutic Paracentesis for Severe OHSS:** [1,2,9]\n\n**Indications:**\n- Respiratory compromise from tense ascites\n- Severe abdominal pain/distension\n- Oliguria despite IV fluids\n- Concern for abdominal compartment syndrome\n\n**Technique Considerations:**\n- **Ultrasound-guided** (enlarged ovaries make blind approach dangerous)\n- Avoid ovaries - they can be 10+ cm\n- Use midline or lateral approach away from ovaries\n- Slow removal (1-2 L at a time)\n\n**Volume to Remove:**\n- Remove enough for symptom relief (typically 1-3 L)\n- May remove up to 4-5 L if needed\n- Consider albumin replacement for large-volume paracentesis\n\n**Post-Paracentesis:**\n- 25% albumin 6-8g per liter removed (if >2L)\n- Recheck Hct after procedure\n- May need repeated paracentesis\n\n**Complications:**\n- Ovarian injury (use US guidance)\n- Bleeding\n- Infection\n- Re-accumulation (common)',
         citation: [1, 2, 9],
         next: 'ohss-complications',
+        summary: 'US-guided paracentesis for respiratory compromise or tense ascites — avoid ovaries (10+ cm), slow removal 1-3L, albumin 6-8g/L if >2L removed',
     },
     // =====================================================================
     // MODULE 5: COMPLICATIONS
@@ -221,6 +244,8 @@ export const OHSS_NODES = [
         body: '**Life-Threatening Complications of OHSS:** [1,5,8]\n\n**1. Venous Thromboembolism (VTE):**\n- DVT, PE most common\n- Risk: 10-100x increased vs general population\n- Can occur weeks after OHSS onset\n\n**2. Arterial Thromboembolism:** [8]\n- Less common but devastating\n- Stroke, MI, limb ischemia\n- Often in unusual sites (upper extremity, cerebral)\n\n**3. Ovarian Torsion:** [4]\n- Enlarged, heavy ovaries prone to twist\n- Sudden severe unilateral pain\n- Surgical emergency\n\n**4. Ovarian Rupture:**\n- Can cause significant hemoperitoneum\n- May require surgery\n\n**5. Acute Renal Failure:**\n- Prerenal from volume depletion\n- May require dialysis\n\n**6. ARDS:**\n- Severe capillary leak affecting lungs\n- May require intubation\n\n**7. Electrolyte Disturbances:**\n- Hyponatremia, hyperkalemia\n- Can cause arrhythmias',
         citation: [1, 5, 8],
         next: 'ohss-vte-prophylaxis',
+        summary: 'Life-threatening complications: VTE (10-100x risk), ovarian torsion (6-16%), ovarian rupture, AKI, ARDS, electrolyte disturbances',
+        safetyLevel: 'critical',
     },
     {
         id: 'ohss-vte-prophylaxis',
@@ -249,6 +274,8 @@ export const OHSS_NODES = [
             monitoring: 'Watch for bleeding. Check platelets for HIT if prolonged use. Anti-Xa levels if obese or renal impairment.',
         },
         next: 'ohss-torsion',
+        summary: 'All moderate-severe OHSS need VTE prophylaxis — enoxaparin 40mg SC daily, continue throughout illness, 3 months postpartum if pregnant',
+        safetyLevel: 'critical',
     },
     {
         id: 'ohss-torsion',
@@ -258,6 +285,8 @@ export const OHSS_NODES = [
         body: '**Ovarian Torsion in OHSS Setting:** [1,4]\n\n**Why OHSS Increases Torsion Risk:**\n- Enlarged, heavy ovaries (can be >10 cm)\n- Longer pedicle with more room to twist\n- Increased mobility\n- Risk: 6-16% in severe OHSS\n\n**Clinical Presentation:**\n- Sudden onset severe unilateral pain\n- Nausea and vomiting\n- May have intermittent pain (torsion-detorsion)\n- Fever (late sign, indicates necrosis)\n\n**Diagnosis:**\n- Pelvic ultrasound with Doppler\n- Absent or reduced flow to ovary\n- May see "whirlpool sign" of twisted pedicle\n- Note: Flow may be present despite torsion (collateral circulation)\n\n**Management:**\n- **Surgical emergency**\n- Laparoscopy or laparotomy\n- Goal: detorsion and ovarian salvage\n- Oophorectomy if necrotic\n\n**Key Point:** High clinical suspicion for torsion in any OHSS patient with sudden unilateral pain.',
         citation: [1, 4],
         next: 'ohss-renal',
+        summary: 'Torsion risk 6-16% in severe OHSS — sudden unilateral pain, absent Doppler flow, surgical emergency; flow may be present despite torsion',
+        safetyLevel: 'critical',
     },
     {
         id: 'ohss-renal',
@@ -267,6 +296,7 @@ export const OHSS_NODES = [
         body: '**Acute Kidney Injury in OHSS:** [1,5,6]\n\n**Mechanism:**\n- Prerenal AKI from intravascular volume depletion\n- Hemoconcentration reduces renal perfusion\n- Tense ascites can cause abdominal compartment syndrome\n\n**Laboratory Findings:**\n- Rising creatinine (>1.0-1.6 = severe OHSS)\n- BUN:Cr ratio >20:1 (prerenal pattern)\n- FENa <1% (prerenal)\n- Oliguria (<500 mL/24h)\n\n**Management:**\n- **Aggressive IV fluid resuscitation**\n- Albumin if severe hemoconcentration\n- Paracentesis if tense ascites causing compression\n- Avoid nephrotoxins (NSAIDs, contrast if possible)\n- Monitor potassium (may be elevated)\n\n**When to Involve Nephrology:**\n- Creatinine >2.0 or rising despite fluids\n- Hyperkalemia >6.0\n- Metabolic acidosis\n- Anuria\n- Consider dialysis if refractory\n\n**Prognosis:** Usually reversible with appropriate volume resuscitation.',
         citation: [1, 5, 6],
         next: 'ohss-disposition',
+        summary: 'AKI from prerenal volume depletion — aggressive IV resuscitation, avoid nephrotoxins (NSAIDs), paracentesis if compartment syndrome, nephrology if Cr>2.0',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -278,6 +308,7 @@ export const OHSS_NODES = [
         title: 'Disposition Decision',
         body: '**Determine appropriate level of care based on OHSS severity:** [1,2,5]\n\n**Admission Criteria (any of):**\n- Intractable nausea/vomiting\n- Unable to maintain PO intake\n- Hematocrit >45%\n- Creatinine >1.0 mg/dL\n- Severe abdominal pain\n- Respiratory symptoms\n- Oliguria\n- Concern for torsion or rupture\n\n**Outpatient Criteria (ALL must be met):**\n- Mild OHSS only\n- Tolerating PO\n- Adequate urine output\n- Normal labs\n- Reliable follow-up with REI\n- Understands return precautions',
         citation: [1, 2, 5],
+        summary: 'Admit if: Hct>45%, Cr>1.0, intractable N/V, oliguria, respiratory symptoms, torsion concern; discharge only if mild, tolerating PO, reliable REI f/u',
         options: [
             {
                 label: 'Discharge - Mild OHSS',
@@ -355,6 +386,8 @@ export const OHSS_NODES = [
         body: '**Always Contact the REI (Fertility) Clinic:** [1,2]\n\n**Information to Communicate:**\n\n**Patient Identifiers:**\n- Name and DOB\n- REI clinic and physician name\n\n**Timeline:**\n- Date of hCG trigger\n- Date of oocyte retrieval\n- Did embryo transfer occur?\n- Current pregnancy status\n\n**Clinical Status:**\n- OHSS severity classification\n- Current vital signs\n- Key lab values (Hct, Cr, electrolytes)\n- Ultrasound findings (ovarian size, ascites)\n\n**ED Management:**\n- Fluids given\n- Medications administered\n- Procedures performed (paracentesis)\n\n**Disposition Plan:**\n- Discharge vs admit\n- When to follow up\n\n**Why This Matters:**\n- REI can modify future stimulation protocols\n- They have baseline labs for comparison\n- May affect decisions about embryo transfer\n- Continuity of care',
         citation: [1, 2],
         next: 'ohss-prognosis',
+        summary: 'Contact REI with timeline (hCG, retrieval, transfer, pregnancy status), severity, labs, management given, and disposition plan',
+        skippable: true,
     },
     {
         id: 'ohss-prognosis',
@@ -363,6 +396,8 @@ export const OHSS_NODES = [
         title: 'Prognosis & Recovery',
         body: '**OHSS Prognosis:** [1,2,5]\n\n**Natural History:**\n\n**If NOT Pregnant:**\n- OHSS resolves with next menstrual period\n- Usually 7-10 days after onset\n- Self-limiting once hCG clears\n\n**If Pregnant:**\n- OHSS may worsen initially (endogenous hCG rises)\n- Peak symptoms at 8-10 weeks gestation\n- Gradually improves as hCG plateaus\n- Can take weeks to fully resolve\n\n**Long-term Outcomes:**\n- Fertility is preserved\n- Future IVF cycles can use modified protocols\n- No evidence of long-term ovarian damage\n- No evidence of adverse effects on offspring\n\n**Mortality:**\n- Rare with modern management\n- Deaths usually from VTE or ARDS\n- Prevention and early recognition are key\n\n**Prevention in Future Cycles:**\n- Lower gonadotropin doses\n- GnRH agonist trigger instead of hCG\n- Freeze-all embryos (no fresh transfer)\n- Dopamine agonists (cabergoline)',
         citation: [1, 2, 5],
+        summary: 'Not pregnant: resolves with menses (7-10d); pregnant: may worsen then improves by 8-10wk; fertility preserved, mortality rare with modern care',
+        skippable: true,
     },
 ];
 export const OHSS_NODE_COUNT = OHSS_NODES.length;

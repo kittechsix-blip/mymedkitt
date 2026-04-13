@@ -47,6 +47,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         next: 'aortic-incidental',
       },
     ],
+
+    summary: 'Time-critical: ruptured AAA >80% mortality, untreated Type A dissection 1-2%/hour — misdiagnosis rate up to 30%',
   },
 
   {
@@ -57,6 +59,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Aortic dissection = intimal tear with blood tracking into the media, creating a false lumen.**\n\n**Stanford Classification:** [1][2]\n- **Type A:** Involves ascending aorta (proximal to left subclavian). Surgical emergency. Mortality 1-2%/hour untreated.\n- **Type B:** Descending aorta only (distal to left subclavian). Usually medical management unless complicated.\n\n**Acute Aortic Syndromes (all evaluated similarly):** [5]\n- Aortic dissection (85-95% of AAS)\n- Intramural hematoma (5-25%)\n- Penetrating atherosclerotic ulcer (2-7%)\n\n**Risk factors:** Hypertension (70%), connective tissue disorders (Marfan, Ehlers-Danlos), bicuspid aortic valve, prior cardiac surgery, cocaine use, pregnancy (3rd trimester), aortic coarctation. [1][2]\n\n**Physical exam findings (increase likelihood ratio):** [6]\n- Pulse deficit (LR 5.7)\n- BP differential >20 mmHg between arms (LR 5.7)\n- Focal neurologic deficit (LR 5.7)\n- New aortic regurgitation murmur\n\n[Aortic Dissection Detection Risk Score](#/info/aortic-add-rs)',
     citation: [1, 2, 5, 6],
     next: 'aortic-add-rs',
+
+    summary: 'Type A (ascending) = surgical emergency; Type B (descending) = usually medical; pulse deficit/BP differential LR 5.7',
   },
 
   {
@@ -87,6 +91,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         next: 'aortic-ddimer',
       },
     ],
+
+    summary: 'ADD-RS ≥2 = immediate CTA; ADD-RS 0-1 + D-dimer <500 = 99% sensitivity rule-out, can avoid ~50% of CTAs',
   },
 
   // =====================================================================
@@ -113,6 +119,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         next: 'aortic-ruled-out',
       },
     ],
+
+    summary: 'D-dimer to RULE OUT not diagnose — may be falsely negative in thrombosed/chronic dissections; do NOT delay CTA for high-risk',
   },
 
   {
@@ -124,6 +132,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     images: [{ src: 'images/aortic-aneurysm/aaa-ct.jpg', alt: 'Axial contrast-enhanced CT scan showing a 4.8 × 3.8 cm infrarenal abdominal aortic aneurysm with mural thrombus', caption: 'CT angiogram: infrarenal AAA (4.8 × 3.8 cm) with mural thrombus — CT is the gold standard for sizing and operative planning. (CC BY-SA 3.0, James Heilman MD)' }],
     citation: [1, 5],
     next: 'aortic-classify',
+
+    summary: 'CTA is gold standard (~100% sensitivity); POCUS SPEED protocol for unstable patients (92% sens); type and cross 6-10 units',
   },
 
   {
@@ -161,6 +171,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Classify CTA findings: dissection (intimal flap), IMH (crescent wall thickening >5mm), PAU (ulceration into media), or ruptured AAA',
   },
 
   {
@@ -207,6 +219,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
       monitoring: 'Continuous BP and HR monitoring. Target HR 60-70 bpm, SBP 100-120 mmHg.',
     },
     next: 'aortic-vasodilator',
+
+    summary: 'Beta-blocker FIRST (HR 60-70, SBP 100-120) — esmolol preferred for unstable; vasodilators alone cause reflex tachycardia',
+    safetyLevel: 'critical',
   },
 
   {
@@ -236,6 +251,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
       monitoring: 'Arterial line recommended. Target SBP 100-120 mmHg.',
     },
     next: 'aortic-hypotensive',
+
+    summary: 'Add vasodilator AFTER beta-blocker if SBP>120 — nicardipine first choice, clevidipine if available (1-2min half-life)',
   },
 
   {
@@ -257,6 +274,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
       monitoring: 'Check BP in all extremities. Use highest pressure for management. Prepare for emergent surgery.',
     },
     next: 'aortic-type-a',
+
+    summary: 'Check BP in all extremities; pseudohypotension from limb occlusion; tamponade = small-volume pericardiocentesis only as temporizing',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -271,6 +291,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Type A dissection = IMMEDIATE SURGICAL INDICATION.** [1][2][10]\n\n**Mortality without surgery: 50% at 48 hours, 1-2% per hour.**\n**Mortality with surgery: 20% at 14 days** (much improved from historical rates)\n\n**Indications for emergent repair:**\n- All Type A dissections (regardless of symptoms)\n- Tamponade, severe aortic regurgitation\n- Malperfusion syndromes (coronary, cerebral, visceral, limb)\n- Rupture or impending rupture\n\n**ED Management while awaiting surgery:**\n1. Anti-impulse therapy (HR 60-70, SBP 100-120)\n2. Adequate IV access (large-bore x2 or central line)\n3. Type and crossmatch 6-10 units pRBCs\n4. Continuous monitoring (arterial line preferred)\n5. Pain control with opioids (morphine, fentanyl) - also reduces sympathetic drive\n6. NPO for surgery\n\n**Consults:**\n- Cardiothoracic surgery STAT\n- Cardiac anesthesia\n- Perfusionist for bypass\n\n[Type A Dissection Surgery Overview](#/info/aortic-surgery)',
     citation: [1, 2, 10],
     next: 'aortic-dispo-surgery',
+
+    summary: 'ALL Type A = immediate surgery; mortality without surgery 50% at 48h, 1-2%/hour; CT surgery STAT consult',
+    safetyLevel: 'critical',
   },
 
   {
@@ -293,6 +316,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Uncomplicated Type B = medical management (<10% mortality); complicated = TEVAR (~30% mortality) — malperfusion defines complicated',
   },
 
   {
@@ -303,6 +328,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Uncomplicated Type B dissection responds well to aggressive medical therapy.** [1][11]\n\n**Anti-impulse therapy:**\n- Target HR 60-70 bpm\n- Target SBP 100-120 mmHg\n- Pain control (adequate analgesia reduces sympathetic drive)\n\n**ICU admission for:**\n- Continuous BP monitoring\n- Serial imaging at 24-48 hours to assess for progression\n- Detection of complications\n\n**Transition to oral therapy (once stable):**\n- [Metoprolol](#/drug/metoprolol/aortic dissection oral) or labetalol\n- Add calcium channel blocker (nifedipine XR) for additional BP control\n- ACE inhibitor or ARB for long-term management\n\n**Long-term surveillance:**\n- CT at 1, 3, 6, 12 months, then annually\n- SBP goal <130 mmHg chronically\n- Beta-blocker lifelong\n\n**Prognosis:** With optimal medical therapy, 5-year survival is 60-80%. ~24% will require intervention for late complications. [11]',
     citation: [1, 11],
     next: 'aortic-dispo-icu',
+
+    summary: 'ICU for continuous BP monitoring, serial imaging at 24-48h; 5-year survival 60-80%; ~24% need late intervention',
   },
 
   {
@@ -313,6 +340,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Complicated Type B dissection requires TEVAR (Thoracic Endovascular Aortic Repair) or open surgery.** [1][11]\n\n**TEVAR is preferred for complicated Type B:**\n- Places stent-graft to seal entry tear\n- Excludes false lumen\n- Promotes thrombosis and remodeling\n- Less invasive than open repair\n\n**Indications for urgent intervention:**\n- Rupture or impending rupture\n- Malperfusion syndrome not responding to medical optimization\n- Rapid aortic expansion (>5 mm in acute phase)\n- Refractory pain or hypertension\n\n**ED management while awaiting intervention:**\n- Anti-impulse therapy (HR 60-70, SBP 100-120)\n- Permissive hypertension may be necessary if malperfusion present - balance perfusion vs rupture risk\n- Large-bore IV access, type and cross 6-10 units\n- Continuous monitoring\n\n**Consults:**\n- Vascular surgery\n- Cardiothoracic surgery (backup for open repair if TEVAR not feasible)\n\n**Mortality for complicated Type B requiring repair: ~30%** [1]',
     citation: [1, 11],
     next: 'aortic-dispo-surgery',
+
+    summary: 'TEVAR preferred for complicated Type B — stent-graft seals entry tear; may need permissive hypertension if malperfusion',
   },
 
   {
@@ -323,6 +352,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**PAU = atherosclerotic plaque ulcerates through intima into media.** [5][12]\n\n**Characteristics:**\n- Most common in descending thoracic aorta (62%)\n- Typically older patients (70s-80s) with severe atherosclerosis\n- May coexist with intramural hematoma\n- Risk of rupture reported up to 40%\n\n**Management is individualized:** [5][12]\n\n**Indications for intervention:**\n- Persistent or recurrent symptoms despite medical therapy\n- Rupture or impending rupture\n- Development of pseudoaneurysm\n- Progression to dissection or large IMH\n\n**Medical management (similar to Type B):**\n- Anti-impulse therapy\n- Beta-blocker + vasodilator\n- Pain control\n- Serial imaging\n\n**Intervention options:**\n- TEVAR is preferred modality\n- Open repair for complex anatomy\n\n**The natural history is unpredictable** - PAU can remain stable, enlarge, progress to IMH/dissection/pseudoaneurysm, or rupture.',
     citation: [5, 12],
     next: 'aortic-dispo-icu',
+
+    summary: 'PAU = ulcer through intima to media, mostly descending thoracic; up to 40% rupture risk; TEVAR if intervention needed',
   },
 
   {
@@ -333,6 +364,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Ruptured AAA is a surgical emergency with mortality >80% without intervention.** [3][13]\n\n**AAA defined as infrarenal aortic diameter >3 cm.** [3]\n\n**Classic triad (present in <50%):**\n- Hypotension\n- Abdominal or back pain\n- Pulsable abdominal mass\n\n**Risk factors:** Age >65, male, smoking history, HTN, family history, connective tissue disease.\n\n**Physical exam sensitivity for AAA by size:** [3]\n- 3.0-3.9 cm: 29%\n- 4.0-4.9 cm: 50%\n- >=5.0 cm: 76%\n\n**Common misdiagnoses:** Renal colic (24%), diverticulitis (13%), GI bleed (13%), acute coronary syndrome.\n\n**Bedside ultrasound:**\n- 100% sensitive when entire aorta visualized\n- Can measure diameter and detect AAA\n- CANNOT reliably detect rupture (retroperitoneal blood not visible)\n- Allows continued resuscitation without transport',
     citation: [3, 13],
     next: 'aortic-aaa-imaging',
+
+    summary: 'Classic triad (hypotension, pain, pulsatile mass) present <50%; bedside US 100% sensitive for AAA but CANNOT detect rupture',
   },
 
   {
@@ -362,6 +395,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Unstable = bedside US + straight to OR (no CT); stable = CTA for anatomy; call vascular surgery on suspicion',
   },
 
   {
@@ -386,6 +421,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
       monitoring: 'Target SBP 70-90 mmHg. Maintain consciousness. Avoid intubation if possible.',
     },
     next: 'aortic-aaa-surgical',
+
+    summary: 'Permissive hypotension SBP 70-90 — maintain tamponade, minimize crystalloid, 1:1:1 MTP; avoid intubation if possible',
+    safetyLevel: 'critical',
   },
 
   {
@@ -396,6 +434,8 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**EVAR (endovascular) vs Open Surgical Repair (OSR)** [13]\n\n**EVAR preferred when anatomy allows:**\n- Can be performed under local anesthesia\n- Less physiologic stress\n- Anatomic requirements:\n  - Aortic bifurcation diameter >=17 mm\n  - Aneurysmal neck >=15 mm diameter\n  - Suitable femoral/iliac arteries (not excessively tortuous/calcified)\n\n**OSR indicated when:**\n- EVAR anatomy unsuitable\n- Rupture with free intraperitoneal hemorrhage\n- Performed under general anesthesia\n\n**Endovascular Balloon Control (EVBC):** [13]\n- For hemodynamically unstable patients\n- Occlusion balloon placed via femoral access\n- Provides temporary hemorrhage control\n- Bridge to definitive repair\n\n**30-minute window:** After hemodynamic stabilization, 3D imaging analysis determines EVAR vs OSR.\n\n**Operative mortality:** [3]\n- Elective AAA repair: 5-10%\n- Ruptured AAA repair: 41-50%\n- Normotensive patients with contained bleeding have best survival',
     citation: [3, 13],
     next: 'aortic-dispo-surgery',
+
+    summary: 'EVAR preferred when anatomy allows (local anesthesia); OSR for unsuitable anatomy; 30-min 3D analysis determines approach',
   },
 
   {
@@ -406,6 +446,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Symptomatic aneurysm = impending rupture until proven otherwise.** [3][15]\n\n**Symptoms suggesting instability:**\n- New or worsening abdominal/back pain\n- Tenderness over known aneurysm\n- Rapid growth on surveillance imaging\n- Peripheral embolization (blue toe syndrome)\n\n**Management:**\n- Admit for urgent surgical evaluation\n- CT angiography to assess for contained leak\n- Type and crossmatch\n- NPO for possible emergent surgery\n- BP control (avoid excessive hypertension)\n\n**Indications for urgent repair:** [15]\n- Symptomatic AAA (any size)\n- AAA >5.5 cm in men or >5.0 cm in women\n- Growth rate >0.5 cm in 6 months\n- Saccular morphology or eccentric shape\n\n**Consult vascular surgery for admission and timing of repair.**',
     citation: [3, 15],
     next: 'aortic-dispo-admit',
+
+    summary: 'Symptomatic = impending rupture — admit for urgent surgery; repair threshold: men ≥5.5cm, women ≥5.0cm, or growth >0.5cm/6mo',
+    safetyLevel: 'warning',
   },
 
   {
@@ -463,6 +506,9 @@ export const AORTIC_ANEURYSM_NODES: DecisionNode[] = [
     body: '**Malperfusion = branch vessel compromise from dissection or thrombosis.** [1][2]\n\n**Coronary malperfusion:**\n- RCA most commonly involved (right coronary ostium)\n- Presents as STEMI - check for dissection before cath lab\n- Treatment: emergent surgery, not PCI\n\n**Cerebral malperfusion:**\n- Carotid/vertebral involvement\n- Stroke in 5-10% of Type A dissections\n- Does NOT preclude surgery unless massive stroke\n\n**Spinal cord malperfusion:**\n- Paraplegia/paraparesis\n- Intercostal/lumbar artery involvement\n- Associated with poor prognosis\n\n**Mesenteric malperfusion:**\n- SMA involvement\n- Elevated lactate, abdominal pain out of proportion\n- Mortality >50%\n\n**Renal malperfusion:**\n- Oliguria, rising creatinine\n- May require fenestration or stenting\n\n**Limb malperfusion:**\n- Pulseless, cold extremity\n- May resolve with true lumen reperfusion\n\n**Management:** Surgical repair restores true lumen flow; may need adjunctive fenestration or branch stenting.',
     citation: [1, 2],
     next: 'aortic-type-a',
+
+    summary: 'Branch vessel compromise: coronary (STEMI, not PCI), cerebral (stroke 5-10%), mesenteric (lactate, >50% mortality), spinal, renal, limb',
+    safetyLevel: 'critical',
   },
 
 ];

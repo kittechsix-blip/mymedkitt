@@ -26,6 +26,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: 'A **comprehensive psychiatric assessment** follows a structured format including both historical information and a systematic **Mental Status Examination (MSE)**.\n\nThe MSE is a structured way to assess and document a patient\'s current cognitive, behavioral, and emotional functioning. Unlike the MMSE (cognitive screening), the MSE offers a **broader view** of the patient\'s psychological state during a specific encounter.\n\n**10 Components of the MSE:**\n1. Appearance\n2. Behavior\n3. Speech & Language\n4. Mood (subjective)\n5. Affect (objective)\n6. Thought Process\n7. Thought Content & Perception\n8. Suicidal / Homicidal Risk\n9. Cognition\n10. Insight & Judgment\n\n**Documentation for CPT 90792 must include:**\n• Complete medical and psychiatric history\n• Mental status examination findings\n• Initial diagnosis\n• Evaluation of capacity to respond to treatment\n• Initial treatment plan',
         citation: [1, 2, 9],
         next: 'psych-history',
+        summary: '10-component MSE: appearance through insight/judgment — CPT 90792 requires full MSE + treatment plan',
+        skippable: true,
     },
     {
         id: 'psych-history',
@@ -35,6 +37,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Presenting Complaint:**\n• Chief complaint in patient\'s own words\n• Onset, duration, and course of current symptoms\n• Precipitating events or stressors\n\n**Psychiatric History:**\n• Previous psychiatric diagnoses\n• Prior hospitalizations (voluntary vs. involuntary)\n• Previous treatments and response\n• History of self-harm or suicide attempts\n\n**Medication History:**\n• Current psychotropic medications (dose, duration, adherence)\n• Previous medication trials and why discontinued\n• Over-the-counter and herbal supplements\n\n**Substance Use:**\n• Alcohol — type, quantity, frequency, last use\n• Illicit drugs — type, route, frequency, last use\n• Tobacco/nicotine, caffeine\n• History of withdrawal symptoms or DTs\n\n**Medical History:**\n• Relevant medical conditions (thyroid, neurologic, metabolic)\n• Recent head trauma or seizures\n• Current medical medications\n\n**Family Psychiatric History:**\n• Psychiatric diagnoses in first-degree relatives\n• Family history of suicide or substance use\n\n**Social History:**\n• Living situation, employment, relationships\n• Support system, legal issues\n\n**Collateral Sources:**\n• Family members, EMS, pharmacy records, prior ED visits\n• Document who provided information and relationship to patient',
         citation: [3, 4, 5],
         next: 'psych-appearance',
+        summary: 'Chief complaint, psych/med/substance history, collateral sources — document who provided information',
+        skippable: true,
     },
     {
         id: 'psych-appearance',
@@ -44,6 +48,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Appearance** refers to how the patient presents physically. These observations offer insight into level of functioning, mood, and potential psychiatric symptoms.\n\n**Hygiene & Grooming:**\n• Clean, neat, shaven\n• Body odor, disheveled, unkempt, malodorous\n\n**Dress:**\n• Appropriate, casual, neat, business, fashionable\n• Bizarre, inappropriate, dirty, stained, ragged, layered\n\n**Posture:**\n• Relaxed, rigid, slumped, tense\n\n**Facial Expressions:**\n• Calm, sad, anxious, angry, perplexed, masked, grimacing, tearful\n\n**Apparent Age:**\n• Younger than / older than / consistent with stated age\n\n**Body Habitus:**\n• Normal, underweight, overweight, obese, cachectic\n\n**Distinguishing Features:**\n• Tattoos, piercings, scars, visible injuries, track marks\n\n**Makeup/Adornment:**\n• Appropriate, garish, bizarre, none\n\n**Assessment Prompts:**\n• "How do you usually get ready for the day?"\n• "Have you noticed any changes in your daily routines or energy levels?"\n\n**Example:** "Patient appears older than stated age. Disheveled, with stained clothing and poor hygiene. Avoids eye contact and sits with a slouched posture."',
         citation: [1, 6, 9],
         next: 'psych-behavior',
+        summary: 'Assess hygiene, dress, posture, facial expression, apparent age — insights into functioning and mood',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 2: BEHAVIOR, SPEECH & EMOTIONS
@@ -68,6 +74,7 @@ export const PSYCH_ASSESSMENT_NODES = [
                 next: 'psych-safety',
             },
         ],
+        summary: 'Eye contact, cooperation, psychomotor activity, movement disorders (tardive dyskinesia), level of arousal',
     },
     {
         id: 'psych-speech',
@@ -77,6 +84,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Speech patterns** offer insight into cognitive and emotional state. Disruptions may indicate mood disorders, anxiety, thought disorganization, or neurocognitive impairment.\n\n**Rate:**\n• Normal (~100-150 words/minute)\n• Rapid / pressured (→ mania, anxiety)\n• Slow / hesitant (→ depression, sedation)\n• Delayed onset\n\n**Rhythm:**\n• Normal prosody, articulate\n• Monotone, stuttering, dysarthric, slurred\n\n**Volume:**\n• Normal, loud, soft, whispered, mute\n\n**Content / Quantity:**\n• Normal, fluent, verbose / loquacious\n• Impoverished / poverty of speech (→ depression, negative symptoms)\n• Spontaneous vs. only responsive to questions\n\n**Tone:**\n• Normal, anxious, angry, whiny, flat, tremulous\n\n**Fluency:**\n• Fluent, non-fluent, word-finding difficulty\n\n**Articulation:**\n• Clear, slurred (→ intoxication, neurologic), mumbling\n\n**Latency:**\n• Normal response time\n• Increased latency (→ depression, thought blocking, sedation)\n\n**Assessment Prompts:**\n• "Has anyone mentioned changes in the way you speak lately?"\n• "Do you feel like it\'s harder to find words or express yourself?"\n\n**Example:** "Speech is slow in rate, low in volume, with increased latency. Normal articulation. Poverty of speech noted."',
         citation: [1, 6, 9, 10],
         next: 'psych-mood',
+        summary: 'Rate, rhythm, volume, content, latency — pressured speech suggests mania, poverty suggests depression',
+        skippable: true,
     },
     {
         id: 'psych-mood',
@@ -86,6 +95,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Mood** is the patient\'s **self-reported** emotional state — what they TELL you they feel. It represents a **sustained emotion** present over a prolonged period that can alter their perception of the world.\n\n**Ask the patient:**\n• "How is your mood today?"\n• "How have you been feeling over the past few days?"\n• "Would you say your emotions have been steady or up and down?"\n• "Have you felt sad or discouraged?"\n• "Have you been feeling anxious or worried?"\n• "On a scale of 1-10, how would you rate your mood?"\n\n**Document in patient\'s own words** (in quotes).\n\n**Common Descriptors:**\n• Euthymic (normal)\n• Depressed, sad, hopeless, empty\n• Irritable, angry\n• Anxious, fearful, worried\n• Euphoric, elevated, expansive\n• Apathetic, flat\n• Labile (rapidly changing)\n\n**Key Distinction:**\n• **Mood** = what the patient TELLS you (subjective, sustained)\n• **Affect** = what you OBSERVE (objective, moment-to-moment)\n\n**Example:** "Patient describes mood as \'I just feel empty inside.\'"',
         citation: [1, 6, 9, 10],
         next: 'psych-affect',
+        summary: 'Document in patient\'s own words — mood is SUBJECTIVE (what they tell you), sustained emotional state',
     },
     {
         id: 'psych-affect',
@@ -95,6 +105,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Affect** is the clinician\'s **objective observation** of the patient\'s emotional expression — what you SEE. It is an observable emotion expressed in the moment, fluctuating during the encounter.\n\n**Intensity:**\n• Normal\n• Flat (no emotional expression → schizophrenia, severe depression)\n• Blunted (minimal expression)\n• Exaggerated\n\n**Quality:**\n• Sad, agitated, euphoric, anxious, angry, fearful, indifferent\n\n**Fluctuation / Stability:**\n• Stable\n• Labile — rapidly shifting, easily altered between states (→ mania, TBI, pseudobulbar affect)\n\n**Range:**\n• Broad / full (normal variation)\n• Restricted / constricted (reduced variation)\n• Flat (absent expression)\n• Expansive\n\n**Congruence:**\n• Mood-congruent (affect matches stated mood)\n• Mood-incongruent (laughing while describing sadness → psychosis)\n\n**Appropriateness:**\n• Appropriate to content of discussion\n• Inappropriate (affect mismatches topic)\n\n**Assessment Prompts:**\n• "How have you been feeling over the past few days?"\n• "Would you say your emotions have been steady or up and down lately?"\n\n**Example:** "Affect is restricted in range, blunted in intensity, mood-congruent, and appropriate to content."',
         citation: [1, 6, 9, 10],
         next: 'psych-thought-process',
+        summary: 'Affect is OBJECTIVE — your observation of intensity, quality, range, congruence with stated mood',
     },
     // =====================================================================
     // MODULE 3: THOUGHT, PERCEPTION & COGNITION
@@ -107,6 +118,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Thought process** describes the *form and flow* of thinking — HOW the patient thinks. Assess the amount, speed, and the way thoughts are linked together.\n\n**Stream of Thought** (amount and speed):\n• **Goal-directed / linear** — thoughts connect logically (normal)\n• **Rapid** — increased speed but still coherent\n• **Impoverished** — slow thinking, few spontaneous ideas\n• **Thought blocking** — abrupt interruption mid-sentence (→ schizophrenia)\n• **Distractible** — easily pulled off-topic by stimuli\n\n**Form of Thought** (how thoughts are linked):\n• **Circumstantial** — reaches the point via excessive detail\n• **Tangential** — wanders off topic, never reaches the point\n• **Loose associations** — unrelated ideas shift without logic\n• **Flight of ideas** — rapid shifting between loosely connected topics (→ mania)\n• **Perseveration** — repetitive return to same idea\n• **Clang associations** — connections based on sound, not meaning\n• **Word salad** — incoherent, random words without structure\n• **Neologisms** — made-up words\n• **Illogical** — conclusions don\'t follow from premises\n• **Incoherent** — incomprehensible speech\n\n**Assessment Prompts:**\n• "Do you find it easy to focus or follow through on your thoughts?"\n\n**Example:** "Thought process is tangential with loose associations. Patient unable to maintain goal-directed conversation."',
         citation: [1, 6, 9, 10],
         next: 'psych-thought-content',
+        summary: 'HOW they think — goal-directed, tangential, loose associations, flight of ideas, thought blocking',
     },
     {
         id: 'psych-thought-content',
@@ -116,6 +128,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**THOUGHT CONTENT** — WHAT the patient is thinking about.\n\n**Content of Thought:**\n• **Delusions** (fixed false beliefs):\n  — Paranoid / persecutory — being watched, followed, harmed\n  — Grandiose — inflated self-importance or abilities\n  — Somatic — false beliefs about body\n  — Referential — events/media directed at them\n  — Erotomanic — belief someone is in love with them\n  — Nihilistic — belief that self/world doesn\'t exist\n  — Religious — divine mission or possession\n• **Obsessions** — intrusive, unwanted thoughts\n• **Compulsions** — repetitive behaviors to reduce anxiety\n• **Phobias** — specific fears\n• **Ruminations** — repetitive worried thoughts\n• **Overvalued ideas** — strongly held but not delusional\n\n**Possession of Thought:**\n• Thought broadcasting — belief thoughts are transmitted to others\n• Thought insertion — belief thoughts are placed by external force\n• Thought withdrawal — belief thoughts are being removed\n\n**PERCEPTION** — sensory experiences.\n\n**PERCEPTIONS Mnemonic:**\n• **P**erception disturbances?\n• **E**ncephalitis considered?\n• **R**eflex hallucinations?\n• **C**oncentration affected?\n• **E**xperiences — derealization, depersonalization?\n• **P**seudohallucinations (insight preserved)?\n• **T**actile, auditory, visual, gustatory, olfactory hallucinations?\n• **I**pseity disturbance (disturbed sense of self)?\n• **O**rganic states?\n• **N**egative symptoms?\n• **S**ensory impairment?\n\n**Command hallucinations:** Ask specifically, document content.\n\n**Screening Questions:**\n• "Do you see or hear things that others don\'t?"\n• "Do you ever feel like things aren\'t real?"\n• "Do you have thoughts that feel intrusive or hard to stop?"\n\n**Note:** SI/HI is assessed in the Safety module.\n\n**Example:** "Patient reports auditory hallucinations (non-command voices commenting on actions). Denies visual hallucinations. Endorses paranoid ideation that coworkers are monitoring him."',
         citation: [1, 6, 9, 10],
         next: 'psych-cognition',
+        summary: 'WHAT they think — delusions, obsessions, hallucinations, command hallucinations (ask specifically)',
+        safetyLevel: 'warning',
     },
     {
         id: 'psych-cognition',
@@ -125,6 +139,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Cognitive assessment** determines how well the patient processes information, recalls memories, and maintains awareness.\n\n**Alertness:**\n• Alert, lethargic, obtunded, stuporous, comatose\n\n**Orientation** (document as A&Ox3 or A&Ox4):\n• Person — "What is your name?"\n• Place — "Where are you right now?"\n• Time — "What year/month/day is it?"\n• Situation — "Why are you here today?"\n\n**Clouding of Consciousness:**\n• Drowsiness, memory impairment, impaired concentration\n• Subtle fluctuations in awareness (→ delirium)\n\n**Attention & Concentration:**\n• Serial 7s (100, 93, 86, 79, 72...)\n• Spell "WORLD" backward\n• Days of the week backward\n• Digit span forward/backward\n\n**Memory:**\n• **Immediate** — repeat 3 words (apple, table, penny)\n• **Short-term** — recall those 3 words after 5 minutes\n• **Long-term** — biographical facts (birthday, address)\n\n**Visuospatial Functioning:**\n• Clock drawing test (draw clock showing 11:10)\n• Copy intersecting pentagons or 3D cube\n\n**Abstract Reasoning:**\n• Similarities — "How are an apple and orange alike?"\n• Proverb interpretation — "A stitch in time saves nine"\n\n**Language:**\n• Naming — point to common objects\n• Comprehension — follow multi-step commands\n• Repetition — "No ifs, ands, or buts"\n\n**Formal Screening:** Consider MMSE (cutoff 24/30) or MoCA (cutoff 26/30) if cognitive impairment suspected.\n\n**Cultural Considerations:** Language barriers, education level, and cultural norms may affect performance. Use interpreter services. Adjust expectations for literacy and background. General knowledge varies by culture/ethnicity.\n\n**Reversible causes to consider:** hypothyroidism, B12 deficiency, infections, medications (beta-blockers, steroids, anticholinergics), substance use.\n\n**Assessment Prompts:**\n• "Can you tell me where we are and what today\'s date is?"\n• "I\'ll say 3 words — can you repeat them back to me?"\n\n**Example:** "Alert and oriented x4. Attention fair, distracted during serial 7s. Recalls 2/3 words at 5 minutes. Insight and judgment limited."',
         citation: [1, 4, 6, 9, 10],
         next: 'psych-safety',
+        summary: 'Orientation, attention (serial 7s), memory (3-word recall), abstract reasoning, clock drawing test',
     },
     // =====================================================================
     // MODULE 4: SAFETY ASSESSMENT
@@ -136,6 +151,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         title: '8. Safety — SI/HI Screening',
         body: '**Suicidal Ideation — ask directly:**\n• "Do you feel that life is not worth living?"\n• "Have you had thoughts of hurting yourself?"\n• "Have you thought about killing yourself?"\n• "Do you have a plan? Do you have the means?"\n• "Have you ever attempted suicide before?"\n\nConsider using the **Columbia Suicide Severity Rating Scale (C-SSRS)** for structured screening.\n\n**Homicidal Ideation — ask directly:**\n• "Have you had thoughts of hurting anyone else?"\n• "Is there anyone you feel angry enough to harm?"\n• "Do you have a plan or access to weapons?"\n\n**Risk Factors for Suicide:**\n• Previous attempts (strongest predictor)\n• Access to lethal means — **ask specifically about firearms**\n• Recent losses, social isolation\n• Substance use, chronic pain\n• Male sex, older age, psychiatric diagnosis\n• Recent ED visits, recent discharge from psychiatric facility\n\n**Protective Factors:**\n• Social support, children at home\n• Future orientation, religious beliefs\n• Therapeutic alliance, treatment engagement\n\n**Descriptors:** Not suicidal, passive ideation, active ideation with/without plan, intent reported, homicidal intent reported.',
         citation: [1, 5, 7],
+        summary: 'Ask directly about SI/HI — previous attempts strongest predictor, ask specifically about firearms access',
+        safetyLevel: 'critical',
         options: [
             {
                 label: 'No SI / HI',
@@ -170,6 +187,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Passive SI** — patient expresses desire to be dead or not alive but denies active plan or intent.\n\n**Further Assessment:**\n• Frequency and duration of thoughts\n• Any preparatory behaviors (giving away possessions, writing notes)\n• Access to means — **ask specifically about firearms**\n• Substance use (acutely increases risk)\n• Recent changes in behavior or functioning\n\n**Safety Planning (Stanley-Brown Model):**\n1. Warning signs that a crisis is developing\n2. Internal coping strategies\n3. People and social settings that provide distraction\n4. People to contact for help\n5. Professionals and agencies to contact\n6. Making the environment safe (lethal means counseling)\n\n**Disposition Considerations:**\n• Means restriction counseling (document specifically)\n• Outpatient psychiatric follow-up within 48-72 hours\n• Crisis resources: **988 Suicide & Crisis Lifeline**\n• Consider social work consult\n• Discharge may be appropriate if patient is **not intoxicated, has support system, agrees to safety plan, and can contract for safety**\n\n**Document:** risk factors, protective factors, safety plan, and clinical reasoning for disposition.',
         citation: [1, 5, 7],
         next: 'psych-insight',
+        summary: 'Safety planning (Stanley-Brown), means restriction counseling, 988 Lifeline, outpatient follow-up 48-72h',
     },
     {
         id: 'psych-si-active',
@@ -200,6 +218,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Insight** — the extent to which the patient recognizes and appraises their experiences.\n\n**Levels of Insight:**\n• **Good / Complete** — acknowledges illness, understands need for treatment, willing to engage\n• **Fair / Partial** — acknowledges some symptoms but minimizes severity or attributes to wrong cause\n• **Poor / Limited** — denies illness, blames external factors, resistant to treatment\n• **Absent / None** — no recognition of illness whatsoever\n\n**Key Questions:**\n• Do they have insight into their symptoms and diagnosis?\n• What is their judgment on the problem?\n• Are they willing to work with healthcare professionals?\n• Are they AWARE of potential treatments?\n• Are they ACCEPTING that the problem may be a result of mental illness?\n\n**Judgment** — patient\'s decision-making capacity.\n\n**Judgment Levels:** Good, fair, poor, impaired, inflated.\n\n**Assessment Methods:**\n• "What would you do if you found a stamped, addressed letter on the ground?"\n• "What would you do if you smelled smoke in a crowded theater?"\n• Evaluate recent decisions and their consequences\n• Assess understanding of treatment recommendations\n• Assess problem-solving ability\n\n**Capacity** (4 criteria):\n1. Express a consistent choice\n2. Understand the relevant information\n3. Appreciate how it applies to their situation\n4. Rationally manipulate the information\n\n**Clinical Judgment & Risk Assessment:**\nSynthesize all MSE findings into an overall risk formulation. Consider whether the patient is a danger to self, danger to others, or gravely disabled.\n\n**Example:** "Insight is poor — patient denies any mental health concerns despite florid psychotic symptoms. Judgment impaired as evidenced by inability to plan for basic safety needs."',
         citation: [1, 3, 9, 10],
         next: 'psych-labs',
+        summary: 'Insight: good/fair/poor/absent; Judgment: decision-making capacity (4 criteria); synthesize overall risk',
     },
     {
         id: 'psych-labs',
@@ -209,6 +228,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         body: '**Consider labs to rule out medical contributors to psychiatric symptoms:**\n\n**Routine:**\n• CBC — infection, anemia\n• BMP — electrolytes, glucose, renal function\n• TSH — hypothyroidism / hyperthyroidism\n• Urinalysis — UTI (especially elderly with altered mental status)\n\n**As Clinically Indicated:**\n• Urine drug screen — substance-induced symptoms\n• Blood alcohol level\n• B12 and folate — deficiency causes cognitive/mood changes\n• LFTs — hepatic encephalopathy\n• HIV testing\n• RPR/VDRL — neurosyphilis\n• Lyme titer (endemic areas)\n• Ammonia level\n• Acetaminophen and salicylate levels (if overdose suspected)\n\n**Imaging:**\n• CT head — first psychotic break, focal neuro findings, trauma, elderly new-onset symptoms\n\n**Abnormal findings should prompt medical workup before attributing symptoms to primary psychiatric illness.**\n\n**Environmental Assessment:**\nWhen conducting MSE in the patient\'s home or residential setting, physical surroundings offer clues about cognitive functioning, reality testing, and self-care capacity (hoarding, safety hazards, food availability).',
         citation: [1, 4, 9],
         next: 'psych-disposition',
+        summary: 'CBC, BMP, TSH, UA baseline — UDS/BAL, CT head for first psychotic break or new focal findings',
     },
     {
         id: 'psych-disposition',
@@ -236,6 +256,7 @@ export const PSYCH_ASSESSMENT_NODES = [
                 next: 'psych-admit',
             },
         ],
+        summary: 'Document all 10 MSE components, diagnosis, capacity assessment, treatment plan — use objective language',
     },
     {
         id: 'psych-discharge',

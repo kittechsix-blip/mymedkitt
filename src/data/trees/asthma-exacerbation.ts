@@ -26,6 +26,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'asthma-severity-score', label: 'Severity Score' },
     ],
     next: 'asthma-severity',
+
+    summary: 'Maximize medical therapy before intubation — most patients can avoid the tube with proper management',
+    skippable: true,
   },
 
   {
@@ -40,6 +43,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Severe', description: 'PEF ≤50%, speaks words only, SpO2 <90%', next: 'asthma-severe-immediate' },
       { label: 'Life-Threatening', description: 'Silent chest, AMS, bradycardia, PEF <25%', next: 'asthma-critical' },
     ],
+
+    summary: 'Classify severity by speech, RR, HR, SpO2, PEF — silent chest is a DIRE sign of critically severe obstruction',
+    safetyLevel: 'warning',
   },
 
   {
@@ -53,6 +59,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'pef-predicted', label: 'PEF % Predicted' },
     ],
     next: 'asthma-response-assessment',
+
+    summary: 'SABA q20min x3, ipratropium first hour only, steroids early (reduce admissions), reassess at 60-90 min by PEF',
   },
 
   {
@@ -66,6 +74,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'PEF 50-70% - Incomplete', description: 'Some improvement, still symptomatic', next: 'asthma-continuous-nebs' },
       { label: 'PEF <50% - Poor Response', description: 'Minimal improvement despite therapy', next: 'asthma-severe-immediate' },
     ],
+
+    summary: 'PEF-guided reassessment at 60-90 min — >70% discharge, 50-70% continue, <50% escalate to severe protocol',
   },
 
   {
@@ -76,6 +86,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Severe exacerbation requires AGGRESSIVE therapy:** [1][3][5]\n\n**IMMEDIATE SIMULTANEOUS ACTIONS:**\n1. **High-flow O2**: NRB or HFNC to maintain SpO2 ≥92%\n2. **Continuous nebs**: Start immediately (not intermittent)\n3. **IV steroids**: Methylprednisolone 125mg IV\n4. **IV access**: Large bore, draw labs\n5. **IV Magnesium**: 2g over 20 minutes\n\n**Labs to Draw:**\n• VBG (pH, pCO2 - rising CO2 is ominous)\n• BMP (K+ often low from beta-agonists)\n• Consider troponin if cardiac history\n\n**Continuous Monitoring:**\n• SpO2, RR, ability to speak\n• Reassess every 15-30 minutes\n• Prepare for escalation if no improvement\n\n**🚨 If no improvement in 30-60 min → escalate therapies**',
     citation: [1, 3, 5],
     next: 'asthma-continuous-nebs',
+
+    summary: 'Continuous nebs, methylpred 125mg IV, Mg 2g IV over 20min, VBG for rising CO2 — escalate if no improvement in 30-60min',
+    safetyLevel: 'warning',
   },
 
   {
@@ -86,6 +99,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**🚨 CRITICAL STATUS - IMPENDING RESPIRATORY FAILURE:** [3][6]\n\n**Immediate Actions:**\n1. **Call for help** - anesthesia, ICU, RT\n2. **Prepare airway equipment** - but don\'t intubate yet if possible\n3. **Aggressive medical therapy** while preparing\n4. **BiPAP with ketamine sedation** if patient can tolerate\n\n**Signs of Impending Arrest:**\n• Silent chest\n• Altered mental status\n• Bradycardia\n• Hypotension\n• Cyanosis\n\n**If Patient Arrests:**\nProceed immediately to intubation - no time for DSI\n\n**If Patient Still Conscious:**\nTry maximum medical therapy + BiPAP with ketamine first.\n\n"Intubation is often the beginning of the end in severe asthma" [3]',
     citation: [3, 6],
     next: 'asthma-critical-decision',
+
+    summary: 'Impending arrest: silent chest, AMS, bradycardia — try BiPAP + ketamine first, intubation is often beginning of end',
+    safetyLevel: 'critical',
   },
 
   {
@@ -98,6 +114,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Still Conscious', description: 'Try max medical therapy + BiPAP', next: 'asthma-bipap-sedation' },
       { label: 'Agonal/Arresting', description: 'Must intubate immediately', next: 'asthma-crash-airway' },
     ],
+
+    summary: 'Still conscious → max medical therapy + BiPAP; agonal/arresting → intubate immediately',
   },
 
   // =====================================================================
@@ -112,6 +130,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Continuous nebulization is superior to intermittent for severe asthma:** [7]\n\n**Protocol:**\n• **Albuterol**: 10-15mg/hr continuous (undiluted albuterol in nebulizer)\n• **Ipratropium**: Add 0.5mg to first hour only\n• Run continuously until patient improves\n\n**How to Set Up:**\n1. Attach nebulizer to O2 at 8-10 L/min\n2. Add undiluted albuterol 5mg/mL (3-4 mL = 15-20mg)\n3. Run until empty, immediately refill\n4. Use inline nebulizer if on BiPAP/HFNC\n\n**Evidence:**\n• Cochrane review: continuous > intermittent in severe asthma\n• Fewer hospitalizations, greater FEV1 improvement\n• Safe - monitor for tremor, tachycardia, hypokalemia [7]\n\n**Monitor for Beta-Agonist Side Effects:**\n• Tachycardia (usually tolerable)\n• Hypokalemia - check q2-4h, replace aggressively\n• Tremor\n• Lactic acidosis (usually mild)',
     citation: [7],
     next: 'asthma-magnesium',
+
+    summary: 'Continuous nebs (10-15mg/hr albuterol) superior to intermittent — monitor K+, tachycardia, lactic acidosis',
   },
 
   {
@@ -122,6 +142,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Magnesium is a bronchodilator for SEVERE asthma:** [5][8]\n\n**Dosing:**\n• **2 grams IV over 20 minutes**\n• Can repeat x1 if severe\n• Max benefit in severe asthma (PEF <25%)\n\n**Mechanism:**\n• Smooth muscle relaxation\n• Inhibits calcium-mediated bronchoconstriction\n• Decreases inflammatory mediator release\n\n**Evidence:**\n• NNT = 4 to prevent hospitalization in severe asthma [8]\n• Most benefit when PEF <25% predicted\n• Safe with minimal side effects\n\n**Side Effects:**\n• Flushing, warmth (common, benign)\n• Hypotension (rare at this dose)\n• Respiratory depression (very rare)\n\n**⚠️ Less effective in mild-moderate asthma - reserve for severe cases**\n\nCheck Mg level only if giving multiple doses or renal impairment',
     citation: [5, 8],
     next: 'asthma-adjunct-decision',
+
+    summary: 'IV Mg 2g over 20min — NNT 4 to prevent admission in severe asthma (PEF <25%), less effective in mild-moderate',
   },
 
   {
@@ -136,6 +158,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Not Improving - Add Epinephrine', description: 'SC/IM or IV for critical', next: 'asthma-epinephrine' },
       { label: 'Fatiguing - Need BiPAP', description: 'Non-invasive ventilation', next: 'asthma-bipap-indications' },
     ],
+
+    summary: 'Assess response after continuous nebs + Mg — route to ketamine, epinephrine, BiPAP, or disposition',
   },
 
   {
@@ -146,6 +170,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Ketamine has bronchodilatory properties:** [9]\n\n**Mechanism:**\n• Direct smooth muscle relaxation\n• Catecholamine release (endogenous epinephrine)\n• Inhibits vagal-mediated bronchoconstriction\n\n**Dosing for Bronchospasm (sub-dissociative):**\n• **0.1-0.2 mg/kg IV bolus** (10-20mg for typical adult)\n• Can repeat q10-15 min as needed\n• Or **0.5 mg/kg/hr IV infusion**\n\n**Benefits in Asthma:**\n• Does NOT cause respiratory depression at sub-dissociative doses\n• Bronchodilation without airway collapse\n• Can use as sedation for BiPAP (see next)\n• Maintains airway reflexes\n\n**Side Effects:**\n• Emergence reaction (rare at low doses)\n• Hypersalivation - give glycopyrrolate 0.2mg IV if needed\n• Nystagmus, feeling "weird"\n\n**EMCrit Pearl:** "Ketamine is the sedative of choice in severe asthma - it opens airways rather than collapsing them" [9]',
     citation: [9],
     next: 'asthma-ketamine-next',
+
+    summary: 'Sub-dissociative ketamine 0.1-0.2 mg/kg — bronchodilatory without respiratory depression, ideal BiPAP sedative',
   },
 
   {
@@ -159,6 +185,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Add Epinephrine', description: 'Still not improving', next: 'asthma-epinephrine' },
       { label: 'Reassess', description: 'Check response', next: 'asthma-disposition-criteria' },
     ],
+
+    summary: 'Route after ketamine — BiPAP sedation, add epinephrine, or reassess for disposition',
   },
 
   {
@@ -169,6 +197,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Epinephrine for severe asthma unresponsive to beta-agonists:** [10][11]\n\n**Routes & Dosing:**\n\n**Subcutaneous/IM:**\n• **0.3-0.5 mg (1:1000) IM/SQ q20min x 3 doses**\n• Same as anaphylaxis dosing\n• Fast-acting, effective for severe asthma\n\n**IV (for critical patients):**\n• **Push-dose epi: 10-20 mcg IV q2-3min**\n• Or infusion: 1-10 mcg/min\n• Reserve for impending arrest\n\n**Nebulized Epinephrine:**\n• L-epinephrine 0.5mL of 2.25% (racemic) in 3mL NS\n• Or regular epinephrine 3-5mg (3-5mL of 1:1000)\n• Add to continuous albuterol\n\n**When to Use:**\n• Severe asthma failing SABA\n• Young patients without cardiac disease\n• Anaphylaxis component suspected\n\n**⚠️ Caution in elderly, cardiac history, hypertension**\n\n**Pearl:** IM epinephrine is safe and underutilized in severe asthma [10]',
     citation: [10, 11],
     next: 'asthma-epi-next',
+
+    summary: 'IM epi 0.3-0.5mg q20min x3 — safe and underutilized in severe asthma, caution in elderly/cardiac patients',
+    safetyLevel: 'warning',
   },
 
   {
@@ -182,6 +213,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Need BiPAP', description: 'Fatiguing, needs support', next: 'asthma-bipap-indications' },
       { label: 'Need Intubation', description: 'Failing all therapies', next: 'asthma-intubation-indications' },
     ],
+
+    summary: 'Assess response after epinephrine — route to disposition, BiPAP, or intubation',
   },
 
   // =====================================================================
@@ -196,6 +229,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**BiPAP can prevent intubation in severe asthma:** [12]\n\n**Indications for BiPAP:**\n• Severe asthma failing maximal medical therapy\n• Fatigue/respiratory distress despite treatment\n• Rising pCO2 on VBG\n• Patient still alert and cooperative\n\n**Contraindications:**\n• Altered mental status (unless from hypercapnia)\n• Inability to protect airway\n• Facial trauma/burns\n• Uncooperative patient (consider sedation first)\n• Hemodynamic instability\n\n**Evidence:**\n• Cochrane review shows benefit in acute asthma [12]\n• Reduces work of breathing\n• Can deliver nebulized meds through circuit\n• Bridge to allow medications time to work\n\n**Key Concept:**\nBiPAP "buys time" for medications to work. Combine with ketamine sedation if patient is anxious or fighting the mask.',
     citation: [12],
     next: 'asthma-bipap-settings',
+
+    summary: 'BiPAP buys time for meds to work — contraindicated with AMS, inability to protect airway, hemodynamic instability',
   },
 
   {
@@ -206,6 +241,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Initial BiPAP Settings for Asthma:** [3][12]\n\n**Starting Settings:**\n• **EPAP (PEEP): 5 cm H2O** - start LOW\n• **IPAP: 10-12 cm H2O** - titrate for comfort\n• **Pressure Support = IPAP - EPAP = 5-7 cm H2O**\n• **FiO2: Start at 100%, wean to SpO2 92-95%**\n\n**Why LOW PEEP in Asthma?**\n• Asthmatics have severe air-trapping (auto-PEEP)\n• External PEEP can worsen hyperinflation\n• Start low, only increase if needed\n\n**Titration:**\n• Increase IPAP by 2 cm q5-10 min for comfort/tidal volume\n• Max IPAP usually 15-18 cm H2O\n• Keep EPAP low (5-8) unless clear benefit\n\n**Add Inline Nebulizer:**\n• Continue continuous albuterol through BiPAP circuit\n• Place nebulizer between mask and expiratory port\n\n**Monitoring:**\n• Respiratory rate (should decrease)\n• Patient comfort\n• VBG at 30-60 min (pCO2 should improve)\n• SpO2 (target 92-95%)',
     citation: [3, 12],
     next: 'asthma-bipap-tolerance',
+
+    summary: 'Start LOW PEEP (EPAP 5) — asthmatics have auto-PEEP, external PEEP worsens hyperinflation; add inline nebs',
   },
 
   {
@@ -219,6 +256,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'No - Anxious/Fighting', description: 'Needs sedation', next: 'asthma-bipap-sedation' },
       { label: 'Failing BiPAP', description: 'Consider intubation', next: 'asthma-intubation-indications' },
     ],
+
+    summary: 'Assess BiPAP tolerance — route to continued monitoring, sedation for compliance, or intubation',
   },
 
   {
@@ -229,6 +268,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Ketamine is the IDEAL sedative for BiPAP in asthma:** [9]\n\n**Why Ketamine?**\n• Does NOT cause respiratory depression\n• Bronchodilatory properties\n• Maintains airway reflexes\n• Patient remains arousable\n\n**Dosing for BiPAP Tolerance:**\n• **Bolus: 0.2-0.3 mg/kg IV** (20-30mg for typical adult)\n• **Infusion: 0.5-1 mg/kg/hr** (optional for ongoing sedation)\n• Can repeat bolus q10-15 min as needed\n\n**Goal:**\n• Patient calm but arousable\n• Tolerating mask\n• Not fighting BiPAP\n• Still breathing spontaneously\n\n**Adjuncts if Needed:**\n• **Glycopyrrolate 0.2-0.4mg IV** for hypersalivation\n• Small dose **midazolam 0.5-1mg IV** if emergence concern (rare)\n\n**⚠️ AVOID in asthma:**\n• Propofol (respiratory depression)\n• High-dose benzodiazepines\n• Opioids (respiratory depression)\n\n**Pearl:** "A little ketamine goes a long way - start low"',
     citation: [9],
     next: 'asthma-bipap-settings',
+
+    summary: 'Ketamine 0.2-0.3 mg/kg IV for BiPAP tolerance — AVOID propofol, high-dose benzos, opioids (respiratory depression)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -239,6 +281,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Signs BiPAP is Working:**\n• Decreased respiratory rate\n• Improved patient comfort\n• Decreased accessory muscle use\n• Improving pCO2 on VBG\n• SpO2 improving or stable\n\n**Weaning BiPAP:**\n1. Continue for 1-2 hours minimum after improvement\n2. Decrease IPAP by 2 cm q30-60 min as tolerated\n3. Trial off BiPAP when:\n   - IPAP ≤10, EPAP ≤5\n   - Comfortable\n   - RR <25\n   - SpO2 >92% on low FiO2\n\n**After BiPAP:**\n• Continue continuous nebs\n• Reassess for disposition\n• Check post-BiPAP PEF\n\n**If BiPAP Tolerated Well:**\n• Most can avoid intubation\n• ICU admission for close monitoring\n• Continue aggressive medical therapy',
     citation: [1, 12],
     next: 'asthma-disposition-criteria',
+
+    summary: 'BiPAP working: decreased RR, improved comfort, improving pCO2 — wean IPAP by 2cm q30-60min when stable',
   },
 
   // =====================================================================
@@ -253,6 +297,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Intubation in asthma is HIGH RISK - avoid if possible:** [3][6]\n\n**Absolute Indications:**\n• Respiratory arrest\n• Cardiac arrest\n• Severe hypoxemia despite maximal therapy\n• Obtunded/cannot protect airway\n\n**Relative Indications:**\n• Fatigue despite maximal therapy + BiPAP\n• Rapidly rising pCO2 with acidosis\n• Unable to tolerate BiPAP\n\n**Why Is Intubation Dangerous?**\n• Paralysis removes compensatory mechanisms\n• Air trapping worsens → breath stacking → hypotension\n• Difficult to ventilate\n• High mortality in intubated asthmatics\n\n**EMCrit Rule:**\n"If you intubate an asthmatic and they arrest, disconnect the ETT and compress the chest manually for 30-60 seconds to relieve air trapping"\n\n**Before Intubating - Ask:**\n1. Have I maximized continuous nebs?\n2. Have I given IV Mg?\n3. Have I tried ketamine?\n4. Have I tried epinephrine?\n5. Have I tried BiPAP with ketamine sedation?',
     citation: [3, 6],
     next: 'asthma-intubation-decision',
+
+    summary: 'Intubation is HIGH RISK — paralysis removes compensation, air trapping causes hypotension; exhaust all options first',
+    safetyLevel: 'critical',
   },
 
   {
@@ -267,6 +314,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Must Intubate - DSI', description: 'Patient still conscious', next: 'asthma-dsi' },
       { label: 'Crash Intubation', description: 'Agonal or arresting', next: 'asthma-crash-airway' },
     ],
+
+    summary: 'Decision point: return to medical therapy, try BiPAP + ketamine, DSI, or crash airway',
   },
 
   {
@@ -277,6 +326,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**DSI = preoxygenate BEFORE paralyzing:** [13]\n\n**Why DSI in Asthma?**\n• Asthmatics often hypoxemic and hypercapnic\n• BiPAP/HFNC for preoxygenation is superior\n• Ketamine allows preoxygenation without losing reflexes\n• Time to denitrogenate properly\n\n**DSI Protocol:**\n1. **Ketamine 1-1.5 mg/kg IV** - dissociate the patient\n2. **Apply BiPAP or NRB** for 3-5 minutes\n3. **When SpO2 optimal** (ideally >95%), give:\n   - Ketamine 1-2 mg/kg IV (induction)\n   - Rocuronium 1.2 mg/kg IV\n4. **Intubate when paralyzed**\n\n**Why Ketamine for Induction?**\n• Bronchodilatory\n• Maintains hemodynamic stability\n• No histamine release\n\n**Avoid in Asthma Intubation:**\n• ~~Propofol~~ - hypotension, no bronchodilation\n• ~~Etomidate~~ - no bronchodilation\n• ~~Succinylcholine~~ - histamine release\n\n**Tube Selection:**\n• Large ETT (7.5-8.0 for women, 8.0-8.5 for men)\n• Larger tube = less resistance for air trapping',
     citation: [9, 13],
     next: 'asthma-vent-settings',
+
+    summary: 'DSI: ketamine 1-1.5 mg/kg → BiPAP preoxygenation 3-5min → roc 1.2 mg/kg; AVOID propofol, etomidate, succinylcholine',
+    safetyLevel: 'critical',
   },
 
   {
@@ -287,6 +339,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Patient Arresting or Agonal - No Time for DSI:** [3]\n\n**Immediate Actions:**\n1. **Bag-mask ventilate** - slow breaths, allow full exhalation\n2. **Intubate immediately** - use ketamine 1.5-2 mg/kg if IV available\n3. **Skip paralytic** if truly agonal/apneic\n4. **Largest ETT possible**\n\n**If Already Intubated and Arrests:**\n1. **Disconnect ETT from ventilator**\n2. **Manual chest compression** for 30-60 seconds\n3. This allows air trapped under pressure to escape\n4. Reconnect and ventilate with LOW rate, LONG expiratory time\n\n**Push-Dose Epinephrine:**\n• If hypotensive: 10-20 mcg IV q2-3min\n• Full arrest: 1mg IV per ACLS\n\n**Post-Intubation:**\n• Immediate post-intubation CXR (pneumothorax?)\n• Continue continuous nebs through vent circuit\n• Very conservative ventilator settings',
     citation: [3],
     next: 'asthma-vent-settings',
+
+    summary: 'If intubated and arrests: DISCONNECT ETT, compress chest 30-60s to relieve air trapping, then low rate ventilation',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -305,6 +360,9 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'ie-ratio', label: 'I:E Ratio' },
     ],
     next: 'asthma-permissive-hypercapnia',
+
+    summary: 'LOW rate 8-12, I:E 1:4-1:5, PEEP 0-5 — if hypotensive post-intubation, disconnect ETT and compress chest',
+    safetyLevel: 'critical',
   },
 
   {
@@ -315,6 +373,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Permissive hypercapnia is REQUIRED in severe asthma:** [14][15]\n\n**Concept:**\n• Accept elevated pCO2 to avoid dangerous ventilator settings\n• Priority: prevent air trapping, not normalize pCO2\n• "Lungs are obstructed, not dead - CO2 will normalize later"\n\n**Acceptable Targets:**\n• **pH >7.15-7.20** (tolerate lower if stable)\n• **pCO2: 60-80 mmHg OK** (even higher if needed)\n• **SpO2 >88-90%**\n\n**What NOT to Do:**\n• ❌ Don\'t increase rate to "fix" pCO2\n• ❌ Don\'t increase tidal volume significantly\n• ❌ Don\'t chase normal ABG numbers\n\n**Contraindications to Permissive Hypercapnia:**\n• Elevated ICP\n• Severe metabolic acidosis (pH already very low)\n• Cardiovascular instability\n\n**Evidence:**\n• Tuxen DV showed permissive hypercapnia dramatically reduced mortality in status asthmaticus [15]\n• Traditional ventilation (normal pCO2) = 38% mortality\n• Permissive hypercapnia = 0% mortality in his series',
     citation: [14, 15],
     next: 'asthma-vent-troubleshoot',
+
+    summary: 'Accept pCO2 60-80+, pH >7.15 — do NOT increase rate to fix pCO2; Tuxen series: 0% mortality with permissive hypercapnia',
   },
 
   {
@@ -325,6 +385,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Common Problems and Solutions:** [3][14]\n\n**HYPOTENSION Post-Intubation:**\nMost common cause = air trapping\n1. **Disconnect ETT** from vent for 30-60 sec\n2. **Compress chest** to expel trapped air\n3. **Reconnect** with LOWER rate, LONGER expiratory time\n4. If persists → pneumothorax? → needle decompression\n\n**HIGH PLATEAU PRESSURES (>30):**\n• Auto-PEEP from air trapping\n• Decrease rate further\n• Increase expiratory time\n• Consider sedation if patient fighting vent\n\n**BREATH STACKING:**\n• Patient triggering extra breaths\n• Deep sedation with propofol + fentanyl\n• May need paralysis (cisatracurium)\n• Decrease sensitivity if auto-triggering\n\n**WORSENING OXYGENATION:**\nRule out:\n• Pneumothorax (CXR, ultrasound)\n• Mucus plugging (suction)\n• Right mainstem intubation\n• Atelectasis\n\n**BRONCHOSPASM ON VENT:**\n• Continue continuous nebs through circuit\n• Add ketamine infusion\n• Add magnesium if not given',
     citation: [3, 14],
     next: 'asthma-vent-ongoing',
+
+    summary: 'Hypotension = disconnect ETT test; high plateau = lower rate; breath stacking = deep sedation ± paralysis',
   },
 
   {
@@ -335,6 +397,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Ongoing Management of Intubated Asthmatic:** [6]\n\n**Sedation:**\n• Propofol 25-75 mcg/kg/min + fentanyl 25-100 mcg/hr\n• Deep sedation often required initially\n• RASS -4 to -5 acceptable initially\n\n**Paralysis:**\n• May be needed for severe air trapping\n• Cisatracurium 0.15 mg/kg load, then 2-3 mcg/kg/min\n• Use train-of-four monitoring\n• Wean ASAP (increases ICU complications)\n\n**Continue Bronchodilators:**\n• Continuous albuterol via inline nebulizer\n• IV magnesium (consider infusion 1-2 g/hr)\n• IV methylprednisolone 40-60mg q6h\n\n**Monitoring:**\n• VBG/ABG q4-6h initially\n• Plateau pressure and auto-PEEP\n• CXR daily (pneumothorax)\n• Electrolytes (hypokalemia common)\n\n**Liberation:**\n• Improve bronchospasm before weaning\n• SBT only when airway pressures improved\n• High risk for reintubation - be conservative',
     citation: [6],
     next: 'asthma-disposition-icu',
+
+    summary: 'Deep sedation (RASS -4/-5), paralysis if needed, continue inline nebs, wean as bronchospasm improves',
   },
 
   // =====================================================================
@@ -352,6 +416,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { id: 'pef-predicted', label: 'PEF % Predicted' },
     ],
     next: 'asthma-dispo-decision',
+
+    summary: 'PEF ≥70% = discharge, 50-69% = observe, <50% = admit, <25% = ICU — prior intubation/ICU favors admission',
   },
 
   {
@@ -366,6 +432,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
       { label: 'Admit to Floor', description: 'PEF <50%, needs ongoing therapy', next: 'asthma-admit-floor' },
       { label: 'Admit to ICU', description: 'BiPAP, severe features, PEF <25%', next: 'asthma-disposition-icu' },
     ],
+
+    summary: 'PEF-guided disposition decision: discharge, observation, floor, or ICU based on response to treatment',
   },
 
   {
@@ -387,6 +455,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Observation unit for borderline cases:**\n\n**Ideal Candidates:**\n• PEF 50-69% predicted\n• Improving but not quite ready for discharge\n• Need additional nebulizer treatments\n• Social factors requiring observation\n\n**Observation Protocol:**\n• Continue nebs q2-4h\n• Reassess PEF q4h\n• Monitor for deterioration\n• Clear discharge criteria\n\n**Discharge from Observation if:**\n• PEF improves to ≥70%\n• Symptom resolution\n• SpO2 ≥94% RA\n• Tolerating PO\n• 6-12 hours symptom-free\n\n**Convert to Admission if:**\n• PEF not improving\n• Recurrent symptoms\n• Requires continuous nebs\n• Unable to wean O2\n\n**Observation is NOT appropriate for:**\n• Severe exacerbation\n• High-risk patients\n• BiPAP requirement\n• Prior intubation/ICU',
     citation: [1, 2],
     next: 'asthma-dispo-decision',
+
+    summary: 'PEF 50-69% observation candidates — reassess PEF q4h, discharge if >70%, admit if not improving',
   },
 
   {
@@ -397,6 +467,8 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     body: '**Floor Admission Criteria:**\n\n**Admit to Medical Floor if:**\n• PEF 25-50% predicted after ED treatment\n• Requiring supplemental O2\n• Requiring nebs more frequently than q4h\n• High-risk features (prior intubation, multiple ED visits)\n• Unable to be safely discharged\n\n**Floor Orders:**\n• Continuous SpO2 monitoring\n• Scheduled albuterol q4h + PRN\n• IV or PO steroids\n• RT to titrate O2 to SpO2 ≥92%\n• Call MD if: RR >30, SpO2 <90%, severe distress\n\n**Monitor For:**\n• Need for escalation to ICU\n• Worsening despite treatment\n• Development of pneumonia\n• Mucus plugging\n\n**Expected LOS:**\n• Most floor admissions 1-3 days\n• Longer if requiring IV steroids\n• Can discharge when PEF >70% and off O2',
     citation: [1, 2],
     next: 'asthma-dispo-decision',
+
+    summary: 'Floor admission for PEF 25-50%, supplemental O2 need, or high-risk features — expected LOS 1-3 days',
   },
 
   {

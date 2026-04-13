@@ -41,6 +41,8 @@ Awake techniques require **15-30 minutes** of preparation. If you don't have thi
             { id: 'awake-who-needs', label: 'Who Needs Awake?' },
         ],
         next: 'awake-indications',
+        summary: 'Preserve spontaneous ventilation — confirm cords BEFORE paralyzing; requires 15-30 min prep, 85% overall success',
+        skippable: true,
     },
     {
         id: 'awake-indications',
@@ -75,6 +77,7 @@ Awake techniques require **15-30 minutes** of preparation. If you don't have thi
             { label: 'Neck trauma / mass', description: 'Distorted anatomy', next: 'awake-trauma', urgency: 'urgent' },
             { label: 'Metabolic acidosis', description: 'Cannot tolerate apnea', next: 'awake-acidosis', urgency: 'urgent' },
         ],
+        summary: 'Select primary indication — angioedema, epiglottitis, predicted difficult airway, neck trauma, or metabolic acidosis',
     },
     {
         id: 'awake-angioedema',
@@ -104,6 +107,8 @@ Awake techniques require **15-30 minutes** of preparation. If you don't have thi
 **Proceed to topicalization protocol →** [1][5]`,
         citation: [1, 5],
         next: 'awake-contraindications',
+        summary: 'Angioedema: RSI contraindicated, double-setup with surgical airway ready — 81% first-attempt success, cric in <5%',
+        safetyLevel: 'critical',
     },
     {
         id: 'awake-epiglottitis',
@@ -140,6 +145,8 @@ Awake techniques require **15-30 minutes** of preparation. If you don't have thi
 **Proceed to topicalization protocol →** [1][6]`,
         citation: [1, 6],
         next: 'awake-contraindications',
+        summary: 'Epiglottitis: maintain spontaneous ventilation, do NOT lay flat or insert tongue depressor — heliox, dex, abx',
+        safetyLevel: 'critical',
     },
     {
         id: 'awake-difficult',
@@ -173,6 +180,8 @@ Then RSI with backup plan may be reasonable.
 **Proceed to contraindications check →**`,
         citation: [1, 2],
         next: 'awake-contraindications',
+        summary: 'Choose awake when multiple difficult airway predictors, prior failed intubation, or anticipated difficult cric',
+        skippable: true,
     },
     {
         id: 'awake-trauma',
@@ -204,6 +213,8 @@ Then RSI with backup plan may be reasonable.
 **Proceed to contraindications check →**`,
         citation: [1, 3],
         next: 'awake-contraindications',
+        summary: 'Distorted anatomy from trauma/mass — smaller ETT 6.0-7.0, double-setup, call ENT/surgery early',
+        safetyLevel: 'warning',
     },
     {
         id: 'awake-acidosis',
@@ -237,6 +248,8 @@ If patient too agitated for awake approach:
 **Proceed to contraindications check →**`,
         citation: [1, 7],
         next: 'awake-contraindications',
+        summary: 'Severe metabolic acidosis — even brief apnea causes rapid pH drop; post-intubation set RR 20-30 to match compensation',
+        safetyLevel: 'warning',
     },
     {
         id: 'awake-contraindications',
@@ -268,6 +281,7 @@ Consider Delayed Sequence Intubation (DSI):
             { label: 'Patient uncooperative', description: 'Consider DSI first', next: 'awake-dsi', urgency: 'urgent' },
             { label: 'Severe bleeding / aspiration risk', description: 'Modify approach', next: 'awake-modified', urgency: 'urgent' },
         ],
+        summary: 'Screen for contraindications — uncooperative patient may need DSI first, bleeding favors VL over fiberoptic',
     },
     {
         id: 'awake-dsi',
@@ -306,6 +320,7 @@ Consider Delayed Sequence Intubation (DSI):
 **Proceed to preparation →**`,
         citation: [1, 7],
         next: 'awake-prep-overview',
+        summary: 'DSI: ketamine 1-1.5 mg/kg → preoxygenate 3-5min → topicalize if time → awake intubation while still breathing',
     },
     {
         id: 'awake-modified',
@@ -336,6 +351,7 @@ Consider Delayed Sequence Intubation (DSI):
 **Proceed to preparation →**`,
         citation: [1, 2],
         next: 'awake-prep-overview',
+        summary: 'Awake VL 89% success — less dependent on topical anesthesia quality, can suction simultaneously',
     },
     // =====================================================================
     // MODULE 2: PREPARATION
@@ -380,6 +396,7 @@ Consider Delayed Sequence Intubation (DSI):
             { id: 'awake-atomized-recipe', label: 'Atomized Recipe' },
         ],
         next: 'awake-antisialagogue',
+        summary: '15-30 min prep — equipment checklist, meds, backup surgical airway open and ready, timeline T-15 to T-0',
     },
     {
         id: 'awake-antisialagogue',
@@ -413,6 +430,7 @@ Consider Delayed Sequence Intubation (DSI):
 Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]`,
         citation: [3, 4],
         next: 'awake-route',
+        summary: 'Glycopyrrolate 0.2-0.3mg IV 15min before — dry mouth is CRITICAL, wet mucosa dilutes lidocaine → poor anesthesia',
     },
     {
         id: 'awake-route',
@@ -448,6 +466,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { label: 'Oral fiberoptic', description: 'Larger tube, no epistaxis', next: 'awake-oral-prep', urgency: 'routine' },
             { label: 'Awake video laryngoscopy', description: 'Best for bleeding/secretions', next: 'awake-vl-prep', urgency: 'routine' },
         ],
+        summary: 'Nasal fiberoptic 92% success (most comfortable), oral 57%, awake VL 89% (best for bleeding/secretions)',
     },
     // =====================================================================
     // MODULE 3: TOPICALIZATION
@@ -490,6 +509,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-topical-prep', label: 'Topical Prep Recipe' },
         ],
         next: 'awake-mad-spray',
+        summary: 'Nasal: nebulized lido → viscous gargle → oxymetazoline → nasal lido → serial NPA dilation; max 9mg/kg lidocaine',
+        safetyLevel: 'warning',
     },
     {
         id: 'awake-oral-prep',
@@ -531,6 +552,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-topical-prep', label: 'Topical Prep Recipe' },
         ],
         next: 'awake-mad-spray',
+        summary: 'Oral: nebulized lido → dry mouth → viscous lido gargle → MAD spray to cords; bite block needed; max 9mg/kg',
+        safetyLevel: 'warning',
     },
     {
         id: 'awake-vl-prep',
@@ -564,6 +587,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 **This is essentially "look before you leap" with VL instead of fiber.** [2]`,
         citation: [2],
         next: 'awake-mad-spray',
+        summary: 'VL: minimum nebulized lido + viscous gargle — hyperangulated blade, less stimulation, faster if experienced',
     },
     {
         id: 'awake-mad-spray',
@@ -601,6 +625,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-atomized-recipe', label: 'Atomized Recipe' },
         ],
         next: 'awake-sedation',
+        summary: 'MAD atomizer 4% lido to epiglottis/cords — expect cough (reaching target); track total lido dose across all routes',
     },
     // =====================================================================
     // MODULE 4: SEDATION
@@ -637,6 +662,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { label: 'Dexmedetomidine', description: 'Infusion — best comfort, no resp depression', next: 'awake-dex', urgency: 'routine' },
             { label: 'Minimal sedation', description: 'Topical only — very cooperative patient', next: 'awake-minimal-sed', urgency: 'routine' },
         ],
+        summary: 'Select sedation: ketamine (ED workhorse), dexmedetomidine (no resp depression), or minimal sedation for cooperative patients',
     },
     {
         id: 'awake-ketamine',
@@ -675,6 +701,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 **Key Point:** Never paralyze until you see cords. [1][7]`,
         citation: [1, 7],
         next: 'awake-technique-choice',
+        summary: 'Ketamine 20mg IV aliquots q2min to light sedation — NEVER paralyze until you see cords; watch for apnea at high doses',
+        safetyLevel: 'warning',
     },
     {
         id: 'awake-dex',
@@ -715,6 +743,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Not ideal for truly agitated patients [8]`,
         citation: [8],
         next: 'awake-technique-choice',
+        summary: 'Dex 0.5-1 mcg/kg load over 10min → 0.6-0.7 mcg/kg/hr — cooperative sedation, no resp depression, antisialagogue bonus',
     },
     {
         id: 'awake-minimal-sed',
@@ -747,6 +776,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 **This approach is common in planned OR cases but challenging in ED setting due to patient anxiety/illness.** [3]`,
         citation: [3],
         next: 'awake-technique-choice',
+        summary: 'Topical only for cooperative patients — midazolam 1-2mg for anxiolysis; common in OR, challenging in ED',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: TECHNIQUE
@@ -772,6 +803,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { label: 'Oral fiberoptic', description: '57% success rate', next: 'awake-oral-technique', urgency: 'routine' },
             { label: 'Awake video laryngoscopy', description: '89% success rate', next: 'awake-vl-technique', urgency: 'routine' },
         ],
+        summary: 'Final checks before proceeding — surgical airway ready, suction, paralytic drawn up, patient breathing spontaneously',
     },
     {
         id: 'awake-nasal-technique',
@@ -820,6 +852,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-nasal-steps', label: 'Nasal Steps Quick Ref' },
         ],
         next: 'awake-post-intubation',
+        summary: 'Nasal fiberoptic step-by-step: load ETT on scope → hug septum → visualize cords → advance → railroad ETT with rotation',
     },
     {
         id: 'awake-oral-technique',
@@ -871,6 +904,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-oral-steps', label: 'Oral Steps Quick Ref' },
         ],
         next: 'awake-post-intubation',
+        summary: 'Oral fiberoptic: bite block first, midline over tongue, resistance more common (rotate counterclockwise if stuck)',
     },
     {
         id: 'awake-vl-technique',
@@ -918,6 +952,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { id: 'awake-see-cords-go', label: 'See Cords → Go Checklist' },
         ],
         next: 'awake-post-intubation',
+        summary: 'Awake VL: confirm cords (Grade 1-2) → tube under vision → full induction ONLY after tube through cords; DO NOT paralyze if Grade 3-4',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: POST-INTUBATION & COMPLICATIONS
@@ -959,6 +995,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Complications encountered`,
         citation: [1, 7],
         next: 'awake-complications',
+        summary: 'After ETT confirmed: full induction (ketamine/propofol) ± paralytic; match vent settings to patient physiology',
     },
     {
         id: 'awake-complications',
@@ -985,6 +1022,7 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
             { label: 'Laryngospasm', description: 'Airway obstruction', next: 'awake-laryngospasm', urgency: 'critical' },
             { label: 'Cannot visualize', description: 'Failed technique', next: 'awake-failed', urgency: 'urgent' },
         ],
+        summary: 'Screen for complications: desaturation (12%), epistaxis, laryngospasm, failed visualization — route to management',
     },
     {
         id: 'awake-desat',
@@ -1013,6 +1051,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 Awake technique preserves spontaneous breathing. If patient becomes apneic or cannot oxygenate, you may need to convert to rapid intubation and accept the risks. [2]`,
         citation: [2],
         next: 'awake-success',
+        summary: 'Desat: STOP → OXYGENATE → RECOVER → REASSESS; if cannot recover SpO2, convert to RSI with surgical backup ready',
+        safetyLevel: 'critical',
     },
     {
         id: 'awake-epistaxis',
@@ -1048,6 +1088,7 @@ Awake technique preserves spontaneous breathing. If patient becomes apneic or ca
 - ENT consultation if severe`,
         citation: [4],
         next: 'awake-success',
+        summary: 'Minor: topical epi + continue; moderate: switch to oral route; severe: abort nasal, switch to VL or oral',
     },
     {
         id: 'awake-laryngospasm',
@@ -1088,6 +1129,8 @@ Awake technique preserves spontaneous breathing. If patient becomes apneic or ca
 - Experienced operator with gentle technique [1][7]`,
         citation: [1, 7],
         next: 'awake-success',
+        summary: 'Laryngospasm: remove stimulus → bag-mask → succinylcholine 20-50mg if persists >30s; have sux immediately available',
+        safetyLevel: 'critical',
     },
     {
         id: 'awake-failed',
@@ -1136,6 +1179,8 @@ Awake technique preserves spontaneous breathing. If patient becomes apneic or ca
 **DO NOT paralyze a patient whose airway you cannot visualize without a clear backup plan.** [1][2]`,
         citation: [1, 2],
         next: 'awake-success',
+        summary: 'Cannot visualize: DO NOT PARALYZE — troubleshoot anesthesia/secretions/anatomy; after 3 fails consider surgical airway',
+        safetyLevel: 'critical',
     },
     {
         id: 'awake-success',

@@ -24,6 +24,8 @@ export const PRIAPISM_NODES = [
         body: 'Priapism = prolonged erection lasting > 4 hours, unrelated to sexual stimulation.\n\nTwo types:\n\u2022 Ischemic (low-flow) \u2014 EMERGENCY. Most common. Veno-occlusive.\n\u2022 Non-ischemic (high-flow) \u2014 NOT an emergency. Arterial. Usually post-trauma.\n\nHistory to obtain:\n\u2022 Duration of erection\n\u2022 Pain level\n\u2022 Trauma history (straddle injury, perineal blunt trauma)\n\u2022 PDE5 inhibitor or intracavernosal injection (ICI) use\n\u2022 Sickle cell disease\n\u2022 Medications (antipsychotics, trazodone, anticoagulants)',
         citation: [1, 2, 8],
         next: 'priapism-differential',
+        summary: 'Erection >4h unrelated to stimulation — classify ischemic vs non-ischemic, assess SCD/medication history',
+        skippable: true,
     },
     {
         id: 'priapism-differential',
@@ -33,6 +35,8 @@ export const PRIAPISM_NODES = [
         body: 'ISCHEMIC (Low-Flow)\n\u2022 Painful, fully rigid\n\u2022 No trauma history\n\u2022 Dark blood on aspiration\n\u2022 Compartment syndrome of the penis\n\u2022 UROLOGIC EMERGENCY\n\nNON-ISCHEMIC (High-Flow)\n\u2022 Painless or mild discomfort\n\u2022 Partially erect (not fully rigid)\n\u2022 Trauma history (straddle injury, kick, fall)\n\u2022 Bright red blood on aspiration\n\u2022 Arterial fistula \u2192 unregulated inflow\n\u2022 NOT an emergency\n\nIf unsure, corporal blood gas or Color Doppler ultrasound can help differentiate.',
         citation: [1, 2, 10, 11],
         next: 'priapism-type',
+        summary: 'Ischemic: painful, rigid, dark blood, emergency; Non-ischemic: painless, partial, post-trauma, not emergency',
+        skippable: true,
     },
     {
         id: 'priapism-type',
@@ -59,6 +63,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Classify ischemic vs non-ischemic based on pain, rigidity, trauma history, blood color',
     },
     {
         id: 'priapism-bloodgas',
@@ -68,6 +73,7 @@ export const PRIAPISM_NODES = [
         body: 'Aspirate blood from corpus cavernosum and send for blood gas.\n\nBLOOD COLOR\n\u2022 Dark, deoxygenated = ischemic\n\u2022 Bright red, oxygenated = non-ischemic\n\nISCHEMIC PATTERN\n\u2022 pO\u2082 < 30 mmHg\n\u2022 pCO\u2082 > 60 mmHg\n\u2022 pH < 7.25\n\nNON-ISCHEMIC PATTERN\n\u2022 pO\u2082 > 90 mmHg\n\u2022 pCO\u2082 < 40 mmHg\n\u2022 pH 7.35\u20137.45\n\nNote: Exact cutoffs are not standardized across studies, but the pattern of hypoxia + hypercarbia + acidosis reliably identifies ischemic priapism.\n\nColor Doppler ultrasound is a complementary noninvasive option if available.',
         citation: [1, 2, 9, 10, 11],
         next: 'priapism-bloodgas-result',
+        summary: 'Ischemic: pO2 <30, pCO2 >60, pH <7.25, dark blood; Non-ischemic: pO2 >90, pH normal, bright red',
     },
     {
         id: 'priapism-bloodgas-result',
@@ -88,6 +94,7 @@ export const PRIAPISM_NODES = [
                 next: 'priapism-nonischemic-info',
             },
         ],
+        summary: 'Interpret corporal blood gas pattern to definitively classify ischemic vs non-ischemic',
     },
     // --- Non-ischemic branch (terminal) ---
     {
@@ -98,6 +105,7 @@ export const PRIAPISM_NODES = [
         body: 'NOT a urologic emergency.\n\n\u2022 Usually from perineal trauma \u2192 arterial fistula\n\u2022 Partially tumescent, painless\n\u2022 62% resolve spontaneously\n\u2022 No aspiration or phenylephrine needed\n\u2022 ED risk much lower than ischemic type',
         citation: [1, 2, 3, 7],
         next: 'priapism-nonischemic-result',
+        summary: 'Not an emergency — 62% resolve spontaneously, no aspiration or phenylephrine needed',
     },
     {
         id: 'priapism-nonischemic-result',
@@ -118,6 +126,8 @@ export const PRIAPISM_NODES = [
         body: 'UROLOGIC EMERGENCY.\n\n\u2022 Ischemic priapism = compartment syndrome of the penis\n\u2022 Smooth muscle necrosis begins at 4\u20136 hours\n\u2022 Delayed treatment > 24 hours \u2192 30\u201370% erectile dysfunction\n\u2022 Time-sensitive: proceed to assess duration and etiology now',
         citation: [1, 2, 8],
         next: 'priapism-sickle-check',
+        summary: 'Compartment syndrome of the penis — smooth muscle necrosis begins at 4-6h, ED at 30-70% if >24h',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2: DURATION & ETIOLOGY
@@ -142,6 +152,7 @@ export const PRIAPISM_NODES = [
                 next: 'priapism-duration',
             },
         ],
+        summary: '40% of males with SCD experience priapism — SCD has specific initial management steps',
     },
     // --- SCD branch ---
     {
@@ -164,6 +175,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'SCD <4h: try supportive measures first; >=4h: emergent procedural intervention required',
     },
     {
         id: 'priapism-scd-supportive',
@@ -173,6 +185,8 @@ export const PRIAPISM_NODES = [
         body: 'Try supportive measures first:\n\n\u2022 IV hydration (NS bolus)\n\u2022 Analgesia (ketorolac, opioids PRN)\n\u2022 Warm shower or warm packs\n\u2022 Supplemental O\u2082\n\n\u26A0\uFE0F Do NOT use RBC transfusion to treat priapism in SCD patients.\n\nMonitor for resolution. If no improvement, proceed to aspiration.',
         citation: [1, 6],
         next: 'priapism-scd-supportive-response',
+        summary: 'IV hydration, analgesia, warm packs, O2 — do NOT use RBC transfusion to treat priapism in SCD',
+        safetyLevel: 'warning',
     },
     {
         id: 'priapism-scd-supportive-response',
@@ -193,6 +207,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Assess if supportive measures produced complete detumescence — if persistent, proceed to aspiration',
     },
     {
         id: 'priapism-scd-resolved',
@@ -212,6 +227,8 @@ export const PRIAPISM_NODES = [
         body: 'SCD priapism \u2265 4 hours requires the same procedural treatment as non-SCD ischemic priapism.\n\n\u2022 Continue IV hydration and analgesia\n\u2022 Hematology consult for crisis management\n\u2022 Do NOT use RBC transfusion to treat priapism\n\u2022 Proceed to penile block for anesthesia',
         citation: [1, 6],
         next: 'priapism-penile-block-intro',
+        summary: 'SCD >=4h: same treatment as non-SCD ischemic — continue hydration, hematology consult, proceed to block',
+        safetyLevel: 'warning',
     },
     // --- Non-SCD duration assessment ---
     {
@@ -240,6 +257,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Duration drives urgency — post-ICI may try conservative, 4-36h = penile block, >36h = surgical likely',
     },
     // --- Post-ICI branch ---
     {
@@ -250,6 +268,7 @@ export const PRIAPISM_NODES = [
         body: 'Post-intracavernosal injection priapism.\n\nConservative measures (try briefly, < 30\u201360 min):\n\u2022 Ice packs\n\u2022 Attempt ejaculation\n\u2022 Exercise (walking, climbing stairs)\n\n\u26A0\uFE0F Do NOT let conservative measures delay treatment.\nIf fully rigid and painful, proceed directly to phenylephrine.',
         citation: [1, 4, 5],
         next: 'priapism-post-ici-response',
+        summary: 'Try ice packs, ejaculation, exercise briefly (<30-60 min) — do not delay if fully rigid and painful',
     },
     {
         id: 'priapism-post-ici-response',
@@ -270,6 +289,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Assess if conservative measures produced detumescence — if not, proceed to phenylephrine',
     },
     {
         id: 'priapism-post-ici-resolved',
@@ -290,6 +310,8 @@ export const PRIAPISM_NODES = [
         body: 'Duration > 36\u201348 hours:\n\n\u2022 Smooth muscle necrosis likely advanced\n\u2022 Aspiration + phenylephrine less likely to succeed\n\u2022 Still attempt aspiration + phenylephrine first\n\u2022 If unsuccessful: immediate surgical consultation\n\u2022 AUA/SMSNA recommends early penile prosthesis over delayed placement\n\nProceed to penile block.',
         citation: [1, 7, 8],
         next: 'priapism-penile-block-intro',
+        summary: '>36-48h: smooth muscle necrosis advanced — still attempt aspiration/phenylephrine, early prosthesis if failed',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: PENILE BLOCK
@@ -301,6 +323,8 @@ export const PRIAPISM_NODES = [
         title: 'Dorsal Penile Nerve Block \u2014 Overview',
         body: 'Adequate anesthesia is essential before aspiration.\n\nDorsal penile nerve block provides excellent analgesia for corporal aspiration and irrigation.\n\nAgent: 1% lidocaine WITHOUT epinephrine\n\u2022 The penis is supplied by end-arteries\n\u2022 NEVER use epinephrine \u2014 risk of ischemic necrosis\n\nDose: ~10 mL total (5 mL per side)',
         citation: [1, 9],
+        summary: '10 mL total 1% lidocaine WITHOUT epinephrine — end-artery territory, NEVER use epi',
+        safetyLevel: 'critical',
         images: [
             {
                 src: 'images/priapism/penile-block.png',
@@ -317,6 +341,7 @@ export const PRIAPISM_NODES = [
         title: 'Dorsal Penile Nerve Block \u2014 Technique',
         body: 'PROCEDURE\n\n1. Clean the base of the penis with antiseptic\n2. Identify the **10 o\'clock** and **2 o\'clock** positions at the penile base\n3. Insert a **27-gauge needle** at the **10 o\'clock** position\n4. Advance under Buck\'s fascia (feel a slight pop)\n5. Aspirate to ensure you\'re not in a vessel\n6. Inject 5 mL of 1% lidocaine (no epi)\n7. Repeat at the **2 o\'clock** position with 5 mL\n\n**You must pop through Buck\'s fascia to anesthetize the nerve.**\n\nTotal: 10 mL of 1% lidocaine without epinephrine\n\n\u26A0\uFE0F Avoid the 12 o\'clock midline (dorsal vein and deep dorsal artery)',
         citation: [1, 9],
+        summary: 'Inject at 10 and 2 o\'clock positions under Buck\'s fascia — avoid 12 o\'clock (dorsal vein) and 6 o\'clock (urethra)',
         images: [
             {
                 src: 'images/priapism/do-not-inject.png',
@@ -334,6 +359,8 @@ export const PRIAPISM_NODES = [
         body: '\u2022 Wait 5\u201310 minutes for full anesthetic effect\n\u2022 Test with pinprick on penile shaft\n\u2022 If inadequate, supplement with additional local at injection sites\n\nWhen adequate anesthesia confirmed, proceed to corporal aspiration.',
         citation: [1],
         next: 'priapism-aspiration-intro',
+        summary: 'Wait 5-10 min for full effect, test with pinprick — supplement if inadequate',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 4: CORPORAL ASPIRATION
@@ -345,6 +372,7 @@ export const PRIAPISM_NODES = [
         title: 'Corporal Aspiration \u2014 Setup',
         body: 'EQUIPMENT\n\u2022 18\u201321 gauge butterfly needle or angiocath\n\u2022 Three-way stopcock\n\u2022 20\u201360 mL syringe (for aspiration)\n\u2022 10\u201320 mL syringe with normal saline (for irrigation)\n\u2022 Sterile prep and drape\n\nINJECTION SITE\n\u2022 Lateral aspect of proximal penile shaft\n\u2022 2 o\'clock or 10 o\'clock position\n\u2022 AVOID 12 o\'clock (dorsal neurovascular bundle)\n\u2022 AVOID 6 o\'clock (urethra)\n\nSingle-side entry is sufficient \u2014 the two corpora communicate via the intercavernosal septum.',
         citation: [1, 2, 5, 9],
+        summary: '18-21g butterfly at 2 or 10 o\'clock — avoid 12 (dorsal NV bundle) and 6 (urethra), single side sufficient',
         images: [
             {
                 src: 'images/priapism/cross-section.png',
@@ -366,6 +394,7 @@ export const PRIAPISM_NODES = [
         title: 'Corporal Aspiration \u2014 Procedure',
         body: 'PROCEDURE\n\n1. Insert needle at 2 or 10 o\'clock into corpus cavernosum\n2. Aspirate dark, deoxygenated blood\n3. Continue aspirating until blood turns bright red\n   (bright red = fresh arterial inflow restored)\n4. Typically 20\u201330 mL per aspiration cycle\n\nTIP: Can send initial aspirate for blood gas if type not yet confirmed.\n\nIRRIGATION\n5. After aspiration, irrigate with 20\u201330 mL normal saline\n6. Re-aspirate\n7. Repeat aspiration\u2013irrigation cycles until aspirate is bright red\n\nIrrigation clears clotted blood and metabolic waste, improving resolution rates.',
         citation: [1, 2, 3, 9],
+        summary: 'Aspirate until blood turns bright red, irrigate with NS 20-30 mL, repeat cycles to clear stagnant blood',
         images: [
             {
                 src: 'images/priapism/aspiration-procedure.png',
@@ -395,6 +424,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Aspiration alone only 36% success — if still rigid, proceed to intracavernosal phenylephrine',
     },
     {
         id: 'priapism-aspiration-success',
@@ -417,6 +447,7 @@ export const PRIAPISM_NODES = [
         body: 'Phenylephrine = first-line sympathomimetic (AUA/SMSNA 2022).\n\nWhy phenylephrine?\n\u2022 Pure alpha-1 agonist \u2192 no intrinsic inotropy, no increase in heart rate\n\u2022 Causes smooth muscle contraction \u2192 venous outflow\n\u2022 74% success rate (vs 25% terbutaline)\n\u2022 Combined with aspiration: 70\u2013100% success\n\nOnset: 1 minute | Duration: 10\u201320 minutes\n\nTap for mixing instructions:\n\u2022 [Phenylephrine](#/drug/phenylephrine/priapism) \u2014 first-line\n\u2022 [Epinephrine](#/drug/epinephrine/priapism) \u2014 alternative if no phenylephrine',
         citation: [1, 3, 4, 5],
         next: 'priapism-phenylephrine-dose',
+        summary: 'Pure alpha-1 agonist — 74% success rate, combined with aspiration 70-100%, onset 1 min',
     },
     {
         id: 'priapism-phenylephrine-dose',
@@ -426,6 +457,8 @@ export const PRIAPISM_NODES = [
         body: '\u26A0\uFE0F The corpora cavernosa communicate freely \u2014 only ONE side needs to be injected.\n\nPHENYLEPHRINE (first-line)\n\u2022 200 mcg (2 mL of 100 mcg/mL solution) per dose\n\u2022 Inject into corpus cavernosum\n\u2022 Every 5 minutes\n\u2022 Up to 5 doses TOTAL (= 1 mg max)\n\nEPINEPHRINE (alternative \u2014 if phenylephrine unavailable)\n\u2022 20 mcg (2 mL of 10 mcg/mL solution) per dose\n\u2022 Inject into corpus cavernosum\n\u2022 Every 5 minutes\n\u2022 Up to 5 doses TOTAL (= 100 mcg max)\n\nMONITORING\n\u2022 Check BP and HR every 5 min between injections\n\u2022 HOLD if SBP > 160 or HR > 110\n\u2022 Contraindicated: uncontrolled HTN, MAO inhibitor use\n\nPEDIATRIC / SCD: use lower dose (100 mcg phenylephrine per injection)',
         citation: [1, 4, 5],
         next: 'priapism-phenylephrine-inject',
+        summary: '200 mcg q5 min x5 doses max (1mg total) — hold if SBP >160 or HR >110, monitor BP/HR between doses',
+        safetyLevel: 'critical',
     },
     {
         id: 'priapism-phenylephrine-inject',
@@ -435,6 +468,7 @@ export const PRIAPISM_NODES = [
         body: 'TECHNIQUE\n\n1. Inject 2 mL phenylephrine (200 mcg) through the same needle used for aspiration\n2. Wait 5 minutes\n3. Re-aspirate to remove additional stagnant blood\n4. Assess for detumescence\n5. If still rigid, repeat injection (up to 5 doses total)\n\nRemember: Corpora cavernosa communicate freely.\nOnly one side needs injection. 5 doses = 5 doses TOTAL, not per side.\n\nAlternating approach:\n\u2022 Aspirate \u2192 Inject phenylephrine \u2192 Wait 5 min \u2192 Aspirate again \u2192 Reassess\n\u2022 Continue cycling up to 5 doses',
         citation: [1, 5],
         next: 'priapism-phenylephrine-response',
+        summary: 'Inject through aspiration needle, wait 5 min, re-aspirate, assess — 5 doses TOTAL not per side',
     },
     {
         id: 'priapism-phenylephrine-response',
@@ -456,6 +490,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Assess after up to 5 doses — refractory after 1 hour requires surgical intervention',
     },
     {
         id: 'priapism-phenylephrine-success',
@@ -497,6 +532,7 @@ export const PRIAPISM_NODES = [
         body: 'Failed aspiration, irrigation, and phenylephrine (1 hour max).\n\n\u2022 This is refractory ischemic priapism\n\u2022 Requires surgical intervention\n\u2022 Duration of priapism determines surgical approach\n\u2022 Urgent urology consultation required',
         citation: [1, 7],
         next: 'priapism-refractory-duration',
+        summary: 'Failed medical management after 1 hour — requires surgical shunting or prosthesis based on duration',
     },
     {
         id: 'priapism-refractory-duration',
@@ -519,6 +555,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Total duration determines surgical approach — <36h shunting, >=36-48h consider immediate prosthesis',
     },
     // =====================================================================
     // MODULE 7: SURGICAL ESCALATION
@@ -531,6 +568,7 @@ export const PRIAPISM_NODES = [
         body: 'Shunting creates a pathway for blood to drain from the corpora cavernosa.\n\nTwo categories:\n\u2022 DISTAL shunts \u2014 preferred first (less invasive, lower morbidity)\n\u2022 PROXIMAL shunts \u2014 if distal fails (more invasive, higher complication rate)\n\nDistal shunts connect corpus cavernosum to glans penis.\nProximal shunts connect to corpus spongiosum or saphenous vein.\n\nUrology consultation required for all shunting procedures.',
         citation: [1, 7],
         next: 'priapism-shunting-types',
+        summary: 'Distal shunts first (less invasive), proximal if distal fails — urology consultation required',
     },
     {
         id: 'priapism-shunting-types',
@@ -552,6 +590,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Select shunt type — distal (corporoglanular) attempted first, proximal only if distal fails',
     },
     {
         id: 'priapism-distal-shunt',
@@ -561,6 +600,7 @@ export const PRIAPISM_NODES = [
         body: 'WINTER (percutaneous)\n\u2022 Tru-Cut biopsy needle through glans into distal corpora\n\nEBBEHOJ (percutaneous)\n\u2022 No. 11 scalpel blade through glans into corpora\n\nAL-GHORAB (open)\n\u2022 Open excision of distal tunica albuginea through glans incision\n\nT-SHUNT (variation)\n\u2022 No. 10 blade with 90-degree rotation\n\nAll create a fistula at the glans for blood to drain into the corpus spongiosum.',
         citation: [1, 7],
         next: 'priapism-shunt-response',
+        summary: 'Winter (Tru-Cut), Ebbehoj (#11 blade), Al-Ghorab (open), T-shunt — fistula for drainage through glans',
     },
     {
         id: 'priapism-proximal-shunt',
@@ -570,6 +610,7 @@ export const PRIAPISM_NODES = [
         body: 'QUACKELS\n\u2022 Corporospongiosal shunt at penoscrotal junction\n\nGRAYHACK\n\u2022 Saphenous vein-to-corpus cavernosum anastomosis\n\n\u26A0\uFE0F More invasive, higher complication rate.\nUsed only when distal shunts fail.',
         citation: [1, 7],
         next: 'priapism-shunt-response',
+        summary: 'Quackels or Grayhack — more invasive, higher complications, only when distal shunts fail',
     },
     {
         id: 'priapism-shunt-response',
@@ -590,6 +631,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Assess detumescence after surgical shunting — if persistent, consider proximal shunt or prosthesis',
     },
     {
         id: 'priapism-shunt-success',
@@ -620,6 +662,8 @@ export const PRIAPISM_NODES = [
         body: 'Duration > 36\u201348 hours with failed medical management:\n\n\u2022 Smooth muscle necrosis likely advanced\n\u2022 AUA/SMSNA 2022: consider immediate penile prosthesis\n\u2022 Still attempt aspiration + phenylephrine first if not yet done\n\u2022 If unsuccessful, do not delay surgical consultation\n\nEarly prosthesis placement (within days) has better outcomes:\n\u2022 Easier implantation before fibrosis develops\n\u2022 Better penile length preservation\n\u2022 Patient satisfaction 60\u2013100%',
         citation: [1, 7, 8],
         next: 'priapism-prosthesis-attempt',
+        summary: '>36-48h with failed medical management — early prosthesis preferred (better outcomes, less fibrosis)',
+        safetyLevel: 'warning',
     },
     {
         id: 'priapism-prosthesis-attempt',
@@ -647,6 +691,7 @@ export const PRIAPISM_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'After attempting aspiration/phenylephrine — decide: resolved, shunt, or immediate prosthesis',
     },
     {
         id: 'priapism-prolonged-resolved',

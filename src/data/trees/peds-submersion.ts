@@ -39,6 +39,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'submersion-observation', label: 'Observation Criteria' },
     ],
     next: 'submersion-scene-info',
+
+    summary: 'Leading injury death ages 1-4; submersion duration is key prognostic factor; <5min good, >10min poor; no "dry drowning" entity',
   },
   {
     id: 'submersion-scene-info',
@@ -53,6 +55,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { label: 'Respiratory symptoms only', description: 'Coughing, dyspnea, normal mentation', next: 'submersion-resp-symptoms' },
       { label: 'Asymptomatic', description: 'Normal exam, no symptoms', next: 'submersion-asymptomatic' },
     ],
+
+    summary: 'Obtain submersion duration, water type/temp, scene CPR, time to first breath; stratify by current status',
   },
 
   // ===================================================================
@@ -69,6 +73,9 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'peds-drowning-prognosis', label: 'Outcome Prediction' },
     ],
     next: 'submersion-arrest-continue',
+
+    summary: 'Airway first: 5 rescue breaths before compressions; do NOT Heimlich; if cold <30C limit shocks to 3 and hold meds',
+    safetyLevel: 'critical',
   },
   {
     id: 'submersion-arrest-continue',
@@ -92,6 +99,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
     body: '**Mild hypothermia (32-35°C):**\n\n**Rewarming methods:**\n• Remove wet clothing\n• Warm blankets, forced-air warming (Bair Hugger)\n• Warm IV fluids (38-42°C)\n• Warm humidified oxygen\n\n**Expected rate:** 1-2°C/hour with external methods\n\n**Resuscitation:**\n• Standard PALS medications and dosing\n• Active CPR — do not withhold\n• Defibrillation for VF/pVT\n\n**Monitor for:**\n• "Afterdrop" — core temp may drop during rewarming\n• Rewarming arrhythmias (usually benign)\n• Hyperkalemia (cellular release during rewarming)',
     citation: [4, 5],
     next: 'submersion-rosc-or-term',
+
+    summary: 'Mild 32-35C: standard PALS, active rewarming 1-2C/hr; moderate 28-32C: space med dosing; severe <28C: limit defib, consider ECMO',
   },
   {
     id: 'submersion-severe-hypothermia',
@@ -104,6 +113,9 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'peds-drowning-prognosis', label: 'Outcome Prediction' },
     ],
     next: 'submersion-rosc-or-term',
+
+    summary: 'Not dead until warm and dead; ECMO gold standard for severe hypothermic arrest; limit defib to 3 until >30C; withhold meds until >30C',
+    safetyLevel: 'critical',
   },
   {
     id: 'submersion-rosc-or-term',
@@ -142,6 +154,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'peds-gcs', label: 'Pediatric GCS' },
     ],
     next: 'submersion-icu-monitoring',
+
+    summary: 'Target SpO2 94-98% (avoid hyperoxia); TTM 32-34C for comatose; treat seizures aggressively; avoid hypoglycemia/hyperglycemia',
   },
   {
     id: 'submersion-icu-monitoring',
@@ -236,6 +250,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'submersion-observation', label: 'Observation Criteria' },
     ],
     next: 'submersion-observation-ed',
+
+    summary: 'Asymptomatic with GCS 15 and SpO2 >=95%: no delayed deterioration if truly asymptomatic; complications within 4-8 hours',
   },
 
   // ===================================================================
@@ -252,6 +268,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
       { id: 'submersion-observation', label: 'Observation Criteria' },
     ],
     next: 'submersion-discharge-criteria',
+
+    summary: 'Observe 4-8h; safe discharge if asymptomatic throughout, normal SpO2 RA, normal resp exam, reliable caregiver',
   },
   {
     id: 'submersion-observation-admit',

@@ -37,6 +37,7 @@ export const POTASSIUM_NODES = [
                 next: 'k-pseudo',
             },
         ],
+        summary: 'Route to hyperkalemia or hypokalemia pathway — repeat if unexpected, consider pseudohyperkalemia',
     },
     {
         id: 'k-pseudo',
@@ -46,6 +47,8 @@ export const POTASSIUM_NODES = [
         body: '**Rule out pseudohyperkalemia before treating:**\n\n\u2022 In vitro hemolysis (most common artifact) \u2014 repeat lab\n\u2022 Severe polycythemia (platelets >1M or WBC >50K) \u2014 use heparinized tube or POC\n\u2022 Prolonged tourniquet application or fist clenching\n\u2022 Delayed sample processing\n\n**Point-of-care testing** is generally accurate but cannot detect hemolysis.\n\nIf lab reports severe hyperkalemia but ECG is normal \u2192 consider pseudohyperkalemia and repeat the lab.',
         citation: [1, 7],
         next: 'k-start',
+        summary: 'Rule out hemolysis, polycythemia, prolonged tourniquet — POC testing if severe polycythemia',
+        skippable: true,
     },
     {
         id: 'k-hyper-ecg',
@@ -56,6 +59,8 @@ export const POTASSIUM_NODES = [
         images: [{ src: 'images/potassium/hyperkalemia-ecg.jpg', alt: 'ECG from a patient with K+ 8.2 mmol/L showing prominent peaked narrow T waves', caption: 'Hyperkalemia ECG (K⁺ 8.2 mmol/L) — peaked narrow T waves. Escalating findings: peaked T → PR prolongation → wide QRS → sine wave → PEA. (CC BY 4.0)' }],
         citation: [1, 5],
         next: 'k-hyper-severity',
+        summary: 'First response: check ECG — features confirm diagnosis; normal ECG with severe lab = consider pseudohyperkalemia',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2: HYPERK SEVERITY
@@ -79,6 +84,7 @@ export const POTASSIUM_NODES = [
                 next: 'k-hyper-mod',
             },
         ],
+        summary: 'Severe: K+ >=6.5 + ECG changes or rapid rise; bradycardia and QRS widening most dangerous findings',
     },
     {
         id: 'k-hyper-mod',
@@ -99,6 +105,7 @@ export const POTASSIUM_NODES = [
             monitoring: 'Monitor urine output, replace urine losses with LR to maintain euvolemia. Recheck K+ in 2-4 hours.',
         },
         next: 'k-hyper-step3',
+        summary: 'Gentle kaliuresis with furosemide 40-80mg IV, replace urine volume with LR to maintain euvolemia',
     },
     // =====================================================================
     // MODULE 3: SEVERE HYPERK RX
@@ -111,6 +118,8 @@ export const POTASSIUM_NODES = [
         body: '**Start ALL temporizing measures simultaneously.**\n\nThese shift K+ into cells and stabilize the myocardium. They are **temporizing only** \u2014 K+ will return to baseline in 2-4 hours without definitive elimination therapy.\n\n**Three interventions:**\n1. IV Calcium \u2192 membrane stabilization\n2. Insulin + Dextrose \u2192 intracellular K+ shift\n3. Beta-2 agonist \u2192 intracellular K+ shift\n\n**Do NOT provide temporizing measures without definitive therapy.** This will temporarily improve the K+ but hyperkalemia will inevitably recur.',
         citation: [1, 2],
         next: 'k-hyper-calcium',
+        summary: 'Start ALL three temporizing measures simultaneously — calcium, insulin/dextrose, beta-2 agonist',
+        safetyLevel: 'critical',
     },
     {
         id: 'k-hyper-calcium',
@@ -119,6 +128,8 @@ export const POTASSIUM_NODES = [
         title: 'IV Calcium \u2014 Membrane Stabilization',
         body: '**Indications:** ECG changes (especially bradycardia, QRS widening, conduction delays). Controversial for isolated peaked T-waves.\n\n**Dosing:**\n\u2022 Peripheral access: [Calcium Gluconate](#/drug/calcium-gluconate) **3 grams IV over 10 minutes**\n\u2022 Central access: [Calcium Chloride](#/drug/calcium-chloride) **1 gram IV over 10 minutes**\n\n**Duration:** 30-60 minutes only \u2014 may need to repeat 1-2 times.\n\nRapid IV calcium may cause flushing, nausea, abdominal discomfort.\n\n**Hyperkalemia is generally more dangerous than hypercalcemia** \u2014 err on the side of treating. Avoid pushing ionized calcium >3 mM.',
         citation: [1, 2, 11],
+        summary: 'Calcium gluconate 3g IV over 10 min (peripheral) or CaCl 1g (central) — 30-60 min effect, may repeat',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Calcium Gluconate',
@@ -147,6 +158,8 @@ export const POTASSIUM_NODES = [
         title: 'Insulin + Dextrose \u2014 K+ Shift',
         body: '**[Regular Insulin](#/drug/regular-insulin) 5 units IV bolus** (must be IV, NOT subcutaneous).\n\n**Dextrose co-administration:**\n\u2022 Glucose < 250 mg/dL \u2192 **D50W 2 ampules** (100 mL total) OR **D10W 500 mL over 4 hours** (preferred \u2014 less rebound hypoglycemia)\n\u2022 Glucose 180-250 \u2192 half-dose dextrose (25g)\n\u2022 Glucose > 250 \u2192 no dextrose needed\n\n**Monitor fingerstick glucose q1h for 4-6 hours.** If glucose < 70 \u2192 give additional dextrose.\n\n**Effect:** Onset 15-30 min. K+ reduction: 0.5-1.2 mEq/L. Duration: ~4 hours \u2014 plan for redosing or definitive therapy.',
         citation: [1, 3, 4],
+        summary: 'Insulin 5 units IV + D10W 500mL over 4h preferred — monitor glucose q1h for 4-6h, K+ drops 0.5-1.2',
+        safetyLevel: 'warning',
         treatment: {
             firstLine: {
                 drug: 'Regular Insulin + Dextrose',
@@ -175,6 +188,7 @@ export const POTASSIUM_NODES = [
         title: 'Beta-2 Agonist \u2014 K+ Shift',
         body: '**Preferred:** [Terbutaline](#/drug/terbutaline) **0.5 mg SQ** \u2014 single injection, logistically superior.\n\n**Alternative:** [Albuterol](#/drug/albuterol-neb) **10-20 mg nebulized** (4-8 standard nebs back-to-back). Nearly always underdosed in practice \u2014 a single 2.5 mg neb is inadequate.\n\n**If hypotensive/bradycardic:** [Epinephrine](#/drug/epinephrine) infusion \u2014 treats both hyperkalemia AND hemodynamic instability simultaneously.\n\n**Effect:** Onset 5-30 min. K+ reduction: 0.5-1 mEq/L. Duration: 2-4 hours. Efficacy ~50% lower in ESRD.',
         citation: [1, 6],
+        summary: 'Terbutaline 0.5mg SQ preferred over nebulized albuterol — single injection vs 4-8 nebs, similar efficacy',
         treatment: {
             firstLine: {
                 drug: 'Terbutaline',
@@ -215,6 +229,8 @@ export const POTASSIUM_NODES = [
                 next: 'k-hyper-step3',
             },
         ],
+        summary: 'Do NOT use normal saline — high chloride worsens hyperK; isotonic bicarb preferred if acidotic',
+        safetyLevel: 'warning',
     },
     {
         id: 'k-hyper-bicarb',
@@ -235,6 +251,7 @@ export const POTASSIUM_NODES = [
             monitoring: 'Serum bicarbonate, K+, volume status. Avoid hypertonic bicarb ampules alone (proven ineffective).',
         },
         next: 'k-hyper-step3',
+        summary: '3 amps NaHCO3 in 1L D5W AS the resuscitative fluid — hypertonic bicarb ampules alone are ineffective',
     },
     {
         id: 'k-hyper-step3',
@@ -263,6 +280,7 @@ export const POTASSIUM_NODES = [
             monitoring: 'Urine output, replace losses with LR (bicarb >22) or isotonic bicarb (bicarb <22). Check K+, Mg frequently.',
         },
         next: 'k-hyper-step3-response',
+        summary: 'Scale diuretic to renal function — "nephron bomb" for moderate-severe CKD, replace urine losses with crystalloid',
     },
     {
         id: 'k-hyper-step3-response',
@@ -283,6 +301,7 @@ export const POTASSIUM_NODES = [
                 next: 'k-hyper-step5',
             },
         ],
+        summary: 'Monitor urine output and K+ — add fludrocortisone if making urine but K+ not falling',
     },
     // =====================================================================
     // MODULE 4: K+ ELIMINATION
@@ -314,6 +333,8 @@ export const POTASSIUM_NODES = [
             monitoring: 'Recheck K+ in 4-6 hours. Do NOT delay dialysis if indicated.',
         },
         next: 'k-hyper-monitor',
+        summary: 'SZC 10g PO q8h mildly effective — avoid Kayexalate (colonic necrosis risk), do not rely as sole treatment',
+        safetyLevel: 'warning',
     },
     {
         id: 'k-hyper-step5',
@@ -323,6 +344,8 @@ export const POTASSIUM_NODES = [
         body: '**Indications for emergent dialysis:**\n1. Chronic hemodialysis patient (kaliuresis is futile)\n2. Failure of all other measures (anuric despite diuretic bomb, not a candidate for large-volume isotonic bicarb)\n\n**Do NOT delay dialysis** while hoping potassium binders will work.\n\nFor chronic HD patients, 5 grams of SZC daily on non-dialysis days may help reduce intradialytic hyperkalemia.',
         citation: [1],
         next: 'k-hyper-monitor',
+        summary: 'Dialysis for chronic HD patients or anuric despite diuretic bomb — do not delay for binders',
+        safetyLevel: 'critical',
     },
     {
         id: 'k-hyper-monitor',
@@ -360,6 +383,7 @@ export const POTASSIUM_NODES = [
                 next: 'k-hypopp-assess',
             },
         ],
+        summary: 'Check ECG for arrhythmia, assess for life-threatening features — arrhythmia, paralysis, respiratory failure',
     },
     {
         id: 'k-hypo-severe',
@@ -388,6 +412,8 @@ export const POTASSIUM_NODES = [
             monitoring: 'Continuous cardiac monitoring. Recheck K+ frequently. Always check and correct magnesium.',
         },
         next: 'k-hypo-workup',
+        summary: 'KCl 5-10 mEq over 15-30 min IV with cardiac monitoring — always correct concurrent hypoMg (50% coexist)',
+        safetyLevel: 'critical',
     },
     {
         id: 'k-hypo-mild',
@@ -408,6 +434,7 @@ export const POTASSIUM_NODES = [
             monitoring: 'Recheck K+ in 2-4 hours. Target K+ >=4.0 mEq/L. Always check magnesium.',
         },
         next: 'k-hypo-workup',
+        summary: 'KCl 20-40 mEq PO (each 20 mEq raises K+ ~0.2) — dietary potassium alone is insufficient',
     },
     {
         id: 'k-hypo-workup',
@@ -417,6 +444,8 @@ export const POTASSIUM_NODES = [
         body: '**Common causes:**\n\u2022 Diuretics (thiazides > loops \u2014 0.6 vs 0.3 mEq/L decrease)\n\u2022 GI losses (vomiting, diarrhea, NG suction)\n\u2022 Refeeding syndrome\n\u2022 DKA treatment (insulin shifts K+ intracellularly)\n\u2022 Alkalosis\n\n**Workup:**\n\u2022 BMP, Mg, Phos\n\u2022 Urine K+ and Cl-\n\u2022 If urine K+ > 30 mEq/day \u2192 renal losses\n\u2022 If urine K+ < 25 mEq/day \u2192 extrarenal losses\n\n**Key:** Identify and treat the underlying cause in ALL patients.',
         citation: [14, 15],
         next: 'k-hypo-chronic',
+        summary: 'Check urine K+ to differentiate renal vs extrarenal losses — diuretics, GI losses, DKA treatment common',
+        skippable: true,
     },
     {
         id: 'k-hypo-chronic',
@@ -449,6 +478,7 @@ export const POTASSIUM_NODES = [
                 next: 'k-hypo-severe',
             },
         ],
+        summary: 'Episodic flaccid paralysis with triggers — transcellular redistribution, NOT true depletion',
     },
     {
         id: 'k-hypopp-acute',
@@ -477,6 +507,8 @@ export const POTASSIUM_NODES = [
             monitoring: 'K+ every 30 minutes. Avoid glucose-containing fluids and corticosteroids. Weakness may lag K+ normalization.',
         },
         next: 'k-hypopp-prevent',
+        summary: 'Oral KCl 1 mEq/kg immediate-release ONLY — avoid aggressive IV (rebound hyperK), avoid glucose/steroids',
+        safetyLevel: 'critical',
     },
     {
         id: 'k-hypopp-prevent',

@@ -29,6 +29,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Moderate — symptomatic bradycardia/hypotension', description: 'HR <50 or SBP <90, but no seizures or cardiac arrest.', next: 'bb-stabilize' },
       { label: 'Severe / Critical', description: 'Seizure, cardiac arrest, profound shock, or QRS widening.', next: 'bb-stabilize', urgency: 'critical' },
     ],
+
+    summary: 'Classic triad: bradycardia + hypotension + hypoglycemia — propranolol causes QRS widening, sotalol causes QT prolongation',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-mild',
@@ -38,6 +41,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Mild beta-blocker toxicity:**\n• Sinus bradycardia (HR 50-60)\n• Normal blood pressure\n• Alert mental status\n• No hypoglycemia\n\n**Still requires close monitoring:**\n• Continuous cardiac monitoring\n• IV access\n• Baseline ECG — check for QRS widening (propranolol) or QT prolongation (sotalol)\n• Fingerstick glucose q1-2h (especially children)\n• Serial vitals q15-30 min\n\n**Extended-release formulations** can cause delayed and prolonged toxicity — observe for 24-48 hours [1][3].\n\nProceed to initial stabilization measures.',
     citation: [1, 3],
     next: 'bb-stabilize',
+
+    summary: 'Mild toxicity still needs continuous monitoring — extended-release formulations cause delayed toxicity for 24-48h',
   },
   {
     id: 'bb-agent-specific',
@@ -48,6 +53,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     citation: [1, 2, 3],
     calculatorLinks: [{ id: 'bb-agent-guide', label: 'Agent-Specific Guide' }],
     next: 'bb-stabilize',
+
+    summary: 'Propranolol: QRS widening → NaHCO3; Sotalol: QT/Torsades → Mg + pacing; Carvedilol: alpha block → worse hypotension',
+    safetyLevel: 'critical',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -61,6 +69,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Initiate immediately:**\n• ABCs — airway management if CNS depression\n• Two large-bore IVs\n• Continuous cardiac monitoring\n• 12-lead ECG — look for QRS widening (propranolol) or QT prolongation (sotalol)\n• Fingerstick glucose — treat hypoglycemia (D50 if needed)\n• BMP, lactate, blood gas\n\n**GI Decontamination:**\n• [Activated Charcoal](#/drug/activated-charcoal/beta blocker) 1 g/kg (max 50g) if ingestion within 1-2 hours and airway protected [1]\n• Consider whole bowel irrigation for sustained-release formulations [1]\n\n**First-line intervention:**\n• [Atropine](#/drug/atropine/beta blocker bradycardia) 0.5-1mg IV — usually ineffective but try first [1][2]\n• Expect minimal response — beta-blockers work downstream of muscarinic receptors',
     citation: [1, 2],
     next: 'bb-atropine',
+
+    summary: 'ABCs, cardiac monitoring, ECG for QRS/QT, glucose, charcoal if <2h — atropine first but usually ineffective',
   },
   {
     id: 'bb-atropine',
@@ -74,6 +84,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'No response — still bradycardic/hypotensive', description: 'Escalate to glucagon and calcium', next: 'bb-glucagon', urgency: 'urgent' },
       { label: 'Cardiac arrest or pulseless', description: 'ACLS with modifications', next: 'bb-arrest', urgency: 'critical' },
     ],
+
+    summary: 'Atropine 0.5-1mg IV — usually ineffective (acts on muscarinic, not beta receptors); escalate to glucagon + calcium',
   },
   {
     id: 'bb-glucagon',
@@ -95,6 +107,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'HR, BP q5 min during boluses. Glucose (can cause hyperglycemia). Vomiting precautions.',
     },
     next: 'bb-calcium',
+
+    summary: 'Glucagon 3-5mg IV bolus (up to 10mg) then 2-10mg/hr infusion — bypasses blocked beta receptor via adenylate cyclase',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-calcium',
@@ -123,6 +138,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Ionized calcium. ECG for hypercalcemia (short QT). Magnesium level.',
     },
     next: 'bb-pacing',
+
+    summary: 'Ca gluconate 3g or CaCl 1g IV — improves contractility; target iCa 2x normal, give simultaneously with glucagon',
   },
   {
     id: 'bb-pacing',
@@ -136,6 +153,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Improved — HR and BP responding', description: 'Continue current therapy, close monitoring', next: 'bb-monitor' },
       { label: 'Cardiac arrest', description: 'ACLS with modifications', next: 'bb-arrest', urgency: 'critical' },
     ],
+
+    summary: 'Pacing may not capture in severe toxicity — bridge to other therapies, assess for HIET escalation or arrest',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -150,6 +169,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     citation: [1, 4],
     calculatorLinks: [{ id: 'bb-hiet', label: 'HIET Protocol' }],
     next: 'bb-hiet-dosing',
+
+    summary: 'HIET cornerstone of BB/CCB toxicity — enhances cardiac glucose uptake → positive inotropy; onset 15-60min, be patient',
+    skippable: true,
   },
   {
     id: 'bb-hiet-dosing',
@@ -171,6 +193,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Glucose q15-30 min initially, then q1h. K+ q1h. Target glucose 150-250, K+ 3.5-4.5.',
     },
     next: 'bb-hiet-monitoring',
+
+    summary: 'Insulin 1 unit/kg bolus → 1-10 units/kg/hr; MUST co-administer D10/D25 + aggressive K+ repletion (10-40 mEq/hr)',
+    safetyLevel: 'critical',
   },
   {
     id: 'bb-hiet-monitoring',
@@ -180,6 +205,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Monitoring during HIET:**\n\n**Glucose:**\n• Check q15-30 min initially, then q1h once stable\n• Target: 150-250 mg/dL\n• Hypoglycemia is the main risk — have D50 at bedside\n\n**Potassium:**\n• Check q1h\n• Target: 3.5-4.5 mEq/L\n• Aggressive repletion often needed (10-40 mEq/hr IV)\n\n**Hemodynamics:**\n• Expect improvement in 15-60 minutes [4]\n• Can take longer — be patient before declaring failure\n• Arterial line recommended for continuous BP monitoring\n\n**Lactate:**\n• Trend lactate clearance as marker of perfusion\n\n**Duration:**\n• Continue until patient hemodynamically stable for 12-24 hours\n• Wean gradually (halve rate q2-4h while monitoring)',
     citation: [4],
     next: 'bb-hiet-response',
+
+    summary: 'Glucose q15-30min (target 150-250), K+ q1h (target 3.5-4.5) — hypoglycemia is main risk, D50 at bedside',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-hiet-response',
@@ -193,6 +221,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Still hypotensive', description: 'Add or escalate vasopressors', next: 'bb-pressors', urgency: 'urgent' },
       { label: 'Refractory shock', description: 'Consider lipid emulsion and rescue therapies', next: 'bb-lipid', urgency: 'critical' },
     ],
+
+    summary: 'Assess HIET response at 30-60min — complementary with vasopressors, escalate to lipid emulsion if refractory',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -226,6 +256,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Arterial line for continuous BP. Urine output. Lactate clearance. End-organ perfusion.',
     },
     next: 'bb-pressors-adjunct',
+
+    summary: 'HIGH-DOSE norepi 0.1-3 mcg/kg/min needed — standard doses insufficient when beta receptors blocked; add epi for cardiogenic',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-pressors-adjunct',
@@ -235,6 +268,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**[Vasopressin](#/drug/vasopressin/beta blocker shock)**\n• 0.04 units/min (fixed dose)\n• Bypasses adrenergic receptors entirely — V1 receptor agonist\n• Add to norepinephrine for refractory hypotension [1][2]\n\n**Dopamine:**\n• Less effective — beta-2 effects blocked\n• Not recommended as first-line [1]\n\n**Dobutamine:**\n• Pure beta agonist — ineffective when beta receptors are blocked\n• Avoid [1]\n\n**Phenylephrine:**\n• Pure alpha agonist\n• May worsen bradycardia by reflex\n• Use only if severe tachycardia present\n\n**Key principle:** Multiple vasopressors often needed simultaneously. This is a toxicological emergency — don\'t be afraid to escalate rapidly.',
     citation: [1, 2],
     next: 'bb-pressors-response',
+
+    summary: 'Vasopressin 0.04 units/min bypasses adrenergic receptors — AVOID dobutamine (beta blocked) and dopamine (less effective)',
   },
   {
     id: 'bb-pressors-response',
@@ -246,6 +281,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Responding — MAP ≥65', description: 'Continue current therapy', next: 'bb-monitor' },
       { label: 'Refractory shock', description: 'Escalate to lipid emulsion therapy', next: 'bb-lipid', urgency: 'critical' },
     ],
+
+    summary: 'Assess vasopressor response — MAP ≥65 continue, refractory escalate to lipid emulsion therapy',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -260,6 +297,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     citation: [1, 5],
     calculatorLinks: [{ id: 'bb-intralipid', label: 'Intralipid Dosing' }],
     next: 'bb-lipid-dosing',
+
+    summary: 'Intralipid 20% rescue for refractory toxicity — lipid sink for propranolol/metoprolol/carvedilol; less evidence for hydrophilic agents',
   },
   {
     id: 'bb-lipid-dosing',
@@ -281,6 +320,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Hemodynamics. Lipemia (interferes with labs). Triglycerides.',
     },
     next: 'bb-rescue',
+
+    summary: 'Intralipid 1.5 mL/kg bolus (repeat x2), then 0.25-0.5 mL/kg/min x30-60min — max 10-12 mL/kg first hour',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -301,6 +342,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Refractory vasoplegia', description: 'Methylene blue consideration', next: 'bb-methylene' },
       { label: 'Stable — proceed to disposition', description: 'No rescue therapies needed', next: 'bb-disposition' },
     ],
+
+    summary: 'Route to agent-specific rescue: propranolol QRS→NaHCO3, sotalol QT→Mg, ECMO, dialysis, or methylene blue for vasoplegia',
   },
   {
     id: 'bb-propranolol',
@@ -321,6 +364,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Serial ECGs q15 min. ABG. Na (keep <155). K+ (replete).',
     },
     next: 'bb-disposition',
+
+    summary: 'Propranolol QRS >100ms: NaHCO3 1-2 mEq/kg IV push → target pH 7.50-7.55; avoid phenytoin for seizures',
+    safetyLevel: 'critical',
   },
   {
     id: 'bb-sotalol',
@@ -341,6 +387,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'Continuous telemetry. QTc on serial ECGs. Mg level.',
     },
     next: 'bb-disposition',
+
+    summary: 'Sotalol: Mg 2g IV prophylactically if QTc prolonged + overdrive pacing for Torsades — AVOID amiodarone (further QT prolongation)',
+    safetyLevel: 'critical',
   },
   {
     id: 'bb-dialysis',
@@ -350,6 +399,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Hemodialysis** is effective for hydrophilic beta-blockers with small volumes of distribution [1][3]:\n\n**Dialyzable agents:**\n• **Atenolol** — most dialyzable, Vd 1 L/kg\n• **Nadolol** — small Vd, renally cleared\n• **Sotalol** — dialyzable (but prolonged monitoring still needed for arrhythmias)\n• **Acebutolol** — partially dialyzable\n\n**NOT dialyzable (lipophilic, large Vd):**\n• Propranolol\n• Metoprolol\n• Carvedilol\n• Labetalol\n\n**Indications for dialysis [3]:**\n• Severe toxicity from dialyzable agent\n• Refractory to standard therapy\n• Renal failure limiting drug clearance',
     citation: [1, 3],
     next: 'bb-disposition',
+
+    summary: 'Atenolol/nadolol are dialyzable (small Vd, hydrophilic) — propranolol/metoprolol/carvedilol are NOT dialyzable',
   },
   {
     id: 'bb-methylene',
@@ -370,6 +421,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       monitoring: 'BP. SpO2 may read falsely low. Hemolysis if G6PD deficient.',
     },
     next: 'bb-disposition',
+
+    summary: 'Methylene blue 1-2 mg/kg IV for refractory vasoplegia — contraindicated with serotonergics (serotonin syndrome) and G6PD',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-ecmo',
@@ -379,6 +433,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**VA-ECMO** is the last resort for refractory cardiogenic shock or cardiac arrest [1][2].\n\n**Key principle:** Beta-blocker toxicity is **potentially REVERSIBLE** — aggressive bridge therapy can lead to full neurologic recovery.\n\n**When to consider:**\n• Cardiac arrest refractory to all pharmacological therapies\n• Refractory shock despite maximum support (glucagon + calcium + HIET + high-dose pressors + lipid)\n• Young patient with reversible cause\n\n**Actions:**\n• Contact cardiac surgery/ECMO team EARLY if trajectory suggests need\n• Continue full resuscitation while arranging\n• Bridge therapy until drug metabolized/eliminated\n\n**Prognosis:** Case reports document full recovery after prolonged ECMO support for BB/CCB toxicity.',
     citation: [1, 2],
     next: 'bb-disposition',
+
+    summary: 'VA-ECMO last resort — BB toxicity is REVERSIBLE, aggressive bridge therapy can lead to full neurologic recovery',
   },
   {
     id: 'bb-arrest',
@@ -388,6 +444,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Cardiac arrest from beta-blocker toxicity requires modified ACLS [1][2]:**\n\n**During CPR give ALL of these:**\n• **[Epinephrine](#/drug/epinephrine/cardiac arrest)** — high-dose (standard 1mg may be inadequate when beta-blocked)\n• **[Glucagon](#/drug/glucagon/beta blocker arrest)** 5-10mg IV bolus\n• **[Calcium Chloride](#/drug/calcium-chloride/beta blocker arrest)** 1-3g IV\n• **[Intralipid 20%](#/drug/lipid-emulsion/beta blocker arrest)** 1.5 mL/kg bolus, may repeat\n\n**Prolonged resuscitation:**\n• Toxicological arrests are potentially reversible\n• Continue CPR longer than typical (30-60+ min reasonable)\n• Consider ECMO if available and appropriate candidate\n\n**If ROSC:**\n• Start HIET immediately\n• Continue glucagon infusion\n• Vasopressor infusions\n• ICU with continuous monitoring',
     citation: [1, 2],
     next: 'bb-disposition',
+
+    summary: 'Cardiac arrest: give ALL — high-dose epi, glucagon 5-10mg, CaCl 1-3g, Intralipid; CPR 30-60+ min, consider ECMO',
+    safetyLevel: 'critical',
   },
   {
     id: 'bb-monitor',
@@ -397,6 +456,8 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     body: '**Monitoring during treatment:**\n\n• Continuous cardiac telemetry\n• Arterial line for continuous BP if on vasopressors\n• Fingerstick glucose q1h (HIET) or q2h (without HIET)\n• BMP q4-6h (K+, glucose, renal function)\n• Lactate q4-6h to assess perfusion\n• Serial ECGs for propranolol (QRS) or sotalol (QT)\n\n**Wean therapies gradually:**\n• Glucagon infusion: halve rate q2h while monitoring\n• HIET: halve rate q2-4h, may need dextrose for 12-24h after stopping\n• Vasopressors: wean by 10-20% q30-60 min\n\n**Watch for rebound:**\n• Extended-release formulations: toxicity may recur\n• Continue monitoring 24-48h for sustained-release ingestions',
     citation: [1, 3],
     next: 'bb-disposition',
+
+    summary: 'Wean therapies gradually — extended-release toxicity may recur, continue monitoring 24-48h for sustained-release',
   },
 
   // ═══════════════════════════════════════════════════════════════
@@ -414,6 +475,9 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
       { label: 'Monitored bed', description: 'Stable but requires observation', next: 'bb-monitored' },
       { label: 'Discharge candidate', description: 'Asymptomatic, immediate-release, 6+ hours observation', next: 'bb-discharge' },
     ],
+
+    summary: 'Psych eval MANDATORY for intentional ingestion — extended-release requires 24-48h observation due to delayed effects',
+    safetyLevel: 'warning',
   },
   {
     id: 'bb-icu',

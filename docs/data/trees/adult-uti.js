@@ -15,6 +15,8 @@ export const ADULT_UTI_NODES = [
         body: '**Urinary Tract Infection** = infection involving bladder (cystitis), kidneys (pyelonephritis), or both. [1][2]\n\n**UTI is one of the most common ED diagnoses, but also one of the most over-diagnosed and over-treated.**\n\n**Key Principles:**\n• Distinguish **symptomatic UTI** from **asymptomatic bacteriuria (ASB)**\n• Classify as **uncomplicated** vs **complicated**\n• Use appropriate diagnostic criteria before treating\n• Choose antibiotics wisely (resistance is increasing)\n\n**This consult covers:**\n• History and physical findings\n• UA interpretation\n• Classification (uncomplicated/complicated/pyelo)\n• Antibiotic selection\n• Special populations (elderly, pregnant, catheterized)\n• Disposition criteria',
         citation: [1, 2],
         next: 'uti-history',
+        summary: 'UTI is over-diagnosed and over-treated — distinguish symptomatic from ASB, classify uncomplicated vs complicated',
+        skippable: true,
     },
     {
         id: 'uti-history',
@@ -24,6 +26,8 @@ export const ADULT_UTI_NODES = [
         body: '**Classic UTI Symptoms:** [3][4]\n\n**Lower UTI (Cystitis):**\n• Dysuria (painful urination)\n• Frequency (voiding small amounts often)\n• Urgency (sudden compelling need to void)\n• Suprapubic pain/pressure\n• Hematuria\n\n**Upper UTI (Pyelonephritis):**\n• Fever (≥38°C / 100.4°F)\n• Flank pain / CVA tenderness\n• Nausea/vomiting\n• ± Lower UTI symptoms\n\n**Probability of UTI by Symptoms (Women):**\n| Symptom Combination | Probability |\n|---------------------|-------------|\n| Dysuria + frequency, no vaginal discharge | 90% |\n| Any single symptom | 50% |\n| Vaginal discharge present | Much lower |\n\n**Physical Exam:**\n• Vital signs (fever, tachycardia = concern for sepsis)\n• Abdominal exam (suprapubic tenderness)\n• CVA tenderness (pyelonephritis)\n• Consider pelvic exam if vaginal symptoms present\n• Scrotal/prostate exam in men if indicated',
         citation: [3, 4],
         next: 'uti-initial-decision',
+        summary: 'Dysuria+frequency without vaginal discharge = 90% UTI probability; fever+flank pain = pyelonephritis',
+        skippable: true,
     },
     {
         id: 'uti-initial-decision',
@@ -36,6 +40,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Classic Cystitis - Treat Empirically', description: 'Young woman, no complicating factors', next: 'uti-uncomplicated' },
             { label: 'Pyelonephritis Suspected', description: 'Fever, flank pain, CVA tenderness', next: 'uti-pyelonephritis' },
         ],
+        summary: 'Classic cystitis in young women can be treated empirically; order UA for atypical or complicated presentations',
     },
     // =====================================================================
     // MODULE 2: DIAGNOSIS & UA INTERPRETATION
@@ -49,6 +54,7 @@ export const ADULT_UTI_NODES = [
         images: [{ src: 'images/adult-uti/bacteriuria-pyuria.jpg', alt: 'Phase contrast microscopy of urine sediment showing numerous bacteria (bacteriuria) and white blood cells (pyuria) diagnostic of urinary tract infection', caption: 'Urine microscopy — bacteriuria + pyuria (≥5-10 WBC/HPF). Dipstick leukocyte esterase sensitivity 75-90%; nitrites highly specific (95%) but low sensitivity (25-40%). Culture required for complicated UTI. (CC BY 3.0, Steven Fruitsmaak)' }],
         citation: [3, 5],
         next: 'uti-ua-result',
+        summary: 'LE neg AND nitrite neg = UTI unlikely (NPV>95%); pyuria is most sensitive indicator, absence strongly argues against UTI',
     },
     {
         id: 'uti-ua-result',
@@ -61,6 +67,7 @@ export const ADULT_UTI_NODES = [
             { label: 'No Pyuria (LE- and WBC-)', description: 'UTI unlikely', next: 'uti-no-pyuria' },
             { label: 'Need Culture', description: 'Complicated case', next: 'uti-culture' },
         ],
+        summary: 'Route UA results to classification: pyuria present supports UTI, absent makes UTI unlikely',
     },
     {
         id: 'uti-pyuria-present',
@@ -70,6 +77,7 @@ export const ADULT_UTI_NODES = [
         body: '**Pyuria + Symptoms = UTI** [1][2]\n\nPresence of pyuria supports the diagnosis of UTI when symptoms are present.\n\n**Next Step: Classify the UTI**\n\n**Questions to determine classification:**\n1. Is the patient female AND non-pregnant?\n2. Is there fever or flank pain (pyelonephritis)?\n3. Are there complicating factors?\n\n**Complicating Factors:**\n• Male sex\n• Pregnancy\n• Structural abnormality (stones, stent, stricture)\n• Indwelling catheter\n• Recent urologic procedure\n• Immunocompromised\n• Diabetes mellitus\n• Renal failure\n• Recent antibiotic use\n• Hospital-acquired infection',
         citation: [1, 2],
         next: 'uti-classification-decision',
+        summary: 'Pyuria+symptoms = UTI — now classify: uncomplicated (non-pregnant woman) vs complicated (male, catheter, structural, DM)',
     },
     {
         id: 'uti-classification-decision',
@@ -82,6 +90,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Complicated UTI', description: 'Male, catheter, structural abnormality, DM, immunocompromised', next: 'uti-complicated' },
             { label: 'Pyelonephritis', description: 'Fever, flank pain, CVA tenderness', next: 'uti-pyelonephritis' },
         ],
+        summary: 'Classify: uncomplicated cystitis vs complicated UTI vs pyelonephritis — determines treatment duration and agent',
     },
     {
         id: 'uti-no-pyuria',
@@ -91,6 +100,7 @@ export const ADULT_UTI_NODES = [
         body: '**Absence of pyuria makes UTI unlikely:** [3][5]\n\n**NPV of negative LE and negative nitrite: >95%**\n\n**Alternative Diagnoses to Consider:**\n\n**Gynecologic:**\n• Vulvovaginitis (candida, BV, trich)\n• Cervicitis (gonorrhea, chlamydia)\n• Atrophic vaginitis (postmenopausal)\n\n**Urologic:**\n• Urethritis (STI)\n• Interstitial cystitis\n• Kidney stones\n• Bladder cancer (if hematuria)\n\n**Other:**\n• Prostatitis (men)\n• Epididymitis (men)\n• Reactive arthritis (Reiter\'s)\n\n**Before Concluding "Not UTI":**\n• Was specimen properly collected? (clean catch)\n• Very dilute urine can have false negative LE\n• Consider repeat UA if high clinical suspicion\n• In elderly, symptoms may be atypical\n\n**If symptoms classic for UTI but UA negative:**\nConsider empiric treatment in selected cases (young woman, classic symptoms)',
         citation: [3, 5],
         next: 'uti-no-pyuria-decision',
+        summary: 'No pyuria = UTI unlikely (NPV>95%) — consider vaginitis, STI, stones, IC; dilute urine may give false negative LE',
     },
     {
         id: 'uti-no-pyuria-decision',
@@ -102,6 +112,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Consider Alternative Diagnosis', description: 'Pursue other workup', next: 'uti-differential' },
             { label: 'Treat Empirically Anyway', description: 'Classic symptoms despite negative UA', next: 'uti-uncomplicated' },
         ],
+        summary: 'Pursue alternative diagnosis or consider empiric treatment if classic symptoms despite negative UA',
     },
     {
         id: 'uti-differential',
@@ -111,6 +122,8 @@ export const ADULT_UTI_NODES = [
         body: '**Differential for UTI-like Symptoms:**\n\n**If Vaginal Discharge Present:**\n• Vaginitis (candida, BV, trichomoniasis)\n• Cervicitis (GC/CT)\n• Consider pelvic exam and wet mount\n\n**If STI Risk Factors:**\n• Urethritis (gonorrhea, chlamydia)\n• Test NAAT for GC/CT\n• Treat empirically if high risk\n\n**If Flank Pain:**\n• Kidney stone\n• Pyelonephritis\n• Musculoskeletal pain\n• Consider CT abdomen/pelvis\n\n**If Hematuria Without Pyuria:**\n• Kidney stone\n• Malignancy (especially >40 years)\n• Glomerulonephritis\n• Trauma\n\n**If Elderly with Non-Specific Symptoms:**\n• Likely NOT UTI if:\n  - No fever\n  - No suprapubic pain\n  - No dysuria/frequency\n• Consider other sources of infection\n• Confusion alone ≠ UTI\n\n**Workup:**\n• Pelvic exam if vaginal symptoms\n• GC/CT NAAT if STI risk\n• CT if stone suspected\n• Consider urology referral for persistent hematuria',
         citation: [2, 4],
         next: 'uti-start',
+        summary: 'Consider vaginitis, STI, stones, IC, prostatitis — confusion alone in elderly does NOT equal UTI',
+        skippable: true,
     },
     {
         id: 'uti-culture',
@@ -120,6 +133,8 @@ export const ADULT_UTI_NODES = [
         body: '**When to Send Urine Culture:** [1][6]\n\n**SEND CULTURE FOR:**\n• Complicated UTI\n• Pyelonephritis\n• Men (all UTIs)\n• Pregnancy\n• Catheter-associated UTI\n• Recent UTI (<30 days)\n• Recent antibiotic use\n• Treatment failure\n\n**DO NOT NEED CULTURE FOR:**\n• Uncomplicated cystitis in young women\n• First UTI with classic symptoms\n• Reliable follow-up available\n\n**Culture Thresholds:**\n| Condition | Threshold |\n|-----------|----------|\n| Cystitis (women) | ≥10³ CFU/mL |\n| Pyelonephritis | ≥10⁴ CFU/mL |\n| Catheterized | ≥10⁵ CFU/mL |\n| Men | ≥10³ CFU/mL |\n\n**Common Pathogens:**\n• **E. coli**: 75-95% of uncomplicated UTI\n• **Staph saprophyticus**: 5-10% (young women)\n• **Klebsiella, Proteus**: 5-10%\n• **Enterococcus, Pseudomonas**: complicated UTI\n\n**Resistance Patterns:**\n• Know your local antibiogram\n• TMP-SMX resistance varies widely (10-30%)\n• FQ resistance increasing\n• ESBL-producing organisms more common',
         citation: [1, 6],
         next: 'uti-classification-decision',
+        summary: 'Send culture for complicated UTI, pyelo, men, pregnancy, catheter, treatment failure — not needed for simple cystitis',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 3: UTI CLASSIFICATION
@@ -135,6 +150,7 @@ export const ADULT_UTI_NODES = [
             { id: 'crcl-cockcroft-gault', label: 'CrCl Calculator' },
         ],
         next: 'uti-uncomplicated-treatment',
+        summary: 'Nitrofurantoin 100mg BID x5d preferred, TMP-SMX x3d if resistance <20%, fosfomycin single dose — avoid FQ for cystitis',
     },
     {
         id: 'uti-uncomplicated-treatment',
@@ -147,6 +163,7 @@ export const ADULT_UTI_NODES = [
             { label: 'TMP-SMX', description: 'If local resistance <20%', next: 'uti-tmpsmx' },
             { label: 'Fosfomycin', description: 'Single dose option', next: 'uti-disposition-uncomplicated' },
         ],
+        summary: 'Select first-line agent: nitrofurantoin (lowest resistance), TMP-SMX (check local antibiogram), fosfomycin (single dose)',
     },
     {
         id: 'uti-complicated',
@@ -156,6 +173,7 @@ export const ADULT_UTI_NODES = [
         body: '**Complicated UTI** = UTI with factors increasing treatment failure or recurrence risk. [6][7]\n\n**ALWAYS Complicated:**\n• Male sex (all UTI in men are complicated)\n• Pregnancy\n• Structural abnormality\n• Indwelling catheter\n• Recent urologic procedure\n• Renal transplant\n• Immunocompromised\n\n**Other Complicating Factors:**\n• Diabetes mellitus\n• Recent antibiotics\n• Hospital-acquired\n• Resistant organism history\n• Renal insufficiency\n\n**Workup for Complicated UTI:**\n• Always send urine culture\n• Consider imaging if:\n  - No improvement in 48-72h\n  - Suspected abscess\n  - Suspected obstruction\n• Labs: BMP (renal function)\n\n**Treatment (7-14 days):**\n• **Fluoroquinolone** (ciprofloxacin, levofloxacin)\n• **TMP-SMX** (if susceptible)\n• **Beta-lactam** (amoxicillin-clavulanate, cephalosporin)\n\n**Men with UTI:**\n• All are complicated by definition\n• Treat 7 days minimum\n• Consider prostatitis (treat 4-6 weeks)\n• Urology referral if recurrent',
         citation: [6, 7],
         next: 'uti-complicated-next',
+        summary: 'All male UTIs are complicated; always culture; FQ or TMP-SMX x7-14d; consider prostatitis if recurrent',
     },
     {
         id: 'uti-complicated-next',
@@ -168,6 +186,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Catheter-Associated', description: 'CAUTI management', next: 'uti-cauti' },
             { label: 'Standard Complicated', description: 'Treat with FQ or culture-guided', next: 'uti-fluoroquinolones' },
         ],
+        summary: 'Route complicated UTI: male (consider prostatitis), catheter-associated (remove/change first), standard complicated',
     },
     {
         id: 'uti-pyelonephritis',
@@ -177,6 +196,7 @@ export const ADULT_UTI_NODES = [
         body: '**Pyelonephritis** = upper urinary tract infection involving kidney parenchyma. [8][9]\n\n**Clinical Features:**\n• Fever (≥38°C / 100.4°F)\n• Flank pain\n• CVA tenderness\n• Nausea/vomiting\n• ± Cystitis symptoms\n\n**Labs:**\n• UA with culture (always)\n• CBC (leukocytosis)\n• BMP (creatinine)\n• Blood cultures if septic\n\n**Imaging:**\n• NOT routine for uncomplicated pyelo\n• CT if:\n  - No improvement in 48-72h\n  - Suspected obstruction (stone)\n  - Diabetic (emphysematous pyelo)\n  - Immunocompromised\n  - Suspected abscess\n\n**Treatment Duration:**\n• Outpatient: 5-7 days (FQ) or 10-14 days (TMP-SMX)\n• Inpatient: 10-14 days total',
         citation: [8, 9],
         next: 'uti-pyelo-disposition',
+        summary: 'Fever + flank pain + CVA tenderness — always culture; CT only if no improvement at 48-72h, DM, or suspected abscess',
     },
     {
         id: 'uti-pyelo-disposition',
@@ -188,6 +208,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Outpatient Treatment', description: 'Tolerating PO, no sepsis, reliable follow-up', next: 'uti-pyelo-outpatient' },
             { label: 'Inpatient Treatment', description: 'Septic, vomiting, pregnant, unreliable', next: 'uti-pyelo-inpatient' },
         ],
+        summary: 'Outpatient if tolerating PO, no sepsis, not pregnant, reliable follow-up — otherwise admit for IV antibiotics',
     },
     {
         id: 'uti-pyelo-outpatient',
@@ -197,6 +218,8 @@ export const ADULT_UTI_NODES = [
         body: '**Outpatient treatment criteria (ALL required):** [8][9]\n• Able to tolerate PO intake\n• No significant comorbidities\n• No sepsis\n• Not pregnant\n• Reliable follow-up\n• Home support\n\n**First-Line Outpatient Regimens:**\n\n**1. Fluoroquinolone (PREFERRED):**\n• Ciprofloxacin 500mg BID x 7 days, OR\n• Levofloxacin 750mg daily x 5 days\n\n**2. TMP-SMX (if susceptible):**\n• 1 DS tab BID x 14 days\n• Give single dose ceftriaxone 1g IM first (covers while awaiting sensitivities)\n\n**Alternative:**\n• Ceftriaxone 1g IM x 1, then oral cephalosporin x 10-14 days\n\n**⚠️ DO NOT use nitrofurantoin for pyelonephritis** - does not achieve adequate renal tissue levels\n\n**Follow-Up:**\n• Call/return if worsening or no improvement in 48-72h\n• Repeat culture NOT needed if clinically improved\n• PCP follow-up in 2-3 days',
         citation: [8, 9],
         next: 'uti-disposition-pyelo',
+        summary: 'FQ x7d or TMP-SMX x14d with IM ceftriaxone bridge — do NOT use nitrofurantoin (no renal tissue levels)',
+        safetyLevel: 'warning',
     },
     {
         id: 'uti-pyelo-inpatient',
@@ -206,6 +229,7 @@ export const ADULT_UTI_NODES = [
         body: '**Admission Criteria:** [8][9]\n• Unable to tolerate PO (vomiting)\n• Sepsis or hemodynamic instability\n• Pregnancy\n• Complicated features (obstruction, abscess)\n• Significant comorbidity (diabetes, immunocompromised)\n• No reliable follow-up\n• Failed outpatient therapy\n\n**IV Antibiotic Options:**\n\n**1. Fluoroquinolone:**\n• Ciprofloxacin 400mg IV q12h, OR\n• Levofloxacin 750mg IV daily\n\n**2. Cephalosporin:**\n• Ceftriaxone 1g IV daily\n\n**3. Aminoglycoside-based:**\n• Gentamicin 5mg/kg IV daily + Ampicillin 2g IV q4h\n• For Enterococcus coverage or FQ allergy\n\n**4. Carbapenem (severe/MDR):**\n• Ertapenem 1g IV daily, OR\n• Meropenem 1g IV q8h (Pseudomonas)\n\n**Step-Down:**\n• Convert to PO when:\n  - Afebrile 24-48h\n  - Tolerating PO\n  - Clinically improving\n• Complete 10-14 day total course\n\n**If Not Improving:**\n• CT to rule out obstruction/abscess\n• Broaden antibiotics\n• Consider resistant organism\n• Urology consult if obstruction',
         citation: [8, 9],
         next: 'uti-disposition-pyelo',
+        summary: 'Admit for IV FQ/ceftriaxone/gentamicin+ampicillin; step-down to PO when afebrile 24-48h and tolerating PO',
     },
     // =====================================================================
     // MODULE 4: ANTIBIOTIC SELECTION
@@ -221,6 +245,7 @@ export const ADULT_UTI_NODES = [
             { id: 'crcl-cockcroft-gault', label: 'CrCl Calculator' },
         ],
         next: 'uti-disposition-uncomplicated',
+        summary: 'Macrobid 100mg BID x5d — avoid if CrCl<30 or pyelonephritis; <5% E. coli resistance, minimal collateral damage',
     },
     {
         id: 'uti-tmpsmx',
@@ -230,6 +255,7 @@ export const ADULT_UTI_NODES = [
         body: '**TMP-SMX (Bactrim, Septra)** [1][2]\n\n**Dosing:**\n• 1 DS tablet (160/800mg) BID\n• Uncomplicated cystitis: 3 days\n• Pyelonephritis: 14 days\n• Complicated UTI: 7-14 days\n\n**Advantages:**\n• Excellent tissue penetration\n• Effective for pyelonephritis\n• Inexpensive\n• Once effective first-line\n\n**Major Limitation: RESISTANCE**\n• Use only if local resistance <20%\n• Check your hospital antibiogram\n• Many areas have 20-30% resistance\n\n**Contraindications:**\n• Sulfa allergy\n• G6PD deficiency\n• Pregnancy (1st trimester - teratogenic)\n• Severe renal impairment\n\n**Drug Interactions:**\n• Warfarin (increased INR)\n• Methotrexate (increased toxicity)\n• ACE inhibitors (hyperkalemia)\n\n**When to Use:**\n• Local resistance <20%\n• Culture confirms susceptibility\n• Patient tolerates sulfa\n• Not pregnant (1st trimester)',
         citation: [1, 2],
         next: 'uti-disposition-uncomplicated',
+        summary: 'DS tab BID x3d for cystitis — only if local resistance <20%; avoid in pregnancy, sulfa allergy, G6PD deficiency',
     },
     {
         id: 'uti-fluoroquinolones',
@@ -239,6 +265,8 @@ export const ADULT_UTI_NODES = [
         body: '**Fluoroquinolones - Reserve for Complicated UTI / Pyelonephritis** [1][2]\n\n**FDA Black Box Warning:**\n• Tendon rupture/tendinitis\n• Peripheral neuropathy\n• CNS effects\n• Reserve for when no alternatives\n\n**Dosing:**\n| Drug | Cystitis | Pyelonephritis |\n|------|----------|----------------|\n| Ciprofloxacin | 250mg BID x 3d | 500mg BID x 7d |\n| Levofloxacin | 250mg daily x 3d | 750mg daily x 5d |\n\n**When to Use:**\n• Complicated UTI\n• Pyelonephritis\n• Male UTI\n• Resistance/allergy to first-line agents\n• Culture-confirmed susceptibility\n\n**When NOT to Use:**\n• Uncomplicated cystitis (unless no alternatives)\n• Recent FQ use\n• Known FQ resistance\n• Pediatric/adolescent\n\n**Resistance Concerns:**\n• Increasing E. coli resistance (15-25%)\n• Cross-resistance within class\n• Promotes C. diff\n\n**Special Populations:**\n• Renal dosing required\n• Avoid in pregnancy\n• Caution in elderly (tendon rupture risk)',
         citation: [1, 2],
         next: 'uti-disposition-complicated',
+        summary: 'Reserve FQ for complicated UTI/pyelo — FDA black box for tendon rupture, neuropathy, CNS effects; increasing resistance',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5: SPECIAL POPULATIONS
@@ -251,6 +279,8 @@ export const ADULT_UTI_NODES = [
         body: '**Pregnancy makes ALL UTIs complicated:** [10]\n\n**Key Principle: TREAT ASYMPTOMATIC BACTERIURIA (ASB)**\n• ASB in pregnancy → 25-40% progress to pyelonephritis\n• Pyelo in pregnancy → preterm labor, low birth weight\n• Screen and treat ASB at first prenatal visit\n\n**Safe Antibiotics in Pregnancy:**\n\n**First-Line:**\n• **Nitrofurantoin** 100mg BID x 5-7 days\n  - Avoid at term (theoretical hemolysis)\n  - Avoid in 1st trimester if alternatives\n• **Cephalexin** 500mg QID x 7 days\n• **Amoxicillin-clavulanate** 500mg TID x 7 days\n\n**For Pyelonephritis:**\n• **Admit for IV antibiotics**\n• Ceftriaxone 1g IV daily\n• Ampicillin + gentamicin\n\n**AVOID in Pregnancy:**\n• ❌ TMP-SMX (1st trimester - neural tube defects; 3rd trimester - kernicterus)\n• ❌ Fluoroquinolones (cartilage damage)\n• ❌ Tetracyclines\n\n**Duration:**\n• Cystitis: 7 days (longer than non-pregnant)\n• Pyelonephritis: 10-14 days\n• Consider suppressive therapy for recurrent UTI',
         citation: [10],
         next: 'uti-disposition-pregnant',
+        summary: 'TREAT ASB in pregnancy (25-40% → pyelo) — nitrofurantoin/cephalexin x7d; ADMIT ALL pregnant pyelo for IV abx',
+        safetyLevel: 'critical',
     },
     {
         id: 'uti-elderly',
@@ -260,6 +290,8 @@ export const ADULT_UTI_NODES = [
         body: '**UTI in Elderly - Most Over-Diagnosed Condition:** [11]\n\n**Key Principle: Asymptomatic bacteriuria is COMMON and should NOT be treated**\n\n**ASB Prevalence:**\n• Community-dwelling elderly: 15-50%\n• Nursing home residents: 25-50%\n• Catheterized: up to 100%\n\n**DO NOT TREAT ASB (IDSA Guidelines):**\n• Positive UA/culture WITHOUT symptoms ≠ UTI\n• "Foul-smelling urine" alone is not a UTI\n• "Cloudy urine" alone is not a UTI\n• Non-specific symptoms (fatigue, weakness) are not UTI\n\n**What IS Symptomatic UTI in Elderly:**\n• Dysuria\n• New frequency/urgency\n• Fever without other source\n• Suprapubic pain\n• Gross hematuria\n• New or worsening incontinence\n\n**Altered Mental Status:**\n• UTI causing delirium is OVER-DIAGNOSED\n• Always look for other causes first\n• UTI should be diagnosis of exclusion\n• If treating, response to antibiotics should be rapid\n\n**Treatment in Elderly:**\n• Same antibiotics as younger adults\n• Mind drug interactions\n• Adjust for renal function\n• Avoid FQ if possible (tendon risk)',
         citation: [11],
         next: 'uti-elderly-decision',
+        summary: 'Most over-diagnosed condition — foul/cloudy urine alone is NOT UTI; confusion alone is NOT UTI; do NOT treat ASB',
+        safetyLevel: 'warning',
     },
     {
         id: 'uti-elderly-decision',
@@ -271,6 +303,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Yes - True Symptoms', description: 'Dysuria, frequency, fever + pyuria', next: 'uti-complicated' },
             { label: 'No - Likely ASB', description: 'No symptoms, just positive UA', next: 'uti-asb' },
         ],
+        summary: 'True symptoms = dysuria, new frequency, fever without other source — positive UA alone without symptoms = ASB',
     },
     {
         id: 'uti-asb',
@@ -290,6 +323,8 @@ export const ADULT_UTI_NODES = [
         body: '**Catheter-Associated UTI (CAUTI):** [12]\n\n**Definition:**\nSymptomatic UTI in patient with indwelling catheter or removed within 48h\n\n**Symptoms of CAUTI (need ≥1):**\n• Fever (no other source)\n• New flank/suprapubic pain\n• Costovertebral angle tenderness\n• Altered mental status (if no other cause)\n• New or worsening delirium\n\n**⚠️ NOT CAUTI:**\n• Positive culture alone (always positive if catheterized)\n• Cloudy or foul-smelling urine\n• Pyuria (universal in catheterized patients)\n\n**Management:**\n\n**1. REMOVE OR CHANGE CATHETER:**\n• Remove if no longer needed (preferred)\n• If still needed, change catheter before obtaining culture\n• Biofilm on old catheter harbors resistant organisms\n\n**2. Obtain Culture:**\n• From new catheter if changed\n• Or from freshly placed catheter\n\n**3. Empiric Antibiotics:**\n• FQ or cephalosporin (broader coverage)\n• Tailor based on culture\n• Duration: 7 days (10-14 if slow response)\n\n**Prevention:**\n• Remove catheters as soon as possible\n• Alternatives: intermittent cath, condom cath\n• Proper insertion technique\n• Maintain closed drainage system',
         citation: [12],
         next: 'uti-disposition-complicated',
+        summary: 'REMOVE or change catheter first, culture from new catheter — positive culture alone is NOT CAUTI',
+        safetyLevel: 'warning',
     },
     {
         id: 'uti-male',
@@ -299,6 +334,7 @@ export const ADULT_UTI_NODES = [
         body: '**All UTI in Men Are Complicated:** [6][7]\n\n**Reasons:**\n• Anatomically longer urethra (UTI less common)\n• When UTI occurs, often underlying cause\n• Higher rate of treatment failure\n• Prostatitis common\n\n**Workup:**\n• UA with culture (always)\n• Consider prostate exam (tenderness = prostatitis)\n• Consider STI testing (young, sexually active)\n• Consider imaging if recurrent\n\n**When to Consider Prostatitis:**\n• Perineal or pelvic pain\n• Voiding symptoms\n• Tender prostate on exam\n• Recurrent UTI\n\n**Treatment:**\n\n**Simple UTI in Men:**\n• FQ or TMP-SMX x 7 days (minimum)\n• Culture to guide therapy\n\n**Prostatitis:**\n• FQ x 4-6 weeks (tissue penetration)\n• TMP-SMX x 4-6 weeks alternative\n• Must have good prostate penetration\n\n**Poor Prostate Penetration (avoid):**\n• Nitrofurantoin\n• Beta-lactams\n• Aminoglycosides\n\n**Referral:**\n• Urology for recurrent UTI\n• Evaluate for structural abnormality\n• Consider PSA, post-void residual',
         citation: [6, 7],
         next: 'uti-disposition-complicated',
+        summary: 'All male UTIs complicated — FQ/TMP-SMX x7d minimum; prostatitis = 4-6 weeks; avoid nitrofurantoin (no prostate penetration)',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -321,6 +357,7 @@ export const ADULT_UTI_NODES = [
         body: '**Complicated UTI Disposition:** [6][7]\n\n**Outpatient Criteria (ALL required):**\n• Stable vital signs\n• Able to tolerate PO\n• No sepsis\n• Reliable follow-up\n• Home support\n• Not high-risk\n\n**Outpatient Management:**\n• FQ or TMP-SMX x 7-14 days\n• Ensure culture sent\n• Close follow-up in 48-72h\n• Return precautions clearly explained\n\n**Admission Criteria:**\n• Sepsis or hemodynamic instability\n• Unable to tolerate PO\n• Significant comorbidity\n• Failed outpatient therapy\n• Obstruction or abscess suspected\n• No reliable follow-up\n\n**Follow-Up Plan:**\n• PCP in 48-72h\n• Culture results review\n• Adjust antibiotics based on sensitivities\n• Urology referral if:\n  - Structural abnormality\n  - Recurrent infections\n  - Failed treatment\n\n**Duration:**\n• Simple complicated UTI: 7 days\n• Prostatitis: 4-6 weeks\n• With bacteremia: 10-14 days',
         citation: [6, 7],
         next: 'uti-dispo-decision',
+        summary: 'Outpatient if stable, tolerating PO, reliable follow-up — admit if septic, vomiting, unreliable, or failed outpatient therapy',
     },
     {
         id: 'uti-dispo-decision',
@@ -332,6 +369,7 @@ export const ADULT_UTI_NODES = [
             { label: 'Discharge Home', description: 'Stable, tolerating PO, reliable follow-up', next: 'uti-discharge-complicated' },
             { label: 'Admit', description: 'Septic, vomiting, unreliable, high-risk', next: 'uti-admit' },
         ],
+        summary: 'Discharge if stable with close follow-up for culture results; admit if septic or unable to tolerate PO',
     },
     {
         id: 'uti-discharge-complicated',

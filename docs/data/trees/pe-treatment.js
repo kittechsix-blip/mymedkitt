@@ -36,6 +36,7 @@ export const PE_TREATMENT_NODES = [
                 next: 'pe-low-risk',
             },
         ],
+        summary: 'Assess hemodynamics, bedside echo for RV strain, troponin/BNP; use PESI/sPESI for normotensive patients',
     },
     // =====================================================================
     // MODULE 2: MASSIVE PE (HIGH-RISK)
@@ -49,6 +50,7 @@ export const PE_TREATMENT_NODES = [
         images: [{ src: 'images/pe-treatment/saddle-pe-ct.png', alt: 'CT pulmonary angiogram showing saddle embolus straddling the main pulmonary artery bifurcation with bilateral filling defects', caption: 'Saddle PE on CT-PA — massive embolus at the main PA bifurcation with bilateral filling defects. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 3],
         next: 'pe-massive-tx',
+        summary: 'SBP <90 or cardiogenic shock; mortality >15% without treatment; saddle embolus pattern on CT-PA',
     },
     {
         id: 'pe-massive-tx',
@@ -77,6 +79,8 @@ export const PE_TREATMENT_NODES = [
             monitoring: 'aPTT q6h until stable (target 1.5-2.5x control); CBC, signs of bleeding; hemodynamic status',
         },
         next: 'pe-anticoag-selection',
+        summary: 'UFH 80 U/kg bolus then alteplase 100 mg IV over 2h; cautious fluids (>500 mL worsens RV); norepinephrine preferred',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: SUBMASSIVE PE (INTERMEDIATE-RISK)
@@ -101,6 +105,7 @@ export const PE_TREATMENT_NODES = [
                 next: 'pe-submassive-low',
             },
         ],
+        summary: 'Stratify by RV dysfunction (echo/CT) AND biomarkers (troponin/BNP); both present = intermediate-high risk',
     },
     {
         id: 'pe-submassive-high',
@@ -128,6 +133,8 @@ export const PE_TREATMENT_NODES = [
             monitoring: 'CBC, Cr, signs of bleeding; hemodynamic status for escalation to thrombolysis',
         },
         next: 'pe-anticoag-selection',
+        summary: 'ICU monitoring; enoxaparin or UFH if escalation likely; rescue alteplase if decompensation occurs',
+        safetyLevel: 'warning',
     },
     {
         id: 'pe-submassive-low',
@@ -155,6 +162,7 @@ export const PE_TREATMENT_NODES = [
             monitoring: 'CBC, Cr; monitor for clinical deterioration requiring escalation',
         },
         next: 'pe-anticoag-selection',
+        summary: 'Anticoagulation alone; thrombolysis not indicated; admit for monitoring; escalate if deterioration',
     },
     // =====================================================================
     // MODULE 4: LOW-RISK PE
@@ -171,6 +179,7 @@ export const PE_TREATMENT_NODES = [
             { id: 'spesi', label: 'sPESI Score' },
         ],
         next: 'pe-outpatient-check',
+        summary: 'PESI Class I-II or sPESI 0 confirms low-risk; no RV dysfunction, normal biomarkers, stable hemodynamics',
     },
     {
         id: 'pe-outpatient-check',
@@ -191,6 +200,7 @@ export const PE_TREATMENT_NODES = [
                 next: 'pe-inpatient-low',
             },
         ],
+        summary: 'Hestia-type criteria: stable, no O2 need, no bleeding risk, good support, able to take oral meds, not pregnant',
     },
     {
         id: 'pe-outpatient-tx',
@@ -219,6 +229,7 @@ export const PE_TREATMENT_NODES = [
             monitoring: 'Follow-up within 3-7 days; reassess at 3 months for extended therapy',
         },
         next: 'pe-anticoag-selection',
+        summary: 'Apixaban 10 mg BID x7d then 5 mg BID, or rivaroxaban 15 mg BID x21d then 20 mg daily; no bridge needed',
     },
     {
         id: 'pe-inpatient-low',
@@ -246,6 +257,7 @@ export const PE_TREATMENT_NODES = [
             monitoring: 'Observe 24-48h; confirm oral intake before discharge',
         },
         next: 'pe-anticoag-selection',
+        summary: 'Admit 24-48h observation; start oral DOAC; transition to outpatient when stable and tolerating PO',
     },
     // =====================================================================
     // MODULE 5: ANTICOAGULATION SELECTION
@@ -274,6 +286,7 @@ export const PE_TREATMENT_NODES = [
                 next: 'pe-renal-hepatic',
             },
         ],
+        summary: 'DOACs preferred; CrCl <30 use UFH; cancer VTE use DOAC or LMWH; pregnancy use LMWH only; HIT use argatroban/fondaparinux',
     },
     {
         id: 'pe-doac',
@@ -301,6 +314,7 @@ export const PE_TREATMENT_NODES = [
             },
             monitoring: 'Cr at baseline; reassess at 3 months for extended therapy decision',
         },
+        summary: 'Apixaban/rivaroxaban no bridge needed; edoxaban/dabigatran require 5-10d parenteral lead-in; minimum 3 months',
     },
     {
         id: 'pe-lmwh-warfarin',
@@ -328,6 +342,7 @@ export const PE_TREATMENT_NODES = [
             },
             monitoring: 'INR weekly until stable, then monthly; CBC',
         },
+        summary: 'Enoxaparin bridge to warfarin; overlap until INR 2-3 for 2 consecutive days; INR monitoring weekly then monthly',
     },
     {
         id: 'pe-renal-hepatic',
@@ -363,6 +378,8 @@ export const PE_TREATMENT_NODES = [
             },
             monitoring: 'aPTT q6h (UFH); anti-Xa levels for LMWH in renal impairment; platelets for HIT',
         },
+        summary: 'CrCl <30 use UFH; severe hepatic use UFH; HIT: stop ALL heparin, use fondaparinux or argatroban',
+        safetyLevel: 'warning',
     },
 ];
 export const PE_TREATMENT_NODE_COUNT = PE_TREATMENT_NODES.length;

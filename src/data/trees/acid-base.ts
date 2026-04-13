@@ -39,6 +39,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-stew-assess',
       },
     ],
+
+    summary: 'Order ABG/VBG + BMP + lactate + albumin, then choose Traditional or Stewart diagnostic pathway',
   },
 
   {
@@ -63,6 +65,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-normal-ph',
       },
     ],
+
+    summary: 'Classify pH as acidemia, alkalemia, or normal — normal pH does not exclude mixed disorders',
   },
 
   // =====================================================================
@@ -92,6 +96,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-met-acid',
       },
     ],
+
+    summary: 'Determine if acidemia is respiratory (high pCO2) or metabolic (low/normal pCO2) in origin',
   },
 
   {
@@ -111,6 +117,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-resp-acid-chronic',
       },
     ],
+
+    summary: 'Distinguish acute vs chronic respiratory acidosis using renal compensation rules (3-5 days for full effect)',
   },
 
   {
@@ -156,6 +164,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-met-alk',
       },
     ],
+
+    summary: 'Determine if alkalemia is respiratory (low pCO2) or metabolic (normal/high pCO2) in origin',
   },
 
   {
@@ -182,6 +192,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     calculatorLinks: [{ id: 'anion-gap', label: 'Anion Gap Calculator' }],
     citation: [7, 8],
     next: 'ab-ag-result',
+
+    summary: 'Calculate AG (Na-Cl-HCO3), correct for albumin — low albumin falsely narrows AG and masks HAGMA',
+    skippable: true,
   },
 
   {
@@ -201,6 +214,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-nagma',
       },
     ],
+
+    summary: 'Classify metabolic acidosis as anion gap (>12) or non-anion gap (8-12) to guide differential',
   },
 
   {
@@ -212,6 +227,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     calculatorLinks: [{ id: 'osmolar-gap', label: 'Osmolar Gap Calculator' }],
     citation: [5, 7, 16],
     next: 'ab-delta',
+
+    summary: 'HAGMA confirmed — check lactate, BHB, tox screen, then proceed to Delta Gap for mixed disorders',
+    skippable: true,
   },
 
   {
@@ -239,6 +257,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-delta-high',
       },
     ],
+
+    summary: 'Delta ratio (ΔAG/ΔHCO3) detects hidden second metabolic process — <1 concurrent NAGMA, >2 concurrent alkalosis',
   },
 
   {
@@ -272,6 +292,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     calculatorLinks: [{ id: 'winters-formula', label: 'Winter\'s Formula Calculator' }],
     citation: [6],
     next: 'ab-winters-result',
+
+    summary: 'Apply Winter\'s Formula to predict expected pCO2 — detects concurrent respiratory disturbances',
+    skippable: true,
   },
 
   {
@@ -298,6 +321,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-mixed-resp-alk',
       },
     ],
+
+    summary: 'Compare actual pCO2 to Winter\'s prediction — higher means concurrent respiratory acidosis, lower means respiratory alkalosis',
   },
 
   {
@@ -345,6 +370,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-met-alk-resist',
       },
     ],
+
+    summary: 'Urine chloride differentiates chloride-responsive (<20, give NS) from chloride-resistant (>20, won\'t respond to saline)',
   },
 
   {
@@ -403,6 +430,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     body: '**Step 1: Note the pH** — acidosis (< 7.35) or alkalosis (> 7.45).\n**Step 2: Check pCO2** — respiratory component uses the same rules as the traditional approach.\n\n[Stewart Approach Explained](#/info/ab-stewart-explained) — SID concept, Gamblegram, weak acids, and clinical examples.\n\n**Reference values:**\n• Na: 140 mEq/L | Cl: 105 mEq/L | SID (Na-Cl): 35 mEq/L\n• Albumin: 4.2 g/dL | Lactate: 1 mmol/L | Base Excess: 0',
     citation: [10, 11],
     next: 'ab-stew-sid',
+
+    summary: 'Stewart Step 1-2: note pH and pCO2, then proceed to SID calculation using Na-Cl difference',
+    skippable: true,
   },
 
   {
@@ -427,6 +457,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-stew-sid-high',
       },
     ],
+
+    summary: 'SID (Na-Cl) normal ~35 — low SID = acidosis from Cl excess or Na deficit, high SID = alkalosis',
   },
 
   {
@@ -437,6 +469,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     body: 'Na-Cl effect = (Na − Cl) − 35 mEq/L → **negative** = acidosis contribution.\n\nIn hyponatremic patients, a normal chloride concentration (relative hyperchloremia) will result in a decreased SID and metabolic acidosis. [11]\n\n**Common causes:** Fluid administration (NS, D5W, ½NS all have SID 0), RTA, diarrhea.\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — how NS causes acidosis.\n[Differential Diagnosis](#/info/ab-differential) — RTA types and NAGMA causes.',
     citation: [11, 13],
     next: 'ab-stew-lactate',
+
+    summary: 'Low SID acidosis — from NS resuscitation, RTA, or diarrhea; consider balanced crystalloids',
+    skippable: true,
   },
 
   {
@@ -447,6 +482,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     body: 'Na-Cl effect = (Na − Cl) − 35 mEq/L → **positive** = alkalosis contribution.\n\nHypernatremic patients will have an increased SID and metabolic alkalosis even with a chloride in the reference range. [11]\n\n**Common causes of high SID alkalosis:**\n• NG suction (chloride-rich gastric losses)\n• Diuretics (chloride wasting)\n• Hyperaldosteronism\n• Volume depletion / contraction alkalosis\n• Post-hypercapnia',
     citation: [11],
     next: 'ab-stew-lactate',
+
+    summary: 'High SID alkalosis — from chloride-rich GI losses, diuretics, hyperaldosteronism, or contraction',
+    skippable: true,
   },
 
   {
@@ -473,6 +511,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Lactate effect = 1-measured lactate; >4 is critical — consider sepsis, shock, mesenteric ischemia',
+    safetyLevel: 'warning',
   },
 
   {
@@ -501,6 +542,8 @@ export const ACID_BASE_NODES: DecisionNode[] = [
         next: 'ab-stew-sig-neg',
       },
     ],
+
+    summary: 'SIG >2 = unmeasured anions (ketones, uremia, toxic alcohols) beyond Na-Cl, lactate, and albumin',
   },
 
   {
@@ -512,6 +555,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     calculatorLinks: [{ id: 'osmolar-gap', label: 'Osmolar Gap Calculator' }],
     citation: [7, 10, 11, 16],
     next: 'ab-stew-osm',
+
+    summary: 'Elevated SIG causes: uremia, DKA, AKA, toxic alcohols, salicylates — check osmolar gap if unclear',
+    skippable: true,
   },
 
   {
@@ -542,6 +588,9 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     ],
     citation: [1, 2, 3, 12, 13, 17],
     next: 'ab-disposition',
+
+    summary: 'Bicarb for pH<6.9 with AKI, TCA OD, salicylate tox, severe hyperK — NOT routine in DKA or lactic acidosis',
+    safetyLevel: 'warning',
   },
 
   {

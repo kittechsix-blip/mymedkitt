@@ -35,6 +35,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     body: '[Pelvic Fracture Steps Summary](#/info/pelvic-summary) — quick reference for trauma resuscitation.\n\n**High-energy pelvic fractures are potentially life-threatening injuries** with mortality rates of 5-16% (up to 50% in hemodynamically unstable patients). [1][2]\n\n**Immediate priorities:**\n• Primary survey (ATLS)\n• Establish two large-bore IVs\n• Type and crossmatch\n• Activate massive transfusion protocol if unstable\n• **Do NOT rock the pelvis** — may dislodge clots and worsen bleeding\n\n**Key mechanism patterns:**\n• MVC with lateral impact → lateral compression (LC)\n• MVC with frontal impact → anterior-posterior compression (APC)\n• Fall from height → vertical shear (VS)\n• Motorcycle/pedestrian → combined mechanism',
     citation: [1, 2, 3],
     next: 'pelvic-exam',
+
+    summary: 'Mortality 5-16% (50% if unstable); do NOT rock pelvis; activate MTP if unstable; mechanism predicts fracture pattern',
   },
 
   {
@@ -46,6 +48,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     citation: [1, 3, 4],
     calculatorLinks: [{ id: 'urethral-injury-risk', label: 'Urethral Injury Risk' }],
     next: 'pelvic-imaging',
+
+    summary: 'Assess stability ONCE (do not repeat); check for urethral injury BEFORE Foley; perineal laceration = open fracture',
   },
 
   {
@@ -53,6 +57,7 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Initial Imaging',
+    summary: 'AP pelvis in trauma series; FAST for hemoperitoneum; CT with contrast is gold standard for stable patients; symphysis >2.5cm = unstable',
     body: '**AP Pelvis X-ray:**\n• Part of trauma series (chest, pelvis, C-spine)\n• Identifies gross instability, pubic symphysis diastasis, sacral fractures\n• Pubic symphysis >2.5 cm = significant instability\n\n**FAST Exam:**\n• Evaluates for free fluid (hemoperitoneum)\n• Positive FAST in unstable patient → OR for laparotomy\n• Negative FAST does NOT rule out pelvic hemorrhage (retroperitoneal)\n\n**CT Pelvis with IV Contrast:**\n• Gold standard for fracture characterization\n• Identifies arterial contrast blush (active hemorrhage)\n• Defines injury pattern for classification\n• CT cystogram if bladder injury suspected\n\n**Indications for CT:**\n• All hemodynamically stable patients with pelvic fracture on X-ray\n• Unstable patients — only if can be stabilized for transport',
     images: [{ src: 'images/pelvic-fracture/pelvis-fracture-xray.jpg', alt: 'AP pelvis radiograph showing fracture of the left inferior pubic ramus and left acetabular wall', caption: 'AP pelvic X-ray — pubic ramus and acetabular wall fracture. Part of mandatory trauma series in any hemodynamically unstable trauma patient. (CC BY-SA 4.0, Cerevisae)' }],
     citation: [1, 2, 5],
@@ -90,6 +95,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Classify stable, transient responder, or unstable; hemodynamic status drives entire management pathway',
   },
 
   {
@@ -111,6 +118,9 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
       monitoring: 'Continuous BP, HR. Serial lactate. ABG. Hgb q2-4h. TEG/ROTEM if available.',
     },
     next: 'pelvic-unstable-source',
+
+    summary: 'Apply pelvic binder at greater trochanters immediately; TXA 1g IV if <3h from injury; activate MTP',
+    safetyLevel: 'critical',
   },
 
   {
@@ -135,6 +145,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'FAST positive = likely intra-abdominal source; FAST negative = retroperitoneal pelvic hemorrhage (90% venous, 10% arterial)',
   },
 
   {
@@ -354,6 +366,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Young-Burgess (mechanism-based) and Tile (stability-based) guide management; LC/APC/VS/CM each have distinct bleeding profiles',
   },
 
   {
@@ -364,6 +378,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     body: '**Mechanism:** Side impact (T-bone MVC, fall onto side)\n\n**LC-I:**\n• Transverse pubic rami fractures\n• Sacral compression (anterior) fracture\n• Stable — often non-operative\n\n**LC-II:**\n• LC-I + posterior iliac wing fracture (crescent fracture)\n• Rotationally unstable\n• May require fixation\n\n**LC-III:**\n• LC-I or LC-II ipsilateral\n• Contralateral APC (windswept pelvis)\n• Highly unstable — operative\n\n**Bleeding risk:** Lower than APC/VS (pelvic volume decreases)\n\n**Caution with pelvic binder:** May worsen displacement in pure LC injuries. Use with caution or leave loose.',
     citation: [1, 3, 5],
     next: 'pelvic-classification-management',
+
+    summary: 'LC: side impact, lower bleeding risk; caution with binder (may worsen LC); LC-III windswept = highly unstable',
   },
 
   {
@@ -374,6 +390,8 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     body: '**Mechanism:** Frontal impact (head-on MVC, crush injury)\n\n**APC-I:**\n• Pubic symphysis diastasis <2.5 cm\n• Anterior SI ligaments intact\n• Stable — often non-operative\n\n**APC-II:**\n• Symphysis diastasis >2.5 cm\n• Anterior SI ligaments torn, posterior intact\n• "Open book" — rotationally unstable\n• Requires fixation\n\n**APC-III:**\n• Complete SI disruption (anterior + posterior)\n• Rotationally and vertically unstable\n• High bleeding risk — operative emergency\n\n**Bleeding risk:** HIGH — pelvic volume increases, venous plexus disrupted\n\n**Pelvic binder:** HIGHLY EFFECTIVE — reduces pelvic volume, tamponades bleeding.',
     citation: [1, 3, 5],
     next: 'pelvic-classification-management',
+
+    summary: 'APC: frontal impact, open book; HIGH bleeding risk; pelvic binder HIGHLY effective; APC-III = complete SI disruption',
   },
 
   {
@@ -384,6 +402,9 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     body: '**Mechanism:** Axial load (fall from height, motorcycle ejection)\n\n**Characteristics:**\n• Vertical displacement of hemipelvis\n• Complete disruption of all pelvic ligaments\n• Highest bleeding risk of all patterns\n• Associated with L5 transverse process fractures\n\n**Findings:**\n• Leg length discrepancy (affected side shortened)\n• Hemipelvis displaced cranially\n• Often involves sacral fractures\n\n**Management:**\n• Always operative\n• May require traction in addition to binder\n• High incidence of associated injuries\n\n**Pelvic binder:** Helps but may not fully reduce — consider longitudinal traction.',
     citation: [1, 3, 5],
     next: 'pelvic-classification-management',
+
+    summary: 'VS: axial load, highest bleeding risk, complete ligament disruption; always operative; may need traction plus binder',
+    safetyLevel: 'warning',
   },
 
   {
@@ -513,6 +534,9 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
         next: 'pelvic-foley-safe',
       },
     ],
+
+    summary: 'Evaluate BEFORE Foley: blood at meatus, high-riding prostate, scrotal/perineal hematoma, inability to void',
+    safetyLevel: 'warning',
   },
 
   {
@@ -533,6 +557,9 @@ export const PELVIC_FRACTURE_NODES: DecisionNode[] = [
     body: '**DO NOT attempt blind Foley placement.**\n\n**Retrograde Urethrogram (RUG) Indications:**\n• Blood at urethral meatus\n• High-riding prostate\n• Scrotal/perineal hematoma\n• Unable to void with full bladder\n\n[RUG Procedure Guide](#/info/pelvic-rug-procedure)\n\n**RUG Interpretation:**\n• Normal → proceed with gentle Foley attempt\n• Extravasation → suprapubic catheter\n• Partial tear → may attempt gentle single Foley attempt by experienced provider\n• Complete disruption → suprapubic catheter\n\n**Male urethral anatomy:**\n• Anterior (bulbar, penile) — below UG diaphragm\n• Posterior (membranous, prostatic) — above UG diaphragm\n• Pelvic fractures typically cause posterior urethral injuries',
     citation: [4, 8],
     next: 'pelvic-rug-decision',
+
+    summary: 'Do NOT attempt blind Foley; RUG first if urethral signs present; complete disruption requires suprapubic catheter',
+    safetyLevel: 'critical',
   },
 
   {

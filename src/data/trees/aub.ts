@@ -31,6 +31,9 @@ export const AUB_NODES: DecisionNode[] = [
     body: 'Emergency management of **acute AUB in nonpregnant reproductive-aged women**.\n\nAcute AUB refers to heavy bleeding requiring immediate intervention to prevent further blood loss. May occur spontaneously or within the context of chronic AUB (present >6 months).\n\n**Etiologies classified by PALM-COEIN:**\n• **PALM** (structural) — Polyp, Adenomyosis, Leiomyoma, Malignancy/hyperplasia\n• **COEIN** (non-structural) — Coagulopathy, Ovulatory dysfunction, Endometrial, Iatrogenic, Not classified\n\nUp to **13% of women** with heavy menstrual bleeding have von Willebrand disease; up to **20%** have an underlying coagulopathy.',
     citation: [1, 2, 4],
     next: 'aub-hemodynamic',
+
+    summary: 'Acute AUB in nonpregnant reproductive-age women — PALM-COEIN classification, 20% have underlying coagulopathy',
+    skippable: true,
   },
 
   {
@@ -53,6 +56,8 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-pregnancy',
       },
     ],
+
+    summary: 'Assess hemodynamic stability — tachycardia, hypotension, orthostasis route to emergent resuscitation',
   },
 
   {
@@ -89,6 +94,9 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Serial vitals, CBC q4-6h, urine output. Activate MTP if ongoing hemorrhage.',
     },
     next: 'aub-treatment-unstable',
+
+    summary: 'TXA 1g IV + conjugated estrogen 25mg IV, activate MTP if massive — Foley balloon tamponade 30mL if GYN unavailable',
+    safetyLevel: 'critical',
   },
 
   {
@@ -110,6 +118,9 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-pregnant-exit',
       },
     ],
+
+    summary: 'Must rule out pregnancy before any hormonal therapy — all hormonal treatments contraindicated in pregnancy',
+    safetyLevel: 'critical',
   },
 
   {
@@ -135,6 +146,8 @@ export const AUB_NODES: DecisionNode[] = [
     body: '**Bleeding history:**\n• Amount — pads/tampons per hour, passage of clots\n• Duration — days of current episode\n• Timing — relation to menstrual cycle, LMP\n• Chronic vs acute — AUB >6 months is chronic\n\n**Screen for coagulopathy:**\n• Heavy menstrual bleeding since menarche?\n• PPH, surgical/dental bleeding?\n• Easy bruising, epistaxis, family history of bleeding disorder?\n\n**Associated symptoms:**\n• Fever/chills → infection (PID, UTI)\n• Pelvic pain → ovarian cyst, torsion, adenomyosis\n• Weight gain, hirsutism, irregular periods → **PCOS**\n• Fatigue, cold intolerance, constipation → hypothyroidism\n\n**Medications:** anticoagulants, HRT, OCPs, IUD, tamoxifen\n\n**Pelvic exam:**\n• **Speculum** — identify source of bleeding, cervical lesions, foreign body, discharge\n• **Bimanual** — uterine size/contour, adnexal mass/tenderness, CMT',
     citation: [1, 2, 3],
     next: 'aub-labs',
+
+    summary: 'Focused history: bleeding amount/duration/timing, coagulopathy screen, PCOS features, pelvic exam with speculum',
   },
 
   {
@@ -145,6 +158,8 @@ export const AUB_NODES: DecisionNode[] = [
     body: '**Core labs:**\n• **CBC** with platelets — assess anemia severity\n• **Type & screen**\n• **Pregnancy test** (if not already done)\n• **TSH** — thyroid dysfunction is common contributor\n• **Iron studies** (ferritin) — if anemia present\n• **Chlamydia** screening\n\n**If coagulopathy suspected:**\n• PT / PTT / INR / fibrinogen\n• [Coagulopathy Screening Tool](#/info/aub-coag-screen) — ACOG structured screening questions\n• If screen positive → **vWF antigen**, **ristocetin cofactor**, **Factor VIII**\n\n**Consider:** LFTs (liver disease), prolactin (pituitary), serum hCG (quantitative)',
     citation: [2, 5],
     next: 'aub-imaging',
+
+    summary: 'CBC, T&S, TSH, pregnancy test, coag studies if screen positive — vWF/ristocetin/Factor VIII if coagulopathy suspected',
   },
 
   {
@@ -171,6 +186,8 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-classify',
       },
     ],
+
+    summary: 'TVUS first-line imaging; endometrial biopsy if age ≥45 or <45 with obesity/PCOS/unopposed estrogen',
   },
 
   {
@@ -181,6 +198,8 @@ export const AUB_NODES: DecisionNode[] = [
     body: '**Endometrial biopsy** is indicated to rule out hyperplasia or malignancy.\n\n[Endometrial Cancer Risk Factors](#/info/aub-endo-cancer-risk) — risk factor table with relative risks\n\n**ED considerations:**\n• If active heavy bleeding, sampling may be deferred until bleeding is controlled\n• Office endometrial biopsy (Pipelle) if available in ED\n• Otherwise, arrange **urgent GYN referral** for biopsy\n• Do NOT delay acute bleeding management for biopsy\n\n**Ensure GYN follow-up** for pathology results and definitive management.',
     citation: [1, 2],
     next: 'aub-classify',
+
+    summary: 'Biopsy to rule out hyperplasia/malignancy — do NOT delay bleeding management for biopsy, arrange GYN follow-up',
   },
 
   // =====================================================================
@@ -216,6 +235,8 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-treatment-medical',
       },
     ],
+
+    summary: 'Classify etiology by PALM-COEIN — ovulatory dysfunction (AUB-O) is most common cause (~80% of dysfunctional bleeding)',
   },
 
   {
@@ -226,6 +247,9 @@ export const AUB_NODES: DecisionNode[] = [
     body: '**Polyp (AUB-P):**\nEndometrial or cervical polyps. Hysteroscopic polypectomy is definitive treatment. Often found incidentally on US.\n\n**Adenomyosis (AUB-A):**\nEndometrial tissue within myometrium. Presents with dysmenorrhea + heavy bleeding. Diffuse uterine enlargement on exam. Medical management or hysterectomy for refractory cases.\n\n**Leiomyoma (AUB-L):**\n**Submucosal fibroids** most likely to cause AUB. Size and location guide management. May require myomectomy or uterine artery embolization.\n\n**Malignancy/Hyperplasia (AUB-M):**\nEndometrial biopsy is **mandatory**. Risk factors: age >45, obesity, PCOS, unopposed estrogen, tamoxifen, Lynch syndrome. **GYN oncology referral** if malignancy confirmed.\n\nAll structural causes warrant **GYN referral** for definitive management. In the ED, control acute bleeding medically, then arrange follow-up.',
     citation: [1, 2, 4],
     next: 'aub-treatment-medical',
+
+    summary: 'Structural PALM causes need GYN referral — submucosal fibroids most likely to cause AUB, malignancy needs biopsy',
+    skippable: true,
   },
 
   {
@@ -255,6 +279,9 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Serial CBC, vWF levels, sodium (if DDAVP given). Hematology consult for all confirmed coagulopathies.',
     },
     next: 'aub-treatment-medical',
+
+    summary: 'vWD in up to 13% — TXA first-line, DDAVP for known responders; AVOID NSAIDs with coagulopathy',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -281,6 +308,8 @@ export const AUB_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Reassess after resuscitation — bleeding controlled moves to oral therapy, refractory needs procedural intervention',
   },
 
   {
@@ -313,6 +342,8 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-rx-txa',
       },
     ],
+
+    summary: 'Select regimen: IV estrogen (72% efficacy 8h), OCPs (88%), MPA if estrogen contraindicated (76%), TXA adjunct',
   },
 
   {
@@ -342,6 +373,9 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Serial vitals, CBC. Monitor for nausea, VTE symptoms. Reassess hemostasis q4-6h.',
     },
     next: 'aub-disposition',
+
+    summary: 'IV Premarin 25mg q4-6h (max 24h) — MUST follow with progestin to prevent rebound; contraindicated in VTE/thrombophilia',
+    safetyLevel: 'warning',
   },
 
   {
@@ -363,6 +397,8 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Assess bleeding response at 48-72h. Monitor for VTE symptoms. Check contraindications per CDC MEC.',
     },
     next: 'aub-disposition',
+
+    summary: 'Monophasic OCP 35mcg EE TID x7d then taper — 88% efficacy; contraindicated if >35 + smoker, VTE, migraine with aura',
   },
 
   {
@@ -392,6 +428,8 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Assess bleeding response at 48-72h. Follow up for long-term cycle management.',
     },
     next: 'aub-disposition',
+
+    summary: 'MPA 20mg TID x7d — 76% efficacy, preferred when estrogen contraindicated (VTE, migraine, smoker >35, PCOS/obesity)',
   },
 
   {
@@ -421,6 +459,8 @@ export const AUB_NODES: DecisionNode[] = [
       monitoring: 'Monitor for VTE symptoms. Caution with concurrent OCP use (additive thrombotic risk).',
     },
     next: 'aub-disposition',
+
+    summary: 'TXA 1.3g PO TID x5d reduces bleeding 30-55% — adjunct to hormones or standalone; contraindicated in active VTE',
   },
 
   {
@@ -458,6 +498,8 @@ export const AUB_NODES: DecisionNode[] = [
         next: 'aub-discharge',
       },
     ],
+
+    summary: 'Admit if unstable/Hgb <7/failed outpatient/suspected malignancy; discharge if stable with GYN follow-up in 1-2 weeks',
   },
 
   {

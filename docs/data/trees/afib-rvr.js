@@ -25,6 +25,8 @@ export const AFIB_RVR_NODES = [
         images: [{ src: 'images/afib-rvr/afib-ecg.jpg', alt: 'Atrial fibrillation ECG — two lead rhythm strip', caption: 'AFib: irregularly irregular rhythm, absent P waves, fibrillatory baseline (Wikimedia Commons, CC BY-SA 4.0)' }],
         citation: [1, 3],
         next: 'afib-stability',
+        summary: 'Irregularly irregular rhythm 120-180bpm — always treat underlying precipitants alongside rate control',
+        skippable: true,
     },
     {
         id: 'afib-stability',
@@ -45,6 +47,7 @@ export const AFIB_RVR_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Stable vs unstable determines rate control agents vs immediate cardioversion pathway',
     },
     {
         id: 'afib-ef-screen',
@@ -70,6 +73,8 @@ export const AFIB_RVR_NODES = [
                 next: 'afib-ef-unknown',
             },
         ],
+        summary: 'EF ≤40% = CCBs CONTRAINDICATED (Class 3: Harm) — must know EF before giving diltiazem/verapamil',
+        safetyLevel: 'critical',
     },
     {
         id: 'afib-ef-unknown',
@@ -98,6 +103,8 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Heart rate, blood pressure, signs of decompensation. Obtain bedside echo to clarify EF when possible.',
         },
         next: 'afib-rate-controlled',
+        summary: 'EF unknown — use metoprolol or esmolol safely; avoid CCBs until EF confirmed >40%; bedside echo to clarify',
+        safetyLevel: 'warning',
     },
     {
         id: 'afib-hfref-drugs',
@@ -126,6 +133,8 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Heart rate, blood pressure, signs of HF decompensation. Avoid CCBs (Class 3: Harm).',
         },
         next: 'afib-hfref-controlled',
+        summary: 'CCBs CONTRAINDICATED in HFrEF — use metoprolol, digoxin (positive inotropy), or amiodarone; IV Mg as adjunct',
+        safetyLevel: 'critical',
     },
     {
         id: 'afib-hfref-controlled',
@@ -146,6 +155,7 @@ export const AFIB_RVR_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Target HR<110 in HFrEF — avoid aggressive rate control that worsens cardiac output',
     },
     {
         id: 'afib-hfref-refractory',
@@ -175,6 +185,7 @@ export const AFIB_RVR_NODES = [
                 next: 'afib-hfref-cardioversion',
             },
         ],
+        summary: 'CCBs still contraindicated — escalate with digoxin, IV Mg, amiodarone, or cardioversion for decompensated HF',
     },
     {
         id: 'afib-hfref-cardioversion',
@@ -203,6 +214,7 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Rhythm, blood pressure, respiratory status during sedation. Monitor for AF recurrence post-cardioversion.',
         },
         next: 'afib-refractory-reassess',
+        summary: 'Cardioversion beneficial in HFrEF — loss of atrial kick worsens CO; amiodarone post-cardioversion to maintain sinus',
     },
     // =====================================================================
     // MODULE 2: UNSTABLE PATHWAY
@@ -226,6 +238,8 @@ export const AFIB_RVR_NODES = [
                 next: 'afib-cardioversion-protocol',
             },
         ],
+        summary: 'WPW+AFib = life-threatening — AV nodal blockers ABSOLUTELY CONTRAINDICATED (may cause VF)',
+        safetyLevel: 'critical',
     },
     {
         id: 'afib-wpw-result',
@@ -283,6 +297,7 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Respiratory status during sedation. Cardiac rhythm post-cardioversion. Watch for AF recurrence.',
         },
         next: 'afib-cardioversion-result',
+        summary: 'Synchronized 200J biphasic, sedate with midazolam, amiodarone post-conversion to maintain sinus rhythm',
     },
     {
         id: 'afib-cardioversion-result',
@@ -335,6 +350,8 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Heart rate, blood pressure. Do NOT combine beta-blockers with CCBs (synergistic hypotension). IV Magnesium 2-4g may be added as adjunct.',
         },
         next: 'afib-rate-controlled',
+        summary: 'Diltiazem 0.25mg/kg IV (90% rate control) or metoprolol 2.5-5mg IV — do NOT combine BB with CCB',
+        safetyLevel: 'warning',
     },
     {
         id: 'afib-rate-controlled',
@@ -355,6 +372,7 @@ export const AFIB_RVR_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Target HR<110 for stable outpatients (RACE II); ICU may tolerate <130; titrate to symptoms not strict targets',
     },
     // =====================================================================
     // MODULE 4: REFRACTORY RATE CONTROL
@@ -387,6 +405,7 @@ export const AFIB_RVR_NODES = [
                 next: 'afib-rhythm-control',
             },
         ],
+        summary: 'Re-evaluate underlying causes; add IV Mg, digoxin, amiodarone, or consider cardioversion — avoid BB+CCB combo',
     },
     {
         id: 'afib-refractory-mg',
@@ -407,6 +426,7 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Serum magnesium level (target 3-4 mg/dL). Contraindicated if GFR <30 mL/min or oliguria - use intermittent boluses instead.',
         },
         next: 'afib-refractory-reassess',
+        summary: 'IV Mg 2-4g — blocks slow Ca channels with minimal toxicity; augments other antiarrhythmics; avoid if GFR<30',
     },
     {
         id: 'afib-refractory-dig',
@@ -427,6 +447,7 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Heart rate, digoxin level (if continued). Caution: post hoc analyses associate with increased mortality in A-Fib. Use in combination with other AV nodal agents.',
         },
         next: 'afib-refractory-reassess',
+        summary: 'Digoxin 0.25-0.5mg IV — slow onset ~3h, use as adjunct; useful when hypotension limits BB/CCB titration',
     },
     {
         id: 'afib-refractory-amio',
@@ -447,6 +468,7 @@ export const AFIB_RVR_NODES = [
             monitoring: '74% rate control in trials. More hemodynamically stable than BBs or CCBs. May achieve chemical cardioversion.',
         },
         next: 'afib-refractory-reassess',
+        summary: 'Amiodarone 150mg IV bolus then 1mg/min — hemodynamically stable, may achieve cardioversion; re-bolus if needed',
     },
     {
         id: 'afib-rhythm-control',
@@ -475,6 +497,7 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Rhythm for conversion. Factors favoring rhythm control: NOAF, pulmonary HTN, mitral stenosis, HFrEF, rate control failure.',
         },
         next: 'afib-refractory-reassess',
+        summary: 'Rhythm control stepwise: IV Mg → amiodarone → DC cardioversion; favored for NOAF, pulm HTN, HFrEF',
     },
     {
         id: 'afib-refractory-reassess',
@@ -495,6 +518,7 @@ export const AFIB_RVR_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Reassess after second-line agent — if still refractory, combine agents or try rhythm control',
     },
     // =====================================================================
     // MODULE 5: AF ONSET & ANTICOAGULATION
@@ -517,6 +541,7 @@ export const AFIB_RVR_NODES = [
                 next: 'afib-cha2ds2vasc',
             },
         ],
+        summary: 'New-onset AF often reverts with illness resolution; chronic AF needs CHA2DS2-VASc anticoagulation assessment',
     },
     {
         id: 'afib-noaf-anticoag',
@@ -526,6 +551,7 @@ export const AFIB_RVR_NODES = [
         body: 'NEW-ONSET AF IN CRITICAL ILLNESS\n\nAnticoagulation is generally NOT recommended for NOAF:\n\u2022 Retrospective studies show anticoagulation increases bleeding risk without reducing stroke incidence\n\u2022 Most patients with NOAF will revert to sinus rhythm as critical illness resolves\n\u2022 Survey of UK intensivists: 64% do not routinely anticoagulate NOAF\n\nExceptions \u2014 consider anticoagulation if:\n\u2022 AF persists >48 hours\n\u2022 High stroke risk with low bleeding risk\n\u2022 AF continues beyond resolution of acute illness\n\nIf AF persists for weeks, reassess with [CHA\u2082DS\u2082-VASc scoring](#/calculator/cha2ds2vasc) as chronic AF management becomes appropriate.',
         citation: [3, 8, 9],
         next: 'afib-disposition',
+        summary: 'NOAF: anticoagulation generally NOT recommended — increases bleeding without reducing stroke; most revert to sinus',
     },
     {
         id: 'afib-cha2ds2vasc',
@@ -557,6 +583,8 @@ export const AFIB_RVR_NODES = [
             monitoring: 'Renal function, bleeding signs. If AF >48h and not anticoagulated, consider TEE before cardioversion or anticoagulate ≥3 weeks before elective cardioversion.',
         },
         next: 'afib-disposition',
+        summary: 'Score ≥2 (men) or ≥3 (women) = anticoagulate; AF>48h without anticoagulation needs TEE or 3 weeks AC before cardioversion',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION

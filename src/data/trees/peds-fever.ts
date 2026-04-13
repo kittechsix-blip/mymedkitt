@@ -41,6 +41,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-6m-screen',
       },
     ],
+
+    summary: 'Age-stratified FWS pathway: rectal T >=38C in 0-6mo with no source; select age group to guide workup intensity',
   },
 
   {
@@ -107,6 +109,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Screen for focal infection, hypothermia, bronchiolitis, or ill appearance before applying FWS pathway',
   },
 
   {
@@ -117,6 +121,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     body: '**All 0\u201321 day neonates require full sepsis workup including LP.**\n\nLABS TO ORDER\n\u2022 CBC with differential\n\u2022 Blood culture\n\u2022 CMP\n\u2022 UA (catheterized) \u2014 if positive, send urine culture\n\u2022 Lumbar puncture:\n  \u2013 CSF cell count with differential\n  \u2013 CSF glucose, protein\n  \u2013 CSF Gram stain\n  \u2013 CSF culture\n  \u2013 Meningitis/encephalitis PCR panel\n  \u2013 Hold tube #4 (for HSV PCR if needed)\n\nOPTIONAL\n\u2022 CRP, Procalcitonin\n\u2022 Stool culture (if diarrhea present)',
     citation: [1, 2],
     next: 'pf-neo-hsv',
+
+    summary: 'All 0-21d neonates: full sepsis workup with LP mandatory; CBC, blood culture, CMP, cath UA, CSF studies, hold tube 4',
   },
 
   {
@@ -139,6 +145,9 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-neo-age',
       },
     ],
+
+    summary: 'HSV red flags: vesicles, seizures, lethargy, hepatosplenomegaly, thrombocytopenia, transaminitis, CSF pleocytosis',
+    safetyLevel: 'critical',
   },
 
   {
@@ -149,6 +158,9 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     body: '**Add [Acyclovir](#/drug/acyclovir) 20 mg/kg IV q8h**\n\nHSV TESTING TO ORDER\n\u2022 HSV PCR \u2014 blood (plasma)\n\u2022 HSV PCR \u2014 CSF (from held tube #4)\n\u2022 Surface cultures: conjunctiva, throat, nasopharynx, rectum\n\u2022 Vesicle fluid: viral culture + PCR (if lesions present)\n\u2022 AST, ALT (hepatic involvement screen)\n\nDURATION\n\u2022 Minimum 5 doses or until HSV PCR results negative\n\u2022 If PCR not resulted after 5 doses \u2192 contact Infectious Disease\n\u2022 Ensure adequate hydration (crystalline nephropathy risk)',
     citation: [1, 3],
     next: 'pf-neo-age',
+
+    summary: 'Acyclovir 20 mg/kg IV q8h; order HSV PCR blood + CSF, surface cultures; minimum 5 doses or until PCR negative',
+    safetyLevel: 'critical',
   },
 
   {
@@ -170,6 +182,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-neo-csf',
       },
     ],
+
+    summary: 'Age-specific empiric abx: 0-7d ampicillin+gentamicin; 8-21d ceftriaxone (cefepime if contraindicated)',
   },
 
   {
@@ -192,6 +206,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-neo-admit',
       },
     ],
+
+    summary: 'CSF abnormal if WBC >15 or positive Gram stain; traumatic taps common in neonates — treat as abnormal if uninterpretable',
   },
 
   {
@@ -202,6 +218,9 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     body: '**Escalate to meningitic dosing based on age:**\n\n**0\u20137 DAYS**\n\u2022 [Ampicillin](#/drug/ampicillin) 100 mg/kg IV q8h (meningitic dose)\n\u2022 Add [Cefepime](#/drug/cefepime) 50 mg/kg IV q12h\n\u2022 Discontinue [Gentamicin](#/drug/gentamicin)\n\u2022 Consider [Acyclovir](#/drug/acyclovir) if not already started\n\n**8\u201321 DAYS**\n\u2022 [Ceftriaxone](#/drug/ceftriaxone/pediatric meningitis) 50 mg/kg IV q12h (meningitic dose)\n\u2022 Add [Ampicillin](#/drug/ampicillin) 75 mg/kg IV q6h (meningitic dose)\n\u2022 Consider [Acyclovir](#/drug/acyclovir) if not already started\n\nSee [Antimicrobial Dosing Reference](#/info/pf-abx-dosing) for complete dosing.',
     citation: [1, 6],
     next: 'pf-neo-admit',
+
+    summary: 'Escalate to meningitic dosing; 0-7d: ampicillin 100 mg/kg + cefepime; 8-21d: ceftriaxone q12h + ampicillin q6h',
+    safetyLevel: 'critical',
   },
 
   {
@@ -266,6 +285,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     body: 'LABS TO ORDER\n\u2022 CBC with differential\n\u2022 Blood culture\n\u2022 CMP\n\u2022 **Procalcitonin (PCT)**\n\u2022 UA (catheterized) \u2014 if positive, send urine culture\n\nOPTIONAL\n\u2022 CRP\n\u2022 Stool culture (if diarrhea present)\n\nLP is not automatically required for this age group \u2014 it depends on inflammatory marker results and shared decision-making.',
     citation: [1, 4],
     next: 'pf-22-im',
+
+    summary: 'CBC, blood culture, CMP, procalcitonin, cath UA; LP depends on inflammatory markers and shared decision-making',
   },
 
   {
@@ -288,6 +309,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-22-lp',
       },
     ],
+
+    summary: 'Abnormal: T >38.5, PCT >0.5, CRP >2.0, ANC >4000; any single abnormal marker indicates higher risk',
   },
 
   {
@@ -315,6 +338,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-22-dispo',
       },
     ],
+
+    summary: 'LP recommended if markers abnormal; shared decision if normal; CSF abnormal if WBC >15 or positive Gram stain',
   },
 
   {
@@ -473,6 +498,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
     body: 'LABS TO ORDER\n\u2022 CBC with differential\n\u2022 Blood culture\n\u2022 CMP\n\u2022 **Procalcitonin (PCT)**\n\u2022 UA (catheterized) \u2014 if positive, send urine culture\n\nOPTIONAL\n\u2022 CRP\n\u2022 Stool culture (if diarrhea present)\n\nLP is determined by inflammatory marker results.',
     citation: [1, 4],
     next: 'pf-60-im',
+
+    summary: 'CBC, blood culture, CMP, procalcitonin, cath UA; LP determined by inflammatory marker results',
   },
 
   {
@@ -495,6 +522,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-60-low',
       },
     ],
+
+    summary: 'Same criteria: T >38.5, PCT >0.5, CRP >2.0, ANC >4000; abnormal = LP recommended; all normal = no LP needed',
   },
 
   {
@@ -517,6 +546,8 @@ export const PEDS_FEVER_NODES: DecisionNode[] = [
         next: 'pf-60-ua',
       },
     ],
+
+    summary: 'Lower CSF threshold for 29-60d: WBC >9 (vs >15 for 0-28d); positive Gram stain always abnormal',
   },
 
   {

@@ -28,6 +28,8 @@ export const PSYCHIATRY_ASSESSMENT_NODES: DecisionNode[] = [
     body: 'This is a **structured walkthrough for MSE documentation**. Each section presents descriptive options you can reference while dictating your mental status exam.\n\n**Purpose:** Guide your dictation through each MSE component with standardized terminology.\n\n**Not intended for:** Copy/paste documentation. Use as a reference only.\n\n**MSE Components:**\n1. Appearance & Behavior\n2. Speech & Mood/Affect\n3. Thought Process & Content\n4. Perceptions & Cognition\n5. Insight, Judgment & Risk Stratification',
     citation: [1, 2],
     next: 'mse-appearance-behavior',
+    summary: 'Structured MSE dictation guide with standardized terminology — 5 component sections for documentation',
+    skippable: true,
   },
 
   // =====================================================================
@@ -42,6 +44,8 @@ export const PSYCHIATRY_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**APPEARANCE**\n\n**Grooming:**\n• Well-groomed\n• Disheveled\n• Unkempt\n\n**Hygiene:**\n• Good\n• Fair\n• Poor\n\n**Dress:**\n• Appropriate to weather/situation\n• Inappropriate\n• Bizarre\n\n**Age Appearance:**\n• Appears stated age\n• Appears older than stated age\n• Appears younger than stated age\n\n---\n\n**BEHAVIOR**\n\n**Psychomotor Activity:**\n• Normal\n• Agitated (increased motor activity, restlessness)\n• Retarded (slowed movements, decreased activity)\n• Catatonic (minimal response to environment)\n\n**Eye Contact:**\n• Good (appropriate engagement)\n• Poor (limited engagement)\n• Avoidant (actively looks away)\n• Intense/staring (fixed, unwavering)\n\n**Cooperation:**\n• Cooperative\n• Guarded (cautious, reluctant to share)\n• Hostile\n• Uncooperative',
     citation: [1, 2],
     next: 'mse-speech-mood',
+    summary: 'Grooming, hygiene, dress, psychomotor activity, eye contact, cooperation — standardized descriptors',
+    skippable: true,
   },
 
   // =====================================================================
@@ -56,6 +60,7 @@ export const PSYCHIATRY_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**SPEECH**\n\n**Rate:**\n• Normal\n• Rapid\n• Slow\n• Pressured (rapid, difficult to interrupt)\n\n**Rhythm:**\n• Normal\n• Dysarthric (slurred, unclear articulation)\n• Stuttering\n\n**Volume:**\n• Normal\n• Loud\n• Soft\n• Mute\n\n**Tone:**\n• Normal\n• Monotone\n• Anxious\n\n---\n\n**MOOD** (patient\'s subjective description)\n\nQuote the patient\'s own words. Examples:\n• "Depressed"\n• "Anxious"\n• "Fine"\n• "I want to die"\n• "Scared"\n• "Angry"\n• "Empty"\n\n---\n\n**AFFECT** (your objective observation)\n\n**Range:**\n• Full (normal range of emotional expression)\n• Restricted (limited range)\n• Blunted (significantly diminished)\n• Flat (absent emotional expression)\n\n**Congruence:**\n• Congruent (affect matches stated mood)\n• Incongruent (affect does not match stated mood)\n\n**Quality:**\n• Euthymic (normal, baseline)\n• Dysphoric (sad, depressed)\n• Euphoric (elevated, excessive happiness)\n• Anxious\n• Irritable\n• Labile (rapidly shifting)',
     citation: [1, 2],
     next: 'mse-thought-process-content',
+    summary: 'Speech rate/rhythm/volume, mood in patient\'s words, affect range/congruence/quality — key distinction',
   },
 
   // =====================================================================
@@ -70,6 +75,8 @@ export const PSYCHIATRY_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**THOUGHT PROCESS**\n\n• **Linear/Goal-directed:** Logical, coherent progression toward a point\n• **Circumstantial:** Eventually reaches the point but with excessive, unnecessary detail\n• **Tangential:** Never reaches the point, deviates to unrelated topics\n• **Loose associations:** Ideas shift between unrelated topics without logical connection\n• **Flight of ideas:** Rapid shifting between topics with tenuous connections (seen in mania)\n• **Thought blocking:** Abrupt interruption of thought mid-sentence\n• **Perseveration:** Repetitive focus on a single topic despite attempts to change subject\n• **Word salad:** Incoherent, random words without meaningful connections\n\n---\n\n**THOUGHT CONTENT**\n\n**Suicidal Ideation (SI):**\n• None\n• Passive ("I wish I was dead," "I wish I wouldn\'t wake up")\n• Active without plan ("I want to kill myself" but no specific plan)\n• Active with plan (has specific method in mind)\n• Active with plan and intent (plan + intention to act)\n\n**Homicidal Ideation (HI):**\n• None\n• Passive thoughts (fleeting, no intent)\n• Active without plan\n• Active with plan\n\n**Delusions:**\n• None\n• Paranoid (belief of persecution, conspiracy)\n• Grandiose (inflated self-importance, special powers)\n• Somatic (false beliefs about body/health)\n• Religious (inappropriate religious content)\n• Erotomanic (belief someone is in love with them)\n• Ideas of reference (belief that random events have personal significance)\n\n**Obsessions/Compulsions:**\n• Present\n• Absent',
     citation: [1, 2, 3],
     next: 'mse-perceptions-cognition',
+    summary: 'Process (linear to word salad), SI/HI classification, delusions by type, obsessions/compulsions',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -84,6 +91,8 @@ export const PSYCHIATRY_ASSESSMENT_NODES: DecisionNode[] = [
     body: '**PERCEPTIONS**\n\n**Hallucinations:**\n• None\n• Auditory\n  - Non-command (voices that do not direct behavior)\n  - Command (voices directing specific actions)\n• Visual\n• Tactile\n• Olfactory\n\n**Illusions:**\n• Present (misperception of actual stimulus)\n• Absent\n\n---\n\n**COGNITION**\n\n**Orientation:**\n• Oriented x4 (person, place, time, situation)\n• Oriented x3 (person, place, time)\n• Oriented x2 (person, place)\n• Oriented x1 (person only)\n• Oriented x0 (disoriented to all)\n\n**Attention:**\n• Intact\n• Impaired\n\n*Testing methods:*\n• Serial 7s (subtract 7 from 100 sequentially)\n• Spell WORLD backward\n• Days of week backward\n• Months of year backward\n\n**Memory:**\n• Intact\n• Impaired\n\n*Types:*\n• Immediate (repeat 3 words)\n• Recent/Short-term (recall 3 words after 5 minutes)\n• Remote/Long-term (past events, personal history)',
     citation: [1, 2],
     next: 'mse-insight-judgment-risk',
+    summary: 'Hallucinations by type (command AH = safety concern), orientation x4, attention, memory testing',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================

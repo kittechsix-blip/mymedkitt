@@ -29,6 +29,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
       { id: 'atlanta-severity', label: 'Atlanta Classification' },
     ],
     next: 'ap-severity',
+
+    summary: 'Diagnose with 2 of 3: epigastric pain, lipase >3x ULN, imaging — most cases mild and self-limiting',
+    skippable: true,
   },
 
   {
@@ -61,6 +64,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Atlanta Classification: mild (no OF), moderate (transient OF <48h), severe (persistent OF >48h, 17-30% mortality)',
   },
 
   // =====================================================================
@@ -78,6 +83,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
       { id: 'ap-fluid-rate', label: 'Fluid Rate Calculator' },
     ],
     next: 'ap-etiology',
+
+    summary: 'LR 3-4L/24h (not aggressive), early PO feeding within 24-48h, opioids safe for pain — morphine OK',
   },
 
   {
@@ -88,6 +95,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Aggressive Monitoring Required:** [5][7]\n\n**Fluids:**\n• LR preferred; avoid NS (hyperchloremic acidosis)\n• Goal-directed: titrate to UOP, BUN, Hct\n• Consider early norepinephrine if fluid-refractory hypotension\n• Avoid excessive crystalloid (increases abdominal compartment pressure)\n\n**Nutrition:**\n• **Enteral nutrition** prevents infectious complications [8]\n• Nasogastric route equivalent to nasojejunal (easier)\n• Start within 24-48 hours if no ileus\n• Avoid TPN unless enteral not tolerated\n\n**ICU Consideration:**\n• Monitor for progression to severe disease\n• Serial abdominal exams\n• Trending lactate, BUN, inflammatory markers',
     citation: [5, 7, 8],
     next: 'ap-etiology',
+
+    summary: 'Enteral nutrition prevents infections, NG equivalent to NJ — start within 24-48h, avoid TPN',
   },
 
   {
@@ -101,6 +110,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
       { id: 'map-calculator', label: 'MAP Calculator' },
     ],
     next: 'ap-etiology',
+
+    summary: 'ICU required — NE if fluid-refractory, monitor for ACS (bladder pressure >20), enteral nutrition critical',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -136,6 +148,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
         next: 'ap-other-etiology',
       },
     ],
+
+    summary: 'All patients need RUQ US + triglycerides + LFTs — gallstones 40-70%, alcohol 25-35%, HTG if TG>1000',
   },
 
   {
@@ -146,6 +160,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Key Decision: Cholangitis Present?** [10][11]\n\n**Signs of Cholangitis (Charcot\'s Triad):**\n• Fever\n• Jaundice\n• RUQ pain\n\n**If Cholangitis Present:**\n• **Urgent ERCP within 24 hours**\n• Antibiotics: Piperacillin-tazobactam or ampicillin-sulbactam\n• Do not delay for severity of pancreatitis\n\n**If NO Cholangitis:**\n• No routine ERCP\n• MRCP or EUS if CBD stone suspected but not confirmed\n• Avoid diagnostic ERCP (unnecessary risk)\n\n**Cholecystectomy Timing:** [12]\n• **Mild AP:** Same admission, before discharge\n• **Moderate/Severe AP:** Delay 3-6 weeks until inflammation resolved\n• Same-admission CCY reduces readmission for recurrent biliary events',
     citation: [10, 11, 12],
     next: 'ap-complications-q',
+
+    summary: 'Cholangitis = urgent ERCP <24h; no cholangitis = no routine ERCP; mild AP = same-admission cholecystectomy',
+    safetyLevel: 'warning',
   },
 
   {
@@ -159,6 +176,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
       { id: 'ciwa-ar', label: 'CIWA-Ar Score' },
     ],
     next: 'ap-complications-q',
+
+    summary: 'Give thiamine before glucose, watch for alcohol withdrawal 6-72h, cessation counseling critical',
   },
 
   {
@@ -169,6 +188,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Definition:** TG >1,000 mg/dL as the etiology [13]\n\n**Acute Management:**\n• **Insulin infusion:** Activates lipoprotein lipase\n  - Regular insulin 0.1-0.3 units/kg/hr\n  - Dextrose to prevent hypoglycemia\n  - Continue until TG <500 mg/dL\n\n• **Apheresis/Plasmapheresis:**\n  - Consider if TG >2,000 mg/dL\n  - Or if not responding to insulin\n  - Rapidly reduces TG by 50-80%\n\n**NPO Critical:**\n• Dietary fat worsens hypertriglyceridemia\n• Delay feeding until TG controlled\n\n**Outpatient:**\n• Fibrates (fenofibrate, gemfibrozil)\n• Omega-3 fatty acids\n• Strict low-fat diet\n• Diabetes control if applicable',
     citation: [13],
     next: 'ap-complications-q',
+
+    summary: 'Insulin infusion to activate lipoprotein lipase, target TG<500; apheresis if TG>2000 or refractory',
   },
 
   {
@@ -179,6 +200,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Post-ERCP Pancreatitis:** [14]\n• Most common complication of ERCP (3-5%)\n• Usually mild, self-limiting\n• NSAIDs and pancreatic duct stents reduce risk\n\n**Drug-Induced:**\n• Azathioprine, 6-MP, valproic acid, ACE inhibitors\n• GLP-1 agonists (controversial)\n• Discontinue offending agent\n\n**Autoimmune Pancreatitis:** [15]\n• Type 1: IgG4-related disease, older males\n• Type 2: Associated with IBD\n• Elevated IgG4, pancreatic enlargement on imaging\n• Responds dramatically to steroids\n\n**Trauma:**\n• Blunt abdominal trauma → pancreatic duct injury\n• MRCP to evaluate duct integrity\n\n**Idiopathic:**\n• 10-25% remain without identified cause\n• Consider EUS for occult microlithiasis\n• Genetic testing in recurrent cases',
     citation: [14, 15],
     next: 'ap-complications-q',
+
+    summary: 'Post-ERCP, drug-induced, autoimmune (responds to steroids), trauma — 10-25% remain idiopathic',
+    skippable: true,
   },
 
   // =====================================================================
@@ -218,6 +242,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Image only if no improvement at 48-72h — do NOT routinely image early in mild AP',
   },
 
   {
@@ -228,6 +254,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Definition:** Encapsulated fluid collection with well-defined wall, NO solid debris, develops >4 weeks after onset [3]\n\n**Observation (Most Cases):**\n• Asymptomatic pseudocysts: serial imaging\n• Most acute fluid collections resolve spontaneously\n• Size alone is NOT an indication for drainage\n\n**Intervention Indications:** [17]\n• Symptomatic (pain, early satiety, nausea)\n• Gastric outlet obstruction\n• Biliary obstruction\n• Infected pseudocyst\n• Expanding despite conservative management\n\n**Drainage Options:**\n• **Endoscopic (EUS-guided):** Preferred approach\n• **Percutaneous:** For poor surgical candidates or difficult access\n• **Surgical:** Rarely needed, cystgastrostomy if other approaches fail',
     citation: [3, 17],
     next: 'ap-dispo-complicated',
+
+    summary: 'Most pseudocysts resolve spontaneously — size alone is NOT an indication for drainage',
+    skippable: true,
   },
 
   {
@@ -238,6 +267,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Definition:** Necrosis of pancreatic parenchyma and/or peripancreatic tissue [3]\n\n**Sterile Necrosis — Conservative Management:** [18][19]\n• NO prophylactic antibiotics (ACG/AGA)\n• Supportive care: fluids, nutrition, pain control\n• Most sterile necrosis resolves without intervention\n• Allow walled-off necrosis (WON) to mature (>4 weeks)\n\n**When to Suspect Infection:**\n• Clinical deterioration after initial improvement\n• New/persistent fever, rising WBC\n• **Gas bubbles in necrosis on CT** (diagnostic)\n• **Procalcitonin >3.5 ng/mL** (suggestive)\n\n**DO NOT perform routine FNA** to diagnose infected necrosis — clinical + imaging sufficient [2]\n\n**Key Principle:** DELAY intervention if patient is stable. Walled-off necrosis (>4 weeks) is safer to drain/debride.',
     citation: [3, 18, 19],
     next: 'ap-necrosis-decision',
+
+    summary: 'No prophylactic abx, no routine FNA — delay intervention until WON matures >4 weeks if stable',
+    safetyLevel: 'warning',
   },
 
   {
@@ -260,6 +292,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess for gas on CT, elevated PCT >3.5, clinical sepsis — determines sterile vs infected necrosis path',
   },
 
   {
@@ -270,6 +304,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Continue Supportive Care:** [18]\n\n• Aggressive enteral nutrition\n• Pain management\n• Serial imaging (CT in 7-10 days or with clinical change)\n• NO prophylactic antibiotics\n\n**Indications for Intervention in Sterile Necrosis:**\n• Gastric outlet or biliary obstruction\n• Persistent symptoms >8 weeks despite conservative therapy\n• Disconnected pancreatic duct syndrome\n\n**Timing:**\n• Delay intervention until WON matures (>4 weeks, ideally 6+ weeks)\n• Mature WON is safer to drain and debride\n\n**Prognosis:**\n• Most sterile necrosis resolves with conservative management\n• ~30% will develop infected necrosis (usually weeks 2-4)',
     citation: [18],
     next: 'ap-dispo-complicated',
+
+    summary: 'No prophylactic abx, enteral nutrition, serial imaging — ~30% will develop infected necrosis at weeks 2-4',
+    skippable: true,
   },
 
   // =====================================================================
@@ -284,6 +321,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Infected Pancreatic Necrosis is a Life-Threatening Emergency** [18][19][20]\n\n**Diagnosis:**\n• Gas on CT (pathognomonic)\n• Clinical: fever, sepsis, rising WBC/PCT, failure to improve\n• FNA NOT routinely recommended\n\n**Initial Management:**\n• **Antibiotics with pancreatic penetration:**\n  - Piperacillin-tazobactam (first-line)\n  - Carbapenems (meropenem, imipenem)\n  - Fluoroquinolone + metronidazole\n• Prolonged course: 2-4 weeks minimum\n• May avoid intervention in stable patients\n\n**Key Principle: DELAY IS BENEFICIAL** [20]\n• Antibiotics alone may resolve infection (some cases)\n• Allow necrosis to wall off before intervention\n• Early surgery = higher mortality\n• Ideal timing: >4 weeks from onset',
     citation: [18, 19, 20],
     next: 'ap-step-up',
+
+    summary: 'Life-threatening emergency — pip-tazo or carbapenems with pancreatic penetration, delay intervention >4 weeks',
+    safetyLevel: 'critical',
   },
 
   {
@@ -297,6 +337,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
       { id: 'infected-necrosis-step', label: 'Step-Up Decision Aid' },
     ],
     next: 'ap-intervention-decision',
+
+    summary: 'PANTER step-up: delay+abx (35% resolve) → drain (35% resolve) → minimally invasive → open necrosectomy last',
   },
 
   {
@@ -324,6 +366,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Continue abx alone if improving; drainage if persistent sepsis >72h on abx or enlarging collections',
   },
 
   {
@@ -334,6 +378,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Antibiotic Management:** [19]\n\n**Duration:**\n• Minimum 2-4 weeks\n• Continue until clinical resolution\n• Serial imaging to monitor collections\n\n**If Improving:**\n• Continue current regimen\n• May transition to oral with good bioavailability\n  - Ciprofloxacin + metronidazole\n  - Amoxicillin-clavulanate\n\n**Monitoring:**\n• Daily clinical assessment\n• Trending WBC, procalcitonin, CRP\n• Repeat CT if clinical change\n\n**No Antifungal Prophylaxis** unless documented fungal infection',
     citation: [19],
     next: 'ap-dispo-complicated',
+
+    summary: 'Minimum 2-4 week abx course, may transition to oral cipro+metronidazole — no antifungal prophylaxis',
+    skippable: true,
   },
 
   {
@@ -344,6 +391,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Optimal Timing: >4 Weeks from Symptom Onset** [20][21]\n\n**Why Delay?**\n• Necrosis becomes walled-off (organized collection)\n• Easier to drain/debride\n• Lower complication rate\n• Better demarcation of viable tissue\n\n**Drainage Options:**\n\n**Percutaneous Catheter Drainage (PCD):**\n• IR-placed drain into collection\n• May need upsizing or additional drains\n• Success: ~35% resolve with drainage alone\n\n**Endoscopic Transluminal Drainage (ETD):**\n• EUS-guided transgastric or transduodenal approach\n• Lumen-apposing metal stent (LAMS) or plastic stents\n• Preferred if collection abuts stomach/duodenum\n• TENSION trial: fewer fistulas vs surgical approach\n\n**Consult GI and IR** for multidisciplinary planning',
     citation: [20, 21],
     next: 'ap-dispo-complicated',
+
+    summary: 'Delay drainage >4 weeks for WON maturation — PCD or ETD, consult GI and IR for multidisciplinary plan',
   },
 
   {
@@ -354,6 +403,9 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Indications for Urgent Intervention:** [20][21]\n\n• Hemodynamic instability despite resuscitation\n• Multiorgan failure worsening\n• Abdominal compartment syndrome\n• Massive hemorrhage from pseudoaneurysm\n\n**Approach:**\n• **PCD preferred** even urgently (less morbid than surgery)\n• May need multiple drains\n• IR on standby for bleeding (angioembolization)\n\n**If PCD Not Feasible or Fails:**\n• Video-assisted retroperitoneal debridement (VARD)\n• Open necrosectomy (last resort)\n\n**Bleeding Complications:**\n• Pseudoaneurysm (splenic, gastroduodenal arteries)\n• CT angiography to identify\n• Angioembolization preferred over surgery\n\n**Surgical Consultation Essential** for all infected necrosis cases',
     citation: [20, 21],
     next: 'ap-dispo-complicated',
+
+    summary: 'PCD preferred even urgently over surgery; IR standby for pseudoaneurysm embolization; surgical consult essential',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -368,6 +420,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**Discharge Criteria:** [1][2]\n• Pain controlled with oral medications\n• Tolerating oral diet\n• Hemodynamically stable\n• Trending labs improving\n\n**Before Discharge:**\n• Confirm etiology\n• **Gallstone AP:** Schedule cholecystectomy (same admission or within 2 weeks)\n• **Alcohol AP:** Cessation counseling, withdrawal precautions\n• **HTG:** Lipid clinic referral, fibrate prescription\n\n**Follow-up:**\n• PCP within 1-2 weeks\n• GI referral if recurrent or uncertain etiology\n• Return precautions: worsening pain, fever, vomiting',
     citation: [1, 2],
     next: 'ap-complete',
+
+    summary: 'Discharge when PO tolerant, pain controlled — gallstone AP: same-admit or 2-week cholecystectomy',
   },
 
   {
@@ -378,6 +432,8 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     body: '**ICU Admission Criteria:**\n• Persistent organ failure (severe AP)\n• Infected necrosis requiring intervention\n• Hemodynamic instability\n• Respiratory failure\n\n**Step-Down/Floor:**\n• Moderate AP with transient organ failure resolved\n• Stable necrotizing pancreatitis on antibiotics\n• Pseudocyst not requiring urgent intervention\n\n**Multidisciplinary Team:**\n• GI (endoscopic drainage, nutrition)\n• IR (percutaneous drainage, embolization)\n• Surgery (necrosectomy if needed)\n• Nutrition (enteral feeding optimization)\n\n**Long-term Considerations:**\n• Exocrine insufficiency (enzyme supplementation)\n• Endocrine insufficiency (diabetes)\n• Chronic pancreatitis if recurrent episodes',
     citation: [1, 3],
     next: 'ap-complete',
+
+    summary: 'ICU for persistent organ failure or infected necrosis; multidisciplinary team: GI, IR, surgery, nutrition',
   },
 
   {

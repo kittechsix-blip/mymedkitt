@@ -13,6 +13,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '[PPCM Quick Reference](#/info/ppcm-summary)\n\n**Definition:** Heart failure secondary to LV systolic dysfunction (EF <45%) developing towards the end of pregnancy or in the months following delivery, where no other cause of HF is found. [1][2]\n\n**Timing:**\n- Classic: Last month of pregnancy to 5 months postpartum\n- ~80% present within first month postpartum\n- Can present earlier in pregnancy (rare) or up to 6 months postpartum\n\n**Incidence:** 1 in 1,000-4,000 live births in US (higher in certain populations)\n\n**Why it matters:**\n- Mortality 6-10% in US, up to 28% in some regions\n- Easily missed because symptoms mimic normal pregnancy\n- HIGH recovery potential with aggressive treatment (50-70% recover EF)',
         citation: [1, 2, 3],
         next: 'ppcm-risk-factors',
+        summary: 'HF with EF <45% in late pregnancy to 5mo postpartum — 6-10% mortality, 50-70% recover with treatment',
+        skippable: true,
     },
     {
         id: 'ppcm-risk-factors',
@@ -22,6 +24,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Established risk factors:**\n- African American race (1 in 1,421 vs 1 in 9,861 in Hispanics)\n- Age >=30 years\n- Multiparity\n- Multiple gestation (twins/triplets)\n- Preeclampsia/eclampsia (OR 3.28)\n- Gestational hypertension\n- Obesity\n- Diabetes\n\n**Additional associations:**\n- Prolonged tocolytic use\n- Anemia\n- Family history of cardiomyopathy\n- Prior PPCM (recurrence risk 30-50%)\n\n**African American women have:** [2][5]\n- Higher incidence\n- More severe presentation\n- Lower recovery rates\n- Twice as long to recover when recovery occurs',
         citation: [2, 5, 8],
         next: 'ppcm-presentation',
+        summary: 'African American, age >=30, multiparity, preeclampsia, obesity — AA women have worse outcomes',
+        skippable: true,
     },
     {
         id: 'ppcm-presentation',
@@ -49,6 +53,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-watchful',
             },
         ],
+        summary: 'Red flags: new dyspnea at rest, PND, unable to lie flat, persistent tachycardia >100 — believe her',
     },
     {
         id: 'ppcm-watchful',
@@ -58,6 +63,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: 'If symptoms are mild and more consistent with normal pregnancy:\n\n**Consider outpatient workup:**\n- Schedule outpatient echo within 1-2 weeks\n- Consider BNP/NT-proBNP (normal values unchanged in pregnancy; marked elevation suggests pathology)\n\n**Clear return precautions:**\n- Orthopnea (cannot lie flat)\n- Paroxysmal nocturnal dyspnea\n- Worsening dyspnea at rest\n- New or worsening edema\n- Palpitations or syncope\n\n**PPCM is a diagnosis you cannot afford to miss.** When in doubt, get the echo. [1][2]',
         citation: [1, 2],
         next: 'ppcm-disposition',
+        summary: 'Low suspicion — outpatient echo within 1-2 weeks, BNP, clear return precautions for orthopnea/PND',
+        skippable: true,
     },
     {
         id: 'ppcm-workup',
@@ -67,6 +74,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Essential:**\n\n1. **Echocardiogram** - DIAGNOSTIC\n   - LVEF <45% (often <35% at presentation)\n   - May show LV dilation (LVEDD >2.7 cm/m2)\n   - RV dysfunction, functional MR/TR\n   - Look for LV thrombus\n\n2. **BNP/NT-proBNP**\n   - Markedly elevated in PPCM\n   - Normal pregnancy: minimally elevated\n   - BNP >1860 pg/mL predicts persistent LV dysfunction\n\n3. **Troponin**\n   - Often mildly elevated\n   - High troponin T (>0.4 ng/mL) predicts worse outcomes\n\n**Additional studies:**\n- ECG: sinus tachycardia, nonspecific ST-T changes, low voltage\n- CXR: cardiomegaly, pulmonary edema\n- CBC, BMP, LFTs (end-organ function)\n\n**ECG findings (nonspecific):** Sinus tachycardia (most common), left axis deviation, Q waves (mimicking MI), prolonged QRS [1][2][8]',
         citation: [1, 2, 8],
         next: 'ppcm-severity',
+        summary: 'Echo diagnostic (EF <45%), BNP markedly elevated, troponin often mildly elevated — get echo STAT',
     },
     // =====================================================================
     // MODULE 2: STABILIZATION
@@ -97,6 +105,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 urgency: 'critical',
             },
         ],
+        summary: 'Stratify by EF and hemodynamics — EF <35% needs aggressive treatment, <25% consider ICU/MCS',
     },
     {
         id: 'ppcm-unstable',
@@ -106,6 +115,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Immediate actions:**\n\n1. **Airway/Breathing:**\n   - High-flow O2, NIPPV if tolerating\n   - Early intubation if failing (ketamine preferred for induction)\n   - Avoid hypotension during intubation\n\n2. **Circulation:**\n   - 2 large-bore IVs\n   - Arterial line for continuous BP monitoring\n   - Central line for vasopressors\n\n3. **Positioning:**\n   - If pregnant: left lateral tilt to prevent IVC compression\n   - Elevate head of bed if pulmonary edema\n\n4. **Call for help:**\n   - Cardiology STAT\n   - OB/MFM STAT (if pregnant)\n   - ICU team\n   - Consider transfer to ECMO-capable center\n\n**Target:** MAP >65 mmHg, adequate end-organ perfusion [1][2][3]',
         citation: [1, 2, 3],
         next: 'ppcm-shock-meds',
+        summary: 'Cardiogenic shock — NIPPV/intubation, vasopressors, left lateral tilt if pregnant, activate team',
+        safetyLevel: 'critical',
     },
     {
         id: 'ppcm-shock-meds',
@@ -119,6 +130,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
             { id: 'norepi-calc', label: 'Norepinephrine Calculator' },
         ],
         next: 'ppcm-mechanical-support',
+        summary: 'Dobutamine first-line inotrope, add norepinephrine if MAP <65 — avoid epi infusion post-ROSC',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Dobutamine',
@@ -147,6 +160,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Indications:** Refractory cardiogenic shock despite inotropes/vasopressors\n\n**Options (escalating support):**\n\n1. **IABP (Intra-Aortic Balloon Pump)**\n   - Bridge to recovery or LVAD\n   - Less invasive, widely available\n   - Afterload reduction + coronary perfusion\n\n2. **VA-ECMO**\n   - For severe biventricular failure\n   - Bridge to recovery or decision\n   - PPCM patients often young, good ECMO candidates\n   - ELSO Registry: acceptable outcomes in PPCM\n\n3. **LVAD (Left Ventricular Assist Device)**\n   - Bridge to recovery (many PPCM patients recover)\n   - Bridge to transplant if no recovery\n\n**KEY PEARL:** PPCM has HIGH recovery potential. Do not give up early. Younger patients, no coronary disease, potentially reversible pathology. [1][2][3]',
         citation: [1, 2, 3],
         next: 'ppcm-delivery-check',
+        summary: 'IABP, VA-ECMO, or LVAD for refractory shock — PPCM has HIGH recovery potential, do not give up early',
     },
     {
         id: 'ppcm-delivery-check',
@@ -167,6 +181,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-diuretics',
             },
         ],
+        summary: 'Pregnancy status determines medication safety — ACEi/ARB contraindicated before delivery',
     },
     {
         id: 'ppcm-stable-management',
@@ -176,6 +191,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Goals of acute ED management:**\n1. Reduce preload (diuresis)\n2. Reduce afterload (vasodilators)\n3. Maintain cardiac output\n4. Prevent thromboembolism\n\n**Immediate measures:**\n- Oxygen to maintain SpO2 >94%\n- IV access\n- Cardiac monitoring\n- Foley catheter (monitor UOP)\n- Strict I/O\n\n**Fluid restriction:** 1.5-2 L/day\n\n**Salt restriction:** <2 g sodium/day\n\n**Position:** Semi-upright (head elevated); if pregnant, left lateral tilt [1][2][8]',
         citation: [1, 2, 8],
         next: 'ppcm-diuretics',
+        summary: 'Reduce preload/afterload, maintain CO — O2, IV access, monitoring, fluid/salt restriction',
+        skippable: true,
     },
     {
         id: 'ppcm-severe-management',
@@ -185,6 +202,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**LVEF <35% with symptoms at rest requires aggressive treatment:**\n\n**Immediate:**\n- Oxygen, cardiac monitoring, IV access\n- Urgent echo if not done\n- Cardiology consult STAT\n\n**Treatment priorities:**\n1. IV diuretics for decongestion\n2. Afterload reduction (carefully if hypotensive)\n3. Consider IV vasodilators if SBP >110\n4. Low threshold for ICU admission\n\n**High-risk features requiring ICU:**\n- EF <25%\n- RV dysfunction\n- Significant hypotension (SBP <100)\n- Respiratory distress\n- End-organ dysfunction\n\n**Start thinking about anticoagulation** - LV thrombus risk is high [1][2][6]',
         citation: [1, 2, 6],
         next: 'ppcm-diuretics',
+        summary: 'EF <35% — urgent echo, cardiology STAT, IV diuretics, low threshold for ICU, start anticoagulation',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 3: MEDICATION MANAGEMENT
@@ -197,6 +216,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Loop diuretics - cornerstone of decongestive therapy:**\n\n[Furosemide](#/drug/furosemide/HF) (Lasix)\n- **Initial dose:** 20-40 mg IV bolus\n- **Titrate** based on urine output (target 0.5-1 mL/kg/hr)\n- May need higher doses (80-200 mg) in severe congestion\n- Continuous infusion: 5-20 mg/hr if boluses ineffective\n\n**Pregnancy considerations:**\n- Generally safe in pregnancy\n- May reduce placental perfusion - use lowest effective dose\n- Monitor electrolytes (K+, Mg2+)\n\n**Goal:** Euvolemia without over-diuresis\n- Dry weight = no JVD, no crackles, no peripheral edema\n- Avoid hypotension/renal hypoperfusion [1][2][8][9]',
         citation: [1, 2, 8, 9],
         next: 'ppcm-vasodilators',
+        summary: 'Furosemide 20-40mg IV, titrate to UOP 0.5-1 mL/kg/hr — safe in pregnancy at lowest effective dose',
         treatment: {
             firstLine: {
                 drug: 'Furosemide',
@@ -228,6 +248,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-acei',
             },
         ],
+        summary: 'ACEi/ARB contraindicated in pregnancy (teratogenic) — use hydralazine + nitrates until delivery',
+        safetyLevel: 'critical',
     },
     {
         id: 'ppcm-hydralazine-nitrates',
@@ -237,6 +259,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Hydralazine:**\n- [Hydralazine](#/drug/hydralazine/HTN) 25-50 mg PO TID-QID\n- Alternative: 10-20 mg IV every 4-6 hours (acute)\n- Direct arterial vasodilator (afterload reduction)\n\n**Isosorbide dinitrate:**\n- [Isosorbide dinitrate](#/drug/isosorbide-dinitrate/HF) 20-40 mg PO TID\n- Venodilator (preload reduction)\n\n**IV Nitroglycerin (acute decompensation):**\n- [Nitroglycerin](#/drug/nitroglycerin/ACS) 10-20 mcg/min, titrate up to 200 mcg/min\n- Use if SBP >110 mmHg\n- Excellent for acute pulmonary edema\n\n**AVOID nitroprusside** - cyanide toxicity concern in pregnancy\n\n**Switch to ACE inhibitor/ARB immediately postpartum.** [1][2][8][9]',
         citation: [1, 2, 8, 9],
         next: 'ppcm-beta-blockers',
+        summary: 'Hydralazine + ISDN for pregnancy-safe afterload/preload reduction — avoid nitroprusside (cyanide risk)',
+        safetyLevel: 'warning',
         treatment: {
             firstLine: {
                 drug: 'Hydralazine + Isosorbide dinitrate',
@@ -265,6 +289,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**First-line postpartum - start immediately after delivery:**\n\n[Lisinopril](#/drug/lisinopril/HF) 2.5-5 mg daily, titrate to 20-40 mg daily\nOR\n[Enalapril](#/drug/enalapril/HF) 2.5 mg BID, titrate to 10-20 mg BID\n\n**Safe for breastfeeding:** Enalapril, captopril, benazepril (minimal breast milk transfer)\n\n**If ACE-intolerant (cough):**\n- ARB: [Losartan](#/drug/losartan/HF) 25-50 mg daily (titrate to 100 mg)\n\n**ARNI (Sacubitril/Valsartan):**\n- May consider if persistently low EF on max ACE/ARB\n- AVOID during pregnancy and breastfeeding\n\n**MRA (Spironolactone/Eplerenone):**\n- AVOID during pregnancy\n- Can use postpartum if not breastfeeding\n- [Spironolactone](#/drug/spironolactone/HF) 12.5-25 mg daily [1][2][8][9]',
         citation: [1, 2, 8, 9],
         next: 'ppcm-beta-blockers',
+        summary: 'Start ACEi immediately postpartum — enalapril/captopril safe for breastfeeding, titrate to target dose',
         treatment: {
             firstLine: {
                 drug: 'Lisinopril or Enalapril',
@@ -285,6 +310,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Start once patient is euvolemic and hemodynamically stable:**\n\n**Pregnancy:**\n- [Metoprolol tartrate](#/drug/metoprolol/HF) 12.5-25 mg BID, titrate to 100 mg BID\n- Beta-1 selective preferred\n- AVOID atenolol (IUGR risk)\n\n**Postpartum:**\n- [Carvedilol](#/drug/carvedilol/HF) 3.125 mg BID, titrate to 25 mg BID\n- Superior LV recovery vs metoprolol in some studies\n- Note: excreted in breast milk\n\n**Titration:**\n- Start low, go slow\n- Double dose every 2-4 weeks as tolerated\n- Target resting HR 60-70 bpm\n\n**CONTRAINDICATIONS:**\n- Cardiogenic shock\n- Decompensated HF requiring IV inotropes\n- Severe bradycardia\n- Severe bronchospasm [1][2][8][9]',
         citation: [1, 2, 8, 9],
         next: 'ppcm-bromocriptine',
+        summary: 'Start when euvolemic and stable — metoprolol in pregnancy, carvedilol postpartum, avoid in shock',
         treatment: {
             firstLine: {
                 drug: 'Metoprolol tartrate (pregnancy) or Carvedilol (postpartum)',
@@ -305,6 +331,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Mechanism:** Blocks prolactin release, prevents formation of toxic 16-kDa prolactin fragment that damages cardiomyocytes\n\n**ESC Guideline: Class IIb recommendation** (may be considered)\n\n**Dosing (ESC BOARD regimen):**\n\n**Uncomplicated PPCM (EF 35-45%):**\n- [Bromocriptine](#/drug/bromocriptine/PPCM) 2.5 mg PO daily x 7 days\n\n**Severe PPCM (EF <25% or cardiogenic shock):**\n- Bromocriptine 2.5 mg PO BID x 2 weeks\n- Then 2.5 mg PO daily x 6 weeks\n\n**CRITICAL:** Must use with anticoagulation (increased MI/stroke risk)\n- LMWH at minimum prophylactic dose while on bromocriptine\n\n**Contraindications:**\n- Desire to breastfeed (suppresses lactation)\n- History of thromboembolism without anticoagulation\n\n**Evidence:** EORP PPCM Registry: 22% vs 33% reached primary endpoint (p=0.044). Fewer patients with severe LV dysfunction at 6 months. [1][4]',
         citation: [1, 4],
         next: 'ppcm-anticoag',
+        summary: 'Blocks toxic 16-kDa prolactin — MUST anticoagulate while on bromocriptine, suppresses lactation',
+        safetyLevel: 'warning',
         treatment: {
             firstLine: {
                 drug: 'Bromocriptine',
@@ -345,6 +373,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-no-anticoag',
             },
         ],
+        summary: 'PPCM has HIGH thromboembolic risk — LV thrombus in 17%, anticoagulate if EF <30-35% or LV thrombus',
     },
     {
         id: 'ppcm-therapeutic-anticoag',
@@ -354,6 +383,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Indications:**\n- LV thrombus on echo\n- Atrial fibrillation\n- Prior systemic embolism\n\n**Pregnancy:**\n- [Enoxaparin](#/drug/enoxaparin/VTE) 1 mg/kg SQ every 12 hours\n- Monitor anti-Xa levels (target 0.6-1.0 IU/mL, 4h post-dose)\n- Dose adjustments needed as pregnancy progresses\n\n**Near delivery:**\n- Switch to UFH 24-36 hours before planned delivery\n- Allows reversal with protamine if needed\n- Hold LMWH 24 hours before epidural/spinal\n\n**Postpartum:**\n- Warfarin (INR 2-3) - safe for breastfeeding\n- Or continue LMWH\n- Duration: minimum 3 months or until thrombus resolved + EF improved\n\n**Critical:** Do NOT use warfarin during pregnancy (teratogenic) [1][2][7]',
         citation: [1, 2, 7],
         next: 'ppcm-delivery-considerations',
+        summary: 'Enoxaparin 1mg/kg q12h in pregnancy, warfarin postpartum — do NOT use warfarin during pregnancy',
+        safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Enoxaparin (pregnancy) or Warfarin (postpartum)',
@@ -385,6 +416,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
             },
             monitoring: 'Bleeding signs, repeat echo for EF recovery.',
         },
+        summary: 'Prophylactic enoxaparin 40mg SQ daily — required if on bromocriptine, minimum 8 weeks postpartum',
     },
     {
         id: 'ppcm-no-anticoag',
@@ -394,6 +426,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**If EF >=35%, no thrombus, no AF:**\n- Routine anticoagulation not required\n- VTE prophylaxis per standard obstetric guidelines\n\n**Continue close monitoring:**\n- Repeat echo at 2-4 weeks\n- Watch for deterioration\n\n**Re-assess anticoagulation if:**\n- EF declines <35%\n- New AF\n- New symptoms suggesting embolism\n- Starting bromocriptine [1][2][7]',
         citation: [1, 2, 7],
         next: 'ppcm-delivery-considerations',
+        summary: 'EF >=35% without thrombus/AF — standard VTE prophylaxis only, reassess if EF declines or AF develops',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 5: DELIVERY CONSIDERATIONS
@@ -423,6 +457,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-postpartum-management',
             },
         ],
+        summary: 'Vaginal delivery preferred if stable — epidural reduces catecholamine surge, C-section for OB indications only',
     },
     {
         id: 'ppcm-vaginal-delivery',
@@ -432,6 +467,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Preferred for hemodynamically stable patients:**\n\n**Labor management:**\n- Early epidural (reduces pain/catecholamine surge)\n- Continuous cardiac monitoring\n- Arterial line if severe LV dysfunction\n- Central line if on vasopressors\n\n**Second stage:**\n- Shorten with assisted vaginal delivery (vacuum/forceps)\n- Avoid prolonged Valsalva (decreases preload)\n- Consider passive descent\n\n**Fluid management:**\n- Avoid over-hydration (auto-transfusion after delivery adds ~500 mL)\n- Post-delivery diuresis may be needed\n\n**Anticoagulation:**\n- Hold LMWH 24 hours before epidural placement\n- Can restart 12-24 hours after delivery/epidural removal\n\n**Multidisciplinary team at delivery:** OB, MFM, Cardiology, Anesthesia, Neonatology [1][2][3]',
         citation: [1, 2, 3],
         next: 'ppcm-postpartum-management',
+        summary: 'Early epidural, continuous cardiac monitoring, shorten second stage, hold LMWH 24h before epidural',
     },
     {
         id: 'ppcm-urgent-delivery',
@@ -441,6 +477,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Maternal stabilization takes priority, but delivery may be necessary for both maternal and fetal benefit.**\n\n**Indications for urgent delivery:**\n- Requiring inotropes/vasopressors\n- Mechanical circulatory support needed\n- Maternal decompensation despite maximal therapy\n- Fetal distress\n\n**Considerations:**\n- C-section usually necessary (cannot tolerate labor)\n- General anesthesia may be required (hemodynamic instability)\n- Have blood products ready\n- ECMO standby if available\n\n**Perimortem C-section:**\n- If cardiac arrest: deliver within 4-5 minutes\n- May improve maternal resuscitation (relieves aortocaval compression)\n- Improves neonatal outcomes if >24 weeks\n\n**Post-delivery:** Expect hemodynamic shifts - be prepared for fluid bolus or increased pressors [1][2][3]',
         citation: [1, 2, 3],
         next: 'ppcm-postpartum-management',
+        summary: 'C-section if inotrope-dependent or decompensating — perimortem C-section within 4-5 min if cardiac arrest',
+        safetyLevel: 'critical',
     },
     {
         id: 'ppcm-postpartum-management',
@@ -450,6 +488,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         body: '**Immediate postpartum period (highest risk for decompensation):**\n- Auto-transfusion of ~500 mL blood volume after delivery\n- May precipitate pulmonary edema\n- Close monitoring x 24-48 hours minimum\n\n**Medication transition:**\n- Start ACE inhibitor/ARB immediately\n- Continue/optimize beta-blocker\n- Continue diuretics as needed\n- Continue anticoagulation until EF improves\n\n**Breastfeeding:**\n- Generally safe with most HF medications\n- AVOID if on bromocriptine (suppresses lactation anyway)\n- Safe: metoprolol, enalapril, captopril, furosemide, digoxin, warfarin\n\n**Future pregnancy counseling:**\n- HIGH risk if EF has not fully recovered (<50%)\n- If EF recovered: still 30-50% recurrence risk\n- Contraception counseling essential\n- ESC mWHO Class IV if persistent EF <50% [1][2][3][6]',
         citation: [1, 2, 3, 6],
         next: 'ppcm-disposition',
+        summary: 'Auto-transfusion post-delivery may cause pulmonary edema — start ACEi, optimize GDMT, contraception essential',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION & PROGNOSIS
@@ -461,6 +501,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         title: 'Disposition Assessment',
         body: '**Recovery rates:**\n- ~50-70% recover LV function (EF >50%) by 6 months\n- Most recovery occurs within first 2-3 months\n- IPAC Study: 71% recovered EF >50% at 12 months\n\n**Predictors of WORSE prognosis:**\n- LVEF <30% at presentation\n- LV dilation (LVEDD >60 mm)\n- African American race\n- BNP >1860 pg/mL\n- High troponin (>0.4 ng/mL)\n- QRS >120 ms\n- RV dysfunction\n\n**Predictors of BETTER prognosis:**\n- Higher initial LVEF (35-45%)\n- Postpartum diagnosis (vs antepartum)\n- Caucasian/Hispanic ethnicity\n- Early treatment initiation [1][2][5][6]',
         citation: [1, 2, 5, 6],
+        summary: '50-70% recover EF by 6 months — worse prognosis: EF <30%, LV dilation, AA race, high BNP/troponin',
         calculatorLinks: [
             { id: 'ppcm-prognosis', label: 'Prognosis Factors' },
         ],

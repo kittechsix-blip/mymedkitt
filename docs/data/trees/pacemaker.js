@@ -32,6 +32,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-nbg-code',
+        summary: 'Systematic approach: identify device type (pacemaker/ICD/CRT), assess for malfunction on ECG, determine stability, know when to use magnet',
+        skippable: true,
     },
     {
         id: 'pm-nbg-code',
@@ -51,6 +53,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-indications',
+        summary: 'NBG code: I=paced, II=sensed, III=response; common modes VVI (basic), DDD (most versatile), VOO/DOO (asynchronous magnet mode)',
+        skippable: true,
     },
     {
         id: 'pm-indications',
@@ -60,6 +64,8 @@ export const PACEMAKER_NODES = [
         body: '**Know why the patient has a pacemaker - helps troubleshoot.**\n\n**Sinus Node Dysfunction (Sick Sinus):**\n• Symptomatic sinus bradycardia\n• Sinus pauses >3 seconds\n• Chronotropic incompetence\n• Tachy-brady syndrome\n\n**AV Block:**\n• **Mobitz II** - always needs pacing (high risk of complete block)\n• **3rd degree (complete)** - always needs pacing\n• Advanced AV block (≥2 consecutive non-conducted P waves)\n• Mobitz I with symptoms\n\n**Other:**\n• Bifascicular/trifascicular block + syncope\n• Carotid sinus hypersensitivity\n• Post-ablation\n• Post-TAVR (~10-20% need pacemaker)\n• Selected cardiomyopathy (HCM)\n\n**CRT Indications:**\n• EF ≤35%\n• LBBB with QRS ≥150 ms\n• NYHA Class II-IV despite optimal medical therapy [1][4]',
         citation: [1, 4],
         next: 'pm-approach',
+        summary: 'Pacing indications: sick sinus, Mobitz II, complete heart block, post-TAVR; CRT for EF≤35% + LBBB + QRS≥150ms + NYHA II-IV',
+        skippable: true,
     },
     {
         id: 'pm-approach',
@@ -68,6 +74,7 @@ export const PACEMAKER_NODES = [
         title: 'Clinical Scenario',
         body: '**What is the primary concern?**',
         citation: [1, 2],
+        summary: 'Select clinical scenario: malfunction, ICD shocks, need to defibrillate, magnet use, ECG interpretation, temporary pacing, or device complication',
         options: [
             {
                 label: 'Suspected Pacemaker Malfunction',
@@ -125,6 +132,7 @@ export const PACEMAKER_NODES = [
             { id: 'pm-malfunction-id', label: 'Malfunction ID' },
         ],
         next: 'pm-malfunction-type',
+        summary: 'Four malfunction types: failure to pace (no spikes), failure to capture (spikes without QRS), undersensing (too many spikes), oversensing (pauses)',
     },
     {
         id: 'pm-malfunction-type',
@@ -133,6 +141,7 @@ export const PACEMAKER_NODES = [
         title: 'Identify Malfunction Type',
         body: '**What pattern do you see on ECG?**',
         citation: [2, 5],
+        summary: 'Identify ECG pattern: no spikes = failure to pace, spikes without QRS = failure to capture, too many spikes = undersensing, pauses = oversensing',
         options: [
             {
                 label: 'No Pacing Spikes (when expected)',
@@ -181,6 +190,7 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-malfunction-management',
+        summary: 'Failure to pace: lead fracture, dislodgment, battery depletion, oversensing — apply magnet (if restores pacing = oversensing), check CXR for lead issues',
     },
     {
         id: 'pm-fail-capture',
@@ -200,6 +210,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-malfunction-management',
+        summary: 'Failure to capture: ALWAYS CHECK POTASSIUM (K>7 classic cause), also acidosis/hypoxia/ischemia; treat hyperkalemia aggressively, TCP if unstable',
+        safetyLevel: 'critical',
     },
     {
         id: 'pm-undersensing',
@@ -216,6 +228,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-malfunction-management',
+        summary: 'Undersensing: paces regardless of intrinsic rhythm — DANGER of R-on-T triggering VF; magnet converts to asynchronous but does NOT fix the problem',
+        safetyLevel: 'critical',
     },
     {
         id: 'pm-oversensing',
@@ -232,6 +246,7 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-malfunction-management',
+        summary: 'Oversensing: device inhibited by non-cardiac signals (myopotentials, T-waves, EMI, lead fracture noise) — magnet bypasses sensing and restores pacing',
     },
     {
         id: 'pm-pmt',
@@ -248,6 +263,7 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-malfunction-management',
+        summary: 'PMT in DDD pacemakers: retrograde conduction creates endless loop at upper tracking rate — magnet breaks loop immediately, also try adenosine',
     },
     {
         id: 'pm-malfunction-management',
@@ -256,6 +272,7 @@ export const PACEMAKER_NODES = [
         title: 'Patient Stability',
         body: '**Is the patient hemodynamically stable?**',
         citation: [2, 5],
+        summary: 'Assess hemodynamic stability — unstable needs immediate magnet + K+ check + TCP; stable allows systematic workup and device interrogation',
         options: [
             {
                 label: 'UNSTABLE - Hypotension, AMS, Ischemia',
@@ -300,12 +317,15 @@ export const PACEMAKER_NODES = [
             monitoring: 'Continuous ECG, BP q5min, pulse oximetry. Watch for ischemia from tachycardia.',
         },
         next: 'pm-temp-start',
+        summary: 'Unstable: magnet first, check K+ (treat aggressively if high), TCP if bradycardic, epinephrine 2-10mcg/min bridge, prepare for TVP, STAT EP consult',
+        safetyLevel: 'critical',
     },
     {
         id: 'pm-stable',
         type: 'info',
         module: 2,
         title: 'Stable Pacemaker Malfunction',
+        summary: 'Stable: 12-lead ECG, BMP (K/Mg/Ca), CXR AP+lateral, arrange device interrogation (gold standard), telemetry admission, TCP pads on standby',
         body: '**Stable Patient - Time for Systematic Workup:**\n\n**1. Complete 12-Lead ECG:**\n• Document malfunction type\n• Compare to prior if available\n\n**2. Labs:**\n• BMP (K+, Mg++, Ca++, Cr)\n• Troponin if ischemia concern\n• Consider drug levels (digoxin, antiarrhythmics)\n\n**3. Chest X-ray:**\n• AP and lateral views\n• Compare to prior\n• Look for: lead position, fracture, pneumothorax\n\n**4. Arrange Device Interrogation:**\n• Cardiology/EP consult\n• Device company rep if needed\n• Gold standard for diagnosis\n\n**5. Continuous Monitoring:**\n• Telemetry admission\n• TCP pads on standby\n\n**Disposition:**\n• All confirmed malfunctions need admission\n• Cardiology consultation required\n• May need lead revision or generator replacement [2][5]',
         citation: [2, 5],
         options: [
@@ -344,6 +364,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-ecg-patterns',
+        summary: 'Pacing spikes: vertical deflections; RV pacing = LBBB + LAD morphology; discordant ST-T normal; concordant ST changes = concerning for ischemia',
+        skippable: true,
     },
     {
         id: 'pm-ecg-patterns',
@@ -360,12 +382,16 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-ecg-stemi',
+        summary: 'DDD shows 4 patterns (A-sense/V-sense to A-pace/V-pace); fusion beats = intermediate morphology (normal); pseudofusion = spike on native QRS (normal)',
+        skippable: true,
     },
     {
         id: 'pm-ecg-stemi',
         type: 'info',
         module: 3,
         title: 'STEMI in Paced Rhythm',
+        summary: 'Modified Sgarbossa for paced STEMI: concordant STE ≥1mm, concordant STD V1-V3, or discordant STE ≥25% of S wave — ANY positive = activate cath lab',
+        safetyLevel: 'critical',
         body: '**Modified Sgarbossa Criteria for STEMI with Paced Rhythm:**\n\n**Standard Sgarbossa (Original):**\n1. Concordant ST elevation ≥1 mm (5 points)\n2. Concordant ST depression ≥1 mm in V1-V3 (3 points)\n3. Discordant ST elevation ≥5 mm (2 points)\n\n**MODIFIED Criterion (Smith):**\n• Replace rule 3 with:\n• **ST elevation / S wave ratio ≥0.25**\n• (Proportionally excessive discordant STE)\n\n**Interpretation:**\n• ≥3 points = highly specific for STEMI\n• **ANY positive criterion** warrants cath lab activation\n\n**Key Point:**\n• Normal paced rhythm has **discordant** ST-T changes\n• **Concordant** ST changes are ALWAYS abnormal\n• Excessive discordant STE (>25% of S wave) is abnormal\n\n[Sgarbossa Calculator](#/calculator/pm-sgarbossa) [9][10]',
         citation: [9, 10],
         calculatorLinks: [
@@ -403,6 +429,8 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-magnet-rates',
+        summary: 'CRITICAL difference: magnet on PACEMAKER = asynchronous pacing (VOO/DOO); magnet on ICD = disables SHOCKS only (pacing unchanged)',
+        safetyLevel: 'critical',
     },
     {
         id: 'pm-magnet-rates',
@@ -415,6 +443,7 @@ export const PACEMAKER_NODES = [
             { id: 'pm-magnet-rate', label: 'Magnet Rate' },
         ],
         next: 'pm-magnet-when',
+        summary: 'Magnet rate = battery status: Medtronic 85bpm (65=ERI), Boston Scientific 100 (90=ERI), Abbott 100 (86=ERI); leadless Micra does NOT respond to magnets',
     },
     {
         id: 'pm-magnet-when',
@@ -424,12 +453,14 @@ export const PACEMAKER_NODES = [
         body: '**Indications for Magnet in ED:**\n\n**PACEMAKER:**\n✅ **Oversensing** - restores pacing by bypassing sensing\n✅ **PMT (pacemaker-mediated tachycardia)** - breaks the loop\n✅ **Assess battery status** - check magnet rate\n✅ **Confirm device is pacemaker vs ICD** - different response\n\n**ICD:**\n✅ **Inappropriate shocks** - disables therapy immediately\n✅ **ICD storm** - stops shocks while treating underlying cause\n✅ **End-of-life care** - disable shocks for comfort\n✅ **During surgery** - prevent EMI-triggered shocks\n\n**When NOT to Use Magnet:**\n❌ Patient in actual VT/VF who needs ICD therapy\n❌ Failure to capture (magnet won\'t help threshold issues)\n❌ As diagnostic tool when interrogation is available\n\n**Key Points:**\n• Safe to try in most situations\n• Effect is reversible (remove magnet)\n• Does NOT permanently reprogram device [5][11]',
         citation: [5, 11],
         next: 'pm-magnet-icd',
+        summary: 'Pacemaker magnet: oversensing, PMT, battery check; ICD magnet: inappropriate shocks, ICD storm, end-of-life, surgery; safe and reversible',
     },
     {
         id: 'pm-magnet-icd',
         type: 'info',
         module: 4,
         title: 'ICD Magnet Specifics',
+        summary: 'ICD magnet suspends VT/VF detection and shocks (pacing continues); removing magnet resumes detection; Biotronik may permanently disable after >8h',
         body: '**ICD Magnet Behavior:**\n\n**When Magnet Applied:**\n• Suspends VT/VF detection\n• Suspends shock therapy (ATP and shocks)\n• **Pacing continues normally**\n• Most ICDs emit audible tones\n\n**Manufacturer Differences:**\n\n| Manufacturer | Behavior |\n|--------------|----------|\n| **Medtronic** | Suspends detection while magnet on |\n| **Boston Scientific** | Suspends detection while magnet on |\n| **Abbott (St. Jude)** | Suspends detection while magnet on |\n| **Biotronik** | May permanently disable if magnet held >8 hours |\n\n**After Magnet Removal:**\n• Detection typically resumes\n• Some older devices may need reprogramming\n• Always plan for interrogation\n\n**⚠️ Important:**\n• If patient is in TRUE VT/VF, removing magnet allows appropriate therapy\n• If shocks are inappropriate, keep magnet on until EP can reprogram [5][11]',
         citation: [5, 11],
         options: [
@@ -454,6 +485,7 @@ export const PACEMAKER_NODES = [
         body: '**Patient Received ICD Shock(s) - First Steps:**\n\n**1. Is Patient Stable Now?**\n• ABCs, vital signs, mental status\n• If unstable → treat underlying rhythm\n\n**2. How Many Shocks?**\n• Single shock vs multiple\n• ≥3 shocks in 24h = **ICD Storm** (see below)\n\n**3. Appropriate vs Inappropriate?**\n\n| Appropriate | Inappropriate |\n|-------------|---------------|\n| Device correctly detected and treated VT/VF | Shock when NOT in VT/VF |\n| Look for: ischemia, HF, electrolytes, drugs | Causes: AFib/RVR, SVT, lead fracture, T-wave oversensing |\n\n**4. Initial Workup:**\n• 12-lead ECG\n• BMP, Mg++, troponin\n• Chest X-ray\n• **Device interrogation** (determines appropriate vs inappropriate)\n\n**All ICD shocks warrant ED evaluation and interrogation.** [5][12]',
         citation: [5, 12],
         next: 'pm-icd-appropriate',
+        summary: 'ICD shock evaluation: assess stability, count shocks (≥3 in 24h = storm), determine appropriate vs inappropriate, workup ECG/BMP/Mg/troponin/CXR',
     },
     {
         id: 'pm-icd-appropriate',
@@ -462,6 +494,7 @@ export const PACEMAKER_NODES = [
         title: 'Shock Type',
         body: '**Based on symptoms, rhythm, and interrogation (if available):**',
         citation: [5, 12],
+        summary: 'Classify shocks: appropriate (treated real VT/VF), inappropriate (AFib/SVT/lead noise), ICD storm (≥3 in 24h), or unknown pending interrogation',
         options: [
             {
                 label: 'Likely APPROPRIATE Shocks',
@@ -493,6 +526,7 @@ export const PACEMAKER_NODES = [
         type: 'info',
         module: 5,
         title: 'Appropriate ICD Shocks',
+        summary: 'Appropriate shocks: find the trigger — ischemia, HF, electrolytes, drugs; beta-blocker reduces VT burden, amiodarone for recurrence, admit for monitoring',
         body: '**The ICD Worked - But Why Did Patient Have VT/VF?**\n\n**Workup for Underlying Cause:**\n\n**Ischemia:**\n• ECG, troponin\n• Consider cath if ACS\n\n**Heart Failure:**\n• BNP, chest X-ray\n• Echo if indicated\n• Optimize HF meds\n\n**Electrolytes:**\n• K+, Mg++, Ca++\n• Replete aggressively\n\n**Medications/Drugs:**\n• QT-prolonging drugs\n• Digoxin toxicity\n• Stimulants, cocaine\n\n**Management:**\n• Treat underlying cause\n• Consider beta-blocker (reduces VT burden)\n• Amiodarone for recurrent VT\n• Admission for monitoring and optimization\n• EP follow-up for ICD adjustment\n\n**Single appropriate shock with clear trigger:** May not need prolonged admission if trigger addressed. [5][12]',
         citation: [5, 12],
         options: [
@@ -507,6 +541,7 @@ export const PACEMAKER_NODES = [
         type: 'info',
         module: 5,
         title: 'Inappropriate ICD Shocks',
+        summary: 'Inappropriate shocks: AFib/RVR most common cause, also lead fracture, T-wave oversensing — apply magnet immediately, rate control, arrange interrogation',
         body: '**⚠️ Shocks Delivered When NOT in VT/VF ⚠️**\n\n**Common Causes:**\n\n**Supraventricular Rhythms:**\n• **AFib with RVR** - most common cause\n• Atrial flutter with rapid conduction\n• SVT\n\n**Device/Lead Issues:**\n• **Lead fracture** - generates noise, sensed as VF\n• T-wave oversensing\n• Double counting of QRS\n\n**External:**\n• EMI (electromagnetic interference)\n\n**Immediate Management:**\n\n**1. Apply Magnet:**\n• Disables shock therapy immediately\n• Keep on until reprogramming\n\n**2. Rate Control (if AFib/SVT):**\n• Beta-blocker or diltiazem\n• Reduces rate below detection threshold\n\n**3. Device Interrogation:**\n• Confirms inappropriate shocks\n• Identifies cause\n• Allows reprogramming\n\n**Disposition:** Admit for monitoring and EP adjustment. [5][12]',
         citation: [5, 12],
         options: [
@@ -521,6 +556,8 @@ export const PACEMAKER_NODES = [
         type: 'info',
         module: 5,
         title: 'ICD Storm',
+        summary: 'ICD storm (≥3 shocks/24h) = emergency: apply magnet, beta-blocker + amiodarone 150mg IV, sedate, treat cause; ICU admission, consider ablation',
+        safetyLevel: 'critical',
         body: '**⚠️ ELECTRICAL STORM: ≥3 VT/VF episodes requiring ICD therapy in 24 hours ⚠️**\n\n**This is a Medical Emergency.**\n\n**Immediate Management:**\n\n**1. Apply Magnet (if ongoing shocks):**\n• Stops further shocks\n• Allows assessment and treatment\n\n**2. Determine Appropriate vs Inappropriate:**\n• Interrogate device ASAP\n• If inappropriate → keep magnet on\n• If appropriate → need antiarrhythmic therapy\n\n**3. For APPROPRIATE Storm (True VT/VF):**\n\n| Intervention | Rationale |\n|--------------|----------|\n| **Beta-blocker** | Blunts sympathetic surge, first-line |\n| **Amiodarone** | 150mg IV over 10 min, then infusion |\n| **Sedation** | Reduces catecholamines |\n| **Treat cause** | Ischemia, electrolytes, HF |\n\n**4. Advanced Options:**\n• Overdrive pacing (faster than VT rate)\n• Catheter ablation\n• Left cardiac sympathetic denervation\n• Intubation/sedation if refractory\n\n**Admit to ICU.** [5][12][13]',
         citation: [5, 12, 13],
         treatment: {
@@ -554,6 +591,7 @@ export const PACEMAKER_NODES = [
         type: 'info',
         module: 5,
         title: 'ICD Shock - Unknown Type',
+        summary: 'Unknown shock type: admit for monitoring, arrange interrogation; if ongoing shocks apply magnet — can always externally defibrillate if needed',
         body: '**Cannot Determine Appropriate vs Inappropriate Without Interrogation:**\n\n**If Stable, Single Shock:**\n• Admit for monitoring\n• Arrange interrogation (EP or device company)\n• Basic workup: ECG, BMP, troponin, CXR\n• Telemetry monitoring\n\n**If Multiple Shocks or Ongoing:**\n1. **Apply magnet** to prevent further shocks\n2. Assess hemodynamics\n3. If in VT/VF after magnet: external cardioversion/defibrillation\n4. Emergent interrogation\n\n**Contact:**\n• Cardiology/EP consult\n• Device company (24/7 technical support)\n• Manufacturer often can provide remote interrogation guidance\n\n**Key Point:**\n• You can ALWAYS apply magnet if unsure\n• If patient is in true VT/VF, you can still externally defibrillate\n• Magnet just disables internal therapy [5][12]',
         citation: [5, 12],
         options: [
@@ -574,6 +612,8 @@ export const PACEMAKER_NODES = [
         body: '**YES, you can and SHOULD defibrillate patients with pacemakers/ICDs!**\n\n**Key Points:**\n• **Do NOT delay defibrillation** to check for pacemaker\n• Safe to defibrillate/cardiovert\n• Some current may travel down leads\n• **Device interrogation required after shock**\n\n**If ICD is Actively Shocking:**\n• Wait 30-60 seconds for cycle to complete\n• Then apply AED/defibrillator if still needed\n• You can shock OVER the ICD\'s attempts if necessary\n\n**Post-Shock:**\n• Device may be reset or damaged (rare)\n• **Interrogation within 24 hours** required\n• Check pacing function clinically\n• Watch for failure to capture [2][5][14]',
         citation: [2, 5, 14],
         next: 'pm-shock-placement',
+        summary: 'YES defibrillate patients with devices — do NOT delay; device interrogation required within 24h post-shock; some current may travel down leads',
+        safetyLevel: 'critical',
     },
     {
         id: 'pm-shock-placement',
@@ -590,12 +630,14 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-shock-post',
+        summary: 'A-P pad placement preferred (avoids generator); if anterior-lateral, pads ≥8cm from device; standard energy, no need to reduce for pacemaker',
     },
     {
         id: 'pm-shock-post',
         type: 'info',
         module: 6,
         title: 'Post-Shock Device Care',
+        summary: 'Post-shock: check paced rhythm, assess capture, device interrogation within 24h mandatory; TCP bridge if malfunction detected; document shock details',
         body: '**After External Defibrillation/Cardioversion:**\n\n**Immediate Assessment:**\n• Check for paced rhythm on monitor\n• Assess capture (if pacing)\n• Watch for failure to pace or capture\n\n**Potential Issues:**\n• **Sensing changes** - threshold may increase\n• **Capture changes** - threshold may increase\n• **Temporary pacing dysfunction** - usually resolves\n• **Permanent damage** - rare but possible\n\n**Required Follow-up:**\n• **Device interrogation within 24 hours**\n• Full assessment of sensing and capture thresholds\n• Reprogram if needed\n\n**If Pacing Malfunction Post-Shock:**\n• Transcutaneous pacing as bridge\n• Urgent interrogation\n• May need temporary transvenous pacing\n\n**Documentation:**\n• Number of shocks\n• Energy levels used\n• Pad position\n• Post-shock device function [2][5][14]',
         citation: [2, 5, 14],
         options: [
@@ -616,6 +658,7 @@ export const PACEMAKER_NODES = [
         body: '**When Permanent Pacemaker Fails, Options for Temporary Pacing:**\n\n| Method | Speed | Duration | Reliability |\n|--------|-------|----------|-------------|\n| **Transcutaneous (TCP)** | Fastest | Short-term | Variable capture |\n| **Transvenous (TVP)** | Moderate | Days | Most reliable |\n| **Pharmacologic** | Fast | Bridge only | Limited efficacy |\n\n**Indications for Temporary Pacing:**\n• Pacemaker malfunction with hemodynamic instability\n• Bradycardia unresponsive to medications\n• Asystole or near-asystole\n• Bridge to permanent pacemaker repair/replacement\n\n**Order of Interventions:**\n1. **Atropine** (limited utility in complete block)\n2. **Transcutaneous pacing** (immediate)\n3. **Chronotropic infusion** (epinephrine or dopamine)\n4. **Transvenous pacing** (definitive) [2][8]',
         citation: [2, 8],
         next: 'pm-tcp',
+        summary: 'Temporary pacing options: TCP (fastest), TVP (most reliable), pharmacologic bridge (atropine, epinephrine, dopamine) — order: atropine → TCP → infusion → TVP',
     },
     {
         id: 'pm-tcp',
@@ -635,6 +678,7 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-tcp-troubleshoot',
+        summary: 'TCP: A-P pads ≥8cm from device, start 30-50mA increase by 5-10 until capture (typical 50-100mA), set 1.25x threshold; confirm with pulse not just monitor',
     },
     {
         id: 'pm-tcp-troubleshoot',
@@ -644,6 +688,7 @@ export const PACEMAKER_NODES = [
         body: '**Not Capturing? Troubleshoot:**\n\n**Check Pads:**\n• Good contact?\n• Dried out?\n• Hair interfering?\n• A-P position?\n\n**Increase Output:**\n• Go up to maximum (usually 140-200 mA)\n• If still no capture at max → TVP\n\n**Check Connections:**\n• Pads connected to pacer?\n• Pacer mode correct?\n\n**Patient Factors:**\n• Large body habitus (higher thresholds)\n• Pericardial effusion\n• Severe metabolic derangement\n\n**Patient Comfort:**\n• TCP is **painful** at effective outputs\n• Sedation required for most conscious patients\n• Options: Fentanyl, midazolam, ketamine, propofol\n\n**When TCP Fails:**\n• Transvenous pacing\n• Continue pharmacologic support (epinephrine/dopamine)\n• Call for expert help [2][8]',
         citation: [2, 8],
         next: 'pm-tvp',
+        summary: 'TCP troubleshooting: check pad contact/connections, increase to max mA, try A-P position; TCP is PAINFUL — sedate with fentanyl/midazolam/ketamine',
     },
     {
         id: 'pm-tvp',
@@ -660,12 +705,14 @@ export const PACEMAKER_NODES = [
             },
         ],
         next: 'pm-pharm-bridge',
+        summary: 'TVP: right IJ preferred (straight path to RV), balloon-tipped catheter ~20cm, confirm with injury current/POCUS/fluoro; set output 2-3x threshold',
     },
     {
         id: 'pm-pharm-bridge',
         type: 'info',
         module: 7,
         title: 'Pharmacologic Bridge',
+        summary: 'Atropine 1mg IV (ineffective for Mobitz II/CHB), epinephrine 2-10mcg/min, dopamine 5-20mcg/kg/min — bridges to pacing, not definitive treatment',
         body: '**Medications While Preparing for Pacing:**\n\n**Atropine:**\n• Dose: 1 mg IV, repeat q3-5 min, max 3 mg\n• Works for: Sinus bradycardia, some AV block\n• **Ineffective for:** Mobitz II, complete heart block, transplant hearts\n\n**Epinephrine Infusion:**\n• Dose: **2-10 mcg/min**\n• Chronotropic AND inotropic\n• Titrate to heart rate and blood pressure\n\n**Dopamine Infusion:**\n• Dose: **5-20 mcg/kg/min**\n• Higher doses more chronotropic\n• Alternative to epinephrine\n\n**Isoproterenol:**\n• Pure beta-agonist\n• 2-10 mcg/min\n• Increases myocardial oxygen demand\n• Not routinely recommended\n• May be useful in transplant patients\n\n**Key Point:**\n• These are BRIDGES to pacing, not definitive treatment\n• Prepare for TCP/TVP while infusing [2][8]',
         citation: [2, 8],
         treatment: {
@@ -702,6 +749,7 @@ export const PACEMAKER_NODES = [
         type: 'info',
         module: 7,
         title: 'Device Complications',
+        summary: 'Pocket infection: blood cultures, may need complete extraction + IV abx; Twiddler syndrome: leads coiled on CXR; lead fracture at subclavian crush site',
         body: '**Non-Malfunction Complications:**\n\n**Generator Pocket Infection:**\n• Erythema, warmth, discharge, erosion\n• Systemic signs (fever, bacteremia)\n• **Management:**\n  - Blood cultures x 3\n  - Superficial only (<30 days, no systemic signs): Trial oral abx\n  - True pocket infection: **Complete device extraction** + IV abx 10-14 days\n  - With endocarditis: Extraction + 4-6 weeks IV abx\n\n**Twiddler Syndrome:**\n• Patient manipulates generator in pocket\n• Leads coil around generator on X-ray\n• Causes malfunction, lead dislodgment\n• **Treatment:** Lead repositioning, secure generator to fascia\n\n**Lead Fracture:**\n• At clavicle-first rib junction (subclavian crush)\n• X-ray: Discontinuity or kinking of lead\n• Causes failure to capture, oversensing (noise)\n• **Treatment:** Lead replacement\n\n**Pacemaker Syndrome:**\n• Symptoms from loss of AV synchrony (VVI mode)\n• Fatigue, dyspnea, palpitations, hypotension\n• **Treatment:** Upgrade to DDD pacing [5][16][17]',
         citation: [5, 16, 17],
         images: [

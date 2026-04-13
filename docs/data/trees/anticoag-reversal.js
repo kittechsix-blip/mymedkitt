@@ -16,6 +16,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         images: [{ src: 'images/anticoag-reversal/coagulation-cascade-anticoags.png', alt: 'Coagulation cascade diagram annotated with anticoagulant drug classes showing where warfarin, heparin, dabigatran, and factor Xa inhibitors act in the clotting pathway', caption: 'Anticoagulant mechanism map — warfarin (Factors II,VII,IX,X), UFH/LMWH (Xa + IIa), dabigatran (IIa only), rivaroxaban/apixaban/edoxaban (Xa only). Reversal strategy is agent-specific. (CC BY-SA 4.0)' }],
         citation: [1, 2, 16],
         next: 'acr-bleeding-q',
+        summary: 'Before reversing: assess how coagulopathic, why anticoagulated, and how important is reversal — cirrhosis INR may mislead',
+        skippable: true,
     },
     {
         id: 'acr-bleeding-q',
@@ -46,6 +48,7 @@ export const ANTICOAG_REVERSAL_NODES = [
                 next: 'acr-pre-proc',
             },
         ],
+        summary: 'Triage by urgency: life-threatening = agent-specific reversal, minor = hold dose, supratherapeutic = tiered management',
     },
     // =====================================================================
     // MODULE 2 — Urgent Reversal Protocols
@@ -93,6 +96,8 @@ export const ANTICOAG_REVERSAL_NODES = [
                 next: 'acr-antiplatelet',
             },
         ],
+        summary: 'Act fast — for ICH on warfarin give PCC immediately without waiting for INR; identify agent and last dose timing',
+        safetyLevel: 'critical',
     },
     {
         id: 'acr-warfarin-critical',
@@ -196,6 +201,7 @@ export const ANTICOAG_REVERSAL_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Usually stopping infusion is sufficient (short half-life) — protamine for severe bleeding only; risks anaphylaxis/pulm HTN',
     },
     {
         id: 'acr-ufh-reversal',
@@ -308,6 +314,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         body: 'For most agents, **hold the dose + local measures** is sufficient.\n\n• Drug elimination handles most minor bleeding\n• Consider the patient\'s overall coagulation status — ALL meds and coagulopathies\n• Brief anticoagulation interruption is generally safe for AF or DVT\n• Higher-risk indications (mechanical valve) → minimize interruption time\n\n**Warfarin (Coumadin):** Hold dose. Consider low-dose vitamin K if INR significantly elevated.\n**DOACs:** Hold 1-2 doses. Drug clearance is usually sufficient.\n**Heparin / Enoxaparin (Lovenox):** Stop infusion. Short half-life handles the rest.\n**Antiplatelets:** Local hemostatic measures. DDAVP (Desmopressin) if significant concern.',
         citation: [7, 16],
         next: 'acr-monitoring',
+        summary: 'Hold dose + local measures usually sufficient for minor bleeding — brief anticoagulation interruption generally safe for AF/DVT',
+        skippable: true,
     },
     {
         id: 'acr-supra-agent',
@@ -327,6 +335,7 @@ export const ANTICOAG_REVERSAL_NODES = [
                 next: 'acr-doac-supra',
             },
         ],
+        summary: 'No active bleeding — warfarin uses INR-tiered vitamin K dosing; DOACs usually hold dose and let drug clear',
     },
     // =====================================================================
     // MODULE 4 — Non-Urgent Management
@@ -366,6 +375,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         body: '**Common pitfalls (IBCC):**\n**#1** We **overestimate** bleeding risk. Most bedside ICU procedures are LOW risk — SIR 2019 lists CVC, thoracentesis, and paracentesis all as "low risk." [9]\n**#2** We fail to consider the **big picture** — all meds + all coagulopathies together.\n**#3** We put **excess faith in the INR**. INR 2.5 in cirrhosis = rebalanced hemostasis. INR 2.5 on apixaban = high bleeding risk. Context matters.\n**#4** We try to push INR <1.7 with FFP — this is **impossible and dangerous.** FFP cannot achieve INR below ~1.7 (would require infinite volume). [8,16]\n\n**Low-risk procedures (CVC, thoracentesis, paracentesis):**\n• No evidence for specific coag lab thresholds [9]\n• Key: avoid arterial injury — expert operator, ultrasound guidance, proper technique\n• TEG may help when in doubt, especially in cirrhosis [16]\n\n**Lumbar puncture:** Highest risk bedside procedure — individualize management.',
         citation: [8, 9, 16],
         next: 'acr-monitoring',
+        summary: 'CVC/thoracentesis/paracentesis = low risk — technique matters more than INR; FFP cannot push INR below 1.7',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5 — Monitoring & Disposition
@@ -378,6 +389,7 @@ export const ANTICOAG_REVERSAL_NODES = [
         body: '**Warfarin (Coumadin):** INR at 30 min post-PCC, then 6h and 24h. Watch for INR rebound when PCC wears off (6-8h). Vitamin K prevents this.\n\n**Dabigatran (Pradaxa):** PTT (or TT) at baseline, 2-4h post-idarucizumab (Praxbind), q12h. Watch for drug rebound >12h (adipose redistribution). [3]\n\n**Xa inhibitors (Eliquis/Xarelto/Savaysa):** INR after PCC (Kcentra), then q6h. Anti-Xa level if available. Rebounding INR may indicate waning PCC. [5]\n\n**UFH:** PTT at 10-15 min, 2h (protamine ~2h duration), then q4h × 24h for heparin rebound.\n\n**LMWH (Lovenox):** Anti-Xa level at 10-15 min, 2h, then q4h × 24h. Don\'t expect full anti-Xa normalization.\n\n**tPA (Activase):** Fibrinogen level + coag panel after treatment. Target fibrinogen >150-200 mg/dL. Repeat TEG if available.\n\n**Antiplatelets:** Clinical reassessment. PFA or TEG with platelet mapping if available.',
         citation: [1, 3, 5, 16],
         next: 'acr-resume',
+        summary: 'Agent-specific monitoring intervals — watch for rebound (PCC wears off 6-8h, idarucizumab >12h adipose redistribution)',
     },
     {
         id: 'acr-resume',
@@ -387,6 +399,7 @@ export const ANTICOAG_REVERSAL_NODES = [
         body: 'Most patients will need anticoagulation **restarted** — the original indication hasn\'t gone away.\n\n• **Timing depends on:** indication, bleeding site, severity, patient factors\n• **ICH:** Consider restarting in 4-8 weeks for high-risk indications (e.g., mechanical valve, recurrent DVT/PE)\n• **GI bleed:** May restart earlier (1-2 weeks) once hemostasis is secure\n• **Mechanical valve:** Shortest possible interruption — very high thrombotic risk\n• **Involve hematology** or appropriate specialty for complex cases\n\n**Risk-benefit:** The reason the patient was anticoagulated in the first place still applies. Failure to restart carries its own mortality risk (stroke, PE).',
         citation: [1, 6, 7],
         next: 'acr-pitfalls',
+        summary: 'Most patients need anticoagulation restarted — the original indication still applies; failure to restart carries mortality risk',
     },
     {
         id: 'acr-pitfalls',

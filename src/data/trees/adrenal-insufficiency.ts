@@ -51,6 +51,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-type-classify',
       },
     ],
+
+    summary: 'Adrenal crisis = hemodynamic deterioration resolving with IV hydrocortisone; 50% present as first diagnosis',
   },
 
   {
@@ -71,6 +73,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-type-classify',
       },
     ],
+
+    summary: 'Classic crisis: SBP ≤100, hyponatremia 84%, hypoglycemia, hyperK (PAI only) — infection is #1 trigger',
   },
 
   {
@@ -81,6 +85,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Simultaneous actions — do NOT delay treatment for diagnostics.**\n\n**IV Access + Fluids:**\n• **Adults:** 1L NS bolus, repeat PRN. Add D5 (or [D50](#/drug/dextrose/hypoglycemia) bolus) if hypoglycemic.\n• **Pediatrics:** 20 mL/kg NS bolus, repeat PRN up to 60 mL/kg in first hour. [D10](#/drug/dextrose/hypoglycemia) 2-5 mL/kg for hypoglycemia.\n\n**Draw crisis labs BEFORE steroids if possible — but do NOT delay treatment:**\n• Random cortisol (most important single test)\n• ACTH level (distinguishes primary vs secondary)\n• BMP (Na, K, glucose, Cr)\n• CBC with differential\n• Lactate\n• Renin and aldosterone\n\n[Lab Findings by AI Type](#/info/ai-lab-findings)\n\n**KEY:** A random cortisol drawn during acute physiologic stress that is <18 μg/dL is highly suggestive of AI. A level <10 μg/dL during crisis is virtually diagnostic. [1][2]',
     citation: [1, 2, 7],
     next: 'ai-crisis-steroid',
+
+    summary: 'NS bolus + draw cortisol/ACTH BEFORE steroids (but do NOT delay treatment) — cortisol <18 during stress = AI',
+    safetyLevel: 'critical',
   },
 
   {
@@ -110,6 +117,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
       monitoring: 'Hemodynamics q15-30 min until stable. Glucose q1-2h. Electrolytes q4-6h. Expected BP improvement within 1-2 hours.',
     },
     next: 'ai-crisis-response',
+
+    summary: 'Hydrocortisone 100mg IV stat, then 200mg/24h — at ≥50mg/day no fludrocortisone needed; dex if diagnosis uncertain',
+    safetyLevel: 'critical',
   },
 
   {
@@ -129,6 +139,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-crisis-refractory',
       },
     ],
+
+    summary: 'Hemodynamic improvement expected within 1-2h of IV hydrocortisone — no improvement suggests alternate diagnosis',
   },
 
   // =====================================================================
@@ -154,6 +166,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
       monitoring: 'Glucose q1-2h. Electrolytes (Na, K) q4-6h. Hemodynamics. Avoid aggressive K correction in PAI.',
     },
     next: 'ai-precipitant-workup',
+
+    summary: 'Continue 200mg/24h hydrocortisone, halve daily when stable — avoid aggressive K correction in PAI',
   },
 
   {
@@ -188,6 +202,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-type-classify',
       },
     ],
+
+    summary: 'Infection is #1 trigger — also steroid withdrawal, CYP3A4 inducers, adrenal hemorrhage; ~10% no identifiable cause',
   },
 
   {
@@ -198,6 +214,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Treat BOTH the infection AND the crisis simultaneously.**\n\n• Continue stress-dose [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) throughout active infection\n• Broad-spectrum antibiotics per sepsis protocol\n• Blood and urine cultures, CXR, procalcitonin\n• Do NOT taper steroids until infection is controlled\n• Stress-dose steroids may mask fever — monitor WBC and procalcitonin trends instead\n\n**Waterhouse-Friderichsen syndrome:**\n• Bilateral adrenal hemorrhage in meningococcal sepsis\n• Also seen with DIC, heparin-induced thrombocytopenia, antiphospholipid syndrome\n• CT abdomen shows enlarged hemorrhagic adrenals\n• Irreversible PAI — lifelong glucocorticoid + mineralocorticoid replacement required [2][7]',
     citation: [2, 4, 7],
     next: 'ai-disposition',
+
+    summary: 'Treat BOTH infection and crisis simultaneously — Waterhouse-Friderichsen = bilateral adrenal hemorrhage, permanent PAI',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -232,6 +251,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-diagnostic-labs',
       },
     ],
+
+    summary: 'PAI = adrenal destruction (high ACTH, hyperK); SAI = pituitary (low ACTH, no hyperK); TAI = exogenous steroids (most common)',
   },
 
   {
@@ -242,6 +263,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Hallmarks distinguishing PAI from other types:**\n• **Hyperpigmentation** — ACTH-driven melanocyte stimulation. Look for palmar creases, buccal mucosa, scars, areolae, sun-exposed areas.\n• **Hyperkalemia** — aldosterone deficiency (unique to PAI)\n• Salt craving, postural hypotension, weight loss\n• Low cortisol + elevated ACTH (>2× upper limit of normal)\n\n**Etiologic workup:**\n• 21-hydroxylase antibodies (positive in ~85% of autoimmune PAI)\n• CT adrenals — TB: calcified/enlarged; hemorrhage: enlarged with high density; metastases\n• If antibodies negative: TB testing (PPD/IGRA), fungal (histoplasmosis, coccidioidomycosis), HIV, metastatic disease (lung, breast, melanoma)\n\n**Polyglandular autoimmune syndromes:**\n• **Type 1 (APS-1):** AI + hypoparathyroidism + chronic mucocutaneous candidiasis (AIRE gene mutation)\n• **Type 2 (Schmidt syndrome):** AI + autoimmune thyroid disease ± type 1 diabetes\n• → Check TSH in all PAI patients\n\n**CRITICAL:** Treat cortisol BEFORE thyroxine — levothyroxine accelerates cortisol clearance and can precipitate adrenal crisis in untreated AI. [1][5][8]',
     citation: [1, 5, 8, 9],
     next: 'ai-maintenance',
+
+    summary: 'Hyperpigmentation + hyperK = PAI; check 21-OH Ab, CT adrenals, TSH — treat cortisol BEFORE thyroxine',
+    safetyLevel: 'warning',
   },
 
   {
@@ -252,6 +276,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Key differences from PAI:**\n• **No hyperpigmentation** (ACTH is LOW, not high)\n• **No hyperkalemia** (aldosterone preserved — RAAS axis intact)\n• May have other pituitary hormone deficiencies (TSH, LH/FSH, GH, prolactin)\n\n**Common causes:**\n• Pituitary adenoma (most common structural cause)\n• Post-pituitary surgery or radiation\n• Sheehan syndrome (postpartum pituitary necrosis — history of severe postpartum hemorrhage)\n• Lymphocytic hypophysitis\n• Immune checkpoint inhibitors: ipilimumab (anti-CTLA-4) > pembrolizumab/nivolumab (anti-PD-1) [5][9]\n\n**Workup:**\n• MRI pituitary with contrast\n• Full anterior pituitary panel: LH/FSH, TSH/fT4, GH/IGF-1, prolactin\n• Low or inappropriately normal ACTH + low cortisol confirms SAI\n\n**[Fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) is NOT needed** in SAI — mineralocorticoid pathway (RAAS) is intact. [1][5]',
     citation: [1, 5, 9],
     next: 'ai-maintenance',
+
+    summary: 'No hyperpigmentation, no hyperK (RAAS intact) — MRI pituitary, full anterior pituitary panel; no fludrocortisone needed',
   },
 
   {
@@ -262,6 +288,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Most common form of adrenal insufficiency overall.** [Corticosteroid Equivalency & Alternatives](#/info/ai-steroid-equivalency)\n\n**Risk factors for HPA suppression:**\n• ≥Prednisone 5 mg/day (or equivalent) for ≥3 weeks\n• Any dose for ≥3 weeks with Cushingoid features\n• Repeated high-potency inhaled, topical, or intra-articular steroids\n  — Meta-analysis: 4.2% intranasal, 6.8% inhaled, 52.2% intra-articular [11]\n• Chronic opioid use — prevalence of AI ~15% among chronic opioid users [12]\n\n**Recovery timeline:**\n• HPA axis recovery takes 6-12 months after steroid discontinuation\n• During recovery period: stress dosing still needed for illness/surgery\n\n**Taper guidance:**\n• Reduce to physiologic replacement ([hydrocortisone](#/drug/hydrocortisone/maintenance) 15-20 mg/day) first\n• Then slow taper: reduce by 1-2.5 mg prednisone equivalent every 1-2 weeks\n• Check AM cortisol after holding replacement for 24 hours — if >18 μg/dL, HPA axis has recovered\n\n[Special Populations](#/info/ai-special-populations) [1][11][12][13]',
     citation: [1, 11, 12, 13],
     next: 'ai-maintenance',
+
+    summary: 'Most common AI overall — risk with ≥pred 5mg/day for ≥3 weeks; HPA recovery takes 6-12 months after stopping',
   },
 
   // =====================================================================
@@ -276,6 +304,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '[Lab Findings by AI Type](#/info/ai-lab-findings)\n\n**Step 1 — Morning Cortisol + ACTH (draw at 8-9 AM):**\n• AM cortisol <3 μg/dL → AI virtually confirmed\n• AM cortisol >15 μg/dL → AI unlikely (some guidelines use 18 μg/dL)\n• AM cortisol 3-15 μg/dL → indeterminate, needs cosyntropin stimulation test\n\n**Step 2 — ACTH level distinguishes type:**\n• ACTH >2× upper limit of normal → Primary AI\n• ACTH low or inappropriately normal → Secondary or Tertiary AI\n\n**Additional labs:**\n• BMP: hyponatremia (84%), hyperkalemia (PAI only), hypoglycemia\n• Renin + aldosterone: elevated renin + low aldosterone = PAI\n• TSH, anti-TPO antibodies: screen for polyglandular autoimmune syndrome\n• 21-hydroxylase antibodies if PAI suspected\n• DHEA-S: low in both PAI and SAI (not useful for distinguishing type) [1][5][8]',
     citation: [1, 5, 8],
     next: 'ai-cosyntropin',
+
+    summary: 'AM cortisol <3 = confirmed AI, >15 = unlikely; ACTH high = PAI, low = SAI/TAI; check Na, K, renin, aldosterone',
   },
 
   {
@@ -286,6 +316,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Gold standard for diagnosing PRIMARY AI.**\n\n**Protocol:**\n1. Draw baseline cortisol\n2. Administer cosyntropin 250 μg IV or IM\n3. Draw cortisol at 30 and 60 minutes\n\n**Interpretation:**\n• Peak cortisol ≥18 μg/dL → normal response, rules out PAI\n• Peak cortisol <18 μg/dL → confirms adrenal insufficiency\n\n**Limitations:**\n• Does NOT reliably detect SAI or recent-onset PAI (adrenals may still respond to supraphysiologic exogenous ACTH early in secondary disease)\n• If SAI suspected with normal stimulation test → endocrine referral for insulin tolerance test (ITT) or metyrapone test\n\n**ED tip:** If adrenal crisis is suspected, draw cortisol + ACTH, then give hydrocortisone immediately. Pre-treatment cortisol + ACTH are usually sufficient for diagnosis. Formal stimulation test can be done after stabilization.\n\n**Dexamethasone advantage:** Does NOT cross-react with cortisol immunoassays — allows meaningful cortisol measurement during active treatment. [1][14]',
     citation: [1, 5, 14],
     next: 'ai-cosyntropin-result',
+
+    summary: 'Cosyntropin 250mcg IV/IM, peak cortisol ≥18 = normal — does NOT reliably detect SAI or recent-onset PAI',
   },
 
   {
@@ -307,6 +339,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-type-classify',
       },
     ],
+
+    summary: 'Peak ≥18 excludes PAI; <18 confirms AI — classify type with ACTH level',
   },
 
   {
@@ -350,6 +384,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
       monitoring: 'BP, K+, plasma renin activity for fludrocortisone dosing. Watch for under/overdosing signs. Endocrine follow-up q3-6 months.',
     },
     next: 'ai-stress-dose',
+
+    summary: 'Hydrocortisone 15-25mg/day (2/3 AM, 1/3 PM); PAI also needs fludrocortisone 50-200mcg; SAI/TAI no fludro needed',
   },
 
   {
@@ -371,6 +407,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
       monitoring: 'Clinical status, hemodynamics, glucose. Resume maintenance dose once illness resolved and patient stable.',
     },
     next: 'ai-prevention',
+
+    summary: '#1 crisis cause is failure to stress dose — double for fever >38C, triple for >39C, 100mg IM if vomiting then ED',
+    safetyLevel: 'critical',
   },
 
   {
@@ -381,6 +420,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Abrupt steroid withdrawal:**\n• Most common cause of TAI crisis\n• Risk with ≥prednisone 5 mg/day for ≥3 weeks\n• Management: resume steroids at previous dose, then taper slowly\n\n**CYP3A4 inducers** (accelerate cortisol metabolism):\n• Rifampin, phenytoin, carbamazepine, phenobarbital, St. John\'s wort\n• May need to double hydrocortisone maintenance dose while on CYP3A4 inducer [11]\n\n**CYP3A4 inhibitors** (can mask AI, then crisis when stopped):\n• Ketoconazole, itraconazole, fluconazole, ritonavir\n\n**Immune checkpoint inhibitors:**\n• Ipilimumab (anti-CTLA-4) → hypophysitis → SAI (highest risk)\n• Pembrolizumab/nivolumab (anti-PD-1) → primary adrenalitis → PAI\n• Usually irreversible — lifelong replacement needed\n• Do NOT hold cancer therapy for AI — treat AI and continue immunotherapy [9]\n\n**Chronic opioids:**\n• Suppress hypothalamic CRH → TAI\n• Prevalence ~15% of chronic opioid users\n• Higher risk with higher doses and longer duration\n• No patient on <20 MME/day developed opioid-induced AI in meta-analysis [12]\n• Screen with AM cortisol if unexplained fatigue or hypotension',
     citation: [9, 11, 12, 13],
     next: 'ai-maintenance',
+
+    summary: 'Steroid withdrawal, CYP3A4 inducers (double dose), checkpoint inhibitors (often irreversible), chronic opioids (~15%)',
   },
 
   {
@@ -391,6 +432,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Every AI patient must have ALL of the following:** [16]\n\n**1. Medical Alert Identification**\n• MedicAlert bracelet or necklace stating: "Adrenal Insufficiency — Requires Stress-Dose Steroids"\n\n**2. Emergency Injection Kit**\n• [Hydrocortisone](#/drug/hydrocortisone/emergency IM) 100 mg for IM self-injection (lateral thigh)\n• Patient AND family/caregivers trained in injection technique\n• Replace before expiration date\n• In a study, only 44% of patients in adrenal emergency received their emergency injection before arriving at a medical facility [15]\n\n**3. Steroid Emergency Card**\n• Wallet card with diagnosis, medications, dosing, emergency contact, and instructions for first responders\n\n**4. Written Sick-Day Action Plan**\n• [Sick-Day Rules & Stress Dosing Guide](#/info/ai-sick-day-rules)\n\n**5. Education Topics:**\n• Never stop steroids abruptly\n• Increase dose when ill (sick-day rules)\n• Use IM injection if unable to keep oral steroids down\n• Go to ED immediately after IM injection\n• Inform ALL healthcare providers of diagnosis\n• Wear medical alert identification at all times\n\nGroup education sessions improved patient confidence in emergency injection from 68% to 91%. [16]',
     citation: [1, 15, 16],
     next: 'ai-disposition',
+
+    summary: 'Every AI patient needs: MedicAlert ID, IM hydrocortisone kit, steroid card, written sick-day plan, trained caregivers',
   },
 
   // =====================================================================
@@ -421,6 +464,8 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
         next: 'ai-dispo-discharge',
       },
     ],
+
+    summary: 'ICU for active crisis, floor for unable-to-take-PO or new diagnosis, discharge if stable on oral steroids',
   },
 
   {
@@ -513,6 +558,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
       monitoring: 'Hemodynamics, coagulation status. CT abdomen diagnostic. Lifelong endocrine follow-up required.',
     },
     next: 'ai-disposition',
+
+    summary: 'Bilateral adrenal hemorrhage from DIC, HIT, anticoagulation — CT diagnostic, irreversible lifelong PAI',
+    safetyLevel: 'critical',
   },
 
   {
@@ -523,6 +571,9 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     body: '**Screen all autoimmune PAI patients for associated conditions:**\n\n**Type 1 (APS-1 / APECED):**\n• AI + hypoparathyroidism + chronic mucocutaneous candidiasis\n• AIRE gene mutation, childhood onset\n• Check: calcium, PTH, oral exam for candidiasis\n\n**Type 2 (Schmidt syndrome — most common polyglandular syndrome):**\n• AI + autoimmune thyroid disease (Hashimoto or Graves — most common association)\n• ± Type 1 diabetes, vitiligo, pernicious anemia, celiac disease, premature ovarian failure\n• Check: TSH, anti-TPO, HbA1c, vitamin B12\n\n**CRITICAL:** Treat cortisol BEFORE thyroid hormone — starting levothyroxine in untreated AI precipitates adrenal crisis because thyroxine accelerates cortisol clearance. Always establish glucocorticoid replacement first, then add levothyroxine. [1][5][8]',
     citation: [1, 5, 8],
     next: 'ai-maintenance',
+
+    summary: 'Screen all PAI for thyroid/diabetes — CRITICAL: treat cortisol BEFORE thyroxine to avoid precipitating crisis',
+    safetyLevel: 'critical',
   },
 
 ];

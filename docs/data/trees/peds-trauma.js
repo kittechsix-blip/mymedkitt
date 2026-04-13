@@ -30,6 +30,7 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'peds-vital-signs', label: 'Pediatric Vital Signs by Age' },
         ],
         next: 'peds-trauma-weight',
+        summary: 'Children NOT small adults; larger occiput, faster desaturation, BP drops late (>25-30% blood loss); use weight-based dosing for all meds',
     },
     {
         id: 'peds-trauma-weight',
@@ -43,6 +44,7 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'peds-ett-size', label: 'Pediatric ETT Size Calculator' },
         ],
         next: 'peds-trauma-primary',
+        summary: 'Broselow tape gold standard; cuffed ETT = (age/4)+3.5; fluid bolus 20 mL/kg; blood products 10-20 mL/kg',
     },
     {
         id: 'peds-trauma-primary',
@@ -55,6 +57,7 @@ export const PEDS_TRAUMA_NODES = [
             { label: 'Hemodynamically UNSTABLE', description: 'Hypotension, tachycardia not responding to fluids, altered mental status', next: 'peds-trauma-hemorrhage', urgency: 'critical' },
             { label: 'Hemodynamically STABLE', description: 'Normal vital signs for age, responsive', next: 'peds-trauma-secondary' },
         ],
+        summary: 'ABCDE with peds modifications; tachycardia is early, hypotension is LATE; intubate if GCS <=8; aggressive warming',
     },
     {
         id: 'peds-trauma-secondary',
@@ -108,6 +111,8 @@ export const PEDS_TRAUMA_NODES = [
             monitoring: 'CBC, coagulation studies, fibrinogen, calcium q4-6h during resuscitation. Target Hgb >7, platelets >50k, fibrinogen >150.',
         },
         next: 'peds-trauma-secondary',
+        summary: 'MTP 1:1:1 ratio; TXA 15 mg/kg within 3h; calcium replacement with transfusion; permissive hypotension NOT for TBI',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 3: HEAD TRAUMA
@@ -124,6 +129,7 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'peds-gcs', label: 'Pediatric GCS Calculator' },
         ],
         next: 'peds-trauma-head-severity',
+        summary: 'TBI leading cause of pediatric trauma death; use PECARN for mild TBI imaging; high NAT suspicion in infants with SDH',
     },
     {
         id: 'peds-trauma-head-severity',
@@ -137,6 +143,7 @@ export const PEDS_TRAUMA_NODES = [
             { label: 'Moderate (GCS 9-13)', description: 'Confused, responds to voice/pain', next: 'peds-trauma-mod-tbi', urgency: 'urgent' },
             { label: 'Severe (GCS <=8)', description: 'Obtunded, comatose, posturing', next: 'peds-trauma-severe-tbi', urgency: 'critical' },
         ],
+        summary: 'Mild GCS 14-15: PECARN; moderate GCS 9-13: CT + observe; severe GCS <=8: intubate + CT + ICU + neurosurgery',
     },
     {
         id: 'peds-trauma-pecarn',
@@ -149,6 +156,7 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'pecarn-head-ct', label: 'PECARN Head CT Decision Rule' },
         ],
         next: 'peds-trauma-mild-tbi-dispo',
+        summary: 'PECARN: <2yr check skull fx, AMS, LOC >=5s, severe mechanism; >=2yr check basilar fx signs, AMS, LOC, vomiting, severe HA',
     },
     {
         id: 'peds-trauma-mild-tbi-dispo',
@@ -168,6 +176,7 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Moderate TBI requires CT imaging and close observation.**\n\n**Initial management:**\n1. ABCs with c-spine precautions\n2. Avoid hypoxia (SpO2 >94%) and hypotension\n3. Head of bed elevated 30 degrees (if no spinal injury)\n4. CT head without contrast - STAT\n5. Consider CT c-spine or MRI if clearing difficult\n\n**CT findings requiring neurosurgical consultation:**\n- Epidural hematoma (any size)\n- Subdural hematoma >5mm or with midline shift\n- Parenchymal contusion/hemorrhage\n- Depressed skull fracture\n- Pneumocephalus\n\n**Disposition:**\n- Admit for neurologic observation (minimum 24 hours)\n- Serial neuro checks q1h initially\n- Repeat CT if clinical deterioration\n- Pediatric ICU if declining or concerning imaging [2][7]',
         citation: [2, 7],
         next: 'peds-trauma-dispo',
+        summary: 'Avoid hypoxia/hypotension; HOB 30; CT head STAT; neurosurgery for EDH, SDH >5mm, depressed skull fx; admit 24h minimum',
     },
     {
         id: 'peds-trauma-severe-tbi',
@@ -197,6 +206,8 @@ export const PEDS_TRAUMA_NODES = [
             monitoring: 'Neuro checks q15min. Serial CT if deterioration. Monitor ICP if available. Target CPP >40-50 mmHg.',
         },
         next: 'peds-trauma-dispo',
+        summary: 'GCS <=8 = INTUBATE; 3% saline 3-5 mL/kg for herniation; normoventilation PaCO2 35-40; target CPP >40-50 mmHg',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 4: THORACOABDOMINAL TRAUMA
@@ -209,6 +220,7 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Pediatric torso anatomy increases vulnerability:**\n\n**Chest:**\n- Compliant chest wall --> pulmonary contusion WITHOUT rib fractures\n- Mediastinum mobile --> more susceptible to tension physiology\n- **Rib fractures in children = HIGH ENERGY mechanism** (consider NAT in young children)\n\n**Abdomen:**\n- Solid organs (liver, spleen) relatively larger and less protected\n- Abdominal wall musculature less developed\n- Bladder is intra-abdominal (higher injury risk)\n- Kidneys less protected by perirenal fat\n\n**Key exam findings:**\n- **Seatbelt sign:** Ecchymosis across abdomen --> high risk for hollow viscus injury, lumbar spine fracture (Chance fracture)\n- **Handlebar injury:** Direct blow to epigastrium --> pancreatic/duodenal injury\n- **Abdominal distension:** May indicate hemorrhage or hollow viscus injury\n\n**Diagnostic approach:**\n- **FAST exam:** Sensitive for free fluid but less sensitive in children; negative FAST does not rule out injury\n- **CT abdomen/pelvis with IV contrast:** Study of choice if stable; identify solid organ injury grade [1][9]',
         citation: [1, 9],
         next: 'peds-trauma-torso-eval',
+        summary: 'Compliant chest = contusion without rib fx; rib fx = HIGH energy; seatbelt sign = hollow viscus injury; FAST less sensitive in peds',
     },
     {
         id: 'peds-trauma-torso-eval',
@@ -231,6 +243,7 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Non-operative management (NOM) is standard for most pediatric solid organ injuries.**\n\n**APSA guidelines for liver/spleen injuries:**\n\n| Grade | ICU Days | Hospital Days | Activity Restriction |\n|-------|----------|---------------|---------------------|\n| I | 0 | 2 | 3 weeks |\n| II | 0 | 3 | 4 weeks |\n| III | 0 | 4 | 5 weeks |\n| IV | 1 | 5 | 6 weeks |\n\n**NOM criteria:**\n- Hemodynamically stable or responds to resuscitation\n- No peritonitis\n- No other indication for laparotomy\n- Ability to monitor in appropriate setting\n\n**Monitoring:**\n- Serial abdominal exams\n- Serial Hgb (q6h initially, then q12-24h)\n- Bed rest with gradual advancement\n- Repeat imaging only if clinical deterioration\n\n**Indications for surgery:**\n- Hemodynamic instability despite resuscitation\n- Transfusion requirement >40 mL/kg in 24h\n- Peritonitis (hollow viscus injury)\n- Ongoing hemorrhage\n\n**Note:** Contrast blush on CT may indicate active extravasation - consider IR angioembolization if available [9][10]',
         citation: [9, 10],
         next: 'peds-trauma-dispo',
+        summary: 'NOM standard for most peds solid organ injuries; APSA guidelines by grade; surgery only for instability or >40 mL/kg/24h transfusion',
     },
     {
         id: 'peds-trauma-abd-unstable',
@@ -261,6 +274,7 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Chest trauma in children is less common but can be rapidly fatal.**\n\n**Key differences from adults:**\n- Compliant chest wall = pulmonary contusion WITHOUT rib fractures\n- **Rib fractures indicate HIGH ENERGY transfer** - search for associated injuries\n- Mobile mediastinum = higher risk of tension physiology\n- First rib fracture = major vascular injury until proven otherwise\n\n**Immediate life threats (address in primary survey):**\n- **Tension pneumothorax:** Needle decompression --> chest tube\n  - 2nd ICS MCL or 4th/5th ICS MAL\n  - Needle: 14-18G angiocath (length based on size)\n- **Open pneumothorax:** 3-sided occlusive dressing --> chest tube\n- **Massive hemothorax:** Chest tube --> consider thoracotomy if >15 mL/kg initial output or >2-4 mL/kg/hr ongoing\n- **Cardiac tamponade:** Pericardiocentesis or ED thoracotomy\n- **Flail chest:** Mechanical ventilation support, pain control\n\n**Chest tube sizing:**\n- Infant: 10-12 Fr\n- Toddler: 16-20 Fr\n- School age: 20-28 Fr\n- Adolescent: 28-32 Fr\n\n**Pulmonary contusion:**\n- May not be apparent on initial CXR (develops over 6-24h)\n- Supportive care, oxygen, pain control\n- Avoid fluid overload\n- Mechanical ventilation if severe [1][2]',
         citation: [1, 2],
         next: 'peds-trauma-dispo',
+        summary: 'Rib fx in kids = high energy; tension PTX: needle decompression; hemothorax >15 mL/kg initial = consider thoracotomy',
     },
     // =====================================================================
     // MODULE 5: ORTHOPEDIC TRAUMA
@@ -273,6 +287,7 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Pediatric bones are different:**\n\n- **Physis (growth plate)** is the weakest point --> Salter-Harris fractures\n- More porous, elastic bone --> greenstick, buckle (torus) fractures\n- Thicker periosteum --> remodeling potential is excellent\n- Growth disturbance can occur with physeal injuries\n\n**Unique pediatric fracture patterns:**\n- **Greenstick:** Incomplete fracture, one cortex intact\n- **Torus (buckle):** Compression fracture, no cortical break\n- **Plastic deformation:** Bowing without discrete fracture line\n- **Salter-Harris:** Physeal injuries (see next node)\n\n**High-risk fractures requiring urgent orthopedic consultation:**\n- Open fractures\n- Fractures with neurovascular compromise\n- Salter-Harris III, IV, V\n- Supracondylar humerus fractures (compartment syndrome, vascular injury)\n- Femur fractures (high energy, blood loss, associated injuries)\n- Pelvic fractures\n\n**Always consider NAT** with fractures in non-ambulatory children or multiple fractures in different stages of healing [2][11]',
         citation: [2, 11],
         next: 'peds-trauma-salter',
+        summary: 'Physis is weakest point; Salter-Harris fractures; greenstick/buckle unique to kids; always consider NAT in non-ambulatory children',
     },
     {
         id: 'peds-trauma-salter',
@@ -285,6 +300,8 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'salter-harris', label: 'Salter-Harris Classification Guide' },
         ],
         next: 'peds-trauma-compartment',
+        summary: 'SALTR: I=Slipped, II=Above, III=Lower (intra-articular), IV=Through, V=cRush; III-V need ORIF and have growth arrest risk',
+        skippable: true,
     },
     {
         id: 'peds-trauma-compartment',
@@ -294,6 +311,8 @@ export const PEDS_TRAUMA_NODES = [
         body: '**Compartment syndrome is a CLINICAL DIAGNOSIS. Do not wait for pressure measurement.**\n\n**Classic 6 Ps (late signs - do not wait for all):**\n- **P**ain out of proportion (especially with passive stretch)\n- **P**ressure (tense compartment)\n- **P**aresthesias\n- **P**ulselessness (late)\n- **P**allor (late)\n- **P**aralysis (late)\n\n**Pediatric challenges:**\n- Children may not articulate symptoms well\n- **"3 As" in children:** Anxiety, Agitation, increasing Analgesic requirements\n- Pain out of proportion is the most reliable early sign\n- Passive stretch pain is highly sensitive\n\n**High-risk injuries:**\n- Supracondylar humerus fractures (forearm compartments)\n- Tibial fractures (leg compartments)\n- Crush injuries\n- Circumferential burns\n- Tight casts/splints\n\n**Management:**\n- Remove all circumferential dressings/casts immediately\n- Keep limb at heart level (not elevated)\n- Emergent orthopedic consultation\n- Fasciotomy within 6 hours to prevent irreversible damage\n\n**Compartment pressure:** If measured, >30 mmHg or within 30 mmHg of diastolic pressure (delta P <30) indicates compartment syndrome [11][12]',
         citation: [11, 12],
         next: 'peds-trauma-dispo',
+        summary: 'Clinical diagnosis; pain out of proportion + passive stretch pain most reliable; 3 As in kids: anxiety, agitation, increasing analgesics',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -356,6 +375,8 @@ export const PEDS_TRAUMA_NODES = [
             { id: 'nat-screening', label: 'NAT Screening Tool' },
         ],
         next: 'peds-trauma-nat-report',
+        summary: 'TEN-4-FACESp rule for concerning bruising; skeletal survey mandatory <2yr; CPS reporting is mandated — do not need certainty',
+        safetyLevel: 'critical',
     },
     {
         id: 'peds-trauma-nat-report',

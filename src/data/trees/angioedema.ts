@@ -37,6 +37,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-classify',
       },
     ],
+
+    summary: '~110K ED visits/year, 44% HAE initially misdiagnosed — first assess airway patency before classification',
   },
 
   {
@@ -47,6 +49,9 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: '**DUAL SETUP: Intubation + cricothyrotomy ready simultaneously.** Awake fiberoptic intubation preferred — do NOT paralyze until clear view of airway anatomy obtained. Nasotracheal route may bypass lingual swelling (95% first-attempt success vs 70% orotracheal). Avoid positive-pressure ventilation — barotrauma worsens edema. [9]\n\nFlexible endoscope used in 49% of angioedema intubations. Cricothyrotomy performed in 2% of cases. Topical lidocaine for awake approaches. [9]\n\n**[Awake Intubation](#/tree/awake-intubation)** (see Airway category)\n\n**Extubation:** Wait for visible improvement of edema. Extubate over airway exchange catheter. Video laryngoscopy to confirm laryngeal edema resolution. Cuff leak may provide adjunctive info.',
     citation: [9],
     next: 'angio-classify',
+
+    summary: 'Dual setup: intubation + cric ready; awake fiberoptic preferred — do NOT paralyze until airway visualized',
+    safetyLevel: 'critical',
   },
 
   {
@@ -57,6 +62,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: '**Supplemental O2 and continuous monitoring.** Do NOT use NIPPV (CPAP/BiPAP) — positive pressure/barotrauma can worsen angioedema. [5]\n\nFrequent reassessment is critical — clinical conditions can change rapidly. Low threshold for definitive airway if any signs of compromise.\n\nFlexible laryngoscopy on case-by-case basis for patients with facial edema but no laryngeal symptoms. The true airway threat is the larynx and posterior tongue — not the lips and anterior tongue. [7][8]\n\n**KEY:** Edema localized to the lips alone does NOT have increased intubation risk. [7][8]',
     citation: [5, 7, 8],
     next: 'angio-classify',
+
+    summary: 'No NIPPV (worsens edema); lip-only edema = low intubation risk; true threat is larynx and posterior tongue',
   },
 
   // =====================================================================
@@ -88,6 +95,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-empiric',
       },
     ],
+
+    summary: 'Histamine (urticaria, responds to epi) vs bradykinin (no urticaria, epi/antihistamines/steroids INEFFECTIVE) — treatment entirely different',
   },
 
   {
@@ -129,6 +138,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-abdominal',
       },
     ],
+
+    summary: 'ACEi (30% of ED visits), HAE (family history, onset <20), post-tPA, acquired C1-INH deficiency, or abdominal presentation',
   },
 
   {
@@ -150,6 +161,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-bradykinin-screen',
       },
     ],
+
+    summary: 'Start empiric epi+antihistamine — if responds = histamine-mediated; if no response = likely bradykinin-mediated',
   },
 
   // =====================================================================
@@ -176,6 +189,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-histamine-mild',
       },
     ],
+
+    summary: 'Assess for multisystem involvement — anaphylaxis features (hypotension, wheeze) vs isolated localized swelling',
   },
 
   {
@@ -250,6 +265,9 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: '**STOP the ACEi immediately.** This is NOT an allergic reaction — it is a side effect (class effect). [5][10][20]\n\n**Key facts:**\n• Up to 30% of all ED angioedema visits in the US [5]\n• ~0.7% of patients develop angioedema within 5 years of ACEi use [10]\n• NOT dose-dependent — can occur hours to 10+ years after starting [5]\n• 5-fold higher risk in Black patients (5% vs 0.5%) [20]\n• Can also occur with ARBs (less common)\n\n**Epinephrine, antihistamines, and corticosteroids are generally INEFFECTIVE** — this is a bradykinin-mediated process, not histamine-mediated. [3][5][20]\n\n**Distinguish from allergic:** Slow onset, no urticaria, often asymmetric, primarily tongue/lip involvement.',
     citation: [3, 5, 10, 20],
     next: 'angio-acei-treat',
+
+    summary: 'STOP ACEi immediately — not allergic, bradykinin-mediated; 5x risk in Black patients; can occur years after starting',
+    safetyLevel: 'warning',
   },
 
   {
@@ -311,6 +329,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         next: 'angio-pregnancy',
       },
     ],
+
+    summary: 'HAE types: Type 1 (85%, low C1-INH level), Type 2 (15%, low function), Type 3 (rare, normal C1-INH); 25% de novo mutations',
   },
 
   {
@@ -351,6 +371,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: '**Send C4 level — best screening test in the ED.** [5]\n\n• C4 is **96% sensitive during an acute attack** and 81% sensitive between attacks [20]\n• Low C4 + clinical suspicion warrants empiric treatment while awaiting confirmatory testing\n• Outpatient confirmatory workup: C1-INH level, C1-INH function, C1q\n\n**If HAE is strongly suspected, do NOT delay treatment for lab confirmation.** Start C1-INH concentrate if available.\n\n**Family history is suggestive but not definitive** — 25% of HAE cases are from de novo mutations. [5]\n\n[Lab Interpretation Guide](#/info/angio-labs)',
     citation: [5, 20],
     next: 'angio-hae-treat',
+
+    summary: 'Send C4 (96% sensitive during attack) — low C4 + clinical suspicion warrants empiric treatment before confirmatory labs',
   },
 
   {
@@ -421,6 +443,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: 'Idiopathic angioedema is defined as recurrent angioedema without urticaria, with no identified cause despite thorough evaluation. [4][25]\n\n**Two subtypes (differentiated by treatment response):**\n\n**Idiopathic histaminergic:** Responds to high-dose antihistamines (up to 4× standard dose), leukotriene antagonists, and/or steroids.\n\n**Idiopathic non-histaminergic:** Refractory to antihistamines → consider:\n• [Tranexamic Acid](#/drug/tranexamic-acid/angioedema) — often effective, especially as suppressive therapy [25]\n• [Icatibant](#/drug/icatibant/hereditary angioedema) or C1-INH may sometimes be effective\n\n**Trial of high-dose [Cetirizine](#/drug/cetirizine/angioedema) or [Diphenhydramine](#/drug/diphenhydramine/angioedema) first** — response confirms histaminergic subtype.',
     citation: [4, 25],
     next: 'angio-dispo',
+
+    summary: 'Trial high-dose antihistamine first — response = histaminergic; no response = try TXA, icatibant, or C1-INH',
   },
 
   {
@@ -495,6 +519,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
     body: '**GI involvement occurs in up to 73% of HAE patients.** Abdominal pain is present in 95% of GI cases. [5]\n\n**Presentation:**\n• Severe abdominal pain, diarrhea, nausea, vomiting, ascites\n• Can appear severe enough to mimic acute abdomen → unnecessary imaging and surgical exploration\n• Often recurrent — detailed history is critical\n\n**Imaging findings:**\n• CT: Ascites (most common), segmental bowel wall edema with or without skip segments, straightening of bowel segments [5]\n• Pediatrics: Abdominal ultrasound preferred (radiation-sparing) — can identify bowel wall edema and intussusception\n\n**KEY:** In patients with recurrent abdominal pain + family history of HAE, consider angioedema before proceeding to surgery.',
     citation: [5],
     next: 'angio-abdominal-treat',
+
+    summary: 'GI angioedema in 73% of HAE — severe abdominal pain mimicking acute abdomen; CT shows ascites + bowel wall edema',
   },
 
   {
@@ -557,6 +583,8 @@ export const ANGIOEDEMA_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Ishoo staging guides disposition: Stage 1-2 (face/lip) = observe 4-6h, Stage 3 (tongue) = admit, Stage 4 (laryngeal) = ICU',
   },
 
   {

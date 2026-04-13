@@ -29,6 +29,7 @@ export const PEDS_STEC_HUS_NODES = [
             { id: 'corrected-na', label: 'Corrected Na Calculator' },
         ],
         next: 'stec-clinical',
+        summary: 'STEC causes 5-15% HUS progression; peak age <5yr; HUS triad: MAHA + thrombocytopenia + AKI; onset days 5-10',
     },
     {
         id: 'stec-clinical',
@@ -38,6 +39,8 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Prodromal phase (STEC colitis):** [1,2]\n- Watery diarrhea → bloody diarrhea (60-90%)\n- Severe abdominal cramping\n- Nausea/vomiting\n- Low-grade or no fever (distinguishes from other bacterial causes)\n- Duration: 3-8 days\n\n**HUS phase:** [2,3]\n- Pallor, fatigue (anemia)\n- Petechiae, bruising (thrombocytopenia)\n- Decreased urine output (AKI)\n- Edema, hypertension\n- Irritability, lethargy\n\n**Severe HUS features (poor prognosis):** [3]\n- Anuria >24 hours\n- WBC >20,000\n- Hematocrit <23%\n- Need for RBC transfusion within 4 days\n- CNS involvement (seizures, altered mental status)\n- Bowel necrosis/perforation\n\n**Key point:** HUS can occur without preceding diarrhea in ~10% of cases (atypical presentation).',
         citation: [1, 2, 3],
         next: 'stec-exposure',
+        summary: 'Watery then bloody diarrhea; HUS: pallor, petechiae, oliguria; severe: anuria >24h, WBC >20k, CNS involvement',
+        skippable: true,
     },
     {
         id: 'stec-exposure',
@@ -47,6 +50,8 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Common exposure sources:** [1,4]\n\n**Food-borne (most common):**\n- Undercooked ground beef (hamburger disease)\n- Raw/unpasteurized milk and cheese\n- Raw vegetables (lettuce, spinach, sprouts)\n- Apple cider (unpasteurized)\n- Contaminated water\n\n**Animal contact:**\n- Petting zoos\n- Farm visits\n- Direct cattle/livestock exposure\n\n**Person-to-person:**\n- Daycare outbreaks\n- Household contacts\n- Fecal-oral transmission (very low inoculum needed: 10-100 organisms)\n\n**Incubation period:** 2-10 days (median 3-4 days) [1]\n\n**Public health consideration:**\n- STEC is reportable to public health\n- Contact investigation may be needed\n- Childcare exclusion until 2 negative stool cultures ≥24h apart [4]',
         citation: [1, 4],
         next: 'stec-branch',
+        summary: 'Ground beef, unpasteurized dairy, raw veggies; petting zoos; person-to-person (10-100 organisms); reportable disease',
+        skippable: true,
     },
     {
         id: 'stec-branch',
@@ -87,6 +92,7 @@ export const PEDS_STEC_HUS_NODES = [
         images: [{ src: 'images/peds-stec-hus/schistocytes.jpg', alt: 'Peripheral blood smear showing schistocytes (fragmented red blood cells and helmet cells) in microangiopathic hemolytic anemia', caption: 'Schistocytes on blood smear — hallmark of microangiopathic hemolytic anemia (MAHA) in HUS. Fragmented RBCs indicate intravascular shearing from fibrin strands. (CC0)' }],
         citation: [1, 5],
         next: 'stec-monitoring',
+        summary: 'Shiga toxin EIA most important test; culture alone misses 50%; baseline CBC, BMP, LDH, retic, haptoglobin for HUS monitoring',
     },
     {
         id: 'stec-monitoring',
@@ -96,6 +102,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**All confirmed/suspected STEC cases require close monitoring for HUS development.** [2,3]\n\n**High-risk monitoring schedule (days 5-10 post-diarrhea onset):**\n\n| Day | Labs | Clinical Check |\n|-----|------|----------------|\n| Daily | CBC, BMP, LDH, retic | Urine output, weight, BP |\n\n**Early HUS warning signs:** [3]\n- Hemoglobin drop >2 g/dL\n- Platelet drop >50% or <150,000\n- LDH rising (>2x normal)\n- Creatinine rising\n- Haptoglobin <10\n- Schistocytes on smear\n- Oliguria (<0.5 mL/kg/hr)\n\n**When to intensify monitoring:**\n- Age <5 years\n- Bloody diarrhea\n- WBC >13,000\n- Any lab trend toward HUS\n\n**Outpatient vs inpatient:** [2]\n- Admit if: dehydration, unable to tolerate PO, any lab abnormality, age <2 years\n- Close outpatient follow-up acceptable for well-appearing older children with normal labs',
         citation: [2, 3],
         next: 'stec-management',
+        summary: 'Daily CBC/BMP/LDH days 5-10; early HUS signs: Hgb drop >2, platelets <150k, LDH rising, oliguria; admit if any lab abnormality',
     },
     {
         id: 'hus-evolving',
@@ -117,6 +124,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Management goals:** [1,2]\n- Supportive care\n- Avoid interventions that increase HUS risk\n- Close monitoring for HUS development\n\n**Fluid management:**\n- Aggressive IV fluid resuscitation\n- Maintain euvolemia (key to reducing HUS severity)\n- Goal: UOP 1-2 mL/kg/hr\n- D5NS or D5LR at 1.5x maintenance\n\n**Diet:**\n- NPO initially if severe vomiting\n- Advance to clear liquids → bland diet as tolerated\n- Avoid lactose during acute illness\n\n**Antiemetics:**\n- Ondansetron PRN for nausea/vomiting\n- Avoid promethazine (CNS effects confuse assessment)\n\n**Pain management:**\n- Acetaminophen for cramping\n- Avoid NSAIDs (renal risk, bleeding risk)\n- Avoid opioids if possible (ileus risk)',
         citation: [1, 2],
         next: 'stec-abx-controversy',
+        summary: 'Supportive care only; aggressive IV fluids (goal UOP 1-2 mL/kg/hr); acetaminophen for pain; avoid NSAIDs and opioids',
     },
     {
         id: 'stec-abx-controversy',
@@ -126,6 +134,8 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**CRITICAL: Antibiotics for STEC are CONTROVERSIAL and generally NOT recommended.** [1,2,6]\n\n**Why avoid antibiotics:** [6]\n- Meta-analyses show antibiotics may INCREASE HUS risk\n- Bacterial lysis releases more Shiga toxin\n- Quinolones and TMP-SMX most associated with risk\n- Even bactericidal antibiotics at sub-MIC can induce toxin\n\n**2024 AAP/IDSA position:** [1]\n- **Do NOT routinely give antibiotics for suspected STEC**\n- Hold antibiotics until stool Shiga toxin results known\n- If already started antibiotics, consider stopping if STEC confirmed\n\n**When antibiotics MAY be considered:** [2,6]\n- Septic-appearing child\n- Immunocompromised patient\n- Confirmed non-STEC bacterial pathogen\n\n**Antimotility agents (loperamide, diphenoxylate):** [1]\n- **CONTRAINDICATED** in bloody diarrhea\n- Associated with increased HUS risk and prolonged illness\n- Toxic megacolon risk\n\n**Bottom line:** Supportive care only. No antibiotics, no antimotility agents.',
         citation: [1, 2, 6],
         next: 'stec-disposition-pre',
+        summary: 'Do NOT give antibiotics (may increase HUS risk); do NOT give antimotility agents (contraindicated in bloody diarrhea)',
+        safetyLevel: 'critical',
     },
     {
         id: 'stec-disposition-pre',
@@ -177,6 +187,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Assess HUS severity to guide management intensity.** [3,7]\n\n**Mild HUS:**\n- Platelets 100,000-150,000\n- Creatinine <2x upper normal for age\n- Preserved urine output (>0.5 mL/kg/hr)\n- No hypertension\n- No CNS symptoms\n\n**Moderate HUS:**\n- Platelets 50,000-100,000\n- Creatinine 2-4x upper normal\n- Oliguria but responsive to fluids\n- Mild hypertension\n- No CNS symptoms\n\n**Severe HUS:**\n- Platelets <50,000\n- Anuria or need for dialysis\n- Severe hypertension requiring multiple agents\n- CNS involvement (seizures, encephalopathy)\n- Pancreatitis\n- Cardiac involvement\n\n**Poor prognostic indicators:** [3]\n- WBC >20,000 at presentation\n- Anuria >24 hours\n- Need for dialysis in first 48 hours\n- CNS involvement\n- Age <2 years',
         citation: [3, 7],
         next: 'hus-fluids',
+        summary: 'Mild: plt >100k, Cr <2x normal; severe: plt <50k, anuria, HTN, CNS involvement; WBC >20k and anuria predict poor outcome',
     },
     {
         id: 'hus-fluids',
@@ -186,6 +197,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Fluid management is critical in HUS.** [2,7]\n\n**Early/oliguric phase:**\n- Aggressive volume expansion may improve outcomes if given early (pre-anuric phase)\n- Goal: maintain euvolemia, support renal perfusion\n- 20 mL/kg NS boluses as needed for dehydration\n- Once euvolemic: maintenance + insensible losses\n\n**Anuric phase:**\n- Strict fluid restriction (insensible losses only: 300-400 mL/m²/day)\n- Daily weights critical\n- Avoid fluid overload (pulmonary edema, hypertension)\n\n**Key principle:** [7]\n- **Early aggressive fluids BEFORE anuria may prevent dialysis**\n- Once anuric, minimize fluids to prevent volume overload\n\n**Electrolyte management:**\n- Hyperkalemia common → cardiac monitor, ECG, kayexalate/insulin-glucose PRN\n- Hyponatremia → usually dilutional, restrict fluids\n- Hypocalcemia → correct if symptomatic\n- Acidosis → usually corrected with dialysis if severe',
         citation: [2, 7],
         next: 'hus-transfusion',
+        summary: 'Early aggressive fluids before anuria may prevent dialysis; once anuric restrict to insensible losses only; manage hyperK',
     },
     {
         id: 'hus-transfusion',
@@ -195,6 +207,8 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**RBC transfusion:** [2,7]\n- Transfuse for symptomatic anemia or Hgb <7 g/dL\n- Use irradiated, leukoreduced PRBCs\n- Transfuse slowly (2-4 hours) to avoid volume overload\n- Target Hgb 8-9 g/dL (avoid overtransfusion)\n\n**Platelet transfusion:** [7]\n- **Generally AVOID in typical HUS**\n- Platelets may worsen microvascular thrombosis\n- Consider ONLY if:\n  - Active life-threatening bleeding\n  - Planned invasive procedure with platelets <50,000\n  - CNS hemorrhage\n\n**FFP:**\n- Not indicated in typical STEC-HUS\n- May be harmful (provides more substrate for microangiopathy)\n- Reserved for atypical HUS or TTP\n\n**Special considerations:**\n- Avoid platelet transfusion unless critical\n- Document discussion with hematology if platelets given\n- CMV-negative blood products if possible',
         citation: [2, 7],
         next: 'hus-htn',
+        summary: 'RBC transfuse for Hgb <7; generally AVOID platelet transfusion (worsens thrombosis); FFP not indicated in typical HUS',
+        safetyLevel: 'warning',
     },
     {
         id: 'hus-htn',
@@ -204,6 +218,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**Hypertension is common in HUS and requires treatment.** [3,7]\n\n**Causes:**\n- Volume overload\n- Renal failure with RAAS activation\n- Microangiopathic damage to renal vasculature\n\n**Treatment approach:**\n\n**First-line (volume-dependent):**\n- Fluid restriction\n- Dialysis/ultrafiltration if fluid overloaded\n\n**Antihypertensive agents:** [7]\n\n| Agent | Dose | Notes |\n|-------|------|-------|\n| Amlodipine | 0.1-0.5 mg/kg/day PO | First-line oral |\n| Isradipine | 0.05-0.1 mg/kg/dose q6-8h | Short-acting, good for titration |\n| Nicardipine | 0.5-3 mcg/kg/min IV | Hypertensive emergency |\n| Labetalol | 0.2-1 mg/kg/dose IV | Alternative for emergency |\n| Hydralazine | 0.1-0.2 mg/kg IV q4-6h | Adjunct |\n\n**Avoid:**\n- ACE inhibitors/ARBs acutely (hyperkalemia risk in AKI)\n\n**Goals:**\n- Reduce BP to <95th percentile for age/height\n- Avoid rapid drops (risk of stroke in setting of thrombotic microangiopathy)',
         citation: [3, 7],
         next: 'hus-dialysis',
+        summary: 'Amlodipine first-line oral; nicardipine IV for emergency; avoid ACEi/ARBs acutely (hyperK risk in AKI)',
     },
     {
         id: 'hus-dialysis',
@@ -213,6 +228,7 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**~50-70% of children with STEC-HUS require dialysis.** [3,7]\n\n**Dialysis indications:** [7]\n- Anuria >24 hours\n- Severe hyperkalemia (K >6.5 or ECG changes)\n- Severe acidosis (pH <7.1, HCO3 <10)\n- Volume overload with pulmonary edema\n- Uremic encephalopathy\n- Severe hypertension refractory to medications\n- BUN >80-100 mg/dL\n\n**Modality:** [7]\n- **Peritoneal dialysis** often preferred in young children\n  - Gentler hemodynamics\n  - No anticoagulation needed\n  - Can do at bedside\n- **Hemodialysis** for severe hyperkalemia, rapid correction needed\n- **CRRT** if hemodynamically unstable\n\n**Duration:**\n- Typically 1-2 weeks\n- Most children recover renal function\n- ~25% may need long-term dialysis\n\n**Avoid heparin anticoagulation if possible** (bleeding risk with low platelets)',
         citation: [3, 7],
         next: 'hus-cns',
+        summary: '50-70% need dialysis; indications: anuria >24h, K >6.5, pH <7.1, volume overload, uremic encephalopathy; PD often preferred',
     },
     {
         id: 'hus-cns',
@@ -222,6 +238,8 @@ export const PEDS_STEC_HUS_NODES = [
         body: '**CNS involvement occurs in 20-30% of HUS and is the major cause of mortality.** [3,8]\n\n**CNS manifestations:**\n- Irritability, lethargy\n- Seizures (most common)\n- Altered mental status, coma\n- Stroke (ischemic or hemorrhagic)\n- Cortical blindness\n- Hemiparesis\n\n**Pathophysiology:**\n- Microangiopathic thrombosis in cerebral vessels\n- Direct Shiga toxin neurotoxicity\n- Hypertensive encephalopathy\n- Uremic encephalopathy\n\n**Management:** [8]\n- Urgent neuroimaging (MRI preferred, CT if unstable)\n- Seizure management: lorazepam → levetiracetam (renally adjust)\n- Control hypertension aggressively\n- Correct metabolic derangements\n- ICU admission\n- Consider eculizumab for severe neurologic HUS (off-label but emerging evidence)\n\n**Prognosis:**\n- CNS involvement increases mortality to 3-5%\n- Most survivors recover, but some have long-term neurologic sequelae',
         citation: [3, 8],
         next: 'hus-eculizumab',
+        summary: 'CNS involvement in 20-30% and is major mortality cause; seizures most common; urgent neuroimaging and aggressive BP control',
+        safetyLevel: 'critical',
     },
     {
         id: 'hus-eculizumab',

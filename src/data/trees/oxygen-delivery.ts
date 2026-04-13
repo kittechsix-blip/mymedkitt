@@ -39,6 +39,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     ],
     citation: [1, 2],
     next: 'o2-severity',
+    summary: 'Match O2 device to physiology — Type 1 (hypoxemic: low O2) vs Type 2 (hypercapnic: high CO2); COPD target 88-92% to avoid worsening hypercapnia',
   },
 
   {
@@ -48,6 +49,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'Hypoxemia Severity',
     body: '**Assess current oxygen status:**\n\n**What is the patient\'s SpO2 on room air (or current O2)?**\n\nIf already on oxygen, assess response and trajectory.\n\n**Quick Reference:**\n- SpO2 >94% on RA → May not need supplemental O2\n- SpO2 88-94% → Mild-moderate hypoxemia\n- SpO2 <88% → Severe hypoxemia\n- SpO2 <80% → Critical, consider immediate escalation',
     citation: [1],
+    summary: 'Assess SpO2 and work of breathing: mild 88-94%, moderate 75-88%, severe <75%, COPD/CO2 retainer needs controlled O2 88-92%',
     options: [
       {
         label: 'Mild Hypoxemia (SpO2 88-94%)',
@@ -89,6 +91,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'Nasal cannula 1-6 L/min (24-44% FiO2) — above 6L/min no significant FiO2 increase; FiO2 estimation assumes normal minute ventilation',
   },
 
   {
@@ -98,6 +101,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'Moderate Hypoxemia — Device Selection',
     body: '**Options for SpO2 75-88%:**\n\n| Device | Flow/FiO2 | Best For |\n|--------|-----------|----------|\n| **Non-Rebreather (NRB)** | 10-15 L/min, 60-90% FiO2 | Acute hypoxemia, bridge to definitive therapy |\n| **Venturi Mask** | Set FiO2 (24-60%) | COPD, precise FiO2 needed |\n| **HFNC** | 20-70 L/min, 21-100% FiO2 | Type 1 RF, tolerating face device, avoiding intubation |\n\n**Choose based on clinical scenario:**',
     citation: [1, 2, 3],
+    summary: 'Moderate hypoxemia: NRB (10-15 L/min, 60-90% FiO2), Venturi (precise FiO2 for COPD), or HFNC (20-70 L/min, physiologic benefits)',
     options: [
       {
         label: 'Non-Rebreather Mask',
@@ -125,6 +129,8 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'Severe Hypoxemia — Escalation',
     body: '**Critical hypoxemia (SpO2 <75%) requires immediate text:**\n\n**Options:**\n1. **HFNC** — If patient alert, tolerating, Type 1 RF\n2. **NIV (BiPAP/CPAP)** — If Type 2 RF, CHF, COPD exacerbation\n3. **Intubation** — If altered, not protecting airway, refractory\n\n**Red Flags Requiring Intubation:**\n- GCS ≤8 or declining mental status\n- Unable to protect airway (secretions, vomiting)\n- Severe respiratory acidosis (pH <7.20) not improving\n- Hemodynamic instability\n- Refractory hypoxemia despite maximal non-invasive support\n\n**What is the best approach?**',
     citation: [1, 2, 4],
+    summary: 'Severe SpO2 <75%: HFNC if alert, NIV if Type 2/CHF, intubate if GCS≤8, unable to protect airway, pH<7.20 not improving, or refractory',
+    safetyLevel: 'critical',
     options: [
       {
         label: 'Trial of HFNC',
@@ -158,6 +164,8 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'COPD target SpO2 88-92% — Venturi mask most precise (color-coded adapters), NC 1-2 L/min acceptable; consider NIV if hypercapnic (pH<7.35)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -171,6 +179,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'NRB 10-15 L/min (60-90% FiO2) — reservoir bag must stay ≥1/3 full; if deflating during inspiration, patient not getting adequate O2; short-term bridge',
   },
 
   {
@@ -184,6 +193,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'Venturi delivers precise fixed FiO2 regardless of breathing pattern — color-coded adapters 24-60%; best for COPD and when accurate FiO2 documentation needed',
   },
 
   {
@@ -198,6 +208,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'HFNC 40-50 L/min start, 21-100% FiO2, ~1cmH2O PEEP per 10L; ROX Index predicts failure: ≥4.88 low risk, <3.85 high risk of intubation',
   },
 
   {
@@ -207,6 +218,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'NIV: CPAP vs BiPAP',
     body: '**Non-Invasive Ventilation Options:**\n\n| Mode | Pressures | Best For |\n|------|-----------|----------|\n| **CPAP** | Single pressure (PEEP only) | CHF/pulmonary edema, OSA, atelectasis |\n| **BiPAP** | IPAP + EPAP | COPD, hypercapnic failure, Type 2 RF |\n\n**CPAP:**\n- Delivers continuous positive airway pressure\n- Recruits alveoli, reduces preload/afterload\n- No ventilatory support (patient controls all breaths)\n\n**BiPAP:**\n- IPAP (inspiratory) + EPAP (expiratory) pressures\n- Pressure support = IPAP - EPAP\n- Augments ventilation → clears CO2\n- Can set backup rate for apnea\n\n**Which does this patient need?**',
     citation: [2, 5, 7],
+    summary: 'CPAP (single pressure) for CHF/pulmonary edema/OSA; BiPAP (IPAP+EPAP) for COPD/hypercapnic failure — pressure support = IPAP minus EPAP',
     options: [
       {
         label: 'CPAP',
@@ -234,6 +246,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'CPAP for CHF: start 5cmH2O, titrate up 2-3 q5-10min to 8-12; reduces preload/afterload; stop if worsening AMS, intolerance, or no improvement after 1-2h',
   },
 
   {
@@ -247,6 +260,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-settings-info',
+    summary: 'BiPAP for COPD: IPAP 10-12 titrate up by 2 q5-10min (max 20-25), EPAP 5; increase IPAP for CO2, increase EPAP for O2; check ABG at 1-2h',
   },
 
   {
@@ -274,6 +288,8 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-titration',
+    summary: 'Quick reference for all device settings: NC 1-6L, simple mask 5-10L, NRB 10-15L, Venturi 2-15L, HFNC 20-70L, CPAP 5-20, BiPAP IPAP 10-30',
+    skippable: true,
   },
 
   // =====================================================================
@@ -287,6 +303,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'Titration Strategy',
     body: '**Titration depends on the device and clinical response.**\n\nWhich device are you titrating?',
     citation: [1, 2],
+    summary: 'Select device being titrated — each has specific titration protocol targeting SpO2, work of breathing, and underlying physiology',
     options: [
       {
         label: 'Low-Flow (NC, Mask, NRB)',
@@ -319,6 +336,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     body: '**Low-Flow Device Titration:**\n\n**Nasal Cannula:**\n- Start 2 L/min, increase by 1 L/min q5 min\n- Target SpO2 92-96% (88-92% in COPD)\n- Max effective: 6 L/min\n- If need >6 L/min → escalate to mask or HFNC\n\n**Simple Mask:**\n- Minimum flow: 5 L/min (to prevent CO2 rebreathing)\n- Titrate 5-10 L/min to SpO2 target\n- If need >10 L/min → escalate to NRB or HFNC\n\n**Non-Rebreather:**\n- Always set to 10-15 L/min\n- Keep reservoir bag ≥1/3 full\n- If SpO2 still inadequate on 15 L/min → escalate to HFNC or NIV\n\n**Weaning:**\n- Stable SpO2 for 1-2 hours → trial lower flow\n- NC 2 L/min with SpO2 ≥92% on room air → discontinue [1][3]',
     citation: [1, 3],
     next: 'o2-monitoring',
+    summary: 'NC: start 2L increase by 1L q5min, max 6L; simple mask min 5L; NRB always 10-15L keep bag inflated; escalate if inadequate on max',
   },
 
   {
@@ -332,6 +350,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'rox-index', label: 'ROX Index Calculator' },
     ],
     next: 'o2-monitoring',
+    summary: 'HFNC: wean FiO2 first, then flow by 5-10L q1-2h; escalate if ROX<3.85 at 2h, RR>30, or increasing accessory muscle use despite optimization',
   },
 
   {
@@ -342,6 +361,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     body: '**CPAP Titration (CHF/Pulmonary Edema):**\n\n**Initial:**\n- CPAP: 5 cmH2O\n- FiO2: 100%\n\n**Titration:**\n1. Increase CPAP by 2-3 cmH2O q5-10 min\n2. Typical effective range: 8-12 cmH2O\n3. Max: 15-20 cmH2O (higher may cause discomfort)\n\n**Oxygenation:**\n- Once SpO2 >94%, begin weaning FiO2\n- Target SpO2 92-96%\n\n**Signs of Response (expect within 30-60 min):**\n- Decreased RR (<25/min)\n- Improved SpO2\n- Decreased accessory muscle use\n- Patient reports improved breathing\n- Diuresis (if diuretics given)\n\n**Weaning Protocol:**\n1. Once stable x1-2h: ↓ CPAP by 2 cmH2O q30 min\n2. When CPAP 5 cmH2O, FiO2 <40%, SpO2 >92% → trial off NIV\n3. Apply NC 2-4 L/min, observe x30 min\n\n**Failure/Intubation Criteria:**\n- No improvement after 1-2 hours\n- Worsening mental status\n- Hemodynamic instability [5][7]',
     citation: [5, 7],
     next: 'o2-monitoring',
+    summary: 'CPAP CHF: start 5, titrate to 8-12 by 2-3 q5-10min; expect response in 30-60min; wean when stable 1-2h; intubate if no improvement after 1-2h',
   },
 
   {
@@ -352,6 +372,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     body: '**BiPAP Titration (COPD/Hypercapnic Failure):**\n\n**Initial Settings:**\n- IPAP: 10-12 cmH2O\n- EPAP: 5 cmH2O\n- FiO2: Start high, wean to SpO2 88-92%\n- Backup Rate: 10/min\n\n**Titration by Problem:**\n\n**Hypercapnia (pCO2 >45, pH <7.35):**\n- ↑ IPAP by 2 cmH2O q5-10 min\n- Goal: Increase tidal volume → blow off CO2\n- Max IPAP: 20-25 cmH2O\n\n**Hypoxemia (SpO2 <88%):**\n- ↑ FiO2 first\n- ↑ EPAP by 2 cmH2O (increases PEEP, recruits alveoli)\n- Max EPAP: 10-12 cmH2O\n\n**Patient-Ventilator Dyssynchrony:**\n- Adjust trigger sensitivity\n- Adjust rise time\n- Consider different mask fit\n\n**Check ABG at 1-2 hours:**\n- pH improving → continue current settings\n- pH worsening or unchanged → reassess, consider intubation\n\n**Weaning:**\n- Wean IPAP before EPAP\n- When IPAP ≤12, EPAP 5, FiO2 <40% → trial off [2][5][7]',
     citation: [2, 5, 7],
     next: 'o2-monitoring',
+    summary: 'BiPAP COPD: increase IPAP by 2 q5-10min for hypercapnia, increase EPAP for hypoxemia; check ABG 1-2h — pH worsening = consider intubation',
   },
 
   // =====================================================================
@@ -370,6 +391,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
       { id: 'oxygen-settings', label: 'Oxygen Settings Calculator' },
     ],
     next: 'o2-spo2-targets',
+    summary: 'Continuous SpO2, RR q15-30min, WOB, mental status; ROX Index at 2/6/12h for HFNC; ABG at 1-2h on NIV — failure signs: declining mental status, fatigue',
   },
 
   {
@@ -380,6 +402,8 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     body: '**Condition-Specific SpO2 Targets:**\n\n| Condition | Target SpO2 | Rationale |\n|-----------|-------------|----------|\n| **General hypoxemia** | 92-96% | Adequate oxygenation without hyperoxia |\n| **COPD / CO2 retainer** | 88-92% | Avoid suppressing hypoxic drive, Haldane effect |\n| **ARDS** | 88-95% | Permissive hypoxemia, avoid hyperoxia |\n| **MI / ACS** | 90-94% | Avoid hyperoxia (may worsen outcomes) |\n| **Stroke** | 94-98% | Adequate perfusion, avoid hypoxia |\n| **Pregnancy** | >95% | Fetal oxygenation |\n| **Post-cardiac arrest** | 94-98% | Avoid hypoxia and hyperoxia |\n| **COVID-19 / ARDS** | 88-92% | Permissive hypoxemia per protocols |\n\n**Hyperoxia Harm:**\n- Absorptive atelectasis\n- Oxygen free radical damage\n- Coronary/cerebral vasoconstriction\n- Worse outcomes in MI, stroke, cardiac arrest [1][9]',
     citation: [1, 9],
     next: 'o2-escalation',
+    summary: 'Condition-specific targets: general 92-96%, COPD 88-92%, ARDS 88-95%, MI 90-94%, pregnancy >95%; hyperoxia causes atelectasis and vasoconstriction',
+    safetyLevel: 'warning',
   },
 
   // =====================================================================
@@ -393,6 +417,7 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     title: 'Escalation Decision',
     body: '**Current device failing — what\'s next?**\n\n**Escalation Ladder:**\n1. NC → Mask → NRB\n2. NRB → HFNC or NIV\n3. HFNC → NIV or Intubation\n4. NIV → Intubation\n\n**Current status?**',
     citation: [1, 2],
+    summary: 'Escalation ladder: NC → mask → NRB → HFNC or NIV → intubation; early controlled intubation is better than late crash intubation',
     options: [
       {
         label: 'Stable — Ready for Disposition',
@@ -428,6 +453,8 @@ export const OXYGEN_DELIVERY_NODES: DecisionNode[] = [
     body: '**Indications for Intubation:**\n\n**Absolute:**\n- Cardiac or respiratory arrest\n- GCS ≤8 or rapidly declining\n- Unable to protect airway (secretions, vomiting)\n- Upper airway obstruction\n\n**Strong Indications:**\n- Refractory hypoxemia (SpO2 <88% despite maximal NIV/HFNC)\n- Severe respiratory acidosis (pH <7.20) not improving on NIV\n- Respiratory fatigue/exhaustion\n- Hemodynamic instability\n- High work of breathing despite optimization\n- Anticipated deterioration (e.g., proceeding to OR)\n\n**Delayed Intubation Harm:**\n- Crash intubation = higher complication rate\n- Hypoxic arrest during intubation\n- Aspiration risk\n\n**Remember:** Intubation is a procedure, not a failure. Early controlled intubation > late emergent intubation. [8]',
     citation: [8],
     next: 'o2-disposition',
+    summary: 'Intubate for: GCS≤8, unable to protect airway, refractory SpO2<88% on max support, pH<7.20 not improving, respiratory exhaustion',
+    safetyLevel: 'critical',
   },
 
   {

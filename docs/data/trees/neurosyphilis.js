@@ -22,6 +22,8 @@ export const NEUROSYPHILIS_NODES = [
         body: 'Neurosyphilis should be considered in any patient with confirmed syphilis who has neurological symptoms or signs.\n\nThe diagnosis requires a combination of clinical, serologic, and CSF findings.\n\n**Key presentations:**\n• Visual changes, hearing loss\n• Cognitive impairment, psychiatric symptoms\n• Cranial nerve deficits, meningismus\n• Stroke-like symptoms\n• Tabes dorsalis (late)\n• General paresis (late)',
         citation: [1, 3],
         next: 'ns-neuro-symptoms',
+        summary: 'Suspect neurosyphilis in any confirmed syphilis with neuro symptoms — visual, cognitive, cranial nerve, meningismus, stroke-like',
+        skippable: true,
     },
     {
         id: 'ns-neuro-symptoms',
@@ -48,6 +50,7 @@ export const NEUROSYPHILIS_NODES = [
                 next: 'ns-asymptomatic',
             },
         ],
+        summary: 'Triage by symptom type: neuro symptoms need LP, ocular/otic treat as neurosyphilis regardless of CSF, asymptomatic rarely needs LP',
     },
     // =====================================================================
     // MODULE 2: CSF EVALUATION
@@ -60,6 +63,7 @@ export const NEUROSYPHILIS_NODES = [
         body: 'CSF analysis is indicated for patients with syphilis and neurological symptoms.\n\n**Order:**\n• CSF-VDRL (highly specific, low sensitivity)\n• CSF FTA-ABS (more sensitive, less specific)\n• CSF cell count with differential\n• CSF protein\n• CSF glucose\n\n**Interpretation aids:**\n• CSF-VDRL reactive → diagnostic\n• CSF pleocytosis (>5 WBC/µL) → supportive\n• Elevated CSF protein → supportive\n• CSF FTA-ABS negative → helps rule out',
         citation: [1, 4],
         next: 'ns-csf-result',
+        summary: 'Order CSF-VDRL (highly specific), FTA-ABS (more sensitive), cell count, protein, glucose — reactive VDRL is diagnostic',
     },
     {
         id: 'ns-csf-result',
@@ -86,6 +90,7 @@ export const NEUROSYPHILIS_NODES = [
                 next: 'ns-unlikely',
             },
         ],
+        summary: 'CSF-VDRL reactive = confirmed, abnormal CSF with neuro symptoms = treat even if VDRL negative, normal CSF = unlikely',
     },
     // =====================================================================
     // MODULE 3: DIAGNOSIS & TREATMENT
@@ -249,6 +254,7 @@ export const NEUROSYPHILIS_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'Routine LP NOT recommended for asymptomatic late latent — indicated only for treatment failure, HIV, developing neuro signs, or tertiary syphilis',
     },
     {
         id: 'ns-latent-treatment',

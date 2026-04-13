@@ -24,6 +24,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       { id: 'epi-infusion', label: 'Epi Infusion Calculator' },
     ],
     next: 'anaph-diagnosis',
+
+    summary: 'Epinephrine is the ONLY first-line treatment — NO absolute contraindications; risk of NOT giving always exceeds risk of giving',
+    safetyLevel: 'critical',
   },
 
   {
@@ -49,6 +52,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         next: 'anaph-uncertain',
       },
     ],
+
+    summary: 'WAO criteria: skin+respiratory/CV/GI involvement, OR 2+ systems after known allergen exposure',
   },
 
   {
@@ -89,6 +94,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: 'Aggressive monitoring with low threshold to treat:\n\n• Establish IV access immediately\n• Have [Epinephrine](#/drug/epinephrine/anaphylaxis im) drawn up at bedside (0.5 mL of 1 mg/mL)\n• Reassess every 5-10 minutes\n• Monitor for progression to multi-organ involvement\n• **Low threshold to treat as anaphylaxis** — early epinephrine improves outcomes [1][3]',
     citation: [1, 3],
     next: 'anaph-source-control',
+
+    summary: 'IV access, epi drawn up at bedside, reassess q5-10min — low threshold to treat as anaphylaxis',
   },
 
   // =====================================================================
@@ -103,6 +110,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**SIMULTANEOUS actions:**\n\n**Source control:**\n• Stop all infusions/transfusions\n• Remove insect stinger (scrape, do not squeeze)\n• Sugammadex 16 mg/kg for rocuronium-induced\n\n**IM Epinephrine — FIRST LINE:**\n• [Epinephrine](#/drug/epinephrine/anaphylaxis im) **0.5 mg IM** (0.5 mL of 1 mg/mL) into **anterolateral thigh**\n• Pediatric: **0.01 mg/kg IM** (max 0.5 mg)\n• Repeat every 5 minutes, up to 3 doses\n\n**Do NOT delay for:**\n• IV access\n• Antihistamines\n• Steroids\n\nAnterolateral thigh achieves faster peak levels than deltoid or subcutaneous injection (Simons 2001). A 2026 study confirmed adults receiving 0.5 mg IM were less likely to need further intervention than those receiving 0.3 mg. [1][2][3][4][13]',
     citation: [1, 2, 3, 4],
     next: 'anaph-epi-response',
+
+    summary: 'Stop trigger, epi 0.5mg IM anterolateral thigh — repeat q5min up to 3 doses; do NOT delay for IV/antihistamines/steroids',
+    safetyLevel: 'critical',
     treatment: {
       firstLine: {
         drug: 'Epinephrine',
@@ -144,6 +154,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess 5min after each IM dose — up to 3 IM doses before escalating to IV epinephrine infusion',
   },
 
   {
@@ -154,6 +166,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: 'Continue monitoring — patient responding to IM epinephrine.\n\n• Continuous cardiac monitoring + SpO2\n• Vitals every 5-15 minutes\n• Maintain IV access\n• Proceed to adjunctive therapies now that epinephrine has been given [1][3]',
     citation: [1, 3],
     next: 'anaph-fluids',
+
+    summary: 'Good response to IM epi — continue monitoring, maintain IV access, proceed to adjunctive therapies',
   },
 
   {
@@ -175,6 +189,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'NEVER give cardiac arrest dose (1mg IV push) to patient with pulse — 61-fold dosing error causing hypertensive crisis',
+    safetyLevel: 'critical',
   },
 
   {
@@ -188,6 +205,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       { id: 'epi-infusion', label: 'Epi Infusion Calculator' },
     ],
     next: 'anaph-fluids',
+
+    summary: '1mg in 100mL NS (10mcg/mL): load 20mcg/min x2min, maintain 10mcg/min — aggressively wean after resolution',
+
     treatment: {
       firstLine: {
         drug: 'Epinephrine IV infusion',
@@ -221,6 +241,10 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '[Epinephrine](#/drug/epinephrine/anaphylaxis push dose) **20-50 mcg IV push**, repeat every 1-2 minutes.\n\nIf no IV access: IM 0.5 mg every 5 minutes + emergent IO access.\n\n**Position:** Lay flat, elevate legs — up to **35% of plasma volume** extravasates within minutes during anaphylaxis. [1]\n\n**If cardiac arrest:**\n• Standard ACLS with epinephrine 1 mg IV every 3-5 minutes\n• **Prolonged resuscitation** — this is a reversible pathology\n• Consider VA-ECMO if available [1][2]',
     citation: [1, 2, 4],
     next: 'anaph-fluids',
+
+    summary: 'Push-dose epi 20-50mcg IV q1-2min; lay flat + elevate legs (35% plasma extravasates); prolonged resuscitation warranted',
+    safetyLevel: 'critical',
+
     treatment: {
       firstLine: {
         drug: 'Epinephrine push-dose',
@@ -250,6 +274,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Distributive shock** — up to 35% of intravascular volume extravasates within minutes. [1]\n\n**Adults:**\n• 500-1000 mL NS/LR bolus, repeat aggressively\n• May need several liters in first hour [3]\n\n**Pediatrics:**\n• 20-30 mL/kg bolus, repeat to 60 mL/kg+\n• IO access if no IV [2]\n\n**POCUS-guided fluid management:**\n• IVC collapse = volume responsive → more fluid\n• Hyperdynamic + empty chambers = more fluid\n• Adequate filling + persistent hypotension = uptitrate epinephrine\n\nLR preferred for large-volume resuscitation. [1]',
     citation: [1, 2, 3],
     next: 'anaph-airway',
+
+    summary: 'Up to 35% intravascular volume extravasates — aggressive NS/LR boluses, POCUS-guided; may need liters in first hour',
     treatment: {
       firstLine: {
         drug: 'Normal saline or Lactated Ringer',
@@ -286,6 +312,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Assess for stridor, hoarseness, tongue swelling — angioedema without urticaria suggests ACEi or HAE (epi ineffective)',
   },
 
   {
@@ -315,6 +343,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous SpO2, prepare for surgical airway if intubation fails',
     },
+
+    summary: 'Difficult airway — video laryngoscopy, smaller ETT, surgical airway kit; nebulized epi temporizes; do NOT delay intubation',
+    safetyLevel: 'critical',
   },
 
   // =====================================================================
@@ -349,6 +380,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
+
+    summary: 'Identify refractory anaphylaxis (<0.5%), beta-blocked patients, or persistent bronchospasm requiring escalation',
   },
 
   {
@@ -378,6 +411,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous cardiac monitoring. Watch for emesis/aspiration risk with glucagon.',
     },
+
+    summary: 'Methylene blue 1-2mg/kg IV blocks NO vasodilation; glucagon discouraged (weak evidence, causes emesis, only bypasses beta-1)',
+    safetyLevel: 'warning',
   },
 
   {
@@ -407,6 +443,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       },
       monitoring: 'Continuous cardiac monitoring, POCUS-guided resuscitation, serum tryptase',
     },
+
+    summary: 'Maximize epi + fluids → methylene blue → vasopressin → VA-ECMO; re-evaluate diagnosis if not responding',
+    safetyLevel: 'critical',
   },
 
   {
@@ -436,6 +475,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
       },
       monitoring: 'SpO2, respiratory status, peak flow if able',
     },
+
+    summary: 'Albuterol 2.5-5mg neb (continuous if severe) + terbutaline 0.25mg SQ for persistent wheezing despite adequate epi',
   },
 
   {
@@ -446,6 +487,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Food-dependent exercise-induced anaphylaxis (FDEIA):**\n• Triggered by exercise within 1-4 hours of eating specific foods (wheat, celery most common)\n• Neither food NOR exercise alone causes symptoms\n• Often misdiagnosed [3]\n\n**ED management:** Same as standard anaphylaxis protocol.\n\n**Discharge counseling:**\n• Avoid exercise 4-6 hours after eating trigger food\n• Carry EpiPen at all times during exercise\n• Allergist referral mandatory [3]',
     citation: [3],
     next: 'anaph-disposition-assess',
+
+    summary: 'Food-dependent exercise-induced anaphylaxis — neither food nor exercise alone triggers; avoid exercise 4-6h after trigger food',
+    skippable: true,
   },
 
   // =====================================================================
@@ -460,6 +504,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Second-line only — NEVER delay epinephrine for antihistamines.** [1][3]\n\n**H1 blocker:** [Diphenhydramine](#/drug/diphenhydramine/anaphylaxis) 50 mg IV every 6 hours\n**H2 blocker:** [Famotidine](#/drug/famotidine/anaphylaxis) 20 mg IV every 12 hours\n\nH1 + H2 combination is superior to H1 alone for cutaneous symptoms. [2][3]\n\n**What antihistamines DO:**\n• Reduce urticaria, flushing, pruritus\n• May reduce mucosal edema\n\n**What antihistamines do NOT do:**\n• Treat hypotension\n• Treat bronchospasm\n• Prevent biphasic reactions\n\nAntihistamines are primarily cosmetic. [1]',
     citation: [1, 2, 3],
     next: 'anaph-steroids',
+
+    summary: 'H1+H2 antihistamines are second-line ONLY — reduce urticaria/pruritus but do NOT treat hypotension or bronchospasm',
+    skippable: true,
     treatment: {
       firstLine: {
         drug: 'Diphenhydramine',
@@ -489,6 +536,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Controversial — no randomized controlled trials.** [1][2][3]\n\n**If giving (pick one):**\n• [Dexamethasone](#/drug/dexamethasone/anaphylaxis) 10 mg IV x1\n• [Methylprednisolone](#/drug/methylprednisolone/anaphylaxis) 60 mg IV x1\n\n**Consider if:**\n• Refractory to 2+ IM epinephrine doses\n• Known asthma\n• History of biphasic reactions [1]\n\n**Evidence:**\n• Do NOT prevent biphasic reactions [2]\n• May reduce length of stay in hospitalized patients [2]\n• No benefit on acute symptoms (onset 4-6 hours)\n• **NOT needed for discharge** [1]',
     citation: [1, 2, 3],
     next: 'anaph-tryptase',
+
+    summary: 'Controversial — no RCTs; does NOT prevent biphasic reactions; NOT needed for discharge; consider if refractory or asthma',
+    skippable: true,
     treatment: {
       firstLine: {
         drug: 'Dexamethasone',
@@ -518,6 +568,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Serum tryptase:**\n• Peak ~90 minutes after onset, draw within 3 hours\n• Less useful for food-triggered anaphylaxis (may be normal) [3]\n• Elevated level supports anaphylaxis diagnosis\n• Persistently elevated baseline → suspect mastocytosis\n\n**Other labs:**\n• CBC, BMP, lactate (shock assessment)\n• Troponin if hemodynamic compromise (Kounis syndrome — allergic coronary spasm)\n\n**Tryptase is NOT required** to diagnose or treat anaphylaxis — it is confirmatory and prognostic. [3]',
     citation: [3],
     next: 'anaph-disposition-assess',
+
+    summary: 'Tryptase peaks ~90min, draw within 3h — less useful for food-triggered; elevated baseline suggests mastocytosis',
+    skippable: true,
   },
 
   {
@@ -528,6 +581,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     body: '**Epinephrine infusion weaning:**\n• After symptom resolution, begin weaning over ~30 minutes\n• **AGGRESSIVELY WEAN** — reluctance to stop the infusion is the greatest weakness [4]\n• If symptoms recur during wean, uptitrate and try again in 1-2 hours\n\n**Monitoring parameters:**\n• Continuous cardiac monitoring + SpO2\n• Vitals every 15 minutes for first hour, then every 30 minutes\n\n[Biphasic Reaction Risk Factors](#/info/anaph-biphasic) [1][2][3][4]',
     citation: [1, 2, 3, 4],
     next: 'anaph-disposition-assess',
+
+    summary: 'Aggressively wean epi infusion after resolution (~30min); vitals q15min x1h then q30min; watch for biphasic reaction',
   },
 
   // =====================================================================
@@ -557,6 +612,8 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Biphasic reactions 5-20%, mostly within 8-10h — risk factors: multiple epi doses, IV fluids needed, delayed initial epi',
   },
 
   {
@@ -599,6 +656,9 @@ export const ANAPHYLAXIS_NODES: DecisionNode[] = [
     title: 'Discharge Prescriptions & Education',
     body: '[Discharge Instructions](#/info/anaph-discharge)\n\n**Mandatory:**\n• **EpiPen x2** (prescribe — ensure patient demonstrates use)\n• Allergist referral within 2-4 weeks [2][3]\n• Allergen avoidance education\n• Medical ID bracelet recommended\n\n**Optional short-course (symptomatic relief):**\n• [Diphenhydramine](#/drug/diphenhydramine/angioedema) 25-50 mg PO every 6 hours PRN x 3-5 days\n• [Famotidine](#/drug/famotidine/angioedema) 20 mg PO BID x 3-5 days\n\n**Steroids NOT needed for discharge** — no evidence supports outpatient steroid taper. [1] EB Medicine adult review notes optional 3-5 day course, no taper needed. [3]\n\n**Return precautions:** Any symptom recurrence → use EpiPen immediately + call 911. [2][3]',
     citation: [1, 2, 3],
+
+    summary: 'EpiPen x2 mandatory, allergist referral within 2-4 weeks — steroids NOT needed for discharge',
+
     treatment: {
       firstLine: {
         drug: 'Epinephrine auto-injector (EpiPen)',

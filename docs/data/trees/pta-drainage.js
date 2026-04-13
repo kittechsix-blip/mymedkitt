@@ -24,6 +24,8 @@ export const PTA_DRAINAGE_NODES = [
         body: '[PTA Drainage Steps Summary](#/info/pta-steps)\n\n**Peritonsillar abscess (PTA)** is a collection of pus between the tonsillar capsule and pharyngeal muscles. [1][2]\n\n**Classic presentation:**\n• Severe sore throat (odynophagia)\n• "Hot potato" voice (muffled, wet)\n• Trismus (difficulty opening mouth) — 30-60%\n• Uvular deviation (pushed to opposite side)\n• Unilateral tonsillar swelling and exudate\n• Fever\n• Drooling\n\n**Symptom duration:** Typically 4+ days before abscess forms [2]\n\n**Key distinction:** Abscess vs peritonsillar cellulitis\n• Cellulitis: No drainable pus, antibiotics alone\n• Abscess: Requires drainage + antibiotics',
         citation: [1, 2],
         next: 'pta-clinical-exam',
+        summary: 'Pus between tonsillar capsule and pharyngeal muscles — hot potato voice, trismus, uvular deviation',
+        skippable: true,
     },
     {
         id: 'pta-clinical-exam',
@@ -49,6 +51,7 @@ export const PTA_DRAINAGE_NODES = [
                 next: 'pta-trismus-management',
             },
         ],
+        summary: 'Exam alone 75% sensitive — assess asymmetric swelling, uvular deviation, fluctuance, then US to confirm',
     },
     {
         id: 'pta-trismus-management',
@@ -58,6 +61,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Severe trismus limits examination and procedure access:** [1][2]\n\n**Strategies:**\n\n1. **Dexamethasone 10 mg IV/IM** — give first\n   • Reduces edema and trismus within 30-60 min\n   • Improves mouth opening significantly\n\n2. **Topical anesthesia spray**\n   • Benzocaine 20% or lidocaine 10%\n   • Reduces reflex guarding\n\n3. **Analgesics**\n   • Morphine 0.1 mg/kg IV or hydromorphone 1-2 mg IV\n   • Reduces pain-induced guarding\n\n4. **Procedural sedation** (if still inadequate)\n   • Propofol or ketamine\n   • Reserve for uncooperative patients or children\n\n**After trismus improves, proceed to ultrasound and drainage.**',
         citation: [1, 2],
         next: 'pta-pocus',
+        summary: 'Dexamethasone 10mg first to reduce trismus, then topical anesthesia, analgesics, sedation if needed',
     },
     // =====================================================================
     // MODULE 2: POINT-OF-CARE ULTRASOUND
@@ -70,6 +74,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Intraoral POCUS is gold standard for ED diagnosis:** [3][4]\n\n**Test characteristics:**\n• Sensitivity: 91%\n• Specificity: 75%\n• Eliminates need for CT in most cases\n\n**Advantages:**\n• Confirms abscess vs cellulitis\n• Measures abscess size and depth\n• Identifies carotid artery location\n• Guides needle aspiration in real-time\n\n**Indications for CT instead:**\n• Deep space infection concern (parapharyngeal, retropharyngeal)\n• Airway compromise\n• Failed ultrasound visualization\n• Atypical presentation\n\n[IMAGE: PTA Ultrasound Appearance](#/image/pta-drainage/pta-ultrasound.gif)',
         citation: [3, 4],
         next: 'pta-pocus-technique',
+        summary: 'Intraoral US sensitivity 91% — confirms abscess vs cellulitis, identifies carotid, guides aspiration',
     },
     {
         id: 'pta-pocus-technique',
@@ -79,6 +84,8 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Equipment:** [3][4][5]\n• Endocavitary probe (preferred) with sterile sheath\n• Alternative: Linear hockey-stick probe\n• Sterile gel\n\n**Patient preparation:**\n• Upright position, head extended\n• Topical anesthetic spray to oropharynx\n• Wait 1-2 minutes for effect\n\n**Scanning technique:**\n1. Insert sheathed probe intraorally\n2. Direct toward suspected abscess\n3. Scan systematically: superior pole (70%), mid-tonsil, inferior pole\n4. Look for **hypoechoic/anechoic collection** = pus\n\n**Critical safety step:**\n• **Use Color Doppler to identify carotid artery**\n• Appears as pulsatile vessel posterior/lateral to abscess\n• Typically 2.5-4 cm deep to mucosal surface\n\n[IMAGE: Peritonsillar Abscess — Clinical Appearance](#/image/pta-drainage/pta-clinical-appearance.jpg)\n\n**Measurements to document:**\n• Abscess size (cm)\n• Depth from mucosal surface\n• Distance to carotid artery',
         citation: [3, 4, 5],
         next: 'pta-us-findings',
+        summary: 'Endocavitary probe, scan superior pole first (70% of abscesses), use Color Doppler to locate carotid',
+        safetyLevel: 'warning',
     },
     {
         id: 'pta-us-findings',
@@ -87,6 +94,7 @@ export const PTA_DRAINAGE_NODES = [
         title: 'Ultrasound Findings',
         body: '**Interpret the ultrasound:** [3][4]\n\n**Abscess (drainable):**\n• Hypoechoic or anechoic fluid collection\n• Well-defined borders\n• May have debris/loculations\n\n**Cellulitis (no drainage):**\n• Diffuse edema, no discrete collection\n• Hyperechoic "dirty" appearance\n• No anechoic pocket\n\n**What did ultrasound show?**',
         citation: [3, 4],
+        summary: 'Hypoechoic collection with defined borders = abscess (drain); diffuse edema without pocket = cellulitis',
         images: [
             {
                 src: 'images/pta-drainage/pta-ultrasound.gif',
@@ -141,6 +149,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**If ultrasound findings are unclear:** [1][4]\n\n**Options:**\n\n1. **Diagnostic needle aspiration**\n   • Even if US equivocal, aspiration attempt is reasonable\n   • No pus obtained = cellulitis (treat medically)\n   • Pus obtained = abscess (continue drainage)\n\n2. **CT scan with contrast**\n   • More definitive if diagnosis uncertain\n   • Especially if concern for deep space extension\n   • Consider if: atypical presentation, failed aspiration, airway concern\n\n3. **Trial of antibiotics + steroids with close follow-up**\n   • If low clinical suspicion\n   • Repeat exam/US in 24 hours\n\n**Recommended approach:** Proceed to diagnostic aspiration unless CT clearly indicated.',
         citation: [1, 4],
         next: 'pta-drainage-decision',
+        summary: 'Equivocal US — diagnostic aspiration reasonable, CT if deep space concern, or trial antibiotics + follow-up',
     },
     {
         id: 'pta-drainage-decision',
@@ -161,6 +170,7 @@ export const PTA_DRAINAGE_NODES = [
                 next: 'pta-id-prep',
             },
         ],
+        summary: 'Needle aspiration first-line (85-95% success); I&D for large >2cm, recurrent, or failed aspiration',
     },
     // =====================================================================
     // MODULE 3: NEEDLE ASPIRATION
@@ -173,6 +183,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Equipment:** [1][5][6]\n• 18-gauge needle on 10 mL syringe\n• Needle guard or **depth limiter** (CRITICAL)\n• Headlamp for visualization\n• Yankauer suction\n• Topical anesthetic spray (benzocaine 20% or lidocaine 10%)\n• Local anesthetic: Lidocaine 1% with epinephrine (optional)\n\n**Set up depth limiter:**\n• Mark syringe at **10 mm** from needle tip\n• Or use commercial needle guard\n• **Maximum insertion depth: 8-10 mm**\n\n**Patient positioning:**\n• Upright, seated\n• Head extended slightly backward\n• Mouth open maximally\n• Basin available to spit (not swallow)',
         citation: [1, 5, 6],
         next: 'pta-anesthesia',
+        summary: '18g needle with depth limiter at 10mm, headlamp, Yankauer suction — patient upright with head extended',
     },
     {
         id: 'pta-anesthesia',
@@ -182,6 +193,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Topical anesthesia (always):** [1][6]\n• Spray benzocaine 20% (Cetacaine) or lidocaine 10% generously\n• Cover tonsil, soft palate, base of tongue\n• Wait 1-2 minutes for effect\n• Reduces gag reflex and provides mucosal anesthesia\n\n**Local infiltration (optional, for I&D or difficult aspiration):**\n• Lidocaine 1% with epinephrine\n• 27-gauge needle, 6-10 mL total\n• Inject around fluctuant area\n• Inject at base of uvula\n• Inject along anterior tonsillar pillar\n• **Aspirate before each injection** (avoid intravascular)\n• Wait 2-3 minutes for effect\n\n**Dexamethasone 10 mg IV/IM** — give before or during procedure\n• Reduces edema, pain, trismus\n• Improves outcomes',
         citation: [1, 6],
         next: 'pta-aspiration-technique',
+        summary: 'Topical benzocaine/lidocaine spray first, optional local infiltration — dexamethasone 10mg at procedure time',
     },
     {
         id: 'pta-aspiration-technique',
@@ -191,6 +203,8 @@ export const PTA_DRAINAGE_NODES = [
         body: '**CRITICAL SAFETY: Limit needle depth to 8-10 mm** [1][5][6]\n\nCarotid artery is 2.5-4 cm posterior/lateral to tonsil.\n\n**Target:** Superior pole of tonsil (70% of abscesses)\n\n**Technique:**\n1. Visualize with headlamp and tongue depressor\n2. Insert 18g needle at 45° angle toward tonsillar fossa\n3. Advance **MAXIMUM 8-10 mm** (use depth limiter!)\n4. Aspirate while slowly withdrawing\n5. If no pus, redirect slightly and repeat\n6. Maximum 2-3 passes in superior pole area\n\n[IMAGE: PTA Anatomy — Abscess Location](#/image/pta-drainage/pta-anatomy-diagram.png)\n\n**Ultrasound-guided (preferred):**\n• Attach needle guide to US probe\n• Visualize needle tip entering collection in real-time\n• Maintain needle visualization throughout\n• Color Doppler confirms vessel location\n\n**Volume expectations:**\n• Small abscess: 1-5 mL\n• Moderate: 5-15 mL\n• Large: >15 mL',
         citation: [1, 5, 6],
         next: 'pta-aspiration-result',
+        summary: 'DEPTH LIMIT 8-10mm maximum — target superior pole at 45 degrees, max 2-3 passes, US-guided preferred',
+        safetyLevel: 'critical',
     },
     {
         id: 'pta-aspiration-result',
@@ -215,6 +229,7 @@ export const PTA_DRAINAGE_NODES = [
                 next: 'pta-id-prep',
             },
         ],
+        summary: 'Pus = successful drainage; no pus despite correct position = likely cellulitis; failed = proceed to I&D',
     },
     {
         id: 'pta-no-pus',
@@ -234,6 +249,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**After successful needle aspiration:** [1][6]\n\n**Immediate care:**\n• Withdraw needle slowly while observing for bleeding\n• Have patient spit (not swallow) any blood/drainage\n• Ice water gargles × 2-3 minutes — reduces bleeding, promotes drainage\n• Observe 30-45 minutes\n\n**Assess adequacy:**\n• Patient reports pain relief\n• Swelling decreased\n• Voice improved\n• Trismus improved\n\n**If significant residual collection:**\n• May repeat aspiration once\n• Consider I&D if large remaining pocket\n\n**Next steps:**\n• Medications (antibiotics + steroids)\n• Disposition planning',
         citation: [1, 6],
         next: 'pta-antibiotics',
+        summary: 'Assess pain relief, swelling decrease, voice improvement — ice water gargles, observe 30-45 min',
     },
     // =====================================================================
     // MODULE 4: INCISION & DRAINAGE
@@ -246,6 +262,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Indications for I&D over aspiration:** [1][6][7]\n• Large abscess (>2 cm diameter)\n• Recurrent abscess or prior failed aspiration\n• Multiple loculations suspected\n• Uncooperative patient (with sedation)\n• Patient or provider preference\n\n**Equipment:**\n• #11 or #15 scalpel blade\n• Curved hemostat (Kelly or Mosquito)\n• Headlamp\n• Yankauer suction\n• Local anesthetic (1% lidocaine with epi, 27g needle)\n• Topical anesthetic spray\n\n**Anesthesia:**\n• Topical spray first (benzocaine 20%)\n• Local infiltration: 6-10 mL lidocaine 1% with epi\n  - Around fluctuant area\n  - Base of uvula\n  - Anterior tonsillar pillar\n• Wait 2-3 minutes for effect',
         citation: [1, 6, 7],
         next: 'pta-id-technique',
+        summary: '#11 or #15 blade, curved hemostat, local anesthesia 6-10mL — for large >2cm, recurrent, or failed aspiration',
     },
     {
         id: 'pta-id-technique',
@@ -255,6 +272,8 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Incision & Drainage technique:** [1][6][7]\n\n**Incision location:**\n• Anterior tonsillar pillar (mucosa only)\n• Curvilinear or vertical incision\n• From base of uvula toward last mandibular molar\n• Length: 1.0-1.5 cm\n• Stay on ANTERIOR pillar — avoid lateral (carotid) direction\n\n**Depth:**\n• Superficial incision through mucosa only\n• Penetrate just enough to enter abscess cavity\n• Limit depth to **5-8 mm**\n• Scalpel angle: 45°, directed medially\n\n[IMAGE: PTA Anatomy — Incision Site](#/image/pta-drainage/pta-anatomy-diagram.png)\n\n**Blunt dissection:**\n1. After incision, insert closed hemostat into cavity\n2. Spread gently in 2-3 directions\n3. Opens cavity and breaks loculations\n4. One large deliberate spread usually sufficient\n5. Evacuate pus with suction\n\n**Do NOT suture** — leave open for continued drainage (heals in 3-5 days)',
         citation: [1, 6, 7],
         next: 'pta-post-id',
+        summary: 'Incise anterior pillar 1-1.5cm, depth 5-8mm, blunt dissect with hemostat — stay anterior, do NOT suture',
+        safetyLevel: 'warning',
     },
     {
         id: 'pta-post-id',
@@ -264,6 +283,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**After incision and drainage:** [1][6]\n\n**Immediate:**\n• Suction any remaining pus/blood\n• Have patient spit (not swallow)\n• Ice water gargles × 2-3 minutes\n• Observe for 30-45 minutes\n\n**Complications to watch for:**\n• Bleeding (usually minor, self-limited)\n• Aspiration of pus\n• Inadequate drainage (may need revision)\n\n**If brisk bleeding:**\n• Direct pressure with gauze\n• Consider topical epinephrine (1:1000)\n• Usually resolves with 10-15 min pressure\n• Persistent bleeding → ENT consultation\n\n**Next steps:**\n• Medications (antibiotics + steroids)\n• Disposition planning',
         citation: [1, 6],
         next: 'pta-antibiotics',
+        summary: 'Suction remaining pus, ice water gargles, observe 30-45 min — direct pressure for brisk bleeding',
     },
     // =====================================================================
     // MODULE 5: MEDICATIONS
@@ -276,6 +296,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**PTA is polymicrobial — need anaerobic + aerobic coverage:** [1][2][8]\n\n**First-line oral:**\n• [Amoxicillin-clavulanate](#/drug/amoxicillin-clavulanate/pta) 875/125 mg PO BID × 10-14 days\n\n**Penicillin allergy:**\n• [Clindamycin](#/drug/clindamycin/pta) 300-450 mg PO Q6-8h × 10-14 days\n\n**IV options (if admission):**\n• Ampicillin-sulbactam 3 g IV Q6h\n• OR Clindamycin 600-900 mg IV Q6-8h\n\n**Severe/immunocompromised:**\n• Clindamycin 600 mg IV Q6h + Ceftriaxone 1-2 g IV Q12h\n• Add Vancomycin if MRSA concern\n\n**Pediatric dosing:**\n• Amoxicillin-clavulanate: 45 mg/kg/day divided Q12h (max 875 mg/dose)\n• Clindamycin: 10 mg/kg Q8h (max 600 mg/dose)',
         citation: [1, 2, 8],
         next: 'pta-steroids',
+        summary: 'Amoxicillin-clavulanate 875mg BID x10-14d first-line; clindamycin for PCN allergy — polymicrobial coverage',
     },
     {
         id: 'pta-steroids',
@@ -285,6 +306,7 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Single-dose steroids improve outcomes:** [1][2][9]\n\n**Adult dose:**\n• [Dexamethasone](#/drug/dexamethasone/pta) 10 mg IV/IM/PO × 1\n• OR Methylprednisolone 2-3 mg/kg IV/IM\n\n**Pediatric dose:**\n• Dexamethasone 0.6 mg/kg PO × 1 (max 10 mg)\n\n**Benefits:**\n• Reduces pain and trismus\n• Decreases edema\n• Shortens hospital stay\n• Speeds recovery\n\n**Timing:** Give at or before drainage for maximum benefit\n\n**Safety:** Single dose is safe — no increased infection risk',
         citation: [1, 2, 9],
         next: 'pta-pain-management',
+        summary: 'Dexamethasone 10mg single dose — reduces pain, trismus, edema, speeds recovery, safe with no infection risk',
     },
     {
         id: 'pta-pain-management',
@@ -294,6 +316,8 @@ export const PTA_DRAINAGE_NODES = [
         body: '**Adequate analgesia improves oral intake:** [1]\n\n**Oral options:**\n• Acetaminophen 650-1000 mg Q6h\n• Ibuprofen 400-600 mg Q6h\n• Combination: Alternate acetaminophen/ibuprofen Q3h\n\n**Topical:**\n• Benzocaine spray Q2-3h PRN for throat comfort\n• Viscous lidocaine 2% swish and spit\n\n**Opioids (for severe pain):**\n• Hydrocodone/acetaminophen 5/325 mg Q4-6h PRN\n• Limited course (3-5 days)\n\n**Other comfort measures:**\n• Ice chips, cold liquids\n• Soft, bland diet\n• Avoid acidic foods',
         citation: [1],
         next: 'pta-disposition-decision',
+        summary: 'Alternate acetaminophen/ibuprofen q3h, viscous lidocaine for throat — opioids limited 3-5 days if severe',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 6: DISPOSITION
@@ -317,6 +341,7 @@ export const PTA_DRAINAGE_NODES = [
                 next: 'pta-admission',
             },
         ],
+        summary: 'Discharge if tolerates PO, pain controlled, minimal bleeding; admit if airway concern or septic',
     },
     {
         id: 'pta-discharge',
@@ -367,6 +392,8 @@ export const PTA_DRAINAGE_NODES = [
         title: 'Complications & Prevention',
         body: '**Procedure complications:** [1][6][11]\n\n**Carotid artery injury** (most feared)\n• Prevention: Depth limit 8-10mm, Color Doppler, medial needle direction\n• If hemorrhage: Direct pressure ± topical epi\n• Uncontrolled: ENT/vascular surgery emergently\n\n**Post-aspiration hemorrhage**\n• Usually minor, self-limited\n• Ice water gargles, direct pressure\n• Delayed hemorrhage (>24h) → rule out pseudoaneurysm\n\n**Aspiration**\n• Keep patient upright\n• Spit, not swallow\n• Suction available\n\n**Recurrence**\n• Rate: 2-15%\n• Risk factors: incomplete drainage, large abscess, inadequate antibiotics\n• Prevention: Complete evacuation, full antibiotic course, close follow-up\n\n**If recurrent (>1 episode/12 months):**\n• Tonsillectomy referral',
         citation: [1, 6, 11],
+        summary: 'Carotid injury (most feared) — depth limit prevents it; recurrence 2-15%, tonsillectomy if >1 episode/12mo',
+        safetyLevel: 'warning',
     },
 ];
 export const PTA_DRAINAGE_MODULE_LABELS = [

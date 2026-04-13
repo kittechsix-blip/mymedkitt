@@ -21,6 +21,8 @@ export const POST_ROSC_NODES = [
         body: '[Post-ROSC Steps Summary](#/info/rosc-steps-summary)\n\nROSC confirmed. Immediate priorities:\n\n**Airway & Ventilation:**\n• Secure airway if not already — intubate if GCS ≤8\n• Waveform capnography to confirm ETT placement\n• Target ETCO₂ 35-45 mmHg — guides ventilation\n\n**Immediate Workup:**\n• **12-lead ECG** — STEMI identification is the #1 priority\n• Avoid hypoxia (SpO₂ <94%) and hypotension (SBP <90)\n• Arterial line for continuous BP monitoring\n• Labs: ABG, lactate, troponin, BMP, CBC, coags\n• Portable CXR (ETT position, pulmonary edema)',
         citation: [1, 2, 5],
         next: 'rosc-stemi',
+        summary: 'Secure airway, 12-lead ECG immediately, target ETCO2 35-45, arterial line, labs/CXR',
+        safetyLevel: 'critical',
     },
     {
         id: 'rosc-stemi',
@@ -48,6 +50,7 @@ export const POST_ROSC_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'STEMI identification is #1 priority post-ROSC — emergent PCI if found, do not delay',
     },
     {
         id: 'rosc-cath',
@@ -57,6 +60,8 @@ export const POST_ROSC_NODES = [
         body: '**STEMI + ROSC → emergent PCI.** Do not delay for CT head or other workup.\n\n• Activate cath lab immediately\n• TTM can be initiated in cath lab\n• Transfer to PCI-capable center if not available\n• Dual antiplatelet therapy per ACS protocol\n• Heparin bolus per cath lab protocol\n\n[STEMI Management](#/tree/stemi)',
         citation: [7, 13],
         next: 'rosc-hemo',
+        summary: 'STEMI + ROSC = emergent PCI — do not delay for CT head, TTM can start in cath lab',
+        safetyLevel: 'critical',
     },
     {
         id: 'rosc-no-stemi',
@@ -66,6 +71,8 @@ export const POST_ROSC_NODES = [
         body: 'No STEMI: stabilize hemodynamics first.\n\n**Consider coronary angiography if:**\n• Witnessed arrest with shockable rhythm\n• High suspicion for cardiac cause\n• Hemodynamic instability suggesting cardiogenic shock\n\n**COACT Trial (2019):** Immediate angiography in OHCA without STEMI did NOT improve survival vs delayed/selective strategy.\n\nTiming is less urgent — can wait for clinical stabilization.',
         citation: [14, 7],
         next: 'rosc-hemo',
+        summary: 'COACT trial: no STEMI = no benefit from immediate angiography — stabilize hemodynamics first',
+        skippable: true,
     },
     {
         id: 'rosc-angio-consider',
@@ -75,6 +82,7 @@ export const POST_ROSC_NODES = [
         body: 'Indeterminate ECG or new LBBB: cardiology consult.\n\n**Consider early angiography within 2h if:**\n• Shockable rhythm arrest\n• Hemodynamically unstable\n• High suspicion for ACS\n\n**Non-shockable rhythm with stable hemodynamics →** angiography can be deferred pending further workup and clinical trajectory.',
         citation: [7, 13, 14],
         next: 'rosc-hemo',
+        summary: 'Indeterminate ECG or new LBBB — cardiology consult, early angiography if shockable rhythm',
     },
     // =====================================================================
     // MODULE 2: HEMODYNAMIC TARGETS
@@ -87,6 +95,8 @@ export const POST_ROSC_NODES = [
         body: '**Hemodynamic targets:**\n• **MAP ≥65 mmHg** (some guidelines ≥70) — avoid SBP <90\n• **SpO₂ 94-98%** — avoid hyperoxia (PaO₂ >300 mmHg is harmful, causes oxidative injury)\n• **PaCO₂ 35-45 mmHg** — avoid hypocapnia (causes cerebral vasoconstriction)\n• **ETCO₂ 35-45 mmHg** — correlates with PaCO₂, use to guide ventilator\n\n**Titrate FiO₂ DOWN** to target SpO₂ 94-98% once stable. Most post-arrest patients don\'t need 100% FiO₂ after ROSC.',
         citation: [1, 2, 5, 6],
         next: 'rosc-pressors',
+        summary: 'MAP >=65, SpO2 94-98% (avoid hyperoxia), PaCO2 35-45 (avoid hypocapnia) — titrate FiO2 down',
+        safetyLevel: 'critical',
     },
     {
         id: 'rosc-pressors',
@@ -96,6 +106,7 @@ export const POST_ROSC_NODES = [
         body: '**Vasopressor support:**\n• First-line: [Norepinephrine](#/drug/norepinephrine/post-rosc) 0.1-0.5 mcg/kg/min\n• Refractory: add [Vasopressin](#/drug/vasopressin/post-rosc) 0.04 units/min\n• If cardiac dysfunction: [Dobutamine](#/drug/dobutamine/cardiogenic shock) 2-20 mcg/kg/min or [Milrinone](#/drug/milrinone/cardiogenic shock)\n• Echo to assess LV function — post-arrest myocardial stunning is common and usually recovers in 24-72h\n\n**Avoid epinephrine infusion** post-ROSC if possible (tachyarrhythmias, myocardial oxygen demand).',
         citation: [1, 5, 6],
         next: 'rosc-ttm-check',
+        summary: 'Norepinephrine first-line, add vasopressin if refractory, dobutamine for cardiac dysfunction',
     },
     // =====================================================================
     // MODULE 3: TARGETED TEMPERATURE MANAGEMENT
@@ -120,6 +131,7 @@ export const POST_ROSC_NODES = [
                 next: 'rosc-ttm-awake',
             },
         ],
+        summary: 'Comatose patients need aggressive fever prevention; following commands = good neuro sign',
     },
     {
         id: 'rosc-ttm-coma',
@@ -129,6 +141,8 @@ export const POST_ROSC_NODES = [
         body: '**Comatose after ROSC: prevent fever aggressively.**\n\n**TTM2 Trial (2021):** 33°C vs 37.5°C showed no difference in mortality or neurological outcome.\n\n**Current approach (2023 AHA):**\n• Target **normothermia** — actively prevent fever >37.7°C × 72h\n• Cooling to 32-36°C is acceptable but NOT required\n• Surface cooling devices, IV cold saline bolus, or intravascular cooling\n\n**Anti-shivering protocol:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/ttm) 4g IV (raises shivering threshold)\n• Sedation: propofol or midazolam infusion\n• [Meperidine](#/drug/meperidine/shivering) 25-50mg IV (centrally acting)\n• Neuromuscular blockade if refractory\n\n**Monitor:** Core temp continuously (esophageal or bladder probe). Avoid overcooling.',
         citation: [2, 3, 4, 10],
         next: 'rosc-neuro',
+        summary: 'TTM2: no benefit of cooling to 33C — prevent fever >37.7C x72h, anti-shivering protocol required',
+        safetyLevel: 'critical',
     },
     {
         id: 'rosc-ttm-awake',
@@ -138,6 +152,8 @@ export const POST_ROSC_NODES = [
         body: 'Following commands = good neurological sign.\n\n**Standard care:**\n• Monitor temperature — actively treat any fever >37.7°C\n• No need for aggressive cooling\n• Continue hemodynamic optimization\n• Workup for arrest cause (echo, labs, serial ECGs)\n• Neurology consult if any concern for seizure activity',
         citation: [2, 6],
         next: 'rosc-neuro',
+        summary: 'Awake post-ROSC — standard care, treat fever, echo for arrest cause, neuro consult if seizure concern',
+        skippable: true,
     },
     // =====================================================================
     // MODULE 4: NEUROPROGNOSTICATION
@@ -150,6 +166,8 @@ export const POST_ROSC_NODES = [
         body: '**⚠️ Do NOT prognosticate within 72h post-rewarming.**\n\nSedation, hypothermia, and neuromuscular blockade confound neurological exam. Premature withdrawal of care is the leading cause of preventable death in post-arrest patients.\n\n**Multimodal approach (after 72h rewarming):**\n• **Clinical exam:** absent corneal + pupillary reflexes at 72h = poor prognosis\n• **EEG:** burst suppression or status epilepticus\n• **SSEP:** bilaterally absent N20 cortical responses (most specific)\n• **CT/MRI:** diffuse anoxic injury pattern\n• **NSE (neuron-specific enolase):** >33 ng/mL at 48-72h suggests poor outcome\n\n**No single test is sufficient.** Multimodal concordance is required. Each test has false positive rate. Give minimum 72h before any withdrawal discussion.',
         citation: [6, 8, 9, 12],
         next: 'rosc-seizure',
+        summary: 'Do NOT prognosticate within 72h post-rewarming — multimodal approach required, no single test sufficient',
+        safetyLevel: 'critical',
     },
     {
         id: 'rosc-seizure',
@@ -159,6 +177,8 @@ export const POST_ROSC_NODES = [
         body: '**Post-arrest seizures** occur in 20-30% of comatose survivors.\n\n• Continuous EEG monitoring recommended for all comatose post-arrest patients\n• Clinical seizures may be subtle (eye twitching, nystagmus) or masked by paralysis\n• Treatment: [Levetiracetam](#/drug/levetiracetam/seizure) 60 mg/kg IV (max 4500mg) — first-line\n• Refractory: valproate, phenobarbital, midazolam/propofol infusion\n• **Myoclonus ≠ seizure** — Lance-Adams syndrome (post-hypoxic myoclonus) has better prognosis than true status epilepticus',
         citation: [5, 6, 8],
         next: 'rosc-icu-targets',
+        summary: '20-30% have post-arrest seizures — continuous EEG, levetiracetam first-line, myoclonus is not always seizure',
+        safetyLevel: 'warning',
     },
     // =====================================================================
     // MODULE 5: ICU TARGETS & DISPOSITION
@@ -171,6 +191,7 @@ export const POST_ROSC_NODES = [
         body: '**ICU bundle:**\n• **Glucose 140-180 mg/dL** — avoid hypoglycemia (<70), treat hyperglycemia with insulin infusion\n• **Seizure surveillance:** continuous EEG × 24-48h minimum\n• **Echo:** assess LV function, wall motion abnormalities, post-arrest stunning\n• **Ventilator:** TV 6 mL/kg IBW, PEEP 5-8, target PaCO₂ 35-45\n• **Labs q4-6h:** lactate (trending down = good), troponin, electrolytes, ABG\n• **Foley:** strict I/O monitoring, target UOP >0.5 mL/kg/hr\n• **DVT prophylaxis:** enoxaparin or heparin SQ once hemostasis confirmed',
         citation: [1, 5, 6],
         next: 'rosc-disposition',
+        summary: 'Glucose 140-180, EEG x24-48h, echo, TV 6 mL/kg IBW, labs q4-6h, DVT prophylaxis',
     },
     {
         id: 'rosc-disposition',

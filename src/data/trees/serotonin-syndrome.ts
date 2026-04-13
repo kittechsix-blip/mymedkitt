@@ -27,6 +27,9 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
       { id: 'hunter-criteria', label: 'Hunter Criteria' },
     ],
     next: 'ss-drug-history',
+
+    summary: 'Serotonergic excess causing AMS, autonomic dysfunction, neuromuscular excitation — onset within 24h of drug change, clonus is hallmark',
+    skippable: true,
   },
 
   {
@@ -56,6 +59,8 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
         next: 'ss-alternative-dx',
       },
     ],
+
+    summary: 'Determine serotonergic drug exposure — required for Hunter Criteria diagnosis, check SSRIs/SNRIs/MAOIs/tramadol/MDMA/linezolid',
   },
 
   {
@@ -69,6 +74,9 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
       { id: 'ss-drug-list', label: 'Serotonergic Drug Lookup' },
     ],
     next: 'ss-hunter',
+
+    summary: 'Complete medication history including Rx, OTC/supplements, and recreational drugs — check for new starts, dose changes, and interactions',
+    skippable: true,
   },
 
   // =====================================================================
@@ -87,6 +95,8 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
       { id: 'hunter-criteria', label: 'Hunter Criteria Calculator' },
     ],
     next: 'ss-hunter-result',
+
+    summary: 'Hunter Criteria (84% sens, 97% spec) — serotonergic agent + clonus/tremor/hyperreflexia/hypertonia, check ankle clonus >3 beats',
   },
 
   {
@@ -117,6 +127,8 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
         next: 'ss-ddx',
       },
     ],
+
+    summary: 'Assess if patient meets Hunter Criteria — serotonergic exposure + one clinical finding cluster',
   },
 
   // =====================================================================
@@ -134,6 +146,9 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
       { id: 'ss-vs-nms', label: 'SS vs NMS Differentiator' },
     ],
     next: 'ss-vs-nms-q',
+
+    summary: 'Differentiate SS from NMS, anticholinergic toxicity, malignant hyperthermia, sympathomimetics, sepsis, thyroid storm',
+    skippable: true,
   },
 
   {

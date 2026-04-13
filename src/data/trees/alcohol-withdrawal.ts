@@ -34,6 +34,9 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     images: [{ src: 'images/alcohol-withdrawal/wernicke-mri.jpg', alt: 'MRI FLAIR sequence showing hyperintense signal in mammillary bodies and periventricular regions in Wernicke Encephalopathy', caption: "Wernicke Encephalopathy MRI — hyperintense FLAIR signal in mammillary bodies and periaqueductal grey. Give thiamine BEFORE dextrose in any alcohol patient. (CC BY-SA 3.0)" }],
     citation: [1, 2, 3],
     next: 'aw-history',
+
+    summary: 'Give thiamine IV BEFORE glucose, check glucose/electrolytes/LFTs — withdrawal from GABA downregulation + glutamate upregulation',
+    safetyLevel: 'warning',
   },
 
   {
@@ -44,6 +47,9 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     body: '**Key history elements:**\n• How much does the patient drink? Pattern (daily vs binge)?\n• Does the patient withdraw when they stop drinking?\n• History of withdrawal seizures, DT, or intubation?\n• Verify EMR documentation — "alcoholism" may be years outdated [2]\n• Obtain collateral from family/friends if needed\n\n**Admission blood alcohol level:**\n• BAL >200 mg/dL = high risk for withdrawal [3]\n• Withdrawal can begin while BAL is still elevated\n\n[Timing of Withdrawal Syndromes](#/info/aw-withdrawal-timing)\n\n• **6+ hours:** Minor symptoms (tremor, anxiety, insomnia, diaphoresis)\n• **8-12 hours:** Alcoholic hallucinosis (visual > auditory, clear sensorium)\n• **12-48 hours:** Withdrawal seizures (usually generalized tonic-clonic)\n• **48-96 hours:** Delirium tremens (hallucinations + disorientation + autonomic instability)',
     citation: [2, 3, 4],
     next: 'aw-diagnosis',
+
+    summary: 'Timeline: minor 6h, hallucinosis 8-12h, seizures 12-48h, DT 48-96h — BAL>200 = high risk',
+    skippable: true,
   },
 
   {
@@ -71,6 +77,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-test-dose',
       },
     ],
+
+    summary: 'Diagnosis of exclusion — exclude infection, trauma, metabolic; somnolence after low-dose benzo argues against withdrawal',
   },
 
   // =====================================================================
@@ -85,6 +93,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
     body: '**IV midazolam test dose** can help clarify the diagnosis [2].\n\n[Midazolam](#/drug/midazolam/acute agitation) 2-5 mg IV:\n\n• **If patient becomes sedated** → withdrawal is LESS likely (patients with true withdrawal exhibit benzodiazepine tolerance)\n• **If favorable response** (symptom improvement without oversedation) → withdrawal is likely, proceed with definitive treatment\n\nMidazolam has rapid onset and short duration — ideal for diagnostic assessment.\n\nIf withdrawal is confirmed, proceed to severity assessment.',
     citation: [2],
     next: 'aw-severity',
+
+    summary: 'Midazolam 2-5mg IV test — if sedated, NOT true withdrawal (tolerance absent); if improved without oversedation, likely withdrawal',
   },
 
   {
@@ -133,6 +143,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'PAWSS ≥4 predicts significant withdrawal; CIWA-Ar for monitoring severity; DT = hallucinations + disorientation + autonomic instability',
   },
 
   {
@@ -226,6 +238,9 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'Continuous pulse oximetry, respiratory monitoring. Have airway equipment ready. Monitor for recurrent seizures.',
     },
     next: 'aw-post-seizure',
+
+    summary: 'Phenobarbital 15-20mg/kg IV for seizure — treats both seizure AND underlying withdrawal; phenytoin is NOT effective',
+    safetyLevel: 'critical',
   },
 
   {
@@ -248,6 +263,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-seizure-done',
       },
     ],
+
+    summary: 'Post-seizure: assess for ongoing withdrawal symptoms — high risk for DT, generally requires admission',
   },
 
   {
@@ -280,6 +297,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-bz-select',
       },
     ],
+
+    summary: 'Phenobarbital: dual GABA+glutamate mechanism, predictable levels, auto-taper; BZD: traditional, 5-10% refractory',
   },
 
   // --- PHENOBARBITAL PATHWAY ---
@@ -303,6 +322,9 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-bz-select',
       },
     ],
+
+    summary: 'Screen for hepatic encephalopathy (strong contraindication), respiratory depression, porphyria, prior large BZD doses',
+    safetyLevel: 'warning',
   },
 
   {
@@ -324,6 +346,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'RASS q15-30 min during titration. Target RASS 0 to -1. Check phenobarbital level if uncertain of total dose or if approaching 20 mg/kg.',
     },
     next: 'aw-pb-response',
+
+    summary: 'Load 10mg/kg IV, then 130mg q30min to RASS 0 to -1; 20mg/kg=soft stop, 30mg/kg=hard stop; use ideal body weight',
   },
 
   {
@@ -352,6 +376,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Check level if uncertain; >20mg/kg without improvement = re-evaluate diagnosis; 30mg/kg = upper therapeutic limit',
   },
 
   {
@@ -373,6 +399,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'Monitor for oversedation. Communicate total phenobarbital dose to all providers. Check level if uncertain.',
     },
     next: 'aw-disposition',
+
+    summary: 'Auto-tapers over 3-4 days — do NOT add benzodiazepines; communicate total dose to all providers',
   },
 
   {
@@ -407,6 +435,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-bz-dosing',
       },
     ],
+
+    summary: 'Diazepam preferred (rapid onset, long-acting); lorazepam for cirrhosis (no active metabolites); avoid IM diazepam',
   },
 
   {
@@ -436,6 +466,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'CIWA-Ar q1-4h (severe: q10-15 min). Target RASS 0 to -1. Continuous pulse oximetry. Monitor for respiratory depression.',
     },
     next: 'aw-bz-response',
+
+    summary: 'Symptom-triggered with CIWA-Ar q1-4h; diazepam 5-10mg IV q5-10min to RASS 0 to -1; some need >500mg total',
   },
 
   {
@@ -458,6 +490,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
+
+    summary: 'Refractory if >50mg diazepam in 1h or >200mg in 3-4h — 5-10% will need phenobarbital rescue',
   },
 
   {
@@ -487,6 +521,9 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'Prepare for intubation. Synergistic respiratory depression with phenobarbital + benzodiazepines. ICU admission required.',
     },
     next: 'aw-refractory-result',
+
+    summary: 'Phenobarbital 130-260mg IV q15-20min + BZD is synergistic — intubation often needed; ketamine bridges while PB takes effect',
+    safetyLevel: 'critical',
   },
 
   {
@@ -527,6 +564,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
       monitoring: 'Electrolytes daily (Mg, K, Phos). Fingerstick glucose q4-6h. Monitor for refeeding syndrome in malnourished patients.',
     },
     next: 'aw-disposition',
+
+    summary: 'Thiamine 500mg IV q8h if AMS, 100mg daily if normal — aggressively replete Mg, K, phosphate; monitor for refeeding',
   },
 
   // =====================================================================
@@ -558,6 +597,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-aud-screen',
       },
     ],
+
+    summary: 'ICU for DT/refractory/intubated; floor for controlled withdrawal needing taper; discharge if mild and resolved',
   },
 
   {
@@ -631,6 +672,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-discharge',
       },
     ],
+
+    summary: 'In-hospital MAUD initiation reduces ED visits and readmissions — patients are sober and receptive',
   },
 
   {
@@ -657,6 +700,8 @@ export const ALCOHOL_WITHDRAWAL_NODES: DecisionNode[] = [
         next: 'aw-aud-other',
       },
     ],
+
+    summary: 'Naltrexone first-line (NNT 12, once daily); acamprosate if cirrhosis (safe, NNT 9-12); minimum 6 months duration',
   },
 
   {

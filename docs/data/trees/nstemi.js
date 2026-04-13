@@ -15,6 +15,8 @@ export const NSTEMI_NODES = [
         images: [{ src: 'images/nstemi/wellens-ecg.jpg', alt: "Wellens' syndrome ECG showing deep symmetric T-wave inversions in V2-V3 during chest pain", caption: "Wellens' syndrome — deep anterior T-wave inversions indicating critical proximal LAD stenosis; a high-risk NSTEMI equivalent. (CC BY-SA 3.0)" }],
         citation: [1, 2],
         next: 'nstemi-initial-anticoag',
+        summary: 'Aspirin 162-325mg chewed, NTG 0.4mg SL (rule out RV infarct first), ECG in 10min, serial troponins — morphine only if refractory',
+        safetyLevel: 'critical',
     },
     {
         id: 'nstemi-initial-anticoag',
@@ -54,6 +56,8 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-risk-stratify',
             },
         ],
+        summary: 'Choose ONE anticoagulant — enoxaparin preferred, UFH if CrCl<30 or PCI within 24h, fondaparinux lowest bleed risk; do NOT switch agents',
+        safetyLevel: 'critical',
     },
     {
         id: 'nstemi-risk-stratify',
@@ -74,6 +78,8 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-timi-stratify',
             },
         ],
+        summary: 'Screen for emergent cath (<2h): cardiogenic shock, refractory pain, sustained VT/VF, acute MR/VSD, new pulmonary edema',
+        safetyLevel: 'critical',
     },
     // =====================================================================
     // MODULE 2: RISK STRATIFICATION
@@ -133,6 +139,7 @@ export const NSTEMI_NODES = [
                 urgency: 'urgent',
             },
         ],
+        summary: 'TIMI score guides timing: 0-2 conservative, 3 delayed invasive (25-72h), 4-7 early invasive (<24h)',
     },
     {
         id: 'nstemi-conservative',
@@ -172,6 +179,7 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-discharge',
             },
         ],
+        summary: 'Low TIMI: fondaparinux preferred (lowest bleed), metoprolol, atorvastatin 80mg, clopidogrel 300mg load, stress test before discharge',
     },
     // =====================================================================
     // MODULE 3: INVASIVE STRATEGY
@@ -203,6 +211,7 @@ export const NSTEMI_NODES = [
             monitoring: 'Monitor for bleeding, dyspnea (ticagrelor side effect). ECG for bradyarrhythmias with ticagrelor.',
         },
         next: 'nstemi-post-pci',
+        summary: 'TIMI ≥4: cath within 24h, ticagrelor 180mg preferred (PLATO NNT 54), continue anticoag without switching, atorvastatin 80mg',
     },
     {
         id: 'nstemi-delayed-invasive',
@@ -231,6 +240,7 @@ export const NSTEMI_NODES = [
             monitoring: 'HR goal <70 bpm. Monitor for bradycardia, hypotension, fatigue, bronchospasm.',
         },
         next: 'nstemi-post-pci',
+        summary: 'TIMI 3 or failed conservative: cath 25-72h, P2Y12 loading, may defer P2Y12 until anatomy known, continue beta-blocker/statin/anticoag',
     },
     {
         id: 'nstemi-post-pci',
@@ -276,6 +286,8 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-cabg',
             },
         ],
+        summary: 'P2Y12 for 12mo DAPT: ticagrelor preferred (aspirin ≤100mg), prasugrel if high ischemic risk (CI if prior stroke), clopidogrel if on OAC',
+        safetyLevel: 'warning',
     },
     {
         id: 'nstemi-cabg',
@@ -327,6 +339,7 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-minoca',
             },
         ],
+        summary: 'Standard 12mo DAPT; de-escalation after 1-3mo if high bleed risk (HOST-REDUCE); extend beyond 12mo if high ischemic risk (PEGASUS)',
     },
     {
         id: 'nstemi-minoca',
@@ -368,6 +381,7 @@ export const NSTEMI_NODES = [
             monitoring: 'Cr and K+ 1-2 weeks after initiation/titration. Monitor for hypotension, hyperkalemia, cough (ACEi).',
         },
         next: 'nstemi-risk-factors',
+        summary: 'Five pillars post-ACS: DAPT, high-intensity statin, beta-blocker, ACEi/ARB, aldosterone antagonist if EF≤40%; PPI with DAPT (not omeprazole)',
     },
     {
         id: 'nstemi-risk-factors',
@@ -390,6 +404,7 @@ export const NSTEMI_NODES = [
                 next: 'nstemi-hf-management',
             },
         ],
+        summary: 'Target BP<130/80, LDL<70, HbA1c<7%, smoking cessation (NNT 12); cardiac rehab 36 sessions = 25% CV mortality reduction',
     },
     {
         id: 'nstemi-triple-therapy',

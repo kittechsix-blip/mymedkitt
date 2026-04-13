@@ -22,6 +22,8 @@ export const STROKE_NODES: DecisionNode[] = [
     calculatorLinks: [{ id: 'nihss', label: 'NIHSS Calculator' }],
     images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present (Wikimedia Commons, CC BY-SA 4.0)' }],
     next: 'stroke-deficit',
+    summary: 'Establish last-known-well time, get NIHSS, fingerstick glucose — CT to rule out hemorrhage before thrombolytics',
+    skippable: true,
   },
 
   {
@@ -44,6 +46,7 @@ export const STROKE_NODES: DecisionNode[] = [
         next: 'stroke-minor',
       },
     ],
+    summary: 'Classify deficit severity by NIHSS — disabling (>=6) routes to reperfusion, minor to DAPT pathway',
   },
 
   {
@@ -77,6 +80,7 @@ export const STROKE_NODES: DecisionNode[] = [
         next: 'stroke-late',
       },
     ],
+    summary: 'Time from last known well determines treatment window — 0-4.5h IVT, 4.5-9h extended, 9-24h EVT only',
   },
 
   // =====================================================================
@@ -122,6 +126,8 @@ export const STROKE_NODES: DecisionNode[] = [
         next: 'stroke-no-ivt',
       },
     ],
+    summary: 'Check contraindications and BP <185/110 before IVT — labetalol or nicardipine to control BP',
+    safetyLevel: 'critical',
   },
 
   {
@@ -151,6 +157,8 @@ export const STROKE_NODES: DecisionNode[] = [
       monitoring: 'BP <180/105 x 24h. Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. Any decline = emergent NCCT.',
     },
     next: 'stroke-lvo-check',
+    summary: 'Tenecteplase 0.25 mg/kg preferred single bolus — BP <180/105 x24h, no antithrombotics x24h, neuro checks q15min',
+    safetyLevel: 'critical',
   },
 
   {
@@ -173,6 +181,7 @@ export const STROKE_NODES: DecisionNode[] = [
         next: 'stroke-post-treatment',
       },
     ],
+    summary: 'Review CTA for LVO (ICA, M1, basilar) — LVO present activates neurointerventional team for EVT',
   },
 
   {
@@ -195,6 +204,7 @@ export const STROKE_NODES: DecisionNode[] = [
         next: 'stroke-antiplatelet-start',
       },
     ],
+    summary: 'IVT contraindicated but EVT still possible — get CTA for LVO regardless of thrombolysis eligibility',
   },
 
   // =====================================================================
