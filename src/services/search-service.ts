@@ -223,7 +223,29 @@ export function getAvailableFilterTypes(): { type: SearchFilterType; label: stri
   ];
 }
 
-/** Strict alphabetical prefix search - only matches items starting with query */
+/** Normalize string for prefix matching (remove hyphens, spaces, special chars) */
+function normalizeForSearch(str: string): string {
+  return str.toLowerCase().replace(/[-\s\/\\().,:']/g, '');
+}
+
+/** Check if title matches query prefix (handles "A-Fib" matching "af", "afib", etc.) */
+function matchesPrefix(title: string, query: string): boolean {
+  const normalizedTitle = normalizeForSearch(title);
+  const normalizedQuery = normalizeForSearch(query);
+
+  // Primary: normalized prefix match ("afib" matches "A-Fib RVR")
+  if (normalizedTitle.startsWith(normalizedQuery)) return true;
+
+  // Secondary: word-boundary prefix match (each word in title)
+  const words = title.toLowerCase().split(/[-\s\/\\]+/);
+  for (const word of words) {
+    if (word.startsWith(query)) return true;
+  }
+
+  return false;
+}
+
+/** Strict alphabetical prefix search - matches items starting with query */
 function alphabeticalPrefixSearch(query: string): SearchResult[] {
   const results: SearchResult[] = [];
   const categories = getAllCategories();
@@ -231,7 +253,7 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
 
   // Categories - prefix match on name
   for (const cat of categories) {
-    if (cat.name.toLowerCase().startsWith(query)) {
+    if (matchesPrefix(cat.name, query)) {
       results.push({
         type: 'category',
         label: cat.name,
@@ -239,10 +261,10 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
         route: `/category/${cat.id}`,
       });
     }
-    // Consults - prefix match on title
+    // Consults - prefix match on title OR id
     for (const tree of cat.decisionTrees) {
       if (seenTreeIds.has(tree.id)) continue;
-      if (tree.title.toLowerCase().startsWith(query)) {
+      if (matchesPrefix(tree.title, query) || tree.id.startsWith(query)) {
         seenTreeIds.add(tree.id);
         results.push({
           type: 'consult',
@@ -254,9 +276,9 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
     }
   }
 
-  // Drugs - prefix match on name only
+  // Drugs - prefix match on name
   for (const drug of getAllDrugs()) {
-    if (drug.name.toLowerCase().startsWith(query)) {
+    if (matchesPrefix(drug.name, query)) {
       results.push({
         type: 'drug',
         label: drug.name,
@@ -267,9 +289,9 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
     }
   }
 
-  // Calculators - prefix match on title only
+  // Calculators - prefix match on title
   for (const calc of getAllCalculators()) {
-    if (calc.title.toLowerCase().startsWith(query)) {
+    if (matchesPrefix(calc.title, query)) {
       results.push({
         type: 'calculator',
         label: calc.title,
