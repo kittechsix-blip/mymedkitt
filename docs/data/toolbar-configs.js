@@ -139,6 +139,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'hts', label: 'HTS', icon: '\uD83E\uDDC2', action: 'jump', target: 'na-hypo-emergency' },
         { id: 'fwd', label: 'FWD Calc', icon: '\uD83D\uDCA7', action: 'calculator', target: 'fwd' },
         { id: 'labs', label: 'Labs', icon: '\uD83E\uDDEA', action: 'jump', target: 'na-hypo-initial' },
+        { id: 'discharge', label: 'Discharge', icon: '\uD83C\uDFE0', action: 'overlay', target: 'na-discharge-criteria' },
     ],
     'neurosyphilis': [
         { id: 'iv-pcn', label: 'IV PCN Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'ns-confirmed' },

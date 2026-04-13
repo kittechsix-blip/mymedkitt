@@ -2169,6 +2169,50 @@ const NA_NON_HYPOTONIC_INFO = {
         { num: 2, text: 'Miller NE et al. Sodium Disorders: Hyponatremia and Hypernatremia. AFP. 2023;108(5):476-486.' },
     ],
 };
+// -------------------------------------------------------------------
+// Sodium Disorders — Safe Discharge Criteria
+// -------------------------------------------------------------------
+const NA_DISCHARGE_CRITERIA = {
+    id: 'na-discharge-criteria',
+    title: 'Sodium Disorders: Safe Discharge Criteria',
+    subtitle: 'Who can go home from the ED',
+    sections: [
+        {
+            heading: 'Hyponatremia — Safe for ED Discharge',
+            body: '**ALL of the following must be met:**\n\n✅ Na ≥130 mEq/L **OR** Na 125-129 with known chronic stable cause\n✅ Completely **asymptomatic** (no confusion, gait instability, headache, nausea)\n✅ **Cause identified** or workup can be completed outpatient\n✅ **Not high-risk for ODS**: no alcoholism, malnutrition, hypokalemia, liver disease\n✅ Reliable follow-up available (PCP or nephrology within 1 week)\n✅ Patient understands fluid restriction instructions if indicated\n✅ Not on medications requiring adjustment (thiazides, SSRIs)',
+        },
+        {
+            heading: 'Hyponatremia — Requires Admission',
+            body: '🚨 **Admit if ANY of the following:**\n\n• Na <125 mEq/L (any cause)\n• Na <130 mEq/L with any symptoms\n• Severe or moderate symptoms regardless of Na level\n• Requiring hypertonic saline\n• Requiring DDAVP clamp for controlled correction\n• High overcorrection risk (beer potomania, thiazide-induced, alcoholic, malnourished)\n• Underlying cause needs inpatient workup (new SIAD, concern for malignancy)\n• Unable to follow fluid restriction or no reliable follow-up',
+        },
+        {
+            heading: 'Hypernatremia — Safe for ED Discharge',
+            body: '**ALL of the following must be met:**\n\n✅ Na <150 mEq/L\n✅ **Asymptomatic** (no altered mental status, weakness, lethargy)\n✅ Cause is **simple dehydration** with intact thirst mechanism\n✅ Patient can drink adequate free water (PO intake intact)\n✅ No underlying DI or complex metabolic cause\n✅ Able to access free water independently\n✅ Follow-up Na check available within 1-3 days',
+        },
+        {
+            heading: 'Hypernatremia — Requires Admission',
+            body: '🚨 **Admit if ANY of the following:**\n\n• Na ≥150 mEq/L\n• Any neurologic symptoms (confusion, lethargy, weakness)\n• Unable to drink or swallow safely\n• Diabetes insipidus (central or nephrogenic)\n• Requires IV free water replacement\n• Elderly with impaired thirst or dependent on caregivers\n• Underlying cause unclear or needs workup\n• Hospital-acquired hypernatremia (reflects severe illness)',
+        },
+        {
+            heading: 'Discharge Instructions — Hyponatremia',
+            body: '**For patients discharged with mild hyponatremia (Na 130-134):**\n\n• **Fluid restriction**: Limit total fluids to 1-1.5 L/day\n• **Avoid**: Excessive water intake, electrolyte-free beverages\n• **Stop offending medications** if identified (thiazides, SSRIs)\n• **Recheck Na**: Within 1 week at PCP or lab\n• **Return immediately if**: confusion, severe headache, nausea/vomiting, gait problems, seizure\n• **Follow up with**: PCP (1 week), Nephrology if SIAD suspected',
+        },
+        {
+            heading: 'Discharge Instructions — Hypernatremia',
+            body: '**For patients discharged with mild hypernatremia:**\n\n• **Drink water regularly**: Set a schedule (do not rely on thirst alone)\n• **Goal intake**: At least 2-3 L/day of free water (water, not juice/soda)\n• **Avoid**: Caffeine, alcohol (increase water losses)\n• **Recheck Na**: Within 3 days\n• **Return immediately if**: confusion, severe weakness, unable to drink\n• **Elderly/caregivers**: Ensure someone provides water on a schedule',
+        },
+        {
+            heading: 'Important Considerations',
+            body: '⚠️ **Mild hyponatremia (130-134) is NOT benign:**\n• Associated with increased falls, fractures, cognitive impairment [1]\n• Increased mortality in outpatient settings [2]\n• Requires follow-up even if "asymptomatic"\n\n⚠️ **Most patients leave hospital still hyponatremic:**\n• Despite effective therapy, discharge often premature\n• Ensure cause is addressed, not just the number\n\n⚠️ **ODS symptoms are delayed:**\n• May not appear until 1-2 weeks after discharge\n• Counsel patients on warning signs: speech changes, dysphagia, quadriparesis',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Renneboog B, et al. Mild chronic hyponatremia is associated with falls. Am J Med. 2006;119(1):71.e1-8.' },
+        { num: 2, text: 'Miller NE et al. Sodium Disorders: Hyponatremia and Hypernatremia. AFP. 2023;108(5):476-486.' },
+        { num: 3, text: 'Hoorn EJ, Zietse R. Diagnosis and Treatment of Hyponatremia. JASN. 2017;28(5):1340-1349.' },
+        { num: 4, text: 'Spasovski G et al. Clinical Practice Guideline on Hyponatraemia. Eur J Endocrinol. 2014;170(3):G1-G47.' },
+    ],
+};
 const RABIES_SUMMARY = {
     id: 'rabies-summary',
     title: 'Rabies Steps Summary',
@@ -11986,6 +12030,7 @@ export const INFO_PAGES = {
     'na-ods-risk': NA_ODS_RISK,
     'na-lab-interpretation': NA_LAB_INTERPRETATION,
     'na-non-hypotonic-info': NA_NON_HYPOTONIC_INFO,
+    'na-discharge-criteria': NA_DISCHARGE_CRITERIA,
     'rabies-summary': RABIES_SUMMARY,
     'rabies-animal-risk': RABIES_ANIMAL_RISK,
     'rabies-ddx': RABIES_DDX,
