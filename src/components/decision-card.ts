@@ -30,6 +30,7 @@ export function createDecisionCard(node: DecisionNode, opts: CardOptions): HTMLE
   const card = document.createElement('div');
   card.className = 'decision-card';
   card.setAttribute('data-node-id', node.id);
+  card.setAttribute('translate', 'no'); // Prevent browser auto-translation
 
   if (opts.state === 'answered') {
     card.classList.add('decision-card--answered');
