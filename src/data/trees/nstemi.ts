@@ -99,7 +99,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Emergent Catheterization (<2 hours)',
-    body: '**Immediate PCI indicated.**\n\u2022 Activate cath lab\n\u2022 [UFH](#/drug/ufh) preferred anticoagulation (can titrate in cath lab)\n\u2022 If on fondaparinux: supplement with UFH 60 units/kg IV bolus (catheter thrombosis risk)\n\u2022 P2Y12 inhibitor loading: [Ticagrelor](#/drug/ticagrelor) 180 mg OR [Prasugrel](#/drug/prasugrel) 60 mg (if no prior stroke/TIA)\n\u2022 Consider [Metoprolol](#/drug/metoprolol) if HR >100 and no contraindications\n\u2022 Bedside [Echo (POCUS)](#/info/nstemi-pocus) for wall motion, EF, mechanical complications',
+    body: '**Immediate PCI indicated.**\n\u2022 Activate cath lab\n\u2022 [UFH](#/drug/ufh) preferred anticoagulation (can titrate in cath lab)\n\u2022 If on fondaparinux: supplement with UFH 60 units/kg IV bolus (catheter thrombosis risk)\n\u2022 P2Y12 inhibitor loading: [Ticagrelor](#/drug/ticagrelor) 180 mg OR [Prasugrel](#/drug/prasugrel) 60 mg (if no prior stroke/TIA)\n\u2022 Consider [Metoprolol](#/drug/metoprolol/acs) if HR >100 and no contraindications\n\u2022 Bedside [Echo (POCUS)](#/info/nstemi-pocus) for wall motion, EF, mechanical complications',
     recommendation: 'Emergent PCI. Activate cath lab immediately. UFH preferred. Load P2Y12 inhibitor.',
     confidence: 'definitive',
     citation: [1, 2],
@@ -158,7 +158,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Conservative (Ischemia-Guided) Strategy',
-    body: 'Low TIMI risk. Conservative management appropriate.\nSee [Conservative Management Details](#/info/nstemi-conservative)\n\nMedical therapy:\n\u2022 Continue anticoagulation (fondaparinux preferred \u2014 lowest bleeding)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) PRN chest pain\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO (start immediately)\n\u2022 [Clopidogrel](#/drug/clopidogrel/acs) 300 mg loading if no P2Y12 yet (ticagrelor also acceptable)\n\nStress test before discharge.',
+    body: 'Low TIMI risk. Conservative management appropriate.\nSee [Conservative Management Details](#/info/nstemi-conservative)\n\nMedical therapy:\n\u2022 Continue anticoagulation (fondaparinux preferred \u2014 lowest bleeding)\n\u2022 [Metoprolol](#/drug/metoprolol/acs) \u2014 target HR <70\n\u2022 [Nitroglycerin](#/drug/nitroglycerin) PRN chest pain\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO (start immediately)\n\u2022 [Clopidogrel](#/drug/clopidogrel/acs) 300 mg loading if no P2Y12 yet (ticagrelor also acceptable)\n\nStress test before discharge.',
     citation: [1, 5],
     treatment: {
       firstLine: {
@@ -203,7 +203,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Early Invasive Strategy (<24 hours)',
-    body: 'TIMI \u22654 (high risk). Cardiac catheterization within 24 hours.\n\n**Pre-PCI preparation:**\n\u2022 P2Y12 loading: [Ticagrelor](#/drug/ticagrelor) 180 mg preferred (PLATO: NNT 54 for CV death/MI/stroke)\n\u2022 Alternative: [Clopidogrel](#/drug/clopidogrel/acs) 600 mg if ticagrelor not available or on OAC\n\u2022 Continue anticoagulation (do NOT switch agents)\n\u2022 NPO (anticipate catheterization)\n\u2022 [Metoprolol](#/drug/metoprolol) \u2014 target HR <70 if tolerated\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO',
+    body: 'TIMI \u22654 (high risk). Cardiac catheterization within 24 hours.\n\n**Pre-PCI preparation:**\n\u2022 P2Y12 loading: [Ticagrelor](#/drug/ticagrelor) 180 mg preferred (PLATO: NNT 54 for CV death/MI/stroke)\n\u2022 Alternative: [Clopidogrel](#/drug/clopidogrel/acs) 600 mg if ticagrelor not available or on OAC\n\u2022 Continue anticoagulation (do NOT switch agents)\n\u2022 NPO (anticipate catheterization)\n\u2022 [Metoprolol](#/drug/metoprolol/acs) \u2014 target HR <70 if tolerated\n\u2022 [Atorvastatin](#/drug/atorvastatin) 80 mg PO',
     citation: [1, 2, 6],
     treatment: {
       firstLine: {
@@ -381,7 +381,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Discharge Medications',
-    body: '**The 5 pillars of post-ACS pharmacotherapy:**\n\n1. **DAPT:** Aspirin 81 mg + P2Y12 inhibitor \u00D7 12 months\n2. **Statin:** [Atorvastatin](#/drug/atorvastatin) 80 mg (or rosuvastatin 20\u201340 mg) \u2014 target LDL <70\n3. **Beta-blocker:** [Metoprolol](#/drug/metoprolol) succinate \u2014 continue if EF <40% or hypertension; may discontinue after 1 year if EF preserved\n4. **ACE inhibitor/ARB:** Start within 24h if EF \u226440%, hypertension, or diabetes. Consider for all post-ACS patients.\n5. **Aldosterone antagonist:** Add if EF \u226440% + HF symptoms or diabetes (EPHESUS trial)\n\nAlso: PPI if DAPT (GI prophylaxis \u2014 use pantoprazole, NOT omeprazole with clopidogrel)',
+    body: '**The 5 pillars of post-ACS pharmacotherapy:**\n\n1. **DAPT:** Aspirin 81 mg + P2Y12 inhibitor \u00D7 12 months\n2. **Statin:** [Atorvastatin](#/drug/atorvastatin) 80 mg (or rosuvastatin 20\u201340 mg) \u2014 target LDL <70\n3. **Beta-blocker:** [Metoprolol](#/drug/metoprolol/acs) succinate \u2014 continue if EF <40% or hypertension; may discontinue after 1 year if EF preserved\n4. **ACE inhibitor/ARB:** Start within 24h if EF \u226440%, hypertension, or diabetes. Consider for all post-ACS patients.\n5. **Aldosterone antagonist:** Add if EF \u226440% + HF symptoms or diabetes (EPHESUS trial)\n\nAlso: PPI if DAPT (GI prophylaxis \u2014 use pantoprazole, NOT omeprazole with clopidogrel)',
     citation: [1, 2],
     treatment: {
       firstLine: {
@@ -465,7 +465,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'result',
     module: 5,
     title: 'Post-MI Heart Failure Management',
-    body: 'EF \u226440% post-MI = high-risk. Initiate guideline-directed medical therapy (GDMT):\n\n**Core GDMT (start before discharge):**\n\u2022 ACE inhibitor or ARB (or ARNI if stable) \u2014 SAVE, VALIANT trials\n\u2022 Beta-blocker ([Metoprolol](#/drug/metoprolol) succinate or carvedilol) \u2014 CAPRICORN trial\n\u2022 Aldosterone antagonist (eplerenone 25\u201350 mg or spironolactone) if EF \u226440% + HF symptoms or diabetes \u2014 EPHESUS trial\n\u2022 SGLT2 inhibitor (empagliflozin or dapagliflozin) \u2014 EMPEROR-Reduced, DAPA-HF\n\n**Reassess EF at 3 months.** If persistent EF \u226435%: evaluate for ICD (40 days post-MI minimum).\n\nContinue DAPT + statin as planned.',
+    body: 'EF \u226440% post-MI = high-risk. Initiate guideline-directed medical therapy (GDMT):\n\n**Core GDMT (start before discharge):**\n\u2022 ACE inhibitor or ARB (or ARNI if stable) \u2014 SAVE, VALIANT trials\n\u2022 Beta-blocker ([Metoprolol](#/drug/metoprolol/acs) succinate or carvedilol) \u2014 CAPRICORN trial\n\u2022 Aldosterone antagonist (eplerenone 25\u201350 mg or spironolactone) if EF \u226440% + HF symptoms or diabetes \u2014 EPHESUS trial\n\u2022 SGLT2 inhibitor (empagliflozin or dapagliflozin) \u2014 EMPEROR-Reduced, DAPA-HF\n\n**Reassess EF at 3 months.** If persistent EF \u226435%: evaluate for ICD (40 days post-MI minimum).\n\nContinue DAPT + statin as planned.',
     recommendation: 'Initiate 4-pillar GDMT before discharge. Reassess EF at 3 months. Evaluate for ICD if EF \u226435% after 40 days.',
     confidence: 'definitive',
     citation: [1, 2],

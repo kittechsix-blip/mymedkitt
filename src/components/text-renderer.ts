@@ -39,10 +39,14 @@ export function renderBodyText(container: HTMLElement, text: string): void {
   }
 }
 
-/** Parse a single line for markdown links [text](url) and citation refs [N], rendering both. */
+/** Parse a single line for markdown links [text](url), citation refs [N], and weight-dose patterns (e.g. 0.5 mg/kg/hr). */
 function renderLineWithLinksAndCitations(container: HTMLElement, line: string): void {
-  // Combined pattern: markdown links OR citation references [N] (one or more digits)
-  const combinedPattern = /\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])/g;
+  // Three-way combined pattern:
+  //   1) Markdown links: [text](url)                          → groups 1,2
+  //   2) Citation refs: [N]                                   → groups 3,4
+  //   3) Weight-dose: optional ** + number unit/kg/time + **  → groups 5,6,7,8,9
+  // Markdown links match first (leftmost) so [Drug 0.5 mg/kg](#/drug/...) stays a drug link.
+  const combinedPattern = /\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])|(\*\*)?(\d+\.?\d*(?:\s*[-–]\s*\d+\.?\d*)?)\s*(mg|mcg|units?|U|mL|mEq|g)\/kg(?:\/(day|hr?|min|dose))?(\*\*)?/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = combinedPattern.exec(line)) !== null) {
@@ -82,6 +86,26 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
       btn.textContent = `[${num}]`;
       btn.addEventListener('click', () => scrollToCardCitation(num));
       container.appendChild(btn);
+    } else if (match[6] !== undefined) {
+      // Weight-dose pattern: e.g. "0.5 mg/kg/hr", "**0.1 U/kg/hr**"
+      const doseText = match[0].replace(/\*\*/g, '');
+      const boldOpen = match[5];
+      const boldClose = match[9];
+
+      const btn = document.createElement('button');
+      btn.className = 'dose-calc-link';
+      btn.textContent = doseText;
+      btn.setAttribute('data-link-type', 'calculator');
+      btn.setAttribute('data-link-id', 'weight-dose');
+      btn.setAttribute('aria-label', `Calculate ${doseText} dose`);
+
+      if (boldOpen && boldClose) {
+        const strong = document.createElement('strong');
+        strong.appendChild(btn);
+        container.appendChild(strong);
+      } else {
+        container.appendChild(btn);
+      }
     }
 
     lastIndex = match.index + match[0].length;

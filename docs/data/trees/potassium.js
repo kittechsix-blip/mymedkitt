@@ -91,7 +91,7 @@ export const POTASSIUM_NODES = [
         type: 'info',
         module: 2,
         title: 'Moderate Hyperkalemia Management',
-        body: '**[1] Treat definable causes:**\n\u2022 Discontinue offending medications and nephrotoxins\n\u2022 Establish euvolemia with adequate perfusion\n\u2022 Consider renal diet with limited K+ intake\n\n**[2] Gentle kaliuresis:**\n\u2022 [Furosemide](#/drug/furosemide) 40-80 mg IV \u2014 may be sufficient as sole diuretic\n\u2022 Replace urine volume with Lactated Ringers to maintain even fluid balance\n\nIf single diuretic fails \u2192 escalate to aggressive kaliuresis strategy.',
+        body: '**[1] Treat definable causes:**\n\u2022 Discontinue offending medications and nephrotoxins\n\u2022 Establish euvolemia with adequate perfusion\n\u2022 Consider renal diet with limited K+ intake\n\n**[2] Gentle kaliuresis:**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 40-80 mg IV \u2014 may be sufficient as sole diuretic\n\u2022 Replace urine volume with Lactated Ringers to maintain even fluid balance\n\nIf single diuretic fails \u2192 escalate to aggressive kaliuresis strategy.',
         citation: [1],
         treatment: {
             firstLine: {
@@ -258,7 +258,7 @@ export const POTASSIUM_NODES = [
         type: 'info',
         module: 3,
         title: 'Step 3: Kaliuresis (Diuretic Strategy)',
-        body: 'Scale diuretic intensity to severity of hyperkalemia and renal function.\n\n**Normal renal function:**\n\u2022 [Furosemide](#/drug/furosemide) 60-160 mg IV alone may suffice\n\n**Moderate-severe renal dysfunction ("nephron bomb"):**\n\u2022 [Furosemide](#/drug/furosemide) 160-250 mg IV (or [Bumetanide](#/drug/bumetanide) 4-5 mg IV)\n\u2022 + [Chlorothiazide](#/drug/chlorothiazide) 500-1000 mg IV (or [Metolazone](#/drug/metolazone) 5-10 mg PO)\n\u2022 +/- [Acetazolamide](#/drug/acetazolamide) 250-1000 mg IV/PO\n\u2022 +/- [Fludrocortisone](#/drug/fludrocortisone) 0.2 mg PO (esp. patients on ACEi/ARB, tacrolimus)\n\n**Replace urine losses** with crystalloid:\n\u2022 Bicarb < 22 \u2192 isotonic bicarbonate\n\u2022 Bicarb \u2265 22 \u2192 Lactated Ringers\n\nIn life-threatening hyperK, **err on the side of excessive diuretic**. Large-volume diuresis is easily corrected with crystalloid.',
+        body: 'Scale diuretic intensity to severity of hyperkalemia and renal function.\n\n**Normal renal function:**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 60-160 mg IV alone may suffice\n\n**Moderate-severe renal dysfunction ("nephron bomb"):**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 160-250 mg IV (or [Bumetanide](#/drug/bumetanide) 4-5 mg IV)\n\u2022 + [Chlorothiazide](#/drug/chlorothiazide) 500-1000 mg IV (or [Metolazone](#/drug/metolazone) 5-10 mg PO)\n\u2022 +/- [Acetazolamide](#/drug/acetazolamide) 250-1000 mg IV/PO\n\u2022 +/- [Fludrocortisone](#/drug/fludrocortisone/hyperkalemia) 0.2 mg PO (esp. patients on ACEi/ARB, tacrolimus)\n\n**Replace urine losses** with crystalloid:\n\u2022 Bicarb < 22 \u2192 isotonic bicarbonate\n\u2022 Bicarb \u2265 22 \u2192 Lactated Ringers\n\nIn life-threatening hyperK, **err on the side of excessive diuretic**. Large-volume diuresis is easily corrected with crystalloid.',
         citation: [1, 2],
         treatment: {
             firstLine: {
@@ -287,7 +287,7 @@ export const POTASSIUM_NODES = [
         type: 'question',
         module: 3,
         title: 'Assess Diuretic Response',
-        body: 'Monitor urine output. If the patient produces urine, check potassium content.\n\nIf making urine but K+ not falling \u2192 consider adding [Fludrocortisone](#/drug/fludrocortisone) 0.2 mg PO.\n\nCheck electrolytes (including Mg) frequently and replete as needed.',
+        body: 'Monitor urine output. If the patient produces urine, check potassium content.\n\nIf making urine but K+ not falling \u2192 consider adding [Fludrocortisone](#/drug/fludrocortisone/hyperkalemia) 0.2 mg PO.\n\nCheck electrolytes (including Mg) frequently and replete as needed.',
         citation: [1],
         options: [
             {
@@ -311,7 +311,7 @@ export const POTASSIUM_NODES = [
         type: 'info',
         module: 4,
         title: 'Step 4: Potassium Binders',
-        body: '[Lokelma (SZC)](#/drug/sodium-zirconium-cyclosilicate) **10 grams PO q8h**\n\nOnly **mildly effective** (~0.2 mM reduction at 4 hours, ~0.4 mM at 24 hours). Should NOT be relied upon as sole treatment.\n\nMay help **avoid or delay dialysis** in borderline cases.\n\n**Avoid Kayexalate** \u2014 antiquated, probably ineffective for acute hyperK, and can cause **colonic necrosis**.\n\nPatiromer is less effective than SZC (~0.23 mM at 7 hours). Only use if SZC unavailable.',
+        body: '[Lokelma (SZC)](#/drug/sodium-zirconium-cyclosilicate/acute hyperkalemia) **10 grams PO q8h**\n\nOnly **mildly effective** (~0.2 mM reduction at 4 hours, ~0.4 mM at 24 hours). Should NOT be relied upon as sole treatment.\n\nMay help **avoid or delay dialysis** in borderline cases.\n\n**Avoid Kayexalate** \u2014 antiquated, probably ineffective for acute hyperK, and can cause **colonic necrosis**.\n\nPatiromer is less effective than SZC (~0.23 mM at 7 hours). Only use if SZC unavailable.',
         citation: [1, 12, 13],
         treatment: {
             firstLine: {

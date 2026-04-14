@@ -111,7 +111,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 3,
         title: 'Rate Control in HFrEF (EF ≤40%)',
-        body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EF\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n**FIRST-LINE — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Use lower initial doses in decompensated HF\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
+        body: 'RATE CONTROL IN HEART FAILURE WITH REDUCED EF\n\n⚠️ **CONTRAINDICATED in HFrEF:**\n• Diltiazem — Class 3: Harm\n• Verapamil — Class 3: Harm\n• Non-dihydropyridine CCBs worsen HF outcomes and increase mortality\n\n**FIRST-LINE — Beta-Blockers:**\n• [Metoprolol](#/drug/metoprolol) 2.5–5 mg IV q5min, up to 15 mg total\n• Use lower initial doses in decompensated HF\n• [Esmolol](#/drug/esmolol) if rapid titration needed or hemodynamic uncertainty\n• Beta-blockers are guideline-directed therapy for HFrEF — safe when carefully dosed\n\n**SECOND-LINE — Digoxin:**\n• [Digoxin](#/drug/digoxin/a-fib rate control) 0.25–0.5 mg IV\n• Particularly useful in HFrEF — positive inotropic effect may be beneficial\n• Slow onset (~3 hours) — use as adjunct, not sole agent\n• Use low doses to avoid toxicity\n\n**ALTERNATIVE — Amiodarone:**\n• [Amiodarone](#/drug/amiodarone/a-fib rate control) 150 mg IV bolus, then 1 mg/min\n• Hemodynamically stable, safe in HFrEF\n• May achieve chemical cardioversion\n• Consider if beta-blocker contraindicated or insufficient\n\n**ADJUNCTIVE:**\n• IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2–4g — safe in all patients',
         citation: [1, 2, 3],
         treatment: {
             firstLine: {
@@ -192,7 +192,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 4,
         title: 'Cardioversion in HFrEF',
-        body: 'RHYTHM CONTROL IN HFrEF\n\nCardioversion may be particularly beneficial in HFrEF:\n• Loss of atrial kick worsens cardiac output\n• Tachycardia-induced cardiomyopathy may be reversible\n• Rhythm control may improve HF symptoms\n\n**Procedure:**\n1. Sedation with [Midazolam](#/drug/midazolam) or ketamine/midazolam\n2. Synchronized cardioversion at 200J biphasic\n3. [Amiodarone](#/drug/amiodarone) infusion post-cardioversion to maintain sinus\n\n**Anticoagulation consideration:**\n• If AF duration >48 hours and not anticoagulated, consider TEE first\n• Or anticoagulate for ≥3 weeks before elective cardioversion\n• Emergent cardioversion if hemodynamically compromised regardless of duration',
+        body: 'RHYTHM CONTROL IN HFrEF\n\nCardioversion may be particularly beneficial in HFrEF:\n• Loss of atrial kick worsens cardiac output\n• Tachycardia-induced cardiomyopathy may be reversible\n• Rhythm control may improve HF symptoms\n\n**Procedure:**\n1. Sedation with [Midazolam](#/drug/midazolam) or ketamine/midazolam\n2. Synchronized cardioversion at 200J biphasic\n3. [Amiodarone](#/drug/amiodarone/a-fib rate control) infusion post-cardioversion to maintain sinus\n\n**Anticoagulation consideration:**\n• If AF duration >48 hours and not anticoagulated, consider TEE first\n• Or anticoagulate for ≥3 weeks before elective cardioversion\n• Emergent cardioversion if hemodynamically compromised regardless of duration',
         citation: [1, 2, 3],
         treatment: {
             firstLine: {
@@ -247,7 +247,7 @@ export const AFIB_RVR_NODES = [
         module: 2,
         title: 'WPW + A-Fib Management',
         body: 'WPW with atrial fibrillation is a life-threatening emergency.\n\nAV nodal blocking agents are ABSOLUTELY CONTRAINDICATED \u2014 including beta-blockers, calcium channel blockers, digoxin, and IV amiodarone. These agents may paradoxically accelerate ventricular response through the accessory pathway and precipitate ventricular fibrillation.',
-        recommendation: 'Immediate [synchronized cardioversion](#/info/cardioversion-afib) (200J biphasic). If cardioversion is not immediately available, [Procainamide](#/drug/procainamide) may be used as a temporizing measure.',
+        recommendation: 'Immediate [synchronized cardioversion](#/info/cardioversion-afib) (200J biphasic). If cardioversion is not immediately available, [Procainamide](#/drug/procainamide/wpw) may be used as a temporizing measure.',
         confidence: 'definitive',
         citation: [2, 3],
         treatment: {
@@ -275,7 +275,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 2,
         title: 'Synchronized Cardioversion Protocol',
-        body: 'SYNCHRONIZED CARDIOVERSION PROTOCOL\n\n1. PREPARATION\n\u2022 Confirm synchronization is enabled on defibrillator\n\u2022 Apply pads: anterior/lateral placement preferred (EPIC trial)\n\u2022 Hyperinflation may impair conduction \u2014 cardiovert at end-expiration if possible\n\n2. SEDATION\n\u2022 Midazolam 3\u20135 mg IV bolus, additional 2 mg q2min PRN to adequate sedation\n\u2022 Alternative: MidaKet for patients resistant to midazolam\n\u2022 Flumazenil 0.5\u20131 mg IV available for reversal\n\n3. CARDIOVERSION\n\u2022 Start at 200J biphasic (use maximal energy available)\n\u2022 Escalate energy if initial attempt unsuccessful\n\n4. POST-CARDIOVERSION\n\u2022 Consider [Amiodarone](#/drug/amiodarone) to maintain sinus rhythm (150mg IV bolus, then 1 mg/min infusion)\n\u2022 Consider IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2\u20134g to enhance cardioversion success\n\u2022 If cardioversion not immediately feasible, IV [Amiodarone](#/drug/amiodarone) may be used as temporizing measure',
+        body: 'SYNCHRONIZED CARDIOVERSION PROTOCOL\n\n1. PREPARATION\n\u2022 Confirm synchronization is enabled on defibrillator\n\u2022 Apply pads: anterior/lateral placement preferred (EPIC trial)\n\u2022 Hyperinflation may impair conduction \u2014 cardiovert at end-expiration if possible\n\n2. SEDATION\n\u2022 Midazolam 3\u20135 mg IV bolus, additional 2 mg q2min PRN to adequate sedation\n\u2022 Alternative: MidaKet for patients resistant to midazolam\n\u2022 Flumazenil 0.5\u20131 mg IV available for reversal\n\n3. CARDIOVERSION\n\u2022 Start at 200J biphasic (use maximal energy available)\n\u2022 Escalate energy if initial attempt unsuccessful\n\n4. POST-CARDIOVERSION\n\u2022 Consider [Amiodarone](#/drug/amiodarone/a-fib rate control) to maintain sinus rhythm (150mg IV bolus, then 1 mg/min infusion)\n\u2022 Consider IV [Magnesium Sulfate](#/drug/magnesium-sulfate) 2\u20134g to enhance cardioversion success\n\u2022 If cardioversion not immediately feasible, IV [Amiodarone](#/drug/amiodarone/a-fib rate control) may be used as temporizing measure',
         citation: [1, 2, 5],
         treatment: {
             firstLine: {
@@ -305,7 +305,7 @@ export const AFIB_RVR_NODES = [
         module: 2,
         title: 'Post-Cardioversion Management',
         body: 'Patient has undergone or is undergoing cardioversion for hemodynamically unstable A-Fib RVR.',
-        recommendation: 'Continue [Amiodarone](#/drug/amiodarone) infusion to prevent recurrence. Monitor for reversion to A-Fib. Treat underlying precipitants (sepsis, PE, electrolyte abnormalities). Consider anticoagulation assessment once stabilized.',
+        recommendation: 'Continue [Amiodarone](#/drug/amiodarone/a-fib rate control) infusion to prevent recurrence. Monitor for reversion to A-Fib. Treat underlying precipitants (sepsis, PE, electrolyte abnormalities). Consider anticoagulation assessment once stabilized.',
         confidence: 'recommended',
         citation: [1],
         treatment: {
@@ -433,7 +433,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 4,
         title: 'Add Digoxin',
-        body: '[Digoxin](#/drug/digoxin)\n\n\u2022 Useful when hypotension limits further titration of beta-blockers or CCBs\n\u2022 Slow onset: ~3 hours to achieve rate control (vs 5 min for diltiazem)\n\u2022 Limited efficacy during exertion \u2014 slows primarily resting heart rate\n\u2022 \u26a0\ufe0f Post hoc analyses associate digoxin with increased mortality in A-Fib\n\u2022 Use at low doses, typically in combination with other AV nodal agents\n\u2022 May be particularly useful in patients with concurrent heart failure',
+        body: '[Digoxin](#/drug/digoxin/a-fib rate control)\n\n\u2022 Useful when hypotension limits further titration of beta-blockers or CCBs\n\u2022 Slow onset: ~3 hours to achieve rate control (vs 5 min for diltiazem)\n\u2022 Limited efficacy during exertion \u2014 slows primarily resting heart rate\n\u2022 \u26a0\ufe0f Post hoc analyses associate digoxin with increased mortality in A-Fib\n\u2022 Use at low doses, typically in combination with other AV nodal agents\n\u2022 May be particularly useful in patients with concurrent heart failure',
         citation: [1, 2, 3],
         treatment: {
             firstLine: {
@@ -454,7 +454,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 4,
         title: 'Switch to Amiodarone',
-        body: '[Amiodarone](#/drug/amiodarone)\n\n\u2022 Load with 150 mg IV bolus over 10 min, then 1 mg/min infusion\n\u2022 May need to re-bolus 150 mg x2\u20133 (total 150\u2013450 mg in boluses)\n\u2022 More hemodynamically stable than beta-blockers or CCBs\n\u2022 May achieve chemical cardioversion \u2014 beneficial if rhythm control desired\n\u2022 74% rate control achieved in clinical trials\n\u2022 \u26a0\ufe0f Do not conclude amiodarone has failed without adequate re-bolusing\n\u2022 If cardioversion occurs, continue infusion until critical illness resolves',
+        body: '[Amiodarone](#/drug/amiodarone/a-fib rate control)\n\n\u2022 Load with 150 mg IV bolus over 10 min, then 1 mg/min infusion\n\u2022 May need to re-bolus 150 mg x2\u20133 (total 150\u2013450 mg in boluses)\n\u2022 More hemodynamically stable than beta-blockers or CCBs\n\u2022 May achieve chemical cardioversion \u2014 beneficial if rhythm control desired\n\u2022 74% rate control achieved in clinical trials\n\u2022 \u26a0\ufe0f Do not conclude amiodarone has failed without adequate re-bolusing\n\u2022 If cardioversion occurs, continue infusion until critical illness resolves',
         citation: [1, 2, 5],
         treatment: {
             firstLine: {
@@ -475,7 +475,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 4,
         title: 'Consider Rhythm Control',
-        body: 'RHYTHM CONTROL STRATEGY\n\nConsider when rate control strategy has failed or in new-onset AF where conversion is desirable.\n\nStepwise approach:\n1. IV [Magnesium Sulfate](#/drug/magnesium-sulfate) infusion (front-line, excellent safety)\n2. [Amiodarone](#/drug/amiodarone) if magnesium alone insufficient\n3. DC cardioversion (especially in intubated patients)\n\nFactors favoring rhythm control:\n\u2022 New-onset AF (NOAF) \u2014 likely to revert\n\u2022 Pulmonary hypertension, mitral stenosis, diastolic dysfunction\n\u2022 Heart failure with reduced EF\n\u2022 Failure of rate control\n\nFactors favoring rate control:\n\u2022 Chronic/longstanding AF\n\u2022 Onset >48 hours without anticoagulation\n\u2022 Ongoing severe physiological stress',
+        body: 'RHYTHM CONTROL STRATEGY\n\nConsider when rate control strategy has failed or in new-onset AF where conversion is desirable.\n\nStepwise approach:\n1. IV [Magnesium Sulfate](#/drug/magnesium-sulfate) infusion (front-line, excellent safety)\n2. [Amiodarone](#/drug/amiodarone/a-fib rate control) if magnesium alone insufficient\n3. DC cardioversion (especially in intubated patients)\n\nFactors favoring rhythm control:\n\u2022 New-onset AF (NOAF) \u2014 likely to revert\n\u2022 Pulmonary hypertension, mitral stenosis, diastolic dysfunction\n\u2022 Heart failure with reduced EF\n\u2022 Failure of rate control\n\nFactors favoring rate control:\n\u2022 Chronic/longstanding AF\n\u2022 Onset >48 hours without anticoagulation\n\u2022 Ongoing severe physiological stress',
         citation: [1, 3, 7],
         treatment: {
             firstLine: {
