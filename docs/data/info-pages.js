@@ -11933,6 +11933,45 @@ const VERTIGO_REHAB_DISCHARGE = {
         { num: 2, text: 'Whitney SL, et al. Vestibular rehabilitation overview. Handb Clin Neurol. 2016;137:187-205.' },
     ],
 };
+const VERTIGO_CENTRAL_CHECKLIST = {
+    id: 'vertigo-central-checklist',
+    title: 'Proceed to Central Workup?',
+    subtitle: 'ANY single positive → stroke workup immediately',
+    sections: [
+        {
+            heading: '⚠️ How to use this checklist',
+            body: 'If your patient has **ANY ONE** of the findings below, **skip HINTS** and proceed directly to [Central Features Present — Stroke Pathway](#/node/vert-central-present).\n\nPosterior circulation strokes have a **~35% ED miss rate** [6]. CT head is only **7-16% sensitive** — MRI-DWI is required, and even that misses 20-35% in the first 24-48 hours [4,5].',
+        },
+        {
+            heading: '🔴 The Deadly D\'s',
+            body: '• **Dysarthria** — slurred or garbled speech\n• **Dysphagia** — difficulty swallowing, choking on saliva\n• **Diplopia** — double vision\n• **Dysmetria** — past-pointing on finger-to-nose, overshooting on heel-to-shin\n• **Dysphonia** — hoarseness or voice change\n• **Downbeat or direction-changing nystagmus** — does NOT suppress with fixation',
+        },
+        {
+            heading: '🔴 Red flags (non-D\'s)',
+            body: '• **New severe headache or neck pain** — vertebral artery dissection risk, especially with recent trauma or chiropractic manipulation\n• **Focal weakness, sensory loss, or facial droop** — any lateralizing sign\n• **Horner syndrome** — ptosis + miosis + anhidrosis (ipsilateral)\n• **Truncal ataxia — cannot sit or stand unassisted** — cerebellar stroke patients often CANNOT walk; vestibular neuritis patients CAN\n• **Altered mental status**\n• **Hiccups or loss of pain/temperature sensation** — Wallenberg syndrome (lateral medullary)\n• **New unilateral hearing loss** — AICA stroke until proven otherwise (labyrinthine artery)',
+        },
+        {
+            heading: '🔴 HINTS central findings (if HINTS performed)',
+            body: '• **Direction-changing, vertical, or pure torsional nystagmus** — remove fixation first (Frenzel goggles, ophthalmoscope trick, or paper trick)\n• **Normal HIT** (no catch-up saccade) in an AVS patient — counterintuitive: "Normal HIT in AVS = NOT nice"\n• **Vertical skew deviation** on alternate cover test — 98% specificity for central lesion, most specific HINTS finding\n• **New unilateral sensorineural hearing loss** — HINTS+ finding, AICA territory',
+        },
+        {
+            heading: '🔴 The gait test',
+            body: '**Ask the patient to walk.**\n\n• Vestibular neuritis: unsteady but **CAN walk** with assistance, falls toward affected side\n• Cerebellar stroke: often **CANNOT walk unaided**, truncal ataxia, wide-based gait\n\n**"Cannot walk" in an AVS patient is a critical red flag** that should trigger imaging regardless of other findings.',
+        },
+        {
+            heading: '➡️ If ANY positive — next steps',
+            body: '1. **Activate stroke team** / neurology consult\n2. **Establish last known well time** — determines thrombolytic window\n3. **MRI-DWI + CTA/MRA head and neck** — CT alone is inadequate\n4. Continuous cardiac monitoring, IV × 2, NPO\n5. [NIHSS](#/calculator/nihss) — but remember: NIHSS **underscores** posterior circulation strokes\n6. If within thrombolytic window → [Stroke Consult](#/tree/stroke)\n\n**Do NOT be reassured by young age.** Vertebral dissection causes cerebellar stroke in patients in their 30s-40s. Up to 20% of posterior circulation strokes occur in patients <55 [12].',
+        },
+    ],
+    citations: [
+        { num: 2, text: 'Kattah JC, Talkad AV, Wang DZ, et al. HINTS to diagnose stroke in the acute vestibular syndrome. Stroke. 2009;40(11):3504-3510.' },
+        { num: 4, text: 'Oppenheim C, et al. False-negative diffusion-weighted MR findings in acute ischemic stroke. AJNR Am J Neuroradiol. 2000;21(8):1434-1440.' },
+        { num: 5, text: 'Simonsen CZ, et al. Sensitivity of diffusion-weighted imaging in posterior circulation. Neurology. 2015;85(20):1785-1788.' },
+        { num: 6, text: 'Arch AE, et al. Missed ischemic stroke diagnosis in the emergency department. Stroke. 2016;47(3):668-673.' },
+        { num: 9, text: 'Tarnutzer AA, et al. Does my dizzy patient have a stroke? CMAJ. 2011;183(9):E571-E592.' },
+        { num: 12, text: 'Saber Tehrani AS, et al. Small strokes causing severe vertigo. Neurology. 2014;83(2):169-173.' },
+    ],
+};
 export const INFO_PAGES = {
     // Vertigo
     'vertigo-summary': VERTIGO_SUMMARY,
@@ -11945,6 +11984,7 @@ export const INFO_PAGES = {
     'vertigo-imaging-guide': VERTIGO_IMAGING_GUIDE,
     'vertigo-post-circ-evidence': VERTIGO_POST_CIRC_EVIDENCE,
     'vertigo-rehab-discharge': VERTIGO_REHAB_DISCHARGE,
+    'vertigo-central-checklist': VERTIGO_CENTRAL_CHECKLIST,
     // TIF
     'tif-steps': TIF_STEPS_SUMMARY,
     'tif-utley-steps': TIF_UTLEY_STEPS,
