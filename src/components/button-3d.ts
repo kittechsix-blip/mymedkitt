@@ -41,8 +41,9 @@ export function getSpecialtyGradient(specialtyId: string): string {
 /** Create a 3D glossy button element */
 export function create3DButton(label: string, opts: Button3DOptions = {}): HTMLButtonElement {
   const btn = document.createElement('button');
-  btn.className = 'btn-3d';
+  btn.className = 'btn-3d notranslate';
   btn.type = 'button';
+  btn.setAttribute('translate', 'no');
 
   const variant = opts.variant ?? 'charcoal';
 
