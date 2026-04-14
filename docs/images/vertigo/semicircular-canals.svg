@@ -2,7 +2,7 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 685 520" font-family="DejaVu Sans, sans-serif" font-size="20">
 
   <title>Anatomy of the Human Ear</title>
-  <desc>Translations are included for Bangla, Basque, Chinese, Danish, English, Esperanto, Farsi, Finnish, French, German, Hebrew, Malayalam, Nepali, Punjabi, Russian, Spanish, Tamil, Telugu, Thai, Turkish. Other languages can easily be added.</desc>
+  <desc>English-only version of ear anatomy diagram</desc>
 
   <defs>
     <linearGradient id="a" gradientTransform="matrix(1 0 0 .92286 100.75 41.36)" x1="629" x2="762.64" xlink:href="#b" y1="239.68" y2="241.42"/>
@@ -19,12 +19,12 @@
       <stop offset="0" stop-color="#fce94f"/>
       <stop offset="1" stop-color="#fce94f" stop-opacity="0"/>
     </linearGradient>
-    
+
     <marker id="dot" refX="5" refY="5" markerWidth="10" markerHeight="10">
       <circle cx="5" cy="5" r="1.5"/>
     </marker>
   </defs>
-  
+
  <path d="m164.36 16.603 21.799-.066 6.363 69.682 17.383 85.499c13.881 14.188 27.273 28.908 51.226 32.107 34.201 1.035 68.129 2.008 107.82-6.278 0 0 29.038-13.183 42.599-21.492 14.395-8.82 24.106-27.842 40.859-29.927 10.706-1.332 13.583-4.948 32.896-.46 23.551 5.473 30.65 24.955 51.601 36.486 29.995 16.508 54.341 16.555 85.428 21.763l6.197 33.222 3.96 39.551.461 53.971-86.491 75.459-30.654 29.478-52.624 56.596-4.728-108.06s-49.09-27.647-62.404-17.307c-20.247 15.724-27.473 71.833-27.473 71.833-23.333 3.682-15.595 3.163-29.4-22.835l-25.203-48.752-31.604-6.006-14.287 4.294-16.174-11.916c-.154-3.542.046-28.196-.108-15.662 17.533-8.732 35.42-6.09 52.954-6.57l62.719 12.97 22.712-2.999-39.399-75.859c-17.104-9.864-38.945-7.094-58.568-10.241l-52.062 7.756-29.213-2.592-22.479-27.528c-9.149-19.531-4.741-44.314-6.279-65.537z" fill="#fea" fill-rule="evenodd" opacity=".5"/>
  <path d="m137.37 16.85h25.456l17.621 152.67 3.43 52.515 27.823 37.618 27.745 2.933c19.896 1.791 84.328-15.754 104.02-1.513 27.475 19.871 32.976 65.571 46.896 83.068 4.406 5.538-48.181.468-36.724.182 10.256-.256-65.089-20.161-101.92-2.724-.274 9.991 3.591 16.75 13.148 22.403 6.487 3.838 5.524-2.319 16.063-2.816 14.345-.678 20.223-1.579 34.643 8.154 9.923 6.698 32.697 61.971 43.192 69.931 15.938 12.089 19.064-46.363 30.628-65.411 4.474-7.37 8.135-11.974 21.276-10.169 6.522.896 41.731 6.961 47.495 23.66 12.727 36.873.02 97.415 3.767 100.43l-310.42 1.414-8.109-50.238c-5.359 26.558-11.822 47.755-30.163 11.259l-5.548-44.225c-1.536-6.366-4.736-11.901.892-21.85l19.7-5.232 7.848-36.786-3.634-67.668c-8.688-5.876-9.799-16.298-9.146-27.779l16.859-3.374c14.236-11.374 2.547-23.455-4.95-34.122l-24.142-4.246-4.433-14.819 11.832-21.25c-1.536-15.158-7.743-24.087-14.875-31.783 4.793-30.438 27.825-30.199 42.477-7.019z" fill="#ffd5d5" fill-rule="evenodd" opacity=".5"/>
  <path d="m536.15 230.63c6.319-8.401 47.536 1.044 92.907 6.5l8.608 39.322c-28.252 2.834-39.624 7.769-67.212 20.107-16.512 5.098-31.207-7.211-36.305-23.509-1.364-4.36-2.166-7.071-2.699-8.918-1.794-6.212 7.626-10.876 7.509-10.856-.897-.206-8.444-2.404-7.963-8.598.652-8.389 1.725-11.259 5.155-14.048z" fill="#dee3db"/>
@@ -101,354 +101,46 @@
  <path d="m512.87 188.92c15.909 12.786 50.015 17.072 99.416 22.788-1.348 2.047.566 7.003-4.206 8.018-12.3 2.616-39.88-1.535-65.945-5.039-16.097-2.164-28.713 12.116-33.434 10.217-12.314-4.954 4.206-48.066 4.169-35.984z" fill="#fce94f"/>
  <path d="m153.77 18.694 9.082-.43c3.292 53.031 10.87 107.57 9.808 161.69h-5.358c-8.375-50.746-8.591-108.8-13.532-161.26z" fill="#de8787" fill-rule="evenodd"/>
  <path d="m167.18 179.45 5.592-1.076-2.151 55.709-3.872-29.253z" fill="#ac9393" fill-rule="evenodd"/>
-  
+
  <g stroke="#000" stroke-linejoin="round" fill="none" stroke-width="2">
   <path id="Nervo_coclear" d="m571.97 268.85 20.332 33.547" marker-start="url(#dot)"/>
-  <switch id="heliko" marker-start="url(#dot)">
-   <path id="ta_நத்தைச்சுருள்" systemLanguage="ta" d="m511.73 321.21 37.298 34.157" marker-start="url(#dot)"/>
-   <path id="heliko_default" d="m511.73 321.21 40.603 42.971" marker-start="url(#dot)"/>
-  </switch>
-  <switch id="Kanaloj_semicirculares" marker-start="url(#dot)">
-   <path id="de_Kanaloj_semicirculares" systemLanguage="de" d="m476.31 182.2 37.693-91.569" marker-start="url(#dot)"/>
-   <path id="Kanaloj_semicirculares_default" d="m476.31 182.2 87.693-71.569" marker-start="url(#dot)"/>
-  </switch>
-  <switch id="Nordo_Vestibular" marker-start="url(#dot)">
-   <path id="Nordo_Vestibular_default" systemLanguage="de" d="m564.14 243.77 16.718-89.548" marker-start="url(#dot)"/>
-   <path id="de_Nordo_Vestibular" d="m564.14 243.77 16.718-59.548" marker-start="url(#dot)"/>
-  </switch>
-  <switch id="piedingo_kunigitaj_al_ovala_fenestro" marker-end="url(#dot)">
-   <path id="ta_ஸ்டேபிள்ஸ்_ஓவல்_சாளரத்துடன்_இணைக்கப்பட்டுள்ளது" systemLanguage="ta, te, th" d="m474.77 89.005-40.789 169.93" style="fill:none;marker-end:url(#dot);stroke-linejoin:round;stroke-width:2"/>
-   <path id="piedingo_kunigitaj_al_ovala_fenestro_default" d="m386.63 92.31 47.347 166.62" marker-end="url(#dot)"/>
-  </switch>
-  <switch id="martelo" marker-start="url(#dot)">
-   <path id="ta_சம்மட்டியுருவெலும்பு" systemLanguage="ta" d="m355.82 234.3-39.098-39.004" style="marker-start:url(#dot)"/>
-   <path id="martelo_default" d="m355.82 234.3 -87.022-65.445" marker-start="url(#dot)"/>
-  </switch>
+  <path id="heliko" d="m511.73 321.21 40.603 42.971" marker-start="url(#dot)"/>
+  <path id="Kanaloj_semicirculares" d="m476.31 182.2 87.693-71.569" marker-start="url(#dot)"/>
+  <path id="Nordo_Vestibular" d="m564.14 243.77 16.718-59.548" marker-start="url(#dot)"/>
+  <path id="piedingo_kunigitaj_al_ovala_fenestro" d="m386.63 92.31 47.347 166.62" marker-end="url(#dot)"/>
+  <path id="martelo" d="m355.82 234.3 -87.022-65.445" marker-start="url(#dot)"/>
   <path id="Inko" d="m378.43 239.92 -22.751 -84.909" marker-start="url(#dot)"/>
   <path id="Timpana_Membrano" d="m357.86 300.46 -75.378 147.59" marker-start="url(#dot)"/>
-  <switch id="Ronda_Fenestro" marker-start="url(#dot)">
-   <path id="ta_வட்ட_சாளரம்" systemLanguage="de, fi, ta, te" d="m435.8 295.69c28.466 76.327 58.638 105.09-7.1936 165.97" marker-start="url(#dot)"/>
-   <path id="ru_Ronda_Fenestro" systemLanguage="ru" d="m435.8 295.69 c28 76 20 105 -7.1936 165.97" marker-start="url(#dot)"/>
-   <path id="Ronda_Fenestro_default" d="m435.8 295.69 -9.397 150.55" marker-start="url(#dot)"/>
-  </switch>
+  <path id="Ronda_Fenestro" d="m435.8 295.69 -9.397 150.55" marker-start="url(#dot)"/>
   <path id="Eustachia_Tubo" d="m507.8 397.73 -13.637 61.114" marker-start="url(#dot)"/>
   <path id="Ekstera_Okaza_Kanalo" d="m206.4 376.45 5.354-69.802" marker-end="url(#dot)"/>
   <path id="timpano" d="m370.11 391.92 41.5-62.5" marker-end="url(#dot)"/>
-  <switch id="Auriklo" marker-end="url(#dot)">
-   <path id="ta_வெளிக்காது" systemLanguage="ta" d="m38.872 407.02 30.122-55.564" style="fill:none;marker-end:url(#dot);stroke-linejoin:round;stroke-width:2"/>
-   <path id="Auriklo_default" d="m32.64 416.76 36.354-65.302" marker-end="url(#dot)"/>
-  </switch>
+  <path id="Auriklo" d="m32.64 416.76 36.354-65.302" marker-end="url(#dot)"/>
  </g>
-  
-  <switch transform="translate(324 145)">
-    <text systemLanguage="bn">ইনকাস</text>
-    <text systemLanguage="da" x="-10">Armbolt</text>
-    <text systemLanguage="de" x="-10">Amboss</text>
-    <text systemLanguage="en">Incus</text>
-    <text systemLanguage="eo">Inko</text>
-    <text systemLanguage="es">Yunque</text>
-    <text systemLanguage="eu" x="-15">Ingudea</text>
-    <text systemLanguage="fa">سندانی</text>
-    <text systemLanguage="fi" text-anchor="middle" x="30">Alasin</text>
-    <text systemLanguage="fr" text-anchor="middle" x="30">Enclume</text>
-    <text systemLanguage="he">אינקוס</text>
-    <text systemLanguage="ml" x="-25" y="-10">ഇൻകസ്</text>
-    <text systemLanguage="ne">इन्सस</text>
-    <text systemLanguage="pa">ਇਨਕਸ</text>
-    <text systemLanguage="ru" x="-60">наковальня</text>
-    <text systemLanguage="ta" text-anchor="middle"><tspan x="35" y="-20">பட்டை</tspan><tspan x="40" y="0">சிற்றெலும்பு</tspan></text>
-    <text systemLanguage="te">దాగలి</text>
-    <text systemLanguage="th">กระดูกรูปทั่ง</text>
-    <text systemLanguage="tr">Örs</text>
-    <text systemLanguage="zh">砧骨</text>
-    <text>Incus</text>
-  </switch>
-  
-  <switch transform="translate(222 162)">
-    <text systemLanguage="bn">ম্যালিয়াস</text>
-    <text systemLanguage="da">Hammer</text>
-    <text systemLanguage="de">Hammer</text>
-    <text systemLanguage="en">Malleus</text>
-    <text systemLanguage="eo">martelo</text>
-    <text systemLanguage="es">Martillo</text>
-    <text systemLanguage="eu">Mailua</text>
-    <text systemLanguage="fa">چکشی</text>
-    <text systemLanguage="fi">Vasara</text>
-    <text systemLanguage="fr">Marteau</text>
-    <text systemLanguage="he">מאליוס</text>
-    <text systemLanguage="ml">മാലിയസ്</text>
-    <text systemLanguage="ne">हथौडा</text>
-    <text systemLanguage="pa" x="-5">ਮੈਲੀਅਸ ਹੱਡੀ</text>
-    <text systemLanguage="ru">молоточек</text>
-    <text systemLanguage="ta" transform="rotate(56.201)" x="80" y="-54" text-anchor="end">சம்மட்டியுருவெலும்பு</text>
-    <text systemLanguage="te">కూటకాస్థి</text>
-    <text systemLanguage="th">กระดูกรูปค้อน</text>
-    <text systemLanguage="tr">Çekiç</text>
-    <text systemLanguage="zh">锤骨</text>
-    <text>Malleus</text>
-  </switch>
-    
-  <switch transform="translate(560 85)" text-anchor="middle">
-    <text systemLanguage="bn">অর্ধবৃত্তাকার<tspan x="0" y="25">নালী</tspan></text>
-    <text systemLanguage="da">Semicirkulære<tspan x="0" y="20">kanaler</tspan></text>
-    <text systemLanguage="de">Bogengänge</text>
-    <text systemLanguage="en">Semicircular<tspan x="0" y="20">canals</tspan></text>
-    <text systemLanguage="eo">Kanaloj<tspan x="0" y="20">semicirculares</tspan></text>
-    <text systemLanguage="es">Canales<tspan x="0" y="20">semicirculares</tspan></text>
-    <text systemLanguage="eu">Hodi<tspan x="0" y="20">erdizirkularrak</tspan></text>
-    <text systemLanguage="fa">کانال‌های<tspan x="0" y="20">نیم‌دایره</tspan></text>
-    <text systemLanguage="fi"><tspan x="0" y="20">Kaarikäytävät</tspan></text>
-    <text systemLanguage="fr">Canaux<tspan x="0" y="20">semi-circulaires</tspan></text>
-    <text systemLanguage="he">תעלות<tspan x="0" y="20">בצורת חצי עיגול</tspan></text>
-    <text systemLanguage="ml" x="10">അർദ്ധവൃത്താകാര<tspan x="10" y="20">നാളങ്ങൾ</tspan></text>
-    <text systemLanguage="ne">अर्धरात्रिक<tspan x="0" y="20">नहर</tspan></text>
-    <text systemLanguage="pa" y="-5">ਅਰਧ-ਚੱਕਰਾਕਾਰ<tspan x="0" y="20">ਨਾਲੀਆਂ</tspan></text>
-    <text systemLanguage="ru">полукружные<tspan x="0" y="20">каналы</tspan></text>
-    <text systemLanguage="ta"><tspan x="0" y="-20">அரை</tspan><tspan x="0" y="0">வட்ட</tspan><tspan x="0" y="20">வட்டங்கள்</tspan></text>
-    <text systemLanguage="te">అర్థచంద్రాకార<tspan x="0" y="20">కాలువలు</tspan></text>
-    <text systemLanguage="th">หลอดกึ่งวงกลม</text>
-    <text systemLanguage="tr">Semisirküler<tspan x="0" y="20">kanallar</tspan></text>
-    <text systemLanguage="zh">半规管</text>
-    <text>Semicircular<tspan x="0" y="20">canals</tspan></text>
-  </switch>
-  
-  <switch transform="translate(551 159)">
-    <text systemLanguage="bn">ভেস্টিবুলার<tspan x="0" y="25">স্নায়ু</tspan></text>
-    <text systemLanguage="da">Vestibulær<tspan x="0" y="20">nerven</tspan></text>
-    <text systemLanguage="de" x="-30" y="-30">Nerv des<tspan x="-53" y="-10">Vestibular-Organs</tspan></text>
-    <text systemLanguage="en">Vestibular<tspan x="0" y="20">nerve</tspan></text>
-    <text systemLanguage="eo">Nordo<tspan x="0" y="20">Vestibular</tspan></text>
-    <text systemLanguage="es">Nervio<tspan x="0" y="20">vestibular</tspan></text>
-    <text systemLanguage="eu">Nerbio<tspan x="0" y="20">bestibularra</tspan></text>
-    <text systemLanguage="fa">عصب<tspan x="0" y="20">دهلیزی</tspan></text>
-    <text systemLanguage="fi"><tspan x="-35" y="10">Tasapainohermo</tspan></text>
-    <text systemLanguage="fr">Nerf<tspan x="0" y="20">vestibulaire</tspan></text>
-    <text systemLanguage="he">עצב<tspan x="0" y="20">שיווי המשקל</tspan></text>
-    <text systemLanguage="ml" x="-30" y="0">വെസ്റ്റിബ്യൂളാർ<tspan x="5" y="22">നാഡി</tspan></text>
-    <text systemLanguage="ne">दन्त<tspan x="0" y="20">तंत्रिका</tspan></text>
-    <text systemLanguage="pa" y="-5">ਵੈਸਟੀਬਿਊਲਰ<tspan x="0" y="20">ਨਾੜੀਆਂ</tspan></text>
-    <text systemLanguage="ru" x="-30">вестибулярный<tspan x="0" y="20">корешок</tspan></text>
-    <text systemLanguage="ta"><tspan x="124" text-anchor="end">வெஸ்டிபுலார்</tspan><tspan x="0" y="20">நர்வ்</tspan></text>
-    <text systemLanguage="te">నడవడిక</text>
-    <text systemLanguage="th">เส้นประสาท<tspan x="0" y="20">รับการทรงตัว</tspan></text>
-    <text systemLanguage="tr">Vestibüler<tspan x="0" y="20">sinir</tspan></text>
-    <text systemLanguage="zh">前庭神经</text>
-    <text>Vestibular<tspan x="0" y="20">nerve</tspan></text>
-  </switch>
-  
-  <switch transform="translate(563 323)">
-    <text systemLanguage="bn">ককলিয়ার<tspan x="0" y="25">স্নায়ু</tspan></text>
-    <text systemLanguage="da">Hørenerven</text>
-    <text systemLanguage="de">Hörnerv</text>
-    <text systemLanguage="en">Cochlear<tspan x="0" y="20">nerve</tspan></text>
-    <text systemLanguage="eo">Nervo<tspan x="0" y="20">coclear</tspan></text>
-    <text systemLanguage="es">Nervio<tspan x="0" y="20">coclear</tspan></text>
-    <text systemLanguage="eu">Entzumen-<tspan x="0" y="20">nerbioa</tspan></text>
-    <text systemLanguage="fa">عصب<tspan x="0" y="20">حلزونی</tspan></text>
-    <text systemLanguage="fi"><tspan x="-20" y="0">Kuulohermo</tspan></text>
-    <text systemLanguage="fr">Nerf<tspan x="0" y="20">cochléaire</tspan></text>
-    <text systemLanguage="he">עורק<tspan x="0" y="20">שבלול</tspan></text>
-    <text systemLanguage="ml">കോക്ലിയർ<tspan x="0" y="25">നാഡി</tspan></text>
-    <text systemLanguage="ne">cochlearis<tspan x="0" y="20">स्नायु</tspan></text>
-    <text systemLanguage="pa">ਕੋਚਲੀਅਰ<tspan x="0" y="25">ਨਾੜੀ</tspan></text>
-    <text systemLanguage="ru">улитковый<tspan x="0" y="20">корешок</tspan></text>
-    <text systemLanguage="ta">கோக்ளிர்<tspan x="0" y="20">நரர்</tspan></text>
-    <text systemLanguage="te">కంబునాడి</text>
-    <text systemLanguage="th">เส้นประสาท<tspan x="0" y="20">รับการได้ยิน</tspan></text>
-    <text systemLanguage="tr">Koklear<tspan x="0" y="20">sinir</tspan></text>
-    <text systemLanguage="zh">蜗神经</text>
-    <text>Cochlear<tspan x="0" y="20">nerve</tspan></text>
-  </switch>
-  
-  <switch transform="translate(473 478)">
-    <text systemLanguage="bn">ইউস্টেশিয়ান<tspan x="0" y="25">নালী</tspan></text>
-    <text systemLanguage="da">Øretrompet</text>
-    <text systemLanguage="de">Eustachische Röhre</text>
-    <text systemLanguage="en">Eustachian tube</text>
-    <text systemLanguage="eo">Eustachia Tubo</text>
-    <text systemLanguage="es">Trompa de Eustaquio</text>
-    <text systemLanguage="eu">Eustakioren tronpa</text>
-    <text systemLanguage="fa">شیپور استاش</text>
-    <text systemLanguage="fi">Korvatorvi</text>
-    <text systemLanguage="fr">Trompe d'Eustache</text>
-    <text systemLanguage="he">צינור אוסטאצ'יאני</text>
-    <text systemLanguage="ml">യൂസ്റ്റേക്കിയൻ<tspan x="0" y="25">കുഴൽ</tspan></text>
-    <text systemLanguage="ne">Eustachiana ट्यूब</text>
-    <text systemLanguage="pa" y="5">ਗਲੇ ਨੂੰ ਜਾਂਦੀ ਹੋਈ ਨਾਲੀ</text>
-    <text systemLanguage="ru">евстахиева труба</text>
-    <text systemLanguage="ta">யூஸ்டிக் டூப்</text>
-    <text systemLanguage="te" x="20">పటహపూరణనాడిక</text>
-    <text systemLanguage="th">ท่อหู</text>
-    <text systemLanguage="tr">Östaki borusu</text>
-    <text systemLanguage="zh">咽鼓管</text>
-    <text>Eustachian tube</text>
-  </switch>
-  
-  <switch transform="translate(257 473)" text-anchor="middle">      
-    <text systemLanguage="bn">টিমপেনিক পর্দা</text>
-    <text systemLanguage="da">Trommehinden</text>
-    <text systemLanguage="de">Trommelfell</text>
-    <text systemLanguage="en">Tympanic<tspan x="0" y="20">membrane</tspan></text>
-    <text systemLanguage="eo">Timpana<tspan x="0" y="20">Membrano</tspan></text>
-    <text systemLanguage="es">Membrana<tspan x="0" y="20">timpánica</tspan></text>
-    <text systemLanguage="eu">Tinpanoa</text>
-    <text systemLanguage="fa">پرده<tspan x="0" y="20">گوش</tspan></text>
-    <text systemLanguage="fi">Tärykalvo</text>
-    <text systemLanguage="fr">Tympan</text>
-    <text systemLanguage="he">ממברנה<tspan x="0" y="20">טימפאנית</tspan></text>
-    <text systemLanguage="ml">റ്റിമ്പാനിക്<tspan x="0" y="20">സ്തരം</tspan></text>
-    <text systemLanguage="ne">टेम्पाइनिक<tspan x="0" y="20">झिल्ली</tspan></text>
-    <text systemLanguage="pa">ਟਿਮਪੈਨਿਕ ਮੈਂਬਰੇਨ</text>
-    <text systemLanguage="ru">барабанная<tspan x="0" y="20">перепонка</tspan></text>
-    <text systemLanguage="ta">டிமென்ட்பிக்<tspan x="0" y="20">மெம்பிரேன்</tspan></text>
-    <text systemLanguage="te">కణభేరి పొర</text>
-    <text systemLanguage="th">แก้วหู</text>
-    <text systemLanguage="tr">Kulak<tspan x="0" y="20">zarı</tspan></text>
-    <text systemLanguage="zh">鼓膜</text>
-    <text>Tympanic<tspan x="0" y="20">membrane</tspan></text>
-  </switch>
-    
-  <switch transform="translate(206 401)" text-anchor="middle">
-    <text systemLanguage="bn">কর্ণকুহর</text>
-    <text systemLanguage="da">Øregangen</text>
-    <text systemLanguage="de">äußerer<tspan x="0" y="20">Gehörgang</tspan></text>
-    <text systemLanguage="en">External<tspan x="0" y="20">auditory canal</tspan></text>
-    <text systemLanguage="eo">Ekstera<tspan x="0" y="20">Okaza Kanalo</tspan></text>
-    <text systemLanguage="es">Canal<tspan x="0" y="20">auditivo externo</tspan></text>
-    <text systemLanguage="eu">Kanpo-entzunbidea</text>
-    <text systemLanguage="fa">مجرای<tspan x="0" y="20">شنوایی خارجی</tspan></text>
-    <text systemLanguage="fi" x="15">Korvakäytävä</text>
-    <text systemLanguage="fr" x="5">Canal auditif<tspan x="0" y="20">externe</tspan></text>
-    <text systemLanguage="he">תעלה<tspan x="0" y="20">שמיעה חיצונית</tspan></text>
-    <text systemLanguage="ml">ബാഹ്യ<tspan x="0" y="20">ശ്രവണ നാളം</tspan></text>
-    <text systemLanguage="ne">बाह्य लेखा<tspan x="0" y="20">परीक्षा नहर</tspan></text>
-    <text systemLanguage="pa">ਬਾਹਰੀ ਸੁਣਨ<tspan x="0" y="25">ਵਾਲੀ ਨਾਲੀ</tspan></text>
-    <text systemLanguage="ru">наружный<tspan x="-5" y="20">слуховой проход</tspan></text>
-    <text systemLanguage="ta">அவுட்<tspan x="0" y="20">எக்ஸ்பிரஸ்</tspan><tspan x="0" y="40">சேனல்</tspan></text>
-    <text systemLanguage="te">சேனல்</text>
-    <text systemLanguage="th">รูหู</text>
-    <text systemLanguage="tr">Dış<tspan x="0" y="20">işitme kanalı</tspan></text>
-    <text systemLanguage="zh">外耳道</text>
-    <text>External<tspan x="0" y="20">auditory canal</tspan></text>
-  </switch>
-    
-  <switch transform="translate(380 45)" text-anchor="middle">
-    <text systemLanguage="bn">স্টেপিস<tspan x="0" y="25">(ওভাল উইন্ডোতে</tspan><tspan x="0" y="50">যুক্ত)</tspan></text>
-    <text systemLanguage="da">Stigbøjlen<tspan x="0" y="20">(Sidder på det</tspan><tspan x="0" y="40">ovale vindue)</tspan></text>
-    <text systemLanguage="de">Steigbügel<tspan x="0" y="20">(anliegend am</tspan><tspan x="0" y="40">ovalen Fenster)</tspan></text>
-    <text systemLanguage="en">Stapes<tspan x="0" y="20">(attached to</tspan><tspan x="0" y="40">oval window)</tspan></text>
-    <text systemLanguage="eo">piedingo<tspan x="0" y="20">(kunigitaj al</tspan><tspan x="0" y="40">ovala fenestro)</tspan></text>
-    <text systemLanguage="es">Estribo<tspan x="0" y="20">(pegado a la</tspan><tspan x="0" y="40">ventana oval)</tspan></text>
-    <text systemLanguage="eu" y="40">Estribua</text>
-    <text systemLanguage="fa">رکابی<tspan x="0" y="20">(متصل‌شده به</tspan><tspan x="0" y="40">پنجره بیضی)</tspan></text>
-    <text systemLanguage="fi" y="40">Jalustin</text>
-    <text systemLanguage="fr">Stapes<tspan x="0" y="20">(attaché à la</tspan><tspan x="0" y="40">fenêtre ovale)</tspan></text>
-    <text systemLanguage="he">סטאפים<tspan x="0" y="20">(מחוברים</tspan><tspan x="0" y="40">לחלון אובאלי)</tspan></text>
-    <text systemLanguage="ml" x="-30">സ്റ്റേപിസ്<tspan x="-30" y="20">(അണ്ഡാകാര ജാലകവുമായി</tspan><tspan x="-50" y="40">ബന്ധിച്ചിരിക്കുന്നു)</tspan></text>
-    <text systemLanguage="ne">आकार <tspan x="0" y="20">(ओभरल</tspan><tspan x="0" y="40">सञ्झ्यालमा संलग्न)</tspan></text>
-    <text systemLanguage="pa">ਸਟੇਪ (ਅੰਡਾਕਾਰ<tspan x="0" y="25">ਖਿੜਕੀ ਨਾਲ ਜੁੜੀ ਹੋਈ)</tspan></text>
-    <text systemLanguage="ru">стремечко<tspan x="0" y="20">(соединённое с</tspan><tspan x="0" y="40">овальным окном)</tspan></text>
-    <text systemLanguage="ta">ஸ்டேபிள்ஸ்<tspan x="0" y="20">(ஓவல் சாளரத்துடன்</tspan><tspan x="0" y="40">இணைக்கப்பட்டுள்ளது)</tspan></text>
-    <text systemLanguage="te" x="60" y="40">అస్థిక</text>
-    <text systemLanguage="th"><tspan x="30">กระดูกรูปโกลน</tspan><tspan x="30" y="20">(เชื่อมต่อไป</tspan><tspan x="30" y="40">ที่ช่องรูปไข่)</tspan></text>
-    <text systemLanguage="tr">Üzengi<tspan x="0" y="20">(oval pencereye</tspan><tspan x="0" y="40">bağlı)</tspan></text>
-    <text systemLanguage="zh">镫骨</text>
-    <text>Stapes<tspan x="0" y="20">(attached to</tspan><tspan x="0" y="40">oval window)</tspan></text>
-  </switch>
-  
-  <switch transform="translate(557 383)">
-    <text systemLanguage="bn">ককলিয়া</text>
-    <text systemLanguage="da">Cochlea</text>
-    <text systemLanguage="de" x="-10">Hörschnecke</text>
-    <text systemLanguage="en">Cochlea</text>
-    <text systemLanguage="eo">heliko</text>
-    <text systemLanguage="es">Cóclea</text>
-    <text systemLanguage="eu">Koklea</text>
-    <text systemLanguage="fa">حلزون</text>
-    <text systemLanguage="fi">Simpukka</text>
-    <text systemLanguage="fr">Limaçon</text>
-    <text systemLanguage="he">שַׁבְּלוּל</text>
-    <text systemLanguage="ml">കോക്ലിയ</text>
-    <text systemLanguage="ne">चिप्लेकिरो</text>
-    <text systemLanguage="pa">ਕੋਚਲੀਆ</text>
-    <text systemLanguage="ru">улитка</text>
-    <text systemLanguage="ta" x="118" y="-7" text-anchor="end">நத்தைச்சுருள்</text>
-    <text systemLanguage="te">కర్ణావృత్తి</text>
-    <text systemLanguage="th">ท่อรูปหอยโข่ง</text>
-    <text systemLanguage="tr">Koklea</text>
-    <text systemLanguage="zh">耳蜗</text>
-    <text>Cochlea</text>
-  </switch>
-  
-  <switch transform="translate(411 482)" text-anchor="middle">
-    <text systemLanguage="bn">রাউন্ড<tspan x="0" y="25">উইন্ডো</tspan></text>
-    <text systemLanguage="da">Runde<tspan x="0" y="20">vindue</tspan></text>
-    <text systemLanguage="de">rundes<tspan x="0" y="20">Fenster</tspan></text>
-    <text systemLanguage="en">Round<tspan x="0" y="20">window</tspan></text>
-    <text systemLanguage="eo">Ronda<tspan x="0" y="20">Fenestro</tspan></text>
-    <text systemLanguage="es">Ventana<tspan x="0" y="20">redonda</tspan></text>
-    <text systemLanguage="eu">Leiho<tspan x="0" y="20">biribila</tspan></text>
-    <text systemLanguage="fa">پنجره<tspan x="0" y="20">گرد</tspan></text>
-    <text systemLanguage="fi">Pyöreä<tspan x="0" y="20">rakkula</tspan></text>
-    <text systemLanguage="fr">Fenêtre<tspan x="0" y="20">ronde</tspan></text>
-    <text systemLanguage="he">חלון<tspan x="0" y="20">עגול</tspan></text>
-    <text systemLanguage="ml">വൃത്ത<tspan x="0" y="20">ജാലകം</tspan></text>
-    <text systemLanguage="ne">राउन्ड<tspan x="0" y="20">विन्डो</tspan></text>
-    <text systemLanguage="pa">ਗੋਲ ਖਿੜਕੀ</text>
-    <text systemLanguage="ru">круглое<tspan x="0" y="20">окно</tspan></text>
-    <text systemLanguage="ta">வட்ட<tspan x="0" y="20">சாளரம்</tspan></text>
-    <text systemLanguage="te">గుండ్రని గవాక్షం</text>
-    <text systemLanguage="th">ช่องรูปไข่<tspan x="0" y="20">(หน้าต่างรูปไข่)</tspan></text>
-    <text systemLanguage="tr">Yuvarlak<tspan x="0" y="20">pencere</tspan></text>
-    <text systemLanguage="zh">蜗窗</text>
-    <text>Round<tspan x="0" y="20">window</tspan></text>
-  </switch>
-  
-  <switch transform="rotate(-90) translate(-495 26)">
-    <text systemLanguage="bn">কানের পাতা</text>
-    <text systemLanguage="da">Det ydre øre</text>
-    <text systemLanguage="de">Ohrmuschel</text>
-    <text systemLanguage="en">Auricle</text>
-    <text systemLanguage="eo">Auriklo</text>
-    <text systemLanguage="es">Oreja</text>
-    <text systemLanguage="eu">Kanpo-belarria</text>
-    <text systemLanguage="fa">لاله گوش</text>
-    <text systemLanguage="fi">Korvalehti</text>
-    <text systemLanguage="fr">Auricule</text>
-    <text systemLanguage="he">אֲפַרכֶּסֶת</text>
-    <text systemLanguage="ml">ചെവിക്കുട</text>
-    <text systemLanguage="ne">बाहिरी कान</text>
-    <text systemLanguage="pa">ਕੰਨ ਦਾ ਉੱਪਰਲਾ ਖਾਨਾ</text>
-    <text systemLanguage="ru">ушная раковина</text>
-    <text systemLanguage="ta">வெளிக்காது</text>
-    <text systemLanguage="te" x="40">కర్ణిక</text>
-    <text systemLanguage="th" x="40">ใบหู</text>
-    <text systemLanguage="tr">Kulak kepçesi</text>
-    <text systemLanguage="zh" x="40">耳郭</text>
-    <text>Auricle</text>
-  </switch>
-  
-  <switch transform="translate(317 409)">
-    <text systemLanguage="bn">টিমপেনিক<tspan x="0" y="25">ক্যাভিটি</tspan></text>
-    <text systemLanguage="da">Tympanisk<tspan x="0" y="20">hulrum</tspan></text>
-    <text systemLanguage="de">Paukenhöhle</text>
-    <text systemLanguage="en">Tympanic<tspan x="0" y="20">cavity</tspan></text>
-    <text systemLanguage="eo">timpano</text>
-    <text systemLanguage="es">Cavidad<tspan x="0" y="20">timpánica</tspan></text>
-    <text systemLanguage="eu">Barrunbe<tspan x="0" y="20">tinpanikoa</tspan></text>
-    <text systemLanguage="fa">صندوق<tspan x="0" y="20">صماخ</tspan></text>
-    <text systemLanguage="fi"><tspan x="-6" y="0">Välikorvaontelo</tspan></text>
-    <text systemLanguage="fr">Cavité<tspan x="-15" y="20">tympanique</tspan></text>
-    <text systemLanguage="he">חלל<tspan x="0" y="20">טימפאני</tspan></text>
-    <text systemLanguage="ml" x="-5">റ്റിമ്പാനിക്<tspan x="0" y="20">അറ</tspan></text>
-    <text systemLanguage="ne">टेस्मेन<tspan x="0" y="20">गुफा</tspan></text>
-    <text systemLanguage="pa" y="5">ਟਿਮਪੈਨਿਕ ਛੇਕ</text>
-    <text systemLanguage="ru">барабанная<tspan x="0" y="20">полость</tspan></text>
-    <text systemLanguage="ta">டிமென்ட்பிக்<tspan x="0" y="20">கேவிட்டி</tspan></text>
-    <text systemLanguage="te">కర్ణభేరి కుహరం</text>
-    <text systemLanguage="th">ช่องหู<tspan x="0" y="20">(หลังแก้วหู)</tspan></text>
-    <text systemLanguage="tr">Timpanik<tspan x="0" y="20">boşluk</tspan></text>
-    <text systemLanguage="zh">鼓室</text>
-    <text>Tympanic<tspan x="0" y="20">cavity</tspan></text>
- </switch>
+
+  <text transform="translate(324 145)">Incus</text>
+
+  <text transform="translate(222 162)">Malleus</text>
+
+  <text transform="translate(560 85)" text-anchor="middle">Semicircular<tspan x="0" y="20">canals</tspan></text>
+
+  <text transform="translate(551 159)">Vestibular<tspan x="0" y="20">nerve</tspan></text>
+
+  <text transform="translate(563 323)">Cochlear<tspan x="0" y="20">nerve</tspan></text>
+
+  <text transform="translate(473 478)">Eustachian tube</text>
+
+  <text transform="translate(257 473)" text-anchor="middle">Tympanic<tspan x="0" y="20">membrane</tspan></text>
+
+  <text transform="translate(206 401)" text-anchor="middle">External<tspan x="0" y="20">auditory canal</tspan></text>
+
+  <text transform="translate(380 45)" text-anchor="middle">Stapes<tspan x="0" y="20">(attached to</tspan><tspan x="0" y="40">oval window)</tspan></text>
+
+  <text transform="translate(557 383)">Cochlea</text>
+
+  <text transform="translate(411 482)" text-anchor="middle">Round<tspan x="0" y="20">window</tspan></text>
+
+  <text transform="rotate(-90) translate(-495 26)">Auricle</text>
+
+  <text transform="translate(317 409)">Tympanic<tspan x="0" y="20">cavity</tspan></text>
 </svg>
