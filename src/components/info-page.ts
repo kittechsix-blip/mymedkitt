@@ -30,10 +30,8 @@ function renderInfoBodyLine(container: HTMLElement, line: string): void {
   const combinedPattern = /\[([^\]]+)\]\((#\/[^)]+)\)|\[(\d+)\](?:\[(\d+)\])*/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
-  let hasMatch = false;
 
   while ((match = combinedPattern.exec(line)) !== null) {
-    hasMatch = true;
     // Text before this match
     if (match.index > lastIndex) {
       infoBoldAware(container, line.slice(lastIndex, match.index));
@@ -88,14 +86,9 @@ function renderInfoBodyLine(container: HTMLElement, line: string): void {
     lastIndex = match.index + match[0].length;
   }
 
-  // Remaining text after last match
+  // Remaining text after last match (or entire line if no matches)
   if (lastIndex < line.length) {
     infoBoldAware(container, line.slice(lastIndex));
-  }
-
-  // If no matches found, render with bold support
-  if (!hasMatch) {
-    infoBoldAware(container, line);
   }
 }
 
