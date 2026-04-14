@@ -545,17 +545,36 @@ if (drugIds.length > 0 || updateDrugIds.length > 0) {
   const drugModule = await import(pathToFileURL(resolve(docsDir, 'data', 'drug-store.js')).href);
   const allDrugs = drugModule.ALL_DRUGS || drugModule.default?.ALL_DRUGS || [];
 
+  // Convert camelCase drug object to snake_case Supabase columns
+  function drugToSnakeCase(drug) {
+    return {
+      id: drug.id,
+      name: drug.name,
+      generic_name: drug.genericName,
+      drug_class: drug.drugClass,
+      route: drug.route,
+      indications: drug.indications,
+      dosing: drug.dosing,
+      contraindications: drug.contraindications || null,
+      cautions: drug.cautions || null,
+      monitoring: drug.monitoring || null,
+      notes: drug.notes || null,
+      image: drug.image || null,
+      citations: drug.citations || [],
+    };
+  }
+
   for (const did of drugIds) {
     const drug = allDrugs.find(d => d.id === did);
     if (!drug) { console.error(`  Drug not found: ${did}`); continue; }
-    await supaUpsert('drugs', drug);
+    await supaUpsert('drugs', drugToSnakeCase(drug));
     console.log(`  Inserted: ${did}`);
   }
 
   for (const did of updateDrugIds) {
     const drug = allDrugs.find(d => d.id === did);
     if (!drug) { console.error(`  Drug not found: ${did}`); continue; }
-    await supaPatch('drugs', `id=eq.${did}`, drug);
+    await supaPatch('drugs', `id=eq.${did}`, drugToSnakeCase(drug));
     console.log(`  Updated: ${did}`);
   }
 }
