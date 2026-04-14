@@ -1,7 +1,7 @@
 // myMedKitt — Shared Text Rendering Utilities
 // Extracted from tree-wizard.ts. Renders body text with markdown links, bold, and line breaks.
 import { showInfoModal } from './info-page.js';
-import { showDrugModal } from './drug-store.js';
+import { showDrugModal, buildWeightCalcPanel } from './drug-store.js';
 import { router } from '../services/router.js';
 /** Append text to a parent element, converting **bold** markers to <strong> elements. */
 export function appendBoldAware(parent, text) {
@@ -91,12 +91,19 @@ function renderLineWithLinksAndCitations(container, line) {
             const doseText = match[0].replace(/\*\*/g, '');
             const boldOpen = match[5];
             const boldClose = match[9];
+            // Parse dose value and unit from the match for pre-filling the calculator
+            const dosePerKg = parseFloat(match[6]);
+            const unit = match[7] === 'U' ? 'units' : match[7]; // normalize U → units
+            const timeSuffix = match[8]; // day, hr, h, min, dose — or undefined
             const btn = document.createElement('button');
             btn.className = 'dose-calc-link';
             btn.textContent = doseText;
-            btn.setAttribute('data-link-type', 'calculator');
-            btn.setAttribute('data-link-id', 'weight-dose');
             btn.setAttribute('aria-label', `Calculate ${doseText} dose`);
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                showInlineDoseCalc(btn, dosePerKg, unit, timeSuffix);
+            });
             if (boldOpen && boldClose) {
                 const strong = document.createElement('strong');
                 strong.appendChild(btn);
@@ -192,5 +199,63 @@ export function handleInlineLinkClick(e, onNodeJump) {
     }
     else {
         showInfoModal(linkId);
+    }
+}
+// -------------------------------------------------------------------
+// Inline Dose Calculator Popup
+// -------------------------------------------------------------------
+let activeDosePopup = null;
+/** Show a floating dose calculator popup near the tapped dose link.
+ *  Pre-fills the dose/unit from the matched pattern — user only enters weight
+ *  (via direct kg, Broselow tape, or age estimation). */
+function showInlineDoseCalc(_anchor, dosePerKg, unit, timeSuffix) {
+    // Dismiss any existing popup
+    if (activeDosePopup) {
+        activeDosePopup.remove();
+        activeDosePopup = null;
+    }
+    // Build WeightCalc from parsed pattern
+    const label = timeSuffix
+        ? `${dosePerKg} ${unit}/kg/${timeSuffix}`
+        : `${dosePerKg} ${unit}/kg`;
+    const wc = { dosePerKg, unit, label };
+    // Build the 3-tab calculator panel (reuse Pharmacy's buildWeightCalcPanel)
+    const calcPanel = buildWeightCalcPanel([wc]);
+    // Wrap in a dismissible overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay info-modal-overlay active';
+    overlay.style.zIndex = '10000';
+    const popup = document.createElement('div');
+    popup.className = 'dose-popup-panel';
+    // Header with dose context + close button
+    const header = document.createElement('div');
+    header.className = 'dose-popup-header';
+    const title = document.createElement('div');
+    title.className = 'dose-popup-title';
+    title.textContent = `Dose: ${label}`;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'dose-popup-close';
+    closeBtn.textContent = '×';
+    closeBtn.setAttribute('aria-label', 'Close calculator');
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    popup.appendChild(header);
+    popup.appendChild(calcPanel);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    activeDosePopup = overlay;
+    const dismiss = () => {
+        overlay.remove();
+        activeDosePopup = null;
+    };
+    closeBtn.addEventListener('click', dismiss);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay)
+            dismiss();
+    });
+    // Auto-focus the weight input
+    const firstInput = calcPanel.querySelector('input');
+    if (firstInput) {
+        requestAnimationFrame(() => firstInput.focus());
     }
 }

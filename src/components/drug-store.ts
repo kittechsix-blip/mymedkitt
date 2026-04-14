@@ -385,11 +385,12 @@ export function showDrugModal(drugId: string, indicationHint?: string): boolean 
     for (const card of cards) {
       const ind = card.getAttribute('data-indication') ?? '';
       if (ind.includes(hint) || hint.split(' ').every(w => ind.includes(w))) {
-        requestAnimationFrame(() => {
+        // Use setTimeout to ensure modal is fully rendered and laid out before scrolling
+        setTimeout(() => {
           (card as HTMLElement).style.outline = '2px solid var(--color-primary)';
           (card as HTMLElement).style.outlineOffset = '4px';
           card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+        }, 100);
         break;
       }
     }
@@ -634,7 +635,7 @@ function renderDoseResults(
 }
 
 /** Build the full weight-based dose calculator panel */
-function buildWeightCalcPanel(calcs: WeightCalc[], drugCtx?: DrugContext): HTMLElement {
+export function buildWeightCalcPanel(calcs: WeightCalc[], drugCtx?: DrugContext): HTMLElement {
   const panel = document.createElement('div');
   panel.className = 'dose-calc-panel';
 

@@ -32562,13 +32562,15 @@ function renderNumberField(container, field, values, onChange) {
     const input = document.createElement('input');
     input.type = 'number';
     input.className = 'calculator-number-input';
-    input.inputMode = 'numeric';
+    // Use decimal keyboard for fields that accept fractional values (weight, dose/kg, etc.)
+    input.inputMode = field.valueIsPoints ? 'decimal' : 'numeric';
     input.min = '0';
-    input.max = '150';
+    input.max = field.valueIsPoints ? '9999' : '150';
+    input.step = field.valueIsPoints ? 'any' : '1';
     input.placeholder = '0';
     input.setAttribute('aria-label', field.label);
     input.addEventListener('input', () => {
-        const val = parseInt(input.value, 10);
+        const val = field.valueIsPoints ? parseFloat(input.value) : parseInt(input.value, 10);
         values[field.name] = isNaN(val) ? 0 : val;
         // Capture weight/age to patient context
         if (field.name === 'weight' && val > 0) {
