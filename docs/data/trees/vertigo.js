@@ -209,7 +209,7 @@ export const VERTIGO_NODES = [
         citation: [7, 17, 19],
         summary: 'Classic BPPV: <1min episodes triggered by head position, no hearing loss — posterior canal 85%, confirm with Dix-Hallpike test',
         skippable: true,
-        images: [{ src: 'images/vertigo/canalolithiasis.jpg', alt: 'Canalolithiasis in semicircular canal', caption: 'Canalolithiasis: free-floating otoconia (calcium carbonate crystals) in a semicircular canal — the mechanism of BPPV. Head movement shifts the particles, deflecting the cupula and triggering vertigo. (TnoXX, Wikimedia Commons, CC BY 4.0)' }],
+        images: [{ src: 'images/vertigo/canalolithiasis-english.png', alt: 'Vestibular system showing semicircular canals', caption: 'The vestibular apparatus: semicircular canals detect angular head rotation. Displaced otoconia (calcium carbonate crystals) enter a canal, causing BPPV. (BruceBlaus, Wikimedia Commons, CC BY-SA 4.0)' }],
         next: 'vert-dix-hallpike',
     },
     {
