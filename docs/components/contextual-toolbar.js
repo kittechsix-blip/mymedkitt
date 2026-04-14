@@ -25,6 +25,7 @@ export function renderContextualToolbar(consultId, controller, _entryNodeId, mod
         globalTabBar.style.display = 'none';
     const toolbar = document.createElement('div');
     toolbar.className = 'contextual-toolbar';
+    toolbar.setAttribute('translate', 'no'); // Prevent browser auto-translation
     const config = getToolbarConfig(consultId);
     // Configurable tool buttons
     for (const item of config.tools) {

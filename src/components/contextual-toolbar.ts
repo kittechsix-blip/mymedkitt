@@ -37,6 +37,7 @@ export function renderContextualToolbar(
 
   const toolbar = document.createElement('div');
   toolbar.className = 'contextual-toolbar';
+  toolbar.setAttribute('translate', 'no'); // Prevent browser auto-translation
 
   const config = getToolbarConfig(consultId);
 

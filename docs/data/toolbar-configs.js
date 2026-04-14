@@ -1159,6 +1159,11 @@ const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', 
 /** Get the toolbar config for a consult, always including the 🛑 Stop button */
 export function getToolbarConfig(consultId) {
     const tools = TOOLBAR_CONFIGS[consultId] ?? [];
+    // Only add stop item if not already present in tools
+    const hasStopItem = tools.some(t => t.id === 'stop' || t.id.includes('-stop'));
+    if (hasStopItem) {
+        return { consultId, tools };
+    }
     const stopItem = { ...STOP_ITEM, target: `${consultId}-stop` };
     return {
         consultId,
