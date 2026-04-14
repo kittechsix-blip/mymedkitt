@@ -32938,6 +32938,96 @@ const PEDS_DOSE_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// VERTIGO — CENTRAL WORKUP CHECKLIST
+// =====================================================================
+
+const VERTIGO_CENTRAL_CHECKLIST_CALCULATOR: CalculatorDefinition = {
+  id: 'vertigo-central-checklist',
+  title: 'Proceed to Central Workup?',
+  subtitle: 'Central Feature Screening Checklist',
+  description: 'Toggle ANY finding present in your patient. A single positive finding means HINTS is unnecessary — proceed directly to posterior circulation stroke workup. HINTS exam findings are listed last — only assess those if all red flags above are negative.',
+  fields: [
+    // Deadly D's
+    { name: 'dysarthria', label: 'Dysarthria', type: 'toggle', points: 1, description: 'Slurred or garbled speech' },
+    { name: 'dysphagia', label: 'Dysphagia', type: 'toggle', points: 1, description: 'Difficulty swallowing, choking on saliva' },
+    { name: 'diplopia', label: 'Diplopia', type: 'toggle', points: 1, description: 'Double vision' },
+    { name: 'dysmetria', label: 'Dysmetria', type: 'toggle', points: 1, description: 'Past-pointing on finger-to-nose, overshooting on heel-to-shin' },
+    { name: 'dysphonia', label: 'Dysphonia', type: 'toggle', points: 1, description: 'Hoarseness or voice change' },
+    { name: 'nystagmus-central', label: 'Downbeat or direction-changing nystagmus', type: 'toggle', points: 1, description: 'Does NOT suppress with fixation' },
+    // Red Flags (non-D's)
+    { name: 'headache-neck', label: 'New severe headache or neck pain', type: 'toggle', points: 1, description: 'Vertebral dissection risk — trauma, chiropractic manipulation' },
+    { name: 'focal-deficit', label: 'Focal weakness, sensory loss, or facial droop', type: 'toggle', points: 1, description: 'Any lateralizing neurologic sign' },
+    { name: 'horner', label: 'Horner syndrome', type: 'toggle', points: 1, description: 'Ptosis + miosis + anhidrosis (ipsilateral)' },
+    { name: 'truncal-ataxia', label: 'Cannot sit or stand unassisted', type: 'toggle', points: 1, description: 'Truncal ataxia — cerebellar stroke patients cannot walk' },
+    { name: 'ams', label: 'Altered mental status', type: 'toggle', points: 1 },
+    { name: 'wallenberg', label: 'Hiccups or loss of pain/temp sensation', type: 'toggle', points: 1, description: 'Wallenberg syndrome (lateral medullary)' },
+    { name: 'hearing-loss', label: 'New unilateral hearing loss', type: 'toggle', points: 1, description: 'AICA stroke until proven otherwise (labyrinthine artery)' },
+    // Gait test
+    { name: 'cannot-walk', label: 'Cannot walk unaided', type: 'toggle', points: 1, description: 'Vestibular neuritis CAN walk — cerebellar stroke often CANNOT' },
+    // HINTS central findings (at bottom)
+    { name: 'hints-nystagmus', label: 'HINTS: Direction-changing / vertical / pure torsional nystagmus', type: 'toggle', points: 1, description: 'Remove fixation first (Frenzel goggles / ophthalmoscope / paper trick)' },
+    { name: 'hints-hit', label: 'HINTS: Normal HIT (no catch-up saccade) in AVS', type: 'toggle', points: 1, description: '"Normal HIT in AVS = NOT nice" — counterintuitive' },
+    { name: 'hints-skew', label: 'HINTS: Vertical skew deviation', type: 'toggle', points: 1, description: 'Alternate cover test — 98% specificity for central lesion' },
+    { name: 'hints-hearing', label: 'HINTS+: New unilateral sensorineural hearing loss', type: 'toggle', points: 1, description: 'AICA territory — labyrinthine artery involvement' },
+  ],
+  results: [],
+  thresholdNote: 'Posterior circulation strokes have a ~35% ED miss rate. CT head is only 7-16% sensitive. MRI-DWI misses 20-35% in first 24-48 hours — repeat at 48-72h if clinical suspicion high.',
+  citations: [
+    'Kattah JC, et al. HINTS to diagnose stroke in the acute vestibular syndrome. Stroke. 2009;40(11):3504-3510.',
+    'Arch AE, et al. Missed ischemic stroke diagnosis in the emergency department. Stroke. 2016;47(3):668-673.',
+    'Tarnutzer AA, et al. Does my dizzy patient have a stroke? CMAJ. 2011;183(9):E571-E592.',
+    'Saber Tehrani AS, et al. Small strokes causing severe vertigo. Neurology. 2014;83(2):169-173.',
+    'Oppenheim C, et al. False-negative diffusion-weighted MR findings in acute ischemic stroke. AJNR Am J Neuroradiol. 2000;21(8):1434-1440.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const total = Object.values(values).reduce((sum, v) => sum + v, 0);
+    if (total === 0) {
+      return {
+        value: '0',
+        label: 'No Central Features',
+        description: '**ALL RED FLAGS NEGATIVE**\n\nNo central features identified. If this is an AVS patient with spontaneous nystagmus, proceed with HINTS exam.\n\n**Remember:** HINTS is ONLY valid when:\n• Patient has continuous vertigo (AVS)\n• Spontaneous nystagmus is present\n• No central red flags (confirmed above)\n\nIf HINTS is not appropriate, consider alternate diagnosis (BPPV, vestibular migraine, TIA).',
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Build a list of positive findings
+    const labels: Record<string, string> = {
+      'dysarthria': 'Dysarthria',
+      'dysphagia': 'Dysphagia',
+      'diplopia': 'Diplopia',
+      'dysmetria': 'Dysmetria',
+      'dysphonia': 'Dysphonia',
+      'nystagmus-central': 'Central nystagmus pattern',
+      'headache-neck': 'Severe headache/neck pain',
+      'focal-deficit': 'Focal neurologic deficit',
+      'horner': 'Horner syndrome',
+      'truncal-ataxia': 'Truncal ataxia',
+      'ams': 'Altered mental status',
+      'wallenberg': 'Wallenberg signs',
+      'hearing-loss': 'Unilateral hearing loss',
+      'cannot-walk': 'Cannot walk unaided',
+      'hints-nystagmus': 'HINTS: central nystagmus',
+      'hints-hit': 'HINTS: normal HIT in AVS',
+      'hints-skew': 'HINTS: vertical skew',
+      'hints-hearing': 'HINTS+: unilateral hearing loss',
+    };
+
+    const positive = Object.entries(values)
+      .filter(([, v]) => v > 0)
+      .map(([k]) => labels[k] || k);
+
+    const findings = positive.map(f => `• ${f}`).join('\n');
+
+    return {
+      value: String(total),
+      label: '\u26A0\uFE0F PROCEED TO CENTRAL WORKUP',
+      description: `**${total} CENTRAL FEATURE${total > 1 ? 'S' : ''} PRESENT:**\n${findings}\n\n**IMMEDIATE ACTIONS:**\n• **Activate stroke team** / neurology consult\n• Establish **last known well time**\n• **MRI-DWI + CTA/MRA head and neck** — CT alone is inadequate\n• Continuous cardiac monitoring, IV \u00D7 2, NPO\n• NIHSS (underscores posterior circulation strokes)\n• If within thrombolytic window \u2192 stroke consult\n\n**Do NOT be reassured by young age.** Vertebral dissection causes cerebellar stroke in patients in their 30s-40s. Up to 20% of posterior circulation strokes occur in patients <55.`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -33429,6 +33519,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'diplopia-3step': DIPLOPIA_3STEP_CALCULATOR,
   'diplopia-exam-checklist': DIPLOPIA_EXAM_CHECKLIST_CALCULATOR,
   'diplopia-localize': DIPLOPIA_LOCALIZE_CALCULATOR,
+  // Vertigo
+  'vertigo-central-checklist': VERTIGO_CENTRAL_CHECKLIST_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

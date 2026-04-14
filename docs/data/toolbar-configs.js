@@ -324,7 +324,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'migraine-dhe', label: 'DHE', icon: '💉', action: 'calculator', target: 'dhe-protocol' },
     ],
     'vertigo': [
-        { id: 'central', label: 'Central?', icon: '⚠️', action: 'overlay', target: 'vertigo-central-checklist' },
+        { id: 'central', label: 'Central?', icon: '⚠️', action: 'calculator', target: 'vertigo-central-checklist' },
         { id: 'hints', label: 'HINTS', icon: '👁️', action: 'overlay', target: 'vertigo-hints-guide' },
         { id: 'epley', label: 'Epley', icon: '🔄', action: 'overlay', target: 'vertigo-dix-hallpike' },
         { id: 'bppv', label: 'BPPV', icon: '💫', action: 'jump', target: 'vert-bppv-history' },
