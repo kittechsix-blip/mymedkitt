@@ -11933,7 +11933,207 @@ const VERTIGO_REHAB_DISCHARGE = {
         { num: 2, text: 'Whitney SL, et al. Vestibular rehabilitation overview. Handb Clin Neurol. 2016;137:187-205.' },
     ],
 };
+// =====================================================================
+// ORGANIC VS PSYCHIATRIC INFO PAGES
+// =====================================================================
+const OVP_RED_FLAGS_SUMMARY = {
+    id: 'ovp-red-flags-summary',
+    title: 'Red Flags for Organic Cause',
+    subtitle: 'High-risk features suggesting medical etiology',
+    sections: [
+        {
+            heading: 'History Red Flags',
+            body: '• **New-onset psychiatric symptoms** without prior history (63% have organic cause)\n• **Age >45** with first psychiatric presentation\n• **Age <12** with behavioral emergency\n• **No prior psychiatric history**\n• **Abrupt onset** (organic tends to be sudden)\n• **Recent head trauma**\n• **Recent medication change** (especially anticholinergics, steroids)',
+        },
+        {
+            heading: 'Exam Red Flags',
+            body: '• **Abnormal vital signs** (T >100.4°F, HR <50 or >100, BP <100 or >180/110, RR <8 or >22, SpO2 <95%)\n• **Altered level of consciousness** (drowsy, obtunded, fluctuating)\n• **Visual hallucinations** (rare in primary psychiatric illness)\n• **Disorientation** to person, place, or time\n• **Memory impairment** (recent memory)\n• **Focal neurologic deficits**\n• **Catatonia** (immobility, mutism, posturing)',
+        },
+        {
+            heading: 'High-Risk Populations',
+            body: '• **Elderly (≥65)** — delirium missed 76% of the time\n• **Immunocompromised** (HIV, transplant, chemotherapy)\n• **Known chronic illness** (diabetes, renal, hepatic, thyroid)\n• **Substance use** — intoxication or withdrawal\n• **Polypharmacy** — drug-drug interactions',
+        },
+        {
+            heading: 'Key Principle',
+            body: '**Any red flag = organic until proven otherwise.** Medical workup before psychiatric disposition.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Now. How to Tell Whether a Psychiatric Emergency is Due to Disease or Psychological Illness. 2017.' },
+        { num: 2, text: 'Henneman PL, et al. Ann Emerg Med. 1994;24(4):672-677.' },
+    ],
+};
+const OVP_AEIOU_TIPS = {
+    id: 'ovp-aeiou-tips',
+    title: 'AEIOU-TIPS Mnemonic',
+    subtitle: 'Differential for altered mental status / organic psychiatric causes',
+    sections: [
+        {
+            heading: 'A — Alcohol / Acidosis',
+            body: '• Alcohol intoxication or withdrawal\n• Metabolic acidosis (DKA, uremia, toxic alcohols)\n• Ammonia (hepatic encephalopathy)',
+        },
+        {
+            heading: 'E — Electrolytes / Endocrine / Epilepsy',
+            body: '• Hyponatremia (common with SSRIs, diuretics)\n• Hypercalcemia, hypoglycemia, hyperglycemia\n• Thyroid (hyper = anxiety; hypo = depression)\n• Cushing, Addison, pheochromocytoma\n• Postictal state, nonconvulsive status epilepticus (NCSE)',
+        },
+        {
+            heading: 'I — Infection',
+            body: '• UTI (most common in elderly women)\n• Pneumonia, sepsis\n• Meningitis, encephalitis (autoimmune encephalitis increasing)\n• HIV-related CNS infections',
+        },
+        {
+            heading: 'O — Overdose / Oxygen / Opiates',
+            body: '• Intentional or accidental overdose\n• Hypoxia (PE, pneumonia, CO)\n• Opioid toxicity (respiratory depression, miosis)',
+        },
+        {
+            heading: 'U — Uremia',
+            body: '• Uremic encephalopathy\n• Dialysis disequilibrium syndrome',
+        },
+        {
+            heading: 'T — Temperature / Trauma / Thiamine',
+            body: '• Hypothermia, hyperthermia (heat stroke)\n• Head trauma, subdural hematoma\n• Wernicke encephalopathy (give thiamine before glucose)',
+        },
+        {
+            heading: 'I — Insulin (Hypoglycemia)',
+            body: '• **The "6th vital sign"** — always check fingerstick glucose\n• Can mimic ANY psychiatric presentation\n• Insulinoma misdiagnosed as psych in 64% of cases',
+        },
+        {
+            heading: 'P — Psychiatric / Poisoning',
+            body: '• Primary psychiatric illness (if all organic ruled out)\n• Toxins: CO, heavy metals, anticholinergics, serotonin syndrome, NMS',
+        },
+        {
+            heading: 'S — Stroke / Seizure / Space-Occupying Lesion',
+            body: '• Stroke (especially frontal, temporal)\n• Postictal state, NCSE\n• Tumor, abscess, subdural\n• SAH, VP shunt malfunction',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'SAEM M4 Curriculum. Approach to Altered Mental Status.' },
+    ],
+};
+const OVP_CAM_TOOL = {
+    id: 'ovp-cam-tool',
+    title: 'CAM Screening Tool',
+    subtitle: 'Confusion Assessment Method for delirium',
+    sections: [
+        {
+            heading: 'CAM Criteria',
+            body: '**Delirium present if BOTH of:**\n1. Acute onset or fluctuating course\n2. Inattention\n\n**PLUS EITHER:**\n3. Altered level of consciousness\n4. Disorganized thinking',
+        },
+        {
+            heading: 'Feature 1: Acute Onset / Fluctuating',
+            body: 'Ask family/caregiver:\n• "Is this a change from baseline?"\n• "Has the mental status fluctuated (come and go) today?"',
+        },
+        {
+            heading: 'Feature 2: Inattention',
+            body: '**Test with any of:**\n• Spell WORLD backward\n• Say months of year backward (Dec → Jan)\n• Count backward from 20 to 1\n\n**Abnormal:** >2 errors = inattention',
+        },
+        {
+            heading: 'Feature 3: Altered LOC',
+            body: '**RASS ≠ 0 (anything other than calm and alert)**\n• Hyperactive: agitated, restless, combative\n• Hypoactive: drowsy, lethargic (MOST COMMONLY MISSED)',
+        },
+        {
+            heading: 'Feature 4: Disorganized Thinking',
+            body: 'Ask questions:\n• "Will a stone float on water?"\n• "Are there fish in the sea?"\n• "Does one pound weigh more than two?"\n• "Can you use a hammer to pound a nail?"\n\nObserve for:\n• Rambling, irrelevant speech\n• Unclear or illogical flow of ideas',
+        },
+        {
+            heading: 'Performance',
+            body: '**Original CAM:** 94-100% sensitive, 90-95% specific\n**bCAM (brief):** 84% sensitive, 96% specific when done by physician\n**Takes <2 minutes**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Inouye SK, et al. Clarifying confusion: the CAM. Ann Intern Med. 1990;113(12):941-948.' },
+    ],
+};
+const OVP_DELIRIUM_VS_PSYCH = {
+    id: 'ovp-delirium-vs-psych',
+    title: 'Delirium vs Psychiatric Illness',
+    subtitle: 'Key differentiating features',
+    sections: [
+        {
+            heading: 'Onset',
+            body: '**Delirium:** Acute (hours to days)\n**Psychiatric:** Chronic/subacute (days to weeks) or recurrent episodes',
+        },
+        {
+            heading: 'Course',
+            body: '**Delirium:** Fluctuates throughout the day (waxes and wanes)\n**Psychiatric:** Relatively stable within a day',
+        },
+        {
+            heading: 'Attention',
+            body: '**Delirium:** Impaired (cannot focus, easily distracted)\n**Psychiatric:** Usually intact',
+        },
+        {
+            heading: 'Consciousness',
+            body: '**Delirium:** Altered (drowsy, agitated, or fluctuating)\n**Psychiatric:** Clear and stable',
+        },
+        {
+            heading: 'Hallucinations',
+            body: '**Delirium:** Visual hallucinations common\n**Psychiatric:** Auditory hallucinations more common (command voices, commentary)',
+        },
+        {
+            heading: 'Orientation',
+            body: '**Delirium:** Often disoriented (person, place, time)\n**Psychiatric:** Usually oriented',
+        },
+        {
+            heading: 'Memory',
+            body: '**Delirium:** Impaired recent memory\n**Psychiatric:** Memory usually intact',
+        },
+        {
+            heading: 'Sleep-Wake',
+            body: '**Delirium:** Disrupted, often reversed day-night cycle\n**Psychiatric:** May have insomnia but no reversal',
+        },
+        {
+            heading: 'Vital Signs',
+            body: '**Delirium:** Often abnormal (fever, tachycardia)\n**Psychiatric:** Usually normal',
+        },
+        {
+            heading: 'Key Point',
+            body: '**If visual hallucinations, fluctuating consciousness, or disorientation are present → assume delirium until proven otherwise.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Han JH, et al. Acad Emerg Med. 2009;16(3):193-200.' },
+    ],
+};
+const OVP_ORGANIC_MIMICS = {
+    id: 'ovp-organic-mimics',
+    title: 'Medical Conditions Mimicking Psychiatric Illness',
+    subtitle: 'Common organic causes by category',
+    sections: [
+        {
+            heading: 'Neurologic',
+            body: '• **Encephalitis** — autoimmune increasing; psychosis, catatonia, OCD-like behaviors\n• **Complex partial seizures** — temporal lobe; altered behavior, postictal state\n• **Stroke/TIA** — frontal or temporal; personality change, aphasia\n• **Subdural hematoma** — elderly on anticoagulants\n• **Neurosyphilis** — resurgence (70% increase); psychosis, mania, personality change\n• **Parkinson disease** — depression/anxiety precede motor symptoms\n• **Huntington disease** — psychiatric symptoms precede chorea',
+        },
+        {
+            heading: 'Endocrine',
+            body: '• **Hyperthyroidism** — anxiety (60%), panic, psychosis\n• **Hypothyroidism** — depression (treatment-resistant); severe = "myxedema madness"\n• **Hypoglycemia** — anxiety, confusion, bizarre behavior, seizures\n• **Cushing syndrome** — depression, anxiety in 50%+\n• **Pheochromocytoma** — mimics panic attacks; episodic HTN + anxiety\n• **Adrenal insufficiency** — fatigue, depression',
+        },
+        {
+            heading: 'Metabolic',
+            body: '• **Hyponatremia** — common with SSRIs, diuretics; confusion, agitation\n• **Hypercalcemia** — cognitive impairment to obtundation\n• **Uremia** — encephalopathy with advanced renal disease\n• **Hepatic encephalopathy** — asterixis, confusion\n• **B12 deficiency** — depression, irritability, delirium, psychosis, OCD',
+        },
+        {
+            heading: 'Infectious',
+            body: '• **UTI** — most common delirium cause in elderly women\n• **Pneumonia** — especially in elderly, immunocompromised\n• **Sepsis** — encephalopathy often first sign before fever\n• **HIV/AIDS** — CNS infections, dementia complex',
+        },
+        {
+            heading: 'Toxic',
+            body: '• **Alcohol withdrawal** — delirium tremens, hallucinations\n• **Benzodiazepine withdrawal** — anxiety, seizures\n• **Anticholinergic toxicity** — agitation, hallucinations, dry/hot\n• **Serotonin syndrome** — agitation, hyperthermia, clonus\n• **NMS** — rigidity, hyperthermia, AMS with neuroleptics\n• **CO poisoning** — multiple affected people, headache',
+        },
+        {
+            heading: 'Cardiovascular',
+            body: '• **ACS** — can present as confusion in elderly\n• **PE** — sense of impending doom mimics panic\n• **Arrhythmia** — palpitations, anxiety',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'JUCM. Psychiatric Manifestations of Organic Disease. 2021.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Organic vs Psychiatric
+    'ovp-red-flags-summary': OVP_RED_FLAGS_SUMMARY,
+    'ovp-aeiou-tips': OVP_AEIOU_TIPS,
+    'ovp-cam-tool': OVP_CAM_TOOL,
+    'ovp-delirium-vs-psych': OVP_DELIRIUM_VS_PSYCH,
+    'ovp-organic-mimics': OVP_ORGANIC_MIMICS,
     // Vertigo
     'vertigo-summary': VERTIGO_SUMMARY,
     'vertigo-hints-guide': VERTIGO_HINTS_GUIDE,

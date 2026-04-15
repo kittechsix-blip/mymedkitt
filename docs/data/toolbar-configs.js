@@ -556,6 +556,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'elderly', label: 'Elderly', icon: '👴', action: 'jump', target: 'del-elderly' },
         { id: 'cam', label: 'CAM', icon: '🧠', action: 'overlay', target: 'del-cam-guide' },
     ],
+    'organic-vs-psych': [
+        { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'overlay', target: 'ovp-red-flags-summary' },
+        { id: 'aeiou', label: 'AEIOU-TIPS', icon: '🔤', action: 'overlay', target: 'ovp-aeiou-tips' },
+        { id: 'cam', label: 'CAM', icon: '🧠', action: 'overlay', target: 'ovp-cam-tool' },
+        { id: 'mimics', label: 'Mimics', icon: '🎭', action: 'overlay', target: 'ovp-organic-mimics' },
+        { id: 'compare', label: 'Del vs Psych', icon: '⚖️', action: 'overlay', target: 'ovp-delirium-vs-psych' },
+    ],
     'dental-avulsion': [
         { id: 'reimplant', label: 'Reimplant', icon: '🦷', action: 'jump', target: 'avulsion-reimplant' },
         { id: 'storage', label: 'Storage', icon: '🥛', action: 'jump', target: 'avulsion-storage' },

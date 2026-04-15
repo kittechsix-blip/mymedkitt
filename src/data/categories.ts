@@ -1021,6 +1021,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'delirium-start',
       },
       {
+        id: 'organic-vs-psych',
+        title: 'Organic vs Psychiatric Emergency',
+        subtitle: 'Medical Clearance → Red Flags → Organic Mimics → Workup → Risk Assessment → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 22,
+        entryNodeId: 'ovp-start',
+      },
+      {
         id: 'migraine',
         title: 'Migraine',
         subtitle: 'Red Flags → ICHD-3 Diagnosis → Treatment → Rescue → Nerve Blocks → Dispo',

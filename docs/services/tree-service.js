@@ -470,6 +470,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/delirium.js');
             return { nodes: m.DELIRIUM_NODES, entryNodeId: 'delirium-start', categoryId: 'neurology', moduleLabels: m.DELIRIUM_MODULE_LABELS, citations: m.DELIRIUM_CITATIONS, criticalActions: m.DELIRIUM_CRITICAL_ACTIONS };
         },
+        'organic-vs-psych': async () => {
+            const m = await import('../data/trees/organic-vs-psych.js');
+            return { nodes: m.ORGANIC_PSYCH_NODES, entryNodeId: 'ovp-start', categoryId: 'neurology', moduleLabels: m.ORGANIC_PSYCH_MODULE_LABELS, citations: m.ORGANIC_PSYCH_CITATIONS, criticalActions: m.ORGANIC_PSYCH_CRITICAL_ACTIONS };
+        },
         'anaphylaxis': async () => {
             const m = await import('../data/trees/anaphylaxis.js');
             return { nodes: m.ANAPHYLAXIS_NODES, entryNodeId: 'anaph-start', categoryId: 'emergency-medicine', moduleLabels: m.ANAPHYLAXIS_MODULE_LABELS, citations: m.ANAPHYLAXIS_CITATIONS, criticalActions: m.ANAPHYLAXIS_CRITICAL_ACTIONS };
