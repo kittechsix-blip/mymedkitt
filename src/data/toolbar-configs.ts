@@ -1175,6 +1175,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ecg', label: 'Paced ECG', icon: '💓', action: 'calculator', target: 'pm-ecg-pattern' },
     { id: 'icd-storm', label: 'ICD Storm', icon: '🌩️', action: 'calculator', target: 'pm-icd-storm' },
   ],
+  // ---------------------------------------------------------------
+  // DVT
+  // ---------------------------------------------------------------
+  'dvt': [
+    { id: 'wells-dvt', label: 'Wells', icon: '📋', action: 'calculator', target: 'wells-dvt' },
+    { id: 'anticoag', label: 'Anticoag', icon: '💊', action: 'overlay', target: 'dvt-anticoag-tool' },
+    { id: 'us-findings', label: 'US Guide', icon: '🔊', action: 'overlay', target: 'dvt-us-guide' },
+    { id: 'special-pops', label: 'Special', icon: '⚠️', action: 'overlay', target: 'dvt-special-populations' },
+    { id: 'duration', label: 'Duration', icon: '📅', action: 'overlay', target: 'dvt-duration-guide' },
+  ],
 };
 
 // Stop button appended automatically to every consult

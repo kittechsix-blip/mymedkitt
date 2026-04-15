@@ -103,6 +103,7 @@ export { PERIPARTUM_CARDIOMYOPATHY_NODES, PERIPARTUM_CARDIOMYOPATHY_MODULE_LABEL
 export { HYPOTHERMIA_NODES, HYPOTHERMIA_MODULE_LABELS, HYPOTHERMIA_CITATIONS, HYPOTHERMIA_NODE_COUNT } from './hypothermia';
 export { AWAKE_INTUBATION_NODES, AWAKE_INTUBATION_MODULE_LABELS, AWAKE_INTUBATION_CITATIONS, AWAKE_INTUBATION_NODE_COUNT } from './awake-intubation';
 export { EAR_FB_NODES, EAR_FB_MODULE_LABELS, EAR_FB_CITATIONS } from './ear-fb';
+export { DVT_NODES, DVT_MODULE_LABELS, DVT_CITATIONS, DVT_CRITICAL_ACTIONS } from './dvt';
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
 /**

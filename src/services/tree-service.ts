@@ -335,6 +335,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'burr-hole': async () => (await import('../data/trees/burr-hole.js')).BURR_HOLE_CRITICAL_ACTIONS,
     'rv-assessment': async () => (await import('../data/trees/rv-assessment.js')).RV_ASSESSMENT_CRITICAL_ACTIONS,
     'cervical-spine': async () => (await import('../data/trees/cervical-spine.js')).CERVICAL_SPINE_CRITICAL_ACTIONS,
+    'dvt': async () => (await import('../data/trees/dvt.js')).DVT_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -1045,6 +1046,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'brain-herniation': async () => {
       const m = await import('../data/trees/brain-herniation.js');
       return { nodes: m.BRAIN_HERNIATION_NODES, entryNodeId: 'hern-start', categoryId: 'trauma-surg', moduleLabels: m.BRAIN_HERNIATION_MODULE_LABELS, citations: m.BRAIN_HERNIATION_CITATIONS, criticalActions: m.BRAIN_HERNIATION_CRITICAL_ACTIONS };
+    },
+    'dvt': async () => {
+      const m = await import('../data/trees/dvt.js');
+      return { nodes: m.DVT_NODES, entryNodeId: 'dvt-start', categoryId: 'heme-onc', moduleLabels: m.DVT_MODULE_LABELS, citations: m.DVT_CITATIONS, criticalActions: m.DVT_CRITICAL_ACTIONS };
     },
   };
 

@@ -12677,7 +12677,159 @@ const OVP_ORGANIC_MIMICS: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// DVT Info Pages
+// -------------------------------------------------------------------
+
+const DVT_ANTICOAG_TOOL: InfoPage = {
+  id: 'dvt-anticoag-tool',
+  title: 'Anticoagulant Selection for DVT',
+  subtitle: 'Patient profile-based treatment selection',
+  sections: [
+    {
+      heading: 'Standard Patient (No Complicating Factors)',
+      body: '**First-Line: DOACs (no bridging required)**\n\n• **Apixaban:** 10 mg BID × 7 days → 5 mg BID\n• **Rivaroxaban:** 15 mg BID × 21 days → 20 mg daily\n\n*Both are single-drug approaches without parenteral bridging.*',
+    },
+    {
+      heading: 'Active Cancer',
+      body: '**CHEST 2021: DOAC or LMWH preferred over warfarin**\n\n• **Apixaban** — preferred (lowest GI bleeding)\n• **LMWH** — if GI malignancy, drug interactions, or poor oral intake\n  - Enoxaparin 1 mg/kg BID\n  - Dalteparin 200 U/kg daily × 30d → 150 U/kg daily\n\n**Duration:** Indefinite while cancer active',
+    },
+    {
+      heading: 'Pregnancy',
+      body: '**⚠️ DOACs and WARFARIN are CONTRAINDICATED**\n\n• **LMWH:** Enoxaparin 1 mg/kg BID (weight-based)\n• Do NOT use once-daily dosing in pregnancy\n\n**Duration:** Throughout pregnancy + ≥6 weeks postpartum',
+    },
+    {
+      heading: 'Renal Impairment',
+      body: '**CrCl 30-50:** DOACs okay with dose adjustments\n**CrCl 15-30:** Apixaban preferred (5 mg BID)\n**CrCl <15/Dialysis:** Apixaban 5 mg BID, warfarin, or UFH\n\n*Avoid LMWH in dialysis (accumulates)*',
+    },
+    {
+      heading: 'Antiphospholipid Syndrome',
+      body: '**⚠️ DOACs are INFERIOR to warfarin for APS**\n\n• Use warfarin, target INR 2-3\n• Triple-positive APS may need INR 3-4\n• TRAPS trial showed higher thrombosis with rivaroxaban',
+    },
+    {
+      heading: 'High Bleeding Risk',
+      body: '• **Apixaban** — lowest GI bleeding among DOACs\n• Consider LMWH (partially reversible with protamine)\n• May need shorter duration therapy (3 months)',
+    },
+    {
+      heading: 'Obesity (>120 kg or BMI >40)',
+      body: '• Standard DOAC dosing appears effective\n• Consider drug-specific anti-Xa levels if concern\n• Alternative: warfarin or LMWH with anti-Xa monitoring',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Stevens SM, et al. CHEST Guideline 2021.' },
+    { num: 2, text: 'Kearon C, et al. CHEST Guideline 2016.' },
+  ],
+};
+
+const DVT_US_GUIDE: InfoPage = {
+  id: 'dvt-us-guide',
+  title: 'DVT Ultrasound Interpretation',
+  subtitle: 'Compression ultrasound findings and management',
+  sections: [
+    {
+      heading: 'Technique',
+      body: '**Compression Ultrasonography (CUS)**\n\n• Compress vein with transducer every 1-2 cm\n• Normal: vein completely compresses (walls touch)\n• DVT: vein does NOT compress (thrombus visible)\n\n**Standard locations:** Common femoral → superficial femoral → popliteal',
+    },
+    {
+      heading: 'Positive: Proximal DVT',
+      body: '**Definition:** Popliteal vein or above (femoral, iliac)\n\n**Risk:** 40-50% have subclinical PE\n\n**Management:**\n• ALL proximal DVTs require anticoagulation\n• Minimum 3 months duration\n• Consider catheter-directed thrombolysis for iliofemoral DVT with:\n  - Onset <14 days\n  - Good functional status\n  - Low bleeding risk',
+    },
+    {
+      heading: 'Positive: Isolated Calf DVT',
+      body: '**Definition:** DVT limited to tibial, peroneal, or muscular veins\n\n**Natural history:** 15-25% propagate to proximal within 2 weeks\n\n**Options:**\n1. **Anticoagulate** — severe symptoms, high extension risk\n2. **Serial imaging** — repeat US at 1 week, then 2 weeks\n   - If propagates → anticoagulate',
+    },
+    {
+      heading: 'Negative with High Probability',
+      body: '**Wells ≥2 + Negative US:**\n• 5-7% still have DVT on repeat\n• Recommend repeat US in 5-7 days\n• Or whole-leg US\n• Consider CT/MR venography if iliac DVT suspected',
+    },
+    {
+      heading: 'Iliac Vein DVT',
+      body: '**May be missed on standard CUS**\n\nConsider CT or MR venography if:\n• Bilateral leg swelling\n• Abdominal/back pain\n• Pregnancy (iliac compression)\n• Pelvic mass\n• Left leg DVT in young woman (May-Thurner)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'UpToDate. DVT Diagnosis. 2024.' },
+  ],
+};
+
+const DVT_SPECIAL_POPULATIONS: InfoPage = {
+  id: 'dvt-special-populations',
+  title: 'DVT Special Populations',
+  subtitle: 'IVC filters, treatment failure, high-risk scenarios',
+  sections: [
+    {
+      heading: 'IVC Filter Indications',
+      body: '**Very Limited Indications:**\n\n**Absolute:**\n• Acute proximal DVT/PE with TRUE contraindication to anticoag\n  - Active major bleeding\n  - Recent major surgery with high bleed risk\n  - Hemorrhagic stroke\n\n**NOT Indications:**\n• "High bleeding risk" without active bleeding\n• Prophylaxis in trauma\n• Free-floating thrombus (anticoagulate)\n• Patient preference\n\n**⚠️ Filters do NOT reduce mortality and increase long-term DVT risk**',
+    },
+    {
+      heading: 'Treatment Failure / Recurrent VTE',
+      body: '**First: Confirm compliance and therapeutic levels**\n\n**On DOAC:**\n• Switch to LMWH, or\n• Increase dose, or switch DOAC\n\n**On LMWH:**\n• Increase dose by 25-33%\n• Check anti-Xa levels\n\n**On Warfarin:**\n• Switch to LMWH or DOAC\n\n**Consider IVC filter only if recurs despite therapeutic anticoag**',
+    },
+    {
+      heading: 'Phlegmasia Cerulea Dolens',
+      body: '**Limb-threatening DVT**\n\n• Massive iliofemoral DVT\n• Triad: severe pain, cyanosis, massive edema\n• Risk of venous gangrene\n\n**Management:**\n• Immediate anticoagulation\n• Urgent vascular/IR consult\n• Consider catheter-directed thrombolysis\n• May need fasciotomy',
+    },
+    {
+      heading: 'Upper Extremity DVT',
+      body: '• Often catheter-related or Paget-Schroetter syndrome\n• Similar anticoagulation principles\n• Consider catheter removal if related\n• Lower PE risk than lower extremity DVT',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'CHEST Guidelines 2021.' },
+    { num: 2, text: 'Jaff MR, et al. Circulation 2011.' },
+  ],
+};
+
+const DVT_DURATION_GUIDE: InfoPage = {
+  id: 'dvt-duration-guide',
+  title: 'Duration of Anticoagulation',
+  subtitle: 'Provoked vs unprovoked DVT treatment duration',
+  sections: [
+    {
+      heading: 'Provoked DVT (Major Transient Risk Factor)',
+      body: '**Examples:** Major surgery, trauma, hospitalization >3 days, cast\n\n**Duration:** 3 months, then STOP\n\n**Recurrence risk:** <3% per year after stopping',
+    },
+    {
+      heading: 'Minor Transient Risk Factor',
+      body: '**Examples:** Long flight, oral contraceptives, minor surgery, minor trauma\n\n**Duration:** 3 months minimum, consider extended\n\n**Recurrence risk:** ~5% per year after stopping',
+    },
+    {
+      heading: 'Unprovoked DVT',
+      body: '**Definition:** No identifiable risk factor\n\n**Duration:** Extended/indefinite (PREFERRED)\n• Or 3 months minimum, then reassess\n\n**Recurrence risk:** 10% at 1 year, 30% at 5 years\n• Males have higher recurrence than females',
+    },
+    {
+      heading: 'Cancer-Associated DVT',
+      body: '**Duration:** INDEFINITE while cancer active\n\n• Reassess if cancer in remission\n• Apixaban or LMWH preferred over warfarin',
+    },
+    {
+      heading: 'Recurrent Unprovoked VTE',
+      body: '**Duration:** INDEFINITE anticoagulation',
+    },
+    {
+      heading: 'Extended Therapy Options (After Initial 6 Months)',
+      body: '**Reduced-dose DOAC:**\n• Apixaban 2.5 mg BID\n• Rivaroxaban 10 mg daily\n\n*Similar efficacy with lower bleeding (AMPLIFY-EXT, EINSTEIN-CHOICE)*\n\n**Aspirin:** Inferior but better than nothing if anticoag stopped',
+    },
+    {
+      heading: 'Factors Favoring Extended Therapy',
+      body: '• Unprovoked DVT\n• Male sex\n• Positive D-dimer 1 month after stopping\n• Residual thrombus\n• Prior VTE\n• Active cancer\n• Antiphospholipid syndrome\n• Strong thrombophilia',
+    },
+    {
+      heading: 'Factors Favoring Stopping at 3 Months',
+      body: '• Provoked by major transient risk factor\n• High bleeding risk\n• Falls risk\n• Patient preference\n• Poor compliance expected',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kearon C, et al. CHEST 2016.' },
+    { num: 2, text: 'Agnelli G, et al. NEJM 2013 (AMPLIFY-EXT).' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // DVT
+  'dvt-anticoag-tool': DVT_ANTICOAG_TOOL,
+  'dvt-us-guide': DVT_US_GUIDE,
+  'dvt-special-populations': DVT_SPECIAL_POPULATIONS,
+  'dvt-duration-guide': DVT_DURATION_GUIDE,
   // Organic vs Psychiatric
   'ovp-red-flags-summary': OVP_RED_FLAGS_SUMMARY,
   'ovp-aeiou-tips': OVP_AEIOU_TIPS,
