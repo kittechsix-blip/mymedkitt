@@ -1171,6 +1171,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'special-pops', label: 'Special', icon: '⚠️', action: 'overlay', target: 'dvt-special-populations' },
         { id: 'duration', label: 'Duration', icon: '📅', action: 'overlay', target: 'dvt-duration-guide' },
     ],
+    // ---------------------------------------------------------------
+    // Pediatric Intussusception
+    // ---------------------------------------------------------------
+    'intussusception': [
+        { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'overlay', target: 'intuss-red-flags' },
+        { id: 'us-guide', label: 'US Guide', icon: '🔊', action: 'overlay', target: 'intuss-us-guide' },
+        { id: 'lead-points', label: 'Lead Points', icon: '🎯', action: 'overlay', target: 'intuss-lead-points' },
+        { id: 'contraindications', label: 'Enema CI', icon: '🚫', action: 'overlay', target: 'intuss-contraindications' },
+        { id: 'post-reduction', label: 'Post-Reduce', icon: '✅', action: 'overlay', target: 'intuss-post-reduction' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

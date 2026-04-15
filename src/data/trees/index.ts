@@ -105,6 +105,7 @@ export { HYPOTHERMIA_NODES, HYPOTHERMIA_MODULE_LABELS, HYPOTHERMIA_CITATIONS, HY
 export { AWAKE_INTUBATION_NODES, AWAKE_INTUBATION_MODULE_LABELS, AWAKE_INTUBATION_CITATIONS, AWAKE_INTUBATION_NODE_COUNT } from './awake-intubation';
 export { EAR_FB_NODES, EAR_FB_MODULE_LABELS, EAR_FB_CITATIONS } from './ear-fb';
 export { DVT_NODES, DVT_MODULE_LABELS, DVT_CITATIONS, DVT_CRITICAL_ACTIONS } from './dvt';
+export { INTUSSUSCEPTION_NODES, INTUSSUSCEPTION_MODULE_LABELS, INTUSSUSCEPTION_CITATIONS, INTUSSUSCEPTION_CRITICAL_ACTIONS } from './intussusception';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

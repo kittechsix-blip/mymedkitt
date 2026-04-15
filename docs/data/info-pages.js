@@ -12269,7 +12269,175 @@ const DVT_DURATION_GUIDE = {
         { num: 2, text: 'Agnelli G, et al. NEJM 2013 (AMPLIFY-EXT).' },
     ],
 };
+// -------------------------------------------------------------------
+// Pediatric Intussusception Info Pages
+// -------------------------------------------------------------------
+const INTUSS_RED_FLAGS = {
+    id: 'intuss-red-flags',
+    title: 'Intussusception Red Flags',
+    subtitle: 'Warning signs requiring immediate attention',
+    sections: [
+        {
+            heading: 'Late/Concerning Findings',
+            body: '**Bloody stool / "currant jelly"** - mucus + blood + sloughed mucosa\n**Bilious vomiting** - indicates complete obstruction\n**Abdominal distension** - progressive obstruction\n**Peritoneal signs** - rebound, guarding, rigidity\n**Shock** - tachycardia, poor perfusion, hypotension',
+        },
+        {
+            heading: 'Atypical Presentations',
+            body: '**Lethargy or altered mental status** - may be ONLY symptom in young infants\n**Painless intussusception** - rare but occurs\n**Pallor and hypotonia** - nonspecific but concerning',
+        },
+        {
+            heading: 'High-Risk Age Groups',
+            body: '**<3 months old:** Higher risk of pathologic lead point (surgical consult early)\n**>5 years old:** Lead point in ~30% (consider CT to evaluate)',
+        },
+        {
+            heading: 'Absolute Contraindications to Enema',
+            body: '**Peritonitis** - rebound, guarding, rigidity\n**Pneumoperitoneum** - free air on X-ray\n**Hemodynamic instability / Shock** - despite resuscitation\n\n*These patients go directly to surgery*',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'UpToDate. Intussusception in children. 2024.' },
+        { num: 2, text: 'StatPearls. Child Intussusception. 2024.' },
+    ],
+};
+const INTUSS_US_GUIDE = {
+    id: 'intuss-us-guide',
+    title: 'Intussusception Ultrasound Guide',
+    subtitle: 'Target sign, pseudokidney, and key findings',
+    sections: [
+        {
+            heading: 'Technique',
+            body: '**Probe:** Linear high-frequency (children), curvilinear for larger patients\n**Approach:** Systematic scan of all quadrants\n**Focus:** Right upper quadrant (most common location)',
+        },
+        {
+            heading: 'Target Sign / Donut Sign (Transverse)',
+            body: '![Target Sign](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Intussusception.png/220px-Intussusception.png)\n\n**Appearance:** Concentric rings of alternating echogenicity\n**Size:** Usually ~3 cm diameter\n**Components:**\n- Hypoechoic outer rim = edematous bowel wall\n- Hyperechoic center = mesentery and trapped fat\n- Multiple layers visible',
+        },
+        {
+            heading: 'Pseudokidney Sign (Longitudinal)',
+            body: 'When viewing along the length of the intussusception:\n- Elongated, kidney-shaped structure\n- Also called "sandwich" or "hayfork" sign\n- Layers visible along the length',
+        },
+        {
+            heading: 'Color Doppler Assessment',
+            body: '**Normal flow:** Good prognostic sign\n**Absent/reduced flow:** Concerning for ischemia - higher risk\n\n*Absence of Doppler flow suggests vascular compromise - consider early surgical consultation*',
+        },
+        {
+            heading: 'Concerning US Features',
+            body: '- **Free peritoneal fluid** - prolonged/severe case\n- **Absent Doppler flow** - vascular compromise\n- **Large trapped fluid** - edema and ischemia\n- **Left-sided location** - advanced, harder reduction\n- **Visible lead point** - will likely need surgery',
+        },
+        {
+            heading: 'Test Characteristics',
+            body: '**Sensitivity:** >97%\n**Specificity:** >97%\n**Negative Predictive Value:** 99.7%\n\n*A negative US by experienced sonographer effectively rules out ileocolic intussusception*',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP EM Ultrasound. Mastering Intussusception US. 2021.' },
+        { num: 2, text: 'Daneman A. Practical Imaging Strategies. AJR. 2020.' },
+    ],
+};
+const INTUSS_LEAD_POINTS = {
+    id: 'intuss-lead-points',
+    title: 'Pathologic Lead Points by Age',
+    subtitle: 'When to suspect and what to look for',
+    sections: [
+        {
+            heading: 'Overall Incidence',
+            body: 'Pathologic lead points occur in ~10% of pediatric intussusceptions overall.\n\nThe vast majority (90%) are **idiopathic** - thought to be due to lymphoid hyperplasia (Peyer patches) from viral illness.',
+        },
+        {
+            heading: 'Age <3 Months',
+            body: '**Higher risk of lead point** even though intussusception is rare at this age.\n\nIf intussusception occurs in this age group:\n- Idiopathic in ~75%\n- Lead point in ~25%\n- Obtain surgical consultation early',
+        },
+        {
+            heading: 'Age 3 Months - 3 Years',
+            body: '**Peak age for intussusception**\n\nMostly idiopathic (viral-triggered lymphoid hyperplasia)\n\nLead point in ~3-5%\n\nGood candidate for enema reduction',
+        },
+        {
+            heading: 'Age >5 Years',
+            body: '**Lead point in ~30%** - much higher!\n\n**Common lead points:**\n- **Meckel diverticulum** (most common, ~75%)\n- **Polyps** (~15%)\n- **Lymphoma** (especially older children)\n- **Henoch-Schonlein purpura** (intestinal involvement)\n- **Duplication cysts**\n\n**Consider CT scan** to evaluate for lead point before/after reduction\n\n**Earlier surgical consultation** recommended',
+        },
+        {
+            heading: 'Lead Point Types',
+            body: '**Meckel Diverticulum** - most common (75%)\n**Polyps** - 15% of lead points\n**Lymphoma/Tumors** - 3%\n**Duplication cyst**\n**Lymphangioma**\n**Henoch-Schonlein purpura** - vasculitis causing bowel wall hematoma',
+        },
+        {
+            heading: 'When to Suspect Lead Point',
+            body: '- Age <3 months or >5 years\n- Recurrent intussusception (3+ episodes)\n- Visible mass on ultrasound within intussusception\n- Failed reduction without obvious cause\n- Small bowel-small bowel intussusception with symptoms',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'UpToDate. Intussusception in children. 2024.' },
+        { num: 2, text: 'Jen HC. Clinical prediction rules. J Pediatr Surg. 2016.' },
+    ],
+};
+const INTUSS_CONTRAINDICATIONS = {
+    id: 'intuss-contraindications',
+    title: 'Enema Reduction Contraindications',
+    subtitle: 'When NOT to attempt non-operative reduction',
+    sections: [
+        {
+            heading: 'ABSOLUTE Contraindications',
+            body: '**Peritonitis**\n- Rebound tenderness\n- Guarding\n- Rigidity\n- Exquisite tenderness\n\n**Pneumoperitoneum**\n- Free air on abdominal X-ray\n- Signs of perforation\n\n**Hemodynamic Instability / Shock**\n- Persistent tachycardia\n- Hypotension despite fluids\n- Poor perfusion\n- Altered mental status from shock\n\n*These patients require IMMEDIATE SURGICAL INTERVENTION*',
+        },
+        {
+            heading: 'Relative Contraindications (Higher Failure Risk)',
+            body: 'These are NOT absolute contraindications, but reduction is more likely to fail:\n\n- Symptom duration >48 hours\n- Rectal bleeding or bloody stool\n- Severe dehydration\n- Small bowel obstruction on X-ray\n- Prolapsing intussusception (through rectum)\n- Left-sided location on imaging\n- Absent Doppler flow\n- Free fluid on ultrasound',
+        },
+        {
+            heading: 'Enema Reduction Success Rates',
+            body: '**Air (pneumatic) reduction:** 80-95% success\n**Hydrostatic (saline) reduction:** 73-86% success\n\n**Factors decreasing success:**\n- Longer symptom duration\n- Younger age\n- Lethargy\n- Fever\n- Bloody diarrhea\n- SBO on X-ray\n- Left-sided intussusception\n- Pathologic lead point',
+        },
+        {
+            heading: 'Perforation Risk',
+            body: 'Overall perforation rate during reduction: **0.5-1%**\n\n**If perforation occurs:**\n- STOP the procedure\n- Decompress if tension pneumoperitoneum\n- Immediate surgical consultation\n- IV antibiotics\n- Emergent laparotomy',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Xie X. Pneumatic vs liquid enema: meta-analysis. 2024.' },
+        { num: 2, text: 'Jen HC. Clinical prediction rules. J Pediatr Surg. 2016.' },
+    ],
+};
+const INTUSS_POST_REDUCTION = {
+    id: 'intuss-post-reduction',
+    title: 'Post-Reduction Care Guide',
+    subtitle: 'Observation, feeding, discharge criteria',
+    sections: [
+        {
+            heading: 'Observation Period',
+            body: '**Minimum 4 hours** observation after successful reduction (CHOP guideline)\n\nSome institutions observe 6-24 hours, but evidence supports shorter observation for stable patients.',
+        },
+        {
+            heading: 'Oral Trial',
+            body: 'Begin **clear liquids 2 hours** post-reduction\n\nAdvance diet as tolerated\n\nIf tolerating PO well - good sign for discharge',
+        },
+        {
+            heading: 'Monitoring',
+            body: '- Vital signs q1-2 hours initially\n- Serial abdominal exams\n- Watch for return of symptoms:\n  - Episodic crying/pain\n  - Vomiting\n  - Abdominal distension\n  - Lethargy',
+        },
+        {
+            heading: 'Recurrence',
+            body: '**Recurrence rate: 8-10%**\n\nMost recurrences occur within **24-48 hours**\n\n**If recurrence suspected:**\n- Repeat ultrasound\n- Can attempt repeat enema reduction\n- After 3 recurrences: surgical intervention',
+        },
+        {
+            heading: 'Discharge Criteria',
+            body: '- Observation period completed (4+ hours)\n- Tolerating oral intake\n- Asymptomatic\n- Reliable caregivers with transportation\n- Close follow-up available\n- Understand return precautions',
+        },
+        {
+            heading: 'Admission Criteria',
+            body: '- Age <36 months (some guidelines)\n- Unable to tolerate PO\n- Prolonged symptoms prior to reduction\n- Multiple reduction attempts required\n- Concern for lead point\n- Social concerns / poor follow-up',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'CHOP. Ileocolic Intussusception Pathway. 2024.' },
+        { num: 2, text: 'APSA. Management of Intussusception Review. 2021.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Intussusception
+    'intuss-red-flags': INTUSS_RED_FLAGS,
+    'intuss-us-guide': INTUSS_US_GUIDE,
+    'intuss-lead-points': INTUSS_LEAD_POINTS,
+    'intuss-contraindications': INTUSS_CONTRAINDICATIONS,
+    'intuss-post-reduction': INTUSS_POST_REDUCTION,
     // DVT
     'dvt-anticoag-tool': DVT_ANTICOAG_TOOL,
     'dvt-us-guide': DVT_US_GUIDE,

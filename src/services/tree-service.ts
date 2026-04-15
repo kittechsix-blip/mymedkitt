@@ -336,6 +336,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'rv-assessment': async () => (await import('../data/trees/rv-assessment.js')).RV_ASSESSMENT_CRITICAL_ACTIONS,
     'cervical-spine': async () => (await import('../data/trees/cervical-spine.js')).CERVICAL_SPINE_CRITICAL_ACTIONS,
     'dvt': async () => (await import('../data/trees/dvt.js')).DVT_CRITICAL_ACTIONS,
+    'intussusception': async () => (await import('../data/trees/intussusception.js')).INTUSSUSCEPTION_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -1050,6 +1051,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'dvt': async () => {
       const m = await import('../data/trees/dvt.js');
       return { nodes: m.DVT_NODES, entryNodeId: 'dvt-start', categoryId: 'heme-onc', moduleLabels: m.DVT_MODULE_LABELS, citations: m.DVT_CITATIONS, criticalActions: m.DVT_CRITICAL_ACTIONS };
+    },
+    'intussusception': async () => {
+      const m = await import('../data/trees/intussusception.js');
+      return { nodes: m.INTUSSUSCEPTION_NODES, entryNodeId: 'intuss-start', categoryId: 'pediatrics', moduleLabels: m.INTUSSUSCEPTION_MODULE_LABELS, citations: m.INTUSSUSCEPTION_CITATIONS, criticalActions: m.INTUSSUSCEPTION_CRITICAL_ACTIONS };
     },
   };
 
