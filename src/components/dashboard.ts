@@ -8,7 +8,8 @@ import { isSharedMode, getSharedTreeIds, grantFullAccess } from '../services/sha
 import type { Category } from '../models/types.js';
 import { getAllDrugs } from '../services/drug-service.js';
 import { getAllCalculators } from './calculator.js';
-import { buildSearchIndex } from '../services/search-service.js';
+import { buildSearchIndex, search, type SearchResult } from '../services/search-service.js';
+import { showDrugModal } from './drug-store.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -83,28 +84,122 @@ export function renderDashboard(container: HTMLElement): void {
   const heroSearch = document.createElement('div');
   heroSearch.className = 'dashboard-hero-search';
 
-  const heroSearchBtn = document.createElement('button');
-  heroSearchBtn.className = 'dashboard-hero-search__btn';
-  heroSearchBtn.type = 'button';
+  const searchField = document.createElement('div');
+  searchField.className = 'dashboard-hero-search__field';
 
   const searchIcon = document.createElement('span');
   searchIcon.className = 'dashboard-hero-search__icon';
   searchIcon.textContent = '🔍';
+  searchIcon.setAttribute('aria-hidden', 'true');
 
-  const searchText = document.createElement('span');
-  searchText.className = 'dashboard-hero-search__text';
-  searchText.textContent = 'Search consults, drugs, calculators...';
+  const searchInput = document.createElement('input');
+  searchInput.className = 'dashboard-hero-search__input';
+  searchInput.type = 'search';
+  searchInput.placeholder = 'Search consults, drugs, calculators…';
+  searchInput.setAttribute('aria-label', 'Search consults, drugs, and calculators');
+  searchInput.autocomplete = 'off';
+  searchInput.autocapitalize = 'off';
+  searchInput.spellcheck = false;
+  searchInput.enterKeyHint = 'search';
 
-  const searchShortcut = document.createElement('span');
-  searchShortcut.className = 'dashboard-hero-search__shortcut';
-  searchShortcut.textContent = '⌘K';
+  searchField.appendChild(searchIcon);
+  searchField.appendChild(searchInput);
 
-  heroSearchBtn.appendChild(searchIcon);
-  heroSearchBtn.appendChild(searchText);
-  heroSearchBtn.appendChild(searchShortcut);
+  const resultsList = document.createElement('ul');
+  resultsList.className = 'dashboard-hero-search__results';
+  resultsList.setAttribute('role', 'listbox');
+  resultsList.hidden = true;
 
-  heroSearch.appendChild(heroSearchBtn);
+  heroSearch.appendChild(searchField);
+  heroSearch.appendChild(resultsList);
   dashboard.appendChild(heroSearch);
+
+  function navigateToResult(r: SearchResult): void {
+    searchInput.value = '';
+    resultsList.hidden = true;
+    resultsList.innerHTML = '';
+    if (r.type === 'drug' && r.drugId) {
+      showDrugModal(r.drugId);
+      return;
+    }
+    router.navigate(r.route);
+  }
+
+  function renderResults(query: string): void {
+    if (!query.trim()) {
+      resultsList.hidden = true;
+      resultsList.innerHTML = '';
+      return;
+    }
+    const results = search(query).slice(0, 12);
+    resultsList.innerHTML = '';
+    if (results.length === 0) {
+      const empty = document.createElement('li');
+      empty.className = 'dashboard-hero-search__empty';
+      empty.textContent = 'No matches';
+      resultsList.appendChild(empty);
+      resultsList.hidden = false;
+      return;
+    }
+    for (const r of results) {
+      const li = document.createElement('li');
+      li.className = 'dashboard-hero-search__result';
+      li.setAttribute('role', 'option');
+      li.tabIndex = 0;
+
+      const badge = document.createElement('span');
+      badge.className = `dashboard-hero-search__badge dashboard-hero-search__badge--${r.type}`;
+      badge.textContent = r.type;
+
+      const labelWrap = document.createElement('span');
+      labelWrap.className = 'dashboard-hero-search__label-wrap';
+
+      const label = document.createElement('span');
+      label.className = 'dashboard-hero-search__label';
+      label.textContent = r.label;
+
+      labelWrap.appendChild(label);
+
+      if (r.sublabel) {
+        const sub = document.createElement('span');
+        sub.className = 'dashboard-hero-search__sublabel';
+        sub.textContent = r.sublabel;
+        labelWrap.appendChild(sub);
+      }
+
+      li.appendChild(badge);
+      li.appendChild(labelWrap);
+
+      li.addEventListener('click', () => navigateToResult(r));
+      li.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          navigateToResult(r);
+        }
+      });
+
+      resultsList.appendChild(li);
+    }
+    resultsList.hidden = false;
+  }
+
+  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  searchInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') {
+      const first = resultsList.querySelector<HTMLLIElement>('.dashboard-hero-search__result');
+      if (first) first.click();
+    } else if (ev.key === 'Escape') {
+      searchInput.value = '';
+      resultsList.hidden = true;
+      resultsList.innerHTML = '';
+      searchInput.blur();
+    }
+  });
+  document.addEventListener('click', (ev) => {
+    if (!heroSearch.contains(ev.target as Node)) {
+      resultsList.hidden = true;
+    }
+  });
 
   // ---- Recents Row ----
   const recents = getRecents();

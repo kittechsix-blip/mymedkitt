@@ -3695,52 +3695,135 @@ body {
 
 /* Hero Search Bar */
 .dashboard-hero-search {
+  position: relative;
   margin: 0 0 24px;
 }
 
-.dashboard-hero-search__btn {
+.dashboard-hero-search__field {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  padding: 14px 18px;
+  padding: 12px 16px;
   background: var(--color-surface-card);
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 16px;
-  color: var(--color-text-muted);
-  text-align: left;
   box-shadow: var(--shadow-sm);
-  transition: all 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.dashboard-hero-search__btn:hover {
+.dashboard-hero-search__field:focus-within {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-md);
-}
-
-.dashboard-hero-search__btn:active {
-  transform: scale(0.99);
 }
 
 .dashboard-hero-search__icon {
   font-size: 18px;
   opacity: 0.6;
+  flex-shrink: 0;
 }
 
-.dashboard-hero-search__text {
+.dashboard-hero-search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-text-primary);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dashboard-hero-search__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.dashboard-hero-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dashboard-hero-search__results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 60vh;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg, 0 8px 24px rgba(0,0,0,0.12));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-hero-search__result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dashboard-hero-search__result:hover,
+.dashboard-hero-search__result:focus {
+  background: var(--color-surface-hover);
+  outline: 0;
+}
+
+.dashboard-hero-search__badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: var(--color-text-muted);
+}
+
+.dashboard-hero-search__badge--consult { background: #1565C0; }
+.dashboard-hero-search__badge--drug { background: #2E7D32; }
+.dashboard-hero-search__badge--calculator { background: #6A1B9A; }
+.dashboard-hero-search__badge--category { background: #455A64; }
+
+.dashboard-hero-search__label-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   flex: 1;
 }
 
-.dashboard-hero-search__shortcut {
-  padding: 4px 10px;
-  background: var(--color-surface-hover);
-  border-radius: 6px;
-  font-size: 12px;
+.dashboard-hero-search__label {
+  font-size: 15px;
   font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-hero-search__sublabel {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-hero-search__empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
   color: var(--color-text-muted);
 }
 
