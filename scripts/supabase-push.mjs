@@ -255,6 +255,7 @@ const TREE_REGISTRY = {
   'cauda-equina':        { prefix: 'CAUDA_EQUINA',         entryNodeId: 'ces-start',          categoryId: 'trauma-surg' },
   'brain-herniation':    { prefix: 'BRAIN_HERNIATION',     entryNodeId: 'hern-start',         categoryId: 'trauma-surg' },
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',        categoryId: 'infectious-disease' },
+  'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL', entryNodeId: 'fh-start',        categoryId: 'procedures' },
 };
 
 const CROSS_LISTINGS = {
