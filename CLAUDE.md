@@ -46,6 +46,23 @@ Skill tool → skill: "deploy"
 
 **Do NOT manually run deploy steps.** Always use the skill to ensure nothing is missed.
 
+### Parallel-Session Safety (MANDATORY before any git commit/push)
+
+**Problem:** Two Claude sessions running in this repo simultaneously can swap commit messages (one session's staged files end up under another session's prepared message via `.git/COMMIT_EDITMSG` race) and `pull --rebase` from one session can silently drop the other's unpushed commits. This happened on 2026-04-16 — search-bar fix shipped under an NSTI consult's commit message.
+
+**Before every `git commit` or `git push` in this repo, check:**
+
+1. `git status` — any staged files you didn't stage?
+2. `git reflog -n 5` — any HEAD movements (commits/resets) you didn't perform in this session?
+3. Untracked files matching an in-progress feature you weren't building?
+
+**If parallel activity is detected:**
+- STOP. Tell Andy what you found before doing anything destructive.
+- Do NOT run `git pull --rebase`, `git reset`, or `git push --force` — these can drop the other session's work.
+- Prefer working on a separate branch (`git checkout -b fix/<name>`) to isolate commits until merge.
+
+Full rule and recovery steps: `~/Desktop/claude-brain/agent-instructions/agent-rules.md`.
+
 ### New Consult Build Pipeline (Autonomous)
 1. Create tree file: `src/data/trees/<id>.ts` (use `CONSULT_TEMPLATE.md`)
 2. Register in: `categories.ts`, `tree-service.ts`, `trees/index.ts`
