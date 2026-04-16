@@ -254,6 +254,7 @@ const TREE_REGISTRY = {
   'neurogenic-shock':    { prefix: 'NEUROGENIC_SHOCK',     entryNodeId: 'neuro-shock-start',  categoryId: 'trauma-surg' },
   'cauda-equina':        { prefix: 'CAUDA_EQUINA',         entryNodeId: 'ces-start',          categoryId: 'trauma-surg' },
   'brain-herniation':    { prefix: 'BRAIN_HERNIATION',     entryNodeId: 'hern-start',         categoryId: 'trauma-surg' },
+  'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',        categoryId: 'infectious-disease' },
 };
 
 const CROSS_LISTINGS = {
