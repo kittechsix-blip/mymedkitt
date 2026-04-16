@@ -13,9 +13,6 @@ export const NECROTIZING_FASCIITIS_NODES = [
         title: 'Necrotizing Fasciitis — Initial Assessment',
         body: '[NSTI Steps Summary](#/info/nf-summary)\n\n**Necrotizing Soft Tissue Infection (NSTI)** is a rapidly progressive, life-threatening infection of the fascia and subcutaneous tissue with mortality of **25-35%** even with treatment. [1][2]\n\n**Key Principle:** This is a CLINICAL and SURGICAL diagnosis. Labs and imaging may support suspicion but CANNOT rule out NSTI. When in doubt, get surgery to the bedside. [2][3]\n\n**Hard Signs (high specificity):** [2]\n• Hemorrhagic bullae (~96% specific)\n• Crepitus / gas on imaging\n• Skin necrosis or violaceous discoloration\n• "Dishwater" gray wound drainage\n\n**Soft Signs (variable sensitivity):**\n• Pain out of proportion to exam (~90% sensitive) [2]\n• Rapidly spreading erythema/edema\n• Systemic toxicity with focal pain\n• Edema extending beyond erythema borders\n\n[NSTI Classification](#/info/nf-classification)\n\nAssess hemodynamic status:',
         citation: [1, 2, 3],
-        calculatorLinks: [
-            { id: 'lrinec', label: 'LRINEC Score' },
-        ],
         options: [
             {
                 label: 'Hard Signs Present',
@@ -107,9 +104,6 @@ export const NECROTIZING_FASCIITIS_NODES = [
         title: 'LRINEC Score — Adjunct Only',
         body: '**Laboratory Risk Indicator for Necrotizing Fasciitis (LRINEC)** [5]\n\n[Calculate LRINEC Score](#/calc/lrinec)\n\n| Parameter | Cutoff | Points |\n|-----------|--------|--------|\n| CRP | <150 mg/L | 0 |\n| | >=150 mg/L | 4 |\n| WBC | <15 | 0 |\n| | 15-25 | 1 |\n| | >25 | 2 |\n| Hemoglobin | >13.5 g/dL | 0 |\n| | 11-13.5 | 1 |\n| | <11 | 2 |\n| Sodium | >=135 | 0 |\n| | <135 | 2 |\n| Creatinine | <=1.6 mg/dL | 0 |\n| | >1.6 | 2 |\n| Glucose | <=180 mg/dL | 0 |\n| | >180 | 1 |\n\n**Interpretation:**\n• **LRINEC >=6** — Higher risk, ~92% PPV in original study [5]\n• **LRINEC >=8** — Strong indicator for NSTI\n\n**CRITICAL LIMITATION:** [2][5]\n• **Poor sensitivity** — scores <6 do NOT rule out NSTI\n• Canadian guidelines recommend AGAINST using LRINEC for decision-making [2]\n• Use as ADJUNCT only, not as screening tool\n• **Clinical suspicion always trumps LRINEC score**',
         citation: [2, 5],
-        calculatorLinks: [
-            { id: 'lrinec', label: 'LRINEC Score' },
-        ],
         next: 'nf-resus',
         summary: 'LRINEC >=6 increases suspicion BUT scores <6 do NOT rule out; Canadian guidelines recommend against using for decision-making; clinical suspicion trumps score',
     },
