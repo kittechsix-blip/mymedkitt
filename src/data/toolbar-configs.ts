@@ -278,7 +278,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'dka': [
     { id: 'anion-gap', label: 'Anion Gap', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
-    { id: 'insulin-drip', label: 'Insulin Drip', icon: '\uD83D\uDC89', action: 'jump', target: 'dka-insulin-start' },
+    { id: 'insulin-drip', label: 'IV Insulin', icon: '\uD83D\uDC89', action: 'jump', target: 'dka-insulin-start' },
+    { id: 'sc-insulin', label: 'SC Insulin', icon: '💉', action: 'overlay', target: 'dka-sc-insulin-guide' },
     { id: 'k-repletion', label: 'K Repletion', icon: '\u26A1', action: 'jump', target: 'dka-potassium-check' },
     { id: 'fluid-deficit', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'jump', target: 'dka-fluid-management' },
   ],

@@ -11698,6 +11698,54 @@ const MS_DMT_REFERENCE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// DKA - Subcutaneous Insulin Protocol
+// -------------------------------------------------------------------
+
+const DKA_SC_INSULIN_GUIDE: InfoPage = {
+  id: 'dka-sc-insulin-guide',
+  title: 'Subcutaneous Insulin for Mild DKA',
+  subtitle: '2024 Consensus Protocol',
+  sections: [
+    {
+      heading: 'Eligibility Criteria (ALL must be met)',
+      body: '• **pH ≥7.25** AND **HCO3 ≥15** mEq/L (mild DKA only)\n• **BOHB ≤6** mmol/L\n• **Alert and oriented**, able to tolerate PO fluids\n• **Hemodynamically stable** (no shock, SBP >90)\n• No peritonitis, severe vomiting, or surgical abdomen\n• No concern for impaired absorption (severe edema, hypoperfusion)\n• Reliable patient/family for monitoring\n\n**If ANY criterion is NOT met → use IV insulin protocol**',
+    },
+    {
+      heading: 'Initial Dose (Priming Bolus)',
+      body: '**Insulin lispro (Humalog) or insulin aspart (Novolog):**\n\n• **0.3 U/kg SC** (max 30 units)\n• Example: 70 kg patient → 21 units SC\n• Give immediately after confirming eligibility\n\nPrefer rapid-acting insulin analogues over regular insulin for faster onset.',
+    },
+    {
+      heading: 'Maintenance Dosing',
+      body: '**Option A — Hourly SC dosing:**\n• 0.1 U/kg SC every hour\n• Example: 70 kg → 7 units q1h\n• More frequent monitoring required\n\n**Option B — Every-2-hour dosing (preferred):**\n• 0.2 U/kg SC every 2 hours\n• Example: 70 kg → 14 units q2h\n• Easier to manage, similar efficacy\n\n**Continue until DKA resolution criteria met** (AG <12, HCO3 >18, pH >7.3, tolerating PO)',
+    },
+    {
+      heading: 'Monitoring Schedule',
+      body: '• **Glucose:** q1-2h until stable, then q2-4h\n• **K+ check:** Before each insulin dose (hold if <3.3 mEq/L)\n• **BMP:** q2-4h (Na, K, Cl, HCO3)\n• **BOHB:** q4h if available\n• **VBG/ABG:** q2-4h to assess pH recovery\n\n**K+ Rules (same as IV protocol):**\n• K+ <3.3 → Hold insulin, replete 20-40 mEq K+ over 1h, recheck\n• K+ 3.3-5.3 → Continue insulin, add K+ to IVF\n• K+ >5.3 → Continue insulin, hold K+ repletion',
+    },
+    {
+      heading: 'When Glucose Reaches 200-250 mg/dL',
+      body: '• Add **D5W or D10W** to IV fluids (or oral carbs if eating)\n• **Continue SC insulin** until acidosis resolved\n• **Do NOT stop insulin for low glucose** — give more dextrose instead\n• This is the most common error in DKA management\n\nGoal: Maintain glucose 150-200 mg/dL while continuing insulin to clear ketones.',
+    },
+    {
+      heading: 'Escalation to IV Insulin',
+      body: '**Convert to IV insulin if:**\n• Glucose not improving after 2-3 SC doses\n• Clinical deterioration (worsening mental status, hemodynamic instability)\n• Persistent acidosis despite SC insulin\n• K+ <3.3 mEq/L requiring aggressive repletion\n• Patient unable to tolerate PO fluids\n• Provider discretion\n\n**Transition:** Start IV insulin drip at 0.1 U/kg/hr. No bolus needed when transitioning from SC.',
+    },
+    {
+      heading: 'Transition to Maintenance Therapy',
+      body: '**Once DKA resolved** (AG <12, HCO3 >18, pH >7.3, tolerating PO):\n\n1. Start **basal insulin** (glargine 0.25 U/kg SC) if not already given\n2. Continue rapid-acting insulin with meals\n3. Overlap SC rapid-acting × 1-2 hours after first basal dose\n4. Ensure endocrine follow-up within 1-2 weeks',
+    },
+    {
+      heading: 'Evidence Base',
+      body: '**SQuID II Trial (2025):** SC insulin showed non-inferior time to DKA resolution vs IV insulin in mild-moderate DKA with similar safety profile.\n\n**2024 ADA/EASD/JBDS Consensus:** Endorses SC insulin for uncomplicated mild DKA in appropriate patients.\n\n**Advantages:**\n• No IV drip required → reduced ICU utilization\n• Can be managed on general medical floor\n• Easier transition to outpatient regimen\n• Similar efficacy in eligible patients',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care. 2024;47(8):1257-1275.' },
+    { num: 2, text: 'Griffey RT, Schneider RM, et al. SQuID II: Clinical and operational effectiveness of subcutaneous insulin protocol. Acad Emerg Med. 2025;32(1):61-71.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Asthma Exacerbation
 // -------------------------------------------------------------------
 
@@ -13038,6 +13086,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dm-summary': DM_SUMMARY,
   'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
   'dm-oral-discharge': DM_ORAL_DISCHARGE,
+  // DKA
+  'dka-sc-insulin-guide': DKA_SC_INSULIN_GUIDE,
   'pelvic-summary': PELVIC_SUMMARY,
   'lefort-summary': LEFORT_SUMMARY,
   'pelvic-rug-procedure': PELVIC_RUG_PROCEDURE,

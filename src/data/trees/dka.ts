@@ -168,7 +168,7 @@ export const DKA_NODES: DecisionNode[] = [
       {
         label: 'Mild DKA',
         description: 'pH 7.25-7.30, HCO3 15-18, alert and oriented',
-        next: 'dka-precipitant-screen',
+        next: 'dka-mild-insulin-choice',
       },
       {
         label: 'Moderate DKA',
@@ -250,6 +250,65 @@ export const DKA_NODES: DecisionNode[] = [
     citation: [1, 10, 11, 13, 14],
     next: 'dka-precipitant-screen',
     summary: 'HD = restrict fluids/K+. SGLT2i = permanently discontinue. Pregnancy = fetal monitoring + OB/endo.',
+    safetyLevel: 'warning',
+  },
+
+  // ---------------------------------------------------------------------
+  // MILD DKA: SUBCUTANEOUS INSULIN OPTION (2024 Consensus)
+  // ---------------------------------------------------------------------
+
+  {
+    id: 'dka-mild-insulin-choice',
+    type: 'question',
+    module: 2,
+    title: 'Mild DKA — Insulin Route Selection',
+    body: '**Subcutaneous rapid-acting insulin is an evidence-based alternative to IV insulin for mild DKA.**\n\nThe 2024 ADA/EASD/JBDS Consensus and SQuID II trial support SC insulin for **uncomplicated mild DKA** in appropriate patients. [1][6]\n\n**SC insulin eligibility criteria (ALL must be met):**\n• pH ≥7.25 AND HCO3 ≥15 mEq/L (mild DKA only)\n• BOHB ≤6 mmol/L\n• Alert and oriented, able to tolerate PO\n• Hemodynamically stable (no shock, SBP >90)\n• No peritonitis, severe vomiting, or surgical abdomen\n• No concern for impaired absorption (severe edema, hypoperfusion)\n• Reliable patient/family for monitoring\n\n**Benefits of SC insulin:**\n• No IV insulin drip required → less ICU resource use\n• Can be managed on medical floor or observation unit\n• Similar resolution times in eligible patients (SQuID II trial)\n• Easier transition to outpatient regimen\n\n**When to choose IV insulin instead:**\n• Any doubt about eligibility criteria\n• Moderate-to-severe DKA (pH <7.25, HCO3 <15)\n• Hemodynamic instability\n• Unable to tolerate PO fluids\n• Pregnancy, ESRD, or special populations',
+    citation: [1, 6],
+    options: [
+      {
+        label: 'Eligible for SC Insulin',
+        description: 'Meets all criteria: mild DKA, stable, alert, tolerates PO',
+        next: 'dka-sc-insulin-protocol',
+      },
+      {
+        label: 'IV Insulin Required',
+        description: 'Does not meet SC criteria or provider preference',
+        next: 'dka-precipitant-screen',
+        urgency: 'urgent',
+      },
+    ],
+    summary: 'SC insulin is an option for mild DKA (pH ≥7.25, stable, alert). All criteria must be met.',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'dka-sc-insulin-protocol',
+    type: 'info',
+    module: 2,
+    title: 'Subcutaneous Insulin Protocol for Mild DKA',
+    body: '**Rapid-acting SC insulin is safe and effective for mild DKA when eligibility criteria are met.** [1][6]\n\n**Initial Dose (Priming):**\n• [Insulin lispro (Humalog)](#/drug/insulin-lispro/DKA) or [insulin aspart (Novolog)](#/drug/insulin-aspart/DKA): **0.3 U/kg SC** (max 30 units)\n• Example: 70 kg patient → 21 units SC\n• Give immediately after confirming eligibility\n\n**Maintenance Dosing (choose one):**\n\n**Option A — Hourly SC dosing:**\n• 0.1 U/kg SC every hour\n• Example: 70 kg → 7 units q1h\n• More frequent monitoring required\n\n**Option B — Every-2-hour dosing (preferred):**\n• 0.2 U/kg SC every 2 hours\n• Example: 70 kg → 14 units q2h\n• Easier to manage, similar efficacy\n\n**Monitoring (same as IV protocol):**\n• Glucose: q1-2h until stable, then q2-4h\n• BMP: q2-4h (Na, K, Cl, HCO3)\n• BOHB: q4h if available\n• Continue until DKA resolution criteria met\n\n**When glucose reaches 200-250 mg/dL:**\n• Add D5W or D10W to IV fluids (or oral carbs if eating)\n• Continue SC insulin until acidosis resolved\n• **Do NOT stop insulin for low glucose — give more dextrose**\n\n**Transition to maintenance:**\n• Once DKA resolved (AG <12, HCO3 >18, pH >7.3, tolerating PO):\n• Start basal insulin if not already given\n• Continue rapid-acting insulin with meals\n• Overlap SC rapid-acting × 1-2 hours after first basal dose\n\n**Escalation to IV insulin:**\n• If glucose not improving after 2-3 doses\n• If clinical deterioration (worsening mental status, hemodynamic instability)\n• If K+ <3.3 mEq/L (same as IV protocol — hold insulin, replete K+)',
+    citation: [1, 6],
+    next: 'dka-precipitant-screen',
+    treatment: {
+      firstLine: {
+        drug: 'Insulin lispro or aspart (rapid-acting)',
+        dose: '0.3 U/kg initial, then 0.2 U/kg q2h',
+        route: 'Subcutaneous',
+        frequency: 'Initial dose, then every 2 hours',
+        duration: 'Until DKA resolved (AG <12, HCO3 >18, pH >7.3)',
+        notes: 'Alternative: 0.1 U/kg q1h after initial 0.3 U/kg bolus. Max initial dose 30 units.',
+      },
+      alternative: {
+        drug: 'Insulin regular (if rapid-acting unavailable)',
+        dose: '0.3 U/kg initial, then 0.1-0.2 U/kg q2h',
+        route: 'Subcutaneous',
+        frequency: 'Every 2 hours',
+        duration: 'Until DKA resolved',
+        notes: 'Onset slower than lispro/aspart. Monitor closely. Rapid-acting preferred.',
+      },
+      monitoring: 'Glucose q1-2h. K+ before each dose (hold if <3.3). BMP q2-4h. Escalate to IV if not improving.',
+    },
+    summary: 'SC insulin: 0.3 U/kg initial → 0.2 U/kg q2h (or 0.1 U/kg q1h). Same K+ rules and monitoring as IV.',
     safetyLevel: 'warning',
   },
 
