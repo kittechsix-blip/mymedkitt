@@ -3660,6 +3660,111 @@ const QSOFA_CALCULATOR = {
     ],
 };
 // -------------------------------------------------------------------
+// LRINEC Score (Necrotizing Fasciitis)
+// -------------------------------------------------------------------
+const LRINEC_CALCULATOR = {
+    id: 'lrinec',
+    title: 'LRINEC Score',
+    subtitle: 'Laboratory Risk Indicator for Necrotizing Fasciitis',
+    description: 'Risk stratification tool for necrotizing soft tissue infection (NSTI). CRITICAL LIMITATION: Poor sensitivity — a low score does NOT rule out NSTI. Canadian guidelines recommend AGAINST using LRINEC for decision-making. Clinical suspicion always trumps the score. Use as ADJUNCT only.',
+    fields: [
+        {
+            name: 'crp',
+            label: 'C-Reactive Protein (CRP)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<150 mg/L', points: 0 },
+                { label: '≥150 mg/L', points: 4 },
+            ],
+        },
+        {
+            name: 'wbc',
+            label: 'White Blood Cell Count',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<15 × 10³/μL', points: 0 },
+                { label: '15–25 × 10³/μL', points: 1 },
+                { label: '>25 × 10³/μL', points: 2 },
+            ],
+        },
+        {
+            name: 'hgb',
+            label: 'Hemoglobin',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '>13.5 g/dL', points: 0 },
+                { label: '11–13.5 g/dL', points: 1 },
+                { label: '<11 g/dL', points: 2 },
+            ],
+        },
+        {
+            name: 'sodium',
+            label: 'Sodium',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '≥135 mEq/L', points: 0 },
+                { label: '<135 mEq/L', points: 2 },
+            ],
+        },
+        {
+            name: 'creatinine',
+            label: 'Creatinine',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '≤1.6 mg/dL', points: 0 },
+                { label: '>1.6 mg/dL', points: 2 },
+            ],
+        },
+        {
+            name: 'glucose',
+            label: 'Glucose',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '≤180 mg/dL', points: 0 },
+                { label: '>180 mg/dL', points: 1 },
+            ],
+        },
+    ],
+    results: [
+        {
+            min: -Infinity,
+            max: 6,
+            label: 'Score 0-5',
+            risk: 'Low Risk',
+            mortality: 'Low probability of NSTI by scoring. **CRITICAL:** Does NOT rule out NSTI — poor sensitivity. If clinical suspicion is high, proceed with surgical consultation regardless of score.',
+            colorVar: '--color-primary',
+        },
+        {
+            min: 6,
+            max: 8,
+            label: 'Score 6-7',
+            risk: 'Moderate Risk',
+            mortality: 'Intermediate probability of NSTI (50-75% PPV in original study). Surgical consultation recommended. Consider CT imaging if not already obtained.',
+            colorVar: '--color-warning',
+        },
+        {
+            min: 8,
+            max: Infinity,
+            label: 'Score ≥8',
+            risk: 'High Risk',
+            mortality: 'High probability of NSTI (>75% PPV in original study). STAT surgical consultation. Do NOT delay surgery for additional workup. LRINEC ≥7 correlates with increased mortality.',
+            colorVar: '--color-danger',
+        },
+    ],
+    thresholdNote: 'LRINEC ≥6 increases suspicion but scores <6 do NOT rule out NSTI. Canadian guidelines recommend against using LRINEC for decision-making. Clinical findings (hemorrhagic bullae, crepitus, pain out of proportion, rapid progression) should drive surgical consultation, not this score.',
+    citations: [
+        'Wong CH, et al. The LRINEC (Laboratory Risk Indicator for Necrotizing Fasciitis) score: a tool for distinguishing necrotizing fasciitis from other soft tissue infections. Crit Care Med. 2004;32(7):1535-41.',
+        'Farkas J. Skin and soft tissue infections (including necrotizing fasciitis). EMCrit IBCC. Updated Oct 2025.',
+        'Fernando SM, et al. Necrotizing Soft Tissue Infection: Diagnostic Accuracy of Physical Examination, Imaging, and the LRINEC Score. Ann Surg. 2019;269(1):58-65.',
+    ],
+};
+// -------------------------------------------------------------------
 // MAP Calculator
 // -------------------------------------------------------------------
 const MAP_CALCULATOR = {
@@ -32102,6 +32207,7 @@ const CALCULATORS = {
     'alt-apap-product': ALT_APAP_PRODUCT_CALCULATOR,
     'sal-tox-guide': SAL_TOX_GUIDE_CALCULATOR,
     'qsofa': QSOFA_CALCULATOR,
+    'lrinec': LRINEC_CALCULATOR,
     'map-calculator': MAP_CALCULATOR,
     'mening-abx': MENING_ABX_CALCULATOR,
     'lp-interp': LP_INTERP_CALCULATOR,

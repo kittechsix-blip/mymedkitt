@@ -7689,6 +7689,111 @@ const SEPSIS_SEP1_BUNDLE = {
     ],
 };
 // -------------------------------------------------------------------
+// Necrotizing Fasciitis (NSTI)
+// -------------------------------------------------------------------
+const NF_SUMMARY = {
+    id: 'nf-summary',
+    title: 'Necrotizing Fasciitis Steps Summary',
+    subtitle: 'Quick Reference — Recognition → Surgery → Antibiotics → Monitoring',
+    sections: [
+        {
+            heading: 'Recognition & Initial Assessment',
+            body: '[Assess for hard signs vs soft signs](#/node/nf-start)\n• **Hard signs:** Hemorrhagic bullae, crepitus, skin necrosis\n• **Soft signs:** Pain out of proportion, rapid spread, systemic toxicity\n[Risk factors: DM, immunocompromise, IVDU, recent surgery](#/node/nf-soft-signs)\n[LRINEC Score — adjunct only, does NOT rule out](#/node/nf-lrinec)\n[CT imaging if diagnosis uncertain](#/node/nf-imaging)',
+        },
+        {
+            heading: 'Surgical Consultation — STAT',
+            body: '[Call surgery IMMEDIATELY](#/node/nf-surgery)\n• **Each hour of surgical delay increases mortality 2-3%**\n• Do NOT wait for imaging, labs, or hemodynamic stability\n[Bedside finger test if surgery delayed](#/node/nf-surgery)\n[Anatomic location guides microbiology](#/node/nf-location)\n• [Fournier gangrene — perineal NSTI](#/node/nf-fournier)\n• [Head/neck NSTI — airway threat](#/node/nf-head-neck)',
+        },
+        {
+            heading: 'Antimicrobial Therapy',
+            body: '[Triple therapy within 1 hour](#/node/nf-abx-empiric)\n• **Pip-tazo** 4.5g IV q6h (or meropenem)\n• **Linezolid** 600 mg IV q12h (or vancomycin for MRSA)\n• **Clindamycin** 900 mg IV q8h (CRITICAL for toxin suppression)\n[Vibrio — saltwater: add doxycycline + cephalosporin](#/node/nf-vibrio)\n[Aeromonas — freshwater: add doxycycline + fluoroquinolone](#/node/nf-aeromonas)\n[De-escalate based on culture results at 48-72h](#/node/nf-abx-deescalation)',
+        },
+        {
+            heading: 'Adjunctive Therapies',
+            body: '[Clindamycin for toxin suppression](#/node/nf-toxin)\n• Beta-lactams may paradoxically increase toxin release\n[IVIG for streptococcal TSS](#/node/nf-ivig)\n• 1 g/kg day 1, then 0.5 g/kg days 2-3\n[Hyperbaric oxygen — controversial](#/node/nf-hbo)\n• Never delay surgery for HBO',
+        },
+        {
+            heading: 'Monitoring & Disposition',
+            body: '[Serial wound exams every 4-6 hours](#/node/nf-monitoring)\n• Mark borders with time at each exam\n[Return to OR every 24-48 hours](#/node/nf-monitoring)\n[All NSTI patients require ICU admission](#/node/nf-dispo)\n[Mortality: 25-35% overall, 40% Fournier, >50% Vibrio](#/node/nf-complications)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Skin and soft tissue infections (including necrotizing fasciitis). EMCrit IBCC. Updated Oct 2025.' },
+        { num: 2, text: 'Stevens DL, et al. IDSA Guidelines for Skin and Soft Tissue Infections. Clin Infect Dis. 2014;59(2):e10-52.' },
+    ],
+};
+const NF_CLASSIFICATION = {
+    id: 'nf-classification',
+    title: 'NSTI Classification by Microbiology',
+    subtitle: 'Type I (Polymicrobial) vs Type II (Monomicrobial)',
+    sections: [
+        {
+            heading: 'Type I — Polymicrobial (70-90% of cases)',
+            body: '**At least 2 organisms, often 4-5+**\n\n**Organisms:**\n• Anaerobes: Bacteroides, Clostridium, Peptostreptococcus\n• Aerobic streptococci (non-Group A)\n• Enterobacteriaceae (E. coli, Klebsiella)\n• Enterococci\n\n**Clinical associations:**\n• Diabetes mellitus\n• Post-operative infections\n• Fournier gangrene\n• Trunk/torso involvement\n• Older patients with comorbidities',
+        },
+        {
+            heading: 'Type II — Monomicrobial (10-30% of cases)',
+            body: '**Single organism, often more virulent**\n\n**Most common organisms:**\n• **Group A Streptococcus (GAS)** — most common, associated with toxic shock\n• **MRSA** — up to 1/3 of Type II infections\n• **Clostridium perfringens** — traumatic, contaminated wounds\n\n**Clinical associations:**\n• Extremity involvement\n• Younger, healthier patients\n• Often no clear entry point\n• Higher association with TSS',
+        },
+        {
+            heading: 'Type III — Vibrio Species',
+            body: '**Proposed separate category**\n\n**Vibrio vulnificus:**\n• Saltwater exposure (Gulf Coast, warm coastal waters)\n• Raw oyster ingestion\n• **Liver cirrhosis = 100x increased risk**\n• Extremely rapid progression\n• **>50% mortality**\n\n**Vibrio parahaemolyticus:**\n• Similar exposure risks\n• Generally less severe than V. vulnificus',
+        },
+        {
+            heading: 'Clostridial Myonecrosis (Gas Gangrene)',
+            body: '**Distinct entity with muscle involvement**\n\n**Organisms:**\n• Clostridium perfringens (most common)\n• C. septicum (associated with colon cancer — get colonoscopy)\n• C. novyi, C. histolyticum\n\n**Characteristics:**\n• Gas production in tissues (crepitus)\n• Extremely rapid progression\n• Bronze skin discoloration\n• Sweet, foul odor\n• Traumatic or post-surgical',
+        },
+        {
+            heading: 'Fournier Gangrene',
+            body: '**Polymicrobial perineal NSTI**\n\n**Sources:**\n• Urologic (UTI, instrumentation)\n• Colorectal (perianal abscess, fistula)\n• Dermatologic (skin infection, trauma)\n\n**Risk factors:**\n• Diabetes mellitus (most common)\n• Alcoholism\n• Immunocompromise\n\n**Mortality: ~40%**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bonne SL, Kadri SS. Evaluation and Management of Necrotizing Soft Tissue Infections. Infect Dis Clin North Am. 2017;31(3):497-511.' },
+        { num: 2, text: 'Hakkarainen TW, et al. Necrotizing soft tissue infections: review and current concepts. Curr Probl Surg. 2014;51(8):344-362.' },
+    ],
+};
+const NF_TREATMENT_GUIDE = {
+    id: 'nf-treatment-guide',
+    title: 'NSTI Antibiotic Treatment Guide',
+    subtitle: 'Empiric Regimen → Culture-Directed → Duration',
+    sections: [
+        {
+            heading: 'Quick Reference — Drug Dosing',
+            body: '',
+            drugTable: [
+                { drug: 'Piperacillin-Tazobactam', regimen: '4.5g IV q6h (extended infusion) — First-line broad-spectrum; covers gram-neg + anaerobes' },
+                { drug: 'Meropenem', regimen: '1g IV q8h (extended infusion) — Alternative for MDR risk or pip-tazo allergy' },
+                { drug: 'Linezolid', regimen: '600 mg IV/PO q12h — MRSA coverage; superior toxin suppression; avoids AKI' },
+                { drug: 'Vancomycin', regimen: '25-30 mg/kg IV load → 15-20 mg/kg q8-12h — Alternative MRSA coverage; monitor levels' },
+                { drug: 'Clindamycin', regimen: '900 mg IV q8h (or 1200 mg IV q6h) — CRITICAL for toxin suppression; add to ALL regimens' },
+                { drug: 'Doxycycline', regimen: '100 mg IV q12h — ADD for Vibrio (saltwater) or Aeromonas (freshwater)' },
+            ],
+        },
+        {
+            heading: 'Empiric Regimen (Start Immediately)',
+            body: '**Triple therapy:**\n\n1. **Broad-spectrum beta-lactam:**\n   • [Pip-tazo](#/drug/piperacillin-tazobactam) 4.5g IV q6h — preferred\n   • [Meropenem](#/drug/meropenem) 1g IV q8h — if MDR risk\n\n2. **MRSA coverage:**\n   • [Linezolid](#/drug/linezolid) 600 mg IV q12h — preferred\n   • [Vancomycin](#/drug/vancomycin) 25-30 mg/kg load — alternative\n\n3. **Toxin suppression (ALWAYS include):**\n   • [Clindamycin](#/drug/clindamycin) 900 mg IV q8h\n\n**Give antibiotics within 1 hour of recognition.**',
+        },
+        {
+            heading: 'Water Exposure — Additional Coverage',
+            body: '**Saltwater (Vibrio vulnificus):**\n• ADD [Doxycycline](#/drug/doxycycline) 100 mg IV q12h\n• ADD [Ceftriaxone](#/drug/ceftriaxone) 2g IV q24h (or ceftazidime)\n\n**Freshwater (Aeromonas):**\n• ADD [Doxycycline](#/drug/doxycycline) 100 mg IV q12h\n• ADD [Ciprofloxacin](#/drug/ciprofloxacin) 400 mg IV q12h',
+        },
+        {
+            heading: 'Culture-Directed De-escalation',
+            body: '**When cultures finalize (48-72 hours):**\n\n**Group A Streptococcus:**\n• [Penicillin G](#/drug/penicillin-g-iv) 4 million units IV q4h\n• PLUS [Clindamycin](#/drug/clindamycin) 900 mg IV q8h\n\n**MRSA:**\n• [Vancomycin](#/drug/vancomycin) or [Linezolid](#/drug/linezolid)\n• PLUS [Clindamycin](#/drug/clindamycin) if toxin-producing\n\n**Clostridial:**\n• [Penicillin G](#/drug/penicillin-g-iv) 4 million units IV q4h\n• PLUS [Clindamycin](#/drug/clindamycin) 900 mg IV q8h',
+        },
+        {
+            heading: 'Duration & Transition',
+            body: '**Total duration:** 7-14 days\n\n**Continue IV therapy:**\n• 48-72 hours after final debridement\n• Until clinical improvement evident\n\n**Transition to oral:**\n• When tolerating oral intake\n• Appropriate oral options based on culture\n• Complete remainder of course as outpatient if stable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. EMCrit IBCC — Necrotizing Fasciitis. Oct 2025.' },
+        { num: 2, text: 'Sartelli M, et al. 2018 WSES/SIS-E Consensus for SSTI Management. World J Emerg Surg. 2018;13:58.' },
+        { num: 3, text: 'Stevens DL, et al. IDSA Guidelines for SSTI. Clin Infect Dis. 2014;59(2):e10-52.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Opioid Withdrawal
 // -------------------------------------------------------------------
 const OW_SUMMARY = {
@@ -12477,7 +12582,121 @@ const INTUSS_POST_REDUCTION = {
         { num: 2, text: 'APSA. Management of Intussusception Review. 2021.' },
     ],
 };
+// -------------------------------------------------------------------
+// Fishhook Removal
+// -------------------------------------------------------------------
+const FH_TECHNIQUE_SUMMARY = {
+    id: 'fh-technique-summary',
+    title: 'Fishhook Removal Techniques',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            heading: 'Technique Selection Guide',
+            body: '**Match technique to hook and location:**\n\n| Technique | Success Rate | Best For |\n|-----------|--------------|----------|\n| Retrograde | 30-40% | Barbless, superficial |\n| String-yank | 65-90% | Small-medium hooks, fixed body parts |\n| Advance-and-cut | >95% | Large hooks, barb near surface |\n| Needle-cover | 60-70% | Sensitive areas (face, ear) |',
+        },
+        {
+            heading: 'Retrograde Technique',
+            body: '**Simplest but lowest success rate**\n\n1. Apply downward pressure on shank\n2. Back hook out along entry path\n3. Stop if resistance felt\n\n**Best for:** Barbless or minimally embedded hooks',
+        },
+        {
+            heading: 'String-Yank Technique',
+            body: '**Most commonly used, minimal trauma**\n\n1. Wrap string around hook bend\n2. Press shank firmly DOWN toward skin\n3. Quick jerk parallel to shank direction\n4. Wear eye protection (hook flies!)\n\n**CONTRAINDICATION:** Earlobes, free-floating skin',
+        },
+        {
+            heading: 'Advance-and-Cut Technique',
+            body: '**Almost always successful**\n\n1. Anesthetize exit point\n2. Advance hook through skin until barb exits\n3. Cut barb off with wire cutters\n4. Back remainder out through entry\n\n**Best for:** Large hooks, failed string-yank',
+        },
+        {
+            heading: 'Needle-Cover Technique',
+            body: '**For sensitive areas**\n\n1. Anesthetize thoroughly\n2. Insert 18G needle along entry tract (bevel toward hook)\n3. Engage barb in needle lumen\n4. Back out hook and needle together\n\n**Best for:** Face, ear, nose',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gammons MG, Jackson E. Fishhook Removal. Am Fam Physician. 2001;63(11):2231-2236.' },
+        { num: 2, text: 'Prats M. Trick of the Trade: Fishhook Removal Techniques. ALiEM. 2014.' },
+    ],
+};
+const FH_HOOK_ANATOMY = {
+    id: 'fh-hook-anatomy',
+    title: 'Fishhook Anatomy',
+    subtitle: 'Know Your Hook',
+    sections: [
+        {
+            heading: 'Hook Components',
+            body: '**Understanding hook anatomy guides technique selection:**\n\n**Eye:** Loop at top for line attachment\n\n**Shank:** Straight portion from eye to bend\n\n**Bend:** Curved portion (hook shape varies by design)\n\n**Point:** Sharp penetrating tip\n\n**Barb:** Angled projection preventing easy removal (key challenge)\n\n**Gap/Gape:** Distance from point to shank (determines penetration depth)',
+        },
+        {
+            heading: 'Hook Types',
+            body: '**Single-barbed:** Most common recreational hook. All techniques applicable.\n\n**Treble hook:** Three hooks joined at eye (lures). Tape uninvolved points. Use advance-and-cut: cut shank, pull through.\n\n**Multiple-barbed:** Commercial fishing. Often need advance-and-cut.\n\n**Barbless:** Catch-and-release. Simple retrograde removal usually works.',
+        },
+        {
+            heading: 'Why the Barb Matters',
+            body: '**The barb is the key challenge:**\n\n- Prevents simple backward removal\n- Must be disengaged (string-yank), sheathed (needle-cover), or removed (advance-cut)\n- Barb direction determines technique approach\n- Larger barbs = more tissue trauma\n\n**Clinical tip:** Have patient describe or draw the hook if not visible.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gammons MG, Jackson E. Fishhook Removal. Am Fam Physician. 2001;63(11):2231-2236.' },
+    ],
+};
+const FH_WOUND_CARE_GUIDE = {
+    id: 'fh-wound-care-guide',
+    title: 'Post-Removal Wound Care',
+    subtitle: 'Tetanus, Antibiotics, Follow-up',
+    sections: [
+        {
+            heading: 'Immediate Post-Removal Care',
+            body: '1. **Explore wound** for retained foreign body (bait, debris)\n2. **Irrigate thoroughly** with saline or tap water\n3. **Leave wound open** (do NOT suture)\n4. Apply **triple antibiotic ointment**\n5. Simple **dressing**',
+        },
+        {
+            heading: 'Tetanus Prophylaxis',
+            body: '| Last Booster | Clean Wound | Contaminated |\n|--------------|-------------|---------------|\n| <5 years | No Td | No Td |\n| 5-10 years | No Td | Td |\n| >10 years | Td | Td + TIG |\n| Unknown | Td | Td + TIG |',
+        },
+        {
+            heading: 'Antibiotic Prophylaxis',
+            body: '**NOT routinely indicated**\n\n**Consider antibiotics for:**\n- Immunocompromised patients\n- Diabetes or PVD\n- Deep wounds (tendon, cartilage, bone)\n- Saltwater exposure (Vibrio coverage)\n- Heavily contaminated wounds\n- Delayed presentation (>24h)',
+            drugTable: [
+                { drug: 'Freshwater exposure', regimen: 'Amoxicillin-clavulanate 875/125mg PO BID x 5-7d OR Doxycycline 100mg BID + Ciprofloxacin 500mg BID' },
+                { drug: 'Saltwater exposure', regimen: 'Doxycycline 100mg PO BID x 5-7d OR Ciprofloxacin 500mg PO BID x 5-7d (Vibrio coverage)' },
+            ],
+        },
+        {
+            heading: 'Return Precautions',
+            body: '**Return to ED if:**\n- Increasing pain, redness, swelling after 48h\n- Purulent drainage\n- Fever >101F (38.3C)\n- Red streaking from wound\n- Wound opening\n\n**Follow-up:** PCP in 3-5 days OR sooner if concerns',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gammons MG, Jackson E. Fishhook Removal. Am Fam Physician. 2001;63(11):2231-2236.' },
+        { num: 2, text: 'ACEP Now. Emergency Medicine Techniques for Removing Fishhooks. 2016.' },
+    ],
+};
+const FH_EQUIPMENT_CHECKLIST = {
+    id: 'fh-equipment-checklist',
+    title: 'Equipment Checklist',
+    subtitle: 'Fishhook Removal',
+    sections: [
+        {
+            heading: 'Required Equipment',
+            body: '**Tools:**\n- [ ] Needle driver or hemostat\n- [ ] Wire cutters (MUST cut hook metal)\n- [ ] 18-gauge needle\n\n**Anesthesia:**\n- [ ] Lidocaine (without epinephrine)\n- [ ] 25-27 gauge needle for infiltration\n\n**Antiseptic:**\n- [ ] Povidone-iodine or chlorhexidine\n\n**String-yank supplies:**\n- [ ] 0-silk suture, fishing line, or umbilical tape (~18 inches)\n\n**Safety:**\n- [ ] Eye protection for patient AND provider',
+        },
+        {
+            heading: 'Preparation Steps',
+            body: '1. Remove all attached line, bait, lures\n2. Clean area with antiseptic\n3. Tape or cut uninvolved hooks on treble hooks\n4. Position patient comfortably with good lighting\n5. Put on eye protection (mandatory for string-yank)\n6. Consider digital block for finger/toe involvement',
+        },
+        {
+            heading: 'Anesthesia Options',
+            body: '**String-yank:** Often NO anesthesia needed (fastest, least painful)\n\n**All other techniques:** Local infiltration around hook\n\n**Digital block:** For finger/toe involvement\n\n**TIP:** Adequate anesthesia improves patient cooperation and technique success.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Reichman EF. Emergency Medicine Procedures. 2nd ed. McGraw-Hill; 2013.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Fishhook Removal
+    'fh-technique-summary': FH_TECHNIQUE_SUMMARY,
+    'fh-hook-anatomy': FH_HOOK_ANATOMY,
+    'fh-wound-care-guide': FH_WOUND_CARE_GUIDE,
+    'fh-equipment-checklist': FH_EQUIPMENT_CHECKLIST,
     // Intussusception
     'intuss-red-flags': INTUSS_RED_FLAGS,
     'intuss-us-guide': INTUSS_US_GUIDE,
@@ -12762,6 +12981,9 @@ export const INFO_PAGES = {
     'sepsis-mimics': SEPSIS_MIMICS,
     'sepsis-cardiomyopathy': SEPSIS_CARDIOMYOPATHY_PAGE,
     'sepsis-sep1-bundle': SEPSIS_SEP1_BUNDLE,
+    'nf-summary': NF_SUMMARY,
+    'nf-classification': NF_CLASSIFICATION,
+    'nf-treatment-guide': NF_TREATMENT_GUIDE,
     'ow-summary': OW_SUMMARY,
     'ow-cows-guide': OW_COWS_GUIDE,
     'ow-meds-compare': OW_MEDS_COMPARE,

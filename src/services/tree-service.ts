@@ -337,6 +337,7 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'cervical-spine': async () => (await import('../data/trees/cervical-spine.js')).CERVICAL_SPINE_CRITICAL_ACTIONS,
     'dvt': async () => (await import('../data/trees/dvt.js')).DVT_CRITICAL_ACTIONS,
     'intussusception': async () => (await import('../data/trees/intussusception.js')).INTUSSUSCEPTION_CRITICAL_ACTIONS,
+    'fishhook-removal': async () => (await import('../data/trees/fishhook-removal.js')).FISHHOOK_REMOVAL_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -583,6 +584,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'sepsis': async () => {
       const m = await import('../data/trees/sepsis.js');
       return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS, criticalActions: m.SEPSIS_CRITICAL_ACTIONS };
+    },
+    'necrotizing-fasciitis': async () => {
+      const m = await import('../data/trees/necrotizing-fasciitis.js');
+      return { nodes: m.NECROTIZING_FASCIITIS_NODES, entryNodeId: 'nf-start', categoryId: 'infectious-disease', moduleLabels: m.NECROTIZING_FASCIITIS_MODULE_LABELS, citations: m.NECROTIZING_FASCIITIS_CITATIONS, criticalActions: m.NECROTIZING_FASCIITIS_CRITICAL_ACTIONS };
     },
     'tuberculosis': async () => {
       const m = await import('../data/trees/tuberculosis.js');
@@ -1055,6 +1060,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'intussusception': async () => {
       const m = await import('../data/trees/intussusception.js');
       return { nodes: m.INTUSSUSCEPTION_NODES, entryNodeId: 'intuss-start', categoryId: 'pediatrics', moduleLabels: m.INTUSSUSCEPTION_MODULE_LABELS, citations: m.INTUSSUSCEPTION_CITATIONS, criticalActions: m.INTUSSUSCEPTION_CRITICAL_ACTIONS };
+    },
+    'fishhook-removal': async () => {
+      const m = await import('../data/trees/fishhook-removal.js');
+      return { nodes: m.FISHHOOK_REMOVAL_NODES, entryNodeId: 'fh-start', categoryId: 'procedures', moduleLabels: m.FISHHOOK_REMOVAL_MODULE_LABELS, citations: m.FISHHOOK_REMOVAL_CITATIONS, criticalActions: m.FISHHOOK_REMOVAL_CRITICAL_ACTIONS };
     },
   };
 

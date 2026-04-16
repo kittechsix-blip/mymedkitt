@@ -1555,8 +1555,12 @@ const CLINDAMYCIN: DrugEntry = {
   genericName: 'Clindamycin',
   drugClass: 'Lincosamide antibiotic',
   route: 'IV/PO',
-  indications: ['Anaerobic coverage', 'Aspiration pneumonia', 'Skin/soft tissue infection', 'Streptococcal toxic shock'],
+  indications: ['Anaerobic coverage', 'Aspiration pneumonia', 'Skin/soft tissue infection', 'Streptococcal toxic shock', 'Necrotizing fasciitis toxin suppression'],
   dosing: [
+    {
+      indication: 'Necrotizing fasciitis / NSTI — toxin suppression',
+      regimen: '900 mg IV q8h (some experts: 1200 mg IV q6h for severe TSS).\n\n**CRITICAL — add to ALL NSTI regimens.** Inhibits bacterial protein synthesis at 50S ribosome, suppressing exotoxin production. Beta-lactams may paradoxically INCREASE toxin release (Eagle effect). Continue throughout antibiotic course.\n\nFor dual toxin suppression in severe streptococcal TSS, consider adding linezolid 600 mg IV q12h.',
+    },
     {
       indication: 'Anaerobic coverage (DKA infection, aspiration)',
       regimen: '600-900 mg IV q6-8h.\n\nExcellent anaerobic coverage including Bacteroides fragilis.\nGood lung penetration — preferred for aspiration pneumonia.\n\nPediatric: 25-40 mg/kg/day IV divided q6-8h (max 4.8 g/day).',
@@ -2574,8 +2578,12 @@ const LINEZOLID: DrugEntry = {
   genericName: 'Linezolid',
   drugClass: 'Oxazolidinone antibiotic',
   route: 'IV / PO',
-  indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection', 'MDR-TB'],
+  indications: ['MRSA sepsis (vancomycin alternative)', 'MRSA pneumonia', 'VRE infection', 'MDR-TB', 'Necrotizing fasciitis MRSA coverage'],
   dosing: [
+    {
+      indication: 'Necrotizing fasciitis / NSTI — MRSA coverage',
+      regimen: '600 mg IV q12h.\n\n**PREFERRED over vancomycin** for MRSA coverage in NSTI:\n• Superior toxin suppression at ribosomal level\n• Avoids nephrotoxicity (AKI common in septic shock)\n• No levels to monitor\n\nFor dual toxin suppression in severe streptococcal TSS, combine with clindamycin 900 mg IV q8h (different ribosomal binding sites, potentially synergistic).',
+    },
     {
       indication: 'MRSA sepsis / pneumonia',
       regimen: '600 mg IV or PO q12h. No renal dose adjustment required. 100% oral bioavailability \u2014 IV-to-PO switch straightforward.',

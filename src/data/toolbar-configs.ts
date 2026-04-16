@@ -276,6 +276,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'vp-rx', label: 'VP Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'sepsis-vp-init' },
     { id: 'abx', label: 'Abx Table', icon: '\uD83D\uDC8A', action: 'overlay', target: 'sepsis-abx-table' },
   ],
+  'necrotizing-fasciitis': [
+    { id: 'lrinec', label: 'LRINEC', icon: '\uD83E\uDDEA', action: 'calculator', target: 'lrinec' },
+    { id: 'surgery', label: 'Surgery', icon: '\uD83D\uDD2A', action: 'jump', target: 'nf-surgery' },
+    { id: 'abx', label: 'Abx Rx', icon: '\uD83D\uDC8A', action: 'overlay', target: 'nf-treatment-guide' },
+    { id: 'toxin', label: 'Clinda', icon: '\u2620\uFE0F', action: 'jump', target: 'nf-toxin' },
+    { id: 'types', label: 'Types', icon: '\uD83E\uDDA0', action: 'overlay', target: 'nf-classification' },
+  ],
   'dka': [
     { id: 'anion-gap', label: 'Anion Gap', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
     { id: 'insulin-drip', label: 'IV Insulin', icon: '\uD83D\uDC89', action: 'jump', target: 'dka-insulin-start' },
@@ -1195,6 +1202,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'lead-points', label: 'Lead Points', icon: '🎯', action: 'overlay', target: 'intuss-lead-points' },
     { id: 'contraindications', label: 'Enema CI', icon: '🚫', action: 'overlay', target: 'intuss-contraindications' },
     { id: 'post-reduction', label: 'Post-Reduce', icon: '✅', action: 'overlay', target: 'intuss-post-reduction' },
+  ],
+  // ---------------------------------------------------------------
+  // Fishhook Removal
+  // ---------------------------------------------------------------
+  'fishhook-removal': [
+    { id: 'techniques', label: 'Techniques', icon: '🎣', action: 'overlay', target: 'fh-technique-summary' },
+    { id: 'anatomy', label: 'Anatomy', icon: '🪝', action: 'overlay', target: 'fh-hook-anatomy' },
+    { id: 'string-yank', label: 'String', icon: '🧵', action: 'jump', target: 'fh-string-yank' },
+    { id: 'advance-cut', label: 'Advance', icon: '✂️', action: 'jump', target: 'fh-advance-cut' },
+    { id: 'wound-care', label: 'Wound Care', icon: '🩹', action: 'overlay', target: 'fh-wound-care-guide' },
   ],
 };
 
