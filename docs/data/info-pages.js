@@ -11193,11 +11193,11 @@ const DKA_SC_INSULIN_GUIDE = {
         },
         {
             heading: 'Initial Dose (Priming Bolus)',
-            body: '**Insulin lispro (Humalog) or insulin aspart (Novolog):**\n\n• **0.3 U/kg SC** (max 30 units)\n• Example: 70 kg patient → 21 units SC\n• Give immediately after confirming eligibility\n\nPrefer rapid-acting insulin analogues over regular insulin for faster onset.',
+            body: '**[Insulin lispro (Humalog)](#/drug/insulin-lispro/DKA SC priming):**\n\n• **[0.3 U/kg](#/calc/weight?dose=0.3&unit=units&drug=insulin-lispro) SC** (max 30 units)\n• Example: 70 kg patient → 21 units SC\n• Give immediately after confirming eligibility\n\n**Alternative:** [Insulin aspart (Novolog)](#/drug/insulin-aspart/DKA SC priming) — same dosing\n\nPrefer rapid-acting insulin analogues (lispro or aspart) over regular insulin for faster onset (15-30 min vs 30-60 min).',
         },
         {
             heading: 'Maintenance Dosing',
-            body: '**Option A — Hourly SC dosing:**\n• 0.1 U/kg SC every hour\n• Example: 70 kg → 7 units q1h\n• More frequent monitoring required\n\n**Option B — Every-2-hour dosing (preferred):**\n• 0.2 U/kg SC every 2 hours\n• Example: 70 kg → 14 units q2h\n• Easier to manage, similar efficacy\n\n**Continue until DKA resolution criteria met** (AG <12, HCO3 >18, pH >7.3, tolerating PO)',
+            body: '**Option A — Hourly SC dosing:**\n• [Insulin lispro](#/drug/insulin-lispro/DKA SC maintenance): **[0.1 U/kg](#/calc/weight?dose=0.1&unit=units&drug=insulin-lispro) SC every hour**\n• Example: 70 kg → 7 units q1h\n• More frequent monitoring required\n\n**Option B — Every-2-hour dosing (preferred):**\n• [Insulin lispro](#/drug/insulin-lispro/DKA SC maintenance): **[0.2 U/kg](#/calc/weight?dose=0.2&unit=units&drug=insulin-lispro) SC every 2 hours**\n• Example: 70 kg → 14 units q2h\n• Easier to manage, similar efficacy\n\n**Continue until DKA resolution criteria met** (AG <12, HCO3 >18, pH >7.3, tolerating PO)',
         },
         {
             heading: 'Monitoring Schedule',
@@ -11205,15 +11205,15 @@ const DKA_SC_INSULIN_GUIDE = {
         },
         {
             heading: 'When Glucose Reaches 200-250 mg/dL',
-            body: '• Add **D5W or D10W** to IV fluids (or oral carbs if eating)\n• **Continue SC insulin** until acidosis resolved\n• **Do NOT stop insulin for low glucose** — give more dextrose instead\n• This is the most common error in DKA management\n\nGoal: Maintain glucose 150-200 mg/dL while continuing insulin to clear ketones.',
+            body: '• Add **D5W or D10W** to IV fluids (or oral carbs if eating)\n• **Continue SC insulin** until acidosis resolved\n• **Do NOT stop insulin for low glucose — give more dextrose instead**\n• This is the most common error in DKA management\n\nGoal: Maintain glucose 150-200 mg/dL while continuing insulin to clear ketones.',
         },
         {
             heading: 'Escalation to IV Insulin',
-            body: '**Convert to IV insulin if:**\n• Glucose not improving after 2-3 SC doses\n• Clinical deterioration (worsening mental status, hemodynamic instability)\n• Persistent acidosis despite SC insulin\n• K+ <3.3 mEq/L requiring aggressive repletion\n• Patient unable to tolerate PO fluids\n• Provider discretion\n\n**Transition:** Start IV insulin drip at 0.1 U/kg/hr. No bolus needed when transitioning from SC.',
+            body: '**Convert to IV insulin if:**\n• Glucose not improving after 2-3 SC doses\n• Clinical deterioration (worsening mental status, hemodynamic instability)\n• Persistent acidosis despite SC insulin\n• K+ <3.3 mEq/L requiring aggressive repletion\n• Patient unable to tolerate PO fluids\n• Provider discretion\n\n**Transition:** Start [Regular insulin](#/drug/regular-insulin/DKA) IV drip at [0.1 U/kg/hr](#/calc/weight?dose=0.1&unit=units&drug=regular-insulin). No bolus needed when transitioning from SC.',
         },
         {
             heading: 'Transition to Maintenance Therapy',
-            body: '**Once DKA resolved** (AG <12, HCO3 >18, pH >7.3, tolerating PO):\n\n1. Start **basal insulin** (glargine 0.25 U/kg SC) if not already given\n2. Continue rapid-acting insulin with meals\n3. Overlap SC rapid-acting × 1-2 hours after first basal dose\n4. Ensure endocrine follow-up within 1-2 weeks',
+            body: '**Once DKA resolved** (AG <12, HCO3 >18, pH >7.3, tolerating PO):\n\n1. Start **[insulin glargine (Lantus)](#/drug/insulin-glargine/DKA basal)** [0.25 U/kg](#/calc/weight?dose=0.25&unit=units&drug=insulin-glargine) SC if not already given\n2. Continue rapid-acting insulin with meals\n3. Overlap SC rapid-acting × 1-2 hours after first basal dose\n4. Ensure endocrine follow-up within 1-2 weeks',
         },
         {
             heading: 'Evidence Base',
