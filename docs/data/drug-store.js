@@ -4648,8 +4648,23 @@ const INSULIN_LISPRO = {
     genericName: 'Insulin lispro',
     drugClass: 'Rapid-acting insulin',
     route: 'SC',
-    indications: ['Mealtime insulin coverage', 'Inpatient basal-bolus therapy', 'Correction scale insulin', 'Type 1 diabetes', 'Type 2 diabetes'],
+    indications: ['Mealtime insulin coverage', 'Inpatient basal-bolus therapy', 'Correction scale insulin', 'Type 1 diabetes', 'Type 2 diabetes', 'DKA SC protocol'],
     dosing: [
+        {
+            indication: 'DKA SC protocol - priming bolus',
+            regimen: 'For MILD DKA only (pH ≥7.25, HCO3 ≥15, alert, stable):\n\n**Initial (priming) dose:** 0.3 U/kg SC (max 30 units)\n\nExample: 70 kg patient → 21 units SC\n\nGive immediately after confirming eligibility for SC protocol.',
+            weightCalc: { dosePerKg: 0.3, unit: 'units', maxDose: 30, label: 'DKA priming bolus' },
+        },
+        {
+            indication: 'DKA SC protocol - maintenance q2h',
+            regimen: 'After priming dose, give maintenance every 2 hours:\n\n**Maintenance dose:** 0.2 U/kg SC q2h\n\nExample: 70 kg patient → 14 units q2h\n\nContinue until DKA resolved (AG <12, HCO3 >18, pH >7.3).\n\n**Hold if K+ <3.3 mEq/L** - replete potassium first.',
+            weightCalc: { dosePerKg: 0.2, unit: 'units', label: 'DKA maintenance q2h' },
+        },
+        {
+            indication: 'DKA SC protocol - maintenance q1h',
+            regimen: 'Alternative hourly dosing (more frequent monitoring required):\n\n**Maintenance dose:** 0.1 U/kg SC every hour\n\nExample: 70 kg patient → 7 units q1h\n\nContinue until DKA resolved. Hold if K+ <3.3 mEq/L.',
+            weightCalc: { dosePerKg: 0.1, unit: 'units', label: 'DKA maintenance q1h' },
+        },
         {
             indication: 'Inpatient - mealtime bolus',
             regimen: 'Give immediately before meals.\n\nDose = 50% of TDD divided by 3 meals.\n\nExample: TDD 40 U => Bolus 20 U total => ~7 U per meal.\n\nHold if patient NPO or eating <50% of meal.',
