@@ -275,6 +275,7 @@ async function loadCriticalActionsOnly(treeId) {
         'dvt': async () => (await import('../data/trees/dvt.js')).DVT_CRITICAL_ACTIONS,
         'intussusception': async () => (await import('../data/trees/intussusception.js')).INTUSSUSCEPTION_CRITICAL_ACTIONS,
         'fishhook-removal': async () => (await import('../data/trees/fishhook-removal.js')).FISHHOOK_REMOVAL_CRITICAL_ACTIONS,
+        'vafei': async () => (await import('../data/trees/vafei.js')).VAFEI_CRITICAL_ACTIONS,
     };
     const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
     if (!loader)
@@ -1000,6 +1001,10 @@ async function loadHardcodedFallback(treeId) {
         'fishhook-removal': async () => {
             const m = await import('../data/trees/fishhook-removal.js');
             return { nodes: m.FISHHOOK_REMOVAL_NODES, entryNodeId: 'fh-start', categoryId: 'procedures', moduleLabels: m.FISHHOOK_REMOVAL_MODULE_LABELS, citations: m.FISHHOOK_REMOVAL_CITATIONS, criticalActions: m.FISHHOOK_REMOVAL_CRITICAL_ACTIONS };
+        },
+        'vafei': async () => {
+            const m = await import('../data/trees/vafei.js');
+            return { nodes: m.VAFEI_NODES, entryNodeId: 'vafei-start', categoryId: 'anesthesia-airway', moduleLabels: m.VAFEI_MODULE_LABELS, citations: m.VAFEI_CITATIONS, criticalActions: m.VAFEI_CRITICAL_ACTIONS };
         },
     };
     const loader = TREE_IMPORTS[treeId];

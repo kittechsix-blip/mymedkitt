@@ -12583,6 +12583,146 @@ const INTUSS_POST_REDUCTION = {
     ],
 };
 // -------------------------------------------------------------------
+// VAFEI (Video-Assisted Flexible Endoscopic Intubation)
+// -------------------------------------------------------------------
+const VAFEI_STEPS_SUMMARY = {
+    id: 'vafei-steps-summary',
+    title: 'VAFEI Quick Steps',
+    subtitle: 'Video-Assisted Flexible Endoscopic Intubation',
+    sections: [
+        {
+            heading: 'Equipment Setup',
+            body: '- Video laryngoscope (hyperangulated preferred)\n- Flexible endoscope with ETT pre-loaded\n- Suction x2\n- 4% lidocaine + atomizer\n- Glycopyrrolate 0.2mg IV (antisialagogue)\n- Low-dose ketamine drawn\n- Paralytic drawn and ready (rescue)',
+        },
+        {
+            heading: 'Positioning',
+            body: '**VL Operator:** Behind patient\'s LEFT shoulder\n**FE Operator:** Behind patient\'s HEAD\n**Patient:** Semi-Fowler (30-45 degrees)\n**Monitor:** Split-screen over bed',
+        },
+        {
+            heading: 'The VAFEI Sequence',
+            body: '1. **VL insertion** - Obtain laryngeal view, hold with left hand, suction in right\n2. **FE insertion** - Look in mouth, advance to blade tip, then use VL screen\n3. **Cord passage** - Spray lidocaine, advance through cords to carina\n4. **Railroad ETT** - Advance pre-loaded tube until visible on FE screen\n5. **Withdraw scope** - Confirm ETT 2-3cm above carina\n6. **Confirm** - Waveform capnography mandatory',
+        },
+        {
+            heading: 'Key Pearl',
+            body: '"The right speed is SLOWER than your instincts."\n\n— Strayer & Caputo, ACEP Now 2022',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Strayer RJ, Caputo N. How to Use Video-Assisted Flexible Endoscopic Intubation. ACEP Now. 2022.' },
+    ],
+};
+const VAFEI_TOPICALIZATION_GUIDE = {
+    id: 'vafei-topicalization-guide',
+    title: 'Airway Topicalization',
+    subtitle: 'Lidocaine Technique for Awake Intubation',
+    sections: [
+        {
+            heading: 'Maximum Lidocaine Dose',
+            body: '**7 mg/kg** — calculate BEFORE starting!\n\n70 kg patient:\n- Max dose: 490 mg\n- 4% lidocaine = 40 mg/mL\n- Max volume: ~12 mL of 4%',
+        },
+        {
+            heading: 'Nebulized Lidocaine',
+            body: '- 4% lidocaine, 4-5 mL\n- Low flow (4-8 L/min)\n- 10-15 minutes\n- Anesthetizes entire upper airway',
+        },
+        {
+            heading: 'Atomized Lidocaine',
+            body: '- MAD device with 4% lidocaine\n- Spray tonsillar pillars\n- Spray posterior pharynx\n- Spray base of tongue/vallecula',
+        },
+        {
+            heading: 'Through the Scope',
+            body: '"Spray as you go"\n\n- 2-3 mL of 4% lidocaine\n- Through FE working channel\n- Directly onto vocal cords\n- Wait 30-60 sec before advancing',
+        },
+        {
+            heading: 'Toxicity Signs',
+            body: '- Perioral numbness, metallic taste\n- Tinnitus, visual changes\n- Lightheadedness, confusion\n- Seizures, arrhythmias\n\n**If suspected:** STOP lidocaine, support airway, consider lipid emulsion',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ahmad I, et al. DAS guidelines for awake tracheal intubation. Anaesthesia. 2020.' },
+        { num: 2, text: 'Stolz AJ. Managing Awake Intubation. Ann Emerg Med. 2024.' },
+    ],
+};
+const VAFEI_KETAMINE_GUIDE = {
+    id: 'vafei-ketamine-guide',
+    title: 'Ketamine for Awake Intubation',
+    subtitle: 'Dosing and Safety',
+    sections: [
+        {
+            heading: 'Low-Dose (Procedural Sedation)',
+            body: '**Goal:** Anxiolysis + comfort, maintains reflexes\n\n- 0.3-0.5 mg/kg IV (20-30 mg typical)\n- OR titrate 20 mg aliquots q2 min\n- Patient arousable, follows commands\n- Breathing preserved',
+        },
+        {
+            heading: 'Dissociative Dose (KOBI)',
+            body: '**Ketamine-Only Breathing Intubation**\n\n- 1-2 mg/kg IV\n- OR 25 mg aliquots q15 sec until dissociated\n- Patient fully dissociated but breathing\n- Cannot follow commands',
+        },
+        {
+            heading: 'CRITICAL SAFETY',
+            body: '⚠️ **ALWAYS have paralytic drawn and ready**\n\n- Rocuronium 1.2 mg/kg\n- OR Succinylcholine 1.5 mg/kg\n\n**Why?**\n- Laryngospasm can occur\n- Increased muscle tone may impair view\n- Patient may gag, cough, adduct cords',
+        },
+        {
+            heading: 'Ketamine Cautions',
+            body: '- Hypotension in catecholamine-depleted patients\n- Emergence reactions (midazolam can help)\n- Increased secretions (use antisialagogue)\n- May increase ICP (controversial)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart SD. EMCrit 247: Dissociated Awake Intubation. 2018.' },
+        { num: 2, text: 'Driver BE, et al. Alternatives to RSI with Ketamine. West J Emerg Med. 2019.' },
+    ],
+};
+const VAFEI_TROUBLESHOOTING_GUIDE = {
+    id: 'vafei-troubleshooting-guide',
+    title: 'VAFEI Troubleshooting',
+    subtitle: 'Common Problems and Solutions',
+    sections: [
+        {
+            heading: 'Poor Visualization',
+            body: '**Blood/secretions:**\n- VL operator suctions aggressively\n- Clear pharynx before FE insertion\n\n**Fogging:**\n- Warm scope in warm water\n- Anti-fog solution\n- Wipe lens on mucosa',
+        },
+        {
+            heading: 'Cords Won\'t Open',
+            body: '**Awake patient:**\n- More lidocaine to cords via FE channel\n- Wait 30-60 sec\n- Ask for deep breath, advance during inspiration\n\n**Laryngospasm:**\n- STOP, withdraw scope\n- Give paralytic (that\'s why it\'s drawn!)',
+        },
+        {
+            heading: 'ETT Hang-Up at Cords',
+            body: 'Most common - catches on right arytenoid\n\n**Solutions:**\n1. Rotate ETT 90° counterclockwise\n2. Withdraw and re-advance\n3. Jaw thrust by VL operator\n4. Try smaller tube (6.5 or 6.0)\n\n**DO NOT FORCE**',
+        },
+        {
+            heading: 'Desaturation',
+            body: '1. **STOP** procedure\n2. Remove FE and VL\n3. **BVM** with 100% O2\n4. If can\'t ventilate → **SGA**\n5. If CICO → **Cricothyrotomy**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Strayer RJ, Caputo N. VAFEI. ACEP Now. 2022.' },
+    ],
+};
+const VAFEI_INDICATIONS_GUIDE = {
+    id: 'vafei-indications-guide',
+    title: 'VAFEI Indications',
+    subtitle: 'When to Consider This Technique',
+    sections: [
+        {
+            heading: 'Primary Indications',
+            body: '**Anatomically Difficult/Distorted:**\n- Angioedema (most common)\n- Ludwig angina / deep neck infection\n- Oropharyngeal abscess / hematoma\n- Laryngeal or orofacial trauma\n- Airway tumors / masses\n- Prior H&N surgery or radiation',
+        },
+        {
+            heading: 'Intrinsic Difficult Airway',
+            body: '- Micrognathia / retrognathia\n- Limited mouth opening (trismus)\n- Morbid obesity\n- Failed 3-3-2 rule\n- Mallampati IV\n- History of difficult intubation',
+        },
+        {
+            heading: 'Clinical Scenarios',
+            body: '- "Scared to paralyze" patients\n- Failed VL (can still oxygenate)\n- C-spine immobility + predicted difficult airway\n- Need continuous visualization (laryngeal trauma)',
+        },
+        {
+            heading: 'Relative Contraindications',
+            body: '- Massive upper airway bleeding\n- Complete airway obstruction\n- Impending arrest / no time\n- Severely uncooperative patient\n\n**Most are RELATIVE** — aggressive suctioning can address secretions',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sandefur BJ, et al. FEI in Emergency Medicine. AEM Educ Train. 2024.' },
+        { num: 2, text: 'Ahmad I, et al. DAS Awake Intubation Guidelines. 2020.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Fishhook Removal
 // -------------------------------------------------------------------
 const FH_TECHNIQUE_SUMMARY = {
@@ -12692,6 +12832,12 @@ const FH_EQUIPMENT_CHECKLIST = {
     ],
 };
 export const INFO_PAGES = {
+    // VAFEI
+    'vafei-steps-summary': VAFEI_STEPS_SUMMARY,
+    'vafei-topicalization-guide': VAFEI_TOPICALIZATION_GUIDE,
+    'vafei-ketamine-guide': VAFEI_KETAMINE_GUIDE,
+    'vafei-troubleshooting-guide': VAFEI_TROUBLESHOOTING_GUIDE,
+    'vafei-indications-guide': VAFEI_INDICATIONS_GUIDE,
     // Fishhook Removal
     'fh-technique-summary': FH_TECHNIQUE_SUMMARY,
     'fh-hook-anatomy': FH_HOOK_ANATOMY,

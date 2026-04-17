@@ -1213,6 +1213,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'advance-cut', label: 'Advance', icon: '✂️', action: 'jump', target: 'fh-advance-cut' },
     { id: 'wound-care', label: 'Wound Care', icon: '🩹', action: 'overlay', target: 'fh-wound-care-guide' },
   ],
+  // ---------------------------------------------------------------
+  // VAFEI (Video-Assisted Flexible Endoscopic Intubation)
+  // ---------------------------------------------------------------
+  'vafei': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vafei-steps-summary' },
+    { id: 'topical', label: 'Lidocaine', icon: '💉', action: 'overlay', target: 'vafei-topicalization-guide' },
+    { id: 'ketamine', label: 'Ketamine', icon: '💊', action: 'overlay', target: 'vafei-ketamine-guide' },
+    { id: 'trouble', label: 'Trouble', icon: '🔧', action: 'overlay', target: 'vafei-troubleshooting-guide' },
+    { id: 'indications', label: 'Indications', icon: '🎯', action: 'overlay', target: 'vafei-indications-guide' },
+  ],
 };
 
 // Stop button appended automatically to every consult
