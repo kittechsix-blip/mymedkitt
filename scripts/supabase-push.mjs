@@ -256,6 +256,7 @@ const TREE_REGISTRY = {
   'brain-herniation':    { prefix: 'BRAIN_HERNIATION',     entryNodeId: 'hern-start',         categoryId: 'trauma-surg' },
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',        categoryId: 'infectious-disease' },
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL', entryNodeId: 'fh-start',        categoryId: 'procedures' },
+  'vafei': { prefix: 'VAFEI', entryNodeId: 'vafei-start',        categoryId: 'anesthesia-airway' },
 };
 
 const CROSS_LISTINGS = {
