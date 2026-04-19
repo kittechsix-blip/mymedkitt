@@ -13409,7 +13409,153 @@ const FH_EQUIPMENT_CHECKLIST: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Blood Culture Stewardship
+// -------------------------------------------------------------------
+
+const BCS_INDICATIONS: InfoPage = {
+  id: 'bcs-indications',
+  title: 'When to Order Blood Cultures',
+  subtitle: 'High-Yield vs Low-Yield Indications',
+  sections: [
+    {
+      heading: 'High-Yield Indications (DO Order)',
+      body: '**Pre-test probability exceeds contamination risk (~3%):**\n\n• **Sepsis / Septic Shock** — 38-69% bacteremia rate\n• **Suspected endocarditis** — 3 sets from 3 sites\n• **Meningitis / Encephalitis** — before LP\n• **Osteomyelitis / Septic arthritis** — 30-50% yield\n• **Healthcare-associated infections** (HAP, CLABSI)\n• **Complicated pyelonephritis** (obstruction, catheter, shock)\n• **Febrile neutropenia** (ANC <500)\n• **Immunocompromised** (transplant, chemo, HIV CD4 <200)',
+    },
+    {
+      heading: 'Low-Yield Indications (Consider SKIPPING)',
+      body: '**False-positive rate may exceed true-positive rate:**\n\n• **Community-acquired pneumonia** — 6-9% yield, changes management in <1%\n• **Uncomplicated cellulitis** — <2% bacteremia, contamination more likely\n• **Simple UTI/pyelonephritis** — same organism as urine 97% of time\n• **Low-grade fever** without risk factors (Shapiro <2)\n• **Clear viral syndrome**',
+    },
+    {
+      heading: 'The Shapiro Rule',
+      body: '**Major criteria (3 points each):**\n• Temperature >39.4°C (103°F)\n• Indwelling vascular catheter\n• Clinical suspicion of endocarditis\n\n**Minor criteria (1 point each):**\n• Temp 38.3-39.3°C\n• Age >65\n• Rigors\n• Vomiting\n• SBP <90\n• WBC >18,000\n• Bands >5%\n• Platelets <150,000\n• Creatinine >2.0\n\n**Score ≥2 points:** 19% bacteremia → cultures indicated\n**Score <2 points:** <1% bacteremia → consider skipping',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Shapiro NI, et al. Who Needs a Blood Culture? J Emerg Med. 2008;35(3):255-264.' },
+    { num: 2, text: 'Coburn B, et al. Does This Adult Patient with Suspected Bacteremia Require Blood Cultures? JAMA. 2012;308(5):502-511.' },
+  ],
+};
+
+const BCS_CONTAMINATION: InfoPage = {
+  id: 'bcs-contamination',
+  title: 'Contamination & Interpretation',
+  subtitle: 'True Pathogen vs Contaminant',
+  sections: [
+    {
+      heading: 'Organisms That Are ALMOST ALWAYS True Pathogens (>90%)',
+      body: '• ***Staphylococcus aureus***\n• ***Streptococcus pneumoniae***\n• ***Escherichia coli*** and other Enterobacteriaceae\n• ***Pseudomonas aeruginosa***\n• ***Candida* species**\n• **Beta-hemolytic streptococci**\n\n**If you grow these → treat as true infection.**',
+    },
+    {
+      heading: 'Organisms That Are OFTEN Contaminants',
+      body: '• **Coagulase-negative staphylococci (CoNS)** — only 10-12% true infection\n• ***Corynebacterium* species** (diphtheroids)\n• ***Bacillus* species** (not *anthracis*)\n• ***Propionibacterium acnes***\n• ***Micrococcus* species**\n\n**Single bottle CoNS in stable patient = likely contaminant.**',
+    },
+    {
+      heading: 'When to Suspect TRUE CoNS Infection',
+      body: '• **≥3 SIRS criteria present** (probability 72.3%)\n• **≥2 SIRS criteria + central venous catheter**\n• **Multiple positive bottles** from separate draws\n• **Prosthetic valve or device**\n• **Time to positivity <14 hours**\n\n**If none of above:** High probability of contamination. Consider observation without vancomycin.',
+    },
+    {
+      heading: 'Cost of False Positives',
+      body: '• **Unnecessary vancomycin** therapy (resistance, nephrotoxicity)\n• **Mean 2-4 extra hospital days**\n• **$1,000-$5,000 additional cost per episode**\n• **Drives antibiotic resistance**\n• **Delays appropriate disposition**',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hall KK, Lyman JA. Updated Review of Blood Culture Contamination. Clin Microbiol Rev. 2006;19(4):788-802.' },
+    { num: 2, text: 'Saunders JM, et al. Guidelines for Interpretation of Positive Blood Cultures. AHRQ PSNet. 2023.' },
+  ],
+};
+
+const BCS_TECHNIQUE: InfoPage = {
+  id: 'bcs-technique',
+  title: 'Optimal Collection Technique',
+  subtitle: 'Maximize Yield, Minimize Contamination',
+  sections: [
+    {
+      heading: 'Volume Matters Most',
+      body: '• **20-30 mL total** (10-15 mL per bottle pair)\n• Each additional mL increases yield by **3%**\n• Under-filling is the most common error\n• Do NOT "save" bottles by under-filling',
+    },
+    {
+      heading: 'Skin Antisepsis',
+      body: '• **Chlorhexidine/alcohol preferred** over povidone-iodine\n• Allow to dry completely before venipuncture\n• Reduces contamination by **30-50%**\n• Avoid touching the site after prep',
+    },
+    {
+      heading: 'Diversion Devices',
+      body: '• Initial ~0.5-1 mL of blood diverted away from culture bottle\n• Reduces contamination by **average 64%**\n• **IDSA/ASM 2024: Strongly recommended**\n• Worth the small additional cost',
+    },
+    {
+      heading: 'Site Selection',
+      body: '• **2 peripheral venipunctures preferred**\n• Draw from **separate anatomic sites**\n• If must use line: draw peripheral + line simultaneously, note which is which\n• **NEVER draw only from indwelling catheter** (high false-positive rate)',
+    },
+    {
+      heading: 'Timing',
+      body: '• Obtain **before antibiotics** when possible\n• If already on antibiotics: draw at **trough** (just before next dose)\n• Do NOT delay antibiotics >1hr to obtain cultures in septic patients\n• All bottles can be drawn at same time (no need to wait between sets)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Humphries RM, et al. IDSA/ASM Guide to Utilization of the Microbiology Laboratory: 2024 Update. Clin Infect Dis. 2024.' },
+    { num: 2, text: 'Lamy B, et al. How to Optimize Blood Cultures for Diagnosis of Bloodstream Infections. Front Microbiol. 2016;7:697.' },
+  ],
+};
+
+const BCS_YIELD_TABLE: InfoPage = {
+  id: 'bcs-yield-table',
+  title: 'Bacteremia Yield by Infection Type',
+  subtitle: 'Pre-Test Probability for Decision-Making',
+  sections: [
+    {
+      heading: 'High Yield (>15% bacteremia)',
+      body: '| Infection | Bacteremia Rate |\n|---|---|\n| **Septic shock** | 69% |\n| **Severe sepsis** | 38% |\n| **Meningitis** | 30-50% |\n| **Endocarditis** | 95% (3 sets) |\n| **Osteomyelitis** | 30-50% |\n| **Febrile neutropenia** | 20-30% |\n| **CLABSI** | High (variable) |',
+    },
+    {
+      heading: 'Moderate Yield (5-15% bacteremia)',
+      body: '| Infection | Bacteremia Rate |\n|---|---|\n| **Complicated pyelonephritis** | 19-25% |\n| **Cholangitis** | 15-40% |\n| **Healthcare-associated pneumonia** | 10-20% |\n| **Severe CAP (ICU)** | 14-33% |',
+    },
+    {
+      heading: 'Low Yield (<5% bacteremia)',
+      body: '| Infection | Bacteremia Rate | Management Changed |\n|---|---|---|\n| **CAP (non-ICU)** | 6-9% | **<1%** |\n| **Simple cellulitis** | **<2%** | Rarely |\n| **Simple UTI** | <5% | Same organism 97% |\n| **Simple pyelonephritis** | 19-25% | **2.3%** |',
+    },
+    {
+      heading: 'Decision Framework',
+      body: '**Order cultures when:**\n• Pre-test probability **exceeds contamination rate (~3%)**\n• Result will **change management**\n• Patient has **high-risk features** (immunocompromised, indwelling device, rigors)\n\n**Skip cultures when:**\n• False-positive rate likely **exceeds** true-positive rate\n• Source-specific culture available (urine, wound)\n• Low-risk, immunocompetent patient with clear source',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Long B, Koyfman A. Blood Culture Utility in the Emergency Department. J Emerg Med. 2016;51(5):529-539.' },
+    { num: 2, text: 'Coburn B, et al. Does This Adult Patient Require Blood Cultures? JAMA. 2012;308(5):502-511.' },
+  ],
+};
+
+const BCS_HIGH_YIELD: InfoPage = {
+  id: 'bcs-high-yield',
+  title: 'High-Yield Indications Quick Reference',
+  subtitle: 'Always Order Blood Cultures',
+  sections: [
+    {
+      heading: 'ALWAYS Culture',
+      body: '**Sepsis / Septic Shock**\n• 2 sets from 2 peripheral sites\n• 20-30 mL total volume\n• BEFORE antibiotics (but do not delay abx)\n\n**Suspected Endocarditis**\n• 3 sets from 3 separate sites\n• Over 1-24 hours (unless unstable)\n• Before antibiotics (critical for diagnosis)\n\n**Meningitis / Encephalitis**\n• Before or concurrent with LP\n• Critical for organism identification\n• Do not delay antibiotics',
+    },
+    {
+      heading: 'Strong Indication',
+      body: '**Febrile Neutropenia** (ANC <500)\n• Pan-culture (blood, urine, consider fungal)\n• Low threshold for empiric broad-spectrum\n\n**Immunocompromised**\n• Solid organ transplant <1 year\n• Active chemotherapy\n• HIV with CD4 <200\n• Chronic high-dose steroids\n\n**Healthcare-Associated Infections**\n• Hospital-acquired pneumonia\n• CLABSI suspected\n• Surgical site infection',
+    },
+    {
+      heading: 'Clinical Features That Increase Yield',
+      body: '• **Rigors / shaking chills** (LR 4.7 for bacteremia)\n• **Temperature >39.4°C**\n• **Indwelling vascular device**\n• **Shapiro score ≥2**\n• **Diastolic BP <40 mmHg** (vasoplegia)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021.' },
+    { num: 2, text: 'Shapiro NI, et al. Who Needs a Blood Culture? J Emerg Med. 2008.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Blood Culture Stewardship
+  'bcs-indications': BCS_INDICATIONS,
+  'bcs-contamination': BCS_CONTAMINATION,
+  'bcs-technique': BCS_TECHNIQUE,
+  'bcs-yield-table': BCS_YIELD_TABLE,
+  'bcs-high-yield': BCS_HIGH_YIELD,
   // VAFEI
   'vafei-steps-summary': VAFEI_STEPS_SUMMARY,
   'vafei-topicalization-guide': VAFEI_TOPICALIZATION_GUIDE,

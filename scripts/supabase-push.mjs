@@ -257,6 +257,7 @@ const TREE_REGISTRY = {
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',        categoryId: 'infectious-disease' },
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL', entryNodeId: 'fh-start',        categoryId: 'procedures' },
   'vafei': { prefix: 'VAFEI', entryNodeId: 'vafei-start',        categoryId: 'anesthesia-airway' },
+  'blood-culture-stewardship': { prefix: 'BLOOD_CULTURE_STEWARDSHIP', entryNodeId: 'bcs-start',        categoryId: 'infectious-disease' },
 };
 
 const CROSS_LISTINGS = {

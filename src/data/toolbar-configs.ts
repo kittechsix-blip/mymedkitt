@@ -1223,6 +1223,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'trouble', label: 'Trouble', icon: '🔧', action: 'overlay', target: 'vafei-troubleshooting-guide' },
     { id: 'indications', label: 'Indications', icon: '🎯', action: 'overlay', target: 'vafei-indications-guide' },
   ],
+  'blood-culture-stewardship': [
+    { id: 'indications', label: 'Indications', icon: '✅', action: 'overlay', target: 'bcs-indications' },
+    { id: 'contam', label: 'Contam', icon: '🦠', action: 'overlay', target: 'bcs-contamination' },
+    { id: 'technique', label: 'Technique', icon: '🩸', action: 'overlay', target: 'bcs-technique' },
+    { id: 'yield', label: 'Yield', icon: '📊', action: 'overlay', target: 'bcs-yield-table' },
+    { id: 'high-yield', label: 'High Yield', icon: '🎯', action: 'overlay', target: 'bcs-high-yield' },
+  ],
 };
 
 // Stop button appended automatically to every consult
