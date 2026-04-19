@@ -1216,6 +1216,19 @@ const TOOLBAR_CONFIGS = {
         { id: 'yield', label: 'Yield', icon: '📊', action: 'overlay', target: 'bcs-yield-table' },
         { id: 'high-yield', label: 'High Yield', icon: '🎯', action: 'overlay', target: 'bcs-high-yield' },
     ],
+    'low-back-pain': [
+        { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'overlay', target: 'lbp-red-flags' },
+        { id: 'ces-exam', label: 'CES Exam', icon: '🦴', action: 'overlay', target: 'lbp-ces-exam' },
+        { id: 'dermatomes', label: 'Dermatomes', icon: '🧠', action: 'overlay', target: 'lbp-dermatomes' },
+        { id: 'meds', label: 'Meds', icon: '💊', action: 'overlay', target: 'lbp-meds' },
+        { id: 'discharge', label: 'Discharge', icon: '🏠', action: 'overlay', target: 'lbp-discharge' },
+    ],
+    'cricothyrotomy': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cric-steps' },
+        { id: 'anatomy', label: 'Anatomy', icon: '🔬', action: 'overlay', target: 'cric-anatomy' },
+        { id: 'equipment', label: 'Equipment', icon: '🔧', action: 'overlay', target: 'cric-equipment' },
+        { id: 'complications', label: 'Complications', icon: '⚠️', action: 'overlay', target: 'cric-complications' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

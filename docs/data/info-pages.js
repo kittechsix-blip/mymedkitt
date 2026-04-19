@@ -12965,6 +12965,271 @@ const BCS_HIGH_YIELD = {
         { num: 2, text: 'Shapiro NI, et al. Who Needs a Blood Culture? J Emerg Med. 2008.' },
     ],
 };
+// -------------------------------------------------------------------
+// Low Back Pain
+// -------------------------------------------------------------------
+const LBP_RED_FLAGS = {
+    id: 'lbp-red-flags',
+    title: 'Low Back Pain Red Flags',
+    subtitle: 'Screen for Emergent Conditions',
+    sections: [
+        {
+            heading: 'Cauda Equina Syndrome',
+            body: '**The "Big 3" — most specific:**\n• **Urinary retention** (post-void residual >200 mL)\n• **Saddle anesthesia** (perineal numbness)\n• **Bilateral leg weakness or numbness**\n\n**Other features:**\n• Fecal incontinence\n• Decreased rectal tone\n• Sexual dysfunction\n• Progressive bilateral radiculopathy',
+        },
+        {
+            heading: 'Spinal Infection',
+            body: '**Risk factors:**\n• IVDU (most common)\n• Recent spinal procedure (injection, surgery)\n• Immunocompromised (diabetes, HIV, steroids, chemo)\n• Indwelling catheter / bacteremia\n\n**Clinical:**\n• Fever + localized back pain\n• Point tenderness over spine\n• Elevated ESR/CRP',
+        },
+        {
+            heading: 'Malignancy',
+            body: '• History of cancer (breast, lung, prostate, kidney, myeloma)\n• Unexplained weight loss >10 lbs\n• Pain worse at **night** or with **rest**\n• Age >50 with new, severe back pain\n• Failure to improve with conservative treatment',
+        },
+        {
+            heading: 'Fracture',
+            body: '• Significant trauma\n• Age >65 (osteoporosis risk)\n• Chronic steroid use\n• Midline tenderness to palpation\n• History of osteoporosis',
+        },
+        {
+            heading: 'Vascular (AAA)',
+            body: '• Pulsatile abdominal mass\n• Tearing pain radiating to groin/flank\n• Age >60 with vascular risk factors\n• Known AAA',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Casazza BA. Diagnosis and Treatment of Acute Low Back Pain. Am Fam Physician. 2012.' },
+    ],
+};
+const LBP_CES_EXAM = {
+    id: 'lbp-ces-exam',
+    title: 'Cauda Equina Syndrome Exam',
+    subtitle: 'Focused Assessment',
+    sections: [
+        {
+            heading: 'Bladder',
+            body: '**Post-void residual (PVR):**\n• Use POCUS or bladder scanner\n• **>200 mL is abnormal** and raises suspicion for CES\n• Ask about urinary retention, hesitancy, incontinence',
+        },
+        {
+            heading: 'Rectal Exam',
+            body: '• **Rectal tone** — decreased or absent in CES\n• **Perianal sensation** — test light touch S2-S5 dermatomes\n• **Voluntary squeeze** — absent in severe CES',
+        },
+        {
+            heading: 'Sensory',
+            body: '**Saddle anesthesia:**\n• Test light touch over perineum, buttocks, posterior thighs\n• S2-S5 distribution\n• Compare left to right\n\n**Lower extremity:**\n• L4: Medial leg/ankle\n• L5: Dorsum of foot, first web space\n• S1: Lateral foot',
+        },
+        {
+            heading: 'Motor',
+            body: '**Test bilateral:**\n• L4: Knee extension (quads)\n• L5: Great toe dorsiflexion (EHL), ankle DF\n• S1: Ankle plantarflexion, toe walking\n\n**Look for:**\n• Bilateral weakness (not just unilateral)\n• Progressive deficit',
+        },
+        {
+            heading: 'Management if CES Suspected',
+            body: '• **Emergent MRI** (gold standard)\n• **POCUS bladder scan** while awaiting MRI\n• **Neurosurgery STAT consult**\n• Decompression within **48 hours** improves outcomes',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Todd NV. Guidelines for cauda equina syndrome. Br J Neurosurg. 2017.' },
+    ],
+};
+const LBP_DERMATOMES = {
+    id: 'lbp-dermatomes',
+    title: 'Lumbar Dermatomes & Myotomes',
+    subtitle: 'Nerve Root Localization',
+    sections: [
+        {
+            heading: 'L4 (5% of radiculopathies)',
+            body: '**Motor:** Knee extension (quadriceps)\n**Sensory:** Medial leg, medial ankle\n**Reflex:** Patellar (knee jerk)\n**Test:** Squat and rise, heel walk',
+        },
+        {
+            heading: 'L5 (45% of radiculopathies)',
+            body: '**Motor:** Great toe dorsiflexion (EHL), ankle dorsiflexion\n**Sensory:** Dorsum of foot, first web space\n**Reflex:** None (or internal hamstring)\n**Test:** Heel walk, great toe extension against resistance',
+        },
+        {
+            heading: 'S1 (45% of radiculopathies)',
+            body: '**Motor:** Ankle plantarflexion, toe walking\n**Sensory:** Lateral foot, small toe, posterior calf\n**Reflex:** Achilles (ankle jerk)\n**Test:** Toe walk, single-leg heel raise',
+        },
+        {
+            heading: 'Straight Leg Raise (SLR)',
+            body: '**Positive:** Radicular pain at <60°\n**Sensitivity:** 91% for L5/S1 disc herniation\n**Specificity:** ~26%\n\n**Crossed SLR:** Pain in affected leg when raising opposite leg\n• More specific (~88%) for disc herniation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kreiner DS, et al. Diagnosis and treatment of lumbar disc herniation with radiculopathy. Spine J. 2014.' },
+    ],
+};
+const LBP_MEDS = {
+    id: 'lbp-meds',
+    title: 'Low Back Pain Medications',
+    subtitle: 'Evidence-Based Treatment',
+    sections: [
+        {
+            heading: 'First-Line: NSAIDs',
+            body: '**Most effective for acute LBP**\n\n• Ibuprofen 400-600 mg PO q6-8h\n• Naproxen 500 mg PO BID\n• Ketorolac 10 mg PO q4-6h (short-term)\n\n**Cautions:** GI bleed, renal impairment, cardiac disease',
+        },
+        {
+            heading: 'Adjunct: Acetaminophen',
+            body: '• 650-1000 mg PO q6h (max 3g/day)\n• Less effective than NSAIDs alone\n• Safe in most patients\n• Use as adjunct or if NSAIDs contraindicated',
+        },
+        {
+            heading: 'Second-Line: Muscle Relaxants',
+            body: '**For muscle spasm:**\n• Cyclobenzaprine 5-10 mg PO TID × 7-10 days\n• Methocarbamol 750-1500 mg PO QID\n• Baclofen 5-10 mg PO TID\n\n**Cautions:** Sedation, fall risk in elderly, abuse potential',
+        },
+        {
+            heading: 'AVOID or Use Cautiously',
+            body: '**Opioids:**\n• No better than NSAIDs for acute LBP\n• Addiction, hyperalgesia, constipation\n• Reserve for severe pain refractory to first-line\n\n**Benzodiazepines:**\n• No evidence of benefit\n• Addiction risk, sedation\n\n**Systemic steroids:**\n• Conflicting evidence\n• Short-term benefit at best',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Qaseem A, et al. Noninvasive Treatments for Acute LBP. Ann Intern Med. 2017.' },
+    ],
+};
+const LBP_DISCHARGE = {
+    id: 'lbp-discharge',
+    title: 'Low Back Pain Discharge Instructions',
+    subtitle: 'Patient Education',
+    sections: [
+        {
+            heading: 'What to Tell Patients',
+            body: '"You have a muscle strain in your back. This is very common and not serious. Most back pain gets better on its own within 2-4 weeks."\n\n"Staying active helps you heal faster than bed rest. Light walking and gentle movement are good."\n\n"An MRI would show normal age-related changes that everyone has. It wouldn\'t help your treatment and might lead to unnecessary procedures."',
+        },
+        {
+            heading: 'Activity',
+            body: '• **Stay active** — avoid bed rest (harmful)\n• Light walking encouraged\n• Avoid heavy lifting for 1-2 weeks\n• Gradual return to normal activities\n• Heat or ice for comfort',
+        },
+        {
+            heading: 'Medications',
+            body: '• Take NSAIDs as prescribed (with food)\n• Acetaminophen can be used in addition\n• Muscle relaxants for significant spasm (short-term)\n• Avoid alcohol with medications',
+        },
+        {
+            heading: 'Return Precautions — Come Back If:',
+            body: '**URGENT — Return immediately if:**\n• Difficulty urinating or loss of bladder control\n• Loss of bowel control\n• Numbness in your groin or buttocks\n• Weakness in your legs getting worse\n• Fever with back pain\n• Severe pain not controlled by medications',
+        },
+        {
+            heading: 'Follow-Up',
+            body: '• PCP in 2-4 weeks if not improving\n• Physical therapy if symptoms >2-4 weeks\n• No imaging needed unless red flags develop',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Choosing Wisely. Imaging for uncomplicated low back pain. 2023.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Cricothyrotomy
+// -------------------------------------------------------------------
+const CRIC_STEPS = {
+    id: 'cric-steps',
+    title: 'Scalpel-Finger-Bougie Technique',
+    subtitle: 'Step-by-Step Guide',
+    sections: [
+        {
+            heading: 'Step 1: Position & Stabilize',
+            body: '• Patient supine, neck extended (unless C-spine)\n• Operator at patient\'s side\n• **Laryngeal handshake:** Non-dominant hand grips larynx (thumb + middle finger)\n• Index finger locates CTM from **notch DOWN**',
+        },
+        {
+            heading: 'Step 2: Vertical Skin Incision',
+            body: '• **4 cm VERTICAL incision** through skin\n• Start above thyroid notch, extend below cricoid\n• Cut through skin and subcutaneous tissue\n• Vertical = more forgiving if landmarks are off',
+        },
+        {
+            heading: 'Step 3: Blunt Dissection',
+            body: '• Use finger to bluntly dissect to CTM\n• Palpate the **soft "trampoline"** of the membrane\n• Maintain laryngeal grip throughout',
+        },
+        {
+            heading: 'Step 4: Horizontal CTM Incision',
+            body: '• **HORIZONTAL stab** through CTM with #10 scalpel\n• Cut ~2-3 cm across membrane\n• Rotate blade 90° caudally\n• **Remove scalpel** — keep finger in hole',
+        },
+        {
+            heading: 'Step 5: Bougie Insertion',
+            body: '• Slide bougie alongside finger into trachea\n• Direct **caudally** (toward feet)\n• Feel for **"clicking"** over tracheal rings\n• Hold-up at 15-20 cm confirms trachea',
+        },
+        {
+            heading: 'Step 6: ETT Over Bougie',
+            body: '• Thread **6.0 ETT** over bougie\n• Advance only until **cuff passes incision**\n• Remove bougie, inflate cuff\n• Confirm with **ETCO₂ waveform**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart S. EMCrit Podcast 131: Cricothyrotomy. 2014.' },
+        { num: 2, text: 'Hill C, et al. Scalpel-Finger-Tube Method. J Emerg Med. 2012.' },
+    ],
+};
+const CRIC_ANATOMY = {
+    id: 'cric-anatomy',
+    title: 'Cricothyroid Membrane Anatomy',
+    subtitle: 'Landmark Identification',
+    sections: [
+        {
+            heading: 'Location',
+            body: 'The **cricothyroid membrane (CTM)** is located between:\n• **Thyroid cartilage** (Adam\'s apple) — above\n• **Cricoid cartilage** — below\n\nIt is the **only avascular** anterior access point to the airway.',
+        },
+        {
+            heading: 'Dimensions',
+            body: '• **Height:** ~9 mm\n• **Width:** ~30 mm\n• Just large enough for a **6.0 ETT** (OD 8.2 mm)\n• Female and small patients may need 5.5 or 5.0',
+        },
+        {
+            heading: 'Laryngeal Handshake (EMCrit Method)',
+            body: '1. Stand at patient\'s **side** (not at head)\n2. Grasp larynx with non-dominant hand\n3. **Thumb + middle finger** on lateral thyroid cartilage\n4. **Index finger** palpates from thyroid notch **DOWN**\n5. Feel the "dip" of the CTM between cartilages\n\n**Validated in RCT as superior to other localization methods.**',
+        },
+        {
+            heading: 'Structures to Avoid',
+            body: '• **Superior thyroid artery/vein** — at superior thyroid border\n• **Anterior jugular veins** — lateral to midline\n• **Cricothyroid artery** — crosses CTM superiorly (variable)\n\n**Pearl:** Keep incision in **lower half** of CTM to avoid vessels.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Salah N, et al. Comparison of CTM identification methods. Anesth Analg. 2020.' },
+    ],
+};
+const CRIC_EQUIPMENT = {
+    id: 'cric-equipment',
+    title: 'Cricothyrotomy Equipment',
+    subtitle: 'The Essential 3 Items',
+    sections: [
+        {
+            heading: 'The Only 3 Things You Need',
+            body: '1. **#10 scalpel** (or #20) — large blade for CTM incision\n2. **Bougie** (gum elastic bougie) — guides ETT placement\n3. **6.0 cuffed ETT** — fits through CTM; have 5.5 backup\n\n**That\'s it.** You can do this procedure with just these 3 items.',
+        },
+        {
+            heading: 'Why 6.0 ETT?',
+            body: '• CTM height = ~9 mm\n• 6.0 ETT outer diameter = 8.2 mm\n• 5.5 ETT OD = 7.5 mm (for small patients)\n• 5.0 ETT OD = 7.0 mm (smallest practical)\n\n**Do not use tracheostomy tubes** — they are shorter and may dislodge.',
+        },
+        {
+            heading: 'Also Have Ready',
+            body: '• 10 mL syringe (inflate cuff)\n• BVM\n• Waveform capnography (ETCO₂)\n• Suction\n• Tape or tie (secure tube)\n• Gauze (bleeding control)',
+        },
+        {
+            heading: 'Optional',
+            body: '• Tracheal hook (to elevate incision)\n• Trousseau dilator\n• Commercial cric kit (if familiar)\n\n**Do NOT wait** for a kit if you have scalpel, bougie, and tube.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'LITFL. Surgical Cricothyroidotomy. 2024.' },
+    ],
+};
+const CRIC_COMPLICATIONS = {
+    id: 'cric-complications',
+    title: 'Cricothyrotomy Complications',
+    subtitle: 'Prevention & Management',
+    sections: [
+        {
+            heading: 'Bleeding (50%)',
+            body: '**Most common complication**\n\n• Heavy bleeding reported in up to 50% of cases\n• **IGNORE during procedure** — this is tactile, not visual\n• Control with direct pressure AFTER airway secured\n• Rarely needs ligation or packing\n• Severe hemorrhage can cause aspiration (rare)',
+        },
+        {
+            heading: 'Right Mainstem Intubation (46%)',
+            body: '• ETT is longer than tracheostomy tube\n• **Prevention:** Advance only until cuff passes CTM\n• **Detection:** Absent left-sided breath sounds\n• **Treatment:** Withdraw ETT until bilateral breath sounds',
+        },
+        {
+            heading: 'False Tract',
+            body: '• Bougie or ETT enters pre-tracheal soft tissue\n• **Prevention:** Feel for bougie "clicking" over tracheal rings\n• Hold-up should occur at 15-20 cm\n• **Treatment:** Remove and re-attempt with finger guidance',
+        },
+        {
+            heading: 'Posterior Tracheal Injury',
+            body: '• From overly aggressive scalpel or deep insertion\n• Can cause esophageal injury\n• **Prevention:** Controlled horizontal incision, don\'t plunge\n• May lead to mediastinal air or infection',
+        },
+        {
+            heading: 'Late Complications',
+            body: '• Subglottic stenosis (long-term)\n• Voice changes\n• Scar formation\n\n**This is why conversion to formal tracheostomy is recommended within 24-72 hours.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Duggan LV, et al. Cricothyroidotomy. StatPearls. 2024.' },
+    ],
+};
 export const INFO_PAGES = {
     // Blood Culture Stewardship
     'bcs-indications': BCS_INDICATIONS,
@@ -12972,6 +13237,17 @@ export const INFO_PAGES = {
     'bcs-technique': BCS_TECHNIQUE,
     'bcs-yield-table': BCS_YIELD_TABLE,
     'bcs-high-yield': BCS_HIGH_YIELD,
+    // Low Back Pain
+    'lbp-red-flags': LBP_RED_FLAGS,
+    'lbp-ces-exam': LBP_CES_EXAM,
+    'lbp-dermatomes': LBP_DERMATOMES,
+    'lbp-meds': LBP_MEDS,
+    'lbp-discharge': LBP_DISCHARGE,
+    // Cricothyrotomy
+    'cric-steps': CRIC_STEPS,
+    'cric-anatomy': CRIC_ANATOMY,
+    'cric-equipment': CRIC_EQUIPMENT,
+    'cric-complications': CRIC_COMPLICATIONS,
     // VAFEI
     'vafei-steps-summary': VAFEI_STEPS_SUMMARY,
     'vafei-topicalization-guide': VAFEI_TOPICALIZATION_GUIDE,

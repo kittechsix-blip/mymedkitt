@@ -340,6 +340,8 @@ async function loadCriticalActionsOnly(treeId: string): Promise<readonly Critica
     'fishhook-removal': async () => (await import('../data/trees/fishhook-removal.js')).FISHHOOK_REMOVAL_CRITICAL_ACTIONS,
     'vafei': async () => (await import('../data/trees/vafei.js')).VAFEI_CRITICAL_ACTIONS,
     'blood-culture-stewardship': async () => (await import('../data/trees/blood-culture-stewardship.js')).BLOOD_CULTURE_STEWARDSHIP_CRITICAL_ACTIONS,
+    'low-back-pain': async () => (await import('../data/trees/low-back-pain.js')).LOW_BACK_PAIN_CRITICAL_ACTIONS,
+    'cricothyrotomy': async () => (await import('../data/trees/cricothyrotomy.js')).CRICOTHYROTOMY_CRITICAL_ACTIONS,
   };
 
   const loader = CRITICAL_ACTIONS_IMPORTS[treeId];
@@ -1074,6 +1076,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     'blood-culture-stewardship': async () => {
       const m = await import('../data/trees/blood-culture-stewardship.js');
       return { nodes: m.BLOOD_CULTURE_STEWARDSHIP_NODES, entryNodeId: 'bcs-start', categoryId: 'infectious-disease', moduleLabels: m.BLOOD_CULTURE_STEWARDSHIP_MODULE_LABELS, citations: m.BLOOD_CULTURE_STEWARDSHIP_CITATIONS, criticalActions: m.BLOOD_CULTURE_STEWARDSHIP_CRITICAL_ACTIONS };
+    },
+    'low-back-pain': async () => {
+      const m = await import('../data/trees/low-back-pain.js');
+      return { nodes: m.LOW_BACK_PAIN_NODES, entryNodeId: 'lbp-start', categoryId: 'emergency-medicine', moduleLabels: m.LOW_BACK_PAIN_MODULE_LABELS, citations: m.LOW_BACK_PAIN_CITATIONS, criticalActions: m.LOW_BACK_PAIN_CRITICAL_ACTIONS };
+    },
+    'cricothyrotomy': async () => {
+      const m = await import('../data/trees/cricothyrotomy.js');
+      return { nodes: m.CRICOTHYROTOMY_NODES, entryNodeId: 'cric-start', categoryId: 'anesthesia-airway', moduleLabels: m.CRICOTHYROTOMY_MODULE_LABELS, citations: m.CRICOTHYROTOMY_CITATIONS, criticalActions: m.CRICOTHYROTOMY_CRITICAL_ACTIONS };
     },
   };
 

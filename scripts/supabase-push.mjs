@@ -258,6 +258,8 @@ const TREE_REGISTRY = {
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL', entryNodeId: 'fh-start',        categoryId: 'procedures' },
   'vafei': { prefix: 'VAFEI', entryNodeId: 'vafei-start',        categoryId: 'anesthesia-airway' },
   'blood-culture-stewardship': { prefix: 'BLOOD_CULTURE_STEWARDSHIP', entryNodeId: 'bcs-start',        categoryId: 'infectious-disease' },
+  'low-back-pain': { prefix: 'LOW_BACK_PAIN', entryNodeId: 'lbp-start', categoryId: 'emergency-medicine' },
+  'cricothyrotomy': { prefix: 'CRICOTHYROTOMY', entryNodeId: 'cric-start', categoryId: 'anesthesia-airway' },
 };
 
 const CROSS_LISTINGS = {
@@ -294,6 +296,7 @@ const CROSS_LISTINGS = {
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
+  'cricothyrotomy': [{ categoryId: 'procedures' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
