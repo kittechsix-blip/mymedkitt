@@ -9,6 +9,7 @@ import { createDecisionCard } from './decision-card.js';
 import { handleInlineLinkClick } from './text-renderer.js';
 import { renderContextualToolbar, removeContextualToolbar } from './contextual-toolbar.js';
 import { getSpecialtyGradient } from './button-3d.js';
+import { createCriticalActionsButton } from './critical-actions.js';
 import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 import { addRecentConsult } from './dashboard.js';
@@ -268,6 +269,26 @@ function renderConsultSearch(container: HTMLElement): void {
   });
 
   wrapper.appendChild(toggleBtn);
+
+  // Critical Actions button — red 3D glass, next to search
+  if (currentConfig?.criticalActions && currentConfig.criticalActions.length > 0 && controller) {
+    const consultTitle = getConsultTitle(currentTreeId ?? '') ?? '';
+    const criticalBtn = createCriticalActionsButton({
+      actions: currentConfig.criticalActions,
+      consultTitle,
+      onJumpToNode: (nodeId) => {
+        if (!controller) return;
+        controller.jumpToNode(nodeId);
+        renderFlow(container);
+        requestAnimationFrame(() => {
+          const active = container.querySelector('.decision-card--active');
+          if (active) active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      },
+    });
+    wrapper.appendChild(criticalBtn);
+  }
+
   wrapper.appendChild(input);
   wrapper.appendChild(results);
   container.appendChild(wrapper);
