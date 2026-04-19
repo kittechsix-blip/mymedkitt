@@ -22,6 +22,13 @@ function registerServiceWorker() {
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((reg) => {
             console.log('Service worker registered:', reg.scope);
             reg.update();
+            // iOS PWA quirk: a backgrounded app never re-checks sw.js until
+            // something triggers navigation. Kick an update check every time the
+            // page becomes visible so a fresh deploy always reaches the user.
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible')
+                    reg.update();
+            });
         }).catch((err) => {
             console.error('Service worker registration failed:', err);
         });
