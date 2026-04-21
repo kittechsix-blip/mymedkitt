@@ -902,6 +902,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/cricothyrotomy.js');
       return { nodes: m.CRICOTHYROTOMY_NODES, entryNodeId: 'cric-start', categoryId: 'anesthesia-airway', moduleLabels: m.CRICOTHYROTOMY_MODULE_LABELS, citations: m.CRICOTHYROTOMY_CITATIONS, criticalActions: m.CRICOTHYROTOMY_CRITICAL_ACTIONS };
     },
+    'ear-infection': async () => {
+      const m = await import('../data/trees/ear-infection.js');
+      return { nodes: m.EAR_INFECTION_NODES, entryNodeId: 'ear-start', categoryId: 'emergency-medicine', moduleLabels: m.EAR_INFECTION_MODULE_LABELS, citations: m.EAR_INFECTION_CITATIONS, criticalActions: m.EAR_INFECTION_CRITICAL_ACTIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

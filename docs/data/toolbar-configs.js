@@ -1229,6 +1229,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'equipment', label: 'Equipment', icon: '🔧', action: 'overlay', target: 'cric-equipment' },
         { id: 'complications', label: 'Complications', icon: '⚠️', action: 'overlay', target: 'cric-complications' },
     ],
+    'ear-infection': [
+        { id: 'overview', label: 'Overview', icon: '👂', action: 'overlay', target: 'ear-overview' },
+        { id: 'aom-abx', label: 'AOM Abx', icon: '💊', action: 'overlay', target: 'ear-aom-abx' },
+        { id: 'oe-rx', label: 'OE Rx', icon: '💧', action: 'overlay', target: 'ear-oe-treatment' },
+        { id: 'moe-flags', label: 'MOE Flags', icon: '🚩', action: 'overlay', target: 'ear-moe-flags' },
+        { id: 'perf-guide', label: 'TM Perf', icon: '🔊', action: 'overlay', target: 'ear-perf-overview' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

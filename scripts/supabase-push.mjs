@@ -260,6 +260,7 @@ const TREE_REGISTRY = {
   'blood-culture-stewardship': { prefix: 'BLOOD_CULTURE_STEWARDSHIP', entryNodeId: 'bcs-start',        categoryId: 'infectious-disease' },
   'low-back-pain': { prefix: 'LOW_BACK_PAIN', entryNodeId: 'lbp-start', categoryId: 'emergency-medicine' },
   'cricothyrotomy': { prefix: 'CRICOTHYROTOMY', entryNodeId: 'cric-start', categoryId: 'anesthesia-airway' },
+  'ear-infection': { prefix: 'EAR_INFECTION', entryNodeId: 'ear-start', categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {

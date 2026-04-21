@@ -13230,6 +13230,143 @@ const CRIC_COMPLICATIONS = {
         { num: 1, text: 'Duggan LV, et al. Cricothyroidotomy. StatPearls. 2024.' },
     ],
 };
+// -------------------------------------------------------------------
+// Ear Infection
+// -------------------------------------------------------------------
+const EAR_OVERVIEW = {
+    id: 'ear-overview',
+    title: 'Ear Infection Overview',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            heading: 'Otitis Media vs Otitis Externa',
+            body: '| Feature | Otitis Media | Otitis Externa |\n|---------|--------------|----------------|\n| **Location** | Middle ear | Ear canal |\n| **Tragal tenderness** | Absent | **Present** |\n| **TM appearance** | Bulging, erythema | Normal (may be occluded) |\n| **Canal appearance** | Normal | Edema, debris, erythema |\n| **Pinna manipulation** | Not painful | **Painful** |',
+        },
+        {
+            heading: 'Red Flags',
+            body: '**⚠️ Immediate Concern:**\n\n• **Postauricular swelling** → Mastoiditis\n• **Facial nerve palsy** → Malignant OE or cholesteatoma\n• **Granulation tissue at bony-cartilaginous junction** → Malignant OE\n• **Severe pain in diabetic/immunocompromised** → Malignant OE\n• **Cranial nerve involvement** → Skull base osteomyelitis',
+        },
+        {
+            heading: 'Pathogens',
+            body: '**AOM:**\n• S. pneumoniae (most common)\n• H. influenzae\n• M. catarrhalis\n\n**OE:**\n• P. aeruginosa (most common)\n• S. aureus\n• Mixed flora\n\n**Malignant OE:**\n• P. aeruginosa (>95%)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAP. Diagnosis and Management of AOM. Pediatrics. 2013.' },
+    ],
+};
+const EAR_AOM_ABX = {
+    id: 'ear-aom-abx',
+    title: 'AOM Antibiotic Dosing',
+    subtitle: 'First-line and alternatives',
+    sections: [
+        {
+            heading: 'First-Line: High-Dose Amoxicillin',
+            body: '| Population | Dose | Frequency | Duration |\n|------------|------|-----------|----------|\n| Children | 80-90 mg/kg/day | Divided BID | 5-10 days |\n| Adults | 500-875 mg | TID or BID | 5-7 days |\n\n**Duration by Age:**\n• <2 years: 10 days\n• ≥2 years, mild: 5 days\n• ≥2 years, severe: 10 days\n• Perforated TM: 10 days',
+        },
+        {
+            heading: 'Amoxicillin-Clavulanate (Second-Line)',
+            body: '**Use if:**\n• Amox within past 30 days\n• Purulent conjunctivitis\n• Treatment failure at 48-72h\n\n| Population | Dose | Frequency |\n|------------|------|----------|\n| Children | 90 mg/kg/day (amox) | BID |\n| Adults | 875/125 mg | BID |',
+        },
+        {
+            heading: 'Non-Type I PCN Allergy (Cephalosporins OK)',
+            body: '| Drug | Pediatric | Adult |\n|------|-----------|-------|\n| Cefdinir | 14 mg/kg/day ÷ BID | 300 mg BID |\n| Cefuroxime | 30 mg/kg/day ÷ BID | 500 mg BID |\n| Cefpodoxime | 10 mg/kg/day ÷ BID | 200 mg BID |',
+        },
+        {
+            heading: 'Type I PCN Allergy (Severe)',
+            body: '**Azithromycin:**\n• Day 1: 10 mg/kg (max 500 mg)\n• Days 2-5: 5 mg/kg (max 250 mg)\n\n⚠️ Limited efficacy vs H. flu and S. pneumo — use only if beta-lactams contraindicated.',
+        },
+        {
+            heading: 'Treatment Failure',
+            body: '**Ceftriaxone IM:**\n• 50 mg/kg IM daily × 3 days (max 1g/dose)\n\nUse for failures on amox-clav or multiple treatment failures.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAP. Diagnosis and Management of AOM. Pediatrics. 2013.' },
+    ],
+};
+const EAR_OE_TREATMENT = {
+    id: 'ear-oe-treatment',
+    title: 'Otitis Externa Treatment',
+    subtitle: 'Topical and oral options',
+    sections: [
+        {
+            heading: 'First-Line Topical Antibiotics',
+            body: '| Medication | Dose | Frequency | Duration |\n|------------|------|-----------|----------|\n| **Cipro/dex (Ciprodex)** | 4 drops | BID | 7 days |\n| Ofloxacin 0.3% | 5-10 drops | Daily | 7 days |\n| Ciprofloxacin 0.2% | 3-4 drops | BID | 7 days |',
+        },
+        {
+            heading: 'Acidifying Agents (Mild OE)',
+            body: '• Acetic acid 2%: 5 drops TID × 7 days\n• Acetic acid/hydrocortisone: 5 drops TID-QID\n\nGood for prevention and mild cases.',
+        },
+        {
+            heading: 'Administration Technique',
+            body: '1. Warm drops in hands 1-2 minutes\n2. Lie with affected ear up\n3. Instill drops\n4. Maintain position **60 seconds**\n5. Keep ear **DRY** between treatments\n\n**Severe Swelling:** Place ear wick, apply drops to external end.',
+        },
+        {
+            heading: 'When to Use Oral Antibiotics',
+            body: '**Indications:**\n• Cellulitis extending beyond canal\n• Fever\n• Diabetes or immunocompromised\n• Failed topical therapy\n\n| Drug | Dose | Duration |\n|------|------|----------|\n| Ciprofloxacin | 500 mg BID | 10 days |\n| Cephalexin | 500 mg QID | 10 days |',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAO-HNSF. Acute Otitis Externa CPG. 2014.' },
+    ],
+};
+const EAR_MOE_FLAGS = {
+    id: 'ear-moe-flags',
+    title: 'Malignant OE Red Flags',
+    subtitle: 'Necrotizing otitis externa',
+    sections: [
+        {
+            heading: '⚠️ This is a MEDICAL EMERGENCY',
+            body: 'Skull base osteomyelitis with **up to 20% mortality** if untreated.\n\n**Causative organism:** P. aeruginosa (>95%)',
+        },
+        {
+            heading: 'Risk Factors',
+            body: '• **Diabetes mellitus** (90%+ of cases)\n• Immunocompromised (HIV, chemo, transplant)\n• Advanced age (>65 years)\n• Chronic steroid use',
+        },
+        {
+            heading: 'Clinical Red Flags',
+            body: '• **Granulation tissue** at bony-cartilaginous junction\n• **Cranial nerve palsy** (CN VII most common)\n• **Severe, disproportionate pain**\n• OE not responding to 7-10 days topical Rx\n• **Trismus**\n• Fever in setting of OE',
+        },
+        {
+            heading: 'Intracranial Extension Signs',
+            body: '• Severe headache\n• Altered mental status\n• Nuchal rigidity\n• Seizures\n• Multiple cranial nerve involvement',
+        },
+        {
+            heading: 'Workup',
+            body: '**Labs:** ESR (invariably elevated), CRP, glucose, creatinine\n\n**Imaging:** CT temporal bone with contrast (bone erosion, soft tissue extent)\n\n**Treatment:** IV ciprofloxacin 400 mg q8h × **6-8 weeks minimum**\n\n**Consults:** ENT (urgent), ID, ± Neurosurgery',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'StatPearls. Necrotizing Otitis Externa. NCBI. 2024.' },
+    ],
+};
+const EAR_PERF_OVERVIEW = {
+    id: 'ear-perf-overview',
+    title: 'TM Perforation Management',
+    subtitle: 'Safe drops and healing',
+    sections: [
+        {
+            heading: 'Safe Drops for Perforated TM',
+            body: '**USE (Fluoroquinolones — non-ototoxic):**\n• Ofloxacin 0.3%: 5-10 drops daily\n• Ciprofloxacin 0.3%: 3-4 drops BID\n• Cipro/dex: 4 drops BID\n\n**AVOID (Ototoxic):**\n• Neomycin\n• Tobramycin\n• Polymyxin B\n• Gentamicin\n• Alcohol-containing drops',
+        },
+        {
+            heading: 'Healing Expectations',
+            body: '| Size | Healing Time | Spontaneous Closure |\n|------|--------------|--------------------|\n| Small (<25%) | 2-4 weeks | 85-94% |\n| Medium (25-50%) | 3-4 weeks | 80-85% |\n| Large (>50%) | ~47 days | Variable |',
+        },
+        {
+            heading: 'Patient Instructions',
+            body: '• Keep ear **DRY** (cotton ball + petroleum jelly for showering)\n• No swimming until healed\n• Avoid forceful nose blowing\n• Follow-up in 2-4 weeks',
+        },
+        {
+            heading: 'Urgent ENT Referral',
+            body: '• Sensorineural hearing loss\n• Vertigo\n• Suspected ossicular damage\n• Facial nerve palsy\n• CSF leak (clear watery fluid)\n• Perforation not healed by 2-3 months',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lou ZC. Traumatic TM perforation. Am J Otolaryngol. 2012.' },
+    ],
+};
 export const INFO_PAGES = {
     // Blood Culture Stewardship
     'bcs-indications': BCS_INDICATIONS,
@@ -13638,6 +13775,12 @@ export const INFO_PAGES = {
     // Multiple Sclerosis
     'ms-stop': MS_STOP,
     'ms-dmt-reference': MS_DMT_REFERENCE,
+    // Ear Infection
+    'ear-overview': EAR_OVERVIEW,
+    'ear-aom-abx': EAR_AOM_ABX,
+    'ear-oe-treatment': EAR_OE_TREATMENT,
+    'ear-moe-flags': EAR_MOE_FLAGS,
+    'ear-perf-overview': EAR_PERF_OVERVIEW,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
