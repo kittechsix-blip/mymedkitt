@@ -15,6 +15,13 @@ export interface ToolbarConfig {
 }
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'delayed-sequence-intubation': [
+    { id: 'summary', label: 'DSI Steps', icon: '📋', action: 'overlay', target: 'dsi-summary' },
+    { id: 'ketamine', label: 'Ketamine', icon: '💉', action: 'overlay', target: 'dsi-ketamine' },
+    { id: 'preox', label: 'Triple 15', icon: '🫁', action: 'overlay', target: 'dsi-preox' },
+    { id: 'checklist', label: 'Checklist', icon: '✅', action: 'overlay', target: 'dsi-checklist' },
+    { id: 'contraindications', label: 'Contra', icon: '🚫', action: 'overlay', target: 'dsi-contraindications' },
+  ],
   'difficult-airway-bougie': [
     { id: 'lemon', label: 'LEMON', icon: '🍋', action: 'calculator', target: 'lemon-score' },
     { id: 'bougie', label: 'Bougie', icon: '🔧', action: 'jump', target: 'dab-technique' },

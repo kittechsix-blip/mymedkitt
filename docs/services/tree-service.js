@@ -110,6 +110,10 @@ async function loadCriticalActionsOnly(treeId) {
 /** Hardcoded fallback — dynamically import the tree file */
 async function loadHardcodedFallback(treeId) {
     const TREE_IMPORTS = {
+        'delayed-sequence-intubation': async () => {
+            const m = await import('../data/trees/delayed-sequence-intubation.js');
+            return { nodes: m.DELAYED_SEQUENCE_INTUBATION_NODES, entryNodeId: 'dsi-start', categoryId: 'anesthesia-airway', moduleLabels: m.DELAYED_SEQUENCE_INTUBATION_MODULE_LABELS, citations: m.DELAYED_SEQUENCE_INTUBATION_CITATIONS, criticalActions: m.DELAYED_SEQUENCE_INTUBATION_CRITICAL_ACTIONS };
+        },
         'difficult-airway-bougie': async () => {
             const m = await import('../data/trees/difficult-airway-bougie.js');
             return { nodes: m.DIFFICULT_AIRWAY_BOUGIE_NODES, entryNodeId: 'dab-start', categoryId: 'anesthesia-airway', moduleLabels: m.DIFFICULT_AIRWAY_BOUGIE_MODULE_LABELS, citations: m.DIFFICULT_AIRWAY_BOUGIE_CITATIONS, criticalActions: m.DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS };

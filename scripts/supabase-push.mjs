@@ -81,6 +81,7 @@ const infoPageIds = getArgList('--info-pages');
 // Tree registry (same as generate-supabase-sql.mjs)
 // ---------------------------------------------------------------------------
 const TREE_REGISTRY = {
+  'delayed-sequence-intubation': { prefix: 'DELAYED_SEQUENCE_INTUBATION', entryNodeId: 'dsi-start', categoryId: 'anesthesia-airway' },
   'difficult-airway-bougie': { prefix: 'DIFFICULT_AIRWAY_BOUGIE', entryNodeId: 'dab-start', categoryId: 'anesthesia-airway' },
   'pneumothorax':     { prefix: 'PNEUMOTHORAX',       entryNodeId: 'pneumothorax-start', categoryId: 'us-rads' },
   'pe-treatment':     { prefix: 'PE_TREATMENT',       entryNodeId: 'pe-start',           categoryId: 'critical-care' },

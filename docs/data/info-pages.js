@@ -13367,7 +13367,156 @@ const EAR_PERF_OVERVIEW = {
         { num: 1, text: 'Lou ZC. Traumatic TM perforation. Am J Otolaryngol. 2012.' },
     ],
 };
+// =====================================================================
+// DELAYED SEQUENCE INTUBATION INFO PAGES
+// =====================================================================
+const DSI_SUMMARY = {
+    id: 'dsi-summary',
+    title: 'DSI Quick Reference',
+    subtitle: 'Procedural sedation where the procedure is preoxygenation',
+    sections: [
+        {
+            heading: 'Core Concept',
+            body: '**DSI = Procedural sedation where the procedure is preoxygenation.**\n\nKetamine preserves spontaneous breathing and airway reflexes, allowing oxygen loading BEFORE paralysis.\n\n**RSI:** Trust the preoxygenation you already did\n**DSI:** Secure better preoxygenation in the patient who won\'t tolerate it',
+        },
+        {
+            heading: 'Indications',
+            body: '• Agitated delirium preventing preoxygenation\n• Patient refusing NC, NRB, BVM, or NIV\n• High-risk desaturator (SpO2 ≤93% on high-flow)\n• Combative patient on NIV\n• Needs pre-intubation procedures they won\'t tolerate',
+        },
+        {
+            heading: 'Ketamine Dosing',
+            body: '| Step | Dose | Notes |\n|------|------|-------|\n| Initial | **1-1.5 mg/kg IV** | Slow push over 15-30 sec |\n| Redose | 0.5 mg/kg IV | Wait 60-90 sec between doses |\n| Goal | Dissociation | Calm, breathing, reflexes intact |',
+        },
+        {
+            heading: 'Triple 15 Preoxygenation',
+            body: '• NC 15 L/min (keep on entire procedure)\n• NRB 15 L/min OR BVM/CPAP with PEEP\n• Minimum 3 min once SpO2 >95%\n• 10-min abort rule if SpO2 <95%',
+        },
+        {
+            heading: 'Key Pearls',
+            body: '• **15-20% avoid intubation** after DSI\n• Slow ketamine push prevents apnea\n• Keep NC during paralysis\n• Have RSI drugs ready throughout',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart SD. EMCrit DSI Protocol. emcrit.org/dsi' },
+    ],
+};
+const DSI_KETAMINE = {
+    id: 'dsi-ketamine',
+    title: 'Ketamine for DSI',
+    subtitle: 'Dissociative dose — NOT full induction',
+    sections: [
+        {
+            heading: 'Key Distinction',
+            body: '**This is DISSOCIATIVE sedation, NOT full induction.**\n\nGoal: Patient calm and compliant, still breathing spontaneously, airway reflexes intact.\n\nNOT: Unconscious and apneic.',
+        },
+        {
+            heading: 'IV Dosing',
+            body: '| Parameter | Value |\n|-----------|-------|\n| Initial | **1.0-1.5 mg/kg IV** |\n| Admin | **Slow push 15-30 sec** |\n| Redose | 0.5 mg/kg q5min PRN |\n| Onset | ~30 seconds |\n| Max total | 3-4 mg/kg |',
+        },
+        {
+            heading: 'Why Slow Push?',
+            body: 'Rapid IV push → transient apnea (defeats DSI purpose)\n\nSlow push → dissociation without respiratory depression\n\n**Always push over 15-30 seconds**',
+        },
+        {
+            heading: 'Signs of Adequate Dissociation',
+            body: '• Patient calm, not fighting\n• Tolerating oxygen delivery\n• **Nystagmus present**\n• Spontaneous breathing continues\n• May have subtle purposeful movements',
+        },
+        {
+            heading: 'Side Effects',
+            body: '• **Hypersalivation** — have suction ready\n• Transient HTN/tachycardia — expected\n• Emergence reactions — post-procedure, benzos if needed\n\n**Apnea is rare but reported** — have BVM ready',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart SD. Delayed sequence intubation. Ann Emerg Med. 2015.' },
+    ],
+};
+const DSI_PREOX = {
+    id: 'dsi-preox',
+    title: 'DSI Preoxygenation',
+    subtitle: 'The Triple 15 Strategy',
+    sections: [
+        {
+            heading: 'Layer 1: Nasal Cannula (CONTINUOUS)',
+            body: '**15 L/min O2 via nasal cannula**\n\n• Keep on throughout ENTIRE procedure\n• Keep on during paralysis\n• Only remove at moment of intubation\n\n**This is non-negotiable.**',
+        },
+        {
+            heading: 'Layer 2: Secondary Oxygenation',
+            body: '| If SpO2 | Use |\n|---------|-----|\n| >95% | Non-rebreather 15 L/min |\n| ≤95% | BVM + PEEP 5-15 cm H2O |\n| ≤95% | OR CPAP/NIV 5-15 cm H2O |\n\n**PEEP prevents alveolar collapse, improves FRC**',
+        },
+        {
+            heading: 'Duration Guidelines',
+            body: '| Scenario | Time |\n|----------|------|\n| SpO2 >95% | Continue 3 more min |\n| SpO2 90-95% | Until >95%, then 3 min |\n| SpO2 <95% at 10 min | Abort to RSI |',
+        },
+        {
+            heading: 'Goals',
+            body: '• SpO2 >95% (target 98%)\n• Regular spontaneous respirations (RR 12-20)\n• Reduced work of breathing\n• Minimum 3 min for denitrogenation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit. Preoxygenation and DSI. emcrit.org' },
+    ],
+};
+const DSI_CHECKLIST = {
+    id: 'dsi-checklist',
+    title: 'DSI Setup Checklist',
+    subtitle: 'Before ketamine administration',
+    sections: [
+        {
+            heading: 'Positioning',
+            body: '☐ Head-up 30+ degrees\n☐ Ramp if obese\n☐ Auditory meatus above jugular notch',
+        },
+        {
+            heading: 'Airway Equipment',
+            body: '☐ Video laryngoscope + backup direct\n☐ ETT sizes + stylet + bougie\n☐ Suction x2 (ketamine hypersalivation)\n☐ BVM with PEEP valve\n☐ Supraglottic airway\n☐ Surgical airway kit at bedside',
+        },
+        {
+            heading: 'Medications',
+            body: '**DSI:**\n☐ Ketamine 1-1.5 mg/kg drawn\n\n**RSI Backup (must be ready):**\n☐ Induction agent (etomidate/propofol)\n☐ Rocuronium 1.2 mg/kg OR\n☐ Succinylcholine 1.5 mg/kg',
+        },
+        {
+            heading: 'Monitoring',
+            body: '☐ Continuous SpO2\n☐ Waveform capnography\n☐ Continuous cardiac\n☐ Blood pressure cycling',
+        },
+        {
+            heading: 'Oxygenation Setup',
+            body: '☐ Nasal cannula at 15 L/min\n☐ NRB or BVM+PEEP ready\n☐ CPAP/BiPAP available if needed',
+        },
+    ],
+    citations: [],
+};
+const DSI_CONTRAINDICATIONS = {
+    id: 'dsi-contraindications',
+    title: 'DSI Contraindications',
+    subtitle: 'When DSI is not appropriate',
+    sections: [
+        {
+            heading: 'Absolute Contraindications',
+            body: '• **Non-spontaneously breathing** — DSI requires spontaneous ventilation\n• **Absent airway reflexes** — comatose, unresponsive\n• **Ketamine allergy**\n• **Very high aspiration risk** — DSI is not apneic',
+        },
+        {
+            heading: 'Relative Contraindications',
+            body: '• Severe hypertension\n• Severe tachycardia\n• Active myocardial ischemia\n• Recent MI\n• Uncontrolled hyperthyroidism\n\n→ Consider **dexmedetomidine** alternative',
+        },
+        {
+            heading: 'Dexmedetomidine Alternative',
+            body: '**Dose:** 1 mcg/kg IV over 10 minutes\n\n**Advantages:**\n• No sympathomimetic surge\n• Less hypersalivation\n• Preserves airway reflexes\n\n**Disadvantages:**\n• Slower onset (3-5 min)\n• Less potent against severe agitation\n• May cause bradycardia/hypotension',
+        },
+        {
+            heading: 'Operator Requirement',
+            body: '**DSI requires experienced airway provider.**\n\nNot a technique for novices or first-year residents without direct supervision.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Weingart SD. DSI Contraindications. EMCrit.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Delayed Sequence Intubation
+    'dsi-summary': DSI_SUMMARY,
+    'dsi-ketamine': DSI_KETAMINE,
+    'dsi-preox': DSI_PREOX,
+    'dsi-checklist': DSI_CHECKLIST,
+    'dsi-contraindications': DSI_CONTRAINDICATIONS,
     // Blood Culture Stewardship
     'bcs-indications': BCS_INDICATIONS,
     'bcs-contamination': BCS_CONTAMINATION,

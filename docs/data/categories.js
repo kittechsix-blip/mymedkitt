@@ -8,6 +8,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'anesthesia-airway.png',
         decisionTrees: [
             {
+                id: 'delayed-sequence-intubation',
+                title: 'Delayed Sequence Intubation (DSI)',
+                subtitle: 'The Delirious Desaturator → Ketamine → Triple 15 Preoxygenation → Reassess → Intubate',
+                categoryId: 'anesthesia-airway',
+                version: '1.0',
+                nodeCount: 18,
+                entryNodeId: 'dsi-start',
+            },
+            {
                 id: 'difficult-airway-bougie',
                 title: 'Difficult Airway / Bougie-First',
                 subtitle: 'Pre-Assessment → Approach → Bougie Technique → Confirmation → Failed Airway → Surgical Airway',
