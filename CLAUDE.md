@@ -480,23 +480,71 @@ const CONSULT_STOP: InfoPage = {
 
 **Each item MUST link to the relevant node** where this is explained using `[text](#/node/node-id)` format.
 
-### Consult Images (MANDATORY)
+### Consult Images (MANDATORY — Commercial-Safe Licensing Only)
 
-**Sources (search in order, all open-source/Creative Commons):**
-1. **WikEM** (wikem.org) — CC-licensed EM reference images
-2. **Radiopaedia** (radiopaedia.org) — CC-licensed radiology/imaging cases
-3. **OpenStax Anatomy** (openstax.org) — CC-licensed anatomical illustrations
-4. **Wikimedia Commons** (commons.wikimedia.org) — CC/public domain medical images
-5. **Open-i / PMC** (openi.nlm.nih.gov) — open-access biomedical images from PubMed Central
+**myMedKitt is a commercial product.** All images MUST be usable in a paid/proprietary app with NO ongoing obligations (no attribution requirement, no ShareAlike requirement, no non-commercial restriction).
 
-**Do NOT use** images from UpToDate, EMCrit, EBMedicine, or other paywalled/copyrighted sources unless explicitly approved by Andy.
+**ACCEPTABLE LICENSES ONLY:**
+- ✅ **Public Domain** (e.g., expired copyright like Gray's Anatomy 1858; historical atlases pre-1930)
+- ✅ **CC0** (Creative Commons Zero — creator waived all rights)
+- ✅ **US Federal Government Works** (17 USC §105 — works by NIH, CDC, NIAID, NLM federal employees are uncopyrightable)
+
+**REJECTED LICENSES — DO NOT USE:**
+- ❌ **CC BY** (attribution required — creates ongoing obligation)
+- ❌ **CC BY-SA** (ShareAlike — forces derivative works to be CC BY-SA, conflicts with proprietary commercial use)
+- ❌ **CC BY-NC** (NonCommercial — explicitly forbids commercial use)
+- ❌ **CC BY-ND** (NoDerivatives — forbids modification)
+- ❌ **Wellcome Collection default license** (CC BY 4.0 — attribution required)
+- ❌ **Any "fair use only" or "educational use only" imagery** — not safe for commercial
+
+**Preferred sources (in order):**
+1. **NIH BioArt** (bioart.niaid.nih.gov) — NIAID-produced medical illustrations, all US Gov Work / Public Domain
+2. **Wikimedia Commons — filtered to CC0 or Public Domain only** — verify license tag on each file's description page (look for `PD-1923`, `PD-USGov`, `CC0`, `PD-old-100`)
+3. **Gray's Anatomy plates (1858)** — all Public Domain via expired copyright (Henry Vandyke Carter illustrations)
+4. **CDC Public Health Image Library** (phil.cdc.gov) — US Gov Work, Public Domain
+5. **OpenStax Anatomy** — CC BY 4.0 — **REJECTED for commercial use** (attribution required); only acceptable if you have explicit license-compatible workflow. Default: skip.
+
+**Do NOT use** images from UpToDate, EMCrit, EBMedicine, Radiopaedia (largely CC BY-NC-SA), WikEM (CC BY-NC-SA), Medscape, or any paywalled/restricted source.
+
+**License verification protocol (for every image before commit):**
+1. Read the file's Commons description page — look for explicit license template (`PD-1923`, `PD-USGov-NIH-NIAID`, `CC0`, etc.)
+2. Cross-check the source site if claimed as US Gov Work (e.g., confirm on bioart.niaid.nih.gov, not just Commons claim)
+3. `curl -I` the direct URL — confirm HTTP 200 and correct Content-Type before downloading
+4. **If license has any ambiguity, skip the image and find another.** Err on the side of caution.
 
 **Image sourcing during consult builds:**
-- When building or enhancing a consult, proactively search the above sources for relevant clinical images (anatomy, procedures, ECGs, imaging, clinical photos)
-- Download usable images and add `images` arrays to appropriate nodes
-- **At end of build, before deploy:** Present Andy with a summary of all images chosen — source, description, and which node they'll appear on — for approval before committing
+- Delegate image search to a subagent with explicit instruction: "CC0, Public Domain, or US Federal Government Work ONLY — no CC BY, no CC BY-SA, no NC, no ND."
+- Subagent must return direct URL + explicit license tag + verification evidence (curl HEAD + Commons page inspection) for every image
+- Download to `docs/images/<tree-id>/`
+- Add `images` arrays to appropriate nodes with descriptive alt text and clinical captions
+- **Best-practice attribution in caption** even when not legally required (e.g., "NIH BioArt #421, NIAID — Public Domain"; "Gray's Anatomy, 1858 — Public Domain") — good hygiene, shows provenance
+- **At end of build, before deploy:** Present Andy with a summary of all images chosen — source, description, license, which node — for approval before committing
 
 **Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
+
+**Mobile compression:** JPGs over ~500KB should be compressed with `sips -Z 1200 <file> -s formatOptions 75-80` to keep page loads fast. SVGs are scalable and rarely need compression.
+
+### Citation vs. Verbatim Quoting (MANDATORY)
+
+myMedKitt **cites** authoritative sources (EMCrit, AHA, ACOG, SOAP, EMCrit IBCC, UpToDate) — facts and clinical guidelines are not copyrightable. But **verbatim quotations** of more than a sentence or two from any proprietary source (EMCrit text, UpToDate, EBMedicine, textbooks) require either:
+- Explicit permission from the source
+- Or fair-use analysis (educational context, limited excerpt, transformative use)
+
+**Default rule for consult content:**
+- **Write in your own words.** Paraphrase clinical recommendations — never copy/paste paragraphs from source material.
+- **Short attributed pearls are OK** — e.g., a single-sentence EMCrit pearl clearly quoted with attribution. Longer excerpts are NOT.
+- **Citations are always fine.** List them in the `CITATIONS` array with full bibliographic text.
+- If unsure, write from clinical knowledge + cite the source for verification, don't quote the source directly.
+
+### Commercial Product — Additional Safeguards (MANDATORY)
+
+Because myMedKitt will be monetized:
+
+1. **Medical-legal disclaimer** — The 3-layer legal banner system (splash + banner + modal in `legal-banner.js`) MUST fire on every new consult and every monetized route. Never disable or weaken it.
+2. **No patient data persistence** — decision inputs remain ephemeral per session. Never add backend patient data storage without a full HIPAA review.
+3. **FDA / CDS exemption preservation** — The app qualifies for the 21st Century Cures Act CDS exemption because it enables clinicians to independently review the basis for recommendations. Every consult MUST preserve this by: (a) citing sources clinicians can verify, (b) showing the clinical reasoning, not just the answer, (c) making the tool support clinical judgment rather than replace it. Do not add opaque "trust me" recommendations.
+4. **Terms of Service & liability limitation** — All monetized tiers require explicit user agreement with liability carve-outs before first use.
+5. **Trademark hygiene** — Before printing marketing materials or public launch messaging, re-verify "MedKitt" trademark status.
 
 ### Calculator Output Formatting (MANDATORY)
 
