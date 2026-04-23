@@ -91,6 +91,7 @@ const TREE_REGISTRY = {
   'echo-epss':        { prefix: 'ECHO_EPSS',           entryNodeId: 'epss-start',         categoryId: 'us-rads' },
   'shoulder-dystocia':{ prefix: 'SHOULDER_DYSTOCIA',   entryNodeId: 'sd-start',           categoryId: 'ob-gyn' },
   'precip-delivery':  { prefix: 'PRECIP_DELIVERY',     entryNodeId: 'precip-start',       categoryId: 'ob-gyn' },
+  'afe':              { prefix: 'AFE',                 entryNodeId: 'afe-start',          categoryId: 'ob-gyn' },
   'breech-delivery':  { prefix: 'BREECH_DELIVERY',     entryNodeId: 'breech-start',       categoryId: 'ob-gyn' },
   'cord-emergencies': { prefix: 'CORD_EMERGENCIES',    entryNodeId: 'cord-start',         categoryId: 'ob-gyn' },
   'resuscitative-hysterotomy': { prefix: 'RESUSCITATIVE_HYSTEROTOMY', entryNodeId: 'rh-start', categoryId: 'ob-gyn' },
@@ -198,6 +199,7 @@ const TREE_REGISTRY = {
   'neurogenic-shock':    { prefix: 'NEUROGENIC_SHOCK',     entryNodeId: 'neuro-shock-start',  categoryId: 'trauma-surg' },
   'cauda-equina':        { prefix: 'CAUDA_EQUINA',         entryNodeId: 'ces-start',          categoryId: 'trauma-surg' },
   'brain-herniation':    { prefix: 'BRAIN_HERNIATION',     entryNodeId: 'hern-start',         categoryId: 'trauma-surg' },
+  'pph':                 { prefix: 'PPH',                   entryNodeId: 'pph-start',          categoryId: 'ob-gyn' },
 };
 
 // Cross-listing: which consults appear in multiple categories
@@ -239,6 +241,7 @@ const CROSS_LISTINGS = {
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
+  'pph':                 [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

@@ -14484,6 +14484,514 @@ const BREECH_DELIVERY_STOP = {
         },
     ],
 };
+// -------------------------------------------------------------------
+// PPH — Steps Summary
+// -------------------------------------------------------------------
+const PPH_STEPS_SUMMARY = {
+    id: 'pph-steps-summary',
+    title: 'PPH Steps Summary',
+    subtitle: 'Quick-reference checklist for postpartum hemorrhage resuscitation',
+    sections: [
+        {
+            heading: '1. Recognize & Call Help',
+            body: '• [Blood loss ≥1000 mL OR signs of hypovolemia within 24h of delivery](#/node/pph-definition)\n• [Shock Index >0.9 abnormal in pregnancy; >1.0 = hemorrhagic shock](#/node/pph-initial-assess)\n• [Call OB, anesthesia, blood bank, charge nurse — announce clearly](#/node/pph-call-team)\n• [Designate a timekeeper — call out every 5 min](#/node/pph-call-team)',
+        },
+        {
+            heading: '2. Access, Labs, Blood',
+            body: '• [2 large-bore IVs (16-18g), IO if access fails](#/node/pph-access-labs)\n• [CBC, fibrinogen, PT/PTT, T&C 4-6 units — fibrinogen <200 = severe PPH](#/node/pph-access-labs)\n• [Emergency-release O-neg blood; activate MTP if SI >1.0](#/node/pph-unstable)',
+        },
+        {
+            heading: '3. Immediate Measures (do NOW)',
+            body: '• [Fundal massage + empty bladder (Foley)](#/node/pph-massage-fundus)\n• [Tranexamic Acid 1 g IV within 3h — repeat at 30 min if bleeding continues](#/node/pph-txa)\n• [Bimanual uterine compression — 5-10 min](#/node/pph-bimanual-compression)',
+        },
+        {
+            heading: '4. Check the 4 T\'s',
+            body: '• [**Tone** (70-80%) — boggy uterus → uterotonics](#/node/pph-atony-intro)\n• [**Trauma** (20%) — speculum every quadrant, check fundus](#/node/pph-trauma-assess)\n• [**Tissue** (10%) — retained products; manual exploration](#/node/pph-tissue)\n• [**Thrombin** (<1%) — coagulopathy; MTP + balanced transfusion](#/node/pph-thrombin)',
+        },
+        {
+            heading: '5. Uterotonic Ladder (atony)',
+            body: '• [Oxytocin 20u in 1L at 250 mL/hr — NEVER IV push](#/node/pph-oxytocin)\n• [Methylergonovine 0.2 mg IM q2-4h — AVOID in HTN/preeclampsia](#/node/pph-methergine)\n• [Carboprost 0.25 mg IM q15-90 min — AVOID in asthma](#/node/pph-carboprost)\n• [Misoprostol 800-1000 mcg PR/SL — few CIs, useful when other agents blocked](#/node/pph-misoprostol)',
+        },
+        {
+            heading: '6. If Bleeding Continues',
+            body: '• [Bakri balloon 300-500 mL saline under U/S — 75-86% success](#/node/pph-bakri)\n• [Activate [Massive Transfusion Protocol](#/tree/massive-transfusion) — 1:1:1 + cryo + Ca + warm](#/node/pph-mtp)\n• [IR for UAE (stable); OR for B-Lynch, O\'Leary, hysterectomy](#/node/pph-surgical)\n• [Hysterectomy is the final life-saving step — do not delay](#/node/pph-hysterectomy)',
+        },
+        {
+            heading: '7. Disposition',
+            body: '• [ICU if ≥4 units transfused, hysterectomy, or instability](#/node/pph-controlled)\n• [VTE prophylaxis mechanical immediately; pharmacologic once hemostatic](#/node/pph-rh-check)\n• [RhoGAM within 72h if Rh-negative mother](#/node/pph-rh-check)\n• [[Discharge Instructions](#/info/pph-discharge) for return precautions](#/node/pph-controlled)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. 2017 (reaffirmed 2023).' },
+        { num: 2, text: 'CMQCC Obstetric Hemorrhage Toolkit v3.0. 2022.' },
+        { num: 3, text: 'WOMAN Trial. Lancet. 2017;389(10084):2105-2116.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PPH — 4 T's Differential
+// -------------------------------------------------------------------
+const PPH_FOUR_TS_INFO = {
+    id: 'pph-four-ts-info',
+    title: 'The 4 T\'s of PPH',
+    subtitle: 'Systematic differential for every postpartum bleed',
+    sections: [
+        {
+            heading: 'Tone — Uterine Atony (~70-80%)',
+            body: '**Clinical clue:** Boggy, soft uterus; fundus palpable above umbilicus.\n\n**Risk factors:** Prolonged labor, augmented labor, chorioamnionitis, overdistension (multiples, polyhydramnios, macrosomia), grand multiparity, rapid precipitous delivery, general anesthesia, magnesium sulfate.\n\n**Management:**\n• [Fundal massage + empty bladder](#/node/pph-massage-fundus)\n• [Bimanual compression](#/node/pph-bimanual-compression)\n• Uterotonic ladder: [Oxytocin](#/node/pph-oxytocin) → [Methylergonovine](#/node/pph-methergine) → [Carboprost](#/node/pph-carboprost) → [Misoprostol](#/node/pph-misoprostol)\n• Persist → [Bakri balloon](#/node/pph-bakri)',
+        },
+        {
+            heading: 'Trauma (~20%)',
+            body: '**Clinical clue:** Firm, well-contracted uterus but ongoing bleeding.\n\n**Types:**\n• **Cervical laceration** — most common at 3 and 9 o\'clock; use ring forceps to inspect every quadrant\n• **Vaginal laceration / sulcus tear** — side walls, posterior fornix\n• **Perineal laceration** — [1st-4th degree grading](#/node/pph-laceration)\n• **Vulvar / paravaginal hematoma** — disproportionate pain, expanding mass, hemodynamic decline\n• **[Uterine inversion](#/node/pph-uterine-inversion)** — absent/dimpled fundus abdominally, fleshy mass at introitus\n• **[Uterine rupture](#/node/pph-rupture)** — severe pain, loss of fetal station, hemoperitoneum\n\n**Management:**\n• Speculum exam with adequate light, analgesia, assistants\n• Repair 1st/2nd degree perineal in ED; defer 3rd/4th and cervical to OB\n• Uterine inversion → stop uterotonics → [Johnson maneuver](#/node/pph-uterine-inversion)\n• Rupture → OR immediately',
+        },
+        {
+            heading: 'Tissue — Retained Products (~10%)',
+            body: '**Clinical clue:** Incomplete placenta on inspection; persistent bleeding despite firm uterus; placenta not delivered within 30 min.\n\n**Types:**\n• **Retained cotyledon / fragment** — torn edge or ragged membranes\n• **Retained succenturiate lobe** — check for torn vessels at placental edge\n• **Placenta accreta spectrum** — resistant to separation; DO NOT force\n• **Blood clot retention** — evacuate manually\n\n**Management:**\n• [Manual uterine exploration](#/node/pph-tissue) under analgesia\n• Ultrasound-guided D&C if needed\n• Antibiotics (ampicillin + gentamicin)\n• Accreta → leave placenta in situ, transfer to OR for controlled delivery ± hysterectomy',
+        },
+        {
+            heading: 'Thrombin — Coagulopathy (<1% primary; common secondary)',
+            body: '**Clinical clue:** Oozing from IV sites, mucosal bleeding, petechiae, non-clotting blood.\n\n**Causes:**\n• Dilutional coagulopathy (large crystalloid or unbalanced resuscitation)\n• [DIC](#/node/pph-thrombin) — severe PPH, sepsis, abruption, IUFD\n• Amniotic fluid embolism (AFE) — cardiopulmonary collapse + DIC + respiratory failure\n• HELLP / severe preeclampsia\n• Pre-existing — vWD, hemophilia carrier, anticoagulation\n\n**Management:**\n• Balanced transfusion 1:1:1 (pRBC:FFP:platelets) — [MTP](#/node/pph-mtp)\n• Cryoprecipitate if fibrinogen <200 mg/dL\n• Calcium gluconate 1-2 g per 4 units blood\n• Keep warm, correct acidosis, treat the lethal triad',
+        },
+        {
+            heading: 'Key Teaching Point',
+            body: '**Always check tone first.** It\'s the most common cause. If the uterus is firm and well-contracted but bleeding continues, pivot immediately to trauma and tissue. Thrombin is the quietest but easiest to miss — watch the IV sites and the drapes.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.' },
+        { num: 2, text: 'Bienstock JL, Eke AC, Hueppchen NA. Postpartum Hemorrhage. N Engl J Med. 2021;384(17):1635-1645.' },
+        { num: 3, text: 'CMQCC Obstetric Hemorrhage Toolkit v3.0. 2022.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PPH — Uterotonic Ladder
+// -------------------------------------------------------------------
+const PPH_UTEROTONIC_LADDER = {
+    id: 'pph-uterotonic-ladder',
+    title: 'Uterotonic Ladder',
+    subtitle: 'Comparison of first-line uterotonics for PPH',
+    sections: [
+        {
+            heading: '1. Oxytocin (Pitocin) — First Line',
+            body: '**Dose:** 20 units in 1 L NS/LR at 250 mL/hr (~10 mU/min) — or 10 units IM if no IV\n\n**Onset:** 1-2 min IV, 3-5 min IM\n\n**Contraindications:** None significant at PPH doses\n\n**Cautions:**\n• **NEVER IV push** — causes profound hypotension, can re-arrest\n• Water intoxication with prolonged high-dose infusion\n\n**[Full drug detail →](#/drug/oxytocin/postpartum hemorrhage)**',
+        },
+        {
+            heading: '2. Methylergonovine (Methergine) — Second Line',
+            body: '**Dose:** 0.2 mg IM, may repeat q2-4h up to 5 doses (1 mg total)\n\n**Onset:** 2-5 min\n\n**Contraindications (absolute):**\n• **Hypertension, preeclampsia, eclampsia, HELLP**\n• Coronary artery disease, recent MI, CVA\n• Raynaud\'s phenomenon\n• Sepsis (vasospasm → gangrene)\n\n**Cautions:**\n• **NEVER IV** — fatal hypertensive emergencies\n• Premedicate with ondansetron (nausea/vomiting common)\n\n**[Full drug detail →](#/drug/methylergonovine/postpartum hemorrhage)**',
+        },
+        {
+            heading: '3. Carboprost (Hemabate) — Third Line',
+            body: '**Dose:** 0.25 mg (250 mcg) IM, may repeat q15-90 min up to 8 doses (2 mg total)\n\n**Onset:** 3-5 min\n\n**Contraindications (absolute):**\n• **Asthma — ANY history**\n• Pulmonary hypertension\n• Significant cardiac, hepatic, renal disease\n\n**Cautions:**\n• Stop if bronchospasm develops\n• Premedicate with ondansetron + loperamide (GI side effects in 20-30%)\n• Fever, flushing common\n\n**[Full drug detail →](#/drug/carboprost/postpartum hemorrhage)**',
+        },
+        {
+            heading: '4. Misoprostol (Cytotec) — Adjunct / Alternative',
+            body: '**Dose:** 800-1000 mcg PR or SL, single dose\n\n**Onset:** 10-15 min PR, faster SL\n\n**Contraindications:** Essentially none at PPH doses\n\n**Cautions:**\n• Fever, shivering expected (~30-50%, not infection)\n• Diarrhea common\n\n**When to use:** First choice when HTN + asthma both present (methylergonovine AND carboprost contraindicated). Cheap, shelf-stable — widely used globally.\n\n**[Full drug detail →](#/drug/misoprostol/postpartum hemorrhage)**',
+        },
+        {
+            heading: 'Decision Flow (Asthma + HTN Matrix)',
+            body: '**No HTN, no asthma →** Oxytocin → Methergine → Hemabate → Miso\n\n**HTN / preeclampsia →** Oxytocin → Hemabate (if no asthma) → Miso\n\n**Asthma →** Oxytocin → Methergine (if no HTN) → Miso\n\n**HTN + Asthma →** Oxytocin → Miso (only agent without absolute CI)\n\n**Always use drugs in parallel with mechanical measures (massage, bimanual compression) and TXA.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. 2017.' },
+        { num: 2, text: 'WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage. 2012, 2017.' },
+        { num: 3, text: 'Bienstock JL, et al. Postpartum Hemorrhage. NEJM. 2021;384:1635-1645.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PPH — Bakri Balloon Technique
+// -------------------------------------------------------------------
+const PPH_BAKRI_TECHNIQUE = {
+    id: 'pph-bakri-technique',
+    title: 'Bakri Balloon Placement',
+    subtitle: 'Intrauterine tamponade for refractory PPH',
+    sections: [
+        {
+            heading: 'Indications',
+            body: '• Persistent uterine atony despite maximal medical therapy\n• Bleeding from the lower uterine segment (e.g., after placenta previa)\n• Temporizing measure during transport to OR or interventional radiology\n• Coagulopathy with ongoing hemorrhage (while correcting)',
+        },
+        {
+            heading: 'Contraindications',
+            body: '• Known uterine anomaly preventing balloon placement\n• Uterine rupture (do not balloon-tamponade a torn uterus)\n• Active uterine infection\n• Inability to identify the source (e.g., undiagnosed laceration — rule out first)',
+        },
+        {
+            heading: 'Equipment',
+            body: '• Bakri balloon (specific brand — max 500 mL; alternatives: ebb balloon 750 mL, or Foley 30-60 mL if Bakri unavailable)\n• Sterile 60 mL syringe or IV tubing\n• 500 mL sterile saline\n• Speculum, ring forceps\n• Ultrasound for placement confirmation\n• Foley catheter (empty bladder prior to placement)',
+        },
+        {
+            heading: 'Procedure (Step-by-Step)',
+            body: '**1.** Empty the bladder (Foley).\n\n**2.** Place patient in lithotomy, expose cervix with speculum.\n\n**3.** **Insert deflated balloon** through the cervix into the uterine cavity — grasp anterior cervical lip with ring forceps to stabilize.\n\n**4.** Confirm intrauterine placement with bedside ultrasound — the balloon tip should be above the level of the cervix, within the uterine fundus.\n\n**5.** **Inflate with sterile saline: 300-500 mL** (do not exceed 500 mL for Bakri). Stop at the volume that controls bleeding and provides firm resistance.\n\n**6.** Apply **gentle downward traction** on the drainage port — tape stem to the patient\'s thigh.\n\n**7.** **Monitor the drainage port:** blood draining at >100 mL/hr = tamponade failure → escalate to surgery / IR.\n\n**8.** **Continue oxytocin infusion** to maintain uterine tone.\n\n**9.** **Antibiotics** — ampicillin-sulbactam or cefazolin for 24h.\n\n**10.** **Remove in 12-24 hours** in a controlled setting — deflate slowly over 10-15 min, observe for re-bleeding before removing the balloon.',
+        },
+        {
+            heading: 'Success Rate',
+            body: 'Bakri balloon tamponade achieves **hemostasis in 75-86% of atonic PPH** cases, reducing the need for hysterectomy. [1]\n\n**Best outcomes** when applied early — before massive transfusion cascade.\n\n**Failure** (>100 mL/hr drainage continuing) → move rapidly to surgical options: B-Lynch suture, uterine artery embolization (IR), or hysterectomy.',
+        },
+        {
+            heading: 'Alternatives if No Bakri Available',
+            body: '• **Foley catheter** (30-60 mL balloon) — less effective but widely available; useful as bridge\n• **Sengstaken-Blakemore / Rüsch balloon** — off-label use; larger volume\n• **Bakri-style condom catheter** — low-resource settings, published efficacy\n• **Uterine packing with gauze** — older technique, largely replaced by balloons',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Aibar L, et al. Bakri Balloon for the Management of Postpartum Hemorrhage. Acta Obstet Gynecol Scand. 2013;92(4):465-467.' },
+        { num: 2, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. 2017.' },
+        { num: 3, text: 'CMQCC Obstetric Hemorrhage Toolkit v3.0. 2022.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PPH — Placenta Accreta Spectrum
+// -------------------------------------------------------------------
+const PPH_ACCRETA = {
+    id: 'pph-accreta',
+    title: 'Placenta Accreta Spectrum',
+    subtitle: 'Abnormally adherent placenta — do NOT force separation',
+    sections: [
+        {
+            heading: 'Definitions',
+            body: '**Accreta** — chorionic villi attached to myometrium (most superficial)\n**Increta** — villi invade **into** myometrium\n**Percreta** — villi penetrate through uterine serosa, may invade bladder, bowel, or adjacent organs\n\nCollectively called **placenta accreta spectrum (PAS)**.\n\n**Incidence:** 1 in 500-1000 deliveries in the US; rising sharply with cesarean delivery rates.',
+        },
+        {
+            heading: 'Risk Factors (Highest Risk)',
+            body: '• **Placenta previa over a prior cesarean scar** — >50% risk with 3+ prior C-sections\n• Prior cesarean delivery (risk ↑ with each)\n• Prior uterine surgery (myomectomy, D&C, endometrial ablation)\n• Advanced maternal age, multiparity\n• Prior uterine radiation\n• IVF pregnancy',
+        },
+        {
+            heading: 'Recognition During Delivery',
+            body: '• Placenta fails to deliver within 30 minutes of birth\n• **No plane of cleavage** on manual extraction — resistance to separation\n• Heavy bleeding when separation is attempted\n• Ultrasound before delivery may show loss of retroplacental clear space, placental lacunae',
+        },
+        {
+            heading: 'Management — CRITICAL',
+            body: '**DO NOT FORCE placental separation** — catastrophic hemorrhage (average blood loss with forced separation: 3-5 L).\n\n**If PAS is discovered during delivery:**\n1. **Stop** — do not pull harder\n2. Leave the placenta in situ\n3. Resuscitate aggressively — 2 large-bore IVs, T&C 4-6 units, activate MTP\n4. **Transfer to OR immediately** for controlled cesarean hysterectomy (if no ability to deliver in-place vaginally with accreta-specialized team)\n5. Consult interventional radiology for possible preoperative uterine artery balloon occlusion\n6. Consult urology if bladder involvement suspected (percreta)',
+        },
+        {
+            heading: 'Antepartum Diagnosis (Preferred)',
+            body: 'When PAS is diagnosed antepartum by ultrasound or MRI, delivery should be planned at **34-35 weeks** in a tertiary center with:\n• Accreta-experienced OB surgeon\n• IR availability (preoperative balloon occlusion catheters)\n• ICU bed\n• Blood bank with 4-6 units crossmatched and MTP ready\n• Cell saver\n• Urology on standby\n\n**Planned cesarean hysterectomy** is the standard of care for diagnosed percreta.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jauniaux E, et al. FIGO Consensus Guidelines on Placenta Accreta Spectrum Disorders. Int J Gynaecol Obstet. 2018;140(3):291-298.' },
+        { num: 2, text: 'ACOG/SMFM. Placenta Accreta Spectrum. Obstet Gynecol. 2018;132(6):e259-e275.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PPH — Discharge Instructions (Shareable)
+// -------------------------------------------------------------------
+const PPH_DISCHARGE = {
+    id: 'pph-discharge',
+    title: 'After a Postpartum Hemorrhage — Patient Information',
+    subtitle: 'Home care, warning signs, and follow-up after PPH',
+    sections: [
+        {
+            heading: 'What Happened',
+            body: 'You had a **postpartum hemorrhage** — heavier-than-normal bleeding after delivery. The team acted quickly to stop the bleeding, replace blood if needed, and make sure you and your baby are safe. It is normal to feel shaken, tired, or emotional for days to weeks afterward.',
+        },
+        {
+            heading: 'What to Expect at Home',
+            body: '• **Vaginal bleeding (lochia)** — normal for 4-6 weeks. Starts red, becomes pink, then yellow/white.\n• **Fatigue** — you may feel tired for weeks, especially if you needed a transfusion. Iron supplements help.\n• **Cramping** — especially with breastfeeding; this is your uterus contracting back down, a good sign.\n• **Emotional changes** — mood swings, tearfulness, even flashbacks to the event are common after severe PPH. You are not alone.',
+        },
+        {
+            heading: '🚨 Return to the ED Immediately If:',
+            body: '• **Heavy bleeding** — soaking more than one full pad per hour for 2+ hours\n• **Passing large blood clots** (bigger than a golf ball, or multiple clots in a row)\n• **Sudden flood of bright red blood** after bleeding had slowed\n• **Foul-smelling vaginal discharge** or fever >100.4°F (38°C)\n• **Severe abdominal or pelvic pain** that is getting worse\n• **Dizziness, lightheadedness, or fainting** when standing up\n• **Fast heartbeat** (>110/min at rest), pale skin, cold sweat\n• **Calf pain, leg swelling, chest pain, or shortness of breath** (blood clot warning signs — higher risk after PPH)\n• **Severe headache, vision changes, or confusion** (preeclampsia can occur up to 6 weeks postpartum)',
+        },
+        {
+            heading: 'Medications You Will Continue at Home',
+            body: '• **Iron supplements** — take with vitamin C or orange juice; avoid with coffee/tea/dairy. Constipation is common — stool softener helps.\n• **Antibiotics** — finish the full course even if you feel better.\n• **Pain medicine** — take as directed; avoid aspirin and NSAIDs if you have a bleeding history.\n• **Prenatal vitamins** — continue, especially if breastfeeding.',
+        },
+        {
+            heading: 'Follow-Up',
+            body: '• **OB visit** — in 1-2 weeks (earlier if you had a hysterectomy or major surgery). Bring a list of questions.\n• **Blood count check** — often done at your 2-week visit.\n• **Future pregnancies** — tell your next pregnancy doctor you had a PPH; this changes how they plan your next delivery.\n• **Mental health** — ask about counseling or support groups. Severe PPH can cause post-traumatic stress and postpartum depression.',
+        },
+        {
+            heading: 'Activity',
+            body: '• **Rest as much as possible** for the first 2 weeks — avoid heavy lifting, stairs if possible.\n• **Walk short distances** several times a day to reduce blood clot risk.\n• **No driving** for at least 1 week after discharge (or longer if you had surgery).\n• **No sexual intercourse, tampons, or douching** until cleared by your OB (usually 4-6 weeks).\n• **Stay hydrated** — especially if breastfeeding.',
+        },
+        {
+            heading: 'You Are Not Alone',
+            body: 'Surviving a postpartum hemorrhage is physically and emotionally hard. Many people feel scared, guilty, or overwhelmed afterward. This is normal. Talk to your doctor, partner, or a counselor. Organizations like Postpartum Support International (1-800-944-4773) can help. https://www.postpartum.net',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Committee Opinion No. 736: Optimizing Postpartum Care. 2018.' },
+        { num: 2, text: 'Postpartum Support International. https://www.postpartum.net' },
+    ],
+    shareable: true,
+};
+// -------------------------------------------------------------------
+// PPH — Do NOT Items (Stop Page)
+// -------------------------------------------------------------------
+const PPH_STOP = {
+    id: 'pph-stop',
+    title: 'PPH — Do NOT',
+    subtitle: 'Critical pitfalls to avoid in postpartum hemorrhage',
+    sections: [
+        {
+            heading: '🛑 Do NOT give oxytocin IV push',
+            body: 'IV bolus of oxytocin causes **profound hypotension and cardiac arrhythmias** — documented cardiac arrests have occurred, especially in patients with any underlying cardiac compromise. Always give as an infusion (20 units in 1 L at 250 mL/hr) or IM (10 units). [See oxytocin node](#/node/pph-oxytocin).',
+        },
+        {
+            heading: '🛑 Do NOT give methylergonovine in HTN or preeclampsia',
+            body: '**Methergine causes severe vasoconstriction** and has triggered fatal hypertensive emergencies, MI, and CVA when given to patients with any hypertension, preeclampsia, or CAD. Always check BP before every dose. If HTN, skip to misoprostol or (if no asthma) carboprost. [See methergine check](#/node/pph-methergine-check).',
+        },
+        {
+            heading: '🛑 Do NOT give carboprost (Hemabate) in asthma',
+            body: 'Carboprost is a PGF2α analog — **bronchospasm is the dose-limiting adverse effect** and has caused fatal status asthmaticus. **Any history of asthma is an absolute contraindication.** Use misoprostol instead. [See carboprost check](#/node/pph-carboprost-check).',
+        },
+        {
+            heading: '🛑 Do NOT pull harder on a placenta that won\'t separate',
+            body: '**Forceful traction on an adherent placenta can cause uterine inversion** (life-threatening emergency) or catastrophic hemorrhage from placenta accreta (average EBL with forced separation: 3-5 L). If resistance is felt, **stop immediately** — leave the placenta in situ and transfer to OR. [See tissue node](#/node/pph-tissue) and [accreta page](#/info/pph-accreta).',
+        },
+        {
+            heading: '🛑 Do NOT give uterotonics to a uterine inversion',
+            body: 'Uterotonics **contract the cervical ring**, trapping the inverted uterus and making manual reduction impossible. **Stop all uterotonics immediately** if you suspect inversion (dimpled/absent fundus, fleshy mass at introitus). Use tocolytics (NTG, terbutaline, or magnesium) to relax the uterus, perform manual reduction (Johnson maneuver), then resume uterotonics only AFTER the uterus is reverted. [See uterine inversion node](#/node/pph-uterine-inversion).',
+        },
+        {
+            heading: '🛑 Do NOT rely on visual estimation of blood loss',
+            body: 'Visual EBL **underestimates true blood loss by 30-50%**. By the time hypotension develops in a pregnant patient, she has often lost ≥25% of her blood volume (~1500 mL). Use [Shock Index](#/calculator/shock-index) >0.9 (abnormal) / >1.0 (shock), calibrated under-buttocks drapes, and weighed sponges. [See initial assessment](#/node/pph-initial-assess).',
+        },
+        {
+            heading: '🛑 Do NOT delay TXA past 3 hours',
+            body: 'TXA reduces death from bleeding in PPH **only when given within 3 hours of delivery** (WOMAN trial, RR 0.69 for death from bleeding when given <1 hour). **Given >3 hours has no benefit and may increase mortality** in some subgroups. Don\'t wait on labs — give 1 g IV over 10 min as soon as PPH is diagnosed. [See TXA node](#/node/pph-txa).',
+        },
+        {
+            heading: '🛑 Do NOT interpret a "normal" fibrinogen as reassuring',
+            body: 'Pregnancy baseline fibrinogen is **400-600 mg/dL** at term. A fibrinogen of 300 mg/dL — "normal" in non-pregnant adults — actually reflects significant consumption in a postpartum bleed. **<200 mg/dL is the earliest lab marker of severe PPH** and predicts massive transfusion. Replete with cryoprecipitate aggressively. [See labs](#/node/pph-access-labs).',
+        },
+        {
+            heading: '🛑 Do NOT delay hysterectomy out of fertility preservation when life is threatened',
+            body: 'Peripartum hysterectomy is the **final life-saving step**. Every additional hour of uncontrolled hemorrhage raises maternal mortality. When uterotonics + Bakri + MTP + IR/B-Lynch fail, **do not delay hysterectomy** out of inappropriate attachment to future fertility. Discuss with the patient\'s partner/family when possible, document indication, and proceed. [See hysterectomy node](#/node/pph-hysterectomy).',
+        },
+        {
+            heading: '🛑 Do NOT forget RhoGAM, VTE prophylaxis, and mental health follow-up',
+            body: '**After the crisis:** Rh-negative mothers need [Rh Immune Globulin](#/drug/rh-immune-globulin/rh negative postpartum) within 72 hours. PPH + immobility + massive transfusion dramatically raises VTE risk — start mechanical prophylaxis immediately and pharmacologic once hemostasis is confirmed (fibrinogen ≥200). Severe PPH is a traumatic event — screen for postpartum depression and PTSD at follow-up. [See post-PPH care](#/node/pph-rh-check).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. 2017 (reaffirmed 2023).' },
+        { num: 2, text: 'WOMAN Trial. Lancet. 2017;389(10084):2105-2116.' },
+        { num: 3, text: 'Collins PW, et al. Fibrinogen in Postpartum Hemorrhage. Blood. 2014;124:1727-1736.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Amniotic Fluid Embolism (AFE)
+// -------------------------------------------------------------------
+const AFE_STEPS_SUMMARY = {
+    id: 'afe-steps-summary',
+    title: 'AFE Steps Summary',
+    subtitle: 'First-2-minute resuscitation checklist',
+    sections: [
+        {
+            heading: '0–30 sec — Recognize',
+            body: '• [Peripartum + sudden hypoxia + hypotension + DIC](#/node/afe-start)\n• [~30% have prodrome: agitation, "sense of doom", paresthesias](#/node/afe-start)\n• [Rule out PE, anaphylaxis, sepsis, hemorrhage, eclampsia](#/node/afe-ddx)',
+        },
+        {
+            heading: '30–60 sec — Call & Airway',
+            body: '• [Call OB, anesthesia, ICU, NICU, blood bank (MTP), ECMO](#/node/afe-call)\n• [Announce the diagnosis — bring OR to patient, do NOT transport](#/node/afe-call)\n• [Immediate intubation, 100% FiO₂, PEEP 5–10, ETT 6.0–7.0](#/node/afe-airway)',
+        },
+        {
+            heading: '60–120 sec — Circulate',
+            body: '• [If arrest → CPR with standard hand position + manual LUD](#/node/afe-acls)\n• [Two-handed push-to-left over tilt — continuous through CPR](#/node/afe-lud)\n• [2× large-bore IV above diaphragm, A-line, IO if no IV in 60s](#/node/afe-access)\n• [Draw fibrinogen, platelets, PT/PTT, TEG, ABG, lactate, type+cross 6 U](#/node/afe-access)',
+        },
+        {
+            heading: '2–4 min — Pharmacologic',
+            body: '• [A-O-K: Atropine 0.2 mg + Ondansetron 8 mg + Ketorolac 15 mg IV push together](#/node/afe-pharm-branch)\n• [Alternative 50-50-500: Diphenhydramine 50 mg + Famotidine 50 mg + Hydrocortisone 500 mg IV](#/node/afe-pharm-branch)\n• [Start norepinephrine 0.05–0.5 mcg/kg/min — add vasopressin 0.04 U/min early](#/node/afe-hemo)',
+        },
+        {
+            heading: '4 min — Perimortem C/S',
+            body: '• [If arrest + ≥23 wk and no ROSC by 4 min → start resuscitative hysterotomy NOW](#/node/afe-pmcd-decision)\n• [Bedside — do NOT transport to OR; midline vertical, CPR continuous](#/node/afe-pmcd)\n• [Full procedural detail in Resuscitative Hysterotomy consult](#/tree/resuscitative-hysterotomy)',
+        },
+        {
+            heading: 'Parallel — DIC / MTP',
+            body: '• [Activate MTP — do not wait for labs; 1:1:1 PRBC:FFP:platelets](#/node/afe-mtp)\n• [Fibrinogen target ≥150–200 mg/dL — cryoprecipitate 10 U or fibrinogen concentrate 2–4 g](#/node/afe-mtp)\n• [TXA 1 g IV over 10 min × 2 doses (second at 30 min if bleeding) — <3 h window](#/node/afe-txa)\n• [Avoid rFVIIa — thrombotic death in AFE series](#/node/afe-txa)',
+        },
+        {
+            heading: 'Refractory — ECMO',
+            body: '• [Call ECMO team DURING resus, not after — survival 60–80% with vs ~30% without](#/node/afe-ecmo)\n• [Impella RP / RVAD if ECMO delayed](#/node/afe-ecmo)\n• [Extended CPR in AFE has produced neurologically intact survivors — do not terminate early](#/node/afe-refractory)',
+        },
+        {
+            heading: 'Post-ROSC',
+            body: '• [ICU, TTM 32–36 °C × 24 h if comatose](#/node/afe-postrosc)\n• [Trend fibrinogen, TEG, platelets q1–2 h — watch delayed DIC × 24 h](#/node/afe-postrosc)\n• [Report to AFE Foundation registry](https://www.afesupport.org)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Pacheco LD, et al. SMFM Clinical Guideline #9: Amniotic fluid embolism. Am J Obstet Gynecol. 2016;215(2):B16-24.' },
+        { num: 2, text: 'Combs CA, et al. SMFM Special Statement: Checklist for initial management of AFE. Am J Obstet Gynecol. 2021;224(4):B29-32.' },
+    ],
+};
+const AFE_CRITERIA = {
+    id: 'afe-criteria',
+    title: 'SMFM / Clark Diagnostic Criteria',
+    subtitle: 'Research-standard definition — treat empirically, confirm retrospectively',
+    sections: [
+        {
+            heading: 'All 4 criteria required (Clark 2016 / SMFM)',
+            body: '**1. Sudden cardiorespiratory arrest OR hypotension (SBP <90) + respiratory compromise** (dyspnea, cyanosis, SpO₂ <90%)\n\n**2. Documented DIC** (ISTH obstetric score ≥3) after the initial event — BEFORE significant hemorrhage-related dilution\n\n**3. Clinical onset during labor, C-section, D&E, or within 30 minutes postpartum**\n\n**4. No other clinical explanation** for findings\n\n**AFE is a clinical diagnosis of exclusion** — treat empirically, meet criteria retrospectively. Do NOT delay resuscitation to establish the diagnosis.',
+        },
+        {
+            heading: 'Classic triad',
+            body: '**Hypoxia + Hypotension + Coagulopathy** occurring in peripartum period.\n\n**Prodrome in ~30% of cases** — precedes collapse by seconds to minutes:\n• Agitation, restlessness\n• "Sense of impending doom"\n• Shivering, chills\n• Paresthesias, metallic taste\n• Numbness of lips, fingers',
+        },
+        {
+            heading: 'ISTH obstetric DIC score (for criterion 2)',
+            body: 'Platelet count: >100 = 0, 50–100 = 1, <50 = 2\n\nProlonged PT: <25% = 0, 25–50% = 1, >50% = 2\n\nFibrinogen: >200 = 0, ≤200 = 1\n\n**Total score ≥3 = overt DIC** (obstetric-specific — lower than the ≥5 threshold for general DIC).',
+        },
+        {
+            heading: 'Differential — must rule out',
+            body: '• Pulmonary embolism — echo: RV strain without fibrinolytic DIC\n• Anaphylaxis — urticaria, clear trigger, responds to epi alone\n• Septic shock — slower onset, source + fever/WBC\n• Myocardial infarction — ECG changes, troponin\n• Eclampsia — seizure, proteinuria, HTN\n• Hemorrhagic shock — identifiable bleeding + fluid-responsive\n• Peripartum cardiomyopathy — subacute, LV dysfunction, no DIC\n• Air embolism / LAST — context-specific',
+        },
+        {
+            heading: 'Incidence & mortality',
+            body: '• Incidence: **1 in 15,200 to 1 in 53,800 deliveries** (varies by registry)\n• Maternal mortality: **20–60%**\n• Neurologically intact maternal survival: ~70% of survivors\n• Perinatal mortality: ~20–25%\n• **~50% of deaths occur within first hour** — recognition and action in minutes matters',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Clark SL, Romero R, Dildy GA, et al. Proposed diagnostic criteria for the case definition of AFE in research studies. Am J Obstet Gynecol. 2016;215(4):408-12. PMID: 27372270.' },
+        { num: 2, text: 'Pacheco LD, et al. SMFM Clinical Guideline #9. Am J Obstet Gynecol. 2016;215(2):B16-24. PMID: 26987420.' },
+        { num: 3, text: 'Erez O, et al. DIC in obstetrics: clinical-pathologic scoring system. Am J Obstet Gynecol. 2014;210(6):534.e1-11.' },
+    ],
+};
+const AFE_ACLS_PREGNANCY = {
+    id: 'afe-acls-pregnancy',
+    title: 'Pregnancy-Modified ACLS',
+    subtitle: 'AHA 2015 — key differences from standard adult ACLS',
+    sections: [
+        {
+            heading: 'Compressions',
+            body: '• **Hand position: standard** — center of sternum (NOT higher, despite older teaching)\n• **Rate 100–120/min, depth 5–6 cm, full recoil** — same as non-pregnant\n• **Rotate compressor q2 min** — fatigue drops quality fast\n• **Mechanical CPR device** if available — frees a team member for other tasks',
+        },
+        {
+            heading: 'Manual Left Uterine Displacement (LUD) — MANDATORY if fundus ≥ umbilicus',
+            body: '**Two-handed push-to-left is preferred over tilt.**\n\n**Technique:** Dedicated provider stands at patient\'s left, cups uterus with both hands, pushes up and to the patient\'s LEFT. Continuous throughout CPR — do NOT stop for rhythm checks.\n\n**Why:** IVC compression by gravid uterus reduces venous return up to 30%. CPR is ineffective without LUD.\n\n**Tilt (Cardiff wedge, rolled blanket) is inferior** — compression quality drops ~30% on any tilt. Use only if LUD cannot be maintained.',
+        },
+        {
+            heading: 'Defibrillation',
+            body: '• **Standard joules** — biphasic 120–200 J or monophasic 360 J\n• **Standard pad placement** — anterolateral; no change for pregnancy\n• **Remove fetal monitors BEFORE defibrillation** — external and internal (scalp electrode)\n• **Energy absorbed by fetus is negligible** — do not under-dose',
+        },
+        {
+            heading: 'Airway',
+            body: '• **Early intubation** — higher aspiration risk + airway edema + difficult airway\n• **Smaller ETT (6.0–7.0)** — laryngeal and mucosal edema\n• **Cricoid pressure during bagging** until intubated\n• **Expect difficult airway** — full-term body habitus, large breasts, Mallampati worsening\n• **Waveform capnography** immediately post-intubation — ETCO₂ >20 = adequate CPR',
+        },
+        {
+            heading: 'IV access & drugs',
+            body: '• **IV above the diaphragm** — IVC compression below\n• **IO if no IV within 60 sec** — humeral (above-diaphragm) preferred\n• **All ACLS drugs at standard doses** — epinephrine 1 mg IV q3–5 min, amiodarone 300 mg bolus\n• **No drug contraindicated in maternal arrest** — fetal risk is irrelevant if mother dies',
+        },
+        {
+            heading: 'The 4-Minute Rule — perimortem C/S',
+            body: '**If ROSC not achieved by 4 minutes of arrest AND fundus ≥ umbilicus OR ≥23 wk:** start resuscitative hysterotomy at minute 4, deliver by minute 5.\n\n**Relieves aortocaval compression → restores maternal venous return and CPR effectiveness.** Maternal survival is the primary goal, not fetal rescue. Bedside procedure — do NOT transport.\n\n→ [Resuscitative Hysterotomy consult](#/tree/resuscitative-hysterotomy) for full procedure.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jeejeebhoy FM, et al. Cardiac Arrest in Pregnancy: AHA Scientific Statement. Circulation. 2015;132(18):1747-73. PMID: 26443610.' },
+        { num: 2, text: 'Lipman S, et al. The Society for Obstetric Anesthesia and Perinatology consensus statement on the management of cardiac arrest in pregnancy. Anesth Analg. 2014;118(5):1003-16.' },
+    ],
+};
+const AFE_AOK = {
+    id: 'afe-aok',
+    title: 'A-O-K + Anaphylactoid Therapy',
+    subtitle: 'Pharmacologic adjuncts for AFE — not a substitute for ACLS',
+    sections: [
+        {
+            heading: 'A-O-K Protocol (Rezai 2017)',
+            body: '**Rationale:** Blocks three pulmonary vasoconstrictor/platelet pathways simultaneously. Case-report evidence; reasonable adjunct to ACLS, pressors, MTP, and perimortem C/S.\n\n**Give all three together, IV push, within 1 minute of recognition:**\n\n• **[Atropine](#/drug/atropine/amniotic fluid embolism) 0.2 mg IV** — vagolytic → reverses pulmonary reflex bradycardia/hypotension\n• **[Ondansetron](#/drug/ondansetron/amniotic fluid embolism) 8 mg IV** — 5-HT3 antagonist → reduces serotonin-mediated pulmonary vasoconstriction\n• **[Ketorolac](#/drug/ketorolac/amniotic fluid embolism) 15 mg IV** — COX inhibitor → blocks thromboxane, preserves platelets\n\n**Mnemonic:** "**A**ll **O**f these in a **K**iss" — give together.',
+        },
+        {
+            heading: 'Alternative: 50-50-500 Anaphylactoid Protocol',
+            body: '**Based on the older anaphylactoid hypothesis** for AFE pathophysiology (complement activation + mast cell degranulation). Still reasonable if A-O-K drugs unavailable or as an addition.\n\n• **[Diphenhydramine](#/drug/diphenhydramine/amniotic fluid embolism) 50 mg IV** — H1 antihistamine\n• **[Famotidine](#/drug/famotidine/amniotic fluid embolism) 50 mg IV** (or 20 mg per hospital formulary) — H2 antihistamine\n• **[Hydrocortisone](#/drug/hydrocortisone/amniotic fluid embolism) 500 mg IV** — stress-dose corticosteroid',
+        },
+        {
+            heading: 'What these drugs DO NOT replace',
+            body: '• **ACLS** — CPR, defibrillation, standard resuscitation drugs\n• **Perimortem C/S** at 4 minutes of arrest\n• **Massive transfusion** 1:1:1 with fibrinogen replacement\n• **Vasopressors** (norepinephrine + vasopressin)\n• **Mechanical circulatory support** (ECMO) for refractory cases\n\n**A-O-K and 50-50-500 are adjuncts.** The core resuscitation must continue in parallel.',
+        },
+        {
+            heading: 'Evidence quality',
+            body: 'Both protocols are based on **case reports and small case series**. No RCTs exist — AFE is too rare (~1:50,000 deliveries) for randomization. The mechanistic rationale is plausible, the drugs are cheap and available, and the risk profile in the peri-arrest setting is favorable.\n\n**Rezai 2017** reports maternal and neonatal survival in an atypical AFE case using A-O-K. Subsequent case reports have shown varying outcomes.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Rezai S, et al. Atypical amniotic fluid embolism managed with a novel therapeutic regimen (A-O-K). Case Rep Obstet Gynecol. 2017;2017:8458375. PMID: 29430313. https://pubmed.ncbi.nlm.nih.gov/29430313/' },
+        { num: 2, text: 'Pacheco LD, et al. Amniotic fluid embolism: principles of early clinical management. Am J Obstet Gynecol. 2020;222(1):48-52. PMID: 31376394.' },
+    ],
+};
+const AFE_MTP_INFO = {
+    id: 'afe-mtp',
+    title: 'DIC / Massive Transfusion Targets',
+    subtitle: 'Obstetric DIC thresholds — higher than trauma',
+    sections: [
+        {
+            heading: 'Activate MTP at diagnosis',
+            body: '**Do NOT wait for labs.** AFE coagulopathy is fibrinolytic PLUS consumptive — it will develop rapidly.\n\n**Initial order set:**\n• **PRBC : FFP : Platelets = 1:1:1** (standard MTP pack)\n• **[Cryoprecipitate](#/drug/cryoprecipitate/amniotic fluid embolism) 10 units** (or 2 pooled bags)\n• **Fibrinogen concentrate 2–4 g IV** if available (faster, volume-sparing)\n• **[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism) 1 g IV over 10 min**\n• **Type and crossmatch 6 U PRBC** if not already',
+        },
+        {
+            heading: 'Targets (obstetric thresholds)',
+            body: '**FIBRINOGEN: ≥150–200 mg/dL**\n• Higher than trauma (<200 predicts ongoing obstetric hemorrhage — Charbit 2007)\n• Each 10 units cryo raises fibrinogen ~50–100 mg/dL\n• 1 g fibrinogen concentrate raises fibrinogen ~30–40 mg/dL in 70 kg patient\n\n**PLATELETS: >50 ×10⁹/L** (>75 if ongoing bleeding, >100 if CNS hemorrhage)\n\n**PT/INR: <1.5 × control**\n\n**pH: >7.2** — bicarb for pH <7.1 with hemodynamic instability\n\n**iCa²⁺: >1.1 mmol/L** — check after every 4 units PRBC (citrate chelates calcium)\n\n**Temperature: >35 °C** — fluid warmer + forced-air rewarmer mandatory',
+        },
+        {
+            heading: 'TXA dosing',
+            body: '**[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism):**\n• **1 g IV over 10 min** → **repeat 1 g IV over 10 min at 30 minutes** if bleeding continues\n• Must be given <3 h from onset of hemorrhage/AFE — effect diminishes after\n• WOMAN trial (Lancet 2017): NNT 267 for death from bleeding in PPH; no increase in thromboembolic events\n• Do NOT rapid-push — causes hypotension',
+        },
+        {
+            heading: 'TEG/ROTEM-guided resuscitation',
+            body: '**If available, TEG/ROTEM is superior to static fibrinogen for real-time decision making:**\n\n• **FIBTEM A5 <12 mm** → give fibrinogen (cryo or concentrate)\n• **EXTEM CT prolonged** → FFP or 4-factor PCC\n• **LY30 >3%** → TXA for hyperfibrinolysis\n• **EXTEM A10 low + FIBTEM normal** → platelets',
+        },
+        {
+            heading: 'Drugs to AVOID',
+            body: '**Avoid recombinant factor VIIa (rFVIIa)** — Leighton 2011 systematic review showed increased thrombotic death in AFE patients receiving rFVIIa. Reserve only for refractory bleeding AFTER maximal standard MTP has failed AND surgical bleeding is controlled.\n\n**Avoid prothrombin complex concentrate (PCC) routinely** in AFE — unlike in anticoagulation reversal, it adds procoagulant load to an already prothrombotic complication. TEG-guided use only.\n\n**Avoid crystalloid overload** — dilutes remaining factors, worsens RV distension, and triggers abdominal compartment syndrome if >3 L given.',
+        },
+        {
+            heading: 'Mechanical hemostasis (uterine source)',
+            body: '**[Oxytocin](#/drug/oxytocin/amniotic fluid embolism) 20 U in 1 L NS at 250 mL/hr** — never IV push (hypotension)\n\n**Methylergonovine 0.2 mg IM** — avoid if HTN/preeclampsia\n\n**Carboprost (15-methyl PGF2α) 250 mcg IM** q15 min × 8 doses — avoid in asthma\n\n**Misoprostol 800–1000 mcg PR or SL** — safe in HTN and asthma\n\n**Bakri balloon** or uterine packing for refractory atony\n\n**Hysterectomy** — do not delay for the dying patient',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'WOMAN Trial Collaborators. Effect of early TXA administration on mortality in postpartum haemorrhage (WOMAN). Lancet. 2017;389(10084):2105-16. PMID: 28456509.' },
+        { num: 2, text: 'Charbit B, et al. The decrease of fibrinogen is an early predictor of the severity of postpartum hemorrhage. J Thromb Haemost. 2007;5(2):266-73.' },
+        { num: 3, text: 'Leighton BL, et al. Use of rFVIIa in patients with AFE: systematic review. Anesthesiology. 2011;115(6):1201-8. PMID: 22037642.' },
+    ],
+};
+const AFE_STOP = {
+    id: 'afe-stop',
+    title: 'AFE — Do NOT',
+    subtitle: 'Critical pitfalls that kill AFE patients',
+    sections: [
+        {
+            heading: '🛑 Do NOT transport to OR for perimortem C/S',
+            body: 'Resuscitative hysterotomy is a **bedside procedure**. Transport wastes the 4-minute window and degrades CPR quality. Bring a scalpel, not a gurney. [Perimortem C/S decision](#/node/afe-pmcd-decision).',
+        },
+        {
+            heading: '🛑 Do NOT delay hysterotomy waiting for anesthesia',
+            body: 'A patient in cardiac arrest needs no anesthesia. Waiting for an anesthesiologist to "confirm" she is in arrest before cutting violates the 4-minute rule. [Start hysterotomy NOW](#/node/afe-pmcd).',
+        },
+        {
+            heading: '🛑 Do NOT IV-push oxytocin',
+            body: 'IV push causes profound hypotension and can re-arrest a post-ROSC AFE patient. Always dilute 20 units in 1 L NS at 250 mL/hr or give 10 U IM. [Uterine atony management](#/info/afe-mtp).',
+        },
+        {
+            heading: '🛑 Do NOT load milrinone',
+            body: 'The 50 mcg/kg bolus drops SBP by 10–20 mmHg — catastrophic in AFE shock. Start infusion at 0.25 mcg/kg/min without a bolus. [Hemodynamic support](#/node/afe-hemo).',
+        },
+        {
+            heading: '🛑 Do NOT give rFVIIa routinely',
+            body: 'Leighton 2011: recombinant Factor VIIa was associated with increased thrombotic death in AFE. Reserve only for refractory bleeding after maximal standard MTP has failed. [MTP targets](#/info/afe-mtp).',
+        },
+        {
+            heading: '🛑 Do NOT over-resuscitate with crystalloid',
+            body: 'AFE shock is RV failure physiology. Fluid worsens RV distension and septal shift. Limit crystalloid to 500 mL during initial resuscitation; use blood products after. [RV-first strategy](#/node/afe-hemo).',
+        },
+        {
+            heading: '🛑 Do NOT place chest compressions higher than normal',
+            body: 'Older teaching recommended higher hand position in pregnancy. The AHA 2015 statement confirms: **standard center-of-sternum position**. Hand position is not the problem — aortocaval compression is. [Pregnancy-modified ACLS](#/info/afe-acls-pregnancy).',
+        },
+        {
+            heading: '🛑 Do NOT tilt instead of manual LUD',
+            body: 'Any tilt (Cardiff wedge, rolled blanket, left lateral decubitus) degrades compression quality ~30%. Two-handed push-to-left by a dedicated provider is the standard. [LUD technique](#/node/afe-lud).',
+        },
+        {
+            heading: '🛑 Do NOT terminate resuscitation early',
+            body: 'AFE is one of the few arrest scenarios where prolonged, "futile-appearing" CPR has produced neurologically intact survivors. Reversible physiology + ECMO eligibility = extended resuscitation is appropriate. [Extended resuscitation](#/node/afe-refractory).',
+        },
+        {
+            heading: '🛑 Do NOT forget the neonate',
+            body: 'NICU team must be at the bedside BEFORE hysterotomy. Neonatal outcomes depend on time from maternal arrest to delivery — have the team, the warmer, and the equipment ready when you cut. [Team activation](#/node/afe-call).',
+        },
+    ],
+    citations: [],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -14613,6 +15121,21 @@ export const INFO_PAGES = {
     'bronch-parent-en': BRONCH_PARENT_EN,
     'bronch-parent-es': BRONCH_PARENT_ES,
     'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
+    // Amniotic Fluid Embolism (AFE)
+    'afe-steps-summary': AFE_STEPS_SUMMARY,
+    'afe-criteria': AFE_CRITERIA,
+    'afe-acls-pregnancy': AFE_ACLS_PREGNANCY,
+    'afe-aok': AFE_AOK,
+    'afe-mtp': AFE_MTP_INFO,
+    'afe-stop': AFE_STOP,
+    // Postpartum Hemorrhage (PPH)
+    'pph-steps-summary': PPH_STEPS_SUMMARY,
+    'pph-four-ts-info': PPH_FOUR_TS_INFO,
+    'pph-uterotonic-ladder': PPH_UTEROTONIC_LADDER,
+    'pph-bakri-technique': PPH_BAKRI_TECHNIQUE,
+    'pph-accreta': PPH_ACCRETA,
+    'pph-discharge': PPH_DISCHARGE,
+    'pph-stop': PPH_STOP,
     // Breech Delivery
     'breech-delivery-summary': BREECH_DELIVERY_SUMMARY,
     'breech-types-atlas': BREECH_TYPES_ATLAS,

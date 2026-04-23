@@ -498,6 +498,10 @@ const ATROPINE = {
             regimen: '0.02 mg/kg IV (minimum 0.1 mg, maximum 0.5 mg per dose). May repeat once. Total maximum: 1 mg (child), 2 mg (adolescent).',
             weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 0.5 },
         },
+        {
+            indication: 'Amniotic fluid embolism (A-O-K protocol)',
+            regimen: '0.2 mg IV push. Give SIMULTANEOUSLY with Ondansetron 8 mg IV + Ketorolac 15 mg IV within 1 minute of recognition. Vagolytic — reverses pulmonary reflex bradycardia/hypotension. Rezai 2017 case-report evidence; adjunct to ACLS, not a substitute.',
+        },
     ],
     contraindications: [
         'Narrow-angle glaucoma (relative)',
@@ -3218,6 +3222,48 @@ const METHYLENE_BLUE = {
         'Krishnaswamy G. Critical Care Management of the Patient With Anaphylaxis. Crit Care Med. 2021;49(5):838-857.',
     ],
 };
+const METHYLERGONOVINE = {
+    id: 'methylergonovine',
+    name: 'Methylergonovine (Methergine)',
+    genericName: 'Methylergonovine maleate',
+    drugClass: 'Ergot alkaloid uterotonic',
+    route: 'IM / PO',
+    indications: ['Postpartum hemorrhage (uterine atony)', 'Subinvolution of the uterus', 'Secondary (late) postpartum hemorrhage'],
+    dosing: [
+        {
+            indication: 'Postpartum Hemorrhage',
+            regimen: '**0.2 mg IM** — onset 2–5 min, duration ~3 hours. May repeat **every 2–4 hours** for persistent atony, **maximum 5 doses (1 mg total)**. **NEVER give IV** — severe hypertensive emergencies, MI, and CVA reported. CONTRAINDICATED in HTN, preeclampsia, eclampsia, CAD, Raynaud\'s, and sepsis (risk of vasospasm). Give antiemetic prophylactically (nausea/vomiting common). Transient BP elevation is expected; severe HTN is pathologic — stop the drug.',
+        },
+        {
+            indication: 'Subinvolution / Late PPH',
+            regimen: '0.2 mg PO q6–8h × up to 7 days after delivery. Usually in consultation with OB. Screen BP at every dose — HTN is the key contraindication.',
+        },
+    ],
+    contraindications: [
+        'Hypertension (any SBP ≥140 or DBP ≥90)',
+        'Preeclampsia, eclampsia, HELLP',
+        'Coronary artery disease, recent MI',
+        'Cerebrovascular disease (prior stroke)',
+        'Raynaud\'s phenomenon / peripheral vascular disease',
+        'Sepsis (risk of gangrene from vasospasm)',
+        'Known ergot hypersensitivity',
+        'Concurrent potent CYP3A4 inhibitors (azole antifungals, macrolides, protease inhibitors)',
+    ],
+    cautions: [
+        'NEVER give IV — fatal hypertensive reactions reported',
+        'Can trigger coronary vasospasm → chest pain/MI even in low-risk patients',
+        'Nausea and vomiting common (~20-30%) — premedicate with ondansetron',
+        'Lactation: small amount in breast milk, considered compatible with breastfeeding',
+        'Stronger vasoconstriction in smokers',
+    ],
+    monitoring: 'Blood pressure before every dose (hold if BP >140/90), uterine tone, vaginal bleeding, chest pain or neurologic symptoms.',
+    notes: 'Second-line uterotonic after oxytocin for uterine atony. Ergot alkaloid that causes sustained myometrial contraction. The absolute contraindication in hypertension and preeclampsia is its defining limitation — always verify BP and screen for preeclamptic features before administering. When methylergonovine is contraindicated, move to misoprostol or (if no asthma) carboprost.',
+    citations: [
+        'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.',
+        'WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage. 2012, 2017 update.',
+        'Bienstock JL, Eke AC, Hueppchen NA. Postpartum Hemorrhage. NEJM. 2021;384(17):1635-1645.',
+    ],
+};
 const METHADONE = {
     id: 'methadone',
     name: 'Methadone',
@@ -3992,6 +4038,10 @@ const OXYTOCIN = {
         {
             indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
             regimen: '20 units in 1L NS (or LR). Infuse at 250 mL/hr. Alternative: 10 U IM after delivery if no IV access. Do NOT give IV push — causes profound hypotension and can re-arrest a post-ROSC patient. Start immediately after placental delivery or after resuscitative hysterotomy to prevent/treat uterine atony.',
+        },
+        {
+            indication: 'Amniotic fluid embolism — uterine atony',
+            regimen: '20 units in 1 L NS at 250 mL/hr IV infusion after placental delivery or resuscitative hysterotomy. **NEVER IV push** — profound hypotension can re-arrest a post-ROSC AFE patient. Combine with bimanual uterine massage. Add methylergonovine 0.2 mg IM (if no HTN/preeclampsia) or carboprost 250 mcg IM (if no asthma) as second-line if atony persists.',
         },
     ],
     contraindications: [
@@ -5296,6 +5346,10 @@ const VASOPRESSIN = {
             indication: 'Post-cardiac arrest vasopressor (adjunct)',
             regimen: '0.04 units/min IV infusion (fixed dose, do not titrate). Add to norepinephrine for refractory post-arrest hypotension. May reduce norepinephrine requirements. Also used as alternative to epinephrine in cardiac arrest (40 units IV single dose, no longer recommended as routine).',
         },
+        {
+            indication: 'Amniotic fluid embolism \u2014 pulmonary-sparing vasopressor',
+            regimen: '0.04 units/min IV infusion (fixed dose, non-titratable). **Preferred second vasopressor in AFE** \u2014 V1 receptor agonist spares the pulmonary vasculature while raising systemic BP for RV coronary perfusion. Add to norepinephrine early rather than escalating NE to high doses. Synergistic effect.',
+        },
     ],
     contraindications: [
         'Known hypersensitivity',
@@ -5513,6 +5567,42 @@ const CAPLACIZUMAB = {
         'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
     ],
 };
+const CARBOPROST = {
+    id: 'carboprost',
+    name: 'Carboprost (Hemabate)',
+    genericName: '15-methyl prostaglandin F2α tromethamine',
+    drugClass: 'Prostaglandin F2α analog (uterotonic)',
+    route: 'IM / Intramyometrial',
+    indications: ['Postpartum hemorrhage (uterine atony)', 'Refractory PPH when oxytocin + methylergonovine fail'],
+    dosing: [
+        {
+            indication: 'Postpartum Hemorrhage',
+            regimen: '**0.25 mg (250 mcg) IM** into the deltoid or vastus lateralis — onset 3–5 min, duration ~2 hours. May repeat **every 15–90 minutes** to a maximum of **8 doses (2 mg total)**. **ABSOLUTE CONTRAINDICATION: any history of asthma** (can trigger fatal bronchospasm). Also CI in pulmonary HTN, significant cardiac/hepatic/renal disease. Premedicate with ondansetron + loperamide — GI side effects (nausea, vomiting, diarrhea) occur in 20–30%. Fever and flushing expected. Intramyometrial dosing (by OB during laparotomy) is also effective.',
+        },
+    ],
+    contraindications: [
+        'Asthma — ANY history (absolute)',
+        'Pulmonary hypertension',
+        'Active pulmonary, cardiac, hepatic, or renal disease',
+        'Pelvic inflammatory disease',
+        'Known hypersensitivity to prostaglandins',
+    ],
+    cautions: [
+        'Stop immediately if wheezing or bronchospasm develops — have albuterol and bronchodilators ready',
+        'Diarrhea and vomiting are common — premedicate with antiemetic and antidiarrheal',
+        'Fever and flushing expected (not infection)',
+        'Hypertension can occur — monitor BP',
+        'Uterine hyperstimulation rarely reported',
+        'Do not exceed 2 mg total (8 doses of 0.25 mg)',
+    ],
+    monitoring: 'Respiratory exam (bronchospasm), uterine tone, temperature, BP, GI symptoms.',
+    notes: 'Third-line uterotonic reserved for refractory uterine atony after oxytocin and methylergonovine. 15-methyl PGF2α analog. The defining limitation is asthma — always screen before use. In asthmatic patients with PPH refractory to oxytocin, skip directly to misoprostol. Intramyometrial injection by the OB intraoperatively is occasionally used when IM access is compromised.',
+    citations: [
+        'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.',
+        'WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage. 2012, 2017 update.',
+        'CMQCC Obstetric Hemorrhage Toolkit v3.0. 2022.',
+    ],
+};
 const FENTANYL = {
     id: 'fentanyl',
     name: 'Fentanyl',
@@ -5660,6 +5750,10 @@ const HYDROCORTISONE = {
         {
             indication: 'Septic shock',
             regimen: '50 mg IV q6h OR 200 mg/day continuous infusion for vasopressor-dependent septic shock. ADRENAL trial: reduced time on vasopressors, ICU LOS, intubation duration. No increased superinfection risk. Consider adding fludrocortisone 50 mcg PO daily (APROCCHSS). Taper over 2-3 days when vasopressors discontinued.',
+        },
+        {
+            indication: 'Amniotic fluid embolism (50-50-500 anaphylactoid protocol)',
+            regimen: '500 mg IV push. Part of the "50-50-500" anaphylactoid regimen: Diphenhydramine 50 mg IV + Famotidine 50 mg IV (or 20 mg per formulary) + Hydrocortisone 500 mg IV. Older alternative to A-O-K. May also serve as stress-dose corticosteroid coverage during prolonged resuscitation. Adjunct only — not a substitute for ACLS, MTP, or hysterotomy.',
         },
     ],
     contraindications: [
@@ -6086,6 +6180,11 @@ const MILRINONE = {
                 { dosePerKg: 0.5, unit: 'mcg/min', label: 'Maintenance infusion (0.5 mcg/kg/min)' },
             ],
         },
+        {
+            indication: 'Amniotic fluid embolism — RV inodilator',
+            regimen: '**NO loading dose** (drops SBP — never bolus in AFE shock). Start 0.25 mcg/kg/min IV infusion, titrate to 0.75 mcg/kg/min. Reduces PVR while augmenting RV contractility. Pair with norepinephrine or vasopressin to counter systemic vasodilation. Inhaled milrinone 5 mg nebulized is a selective pulmonary vasodilator alternative.',
+            weightCalc: { dosePerKg: 0.375, unit: 'mcg/min', label: 'AFE RV inodilator (no bolus)' },
+        },
     ],
     contraindications: [
         'Severe aortic or pulmonary stenosis (outflow obstruction)',
@@ -6377,6 +6476,10 @@ const TRANEXAMIC_ACID = {
         {
             indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
             regimen: '1 g IV over 10 minutes (infuse at 1 mL/min — faster causes hypotension). Repeat once 30 min later or if bleeding restarts within 24h. MUST be given within 3 hours of delivery/bleeding for benefit (WOMAN trial). WOMAN trial: 20,060 women — reduced death from bleeding when given early (1.5% vs 1.9%, RR 0.81).',
+        },
+        {
+            indication: 'Amniotic fluid embolism — antifibrinolytic',
+            regimen: '1 g IV over 10 min. **Repeat 1 g IV over 10 min at 30 minutes if bleeding continues.** Must be given <3 hours from onset of hemorrhage/AFE — effect diminishes after. AFE coagulopathy has a fibrinolytic component that TXA targets. Do NOT rapid-push — hypotension. WOMAN trial evidence (NNT 267, no thromboembolic increase).',
         },
     ],
     contraindications: [
@@ -7936,6 +8039,10 @@ const CRYOPRECIPITATE = {
             indication: 'tPA reversal',
             regimen: '10 units initially (with TXA). Target fibrinogen >150-200 mg/dL. Each 10 units raises fibrinogen ~50 mg/dL.',
         },
+        {
+            indication: 'Amniotic fluid embolism — obstetric DIC',
+            regimen: '10 units (two 5-unit pools) initially. Target fibrinogen **≥150-200 mg/dL** — obstetric DIC threshold is higher than trauma (<200 predicts ongoing hemorrhage — Charbit 2007). Each 10 units raises fibrinogen ~50-100 mg/dL. Repeat q30-60 min guided by TEG/ROTEM (FIBTEM A5 <12 mm = give fibrinogen) or fibrinogen level. Fibrinogen concentrate 2-4 g IV is faster and volume-sparing if available.',
+        },
     ],
     contraindications: ['IgA deficiency with anti-IgA antibodies (anaphylaxis risk)'],
     cautions: [
@@ -8235,6 +8342,11 @@ const NOREPINEPHRINE = {
         {
             indication: 'Post-cardiac arrest hemodynamic support',
             regimen: '0.1-0.5 mcg/kg/min IV infusion. First-line vasopressor post-ROSC. Target MAP ≥65 mmHg (some guidelines ≥70). Preferred over epinephrine infusion post-arrest (less tachyarrhythmia risk). Add vasopressin 0.04 units/min for refractory hypotension.',
+        },
+        {
+            indication: 'Amniotic fluid embolism — first-line pressor',
+            regimen: '0.05-0.5 mcg/kg/min IV infusion. **First-choice vasopressor in AFE shock.** Alpha > beta activity supports RV coronary perfusion without excessive pulmonary vasoconstriction. Titrate to MAP ≥65. Add vasopressin 0.04 units/min early rather than escalating to high NE doses. Limit crystalloid — RV failure physiology.',
+            weightCalc: { dosePerKg: 0.1, unit: 'mcg/min', label: 'AFE shock (0.1 mcg/kg/min)' },
         },
     ],
     contraindications: [
@@ -9235,6 +9347,7 @@ export const ALL_DRUGS = [
     CALCIUM_GLUCONATE_GEL,
     CAPLACIZUMAB,
     CAPSAICIN_TOPICAL,
+    CARBOPROST,
     CEFAZOLIN,
     CRYOPRECIPITATE,
     CEFEPIME,
@@ -9334,6 +9447,7 @@ export const ALL_DRUGS = [
     METHYLPREDNISOLONE,
     METHYLPREDNISOLONE_IV,
     METHYLENE_BLUE,
+    METHYLERGONOVINE,
     METOCLOPRAMIDE,
     METOLAZONE,
     METRONIDAZOLE,
@@ -9559,6 +9673,8 @@ const NAME_TO_ID = [
     [/metronidazole|flagyl/i, 'metronidazole'],
     [/methylprednisolone|solu-?medrol|medrol|depo-?medrol/i, 'methylprednisolone'],
     [/methylene.blue/i, 'methylene-blue'],
+    [/methylergonovine|methergine/i, 'methylergonovine'],
+    [/carboprost|hemabate/i, 'carboprost'],
     [/metoprolol|lopressor|toprol/i, 'metoprolol'],
     [/midazolam|versed/i, 'midazolam'],
     [/misoprostol|cytotec/i, 'misoprostol'],

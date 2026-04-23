@@ -214,6 +214,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/precip-delivery.js');
             return { nodes: m.PRECIP_DELIVERY_NODES, entryNodeId: 'precip-start', categoryId: 'ob-gyn', moduleLabels: m.PRECIP_DELIVERY_MODULE_LABELS, citations: m.PRECIP_DELIVERY_CITATIONS, criticalActions: m.PRECIP_DELIVERY_CRITICAL_ACTIONS };
         },
+        'afe': async () => {
+            const m = await import('../data/trees/afe.js');
+            return { nodes: m.AFE_NODES, entryNodeId: 'afe-start', categoryId: 'ob-gyn', moduleLabels: m.AFE_MODULE_LABELS, citations: m.AFE_CITATIONS, criticalActions: m.AFE_CRITICAL_ACTIONS };
+        },
+        'pph': async () => {
+            const m = await import('../data/trees/pph.js');
+            return { nodes: m.PPH_NODES, entryNodeId: 'pph-start', categoryId: 'ob-gyn', moduleLabels: m.PPH_MODULE_LABELS, citations: m.PPH_CITATIONS, criticalActions: m.PPH_CRITICAL_ACTIONS };
+        },
         'breech-delivery': async () => {
             const m = await import('../data/trees/breech-delivery.js');
             return { nodes: m.BREECH_DELIVERY_NODES, entryNodeId: 'breech-start', categoryId: 'ob-gyn', moduleLabels: m.BREECH_DELIVERY_MODULE_LABELS, citations: m.BREECH_DELIVERY_CITATIONS, criticalActions: m.BREECH_DELIVERY_CRITICAL_ACTIONS };

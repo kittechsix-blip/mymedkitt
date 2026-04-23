@@ -56,6 +56,22 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },
     { id: 'oxytocin', label: 'Oxytocin', icon: '\uD83D\uDC89', action: 'jump', target: 'precip-oxytocin' },
   ],
+  'afe': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'afe-steps-summary' },
+    { id: 'criteria', label: 'Criteria', icon: '🩺', action: 'overlay', target: 'afe-criteria' },
+    { id: 'aok', label: 'A-O-K', icon: '💉', action: 'overlay', target: 'afe-aok' },
+    { id: 'mtp', label: 'MTP', icon: '🩸', action: 'overlay', target: 'afe-mtp' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'afe-stop' },
+  ],
+  'pph': [
+    { id: 'summary', label: 'Summary', icon: '📋', action: 'overlay', target: 'pph-steps-summary' },
+    { id: 'four-ts', label: '4 T’s', icon: '🩸', action: 'overlay', target: 'pph-four-ts-info' },
+    { id: 'uterotonics', label: 'Uterotonics', icon: '💉', action: 'overlay', target: 'pph-uterotonic-ladder' },
+    { id: 'bakri', label: 'Bakri', icon: '🎈', action: 'overlay', target: 'pph-bakri-technique' },
+    { id: 'bimanual', label: 'Bimanual', icon: '✋', action: 'jump', target: 'pph-bimanual-compression' },
+    { id: 'shock-idx', label: 'Shock Idx', icon: '📉', action: 'calculator', target: 'shock-index' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'pph-stop' },
+  ],
   'breech-delivery': [
     { id: 'summary', label: 'Summary', icon: '📋', action: 'overlay', target: 'breech-delivery-summary' },
     { id: 'types', label: 'Types', icon: '📖', action: 'overlay', target: 'breech-types-atlas' },

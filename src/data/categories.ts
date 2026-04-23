@@ -1200,6 +1200,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'precip-start',
       },
       {
+        id: 'afe',
+        title: 'Amniotic Fluid Embolism',
+        subtitle: 'Recognition → Resuscitation → Perimortem C/S → A-O-K → DIC/MTP → Post-ROSC',
+        categoryId: 'ob-gyn',
+        version: '1.0',
+        nodeCount: 17,
+        entryNodeId: 'afe-start',
+      },
+      {
         id: 'breech-delivery',
         title: 'Breech Delivery',
         subtitle: 'Recognition → Classification → Vaginal vs C-Section → Maneuvers → Aftercoming Head → Postpartum',
@@ -1261,6 +1270,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 24,
         entryNodeId: 'pep-start',
+      },
+      {
+        id: 'pph',
+        title: 'Postpartum Hemorrhage',
+        subtitle: 'Recognition → Immediate Measures → 4 T’s → Uterotonics → Advanced Interventions → Disposition',
+        categoryId: 'ob-gyn',
+        version: '1.0',
+        nodeCount: 34,
+        entryNodeId: 'pph-start',
       },
       {
         id: 'ohss',

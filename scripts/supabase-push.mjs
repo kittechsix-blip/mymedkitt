@@ -101,6 +101,7 @@ const TREE_REGISTRY = {
   'echo-epss':        { prefix: 'ECHO_EPSS',           entryNodeId: 'epss-start',         categoryId: 'us-rads' },
   'shoulder-dystocia':{ prefix: 'SHOULDER_DYSTOCIA',   entryNodeId: 'sd-start',           categoryId: 'ob-gyn' },
   'precip-delivery':  { prefix: 'PRECIP_DELIVERY',     entryNodeId: 'precip-start',       categoryId: 'ob-gyn' },
+  'afe':              { prefix: 'AFE',                 entryNodeId: 'afe-start',          categoryId: 'ob-gyn' },
   'breech-delivery':  { prefix: 'BREECH_DELIVERY',     entryNodeId: 'breech-start',       categoryId: 'ob-gyn' },
   'cord-emergencies': { prefix: 'CORD_EMERGENCIES',    entryNodeId: 'cord-start',         categoryId: 'ob-gyn' },
   'resuscitative-hysterotomy': { prefix: 'RESUSCITATIVE_HYSTEROTOMY', entryNodeId: 'rh-start', categoryId: 'ob-gyn' },
@@ -267,6 +268,7 @@ const TREE_REGISTRY = {
   'low-back-pain': { prefix: 'LOW_BACK_PAIN', entryNodeId: 'lbp-start', categoryId: 'emergency-medicine' },
   'cricothyrotomy': { prefix: 'CRICOTHYROTOMY', entryNodeId: 'cric-start', categoryId: 'anesthesia-airway' },
   'ear-infection': { prefix: 'EAR_INFECTION', entryNodeId: 'ear-start', categoryId: 'emergency-medicine' },
+  'pph':           { prefix: 'PPH',            entryNodeId: 'pph-start',  categoryId: 'ob-gyn' },
 };
 
 const CROSS_LISTINGS = {
@@ -304,6 +306,7 @@ const CROSS_LISTINGS = {
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
   'cricothyrotomy': [{ categoryId: 'procedures' }],
+  'pph':            [{ categoryId: 'emergency-medicine' }],
 };
 
 const reg = TREE_REGISTRY[consultId];
