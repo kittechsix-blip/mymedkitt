@@ -54,6 +54,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'four-ts', label: '4 T’s', icon: '🩸', action: 'overlay', target: 'pph-four-ts-info' },
         { id: 'uterotonics', label: 'Uterotonics', icon: '💉', action: 'overlay', target: 'pph-uterotonic-ladder' },
         { id: 'bakri', label: 'Bakri', icon: '🎈', action: 'overlay', target: 'pph-bakri-technique' },
+        { id: 'condom-cath', label: 'Condom Cath', icon: '🧰', action: 'overlay', target: 'pph-condom-catheter' },
         { id: 'bimanual', label: 'Bimanual', icon: '✋', action: 'jump', target: 'pph-bimanual-compression' },
         { id: 'shock-idx', label: 'Shock Idx', icon: '📉', action: 'calculator', target: 'shock-index' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'pph-stop' },

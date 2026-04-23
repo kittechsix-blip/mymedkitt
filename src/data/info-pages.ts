@@ -15276,13 +15276,77 @@ const PPH_BAKRI_TECHNIQUE: InfoPage = {
     },
     {
       heading: 'Alternatives if No Bakri Available',
-      body: '• **Foley catheter** (30-60 mL balloon) — less effective but widely available; useful as bridge\n• **Sengstaken-Blakemore / Rüsch balloon** — off-label use; larger volume\n• **Bakri-style condom catheter** — low-resource settings, published efficacy\n• **Uterine packing with gauze** — older technique, largely replaced by balloons',
+      body: '• **[Bakri-style condom catheter (Akhter method)](#/info/pph-condom-catheter)** — MacGyver\'d from a Foley + condom + IV saline; 85–95% success in published series; WHO-endorsed for low-resource and bridge use\n• **Foley catheter alone** (30–60 mL balloon) — widely available; weakest option but useful as immediate bridge while building a condom catheter\n• **Sengstaken-Blakemore / Rüsch / ebb balloon** — larger-volume alternatives; off-label use of esophageal balloons\n• **Uterine packing with gauze** — older technique (rolled gauze soaked in saline ± thrombin), largely replaced by balloons but still valid if nothing else available',
     },
   ],
   citations: [
     { num: 1, text: 'Aibar L, et al. Bakri Balloon for the Management of Postpartum Hemorrhage. Acta Obstet Gynecol Scand. 2013;92(4):465-467.' },
     { num: 2, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. 2017.' },
     { num: 3, text: 'CMQCC Obstetric Hemorrhage Toolkit v3.0. 2022.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// PPH — Condom Catheter (Low-Resource Bakri Alternative)
+// -------------------------------------------------------------------
+
+const PPH_CONDOM_CATHETER: InfoPage = {
+  id: 'pph-condom-catheter',
+  title: 'Condom Catheter — Low-Resource Uterine Tamponade',
+  subtitle: 'Akhter method (Bangladesh, 2003) — when no Bakri is available',
+  sections: [
+    {
+      heading: 'When to Use',
+      body: '**Indications — same as Bakri:**\n• Persistent atonic PPH despite uterotonics + bimanual compression\n• Lower-uterine-segment bleeding (placenta previa site)\n• **Bridge to OR / IR / transfer** when commercial balloon is unavailable or not on formulary\n\n**Settings where this is standard of care:**\n• Low- and middle-income countries (LMIC) — originally published in Bangladesh by Dr. Sayeba Akhter\n• Rural US hospitals without L&D or IR\n• Disaster / austere / field medicine\n• **Any ED where the Bakri is locked in L&D and the patient is bleeding now** — the condom catheter can be assembled at bedside in 2–3 minutes\n\n**Same contraindications as Bakri:** uterine rupture, uterine anomaly preventing placement, active infection, undiagnosed laceration as source.',
+    },
+    {
+      heading: 'Equipment (All Stocked in Any ED)',
+      body: '• **Foley catheter, 16–18 Fr** with **30 mL bulb** (standard bladder catheter — pick the largest your ED stocks)\n• **1 condom** — any latex male condom; unlubricated preferred but any will work. If latex allergy → polyurethane/polyisoprene condom or sterile surgical glove finger as substitute\n• **2–3 lengths of silk suture, umbilical tape, or sterile string** — to tie the condom to the catheter\n• **IV bag of normal saline (500 mL or 1 L)** + standard IV tubing\n• **Three-way stopcock** (optional but helpful — allows clamping without disconnecting)\n• **Ring forceps × 2** (sponge forceps)\n• **Bivalve speculum** (Graves or Sims)\n• **Sterile gloves, lube, Betadine**\n• **Second Foley catheter** for the bladder (always empty the bladder first — Bakri-sized uteri distort bladder anatomy)\n• **Bedside ultrasound** to confirm intrauterine placement (highly desirable but not mandatory)',
+    },
+    {
+      heading: 'Step 1 — Assemble the Device (60–90 seconds)',
+      body: '**1a.** Open the Foley catheter aseptically. Do NOT insert it into the bladder.\n\n**1b.** **Unroll the condom** over the distal tip of the Foley catheter — the condom covers the drainage eyes AND the 30 mL bulb. The Foley should sit entirely inside the condom with only the proximal shaft (with the inflation port and drainage port) exposed.\n\n**1c.** **Tie the open end of the condom** tightly to the catheter shaft **just proximal to the Foley bulb** using 2–3 wraps of silk suture or umbilical tape. Pull tight — leaks here defeat the whole device. A second tie 1 cm proximal to the first adds security.\n\n**1d.** **Test the assembly** on the back table: inflate the Foley bulb with 10 mL of air first, then push 50 mL of saline into the drainage port using a syringe — the condom should expand evenly like a water balloon with no saline escaping at the tie. Deflate before insertion.',
+    },
+    {
+      heading: 'Step 2 — Prepare the Patient',
+      body: '**2a.** Lithotomy position, Betadine prep, sterile drapes.\n\n**2b.** **Empty the bladder** with a second Foley — uterine distension from the balloon will compress the bladder and cause retention if not drained.\n\n**2c.** **Bimanual exam** to confirm the uterus is atonic and to rule out uterine rupture or retained placenta (both are absolute contraindications — tamponading a rupture is lethal, tamponading retained products delays definitive treatment).\n\n**2d.** Insert the **bivalve speculum** and visualize the cervix. Grasp the **anterior cervical lip with ring forceps** to stabilize and straighten the cervical canal.',
+    },
+    {
+      heading: 'Step 3 — Insert the Condom Catheter',
+      body: '**3a.** **Hold the assembled catheter with the second pair of ring forceps** at the distal (condom-covered) end. Guide the condom tip through the cervix into the uterine cavity.\n\n**3b.** **Advance until the condom is entirely above the internal os** — feel for loss of resistance as you pass the internal os. The entire Foley bulb and the condom should sit in the uterine body.\n\n**3c.** **Inflate the Foley bulb with 10 mL of saline** (through the balloon port) — this anchors the catheter and helps prevent the condom from being pushed out.\n\n**3d.** If ultrasound is available, **confirm intrauterine placement** — the balloon should be visible as a fluid-filled structure within the uterine cavity, above the level of the internal os.',
+    },
+    {
+      heading: 'Step 4 — Fill the Condom',
+      body: '**4a.** **Connect IV tubing** from the 500 mL or 1 L NS bag to the **drainage port** of the Foley (not the balloon port). A three-way stopcock between tubing and catheter makes clamping easier.\n\n**4b.** **Hang the saline bag 1–1.5 meters above the patient** or squeeze with both hands to drive flow.\n\n**4c.** **Fill gradually, watching for:**\n• **Hemorrhage slowing or stopping** — the primary endpoint\n• **Firm resistance** against the uterine wall\n• **Return of normal uterine tone** on abdominal palpation\n\n**4d.** **Typical fill volume: 250–500 mL** (range 100–750 mL depending on uterine size — a post-term or twin uterus can take more). **Stop when bleeding stops** or when you feel firm resistance — do not chase an arbitrary volume.\n\n**4e.** **Clamp the drainage port** (three-way stopcock, Kocher clamp, umbilical-cord clamp, or a simple knot in the tubing) to lock in the fill volume.',
+    },
+    {
+      heading: 'Step 5 — Secure and Monitor',
+      body: '**5a.** **Apply gentle downward traction** on the catheter shaft and **tape it to the patient\'s inner thigh** — tension keeps the condom seated against the lower uterine segment.\n\n**5b.** **Pack the vagina** with a sterile gauze roll if the condom appears to be prolapsing through the cervix. A Sims or Deaver retractor supported by vaginal packing also works.\n\n**5c.** **Start or continue [Oxytocin](#/drug/oxytocin/postpartum hemorrhage) 20 units in 1 L NS at 250 mL/hr** — uterotonic support improves tamponade efficacy by adding myometrial contraction.\n\n**5d.** **Prophylactic antibiotics:** ampicillin-sulbactam 3 g IV, cefazolin 2 g IV, or (in resource-limited settings) ampicillin 2 g IV + metronidazole 500 mg IV.\n\n**5e.** **Bladder Foley stays in** throughout the procedure and for the duration of the tamponade.\n\n**5f.** **Monitor:**\n• Continuous vitals, pulse oximetry\n• Visible bleeding from vagina around the catheter or from the tip of the catheter (if drainage port is temporarily unclamped) — >100 mL/hr = tamponade failure → escalate\n• Fundal height — an enlarging fundus means blood is accumulating above the balloon and the tamponade is failing\n• Urine output via the bladder Foley\n• Vaginal packing saturation',
+    },
+    {
+      heading: 'Step 6 — Remove',
+      body: '**6a.** **Leave in place 12–48 hours** — most protocols use **24 hours**. Longer is tolerated in LMIC settings while waiting for transfer.\n\n**6b.** **Before removal:** ensure bleeding has stopped, vitals are stable, fibrinogen and platelets are within safe range, and any coagulopathy has been corrected.\n\n**6c.** **Deflate the condom gradually** — open the clamp and allow saline to drain by gravity over **10–20 minutes** (not all at once — a rapid deflation can trigger rebound bleeding).\n\n**6d.** **Observe for 30 minutes** with the empty catheter still in place — if re-bleeding starts, re-inflate immediately and plan definitive surgical management (B-Lynch, UAE, or hysterectomy).\n\n**6e.** **Deflate the Foley bulb** (remove the 10 mL saline from the balloon port), then **gently remove the entire catheter** with the condom still attached — pull in one piece. Do NOT cut the tie, or you risk leaving the condom in the uterus.\n\n**6f.** **Inspect the removed device** — the condom should be intact. If torn, perform bimanual exam to rule out retained fragment.',
+    },
+    {
+      heading: 'Published Success Rates',
+      body: '• **Akhter 2003** (original description, 23 patients, Bangladesh): **100% hemostasis** in atonic PPH refractory to uterotonics. No hysterectomies in the case series.\n• **Tindell 2012** (systematic review, 13 studies, 369 patients): **pooled success ~92%** for uterine balloon tamponade across commercial and improvised devices — condom catheter outcomes comparable to Bakri.\n• **Rathore 2012** (RCT, 32 patients in India): condom catheter controlled bleeding in **94%** vs. conventional management in 62%.\n• **WHO 2017 Updated PPH Recommendations**: **uterine balloon tamponade (including improvised devices) is recommended** when uterotonics fail and before resorting to surgery.\n\n**Caveat:** Most high-quality evidence is from LMIC cohorts. US and European data are case series. The condom catheter is not FDA-approved as a medical device — it is an off-label, improvised use of approved components.',
+    },
+    {
+      heading: 'Common Pitfalls',
+      body: '**🛑 Leak at the tie** — the single most common failure. Test on the back table before insertion. Use 2–3 ties, not one. If you see saline seeping during fill, stop, deflate, re-tie.\n\n**🛑 Under-filling** — stopping at 100 mL because "that seemed like enough." The endpoint is **bleeding stopped AND firm resistance** — not a number. A term-pregnancy uterus can easily accept 500 mL.\n\n**🛑 Over-filling** — forcing past resistance risks uterine rupture, especially in an already-overdistended atonic uterus. Stop when bleeding stops.\n\n**🛑 Missed uterine rupture** — tamponading a torn uterus is fatal. Always bimanual-exam first; if any suspicion of rupture (shoulder-tip pain, hemoperitoneum on FAST, unstable vitals out of proportion to visible bleeding) → OR, not balloon.\n\n**🛑 Balloon expulsion** — most common in a patulous cervix or after extensive dilation. Use the anterior-cervical-lip ring forceps to keep the cervix closed while filling; pack the vagina with gauze after placement.\n\n**🛑 Forgetting the bladder Foley** — urinary retention from the balloon pressing on the bladder is uncomfortable and masks the urine-output marker you need to gauge shock.\n\n**🛑 No antibiotics** — prolonged intrauterine foreign body + postpartum uterus = endometritis risk. Always cover.\n\n**🛑 Removing too fast** — slow deflation over 10–20 min allows you to catch re-bleeding before the catheter is out and you have to start over.',
+    },
+    {
+      heading: 'If the Condom Catheter Fails',
+      body: 'Failure = >100 mL/hr continued drainage OR unstable vitals despite resuscitation OR rising fundus above the balloon.\n\n**Escalate immediately:**\n• [Massive Transfusion Protocol](#/tree/massive-transfusion) — 1:1:1 + cryoprecipitate if not already running\n• **OR for B-Lynch suture, O\'Leary ligation, or hysterectomy**\n• **Interventional Radiology for uterine artery embolization** if patient is stable enough to transport\n• **Hysterectomy is the definitive answer** — do not delay for fertility preservation if the patient is dying',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Akhter S, Begum MR, Kabir Z, et al. Use of a condom to control massive postpartum hemorrhage. MedGenMed. 2003;5(3):38. PMID: 14600674. https://pubmed.ncbi.nlm.nih.gov/14600674/' },
+    { num: 2, text: 'Tindell K, Garfinkel R, Abu-Haydar E, et al. Uterine balloon tamponade for the treatment of postpartum haemorrhage in resource-poor settings: a systematic review. BJOG. 2013;120(1):5-14. PMID: 22882240.' },
+    { num: 3, text: 'Rathore AM, Gupta S, Manaktala U, Gupta S, Dubey C, Khan M. Uterine tamponade using condom catheter balloon in the management of non-traumatic postpartum hemorrhage. J Obstet Gynaecol Res. 2012;38(9):1162-7. PMID: 22563755.' },
+    { num: 4, text: 'WHO recommendations on prevention and treatment of postpartum haemorrhage. Geneva: World Health Organization; 2012 (updated 2017). https://www.who.int/publications/i/item/9789241548502' },
+    { num: 5, text: 'Maswime S, Buchmann E. A systematic review of maternal near miss and mortality due to postpartum hemorrhage. Int J Gynaecol Obstet. 2017;137(1):1-7. PMID: 28099749.' },
+    { num: 6, text: 'FIGO. Prevention and treatment of postpartum hemorrhage in low-resource settings. Int J Gynaecol Obstet. 2012;117(2):108-18.' },
   ],
 };
 
@@ -16088,6 +16152,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pph-four-ts-info': PPH_FOUR_TS_INFO,
   'pph-uterotonic-ladder': PPH_UTEROTONIC_LADDER,
   'pph-bakri-technique': PPH_BAKRI_TECHNIQUE,
+  'pph-condom-catheter': PPH_CONDOM_CATHETER,
   'pph-accreta': PPH_ACCRETA,
   'pph-discharge': PPH_DISCHARGE,
   'pph-stop': PPH_STOP,
