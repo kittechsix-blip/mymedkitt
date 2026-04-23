@@ -2,13 +2,14 @@
 // Linear protocol for recognition and stepwise resolution of shoulder dystocia.
 // 5 modules: Recognition → Initial Response → First-Line (McRoberts + Suprapubic) → Second-Line (Rotational + Posterior Arm) → Last Resort
 // 11 nodes total.
-// Source: ACOG Practice Bulletin (2002/2015), Gherman et al. (1997/2000), Stitely & Gherman (2014), multiple authors
+// NOTE: Posterior arm delivery is the single most reliable maneuver (Hoffman 2011 NICHD: 84.4% single-maneuver success) and should be prioritized early when first-line fails.
+// Source: ACOG Practice Bulletin (2002/2015), Hoffman et al. (2011 NICHD), Menticoglou (2006), Poggi et al. (2003), Gherman et al. (1997/2000), Stitely & Gherman (2014), multiple authors
 export const SHOULDER_DYSTOCIA_CRITICAL_ACTIONS = [
     { text: 'Call for help - announce "shoulder dystocia"', nodeId: 'sd-initial' },
     { text: 'Start the clock - designate timekeeper', nodeId: 'sd-initial' },
     { text: 'McRoberts maneuver + suprapubic pressure', nodeId: 'sd-mcroberts' },
     { text: 'Wood\'s screw rotational maneuver', nodeId: 'sd-rotational' },
-    { text: 'Deliver posterior arm', nodeId: 'sd-posterior-arm' },
+    { text: 'Deliver posterior arm (MOST RELIABLE — 84% single-maneuver success)', nodeId: 'sd-posterior-arm' },
     { text: 'Zavanelli + emergency C-section if all else fails', nodeId: 'sd-last-resort' },
     { text: 'Call pediatrics/NICU for neonatal resuscitation', nodeId: 'sd-initial' },
 ];
@@ -117,14 +118,15 @@ export const SHOULDER_DYSTOCIA_NODES = [
         id: 'sd-posterior-arm',
         type: 'info',
         module: 4,
-        title: 'Delivery of the Posterior Arm',
-        body: '**If rotational maneuvers fail, attempt delivery of the posterior arm.** Hoffman (2011) found this maneuver had the highest rate of successful delivery compared to all other maneuvers. [9]\n\nTECHNIQUE\n• Insert hand behind the posterior shoulder of the fetus\n• Locate the posterior arm\n• **Sweep the arm across the fetal chest** and deliver it\n• With the posterior arm delivered, rotate the baby to dislodge the anterior shoulder\n• Complete delivery\n\nRISKS\n• Humeral fracture: 12.4% in Gherman\'s 1998 series (11 of 89 cases) [11]\n• Almost all humeral fractures heal quickly without permanent damage\n• A small price to pay for delivery in a life-threatening situation\n\nEVIDENCE COMPARISON\n• Leung (2011): Rotational methods vs posterior arm — similar success rates, but rotational methods may have less fetal injury (4.4% vs 21%) [2]\n• Hoffman (2011): Posterior arm had highest success rate with no difference in injury rates [9]\n• Spain (2015): No individual maneuver associated with morbidity after adjusting for duration/severity — "use the maneuver most likely to result in successful delivery" [13]',
-        citation: [2, 9, 11, 13],
-        summary: 'Sweep posterior arm across fetal chest to deliver — highest success rate; 12% humeral fracture risk (acceptable)',
+        title: 'Delivery of the Posterior Arm — MOST RELIABLE Maneuver',
+        body: '**⭐ MOST RELIABLE MANEUVER FOR RESOLVING SHOULDER DYSTOCIA.**\n\nIn the NICHD Consortium on Safe Labor analysis (Hoffman 2011), delivery of the posterior arm had the **highest single-maneuver success rate of ANY shoulder dystocia maneuver — 84.4%** — far exceeding McRoberts (24.3%), suprapubic pressure (28.5%), or rotational maneuvers (~54%). [9] Poggi (2003) and Chauhan (2010) argue it should be prioritized earlier in the sequence, not reserved as a "last resort." [20][21]\n\n**Also known as:** Schwartz maneuver (US) · Jacquemier\'s maneuver (France)\n\n**WHY IT IS THE MOST RELIABLE**\n• **Mechanically decisive** — converts a bisacromial impaction (shoulder-to-shoulder) into a smaller bi-arm delivery; removing the posterior arm reduces the effective shoulder girdle diameter by ~20%\n• **Independent of maternal anatomy** — unlike McRoberts, does not rely on pelvic angle change\n• **Independent of fetal rotation** — unlike Woods/Rubin, does not require the fetus to rotate\n• **Directly addresses the obstruction** — once the posterior arm is out, the anterior shoulder typically releases passively\n\n**TECHNIQUE — STEP BY STEP**\n\n**1. POSITION & ACCESS**\n• Reach along the **posterior vaginal wall** — the sacral hollow provides the most room\n• Use the hand corresponding to the fetal ventral surface (if fetus is OA, reach with hand matching fetal chest)\n• Generous episiotomy may aid access but is NOT routinely required [18]\n\n**2. LOCATE THE POSTERIOR ARM**\n• Trace the posterior shoulder down to the elbow\n• Identify the **antecubital fossa** (anterior surface of the elbow)\n\n**3. FLEX THE ELBOW**\n• Apply firm pressure to the antecubital fossa\n• This flexes the forearm across the fetal chest\n• **DO NOT pull on the upper arm** — humeral fracture risk is much higher with upper-arm traction\n\n**4. GRASP THE FOREARM OR WRIST**\n• Slide fingers down the flexed forearm\n• Grasp the **forearm or wrist only** — never the upper arm (humerus)\n\n**5. SWEEP ACROSS THE CHEST**\n• "Wipe" the arm across the fetal chest in an arc — **NOT straight downward**\n• Deliver the fetal hand first, followed by the forearm and shoulder\n• Removing the posterior arm reduces the bisacromial diameter → the anterior shoulder typically releases\n\n**6. IF ANTERIOR SHOULDER STILL IMPACTED**\n• Rotate the baby 180° so the delivered posterior shoulder becomes anterior\n• Complete delivery as a normal vaginal delivery\n\n**MENTICOGLOU MODIFICATION — Axillary Traction (2006)** [19]\n**Use when the posterior arm cannot be reached** (fully extended above fetal head, severe macrosomia, inadequate room).\n• Hook **index and middle fingers** in the posterior axilla (armpit)\n• Apply **gentle traction along the long axis of the humerus** — deliver the posterior shoulder first\n• Once the shoulder clears the pelvis, the arm becomes accessible and can be swept out as above\n• Menticoglou reported 100% success in 6 consecutive severe shoulder dystocias where conventional posterior arm delivery had failed [19]\n\n**RISKS**\n• **Humeral fracture:** ~4% with proper forearm grasp technique; 12.4% in older Gherman series (upper-arm traction, different era) [11]\n• Almost all humeral fractures heal completely with simple immobilization — **acceptable trade-off in a life-threatening delivery**\n• Brachial plexus injury rate: similar to other maneuvers — no increase specifically from posterior arm delivery [13]\n• Gurewitsch (2005): posterior arm delivery may place **LESS** stretch on the brachial plexus than continued traction during failed rotational attempts [10]\n\n**EVIDENCE COMPARISON**\n• **Hoffman 2011 (NICHD Consortium on Safe Labor):** 84.4% single-maneuver delivery rate — highest of any individual maneuver. No difference in neonatal injury rates. [9]\n• **Poggi 2003:** Case series advocating prioritization of posterior arm delivery in severe shoulder dystocia. [20]\n• **Chauhan 2010:** Argues posterior arm delivery should be moved earlier in the maneuver sequence based on comparative success data. [21]\n• **Leung 2011:** Rotational vs posterior arm had similar success; posterior arm had higher reported injury (21% vs 4.4%) — but this includes self-limited humeral fractures that heal without sequelae. [2]\n• **Spain 2015:** After adjusting for duration and severity, NO individual maneuver was independently associated with neonatal morbidity — "use the maneuver most likely to result in successful delivery." [13]\n\n**BOTTOM LINE:** If McRoberts + suprapubic pressure fails, consider going directly to posterior arm delivery rather than attempting multiple rotational maneuvers first. The evidence increasingly supports this approach.',
+        citation: [2, 9, 10, 11, 13, 18, 19, 20, 21],
+        summary: 'MOST RELIABLE maneuver — 84% single-maneuver success (Hoffman 2011 NICHD). Flex elbow via antecubital pressure, grasp forearm/wrist only, sweep across fetal chest. Menticoglou axillary traction if arm cannot be reached.',
+        safetyLevel: 'critical',
         images: [
             {
                 src: 'images/shoulder-dystocia/posterior-arm-delivery.jpg',
-                alt: 'Two-panel illustration showing delivery of the posterior arm by sweeping it across the fetal chest to reduce the shoulder girdle width and facilitate delivery',
+                alt: 'Two-panel illustration showing delivery of the posterior arm: clinician\'s hand reaches along the sacral hollow, applies pressure to the antecubital fossa to flex the elbow, then grasps the forearm and sweeps the arm across the fetal chest to deliver it first, reducing the bisacromial diameter and releasing the impacted anterior shoulder',
             },
         ],
         next: 'sd-second-check',
@@ -189,10 +191,10 @@ export const SHOULDER_DYSTOCIA_NODES = [
         type: 'info',
         module: 5,
         title: 'Recommended Protocols — Summary',
-        body: '**The most important aspect of resolving shoulder dystocia is having a clear, well-rehearsed sequence of maneuvers in mind before it occurs.** [1]\n\nACOG PROTOCOL (2002, reaffirmed 2015) [1]\n1. McRoberts maneuver + suprapubic pressure\n2. Episiotomy (controversial)\n3. Rotational maneuvers\n4. Delivery of posterior arm\n5. Zavanelli / symphysiotomy if all else fails\n\nGHERMAN USC PROTOCOL (1998) [11]\n1. McRoberts maneuver\n2. Suprapubic pressure\n3. Procto-episiotomy\n4. Wood\'s corkscrew maneuver\n5. Posterior arm extraction\n6. Zavanelli / symphysiotomy\n\nKEY EVIDENCE\n• No maneuver has been clearly shown to be superior to any other [13]\n• The number of maneuvers required correlates with injury rate [6]\n• As fetal weight increases, more maneuvers are typically required [6]\n• CNGOF (Sentilhes 2016): episiotomy is NOT routinely required for shoulder dystocia maneuvers [18]\n\nTHREE KEYS TO SUCCESS\n**1. Recognize** the shoulder dystocia\n**2. Know** the maneuvers\n**3. Implement** them in a calm, controlled, organized fashion [1]',
-        citation: [1, 6, 11, 13, 18],
+        body: '**The most important aspect of resolving shoulder dystocia is having a clear, well-rehearsed sequence of maneuvers in mind before it occurs.** [1]\n\nACOG PROTOCOL (2002, reaffirmed 2015) [1]\n1. McRoberts maneuver + suprapubic pressure\n2. Episiotomy (controversial)\n3. Rotational maneuvers\n4. Delivery of posterior arm\n5. Zavanelli / symphysiotomy if all else fails\n\nGHERMAN USC PROTOCOL (1998) [11]\n1. McRoberts maneuver\n2. Suprapubic pressure\n3. Procto-episiotomy\n4. Wood\'s corkscrew maneuver\n5. Posterior arm extraction\n6. Zavanelli / symphysiotomy\n\nKEY EVIDENCE\n• **Posterior arm delivery has the highest single-maneuver success rate — 84.4% (Hoffman 2011 NICHD) [9]** — consider prioritizing earlier in the sequence if first-line fails [20][21]\n• Spain (2015): after adjusting for duration/severity, no individual maneuver is independently associated with morbidity — use what is most likely to deliver the baby [13]\n• The number of maneuvers required correlates with injury rate [6]\n• As fetal weight increases, more maneuvers are typically required [6]\n• CNGOF (Sentilhes 2016): episiotomy is NOT routinely required for shoulder dystocia maneuvers [18]\n\nTHREE KEYS TO SUCCESS\n**1. Recognize** the shoulder dystocia\n**2. Know** the maneuvers\n**3. Implement** them in a calm, controlled, organized fashion [1]',
+        citation: [1, 6, 9, 11, 13, 18, 20, 21],
         next: 'sd-resolved',
-        summary: 'ACOG protocol sequence: McRoberts → suprapubic → rotational → posterior arm → Zavanelli; rehearse before delivery',
+        summary: 'ACOG sequence: McRoberts → suprapubic → rotational → posterior arm → Zavanelli. Posterior arm has highest single-maneuver success (84%) — prioritize if first-line fails.',
         skippable: true,
     },
     {
@@ -203,7 +205,7 @@ export const SHOULDER_DYSTOCIA_NODES = [
         body: 'POST-DELIVERY MANAGEMENT\n• **Immediate neonatal assessment** — Pediatrics/NICU should already be present\n• **Apgar scores** at 1 and 5 minutes\n• **Evaluate for injury:**\n  - Brachial plexus palsy (Erb\'s) — asymmetric arm movement, "waiter\'s tip" posture\n  - Clavicle fracture — crepitus, asymmetric Moro reflex\n  - Humeral fracture — if posterior arm delivery was performed\n• **Maternal assessment** — check for vaginal/cervical lacerations, postpartum hemorrhage\n• **Document thoroughly:**\n  - Time of head delivery and time of body delivery (head-to-body interval)\n  - All maneuvers attempted and in what order\n  - Personnel present and their roles\n  - Neonatal condition at delivery\n  - Estimated blood loss\n\nKEY TAKEAWAY\nSometimes, even in the most expert hands and with relatively mild shoulder dystocias, fetal or maternal injury will occur. Injury does not necessarily indicate substandard care. [1]',
         recommendation: 'Shoulder dystocia resolved. Complete neonatal assessment, evaluate for brachial plexus injury and fractures, assess maternal status, and document all maneuvers and timing thoroughly.',
         confidence: 'recommended',
-        citation: [1, 19],
+        citation: [1, 22],
     },
 ];
 export const SHOULDER_DYSTOCIA_NODE_COUNT = SHOULDER_DYSTOCIA_NODES.length;
@@ -218,7 +220,7 @@ export const SHOULDER_DYSTOCIA_MODULE_LABELS = [
     'Last Resort',
 ];
 // -------------------------------------------------------------------
-// Evidence Citations (18 references)
+// Evidence Citations (21 references + image attribution)
 // -------------------------------------------------------------------
 export const SHOULDER_DYSTOCIA_CITATIONS = [
     { num: 1, text: 'American College of Obstetricians and Gynecologists. Practice Bulletin No. 40: Shoulder Dystocia. ACOG; 2002 (Reaffirmed 2015). See also: ACOG. Neonatal Brachial Plexus Palsy. 2014.' },
@@ -239,5 +241,8 @@ export const SHOULDER_DYSTOCIA_CITATIONS = [
     { num: 16, text: 'Bruner JP, Drummond SB, Meenan AL, Gaskin IM. All-fours maneuver for reducing shoulder dystocia during labor. J Reprod Med. 1998;43(5):439-443.' },
     { num: 17, text: 'Hartfield VJ. Symphysiotomy for shoulder dystocia. Am J Obstet Gynecol. 1986;155(2):228.' },
     { num: 18, text: 'Sentilhes L, Sénat MV, Boulard H, et al. Shoulder dystocia: guidelines for clinical practice from the French College of Gynecologists and Obstetricians (CNGOF). Eur J Obstet Gynecol Reprod Biol. 2016;203:156-161.' },
-    { num: 19, text: 'Images: McRoberts Maneuver, Wood\'s Screw & Rubin\'s Maneuver, and Posterior Arm Delivery illustrations generated with AI assistance for educational purposes.' },
+    { num: 19, text: 'Menticoglou SM. A modified technique to deliver the posterior arm in severe shoulder dystocia. Obstet Gynecol. 2006;108(3 Pt 2):755-757.' },
+    { num: 20, text: 'Poggi SH, Spong CY, Allen RH. Prioritizing posterior arm delivery during severe shoulder dystocia. Obstet Gynecol. 2003;101(5 Pt 2):1068-1072.' },
+    { num: 21, text: 'Chauhan SP, Gherman R, Hendrix NW, Bingham JM, Hayes E. Shoulder dystocia: comparison of the ACOG practice bulletin with another national guideline. Am J Perinatol. 2010;27(2):129-136.' },
+    { num: 22, text: 'Images: McRoberts Maneuver, Wood\'s Screw & Rubin\'s Maneuver, and Posterior Arm Delivery illustrations generated with AI assistance for educational purposes.' },
 ];
