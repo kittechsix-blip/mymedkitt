@@ -14992,6 +14992,286 @@ const AFE_STOP = {
     ],
     citations: [],
 };
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — Steps Summary
+// -------------------------------------------------------------------
+const HTNP_STEPS_SUMMARY = {
+    id: 'htnp-steps-summary',
+    title: 'HTN in Pregnancy — Steps Summary',
+    subtitle: 'Full spectrum: chronic, gestational, preeclampsia, HELLP, postpartum',
+    sections: [
+        {
+            body: '**Active seizure? → [Eclampsia consult](#/tree/eclampsia) (separate tree, not this one).** This summary covers everything else.',
+        },
+        {
+            heading: '0–5 min — Recognize & Triage',
+            body: '• [Classify BP: non-severe (140–159/90–109) vs severe-range (≥160/110)](#/node/htnp-definitions)\n• [Screen for severe features: plt<100K, LFTs>2×, Cr>1.1, pulm edema, new HA/visual](#/node/htnp-severe-features)\n• [Route by presentation: active seizure, severe-range BP, non-severe, postpartum, ASA question](#/node/htnp-presentation-branch)',
+        },
+        {
+            heading: '5–30 min — Severe-Range BP (≥160/110)',
+            body: '• [Treat within 30–60 min — stroke, not seizure, is the leading cause of maternal death](#/node/htnp-severe-acute)\n• [Target 140–150 / 90–100 (not "normal") — do not drop MAP >25% in 1 h](#/node/htnp-severe-acute)\n• [Choose: IV labetalol, IV hydralazine, or PO nifedipine IR](#/node/htnp-severe-choose)\n• [Labetalol ACOG ladder: 20 → 40 → 80 → 80 mg IV q10min, max 300 mg](#/node/htnp-severe-labetalol)\n• [Hydralazine ladder: 5–10 → 10 mg IV q20min, max 30 mg](#/node/htnp-severe-hydralazine)\n• [Nifedipine IR: 10 → 20 → 20 mg PO q20min, max 50 mg. NEVER sublingual](#/node/htnp-severe-nifedipine)',
+        },
+        {
+            heading: '15–60 min — Workup',
+            body: '• [Labs: CBC + smear, Cr, AST/ALT, LDH, uric acid, UA + spot protein/Cr, T&S, coags if HELLP](#/node/htnp-workup)\n• [Fetal: continuous EFM, growth + AFI + UA Doppler US as indicated](#/node/htnp-fetal)\n• [Classify: chronic, gestational, preeclampsia ± severe, superimposed, or HELLP](#/node/htnp-classify)',
+        },
+        {
+            heading: 'Ongoing — Preeclampsia w/ Severe Features',
+            body: '• [Admit L&D, control BP, start magnesium prophylaxis](#/node/htnp-pe-severe)\n• [Magnesium: 4–6 g IV load, 1–2 g/hr × 24 h postpartum. DTRs, RR, UOP, Mg level q6h](#/node/htnp-mag-prophylaxis)\n• [Antidote for Mg toxicity: calcium gluconate 1 g IV over 3–5 min](#/drug/calcium-gluconate/magnesium toxicity)\n• [Betamethasone 12 mg IM q24h × 2 if 23–34 wk with delivery expected <7 d](#/node/htnp-fetal)',
+        },
+        {
+            heading: 'HELLP Recognition',
+            body: '• [LDH>600, AST/ALT >2× ULN, platelets <100K. 15–20% without HTN/proteinuria](#/node/htnp-hellp)\n• [Image if severe RUQ + dropping Hgb — rule out subcapsular hematoma](#/node/htnp-hellp)\n• [Mgmt: BP + mag + platelets <20K (or <50K if bleeding/cesarean) + cryo if fibrinogen <100–150 + delivery](#/node/htnp-hellp-mgmt)',
+        },
+        {
+            heading: 'Delivery Timing',
+            body: '• [Chronic HTN stable: 38–39 wk. Gestational HTN or PE no-severe: 37 wk](#/node/htnp-delivery-timing)\n• [PE with severe features: 34 wk (earlier if unstable)](#/node/htnp-delivery-timing)\n• [HELLP: after stabilization — GA irrelevant if maternal deterioration](#/node/htnp-delivery-timing)\n• [Vaginal delivery acceptable; cesarean not mandatory](#/node/htnp-delivery-timing)',
+        },
+        {
+            heading: 'Postpartum',
+            body: '• [BP peaks 3–6 d postpartum. 55% postpartum PE has no antepartum PE. Risk to 6 wk](#/node/htnp-postpartum)\n• [Same acute-BP agents; ACE-i acceptable postpartum + breastfeeding (not in pregnancy)](#/node/htnp-postpartum)\n• [Every discharge: BP log, recheck 3–7 d, return precautions](#/node/htnp-discharge)',
+        },
+        {
+            heading: 'Future-Pregnancy Prophylaxis',
+            body: '• [Aspirin 81 mg PO daily 12–28 wk (ideally <16 wk) → cuts preeclampsia ~15%](#/node/htnp-asa-prophylaxis)\n• [Indicated: ≥1 high-risk factor or ≥2 moderate-risk factors — counsel every prior-PE patient](#/node/htnp-asa-prophylaxis)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-e260.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy. Obstet Gynecol. 2019;133(2):e174-e180.' },
+        { num: 3, text: 'Tita AT, et al. CHAP Trial. NEJM. 2022;386(19):1781-1792.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — Stop (Do NOT) Page
+// -------------------------------------------------------------------
+const HTNP_STOP = {
+    id: 'htnp-stop',
+    title: 'HTN in Pregnancy — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT give ACE inhibitors or ARBs in pregnancy',
+            body: '**ACE inhibitors, ARBs, and direct renin inhibitors are teratogenic across all trimesters** — cause renal dysgenesis, oligohydramnios, skull ossification defects, IUGR, and neonatal renal failure. If a patient with chronic HTN conceives on lisinopril/losartan, switch immediately. ACE-i are acceptable **postpartum** and compatible with breastfeeding (different from pregnancy rule). [See chronic HTN node](#/node/htnp-chronic).',
+        },
+        {
+            heading: '🛑 Do NOT give sublingual nifedipine',
+            body: '**Sublingual nifedipine is contraindicated** — unpredictable absorption produces severe, sudden hypotension with documented strokes and fetal distress. ACOG specifies oral capsules **swallowed intact**. [See nifedipine protocol](#/node/htnp-severe-nifedipine).',
+        },
+        {
+            heading: '🛑 Do NOT require proteinuria to diagnose severe preeclampsia',
+            body: '**~25% of severe preeclampsia presents WITHOUT proteinuria.** ACOG 2013 removed proteinuria from severity grading. Diagnose on severe features (BP ≥160/110, platelets <100K, LFTs >2×, Cr >1.1, pulm edema, new HA/visual) **regardless of urine protein**. Waiting for proteinuria delays magnesium and delivery. [See severe features](#/node/htnp-severe-features).',
+        },
+        {
+            heading: '🛑 Do NOT delay severe-range BP treatment waiting for "definitive" diagnosis',
+            body: '**SBP ≥160 or DBP ≥110 sustained ≥15 min = treat now.** Stroke is the leading cause of maternal death from preeclampsia — not seizure. Treat within 30–60 min even if classification is unclear. BP control is a bridge to delivery, not definitive treatment. [See severe-range BP](#/node/htnp-severe-acute).',
+        },
+        {
+            heading: '🛑 Do NOT drop MAP >25% in the first hour',
+            body: 'Abrupt BP lowering in preeclampsia causes **uteroplacental hypoperfusion** → fetal distress, abruption, maternal stroke from relative hypoperfusion. Target **140–150 / 90–100** (not "normal"). If BP drops below 140/90, stop the agent, place left lateral, 250–500 mL NS bolus, continuous fetal monitoring. [See BP goals](#/node/htnp-severe-acute).',
+        },
+        {
+            heading: '🛑 Do NOT give magnesium for mild preeclampsia',
+            body: '**Magnesium is for preeclampsia with SEVERE features** (and for active eclamptic seizures). Routine magnesium in preeclampsia without severe features adds toxicity risk without clear benefit. If severe features develop or active labor ensues, start mag then. [See mag indication](#/node/htnp-mag-prophylaxis).',
+        },
+        {
+            heading: '🛑 Do NOT ignore loss of DTRs on magnesium',
+            body: '**Loss of deep tendon reflexes is the first clinical sign of magnesium toxicity** (Mg ~9–12 mg/dL). Next is respiratory depression (12–15), then arrest (>15). Hold the infusion, send a Mg level, support ventilation, and give [calcium gluconate](#/drug/calcium-gluconate/magnesium toxicity) **1 g (10 mL of 10%) IV over 3–5 min** as antidote. [See toxicity ladder](#/node/htnp-mag-prophylaxis).',
+        },
+        {
+            heading: '🛑 Do NOT give methylergonovine (Methergine) in HTN/preeclampsia',
+            body: '**Methergine causes severe vasoconstriction** and has triggered fatal hypertensive emergencies, MI, and CVA in preeclamptic patients. **Absolute contraindication** in HTN, preeclampsia, eclampsia, HELLP. Use misoprostol for postpartum atony instead; carboprost is also acceptable if no asthma. [See methylergonovine entry](#/drug/methylergonovine/postpartum hemorrhage).',
+        },
+        {
+            heading: '🛑 Do NOT discharge postpartum preeclampsia without a 3–7 day BP plan',
+            body: 'Most maternal deaths from preeclampsia occur **postpartum**. BP peaks at **3–6 days** post-delivery. 55% of postpartum preeclampsia occurs in patients who did NOT have antepartum preeclampsia. Every HTN-in-pregnancy discharge needs: BP log, cuff, recheck at 3–7 days, and written return precautions. [See postpartum](#/node/htnp-postpartum).',
+        },
+        {
+            heading: '🛑 Do NOT miss HELLP without hypertension',
+            body: '**15–20% of HELLP presents without hypertension or proteinuria.** Any pregnant patient with RUQ/epigastric pain + N/V + malaise deserves platelets, AST/ALT, and LDH — don\'t wait for BP to rise. Mortality from missed HELLP (especially hepatic subcapsular hematoma) is catastrophic. [See HELLP](#/node/htnp-hellp).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. 2020.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy. 2019.' },
+        { num: 3, text: 'Martin JN Jr, et al. Stroke and severe preeclampsia: SBP paradigm shift. Obstet Gynecol. 2005;105(2):246-254.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — HELLP Criteria
+// -------------------------------------------------------------------
+const HTNP_HELLP_CRITERIA = {
+    id: 'htnp-hellp-criteria',
+    title: 'HELLP Criteria',
+    subtitle: 'Tennessee + Mississippi classifications',
+    sections: [
+        {
+            heading: 'Tennessee Classification (Diagnosis)',
+            body: '**ALL THREE components required for complete HELLP:**\n\n• **H**emolysis — LDH >600 IU/L, schistocytes on peripheral smear, indirect bilirubin elevated\n• **E**levated **L**iver enzymes — AST or ALT >2× upper limit of normal\n• **L**ow **P**latelets — <100,000/µL\n\n**Partial HELLP** = 1 or 2 of the above. Still dangerous — treat as high-risk preeclampsia with severe features.',
+        },
+        {
+            heading: 'Mississippi Classification (Severity)',
+            body: '**Class I (most severe)**\n• Platelets <50,000/µL\n• AST/ALT >70 IU/L\n• LDH >600 IU/L\n• Highest maternal morbidity and mortality\n\n**Class II**\n• Platelets 50,000–100,000/µL\n• AST/ALT >70\n• LDH >600\n\n**Class III (least severe)**\n• Platelets 100,000–150,000/µL\n• AST/ALT >40\n• LDH >600',
+        },
+        {
+            heading: 'Clinical Features',
+            body: '• **RUQ or epigastric pain** — 65–90%\n• **Nausea and vomiting** — 30–80%\n• **Headache** — 30–60%\n• **Malaise preceding abdominal symptoms** — often the earliest sign\n• **BP may be normal or minimally elevated** in 15–20%\n• **Proteinuria may be absent** — do not require for diagnosis',
+        },
+        {
+            heading: 'Complications',
+            body: '• **Hepatic subcapsular hematoma / rupture** — rare but catastrophic (mortality 60–80%). Consider imaging if severe RUQ pain + dropping Hgb.\n• **DIC** — 15–20%\n• **Placental abruption** — 15–20%\n• **Acute kidney injury** — 5–10%\n• **Pulmonary edema** — 5–10%\n• **ARDS, cerebral edema, intracranial hemorrhage** — rarer but cause most mortality',
+        },
+        {
+            heading: 'Differential Diagnosis',
+            body: '**Must be distinguished from:**\n• **AFLP** (acute fatty liver of pregnancy) — glucose <60, ammonia elevated, prolonged PT often out of proportion to platelet drop\n• **TTP/HUS** — MAHA + thrombocytopenia + AKI + neurologic sx + fever; ADAMTS13 <10% in TTP\n• **Viral hepatitis** — viral serologies\n• **Cholestasis of pregnancy** — pruritus + bile acids, normal platelets/LDH\n• **Lupus flare** — ANA/dsDNA, complement',
+        },
+        {
+            heading: 'Management Summary',
+            body: '• Same BP control as severe preeclampsia\n• [Magnesium](#/drug/magnesium-sulfate/eclampsia) 4–6 g IV load, 1–2 g/hr × 24 h postpartum\n• Labs q4–6 h in acute phase\n• **Platelets** if <20K regardless, or <50K if bleeding/cesarean planned\n• **Cryoprecipitate** if fibrinogen <100–150\n• **Delivery is the only definitive treatment** (after stabilization)\n• Labs nadir 24–48 h postpartum — expect platelets to drop further after delivery before recovering\n• 20–30% of HELLP presents postpartum — maintain suspicion up to 7 days after delivery',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Haram K, Svendsen E, Abildgaard U. The HELLP syndrome: clinical issues and management. A review. BMC Pregnancy Childbirth. 2009;9:8.' },
+        { num: 2, text: 'Sibai BM. Diagnosis, controversies, and management of the syndrome of hemolysis, elevated liver enzymes, and low platelet count. Obstet Gynecol. 2004;103(5 Pt 1):981-991.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — Classification Table
+// -------------------------------------------------------------------
+const HTNP_CLASSIFICATION = {
+    id: 'htnp-classification',
+    title: 'HTN in Pregnancy — Classification',
+    subtitle: 'The full spectrum — ACOG 2020',
+    sections: [
+        {
+            heading: 'Chronic Hypertension',
+            body: '• Pre-existing HTN **before pregnancy**, OR\n• New HTN **<20 weeks**, OR\n• Persists **>12 weeks postpartum**\n\n**Management:** Target <140/90 (CHAP trial). First-line: labetalol, nifedipine XL, methyldopa. Start aspirin 81 mg 12–28 wk (high-risk indication). Delivery at 38–39 wk if well-controlled.',
+        },
+        {
+            heading: 'Gestational Hypertension',
+            body: '• New HTN **≥20 weeks**\n• **No proteinuria, no end-organ dysfunction**\n• Should resolve by 12 weeks postpartum (otherwise reclassify as chronic HTN)\n\n**Management:** 2×/week BP checks, weekly labs, twice-weekly fetal NSTs. **15–25% progress to preeclampsia.** Deliver at 37 wk if stable.',
+        },
+        {
+            heading: 'Preeclampsia — No Severe Features',
+            body: '• HTN ≥20 wk **PLUS** one of:\n  - Proteinuria ≥300 mg/24 h or protein/Cr ≥0.3 or dipstick ≥2+\n  - End-organ dysfunction below severe thresholds\n• **BP <160/110, platelets ≥100K, LFTs <2× ULN, Cr ≤1.1, no pulm edema, no new CNS sx**\n\n**Management:** Admit for initial evaluation. Serial labs and fetal surveillance. Magnesium NOT routine. Deliver at 37 wk.',
+        },
+        {
+            heading: 'Preeclampsia — Severe Features',
+            body: '**Any ONE feature defines severe:**\n• **BP ≥160 SBP or ≥110 DBP** on 2 readings ≥4 h apart\n• **Platelets <100,000/µL**\n• **AST or ALT >2× upper limit of normal**\n• **Severe persistent RUQ / epigastric pain** unresponsive to meds\n• **Serum Cr >1.1 mg/dL** or doubling of baseline\n• **Pulmonary edema**\n• **New-onset severe headache** unresponsive to meds\n• **New visual disturbances** (scotomata, photopsia, blurring)\n\n**Removed as severe features (2013):** IUGR, amount of proteinuria.\n\n**Management:** Admit L&D, control BP, magnesium, expedite delivery. Delivery at 34 wk (earlier if unstable).',
+        },
+        {
+            heading: 'Superimposed Preeclampsia',
+            body: '**Chronic HTN PLUS any of:**\n• New proteinuria (or worsening baseline proteinuria)\n• Sudden BP worsening requiring higher doses\n• Thrombocytopenia, elevated LFTs, renal insufficiency, pulm edema, new CNS sx (any severe feature)\n\n**Highest-risk subgroup.** Management follows preeclampsia ± severe features rules. Deliver at 37 wk if no severe features, 34 wk if severe features.',
+        },
+        {
+            heading: 'HELLP Syndrome',
+            body: 'See [HELLP Criteria](#/info/htnp-hellp-criteria) — Hemolysis + Elevated LFTs + Low Platelets. 10–20% of preeclampsia; **15–20% present without HTN or proteinuria**. Delivery after stabilization regardless of GA if maternal deterioration.',
+        },
+        {
+            heading: 'Postpartum Hypertension',
+            body: '**New or persistent HTN up to 6 weeks postpartum.** BP peaks 3–6 days post-delivery. 55% of postpartum preeclampsia has no antepartum PE. Same acute treatment; ACE-i acceptable postpartum and in breastfeeding.',
+        },
+        {
+            heading: 'Eclampsia',
+            body: 'Generalized tonic-clonic seizure in a preeclampsia patient. **Not managed in this tree** — see the dedicated [Eclampsia consult](#/tree/eclampsia).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. 2020.' },
+        { num: 2, text: 'ACOG Practice Bulletin No. 203: Chronic Hypertension in Pregnancy. 2019.' },
+        { num: 3, text: 'Tita AT, et al. CHAP Trial. NEJM. 2022;386(19):1781-1792.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — Aspirin Prophylaxis Guide
+// -------------------------------------------------------------------
+const HTNP_ASA_GUIDE = {
+    id: 'htnp-asa-guide',
+    title: 'Aspirin Prophylaxis — Future Pregnancy',
+    subtitle: 'USPSTF + ACOG 2021',
+    sections: [
+        {
+            heading: 'Dose & Timing',
+            body: '• **[Aspirin](#/drug/aspirin/preeclampsia prophylaxis) 81 mg PO daily**\n• Start **12–28 weeks gestation** — ideally **<16 weeks** for maximum benefit\n• Continue **until delivery**\n• No loading dose, no higher dose — 81 mg is the evidence-based target',
+        },
+        {
+            heading: 'Benefit',
+            body: '• Reduces preeclampsia by **~15%** (RR 0.85)\n• Reduces preterm birth by **~10%**\n• Reduces IUGR ~10%\n• **No increase** in placental abruption, PPH, or fetal bleeding at 81 mg\n• **ASPRE trial (NEJM 2017):** 150 mg daily reduced preterm preeclampsia 62% in high-risk screened patients — but 81 mg is the US standard per USPSTF',
+        },
+        {
+            heading: 'High-Risk Indications (≥1 = prescribe)',
+            body: '• **History of preeclampsia** — especially early-onset (<34 wk) or severe\n• **Multifetal gestation**\n• **Chronic hypertension**\n• **Type 1 or 2 diabetes mellitus**\n• **Chronic kidney disease**\n• **Autoimmune disease** (SLE, antiphospholipid syndrome)',
+        },
+        {
+            heading: 'Moderate-Risk Indications (≥2 = prescribe)',
+            body: '• **Nulliparity** (first pregnancy)\n• **Obesity** (BMI >30)\n• **Family history** of preeclampsia (mother, sister)\n• **Sociodemographic** — low income, Black race, age ≥35\n• **Prior poor obstetric outcome** — SGA infant, stillbirth, placental abruption\n• **Interpregnancy interval >10 years**',
+        },
+        {
+            heading: 'Low-Risk — No Aspirin',
+            body: 'Healthy nulliparous or multiparous patients without any high- or moderate-risk factor do NOT need aspirin prophylaxis. Universal prophylaxis has not shown benefit and adds cost/pill burden without evidence.',
+        },
+        {
+            heading: 'ED / Clinic Script',
+            body: '**When you see any patient in the ED or clinic with a history of preeclampsia, HELLP, or eclampsia:**\n\n> "For your next pregnancy, ask your OB about starting low-dose aspirin at 12 weeks. Research shows it cuts the risk of this happening again by about 15%. It is safe and cheap — just 81 mg, the baby-aspirin dose."\n\nDocument the recommendation and the OB referral in the discharge summary.',
+        },
+        {
+            heading: 'Calcium Supplementation',
+            body: '**Consider 1–2 g/day calcium** in populations with low dietary intake (<600 mg/day). Meta-analyses show modest additional reduction in preeclampsia in low-calcium diets but minimal benefit in replete populations. Not a substitute for aspirin.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'US Preventive Services Task Force. Aspirin Use to Prevent Preeclampsia. JAMA. 2021;326(12):1186-1191.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 743: Low-Dose Aspirin Use During Pregnancy. Obstet Gynecol. 2018;132(1):e44-e52.' },
+        { num: 3, text: 'Rolnik DL, et al. ASPRE Trial. NEJM. 2017;377(7):613-622.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hypertension in Pregnancy — Patient Discharge Handout
+// -------------------------------------------------------------------
+const HTNP_DISCHARGE_PATIENT = {
+    id: 'htnp-discharge-patient',
+    title: 'High Blood Pressure in Pregnancy',
+    subtitle: 'What you need to know before you go home',
+    sections: [
+        {
+            body: 'High blood pressure (hypertension) during pregnancy and after delivery can be serious — but with careful follow-up, most patients do well. This sheet covers what to watch for, when to come back, and how to take care of yourself.',
+        },
+        {
+            heading: 'Your Blood Pressure Plan',
+            body: '• **Check your BP at home every day** with a properly sized cuff, seated, arm at heart level, after resting 5 minutes.\n• **Log every reading** — bring the log to every visit.\n• **Goal:** top number (SBP) under 140, bottom number (DBP) under 90.\n• **Follow-up appointment in 3–7 days** with your OB — this is critical, not optional.\n• **6-week postpartum visit** — bring your BP log and current meds.',
+        },
+        {
+            heading: 'Your Medications',
+            body: 'If you were started on a blood pressure medication:\n\n• **Take it exactly as prescribed** — do not skip doses.\n• **Do NOT stop suddenly** — even if your BP is normal. Call your OB before any change.\n• Common pregnancy-safe options: **labetalol**, **nifedipine XL**, **methyldopa** (in pregnancy); **labetalol**, **nifedipine XL**, **enalapril** (after delivery).\n• If breastfeeding: labetalol, nifedipine, and enalapril are all compatible.',
+        },
+        {
+            heading: 'Come Back IMMEDIATELY For',
+            body: '• **Blood pressure at home ≥160 systolic (top) OR ≥110 diastolic (bottom)** on 2 readings 15 min apart\n• **Severe headache** that does not get better with acetaminophen\n• **Vision changes** — blurry vision, seeing spots, flashes of light, or loss of vision\n• **Severe pain in the upper-right belly or center chest/upper abdomen** — this can signal liver involvement (HELLP)\n• **Shortness of breath, trouble lying flat** — possible fluid in the lungs\n• **Seizure** — call 911 immediately\n• **Less fetal movement** (if still pregnant)\n• **Heavy vaginal bleeding**\n• **Swelling in the face or hands** with rapid weight gain',
+        },
+        {
+            heading: 'After Delivery — Stay Alert',
+            body: 'Most serious problems from preeclampsia actually happen **after** delivery, not before. Your BP can peak **3–6 days postpartum** — even if it was controlled in the hospital. The risk continues for **6 weeks** after delivery.\n\nIf you feel a severe headache, see spots, have upper-belly pain, or feel short of breath any time in the first 6 weeks, go to the ER — do not wait until your OB visit.',
+        },
+        {
+            heading: 'Your Next Pregnancy',
+            body: 'If you had preeclampsia, HELLP, or eclampsia, **your next pregnancy has a higher risk of the same problem**. Good news: a simple, safe medication can help.\n\n**Low-dose aspirin (81 mg — baby aspirin) once a day, starting at 12 weeks, reduces your risk by about 15%.** Ask your OB about it at your first prenatal visit in any future pregnancy.',
+        },
+        {
+            heading: 'Long-Term Health',
+            body: 'Preeclampsia is a marker of elevated lifetime risk for high blood pressure, heart attack, and stroke. Please:\n• Have your primary care doctor check your BP at least yearly\n• Maintain a healthy weight, exercise regularly, eat a balanced diet\n• Do not smoke\n• Ask your PCP about cardiovascular risk assessment every 5 years',
+        },
+        {
+            heading: 'You Are Not Alone',
+            body: 'Serious pregnancy complications can be emotionally difficult. If you feel sad, anxious, scared, or overwhelmed, talk to your OB, PCP, or a counselor. Postpartum Support International: 1-800-944-4773. The Preeclampsia Foundation: https://www.preeclampsia.org',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Committee Opinion No. 736: Optimizing Postpartum Care. Obstet Gynecol. 2018.' },
+        { num: 2, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. 2020.' },
+        { num: 3, text: 'Preeclampsia Foundation. https://www.preeclampsia.org' },
+    ],
+    shareable: true,
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -15458,6 +15738,13 @@ export const INFO_PAGES = {
     'ec-iud-guide': EC_IUD_GUIDE,
     'ec-drug-interactions': EC_DRUG_INTERACTIONS,
     'ec-catholic-protocol': EC_CATHOLIC_PROTOCOL,
+    // Hypertension in Pregnancy
+    'htnp-steps-summary': HTNP_STEPS_SUMMARY,
+    'htnp-stop': HTNP_STOP,
+    'htnp-hellp-criteria': HTNP_HELLP_CRITERIA,
+    'htnp-classification': HTNP_CLASSIFICATION,
+    'htnp-asa-guide': HTNP_ASA_GUIDE,
+    'htnp-discharge-patient': HTNP_DISCHARGE_PATIENT,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

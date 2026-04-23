@@ -106,6 +106,7 @@ const TREE_REGISTRY = {
   'aub':              { prefix: 'AUB',                 entryNodeId: 'aub-start',          categoryId: 'ob-gyn' },
   'status-epilepticus': { prefix: 'STATUS_EPILEPTICUS', entryNodeId: 'se-start',           categoryId: 'neurology' },
   'first-trimester':  { prefix: 'FIRST_TRIMESTER',    entryNodeId: 'ft-start',           categoryId: 'ob-gyn' },
+  'htn-pregnancy':    { prefix: 'HTN_PREGNANCY',      entryNodeId: 'htnp-start',         categoryId: 'ob-gyn' },
   'diarrhea':         { prefix: 'DIARRHEA',            entryNodeId: 'diarrhea-start',     categoryId: 'gastroenterology' },
   'hiv':              { prefix: 'HIV',                 entryNodeId: 'hiv-start',          categoryId: 'infectious-disease' },
   'meningitis':       { prefix: 'MENINGITIS',          entryNodeId: 'mening-start',       categoryId: 'infectious-disease' },

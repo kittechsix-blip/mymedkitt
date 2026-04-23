@@ -102,10 +102,10 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Team Assembly',
-    body: '**CALL FOR HELP — assign roles:**\n\n• **OB attending** — definitive management, surgical decisions\n• **OB anesthesia** — airway, access, hemodynamic support, arterial line\n• **Blood bank** — activate MTP, confirm sample available, send emergency-release cooler\n• **Charge nurse** — runner, documentation, recorder\n• **Second RN** — dedicated to medications and blood products\n• **Pharmacy** — mix uterotonics, prepare TXA\n\n**Announce clearly:** "Postpartum hemorrhage. Estimated blood loss X mL. We need [blood/team/OR]."\n\n**Designate a timekeeper** — call out every 5 minutes. PPH mortality is driven by cumulative delay.\n\n**Notify pediatrics** if newborn remains in the room — they should not be forgotten during maternal resuscitation. [5][9]',
-    citation: [5, 9],
+    body: '**CALL FOR HELP — assign roles:**\n\n• **OB attending** — definitive management, surgical decisions\n• **OB anesthesia** — airway, access, hemodynamic support, arterial line\n• **Blood bank** — activate MTP, confirm sample available, send emergency-release cooler\n• **Charge nurse** — runner, documentation, recorder\n• **Second RN** — dedicated to medications and blood products\n• **Pharmacy** — mix uterotonics, prepare TXA\n\n---\n\n**IF OB NOT AVAILABLE — alternative specialists:**\n\n**Interventional Radiology (IR):**\n• Uterine artery embolization (UAE) — 84-96% success rate\n• Procedure time ~90 min; wait 30 min after prostaglandins (uterine artery spasm)\n• **Fertility impact:** 70-80% can still conceive, BUT:\n  - 24% recurrent PPH in future pregnancies (vs 6.6% baseline)\n  - 3.4% placenta accreta risk in subsequent pregnancy\n  - Higher preterm birth, placental abnormalities\n• Best option when hemodynamically stable\n\n**Vascular Surgery:**\n• Internal iliac artery ligation — 75-88% success rate\n• **No evidence of impaired future fertility** — collaterals re-establish\n• 57% pregnancy rate within 1 year of ligation\n• Call when IR unavailable or failed\n\n**General/Trauma Surgery:**\n• Emergency peripartum hysterectomy (last resort)\n• Subtotal hysterectomy preferred in emergencies (faster, less blood loss)\n• Call early if hysterectomy likely — they can assist or perform\n\n**Hematology:**\n• Call for massive PPH (>1500 mL) with coagulopathy\n• DIC management, point-of-care testing guidance\n• Fibrinogen replacement targets\n\n---\n\n**Announce clearly:** "Postpartum hemorrhage. Estimated blood loss X mL. We need [blood/team/OR]."\n\n**Designate a timekeeper** — call out every 5 minutes. PPH mortality is driven by cumulative delay.\n\n**Notify pediatrics** if newborn remains in the room — they should not be forgotten during maternal resuscitation. [5][9][20][21]',
+    citation: [5, 9, 20, 21],
     next: 'pph-access-labs',
-    summary: 'Announce PPH clearly, assign OB/Anesthesia/Blood Bank/Timekeeper roles, designate a recorder.',
+    summary: 'OB primary; if unavailable: IR (UAE 84-96% success, fertility impact), Vascular (IIA ligation, no fertility impact), Surgery (hysterectomy last resort), Hematology (DIC).',
   },
 
   {
@@ -678,4 +678,6 @@ export const PPH_CITATIONS: Citation[] = [
   { num: 17, text: 'B-Lynch C, et al. The B-Lynch Surgical Technique for the Control of Massive Postpartum Haemorrhage. Br J Obstet Gynaecol. 1997;104(3):372-375.' },
   { num: 18, text: 'Shields LE, et al. Comprehensive Maternal Hemorrhage Protocols Reduce the Use of Blood Products and Improve Patient Safety. Am J Obstet Gynecol. 2015;212(3):272-280.' },
   { num: 19, text: 'ACOG Committee Opinion No. 736: Optimizing Postpartum Care. Obstet Gynecol. 2018;131(5):e140-e150.' },
+  { num: 20, text: 'Poujade O, et al. Uterine Artery Embolization for Postpartum Hemorrhage: Fertility and Pregnancy Outcomes. Hum Reprod. 2010;25(11):2655-61. https://pubmed.ncbi.nlm.nih.gov/20729538/' },
+  { num: 21, text: 'Joshi VM, Otiv SR, Majumder R, et al. Internal Iliac Artery Ligation for Arresting Postpartum Haemorrhage. BJOG. 2007;114(3):356-361.' },
 ];

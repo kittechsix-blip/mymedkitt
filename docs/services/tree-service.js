@@ -550,6 +550,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/eclampsia.js');
             return { nodes: m.ECLAMPSIA_NODES, entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn', moduleLabels: m.ECLAMPSIA_MODULE_LABELS, citations: m.ECLAMPSIA_CITATIONS, criticalActions: m.ECLAMPSIA_CRITICAL_ACTIONS };
         },
+        'htn-pregnancy': async () => {
+            const m = await import('../data/trees/htn-pregnancy.js');
+            return { nodes: m.HTN_PREGNANCY_NODES, entryNodeId: 'htnp-start', categoryId: 'ob-gyn', moduleLabels: m.HTN_PREGNANCY_MODULE_LABELS, citations: m.HTN_PREGNANCY_CITATIONS, criticalActions: m.HTN_PREGNANCY_CRITICAL_ACTIONS };
+        },
         'aortic-dissection': async () => {
             const m = await import('../data/trees/aortic-dissection.js');
             return { nodes: m.AORTIC_DISSECTION_NODES, entryNodeId: 'dissect-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_DISSECTION_MODULE_LABELS, citations: m.AORTIC_DISSECTION_CITATIONS, criticalActions: m.AORTIC_DISSECTION_CRITICAL_ACTIONS };

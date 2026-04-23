@@ -418,8 +418,12 @@ const ASPIRIN: DrugEntry = {
   genericName: 'Acetylsalicylic acid',
   drugClass: 'Antiplatelet (COX inhibitor)',
   route: 'PO',
-  indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)'],
+  indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)'],
   dosing: [
+    {
+      indication: 'Preeclampsia prophylaxis (pregnancy)',
+      regimen: '81 mg PO once daily, started at 12–28 weeks gestation (ideally <16 wk), continued until delivery. USPSTF + ACOG 2021: reduces preeclampsia ~15% and preterm birth ~10%. Indicated for ≥1 high-risk factor (prior preeclampsia, multifetal, chronic HTN, DM, CKD, autoimmune) or ≥2 moderate-risk factors (nulliparity, obesity, family history, age ≥35, prior SGA/stillbirth, >10 y interpregnancy interval). No increase in abruption, PPH, or fetal bleeding at 81 mg.',
+    },
     {
       indication: 'Acute ischemic stroke (no IVT)',
       regimen: '160\u2013325 mg PO within 24\u201348 hours of symptom onset. If given via NG tube: use non-enteric-coated formulation or crush enteric-coated.',
@@ -3019,8 +3023,16 @@ const LABETALOL: DrugEntry = {
   genericName: 'Labetalol hydrochloride',
   drugClass: 'Combined alpha-1 and beta-adrenergic blocker',
   route: 'IV',
-  indications: ['Acute stroke BP management (pre/post thrombolysis)', 'Hypertensive emergency', 'Preeclampsia/eclampsia'],
+  indications: ['Acute stroke BP management (pre/post thrombolysis)', 'Hypertensive emergency', 'Severe hypertension in pregnancy', 'Chronic hypertension in pregnancy', 'Preeclampsia/eclampsia'],
   dosing: [
+    {
+      indication: 'Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)',
+      regimen: 'ACOG escalating protocol: 20 mg IV → wait 10 min → 40 mg IV → wait 10 min → 80 mg IV → wait 10 min → 80 mg IV. Max cumulative 300 mg. Switch to hydralazine if uncontrolled. Continuous infusion: 1–2 mg/min IV for repeated boluses. Target BP 140–150/90–100. Avoid in asthma, HF, bradycardia, heart block. Safe with magnesium.',
+    },
+    {
+      indication: 'Chronic hypertension pregnancy (outpatient)',
+      regimen: '200 mg PO q8–12 h (max 2400 mg/day). First-line oral agent for chronic HTN in pregnancy per ACOG + CHAP trial. Target BP <140/90. Safe in pregnancy and breastfeeding. Start at 100 mg PO BID and titrate up every 2–3 days based on home BP log.',
+    },
     {
       indication: 'Pre-thrombolysis BP (target <185/110)',
       regimen: '10\u201320 mg IV bolus over 1\u20132 min. May repeat once. If BP still >185/110 after 2 doses, consider nicardipine infusion. Do NOT proceed with thrombolysis if BP remains uncontrolled.',
@@ -3381,6 +3393,83 @@ const METHYLERGONOVINE: DrugEntry = {
     'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.',
     'WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage. 2012, 2017 update.',
     'Bienstock JL, Eke AC, Hueppchen NA. Postpartum Hemorrhage. NEJM. 2021;384(17):1635-1645.',
+  ],
+};
+
+const METHYLDOPA: DrugEntry = {
+  id: 'methyldopa',
+  name: 'Methyldopa (Aldomet)',
+  genericName: 'Methyldopa',
+  drugClass: 'Central α₂-adrenergic agonist',
+  route: 'PO',
+  indications: ['Chronic hypertension in pregnancy', 'Gestational hypertension (maintenance)'],
+  dosing: [
+    {
+      indication: 'Chronic hypertension pregnancy',
+      regimen: '250 mg PO q8h to start; titrate by 250 mg every 2 days to response. Usual dose 500 mg–2 g/day in 2–4 divided doses. Max 3 g/day. Longest safety track record in pregnancy (used since the 1960s). Slower onset (2–4 h) and less potent than labetalol or nifedipine — generally a second- or third-line choice when those are contraindicated or poorly tolerated. Peak effect 6–8 h, steady state 2–3 days.',
+    },
+  ],
+  contraindications: [
+    'Active hepatic disease (hepatitis, cirrhosis)',
+    'History of methyldopa-induced liver injury or hemolytic anemia',
+    'Pheochromocytoma',
+    'MAOI use',
+  ],
+  cautions: [
+    'Sedation, fatigue — prominent in the first 1–2 weeks (often limits adherence)',
+    'Positive Coombs test in 10–20% (usually asymptomatic; hemolytic anemia rare)',
+    'Elevated LFTs — check baseline and at 6–12 weeks; stop if hepatitis develops',
+    'Depression — avoid in patients with history of major depression',
+    'Orthostatic hypotension, especially with first dose',
+    'Breastfeeding: compatible',
+  ],
+  monitoring: 'Baseline CBC, LFTs. LFTs at 6–12 weeks of therapy. Symptom check for fatigue, depression at every visit. Home BP log.',
+  notes: 'Central α₂-agonist reduces sympathetic outflow. Crosses placenta but fetal safety data span >50 years — no teratogenicity or adverse neonatal outcomes demonstrated. Often reserved for patients who fail or cannot tolerate labetalol/nifedipine, or for long-standing pregnancies on it before pregnancy. Not useful for acute severe-range BP control (slow onset).',
+  citations: [
+    'ACOG Practice Bulletin No. 203: Chronic Hypertension in Pregnancy. Obstet Gynecol. 2019;133(1):e26-e50.',
+    'Magee LA, et al. Less-tight versus tight control of hypertension in pregnancy (CHIPS). N Engl J Med. 2015;372(5):407-17.',
+  ],
+};
+
+const NIFEDIPINE_IR: DrugEntry = {
+  id: 'nifedipine-ir',
+  name: 'Nifedipine (Immediate-Release / Extended-Release)',
+  genericName: 'Nifedipine',
+  drugClass: 'Dihydropyridine calcium channel blocker',
+  route: 'PO',
+  indications: ['Severe hypertension in pregnancy', 'Chronic hypertension in pregnancy', 'Postpartum hypertension'],
+  dosing: [
+    {
+      indication: 'Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)',
+      regimen: 'ACOG protocol (immediate-release capsules, swallowed whole): 10 mg PO → wait 20 min → 20 mg PO → wait 20 min → 20 mg PO → switch to labetalol IV if still uncontrolled. Max 50 mg short-term. Onset 10–20 min, duration 3–6 h. **NEVER give sublingual** — unpredictable absorption, severe hypotension risk. Safe with magnesium sulfate (Magee 2005).',
+    },
+    {
+      indication: 'Chronic hypertension pregnancy (maintenance)',
+      regimen: 'Extended-release (XL): 30–60 mg PO once daily. Max 120 mg/day. First-line oral agent alongside labetalol for chronic HTN in pregnancy. Target BP <140/90 per CHAP trial. Preferred over IR for chronic dosing due to smoother pharmacokinetics.',
+    },
+    {
+      indication: 'Postpartum hypertension',
+      regimen: 'XL 30–60 mg PO daily. Safe with breastfeeding. Titrate to target BP <140/90. If severe-range BP persists or recurs, escalate with labetalol or add second agent.',
+    },
+  ],
+  contraindications: [
+    'Severe aortic stenosis',
+    'Cardiogenic shock',
+    'Hypersensitivity to dihydropyridine CCBs',
+  ],
+  cautions: [
+    'Never give sublingual (old teaching) — severe, unpredictable hypotension',
+    'Headache and flushing (common initial side effects, usually improve)',
+    'Reflex tachycardia — less than with hydralazine but still possible',
+    'Peripheral edema with chronic use',
+    'Safe with magnesium (old neuromuscular blockade concern has been disproven)',
+  ],
+  monitoring: 'BP q10–15 min during acute titration; HR; continuous fetal monitoring during acute BP control. For chronic: home BP log.',
+  notes: 'Fast-acting oral option for severe-range BP when IV access is delayed. Safe to use with magnesium infusion despite legacy concerns. Extended-release formulation is preferred for chronic daily dosing. Do not use sublingual or chewed capsules — the ACOG and NICE protocols specify swallowed intact oral capsules only.',
+  citations: [
+    'ACOG Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy and the Postpartum Period. Obstet Gynecol. 2019;133(2):e174-e180.',
+    'Magee LA, Miremadi S, Li J, et al. Therapy with both magnesium sulfate and nifedipine does not increase the risk of serious magnesium-related maternal side effects. Am J Obstet Gynecol. 2005;193(1):153-163.',
+    'Tita AT, et al. Treatment for Mild Chronic Hypertension during Pregnancy (CHAP). N Engl J Med. 2022;386(19):1781-1792.',
   ],
 };
 
@@ -5967,8 +6056,12 @@ const HYDRALAZINE: DrugEntry = {
   genericName: 'Hydralazine hydrochloride',
   drugClass: 'Direct-acting vasodilator (arteriolar)',
   route: 'PO / IV',
-  indications: ['VAD hypertension (MAP >90)', 'Hypertensive emergency/urgency', 'Heart failure (with isosorbide dinitrate)'],
+  indications: ['VAD hypertension (MAP >90)', 'Hypertensive emergency/urgency', 'Severe hypertension in pregnancy', 'Heart failure (with isosorbide dinitrate)'],
   dosing: [
+    {
+      indication: 'Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)',
+      regimen: 'ACOG protocol: 5–10 mg IV over 2 min → wait 20 min → 10 mg IV → wait 20 min → switch to labetalol 20 mg IV. Max cumulative 30 mg before switching. Onset 10–20 min, duration 4–6 h. Pre-load 500 mL NS if volume-depleted — prevents abrupt hypotension. May cause reflex tachycardia. Avoid in CAD.',
+    },
     {
       indication: 'VAD hypertension',
       regimen: '10-25 mg PO every 6-8 hours. Titrate to target MAP 70-80 mmHg. Maximum 100 mg PO q8h. Preferred first-line oral agent for VAD hypertension — reduces afterload without decreasing native cardiac contractility.',
@@ -9734,6 +9827,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   METHYLPREDNISOLONE_IV,
   METHYLENE_BLUE,
   METHYLERGONOVINE,
+  METHYLDOPA,
   METOCLOPRAMIDE,
   METOLAZONE,
   METRONIDAZOLE,
@@ -9748,6 +9842,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   NALOXONE,
   NALTREXONE,
   NICARDIPINE,
+  NIFEDIPINE_IR,
   NIMODIPINE,
   NITROFURANTOIN,
   NOREPINEPHRINE,

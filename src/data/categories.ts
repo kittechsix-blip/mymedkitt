@@ -1263,6 +1263,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'eclampsia-start',
       },
       {
+        id: 'htn-pregnancy',
+        title: 'Hypertension in Pregnancy',
+        subtitle: 'Recognition → Workup → Severe-Range BP → Preeclampsia Spectrum → HELLP → Postpartum & Prevention',
+        categoryId: 'ob-gyn',
+        version: '1.0',
+        nodeCount: 30,
+        entryNodeId: 'htnp-start',
+      },
+      {
         id: 'pe-pregnancy',
         title: 'PE in Pregnancy',
         subtitle: 'Recognition → Risk Stratification → Diagnosis → LMWH → Thrombolysis → Disposition',

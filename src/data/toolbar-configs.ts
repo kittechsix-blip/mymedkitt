@@ -653,6 +653,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bp-rx', label: 'BP Protocol', icon: '🩺', action: 'jump', target: 'eclampsia-bp-labetalol' },
     { id: 'hellp', label: 'HELLP', icon: '🚨', action: 'jump', target: 'eclampsia-hellp' },
   ],
+  'htn-pregnancy': [
+    { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'htnp-steps-summary' },
+    { id: 'classify', label: 'Classify', icon: '📖', action: 'overlay', target: 'htnp-classification' },
+    { id: 'severe-bp', label: 'Severe BP', icon: '🩺', action: 'jump', target: 'htnp-severe-acute' },
+    { id: 'map', label: 'MAP', icon: '📊', action: 'calculator', target: 'map-calculator' },
+    { id: 'mag', label: 'Mag Rx', icon: '💉', action: 'jump', target: 'htnp-mag-prophylaxis' },
+    { id: 'hellp', label: 'HELLP', icon: '🚨', action: 'overlay', target: 'htnp-hellp-criteria' },
+    { id: 'asa', label: 'ASA Rx', icon: '💊', action: 'overlay', target: 'htnp-asa-guide' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'htnp-stop' },
+  ],
   'ed-methadone': [
     { id: 'cows', label: 'COWS', icon: '📊', action: 'calculator', target: 'cows' },
     { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'ed-methadone-summary' },
