@@ -677,7 +677,7 @@ export const HIV_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Postexposure Prophylaxis (PEP)',
-    body: '**PEP is most effective when given ASAP** — ideally within 2 hours of exposure.\n\n**NOT recommended when care is sought >72 hours after exposure.** [60]\n\n**Indications:** Sexual exposure, needlestick/percutaneous, mucous membrane exposure, sexual assault.\n\n**Preferred regimens (28 days):**\n• [Biktarvy](#/drug/biktarvy/hiv pep) 1 tablet daily — preferred single-tablet regimen\n• [TDF/FTC](#/drug/tdf-ftc/hiv pep) + [Dolutegravir](#/drug/dolutegravir/hiv pep) — alternative\n• [TDF/FTC](#/drug/tdf-ftc/hiv pep) + [Darunavir](#/drug/darunavir/hiv pep)/[Ritonavir](#/drug/ritonavir/hiv pep) — second alternative\n\n**Baseline testing:** HIV test on exposed patient.\n\n**Adherence is critical:** One study showed <60% follow-up rates and <25% completed full 28-day course. [61] Emphasize adherence and arrange follow-up.\n\n**For the complete PEP decision pathway** including exposure risk assessment, special populations, and follow-up: [Post Exposure Prophylaxis Consult](#/tree/pep)\n\nRisk of transmission depends on type of exposure and viral load of source. Undetectable viral load = virtually zero transmission risk (PARTNER 2 study). [10]',
+    body: '**PEP is most effective when given ASAP** — ideally within 2 hours of exposure.\n\n**NOT recommended when care is sought >72 hours after exposure.** [60]\n\n**Indications:** Sexual exposure, needlestick/percutaneous, mucous membrane exposure, sexual assault.\n\n**Preferred regimens (28 days):**\n• [Biktarvy](#/drug/biktarvy/hiv pep) 1 tablet daily — CDC 2025 preferred single-tablet regimen\n• [TDF/FTC](#/drug/tdf-ftc/hiv pep) + [Dolutegravir](#/drug/dolutegravir/hiv pep) — equally effective, lower cost (often institutional preference)\n• [TDF/FTC](#/drug/tdf-ftc/hiv pep) + [Darunavir](#/drug/darunavir/hiv pep)/[Ritonavir](#/drug/ritonavir/hiv pep) — second alternative\n\n💰 **Cost note:** Biktarvy ~$3,500/mo vs TDF/FTC + dolutegravir ~$1,800-2,200/mo. Both regimens have equivalent efficacy. Check your institution\'s formulary.\n\n**Baseline testing:** HIV test on exposed patient.\n\n**Adherence is critical:** One study showed <60% follow-up rates and <25% completed full 28-day course. [61] Emphasize adherence and arrange follow-up.\n\n**For the complete PEP decision pathway** including exposure risk assessment, special populations, and follow-up: [Post Exposure Prophylaxis Consult](#/tree/pep)\n\nRisk of transmission depends on type of exposure and viral load of source. Undetectable viral load = virtually zero transmission risk (PARTNER 2 study). [10]',
     citation: [10, 60, 61],
     treatment: {
       firstLine: {
@@ -686,7 +686,7 @@ export const HIV_NODES: DecisionNode[] = [
         route: 'PO',
         frequency: 'Once daily',
         duration: '28 days',
-        notes: 'Preferred single-tablet PEP regimen. Start ASAP, ideally within 2 hours. NOT effective if started >72 hours post-exposure. Take with or without food.',
+        notes: 'CDC 2025 preferred single-tablet regimen. Start ASAP, ideally within 2 hours. NOT effective if started >72 hours post-exposure. Take with or without food. Higher cost than TDF/FTC + dolutegravir.',
       },
       alternative: {
         drug: 'TDF/FTC + Dolutegravir',
@@ -694,7 +694,7 @@ export const HIV_NODES: DecisionNode[] = [
         route: 'PO',
         frequency: 'Once daily',
         duration: '28 days',
-        notes: 'Alternative: TDF/FTC + Darunavir 800mg/Ritonavir 100mg daily. Review dolutegravir neural tube defect risk in women of childbearing potential. Dispense full 28-day course from ED if possible.',
+        notes: 'Equally effective, significantly lower cost — often institutional preference. Alternative: TDF/FTC + Darunavir 800mg/Ritonavir 100mg daily. Review dolutegravir neural tube defect risk in women of childbearing potential. Dispense full 28-day course from ED if possible.',
       },
       monitoring: 'Baseline HIV test (must be negative). Follow-up at 4-6 weeks and 3 months for repeat HIV testing. Emphasize adherence - <25% complete full 28-day course. Arrange follow-up within 3-7 days.',
     },

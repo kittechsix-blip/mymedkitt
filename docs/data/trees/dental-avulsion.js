@@ -207,8 +207,8 @@ export const DENTAL_AVULSION_NODES = [
         type: 'info',
         module: 4,
         title: 'Splinting Technique',
-        body: '**Flexible splint is standard of care:**\n\n**Goal:** Stabilize tooth while allowing physiologic movement.\n\n**ED Splinting Options:**\n\n**1. COE-PAK (periodontal dressing):**\n• Mix and apply across 2-3 teeth on each side\n• Mold to cover labial and lingual surfaces\n• Easy, effective, no special equipment\n\n**2. Tissue adhesive (Dermabond):**\n• Apply across several teeth\n• Quick and accessible\n• May need reapplication\n\n**3. Aluminum foil + adhesive:**\n• Improvised but effective\n\n**Duration:** 2 weeks for uncomplicated avulsion\n\n**Rigid splints are NOT recommended** — cause ankylosis. [1][2][3]',
-        citation: [1, 2, 3],
+        body: '**Flexible splint is standard of care:**\n\n**Goal:** Stabilize tooth while allowing physiologic movement.\n\n---\n\n**ED SPLINTING: STEP-BY-STEP**\n\n**Materials (pick one method):**\n• 2-octyl cyanoacrylate (Dermabond) + N95 nasal bridge strip\n• COE-PAK periodontal dressing\n• Suture foil from suture pack + skin glue\n\n---\n\n**METHOD 1: Dermabond + N95 Strip (Preferred)**\n\n**Step 1 — Prepare:**\n• Cut metal nasal bridge from N95 mask\n• Round any sharp edges\n• Dry the tooth and adjacent teeth with gauze\n\n**Step 2 — Initial adhesion:**\n• Apply Dermabond to mesial and distal edges of reimplanted tooth\n• Adhere to adjacent teeth on each side\n• Hold firm pressure x 30 seconds\n\n**Step 3 — Splint placement:**\n• Apply Dermabond to inner aspect of nasal bridge strip\n• Apply Dermabond to buccal (front) surface of target tooth + 1-2 teeth on each side\n• Press strip firmly against teeth\n• Hold under pressure x 1 minute\n\n**Step 4 — Verify:**\n• Confirm stability\n• Check occlusion (bite alignment)\n\n---\n\n**METHOD 2: COE-PAK (periodontal dressing):**\n• Mix catalyst and base paste until uniform color\n• Roll into a rope shape\n• Apply across labial (front) and lingual (back) surfaces\n• Mold to cover 2-3 teeth on each side of avulsed tooth\n• Hardens in ~10 minutes\n\n---\n\n**METHOD 3: Suture foil + Dermabond:**\n• Cut foil from suture packaging to span 3-5 teeth\n• Apply Dermabond to foil and buccal tooth surfaces\n• Press and hold x 1 minute\n\n---\n\n**Duration:**\n• 2 weeks: Standard (extraoral dry time <60 min)\n• 4 weeks: If extraoral dry time >60 min or alveolar fracture (IADT 2020)\n\n**⚠️ Rigid splints are NOT recommended** — cause ankylosis. [1][2][3][5]',
+        citation: [1, 2, 3, 5],
         next: 'avulsion-xray',
         summary: 'Splinting Technique — review key clinical information before proceeding',
     },
@@ -349,4 +349,5 @@ export const DENTAL_AVULSION_CITATIONS = [
     { num: 2, text: 'International Association of Dental Traumatology (IADT) Guidelines. Dental Traumatology. 2020;36(4):331-342.' },
     { num: 3, text: 'EB Medicine - Dental Emergencies in the Emergency Department. Emergency Medicine Practice. 2021.' },
     { num: 4, text: 'American Academy of Pediatric Dentistry. Management of Acute Dental Trauma. Pediatr Dent. 2022;44(5):413-421.' },
+    { num: 5, text: 'Roberts JR, Hedges JR. Roberts and Hedges\' Clinical Procedures in Emergency Medicine and Acute Care. 7th ed. Chapter 64: Emergency Dental Procedures. Elsevier; 2019.' },
 ];
