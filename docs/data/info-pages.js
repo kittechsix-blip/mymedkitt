@@ -13341,6 +13341,150 @@ const EAR_MOE_FLAGS = {
         { num: 1, text: 'StatPearls. Necrotizing Otitis Externa. NCBI. 2024.' },
     ],
 };
+// =====================================================================
+// PREGNANCY TRAUMA INFO PAGES
+// =====================================================================
+const PREG_TRAUMA_TOOLS = {
+    id: 'preg-trauma-tools',
+    title: 'Pregnancy Trauma Tools',
+    subtitle: 'Quick reference tools for the pregnant trauma patient',
+    sections: [
+        {
+            heading: 'Resuscitative Hysterotomy',
+            body: '**Indication:** Maternal cardiac arrest + fundus at/above umbilicus (≥20 weeks)\n\n**Timing:**\n• Begin at **4 minutes** of arrest\n• Goal: delivery by **5 minutes**\n\n**Technique:**\n1. Vertical midline skin incision (umbilicus to pubis)\n2. Cut through fascia, bluntly separate rectus\n3. Vertical uterine incision\n4. Deliver fetus head-first\n5. Clamp and cut cord\n6. Pack uterus, continue CPR\n\n[Full Procedure Guide](#/info/preg-resuscitative-hysterotomy)',
+        },
+        {
+            heading: 'RhIg Dosing Calculator',
+            body: '**Standard dose:** 300 mcg IM (covers up to 30 mL fetal blood)\n\n**When KB shows large FMH:**\n\n**Formula:** Vials = (KB % × 50) ÷ 30, round up + 1\n\n| KB % | Fetal Blood (mL) | Vials Needed |\n|------|------------------|---------------|\n| 0.5% | 25 mL | 1 (standard) |\n| 1.0% | 50 mL | 2 vials |\n| 2.0% | 100 mL | 4 vials |\n| 3.0% | 150 mL | 6 vials |\n| 5.0% | 250 mL | 9 vials |\n\n**Give within 72 hours** (ideally within 12h)',
+        },
+        {
+            heading: 'Monitoring Duration Guide',
+            body: '| Finding | Monitoring |\n|---------|------------|\n| Low-risk, reassuring | 4-6 hours |\n| ≥6 contractions/hr | 24 hours |\n| Vaginal bleeding | 24 hours |\n| Positive KB (>5 cells) | 24 hours |\n| Non-reassuring FHR | 24 hours |\n| Seatbelt sign | 24 hours |\n| High-energy mechanism | 24 hours |',
+        },
+        {
+            heading: 'Fundal Height Landmarks',
+            body: '| Landmark | Gestational Age |\n|----------|----------------|\n| Symphysis pubis | 12 weeks |\n| Midway | 16 weeks |\n| Umbilicus | 20 weeks |\n| Xiphoid | 36 weeks |\n\n**Rule of thumb:** After 20 weeks, fundal height (cm) ≈ weeks gestation (±3 cm)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EAST Guidelines: Trauma in Pregnancy. 2023.' },
+        { num: 2, text: 'AHA ACLS Cardiac Arrest in Pregnancy Algorithm. 2025.' },
+    ],
+};
+const PREG_RESUSCITATIVE_HYSTEROTOMY = {
+    id: 'preg-resuscitative-hysterotomy',
+    title: 'Resuscitative Hysterotomy',
+    subtitle: 'Step-by-step emergency procedure',
+    sections: [
+        {
+            heading: 'Indication',
+            body: '**Maternal cardiac arrest** with uterus ≥20 weeks (fundus at or above umbilicus) and **no ROSC within 4 minutes**.\n\n**Primary goal:** Relieve aortocaval compression to improve maternal resuscitation.\n\n**Secondary goal:** Fetal survival (if viable).',
+        },
+        {
+            heading: 'Equipment',
+            body: '• Scalpel with #10 blade\n• Mayo scissors\n• 2 Kelly clamps (for cord)\n• Bulb suction\n• Sterile towels (for packing)\n• Cord clamp\n• Neonatal resuscitation equipment ready',
+        },
+        {
+            heading: 'Step 1: Incision',
+            body: '**Vertical midline incision** from umbilicus to pubic symphysis.\n\n• Use scalpel to cut through skin\n• Continue through subcutaneous tissue\n• Cut through fascia (linea alba)\n• Bluntly dissect rectus muscles laterally\n• Enter peritoneum',
+        },
+        {
+            heading: 'Step 2: Identify Uterus',
+            body: '• Uterus will be immediately visible\n• Move bladder inferiorly if in the way (do not waste time catheterizing)\n• Note placental location if visible',
+        },
+        {
+            heading: 'Step 3: Uterine Incision',
+            body: '**Vertical incision** through lower uterine segment extending to fundus.\n\n• Use scalpel to make initial incision until amniotic fluid escapes\n• Insert index and middle fingers to lift uterine wall\n• Use Mayo scissors to extend incision superiorly\n• **If anterior placenta:** Cut directly through it',
+        },
+        {
+            heading: 'Step 4: Deliver Fetus',
+            body: '• Deliver head first (or presenting part)\n• Avoid grasping abdomen\n• Suction mouth and nose with bulb\n• Clamp cord in 2 places\n• Cut between clamps\n• Hand infant to neonatal team immediately',
+        },
+        {
+            heading: 'Step 5: Post-Delivery',
+            body: '• Manually deliver placenta (do not delay)\n• Pack uterus with sterile towels\n• **Continue maternal CPR**\n• Cardiac output should improve once compression relieved\n• If ROSC: definitive surgical management',
+        },
+        {
+            heading: 'Timing & Outcomes',
+            body: '| Arrest-to-Delivery | Maternal Survival | Neonatal Survival |\n|-------------------|-------------------|------------------|\n| <5 minutes | ~54% | ~45% |\n| 5-10 minutes | ~25-40% | ~30% |\n| 10-15 minutes | Documented cases | Documented cases |\n| >15 minutes | Possible | Possible to 30 min |\n\n**Do not abandon procedure** even if >5 minutes — survival documented at 15 min (maternal) and 30 min (neonatal).',
+        },
+        {
+            heading: 'Key Pearls',
+            body: '• **Do NOT move to OR** — perform at bedside\n• **Continue CPR throughout** and after delivery\n• **Manual left uterine displacement** until incision made\n• **Speed is critical** — perfection is not\n• Any physician can perform this procedure when indicated\n• Do not delay for OB arrival',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Eldridge AJ, et al. Perimortem Cesarean Delivery. StatPearls. 2024.' },
+        { num: 2, text: 'Roberts JR, Hedges JR. Clinical Procedures in Emergency Medicine. 7th ed. Elsevier; 2019.' },
+        { num: 3, text: 'AHA Guidelines: Cardiac Arrest in Pregnancy. Circulation. 2025.' },
+    ],
+};
+const PREG_TRAUMA_DDX = {
+    id: 'preg-trauma-ddx',
+    title: 'Pregnancy Trauma Differential',
+    subtitle: 'Unique diagnoses in the pregnant trauma patient',
+    sections: [
+        {
+            heading: 'Life-Threatening Diagnoses',
+            body: '| Diagnosis | Key Features | Management |\n|-----------|--------------|------------|\n| **Placental abruption** | Vaginal bleeding, uterine tenderness, tetanic uterus, non-reassuring FHR | Emergent cesarean if unstable |\n| **Uterine rupture** | Severe pain, loss of fetal station, palpable fetal parts, maternal shock | Immediate laparotomy |\n| **Maternal hemorrhagic shock** | May appear normal until 30% loss; fetus suffers first | Aggressive resuscitation |\n| **Amniotic fluid embolism** | Sudden cardiovascular collapse, DIC, occurs during/after delivery | Supportive; high mortality |',
+        },
+        {
+            heading: 'Emergent Diagnoses',
+            body: '| Diagnosis | Key Features | Management |\n|-----------|--------------|------------|\n| **Fetal distress** | Bradycardia <110, late decels, loss of variability | Optimize mother, emergent cesarean |\n| **Preterm labor** | Regular contractions, cervical change | Tocolytics controversial in trauma; steroids 24-34 wks |\n| **Fetomaternal hemorrhage** | +Kleihauer-Betke | RhIg within 72h |\n| **Cord prolapse** | Visible/palpable cord, fetal bradycardia | Elevate presenting part, emergent cesarean |',
+        },
+        {
+            heading: 'Physiologic Changes Mimicking Pathology',
+            body: '| Finding | Normal Pregnancy Change |\n|---------|------------------------|\n| Tachycardia (HR +15-20) | Increased CO and blood volume |\n| Mild hypotension (SBP -10-15) | Decreased SVR |\n| Anemia (Hgb 10-11) | Hemodilution |\n| Leukocytosis (WBC 10-15k) | Normal in pregnancy |\n| Elevated D-dimer | Progresses with gestation |\n| Dyspnea | Elevated diaphragm, hyperventilation |\n| Mild tachypnea | Increased minute ventilation |',
+        },
+        {
+            heading: 'Trauma-Modified Presentations',
+            body: '| Standard Finding | Pregnancy Modification |\n|------------------|------------------------|\n| Abdominal rigidity | May be absent (stretched abdominal wall) |\n| Peritoneal signs | Decreased sensitivity (uterus displaces bowel) |\n| Shock vitals | Delayed onset (30% loss before apparent) |\n| Pain localization | Referred pain more common |\n| Internal bleeding | May be massive without external signs |',
+        },
+        {
+            heading: 'Missed Diagnoses to Consider',
+            body: '• **Concealed abruption** — no vaginal bleeding, but uterine pain and fetal distress\n• **Splenic rupture** — enlarged spleen in pregnancy, higher rupture risk\n• **Bladder rupture** — displaced superior and anterior\n• **Diaphragmatic injury** — elevated baseline makes diagnosis harder\n• **Delayed abruption** — can occur up to 24h post-trauma\n• **IPV** — trauma is leading cause; screen all patients',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EAST Guidelines: Trauma in Pregnancy. 2023.' },
+        { num: 2, text: 'ACOG Practice Bulletin 211: Critical Care in Pregnancy. 2019.' },
+    ],
+};
+const PREG_RESUS_RULES = {
+    id: 'preg-resus-rules',
+    title: 'Pregnancy Resuscitation Rules',
+    subtitle: 'Key modifications for the pregnant trauma patient',
+    sections: [
+        {
+            heading: 'The Golden Rules',
+            body: '1. **MOTHER FIRST** — fetal survival depends on maternal survival\n2. **LEFT UTERINE DISPLACEMENT** after 20 weeks — always\n3. **RESUSCITATE AGGRESSIVELY** — can lose 30% volume before showing shock\n4. **THE FETUS IS THE FIRST TO SUFFER** — maternal shunting protects mother at fetal expense\n5. **CT IS SAFE** — do not withhold necessary imaging\n6. **RHIG FOR ALL RH-NEGATIVE** — within 72 hours',
+        },
+        {
+            heading: 'Airway Modifications',
+            body: '• **Smaller ETT (6.0-7.0)** — airway edema common\n• **RSI preferred** — increased aspiration risk\n• **Aggressive preoxygenation** — FRC decreased, O2 consumption increased\n• **Expect difficult airway** — edema, weight gain, breast enlargement',
+        },
+        {
+            heading: 'Breathing Modifications',
+            body: '• **SpO2 target >95%** — fetal oxygenation depends on maternal PaO2\n• **Chest tubes 1-2 spaces higher** — elevated diaphragm\n• **Lower threshold for intubation** — rapid desaturation',
+        },
+        {
+            heading: 'Circulation Modifications',
+            body: '• **Left uterine displacement** — 15-30° tilt or manual displacement\n• **IV access above diaphragm** — IVC compression affects lower extremity return\n• **Target SBP >90 mmHg** — uterine perfusion pressure\n• **Blood products early** — 1:1:1 ratio if massive transfusion needed\n• **Vasopressors acceptable** — phenylephrine, norepinephrine',
+        },
+        {
+            heading: 'Cardiac Arrest Modifications',
+            body: '• **Manual left uterine displacement** — assign team member\n• **Same defibrillation doses** — remove fetal monitors first\n• **Same medications** — all ACLS drugs acceptable\n• **4-minute rule** — begin resuscitative hysterotomy if no ROSC\n• **Continue CPR after delivery** — do not stop',
+        },
+        {
+            heading: 'Fetal Monitoring',
+            body: '• **Continuous monitoring >24 weeks** — all trauma patients\n• **Minimum 4-6 hours** — low-risk patients\n• **24 hours** — any high-risk features\n• **Non-reassuring FHR** — optimize mother first, then consider emergent delivery',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AHA ACLS Guidelines: Cardiac Arrest in Pregnancy. 2025.' },
+        { num: 2, text: 'EAST Guidelines: Trauma in Pregnancy. 2023.' },
+    ],
+};
 const EAR_PERF_OVERVIEW = {
     id: 'ear-perf-overview',
     title: 'TM Perforation Management',
@@ -13930,6 +14074,11 @@ export const INFO_PAGES = {
     'ear-oe-treatment': EAR_OE_TREATMENT,
     'ear-moe-flags': EAR_MOE_FLAGS,
     'ear-perf-overview': EAR_PERF_OVERVIEW,
+    // Pregnancy Trauma
+    'preg-trauma-tools': PREG_TRAUMA_TOOLS,
+    'preg-resuscitative-hysterotomy': PREG_RESUSCITATIVE_HYSTEROTOMY,
+    'preg-trauma-ddx': PREG_TRAUMA_DDX,
+    'preg-resus-rules': PREG_RESUS_RULES,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

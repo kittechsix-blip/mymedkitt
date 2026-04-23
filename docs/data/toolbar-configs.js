@@ -873,6 +873,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'gcs', label: 'GCS', icon: '📋', action: 'calculator', target: 'peds-gcs' },
         { id: 'nat', label: 'NAT', icon: '🚩', action: 'jump', target: 'peds-trauma-nat' },
     ],
+    'pregnancy-trauma': [
+        { id: 'tools', label: 'Tools', icon: '🛠️', action: 'overlay', target: 'preg-trauma-tools' },
+        { id: 'hysterotomy', label: 'C-Section', icon: '🔪', action: 'overlay', target: 'preg-resuscitative-hysterotomy' },
+        { id: 'ddx', label: 'Preg DDx', icon: '🩺', action: 'overlay', target: 'preg-trauma-ddx' },
+        { id: 'resus', label: 'Resus Rules', icon: '❤️', action: 'overlay', target: 'preg-resus-rules' },
+    ],
     'urinary-sphincter': [
         { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'overlay', target: 'cauda-equina-red-flags' },
         { id: 'pvr', label: 'PVR', icon: '📊', action: 'jump', target: 'sphincter-pvr' },

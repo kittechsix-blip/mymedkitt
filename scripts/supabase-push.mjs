@@ -220,6 +220,7 @@ const TREE_REGISTRY = {
   'urinary-sphincter':    { prefix: 'URINARY_SPHINCTER',    entryNodeId: 'sphincter-start',  categoryId: 'urology' },
   'eating-disorders':     { prefix: 'EATING_DISORDERS',     entryNodeId: 'ed-start',         categoryId: 'emergency-medicine' },
   'peds-trauma':          { prefix: 'PEDS_TRAUMA',          entryNodeId: 'peds-trauma-start', categoryId: 'trauma-surg' },
+  'pregnancy-trauma':     { prefix: 'PREGNANCY_TRAUMA',     entryNodeId: 'preg-trauma-start', categoryId: 'trauma-surg' },
   'ohss':                 { prefix: 'OHSS',                 entryNodeId: 'ohss-start',       categoryId: 'ob-gyn' },
   'rhogam-early-pregnancy': { prefix: 'RHOGAM_EARLY_PREGNANCY', entryNodeId: 'rhogam-start', categoryId: 'ob-gyn' },
   'sti-comprehensive':    { prefix: 'STI_COMPREHENSIVE',    entryNodeId: 'sti-start',        categoryId: 'infectious-disease' },

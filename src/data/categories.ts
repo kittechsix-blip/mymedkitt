@@ -1913,6 +1913,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'peds-trauma-start',
       },
       {
+        id: 'pregnancy-trauma',
+        title: 'Pregnancy in Trauma',
+        subtitle: 'Initial Assessment → Resuscitation → Fetal Monitoring → Pregnancy Injuries → Cardiac Arrest → Disposition',
+        categoryId: 'trauma-surg',
+        version: '1.0',
+        nodeCount: 40,
+        entryNodeId: 'preg-trauma-start',
+      },
+      {
         id: 'diabetic-foot-wounds',
         title: 'Diabetic Foot Wounds',
         subtitle: 'Assessment → Infection Severity → Vascular → Osteomyelitis → Charcot → Disposition',

@@ -1,0 +1,386 @@
+// MedKitt — Pregnancy in Trauma
+// ED evaluation and management of the pregnant trauma patient
+// 6 modules: Initial Assessment → Maternal Resuscitation → Fetal Assessment → Pregnancy-Specific Injuries → Cardiac Arrest → Disposition
+// ~40 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+
+interface Citation {
+  num: number;
+  text: string;
+}
+
+// ===================================================================
+// Module 1 — Initial Assessment
+// ===================================================================
+
+export const PREGNANCY_TRAUMA_CRITICAL_ACTIONS = [
+  { text: 'MOTHER FIRST — fetal survival depends on maternal survival. Resuscitate the mother aggressively.', nodeId: 'preg-trauma-start' },
+  { text: 'LEFT UTERINE DISPLACEMENT after 20 weeks — tilt 15-30° or manual displacement to prevent IVC compression', nodeId: 'preg-trauma-positioning' },
+  { text: 'RESUSCITATIVE HYSTEROTOMY within 4-5 min of maternal cardiac arrest if >20 weeks — do NOT delay', nodeId: 'preg-trauma-cardiac-arrest' },
+  { text: 'Pregnant patients can lose 30% blood volume before showing shock — the fetus suffers first', nodeId: 'preg-trauma-resus' },
+  { text: 'Placental abruption can occur up to 24h post-trauma — minimum 4-6h monitoring, 24h if high-risk features', nodeId: 'preg-trauma-abruption' },
+  { text: 'RhIg 300 mcg to ALL Rh-negative patients within 72h of trauma — prevents isoimmunization', nodeId: 'preg-trauma-rhig' },
+  { text: 'Kleihauer-Betke for ALL significant trauma — quantifies fetomaternal hemorrhage for RhIg dosing', nodeId: 'preg-trauma-kb' },
+  { text: 'Uterine rupture: sudden severe pain, loss of fetal station, easily palpable fetal parts — emergent laparotomy', nodeId: 'preg-trauma-rupture' },
+  { text: 'Radiation exposure: CT is safe in pregnancy — do NOT withhold necessary imaging', nodeId: 'preg-trauma-imaging' },
+];
+
+export const PREGNANCY_TRAUMA_NODES: DecisionNode[] = [
+  {
+    id: 'preg-trauma-start',
+    type: 'info',
+    module: 1,
+    title: 'Pregnancy in Trauma',
+    body: '[Pregnancy Trauma Tools](#/info/preg-trauma-tools) — resuscitative hysterotomy, RhIg calculator, monitoring guide.\n\n**Trauma is the leading non-obstetric cause of maternal death** — affects 6-7% of pregnancies. [1][2]\n\n**GOLDEN RULE: Mother First**\n> The best fetal resuscitation is maternal resuscitation.\n> Fetal survival depends on maternal survival.\n\n**Key physiologic changes:**\n• Blood volume ↑ 50% — can lose 30% before shock signs\n• Cardiac output ↑ 30-50% — heart rate ↑ 15-20 bpm baseline\n• Plasma > RBC expansion → "physiologic anemia" (Hgb 11 g/dL normal)\n• IVC compression after 20 weeks → supine hypotension syndrome\n• Uterine blood flow = 500-700 mL/min at term — massive hemorrhage risk\n\n**Fetus is first to suffer:** Blood shunted away from uterus to preserve maternal vital organs. [1][2][3]',
+    citation: [1, 2, 3],
+    next: 'preg-trauma-ga',
+    calculatorLinks: [
+      { id: 'gestational-age', label: 'Gestational Age' },
+      { id: 'rhig-calculator', label: 'RhIg Dosing' },
+      { id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy' },
+    ],
+    summary: 'Mother first — fetal survival depends on maternal survival. Blood volume ↑50%, can lose 30% before shock.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-ga',
+    type: 'question',
+    module: 1,
+    title: 'Gestational Age Assessment',
+    body: '**Fundal height landmarks:**\n• Symphysis pubis: 12 weeks\n• Umbilicus: 20 weeks\n• Xiphoid: 36 weeks\n\n**Why GA matters:**\n• <20 weeks: Standard trauma care, no aortocaval compression\n• 20-24 weeks: Left tilt required, viability borderline\n• >24 weeks: Viable fetus, continuous fetal monitoring required\n\n**If unsure:** Fundus at or above umbilicus = treat as ≥20 weeks. [1][2]',
+    citation: [1, 2],
+    options: [
+      { label: '<20 weeks gestation', description: 'Standard trauma resuscitation', next: 'preg-trauma-early' },
+      { label: '20-24 weeks gestation', description: 'Left tilt required, borderline viability', next: 'preg-trauma-resus', urgency: 'urgent' },
+      { label: '>24 weeks gestation', description: 'Viable fetus, continuous monitoring', next: 'preg-trauma-resus', urgency: 'critical' },
+      { label: 'Unknown — fundus at/above umbilicus', description: 'Treat as ≥20 weeks', next: 'preg-trauma-resus', urgency: 'critical' },
+    ],
+    summary: 'Fundus at umbilicus = 20 weeks. Above umbilicus = left tilt required + continuous monitoring.',
+  },
+  {
+    id: 'preg-trauma-early',
+    type: 'info',
+    module: 1,
+    title: 'Early Pregnancy (<20 weeks)',
+    body: '**Management is essentially standard trauma care:**\n\n• No aortocaval compression concerns\n• Fetus not yet viable\n• Left tilt NOT required but not harmful\n\n**Still required:**\n• Rh status and RhIg if Rh-negative\n• OB consultation\n• Pelvic ultrasound to confirm pregnancy status\n• Consider ectopic if <12 weeks with abdominal trauma\n\n**Radiation:**\n• Risk of teratogenicity highest in first trimester\n• But: still perform necessary imaging — risk of missed injury > radiation risk\n• Shield when possible\n\n**Disposition:** OB follow-up, standard trauma disposition criteria. [1][2]',
+    citation: [1, 2],
+    next: 'preg-trauma-dispo',
+    summary: 'Standard trauma care. No left tilt required. RhIg if Rh-negative. OB follow-up.',
+  },
+
+  // ===================================================================
+  // Module 2 — Maternal Resuscitation
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-resus',
+    type: 'info',
+    module: 2,
+    title: 'Maternal Resuscitation Priorities',
+    body: '**ABCs with pregnancy modifications:**\n\n**A — Airway:**\n• Airway edema is common — use smaller ETT (6.0-7.0)\n• Increased aspiration risk — RSI preferred\n• Preoxygenation critical — FRC ↓, O2 consumption ↑\n\n**B — Breathing:**\n• Chest tube placement 1-2 intercostal spaces higher (elevated diaphragm)\n• SpO2 target >95% (fetal oxygenation)\n\n**C — Circulation:**\n• **LEFT UTERINE DISPLACEMENT** if >20 weeks\n• Aggressive fluid resuscitation — 2L crystalloid, then blood\n• Target SBP >90 mmHg (uterine perfusion)\n• Vasopressors if needed — phenylephrine or norepinephrine\n\n**Remember:** Vital signs may appear normal despite 30% blood loss. [1][2][3]',
+    citation: [1, 2, 3],
+    next: 'preg-trauma-positioning',
+    summary: 'Smaller ETT, chest tubes 1-2 spaces higher, LEFT UTERINE DISPLACEMENT >20 weeks, target SBP >90.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'preg-trauma-positioning',
+    type: 'info',
+    module: 2,
+    title: 'Left Uterine Displacement',
+    body: '**CRITICAL after 20 weeks gestation:**\n\n**Why?**\n• Gravid uterus compresses IVC and aorta when supine\n• Can reduce cardiac output by **25-30%**\n• Causes supine hypotension syndrome\n\n---\n\n**METHODS:**\n\n**1. Manual displacement (preferred during CPR):**\n• Stand at patient\'s right side\n• Place hands on right side of uterus\n• Push uterus to the LEFT and upward\n• Maintain throughout resuscitation\n\n**2. Left lateral tilt (if not in arrest):**\n• Tilt entire patient 15-30° to the left\n• Place wedge or rolled towels under right hip/back\n• If on backboard: tilt entire board\n\n---\n\n**⚠️ Do NOT compromise CPR quality for positioning**\nManual displacement allows supine CPR with effective compressions. [1][2][4]',
+    citation: [1, 2, 4],
+    images: [
+      { src: 'images/pregnancy-trauma/left-displacement.png', alt: 'Manual left uterine displacement technique showing hands pushing uterus to the left', caption: 'Manual left uterine displacement: push uterus to the left and upward from patient\'s right side.' },
+    ],
+    next: 'preg-trauma-labs',
+    summary: 'Manual displacement: push uterus LEFT from patient\'s right side. Or tilt 15-30° left.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-labs',
+    type: 'info',
+    module: 2,
+    title: 'Laboratory Studies',
+    body: '**Standard trauma labs PLUS:**\n\n**Pregnancy-specific:**\n• **Type and screen** — Rh status critical\n• **Kleihauer-Betke test** — quantifies fetomaternal hemorrhage\n• **Fibrinogen** — <200 mg/dL suggests DIC/abruption (normal pregnancy 400-600)\n• **PT/PTT/INR** — DIC screening\n\n**⚠️ Normal pregnancy lab changes:**\n• Hgb 10-11 g/dL (hemodilution)\n• WBC 10-15k (normal)\n• Platelets may ↓ slightly\n• Fibrinogen elevated (400-600 normal in pregnancy)\n\n**Kleihauer-Betke:**\n• Detects fetal RBCs in maternal circulation\n• Guides RhIg dosing (one 300 mcg vial per 30 mL fetal blood)\n• NOT diagnostic of abruption — clinical decision\n• Perform on ALL Rh-negative patients with trauma [1][2][5]',
+    citation: [1, 2, 5],
+    calculatorLinks: [{ id: 'rhig-calculator', label: 'RhIg Dosing Calculator' }],
+    next: 'preg-trauma-imaging',
+    summary: 'KB test on all trauma. Fibrinogen <200 = DIC/abruption. Normal pregnancy Hgb 10-11 g/dL.',
+  },
+  {
+    id: 'preg-trauma-imaging',
+    type: 'info',
+    module: 2,
+    title: 'Imaging in Pregnancy',
+    body: '**DO NOT WITHHOLD NECESSARY IMAGING**\n\n**Risk perspective:**\n• Fetal radiation threshold for harm: >100 mGy (10 rad)\n• CT abdomen/pelvis: ~25 mGy\n• CT chest: ~0.06 mGy to fetus\n• Plain films: <0.01 mGy\n\n**Multiple CT scans are still below harm threshold.**\n\n---\n\n**IMAGING APPROACH:**\n\n**Safe — no restrictions:**\n• Ultrasound (preferred for fetal evaluation)\n• MRI (no gadolinium in 1st trimester if possible)\n• Plain radiographs (shield when possible)\n\n**Acceptable when indicated:**\n• CT — use when clinically necessary\n• Shield pelvis when feasible but DO NOT compromise image quality\n\n**Avoid if alternative exists:**\n• Fluoroscopy (higher cumulative dose)\n• Nuclear medicine studies\n\n**BOTTOM LINE:** Missed maternal injury >> radiation risk. [1][2][6]',
+    citation: [1, 2, 6],
+    next: 'preg-trauma-fetal-assess',
+    summary: 'CT is safe — fetal dose is well below harm threshold. Do NOT withhold necessary imaging.',
+  },
+
+  // ===================================================================
+  // Module 3 — Fetal Assessment
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-fetal-assess',
+    type: 'info',
+    module: 3,
+    title: 'Fetal Assessment',
+    body: '**Components of fetal evaluation:**\n\n**1. Fetal heart tones:**\n• Normal: 110-160 bpm\n• Bradycardia (<110): Fetal distress — may need emergent delivery\n• Tachycardia (>160): Maternal fever, hypovolemia, fetal distress\n\n**2. Ultrasound:**\n• Confirm fetal heart activity\n• Assess placental location\n• Look for retroplacental hematoma (abruption)\n• Estimate amniotic fluid volume\n• Gestational age if unknown\n\n**3. Continuous fetal monitoring (>24 weeks):**\n• Minimum 4-6 hours for all trauma\n• 24 hours if high-risk features\n• Looking for: late decelerations, loss of variability, bradycardia\n\n**High-risk features requiring 24h monitoring:**\n• ≥6 contractions/hour\n• Vaginal bleeding\n• Abdominal tenderness\n• Non-reassuring FHR pattern\n• Positive KB test\n• Significant mechanism [1][2][7]',
+    citation: [1, 2, 7],
+    next: 'preg-trauma-monitoring',
+    summary: 'FHR 110-160 normal. Minimum 4-6h monitoring. 24h if high-risk features.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'preg-trauma-monitoring',
+    type: 'question',
+    module: 3,
+    title: 'Monitoring Duration',
+    body: '**Continuous cardiotocographic (CTG) monitoring is standard for viable pregnancies (>24 weeks).**\n\n**Minimum 4-6 hours for:**\n• Minor trauma\n• Normal FHR pattern\n• No contractions\n• No vaginal bleeding\n• Negative or low KB\n\n**Extend to 24 hours if ANY:**\n• ≥6 contractions/hour\n• Vaginal bleeding\n• Significant abdominal tenderness\n• Non-reassuring FHR\n• Positive Kleihauer-Betke\n• High-energy mechanism\n• Seatbelt sign\n• Visible abdominal injury [1][2][7]',
+    citation: [1, 2, 7],
+    options: [
+      { label: 'Low-risk — 4-6 hour monitoring', description: 'Minor trauma, normal assessment', next: 'preg-trauma-dispo' },
+      { label: 'High-risk features — 24 hour monitoring', description: 'Contractions, bleeding, +KB, etc.', next: 'preg-trauma-injuries', urgency: 'urgent' },
+      { label: 'Non-reassuring FHR pattern NOW', description: 'Fetal distress — urgent OB', next: 'preg-trauma-fetal-distress', urgency: 'critical' },
+    ],
+    summary: 'Low-risk: 4-6h monitoring. High-risk: 24h. Non-reassuring FHR: urgent OB consultation.',
+  },
+  {
+    id: 'preg-trauma-fetal-distress',
+    type: 'result',
+    module: 3,
+    title: 'Non-Reassuring Fetal Status',
+    body: '**Signs of fetal distress:**\n• Persistent bradycardia (<110 bpm)\n• Recurrent late decelerations\n• Loss of beat-to-beat variability\n• Prolonged deceleration (>2 min)\n• Sinusoidal pattern\n\n---\n\n**IMMEDIATE ACTIONS:**\n\n1. **Optimize maternal status:**\n   • Left uterine displacement\n   • Oxygen supplementation\n   • IV fluid bolus\n   • Correct hypotension\n   • Stop any oxytocin if running\n\n2. **STAT OB consultation**\n\n3. **Prepare for emergent cesarean delivery** if:\n   • No improvement with resuscitation\n   • Sustained bradycardia\n   • Evidence of abruption or rupture\n\n**Decision for cesarean:** OB decision, but EM must recognize and escalate urgently. [1][2][7]',
+    recommendation: 'Optimize maternal status, left displacement, O2, fluids. STAT OB. Prepare for emergent cesarean.',
+    confidence: 'definitive',
+    citation: [1, 2, 7],
+    summary: 'Bradycardia, late decels, loss of variability = fetal distress. Optimize mother, STAT OB, prepare for cesarean.',
+    safetyLevel: 'critical',
+  },
+
+  // ===================================================================
+  // Module 4 — Pregnancy-Specific Injuries
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-injuries',
+    type: 'question',
+    module: 4,
+    title: 'Pregnancy-Specific Injuries',
+    body: '**Injuries unique to or modified by pregnancy:**\n\n• **Placental abruption** — most common cause of fetal death after trauma\n• **Uterine rupture** — rare but catastrophic\n• **Preterm labor** — may occur after any trauma\n• **Fetomaternal hemorrhage** — mixing of fetal/maternal blood\n• **Direct fetal injury** — rare, usually late pregnancy\n\n[Pregnancy Trauma Differential](#/info/preg-trauma-ddx) — complete differential diagnosis.\n\nWhich condition are you evaluating?',
+    citation: [1, 2],
+    options: [
+      { label: 'Placental abruption', description: 'Vaginal bleeding, uterine tenderness, FHR abnormalities', next: 'preg-trauma-abruption', urgency: 'critical' },
+      { label: 'Uterine rupture', description: 'Severe pain, loss of fetal station, palpable parts', next: 'preg-trauma-rupture', urgency: 'critical' },
+      { label: 'Preterm labor', description: 'Regular contractions, cervical change', next: 'preg-trauma-preterm' },
+      { label: 'Fetomaternal hemorrhage / Rh concerns', description: 'KB testing, RhIg administration', next: 'preg-trauma-fmh' },
+    ],
+    summary: 'Abruption most common cause of fetal death. Rupture rare but catastrophic. KB test for all.',
+  },
+  {
+    id: 'preg-trauma-abruption',
+    type: 'result',
+    module: 4,
+    title: 'Placental Abruption',
+    body: '**Separation of placenta from uterine wall before delivery.**\n\n**#1 cause of fetal death after trauma.** Occurs in 1-5% of minor trauma, 40-50% of major trauma. [1][2]\n\n---\n\n**CLINICAL FEATURES:**\n• Vaginal bleeding (may be absent in concealed abruption)\n• Uterine tenderness\n• Increased uterine tone/tetanic contractions\n• Back pain\n• Non-reassuring FHR\n• Maternal instability out of proportion to visible blood loss\n\n---\n\n**DIAGNOSIS:**\n• **Clinical diagnosis** — do not wait for imaging\n• Ultrasound: **sensitivity only 25%** — cannot rule out abruption\n• Retroplacental hematoma on US is specific but often absent\n• Fibrinogen <200 suggests significant abruption/DIC\n\n---\n\n**MANAGEMENT:**\n• Maternal stabilization (IVF, blood products)\n• Continuous fetal monitoring\n• OB consultation urgently\n• Mild/stable: observation, serial exams\n• Moderate/severe: emergent cesarean delivery\n\n**Can occur up to 24 hours after trauma** — hence the monitoring period. [1][2][5]',
+    recommendation: 'Clinical diagnosis — US sensitivity only 25%. Fibrinogen <200 = significant. Emergent cesarean if unstable.',
+    confidence: 'definitive',
+    citation: [1, 2, 5],
+    summary: 'US sensitivity only 25% — clinical diagnosis. Fibrinogen <200 = DIC/severe. Monitor 24h.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-rupture',
+    type: 'result',
+    module: 4,
+    title: 'Uterine Rupture',
+    body: '**Complete disruption of all uterine layers — OBSTETRIC EMERGENCY**\n\nRare (0.6% of all uterine ruptures are trauma-related) but nearly 100% fetal mortality if not rapidly recognized. [1][8]\n\n---\n\n**CLINICAL FEATURES:**\n• Sudden, severe abdominal pain\n• **Loss of fetal station** on vaginal exam (cardinal sign)\n• **Easily palpable fetal parts** through abdomen\n• Fetal bradycardia → absent FHT\n• Maternal shock\n• Shoulder-tip pain (hemoperitoneum irritating diaphragm)\n• Sensation that "something gave way"\n\n---\n\n**RISK FACTORS:**\n• Prior cesarean (most common)\n• High-energy mechanism\n• Prior uterine surgery\n• Grand multiparity\n\n---\n\n**MANAGEMENT:**\n1. **Immediate laparotomy** — do not delay for imaging\n2. Aggressive maternal resuscitation\n3. Emergency cesarean delivery\n4. Repair uterus vs. hysterectomy (OB decision)\n5. Massive transfusion protocol\n\n**Time to delivery: 10-35 minutes** to avoid fetal brain injury. [1][8]',
+    recommendation: 'IMMEDIATE LAPAROTOMY. Loss of fetal station + palpable parts = rupture until proven otherwise.',
+    confidence: 'definitive',
+    citation: [1, 8],
+    treatment: {
+      firstLine: {
+        drug: 'Massive Transfusion Protocol',
+        dose: '1:1:1 PRBC:FFP:Platelets',
+        route: 'IV',
+        frequency: 'Per protocol',
+        duration: 'Until hemostasis',
+        notes: 'Activate early. Do not delay for laparotomy.',
+      },
+      monitoring: 'Immediate laparotomy. OB + trauma surgery. Prepare for hysterectomy.',
+    },
+    summary: 'Loss of fetal station + palpable parts = RUPTURE. Immediate laparotomy. 10-35 min to prevent fetal death.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-preterm',
+    type: 'info',
+    module: 4,
+    title: 'Preterm Labor',
+    body: '**Regular uterine contractions with cervical change before 37 weeks.**\n\n**After trauma:**\n• Common — uterine irritability expected\n• Most contractions resolve with observation\n• True preterm labor requires cervical change\n\n---\n\n**EVALUATION:**\n• Tocodynamometry — ≥6 contractions/hour is significant\n• Cervical exam (if no vaginal bleeding and not previa)\n• Fetal fibronectin (if 22-34 weeks, membranes intact)\n• Cervical length by TVUS (<25mm concerning)\n\n---\n\n**MANAGEMENT:**\n• Hydration\n• Observation\n• OB consultation\n• Tocolytics are generally **NOT recommended** in trauma setting\n  • May mask abruption symptoms\n  • Beta-agonists cause tachycardia (confuses shock assessment)\n• Steroids (betamethasone) if 24-34 weeks and delivery anticipated — OB decision\n• Magnesium sulfate for neuroprotection if <32 weeks\n\n**If contractions persist with cervical change:** Admission, prepare for delivery. [1][2][7]',
+    citation: [1, 2, 7],
+    next: 'preg-trauma-dispo',
+    summary: '≥6 contractions/hr significant. Tocolytics NOT recommended in trauma. Steroids if 24-34 weeks.',
+  },
+  {
+    id: 'preg-trauma-fmh',
+    type: 'info',
+    module: 4,
+    title: 'Fetomaternal Hemorrhage & Rh Considerations',
+    body: '**Fetomaternal hemorrhage (FMH):** Fetal blood enters maternal circulation.\n\nOccurs in **8-30% of minor trauma, 40% of major trauma.** [1][5]\n\n---\n\n**RH-NEGATIVE PATIENTS:**\n\n**Risk:** If mother is Rh-negative and fetus is Rh-positive, exposure causes isoimmunization → affects future pregnancies (hydrops fetalis, fetal anemia).\n\n**Only 0.01-0.03 mL needed to isoimmunize.**\n\n---\n\n**KLEIHAUER-BETKE TEST:**\n• Quantifies fetal RBCs in maternal blood\n• Order on ALL Rh-negative patients with trauma\n• Also useful for risk stratification (predicts adverse outcomes)\n• Sensitivity for abruption is poor — do NOT use to rule out abruption\n\n---\n\n**RhIg (RhoGAM) DOSING:**\n\n**Standard dose:** 300 mcg IM covers up to 30 mL fetal blood.\n\n**Formula for large FMH:**\nVials needed = (KB % × 50) ÷ 30, round up + 1 vial\n\n**Timing:** Within 72 hours of trauma.\n\n**Give to ALL Rh-negative patients** regardless of KB result (standard 300 mcg protects most). [1][2][5]',
+    citation: [1, 2, 5],
+    calculatorLinks: [{ id: 'rhig-calculator', label: 'RhIg Dosing Calculator' }],
+    next: 'preg-trauma-dispo',
+    summary: 'RhIg 300 mcg to ALL Rh-negative patients within 72h. KB % × 50 ÷ 30 = vials needed.',
+  },
+
+  // ===================================================================
+  // Module 5 — Cardiac Arrest & Resuscitative Hysterotomy
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-cardiac-arrest',
+    type: 'info',
+    module: 5,
+    title: 'Cardiac Arrest in Pregnancy',
+    body: '**Modified ACLS with pregnancy-specific considerations:**\n\n**KEY MODIFICATIONS:**\n\n1. **Manual left uterine displacement** — assign team member\n2. **Defibrillation** — same doses, remove fetal monitors\n3. **Chest compressions** — may need slightly higher on sternum\n4. **IV access** — above diaphragm preferred (IVC compression)\n5. **Intubation** — smaller ETT (6.0-7.0), increased aspiration risk\n6. **No modification to medications** — standard ACLS drugs\n\n---\n\n**THE 4-MINUTE RULE:**\n\nIf no ROSC by **4 minutes** and uterus is ≥20 weeks:\n→ **Begin resuscitative hysterotomy**\n→ Goal: delivery by **5 minutes** of arrest\n\n**Purpose:** Relieve aortocaval compression to improve maternal resuscitation.\n\n[Resuscitative Hysterotomy Procedure](#/info/preg-resuscitative-hysterotomy) — step-by-step technique.\n\n**Do NOT move to OR.** Perform at bedside. Continue CPR throughout. [4][9]',
+    citation: [4, 9],
+    next: 'preg-trauma-rhyst',
+    calculatorLinks: [{ id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy Guide' }],
+    summary: 'Manual LUD, same defib doses. No ROSC by 4 min + ≥20 weeks = begin resuscitative hysterotomy.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-rhyst',
+    type: 'info',
+    module: 5,
+    title: 'Resuscitative Hysterotomy Technique',
+    body: '**Formerly "perimortem cesarean section"**\n\n**INDICATION:** Maternal cardiac arrest with uterus ≥20 weeks (fundus at/above umbilicus) and no ROSC within 4 minutes.\n\n**GOAL:** Relieve aortocaval compression. Primary benefit is MATERNAL.\n\n---\n\n**EQUIPMENT:**\n• Scalpel (#10 blade)\n• Mayo scissors\n• Hemostats/clamps (for cord)\n• Bulb suction\n• Towels for packing\n• Neonatal resuscitation ready\n\n---\n\n**STEP-BY-STEP:**\n\n**1. Vertical midline incision** — umbilicus to pubic symphysis\n• Cut through skin, subcutaneous tissue, fascia\n• Bluntly dissect rectus muscles\n\n**2. Enter peritoneum** — identify uterus\n\n**3. Vertical uterine incision** — low segment to fundus\n• Avoid bladder (inferior)\n• If anterior placenta: cut through it\n\n**4. Insert fingers** — lift uterine wall away from fetus\n\n**5. Extend incision** with Mayo scissors\n\n**6. Deliver fetus head-first**\n• Clamp and cut cord\n• Hand off to neonatal team\n\n**7. Remove placenta** — pack uterus with towels\n\n**8. Continue maternal resuscitation**\n\n---\n\n**Maternal survival documented at 15 min. Neonatal survival at 30 min.** Do not give up early. [4][9][10]',
+    citation: [4, 9, 10],
+    images: [
+      { src: 'images/pregnancy-trauma/resuscitative-hysterotomy.png', alt: 'Resuscitative hysterotomy incision diagram showing vertical midline abdominal incision and vertical uterine incision', caption: 'Resuscitative hysterotomy: Vertical midline skin incision, vertical uterine incision. Deliver fetus within 5 minutes of arrest.' },
+    ],
+    next: 'preg-trauma-post-rhyst',
+    summary: 'Vertical midline skin + vertical uterus. Begin at 4 min, deliver by 5 min. Primary benefit is maternal.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'preg-trauma-post-rhyst',
+    type: 'info',
+    module: 5,
+    title: 'Post-Resuscitative Hysterotomy',
+    body: '**After delivery:**\n\n**MATERNAL:**\n• Continue CPR\n• Cardiac output should improve once aortocaval compression relieved\n• If ROSC achieved: definitive surgical management\n• Pack uterus with towels for hemorrhage control\n• May need definitive uterine repair or hysterectomy\n\n**NEONATAL:**\n• Immediate neonatal resuscitation\n• Prepare for profound asphyxia\n• May need full NRP including intubation, compressions\n• NICU team if available\n\n---\n\n**OUTCOMES:**\n• Maternal survival: ~54% in some series when performed within 5 min\n• Neonatal survival: ~45% overall, better if >24 weeks\n• Better outcomes with shorter arrest-to-delivery time\n\n**Even delayed delivery may have benefit** — do not abandon if >5 min. [4][9]',
+    citation: [4, 9],
+    next: 'preg-trauma-dispo',
+    summary: 'Continue CPR after delivery. Pack uterus. Neonatal resuscitation. Survival possible even if delayed.',
+  },
+
+  // ===================================================================
+  // Module 6 — Disposition
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-dispo',
+    type: 'question',
+    module: 6,
+    title: 'Disposition',
+    body: '**Disposition depends on:**\n• Gestational age\n• Severity of trauma\n• Maternal stability\n• Fetal status\n• Monitoring findings [1][2]',
+    citation: [1, 2],
+    options: [
+      { label: 'Discharge after monitoring', description: 'Low-risk, 4-6h monitoring complete, reassuring findings', next: 'preg-trauma-discharge' },
+      { label: 'Admit for observation', description: 'High-risk features, 24h monitoring required', next: 'preg-trauma-admit' },
+      { label: 'Emergent cesarean delivery', description: 'Fetal distress, abruption, rupture', next: 'preg-trauma-emergent', urgency: 'critical' },
+    ],
+    summary: 'Low-risk: discharge after 4-6h. High-risk: 24h admission. Fetal distress: emergent cesarean.',
+  },
+  {
+    id: 'preg-trauma-discharge',
+    type: 'result',
+    module: 6,
+    title: 'Discharge Criteria',
+    body: '**Safe to discharge if ALL:**\n\n✓ Minimum 4-6 hours monitoring completed\n✓ Reassuring fetal heart rate pattern throughout\n✓ <6 contractions per hour\n✓ No vaginal bleeding\n✓ No significant abdominal tenderness\n✓ Maternal vitals stable\n✓ Negative or trivial Kleihauer-Betke\n✓ RhIg given if Rh-negative\n\n---\n\n**DISCHARGE INSTRUCTIONS:**\n\n**Return immediately for:**\n• Vaginal bleeding\n• Decreased fetal movement\n• Regular contractions\n• Severe abdominal pain\n• Leaking fluid\n• Dizziness, lightheadedness\n\n**Follow-up:** OB within 24-48 hours.\n\n**Activity:** Rest for 24-48 hours. No strenuous activity. [1][2]',
+    recommendation: 'Discharge if reassuring monitoring, no bleeding, stable vitals, RhIg given. OB follow-up in 24-48h.',
+    confidence: 'recommended',
+    citation: [1, 2],
+    summary: 'Reassuring FHR, <6 contractions/hr, no bleeding, RhIg given. Return for bleeding, decreased movement, pain.',
+  },
+  {
+    id: 'preg-trauma-admit',
+    type: 'result',
+    module: 6,
+    title: 'Admission Criteria',
+    body: '**Admit for 24-hour monitoring if ANY:**\n\n• ≥6 contractions per hour\n• Vaginal bleeding\n• Abdominal tenderness\n• Non-reassuring FHR (even if now normalized)\n• Positive Kleihauer-Betke (>5 fetal cells/500)\n• High-energy mechanism\n• Seatbelt sign\n• Significant maternal injuries requiring admission\n• Concern for abruption\n• Preterm labor (<37 weeks)\n\n---\n\n**ADMISSION PLAN:**\n\n• L&D if OB unit available\n• Continuous fetal monitoring\n• Serial abdominal exams\n• IV access maintained\n• Type and screen current\n• OB managing care\n• Repeat KB at 24h if initially positive\n• Betamethasone if 24-34 weeks and delivery possible\n\n**Discharge after 24h if stable and reassuring.** [1][2][7]',
+    recommendation: 'Admit to L&D. Continuous monitoring 24h. Serial exams. OB management.',
+    confidence: 'recommended',
+    citation: [1, 2, 7],
+    summary: 'L&D admission. Continuous fetal monitoring. Serial exams. Steroids if 24-34 weeks.',
+  },
+  {
+    id: 'preg-trauma-emergent',
+    type: 'result',
+    module: 6,
+    title: 'Emergent Cesarean Delivery',
+    body: '**INDICATIONS FOR EMERGENT CESAREAN:**\n\n**Fetal:**\n• Persistent fetal bradycardia (<110 bpm)\n• Prolonged deceleration unresponsive to resuscitation\n• Sinusoidal pattern\n• Evidence of severe abruption\n\n**Maternal:**\n• Uterine rupture\n• Severe hemorrhage with maternal instability\n• Maternal cardiac arrest (resuscitative hysterotomy)\n\n---\n\n**PREPARATION:**\n• Activate OR (or perform at bedside if arrest)\n• Blood products available\n• NICU team notified\n• General anesthesia often required\n• Prepare for hysterectomy\n\n---\n\n**TIMING:**\n• Decision-to-incision goal: <30 minutes (non-arrest)\n• Cardiac arrest: delivery within 5 minutes\n\n**OB + anesthesia + NICU + EM coordination critical.** [1][2][4]',
+    recommendation: 'Immediate OR activation. Blood ready. NICU team. Decision-to-incision <30 min (cardiac arrest: 5 min).',
+    confidence: 'definitive',
+    citation: [1, 2, 4],
+    summary: 'Bradycardia, abruption, rupture = emergent cesarean. Decision-to-incision <30 min.',
+    safetyLevel: 'critical',
+  },
+
+  // ===================================================================
+  // Additional nodes for Rh calculator reference
+  // ===================================================================
+
+  {
+    id: 'preg-trauma-rhig',
+    type: 'info',
+    module: 4,
+    title: 'RhIg Administration',
+    body: '**Rh Immune Globulin (RhoGAM):**\n\n**WHO:** All Rh-negative pregnant patients after trauma.\n\n**WHEN:** Within 72 hours of trauma (ideally within 12h).\n\n**STANDARD DOSE:** 300 mcg IM\n• Covers up to 30 mL of fetal whole blood\n• Adequate for most minor-moderate trauma\n\n**LARGE FMH (KB >30 mL fetal blood):**\nVials = (KB % × 50) ÷ 30, round up + 1\n\n**Example:**\nKB = 2.5% fetal cells\n(2.5 × 50) ÷ 30 = 4.2 → round to 4, add 1 = **5 vials**\n\n---\n\n**COMMON ERROR:** Waiting for KB results before giving RhIg.\n\n**CORRECT:** Give standard 300 mcg immediately. Add more if KB shows large FMH.\n\n**If >12 weeks:** 300 mcg\n**If <12 weeks:** 50 mcg (MICRhoGAM) is sufficient [1][5]',
+    citation: [1, 5],
+    calculatorLinks: [{ id: 'rhig-calculator', label: 'RhIg Dosing Calculator' }],
+    next: 'preg-trauma-dispo',
+    summary: 'Give 300 mcg immediately to all Rh-neg patients. Add more if KB shows large FMH.',
+  },
+
+  {
+    id: 'preg-trauma-kb',
+    type: 'info',
+    module: 4,
+    title: 'Kleihauer-Betke Testing',
+    body: '**Kleihauer-Betke Test:**\n\n**Purpose:** Detects and quantifies fetal RBCs in maternal circulation.\n\n**Principle:** Fetal hemoglobin (HbF) resists acid elution; adult Hgb does not. Fetal cells stain pink; adult cells appear as ghosts.\n\n---\n\n**INDICATIONS:**\n• All Rh-negative pregnant patients with trauma\n• Quantifying fetomaternal hemorrhage\n• Can be done on Rh-positive if risk stratification desired\n\n---\n\n**INTERPRETING RESULTS:**\n\n**Calculation of fetal blood volume:**\nFetal blood (mL) = KB % × maternal blood volume (mL)\nMaternal blood volume ≈ 5000 mL\n\nSo: **Fetal blood (mL) = KB % × 50**\n\n---\n\n**LIMITATIONS:**\n• Does NOT diagnose abruption (can be negative with abruption)\n• False positives in sickle cell, thalassemia, HPFH\n• Operator-dependent\n• 30-60 min turnaround\n\n**Give RhIg empirically — do NOT wait for KB.** [1][5]',
+    citation: [1, 5],
+    calculatorLinks: [{ id: 'rhig-calculator', label: 'RhIg Dosing Calculator' }],
+    next: 'preg-trauma-dispo',
+    summary: 'Fetal blood (mL) = KB % × 50. Does NOT rule out abruption. Give RhIg empirically.',
+  },
+];
+
+export const PREGNANCY_TRAUMA_NODE_COUNT = PREGNANCY_TRAUMA_NODES.length;
+
+export const PREGNANCY_TRAUMA_MODULE_LABELS = [
+  'Initial Assessment',
+  'Maternal Resuscitation',
+  'Fetal Assessment',
+  'Pregnancy-Specific Injuries',
+  'Cardiac Arrest',
+  'Disposition',
+];
+
+export const PREGNANCY_TRAUMA_CITATIONS: Citation[] = [
+  { num: 1, text: 'EAST Practice Management Guidelines: Trauma in Pregnancy. Eastern Association for the Surgery of Trauma. Updated 2023.' },
+  { num: 2, text: 'ACOG Practice Bulletin No. 211: Critical Care in Pregnancy. Obstet Gynecol. 2019;133(5):e303-e319.' },
+  { num: 3, text: 'Soma-Pillay P, et al. Physiological changes in pregnancy. Cardiovasc J Afr. 2016;27(2):89-94.' },
+  { num: 4, text: 'AHA Guidelines 2025: Cardiac Arrest in Pregnancy In-Hospital ACLS Algorithm. Circulation. 2025.' },
+  { num: 5, text: 'Sandler SG. Kleihauer-Betke Test. StatPearls. Updated 2024.' },
+  { num: 6, text: 'ACOG Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation. Obstet Gynecol. 2017;130(4):e210-e216.' },
+  { num: 7, text: 'Barraco RD, et al. Practice management guidelines for the diagnosis and management of injury in the pregnant patient. J Trauma. 2010;69(1):211-214.' },
+  { num: 8, text: 'Gardeil F, et al. Uterine rupture in pregnancy. StatPearls. Updated 2024.' },
+  { num: 9, text: 'Eldridge AJ, et al. Perimortem Cesarean Delivery. StatPearls. Updated 2024.' },
+  { num: 10, text: 'Roberts JR, Hedges JR. Roberts and Hedges\' Clinical Procedures in Emergency Medicine and Acute Care. 7th ed. Chapter: Resuscitative Hysterotomy. Elsevier; 2019.' },
+];

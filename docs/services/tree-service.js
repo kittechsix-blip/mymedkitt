@@ -706,6 +706,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/peds-trauma.js');
             return { nodes: m.PEDS_TRAUMA_NODES, entryNodeId: 'peds-trauma-start', categoryId: 'trauma-surg', moduleLabels: m.PEDS_TRAUMA_MODULE_LABELS, citations: m.PEDS_TRAUMA_CITATIONS, criticalActions: m.PEDS_TRAUMA_CRITICAL_ACTIONS };
         },
+        'pregnancy-trauma': async () => {
+            const m = await import('../data/trees/pregnancy-trauma.js');
+            return { nodes: m.PREGNANCY_TRAUMA_NODES, entryNodeId: 'preg-trauma-start', categoryId: 'trauma-surg', moduleLabels: m.PREGNANCY_TRAUMA_MODULE_LABELS, citations: m.PREGNANCY_TRAUMA_CITATIONS, criticalActions: m.PREGNANCY_TRAUMA_CRITICAL_ACTIONS };
+        },
         'ohss': async () => {
             const m = await import('../data/trees/ohss.js');
             return { nodes: m.OHSS_NODES, entryNodeId: 'ohss-start', categoryId: 'ob-gyn', moduleLabels: m.OHSS_MODULE_LABELS, citations: m.OHSS_CITATIONS, criticalActions: m.OHSS_CRITICAL_ACTIONS };
