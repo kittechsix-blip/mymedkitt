@@ -110,9 +110,9 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES: DecisionNode[] = [
     citation: [1, 2, 3, 4, 8, 9],
     images: [
       {
-        src: 'images/resuscitative-hysterotomy/supine-hypotensive-syndrome.jpg',
-        alt: 'Lateral-view illustration of supine pregnant woman with gravid uterus compressing IVC and aorta against the vertebral column',
-        caption: 'Supine hypotensive syndrome: the gravid uterus compresses the IVC (reducing venous return) and aorta (reducing uteroplacental perfusion) — the anatomic basis for LUD and for resuscitative hysterotomy in arrest. (Bonnie Urquhart Gruenberg — CC BY-SA 4.0, via Wikimedia Commons)',
+        src: 'images/resuscitative-hysterotomy/gravid-uterus-nih-bioart.svg',
+        alt: 'Lateral cross-section of pregnant human abdomen showing fetus and gravid uterus in relation to maternal torso and vertebral column',
+        caption: 'Lateral cross-section of the gravid abdomen. In supine positioning, the uterus compresses the IVC and aorta against the vertebral column, reducing venous return — the anatomic basis for LUD and for resuscitative hysterotomy in arrest. (NIH BioArt #421, NIAID — Public Domain)',
       },
     ],
     next: 'rh-lud',
@@ -129,9 +129,9 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES: DecisionNode[] = [
     citation: [1, 4, 10],
     images: [
       {
-        src: 'images/resuscitative-hysterotomy/pregnancy-uterus-height.jpg',
-        alt: 'Silhouette of pregnant abdomen showing fundal height landmarks at pubic symphysis, umbilicus (20 wk), and xiphoid (36-38 wk)',
-        caption: 'Fundal height landmarks. The uterus being displaced during LUD is this entire mass — a two-handed pull up and to the patient\'s left. (Ulysse2121 — CC BY-SA 3.0, via Wikimedia Commons)',
+        src: 'images/resuscitative-hysterotomy/gravid-uterus-nih-bioart.svg',
+        alt: 'Lateral cross-section of pregnant abdomen showing the gravid uterus as a large intra-abdominal mass',
+        caption: 'The uterus being displaced during LUD is this entire mass. Manual LUD = two-handed pull up and to the patient\'s left, continuous, dedicated provider. (NIH BioArt #421, NIAID — Public Domain)',
       },
     ],
     next: 'rh-iv-airway',
@@ -327,9 +327,9 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES: DecisionNode[] = [
     citation: [1, 2, 17],
     images: [
       {
-        src: 'images/resuscitative-hysterotomy/cesarean-incision-lines.jpg',
-        alt: 'Overlay showing both low-transverse (Pfannenstiel) and classical vertical cesarean incision lines on pregnant abdomen',
-        caption: 'Classical vertical (preferred for RH) vs. low transverse cesarean incisions. Vertical is faster, avoids bladder mobilization, and works regardless of placental location. (Ajzh2074 — CC BY-SA 3.0, via Wikimedia Commons)',
+        src: 'images/resuscitative-hysterotomy/hysterotomy-leishman-1888.jpg',
+        alt: 'Historical surgical engraving showing hysterotomy — exposure of the uterus and incision technique for delivery',
+        caption: 'Historical illustration of hysterotomy (Leishman & Stubbs, 1888). For resuscitative hysterotomy use a **classical vertical** uterine incision — faster, better exposure, avoids bladder mobilization, and works regardless of placental location. (Leishman & Stubbs, A System of Midwifery, 1888 — Public Domain)',
       },
     ],
     next: 'rh-extract-fetus',

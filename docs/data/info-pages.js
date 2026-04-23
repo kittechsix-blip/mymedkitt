@@ -14246,6 +14246,49 @@ const EC_IUD_GUIDE = {
         { num: 3, text: 'Turok DK et al. Copper IUD for EC: Clinical Practice. Semin Reprod Med 2021.' },
     ],
 };
+const EC_CATHOLIC_PROTOCOL = {
+    id: 'ec-catholic-protocol',
+    title: 'Catholic Hospital EC Protocol',
+    subtitle: 'Ascension/ERD-compliant sexual assault EC algorithm',
+    sections: [
+        {
+            heading: 'Ascension Texas Protocol (Rev. 2.20.25)',
+            body: '**Per Ethical and Religious Directives (ERD) Directive 36:**\n\nCatholic hospitals use a different EC protocol for sexual assault cases, requiring **serum LH testing** to determine ovulation status before administering Plan B.\n\n**Rationale:** ERD permits EC only if it prevents fertilization, not implantation. LH testing attempts to identify ovulating patients where fertilization may have already occurred.',
+        },
+        {
+            heading: 'Step 1: Timing',
+            body: '• Patient must present **within 72 hours** of assault\n• If >72 hours post-assault → EC NOT administered per protocol\n\n**Note:** Standard medical guidance supports EC up to 120 hours. This 72-hour limit is institution-specific.',
+        },
+        {
+            heading: 'Step 2: Pregnancy Test',
+            body: '• Order urine or serum **HCG** with patient permission\n• If **positive** → pregnancy predates assault → **NO Plan B**\n• If patient is **sterile** → no EC needed (may give for psychological benefit if requested)',
+        },
+        {
+            heading: 'Step 3: Serum LH Test',
+            body: '**If conception is possible → order Serum LH**\n\n| LH Result | Interpretation | Plan B? |\n|-----------|----------------|---------||\n| **Outside 19.18-103.03** | Not ovulating OR ovum no longer viable | ✅ **YES** |\n| **Within 19.18-103.03** | LH surge = likely ovulating | ❌ **NO** |\n\n**LH 19.18-103.03 mIU/mL** = mid-cycle surge window where fertilization is possible',
+        },
+        {
+            heading: 'If Plan B CAN Be Given',
+            body: '• **Levonorgestrel 1.5 mg PO once** (Plan B)\n• Available from: Inpatient pharmacy OR ED Omnicell\n• Requires physician order\n• Counsel: EC is NOT 100% effective',
+        },
+        {
+            heading: 'If Plan B CANNOT Be Given',
+            body: '• Inform patient **why** per protocol\n• **Patient may seek treatment elsewhere**\n• Document discussion in chart\n• Provide information about community resources\n\n**Patient rights:** The patient has the right to seek EC at a non-Catholic facility. Provide this information clearly.',
+        },
+        {
+            heading: 'NOT Permitted at Ascension Facilities',
+            body: '❌ **Ella (ulipristal)** — post-fertilization mechanism\n❌ **Mifepristone (RU-486)**\n❌ **Copper IUD for EC**\n❌ Any agent with post-fertilization mechanism\n\n**Note:** Mirena IUD is also restricted for EC purposes at most Catholic facilities.',
+        },
+        {
+            heading: 'Complete Sexual Assault Care',
+            body: '**Don\'t forget:**\n• STI/STD prophylaxis discussion with attending\n• Forensic evidence collection (SANE if available)\n• Offer Spiritual Care / Social Services\n• Treat injuries, prophylactic antibiotics as indicated\n• Document thoroughly\n• Refer to [Sexual Assault Considerations](#/node/ec-assault-considerations)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ascension Texas Sexual Assault EC Protocol. Rev. 2.20.25.' },
+        { num: 2, text: 'United States Conference of Catholic Bishops. Ethical and Religious Directives for Catholic Health Care Services. 6th Ed. 2018. Directive 36.' },
+    ],
+};
 const EC_DRUG_INTERACTIONS = {
     id: 'ec-drug-interactions',
     title: 'EC Drug Interactions',
@@ -14718,6 +14761,7 @@ export const INFO_PAGES = {
     'ec-legal-guide': EC_LEGAL_GUIDE,
     'ec-iud-guide': EC_IUD_GUIDE,
     'ec-drug-interactions': EC_DRUG_INTERACTIONS,
+    'ec-catholic-protocol': EC_CATHOLIC_PROTOCOL,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

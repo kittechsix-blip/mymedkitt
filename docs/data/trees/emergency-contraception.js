@@ -300,10 +300,10 @@ export const EMERGENCY_CONTRACEPTION_NODES = [
         type: 'info',
         module: 6,
         title: 'Sexual Assault Considerations',
-        body: '**EC in sexual assault cases:**\n\n**Standard of care:**\n• Offer EC to ALL sexual assault survivors\n• Should be offered regardless of patient\'s stated desire for pregnancy\n• Patient may accept or decline\n\n**Hospital requirements (most states):**\n• Must provide information about EC\n• May be required to offer or dispense EC\n• Some states require direct dispensing\n\n**Texas:**\n• Must provide information about EC\n• NOT required to dispense (patient may go to pharmacy)\n• Plan B available OTC at pharmacy\n\n**Documentation:**\n• Offer documented in chart\n• Patient acceptance or refusal documented\n• If declined, offer to revisit decision before discharge\n\n**See SANE/SAFE protocol for complete assault evaluation.** [12]',
-        citation: [12],
+        body: '**EC in sexual assault cases:**\n\n**Standard of care:**\n• Offer EC to ALL sexual assault survivors\n• Should be offered regardless of patient\'s stated desire for pregnancy\n• Patient may accept or decline\n\n**Hospital requirements (most states):**\n• Must provide information about EC\n• May be required to offer or dispense EC\n• Some states require direct dispensing\n\n**Texas:**\n• Must provide information about EC\n• NOT required to dispense (patient may go to pharmacy)\n• Plan B available OTC at pharmacy\n\n**Catholic/Ascension hospitals:**\n• Require **serum LH testing** before Plan B\n• Plan B given only if LH **outside 19.18-103.03 mIU/mL**\n• ella, Cu-IUD NOT permitted\n• [See Catholic Hospital Protocol](#/info/ec-catholic-protocol) for full algorithm\n\n**Documentation:**\n• Offer documented in chart\n• Patient acceptance or refusal documented\n• If declined, offer to revisit decision before discharge\n\n**See SANE/SAFE protocol for complete assault evaluation.** [12,13]',
+        citation: [12, 13],
         next: 'ec-disposition',
-        summary: 'Offer EC to all sexual assault survivors; document offer and decision; Texas requires info but not dispensing',
+        summary: 'Offer EC to all assault survivors; Catholic hospitals require LH testing; document offer and decision',
     },
 ];
 export const EMERGENCY_CONTRACEPTION_CITATIONS = [
@@ -319,4 +319,5 @@ export const EMERGENCY_CONTRACEPTION_CITATIONS = [
     { num: 10, text: 'Faculty of Sexual and Reproductive Healthcare. Drug Interactions with Hormonal Contraception. FSRH Clinical Guideline. 2024.' },
     { num: 11, text: 'Guttmacher Institute. Emergency Contraception: State Laws and Policies. 2024.' },
     { num: 12, text: 'ACEP Clinical Policy: Management of the Adult Patient After Sexual Assault. Ann Emerg Med. 2019.' },
+    { num: 13, text: 'Ascension Texas Sexual Assault EC Protocol. Rev. 2.20.25. Per Ethical and Religious Directives for Catholic Health Care Services (Directive 36).' },
 ];

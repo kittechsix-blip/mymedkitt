@@ -914,7 +914,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'timing', label: 'Timing', icon: '⏱️', action: 'overlay', target: 'ec-timing-efficacy' },
     { id: 'weight', label: 'Weight', icon: '⚖️', action: 'overlay', target: 'ec-weight-guide' },
     { id: 'legal', label: 'Legal', icon: '📜', action: 'overlay', target: 'ec-legal-guide' },
-    { id: 'iud', label: 'Cu-IUD', icon: '🔧', action: 'overlay', target: 'ec-iud-guide' },
+    { id: 'catholic', label: 'Catholic', icon: '✝️', action: 'overlay', target: 'ec-catholic-protocol' },
   ],
   'urinary-sphincter': [
     { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'overlay', target: 'cauda-equina-red-flags' },
