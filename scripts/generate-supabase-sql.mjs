@@ -91,6 +91,7 @@ const TREE_REGISTRY = {
   'echo-epss':        { prefix: 'ECHO_EPSS',           entryNodeId: 'epss-start',         categoryId: 'us-rads' },
   'shoulder-dystocia':{ prefix: 'SHOULDER_DYSTOCIA',   entryNodeId: 'sd-start',           categoryId: 'ob-gyn' },
   'precip-delivery':  { prefix: 'PRECIP_DELIVERY',     entryNodeId: 'precip-start',       categoryId: 'ob-gyn' },
+  'breech-delivery':  { prefix: 'BREECH_DELIVERY',     entryNodeId: 'breech-start',       categoryId: 'ob-gyn' },
   'cord-emergencies': { prefix: 'CORD_EMERGENCIES',    entryNodeId: 'cord-start',         categoryId: 'ob-gyn' },
   'resuscitative-hysterotomy': { prefix: 'RESUSCITATIVE_HYSTEROTOMY', entryNodeId: 'rh-start', categoryId: 'ob-gyn' },
   'neonatal-resus':   { prefix: 'NEONATAL_RESUS',      entryNodeId: 'nrp-start',          categoryId: 'pediatrics' },

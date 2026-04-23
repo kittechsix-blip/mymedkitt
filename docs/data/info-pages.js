@@ -14316,6 +14316,174 @@ const EC_DRUG_INTERACTIONS = {
         { num: 2, text: 'UK MHRA. Levonorgestrel and enzyme inducers guidance. 2016.' },
     ],
 };
+// -------------------------------------------------------------------
+// Breech Delivery — Steps Summary
+// -------------------------------------------------------------------
+const BREECH_DELIVERY_SUMMARY = {
+    id: 'breech-delivery-summary',
+    title: 'Breech Delivery Steps Summary',
+    subtitle: 'Quick-reference checklist for ED vaginal breech delivery',
+    sections: [
+        {
+            heading: '1. Recognize and Classify',
+            body: '• [Suspect breech: HR above umbilicus, head at fundus, soft presenting part](#/node/breech-suspect)\n• [Confirm with bedside POCUS — takes <60 seconds](#/node/breech-pocus-confirm)\n• [Classify: Frank (best), Complete, Footling (highest cord prolapse risk)](#/node/breech-classify)',
+        },
+        {
+            heading: '2. Decision — Vaginal or C-Section',
+            body: '• [Not imminent → OR for C-section (Term Breech Trial, ACOG 745)](#/node/breech-csection)\n• [Imminent (body delivering, full dilation, active pushing) → vaginal with maneuvers](#/node/breech-imminent)\n• [Transverse lie → C-section only; tocolysis to buy time](#/node/breech-transverse)',
+        },
+        {
+            heading: '3. Preparation',
+            body: '• [Call OB + Peds/NICU + Anesthesia STAT; OR must be available as backup](#/node/breech-callhelp)\n• [Check immediately for cord prolapse (footling = 15-20%)](#/node/breech-cord-check)\n• [Dorsal lithotomy, bladder empty, IV ×2, type and screen, warmer on](#/node/breech-prep)',
+        },
+        {
+            heading: '4. Body Delivery — HANDS OFF',
+            body: '• [Hands off the breech until scapulae visible — traction causes head extension](#/node/breech-hands-off)\n• [Body delivers to umbilicus via maternal pushing only](#/node/breech-body-spontaneous)\n• [Keep back anterior; rotate if posterior (grip iliac crests, thumbs on sacrum)](#/node/breech-back-anterior)\n• [Pinard maneuver for extended legs (frank breech): finger behind knee → reflex flexion](#/node/breech-pinard)\n• [Loop cord down after umbilicus delivers; 5-10 min to head](#/node/breech-umbilicus)',
+        },
+        {
+            heading: '5. Shoulders and Arms',
+            body: '• [Flexed arms deliver spontaneously](#/node/breech-arms-assess)\n• [Nuchal arm → Løvset maneuver: 180° rotate → sweep across chest; reverse for 2nd arm](#/node/breech-lovset)',
+        },
+        {
+            heading: '6. Aftercoming Head',
+            body: '• [Mauriceau-Smellie-Veit: body on forearm, finger in MAXILLA (not mandible), other hand on shoulders](#/node/breech-msv)\n• [Burns-Marshall if MSV fails: hold ankles, body hangs, arc upward over abdomen](#/node/breech-burns-marshall)\n• [Head entrapment: Terbutaline tocolysis → emergent OR for C-section rescue](#/node/breech-head-entrapment)',
+        },
+        {
+            heading: '7. Postpartum',
+            body: '• [Neonate: APGAR, brachial plexus exam, limb palpation, hip assessment](#/node/breech-complete)\n• [Oxytocin 20u in 1L NS at 250 mL/hr after placenta delivers](#/node/breech-maternal-postpartum)\n• [Inspect cervix carefully (higher laceration rate in breech)](#/node/breech-maternal-postpartum)\n• [Admit mom to OB ×24h min, neonate to nursery/NICU](#/node/breech-final)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'VanRooyen MJ, Scott JA. Emergency Delivery. Tintinalli\'s Emergency Medicine. 9th ed. McGraw-Hill; 2020.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 745: Mode of Term Singleton Breech Delivery. 2018.' },
+        { num: 3, text: 'RCOG Green-top Guideline No. 20b: Management of Breech Presentation. 2017.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Breech Types Atlas — Frank, Complete, Footling
+// -------------------------------------------------------------------
+const BREECH_TYPES_ATLAS = {
+    id: 'breech-types-atlas',
+    title: 'Types of Breech Presentation',
+    subtitle: 'Classification, frequency, and delivery implications',
+    sections: [
+        {
+            heading: 'Frank Breech (50-70% of term breech)',
+            body: '**ANATOMY:** Hips flexed, both knees extended — fetal feet are up near the face ("pike position").\n\n**PRESENTING PART:** Buttocks only; feels like a smooth oval on vaginal exam.\n\n**DELIVERY IMPLICATIONS:**\n• Most favorable type for vaginal delivery\n• Buttocks dilate cervix like a wedge — reduces risk of head entrapment\n• Lower cord prolapse risk (~0.5%)\n• May require [Pinard maneuver](#/node/breech-pinard) to flex each extended leg for delivery',
+        },
+        {
+            heading: 'Complete Breech (5-10%)',
+            body: '**ANATOMY:** Hips AND knees both flexed ("cannonball" or cross-legged position).\n\n**PRESENTING PART:** Both buttocks and feet together at the pelvic outlet.\n\n**DELIVERY IMPLICATIONS:**\n• Acceptable for vaginal delivery in selected cases\n• Cord prolapse risk ~5%\n• Legs deliver spontaneously — no Pinard needed',
+        },
+        {
+            heading: 'Incomplete / Footling Breech (10-40% at term, more common preterm)',
+            body: '**ANATOMY:** One or both hips extended — foot or feet present first.\n\n**PRESENTING PART:** Single foot (single footling) or both feet (double footling).\n\n**DELIVERY IMPLICATIONS:**\n• **HIGHEST cord prolapse risk (~15-20%)** — foot does not occlude cervix\n• **Relative contraindication to vaginal delivery** — cervix may not fully dilate around the small foot, trapping body/head\n• Strong preference for C-section even if delivery seems imminent',
+        },
+        {
+            heading: 'Kneeling Breech (rare)',
+            body: '**ANATOMY:** Hips extended, knees flexed — knees present first.\n\n**MANAGEMENT:** Managed similarly to footling breech — high complication risk, prefer C-section.',
+        },
+        {
+            heading: 'Sacro-Anterior vs Sacro-Posterior Orientation',
+            body: '**SACRO-ANTERIOR (preferred):** Fetal sacrum faces maternal pubic symphysis (anteriorly). This allows normal mechanism of labor, with proper head flexion during delivery.\n\n**SACRO-POSTERIOR (avoid):** Fetal sacrum faces maternal spine (posteriorly). Head is likely extended; vaginal delivery becomes dangerous. Gently rotate to sacro-anterior using iliac crest grip (thumbs on sacrum — never on abdomen).\n\nSee [Keep Back Anterior](#/node/breech-back-anterior) for rotation technique.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lanni SM, Gherman R, Gonik B. Malpresentations. In: Gabbe SG, ed. Obstetrics: Normal and Problem Pregnancies. 7th ed. Elsevier; 2017.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 745: Mode of Term Singleton Breech Delivery. Obstet Gynecol. 2018;132(2):e60-e63.' },
+        { num: 3, text: 'RCOG Green-top Guideline No. 20b: Management of Breech Presentation. BJOG. 2017;124(7):e151-e177.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Breech Maneuvers Atlas
+// -------------------------------------------------------------------
+const BREECH_MANEUVERS_ATLAS = {
+    id: 'breech-maneuvers-atlas',
+    title: 'Breech Delivery Maneuvers Atlas',
+    subtitle: 'Pinard, Løvset, Mauriceau-Smellie-Veit, Burns-Marshall, Bracht',
+    sections: [
+        {
+            heading: 'Pinard Maneuver — Extended Legs (Frank Breech)',
+            body: '**PURPOSE:** Flex an extended fetal leg at the knee to deliver one foot at a time — used in frank breech with legs extended above the body.\n\n**TECHNIQUE:**\n1. Two fingers into the vagina alongside the extended leg\n2. Press behind the knee (popliteal fossa) — triggers reflex knee flexion\n3. Sweep the foot laterally and deliver it\n4. Repeat on the contralateral leg\n\n**CAUTION:** Do not pull on the leg. Reflex flexion from popliteal pressure, not traction. Named for Adolphe Pinard (1844-1934).',
+        },
+        {
+            heading: 'Løvset Maneuver — Nuchal Arms',
+            body: '**PURPOSE:** Deliver fetal arms that are trapped behind the head ("nuchal arms").\n\n**GRIP:** Thumbs on fetal sacrum, fingers wrapped around iliac crests. **Never grip the abdomen.**\n\n**TECHNIQUE:**\n1. Gentle downward traction + rotate body 180° clockwise → brings posterior arm anteriorly under pubic arch\n2. Sweep the now-anterior arm across the fetal face/chest and out\n3. Rotate body 180° counter-clockwise → brings other arm anteriorly\n4. Sweep second arm out the same way\n\n**CAUTION:** Always sweep arm across chest, not laterally — lateral sweep risks humerus fracture. Named for Jørgen Løvset (1896-1981).',
+        },
+        {
+            heading: 'Mauriceau-Smellie-Veit (MSV) — Aftercoming Head',
+            body: '**PURPOSE:** Deliver the aftercoming fetal head in controlled, flexed position.\n\n**SETUP:** Fetal body straddles operator\'s dominant forearm (face down).\n\n**HAND POSITIONING:**\n• **Dominant hand (body-supporting):** Middle finger into fetal mouth on the MAXILLA (upper jaw — NOT mandible). Index and ring fingers on malar/cheek bones. Purpose: flex the head.\n• **Non-dominant hand (shoulder):** Middle finger on occiput; index and ring fingers on each scapula. Purpose: downward shoulder traction.\n\n**TECHNIQUE:**\n1. Gentle downward traction while mouth-finger keeps head flexed\n2. As occiput emerges under symphysis, elevate body upward toward maternal abdomen\n3. Head delivers over the perineum\n\n**ASSISTANT:** Gentle suprapubic pressure to encourage head flexion.\n\n**CAUTION:** DO NOT pull on the mandible — can dislocate jaw. Named for François Mauriceau (1637-1709), William Smellie (1697-1763), and Gustav Adolph Veit (1824-1903).',
+        },
+        {
+            heading: 'Burns-Marshall — Alternative for Aftercoming Head',
+            body: '**PURPOSE:** Alternative technique for the aftercoming head when MSV fails or is not preferred.\n\n**TECHNIQUE:**\n1. Grasp fetal ankles with one hand\n2. Let the body hang vertically from the perineum — body weight encourages head flexion\n3. Wait 30-60 seconds for the occiput to appear under the symphysis\n4. Once occiput visible, arc the body upward over the maternal abdomen in a slow wide sweep\n5. Head delivers as chin → mouth → nose → forehead → occiput\n\n**CAUTION:** Move slowly — rapid decompression of the head causes tentorial tears and intracranial hemorrhage.',
+        },
+        {
+            heading: 'Bracht Maneuver — "Hands-Off" Technique',
+            body: '**PURPOSE:** Alternative hands-off technique used in European/German obstetric practice — promotes physiologic delivery with minimal manipulation.\n\n**TECHNIQUE:**\n1. When the body has delivered to the scapulae, **do not pull or manipulate**\n2. With the next contraction, grasp the body around the pelvis and gently hyperflex it upward over the maternal abdomen (symphysis as pivot)\n3. This hyperflexion helps the head flex and deliver in one continuous motion\n4. Assistant may apply suprapubic pressure\n\n**CAUTION:** Requires strong maternal contractions; may not work if uterine tone is poor. Most familiar to European providers.',
+        },
+        {
+            heading: 'Tocolysis for Head Entrapment',
+            body: '**PURPOSE:** Relax uterus to allow head delivery or buy time for OR transfer.\n\n**AGENTS:**\n• [Terbutaline](#/drug/terbutaline/tocolysis) 0.25 mg SQ × 1 — onset 1-5 min, duration 15-30 min\n• Nitroglycerin 50-200 mcg IV boluses — onset <1 min, duration 1-2 min (requires BP monitoring)\n\n**USE:** When head is entrapped and you need immediate uterine relaxation while preparing for rescue maneuvers or emergent C-section.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lanni SM, Gherman R, Gonik B. Malpresentations. In: Gabbe SG, ed. Obstetrics: Normal and Problem Pregnancies. 7th ed. Elsevier; 2017.' },
+        { num: 2, text: 'VanRooyen MJ, Scott JA. Emergency Delivery. Tintinalli\'s Emergency Medicine. 9th ed. McGraw-Hill; 2020.' },
+        { num: 3, text: 'RCOG Green-top Guideline No. 20b: Management of Breech Presentation. BJOG. 2017;124(7):e151-e177.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Breech Delivery — Do NOT (Stop Page)
+// -------------------------------------------------------------------
+const BREECH_DELIVERY_STOP = {
+    id: 'breech-delivery-stop',
+    title: 'Breech Delivery — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    citations: [],
+    sections: [
+        {
+            heading: '🛑 Do NOT apply traction to the fetal body',
+            body: 'Traction causes the fetal head to extend — an extended head cannot pass through the pelvis, causing catastrophic head entrapment. Let uterine contractions and maternal pushing deliver the body. [Hands off until scapulae visible](#/node/breech-hands-off).',
+        },
+        {
+            heading: '🛑 Do NOT grip the fetal abdomen',
+            body: 'Squeezing the abdomen damages the spleen, kidneys, and adrenal glands — adrenal hemorrhage is a known breech delivery complication. Always grip the bony pelvis: thumbs on sacrum, fingers on iliac crests. [Correct grip](#/node/breech-back-anterior).',
+        },
+        {
+            heading: '🛑 Do NOT attempt vaginal delivery if breech is NOT imminent',
+            body: 'Per the Term Breech Trial (Hannah 2000) and ACOG Committee Opinion 745, planned C-section reduces perinatal mortality by 67%. If you have time for OR, use it. [Transfer to OR](#/node/breech-csection).',
+        },
+        {
+            heading: '🛑 Do NOT forget to check for cord prolapse',
+            body: 'Footling breech has a 15-20% cord prolapse rate. A sterile vaginal exam at first contact should rule this out. Missed cord prolapse = rapid fetal death. [Cord check](#/node/breech-cord-check).',
+        },
+        {
+            heading: '🛑 Do NOT pull on the fetal mandible during MSV',
+            body: 'The Mauriceau-Smellie-Veit maneuver requires finger pressure on the MAXILLA (upper jaw) to flex the head. Pulling on the mandible dislocates the jaw and does NOT achieve head flexion. [MSV technique](#/node/breech-msv).',
+        },
+        {
+            heading: '🛑 Do NOT sweep Løvset arms laterally',
+            body: 'When delivering nuchal arms with the Løvset maneuver, always sweep the arm across the fetal chest. Lateral sweep risks humerus fracture. [Løvset technique](#/node/breech-lovset).',
+        },
+        {
+            heading: '🛑 Do NOT rush the aftercoming head',
+            body: 'Rapid head decompression causes tentorial tears and intracranial hemorrhage. Whether MSV or Burns-Marshall, move slowly and deliberately. [Burns-Marshall](#/node/breech-burns-marshall).',
+        },
+        {
+            heading: '🛑 Do NOT attempt vaginal delivery of transverse lie',
+            body: 'Transverse lie cannot be delivered vaginally. Attempts cause uterine rupture and fetal death. Tocolysis + emergent C-section only. [Transverse management](#/node/breech-transverse).',
+        },
+        {
+            heading: '🛑 Do NOT attempt internal podalic version in the ED',
+            body: 'Internal podalic version (rotating the fetus by pulling on the feet) is beyond ED scope. Historically performed, but carries high maternal and fetal morbidity. For transverse lie or compound presentation, go to OR.',
+        },
+        {
+            heading: '🛑 Do NOT commit to vaginal breech without OR backup',
+            body: 'Breech deliveries can convert to head entrapment, nuchal arms, or cord prolapse within minutes. Without available OR for C-section rescue, the risk is unacceptable. Always call OB + Anesthesia STAT before proceeding. [Call for help](#/node/breech-callhelp).',
+        },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -14445,6 +14613,11 @@ export const INFO_PAGES = {
     'bronch-parent-en': BRONCH_PARENT_EN,
     'bronch-parent-es': BRONCH_PARENT_ES,
     'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
+    // Breech Delivery
+    'breech-delivery-summary': BREECH_DELIVERY_SUMMARY,
+    'breech-types-atlas': BREECH_TYPES_ATLAS,
+    'breech-maneuvers-atlas': BREECH_MANEUVERS_ATLAS,
+    'breech-delivery-stop': BREECH_DELIVERY_STOP,
     // Resuscitative Hysterotomy
     'rh-summary': RH_SUMMARY,
     'resuscitative-hysterotomy-stop': RH_STOP,

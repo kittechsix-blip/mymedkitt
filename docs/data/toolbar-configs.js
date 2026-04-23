@@ -42,6 +42,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },
         { id: 'oxytocin', label: 'Oxytocin', icon: '\uD83D\uDC89', action: 'jump', target: 'precip-oxytocin' },
     ],
+    'breech-delivery': [
+        { id: 'summary', label: 'Summary', icon: '📋', action: 'overlay', target: 'breech-delivery-summary' },
+        { id: 'types', label: 'Types', icon: '📖', action: 'overlay', target: 'breech-types-atlas' },
+        { id: 'maneuvers', label: 'Maneuvers', icon: '🔄', action: 'overlay', target: 'breech-maneuvers-atlas' },
+        { id: 'lovset', label: 'Løvset', icon: '🔃', action: 'jump', target: 'breech-lovset' },
+        { id: 'msv', label: 'MSV Head', icon: '👶', action: 'jump', target: 'breech-msv' },
+        { id: 'entrapment', label: 'Entrapment', icon: '⚠️', action: 'jump', target: 'breech-head-entrapment' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'breech-delivery-stop' },
+    ],
     'resuscitative-hysterotomy': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'rh-summary' },
         { id: 'lud', label: 'LUD', icon: '↔️', action: 'jump', target: 'rh-lud' },

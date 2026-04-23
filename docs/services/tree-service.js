@@ -214,6 +214,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/precip-delivery.js');
             return { nodes: m.PRECIP_DELIVERY_NODES, entryNodeId: 'precip-start', categoryId: 'ob-gyn', moduleLabels: m.PRECIP_DELIVERY_MODULE_LABELS, citations: m.PRECIP_DELIVERY_CITATIONS, criticalActions: m.PRECIP_DELIVERY_CRITICAL_ACTIONS };
         },
+        'breech-delivery': async () => {
+            const m = await import('../data/trees/breech-delivery.js');
+            return { nodes: m.BREECH_DELIVERY_NODES, entryNodeId: 'breech-start', categoryId: 'ob-gyn', moduleLabels: m.BREECH_DELIVERY_MODULE_LABELS, citations: m.BREECH_DELIVERY_CITATIONS, criticalActions: m.BREECH_DELIVERY_CRITICAL_ACTIONS };
+        },
         'cord-emergencies': async () => {
             const m = await import('../data/trees/cord-emergencies.js');
             return { nodes: m.CORD_EMERGENCIES_NODES, entryNodeId: 'cord-start', categoryId: 'ob-gyn', moduleLabels: m.CORD_EMERGENCIES_MODULE_LABELS, citations: m.CORD_EMERGENCIES_CITATIONS, criticalActions: m.CORD_EMERGENCIES_CRITICAL_ACTIONS };

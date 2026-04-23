@@ -1197,6 +1197,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'precip-start',
             },
             {
+                id: 'breech-delivery',
+                title: 'Breech Delivery',
+                subtitle: 'Recognition → Classification → Vaginal vs C-Section → Maneuvers → Aftercoming Head → Postpartum',
+                categoryId: 'ob-gyn',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'breech-start',
+            },
+            {
                 id: 'shoulder-dystocia',
                 title: 'Shoulder Dystocia',
                 subtitle: 'Recognition \u2192 McRoberts + Suprapubic \u2192 Rotational \u2192 Posterior Arm \u2192 Last Resort',
