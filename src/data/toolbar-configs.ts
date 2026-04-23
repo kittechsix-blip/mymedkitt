@@ -56,10 +56,26 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },
     { id: 'oxytocin', label: 'Oxytocin', icon: '\uD83D\uDC89', action: 'jump', target: 'precip-oxytocin' },
   ],
+  'resuscitative-hysterotomy': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'rh-summary' },
+    { id: 'lud', label: 'LUD', icon: '↔️', action: 'jump', target: 'rh-lud' },
+    { id: 'beauchops', label: 'BEAU-CHOPS', icon: '🔍', action: 'overlay', target: 'rh-beauchops-details' },
+    { id: 'incise', label: 'Incise', icon: '🔪', action: 'jump', target: 'rh-skin-incision' },
+    { id: 'apgar', label: 'APGAR', icon: '👶', action: 'calculator', target: 'apgar' },
+    { id: 'checklist', label: 'Checklist', icon: '✅', action: 'overlay', target: 'rh-procedure-checklist' },
+  ],
   'shoulder-dystocia': [
     { id: 'mcroberts', label: 'McRoberts', icon: '\uD83E\uDDB5', action: 'jump', target: 'sd-mcroberts' },
     { id: 'rotational', label: 'Rotational', icon: '\uD83D\uDD04', action: 'jump', target: 'sd-rotational' },
     { id: 'post-arm', label: 'Post Arm', icon: '\uD83D\uDCAA', action: 'jump', target: 'sd-posterior-arm' },
+  ],
+  'cord-emergencies': [
+    { id: 'summary', label: 'Summary', icon: '\uD83D\uDCCB', action: 'overlay', target: 'cord-summary' },
+    { id: 'somersault', label: 'Somersault', icon: '\uD83E\uDD38', action: 'overlay', target: 'cord-somersault-guide' },
+    { id: 'algorithm', label: 'Prolapse', icon: '\uD83C\uDD98', action: 'overlay', target: 'cord-prolapse-algorithm' },
+    { id: 'position', label: 'Position', icon: '\uD83D\uDECC', action: 'overlay', target: 'cord-knee-chest' },
+    { id: 'tocolysis', label: 'Tocolysis', icon: '\uD83D\uDC89', action: 'overlay', target: 'cord-tocolysis-guide' },
+    { id: 'stop', label: 'Stop', icon: '\uD83D\uDED1', action: 'overlay', target: 'cord-stop' },
   ],
   'first-trimester': [
     { id: 'ectopic', label: 'Ectopic', icon: '\uD83D\uDCCD', action: 'jump', target: 'ft-ectopic-confirmed' },
@@ -892,6 +908,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hysterotomy', label: 'C-Section', icon: '🔪', action: 'overlay', target: 'preg-resuscitative-hysterotomy' },
     { id: 'ddx', label: 'Preg DDx', icon: '🩺', action: 'overlay', target: 'preg-trauma-ddx' },
     { id: 'resus', label: 'Resus Rules', icon: '❤️', action: 'overlay', target: 'preg-resus-rules' },
+  ],
+  'emergency-contraception': [
+    { id: 'dosing', label: 'Dosing', icon: '💊', action: 'overlay', target: 'ec-dosing-guide' },
+    { id: 'timing', label: 'Timing', icon: '⏱️', action: 'overlay', target: 'ec-timing-efficacy' },
+    { id: 'weight', label: 'Weight', icon: '⚖️', action: 'overlay', target: 'ec-weight-guide' },
+    { id: 'legal', label: 'Legal', icon: '📜', action: 'overlay', target: 'ec-legal-guide' },
+    { id: 'iud', label: 'Cu-IUD', icon: '🔧', action: 'overlay', target: 'ec-iud-guide' },
   ],
   'urinary-sphincter': [
     { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'overlay', target: 'cauda-equina-red-flags' },

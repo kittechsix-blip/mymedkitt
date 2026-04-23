@@ -1,0 +1,360 @@
+// MedKitt — Emergency Contraception
+// Based on ACOG, CDC Selected Practice Recommendations 2024, WHO, UpToDate
+// Method Selection → Timing → Weight Considerations → Drug Interactions → Legal Guide → Disposition
+// 6 modules, ~28 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const EMERGENCY_CONTRACEPTION_CRITICAL_ACTIONS = [
+  { text: 'Copper IUD is MOST effective EC (>99%) — offer to all eligible patients', nodeId: 'ec-iud' },
+  { text: 'Ulipristal (ella) maintains efficacy 72-120h — preferred if >72h or weight >165 lbs', nodeId: 'ec-ulipristal' },
+  { text: 'Levonorgestrel (Plan B) efficacy drops significantly after 72h and with higher weight', nodeId: 'ec-levonorgestrel' },
+  { text: 'EC will NOT harm existing pregnancy — safe if inadvertently taken', nodeId: 'ec-pregnancy-test' },
+  { text: 'NO absolute medical contraindications to EC (ACOG/CDC)', nodeId: 'ec-contraindications' },
+  { text: 'Enzyme inducers (phenytoin, rifampin) reduce pill EC efficacy — double LNG dose or use IUD', nodeId: 'ec-drug-interactions' },
+  { text: 'In Texas: Plan B OTC, ella Rx, Cu-IUD all LEGAL — FDA labeled non-abortifacient', nodeId: 'ec-legal-overview' },
+];
+
+export const EMERGENCY_CONTRACEPTION_MODULE_LABELS = [
+  'Initial Assessment',
+  'Method Selection',
+  'Oral EC Options',
+  'Copper IUD',
+  'Special Populations',
+  'Disposition',
+];
+
+export const EMERGENCY_CONTRACEPTION_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'ec-start',
+    type: 'info',
+    module: 1,
+    title: 'Emergency Contraception',
+    body: '**Emergency contraception (EC)** prevents pregnancy after unprotected intercourse or contraceptive failure.\n\n**Key principles:**\n• EC works by **preventing ovulation** — NOT by disrupting implantation\n• **FDA-labeled as non-abortifacient** (Dec 2022 label update)\n• Safe, effective, and legal in all 50 states\n• No absolute medical contraindications (ACOG/CDC)\n\n**EC options by efficacy:**\n1. **Copper IUD** — >99% effective, up to 5 days\n2. **Ulipristal (ella)** — 85-95% effective, up to 5 days\n3. **Levonorgestrel (Plan B)** — 75-89% effective, best within 72h\n4. **Yuzpe method** — 56-86% effective, backup option only\n\n**Time is critical** — efficacy decreases with delay for all methods except Cu-IUD. [1,2]',
+    citation: [1, 2],
+    next: 'ec-pregnancy-test',
+    summary: 'EC prevents ovulation; FDA-labeled non-abortifacient; no absolute contraindications; time-sensitive',
+  },
+
+  {
+    id: 'ec-pregnancy-test',
+    type: 'info',
+    module: 1,
+    title: 'Pregnancy Testing',
+    body: '**Pregnancy test is NOT required** before EC if timing is appropriate.\n\n**When to test:**\n• If last menstrual period (LMP) was >4 weeks ago\n• If patient has had multiple unprotected events\n• If considering IUD insertion\n\n**If pregnancy test is positive:**\n• EC will NOT work (already pregnant)\n• EC will NOT harm existing pregnancy\n• No teratogenic effects documented\n• Counsel on pregnancy options\n\n**Safe to give EC if pregnancy status unknown** — will simply be ineffective if already pregnant. [2,3]',
+    citation: [2, 3],
+    next: 'ec-timing-assessment',
+    summary: 'Pregnancy test not required; EC will not harm existing pregnancy; safe if status unknown',
+  },
+
+  {
+    id: 'ec-timing-assessment',
+    type: 'question',
+    module: 1,
+    title: 'Time Since Intercourse',
+    body: '**Time since unprotected intercourse** determines optimal EC method.\n\nIf **multiple events** over several days, calculate from the **earliest** unprotected intercourse.\n\nNote: LMP and ovulation timing can extend window if intercourse occurred before ovulation.',
+    citation: [1, 2],
+    options: [
+      { label: '0-24 hours', description: 'Maximum efficacy window — all methods highly effective', next: 'ec-method-early' },
+      { label: '24-72 hours', description: 'Standard EC window — LNG and UPA both effective', next: 'ec-method-standard' },
+      { label: '72-120 hours (3-5 days)', description: 'Extended window — UPA or Cu-IUD preferred', next: 'ec-method-late' },
+      { label: '>120 hours (>5 days)', description: 'Only Cu-IUD may work (up to 5 days post-ovulation)', next: 'ec-method-very-late' },
+    ],
+    summary: 'Calculate from earliest unprotected intercourse; timing determines optimal method',
+  },
+
+  // =====================================================================
+  // MODULE 2: METHOD SELECTION
+  // =====================================================================
+
+  {
+    id: 'ec-method-early',
+    type: 'question',
+    module: 2,
+    title: 'Method Selection: 0-24 Hours',
+    body: '**Best efficacy window** — all methods highly effective.\n\n**Decision factors:**\n• **Long-term contraception desired?** → Cu-IUD\n• **Weight >165 lbs or BMI >25?** → Ulipristal or Cu-IUD\n• **Need OTC access now?** → Levonorgestrel\n• **On enzyme-inducing meds?** → Cu-IUD or double-dose LNG\n\n**Efficacy at 0-24h:**\n• Cu-IUD: >99%\n• Ulipristal: 94% (65% better than LNG)\n• Levonorgestrel: 91%',
+    citation: [1, 2, 4],
+    options: [
+      { label: 'Copper IUD', description: 'Most effective + long-term contraception', next: 'ec-iud' },
+      { label: 'Ulipristal (ella)', description: 'Best oral option; Rx required', next: 'ec-ulipristal' },
+      { label: 'Levonorgestrel (Plan B)', description: 'OTC, immediate access', next: 'ec-levonorgestrel' },
+      { label: 'Weight or drug interaction concerns', description: 'Need special considerations', next: 'ec-weight-check' },
+    ],
+  },
+
+  {
+    id: 'ec-method-standard',
+    type: 'question',
+    module: 2,
+    title: 'Method Selection: 24-72 Hours',
+    body: '**Standard EC window** — all oral methods still effective.\n\n**At 24-72h, efficacy:**\n• Cu-IUD: >99%\n• Ulipristal: 95% (42% better than LNG)\n• Levonorgestrel: 87-90%\n\n**Consider ulipristal over levonorgestrel if:**\n• Weight >165 lbs or BMI >25\n• Approaching 72h mark\n• Want highest oral efficacy\n\n**Levonorgestrel advantages:**\n• OTC (no prescription wait)\n• Lower cost (~$40 vs ~$50)',
+    citation: [1, 2, 4],
+    options: [
+      { label: 'Copper IUD', description: 'Most effective option', next: 'ec-iud' },
+      { label: 'Ulipristal (ella)', description: 'Better than LNG, especially near 72h', next: 'ec-ulipristal' },
+      { label: 'Levonorgestrel (Plan B)', description: 'OTC, effective if <72h', next: 'ec-levonorgestrel' },
+      { label: 'Weight or drug interaction concerns', description: 'Need special considerations', next: 'ec-weight-check' },
+    ],
+  },
+
+  {
+    id: 'ec-method-late',
+    type: 'question',
+    module: 2,
+    title: 'Method Selection: 72-120 Hours',
+    body: '**Extended window (3-5 days)** — levonorgestrel efficacy significantly reduced.\n\n**At 72-120h, efficacy:**\n• Cu-IUD: >99%\n• Ulipristal: ~95% (maintains effectiveness)\n• Levonorgestrel: 72-87% (declining)\n\n**Ulipristal is PREFERRED** over levonorgestrel in this window — maintains efficacy while LNG drops significantly. [2,4]\n\n**If ulipristal unavailable:**\n• LNG is still better than nothing\n• Consider double dose (3 mg) if weight >165 lbs',
+    citation: [2, 4],
+    options: [
+      { label: 'Copper IUD', description: 'Gold standard — unaffected by timing', next: 'ec-iud' },
+      { label: 'Ulipristal (ella)', description: 'Maintains efficacy — preferred oral option', next: 'ec-ulipristal' },
+      { label: 'Levonorgestrel only available', description: 'Reduced efficacy but still reasonable', next: 'ec-levonorgestrel' },
+    ],
+  },
+
+  {
+    id: 'ec-method-very-late',
+    type: 'info',
+    module: 2,
+    title: 'Method Selection: >120 Hours',
+    body: '**Beyond 5 days** — limited options.\n\n**Copper IUD may still work** if:\n• Within 5 days of **ovulation** (not intercourse)\n• Can determine ovulation timing from LMP/cycle\n• Example: Intercourse day 7, ovulation day 14 → IUD on day 13 still effective\n\n**If cycle timing uncertain:**\n• Cu-IUD can still be placed if negative pregnancy test\n• Efficacy less certain but still reasonable option\n\n**Oral EC NOT effective** after 120 hours — do not offer LNG or UPA.\n\n**Counsel on:**\n• Pregnancy test in 2-3 weeks if period does not arrive\n• Pregnancy options if test positive [2]',
+    citation: [2],
+    next: 'ec-iud',
+    summary: 'Only Cu-IUD may work beyond 5 days; oral EC not effective; counsel on pregnancy test timing',
+  },
+
+  // =====================================================================
+  // MODULE 3: ORAL EC OPTIONS
+  // =====================================================================
+
+  {
+    id: 'ec-levonorgestrel',
+    type: 'info',
+    module: 3,
+    title: 'Levonorgestrel (Plan B)',
+    body: '**Levonorgestrel 1.5 mg** — single dose oral EC.\n\n**Brands:** Plan B One-Step, Take Action, My Way, AfterPill, others\n\n**Dosing:**\n• **Standard:** 1.5 mg x1 (or 2 × 0.75 mg tablets at once)\n• **High-risk:** 3 mg x1 if on enzyme inducers OR weight >165 lbs\n\n**Timing:**\n| Window | Pregnancy Rate | Efficacy |\n|--------|----------------|----------|\n| <24h | 0.5% | 91% |\n| <72h | 0.8% | 87-90% |\n| 72-96h | 1.2% | 75-80% |\n| 96-120h | 1.8% | 72-87% |\n\n**Access:** OTC — no prescription, no age limit\n**Cost:** ~$40-50\n\n**Mechanism:** Inhibits/delays ovulation. Does NOT prevent implantation or harm existing pregnancy. [1,2]',
+    citation: [1, 2],
+    next: 'ec-lng-counseling',
+    summary: 'LNG 1.5 mg x1; OTC no age limit; efficacy drops after 72h and with higher weight; double dose if enzyme inducers',
+  },
+
+  {
+    id: 'ec-lng-counseling',
+    type: 'info',
+    module: 3,
+    title: 'Levonorgestrel: Counseling Points',
+    body: '**Patient counseling for levonorgestrel:**\n\n**Expected effects:**\n• Nausea (15-23%) — antiemetic usually not needed\n• If vomiting within 2 hours, repeat dose\n• Menstrual changes — period may come early or late\n• Spotting or irregular bleeding common\n\n**Return precautions:**\n• Period >7 days late → pregnancy test\n• Severe abdominal pain → evaluate for ectopic\n\n**Contraception timing:**\n• Can resume hormonal contraception **immediately** after LNG\n• Use backup method (condom) for 7 days\n\n**Weight considerations:**\n• Efficacy may be reduced if weight >165 lbs or BMI >25\n• Consider ulipristal or IUD if available\n• LNG still better than nothing at any weight [2,4]',
+    citation: [2, 4],
+    next: 'ec-disposition',
+    summary: 'Nausea 15-23%; repeat if vomit <2h; can resume hormonal contraception immediately; backup x7 days',
+  },
+
+  {
+    id: 'ec-ulipristal',
+    type: 'info',
+    module: 3,
+    title: 'Ulipristal Acetate (ella)',
+    body: '**Ulipristal acetate 30 mg** — selective progesterone receptor modulator.\n\n**Brand:** ella\n\n**Dosing:** 30 mg x1 (no dose escalation for weight)\n\n**Timing — maintains efficacy throughout window:**\n| Window | Pregnancy Rate | vs LNG |\n|--------|----------------|--------|\n| <24h | 0.4-0.6% | 65% better |\n| <72h | 0.9-1.8% | 42% better |\n| 72-120h | Stable ~1% | Significantly better |\n\n**Access:** Prescription required\n**Cost:** ~$50 (insurance often covers)\n\n**Advantages over LNG:**\n• Maintains efficacy 72-120h (LNG declines)\n• Better for weight >165 lbs\n• More effective near ovulation\n\n**Mechanism:** Delays ovulation even when LH surge has begun. [2,4,5]',
+    citation: [2, 4, 5],
+    next: 'ec-upa-counseling',
+    summary: 'UPA 30 mg x1; Rx only; maintains efficacy 72-120h; better for higher weight; 42-65% better than LNG',
+  },
+
+  {
+    id: 'ec-upa-counseling',
+    type: 'info',
+    module: 3,
+    title: 'Ulipristal: Counseling Points',
+    body: '**Patient counseling for ulipristal:**\n\n**Expected effects:**\n• Similar side effects to LNG (nausea, headache, fatigue)\n• If vomiting within 3 hours, repeat dose\n• Menstrual changes common\n\n**CRITICAL — Hormonal contraception timing:**\n• **Wait 5 days** before starting hormonal contraception\n• UPA blocks progesterone receptors — concurrent hormones reduce efficacy\n• Use **barrier method only** for 5 days after UPA\n• Then start hormonal method + backup for 7 more days\n\n**Contraindications:**\n• Current use of CYP3A4 inducers (phenytoin, rifampin, carbamazepine)\n• If on enzyme inducers → use Cu-IUD or double-dose LNG instead\n\n**Return precautions:**\n• Same as LNG — late period, severe pain [2,5]',
+    citation: [2, 5],
+    next: 'ec-disposition',
+    summary: 'WAIT 5 DAYS before hormonal contraception; barrier only for 5 days; contraindicated with enzyme inducers',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'ec-yuzpe',
+    type: 'info',
+    module: 3,
+    title: 'Yuzpe Method (Backup Option)',
+    body: '**Yuzpe regimen** — combined estrogen-progestin EC.\n\n**Use ONLY if LNG, UPA, and IUD unavailable.**\n\n**Regimen:**\n• **Dose 1:** 100 mcg ethinyl estradiol + 0.5 mg levonorgestrel\n• **Dose 2:** Repeat in 12 hours\n\n**Using COCs (example):**\n• Lo Loestrin: N/A (EE too low)\n• Levora, Nordette: 4 pills x2 (12h apart)\n• Alesse, Levlite: 5 pills x2 (12h apart)\n• Consult package insert for other brands\n\n**Efficacy:** 56-86% (inferior to progestin-only methods)\n\n**Side effects:**\n• Nausea (54%), vomiting (16%)\n• **Give antiemetic 1 hour before** (ondansetron 4 mg or meclizine 25 mg)\n\n**Timing:** Within 72 hours; some efficacy to 120 hours [1,6]',
+    citation: [1, 6],
+    next: 'ec-disposition',
+    summary: 'Backup option only; 100 mcg EE + 0.5 mg LNG x2 (12h apart); give antiemetic prophylaxis; 56-86% effective',
+  },
+
+  // =====================================================================
+  // MODULE 4: COPPER IUD
+  // =====================================================================
+
+  {
+    id: 'ec-iud',
+    type: 'info',
+    module: 4,
+    title: 'Copper IUD: Most Effective EC',
+    body: '**Copper IUD (ParaGard)** — gold standard for emergency contraception.\n\n**Efficacy:** >99% (pregnancy rate 0.1%)\n\n**Timing:**\n• Within 5 days of unprotected intercourse, OR\n• Within 5 days of ovulation (if determinable)\n• Can insert any time in cycle if pregnancy test negative\n\n**Advantages:**\n• **Highest efficacy** of any EC method\n• **Unaffected by weight** or body habitus\n• **Unaffected by timing** within window\n• **Unaffected by medications** (enzyme inducers)\n• **Long-term contraception** (up to 10 years)\n\n**Mechanism:** Affects sperm motility and creates hostile uterine environment. Does NOT prevent implantation of fertilized egg — NOT an abortifacient. [2,7,8]',
+    citation: [2, 7, 8],
+    next: 'ec-iud-eligibility',
+    summary: 'Cu-IUD >99% effective; unaffected by weight/timing/meds; up to 5 days; provides long-term contraception',
+  },
+
+  {
+    id: 'ec-iud-eligibility',
+    type: 'question',
+    module: 4,
+    title: 'Copper IUD Eligibility',
+    body: '**Screen for IUD eligibility:**\n\n**Can insert in ED if:**\n• Trained provider available\n• Equipment available\n• Patient desires IUD for EC + ongoing contraception\n\n**Contraindications (CDC MEC Category 4):**\n• Current pregnancy\n• Current purulent cervicitis or PID\n• Unexplained vaginal bleeding (until evaluated)\n• Cervical/endometrial cancer\n• Uterine cavity distortion (fibroids, anomaly)\n• Wilson disease (copper overload)\n\n**NOT contraindications:**\n• Nulliparity\n• Prior ectopic pregnancy\n• STI risk factors\n• Breastfeeding [7]',
+    citation: [7],
+    options: [
+      { label: 'Eligible — proceed with insertion', description: 'No contraindications, patient desires', next: 'ec-iud-insertion' },
+      { label: 'Not eligible or not desired', description: 'Contraindication or patient declines', next: 'ec-method-early' },
+      { label: 'Refer to OB/GYN for insertion', description: 'ED unable to insert, patient wants IUD', next: 'ec-iud-referral' },
+    ],
+  },
+
+  {
+    id: 'ec-iud-insertion',
+    type: 'info',
+    module: 4,
+    title: 'Copper IUD Insertion',
+    body: '**ED IUD insertion for EC:**\n\n**Pre-procedure:**\n• Pregnancy test (if not done)\n• Bimanual exam for uterine position\n• STI testing if high-risk (can insert before results)\n• NSAIDs for pain (ibuprofen 400-600 mg)\n\n**Procedure:**\n• Standard IUD insertion technique\n• Confirm string visibility and length\n• Document string length in chart\n\n**Post-procedure:**\n• Cramping and spotting expected\n• NSAIDs PRN for cramping\n• String check in 4-6 weeks\n\n**Counseling:**\n• Heavier, longer periods for first 3-6 months\n• Can remain in place up to 10 years\n• Return if fever, severe pain, abnormal discharge, string changes [7]',
+    citation: [7],
+    next: 'ec-disposition',
+    summary: 'Standard insertion technique; NSAIDs for pain; string check 4-6 weeks; heavier periods first 3-6 months',
+  },
+
+  {
+    id: 'ec-iud-referral',
+    type: 'info',
+    module: 4,
+    title: 'IUD Referral',
+    body: '**If unable to insert IUD in ED:**\n\n**Urgent referral options:**\n• OB/GYN clinic (next day if possible)\n• Family planning clinic (Planned Parenthood)\n• Primary care if trained\n\n**Bridge therapy:**\n• Give oral EC NOW (ulipristal or levonorgestrel)\n• Oral EC can "bridge" until IUD placed\n• IUD can still be placed within 5 days of intercourse\n\n**Important timing:**\n• If >72h since intercourse, use ulipristal (not LNG)\n• Schedule IUD insertion ASAP\n• Patient should abstain or use barrier until IUD placed\n\n**Document:** Referral made, bridge EC provided, timing discussed [2]',
+    citation: [2],
+    next: 'ec-disposition',
+    summary: 'Give oral EC as bridge; schedule IUD ASAP; UPA preferred if >72h; abstain/barrier until IUD placed',
+  },
+
+  // =====================================================================
+  // MODULE 5: SPECIAL POPULATIONS
+  // =====================================================================
+
+  {
+    id: 'ec-weight-check',
+    type: 'question',
+    module: 5,
+    title: 'Weight Considerations',
+    body: '**Weight affects oral EC efficacy** — levonorgestrel more than ulipristal.\n\n**Evidence-based thresholds:**\n• **>165 lbs (~75 kg) or BMI >25:** LNG efficacy reduced\n• **>195 lbs (~89 kg) or BMI >30:** Both LNG and UPA efficacy reduced\n• **Cu-IUD unaffected by weight**\n\n**Recommendations by weight:**\n\n| Weight | First Choice | Second Choice |\n|--------|--------------|---------------|\n| <165 lbs | Any method | — |\n| 165-195 lbs | Cu-IUD or UPA | LNG (reduced efficacy) |\n| >195 lbs | Cu-IUD | UPA (better than LNG) |\n\n**Note:** LNG is still better than nothing at any weight. Do NOT withhold EC based on weight. [4,9]',
+    citation: [4, 9],
+    options: [
+      { label: '<165 lbs — standard dosing', description: 'All methods equally effective', next: 'ec-method-early' },
+      { label: '165-195 lbs — prefer UPA or IUD', description: 'LNG efficacy reduced', next: 'ec-ulipristal' },
+      { label: '>195 lbs — prefer Cu-IUD', description: 'Best option for higher weights', next: 'ec-iud' },
+      { label: 'Check drug interactions first', description: 'On enzyme-inducing medications', next: 'ec-drug-interactions' },
+    ],
+  },
+
+  {
+    id: 'ec-drug-interactions',
+    type: 'info',
+    module: 5,
+    title: 'Drug Interactions',
+    body: '**CYP3A4 enzyme inducers** significantly reduce oral EC efficacy.\n\n**Medications that reduce EC efficacy:**\n\n**Anticonvulsants:**\n• Phenytoin (Dilantin)\n• Carbamazepine (Tegretol)\n• Phenobarbital\n• Oxcarbazepine\n• Topiramate (>200 mg/day)\n\n**Antibiotics:**\n• Rifampin (most potent)\n• Rifabutin\n\n**Antiretrovirals:**\n• Efavirenz, nevirapine\n• Some protease inhibitors\n\n**Other:**\n• St. John\'s Wort\n• Griseofulvin\n\n**Management:**\n• **Ulipristal:** Contraindicated — do NOT use\n• **Levonorgestrel:** Double dose to 3 mg\n• **Copper IUD:** Unaffected — preferred option\n\n**Duration:** Effect persists 4 weeks after stopping inducer [2,10]',
+    citation: [2, 10],
+    next: 'ec-drug-interaction-choice',
+    summary: 'Enzyme inducers reduce oral EC efficacy; UPA contraindicated; double LNG to 3 mg; Cu-IUD unaffected',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'ec-drug-interaction-choice',
+    type: 'question',
+    module: 5,
+    title: 'EC Choice with Drug Interactions',
+    body: '**Patient on enzyme-inducing medication:**\n\nChoose the best option based on availability and patient preference.',
+    citation: [2, 10],
+    options: [
+      { label: 'Copper IUD', description: 'Unaffected by enzyme inducers — best option', next: 'ec-iud' },
+      { label: 'Levonorgestrel 3 mg (double dose)', description: 'If IUD unavailable; reduced but present efficacy', next: 'ec-lng-high-dose' },
+    ],
+  },
+
+  {
+    id: 'ec-lng-high-dose',
+    type: 'info',
+    module: 5,
+    title: 'High-Dose Levonorgestrel',
+    body: '**Levonorgestrel 3 mg** — for enzyme inducers or weight >165 lbs.\n\n**Dosing:** 3 mg x1 (double the standard dose)\n\n**How to give:**\n• Two 1.5 mg tablets (Plan B) at once, OR\n• Four 0.75 mg tablets at once\n\n**Evidence:**\n• UK FSRH recommends doubling for enzyme inducers\n• Mixed evidence for weight-based doubling (2024 study showed no clear benefit)\n• Reasonable to offer when Cu-IUD or UPA unavailable\n\n**Side effects:** Same as standard dose — may have slightly more nausea\n\n**Counseling:** Same as standard LNG — backup method for 7 days [2,10]',
+    citation: [2, 10],
+    next: 'ec-lng-counseling',
+    summary: 'LNG 3 mg x1 for enzyme inducers or high weight; give 2 × 1.5 mg tablets; same counseling as standard dose',
+  },
+
+  {
+    id: 'ec-contraindications',
+    type: 'info',
+    module: 5,
+    title: 'Contraindications & Safety',
+    body: '**ACOG/CDC: "No absolute medical contraindications to EC."**\n\n**NOT contraindications to oral EC:**\n• Existing pregnancy (won\'t work, but won\'t harm)\n• History of ectopic pregnancy\n• Breastfeeding (safe for infant)\n• History of VTE/thromboembolism\n• Migraine with aura\n• Liver disease\n• Cardiovascular disease\n\n**Ulipristal-specific:**\n• Avoid if on enzyme-inducing medications\n• Avoid in severe hepatic impairment (theoretical)\n\n**Copper IUD contraindications:**\n• Current pregnancy\n• Active PID/cervicitis\n• Wilson disease\n• Uterine cavity distortion\n\n**Yuzpe-specific:**\n• May avoid in migraine with aura (estrogen component)\n• Single-dose estrogen exposure is minimal risk [2,3,7]',
+    citation: [2, 3, 7],
+    next: 'ec-legal-overview',
+    summary: 'No absolute contraindications to oral EC; IUD has standard IUD contraindications; safe in pregnancy (ineffective but not harmful)',
+  },
+
+  {
+    id: 'ec-legal-overview',
+    type: 'info',
+    module: 5,
+    title: 'Legal Status Overview',
+    body: '**Emergency contraception is LEGAL in all 50 states.**\n\n**FDA classification:**\n• EC is a **contraceptive**, NOT an abortifacient\n• Dec 2022 label update: "does not terminate pregnancy"\n• Mechanism: prevents ovulation, does NOT disrupt implantation\n\n**Access by method:**\n\n| Method | Access | Age Limit |\n|--------|--------|----------|\n| Plan B | OTC | None |\n| ella | Rx | None |\n| Cu-IUD | Provider | None |\n\n**Restrictive states (TX, ID, OK, LA, AR):**\n• Plan B: Legal, OTC, no restrictions\n• ella: Legal with prescription\n• Cu-IUD: Legal, standard of care\n\n**See [Legal Considerations tool](#/info/ec-legal-guide) for state-specific details.** [11]',
+    citation: [11],
+    next: 'ec-disposition',
+    summary: 'EC legal in all states; FDA labeled non-abortifacient; Plan B OTC no age limit; ella Rx; Cu-IUD standard of care',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'ec-disposition',
+    type: 'result',
+    module: 6,
+    title: 'EC Disposition & Follow-up',
+    body: '**Discharge instructions:**\n\n**Expected effects:**\n• Nausea, headache, fatigue — usually mild\n• Menstrual changes — period may be early or late\n• Spotting or irregular bleeding\n\n**Return precautions:**\n• Period >7 days late → pregnancy test\n• Severe abdominal pain → evaluate for ectopic\n• Heavy bleeding → evaluate\n\n**Ongoing contraception:**\n• **After LNG:** Start hormonal method immediately + backup x7 days\n• **After UPA:** Wait 5 days, then start hormonal + backup x7 days\n• **After Cu-IUD:** Already protected; no additional method needed\n\n**Follow-up:**\n• PCP or OB/GYN for contraception counseling\n• If IUD placed: string check 4-6 weeks\n• STI testing if indicated [2]',
+    recommendation: 'Provide EC immediately. Counsel on expected effects and return precautions. Discuss ongoing contraception. Follow up with PCP/OB-GYN.',
+    confidence: 'definitive',
+    citation: [2],
+  },
+
+  {
+    id: 'ec-assault-considerations',
+    type: 'info',
+    module: 6,
+    title: 'Sexual Assault Considerations',
+    body: '**EC in sexual assault cases:**\n\n**Standard of care:**\n• Offer EC to ALL sexual assault survivors\n• Should be offered regardless of patient\'s stated desire for pregnancy\n• Patient may accept or decline\n\n**Hospital requirements (most states):**\n• Must provide information about EC\n• May be required to offer or dispense EC\n• Some states require direct dispensing\n\n**Texas:**\n• Must provide information about EC\n• NOT required to dispense (patient may go to pharmacy)\n• Plan B available OTC at pharmacy\n\n**Documentation:**\n• Offer documented in chart\n• Patient acceptance or refusal documented\n• If declined, offer to revisit decision before discharge\n\n**See SANE/SAFE protocol for complete assault evaluation.** [12]',
+    citation: [12],
+    next: 'ec-disposition',
+    summary: 'Offer EC to all sexual assault survivors; document offer and decision; Texas requires info but not dispensing',
+  },
+
+];
+
+export const EMERGENCY_CONTRACEPTION_CITATIONS: Citation[] = [
+  { num: 1, text: 'ACOG Practice Bulletin No. 152: Emergency Contraception. Obstet Gynecol. 2015;126(3):e1-e11. Reaffirmed 2023.' },
+  { num: 2, text: 'Curtis KM et al. U.S. Selected Practice Recommendations for Contraceptive Use, 2024. MMWR. 2024;73(RR-3):1-77.' },
+  { num: 3, text: 'Cleland K et al. The efficacy of intrauterine devices for emergency contraception: a systematic review. Hum Reprod. 2012;27(7):1994-2000.' },
+  { num: 4, text: 'Glasier A et al. Ulipristal acetate versus levonorgestrel for emergency contraception: a randomised non-inferiority trial and meta-analysis. Lancet. 2010;375(9714):555-562.' },
+  { num: 5, text: 'Brache V et al. Ulipristal acetate prevents ovulation more effectively than levonorgestrel. Contraception. 2013;88(5):611-618.' },
+  { num: 6, text: 'Task Force on Postovulatory Methods of Fertility Regulation. Randomised controlled trial of levonorgestrel versus the Yuzpe regimen of combined oral contraceptives for emergency contraception. Lancet. 1998;352(9126):428-433.' },
+  { num: 7, text: 'Curtis KM et al. U.S. Medical Eligibility Criteria for Contraceptive Use, 2024. MMWR. 2024;73(RR-4):1-126.' },
+  { num: 8, text: 'Turok DK et al. Copper IUD for Emergency Contraception: Clinical Practice and Mechanisms of Action. Semin Reprod Med. 2021;39(1-2):47-53.' },
+  { num: 9, text: 'Kapp N et al. Effect of body weight and BMI on the efficacy of levonorgestrel emergency contraception. Contraception. 2015;91(6):497-499.' },
+  { num: 10, text: 'Faculty of Sexual and Reproductive Healthcare. Drug Interactions with Hormonal Contraception. FSRH Clinical Guideline. 2024.' },
+  { num: 11, text: 'Guttmacher Institute. Emergency Contraception: State Laws and Policies. 2024.' },
+  { num: 12, text: 'ACEP Clinical Policy: Management of the Adult Patient After Sexual Assault. Ann Emerg Med. 2019.' },
+];

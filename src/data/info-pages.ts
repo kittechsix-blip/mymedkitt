@@ -14266,6 +14266,645 @@ const DSI_CONTRAINDICATIONS: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// RESUSCITATIVE HYSTEROTOMY — Steps Summary, Stop, ACLS Mods,
+// BEAU-CHOPS Details, Procedure Checklist
+// -------------------------------------------------------------------
+
+const RH_SUMMARY: InfoPage = {
+  id: 'rh-summary',
+  title: 'Resuscitative Hysterotomy — Steps Summary',
+  subtitle: 'Time-critical quick reference — know this before you need it',
+  sections: [
+    {
+      heading: '1. Recognition (first 60 seconds)',
+      body: '• [Maternal cardiac arrest confirmed](#/node/rh-arrest-confirmed)\n• [Fundus at or above umbilicus → RH indicated](#/node/rh-fundal-check)\n• [If unsure of GA, assume ≥20 weeks and proceed](#/node/rh-fundal-check)',
+    },
+    {
+      heading: '2. Pre-Arrest Optimization / Code Setup',
+      body: '• [Manual Left Lateral Uterine Displacement — continuous, dedicated provider](#/node/rh-lud)\n• [IV access ABOVE the diaphragm — IVC is compressed](#/node/rh-iv-airway)\n• [Anticipate difficult airway — VL, small ETT, aspiration risk](#/node/rh-iv-airway)\n• [Start the timer — timekeeper calls out every 30 seconds](#/node/rh-start-timer)\n• [Page OB, neonatology, anesthesia, blood bank](#/node/rh-arrest-confirmed)',
+    },
+    {
+      heading: '3. Cardiac Arrest Response (standard ACLS, with modifications)',
+      body: '• [Same drugs, same energies, same pad placement as non-pregnant](#/node/rh-acls-pregnancy)\n• [Compressions: standard midsternal position, 100-120/min, 5-6 cm depth](#/node/rh-acls-pregnancy)\n• [Seek reversible causes — BEAU-CHOPS mnemonic](#/node/rh-beauchops)\n• [Remove fetal monitors before defibrillation](#/node/rh-acls-pregnancy)',
+    },
+    {
+      heading: '4. The 4-Minute Decision',
+      body: '• [At 4 minutes without ROSC: begin incision](#/node/rh-decision-point)\n• [Target: fetus delivered by 5 minutes](#/node/rh-decision-point)\n• [Past 4 min already? Start NOW — later still beats never (Rose 2015, Benson 2016)](#/node/rh-decision-point)\n• [Scalpel is the only tool you need](#/node/rh-equipment)',
+    },
+    {
+      heading: '5. The Procedure (at the bedside, CPR ongoing)',
+      body: '• [Do NOT move patient, do NOT wait for OB, do NOT stop CPR](#/node/rh-proceed)\n• [Vertical midline skin incision: xiphoid → symphysis pubis](#/node/rh-skin-incision)\n• [Classical (vertical) uterine incision — shallow entry, extend with fingers](#/node/rh-uterine-incision)\n• [Deliver fetus — head first (vertex) or presenting part (breech)](#/node/rh-extract-fetus)\n• [Clamp and cut cord — hand to neonatal team](#/node/rh-cord-clamp)\n• [Deliver placenta with gentle cord traction + fundal counter-pressure](#/node/rh-placenta)\n• [Continue CPR throughout — do NOT close abdomen yet](#/node/rh-continue-cpr)',
+    },
+    {
+      heading: '6. Post-Delivery (maternal + neonatal)',
+      body: '• [Reassess maternal pulse — ROSC often happens now](#/node/rh-maternal-outcome)\n• [If ROSC: pressors, uterotonics, TXA, cefazolin 2g, transfer to OR](#/node/rh-rosc-postop)\n• [Uterine atony: Oxytocin drip + TXA 1g IV + bimanual massage](#/node/rh-uterine-atony)\n• [Neonate: vigorous? routine care. Depressed? initiate NRP](#/node/rh-neonate)\n• [APGAR at 1, 5, 10 minutes — use the calculator](#/calculator/apgar)\n• [ICU + NICU — formal closure in OR — debrief team + family](#/node/rh-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Weingart S, Swaminathan A. Resuscitative Hysterotomy. EMCrit Project. https://emcrit.org/emcrit/resuscitative-hysterotomy/' },
+    { num: 2, text: 'Jeejeebhoy FM, et al. Cardiac Arrest in Pregnancy: AHA Scientific Statement. Circulation. 2015;132(18):1747-1773.' },
+    { num: 3, text: 'Lipman S, et al. SOAP Consensus Statement. Anesth Analg. 2014;118(5):1003-1016.' },
+  ],
+};
+
+const RH_STOP: InfoPage = {
+  id: 'resuscitative-hysterotomy-stop',
+  title: 'Resuscitative Hysterotomy — Do NOT',
+  subtitle: 'Critical pitfalls — the errors that kill both patients',
+  citations: [],
+  sections: [
+    {
+      heading: '🛑 Do NOT move the patient to the OR',
+      body: 'Transport degrades CPR quality and adds 5-15 minutes of delay. The procedure is performed **at the bedside**, wherever arrest occurred. Every minute of transport worsens maternal and neonatal outcomes. [SOAP 2014, AHA 2015, EMCrit](#/node/rh-proceed).',
+    },
+    {
+      heading: '🛑 Do NOT wait for obstetrics',
+      body: 'Most obstetricians have never performed RH outside the OR. The **EM physician is the correct operator**. OB can do formal closure later. Waiting for OB wastes the 4-minute window. [Perform at bedside now](#/node/rh-proceed).',
+    },
+    {
+      heading: '🛑 Do NOT stop CPR during the procedure',
+      body: 'CPR and LUD continue throughout incision and extraction. The delivery IS part of the resuscitation. Stopping compressions defeats the purpose. [Continue CPR](#/node/rh-continue-cpr).',
+    },
+    {
+      heading: '🛑 Do NOT use tilted-board positioning during CPR',
+      body: 'The 30° left tilt degrades chest compression quality by ~30%. Use **manual LUD** instead — patient flat supine, dedicated provider pulls uterus up and to the left continuously. [Manual LUD technique](#/node/rh-lud).',
+    },
+    {
+      heading: '🛑 Do NOT place IV access below the diaphragm',
+      body: 'Femoral and lower-extremity access delivers drugs into a compressed IVC — they never reach the central circulation. **Upper extremity or humeral IO only.** [Vascular access](#/node/rh-iv-airway).',
+    },
+    {
+      heading: '🛑 Do NOT skip the procedure because you\'re past 4 minutes',
+      body: 'The 4-minute rule is a starting gun, not a finish line. Rose 2015 and Benson 2016 demonstrate maternal and neonatal survival well beyond 5 minutes. **Longer arrest is not a contraindication** — do the procedure. [Evidence on timing](#/node/rh-decision-point).',
+    },
+    {
+      heading: '🛑 Do NOT use Pfannenstiel or low transverse uterine incision',
+      body: 'These are obstetric-convenience incisions. For RH use **vertical midline skin** (xiphoid to symphysis) and **classical vertical uterine** — fastest, best exposure, no bladder mobilization, works with anterior placenta. [Incision choice](#/node/rh-uterine-incision).',
+    },
+    {
+      heading: '🛑 Do NOT give oxytocin IV push post-delivery',
+      body: 'IV bolus oxytocin causes **profound hypotension, tachycardia, and can re-arrest the patient**. Run it as an infusion: 20 units in 1L NS at 250 mL/hr. [PPH management](#/node/rh-uterine-atony).',
+    },
+    {
+      heading: '🛑 Do NOT give methylergonovine in HTN/preeclampsia',
+      body: 'Methylergonovine (Methergine) is contraindicated in hypertension, preeclampsia, and eclampsia — patients very likely to be the ones needing RH. Use **oxytocin, TXA, misoprostol, and carboprost** instead. Carboprost avoided in asthma. [Uterotonic choice](#/node/rh-uterine-atony).',
+    },
+    {
+      heading: '🛑 Do NOT forget magnesium toxicity as a cause',
+      body: 'If the patient was on MgSO4 for eclampsia or preterm labor, **magnesium toxicity** may be the cause of arrest. Give [Calcium Gluconate](#/drug/calcium-gluconate/hypermagnesemia) 1 g IV or [Calcium Chloride](#/drug/calcium-chloride/hypermagnesemia) 1 g IV. [BEAU-CHOPS causes](#/node/rh-beauchops).',
+    },
+    {
+      heading: '🛑 Do NOT close the abdomen during ongoing arrest',
+      body: 'Pack with clean/saline-soaked gauze and continue resuscitation. Formal closure happens in the OR **only after ROSC**. Closing during arrest wastes time and conceals bleeding. [Post-procedure](#/node/rh-continue-cpr).',
+    },
+    {
+      heading: '🛑 Do NOT wait for consent',
+      body: 'This is **emergent life-saving surgery during cardiac arrest**. No consent is required. Brief communication with family if present is appropriate but should not delay the procedure. Document the clinical scenario. [Proceed with RH](#/node/rh-proceed).',
+    },
+  ],
+};
+
+const RH_ACLS_MODS: InfoPage = {
+  id: 'rh-acls-mods',
+  title: 'ACLS Modifications in Pregnancy',
+  subtitle: 'What changes and what stays the same during maternal arrest',
+  sections: [
+    {
+      heading: 'Chest Compressions',
+      body: '**SAME AS NON-PREGNANT:**\n• **Position:** center of chest, midsternal (older teaching to move hands cephalad is no longer recommended — AHA 2015/2023)\n• **Rate:** 100-120/min\n• **Depth:** at least 5 cm (2 inches)\n• **Recoil:** allow full chest recoil\n• **Interruptions:** minimize (<10 sec for pulse check)\n\n**WHAT\'S DIFFERENT:**\n• **Patient flat supine** (no tilted board)\n• **Manual LUD continuously** — dedicated provider',
+    },
+    {
+      heading: 'Defibrillation',
+      body: '**SAME AS NON-PREGNANT:**\n• **Energy:** 200J biphasic (same as standard)\n• **Pad placement:** anterolateral (standard)\n• **Shocks are safe** at all gestational ages — fetus tolerates defibrillation without issue\n\n**WHAT\'S DIFFERENT:**\n• **Remove fetal/tocodynamometer monitors** before shocking (arcing risk)\n• **Continue LUD** through the shock',
+    },
+    {
+      heading: 'Medications',
+      body: '**NO DOSE MODIFICATIONS IN PREGNANCY:**\n• [Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO q3-5 min\n• Amiodarone 300 mg IV for refractory VF/VT (150 mg if second dose)\n• Lidocaine 1-1.5 mg/kg IV if amiodarone unavailable\n• Calcium if hyperkalemia/hypocalcemia/magnesium toxicity\n• Sodium bicarbonate only for specific indications (not routine)\n\n**PRINCIPLE:** Fetal medication exposure concerns do not apply during arrest — "what is best for the mother is best for the baby." Give full doses. [Medications](#/drug/epinephrine/cardiac arrest)',
+    },
+    {
+      heading: 'IV Access — ABOVE the Diaphragm',
+      body: '**CRITICAL:** IV/IO access must be above the diaphragm.\n\n**PREFERRED SITES:**\n• Antecubital fossa\n• External jugular\n• Humeral IO\n• Subclavian (if trained)\n\n**AVOID:**\n• Femoral lines\n• Lower extremity IVs\n• Lower extremity IO\n\n**WHY:** The gravid uterus compresses the IVC — drugs given below the compression point do not reach the heart. Medications appear to "not work" until the patient has a sustainable return of circulation.',
+    },
+    {
+      heading: 'Airway — Anticipate Difficulty',
+      body: '**PREGNANT AIRWAY IS 8× MORE LIKELY TO BE DIFFICULT:**\n• Mucosal edema — friable, bleeds with manipulation\n• Increased O2 consumption + reduced FRC → rapid desaturation\n• Delayed gastric emptying → high aspiration risk\n• Breast tissue can obstruct blade insertion\n\n**PREPARATION:**\n• **Video laryngoscopy first-line**\n• **Smaller ETT** — try 6.0-7.0 mm (not 7.5-8.0)\n• **Avoid nasal intubation** (nasal mucosa bleeds)\n• **Short handle** if breast tissue interferes\n• **Bougie, suction, cricoid pressure** ready\n• Standard RSI meds acceptable (etomidate, ketamine, succinylcholine, rocuronium)',
+    },
+    {
+      heading: 'Left Lateral Uterine Displacement (LUD)',
+      body: '**MANDATORY from 20 weeks onward during any resuscitation.**\n\n**MANUAL LUD > TILT:**\n• Patient flat supine → optimal compression quality\n• Dedicated provider on patient\'s left side\n• **Two-handed pull:** reach across and pull the uterus toward you (up and to the left)\n• Alternative: one-handed push from the right, palm pushing uterus up and leftward\n• **Continuous** — not periodic, not optional\n\n**WHY NOT TILT:**\n• 30° tilt degrades compression quality ~30%\n• Makes intubation, defibrillation, IV access harder\n• Patient slides off tilted surface during prolonged resuscitation',
+    },
+    {
+      heading: 'The 4-Minute Decision Point',
+      body: '**UNIQUE TO PREGNANT ARREST:**\n• At 4 minutes without ROSC → begin [resuscitative hysterotomy](#/node/rh-decision-point)\n• Fetus delivered by 5 minutes ideal\n• **Past 4 min? Start NOW anyway** — [Rose 2015 and Benson 2016](#/node/rh-decision-point) demonstrate benefit at much longer intervals\n\n**TIMEKEEPER:** Designate one person to call out every 30 seconds. Under stress, teams underestimate elapsed time by 30-50%.',
+    },
+    {
+      heading: 'Reversible Causes — BEAU-CHOPS',
+      body: 'In addition to standard H\'s and T\'s, seek pregnancy-specific causes:\n• **B**leeding / DIC (placenta, atony, rupture, AFE-DIC)\n• **E**mbolism (PE, amniotic fluid embolism, air, fat)\n• **A**nesthetic complications (high spinal, LAST)\n• **U**terine atony\n• **C**ardiac disease (MI, PPCM, aortic dissection)\n• **H**ypertension (eclampsia, HELLP, ICH)\n• **O**ther standard H\'s and T\'s + Mg toxicity\n• **P**lacenta previa / abruption\n• **S**epsis\n\n[Full BEAU-CHOPS with treatments](#/info/rh-beauchops-details)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Jeejeebhoy FM, et al. Cardiac Arrest in Pregnancy: A Scientific Statement From the American Heart Association. Circulation. 2015;132(18):1747-1773.' },
+    { num: 2, text: 'Lipman S, et al. The Society for Obstetric Anesthesia and Perinatology consensus statement on the management of cardiac arrest in pregnancy. Anesth Analg. 2014;118(5):1003-1016.' },
+    { num: 3, text: 'Panchal AR, et al. Part 3: Adult Basic and Advanced Life Support: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(suppl 2):S366-S468.' },
+  ],
+};
+
+const RH_BEAUCHOPS_DETAILS: InfoPage = {
+  id: 'rh-beauchops-details',
+  title: 'BEAU-CHOPS — Reversible Causes',
+  subtitle: 'Pregnancy-specific causes of cardiac arrest — with treatments',
+  sections: [
+    {
+      heading: 'B — Bleeding / DIC',
+      body: '**CAUSES:**\n• Placental abruption, placenta previa, accreta\n• Uterine rupture (especially prior C-section)\n• Vaginal/cervical laceration\n• Postpartum atony hemorrhage\n• AFE-associated DIC\n\n**MANAGEMENT:**\n• Activate [Massive Transfusion Protocol](#/tree/massive-transfusion) — 1:1:1 pRBC:FFP:platelets\n• [TXA](#/drug/tranexamic-acid/postpartum hemorrhage) 1g IV over 10 min (within 3h of bleeding)\n• Fibrinogen replacement (cryoprecipitate) — goal >200 mg/dL\n• Surgical source control — OR emergent laparotomy',
+    },
+    {
+      heading: 'E — Embolism',
+      body: '**PULMONARY EMBOLISM:**\n• 5-10x higher risk in pregnancy\n• [PE in Pregnancy](#/tree/pe-pregnancy)\n• Consider systemic thrombolysis if confirmed and arrested\n\n**AMNIOTIC FLUID EMBOLISM (AFE):**\n• Uniquely pregnancy-related\n• Sudden cardiovascular collapse + DIC + respiratory failure during labor/delivery or immediate postpartum\n• Mortality 40-60%\n• Treatment: supportive, MTP, consider ECMO if available\n• Case reports of atropine + ondansetron + ketorolac ("A-OK") with anecdotal benefit',
+    },
+    {
+      heading: 'A — Anesthetic Complications',
+      body: '**HIGH / TOTAL SPINAL:**\n• Sudden hypotension, bradycardia, apnea after neuraxial anesthesia\n• Treatment: intubation, pressors, LUD, resuscitation\n\n**LOCAL ANESTHETIC SYSTEMIC TOXICITY (LAST):**\n• Seizures, arrhythmias, arrest after local anesthetic (epidural, paracervical block)\n• Treatment: [Intralipid 20%](#/drug/intralipid-20/last) 1.5 mL/kg bolus, then 0.25 mL/kg/min infusion\n• AVOID propofol (worsens LAST)\n\n**FAILED AIRWAY:** Anticipate difficult airway in pregnancy — see [ACLS Mods](#/info/rh-acls-mods)',
+    },
+    {
+      heading: 'U — Uterine Atony / Rupture',
+      body: '**UTERINE ATONY (after delivery):**\n• [Oxytocin](#/drug/oxytocin/postpartum hemorrhage) 20 U in 1L NS at 250 mL/hr (NO IV push)\n• [TXA](#/drug/tranexamic-acid/postpartum hemorrhage) 1g IV\n• [Misoprostol](#/drug/misoprostol/postpartum hemorrhage) 800-1000 mcg PR\n• Methylergonovine 0.2 mg IM (AVOID in HTN/preeclampsia)\n• Carboprost 250 mcg IM q15 min (AVOID in asthma)\n• Bimanual uterine massage\n\n**UTERINE RUPTURE:**\n• Sudden abdominal pain, fetal distress, hemodynamic collapse\n• MTP + emergency laparotomy',
+    },
+    {
+      heading: 'C — Cardiac Disease',
+      body: '**MI IN PREGNANCY:**\n• Rare but increasing (older maternal age, obesity)\n• Treatment: aspirin, cardiac cath, PCI — do not withhold life-saving interventions due to pregnancy\n\n**[PERIPARTUM CARDIOMYOPATHY](#/tree/peripartum-cardiomyopathy):**\n• Presents late pregnancy to 5 months postpartum\n• HF with EF ≤45%, no prior cardiac disease\n\n**AORTIC DISSECTION:**\n• [Aortic Dissection](#/tree/aortic-dissection)\n• Increased risk in pregnancy (especially connective tissue disease)\n\n**ARRHYTHMIA / CONGENITAL HEART DISEASE:** Standard ACLS, no dose modifications',
+    },
+    {
+      heading: 'H — Hypertension / HELLP / Eclampsia',
+      body: '**[ECLAMPSIA](#/tree/eclampsia):**\n• Generalized tonic-clonic seizure in preeclampsia\n• Treatment: [Magnesium Sulfate](#/drug/magnesium-sulfate/eclampsia) 4-6 g IV over 15-20 min, then 2 g/hr\n• BP management: Labetalol, Hydralazine, Nicardipine\n\n**HELLP SYNDROME:**\n• Hemolysis, Elevated LFTs, Low Platelets\n• Risk of hepatic hematoma rupture, DIC, ICH\n\n**SEVERE HTN WITH ICH/STROKE:**\n• Immediate BP control to <160/110\n• Neurosurgical consult\n\n**MAGNESIUM TOXICITY (IF ON MgSO4):**\n• Loss of DTRs, respiratory depression, arrest\n• Treatment: [Calcium Gluconate](#/drug/calcium-gluconate/hypermagnesemia) 1g IV OR [Calcium Chloride](#/drug/calcium-chloride/hypermagnesemia) 1g IV',
+    },
+    {
+      heading: 'O — Other (H\'s and T\'s + Magnesium)',
+      body: '**STANDARD H\'s:**\n• Hypoxia, Hypovolemia, H+ (acidosis), Hypo/hyperkalemia, Hypothermia\n\n**STANDARD T\'s:**\n• Tension pneumothorax, Tamponade, Toxins, Thrombosis (coronary/pulmonary)\n\n**PREGNANCY-SPECIFIC:**\n• **Magnesium toxicity** — if on MgSO4 infusion, give Calcium Gluconate 1g IV\n• **Insulin-induced hypoglycemia** in gestational diabetics\n• **Thyroid storm** in hyperthyroid patients',
+    },
+    {
+      heading: 'P — Placental Catastrophes',
+      body: '**PLACENTA PREVIA:** Painless vaginal bleeding, placenta over cervical os\n**PLACENTAL ABRUPTION:** Abdominal pain + bleeding + uterine tenderness, fetal distress\n**PLACENTA ACCRETA:** Failure of placental separation, massive postpartum hemorrhage\n\n**ALL:** Activate MTP, emergency delivery, surgical management',
+    },
+    {
+      heading: 'S — Sepsis',
+      body: '**PREGNANCY-RELATED SOURCES:**\n• Chorioamnionitis\n• Endometritis (postpartum)\n• Pyelonephritis (more common in pregnancy)\n• Pneumonia\n• Septic abortion\n\n**MANAGEMENT:** [Sepsis](#/tree/sepsis)\n• Early broad-spectrum antibiotics\n• Fluid resuscitation\n• Source control',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Vanden Hoek TL, et al. Part 12: Cardiac arrest in special situations: 2010 AHA Guidelines for CPR and ECC. Circulation. 2010;122(suppl 3):S829-S861.' },
+    { num: 2, text: 'Jeejeebhoy FM, et al. Cardiac Arrest in Pregnancy: AHA Scientific Statement. Circulation. 2015;132(18):1747-1773.' },
+  ],
+};
+
+const RH_PROCEDURE_CHECKLIST: InfoPage = {
+  id: 'rh-procedure-checklist',
+  title: 'Resuscitative Hysterotomy — Procedure Checklist',
+  subtitle: 'Laminate this. Tape it to the code cart.',
+  shareable: true,
+  sections: [
+    {
+      heading: '✓ Pre-Incision (first 4 minutes of arrest)',
+      body: '**☐** Confirm maternal cardiac arrest\n**☐** Palpate fundus — at or above umbilicus?\n**☐** Start timer — timekeeper calls out q30 sec\n**☐** Manual LUD — dedicated provider, continuous\n**☐** IV access ABOVE diaphragm\n**☐** High-quality CPR, standard position\n**☐** Standard ACLS meds and shocks\n**☐** Seek BEAU-CHOPS causes\n**☐** Page OB, neonatology, anesthesia, blood bank\n**☐** Scalpel at bedside\n**☐** Neonatal warmer ON',
+    },
+    {
+      heading: '✓ Incision (at ~4 minutes if no ROSC)',
+      body: '**☐** Announce clearly: "I am performing resuscitative hysterotomy"\n**☐** Continue CPR and LUD\n**☐** Quick splash antisepsis if instant (otherwise skip)\n**☐** #10 or #20 scalpel in hand\n**☐** **Vertical midline skin incision** — xiphoid to symphysis\n**☐** Through skin, fat, fascia, muscle, peritoneum in one pass',
+    },
+    {
+      heading: '✓ Uterine Entry (LUD released at this moment)',
+      body: '**☐** LUD provider releases\n**☐** **Classical vertical uterine incision** — shallow entry 1-2 cm\n**☐** Identify amniotic sac or fetal part\n**☐** Extend incision with fingers (non-dominant hand protects fetus)\n**☐** Through placenta if necessary (do not stop)',
+    },
+    {
+      heading: '✓ Delivery (target: by 5 minutes)',
+      body: '**☐** Deliver head or presenting part\n**☐** Follow with body and limbs\n**☐** Fundal pressure from above if needed\n**☐** Double-clamp cord, cut between\n**☐** Hand fetus to neonatal team at warmer\n**☐** Deliver placenta with gentle cord traction',
+    },
+    {
+      heading: '✓ Post-Delivery Resuscitation',
+      body: '**☐** Continue CPR\n**☐** Reassess at next rhythm check — watch for ROSC\n**☐** Do NOT close abdomen\n**☐** Pack with clean/saline-soaked gauze\n**☐** Neonatal team running NRP algorithm\n**☐** APGAR at 1 and 5 minutes',
+    },
+    {
+      heading: '✓ Post-ROSC (if achieved)',
+      body: '**☐** Confirm ROSC — pulse, ETCO2, rhythm, BP\n**☐** Airway secured, pressors titrated\n**☐** Uterotonics: Oxytocin drip + TXA 1g IV + bimanual massage\n**☐** Cefazolin 2g IV (non-sterile field prophylaxis)\n**☐** Continue MTP if bleeding\n**☐** Identify and treat cause\n**☐** Transfer to OR for formal closure\n**☐** ICU admission with MFM/ICU/anesthesia\n**☐** Team debrief\n**☐** Family support — chaplain, social work\n**☐** Document thoroughly: times, decisions, personnel',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Weingart S, Swaminathan A. Resuscitative Hysterotomy. EMCrit Project.' },
+    { num: 2, text: 'Jeejeebhoy FM, et al. AHA Scientific Statement. Circulation. 2015;132(18):1747-1773.' },
+    { num: 3, text: 'Lipman S, et al. SOAP Consensus Statement. Anesth Analg. 2014;118(5):1003-1016.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Cord Emergencies — Steps Summary, Somersault Guide, Algorithm,
+// Knee-Chest Positioning, Tocolysis Guide, Stop (Do NOT)
+// -------------------------------------------------------------------
+
+const CORD_SUMMARY: InfoPage = {
+  id: 'cord-summary',
+  title: 'Cord Emergencies Steps Summary',
+  subtitle: 'Quick-reference overview of all four pathways',
+  sections: [
+    {
+      heading: '1. Triage — Which Emergency?',
+      body: '• [Cord palpable/visible after ROM → Cord Prolapse](#/node/cord-prolapse-start)\n• [Cord around neck at delivery → Nuchal Cord](#/node/cord-nuchal-palpate)\n• [PV bleed + sinusoidal FHT → Vasa Previa](#/node/cord-vasa-known)\n• [Unexplained fetal brady → Cord Accident](#/node/cord-accident-recognize)',
+    },
+    {
+      heading: '2. Cord Prolapse',
+      body: '• [Page OB, Anesthesia, NICU, OR team — DDI goal <30 min](#/node/cord-prolapse-callhelp)\n• [Position: knee-chest or left-lat Trendelenburg, NEVER supine](#/node/cord-position)\n• [Continuous manual elevation of presenting part — do NOT replace cord](#/node/cord-manual-elevate)\n• [Bladder fill 500-750 mL warm NS via Foley if transport delayed](#/node/cord-bladder-fill)\n• [Tocolysis: Terbutaline 0.25 mg SC or NTG 50-100 mcg IV](#/node/cord-tocolysis)\n• [Emergent C-section (or operative vaginal if truly imminent)](#/node/cord-delivery-timing)',
+    },
+    {
+      heading: '3. Nuchal Cord',
+      body: '• [Palpate after head delivers — Type A unlocked vs Type B locked](#/node/cord-nuchal-palpate)\n• [Loose → slip over head. Tight reducible → slip over shoulder](#/node/cord-nuchal-loose)\n• [Too tight → Somersault maneuver (preferred over clamp-and-cut)](#/node/cord-somersault)\n• [Clamp and cut only if somersault fails — commits to immediate delivery](#/node/cord-nuchal-clamp)\n• [Continue per Precipitous Delivery consult](#/tree/precip-delivery)',
+    },
+    {
+      heading: '4. Vasa Previa',
+      body: '• [Known antenatal — planned C/S 34-37 wk, steroids 28-32 wk](#/node/cord-vasa-planned)\n• [Acute: PV bleed + ROM + sinusoidal FHT → STAT C/S](#/node/cord-vasa-acute)\n• [O-neg CMV-neg irradiated neonatal blood 10 mL/kg at bedside](#/node/cord-vasa-acute)\n• [Apt test confirms fetal Hgb (pink with KOH) — do NOT delay delivery](#/node/cord-vasa-apt)',
+    },
+    {
+      heading: '5. Cord Accidents / True Knots',
+      body: '• [Unexplained brady ddx: compression, occult prolapse, abruption, rupture](#/node/cord-accident-recognize)\n• [In-utero resus: left tilt, O2, fluids, STOP oxytocin, tocolysis](#/node/cord-accident-resus)\n• [Mono-mono twins — always entangled, always C/S 32-34 wk](#/node/cord-monoamniotic)\n• [Fails in 5-10 min → Category 1/2 C-section](#/node/cord-accident-result)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'RCOG Green-top Guideline No. 50. Umbilical Cord Prolapse. 2014.' },
+    { num: 2, text: 'Oyelese Y, Smulian JC. Vasa previa. Obstet Gynecol. 2006;107(4):927-941.' },
+    { num: 3, text: 'Mercer JS et al. Nuchal cord management. J Midwifery Womens Health. 2005;50(5):373-379.' },
+  ],
+};
+
+const CORD_SOMERSAULT_GUIDE: InfoPage = {
+  id: 'cord-somersault-guide',
+  title: 'Somersault Maneuver — Step by Step',
+  subtitle: 'For tight nuchal cord that cannot be slipped — Schaefer / Mercer technique',
+  image: {
+    src: 'images/cord-emergencies/somersault-maneuver.svg',
+    alt: 'Three-panel diagram showing the somersault maneuver sequence',
+    caption: 'Somersault maneuver: keep head flexed near thigh, let body rotate up and over the perineum, unwind cord AFTER delivery.',
+  },
+  sections: [
+    {
+      heading: 'When to Use',
+      body: 'Nuchal cord at delivery that is **too tight to slip** over the head OR over the shoulder. Attempted BEFORE clamp-and-cut in any case where delivery can otherwise proceed. [1][2]',
+    },
+    {
+      heading: 'Steps',
+      body: '**1. KEEP HEAD FLEXED TO THIGH**\n• After the head delivers, keep the fetal head flexed — chin to chest — close to the mother\'s thigh or perineum\n• Do not let the head extend away from the body\n\n**2. DELIVER SHOULDERS NORMALLY**\n• Gentle downward traction to deliver the anterior shoulder under the symphysis\n• Gentle upward traction to deliver the posterior shoulder\n• Do NOT pull on the head to bring the body down — keep head near thigh\n\n**3. LET BODY SOMERSAULT**\n• As the shoulders and body deliver, allow the fetus to rotate up and over the perineum\n• The body "somersaults" — head stays near mom\'s thigh, body arcs upward\n• Baby ends face-up on mother\'s abdomen/thigh\n\n**4. UNWIND CORD AFTER DELIVERY**\n• With the baby delivered, unwind any remaining cord loops\n• Complete standard postpartum care per [Precipitous Delivery](#/tree/precip-delivery)',
+    },
+    {
+      heading: 'Why Somersault > Clamp-and-Cut',
+      body: '• **Preserves placental transfusion** — ~30% of neonatal blood volume transfers during delivery\n• **Avoids neonatal hypovolemia/anemia** — devastating if shoulder dystocia then occurs\n• **Avoids HIE from delayed delivery** — cutting commits you to rapid delivery, no salvage if obstructed\n• **Evidence:** cutting a nuchal cord before delivery is associated with neonatal anemia, HIE, and cerebral palsy when followed by delayed delivery [2][3]',
+    },
+    {
+      heading: 'If Somersault Fails',
+      body: '[Double clamp and cut the cord](#/node/cord-nuchal-clamp), then deliver immediately. Anticipate possible [shoulder dystocia](#/tree/shoulder-dystocia) and prepare for neonatal volume resuscitation (10 mL/kg NS or O-neg blood).',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Schaefer G. The somersault maneuver for delivery of the infant with a nuchal cord. Midwifery Today. 1987.' },
+    { num: 2, text: 'Mercer JS, Skovgaard RL, Peareara-Eaves J, Bowman TA. Nuchal cord management and nurse-midwifery practice. J Midwifery Womens Health. 2005;50(5):373-379.' },
+    { num: 3, text: 'Iffy L, Varadi V, Papp E. Untoward neonatal sequelae deriving from cutting of the umbilical cord before delivery. Med Law. 2001;20(4):627-634.' },
+  ],
+  shareable: false,
+};
+
+const CORD_PROLAPSE_ALGORITHM: InfoPage = {
+  id: 'cord-prolapse-algorithm',
+  title: 'Cord Prolapse Algorithm',
+  subtitle: 'One-view decision tree — diagnosis to delivery',
+  sections: [
+    {
+      heading: '1. Recognize',
+      body: '**Diagnosis** = palpable/visible cord OR sudden fetal bradycardia / severe variable decels within 5 min of ROM. Perform [vaginal exam](#/node/cord-prolapse-start) on ANY patient with FHR abnormality post-ROM.',
+    },
+    {
+      heading: '2. Call and Prepare',
+      body: '• [Page OB, Anesthesia, NICU, OR team](#/node/cord-prolapse-callhelp)\n• DDI goal **<30 min (RCOG)**, many centers **<15 min**\n• Document time of diagnosis',
+    },
+    {
+      heading: '3. Decompress (simultaneous)',
+      body: '**POSITIONING** — choose one:\n• [Knee-chest](#/node/cord-position) — best gravity decompression\n• [Trendelenburg + left tilt](#/node/cord-position) — best for transport\n• [Exaggerated Sims](#/node/cord-position) — comfortable for longer waits\n• **NEVER supine** — compresses IVC and cord\n\n**MANUAL ELEVATION**\n• [Gloved hand in vagina, push presenting part cephalad](#/node/cord-manual-elevate)\n• Continuous — do NOT release until fetus delivered\n• Nurse elevates if you need hands free\n\n**CORD HANDLING**\n• Minimize handling (vasospasm)\n• Warm saline-soaked gauze if exposed\n• **Do NOT replace cord** into uterus\n• Do NOT clamp',
+    },
+    {
+      heading: '4. Temporize',
+      body: '**BLADDER FILL (Vago procedure)**\n• [500-750 mL warm NS via 16F Foley, clamp](#/node/cord-bladder-fill)\n• Frees hand, elevates presenting part, reduces contractions\n• Can temporize 30-60+ min for transfer\n• Drain before skin incision\n\n**TOCOLYSIS**\n• [Terbutaline 0.25 mg SC](#/node/cord-tocolysis) — first-line, onset 1-5 min\n• [Nitroglycerin 50-100 mcg IV](#/node/cord-tocolysis) — fastest, onset 1-2 min (watch BP)\n• Mag sulfate TOO SLOW — not appropriate here\n\n**MATERNAL ADJUNCTS**\n• O2 10 L/min NRB\n• IV crystalloid 500 mL-1 L\n• Left tilt ≥15°',
+    },
+    {
+      heading: '5. Deliver',
+      body: '**Category 1 C-section** — [DDI <30 min target](#/node/cord-csection)\n• Spinal OK if fetus stable on elevation; GA if not\n• NICU at delivery — may need volume resus\n\n**OR operative vaginal delivery** — [ONLY if fully dilated, +2 vertex, experienced provider, delivery <5 min](#/node/cord-vaginal-delivery)\n\n**OR OR-delayed (rural)** — [maintain bladder fill + elevation + tocolysis indefinitely during transfer](#/node/cord-bladder-fill)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'RCOG Green-top Guideline No. 50. Umbilical Cord Prolapse. 2014.' },
+    { num: 2, text: 'Lin MG. Umbilical cord prolapse. Obstet Gynecol Surv. 2006;61(4):269-277.' },
+    { num: 3, text: 'Vago T. Prolapse of the umbilical cord: a method of management. Am J Obstet Gynecol. 1970;107(6):967-969.' },
+    { num: 4, text: 'Holbrook BD, Phelan ST. Umbilical cord prolapse. Obstet Gynecol Clin North Am. 2013;40(1):1-14.' },
+  ],
+};
+
+const CORD_KNEE_CHEST: InfoPage = {
+  id: 'cord-knee-chest',
+  title: 'Knee-Chest & Positioning Guide',
+  subtitle: 'Positioning for cord prolapse — decompression by gravity',
+  image: {
+    src: 'images/cord-emergencies/knee-chest-position.jpg',
+    alt: 'Illustration of patient in knee-chest (genupectoral) position',
+    caption: 'Knee-chest (genupectoral) position. Dorland (1901), public domain via Wikimedia Commons.',
+  },
+  sections: [
+    {
+      heading: 'Goal',
+      body: 'Use **gravity to decompress the cord** while maintaining maternal uteroplacental perfusion. Combine with continuous manual elevation of the presenting part and left lateral tilt.',
+    },
+    {
+      heading: 'Option 1: Knee-Chest (Genupectoral)',
+      body: '**Most gravity assistance** — best for stationary OR prep.\n\n**Technique:**\n• Patient kneels on the bed\n• Chest and head rest on the mattress (face turned to one side)\n• Buttocks pointed up toward the ceiling\n• Knees under hips, arms forward\n\n**Advantages:** maximal gravity decompression\n**Disadvantages:** difficult to maintain during transport, awkward for IV and fetal monitoring',
+    },
+    {
+      heading: 'Option 2: Trendelenburg + Left Lateral Tilt',
+      body: '**Best for transport** — maintains IV access and monitoring.\n\n**Technique:**\n• Bed tilted head-down 15-30°\n• Hips elevated on pillows or wedge\n• **Left lateral tilt ≥15°** to decompress IVC\n\n**Advantages:** easier transport, monitoring, IV access\n**Disadvantages:** less gravity assistance than knee-chest',
+    },
+    {
+      heading: 'Option 3: Exaggerated Sims',
+      body: '**Comfortable for longer waits** — good for rural transfer.\n\n**Technique:**\n• Patient on left side\n• Hips and pelvis elevated on pillows\n• Upper leg flexed forward\n• Head down slightly\n\n**Advantages:** comfortable, sustainable for hours, good for IV and monitoring\n**Disadvantages:** intermediate gravity assistance',
+    },
+    {
+      heading: 'Universal Rules',
+      body: '• **ALWAYS left lateral tilt ≥15°** in any position — decompresses IVC, maintains uteroplacental perfusion\n• **NEVER supine** — aortocaval compression worsens fetal hypoxia AND cord compression\n• Combine with continuous [manual elevation of presenting part](#/node/cord-manual-elevate)\n• Change position if patient uncomfortable for extended waits — function matters more than position name',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'RCOG Green-top Guideline No. 50. Umbilical Cord Prolapse. 2014.' },
+    { num: 2, text: 'Lin MG. Umbilical cord prolapse. Obstet Gynecol Surv. 2006;61(4):269-277.' },
+  ],
+};
+
+const CORD_TOCOLYSIS_GUIDE: InfoPage = {
+  id: 'cord-tocolysis-guide',
+  title: 'Tocolysis for Cord Emergencies',
+  subtitle: 'In-utero resuscitation — dosing and comparison',
+  sections: [
+    {
+      heading: 'Goal',
+      body: '**Relax the uterus** to improve placental perfusion and reduce cord compression during OR prep, transport, or when delivery is delayed. Every 1-minute reduction in cord compression matters.',
+    },
+    {
+      heading: 'First-Line — Terbutaline',
+      body: '**[Terbutaline](#/drug/terbutaline/tocolysis) 0.25 mg SC or IM × 1 dose**\n\n**Onset:** 1-5 minutes (SC)\n**Duration:** 15-30 minutes\n**May repeat:** q15-30 min × 1 if needed\n\n**Watch for:**\n• Maternal HR — avoid if baseline >120\n• Hyperglycemia (~10-15 mg/dL rise)\n• Hypokalemia\n• Jitteriness, tremor\n\n**Contraindications (relative):** baseline tachycardia, arrhythmia, active MI, brittle diabetes',
+    },
+    {
+      heading: 'Fastest Onset — Nitroglycerin',
+      body: '**[Nitroglycerin](#/drug/nitroglycerin/tocolysis cord prolapse) 50-100 mcg IV push; may repeat q2min up to 400 mcg total**\n\n**Onset:** 1-2 minutes (IV)\n**Duration:** 2-5 minutes\n\n**Also available:** 0.4 mg SL × 1 (onset 1-2 min, less reliable than IV)\n\n**Watch for:**\n• **Maternal hypotension** — main adverse effect\n• Have phenylephrine 100 mcg IV ready\n• Have IV crystalloid 500 mL ready\n• Reflex tachycardia\n• Headache\n\n**Contraindications:** SBP <90, RV infarction, PDE-5 inhibitor use 24-48h',
+    },
+    {
+      heading: 'NOT Appropriate — Magnesium Sulfate',
+      body: '**Mag sulfate onset is 20+ minutes — too slow for acute cord compression.**\n\nReserve [magnesium sulfate](#/drug/magnesium-sulfate/eclampsia) for:\n• Eclampsia / severe preeclampsia\n• Fetal neuroprotection in preterm delivery\n• NOT for acute in-utero resuscitation in cord emergency',
+    },
+    {
+      heading: 'Maternal Adjuncts',
+      body: '**Simultaneous with tocolytic:**\n• **Oxygen** — 10 L/min NRB\n• **IV fluid bolus** — 500 mL – 1 L crystalloid\n• **Left lateral tilt** ≥15° (IVC decompression)\n• **Stop oxytocin** if running (tachysystole is a common reversible cause of fetal compromise)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'David M, Walka MM, Schmid B, et al. Nitroglycerin to facilitate fetal extraction during cesarean delivery. Obstet Gynecol. 1998;91(1):119-124.' },
+    { num: 2, text: 'RCOG Green-top Guideline No. 50. Umbilical Cord Prolapse. 2014.' },
+    { num: 3, text: 'Lin MG. Umbilical cord prolapse. Obstet Gynecol Surv. 2006;61(4):269-277.' },
+  ],
+};
+
+const CORD_STOP: InfoPage = {
+  id: 'cord-stop',
+  title: 'Cord Emergencies — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  citations: [
+    { num: 1, text: 'RCOG Green-top Guideline No. 50. Umbilical Cord Prolapse. 2014.' },
+    { num: 2, text: 'Oyelese Y, Smulian JC. Vasa previa. Obstet Gynecol. 2006;107(4):927-941.' },
+    { num: 3, text: 'Mercer JS et al. Nuchal cord management. J Midwifery Womens Health. 2005;50(5):373-379.' },
+    { num: 4, text: 'Iffy L et al. Untoward neonatal sequelae from cutting the umbilical cord before delivery. Med Law. 2001;20(4):627-634.' },
+  ],
+  sections: [
+    {
+      heading: '🛑 Do NOT attempt to reduce a prolapsed cord back into the uterus',
+      body: 'Historical teaching now discouraged. It is **ineffective, induces cord vasospasm, and delays definitive care**. Instead, [elevate the presenting part off the cord manually](#/node/cord-manual-elevate) and minimize cord handling.',
+    },
+    {
+      heading: '🛑 Do NOT leave prolapsed cord exposed to air or handle it repeatedly',
+      body: 'Both **cause vasospasm** and worsen fetal ischemia. If cord is outside the introitus, cover with **warm saline-soaked gauze** and minimize contact. Do not clamp the cord. [Cord prolapse pathway](#/node/cord-prolapse-start).',
+    },
+    {
+      heading: '🛑 Do NOT clamp and cut a tight nuchal cord as first-line',
+      body: 'Attempt the [somersault maneuver first](#/node/cord-somersault). Cutting commits you to immediate delivery — if shoulder dystocia follows, the fetus has no placental circulation → acute hypoxia and anemia. Cutting is a **last resort** after somersault fails.',
+    },
+    {
+      heading: '🛑 Do NOT transport a cord prolapse patient supine',
+      body: 'Supine position compresses IVC AND worsens cord compression. Use [knee-chest, Trendelenburg with left tilt, or exaggerated Sims](#/node/cord-position) for all transport. Left lateral tilt ≥15° is mandatory in any position.',
+    },
+    {
+      heading: '🛑 Do NOT delay C-section for antenatal steroids',
+      body: 'When the fetus is already compromised, **deliver now — neonatology manages lung immaturity**. Steroids are for planned premature deliveries, not acute emergencies. [Cord prolapse result](#/node/cord-csection).',
+    },
+    {
+      heading: '🛑 Do NOT rupture membranes if vasa previa is known or suspected',
+      body: 'Amniotomy over unprotected fetal vessels = **fetal exsanguination within minutes** (fetal blood volume is only 80-100 mL/kg). If pulsating vessels palpable through a dilated cervix, stop the exam and prepare for C-section. [Vasa previa pathway](#/node/cord-vasa-known).',
+    },
+    {
+      heading: '🛑 Do NOT perform digital cervical exam in a third-trimester patient with vaginal bleeding',
+      body: 'Before ruling out placenta previa and vasa previa with ultrasound. Digital exam in these conditions can provoke catastrophic bleeding. [Acute vasa previa](#/node/cord-vasa-acute).',
+    },
+    {
+      heading: '🛑 Do NOT administer oxytocin during active cord prolapse',
+      body: 'Contractions **worsen cord compression**. Turn off the pump. Use [tocolysis instead](#/node/cord-tocolysis) — terbutaline 0.25 mg SC or NTG 50-100 mcg IV.',
+    },
+    {
+      heading: '🛑 Do NOT give magnesium sulfate for acute tocolysis in cord emergency',
+      body: 'Mag onset is 20+ minutes — **too slow** for acute cord compression. Use [terbutaline or nitroglycerin](#/node/cord-tocolysis). Reserve magnesium for eclampsia or fetal neuroprotection.',
+    },
+    {
+      heading: '🛑 Do NOT forget to drain the bladder before skin incision',
+      body: 'If [Vago bladder-fill](#/node/cord-bladder-fill) was used for temporization, **uncuff the Foley and drain immediately before cesarean skin incision**. A distended bladder is in the surgical field.',
+    },
+    {
+      heading: '🛑 Do NOT skip the Apt test just because vasa previa seems obvious',
+      body: 'Bedside Apt test (1% KOH — pink = fetal Hgb) distinguishes fetal from maternal blood in ~2 minutes. **Confirms diagnosis**, documents for medicolegal purposes, guides neonatal resuscitation needs. Do NOT delay C-section for results, but do perform it. [Apt test technique](#/node/cord-vasa-apt).',
+    },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Emergency Contraception Tools
+// -------------------------------------------------------------------
+
+const EC_DOSING_GUIDE: InfoPage = {
+  id: 'ec-dosing-guide',
+  title: 'EC Dosing Quick Reference',
+  subtitle: 'Emergency contraception dosing at a glance',
+  sections: [
+    {
+      heading: 'Levonorgestrel (Plan B)',
+      body: '**Standard dose:** 1.5 mg PO × 1\n\n**High-risk dose (3 mg):** Use if:\n• Weight >165 lbs (75 kg) or BMI >25\n• On enzyme-inducing medications\n\n**How to give 3 mg:** Two 1.5 mg tablets at once\n\n**Timing:** Best within 72h; some efficacy to 120h\n\n**Access:** OTC — no prescription, no age limit\n\n**Cost:** ~$40-50',
+    },
+    {
+      heading: 'Ulipristal (ella)',
+      body: '**Dose:** 30 mg PO × 1 (no dose escalation)\n\n**Timing:** Up to 120h (5 days) — maintains efficacy\n\n**Access:** Prescription required\n\n**Cost:** ~$50\n\n**CRITICAL:** Wait 5 days before starting hormonal contraception',
+    },
+    {
+      heading: 'Yuzpe Method (Backup Only)',
+      body: '**Dose 1:** 100 mcg ethinyl estradiol + 0.5 mg levonorgestrel\n**Dose 2:** Repeat in 12 hours\n\n**Using COCs:**\n• Levora/Nordette: 4 pills × 2 (12h apart)\n• Alesse/Levlite: 5 pills × 2 (12h apart)\n\n**Timing:** Within 72h\n\n**Side effects:** Nausea 54%, vomiting 16%\n**Give antiemetic 1h before:** Ondansetron 4 mg or meclizine 25 mg',
+    },
+    {
+      heading: 'Copper IUD (ParaGard)',
+      body: '**Most effective EC** (>99%)\n\n**Timing:** Within 5 days of intercourse OR within 5 days of ovulation\n\n**Advantages:**\n• Unaffected by weight\n• Unaffected by timing\n• Unaffected by medications\n• Provides 10 years of contraception',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACOG Practice Bulletin No. 152: Emergency Contraception. 2015/2023.' },
+    { num: 2, text: 'CDC Selected Practice Recommendations for Contraceptive Use. MMWR 2024.' },
+  ],
+};
+
+const EC_TIMING_EFFICACY: InfoPage = {
+  id: 'ec-timing-efficacy',
+  title: 'EC Timing & Efficacy',
+  subtitle: 'Efficacy by method and time since intercourse',
+  sections: [
+    {
+      heading: 'Efficacy by Time Window',
+      body: '| Method | 0-24h | 24-72h | 72-120h | >120h |\n|--------|-------|--------|---------|-------|\n| **Cu-IUD** | >99% | >99% | >99% | May work* |\n| **Ulipristal** | 94% | 95% | 95% | No |\n| **Levonorgestrel** | 91% | 87% | 75% | No |\n| **Yuzpe** | 86% | 75% | 58% | No |\n\n*Cu-IUD may work beyond 5 days if within 5 days of ovulation',
+    },
+    {
+      heading: 'Key Timing Points',
+      body: '**Levonorgestrel:**\n• Best within 24 hours (91% efficacy)\n• Acceptable within 72 hours (87%)\n• Efficacy **drops significantly** after 72 hours\n• UK guidance: consider ineffective after 96 hours\n\n**Ulipristal:**\n• **No efficacy decay** from 24-120 hours\n• 42% better than LNG at 24-72h\n• 65% better than LNG in first 24h\n• Maintains efficacy near ovulation (LNG does not)',
+    },
+    {
+      heading: 'Method Selection by Timing',
+      body: '**0-72 hours:** Any method works well\n• LNG acceptable if OTC access critical\n• UPA slightly better\n• IUD best if available\n\n**72-120 hours:** Switch to UPA or IUD\n• LNG efficacy significantly reduced\n• UPA maintains ~95% efficacy\n• IUD unaffected\n\n**>120 hours:** IUD only option\n• Oral EC not effective\n• IUD may still work if before ovulation',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Glasier A et al. Ulipristal vs levonorgestrel. Lancet 2010.' },
+    { num: 2, text: 'Brache V et al. Ulipristal prevents ovulation. Contraception 2013.' },
+  ],
+};
+
+const EC_WEIGHT_GUIDE: InfoPage = {
+  id: 'ec-weight-guide',
+  title: 'EC Weight Considerations',
+  subtitle: 'Weight-based efficacy and recommendations',
+  sections: [
+    {
+      heading: 'Weight Thresholds',
+      body: '| Weight | BMI | LNG Efficacy | UPA Efficacy | Best Option |\n|--------|-----|--------------|--------------|-------------|\n| <165 lbs | <25 | Full | Full | Any |\n| 165-195 lbs | 25-30 | **Reduced** | Slightly reduced | UPA or IUD |\n| >195 lbs | >30 | **Significantly reduced** | Reduced | **Cu-IUD** |',
+    },
+    {
+      heading: 'Clinical Recommendations',
+      body: '**Weight <165 lbs (75 kg):**\n• All methods equally effective\n• Choose based on access and timing\n\n**Weight 165-195 lbs (75-89 kg):**\n• LNG efficacy reduced\n• Prefer ulipristal or copper IUD\n• If LNG only available: still give (better than nothing)\n\n**Weight >195 lbs (89 kg):**\n• Both LNG and UPA have reduced efficacy\n• **Copper IUD is best option** (unaffected by weight)\n• If pills only: UPA > LNG',
+    },
+    {
+      heading: 'Doubling Levonorgestrel Dose',
+      body: '**For weight >165 lbs:**\n• Consider 3 mg (double dose)\n• Mixed evidence — 2024 study showed no clear benefit\n• Reasonable option when IUD/UPA unavailable\n\n**For enzyme inducers:**\n• Double dose (3 mg) is recommended\n• Better evidence than weight-based doubling\n\n**Important:** Do NOT withhold EC based on weight. Any EC is better than no EC.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kapp N et al. Effect of body weight on EC efficacy. Contraception 2015.' },
+    { num: 2, text: 'FSRH Clinical Guidance. Emergency Contraception. 2023.' },
+  ],
+};
+
+const EC_LEGAL_GUIDE: InfoPage = {
+  id: 'ec-legal-guide',
+  title: 'EC Legal Considerations',
+  subtitle: 'State-by-state legal status and access barriers',
+  sections: [
+    {
+      heading: 'Federal Status',
+      body: '**FDA Classification:**\n• EC is a **contraceptive**, NOT an abortifacient\n• December 2022 label update: "does not terminate pregnancy"\n• Mechanism: prevents ovulation, does NOT disrupt implantation\n\n**All EC methods are legal in all 50 states.**',
+    },
+    {
+      heading: 'Texas',
+      body: '**Plan B (levonorgestrel):**\n• ✅ Legal\n• ✅ OTC — no prescription needed\n• ✅ No age restrictions\n• May be behind counter but no Rx required\n\n**ella (ulipristal):**\n• ✅ Legal with prescription\n• Telehealth prescribing available\n\n**Copper IUD:**\n• ✅ Legal, standard of care\n• NOT considered abortifacient\n\n**Minors:**\n• Plan B: OTC, no parental consent needed\n• Title X clinics: parental consent required (5th Circuit ruling 2024)\n\n**Pharmacist refusal:**\n• No state law protecting refusal (as of 2026)\n• SB 1985 (2025) proposes protection — status pending',
+    },
+    {
+      heading: 'Other Restrictive States',
+      body: '**Idaho:**\n• EC legal; unique: pharmacists can prescribe without age limit\n• School clinics: EC restricted except for rape\n\n**Oklahoma:**\n• EC legal, no state bans\n• Reports of individual pharmacist refusals\n\n**Louisiana:**\n• EC legal but legal risk from "personhood" language\n• Reports of pharmacist refusals\n\n**Arkansas:**\n• EC legal\n• Some Medicaid access restrictions',
+    },
+    {
+      heading: 'Pharmacist Refusal Laws',
+      body: '**States with pharmacist refusal clauses:**\nArizona, Arkansas, Georgia, Idaho, Mississippi, South Dakota\n\n**If pharmacist refuses:**\n• Patient can request transfer to another pharmacy\n• OTC Plan B available at most retailers\n• Document refusal for risk management\n\n**Texas:** No state refusal law (currently), but pending legislation',
+    },
+    {
+      heading: 'Sexual Assault Protocols',
+      body: '**Hospital requirements vary by state:**\n\n**Texas:**\n• Must provide information about EC\n• NOT required to dispense\n• Patient may go to pharmacy\n\n**Best practice:**\n• Offer EC to all sexual assault survivors\n• Document offer and patient decision\n• If declined, offer to revisit before discharge',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Guttmacher Institute. Emergency Contraception: State Laws. 2024.' },
+    { num: 2, text: 'FDA. Plan B Label Update. December 2022.' },
+    { num: 3, text: 'KFF. Right to Contraception: State Actions. 2024.' },
+  ],
+};
+
+const EC_IUD_GUIDE: InfoPage = {
+  id: 'ec-iud-guide',
+  title: 'Copper IUD for EC',
+  subtitle: 'The most effective emergency contraception',
+  sections: [
+    {
+      heading: 'Why Copper IUD is Gold Standard',
+      body: '**Efficacy:** >99% (pregnancy rate 0.1%)\n\n**Advantages over oral EC:**\n• **Unaffected by weight** — works at any BMI\n• **Unaffected by timing** — consistent efficacy within 5-day window\n• **Unaffected by medications** — no drug interactions\n• **Long-term contraception** — up to 10 years\n• **Immediate protection** — no backup method needed',
+    },
+    {
+      heading: 'Timing Window',
+      body: '**Standard guidance:**\n• Within 5 days of unprotected intercourse\n\n**Extended guidance:**\n• Within 5 days of **ovulation** (not intercourse)\n• If cycle timing known, may extend window\n• Example: Sex day 7, ovulation day 14 → IUD day 13 still works\n\n**If timing uncertain:**\n• Can insert any time in cycle if pregnancy test negative\n• Efficacy less certain beyond 5 days but reasonable option',
+    },
+    {
+      heading: 'Contraindications (CDC MEC 4)',
+      body: '**Absolute contraindications:**\n• Current pregnancy\n• Active PID or purulent cervicitis\n• Unexplained vaginal bleeding (until evaluated)\n• Cervical or endometrial cancer\n• Uterine cavity distortion (fibroids, anomaly)\n• Wilson disease (copper overload)\n\n**NOT contraindications:**\n• Nulliparity (never given birth)\n• Prior ectopic pregnancy\n• STI risk factors (test, can insert before results)\n• Breastfeeding',
+    },
+    {
+      heading: 'ED Insertion Considerations',
+      body: '**Can insert in ED if:**\n• Trained provider available\n• Equipment available\n• Patient desires IUD for EC + ongoing contraception\n\n**Pre-procedure:**\n• Pregnancy test (if not done)\n• Bimanual exam for uterine position\n• STI testing if high-risk (can insert before results)\n• NSAIDs for pain (ibuprofen 400-600 mg)\n\n**If unable to insert:**\n• Give oral EC as bridge\n• Refer for urgent IUD insertion within 5 days',
+    },
+    {
+      heading: 'Post-Insertion Counseling',
+      body: '**Expected effects:**\n• Cramping — NSAIDs PRN\n• Spotting — normal\n• Heavier, longer periods first 3-6 months\n\n**Follow-up:**\n• String check in 4-6 weeks\n• Can remain 10 years\n\n**Return precautions:**\n• Fever, severe pain, abnormal discharge\n• String changes (longer, shorter, absent)\n• Signs of pregnancy',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Cleland K et al. IUD for emergency contraception. Hum Reprod 2012.' },
+    { num: 2, text: 'CDC Medical Eligibility Criteria for Contraceptive Use. MMWR 2024.' },
+    { num: 3, text: 'Turok DK et al. Copper IUD for EC: Clinical Practice. Semin Reprod Med 2021.' },
+  ],
+};
+
+const EC_DRUG_INTERACTIONS: InfoPage = {
+  id: 'ec-drug-interactions',
+  title: 'EC Drug Interactions',
+  subtitle: 'CYP3A4 inducers and EC efficacy',
+  sections: [
+    {
+      heading: 'Medications That Reduce EC Efficacy',
+      body: '**Anticonvulsants:**\n• Phenytoin (Dilantin)\n• Carbamazepine (Tegretol)\n• Phenobarbital\n• Oxcarbazepine\n• Topiramate (>200 mg/day)\n• Primidone\n\n**Antibiotics:**\n• Rifampin (most potent inducer)\n• Rifabutin\n\n**Antiretrovirals:**\n• Efavirenz\n• Nevirapine\n• Some protease inhibitors\n\n**Other:**\n• St. John\'s Wort\n• Griseofulvin\n• Bosentan',
+    },
+    {
+      heading: 'Management Recommendations',
+      body: '**Ulipristal (ella):**\n• ❌ **CONTRAINDICATED** with enzyme inducers\n• Do NOT use — significantly reduced efficacy\n\n**Levonorgestrel (Plan B):**\n• ⚠️ Reduced efficacy\n• **Double dose to 3 mg** (two 1.5 mg tablets)\n• UK FSRH recommended approach\n\n**Copper IUD:**\n• ✅ **Unaffected** by any medications\n• **Best option** for patients on enzyme inducers',
+    },
+    {
+      heading: 'Duration of Effect',
+      body: '**How long do inducers affect EC?**\n\n• Effect persists **4 weeks** after stopping the medication\n• If patient stopped inducer within past month, still assume reduced efficacy\n\n**Practical approach:**\n• Ask about current AND recent (past month) medications\n• When in doubt, use copper IUD or double LNG dose',
+    },
+    {
+      heading: 'Clinical Decision Tree',
+      body: '**Patient on enzyme inducer needs EC:**\n\n1️⃣ **Best:** Copper IUD (unaffected)\n\n2️⃣ **If IUD unavailable:** Levonorgestrel 3 mg (double dose)\n\n3️⃣ **Do NOT use:** Ulipristal (contraindicated)\n\n**Document:** Interaction identified, alternative used, rationale',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'FSRH Drug Interactions with Hormonal Contraception. 2024.' },
+    { num: 2, text: 'UK MHRA. Levonorgestrel and enzyme inducers guidance. 2016.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Delayed Sequence Intubation
   'dsi-summary': DSI_SUMMARY,
@@ -14395,6 +15034,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'bronch-parent-en': BRONCH_PARENT_EN,
   'bronch-parent-es': BRONCH_PARENT_ES,
   'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
+  // Resuscitative Hysterotomy
+  'rh-summary': RH_SUMMARY,
+  'resuscitative-hysterotomy-stop': RH_STOP,
+  'rh-acls-mods': RH_ACLS_MODS,
+  'rh-beauchops-details': RH_BEAUCHOPS_DETAILS,
+  'rh-procedure-checklist': RH_PROCEDURE_CHECKLIST,
   'sd-summary': SD_SUMMARY,
   'afib-summary': AFIB_SUMMARY,
   'afib-rvr-stop': AFIB_STOP,
@@ -14691,6 +15336,20 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'preg-resuscitative-hysterotomy': PREG_RESUSCITATIVE_HYSTEROTOMY,
   'preg-trauma-ddx': PREG_TRAUMA_DDX,
   'preg-resus-rules': PREG_RESUS_RULES,
+  // Cord Emergencies
+  'cord-summary': CORD_SUMMARY,
+  'cord-somersault-guide': CORD_SOMERSAULT_GUIDE,
+  'cord-prolapse-algorithm': CORD_PROLAPSE_ALGORITHM,
+  'cord-knee-chest': CORD_KNEE_CHEST,
+  'cord-tocolysis-guide': CORD_TOCOLYSIS_GUIDE,
+  'cord-stop': CORD_STOP,
+  // Emergency Contraception
+  'ec-dosing-guide': EC_DOSING_GUIDE,
+  'ec-timing-efficacy': EC_TIMING_EFFICACY,
+  'ec-weight-guide': EC_WEIGHT_GUIDE,
+  'ec-legal-guide': EC_LEGAL_GUIDE,
+  'ec-iud-guide': EC_IUD_GUIDE,
+  'ec-drug-interactions': EC_DRUG_INTERACTIONS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

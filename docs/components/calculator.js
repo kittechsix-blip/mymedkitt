@@ -31944,6 +31944,104 @@ const VERTIGO_CENTRAL_CHECKLIST_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// RESUSCITATIVE HYSTEROTOMY CALCULATORS
+// -------------------------------------------------------------------
+const APGAR_CALCULATOR = {
+    id: 'apgar',
+    title: 'APGAR Score',
+    subtitle: 'Newborn Assessment — 1, 5, and 10 minutes',
+    description: 'Standardized assessment of newborn condition at 1, 5, and 10 minutes after delivery. Each of 5 components scored 0-2. Total 0-10. A score of 7-10 is reassuring; 4-6 indicates moderate distress; 0-3 indicates severe distress requiring immediate intensive resuscitation. The APGAR is a reassessment tool — it does not replace the NRP algorithm and should not delay resuscitation.',
+    fields: [
+        {
+            name: 'appearance',
+            label: 'A — Appearance (skin color)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Blue/pale all over (0)', points: 0 },
+                { label: 'Acrocyanosis — body pink, extremities blue (1)', points: 1 },
+                { label: 'Completely pink (2)', points: 2 },
+            ],
+        },
+        {
+            name: 'pulse',
+            label: 'P — Pulse (heart rate)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent — no pulse (0)', points: 0 },
+                { label: '<100 bpm (1)', points: 1 },
+                { label: '≥100 bpm (2)', points: 2 },
+            ],
+        },
+        {
+            name: 'grimace',
+            label: 'G — Grimace (reflex irritability to stimulation)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No response (0)', points: 0 },
+                { label: 'Grimace only (1)', points: 1 },
+                { label: 'Cry, cough, sneeze, or active withdrawal (2)', points: 2 },
+            ],
+        },
+        {
+            name: 'activity',
+            label: 'A — Activity (muscle tone)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Limp / flaccid (0)', points: 0 },
+                { label: 'Some flexion of extremities (1)', points: 1 },
+                { label: 'Active motion / well-flexed (2)', points: 2 },
+            ],
+        },
+        {
+            name: 'respiration',
+            label: 'R — Respiration',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Apneic — not breathing (0)', points: 0 },
+                { label: 'Slow or irregular, weak cry (1)', points: 1 },
+                { label: 'Good, strong cry (2)', points: 2 },
+            ],
+        },
+    ],
+    results: [
+        {
+            min: 0,
+            max: 3,
+            label: '0-3 — Severe Distress',
+            risk: 'Severe cardiorespiratory depression',
+            mortality: '**IMMEDIATE RESUSCITATION:**\n• Positive pressure ventilation (PPV)\n• Chest compressions if HR <60 despite PPV (3:1 ratio)\n• Epinephrine 0.01-0.03 mg/kg IV/IO if HR <60 despite PPV + compressions\n• Intubate if prolonged PPV or ineffective\n• Reassess q30-60 sec\n• Continued low APGAR at 5 min → recheck q5 min until ≥7 or age 20 min\n• Admission to NICU mandatory',
+            colorVar: '--color-danger',
+        },
+        {
+            min: 4,
+            max: 6,
+            label: '4-6 — Moderate Distress',
+            risk: 'Moderate depression — likely needs support',
+            mortality: '**SUPPORT + REASSESS:**\n• Warm, dry, stimulate vigorously\n• Clear airway — suction if obstruction\n• PPV if HR <100 or apneic/gasping\n• Blow-by O2 if labored breathing but HR ≥100\n• Pulse ox on right hand (preductal)\n• Reassess in 30-60 sec\n• APGAR recheck at 5 min\n• If <7 at 5 min → continue q5 min until ≥7 or age 20 min\n• NICU evaluation',
+            colorVar: '--color-warning',
+        },
+        {
+            min: 7,
+            max: 10,
+            label: '7-10 — Reassuring',
+            risk: 'Good transitional newborn condition',
+            mortality: '**ROUTINE NEWBORN CARE:**\n• Warm, dry, stimulate\n• Pulse ox (preductal)\n• Skin-to-skin with mother if mother stable\n• Delayed cord clamping 30-60 sec if vigorous\n• APGAR at 5 min for documentation\n• Monitor temperature — hypothermia is #1 risk in ED deliveries\n• Routine newborn exam and disposition',
+            colorVar: '--color-primary',
+        },
+    ],
+    thresholdNote: 'APGAR is assessed at 1 minute (condition at birth) and 5 minutes (response to resuscitation). Continue scoring every 5 minutes until score ≥7 or infant age reaches 20 minutes. The APGAR does NOT determine the need for resuscitation — that is driven by HR, respirations, and tone per NRP algorithm. A single low APGAR does not predict long-term outcome. Prolonged depression (APGAR ≤3 at 5+ min) correlates with increased risk of neurologic injury.',
+    citations: [
+        'Apgar V. A proposal for a new method of evaluation of the newborn infant. Curr Res Anesth Analg. 1953;32(4):260-267.',
+        'American Academy of Pediatrics Committee on Fetus and Newborn; American College of Obstetricians and Gynecologists Committee on Obstetric Practice. The Apgar Score. Pediatrics. 2015;136(4):819-822.',
+        'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. American Academy of Pediatrics; 2021.',
+    ],
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -32438,6 +32536,8 @@ const CALCULATORS = {
     'diplopia-localize': DIPLOPIA_LOCALIZE_CALCULATOR,
     // Vertigo
     'vertigo-central-checklist': VERTIGO_CENTRAL_CHECKLIST_CALCULATOR,
+    // Resuscitative Hysterotomy
+    'apgar': APGAR_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

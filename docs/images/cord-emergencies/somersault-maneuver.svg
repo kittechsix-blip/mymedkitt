@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360" role="img" aria-labelledby="title desc">
+  <title id="title">Somersault Maneuver for Tight Nuchal Cord</title>
+  <desc id="desc">Three-panel sequence showing the somersault maneuver: head delivered and kept flexed toward mother's thigh, body somersaults up and over the perineum, baby lands face-up with cord still intact.</desc>
+  <style>
+    .bg { fill: #FAFAF5; }
+    .panel-label { font: 600 14px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .caption { font: 400 12px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .label-sm { font: 500 11px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+    .body-line { stroke: #37474F; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .mother { stroke: #37474F; stroke-width: 2.4; fill: #F5EDE4; }
+    .baby { stroke: #37474F; stroke-width: 2.2; fill: #FFE0C2; }
+    .cord { stroke: #880E4F; stroke-width: 2.4; fill: none; stroke-linecap: round; }
+    .arrow { stroke: #3CB371; stroke-width: 2.2; fill: none; marker-end: url(#arrowhead); }
+    .dashed { stroke: #5A5A5A; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+    .divider { stroke: #D5D2C8; stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3CB371"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="900" height="360"/>
+  <line class="divider" x1="300" y1="20" x2="300" y2="340"/>
+  <line class="divider" x1="600" y1="20" x2="600" y2="340"/>
+
+  <!-- Panel 1: Head delivered, keep flexed to thigh -->
+  <text class="panel-label" x="150" y="40" text-anchor="middle">1. Head Delivered — Keep Flexed</text>
+  <path class="mother" d="M 40 260 Q 60 220 100 210 L 240 210 Q 280 215 280 260 L 280 330 L 40 330 Z"/>
+  <path class="dashed" d="M 100 210 Q 170 195 240 210"/>
+  <circle class="baby" cx="150" cy="205" r="30"/>
+  <circle cx="138" cy="200" r="2" fill="#37474F"/>
+  <path class="body-line" d="M 115 190 q -10 -6 -22 4"/>
+  <path class="body-line" d="M 185 190 q 10 -6 22 4"/>
+  <path class="cord" d="M 124 228 Q 150 240 176 228"/>
+  <path class="arrow" d="M 150 150 Q 150 175 150 190"/>
+  <text class="label-sm" x="150" y="145" text-anchor="middle">head stays near thigh</text>
+  <text class="caption" x="150" y="312" text-anchor="middle">Cord too tight to slip.</text>
+  <text class="caption" x="150" y="328" text-anchor="middle">Do NOT cut. Flex head to thigh.</text>
+
+  <!-- Panel 2: Shoulders delivering, body somersaults up -->
+  <text class="panel-label" x="450" y="40" text-anchor="middle">2. Shoulders Out — Body Somersaults</text>
+  <path class="mother" d="M 340 260 Q 360 220 400 210 L 540 210 Q 580 215 580 260 L 580 330 L 340 330 Z"/>
+  <path class="dashed" d="M 400 210 Q 470 195 540 210"/>
+  <circle class="baby" cx="450" cy="205" r="28"/>
+  <path class="baby" d="M 422 215 Q 420 255 435 285 L 465 285 Q 480 255 478 215 Z"/>
+  <path class="cord" d="M 425 220 Q 450 230 475 220"/>
+  <path class="cord" d="M 450 230 Q 455 260 470 290"/>
+  <path class="arrow" d="M 490 275 Q 530 230 520 170"/>
+  <text class="label-sm" x="540" y="215">body rotates</text>
+  <text class="label-sm" x="540" y="230">up and over</text>
+  <text class="caption" x="450" y="312" text-anchor="middle">Deliver shoulders normally.</text>
+  <text class="caption" x="450" y="328" text-anchor="middle">Let body somersault over perineum.</text>
+
+  <!-- Panel 3: Baby face-up on thigh, cord intact -->
+  <text class="panel-label" x="750" y="40" text-anchor="middle">3. Baby on Thigh — Cord Intact</text>
+  <path class="mother" d="M 640 260 Q 660 220 700 210 L 840 210 Q 880 215 880 260 L 880 330 L 640 330 Z"/>
+  <path class="dashed" d="M 700 210 Q 770 195 840 210"/>
+  <circle class="baby" cx="730" cy="195" r="22"/>
+  <circle cx="728" cy="190" r="1.8" fill="#37474F"/>
+  <path class="baby" d="M 748 180 Q 790 172 830 180 Q 840 195 830 210 Q 790 218 748 210 Z"/>
+  <path class="body-line" d="M 830 200 q 18 -4 24 -14"/>
+  <path class="body-line" d="M 830 190 q 18 4 24 -4"/>
+  <path class="cord" d="M 720 205 Q 705 215 720 225 Q 735 235 750 225"/>
+  <path class="cord" d="M 720 225 Q 700 245 685 270"/>
+  <text class="caption" x="750" y="312" text-anchor="middle">Baby face-up, cord still wrapped.</text>
+  <text class="caption" x="750" y="328" text-anchor="middle">Unwind cord AFTER full delivery.</text>
+</svg>

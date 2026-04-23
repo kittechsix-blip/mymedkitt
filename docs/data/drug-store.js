@@ -850,6 +850,10 @@ const CALCIUM_CHLORIDE = {
             indication: 'HF acid burn — severe/systemic',
             regimen: '1 gram IV over 10 min for systemic hypocalcemia from HF exposure. Central line required. Monitor iCa closely.',
         },
+        {
+            indication: 'Hypermagnesemia / Magnesium Toxicity',
+            regimen: '1 gram IV over 5-10 minutes (central line). Reverses MgSO4-induced respiratory depression, cardiac arrest, and neuromuscular blockade. Use when patient arrests or develops symptomatic hypermagnesemia on MgSO4 infusion (eclampsia, preterm labor). Contains 3x more elemental calcium per gram than calcium gluconate.',
+        },
     ],
     contraindications: [
         'Peripheral IV administration (causes severe tissue necrosis)',
@@ -888,6 +892,10 @@ const CALCIUM_GLUCONATE = {
             indication: 'HF acid burn — subcutaneous',
             regimen: '5% solution (dilute 10% to 5%): inject 0.5 mL per cm² of affected area using 27-30G needle. Max 0.5 mL per digit. For intra-arterial: 10 mL of 10% CaGluc in 40 mL NS via radial artery catheter over 4 hours.',
         },
+        {
+            indication: 'Hypermagnesemia / Magnesium Toxicity',
+            regimen: '1-2 grams IV over 5-10 minutes (peripheral OK). Reverses MgSO4-induced loss of DTRs, respiratory depression, and cardiac arrest. Use in pregnant patient on MgSO4 for eclampsia/preterm labor who arrests or develops symptomatic hypermagnesemia. Use calcium gluconate when central access unavailable.',
+        },
     ],
     contraindications: [
         'Digoxin toxicity (relative — calcium may worsen digitalis effects)',
@@ -922,6 +930,10 @@ const CEFAZOLIN = {
             indication: 'Neonatal UTI',
             regimen: '50 mg/kg/day divided q8h.',
             weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 3 },
+        },
+        {
+            indication: 'Surgical Prophylaxis (post-Resuscitative Hysterotomy)',
+            regimen: '2 grams IV once (3 g if weight ≥120 kg). Given after ROSC to cover the non-sterile intra-abdominal field. Covers skin and common OR flora. Alternative if beta-lactam allergy: Clindamycin 900 mg IV + Gentamicin 5 mg/kg IV.',
         },
     ],
     contraindications: [
@@ -3729,8 +3741,8 @@ const NITROGLYCERIN = {
             regimen: 'SL: 0.4 mg (1 tablet or spray) every 5 min × 3 doses. IV: Start 5-10 mcg/min, titrate by 5-10 mcg/min every 3-5 min. Target: symptom relief and SBP >100. Max typically 200 mcg/min.',
         },
         {
-            indication: 'Tocolysis (Shoulder Dystocia / Zavanelli)',
-            regimen: 'SL: 0.4 mg (1 spray or tablet) × 1 dose. Provides rapid uterine relaxation to facilitate cephalic replacement (Zavanelli maneuver) prior to emergency cesarean section. Onset: 1-2 minutes SL. Alternative to terbutaline SQ.',
+            indication: 'Tocolysis (Cord Prolapse / Shoulder Dystocia / Zavanelli)',
+            regimen: 'IV: 50-100 mcg IV push for acute cord compression emergencies; may repeat q2min up to 400 mcg total. Onset 1-2 minutes IV — fastest-onset tocolytic. SL: 0.4 mg (1 spray or tablet) × 1 dose — alternative when IV access limited. Have phenylephrine and IV fluids ready — maternal hypotension is the main adverse effect. Alternative to terbutaline SQ.',
         },
     ],
     contraindications: [
@@ -3976,6 +3988,10 @@ const OXYTOCIN = {
         {
             indication: 'Precipitous Delivery — Third Stage',
             regimen: '20 units in 1L NS (or LR). Infuse at 250 mL/hr. Max 40 units over 4–10 hrs. Start after placental delivery. Do NOT give IV push — can cause profound hypotension.',
+        },
+        {
+            indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
+            regimen: '20 units in 1L NS (or LR). Infuse at 250 mL/hr. Alternative: 10 U IM after delivery if no IV access. Do NOT give IV push — causes profound hypotension and can re-arrest a post-ROSC patient. Start immediately after placental delivery or after resuscitative hysterotomy to prevent/treat uterine atony.',
         },
     ],
     contraindications: [
@@ -5023,8 +5039,8 @@ const TERBUTALINE = {
             regimen: '0.25 mg SQ, may repeat q15-30 min PRN, max 0.5 mg in 4 hours.',
         },
         {
-            indication: 'Tocolysis (Shoulder Dystocia / Zavanelli)',
-            regimen: '0.25 mg SQ or IM × 1 dose. Provides rapid uterine relaxation to facilitate cephalic replacement (Zavanelli maneuver) prior to emergency cesarean section. Onset: 5 minutes SQ.',
+            indication: 'Tocolysis (Cord Prolapse / Shoulder Dystocia / Zavanelli)',
+            regimen: '0.25 mg SQ or IM × 1 dose. First-line for acute tocolysis in cord emergencies and for cephalic replacement (Zavanelli). Onset: 1-5 minutes. Duration: 15-30 minutes. Relaxes uterus to improve placental perfusion and reduce cord compression during OR prep or transport. Monitor maternal HR (avoid if >120), glucose, K+.',
         },
         {
             indication: 'Anaphylaxis bronchospasm',
@@ -6018,11 +6034,15 @@ const MISOPROSTOL = {
     genericName: 'Misoprostol',
     drugClass: 'Prostaglandin E1 analog',
     route: 'Intravaginal/PO/SL',
-    indications: ['Incomplete miscarriage (medical management)', 'Missed miscarriage', 'Cervical ripening'],
+    indications: ['Incomplete miscarriage (medical management)', 'Missed miscarriage', 'Cervical ripening', 'Postpartum hemorrhage (uterine atony)'],
     dosing: [
         {
             indication: 'Miscarriage — medical management',
             regimen: '800 mcg intravaginally, single dose. 91% effective within 7 days. May repeat once if incomplete passage. Expect significant cramping and bleeding. Premedicate with ibuprofen 600 mg PO for pain.',
+        },
+        {
+            indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
+            regimen: '800-1000 mcg PR (rectal) or SL, single dose. Alternative second-line uterotonic when oxytocin fails or as adjunct. Side effects: fever, shivering, diarrhea (common, not infection). Unlike methylergonovine, NO contraindication in HTN/preeclampsia. Unlike carboprost, NO contraindication in asthma — useful when both are contraindicated.',
         },
     ],
     contraindications: [
@@ -6353,6 +6373,10 @@ const TRANEXAMIC_ACID = {
         {
             indication: 'Pelvic fracture / trauma hemorrhage',
             regimen: '1 g IV over 10 minutes as soon as possible (ideally within 3 hours of injury), then 1 g IV infusion over 8 hours. CRASH-2 trial: 20,211 trauma patients — mortality benefit only if given within 3 hours (NNT 67). Given >3 hours: may increase mortality. Do NOT give if >3 hours from injury.',
+        },
+        {
+            indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
+            regimen: '1 g IV over 10 minutes (infuse at 1 mL/min — faster causes hypotension). Repeat once 30 min later or if bleeding restarts within 24h. MUST be given within 3 hours of delivery/bleeding for benefit (WOMAN trial). WOMAN trial: 20,060 women — reduced death from bleeding when given early (1.5% vs 1.9%, RR 0.81).',
         },
     ],
     contraindications: [
