@@ -16339,6 +16339,171 @@ const CONST_ILEUS_PREVENTION: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// PNES / Functional Seizures
+// -------------------------------------------------------------------
+
+const PNES_SEMIOLOGY_CHECKLIST: InfoPage = {
+  id: 'pnes-semiology-checklist',
+  title: 'PNES Semiologic Checklist',
+  subtitle: 'Bedside assessment tool for PNES vs epileptic seizures',
+  sections: [
+    {
+      heading: 'High Specificity for PNES',
+      body: '**Signs strongly favoring PNES (use PLR >5):**\n\n| Sign | PLR |\n|------|-----|\n| **Ictal eye closure** | **40.5** |\n| **Asynchronous limb movements** | **10.2** |\n| **Ictal weeping/crying** | **8.2** |\n| Side-to-side head shaking | High |\n| Pelvic thrusting | High |\n| Fluctuating intensity | High |',
+    },
+    {
+      heading: 'Suggestive of PNES',
+      body: '✓ Duration >2 minutes\n✓ Gradual onset/offset\n✓ Preserved awareness during bilateral motor activity\n✓ Can follow commands during event\n✓ Postictal recall of words spoken during event\n✓ Rapid return to baseline\n✓ Modulation by bystanders (waxing/waning with attention)\n✓ Emotional trigger immediately preceding',
+    },
+    {
+      heading: 'Suggestive of Epileptic Seizure',
+      body: '⚡ **Ictal head version** (PLR 5.0 for epilepsy)\n⚡ **Ictal eye opening** (typical in epilepsy)\n⚡ Abrupt onset\n⚡ Stereotyped pattern (same each time)\n⚡ Duration 60-90 seconds (GTC)\n⚡ Postictal confusion/drowsiness lasting minutes to hours\n⚡ No recall of ictal period',
+    },
+    {
+      heading: 'Non-Discriminating Features',
+      body: '**These do NOT distinguish PNES from epilepsy:**\n\n❌ Urinary incontinence — occurs in both\n❌ Tongue biting — occurs in both (lateral more in epilepsy)\n❌ Aura — occurs in both\n❌ Falls with injury — occurs in both\n❌ Back arching — occurs in both',
+    },
+    {
+      heading: 'Important Caveats',
+      body: '• **10-30% of PNES patients also have epilepsy** — cannot assume all events are functional\n• **Frontal lobe seizures** can have bizarre movements mimicking PNES — typically brief (<30 sec), stereotyped, occur from sleep\n• **No single sign is pathognomonic** — use overall clinical picture\n• **Video-EEG is gold standard** for definitive diagnosis',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Seneviratne U, et al. Using Semiology to Classify Epileptic Seizures vs PNES: A Meta-analysis. JAMA Neurol. 2022;79(6):604-612.' },
+    { num: 2, text: 'Avbersek A, Sisodiya SM. Acta Epileptol. 2020. First-line ED management of PNES.' },
+  ],
+};
+
+const PNES_PATIENT_INFO: InfoPage = {
+  id: 'pnes-patient-info',
+  title: 'Functional Seizures: Patient Information',
+  subtitle: 'Understanding your diagnosis and treatment options',
+  shareable: true,
+  sections: [
+    {
+      heading: 'What Are Functional Seizures?',
+      body: 'Functional seizures (also called PNES or dissociative seizures) are **real seizures** with a different cause than epilepsy.\n\n• In epilepsy, seizures are caused by abnormal electrical activity in the brain\n• In functional seizures, the brain\'s "software" (how it processes information) is affected, not the "hardware" (brain structure)\n\n**You are NOT faking.** These seizures are not under your conscious control. They are a recognized medical condition.',
+    },
+    {
+      heading: 'Who Gets Functional Seizures?',
+      body: '• About 1 in 5 people referred to epilepsy centers have functional seizures\n• More common in women\n• Peak age 20-40 years\n• Often associated with stress, anxiety, depression, or past trauma\n• Can occur alongside epilepsy (10-30% of patients have both)',
+    },
+    {
+      heading: 'Treatment Works',
+      body: '**Good news:** Functional seizures respond to treatment.\n\n• **Cognitive Behavioral Therapy (CBT)** is the most effective treatment\n• Studies show 50-60% reduction in seizure frequency\n• Some patients have complete resolution\n• Anti-seizure medications do NOT help (and can cause side effects)\n\n**The right treatment is therapy, not pills.**',
+    },
+    {
+      heading: 'What You Can Do',
+      body: '✓ **Keep follow-up appointments** with neurology and mental health\n✓ **Be patient** — improvement takes time\n✓ **Learn your triggers** — stress, lack of sleep, conflict\n✓ **Practice coping strategies** learned in therapy\n✓ **Maintain routine** — regular sleep, meals, exercise\n✓ **Connect with support** — family, friends, support groups',
+    },
+    {
+      heading: 'When to Return to the ER',
+      body: '🚨 Seizure lasting >5 minutes without recovery\n🚨 Injury during seizure\n🚨 Seizure looks different from your usual events\n🚨 High fever with seizure\n🚨 Thoughts of hurting yourself\n🚨 Unable to return to baseline',
+    },
+    {
+      heading: 'Resources',
+      body: '• **Epilepsy Foundation:** epilepsy.org/PNES\n• **FND Hope:** fndhope.org\n• **NAMI:** nami.org (mental health support)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'LaFrance WC Jr, et al. Multicenter CBT Pilot Trial for PNES. JAMA Psychiatry. 2014;71(9):997-1005.' },
+    { num: 2, text: 'Mayor R, et al. PNES: An empathetic, practical approach. Cleve Clin J Med. 2022;89(5):252-259.' },
+  ],
+};
+
+const PNES_COMMUNICATION_GUIDE: InfoPage = {
+  id: 'pnes-communication-guide',
+  title: 'PNES Communication Guide',
+  subtitle: 'How to explain the diagnosis — empathetic, clear language',
+  sections: [
+    {
+      heading: 'Key Messages',
+      body: '**1. "Your seizures are REAL"**\n• "I can see these events are distressing and real."\n• "You are not making this up or faking."\n\n**2. "This is a recognized medical condition"**\n• "This is called functional seizures."\n• "It\'s related to how your brain processes stress."\n\n**3. "This is TREATABLE"**\n• "Therapy, particularly CBT, helps most people."\n• "Many patients have significant improvement."\n\n**4. "Epilepsy medications won\'t help"**\n• "Those medications won\'t work and can cause side effects."',
+    },
+    {
+      heading: 'Hardware vs Software Analogy',
+      body: '**Use this analogy — it resonates with patients:**\n\n*"Your brain has two parts — the hardware (the physical brain) and the software (how the brain processes information).*\n\n*In your case, the hardware is fine — no tumor, no abnormal electrical activity. But the software has a glitch — your brain is processing stress in a way that causes these episodes."*\n\nThis validates their experience while explaining the mechanism.',
+    },
+    {
+      heading: 'What NOT to Say',
+      body: '❌ "It\'s all in your head"\n❌ "There\'s nothing wrong with you"\n❌ "It\'s just stress"\n❌ "You\'re faking"\n❌ "Your seizures aren\'t real"\n❌ "You need to stop doing this"\n❌ "This is psychological" (without explanation)\n\nThese statements damage trust and worsen outcomes.',
+    },
+    {
+      heading: 'Sample Script',
+      body: '*"I\'ve observed your seizure and reviewed your records. I want to share what I\'ve found.*\n\n*First, your seizures are real. You\'re not faking. This is a recognized condition called functional seizures.*\n\n*The best analogy: your brain\'s hardware is fine — no tumor, no abnormal electrical activity. But the software has a glitch.*\n\n*The good news: therapy, especially CBT, helps most people. Some have complete resolution.*\n\n*Epilepsy medications won\'t help here and could cause side effects.*\n\n*Do you have any questions?"*',
+    },
+    {
+      heading: 'Handling Pushback',
+      body: '**"But I have epilepsy!"**\n→ "Some people have both. Video-EEG helps us tell which is which."\n\n**"This means you think I\'m crazy."**\n→ "Not at all. This is a neurological condition — your brain is misfiring, just differently than epilepsy."\n\n**"Why would my brain do this?"**\n→ "We\'re still learning, but it often relates to how the brain handles stress or past experiences."',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'LaFrance WC Jr, et al. What Are We Communicating When We Present the Diagnosis of PNES? Epilepsy Behav. 2015;49:342-347.' },
+    { num: 2, text: 'AAN/ILAE Practice Guideline: Management of Functional Seizures. Neurology. 2024.' },
+  ],
+};
+
+const PNES_SAFETY_SCREEN: InfoPage = {
+  id: 'pnes-safety-screen',
+  title: 'PNES Safety Screening',
+  subtitle: 'Psychiatric comorbidity and safety assessment',
+  sections: [
+    {
+      heading: 'High Rates of Psychiatric Comorbidity',
+      body: '**PNES patients have high rates of:**\n• Depression (very common)\n• Anxiety disorders (very common)\n• PTSD (common — 30-40%)\n• Borderline personality disorder\n• Suicidal ideation\n• Self-harm history',
+    },
+    {
+      heading: 'Ask Directly',
+      body: '**Suicidal Ideation:**\n• "Are you having any thoughts of hurting yourself?"\n• "Have you ever tried to hurt yourself?"\n\n**Safety:**\n• "Do you feel safe at home?"\n• "Is anyone hurting you or threatening you?"\n\n**If SI present:**\n→ Psychiatric evaluation before discharge\n→ Safety planning\n→ May need admission for stabilization',
+    },
+    {
+      heading: 'Do NOT Probe Trauma in ED',
+      body: '⚠️ **30-40% of PNES patients have trauma history**\n\n• Do NOT ask directly about trauma details in the ED\n• This can be retraumatizing\n• Leave trauma exploration to outpatient therapy\n• Focus on current safety and immediate needs\n\n**Instead say:**\n"Many people with this condition have difficult experiences in their past. Your therapist can help explore that when you\'re ready."',
+    },
+    {
+      heading: 'Resource Needs',
+      body: '**Assess:**\n• Mental health access (do they have a therapist/psychiatrist?)\n• Insurance/financial barriers\n• Transportation to appointments\n• Social support system\n\n**Connect to:**\n• Social work if barriers identified\n• Crisis resources if needed\n• 988 Suicide & Crisis Lifeline',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAN/ILAE Practice Guideline: Management of Functional Seizures. Neurology. 2024.' },
+    { num: 2, text: 'Popkirov S, et al. First-line ED management of PNES. Acta Epileptol. 2020.' },
+  ],
+};
+
+const PNES_STOP: InfoPage = {
+  id: 'pnes-stop',
+  title: 'PNES: Stop Before You Proceed',
+  subtitle: 'Critical reminders for suspected PNES',
+  sections: [
+    {
+      heading: '🛑 Do NOT Give Benzodiazepines',
+      body: '**26% adverse effect rate** in RAMPART/ESETT trials when benzos given to PNES patients\n\n• Respiratory depression requiring intervention\n• 1 in 5 admitted to ICU\n• Cumulative dosing worsens outcomes\n\n**If uncertain:** Observe and document semiology first.',
+    },
+    {
+      heading: '🛑 Do NOT Intubate',
+      body: '**Deaths reported** from attempted intubation for PNES\n\n• Prolonged hospitalization\n• Higher rates of future PNES-related ED visits\n• Iatrogenic harm far exceeds benefit\n\n**PNES events resolve spontaneously** — usually within 2-15 minutes.',
+    },
+    {
+      heading: '🛑 Do NOT Escalate ASMs',
+      body: 'Anti-seizure medications are **ineffective** for PNES:\n\n• Expose patients to unnecessary side effects\n• Delay appropriate psychiatric treatment\n• Reinforce incorrect diagnosis',
+    },
+    {
+      heading: '✅ Safe Initial Approach',
+      body: '• Ensure patient safety (side rails, remove hazards)\n• Observe and document semiology (eye position, movements, duration)\n• Speak calmly: "You are safe, we are here to help"\n• Time the event\n• Video record if possible (invaluable for neurology)\n• Consider verbal reassurance: "I am Dr. [name]. You are in the ER."',
+    },
+    {
+      heading: '⚠️ But If Red Flags Present...',
+      body: '**Treat as epileptic seizure if:**\n\n🚩 Continuous seizure >5 min without recovery\n🚩 Lateral tongue bite + prolonged postictal confusion\n🚩 This is their FIRST seizure ever\n🚩 Clinical uncertainty — when in doubt, treat\n\n**Remember:** 10-30% of PNES patients also have epilepsy. Not all seizures in a PNES patient are functional.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bacchi S, et al. Minimising harm: avoiding intubation for PNES. MJA. 2024;220(7):347-349.' },
+    { num: 2, text: 'Avbersek A, et al. Dissociative seizures in the ER. BMC Emerg Med. 2024;24:47.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Delayed Sequence Intubation
   'dsi-summary': DSI_SUMMARY,
@@ -16826,6 +16991,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'htnp-classification': HTNP_CLASSIFICATION,
   'htnp-asa-guide': HTNP_ASA_GUIDE,
   'htnp-discharge-patient': HTNP_DISCHARGE_PATIENT,
+  // PNES (Functional Seizures)
+  'pnes-semiology-checklist': PNES_SEMIOLOGY_CHECKLIST,
+  'pnes-patient-info': PNES_PATIENT_INFO,
+  'pnes-communication-guide': PNES_COMMUNICATION_GUIDE,
+  'pnes-safety-screen': PNES_SAFETY_SCREEN,
+  'pnes-stop': PNES_STOP,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

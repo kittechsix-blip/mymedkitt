@@ -1324,6 +1324,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'ogilvie', label: 'Ogilvie', icon: '🎯', action: 'overlay', target: 'const-ogilvie-criteria' },
         { id: 'ileus', label: 'Ileus Prev', icon: '🏥', action: 'overlay', target: 'const-ileus-prevention' },
     ],
+    'pnes': [
+        { id: 'semiology', label: 'Semiology', icon: '👁️', action: 'overlay', target: 'pnes-semiology-checklist' },
+        { id: 'communication', label: 'Explain Dx', icon: '💬', action: 'overlay', target: 'pnes-communication-guide' },
+        { id: 'patient-info', label: 'Handout', icon: '📄', action: 'overlay', target: 'pnes-patient-info' },
+        { id: 'safety', label: 'Safety', icon: '🛡️', action: 'overlay', target: 'pnes-safety-screen' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'pnes-stop' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

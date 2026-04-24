@@ -392,6 +392,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ow-start',
             },
             {
+                id: 'pnes',
+                title: 'Functional Seizures (PNES)',
+                subtitle: 'Recognition → Avoid Iatrogenic Harm → Semiology → Communication → Safety → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 32,
+                entryNodeId: 'pnes-start',
+            },
+            {
                 id: 'psych-assessment',
                 title: 'Psychiatric Assessment',
                 subtitle: 'History → MSE (10 Components) → Safety → Disposition',

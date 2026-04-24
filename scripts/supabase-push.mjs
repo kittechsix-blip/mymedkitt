@@ -272,6 +272,7 @@ const TREE_REGISTRY = {
   'cricothyrotomy': { prefix: 'CRICOTHYROTOMY', entryNodeId: 'cric-start', categoryId: 'anesthesia-airway' },
   'ear-infection': { prefix: 'EAR_INFECTION', entryNodeId: 'ear-start', categoryId: 'emergency-medicine' },
   'pph':           { prefix: 'PPH',            entryNodeId: 'pph-start',  categoryId: 'ob-gyn' },
+  'pnes':          { prefix: 'PNES',           entryNodeId: 'pnes-start', categoryId: 'emergency-medicine' },
 };
 
 const CROSS_LISTINGS = {
