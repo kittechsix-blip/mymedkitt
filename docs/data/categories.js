@@ -1144,6 +1144,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'gbs-start',
             },
             {
+                id: 'iih',
+                title: 'Idiopathic Intracranial Hypertension',
+                subtitle: 'Recognition → ONSD POCUS → Diagnosis → Acetazolamide → Escalation → Disposition',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 26,
+                entryNodeId: 'iih-start',
+            },
+            {
                 id: 'myasthenia-gravis',
                 title: 'Myasthenia Gravis',
                 subtitle: 'Recognition → Myasthenic Crisis → Cholinergic Crisis → Treatment → Airway → Disposition',

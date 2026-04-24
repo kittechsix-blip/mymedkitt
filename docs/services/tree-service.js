@@ -346,6 +346,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/brue.js');
             return { nodes: m.BRUE_NODES, entryNodeId: 'brue-start', categoryId: 'pediatrics', moduleLabels: m.BRUE_MODULE_LABELS, citations: m.BRUE_CITATIONS, criticalActions: m.BRUE_CRITICAL_ACTIONS };
         },
+        'iih': async () => {
+            const m = await import('../data/trees/iih.js');
+            return { nodes: m.IIH_NODES, entryNodeId: 'iih-start', categoryId: 'neurology', moduleLabels: m.IIH_MODULE_LABELS, citations: m.IIH_CITATIONS, criticalActions: m.IIH_CRITICAL_ACTIONS };
+        },
         'sickle-cell': async () => {
             const m = await import('../data/trees/sickle-cell.js');
             return { nodes: m.SICKLE_CELL_NODES, entryNodeId: 'scd-start', categoryId: 'heme-onc', moduleLabels: m.SICKLE_CELL_MODULE_LABELS, citations: m.SICKLE_CELL_CITATIONS, criticalActions: m.SICKLE_CELL_CRITICAL_ACTIONS };

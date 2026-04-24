@@ -16639,6 +16639,152 @@ const BRUE_WORKUP_GUIDE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// IIH (Idiopathic Intracranial Hypertension)
+// -------------------------------------------------------------------
+
+const IIH_ONSD_TECHNIQUE: InfoPage = {
+  id: 'iih-onsd-technique',
+  title: 'ONSD POCUS Technique',
+  subtitle: 'ACEP Core Application: Optic Nerve Sheath Diameter',
+  sections: [
+    {
+      heading: 'Equipment & Setup',
+      body: '**Required:**\n• High-frequency linear probe (7.5-12 MHz)\n• Ultrasound gel (generous amount)\n• Optional: Tegaderm over closed eye\n\n**Patient Position:**\n• Supine\n• Eyes closed gently\n• Looking straight ahead\n• Avoid excessive eye movement',
+    },
+    {
+      heading: 'The "3 × 5" Rule',
+      body: '**Remember: 3mm behind, 5mm cutoff**\n\n1. Place probe gently on closed eyelid (transverse)\n2. Identify the optic nerve as **hypoechoic stripe** behind globe\n3. Measure **3 mm posterior** to the posterior globe margin\n4. Measure **inner edge to inner edge** of the nerve sheath\n5. Repeat in **both eyes**\n6. **Average** bilateral measurements',
+    },
+    {
+      heading: 'Interpretation',
+      body: '| ONSD (mm) | Interpretation | ICP Correlation |\n|-----------|----------------|----------------|\n| **<5** | Normal | ICP likely normal |\n| **5-6** | Indeterminate | Clinical correlation |\n| **>6** | Elevated | ICP >20 mmHg |\n| >7.5 | Severely elevated | Plateau effect |\n\n**Diagnostic Accuracy (ONSD >5mm):**\n• Sensitivity: 88-100%\n• Specificity: 63-95%',
+    },
+    {
+      heading: 'Pearls & Pitfalls',
+      body: '✅ **Do:**\n• Measure both eyes — unilateral may be artifact\n• Use minimal probe pressure\n• Ensure perpendicular angle to nerve\n• Average multiple measurements\n\n❌ **Avoid:**\n• Excessive probe pressure (artificially elevates ONSD)\n• Measuring obliquely to nerve\n• Single measurement\n\n**Key advantage:** ONSD elevation **precedes papilledema** by hours to days',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Ultrasound Guidelines 2023: Ocular is a Core Application.' },
+    { num: 2, text: 'Ohle R, et al. Ann Emerg Med. 2015;66(6):625-632.' },
+  ],
+};
+
+const IIH_PAPILLEDEMA_GUIDE: InfoPage = {
+  id: 'iih-papilledema-guide',
+  title: 'Papilledema Assessment',
+  subtitle: 'Frisén Scale and fundoscopic findings',
+  sections: [
+    {
+      heading: 'Key Features of Papilledema',
+      body: '**Early Signs:**\n• Blurred disc margins (nasal first)\n• Loss of spontaneous venous pulsations\n• Hyperemia of the disc\n• Venous engorgement\n\n**Late Signs:**\n• Complete margin obscuration\n• Elevation of optic disc\n• Obscuration of blood vessels\n• Peripapillary hemorrhages\n• Cotton-wool spots',
+    },
+    {
+      heading: 'Frisén Grading Scale',
+      body: '| Grade | Description |\n|-------|-------------|\n| **0** | Normal optic disc |\n| **1** | C-shaped halo, temporal preserved |\n| **2** | Circumferential halo, no vessel obscuration |\n| **3** | Partial obscuration of ≥1 major vessel |\n| **4** | Total obscuration of major vessels on disc |\n| **5** | Dome-shaped, obliterated cup, vessel segments only |',
+    },
+    {
+      heading: 'Grade Correlates with Severity',
+      body: '• **Grade 1-2:** Mild papilledema — medical management\n• **Grade 3:** Moderate — aggressive medical management\n• **Grade 4-5:** Severe — consider urgent surgical intervention\n\n**Visual Field Loss Risk:**\nHigher Frisén grade correlates with increased risk of visual field defects',
+    },
+    {
+      heading: 'Papilledema vs Pseudopapilledema',
+      body: '**Pseudopapilledema (optic disc drusen):**\n• Disc elevation but sharp margins\n• No venous engorgement\n• No obscuration of vessels\n• Yellow refractile bodies may be visible\n• Autofluorescence on fundus photography\n• Confirmed by B-scan ultrasound or CT (calcification)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Frisén L. J Neurol Neurosurg Psychiatry. 1982;45(1):13-18.' },
+  ],
+};
+
+const IIH_DIAGNOSTIC_CRITERIA: InfoPage = {
+  id: 'iih-diagnostic-criteria',
+  title: 'IIH Diagnostic Criteria',
+  subtitle: 'Modified Dandy / Friedman 2013 Criteria',
+  sections: [
+    {
+      heading: 'Definite IIH — ALL Required',
+      body: '1. ✓ **Papilledema present**\n\n2. ✓ **Normal neurologic exam** (except CN VI palsy allowed)\n\n3. ✓ **Normal neuroimaging:**\n   • MRI brain with gadolinium\n   • MRV to exclude venous sinus thrombosis\n\n4. ✓ **Normal CSF composition**\n\n5. ✓ **Elevated opening pressure:**\n   • Adults: **>25 cm H₂O**\n   • Children: **>28 cm H₂O**',
+    },
+    {
+      heading: 'Probable IIH',
+      body: 'Meets criteria 1-4 but opening pressure is:\n• **20-25 cm H₂O** in symptomatic patient\n\nRequires clinical judgment and close follow-up.',
+    },
+    {
+      heading: 'IIH Without Papilledema (IIHWOP)',
+      body: '**Criteria:**\n• Meets criteria 2-5 (normal exam, imaging, CSF, elevated OP)\n• **No papilledema** BUT has unilateral or bilateral CN VI palsy\n\n**Requires additional supporting features:**\n• Empty sella on MRI\n• Optic nerve sheath distension on MRI\n• Flattening of posterior globe\n• Transverse sinus stenosis\n• Tortuous optic nerve',
+    },
+    {
+      heading: 'Secondary Causes to Exclude',
+      body: '**Before diagnosing IIH:**\n\n❌ Cerebral venous sinus thrombosis (MRV)\n❌ Intracranial mass/tumor\n❌ Hydrocephalus\n❌ Meningitis (CSF abnormal)\n\n**Medication-induced:**\n• Vitamin A / retinoids\n• Tetracyclines (doxycycline, minocycline)\n• Growth hormone\n• Lithium\n• Corticosteroid withdrawal',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Friedman DI, et al. Neurology. 2013;81(13):1159-1165.' },
+  ],
+};
+
+const IIH_ACETAZOLAMIDE_GUIDE: InfoPage = {
+  id: 'iih-acetazolamide-guide',
+  title: 'Acetazolamide (Diamox) Dosing',
+  subtitle: 'IIHTT Trial-Based Protocol',
+  sections: [
+    {
+      heading: 'Starting Dose',
+      body: '**Initial:** 500 mg PO BID (1 g/day)\n\n**Titration Schedule:**\n• Week 1: 500 mg BID (1 g/day)\n• Week 2: 750 mg BID (1.5 g/day)\n• Week 3-4: 1000 mg BID (2 g/day)\n• Beyond: Increase by 250-500 mg/week\n\n**Target:** 2-4 g/day as tolerated\n**Max:** 4 g/day',
+    },
+    {
+      heading: 'IIHTT Tolerability Data',
+      body: '• **89.5%** tolerated ≥1 g/day\n• **44%** tolerated maximum (4 g/day)\n• **Mean dose at 6 months:** 2.5 g/day\n\nMost patients achieve good outcomes on 2-3 g/day.',
+    },
+    {
+      heading: 'Common Side Effects',
+      body: '**Expected (warn patients):**\n• Paresthesias (tingling hands/feet) — dose-related\n• Dysgeusia (metallic taste, carbonation tastes "flat")\n• Fatigue, malaise\n• GI upset, anorexia, nausea\n• Polyuria\n\n**Monitor for:**\n• Hypokalemia — check BMP at 2-4 weeks\n• Metabolic acidosis\n• Renal stones (rare)',
+    },
+    {
+      heading: 'Contraindications',
+      body: '❌ **Absolute:**\n• Sulfonamide allergy (cross-reactivity possible)\n• Severe hepatic disease\n• Severe renal disease (CrCl <10)\n• Adrenal insufficiency\n• Hypokalemia (uncorrected)\n\n⚠️ **Caution:**\n• Pregnancy (weigh risks/benefits)\n• Concurrent topiramate (increased acidosis risk)',
+    },
+    {
+      heading: 'Alternatives',
+      body: '**If acetazolamide not tolerated:**\n\n• **Topiramate** 25-100 mg BID\n  - Also causes weight loss (beneficial in IIH)\n  - Similar carbonic anhydrase inhibition\n\n• **Furosemide** 20-40 mg daily\n  - Less effective than acetazolamide\n  - Consider if sulfa allergy',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Wall M, et al. JAMA. 2014;311(16):1641-1651. (IIHTT)' },
+    { num: 2, text: 'Shah DJ, et al. J Neuroophthalmol. 2016;36(1):13-19.' },
+  ],
+};
+
+const IIH_SURGICAL_OPTIONS: InfoPage = {
+  id: 'iih-surgical-options',
+  title: 'Surgical Management of IIH',
+  subtitle: 'Options for refractory or fulminant cases',
+  sections: [
+    {
+      heading: 'Indications for Surgery',
+      body: '**Urgent/Emergent:**\n• Fulminant IIH with rapid vision loss\n• Severe visual field deficits (PMD <-7 dB)\n• Visual acuity involvement\n• High-grade papilledema (Frisén 4-5)\n\n**Elective:**\n• Failure of medical management\n• Intolerable medication side effects\n• Progressive visual loss despite treatment',
+    },
+    {
+      heading: 'Optic Nerve Sheath Fenestration (ONSF)',
+      body: '**Indication:** Primarily **visual symptoms**\n\n**Procedure:**\n• Creates window in optic nerve sheath\n• Allows CSF egress, decompresses optic nerve\n• Can be unilateral or bilateral\n\n**Outcomes:**\n• **~90%** visual stabilization or improvement\n• Headache improvement in ~50%\n\n**Complications:**\n• Diplopia (usually transient)\n• Pupil abnormalities\n• Rare: vision loss',
+    },
+    {
+      heading: 'CSF Shunting (VP or LP)',
+      body: '**Indication:** Primarily **headache symptoms**\n\n**Options:**\n• Ventriculoperitoneal (VP) shunt\n• Lumboperitoneal (LP) shunt\n\n**Outcomes:**\n• Excellent headache relief initially\n• Variable long-term success\n\n**Complications:**\n• Shunt failure/revision (common — ~50% at 2 years)\n• Infection\n• Over-drainage (low pressure headache)\n• Acquired Chiari malformation (LP shunt)',
+    },
+    {
+      heading: 'Venous Sinus Stenting',
+      body: '**Indication:** Transverse sinus stenosis with significant gradient\n\n**Patient Selection:**\n• Pressure gradient >8 mmHg across stenosis\n• Failed medical management\n• Anatomically suitable\n\n**Procedure:**\n• Endovascular stent placement\n• Reduces venous outflow resistance\n\n**Outcomes:**\n• Promising results in selected patients\n• May reduce need for shunting\n\n**Note:** Still considered investigational at many centers.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Mollan SP, et al. J Neurol Neurosurg Psychiatry. 2018;89(10):1088-1100.' },
+    { num: 2, text: 'Kalyvas A, et al. Neurosurgery. 2024. (Venous stenting review)' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // PNES / Functional Seizures
 // -------------------------------------------------------------------
 
@@ -17302,6 +17448,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'brue-nat-screen-guide': BRUE_NAT_SCREEN_GUIDE,
   'brue-ecg-guide': BRUE_ECG_GUIDE,
   'brue-workup-guide': BRUE_WORKUP_GUIDE,
+  // IIH (Idiopathic Intracranial Hypertension)
+  'iih-onsd-technique': IIH_ONSD_TECHNIQUE,
+  'iih-papilledema-guide': IIH_PAPILLEDEMA_GUIDE,
+  'iih-diagnostic-criteria': IIH_DIAGNOSTIC_CRITERIA,
+  'iih-acetazolamide-guide': IIH_ACETAZOLAMIDE_GUIDE,
+  'iih-surgical-options': IIH_SURGICAL_OPTIONS,
   // PNES (Functional Seizures)
   'pnes-semiology-checklist': PNES_SEMIOLOGY_CHECKLIST,
   'pnes-patient-info': PNES_PATIENT_INFO,

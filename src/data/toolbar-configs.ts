@@ -1361,6 +1361,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ecg', label: 'ECG Guide', icon: '💓', action: 'overlay', target: 'brue-ecg-guide' },
     { id: 'workup', label: 'Workup', icon: '🧪', action: 'overlay', target: 'brue-workup-guide' },
   ],
+  'iih': [
+    { id: 'onsd', label: 'ONSD POCUS', icon: '👁️', action: 'overlay', target: 'iih-onsd-technique' },
+    { id: 'papilledema', label: 'Papilledema', icon: '🔬', action: 'overlay', target: 'iih-papilledema-guide' },
+    { id: 'criteria', label: 'Friedman', icon: '📋', action: 'overlay', target: 'iih-diagnostic-criteria' },
+    { id: 'acetazolamide', label: 'Diamox', icon: '💊', action: 'overlay', target: 'iih-acetazolamide-guide' },
+    { id: 'surgery', label: 'Surgery', icon: '🔧', action: 'overlay', target: 'iih-surgical-options' },
+  ],
 };
 
 // Stop button appended automatically to every consult

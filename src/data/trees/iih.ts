@@ -1,0 +1,415 @@
+// MedKitt — Idiopathic Intracranial Hypertension (IIH / Pseudotumor Cerebri)
+// Focus on ACEP-recommended ocular POCUS for ONSD measurement
+// Recognition → POCUS/Fundoscopy → Diagnosis → Treatment → Disposition
+// 6 modules: Recognition → Ocular Assessment → Diagnosis → Medical Management → Escalation → Disposition
+// Evidence: ACEP POCUS Guidelines 2023, IIHTT Trial, Friedman Criteria 2013
+
+import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const IIH_MODULE_LABELS: string[] = [
+  'Recognition',
+  'Ocular Assessment',
+  'Diagnosis',
+  'Medical Management',
+  'Escalation',
+  'Disposition',
+];
+
+export const IIH_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: RECOGNITION
+  // =====================================================================
+
+  {
+    id: 'iih-start',
+    type: 'info',
+    module: 1,
+    title: 'Idiopathic Intracranial Hypertension (IIH)',
+    body: '**Also known as:** Pseudotumor Cerebri\n\n**Definition:** Elevated ICP (>25 cm H₂O) without identifiable cause, normal CSF composition, and normal neuroimaging.\n\n**Classic Patient:**\n• Obese woman of childbearing age (90%)\n• Incidence 20/100,000 in obese women vs 1/100,000 general population\n\n**Cardinal Symptoms:**\n\n| Symptom | Frequency |\n|---------|-----------|\n| **Headache** | 90% — often positional, worse AM |\n| **Pulsatile tinnitus** | 60% — "whooshing" with heartbeat |\n| **Transient visual obscurations** | 70% — seconds, with posture change |\n| **Diplopia** | 30% — CN VI palsy |\n| **Visual loss** | Variable — can be permanent |\n\n⚠️ **Vision loss is the major morbidity** — can be irreversible if untreated',
+    citation: [1, 2],
+    next: 'iih-red-flags',
+    summary: 'IIH = elevated ICP without cause. Classic: obese woman with headache, pulsatile tinnitus, transient visual obscurations. Vision loss is main morbidity.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-red-flags',
+    type: 'question',
+    module: 1,
+    title: 'Red Flags — Exclude Secondary Causes',
+    body: '**Before diagnosing IIH, exclude secondary causes:**\n\n🚨 **Emergent Etiologies:**\n• Cerebral venous sinus thrombosis (CVST)\n• Intracranial mass/tumor\n• Meningitis/encephalitis\n• Hydrocephalus\n\n**Risk Factors for CVST:**\n• Pregnancy/postpartum\n• Oral contraceptives\n• Hypercoagulable state\n• Recent head trauma\n• Infection (otitis, mastoiditis)\n\n**Medications Causing Elevated ICP:**\n• Vitamin A / retinoids\n• Tetracyclines (doxycycline, minocycline)\n• Growth hormone\n• Lithium\n• Corticosteroid withdrawal\n\nAre red flags present?',
+    citation: [1, 3],
+    options: [
+      { label: 'Yes — Red Flags Present', next: 'iih-secondary-workup', description: 'Need urgent imaging/workup', urgency: 'urgent' },
+      { label: 'No — Classic IIH Presentation', next: 'iih-ocular-assessment', description: 'Proceed to ocular assessment' },
+    ],
+    summary: 'Exclude CVST, mass, meningitis. Check medications (vitamin A, tetracyclines, steroids). CVST risk: OCP, pregnancy, hypercoagulable.',
+  },
+
+  {
+    id: 'iih-secondary-workup',
+    type: 'result',
+    module: 1,
+    title: 'Secondary Cause Workup',
+    body: '**Urgent Imaging Required:**\n\n• **CT Head without contrast** — rule out mass, hydrocephalus, hemorrhage\n• **MRV (or CTV)** — rule out cerebral venous sinus thrombosis\n• **MRI Brain with contrast** — if mass suspected\n\n**If CVST Confirmed:**\n• Anticoagulation (even with hemorrhage in most cases)\n• Neurology/neurosurgery consult\n• ICU admission\n\n**If Medication-Induced:**\n• Stop offending agent\n• Still needs ophthalmology evaluation\n• May need bridge treatment for ICP\n\n**Laboratory Workup:**\n• CBC, CMP, coagulation studies\n• Consider hypercoagulability panel if CVST',
+    recommendation: 'Order CT Head + MRV to rule out secondary causes. If CVST confirmed, anticoagulate and admit. Neurology consult.',
+    confidence: 'definitive',
+    citation: [1, 3],
+  },
+
+  // =====================================================================
+  // MODULE 2: OCULAR ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'iih-ocular-assessment',
+    type: 'info',
+    module: 2,
+    title: 'Ocular Assessment — POCUS First',
+    body: '**ACEP Core Application: Ocular Ultrasound**\n\nOcular POCUS is a core emergency ultrasound competency per ACEP 2023 guidelines.\n\n**Two Key Findings:**\n\n1. **Optic Nerve Sheath Diameter (ONSD)**\n   • Measures elevated ICP non-invasively\n   • Precedes papilledema by hours to days\n\n2. **Optic Disc Elevation (ODE)**\n   • Visualizes papilledema directly\n   • ≥0.6 mm elevation = significant\n\n**Advantages of POCUS:**\n• Rapid (2-3 minutes)\n• Non-invasive\n• Can be done before CT/LP\n• Real-time assessment\n• Earlier detection than fundoscopy\n\n**When to Use:**\n• Suspected elevated ICP\n• Headache with visual symptoms\n• Unable to visualize fundus (small pupil, cataract)',
+    citation: [4, 5, 6],
+    next: 'iih-onsd-technique',
+    summary: 'Ocular POCUS is ACEP core competency. Measures ONSD (elevated ICP) and ODE (papilledema). Faster than fundoscopy, precedes papilledema.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-onsd-technique',
+    type: 'info',
+    module: 2,
+    title: 'ONSD Measurement Technique',
+    body: '**Equipment:**\n• High-frequency linear probe (7.5-12 MHz)\n• Tegaderm over closed eye (optional)\n• Generous ultrasound gel\n\n**Technique — "Remember 3×5":**\n\n1. Patient supine, eyes closed, looking straight ahead\n2. Place probe gently on closed eyelid (transverse)\n3. Identify optic nerve as hypoechoic stripe behind globe\n4. Measure **3 mm posterior** to the globe\n5. Measure inner edge to inner edge of sheath\n6. Repeat in **both eyes**, take **average**\n\n**Interpretation:**\n\n| ONSD | Interpretation |\n|------|----------------|\n| **<5 mm** | Normal |\n| **5-6 mm** | Indeterminate — correlate clinically |\n| **>6 mm** | Elevated ICP (>20 mmHg) |\n\n**Diagnostic Accuracy (ONSD >5 mm):**\n• Sensitivity: 88-100%\n• Specificity: 63-95%\n\n⚠️ **Measure both eyes** — unilateral findings may be artifact',
+    citation: [5, 6, 7],
+    images: [
+      {
+        src: 'images/iih/onsd-measurement.png',
+        alt: 'Optic nerve sheath diameter measurement showing 3mm posterior to globe with calipers measuring inner to inner edge',
+        caption: 'ONSD measurement: 3mm behind globe, inner edge to inner edge. Normal <5mm.',
+      },
+    ],
+    next: 'iih-onsd-result',
+    summary: 'ONSD technique: 3mm behind globe, measure inner to inner. <5mm normal, 5-6mm indeterminate, >6mm elevated ICP. Check both eyes.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-onsd-result',
+    type: 'question',
+    module: 2,
+    title: 'ONSD Measurement Result',
+    body: '**Enter bilateral ONSD measurements:**\n\n**Interpretation:**\n\n| Average ONSD | Significance |\n|--------------|--------------|\n| **<5 mm** | Normal — low probability of elevated ICP |\n| **5-6 mm** | Indeterminate — clinical correlation needed |\n| **>6 mm** | Elevated — correlates with ICP >20 mmHg |\n\n**Also assess for:**\n• **Optic disc elevation** (ODE) ≥0.6 mm\n• **Crescent sign** — fluid around optic nerve\n\n**Note:** ONSD dilates before papilledema develops on fundoscopy.\n\nWhat is the average ONSD?',
+    citation: [5, 6],
+    options: [
+      { label: 'ONSD >6 mm — Elevated', next: 'iih-fundoscopy', description: 'High probability elevated ICP', urgency: 'urgent' },
+      { label: 'ONSD 5-6 mm — Indeterminate', next: 'iih-fundoscopy', description: 'Proceed to fundoscopy' },
+      { label: 'ONSD <5 mm — Normal', next: 'iih-low-suspicion', description: 'Low probability elevated ICP' },
+    ],
+    summary: 'ONSD >6mm = elevated ICP. 5-6mm indeterminate. <5mm normal. Always correlate with clinical picture.',
+  },
+
+  {
+    id: 'iih-low-suspicion',
+    type: 'info',
+    module: 2,
+    title: 'Low Suspicion for Elevated ICP',
+    body: '**ONSD <5 mm suggests normal ICP**\n\nHowever, **ONSD has limitations:**\n• Sensitivity 88-100% (not perfect)\n• Prior optic nerve pathology may affect baseline\n• Chronic elevated ICP may have normal ONSD\n\n**Still Consider IIH if:**\n• Classic symptoms (positional headache, pulsatile tinnitus)\n• Transient visual obscurations\n• Typical demographics (obese woman of childbearing age)\n\n**Next Steps:**\n• Fundoscopic exam if symptoms concerning\n• Consider MRI/MRV to rule out secondary causes\n• Outpatient neurology/ophthalmology follow-up if low suspicion\n\n**Alternative Diagnoses to Consider:**\n• Migraine (especially vestibular migraine)\n• Tension-type headache\n• Medication overuse headache\n• Cervicogenic headache',
+    citation: [5, 6],
+    next: 'iih-fundoscopy-optional',
+    summary: 'ONSD <5mm suggests normal ICP but not perfect. Consider fundoscopy if classic symptoms. Rule out other headache disorders.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-fundoscopy-optional',
+    type: 'question',
+    module: 2,
+    title: 'Fundoscopic Examination',
+    body: '**Fundoscopy remains gold standard for papilledema detection**\n\n**Perform if:**\n• Symptoms concerning despite normal ONSD\n• Need to document baseline optic disc appearance\n• Cannot perform adequate POCUS\n\n**Papilledema Grading (Frisén Scale):**\n\n| Grade | Findings |\n|-------|----------|\n| 0 | Normal |\n| 1 | C-shaped halo, temporal blurring |\n| 2 | Circumferential halo |\n| 3 | Obscuration of vessels at disc |\n| 4 | Total obscuration of vessels |\n| 5 | Dome-shaped protrusion, obliteration of cup |\n\nFundoscopy result?',
+    citation: [1, 8],
+    options: [
+      { label: 'Papilledema Present', next: 'iih-diagnosis', description: 'Confirms elevated ICP' },
+      { label: 'Normal Fundoscopy', next: 'iih-alternative-dx', description: 'Consider other diagnoses' },
+      { label: 'Unable to Visualize', next: 'iih-ophtho-consult', description: 'Need ophthalmology for formal exam' },
+    ],
+    summary: 'Fundoscopy for papilledema grading. Frisén scale 0-5. Gold standard but requires expertise.',
+  },
+
+  {
+    id: 'iih-fundoscopy',
+    type: 'info',
+    module: 2,
+    title: 'Fundoscopic Examination',
+    body: '**ONSD elevated — now confirm with fundoscopy**\n\n**Papilledema Features:**\n• Blurred disc margins (starts nasal, progresses circumferentially)\n• Elevated optic disc\n• Obscuration of blood vessels at disc margin\n• Venous engorgement\n• Loss of spontaneous venous pulsations\n• Peripapillary hemorrhages (later stage)\n\n**Frisén Grading Scale:**\n\n| Grade | Description |\n|-------|-------------|\n| 0 | Normal disc |\n| 1 | C-shaped halo, temporal preserved |\n| 2 | Circumferential halo, no obscuration |\n| 3 | Partial vessel obscuration |\n| 4 | Total vessel obscuration at disc |\n| 5 | Dome-shaped, obliterated cup |\n\n**Note:** Papilledema may lag behind ICP elevation by hours to days — ONSD is earlier marker.',
+    citation: [1, 8],
+    next: 'iih-papilledema-result',
+    summary: 'Papilledema: blurred margins, elevated disc, venous engorgement. Frisén scale 0-5. ONSD rises before papilledema develops.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-papilledema-result',
+    type: 'question',
+    module: 2,
+    title: 'Papilledema Status',
+    body: '**Fundoscopy findings:**\n\nPapilledema is present if ANY of:\n• Blurred disc margins\n• Elevated optic disc\n• Obscured vessels at disc margin\n• Peripapillary hemorrhages\n\n**Important:** Absence of papilledema does NOT rule out IIH\n• "IIH without papilledema" (IIHWOP) is recognized\n• ONSD elevation may precede papilledema\n• ~5% of IIH patients lack papilledema\n\nPapilledema present?',
+    citation: [1, 2],
+    options: [
+      { label: 'Yes — Papilledema Confirmed', next: 'iih-diagnosis', description: 'Proceed to formal diagnosis' },
+      { label: 'No — But ONSD Elevated', next: 'iih-diagnosis', description: 'Still concerning — proceed to diagnosis' },
+      { label: 'Uncertain — Need Expert Review', next: 'iih-ophtho-consult', description: 'Ophthalmology consult for formal evaluation' },
+    ],
+    summary: 'Papilledema confirms elevated ICP. Absence does not rule out IIH (IIHWOP exists). If ONSD elevated, proceed to diagnosis.',
+  },
+
+  {
+    id: 'iih-ophtho-consult',
+    type: 'info',
+    module: 2,
+    title: 'Ophthalmology Consultation',
+    body: '**Indications for Urgent Ophthalmology:**\n\n• Cannot adequately visualize fundus\n• Uncertain papilledema findings\n• Need formal visual field testing\n• Severe papilledema (Frisén 4-5)\n• Rapid visual decline\n\n**Ophthalmology Will Provide:**\n• Dilated fundoscopic exam\n• Formal papilledema grading\n• Visual field testing (Humphrey perimetry)\n• Optic nerve photography for baseline\n• OCT if available\n\n**Visual Fields are Critical:**\n• Perimetric mean deviation (PMD) guides treatment intensity\n• PMD determines mild vs moderate vs severe visual loss\n• Serial testing monitors treatment response\n\n**Timeline:**\n• Severe vision loss → same-day ophthalmology\n• Moderate concerns → within 24-48 hours\n• Mild concerns → within 1 week',
+    citation: [1, 9],
+    next: 'iih-diagnosis',
+    summary: 'Ophthalmology for formal fundus exam, visual fields, OCT. Visual field PMD guides treatment. Urgent if severe vision loss.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-alternative-dx',
+    type: 'result',
+    module: 2,
+    title: 'Alternative Diagnosis',
+    body: '**Normal ONSD + Normal Fundoscopy = IIH Unlikely**\n\n**Consider Alternative Diagnoses:**\n\n| Diagnosis | Features |\n|-----------|----------|\n| **Migraine** | Unilateral, throbbing, photo/phonophobia, nausea |\n| **Tension headache** | Bilateral, band-like, non-pulsatile |\n| **Medication overuse** | >15 days/month analgesic use |\n| **Cervicogenic** | Neck-related, unilateral, occipital |\n| **Cluster headache** | Unilateral, periorbital, autonomic features |\n| **Low CSF pressure** | Positional (worse upright), may have leak history |\n\n**Pulsatile Tinnitus DDx:**\n• Venous hum (benign)\n• AV fistula/malformation\n• Glomus tumor\n• Carotid stenosis/dissection\n\n**If Symptoms Persist:**\n• Consider outpatient MRI/MRV\n• Neurology referral\n• May need LP to definitively rule out elevated ICP',
+    recommendation: 'IIH unlikely with normal ONSD and fundoscopy. Consider alternative headache diagnoses. Outpatient neurology follow-up if symptoms persist.',
+    confidence: 'recommended',
+    citation: [1, 2],
+  },
+
+  // =====================================================================
+  // MODULE 3: DIAGNOSIS
+  // =====================================================================
+
+  {
+    id: 'iih-diagnosis',
+    type: 'info',
+    module: 3,
+    title: 'Diagnostic Criteria — Modified Dandy/Friedman',
+    body: '**IIH Diagnostic Criteria (Friedman 2013):**\n\n**DEFINITE IIH — All Required:**\n\n1. ✓ **Papilledema present**\n2. ✓ **Normal neurologic exam** (except CN VI palsy)\n3. ✓ **Normal neuroimaging** (MRI preferred, with MRV)\n4. ✓ **Normal CSF composition**\n5. ✓ **Elevated opening pressure:**\n   • Adults: >25 cm H₂O\n   • Children: >28 cm H₂O\n\n**PROBABLE IIH:**\n• Meets criteria 1-4 but OP 20-25 cm H₂O\n\n**IIH WITHOUT PAPILLEDEMA (IIHWOP):**\n• Meets criteria 2-5\n• No papilledema BUT has CN VI palsy\n• Requires additional supporting features:\n   - Empty sella on MRI\n   - Optic nerve sheath distension on MRI\n   - Transverse sinus stenosis on MRV',
+    citation: [2, 3],
+    next: 'iih-imaging',
+    summary: 'Definite IIH: papilledema + normal exam + normal MRI/MRV + normal CSF + OP >25 cmH₂O. IIHWOP requires additional MRI findings.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-imaging',
+    type: 'info',
+    module: 3,
+    title: 'Neuroimaging',
+    body: '**Required Before LP:**\n\n**MRI Brain with MRV (preferred)** or CT/CTV:\n\n**Purpose:**\n• Rule out mass, hydrocephalus\n• Rule out cerebral venous sinus thrombosis (CVST)\n• Identify IIH-associated findings\n\n**IIH Findings on MRI:**\n\n| Finding | Sensitivity |\n|---------|-------------|\n| **Empty sella** | 70% |\n| **Optic nerve sheath distension** | 45% |\n| **Flattening of posterior globe** | 80% |\n| **Transverse sinus stenosis** | 90% |\n| **Tortuosity of optic nerve** | Variable |\n\n**Note:** These findings SUPPORT but do not CONFIRM IIH — LP still required.\n\n**If MRI Unavailable:**\n• CT Head without contrast + CTV/CT venogram\n• Less sensitive for IIH-associated findings\n• Adequate for ruling out mass/CVST',
+    citation: [1, 3],
+    next: 'iih-lp',
+    summary: 'MRI + MRV preferred. IIH findings: empty sella, ONSD on MRI, posterior globe flattening, transverse sinus stenosis. Rule out CVST.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-lp',
+    type: 'info',
+    module: 3,
+    title: 'Lumbar Puncture',
+    body: '**LP is Required for Definitive Diagnosis**\n\n**Technique:**\n• Patient in lateral decubitus position (most accurate OP)\n• Legs extended (flexion falsely elevates OP)\n• Measure opening pressure before removing fluid\n\n**Opening Pressure Interpretation:**\n\n| OP (cm H₂O) | Interpretation |\n|-------------|----------------|\n| <20 | Normal |\n| 20-25 | Borderline (probable IIH if symptomatic) |\n| **>25** | **Elevated (adult)** |\n| >28 | Elevated (children) |\n\n**CSF Analysis (must be normal for IIH):**\n• Protein: normal\n• Glucose: normal\n• Cell count: normal\n• Gram stain/culture: negative\n\n**Therapeutic LP:**\n• Remove 20-30 mL CSF\n• Provides temporary symptom relief\n• Can be diagnostic + therapeutic\n\n⚠️ **If CSF abnormal** — not IIH, consider meningitis, carcinomatosis, etc.',
+    citation: [1, 2],
+    next: 'iih-lp-result',
+    summary: 'LP confirms diagnosis: OP >25 cmH₂O with normal CSF composition. Therapeutic removal of 20-30mL for symptom relief.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-lp-result',
+    type: 'question',
+    module: 3,
+    title: 'LP Results',
+    body: '**Opening Pressure and CSF Results:**\n\n**IIH Confirmed if:**\n• OP >25 cm H₂O (adult) or >28 cm H₂O (child)\n• Normal CSF composition (protein, glucose, cells)\n\n**Opening Pressure Result:**',
+    citation: [2],
+    options: [
+      { label: 'OP >25 + Normal CSF — IIH Confirmed', next: 'iih-severity', description: 'Proceed to severity assessment' },
+      { label: 'OP 20-25 + Normal CSF — Probable IIH', next: 'iih-severity', description: 'Borderline elevation, clinical correlation' },
+      { label: 'OP Normal or CSF Abnormal', next: 'iih-not-iih', description: 'IIH ruled out' },
+    ],
+    summary: 'OP >25 cmH₂O + normal CSF = definite IIH. OP 20-25 = probable IIH. Abnormal CSF = not IIH.',
+  },
+
+  {
+    id: 'iih-not-iih',
+    type: 'result',
+    module: 3,
+    title: 'IIH Ruled Out',
+    body: '**Diagnosis is NOT IIH**\n\n**If CSF Abnormal:**\n• Elevated protein → inflammatory, infectious, neoplastic\n• Pleocytosis → meningitis, carcinomatosis\n• Low glucose → bacterial/fungal meningitis, carcinomatosis\n\n**If OP Normal with Papilledema:**\n• Consider pseudopapilledema (optic disc drusen)\n• Prior LP may have temporarily normalized pressure\n• Repeat LP after recovery period\n\n**Alternative Diagnoses:**\n• CVST (should have been ruled out on MRV)\n• Chronic meningitis\n• Leptomeningeal carcinomatosis\n• Sarcoidosis\n• Optic disc drusen (pseudopapilledema)',
+    recommendation: 'IIH ruled out. If CSF abnormal, evaluate for meningitis, carcinomatosis, or inflammatory process. Neurology consult for further workup.',
+    confidence: 'definitive',
+    citation: [1, 2],
+  },
+
+  {
+    id: 'iih-severity',
+    type: 'question',
+    module: 3,
+    title: 'Visual Severity Assessment',
+    body: '**Visual function determines treatment urgency**\n\n**Visual Field Testing (if available):**\n• Perimetric Mean Deviation (PMD) from Humphrey VF\n\n**Severity Classification:**\n\n| Severity | PMD | Features |\n|----------|-----|----------|\n| **Mild** | -2 to -3.5 dB | Minimal visual field loss, low-grade papilledema |\n| **Moderate** | -3.5 to -7 dB | Moderate VF loss, papilledema grade 2-3 |\n| **Severe** | <-7 dB | Significant VF loss, high-grade papilledema |\n| **Fulminant** | Rapid decline | Visual acuity loss, rapidly progressive |\n\n**If Visual Fields Not Available:**\n• Use visual acuity, papilledema grade, symptom severity\n• Err on side of caution\n\nWhat is the visual severity?',
+    citation: [9, 10],
+    options: [
+      { label: 'Mild Visual Loss', next: 'iih-medical-mild', description: 'PMD -2 to -3.5 dB or low-grade papilledema' },
+      { label: 'Moderate Visual Loss', next: 'iih-medical-moderate', description: 'PMD -3.5 to -7 dB or moderate papilledema' },
+      { label: 'Severe/Fulminant', next: 'iih-escalation', description: 'PMD <-7 dB, VA loss, or rapid decline', urgency: 'critical' },
+    ],
+    summary: 'Visual severity guides treatment: mild = acetazolamide + weight loss, moderate = aggressive medical, severe/fulminant = urgent surgery.',
+  },
+
+  // =====================================================================
+  // MODULE 4: MEDICAL MANAGEMENT
+  // =====================================================================
+
+  {
+    id: 'iih-medical-mild',
+    type: 'info',
+    module: 4,
+    title: 'Medical Management — Mild Visual Loss',
+    body: '**IIHTT Trial-Based Treatment:**\n\n**1. Acetazolamide**\n\n| Parameter | Recommendation |\n|-----------|----------------|\n| **Starting dose** | 500 mg PO BID (1 g/day) |\n| **Target dose** | 2-4 g/day as tolerated |\n| **IIHTT mean dose** | 2.5 g/day at 6 months |\n| **Max dose** | 4 g/day |\n\n**Common Side Effects:**\n• Paresthesias (tingling hands/feet) — expected\n• Fatigue\n• Dysgeusia (metallic taste, carbonation tastes flat)\n• GI upset, anorexia\n• Hypokalemia — check BMP periodically\n\n**2. Weight Loss**\n• Target: 5-10% body weight reduction\n• Low-sodium diet (reduces CSF production)\n• IIHTT required lifestyle modification in all patients\n\n**3. Headache Management**\n• Topiramate 25-100 mg BID (alternative to acetazolamide, promotes weight loss)\n• Avoid NSAIDs long-term (rebound)',
+    citation: [9, 10, 11],
+    next: 'iih-acetazolamide-dosing',
+    summary: 'Mild IIH: Acetazolamide 500mg BID, titrate to 2-4g/day. Weight loss 5-10%. IIHTT showed benefit with mean dose 2.5g/day.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-acetazolamide-dosing',
+    type: 'info',
+    module: 4,
+    title: 'Acetazolamide Dosing Protocol',
+    body: '**Starting & Titration:**\n\n**Week 1:** 500 mg PO BID (1 g/day)\n**Week 2:** Increase to 750 mg BID (1.5 g/day) if tolerated\n**Week 3-4:** Increase to 1 g BID (2 g/day)\n**Beyond:** Increase by 250-500 mg/week to max 4 g/day\n\n**IIHTT Tolerability:**\n• 89.5% tolerated ≥1 g/day\n• 44% tolerated max dose (4 g/day)\n• Mean tolerated dose: 2.5 g/day\n\n**Contraindications:**\n❌ Sulfonamide allergy (cross-reactivity possible)\n❌ Severe hepatic/renal disease\n❌ Hypokalemia (uncorrected)\n❌ Adrenal insufficiency\n\n**Monitoring:**\n• BMP at 2-4 weeks (potassium, bicarb)\n• Replete potassium as needed\n• Watch for metabolic acidosis\n\n**Alternatives:**\n• Topiramate 25-100 mg BID (also causes weight loss)\n• Furosemide 20-40 mg daily (less effective)',
+    citation: [10, 11],
+    calculatorLinks: [{ id: 'acetazolamide-iih', label: 'Acetazolamide Dosing' }],
+    next: 'iih-discharge-mild',
+    summary: 'Start 500mg BID, titrate by 250-500mg/week to 2-4g/day. Check BMP in 2-4 weeks. 89% tolerate ≥1g/day per IIHTT.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-medical-moderate',
+    type: 'info',
+    module: 4,
+    title: 'Medical Management — Moderate Visual Loss',
+    body: '**More Aggressive Approach Required:**\n\n**1. Acetazolamide — Higher Doses**\n• Start 500 mg PO QID (2 g/day) or 1 g BID\n• Titrate rapidly to 3-4 g/day\n• Consider IV acetazolamide 500 mg if severe symptoms\n\n**2. Serial Therapeutic LPs**\n• Remove 20-30 mL CSF per session\n• Temporary relief, buys time for medications to work\n• Can be done q1-3 days in acute setting\n\n**3. Weight Loss Counseling**\n• Dietary consultation\n• Consider bariatric surgery referral if BMI >40\n\n**4. Close Follow-Up**\n• Visual fields within 1-2 weeks\n• Ophthalmology follow-up within 1 week\n• Neurology co-management\n\n**If No Improvement in 2-4 Weeks:**\n• Escalate to surgical intervention\n• Consider optic nerve sheath fenestration\n• Consider CSF shunting',
+    citation: [1, 9, 10],
+    next: 'iih-disposition-moderate',
+    summary: 'Moderate: Higher acetazolamide doses (2-4g/day), serial therapeutic LPs, close follow-up. Consider surgery if no improvement in 2-4 weeks.',
+    skippable: true,
+  },
+
+  // =====================================================================
+  // MODULE 5: ESCALATION
+  // =====================================================================
+
+  {
+    id: 'iih-escalation',
+    type: 'info',
+    module: 5,
+    title: 'Severe/Fulminant IIH — Urgent Intervention',
+    body: '**Fulminant IIH is an Emergency**\n\n**Definition:**\n• Rapid visual decline over days to weeks\n• Severe visual field loss (PMD <-7 dB)\n• Visual acuity loss\n• High-grade papilledema (Frisén 4-5)\n\n**Immediate Actions:**\n\n1. **Emergent Ophthalmology Consult**\n2. **Emergent Neurosurgery Consult**\n3. **IV Acetazolamide** 500 mg\n4. **Therapeutic LP** — remove 30-40 mL CSF\n5. **Admit to hospital**\n\n**Surgical Options:**\n\n| Procedure | Indication |\n|-----------|------------|\n| **Optic Nerve Sheath Fenestration (ONSF)** | Primarily visual symptoms, rapid vision loss |\n| **VP/LP Shunt** | Primarily headache symptoms, failed ONSF |\n| **Venous Sinus Stenting** | Transverse sinus stenosis with pressure gradient |\n\n**ONSF:**\n• Creates window in optic nerve sheath\n• Immediate decompression of optic nerve\n• ~90% stabilization/improvement of vision',
+    citation: [1, 9, 12],
+    next: 'iih-admit-severe',
+    summary: 'Fulminant IIH: emergent ophthalmology + neurosurgery. IV acetazolamide, therapeutic LP, admit. Surgical options: ONSF, VP shunt, venous stenting.',
+    skippable: true,
+  },
+
+  {
+    id: 'iih-admit-severe',
+    type: 'result',
+    module: 5,
+    title: 'Admission — Severe/Fulminant IIH',
+    body: '**Admission Required:**\n\n**Admission Criteria:**\n• Severe or rapidly progressive visual loss\n• Visual acuity involvement\n• High-grade papilledema (Frisén 4-5)\n• Need for serial therapeutic LPs\n• Surgical intervention planned\n\n**Admission Orders:**\n• Neuro checks q4h (visual acuity, pupil exam)\n• Acetazolamide IV 500 mg q6h (or PO if tolerating)\n• Therapeutic LP if not recently done\n• Strict I/Os, daily weights\n• Low-sodium diet\n• Ophthalmology consult (urgent)\n• Neurosurgery consult (if surgical candidate)\n\n**Monitoring:**\n• Daily visual acuity checks\n• Visual field testing when able\n• Serial fundoscopic exams\n\n**Surgical Planning:**\n• ONSF if vision primarily affected\n• VP/LP shunt if headache predominant\n• Venous stenting if gradient >8 mmHg on venogram',
+    recommendation: 'ADMIT for severe/fulminant IIH. IV acetazolamide, therapeutic LP, urgent ophthalmology and neurosurgery consults. Consider emergent ONSF or shunting.',
+    confidence: 'definitive',
+    citation: [1, 9, 12],
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'iih-discharge-mild',
+    type: 'result',
+    module: 6,
+    title: 'Discharge — Mild IIH',
+    body: '**Discharge Criteria:**\n✓ Mild visual loss only\n✓ Stable symptoms\n✓ Able to tolerate oral medications\n✓ Close follow-up arranged\n✓ Understands return precautions\n\n**Discharge Medications:**\n• Acetazolamide 500 mg PO BID (titrate to 2-4 g/day)\n• Potassium supplementation PRN (20-40 mEq/day)\n\n**Follow-Up:**\n• Ophthalmology: 1-2 weeks (visual fields, fundus exam)\n• Neurology: 2-4 weeks\n• PCP: 1-2 weeks (BMP check, weight monitoring)\n\n**Patient Education:**\n• Weight loss is critical — 5-10% reduction target\n• Low-sodium diet\n• Expected side effects: tingling, taste changes, fatigue\n• Stop carbonated beverages (taste flat)\n\n**Return Immediately If:**\n• Vision changes (blurring, field loss, double vision)\n• Severe headache not relieved by medication\n• Nausea/vomiting\n• Weakness or numbness',
+    recommendation: 'DISCHARGE with acetazolamide 500mg BID. Close ophthalmology (1-2 weeks) and neurology (2-4 weeks) follow-up. Weight loss counseling. Return for vision changes.',
+    confidence: 'definitive',
+    citation: [1, 9, 10],
+    calculatorLinks: [{ id: 'acetazolamide-iih', label: 'Acetazolamide Dosing' }],
+  },
+
+  {
+    id: 'iih-disposition-moderate',
+    type: 'question',
+    module: 6,
+    title: 'Disposition — Moderate Visual Loss',
+    body: '**Moderate IIH — Disposition Decision**\n\n**Consider Admission if:**\n• Unable to arrange rapid follow-up\n• Needs serial therapeutic LPs\n• Not tolerating oral medications\n• Concern for progression\n• Social factors limiting compliance\n\n**Discharge Possible if:**\n• Stable symptoms after therapeutic LP\n• Tolerating medications\n• Ophthalmology follow-up within 3-5 days\n• Reliable patient with good social support\n• Clear return precautions understood\n\nDisposition:',
+    citation: [1, 9],
+    options: [
+      { label: 'Admit — Close Monitoring Needed', next: 'iih-admit-moderate', description: 'Serial LPs, medication titration, close monitoring' },
+      { label: 'Discharge — Close Follow-Up Arranged', next: 'iih-discharge-moderate', description: 'Stable, reliable, follow-up in 3-5 days' },
+    ],
+    summary: 'Moderate IIH: consider admit if rapid follow-up unavailable or needs serial LPs. Discharge if stable with 3-5 day ophthalmology follow-up.',
+  },
+
+  {
+    id: 'iih-admit-moderate',
+    type: 'result',
+    module: 6,
+    title: 'Admission — Moderate IIH',
+    body: '**Admission for Observation and Treatment:**\n\n**Indication:**\n• Moderate visual loss requiring close monitoring\n• Need for serial therapeutic LPs\n• Medication titration\n• Cannot arrange close outpatient follow-up\n\n**Admission Orders:**\n• Acetazolamide 500 mg PO QID (2 g/day) — titrate as tolerated\n• Daily visual acuity and pupil checks\n• Therapeutic LP q1-2 days PRN headache/symptoms\n• BMP daily (monitor potassium, bicarb)\n• Dietary consult — low-sodium, weight loss\n• Ophthalmology consult for visual fields\n• Neurology co-management\n\n**Discharge Criteria:**\n• Visual function stable or improving\n• Tolerating oral acetazolamide ≥2 g/day\n• Follow-up appointments confirmed\n• Patient educated on return precautions',
+    recommendation: 'ADMIT for moderate IIH. Acetazolamide 2 g/day, serial therapeutic LPs, daily visual checks. Ophthalmology and neurology consults. Discharge when stable.',
+    confidence: 'recommended',
+    citation: [1, 9],
+  },
+
+  {
+    id: 'iih-discharge-moderate',
+    type: 'result',
+    module: 6,
+    title: 'Discharge — Moderate IIH (Close Follow-Up)',
+    body: '**Discharge with Very Close Follow-Up:**\n\n**Discharge Medications:**\n• Acetazolamide 500 mg PO TID-QID (1.5-2 g/day)\n• Potassium 20-40 mEq PO daily\n\n**CRITICAL Follow-Up:**\n• Ophthalmology: **within 3-5 days** (visual fields mandatory)\n• Neurology: within 1 week\n• PCP: within 1 week (BMP, weight)\n\n**Patient Contract:**\n• Patient verbally confirms understanding of severity\n• Clear return precautions documented\n• Emergency contact information provided\n• Family/support person aware of situation\n\n**Return IMMEDIATELY If:**\n• ANY vision changes (blurring, field loss, double vision, flashes)\n• Severe headache not relieved by medication\n• Vomiting\n• Confusion or mental status changes\n• Unable to take medications\n\n**Low Threshold for Re-evaluation:**\n• If ANY concern, return to ED',
+    recommendation: 'DISCHARGE with acetazolamide 1.5-2 g/day. CRITICAL: Ophthalmology within 3-5 days. Low threshold for return. Document patient understanding of severity.',
+    confidence: 'recommended',
+    citation: [1, 9, 10],
+  },
+
+];
+
+export const IIH_CITATIONS: Citation[] = [
+  { num: 1, text: 'Friedman DI, et al. Diagnostic criteria for idiopathic intracranial hypertension. Neurology. 2013;81(13):1159-1165.' },
+  { num: 2, text: 'Markey KA, et al. Idiopathic intracranial hypertension: Update on diagnosis and management. PMC. 2020.' },
+  { num: 3, text: 'Mollan SP, et al. Idiopathic intracranial hypertension: consensus guidelines on management. J Neurol Neurosurg Psychiatry. 2018;89(10):1088-1100.' },
+  { num: 4, text: 'ACEP. Ultrasound Guidelines: Emergency, Point-of-care, and Clinical Ultrasound Guidelines in Medicine. 2023.' },
+  { num: 5, text: 'Ohle R, et al. Sonography of the Optic Nerve Sheath Diameter for Detection of Raised Intracranial Pressure. Ann Emerg Med. 2015;66(6):625-632.' },
+  { num: 6, text: 'StatPearls. Optic Nerve Sheath Ultrasound. NCBI Bookshelf. 2024.' },
+  { num: 7, text: 'Wilson JW, et al. Novice emergency physician ultrasonography of optic nerve sheath diameter compared to ophthalmologist fundoscopic evaluation for papilledema. JACEP Open. 2021;2(1):e12355.' },
+  { num: 8, text: 'Frisén L. Swelling of the optic nerve head: a staging scheme. J Neurol Neurosurg Psychiatry. 1982;45(1):13-18.' },
+  { num: 9, text: 'Wall M, et al. Effect of Acetazolamide on Visual Function in Patients With IIH and Mild Visual Loss: The IIHTT. JAMA. 2014;311(16):1641-1651.' },
+  { num: 10, text: 'Wall M, et al. The Idiopathic Intracranial Hypertension Treatment Trial: A Review of the Outcomes. Headache. 2017;57(8):1303-1310.' },
+  { num: 11, text: 'Shah DJ, et al. Safety and Tolerability of Acetazolamide in the IIHTT. J Neuroophthalmol. 2016;36(1):13-19.' },
+  { num: 12, text: 'Kalyvas A, et al. Stenting for Venous Sinus Stenosis in IIH: A Systematic Review. Neurosurgery. 2024.' },
+];
+
+export const IIH_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'ONSD >6mm = elevated ICP — ACEP core ocular POCUS application, measure 3mm behind globe', nodeId: 'iih-onsd-technique' },
+  { text: 'Rule out CVST before diagnosing IIH — MRV mandatory, especially with risk factors', nodeId: 'iih-red-flags' },
+  { text: 'Vision loss is the major morbidity — visual fields guide treatment intensity', nodeId: 'iih-severity' },
+  { text: 'Acetazolamide 500mg BID to start, titrate to 2-4g/day per IIHTT', nodeId: 'iih-acetazolamide-dosing' },
+  { text: 'Fulminant IIH = emergency — IV acetazolamide, therapeutic LP, emergent surgery consult', nodeId: 'iih-escalation' },
+  { text: 'Weight loss 5-10% is critical adjunct — all IIH patients need lifestyle modification', nodeId: 'iih-medical-mild' },
+];
