@@ -344,7 +344,7 @@ export const PRIAPISM_NODES = [
         summary: 'Inject at 10 and 2 o\'clock positions under Buck\'s fascia — avoid 12 o\'clock (dorsal vein) and 6 o\'clock (urethra)',
         images: [
             {
-                src: 'images/priapism/do-not-inject.png',
+                src: 'images/priapism/do-not-inject.jpg',
                 alt: 'Clock-face diagram showing safe injection zones — do not inject near the 6 o\'clock (ventral) or 12 o\'clock (dorsal midline) positions',
                 caption: 'Safe injection zones: avoid 12 o\'clock (dorsal neurovascular bundle) and 6 o\'clock (ventral urethra).',
             },
