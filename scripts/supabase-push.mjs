@@ -273,6 +273,7 @@ const TREE_REGISTRY = {
   'ear-infection': { prefix: 'EAR_INFECTION', entryNodeId: 'ear-start', categoryId: 'emergency-medicine' },
   'pph':           { prefix: 'PPH',            entryNodeId: 'pph-start',  categoryId: 'ob-gyn' },
   'pnes':          { prefix: 'PNES',           entryNodeId: 'pnes-start', categoryId: 'emergency-medicine' },
+  'amaurosis-fugax': { prefix: 'AMAUROSIS_FUGAX', entryNodeId: 'af-start', categoryId: 'ophthalmology' },
 };
 
 const CROSS_LISTINGS = {
@@ -311,6 +312,7 @@ const CROSS_LISTINGS = {
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
   'cricothyrotomy': [{ categoryId: 'procedures' }],
   'pph':            [{ categoryId: 'emergency-medicine' }],
+  'amaurosis-fugax': [{ categoryId: 'neurology' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

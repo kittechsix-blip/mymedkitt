@@ -338,6 +338,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/pnes.js');
             return { nodes: m.PNES_NODES, entryNodeId: 'pnes-start', categoryId: 'emergency-medicine', moduleLabels: m.PNES_MODULE_LABELS, citations: m.PNES_CITATIONS, criticalActions: m.PNES_CRITICAL_ACTIONS };
         },
+        'amaurosis-fugax': async () => {
+            const m = await import('../data/trees/amaurosis-fugax.js');
+            return { nodes: m.AMAUROSIS_FUGAX_NODES, entryNodeId: 'af-start', categoryId: 'ophthalmology', moduleLabels: m.AMAUROSIS_FUGAX_MODULE_LABELS, citations: m.AMAUROSIS_FUGAX_CITATIONS, criticalActions: m.AMAUROSIS_FUGAX_CRITICAL_ACTIONS };
+        },
         'sickle-cell': async () => {
             const m = await import('../data/trees/sickle-cell.js');
             return { nodes: m.SICKLE_CELL_NODES, entryNodeId: 'scd-start', categoryId: 'heme-onc', moduleLabels: m.SICKLE_CELL_MODULE_LABELS, citations: m.SICKLE_CELL_CITATIONS, criticalActions: m.SICKLE_CELL_CRITICAL_ACTIONS };

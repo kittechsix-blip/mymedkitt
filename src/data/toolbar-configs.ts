@@ -1345,6 +1345,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'safety', label: 'Safety', icon: '🛡️', action: 'overlay', target: 'pnes-safety-screen' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'pnes-stop' },
   ],
+  'amaurosis-fugax': [
+    { id: 'abcd2', label: 'ABCD2', icon: '📊', action: 'calculator', target: 'tia-abcd2' },
+    { id: 'gca', label: 'GCA Screen', icon: '🔥', action: 'overlay', target: 'af-gca-screen' },
+    { id: 'carotid', label: 'Carotid', icon: '🩺', action: 'overlay', target: 'af-carotid-guide' },
+    { id: 'dapt', label: 'DAPT', icon: '💊', action: 'calculator', target: 'tia-dapt-protocol' },
+    { id: 'fundus', label: 'Fundus', icon: '👁️', action: 'overlay', target: 'af-fundus-atlas' },
+    { id: 'ddx', label: 'DDx', icon: '🔍', action: 'overlay', target: 'af-tmvl-ddx' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'af-stop' },
+  ],
 };
 
 // Stop button appended automatically to every consult

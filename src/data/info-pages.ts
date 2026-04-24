@@ -16340,6 +16340,149 @@ const CONST_ILEUS_PREVENTION: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Amaurosis Fugax / Transient Monocular Vision Loss
+// -------------------------------------------------------------------
+
+const AF_GCA_SCREEN: InfoPage = {
+  id: 'af-gca-screen',
+  title: 'Giant Cell Arteritis (GCA) Screen',
+  subtitle: 'Mandatory in ALL patients ≥50 with vision loss',
+  sections: [
+    {
+      heading: 'Why Screen?',
+      body: 'GCA can cause **permanent bilateral blindness** within hours.\n\n• Second eye involvement: up to 50% within days if untreated\n• Early steroids prevent contralateral vision loss\n• Treatment before biopsy is standard of care',
+    },
+    {
+      heading: 'Red Flags (High Specificity)',
+      body: '| Finding | LR+ |\n|---------|-----|\n| **Jaw claudication** | 4.2 |\n| **Diplopia** | 3.4 |\n| **Temporal artery abnormality** | 4.6 |\n| **ESR ≥50** | 1.2 |\n| **CRP ≥10** | - |\n\n**Classic triad:** Headache + jaw claudication + vision symptoms',
+    },
+    {
+      heading: 'Lab Interpretation',
+      body: '| ESR | CRP | Interpretation |\n|-----|-----|----------------|\n| ≥50 | ≥10 | **High suspicion** (Spec 97%) |\n| ≥50 | Normal | Moderate suspicion |\n| Normal | ≥10 | Moderate suspicion |\n| Normal | Normal | **~4% of GCA can have both normal** |\n\n**Do NOT rule out GCA with normal labs if clinical suspicion high**',
+    },
+    {
+      heading: 'Treatment',
+      body: '**Vision-threatening GCA:**\n\n• **Methylprednisolone 1g IV daily x 3 days**\n• Then prednisone 1 mg/kg/day PO\n• Temporal artery biopsy within 2 weeks\n• Rheumatology consult\n\n**Start steroids BEFORE biopsy confirmation**',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR/VF Guideline for Management of Giant Cell Arteritis. Arthritis Rheumatol. 2021.' },
+  ],
+};
+
+const AF_TMVL_DDX: InfoPage = {
+  id: 'af-tmvl-ddx',
+  title: 'TMVL Differential Diagnosis',
+  subtitle: 'Ischemic vs Non-Ischemic causes',
+  sections: [
+    {
+      heading: 'Ischemic (Most Common)',
+      body: '**Embolic:**\n• Carotid artery stenosis/plaque (most common)\n• Cardioembolic (AF, valve disease, LV thrombus)\n• Aortic arch atheroma\n\n**Arteritis:**\n• Giant cell arteritis\n• Other vasculitis\n\n**Other:**\n• Carotid/vertebral dissection\n• Hypercoagulable states\n• Hyperviscosity syndromes',
+    },
+    {
+      heading: 'Non-Ischemic',
+      body: '| Cause | Key Features |\n|-------|-------------|\n| **Ocular migraine** | Positive symptoms (scintillations, zigzags), headache follows, young patient |\n| **Papilledema** | Bilateral, seconds duration, positional, worse on bending |\n| **Angle-closure glaucoma** | Pain, halos around lights, red eye, mid-dilated pupil |\n| **Dry eye** | Very brief, clears with blinking |\n| **Uhthoff phenomenon** | MS patient, triggered by heat/exercise |',
+    },
+    {
+      heading: 'Ischemic vs Migraine',
+      body: '| Feature | Ischemic | Migraine |\n|---------|----------|----------|\n| **Symptoms** | Negative (blackout, curtain) | Positive (lights, zigzags) |\n| **Duration** | Seconds to minutes | 5-60 minutes |\n| **Headache** | Usually absent | Typically follows |\n| **Age** | Usually >50 | Usually <40 |\n| **Risk factors** | HTN, DM, smoking, CAD | FHx migraine |',
+    },
+    {
+      heading: 'Key Point',
+      body: '**Assume ischemic until proven otherwise**\n\nEven if migraine suspected, full stroke workup warranted if:\n• First episode in patient >40\n• Vascular risk factors present\n• Atypical features',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Foroozan R. Transient Monocular Visual Loss: How Does Age Impact Diagnosis? Ophthalmol Ther. 2024.' },
+  ],
+};
+
+const AF_CAROTID_GUIDE: InfoPage = {
+  id: 'af-carotid-guide',
+  title: 'Carotid Stenosis Management',
+  subtitle: 'CEA indications and timing',
+  sections: [
+    {
+      heading: 'Symptomatic Stenosis',
+      body: '**Symptomatic = ipsilateral TIA/stroke within 6 months**\n\n| Stenosis | Recommendation | NNT |\n|----------|----------------|-----|\n| **70-99%** | CEA strongly indicated | ~6 |\n| **50-69%** | CEA may be beneficial | ~22 |\n| **<50%** | Medical management | - |\n| **100%** | Occluded, no intervention | - |',
+    },
+    {
+      heading: 'Timing of CEA',
+      body: '**Best outcomes within 2 weeks of event**\n\n• After 48 hours (allow stabilization)\n• Before 14 days (highest benefit window)\n• Patient must be neurologically stable\n• Center must have <3% perioperative complication rate',
+    },
+    {
+      heading: 'CEA vs CAS',
+      body: '**CEA (Endarterectomy):** First-line for most patients\n\n**CAS (Stenting):** Consider if:\n• High surgical risk\n• Radiation-induced stenosis\n• Prior CEA with restenosis\n• Lesion above C2\n• Tandem lesions',
+    },
+    {
+      heading: 'While Awaiting CEA',
+      body: '• DAPT (aspirin + clopidogrel x 21 days)\n• High-intensity statin (atorvastatin 80mg)\n• BP control (<130/80)\n• Smoking cessation\n• Avoid hypotension',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'NASCET Collaborators. Beneficial effect of CEA in symptomatic patients with high-grade stenosis. NEJM. 1991.' },
+  ],
+};
+
+const AF_FUNDUS_ATLAS: InfoPage = {
+  id: 'af-fundus-atlas',
+  title: 'Fundoscopic Findings Atlas',
+  subtitle: 'Key findings in retinal ischemia',
+  sections: [
+    {
+      heading: 'Normal Fundus',
+      body: '![Normal fundus](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Fundus_photograph_of_normal_right_eye.jpg/440px-Fundus_photograph_of_normal_right_eye.jpg)\n\n• Clear red reflex\n• Sharp optic disc margins\n• Cup-to-disc ratio ~0.3\n• Vessels: arteries lighter, veins darker',
+    },
+    {
+      heading: 'Central Retinal Artery Occlusion (CRAO)',
+      body: '![CRAO](https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Fundus_photo_showing_cherry-red_spot_in_CRAO.jpg/440px-Fundus_photo_showing_cherry-red_spot_in_CRAO.jpg)\n\n**Classic findings:**\n• **Cherry-red spot** at macula (fed by choroidal circulation)\n• Pale, edematous retina (ischemic whitening)\n• Attenuated arteries\n• Box-car segmentation of vessels',
+    },
+    {
+      heading: 'Branch Retinal Artery Occlusion (BRAO)',
+      body: '• Sectoral pallor following vessel distribution\n• Corresponding visual field defect\n• May see emboli at bifurcation\n\n**Types of emboli:**\n| Type | Source | Appearance |\n|------|--------|------------|\n| Cholesterol (Hollenhorst) | Carotid | Bright, refractile |\n| Fibrin-platelet | Cardiac/carotid | White, elongated |\n| Calcific | Cardiac valves | White, non-refractile |',
+    },
+    {
+      heading: 'Hollenhorst Plaque',
+      body: '![Hollenhorst plaque](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Hollenhorst_plaques.jpg/400px-Hollenhorst_plaques.jpg)\n\n**Cholesterol embolus at arterial bifurcation**\n\n• Bright, refractile, yellow-orange\n• Usually from carotid plaque\n• May be asymptomatic if small\n• Indicates high embolic risk',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Academy of Ophthalmology. Retinal and Ophthalmic Artery Occlusions PPP 2024-2025.' },
+  ],
+};
+
+const AF_STOP: InfoPage = {
+  id: 'af-stop',
+  title: 'TMVL: Stop Before You Proceed',
+  subtitle: 'Critical reminders for transient vision loss',
+  sections: [
+    {
+      heading: '🛑 This is a Stroke Equivalent',
+      body: '**TMVL = Retinal TIA**\n\n• 5-10% stroke risk at 1 year\n• Highest risk in first 7 days\n• 20-30% have silent infarcts on MRI-DWI\n\n**Treat with same urgency as cerebral TIA**',
+    },
+    {
+      heading: '🛑 Check GCA in ALL Patients ≥50',
+      body: '**GCA causes permanent bilateral blindness**\n\n• Order ESR + CRP immediately\n• Look for: jaw claudication, headache, scalp tenderness\n• Start IV steroids if ANY suspicion\n• Do NOT wait for biopsy',
+    },
+    {
+      heading: '🛑 CRAO is Time-Critical',
+      body: '**If vision loss persistent (not transient):**\n\n• <4.5 hours: Consider IV tPA per stroke protocol\n• Activate stroke code\n• Emergent ophthalmology consult\n\nRetinal tissue tolerates ischemia poorly, similar to brain.',
+    },
+    {
+      heading: '🛑 Carotid Imaging is Mandatory',
+      body: '**Most common cause = carotid stenosis**\n\n• CTA or MRA head/neck\n• Carotid Doppler if CT/MRA unavailable\n• Symptomatic stenosis ≥50%: CEA indicated\n• Timing: best if CEA within 2 weeks',
+    },
+    {
+      heading: '✅ Essential Workup',
+      body: '• **MRI Brain with DWI** (preferred over CT)\n• **MRA/CTA Head and Neck**\n• **ECG** (screen for AF)\n• **Echo** (cardiac source)\n• **Labs:** ESR, CRP, CBC, BMP, lipids, HbA1c\n• **Telemetry** (paroxysmal AF)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AHA/ASA Scientific Statement on Acute Retinal Ischemia. Stroke. 2021.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // PNES / Functional Seizures
 // -------------------------------------------------------------------
 
@@ -16991,6 +17134,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'htnp-classification': HTNP_CLASSIFICATION,
   'htnp-asa-guide': HTNP_ASA_GUIDE,
   'htnp-discharge-patient': HTNP_DISCHARGE_PATIENT,
+  // Amaurosis Fugax / TMVL
+  'af-gca-screen': AF_GCA_SCREEN,
+  'af-tmvl-ddx': AF_TMVL_DDX,
+  'af-carotid-guide': AF_CAROTID_GUIDE,
+  'af-fundus-atlas': AF_FUNDUS_ATLAS,
+  'af-stop': AF_STOP,
   // PNES (Functional Seizures)
   'pnes-semiology-checklist': PNES_SEMIOLOGY_CHECKLIST,
   'pnes-patient-info': PNES_PATIENT_INFO,
