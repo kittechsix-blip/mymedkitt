@@ -621,6 +621,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pta', label: 'PTA', icon: '🩹', action: 'jump', target: 'dni-pta' },
   ],
   'delirium': [
+    { id: '4at', label: '4AT', icon: '🔢', action: 'calculator', target: '4at' },
     { id: 'rass', label: 'RASS', icon: '📊', action: 'calculator', target: 'rass' },
     { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'delirium-summary' },
     { id: 'meds', label: 'Med Rx', icon: '💊', action: 'jump', target: 'del-pharm-decision' },

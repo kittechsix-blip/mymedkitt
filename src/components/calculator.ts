@@ -2204,6 +2204,73 @@ const RASS_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+const FOUR_AT_CALCULATOR: CalculatorDefinition = {
+  id: '4at',
+  title: '4AT',
+  subtitle: 'Rapid Delirium Screening Tool',
+  description: 'The 4AT is a rapid (<2 min), validated screening tool for delirium detection. It requires no prior training and can be used at the bedside in ED, hospital, or ICU settings. Scores ≥4 suggest delirium is likely. Unlike CAM, 4AT can be performed even if patient is drowsy or unarousable.',
+  fields: [
+    {
+      name: '4at-alertness',
+      label: '[A] Alertness',
+      type: 'select',
+      points: 0,
+      description: 'Observe the patient. If asleep, attempt to wake with speech or gentle touch on shoulder. Ask patient to state their name and address.',
+      selectOptions: [
+        { label: 'Normal (fully alert, not agitated, throughout assessment)', points: 0 },
+        { label: 'Mild sleepiness (<10 sec after waking, then normal)', points: 0 },
+        { label: 'Clearly abnormal', points: 4 },
+      ],
+    },
+    {
+      name: '4at-amt4',
+      label: '[M] AMT4 — Abbreviated Mental Test',
+      type: 'select',
+      points: 0,
+      description: 'Ask: (1) Age, (2) Date of birth, (3) Place (name of hospital/building), (4) Current year. Give 1 point for each correct answer.',
+      selectOptions: [
+        { label: 'No mistakes (all 4 correct)', points: 0 },
+        { label: '1 mistake', points: 1 },
+        { label: '2 or more mistakes / untestable', points: 2 },
+      ],
+    },
+    {
+      name: '4at-attention',
+      label: '[T] Attention — Months Backwards',
+      type: 'select',
+      points: 0,
+      description: 'Ask patient to name the months of the year backwards, starting at December. Prompt once with "What is the month before December?" Record how many months are stated correctly before first mistake.',
+      selectOptions: [
+        { label: 'Achieves 7 months or more correctly', points: 0 },
+        { label: 'Achieves <7 months / refuses to start', points: 1 },
+        { label: 'Untestable (cannot start, too unwell)', points: 2 },
+      ],
+    },
+    {
+      name: '4at-acute',
+      label: '[4] Acute Change or Fluctuating Course',
+      type: 'select',
+      points: 0,
+      description: 'Evidence of significant change or fluctuation in: alertness, cognition, other mental function (e.g., paranoia, hallucinations). Based on history from patient/family/staff, and observation.',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 4 },
+      ],
+    },
+  ],
+  results: [
+    { min: 4, max: Infinity, label: '4AT ≥4', risk: 'Possible Delirium ± Cognitive Impairment', mortality: 'Delirium or severe cognitive impairment is LIKELY. Proceed with full delirium workup: identify precipitants (infection, medications, metabolic, pain, urinary retention, constipation). Delirium is a medical emergency — it indicates acute brain dysfunction.', colorVar: '--color-danger' },
+    { min: 1, max: 4, label: '4AT 1-3', risk: 'Possible Cognitive Impairment', mortality: 'Possible cognitive impairment detected. May indicate dementia, mild delirium, or delirium superimposed on dementia. Further cognitive assessment recommended. Consider baseline cognitive status — is this new?', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: '4AT 0', risk: 'Unlikely Delirium', mortality: 'Delirium or severe cognitive impairment is UNLIKELY (but not ruled out). If clinical suspicion remains high, reassess later or use additional tools (CAM). Note: 4AT may miss subtle or hypoactive delirium.', colorVar: '--color-primary' },
+  ],
+  thresholdNote: '4AT ≥4 = likely delirium. Score 1-3 = possible cognitive impairment. Score 0 = delirium unlikely but not excluded if high suspicion.',
+  citations: [
+    'Bellelli G, et al. Validation of the 4AT, a new instrument for rapid delirium screening. Age Ageing. 2014;43(4):496-502.',
+    'Shenkin SD, et al. Delirium detection in older acute medical inpatients: a multicentre prospective comparative diagnostic test accuracy study of the 4AT and the CAM. BMC Med. 2019;17:138.',
+    'MacLullich AMJ, et al. The 4AT: a rapid assessment test for delirium. Age Ageing. 2014;43(4):496-502. https://www.the4at.com/',
+  ],
+};
+
 // -------------------------------------------------------------------
 // Compensation Rule Calculators (ABG Acid-Base)
 // -------------------------------------------------------------------
@@ -33450,6 +33517,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'emergency-blood-selection': EMERGENCY_BLOOD_SELECTION_CALCULATOR,
   'cows': COWS_CALCULATOR,
   'rass': RASS_CALCULATOR,
+  '4at': FOUR_AT_CALCULATOR,
   'pesi': PESI_CALCULATOR,
   'spesi': SPESI_CALCULATOR,
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,

@@ -1103,8 +1103,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'delirium',
-        title: 'Delirium Management',
-        subtitle: 'Safety → Screening → Etiology → De-escalation → Pharmacology → Disposition',
+        title: 'Delirium',
+        subtitle: 'Safety → 4AT/CAM Screening → Etiology → De-escalation → Pharmacology → Disposition',
         categoryId: 'neurology',
         version: '1.0',
         nodeCount: 30,
