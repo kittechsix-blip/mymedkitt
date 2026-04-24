@@ -15787,6 +15787,156 @@ const AF_STOP = {
     ],
 };
 // -------------------------------------------------------------------
+// BRUE (Brief Resolved Unexplained Event)
+// -------------------------------------------------------------------
+const BRUE_RISK_CALC = {
+    id: 'brue-risk-calc',
+    title: 'BRUE Risk Stratification',
+    subtitle: 'AAP 2016 Lower-Risk vs Higher-Risk criteria',
+    sections: [
+        {
+            heading: 'Lower-Risk BRUE — ALL Must Be Met',
+            body: '☐ Age **>60 days**\n☐ If preterm: GA **>32 weeks** AND corrected age **>45 weeks**\n☐ **First** BRUE (no prior events, no cluster)\n☐ Event duration **<1 minute**\n☐ **No CPR** required by trained medical provider\n☐ **Normal** physical exam\n☐ **No** concerning historical features\n\n**If ALL checked → Lower-Risk**\n**If ANY unchecked → Higher-Risk**',
+        },
+        {
+            heading: 'Higher-Risk Features',
+            body: '⚠️ **Any of these = Higher-Risk:**\n\n• Age ≤60 days\n• Preterm <32 weeks OR corrected age <45 weeks\n• Multiple events or cluster\n• Event duration ≥1 minute\n• CPR by trained medical provider\n• Abnormal exam findings\n• Concerning history:\n  - Family history of SIDS\n  - Social concerns (NAT)\n  - Prior similar events',
+        },
+        {
+            heading: 'Management by Risk',
+            body: '**Lower-Risk:**\n• Observe 1-4 hours\n• Consider ECG, pertussis test\n• Parent education (CPR, safe sleep)\n• Discharge with 24-48hr follow-up\n\n**Higher-Risk:**\n• Admit for monitoring\n• Tiered, hypothesis-driven workup\n• Prioritize NAT, cardiac, infection\n• Subspecialty consults as indicated',
+        },
+        {
+            heading: 'Statistics',
+            body: '• **>90% of BRUEs** classified as higher-risk\n• **~1%** of low-risk have serious underlying condition\n• **~5%** recurrence rate in low-risk\n• **~5%** of high-risk have serious underlying condition',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tieder JS, et al. Brief Resolved Unexplained Events and Evaluation of Lower-Risk Infants. Pediatrics. 2016;137(5):e20160590.' },
+    ],
+};
+const BRUE_DDX_GUIDE = {
+    id: 'brue-ddx-guide',
+    title: 'BRUE Differential Diagnosis',
+    subtitle: 'Common causes of infant apnea/color change events',
+    sections: [
+        {
+            heading: 'Most Common Causes',
+            body: 'When a cause is identified, the event is **no longer a BRUE**:\n\n| Rank | Cause | Frequency |\n|------|-------|----------|\n| 1 | **GER with laryngospasm** | ~30% |\n| 2 | **Lower respiratory infection** | ~15% |\n| 3 | **Seizure** | ~10% |\n| 4 | **Child maltreatment** | ~5% |',
+        },
+        {
+            heading: 'GI Causes',
+            body: '• **GER with laryngospasm** — event during/after feeding, regurgitation noted\n• **Swallowing dysfunction** — coughing/gagging with feeds\n• **Aspiration** — recurrent respiratory symptoms with feeding',
+        },
+        {
+            heading: 'Respiratory Causes',
+            body: '• **Pertussis** — paroxysmal cough, apnea, cyanosis (young infants lack classic whoop)\n• **RSV/Bronchiolitis** — respiratory symptoms, wheezing\n• **Laryngomalacia** — stridor, worse with feeding/crying\n• **Airway obstruction** — positional, anatomic',
+        },
+        {
+            heading: 'Neurologic Causes',
+            body: '• **Seizure** — subtle in infants (eye deviation, cycling movements)\n• **Breath-holding spell** — triggered by crying, predictable\n• **Apnea of infancy** — diagnosis of exclusion',
+        },
+        {
+            heading: 'Cardiac Causes',
+            body: '• **Long QT syndrome** — QTc >460 ms, family history sudden death\n• **WPW** — delta wave, short PR\n• **SVT** — tachycardia, poor feeding, pallor\n• **Structural heart disease** — murmur, failure to thrive',
+        },
+        {
+            heading: 'Other Causes',
+            body: '• **NAT/Abuse** — suffocation, shaking, Munchausen by proxy\n• **Infection** — UTI (common in young infants), sepsis, meningitis\n• **Metabolic** — hypoglycemia, inborn errors\n• **Medication/Toxin** — accidental ingestion',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tieder JS, et al. Framework for Higher-Risk Infant After BRUE. Pediatrics. 2019;144(2):e20184101.' },
+    ],
+};
+const BRUE_NAT_SCREEN_GUIDE = {
+    id: 'brue-nat-screen-guide',
+    title: 'NAT Screening in BRUE',
+    subtitle: 'TEN-4 FACES rule and abuse red flags',
+    sections: [
+        {
+            heading: '⚠️ NAT Red Flags',
+            body: '**High-Risk Features:**\n\n• Recurrent events with **same caregiver**\n• **Inconsistent** or changing history\n• **Delay** in seeking care\n• **Bruising** in non-mobile infant\n• Unexplained injuries\n• Prior CPS involvement\n• Domestic violence in home\n• Substance abuse\n• Young, isolated, or stressed caregivers',
+        },
+        {
+            heading: 'TEN-4 FACES Bruising Rule',
+            body: '**Bruising in these locations = Highly concerning for abuse:**\n\n**TEN-4:** Bruising on...\n• **T**orso\n• **E**ar\n• **N**eck\n...in any child **<4 years old**\n\n**FACES:** Or bruising on...\n• **F**ace\n• **A**rm (any)\n• **C**heek\n• **E**yes\n• **S**oft tissue\n...in infant **<4 months old**\n\n**Sensitivity ~97% for abuse**',
+        },
+        {
+            heading: 'Key Principle',
+            body: '🚨 **"Those who don\'t cruise, rarely bruise"**\n\nBruising in a non-mobile infant (<4 months) is **rare** and should prompt abuse evaluation.\n\n• Accidental bruising uncommon before crawling/walking\n• Any bruise in non-mobile infant = explain or investigate',
+        },
+        {
+            heading: 'If NAT Suspected',
+            body: '**Required Evaluation:**\n\n• **Head CT or MRI** — subdural hematoma, SAH\n• **Skeletal survey** — healing/acute fractures\n• **Dilated fundoscopic exam** — retinal hemorrhages\n• **Social work consult** — immediate\n• **CPS report** — mandated\n• **Admit for safety** — do not discharge to suspected abuser\n\n**Document carefully** — detailed quotes, exam findings, timeline',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Pierce MC, et al. Validation of TEN-4 FACESp Bruising Rule. Pediatrics. 2021;147(4):e2020024653.' },
+    ],
+};
+const BRUE_ECG_GUIDE = {
+    id: 'brue-ecg-guide',
+    title: 'ECG Screening in BRUE',
+    subtitle: 'Detecting arrhythmias that cause infant apnea',
+    sections: [
+        {
+            heading: 'Why ECG in BRUE?',
+            body: 'Cardiac arrhythmias can present as:\n• Apnea\n• Color change (pallor, cyanosis)\n• Unresponsiveness\n• "Seizure-like" episodes\n\n**ECG recommended for all higher-risk BRUE**\n**"May consider" for lower-risk BRUE**',
+        },
+        {
+            heading: 'Long QT Syndrome',
+            body: '**QTc Interpretation (Bazett):**\n\n| QTc (ms) | Interpretation |\n|----------|----------------|\n| <440 | Normal |\n| 440-460 | Borderline |\n| **>460** | **Prolonged** |\n| >480 | High-risk |\n\n**Red flags:**\n• Family history sudden death <50 years\n• Syncope with exercise or startle\n• Known channelopathy in family',
+        },
+        {
+            heading: 'Wolff-Parkinson-White (WPW)',
+            body: '**ECG Findings:**\n• Short PR interval (<120 ms)\n• **Delta wave** (slurred upstroke of QRS)\n• Wide QRS (>120 ms)\n\n**Risk:** SVT, rarely sudden death\n\n**If WPW on ECG:** Cardiology referral',
+        },
+        {
+            heading: 'Other Arrhythmias',
+            body: '• **SVT** — narrow complex tachycardia, rate >220 bpm\n• **Heart block** — AV dissociation, bradycardia\n• **Ectopy** — frequent PVCs may warrant evaluation\n\n**Action:** Cardiology consult for any abnormal ECG',
+        },
+        {
+            heading: 'Family History Triggers',
+            body: '**Ask about family history of:**\n\n• Sudden death <50 years (especially unexplained)\n• Syncope with exercise\n• Drowning (may be arrhythmia-related)\n• Pacemaker or ICD in young family member\n• Known Long QT, WPW, Brugada, CPVT\n• Cardiomyopathy',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ackerman MJ, et al. HRS/EHRA Expert Consensus Statement on Genetic Testing for Channelopathies. Heart Rhythm. 2011;8(8):1308-1339.' },
+    ],
+};
+const BRUE_WORKUP_GUIDE = {
+    id: 'brue-workup-guide',
+    title: 'BRUE Workup by Risk',
+    subtitle: 'Evidence-based testing recommendations',
+    sections: [
+        {
+            heading: 'Lower-Risk BRUE',
+            body: '**AAP Strong Recommendations AGAINST:**\n\n❌ CBC, BMP, blood gas\n❌ Chest X-ray\n❌ Echocardiogram\n❌ EEG\n❌ Neuroimaging\n❌ Upper GI series\n❌ LP\n❌ Empiric acid suppression\n❌ Admission solely for monitoring',
+        },
+        {
+            heading: 'Lower-Risk — May Consider',
+            body: '**Weak Recommendations (consider):**\n\n✓ **12-lead ECG** — screen for Long QT, WPW\n✓ **Pertussis PCR** — if underimmunized or outbreak\n✓ **Observation 1-4 hours** with continuous SpO2\n\n**Always provide:**\n• Parent education on infant CPR\n• Safe sleep counseling\n• Return precautions',
+        },
+        {
+            heading: 'Higher-Risk — Initial Tier',
+            body: '**Baseline Testing:**\n\n• Continuous pulse oximetry (4+ hours)\n• 12-lead ECG\n• Blood glucose\n• VBG or BMP\n• CBC\n\n**If respiratory concern:**\n• Respiratory viral panel\n• Pertussis PCR',
+        },
+        {
+            heading: 'Higher-Risk — Directed Testing',
+            body: '**Based on Clinical Suspicion:**\n\n| Concern | Testing |\n|---------|--------|\n| **NAT** | Head CT/MRI, skeletal survey, retinal exam |\n| **Seizure** | EEG, neurology consult |\n| **Cardiac** | Echo, Holter, cardiology |\n| **Metabolic** | Ammonia, lactate, acylcarnitine |\n| **Infection** | UA, LP if meningitis concern |\n| **Feeding** | Observed feeds, swallow study |',
+        },
+        {
+            heading: 'Avoid Indiscriminate Testing',
+            body: '⚠️ **Key Principle:**\n\nTesting should be **hypothesis-driven**, not shotgun.\n\n• Low diagnostic yield with broad testing\n• High false-positive rate creates cascades\n• Focus on **time-sensitive** conditions first:\n  1. Child maltreatment\n  2. Feeding/aspiration issues\n  3. Cardiac arrhythmia\n  4. Serious infection',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tieder JS, et al. Brief Resolved Unexplained Events. Pediatrics. 2016;137(5):e20160590.' },
+        { num: 2, text: 'Tieder JS, et al. Framework for Higher-Risk BRUE. Pediatrics. 2019;144(2):e20184101.' },
+    ],
+};
+// -------------------------------------------------------------------
 // PNES / Functional Seizures
 // -------------------------------------------------------------------
 const PNES_SEMIOLOGY_CHECKLIST = {
@@ -16438,6 +16588,12 @@ export const INFO_PAGES = {
     'af-carotid-guide': AF_CAROTID_GUIDE,
     'af-fundus-atlas': AF_FUNDUS_ATLAS,
     'af-stop': AF_STOP,
+    // BRUE (Brief Resolved Unexplained Event)
+    'brue-risk-calc': BRUE_RISK_CALC,
+    'brue-ddx-guide': BRUE_DDX_GUIDE,
+    'brue-nat-screen-guide': BRUE_NAT_SCREEN_GUIDE,
+    'brue-ecg-guide': BRUE_ECG_GUIDE,
+    'brue-workup-guide': BRUE_WORKUP_GUIDE,
     // PNES (Functional Seizures)
     'pnes-semiology-checklist': PNES_SEMIOLOGY_CHECKLIST,
     'pnes-patient-info': PNES_PATIENT_INFO,

@@ -406,6 +406,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/amaurosis-fugax.js');
       return { nodes: m.AMAUROSIS_FUGAX_NODES, entryNodeId: 'af-start', categoryId: 'ophthalmology', moduleLabels: m.AMAUROSIS_FUGAX_MODULE_LABELS, citations: m.AMAUROSIS_FUGAX_CITATIONS, criticalActions: m.AMAUROSIS_FUGAX_CRITICAL_ACTIONS };
     },
+    'brue': async () => {
+      const m = await import('../data/trees/brue.js');
+      return { nodes: m.BRUE_NODES, entryNodeId: 'brue-start', categoryId: 'pediatrics', moduleLabels: m.BRUE_MODULE_LABELS, citations: m.BRUE_CITATIONS, criticalActions: m.BRUE_CRITICAL_ACTIONS };
+    },
     'sickle-cell': async () => {
       const m = await import('../data/trees/sickle-cell.js');
       return { nodes: m.SICKLE_CELL_NODES, entryNodeId: 'scd-start', categoryId: 'heme-onc', moduleLabels: m.SICKLE_CELL_MODULE_LABELS, citations: m.SICKLE_CELL_CITATIONS, criticalActions: m.SICKLE_CELL_CRITICAL_ACTIONS };

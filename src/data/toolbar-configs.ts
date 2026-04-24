@@ -1354,6 +1354,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ddx', label: 'DDx', icon: '🔍', action: 'overlay', target: 'af-tmvl-ddx' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'af-stop' },
   ],
+  'brue': [
+    { id: 'risk', label: 'Risk Calc', icon: '📊', action: 'overlay', target: 'brue-risk-calc' },
+    { id: 'ddx', label: 'DDx', icon: '🔍', action: 'overlay', target: 'brue-ddx-guide' },
+    { id: 'nat', label: 'NAT Screen', icon: '⚠️', action: 'overlay', target: 'brue-nat-screen-guide' },
+    { id: 'ecg', label: 'ECG Guide', icon: '💓', action: 'overlay', target: 'brue-ecg-guide' },
+    { id: 'workup', label: 'Workup', icon: '🧪', action: 'overlay', target: 'brue-workup-guide' },
+  ],
 };
 
 // Stop button appended automatically to every consult

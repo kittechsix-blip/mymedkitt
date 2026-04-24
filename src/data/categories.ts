@@ -1548,6 +1548,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'pf-start',
       },
       {
+        id: 'brue',
+        title: 'BRUE (Brief Resolved Unexplained Event)',
+        subtitle: 'Recognition → Risk Stratification → Low-Risk → High-Risk → Etiology → Disposition',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 20,
+        entryNodeId: 'brue-start',
+      },
+      {
         id: 'neonatal-resus',
         title: 'Neonatal Resuscitation (NRP)',
         subtitle: 'Initial Eval → PPV → CPR → Epinephrine → UVC → Post-Resuscitation',

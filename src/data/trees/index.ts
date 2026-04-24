@@ -116,6 +116,7 @@ export { PEDS_CONSTIPATION_NODES, PEDS_CONSTIPATION_MODULE_LABELS, PEDS_CONSTIPA
 export { CONSTIPATION_NODES, CONSTIPATION_MODULE_LABELS, CONSTIPATION_CITATIONS, CONSTIPATION_CRITICAL_ACTIONS } from './constipation';
 export { PNES_NODES, PNES_MODULE_LABELS, PNES_CITATIONS, PNES_CRITICAL_ACTIONS } from './pnes';
 export { AMAUROSIS_FUGAX_NODES, AMAUROSIS_FUGAX_MODULE_LABELS, AMAUROSIS_FUGAX_CITATIONS, AMAUROSIS_FUGAX_CRITICAL_ACTIONS } from './amaurosis-fugax';
+export { BRUE_NODES, BRUE_MODULE_LABELS, BRUE_CITATIONS, BRUE_CRITICAL_ACTIONS } from './brue';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

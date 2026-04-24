@@ -274,6 +274,7 @@ const TREE_REGISTRY = {
   'pph':           { prefix: 'PPH',            entryNodeId: 'pph-start',  categoryId: 'ob-gyn' },
   'pnes':          { prefix: 'PNES',           entryNodeId: 'pnes-start', categoryId: 'emergency-medicine' },
   'amaurosis-fugax': { prefix: 'AMAUROSIS_FUGAX', entryNodeId: 'af-start', categoryId: 'ophthalmology' },
+  'brue':            { prefix: 'BRUE',            entryNodeId: 'brue-start', categoryId: 'pediatrics' },
 };
 
 const CROSS_LISTINGS = {
