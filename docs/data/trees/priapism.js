@@ -380,7 +380,7 @@ export const PRIAPISM_NODES = [
                 caption: 'Penile cross-section: Corpora cavernosa (paired), corpus spongiosum (ventral), urethra, and dorsal neurovascular bundle. (Courtesy: Frank M. Corl, MS, Johns Hopkins Medical Institutions)',
             },
             {
-                src: 'images/priapism/aspiration-setup.png',
+                src: 'images/priapism/aspiration-setup.jpg',
                 alt: 'Three-way stopcock connected to butterfly needle and syringes for priapism aspiration setup',
                 caption: 'Aspiration setup: Three-way stopcock, butterfly needle, aspiration syringe, and saline irrigation syringe. (Source: EmDocs.net)',
             },
