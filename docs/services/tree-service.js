@@ -198,6 +198,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/bronchiolitis.js');
             return { nodes: m.BRONCHIOLITIS_NODES, entryNodeId: 'bronch-start', categoryId: 'pediatrics', moduleLabels: m.BRONCHIOLITIS_MODULE_LABELS, citations: m.BRONCHIOLITIS_CITATIONS, criticalActions: m.BRONCHIOLITIS_CRITICAL_ACTIONS };
         },
+        'peds-constipation': async () => {
+            const m = await import('../data/trees/peds-constipation.js');
+            return { nodes: m.PEDS_CONSTIPATION_NODES, entryNodeId: 'peds-const-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_CONSTIPATION_MODULE_LABELS, citations: m.PEDS_CONSTIPATION_CITATIONS, criticalActions: m.PEDS_CONSTIPATION_CRITICAL_ACTIONS };
+        },
         'echo-epss': async () => {
             const m = await import('../data/trees/echo-epss.js');
             return { nodes: m.ECHO_EPSS_NODES, entryNodeId: 'epss-start', categoryId: 'us-rads', moduleLabels: m.ECHO_EPSS_MODULE_LABELS, citations: m.ECHO_EPSS_CITATIONS, criticalActions: m.ECHO_EPSS_CRITICAL_ACTIONS };
@@ -301,6 +305,10 @@ async function loadHardcodedFallback(treeId) {
         'diarrhea': async () => {
             const m = await import('../data/trees/diarrhea.js');
             return { nodes: m.DIARRHEA_NODES, entryNodeId: 'diarrhea-start', categoryId: 'gastroenterology', moduleLabels: m.DIARRHEA_MODULE_LABELS, citations: m.DIARRHEA_CITATIONS, criticalActions: m.DIARRHEA_CRITICAL_ACTIONS };
+        },
+        'constipation': async () => {
+            const m = await import('../data/trees/constipation.js');
+            return { nodes: m.CONSTIPATION_NODES, entryNodeId: 'const-start', categoryId: 'gastroenterology', moduleLabels: m.CONSTIPATION_MODULE_LABELS, citations: m.CONSTIPATION_CITATIONS, criticalActions: m.CONSTIPATION_CRITICAL_ACTIONS };
         },
         'hiv': async () => {
             const m = await import('../data/trees/hiv.js');

@@ -1322,6 +1322,21 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'moe-flags', label: 'MOE Flags', icon: '🚩', action: 'overlay', target: 'ear-moe-flags' },
     { id: 'perf-guide', label: 'TM Perf', icon: '🔊', action: 'overlay', target: 'ear-perf-overview' },
   ],
+  'peds-constipation': [
+    { id: 'peg', label: 'PEG Dosing', icon: '💊', action: 'overlay', target: 'peds-const-peg-guide' },
+    { id: 'enemas', label: 'Enemas', icon: '💧', action: 'overlay', target: 'peds-const-enema-guide' },
+    { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'overlay', target: 'peds-const-red-flags' },
+    { id: 'rome', label: 'Rome IV', icon: '📋', action: 'overlay', target: 'peds-const-rome-criteria' },
+    { id: 'maintenance', label: 'Maintenance', icon: '📅', action: 'overlay', target: 'peds-const-maintenance-guide' },
+  ],
+  'constipation': [
+    { id: 'disimpact', label: 'Disimpaction', icon: '🧤', action: 'overlay', target: 'const-disimpaction-technique' },
+    { id: 'enemas', label: 'Enemas', icon: '💧', action: 'overlay', target: 'const-enema-guide' },
+    { id: 'laxatives', label: 'Laxatives', icon: '💊', action: 'overlay', target: 'const-laxative-ladder' },
+    { id: 'neostigmine', label: 'Neostigmine', icon: '💉', action: 'overlay', target: 'const-neostigmine-guide' },
+    { id: 'ogilvie', label: 'Ogilvie', icon: '🎯', action: 'overlay', target: 'const-ogilvie-criteria' },
+    { id: 'ileus', label: 'Ileus Prev', icon: '🏥', action: 'overlay', target: 'const-ileus-prevention' },
+  ],
 };
 
 // Stop button appended automatically to every consult

@@ -15334,6 +15334,321 @@ const HTNP_DISCHARGE_PATIENT = {
     ],
     shareable: true,
 };
+// -------------------------------------------------------------------
+// Pediatric Constipation Tools
+// -------------------------------------------------------------------
+const PEDS_CONST_ENEMA_GUIDE = {
+    id: 'peds-const-enema-guide',
+    title: 'Pediatric Enema Dosing Guide',
+    subtitle: 'Age-based enema dosing for fecal disimpaction',
+    sections: [
+        {
+            heading: 'Normal Saline Enema (Safest)',
+            body: '**Dose:** 5-10 mL/kg (max 500 mL)\n\nSafest option with minimal risk of electrolyte disturbances. May need to repeat 2-3 times for full effect.',
+        },
+        {
+            heading: 'Mineral Oil Retention Enema',
+            body: '**Dose:** 15-30 mL per year of age (max 240 mL)\n\n| Age | Dose |\n|-----|------|\n| 2-6 years | ~60 mL (2 oz) |\n| 6-12 years | ~120 mL (4 oz) |\n| >12 years | 180-240 mL |\n\n**Technique:** Instill slowly, have child retain for 30-60 minutes. Follow with saline enema 1-3 hours later.',
+        },
+        {
+            heading: 'Milk & Molasses Enema',
+            body: '**Preparation:** Mix 1:1 ratio whole milk and molasses, warm to body temperature.\n\n**Dose:** 5-6 mL/kg (max 135 mL)\n\n**Efficacy:** 88% success rate in ED studies. Comparable to sodium phosphate enemas.\n\n⚠️ **Caution:** Rare reports of hemodynamic compromise. Use with monitoring in dehydrated patients.',
+        },
+        {
+            heading: 'Sodium Phosphate (Fleet\'s) - Use Caution',
+            body: '⚠️ **Avoid in children <2 years** (some recommend <4 years)\n\n**Risks:** Hyperphosphatemia, hypocalcemia, hypokalemia — especially in young children, dehydrated, or renal impairment.\n\n| Age | Dose |\n|-----|------|\n| 2-4 years | 30 mL (1 oz) — if used |\n| 5-11 years | 66 mL (2.25 oz) |\n| ≥12 years | 133 mL (4.5 oz) |\n\n**Only give single dose.** Do not repeat.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Miller MK, et al. Safety and Efficacy of Milk and Molasses Enemas. Pediatr Emerg Care. 2012;28(12):1319-23.' },
+        { num: 2, text: 'Tabbers MM, et al. ESPGHAN/NASPGHAN Guidelines on Constipation. JPGN. 2014;58(2):258-274.' },
+    ],
+};
+const PEDS_CONST_PEG_GUIDE = {
+    id: 'peds-const-peg-guide',
+    title: 'PEG 3350 Dosing Guide',
+    subtitle: 'Polyethylene glycol for disimpaction and maintenance',
+    sections: [
+        {
+            heading: 'Disimpaction Dosing',
+            body: '**Dose:** 1-1.5 g/kg/day (max 100 g/day)\n\n• Divide into 2-4 doses throughout the day\n• Mix in 10 mL water per gram of PEG\n• Continue for **3-6 days** until clear watery stools\n\n**Example (20 kg child):**\n• 20-30 g/day = ~1.5-2 capfuls daily\n• Divide into morning and evening doses',
+        },
+        {
+            heading: 'Rapid Protocol (ED)',
+            body: '**Alternative for faster clearance:**\n\n• 6 mL/kg prepared solution (max 135 mL)\n• May repeat every 12-24 hours × 1-3 doses\n• Works within 24-48 hours',
+        },
+        {
+            heading: 'Maintenance Dosing',
+            body: '**Start AFTER successful disimpaction.**\n\n**Dose:** 0.4-0.8 g/kg/day\n\n• Start at 0.4 g/kg, titrate to effect\n• Goal: 1-2 soft stools daily\n• Continue minimum **2-3 months**\n• Taper slowly (reduce 25% every 2-4 weeks)',
+        },
+        {
+            heading: 'Palatability Tips',
+            body: '• PEG without electrolytes (MiraLAX) tastes better than PEG-ELS\n• Mix in juice, Gatorade, or flavored drink\n• Serve cold\n• Crystal Light or Kool-Aid powder helps mask taste',
+        },
+        {
+            heading: 'Expected Effects',
+            body: '**Disimpaction phase:**\n• Frequent loose/watery stools within 24-48 hours\n• Some fecal incontinence expected — warn family\n• Success rate: 85-95%\n\n**If no stool output after 3 days → add rectal enema.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tabbers MM, et al. ESPGHAN/NASPGHAN Guidelines. JPGN. 2014;58(2):258-274.' },
+        { num: 2, text: 'Youssef NN, et al. PEG 3350 for Childhood Fecal Impaction. J Pediatr. 2002;141(3):410-4.' },
+    ],
+};
+const PEDS_CONST_RED_FLAGS = {
+    id: 'peds-const-red-flags',
+    title: 'Pediatric Constipation Red Flags',
+    subtitle: 'Warning signs for organic disease',
+    sections: [
+        {
+            heading: 'Hirschsprung Disease',
+            body: '🚩 Delayed meconium passage (>48h after birth)\n🚩 Onset in first weeks of life\n🚩 Failure to thrive\n🚩 Explosive stool after rectal exam\n🚩 **Empty rectum** on exam despite constipation\n🚩 Severe distention\n\n**If suspected:** Refer for suction rectal biopsy. **Do NOT give enemas** — risk of enterocolitis.',
+        },
+        {
+            heading: 'Bowel Obstruction',
+            body: '🚩 Bilious vomiting\n🚩 Severe abdominal distention\n🚩 Absent bowel sounds\n🚩 Complete obstipation (no flatus)\n\n**Action:** Immediate imaging (XR, CT), surgical consult.',
+        },
+        {
+            heading: 'Spinal Cord Pathology',
+            body: '🚩 Sacral dimple or tuft of hair\n🚩 Asymmetric gluteal cleft\n🚩 Abnormal lower extremity reflexes\n🚩 Abnormal gait\n🚩 Urinary incontinence\n\n**Action:** MRI lumbosacral spine, neurology referral.',
+        },
+        {
+            heading: 'Other Organic Causes',
+            body: '🚩 Fever (enterocolitis in Hirschsprung)\n🚩 Bloody stool (beyond fissure)\n🚩 Significant weight loss\n🚩 Thyroid abnormalities (hypothyroidism)\n🚩 Abdominal mass (beyond fecal)',
+        },
+        {
+            heading: 'Functional Constipation Reassurance',
+            body: '**95% of pediatric constipation is FUNCTIONAL.**\n\nFeatures favoring functional:\n• Onset at weaning, toilet training, or school entry\n• Withholding behaviors (tiptoeing, hiding)\n• Large-diameter stools\n• Fecal soiling (encopresis)\n• Otherwise healthy, thriving child',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tabbers MM, et al. ESPGHAN/NASPGHAN Guidelines. JPGN. 2014;58(2):258-274.' },
+    ],
+};
+const PEDS_CONST_ROME_CRITERIA = {
+    id: 'peds-const-rome-criteria',
+    title: 'Rome IV Criteria',
+    subtitle: 'Diagnostic criteria for functional constipation in children',
+    sections: [
+        {
+            heading: 'Infants & Toddlers (<4 years)',
+            body: '**Must include ≥1 month of ≥2 of the following:**\n\n• ≤2 defecations per week\n• History of excessive stool retention\n• History of painful or hard bowel movements\n• History of large-diameter stools\n• Presence of a large fecal mass in the rectum\n\n**In toilet-trained children, also:**\n• ≥1 episode of fecal incontinence per week\n• History of large-diameter stools that may obstruct toilet',
+        },
+        {
+            heading: 'Children ≥4 years',
+            body: '**Must include ≥2 criteria for ≥1 month:**\n\n• ≤2 defecations in the toilet per week\n• ≥1 episode of fecal incontinence per week\n• History of retentive posturing or excessive volitional stool retention\n• History of painful or hard bowel movements\n• Presence of a large fecal mass in the rectum\n• History of large-diameter stools that may obstruct toilet\n\n**With insufficient criteria for IBS.**',
+        },
+        {
+            heading: 'Normal Stool Frequency by Age',
+            body: '| Age | Stools/Day (mean) | Range |\n|-----|-------------------|-------|\n| 0-3 months (BF) | 2.9 | 5-40/week |\n| 0-3 months (FF) | 2.0 | 5-28/week |\n| 6-12 months | 1.8 | 5-28/week |\n| 1-3 years | 1.4 | 4-21/week |\n| >3 years | 1.0 | 3-14/week |',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hyams JS, et al. Functional Disorders: Children and Adolescents. Gastroenterology. 2016;150(6):1456-68.' },
+    ],
+};
+const PEDS_CONST_MAINTENANCE_GUIDE = {
+    id: 'peds-const-maintenance-guide',
+    title: 'Maintenance Therapy Guide',
+    subtitle: 'Long-term management after disimpaction',
+    sections: [
+        {
+            heading: 'Medication: PEG 3350',
+            body: '**First-Line Maintenance**\n\n**Dose:** 0.4-0.8 g/kg/day\n• Start low, titrate to 1-2 soft stools/day\n• Max: 17 g/day (one capful)\n\n**Duration:**\n• Minimum 2-3 months\n• Often 6-12 months needed\n• Taper slowly (25% reduction every 2-4 weeks)\n\n**Common mistake:** Stopping too soon → recurrence.',
+        },
+        {
+            heading: 'Behavioral Interventions',
+            body: '**Toilet Training:**\n• Scheduled sitting 5-10 min after meals (gastrocolic reflex)\n• Proper positioning: feet flat on stool, knees above hips\n• Positive reinforcement — sticker charts for sitting (not for stooling)\n• Never punish accidents\n\n**Withholding:**\n• Explain holding makes stool bigger/harder\n• Reassure stool will be soft with laxatives\n• Never force toilet sitting',
+        },
+        {
+            heading: 'Diet Recommendations',
+            body: '**Fiber:** Age + 5 grams/day\n• Example: 8-year-old = 13 g/day\n• Fruits, vegetables, whole grains\n\n**Fluids:** Adequate water throughout day\n\n**Limit:**\n• Excess cow\'s milk (>24 oz/day associated with constipation)\n• Constipating foods: bananas, rice, applesauce, toast (BRAT)',
+        },
+        {
+            heading: 'Follow-up Timeline',
+            body: '• **2-4 weeks:** PCP visit to assess response, adjust dose\n• **2-3 months:** Reassess if ready to taper\n• **6+ months:** GI referral if refractory despite compliance',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tabbers MM, et al. ESPGHAN/NASPGHAN Guidelines. JPGN. 2014;58(2):258-274.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Adult Constipation Tools
+// -------------------------------------------------------------------
+const CONST_DISIMPACTION_TECHNIQUE = {
+    id: 'const-disimpaction-technique',
+    title: 'Manual Disimpaction Technique',
+    subtitle: 'Step-by-step guide for fecal disimpaction',
+    sections: [
+        {
+            heading: 'Preparation',
+            body: '**Before manual disimpaction:**\n\n1. **Soften stool first:**\n   • Mineral oil enema 120-150 mL\n   • Retain 30-60 minutes\n\n2. **Pre-medicate:**\n   • Acetaminophen 1 g PO/PR or ketorolac 15-30 mg IV\n   • ± Low-dose benzodiazepine for anxiety\n\n3. **Position:** Left lateral decubitus, knees to chest\n\n4. **Supplies:** Double gloves, water-soluble lubricant, chux pads, bedpan',
+        },
+        {
+            heading: 'Technique',
+            body: '1. Lubricate gloved index finger generously\n2. Insert finger gently into rectum\n3. **Break up stool** using scissoring motion\n4. **Hook and extract** fragments with flexed finger\n5. Move finger in circular motion to loosen stool\n6. Remove fragments in small pieces\n7. **Stop if patient has significant pain or vagal symptoms**\n8. Repeat until rectum is empty\n\n**Duration:** 15-30 minutes typically required',
+        },
+        {
+            heading: 'Vagal Precautions',
+            body: '⚠️ **Monitor for:**\n• Bradycardia\n• Hypotension\n• Diaphoresis\n• Nausea/dizziness\n\n**If symptomatic bradycardia:**\n• Stop immediately\n• Atropine 0.5 mg IV available\n\n**Avoid in:** Patients with cardiac conduction abnormalities',
+        },
+        {
+            heading: 'Post-Procedure',
+            body: '**After disimpaction:**\n\n1. **Cleansing enema:**\n   • Tap water or saline 500-1000 mL\n   • May need to repeat 2-3 times\n\n2. **Check:** Post-void residual if urinary retention suspected\n\n3. **Start maintenance:** PEG 17 g daily to prevent recurrence',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Obokhare I. Fecal Impaction: A Cause for Concern? Clin Colon Rectal Surg. 2012;25(1):53-58.' },
+    ],
+};
+const CONST_ENEMA_GUIDE = {
+    id: 'const-enema-guide',
+    title: 'Adult Enema Guide',
+    subtitle: 'Types, dosing, and precautions',
+    sections: [
+        {
+            heading: 'Mineral Oil Retention Enema',
+            body: '**Dose:** 120-150 mL\n\n**Use:** Softening before manual disimpaction\n\n**Technique:**\n• Instill slowly\n• Retain 30-60 minutes (up to several hours if possible)\n• Follow with cleansing enema\n\n**Safe for:** Most patients, including elderly and renal impairment',
+        },
+        {
+            heading: 'Tap Water / Normal Saline Enema',
+            body: '**Dose:** 500-1000 mL\n\n**Use:** Cleansing enema after disimpaction\n\n**Technique:**\n• Warm to body temperature\n• Limit reservoir height to 3 feet above anus\n• Instill slowly, guided by patient comfort\n• Retain 5-15 minutes if possible\n\n**Safe for:** All patients',
+        },
+        {
+            heading: 'Sodium Phosphate (Fleet\'s)',
+            body: '**Dose:** 118 mL single dose\n\n⚠️ **HIGH-RISK: Use with extreme caution**\n\n**Avoid in:**\n• Age >65 years\n• Renal impairment (any GFR reduction)\n• Heart failure\n• Dehydration\n• Electrolyte abnormalities\n• On ACEi, ARB, diuretics, NSAIDs\n\n**Risks:** Fatal hyperphosphatemia, hypocalcemia — FDA black box warning\n\n**If used:** Single dose ONLY. Never repeat.',
+        },
+        {
+            heading: 'Soapsuds Enema',
+            body: '⚠️ **Generally NOT recommended**\n\n• Risk of rectal mucosa damage\n• Chemical colitis reported\n• If used: mild castile soap only, highly dilute\n\n**Prefer:** Tap water or saline instead',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bharucha AE, Lacy BE. Constipation. Gastroenterology. 2020;158(5):1232-1249.' },
+    ],
+};
+const CONST_NEOSTIGMINE_GUIDE = {
+    id: 'const-neostigmine-guide',
+    title: 'Neostigmine Protocol',
+    subtitle: 'For acute colonic pseudo-obstruction (Ogilvie syndrome)',
+    sections: [
+        {
+            heading: 'Indications',
+            body: '• ACPO refractory to 24-72h conservative management\n• Cecum ≥12 cm diameter\n• Duration >4-6 days\n• No contraindications to neostigmine',
+        },
+        {
+            heading: 'Contraindications',
+            body: '❌ Mechanical bowel obstruction (must rule out first!)\n❌ Recent MI, severe cardiac disease, bradycardia\n❌ Active bronchospasm (asthma/COPD exacerbation)\n❌ Pregnancy\n❌ Renal failure (relative: Cr >3 mg/dL)',
+        },
+        {
+            heading: 'Pre-Treatment Checklist',
+            body: '✅ Continuous cardiac monitoring\n✅ IV access confirmed\n✅ **Atropine 0.5 mg at bedside**\n✅ Foley catheter in place\n✅ Rectal tube in place\n✅ Patient supine or left lateral',
+        },
+        {
+            heading: 'Dosing Protocol',
+            body: '**Dose:** 2 mg IV over **5 FULL MINUTES**\n\n⚠️ Do NOT give as rapid IV push — REAL five minutes on the clock\n\n**Cautious approach:** 1 mg, wait, then another 1 mg\n\n**Monitoring during administration:**\n• Continuous ECG — watch for bradycardia\n• BP every 2-3 minutes\n• Stop immediately if symptomatic bradycardia',
+        },
+        {
+            heading: 'Atropine Protocol',
+            body: '**Give Atropine 0.5 mg IV if:**\n\n• HR <60 with symptoms (dizziness, hypotension)\n• Asymptomatic HR <40',
+        },
+        {
+            heading: 'Expected Response',
+            body: '• Passage of flatus/stool within **10-30 minutes**\n• 91% initial response rate (NEJM landmark trial)\n• X-ray improvement within 4-6 hours\n\n**If no response in 3 hours:**\n• May repeat 2 mg IV (max 3 doses total)\n• Half-life ~50 min',
+        },
+        {
+            heading: '"Killer Bees" - Side Effects',
+            body: '🐝 **B**radycardia (most common, ~10%)\n🐝 **B**ronchospasm\n🐝 **B**ronchorrhea\n\nAlso: abdominal cramping, nausea, salivation, vomiting',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ponec RJ, et al. Neostigmine for ACPO. N Engl J Med. 1999;341(3):137-141.' },
+        { num: 2, text: 'ASCRS/ASGE Guidelines for ACPO. Dis Colon Rectum. 2020.' },
+    ],
+};
+const CONST_OGILVIE_CRITERIA = {
+    id: 'const-ogilvie-criteria',
+    title: 'Ogilvie Syndrome Criteria',
+    subtitle: 'ACPO diagnosis and perforation risk',
+    sections: [
+        {
+            heading: 'Diagnostic Criteria',
+            body: '**Acute Colonic Pseudo-Obstruction (ACPO):**\n\n• Massive colonic dilation (cecum >9 cm)\n• WITHOUT mechanical obstruction on CT\n• Often involving cecum to splenic flexure\n• Decompressed distal colon/rectum\n• No transition point on imaging',
+        },
+        {
+            heading: 'Perforation Risk Factors',
+            body: '**HIGH RISK — urgent intervention needed:**\n\n🚨 **Cecal diameter >12 cm**\n🚨 **Duration >6 days**\n\n**Cecal perforation mortality: 40-50%**\n\n| Cecum Diameter | Risk Level |\n|----------------|------------|\n| <9 cm | Low |\n| 9-12 cm | Moderate |\n| >12 cm | HIGH — act now |',
+        },
+        {
+            heading: 'Common Precipitants',
+            body: '• Recent surgery (orthopedic, cardiac, OB, abdominal)\n• Critical illness, trauma, sepsis\n• Electrolyte abnormalities (K+, Mg2+)\n• Medications (opioids, anticholinergics, CCBs)\n• Neurologic disease (stroke, Parkinson\'s, SCI)\n• Postpartum',
+        },
+        {
+            heading: 'Distinguish from Mechanical Obstruction',
+            body: '| Feature | ACPO | Mechanical Obstruction |\n|---------|------|------------------------|\n| CT transition point | No | Yes |\n| Distention | Cecum to splenic flexure | Proximal to obstruction |\n| Decompressed bowel | Distal colon/rectum | Distal to obstruction |\n| Bowel sounds | May be present | High-pitched or absent |\n| Flatus/stool | May still pass some | Complete obstipation |',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Saunders MD. ACPO. Best Pract Res Clin Gastroenterol. 2007;21(4):671-687.' },
+    ],
+};
+const CONST_LAXATIVE_LADDER = {
+    id: 'const-laxative-ladder',
+    title: 'Laxative Ladder',
+    subtitle: 'Evidence-based laxative selection (AGA/ACG 2023)',
+    sections: [
+        {
+            heading: 'First-Line: OTC Options',
+            body: '**PEG 3350 (MiraLAX)** ⭐ Strongly recommended\n• 17 g daily in 8 oz liquid\n• Safe for long-term use\n\n**Fiber (Psyllium)** — Conditionally recommended\n• 1-2 tbsp daily with adequate water\n• May worsen bloating initially\n\n**Magnesium oxide** — Conditionally recommended\n• 400-800 mg daily\n• Avoid in renal impairment\n\n**Senna** — Conditionally recommended\n• 2-4 tablets at bedtime\n• Safe for short to medium-term use',
+        },
+        {
+            heading: 'Second-Line: If OTC Fails',
+            body: '**Lactulose** — 15-45 mL daily\n• Alternative osmotic laxative\n• More bloating than PEG\n\n**Bisacodyl** — 5-10 mg PO or 10 mg PR\n• Stimulant, works in 6-12 hours (PO) or 15-60 min (PR)\n• Good for rapid effect',
+        },
+        {
+            heading: 'Third-Line: Prescription',
+            body: '**Linaclotide (Linzess)** — 145-290 mcg daily\n• Secretagogue, also helps abdominal pain\n• Take on empty stomach\n\n**Plecanatide (Trulance)** — 3 mg daily\n• Similar to linaclotide\n\n**Prucalopride (Motegrity)** — 2 mg daily\n• 5-HT4 agonist, prokinetic\n• Once daily, simple dosing\n\n**Lubiprostone (Amitiza)** — 24 mcg BID\n• Chloride channel activator\n• Take with food',
+        },
+        {
+            heading: 'Avoid',
+            body: '❌ **Docusate (stool softener) alone** — No better than placebo\n\n❌ **Mineral oil orally** — Aspiration risk, lipoid pneumonia\n\n❌ **Repeated phosphate enemas** — Fatal electrolyte disturbances',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AGA-ACG Clinical Practice Guideline: CIC. Gastroenterology. 2023.' },
+    ],
+};
+const CONST_ILEUS_PREVENTION = {
+    id: 'const-ileus-prevention',
+    title: 'Postoperative Ileus Prevention',
+    subtitle: 'Evidence-based strategies to reduce POI',
+    sections: [
+        {
+            heading: 'Multimodal Analgesia',
+            body: '**Minimize opioids** — #1 modifiable risk factor\n\n• Regional anesthesia (epidural, TAP block)\n• NSAIDs/COX-2 inhibitors (ketorolac, celecoxib)\n• Acetaminophen scheduled\n• Gabapentinoids (gabapentin, pregabalin)\n• Lidocaine IV infusion',
+        },
+        {
+            heading: 'Enhanced Recovery (ERAS) Elements',
+            body: '• **Early ambulation** — OOB POD0, ambulate TID\n• **Early enteral feeding** — clear liquids POD0\n• **Minimize IV fluids** — goal-directed therapy\n• **No routine NG tubes** — remove early if placed\n• **Avoid excessive crystalloid**',
+        },
+        {
+            heading: 'Gum Chewing',
+            body: '✅ **Evidence-based!**\n\nSugar-free gum TID starting POD1\n\n• Stimulates cephalic-vagal reflex\n• Reduces time to flatus by ~12-24 hours\n• Reduces LOS\n• Cheap, no side effects',
+        },
+        {
+            heading: 'Alvimopan (Entereg)',
+            body: '**Peripheral mu-opioid antagonist**\n\n• 12 mg PO 30 min to 5 hours pre-op\n• Then 12 mg BID (max 15 doses or until discharge)\n• Reduces time to GI recovery by ~12-24 hours\n\n**Limitations:**\n• Only via hospital EASE program\n• Not for chronic opioid users (>7 days)\n• Only for bowel resection with anastomosis',
+        },
+        {
+            heading: 'Correct Electrolytes',
+            body: '• **Potassium** — Keep K+ >4.0 mEq/L\n• **Magnesium** — Keep Mg2+ >2.0 mg/dL\n\nHypokalemia and hypomagnesemia impair GI motility.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Behm B, Stollman N. Postoperative Ileus. Clin Gastroenterol Hepatol. 2003;1(2):71-80.' },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -15801,6 +16116,19 @@ export const INFO_PAGES = {
     'ec-iud-guide': EC_IUD_GUIDE,
     'ec-drug-interactions': EC_DRUG_INTERACTIONS,
     'ec-catholic-protocol': EC_CATHOLIC_PROTOCOL,
+    // Pediatric Constipation
+    'peds-const-enema-guide': PEDS_CONST_ENEMA_GUIDE,
+    'peds-const-peg-guide': PEDS_CONST_PEG_GUIDE,
+    'peds-const-red-flags': PEDS_CONST_RED_FLAGS,
+    'peds-const-rome-criteria': PEDS_CONST_ROME_CRITERIA,
+    'peds-const-maintenance-guide': PEDS_CONST_MAINTENANCE_GUIDE,
+    // Adult Constipation
+    'const-disimpaction-technique': CONST_DISIMPACTION_TECHNIQUE,
+    'const-enema-guide': CONST_ENEMA_GUIDE,
+    'const-neostigmine-guide': CONST_NEOSTIGMINE_GUIDE,
+    'const-ogilvie-criteria': CONST_OGILVIE_CRITERIA,
+    'const-laxative-ladder': CONST_LAXATIVE_LADDER,
+    'const-ileus-prevention': CONST_ILEUS_PREVENTION,
     // Hypertension in Pregnancy
     'htnp-steps-summary': HTNP_STEPS_SUMMARY,
     'htnp-stop': HTNP_STOP,
