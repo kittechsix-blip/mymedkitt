@@ -41,8 +41,8 @@ export const PEDS_FEVER_NODES = [
         id: 'pf-off-pathway',
         type: 'result',
         module: 1,
-        title: 'Off-Pathway \u2014 Alternate Management',
-        body: 'Patient meets one or more exclusion criteria for the FWS pathway.\n\nEXCLUSION CRITERIA\n\u2022 Preterm (<37 weeks gestational age)\n\u2022 Immunocompromised\n\u2022 Indwelling devices (VP shunt, central line)\n\u2022 Known immune deficiency\n\u2022 Recent hospitalization (within 7 days)\n\u2022 Current antibiotics or recent (<48h)\n\nOFF-PATHWAY TRIGGERS\n\u2022 Focal bacterial infection identified (cellulitis, abscess, pneumonia, osteomyelitis)\n\u2022 Hypothermia (<36°C / 96.8°F)\n\u2022 Bronchiolitis with clear viral syndrome\n\u2022 Clinically ill-appearing (not toxic, but not well)',
+        title: 'Off-Pathway — Alternate Management',
+        body: 'Patient meets one or more exclusion criteria for the FWS pathway.\n\nEXCLUSION CRITERIA\n• Preterm (<37 weeks gestational age)\n• Immunocompromised\n• Indwelling devices (VP shunt, central line)\n• Known immune deficiency\n• Recent hospitalization (within 7 days)\n• Current antibiotics or recent (<48h)\n\nOFF-PATHWAY TRIGGERS\n• Focal bacterial infection identified (cellulitis, abscess, pneumonia, osteomyelitis)\n• Hypothermia (<36°C / 96.8°F)\n• Clinically ill-appearing (not toxic, but not well)',
         recommendation: 'Manage per condition-specific guidelines. These patients require individualized assessment and may need broader workup than the FWS pathway provides.',
         confidence: 'recommended',
         citation: [1, 9],
@@ -85,21 +85,29 @@ export const PEDS_FEVER_NODES = [
         id: 'pf-neo-screen',
         type: 'question',
         module: 1,
-        title: '0\u201321 Days: Pathway Screening',
-        body: 'Does the infant have any of the following off-pathway triggers?\n\n\u2022 Focal bacterial infection (cellulitis, abscess, pneumonia, osteomyelitis)\n\u2022 Hypothermia (<36°C / 96.8°F)\n\u2022 Bronchiolitis with clear viral syndrome\n\u2022 Clinically ill-appearing',
+        title: '0–21 Days: Pathway Screening',
+        body: 'Does the infant have any of the following?\n\n• Focal bacterial infection (cellulitis, abscess, pneumonia, osteomyelitis)\n• Hypothermia (<36°C / 96.8°F)\n• Clinically ill-appearing\n• Bronchiolitis or clear viral syndrome (RSV, influenza, etc.)',
         citation: [1],
         options: [
             {
-                label: 'Yes \u2014 Off-pathway trigger present',
+                label: 'Focal infection, hypothermia, or ill-appearing',
+                description: 'Off-pathway — individualized management',
                 next: 'pf-off-pathway',
             },
             {
-                label: 'No \u2014 Well-appearing, no focal source',
+                label: 'Bronchiolitis / RSV / Clear viral syndrome',
+                description: 'Still need workup — IBI risk 1-2% at this age',
+                next: 'pf-neo-viral',
+                urgency: 'urgent',
+            },
+            {
+                label: 'Well-appearing, no focal source, no viral syndrome',
+                description: 'Standard FWS pathway',
                 next: 'pf-neo-labs',
                 urgency: 'urgent',
             },
         ],
-        summary: 'Screen for focal infection, hypothermia, bronchiolitis, or ill appearance before applying FWS pathway',
+        summary: 'Screen for focal infection, hypothermia, ill appearance, or viral syndrome before applying FWS pathway',
     },
     {
         id: 'pf-neo-labs',
@@ -205,9 +213,9 @@ export const PEDS_FEVER_NODES = [
         id: 'pf-neo-admit',
         type: 'result',
         module: 5,
-        title: 'Admit \u2014 Await Cultures',
-        body: '**ALL 0\u201321 day neonates are admitted** regardless of clinical appearance or lab results.\n\nINPATIENT MANAGEMENT\n\u2022 Continue empiric antibiotics pending culture results\n\u2022 Blood cultures: finalized at 24\u201336 hours\n\u2022 CSF cultures: finalized at 48\u201372 hours\n\nIF PATHOGEN IDENTIFIED\n\u2022 Narrow antibiotics to targeted therapy\n\u2022 Duration based on organism and site\n\nIF NO PATHOGEN AT 24\u201336 HOURS + WELL-APPEARING\n\u2022 Discontinue antimicrobials\n\u2022 Observe for clinical stability\n\u2022 Manage supportively for duration of illness',
-        recommendation: 'Admit to inpatient. Continue age-appropriate empiric antibiotics. If cultures negative at 24\u201336h and infant is well-appearing, discontinue antibiotics.',
+        title: 'Admit — Await Cultures',
+        body: '**ALL 0–21 day neonates are admitted** regardless of clinical appearance or lab results.\n\nINPATIENT MANAGEMENT\n• Continue empiric antibiotics pending culture results\n• Blood cultures: finalized at 24–36 hours\n• CSF cultures: finalized at 48–72 hours\n\nIF PATHOGEN IDENTIFIED\n• Narrow antibiotics to targeted therapy\n• Duration based on organism and site\n\nIF NO PATHOGEN AT 24–36 HOURS + WELL-APPEARING\n• Discontinue antimicrobials\n• Observe for clinical stability\n• Manage supportively for duration of illness',
+        recommendation: 'Admit to inpatient. Continue age-appropriate empiric antibiotics. If cultures negative at 24–36h and infant is well-appearing, discontinue antibiotics.',
         confidence: 'definitive',
         citation: [1, 5, 7],
         calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
@@ -232,26 +240,72 @@ export const PEDS_FEVER_NODES = [
         }
     },
     // =====================================================================
+    // 0–21 DAY VIRAL SYNDROME PATHWAY (2 nodes)
+    // Even with bronchiolitis/RSV, neonates have 1-2% IBI risk
+    // =====================================================================
+    {
+        id: 'pf-neo-viral',
+        type: 'info',
+        module: 2,
+        title: 'Febrile Neonate with Viral Syndrome',
+        body: '**CRITICAL: Age <21 days with bronchiolitis/RSV still requires full sepsis workup.**\n\n⚠️ IBI RISK IN RSV-POSITIVE NEONATES\n• Bacteremia: 1.1%\n• Meningitis: 0.8%\n• UTI: 5.2%\n\nThis is NOT negligible risk. The viral syndrome does NOT exclude serious bacterial infection in this age group.\n\n**FULL SEPSIS WORKUP REQUIRED**\n• CBC with differential\n• Blood culture\n• CMP\n• Procalcitonin, CRP (optional but helpful)\n• UA + urine culture (catheterized)\n• **Lumbar puncture** — still required at this age\n• Respiratory viral panel (to confirm RSV/viral etiology)\n\nSee [Viral Syndrome Workup Guide](#/info/pf-viral-workup) for details.',
+        citation: [1, 11, 12],
+        next: 'pf-neo-viral-result',
+        safetyLevel: 'critical',
+        summary: 'Febrile neonate <21d with RSV/bronchiolitis: IBI risk 1-2%, still need full sepsis workup including LP',
+    },
+    {
+        id: 'pf-neo-viral-result',
+        type: 'result',
+        module: 5,
+        title: 'Neonatal Viral Syndrome — ADMIT',
+        body: '**ALL 0–21 day neonates with fever + viral syndrome are ADMITTED.**\n\nEMPIRIC ANTIBIOTICS\n• **0–7 days:** [Ampicillin](#/drug/ampicillin) + [Gentamicin](#/drug/gentamicin)\n• **8–21 days:** [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) (or [Cefepime](#/drug/cefepime) if [CI](#/info/pf-ceftriaxone-ci)) + [Ampicillin](#/drug/ampicillin)\n\nVIRAL SYNDROME MANAGEMENT\n• Supportive care: suctioning, hydration, oxygen PRN\n• Bronchiolitis: no role for bronchodilators, steroids, or antibiotics (for the viral illness itself)\n• Monitor for apnea — highest risk in infants <4 weeks\n\nDISCONTINUE ANTIBIOTICS IF:\n• Cultures negative at 24–36h\n• Well-appearing\n• Inflammatory markers normalizing\n• Clear viral etiology confirmed',
+        recommendation: 'ADMIT. Full sepsis workup + empiric antibiotics even with confirmed viral syndrome. Discontinue antibiotics if cultures negative at 24–36h and infant well-appearing.',
+        confidence: 'definitive',
+        citation: [1, 11, 12],
+        calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+        treatment: {
+            firstLine: {
+                drug: 'Ceftriaxone + Ampicillin',
+                dose: 'Ceftriaxone 50 mg/kg (max 2g); Ampicillin 50 mg/kg',
+                route: 'IV',
+                frequency: 'Ceftriaxone q24h; Ampicillin q8h',
+                duration: 'Until cultures negative at 24-36h',
+                notes: 'For age 8-21 days. Age 0-7 days: Ampicillin + Gentamicin instead.',
+            },
+            monitoring: 'Monitor for apnea in neonates with bronchiolitis. Blood cultures at 24-36h. CSF cultures at 48-72h.',
+        },
+        safetyLevel: 'critical',
+    },
+    // =====================================================================
     // 22–28 DAY PATHWAY (9 nodes)
     // =====================================================================
     {
         id: 'pf-22-screen',
         type: 'question',
         module: 1,
-        title: '22\u201328 Days: Pathway Screening',
-        body: 'Does the infant have any of the following off-pathway triggers?\n\n\u2022 Focal bacterial infection identified\n\u2022 Hypothermia (<36°C / 96.8°F)\n\u2022 Bronchiolitis with clear viral syndrome\n\u2022 Clinically ill-appearing',
-        citation: [1],
+        title: '22–28 Days: Pathway Screening',
+        body: 'Does the infant have any of the following?\n\n• Focal bacterial infection identified\n• Hypothermia (<36°C / 96.8°F)\n• Clinically ill-appearing\n• Bronchiolitis or clear viral syndrome (RSV, influenza, etc.)',
+        citation: [1, 11],
         options: [
             {
-                label: 'Yes \u2014 Off-pathway trigger present',
+                label: 'Focal infection, hypothermia, or ill-appearing',
+                description: 'Off-pathway — individualized management',
                 next: 'pf-off-pathway',
             },
             {
-                label: 'No \u2014 Well-appearing, no focal source',
+                label: 'Bronchiolitis / RSV / Clear viral syndrome',
+                description: 'Modified workup — LP may be deferred',
+                next: 'pf-22-viral',
+            },
+            {
+                label: 'Well-appearing, no focal source, no viral syndrome',
+                description: 'Standard FWS pathway',
                 next: 'pf-22-labs',
                 urgency: 'urgent',
             },
         ],
+        summary: 'Screen for focal infection, hypothermia, ill appearance, or viral syndrome; viral syndrome has modified pathway',
     },
     {
         id: 'pf-22-labs',
@@ -417,7 +471,7 @@ export const PEDS_FEVER_NODES = [
         type: 'result',
         module: 5,
         title: 'Disposition',
-        body: '**IF DISCHARGED HOME**\n\u2022 Review [Discharge Criteria](#/info/pf-discharge) \u2014 all must be met\n\u2022 Consider [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) 50 mg/kg IM/IV x1 if inflammatory markers abnormal\n\u2022 Mandatory PCP or ED follow-up within 24 hours\n\u2022 Provide [Return Precautions](#/info/pf-discharge)\n\u2022 Culture callback: blood culture results at 24\u201336h\n\n**IF ADMITTED**\n\u2022 Continue observation\n\u2022 If abnormal inflammatory markers: may give [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) 50 mg/kg IV q24h\n\u2022 If normal inflammatory markers: prefer off antibiotics, discuss close observation\n\u2022 Culture results at 24\u201336h determine next steps\n\n**IF LP NOT PERFORMED**\n\u2022 Abnormal inflammatory markers: recommend admission, prefer off antibiotics but may give Ceftriaxone\n\u2022 Normal inflammatory markers: home observation reasonable with 24h follow-up',
+        body: '**IF DISCHARGED HOME**\n• Review [Discharge Criteria](#/info/pf-discharge) — all must be met\n• Consider [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) 50 mg/kg IM/IV x1 if inflammatory markers abnormal\n• Mandatory PCP or ED follow-up within 24 hours\n• Provide [Return Precautions](#/info/pf-discharge)\n• Culture callback: blood culture results at 24–36h\n\n**IF ADMITTED**\n• Continue observation\n• If abnormal inflammatory markers: may give [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) 50 mg/kg IV q24h\n• If normal inflammatory markers: prefer off antibiotics, discuss close observation\n• Culture results at 24–36h determine next steps\n\n**IF LP NOT PERFORMED**\n• Abnormal inflammatory markers: recommend admission, prefer off antibiotics but may give Ceftriaxone\n• Normal inflammatory markers: home observation reasonable with 24h follow-up',
         recommendation: 'Disposition based on inflammatory marker status and shared decision-making. Ensure 24-hour follow-up regardless of disposition. Culture callback system in place.',
         confidence: 'recommended',
         citation: [1, 4, 7, 9],
@@ -435,26 +489,113 @@ export const PEDS_FEVER_NODES = [
         }
     },
     // =====================================================================
+    // 22–28 DAY VIRAL SYNDROME PATHWAY (4 nodes)
+    // Lower IBI risk with confirmed viral syndrome + normal inflammatory markers
+    // LP often can be deferred, but UTI risk remains
+    // =====================================================================
+    {
+        id: 'pf-22-viral',
+        type: 'info',
+        module: 2,
+        title: '22–28 Day Febrile Infant with Viral Syndrome',
+        body: '**Modified workup for well-appearing 22–28 day infant with confirmed viral syndrome (bronchiolitis, RSV, influenza).**\n\nKEY EVIDENCE\n• RSV-positive infants 22–28 days: bacteremia ~0.7%, meningitis <0.5%\n• When inflammatory markers ALL normal, meningitis risk approaches 0%\n• UTI risk remains 5–7% even with viral syndrome\n\n**LABS TO ORDER**\n• CBC with differential\n• Blood culture\n• **Procalcitonin** (critical for risk stratification)\n• CRP (optional)\n• **UA + urine culture (catheterized)** — UTI risk unchanged\n• Respiratory viral panel (if not already confirmed)\n\n**LP DECISION** depends on inflammatory markers — see next step.',
+        citation: [1, 4, 11, 12],
+        next: 'pf-22-viral-im',
+        summary: '22-28d with viral syndrome: lower IBI risk but UTI risk unchanged; need labs + UA, LP decision based on inflammatory markers',
+    },
+    {
+        id: 'pf-22-viral-im',
+        type: 'question',
+        module: 3,
+        title: 'Viral Syndrome: Inflammatory Markers',
+        body: 'Review inflammatory markers. **All must be normal to defer LP.**\n\n**LOW-RISK CRITERIA (ALL must be met):**\n• Procalcitonin <0.5 ng/mL\n• ANC <4,000 cells/mm³\n• Temperature ≤38.5°C (101.3°F)\n• CRP <2.0 mg/dL (if obtained)\n\n**If ANY marker abnormal → higher risk → LP recommended**\n\nSee [Step-by-Step Criteria](#/info/pf-step-by-step) for details.',
+        citation: [4, 9, 11],
+        options: [
+            {
+                label: 'ALL Markers Normal (Low Risk)',
+                description: 'LP can be deferred — proceed to UTI screen',
+                next: 'pf-22-viral-ua',
+            },
+            {
+                label: 'ANY Marker Abnormal',
+                description: 'Higher risk — LP recommended',
+                next: 'pf-22-lp',
+                urgency: 'urgent',
+            },
+        ],
+        summary: 'Low risk if ALL normal: PCT <0.5, ANC <4000, T ≤38.5, CRP <2.0; any abnormal = LP recommended',
+    },
+    {
+        id: 'pf-22-viral-ua',
+        type: 'question',
+        module: 3,
+        title: 'Viral Syndrome: UTI Screening',
+        body: '**UTI risk remains 5–7% even with confirmed viral syndrome.**\n\nReview the [urinalysis results](#/info/pf-ua-interpret).\n\n**Positive UA:** Leukocyte esterase, nitrites, >5 WBC/hpf, or bacteria on Gram stain.\n\nIf UA positive, ensure catheterized urine culture was sent.',
+        citation: [1, 8, 11],
+        options: [
+            {
+                label: 'UA Positive',
+                description: 'UTI confirmed — start IV antibiotics',
+                next: 'pf-22-uti',
+            },
+            {
+                label: 'UA Negative',
+                description: 'No UTI — proceed to disposition',
+                next: 'pf-22-viral-dispo',
+            },
+        ],
+        summary: 'UTI risk 5-7% even with viral syndrome; always screen with catheterized UA',
+    },
+    {
+        id: 'pf-22-viral-dispo',
+        type: 'result',
+        module: 5,
+        title: 'Viral Syndrome — Low Risk Disposition',
+        body: '**22–28 day infant with confirmed viral syndrome + ALL normal inflammatory markers + negative UA**\n\nThis infant is LOW RISK for serious bacterial infection.\n\n**LP STATUS**\n• LP NOT required if all criteria met\n• Document shared decision-making with family\n\n**DISPOSITION OPTIONS**\n\n✓ **Home observation** (preferred if all criteria met):\n• Well-appearing, tolerating PO\n• Reliable caregiver\n• PCP/ED follow-up in 24 hours confirmed\n• No antibiotics needed\n\n✓ **Brief observation** (4–6h in ED):\n• If any concern about clinical trajectory\n• Recheck before discharge\n\n**ANTIBIOTICS**\n• Prefer NO antibiotics for low-risk viral syndrome\n• May consider single dose Ceftriaxone if family/provider preference, but not required\n\n**CULTURE CALLBACK**\n• Blood culture results at 24–36h\n• Urine culture results if sent',
+        recommendation: 'LOW RISK. Home observation with 24h follow-up. No LP or antibiotics needed if all low-risk criteria met. Document shared decision-making.',
+        confidence: 'recommended',
+        citation: [1, 4, 7, 9, 11],
+        treatment: {
+            firstLine: {
+                drug: 'Supportive care only',
+                dose: 'N/A',
+                route: 'N/A',
+                frequency: 'N/A',
+                duration: 'N/A',
+                notes: 'No antibiotics needed for low-risk viral syndrome with normal inflammatory markers',
+            },
+            monitoring: 'Culture callback at 24-36h. Mandatory 24-hour follow-up. Return precautions given.',
+        }
+    },
+    // =====================================================================
     // 29–60 DAY PATHWAY (9 nodes)
     // =====================================================================
     {
         id: 'pf-60-screen',
         type: 'question',
         module: 1,
-        title: '29\u201360 Days: Pathway Screening',
-        body: 'Does the infant have any of the following off-pathway triggers?\n\n\u2022 Focal bacterial infection identified\n\u2022 Hypothermia (<36°C / 96.8°F)\n\u2022 Bronchiolitis with clear viral syndrome\n\u2022 Clinically ill-appearing',
-        citation: [1],
+        title: '29–60 Days: Pathway Screening',
+        body: 'Does the infant have any of the following?\n\n• Focal bacterial infection identified\n• Hypothermia (<36°C / 96.8°F)\n• Clinically ill-appearing\n• Bronchiolitis or clear viral syndrome (RSV, influenza, etc.)',
+        citation: [1, 11],
         options: [
             {
-                label: 'Yes \u2014 Off-pathway trigger present',
+                label: 'Focal infection, hypothermia, or ill-appearing',
+                description: 'Off-pathway — individualized management',
                 next: 'pf-off-pathway',
             },
             {
-                label: 'No \u2014 Well-appearing, no focal source',
+                label: 'Bronchiolitis / RSV / Clear viral syndrome',
+                description: 'Low IBI risk — but still screen for UTI',
+                next: 'pf-60-viral',
+            },
+            {
+                label: 'Well-appearing, no focal source, no viral syndrome',
+                description: 'Standard FWS pathway',
                 next: 'pf-60-labs',
                 urgency: 'urgent',
             },
         ],
+        summary: 'Screen for focal infection, hypothermia, ill appearance, or viral syndrome; viral syndrome has low IBI risk',
     },
     {
         id: 'pf-60-labs',
@@ -636,8 +777,8 @@ export const PEDS_FEVER_NODES = [
         id: 'pf-60-low',
         type: 'result',
         module: 5,
-        title: 'Low Risk \u2014 Disposition',
-        body: 'All inflammatory markers normal \u2192 low risk for serious bacterial infection. No LP needed.\n\n**UA POSITIVE?**\n\u2022 If UA positive: [Cephalexin](#/drug/cephalexin) 17 mg/kg PO TID x 10 days + home\n\u2022 Ensure catheterized urine culture was sent\n\n**UA NEGATIVE?**\n\u2022 No antibiotics needed\n\u2022 Home observation with follow-up\n\n**DISCHARGE REQUIREMENTS**\n\u2022 Review [Discharge Criteria](#/info/pf-discharge)\n\u2022 PCP or ED follow-up within 24 hours\n\u2022 Provide [Return Precautions](#/info/pf-discharge)\n\u2022 Culture callback: blood culture results at 24\u201336h',
+        title: 'Low Risk — Disposition',
+        body: 'All inflammatory markers normal → low risk for serious bacterial infection. No LP needed.\n\n**UA POSITIVE?**\n• If UA positive: [Cephalexin](#/drug/cephalexin) 17 mg/kg PO TID x 10 days + home\n• Ensure catheterized urine culture was sent\n\n**UA NEGATIVE?**\n• No antibiotics needed\n• Home observation with follow-up\n\n**DISCHARGE REQUIREMENTS**\n• Review [Discharge Criteria](#/info/pf-discharge)\n• PCP or ED follow-up within 24 hours\n• Provide [Return Precautions](#/info/pf-discharge)\n• Culture callback: blood culture results at 24–36h',
         recommendation: 'Low risk for SBI. If UTI: oral Cephalexin and home. If no UTI: no antibiotics, home observation with 24-hour follow-up.',
         confidence: 'recommended',
         citation: [1, 4, 7, 9],
@@ -652,6 +793,62 @@ export const PEDS_FEVER_NODES = [
                 notes: 'Only if UA positive (UTI). No antibiotics if UA negative.',
             },
             monitoring: 'Urine culture results if UA positive. Culture callback at 24-36h. 24-hour follow-up.',
+        }
+    },
+    // =====================================================================
+    // 29–60 DAY VIRAL SYNDROME PATHWAY (3 nodes)
+    // Lowest IBI risk — UTI screening still required
+    // =====================================================================
+    {
+        id: 'pf-60-viral',
+        type: 'info',
+        module: 2,
+        title: '29–60 Day Febrile Infant with Viral Syndrome',
+        body: '**Well-appearing 29–60 day infant with confirmed viral syndrome (bronchiolitis, RSV, influenza) has VERY LOW IBI risk.**\n\nKEY EVIDENCE\n• RSV-positive infants 29–60 days: bacteremia <0.5%, meningitis approaches 0%\n• AAP 2021: bronchiolitis is an exclusion criterion for the full FWS pathway\n• **UTI risk remains 5–7%** even with viral syndrome\n\n**MINIMAL WORKUP**\n• UA + urine culture (catheterized) — **always required**\n• Blood culture (optional but reasonable)\n• Procalcitonin (optional — may help if clinical concern)\n\n**NO LP REQUIRED** for well-appearing infants with confirmed viral syndrome in this age group.\n\n**NO CBC REQUIRED** if clear viral diagnosis and well-appearing.',
+        citation: [1, 11, 12, 13],
+        next: 'pf-60-viral-ua',
+        summary: '29-60d with viral syndrome: IBI risk <0.5%, LP not needed; UTI risk 5-7% so always get UA',
+    },
+    {
+        id: 'pf-60-viral-ua',
+        type: 'question',
+        module: 3,
+        title: 'Viral Syndrome: UTI Screening',
+        body: '**UTI risk remains 5–7% even with confirmed viral syndrome.**\n\nObtain catheterized UA for all febrile infants, regardless of viral diagnosis.\n\n**Positive UA:** Leukocyte esterase, nitrites, >5 WBC/hpf, or bacteria on Gram stain.',
+        citation: [1, 8, 11],
+        options: [
+            {
+                label: 'UA Positive',
+                description: 'UTI confirmed — treat accordingly',
+                next: 'pf-60-uti',
+            },
+            {
+                label: 'UA Negative',
+                description: 'No UTI — supportive care for viral illness',
+                next: 'pf-60-viral-dispo',
+            },
+        ],
+        summary: 'UTI risk 5-7% even with viral syndrome; always get catheterized UA',
+    },
+    {
+        id: 'pf-60-viral-dispo',
+        type: 'result',
+        module: 5,
+        title: 'Viral Syndrome — Supportive Care',
+        body: '**29–60 day infant with confirmed viral syndrome + negative UA**\n\nThis infant is VERY LOW RISK for serious bacterial infection.\n\n**WORKUP COMPLETE**\n• No LP required\n• No blood culture required (but reasonable if obtained)\n• No antibiotics needed\n\n**VIRAL ILLNESS MANAGEMENT**\n• Supportive care: hydration, suctioning PRN\n• Bronchiolitis: no bronchodilators, no steroids, no antibiotics\n• Influenza: consider oseltamivir if <48h symptoms\n• Monitor for apnea if RSV + age <6 weeks\n\n**DISPOSITION**\n• Home observation with follow-up\n• Brief observation (4–6h) if any concern\n• PCP follow-up in 24–48h\n\n**RETURN PRECAUTIONS**\n• Increased work of breathing, retractions, grunting\n• Poor feeding, decreased wet diapers\n• Lethargy, irritability\n• Fever worsening or persistent >5 days',
+        recommendation: 'VERY LOW RISK. Supportive care for viral illness. No LP or antibiotics needed. Home with follow-up if well-appearing and tolerating PO.',
+        confidence: 'recommended',
+        citation: [1, 11, 12, 13],
+        treatment: {
+            firstLine: {
+                drug: 'Supportive care only',
+                dose: 'N/A',
+                route: 'N/A',
+                frequency: 'N/A',
+                duration: 'N/A',
+                notes: 'No antibiotics for viral syndrome with negative UA. Manage bronchiolitis/RSV supportively.',
+            },
+            monitoring: 'PCP follow-up in 24-48h. Return precautions given. Monitor for apnea if RSV + <6 weeks.',
         }
     },
     // =====================================================================
@@ -844,14 +1041,17 @@ export const PEDS_FEVER_CRITICAL_ACTIONS = [
 // Evidence Citations
 // -------------------------------------------------------------------
 export const PEDS_FEVER_CITATIONS = [
-    { num: 1, text: 'Dell Children\u2019s EBOC. Fever Without a Source Clinical Guideline. September 2022.' },
+    { num: 1, text: 'Dell Children\'s EBOC. Fever Without a Source Clinical Guideline. September 2022.' },
     { num: 2, text: 'Byington CL, et al. Serious bacterial infections in febrile infants 1 to 90 days old with and without viral infections. Pediatrics. 2004;113(6):1662-6.' },
     { num: 3, text: 'Caviness AC, et al. Prevalence of neonatal HSV infection compared with serious bacterial illness in hospitalized neonates. J Pediatr. 2008;153(2):164-9.' },
-    { num: 4, text: 'Gomez B, et al. Validation of the \u201cStep-by-Step\u201d Approach in Management of Young Febrile Infants. Pediatrics. 2016;138(2):e20154381.' },
+    { num: 4, text: 'Gomez B, et al. Validation of the "Step-by-Step" Approach in Management of Young Febrile Infants. Pediatrics. 2016;138(2):e20154381.' },
     { num: 5, text: 'Biondi E, et al. Epidemiology of bacteremia in febrile infants in the United States. Pediatrics. 2013;132(6):990-6.' },
     { num: 6, text: 'Greenhow TL, et al. Changing epidemiology of bacteremia in infants aged 1 week to 3 months. Pediatrics. 2012;129:e590-e596.' },
     { num: 7, text: 'Pantell RH, et al. Management and outcomes of care of fever in early infancy. JAMA. 2004;291(10):1203-12.' },
     { num: 8, text: 'Schroeder AR, et al. Diagnostic Accuracy of the Urinalysis for UTI in Infants <3 Months of Age. Pediatrics. 2015;135(6):965-71.' },
     { num: 9, text: 'Biondi EA, et al. REVISE: Reducing Variability in the Infant Sepsis Evaluation. Pediatrics. 2019;144(3):e20182201.' },
     { num: 10, text: 'Nigrovic LE, et al. Clinical prediction rule for identifying children with CSF pleocytosis at very low risk for bacterial meningitis. JAMA. 2007;297(1):52-60.' },
+    { num: 11, text: 'Levine DA, et al. Risk of serious bacterial infection in young febrile infants with respiratory syncytial virus infections. Pediatrics. 2004;113(6):1728-34.' },
+    { num: 12, text: 'Ralston SL, et al. AAP Clinical Practice Guideline: Management of Bronchiolitis. Pediatrics. 2014;134(5):e1474-e1502.' },
+    { num: 13, text: 'Pantell RH, et al. AAP Clinical Practice Guideline: Evaluation and Management of Well-Appearing Febrile Infants 8-60 Days Old. Pediatrics. 2021;148(2):e2021052228.' },
 ];

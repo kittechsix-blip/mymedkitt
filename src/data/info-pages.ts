@@ -1228,6 +1228,88 @@ const PF_DISCHARGE_PAGE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Viral Syndrome Workup Guide (Peds Fever)
+// -------------------------------------------------------------------
+
+const PF_VIRAL_WORKUP_PAGE: InfoPage = {
+  id: 'pf-viral-workup',
+  title: 'Febrile Infant with Viral Syndrome',
+  subtitle: 'Age-Stratified Workup When Bronchiolitis/RSV Present',
+  sections: [
+    {
+      heading: 'Key Principle',
+      body: 'Confirmed viral syndrome (bronchiolitis, RSV, influenza) REDUCES but does NOT eliminate the risk of invasive bacterial infection (IBI). The management varies significantly by age.',
+    },
+    {
+      heading: '0–21 Days (Neonates)',
+      body: '**IBI RISK: 1.1% bacteremia, 0.8% meningitis, 5.2% UTI**\n\n⚠️ This is NOT negligible risk.\n\n• **FULL SEPSIS WORKUP REQUIRED** — same as FWS pathway\n• CBC, blood culture, CMP\n• Procalcitonin, CRP\n• Catheterized UA + urine culture\n• **LP required** at this age\n• Respiratory viral panel to confirm\n\n**ADMIT + Empiric antibiotics** pending cultures\n\nDiscontinue abx if cultures negative at 24–36h and infant well-appearing.',
+    },
+    {
+      heading: '22–28 Days',
+      body: '**IBI RISK with RSV: ~0.7% bacteremia, <0.5% meningitis, 5–7% UTI**\n\n• CBC, blood culture, procalcitonin\n• **Catheterized UA + urine culture** — always required (UTI risk unchanged)\n• Respiratory viral panel\n\n**LP DECISION:**\n• If ALL inflammatory markers normal → LP can be deferred\n• If ANY marker abnormal → LP recommended\n\n**Low-risk criteria (ALL must be met):**\n• PCT <0.5 ng/mL\n• ANC <4,000 cells/mm³\n• T ≤38.5°C\n• CRP <2.0 mg/dL\n\nIf low-risk + UA negative → home observation, no antibiotics needed.',
+    },
+    {
+      heading: '29–60 Days',
+      body: '**IBI RISK with RSV: <0.5% bacteremia, ~0% meningitis, 5–7% UTI**\n\nThis is VERY LOW risk for IBI.\n\n• **Catheterized UA + urine culture** — always required\n• Blood culture optional but reasonable\n• Procalcitonin optional\n\n**NO LP REQUIRED** for well-appearing infants with confirmed viral syndrome.\n\nIf UA negative → supportive care, home observation, no antibiotics.',
+    },
+    {
+      heading: '2–6 Months',
+      body: '**IBI RISK: Very low (<0.3% bacteremia)**\n\n• **UA only** if UTI risk factors present\n• No blood work required if clear viral diagnosis\n• Supportive care\n• Home observation',
+    },
+    {
+      heading: 'UTI Risk Unchanged',
+      body: '**UTI risk remains 5–7% even with confirmed viral syndrome.**\n\nAlways obtain catheterized UA for febrile infants <60 days, regardless of viral diagnosis.\n\nBag specimens are NOT acceptable for culture — 85% contamination rate.',
+    },
+    {
+      heading: 'Bronchiolitis Management Pearls',
+      body: '• **No bronchodilators** — no benefit in bronchiolitis\n• **No steroids** — do not reduce admission rates\n• **No antibiotics** for the bronchiolitis itself\n• Gentle nasal suctioning PRN\n• Maintain hydration (PO or IV)\n• Monitor for apnea in infants <6 weeks\n• Supplemental O₂ if SpO₂ <90% sustained',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Levine DA, et al. Risk of SBI in young febrile infants with RSV infections. Pediatrics. 2004;113(6):1728-34.' },
+    { num: 2, text: 'Ralston SL, et al. AAP Clinical Practice Guideline: Management of Bronchiolitis. Pediatrics. 2014;134(5):e1474-e1502.' },
+    { num: 3, text: 'Pantell RH, et al. AAP Guideline: Evaluation of Febrile Infants 8-60 Days Old. Pediatrics. 2021;148(2):e2021052228.' },
+    { num: 4, text: 'Gomez B, et al. Validation of the Step-by-Step Approach. Pediatrics. 2016;138(2):e20154381.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Step-by-Step Criteria (Peds Fever)
+// -------------------------------------------------------------------
+
+const PF_STEP_BY_STEP_PAGE: InfoPage = {
+  id: 'pf-step-by-step',
+  title: 'Step-by-Step Low-Risk Criteria',
+  subtitle: 'PECARN/Step-by-Step Rule for Febrile Infants',
+  sections: [
+    {
+      heading: 'Overview',
+      body: 'The Step-by-Step approach identifies febrile infants at LOW risk for invasive bacterial infection (IBI). Originally validated for infants 22–90 days, it uses sequential evaluation of clinical appearance, inflammatory markers, and urinalysis.',
+    },
+    {
+      heading: 'LOW-RISK CRITERIA (ALL must be met)',
+      body: '1. **Well-appearing** (no toxic appearance)\n2. **Age ≥21 days**\n3. **Procalcitonin <0.5 ng/mL**\n4. **ANC <4,000 cells/mm³**\n5. **Temperature ≤38.5°C** (at home or ED)\n6. **CRP <2.0 mg/dL** (if obtained)\n7. **UA negative**',
+    },
+    {
+      heading: 'If ALL Low-Risk Criteria Met',
+      body: '• **Age 22–28 days:** LP can be deferred (shared decision). Home observation reasonable.\n• **Age 29–60 days:** No LP needed. Home observation with 24h follow-up.\n• **Age 61–90 days:** No LP, no blood work needed. Home observation.\n\n**No antibiotics required** if all criteria met.',
+    },
+    {
+      heading: 'If ANY Criterion NOT Met',
+      body: '• **Higher risk for IBI**\n• **LP recommended** (except age >60 days where risk remains low)\n• Consider empiric antibiotics pending cultures\n• Disposition per clinical judgment',
+    },
+    {
+      heading: 'Performance',
+      body: '• **Sensitivity for IBI:** 92%\n• **Specificity:** 48%\n• **NPV for bacteremia:** 99.7%\n• **NPV for meningitis:** 99.9%\n\nWhen all criteria are met, IBI risk is <0.3%.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gomez B, et al. Validation of the Step-by-Step Approach in Management of Young Febrile Infants. Pediatrics. 2016;138(2):e20154381.' },
+    { num: 2, text: 'Kuppermann N, et al. A Clinical Prediction Rule to Identify Febrile Infants 60 Days and Younger at Low Risk for SBI. JAMA Pediatr. 2019;173(4):342-351.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Bronchiolitis — NOT Recommended Interventions
 // -------------------------------------------------------------------
 
@@ -17070,6 +17152,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pf-uti-risk': PF_UTI_RISK_PAGE,
   'pf-ua-interpret': PF_UA_INTERPRET_PAGE,
   'pf-discharge': PF_DISCHARGE_PAGE,
+  'pf-viral-workup': PF_VIRAL_WORKUP_PAGE,
+  'pf-step-by-step': PF_STEP_BY_STEP_PAGE,
   'bronch-not-recommended': BRONCH_NOT_RECOMMENDED,
   'bronch-hfnc-protocol': BRONCH_HFNC_PROTOCOL,
   'bronch-hfnc-weaning': BRONCH_HFNC_WEANING,
