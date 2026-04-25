@@ -10893,6 +10893,172 @@ const MAL_PEARLS = {
     ],
 };
 // -------------------------------------------------------------------
+// Fever of Unknown Origin (FUO)
+// -------------------------------------------------------------------
+const FUO_CRITERIA = {
+    id: 'fuo-criteria',
+    title: 'FUO Diagnostic Criteria',
+    subtitle: 'Classic and Modified Definitions',
+    sections: [
+        {
+            heading: 'Classic FUO (Petersdorf & Beeson, 1961)',
+            body: '• Temperature **≥38.3°C (101°F)** on multiple occasions\n• Duration **≥3 weeks**\n• **Uncertain diagnosis** after 1 week of inpatient investigation\n\nThis original definition required hospitalization for workup.',
+        },
+        {
+            heading: 'Modified FUO (Durack & Street, 1991)',
+            body: 'Updated criteria for outpatient era:\n• Temperature **≥38.3°C (101°F)** on multiple occasions\n• Duration **≥3 weeks** (outpatient) or **≥3 days** (inpatient)\n• **Uncertain diagnosis** after:\n  - 3 outpatient visits, OR\n  - 3 days of inpatient investigation\n\nAlso introduced FUO subclassifications.',
+        },
+        {
+            heading: 'FUO Categories',
+            body: '**1. Classic FUO:** Immunocompetent patient, community-acquired\n\n**2. Nosocomial FUO:**\n• Hospitalized ≥24h before fever onset\n• Fever developing after ≥3 days\n• Common causes: line infection, C. diff, drug fever, surgical site infection\n\n**3. Neutropenic FUO:**\n• ANC <500/µL (or expected to fall <500)\n• Fever ≥3 days despite antibiotics\n• Broader differential including fungal\n\n**4. HIV-associated FUO:**\n• Confirmed HIV infection\n• Fever ≥4 weeks (outpatient) or ≥3 days (inpatient)\n• Opportunistic infections dominate differential',
+        },
+        {
+            heading: 'Modern Approach (2024)',
+            body: 'Recent expert consensus recommends:\n• Standardized **minimal initial diagnostic tests** before applying FUO classification\n• Qualitative criteria (specific tests completed) rather than time-based only\n• Earlier use of FDG-PET/CT when initial workup negative\n• Recognition that ~30% remain undiagnosed despite thorough evaluation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Petersdorf RG, Beeson PB. Fever of unexplained origin: report on 100 cases. Medicine (Baltimore). 1961;40:1-30.' },
+        { num: 2, text: 'Durack DT, Street AC. Fever of unknown origin — reexamined and redefined. Curr Clin Top Infect Dis. 1991;11:35-51.' },
+    ],
+};
+const FUO_INITIAL_WORKUP = {
+    id: 'fuo-initial-workup',
+    title: 'FUO Initial Workup Checklist',
+    subtitle: 'Minimum Required Evaluation Before FUO Diagnosis',
+    sections: [
+        {
+            heading: 'History (Critical Elements)',
+            body: '☐ **Fever pattern:** continuous, intermittent, relapsing, circadian\n☐ **Duration and maximum temperature**\n☐ **ALL medications** (including OTCs, supplements, herbals)\n☐ **Travel history** (past year, endemic exposures)\n☐ **Occupational exposures** (animals, chemicals, healthcare)\n☐ **Sexual history and HIV risk factors**\n☐ **Animal/pet exposures**\n☐ **Family history** (FMF, periodic fever syndromes)\n☐ **Prior surgeries, implants, devices**\n☐ **Dental work or symptoms**\n☐ **Injection drug use**\n☐ **Sick contacts, TB exposures**',
+        },
+        {
+            heading: 'Physical Exam (High-Yield Findings)',
+            body: '☐ **Lymph nodes:** all regions, especially supraclavicular\n☐ **Cardiac:** new murmurs, splinter hemorrhages\n☐ **Abdomen:** hepatosplenomegaly, masses\n☐ **Skin:** rashes, nodules, embolic phenomena\n☐ **Eyes:** fundoscopic exam (Roth spots, uveitis)\n☐ **Joints:** arthritis, synovitis\n☐ **Temporal arteries:** tenderness, reduced pulse (age >50)\n☐ **Prostate/rectal exam:** prostatitis, abscess\n☐ **Dental exam:** abscess, periodontal disease\n☐ **Repeat exam daily** — new findings may emerge',
+        },
+        {
+            heading: 'Initial Laboratory Studies',
+            body: '☐ **CBC with differential** (anemia, leukocytosis, eosinophilia)\n☐ **CMP** (electrolytes, renal function, glucose)\n☐ **LFTs** (hepatic involvement)\n☐ **ESR and CRP** (inflammatory markers)\n☐ **LDH** (lymphoma, hemolysis)\n☐ **Ferritin** (Still disease, HLH)\n☐ **Blood cultures x 2-3** (separate venipunctures)\n☐ **Urinalysis + urine culture**\n☐ **HIV serology** (if not recently tested)\n☐ **ANA, RF** (if autoimmune suspected)\n☐ **Procalcitonin** (bacterial vs non-bacterial)',
+        },
+        {
+            heading: 'Initial Imaging',
+            body: '☐ **Chest X-ray** (pneumonia, masses, adenopathy)\n☐ **Abdominal ultrasound or CT** (abscess, hepatosplenomegaly, masses)\n\nConsider early:\n☐ **FDG-PET/CT** — 50-70% diagnostic yield when initial workup negative\n☐ **Echocardiogram** — if any cardiac concern',
+        },
+        {
+            heading: 'Directed Testing Based on Clues',
+            body: '**If travel history:** Malaria smears, dengue serology, typhoid cultures\n**If lymphadenopathy:** Excisional biopsy, EBV/CMV serology\n**If age >50 + high ESR:** Temporal artery biopsy\n**If hepatic abnormalities:** Hepatitis panel, liver biopsy\n**If murmur:** TTE → TEE\n**If rash:** Skin biopsy\n**If TB exposure:** Quantiferon, AFB cultures',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Haidar G, Singh N. Fever of Unknown Origin. NEJM. 2022;386(5):463-477.' },
+        { num: 2, text: 'Bleeker-Rovers CP, et al. A Prospective Multicenter Study on FUO. Medicine. 2007;86(1):26-38.' },
+    ],
+};
+const FUO_TRAVEL_DISEASES = {
+    id: 'fuo-travel-diseases',
+    title: 'Travel-Associated Diseases by Region',
+    subtitle: 'Geographic Distribution and Incubation Periods',
+    sections: [
+        {
+            heading: 'Sub-Saharan Africa',
+            body: '**SHORT (<2 wk):** Malaria (P. falciparum), dengue, chikungunya, rickettsial diseases, travelers diarrhea\n**MEDIUM (2-6 wk):** Malaria (all species), typhoid, hepatitis A/E, acute HIV, schistosomiasis (Katayama fever)\n**LONG (>6 wk):** Tuberculosis, visceral leishmaniasis, brucellosis\n\n**KEY PATHOGEN:** Malaria — #1 cause of fever from Africa. Rule out first.',
+        },
+        {
+            heading: 'South/Southeast Asia',
+            body: '**SHORT (<2 wk):** Dengue (#1 from Asia), chikungunya, Japanese encephalitis, scrub typhus, travelers diarrhea\n**MEDIUM (2-6 wk):** Typhoid/paratyphoid (South Asia #1), malaria, hepatitis A/E, leptospirosis, melioidosis\n**LONG (>6 wk):** Tuberculosis, visceral leishmaniasis (India)\n\n**KEY PATHOGEN:** Dengue most common; Typhoid especially from India/Bangladesh.',
+        },
+        {
+            heading: 'Central/South America',
+            body: '**SHORT (<2 wk):** Dengue, Zika, chikungunya, rickettsial diseases, travelers diarrhea\n**MEDIUM (2-6 wk):** Malaria (Amazon basin), typhoid, hepatitis A, leptospirosis, histoplasmosis, coccidioidomycosis\n**LONG (>6 wk):** Tuberculosis, Chagas disease, visceral leishmaniasis, paracoccidioidomycosis\n\n**KEY PATHOGEN:** Dengue most common; Malaria if Amazon basin travel.',
+        },
+        {
+            heading: 'Middle East / North Africa',
+            body: '**SHORT (<2 wk):** MERS-CoV, brucellosis, rickettsial diseases\n**MEDIUM (2-6 wk):** Typhoid, hepatitis A/E, Q fever, brucellosis\n**LONG (>6 wk):** Tuberculosis, visceral leishmaniasis, brucellosis\n\n**KEY PATHOGENS:** Brucellosis (unpasteurized dairy), MERS (Arabian Peninsula).',
+        },
+        {
+            heading: 'Caribbean',
+            body: '**SHORT (<2 wk):** Dengue, chikungunya, Zika, leptospirosis\n**MEDIUM (2-6 wk):** Typhoid, hepatitis A, malaria (Haiti/Dominican Republic), ciguatera\n\n**KEY PATHOGENS:** Dengue, chikungunya; Malaria only from Haiti/DR.',
+        },
+        {
+            heading: 'Incubation Period Guide',
+            body: '**<2 weeks:**\n• Dengue, chikungunya, Zika\n• Rickettsial diseases\n• Travelers diarrhea\n• Influenza, COVID-19\n\n**2-6 weeks:**\n• Malaria (especially P. vivax/ovale)\n• Typhoid/paratyphoid\n• Hepatitis A, E\n• Acute HIV seroconversion\n• Leptospirosis\n\n**>6 weeks (months):**\n• Tuberculosis\n• Visceral leishmaniasis\n• Amoebic liver abscess\n• Chronic fungal infections',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'CDC Yellow Book 2024. Fever in the Returned Traveler.' },
+        { num: 2, text: 'Freedman DO, et al. Spectrum of Disease in Ill Returned Travelers. NEJM. 2006;354(2):119-30.' },
+    ],
+};
+const FUO_DRUG_FEVER_PAGE = {
+    id: 'fuo-drug-fever',
+    title: 'Drug Fever: Common Culprits',
+    subtitle: 'Medications Associated with Drug-Induced Fever',
+    sections: [
+        {
+            heading: 'Antibiotics (Most Common Class)',
+            body: '**Beta-lactams** (penicillins, cephalosporins) — #1 cause\n**Sulfonamides** (TMP-SMX)\n**Vancomycin**\n**Nitrofurantoin**\n**Minocycline**\n**Amphotericin B**\n\nOnset: Usually 7-10 days after starting, but can occur within hours on re-exposure.',
+        },
+        {
+            heading: 'Anticonvulsants',
+            body: '**Phenytoin** — DRESS syndrome\n**Carbamazepine** — DRESS syndrome\n**Phenobarbital**\n**Lamotrigine**\n\nMay present with rash, lymphadenopathy, hepatitis (DRESS syndrome).',
+        },
+        {
+            heading: 'Cardiovascular Drugs',
+            body: '**Procainamide** — also drug-induced lupus\n**Quinidine**\n**Hydralazine** — also drug-induced lupus\n**Methyldopa**\n**Nifedipine**\n**Diltiazem**',
+        },
+        {
+            heading: 'Other Common Culprits',
+            body: '**Allopurinol** — especially with HLA-B*5801\n**Heparin**\n**Bleomycin**\n**Interferon-alpha**\n**Biological agents** (TNF inhibitors, checkpoint inhibitors)\n**H2 blockers** (ranitidine, cimetidine)\n**NSAIDs** (paradoxically)\n**Barbiturates**',
+        },
+        {
+            heading: 'Clinical Features',
+            body: '**Timing:** Days to weeks after drug initiation (mean 7-10 days)\n**Appearance:** Patient often appears paradoxically well despite fever\n**Relative bradycardia:** Pulse inappropriately low for fever degree\n**Rash:** Present in ~20% (not required for diagnosis)\n**Eosinophilia:** Present in ~20% (not required)\n**Resolution:** Fever resolves 48-72 hours after stopping drug (may take up to 5-7 days for some)',
+        },
+        {
+            heading: 'Diagnosis',
+            body: '**Diagnosis of exclusion:**\n1. Temporal relationship to drug exposure\n2. Resolution after drug discontinuation\n3. Exclusion of other fever causes\n\n**Re-challenge:** Confirms diagnosis but rarely performed (risk of severe reaction)\n\n**No specific lab test available**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Patel RA, Gallagher JC. Drug Fever. Pharmacotherapy. 2010;30(1):57-69.' },
+        { num: 2, text: 'Mackowiak PA, LeMaistre CF. Drug fever: a critical appraisal. Ann Intern Med. 1987;106(5):728-733.' },
+    ],
+};
+const FUO_CATEGORIES = {
+    id: 'fuo-categories',
+    title: 'FUO Etiologies by Category',
+    subtitle: 'Distribution of Causes in Classic FUO',
+    sections: [
+        {
+            heading: 'Infections (~30%)',
+            body: '**Most Common:**\n• Tuberculosis (most common infectious cause worldwide)\n• Endocarditis (especially culture-negative)\n• Intra-abdominal abscess\n• Osteomyelitis\n• Prostatitis (elderly men)\n• Dental abscess\n\n**Viral:**\n• EBV, CMV (prolonged mononucleosis)\n• HIV (acute or advanced)\n\n**Fungal:**\n• Histoplasmosis, coccidioidomycosis (endemic areas)\n• Disseminated candidiasis',
+        },
+        {
+            heading: 'Malignancy (~20%)',
+            body: '**Hematologic (most common):**\n• Lymphoma (Hodgkin and Non-Hodgkin)\n• Leukemia (especially AML, CLL)\n• Castleman disease\n• Myelodysplastic syndrome\n\n**Solid Tumors:**\n• Renal cell carcinoma (classic FUO cause)\n• Hepatocellular carcinoma\n• Ovarian cancer\n• Atrial myxoma\n• Colon cancer (with liver metastases)',
+        },
+        {
+            heading: 'Autoimmune/Inflammatory (~20%)',
+            body: '**Vasculitis:**\n• Giant Cell Arteritis (age >50)\n• Polyarteritis nodosa\n• ANCA-associated vasculitis\n\n**Connective Tissue:**\n• Adult Still disease (ferritin >10,000)\n• Systemic lupus erythematosus\n• Rheumatoid arthritis\n• Inflammatory myopathy\n\n**Granulomatous:**\n• Sarcoidosis\n\n**Autoinflammatory:**\n• Familial Mediterranean fever\n• TRAPS',
+        },
+        {
+            heading: 'Miscellaneous (~10%)',
+            body: '• **Drug fever** (3-7% of all FUO)\n• **Factitious fever** (self-induced)\n• **Habitual hyperthermia**\n• **Thyroiditis** (subacute)\n• **Pulmonary embolism** (recurrent)\n• **Inflammatory bowel disease**\n• **Cirrhosis**\n• **Hematoma** (large, resolving)',
+        },
+        {
+            heading: 'Undiagnosed (~20-30%)',
+            body: '**Prognosis is generally favorable:**\n• Many resolve spontaneously\n• ~50% eventually diagnosed on long-term follow-up\n• 5-year mortality similar to age-matched controls\n\n**Management:**\n• Close follow-up\n• Repeat evaluation if new symptoms\n• Avoid empiric steroids unless infection excluded',
+        },
+        {
+            heading: 'Geographic Variation',
+            body: '**Developing countries:**\n• Infections dominate (TB, typhoid, malaria)\n\n**Developed countries:**\n• Non-infectious inflammatory diseases more common\n• Malignancy percentage higher\n• "Undiagnosed" category larger (more thorough workup excludes obvious causes)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Haidar G, Singh N. Fever of Unknown Origin. NEJM. 2022;386(5):463-477.' },
+        { num: 2, text: 'Bleeker-Rovers CP, et al. A Prospective Multicenter Study on FUO. Medicine. 2007;86(1):26-38.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Cardiac Arrest Suite — Info Pages
 // -------------------------------------------------------------------
 const CA_ETCO2_GUIDE = {
@@ -16741,6 +16907,12 @@ export const INFO_PAGES = {
     'mal-pregnancy': MAL_PREGNANCY,
     'mal-prophylaxis-failure': MAL_PROPHYLAXIS_FAILURE,
     'mal-pearls': MAL_PEARLS,
+    // FUO (Fever of Unknown Origin)
+    'fuo-criteria': FUO_CRITERIA,
+    'fuo-initial-workup': FUO_INITIAL_WORKUP,
+    'fuo-travel-diseases': FUO_TRAVEL_DISEASES,
+    'fuo-drug-fever': FUO_DRUG_FEVER_PAGE,
+    'fuo-categories': FUO_CATEGORIES,
     'ca-etco2-guide': CA_ETCO2_GUIDE,
     'ca-no-cpr-criteria': CA_NO_CPR_CRITERIA,
     'ca-tor-rules': CA_TOR_RULES,

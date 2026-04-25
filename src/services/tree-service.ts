@@ -414,6 +414,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/iih.js');
       return { nodes: m.IIH_NODES, entryNodeId: 'iih-start', categoryId: 'neurology', moduleLabels: m.IIH_MODULE_LABELS, citations: m.IIH_CITATIONS, criticalActions: m.IIH_CRITICAL_ACTIONS };
     },
+    'fuo': async () => {
+      const m = await import('../data/trees/fuo.js');
+      return { nodes: m.FUO_NODES, entryNodeId: 'fuo-start', categoryId: 'infectious-disease', moduleLabels: m.FUO_MODULE_LABELS, citations: m.FUO_CITATIONS, criticalActions: m.FUO_CRITICAL_ACTIONS };
+    },
     'sickle-cell': async () => {
       const m = await import('../data/trees/sickle-cell.js');
       return { nodes: m.SICKLE_CELL_NODES, entryNodeId: 'scd-start', categoryId: 'heme-onc', moduleLabels: m.SICKLE_CELL_MODULE_LABELS, citations: m.SICKLE_CELL_CITATIONS, criticalActions: m.SICKLE_CELL_CRITICAL_ACTIONS };

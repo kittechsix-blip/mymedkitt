@@ -1368,6 +1368,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'acetazolamide', label: 'Diamox', icon: '💊', action: 'overlay', target: 'iih-acetazolamide-guide' },
     { id: 'surgery', label: 'Surgery', icon: '🔧', action: 'overlay', target: 'iih-surgical-options' },
   ],
+  'fuo': [
+    { id: 'criteria', label: 'Criteria', icon: '📋', action: 'overlay', target: 'fuo-criteria' },
+    { id: 'workup', label: 'Workup', icon: '🧪', action: 'overlay', target: 'fuo-initial-workup' },
+    { id: 'travel', label: 'Travel', icon: '✈️', action: 'overlay', target: 'fuo-travel-diseases' },
+    { id: 'drugs', label: 'Drug Fever', icon: '💊', action: 'overlay', target: 'fuo-drug-fever' },
+    { id: 'categories', label: 'Etiologies', icon: '🔍', action: 'overlay', target: 'fuo-categories' },
+  ],
 };
 
 // Stop button appended automatically to every consult
