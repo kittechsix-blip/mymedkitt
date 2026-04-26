@@ -1093,6 +1093,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'abx', label: 'Abx Select', icon: '💉', action: 'calculator', target: 'uti-abx-select' },
     { id: 'classify', label: 'Classify', icon: '📋', action: 'overlay', target: 'uti-classification' },
     { id: 'special', label: 'Special', icon: '⚠️', action: 'overlay', target: 'uti-special-pops' },
+    { id: 'resistant', label: 'Resistant', icon: '🦠', action: 'jump', target: 'uti-resistant-start' },
   ],
   // ---------------------------------------------------------------
   // TTP

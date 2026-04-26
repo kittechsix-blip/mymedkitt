@@ -411,6 +411,96 @@ export const ADULT_UTI_NODES = [
         confidence: 'recommended',
         citation: [10],
     },
+    // =====================================================================
+    // MODULE 7: RESISTANT UTI
+    // =====================================================================
+    {
+        id: 'uti-resistant-start',
+        type: 'info',
+        module: 7,
+        title: 'Resistant UTI Overview',
+        body: '**When to Suspect Resistant UTI:** [13][14]\n\n**High-Risk Factors:**\n• Healthcare facility residence (SNF, LTAC)\n• Recent hospitalization (within 90 days)\n• Prior antibiotic exposure (strongest predictor)\n• Indwelling urinary catheter or stent\n• History of resistant organism (ESBL, MDR)\n• Multiple prior UTIs\n• Recent urologic procedure\n• Immunosuppression\n\n**Key Resistant Organisms:**\n• **ESBL-E** - Extended-spectrum beta-lactamase producing E. coli/Klebsiella\n• **DTR-Pseudomonas** - Difficult-to-treat resistant Pseudomonas\n• **VRE** - Vancomycin-resistant Enterococcus\n• **CRE** - Carbapenem-resistant Enterobacterales\n\n**Critical Point:**\n⚠️ **Piperacillin-tazobactam is NOT effective for ESBL** (12% vs 4% 30-day mortality compared to meropenem in bloodstream infections)',
+        citation: [13, 14],
+        next: 'uti-resistant-pathway',
+        summary: 'SNF, prior abx, catheter, MDR history = suspect resistant organisms; pip-tazo NOT for ESBL (higher mortality)',
+        safetyLevel: 'warning',
+    },
+    {
+        id: 'uti-resistant-pathway',
+        type: 'question',
+        module: 7,
+        title: 'Resistant UTI Pathway',
+        body: 'What type of resistant organism is suspected or confirmed?',
+        options: [
+            { label: 'ESBL-E (E. coli/Klebsiella)', description: 'Most common resistant gram-negative', next: 'uti-resistant-esbl' },
+            { label: 'DTR-Pseudomonas', description: 'Catheter, hospital-acquired', next: 'uti-resistant-pseudomonas' },
+            { label: 'VRE', description: 'Vancomycin-resistant Enterococcus', next: 'uti-resistant-vre' },
+            { label: 'Sepsis with Resistant UTI', description: 'Empiric broad coverage needed', next: 'uti-resistant-sepsis' },
+        ],
+        summary: 'Route by organism: ESBL-E (most common), DTR-Pseudomonas (catheter/hospital), VRE, or sepsis (empiric broad)',
+    },
+    {
+        id: 'uti-resistant-esbl',
+        type: 'info',
+        module: 7,
+        title: 'ESBL-E Treatment',
+        body: '**ESBL-Producing E. coli / Klebsiella Treatment:** [13][14]\n\n**UNCOMPLICATED CYSTITIS (non-septic):**\n\n**Preferred (in order):**\n1. **Nitrofurantoin** 100mg BID x 5 days (if susceptible)\n2. **Fosfomycin** 3g single dose (E. coli only)\n3. **TMP-SMX** DS BID x 3 days (if susceptible)\n\n**Alternative:**\n• Single-dose aminoglycoside (gentamicin 5mg/kg IV/IM once)\n• Ciprofloxacin (if susceptible - reserve)\n\n**PYELONEPHRITIS / COMPLICATED UTI:**\n\n**Preferred:**\n1. **Meropenem** 1g IV q8h (7-10 days)\n   - Extended infusion 2g over 3 hours q8h for severe\n   - CrCl <50: 1g IV q12h\n2. **Ertapenem** 1g IV q24h (7-10 days; 14 if bacteremic)\n   - Lower cost, can give IM for outpatient\n3. **Imipenem-cilastatin** 0.5-1g IV q6-8h\n\n**Oral step-down (if susceptible):**\n• Ciprofloxacin 500mg BID\n• Levofloxacin 750mg daily\n• TMP-SMX DS BID\n\n**⚠️ DO NOT USE for ESBL:**\n• Piperacillin-tazobactam (higher mortality)\n• Fosfomycin for pyelo (poor renal penetration)\n• Nitrofurantoin for pyelo',
+        citation: [13, 14],
+        next: 'uti-resistant-dispo',
+        summary: 'ESBL cystitis: nitrofurantoin > fosfomycin > TMP-SMX; ESBL pyelo: meropenem 1g IV q8h (NOT pip-tazo)',
+        safetyLevel: 'warning',
+    },
+    {
+        id: 'uti-resistant-pseudomonas',
+        type: 'info',
+        module: 7,
+        title: 'DTR-Pseudomonas Treatment',
+        body: '**Difficult-to-Treat Resistant Pseudomonas:** [13][14]\n\n**Risk Factors:**\n• Hospital-acquired infection\n• Indwelling catheter\n• Significant prior antibiotic exposure\n• ICU stay\n• Cystic fibrosis\n\n**First-Line Agents:**\n• **Ceftolozane-tazobactam** (preferred - reserve for DTR)\n• **Ceftazidime-avibactam**\n• **Imipenem-cilastatin-relebactam**\n• **Cefiderocol** (novel siderophore cephalosporin)\n\n**Alternative Agents:**\n• **Tobramycin** 5mg/kg IV once daily (7-10 days)\n  - Concentrates in renal tissue\n  - Preferred over gentamicin for Pseudomonas\n  - Requires TDM in severe illness\n• **Amikacin** 15mg/kg IV once daily\n  - Alternative if tobramycin-resistant\n  - Monitor for nephrotoxicity\n\n**Note:** Gentamicin has intrinsic gaps against Pseudomonas - prefer tobramycin/amikacin\n\n**Duration:** 7-10 days for pyelonephritis; longer if bacteremic',
+        citation: [13, 14],
+        next: 'uti-resistant-dispo',
+        summary: 'DTR-Pseudomonas: ceftolozane-tazobactam preferred; tobramycin 5mg/kg daily x7-10d alternative; NOT gentamicin',
+    },
+    {
+        id: 'uti-resistant-vre',
+        type: 'info',
+        module: 7,
+        title: 'VRE Treatment',
+        body: '**Vancomycin-Resistant Enterococcus (VRE) UTI:** [15]\n\n**Important:** VRE colonization ≠ infection. Only treat symptomatic UTI.\n\n**VRE CYSTITIS (lower UTI):**\n• **Fosfomycin** 3g PO q48h x 3 doses\n• **Nitrofurantoin** 100mg BID x 5-7 days (if susceptible)\n• **Doxycycline** 100mg BID (if susceptible - poor urinary excretion)\n\n**VRE PYELONEPHRITIS / BACTEREMIA:**\n• **Linezolid** 600mg IV/PO q12h (7-10 days)\n  - Excellent oral bioavailability\n  - Monitor CBC (thrombocytopenia)\n• **Daptomycin** (if susceptible, higher doses for UTI)\n• High-dose ampicillin/sulbactam (if ampicillin-susceptible)\n\n**Key Points:**\n• Remove/replace indwelling catheter if present\n• Do NOT treat asymptomatic bacteriuria with VRE\n• Linezolid = workhorse for VRE upper tract\n• Consult ID for complex cases\n\n**Duration:**\n• Cystitis: 5-7 days\n• Pyelonephritis: 7-10 days\n• Bacteremia: 10-14 days',
+        citation: [15],
+        next: 'uti-resistant-dispo',
+        summary: 'VRE cystitis: fosfomycin 3g q48h x3 doses; VRE pyelo: linezolid 600mg q12h; do NOT treat VRE colonization',
+    },
+    {
+        id: 'uti-resistant-sepsis',
+        type: 'info',
+        module: 7,
+        title: 'Sepsis with Resistant UTI',
+        body: '**Urosepsis with Suspected Resistant Organism:** [13][14]\n\n**Empiric Therapy (before culture results):**\n\n**Standard Approach:**\n• **Vancomycin** 15-20mg/kg IV q8-12h\n  PLUS\n• **Meropenem** 1g IV q8h\n  (or extended infusion 2g over 3 hours q8h for critical illness)\n\n**Rationale:** Covers gram-positive (including VRE with vanco) + broad gram-negative + ESBL\n\n**If Pseudomonas Concern (catheter, hospital-acquired):**\n• Add **tobramycin** 5mg/kg IV x1 or switch to **cefepime** 2g IV q8h + vanco\n\n**De-escalation:**\n• Once sensitivities available, narrow based on culture\n• See organism-specific nodes for targeted therapy\n\n**Sepsis Bundle:**\n• Lactate\n• Blood cultures x 2\n• Broad-spectrum antibiotics within 1 hour\n• Fluid resuscitation (30mL/kg crystalloid)\n• Vasopressors if hypotensive despite fluids\n\n**Imaging:**\n• CT abdomen/pelvis if concern for abscess or obstruction\n• Especially if diabetic (emphysematous pyelonephritis)',
+        citation: [13, 14],
+        next: 'uti-resistant-escalation',
+        summary: 'Urosepsis empiric: vancomycin + meropenem; add tobramycin if Pseudomonas concern; de-escalate when cultures back',
+        safetyLevel: 'critical',
+    },
+    {
+        id: 'uti-resistant-escalation',
+        type: 'info',
+        module: 7,
+        title: 'When to Consult ID',
+        body: '**Escalate to Infectious Disease Consult:** [13]\n\n**Do NOT hesitate to consult for:**\n\n**1. Multidrug-resistant organism without clear options:**\n• ESBL or Pseudomonas requiring admission, unclear which agent\n• VRE with borderline susceptibilities\n• CRE (carbapenem-resistant)\n\n**2. Sepsis with resistant organisms:**\n• Urosepsis with known ESBL, CRE, or MDR Pseudomonas\n• Uncertain appropriateness of empiric coverage\n\n**3. Clinical failure:**\n• No improvement after 48-72 hours despite appropriate therapy\n• Recurrent UTIs in short interval\n• Suppurative complications (abscess, emphysematous pyelo)\n\n**4. Complicated scenarios:**\n• Renal transplant recipient\n• Immunosuppressed patient\n• Pregnancy with resistant organism\n• Need for long-term suppressive therapy\n\n**5. Bacteremia:**\n• Any positive blood culture from urinary source\n• Septic shock from UTI\n\n**Local Antibiogram:**\n• Request ED-stratified antibiogram from microbiology\n• Resistance rates vary by patient population (SNF vs community)',
+        citation: [13],
+        next: 'uti-resistant-dispo',
+        summary: 'Consult ID for: MDR without clear options, sepsis with resistant organism, clinical failure at 48-72h, bacteremia',
+    },
+    {
+        id: 'uti-resistant-dispo',
+        type: 'result',
+        module: 7,
+        title: 'Resistant UTI Disposition',
+        body: '**Disposition for Resistant UTI:**\n\n**ADMIT if:**\n• Sepsis or hemodynamic instability\n• Unable to tolerate PO\n• Requires IV-only antibiotic (no oral option)\n• Significant comorbidities\n• Unreliable follow-up\n• Bacteremia suspected/confirmed\n\n**OUTPATIENT if (all required):**\n• Stable vital signs\n• Tolerating PO\n• Oral antibiotic option available (based on susceptibilities)\n• Reliable 48-72h follow-up\n• Culture sent, will call with results\n\n**Outpatient Options (if susceptible):**\n• Oral fluoroquinolone (ciprofloxacin, levofloxacin)\n• TMP-SMX DS\n• Fosfomycin (cystitis only)\n• Linezolid PO (for VRE)\n\n**Follow-Up:**\n• Call patient with culture results in 48-72h\n• Adjust antibiotics based on sensitivities\n• If not improving, may need admission\n• Urology referral for structural issues\n• Consider ID follow-up for recurrent MDR',
+        recommendation: 'Admit if septic, vomiting, IV-only antibiotic needed, or bacteremic. Outpatient with close follow-up if stable with oral options. Always send culture for resistant UTI.',
+        confidence: 'recommended',
+        citation: [13, 14],
+    },
 ];
 // =====================================================================
 // MODULE LABELS
@@ -422,8 +512,9 @@ export const ADULT_UTI_MODULE_LABELS = [
     'Antibiotic Selection',
     'Special Populations',
     'Disposition',
+    'Resistant UTI',
 ];
-export const ADULT_UTI_NODE_COUNT = 32;
+export const ADULT_UTI_NODE_COUNT = 40;
 // =====================================================================
 // CRITICAL ACTIONS
 // =====================================================================
@@ -436,6 +527,9 @@ export const ADULT_UTI_CRITICAL_ACTIONS = [
     { text: 'Catheter: remove/change if possible', nodeId: 'uti-cauti' },
     { text: 'Pyelo: IV abx if toxic/vomiting', nodeId: 'uti-pyelo-inpatient' },
     { text: 'Elderly: ASB common, don\'t overtreat', nodeId: 'uti-elderly' },
+    { text: 'ESBL: NO pip-tazo (use carbapenems)', nodeId: 'uti-resistant-esbl' },
+    { text: 'VRE: linezolid for upper tract', nodeId: 'uti-resistant-vre' },
+    { text: 'Resistant sepsis: vanco + meropenem', nodeId: 'uti-resistant-sepsis' },
 ];
 // =====================================================================
 // CITATIONS
@@ -488,5 +582,17 @@ export const ADULT_UTI_CITATIONS = [
     {
         num: 12,
         text: 'Hooton TM et al. Diagnosis, Prevention, and Treatment of Catheter-Associated UTI. Clin Infect Dis 2010;50(5):625-663.',
+    },
+    {
+        num: 13,
+        text: 'Tamma PD et al. IDSA 2024 Guidance on the Treatment of Antimicrobial Resistant Gram-Negative Infections. Clin Infect Dis 2024.',
+    },
+    {
+        num: 14,
+        text: 'Tamma PD et al. IDSA 2023 Guidance on ESBL-Producing Enterobacterales, CRE, and DTR-P. aeruginosa. Clin Infect Dis 2023;77(4):572-582.',
+    },
+    {
+        num: 15,
+        text: 'Heintz BH et al. Treatment of VRE Urinary Tract Infections. Ann Pharmacother 2010;44(12):1930-1939.',
     },
 ];
