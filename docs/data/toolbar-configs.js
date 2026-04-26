@@ -91,6 +91,7 @@ const TOOLBAR_CONFIGS = {
     ],
     'first-trimester': [
         { id: 'ectopic', label: 'Ectopic', icon: '\uD83D\uDCCD', action: 'jump', target: 'ft-ectopic-confirmed' },
+        { id: 'us-signs', label: 'US Signs', icon: '📡', action: 'overlay', target: 'ft-us-ectopic-signs' },
         { id: 'nvp', label: 'NVP Rx', icon: '\uD83E\uDD22', action: 'jump', target: 'ft-nvp-assess' },
         { id: 'miscarriage', label: 'Miscarriage', icon: '\uD83E\uDE78', action: 'jump', target: 'ft-miscarriage-type' },
     ],

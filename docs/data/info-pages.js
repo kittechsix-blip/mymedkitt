@@ -3624,6 +3624,47 @@ const FT_ECTOPIC_RISK = {
         { num: 5, text: 'Tal J, Haddad S, Gordon N, et al. Heterotopic pregnancy after ovulation induction and assisted reproductive technologies. Fertil Steril. 1996;66(1):1-12.' },
     ],
 };
+const FT_US_ECTOPIC_SIGNS = {
+    id: 'ft-us-ectopic-signs',
+    title: 'High-Risk US Findings for Ectopic',
+    subtitle: 'Sonographic Signs When No IUP Visualized',
+    sections: [
+        {
+            heading: 'Definitive Ectopic Findings',
+            body: '**100% specific** (any of these = ectopic confirmed):\n\n• **Extrauterine gestational sac with yolk sac**\n• **Extrauterine embryo** (with or without cardiac activity)\n\nThese are RARE findings. Most ectopics show indirect signs only.',
+        },
+        {
+            heading: 'Tubal Ring Sign',
+            body: '**Hyperechoic ring surrounding a small anechoic center** in the adnexa, separate from the ovary.\n\n• **Specificity: 88-95%** for ectopic pregnancy [1]\n• Represents the echogenic trophoblastic tissue surrounding the gestational sac\n• Must distinguish from corpus luteum cyst (CL is ON the ovary, tubal ring is SEPARATE)\n\n**Pearl:** Slide the probe to confirm the mass moves independently from the ovary.',
+        },
+        {
+            heading: 'Adnexal Mass',
+            body: '**Any adnexal mass separate from the ovary** raises suspicion for ectopic:\n\n• **Complex mass** (cystic + solid) — most common finding\n• **Blob sign** — inhomogeneous adnexal mass without clear ring structure\n• **Hyperechoic mass** — may represent hematosalpinx or clot\n\n**Probe tenderness:** Pain when pressing adnexal mass with transvaginal probe strongly suggests ectopic.',
+        },
+        {
+            heading: 'Free Fluid',
+            body: '**Echogenic (complex) free fluid** in cul-de-sac suggests hemoperitoneum:\n\n• Simple anechoic fluid — physiologic or hemorrhagic (less specific)\n• **Echogenic fluid with debris** — blood/clot, highly suspicious [2]\n• Moderate-to-large volume + no IUP → assume ruptured ectopic\n\n**FAST exam:** In unstable patient, any free fluid + positive pregnancy test = OR for presumed ruptured ectopic.',
+        },
+        {
+            heading: 'Pseudosac',
+            body: '**Intrauterine fluid collection WITHOUT the double decidual sign or yolk sac:**\n\n• Present in 10-20% of ectopic pregnancies [3]\n• Represents decidual reaction to ectopic pregnancy hormones\n• **Differentiating features:**\n  - Pseudosac: centrally located, single layer, no double ring\n  - True IUP: eccentric, double decidual sign, yolk sac visible by 5.5 weeks\n\n**Pearl:** If unsure whether IUP or pseudosac, do NOT reassure patient. Treat as PUL with close follow-up.',
+        },
+        {
+            heading: 'Combined Findings',
+            body: '**Multiple findings increase diagnostic certainty:**\n\n• Adnexal mass + free fluid + no IUP → **PPV 97%** for ectopic [4]\n• Tubal ring sign + free fluid → very high specificity\n• Even small free fluid with adnexal mass significantly raises ectopic probability\n\n**Clinical decision:** High-risk US findings warrant urgent OB consultation even if beta-hCG is low. DO NOT discharge without definitive plan.',
+        },
+        {
+            heading: 'What You Will NOT See',
+            body: '**Absent findings do NOT rule out ectopic:**\n\n• No adnexal mass visible — small ectopics are often not visualized\n• No free fluid — unruptured ectopics have no hemoperitoneum\n• Normal-appearing uterus — expected in early ectopic\n\n**Key point:** "Normal" ultrasound + positive pregnancy test + no IUP = Pregnancy of Unknown Location. Requires serial beta-hCG monitoring.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Brown DL, Doubilet PM. Transvaginal sonography for diagnosing ectopic pregnancy: positivity criteria and performance characteristics. J Ultrasound Med. 1994;13(4):259-266.' },
+        { num: 2, text: 'Nyberg DA, Hughes MP, Mack LA, Wang KY. Extrauterine findings of ectopic pregnancy at transvaginal US: importance of echogenic fluid. Radiology. 1991;178(3):823-826.' },
+        { num: 3, text: 'Ackerman TE, Levi CS, Dashefsky SM, et al. Interstitial line: sonographic finding in interstitial (cornual) ectopic pregnancy. Radiology. 1993;189(1):83-87.' },
+        { num: 4, text: 'Mehta TS, Levine D, Beckwith B. Treatment of ectopic pregnancy: is a human chorionic gonadotropin level of 2,000 mIU/mL a reasonable threshold? Radiology. 1997;205(2):569-573.' },
+    ],
+};
 const FT_MISCARRIAGE_TYPES = {
     id: 'ft-miscarriage-types',
     title: 'Miscarriage Classification',
@@ -16700,6 +16741,7 @@ export const INFO_PAGES = {
     'diarrhea-etiology': DIARRHEA_ETIOLOGY,
     'ft-summary': FT_SUMMARY,
     'ft-ectopic-risk': FT_ECTOPIC_RISK,
+    'ft-us-ectopic-signs': FT_US_ECTOPIC_SIGNS,
     'ft-miscarriage-types': FT_MISCARRIAGE_TYPES,
     'ft-nvp-pathway': FT_NVP_PATHWAY,
     'ft-imaging-safety': FT_IMAGING_SAFETY,

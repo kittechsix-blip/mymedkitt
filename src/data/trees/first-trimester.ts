@@ -110,7 +110,7 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Ultrasound & Beta-hCG',
-    body: '**Bedside or formal transvaginal ultrasound** + quantitative beta-hCG.\n\nEmergency physicians have **99.96% negative predictive value** for ectopic when IUP identified on bedside US. [5]\n\n[Ectopic Pregnancy Sites & Risk Factors](#/info/ft-ectopic-risk)\n\n**Risk factors:** prior ectopic, PID/STI history, salpingitis, IUD in situ, smoking (>1 pack/day OR 4), assisted reproductive technology.\n\nNearly **half of patients** with ectopic will have NO risk factors. [1]',
+    body: '**Bedside or formal transvaginal ultrasound** + quantitative beta-hCG.\n\nEmergency physicians have **99.96% negative predictive value** for ectopic when IUP identified on bedside US. [5]\n\n[Ectopic Pregnancy Sites & Risk Factors](#/info/ft-ectopic-risk)\n\n[High-Risk Ultrasound Findings for Ectopic](#/info/ft-us-ectopic-signs) — diagnostic clues when no IUP seen.\n\n**Risk factors:** prior ectopic, PID/STI history, salpingitis, IUD in situ, smoking (>1 pack/day OR 4), assisted reproductive technology.\n\nNearly **half of patients** with ectopic will have NO risk factors. [1]',
     citation: [1, 5, 6],
     images: [
       {
@@ -136,6 +136,12 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
         next: 'ft-no-iup-high',
       },
       {
+        label: 'High-risk US findings for ectopic',
+        description: 'Adnexal mass, tubal ring sign, or free fluid without IUP',
+        next: 'ft-us-high-risk',
+        urgency: 'urgent',
+      },
+      {
         label: 'Definitive ectopic on ultrasound',
         description: 'Extrauterine yolk sac or embryo identified',
         next: 'ft-ectopic-confirmed',
@@ -143,6 +149,18 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
       },
     ],
     summary: 'Bedside TVUS + quant hCG — EP has 99.96% NPV for ectopic when IUP identified on bedside US',
+  },
+
+  {
+    id: 'ft-us-high-risk',
+    type: 'info',
+    module: 2,
+    title: 'High-Risk US Findings for Ectopic',
+    body: '**Ultrasound findings highly suggestive of ectopic pregnancy** (even without definitive extrauterine embryo):\n\n**Adnexal findings:**\n• **Tubal ring sign** (88% specific) — hyperechoic ring around extrauterine gestational sac, separate from ovary [38]\n• **Adnexal mass** separate from ovary — especially if tender on transvaginal probe pressure ("probe tenderness")\n• **Complex adnexal mass** with cystic and solid components\n• **Blob sign** — inhomogeneous adnexal mass without clear ring\n\n**Free fluid:**\n• **Echogenic free fluid** in cul-de-sac — suggests hemoperitoneum (blood clots), NOT simple ascites [39]\n• **Moderate-large free fluid** without IUP — assume ruptured ectopic until proven otherwise\n• **FAST exam positive** in unstable patient = OR\n\n**Uterine findings suggestive of NO IUP:**\n• **Pseudosac** — intrauterine fluid collection WITHOUT double decidual sign or yolk sac. Seen in 10-20% of ectopic pregnancies. [40]\n• **Trilaminar endometrium** — normal endometrial stripe pattern without gestational sac\n\n**Combined findings increase specificity:**\n• Adnexal mass + free fluid + no IUP → **PPV 97%** for ectopic [41]\n• Even small amounts of free fluid with adnexal mass significantly raise ectopic probability\n\n**Management:** These findings warrant urgent OB consultation even if beta-hCG is low. Do not discharge without definitive plan.',
+    citation: [38, 39, 40, 41],
+    next: 'ft-ectopic-confirmed',
+    summary: 'Tubal ring, adnexal mass, echogenic free fluid, pseudosac — urgent OB consult even with low hCG',
+    safetyLevel: 'warning',
   },
 
   {
@@ -819,4 +837,8 @@ export const FIRST_TRIMESTER_CITATIONS: Citation[] = [
   { num: 35, text: 'Ray JG, Vermeulen MJ, Bharatha A, et al. Association between MRI exposure during pregnancy and fetal and childhood outcomes. JAMA. 2016;316(9):952-961.' },
   { num: 36, text: 'ACOG Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation. Obstet Gynecol. 2017;130(4):e210-e216.' },
   { num: 37, text: 'Catlin A. Interdisciplinary guidelines for care of women presenting to the emergency department with pregnancy loss. MCN Am J Matern Child Nurs. 2018;43(1):13-18.' },
+  { num: 38, text: 'Brown DL, Doubilet PM. Transvaginal sonography for diagnosing ectopic pregnancy: positivity criteria and performance characteristics. J Ultrasound Med. 1994;13(4):259-266.' },
+  { num: 39, text: 'Nyberg DA, Hughes MP, Mack LA, Wang KY. Extrauterine findings of ectopic pregnancy at transvaginal US: importance of echogenic fluid. Radiology. 1991;178(3):823-826.' },
+  { num: 40, text: 'Ackerman TE, Levi CS, Dashefsky SM, et al. Interstitial line: sonographic finding in interstitial (cornual) ectopic pregnancy. Radiology. 1993;189(1):83-87.' },
+  { num: 41, text: 'Mehta TS, Levine D, Beckwith B. Treatment of ectopic pregnancy: is a human chorionic gonadotropin level of 2,000 mIU/mL a reasonable threshold? Radiology. 1997;205(2):569-573.' },
 ];
