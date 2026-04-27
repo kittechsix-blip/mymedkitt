@@ -266,7 +266,7 @@ export const STI_COMPREHENSIVE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Pregnancy Modifications',
-    body: '[Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety)\n\n**Safe in pregnancy:**\n- Ceftriaxone (all trimesters)\n- Azithromycin (all trimesters)\n- Metronidazole (all trimesters - CDC category B)\n- Acyclovir/Valacyclovir (safe in pregnancy)\n\n**Contraindicated in pregnancy:**\n- **Doxycycline** - use azithromycin 1g x1 instead for CT\n- **Fluoroquinolones** (moxifloxacin, ciprofloxacin)\n- **Tinidazole** - use metronidazole\n\n**Syphilis in pregnancy:**\n- Penicillin is the ONLY effective treatment\n- If PCN allergic, MUST desensitize\n- Screen at 1st visit, 28-32 weeks, AND delivery (ACOG 2024)',
+    body: '[Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety)\n\n**Safe in pregnancy:**\n- Ceftriaxone (all trimesters)\n- Azithromycin (all trimesters)\n- Metronidazole (all trimesters - CDC category B)\n- Acyclovir/Valacyclovir (safe in pregnancy)\n\n**Contraindicated in pregnancy:**\n- [Doxycycline](#/drug/doxycycline/sti prophylaxis) - use azithromycin 1g x1 instead for CT\n- **Fluoroquinolones** (moxifloxacin, ciprofloxacin)\n- **Tinidazole** - use metronidazole\n\n**Syphilis in pregnancy:**\n- Penicillin is the ONLY effective treatment\n- If PCN allergic, MUST desensitize\n- Screen at 1st visit, 28-32 weeks, AND delivery (ACOG 2024)',
     citation: [1, 3],
     calculatorLinks: [
       { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },

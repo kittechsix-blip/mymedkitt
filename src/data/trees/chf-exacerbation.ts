@@ -193,7 +193,7 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'SCAPE: Refractory — Prepare for Intubation',
-    body: '**Refractory SCAPE — patient failing BiPAP + high-dose NTG:**\n\n**Before intubation:**\n- Push NTG to maximum (800+ mcg/min)\n- Ensure BiPAP settings maximized\n- Rule out pneumothorax, PE, tamponade\n\n**If must intubate:**\n- **Ketamine** preferred induction (less hypotension)\n- Avoid propofol (profound hypotension)\n- Have vasopressor ready (norepinephrine)\n- Post-intubation: continue aggressive vasodilation\n\n**Consider:**\n- Emergent cardiology consult\n- ECMO evaluation if available\n- Mechanical circulatory support\n\n**This is now cardiogenic shock territory.** [1][3]',
+    body: '**Refractory SCAPE — patient failing BiPAP + high-dose NTG:**\n\n**Before intubation:**\n- Push NTG to maximum (800+ mcg/min)\n- Ensure BiPAP settings maximized\n- Rule out pneumothorax, PE, tamponade\n\n**If must intubate:**\n- [Ketamine](#/drug/ketamine/rsi induction) preferred induction (less hypotension)\n- Avoid propofol (profound hypotension)\n- Have vasopressor ready (norepinephrine)\n- Post-intubation: continue aggressive vasodilation\n\n**Consider:**\n- Emergent cardiology consult\n- ECMO evaluation if available\n- Mechanical circulatory support\n\n**This is now cardiogenic shock territory.** [1][3]',
     citation: [1, 3],
     treatment: {
       firstLine: {

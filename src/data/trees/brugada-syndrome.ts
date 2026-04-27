@@ -248,7 +248,7 @@ export const BRUGADA_SYNDROME_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Electrical Storm Protocol',
-    body: '**Electrical Storm (≥3 VF/VT episodes/day) — EMERGENCY**\n\n**First-line: ISOPROTERENOL**\n\n**Mechanism:** Increases HR → decreases J-point → suppresses VF\n\n**Protocol:**\n• **Bolus:** 1-2 mcg IV\n• **Infusion:** 0.15-2.0 mcg/min\n• **Target:** 20% increase in heart rate\n• **Duration:** Continue until stable (mean 24±13 days)\n\n**Add QUINIDINE when stable:**\n• 200 mg PO TID → increase to 400 mg TID\n• Allows weaning of isoproterenol in 24-48h\n\n**❌ DO NOT USE:**\n• **Beta-blockers** — ineffective\n• **Amiodarone** — may worsen\n• **Lidocaine** — ineffective\n• **Flecainide/propafenone** — will worsen\n\n**If refractory:**\n• Catheter ablation (RVOT epicardial substrate)\n• Consult EP urgently',
+    body: '**Electrical Storm (≥3 VF/VT episodes/day) — EMERGENCY**\n\n**First-line: ISOPROTERENOL**\n\n**Mechanism:** Increases HR → decreases J-point → suppresses VF\n\n**Protocol:**\n• **Bolus:** 1-2 mcg IV\n• **Infusion:** 0.15-2.0 mcg/min\n• **Target:** 20% increase in heart rate\n• **Duration:** Continue until stable (mean 24±13 days)\n\n**Add QUINIDINE when stable:**\n• 200 mg PO TID → increase to 400 mg TID\n• Allows weaning of isoproterenol in 24-48h\n\n**❌ DO NOT USE:**\n• **Beta-blockers** — ineffective\n• [Amiodarone](#/drug/amiodarone/cardiac arrest) — may worsen\n• **Lidocaine** — ineffective\n• **Flecainide/propafenone** — will worsen\n\n**If refractory:**\n• Catheter ablation (RVOT epicardial substrate)\n• Consult EP urgently',
     citation: [8, 9],
     calculatorLinks: [
       { id: 'brugada-vf-storm', label: 'VF Storm Protocol' },

@@ -149,7 +149,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'RV Failure',
-    body: '**RV failure is a DIFFERENT animal:**\n\n**DO NOT** give aggressive fluids — the RV is preload-dependent but can\'t handle excess volume.\n\n**Management:**\n• **Small fluid boluses** only if clearly hypovolemic (250 mL, reassess)\n• **Norepinephrine** to maintain coronary perfusion\n• **Inotropes:** Dobutamine or milrinone (careful with milrinone — vasodilation)\n• **Reduce RV afterload:** Treat PE if present, optimize ventilation\n• **Avoid intubation** if possible — PPV worsens RV failure\n\n**PAPI (PA Pulsatility Index)** <1.0 = severe RV failure\n\nIf RV MI: **DO NOT give nitrates** [1][2][5]',
+    body: '**RV failure is a DIFFERENT animal:**\n\n**DO NOT** give aggressive fluids — the RV is preload-dependent but can\'t handle excess volume.\n\n**Management:**\n• **Small fluid boluses** only if clearly hypovolemic (250 mL, reassess)\n• [Norepinephrine](#/drug/norepinephrine/vasodilatory shock) to maintain coronary perfusion\n• **Inotropes:** Dobutamine or milrinone (careful with milrinone — vasodilation)\n• **Reduce RV afterload:** Treat PE if present, optimize ventilation\n• **Avoid intubation** if possible — PPV worsens RV failure\n\n**PAPI (PA Pulsatility Index)** <1.0 = severe RV failure\n\nIf RV MI: **DO NOT give nitrates** [1][2][5]',
     citation: [1, 2, 5],
     next: 'cs-hemodynamics',
     summary: 'NO aggressive fluids RV — norepinephrine, no nitrates RV MI',

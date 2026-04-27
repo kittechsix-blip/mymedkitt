@@ -152,7 +152,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Cephalosporin Alternatives',
-    body: '**Non-Type I PCN Allergy — Cephalosporin Options:** [3]\n\n| Drug | Pediatric Dose | Adult Dose | Duration |\n|------|----------------|------------|----------|\n| Cefdinir | 14 mg/kg/day ÷ q12-24h (max 600 mg/day) | 300 mg BID | 5-7 days |\n| Cefuroxime | 30 mg/kg/day ÷ BID (max 500 mg/dose) | 500 mg BID | 5-7 days |\n| Cefpodoxime | 10 mg/kg/day ÷ BID (max 200 mg/dose) | 200 mg BID | 5-7 days |\n\n**Treatment Failure on First-Line:**\n• **Ceftriaxone** 50 mg/kg IM daily × 3 days (max 1g/dose)\n\n**Cross-Reactivity Note:**\nCephalosporin cross-reactivity with penicillin is <2% for non-Type I allergies. Safe to use.',
+    body: '**Non-Type I PCN Allergy — Cephalosporin Options:** [3]\n\n| Drug | Pediatric Dose | Adult Dose | Duration |\n|------|----------------|------------|----------|\n| Cefdinir | 14 mg/kg/day ÷ q12-24h (max 600 mg/day) | 300 mg BID | 5-7 days |\n| Cefuroxime | 30 mg/kg/day ÷ BID (max 500 mg/dose) | 500 mg BID | 5-7 days |\n| Cefpodoxime | 10 mg/kg/day ÷ BID (max 200 mg/dose) | 200 mg BID | 5-7 days |\n\n**Treatment Failure on First-Line:**\n• [Ceftriaxone](#/drug/ceftriaxone/pediatric fever) 50 mg/kg IM daily × 3 days (max 1g/dose)\n\n**Cross-Reactivity Note:**\nCephalosporin cross-reactivity with penicillin is <2% for non-Type I allergies. Safe to use.',
     citation: [3],
     next: 'ear-aom-analgesia',
 

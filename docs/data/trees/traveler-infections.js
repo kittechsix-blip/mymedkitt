@@ -317,7 +317,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 
 **Iraq/Pakistan Travelers:**
 - **Ceftriaxone resistance common** in these regions
-- Uncomplicated: **Azithromycin**
+- Uncomplicated: [Azithromycin](#/drug/azithromycin/traveler diarrhea)
 - Complicated: **Carbapenem** (meropenem, ertapenem)
 
 **DO NOT use fluoroquinolones empirically** - widespread resistance
@@ -548,12 +548,12 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 
 **Mild (No Fever, No Blood):**
 - **Hydration** (oral rehydration solution)
-- **Loperamide** (if no fever, no bloody stools)
+- [Loperamide](#/drug/loperamide/traveler diarrhea) (if no fever, no bloody stools)
   - 4mg initial, then 2mg after each loose stool (max 16mg/day)
 - **Consider antibiotics** if moderate-severe symptoms
 
 **Moderate-Severe:**
-- **Azithromycin** (first-line)
+- [Azithromycin](#/drug/azithromycin/traveler diarrhea) (first-line)
   - 1000mg single dose OR
   - 500mg daily x 3 days
 - Alternatives: fluoroquinolone (if from area without resistance)
@@ -1005,7 +1005,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 
 **Treatment:**
 - **Supportive care** (oxygen, mechanical ventilation)
-- **Oseltamivir** (for avian flu if started early)
+- [Oseltamivir](#/drug/oseltamivir/influenza treatment adult) (for avian flu if started early)
 - No specific antiviral for MERS
 
 **Notification:**
@@ -1091,7 +1091,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
   - Outpatient: amoxicillin-clavulanate + azithromycin OR respiratory fluoroquinolone
   - Inpatient: ceftriaxone + azithromycin OR respiratory fluoroquinolone
 - **COVID-19 antivirals** if positive (nirmatrelvir-ritonavir, remdesivir)
-- **Oseltamivir** if influenza positive
+- [Oseltamivir](#/drug/oseltamivir/influenza treatment adult) if influenza positive
 
 **Disposition:**
 - **PSI/CURB-65 score** for admission decision
@@ -1210,7 +1210,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 **Treatment:**
 
 **Severe Malaria Protocol:**
-1. **IV Artesunate** (first-line, available through CDC)
+1. [IV Artesunate](#/drug/iv-artesunate/severe malaria) (first-line, available through CDC)
    - Loading dose: 2.4mg/kg IV at 0, 12, 24 hours
    - Then 2.4mg/kg IV daily until able to take PO
 2. **Alternative: IV Quinidine** (if artesunate unavailable)
@@ -1272,7 +1272,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
    - 20 IU/kg
    - **Infiltrate wound site** (as much as possible)
    - Give remainder IM at distant site from vaccine
-3. **Rabies vaccine**
+3. [Rabies vaccine](#/drug/rabies-vaccine/unvaccinated immunocompetent)
    - 4-dose series: days 0, 3, 7, 14
    - IM (deltoid, NOT gluteal)
 

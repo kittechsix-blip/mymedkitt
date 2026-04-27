@@ -388,7 +388,7 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Vasopressor Selection',
-    body: '**Choose vasopressor based on heart rate** [16][17]:\n\n• **[Norepinephrine](#/drug/norepinephrine/tca hypotension)** — first-line. Alpha agonism directly counters TCA alpha-receptor blockade [3][16].\n• **[Epinephrine](#/drug/epinephrine/tca vasopressor)** — if bradycardic or NE-refractory. Combined alpha + beta agonism [16].\n• **Phenylephrine** — if markedly tachycardic (pure alpha, no beta stimulation) [16].\n• **[Vasopressin](#/drug/vasopressin/TCA)** — for refractory cases. Bypasses the alpha-adrenergic receptor entirely [16].\n\n🚫 **Avoid pure beta-agonists** (dobutamine, low-dose dopamine) — may worsen tachycardia without adequate vasoconstriction [3].\n\nWhat is the clinical trajectory?',
+    body: '**Choose vasopressor based on heart rate** [16][17]:\n\n• **[Norepinephrine](#/drug/norepinephrine/tca hypotension)** — first-line. Alpha agonism directly counters TCA alpha-receptor blockade [3][16].\n• **[Epinephrine](#/drug/epinephrine/tca vasopressor)** — if bradycardic or NE-refractory. Combined alpha + beta agonism [16].\n• [Phenylephrine](#/drug/phenylephrine/sepsis vasopressor) — if markedly tachycardic (pure alpha, no beta stimulation) [16].\n• **[Vasopressin](#/drug/vasopressin/TCA)** — for refractory cases. Bypasses the alpha-adrenergic receptor entirely [16].\n\n🚫 **Avoid pure beta-agonists** (dobutamine, low-dose dopamine) — may worsen tachycardia without adequate vasoconstriction [3].\n\nWhat is the clinical trajectory?',
     citation: [3, 16, 17],
     treatment: {
       firstLine: {

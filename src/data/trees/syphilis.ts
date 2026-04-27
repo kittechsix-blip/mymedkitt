@@ -437,7 +437,7 @@ export const SYPHILIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Treatment by Stage',
-    body: '**Penicillin G** is the only proven treatment for syphilis. Treatment regimen is determined by disease stage. [1][5][31]\n\n[Treatment Summary Table](#/info/syph-treatment-table)\n\nJarisch-Herxheimer reaction may occur within hours of treatment — counsel all patients. [32]',
+    body: '[Penicillin G](#/drug/penicillin-g-iv/neurosyphilis) is the only proven treatment for syphilis. Treatment regimen is determined by disease stage. [1][5][31]\n\n[Treatment Summary Table](#/info/syph-treatment-table)\n\nJarisch-Herxheimer reaction may occur within hours of treatment — counsel all patients. [32]',
     citation: [1, 5, 31, 32],
     options: [
       {

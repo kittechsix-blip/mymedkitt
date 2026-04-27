@@ -193,7 +193,7 @@ export const KRATOM_WITHDRAWAL_NODES = [
         type: 'info',
         module: 5,
         title: 'Gabapentin & Adjuncts',
-        body: '**Gabapentin:**\n• Reduces myalgias, chills, dysphoria, diarrhea, muscle tension\n• Dosing: 300-600 mg q6-8h, titrate to effect\n• Evidence: 1600 mg/day superior to 900 mg/day for opioid withdrawal\n• Good safety profile, no respiratory risk\n• Case report: successful kratom withdrawal in LVAD patient\n\n**Other symptomatic adjuncts:**\n\n• **Loperamide** 2mg initial, then 1mg after each loose stool (max 16mg/day)\n  — CAUTION: QTc prolongation at high doses, do not exceed\n\n• **Ondansetron** 4-8 mg q6h PRN for nausea\n\n• **Ibuprofen/Acetaminophen** for myalgias\n\n• **Trazodone** 50-100mg or **melatonin** for insomnia\n\n• **Benzodiazepines** (short-term) for severe agitation or seizure risk',
+        body: '**Gabapentin:**\n• Reduces myalgias, chills, dysphoria, diarrhea, muscle tension\n• Dosing: 300-600 mg q6-8h, titrate to effect\n• Evidence: 1600 mg/day superior to 900 mg/day for opioid withdrawal\n• Good safety profile, no respiratory risk\n• Case report: successful kratom withdrawal in LVAD patient\n\n**Other symptomatic adjuncts:**\n\n• [Loperamide](#/drug/loperamide/opioid withdrawal diarrhea) 2mg initial, then 1mg after each loose stool (max 16mg/day)\n  — CAUTION: QTc prolongation at high doses, do not exceed\n\n• [Ondansetron](#/drug/ondansetron/opioid withdrawal) 4-8 mg q6h PRN for nausea\n\n• **Ibuprofen/Acetaminophen** for myalgias\n\n• **Trazodone** 50-100mg or **melatonin** for insomnia\n\n• **Benzodiazepines** (short-term) for severe agitation or seizure risk',
         citation: [10, 11],
         treatment: {
             firstLine: {

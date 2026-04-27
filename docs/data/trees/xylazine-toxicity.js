@@ -113,7 +113,7 @@ export const XYLAZINE_TOXICITY_NODES = [
         type: 'info',
         module: 2,
         title: 'Stage 3A — Severe XAW with Function',
-        body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + **Piperacillin-Tazobactam**\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
+        body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + [Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric)\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
         citation: [3, 4],
         treatment: {
             firstLine: {

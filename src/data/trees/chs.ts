@@ -332,7 +332,7 @@ export const CHS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Refractory \u2014 Escalation Options',
-    body: 'Persistent vomiting despite butyrophenone + capsaicin.\n\n**Escalation options:**\n1. **Repeat butyrophenone dose** if first dose was subtherapeutic\n2. **Olanzapine** 5-10 mg IM/PO as second-line agent\n3. Reassess for alternative diagnoses if truly refractory\n4. Consider admission for continued IV antiemetics\n\n\u26a0\ufe0f Do NOT escalate to opioids or benzodiazepines.',
+    body: 'Persistent vomiting despite butyrophenone + capsaicin.\n\n**Escalation options:**\n1. **Repeat butyrophenone dose** if first dose was subtherapeutic\n2. [Olanzapine](#/drug/olanzapine/chs second-line) 5-10 mg IM/PO as second-line agent\n3. Reassess for alternative diagnoses if truly refractory\n4. Consider admission for continued IV antiemetics\n\n\u26a0\ufe0f Do NOT escalate to opioids or benzodiazepines.',
     citation: [2, 3],
     next: 'chs-olanzapine',
   

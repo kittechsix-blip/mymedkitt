@@ -272,7 +272,7 @@ export const CARDIAC_ARREST_NODES = [
         type: 'info',
         module: 5,
         title: 'Situation-Specific Medications',
-        body: '**Beyond epinephrine — give when indicated:**\n\n• **Sodium bicarbonate** 1-2 mEq/kg IV:\n  Wide QRS / TCA toxicity, known hyperkalemia, prolonged arrest, pre-existing metabolic acidosis\n\n• **Calcium** (1g calcium gluconate or 1g calcium chloride IV):\n  Hyperkalemia, calcium channel blocker OD, hypermagnesemia\n\n• **Magnesium sulfate** 2g IV over 1-2 min:\n  Refractory VF, torsades de pointes (polymorphic VT + long QT)\n\n• **Lipid emulsion** (Intralipid 20%) 1.5 mL/kg bolus:\n  Local anesthetic systemic toxicity (LAST)\n\n**Do NOT routinely give NaHCO3 or calcium** — only for specific indications above [5][8].',
+        body: '**Beyond epinephrine — give when indicated:**\n\n• [Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperkalemia) 1-2 mEq/kg IV:\n  Wide QRS / TCA toxicity, known hyperkalemia, prolonged arrest, pre-existing metabolic acidosis\n\n• **Calcium** (1g calcium gluconate or 1g calcium chloride IV):\n  Hyperkalemia, calcium channel blocker OD, hypermagnesemia\n\n• [Magnesium sulfate](#/drug/magnesium-sulfate/torsades) 2g IV over 1-2 min:\n  Refractory VF, torsades de pointes (polymorphic VT + long QT)\n\n• **Lipid emulsion** (Intralipid 20%) 1.5 mL/kg bolus:\n  Local anesthetic systemic toxicity (LAST)\n\n**Do NOT routinely give NaHCO3 or calcium** — only for specific indications above [5][8].',
         citation: [5, 8],
         next: 'ca-rosc',
         summary: 'NaHCO3 wide QRS, Ca CCB, Mg TdP, Intralipid LAST',

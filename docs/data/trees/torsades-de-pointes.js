@@ -206,7 +206,7 @@ export const TORSADES_DE_POINTES_NODES = [
         type: 'info',
         module: 3,
         title: '🚫 Drugs to AVOID in TdP',
-        body: '**These drugs prolong QT and WILL worsen TdP:**\n\n• **Amiodarone** — Class III, prolongs QT significantly. The most common error in TdP management.\n• **Procainamide** — Class IA, prolongs QT\n• **Sotalol** — Class III, prolongs QT\n• **Beta-blockers** — in acquired TdP, can worsen pause-dependent mechanism (appropriate in congenital LQTS)\n• **Any Class IA or Class III antiarrhythmic**\n• **Ibutilide, dofetilide, dronedarone, flecainide**\n\n**Safe antiarrhythmics in TdP:**\n• Lidocaine (Class IB — shortens QT)\n• Magnesium (electrolyte/membrane stabilizer)\n\n**If the standard ACLS "VT" protocol is followed with amiodarone, the patient may worsen or die.**',
+        body: '**These drugs prolong QT and WILL worsen TdP:**\n\n• [Amiodarone](#/drug/amiodarone/cardiac arrest) — Class III, prolongs QT significantly. The most common error in TdP management.\n• [Procainamide](#/drug/procainamide/wide-complex tachycardia) — Class IA, prolongs QT\n• **Sotalol** — Class III, prolongs QT\n• **Beta-blockers** — in acquired TdP, can worsen pause-dependent mechanism (appropriate in congenital LQTS)\n• **Any Class IA or Class III antiarrhythmic**\n• **Ibutilide, dofetilide, dronedarone, flecainide**\n\n**Safe antiarrhythmics in TdP:**\n• Lidocaine (Class IB — shortens QT)\n• Magnesium (electrolyte/membrane stabilizer)\n\n**If the standard ACLS "VT" protocol is followed with amiodarone, the patient may worsen or die.**',
         citation: [1, 2, 4],
         next: 'tdp-refractory',
         summary: 'Amiodarone prolongs QT and WILL worsen TdP — most common lethal error in TdP management',
