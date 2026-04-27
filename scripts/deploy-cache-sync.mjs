@@ -96,6 +96,7 @@ if (!diffOutput.trim()) {
       'rabies':           { prefix: 'RABIES' },
       'burns':            { prefix: 'BURNS' },
       'echo-views':       { prefix: 'ECHO_VIEWS' },
+      'pneumonia':        { prefix: 'PNEUMONIA' },
     };
 
     const sqlLines = [];
