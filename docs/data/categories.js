@@ -929,6 +929,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'sti-start',
             },
             {
+                id: 'pneumonia',
+                title: 'Pneumonia',
+                subtitle: 'CAP/HAP/VAP → Severity (PSI/CURB-65) → MRSA/Pseudomonas Risk → Complications → Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 38,
+                entryNodeId: 'pna-start',
+            },
+            {
                 id: 'traveler-infections',
                 title: 'Traveler Infections',
                 subtitle: 'Assessment → Fever/GI/Rash/Respiratory → Geographic Risk → Malaria/Dengue/Typhoid → Treatment → Disposition',

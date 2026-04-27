@@ -290,6 +290,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/kratom-withdrawal.js');
             return { nodes: m.KRATOM_WITHDRAWAL_NODES, entryNodeId: 'kw-start', categoryId: 'toxicology', moduleLabels: m.KRATOM_WITHDRAWAL_MODULE_LABELS, citations: m.KRATOM_WITHDRAWAL_CITATIONS, criticalActions: m.KRATOM_WITHDRAWAL_CRITICAL_ACTIONS };
         },
+        'pneumonia': async () => {
+            const m = await import('../data/trees/pneumonia.js');
+            return { nodes: m.PNEUMONIA_NODES, entryNodeId: 'pna-start', categoryId: 'infectious-disease', moduleLabels: m.PNEUMONIA_MODULE_LABELS, citations: m.PNEUMONIA_CITATIONS, criticalActions: m.PNEUMONIA_CRITICAL_ACTIONS };
+        },
         'alcohol-withdrawal': async () => {
             const m = await import('../data/trees/alcohol-withdrawal.js');
             return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'emergency-medicine', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS, criticalActions: m.ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS };

@@ -17664,6 +17664,224 @@ const KW_COMPLICATIONS_GUIDE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Pneumonia — Info Pages
+// -------------------------------------------------------------------
+
+const PNA_OVERVIEW: InfoPage = {
+  id: 'pna-overview',
+  title: 'Pneumonia Overview',
+  subtitle: 'Classification, epidemiology, and clinical approach',
+  sections: [
+    {
+      heading: 'Classification by Setting',
+      body: '**Community-Acquired Pneumonia (CAP):**\n• Acquired outside healthcare setting\n• Most common: S. pneumoniae, H. influenzae, atypicals (Mycoplasma, Chlamydia, Legionella)\n• IDSA/ATS 2019 guidelines govern treatment\n\n**Hospital-Acquired Pneumonia (HAP):**\n• Develops ≥48 hours after hospital admission\n• Higher risk of MDR organisms: MRSA, Pseudomonas, Acinetobacter\n\n**Ventilator-Associated Pneumonia (VAP):**\n• Develops 48-72 hours after intubation\n• Highest MDR risk\n\n**Aspiration Pneumonia:**\n• Often CAP + aspiration event\n• Modern approach: do NOT routinely cover anaerobes',
+    },
+    {
+      heading: 'Initial Workup',
+      body: '**All patients:**\n• Chest X-ray (or CT if high suspicion with negative CXR)\n• Pulse oximetry\n• CBC, BMP, lactate\n\n**Hospitalized patients:**\n• Blood cultures × 2 (before antibiotics)\n• Sputum gram stain and culture\n• Consider procalcitonin (helps guide de-escalation)\n\n**Severe CAP or specific indications:**\n• Urine pneumococcal antigen\n• Urine Legionella antigen (severe, outbreak exposure, travel to endemic area)\n• Influenza testing when flu circulating',
+    },
+    {
+      heading: 'Key Decision Points',
+      body: '**1. Where was it acquired?** → CAP vs HAP/VAP dictates empiric coverage\n\n**2. How severe?** → PSI/CURB-65 determines outpatient vs admit vs ICU\n\n**3. Risk for resistant organisms?** → MRSA and Pseudomonas risk assessment\n\n**4. Any complications?** → Effusion, empyema, abscess require different approach',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Metlay JP, et al. IDSA/ATS CAP Guidelines. Am J Respir Crit Care Med. 2019;200(7):e45-e67.' },
+    { num: 2, text: 'Kalil AC, et al. IDSA/ATS HAP/VAP Guidelines. Clin Infect Dis. 2016;63(5):e61-e111.' },
+  ],
+};
+
+const PNA_SEVERE_INFO: InfoPage = {
+  id: 'pna-severe-info',
+  title: 'Severe CAP Criteria',
+  subtitle: 'IDSA/ATS 2019 major and minor criteria',
+  sections: [
+    {
+      heading: 'Major Criteria (Any 1 = ICU)',
+      body: '• **Septic shock** requiring vasopressors\n• **Respiratory failure** requiring mechanical ventilation\n\nEither major criterion mandates ICU admission.',
+    },
+    {
+      heading: 'Minor Criteria (3+ = Severe CAP)',
+      body: '• Respiratory rate ≥30 breaths/min\n• PaO2/FiO2 ratio ≤250\n• Multilobar infiltrates\n• Confusion/disorientation\n• Uremia (BUN ≥20 mg/dL)\n• Leukopenia (WBC <4,000 cells/μL)\n• Thrombocytopenia (platelets <100,000/μL)\n• Hypothermia (core temperature <36°C)\n• Hypotension requiring aggressive fluid resuscitation\n\n**3 or more minor criteria = severe CAP → ICU admission**',
+    },
+    {
+      heading: 'Clinical Application',
+      body: 'These criteria identify patients at high risk for:\n• Intensive respiratory support (BiPAP, mechanical ventilation)\n• Vasopressor support (ICU-level care)\n• 30-day mortality >10%\n\n**Use SMART-COP for objective prediction of IRVS need:**\n• Score ≥5: 33% need intensive support\n• Score ≥7: 67% need intensive support',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Metlay JP, et al. IDSA/ATS CAP Guidelines. Am J Respir Crit Care Med. 2019;200(7):e45-e67.' },
+    { num: 2, text: 'Charles PG, et al. SMART-COP validation. Clin Infect Dis. 2008;47(3):375-384.' },
+  ],
+};
+
+const PNA_ABX_DOSING: InfoPage = {
+  id: 'pna-abx-dosing',
+  title: 'Pneumonia Antibiotic Dosing',
+  subtitle: 'Quick reference for empiric regimens',
+  sections: [
+    {
+      heading: 'Outpatient Regimens',
+      body: '',
+      drugTable: [
+        { drug: 'Amoxicillin', regimen: '1g PO TID × 5 days (healthy, no comorbidities)' },
+        { drug: 'Doxycycline', regimen: '100mg PO BID × 5 days' },
+        { drug: 'Levofloxacin', regimen: '750mg PO daily × 5 days' },
+        { drug: 'Moxifloxacin', regimen: '400mg PO daily × 5 days' },
+        { drug: 'Amox-Clav + Azithro', regimen: '875/125mg TID + 500mg day 1 then 250mg daily × 5 days' },
+      ],
+    },
+    {
+      heading: 'Inpatient Non-Severe',
+      body: '',
+      drugTable: [
+        { drug: 'Ceftriaxone', regimen: '1-2g IV daily' },
+        { drug: 'Ampicillin-Sulbactam', regimen: '3g IV Q6h' },
+        { drug: 'Azithromycin', regimen: '500mg IV/PO daily' },
+        { drug: 'Levofloxacin', regimen: '750mg IV/PO daily (monotherapy OK)' },
+      ],
+    },
+    {
+      heading: 'Anti-Pseudomonal Coverage',
+      body: '',
+      drugTable: [
+        { drug: 'Cefepime', regimen: '2g IV Q8h' },
+        { drug: 'Piperacillin-Tazobactam', regimen: '4.5g IV Q6h' },
+        { drug: 'Meropenem', regimen: '1g IV Q8h (ESBL concern)' },
+        { drug: 'Ciprofloxacin', regimen: '400mg IV Q8h' },
+      ],
+    },
+    {
+      heading: 'MRSA Coverage',
+      body: '',
+      drugTable: [
+        { drug: 'Vancomycin', regimen: '15-20 mg/kg IV Q8-12h (target trough 15-20 mcg/mL)' },
+        { drug: 'Vancomycin Loading', regimen: '25-30 mg/kg IV × 1 for severe/ICU' },
+        { drug: 'Linezolid', regimen: '600mg IV/PO BID (lung penetration advantage)' },
+      ],
+    },
+    {
+      heading: 'Anaerobic Coverage (Abscess/Empyema)',
+      body: '',
+      drugTable: [
+        { drug: 'Clindamycin', regimen: '600mg IV Q6h' },
+        { drug: 'Metronidazole', regimen: '500mg IV Q8h' },
+        { drug: 'Amp-Sulbactam', regimen: '3g IV Q6h (covers anaerobes)' },
+        { drug: 'Pip-Tazo', regimen: '4.5g IV Q6h (covers anaerobes)' },
+      ],
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Metlay JP, et al. IDSA/ATS CAP Guidelines. Am J Respir Crit Care Med. 2019.' },
+    { num: 2, text: 'Sanford Guide to Antimicrobial Therapy. 2025.' },
+  ],
+};
+
+const PNA_MRSA_INFO: InfoPage = {
+  id: 'pna-mrsa-info',
+  title: 'MRSA Risk Assessment',
+  subtitle: 'When to add empiric MRSA coverage',
+  sections: [
+    {
+      heading: 'Risk Factors (Add Coverage if Any)',
+      body: '• **Prior MRSA isolation** (any site, especially respiratory) — strongest predictor\n• IV antibiotics within past 90 days\n• Hospitalization within past 90 days\n• Nursing home / long-term care residence\n• End-stage renal disease (ESRD)\n• Injection drug use\n• Lung abscess or empyema\n• Recent influenza infection\n• Necrotizing or cavitary pneumonia on imaging',
+    },
+    {
+      heading: 'Local Epidemiology',
+      body: 'If your facility has **MRSA prevalence >10-20%** in respiratory cultures, lower your threshold to cover empirically.\n\nCheck your hospital antibiogram for local resistance patterns.',
+    },
+    {
+      heading: 'MRSA Nasal PCR',
+      body: '**Excellent negative predictive value (~95%)**\n\nIf nasal MRSA PCR is negative:\n• Can guide stopping vancomycin at 48h\n• Reduces unnecessary vancomycin exposure\n• Cost-effective de-escalation strategy\n\n**Positive PCR:**\n• Continue MRSA coverage pending cultures\n• Colonization ≠ infection, but risk is elevated',
+    },
+    {
+      heading: 'Coverage Options',
+      body: '**Vancomycin:**\n• 15-20 mg/kg IV Q8-12h (target trough 15-20)\n• Loading dose 25-30 mg/kg for severe/ICU\n\n**Linezolid:**\n• 600mg IV/PO BID\n• Better lung penetration than vancomycin\n• Consider for necrotizing pneumonia',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Metlay JP, et al. IDSA/ATS CAP Guidelines. Am J Respir Crit Care Med. 2019.' },
+    { num: 2, text: 'Kalil AC, et al. IDSA/ATS HAP/VAP Guidelines. Clin Infect Dis. 2016.' },
+  ],
+};
+
+const PNA_PSEUDO_INFO: InfoPage = {
+  id: 'pna-pseudo-info',
+  title: 'Pseudomonas Risk Assessment',
+  subtitle: 'When to add anti-pseudomonal coverage',
+  sections: [
+    {
+      heading: 'Risk Factors (Add Coverage if Any)',
+      body: '• **Prior Pseudomonas respiratory isolation** — strongest predictor\n• Bronchiectasis\n• Severe COPD (FEV1 <25% predicted)\n• Tracheostomy history\n• Lung abscess or empyema\n• Recurrent pneumonia requiring hospitalization\n• Chronic steroid use (prednisone >10mg/day)\n• Recent broad-spectrum antibiotics',
+    },
+    {
+      heading: 'Important Nuance',
+      body: '**COPD alone is NOT an indication for Pseudomonas coverage**\n\nIsolated COPD without additional factors has the same Pseudomonas risk as the general population (~1-2.5% of CAP).\n\nRequire **severe COPD (FEV1 <25%)** OR **prior Pseudomonas isolation** to justify empiric coverage.',
+    },
+    {
+      heading: 'Coverage Options',
+      body: '**Anti-pseudomonal beta-lactams:**\n• Cefepime 2g IV Q8h\n• Piperacillin-tazobactam 4.5g IV Q6h\n• Meropenem 1g IV Q8h (if ESBL concern)\n\n**Alternative/additional coverage:**\n• Levofloxacin 750mg IV daily (also covers Pseudomonas)\n• Ciprofloxacin 400mg IV Q8h\n\n**For high MDR risk (HAP/VAP):**\nUse TWO anti-pseudomonal agents from different classes',
+    },
+    {
+      heading: 'De-escalation',
+      body: 'Stop Pseudomonas coverage at 48-72h if:\n• Cultures are negative for Pseudomonas\n• Patient is clinically improving\n• No risk factors on reassessment\n\n**Do not maintain broad coverage unnecessarily** — promotes resistance',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Metlay JP, et al. IDSA/ATS CAP Guidelines. Am J Respir Crit Care Med. 2019.' },
+    { num: 2, text: 'Kalil AC, et al. IDSA/ATS HAP/VAP Guidelines. Clin Infect Dis. 2016.' },
+  ],
+};
+
+const PNA_EFFUSION_INFO: InfoPage = {
+  id: 'pna-effusion-info',
+  title: 'Parapneumonic Effusion Assessment',
+  subtitle: 'Simple vs complicated vs empyema',
+  sections: [
+    {
+      heading: 'Classification',
+      body: '**Stage 1 — Simple (Exudative):**\n• Thin, free-flowing fluid\n• Sterile, low cell count\n• Usually resolves with antibiotics alone\n\n**Stage 2 — Fibrinopurulent:**\n• Fibrin deposition, loculations developing\n• Develops 5-10 days into infection\n• May progress without drainage\n\n**Stage 3 — Organizing (Empyema):**\n• Thick pleural peel, trapped lung\n• Positive culture/gram stain\n• **REQUIRES drainage**',
+    },
+    {
+      heading: 'Diagnostic Thoracentesis',
+      body: '**Send fluid for:**\n• pH (anaerobic syringe, ice, to lab immediately)\n• Glucose\n• LDH\n• Total protein\n• Cell count with differential\n• Gram stain\n• Culture (aerobic + anaerobic)\n\n**Also consider:** cytology if malignancy concern',
+    },
+    {
+      heading: 'Complicated Effusion Criteria',
+      body: '**Drain if ANY of the following:**\n• pH <7.2\n• Glucose <60 mg/dL (or <40 mg/dL = empyema)\n• LDH >3× upper limit of serum normal (or >1000 IU/L)\n• Positive gram stain\n• Positive culture\n• Frank pus\n• Loculations on imaging',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Light RW. Parapneumonic effusions and empyema. Proc Am Thorac Soc. 2006.' },
+    { num: 2, text: 'Rahman NM, et al. tPA/DNase for pleural infection. NEJM. 2011.' },
+  ],
+};
+
+const PNA_RAPID_SCORE: InfoPage = {
+  id: 'pna-rapid',
+  title: 'RAPID Score',
+  subtitle: 'Mortality risk stratification for empyema',
+  sections: [
+    {
+      heading: 'Components',
+      body: '**R** — Renal function: Creatinine >141 μmol/L (>1.6 mg/dL) = **1 point**\n\n**A** — Age >50 years = **1 point**\n\n**P** — Purulence: Frank pus on aspiration = **2 points**\n\n**I** — Infection source: Hospital-acquired or immunosuppression = **1 point**\n\n**D** — Dietary: Albumin <27 g/L = **1 point**\n\n**Total: 0-7 points**',
+    },
+    {
+      heading: 'Risk Categories',
+      body: '**Low risk (0-2 points):**\n• ~2% 3-month mortality\n• May be candidates for less aggressive drainage\n\n**Medium risk (3-4 points):**\n• ~10% 3-month mortality\n• Standard chest tube drainage\n\n**High risk (5-7 points):**\n• ~25-30% 3-month mortality\n• Consider early surgical consultation\n• More aggressive management warranted',
+    },
+    {
+      heading: 'Clinical Application',
+      body: 'RAPID score helps:\n• Set expectations for outcomes\n• Guide aggressiveness of intervention\n• Identify patients needing early surgical input\n\nDerived from MIST1/MIST2 trial populations.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rahman NM, et al. RAPID score for pleural infection. Chest. 2014.' },
+    { num: 2, text: 'MIST2 Trial Investigators. NEJM. 2011.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Cardiac Arrest — Steps Summary
 // -------------------------------------------------------------------
 
@@ -18842,6 +19060,14 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'kw-treatment-comparison': KW_TREATMENT_COMPARISON,
   'kw-bup-dosing-tool': KW_BUP_DOSING_TOOL,
   'kw-complications-guide': KW_COMPLICATIONS_GUIDE,
+  // Pneumonia
+  'pna-overview': PNA_OVERVIEW,
+  'pna-severe-info': PNA_SEVERE_INFO,
+  'pna-abx-dosing': PNA_ABX_DOSING,
+  'pna-mrsa-info': PNA_MRSA_INFO,
+  'pna-pseudo-info': PNA_PSEUDO_INFO,
+  'pna-effusion-info': PNA_EFFUSION_INFO,
+  'pna-rapid': PNA_RAPID_SCORE,
   // Steps Summaries — Resuscitation Consults
   'ca-steps-summary': CARDIAC_ARREST_SUMMARY,
   'pea-steps-summary': PEA_ARREST_SUMMARY,

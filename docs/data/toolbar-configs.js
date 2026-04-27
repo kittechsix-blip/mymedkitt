@@ -1380,6 +1380,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'heart', label: 'CHD', icon: '❤️', action: 'jump', target: 'misfits-heart' },
         { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'misfits-abx' },
     ],
+    'pneumonia': [
+        { id: 'psi', label: 'PSI/PORT', icon: '📊', action: 'calculator', target: 'psi-port' },
+        { id: 'curb65', label: 'CURB-65', icon: '📈', action: 'calculator', target: 'curb-65' },
+        { id: 'smartcop', label: 'SMART-COP', icon: '🏥', action: 'calculator', target: 'smart-cop' },
+        { id: 'abx', label: 'Abx Dosing', icon: '💊', action: 'overlay', target: 'pna-abx-dosing' },
+        { id: 'mrsa', label: 'MRSA Risk', icon: '🦠', action: 'overlay', target: 'pna-mrsa-info' },
+        { id: 'pseudo', label: 'Pseudo Risk', icon: '🧫', action: 'overlay', target: 'pna-pseudo-info' },
+        { id: 'effusion', label: 'Effusion', icon: '💧', action: 'overlay', target: 'pna-effusion-info' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
