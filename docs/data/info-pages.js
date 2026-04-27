@@ -16772,6 +16772,158 @@ const MG_IVIG_PLEX = {
     ],
 };
 // -------------------------------------------------------------------
+// Kratom Withdrawal Reference Pages
+// -------------------------------------------------------------------
+const KW_PHARMACOLOGY = {
+    id: 'kw-pharmacology',
+    title: 'Kratom Pharmacology',
+    subtitle: 'Why Withdrawal Occurs',
+    sections: [
+        {
+            heading: 'Active Alkaloids',
+            body: '**Mitragynine** (60-70% of alkaloid content)\n- Partial mu-opioid receptor agonist\n- Also binds alpha-adrenergic, serotonin, dopamine receptors\n\n**7-Hydroxymitragynine (7-OH)** (<0.05% of leaf)\n- 5-10x more potent than mitragynine at mu receptor\n- More potent than morphine\n- Key driver of dependence',
+        },
+        {
+            heading: 'Human-Specific Metabolism',
+            body: '**MGPI (Mitragynine Pseudoindoxyl)**\n\nFormed rapidly in human plasma (54% conversion within 2 hours).\n\n**Most potent kratom metabolite** - mu-opioid binding at 0.087 nM vs mitragynine 7.24 nM.\n\nDoes NOT form significantly in animal models (only 2-4%). This explains why animal studies **underestimate** human dependence potential.',
+        },
+        {
+            heading: 'Biased Agonism',
+            body: 'Kratom alkaloids exhibit **biased agonism** at mu-opioid receptors:\n\n- Activate G-protein signaling\n- Do NOT recruit beta-arrestin\n\nThis may explain:\n- Reduced respiratory depression vs classical opioids\n- Reduced constipation\n- BUT tolerance and withdrawal still develop with chronic high-dose use',
+        },
+        {
+            heading: 'Multi-Receptor Activity',
+            body: 'Kratom is NOT "just an opioid" - it acts on:\n\n- Mu-opioid (partial agonist)\n- Alpha-2 adrenergic\n- Serotonin 5-HT2A\n- Dopamine D2\n\nThis multi-receptor profile explains why withdrawal is **milder but more protracted** than pure opioid withdrawal.',
+        },
+        {
+            heading: 'Dose-Dependent Effects',
+            body: '**Low doses (2-5g):** Stimulant-like\n- Alertness, energy, mild euphoria\n\n**High doses (>10g):** Opioid-like\n- Sedation, analgesia, euphoria\n- Dependence develops here\n\n**Withdrawal threshold:** >3g twice daily for extended period, or any regular use of concentrated 7-OH products.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Prozialeck WC, et al. An update on the clinical pharmacology of kratom. Pharmacol Res. 2024;200:107066.' },
+        { num: 2, text: 'Kruegel AC, et al. Metabolism of a Kratom Alkaloid Metabolite in Human Plasma. ACS Pharmacol Transl Sci. 2020;3(6):1063-1068.' },
+    ],
+};
+const KW_TIMELINE_CHART = {
+    id: 'kw-timeline-chart',
+    title: 'Withdrawal Timeline',
+    subtitle: 'Kratom vs Opioid Comparison',
+    sections: [
+        {
+            heading: 'Kratom Withdrawal',
+            body: '**Onset:** 6-12 hours\n**Peak:** Day 3-4 (96 hours)\n**Acute phase:** 4-7 days\n**PAWS:** 2+ weeks\n**Full resolution:** Up to 3 months',
+        },
+        {
+            heading: 'Short-Acting Opioid (Heroin, Oxycodone)',
+            body: '**Onset:** 8-24 hours\n**Peak:** 36-72 hours\n**Resolution:** 5-7 days',
+        },
+        {
+            heading: 'Long-Acting Opioid (Methadone)',
+            body: '**Onset:** 36-48 hours\n**Peak:** 72-96 hours\n**Resolution:** 2-3 weeks',
+        },
+        {
+            heading: 'Key Differences',
+            body: '| Feature | Kratom | Opioid |\n|---------|--------|--------|\n| Intensity | Milder | More intense |\n| Duration | 1-3 weeks (up to 3 mo) | ~1 week |\n| Peak | Day 3-4 | Day 1-2 |\n| Life-threatening | Rare | Uncommon |\n| Neuropsych | Prominent, protracted | Present but shorter |',
+        },
+        {
+            heading: 'Clinical Implication',
+            body: '**Warn patients:** symptoms may worsen before improving. Peak is day 3-4, not day 1-2 like opioids.\n\nPlan follow-up accordingly - 24-48h check-in recommended to catch peak symptoms.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Garcia-Romeu A, et al. Kratom withdrawal: Discussions of a scientific expert forum. Drug Alcohol Depend. 2023;248:109927.' },
+    ],
+};
+const KW_TREATMENT_COMPARISON = {
+    id: 'kw-treatment-comparison',
+    title: 'Treatment Comparison',
+    subtitle: 'Buprenorphine vs Non-Opioid Pathway',
+    sections: [
+        {
+            heading: 'Buprenorphine (Best-Supported)',
+            body: '**Mechanism:** High-affinity partial mu-agonist displaces kratom alkaloids\n\n**Advantages:**\n- Best evidence for efficacy (case series)\n- Rapid symptom control\n- Can bridge to MOUD if OUD present\n\n**Concerns:**\n- May create iatrogenic opioid dependence in opioid-naive\n- Wait for COWS ≥8 to avoid precipitated WD\n\n**Best for:** Prior opioid use, severe symptoms, patient preference',
+        },
+        {
+            heading: 'Non-Opioid (Clonidine/Gabapentin)',
+            body: '**Mechanism:** Alpha-2 agonist (clonidine) reduces sympathetic outflow; gabapentin for neuro/muscular symptoms\n\n**Advantages:**\n- No risk of iatrogenic opioid dependence\n- No cross-dependence with kratom\n- Good safety profile\n\n**Concerns:**\n- May be less effective for severe withdrawal\n- Hypotension with clonidine\n\n**Best for:** Opioid-naive, mild-moderate symptoms, patient declines opioid therapy',
+        },
+        {
+            heading: 'Decision Factors',
+            body: '| Factor | Buprenorphine | Non-Opioid |\n|--------|---------------|------------|\n| Prior opioid use | Yes | Either |\n| Opioid-naive | Caution | Preferred |\n| COWS 5-12 | Either | Good option |\n| COWS >12 | Preferred | Can try |\n| Patient preference | Varies | Varies |',
+        },
+        {
+            heading: 'Combination Approach',
+            body: 'Can combine buprenorphine with clonidine for residual adrenergic symptoms.\n\nGabapentin adds value in either pathway for myalgias, restlessness, and sleep.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Khanna IK, et al. Treatment of Kratom Withdrawal With Buprenorphine/Naloxone. J Addict Med. 2020;14(6):e284-e286.' },
+        { num: 2, text: 'Caputo F, et al. Clonidine Attenuates Mitragynine Withdrawal. Front Pharmacol. 2021;12:708019.' },
+    ],
+};
+const KW_BUP_DOSING_TOOL = {
+    id: 'kw-bup-dosing-tool',
+    title: 'Buprenorphine Dosing',
+    subtitle: 'Kratom Withdrawal Protocol',
+    sections: [
+        {
+            heading: 'Pre-Dosing Requirements',
+            body: '1. Confirm COWS ≥8 (objective withdrawal present)\n2. Document last kratom use (should be >6-12h)\n3. Check for contraindications (severe respiratory disease, concurrent full agonist)\n4. Obtain baseline vitals',
+        },
+        {
+            heading: 'Initial Dose by Kratom Use',
+            body: '**<20g kratom/day:**\nStart 4-8 mg SL (or 4/1 - 8/2 mg buprenorphine-naloxone)\n\n**>40g kratom/day:**\nStart 12-16 mg SL (or 12/3 - 16/4 mg buprenorphine-naloxone)\n\n**Unknown/concentrated products:**\nStart 8 mg, titrate based on response',
+        },
+        {
+            heading: 'Titration Protocol',
+            body: '1. Give initial dose\n2. Reassess COWS at 60-90 minutes\n3. If COWS still elevated (>8), give additional 4 mg\n4. Repeat q60-90min as needed\n5. Maximum day 1: 16-24 mg total\n\n**Add clonidine 0.1 mg PRN** for residual adrenergic symptoms (sweating, tachycardia)',
+        },
+        {
+            heading: 'Taper Schedule',
+            body: '**Short-term (acute withdrawal):**\nDay 1: 8-16 mg\nDay 2-3: 8 mg\nDay 4-5: 4 mg\nDay 6-7: 2 mg then stop\n\n**Ongoing MOUD:**\nIf patient has OUD or prefers maintenance, transition to standard buprenorphine maintenance with addiction medicine follow-up.',
+        },
+        {
+            heading: 'Discharge Prescription',
+            body: 'If discharging with buprenorphine:\n- 3-day bridge supply (common)\n- Arrange follow-up within 72 hours\n- Provide naloxone kit\n- Clear instructions on dosing',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Shetty A, et al. The successful use of buprenorphine to manage kratom withdrawal. J Subst Use Addict Treat. 2025.' },
+    ],
+};
+const KW_COMPLICATIONS_GUIDE = {
+    id: 'kw-complications-guide',
+    title: 'Complications Reference',
+    subtitle: 'Monitoring and Red Flags',
+    sections: [
+        {
+            heading: 'Cardiac (HIGHEST CONCERN)',
+            body: '**Documented complications:**\n- Bradycardia at peak (day 3-4) → cardiac arrest (case report)\n- Tachycardia (early phase)\n- QTc prolongation (especially 7-OH products)\n- Brugada exacerbation\n- Torsades de pointes (rare)\n\n**Monitor:** Continuous telemetry if admitted. ECG on all moderate-severe presentations.',
+        },
+        {
+            heading: 'Neurological',
+            body: '**Seizures:** Rare, more common in high-dose chronic users\n\n**Delirium:** Hallucinations, confusion documented\n- May meet CIWA criteria\n- Treat with dexmedetomidine ± lorazepam\n\n**Motor symptoms:** Tremors, jerky movements, hyperreflexia, coordination issues',
+        },
+        {
+            heading: 'GI / Metabolic',
+            body: '**Severe dehydration** from vomiting/diarrhea\n- Can cause electrolyte imbalance → arrhythmias\n- Check BMP, replete aggressively\n\n**Hepatic injury:**\n- Kratom-induced liver injury (cholestatic/mixed)\n- Check LFTs if jaundice, RUQ pain, or dark urine\n- More common with chronic use than acute withdrawal',
+        },
+        {
+            heading: 'Psychiatric',
+            body: '**Depression:** Prominent and protracted\n- May persist weeks (PAWS)\n- Screen for suicidality\n\n**Cognitive impairment:** "Brain fog" lasting weeks\n\n**Severe agitation:** May require chemical sedation',
+        },
+        {
+            heading: 'ICU Admission Triggers',
+            body: '- HR <50 with symptoms\n- Arrhythmia on ECG\n- Hemodynamic instability\n- Seizure\n- Altered mental status, hallucinations\n- Intractable vomiting with severe dehydration\n- COWS >24 unresponsive to treatment',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Eggleston W, et al. The acute adverse health effects of kratom. Front Pharmacol. 2025;16:1620601.' },
+        { num: 2, text: 'CDC MMWR. Kratom-Related Reports to Poison Centers. 2025;75(11).' },
+    ],
+};
+// -------------------------------------------------------------------
 // Cardiac Arrest — Steps Summary
 // -------------------------------------------------------------------
 const CARDIAC_ARREST_SUMMARY = {
@@ -17444,6 +17596,12 @@ export const INFO_PAGES = {
     'mg-drugs-avoid': MG_DRUGS_AVOID,
     'mg-pyridostigmine': MG_PYRIDOSTIGMINE,
     'mg-ivig-plex': MG_IVIG_PLEX,
+    // Kratom Withdrawal
+    'kw-pharmacology': KW_PHARMACOLOGY,
+    'kw-timeline-chart': KW_TIMELINE_CHART,
+    'kw-treatment-comparison': KW_TREATMENT_COMPARISON,
+    'kw-bup-dosing-tool': KW_BUP_DOSING_TOOL,
+    'kw-complications-guide': KW_COMPLICATIONS_GUIDE,
     // Steps Summaries — Resuscitation Consults
     'ca-steps-summary': CARDIAC_ARREST_SUMMARY,
     'pea-steps-summary': PEA_ARREST_SUMMARY,

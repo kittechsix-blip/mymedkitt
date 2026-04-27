@@ -151,6 +151,7 @@ const TREE_REGISTRY = {
   'diplopia':             { prefix: 'DIPLOPIA',               entryNodeId: 'diplopia-start', categoryId: 'ophthalmology' },
   'pacemaker':            { prefix: 'PACEMAKER',              entryNodeId: 'pm-start',       categoryId: 'cardiology' },
   'opioid-withdrawal':    { prefix: 'OPIOID_WITHDRAWAL',      entryNodeId: 'ow-start',       categoryId: 'toxicology' },
+  'kratom-withdrawal':    { prefix: 'KRATOM_WITHDRAWAL',      entryNodeId: 'kw-start',       categoryId: 'toxicology' },
   'alcohol-withdrawal':   { prefix: 'ALCOHOL_WITHDRAWAL',     entryNodeId: 'aws-start',      categoryId: 'toxicology' },
   'anticoag-reversal':    { prefix: 'ANTICOAG_REVERSAL',      entryNodeId: 'acr-start',      categoryId: 'heme-onc' },
   'tuberculosis':         { prefix: 'TUBERCULOSIS',           entryNodeId: 'tb-start',       categoryId: 'infectious-disease' },

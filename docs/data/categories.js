@@ -1884,6 +1884,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ow-start',
             },
             {
+                id: 'kratom-withdrawal',
+                title: 'Kratom Withdrawal',
+                subtitle: 'Recognition → Assessment → Buprenorphine vs Non-Opioid → Complications → Disposition',
+                categoryId: 'toxicology',
+                version: '1.0',
+                nodeCount: 24,
+                entryNodeId: 'kw-start',
+            },
+            {
                 id: 'tca-toxidrome',
                 title: 'TCA Overdose',
                 subtitle: 'Recognition → ECG → Bicarbonate → Seizures → Hemodynamics → Disposition',

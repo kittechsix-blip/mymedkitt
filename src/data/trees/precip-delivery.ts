@@ -12,7 +12,7 @@ export const PRECIP_DELIVERY_CRITICAL_ACTIONS = [
   { text: 'Assign minimum 4 people: mom, baby, delivery, resus', nodeId: 'precip-callhelp' },
   { text: 'Turn on neonatal warmer now', nodeId: 'precip-callhelp' },
   { text: 'Support head, check for nuchal cord', nodeId: 'precip-head-delivery' },
-  { text: 'Delayed cord clamping (30-60 sec) unless resuscitation needed', nodeId: 'precip-cord-clamp' },
+  { text: 'Deferred cord clamping (at least 60 sec) unless resuscitation needed', nodeId: 'precip-cord-clamp' },
   { text: 'Dry, warm, stimulate newborn', nodeId: 'precip-neonate-assess' },
   { text: 'Controlled cord traction for placenta', nodeId: 'precip-placenta-delivery' },
   { text: 'Oxytocin 10 units IM after placenta delivers', nodeId: 'precip-oxytocin' },
@@ -264,9 +264,9 @@ export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Cord Clamping & Cutting',
-    body: 'CORD CLAMPING AND CUTTING\n\n**DO NOT DROP THE BABY.** The baby is wet and slippery.\n\n1. Place the baby directly on mom\'s abdomen — **skin-to-skin contact**\n2. Dry the baby vigorously with a warm towel\n3. Clamp the cord in **two places**, approximately **3 cm apart**, with the first clamp ~3 cm from the baby\'s abdomen\n4. **Cut between the two clamps** with sterile scissors\n\nDELAYED CORD CLAMPING\nCurrent NRP guidelines recommend delayed cord clamping (30–60 seconds) in vigorous term newborns. If the baby requires resuscitation, clamp and cut immediately. [5]\n\nNON-STERILE ENVIRONMENT\nIf delivery occurred without sterile instruments, clean the cord stump with antiseptic to prevent omphalitis (cord infection). [1][2]',
+    body: 'CORD CLAMPING AND CUTTING\n\n**DO NOT DROP THE BABY.** The baby is wet and slippery.\n\n1. Place the baby directly on mom\'s abdomen — **skin-to-skin contact**\n2. Dry the baby vigorously with a warm towel\n3. Clamp the cord in **two places**, approximately **3 cm apart**, with the first clamp ~3 cm from the baby\'s abdomen\n4. **Cut between the two clamps** with sterile scissors\n\nDELAYED CORD CLAMPING\nCurrent NRP 9th edition (October 2025) guidelines recommend deferred cord clamping for **at least 60 seconds** in vigorous term and preterm newborns who do not require immediate resuscitation. If the baby requires resuscitation, clamp and cut immediately. [5]\n\nNON-STERILE ENVIRONMENT\nIf delivery occurred without sterile instruments, clean the cord stump with antiseptic to prevent omphalitis (cord infection). [1][2]',
     citation: [1, 2, 5],
-    summary: 'Do NOT drop the baby — skin-to-skin, delayed cord clamping 30-60 sec unless resuscitation needed',
+    summary: 'Do NOT drop the baby — skin-to-skin, deferred cord clamping at least 60 sec unless resuscitation needed',
     images: [
       {
         src: 'images/precip-delivery/cord-clamping.png',
