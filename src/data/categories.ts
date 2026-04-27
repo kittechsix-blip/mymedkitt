@@ -324,6 +324,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'hemo-start',
       },
       {
+        id: 'pneumonia',
+        title: 'Pneumonia',
+        subtitle: 'CAP/HAP/VAP → Severity (PSI/CURB-65) → MRSA/Pseudomonas Risk → Complications → Disposition',
+        categoryId: 'critical-care',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'pna-start',
+      },
+      {
         id: 'cardiogenic-shock',
         title: 'Cardiogenic Shock',
         subtitle: 'Recognition → Hemodynamics → Stabilization → Pressors → MCS → Disposition',
