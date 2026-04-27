@@ -403,7 +403,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Additional Therapies',
-    body: '**Vasopressin analogues (case reports only):**\n• **Terlipressin** (Glypressin) — IV or endobronchial\n• Endobronchial has similar efficacy with 251x lower plasma concentration\n• [Desmopressin](#/drug/desmopressin/hemoptysis) — used in CF, leptospirosis\n\n**Bronchoscopic hemostatic agents:**\n• Oxidized regenerated cellulose (Surgicel)\n• Thrombin/fibrin glue\n• Argon plasma coagulation (APC)\n• Electrocautery, laser [2]',
+    body: '**Vasopressin analogues (case reports only):**\n• [Terlipressin](#/drug/terlipressin/acute variceal hemorrhage) (Glypressin) — IV or endobronchial\n• Endobronchial has similar efficacy with 251x lower plasma concentration\n• [Desmopressin](#/drug/desmopressin/hemoptysis) — used in CF, leptospirosis\n\n**Bronchoscopic hemostatic agents:**\n• Oxidized regenerated cellulose (Surgicel)\n• Thrombin/fibrin glue\n• Argon plasma coagulation (APC)\n• Electrocautery, laser [2]',
     citation: [2],
     next: 'hemo-icu-admit',
 

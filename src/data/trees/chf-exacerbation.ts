@@ -162,7 +162,7 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'SCAPE: Escalate Therapy',
-    body: '**Partial response — escalate:**\n\n**1. Increase NTG further:**\n- Push to 400-800 mcg/min if BP allows\n- No ceiling dose in SCAPE\n\n**2. BiPAP settings:**\n- Increase to BiPAP 24/20 if tolerated\n- Patient compliance key — may need sedation\n\n**3. Add second vasodilator:**\n- [Clevidipine](#/drug/clevidipine/chf) — calcium channel blocker, very titratable\n- [Nicardipine](#/drug/nicardipine/chf) — alternative IV CCB\n- **Enalaprilat** — if normal renal function\n\n**4. Consider nitroprusside:**\n- Guideline-recommended alternative\n- Risk: cyanide toxicity with prolonged use\n- Requires arterial line monitoring [1][3]',
+    body: '**Partial response — escalate:**\n\n**1. Increase NTG further:**\n- Push to 400-800 mcg/min if BP allows\n- No ceiling dose in SCAPE\n\n**2. BiPAP settings:**\n- Increase to BiPAP 24/20 if tolerated\n- Patient compliance key — may need sedation\n\n**3. Add second vasodilator:**\n- [Clevidipine](#/drug/clevidipine/chf) — calcium channel blocker, very titratable\n- [Nicardipine](#/drug/nicardipine/chf) — alternative IV CCB\n- [Enalaprilat](#/drug/enalaprilat/heart failure) — if normal renal function\n\n**4. Consider nitroprusside:**\n- Guideline-recommended alternative\n- Risk: cyanide toxicity with prolonged use\n- Requires arterial line monitoring [1][3]',
     citation: [1, 3],
     treatment: {
       firstLine: {

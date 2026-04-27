@@ -323,7 +323,7 @@ export const SHOULDER_DISLOCATION_NODES = [
         type: 'info',
         module: 6,
         title: 'Discharge Instructions',
-        body: '**Discharge checklist:**\n\n**Medications:**\n• NSAIDs: [Ibuprofen](#/drug/ibuprofen/pain) 600-800mg TID with food\n• Consider short course opioid for severe pain\n• Muscle relaxant optional: **Cyclobenzaprine** 10mg TID\n\n**Activity restrictions:**\n• Sling immobilization as prescribed\n• No lifting >5 lbs with affected arm\n• No overhead activities\n• No driving until out of sling\n\n**Return precautions:**\n• Numbness/tingling that worsens\n• New weakness\n• Severe pain not controlled with medications\n• Signs of re-dislocation\n\n**Follow-up:**\n• Orthopedics within 1-2 weeks\n• Physical therapy referral\n• First-time young patients: discuss surgical options',
+        body: '**Discharge checklist:**\n\n**Medications:**\n• NSAIDs: [Ibuprofen](#/drug/ibuprofen/pain) 600-800mg TID with food\n• Consider short course opioid for severe pain\n• Muscle relaxant optional: [Cyclobenzaprine](#/drug/cyclobenzaprine/musculoskeletal pain) 10mg TID\n\n**Activity restrictions:**\n• Sling immobilization as prescribed\n• No lifting >5 lbs with affected arm\n• No overhead activities\n• No driving until out of sling\n\n**Return precautions:**\n• Numbness/tingling that worsens\n• New weakness\n• Severe pain not controlled with medications\n• Signs of re-dislocation\n\n**Follow-up:**\n• Orthopedics within 1-2 weeks\n• Physical therapy referral\n• First-time young patients: discuss surgical options',
         citation: [1],
         next: 'shoulder-recurrence-counseling',
         summary: 'NSAIDs + optional muscle relaxant, sling, no lifting >5lbs, ortho within 1-2wk, PT referral',

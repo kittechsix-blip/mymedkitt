@@ -283,7 +283,7 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Empiric Antibiotics - MSSA Coverage',
-    body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n**Nafcillin** 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
+    body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n[Nafcillin](#/drug/nafcillin/pediatric MSSA osteomyelitis) 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
     citation: [1, 3],
     treatment: {
       firstLine: {

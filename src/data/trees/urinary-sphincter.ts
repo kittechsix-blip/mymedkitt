@@ -375,7 +375,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: '5-Alpha Reductase Inhibitors',
-    body: '**5-Alpha reductase inhibitors (5-ARIs):**\n\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n**Dutasteride** 0.5 mg daily\n\n**NOT helpful acutely** - effect takes 3-6 months.\n\n**Mechanism:** Blocks conversion of testosterone to DHT, causing prostate shrinkage (20-30% reduction over 6-12 months).\n\n**When to consider:**\n- Large prostate (>40 mL)\n- Recurrent retention episodes\n- PSA >1.5 ng/mL\n\n**Typically started by urology**, not in ED.\n\n**Side effects:**\n- Sexual dysfunction (decreased libido, ED)\n- Decreased ejaculate volume\n- Gynecomastia (rare)\n- Lowers PSA by ~50% (inform urologist)\n\n**Bethanechol** - cholinergic agent for atonic bladder, rarely used acutely.',
+    body: '**5-Alpha reductase inhibitors (5-ARIs):**\n\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n[Dutasteride](#/drug/dutasteride/BPH) 0.5 mg daily\n\n**NOT helpful acutely** - effect takes 3-6 months.\n\n**Mechanism:** Blocks conversion of testosterone to DHT, causing prostate shrinkage (20-30% reduction over 6-12 months).\n\n**When to consider:**\n- Large prostate (>40 mL)\n- Recurrent retention episodes\n- PSA >1.5 ng/mL\n\n**Typically started by urology**, not in ED.\n\n**Side effects:**\n- Sexual dysfunction (decreased libido, ED)\n- Decreased ejaculate volume\n- Gynecomastia (rare)\n- Lowers PSA by ~50% (inform urologist)\n\n[Bethanechol](#/drug/bethanechol/neurogenic bladder) - cholinergic agent for atonic bladder, rarely used acutely.',
     citation: [1, 10],
     next: 'sphincter-dispo-decision',
 

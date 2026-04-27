@@ -287,7 +287,7 @@ export const IRON_OD_NODES = [
         type: 'info',
         module: 5,
         title: 'Deferoxamine Dosing',
-        body: '**Deferoxamine**\n\n**IV Infusion (preferred route):** [1][2][4]\n\n**Starting dose:** 5 mg/kg/hr IV\n**Titrate up to:** 15 mg/kg/hr as tolerated\n**Maximum dose:** 6 grams per 24 hours in adults [1]\n\n**Rate titration:**\n- Start at 5 mg/kg/hr to minimize hypotension\n- Increase by 5 mg/kg/hr every 30-60 minutes as BP tolerates\n- Target 15 mg/kg/hr in severe poisoning\n\n**IM route (if no IV access):**\n- 90 mg/kg IM (max 1 g per injection site)\n- Only use temporarily until IV access obtained\n- Less reliable absorption\n\n**"Vin rose" urine:** [2]\n- Classically described pinkish-orange urine indicates ferrioxamine excretion\n- **NOT reliable** - absence does not mean chelation isn\'t working\n- Do NOT use urine color to guide therapy',
+        body: '[Deferoxamine](#/drug/deferoxamine/iron overdose)\n\n**IV Infusion (preferred route):** [1][2][4]\n\n**Starting dose:** 5 mg/kg/hr IV\n**Titrate up to:** 15 mg/kg/hr as tolerated\n**Maximum dose:** 6 grams per 24 hours in adults [1]\n\n**Rate titration:**\n- Start at 5 mg/kg/hr to minimize hypotension\n- Increase by 5 mg/kg/hr every 30-60 minutes as BP tolerates\n- Target 15 mg/kg/hr in severe poisoning\n\n**IM route (if no IV access):**\n- 90 mg/kg IM (max 1 g per injection site)\n- Only use temporarily until IV access obtained\n- Less reliable absorption\n\n**"Vin rose" urine:** [2]\n- Classically described pinkish-orange urine indicates ferrioxamine excretion\n- **NOT reliable** - absence does not mean chelation isn\'t working\n- Do NOT use urine color to guide therapy',
         citation: [1, 2, 4],
         treatment: {
             firstLine: {

@@ -161,7 +161,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 **If antivenom fails in arrest:** Give IV magnesium 10 mmol
 
 **Medications:**
-- **Box Jellyfish Antivenom**: 1-6 ampoules IV
+- [Box Jellyfish Antivenom](#/drug/box-jellyfish-antivenom/box jellyfish envenomation): 1-6 ampoules IV
 - [Magnesium sulfate](#/drug/magnesium-sulfate/cardiac-arrest): 10 mmol IV if antivenom fails`,
     images: [{ src: 'images/marine-envenomation/box-jellyfish.png', alt: 'Box jellyfish (Chironex sp.) — cube-shaped bell with tentacles', caption: 'Box jellyfish (Chironex sp.) — cube-shaped bell, potent venom. CC BY-SA 2.0.' }],
     citation: [1, 4, 5, 6],
@@ -362,7 +362,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 *Doses >3 ampoules: Contact toxicology*
 
 **Medications:**
-- **Stonefish Antivenom**: 1 amp per 2 punctures (max 3)`,
+- [Stonefish Antivenom](#/drug/stonefish-antivenom/stonefish envenomation): 1 amp per 2 punctures (max 3)`,
     citation: [3, 8, 10],
     next: 'marine-systemic',
     summary: 'Stonefish: most venomous fish — hot water immersion, antivenom available for severe cases',
@@ -545,7 +545,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
 **Post-antivenom:** Monitor for serum sickness 4-14 days
 
 **Medications:**
-- **Sea Snake Antivenom**: 1 vial IV (1:10 dilution)`,
+- [Sea Snake Antivenom](#/drug/sea-snake-antivenom/sea snake envenomation): 1 vial IV (1:10 dilution)`,
     citation: [1, 12],
     next: 'marine-systemic',
     summary: 'Sea snake: delayed myotoxicity and neurotoxicity — observe 8h minimum, antivenom if symptomatic',

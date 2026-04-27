@@ -161,7 +161,7 @@ export const SEROTONIN_SYNDROME_NODES = [
         type: 'result',
         module: 3,
         title: 'NMS — Different Management',
-        body: '**Neuroleptic Malignant Syndrome requires different treatment:** [6]\n\n**Immediate:**\n• Stop offending antipsychotic\n• Aggressive cooling\n• IV fluids\n• Benzodiazepines for rigidity\n\n**Specific therapy:**\n• **Dantrolene** — muscle relaxant, first-line\n• **Bromocriptine** — dopamine agonist (contraindicated in SS!)\n\n**Duration:**\n• Resolution takes days to weeks\n• 2-week washout before restarting antipsychotics\n\n**ICU admission** for all but mildest cases',
+        body: '**Neuroleptic Malignant Syndrome requires different treatment:** [6]\n\n**Immediate:**\n• Stop offending antipsychotic\n• Aggressive cooling\n• IV fluids\n• Benzodiazepines for rigidity\n\n**Specific therapy:**\n• **Dantrolene** — muscle relaxant, first-line\n• [Bromocriptine](#/drug/bromocriptine/NMS) — dopamine agonist (contraindicated in SS!)\n\n**Duration:**\n• Resolution takes days to weeks\n• 2-week washout before restarting antipsychotics\n\n**ICU admission** for all but mildest cases',
         recommendation: 'Consult toxicology and psychiatry. ICU admission for moderate-severe NMS.',
         citation: [6],
     },

@@ -178,7 +178,7 @@ export const BETA_BLOCKER_OD_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'HIET Dosing Protocol',
-    body: '****Regular Insulin** Protocol:**\n\n**Bolus:** 1 unit/kg IV push\n\n**Infusion:** Start at 1 unit/kg/hr\n• Titrate up to **10 units/kg/hr** based on hemodynamic response [1][4]\n• Some cases have used even higher doses\n\n**MUST co-administer:**\n\n1. **Dextrose:**\n   • D25 or D50 bolus to achieve glucose 150-250 mg/dL\n   • D10 or D25 infusion to maintain euglycemia\n   • May need 25-50g dextrose/hr [4]\n\n2. **Potassium:**\n   • Target K+ 3.5-4.5 mEq/L\n   • Insulin drives K+ intracellularly\n   • Replace aggressively (10-40 mEq/hr may be needed) [4]',
+    body: '**[Regular Insulin](#/drug/insulin-regular/hyperkalemia) Protocol:**\n\n**Bolus:** 1 unit/kg IV push\n\n**Infusion:** Start at 1 unit/kg/hr\n• Titrate up to **10 units/kg/hr** based on hemodynamic response [1][4]\n• Some cases have used even higher doses\n\n**MUST co-administer:**\n\n1. **Dextrose:**\n   • D25 or D50 bolus to achieve glucose 150-250 mg/dL\n   • D10 or D25 infusion to maintain euglycemia\n   • May need 25-50g dextrose/hr [4]\n\n2. **Potassium:**\n   • Target K+ 3.5-4.5 mEq/L\n   • Insulin drives K+ intracellularly\n   • Replace aggressively (10-40 mEq/hr may be needed) [4]',
     citation: [1, 4],
     calculatorLinks: [{ id: 'bb-hiet', label: 'HIET Calculator' }],
     treatment: {

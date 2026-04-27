@@ -342,7 +342,7 @@ export const UPPER_GI_BLEED_NODES = [
         type: 'result',
         module: 6,
         title: 'Low-Risk UGIB — Outpatient',
-        body: '**GBS 0-1 = Low Risk, Outpatient Candidate:** [4][17]\n\n**Criteria for Outpatient Management:**\n• GBS 0-1\n• Hemodynamically stable\n• No transfusion required\n• No high-risk comorbidities\n• Reliable follow-up available\n• Can tolerate PO\n\n**Discharge Plan:**\n• PPI: **Omeprazole** 40 mg PO BID until EGD\n• Outpatient EGD within **24-48 hours**\n• Avoid NSAIDs, aspirin (discuss with PCP)\n• Clear liquid diet, advance as tolerated\n\n**Return Precautions:**\n• Recurrent vomiting blood\n• Black/tarry stools\n• Lightheadedness, syncope\n• Abdominal pain worsening',
+        body: '**GBS 0-1 = Low Risk, Outpatient Candidate:** [4][17]\n\n**Criteria for Outpatient Management:**\n• GBS 0-1\n• Hemodynamically stable\n• No transfusion required\n• No high-risk comorbidities\n• Reliable follow-up available\n• Can tolerate PO\n\n**Discharge Plan:**\n• PPI: [Omeprazole](#/drug/omeprazole/peptic ulcer disease) 40 mg PO BID until EGD\n• Outpatient EGD within **24-48 hours**\n• Avoid NSAIDs, aspirin (discuss with PCP)\n• Clear liquid diet, advance as tolerated\n\n**Return Precautions:**\n• Recurrent vomiting blood\n• Black/tarry stools\n• Lightheadedness, syncope\n• Abdominal pain worsening',
         recommendation: 'GBS 0-1: Outpatient PPI + EGD within 24-48h. Strict return precautions.',
         confidence: 'definitive',
         citation: [4, 17],
