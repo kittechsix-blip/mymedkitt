@@ -16771,6 +16771,150 @@ const MG_IVIG_PLEX = {
         { num: 2, text: 'Farmakidis C, et al. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
     ],
 };
+// -------------------------------------------------------------------
+// Cardiac Arrest — Steps Summary
+// -------------------------------------------------------------------
+const CARDIAC_ARREST_SUMMARY = {
+    id: 'ca-steps-summary',
+    title: 'Cardiac Arrest Steps Summary',
+    subtitle: 'ACLS pathway — confirm → CPR → rhythm-driven care → ROSC or TOR',
+    sections: [
+        {
+            heading: '1. Scene Assessment & Recognition',
+            body: '• [Scene safety, signs of obvious death, valid DNAR/POLST](#/node/ca-start)\n• [Confirm arrest in ≤10 sec — unsure = start CPR](#/node/ca-confirm)\n• [Activate team, assign roles, call for defibrillator/AED](#/node/ca-confirm)',
+        },
+        {
+            heading: '2. First 2 Minutes',
+            body: '• [High-quality CPR — 100-120/min, depth 5-6 cm, full recoil, rotate q2 min](#/node/ca-cpr-start)\n• [Airway — BVM with OPA, supraglottic, or ETT after first cycle](#/node/ca-airway)\n• [IV → IO within 60 sec if no access](#/node/ca-cpr-start)\n• [Attach pads, defibrillator on, ETCO₂ immediately after airway](#/node/ca-cpr-start)\n• [First rhythm check at 2 min — minimize interruption <10 sec](#/node/ca-rhythm-check)',
+        },
+        {
+            heading: '3. Rhythm-Driven Routing',
+            body: '• [Shockable: VF, pulseless VT, torsades](#/node/ca-shockable-branch)\n• [VF → defibrillate then resume CPR](#/node/ca-vf-link)\n• [Pulseless VT → defibrillate then resume CPR](#/node/ca-pvt-link)\n• [Torsades → magnesium, overdrive pacing, defibrillate](#/node/ca-tdp-link)\n• [Non-shockable: PEA or asystole](#/node/ca-nonshockable-branch)\n• [PEA workflow: POCUS for cardiac activity + reversible causes](#/node/ca-pea-link)\n• [Bradycardic arrest / asystole](#/node/ca-brady-link)',
+        },
+        {
+            heading: '4. Universal Resuscitation Principles',
+            body: '• [Vascular access — IV, then IO if no IV in 60 sec](#/node/ca-access)\n• [Epinephrine 1 mg IV/IO q3-5 min — non-shockable after 1st cycle, shockable after 2nd shock](#/node/ca-epi)\n• [ETCO₂ waveform target >20 mmHg = adequate CPR; sudden ↑ = ROSC](#/node/ca-universal)',
+        },
+        {
+            heading: '5. Reversible Causes — H\'s & T\'s',
+            body: '• [Six H\'s and six T\'s — review at every pulse check](#/node/ca-hs-ts)\n• [POCUS during pulse checks only — RUSH protocol for tamponade, PTX, PE, hypovolemia, contractility](#/node/ca-pocus-arrest)\n• [Situation-specific meds: bicarb, calcium, lipid, hypertonic saline, glucose](#/node/ca-special-meds)',
+        },
+        {
+            heading: '6. ROSC or Termination of Resuscitation',
+            body: '• [ROSC pathway → post-arrest care, target temperature, reperfusion](#/node/ca-rosc)\n• [TOR criteria: ETCO₂ <10 mmHg after 20 min adequate CPR + no reversible cause](#/node/ca-tor-criteria)\n• [No cardiac activity on POCUS = poor prognosis](#/node/ca-no-activity)\n• [Code called — TOR documentation, family debrief, organ donation](#/node/ca-code-called)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Panchal AR, et al. 2020 AHA Guidelines for CPR and ECC: Adult Advanced Life Support. Circulation. 2020.' },
+        { num: 2, text: 'Soar J, et al. ERC Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
+    ],
+};
+// -------------------------------------------------------------------
+// PEA Arrest — Steps Summary
+// -------------------------------------------------------------------
+const PEA_ARREST_SUMMARY = {
+    id: 'pea-steps-summary',
+    title: 'PEA Arrest Steps Summary',
+    subtitle: 'POCUS-driven pathway — pseudo vs true PEA → cause-directed therapy',
+    sections: [
+        {
+            heading: '1. PEA Recognition',
+            body: '• [Organized rhythm + no palpable pulse = PEA](#/node/pea-start)\n• [RUSH exam during pulse check — limit to <10 sec](#/node/pea-pocus)\n• [Cardiac activity on POCUS? — bedside ultrasound divides PEA into pseudo vs true](#/node/pea-activity)',
+        },
+        {
+            heading: '2. Pseudo-PEA vs True PEA',
+            body: '• [Pseudo-PEA: organized contractility on POCUS = profound shock, not arrest](#/node/pea-pseudopea)\n• [Treat pseudo-PEA as severe shock — fluids, push-dose pressors, address cause](#/node/pea-shock-mgmt)\n• [True PEA: cardiac standstill on POCUS — universally poor prognosis](#/node/pea-no-activity)',
+        },
+        {
+            heading: '3. QRS Width — Narrows the Differential',
+            body: '• [QRS width drives the "What killed this heart?" question](#/node/pea-qrs-width)\n• [Wide QRS PEA → metabolic / toxic causes (hyperK, TCA, sodium-channel blockade, acidosis)](#/node/pea-wide)\n• [Narrow QRS PEA → mechanical / obstructive causes (tamponade, tension PTX, PE, hypovolemia, auto-PEEP)](#/node/pea-narrow)',
+        },
+        {
+            heading: '4. Treatable Causes',
+            body: '• [Wide-complex differential](#/node/pea-causes-wide)\n• [Hyperkalemia in arrest — calcium, bicarb, insulin/dextrose](#/node/pea-hyperK)\n• [TCA / Na-channel blocker — sodium bicarbonate](#/node/pea-tca)\n• [Severe acidosis — bicarbonate](#/node/pea-acidosis)\n• [Narrow-complex POCUS-directed differential](#/node/pea-causes-narrow)\n• [Mechanical hyperinflation / auto-PEEP — disconnect, prolonged exhalation](#/node/pea-autopeep)\n• [Tamponade — pericardiocentesis](#/node/pea-tamponade)\n• [Tension pneumothorax — needle decompression / finger thoracostomy](#/node/pea-tension)\n• [Massive PE — thrombolysis](#/node/pea-massive-pe)\n• [Hypovolemia — volume resuscitation](#/node/pea-hypovolemia)',
+        },
+        {
+            heading: '5. CPR & Medications',
+            body: '• [High-quality CPR with ETCO₂ monitoring](#/node/pea-cpr)\n• [Epinephrine 1 mg IV/IO q3-5 min from the first cycle in PEA](#/node/pea-epi)',
+        },
+        {
+            heading: '6. ROSC or Termination',
+            body: '• [Rhythm/pulse check — ROSC achieved?](#/node/pea-rosc-check)\n• [ROSC → post-arrest care pathway](#/node/pea-rosc)\n• [Continue resuscitation if reversible cause still treatable](#/node/pea-continue)\n• [Termination criteria — no ROSC + no reversible cause + asystole/standstill](#/node/pea-tor)\n• [Code called — TOR documentation](#/node/pea-code-called)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Littmann L, Bustin DJ, Haley MW. A simplified and structured teaching tool for the evaluation and management of pulseless electrical activity. Med Princ Pract. 2014;23(1):1-6.' },
+        { num: 2, text: 'Farkas J. PEA arrest. EMCrit Internet Book of Critical Care. emcrit.org/ibcc/pea.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Bradycardic Arrest — Steps Summary
+// -------------------------------------------------------------------
+const BRADYCARDIC_ARREST_SUMMARY = {
+    id: 'brady-steps-summary',
+    title: 'Bradycardic Arrest Steps Summary',
+    subtitle: 'Pacing-first pathway — capture → meds → reversible cause → TVP or TOR',
+    sections: [
+        {
+            heading: '1. Recognition',
+            body: '• [Bradycardia + cardiovascular collapse / arrest](#/node/brady-start)\n• [Classify rhythm: asystole, bradycardic PEA, profound bradycardia](#/node/brady-confirm)',
+        },
+        {
+            heading: '2. Immediate Pacing',
+            body: '• [Asystole — confirm in 2 leads, CPR + epi (no pacing benefit in asystole)](#/node/brady-asystole-mgmt)\n• [Transcutaneous pacing — pads, rate 70-80, current up from 50 mA](#/node/brady-tcp)\n• [Assess electrical AND mechanical capture (palpate femoral pulse)](#/node/brady-capture)',
+        },
+        {
+            heading: '3. Medications',
+            body: '• [Failure to capture — increase current, reposition pads, switch to medications/TVP](#/node/brady-no-capture)\n• [Atropine 1 mg IV q3-5 min (max 3 mg) — limited utility in arrest, may try if not asystole](#/node/brady-atropine)\n• [Chronotropic infusions — epinephrine 2-10 mcg/min OR dopamine 5-20 mcg/kg/min](#/node/brady-epi-infusion)',
+        },
+        {
+            heading: '4. Reversible Causes',
+            body: '• [Common reversible causes: hyperK, beta-blocker/CCB toxicity, hypoxia, ↑ICP, MI, hypothermia, organophosphate](#/node/brady-causes)\n• [Identify and treat reversible cause aggressively](#/node/brady-cause-check)\n• [Cause-specific therapy: calcium for hyperK/CCB, glucagon/HIET for BB, decompress for ↑ICP](#/node/brady-treat-cause)',
+        },
+        {
+            heading: '5. Transvenous Pacing, ROSC, or TOR',
+            body: '• [Transvenous pacing if TCP failing, prolonged need, or unable to tolerate](#/node/brady-tvp)\n• [Post-capture management — confirm pulse with capture, target HR 70-80](#/node/brady-post-capture)\n• [Patient status: ROSC, persistent arrest, or rearrest?](#/node/brady-rosc-check)\n• [ROSC achieved — post-arrest care pathway](#/node/brady-rosc)\n• [Re-arrest — re-enter pacing/medication algorithm](#/node/brady-rearrest)\n• [Termination of resuscitation — no ROSC despite pacing + meds + cause-directed therapy](#/node/brady-tor)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kusumoto FM, et al. 2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay. Circulation. 2019.' },
+        { num: 2, text: 'Panchal AR, et al. 2020 AHA Guidelines for CPR and ECC. Circulation. 2020.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Ventricular Tachycardia — Steps Summary
+// -------------------------------------------------------------------
+const VT_SUMMARY = {
+    id: 'vt-steps-summary',
+    title: 'VT Management Steps Summary',
+    subtitle: 'Pulse → stability → morphology drives the algorithm',
+    sections: [
+        {
+            heading: '1. First Decisions',
+            body: '• [Wide-complex tachycardia identified — assume VT until proven otherwise](#/node/vt-start)\n• [Pulse check — pulseless = ACLS arrest pathway](#/node/vt-pulse)\n• [QRS morphology: monomorphic vs polymorphic](#/node/vt-morphology)',
+        },
+        {
+            heading: '2. Pulseless VT (Arrest)',
+            body: '• [Defibrillate immediately — 200J biphasic](#/node/pvt-shock)\n• [CPR 2 min, epinephrine 1 mg q3-5 min, antiarrhythmic (amiodarone 300 mg or lidocaine 1-1.5 mg/kg)](#/node/pvt-cycle)\n• [Rhythm check after each 2-min cycle](#/node/pvt-check)\n• [Refractory pVT — double sequential defibrillation, change pad position, esmolol](#/node/pvt-refractory)\n• [Polymorphic in arrest — check QTc; magnesium for torsades](#/node/pvt-torsades-check)\n• [ROSC achieved — post-cardiac arrest care](#/node/pvt-rosc)',
+        },
+        {
+            heading: '3. Unstable VT (Pulse + Shock/Hypotension/Altered)',
+            body: '• [Hemodynamic stability assessment — unstable = synchronized cardioversion](#/node/vt-unstable-check)\n• [Synchronized cardioversion 100J → 200J → 300J → 360J](#/node/vt-cardiovert)\n• [Post-cardioversion — antiarrhythmic infusion + reversible cause workup](#/node/vt-post-cardiovert)',
+        },
+        {
+            heading: '4. Stable VT',
+            body: '• [Stable monomorphic VT — IV antiarrhythmic (procainamide preferred, amiodarone, sotalol)](#/node/vt-mono-stable)\n• [Response to antiarrhythmic — converted vs persistent](#/node/vt-mono-response)\n• [Refractory stable monomorphic VT — synchronized cardioversion under sedation](#/node/vt-mono-refractory)\n• [Polymorphic VT — check baseline QTc to choose pathway](#/node/vt-poly-check)\n• [Polymorphic with normal QTc → treat ischemia (cath, beta-blocker)](#/node/vt-poly-normal-qt)\n• [Polymorphic with prolonged QTc = torsades → magnesium, correct K/Mg, overdrive pacing](#/node/vt-poly-long-qt)',
+        },
+        {
+            heading: '5. Post-Conversion & Disposition',
+            body: '• [Post-conversion checklist — 12-lead, electrolytes, troponin, echo, structural workup](#/node/vt-converted)\n• [Recurrent VT management — antiarrhythmic infusion, EP consult, ICD eval](#/node/vt-recurrent)\n• [Disposition — ICU vs CCU, EP consult for ablation/ICD](#/node/vt-disposition)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias. Circulation. 2018;138(13):e272-e391.' },
+        { num: 2, text: 'Panchal AR, et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -17300,6 +17444,11 @@ export const INFO_PAGES = {
     'mg-drugs-avoid': MG_DRUGS_AVOID,
     'mg-pyridostigmine': MG_PYRIDOSTIGMINE,
     'mg-ivig-plex': MG_IVIG_PLEX,
+    // Steps Summaries — Resuscitation Consults
+    'ca-steps-summary': CARDIAC_ARREST_SUMMARY,
+    'pea-steps-summary': PEA_ARREST_SUMMARY,
+    'brady-steps-summary': BRADYCARDIC_ARREST_SUMMARY,
+    'vt-steps-summary': VT_SUMMARY,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
