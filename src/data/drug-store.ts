@@ -47,7 +47,7 @@ const ACETAZOLAMIDE: DrugEntry = {
   genericName: 'Acetazolamide',
   drugClass: 'Carbonic anhydrase inhibitor',
   route: 'IV/PO',
-  indications: ['Hyperkalemia (nephron bomb — third diuretic)', 'Hypokalemic periodic paralysis (prevention)', 'Metabolic alkalosis', 'Acute mountain sickness'],
+  indications: ['Hyperkalemia (nephron bomb — third diuretic)', 'Hypokalemic periodic paralysis (prevention)', 'Metabolic alkalosis', 'Acute mountain sickness', 'Acute angle closure glaucoma — IOP reduction'],
   dosing: [
     {
       indication: 'Hyperkalemia (nephron bomb)',
@@ -60,6 +60,10 @@ const ACETAZOLAMIDE: DrugEntry = {
     {
       indication: 'Metabolic alkalosis',
       regimen: '250-500 mg IV q6-8h.',
+    },
+    {
+      indication: 'Acute angle closure glaucoma — IOP reduction',
+      regimen: '500 mg IV (or PO if able) × 1, then 250 mg PO q4h until ophthalmology definitive treatment. Reduces aqueous humor production by ~50%. Combine with topical agents (timolol, brimonidine, pilocarpine) and IV mannitol if IOP severely elevated. Avoid in sulfa allergy.',
     },
   ],
   contraindications: [
@@ -212,11 +216,20 @@ const AMOXICILLIN: DrugEntry = {
   genericName: 'Amoxicillin',
   drugClass: 'Aminopenicillin',
   route: 'PO',
-  indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy'],
+  indications: ['UTI in pregnancy', 'Asymptomatic bacteriuria in pregnancy', 'Early Lyme disease'],
   dosing: [
     {
       indication: 'UTI / Asymptomatic bacteriuria in pregnancy',
       regimen: '875 mg PO BID × 7 days. First-line option for UTI in pregnancy. Guided by local resistance patterns and culture sensitivities.',
+    },
+    {
+      indication: 'Early Lyme disease (adult)',
+      regimen: '500 mg PO TID × 14 days. Alternative when doxycycline contraindicated (pregnancy, age <8). Treats erythema migrans, early disseminated Lyme without neurologic involvement. IDSA/AAN/ACR 2020.',
+    },
+    {
+      indication: 'Early Lyme disease (pediatric)',
+      regimen: '50 mg/kg/day PO divided TID (max 500 mg/dose) × 14 days. First-line for children <8 years with erythema migrans. IDSA 2020.',
+      weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 500, dailyDivided: 3 },
     },
   ],
   contraindications: [
@@ -241,12 +254,16 @@ const AMOXICILLIN_CLAVULANATE: DrugEntry = {
   genericName: 'Amoxicillin / Clavulanic acid',
   drugClass: 'Aminopenicillin + beta-lactamase inhibitor',
   route: 'PO',
-  indications: ['Pediatric UTI (alternative outpatient)', 'Otitis media', 'Sinusitis', 'Bite wounds'],
+  indications: ['Pediatric UTI (alternative outpatient)', 'Otitis media', 'Sinusitis', 'Bite wounds', 'Adult UTI / cystitis'],
   dosing: [
     {
       indication: 'Pediatric UTI',
       regimen: '20-40 mg/kg/day divided BID. Max 875 mg/dose.',
       weightCalc: { dosePerKg: 40, unit: 'mg', maxDose: 875, dailyDivided: 2 },
+    },
+    {
+      indication: 'Adult UTI / cystitis',
+      regimen: '500/125 mg PO BID × 5-7 days. Alternative for uncomplicated cystitis when first-line agents (nitrofurantoin, fosfomycin, TMP-SMX) contraindicated or resistance suspected. Pregnancy-safe. IDSA 2011.',
     },
   ],
   contraindications: [
@@ -525,7 +542,7 @@ const ATROPINE: DrugEntry = {
   genericName: 'Atropine sulfate',
   drugClass: 'Anticholinergic (muscarinic antagonist)',
   route: 'IV',
-  indications: ['Symptomatic bradycardia', 'Organophosphate/carbamate poisoning', 'Digoxin toxicity (temporizing)', 'Beta-blocker toxicity (usually ineffective)', 'CCB toxicity (usually ineffective)'],
+  indications: ['Symptomatic bradycardia', 'Organophosphate/carbamate poisoning', 'Cholinergic crisis (myasthenia gravis / over-medication)', 'Digoxin toxicity (temporizing)', 'Beta-blocker toxicity (usually ineffective)', 'CCB toxicity (usually ineffective)'],
   dosing: [
     {
       indication: 'Symptomatic bradycardia (ACLS)',
@@ -534,6 +551,10 @@ const ATROPINE: DrugEntry = {
     {
       indication: 'Organophosphate/carbamate poisoning',
       regimen: 'Initial: 2-4 mg IV. Double dose every 5 minutes until secretions dry (may require 10-20+ mg). Goal: dry secretions, HR >80, SBP >90. No maximum dose in cholinergic crisis.',
+    },
+    {
+      indication: 'Cholinergic crisis — myasthenia gravis / over-medication',
+      regimen: '0.5-1 mg IV titrated PRN to dry secretions and HR >60. Far less aggressive than organophosphate dosing — typical total <2-3 mg. Used for muscarinic symptoms (bradycardia, secretions, miosis, abdominal cramping) from cholinesterase inhibitor (pyridostigmine) over-medication. Stop pyridostigmine, monitor for respiratory failure (atropine does NOT reverse nicotinic weakness — patient may still need intubation). Edrophonium test obsolete; clinical assessment + neuro consult guides care.',
     },
     {
       indication: 'Digoxin toxicity — bradycardia',
@@ -1069,7 +1090,7 @@ const CEFTRIAXONE: DrugEntry = {
   genericName: 'Ceftriaxone',
   drugClass: 'Third-generation cephalosporin',
   route: 'IV',
-  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis'],
+  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis', 'Acute otitis media (treatment failure)'],
   dosing: [
     {
       indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -1123,6 +1144,14 @@ const CEFTRIAXONE: DrugEntry = {
       indication: 'Sexual assault STI prophylaxis',
       regimen: '500 mg IM \u00D7 1 dose. Empiric gonorrhea prophylaxis post-sexual assault. Administer in ED. Cephalosporin allergy alternative: Gentamicin 240 mg IM \u00D7 1 + Azithromycin 2 g PO \u00D7 1. CDC STI Guidelines 2021.',
     },
+    {
+      indication: 'Acute otitis media \u2014 treatment failure / vomiting',
+      regimen: '50 mg/kg IM/IV (max 1 g) \u00D7 1 dose for child unable to tolerate oral. For severe / treatment failure after 48-72h of high-dose amoxicillin: 50 mg/kg/day \u00D7 3 days. AAP 2013 AOM guideline.',
+      weightCalc: [
+        { dosePerKg: 50, unit: 'mg', maxDose: 1000, label: 'Single dose (vomiting)' },
+        { dosePerKg: 50, unit: 'mg', maxDose: 1000, label: 'Treatment failure (\u00D7 3 days)' },
+      ],
+    },
   ],
   contraindications: [
     'Severe cephalosporin allergy',
@@ -1145,12 +1174,16 @@ const CEPHALEXIN: DrugEntry = {
   genericName: 'Cephalexin',
   drugClass: 'First-generation cephalosporin',
   route: 'PO',
-  indications: ['Pediatric UTI (first-line outpatient)', 'Skin and soft tissue infections'],
+  indications: ['Pediatric UTI (first-line outpatient)', 'Skin and soft tissue infections', 'Adult UTI / cystitis (pregnancy-safe)'],
   dosing: [
     {
       indication: 'Pediatric UTI',
       regimen: '50-100 mg/kg/day divided TID-QID. Max 1000 mg/dose.',
       weightCalc: { dosePerKg: 75, unit: 'mg', maxDose: 1000, dailyDivided: 4 },
+    },
+    {
+      indication: 'Adult UTI / cystitis (pregnancy-safe)',
+      regimen: '500 mg PO QID \u00D7 7 days (or 250 mg QID if non-pregnant uncomplicated cystitis \u00D7 5-7 days). First-line PO step-down after IV pyelonephritis. Pregnancy-safe across all trimesters. IDSA 2011.',
     },
     {
       indication: 'Neonatal UTI',
@@ -1185,6 +1218,10 @@ const DARUNAVIR: DrugEntry = {
     {
       indication: 'HIV PEP (alternative)',
       regimen: '800 mg PO once daily + ritonavir 100 mg PO once daily x 28 days. Must be taken with food. Always co-administer with ritonavir (pharmacokinetic booster).',
+    },
+    {
+      indication: 'HIV treatment (boosted PI)',
+      regimen: 'Treatment-naive: 800 mg PO once daily + cobicistat 150 mg PO daily (preferred) OR + ritonavir 100 mg PO daily. Take with food. Treatment-experienced with ≥1 darunavir-resistance mutation: 600 mg PO BID + ritonavir 100 mg BID. Genotype-guided in failure. DHHS HIV Guidelines 2024.',
     },
   ],
   contraindications: [
@@ -1253,7 +1290,7 @@ const DEXAMETHASONE: DrugEntry = {
   genericName: 'Dexamethasone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO/IM/IV',
-  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)', 'Anaphylaxis (adjunctive)'],
+  indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)', 'Anaphylaxis (adjunctive)', 'Migraine — recurrence prevention'],
   dosing: [
     {
       indication: 'Croup',
@@ -1285,6 +1322,10 @@ const DEXAMETHASONE: DrugEntry = {
     {
       indication: 'Anaphylaxis (adjunctive)',
       regimen: '10 mg IV × 1 dose. Second-line only — controversial, no RCTs demonstrating clear benefit. Consider if refractory to 2+ IM epinephrine doses or asthma overlap. Does NOT prevent biphasic reactions. Not needed for discharge.',
+    },
+    {
+      indication: 'Migraine — recurrence prevention',
+      regimen: '10 mg IV/IM × 1 dose at end of acute migraine treatment. Reduces 24-72h headache recurrence by ~25% (Colman 2008 meta-analysis, NNT ~9). Single-dose use, no taper. Can also be given as 4-8 mg if 10 mg unavailable.',
     },
   ],
   contraindications: [
@@ -1731,6 +1772,10 @@ const DABIGATRAN: DrugEntry = {
       indication: 'PE / DVT treatment',
       regimen: 'Requires 5\u201310 days parenteral anticoagulation (LMWH or UFH) first, then 150 mg twice daily.',
     },
+    {
+      indication: 'Atrial fibrillation (stroke prevention)',
+      regimen: '150 mg PO BID (CrCl >30). 75 mg PO BID if CrCl 15-30. Contraindicated CrCl <15. NO parenteral bridging required for AFib (unlike PE/DVT). Reversal: idarucizumab 5 g IV. RE-LY trial: 150 mg BID superior to warfarin for stroke prevention. ACC/AHA/ACCP/HRS 2023.',
+    },
   ],
   cautions: [
     'CrCl <30 mL/min \u2014 contraindicated (predominantly renal clearance ~80%)',
@@ -2020,7 +2065,7 @@ const DOXYCYCLINE: DrugEntry = {
   genericName: 'Doxycycline',
   drugClass: 'Tetracycline antibiotic',
   route: 'PO',
-  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage', 'Sexual assault STI prophylaxis'],
+  indications: ['Syphilis (PCN allergy alternative)', 'Chlamydia', 'Tick-borne diseases', 'Acne', 'Malaria prophylaxis', 'Community-acquired pneumonia atypical coverage', 'Sexual assault STI prophylaxis', 'Early Lyme disease'],
   dosing: [
     {
       indication: 'Primary / Secondary / Early latent syphilis (PCN allergy)',
@@ -2037,6 +2082,15 @@ const DOXYCYCLINE: DrugEntry = {
     {
       indication: 'Sexual assault STI prophylaxis',
       regimen: '100 mg PO BID \u00D7 7 days. Empiric chlamydia prophylaxis post-sexual assault. Prescribe at discharge. Contraindicated in pregnancy — substitute azithromycin 1 g PO \u00D7 1. CDC STI Guidelines 2021.',
+    },
+    {
+      indication: 'Early Lyme disease (adult)',
+      regimen: '100 mg PO BID × 10-14 days for erythema migrans without neurologic involvement. × 14-21 days if early disseminated disease (multiple EM, mild carditis, isolated facial palsy). First-line per IDSA/AAN/ACR 2020. Also covers possible Anaplasma co-infection.',
+    },
+    {
+      indication: 'Early Lyme disease (pediatric ≥8 yr)',
+      regimen: '4.4 mg/kg/day PO divided BID (max 100 mg/dose) × 10-14 days. Acceptable in children of any age for short courses (≤21 days) per AAP 2019 — tooth staining concern minimal. <8 yr: amoxicillin preferred when feasible.',
+      weightCalc: { dosePerKg: 4.4, unit: 'mg', maxDose: 100, dailyDivided: 2 },
     },
   ],
   contraindications: [
@@ -3081,7 +3135,7 @@ const MAGNESIUM_SULFATE: DrugEntry = {
   genericName: 'Magnesium sulfate',
   drugClass: 'Electrolyte / Antiarrhythmic adjunct',
   route: 'IV',
-  indications: ['A-Fib / A-Flutter adjunctive rate and rhythm control', 'Torsades de pointes', 'Hypomagnesemia', 'Eclampsia / Pre-eclampsia seizure prophylaxis', 'Hypomagnesemia / Hypokalemia adjunct', 'TCA arrhythmia'],
+  indications: ['A-Fib / A-Flutter adjunctive rate and rhythm control', 'Torsades de pointes', 'Hypomagnesemia', 'Eclampsia / Pre-eclampsia seizure prophylaxis', 'Hypomagnesemia / Hypokalemia adjunct', 'TCA arrhythmia', 'Migraine — IV adjunct'],
   dosing: [
     {
       indication: 'A-Fib (adjunctive)',
@@ -3106,6 +3160,10 @@ const MAGNESIUM_SULFATE: DrugEntry = {
     {
       indication: 'Post-arrest TTM — anti-shivering',
       regimen: '4 g IV bolus over 20 min. Raises shivering threshold by ~1°C. Give as first-line anti-shivering agent before meperidine or paralysis. Also repletes intracellular magnesium (common post-arrest). Target Mg 3-4 mg/dL during TTM.',
+    },
+    {
+      indication: 'Migraine — IV adjunct',
+      regimen: '1-2 g IV over 15-30 minutes × 1 dose. Most effective for migraine WITH AURA (Cete 2005 RCT showed superiority over placebo). Less robust evidence for migraine without aura. Add to standard cocktail (antiemetic + ketorolac + diphenhydramine ± dexamethasone) when first-line agents incomplete.',
     },
   ],
   contraindications: [
@@ -4428,7 +4486,7 @@ const PREDNISONE: DrugEntry = {
   genericName: 'Prednisone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO',
-  indications: ['COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions'],
+  indications: ['COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection'],
   dosing: [
     {
       indication: 'COPD exacerbation',
@@ -4455,6 +4513,11 @@ const PREDNISONE: DrugEntry = {
       indication: 'Pediatric asthma exacerbation',
       regimen: '1-2 mg/kg/day PO (max 60 mg) for 3-5 days.',
       weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 60 },
+    },
+    {
+      indication: 'IRIS in TB/HIV coinfection',
+      regimen: '1.5 mg/kg/day PO × 2 weeks, then 0.75 mg/kg/day × 2 weeks (Meintjes 2010 RCT). Used for paradoxical TB-IRIS in patients on ART with worsening TB symptoms. Continue ART and TB therapy. Rule out alternative causes (drug resistance, new opportunistic infection) before attributing to IRIS. Coordinate with ID.',
+      weightCalc: { dosePerKg: 1.5, unit: 'mg' },
     },
   ],
   contraindications: [
@@ -6175,7 +6238,7 @@ const KETOROLAC: DrugEntry = {
   genericName: 'Ketorolac tromethamine',
   drugClass: 'NSAID (nonsteroidal anti-inflammatory)',
   route: 'IV/IM',
-  indications: ['SCD pain crisis', 'Acute moderate-severe pain'],
+  indications: ['SCD pain crisis', 'Acute moderate-severe pain', 'Migraine — IV NSAID'],
   dosing: [
     {
       indication: 'SCD pain crisis',
@@ -6184,6 +6247,10 @@ const KETOROLAC: DrugEntry = {
         { dosePerKg: 0.5, unit: 'mg', maxDose: 15, label: 'Pediatric (<16 yr)' },
         { dosePerKg: 0.5, unit: 'mg', maxDose: 30, label: 'Adult (\u226516 yr)' },
       ],
+    },
+    {
+      indication: 'Migraine \u2014 IV NSAID',
+      regimen: '15-30 mg IV/IM \u00D7 1 dose (typical 30 mg IV in adults). Onset 10-15 min, duration 4-6h. Equivalent efficacy to oral ibuprofen 800 mg but parenteral. AHS 2016 Level B for acute migraine. Avoid within 5 days of any other NSAID. Contraindicated CrCl <30, GI bleed, third trimester pregnancy.',
     },
   ],
   contraindications: [
@@ -7402,7 +7469,7 @@ const TMP_SMX: DrugEntry = {
   genericName: 'Trimethoprim-sulfamethoxazole',
   drugClass: 'Sulfonamide antibiotic combination',
   route: 'PO',
-  indications: ['Uncomplicated cystitis', 'Pyelonephritis (if susceptible)', 'Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea', 'PJP prophylaxis (HIV, CD4 <200)'],
+  indications: ['Uncomplicated cystitis', 'Pyelonephritis (if susceptible)', 'Acute infectious diarrhea (pediatric first-line)', 'Traveler\'s diarrhea', 'PJP prophylaxis (HIV, CD4 <200)', 'MRSA SSTI / cellulitis (purulent)'],
   dosing: [
     {
       indication: 'Uncomplicated cystitis',
@@ -7428,6 +7495,10 @@ const TMP_SMX: DrugEntry = {
     {
       indication: 'PJP Prophylaxis (CD4 <200)',
       regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for 3+ months on ART.',
+    },
+    {
+      indication: 'MRSA SSTI / purulent cellulitis',
+      regimen: '1-2 DS tablets (160/800 mg) PO BID × 5-10 days. First-line oral MRSA SSTI per IDSA 2014 SSTI guidelines. 2 DS BID for moderate-severe or larger lesions. Adjunctive to incision/drainage for abscess. Pediatric: 8-12 mg/kg/day TMP component divided BID.',
     },
   ],
   contraindications: [
@@ -8125,7 +8196,7 @@ const PROPRANOLOL: DrugEntry = {
   genericName: 'Propranolol hydrochloride',
   drugClass: 'Non-selective beta-adrenergic blocker',
   route: 'PO / IV',
-  indications: ['Thyroid storm (rate control)', 'Thyroid storm (IV \u2014 acute)', 'Thyrotoxicosis (symptomatic)'],
+  indications: ['Thyroid storm (rate control)', 'Thyroid storm (IV \u2014 acute)', 'Thyrotoxicosis (symptomatic)', 'Migraine prophylaxis (outpatient)'],
   dosing: [
     {
       indication: 'Thyroid storm (rate control)',
@@ -8138,6 +8209,10 @@ const PROPRANOLOL: DrugEntry = {
     {
       indication: 'Thyrotoxicosis (symptomatic)',
       regimen: '10-40 mg PO TID-QID. For palpitations, tremor, anxiety in stable thyrotoxicosis. Titrate to symptoms.',
+    },
+    {
+      indication: 'Migraine prophylaxis (outpatient)',
+      regimen: 'Start 40-80 mg PO BID, titrate over 2-4 weeks to 160-240 mg/day total. Long-acting (Inderal LA) 80-160 mg PO daily is more convenient. AAN 2012 Level A evidence for episodic migraine prevention. Trial duration: at least 8 weeks at target dose before declaring failure. Avoid in asthma/COPD (non-selective).',
     },
   ],
   contraindications: [
@@ -8559,7 +8634,7 @@ const WARFARIN: DrugEntry = {
   genericName: 'Warfarin sodium',
   drugClass: 'Vitamin K antagonist (anticoagulant)',
   route: 'PO / IV',
-  indications: ['VAD anticoagulation', 'Atrial fibrillation (stroke prevention)', 'Venous thromboembolism', 'Mechanical heart valve'],
+  indications: ['VAD anticoagulation', 'Atrial fibrillation (stroke prevention)', 'Venous thromboembolism', 'Mechanical heart valve', 'CVST / cerebral venous sinus thrombosis'],
   dosing: [
     {
       indication: 'VAD anticoagulation',
@@ -8568,6 +8643,10 @@ const WARFARIN: DrugEntry = {
     {
       indication: 'Atrial fibrillation',
       regimen: 'Target INR 2.0-3.0. Typical starting dose 5 mg PO daily, adjust based on INR. Lower starting dose (2-3 mg) in elderly, liver disease, malnutrition, or drug interactions.',
+    },
+    {
+      indication: 'VTE / CVST anticoagulation',
+      regimen: 'Target INR 2.0-3.0. Start 5 mg PO daily (lower if elderly/frail/interacting drugs). MUST bridge with parenteral anticoagulation (LMWH or UFH) until INR ≥2.0 for 24h. Total duration: 3 months for provoked DVT/PE, 6-12 months for unprovoked, indefinite for recurrent or persistent risk. CVST: 3-6 months with neurology guidance. Pregnancy contraindicated — use LMWH instead.',
     },
   ],
   contraindications: [
@@ -8717,7 +8796,7 @@ const NOREPINEPHRINE: DrugEntry = {
   genericName: 'Norepinephrine bitartrate',
   drugClass: 'Vasopressor / Catecholamine (alpha > beta)',
   route: 'IV infusion',
-  indications: ['TCA overdose hypotension', 'Septic shock', 'Vasodilatory shock', 'VAD vasopressor support'],
+  indications: ['TCA overdose hypotension', 'Septic shock', 'Vasodilatory shock', 'VAD vasopressor support', 'Cardiogenic shock (first-line vasopressor)'],
   dosing: [
     {
       indication: 'TCA Overdose — Hypotension',
@@ -8726,6 +8805,10 @@ const NOREPINEPHRINE: DrugEntry = {
     {
       indication: 'Septic / Vasodilatory Shock',
       regimen: '0.01-3 mcg/kg/min IV infusion. First-line vasopressor per Surviving Sepsis Campaign 2021. Titrate to MAP ≥65 mmHg. Central line preferred but peripheral administration acceptable for initial resuscitation (max 12h via large-bore antecubital or external jugular).',
+    },
+    {
+      indication: 'Cardiogenic shock (first-line vasopressor)',
+      regimen: '0.05-1 mcg/kg/min IV infusion. Preferred over dopamine per SOAP-II trial (lower mortality, fewer arrhythmias). Titrate to MAP ≥65 mmHg AND clinical perfusion (lactate clearance, urine output, mentation). Add inotrope (dobutamine 2.5-10 mcg/kg/min) early if low cardiac output despite adequate MAP. Avoid escalating norepinephrine above 0.5 mcg/kg/min without inotrope/MCS escalation. ESC HF 2021.',
     },
     {
       indication: 'VAD vasopressor',
