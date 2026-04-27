@@ -1363,6 +1363,23 @@ const TOOLBAR_CONFIGS = {
         { id: 'drugs', label: 'Drug Fever', icon: '💊', action: 'overlay', target: 'fuo-drug-fever' },
         { id: 'categories', label: 'Etiologies', icon: '🔍', action: 'overlay', target: 'fuo-categories' },
     ],
+    'chd-peds': [
+        { id: 'blue', label: 'Blue Baby', icon: '🔵', action: 'jump', target: 'chd-blue-screen' },
+        { id: 'red', label: 'Shocked', icon: '🔴', action: 'jump', target: 'chd-red-screen' },
+        { id: 'hyperox', label: 'Hyperoxia', icon: '🫁', action: 'jump', target: 'chd-hyperox' },
+        { id: 'pge', label: 'PGE1', icon: '💉', action: 'jump', target: 'chd-pge1' },
+        { id: 'tet', label: 'Tet Spell', icon: '🦵', action: 'jump', target: 'chd-tet-spell' },
+        { id: 'avoid', label: 'Pitfalls', icon: '⚠️', action: 'jump', target: 'chd-avoid' },
+    ],
+    'misfits-peds': [
+        { id: 'mnemonic', label: 'MISFITS', icon: '🧠', action: 'jump', target: 'misfits-mnemonic' },
+        { id: 'sepsis', label: 'Sepsis', icon: '🦠', action: 'jump', target: 'misfits-sepsis' },
+        { id: 'hsv', label: 'HSV', icon: '🧬', action: 'jump', target: 'misfits-hsv' },
+        { id: 'cah', label: 'CAH', icon: '⚡', action: 'jump', target: 'misfits-cah' },
+        { id: 'volvulus', label: 'Volvulus', icon: '🔄', action: 'jump', target: 'misfits-volvulus' },
+        { id: 'heart', label: 'CHD', icon: '❤️', action: 'jump', target: 'misfits-heart' },
+        { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'misfits-abx' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

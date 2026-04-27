@@ -1,0 +1,625 @@
+// MedKitt — THE MISFITS: Approach to the Sick Neonate
+// Mnemonic for neonatal nightmare presentations
+// T-Trauma, H-Heart, E-Endocrine, M-Metabolic, I-Inborn errors, S-Sepsis, F-Formula, I-Intestinal, T-Toxins, S-Seizures
+// 6 modules: Initial Assessment → THE → MISF → ITS → Resuscitation → Disposition
+// 32 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const MISFITS_PEDS_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'misfits-start',
+    type: 'question',
+    module: 1,
+    title: 'The Sick Neonate (0-28 Days)',
+    body: '**THE MISFITS - Approach to the Critically Ill Neonate**\n\nNeonates present nonspecifically. The same symptoms (lethargy, poor feeding, apnea) can represent dozens of diagnoses. THE MISFITS helps you systematically consider all life-threatening causes.\n\n**THE MISFITS:**\n• **T** - Trauma (NAT) / Temperature instability\n• **H** - Heart (CHD, arrhythmia, myocarditis)\n• **E** - Endocrine (CAH, hypoglycemia, thyroid)\n• **M** - Metabolic (inborn errors)\n• **I** - Inborn errors of metabolism\n• **S** - Sepsis (bacterial, viral, HSV)\n• **F** - Formula mishaps (dilution errors)\n• **I** - Intestinal (NEC, volvulus, obstruction)\n• **T** - Toxins (breast milk drugs, environmental)\n• **S** - Seizures\n\n**REFERENCES**\n• [Full Mnemonic](#/info/misfits-mnemonic)\n• [Core Labs](#/info/misfits-workup)\n• [CHD Consult](#/consult/chd-peds)\n\nWhat is your approach?',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'Triage & Resuscitate',
+        description: 'ABCDE assessment, critical interventions',
+        next: 'misfits-triage',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Work Through THE MISFITS',
+        description: 'Systematic differential approach',
+        next: 'misfits-mnemonic',
+      },
+      {
+        label: 'Specific Concern',
+        description: 'Jump to suspected category',
+        next: 'misfits-jump',
+      },
+    ],
+    summary: 'THE MISFITS: Trauma, Heart, Endocrine, Metabolic, Inborn errors, Sepsis, Formula, Intestinal, Toxins, Seizures',
+  },
+
+  {
+    id: 'misfits-triage',
+    type: 'info',
+    module: 1,
+    title: 'Triage & Initial Stabilization',
+    body: '**IMMEDIATE ASSESSMENT - ABCDE**\n\n**A - AIRWAY**\n• Position, suction\n• Intubate if apneic or severe distress\n• Low threshold to secure airway\n\n**B - BREATHING**\n• SpO2 (pre and post-ductal)\n• Respiratory rate, work of breathing\n• Provide O2 if needed (but consider CHD - see [CHD consult](#/consult/chd-peds))\n\n**C - CIRCULATION**\n• Heart rate, capillary refill, pulses (include femorals!)\n• IV/IO access immediately\n• NS bolus 10 mL/kg if shocked\n• Start empiric antibiotics if sepsis concern\n\n**D - DISABILITY**\n• **GLUCOSE** - Check immediately! Treat <50 mg/dL\n• Pupils, fontanelle, tone, activity\n• Temperature\n\n**E - EXPOSURE**\n• Full undressed exam\n• Look for rashes, bruising, abdominal distension\n• Maintain warmth\n\n**CRITICAL FIRST LABS:**\nGlucose, VBG, lactate, CBC, BMP, blood culture',
+    citation: [1, 2],
+    next: 'misfits-workup',
+    summary: 'ABCDE: secure airway, check SpO2 + femorals, IV access, CHECK GLUCOSE immediately, full exposure exam',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-workup',
+    type: 'info',
+    module: 1,
+    title: 'Core Laboratory Workup',
+    body: '**LABORATORY EVALUATION FOR SICK NEONATE**\n\n**ALWAYS ORDER:**\n• **Glucose** (point-of-care immediately)\n• **VBG or ABG** with lactate\n• **CBC** with differential\n• **BMP** (Na, K, glucose, BUN, Cr, Ca)\n• **Blood culture**\n• **Urinalysis + urine culture** (catheterized)\n\n**STRONGLY CONSIDER:**\n• **Ammonia** (IEM screen)\n• **LFTs** (AST, ALT, bili, albumin)\n• **PT/INR, PTT** (liver function, DIC)\n• **CSF studies** (cell count, glucose, protein, culture, HSV PCR)\n• **HSV PCR** (blood and CSF)\n• **CXR**\n• **ECG**\n\n**IF METABOLIC SUSPECTED:**\n• Lactate, pyruvate\n• Urine organic acids\n• Plasma amino acids\n• Acylcarnitine profile\n• Urine reducing substances\n\n**IF TRAUMA SUSPECTED:**\n• Skeletal survey\n• Head CT\n• Ophthalmology (retinal exam)',
+    citation: [1, 3],
+    next: 'misfits-mnemonic',
+    summary: 'Core labs: glucose, VBG, lactate, CBC, BMP, blood culture, cath UA; consider ammonia, LFTs, LP, HSV PCR',
+  },
+
+  {
+    id: 'misfits-mnemonic',
+    type: 'question',
+    module: 1,
+    title: 'THE MISFITS Mnemonic',
+    body: '**THE MISFITS - Systematic Approach**\n\n**T - TRAUMA / TEMPERATURE**\n• Non-accidental trauma (NAT/abuse)\n• Hypothermia, hyperthermia\n\n**H - HEART**\n• Congenital heart disease (see [CHD consult](#/consult/chd-peds))\n• Arrhythmias (SVT)\n• Myocarditis, cardiomyopathy\n\n**E - ENDOCRINE**\n• Congenital adrenal hyperplasia (CAH)\n• Hypoglycemia\n• Thyroid disorders\n\n**M - METABOLIC / I - INBORN ERRORS**\n• Organic acidemias\n• Urea cycle defects\n• Fatty acid oxidation defects\n\n**S - SEPSIS**\n• Bacterial (GBS, E. coli, Listeria)\n• Viral (HSV - CRITICAL)\n• Fungal\n\n**F - FORMULA MISHAPS**\n• Dilution errors → water intoxication\n• Contamination\n\n**I - INTESTINAL**\n• Necrotizing enterocolitis (NEC)\n• Malrotation with volvulus\n• Obstruction\n\n**T - TOXINS**\n• Medications via breast milk\n• Environmental exposures\n\n**S - SEIZURES**\nPrimary or secondary to above\n\nSelect a category to explore:',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'THE - Trauma, Heart, Endocrine',
+        description: 'NAT, CHD, CAH, hypoglycemia',
+        next: 'misfits-the',
+      },
+      {
+        label: 'MIS - Metabolic, Inborn errors, Sepsis',
+        description: 'IEM, sepsis, HSV',
+        next: 'misfits-mis',
+      },
+      {
+        label: 'FITS - Formula, Intestinal, Toxins, Seizures',
+        description: 'NEC, volvulus, drugs, seizures',
+        next: 'misfits-fits',
+      },
+    ],
+    summary: 'THE MISFITS covers: Trauma/Temp, Heart, Endocrine, Metabolic, Inborn errors, Sepsis, Formula, Intestinal, Toxins, Seizures',
+  },
+
+  {
+    id: 'misfits-jump',
+    type: 'question',
+    module: 1,
+    title: 'Jump to Specific Category',
+    body: '**SELECT YOUR PRIMARY CONCERN:**',
+    options: [
+      { label: 'Sepsis / HSV', next: 'misfits-sepsis', urgency: 'urgent' },
+      { label: 'Congenital Heart Disease', next: 'misfits-heart' },
+      { label: 'CAH (Adrenal Crisis)', next: 'misfits-cah', urgency: 'urgent' },
+      { label: 'Volvulus / NEC', next: 'misfits-volvulus', urgency: 'urgent' },
+    ],
+  },
+
+  // =====================================================================
+  // MODULE 2: THE (Trauma, Heart, Endocrine)
+  // =====================================================================
+
+  {
+    id: 'misfits-the',
+    type: 'question',
+    module: 2,
+    title: 'THE - Trauma, Heart, Endocrine',
+    body: '**T - TRAUMA / TEMPERATURE**\n**H - HEART**\n**E - ENDOCRINE**\n\nThese categories involve physical injury, cardiac pathology, and hormonal emergencies.',
+    options: [
+      {
+        label: 'Trauma / NAT',
+        description: 'Non-accidental trauma, abuse',
+        next: 'misfits-trauma',
+      },
+      {
+        label: 'Heart / CHD',
+        description: 'Congenital heart disease, arrhythmia',
+        next: 'misfits-heart',
+      },
+      {
+        label: 'Endocrine (CAH)',
+        description: 'Congenital adrenal hyperplasia, hypoglycemia',
+        next: 'misfits-cah',
+      },
+      {
+        label: 'Hypoglycemia',
+        description: 'Low glucose management',
+        next: 'misfits-hypoglycemia',
+      },
+    ],
+  },
+
+  {
+    id: 'misfits-trauma',
+    type: 'info',
+    module: 2,
+    title: 'Trauma / Non-Accidental Trauma',
+    body: '**NON-ACCIDENTAL TRAUMA (NAT) / CHILD ABUSE**\n\nSick neonates may be victims of abuse. High index of suspicion required.\n\n**RED FLAGS:**\n• Inconsistent or changing history\n• Delay in seeking care\n• Injuries inconsistent with developmental stage\n• Multiple injuries in various stages of healing\n• Patterned bruising (belt, hand)\n• Bruising in non-mobile infant\n• Unexplained altered mental status\n\n**INJURIES TO EVALUATE:**\n• **Intracranial:** Subdural hematoma (shaken baby)\n• **Skeletal:** Rib fractures, metaphyseal corner fractures\n• **Soft tissue:** Bruising in non-cruising infant\n• **Retinal hemorrhages:** Highly specific for shaking\n• **Abdominal:** Solid organ injury\n\n**WORKUP IF SUSPECTED:**\n• Skeletal survey (full series)\n• Head CT (non-contrast)\n• Dilated fundoscopic exam by ophthalmology\n• LFTs, lipase (abdominal trauma screen)\n• PT/PTT (rule out bleeding disorder)\n• Social work involvement\n• Mandatory reporting\n\n**LEGAL OBLIGATION:** Physicians are mandated reporters.',
+    citation: [4, 5],
+    next: 'misfits-the',
+    summary: 'NAT red flags: inconsistent history, bruising in non-mobile infant, multiple healing injuries; skeletal survey, head CT, retinal exam',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-heart',
+    type: 'result',
+    module: 2,
+    title: 'Heart - Congenital Heart Disease',
+    body: '**CARDIAC CAUSES OF SICK NEONATE**\n\n**CONGENITAL HEART DISEASE**\nSee [CHD Consult](#/consult/chd-peds) for comprehensive management\n\n**KEY CLUES:**\n• Cyanosis not improving with O2 (hyperoxia test fails)\n• Differential cyanosis (pre > post-ductal sats)\n• Weak/absent femoral pulses (coarctation)\n• Murmur (may be absent in critical lesions)\n• Hepatomegaly, respiratory distress\n\n**CRITICAL ACTION:**\nIf ductal-dependent CHD suspected, start [PGE1](#/drug/prostaglandin-e1) 0.05-0.1 mcg/kg/min BEFORE echo confirmation\n\n**OTHER CARDIAC:**\n• **SVT:** HR >220-240 in infant. Adenosine, vagal maneuvers\n• **Myocarditis:** Viral prodrome, tachycardia out of proportion, poor function on echo\n• **Cardiomyopathy:** Dilated, hypertrophic, restrictive\n\n**ARRHYTHMIA MANAGEMENT:**\n• SVT: Vagal (ice to face), [Adenosine](#/drug/adenosine) 0.1 mg/kg\n• Bradycardia: Atropine, pacing, consider structural cause',
+    recommendation: 'Suspected CHD: check 4-extremity sats, femoral pulses. Start PGE1 if ductal-dependent suspected. See full CHD consult for details.',
+    confidence: 'definitive',
+    citation: [1, 6],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+  },
+
+  {
+    id: 'misfits-cah',
+    type: 'result',
+    module: 2,
+    title: 'Congenital Adrenal Hyperplasia (CAH)',
+    body: '**CONGENITAL ADRENAL HYPERPLASIA - ADRENAL CRISIS**\n\n21-hydroxylase deficiency (most common). Cannot make cortisol or aldosterone.\n\n**PRESENTATION**\n• Typically presents at 1-2 weeks of life\n• Lethargy, poor feeding, vomiting\n• Dehydration, shock\n• **Classic labs:** Hyponatremia, hyperkalemia, hypoglycemia\n• Hyperpigmentation (ACTH effect)\n• **Ambiguous genitalia in females** (virilization)\n\n**CLASSIC TRIAD:**\n1. Hyponatremia (salt-wasting)\n2. Hyperkalemia\n3. Hypoglycemia\n\n**LAB CONFIRMATION:**\n• 17-hydroxyprogesterone (elevated)\n• Cortisol (low)\n• ACTH (elevated)\n\n**EMERGENCY TREATMENT:**\n\n**1. FLUID RESUSCITATION**\nNS 20 mL/kg boluses for shock\n\n**2. DEXTROSE**\nD10W or D10NS for hypoglycemia\n\n**3. STRESS-DOSE STEROIDS**\n[Hydrocortisone](#/drug/hydrocortisone) 25 mg IV (neonates) or 2 mg/kg\n• Life-saving in adrenal crisis\n• Give immediately if CAH suspected\n\n**4. TREAT HYPERKALEMIA**\nIf K >6.5 or ECG changes: calcium, insulin/glucose, kayexalate',
+    images: [{ src: 'images/misfits-peds/cah-ambiguous-genitalia.jpg', alt: 'Ambiguous genitalia in female neonate with CAH showing clitoromegaly', caption: 'Ambiguous genitalia in 46,XX female with CAH - clitoromegaly from excess androgens' }],
+    recommendation: 'CAH crisis: NS boluses, D10 for hypoglycemia, Hydrocortisone 25 mg IV immediately. Check 17-OHP to confirm.',
+    confidence: 'definitive',
+    citation: [1, 7],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Hydrocortisone',
+        dose: '25 mg (neonate) or 2 mg/kg',
+        route: 'IV',
+        frequency: 'Once, then q6-8h',
+        duration: 'Until endocrine guidance',
+        notes: 'Stress-dose steroids are life-saving. Do not delay for lab confirmation.',
+      },
+      monitoring: 'Glucose, Na, K. Repeat BMP in 2-4 hours. Watch for rebound hypokalemia.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-hypoglycemia',
+    type: 'result',
+    module: 2,
+    title: 'Neonatal Hypoglycemia',
+    body: '**NEONATAL HYPOGLYCEMIA**\n\n**DEFINITION**\nGlucose <50 mg/dL requires intervention\nGlucose <40 mg/dL is critical\n\n**CAUSES IN SICK NEONATE:**\n• Sepsis (increased metabolic demand)\n• Inborn errors of metabolism\n• Hyperinsulinism\n• Adrenal insufficiency (CAH)\n• Poor feeding, prematurity\n• Maternal diabetes (transient)\n\n**SYMPTOMS**\n• Jitteriness, tremor\n• Lethargy, poor feeding\n• Apnea, cyanosis\n• Seizures\n• Hypothermia\n\n**TREATMENT**\n\n**MILD (asymptomatic, glucose 40-50):**\n• Feed if able to take PO\n• Recheck in 30-60 minutes\n\n**MODERATE TO SEVERE (<40 or symptomatic):**\n• [Dextrose](#/drug/dextrose) IV bolus:\n  - D10W: 2 mL/kg IV push (200 mg/kg)\n  - Provides 200 mg/kg dextrose\n• Follow with D10W infusion at maintenance rate\n• Recheck glucose in 30 minutes\n• Target glucose >50 mg/dL\n\n**REFRACTORY HYPOGLYCEMIA:**\nConsider hyperinsulinism, CAH, IEM\nMay need higher dextrose concentrations (D12.5, D15)',
+    recommendation: 'Hypoglycemia <50: D10W 2 mL/kg IV push, then D10 maintenance infusion. Recheck in 30 min. Investigate cause.',
+    confidence: 'definitive',
+    citation: [1, 8],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Dextrose 10%',
+        dose: '2 mL/kg (delivers 200 mg/kg)',
+        route: 'IV push',
+        frequency: 'Once, may repeat',
+        duration: 'Single bolus then continuous infusion',
+        notes: 'Follow with D10W at maintenance rate. Recheck glucose in 30 min.',
+      },
+      monitoring: 'Glucose q30 min until stable >50 mg/dL, then q1-2h.',
+    },
+  },
+
+  // =====================================================================
+  // MODULE 3: MIS (Metabolic, Inborn Errors, Sepsis)
+  // =====================================================================
+
+  {
+    id: 'misfits-mis',
+    type: 'question',
+    module: 3,
+    title: 'MIS - Metabolic, Inborn Errors, Sepsis',
+    body: '**M - METABOLIC**\n**I - INBORN ERRORS OF METABOLISM**\n**S - SEPSIS**\n\nThese are the most common serious diagnoses in sick neonates.',
+    options: [
+      {
+        label: 'Inborn Errors of Metabolism',
+        description: 'IEM, organic acidemias, urea cycle defects',
+        next: 'misfits-iem',
+      },
+      {
+        label: 'Sepsis',
+        description: 'Bacterial, viral sepsis',
+        next: 'misfits-sepsis',
+        urgency: 'urgent',
+      },
+      {
+        label: 'HSV',
+        description: 'Herpes simplex virus - critical diagnosis',
+        next: 'misfits-hsv',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'misfits-iem',
+    type: 'result',
+    module: 3,
+    title: 'Inborn Errors of Metabolism',
+    body: '**INBORN ERRORS OF METABOLISM (IEM)**\n\nRare individually but collectively important. Typically present in first days to weeks of life.\n\n**SUSPECT IEM IF:**\n• Unexplained encephalopathy\n• Recurrent vomiting\n• Metabolic acidosis with increased anion gap\n• Hyperammonemia\n• Hypoglycemia refractory to treatment\n• Unusual odor (maple syrup, sweaty feet, musty)\n• Family history, consanguinity\n• Normal newborn then deterioration\n\n**KEY LABS:**\n• **Ammonia** (elevated in urea cycle defects)\n• **Lactate** (elevated in mitochondrial, organic acidemias)\n• **VBG** with anion gap\n• **Glucose**\n• **Urine ketones**\n• Plasma amino acids\n• Urine organic acids\n• Acylcarnitine profile\n\n**CATEGORIES:**\n• **Organic acidemias:** High anion gap, ketosis, hyperammonemia\n• **Urea cycle defects:** Severe hyperammonemia, respiratory alkalosis initially\n• **Fatty acid oxidation defects:** Hypoglycemia, no ketones, cardiomyopathy\n• **Maple syrup urine disease:** Sweet urine odor, encephalopathy\n\n**EMERGENCY TREATMENT:**\n1. Stop protein intake (stop feeds, use dextrose)\n2. Provide glucose (D10 infusion at 1.5x maintenance)\n3. Treat hyperammonemia (see ammonia >150)\n4. Emergent genetics/metabolism consult',
+    recommendation: 'Suspect IEM if unexplained acidosis, hyperammonemia, hypoglycemia. Stop protein, give IV dextrose, treat hyperammonemia, consult genetics.',
+    confidence: 'definitive',
+    citation: [1, 9],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'D10W infusion',
+        dose: '1.5x maintenance rate',
+        route: 'IV continuous',
+        frequency: 'Continuous',
+        duration: 'Until genetics guidance',
+        notes: 'Stop all protein intake. Dextrose prevents catabolism.',
+      },
+      monitoring: 'Ammonia q4-6h, glucose, VBG, lactate. Watch for cerebral edema if ammonia very high.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-sepsis',
+    type: 'result',
+    module: 3,
+    title: 'Neonatal Sepsis',
+    body: '**NEONATAL SEPSIS**\n\nMost common serious diagnosis in sick neonate. Must always be considered.\n\n**RISK FACTORS:**\n• Prolonged rupture of membranes (>18h)\n• Maternal GBS colonization\n• Chorioamnionitis\n• Prematurity\n• Indwelling catheters\n\n**COMMON PATHOGENS:**\n**Early-onset (<7 days):** GBS, E. coli, Listeria\n**Late-onset (7-28 days):** Coag-negative Staph, S. aureus, GBS, gram-negatives\n\n**PRESENTATION:**\n• Nonspecific: lethargy, poor feeding, temperature instability\n• Respiratory distress, apnea\n• Jaundice\n• Abdominal distension\n• Petechiae, poor perfusion\n\n**WORKUP:**\n• Blood culture (before antibiotics if possible)\n• CBC with differential\n• CRP, procalcitonin\n• UA and urine culture (catheterized)\n• **Lumbar puncture** (unless contraindicated)\n• CXR if respiratory symptoms\n• HSV PCR (if risk factors - see [HSV](#/info/misfits-hsv))\n\n**EMPIRIC ANTIBIOTICS:**\n• [Ampicillin](#/drug/ampicillin) 50 mg/kg IV q8h (covers Listeria, GBS)\n• [Gentamicin](#/drug/gentamicin) 4 mg/kg IV q24h (covers gram-negatives)\n• Add [Acyclovir](#/drug/acyclovir) 20 mg/kg IV q8h if HSV suspected',
+    recommendation: 'Neonatal sepsis: Ampicillin 50 mg/kg + Gentamicin 4 mg/kg. Add Acyclovir 20 mg/kg if HSV risk. LP if stable.',
+    confidence: 'definitive',
+    citation: [1, 2, 10],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Ampicillin + Gentamicin',
+        dose: 'Ampicillin 50 mg/kg; Gentamicin 4 mg/kg',
+        route: 'IV',
+        frequency: 'Ampicillin q8h; Gentamicin q24h',
+        duration: 'Pending culture results (typically 48-72h if negative)',
+        notes: 'Covers GBS, Listeria, E. coli. Add Acyclovir if HSV suspected.',
+      },
+      alternative: {
+        drug: 'Ceftriaxone (if >7 days and no jaundice)',
+        dose: '50 mg/kg',
+        route: 'IV',
+        frequency: 'q24h',
+        duration: 'Pending cultures',
+        notes: 'Avoid in first week or with hyperbilirubinemia',
+      },
+      monitoring: 'Blood culture at 48h. CRP trending. Clinical improvement.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-hsv',
+    type: 'result',
+    module: 3,
+    title: 'HSV Encephalitis',
+    body: '**NEONATAL HSV - CRITICAL DIAGNOSIS**\n\nHerpes simplex virus can cause devastating encephalitis in neonates. Mortality approaches 80% if untreated.\n\n**RISK FACTORS:**\n• Maternal genital HSV (especially primary outbreak)\n• Vaginal delivery with active lesions\n• Prolonged rupture of membranes\n\n**THREE PATTERNS:**\n1. **SEM (Skin, Eye, Mouth):** Vesicles, conjunctivitis - best prognosis\n2. **CNS disease:** Seizures, lethargy, CSF pleocytosis\n3. **Disseminated:** Multi-organ (liver, lungs, DIC) - worst prognosis\n\n**CLINICAL CLUES:**\n• Vesicular rash (may be absent in 20-40%)\n• Seizures, lethargy\n• Fever or hypothermia\n• CSF pleocytosis\n• Elevated LFTs, DIC\n• Respiratory failure\n\n**WORKUP:**\n• HSV PCR - blood (plasma)\n• HSV PCR - CSF\n• Surface cultures (conjunctiva, mouth, nasopharynx, rectum)\n• Vesicle viral culture/PCR if lesions present\n• AST, ALT, coagulation studies\n\n**TREATMENT:**\n[Acyclovir](#/drug/acyclovir) 20 mg/kg IV q8h\n• Start IMMEDIATELY if HSV suspected\n• Do NOT wait for PCR results\n• Duration: SEM 14 days; CNS/disseminated 21 days\n• Ensure adequate hydration (crystalline nephropathy)',
+    images: [{ src: 'images/misfits-peds/hsv-vesicles.jpg', alt: 'HSV vesicles on neonate scalp from fetal scalp electrode site', caption: 'HSV vesicles - note grouped vesicles on erythematous base. May occur at fetal scalp electrode site.' }],
+    recommendation: 'HSV: Acyclovir 20 mg/kg IV q8h immediately if suspected. Do NOT wait for PCR. SEM 14d, CNS/disseminated 21d.',
+    confidence: 'definitive',
+    citation: [1, 11, 12],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Acyclovir',
+        dose: '20 mg/kg',
+        route: 'IV',
+        frequency: 'q8h',
+        duration: 'SEM: 14 days; CNS/disseminated: 21 days',
+        notes: 'Start immediately if HSV suspected. Adequate hydration prevents crystalline nephropathy.',
+      },
+      monitoring: 'HSV PCR results. LFTs, renal function. Neurologic status. Repeat LP at end of treatment for CNS disease.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 4: FITS (Formula, Intestinal, Toxins, Seizures)
+  // =====================================================================
+
+  {
+    id: 'misfits-fits',
+    type: 'question',
+    module: 4,
+    title: 'FITS - Formula, Intestinal, Toxins, Seizures',
+    body: '**F - FORMULA MISHAPS**\n**I - INTESTINAL CATASTROPHES**\n**T - TOXINS**\n**S - SEIZURES**\n\nThese include GI emergencies, medication errors, and neurologic emergencies.',
+    options: [
+      {
+        label: 'Formula Mishaps',
+        description: 'Dilution errors, water intoxication',
+        next: 'misfits-formula',
+      },
+      {
+        label: 'Intestinal (NEC / Volvulus)',
+        description: 'Surgical emergencies',
+        next: 'misfits-intestinal',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Toxins',
+        description: 'Breast milk drugs, exposures',
+        next: 'misfits-toxins',
+      },
+      {
+        label: 'Seizures',
+        description: 'Neonatal seizure management',
+        next: 'misfits-seizures',
+      },
+    ],
+  },
+
+  {
+    id: 'misfits-formula',
+    type: 'info',
+    module: 4,
+    title: 'Formula Mishaps',
+    body: '**FORMULA ERRORS AND WATER INTOXICATION**\n\n**OVER-DILUTION:**\nParents may over-dilute formula (financial stress, misunderstanding).\n• Results in water intoxication\n• Hyponatremia, hypochloremia\n• Seizures, lethargy, irritability\n\n**UNDER-DILUTION:**\n• Hypernatremia\n• Dehydration\n• Can cause intracranial hemorrhage\n\n**CONTAMINATED FORMULA:**\n• Cronobacter (Enterobacter sakazakii) - powdered formula\n• Can cause meningitis, NEC\n• Particularly dangerous in neonates\n\n**WATER INTOXICATION:**\nSome parents give plain water to neonates\n• Dangerous hyponatremia\n• Seizures common presentation\n\n**KEY QUESTIONS:**\n• What formula brand and type?\n• How do you mix it? (powder to water ratio)\n• How many scoops, how much water?\n• Do you ever give plain water?\n• Observe preparation if possible\n\n**TREATMENT:**\n• Correct electrolyte abnormalities slowly\n• Hyponatremia: 3% saline if seizures (see sodium correction)\n• Education and social work involvement',
+    citation: [1, 13],
+    next: 'misfits-fits',
+    summary: 'Formula errors: over-dilution causes water intoxication/hyponatremia; ask about mixing technique; correct electrolytes slowly',
+  },
+
+  {
+    id: 'misfits-intestinal',
+    type: 'question',
+    module: 4,
+    title: 'Intestinal Emergencies',
+    body: '**INTESTINAL CATASTROPHES IN NEONATES**\n\nAbdominal distension, bilious vomiting, and bloody stools are red flags.\n\n**KEY DIAGNOSES:**\n• **Necrotizing enterocolitis (NEC)**\n• **Malrotation with midgut volvulus**\n• **Hirschsprung\'s disease with enterocolitis**\n• **Intestinal atresia/stenosis**\n\n**RED FLAGS:**\n• Bilious (green) vomiting - volvulus until proven otherwise\n• Bloody stools\n• Abdominal distension\n• Absent bowel sounds or hyperactive bowel sounds\n• Abdominal wall erythema or edema\n\nSelect the suspected diagnosis:',
+    citation: [1, 14],
+    options: [
+      {
+        label: 'NEC (Necrotizing Enterocolitis)',
+        description: 'Premature infant, feeding intolerance, bloody stools',
+        next: 'misfits-nec',
+      },
+      {
+        label: 'Volvulus / Malrotation',
+        description: 'Bilious vomiting - SURGICAL EMERGENCY',
+        next: 'misfits-volvulus',
+        urgency: 'urgent',
+      },
+    ],
+  },
+
+  {
+    id: 'misfits-nec',
+    type: 'result',
+    module: 4,
+    title: 'Necrotizing Enterocolitis (NEC)',
+    body: '**NECROTIZING ENTEROCOLITIS (NEC)**\n\nIschemic necrosis of intestinal mucosa. Most common GI emergency in premature infants.\n\n**RISK FACTORS:**\n• Prematurity (primary risk factor)\n• Formula feeding (breast milk protective)\n• Perinatal asphyxia\n• PDA, CHD\n• Polycythemia\n\n**PRESENTATION:**\n• Abdominal distension\n• Feeding intolerance, vomiting\n• Bloody stools (heme-positive)\n• Lethargy, temperature instability\n• Apnea, bradycardia\n\n**IMAGING:**\n• **Pneumatosis intestinalis** (air in bowel wall) - pathognomonic\n• **Portal venous gas** - severe disease\n• **Pneumoperitoneum** - perforation, surgical emergency\n• Dilated bowel loops, thickened walls\n\n**MANAGEMENT:**\n1. NPO - bowel rest\n2. NGT decompression\n3. IV fluids and TPN\n4. Broad-spectrum antibiotics:\n   - [Ampicillin](#/drug/ampicillin) + [Gentamicin](#/drug/gentamicin) + [Metronidazole](#/drug/metronidazole)\n   - Or Vancomycin + Piperacillin-tazobactam\n5. Serial abdominal exams\n6. Surgical consult\n\n**SURGICAL INDICATIONS:**\n• Pneumoperitoneum (free air)\n• Fixed dilated loop\n• Clinical deterioration despite medical management',
+    images: [{ src: 'images/misfits-peds/nec-pneumatosis.jpg', alt: 'Abdominal X-ray showing pneumatosis intestinalis in NEC', caption: 'Pneumatosis intestinalis - intramural air (arrows) pathognomonic for NEC' }],
+    recommendation: 'NEC: NPO, NGT, IV fluids, broad-spectrum antibiotics (Amp/Gent/Flagyl). Surgical consult for pneumoperitoneum or deterioration.',
+    confidence: 'definitive',
+    citation: [1, 14, 15],
+    treatment: {
+      firstLine: {
+        drug: 'Ampicillin + Gentamicin + Metronidazole',
+        dose: 'Amp 50 mg/kg, Gent 4 mg/kg, Metro 15 mg/kg',
+        route: 'IV',
+        frequency: 'Amp q8h, Gent q24h, Metro q12h',
+        duration: '10-14 days if confirmed NEC',
+        notes: 'Alternative: Vancomycin + Piperacillin-tazobactam. Surgical consult for all cases.',
+      },
+      monitoring: 'Serial abdominal exams q4-6h. Serial abdominal XR. CBC, platelets, lactate.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-volvulus',
+    type: 'result',
+    module: 4,
+    title: 'Malrotation with Midgut Volvulus',
+    body: '**MALROTATION WITH MIDGUT VOLVULUS - SURGICAL EMERGENCY**\n\n**BILIOUS VOMITING IN A NEONATE IS VOLVULUS UNTIL PROVEN OTHERWISE**\n\nMalrotation (abnormal intestinal rotation during development) allows midgut to twist on SMA pedicle, causing ischemia.\n\n**PRESENTATION:**\n• **Bilious (green) vomiting** - hallmark\n• Abdominal distension (may be minimal early)\n• Abdominal pain (infant draws up legs, irritable)\n• Bloody stools (late sign - mucosal necrosis)\n• Shock, acidosis (late)\n\n**CRITICAL POINT:**\nVolvulus can progress from viable to necrotic bowel in HOURS. Do not delay.\n\n**IMAGING:**\n• **Upper GI series** - gold standard\n  - \"Corkscrew\" or \"bird\'s beak\" sign\n  - Duodenal obstruction\n  - Abnormal DJ position\n• **XR** - may show double bubble (with distal gas if incomplete), or dilated stomach\n• **US** - whirlpool sign of twisted mesentery\n\n**MANAGEMENT:**\n1. NPO, NGT decompression\n2. Aggressive fluid resuscitation\n3. **EMERGENT surgical consult**\n4. Broad-spectrum antibiotics\n5. Prepare for OR\n\n**DO NOT DELAY:**\n• Upper GI should be done emergently\n• If high suspicion and patient unstable, may go directly to OR',
+    images: [{ src: 'images/misfits-peds/volvulus-ugi.jpg', alt: 'Upper GI showing corkscrew sign in midgut volvulus', caption: 'Corkscrew or bird\'s beak sign on UGI - pathognomonic for midgut volvulus' }],
+    recommendation: 'BILIOUS VOMITING = VOLVULUS until proven otherwise. Emergent UGI series. Surgical consult immediately. NPO, NGT, fluids.',
+    confidence: 'definitive',
+    citation: [1, 14, 16],
+    treatment: {
+      firstLine: {
+        drug: 'Fluid resuscitation + Antibiotics',
+        dose: 'NS 20 mL/kg boluses; Ampicillin + Gentamicin + Metronidazole',
+        route: 'IV',
+        frequency: 'Boluses PRN; Antibiotics per protocol',
+        duration: 'Until surgical repair',
+        notes: 'SURGICAL EMERGENCY. Do not delay for imaging if unstable.',
+      },
+      monitoring: 'Lactate, VBG. Abdominal exam. Urine output. Prepare for OR.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'misfits-toxins',
+    type: 'info',
+    module: 4,
+    title: 'Toxins and Exposures',
+    body: '**TOXINS AFFECTING NEONATES**\n\n**BREAST MILK DRUG TRANSFER:**\nMany medications pass into breast milk:\n• **Opioids:** Sedation, respiratory depression\n• **Benzodiazepines:** Sedation, poor feeding\n• **Antidepressants:** Irritability or sedation\n• **Methadone:** Neonatal abstinence if discontinued\n• **Alcohol:** Sedation, poor feeding\n• **Cocaine/amphetamines:** Irritability, tachycardia\n\n**ENVIRONMENTAL EXPOSURES:**\n• **Lead:** Rare in neonates, more common in older infants\n• **Carbon monoxide:** Consider if multiple family members ill\n• **Methemoglobinemia:** Well water with nitrates\n\n**MEDICATION ERRORS:**\n• Wrong medication given by caregiver\n• Dosing errors (10x errors common)\n• Topical medication toxicity (benzocaine, lidocaine)\n\n**NEONATAL ABSTINENCE SYNDROME (NAS):**\n• Infants of opioid-dependent mothers\n• Irritability, high-pitched cry, tremors\n• Poor feeding, vomiting, diarrhea\n• Seizures (severe)\n• Use Finnegan scoring system\n• Treat with morphine or methadone if severe\n\n**EVALUATION:**\n• Detailed medication/substance history\n• Toxicology screen (urine, meconium)\n• Poison control consultation',
+    citation: [1, 17],
+    next: 'misfits-fits',
+    summary: 'Consider: breast milk drugs (opioids, benzos), environmental toxins, medication errors, neonatal abstinence syndrome',
+  },
+
+  {
+    id: 'misfits-seizures',
+    type: 'result',
+    module: 4,
+    title: 'Neonatal Seizures',
+    body: '**NEONATAL SEIZURES**\n\nSeizures in neonates are often subtle and easily missed.\n\n**TYPES:**\n• **Subtle:** Eye deviation, lip smacking, cycling movements, apnea\n• **Clonic:** Rhythmic jerking (focal or multifocal)\n• **Tonic:** Sustained posturing\n• **Myoclonic:** Brief jerks (often benign, but can be pathologic)\n\n**MIMICS (Jitteriness):**\n• Stimulus-sensitive\n• No eye deviation or autonomic changes\n• Suppressible with passive flexion\n• Normal EEG\n\n**ETIOLOGY - THINK MISFITS:**\n• Hypoxic-ischemic encephalopathy (most common)\n• Intracranial hemorrhage\n• Infection (meningitis, HSV)\n• Metabolic: hypoglycemia, hypocalcemia, hypomagnesemia, IEM\n• Structural brain abnormality\n• Pyridoxine deficiency (rare)\n\n**WORKUP:**\n• Glucose, calcium, magnesium, sodium\n• LP (meningitis, HSV)\n• EEG (confirm seizures)\n• MRI brain\n• Consider: ammonia, lactate, IEM workup\n\n**TREATMENT:**\n1. **Correct metabolic abnormalities first**\n   - D10 for hypoglycemia\n   - Calcium gluconate for hypocalcemia\n\n2. **First-line antiepileptic:**\n   [Phenobarbital](#/drug/phenobarbital) 20 mg/kg IV loading dose\n   May repeat 10 mg/kg x2 (max 40 mg/kg total load)\n\n3. **If refractory:**\n   [Fosphenytoin](#/drug/fosphenytoin) 20 mg PE/kg IV\n   Or [Levetiracetam](#/drug/levetiracetam) 40-60 mg/kg IV',
+    recommendation: 'Neonatal seizures: correct metabolic causes first (glucose, Ca, Mg). Phenobarbital 20 mg/kg loading dose. EEG and MRI when stable.',
+    confidence: 'definitive',
+    citation: [1, 18],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Phenobarbital',
+        dose: '20 mg/kg loading dose',
+        route: 'IV',
+        frequency: 'May repeat 10 mg/kg x2 if needed',
+        duration: 'Load, then 3-5 mg/kg/day maintenance',
+        notes: 'First correct metabolic causes. Max loading dose 40 mg/kg total.',
+      },
+      alternative: {
+        drug: 'Fosphenytoin or Levetiracetam',
+        dose: 'Fosphenytoin 20 mg PE/kg OR Levetiracetam 40-60 mg/kg',
+        route: 'IV',
+        frequency: 'Loading dose',
+        duration: 'Per neurology guidance',
+        notes: 'For refractory seizures after phenobarbital.',
+      },
+      monitoring: 'EEG monitoring. Glucose, Ca, Mg. Respiratory status (phenobarbital causes sedation).',
+    },
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 5: RESUSCITATION
+  // =====================================================================
+
+  {
+    id: 'misfits-resus',
+    type: 'info',
+    module: 5,
+    title: 'Sick Neonate Resuscitation',
+    body: '**RESUSCITATION PRIORITIES**\n\n**AIRWAY**\n• Position, suction, supplemental O2\n• Intubate if: apnea, severe distress, protecting for transport\n• ETT size: 3.0-3.5 for term newborn\n• Use video laryngoscopy if available\n\n**BREATHING**\n• Target SpO2 >90% (accept lower if CHD suspected)\n• Avoid hyperoxia in preterm infants\n• PPV if needed (neonatal BVM, 20-25 cmH2O)\n\n**CIRCULATION**\n• IV access: peripheral IV, umbilical vein (UVC), IO\n• Fluid boluses: 10 mL/kg NS (smaller than pediatric)\n• Avoid aggressive fluid if cardiac cause suspected\n\n**DRUGS**\n• **Glucose:** D10 2 mL/kg for hypoglycemia\n• **Antibiotics:** Ampicillin + Gentamicin (+/- Acyclovir)\n• **PGE1:** If CHD suspected\n• **Epinephrine:** 0.01-0.03 mg/kg IV/IO (0.1 mg/kg ETT)\n\n**TEMPERATURE**\n• Neonates lose heat rapidly\n• Warm room, radiant warmer, warm fluids\n• Monitor temperature',
+    citation: [1, 2],
+    next: 'misfits-access',
+    summary: 'Resus: 3.0-3.5 ETT, 10 mL/kg fluid boluses, D10 for glucose, Amp+Gent+/-Acyclovir, maintain warmth',
+  },
+
+  {
+    id: 'misfits-access',
+    type: 'info',
+    module: 5,
+    title: 'Vascular Access',
+    body: '**VASCULAR ACCESS IN NEONATES**\n\n**PERIPHERAL IV:**\n• First choice if obtainable\n• Hand, foot, scalp veins\n• 24g typically\n\n**UMBILICAL VENOUS CATHETER (UVC):**\n• Available in first week of life\n• Cut cord 1-2 cm from skin\n• Identify single large thin-walled vein\n• Insert 5F catheter until blood return (2-4 cm)\n• Confirm position (above diaphragm on XR)\n• Can give all medications and fluids\n\n**INTRAOSSEOUS (IO):**\n• If IV/UVC cannot be obtained quickly\n• Proximal tibia (1-2 cm below tibial tuberosity)\n• Distal femur if tibia not accessible\n• Use 15mm needle for neonates\n• Can give all medications and fluids\n\n**UMBILICAL ARTERIAL CATHETER (UAC):**\n• For continuous BP monitoring and blood gas sampling\n• More difficult than UVC\n• Two small thick-walled arteries\n• Usually placed by NICU team\n\n**CENTRAL VENOUS ACCESS:**\n• For prolonged access/TPN\n• PICC or traditional central line\n• Usually placed in NICU/OR',
+    citation: [1, 19],
+    next: 'misfits-abx',
+    summary: 'Access: peripheral IV, UVC (first week), IO if unable; UVC: identify single thin-walled vein, insert 2-4 cm',
+  },
+
+  {
+    id: 'misfits-abx',
+    type: 'result',
+    module: 5,
+    title: 'Empiric Antibiotics',
+    body: '**EMPIRIC ANTIBIOTICS FOR SICK NEONATE**\n\n**STANDARD REGIMEN:**\n• [Ampicillin](#/drug/ampicillin) 50 mg/kg IV q8h\n  - Covers GBS, Listeria, Enterococcus\n• [Gentamicin](#/drug/gentamicin) 4 mg/kg IV q24h\n  - Covers gram-negatives (E. coli, Klebsiella)\n  - Synergy with Ampicillin for GBS\n\n**ADD ACYCLOVIR IF HSV CONCERN:**\n• [Acyclovir](#/drug/acyclovir) 20 mg/kg IV q8h\n• HSV risk factors: maternal HSV, vesicles, seizures, CSF pleocytosis, LFT elevation\n\n**MENINGITIS DOSING:**\n• Ampicillin 75-100 mg/kg IV q6-8h (higher dose)\n• Consider adding [Cefotaxime](#/drug/cefotaxime) or [Ceftriaxone](#/drug/ceftriaxone) (>7 days old)\n\n**NEC/ABDOMINAL:**\nAdd [Metronidazole](#/drug/metronidazole) 15 mg/kg IV q12h for anaerobic coverage\n\n**LATE-ONSET SEPSIS (>7 days):**\nConsider adding [Vancomycin](#/drug/vancomycin) 15 mg/kg IV q8-12h if:\n• Central line present\n• Prior NICU admission\n• Concern for Staph aureus\n\n**DURATION:**\n• Culture-negative, improving: 48-72h\n• Bacteremia: 10-14 days\n• Meningitis: 14-21 days',
+    recommendation: 'Empiric: Ampicillin 50 mg/kg + Gentamicin 4 mg/kg. Add Acyclovir 20 mg/kg if HSV risk. Add Vancomycin for late-onset or line infection.',
+    confidence: 'definitive',
+    citation: [1, 10, 11],
+    calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
+    treatment: {
+      firstLine: {
+        drug: 'Ampicillin + Gentamicin',
+        dose: 'Ampicillin 50 mg/kg; Gentamicin 4 mg/kg',
+        route: 'IV',
+        frequency: 'Ampicillin q8h; Gentamicin q24h',
+        duration: '48-72h if culture-negative; 10-14d if positive',
+        notes: 'Add Acyclovir 20 mg/kg q8h if HSV concern.',
+      },
+      alternative: {
+        drug: 'Ampicillin + Cefotaxime (if meningitis)',
+        dose: 'Ampicillin 75-100 mg/kg; Cefotaxime 50 mg/kg',
+        route: 'IV',
+        frequency: 'Ampicillin q6-8h; Cefotaxime q8h',
+        duration: '14-21 days for meningitis',
+        notes: 'Meningitis dosing. Cefotaxime preferred over ceftriaxone in first week.',
+      },
+      monitoring: 'Blood culture at 48h. CRP trending. Clinical response. Gentamicin levels if prolonged use.',
+    },
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'misfits-admit',
+    type: 'info',
+    module: 6,
+    title: 'Admission Disposition',
+    body: '**DISPOSITION DECISIONS**\n\n**ALL SICK NEONATES ARE ADMITTED**\n\n**NICU ADMISSION:**\n• Prematurity\n• Respiratory support beyond nasal cannula\n• TPN required (NEC, surgical abdomen)\n• Cardiovascular support (pressors, PGE1)\n• Active resuscitation needs\n• Complex congenital anomalies\n• Seizures requiring monitoring\n\n**PICU ADMISSION:**\n• Older neonates (>14-28 days) with acute illness\n• Respiratory failure requiring mechanical ventilation\n• Shock requiring vasopressors\n• Post-operative care\n• Depends on institutional practice\n\n**PEDIATRIC FLOOR (rare):**\n• Stable infant needing observation\n• Rule-out sepsis with low suspicion\n• Jaundice requiring phototherapy only\n\n**TRANSFER CONSIDERATIONS:**\n• Need for subspecialty care (cardiac surgery, ECMO)\n• Stabilize before transport\n• Appropriate transport team\n• See [CHD Transfer](#/consult/chd-peds) if cardiac',
+    citation: [1, 2],
+    next: 'misfits-family',
+    summary: 'All sick neonates admitted; NICU for prematurity, respiratory/CV support, TPN, seizures; PICU for older neonates with acute illness',
+  },
+
+  {
+    id: 'misfits-family',
+    type: 'info',
+    module: 6,
+    title: 'Family Communication',
+    body: '**COMMUNICATING WITH FAMILIES**\n\n**KEY PRINCIPLES:**\n• Parents are terrified - acknowledge this\n• Explain what you\'re doing and why\n• Use plain language, not medical jargon\n• Allow parents to stay during procedures when safe\n• Provide frequent updates\n\n**WHAT TO SAY:**\n"Your baby is very sick. We are doing everything we can to find out what\'s wrong and treat it. I\'m going to be honest with you about what we know and what we don\'t know."\n\n**PROCEDURES:**\n• Explain before you do\n• Offer for parents to step out or stay\n• Brief them after completion\n\n**DIFFICULT CONVERSATIONS:**\n• If prognosis is poor, be honest but compassionate\n• Include palliative care/chaplaincy early if appropriate\n• Allow questions, silence is okay\n\n**SOCIAL SUPPORT:**\n• Social work involvement for all sick neonates\n• Assess home situation, support system\n• If NAT suspected, appropriate reporting and safety measures\n\n**DOCUMENTATION:**\n• Detailed notes of conversations\n• Decision-making documented\n• Time of discussions noted',
+    citation: [1],
+    summary: 'Acknowledge fear, use plain language, allow parents to stay, provide frequent updates, involve social work',
+  },
+
+];
+
+export const MISFITS_PEDS_NODE_COUNT = MISFITS_PEDS_NODES.length;
+
+// -------------------------------------------------------------------
+// Module Labels (for progress indicator)
+// -------------------------------------------------------------------
+
+export const MISFITS_PEDS_MODULE_LABELS = [
+  'Initial Assessment',
+  'THE - Trauma/Heart/Endocrine',
+  'MIS - Metabolic/Sepsis',
+  'FITS - GI/Toxins/Seizures',
+  'Resuscitation',
+  'Disposition',
+];
+
+// -------------------------------------------------------------------
+// Critical Actions
+// -------------------------------------------------------------------
+
+export const MISFITS_PEDS_CRITICAL_ACTIONS = [
+  { text: 'Check glucose IMMEDIATELY in any sick neonate - hypoglycemia is common and treatable', nodeId: 'misfits-triage' },
+  { text: 'Check femoral pulses - weak/absent suggests coarctation or ductal-dependent lesion', nodeId: 'misfits-heart' },
+  { text: 'HSV can kill without vesicles - start Acyclovir empirically if any concern, do NOT wait for PCR', nodeId: 'misfits-hsv' },
+  { text: 'CAH triad: hyponatremia + hyperkalemia + hypoglycemia - give Hydrocortisone 25 mg IV immediately', nodeId: 'misfits-cah' },
+  { text: 'BILIOUS VOMITING = VOLVULUS until proven otherwise - emergent UGI and surgical consult', nodeId: 'misfits-volvulus' },
+  { text: 'Neonatal seizures are often subtle - eye deviation, lip smacking, cycling movements, apnea', nodeId: 'misfits-seizures' },
+  { text: 'Empiric antibiotics for sick neonate: Ampicillin + Gentamicin (+/- Acyclovir if HSV risk)', nodeId: 'misfits-abx' },
+  { text: 'UVC is available in first week - single thin-walled vein, insert 2-4 cm until blood return', nodeId: 'misfits-access' },
+  { text: 'Fluid boluses in neonates: 10 mL/kg (not 20 mL/kg as in older children)', nodeId: 'misfits-resus' },
+];
+
+// -------------------------------------------------------------------
+// Evidence Citations
+// -------------------------------------------------------------------
+
+export const MISFITS_PEDS_CITATIONS: Citation[] = [
+  { num: 1, text: 'Palazzi DL, et al. The Ill-Appearing Infant. Emerg Med Clin North Am. 2021;39(3):599-615.' },
+  { num: 2, text: 'Pantell RH, et al. AAP Clinical Practice Guideline: Evaluation and Management of Well-Appearing Febrile Infants 8-60 Days Old. Pediatrics. 2021;148(2):e2021052228.' },
+  { num: 3, text: 'Escobar GJ, et al. Stratification of risk of early-onset sepsis in newborns ≥34 weeks gestation. Pediatrics. 2014;133(1):30-36.' },
+  { num: 4, text: 'Christian CW, et al. AAP Committee on Child Abuse and Neglect. The evaluation of suspected child physical abuse. Pediatrics. 2015;135(5):e1337-e1354.' },
+  { num: 5, text: 'Maguire S, et al. Which clinical features distinguish inflicted from non-inflicted brain injury? Arch Dis Child. 2009;94(11):860-867.' },
+  { num: 6, text: 'Oster ME, et al. Lessons learned from newborn screening for critical congenital heart defects. Pediatrics. 2016;137(5):e20154573.' },
+  { num: 7, text: 'Speiser PW, et al. Congenital adrenal hyperplasia due to steroid 21-hydroxylase deficiency. J Clin Endocrinol Metab. 2010;95(9):4133-4160.' },
+  { num: 8, text: 'Adamkin DH, et al. AAP Committee on Fetus and Newborn. Postnatal glucose homeostasis in late-preterm and term infants. Pediatrics. 2011;127(3):575-579.' },
+  { num: 9, text: 'Saudubray JM, et al. Clinical approach to treatable inborn metabolic diseases. J Inherit Metab Dis. 2006;29(2-3):261-274.' },
+  { num: 10, text: 'Polin RA, et al. AAP Committee on Fetus and Newborn. Management of neonates with suspected or proven early-onset bacterial sepsis. Pediatrics. 2012;129(5):1006-1015.' },
+  { num: 11, text: 'Kimberlin DW, et al. Guidance on management of asymptomatic neonates born to women with active genital herpes lesions. Pediatrics. 2013;131(2):e572-e579.' },
+  { num: 12, text: 'James SH, et al. Neonatal herpes simplex virus infection. Infect Dis Clin North Am. 2015;29(3):391-400.' },
+  { num: 13, text: 'Moritz ML, et al. Water intoxication in infants and hyponatremia. J Am Soc Nephrol. 2005;16(3):715-722.' },
+  { num: 14, text: 'Neu J, et al. Necrotizing enterocolitis. N Engl J Med. 2011;364(3):255-264.' },
+  { num: 15, text: 'Adams-Chapman I, et al. Necrotizing enterocolitis in the premature infant. Semin Pediatr Surg. 2018;27(1):9-15.' },
+  { num: 16, text: 'Applegate KE, et al. Intestinal malrotation in children: a problem-solving approach to the upper gastrointestinal series. Radiographics. 2006;26(5):1485-1500.' },
+  { num: 17, text: 'Hudak ML, et al. AAP Committee on Drugs. Neonatal drug withdrawal. Pediatrics. 2012;129(2):e540-e560.' },
+  { num: 18, text: 'Shellhaas RA, et al. Neonatal seizures: diagnosis and management strategies. Pediatr Neurol. 2021;122:38-45.' },
+  { num: 19, text: 'Weiner GM, et al. Textbook of Neonatal Resuscitation (NRP). 8th ed. American Academy of Pediatrics; 2021.' },
+];

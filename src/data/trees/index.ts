@@ -118,6 +118,8 @@ export { PNES_NODES, PNES_MODULE_LABELS, PNES_CITATIONS, PNES_CRITICAL_ACTIONS }
 export { AMAUROSIS_FUGAX_NODES, AMAUROSIS_FUGAX_MODULE_LABELS, AMAUROSIS_FUGAX_CITATIONS, AMAUROSIS_FUGAX_CRITICAL_ACTIONS } from './amaurosis-fugax';
 export { BRUE_NODES, BRUE_MODULE_LABELS, BRUE_CITATIONS, BRUE_CRITICAL_ACTIONS } from './brue';
 export { IIH_NODES, IIH_MODULE_LABELS, IIH_CITATIONS, IIH_CRITICAL_ACTIONS } from './iih';
+export { CHD_PEDS_NODES, CHD_PEDS_MODULE_LABELS, CHD_PEDS_CITATIONS, CHD_PEDS_CRITICAL_ACTIONS, CHD_PEDS_NODE_COUNT } from './chd-peds';
+export { MISFITS_PEDS_NODES, MISFITS_PEDS_MODULE_LABELS, MISFITS_PEDS_CITATIONS, MISFITS_PEDS_CRITICAL_ACTIONS, MISFITS_PEDS_NODE_COUNT } from './misfits-peds';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.

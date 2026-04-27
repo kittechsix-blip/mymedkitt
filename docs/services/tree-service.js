@@ -878,6 +878,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/intussusception.js');
             return { nodes: m.INTUSSUSCEPTION_NODES, entryNodeId: 'intuss-start', categoryId: 'pediatrics', moduleLabels: m.INTUSSUSCEPTION_MODULE_LABELS, citations: m.INTUSSUSCEPTION_CITATIONS, criticalActions: m.INTUSSUSCEPTION_CRITICAL_ACTIONS };
         },
+        'chd-peds': async () => {
+            const m = await import('../data/trees/chd-peds.js');
+            return { nodes: m.CHD_PEDS_NODES, entryNodeId: 'chd-start', categoryId: 'pediatrics', moduleLabels: m.CHD_PEDS_MODULE_LABELS, citations: m.CHD_PEDS_CITATIONS, criticalActions: m.CHD_PEDS_CRITICAL_ACTIONS };
+        },
+        'misfits-peds': async () => {
+            const m = await import('../data/trees/misfits-peds.js');
+            return { nodes: m.MISFITS_PEDS_NODES, entryNodeId: 'misfits-start', categoryId: 'pediatrics', moduleLabels: m.MISFITS_PEDS_MODULE_LABELS, citations: m.MISFITS_PEDS_CITATIONS, criticalActions: m.MISFITS_PEDS_CRITICAL_ACTIONS };
+        },
         'fishhook-removal': async () => {
             const m = await import('../data/trees/fishhook-removal.js');
             return { nodes: m.FISHHOOK_REMOVAL_NODES, entryNodeId: 'fh-start', categoryId: 'procedures', moduleLabels: m.FISHHOOK_REMOVAL_MODULE_LABELS, citations: m.FISHHOOK_REMOVAL_CITATIONS, criticalActions: m.FISHHOOK_REMOVAL_CRITICAL_ACTIONS };
