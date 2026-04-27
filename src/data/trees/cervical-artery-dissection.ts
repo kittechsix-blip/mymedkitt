@@ -227,7 +227,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Treatment of Cervical Artery Dissection',
-    body: '**Antithrombotic Therapy:**\n\n**Goal:** Prevent stroke from thromboembolism\n\n**Options (equivalent efficacy):**\n\n**Antiplatelet:**\n• [Aspirin](#/drug/aspirin/stroke) 81-325 mg daily\n• Or dual antiplatelet (aspirin + clopidogrel) x 21 days, then aspirin alone\n\n**Anticoagulation:**\n• **Heparin** → [Warfarin](#/drug/warfarin/dissection) (INR 2-3)\n• Duration: 3-6 months\n\n**CADISS Trial:** No difference between antiplatelet and anticoagulation.\n\n**Most centers:** Antiplatelet therapy preferred (lower bleeding risk). [1][4][5][6]',
+    body: '**Antithrombotic Therapy:**\n\n**Goal:** Prevent stroke from thromboembolism\n\n**Options (equivalent efficacy):**\n\n**Antiplatelet:**\n• [Aspirin](#/drug/aspirin/stroke) 81-325 mg daily\n• Or dual antiplatelet (aspirin + clopidogrel) x 21 days, then aspirin alone\n\n**Anticoagulation:**\n• [Heparin](#/drug/ufh/dissection) → [Warfarin](#/drug/warfarin/dissection) (INR 2-3)\n• Duration: 3-6 months\n\n**CADISS Trial:** No difference between antiplatelet and anticoagulation.\n\n**Most centers:** Antiplatelet therapy preferred (lower bleeding risk). [1][4][5][6]',
     citation: [1, 4, 5, 6],
     treatment: {
       firstLine: {

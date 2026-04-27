@@ -172,7 +172,7 @@ export const BLOOD_CULTURE_STEWARDSHIP_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Febrile Patient — Risk Stratify',
-    body: '**Fever alone is NOT an indication for blood cultures.** [4][6]\n\n**The Shapiro Decision Rule** helps predict true bacteremia: [6]\n\n**Major criteria (3 points each):**\n• Temperature >39.4°C (103°F)\n• Indwelling vascular catheter\n• Clinical suspicion of endocarditis\n\n**Minor criteria (1 point each):**\n• Temperature 38.3-39.3°C\n• Age >65 years\n• Rigors\n• Vomiting\n• Hypotension (SBP <90)\n• WBC >18,000\n• Bands >5%\n• Platelets <150,000\n• Creatinine >2.0\n\n**Score ≥2 points:** 19% bacteremia risk → cultures indicated\n**Score <2 points:** <1% bacteremia risk → consider skipping\n\n**Shapiro Rule Calculator**\n\nWhat is the Shapiro score or clinical gestalt?',
+    body: '**Fever alone is NOT an indication for blood cultures.** [4][6]\n\n**The Shapiro Decision Rule** helps predict true bacteremia: [6]\n\n**Major criteria (3 points each):**\n• Temperature >39.4°C (103°F)\n• Indwelling vascular catheter\n• Clinical suspicion of endocarditis\n\n**Minor criteria (1 point each):**\n• Temperature 38.3-39.3°C\n• Age >65 years\n• Rigors\n• Vomiting\n• Hypotension (SBP <90)\n• WBC >18,000\n• Bands >5%\n• Platelets <150,000\n• Creatinine >2.0\n\n**Score ≥2 points:** 19% bacteremia risk → cultures indicated\n**Score <2 points:** <1% bacteremia risk → consider skipping\n\n[Shapiro Rule Calculator](#/calculator/shapiro)\n\nWhat is the Shapiro score or clinical gestalt?',
     citation: [4, 6],
     options: [
       {

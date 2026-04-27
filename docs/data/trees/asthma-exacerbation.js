@@ -56,7 +56,7 @@ export const ASTHMA_EXACERBATION_NODES = [
         type: 'question',
         module: 1,
         title: 'Treatment Response',
-        body: '**Reassess at 60-90 minutes:**\n\nCheck:\n• Symptom improvement\n• Respiratory rate\n• SpO2 on room air or minimal O2\n• **Peak Expiratory Flow (PEF)**\n\n**PEF Calculator**\n\nWhat is the PEF response?',
+        body: '**Reassess at 60-90 minutes:**\n\nCheck:\n• Symptom improvement\n• Respiratory rate\n• SpO2 on room air or minimal O2\n• **Peak Expiratory Flow (PEF)**\n\n[PEF Calculator](#/calculator/pef-predicted)\n\nWhat is the PEF response?',
         options: [
             { label: 'PEF >70% - Good Response', description: 'Symptom resolution, SpO2 ≥94% RA', next: 'asthma-disposition-criteria' },
             { label: 'PEF 50-70% - Incomplete', description: 'Some improvement, still symptomatic', next: 'asthma-continuous-nebs' },
@@ -345,7 +345,7 @@ export const ASTHMA_EXACERBATION_NODES = [
         type: 'info',
         module: 6,
         title: 'Disposition Criteria',
-        body: '**Use PEF to guide disposition:** [1][2][16]\n\n**Peak Expiratory Flow (PEF) Thresholds:**\n\n| PEF (% predicted or personal best) | Disposition |\n|-----------------------------------|-------------|\n| **≥70%** | Discharge home |\n| **50-69%** | Consider observation or discharge with close follow-up |\n| **<50%** | Admission likely |\n| **<25%** | ICU admission |\n\n**PEF Calculator**\n\n**Additional Discharge Criteria:**\n• Symptom resolution or significant improvement\n• SpO2 ≥94% on room air\n• Able to ambulate without distress\n• Able to use inhaler correctly\n• Has medications or prescription\n• Can access follow-up (PCP within 2-7 days)\n• No high-risk features\n\n**High-Risk Features Favoring Admission:**\n• Prior intubation for asthma\n• ICU admission in past year\n• ≥2 hospitalizations or ≥3 ED visits in past year\n• Recent oral steroid use\n• Poor social support\n• Psychiatric comorbidity',
+        body: '**Use PEF to guide disposition:** [1][2][16]\n\n**Peak Expiratory Flow (PEF) Thresholds:**\n\n| PEF (% predicted or personal best) | Disposition |\n|-----------------------------------|-------------|\n| **≥70%** | Discharge home |\n| **50-69%** | Consider observation or discharge with close follow-up |\n| **<50%** | Admission likely |\n| **<25%** | ICU admission |\n\n[PEF Calculator](#/calculator/pef-predicted)\n\n**Additional Discharge Criteria:**\n• Symptom resolution or significant improvement\n• SpO2 ≥94% on room air\n• Able to ambulate without distress\n• Able to use inhaler correctly\n• Has medications or prescription\n• Can access follow-up (PCP within 2-7 days)\n• No high-risk features\n\n**High-Risk Features Favoring Admission:**\n• Prior intubation for asthma\n• ICU admission in past year\n• ≥2 hospitalizations or ≥3 ED visits in past year\n• Recent oral steroid use\n• Poor social support\n• Psychiatric comorbidity',
         citation: [1, 2, 16],
         calculatorLinks: [
             { id: 'pef-predicted', label: 'PEF % Predicted' },

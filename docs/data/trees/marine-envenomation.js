@@ -661,7 +661,7 @@ Deep punctures, contaminated wounds, stingray injuries, immunocompromised
 **Outpatient Regimens (5 days):**
 - [Ciprofloxacin](#/drug/ciprofloxacin/marine-wound) 500mg PO BID, OR
 - [Doxycycline](#/drug/doxycycline/marine-wound) 100mg PO BID, OR
-- **Levofloxacin** 750mg PO daily
+- [Levofloxacin](#/drug/levofloxacin/marine-wound) 750mg PO daily
 
 *Covers: Staph, Strep, Vibrio species*`,
         citation: [1, 9],

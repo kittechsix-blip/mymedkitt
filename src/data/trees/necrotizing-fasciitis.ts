@@ -264,7 +264,7 @@ export const NECROTIZING_FASCIITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Aeromonas — Freshwater NSTI',
-    body: '**Aeromonas hydrophila** associated with freshwater exposure. [4]\n\n**Risk factors:**\n• Freshwater injury (lake, river, pond)\n• Immunocompromise\n• Liver disease\n• Leech therapy (medicinal leeches)\n\n**Antibiotic regimen (ADD to empiric therapy):** [4]\n• [Doxycycline](#/drug/doxycycline) 100 mg IV q12h PLUS\n• [Ciprofloxacin](#/drug/ciprofloxacin) 400 mg IV q12h OR **Levofloxacin** 750 mg IV q24h\n\n**If already on pip-tazo or carbapenem:**\n• Add doxycycline 100 mg IV q12h + fluoroquinolone\n\n**Note:** Aeromonas is often resistant to ampicillin and first-generation cephalosporins.',
+    body: '**Aeromonas hydrophila** associated with freshwater exposure. [4]\n\n**Risk factors:**\n• Freshwater injury (lake, river, pond)\n• Immunocompromise\n• Liver disease\n• Leech therapy (medicinal leeches)\n\n**Antibiotic regimen (ADD to empiric therapy):** [4]\n• [Doxycycline](#/drug/doxycycline) 100 mg IV q12h PLUS\n• [Ciprofloxacin](#/drug/ciprofloxacin) 400 mg IV q12h OR [Levofloxacin](#/drug/levofloxacin) 750 mg IV q24h\n\n**If already on pip-tazo or carbapenem:**\n• Add doxycycline 100 mg IV q12h + fluoroquinolone\n\n**Note:** Aeromonas is often resistant to ampicillin and first-generation cephalosporins.',
     citation: [4],
     next: 'nf-type-classification',
     summary: 'Aeromonas: freshwater exposure, leech therapy; add doxycycline + fluoroquinolone to standard regimen; resistant to ampicillin',

@@ -368,7 +368,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 3,
         title: 'HSV First Episode - Treatment',
-        body: '**First episode treatment (7-10 days):**\n\n| Drug | Dose | Frequency |\n|------|------|-----------|\n| [Acyclovir](#/drug/acyclovir) | 400mg PO | TID x 7-10d |\n| **Valacyclovir** | 1g PO | BID x 7-10d |\n| Famciclovir | 250mg PO | TID x 7-10d |\n\n**Extend to 14+ days if healing incomplete.**\n\n**Severe disease (hospitalized):**\n- Acyclovir 5-10 mg/kg IV q8h until improving, then oral to complete course\n\n**Pregnancy:**\n- Acyclovir and valacyclovir safe in pregnancy\n- Suppressive therapy from 36 weeks if history of genital herpes',
+        body: '**First episode treatment (7-10 days):**\n\n| Drug | Dose | Frequency |\n|------|------|-----------|\n| [Acyclovir](#/drug/acyclovir) | 400mg PO | TID x 7-10d |\n| [Valacyclovir](#/drug/valacyclovir) | 1g PO | BID x 7-10d |\n| Famciclovir | 250mg PO | TID x 7-10d |\n\n**Extend to 14+ days if healing incomplete.**\n\n**Severe disease (hospitalized):**\n- Acyclovir 5-10 mg/kg IV q8h until improving, then oral to complete course\n\n**Pregnancy:**\n- Acyclovir and valacyclovir safe in pregnancy\n- Suppressive therapy from 36 weeks if history of genital herpes',
         recommendation: 'Start treatment ASAP - most effective within 72h of onset. Counsel on transmission, asymptomatic shedding, and disclosure. Offer suppressive therapy discussion at follow-up.',
         treatment: {
             firstLine: {
@@ -721,7 +721,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 4,
         title: 'Epididymitis - MSM with Insertive Anal',
-        body: '**Cover GC/CT AND enteric bacteria:**\n\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1**\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 10 days**\n- Consider adding **Levofloxacin** **500mg PO daily x 10 days** if enteric organisms suspected\n\n**Supportive care:**\n- Scrotal elevation, NSAIDs, ice packs\n\n**Testing:**\n- Urine NAAT for GC/CT\n- Urine culture (midstream clean catch) for enteric organisms',
+        body: '**Cover GC/CT AND enteric bacteria:**\n\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1**\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 10 days**\n- Consider adding [Levofloxacin](#/drug/levofloxacin) **500mg PO daily x 10 days** if enteric organisms suspected\n\n**Supportive care:**\n- Scrotal elevation, NSAIDs, ice packs\n\n**Testing:**\n- Urine NAAT for GC/CT\n- Urine culture (midstream clean catch) for enteric organisms',
         recommendation: 'Broad coverage for both STI and enteric pathogens. NAAT + urine culture. Partner treatment.',
         treatment: {
             firstLine: {
@@ -742,7 +742,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 4,
         title: 'Epididymitis - Enteric Organisms',
-        body: '**Enteric bacteria (E. coli, Pseudomonas) - NOT STI related:**\n\n- **Levofloxacin** **500mg PO daily x 10 days**\n\n**Indications for fluoroquinolone monotherapy:**\n- Age >35\n- Recent urologic instrumentation/surgery\n- Known urologic abnormality\n- Low STI risk\n\n**Testing:**\n- Urine culture (midstream clean catch)\n- UA\n- Consider prostatic involvement if febrile',
+        body: '**Enteric bacteria (E. coli, Pseudomonas) - NOT STI related:**\n\n- [Levofloxacin](#/drug/levofloxacin) **500mg PO daily x 10 days**\n\n**Indications for fluoroquinolone monotherapy:**\n- Age >35\n- Recent urologic instrumentation/surgery\n- Known urologic abnormality\n- Low STI risk\n\n**Testing:**\n- Urine culture (midstream clean catch)\n- UA\n- Consider prostatic involvement if febrile',
         recommendation: 'Urine culture to guide therapy. If STI not ruled out, add ceftriaxone and NAAT.',
         treatment: {
             firstLine: {

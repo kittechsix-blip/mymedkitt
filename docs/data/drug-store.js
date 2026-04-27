@@ -9439,6 +9439,424 @@ const SCOPOLAMINE = {
         'Furman JM, Barton JJS. Treatment of vertigo. UpToDate. 2024.',
     ],
 };
+const ADENOSINE = {
+    id: 'adenosine',
+    name: 'Adenosine',
+    genericName: 'Adenosine',
+    drugClass: 'Endogenous purine nucleoside (Class V antiarrhythmic)',
+    route: 'IV (rapid push, large-bore proximal vein)',
+    indications: ['SVT (regular narrow-complex tachycardia)', 'Diagnostic unmasking of atrial flutter', 'Pediatric SVT'],
+    dosing: [
+        {
+            indication: 'Adult SVT',
+            regimen: '**6 mg** rapid IV push followed by 20 mL NS flush. If no conversion in 1-2 min: **12 mg** rapid IV push (repeat once if needed). Use proximal AC vein or central line — short half-life (<10 sec) means peripheral push must be fast.',
+        },
+        {
+            indication: 'Pediatric SVT',
+            regimen: '**0.1 mg/kg** (max 6 mg) rapid IV push, flush with 5-10 mL NS. If no conversion: **0.2 mg/kg** (max 12 mg) — may repeat once.',
+            weightCalc: { dosePerKg: 0.1, unit: 'mg', maxDose: 6, label: 'Initial dose' },
+        },
+        {
+            indication: 'Pediatric SVT — second dose',
+            regimen: 'Second/third doses: 0.2 mg/kg (max 12 mg) rapid IV push.',
+            weightCalc: { dosePerKg: 0.2, unit: 'mg', maxDose: 12, label: 'Second dose' },
+        },
+    ],
+    contraindications: [
+        '2nd or 3rd degree AV block (without pacemaker)',
+        'Sick sinus syndrome (without pacemaker)',
+        'Severe asthma / bronchospasm (relative — may precipitate)',
+    ],
+    cautions: [
+        'Warn patient: brief (~10 sec) sense of impending doom, chest pressure, flushing — universal and self-limited',
+        'Transient asystole / heart block expected — have pads on, monitor running',
+        'Reduce dose to 3 mg if via central line, in heart transplant patients, or on dipyridamole/carbamazepine (potentiation)',
+        'Higher doses (up to 18 mg) may be needed if on theophylline/caffeine (antagonism)',
+        'Will NOT convert A-fib, A-flutter, or VT — but transient AV block can unmask flutter waves',
+    ],
+    monitoring: 'Continuous ECG during and after push. Vital signs. Watch for prolonged asystole or progression to AF.',
+    notes: 'Drug of choice for stable SVT after vagal maneuvers fail. Half-life <10 seconds — must be pushed rapidly through proximal IV with immediate saline flush. Effect is dramatic and brief.',
+    citations: [
+        'Page RL et al. 2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia. Circulation. 2016;133(14):e506-e574.',
+    ],
+};
+const ANDEXANET_ALFA = {
+    id: 'andexanet',
+    name: 'Andexanet Alfa',
+    genericName: 'Coagulation Factor Xa (recombinant), Inactivated-zhzo',
+    drugClass: 'Factor Xa decoy / DOAC reversal agent',
+    route: 'IV (bolus then infusion)',
+    indications: ['Apixaban or rivaroxaban reversal in life-threatening bleeding'],
+    dosing: [
+        {
+            indication: 'DOAC reversal — life-threatening bleeding',
+            regimen: '**Low-dose (most patients):** 400 mg IV bolus at 30 mg/min, then 4 mg/min × 120 min (total 480 mg infusion).\n**High-dose:** 800 mg IV bolus at 30 mg/min, then 8 mg/min × 120 min (total 960 mg infusion).\n\n**High-dose criteria:**\n• Apixaban >5 mg dose taken within 8 hr (or unknown timing)\n• Rivaroxaban >10 mg taken within 8 hr (or unknown timing)\n• Otherwise use low-dose.',
+        },
+        {
+            indication: 'Epistaxis (severe DOAC-associated)',
+            regimen: 'Same dosing as above. Reserve for refractory bleeding not controlled by anterior/posterior packing — most epistaxis stops with packing alone even on DOACs.',
+        },
+        {
+            indication: 'Massive hemorrhage / MTP — DOAC reversal',
+            regimen: 'Same dosing. Co-administer with PCC if mixed anticoagulants or unclear DOAC. **Cost: ~$25,000-50,000/dose** — confirm DOAC ingestion + life-threatening bleed before dosing.',
+        },
+    ],
+    contraindications: ['No absolute contraindications in life-threatening bleeding'],
+    cautions: [
+        'Thromboembolic risk: ~10% within 30 days (DVT, PE, MI, stroke)',
+        'Resume anticoagulation as soon as clinically safe',
+        'Effect lasts ~2 hr after infusion — anticoagulant effect may rebound',
+        'Will interfere with heparin assays if heparin given subsequently',
+        'Cost: ~$25,000-50,000/dose — institutional approval often required',
+    ],
+    monitoring: 'Anti-Xa level (poor correlation with bleeding endpoint — clinical assessment primary). Re-bleeding risk 12-24 hr post-infusion.',
+    notes: 'Specific antidote for apixaban and rivaroxaban (also some activity against edoxaban, betrixaban, enoxaparin). Mechanism: recombinant decoy Xa molecule binds and sequesters Xa inhibitors. PCC (Kcentra) is a reasonable alternative when andexanet unavailable or cost-prohibitive — though no head-to-head trials show superiority.',
+    citations: [
+        'Connolly SJ et al. Andexanet for Factor Xa Inhibitor-Associated Acute Major Bleeding. NEJM. 2016;375(12):1131-1141.',
+        'Tomaselli GF et al. 2020 ACC Expert Consensus on Management of Bleeding in Patients on Oral Anticoagulants. JACC. 2020;76(5):594-622.',
+    ],
+};
+const MANNITOL = {
+    id: 'mannitol',
+    name: 'Mannitol',
+    genericName: 'Mannitol',
+    drugClass: 'Osmotic diuretic',
+    route: 'IV (in-line filter required)',
+    indications: ['Cerebral herniation / elevated ICP', 'Acute glaucoma'],
+    dosing: [
+        {
+            indication: 'Brain herniation',
+            regimen: '**0.5-1.5 g/kg** IV over 10-15 min via in-line filter (crystals can form). Onset 5-10 min, duration ~6 hr. May redose q6-8h. Confirm serum osmolality <320 mOsm/L and SBP >100 before redose.',
+            weightCalc: { dosePerKg: 1, unit: 'g', label: 'Standard herniation dose (1 g/kg)' },
+        },
+        {
+            indication: 'Elevated ICP',
+            regimen: '**0.25-1 g/kg** IV over 10-15 min via in-line filter. Onset 5-10 min, duration 4-6 hr. Repeat dosing requires serum osmolality <320, osmolar gap <55, normovolemia.',
+            weightCalc: { dosePerKg: 0.5, unit: 'g', label: 'Standard ICP dose (0.5 g/kg)' },
+        },
+    ],
+    contraindications: [
+        'Anuria from severe renal disease',
+        'Severe pulmonary edema / CHF (volume shift can decompensate)',
+        'Active intracranial bleeding (relative — may worsen by reducing tamponade)',
+        'Severe dehydration / hypovolemia (worsens with osmotic diuresis)',
+    ],
+    cautions: [
+        'Use **in-line filter** — mannitol crystallizes at room temperature',
+        'Hypotension can occur from rapid diuresis — preferred in normovolemic/hypervolemic patients',
+        'Check serum osmolality before redose — stop at >320 mOsm/L (risk of acute renal failure)',
+        'Hypertonic saline (3% or 23.4%) is preferred in hypotensive/hypovolemic patients',
+        'Monitor electrolytes (Na, K) and renal function — rapid shifts',
+        'Rebound ICP elevation possible 4-6 hr after dose if BBB disrupted',
+    ],
+    monitoring: 'Serum osmolality (q6h), osmolar gap, Na, K, BUN/Cr. ICP if monitor in place. Urine output. Hemodynamics.',
+    notes: 'First-line hyperosmolar therapy for impending herniation in normotensive patients. Hypertonic saline preferred when hypotensive/hypovolemic, as mannitol diuresis can worsen perfusion. Both work — choice is patient-specific.',
+    citations: [
+        'Carney N et al. Guidelines for the Management of Severe Traumatic Brain Injury, 4th Edition. Neurosurgery. 2017;80(1):6-15.',
+        'Cook AM et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients. Neurocrit Care. 2020;32(3):647-666.',
+    ],
+};
+const KCENTRA = {
+    id: 'kcentra',
+    name: '4-Factor PCC (Kcentra)',
+    genericName: 'Prothrombin Complex Concentrate (Factors II, VII, IX, X)',
+    drugClass: 'Coagulation factor concentrate',
+    route: 'IV',
+    indications: ['Warfarin reversal in major bleeding', 'DOAC reversal (off-label, when andexanet unavailable)', 'Massive hemorrhage with coagulopathy'],
+    dosing: [
+        {
+            indication: 'Warfarin reversal — INR 2 to <4',
+            regimen: '**25 units/kg** IV (max 2,500 units). Co-administer Vitamin K 10 mg IV. Onset within minutes; recheck INR 30 min post-infusion.',
+            weightCalc: { dosePerKg: 25, unit: 'units', maxDose: 2500, label: 'INR 2-<4' },
+        },
+        {
+            indication: 'Warfarin reversal — INR 4-6',
+            regimen: '**35 units/kg** IV (max 3,500 units). Plus Vitamin K 10 mg IV.',
+            weightCalc: { dosePerKg: 35, unit: 'units', maxDose: 3500, label: 'INR 4-6' },
+        },
+        {
+            indication: 'Warfarin reversal — INR >6',
+            regimen: '**50 units/kg** IV (max 5,000 units). Plus Vitamin K 10 mg IV.',
+            weightCalc: { dosePerKg: 50, unit: 'units', maxDose: 5000, label: 'INR >6' },
+        },
+        {
+            indication: 'Massive hemoptysis / DOAC reversal (off-label)',
+            regimen: '**50 units/kg** IV (max 5,000 units) for life-threatening DOAC-associated bleed when andexanet unavailable. Less effective than andexanet for Xa inhibitors but reasonable alternative.',
+            weightCalc: { dosePerKg: 50, unit: 'units', maxDose: 5000, label: 'DOAC reversal (off-label)' },
+        },
+    ],
+    contraindications: [
+        'Disseminated intravascular coagulation (DIC) — active',
+        'Heparin-induced thrombocytopenia (HIT) — contains heparin',
+        'Known hypersensitivity to PCC components',
+    ],
+    cautions: [
+        'Thromboembolic risk ~5-8% — DVT, PE, MI, stroke',
+        'Contains small amount of heparin — avoid in HIT',
+        'ALWAYS co-administer Vitamin K for warfarin reversal — PCC effect lasts ~6 hr, vitamin K provides durable reversal',
+        'Cost ~$5,000-10,000/dose — confirm major bleed + reversal indication',
+        'Recheck INR 30 min post-infusion to confirm reversal',
+    ],
+    monitoring: 'INR pre and 30 min post-infusion. Repeat at 6-12 hr. Watch for thromboembolic events. Hemoglobin trend.',
+    notes: 'First-line for warfarin reversal in major bleeding (faster, smaller volume than FFP, no thawing needed). For DOACs: andexanet preferred for apixaban/rivaroxaban; idarucizumab for dabigatran; PCC is alternative when those unavailable.',
+    citations: [
+        'Frontera JA et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24(1):6-46.',
+        'Sarode R et al. Efficacy and safety of a 4-factor PCC in patients on vitamin K antagonists presenting with major bleeding. Circulation. 2013;128(11):1234-1243.',
+    ],
+};
+const PROSTAGLANDIN_E1 = {
+    id: 'prostaglandin-e1',
+    name: 'Prostaglandin E1 (Alprostadil)',
+    genericName: 'Alprostadil',
+    drugClass: 'Prostaglandin (vasodilator, ductus arteriosus patency)',
+    route: 'IV (continuous infusion, central preferred)',
+    indications: ['Maintain ductus arteriosus patency in ductal-dependent congenital heart disease'],
+    dosing: [
+        {
+            indication: 'Ductal-dependent CHD (neonate)',
+            regimen: '**Start: 0.05-0.1 mcg/kg/min** continuous IV infusion. Titrate down to lowest effective dose (often 0.01-0.05 mcg/kg/min) once ductus open. Effect within minutes; if no response after 30 min at 0.1 mcg/kg/min, ductus may already be closed — call cardiology.',
+            weightCalc: { dosePerKg: 0.1, unit: 'mcg', label: 'Initial 0.1 mcg/kg/min' },
+        },
+        {
+            indication: 'Ductal-dependent CHD — maintenance',
+            regimen: '**0.01-0.05 mcg/kg/min** once ductus open and SpO2 stable. Use lowest effective dose to minimize side effects.',
+            weightCalc: { dosePerKg: 0.025, unit: 'mcg', label: 'Maintenance 0.025 mcg/kg/min' },
+        },
+    ],
+    contraindications: ['Respiratory distress syndrome with persistent fetal circulation (relative — confirm ductal-dependent lesion first)'],
+    cautions: [
+        '**APNEA in 10-15%** — be prepared to intubate. Most common in first hour, in neonates <2 kg.',
+        'Hypotension from vasodilation — have fluid bolus and pressors ready',
+        'Fever (~14%) and seizures (~4%)',
+        'Flushing, bradycardia, hypoventilation',
+        'Tachyphylaxis can occur — escalate dose if losing effect',
+        'Use **dedicated central line** if possible — extravasation causes tissue irritation',
+        'NEVER stop abruptly in ductal-dependent CHD — may close ductus and precipitate cardiovascular collapse',
+    ],
+    monitoring: 'Continuous SpO2 (pre- and post-ductal), apnea monitor, blood pressure, temperature, glucose. Echo to confirm ductal patency.',
+    notes: 'Life-saving in critical CHD presenting with cyanosis (TGA, HLHS, pulmonary atresia, critical AS, severe coarctation). Start empirically if ductal-dependent lesion suspected — do NOT wait for echo confirmation. Side effects (esp. apnea) common but manageable; benefit far outweighs risk in true ductal-dependent disease.',
+    citations: [
+        'Akkinapally S et al. Prostaglandin E1 for maintaining ductal patency in neonates with ductal-dependent cardiac lesions. Cochrane Database Syst Rev. 2018;(2):CD011417.',
+        'Singh Y, Mikrou P. Use of prostaglandins in duct-dependent congenital heart conditions. Arch Dis Child Educ Pract Ed. 2018;103(3):137-140.',
+    ],
+};
+const NAPROXEN = {
+    id: 'naproxen',
+    name: 'Naproxen',
+    genericName: 'Naproxen',
+    drugClass: 'NSAID (non-selective COX inhibitor)',
+    route: 'PO',
+    indications: ['Acute gout flare', 'Reactive arthritis', 'RA flare', 'Mild-moderate musculoskeletal pain'],
+    dosing: [
+        {
+            indication: 'Gout flare',
+            regimen: '**Naproxen 500 mg PO BID × 5-7 days** (or until 2-3 days after flare resolves). Most effective when started within 24 hr of flare onset. Alternative first-line to colchicine and corticosteroids.',
+        },
+        {
+            indication: 'Reactive arthritis',
+            regimen: '**Naproxen 500 mg PO BID × 2-4 weeks** (or until symptoms resolve). NSAIDs are first-line; symptoms typically self-limited over weeks-months.',
+        },
+        {
+            indication: 'RA flare',
+            regimen: '**Naproxen 500 mg PO BID** for symptomatic flare control. Bridge while DMARDs adjusted by rheumatology. Add PPI if extended use or risk factors for GI bleed.',
+        },
+    ],
+    contraindications: [
+        'Active GI bleeding or peptic ulcer disease',
+        'CKD stage 4-5 / eGFR <30',
+        'NSAID-induced asthma / aspirin-exacerbated respiratory disease',
+        'Late pregnancy (>30 weeks — premature ductus closure)',
+        'Severe hepatic impairment',
+        'Recent CABG (within 10-14 days)',
+    ],
+    cautions: [
+        'GI bleed risk — co-prescribe PPI if elderly, on anticoag, prior PUD, or extended use',
+        'Renal: hold in volume depletion, AKI, decompensated CHF',
+        'CV risk: increased MI/stroke risk, especially with prolonged use',
+        'Avoid in heart failure (sodium retention)',
+        'Drug interactions: increases lithium, methotrexate, warfarin levels',
+        'In pregnancy: avoid 3rd trimester (DA closure, oligohydramnios)',
+    ],
+    monitoring: 'GI symptoms (melena, dyspepsia). Renal function if extended use or risk factors. BP if hypertensive.',
+    notes: 'Common first-line NSAID for ED-managed flares. Longer half-life than ibuprofen allows BID dosing. For acute gout, indomethacin is also reasonable but no clear superiority.',
+    citations: [
+        'FitzGerald JD et al. 2020 ACR Guideline for the Management of Gout. Arthritis Care Res. 2020;72(6):744-760.',
+        'Smolen JS et al. EULAR recommendations for the management of rheumatoid arthritis: 2022 update. Ann Rheum Dis. 2023;82(1):3-18.',
+    ],
+};
+const VALACYCLOVIR = {
+    id: 'valacyclovir',
+    name: 'Valacyclovir',
+    genericName: 'Valacyclovir hydrochloride',
+    drugClass: 'Antiviral (nucleoside analog, prodrug of acyclovir)',
+    route: 'PO',
+    indications: ['Genital herpes (HSV) — initial episode', 'Genital herpes — recurrent', 'Herpes zoster', 'HSV suppression'],
+    dosing: [
+        {
+            indication: 'Genital herpes — initial episode',
+            regimen: '**Valacyclovir 1 g PO BID × 7-10 days.** Start as soon as possible after symptom onset (ideally <72 hr). Reduces lesion duration, viral shedding, and severity.',
+        },
+        {
+            indication: 'Genital herpes — recurrent episode',
+            regimen: '**Valacyclovir 500 mg PO BID × 3 days** OR **1 g PO daily × 5 days.** Most effective when started within 24 hr of prodrome.',
+        },
+        {
+            indication: 'Genital herpes — chronic suppression',
+            regimen: '**Valacyclovir 500 mg PO daily** (or 1 g daily if ≥10 episodes/year). Reduces recurrence frequency by ~75% and reduces transmission to partner by ~50%.',
+        },
+        {
+            indication: 'Herpes zoster (shingles)',
+            regimen: '**Valacyclovir 1 g PO TID × 7 days.** Start within 72 hr of rash onset for maximum benefit. Add gabapentin/lidocaine for acute pain control.',
+        },
+    ],
+    contraindications: ['Known hypersensitivity to valacyclovir or acyclovir'],
+    cautions: [
+        'Renal dose adjustment: CrCl 30-49 → 1 g q12h; CrCl 10-29 → 1 g q24h; CrCl <10 → 500 mg q24h',
+        'Adequate hydration important — crystalline nephropathy at high doses or dehydration',
+        'Thrombotic thrombocytopenic purpura / hemolytic uremic syndrome reported in immunocompromised at very high doses (8 g/day)',
+        'Generally well-tolerated; nausea, headache common',
+    ],
+    monitoring: 'Renal function if extended therapy, dehydration, or elderly. Symptom response 48-72 hr.',
+    notes: 'Prodrug of acyclovir — better PO bioavailability allows simpler dosing. Equivalent efficacy to acyclovir. Not curative — does not eliminate latent virus. For STI screening: also test for HIV, syphilis, gonorrhea, chlamydia at initial diagnosis.',
+    citations: [
+        'Workowski KA et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.',
+        'Corey L et al. Once-daily valacyclovir to reduce the risk of transmission of genital herpes. NEJM. 2004;350(1):11-20.',
+    ],
+};
+const INTRALIPID_20 = {
+    id: 'intralipid-20',
+    name: 'Intralipid 20% (Lipid Emulsion)',
+    genericName: 'Intravenous Lipid Emulsion (ILE) 20%',
+    drugClass: 'Antidote (lipid sink) / parenteral nutrition',
+    route: 'IV',
+    indications: ['Local anesthetic systemic toxicity (LAST)', 'Cardiotoxic lipophilic drug overdose (refractory)'],
+    dosing: [
+        {
+            indication: 'LAST (Local Anesthetic Systemic Toxicity)',
+            regimen: '**Bolus: 1.5 mL/kg of 20% emulsion IV over 1 min** (≈100 mL in 70-kg adult).\nThen **infusion: 0.25 mL/kg/min** for 10 min after hemodynamic stability achieved.\nIf no response after 5 min: repeat bolus once or twice; double infusion to 0.5 mL/kg/min.\n**Maximum cumulative: 12 mL/kg in first 30 min.**',
+            weightCalc: [
+                { dosePerKg: 1.5, unit: 'mL', label: 'Bolus (1.5 mL/kg)' },
+                { dosePerKg: 12, unit: 'mL', label: 'Max cumulative 30 min' },
+            ],
+        },
+        {
+            indication: 'Cardiotoxic overdose (CCB, beta-blocker, TCA — refractory)',
+            regimen: 'Same dosing as LAST. Reserve for refractory shock not responding to standard therapy (HIET, calcium, vasopressors). Best evidence for verapamil and bupivacaine. Limited evidence base outside LAST.',
+            weightCalc: { dosePerKg: 1.5, unit: 'mL', label: 'Bolus' },
+        },
+    ],
+    contraindications: ['Known hypersensitivity to egg, soy, or peanut (relative — life-threatening LAST may justify use)'],
+    cautions: [
+        'Pancreatitis risk with prolonged infusion',
+        'Lab interference: lipemia disrupts CBC, chemistries, coags for hours',
+        'May reduce efficacy of subsequent epinephrine/vasopressors (lipid sink)',
+        'Limit total cumulative dose to ~12 mL/kg',
+        'Use clear IV tubing and dedicated line if possible',
+        'Report LAST cases to www.lipidrescue.org registry',
+    ],
+    monitoring: 'Hemodynamics, neuro status, ECG. Triglycerides if extended infusion. Pancreatic enzymes if symptoms.',
+    notes: 'Standard of care for LAST. Mechanism: lipid sink — extracts lipophilic drug from cardiac tissue. Continue ACLS throughout — lipid is adjunct, not replacement. Avoid vasopressin and high-dose epinephrine in LAST (may worsen outcomes per ASRA guidelines).',
+    citations: [
+        'Neal JM et al. The Third American Society of Regional Anesthesia and Pain Medicine Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
+        'Hoegberg LCG et al. Systematic review of the effect of intravenous lipid emulsion therapy for non-local anesthetic toxicity. Clin Toxicol. 2016;54(3):167-193.',
+    ],
+};
+const LEVOFLOXACIN = {
+    id: 'levofloxacin',
+    name: 'Levofloxacin',
+    genericName: 'Levofloxacin',
+    drugClass: 'Fluoroquinolone antibiotic',
+    route: 'PO / IV',
+    indications: ['Marine wound infections (Vibrio coverage)', 'Community-acquired pneumonia', 'Complicated UTI / pyelonephritis', 'Atypical STI coverage'],
+    dosing: [
+        {
+            indication: 'Marine wound infection (Vibrio vulnificus, Aeromonas)',
+            regimen: '**Levofloxacin 750 mg IV/PO daily.** Combine with doxycycline 100 mg BID for synergy against Vibrio. Treat 7-14 days depending on severity.',
+        },
+        {
+            indication: 'Necrotizing soft tissue infection (adjunct)',
+            regimen: '**Levofloxacin 750 mg IV daily** as part of broad-spectrum regimen (with vancomycin + piperacillin-tazobactam + clindamycin). Adds Pseudomonas/Vibrio coverage. Source control with surgical debridement is primary therapy.',
+        },
+        {
+            indication: 'Community-acquired pneumonia',
+            regimen: '**Levofloxacin 750 mg IV/PO daily × 5 days.** Respiratory fluoroquinolone with atypical coverage. First-line for outpatient with comorbidities or recent antibiotic exposure.',
+        },
+        {
+            indication: 'Pyelonephritis / complicated UTI',
+            regimen: '**Levofloxacin 750 mg IV/PO daily × 5 days** for uncomplicated pyelo. Avoid if local fluoroquinolone resistance rate >10% or recent quinolone exposure.',
+        },
+        {
+            indication: 'STI — gonorrhea / chlamydia (alternative)',
+            regimen: '**Not first-line** for gonorrhea (high resistance). For doxycycline-allergic chlamydia: **levofloxacin 500 mg PO daily × 7 days**. Always pair with appropriate gonorrhea coverage (ceftriaxone 500 mg IM × 1).',
+        },
+    ],
+    contraindications: [
+        'Known fluoroquinolone hypersensitivity',
+        'History of tendinopathy with fluoroquinolones',
+        'Pregnancy (relative — risk-benefit if no alternative)',
+        'Children <18 (relative — cartilage toxicity in animal studies; use only if benefit outweighs risk)',
+    ],
+    cautions: [
+        'FDA boxed warnings: tendon rupture (esp. Achilles, age >60, on steroids), peripheral neuropathy, CNS effects, exacerbation of myasthenia gravis',
+        'QTc prolongation — caution with other QT-prolonging drugs',
+        'Hypoglycemia / hyperglycemia — especially in diabetics on sulfonylureas',
+        'C. difficile colitis risk',
+        'Renal dose adjust: CrCl 20-49 → 750 mg q48h; CrCl 10-19 → 750 mg × 1, then 500 mg q48h',
+        'Chelation: separate from antacids, calcium, iron, sucralfate by ≥2 hr',
+    ],
+    monitoring: 'Renal function, glucose (in diabetics), tendon symptoms. ECG if other QT-prolonging meds.',
+    notes: 'Respiratory fluoroquinolone — broader gram+ coverage than ciprofloxacin (incl. S. pneumoniae). Increasing resistance in some regions; check local antibiogram. FDA recommends reserving for when alternatives unavailable due to disabling adverse effect profile.',
+    citations: [
+        'FDA Drug Safety Communication: FDA updates warnings for fluoroquinolone antibiotics. 2016/2018.',
+        'Stevens DL et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 IDSA Update. Clin Infect Dis. 2014;59(2):e10-e52.',
+    ],
+};
+const CEFOTAXIME = {
+    id: 'cefotaxime',
+    name: 'Cefotaxime',
+    genericName: 'Cefotaxime sodium',
+    drugClass: '3rd-generation cephalosporin antibiotic',
+    route: 'IV / IM',
+    indications: ['Neonatal sepsis / meningitis', 'Pediatric meningitis', 'Severe community-acquired pneumonia', 'Pyelonephritis'],
+    dosing: [
+        {
+            indication: 'Neonatal sepsis / meningitis',
+            regimen: '**Neonates ≤7 days:** 50 mg/kg IV q12h.\n**Neonates 8-28 days:** 50 mg/kg IV q8h.\n**Meningitis:** 50 mg/kg IV q6h (>1 month).\nPreferred over ceftriaxone in neonates (ceftriaxone displaces bilirubin → kernicterus risk).',
+            weightCalc: [
+                { dosePerKg: 50, unit: 'mg', label: 'Neonate ≤7d (q12h)' },
+                { dosePerKg: 50, unit: 'mg', label: 'Neonate 8-28d (q8h)' },
+                { dosePerKg: 50, unit: 'mg', label: 'Meningitis >1mo (q6h)' },
+            ],
+        },
+        {
+            indication: 'Pediatric meningitis (>1 month)',
+            regimen: '**75-100 mg/kg IV q6-8h** (max 12 g/day). Combine with vancomycin for empiric coverage of resistant Strep pneumoniae.',
+            weightCalc: { dosePerKg: 75, unit: 'mg', maxDose: 3000, label: 'Meningitis (q6-8h)' },
+        },
+        {
+            indication: 'Severe pneumonia / pyelonephritis',
+            regimen: '**Adults:** 1-2 g IV q6-8h (max 12 g/day).\n**Pediatric:** 50-180 mg/kg/day IV divided q6-8h.',
+            weightCalc: { dosePerKg: 50, unit: 'mg', dailyDivided: 4, label: 'Pediatric (50-180 mg/kg/day)' },
+        },
+    ],
+    contraindications: [
+        'Known cephalosporin or beta-lactam hypersensitivity',
+        'Anaphylaxis to penicillins (relative — cross-reactivity ~1-2%)',
+    ],
+    cautions: [
+        'Renal dose adjustment for CrCl <20',
+        'Caution in penicillin-allergic patients (cross-reactivity uncommon but possible)',
+        'C. difficile colitis risk',
+        'May cause neutropenia, thrombocytopenia with prolonged use',
+        'Coombs-positive hemolytic anemia rare but reported',
+    ],
+    monitoring: 'CBC if extended therapy. Renal function. C. difficile if diarrhea develops.',
+    notes: 'Preferred 3rd-gen cephalosporin in neonates (avoid ceftriaxone — bilirubin displacement causes kernicterus, especially in neonates <1 month). In older children and adults, ceftriaxone is functionally equivalent and preferred for once-daily dosing.',
+    citations: [
+        'Bradley JS, Nelson JD. Nelson\'s Pediatric Antimicrobial Therapy. 30th ed. AAP; 2024.',
+        'Tunkel AR et al. 2017 IDSA Clinical Practice Guidelines for Healthcare-Associated Ventriculitis and Meningitis. Clin Infect Dis. 2017;64(6):e34-e65.',
+    ],
+};
 export const ALL_DRUGS = [
     ACAMPROSATE,
     ACETAMINOPHEN,
@@ -9684,6 +10102,16 @@ export const ALL_DRUGS = [
     VWF_CONCENTRATE,
     WHOLE_BLOOD,
     ZIPRASIDONE,
+    ADENOSINE,
+    ANDEXANET_ALFA,
+    MANNITOL,
+    KCENTRA,
+    PROSTAGLANDIN_E1,
+    NAPROXEN,
+    VALACYCLOVIR,
+    INTRALIPID_20,
+    LEVOFLOXACIN,
+    CEFOTAXIME,
 ];
 const DRUG_MAP = {};
 for (const drug of ALL_DRUGS) {

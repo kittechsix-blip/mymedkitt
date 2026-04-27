@@ -33302,6 +33302,167 @@ const APGAR_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Wells Criteria for DVT (Modified, 2-tier)
+// -------------------------------------------------------------------
+
+const WELLS_DVT_CALCULATOR: CalculatorDefinition = {
+  id: 'wells-dvt',
+  title: 'Wells Score (DVT)',
+  subtitle: 'Pre-test probability of deep vein thrombosis',
+  description: 'The modified Wells DVT score is a 10-variable clinical prediction rule. Used to stratify suspected DVT into "likely" vs "unlikely" categories, guiding D-dimer vs immediate ultrasound. Score range -2 to +9.',
+  fields: [
+    { name: 'cancer', label: 'Active cancer (treatment within 6 mo or palliative)', type: 'toggle', points: 1 },
+    { name: 'paralysis', label: 'Paralysis, paresis, or recent plaster immobilization of leg', type: 'toggle', points: 1 },
+    { name: 'bedridden', label: 'Recently bedridden ≥3 days OR major surgery within 12 weeks', type: 'toggle', points: 1, description: 'Surgery requiring general/regional anesthesia' },
+    { name: 'tenderness', label: 'Localized tenderness along distribution of deep veins', type: 'toggle', points: 1 },
+    { name: 'leg-swollen', label: 'Entire leg swollen', type: 'toggle', points: 1 },
+    { name: 'calf-swelling', label: 'Calf swelling >3 cm vs asymptomatic side', type: 'toggle', points: 1, description: 'Measured 10 cm below tibial tuberosity' },
+    { name: 'pitting-edema', label: 'Pitting edema confined to symptomatic leg', type: 'toggle', points: 1 },
+    { name: 'collateral-veins', label: 'Collateral superficial veins (non-varicose)', type: 'toggle', points: 1 },
+    { name: 'prior-dvt', label: 'Previously documented DVT', type: 'toggle', points: 1 },
+    { name: 'alternative-dx', label: 'Alternative diagnosis at least as likely as DVT', type: 'toggle', points: -2, description: 'Subtract 2 points if YES — e.g., cellulitis, Baker cyst, muscle strain' },
+  ],
+  results: [
+    {
+      min: -Infinity, max: 1,
+      label: 'Score ≤1',
+      risk: 'DVT Unlikely (~5% prevalence)',
+      mortality: '**WORKUP:**\n• Order high-sensitivity D-dimer\n• If D-dimer **negative** → DVT excluded, no imaging needed\n• If D-dimer **positive** → proceed to whole-leg or proximal compression ultrasound\n\n**SAFETY:**\n• Validated for outpatient and ED — 3-month VTE rate <1% if Wells ≤1 and D-dimer negative\n• Adjust D-dimer cutoff for age ≥50: age × 10 ng/mL (FEU) or age × 5 (DDU) — improves specificity in elderly',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2, max: Infinity,
+      label: 'Score ≥2',
+      risk: 'DVT Likely (~28% prevalence)',
+      mortality: '**WORKUP:**\n• Skip D-dimer — go directly to compression ultrasound\n• Whole-leg ultrasound preferred (single negative scan rules out DVT)\n• If proximal-only US negative → repeat in 1 week OR add D-dimer (negative D-dimer + negative proximal US rules out)\n\n**IF US POSITIVE:**\n• Anticoagulate per institutional pathway\n• Risk-stratify (provoked vs unprovoked, cancer, prior VTE) for treatment duration\n• Consider thrombophilia workup if young, idiopathic, or recurrent',
+      colorVar: '--color-warning',
+    },
+  ],
+  thresholdNote: 'Modified 2-tier Wells (2003): score ≤1 = DVT unlikely; ≥2 = DVT likely. Use D-dimer only in the unlikely group; ultrasound is first-line in the likely group. The original 3-tier version (low <2, moderate 2, high ≥3) is now superseded by the 2-tier version for ED workflows.',
+  citations: [
+    'Wells PS et al. Evaluation of D-dimer in the diagnosis of suspected deep-vein thrombosis. NEJM. 2003;349(13):1227-1235.',
+    'Lim W et al. American Society of Hematology 2018 guidelines for management of venous thromboembolism: diagnosis of venous thromboembolism. Blood Adv. 2018;2(22):3226-3256.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// Shapiro Decision Rule for Blood Culture Indication
+// -------------------------------------------------------------------
+
+const SHAPIRO_CALCULATOR: CalculatorDefinition = {
+  id: 'shapiro',
+  title: 'Shapiro Decision Rule',
+  subtitle: 'Blood culture indication — predicting true bacteremia',
+  description: 'A 12-variable clinical decision rule that predicts the probability of true bacteremia in adult ED patients. Score ≥2 = cultures indicated (~19% bacteremia risk); <2 = consider skipping (<1% bacteremia risk). Helps reduce low-yield blood cultures.',
+  fields: [
+    { name: 'temp-major', label: 'Temperature >39.4°C (>103°F)', type: 'toggle', points: 3, description: 'MAJOR criterion — 3 points' },
+    { name: 'catheter', label: 'Indwelling vascular catheter', type: 'toggle', points: 3, description: 'MAJOR criterion — 3 points' },
+    { name: 'endocarditis', label: 'Clinical suspicion of endocarditis', type: 'toggle', points: 3, description: 'MAJOR criterion — 3 points' },
+    { name: 'temp-minor', label: 'Temperature 38.3-39.3°C (101-103°F)', type: 'toggle', points: 1, description: 'Minor criterion — 1 point' },
+    { name: 'age65', label: 'Age >65 years', type: 'toggle', points: 1 },
+    { name: 'rigors', label: 'Rigors', type: 'toggle', points: 1 },
+    { name: 'vomiting', label: 'Vomiting', type: 'toggle', points: 1 },
+    { name: 'hypotension', label: 'Hypotension (SBP <90 mmHg)', type: 'toggle', points: 1 },
+    { name: 'wbc-high', label: 'WBC >18,000/μL', type: 'toggle', points: 1 },
+    { name: 'bands', label: 'Bands >5%', type: 'toggle', points: 1 },
+    { name: 'platelets-low', label: 'Platelets <150,000/μL', type: 'toggle', points: 1 },
+    { name: 'creatinine', label: 'Creatinine >2.0 mg/dL', type: 'toggle', points: 1 },
+  ],
+  results: [
+    {
+      min: -Infinity, max: 1,
+      label: 'Score <2',
+      risk: 'Low bacteremia probability (<1%)',
+      mortality: '**RECOMMENDATION:**\n• Blood cultures are **low yield**\n• Consider skipping cultures unless other clinical concern\n• Avoid routine 2-bottle culture sets in this group\n\n**EXCEPTIONS — culture anyway if:**\n• Immunocompromise (chemo, transplant, neutropenic)\n• Asplenia\n• Recent invasive procedure or surgery\n• Suspected meningitis (always blood + CSF cultures)\n• Suspected discitis/osteomyelitis/septic joint',
+      colorVar: '--color-primary',
+    },
+    {
+      min: 2, max: Infinity,
+      label: 'Score ≥2',
+      risk: 'Cultures indicated (~19% bacteremia)',
+      mortality: '**RECOMMENDATION:**\n• **Two sets of blood cultures** before antibiotics if possible\n• Draw from 2 separate sites (peripheral preferred over line)\n• If line present, add 1 culture from the line + 1 peripheral (helps identify CRBSI)\n• 2nd set from a different site, no more than 30 min apart\n• Volume matters: 8-10 mL per bottle (adults) — under-filled bottles lower yield\n\n**EMPIRIC ABX:**\n• Start within 1 hour for septic shock; within 3 hours for sepsis\n• Source-specific empiric coverage (UTI, pneumonia, skin/soft tissue, etc.)\n• De-escalate at 48-72 hr based on culture data',
+      colorVar: '--color-warning',
+    },
+  ],
+  thresholdNote: 'Shapiro derived and validated in 3,730 adult ED patients with sensitivity 97% and NPV 99% at the <2 point cutoff. Caveat: NOT validated in immunocompromise, recent surgery, or known endocarditis — culture this population regardless of score. Fever alone is NOT an indication for blood cultures in immunocompetent adults.',
+  citations: [
+    'Shapiro NI et al. Who needs a blood culture? A prospectively derived and validated prediction rule. J Emerg Med. 2008;35(3):255-264.',
+    'Fabre V et al. Principles of Diagnostic Stewardship: A Practical Guide From the SHEA Diagnostic Stewardship Task Force. Infect Control Hosp Epidemiol. 2023;44(2):178-185.',
+  ],
+};
+
+// -------------------------------------------------------------------
+// PEF Predicted (Peak Expiratory Flow) — Asthma severity
+// -------------------------------------------------------------------
+
+const PEF_PREDICTED_CALCULATOR: CalculatorDefinition = {
+  id: 'pef-predicted',
+  title: 'PEF % Predicted',
+  subtitle: 'Asthma exacerbation severity (peak expiratory flow)',
+  description: 'Calculates predicted peak expiratory flow rate (PEF) using Nunn & Gregg reference equations, then compares observed PEF to predicted. Stratifies asthma exacerbation severity per NAEPP EPR-3 guidance. Valid for adults age 15-85.',
+  fields: [
+    { name: 'sex', label: 'Sex', type: 'select', points: 0, selectOptions: [
+      { label: 'Male', points: 1 },
+      { label: 'Female', points: 0 },
+    ] },
+    { name: 'age', label: 'Age (years)', type: 'number', points: 0, description: 'Valid range 15-85' },
+    { name: 'height', label: 'Height (cm)', type: 'number', points: 0, description: 'Valid range 130-220 cm' },
+    { name: 'observed-pef', label: 'Observed PEF (L/min)', type: 'number', points: 0, description: 'Best of 3 attempts' },
+  ],
+  results: [],
+  computeResult: (values) => {
+    const sexMale = values['sex'] === 1;
+    const age = values['age'] || 0;
+    const height = values['height'] || 0;
+    const observed = values['observed-pef'] || 0;
+
+    if (age < 15 || age > 85 || height < 130 || height > 220 || observed <= 0) {
+      return {
+        value: '—',
+        label: 'Invalid input',
+        description: 'Enter valid age (15-85), height (130-220 cm), and observed PEF.\n\nReference equations are validated only within these ranges.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    // Nunn & Gregg 1989 BMJ
+    const predicted = sexMale
+      ? Math.exp(0.544 * Math.log(age) - 0.0151 * age - 74.7 / height + 5.48)
+      : Math.exp(0.376 * Math.log(age) - 0.0120 * age - 58.8 / height + 5.63);
+
+    const pct = Math.round((observed / predicted) * 100);
+    const predictedRounded = Math.round(predicted);
+
+    let label, description, color;
+    if (pct >= 80) {
+      label = `${pct}% of predicted — Mild`;
+      description = `**OBSERVED:** ${observed} L/min\n**PREDICTED:** ${predictedRounded} L/min\n\n**SEVERITY:** Mild exacerbation (PEF ≥80% predicted) — green zone\n\n**MANAGEMENT:**\n• SABA via MDI + spacer (4-8 puffs q20 min × 1 hr)\n• Consider oral corticosteroid if not improving within 1 hr\n• Reassess PEF in 1 hr — discharge candidate if stable >70% predicted\n• Asthma action plan and inhaler technique review`;
+      color = '--color-primary';
+    } else if (pct >= 50) {
+      label = `${pct}% of predicted — Moderate`;
+      description = `**OBSERVED:** ${observed} L/min\n**PREDICTED:** ${predictedRounded} L/min\n\n**SEVERITY:** Moderate exacerbation (PEF 50-79% predicted) — yellow zone\n\n**MANAGEMENT:**\n• Albuterol nebulized 2.5-5 mg + ipratropium 0.5 mg q20 min × 3 doses\n• **Oral corticosteroid:** prednisone 40-60 mg PO (or methylprednisolone 60-125 mg IV) — give early\n• Continuous SpO2, PEF q1h\n• Magnesium sulfate 2 g IV over 20 min if poor response after 1 hr\n• Reassess at 1, 2, 3 hours — admit if not improving to >70%`;
+      color = '--color-warning';
+    } else if (pct >= 33) {
+      label = `${pct}% of predicted — Severe`;
+      description = `**OBSERVED:** ${observed} L/min\n**PREDICTED:** ${predictedRounded} L/min\n\n**SEVERITY:** Severe exacerbation (PEF <50% predicted) — red zone\n\n**MANAGEMENT:**\n• Continuous nebulized albuterol (10-15 mg/hr)\n• Ipratropium 0.5 mg q20 min × 3 doses\n• Methylprednisolone 60-125 mg IV (or prednisone 40-60 mg PO)\n• Magnesium sulfate 2 g IV over 20 min — early\n• IV fluids if dehydrated\n• Consider IM epinephrine 0.3-0.5 mg if adjunct or anaphylaxis component\n• Admit (likely ICU); prepare for possible NIV or intubation if deteriorating`;
+      color = '--color-danger';
+    } else {
+      label = `${pct}% of predicted — Life-threatening`;
+      description = `**OBSERVED:** ${observed} L/min\n**PREDICTED:** ${predictedRounded} L/min\n\n**SEVERITY:** Life-threatening (PEF <33% predicted) — silent chest, exhaustion\n\n**IMMEDIATE ACTIONS:**\n• ICU activation — anesthesia/RT to bedside\n• Continuous nebulized albuterol + ipratropium\n• Methylprednisolone 125 mg IV\n• Magnesium sulfate 2 g IV bolus → may repeat\n• IM epinephrine 0.3-0.5 mg q5-15 min PRN\n• Ketamine 1-2 mg/kg if intubation needed (preserves bronchodilation)\n• Avoid sedation that suppresses respiratory drive prior to securing airway\n• If intubating: low TV (6 mL/kg IBW), low rate (8-10/min), permissive hypercapnia, prolonged expiration (I:E 1:4-1:5), watch for auto-PEEP and barotrauma`;
+      color = '--color-danger';
+    }
+
+    return { value: String(pct), label, description, colorVar: color };
+  },
+  thresholdNote: 'PEF % predicted is the workhorse for asthma severity grading at the bedside. NAEPP EPR-3 cutoffs: ≥80% mild, 50-79% moderate, <50% severe, <33% life-threatening. The Nunn & Gregg equations approximate normal PEF; individual variation is wide — use the patient\'s personal best when available (more accurate than predicted). Score is guidance, not an absolute threshold; always integrate with appearance, work of breathing, mental status, and SpO2.',
+  citations: [
+    'Nunn AJ, Gregg I. New regression equations for predicting peak expiratory flow in adults. BMJ. 1989;298(6680):1068-1070.',
+    'National Asthma Education and Prevention Program. Expert Panel Report 3 (EPR-3): Guidelines for the Diagnosis and Management of Asthma. NIH; 2007 (updated 2020).',
+    'Cloutier MM et al. 2020 Focused Updates to the Asthma Management Guidelines. JACI. 2020;146(6):1217-1270.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -33799,6 +33960,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'vertigo-central-checklist': VERTIGO_CENTRAL_CHECKLIST_CALCULATOR,
   // Resuscitative Hysterotomy
   'apgar': APGAR_CALCULATOR,
+  // DVT
+  'wells-dvt': WELLS_DVT_CALCULATOR,
+  // Blood Culture Stewardship
+  'shapiro': SHAPIRO_CALCULATOR,
+  // Asthma
+  'pef-predicted': PEF_PREDICTED_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
