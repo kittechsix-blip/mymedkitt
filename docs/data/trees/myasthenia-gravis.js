@@ -32,9 +32,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'info',
         module: 1,
         title: 'MGFA Classification',
-        body: '[MGFA Classification Tool](#/calc/mg-mgfa) — standardized severity grading.\n\n**Myasthenia Gravis Foundation of America (MGFA) Classification:**\n\n**Class I:** Ocular MG only\n• Ptosis, diplopia\n• No other muscle involvement\n\n**Class II:** Mild generalized weakness\n• IIa: Predominantly limb/axial\n• IIb: Predominantly bulbar/respiratory\n\n**Class III:** Moderate generalized weakness\n• IIIa: Predominantly limb/axial\n• IIIb: Predominantly bulbar/respiratory\n\n**Class IV:** Severe generalized weakness\n• IVa: Predominantly limb/axial\n• IVb: Predominantly bulbar/respiratory\n\n**Class V:** Intubation required\n• With or without mechanical ventilation\n• Defines **myasthenic crisis**\n\nHigher classes correlate with crisis risk and need for aggressive immunotherapy.',
+        body: '[MGFA Classification Tool](#/info/mg-mgfa) — standardized severity grading.\n\n**Myasthenia Gravis Foundation of America (MGFA) Classification:**\n\n**Class I:** Ocular MG only\n• Ptosis, diplopia\n• No other muscle involvement\n\n**Class II:** Mild generalized weakness\n• IIa: Predominantly limb/axial\n• IIb: Predominantly bulbar/respiratory\n\n**Class III:** Moderate generalized weakness\n• IIIa: Predominantly limb/axial\n• IIIb: Predominantly bulbar/respiratory\n\n**Class IV:** Severe generalized weakness\n• IVa: Predominantly limb/axial\n• IVb: Predominantly bulbar/respiratory\n\n**Class V:** Intubation required\n• With or without mechanical ventilation\n• Defines **myasthenic crisis**\n\nHigher classes correlate with crisis risk and need for aggressive immunotherapy.',
         citation: [1],
-        calculatorLinks: [{ id: 'mg-mgfa', label: 'MGFA Classification' }],
         next: 'mg-is-crisis',
         summary: 'MGFA Class I-V: ocular → mild generalized → moderate → severe → intubation; higher class = higher crisis risk',
         skippable: true,
@@ -44,9 +43,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'question',
         module: 1,
         title: 'Is This Crisis?',
-        body: 'Assess for signs of impending or active respiratory failure.\n\n**Red flags for crisis:**\n• Dyspnea at rest or with minimal exertion\n• Orthopnea, inability to lie flat\n• Use of accessory muscles\n• Weak cough, difficulty clearing secretions\n• Staccato speech (gasping between words)\n• Severe bulbar weakness (aspiration risk)\n\n**Objective measures:**\n• FVC <15-20 mL/kg\n• NIF weaker than -20 to -25 cmH2O\n• SpO2 declining despite supplemental O2\n\n[FVC/NIF Monitoring Tool](#/calc/mg-fvc-nif) — respiratory parameter tracking.',
+        body: 'Assess for signs of impending or active respiratory failure.\n\n**Red flags for crisis:**\n• Dyspnea at rest or with minimal exertion\n• Orthopnea, inability to lie flat\n• Use of accessory muscles\n• Weak cough, difficulty clearing secretions\n• Staccato speech (gasping between words)\n• Severe bulbar weakness (aspiration risk)\n\n**Objective measures:**\n• FVC <15-20 mL/kg\n• NIF weaker than -20 to -25 cmH2O\n• SpO2 declining despite supplemental O2\n\n[FVC/NIF Monitoring Tool](#/info/mg-fvc-nif) — respiratory parameter tracking.',
         citation: [2],
-        calculatorLinks: [{ id: 'mg-fvc-nif', label: 'FVC/NIF Monitor' }],
         options: [
             {
                 label: 'Respiratory compromise — crisis',
@@ -90,9 +88,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'question',
         module: 3,
         title: 'Myasthenic or Cholinergic Crisis?',
-        body: '[Crisis Differentiator Tool](#/calc/mg-crisis) — side-by-side comparison.\n\n**This distinction is CRITICAL** — treatment is opposite.\n\n**Myasthenic crisis:** Worsening MG from disease\n• DRY — no excessive secretions\n• Mydriasis (dilated pupils)\n• No fasciculations\n• Weakness improves with more anticholinesterase\n\n**Cholinergic crisis:** EXCESS pyridostigmine (overdose)\n• WET — **SLUDGE/BBB** symptoms\n• Miosis (constricted pupils)\n• Fasciculations present\n• Weakness WORSENS with more anticholinesterase\n\n**SLUDGE/BBB:**\n**S**alivation, **L**acrimation, **U**rination, **D**efecation, **GI** cramping, **E**mesis\n**B**radycardia, **B**ronchorrhea, **B**ronchospasm\n\n**If in doubt:** STOP all anticholinesterase medications, support airway, give atropine for secretions.',
+        body: '[Crisis Differentiator Tool](#/info/mg-crisis) — side-by-side comparison.\n\n**This distinction is CRITICAL** — treatment is opposite.\n\n**Myasthenic crisis:** Worsening MG from disease\n• DRY — no excessive secretions\n• Mydriasis (dilated pupils)\n• No fasciculations\n• Weakness improves with more anticholinesterase\n\n**Cholinergic crisis:** EXCESS pyridostigmine (overdose)\n• WET — **SLUDGE/BBB** symptoms\n• Miosis (constricted pupils)\n• Fasciculations present\n• Weakness WORSENS with more anticholinesterase\n\n**SLUDGE/BBB:**\n**S**alivation, **L**acrimation, **U**rination, **D**efecation, **GI** cramping, **E**mesis\n**B**radycardia, **B**ronchorrhea, **B**ronchospasm\n\n**If in doubt:** STOP all anticholinesterase medications, support airway, give atropine for secretions.',
         citation: [2, 3],
-        calculatorLinks: [{ id: 'mg-crisis', label: 'Crisis Differentiator' }],
         options: [
             {
                 label: 'Myasthenic crisis — DRY, no SLUDGE',
@@ -176,9 +173,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'info',
         module: 4,
         title: 'Diagnostic Workup',
-        body: '**Bedside tests:**\n\n[Ice Pack Test](#/calc/mg-ice-test) — simple, non-invasive\n• Place ice on closed eyelid for 2 minutes\n• >2mm improvement in ptosis = positive\n• **80% sensitive** for ocular MG\n• Works because cold improves neuromuscular transmission\n\n**Antibody testing:**\n• **AChR antibodies:** 85% sensitive in generalized MG, 50% in ocular MG\n• **Anti-MuSK:** 5-10% of "seronegative" MG\n• **Anti-LRP4:** Rare, newer marker\n• Seronegative MG exists — 5-10% have no detectable antibodies\n\n**Electrodiagnostics:**\n• **Repetitive nerve stimulation (RNS):** >10% decrement is positive\n• **Single-fiber EMG:** Most sensitive test (92-99%), but requires expertise\n\n**Imaging:**\n• **CT chest:** Thymoma in 10-15%, thymic hyperplasia in 65%\n• All newly diagnosed MG patients need chest imaging\n\n**Associated conditions:**\n• Autoimmune thyroid disease — check TFTs\n• Other autoimmune disorders (lupus, RA)',
+        body: '**Bedside tests:**\n\n[Ice Pack Test](#/info/mg-ice-test) — simple, non-invasive\n• Place ice on closed eyelid for 2 minutes\n• >2mm improvement in ptosis = positive\n• **80% sensitive** for ocular MG\n• Works because cold improves neuromuscular transmission\n\n**Antibody testing:**\n• **AChR antibodies:** 85% sensitive in generalized MG, 50% in ocular MG\n• **Anti-MuSK:** 5-10% of "seronegative" MG\n• **Anti-LRP4:** Rare, newer marker\n• Seronegative MG exists — 5-10% have no detectable antibodies\n\n**Electrodiagnostics:**\n• **Repetitive nerve stimulation (RNS):** >10% decrement is positive\n• **Single-fiber EMG:** Most sensitive test (92-99%), but requires expertise\n\n**Imaging:**\n• **CT chest:** Thymoma in 10-15%, thymic hyperplasia in 65%\n• All newly diagnosed MG patients need chest imaging\n\n**Associated conditions:**\n• Autoimmune thyroid disease — check TFTs\n• Other autoimmune disorders (lupus, RA)',
         citation: [1, 4],
-        calculatorLinks: [{ id: 'mg-ice-test', label: 'Ice Pack Test' }],
         next: 'mg-triggers',
         summary: 'Ice pack test 80% sensitive for ocular MG; AChR antibodies 85% in generalized; all need CT chest for thymoma (10-15%)',
     },
@@ -190,9 +186,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'info',
         module: 5,
         title: 'Drug-Induced Exacerbation',
-        body: '[Drugs to Avoid in MG](#/calc/mg-drugs-avoid) — comprehensive contraindication list.\n\n**MEDICATIONS THAT CAN PRECIPITATE CRISIS:**\n\n**Antibiotics:**\n• Aminoglycosides (gentamicin, tobramycin, amikacin)\n• Fluoroquinolones (especially respiratory FQs — levofloxacin, moxifloxacin)\n• Macrolides (azithromycin, erythromycin, clarithromycin)\n\n**Cardiovascular:**\n• Beta-blockers (including ophthalmic — timolol drops!)\n• Calcium channel blockers\n• Procainamide, quinidine\n\n**Critical care:**\n• **Magnesium IV** — neuromuscular blockade\n• Neuromuscular blockers — **prolonged effect** (use succinylcholine cautiously, rocuronium at reduced dose)\n\n**Other:**\n• Botulinum toxin\n• D-penicillamine (can induce MG)\n• **Immune checkpoint inhibitors** (nivolumab, pembrolizumab) — can trigger new-onset MG\n• Interferons\n• Chloroquine/hydroxychloroquine\n• Statins (case reports)\n\n**Safe antibiotics in MG:**\n• Penicillins, cephalosporins, carbapenems\n• Trimethoprim-sulfamethoxazole\n• Vancomycin',
+        body: '[Drugs to Avoid in MG](#/info/mg-drugs-avoid) — comprehensive contraindication list.\n\n**MEDICATIONS THAT CAN PRECIPITATE CRISIS:**\n\n**Antibiotics:**\n• Aminoglycosides (gentamicin, tobramycin, amikacin)\n• Fluoroquinolones (especially respiratory FQs — levofloxacin, moxifloxacin)\n• Macrolides (azithromycin, erythromycin, clarithromycin)\n\n**Cardiovascular:**\n• Beta-blockers (including ophthalmic — timolol drops!)\n• Calcium channel blockers\n• Procainamide, quinidine\n\n**Critical care:**\n• **Magnesium IV** — neuromuscular blockade\n• Neuromuscular blockers — **prolonged effect** (use succinylcholine cautiously, rocuronium at reduced dose)\n\n**Other:**\n• Botulinum toxin\n• D-penicillamine (can induce MG)\n• **Immune checkpoint inhibitors** (nivolumab, pembrolizumab) — can trigger new-onset MG\n• Interferons\n• Chloroquine/hydroxychloroquine\n• Statins (case reports)\n\n**Safe antibiotics in MG:**\n• Penicillins, cephalosporins, carbapenems\n• Trimethoprim-sulfamethoxazole\n• Vancomycin',
         citation: [3, 4],
-        calculatorLinks: [{ id: 'mg-drugs-avoid', label: 'Drugs to Avoid' }],
         next: 'mg-treatment-acute',
         summary: 'AVOID: aminoglycosides, FQs, beta-blockers, IV magnesium, NMBs at full dose — safe: PCNs, cephalosporins, carbapenems',
         safetyLevel: 'critical',
@@ -215,9 +210,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'info',
         module: 6,
         title: 'Pyridostigmine (Mestinon)',
-        body: '[Pyridostigmine Dosing Guide](#/calc/mg-pyridostigmine) — titration and monitoring.\n\n**Mechanism:** Acetylcholinesterase inhibitor — increases acetylcholine at NMJ.\n\n**Dosing:**\n• Start: 30 mg PO TID (with meals)\n• Titrate: Increase by 30 mg q3-5 days as tolerated\n• Typical maintenance: 60 mg PO q4-6h (while awake)\n• Maximum: 120 mg per dose, ~480-600 mg/day total\n\n**Onset:** 30-45 minutes; duration 3-6 hours\n\n**Extended-release (Mestinon Timespan):**\n• 180 mg at bedtime for overnight coverage\n• Do NOT crush or chew\n• Absorption less predictable\n\n**Common side effects (cholinergic):**\n• GI: cramping, diarrhea, nausea\n• Increased salivation, lacrimation\n• Muscle twitching\n\n**Watch for cholinergic crisis** if excessive dosing — see SLUDGE/BBB symptoms.\n\n**Key point:** Pyridostigmine is symptomatic only. It does NOT prevent crisis or modify disease course. Immunotherapy is needed for disease control.',
+        body: '[Pyridostigmine Dosing Guide](#/info/mg-pyridostigmine) — titration and monitoring.\n\n**Mechanism:** Acetylcholinesterase inhibitor — increases acetylcholine at NMJ.\n\n**Dosing:**\n• Start: 30 mg PO TID (with meals)\n• Titrate: Increase by 30 mg q3-5 days as tolerated\n• Typical maintenance: 60 mg PO q4-6h (while awake)\n• Maximum: 120 mg per dose, ~480-600 mg/day total\n\n**Onset:** 30-45 minutes; duration 3-6 hours\n\n**Extended-release (Mestinon Timespan):**\n• 180 mg at bedtime for overnight coverage\n• Do NOT crush or chew\n• Absorption less predictable\n\n**Common side effects (cholinergic):**\n• GI: cramping, diarrhea, nausea\n• Increased salivation, lacrimation\n• Muscle twitching\n\n**Watch for cholinergic crisis** if excessive dosing — see SLUDGE/BBB symptoms.\n\n**Key point:** Pyridostigmine is symptomatic only. It does NOT prevent crisis or modify disease course. Immunotherapy is needed for disease control.',
         citation: [1, 3],
-        calculatorLinks: [{ id: 'mg-pyridostigmine', label: 'Pyridostigmine Dosing' }],
         treatment: {
             firstLine: {
                 drug: 'Pyridostigmine (Mestinon)',
@@ -245,9 +239,8 @@ export const MYASTHENIA_GRAVIS_NODES = [
         type: 'question',
         module: 6,
         title: 'IVIG vs Plasmapheresis',
-        body: '[IVIG vs PLEX Comparison](#/calc/mg-ivig-plex) — efficacy, logistics, and side effects.\n\n**Both are equally effective for MG crisis and acute exacerbation.**\n\n**IVIG:**\n• Dose: 0.4 g/kg/day × 5 days OR 1 g/kg/day × 2 days\n• Onset: 2-5 days\n• Duration of effect: 3-6 weeks\n• Advantages: Easier logistics, peripheral IV access, no central line\n• Disadvantages: Risk of thrombosis, aseptic meningitis, renal toxicity\n• Contraindicated: IgA deficiency (anaphylaxis risk)\n\n**Plasmapheresis (PLEX):**\n• Protocol: 5 exchanges over 10-14 days (alternate days)\n• Onset: Faster than IVIG (1-2 days)\n• Duration of effect: 4-6 weeks\n• Advantages: Faster onset, useful if IVIG contraindicated\n• Disadvantages: Requires central venous access, specialized equipment\n• Complications: Hypotension, citrate toxicity, line infection\n\n**Choice often depends on availability and patient factors.**\n\nBoth provide temporary benefit — must add maintenance immunotherapy.',
+        body: '[IVIG vs PLEX Comparison](#/info/mg-ivig-plex) — efficacy, logistics, and side effects.\n\n**Both are equally effective for MG crisis and acute exacerbation.**\n\n**IVIG:**\n• Dose: 0.4 g/kg/day × 5 days OR 1 g/kg/day × 2 days\n• Onset: 2-5 days\n• Duration of effect: 3-6 weeks\n• Advantages: Easier logistics, peripheral IV access, no central line\n• Disadvantages: Risk of thrombosis, aseptic meningitis, renal toxicity\n• Contraindicated: IgA deficiency (anaphylaxis risk)\n\n**Plasmapheresis (PLEX):**\n• Protocol: 5 exchanges over 10-14 days (alternate days)\n• Onset: Faster than IVIG (1-2 days)\n• Duration of effect: 4-6 weeks\n• Advantages: Faster onset, useful if IVIG contraindicated\n• Disadvantages: Requires central venous access, specialized equipment\n• Complications: Hypotension, citrate toxicity, line infection\n\n**Choice often depends on availability and patient factors.**\n\nBoth provide temporary benefit — must add maintenance immunotherapy.',
         citation: [1, 3, 5],
-        calculatorLinks: [{ id: 'mg-ivig-plex', label: 'IVIG vs PLEX' }],
         options: [
             {
                 label: 'IVIG — proceed',

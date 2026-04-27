@@ -7354,6 +7354,48 @@ const PYRIDOXINE: DrugEntry = {
   ],
 };
 
+const PYRIDOSTIGMINE: DrugEntry = {
+  id: 'pyridostigmine',
+  name: 'Pyridostigmine (Mestinon)',
+  genericName: 'Pyridostigmine bromide',
+  drugClass: 'Acetylcholinesterase inhibitor',
+  route: 'PO',
+  indications: ['Myasthenia gravis — symptomatic treatment', 'Myasthenic crisis (if not cholinergic crisis)', 'Postoperative ileus reversal'],
+  dosing: [
+    {
+      indication: 'Myasthenia gravis — initial',
+      regimen: '30 mg PO TID (with meals). Increase by 30 mg every 3-5 days as tolerated. Typical maintenance 60 mg PO q4-6h while awake.',
+    },
+    {
+      indication: 'Myasthenia gravis — maintenance',
+      regimen: '60 mg PO q4-6h while awake (4-6 doses/day). Maximum 120 mg per dose, 480-600 mg/day total. Take with food to reduce GI effects.',
+    },
+    {
+      indication: 'Extended-release (Mestinon Timespan)',
+      regimen: '180 mg PO at bedtime for overnight coverage. Do NOT crush or chew. Less predictable absorption than immediate-release.',
+    },
+  ],
+  contraindications: [
+    'Mechanical GI or urinary obstruction',
+    'Cholinergic crisis (SLUDGE/BBB symptoms)',
+    'Known hypersensitivity to pyridostigmine or bromides',
+  ],
+  cautions: [
+    'STOP if SLUDGE symptoms develop (salivation, lacrimation, urination, defecation, GI cramping, emesis)',
+    'Excessive dosing causes cholinergic crisis — opposite treatment of myasthenic crisis',
+    'Asthma — may precipitate bronchospasm',
+    'Bradycardia — atropine reverses muscarinic effects',
+    'Not disease-modifying — does not prevent crisis or alter disease course',
+    'Pregnancy: Category B — may cause transient neonatal weakness',
+  ],
+  monitoring: 'Watch for cholinergic side effects (GI cramping, increased secretions, diarrhea, bradycardia). STOP immediately if SLUDGE/BBB symptoms develop.',
+  notes: 'Symptomatic treatment only — increases acetylcholine at neuromuscular junction by inhibiting acetylcholinesterase. Does NOT modify disease course. Onset 30-45 minutes, duration 3-6 hours. In myasthenic crisis, may need to HOLD pyridostigmine initially (risk of secretions, aspiration, and difficulty distinguishing from cholinergic crisis). Immunotherapy (IVIG, PLEX, steroids) is needed for disease control.',
+  citations: [
+    'Sanders DB, Wolfe GI, Benatar M, et al. International Consensus Guidance for Management of Myasthenia Gravis. Neurology. 2016;87(4):419-425.',
+    'Farmakidis C, Pasnoor M, Dimachkie MM, Barohn RJ. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.',
+  ],
+};
+
 const TMP_SMX: DrugEntry = {
   id: 'tmp-smx',
   name: 'TMP-SMX (Bactrim)',
@@ -9883,6 +9925,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   QUETIAPINE,
   QUINIDINE_GLUCONATE,
   PYRAZINAMIDE,
+  PYRIDOSTIGMINE,
   PYRIDOXINE,
   RABIES_IMMUNE_GLOBULIN,
   RABIES_VACCINE,
@@ -10099,6 +10142,7 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/prednisolone|prelone|orapred/i, 'prednisolone'],
   [/prednisone|deltasone|rayos/i, 'prednisone'],
   [/pyridoxine|vitamin.?b6/i, 'pyridoxine'],
+  [/pyridostigmine|mestinon/i, 'pyridostigmine'],
   [/racemic.*epinephrine|neb.*epinephrine|vaponefrin/i, 'racemic-epinephrine'],
   [/regular\s*insulin|insulin\s*regular|humulin/i, 'regular-insulin'],
   [/insulin\s*lispro|lispro|humalog|admelog|lyumjev/i, 'insulin-lispro'],

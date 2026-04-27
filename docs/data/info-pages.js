@@ -16520,6 +16520,257 @@ const PNES_STOP = {
         { num: 2, text: 'Avbersek A, et al. Dissociative seizures in the ER. BMC Emerg Med. 2024;24:47.' },
     ],
 };
+// -------------------------------------------------------------------
+// Myasthenia Gravis Reference Pages
+// -------------------------------------------------------------------
+const MG_SUMMARY = {
+    id: 'mg-summary',
+    title: 'Myasthenia Gravis',
+    subtitle: 'Quick Reference Guide',
+    sections: [
+        {
+            heading: 'What is MG?',
+            body: 'Autoimmune disorder affecting the neuromuscular junction. Antibodies attack acetylcholine receptors (AChR) or related proteins.\n\n**Hallmark:** Fatigable weakness — worse with use, better with rest.',
+        },
+        {
+            heading: 'Key Patterns',
+            body: '• **Ocular symptoms** (ptosis, diplopia) present in 85% at onset\n• **Bulbar involvement:** dysarthria, dysphagia, facial weakness\n• **Limb weakness:** proximal > distal\n• **Respiratory muscles** can be involved — this is the emergency\n• **Diurnal variation** — symptoms worsen throughout the day',
+        },
+        {
+            heading: 'Crisis Definition',
+            body: '**Myasthenic crisis** = respiratory failure requiring mechanical ventilation\n\n**Red flags:**\n• FVC <15-20 mL/kg\n• NIF weaker than -20 to -25 cmH₂O\n• Staccato speech (gasping between words)\n• Severe bulbar weakness',
+        },
+        {
+            heading: 'Key Treatments',
+            body: '• **Pyridostigmine** — symptomatic (does NOT modify disease)\n• **IVIG or PLEX** — rapid-acting immunotherapy for crisis\n• **Steroids** — can cause initial worsening; give with IVIG/PLEX cover\n• **Rocuronium** — use 1/3 to 1/2 dose; MG patients very sensitive',
+        },
+        {
+            heading: 'Drugs to AVOID',
+            body: '**Antibiotics:** Aminoglycosides, fluoroquinolones, macrolides\n**Cardiac:** Beta-blockers (including eye drops!), CCBs\n**Other:** IV magnesium, full-dose NMBs, botulinum toxin\n\n**Safe:** Penicillins, cephalosporins, carbapenems, TMP-SMX, vancomycin',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sanders DB, Wolfe GI, et al. International Consensus Guidance for Management of Myasthenia Gravis. Neurology. 2016;87(4):419-425.' },
+        { num: 2, text: 'Gilhus NE. Myasthenia Gravis. N Engl J Med. 2016;375(26):2570-2581.' },
+    ],
+};
+const MG_MGFA = {
+    id: 'mg-mgfa',
+    title: 'MGFA Classification',
+    subtitle: 'Myasthenia Gravis Foundation of America',
+    sections: [
+        {
+            heading: 'Classification Overview',
+            body: 'Standardized severity grading for MG. Higher classes correlate with crisis risk and need for aggressive immunotherapy.',
+        },
+        {
+            heading: 'Class I — Ocular',
+            body: '• Ptosis, diplopia only\n• No other muscle involvement\n• Best prognosis',
+        },
+        {
+            heading: 'Class II — Mild Generalized',
+            body: '• **IIa:** Predominantly limb/axial\n• **IIb:** Predominantly bulbar/respiratory\n\nMild weakness affecting muscles other than ocular.',
+        },
+        {
+            heading: 'Class III — Moderate Generalized',
+            body: '• **IIIa:** Predominantly limb/axial\n• **IIIb:** Predominantly bulbar/respiratory\n\nModerate weakness — may need immunotherapy.',
+        },
+        {
+            heading: 'Class IV — Severe Generalized',
+            body: '• **IVa:** Predominantly limb/axial\n• **IVb:** Predominantly bulbar/respiratory\n\nSevere weakness — high crisis risk.',
+        },
+        {
+            heading: 'Class V — Intubation',
+            body: '• Intubation required (with or without mechanical ventilation)\n• **Defines myasthenic crisis**\n• Requires ICU admission, IVIG or PLEX',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jaretzki A, et al. MGFA Clinical Classification. Neurology. 2000;55(1):16-23.' },
+    ],
+};
+const MG_FVC_NIF = {
+    id: 'mg-fvc-nif',
+    title: 'FVC & NIF Monitoring',
+    subtitle: 'Respiratory Parameters in MG',
+    sections: [
+        {
+            heading: 'Why Monitor?',
+            body: 'Respiratory failure in MG can occur rapidly. Serial FVC and NIF measurements detect decline before clinical deterioration.',
+        },
+        {
+            heading: 'FVC (Forced Vital Capacity)',
+            body: '**Normal:** >60 mL/kg\n\n**Concerning:** 25-30 mL/kg\n\n**Critical (intubate):** <15-20 mL/kg or <1 L in average adult\n\n**Measure:** Every 2-4 hours in worsening patients',
+        },
+        {
+            heading: 'NIF (Negative Inspiratory Force)',
+            body: '**Normal:** Stronger than -60 cmH₂O\n\n**Concerning:** -30 to -40 cmH₂O\n\n**Critical (intubate):** Weaker than -20 to -25 cmH₂O\n\n**Note:** NIF is effort-dependent — coach patient to give maximal effort',
+        },
+        {
+            heading: '20/30/40 Rule',
+            body: 'Consider intubation when:\n• FVC <20 mL/kg\n• NIF weaker than -30 cmH₂O\n• FVC decline >30% from baseline\n\n**Do NOT wait for hypoxia or hypercapnia** — these are late findings.',
+        },
+        {
+            heading: 'Trending Matters',
+            body: 'A declining trend is as important as absolute values. A patient whose FVC drops from 40 to 25 mL/kg in 4 hours is heading toward crisis even if not yet at critical thresholds.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wendell LC, Levine JM. Myasthenic Crisis. Neurohospitalist. 2011;1(1):16-22.' },
+    ],
+};
+const MG_CRISIS = {
+    id: 'mg-crisis',
+    title: 'Crisis Differentiator',
+    subtitle: 'Myasthenic vs Cholinergic Crisis',
+    sections: [
+        {
+            heading: 'Critical Distinction',
+            body: '**Treatment is OPPOSITE.** Getting this wrong can be fatal.',
+        },
+        {
+            heading: 'Myasthenic Crisis',
+            body: '**Cause:** Worsening MG from disease (underdosed or ineffective treatment)\n\n**Signs:**\n• DRY — no excessive secretions\n• Mydriasis (dilated pupils)\n• No fasciculations\n• Weakness improves with more anticholinesterase\n\n**Treatment:** IVIG or PLEX, support airway',
+        },
+        {
+            heading: 'Cholinergic Crisis',
+            body: '**Cause:** EXCESS pyridostigmine (overdose)\n\n**Signs:**\n• WET — excessive secretions (SLUDGE/BBB)\n• Miosis (constricted pupils)\n• Fasciculations present\n• Weakness WORSENS with more anticholinesterase\n\n**Treatment:** STOP anticholinesterase, atropine for secretions',
+        },
+        {
+            heading: 'SLUDGE/BBB Mnemonic',
+            body: '**S**alivation\n**L**acrimation\n**U**rination\n**D**efecation\n**G**I cramping\n**E**mesis\n\n**B**radycardia\n**B**ronchorrhea\n**B**ronchospasm',
+        },
+        {
+            heading: 'If Uncertain',
+            body: '**STOP all anticholinesterase medications** — safe for both crisis types.\n\n• Support airway\n• Atropine 0.5-1 mg IV for secretions\n• Observe 30-60 min\n• Cholinergic: secretions decrease\n• Myasthenic: weakness persists without cholinergic signs',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wendell LC, Levine JM. Myasthenic Crisis. Neurohospitalist. 2011;1(1):16-22.' },
+        { num: 2, text: 'Farmakidis C, et al. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
+    ],
+};
+const MG_ICE_TEST = {
+    id: 'mg-ice-test',
+    title: 'Ice Pack Test',
+    subtitle: 'Bedside MG Diagnostic',
+    sections: [
+        {
+            heading: 'Overview',
+            body: 'Simple, non-invasive bedside test for ocular MG. Cold improves neuromuscular transmission by slowing acetylcholinesterase activity.',
+        },
+        {
+            heading: 'Technique',
+            body: '1. Measure baseline ptosis (mm of palpebral fissure)\n2. Place ice pack or ice-filled glove on closed eyelid\n3. Hold for **2 minutes**\n4. Remove ice, immediately measure ptosis again',
+        },
+        {
+            heading: 'Interpretation',
+            body: '**Positive:** >2 mm improvement in ptosis\n\n**Sensitivity:** ~80% for ocular MG\n**Specificity:** ~95%\n\nA negative test does not rule out MG. Proceed with antibody testing and EMG if clinical suspicion remains.',
+        },
+        {
+            heading: 'Why It Works',
+            body: 'Cold temperature:\n• Slows acetylcholinesterase activity\n• Prolongs acetylcholine action at NMJ\n• Temporarily improves transmission\n\nThis mechanism is specific to NMJ disorders.',
+        },
+        {
+            heading: 'Limitations',
+            body: '• Only works for ocular symptoms (ptosis)\n• False negatives occur\n• Does not differentiate MG from Lambert-Eaton\n• Confirmatory testing still needed',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gilhus NE. Myasthenia Gravis. N Engl J Med. 2016;375(26):2570-2581.' },
+    ],
+};
+const MG_DRUGS_AVOID = {
+    id: 'mg-drugs-avoid',
+    title: 'Drugs to Avoid in MG',
+    subtitle: 'Medications That Can Precipitate Crisis',
+    sections: [
+        {
+            heading: 'Antibiotics — HIGH RISK',
+            body: '**Avoid:**\n• Aminoglycosides (gentamicin, tobramycin, amikacin)\n• Fluoroquinolones (levofloxacin, moxifloxacin, ciprofloxacin)\n• Macrolides (azithromycin, erythromycin, clarithromycin)\n\n**Safe alternatives:** Penicillins, cephalosporins, carbapenems, TMP-SMX, vancomycin',
+        },
+        {
+            heading: 'Cardiovascular',
+            body: '**Avoid:**\n• Beta-blockers (ALL — including ophthalmic timolol drops!)\n• Calcium channel blockers (verapamil, diltiazem especially)\n• Procainamide, quinidine\n\nThese drugs impair neuromuscular transmission.',
+        },
+        {
+            heading: 'Critical Care',
+            body: '**IV Magnesium:** Can cause severe weakness — avoid if possible, use with extreme caution if essential.\n\n**Neuromuscular blockers:**\n• MG patients are VERY sensitive\n• Rocuronium: Use 1/3 to 1/2 normal dose\n• Have sugammadex available\n• Avoid succinylcholine if possible',
+        },
+        {
+            heading: 'Other Medications',
+            body: '• Botulinum toxin\n• D-penicillamine (can induce MG)\n• Immune checkpoint inhibitors (nivolumab, pembrolizumab)\n• Interferons\n• Chloroquine/hydroxychloroquine\n• Statins (case reports)',
+        },
+        {
+            heading: 'Safe Medications',
+            body: '**Antibiotics:** Penicillins, cephalosporins, carbapenems, TMP-SMX, vancomycin\n\n**Pain:** Acetaminophen, most opioids (caution with respiratory depression)\n\n**Other:** Most antiemetics, PPIs, H2 blockers',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farmakidis C, et al. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
+        { num: 2, text: 'Gilhus NE. Myasthenia Gravis. N Engl J Med. 2016;375(26):2570-2581.' },
+    ],
+};
+const MG_PYRIDOSTIGMINE = {
+    id: 'mg-pyridostigmine',
+    title: 'Pyridostigmine Dosing',
+    subtitle: 'Mestinon Dosing Guide',
+    sections: [
+        {
+            heading: 'Mechanism',
+            body: 'Acetylcholinesterase inhibitor — increases acetylcholine at NMJ. **Symptomatic only** — does NOT modify disease course.',
+        },
+        {
+            heading: 'Initial Dosing',
+            body: '**Start:** 30 mg PO TID (with meals)\n\n**Titrate:** Increase by 30 mg every 3-5 days as tolerated\n\n**Onset:** 30-45 minutes\n**Duration:** 3-6 hours',
+        },
+        {
+            heading: 'Maintenance Dosing',
+            body: '**Typical:** 60 mg PO q4-6h while awake (4-6 doses/day)\n\n**Maximum:** 120 mg per dose, 480-600 mg/day total\n\n**Take with food** to reduce GI side effects.',
+        },
+        {
+            heading: 'Extended-Release (Mestinon Timespan)',
+            body: '**Dose:** 180 mg at bedtime\n\n**Purpose:** Overnight coverage for morning weakness\n\n**Important:**\n• Do NOT crush or chew\n• Absorption less predictable than immediate-release\n• Not for daytime use — erratic absorption',
+        },
+        {
+            heading: 'Side Effects (Cholinergic)',
+            body: '**GI:** Cramping, diarrhea, nausea\n**Secretions:** Increased salivation, lacrimation\n**Other:** Muscle twitching, sweating\n\n**Watch for cholinergic crisis** if excessive dosing — SLUDGE/BBB symptoms.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sanders DB, Wolfe GI, et al. International Consensus Guidance for Management of Myasthenia Gravis. Neurology. 2016;87(4):419-425.' },
+    ],
+};
+const MG_IVIG_PLEX = {
+    id: 'mg-ivig-plex',
+    title: 'IVIG vs Plasmapheresis',
+    subtitle: 'Rapid-Acting Immunotherapy Comparison',
+    sections: [
+        {
+            heading: 'Key Point',
+            body: '**Both are equally effective** for MG crisis and acute exacerbation. Choice depends on availability and patient factors.',
+        },
+        {
+            heading: 'IVIG',
+            body: '**Dose:** 0.4 g/kg/day × 5 days OR 1 g/kg/day × 2 days (total 2 g/kg)\n\n**Onset:** 2-5 days\n**Duration:** 3-6 weeks\n\n**Advantages:**\n• Peripheral IV access only\n• No specialized equipment\n• Widely available\n\n**Risks:** Thrombosis, aseptic meningitis, renal toxicity\n\n**Contraindication:** IgA deficiency (anaphylaxis risk)',
+        },
+        {
+            heading: 'Plasmapheresis (PLEX)',
+            body: '**Protocol:** 5 exchanges over 10-14 days (every other day)\n\n**Onset:** 1-2 days (faster than IVIG)\n**Duration:** 4-6 weeks\n\n**Advantages:**\n• Faster onset\n• Can repeat without cumulative toxicity\n• No IgA concern\n\n**Risks:** Hypotension, citrate toxicity, line infection\n\n**Requires:** Central venous access, specialized equipment',
+        },
+        {
+            heading: 'How to Choose',
+            body: '**Prefer IVIG if:**\n• No central access available\n• Hypercoagulable (PLEX may be safer actually)\n• Limited apheresis availability\n\n**Prefer PLEX if:**\n• Need fastest onset\n• IgA deficiency\n• IVIG allergy\n• Renal impairment',
+        },
+        {
+            heading: 'Important',
+            body: '**Both provide temporary benefit.** Must add maintenance immunotherapy (steroids, azathioprine, mycophenolate) for long-term control.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sanders DB, Wolfe GI, et al. International Consensus Guidance for Management of Myasthenia Gravis. Neurology. 2016;87(4):419-425.' },
+        { num: 2, text: 'Farmakidis C, et al. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -17040,6 +17291,15 @@ export const INFO_PAGES = {
     'pnes-communication-guide': PNES_COMMUNICATION_GUIDE,
     'pnes-safety-screen': PNES_SAFETY_SCREEN,
     'pnes-stop': PNES_STOP,
+    // Myasthenia Gravis
+    'mg-summary': MG_SUMMARY,
+    'mg-mgfa': MG_MGFA,
+    'mg-fvc-nif': MG_FVC_NIF,
+    'mg-crisis': MG_CRISIS,
+    'mg-ice-test': MG_ICE_TEST,
+    'mg-drugs-avoid': MG_DRUGS_AVOID,
+    'mg-pyridostigmine': MG_PYRIDOSTIGMINE,
+    'mg-ivig-plex': MG_IVIG_PLEX,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
