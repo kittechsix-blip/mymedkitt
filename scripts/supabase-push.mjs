@@ -276,6 +276,8 @@ const TREE_REGISTRY = {
   'amaurosis-fugax': { prefix: 'AMAUROSIS_FUGAX', entryNodeId: 'af-start', categoryId: 'ophthalmology' },
   'brue':            { prefix: 'BRUE',            entryNodeId: 'brue-start', categoryId: 'pediatrics' },
   'iih':             { prefix: 'IIH',             entryNodeId: 'iih-start',  categoryId: 'neurology' },
+  'chd-peds':        { prefix: 'CHD_PEDS',        entryNodeId: 'chd-start',  categoryId: 'pediatrics' },
+  'misfits-peds':    { prefix: 'MISFITS_PEDS',    entryNodeId: 'misfits-start', categoryId: 'pediatrics' },
 };
 
 const CROSS_LISTINGS = {
