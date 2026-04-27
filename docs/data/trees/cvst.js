@@ -21,7 +21,7 @@ export const CVST_NODES = [
         type: 'info',
         module: 1,
         title: 'Cerebral Venous Thrombosis',
-        body: '**CVST Steps Summary** — diagnostic and treatment pathway.\n\n**CVST accounts for 0.5-3% of all strokes**, primarily affecting young adults and women of reproductive age (3:1 female predominance).\n\n**Classic presentation:**\n• **Headache** — >90% of cases, often severe, progressive\n• **Seizures** — 20-40%\n• **Focal neurologic deficits** — 20-50%\n• **Altered consciousness** — variable\n• **Papilledema** — suggests elevated ICP\n\n**High-risk populations:**\n• Pregnancy/puerperium (9 per 100,000 deliveries)\n• Oral contraceptive users (OR 7.59)\n• Prothrombotic conditions\n• Malignancy (~6% of cases)',
+        body: '[CVST Steps Summary](#/info/cvst-summary) — diagnostic and treatment pathway.\n\n**CVST accounts for 0.5-3% of all strokes**, primarily affecting young adults and women of reproductive age (3:1 female predominance).\n\n**Classic presentation:**\n• **Headache** — >90% of cases, often severe, progressive\n• **Seizures** — 20-40%\n• **Focal neurologic deficits** — 20-50%\n• **Altered consciousness** — variable\n• **Papilledema** — suggests elevated ICP\n\n**High-risk populations:**\n• Pregnancy/puerperium (9 per 100,000 deliveries)\n• Oral contraceptive users (OR 7.59)\n• Prothrombotic conditions\n• Malignancy (~6% of cases)',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'cvt-gs', label: 'CVT-GS Score' },

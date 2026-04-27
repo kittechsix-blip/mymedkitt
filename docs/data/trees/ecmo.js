@@ -24,7 +24,7 @@ export const ECMO_NODES = [
         type: 'question',
         module: 1,
         title: 'ECMO — Initial Assessment',
-        body: '**ECMO Steps Summary** — quick reference.\n\n**ECMO = Extracorporeal Membrane Oxygenation**\n\nA form of prolonged cardiopulmonary bypass that provides temporary support for refractory respiratory and/or cardiac failure [1][2].\n\n**Two primary configurations:**\n\n**VV-ECMO (Veno-Venous):**\n• Provides **oxygenation and CO₂ removal ONLY**\n• No hemodynamic support\n• Patient must have adequate cardiac function\n• Bridge to lung recovery or transplant\n\n**VA-ECMO (Veno-Arterial):**\n• Provides **oxygenation AND circulatory support**\n• Bypasses both heart and lungs\n• For cardiogenic shock, cardiac arrest (ECPR)\n• Bridge to recovery, LVAD, or transplant\n\n**Key question:** What is failing — the lungs, the heart, or both?',
+        body: '[ECMO Steps Summary](#/info/ecmo-steps-summary) — quick reference.\n\n**ECMO = Extracorporeal Membrane Oxygenation**\n\nA form of prolonged cardiopulmonary bypass that provides temporary support for refractory respiratory and/or cardiac failure [1][2].\n\n**Two primary configurations:**\n\n**VV-ECMO (Veno-Venous):**\n• Provides **oxygenation and CO₂ removal ONLY**\n• No hemodynamic support\n• Patient must have adequate cardiac function\n• Bridge to lung recovery or transplant\n\n**VA-ECMO (Veno-Arterial):**\n• Provides **oxygenation AND circulatory support**\n• Bypasses both heart and lungs\n• For cardiogenic shock, cardiac arrest (ECPR)\n• Bridge to recovery, LVAD, or transplant\n\n**Key question:** What is failing — the lungs, the heart, or both?',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'ecmo-vv-va-selector', label: 'VV vs VA Selector' },

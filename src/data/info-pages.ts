@@ -17815,6 +17815,498 @@ const VT_SUMMARY: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Post-ROSC — Steps Summary
+// -------------------------------------------------------------------
+
+const POST_ROSC_SUMMARY: InfoPage = {
+  id: 'rosc-steps-summary',
+  title: 'Post-ROSC Steps Summary',
+  subtitle: 'Immediate post-ROSC → hemodynamic targets → temperature → neuro → ICU',
+  sections: [
+    {
+      heading: '1. Immediate Post-ROSC',
+      body: '• [Secure airway, ETCO₂ 35-45 mmHg, 12-lead ECG immediately](#/node/rosc-start)\n• [STEMI on ECG — emergent PCI, do not delay](#/node/rosc-stemi)\n• [STEMI confirmed — activate cath lab, TTM in lab, no CT head](#/node/rosc-cath)\n• [No STEMI — stabilize hemodynamics first (COACT trial)](#/node/rosc-no-stemi)\n• [Indeterminate ECG or new LBBB — cardiology consult, consider early angio](#/node/rosc-angio-consider)',
+    },
+    {
+      heading: '2. Hemodynamic Targets',
+      body: '• [MAP ≥65 mmHg, SpO₂ 94-98%, PaCO₂ 35-45 mmHg — titrate FiO₂ down](#/node/rosc-hemo)\n• [Norepinephrine first-line, add vasopressin if refractory; dobutamine for low CO](#/node/rosc-pressors)',
+    },
+    {
+      heading: '3. Temperature Management',
+      body: '• [Assess: patient following commands?](#/node/rosc-ttm-check)\n• [Comatose — prevent fever >37.7°C × 72h, magnesium + meperidine anti-shivering](#/node/rosc-ttm-coma)\n• [Following commands — standard care, treat any fever >37.7°C](#/node/rosc-ttm-awake)',
+    },
+    {
+      heading: '4. Neuroprognostication',
+      body: '• [Do NOT prognosticate <72h post-rewarming — sedation + hypothermia confound exam](#/node/rosc-neuro)\n• [Post-arrest seizures 20-30% — continuous EEG, levetiracetam first-line](#/node/rosc-seizure)',
+    },
+    {
+      heading: '5. ICU Targets & Admission',
+      body: '• [Glucose 140-180 mg/dL, continuous EEG × 24-48h, echo for LV function](#/node/rosc-icu-targets)\n• [ICU admission — document code details, communicate arrest circumstances](#/node/rosc-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+    { num: 2, text: 'Nolan JP et al. ERC/ESICM Guidelines on Post-Resuscitation Care. Resuscitation. 2021;161:220-269.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Aortic Emergencies — Steps Summary
+// -------------------------------------------------------------------
+
+const AORTIC_ANEURYSM_SUMMARY: InfoPage = {
+  id: 'aortic-summary',
+  title: 'Aortic Emergencies Steps Summary',
+  subtitle: 'Time-critical — assess → diagnose → stabilize → type-specific care → surgery',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Recognize high-risk features: abrupt pain, pulse deficit, BP differential >20 mmHg](#/node/aortic-start)\n• [ADD-RS risk stratification to guide imaging approach](#/node/aortic-add-rs)\n• [Assess for classic AAA triad: hypotension, back pain, pulsatile mass](#/node/aortic-aaa-eval)',
+    },
+    {
+      heading: '2. Diagnosis',
+      body: '• [ADD-RS ≥2 → immediate CTA; ADD-RS 0-1 + D-dimer <500 → 99% rule-out](#/node/aortic-imaging)\n• [Classify: dissection (Type A vs B), IMH, PAU, or ruptured AAA](#/node/aortic-classify)\n• [Unstable + bedside US confirms AAA → straight to OR, skip CT](#/node/aortic-aaa-imaging)\n• [D-dimer <500 reliable rule-out for ADD-RS 0-1; elevated → proceed to CTA](#/node/aortic-ddimer)',
+    },
+    {
+      heading: '3. Hemodynamic Management',
+      body: '• [Beta-blocker FIRST (HR 60-70, SBP 100-120) — esmolol preferred in unstable](#/node/aortic-hemo-dissection)\n• [Add vasodilator AFTER beta-blocker if SBP >120 — nicardipine or clevidipine](#/node/aortic-vasodilator)\n• [Hypotensive dissection: check BP all extremities, avoid pure alpha-agonists](#/node/aortic-hypotensive)\n• [Ruptured AAA: permissive hypotension SBP 70-90, 1:1:1 MTP, minimize crystalloid](#/node/aortic-aaa-ruptured)',
+    },
+    {
+      heading: '4. Type-Specific Management',
+      body: '• [Type A dissection → IMMEDIATE surgery; mortality 1-2%/hour untreated](#/node/aortic-type-a)\n• [Uncomplicated Type B → medical management, ICU, serial imaging at 24-48h](#/node/aortic-type-b-medical)\n• [Complicated Type B (malperfusion, rupture) → TEVAR or open repair](#/node/aortic-type-b-intervention)\n• [PAU → individualized; TEVAR if symptoms persist or rupture risk](#/node/aortic-pau)\n• [Ruptured AAA → EVAR if anatomy allows, OSR for unsuitable anatomy](#/node/aortic-aaa-surgical)',
+    },
+    {
+      heading: '5. Surgical Consultation & Disposition',
+      body: '• [Emergent surgery: Type A, ruptured AAA, complicated Type B](#/node/aortic-dispo-surgery)\n• [ICU admission: uncomplicated Type B, IMH, PAU; continuous BP monitoring](#/node/aortic-dispo-icu)\n• [Urgent admission: symptomatic unruptured aneurysm, rapidly expanding AAA](#/node/aortic-dispo-admit)\n• [Malperfusion syndromes: coronary (surgery not PCI), mesenteric (>50% mortality)](#/node/aortic-malperfusion)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Aortic Dissection. Internet Book of Critical Care (IBCC). EMCrit. 2025.' },
+    { num: 2, text: 'Kent KC. Clinical Practice: Abdominal Aortic Aneurysms. NEJM. 2014;371(22):2101-2108.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// CVST — Steps Summary
+// -------------------------------------------------------------------
+
+const CVST_SUMMARY: InfoPage = {
+  id: 'cvst-summary',
+  title: 'CVST Steps Summary',
+  subtitle: 'Diagnosis → anticoagulation despite ICH → risk → special populations → disposition',
+  sections: [
+    {
+      heading: '1. Presentation & Clinical Assessment',
+      body: '• [Identify dominant syndrome: ↑ICP, focal deficits, encephalopathy, or seizure](#/node/cvst-clinical-syndrome)\n• [>90% present with headache; seizures 20-40%; focal deficits 20-50%](#/node/cvst-start)\n• [Acute seizure protocol: lorazepam → levetiracetam; no prophylaxis without prior seizure](#/node/cvst-seizure-management)',
+    },
+    {
+      heading: '2. Diagnosis',
+      body: '• [D-dimer BEFORE imaging (NPV 95-99.8%, but 10% CVST normal D-dimer)](#/node/cvst-diagnosis)\n• [MRI + MRV gold standard; CT + CTV acceptable](#/node/cvst-diagnosis)\n• [MRI by phase: acute T1 iso/T2 hypo, subacute T1/T2 hyperintense](#/node/cvst-imaging-findings)\n• [Confirm CVST → assess location, parenchymal involvement, ICH presence](#/node/cvst-confirmed)',
+    },
+    {
+      heading: '3. ICH Does NOT Contraindicate Anticoagulation',
+      body: '• [CRITICAL: ICH in CVST is NOT a contraindication — hemorrhage is venous congestion consequence](#/node/cvst-ich-anticoag)\n• [ISCVT study: no difference in hemorrhage extension with anticoagulation](#/node/cvst-ich-anticoag)\n• [Proceed immediately to anticoagulation despite ICH](#/node/cvst-ich-anticoag)',
+    },
+    {
+      heading: '4. Risk Stratification & Treatment',
+      body: '• [CVT-GS score: mild 0-2 (1.1% mort), moderate 3-7 (19.6%), severe 8-13 (61.4%)](#/node/cvst-risk-stratification)\n• [FIRST-LINE: Enoxaparin 1 mg/kg SC q12h immediately — do NOT delay](#/node/cvst-treatment)\n• [Alternative if renal impairment or need rapid reversal: UFH IV (aPTT 1.5-2.5×)](#/node/cvst-treatment)\n• [Transition to DOAC after 5-15 days — contraindicated in pregnancy & APS](#/node/cvst-oral-anticoag)',
+    },
+    {
+      heading: '5. Duration & Escalation',
+      body: '• [Duration: 3 mo (transient), 6-12 mo (idiopathic), indefinite (severe thrombophilia)](#/node/cvst-duration)\n• [Monitor for deterioration despite anticoagulation](#/node/cvst-escalation)\n• [Endovascular thrombectomy/thrombolysis for neurologic deterioration](#/node/cvst-endovascular)\n• [Decompressive craniectomy if herniation or midline shift ≥5 mm](#/node/cvst-craniectomy)',
+    },
+    {
+      heading: '6. Special Populations & Disposition',
+      body: '• [Pregnancy: LMWH throughout (DOACs teratogenic; warfarin first-tri defects)](#/node/cvst-pregnancy)\n• [Continue LMWH ≥6 weeks postpartum (min 3 months total)](#/node/cvst-pregnancy)\n• [Malignancy: LMWH preferred initial & long-term](#/node/cvst-malignancy)\n• [OCP users: STOP estrogen-containing — use progestin-only or copper IUD](#/node/cvst-ocp)\n• [Admit all CVST: ICU if AMS or high CVT-GS; neuro unit if stable](#/node/cvst-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Saposnik G, et al. Diagnosis and management of cerebral venous thrombosis: AHA Scientific Statement. Stroke. 2024;55(3):e77-e90.' },
+    { num: 2, text: 'Ferro JM, et al. ESO guideline for diagnosis and treatment of cerebral venous thrombosis. Eur J Neurol. 2017;24(10):1203-1213.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Pediatric Trauma — Steps Summary
+// -------------------------------------------------------------------
+
+const PEDS_TRAUMA_SUMMARY: InfoPage = {
+  id: 'peds-trauma-summary',
+  title: 'Pediatric Trauma Steps Summary',
+  subtitle: 'Stepwise approach to stabilization and disposition',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [Use Broselow tape for weight and equipment sizing](#/node/peds-trauma-weight)\n• [ABCs: airway positioning, assess breathing, check circulation and mental status](#/node/peds-trauma-primary)\n• [Secondary survey: examine head-to-toe, identify primary injury pattern](#/node/peds-trauma-secondary)\n• [Tachycardia is early; hypotension is late and ominous](#/node/peds-trauma-start)',
+    },
+    {
+      heading: '2. Hemorrhage Control',
+      body: '• [Direct pressure on external bleeding; 20 mL/kg NS/LR bolus if unstable](#/node/peds-trauma-hemorrhage)\n• [Transfuse if Hgb <7-8 or ongoing hemorrhage; 1:1:1 MTP; TXA 15 mg/kg within 3 hr](#/node/peds-trauma-transfusion)',
+    },
+    {
+      heading: '3. Head Trauma',
+      body: '• [Mild TBI (GCS 14-15): use PECARN criteria to decide CT](#/node/peds-trauma-pecarn)\n• [Moderate TBI (GCS 9-13): CT head + ICU admission](#/node/peds-trauma-mod-tbi)\n• [Severe TBI (GCS ≤8): intubate + 3% saline for herniation; CPP >40-50 mmHg](#/node/peds-trauma-severe-tbi)',
+    },
+    {
+      heading: '4. Thoracoabdominal Trauma',
+      body: '• [Compliant chest wall: pulmonary contusion without rib fractures](#/node/peds-trauma-torso)\n• [Stable abdominal trauma: non-operative management for most solid organ injuries](#/node/peds-trauma-solid-organ)\n• [Unstable abdominal trauma: activate MTP, surgical consult, OR](#/node/peds-trauma-abd-unstable)\n• [Tension PTX: needle decompression → chest tube; hemothorax >15 mL/kg → thoracotomy](#/node/peds-trauma-chest)',
+    },
+    {
+      heading: '5. Orthopedic Trauma',
+      body: '• [Physis is weakest point; Salter-Harris classification guides management](#/node/peds-trauma-salter)\n• [Compartment syndrome: clinical dx, pain with passive stretch — emergent fasciotomy](#/node/peds-trauma-compartment)\n• [Always consider NAT in non-ambulatory children](#/node/peds-trauma-ortho)',
+    },
+    {
+      heading: '6. Disposition',
+      body: '• [Transfer to peds trauma center if GCS <14, intubated, multisystem, or ICU need](#/node/peds-trauma-dispo)\n• [Stabilize before transfer; secure airway if any concern](#/node/peds-trauma-transfer)\n• [Admit to appropriate level: ICU if GCS <14, unstable, or major injuries](#/node/peds-trauma-admit)\n• [Discharge: stable, pain controlled, reliable caregiver, follow-up](#/node/peds-trauma-discharge)\n• [NAT concern: mandatory CPS reporting; do not discharge to suspected abuser](#/node/peds-trauma-nat-report)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American College of Surgeons. Advanced Trauma Life Support (ATLS) 10th Edition. 2018.' },
+    { num: 2, text: 'AAP / ACEP. APLS: The Pediatric Emergency Medicine Resource, 6th Edition. 2020.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Serotonin Syndrome — Steps Summary
+// -------------------------------------------------------------------
+
+const SEROTONIN_SYNDROME_SUMMARY: InfoPage = {
+  id: 'ss-summary',
+  title: 'Serotonin Syndrome Steps Summary',
+  subtitle: 'Recognize → Hunter Criteria → differentiate from NMS → severity-based treatment',
+  sections: [
+    {
+      heading: '1. Recognition',
+      body: '• [Classic triad — altered mental status, autonomic dysfunction, neuromuscular excitation](#/node/ss-start)\n• [Serotonergic drug exposure required for diagnosis](#/node/ss-drug-history)\n• [Onset within 24 hours of drug change; clonus is hallmark](#/node/ss-start)\n• [Investigate medication history: SSRIs, SNRIs, MAOIs, tramadol, MDMA, linezolid](#/node/ss-investigate-drugs)',
+    },
+    {
+      heading: '2. Hunter Criteria Diagnosis',
+      body: '• [Hunter Criteria — sensitivity 84%, specificity 97% (better than Sternbach)](#/node/ss-hunter)\n• [Clonus is key — spontaneous, inducible, or ocular](#/node/ss-hunter)\n• [Tremor + hyperreflexia, OR hypertonia + temp >38°C + clonus also meet](#/node/ss-hunter)\n• [Assess if criteria met — positive = SS, negative/equivocal = differentiate](#/node/ss-hunter-result)',
+    },
+    {
+      heading: '3. Differentiation from Mimics',
+      body: '• [Consider NMS, anticholinergic, malignant hyperthermia, sympathomimetics, sepsis, thyroid storm](#/node/ss-ddx)\n• [SS vs NMS: SS hyperkinetic with clonus + rapid onset; NMS rigid + slow onset](#/node/ss-vs-nms-q)\n• [If NMS likely — stop antipsychotic, dantrolene, bromocriptine, ICU](#/node/ss-nms-referral)\n• [If other diagnosis — continue workup for alternative etiology](#/node/ss-alternative-dx)',
+    },
+    {
+      heading: '4. Severity Assessment & Treatment',
+      body: '• [Mild (tremor, alert), moderate (agitation, T 38.5-40), severe (T>40, rigidity, seizures)](#/node/ss-severity)\n• [Mild: stop agents, benzos PRN, IV fluids, observe 6-12h](#/node/ss-mild-tx)\n• [Moderate: benzos, cyproheptadine 12 mg load then 2 mg q2h, cooling, admit](#/node/ss-moderate-tx)\n• [Severe: intubate, aggressive cooling, paralysis if needed, cyproheptadine NG, ICU](#/node/ss-severe-tx)',
+    },
+    {
+      heading: '5. Disposition',
+      body: '• [Mild: discharge if resolving after 6-12h, stable vitals, tolerating PO](#/node/ss-dispo-mild)\n• [Moderate: telemetry admit, continue benzos + cyproheptadine 24-48h, tox + psych](#/node/ss-dispo-moderate)\n• [Severe: ICU for T>40, intubation, paralysis, instability — MAOI cases longest duration](#/node/ss-dispo-severe)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Boyer EW, Shannon M. The Serotonin Syndrome. NEJM. 2005;352(11):1112-1120.' },
+    { num: 2, text: 'Dunkley EJ, Isbister GK, et al. The Hunter Serotonin Toxicity Criteria. QJM. 2003;96(9):635-642.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Iron Overdose — Steps Summary
+// -------------------------------------------------------------------
+
+const IRON_OD_SUMMARY: InfoPage = {
+  id: 'iron-summary',
+  title: 'Iron Overdose Steps Summary',
+  subtitle: 'GI injury → systemic toxicity → chelation → disposition',
+  sections: [
+    {
+      heading: '1. Recognition & Toxicity',
+      body: '• [Calculate elemental iron dose (20-33% elemental by formulation)](#/node/iron-start)\n• [Assess: <20 mg/kg minimal, 20-60 mg/kg moderate, >60 mg/kg severe](#/node/iron-start)\n• [Abdominal X-ray — tablets radiopaque, liquids/chewables may not be visible](#/node/iron-start)',
+    },
+    {
+      heading: '2. Classic Stages',
+      body: '• [Stage 1 (0-6h): GI hemorrhage, vomiting, diarrhea, abdominal pain](#/node/iron-stages)\n• [Stage 2 (6-24h): deceptive improvement — DO NOT be fooled](#/node/iron-stages)\n• [Stage 3 (12-48h): shock, metabolic acidosis, coagulopathy, CV collapse](#/node/iron-stages)\n• [Stage 4 (2-4 days): hepatotoxicity, hepatic necrosis, hypoglycemia](#/node/iron-stages)\n• [Stage 5 (2-6 weeks): GI scarring, gastric outlet obstruction, strictures](#/node/iron-stages)',
+    },
+    {
+      heading: '3. Diagnostic Workup',
+      body: '• [Serum iron at 4-6 hours (peak): <350 minimal, 350-500 moderate, >500 severe](#/node/iron-workup)\n• [Labs: CBC, BMP, LFTs, coags, lactate, ABG — metabolic acidosis = severe](#/node/iron-workup)\n• [Do NOT rely on TIBC — falsely elevated, does not guide management](#/node/iron-workup)',
+    },
+    {
+      heading: '4. GI Decontamination',
+      body: '• [Activated charcoal does NOT bind iron — NOT effective](#/node/iron-gi-decon)\n• [WBI with GoLYTELY — 500 mL/hr peds, 1-2 L/hr adults via NG](#/node/iron-wbi)\n• [Continue WBI until clear effluent AND no pills on repeat film](#/node/iron-wbi)\n• [Endoscopic removal only for bezoars or failed WBI — rarely needed](#/node/iron-endoscopy)',
+    },
+    {
+      heading: '5. Deferoxamine Therapy',
+      body: '• [Indication: serum iron >500 mcg/dL OR severe symptoms](#/node/iron-deferoxamine)\n• [Start IV 5 mg/kg/hr, titrate to 15 mg/kg/hr, max 6 g/24h](#/node/iron-dfo-dosing)\n• [Do NOT use "vin rosé" urine color to guide therapy — unreliable](#/node/iron-dfo-duration)\n• [Continue until: clinical improvement AND iron <350 AND acidosis resolved](#/node/iron-dfo-duration)',
+    },
+    {
+      heading: '6. Rescue Therapies',
+      body: '• [Refractory shock: exchange transfusion (pediatric)](#/node/iron-exchange)\n• [Hemodialysis removes ferrioxamine — for renal failure or ARDS](#/node/iron-dialysis)\n• [Supportive: aggressive IVF for GI losses, blood products, vasopressors](#/node/iron-supportive)',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [Low-risk (<20 mg/kg, asymptomatic): observe 6 hr, discharge if well](#/node/iron-dispo-observe)\n• [Moderate (20-60 mg/kg or 350-500 mcg/dL): admit for serial labs](#/node/iron-dispo-admit)\n• [Severe (>60 mg/kg, >500 mcg/dL, or DFO needed): ICU](#/node/iron-dispo-icu)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Manoguerra AS, et al. Iron Ingestion: Out-of-Hospital Management Guideline. Clin Toxicol. 2005;43(6):553-570.' },
+    { num: 2, text: 'Perrone J. Iron. In: Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw-Hill; 2019.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Beta-Blocker Overdose — Steps Summary
+// -------------------------------------------------------------------
+
+const BETA_BLOCKER_OD_SUMMARY: InfoPage = {
+  id: 'bb-steps-summary',
+  title: 'Beta-Blocker Overdose Steps Summary',
+  subtitle: 'Recognize → Stabilize → Glucagon/Ca → HIET → Pressors → Lipid → Rescue',
+  sections: [
+    {
+      heading: '1. Recognition & Agent Identification',
+      body: '• [Suspect BB toxicity: bradycardia + hypotension + hypoglycemia triad](#/node/bb-start)\n• [Identify agent: propranolol (lipophilic, Na⁺ block), sotalol (QT), carvedilol (alpha), atenolol/nadolol (hydrophilic, dialyzable)](#/node/bb-start)\n• [ECG: QRS widening (propranolol) or QT prolongation (sotalol)](#/node/bb-start)\n• [Severity: mild (alert), moderate (HR<50/SBP<90), severe (seizure, arrest)](#/node/bb-start)\n• [Extended-release: 24-48h observation due to delayed toxicity](#/node/bb-mild)',
+    },
+    {
+      heading: '2. Initial Stabilization',
+      body: '• [ABCs, two large-bore IVs, continuous monitoring](#/node/bb-stabilize)\n• [Fingerstick glucose immediately; treat with D50 if needed](#/node/bb-stabilize)\n• [Decontamination: charcoal if <2h, WBI for sustained-release](#/node/bb-stabilize)\n• [Atropine 0.5-1 mg IV (often ineffective; muscarinic, not beta)](#/node/bb-atropine)',
+    },
+    {
+      heading: '3. Glucagon & Calcium — First-Line',
+      body: '• [Glucagon 3-5 mg IV bolus (up to 10 mg total) — bypasses blocked beta receptor](#/node/bb-glucagon)\n• [Glucagon 2-10 mg/hr infusion once response achieved](#/node/bb-glucagon)\n• [Pretreat with ondansetron — nausea/vomiting common](#/node/bb-glucagon)\n• [Calcium gluconate 3 g IV or CaCl 1 g IV over 10-20 min for inotropy](#/node/bb-calcium)',
+    },
+    {
+      heading: '4. High-Dose Insulin Euglycemia (HIET)',
+      body: '• [Cornerstone: regular insulin 1 unit/kg bolus, then 1-10 units/kg/hr infusion](#/node/bb-hiet-dosing)\n• [MUST co-administer dextrose — D10/D25 to maintain glucose 150-250 mg/dL](#/node/bb-hiet-dosing)\n• [Aggressive K⁺ repletion to 3.5-4.5 (insulin drives K intracellularly)](#/node/bb-hiet-dosing)\n• [Monitor glucose q15-30 min, K⁺ q1h — D50 at bedside](#/node/bb-hiet-monitoring)\n• [Onset 15-60 min — be patient, this is NOT DKA dosing](#/node/bb-hiet-monitoring)',
+    },
+    {
+      heading: '5. Vasopressor Therapy',
+      body: '• [HIGH-DOSE norepinephrine 0.1-3 mcg/kg/min — standard doses insufficient](#/node/bb-pressors)\n• [Add epinephrine 0.1-1 mcg/kg/min for cardiogenic component](#/node/bb-pressors)\n• [Vasopressin 0.04 units/min — bypasses adrenergic, add for refractory](#/node/bb-pressors-adjunct)\n• [AVOID dobutamine and dopamine — use NE + epi](#/node/bb-pressors-adjunct)\n• [If MAP ≥65 continue; if refractory, escalate to lipid emulsion](#/node/bb-pressors-response)',
+    },
+    {
+      heading: '6. Lipid Emulsion (Rescue)',
+      body: '• [Intralipid 20% 1.5 mL/kg bolus over 1 min (may repeat ×2 q5 min)](#/node/bb-lipid-dosing)\n• [Then 0.25-0.5 mL/kg/min infusion ×30-60 min — max 10-12 mL/kg first hour](#/node/bb-lipid-dosing)\n• [Best for refractory shock with lipophilic agents (propranolol, metoprolol)](#/node/bb-lipid)\n• [Less evidence for hydrophilic agents (atenolol, nadolol) — dialysis better](#/node/bb-dialysis)',
+    },
+    {
+      heading: '7. Agent-Specific Rescue',
+      body: '• [Propranolol + QRS >100 ms: NaHCO₃ 1-2 mEq/kg push (treat like TCA)](#/node/bb-propranolol)\n• [Sotalol + QT/Torsades: MgSO₄ 2 g IV + overdrive pacing — AVOID amiodarone](#/node/bb-sotalol)\n• [Atenolol/Nadolol: hemodialysis — small Vd, dialyzable, renally cleared](#/node/bb-dialysis)\n• [Refractory vasoplegia: methylene blue 1-2 mg/kg over 15-30 min](#/node/bb-methylene)\n• [Refractory shock/arrest: VA-ECMO — toxicity is REVERSIBLE](#/node/bb-ecmo)',
+    },
+    {
+      heading: '8. Cardiac Arrest (Modified ACLS)',
+      body: '• [Prolonged CPR (30-60+ min) reasonable — toxicological arrest is REVERSIBLE](#/node/bb-arrest)\n• [HIGH-dose epi, glucagon 5-10 mg, CaCl 1-3 g, Intralipid 1.5 mL/kg bolus](#/node/bb-arrest)',
+    },
+    {
+      heading: '9. Disposition',
+      body: '• [ICU: any instability, arrhythmia, or on infusions](#/node/bb-icu)\n• [Monitored bed: stable, normal ECG — min 6h IR, min 24h ER](#/node/bb-monitored)\n• [Discharge: asymptomatic ≥6h, normal vitals/ECG/glucose, IR ONLY, psych clearance](#/node/bb-discharge)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Graudins A, Lee HM, Druda D. CCB and BB Toxicity. Emerg Med Clin North Am. 2022;40(3):531-546.' },
+    { num: 2, text: 'St-Onge M et al. Experts Consensus Recommendations for CCB Poisoning in Adults. Crit Care Med. 2017;45(3):e306-e315.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// CCB Overdose — Steps Summary
+// -------------------------------------------------------------------
+
+const CCB_OD_SUMMARY: InfoPage = {
+  id: 'ccb-steps-summary',
+  title: 'CCB Overdose Steps Summary',
+  subtitle: 'Recognition → shock phenotype → HIET/vasopressors → rescue → disposition',
+  sections: [
+    {
+      heading: '1. Recognition & Classification',
+      body: '• [Identify DHP vs non-DHP agent — determines shock phenotype](#/node/ccb-start)\n• [Dihydropyridines: vasodilatory shock, reflex tachycardia](#/node/ccb-dhp)\n• [Non-dihydropyridines (verapamil/diltiazem): cardiogenic shock, bradycardia](#/node/ccb-nondhp)\n• [Unknown or mixed ingestion — assess phenotype clinically](#/node/ccb-unknown)\n• [Extended-release: delayed toxicity 12-24h, WBI mandatory](#/node/ccb-extended-release)',
+    },
+    {
+      heading: '2. Shock Phenotype Assessment',
+      body: '• [Assess shock phenotype — CRITICAL for treatment routing](#/node/ccb-shock-phenotype)\n• [Vasodilatory: warm, normal/high CO, low SVR — emphasize vasopressors](#/node/ccb-shock-phenotype)\n• [Cardiogenic: cool, low CO, bradycardia — emphasize HIET](#/node/ccb-shock-phenotype)\n• [Mixed: both features — use both HIET AND vasopressors](#/node/ccb-shock-phenotype)',
+    },
+    {
+      heading: '3. Initial Stabilization',
+      body: '• [ABCs, two large-bore IVs, continuous monitor, 12-lead ECG](#/node/ccb-initial-stab)\n• [CaCl 1-2 g IV q15-20 min or continuous infusion — temporary bridge](#/node/ccb-calcium)\n• [Glucagon 3-5 mg bolus then 2-5 mg/hr — less effective than in BB](#/node/ccb-glucagon)\n• [WBI with GoLYTELY 2 L/hr for extended-release](#/node/ccb-gi-decon)',
+    },
+    {
+      heading: '4. High-Dose Insulin Euglycemia (HIET)',
+      body: '• [HIET is FIRST-LINE for cardiogenic shock phenotype](#/node/ccb-hiet-intro)\n• [Regular insulin 1 unit/kg IV bolus, then 1-10 units/kg/hr infusion](#/node/ccb-hiet-dosing)\n• [Maintain glucose 150-250 mg/dL with D10W; replete K to 4.0-4.5](#/node/ccb-hiet-dosing)\n• [Hemodynamic improvement within 15-60 min — do not stop early](#/node/ccb-hiet-onset)',
+    },
+    {
+      heading: '5. Vasopressor Therapy',
+      body: '• [Norepinephrine 0.1-3 mcg/kg/min for vasodilatory shock — HIGH doses needed](#/node/ccb-vasopressors)\n• [Vasopressin 0.04 units/min fixed adjunct for refractory vasoplegia](#/node/ccb-vasopressors)\n• [Escalate aggressively — much higher doses than septic shock](#/node/ccb-vasopressor-high-dose)',
+    },
+    {
+      heading: '6. Lipid Emulsion & Rescue',
+      body: '• [Intralipid 1.5 mL/kg bolus for refractory toxicity — best evidence for verapamil](#/node/ccb-lipid)\n• [Methylene blue 1-2 mg/kg for refractory vasoplegia](#/node/ccb-methylene-blue)\n• [Temporary pacing for refractory bradycardia](#/node/ccb-pacing)\n• [VA-ECMO bridge for arrest or refractory shock — toxicity is REVERSIBLE](#/node/ccb-ecmo)',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [All significant CCB ingestions → ICU](#/node/ccb-disposition)\n• [Extended-release: minimum 24-48h regardless of initial presentation](#/node/ccb-icu-stable)\n• [Unstable: ongoing HIET, vasopressors, serial labs q1-2h](#/node/ccb-icu)\n• [Low-risk (small IR DHP, asymptomatic): monitored observation 6h min](#/node/ccb-obs)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'St-Onge M, et al. Treatment for CCB Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944.' },
+    { num: 2, text: 'Graudins A, Lee HM, Druda D. CCB and BB Toxicity. Emerg Med Clin North Am. 2022;40(3):507-523.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Digoxin Toxicity — Steps Summary
+// -------------------------------------------------------------------
+
+const DIGOXIN_TOXICITY_SUMMARY: InfoPage = {
+  id: 'dig-steps-summary',
+  title: 'Digoxin Toxicity Steps Summary',
+  subtitle: 'Narrow therapeutic index — recognize, ECG, risk-stratify, treat, DigiFab',
+  sections: [
+    {
+      heading: '1. Recognition',
+      body: '• [Classic presentation: GI, visual, CNS symptoms](#/node/dig-start)\n• [Acute ingestion: high level, low K⁺, deceptively well](#/node/dig-acute)\n• [Chronic toxicity: insidious, multiple risk factors](#/node/dig-chronic)\n• [Unknown/mixed: treat as chronic if maintenance therapy](#/node/dig-unknown)',
+    },
+    {
+      heading: '2. ECG Findings',
+      body: '• [ECG critical — scooped ST, PAT with block, bidirectional VT](#/node/dig-ecg)\n• [Bradyarrhythmias: sinus brady, AV block, junctional rhythm](#/node/dig-brady)\n• [Tachyarrhythmias: PAT with block, bidirectional VT — AVOID cardioversion](#/node/dig-tachy)',
+    },
+    {
+      heading: '3. Risk Stratification',
+      body: '• [Assess K⁺ level — hyperkalemia (>5.5) = critical](#/node/dig-risk-strat)\n• [Hyperkalemia in toxicity: DigiFab indicated, AVOID calcium](#/node/dig-hyperkalemia)',
+    },
+    {
+      heading: '4. Treatment',
+      body: '• [General: decontamination, electrolytes, arrhythmia management](#/node/dig-treatment)\n• [Mild: supportive care, activated charcoal, hold digoxin](#/node/dig-supportive)\n• [AVOID: cardioversion, calcium, pacing, beta-blockers](#/node/dig-avoid)',
+    },
+    {
+      heading: '5. DigiFab (Digoxin Immune Fab)',
+      body: '• [Indications: life-threatening arrhythmia, K⁺ >5.5, high level](#/node/dig-fab)\n• [Dosing methods: known ingestion, serum level, or empiric](#/node/dig-fab-dosing)\n• [Known ingestion formula: vials = (mg × 0.8) / 0.5](#/node/dig-fab-amount)\n• [Known level formula: vials = (level × weight) / 100](#/node/dig-fab-level)\n• [Empiric dosing: acute 10-20 vials, chronic 3-6 vials](#/node/dig-fab-empiric)\n• [Post-DigiFab: response 30-60 min, levels meaningless post-Fab](#/node/dig-fab-post)',
+    },
+    {
+      heading: '6. Disposition',
+      body: '• [Disposition: assess for ICU vs telemetry based on severity](#/node/dig-dispo)\n• [ICU: any significant arrhythmia, DigiFab given, K⁺ >5.5](#/node/dig-icu)\n• [Telemetry: mild symptoms, stable, normal K⁺, no arrhythmia](#/node/dig-tele)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hack JB. Digoxin. In: Goldfrank\'s Toxicologic Emergencies, 11th ed. McGraw-Hill. 2019.' },
+    { num: 2, text: 'Chan BS, et al. Digoxin Poisoning. Clin Toxicol. 2022;60(5):533-548.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Intralipid (ILE) — Steps Summary
+// -------------------------------------------------------------------
+
+const INTRALIPID_SUMMARY: InfoPage = {
+  id: 'ile-summary',
+  title: 'ILE (Intralipid) Steps Summary',
+  subtitle: 'Lipid emulsion rescue therapy for LAST and lipophilic drug toxicity',
+  sections: [
+    {
+      heading: '1. Overview',
+      body: '• [What is lipid emulsion therapy](#/node/ile-start)\n• [Mechanism: lipid sink + direct cardiotonic effects](#/node/ile-mechanism)',
+    },
+    {
+      heading: '2. Indications',
+      body: '• [Select clinical scenario](#/node/ile-indications-question)\n• [LAST (Local Anesthetic Systemic Toxicity) — primary indication](#/node/ile-last)\n• [CCB overdose with refractory shock](#/node/ile-ccb)\n• [Beta-blocker overdose with refractory hemodynamic collapse](#/node/ile-bb)\n• [TCA overdose — use AFTER sodium bicarbonate fails](#/node/ile-tca)\n• [Other lipophilic drug toxicity (diphenhydramine, bupropion)](#/node/ile-other)',
+    },
+    {
+      heading: '3. Dosing Protocol',
+      body: '• [Bolus 1.5 mL/kg over 1 min (may repeat ×2 q5 min); infusion 0.25-0.5 mL/kg/min; max 12 mL/kg first 30 min](#/node/ile-dosing-protocol)\n• [Administration: IV access, line compatibility](#/node/ile-admin-details)\n• [CPR modifications for LAST — epi dosing, what to avoid](#/node/ile-cpr-modifications)',
+    },
+    {
+      heading: '4. Monitoring & Endpoints',
+      body: '• [Monitor hemodynamics + response markers](#/node/ile-monitoring)\n• [Continue 15-30 min after stability; watch for recrudescence](#/node/ile-endpoints)\n• [Lab interference — lipemia affects many assays](#/node/ile-lab-interference)',
+    },
+    {
+      heading: '5. Complications & Disposition',
+      body: '• [Complications & adverse effects — rare but important](#/node/ile-complications)\n• [Special populations — peds, pregnancy, obesity dosing](#/node/ile-special-pops)\n• [Post-ILE disposition decision](#/node/ile-disposition)\n• [Stable — ICU admission for observation](#/node/ile-dispo-stable)\n• [Vasopressor-dependent — ICU for ongoing support](#/node/ile-dispo-icu)\n• [Refractory arrest — consider VA-ECMO/ECPR](#/node/ile-dispo-refractory)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Neal JM, Barrington MJ, Fettiplace MR, et al. The Third ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.' },
+    { num: 2, text: 'Panchal AR, et al. Part 3: Adult Basic and Advanced Life Support: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(16_suppl_2):S366-S468.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// ECMO — Steps Summary
+// -------------------------------------------------------------------
+
+const ECMO_SUMMARY: InfoPage = {
+  id: 'ecmo-steps-summary',
+  title: 'ECMO Steps Summary',
+  subtitle: 'Quick reference for ECMO selection, initiation, and management',
+  sections: [
+    {
+      heading: '1. Initial Assessment',
+      body: '• [What is ECMO? VV vs VA differences; assess failing organ system](#/node/ecmo-start)',
+    },
+    {
+      heading: '2. VV vs VA Selection',
+      body: '• [Is cardiac output adequate or failing?](#/node/ecmo-selection-decision)\n• [When in doubt — go VA](#/node/ecmo-selection-decision)\n• [Hemodynamic assessment + echo findings](#/node/ecmo-assessment)',
+    },
+    {
+      heading: '3. VV-ECMO',
+      body: '• [VV indications: P/F ratio <80 despite optimization](#/node/ecmo-vv-indications)\n• [Call ECMO center EARLY — mortality doubles if MV >7 days](#/node/ecmo-vv-timing)\n• [Circuit basics: femoral drain, IJ return](#/node/ecmo-vv-flow)\n• [Initial settings: lung rest, anticoagulation, target flows](#/node/ecmo-vv-settings)\n• [Monitor for recirculation](#/node/ecmo-vv-recirculation)',
+    },
+    {
+      heading: '4. VA-ECMO',
+      body: '• [VA indications: cardiogenic shock, massive PE, arrest](#/node/ecmo-va-indications)\n• [Early initiation improves outcomes — call at SCAI Stage D](#/node/ecmo-va-timing)\n• [Peripheral cannulation: femoral vein drain, femoral artery return](#/node/ecmo-va-flow)\n• [Mandatory right radial arterial line for VA-ECMO](#/node/ecmo-va-settings)\n• [Watch for Harlequin syndrome (differential hypoxemia)](#/node/ecmo-va-harlequin)\n• [Monitor for LV distension — may need Impella or surgical vent](#/node/ecmo-va-lv-distension)',
+    },
+    {
+      heading: '5. ECPR',
+      body: '• [Candidates: witnessed arrest, shockable rhythm, <60 min CPR](#/node/ecmo-ecpr)\n• [Target cannulation within 60 minutes of arrest](#/node/ecmo-ecpr-logistics)',
+    },
+    {
+      heading: '6. Contraindications & Cannulation',
+      body: '• [Absolute: irreversible disease, severe neuro injury](#/node/ecmo-contraindications)\n• [VV: femorojugular (most common) or dual-lumen](#/node/ecmo-vv-cannulation)\n• [VA: peripheral femoral-femoral with distal perfusion cannula (ESSENTIAL)](#/node/ecmo-va-cannulation)',
+    },
+    {
+      heading: '7. Complications & Scores',
+      body: '• [Bleeding 30-50%, thrombosis 10-20%, limb ischemia 10-20%](#/node/ecmo-complications)\n• [RESP score (VV) and SAVE score (VA) guide candidacy](#/node/ecmo-scores)',
+    },
+    {
+      heading: '8. Communication & Disposition',
+      body: '• [Have P/F ratio, pressor doses, lactate trend, echo findings ready](#/node/ecmo-communication)\n• [Proceed with cannulation or transfer to ECMO center](#/node/ecmo-disposition)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. ECMO Manual. EMCrit IBCC. https://emcrit.org/ibcc/ecmo/' },
+    { num: 2, text: 'ELSO Guidelines for Adult Respiratory Failure. Extracorporeal Life Support Organization. 2017.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// Acute Pancreatitis — Steps Summary
+// -------------------------------------------------------------------
+
+const ACUTE_PANCREATITIS_SUMMARY: InfoPage = {
+  id: 'ap-summary',
+  title: 'Acute Pancreatitis Steps Summary',
+  subtitle: 'Diagnosis → severity → resuscitation → complications → intervention → disposition',
+  sections: [
+    {
+      heading: '1. Diagnosis & Severity Assessment',
+      body: '• [Diagnose with 2 of 3: epigastric pain, lipase >3× ULN, imaging](#/node/ap-start)\n• [Atlanta Classification: mild (no OF), moderate (OF <48h), severe (OF >48h)](#/node/ap-severity)\n• [BISAP ≥3 within 24h = 12-30% mortality; Modified Marshall for OF](#/node/ap-severity)',
+    },
+    {
+      heading: '2. Resuscitation',
+      body: '• [LR preferred over NS — goal 3-4 L/24h, NOT aggressive](#/node/ap-mild-resus)\n• [Moderate: 10 mL/kg over 2h if hypovolemic, then 1.5 mL/kg/hr](#/node/ap-mild-resus)\n• [Monitoring: UOP >0.5 mL/kg/hr, decreasing BUN, Hct <44%](#/node/ap-mild-resus)\n• [Early oral feeding within 24-48h; opioids safe for pain](#/node/ap-mild-resus)',
+    },
+    {
+      heading: '3. Etiology & Workup',
+      body: '• [All patients: RUQ US, triglycerides, LFTs](#/node/ap-etiology)\n• [Gallstone (40-70%) — assess for cholangitis](#/node/ap-gallstone)\n• [Cholangitis → urgent ERCP <24h; no cholangitis → no routine ERCP](#/node/ap-gallstone)\n• [Mild AP + gallstones → same-admission cholecystectomy](#/node/ap-gallstone)\n• [Alcoholic → thiamine before glucose, watch for withdrawal](#/node/ap-alcohol)\n• [HTG (TG >1000) → insulin infusion, target <500, apheresis if >2000](#/node/ap-htg)',
+    },
+    {
+      heading: '4. Complications Assessment',
+      body: '• [Image only if no improvement at 48-72h or deterioration](#/node/ap-complications-q)\n• [Pseudocyst: observe most — size alone NOT indication for drainage](#/node/ap-pseudocyst)\n• [Sterile necrosis — NO prophylactic antibiotics](#/node/ap-necrosis)\n• [Suspect infected necrosis: gas on CT, PCT >3.5, fever, deterioration](#/node/ap-necrosis-decision)',
+    },
+    {
+      heading: '5. Intervention — Infected Necrosis',
+      body: '• [Life-threatening — antibiotics with pancreatic penetration: pip-tazo, carbapenems, FQ+metronidazole](#/node/ap-infected-necrosis)\n• [Step-up: delay + abx → drain → minimally invasive → open necrosectomy](#/node/ap-step-up)\n• [If improving on antibiotics: continue, reassess](#/node/ap-abx-continue)\n• [Stable not improving: PCD or EUS-guided ETD >4 weeks from onset](#/node/ap-drainage-timing)\n• [Urgent drainage if unstable, multiorgan failure, ACS](#/node/ap-urgent-drainage)',
+    },
+    {
+      heading: '6. Disposition',
+      body: '• [Mild: discharge when PO tolerant, pain controlled, labs improving](#/node/ap-dispo-mild)\n• [Gallstone: schedule cholecystectomy same admission or within 2 weeks](#/node/ap-dispo-mild)\n• [Complicated: ICU for persistent OF or infected necrosis; multidisciplinary team](#/node/ap-dispo-complicated)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Tenner S, et al. ACG Guideline: Management of Acute Pancreatitis. Am J Gastroenterol. 2024;119(3):419-437.' },
+    { num: 2, text: 'Banks PA, et al. Classification of acute pancreatitis—2012: revision of the Atlanta classification. Gut. 2013;62(1):102-111.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Delayed Sequence Intubation
   'dsi-summary': DSI_SUMMARY,
@@ -18355,6 +18847,21 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pea-steps-summary': PEA_ARREST_SUMMARY,
   'brady-steps-summary': BRADYCARDIC_ARREST_SUMMARY,
   'vt-steps-summary': VT_SUMMARY,
+  // Steps Summaries — Cardiology / Critical Care
+  'rosc-steps-summary': POST_ROSC_SUMMARY,
+  'aortic-summary': AORTIC_ANEURYSM_SUMMARY,
+  'cvst-summary': CVST_SUMMARY,
+  'peds-trauma-summary': PEDS_TRAUMA_SUMMARY,
+  'ecmo-steps-summary': ECMO_SUMMARY,
+  // Steps Summaries — Toxicology
+  'ss-summary': SEROTONIN_SYNDROME_SUMMARY,
+  'iron-summary': IRON_OD_SUMMARY,
+  'bb-steps-summary': BETA_BLOCKER_OD_SUMMARY,
+  'ccb-steps-summary': CCB_OD_SUMMARY,
+  'dig-steps-summary': DIGOXIN_TOXICITY_SUMMARY,
+  'ile-summary': INTRALIPID_SUMMARY,
+  // Steps Summaries — Other
+  'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */
