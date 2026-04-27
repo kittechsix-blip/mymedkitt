@@ -17,7 +17,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Massive Hemoptysis',
-    body: '**Life-threatening hemoptysis** = any volume causing:\n• Airway obstruction\n• Respiratory failure\n• Hemodynamic instability\n\n**Volume thresholds (no consensus):**\n• Classic: ≥600 mL/24h\n• Alternative: ≥200 mL/single episode OR ≥100 mL/hr\n• Best mortality predictor: ≥300 mL expectorated [1]\n\n**Key insight:** Adult tracheobronchial space is only 150-200 mL — even "small" volumes can cause asphyxiation. **Death is from hypoxemia (drowning), not exsanguination.**\n\n[ABCDE Cognitive Aid](#/info/hemo-abcde)',
+    body: '**Life-threatening hemoptysis** = any volume causing:\n• Airway obstruction\n• Respiratory failure\n• Hemodynamic instability\n\n**Volume thresholds (no consensus):**\n• Classic: ≥600 mL/24h\n• Alternative: ≥200 mL/single episode OR ≥100 mL/hr\n• Best mortality predictor: ≥300 mL expectorated [1]\n\n**Key insight:** Adult tracheobronchial space is only 150-200 mL — even "small" volumes can cause asphyxiation. **Death is from hypoxemia (drowning), not exsanguination.**\n\n**ABCDE Cognitive Aid**',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'txa-hemoptysis', label: 'TXA Dosing Calculator' },
@@ -72,7 +72,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Stable Patient Workup',
-    body: '**CT Chest with IV Contrast** (bronchial artery protocol preferred)\n• CT before bronchoscopy has superior yield (~75% vs ~50%) [2]\n• Identifies source, etiology, bronchial artery anatomy for IR\n\n**While awaiting CT:**\n• Continuous SpO₂ monitoring\n• Have airway equipment ready\n• Position patient if side known\n• Start [TXA](#/drug/txa/hemoptysis) empirically\n\n**Low threshold to escalate** — edema/clot can compromise airway rapidly [1][2]',
+    body: '**CT Chest with IV Contrast** (bronchial artery protocol preferred)\n• CT before bronchoscopy has superior yield (~75% vs ~50%) [2]\n• Identifies source, etiology, bronchial artery anatomy for IR\n\n**While awaiting CT:**\n• Continuous SpO₂ monitoring\n• Have airway equipment ready\n• Position patient if side known\n• Start **TXA** empirically\n\n**Low threshold to escalate** — edema/clot can compromise airway rapidly [1][2]',
     citation: [1, 2],
     next: 'hemo-medical-start',
 
@@ -163,7 +163,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Medical Management — "Cause a Clot"',
-    body: '**Hemostatic therapies:**\n1. [Tranexamic Acid (TXA)](#/drug/txa/hemoptysis) — first-line\n2. Cold saline lavage\n3. Topical vasoconstrictors (bronchoscopic)\n4. Coagulopathy reversal\n\n**Pneumonic: The 5 C\'s** [2]\n• **C**ompression (wedge, balloon)\n• **C**old (ice saline lavage)\n• **C**oagulants (TXA, thrombin)\n• **C**austeries (APC, electrocautery)\n• **C**onstriction (vasoconstrictors)',
+    body: '**Hemostatic therapies:**\n1. **Tranexamic Acid (TXA)** — first-line\n2. Cold saline lavage\n3. Topical vasoconstrictors (bronchoscopic)\n4. Coagulopathy reversal\n\n**Pneumonic: The 5 C\'s** [2]\n• **C**ompression (wedge, balloon)\n• **C**old (ice saline lavage)\n• **C**oagulants (TXA, thrombin)\n• **C**austeries (APC, electrocautery)\n• **C**onstriction (vasoconstrictors)',
     citation: [1, 2],
     next: 'hemo-txa',
 
@@ -242,7 +242,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Warfarin Reversal',
-    body: '| Agent | Dose | Onset |\n|-------|------|-------|\n| [Vitamin K](#/drug/vitamin-k/hemoptysis) | 10 mg IV over 30 min | 6-12 hours |\n| [4-Factor PCC](#/drug/kcentra/hemoptysis) | 25-50 units/kg | Minutes |\n| FFP (if PCC unavailable) | 15 mL/kg | After thaw |\n\n**CRITICAL:** Give Vitamin K WITH PCC/FFP. PCC/FFP effect lasts ~8 hours; Vitamin K takes 6-12 hours to work [1]',
+    body: '| Agent | Dose | Onset |\n|-------|------|-------|\n| [Vitamin K](#/drug/vitamin-k/hemoptysis) | 10 mg IV over 30 min | 6-12 hours |\n| **4-Factor PCC** | 25-50 units/kg | Minutes |\n| FFP (if PCC unavailable) | 15 mL/kg | After thaw |\n\n**CRITICAL:** Give Vitamin K WITH PCC/FFP. PCC/FFP effect lasts ~8 hours; Vitamin K takes 6-12 hours to work [1]',
     recommendation: 'Reverse warfarin with 4F-PCC + Vitamin K. PCC provides immediate reversal; Vitamin K sustains it.',
     confidence: 'recommended',
     citation: [1],
@@ -272,7 +272,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'DOAC Reversal',
-    body: '**Direct thrombin inhibitor (Dabigatran):**\n• [Idarucizumab](#/drug/idarucizumab/hemoptysis) (Praxbind) 5g IV\n\n**Factor Xa inhibitors (rivaroxaban, apixaban, edoxaban):**\n• [Andexanet alfa](#/drug/andexanet/hemoptysis) (if available)\n• OR [4-Factor PCC](#/drug/kcentra/hemoptysis) 50 units/kg [1]',
+    body: '**Direct thrombin inhibitor (Dabigatran):**\n• [Idarucizumab](#/drug/idarucizumab/hemoptysis) (Praxbind) 5g IV\n\n**Factor Xa inhibitors (rivaroxaban, apixaban, edoxaban):**\n• **Andexanet alfa** (if available)\n• OR **4-Factor PCC** 50 units/kg [1]',
     recommendation: 'Reverse dabigatran with idarucizumab. For Xa inhibitors, use andexanet alfa or 4F-PCC.',
     confidence: 'recommended',
     citation: [1],
@@ -403,7 +403,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Additional Therapies',
-    body: '**Vasopressin analogues (case reports only):**\n• [Terlipressin](#/drug/terlipressin/hemoptysis) (Glypressin) — IV or endobronchial\n• Endobronchial has similar efficacy with 251x lower plasma concentration\n• [Desmopressin](#/drug/desmopressin/hemoptysis) — used in CF, leptospirosis\n\n**Bronchoscopic hemostatic agents:**\n• Oxidized regenerated cellulose (Surgicel)\n• Thrombin/fibrin glue\n• Argon plasma coagulation (APC)\n• Electrocautery, laser [2]',
+    body: '**Vasopressin analogues (case reports only):**\n• **Terlipressin** (Glypressin) — IV or endobronchial\n• Endobronchial has similar efficacy with 251x lower plasma concentration\n• [Desmopressin](#/drug/desmopressin/hemoptysis) — used in CF, leptospirosis\n\n**Bronchoscopic hemostatic agents:**\n• Oxidized regenerated cellulose (Surgicel)\n• Thrombin/fibrin glue\n• Argon plasma coagulation (APC)\n• Electrocautery, laser [2]',
     citation: [2],
     next: 'hemo-icu-admit',
 

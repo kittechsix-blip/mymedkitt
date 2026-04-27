@@ -63,7 +63,7 @@ export const DELAYED_SEQUENCE_INTUBATION_NODES: DecisionNode[] = [
     module: 1,
     title: 'Standard RSI Appropriate',
     body: 'Patient is tolerating standard preoxygenation — proceed with RSI.',
-    recommendation: '**Standard RSI Indicated**\n\nPatient can tolerate preoxygenation — DSI not required.\n\n**Proceed with RSI:**\n- Preoxygenate with NC 15 L/min + NRB or BVM with PEEP\n- Target SpO2 >95% for 3 minutes\n- Then induction + paralysis + intubation\n\n**Consider the [Physiologically Difficult Airway](#/tree/physiologically-difficult-airway) consult** if:\n- Hypotensive\n- Hypoxemic\n- Severely acidotic\n- RV failure\n- Elevated ICP',
+    recommendation: '**Standard RSI Indicated**\n\nPatient can tolerate preoxygenation — DSI not required.\n\n**Proceed with RSI:**\n- Preoxygenate with NC 15 L/min + NRB or BVM with PEEP\n- Target SpO2 >95% for 3 minutes\n- Then induction + paralysis + intubation\n\n**Consider the **Physiologically Difficult Airway** consult** if:\n- Hypotensive\n- Hypoxemic\n- Severely acidotic\n- RV failure\n- Elevated ICP',
 
     summary: 'Patient tolerates preoxygenation — use standard RSI, not DSI',
   },
@@ -269,7 +269,7 @@ export const DELAYED_SEQUENCE_INTUBATION_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Reassess Need for Intubation',
-    body: '[DSI Reassessment](#/info/dsi-reassess)\n\n**CRITICAL TEACHING POINT:** [1]\n\n**15-20% of DSI patients avoid intubation entirely** once sedation improves oxygenation.\n\n**Before giving paralytic, ask:**\n\n- Has respiratory status improved dramatically?\n- Is work of breathing now minimal?\n- Has underlying condition (asthma/COPD exacerbation) improved?\n- Can patient maintain this on NIV alone?\n\n**If intubation may no longer be needed:**\n- Allow ketamine to wear off (20-30 minutes)\n- Reassess mental status and work of breathing\n- May avoid intubation entirely\n\n**This is especially true for:**\n- Asthma/COPD with anxiety-driven bronchospasm\n- Agitation from hypoxia that resolved with oxygenation\n\nDoes patient still need intubation?',
+    body: '**DSI Reassessment**\n\n**CRITICAL TEACHING POINT:** [1]\n\n**15-20% of DSI patients avoid intubation entirely** once sedation improves oxygenation.\n\n**Before giving paralytic, ask:**\n\n- Has respiratory status improved dramatically?\n- Is work of breathing now minimal?\n- Has underlying condition (asthma/COPD exacerbation) improved?\n- Can patient maintain this on NIV alone?\n\n**If intubation may no longer be needed:**\n- Allow ketamine to wear off (20-30 minutes)\n- Reassess mental status and work of breathing\n- May avoid intubation entirely\n\n**This is especially true for:**\n- Asthma/COPD with anxiety-driven bronchospasm\n- Agitation from hypoxia that resolved with oxygenation\n\nDoes patient still need intubation?',
     citation: [1],
     options: [
       {
@@ -315,7 +315,7 @@ export const DELAYED_SEQUENCE_INTUBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Proceed to Intubation',
-    body: '[Post-DSI Intubation](#/info/dsi-intubation)\n\n**DSI Phase Complete — Proceed to Paralysis and Intubation:**\n\n**Step 1: Final checks**\n- SpO2 optimized (>95% ideally)\n- Equipment ready\n- Backup airway plan confirmed\n- Suction at hand\n\n**Step 2: Maintain apneic oxygenation**\n- **Keep nasal cannula at 15 L/min** during paralysis and laryngoscopy\n- Only remove at moment of intubation\n\n**Step 3: Administer paralytic**\n\n| Drug | Dose | Onset |\n|------|------|-------|\n| Rocuronium | 1.2 mg/kg IV | 45-60 sec |\n| Succinylcholine | 1.5 mg/kg IV | 30-45 sec |\n\n**Step 4: Wait for paralysis** (45-60 seconds)\n\n**Step 5: Laryngoscopy and intubation**\n- Use video laryngoscopy\n- First-pass success is goal\n\n**Step 6: Confirm placement**\n- Waveform capnography (ETCO2 35-45 mmHg)\n- Bilateral breath sounds\n- Chest rise',
+    body: '**Post-DSI Intubation**\n\n**DSI Phase Complete — Proceed to Paralysis and Intubation:**\n\n**Step 1: Final checks**\n- SpO2 optimized (>95% ideally)\n- Equipment ready\n- Backup airway plan confirmed\n- Suction at hand\n\n**Step 2: Maintain apneic oxygenation**\n- **Keep nasal cannula at 15 L/min** during paralysis and laryngoscopy\n- Only remove at moment of intubation\n\n**Step 3: Administer paralytic**\n\n| Drug | Dose | Onset |\n|------|------|-------|\n| Rocuronium | 1.2 mg/kg IV | 45-60 sec |\n| Succinylcholine | 1.5 mg/kg IV | 30-45 sec |\n\n**Step 4: Wait for paralysis** (45-60 seconds)\n\n**Step 5: Laryngoscopy and intubation**\n- Use video laryngoscopy\n- First-pass success is goal\n\n**Step 6: Confirm placement**\n- Waveform capnography (ETCO2 35-45 mmHg)\n- Bilateral breath sounds\n- Chest rise',
     citation: [1, 6],
     next: 'dsi-post-intubation',
 

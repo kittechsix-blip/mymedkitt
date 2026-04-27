@@ -86,7 +86,7 @@ export const PEP_NODES = [
         module: 1,
         title: 'PEP Not Indicated',
         body: 'Exposure occurred >72 hours ago. PEP is not recommended beyond this window due to lack of efficacy data.',
-        recommendation: 'PEP is not recommended. Provide risk reduction counseling. Discuss [PrEP](#/info/prep-info) for ongoing risk.\n\nBASELINE LABS STILL RECOMMENDED\n\u2022 HIV Ag/Ab combo (4th gen) — repeat at 4\u20136 weeks and 3 months\n\u2022 Hepatitis B [surface Ag](#/info/hbv-serology), [surface Ab](#/info/hbv-serology), [core Ab](#/info/hbv-serology)\n\u2022 Hepatitis C Ab',
+        recommendation: 'PEP is not recommended. Provide risk reduction counseling. Discuss **PrEP** for ongoing risk.\n\nBASELINE LABS STILL RECOMMENDED\n\u2022 HIV Ag/Ab combo (4th gen) — repeat at 4\u20136 weeks and 3 months\n\u2022 Hepatitis B [surface Ag](#/info/hbv-serology), [surface Ab](#/info/hbv-serology), [core Ab](#/info/hbv-serology)\n\u2022 Hepatitis C Ab',
         confidence: 'definitive',
         citation: [1, 2, 5],
     },

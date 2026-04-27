@@ -22,7 +22,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Urinary Sphincter Emergencies',
-    body: '**Urinary sphincter dysfunction** presents as either retention or incontinence. Both can signal life-threatening neurologic emergencies.\n\n**Key Principle:** Bladder dysfunction + back pain + leg symptoms = cauda equina until proven otherwise.\n\n**Normal voiding requires:**\n- Intact detrusor muscle contraction (parasympathetic S2-S4)\n- Coordinated sphincter relaxation (somatic S2-S4)\n- Patent urethra\n- Intact cortical inhibition\n\n**Two main presentations:**\n- **Retention:** Cannot empty bladder (obstructive or neurogenic)\n- **Incontinence:** Cannot control voiding (overflow, urge, or neurogenic)\n\n[IPSS Calculator](#/calc/ipss) - quantify symptom severity in stable patients.',
+    body: '**Urinary sphincter dysfunction** presents as either retention or incontinence. Both can signal life-threatening neurologic emergencies.\n\n**Key Principle:** Bladder dysfunction + back pain + leg symptoms = cauda equina until proven otherwise.\n\n**Normal voiding requires:**\n- Intact detrusor muscle contraction (parasympathetic S2-S4)\n- Coordinated sphincter relaxation (somatic S2-S4)\n- Patent urethra\n- Intact cortical inhibition\n\n**Two main presentations:**\n- **Retention:** Cannot empty bladder (obstructive or neurogenic)\n- **Incontinence:** Cannot control voiding (overflow, urge, or neurogenic)\n\n[IPSS Calculator](#/calculator/ipss) - quantify symptom severity in stable patients.',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'ipss', label: 'IPSS (Prostate Symptom Score)' },
@@ -66,7 +66,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Incontinence Classification',
-    body: '**Types of urinary incontinence:**\n\n**Overflow incontinence:**\n- Bladder overdistention with passive leakage\n- Often neurogenic or obstructive\n- Palpable bladder, high PVR\n\n**Urge incontinence:**\n- Sudden, intense urge followed by involuntary loss\n- Detrusor overactivity\n- Often idiopathic, UTI, or neurologic\n\n**Stress incontinence:**\n- Leakage with cough, sneeze, exertion\n- Pelvic floor weakness\n- NOT typically an ED emergency\n\n**Neurogenic incontinence:**\n- Associated neurologic symptoms\n- Bladder + bowel dysfunction\n- Back pain, leg weakness, sensory changes\n\n[PVR Interpretation](#/info/pvr-interpretation)',
+    body: '**Types of urinary incontinence:**\n\n**Overflow incontinence:**\n- Bladder overdistention with passive leakage\n- Often neurogenic or obstructive\n- Palpable bladder, high PVR\n\n**Urge incontinence:**\n- Sudden, intense urge followed by involuntary loss\n- Detrusor overactivity\n- Often idiopathic, UTI, or neurologic\n\n**Stress incontinence:**\n- Leakage with cough, sneeze, exertion\n- Pelvic floor weakness\n- NOT typically an ED emergency\n\n**Neurogenic incontinence:**\n- Associated neurologic symptoms\n- Bladder + bowel dysfunction\n- Back pain, leg weakness, sensory changes\n\n**PVR Interpretation**',
     citation: [1, 3],
     calculatorLinks: [
       { id: 'pvr-interpretation', label: 'Post-Void Residual Guide' },
@@ -102,7 +102,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Neurologic Red Flags',
-    body: '**Screen for emergent neurogenic causes FIRST:**\n\n**Cauda equina syndrome (CES):**\n- Saddle anesthesia (perineum, inner thighs)\n- Bilateral leg weakness or numbness\n- New bowel incontinence or constipation\n- Back pain (often severe, recent onset)\n- Bilateral sciatica\n\n**Spinal cord compression:**\n- Sensory level on exam\n- Upper motor neuron signs below lesion\n- History of malignancy\n\n**Conus medullaris syndrome:**\n- More symmetric, sudden onset\n- Mixed UMN/LMN signs\n- Early bowel/bladder dysfunction\n\n[Cauda Equina Red Flags](#/info/cauda-equina-red-flags)',
+    body: '**Screen for emergent neurogenic causes FIRST:**\n\n**Cauda equina syndrome (CES):**\n- Saddle anesthesia (perineum, inner thighs)\n- Bilateral leg weakness or numbness\n- New bowel incontinence or constipation\n- Back pain (often severe, recent onset)\n- Bilateral sciatica\n\n**Spinal cord compression:**\n- Sensory level on exam\n- Upper motor neuron signs below lesion\n- History of malignancy\n\n**Conus medullaris syndrome:**\n- More symmetric, sudden onset\n- Mixed UMN/LMN signs\n- Early bowel/bladder dysfunction\n\n**Cauda Equina Red Flags**',
     citation: [2, 3, 4],
     calculatorLinks: [
       { id: 'cauda-equina-red-flags', label: 'Cauda Equina Checklist' },
@@ -130,7 +130,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Non-Neurogenic Etiologies',
-    body: '**Common causes of acute urinary retention:**\n\n**Obstructive (most common in men):**\n- BPH - gradual LUTS, nocturia, weak stream\n- Urethral stricture - history of STI, trauma, instrumentation\n- Prostate cancer - hard nodular prostate on DRE\n- Bladder neck obstruction\n\n**Medication-induced:**\n- Anticholinergics (antihistamines, TCAs, antipsychotics)\n- Opioids (common post-operative)\n- Alpha-agonists (decongestants)\n- Benzodiazepines\n- Anesthesia (post-procedural)\n\n**Infectious:**\n- Acute prostatitis - fever, tender prostate\n- Severe UTI\n- Genital herpes (sacral radiculitis)\n\n**Post-operative:**\n- Especially after pelvic/spinal surgery\n- Often multifactorial (anesthesia + opioids + positioning)\n\n[Medication Reference](#/info/retention-meds)',
+    body: '**Common causes of acute urinary retention:**\n\n**Obstructive (most common in men):**\n- BPH - gradual LUTS, nocturia, weak stream\n- Urethral stricture - history of STI, trauma, instrumentation\n- Prostate cancer - hard nodular prostate on DRE\n- Bladder neck obstruction\n\n**Medication-induced:**\n- Anticholinergics (antihistamines, TCAs, antipsychotics)\n- Opioids (common post-operative)\n- Alpha-agonists (decongestants)\n- Benzodiazepines\n- Anesthesia (post-procedural)\n\n**Infectious:**\n- Acute prostatitis - fever, tender prostate\n- Severe UTI\n- Genital herpes (sacral radiculitis)\n\n**Post-operative:**\n- Especially after pelvic/spinal surgery\n- Often multifactorial (anesthesia + opioids + positioning)\n\n**Medication Reference**',
     citation: [1, 5],
     calculatorLinks: [
       { id: 'retention-meds', label: 'Medication-Induced Retention' },
@@ -214,7 +214,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'ED Evaluation',
-    body: '**History:**\n- Duration and onset of symptoms\n- Associated pain, fever, neurologic symptoms\n- Medication list (anticholinergics, opioids, alpha-agonists)\n- Surgical history (especially pelvic, spinal)\n- Prior episodes of retention\n- Baseline urinary function (LUTS, nocturia)\n\n**Physical exam:**\n- Abdomen: palpable bladder, suprapubic tenderness\n- GU: urethral meatus (blood, discharge), phimosis\n- Rectal: prostate size, tenderness, nodularity, tone\n- Neurologic: perineal sensation, anal wink, leg strength/sensation\n\n**Bedside testing:**\n- Bladder ultrasound (PVR) - most important\n- Urinalysis\n\n**Labs if indicated:**\n- BMP (if high-volume retention or AKI concern)\n- PSA (not emergent, discuss with urology)\n- CBC, blood cultures if septic\n\n[PVR Interpretation](#/info/pvr-interpretation)',
+    body: '**History:**\n- Duration and onset of symptoms\n- Associated pain, fever, neurologic symptoms\n- Medication list (anticholinergics, opioids, alpha-agonists)\n- Surgical history (especially pelvic, spinal)\n- Prior episodes of retention\n- Baseline urinary function (LUTS, nocturia)\n\n**Physical exam:**\n- Abdomen: palpable bladder, suprapubic tenderness\n- GU: urethral meatus (blood, discharge), phimosis\n- Rectal: prostate size, tenderness, nodularity, tone\n- Neurologic: perineal sensation, anal wink, leg strength/sensation\n\n**Bedside testing:**\n- Bladder ultrasound (PVR) - most important\n- Urinalysis\n\n**Labs if indicated:**\n- BMP (if high-volume retention or AKI concern)\n- PSA (not emergent, discuss with urology)\n- CBC, blood cultures if septic\n\n**PVR Interpretation**',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'pvr-interpretation', label: 'PVR Interpretation' },
@@ -241,7 +241,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Post-Void Residual',
-    body: '**Post-void residual (PVR) measurement:**\n\nPerform bedside bladder ultrasound.\n\n**Interpretation:**\n- **<50 mL:** Normal\n- **50-100 mL:** Equivocal, repeat if symptomatic\n- **100-200 mL:** Elevated, suggests incomplete emptying\n- **200-300 mL:** Significant retention, needs intervention\n- **>300 mL:** Definite retention, catheterize\n- **>1000 mL:** High volume, monitor for post-obstructive diuresis\n\n**If unable to void at all:**\nPVR = total bladder volume\n\n**Note:** In overflow incontinence, patient may void small amounts frequently but PVR remains elevated (>200 mL).\n\n[PVR Interpretation Guide](#/info/pvr-interpretation)',
+    body: '**Post-void residual (PVR) measurement:**\n\nPerform bedside bladder ultrasound.\n\n**Interpretation:**\n- **<50 mL:** Normal\n- **50-100 mL:** Equivocal, repeat if symptomatic\n- **100-200 mL:** Elevated, suggests incomplete emptying\n- **200-300 mL:** Significant retention, needs intervention\n- **>300 mL:** Definite retention, catheterize\n- **>1000 mL:** High volume, monitor for post-obstructive diuresis\n\n**If unable to void at all:**\nPVR = total bladder volume\n\n**Note:** In overflow incontinence, patient may void small amounts frequently but PVR remains elevated (>200 mL).\n\n**PVR Interpretation Guide**',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'pvr-interpretation', label: 'PVR Guide' },
@@ -305,7 +305,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Catheterization Technique',
-    body: '**Standard Foley catheter insertion:**\n\n**Sizing:**\n- Standard adult: 16-18 Fr\n- Hematuria with clots: 20-22 Fr\n- Suspected stricture: 14 Fr\n\n**Coude tip catheter:**\nCurved tip (15-30 degrees) navigates elevated bladder neck.\nRecommended first-line in older men with suspected BPH.\nEnsure curve points UP (toward ceiling).\n\n**Technique:**\n1. Sterile prep and drape\n2. Liberal lubrication (lidocaine jelly 2%, 10-20 mL, wait 5 min)\n3. In uncircumcised men: retract foreskin, REPLACE after insertion\n4. Insert to hub before inflating balloon\n5. Inflate balloon with 10 mL sterile water\n6. Gently withdraw until resistance\n\n[Catheter Sizing Guide](#/info/catheter-sizing)',
+    body: '**Standard Foley catheter insertion:**\n\n**Sizing:**\n- Standard adult: 16-18 Fr\n- Hematuria with clots: 20-22 Fr\n- Suspected stricture: 14 Fr\n\n**Coude tip catheter:**\nCurved tip (15-30 degrees) navigates elevated bladder neck.\nRecommended first-line in older men with suspected BPH.\nEnsure curve points UP (toward ceiling).\n\n**Technique:**\n1. Sterile prep and drape\n2. Liberal lubrication (lidocaine jelly 2%, 10-20 mL, wait 5 min)\n3. In uncircumcised men: retract foreskin, REPLACE after insertion\n4. Insert to hub before inflating balloon\n5. Inflate balloon with 10 mL sterile water\n6. Gently withdraw until resistance\n\n**Catheter Sizing Guide**',
     citation: [1, 8],
     calculatorLinks: [
       { id: 'catheter-sizing', label: 'Catheter Sizing Guide' },
@@ -375,7 +375,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: '5-Alpha Reductase Inhibitors',
-    body: '**5-Alpha reductase inhibitors (5-ARIs):**\n\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n[Dutasteride](#/drug/dutasteride/bph) 0.5 mg daily\n\n**NOT helpful acutely** - effect takes 3-6 months.\n\n**Mechanism:** Blocks conversion of testosterone to DHT, causing prostate shrinkage (20-30% reduction over 6-12 months).\n\n**When to consider:**\n- Large prostate (>40 mL)\n- Recurrent retention episodes\n- PSA >1.5 ng/mL\n\n**Typically started by urology**, not in ED.\n\n**Side effects:**\n- Sexual dysfunction (decreased libido, ED)\n- Decreased ejaculate volume\n- Gynecomastia (rare)\n- Lowers PSA by ~50% (inform urologist)\n\n[Bethanechol](#/drug/bethanechol/urinary retention) - cholinergic agent for atonic bladder, rarely used acutely.',
+    body: '**5-Alpha reductase inhibitors (5-ARIs):**\n\n[Finasteride](#/drug/finasteride/bph) 5 mg daily\n**Dutasteride** 0.5 mg daily\n\n**NOT helpful acutely** - effect takes 3-6 months.\n\n**Mechanism:** Blocks conversion of testosterone to DHT, causing prostate shrinkage (20-30% reduction over 6-12 months).\n\n**When to consider:**\n- Large prostate (>40 mL)\n- Recurrent retention episodes\n- PSA >1.5 ng/mL\n\n**Typically started by urology**, not in ED.\n\n**Side effects:**\n- Sexual dysfunction (decreased libido, ED)\n- Decreased ejaculate volume\n- Gynecomastia (rare)\n- Lowers PSA by ~50% (inform urologist)\n\n**Bethanechol** - cholinergic agent for atonic bladder, rarely used acutely.',
     citation: [1, 10],
     next: 'sphincter-dispo-decision',
 
@@ -415,7 +415,7 @@ export const URINARY_SPHINCTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Cauda Equina Syndrome',
-    body: '**SURGICAL EMERGENCY - Time to decompression matters**\n\n**Classic triad (often incomplete):**\n1. Saddle anesthesia\n2. Bladder dysfunction (retention > incontinence)\n3. Bilateral leg weakness/sciatica\n\n**Additional features:**\n- Severe low back pain\n- Decreased anal tone\n- Fecal incontinence\n- Sexual dysfunction\n\n**Immediate actions:**\n1. Foley catheter for bladder decompression\n2. **EMERGENT MRI lumbar spine** (gold standard)\n3. Neurosurgery consult STAT\n4. If malignancy/abscess suspected: Dexamethasone 10 mg IV\n5. NPO for likely OR\n\n**Timing matters:**\n- Decompression within 48 hours: better outcomes\n- Decompression <24 hours: best chance of recovery\n- Bladder function recovery worst of all deficits\n\n[Cauda Equina Red Flags](#/info/cauda-equina-red-flags)',
+    body: '**SURGICAL EMERGENCY - Time to decompression matters**\n\n**Classic triad (often incomplete):**\n1. Saddle anesthesia\n2. Bladder dysfunction (retention > incontinence)\n3. Bilateral leg weakness/sciatica\n\n**Additional features:**\n- Severe low back pain\n- Decreased anal tone\n- Fecal incontinence\n- Sexual dysfunction\n\n**Immediate actions:**\n1. Foley catheter for bladder decompression\n2. **EMERGENT MRI lumbar spine** (gold standard)\n3. Neurosurgery consult STAT\n4. If malignancy/abscess suspected: Dexamethasone 10 mg IV\n5. NPO for likely OR\n\n**Timing matters:**\n- Decompression within 48 hours: better outcomes\n- Decompression <24 hours: best chance of recovery\n- Bladder function recovery worst of all deficits\n\n**Cauda Equina Red Flags**',
     citation: [2, 4],
     calculatorLinks: [
       { id: 'cauda-equina-red-flags', label: 'CES Red Flag Checklist' },

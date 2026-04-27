@@ -25,7 +25,7 @@ export const POST_ROSC_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'ROSC Confirmed — Immediate Priorities',
-    body: '[Post-ROSC Steps Summary](#/info/rosc-steps-summary)\n\nROSC confirmed. Immediate priorities:\n\n**Airway & Ventilation:**\n• Secure airway if not already — intubate if GCS ≤8\n• Waveform capnography to confirm ETT placement\n• Target ETCO₂ 35-45 mmHg — guides ventilation\n\n**Immediate Workup:**\n• **12-lead ECG** — STEMI identification is the #1 priority\n• Avoid hypoxia (SpO₂ <94%) and hypotension (SBP <90)\n• Arterial line for continuous BP monitoring\n• Labs: ABG, lactate, troponin, BMP, CBC, coags\n• Portable CXR (ETT position, pulmonary edema)',
+    body: '**Post-ROSC Steps Summary**\n\nROSC confirmed. Immediate priorities:\n\n**Airway & Ventilation:**\n• Secure airway if not already — intubate if GCS ≤8\n• Waveform capnography to confirm ETT placement\n• Target ETCO₂ 35-45 mmHg — guides ventilation\n\n**Immediate Workup:**\n• **12-lead ECG** — STEMI identification is the #1 priority\n• Avoid hypoxia (SpO₂ <94%) and hypotension (SBP <90)\n• Arterial line for continuous BP monitoring\n• Labs: ABG, lactate, troponin, BMP, CBC, coags\n• Portable CXR (ETT position, pulmonary edema)',
     citation: [1, 2, 5],
     next: 'rosc-stemi',
     summary: 'Secure airway, 12-lead ECG immediately, target ETCO2 35-45, arterial line, labs/CXR',

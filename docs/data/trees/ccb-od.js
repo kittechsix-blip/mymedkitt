@@ -22,7 +22,7 @@ export const CCB_OD_NODES = [
         type: 'question',
         module: 1,
         title: 'CCB Overdose — Initial Assessment',
-        body: '[CCB Overdose Steps Summary](#/info/ccb-steps-summary) — quick reference.\n\nCalcium channel blockers are among the most lethal cardiovascular drug overdoses. Understanding the **drug class** is critical for predicting toxicity pattern [1][3].\n\n**Two major classes:**\n\n**Dihydropyridines** (amlodipine, nifedipine, felodipine):\n• Primarily peripheral vasodilation\n• Reflex tachycardia common\n• LESS cardiac depression\n• Predominantly vasodilatory shock\n\n**Non-dihydropyridines** (verapamil, diltiazem):\n• Cardiac conduction slowing\n• Negative inotropy and chronotropy\n• Bradycardia common\n• Predominantly cardiogenic shock\n\n**Classic triad:** Hypotension + bradycardia + hyperglycemia (blocks pancreatic insulin release) [1][3].\n\n**Mental status** often preserved until late — unlike beta-blocker toxicity [2].\n\nWhich CCB class was ingested?',
+        body: '**CCB Overdose Steps Summary** — quick reference.\n\nCalcium channel blockers are among the most lethal cardiovascular drug overdoses. Understanding the **drug class** is critical for predicting toxicity pattern [1][3].\n\n**Two major classes:**\n\n**Dihydropyridines** (amlodipine, nifedipine, felodipine):\n• Primarily peripheral vasodilation\n• Reflex tachycardia common\n• LESS cardiac depression\n• Predominantly vasodilatory shock\n\n**Non-dihydropyridines** (verapamil, diltiazem):\n• Cardiac conduction slowing\n• Negative inotropy and chronotropy\n• Bradycardia common\n• Predominantly cardiogenic shock\n\n**Classic triad:** Hypotension + bradycardia + hyperglycemia (blocks pancreatic insulin release) [1][3].\n\n**Mental status** often preserved until late — unlike beta-blocker toxicity [2].\n\nWhich CCB class was ingested?',
         images: [
             { src: 'images/ccb-od/ccb-od-bradycardia-ecg.jpg', alt: 'ECG showing sinus bradycardia at 43 bpm', caption: 'Severe sinus bradycardia (43 bpm) — classic CCB overdose presentation. Non-dihydropyridines (verapamil, diltiazem) cause conduction slowing and negative chronotropy. CC BY-SA 4.0 Wikimedia Commons.' },
         ],
@@ -83,7 +83,7 @@ export const CCB_OD_NODES = [
         type: 'question',
         module: 2,
         title: 'Shock Phenotype Assessment',
-        body: '**CRITICAL CONCEPT: Treatment depends on shock phenotype** [1][2].\n\n[CCB Shock Type Guide](#/calc/ccb-shock-type) — phenotype assessment tool.\n\n**VASODILATORY SHOCK:**\n• Warm extremities, flash cap refill\n• Normal or elevated cardiac output\n• Low systemic vascular resistance\n• More common with dihydropyridines\n• **Treatment: VASOPRESSORS (norepinephrine, vasopressin)**\n\n**CARDIOGENIC SHOCK:**\n• Cool, mottled extremities\n• Poor cardiac output, bradycardia\n• Elevated lactate, narrow pulse pressure\n• More common with verapamil/diltiazem\n• **Treatment: HIGH-DOSE INSULIN (HIET) + inotropes**\n\n**MIXED SHOCK:**\n• Features of both — COMMON\n• **Treatment: Both HIET AND vasopressors** [1][2]\n\nWhat is the predominant shock phenotype?',
+        body: '**CRITICAL CONCEPT: Treatment depends on shock phenotype** [1][2].\n\n[CCB Shock Type Guide](#/calculator/ccb-shock-type) — phenotype assessment tool.\n\n**VASODILATORY SHOCK:**\n• Warm extremities, flash cap refill\n• Normal or elevated cardiac output\n• Low systemic vascular resistance\n• More common with dihydropyridines\n• **Treatment: VASOPRESSORS (norepinephrine, vasopressin)**\n\n**CARDIOGENIC SHOCK:**\n• Cool, mottled extremities\n• Poor cardiac output, bradycardia\n• Elevated lactate, narrow pulse pressure\n• More common with verapamil/diltiazem\n• **Treatment: HIGH-DOSE INSULIN (HIET) + inotropes**\n\n**MIXED SHOCK:**\n• Features of both — COMMON\n• **Treatment: Both HIET AND vasopressors** [1][2]\n\nWhat is the predominant shock phenotype?',
         citation: [1, 2],
         calculatorLinks: [{ id: 'ccb-shock-type', label: 'Shock Type Assessment' }],
         options: [
@@ -113,7 +113,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'Calcium Therapy',
-        body: '[Calcium Dosing Guide](#/calc/ccb-calcium) — dosing calculator.\n\n**Calcium** is a first-line temporizing agent [1][3]:\n\n**Calcium chloride 10%:**\n• 1-2g (10-20 mL) IV over 5-10 min\n• 3x more elemental calcium than gluconate\n• Requires central line (causes tissue necrosis if extravasated)\n\n**Calcium gluconate 10%:**\n• 3-6g (30-60 mL) IV over 5-10 min\n• Can give peripherally\n• Preferred if no central access\n\n**Repeat dosing:**\n• May repeat q15-20 min PRN\n• Can give continuous infusion: 0.5 mEq/kg/hr (monitor for hypercalcemia)\n• Goal: overcome competitive blockade at calcium channels [1]\n\n**Monitoring:**\n• Ionized calcium q2-4h\n• Target iCa 1.5-2x normal\n• Watch for hypercalcemia (rarely limits therapy)',
+        body: '[Calcium Dosing Guide](#/calculator/ccb-calcium) — dosing calculator.\n\n**Calcium** is a first-line temporizing agent [1][3]:\n\n**Calcium chloride 10%:**\n• 1-2g (10-20 mL) IV over 5-10 min\n• 3x more elemental calcium than gluconate\n• Requires central line (causes tissue necrosis if extravasated)\n\n**Calcium gluconate 10%:**\n• 3-6g (30-60 mL) IV over 5-10 min\n• Can give peripherally\n• Preferred if no central access\n\n**Repeat dosing:**\n• May repeat q15-20 min PRN\n• Can give continuous infusion: 0.5 mEq/kg/hr (monitor for hypercalcemia)\n• Goal: overcome competitive blockade at calcium channels [1]\n\n**Monitoring:**\n• Ionized calcium q2-4h\n• Target iCa 1.5-2x normal\n• Watch for hypercalcemia (rarely limits therapy)',
         citation: [1, 3],
         calculatorLinks: [{ id: 'ccb-calcium', label: 'Calcium Dosing Guide' }],
         treatment: {
@@ -177,7 +177,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 4,
         title: 'High-Dose Insulin Therapy (HIET)',
-        body: '[HIET Protocol](#/calc/ccb-hiet) — dosing calculator.\n\n**HIET is FIRST-LINE for cardiogenic shock phenotype** [1][2][4].\n\n**Mechanism:**\n• In shock, the heart switches from fatty acid to glucose metabolism\n• CCBs block insulin release from pancreas (hyperglycemia is diagnostic)\n• Exogenous insulin restores myocardial glucose uptake\n• Improves contractility independent of calcium channels\n• Some evidence of vasodilation reversal [4]\n\n**Key point:** HIET works through a **completely different mechanism** than trying to overcome calcium channel blockade — it is NOT just pushing more calcium.',
+        body: '[HIET Protocol](#/calculator/ccb-hiet) — dosing calculator.\n\n**HIET is FIRST-LINE for cardiogenic shock phenotype** [1][2][4].\n\n**Mechanism:**\n• In shock, the heart switches from fatty acid to glucose metabolism\n• CCBs block insulin release from pancreas (hyperglycemia is diagnostic)\n• Exogenous insulin restores myocardial glucose uptake\n• Improves contractility independent of calcium channels\n• Some evidence of vasodilation reversal [4]\n\n**Key point:** HIET works through a **completely different mechanism** than trying to overcome calcium channel blockade — it is NOT just pushing more calcium.',
         citation: [1, 2, 4],
         calculatorLinks: [{ id: 'ccb-hiet', label: 'HIET Protocol' }],
         next: 'ccb-hiet-dosing',
@@ -224,7 +224,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 5,
         title: 'Vasopressor Selection',
-        body: '[High-Dose Vasopressor Guide](#/calc/ccb-pressors) — dosing reference.\n\n**For VASODILATORY shock phenotype:**\n\n**[Norepinephrine](#/drug/norepinephrine/ccb shock)** — first-line:\n• Start 0.1 mcg/kg/min\n• Titrate aggressively — up to **0.5-3 mcg/kg/min** [1][2]\n• HIGH DOSES often needed in CCB toxicity\n\n**[Vasopressin](#/drug/vasopressin/ccb shock)** — adjunct:\n• 0.04 units/min (fixed dose)\n• Bypasses the catecholamine pathway entirely\n• Add for refractory vasodilatory shock [1][2]\n\n**[Epinephrine](#/drug/epinephrine/ccb shock):**\n• Combined alpha + beta agonism\n• Consider if combined cardiogenic/vasodilatory features\n• 0.1-0.5 mcg/kg/min, titrate to effect',
+        body: '[High-Dose Vasopressor Guide](#/calculator/ccb-pressors) — dosing reference.\n\n**For VASODILATORY shock phenotype:**\n\n**[Norepinephrine](#/drug/norepinephrine/ccb shock)** — first-line:\n• Start 0.1 mcg/kg/min\n• Titrate aggressively — up to **0.5-3 mcg/kg/min** [1][2]\n• HIGH DOSES often needed in CCB toxicity\n\n**[Vasopressin](#/drug/vasopressin/ccb shock)** — adjunct:\n• 0.04 units/min (fixed dose)\n• Bypasses the catecholamine pathway entirely\n• Add for refractory vasodilatory shock [1][2]\n\n**[Epinephrine](#/drug/epinephrine/ccb shock):**\n• Combined alpha + beta agonism\n• Consider if combined cardiogenic/vasodilatory features\n• 0.1-0.5 mcg/kg/min, titrate to effect',
         citation: [1, 2],
         calculatorLinks: [{ id: 'ccb-pressors', label: 'High-Dose Vasopressor Guide' }],
         treatment: {
@@ -268,7 +268,7 @@ export const CCB_OD_NODES = [
         type: 'info',
         module: 6,
         title: 'Lipid Emulsion (Intralipid)',
-        body: '[Intralipid Dosing](#/calc/ccb-intralipid) — dosing calculator.\n\n**Consider lipid emulsion for severe, refractory toxicity** [1][5].\n\n**Best evidence:** Verapamil (highly lipophilic)\n\n**Dosing:**\n• [Intralipid 20%](#/drug/lipid-emulsion/ccb toxicity) 1.5 mL/kg IV bolus\n• May repeat bolus x2 PRN (q5 min)\n• Infusion: 0.25-0.5 mL/kg/min\n• **Maximum: 10-12 mL/kg in first hour**\n\n**Mechanism:**\n• Creates a "lipid sink" to sequester lipophilic drugs\n• May have direct cardiac effects\n• Evidence is largely from case reports and animal studies [5]',
+        body: '[Intralipid Dosing](#/calculator/ccb-intralipid) — dosing calculator.\n\n**Consider lipid emulsion for severe, refractory toxicity** [1][5].\n\n**Best evidence:** Verapamil (highly lipophilic)\n\n**Dosing:**\n• [Intralipid 20%](#/drug/lipid-emulsion/ccb toxicity) 1.5 mL/kg IV bolus\n• May repeat bolus x2 PRN (q5 min)\n• Infusion: 0.25-0.5 mL/kg/min\n• **Maximum: 10-12 mL/kg in first hour**\n\n**Mechanism:**\n• Creates a "lipid sink" to sequester lipophilic drugs\n• May have direct cardiac effects\n• Evidence is largely from case reports and animal studies [5]',
         citation: [1, 5],
         calculatorLinks: [{ id: 'ccb-intralipid', label: 'Intralipid Dosing' }],
         treatment: {

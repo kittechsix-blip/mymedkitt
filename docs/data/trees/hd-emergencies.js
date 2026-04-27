@@ -20,7 +20,7 @@ export const HD_EMERGENCIES_NODES = [
         type: 'info',
         module: 1,
         title: 'Hemodialysis Emergencies',
-        body: '[HD Emergency Summary](#/info/hd-summary) — AEIOU framework for ESRD complications.\n\n**AEIOU Mnemonic:**\n• **A**ccess complications (bleeding, clotted, infected)\n• **E**lectrolyte emergencies (hyperkalemia, hypocalcemia)\n• **I**nfection (catheter sepsis, endocarditis)\n• **O**verload (pulmonary edema, HTN emergency)\n• **U**remia (encephalopathy, pericarditis, bleeding)\n\n**Key principles:**\n• Many interventions work differently in ESRD\n• Diuretics often ineffective (no urine output)\n• Emergent dialysis is definitive treatment for many conditions\n• Call nephrology early\n• Preserve vascular access at all costs',
+        body: '**HD Emergency Summary** — AEIOU framework for ESRD complications.\n\n**AEIOU Mnemonic:**\n• **A**ccess complications (bleeding, clotted, infected)\n• **E**lectrolyte emergencies (hyperkalemia, hypocalcemia)\n• **I**nfection (catheter sepsis, endocarditis)\n• **O**verload (pulmonary edema, HTN emergency)\n• **U**remia (encephalopathy, pericarditis, bleeding)\n\n**Key principles:**\n• Many interventions work differently in ESRD\n• Diuretics often ineffective (no urine output)\n• Emergent dialysis is definitive treatment for many conditions\n• Call nephrology early\n• Preserve vascular access at all costs',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'hd-emergency-triage', label: 'HD Emergency Triage' },

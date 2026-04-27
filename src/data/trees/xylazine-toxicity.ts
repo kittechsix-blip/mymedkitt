@@ -32,7 +32,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Xylazine Toxicity — Initial Assessment',
-    body: '[Xylazine Quick Reference](#/info/xyl-quick-ref) — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n• Now detected in **>90% of fentanyl supply** in some cities [1][2]\n\n**The epidemic:**\n• 2015: <1% of overdose deaths involved xylazine\n• 2020: 7% nationally, **26% in Philadelphia**\n• 2022: CDC Health Alert Network advisory issued [1]\n\n**Critical point:** Xylazine is **NOT reversed by naloxone** — it is not an opioid. However, **still give naloxone** because 95% of xylazine exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
+    body: '**Xylazine Quick Reference** — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n• Now detected in **>90% of fentanyl supply** in some cities [1][2]\n\n**The epidemic:**\n• 2015: <1% of overdose deaths involved xylazine\n• 2020: 7% nationally, **26% in Philadelphia**\n• 2022: CDC Health Alert Network advisory issued [1]\n\n**Critical point:** Xylazine is **NOT reversed by naloxone** — it is not an opioid. However, **still give naloxone** because 95% of xylazine exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
@@ -64,7 +64,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'OA2A Toxidrome',
-    body: '**OA2A = Opioid + Alpha-2 Agonist** — the combined toxidrome of fentanyl + xylazine [1].\n\n[Tranq vs Opioid Withdrawal](#/info/xyl-withdrawal-comparison)\n\n| Finding | Pure Opioid | OA2A (Xylazine + Opioid) |\n|---------|-------------|---------------------------|\n| Miosis | ✓ | ✓ |\n| Sedation | ✓ | ✓ (prolonged) |\n| Respiratory depression | ✓ | ✓ |\n| Naloxone response | Full arousal | Respirations improve, stays sedated |\n| Bradycardia | Rare | **Common** |\n| Hypotension | Variable | **Common** |\n| Hypothermia | Rare | **Common** |\n| Hyperglycemia | No | Yes |\n\n**Clinical pearl:** If naloxone improves respirations but the patient doesn\'t wake up — suspect xylazine [1][2].',
+    body: '**OA2A = Opioid + Alpha-2 Agonist** — the combined toxidrome of fentanyl + xylazine [1].\n\n**Tranq vs Opioid Withdrawal**\n\n| Finding | Pure Opioid | OA2A (Xylazine + Opioid) |\n|---------|-------------|---------------------------|\n| Miosis | ✓ | ✓ |\n| Sedation | ✓ | ✓ (prolonged) |\n| Respiratory depression | ✓ | ✓ |\n| Naloxone response | Full arousal | Respirations improve, stays sedated |\n| Bradycardia | Rare | **Common** |\n| Hypotension | Variable | **Common** |\n| Hypothermia | Rare | **Common** |\n| Hyperglycemia | No | Yes |\n\n**Clinical pearl:** If naloxone improves respirations but the patient doesn\'t wake up — suspect xylazine [1][2].',
     citation: [1, 2],
     next: 'xyl-resp-assess',
 
@@ -80,7 +80,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Xylazine-Associated Wounds (XAW)',
-    body: '[Xylazine Wound Staging Tool](#/calc/xyl-wound-staging)\n\n**Unique features of "tranq wounds":**\n• Necrotic, non-healing ulcers\n• **NOT always at injection sites** — can appear anywhere on the body\n• Users who **smoke or snort** can develop wounds (systemic effect)\n• Mechanism: vasoconstriction + direct tissue cytotoxicity [3][4]\n\n**Philadelphia wound culture data:**\n• 56% MRSA positive\n• 37% Group A Streptococcus\n• Many polymicrobial [4]\n\n**Critical distinction:** Do NOT misdiagnose chronic XAW as necrotizing fasciitis — aggressive debridement can worsen outcomes [3].\n\nAssess wound severity using the Philadelphia Consensus staging:',
+    body: '[Xylazine Wound Staging Tool](#/calculator/xyl-wound-staging)\n\n**Unique features of "tranq wounds":**\n• Necrotic, non-healing ulcers\n• **NOT always at injection sites** — can appear anywhere on the body\n• Users who **smoke or snort** can develop wounds (systemic effect)\n• Mechanism: vasoconstriction + direct tissue cytotoxicity [3][4]\n\n**Philadelphia wound culture data:**\n• 56% MRSA positive\n• 37% Group A Streptococcus\n• Many polymicrobial [4]\n\n**Critical distinction:** Do NOT misdiagnose chronic XAW as necrotizing fasciitis — aggressive debridement can worsen outcomes [3].\n\nAssess wound severity using the Philadelphia Consensus staging:',
     images: [{ src: 'images/xylazine-toxicity/xylazine-wound.png', alt: 'Necrotic xylazine-associated wound on medial leg', caption: 'Xylazine-associated wound (XAW) — necrotic ulceration at injection site. CC BY 4.0.' }],
     citation: [3, 4],
     calculatorLinks: [
@@ -103,7 +103,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Stage 1 — Superficial XAW',
-    body: '**Philadelphia Consensus Classification [3]:**\n• Partial or full thickness skin loss\n• No exposed tendon, muscle, or bone\n• Preserved function\n\n**Key principle:** **AVOID aggressive debridement**\n• Islands of healthy tissue = healing potential\n• Autolytic debridement preferred (wet-to-dry dressings, hydrogels)\n\n**Local wound care:**\n1. Cleanse with soap and water (or NS)\n2. Sterile non-adherent gauze (Adaptic, Xeroform)\n3. Daily dressing changes\n4. Silver sulfadiazine if signs of infection [3][4]\n\n**Antibiotics if infected:**\n• Signs: erythema >1cm from wound edge, purulence, warmth, tenderness\n• [Wound Antibiotic Selection](#/info/xyl-wound-antibiotics)',
+    body: '**Philadelphia Consensus Classification [3]:**\n• Partial or full thickness skin loss\n• No exposed tendon, muscle, or bone\n• Preserved function\n\n**Key principle:** **AVOID aggressive debridement**\n• Islands of healthy tissue = healing potential\n• Autolytic debridement preferred (wet-to-dry dressings, hydrogels)\n\n**Local wound care:**\n1. Cleanse with soap and water (or NS)\n2. Sterile non-adherent gauze (Adaptic, Xeroform)\n3. Daily dressing changes\n4. Silver sulfadiazine if signs of infection [3][4]\n\n**Antibiotics if infected:**\n• Signs: erythema >1cm from wound edge, purulence, warmth, tenderness\n• **Wound Antibiotic Selection**',
     citation: [3, 4],
     next: 'xyl-wound-antibiotics',
 
@@ -129,7 +129,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Stage 3A — Severe XAW with Function',
-    body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + [Piperacillin-Tazobactam](#/drug/piptazo/xylazine)\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
+    body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + **Piperacillin-Tazobactam**\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
     citation: [3, 4],
     treatment: {
       firstLine: {
@@ -205,7 +205,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Naloxone Administration',
-    body: '**STILL GIVE NALOXONE** — 95% of xylazine ODs involve fentanyl [1][2]\n\n[Naloxone Dosing Reference](#/info/naloxone-dosing)\n\n**Critical difference from pure opioid OD:**\n> Titrate to **adequate respiratory rate**, NOT wakefulness\n\n**EMCrit warning [1]:**\n> "Avoid excessive naloxone dosing. High naloxone could provoke opioid withdrawal in a patient who remains sedated by alpha-2 agonists, leading to emesis with aspiration."\n\n**Dosing:**\n| Route | Dose | Repeat |\n|-------|------|--------|\n| IV | 0.4-2 mg | q2-3 min PRN |\n| IM | 0.4-2 mg | q2-3 min PRN |\n| IN | 4 mg (one spray each nostril) | q2-3 min PRN |\n\n**Goal:** RR >12, SpO₂ >92% — NOT full arousal',
+    body: '**STILL GIVE NALOXONE** — 95% of xylazine ODs involve fentanyl [1][2]\n\n**Naloxone Dosing Reference**\n\n**Critical difference from pure opioid OD:**\n> Titrate to **adequate respiratory rate**, NOT wakefulness\n\n**EMCrit warning [1]:**\n> "Avoid excessive naloxone dosing. High naloxone could provoke opioid withdrawal in a patient who remains sedated by alpha-2 agonists, leading to emesis with aspiration."\n\n**Dosing:**\n| Route | Dose | Repeat |\n|-------|------|--------|\n| IV | 0.4-2 mg | q2-3 min PRN |\n| IM | 0.4-2 mg | q2-3 min PRN |\n| IN | 4 mg (one spray each nostril) | q2-3 min PRN |\n\n**Goal:** RR >12, SpO₂ >92% — NOT full arousal',
     citation: [1, 2],
     treatment: {
       firstLine: {
@@ -364,7 +364,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Xylazine Withdrawal',
-    body: '**Timeline:** Symptoms begin **8-24 hours** after last use\n\n[Tranq vs Opioid Withdrawal Comparison](#/info/xyl-withdrawal-comparison)\n\n**Xylazine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
+    body: '**Timeline:** Symptoms begin **8-24 hours** after last use\n\n**Tranq vs Opioid Withdrawal Comparison**\n\n**Xylazine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
     citation: [1, 5],
     next: 'xyl-withdrawal-tx',
 
@@ -387,7 +387,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Xylazine Withdrawal Treatment',
-    body: '**No FDA-approved medications** — alpha-2 agonists are first-line empirically [1][5]\n\n**Treatment Protocol:**\n| Medication | Dose | Notes |\n|------------|------|-------|\n| [Clonidine](#/drug/clonidine/xylazine) | 0.1-0.3 mg PO q4-6h | First-line. Hold if SBP <90, HR <50 |\n| [Dexmedetomidine](#/drug/dexmedetomidine/xylazine) | 0.2-1.4 mcg/kg/hr IV | ICU only. Severe withdrawal |\n| [Tizanidine](#/drug/tizanidine/xylazine) | 2-4 mg PO q6-8h | Alternative alpha-2 agonist |\n| [Gabapentin](#/drug/gabapentin/xylazine) | 300-600 mg PO TID | Adjunct for anxiety |\n\n**Combined xylazine + opioid withdrawal:**\n• Start buprenorphine for opioid component (using standard COWS protocol)\n• Add clonidine for xylazine component\n• Both can be initiated simultaneously [1]\n\n**De-escalation:** Transition dex → clonidine when tolerating PO (24-48h)',
+    body: '**No FDA-approved medications** — alpha-2 agonists are first-line empirically [1][5]\n\n**Treatment Protocol:**\n| Medication | Dose | Notes |\n|------------|------|-------|\n| [Clonidine](#/drug/clonidine/xylazine) | 0.1-0.3 mg PO q4-6h | First-line. Hold if SBP <90, HR <50 |\n| [Dexmedetomidine](#/drug/dexmedetomidine/xylazine) | 0.2-1.4 mcg/kg/hr IV | ICU only. Severe withdrawal |\n| **Tizanidine** | 2-4 mg PO q6-8h | Alternative alpha-2 agonist |\n| **Gabapentin** | 300-600 mg PO TID | Adjunct for anxiety |\n\n**Combined xylazine + opioid withdrawal:**\n• Start buprenorphine for opioid component (using standard COWS protocol)\n• Add clonidine for xylazine component\n• Both can be initiated simultaneously [1]\n\n**De-escalation:** Transition dex → clonidine when tolerating PO (24-48h)',
     citation: [1, 5],
     treatment: {
       firstLine: {

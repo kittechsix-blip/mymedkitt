@@ -62,7 +62,7 @@ export const PE_PREGNANCY_NODES = [
         type: 'info',
         module: 2,
         title: 'Massive PE — Unstable Patient',
-        body: '**Immediate Actions:**\n\n1. **Resuscitation:**\n   • IV fluids (careful — RV preload-sensitive)\n   • Vasopressors (norepinephrine preferred)\n   • High-flow oxygen\n\n2. **Bedside POCUS:**\n   • RV dilation, D-sign, McConnell\'s sign\n   • If positive → treat empirically\n\n3. **Anticoagulation:**\n   • [UFH](#/drug/heparin/pe) bolus 80 U/kg, then 18 U/kg/hr\n   • UFH preferred over LMWH in massive PE (reversible)\n\n4. **Consider thrombolysis or embolectomy**\n   → Go to thrombolysis module [1][2][4]',
+        body: '**Immediate Actions:**\n\n1. **Resuscitation:**\n   • IV fluids (careful — RV preload-sensitive)\n   • Vasopressors (norepinephrine preferred)\n   • High-flow oxygen\n\n2. **Bedside POCUS:**\n   • RV dilation, D-sign, McConnell\'s sign\n   • If positive → treat empirically\n\n3. **Anticoagulation:**\n   • **UFH** bolus 80 U/kg, then 18 U/kg/hr\n   • UFH preferred over LMWH in massive PE (reversible)\n\n4. **Consider thrombolysis or embolectomy**\n   → Go to thrombolysis module [1][2][4]',
         images: [{ src: 'images/pe-pregnancy/saddle-pe-ct.png', alt: 'CT pulmonary angiogram showing saddle embolus straddling the main pulmonary artery bifurcation with bilateral filling defects', caption: 'Saddle PE on CT-PA — massive embolus at pulmonary artery bifurcation. CTPA preferred over V/Q in most pregnant patients (radiation exposure lower than V/Q lung scan). (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 2, 4],
         next: 'pep-thrombolysis',

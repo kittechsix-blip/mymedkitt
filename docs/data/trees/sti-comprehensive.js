@@ -11,7 +11,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 1,
         title: 'STI Comprehensive Consult',
-        body: '[CDC 2024 STI Regimens](#/calc/sti-cdc-regimens) | [Syndromic Rx Picker](#/calc/sti-syndromic-rx)\n\n**Syndrome-based approach** - treat empirically based on presentation, then narrow based on test results.\n\n**2024-2025 Key Updates:**\n- **DoxyPEP approved** (June 2024) - 200mg doxycycline within 72h post-sex for MSM/TGW with STI history\n- **Syphilis screening x3 in pregnancy** - 1st visit, 28-32w, AND delivery (ACOG 2024)\n- **Azithromycin no longer co-treatment for GC** - Ceftriaxone monotherapy is now standard\n- **Bicillin shortage** - imported alternatives available; prioritize penicillin for pregnancy\n- **Metronidazole + alcohol myth debunked** - no disulfiram-like reaction',
+        body: '[CDC 2024 STI Regimens](#/calculator/sti-cdc-regimens) | [Syndromic Rx Picker](#/calculator/sti-syndromic-rx)\n\n**Syndrome-based approach** - treat empirically based on presentation, then narrow based on test results.\n\n**2024-2025 Key Updates:**\n- **DoxyPEP approved** (June 2024) - 200mg doxycycline within 72h post-sex for MSM/TGW with STI history\n- **Syphilis screening x3 in pregnancy** - 1st visit, 28-32w, AND delivery (ACOG 2024)\n- **Azithromycin no longer co-treatment for GC** - Ceftriaxone monotherapy is now standard\n- **Bicillin shortage** - imported alternatives available; prioritize penicillin for pregnancy\n- **Metronidazole + alcohol myth debunked** - no disulfiram-like reaction',
         citation: [1, 2, 3, 4],
         calculatorLinks: [
             { id: 'sti-cdc-regimens', label: 'CDC Regimen Reference' },
@@ -57,7 +57,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 1,
         title: 'Risk Factor Assessment',
-        body: '**Higher risk factors requiring expanded testing/treatment:**\n\n**MSM (men who have sex with men):**\n- Test all 3 sites: urethral, pharyngeal, rectal\n- Higher rates of LGV proctitis, M. genitalium, mpox\n- Offer doxyPEP if bacterial STI in past 12 months\n\n**HIV-positive:**\n- Same treatment regimens as HIV-negative (with few exceptions)\n- Watch for drug interactions with ART\n- More aggressive suppressive therapy for HSV\n\n**Pregnancy:**\n- [Pregnancy Drug Safety](#/calc/sti-pregnancy-safety) - medication reference\n- Doxycycline contraindicated - use azithromycin\n- Syphilis: penicillin is ONLY effective treatment\n\n**Sexual assault:**\n- [DFSA Workup Consult](#/tree/dfsa-workup) - comprehensive protocol\n- Empiric prophylaxis for GC, CT, trichomoniasis\n- Pregnancy and HIV PEP assessment',
+        body: '**Higher risk factors requiring expanded testing/treatment:**\n\n**MSM (men who have sex with men):**\n- Test all 3 sites: urethral, pharyngeal, rectal\n- Higher rates of LGV proctitis, M. genitalium, mpox\n- Offer doxyPEP if bacterial STI in past 12 months\n\n**HIV-positive:**\n- Same treatment regimens as HIV-negative (with few exceptions)\n- Watch for drug interactions with ART\n- More aggressive suppressive therapy for HSV\n\n**Pregnancy:**\n- [Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety) - medication reference\n- Doxycycline contraindicated - use azithromycin\n- Syphilis: penicillin is ONLY effective treatment\n\n**Sexual assault:**\n- [DFSA Workup Consult](#/tree/dfsa-workup) - comprehensive protocol\n- Empiric prophylaxis for GC, CT, trichomoniasis\n- Pregnancy and HIV PEP assessment',
         citation: [1, 4, 5],
         calculatorLinks: [
             { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
@@ -92,7 +92,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 1,
         title: 'STI Testing Overview',
-        body: '**NAAT (Nucleic Acid Amplification Test):**\n- Gold standard for GC/CT detection\n- Urine, urethral, cervical, rectal, pharyngeal specimens\n- Results in 1-3 days (some point-of-care in 30 min)\n\n**Site-specific testing (MSM, based on exposure):**\n- Urethral: urine NAAT or urethral swab\n- Pharyngeal: throat swab NAAT (lower sensitivity for CT)\n- Rectal: rectal swab NAAT\n\n**Syphilis:**\n- [Syphilis Staging & Serology](#/calc/sti-syphilis-staging)\n- Screening: RPR or VDRL (nontreponemal)\n- Confirmation: TP-PA or FTA-ABS (treponemal)\n- Reverse algorithm: treponemal test first at many labs\n\n**HIV:** 4th gen Ag/Ab combo test (window period ~2-4 weeks)\n\n**Trichomoniasis:** NAAT (more sensitive than wet mount)',
+        body: '**NAAT (Nucleic Acid Amplification Test):**\n- Gold standard for GC/CT detection\n- Urine, urethral, cervical, rectal, pharyngeal specimens\n- Results in 1-3 days (some point-of-care in 30 min)\n\n**Site-specific testing (MSM, based on exposure):**\n- Urethral: urine NAAT or urethral swab\n- Pharyngeal: throat swab NAAT (lower sensitivity for CT)\n- Rectal: rectal swab NAAT\n\n**Syphilis:**\n- [Syphilis Staging & Serology](#/calculator/sti-syphilis-staging)\n- Screening: RPR or VDRL (nontreponemal)\n- Confirmation: TP-PA or FTA-ABS (treponemal)\n- Reverse algorithm: treponemal test first at many labs\n\n**HIV:** 4th gen Ag/Ab combo test (window period ~2-4 weeks)\n\n**Trichomoniasis:** NAAT (more sensitive than wet mount)',
         citation: [1, 6],
         calculatorLinks: [
             { id: 'sti-syphilis-staging', label: 'Syphilis Staging Tool' },
@@ -145,7 +145,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 2,
         title: 'Urethritis - Empiric Treatment',
-        body: '[Syndromic Rx Picker](#/calc/sti-syndromic-rx)\n\n**Empiric treatment covers GC + CT:**\n\n**First-line:**\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1** (1g if >=150kg)\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 7 days**\n\n**2021 Update:** Azithromycin no longer added routinely - ceftriaxone monotherapy for gonorrhea.\n\n**Alternative (if IM not possible):**\n- Cefixime 800mg PO x1 + Doxycycline 100mg BID x 7d\n- *Note: Cefixime less reliable for pharyngeal GC*\n\n**Chlamydia only (GC ruled out):**\n- Doxycycline 100mg PO BID x 7 days',
+        body: '[Syndromic Rx Picker](#/calculator/sti-syndromic-rx)\n\n**Empiric treatment covers GC + CT:**\n\n**First-line:**\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1** (1g if >=150kg)\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 7 days**\n\n**2021 Update:** Azithromycin no longer added routinely - ceftriaxone monotherapy for gonorrhea.\n\n**Alternative (if IM not possible):**\n- Cefixime 800mg PO x1 + Doxycycline 100mg BID x 7d\n- *Note: Cefixime less reliable for pharyngeal GC*\n\n**Chlamydia only (GC ruled out):**\n- Doxycycline 100mg PO BID x 7 days',
         recommendation: 'Treat empirically for both GC and CT. Order NAAT confirmation. Partner therapy within 60 days. Abstain until 7 days after treatment completion.',
         treatment: {
             firstLine: {
@@ -238,7 +238,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 2,
         title: 'Pregnancy Modifications',
-        body: '[Pregnancy Drug Safety](#/calc/sti-pregnancy-safety)\n\n**Safe in pregnancy:**\n- Ceftriaxone (all trimesters)\n- Azithromycin (all trimesters)\n- Metronidazole (all trimesters - CDC category B)\n- Acyclovir/Valacyclovir (safe in pregnancy)\n\n**Contraindicated in pregnancy:**\n- **Doxycycline** - use azithromycin 1g x1 instead for CT\n- **Fluoroquinolones** (moxifloxacin, ciprofloxacin)\n- **Tinidazole** - use metronidazole\n\n**Syphilis in pregnancy:**\n- Penicillin is the ONLY effective treatment\n- If PCN allergic, MUST desensitize\n- Screen at 1st visit, 28-32 weeks, AND delivery (ACOG 2024)',
+        body: '[Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety)\n\n**Safe in pregnancy:**\n- Ceftriaxone (all trimesters)\n- Azithromycin (all trimesters)\n- Metronidazole (all trimesters - CDC category B)\n- Acyclovir/Valacyclovir (safe in pregnancy)\n\n**Contraindicated in pregnancy:**\n- **Doxycycline** - use azithromycin 1g x1 instead for CT\n- **Fluoroquinolones** (moxifloxacin, ciprofloxacin)\n- **Tinidazole** - use metronidazole\n\n**Syphilis in pregnancy:**\n- Penicillin is the ONLY effective treatment\n- If PCN allergic, MUST desensitize\n- Screen at 1st visit, 28-32 weeks, AND delivery (ACOG 2024)',
         citation: [1, 3],
         calculatorLinks: [
             { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
@@ -368,7 +368,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 3,
         title: 'HSV First Episode - Treatment',
-        body: '**First episode treatment (7-10 days):**\n\n| Drug | Dose | Frequency |\n|------|------|-----------|\n| [Acyclovir](#/drug/acyclovir) | 400mg PO | TID x 7-10d |\n| [Valacyclovir](#/drug/valacyclovir) | 1g PO | BID x 7-10d |\n| Famciclovir | 250mg PO | TID x 7-10d |\n\n**Extend to 14+ days if healing incomplete.**\n\n**Severe disease (hospitalized):**\n- Acyclovir 5-10 mg/kg IV q8h until improving, then oral to complete course\n\n**Pregnancy:**\n- Acyclovir and valacyclovir safe in pregnancy\n- Suppressive therapy from 36 weeks if history of genital herpes',
+        body: '**First episode treatment (7-10 days):**\n\n| Drug | Dose | Frequency |\n|------|------|-----------|\n| [Acyclovir](#/drug/acyclovir) | 400mg PO | TID x 7-10d |\n| **Valacyclovir** | 1g PO | BID x 7-10d |\n| Famciclovir | 250mg PO | TID x 7-10d |\n\n**Extend to 14+ days if healing incomplete.**\n\n**Severe disease (hospitalized):**\n- Acyclovir 5-10 mg/kg IV q8h until improving, then oral to complete course\n\n**Pregnancy:**\n- Acyclovir and valacyclovir safe in pregnancy\n- Suppressive therapy from 36 weeks if history of genital herpes',
         recommendation: 'Start treatment ASAP - most effective within 72h of onset. Counsel on transmission, asymptomatic shedding, and disclosure. Offer suppressive therapy discussion at follow-up.',
         treatment: {
             firstLine: {
@@ -453,7 +453,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 3,
         title: 'Syphilis Staging',
-        body: '[Syphilis Staging & Serology](#/calc/sti-syphilis-staging) | [Syphilis Consult](#/tree/syphilis)\n\n**Primary:** Chancre (painless, indurated ulcer at inoculation site)\n**Secondary:** Rash (palms/soles), mucous patches, condyloma lata, systemic symptoms\n**Early Latent:** <1 year, asymptomatic, positive serology\n**Late Latent:** >1 year or unknown duration, asymptomatic\n**Tertiary:** Gummas, cardiovascular syphilis (rare now)\n**Neurosyphilis:** Can occur at ANY stage - CSF exam if neurologic symptoms\n\n**Serology interpretation:**\n- **RPR/VDRL (nontreponemal):** Screening, titers for treatment response\n- **TP-PA/FTA-ABS (treponemal):** Confirmatory, remains positive for life\n- Prozone phenomenon: false-negative RPR in secondary syphilis (dilute specimen)',
+        body: '[Syphilis Staging & Serology](#/calculator/sti-syphilis-staging) | [Syphilis Consult](#/tree/syphilis)\n\n**Primary:** Chancre (painless, indurated ulcer at inoculation site)\n**Secondary:** Rash (palms/soles), mucous patches, condyloma lata, systemic symptoms\n**Early Latent:** <1 year, asymptomatic, positive serology\n**Late Latent:** >1 year or unknown duration, asymptomatic\n**Tertiary:** Gummas, cardiovascular syphilis (rare now)\n**Neurosyphilis:** Can occur at ANY stage - CSF exam if neurologic symptoms\n\n**Serology interpretation:**\n- **RPR/VDRL (nontreponemal):** Screening, titers for treatment response\n- **TP-PA/FTA-ABS (treponemal):** Confirmatory, remains positive for life\n- Prozone phenomenon: false-negative RPR in secondary syphilis (dilute specimen)',
         citation: [1, 11],
         calculatorLinks: [
             { id: 'sti-syphilis-staging', label: 'Syphilis Staging Tool' },
@@ -721,7 +721,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 4,
         title: 'Epididymitis - MSM with Insertive Anal',
-        body: '**Cover GC/CT AND enteric bacteria:**\n\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1**\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 10 days**\n- Consider adding [Levofloxacin](#/drug/levofloxacin) **500mg PO daily x 10 days** if enteric organisms suspected\n\n**Supportive care:**\n- Scrotal elevation, NSAIDs, ice packs\n\n**Testing:**\n- Urine NAAT for GC/CT\n- Urine culture (midstream clean catch) for enteric organisms',
+        body: '**Cover GC/CT AND enteric bacteria:**\n\n- [Ceftriaxone](#/drug/ceftriaxone/sexual assault) **500mg IM x1**\n- PLUS [Doxycycline](#/drug/doxycycline/sexual assault) **100mg PO BID x 10 days**\n- Consider adding **Levofloxacin** **500mg PO daily x 10 days** if enteric organisms suspected\n\n**Supportive care:**\n- Scrotal elevation, NSAIDs, ice packs\n\n**Testing:**\n- Urine NAAT for GC/CT\n- Urine culture (midstream clean catch) for enteric organisms',
         recommendation: 'Broad coverage for both STI and enteric pathogens. NAAT + urine culture. Partner treatment.',
         treatment: {
             firstLine: {
@@ -742,7 +742,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 4,
         title: 'Epididymitis - Enteric Organisms',
-        body: '**Enteric bacteria (E. coli, Pseudomonas) - NOT STI related:**\n\n- [Levofloxacin](#/drug/levofloxacin) **500mg PO daily x 10 days**\n\n**Indications for fluoroquinolone monotherapy:**\n- Age >35\n- Recent urologic instrumentation/surgery\n- Known urologic abnormality\n- Low STI risk\n\n**Testing:**\n- Urine culture (midstream clean catch)\n- UA\n- Consider prostatic involvement if febrile',
+        body: '**Enteric bacteria (E. coli, Pseudomonas) - NOT STI related:**\n\n- **Levofloxacin** **500mg PO daily x 10 days**\n\n**Indications for fluoroquinolone monotherapy:**\n- Age >35\n- Recent urologic instrumentation/surgery\n- Known urologic abnormality\n- Low STI risk\n\n**Testing:**\n- Urine culture (midstream clean catch)\n- UA\n- Consider prostatic involvement if febrile',
         recommendation: 'Urine culture to guide therapy. If STI not ruled out, add ceftriaxone and NAAT.',
         treatment: {
             firstLine: {
@@ -844,7 +844,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 5,
         title: 'STI Screening in Pregnancy',
-        body: '[Pregnancy Drug Safety](#/calc/sti-pregnancy-safety)\n\n**Routine screening at first prenatal visit:**\n- HIV\n- Syphilis (RPR/VDRL + treponemal)\n- Hepatitis B (HBsAg)\n- Chlamydia\n- Gonorrhea (if <25 or high-risk)\n\n**Syphilis screening (ACOG 2024 - 3x screening now standard):**\n- **1st prenatal visit**\n- **28-32 weeks gestation**\n- **At delivery**\n\n**Third trimester rescreen (high-risk):**\n- Age <25\n- Multiple partners\n- New partner\n- Partner with STI\n- Prior STI\n- Geographic area with high rates\n\n**Vertical transmission prevention:**\n- Syphilis: Treat >=30 days before delivery for best outcomes\n- HSV: Suppressive therapy from 36 weeks if history of genital herpes\n- HIV: ART, consider cesarean if detectable VL',
+        body: '[Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety)\n\n**Routine screening at first prenatal visit:**\n- HIV\n- Syphilis (RPR/VDRL + treponemal)\n- Hepatitis B (HBsAg)\n- Chlamydia\n- Gonorrhea (if <25 or high-risk)\n\n**Syphilis screening (ACOG 2024 - 3x screening now standard):**\n- **1st prenatal visit**\n- **28-32 weeks gestation**\n- **At delivery**\n\n**Third trimester rescreen (high-risk):**\n- Age <25\n- Multiple partners\n- New partner\n- Partner with STI\n- Prior STI\n- Geographic area with high rates\n\n**Vertical transmission prevention:**\n- Syphilis: Treat >=30 days before delivery for best outcomes\n- HSV: Suppressive therapy from 36 weeks if history of genital herpes\n- HIV: ART, consider cesarean if detectable VL',
         citation: [1, 3, 4],
         calculatorLinks: [
             { id: 'sti-pregnancy-safety', label: 'Pregnancy Drug Safety' },
@@ -857,7 +857,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 5,
         title: 'MSM-Specific Considerations',
-        body: '[DoxyPEP Eligibility](#/calc/sti-doxypep)\n\n**Testing - all 3 anatomic sites:**\n- Urethral: urine NAAT or swab\n- Pharyngeal: throat swab NAAT\n- Rectal: rectal swab NAAT\n\n**Higher prevalence conditions:**\n- LGV proctitis (C. trachomatis L1-L3)\n- M. genitalium\n- Hepatitis A (recommend vaccination)\n\n**Mpox differential:**\n- Consider in MSM with genital/perianal lesions\n- Can present as proctitis\n- Does NOT rule out concurrent STI - test for both\n- JYNNEOS vaccine for at-risk MSM\n\n**DoxyPEP (June 2024 CDC):**\n- Doxycycline 200mg PO within 72h post-sex\n- For MSM/TGW with bacterial STI in past 12 months\n- Reduces syphilis 73-87%, chlamydia 70-88%, gonorrhea ~50%\n- Does NOT replace PrEP for HIV prevention',
+        body: '[DoxyPEP Eligibility](#/calculator/sti-doxypep)\n\n**Testing - all 3 anatomic sites:**\n- Urethral: urine NAAT or swab\n- Pharyngeal: throat swab NAAT\n- Rectal: rectal swab NAAT\n\n**Higher prevalence conditions:**\n- LGV proctitis (C. trachomatis L1-L3)\n- M. genitalium\n- Hepatitis A (recommend vaccination)\n\n**Mpox differential:**\n- Consider in MSM with genital/perianal lesions\n- Can present as proctitis\n- Does NOT rule out concurrent STI - test for both\n- JYNNEOS vaccine for at-risk MSM\n\n**DoxyPEP (June 2024 CDC):**\n- Doxycycline 200mg PO within 72h post-sex\n- For MSM/TGW with bacterial STI in past 12 months\n- Reduces syphilis 73-87%, chlamydia 70-88%, gonorrhea ~50%\n- Does NOT replace PrEP for HIV prevention',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'sti-doxypep', label: 'DoxyPEP Eligibility' },
@@ -881,7 +881,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'result',
         module: 5,
         title: 'DoxyPEP Guidance',
-        body: '[DoxyPEP Eligibility Tool](#/calc/sti-doxypep)\n\n**CDC Guidelines (June 2024):**\n\n**Who should be offered doxyPEP:**\n- Gay/bisexual men (MSM) with bacterial STI in past 12 months\n- Transgender women with bacterial STI in past 12 months\n- Can discuss with MSM/TGW without recent STI who engage in high-risk activities\n\n**Dosing:**\n- [Doxycycline](#/drug/doxycycline/sexual assault) **200mg PO** as soon as possible, **within 72 hours** after oral, vaginal, or anal sex\n- Maximum: 200mg in 24 hours\n\n**Efficacy:**\n- Syphilis: 73-87% reduction\n- Chlamydia: 70-88% reduction\n- Gonorrhea: ~50% reduction (concern for resistance)\n\n**NOT recommended for:**\n- Cisgender women, cisgender heterosexual men, transgender men (insufficient data)\n\n**Monitoring:**\n- Baseline STI screening\n- STI testing every 3-6 months at all exposure sites\n- Reassess need for doxyPEP every 3-6 months',
+        body: '[DoxyPEP Eligibility Tool](#/calculator/sti-doxypep)\n\n**CDC Guidelines (June 2024):**\n\n**Who should be offered doxyPEP:**\n- Gay/bisexual men (MSM) with bacterial STI in past 12 months\n- Transgender women with bacterial STI in past 12 months\n- Can discuss with MSM/TGW without recent STI who engage in high-risk activities\n\n**Dosing:**\n- [Doxycycline](#/drug/doxycycline/sexual assault) **200mg PO** as soon as possible, **within 72 hours** after oral, vaginal, or anal sex\n- Maximum: 200mg in 24 hours\n\n**Efficacy:**\n- Syphilis: 73-87% reduction\n- Chlamydia: 70-88% reduction\n- Gonorrhea: ~50% reduction (concern for resistance)\n\n**NOT recommended for:**\n- Cisgender women, cisgender heterosexual men, transgender men (insufficient data)\n\n**Monitoring:**\n- Baseline STI screening\n- STI testing every 3-6 months at all exposure sites\n- Reassess need for doxyPEP every 3-6 months',
         recommendation: 'Offer to eligible MSM/TGW. Does not replace condoms or HIV PrEP. Regular STI screening required.',
         treatment: {
             firstLine: {
@@ -918,7 +918,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 6,
         title: 'Partner Management',
-        body: '[EPT Generator](#/calc/sti-ept-generator)\n\n**Partner notification:**\n- Sex partners within **60 days** should be evaluated and treated\n- For syphilis, extend lookback period based on staging\n\n**Expedited Partner Therapy (EPT):**\n- Patient provides medication/prescription to partner\n- **Legal in 47 states + DC** (not allowed: Kansas, South Dakota)\n- Most effective for chlamydia\n\n**EPT regimens:**\n| Infection | EPT Regimen |\n|-----------|-------------|\n| Chlamydia | Doxycycline 100mg BID x 7 days |\n| Gonorrhea | Cefixime 800mg PO x1 |\n| Trichomonas | Metronidazole 2g PO x1 |\n\n**Important:**\n- Partners should still be evaluated if possible\n- Document EPT in medical record\n- Inform patient about drug allergies, side effects',
+        body: '[EPT Generator](#/calculator/sti-ept-generator)\n\n**Partner notification:**\n- Sex partners within **60 days** should be evaluated and treated\n- For syphilis, extend lookback period based on staging\n\n**Expedited Partner Therapy (EPT):**\n- Patient provides medication/prescription to partner\n- **Legal in 47 states + DC** (not allowed: Kansas, South Dakota)\n- Most effective for chlamydia\n\n**EPT regimens:**\n| Infection | EPT Regimen |\n|-----------|-------------|\n| Chlamydia | Doxycycline 100mg BID x 7 days |\n| Gonorrhea | Cefixime 800mg PO x1 |\n| Trichomonas | Metronidazole 2g PO x1 |\n\n**Important:**\n- Partners should still be evaluated if possible\n- Document EPT in medical record\n- Inform patient about drug allergies, side effects',
         citation: [1, 13],
         calculatorLinks: [
             { id: 'sti-ept-generator', label: 'EPT Generator' },
@@ -961,7 +961,7 @@ export const STI_COMPREHENSIVE_NODES = [
         type: 'info',
         module: 6,
         title: 'Resources & References',
-        body: '**Clinical Resources:**\n- [CDC STI Treatment Guidelines](https://www.cdc.gov/std/treatment-guidelines/)\n- [CDC DoxyPEP Guidelines](https://www.cdc.gov/mmwr/volumes/73/rr/rr7302a1.htm)\n- [EPT Legal Status by State](https://www.cdc.gov/sti/php/ept-legal-status/index.html)\n\n**Patient Resources:**\n- [CDC STI Information](https://www.cdc.gov/std/)\n- [Planned Parenthood STI Info](https://www.plannedparenthood.org/learn/stds-hiv-safer-sex)\n\n**Related Consults:**\n- [Syphilis Consult](#/tree/syphilis)\n- [HIV Consult](#/tree/hiv)\n- [PEP Consult](#/tree/pep)\n- [DFSA Workup](#/tree/dfsa-workup)\n\n**Calculators:**\n- [CDC Regimen Reference](#/calc/sti-cdc-regimens)\n- [Syndromic Rx Picker](#/calc/sti-syndromic-rx)\n- [EPT Generator](#/calc/sti-ept-generator)\n- [Syphilis Staging](#/calc/sti-syphilis-staging)\n- [Pregnancy Drug Safety](#/calc/sti-pregnancy-safety)\n- [DoxyPEP Eligibility](#/calc/sti-doxypep)',
+        body: '**Clinical Resources:**\n- [CDC STI Treatment Guidelines](https://www.cdc.gov/std/treatment-guidelines/)\n- [CDC DoxyPEP Guidelines](https://www.cdc.gov/mmwr/volumes/73/rr/rr7302a1.htm)\n- [EPT Legal Status by State](https://www.cdc.gov/sti/php/ept-legal-status/index.html)\n\n**Patient Resources:**\n- [CDC STI Information](https://www.cdc.gov/std/)\n- [Planned Parenthood STI Info](https://www.plannedparenthood.org/learn/stds-hiv-safer-sex)\n\n**Related Consults:**\n- [Syphilis Consult](#/tree/syphilis)\n- [HIV Consult](#/tree/hiv)\n- [PEP Consult](#/tree/pep)\n- [DFSA Workup](#/tree/dfsa-workup)\n\n**Calculators:**\n- [CDC Regimen Reference](#/calculator/sti-cdc-regimens)\n- [Syndromic Rx Picker](#/calculator/sti-syndromic-rx)\n- [EPT Generator](#/calculator/sti-ept-generator)\n- [Syphilis Staging](#/calculator/sti-syphilis-staging)\n- [Pregnancy Drug Safety](#/calculator/sti-pregnancy-safety)\n- [DoxyPEP Eligibility](#/calculator/sti-doxypep)',
         citation: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     },
 ];

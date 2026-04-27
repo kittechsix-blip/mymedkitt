@@ -64,7 +64,7 @@ export const FIRST_TRIMESTER_NODES = [
         type: 'question',
         module: 1,
         title: 'Chief Complaint',
-        body: 'Determine the primary presentation to guide workup.\n\nAll stable patients need:\n• Urine pregnancy test (if not done)\n• Focused obstetric history — [gravida/parity (TPAL)](#/info/ft-ob-history), prior ectopic, assisted reproductive technology\n• Focused physical exam including pelvic if indicated',
+        body: 'Determine the primary presentation to guide workup.\n\nAll stable patients need:\n• Urine pregnancy test (if not done)\n• Focused obstetric history — **gravida/parity (TPAL)**, prior ectopic, assisted reproductive technology\n• Focused physical exam including pelvic if indicated',
         citation: [1],
         options: [
             {
@@ -308,7 +308,7 @@ export const FIRST_TRIMESTER_NODES = [
         type: 'info',
         module: 3,
         title: 'Complete Miscarriage',
-        body: 'All products of conception have passed. Uterus is empty on ultrasound. Cervical os is closed.\n\n**Management:**\n• Confirm with ultrasound — empty uterus, closed os\n• No further ED intervention needed\n• Serial beta-hCG should trend to zero\n• OB follow-up for confirmation of completed miscarriage\n• Emotional support and grief resources\n\n[Managing Communication Around Pregnancy Loss](#/info/ft-miscarriage-communication)',
+        body: 'All products of conception have passed. Uterus is empty on ultrasound. Cervical os is closed.\n\n**Management:**\n• Confirm with ultrasound — empty uterus, closed os\n• No further ED intervention needed\n• Serial beta-hCG should trend to zero\n• OB follow-up for confirmation of completed miscarriage\n• Emotional support and grief resources\n\n**Managing Communication Around Pregnancy Loss**',
         citation: [1],
         next: 'ft-rh-rhogam',
         summary: 'Empty uterus, closed os — confirm on US, serial hCG to zero, emotional support',

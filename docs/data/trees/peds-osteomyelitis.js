@@ -11,7 +11,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         type: 'info',
         module: 1,
         title: 'Pediatric Osteomyelitis - Clinical Recognition',
-        body: '[Osteomyelitis Quick Reference](#/info/osteo-quick-ref) - key clinical pearls.\n\nAcute hematogenous osteomyelitis (AHO) is the most common form of bone infection in children. Peak incidence occurs at **ages 12-24 months**. [1,2]\n\n**Definitions:** [1]\n- **Acute:** Symptoms <4 weeks in previously uninfected bone\n- **Subacute:** Symptoms 1-3 months, often insidious\n- **Chronic:** >3 months or relapse after treatment; often has sequestrum\n\n**Key principle:** Empiric antibiotics should be started within **1 hour** of suspicion in ill-appearing children. Cultures (blood and/or bone) should be obtained but should NOT delay treatment. [1,3]',
+        body: '**Osteomyelitis Quick Reference** - key clinical pearls.\n\nAcute hematogenous osteomyelitis (AHO) is the most common form of bone infection in children. Peak incidence occurs at **ages 12-24 months**. [1,2]\n\n**Definitions:** [1]\n- **Acute:** Symptoms <4 weeks in previously uninfected bone\n- **Subacute:** Symptoms 1-3 months, often insidious\n- **Chronic:** >3 months or relapse after treatment; often has sequestrum\n\n**Key principle:** Empiric antibiotics should be started within **1 hour** of suspicion in ill-appearing children. Cultures (blood and/or bone) should be obtained but should NOT delay treatment. [1,3]',
         images: [
             { src: 'images/peds-osteomyelitis/brodie-abscess-xray.jpg', alt: 'AP radiograph of the distal tibia showing a lytic lesion from subacute staphylococcal osteomyelitis (Brodie abscess)', caption: 'Brodie abscess — lytic lesion in the distal tibia from subacute osteomyelitis. Subacute AHO is more radiographically subtle than acute forms. CC BY-SA 3.0, Jto410. Wikimedia Commons.' },
         ],
@@ -265,7 +265,7 @@ export const PEDS_OSTEOMYELITIS_NODES = [
         type: 'info',
         module: 3,
         title: 'Empiric Antibiotics - MSSA Coverage',
-        body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n[Nafcillin](#/drug/nafcillin/osteomyelitis) 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
+        body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n**Nafcillin** 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
         citation: [1, 3],
         treatment: {
             firstLine: {

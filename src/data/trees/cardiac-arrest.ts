@@ -27,7 +27,7 @@ export const CARDIAC_ARREST_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Cardiac Arrest — Scene Assessment',
-    body: '[Cardiac Arrest Steps Summary](#/info/ca-steps-summary)\n\n**Scene assessment:** Are there obvious signs of death present that preclude resuscitation?\n\n• Decapitation\n• Hemicorporectomy\n• Dependent lividity\n• Rigor mortis\n• Decomposition\n• Valid DNAR\n• Obviously non-survivable traumatic injury',
+    body: '**Cardiac Arrest Steps Summary**\n\n**Scene assessment:** Are there obvious signs of death present that preclude resuscitation?\n\n• Decapitation\n• Hemicorporectomy\n• Dependent lividity\n• Rigor mortis\n• Decomposition\n• Valid DNAR\n• Obviously non-survivable traumatic injury',
     citation: [5, 6],
     options: [
       {

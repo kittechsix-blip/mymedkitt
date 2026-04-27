@@ -20,7 +20,7 @@ export const PEA_ARREST_NODES = [
         type: 'info',
         module: 1,
         title: 'PEA Arrest: Recognition',
-        body: '[PEA Arrest Steps Summary](#/info/pea-steps-summary)\n\n**Pulseless Electrical Activity (PEA):** organized rhythm on the monitor with NO palpable pulse.\n\nPEA is NOT a single diagnosis — it is a presentation with a treatable cause.\n\n**Immediate actions:**\n• Begin high-quality CPR\n• Attach ETCO₂ immediately — target >20 mmHg\n• POCUS at first pulse check\n• Obtain IV/IO access\n• Identify and treat reversible causes',
+        body: '**PEA Arrest Steps Summary**\n\n**Pulseless Electrical Activity (PEA):** organized rhythm on the monitor with NO palpable pulse.\n\nPEA is NOT a single diagnosis — it is a presentation with a treatable cause.\n\n**Immediate actions:**\n• Begin high-quality CPR\n• Attach ETCO₂ immediately — target >20 mmHg\n• POCUS at first pulse check\n• Obtain IV/IO access\n• Identify and treat reversible causes',
         images: [
             { src: 'images/pea-arrest/pea-ecg.svg', alt: 'ECG rhythm strip showing organized electrical activity without a palpable pulse (PEA)', caption: 'PEA rhythm — organized QRS complexes without a perfusing pulse. NOT shockable. Focus on CPR + identifying reversible causes (H\'s and T\'s). Public domain. Wikimedia Commons.' },
         ],

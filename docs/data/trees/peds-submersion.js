@@ -21,7 +21,7 @@ export const PEDS_SUBMERSION_NODES = [
         type: 'info',
         module: 1,
         title: 'Pediatric Submersion Injury',
-        body: '[Submersion Summary](#/info/submersion-summary) — resuscitation and disposition pathway.\n\n**Drowning** is the leading cause of injury death in children ages 1-4 and second leading cause ages 5-14.\n\n**Key prognostic factors:**\n• **Submersion duration** — most important predictor\n• Scene CPR and time to ROSC\n• Water temperature (cold water may be protective)\n• Initial GCS and pupil reactivity\n\n**Critical thresholds:**\n• <5 min submersion: generally good outcomes\n• 5-10 min: variable outcomes\n• >10 min: poor prognosis in normothermic patients\n• >25 min in warm water: futility likely\n\n**No "dry drowning" as distinct entity** — delayed complications occur within 4-8 hours of symptomatic presentation.',
+        body: '**Submersion Summary** — resuscitation and disposition pathway.\n\n**Drowning** is the leading cause of injury death in children ages 1-4 and second leading cause ages 5-14.\n\n**Key prognostic factors:**\n• **Submersion duration** — most important predictor\n• Scene CPR and time to ROSC\n• Water temperature (cold water may be protective)\n• Initial GCS and pupil reactivity\n\n**Critical thresholds:**\n• <5 min submersion: generally good outcomes\n• 5-10 min: variable outcomes\n• >10 min: poor prognosis in normothermic patients\n• >25 min in warm water: futility likely\n\n**No "dry drowning" as distinct entity** — delayed complications occur within 4-8 hours of symptomatic presentation.',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'peds-submersion-severity', label: 'Submersion Severity' },

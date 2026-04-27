@@ -11,7 +11,7 @@ export const BRUGADA_SYNDROME_NODES = [
         type: 'info',
         module: 1,
         title: 'Brugada Syndrome',
-        body: '[Brugada Summary](#/info/brugada-summary) — inherited channelopathy with SCD risk.\n\n**Brugada syndrome (BrS)** is an inherited sodium channelopathy causing distinctive ECG patterns and ventricular fibrillation risk.\n\n**Key features:**\n• **Type 1 ECG pattern** = diagnostic (coved ST elevation ≥2mm in V1-V3)\n• Male predominance (8:1)\n• Mean age of events: 40 years\n• Often presents with syncope, VF, or sudden death\n• **Undiagnosed BrS has ~10% annual mortality**\n\n**Triggers:**\n• Fever (most common)\n• Sodium channel blocking drugs\n• Vagal stimulation, large meals\n• Cocaine use',
+        body: '**Brugada Summary** — inherited channelopathy with SCD risk.\n\n**Brugada syndrome (BrS)** is an inherited sodium channelopathy causing distinctive ECG patterns and ventricular fibrillation risk.\n\n**Key features:**\n• **Type 1 ECG pattern** = diagnostic (coved ST elevation ≥2mm in V1-V3)\n• Male predominance (8:1)\n• Mean age of events: 40 years\n• Often presents with syncope, VF, or sudden death\n• **Undiagnosed BrS has ~10% annual mortality**\n\n**Triggers:**\n• Fever (most common)\n• Sodium channel blocking drugs\n• Vagal stimulation, large meals\n• Cocaine use',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'brugada-shanghai', label: 'Shanghai Score' },

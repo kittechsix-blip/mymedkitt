@@ -11,7 +11,7 @@ export const SEROTONIN_SYNDROME_NODES = [
         type: 'info',
         module: 1,
         title: 'Serotonin Syndrome',
-        body: '[Serotonin Syndrome Steps Summary](#/info/ss-summary)\n\n**Definition:** Life-threatening condition caused by excessive serotonergic activity in the CNS. [1]\n\n**Classic Triad:** [1][2]\n• **Altered mental status** (agitation, confusion, anxiety)\n• **Autonomic dysfunction** (hyperthermia, tachycardia, diaphoresis, mydriasis)\n• **Neuromuscular excitation** (clonus, hyperreflexia, tremor, rigidity)\n\n**Key Features:**\n• Onset typically within **24 hours** (often within 6 hours) of drug change\n• Hyperkinetic state with **clonus** (unlike NMS)\n• Lower extremity findings more pronounced than upper\n• Rapid progression possible → hyperthermia >41°C, rhabdomyolysis, DIC, death',
+        body: '**Serotonin Syndrome Steps Summary**\n\n**Definition:** Life-threatening condition caused by excessive serotonergic activity in the CNS. [1]\n\n**Classic Triad:** [1][2]\n• **Altered mental status** (agitation, confusion, anxiety)\n• **Autonomic dysfunction** (hyperthermia, tachycardia, diaphoresis, mydriasis)\n• **Neuromuscular excitation** (clonus, hyperreflexia, tremor, rigidity)\n\n**Key Features:**\n• Onset typically within **24 hours** (often within 6 hours) of drug change\n• Hyperkinetic state with **clonus** (unlike NMS)\n• Lower extremity findings more pronounced than upper\n• Rapid progression possible → hyperthermia >41°C, rhabdomyolysis, DIC, death',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'hunter-criteria', label: 'Hunter Criteria' },

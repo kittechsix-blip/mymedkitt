@@ -167,7 +167,7 @@ export const TETANUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Tetanus-Prone — TIG + Vaccine Required',
-    body: '**Tetanus-prone wound + <3 doses or unknown:**\n\n✅ **Give BOTH:**\n\n**1. Tetanus Immune Globulin (TIG)**\n• [TIG](#/drug/tetanus-immune-globulin/prophylaxis) **250 units IM**\n• Provides immediate passive immunity\n• Lasts ~4 weeks\n\n**2. Tdap (or Td)**\n• **0.5 mL IM**\n• Starts active immunity\n\n⚠️ **CRITICAL: Different Injection Sites**\n• TIG and Tdap must be given at DIFFERENT anatomic sites\n• Use opposite deltoids, or deltoid + anterolateral thigh\n• NEVER mix in same syringe\n\n**Why Both?**\n• TIG provides immediate protection (passive)\n• Vaccine provides long-term protection (active)\n\n**Complete the Series:**\n• Patient needs remaining doses for full immunity\n• Refer to PCP for doses 2 and 3 [1][2][3]',
+    body: '**Tetanus-prone wound + <3 doses or unknown:**\n\n✅ **Give BOTH:**\n\n**1. Tetanus Immune Globulin (TIG)**\n• **TIG** **250 units IM**\n• Provides immediate passive immunity\n• Lasts ~4 weeks\n\n**2. Tdap (or Td)**\n• **0.5 mL IM**\n• Starts active immunity\n\n⚠️ **CRITICAL: Different Injection Sites**\n• TIG and Tdap must be given at DIFFERENT anatomic sites\n• Use opposite deltoids, or deltoid + anterolateral thigh\n• NEVER mix in same syringe\n\n**Why Both?**\n• TIG provides immediate protection (passive)\n• Vaccine provides long-term protection (active)\n\n**Complete the Series:**\n• Patient needs remaining doses for full immunity\n• Refer to PCP for doses 2 and 3 [1][2][3]',
     citation: [1, 2, 3],
     treatment: {
       firstLine: {
@@ -344,7 +344,7 @@ export const TETANUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Active Tetanus — Treatment Overview',
-    body: '**Treatment Priorities (in order):**\n\n**1. AIRWAY** — Early intubation for generalized tetanus\n\n**2. NEUTRALIZE UNBOUND TOXIN — TIG**\n• [TIG](#/drug/tetanus-immune-globulin/therapeutic) **3000-6000 units IM**\n• Does NOT reverse bound toxin\n• Give ASAP — toxin binding is irreversible\n\n**3. ELIMINATE SOURCE — Antibiotics + Wound**\n• Metronidazole preferred\n• Aggressive wound debridement\n\n**4. CONTROL SPASMS — Benzodiazepines**\n• Diazepam or midazolam\n• May need MASSIVE doses\n\n**5. MANAGE AUTONOMIC INSTABILITY**\n• Magnesium sulfate infusion\n• Avoid beta-blockers\n\n**6. SUPPORTIVE CARE**\n• ICU admission\n• Nutrition, DVT prophylaxis, positioning\n\n**ICU is MANDATORY for generalized tetanus** [6][7][8]',
+    body: '**Treatment Priorities (in order):**\n\n**1. AIRWAY** — Early intubation for generalized tetanus\n\n**2. NEUTRALIZE UNBOUND TOXIN — TIG**\n• **TIG** **3000-6000 units IM**\n• Does NOT reverse bound toxin\n• Give ASAP — toxin binding is irreversible\n\n**3. ELIMINATE SOURCE — Antibiotics + Wound**\n• Metronidazole preferred\n• Aggressive wound debridement\n\n**4. CONTROL SPASMS — Benzodiazepines**\n• Diazepam or midazolam\n• May need MASSIVE doses\n\n**5. MANAGE AUTONOMIC INSTABILITY**\n• Magnesium sulfate infusion\n• Avoid beta-blockers\n\n**6. SUPPORTIVE CARE**\n• ICU admission\n• Nutrition, DVT prophylaxis, positioning\n\n**ICU is MANDATORY for generalized tetanus** [6][7][8]',
     citation: [6, 7, 8],
     calculatorLinks: [
       { id: 'tet-management', label: 'Management Checklist' },
@@ -373,7 +373,7 @@ export const TETANUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'TIG — Therapeutic Dosing',
-    body: '**Tetanus Immune Globulin — Active Disease:**\n\n**Dose:** [TIG](#/drug/tetanus-immune-globulin/therapeutic) **3000-6000 units IM**\n• Much higher than prophylaxis (250 units)\n• Some give 500 units intrathecally (controversial, not FDA approved)\n\n**Timing:**\n• Give immediately — don\'t delay for wound care\n• Only neutralizes UNBOUND toxin\n• Toxin already bound to neurons is irreversible\n\n**Administration:**\n• Large IM dose — may need to divide into multiple sites\n• Intrathecal use is experimental but may reduce mortality\n\n**Duration:**\n• Half-life ~3-4 weeks\n• Single dose sufficient\n\n**If TIG Unavailable:**\n• IVIG can be substituted\n• Dose: 200-400 mg/kg\n• Contains tetanus antibodies from pooled donors [6][7]',
+    body: '**Tetanus Immune Globulin — Active Disease:**\n\n**Dose:** **TIG** **3000-6000 units IM**\n• Much higher than prophylaxis (250 units)\n• Some give 500 units intrathecally (controversial, not FDA approved)\n\n**Timing:**\n• Give immediately — don\'t delay for wound care\n• Only neutralizes UNBOUND toxin\n• Toxin already bound to neurons is irreversible\n\n**Administration:**\n• Large IM dose — may need to divide into multiple sites\n• Intrathecal use is experimental but may reduce mortality\n\n**Duration:**\n• Half-life ~3-4 weeks\n• Single dose sufficient\n\n**If TIG Unavailable:**\n• IVIG can be substituted\n• Dose: 200-400 mg/kg\n• Contains tetanus antibodies from pooled donors [6][7]',
     citation: [6, 7],
     treatment: {
       firstLine: {

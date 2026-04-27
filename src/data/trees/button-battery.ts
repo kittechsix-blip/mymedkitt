@@ -413,7 +413,7 @@ Once past the stomach, serious complications are rare.
 - CT chest with contrast for extent of injury
 
 **Antibiotic Options:**
-- [Ampicillin-sulbactam](#/drug/ampicillin-sulbactam/mediastinitis) 3g IV q6h OR
+- [Ampicillin-sulbactam](#/drug/ampicillin/mediastinitis) 3g IV q6h OR
 - [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/mediastinitis) 4.5g IV q6h`,
     citation: [6, 7],
     next: 'battery-disposition',

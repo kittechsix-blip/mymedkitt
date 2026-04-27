@@ -55,7 +55,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Acute Otitis Media — Diagnosis',
-    body: '[AOM Diagnostic Criteria](#/info/ear-aom-criteria)\n\n**AAP 2013 Diagnostic Criteria — Diagnose AOM when:** [1][2]\n\n• **Moderate-severe bulging of TM**, OR\n• **New onset otorrhea** (not from OE), OR\n• **Mild bulging** with recent (<48h) ear pain OR intense TM erythema\n\n**Must have middle ear effusion (MEE)** confirmed by:\n• Pneumatic otoscopy (decreased TM mobility)\n• Tympanometry\n\n**Key Point:** Bulging TM is the best discriminator — 92% of children with AOM have bulging vs 0% with OME (effusion only). [1]\n\n**Cannot diagnose AOM without MEE** — TM erythema alone is insufficient (can be from crying, fever).',
+    body: '**AOM Diagnostic Criteria**\n\n**AAP 2013 Diagnostic Criteria — Diagnose AOM when:** [1][2]\n\n• **Moderate-severe bulging of TM**, OR\n• **New onset otorrhea** (not from OE), OR\n• **Mild bulging** with recent (<48h) ear pain OR intense TM erythema\n\n**Must have middle ear effusion (MEE)** confirmed by:\n• Pneumatic otoscopy (decreased TM mobility)\n• Tympanometry\n\n**Key Point:** Bulging TM is the best discriminator — 92% of children with AOM have bulging vs 0% with OME (effusion only). [1]\n\n**Cannot diagnose AOM without MEE** — TM erythema alone is insufficient (can be from crying, fever).',
     citation: [1, 2],
     next: 'ear-aom-severity',
 
@@ -100,7 +100,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Watchful Waiting Option',
-    body: '[AOM Watchful Waiting Protocol](#/info/ear-aom-watchful)\n\n**Watchful Waiting Criteria (ALL must be met):** [1][2]\n\n• Age ≥6 months\n• Mild symptoms (pain <48h, temp <39°C)\n• Unilateral OR bilateral with mild symptoms in child ≥24 months\n• Reliable follow-up available within 48-72 hours\n• Parent/caregiver understands when to fill prescription\n\n**Safety-Net Antibiotic Prescription (SNAP):**\nGive prescription with instructions NOT to fill unless:\n• Persistent ear pain beyond 48 hours\n• Severe pain not relieved with OTC meds\n• Development of ear drainage\n• Fever >39°C\n\n**Evidence:** 80% of parents do NOT fill the prescription. [2]\n\n**Exclusions from Watchful Waiting:**\n• Age <6 months\n• Tympanostomy tubes\n• Immune deficiencies\n• Craniofacial abnormalities\n• Recurrent/chronic OM',
+    body: '**AOM Watchful Waiting Protocol**\n\n**Watchful Waiting Criteria (ALL must be met):** [1][2]\n\n• Age ≥6 months\n• Mild symptoms (pain <48h, temp <39°C)\n• Unilateral OR bilateral with mild symptoms in child ≥24 months\n• Reliable follow-up available within 48-72 hours\n• Parent/caregiver understands when to fill prescription\n\n**Safety-Net Antibiotic Prescription (SNAP):**\nGive prescription with instructions NOT to fill unless:\n• Persistent ear pain beyond 48 hours\n• Severe pain not relieved with OTC meds\n• Development of ear drainage\n• Fever >39°C\n\n**Evidence:** 80% of parents do NOT fill the prescription. [2]\n\n**Exclusions from Watchful Waiting:**\n• Age <6 months\n• Tympanostomy tubes\n• Immune deficiencies\n• Craniofacial abnormalities\n• Recurrent/chronic OM',
     citation: [1, 2],
     next: 'ear-aom-analgesia',
 
@@ -204,7 +204,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Otitis Externa — Risk Assessment',
-    body: '[Otitis Externa Overview](#/info/ear-oe-overview)\n\n**Classic OE Features:** [6]\n• Rapid onset (<48 hours)\n• **Tragal tenderness** (classic finding)\n• Pain with pinna manipulation\n• Ear canal edema, erythema, debris\n• ± Otorrhea\n\n**Distinguish from AOM:**\n• OE: Tragal tenderness, visible canal inflammation\n• AOM: TM findings, no tragal tenderness\n\n**Assess for Malignant OE Risk Factors:**',
+    body: '**Otitis Externa Overview**\n\n**Classic OE Features:** [6]\n• Rapid onset (<48 hours)\n• **Tragal tenderness** (classic finding)\n• Pain with pinna manipulation\n• Ear canal edema, erythema, debris\n• ± Otorrhea\n\n**Distinguish from AOM:**\n• OE: Tragal tenderness, visible canal inflammation\n• AOM: TM findings, no tragal tenderness\n\n**Assess for Malignant OE Risk Factors:**',
     citation: [6, 7],
     options: [
       {
@@ -356,7 +356,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Malignant OE — Workup',
-    body: '[Malignant OE Overview](#/info/ear-moe-overview)\n\n**THIS IS AN EMERGENCY** — Skull base osteomyelitis, mortality up to 20%.\n\n**Laboratory Studies:** [7][8]\n\n| Test | Expected Finding |\n|------|------------------|\n| ESR | Elevated (often >65-100 mm/h) |\n| CRP | Elevated |\n| WBC | Usually normal or mildly elevated |\n| Glucose | Check/optimize in diabetics |\n| Creatinine | Baseline for antibiotic dosing |\n\n**Imaging:**\n\n| Modality | Indication |\n|----------|------------|\n| **CT with contrast** | First-line: bone erosion, soft tissue extent |\n| **MRI** | Better for soft tissue, intracranial extension |\n| **Tc-99m bone scan** | Disease activity (sensitive, not specific) |\n| **Gallium-67 / FDG-PET** | Treatment response monitoring |\n\n**Cultures:**\n• Culture ear canal drainage\n• Blood cultures if febrile',
+    body: '**Malignant OE Overview**\n\n**THIS IS AN EMERGENCY** — Skull base osteomyelitis, mortality up to 20%.\n\n**Laboratory Studies:** [7][8]\n\n| Test | Expected Finding |\n|------|------------------|\n| ESR | Elevated (often >65-100 mm/h) |\n| CRP | Elevated |\n| WBC | Usually normal or mildly elevated |\n| Glucose | Check/optimize in diabetics |\n| Creatinine | Baseline for antibiotic dosing |\n\n**Imaging:**\n\n| Modality | Indication |\n|----------|------------|\n| **CT with contrast** | First-line: bone erosion, soft tissue extent |\n| **MRI** | Better for soft tissue, intracranial extension |\n| **Tc-99m bone scan** | Disease activity (sensitive, not specific) |\n| **Gallium-67 / FDG-PET** | Treatment response monitoring |\n\n**Cultures:**\n• Culture ear canal drainage\n• Blood cultures if febrile',
     citation: [7, 8],
     next: 'ear-moe-treatment',
 
@@ -368,7 +368,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Malignant OE — Treatment',
-    body: '[Malignant OE IV Antibiotics](#/info/ear-moe-abx)\n\n**Pseudomonas Coverage is ESSENTIAL** (>95% of cases) [7][8]\n\n**First-Line IV Treatment:**\n\n| Medication | Dose | Route | Duration |\n|------------|------|-------|----------|\n| Ciprofloxacin | 400 mg IV q8-12h | IV→PO | 6-8 weeks minimum |\n\n**Alternative IV Regimens (if FQ resistance or allergy):**\n\n| Medication | Dose | Frequency |\n|------------|------|----------|\n| Ceftazidime | 2g IV | q8h |\n| Piperacillin-tazobactam | 4.5g IV | q6h |\n| Cefepime | 2g IV | q8h |\n| Meropenem | 1g IV | q8h |\n\n**Treatment Duration:**\n• **Minimum 6 weeks** of culture-directed therapy\n• Continue until clinical resolution AND normalized ESR/CRP\n• Some cases require up to 29 weeks\n\n**Consults Required:**\n• Otolaryngology (debridement)\n• Infectious Disease\n• Neurosurgery (if intracranial involvement)',
+    body: '**Malignant OE IV Antibiotics**\n\n**Pseudomonas Coverage is ESSENTIAL** (>95% of cases) [7][8]\n\n**First-Line IV Treatment:**\n\n| Medication | Dose | Route | Duration |\n|------------|------|-------|----------|\n| Ciprofloxacin | 400 mg IV q8-12h | IV→PO | 6-8 weeks minimum |\n\n**Alternative IV Regimens (if FQ resistance or allergy):**\n\n| Medication | Dose | Frequency |\n|------------|------|----------|\n| Ceftazidime | 2g IV | q8h |\n| Piperacillin-tazobactam | 4.5g IV | q6h |\n| Cefepime | 2g IV | q8h |\n| Meropenem | 1g IV | q8h |\n\n**Treatment Duration:**\n• **Minimum 6 weeks** of culture-directed therapy\n• Continue until clinical resolution AND normalized ESR/CRP\n• Some cases require up to 29 weeks\n\n**Consults Required:**\n• Otolaryngology (debridement)\n• Infectious Disease\n• Neurosurgery (if intracranial involvement)',
     citation: [7, 8],
     next: 'ear-moe-admit',
 
@@ -396,7 +396,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Otomycosis — Assessment',
-    body: '[Otomycosis Overview](#/info/ear-fungal-overview)\n\n**When to Suspect Fungal Otitis:** [10]\n\n• OE not responding to topical antibacterials\n• Immunocompromised patient\n• Prolonged antibiotic use (topical or systemic)\n• Chronic otorrhea\n• Previous otomycosis\n• Humid climate / frequent water exposure\n\n**Visual Findings:**\n\n**Aspergillus spp (90% of cases):**\n• Black or yellow dots/spores\n• Fuzzy white or gray masses\n• "Wet newspaper" or cotton-like debris\n• Black-headed hyphae visible\n\n**Candida spp (10% of cases):**\n• Thick, creamy white discharge\n• White, cheesy material\n\n**Symptoms:**\n• Intense itching (often > pain)\n• Fullness sensation\n• Hearing loss\n• Minimal erythema compared to bacterial OE',
+    body: '**Otomycosis Overview**\n\n**When to Suspect Fungal Otitis:** [10]\n\n• OE not responding to topical antibacterials\n• Immunocompromised patient\n• Prolonged antibiotic use (topical or systemic)\n• Chronic otorrhea\n• Previous otomycosis\n• Humid climate / frequent water exposure\n\n**Visual Findings:**\n\n**Aspergillus spp (90% of cases):**\n• Black or yellow dots/spores\n• Fuzzy white or gray masses\n• "Wet newspaper" or cotton-like debris\n• Black-headed hyphae visible\n\n**Candida spp (10% of cases):**\n• Thick, creamy white discharge\n• White, cheesy material\n\n**Symptoms:**\n• Intense itching (often > pain)\n• Fullness sensation\n• Hearing loss\n• Minimal erythema compared to bacterial OE',
     citation: [10],
     next: 'ear-fungal-treat',
 
@@ -487,7 +487,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 7,
     title: 'Mastoiditis — Assessment',
-    body: '[Mastoiditis Overview](#/info/ear-mastoid-overview)\n\n**Classic Triad:** [13]\n1. **Postauricular swelling and erythema** (over mastoid process)\n2. **Tenderness over mastoid**\n3. **Protrusion/displacement of pinna** (pushed forward and outward)\n\n**Other Signs:**\n• Fever\n• Otalgia\n• Otorrhea (often profuse, may have pulsatile quality)\n• Loss of postauricular crease\n• Fluctuance (if subperiosteal abscess)\n• History of recent or concurrent AOM\n\n**Intracranial Complications (6-23% of cases):**\n• Headache\n• Altered mental status\n• Nuchal rigidity\n• Seizures\n• Focal neurological signs\n\n**⚠️ This is a SURGICAL EMERGENCY if abscess present**',
+    body: '**Mastoiditis Overview**\n\n**Classic Triad:** [13]\n1. **Postauricular swelling and erythema** (over mastoid process)\n2. **Tenderness over mastoid**\n3. **Protrusion/displacement of pinna** (pushed forward and outward)\n\n**Other Signs:**\n• Fever\n• Otalgia\n• Otorrhea (often profuse, may have pulsatile quality)\n• Loss of postauricular crease\n• Fluctuance (if subperiosteal abscess)\n• History of recent or concurrent AOM\n\n**Intracranial Complications (6-23% of cases):**\n• Headache\n• Altered mental status\n• Nuchal rigidity\n• Seizures\n• Focal neurological signs\n\n**⚠️ This is a SURGICAL EMERGENCY if abscess present**',
     citation: [13],
     next: 'ear-mastoid-workup',
 
@@ -511,7 +511,7 @@ export const EAR_INFECTION_NODES: DecisionNode[] = [
     type: 'info',
     module: 7,
     title: 'Mastoiditis — Treatment',
-    body: '[Mastoiditis IV Antibiotics](#/info/ear-mastoid-abx)\n\n**Common Pathogens:**\n• Streptococcus pneumoniae (most common)\n• Streptococcus pyogenes (GAS)\n• Staphylococcus aureus\n• Haemophilus influenzae\n• Pseudomonas (if chronic OM, tubes, recent abx)\n\n**First-Line Empiric Regimens:** [13][14]\n\n| Scenario | Antibiotic | Pediatric Dose | Adult Dose |\n|----------|------------|----------------|------------|\n| Standard | Ceftriaxone | 50-100 mg/kg/day ÷ q12-24h | 1-2g IV daily |\n| | + Clindamycin | 30-40 mg/kg/day ÷ q6-8h | 600-900 mg IV q8h |\n| Alternative | Ampicillin-sulbactam | 50 mg/kg q6h | 1.5-3g IV q6h |\n\n**Add Vancomycin if:**\n• MRSA risk factors\n• No improvement on initial therapy\n• Pediatric: 15 mg/kg IV q6h\n• Adult: 15-20 mg/kg IV q8-12h\n\n**Pseudomonas Coverage (chronic OM, tubes):**\n• Piperacillin-tazobactam 100 mg/kg IV q6h (peds) / 4.5g IV q6h (adult)\n\n**Duration:**\n• IV therapy: 7-14 days\n• Total course: 14 days minimum',
+    body: '**Mastoiditis IV Antibiotics**\n\n**Common Pathogens:**\n• Streptococcus pneumoniae (most common)\n• Streptococcus pyogenes (GAS)\n• Staphylococcus aureus\n• Haemophilus influenzae\n• Pseudomonas (if chronic OM, tubes, recent abx)\n\n**First-Line Empiric Regimens:** [13][14]\n\n| Scenario | Antibiotic | Pediatric Dose | Adult Dose |\n|----------|------------|----------------|------------|\n| Standard | Ceftriaxone | 50-100 mg/kg/day ÷ q12-24h | 1-2g IV daily |\n| | + Clindamycin | 30-40 mg/kg/day ÷ q6-8h | 600-900 mg IV q8h |\n| Alternative | Ampicillin-sulbactam | 50 mg/kg q6h | 1.5-3g IV q6h |\n\n**Add Vancomycin if:**\n• MRSA risk factors\n• No improvement on initial therapy\n• Pediatric: 15 mg/kg IV q6h\n• Adult: 15-20 mg/kg IV q8-12h\n\n**Pseudomonas Coverage (chronic OM, tubes):**\n• Piperacillin-tazobactam 100 mg/kg IV q6h (peds) / 4.5g IV q6h (adult)\n\n**Duration:**\n• IV therapy: 7-14 days\n• Total course: 14 days minimum',
     citation: [13, 14],
     next: 'ear-mastoid-surgery',
 

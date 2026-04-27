@@ -19,7 +19,7 @@ export const VENTRICULAR_TACHYCARDIA_NODES = [
         type: 'info',
         module: 1,
         title: 'Ventricular Tachycardia',
-        body: '[VT Management Steps Summary](#/info/vt-steps-summary)\n\n**VT confirmed:** wide complex tachycardia, rate usually 150–250 bpm.\n\n**Key Features:**\n• QRS duration >120 ms\n• AV dissociation (if present, highly specific for VT)\n• Concordance across precordial leads\n• Fusion/capture beats\n\n**⚠️ Check pulse immediately** — pulseless VT and VT with pulse have fundamentally different management protocols.',
+        body: '**VT Management Steps Summary**\n\n**VT confirmed:** wide complex tachycardia, rate usually 150–250 bpm.\n\n**Key Features:**\n• QRS duration >120 ms\n• AV dissociation (if present, highly specific for VT)\n• Concordance across precordial leads\n• Fusion/capture beats\n\n**⚠️ Check pulse immediately** — pulseless VT and VT with pulse have fundamentally different management protocols.',
         images: [{ src: 'images/cardiac-arrest/mvt-ecg.png', alt: 'Monomorphic ventricular tachycardia ECG', caption: 'Monomorphic VT — regular wide complex tachycardia' }],
         citation: [1, 3, 6],
         next: 'vt-pulse',

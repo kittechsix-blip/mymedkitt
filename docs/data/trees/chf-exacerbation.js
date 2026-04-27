@@ -56,7 +56,7 @@ export const CHF_EXACERBATION_NODES = [
         type: 'info',
         module: 2,
         title: 'SCAPE: Immediate Treatment',
-        body: '**SCAPE is NOT volume overload.** The problem is fluid redistribution into lungs from massive afterload. Treatment = break the sympathetic spiral.\n\n**Simultaneous actions (do ALL at once):**\n\n**1. BiPAP/CPAP — Immediate**\n- Start CPAP 8-10 cm H₂O OR BiPAP 12/6\n- Titrate UP aggressively: goal CPAP 15-20 or BiPAP 20-24/10-12\n- Higher pressures = greater hemodynamic benefit\n- Reduces preload AND afterload\n\n**2. High-Dose Nitroglycerin — Aggressive**\n- [See NTG Protocol](#/info/chf-ntg-protocol)\n- Bolus: 400-800 mcg/min x 2-2.5 min (OR 1000-2000 mcg IV bolus)\n- Then infusion: start 100-200 mcg/min, titrate to 400+ mcg/min\n- Goal: SBP <140 within 10 minutes\n\n**By 10 minutes, patient should be "out of the water."** [1][3]',
+        body: '**SCAPE is NOT volume overload.** The problem is fluid redistribution into lungs from massive afterload. Treatment = break the sympathetic spiral.\n\n**Simultaneous actions (do ALL at once):**\n\n**1. BiPAP/CPAP — Immediate**\n- Start CPAP 8-10 cm H₂O OR BiPAP 12/6\n- Titrate UP aggressively: goal CPAP 15-20 or BiPAP 20-24/10-12\n- Higher pressures = greater hemodynamic benefit\n- Reduces preload AND afterload\n\n**2. High-Dose Nitroglycerin — Aggressive**\n- **See NTG Protocol**\n- Bolus: 400-800 mcg/min x 2-2.5 min (OR 1000-2000 mcg IV bolus)\n- Then infusion: start 100-200 mcg/min, titrate to 400+ mcg/min\n- Goal: SBP <140 within 10 minutes\n\n**By 10 minutes, patient should be "out of the water."** [1][3]',
         citation: [1, 3],
         calculatorLinks: [
             { id: 'chf-ntg-calc', label: 'SCAPE NTG Calculator' },
@@ -139,7 +139,7 @@ export const CHF_EXACERBATION_NODES = [
         type: 'info',
         module: 2,
         title: 'SCAPE: Escalate Therapy',
-        body: '**Partial response — escalate:**\n\n**1. Increase NTG further:**\n- Push to 400-800 mcg/min if BP allows\n- No ceiling dose in SCAPE\n\n**2. BiPAP settings:**\n- Increase to BiPAP 24/20 if tolerated\n- Patient compliance key — may need sedation\n\n**3. Add second vasodilator:**\n- [Clevidipine](#/drug/clevidipine/chf) — calcium channel blocker, very titratable\n- [Nicardipine](#/drug/nicardipine/chf) — alternative IV CCB\n- [Enalaprilat](#/drug/enalaprilat/chf) — if normal renal function\n\n**4. Consider nitroprusside:**\n- Guideline-recommended alternative\n- Risk: cyanide toxicity with prolonged use\n- Requires arterial line monitoring [1][3]',
+        body: '**Partial response — escalate:**\n\n**1. Increase NTG further:**\n- Push to 400-800 mcg/min if BP allows\n- No ceiling dose in SCAPE\n\n**2. BiPAP settings:**\n- Increase to BiPAP 24/20 if tolerated\n- Patient compliance key — may need sedation\n\n**3. Add second vasodilator:**\n- [Clevidipine](#/drug/clevidipine/chf) — calcium channel blocker, very titratable\n- [Nicardipine](#/drug/nicardipine/chf) — alternative IV CCB\n- **Enalaprilat** — if normal renal function\n\n**4. Consider nitroprusside:**\n- Guideline-recommended alternative\n- Risk: cyanide toxicity with prolonged use\n- Requires arterial line monitoring [1][3]',
         citation: [1, 3],
         treatment: {
             firstLine: {

@@ -577,7 +577,7 @@ const EPSS_MEASUREMENT_PAGE: InfoPage = {
     },
     {
       heading: 'Full Consult',
-      body: 'For a complete step-by-step guide with images, see the [Echo-EPSS Consult](#/consult/echo-epss).',
+      body: 'For a complete step-by-step guide with images, see the [Echo-EPSS Consult](#/tree/echo-epss).',
     },
   ],
   citations: [
@@ -14721,7 +14721,7 @@ const RH_BEAUCHOPS_DETAILS: InfoPage = {
     },
     {
       heading: 'A — Anesthetic Complications',
-      body: '**HIGH / TOTAL SPINAL:**\n• Sudden hypotension, bradycardia, apnea after neuraxial anesthesia\n• Treatment: intubation, pressors, LUD, resuscitation\n\n**LOCAL ANESTHETIC SYSTEMIC TOXICITY (LAST):**\n• Seizures, arrhythmias, arrest after local anesthetic (epidural, paracervical block)\n• Treatment: [Intralipid 20%](#/drug/intralipid-20/last) 1.5 mL/kg bolus, then 0.25 mL/kg/min infusion\n• AVOID propofol (worsens LAST)\n\n**FAILED AIRWAY:** Anticipate difficult airway in pregnancy — see [ACLS Mods](#/info/rh-acls-mods)',
+      body: '**HIGH / TOTAL SPINAL:**\n• Sudden hypotension, bradycardia, apnea after neuraxial anesthesia\n• Treatment: intubation, pressors, LUD, resuscitation\n\n**LOCAL ANESTHETIC SYSTEMIC TOXICITY (LAST):**\n• Seizures, arrhythmias, arrest after local anesthetic (epidural, paracervical block)\n• Treatment: **Intralipid 20%** 1.5 mL/kg bolus, then 0.25 mL/kg/min infusion\n• AVOID propofol (worsens LAST)\n\n**FAILED AIRWAY:** Anticipate difficult airway in pregnancy — see [ACLS Mods](#/info/rh-acls-mods)',
     },
     {
       heading: 'U — Uterine Atony / Rupture',

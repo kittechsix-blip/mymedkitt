@@ -19,7 +19,7 @@ export const BRADYCARDIC_ARREST_NODES = [
         type: 'info',
         module: 1,
         title: 'Bradycardic Arrest: Recognition',
-        body: '[Bradycardic Arrest Steps Summary](#/info/brady-steps-summary)\n\nBradycardic arrest: extreme bradycardia (<20 bpm) or asystole causing pulselessness.\n\n**Key steps:**\n• Confirm rhythm in **2 leads** — avoid misdiagnosing lead disconnect artifact as asystole\n• Check gain settings — low gain can mimic flat line\n• True asystole: no electrical activity in any lead\n• Extreme bradycardia: wide QRS escape rhythm, usually <20 bpm',
+        body: '**Bradycardic Arrest Steps Summary**\n\nBradycardic arrest: extreme bradycardia (<20 bpm) or asystole causing pulselessness.\n\n**Key steps:**\n• Confirm rhythm in **2 leads** — avoid misdiagnosing lead disconnect artifact as asystole\n• Check gain settings — low gain can mimic flat line\n• True asystole: no electrical activity in any lead\n• Extreme bradycardia: wide QRS escape rhythm, usually <20 bpm',
         images: [
             { src: 'images/cardiac-arrest/asystole-ecg.png', alt: 'Asystole ECG strip', caption: 'Asystole — confirm in 2 leads' },
             { src: 'images/cardiac-arrest/chb-ecg.png', alt: 'Complete heart block ECG', caption: 'Complete heart block with ventricular escape' },

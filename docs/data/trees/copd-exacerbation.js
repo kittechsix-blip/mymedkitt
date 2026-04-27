@@ -99,7 +99,7 @@ export const COPD_EXACERBATION_NODES = [
         type: 'info',
         module: 2,
         title: 'Moderate AECOPD: ED Treatment',
-        body: '**Moderate exacerbation - requires ED treatment:**\n\n**Simultaneous interventions:**\n\n**1. Oxygen Therapy:**\n- Target SpO2 **88-92%** (not higher!)\n- Hyperoxia worsens V/Q mismatch and CO2 retention\n\n**2. Nebulized Bronchodilators:**\n- [Albuterol](#/drug/albuterol/copd) 2.5-5 mg + [Ipratropium](#/drug/ipratropium/copd) 0.5 mg nebulized\n- Schedule q4-6h, PRN albuterol q2h\n- Can give through BiPAP without removing mask\n\n**3. Systemic Corticosteroids:**\n- Methylprednisolone 125 mg IV (ED dose)\n- Then prednisone 40-60 mg PO daily x 5 days\n\n**4. Consider NIV early:**\n- If RR >24-28 after initial bronchodilators\n- If accessory muscle use persists\n- If hypercapnia suspected\n\n**Reassess in 1-2 hours.** [1][2][5]',
+        body: '**Moderate exacerbation - requires ED treatment:**\n\n**Simultaneous interventions:**\n\n**1. Oxygen Therapy:**\n- Target SpO2 **88-92%** (not higher!)\n- Hyperoxia worsens V/Q mismatch and CO2 retention\n\n**2. Nebulized Bronchodilators:**\n- [Albuterol](#/drug/albuterol-neb/copd) 2.5-5 mg + [Ipratropium](#/drug/ipratropium-neb/copd) 0.5 mg nebulized\n- Schedule q4-6h, PRN albuterol q2h\n- Can give through BiPAP without removing mask\n\n**3. Systemic Corticosteroids:**\n- Methylprednisolone 125 mg IV (ED dose)\n- Then prednisone 40-60 mg PO daily x 5 days\n\n**4. Consider NIV early:**\n- If RR >24-28 after initial bronchodilators\n- If accessory muscle use persists\n- If hypercapnia suspected\n\n**Reassess in 1-2 hours.** [1][2][5]',
         citation: [1, 2, 5],
         treatment: {
             firstLine: {
@@ -150,7 +150,7 @@ export const COPD_EXACERBATION_NODES = [
         type: 'info',
         module: 2,
         title: 'Severe AECOPD: Immediate Interventions',
-        body: '**Severe exacerbation - imminent respiratory failure:**\n\n**Immediate simultaneous actions:**\n\n**1. BiPAP - Start NOW:**\n- Initial: 10 cm iPAP / 5 cm ePAP\n- Titrate to: 18-20 cm iPAP / 8 cm ePAP\n- FiO2 to target SpO2 88-92%\n\n**2. Nebulized bronchodilators:**\n- [Albuterol](#/drug/albuterol/copd) + [Ipratropium](#/drug/ipratropium/copd) through BiPAP\n- Continuous albuterol 10-15 mg/hr if severe\n\n**3. IV Methylprednisolone:**\n- 125 mg IV push\n\n**4. IV Magnesium (if refractory):**\n- 2g IV over 20 minutes\n- May reduce hospitalizations\n\n**5. ABG/VBG:**\n- Check for respiratory acidosis\n- pH <7.25 concerning\n\n**Do NOT delay BiPAP for ABG!**\nEven patients who look terrible often improve rapidly on BiPAP. [1][2][6]',
+        body: '**Severe exacerbation - imminent respiratory failure:**\n\n**Immediate simultaneous actions:**\n\n**1. BiPAP - Start NOW:**\n- Initial: 10 cm iPAP / 5 cm ePAP\n- Titrate to: 18-20 cm iPAP / 8 cm ePAP\n- FiO2 to target SpO2 88-92%\n\n**2. Nebulized bronchodilators:**\n- [Albuterol](#/drug/albuterol-neb/copd) + [Ipratropium](#/drug/ipratropium-neb/copd) through BiPAP\n- Continuous albuterol 10-15 mg/hr if severe\n\n**3. IV Methylprednisolone:**\n- 125 mg IV push\n\n**4. IV Magnesium (if refractory):**\n- 2g IV over 20 minutes\n- May reduce hospitalizations\n\n**5. ABG/VBG:**\n- Check for respiratory acidosis\n- pH <7.25 concerning\n\n**Do NOT delay BiPAP for ABG!**\nEven patients who look terrible often improve rapidly on BiPAP. [1][2][6]',
         citation: [1, 2, 6],
         treatment: {
             firstLine: {
@@ -183,7 +183,7 @@ export const COPD_EXACERBATION_NODES = [
         type: 'info',
         module: 3,
         title: 'Bronchodilator Therapy',
-        body: '**SABA + SAMA Combination:**\n\n**Nebulized (preferred in acute setting):**\n- [Albuterol](#/drug/albuterol/copd) 2.5-5 mg + [Ipratropium](#/drug/ipratropium/copd) 0.5 mg\n- DuoNeb = combination product\n- Schedule: q4-6h, with albuterol q2h PRN\n\n**MDI with spacer (equally effective):**\n- Albuterol 4-8 puffs + Ipratropium 2-4 puffs\n- May be difficult in severe respiratory distress\n\n**Key Points:**\n- Combination SABA + SAMA superior to either alone [7]\n- Can deliver through BiPAP in-line without removing mask\n- Nebulizer may be easier in sicker patients\n- MDI + spacer equally effective if patient can coordinate\n\n**Continuous nebulization:**\n- Reserved for severe/refractory cases\n- Albuterol 10-15 mg/hr continuous\n- Watch for tachycardia, tremor, hypokalemia [1][2][7]',
+        body: '**SABA + SAMA Combination:**\n\n**Nebulized (preferred in acute setting):**\n- [Albuterol](#/drug/albuterol-neb/copd) 2.5-5 mg + [Ipratropium](#/drug/ipratropium-neb/copd) 0.5 mg\n- DuoNeb = combination product\n- Schedule: q4-6h, with albuterol q2h PRN\n\n**MDI with spacer (equally effective):**\n- Albuterol 4-8 puffs + Ipratropium 2-4 puffs\n- May be difficult in severe respiratory distress\n\n**Key Points:**\n- Combination SABA + SAMA superior to either alone [7]\n- Can deliver through BiPAP in-line without removing mask\n- Nebulizer may be easier in sicker patients\n- MDI + spacer equally effective if patient can coordinate\n\n**Continuous nebulization:**\n- Reserved for severe/refractory cases\n- Albuterol 10-15 mg/hr continuous\n- Watch for tachycardia, tremor, hypokalemia [1][2][7]',
         citation: [1, 2, 7],
         treatment: {
             firstLine: {
@@ -527,7 +527,7 @@ export const COPD_EXACERBATION_NODES = [
         type: 'result',
         module: 6,
         title: 'Telemetry/Floor Admission',
-        body: '**Floor admission for moderate AECOPD:**\n\n**Orders:**\n- Supplemental O2 to SpO2 88-92%\n- [Albuterol](#/drug/albuterol/copd) + [Ipratropium](#/drug/ipratropium/copd) neb q4-6h scheduled, albuterol q2h PRN\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily (5-day total course)\n- Antibiotics if indicated\n- Continue home maintenance inhalers\n\n**Monitoring:**\n- SpO2 checks q4h\n- RR assessment\n- Escalate to BiPAP if worsening\n\n**Before discharge:**\n- Inhaler technique education\n- Smoking cessation counseling\n- Action plan for future exacerbations\n- PCP follow-up within 7 days\n- Pulmonology referral if frequent exacerbations\n\n**Average length of stay:** 3-5 days',
+        body: '**Floor admission for moderate AECOPD:**\n\n**Orders:**\n- Supplemental O2 to SpO2 88-92%\n- [Albuterol](#/drug/albuterol-neb/copd) + [Ipratropium](#/drug/ipratropium-neb/copd) neb q4-6h scheduled, albuterol q2h PRN\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily (5-day total course)\n- Antibiotics if indicated\n- Continue home maintenance inhalers\n\n**Monitoring:**\n- SpO2 checks q4h\n- RR assessment\n- Escalate to BiPAP if worsening\n\n**Before discharge:**\n- Inhaler technique education\n- Smoking cessation counseling\n- Action plan for future exacerbations\n- PCP follow-up within 7 days\n- Pulmonology referral if frequent exacerbations\n\n**Average length of stay:** 3-5 days',
         recommendation: 'Telemetry/floor admission. Complete steroid course, bronchodilators, antibiotics if indicated. Discharge when stable on room air or baseline O2.',
         confidence: 'recommended',
         citation: [1, 2, 11],

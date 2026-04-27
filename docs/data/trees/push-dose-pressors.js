@@ -20,7 +20,7 @@ export const PUSH_DOSE_PRESSORS_NODES = [
         type: 'question',
         module: 1,
         title: 'Push-Dose Pressors - Indications',
-        body: '[Push-Dose Pressors Summary](#/info/pdp-summary)\n\n**Definition:** Vasopressors administered as IV bolus doses for immediate blood pressure support, bridging to continuous infusion.\n\n**Key principle:** Push-dose pressors provide immediate hemodynamic support when continuous infusions cannot be established within 5-8 minutes. [1][2]\n\n**Epinephrine has won:** Dr. Weingart now recommends push-dose epinephrine over phenylephrine for most situations due to its combined inotropic and vasopressor effects. [1][6]\n\n**CRITICAL SAFETY:** These are NOT cardiac arrest doses. Do NOT give 1 mg IV epinephrine to a patient with a pulse. [1][2][3]\n\nWhat is the clinical scenario?',
+        body: '**Push-Dose Pressors Summary**\n\n**Definition:** Vasopressors administered as IV bolus doses for immediate blood pressure support, bridging to continuous infusion.\n\n**Key principle:** Push-dose pressors provide immediate hemodynamic support when continuous infusions cannot be established within 5-8 minutes. [1][2]\n\n**Epinephrine has won:** Dr. Weingart now recommends push-dose epinephrine over phenylephrine for most situations due to its combined inotropic and vasopressor effects. [1][6]\n\n**CRITICAL SAFETY:** These are NOT cardiac arrest doses. Do NOT give 1 mg IV epinephrine to a patient with a pulse. [1][2][3]\n\nWhat is the clinical scenario?',
         citation: [1, 2, 3, 6],
         calculatorLinks: [
             { id: 'map-calculator', label: 'MAP Calculator' },
