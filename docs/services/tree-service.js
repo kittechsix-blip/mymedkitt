@@ -6,6 +6,12 @@ import { cacheGetFiltered, cachePutMany, setLastSync, getLastSync } from './cach
 // In-memory cache keyed by tree ID
 const treeCache = new Map();
 const STALE_MS = 60 * 60 * 1000;
+// Re-attach summaryHook flags that aren't stored in Supabase. Keyed by node ID
+// so it survives DB round-trips. Add new entries here when a node needs to
+// trigger a custom summary modal (currently only the MSE Dictation builder).
+const SUMMARY_HOOK_NODES = {
+    'mse-build-summary': 'mse-dictation',
+};
 function mapNodeRow(row) {
     const node = {
         id: row.id,
@@ -32,6 +38,9 @@ function mapNodeRow(row) {
         node.images = row.images;
     if (row.calculator_links && row.calculator_links.length > 0)
         node.calculatorLinks = row.calculator_links;
+    const hook = SUMMARY_HOOK_NODES[row.id];
+    if (hook)
+        node.summaryHook = hook;
     return node;
 }
 /** Try loading a tree from IndexedDB cache */

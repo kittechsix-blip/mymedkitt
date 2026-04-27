@@ -66,6 +66,13 @@ interface TreeMetaRow {
   module_labels: string[];
 }
 
+// Re-attach summaryHook flags that aren't stored in Supabase. Keyed by node ID
+// so it survives DB round-trips. Add new entries here when a node needs to
+// trigger a custom summary modal (currently only the MSE Dictation builder).
+const SUMMARY_HOOK_NODES: Record<string, DecisionNode['summaryHook']> = {
+  'mse-build-summary': 'mse-dictation',
+};
+
 function mapNodeRow(row: NodeRow): DecisionNode {
   const node: DecisionNode = {
     id: row.id,
@@ -83,6 +90,8 @@ function mapNodeRow(row: NodeRow): DecisionNode {
   if (row.confidence) node.confidence = row.confidence as DecisionNode['confidence'];
   if (row.images && row.images.length > 0) node.images = row.images as DecisionNode['images'];
   if (row.calculator_links && row.calculator_links.length > 0) node.calculatorLinks = row.calculator_links as DecisionNode['calculatorLinks'];
+  const hook = SUMMARY_HOOK_NODES[row.id];
+  if (hook) node.summaryHook = hook;
   return node;
 }
 
