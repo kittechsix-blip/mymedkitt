@@ -13,7 +13,9 @@ export const PNEUMONIA_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'MRSA coverage: add if prior MRSA isolation, recent hospitalization, ESRD, recent IV antibiotics', nodeId: 'pna-mrsa-risk' },
   { text: 'Pseudomonas coverage: add if prior isolation, bronchiectasis, severe COPD, tracheostomy history', nodeId: 'pna-pseudo-risk' },
   { text: 'Macrolide monotherapy NO LONGER recommended for CAP (>30% resistance in US)', nodeId: 'pna-outpatient-healthy' },
-  { text: 'Empyema (pH <7.2, glucose <60, LDH >3x, positive culture) requires drainage', nodeId: 'pna-empyema' },
+  { text: 'ACCP Stage 3-4 effusion (pH <7.2, glucose <40, positive culture, pus) requires drainage', nodeId: 'pna-effusion-assess' },
+  { text: 'Loculated effusion: tPA 10mg + DNase 5mg BID × 3 days (MIST2 protocol) → 90% success', nodeId: 'pna-drainage-fibrinolytics' },
+  { text: 'Failed tube drainage 48-72h → escalate to VATS; early surgery (7-10d) has better outcomes', nodeId: 'pna-surgery-indications' },
   { text: 'HAP/VAP: 7 days total treatment, de-escalate at 48h if cultures negative', nodeId: 'pna-hap-abx' },
   { text: 'CAP duration: 5 days total if clinically stable with normal vitals', nodeId: 'pna-inpatient-nonsevere' },
 ];
@@ -355,43 +357,158 @@ export const PNEUMONIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'Parapneumonic Effusion Assessment',
-    body: '[RAPID Score](#/info/pna-rapid)\n\n**Light\'s Criteria (exudate if ANY):**\n• Pleural/serum protein ratio >0.5\n• Pleural/serum LDH ratio >0.6\n• Pleural LDH >200 IU/L\n\n**Complicated effusion indicators (drain if ANY):**\n• pH <7.2\n• Glucose <60 mg/dL\n• LDH >3× upper limit of serum normal\n• Positive gram stain or culture\n• Loculations on imaging\n• Frank pus\n\n**RAPID Score (mortality risk):**\n• 0-2: Low risk (~2% mortality)\n• 3-4: Medium risk (~10% mortality)\n• 5-7: High risk (~25-30% mortality)\n\n**Does the effusion meet criteria for drainage?**',
-    citation: [8, 9],
+    body: '[RAPID Score](#/info/pna-rapid)\n\n**Step 1: Confirm exudate (Light\'s Criteria — ANY 1):**\n• Pleural/serum protein ratio >0.5\n• Pleural/serum LDH ratio >0.6\n• Pleural LDH >2/3 upper limit of serum normal\n\n**Step 2: ACCP Staging (determines drainage need):**\n\n| Stage | Pleural Findings | Risk | Drainage? |\n|-------|-----------------|------|----------|\n| 1 | Minimal (<10mm), free-flowing | Very low | No |\n| 2 | >10mm, free-flowing, pH ≥7.2, glucose ≥60, negative culture | Low | No |\n| 3 | pH <7.2 OR glucose <40 OR positive culture OR loculated | Moderate | **Yes** |\n| 4 | Frank pus | High | **Yes** |\n\n**What stage is this effusion?**',
+    citation: [8, 9, 13],
     options: [
       {
-        label: 'Simple Effusion — No Drainage Needed',
+        label: 'Stage 1-2: Simple Effusion',
         next: 'pna-effusion-simple',
       },
       {
-        label: 'Complicated Effusion — Needs Drainage',
+        label: 'Stage 3: Complicated Effusion',
+        next: 'pna-effusion-complicated',
+      },
+      {
+        label: 'Stage 4: Empyema (Frank Pus)',
         next: 'pna-empyema',
       },
     ],
-    summary: 'Drain if: pH <7.2, glucose <60, LDH >3x, positive culture/gram stain, loculations, pus',
+    summary: 'ACCP staging: Stage 1-2 = no drainage; Stage 3 (pH <7.2, loculated, positive culture) = drain; Stage 4 (pus) = drain',
   },
 
   {
     id: 'pna-effusion-simple',
     type: 'result',
     module: 6,
-    title: 'Simple Parapneumonic Effusion',
-    body: '**Management:**\n\n**Antibiotics alone** — drainage not required\n• Standard CAP regimen based on severity\n• Duration: 5-7 days\n\n**Monitoring:**\n• Repeat imaging at 48-72h to assess resolution\n• If enlarging or not improving → reclassify as complicated\n\n**Indications to re-tap:**\n• Clinical deterioration\n• Persistent fever >72h on antibiotics\n• Enlarging effusion\n\n**Simple effusions usually resolve with appropriate antibiotic therapy.**',
-    citation: [8],
-    recommendation: 'Antibiotics alone. Repeat imaging 48-72h. Re-tap if deteriorating or enlarging.',
+    title: 'Simple Parapneumonic Effusion (Stage 1-2)',
+    body: '**Management — Antibiotics alone:**\n\n• Standard CAP regimen based on severity\n• Duration: 5-7 days\n• Drainage NOT required\n\n**Monitoring:**\n• Repeat imaging at 48-72h\n• 95% resolve with antibiotics alone\n\n**⚠️ Indications to Reclassify → Drain:**\n• Enlarging effusion despite antibiotics\n• Persistent fever >72h\n• Clinical deterioration\n• New loculations on follow-up imaging\n\n**Re-tap if any of above** — check pH, glucose, culture\n\nIf now meets Stage 3-4 criteria → proceed to drainage pathway.',
+    citation: [8, 13],
+    recommendation: 'Antibiotics alone. Repeat imaging 48-72h. Re-tap if enlarging, persistent fever, or deteriorating.',
     confidence: 'recommended',
-    summary: 'Simple effusion: antibiotics alone; repeat imaging 48-72h; re-tap if deteriorating or enlarging',
+    summary: 'Simple effusion: antibiotics alone; 95% resolve; re-tap if enlarging, fever >72h, or deteriorating',
+  },
+
+  {
+    id: 'pna-effusion-complicated',
+    type: 'question',
+    module: 6,
+    title: 'Complicated Effusion — Drainage Method',
+    body: '**Drainage is REQUIRED for Stage 3 effusions.**\n\n**Assess effusion characteristics:**\n\n**Free-flowing (no loculations):**\n• Chest tube (≥14 Fr) or pigtail catheter\n• Success rate ~90%\n\n**Loculated/Septated:**\n• tPA + DNase (MIST2 protocol) with chest tube\n• Success rate ~90% vs 16% for tube alone\n• Alternative: early VATS\n\n**Large/Organizing (>50% hemithorax or pleural thickening >2mm):**\n• Consider early VATS\n• Higher tube failure rate\n\n**What are the effusion characteristics?**',
+    citation: [8, 9, 14],
+    options: [
+      {
+        label: 'Free-Flowing — Chest Tube',
+        next: 'pna-drainage-tube',
+      },
+      {
+        label: 'Loculated — tPA/DNase or VATS',
+        next: 'pna-drainage-fibrinolytics',
+      },
+      {
+        label: 'Large/Organizing — Consider Early Surgery',
+        next: 'pna-surgery-indications',
+      },
+    ],
+    summary: 'Free-flowing = tube; loculated = tPA/DNase or VATS; large/organizing = consider early surgery',
+  },
+
+  {
+    id: 'pna-drainage-tube',
+    type: 'question',
+    module: 6,
+    title: 'Chest Tube Drainage',
+    body: '**Chest Tube Placement:**\n\n**Size:** ≥14 Fr (larger not proven better)\n• Small-bore (10-14 Fr) catheter equally effective\n• Image-guided placement preferred\n\n**Placement:**\n• Under ultrasound or CT guidance\n• Avoid "safe triangle" blind insertion if loculated\n\n**Management:**\n• -20 cm H2O suction\n• Daily drainage volume tracking\n• Flush Q6-8h with 20-30mL saline\n\n**Success criteria at 24-48h:**\n• Clinical improvement (fever, WBC, oxygenation)\n• Drainage >200mL/day initially\n• CXR: lung re-expansion, decreasing fluid\n\n**Assess response at 24-48h:**',
+    citation: [8, 9],
+    options: [
+      {
+        label: 'Adequate Response — Continue Tube',
+        next: 'pna-drainage-success',
+      },
+      {
+        label: 'Inadequate Response — Escalate',
+        next: 'pna-drainage-failed',
+      },
+    ],
+    summary: 'Small-bore (10-14 Fr) image-guided; -20 cmH2O suction; assess response at 24-48h',
+  },
+
+  {
+    id: 'pna-drainage-fibrinolytics',
+    type: 'info',
+    module: 6,
+    title: 'Intrapleural Fibrinolytics (MIST2)',
+    body: '**tPA + DNase Protocol (MIST2 Trial):**\n\n**Indication:** Loculated/septated parapneumonic effusion or empyema\n\n**Regimen:**\n• tPA 10mg + DNase 5mg in 30mL saline\n• Instill via chest tube, clamp 1 hour\n• BID × 3 days (6 total doses)\n\n**Evidence (MIST2 NEJM 2011):**\n• Combination: 90% success, 4% surgery rate\n• tPA alone: 55% success\n• DNase alone: 22% success\n• Placebo: 16% success\n\n**Contraindications:**\n• Bronchopleural fistula\n• Active bleeding/coagulopathy\n• Recent surgery (<2 weeks)\n• Allergy to components\n\n**Monitor for:**\n• Chest pain (common, transient)\n• Bleeding (rare but serious)\n• Systemic fibrinolysis (very rare)\n\n**Assess response after 3 days. If inadequate → surgery.**',
+    citation: [8, 14],
+    next: 'pna-drainage-tube',
+    summary: 'MIST2: tPA 10mg + DNase 5mg BID × 3 days; 90% success vs 16% placebo; contraindicated if fistula/bleeding',
+  },
+
+  {
+    id: 'pna-drainage-success',
+    type: 'result',
+    module: 6,
+    title: 'Successful Tube Drainage',
+    body: '**Tube Management:**\n\n**Continue drainage until:**\n• Output <100-150 mL/day (some use <50mL)\n• CXR shows lung re-expansion\n• No air leak\n\n**Tube Removal:**\n• When output low AND imaging clear\n• Consider water seal trial before removal\n• CXR 2-4h post-removal to rule out pneumothorax\n\n**Antibiotics:**\n• Ampicillin-sulbactam 3g IV Q6h, OR\n• Piperacillin-tazobactam 4.5g IV Q6h\n• Add MRSA coverage if risk factors\n• **Duration: 2-4 weeks total** (IV → PO transition)\n\n**PO Transition Options:**\n• Amoxicillin-clavulanate 875mg TID\n• If MRSA: add TMP-SMX or linezolid\n\n**Follow-up:**\n• CXR at 4-6 weeks\n• Persistent opacity → CT to assess for trapped lung',
+    citation: [8, 9],
+    recommendation: 'Remove tube when <100-150mL/day + lung re-expanded. Antibiotics 2-4 weeks total. CXR at 4-6 weeks.',
+    confidence: 'recommended',
+    summary: 'Remove tube when <100-150mL/day + lung re-expanded; antibiotics 2-4 weeks; follow-up CXR 4-6 weeks',
+  },
+
+  {
+    id: 'pna-drainage-failed',
+    type: 'question',
+    module: 6,
+    title: 'Failed Tube Drainage — Escalation',
+    body: '**Signs of Drainage Failure (at 24-48h):**\n• Persistent fever\n• No clinical improvement\n• Persistent/enlarging effusion on imaging\n• Loculations developing\n• Tube output <50mL with significant residual fluid\n\n**Options:**\n\n**1. Intrapleural Fibrinolytics (if not yet tried):**\n• tPA + DNase protocol\n• Success ~90% for loculated effusions\n\n**2. VATS (Video-Assisted Thoracoscopic Surgery):**\n• Break up loculations\n• Debride fibrinous peel\n• Definitive drainage\n• Success rate 85-90%\n\n**3. Thoracotomy with Decortication:**\n• Reserved for VATS failure or trapped lung\n• Higher morbidity but definitive\n\n**What is the next step?**',
+    citation: [9, 14, 15],
+    options: [
+      {
+        label: 'Try Fibrinolytics First',
+        next: 'pna-drainage-fibrinolytics',
+      },
+      {
+        label: 'Proceed to VATS',
+        next: 'pna-surgery-indications',
+      },
+    ],
+    summary: 'Failed drainage: try tPA/DNase if not done; otherwise VATS; thoracotomy reserved for VATS failure',
+  },
+
+  {
+    id: 'pna-surgery-indications',
+    type: 'result',
+    module: 6,
+    title: 'Surgical Indications — VATS vs Thoracotomy',
+    body: '**VATS Indications (preferred first-line surgical approach):**\n\n• Failed chest tube ± fibrinolytics (48-72h no improvement)\n• Multiloculated empyema\n• Empyema with thick fibrinous peel\n• Large effusion (>50% hemithorax)\n• Organizing effusion (>2mm pleural thickening)\n• Early Stage 3 empyema (some centers prefer early VATS)\n\n**VATS Procedure:**\n• Debridement of loculations/peel\n• Complete evacuation of infected material\n• Chest tube placement under direct vision\n• Success: 85-90%, mortality 0-2%\n\n**Thoracotomy with Decortication Indications:**\n\n• **VATS failure** (10-15% conversion rate)\n• **Trapped lung** (organized fibrous peel preventing expansion)\n• **Stage IV empyema** (organized with lung entrapped)\n• **Bronchopleural fistula** requiring repair\n• **Suspected malignancy** requiring tissue\n\n**Timing Matters:**\n• Early surgery (within 7-10 days) has better outcomes\n• After 3-4 weeks, fibrosis makes decortication more difficult\n\n**Thoracotomy Risks:**\n• Mortality 2-8%\n• Prolonged air leak (10-20%)\n• Higher morbidity than VATS\n\n**Post-Op:**\n• Continue IV antibiotics 2-4 weeks\n• CT at 6-8 weeks to assess resolution',
+    citation: [9, 14, 15],
+    recommendation: 'VATS first if tube/fibrinolytics fail. Thoracotomy for VATS failure, trapped lung, or fistula. Early surgery (7-10d) preferred.',
+    confidence: 'definitive',
+    summary: 'VATS: failed tube, loculated, organizing; Thoracotomy: VATS failure, trapped lung, fistula. Early surgery (7-10d) better.',
   },
 
   {
     id: 'pna-empyema',
-    type: 'result',
+    type: 'question',
     module: 6,
-    title: 'Empyema Management',
-    body: '[RAPID Score](#/info/pna-rapid) | [Antibiotic Dosing Reference](#/info/pna-abx-dosing)\n\n**Definition:** Infected pleural space with:\n• Frank pus, OR\n• Positive gram stain/culture, OR\n• pH <7.2 + glucose <60 + LDH elevated\n\n**DRAINAGE IS REQUIRED:**\n\n**Drainage Options:**\n• Percutaneous chest tube (≥14 Fr) — success ~83%\n• Image-guided pigtail catheter\n• VATS if loculated or failed tube drainage\n\n**Antibiotics (anaerobic coverage important):**\n• Ampicillin-sulbactam 3g IV Q6h, OR\n• Piperacillin-tazobactam 4.5g IV Q6h, OR\n• Ceftriaxone 2g IV daily + metronidazole 500mg IV Q8h\n\n**If MRSA risk:** Add vancomycin or linezolid\n\n**Duration:** 2-4 weeks total (IV then PO transition)\n\n**Intrapleural fibrinolytics:** Consider tPA + DNase if loculated (MIST2 protocol)',
+    title: 'Empyema (Stage 4) — Frank Pus',
+    body: '[RAPID Score](#/info/pna-rapid) | [Antibiotic Dosing Reference](#/info/pna-abx-dosing)\n\n**Definition:** Frank pus in the pleural space\n\n**IMMEDIATE DRAINAGE REQUIRED**\n\n**Antibiotics (anaerobic coverage critical):**\n• Ampicillin-sulbactam 3g IV Q6h, OR\n• Piperacillin-tazobactam 4.5g IV Q6h, OR\n• Ceftriaxone 2g IV + metronidazole 500mg IV Q8h\n\n**If MRSA risk:** Add vancomycin or linezolid\n\n**Duration:** 2-4 weeks total (IV → PO)\n\n**Common Organisms:**\n• Streptococcus (especially S. milleri group)\n• Staphylococcus aureus (including MRSA)\n• Anaerobes (esp. with aspiration history)\n• Gram-negatives (Klebsiella, E. coli)\n\n**Assess effusion characteristics for drainage method:**',
     citation: [8, 9],
-    recommendation: 'MUST drain (chest tube or VATS). Amp-sulb or pip-tazo × 2-4 weeks. Consider tPA+DNase if loculated.',
-    confidence: 'definitive',
-    summary: 'Empyema: MUST drain (chest tube or VATS); amp-sulb or pip-tazo × 2-4 weeks; consider tPA+DNase if loculated',
+    options: [
+      {
+        label: 'Free-Flowing Pus — Chest Tube',
+        next: 'pna-drainage-tube',
+      },
+      {
+        label: 'Loculated Pus — tPA/DNase',
+        next: 'pna-drainage-fibrinolytics',
+      },
+      {
+        label: 'Organizing/Trapped — Early VATS',
+        next: 'pna-surgery-indications',
+      },
+    ],
+    summary: 'Frank pus = immediate drainage; choose method by loculation status; antibiotics 2-4 weeks with anaerobic coverage',
   },
 
   {
@@ -500,4 +617,7 @@ export const PNEUMONIA_CITATIONS: Citation[] = [
   { num: 10, text: 'Kuhajda I, et al. Lung abscess-etiology, diagnostic and treatment options. Ann Transl Med. 2015;3(13):183.' },
   { num: 11, text: 'Mandell LA, Niederman MS. Aspiration Pneumonia. N Engl J Med. 2019;380(7):651-663.' },
   { num: 12, text: 'Uyeki TM, et al. Clinical Practice Guidelines by IDSA: 2018 Update on Diagnosis, Treatment, Chemoprophylaxis, and Institutional Outbreak Management of Seasonal Influenza. Clin Infect Dis. 2019;68(6):e1-e47.' },
+  { num: 13, text: 'Colice GL, et al. Medical and Surgical Treatment of Parapneumonic Effusions: An Evidence-Based Guideline. ACCP. Chest. 2000;118(4):1158-1171.' },
+  { num: 14, text: 'Piccolo F, et al. Management of the Infected Pleural Space. Semin Respir Crit Care Med. 2019;40(3):370-382.' },
+  { num: 15, text: 'Reichert M, et al. Surgical treatment of pleural empyema: comparison of VATS decortication versus open thoracotomy. J Thorac Dis. 2021;13(7):4398-4406.' },
 ];
