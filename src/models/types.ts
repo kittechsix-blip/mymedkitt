@@ -70,6 +70,8 @@ export interface DecisionNode {
   skippable?: boolean;
   /** Need-to-Know: Safety level — always-visible banner above accordion */
   safetyLevel?: 'critical' | 'warning';
+  /** Triggers a custom modal on render. 'mse-dictation' opens the MSE summary card. */
+  summaryHook?: 'mse-dictation';
 }
 
 export interface NodeOption {

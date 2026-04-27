@@ -1,7 +1,8 @@
 // MedKitt — Psychiatry Assessment (MSE Dictation Guide)
-// Structured Mental Status Exam walkthrough for documentation.
-// 6 modules: Start → Appearance & Behavior → Speech & Mood/Affect → Thought Process & Content → Perceptions & Cognition → Insight, Judgment & Risk
-// 7 nodes total.
+// Two paths from entry node `mse-start`:
+//   1. Reference Mode → existing read-only walkthrough (`mse-reference-start` → … → `mse-insight-judgment-risk`)
+//   2. Build Dictation → 10-card interactive multi-select that ends in a popup summary modal
+// Tree ID: psychiatry-assessment
 export const PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS = [
     { text: 'Active SI with plan and intent = high risk requiring admission or safety plan', nodeId: 'mse-insight-judgment-risk' },
     { text: 'Command auditory hallucinations to harm self/others = immediate safety concern', nodeId: 'mse-perceptions-cognition' },
@@ -11,10 +12,25 @@ export const PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS = [
 ];
 export const PSYCHIATRY_ASSESSMENT_NODES = [
     // =====================================================================
-    // MODULE 0: START
+    // ENTRY: pick Reference vs Build
     // =====================================================================
     {
         id: 'mse-start',
+        type: 'question',
+        module: 0,
+        title: 'Mental Status Exam',
+        body: 'Choose how you want to use this consult.\n\n**Reference Mode** — read-only walkthrough of standardized MSE descriptors for each component. Useful for teaching, residency review, or refreshing terminology before dictation.\n\n**Build Dictation** — interactive multi-select across 10 MSE domains. Tap the descriptors that match your patient; at the end you get a pop-up dictation summary you can copy into the EMR.',
+        options: [
+            { label: 'Reference Mode', description: 'Read-only descriptors by component', next: 'mse-reference-start' },
+            { label: 'Build Dictation', description: 'Multi-select each domain → summary card', next: 'mse-build-appearance' },
+        ],
+        summary: 'Reference Mode (read-only descriptors) or Build Dictation (interactive checklist → EMR summary).',
+    },
+    // =====================================================================
+    // REFERENCE MODE — original 6-node walkthrough (unchanged content)
+    // =====================================================================
+    {
+        id: 'mse-reference-start',
         type: 'info',
         module: 0,
         title: 'Mental Status Exam Dictation Guide',
@@ -24,9 +40,6 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         summary: 'Structured MSE dictation guide with standardized terminology — 5 component sections for documentation',
         skippable: true,
     },
-    // =====================================================================
-    // MODULE 1: APPEARANCE & BEHAVIOR
-    // =====================================================================
     {
         id: 'mse-appearance-behavior',
         type: 'info',
@@ -38,9 +51,6 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         summary: 'Grooming, hygiene, dress, psychomotor activity, eye contact, cooperation — standardized descriptors',
         skippable: true,
     },
-    // =====================================================================
-    // MODULE 2: SPEECH & MOOD/AFFECT
-    // =====================================================================
     {
         id: 'mse-speech-mood',
         type: 'info',
@@ -51,9 +61,6 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         next: 'mse-thought-process-content',
         summary: 'Speech rate/rhythm/volume, mood in patient\'s words, affect range/congruence/quality — key distinction',
     },
-    // =====================================================================
-    // MODULE 3: THOUGHT PROCESS & CONTENT
-    // =====================================================================
     {
         id: 'mse-thought-process-content',
         type: 'info',
@@ -65,9 +72,6 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         summary: 'Process (linear to word salad), SI/HI classification, delusions by type, obsessions/compulsions',
         safetyLevel: 'warning',
     },
-    // =====================================================================
-    // MODULE 4: PERCEPTIONS & COGNITION
-    // =====================================================================
     {
         id: 'mse-perceptions-cognition',
         type: 'info',
@@ -79,9 +83,6 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         summary: 'Hallucinations by type (command AH = safety concern), orientation x4, attention, memory testing',
         safetyLevel: 'warning',
     },
-    // =====================================================================
-    // MODULE 5: INSIGHT, JUDGMENT & RISK
-    // =====================================================================
     {
         id: 'mse-insight-judgment-risk',
         type: 'result',
@@ -91,6 +92,316 @@ export const PSYCHIATRY_ASSESSMENT_NODES = [
         citation: [1, 2, 3, 4],
         recommendation: 'Document MSE findings. Risk stratification guides disposition and safety planning. Use C-SSRS for standardized suicide risk assessment.',
         confidence: 'definitive',
+    },
+    // =====================================================================
+    // BUILD DICTATION — 10 interactive cards → summary modal
+    // =====================================================================
+    {
+        id: 'mse-build-appearance',
+        type: 'input',
+        module: 1,
+        title: 'Appearance',
+        body: 'Select all descriptors that apply.',
+        inputs: [
+            {
+                name: 'appearance',
+                type: 'checkbox',
+                label: 'Appearance',
+                options: [
+                    { label: 'Well-groomed', value: 'well-groomed' },
+                    { label: 'Disheveled / poor hygiene', value: 'disheveled with poor hygiene' },
+                    { label: 'Unkempt', value: 'unkempt' },
+                    { label: 'Appears stated age', value: 'appears stated age' },
+                    { label: 'Older than stated', value: 'appears older than stated age' },
+                    { label: 'Younger than stated', value: 'appears younger than stated age' },
+                    { label: 'Dress appropriate', value: 'dressed appropriately for context' },
+                    { label: 'Dress inappropriate', value: 'dressed inappropriately for context' },
+                    { label: 'Bizarre dress', value: 'bizarrely dressed' },
+                    { label: 'Malodorous', value: 'malodorous' },
+                ],
+            },
+        ],
+        next: 'mse-build-behavior',
+    },
+    {
+        id: 'mse-build-behavior',
+        type: 'input',
+        module: 1,
+        title: 'Behavior',
+        body: 'Psychomotor activity, eye contact, and cooperation.',
+        inputs: [
+            {
+                name: 'behavior',
+                type: 'checkbox',
+                label: 'Behavior',
+                options: [
+                    { label: 'Calm / cooperative', value: 'calm and cooperative' },
+                    { label: 'Agitated', value: 'agitated with increased motor activity' },
+                    { label: 'Restless / pacing', value: 'restless and pacing' },
+                    { label: 'Psychomotor retardation', value: 'psychomotor retardation with slowed movements' },
+                    { label: 'Catatonic', value: 'catatonic with minimal response to environment' },
+                    { label: 'Good eye contact', value: 'good eye contact' },
+                    { label: 'Poor eye contact', value: 'poor eye contact' },
+                    { label: 'Avoidant gaze', value: 'avoidant gaze' },
+                    { label: 'Intense / fixed staring', value: 'intense, fixed staring' },
+                    { label: 'Guarded', value: 'guarded and reluctant to share' },
+                    { label: 'Hostile', value: 'hostile' },
+                    { label: 'Uncooperative', value: 'uncooperative with exam' },
+                ],
+            },
+        ],
+        next: 'mse-build-speech',
+    },
+    {
+        id: 'mse-build-speech',
+        type: 'input',
+        module: 2,
+        title: 'Speech',
+        body: 'Rate, rhythm, volume, and tone.',
+        inputs: [
+            {
+                name: 'speech',
+                type: 'checkbox',
+                label: 'Speech',
+                options: [
+                    { label: 'Normal rate / rhythm / volume', value: 'normal rate, rhythm, and volume' },
+                    { label: 'Rapid', value: 'rapid' },
+                    { label: 'Slow', value: 'slow' },
+                    { label: 'Pressured', value: 'pressured and difficult to interrupt' },
+                    { label: 'Dysarthric / slurred', value: 'dysarthric with slurred articulation' },
+                    { label: 'Stuttering', value: 'stuttering' },
+                    { label: 'Loud', value: 'loud' },
+                    { label: 'Soft', value: 'soft' },
+                    { label: 'Mute', value: 'mute' },
+                    { label: 'Monotone', value: 'monotone' },
+                    { label: 'Anxious tone', value: 'anxious in tone' },
+                ],
+            },
+        ],
+        next: 'mse-build-mood',
+    },
+    {
+        id: 'mse-build-mood',
+        type: 'input',
+        module: 2,
+        title: 'Mood',
+        body: 'Patient\'s **subjective** description — pick the descriptor that best matches their own words. Quote the patient verbatim in your final dictation if possible.',
+        inputs: [
+            {
+                name: 'mood',
+                type: 'checkbox',
+                label: 'Mood (patient-reported)',
+                options: [
+                    { label: 'Euthymic / "fine"', value: 'mood reported as "fine"' },
+                    { label: 'Depressed', value: 'mood reported as "depressed"' },
+                    { label: 'Anxious', value: 'mood reported as "anxious"' },
+                    { label: 'Angry', value: 'mood reported as "angry"' },
+                    { label: 'Scared', value: 'mood reported as "scared"' },
+                    { label: 'Empty / numb', value: 'mood reported as "empty"' },
+                    { label: '"I want to die"', value: 'mood reported as "I want to die"' },
+                    { label: 'Hopeless', value: 'mood reported as "hopeless"' },
+                    { label: 'Irritable', value: 'mood reported as "irritable"' },
+                ],
+            },
+        ],
+        next: 'mse-build-affect',
+    },
+    {
+        id: 'mse-build-affect',
+        type: 'input',
+        module: 2,
+        title: 'Affect',
+        body: 'Your **objective** observation — range, congruence, and quality.',
+        inputs: [
+            {
+                name: 'affect',
+                type: 'checkbox',
+                label: 'Affect',
+                options: [
+                    { label: 'Full range', value: 'full range' },
+                    { label: 'Restricted range', value: 'restricted range' },
+                    { label: 'Blunted', value: 'blunted' },
+                    { label: 'Flat', value: 'flat' },
+                    { label: 'Congruent with mood', value: 'congruent with stated mood' },
+                    { label: 'Incongruent with mood', value: 'incongruent with stated mood' },
+                    { label: 'Euthymic', value: 'euthymic' },
+                    { label: 'Dysphoric', value: 'dysphoric' },
+                    { label: 'Euphoric', value: 'euphoric' },
+                    { label: 'Anxious', value: 'anxious' },
+                    { label: 'Irritable', value: 'irritable' },
+                    { label: 'Labile', value: 'labile and rapidly shifting' },
+                ],
+            },
+        ],
+        next: 'mse-build-thought-process',
+    },
+    {
+        id: 'mse-build-thought-process',
+        type: 'input',
+        module: 3,
+        title: 'Thought Process',
+        body: 'How the patient organizes and connects ideas.',
+        inputs: [
+            {
+                name: 'thought-process',
+                type: 'checkbox',
+                label: 'Thought process',
+                options: [
+                    { label: 'Linear / goal-directed', value: 'linear and goal-directed' },
+                    { label: 'Circumstantial', value: 'circumstantial' },
+                    { label: 'Tangential', value: 'tangential' },
+                    { label: 'Loose associations', value: 'loose associations' },
+                    { label: 'Flight of ideas', value: 'flight of ideas' },
+                    { label: 'Thought blocking', value: 'thought blocking' },
+                    { label: 'Perseveration', value: 'perseveration' },
+                    { label: 'Word salad', value: 'word salad' },
+                ],
+            },
+        ],
+        next: 'mse-build-thought-content',
+        safetyLevel: 'warning',
+    },
+    {
+        id: 'mse-build-thought-content',
+        type: 'input',
+        module: 3,
+        title: 'Thought Content',
+        body: 'SI/HI screen and delusional content. **Document SI/HI exactly as classified — passive, active without plan, or active with plan/intent.**',
+        inputs: [
+            {
+                name: 'thought-content',
+                type: 'checkbox',
+                label: 'Thought content',
+                options: [
+                    { label: 'Denies SI', value: 'denies suicidal ideation' },
+                    { label: 'Passive SI', value: 'passive suicidal ideation' },
+                    { label: 'Active SI without plan', value: 'active suicidal ideation without plan' },
+                    { label: 'Active SI WITH plan', value: 'active suicidal ideation with plan' },
+                    { label: 'Active SI WITH plan AND intent', value: 'active suicidal ideation with plan and intent' },
+                    { label: 'Denies HI', value: 'denies homicidal ideation' },
+                    { label: 'Passive HI', value: 'passive homicidal ideation' },
+                    { label: 'Active HI without plan', value: 'active homicidal ideation without plan' },
+                    { label: 'Active HI WITH plan', value: 'active homicidal ideation with plan' },
+                    { label: 'No delusions', value: 'no delusions' },
+                    { label: 'Paranoid delusions', value: 'paranoid delusions' },
+                    { label: 'Grandiose delusions', value: 'grandiose delusions' },
+                    { label: 'Somatic delusions', value: 'somatic delusions' },
+                    { label: 'Religious delusions', value: 'religious delusions' },
+                    { label: 'Erotomanic delusions', value: 'erotomanic delusions' },
+                    { label: 'Ideas of reference', value: 'ideas of reference' },
+                    { label: 'Obsessions / compulsions present', value: 'obsessions and compulsions present' },
+                ],
+            },
+        ],
+        next: 'mse-build-perceptions',
+        safetyLevel: 'critical',
+    },
+    {
+        id: 'mse-build-perceptions',
+        type: 'input',
+        module: 4,
+        title: 'Perceptions',
+        body: 'Hallucinations and illusions. **Command auditory hallucinations to harm self/others = immediate safety concern.**',
+        inputs: [
+            {
+                name: 'perceptions',
+                type: 'checkbox',
+                label: 'Perceptions',
+                options: [
+                    { label: 'Denies hallucinations', value: 'denies hallucinations' },
+                    { label: 'Auditory — non-command', value: 'non-command auditory hallucinations' },
+                    { label: 'Auditory — command (no harm)', value: 'command auditory hallucinations without harm content' },
+                    { label: 'Auditory — command to harm SELF', value: 'command auditory hallucinations to harm self' },
+                    { label: 'Auditory — command to harm OTHERS', value: 'command auditory hallucinations to harm others' },
+                    { label: 'Visual hallucinations', value: 'visual hallucinations' },
+                    { label: 'Tactile hallucinations', value: 'tactile hallucinations' },
+                    { label: 'Olfactory hallucinations', value: 'olfactory hallucinations' },
+                    { label: 'Illusions present', value: 'illusions present' },
+                    { label: 'No illusions', value: 'no illusions' },
+                ],
+            },
+        ],
+        next: 'mse-build-cognition',
+        safetyLevel: 'critical',
+    },
+    {
+        id: 'mse-build-cognition',
+        type: 'input',
+        module: 4,
+        title: 'Cognition',
+        body: 'Orientation, attention, and memory.',
+        inputs: [
+            {
+                name: 'cognition',
+                type: 'checkbox',
+                label: 'Cognition',
+                options: [
+                    { label: 'Alert and oriented x4', value: 'alert and oriented to person, place, time, and situation' },
+                    { label: 'Oriented x3', value: 'oriented to person, place, and time' },
+                    { label: 'Oriented x2', value: 'oriented to person and place only' },
+                    { label: 'Oriented x1', value: 'oriented to person only' },
+                    { label: 'Disoriented', value: 'disoriented' },
+                    { label: 'Attention intact', value: 'attention intact' },
+                    { label: 'Attention impaired', value: 'attention impaired' },
+                    { label: 'Memory intact', value: 'memory intact (immediate, recent, remote)' },
+                    { label: 'Short-term memory impaired', value: 'short-term memory impairment' },
+                    { label: 'Long-term memory impaired', value: 'long-term memory impairment' },
+                ],
+            },
+        ],
+        next: 'mse-build-insight-judgment-risk',
+    },
+    {
+        id: 'mse-build-insight-judgment-risk',
+        type: 'input',
+        module: 5,
+        title: 'Insight, Judgment & Risk',
+        body: 'Patient\'s awareness of illness, decision-making, and overall risk tier. After Continue you will see the dictation summary.',
+        inputs: [
+            {
+                name: 'insight',
+                type: 'checkbox',
+                label: 'Insight',
+                options: [
+                    { label: 'Good insight', value: 'good insight' },
+                    { label: 'Fair insight', value: 'fair insight' },
+                    { label: 'Poor insight (anosognosia)', value: 'poor insight' },
+                ],
+            },
+            {
+                name: 'judgment',
+                type: 'checkbox',
+                label: 'Judgment',
+                options: [
+                    { label: 'Good judgment', value: 'intact judgment' },
+                    { label: 'Fair judgment', value: 'fair judgment' },
+                    { label: 'Poor judgment', value: 'impaired judgment' },
+                ],
+            },
+            {
+                name: 'risk',
+                type: 'checkbox',
+                label: 'Risk stratification',
+                options: [
+                    { label: 'LOW risk (no SI/HI, protective factors)', value: 'LOW suicide risk — no SI/HI, no plan, protective factors present' },
+                    { label: 'MODERATE risk (passive SI or prior attempts)', value: 'MODERATE suicide risk — passive SI or prior attempts, limited protective factors' },
+                    { label: 'HIGH risk (active SI with plan, command AH, recent attempt)', value: 'HIGH suicide risk — active SI with plan, intent, or command AH; admission and safety planning indicated' },
+                ],
+            },
+        ],
+        citation: [1, 2, 3, 4],
+        next: 'mse-build-summary',
+        safetyLevel: 'critical',
+    },
+    {
+        id: 'mse-build-summary',
+        type: 'result',
+        module: 5,
+        title: 'MSE Dictation Summary',
+        body: 'Your selections are formatted as clinical prose in the pop-up summary card. Tap **Copy to Clipboard**, then dictate or paste into the EMR.\n\nIf the card did not appear, tap **Start Over** and walk through the builder again.',
+        recommendation: 'Verify all findings before submitting documentation. Risk stratification guides disposition and safety planning.',
+        confidence: 'definitive',
+        summaryHook: 'mse-dictation',
     },
 ];
 // -------------------------------------------------------------------

@@ -5,6 +5,7 @@ import { renderBodyText } from './text-renderer.js';
 import { renderInlineCitations } from './reference-table.js';
 import { create3DButton } from './button-3d.js';
 import { findDrugIdByName } from '../data/drug-store.js';
+import { showMseSummaryModal } from './mse-summary-modal.js';
 import { router } from '../services/router.js';
 /** Create a decision card DOM element for the given node */
 export function createDecisionCard(node, opts) {
@@ -29,8 +30,13 @@ export function createDecisionCard(node, opts) {
                 renderActiveResult(card, node, opts);
                 break;
             case 'input':
-                renderActiveQuestion(card, node, opts);
+                renderActiveInput(card, node, opts);
                 break;
+        }
+        // Trigger custom summary modals after the card is built.
+        if (node.summaryHook === 'mse-dictation' && opts.answers) {
+            const answers = opts.answers;
+            requestAnimationFrame(() => showMseSummaryModal(answers));
         }
     }
     return card;
@@ -61,6 +67,21 @@ function renderAnsweredCard(card, node, opts) {
             a.classList.add('answered-pill__a--critical');
         else if (selectedOpt.urgency === 'urgent')
             a.classList.add('answered-pill__a--urgent');
+        pill.appendChild(q);
+        pill.appendChild(arrow);
+        pill.appendChild(a);
+    }
+    else if (node.type === 'input') {
+        // Input node: Title → comma-separated selections (or em dash if empty)
+        const q = document.createElement('span');
+        q.className = 'answered-pill__q';
+        q.textContent = node.title;
+        const arrow = document.createElement('span');
+        arrow.className = 'answered-pill__arrow';
+        arrow.textContent = '→';
+        const a = document.createElement('span');
+        a.className = 'answered-pill__a';
+        a.textContent = opts.selectedLabel && opts.selectedLabel.length > 0 ? opts.selectedLabel : '—';
         pill.appendChild(q);
         pill.appendChild(arrow);
         pill.appendChild(a);
@@ -169,6 +190,80 @@ function renderActiveInfo(card, node, opts) {
         });
         card.appendChild(continueBtn);
     }
+}
+// -------------------------------------------------------------------
+// Active input card (currently: checkbox-group multi-select for MSE builder)
+// -------------------------------------------------------------------
+function renderActiveInput(card, node, opts) {
+    const title = document.createElement('h2');
+    title.className = 'decision-card__title';
+    title.textContent = node.title;
+    card.appendChild(title);
+    renderSafetyBanner(card, node);
+    if (node.body) {
+        const body = document.createElement('div');
+        body.className = 'decision-card__body';
+        renderBodyText(body, node.body);
+        card.appendChild(body);
+    }
+    // Track selections across all checkbox-type inputs in this node.
+    const selected = new Set();
+    // Render each input in order. Currently only `checkbox` is supported; other
+    // input types fall through to a placeholder so partial implementations don't
+    // crash.
+    for (const input of node.inputs ?? []) {
+        renderInputField(card, input, selected);
+    }
+    const continueBtn = create3DButton('Continue \u2192', {
+        variant: 'charcoal',
+        onClick: () => opts.onInputContinue?.(Array.from(selected)),
+    });
+    card.appendChild(continueBtn);
+    if (node.citation?.length && opts.config) {
+        renderInlineCitations(card, node.citation, opts.config.citations);
+    }
+}
+function renderInputField(card, input, selected) {
+    if (input.type !== 'checkbox' || !input.options || input.options.length === 0) {
+        // Other input types (number, select) are not yet wired into the renderer.
+        return;
+    }
+    const group = document.createElement('div');
+    group.className = 'checkbox-group-input';
+    if (input.label) {
+        const label = document.createElement('div');
+        label.className = 'checkbox-group-input__label';
+        label.textContent = input.label;
+        group.appendChild(label);
+    }
+    for (const opt of input.options) {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'checkbox-option';
+        row.setAttribute('aria-pressed', 'false');
+        const indicator = document.createElement('span');
+        indicator.className = 'checkbox-option__indicator';
+        indicator.setAttribute('aria-hidden', 'true');
+        const labelText = document.createElement('span');
+        labelText.className = 'checkbox-option__label';
+        labelText.textContent = opt.label;
+        row.appendChild(indicator);
+        row.appendChild(labelText);
+        row.addEventListener('click', () => {
+            if (selected.has(opt.value)) {
+                selected.delete(opt.value);
+                row.classList.remove('checkbox-option--selected');
+                row.setAttribute('aria-pressed', 'false');
+            }
+            else {
+                selected.add(opt.value);
+                row.classList.add('checkbox-option--selected');
+                row.setAttribute('aria-pressed', 'true');
+            }
+        });
+        group.appendChild(row);
+    }
+    card.appendChild(group);
 }
 // -------------------------------------------------------------------
 // Active result card

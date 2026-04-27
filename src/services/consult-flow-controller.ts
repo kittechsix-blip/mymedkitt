@@ -45,19 +45,27 @@ export class ConsultFlowController {
 
       const answerLabel = session.answers[nodeId];
       let selectedIndex: number | undefined;
+      let selectedLabel: string | undefined;
 
-      if (answerLabel !== undefined && node.options) {
-        // Find matching option index
-        const labelStr = String(answerLabel);
-        selectedIndex = node.options.findIndex(o => o.label === labelStr);
-        if (selectedIndex === -1) selectedIndex = undefined;
+      if (answerLabel !== undefined) {
+        if (Array.isArray(answerLabel)) {
+          // Input node with checkbox-group selections
+          selectedLabel = answerLabel.join(', ');
+        } else {
+          selectedLabel = String(answerLabel);
+          if (node.options) {
+            // Find matching option index for question nodes
+            const idx = node.options.findIndex(o => o.label === selectedLabel);
+            if (idx !== -1) selectedIndex = idx;
+          }
+        }
       }
 
       this.cardStack.push({
         nodeId,
         node,
         selectedOptionIndex: selectedIndex,
-        selectedLabel: answerLabel !== undefined ? String(answerLabel) : undefined,
+        selectedLabel,
       });
     }
 
@@ -94,6 +102,32 @@ export class ConsultFlowController {
     this.cardStack.push({
       nodeId: currentNode.id,
       node: currentNode,
+    });
+
+    this.engine.continueToNext();
+    this.autoSkipIfNeeded();
+    return this.engine.getCurrentNode();
+  }
+
+  /**
+   * Continue from an input node, recording the user's checkbox selections in
+   * the session answers. Mutates the live session via getSession() so the
+   * engine's persistence picks it up on the next saveSession() inside
+   * continueToNext().
+   */
+  continueWithInput(values: string[]): DecisionNode | null {
+    const currentNode = this.engine.getCurrentNode();
+    if (!currentNode) return null;
+
+    const session = this.engine.getSession();
+    if (session) {
+      session.answers[currentNode.id] = values;
+    }
+
+    this.cardStack.push({
+      nodeId: currentNode.id,
+      node: currentNode,
+      selectedLabel: values.length > 0 ? values.join(', ') : undefined,
     });
 
     this.engine.continueToNext();

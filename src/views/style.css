@@ -4457,3 +4457,246 @@ body.critical-actions-open {
   }
 }
 
+/* ==================================================================
+   Checkbox-group Input (MSE builder)
+   ================================================================== */
+
+.checkbox-group-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.checkbox-group-input + .checkbox-group-input {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.checkbox-group-input__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 4px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #4a4a4a 0%, #333 100%);
+  color: #fff;
+  border: 1px solid #2a2a2a;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(0,0,0,0.18);
+  transition: background 0.12s ease, transform 0.05s ease, box-shadow 0.12s ease;
+}
+
+.checkbox-option:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.checkbox-option--selected {
+  background: linear-gradient(180deg, #4ec27a 0%, #3CB371 100%);
+  border-color: #2f9c5f;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.checkbox-option__indicator {
+  flex: 0 0 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.checkbox-option--selected .checkbox-option__indicator {
+  background: #fff;
+  border-color: #fff;
+}
+
+.checkbox-option--selected .checkbox-option__indicator::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #2f9c5f;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-option__label {
+  flex: 1;
+  line-height: 1.3;
+}
+
+/* ==================================================================
+   MSE Dictation Summary Modal
+   ================================================================== */
+
+.mse-summary-overlay {
+  align-items: flex-end;
+}
+
+.mse-summary-panel {
+  max-width: 560px;
+  padding: 0;
+}
+
+.mse-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-surface-card);
+  z-index: 1;
+}
+
+.mse-summary-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.mse-summary-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.mse-summary-close:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+.mse-summary-banner {
+  margin: 12px 16px 0;
+}
+
+.mse-summary-body {
+  padding: 16px 20px 8px;
+}
+
+.mse-summary-intro {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.mse-dictation-text {
+  background: #FAFAF5;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.mse-dictation-header {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mse-dictation-row {
+  padding: 4px 0;
+}
+
+.mse-dictation-row + .mse-dictation-row {
+  border-top: 1px dashed rgba(0,0,0,0.06);
+}
+
+.mse-dictation-label {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.mse-dictation-value {
+  color: var(--color-text-primary);
+}
+
+.mse-dictation-row--empty .mse-dictation-value {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.mse-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 20px 16px;
+}
+
+.mse-summary-action {
+  min-height: 48px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.12s ease, transform 0.05s ease;
+}
+
+.mse-summary-action:active {
+  transform: translateY(1px);
+}
+
+.mse-summary-action--primary {
+  background: linear-gradient(180deg, #4ec27a 0%, #3CB371 100%);
+  color: #fff;
+  border-color: #2f9c5f;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.mse-summary-action--secondary {
+  background: linear-gradient(180deg, #4a4a4a 0%, #333 100%);
+  color: #fff;
+  border-color: #2a2a2a;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 2px rgba(0,0,0,0.18);
+}
+
+.mse-summary-action--tertiary {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+.mse-summary-disclaimer {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: 0 20px 18px;
+  line-height: 1.4;
+}
+
+

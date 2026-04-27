@@ -134,11 +134,13 @@ function renderFlow(container: HTMLElement): void {
   const currentNode = controller.getCurrentNode();
 
   if (currentNode) {
+    const sessionAnswers = controller.getEngine().getSession()?.answers;
     const activeCard = createDecisionCard(currentNode, {
       state: 'active',
       config: currentConfig,
       treeId: currentTreeId ?? undefined,
       entryNodeId: currentEntryNodeId ?? undefined,
+      answers: sessionAnswers,
       onOptionSelect: (i) => {
         if (!controller) return;
         const nextNode = controller.selectOption(i);
@@ -160,6 +162,21 @@ function renderFlow(container: HTMLElement): void {
         if (!controller) return;
         const nextNode = controller.continueToNext();
         // Track node visit for KittMD analytics
+        if (nextNode && currentTreeId) {
+          trackNodeVisit(currentTreeId, nextNode.id);
+        }
+        renderFlow(container);
+        requestAnimationFrame(() => {
+          const cards = container.querySelectorAll('.decision-card--active');
+          const last = cards[cards.length - 1];
+          if (last) {
+            last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      },
+      onInputContinue: (values) => {
+        if (!controller) return;
+        const nextNode = controller.continueWithInput(values);
         if (nextNode && currentTreeId) {
           trackNodeVisit(currentTreeId, nextNode.id);
         }
