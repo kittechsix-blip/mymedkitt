@@ -801,9 +801,9 @@ const TOOLBAR_CONFIGS = {
         { id: 'resp-tx', label: 'Resp Tx', icon: '🫁', action: 'jump', target: 'submersion-resp-treatment' },
     ],
     'psych-assessment': [
+        { id: 'cssrs', label: 'C-SSRS', icon: '📋', action: 'calculator', target: 'cssrs-screen' },
         { id: 'si-hi', label: 'SI/HI', icon: '⚠️', action: 'jump', target: 'psych-safety' },
         { id: 'active-si', label: 'Active SI', icon: '🚨', action: 'jump', target: 'psych-si-active' },
-        { id: 'labs', label: 'Labs', icon: '🧪', action: 'jump', target: 'psych-labs' },
         { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'psych-disposition' },
     ],
     'psychiatry-assessment': [

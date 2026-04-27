@@ -405,8 +405,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'psych-assessment',
-        title: 'Psychiatric Assessment',
-        subtitle: 'History → MSE (10 Components) → Safety → Disposition',
+        title: 'Psychiatric Evaluation',
+        subtitle: 'History → MSE (10 Components) → C-SSRS → Safety → Disposition',
         categoryId: 'emergency-medicine',
         version: '1.0',
         nodeCount: 19,
