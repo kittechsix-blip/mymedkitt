@@ -21,6 +21,8 @@ import { NEONATAL_RESUS_NODES, NEONATAL_RESUS_CITATIONS, NEONATAL_RESUS_MODULE_L
 import { DISTAL_RADIUS_NODES, DISTAL_RADIUS_CITATIONS, DISTAL_RADIUS_MODULE_LABELS } from '../src/data/trees/distal-radius.js';
 import { SODIUM_NODES, SODIUM_CITATIONS, SODIUM_MODULE_LABELS } from '../src/data/trees/sodium.js';
 import { SPLINTING_NODES, SPLINTING_CITATIONS, SPLINTING_MODULE_LABELS } from '../src/data/trees/splinting.js';
+// @ts-expect-error — pure JS helper, untyped on purpose (consumed by both .mjs scripts and this .ts file)
+import { nodeRowFromDecisionNode } from './node-row.mjs';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
@@ -102,33 +104,7 @@ async function seed() {
   const allNodes: unknown[] = [];
   for (const tree of TREES) {
     for (let i = 0; i < tree.nodes.length; i++) {
-      const node = tree.nodes[i];
-      allNodes.push({
-        id: node.id,
-        tree_id: tree.id,
-        type: node.type,
-        module: node.module,
-        title: node.title,
-        body: node.body,
-        citation: node.citation ?? [],
-        options: node.options ?? [],
-        inputs: node.inputs ?? [],
-        next: node.next ?? null,
-        recommendation: node.recommendation ?? null,
-        treatment: node.treatment ?? null,
-        confidence: node.confidence ?? null,
-        images: node.images ?? [],
-        calculator_links: node.calculatorLinks ?? [],
-        sort_order: i,
-        // Disclosure/safety fields added 2026-04-28 — must stay in sync with
-        // supabase-push.mjs and generate-supabase-sql.mjs row mappers.
-        summary: node.summary ?? null,
-        skippable: node.skippable ?? null,
-        safety_level: node.safetyLevel ?? null,
-        when_to_use: node.whenToUse ?? null,
-        pearls: node.pearls ?? null,
-        evidence: node.evidence ?? null,
-      });
+      allNodes.push(nodeRowFromDecisionNode(tree.nodes[i], tree.id, i));
     }
     totalNodes += tree.nodes.length;
   }

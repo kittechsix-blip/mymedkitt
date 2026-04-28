@@ -18,6 +18,7 @@ import { readFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { TREE_REGISTRY } from './tree-registry.mjs';
+import { nodeRowFromDecisionNode } from './node-row.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, '..');
@@ -285,29 +286,7 @@ if (!isUpdate) {
   await supaDelete('decision_nodes', `tree_id=eq.${consultId}`);
 
   // Convert nodes to Supabase format
-  const nodeRows = nodes.map(n => ({
-    id: n.id,
-    tree_id: consultId,
-    type: n.type,
-    module: n.module !== undefined ? n.module : null,
-    title: n.title || null,
-    body: n.body || null,
-    recommendation: n.recommendation || null,
-    next: n.next || null,
-    options: n.options || null,
-    inputs: n.inputs || null,
-    calculator_links: n.calculatorLinks || null,
-    treatment: n.treatment || null,
-    citation: n.citation || null,
-    confidence: n.confidence || null,
-    images: n.images || null,
-    summary: n.summary || null,
-    skippable: n.skippable !== undefined ? n.skippable : null,
-    safety_level: n.safetyLevel || null,
-    when_to_use: n.whenToUse || null,
-    pearls: n.pearls || null,
-    evidence: n.evidence || null,
-  }));
+  const nodeRows = nodes.map((n, i) => nodeRowFromDecisionNode(n, consultId, i));
 
   // Batch insert (Supabase has row limits)
   const BATCH_SIZE = 50;
@@ -327,29 +306,7 @@ if (!isUpdate) {
   console.log(`  Replacing ${nodes.length} nodes...`);
   await supaDelete('decision_nodes', `tree_id=eq.${consultId}`);
 
-  const nodeRows = nodes.map(n => ({
-    id: n.id,
-    tree_id: consultId,
-    type: n.type,
-    module: n.module !== undefined ? n.module : null,
-    title: n.title || null,
-    body: n.body || null,
-    recommendation: n.recommendation || null,
-    next: n.next || null,
-    options: n.options || null,
-    inputs: n.inputs || null,
-    calculator_links: n.calculatorLinks || null,
-    treatment: n.treatment || null,
-    citation: n.citation || null,
-    confidence: n.confidence || null,
-    images: n.images || null,
-    summary: n.summary || null,
-    skippable: n.skippable !== undefined ? n.skippable : null,
-    safety_level: n.safetyLevel || null,
-    when_to_use: n.whenToUse || null,
-    pearls: n.pearls || null,
-    evidence: n.evidence || null,
-  }));
+  const nodeRows = nodes.map((n, i) => nodeRowFromDecisionNode(n, consultId, i));
 
   const BATCH_SIZE = 50;
   for (let i = 0; i < nodeRows.length; i += BATCH_SIZE) {

@@ -16,6 +16,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { TREE_REGISTRY } from './tree-registry.mjs';
+import { NODE_COLUMNS } from './node-row.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, '..');
@@ -262,7 +263,10 @@ for (const [moduleNum, moduleNodes] of [...modules.entries()].sort((a, b) => a[0
   lines.push(`-- MODULE ${moduleNum}: ${moduleLabel.toUpperCase()}`);
 
   for (const node of moduleNodes) {
-    lines.push(`INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, options, inputs, next, recommendation, treatment, confidence, images, calculator_links, sort_order, summary, skippable, safety_level, when_to_use, pearls, evidence) VALUES`);
+    // Column list comes from the shared NODE_COLUMNS so it can't drift from
+    // node-row.mjs / tree-service.ts. VALUES stays hand-built because each
+    // column has its own SQL literal type (jsonb / text / int / bool).
+    lines.push(`INSERT INTO decision_nodes (${NODE_COLUMNS.join(', ')}) VALUES`);
     lines.push(`(${sqlEscape(node.id)}, ${sqlEscape(consultId)}, ${sqlEscape(node.type)}, ${node.module || 0},`);
     lines.push(` ${sqlEscape(node.title)},`);
     lines.push(` ${sqlEscape(node.body)},`);
