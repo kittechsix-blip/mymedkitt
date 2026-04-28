@@ -97,6 +97,9 @@ if (!diffOutput.trim()) {
       'burns':            { prefix: 'BURNS' },
       'echo-views':       { prefix: 'ECHO_VIEWS' },
       'pneumonia':        { prefix: 'PNEUMONIA' },
+      'svt':              { prefix: 'SVT' },
+      'gallbladder':      { prefix: 'GALLBLADDER' },
+      'post-tonsillectomy-bleed': { prefix: 'PTH' },
     };
 
     const sqlLines = [];

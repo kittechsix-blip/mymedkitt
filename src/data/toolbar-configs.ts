@@ -1403,6 +1403,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pseudo', label: 'Pseudo Risk', icon: '🧫', action: 'overlay', target: 'pna-pseudo-info' },
     { id: 'effusion', label: 'Effusion', icon: '💧', action: 'overlay', target: 'pna-effusion-info' },
   ],
+  'svt': [
+    { id: 'valsalva', label: 'Valsalva', icon: '💨', action: 'overlay', target: 'svt-valsalva' },
+    { id: 'adenosine', label: 'Adenosine', icon: '💉', action: 'overlay', target: 'svt-adenosine-info' },
+    { id: 'diltiazem', label: 'Diltiazem', icon: '💊', action: 'overlay', target: 'svt-diltiazem' },
+    { id: 'cardiovert', label: 'Cardiovert', icon: '⚡', action: 'overlay', target: 'svt-cardiovert' },
+    { id: 'wpw', label: 'WPW', icon: '⚠️', action: 'overlay', target: 'svt-wpw' },
+  ],
+  'gallbladder': [
+    { id: 'murphy', label: "Murphy's", icon: '👆', action: 'overlay', target: 'gb-murphy' },
+    { id: 'tokyo', label: 'Tokyo', icon: '📊', action: 'overlay', target: 'gb-tokyo' },
+    { id: 'pocus', label: 'POCUS', icon: '📷', action: 'overlay', target: 'gb-pocus' },
+    { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'overlay', target: 'gb-abx' },
+    { id: 'ercp', label: 'ERCP', icon: '🔬', action: 'overlay', target: 'gb-ercp' },
+  ],
+  'post-tonsillectomy-bleed': [
+    { id: 'severity', label: 'Severity', icon: '📊', action: 'overlay', target: 'pth-severity' },
+    { id: 'txa', label: 'TXA', icon: '💉', action: 'overlay', target: 'pth-txa' },
+    { id: 'hemostasis', label: 'Hemostasis', icon: '🩹', action: 'overlay', target: 'pth-hemostasis' },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'overlay', target: 'pth-airway' },
+    { id: 'transfusion', label: 'Transfuse', icon: '🩸', action: 'overlay', target: 'pth-transfusion' },
+  ],
 };
 
 // Stop button appended automatically to every consult

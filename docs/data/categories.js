@@ -115,6 +115,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'stemi-start',
             },
             {
+                id: 'svt',
+                title: 'Supraventricular Tachycardia (SVT)',
+                subtitle: 'Vagal Maneuvers → Adenosine → Rate Control → WPW → Cardioversion',
+                categoryId: 'cardiology',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'svt-start',
+            },
+            {
                 id: 'syncope',
                 title: 'Syncope Evaluation',
                 subtitle: 'Life-Threat Screen → Etiology → Risk Stratification → Disposition',
@@ -767,6 +776,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 24,
                 entryNodeId: 'diarrhea-start',
+            },
+            {
+                id: 'gallbladder',
+                title: 'Gallbladder Disease',
+                subtitle: 'Biliary Colic → Cholecystitis → Cholangitis → Tokyo Grading → ERCP',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 30,
+                entryNodeId: 'gb-start',
             },
             {
                 id: 'constipation',
@@ -1579,6 +1597,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'peds-const-start',
+            },
+            {
+                id: 'post-tonsillectomy-bleed',
+                title: 'Post-Tonsillectomy Hemorrhage',
+                subtitle: 'Primary vs Secondary → Severity → TXA → Hemostasis → ENT/OR Criteria',
+                categoryId: 'pediatrics',
+                version: '1.0',
+                nodeCount: 24,
+                entryNodeId: 'pth-start',
             },
             {
                 id: 'peds-fever',

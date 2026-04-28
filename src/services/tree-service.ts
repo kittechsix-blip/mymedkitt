@@ -367,6 +367,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/pneumonia.js');
       return { nodes: m.PNEUMONIA_NODES, entryNodeId: 'pna-start', categoryId: 'infectious-disease', moduleLabels: m.PNEUMONIA_MODULE_LABELS, citations: m.PNEUMONIA_CITATIONS, criticalActions: m.PNEUMONIA_CRITICAL_ACTIONS };
     },
+    'svt': async () => {
+      const m = await import('../data/trees/svt.js');
+      return { nodes: m.SVT_NODES, entryNodeId: 'svt-start', categoryId: 'cardiology', moduleLabels: m.SVT_MODULE_LABELS, citations: m.SVT_CITATIONS, criticalActions: m.SVT_CRITICAL_ACTIONS };
+    },
+    'gallbladder': async () => {
+      const m = await import('../data/trees/gallbladder.js');
+      return { nodes: m.GALLBLADDER_NODES, entryNodeId: 'gb-start', categoryId: 'gastroenterology', moduleLabels: m.GALLBLADDER_MODULE_LABELS, citations: m.GALLBLADDER_CITATIONS, criticalActions: m.GALLBLADDER_CRITICAL_ACTIONS };
+    },
+    'post-tonsillectomy-bleed': async () => {
+      const m = await import('../data/trees/post-tonsillectomy-bleed.js');
+      return { nodes: m.PTH_NODES, entryNodeId: 'pth-start', categoryId: 'pediatrics', moduleLabels: m.PTH_MODULE_LABELS, citations: m.PTH_CITATIONS, criticalActions: m.PTH_CRITICAL_ACTIONS };
+    },
     'alcohol-withdrawal': async () => {
       const m = await import('../data/trees/alcohol-withdrawal.js');
       return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'emergency-medicine', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS, criticalActions: m.ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS };
