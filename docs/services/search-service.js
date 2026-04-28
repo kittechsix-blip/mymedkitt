@@ -115,7 +115,14 @@ export function buildSearchIndex() {
         console.warn('[SearchService] Fuse.js not loaded, falling back to substring search');
     }
 }
-/** Search with strict alphabetical prefix matching */
+/**
+ * Two-stage search:
+ *   1. Alphabetical prefix first — keeps "afib", "stem" instantly responsive.
+ *   2. If the prefix path yields few/no hits, expand via Fuse against the
+ *      pre-built index (which carries clinical/drug synonyms in `keywords`).
+ * Without stage 2, "heart attack" found nothing because STEMI has no title
+ * prefix match — its synonym "heart attack" was indexed but never queried.
+ */
 export function search(query) {
     if (!query || query.trim().length === 0)
         return [];
@@ -128,8 +135,50 @@ export function search(query) {
         buildSearchIndex();
     }
     const q = sanitized.toLowerCase();
-    // Use strict alphabetical prefix search
-    return alphabeticalPrefixSearch(q);
+    const prefixResults = alphabeticalPrefixSearch(q);
+    // Single-character queries: prefix-only to avoid fuzzing whole index.
+    // Plenty of prefix hits: skip Fuse cost.
+    if (q.length < 2 || prefixResults.length >= 3)
+        return prefixResults;
+    const fuzzyResults = [];
+    if (searchIndex) {
+        for (const r of searchIndex.search(q)) {
+            const mapped = docToResult(r.item);
+            if (mapped) {
+                mapped.score = r.score;
+                fuzzyResults.push(mapped);
+            }
+        }
+    }
+    // Merge prefix-first, de-dupe by route+drugId (covers drug rows that share
+    // the /drugs route but identify by drugId, and any tree matched twice).
+    const seen = new Set();
+    const merged = [];
+    for (const r of [...prefixResults, ...fuzzyResults]) {
+        const key = (r.drugId ?? '') + '|' + r.route;
+        if (seen.has(key))
+            continue;
+        seen.add(key);
+        merged.push(r);
+    }
+    return merged;
+}
+/** Map an indexed SearchDoc to a routable SearchResult. */
+function docToResult(doc) {
+    switch (doc.type) {
+        case 'category': {
+            const catId = doc.id.replace(/^cat-/, '');
+            return { type: 'category', label: doc.title, sublabel: doc.subtitle, route: `/category/${catId}` };
+        }
+        case 'consult':
+            return { type: 'consult', label: doc.title, sublabel: doc.subtitle, route: `/tree/${doc.id}` };
+        case 'drug':
+            return { type: 'drug', label: doc.title, sublabel: doc.subtitle, route: '/drugs', drugId: doc.drugId || doc.id };
+        case 'calculator':
+            return { type: 'calculator', label: doc.title, sublabel: doc.subtitle, route: `/calculator/${doc.id}` };
+        default:
+            return null;
+    }
 }
 /** Search with optional type filters */
 export function searchWithFilters(query, filters) {

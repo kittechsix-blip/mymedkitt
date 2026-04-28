@@ -61,6 +61,10 @@ function clearMain(): HTMLElement {
     homeScrollTop = main.scrollTop;
   }
   main.innerHTML = '';
+  // Reset scroll on every route change so Pharmacy/Med-Calc/specialty views
+  // don't open mid-list (hiding back button + title) after exiting a consult.
+  // handleHome restores homeScrollTop after rendering the dashboard.
+  main.scrollTop = 0;
   // Restore app header (dashboard hides it)
   const appHeader = document.querySelector('.app-header') as HTMLElement | null;
   if (appHeader) appHeader.style.display = '';

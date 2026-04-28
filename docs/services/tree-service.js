@@ -38,6 +38,18 @@ function mapNodeRow(row) {
         node.images = row.images;
     if (row.calculator_links && row.calculator_links.length > 0)
         node.calculatorLinks = row.calculator_links;
+    if (row.summary)
+        node.summary = row.summary;
+    if (row.skippable)
+        node.skippable = row.skippable;
+    if (row.safety_level)
+        node.safetyLevel = row.safety_level;
+    if (row.when_to_use)
+        node.whenToUse = row.when_to_use;
+    if (row.pearls)
+        node.pearls = row.pearls;
+    if (row.evidence)
+        node.evidence = row.evidence;
     const hook = SUMMARY_HOOK_NODES[row.id];
     if (hook)
         node.summaryHook = hook;

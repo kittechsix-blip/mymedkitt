@@ -301,6 +301,12 @@ if (!isUpdate) {
     citation: n.citation || null,
     confidence: n.confidence || null,
     images: n.images || null,
+    summary: n.summary || null,
+    skippable: n.skippable !== undefined ? n.skippable : null,
+    safety_level: n.safetyLevel || null,
+    when_to_use: n.whenToUse || null,
+    pearls: n.pearls || null,
+    evidence: n.evidence || null,
   }));
 
   // Batch insert (Supabase has row limits)
@@ -337,6 +343,12 @@ if (!isUpdate) {
     citation: n.citation || null,
     confidence: n.confidence || null,
     images: n.images || null,
+    summary: n.summary || null,
+    skippable: n.skippable !== undefined ? n.skippable : null,
+    safety_level: n.safetyLevel || null,
+    when_to_use: n.whenToUse || null,
+    pearls: n.pearls || null,
+    evidence: n.evidence || null,
   }));
 
   const BATCH_SIZE = 50;

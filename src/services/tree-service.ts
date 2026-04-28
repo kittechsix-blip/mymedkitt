@@ -48,6 +48,12 @@ interface NodeRow {
   images: unknown[] | null;
   calculator_links: unknown[] | null;
   sort_order: number;
+  summary: string | null;
+  skippable: boolean | null;
+  safety_level: 'critical' | 'warning' | null;
+  when_to_use: string | null;
+  pearls: string | null;
+  evidence: string | null;
 }
 
 interface CitationRow {
@@ -90,6 +96,12 @@ function mapNodeRow(row: NodeRow): DecisionNode {
   if (row.confidence) node.confidence = row.confidence as DecisionNode['confidence'];
   if (row.images && row.images.length > 0) node.images = row.images as DecisionNode['images'];
   if (row.calculator_links && row.calculator_links.length > 0) node.calculatorLinks = row.calculator_links as DecisionNode['calculatorLinks'];
+  if (row.summary) node.summary = row.summary;
+  if (row.skippable) node.skippable = row.skippable;
+  if (row.safety_level) node.safetyLevel = row.safety_level;
+  if (row.when_to_use) node.whenToUse = row.when_to_use;
+  if (row.pearls) node.pearls = row.pearls;
+  if (row.evidence) node.evidence = row.evidence;
   const hook = SUMMARY_HOOK_NODES[row.id];
   if (hook) node.summaryHook = hook;
   return node;

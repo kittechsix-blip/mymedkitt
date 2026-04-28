@@ -47,11 +47,23 @@
             border-radius: 16px;
             max-width: 600px;
             width: 100%;
+            /* dvh keeps Accept reachable on short iOS viewports where 90vh
+               miscalculates with the Safari toolbar; vh stays as fallback. */
             max-height: 90vh;
-            overflow-y: auto;
-            padding: 32px;
+            max-height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 32px calc(20px + env(safe-area-inset-bottom));
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 107, 107, 0.3);
         }
+
+        /* Sections above the actions stay sized; the checkbox list is the
+           scrolling child so the Accept button is always visible. */
+        .legal-splash-header,
+        .legal-splash-content,
+        .legal-splash-actions,
+        .legal-splash-footer { flex-shrink: 0; }
         
         .legal-splash-header {
             text-align: center;
@@ -115,6 +127,12 @@
             list-style: none;
             padding: 0;
             margin: 0 0 24px;
+            /* Absorb scroll so actions/footer stay pinned. min-height: 0 lets
+               this flex child shrink below its content height in a flex column. */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            flex: 1 1 auto;
+            min-height: 0;
         }
         
         .legal-checkbox-item {

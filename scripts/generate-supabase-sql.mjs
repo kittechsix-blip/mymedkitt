@@ -262,11 +262,12 @@ for (const [moduleNum, moduleNodes] of [...modules.entries()].sort((a, b) => a[0
   lines.push(`-- MODULE ${moduleNum}: ${moduleLabel.toUpperCase()}`);
 
   for (const node of moduleNodes) {
-    lines.push(`INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, options, inputs, next, recommendation, treatment, confidence, images, calculator_links, sort_order) VALUES`);
+    lines.push(`INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, options, inputs, next, recommendation, treatment, confidence, images, calculator_links, sort_order, summary, skippable, safety_level, when_to_use, pearls, evidence) VALUES`);
     lines.push(`(${sqlEscape(node.id)}, ${sqlEscape(consultId)}, ${sqlEscape(node.type)}, ${node.module || 0},`);
     lines.push(` ${sqlEscape(node.title)},`);
     lines.push(` ${sqlEscape(node.body)},`);
-    lines.push(` ${jsonbVal(node.citation || [])}, ${jsonbVal(node.options || [])}, ${jsonbVal(node.inputs || [])}, ${sqlEscapeOrNull(node.next || null)}, ${sqlEscapeOrNull(node.recommendation || null)}, ${jsonbValOrNull(node.treatment || null)}, ${sqlEscapeOrNull(node.confidence || null)}, ${jsonbVal(node.images || [])}, ${jsonbVal(node.calculatorLinks || [])}, ${sortOrder})`);
+    lines.push(` ${jsonbVal(node.citation || [])}, ${jsonbVal(node.options || [])}, ${jsonbVal(node.inputs || [])}, ${sqlEscapeOrNull(node.next || null)}, ${sqlEscapeOrNull(node.recommendation || null)}, ${jsonbValOrNull(node.treatment || null)}, ${sqlEscapeOrNull(node.confidence || null)}, ${jsonbVal(node.images || [])}, ${jsonbVal(node.calculatorLinks || [])}, ${sortOrder},`);
+    lines.push(` ${sqlEscapeOrNull(node.summary || null)}, ${node.skippable === undefined ? 'NULL' : (node.skippable ? 'true' : 'false')}, ${sqlEscapeOrNull(node.safetyLevel || null)}, ${sqlEscapeOrNull(node.whenToUse || null)}, ${sqlEscapeOrNull(node.pearls || null)}, ${sqlEscapeOrNull(node.evidence || null)})`);
     lines.push(`;`);
     lines.push('');
     sortOrder++;

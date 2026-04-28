@@ -19,6 +19,25 @@ let currentTreeId = null;
 let delegatedContainer = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
+/**
+ * Scroll the active card into view so its top sits just below the sticky
+ * consult header. scrollIntoView({block:'center'}) was clipping the question
+ * title behind .consult-flow-header (position:sticky, z-index:50) — bedside
+ * decisions could land on answer buttons before the user saw the question.
+ */
+function scrollCardBelowHeader(card) {
+    const main = document.getElementById('main-content');
+    if (!main) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+    const header = main.querySelector('.consult-flow-header');
+    const headerH = header ? header.getBoundingClientRect().height : 0;
+    const cardRect = card.getBoundingClientRect();
+    const mainRect = main.getBoundingClientRect();
+    const target = main.scrollTop + (cardRect.top - mainRect.top) - headerH - 12;
+    main.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+}
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container, treeId) {
     const config = await getTreeConfig(treeId);
@@ -57,7 +76,7 @@ export async function renderConsultFlow(container, treeId) {
                         return;
                     const activeCard = delegatedContainer.querySelector('.decision-card--active');
                     if (activeCard) {
-                        activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        scrollCardBelowHeader(activeCard);
                     }
                 });
             }
@@ -137,7 +156,7 @@ function renderFlow(container) {
                     const cards = container.querySelectorAll('.decision-card--active');
                     const last = cards[cards.length - 1];
                     if (last) {
-                        last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        scrollCardBelowHeader(last);
                     }
                 });
             },
@@ -154,7 +173,7 @@ function renderFlow(container) {
                     const cards = container.querySelectorAll('.decision-card--active');
                     const last = cards[cards.length - 1];
                     if (last) {
-                        last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        scrollCardBelowHeader(last);
                     }
                 });
             },
@@ -170,7 +189,7 @@ function renderFlow(container) {
                     const cards = container.querySelectorAll('.decision-card--active');
                     const last = cards[cards.length - 1];
                     if (last) {
-                        last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        scrollCardBelowHeader(last);
                     }
                 });
             },
@@ -198,7 +217,7 @@ function renderFlow(container) {
             const activeCards = container.querySelectorAll('.decision-card--active');
             const last = activeCards[activeCards.length - 1];
             if (last) {
-                last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                scrollCardBelowHeader(last);
             }
         });
     }
@@ -285,7 +304,7 @@ function renderConsultSearch(container) {
                 requestAnimationFrame(() => {
                     const active = container.querySelector('.decision-card--active');
                     if (active)
-                        active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        scrollCardBelowHeader(active);
                 });
             },
         });
@@ -379,7 +398,7 @@ function renderResults(matches, resultsEl, container) {
             requestAnimationFrame(() => {
                 const active = container.querySelector('.decision-card--active');
                 if (active)
-                    active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    scrollCardBelowHeader(active);
             });
         });
         resultsEl.appendChild(item);

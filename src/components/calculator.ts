@@ -34410,11 +34410,20 @@ function renderNumberField(
 
   container.appendChild(inputRow);
 
-  // Points indicator
-  const points = document.createElement('span');
-  points.className = 'calculator-field-points';
-  points.textContent = field.valueIsPoints ? 'pts = age' : `+${field.points} pts`;
-  container.appendChild(points);
+  // Points indicator — only when the helper carries meaning.
+  // valueIsPoints is overloaded: true scoring (age contributes 1 pt/year) AND
+  // formula-input plumbing (Weight, TBSA, Sodium) where the value just feeds
+  // computeResult. The "pts = age" helper is only correct for the age field;
+  // for formula inputs the unit + label already explain the field, so omit
+  // the points span entirely rather than mislabeling it.
+  const isAgeScoring = field.valueIsPoints && field.name === 'age';
+  const isFixedPointScoring = !field.valueIsPoints && field.points > 0;
+  if (isAgeScoring || isFixedPointScoring) {
+    const points = document.createElement('span');
+    points.className = 'calculator-field-points';
+    points.textContent = isAgeScoring ? 'pts = age' : `+${field.points} pts`;
+    container.appendChild(points);
+  }
 }
 
 function renderToggleField(
