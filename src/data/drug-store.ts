@@ -7497,7 +7497,7 @@ const TMP_SMX: DrugEntry = {
       regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for 3+ months on ART.',
     },
     {
-      indication: 'MRSA SSTI / purulent cellulitis',
+      indication: 'MRSA SSTI / cellulitis (purulent)',
       regimen: '1-2 DS tablets (160/800 mg) PO BID × 5-10 days. First-line oral MRSA SSTI per IDSA 2014 SSTI guidelines. 2 DS BID for moderate-severe or larger lesions. Adjunctive to incision/drainage for abscess. Pediatric: 8-12 mg/kg/day TMP component divided BID.',
     },
   ],
