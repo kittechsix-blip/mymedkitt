@@ -1410,6 +1410,20 @@ const TOOLBAR_CONFIGS = {
         { id: 'airway', label: 'Airway', icon: '🫁', action: 'overlay', target: 'pth-airway' },
         { id: 'transfusion', label: 'Transfuse', icon: '🩸', action: 'overlay', target: 'pth-transfusion' },
     ],
+    'critical-care-drips': [
+        { id: 'vasopressors', label: 'Pressors', icon: '💉', action: 'jump', target: 'ccd-vasopressor-overview' },
+        { id: 'sedation', label: 'Sedation', icon: '😴', action: 'jump', target: 'ccd-sedation-overview' },
+        { id: 'htn', label: 'HTN Emerg', icon: '📈', action: 'jump', target: 'ccd-htn-overview' },
+        { id: 'insulin', label: 'DKA Insulin', icon: '🧪', action: 'jump', target: 'ccd-insulin-dka' },
+        { id: 'quick-ref', label: 'Quick Ref', icon: '📋', action: 'jump', target: 'ccd-quick-reference' },
+    ],
+    'blood-transfusions': [
+        { id: 'mtp', label: 'MTP', icon: '🩸', action: 'jump', target: 'bt-mtp-protocol' },
+        { id: 'taco-trali', label: 'TACO/TRALI', icon: '🫁', action: 'jump', target: 'bt-taco-trali' },
+        { id: 'txa', label: 'TXA', icon: '💉', action: 'jump', target: 'bt-txa' },
+        { id: 'calcium', label: 'Calcium', icon: '🦴', action: 'jump', target: 'bt-calcium' },
+        { id: 'consent', label: 'Consent', icon: '📝', action: 'overlay', target: 'bt-consent' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

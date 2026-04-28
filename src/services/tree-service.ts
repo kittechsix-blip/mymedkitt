@@ -391,6 +391,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/post-tonsillectomy-bleed.js');
       return { nodes: m.PTH_NODES, entryNodeId: 'pth-start', categoryId: 'pediatrics', moduleLabels: m.PTH_MODULE_LABELS, citations: m.PTH_CITATIONS, criticalActions: m.PTH_CRITICAL_ACTIONS };
     },
+    'critical-care-drips': async () => {
+      const m = await import('../data/trees/critical-care-drips.js');
+      return { nodes: m.CRITICAL_CARE_DRIPS_NODES, entryNodeId: 'ccd-start', categoryId: 'pharmacist', moduleLabels: m.CRITICAL_CARE_DRIPS_MODULE_LABELS, citations: m.CRITICAL_CARE_DRIPS_CITATIONS, criticalActions: m.CRITICAL_CARE_DRIPS_CRITICAL_ACTIONS };
+    },
+    'blood-transfusions': async () => {
+      const m = await import('../data/trees/blood-transfusions.js');
+      return { nodes: m.BLOOD_TRANSFUSIONS_NODES, entryNodeId: 'bt-start', categoryId: 'pharmacist', moduleLabels: m.BLOOD_TRANSFUSIONS_MODULE_LABELS, citations: m.BLOOD_TRANSFUSIONS_CITATIONS, criticalActions: m.BLOOD_TRANSFUSIONS_CRITICAL_ACTIONS };
+    },
     'alcohol-withdrawal': async () => {
       const m = await import('../data/trees/alcohol-withdrawal.js');
       return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'emergency-medicine', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS, criticalActions: m.ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS };

@@ -209,4 +209,6 @@ export const TREE_REGISTRY = {
   'organic-vs-psych': { prefix: 'ORGANIC_PSYCH',       entryNodeId: 'op-start',           categoryId: 'em' },
   'post-tonsillectomy-bleed': { prefix: 'PTH',         entryNodeId: 'pth-start',          categoryId: 'em' },
   'svt':              { prefix: 'SVT',                 entryNodeId: 'svt-start',          categoryId: 'cardiology' },
+  'critical-care-drips': { prefix: 'CRITICAL_CARE_DRIPS', entryNodeId: 'ccd-start',       categoryId: 'pharmacist' },
+  'blood-transfusions': { prefix: 'BLOOD_TRANSFUSIONS', entryNodeId: 'bt-start',          categoryId: 'pharmacist' },
 };
