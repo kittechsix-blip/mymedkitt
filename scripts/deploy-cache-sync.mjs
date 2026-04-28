@@ -16,6 +16,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { execSync } from 'child_process';
+import { TREE_REGISTRY } from './tree-registry.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, '..');
@@ -52,10 +53,14 @@ if (!diffOutput.trim()) {
   console.log('No tree/drug/info-page data changes detected in git diff.');
   console.log('Skipping Supabase UPDATE SQL generation.\n');
 } else {
-  // Parse which files changed
+  // Parse which files changed.
+  // The diff header line looks like: `diff --git a/PATH_A b/PATH_B`.
+  // The path may contain spaces only if quoted, but tree filenames don't, so a
+  // non-greedy "match until the next space" works: it stops at the boundary
+  // between PATH_A and ` b/...`.
   const changedFiles = new Set();
   for (const line of diffOutput.split('\n')) {
-    const match = line.match(/^diff --git a\/(src\/data\/.*\.ts)/);
+    const match = line.match(/^diff --git a\/(src\/data\/[^ \t]+\.ts) /);
     if (match) changedFiles.add(match[1]);
   }
   console.log('Changed data files:');
@@ -69,38 +74,8 @@ if (!diffOutput.trim()) {
 
   if (treeFiles.length > 0) {
     console.log('=== Step 2: Generating Supabase UPDATE SQL ===\n');
-
-    // Tree registry (mirrors generate-supabase-sql.mjs)
-    const TREE_REGISTRY = {
-      'pneumothorax':     { prefix: 'PNEUMOTHORAX' },
-      'pe-treatment':     { prefix: 'PE_TREATMENT' },
-      'priapism':         { prefix: 'PRIAPISM' },
-      'afib-rvr':         { prefix: 'AFIB_RVR' },
-      'chest-tube':       { prefix: 'CHEST_TUBE' },
-      'pep':              { prefix: 'PEP' },
-      'stroke':           { prefix: 'STROKE' },
-      'nstemi':           { prefix: 'NSTEMI' },
-      'potassium':        { prefix: 'POTASSIUM' },
-      'sodium':           { prefix: 'SODIUM' },
-      'croup':            { prefix: 'CROUP' },
-      'uti-peds':         { prefix: 'UTI_PEDS' },
-      'peds-fever':       { prefix: 'PEDS_FEVER' },
-      'bronchiolitis':    { prefix: 'BRONCHIOLITIS' },
-      'echo-epss':        { prefix: 'ECHO_EPSS' },
-      'shoulder-dystocia':{ prefix: 'SHOULDER_DYSTOCIA' },
-      'precip-delivery':  { prefix: 'PRECIP_DELIVERY' },
-      'neonatal-resus':   { prefix: 'NEONATAL_RESUS' },
-      'distal-radius':    { prefix: 'DISTAL_RADIUS' },
-      'splinting':        { prefix: 'SPLINTING' },
-      'neurosyphilis':    { prefix: 'NEUROSYPHILIS' },
-      'rabies':           { prefix: 'RABIES' },
-      'burns':            { prefix: 'BURNS' },
-      'echo-views':       { prefix: 'ECHO_VIEWS' },
-      'pneumonia':        { prefix: 'PNEUMONIA' },
-      'svt':              { prefix: 'SVT' },
-      'gallbladder':      { prefix: 'GALLBLADDER' },
-      'post-tonsillectomy-bleed': { prefix: 'PTH' },
-    };
+    // TREE_REGISTRY is the shared registry imported at the top of this file —
+    // single source of truth, kept in sync across all deploy/push scripts.
 
     const sqlLines = [];
     sqlLines.push('-- =====================================================================');
