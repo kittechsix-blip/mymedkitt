@@ -120,6 +120,14 @@ async function seed() {
         images: node.images ?? [],
         calculator_links: node.calculatorLinks ?? [],
         sort_order: i,
+        // Disclosure/safety fields added 2026-04-28 — must stay in sync with
+        // supabase-push.mjs and generate-supabase-sql.mjs row mappers.
+        summary: node.summary ?? null,
+        skippable: node.skippable ?? null,
+        safety_level: node.safetyLevel ?? null,
+        when_to_use: node.whenToUse ?? null,
+        pearls: node.pearls ?? null,
+        evidence: node.evidence ?? null,
       });
     }
     totalNodes += tree.nodes.length;

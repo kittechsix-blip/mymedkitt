@@ -32774,19 +32774,32 @@ export function getAllCalculators() {
 // -------------------------------------------------------------------
 // Render: Calculator List (Medical Calculators category)
 // -------------------------------------------------------------------
-/** Alphabetical prefix search for calculators — strict "starts with" matching */
+/**
+ * Calculator-list search. Title-prefix matches first; for queries ≥ 2 chars,
+ * also substring-match the subtitle so "appendicitis" finds Alvarado Score
+ * (subtitle "Appendicitis Prediction") and "anion" finds Anion Gap +
+ * Delta Gap. Title and subtitle carry all the metadata users actually search.
+ */
 function rankedCalcSearch(calcs, query) {
-    const matches = [];
+    const q = query.toLowerCase();
+    const titlePrefix = [];
+    const otherMatches = [];
     for (const calc of calcs) {
         const title = calc.title.toLowerCase();
-        // Strict prefix match on title only
-        if (title.startsWith(query)) {
-            matches.push(calc);
+        if (title.startsWith(q)) {
+            titlePrefix.push(calc);
+            continue;
+        }
+        if (q.length < 2)
+            continue;
+        const subtitle = (calc.subtitle || '').toLowerCase();
+        if (title.includes(q) || subtitle.includes(q)) {
+            otherMatches.push(calc);
         }
     }
-    // Sort alphabetically by title
-    matches.sort((a, b) => a.title.localeCompare(b.title));
-    return matches;
+    titlePrefix.sort((a, b) => a.title.localeCompare(b.title));
+    otherMatches.sort((a, b) => a.title.localeCompare(b.title));
+    return [...titlePrefix, ...otherMatches];
 }
 /** Render the calculator list view with search */
 export function renderCalculatorList(container) {

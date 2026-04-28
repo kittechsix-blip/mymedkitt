@@ -26,21 +26,35 @@ interface DrugLike {
   indications: string[];
 }
 
-/** Alphabetical prefix search for drugs — strict "starts with" matching on name */
+/**
+ * Pharmacy search. Name-prefix matches rank first (keeps "apix", "epi" instant);
+ * for queries ≥ 2 chars, also substring-match generic name, drug class, and
+ * indications so "factor xa" finds Apixaban/Andexanet via drugClass, and
+ * "blood thinner" finds anticoagulants via class metadata.
+ */
 function rankedDrugSearch<T extends DrugLike>(drugs: T[], query: string): T[] {
-  const matches: T[] = [];
+  const q = query.toLowerCase();
+  const namePrefix: T[] = [];
+  const otherMatches: T[] = [];
 
   for (const drug of drugs) {
     const name = drug.name.toLowerCase();
-    // Strict prefix match on drug name only
-    if (name.startsWith(query)) {
-      matches.push(drug);
+    if (name.startsWith(q)) {
+      namePrefix.push(drug);
+      continue;
+    }
+    if (q.length < 2) continue;
+    const generic = (drug.genericName || '').toLowerCase();
+    const cls = (drug.drugClass || '').toLowerCase();
+    const indHit = drug.indications.some(i => i.toLowerCase().includes(q));
+    if (name.includes(q) || generic.includes(q) || cls.includes(q) || indHit) {
+      otherMatches.push(drug);
     }
   }
 
-  // Sort alphabetically by name
-  matches.sort((a, b) => a.name.localeCompare(b.name));
-  return matches;
+  namePrefix.sort((a, b) => a.name.localeCompare(b.name));
+  otherMatches.sort((a, b) => a.name.localeCompare(b.name));
+  return [...namePrefix, ...otherMatches];
 }
 
 // -------------------------------------------------------------------
