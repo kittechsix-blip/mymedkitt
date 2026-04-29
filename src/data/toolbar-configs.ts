@@ -518,6 +518,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'co-pregnancy', label: 'Pregnancy', icon: '🤰', action: 'calculator', target: 'co-pregnancy' },
     { id: 'co-cyanide', label: 'Cyanide', icon: '⚠️', action: 'calculator', target: 'co-cyanide' },
   ],
+  'toxic-alcohols': [
+    { id: 'tox-osm', label: 'Osm Gap', icon: '🧮', action: 'calculator', target: 'tox-alc-osmolar' },
+    { id: 'tox-which', label: 'Which?', icon: '🔀', action: 'calculator', target: 'tox-alc-which' },
+    { id: 'tox-fome', label: 'Fomepizole', icon: '💉', action: 'calculator', target: 'tox-alc-fomepizole' },
+    { id: 'tox-lethal', label: 'Lethal', icon: '☠️', action: 'calculator', target: 'tox-alc-lethal' },
+    { id: 'tox-hd', label: 'Dialysis', icon: '🩸', action: 'calculator', target: 'tox-alc-dialysis-criteria' },
+    { id: 'tox-etoh', label: 'Ethanol', icon: '🍺', action: 'calculator', target: 'tox-alc-ethanol' },
+  ],
   'guillain-barre': [
     { id: 'gbs-fvc', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'gbs-fvc-nif' },
     { id: 'gbs-egris', label: 'EGRIS', icon: '📊', action: 'calculator', target: 'gbs-egris' },

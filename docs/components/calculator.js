@@ -1927,6 +1927,344 @@ const OSMOLAR_GAP_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Toxic Alcohol Calculators
+// -------------------------------------------------------------------
+const TOX_ALC_OSMOLAR_CALCULATOR = {
+    id: 'tox-alc-osmolar',
+    title: 'Osmolar Gap',
+    subtitle: 'Toxic Alcohol Screening',
+    description: 'Calculates osmolar gap and estimates toxic alcohol level. Gap >10 suggests toxic alcohol. Gap inversely correlates with anion gap over time.',
+    fields: [
+        { name: 'measured-osm', label: 'Measured Osmolality', type: 'number', points: 0, unit: 'mOsm/kg' },
+        { name: 'sodium', label: 'Sodium', type: 'number', points: 0, unit: 'mEq/L' },
+        { name: 'glucose', label: 'Glucose', type: 'number', points: 0, unit: 'mg/dL' },
+        { name: 'bun', label: 'BUN', type: 'number', points: 0, unit: 'mg/dL' },
+        { name: 'etoh', label: 'Ethanol (if measured)', type: 'number', points: 0, unit: 'mg/dL', description: 'Enter 0 if unknown' },
+    ],
+    results: [],
+    thresholdNote: 'Gap >10 = elevated. Early: high osmolar gap. Late: high anion gap (as metabolites accumulate).',
+    citations: ['Kraut JA, Kurtz I. Toxic alcohol ingestions. Clin J Am Soc Nephrol. 2008;3(1):208-225.'],
+    computeResult: (values) => {
+        const measOsm = values['measured-osm'] || 0;
+        const na = values['sodium'] || 0;
+        const glucose = values['glucose'] || 0;
+        const bun = values['bun'] || 0;
+        const etoh = values['etoh'] || 0;
+        if (measOsm <= 0 || na <= 0) {
+            return { value: '--', label: 'Enter Values', description: 'Enter measured osmolality and sodium.', colorVar: '--color-text-muted' };
+        }
+        let calcOsm = 2 * na + glucose / 18 + bun / 2.8;
+        if (etoh > 0)
+            calcOsm += etoh / 4.6;
+        calcOsm = Math.round(calcOsm * 10) / 10;
+        const gap = Math.round((measOsm - calcOsm) * 10) / 10;
+        // Estimate toxic alcohol levels from gap (rough approximations)
+        const estMethanol = Math.round((gap - 10) * 3.2); // MW 32
+        const estEG = Math.round((gap - 10) * 6.2); // MW 62
+        let label;
+        let colorVar;
+        let interpretation;
+        if (gap <= 10) {
+            label = 'Normal';
+            colorVar = '--color-primary';
+            interpretation = 'Osmolar gap normal. Toxic alcohol unlikely EARLY, but late presentations may have closed gap (metabolites formed).';
+        }
+        else if (gap <= 25) {
+            label = 'Elevated';
+            colorVar = '--color-warning';
+            interpretation = `Elevated gap — consider toxic alcohol.\n\n**Estimated levels (if gap = toxic alcohol):**\n• Methanol: ~${estMethanol > 0 ? estMethanol : 0} mg/dL\n• Ethylene glycol: ~${estEG > 0 ? estEG : 0} mg/dL`;
+        }
+        else {
+            label = 'Highly Elevated';
+            colorVar = '--color-danger';
+            interpretation = `Gap >25 — strongly suggests toxic alcohol. Start fomepizole empirically.\n\n**Estimated levels:**\n• Methanol: ~${estMethanol} mg/dL (treat if >20)\n• Ethylene glycol: ~${estEG} mg/dL (treat if >20-25)`;
+        }
+        return {
+            value: `${gap} mOsm/kg`,
+            label,
+            description: `**Calculated Osm:** ${calcOsm} mOsm/kg\n**Measured Osm:** ${measOsm} mOsm/kg\n**Osmolar Gap:** ${gap}\n\n${interpretation}`,
+            colorVar,
+        };
+    },
+};
+const TOX_ALC_WHICH_CALCULATOR = {
+    id: 'tox-alc-which',
+    title: 'Which Toxic Alcohol?',
+    subtitle: 'Clinical Differentiation',
+    description: 'Helps differentiate between methanol, ethylene glycol, isopropanol, and propylene glycol based on clinical findings.',
+    fields: [
+        { name: 'visual', label: 'Visual symptoms (blurred, snow, photophobia)', type: 'toggle', points: 10 },
+        { name: 'renal', label: 'Acute kidney injury', type: 'toggle', points: 8 },
+        { name: 'hypoca', label: 'Hypocalcemia', type: 'toggle', points: 8 },
+        { name: 'crystals', label: 'Ca-oxalate crystals on UA', type: 'toggle', points: 10 },
+        { name: 'ketones', label: 'Ketones positive', type: 'toggle', points: 5 },
+        { name: 'no-acidosis', label: 'No anion gap acidosis', type: 'toggle', points: 5 },
+        { name: 'icu-drip', label: 'ICU patient on benzo/phenytoin drip', type: 'toggle', points: 7 },
+        { name: 'lactic', label: 'Lactic acidosis', type: 'toggle', points: 3 },
+    ],
+    results: [],
+    thresholdNote: 'Visual = methanol. Renal/hypocalcemia/crystals = EG. Ketones without acidosis = isopropanol. ICU drip + lactic = propylene glycol.',
+    citations: ['Kraut JA, Kurtz I. Toxic alcohol ingestions. Clin J Am Soc Nephrol. 2008;3(1):208-225.'],
+    computeResult: (values) => {
+        const visual = values['visual'] || 0;
+        const renal = values['renal'] || 0;
+        const hypoca = values['hypoca'] || 0;
+        const crystals = values['crystals'] || 0;
+        const ketones = values['ketones'] || 0;
+        const noAcidosis = values['no-acidosis'] || 0;
+        const icuDrip = values['icu-drip'] || 0;
+        const lactic = values['lactic'] || 0;
+        // Score each alcohol
+        const methanolScore = visual * 10;
+        const egScore = renal * 8 + hypoca * 8 + crystals * 10;
+        const ipaScore = (ketones && noAcidosis) ? 10 : 0;
+        const pgScore = (icuDrip && lactic) ? 10 : 0;
+        let likely;
+        let color;
+        let details;
+        if (visual) {
+            likely = 'METHANOL';
+            color = '--color-danger';
+            details = '**Visual symptoms are pathognomonic for methanol toxicity.**\n\n• Formic acid damages retina/optic nerve\n• Start fomepizole + folic acid immediately\n• Urgent dialysis if level >50-70 mg/dL or severe acidosis\n• Urgent ophthalmology consult';
+        }
+        else if (crystals || (renal && hypoca)) {
+            likely = 'ETHYLENE GLYCOL';
+            color = '--color-danger';
+            details = '**Calcium-oxalate crystals + renal failure + hypocalcemia = classic EG.**\n\n• Oxalic acid precipitates with calcium\n• Start fomepizole + thiamine/pyridoxine\n• Dialysis if level >310 mg/dL or AKI\n• Replace calcium if symptomatic hypocalcemia';
+        }
+        else if (ketones && noAcidosis) {
+            likely = 'ISOPROPANOL';
+            color = '--color-warning';
+            details = '**Ketosis WITHOUT acidosis suggests isopropanol.**\n\n• Metabolized to acetone (not toxic)\n• NO fomepizole needed\n• Supportive care only\n• Dialysis rarely indicated';
+        }
+        else if (icuDrip && lactic) {
+            likely = 'PROPYLENE GLYCOL';
+            color = '--color-warning';
+            details = '**ICU patient on benzo/phenytoin drip + lactic acidosis suggests propylene glycol.**\n\n• Stop the offending drip\n• Switch to midazolam or propofol\n• Fomepizole may help\n• Dialysis for severe cases';
+        }
+        else {
+            likely = 'UNCERTAIN';
+            color = '--color-text-muted';
+            details = 'No pathognomonic features identified.\n\n**If osmolar gap elevated:**\n• Start fomepizole empirically\n• Send methanol/EG levels\n• Treat as presumed methanol or EG until excluded';
+        }
+        return {
+            value: likely,
+            label: 'Most Likely',
+            description: details,
+            colorVar: color,
+        };
+    },
+};
+const TOX_ALC_FOMEPIZOLE_CALCULATOR = {
+    id: 'tox-alc-fomepizole',
+    title: 'Fomepizole Dosing',
+    subtitle: 'Antizol® Protocol',
+    description: 'Fomepizole dosing for methanol and ethylene glycol poisoning. Adjust dosing during hemodialysis.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+        { name: 'on-hd', label: 'Currently on hemodialysis', type: 'toggle', points: 1 },
+        { name: 'dose-num', label: 'Which dose? (1 = loading)', type: 'number', points: 0, description: '1-4 = maintenance 10mg/kg, ≥5 = maintenance 15mg/kg' },
+    ],
+    results: [],
+    thresholdNote: 'During HD: give Q4H (auto-induction). After 4 doses, increase to 15 mg/kg Q12H.',
+    citations: ['Brent J, et al. Fomepizole for ethylene glycol poisoning. NEJM. 1999;340(11):832-838.'],
+    computeResult: (values) => {
+        const weight = values['weight'] || 70;
+        const onHD = values['on-hd'] || 0;
+        const doseNum = values['dose-num'] || 1;
+        const loadingDose = Math.round(weight * 15); // 15 mg/kg
+        let maintenanceDose;
+        let interval;
+        if (doseNum <= 1) {
+            maintenanceDose = loadingDose;
+            interval = onHD ? 'then 10 mg/kg Q4H during HD' : 'then 10 mg/kg Q12H';
+        }
+        else if (doseNum <= 4) {
+            maintenanceDose = Math.round(weight * 10); // 10 mg/kg
+            interval = onHD ? 'Q4H (during HD)' : 'Q12H';
+        }
+        else {
+            maintenanceDose = Math.round(weight * 15); // 15 mg/kg (auto-induction)
+            interval = onHD ? 'Q4H (during HD)' : 'Q12H (auto-induction after dose 4)';
+        }
+        const hdNote = onHD
+            ? '\n\n**DURING HEMODIALYSIS:**\n• Give Q4H instead of Q12H\n• If last dose >6h ago, give supplemental dose at HD start\n• Alternative: 1-1.5 mg/kg/hr continuous infusion'
+            : '';
+        return {
+            value: doseNum <= 1 ? `${loadingDose} mg` : `${maintenanceDose} mg`,
+            label: doseNum <= 1 ? 'Loading Dose' : `Dose #${doseNum}`,
+            description: `**Dose ${doseNum}:** ${doseNum <= 1 ? loadingDose : maintenanceDose} mg IV over 30 minutes\n**Interval:** ${interval}\n\n**Protocol:**\n• Loading: 15 mg/kg\n• Doses 2-4: 10 mg/kg Q12H\n• Doses 5+: 15 mg/kg Q12H (auto-induction)${hdNote}\n\n**Continue until:**\n• Toxic alcohol <20 mg/dL AND\n• pH normal AND\n• Patient asymptomatic`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+const TOX_ALC_LETHAL_CALCULATOR = {
+    id: 'tox-alc-lethal',
+    title: 'Lethal Dose Guide',
+    subtitle: 'Toxic Alcohol Thresholds',
+    description: 'Reference for treatment thresholds and lethal doses of toxic alcohols.',
+    fields: [
+        { name: 'alcohol', label: 'Which toxic alcohol?', type: 'select', points: 0, selectOptions: [
+                { label: 'Methanol', points: 1 },
+                { label: 'Ethylene Glycol', points: 2 },
+                { label: 'Isopropanol', points: 3 },
+            ] },
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg', description: 'For volume calculations' },
+    ],
+    results: [],
+    thresholdNote: 'These are approximate values. Individual variation exists. Treat based on clinical status.',
+    citations: ['Barceloux DG, et al. AACT Practice Guidelines. J Toxicol Clin Toxicol. 1999-2002.'],
+    computeResult: (values) => {
+        const alcohol = values['alcohol'] || 1;
+        const weight = values['weight'] || 70;
+        let title;
+        let details;
+        let color;
+        if (alcohol === 1) {
+            // Methanol
+            const lethalVol = Math.round(100 * (weight / 70)); // ~100 mL for 70 kg
+            title = 'METHANOL';
+            details = `**Treatment Threshold:** ≥20 mg/dL\n**Dialysis Threshold:** ≥50-70 mg/dL (or with severe acidosis)\n\n**Lethal Dose:**\n• As little as 30 mL can cause blindness\n• ~100-250 mL often fatal (~${lethalVol} mL for ${weight} kg)\n\n**Sources:** Windshield washer fluid (30-50%), paint thinner, moonshine\n\n**Key toxicity:** Formic acid → retinal damage → blindness`;
+            color = '--color-danger';
+        }
+        else if (alcohol === 2) {
+            // Ethylene Glycol
+            const lethalVol = Math.round(1.5 * weight); // 1-1.5 mL/kg
+            title = 'ETHYLENE GLYCOL';
+            details = `**Treatment Threshold:** ≥20-25 mg/dL\n**Dialysis Threshold:** ≥310 mg/dL (or with renal failure)\n\n**Lethal Dose:**\n• 1-1.5 mL/kg (~${lethalVol} mL for ${weight} kg)\n• ~100 mL in adults typically fatal\n\n**Sources:** Antifreeze (95-100%, sweet taste), brake fluid\n\n**Key toxicity:** Oxalic acid → Ca-oxalate crystals → renal failure`;
+            color = '--color-danger';
+        }
+        else {
+            // Isopropanol
+            const lethalVol = Math.round(3 * weight); // 2-4 mL/kg
+            title = 'ISOPROPANOL';
+            details = `**Treatment Threshold:** Supportive care only\n**Dialysis Threshold:** Rarely needed; consider if >500 mg/dL\n\n**Lethal Dose:**\n• 2-4 mL/kg (~${lethalVol} mL for ${weight} kg)\n• ~240 mL can be lethal, but survival documented with >1L\n\n**Sources:** Rubbing alcohol (70%), hand sanitizer\n\n**Key point:** Metabolized to acetone (NOT toxic). Fomepizole NOT needed.`;
+            color = '--color-warning';
+        }
+        return {
+            value: title,
+            label: 'Toxic Alcohol',
+            description: details,
+            colorVar: color,
+        };
+    },
+};
+const TOX_ALC_DIALYSIS_CALCULATOR = {
+    id: 'tox-alc-dialysis-criteria',
+    title: 'Dialysis Criteria',
+    subtitle: 'EXTRIP Guidelines',
+    description: 'Hemodialysis indications for toxic alcohol poisoning based on EXTRIP recommendations.',
+    fields: [
+        { name: 'alcohol', label: 'Toxic alcohol', type: 'select', points: 0, selectOptions: [
+                { label: 'Methanol', points: 1 },
+                { label: 'Ethylene Glycol', points: 2 },
+                { label: 'Isopropanol', points: 3 },
+            ] },
+        { name: 'level-high', label: 'Level >50-70 (MeOH) or >310 (EG) mg/dL', type: 'toggle', points: 5 },
+        { name: 'severe-acidosis', label: 'Severe metabolic acidosis (pH <7.25)', type: 'toggle', points: 4 },
+        { name: 'vision', label: 'Vision changes', type: 'toggle', points: 5 },
+        { name: 'renal', label: 'Acute kidney injury', type: 'toggle', points: 4 },
+        { name: 'coma-seizure', label: 'Coma or seizures', type: 'toggle', points: 5 },
+        { name: 'refractory', label: 'Deteriorating despite treatment', type: 'toggle', points: 4 },
+    ],
+    results: [],
+    thresholdNote: 'Dialysis removes both parent compound AND toxic metabolites. Half-life drops dramatically with HD.',
+    citations: ['Roberts DM, et al. EXTRIP workgroup recommendations. Clin Toxicol. 2015-2019.'],
+    computeResult: (values) => {
+        const alcohol = values['alcohol'] || 1;
+        const levelHigh = values['level-high'] || 0;
+        const acidosis = values['severe-acidosis'] || 0;
+        const vision = values['vision'] || 0;
+        const renal = values['renal'] || 0;
+        const comaSeizure = values['coma-seizure'] || 0;
+        const refractory = values['refractory'] || 0;
+        const criteriaCount = (levelHigh ? 1 : 0) + (acidosis ? 1 : 0) + (vision ? 1 : 0) + (renal ? 1 : 0) + (comaSeizure ? 1 : 0) + (refractory ? 1 : 0);
+        let recommendation;
+        let color;
+        let details;
+        if (alcohol === 3) {
+            // Isopropanol
+            recommendation = 'DIALYSIS RARELY NEEDED';
+            color = '--color-primary';
+            details = '**Isopropanol:** Acetone is not highly toxic.\n\n**Consider HD only if:**\n• Persistent hypotension unresponsive to fluids\n• Serum isopropanol >500 mg/dL\n• Concurrent lactic acidosis\n\nMost patients recover with supportive care alone.';
+        }
+        else if (criteriaCount >= 1 || vision || comaSeizure) {
+            recommendation = 'DIALYSIS RECOMMENDED';
+            color = '--color-danger';
+            let criteria = [];
+            if (levelHigh)
+                criteria.push('• Elevated toxic alcohol level');
+            if (acidosis)
+                criteria.push('• Severe metabolic acidosis');
+            if (vision)
+                criteria.push('• Vision changes (methanol)');
+            if (renal)
+                criteria.push('• Acute kidney injury (EG)');
+            if (comaSeizure)
+                criteria.push('• Coma or seizures');
+            if (refractory)
+                criteria.push('• Deteriorating despite treatment');
+            details = `**Dialysis criteria met:**\n${criteria.join('\n')}\n\n**Benefits of HD:**\n• Methanol t½: 71h → 2.5h\n• EG t½: 16h → 2.7h\n• Removes toxic metabolites (formate, glycolate)\n\n**Contact nephrology urgently.**`;
+        }
+        else {
+            recommendation = 'DIALYSIS MAY NOT BE NEEDED';
+            color = '--color-warning';
+            details = 'No clear dialysis criteria met.\n\n**Fomepizole alone may suffice if:**\n• Level <50 mg/dL (methanol) or <310 mg/dL (EG)\n• Minimal acidosis (pH >7.30)\n• No vision changes or renal failure\n• No altered mental status\n\n**Continue close monitoring.** Reassess if any deterioration.';
+        }
+        return {
+            value: recommendation,
+            label: 'Dialysis Decision',
+            description: details,
+            colorVar: color,
+        };
+    },
+};
+const TOX_ALC_ETHANOL_CALCULATOR = {
+    id: 'tox-alc-ethanol',
+    title: 'Ethanol Dosing',
+    subtitle: 'Alternative Antidote',
+    description: 'Ethanol dosing when fomepizole is unavailable. Target serum ethanol 100-150 mg/dL.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, unit: 'kg' },
+        { name: 'chronic-drinker', label: 'Chronic alcohol user', type: 'toggle', points: 1, description: 'Needs higher maintenance' },
+        { name: 'baseline-etoh', label: 'Current ethanol level', type: 'number', points: 0, unit: 'mg/dL', description: 'Enter 0 if unknown' },
+    ],
+    results: [],
+    thresholdNote: 'Fomepizole preferred. Ethanol has 19% error rate vs 7% for fomepizole. Monitor levels Q1H initially.',
+    citations: ['Brent J. Fomepizole for ethylene glycol and methanol poisoning. NEJM. 2009;360(21):2216-2223.'],
+    computeResult: (values) => {
+        const weight = values['weight'] || 70;
+        const chronic = values['chronic-drinker'] || 0;
+        const baseline = values['baseline-etoh'] || 0;
+        const target = 100; // 100-150 mg/dL
+        const deficit = Math.max(0, target - baseline);
+        const vd = 0.6; // Volume of distribution for ethanol
+        // Loading dose to reach target
+        const loadingGrams = (deficit * vd * weight) / 1000;
+        const loadingDose = Math.round(loadingGrams * 10) / 10;
+        // Maintenance rate (varies with chronic drinking)
+        const baseMetabolism = chronic ? 175 : 100; // mg/kg/hr (higher in chronic drinkers)
+        const maintenanceGrams = (baseMetabolism * weight) / 1000;
+        const maintenanceHourly = Math.round(maintenanceGrams * 100) / 100;
+        // Convert to IV ethanol (10% solution = 100 mg/mL)
+        const ivLoadingML = Math.round(loadingDose * 10); // 10% ethanol
+        const ivMaintenanceMLHr = Math.round(maintenanceHourly * 10);
+        // Convert to oral (80-proof = 40% = 400 mg/mL)
+        const poLoadingML = Math.round(loadingDose * 2.5);
+        const poMaintenanceMLHr = Math.round(maintenanceHourly * 2.5);
+        let note = '';
+        if (baseline >= 100) {
+            note = '\n\n**Note:** Patient already at therapeutic ethanol level. Maintain current level with infusion only.';
+        }
+        return {
+            value: `${loadingDose}g loading`,
+            label: 'Ethanol Protocol',
+            description: `**Target:** Ethanol 100-150 mg/dL\n**Current level:** ${baseline} mg/dL\n\n**LOADING DOSE:**\n• IV 10% ethanol: ${ivLoadingML} mL over 30-60 min\n• PO 80-proof liquor: ${poLoadingML} mL (~${Math.round(poLoadingML / 44)} shots)\n\n**MAINTENANCE:**\n• IV 10% ethanol: ${ivMaintenanceMLHr} mL/hr\n• PO: ${poMaintenanceMLHr} mL/hr (~${Math.round(poMaintenanceMLHr / 44)} shots/hr)\n${chronic ? '*(Higher rate for chronic drinker)*' : ''}${note}\n\n**Monitor ethanol level Q1H** initially, then Q2-4H once stable.\n\n**⚠️ Fomepizole is preferred** — ethanol has higher error and adverse event rates.`,
+            colorVar: '--color-warning',
+        };
+    },
+};
 const STEWART_SIG_CALCULATOR = {
     id: 'stewart-sig',
     title: 'Stewart SID/SIG Analysis',
@@ -32503,6 +32841,13 @@ const CALCULATORS = {
     'delta-gap': DELTA_GAP_CALCULATOR,
     'winters-formula': WINTERS_FORMULA_CALCULATOR,
     'osmolar-gap': OSMOLAR_GAP_CALCULATOR,
+    // Toxic Alcohols
+    'tox-alc-osmolar': TOX_ALC_OSMOLAR_CALCULATOR,
+    'tox-alc-which': TOX_ALC_WHICH_CALCULATOR,
+    'tox-alc-fomepizole': TOX_ALC_FOMEPIZOLE_CALCULATOR,
+    'tox-alc-lethal': TOX_ALC_LETHAL_CALCULATOR,
+    'tox-alc-dialysis-criteria': TOX_ALC_DIALYSIS_CALCULATOR,
+    'tox-alc-ethanol': TOX_ALC_ETHANOL_CALCULATOR,
     'stewart-sig': STEWART_SIG_CALCULATOR,
     'comp-rule-1': COMP_RULE_1_CALCULATOR,
     'comp-rule-2': COMP_RULE_2_CALCULATOR,

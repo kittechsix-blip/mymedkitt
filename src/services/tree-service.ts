@@ -611,6 +611,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/co-toxicity.js');
       return { nodes: m.CO_TOXICITY_NODES, entryNodeId: 'co-start', categoryId: 'toxicology', moduleLabels: m.CO_TOXICITY_MODULE_LABELS, citations: m.CO_TOXICITY_CITATIONS, criticalActions: m.CO_TOXICITY_CRITICAL_ACTIONS };
     },
+    'toxic-alcohols': async () => {
+      const m = await import('../data/trees/toxic-alcohols.js');
+      return { nodes: m.TOXIC_ALCOHOLS_NODES, entryNodeId: 'tox-alc-start', categoryId: 'toxicology', moduleLabels: m.TOXIC_ALCOHOLS_MODULE_LABELS, citations: m.TOXIC_ALCOHOLS_CITATIONS, criticalActions: m.TOXIC_ALCOHOLS_CRITICAL_ACTIONS };
+    },
     'guillain-barre': async () => {
       const m = await import('../data/trees/guillain-barre.js');
       return { nodes: m.GUILLAIN_BARRE_NODES, entryNodeId: 'gbs-start', categoryId: 'neurology', moduleLabels: m.GUILLAIN_BARRE_MODULE_LABELS, citations: m.GUILLAIN_BARRE_CITATIONS, criticalActions: m.GUILLAIN_BARRE_CRITICAL_ACTIONS };
