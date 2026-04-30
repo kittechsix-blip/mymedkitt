@@ -6804,6 +6804,41 @@ const SCD_FEVER_EVAL = {
         { num: 3, text: 'Baskin MN, et al. Bacteremia risk in febrile patients with SCD. Pediatrics. 2013;131(6):1035-1041.' },
     ],
 };
+const SCD_LABS = {
+    id: 'scd-labs',
+    title: 'SCD Lab Panel & Rationale',
+    subtitle: 'Standard labs for every SCD ED visit — and WHY we order each',
+    sections: [
+        {
+            heading: 'CBC with Differential',
+            body: '**Why:** Establish current hemoglobin and compare to patient\'s baseline.\n\n• **Hemoglobin:** Baseline varies by genotype (HbSS: 6–8 g/dL, HbSC: 10–15 g/dL). A drop >1 g/dL from baseline suggests active hemolysis or sequestration.\n• **WBC:** Leukocytosis common at baseline in SCD (chronic inflammation). WBC >30,000 or <5,000 raises concern for bacterial infection and warrants admission.\n• **Platelets:** Thrombocytosis common at baseline. Thrombocytopenia suggests splenic sequestration or DIC.',
+        },
+        {
+            heading: 'Reticulocyte Count — THE KEY TEST',
+            body: '**Why:** Reticulocytes are immature red blood cells. The retic count tells you if the bone marrow is working.\n\n**Normal response to anemia:** Reticulocyte count should be ELEVATED (bone marrow compensating for hemolysis).\n\n**LOW reticulocyte count (<1%) with anemia = APLASTIC CRISIS**\n• Usually caused by Parvovirus B19 infection\n• Bone marrow suppressed — patient cannot make new RBCs\n• Self-limited (7–10 days) but may need transfusion\n\n**In summary:**\n• High retic + low Hgb = hemolysis (expected in SCD)\n• Low retic + low Hgb = aplastic crisis (Parvovirus B19)\n• Low retic + dropping Hgb = CRITICAL — patient cannot compensate',
+        },
+        {
+            heading: 'Complete Metabolic Panel (CMP)',
+            body: '**Why:** Assess renal function, electrolytes, and hemolysis markers.\n\n• **Creatinine/BUN:** SCD nephropathy is common; baseline renal function important for medication dosing\n• **Bilirubin (indirect):** Elevated in hemolysis — helps confirm ongoing hemolytic crisis\n• **LDH:** Another hemolysis marker; very elevated in acute hemolytic crisis\n• **Electrolytes:** K+ may be elevated with hemolysis; Na+ for hydration status',
+        },
+        {
+            heading: 'Type & Screen (If Ill-Appearing)',
+            body: '**Why:** SCD patients require EXTENDED antigen-matched blood (C, E, Kell negative) due to alloimmunization risk.\n\n• Type and screen early if ANY chance of transfusion\n• Blood bank needs extra time to find compatible units\n• 30% of chronically transfused SCD patients develop alloantibodies\n• Standard uncrossmatched blood can cause severe hemolytic transfusion reactions',
+        },
+        {
+            heading: 'Hemoglobin Electrophoresis (STAT if Ill)',
+            body: '**Why:** Determines current HbS percentage — guides transfusion targets.\n\n• Target HbS <30% for stroke, severe ACS\n• Helps differentiate SCD genotypes\n• Tracks response to chronic transfusion therapy\n• Important for patients who have had recent transfusions',
+        },
+        {
+            heading: 'Blood Culture (If Febrile)',
+            body: '**Why:** SCD patients have functional asplenia — cannot clear encapsulated organisms.\n\n• ALWAYS obtain before antibiotics in febrile SCD patient\n• S. pneumoniae most common pathogen\n• A positive viral test does NOT exclude bacteremia in SCD\n• Historical bacteremia risk was 15–20%; now ~1% with vaccines + penicillin prophylaxis',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jackson KM, et al. Pediatric Sickle Cell Disease. Pediatr Emerg Med Pract. 2024;21(11):1-28.' },
+        { num: 2, text: 'NHLBI. Evidence-Based Management of Sickle Cell Disease: Expert Panel Report. 2014.' },
+    ],
+};
 const SCD_SCT_COMPLICATIONS = {
     id: 'scd-sct-complications',
     title: 'Sickle Cell Trait Complications',
@@ -17994,6 +18029,7 @@ export const INFO_PAGES = {
     'scd-acs-guide': SCD_ACS_GUIDE,
     'scd-transfusion': SCD_TRANSFUSION,
     'scd-fever-eval': SCD_FEVER_EVAL,
+    'scd-labs': SCD_LABS,
     'scd-sct-complications': SCD_SCT_COMPLICATIONS,
     'syncope-discharge': SYNCOPE_DISCHARGE,
     'burns-discharge': BURNS_DISCHARGE,
