@@ -536,6 +536,7 @@ function onInlineLinkClick(e) {
 }
 /** Render unavailable state */
 function renderUnavailable(container, treeId) {
+    removeContextualToolbar(); // Clear any lingering toolbar from previous consult
     container.innerHTML = '';
     const backBtn = document.createElement('button');
     backBtn.className = 'btn-text';

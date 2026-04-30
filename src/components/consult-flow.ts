@@ -573,6 +573,7 @@ function onInlineLinkClick(e: Event): void {
 
 /** Render unavailable state */
 function renderUnavailable(container: HTMLElement, treeId: string): void {
+  removeContextualToolbar(); // Clear any lingering toolbar from previous consult
   container.innerHTML = '';
 
   const backBtn = document.createElement('button');
