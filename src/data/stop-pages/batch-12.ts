@@ -52,6 +52,56 @@ const VERTIGO_STOP: InfoPage = {
   citations: [],
 };
 
+const TOXIC_ALCOHOLS_STOP: InfoPage = {
+  id: 'toxic-alcohols-stop',
+  title: 'Toxic Alcohols — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT discharge methanol or ethylene glycol from the ED',
+      body: 'Both methanol and EG have **biphasic toxicity** — patients may appear clinically improved as intoxication wanes, only to deteriorate hours later as toxic metabolites accumulate. Formate (methanol) and glycolate/oxalate (EG) cause the organ damage, not the parent compounds. **All suspected methanol/EG ingestions require admission** for serial monitoring, even if initially asymptomatic.',
+    },
+    {
+      heading: '🛑 Do NOT rely on osmolar gap alone to rule out toxic alcohol',
+      body: 'Osmolar gap **normalizes as parent compound is metabolized**. A patient presenting late (>12-24h) with severe acidosis may have a normal osmolar gap because all the toxic alcohol has been converted to its toxic metabolite. **Late presentation = anion gap matters more than osmolar gap.** Early presentation = osmolar gap elevated. Late = anion gap elevated, osmolar gap may be normal.',
+    },
+    {
+      heading: '🛑 Do NOT delay fomepizole for level confirmation',
+      body: 'Toxic alcohol levels take **hours to days** to return from most labs. If clinical suspicion is high (elevated osmolar gap, AGMA, compatible history), **give fomepizole immediately**. The risk of withholding antidote far exceeds the cost of treating a false positive. Fomepizole is safe; formate blindness and oxalate renal failure are not.',
+    },
+    {
+      heading: '🛑 Do NOT forget to redose fomepizole during hemodialysis',
+      body: 'Fomepizole is dialyzable. Standard dosing is Q12H, but **during HD you must dose Q4H**. Missing doses during dialysis allows ADH to resume metabolizing the toxic alcohol to its dangerous metabolites. After HD ends, return to Q12H dosing.',
+    },
+    {
+      heading: '🛑 Do NOT assume "antifreeze" means ethylene glycol',
+      body: 'Modern RV/boat antifreeze and some de-icing products use **propylene glycol**, which is far less toxic. Traditional automotive antifreeze is EG. However, propylene glycol can still cause hyperosmolarity and lactic acidosis in massive ingestion. Always try to identify the actual product and its MSDS.',
+    },
+    {
+      heading: '🛑 Do NOT give folic acid for ethylene glycol',
+      body: '**Folic acid is for METHANOL** (enhances formate metabolism). For ethylene glycol, give **thiamine and pyridoxine** (shunt glyoxylic acid away from oxalate). Mixing up cofactors does not help the patient. Methanol → folate. EG → thiamine + pyridoxine.',
+    },
+    {
+      heading: '🛑 Do NOT use ethanol therapy if fomepizole is available',
+      body: 'Ethanol requires ICU-level monitoring, has a narrow therapeutic window (100-150 mg/dL), causes hypoglycemia, and is difficult to titrate. **Fomepizole is the preferred antidote** — predictable dosing, no CNS depression, does not require serum level monitoring. Use ethanol only if fomepizole is unavailable.',
+    },
+    {
+      heading: '🛑 Do NOT miss isopropanol masquerading as EtOH intoxication',
+      body: 'Isopropanol causes intoxication **2x more potent than ethanol** but does NOT cause metabolic acidosis (acetone is not an acid). Classic triad: **inebriation + ketosis WITHOUT acidosis + fruity breath**. Check serum acetone or beta-hydroxybutyrate. Isopropanol is generally supportive care only — no fomepizole needed.',
+    },
+    {
+      heading: '🛑 Do NOT forget to call Poison Control',
+      body: 'Toxic alcohol cases benefit from **real-time toxicology consultation**. Poison Control (1-800-222-1222) can help with: level interpretation, dialysis timing, antidote logistics, and disposition planning. They can also help coordinate care if the patient needs transfer for HD.',
+    },
+    {
+      heading: '🛑 Do NOT underestimate lethal doses',
+      body: '**Lethal doses are shockingly small.** Methanol: ~15-30 mL (1-2 tablespoons). Ethylene glycol: ~100 mL (~3 oz). Even small intentional ingestions warrant full workup and admission. Do not be falsely reassured by "just a sip" history — patients often underreport.',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_12: Record<string, InfoPage> = {
   'vertigo-stop': VERTIGO_STOP,
+  'toxic-alcohols-stop': TOXIC_ALCOHOLS_STOP,
 };
