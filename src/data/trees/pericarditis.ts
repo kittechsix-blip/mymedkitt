@@ -1,0 +1,554 @@
+// MedKitt — Pericarditis (Diagnosis → Risk Stratification → Etiology → Treatment → Recurrence → Disposition)
+// Initial Assessment → High-Risk Evaluation → Etiology → Treatment → Recurrent Pericarditis → Disposition
+// 6 modules: Initial Assessment → High-Risk Evaluation → Etiology → Treatment → Recurrent Pericarditis → Disposition
+// 30 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const PERICARDITIS_CRITICAL_ACTIONS = [
+  { text: 'Diagnosis requires 2 of 4: chest pain, friction rub, ECG changes, pericardial effusion', nodeId: 'pericarditis-start' },
+  { text: 'First-line: NSAID + Colchicine for ALL acute pericarditis', nodeId: 'pericarditis-treatment' },
+  { text: 'Colchicine 0.5mg BID (≥70kg) or 0.5mg daily (<70kg) for 3 months', nodeId: 'pericarditis-colchicine' },
+  { text: 'High-risk features: fever >38°C, large effusion >20mm, tamponade, immunosuppression', nodeId: 'pericarditis-high-risk' },
+  { text: 'Avoid steroids first-line — increase recurrence risk', nodeId: 'pericarditis-steroids' },
+  { text: 'Activity restriction: no competitive sports until symptom-free + normalized CRP + no effusion', nodeId: 'pericarditis-activity' },
+  { text: 'Myopericarditis (troponin+): stricter activity restriction, echo/CMR', nodeId: 'pericarditis-myopericarditis' },
+];
+
+export const PERICARDITIS_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'pericarditis-start',
+    type: 'question',
+    module: 1,
+    title: 'Pericarditis — Diagnostic Criteria',
+    body: '[Pericarditis Summary](#/info/pericarditis-summary)\n\n**Diagnosis requires ≥2 of 4 criteria:** [1][2]\n\n| Criterion | Sensitivity |\n|-----------|-------------|\n| **Chest pain** — sharp, pleuritic, positional (better sitting forward) | ~85-90% |\n| **Pericardial friction rub** — scratchy, 3-component (best at LLSB, leaning forward) | ~30% |\n| **ECG changes** — diffuse ST elevation with PR depression | ~60% |\n| **Pericardial effusion** — new or worsening on echo | ~60% |\n\n**Supporting findings:**\n• Elevated inflammatory markers (CRP, ESR, WBC)\n• Elevated troponin suggests myopericarditis\n• Recent viral illness, post-MI, post-cardiac surgery',
+    citation: [1, 2, 3],
+    options: [
+      {
+        label: 'Meets ≥2 Criteria — Pericarditis Confirmed',
+        next: 'pericarditis-ecg',
+      },
+      {
+        label: 'Only 1 Criterion — Consider Alternatives',
+        description: 'ACS, PE, aortic dissection, musculoskeletal',
+        next: 'pericarditis-differential',
+      },
+      {
+        label: 'Hemodynamically Unstable',
+        description: 'Hypotension, JVD, muffled heart sounds',
+        next: 'pericarditis-tamponade',
+        urgency: 'critical',
+      },
+    ],
+    summary: 'Diagnosis: ≥2 of 4 criteria — chest pain, friction rub, ECG changes, pericardial effusion',
+  },
+
+  {
+    id: 'pericarditis-ecg',
+    type: 'info',
+    module: 1,
+    title: 'ECG in Pericarditis',
+    body: '**Classic 4-stage ECG evolution:** [1][4]\n\n| Stage | Timing | Findings |\n|-------|--------|----------|\n| **I** | Hours-days | Diffuse concave ST elevation + PR depression (reciprocal ST depression + PR elevation in aVR) |\n| **II** | Days | ST/PR normalization |\n| **III** | Days-weeks | Diffuse T-wave inversions |\n| **IV** | Weeks-months | T-wave normalization |\n\n**Key distinguishing features from STEMI:**\n• **Diffuse** ST elevation (not territorial)\n• **Concave** (\"smiley face\") ST morphology\n• **PR depression** — most specific finding\n• **No reciprocal ST depression** (except aVR)\n• ST/T ratio >0.25 in V6 suggests pericarditis\n\n**Spodick sign:** Downsloping TP segment — highly specific but low sensitivity\n\n**PR depression in lead II** — most sensitive single finding',
+    images: [{ src: 'images/pericarditis/pericarditis-ecg.png', alt: 'ECG showing diffuse ST elevation with PR depression characteristic of acute pericarditis', caption: 'Acute pericarditis ECG: diffuse concave ST elevation with PR depression. Note reciprocal changes in aVR.' }],
+    citation: [1, 4],
+    next: 'pericarditis-labs',
+    summary: 'Stage I: diffuse concave ST elevation + PR depression; PR depression in II most sensitive; Spodick sign = downsloping TP',
+  },
+
+  {
+    id: 'pericarditis-labs',
+    type: 'info',
+    module: 1,
+    title: 'Laboratory Evaluation',
+    body: '**Recommended labs for all patients:** [1][2]\n\n• **CRP** — elevated in >75%; useful for monitoring response and guiding taper\n• **ESR** — less specific but supports inflammation\n• **Troponin** — elevated in 30-50% (myopericarditis)\n• **BMP** — renal function (colchicine dosing), uremia\n• **CBC** — leukocytosis supports inflammation\n\n**Consider based on clinical suspicion:**\n• TSH — hypothyroidism can cause pericardial effusion\n• ANA, RF — if autoimmune etiology suspected\n• HIV — immunocompromised patients\n• Blood cultures — if infectious etiology suspected\n• TB testing (QuantiFERON/PPD) — endemic areas, immunocompromised\n\n**Troponin elevation:**\n• Present in 30-50% of acute pericarditis\n• Indicates myocardial involvement (myopericarditis)\n• Usually modest elevation with normal wall motion\n• Does NOT change diagnosis but modifies activity restrictions',
+    citation: [1, 2, 5],
+    next: 'pericarditis-echo',
+    summary: 'CRP most useful for monitoring; troponin elevated in 30-50% (myopericarditis); check renal function for colchicine dosing',
+  },
+
+  {
+    id: 'pericarditis-echo',
+    type: 'question',
+    module: 1,
+    title: 'Echocardiography',
+    body: '**Echo is indicated for ALL suspected pericarditis:** [1][2]\n\n**Findings:**\n• Pericardial effusion — present in ~60%\n• Pericardial thickening (>3mm)\n• Fibrinous strands\n• Wall motion abnormalities (suggests myopericarditis)\n\n**Effusion size classification:**\n\n| Size | End-diastolic depth |\n|------|--------------------|\n| Small | <10 mm |\n| Moderate | 10-20 mm |\n| Large | >20 mm |\n\n**Tamponade physiology:**\n• RV diastolic collapse (early, sensitive)\n• RA systolic collapse (>1/3 cardiac cycle — specific)\n• IVC plethora (>2.1cm, <50% respiratory variation)\n• Respirophasic variation (>25% mitral inflow, >40% tricuspid)',
+    citation: [1, 2, 6],
+    options: [
+      {
+        label: 'No Effusion or Small Effusion',
+        next: 'pericarditis-high-risk',
+      },
+      {
+        label: 'Moderate Effusion (10-20mm)',
+        next: 'pericarditis-high-risk',
+      },
+      {
+        label: 'Large Effusion (>20mm)',
+        next: 'pericarditis-large-effusion',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Tamponade Physiology',
+        next: 'pericarditis-tamponade',
+        urgency: 'critical',
+      },
+    ],
+    summary: 'Echo for all — effusion in ~60%; large >20mm = high risk; RV diastolic collapse = early tamponade sign',
+  },
+
+  {
+    id: 'pericarditis-differential',
+    type: 'info',
+    module: 1,
+    title: 'Differential Diagnosis',
+    body: '**If only 1 criterion present, consider:**\n\n**Cardiac:**\n• **ACS** — territorial ECG changes, troponin, risk factors\n• **Myocarditis** — heart failure symptoms, arrhythmias\n• **Aortic dissection** — tearing pain, BP differential, wide mediastinum\n\n**Pulmonary:**\n• **PE** — pleuritic pain, hypoxia, tachycardia, risk factors\n• **Pneumonia** — fever, cough, consolidation\n• **Pleuritis** — unilateral, friction rub with respiration\n\n**Other:**\n• **Musculoskeletal** — reproducible on palpation\n• **GERD/esophageal** — relation to meals, heartburn\n• **Costochondritis** — point tenderness at costochondral junctions\n\n**When to pursue alternative diagnosis:**\n• Chest pain WITHOUT ECG changes or effusion\n• Unilateral pain\n• Pain reproducible with palpation\n• Associated with exertion (consider ACS)',
+    citation: [1],
+    next: 'pericarditis-start',
+    summary: 'Consider ACS (territorial ECG), PE (hypoxia), dissection (tearing, BP differential), MSK (reproducible)',
+  },
+
+  // =====================================================================
+  // MODULE 2: HIGH-RISK EVALUATION
+  // =====================================================================
+
+  {
+    id: 'pericarditis-high-risk',
+    type: 'question',
+    module: 2,
+    title: 'High-Risk Features',
+    body: '**Assess for predictors of complicated course:** [1][2][7]\n\n**Major criteria (any = high risk → admit):**\n• Fever >38°C (100.4°F)\n• Subacute onset (symptoms over days-weeks)\n• Large pericardial effusion (>20mm)\n• Cardiac tamponade\n• Failure to respond to NSAIDs after 1 week\n\n**Minor criteria (consider admission if present):**\n• Myopericarditis (elevated troponin)\n• Immunosuppression\n• Trauma\n• Oral anticoagulant therapy\n\n**Low-risk (outpatient management appropriate):**\n• Acute onset\n• No fever\n• No major criteria\n• Small or no effusion\n• Responds to NSAIDs within 1 week',
+    citation: [1, 2, 7],
+    options: [
+      {
+        label: 'No High-Risk Features — Low Risk',
+        description: 'Outpatient management appropriate',
+        next: 'pericarditis-etiology',
+      },
+      {
+        label: 'High-Risk Features Present',
+        description: 'Fever, large effusion, subacute, immunosuppressed',
+        next: 'pericarditis-admit',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Troponin Elevated',
+        description: 'Myopericarditis — needs further evaluation',
+        next: 'pericarditis-myopericarditis',
+      },
+    ],
+    summary: 'Major high-risk: fever >38°C, large effusion >20mm, subacute onset, tamponade, NSAID failure',
+  },
+
+  {
+    id: 'pericarditis-myopericarditis',
+    type: 'info',
+    module: 2,
+    title: 'Myopericarditis',
+    body: '**Myopericarditis = pericarditis + troponin elevation with preserved LV function** [1][5][8]\n\n**Classification:**\n• **Myopericarditis** — predominant pericarditis features + elevated troponin + normal LV function\n• **Perimyocarditis** — predominant myocarditis features + LV dysfunction → treat as myocarditis\n\n**Management differences:**\n• Treatment: same as pericarditis (NSAIDs + colchicine)\n• **Stricter activity restriction** — minimum 6 months for athletes\n• Echo to document normal LV function\n• Consider cardiac MRI if diagnosis uncertain or LV dysfunction\n\n**Prognosis:**\n• Generally excellent with preserved LV function\n• Troponin elevation does NOT increase mortality\n• ~15% recurrence rate\n\n**Red flags suggesting true myocarditis:**\n• New heart failure symptoms\n• Arrhythmias (VT, high-grade AV block)\n• LV dysfunction on echo\n• Hemodynamic instability',
+    citation: [1, 5, 8],
+    next: 'pericarditis-etiology',
+    summary: 'Myopericarditis = troponin+ with normal LV function; same treatment but stricter activity restriction (6 mo for athletes)',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'pericarditis-large-effusion',
+    type: 'info',
+    module: 2,
+    title: 'Large Pericardial Effusion',
+    body: '**Large effusion (>20mm) without tamponade:** [1][6]\n\n**Immediate management:**\n• Admit for monitoring\n• Serial echos (daily until stable)\n• Avoid anticoagulation if possible\n• Treat underlying cause aggressively\n\n**Indications for pericardiocentesis (non-emergent):**\n• Diagnostic — suspected bacterial/TB/malignant etiology\n• Therapeutic — symptomatic large effusion\n• Hemodynamic compromise developing\n\n**Pericardiocentesis NOT routinely needed if:**\n• Stable hemodynamics\n• Clear viral/idiopathic etiology\n• Responding to anti-inflammatory therapy\n• Effusion decreasing on serial echo\n\n**Risk of progression to tamponade:**\n• Rapid accumulation > slow accumulation\n• Inflammatory effusions may progress quickly\n• Monitor for Beck\'s triad: hypotension, JVD, muffled heart sounds',
+    citation: [1, 6],
+    next: 'pericarditis-admit',
+    summary: 'Large effusion without tamponade: admit, serial echo, avoid anticoagulation; pericardiocentesis if diagnostic need or worsening',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'pericarditis-tamponade',
+    type: 'info',
+    module: 2,
+    title: 'Cardiac Tamponade',
+    body: '**Tamponade is a clinical diagnosis — do NOT wait for echo confirmation if unstable** [1][6]\n\n**Beck\'s triad (present in ~30%):**\n• Hypotension\n• Elevated JVP\n• Muffled heart sounds\n\n**Other findings:**\n• Pulsus paradoxus (>10 mmHg drop in SBP with inspiration)\n• Tachycardia\n• Kussmaul sign (JVP rises with inspiration — actually more common in constrictive)\n• Electrical alternans on ECG\n\n**Immediate management:**\n1. **IV fluids** — temporizing measure to increase preload\n2. **Avoid positive pressure ventilation** — decreases preload\n3. **Emergent pericardiocentesis** — definitive treatment\n4. Cardiology/CT surgery consultation\n\n**Pericardiocentesis approach:**\n• Echo-guided subxiphoid approach preferred\n• Blind approach only if no echo AND patient crashing\n• Send fluid: cell count, protein, LDH, glucose, cultures, cytology, ADA (if TB suspected)',
+    citation: [1, 6],
+    treatment: {
+      firstLine: {
+        drug: 'IV Normal Saline',
+        dose: '500-1000 mL',
+        route: 'IV',
+        frequency: 'Bolus',
+        duration: 'Temporizing until pericardiocentesis',
+        notes: 'Increases preload. Avoid positive pressure ventilation.',
+      },
+      monitoring: 'Continuous telemetry, BP, emergent cardiology consult for pericardiocentesis',
+    },
+    next: 'pericarditis-admit',
+    summary: 'Clinical diagnosis — Beck\'s triad in ~30%; IV fluids to temporize; emergent pericardiocentesis is definitive',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'pericarditis-admit',
+    type: 'result',
+    module: 2,
+    title: 'Admit for Monitoring',
+    body: '**Admission criteria:** [1][2][7]\n\n• Fever >38°C (100.4°F)\n• Large pericardial effusion (>20mm)\n• Cardiac tamponade\n• Suspected bacterial or tuberculous pericarditis\n• Immunocompromised patient\n• Traumatic pericarditis\n• Failure to respond to outpatient therapy\n• Significant myocarditis features (LV dysfunction, arrhythmias)\n• On anticoagulation with large effusion\n\n**Inpatient management:**\n• Telemetry monitoring\n• Serial echocardiograms\n• Anti-inflammatory therapy (same regimen as outpatient)\n• Treat underlying cause\n• Cardiology consultation\n• Hold anticoagulation if possible (risk of hemorrhagic effusion)',
+    recommendation: 'Admit to telemetry. Serial echos. Anti-inflammatory therapy + treat underlying cause. Cardiology consult.',
+    citation: [1, 2, 7],
+  },
+
+  // =====================================================================
+  // MODULE 3: ETIOLOGY
+  // =====================================================================
+
+  {
+    id: 'pericarditis-etiology',
+    type: 'question',
+    module: 3,
+    title: 'Etiology Assessment',
+    body: '**Most acute pericarditis is idiopathic/viral (80-90%)** [1][2]\n\nExtensive workup not needed for uncomplicated first episode.\n\n**When to pursue specific etiology:**\n• High-risk features present\n• Recurrent pericarditis\n• Large effusion requiring drainage\n• Suspected secondary cause\n\n**Major etiologic categories:**\n\n| Category | Examples |\n|----------|----------|\n| **Idiopathic/Viral** | Coxsackie, EBV, CMV, HIV, COVID-19 |\n| **Post-cardiac injury** | Post-MI (Dressler), post-pericardiotomy, post-ablation |\n| **Autoimmune** | SLE, RA, scleroderma, Sjogren |\n| **Neoplastic** | Lung, breast, lymphoma, leukemia |\n| **Infectious** | TB, bacterial (staph, strep), fungal |\n| **Metabolic** | Uremia, hypothyroidism |\n| **Drug-induced** | Hydralazine, procainamide, isoniazid, checkpoint inhibitors |',
+    citation: [1, 2],
+    options: [
+      {
+        label: 'Idiopathic / Viral',
+        description: 'Most common — no specific workup needed',
+        next: 'pericarditis-treatment',
+      },
+      {
+        label: 'Post-MI (Dressler Syndrome)',
+        description: 'Weeks after MI',
+        next: 'pericarditis-dressler',
+      },
+      {
+        label: 'Autoimmune / Connective Tissue',
+        description: 'SLE, RA, or other CTD',
+        next: 'pericarditis-autoimmune',
+      },
+      {
+        label: 'Suspected Bacterial / TB',
+        description: 'Purulent, immunocompromised, endemic TB',
+        next: 'pericarditis-infectious',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Uremic Pericarditis',
+        description: 'ESRD, BUN typically >60',
+        next: 'pericarditis-uremic',
+      },
+    ],
+    summary: '80-90% idiopathic/viral — extensive workup only for high-risk, recurrent, or specific clinical suspicion',
+  },
+
+  {
+    id: 'pericarditis-dressler',
+    type: 'info',
+    module: 3,
+    title: 'Dressler Syndrome (Post-MI Pericarditis)',
+    body: '**Post-cardiac injury syndrome — occurs 1-8 weeks after MI, surgery, or trauma** [1][9]\n\n**Two types of post-MI pericarditis:**\n\n**Early (within 1 week):**\n• Direct inflammation from infarct\n• More common with transmural MI\n• Usually self-limited\n\n**Late (Dressler syndrome, 1-8 weeks):**\n• Autoimmune mechanism\n• Associated with fever, pleuritis, elevated ESR\n• Less common in reperfusion era\n\n**Treatment considerations:**\n• **[Aspirin](#/drug/aspirin/pericarditis)** preferred over other NSAIDs post-MI\n• Dosing: 650-1000mg TID for 1-2 weeks, then taper\n• [Colchicine](#/drug/colchicine/pericarditis) adjunct as usual\n• Avoid ibuprofen/indomethacin — may impair scar formation\n• Steroids — only if refractory (delay healing)\n\n**Anticoagulation:**\n• Continue if indicated (post-STEMI, mechanical valve)\n• Monitor closely for hemorrhagic conversion\n• Avoid if large effusion',
+    citation: [1, 9],
+    treatment: {
+      firstLine: {
+        drug: 'Aspirin',
+        dose: '650-1000 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '1-2 weeks then taper over 3-4 weeks',
+        notes: 'Preferred post-MI. Add colchicine. Avoid ibuprofen/indomethacin post-MI.',
+      },
+      monitoring: 'Daily symptoms, repeat ECG in 1-2 weeks, CRP weekly until normalized',
+    },
+    next: 'pericarditis-colchicine',
+    summary: 'Post-MI: aspirin preferred (650-1000mg TID), avoid ibuprofen; colchicine adjunct; careful with anticoagulation',
+  },
+
+  {
+    id: 'pericarditis-autoimmune',
+    type: 'info',
+    module: 3,
+    title: 'Autoimmune Pericarditis',
+    body: '**Pericarditis associated with connective tissue diseases:** [1][2]\n\n**Common associations:**\n• **SLE** — most common CTD causing pericarditis (25-50%)\n• **RA** — pericardial involvement in up to 30%\n• **Systemic sclerosis** — often with myocardial involvement\n• **Sjogren syndrome**\n• **Mixed connective tissue disease**\n\n**Management differences:**\n• Treat underlying disease (rheumatology involvement)\n• NSAIDs + colchicine still first-line for pericarditis\n• **Steroids often needed** — lower threshold than idiopathic\n• May need immunosuppressive therapy (azathioprine, methotrexate)\n\n**Workup:**\n• ANA, anti-dsDNA, complement levels\n• RF, anti-CCP\n• ESR, CRP\n• Urinalysis (lupus nephritis)\n\n**Recurrence risk:**\n• Higher than idiopathic pericarditis\n• Correlates with underlying disease activity',
+    citation: [1, 2],
+    next: 'pericarditis-treatment',
+    summary: 'SLE most common CTD; treat underlying disease; lower threshold for steroids; higher recurrence risk',
+  },
+
+  {
+    id: 'pericarditis-infectious',
+    type: 'info',
+    module: 3,
+    title: 'Bacterial / Tuberculous Pericarditis',
+    body: '**Purulent/bacterial pericarditis is a medical emergency** [1][10]\n\n**Bacterial pericarditis:**\n• Usually contiguous spread (pneumonia, empyema, post-surgical)\n• Organisms: Staph, Strep, Gram-negatives\n• High mortality (20-30%) even with treatment\n• Requires drainage + IV antibiotics\n• Often progresses to constrictive pericarditis\n\n**Tuberculous pericarditis:**\n• Common in endemic areas and HIV patients\n• Subacute presentation over weeks-months\n• Large effusions common\n• High risk of constriction (30-50%)\n\n**Workup:**\n• Pericardiocentesis — cell count, protein, LDH, glucose, Gram stain, culture, AFB, ADA\n• Blood cultures\n• TB testing (QuantiFERON, sputum if pulmonary involvement)\n\n**Treatment:**\n• Bacterial: IV antibiotics + surgical drainage\n• TB: 6-month anti-TB therapy; steroids controversial (may reduce constriction)\n\n**Pericardial fluid characteristics:**\n\n| Finding | Suggests |\n|---------|----------|\n| ADA >40 U/L | TB (sensitivity ~90%) |\n| Glucose <40 | Bacterial or TB |\n| Protein >3 g/dL | Exudate |\n| WBC >10,000 with PMN predominance | Bacterial |',
+    citation: [1, 10],
+    next: 'pericarditis-admit',
+    summary: 'Purulent = emergency — drainage + IV abx; TB common in endemic/HIV — ADA >40 suggests TB; high constriction risk',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'pericarditis-uremic',
+    type: 'info',
+    module: 3,
+    title: 'Uremic Pericarditis',
+    body: '**Pericarditis in ESRD patients — usually BUN >60 mg/dL** [1][11]\n\n**Two types:**\n\n**Uremic pericarditis (pre-dialysis or underdialyzed):**\n• BUN typically >60 mg/dL\n• Treatment: **Intensified dialysis** (daily for 1-2 weeks)\n• NSAIDs generally ineffective\n• Steroids not helpful\n\n**Dialysis-associated pericarditis:**\n• Occurs in patients on adequate dialysis\n• Different mechanism — may respond to anti-inflammatory therapy\n• Consider NSAIDs + colchicine (renal dosing)\n\n**Management:**\n• Intensify dialysis — daily HD or increased PD\n• Heparin-free dialysis to avoid hemorrhagic effusion\n• Avoid anticoagulation\n• Monitor for tamponade (effusions can be large)\n• Pericardiocentesis if symptomatic or not responding\n\n**Indications for pericardiectomy:**\n• Recurrent large effusions despite intensified dialysis\n• Constrictive physiology',
+    citation: [1, 11],
+    next: 'pericarditis-admit',
+    summary: 'Uremic (BUN >60): intensified daily dialysis, heparin-free; NSAIDs ineffective; dialysis-associated may respond to anti-inflammatory',
+  },
+
+  // =====================================================================
+  // MODULE 4: TREATMENT
+  // =====================================================================
+
+  {
+    id: 'pericarditis-treatment',
+    type: 'info',
+    module: 4,
+    title: 'First-Line Treatment',
+    body: '**NSAID + Colchicine for ALL acute pericarditis** [1][2][3]\n\n**This combination reduces recurrence from ~30% to ~15%** (COPE, ICAP trials)\n\n**Step 1: Choose NSAID:**\n\n| Drug | Dose | Notes |\n|------|------|-------|\n| [Ibuprofen](#/drug/ibuprofen/pericarditis) | 600mg TID | Most commonly used |\n| [Indomethacin](#/drug/indomethacin/pericarditis) | 25-50mg TID | May be more effective |\n| [Naproxen](#/drug/naproxen/pericarditis) | 500mg BID | Fewer GI effects |\n| [Aspirin](#/drug/aspirin/pericarditis) | 750-1000mg TID | **Preferred post-MI** |\n\n**Duration:** High-dose for 1-2 weeks until symptom resolution + CRP normalization, then taper over 3-4 weeks.\n\n**Step 2: Add Colchicine** (see next node)\n\n**Step 3: GI protection:**\n• PPI while on NSAIDs\n\n**Step 4: Activity restriction:**\n• Avoid strenuous activity until symptom-free AND CRP normal\n• Athletes: minimum 3 months',
+    citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Ibuprofen',
+        dose: '600 mg',
+        route: 'PO',
+        frequency: 'TID',
+        duration: '1-2 weeks high-dose, then taper over 3-4 weeks',
+        notes: 'Alternatives: Indomethacin 25-50mg TID, Naproxen 500mg BID. Post-MI: use Aspirin 750-1000mg TID instead.',
+      },
+      monitoring: 'CRP to guide taper. Symptoms should improve within 1 week. If no improvement, reassess diagnosis.',
+    },
+    next: 'pericarditis-colchicine',
+    summary: 'NSAID + colchicine first-line; ibuprofen 600mg TID or aspirin (post-MI); high-dose 1-2 weeks then taper 3-4 weeks',
+  },
+
+  {
+    id: 'pericarditis-colchicine',
+    type: 'info',
+    module: 4,
+    title: 'Colchicine Therapy',
+    body: '**Colchicine reduces recurrence by ~50%** [1][3][12]\n\n**Dosing:**\n\n| Weight | Dose | Duration (first episode) | Duration (recurrence) |\n|--------|------|--------------------------|----------------------|\n| ≥70 kg | [Colchicine](#/drug/colchicine/pericarditis) 0.5mg BID | 3 months | 6 months |\n| <70 kg | [Colchicine](#/drug/colchicine/pericarditis) 0.5mg daily | 3 months | 6 months |\n\n**No loading dose needed** (unlike gout)\n\n**Key considerations:**\n• Start with NSAID (not as monotherapy)\n• Continue even after NSAID tapered\n• GI side effects (diarrhea) in ~10% — may need dose reduction\n\n**Contraindications/cautions:**\n• Severe renal impairment (GFR <30): reduce to 0.5mg daily or avoid\n• Severe hepatic impairment: avoid\n• P-gp/CYP3A4 inhibitors (clarithromycin, ketoconazole, ritonavir): reduce dose or avoid\n\n**Renal dosing:**\n\n| GFR | Adjustment |\n|-----|------------|\n| 30-60 | 0.5mg daily |\n| <30 | Avoid or 0.25mg daily with close monitoring |',
+    citation: [1, 3, 12],
+    treatment: {
+      firstLine: {
+        drug: 'Colchicine',
+        dose: '0.5 mg',
+        route: 'PO',
+        frequency: 'BID (≥70kg) or daily (<70kg)',
+        duration: '3 months (first episode) or 6 months (recurrence)',
+        notes: 'No loading dose. Continue after NSAID tapered. Reduce dose if GI effects or GFR <60.',
+      },
+      monitoring: 'GI symptoms (dose-limiting); Cr/GFR if renal impairment; continue until full course complete',
+    },
+    next: 'pericarditis-activity',
+    summary: 'Colchicine 0.5mg BID (≥70kg) or daily (<70kg); 3 months first episode, 6 months recurrence; no loading dose',
+  },
+
+  {
+    id: 'pericarditis-activity',
+    type: 'info',
+    module: 4,
+    title: 'Activity Restriction',
+    body: '**Activity restriction is critical — especially for athletes** [1][2][8]\n\n**General population:**\n• Avoid strenuous activity until:\n  - Symptom-free\n  - CRP normalized\n  - No pericardial effusion\n• Typically 1-2 weeks for uncomplicated cases\n\n**Athletes (competitive sports):**\n\n| Condition | Minimum restriction |\n|-----------|--------------------|\n| Uncomplicated pericarditis | 3 months |\n| Myopericarditis (troponin+, normal LV) | 6 months |\n| Perimyocarditis (LV dysfunction) | Per myocarditis guidelines |\n\n**Return-to-play criteria:**\n• Complete symptom resolution\n• Normal CRP/ESR\n• No effusion on echo\n• Normal ECG (may have persistent T-wave changes)\n• Normal LV function (if myopericarditis)\n• Off anti-inflammatory therapy (controversial — some allow return on colchicine)\n\n**Rationale:**\n• Exercise may trigger arrhythmias in myopericarditis\n• Inflammation may be subclinical despite symptom resolution\n• Recurrence risk higher with premature return',
+    citation: [1, 2, 8],
+    next: 'pericarditis-disposition',
+    summary: 'No strenuous activity until symptom-free + normal CRP + no effusion; athletes: 3 mo (pericarditis), 6 mo (myopericarditis)',
+  },
+
+  {
+    id: 'pericarditis-steroids',
+    type: 'info',
+    module: 4,
+    title: 'Corticosteroid Therapy',
+    body: '**Avoid steroids first-line — increase recurrence risk 2-4x** [1][2][3]\n\n**Indications for steroids:**\n• Contraindication to NSAIDs (renal failure, active GI bleeding)\n• Contraindication to colchicine\n• NSAID failure after 1-2 weeks\n• Autoimmune/connective tissue disease\n• Pregnancy (aspirin + colchicine can be used, but steroids if needed)\n\n**If steroids required:**\n• Low dose: [Prednisone](#/drug/prednisone/pericarditis) 0.25-0.5 mg/kg/day (NOT high-dose)\n• Maximum ~25mg/day for most patients\n• Continue colchicine throughout\n• **Very slow taper** — key to preventing recurrence\n\n**Taper protocol:**\n• Maintain dose until symptom-free + CRP normal (usually 2-4 weeks)\n• Then decrease by 2.5-5mg every 2 weeks (if >25mg/day)\n• Below 25mg: decrease by 1.25-2.5mg every 2-4 weeks\n• Total taper duration: often 3-6 months\n\n**If flare during taper:**\n• Return to last effective dose\n• Add/optimize colchicine\n• Consider steroid-sparing agent',
+    citation: [1, 2, 3],
+    treatment: {
+      firstLine: {
+        drug: 'Prednisone',
+        dose: '0.25-0.5 mg/kg/day (max ~25 mg)',
+        route: 'PO',
+        frequency: 'Daily',
+        duration: 'Until symptom-free + CRP normal, then very slow taper over 3-6 months',
+        notes: 'Only if NSAID contraindicated or failed. Continue colchicine. Low dose preferred.',
+      },
+      monitoring: 'CRP to guide taper; blood glucose; BP; symptoms during taper — flare = return to last effective dose',
+    },
+    next: 'pericarditis-recurrent',
+    summary: 'Avoid first-line (2-4x recurrence risk); if needed: low dose 0.25-0.5 mg/kg (max 25mg); very slow taper over months',
+    safetyLevel: 'warning',
+  },
+
+  // =====================================================================
+  // MODULE 5: RECURRENT PERICARDITIS
+  // =====================================================================
+
+  {
+    id: 'pericarditis-recurrent',
+    type: 'question',
+    module: 5,
+    title: 'Recurrent Pericarditis',
+    body: '**Recurrence occurs in 15-30% despite optimal therapy** [1][13]\n\n**Definitions:**\n• **Recurrent:** symptom-free interval ≥4-6 weeks between episodes\n• **Incessant:** symptoms persist >4-6 weeks OR recurrence within 6 weeks of stopping therapy\n\n**Risk factors for recurrence:**\n• Incomplete initial treatment\n• Premature NSAID taper\n• Not using colchicine\n• Steroid use (especially high-dose or rapid taper)\n• Female sex\n• Autoimmune etiology\n\n**Recurrence management ladder:**\n1. NSAIDs + colchicine (longer duration — 6 months)\n2. Add low-dose steroids with very slow taper\n3. IL-1 antagonists (anakinra, rilonacept)\n4. Other immunosuppressants (azathioprine, IVIG)\n5. Pericardiectomy (last resort)',
+    citation: [1, 13],
+    options: [
+      {
+        label: 'First Recurrence',
+        next: 'pericarditis-recurrent-first',
+      },
+      {
+        label: 'Multiple Recurrences / Steroid-Dependent',
+        next: 'pericarditis-refractory',
+      },
+      {
+        label: 'Incessant Pericarditis',
+        description: 'Never achieved remission',
+        next: 'pericarditis-refractory',
+      },
+    ],
+    summary: '15-30% recurrence; risk factors: no colchicine, rapid taper, steroids, female; escalation: NSAIDs → steroids → IL-1 blockers',
+  },
+
+  {
+    id: 'pericarditis-recurrent-first',
+    type: 'info',
+    module: 5,
+    title: 'First Recurrence',
+    body: '**Same therapy as initial episode but longer duration** [1][3][13]\n\n**Treatment:**\n• NSAIDs at full dose until symptom-free + CRP normal\n• **Colchicine for 6 months** (vs 3 months for first episode)\n• Slow NSAID taper (over 4-6 weeks)\n• Address modifiable risk factors (activity, compliance)\n\n**Key points:**\n• Confirm CRP normalization before tapering\n• May need longer NSAID course (2-4 weeks vs 1-2 weeks)\n• Consider echo to rule out effusion\n• Activity restriction until fully resolved\n\n**If not on colchicine previously:**\n• Add it — reduces recurrence by ~50%\n\n**If already on colchicine:**\n• Ensure adherence and correct dosing\n• Consider checking colchicine level (rarely done)\n• Continue for full 6-month course',
+    citation: [1, 3, 13],
+    treatment: {
+      firstLine: {
+        drug: 'Colchicine',
+        dose: '0.5 mg',
+        route: 'PO',
+        frequency: 'BID (≥70kg) or daily (<70kg)',
+        duration: '6 months (longer than first episode)',
+        notes: 'Continue with NSAID. Ensure CRP normal before tapering NSAID.',
+      },
+      monitoring: 'CRP serial monitoring to guide NSAID taper; symptoms; GI side effects',
+    },
+    next: 'pericarditis-disposition',
+    summary: 'First recurrence: same treatment but colchicine for 6 months; confirm CRP normal before taper; address compliance',
+  },
+
+  {
+    id: 'pericarditis-refractory',
+    type: 'info',
+    module: 5,
+    title: 'Refractory / Steroid-Dependent Pericarditis',
+    body: '**IL-1 antagonists are now preferred over escalating steroids** [1][13][14]\n\n**Indications for IL-1 therapy:**\n• ≥2 recurrences despite NSAIDs + colchicine\n• Steroid-dependent (unable to taper below physiologic dose)\n• Contraindication to steroids\n\n**IL-1 antagonists:**\n\n| Drug | Dose | Notes |\n|------|------|-------|\n| **Anakinra** | 100mg SC daily | Rapid onset, injection site reactions |\n| **Rilonacept** | 320mg SC load, then 160mg weekly | FDA-approved for recurrent pericarditis (RHAPSODY trial) |\n\n**RHAPSODY trial (rilonacept):** [14]\n• 96% reduction in recurrence vs placebo\n• Rapid symptom relief (median 5 days)\n\n**Other options:**\n• Azathioprine (steroid-sparing)\n• IVIG (limited evidence)\n• Pericardiectomy — last resort for truly refractory cases\n\n**Referral:**\n• Rheumatology and/or cardiology subspecialty involvement recommended',
+    citation: [1, 13, 14],
+    treatment: {
+      firstLine: {
+        drug: 'Rilonacept',
+        dose: '320 mg SC load, then 160 mg SC weekly',
+        route: 'SC',
+        frequency: 'Weekly after loading',
+        duration: 'Until remission, then taper',
+        notes: 'FDA-approved for recurrent pericarditis. Alternative: Anakinra 100mg SC daily.',
+      },
+      alternative: {
+        drug: 'Anakinra',
+        dose: '100 mg',
+        route: 'SC',
+        frequency: 'Daily',
+        duration: 'Until remission achieved',
+        notes: 'Faster onset but daily injection. Consider if rilonacept unavailable.',
+      },
+      monitoring: 'CRP, symptoms, injection site reactions; rheumatology co-management recommended',
+    },
+    next: 'pericarditis-disposition',
+    summary: 'Refractory: IL-1 antagonists preferred (rilonacept FDA-approved, anakinra); RHAPSODY showed 96% recurrence reduction',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'pericarditis-disposition',
+    type: 'question',
+    module: 6,
+    title: 'Disposition',
+    body: 'Determine appropriate disposition based on risk stratification and clinical status.',
+    citation: [1, 2, 7],
+    options: [
+      {
+        label: 'Low-Risk — Discharge',
+        description: 'No high-risk features, able to take PO, reliable follow-up',
+        next: 'pericarditis-discharge',
+      },
+      {
+        label: 'High-Risk — Admit',
+        description: 'Fever, large effusion, tamponade, immunosuppressed',
+        next: 'pericarditis-admit',
+      },
+      {
+        label: 'Uncertain — Observation',
+        description: 'Borderline features, need serial echo',
+        next: 'pericarditis-observation',
+      },
+    ],
+    summary: 'Low-risk: discharge with close follow-up; high-risk: admit; uncertain: observe with serial echo',
+  },
+
+  {
+    id: 'pericarditis-discharge',
+    type: 'result',
+    module: 6,
+    title: 'Discharge with Follow-Up',
+    body: '**Discharge criteria:** [1][2][7]\n\n• No high-risk features\n• Hemodynamically stable\n• Tolerating oral medications\n• Reliable follow-up available\n• Understands activity restrictions\n\n**Discharge medications:**\n• [Ibuprofen](#/drug/ibuprofen/pericarditis) 600mg TID (or alternative NSAID) + [Colchicine](#/drug/colchicine/pericarditis) 0.5mg BID\n• PPI for GI protection\n\n**Patient instructions:**\n• Take medications as prescribed — do NOT stop early\n• Activity restriction until symptom-free + cleared by physician\n• Return for: worsening chest pain, fever, shortness of breath, lightheadedness\n• Follow-up in 1-2 weeks with cardiology or PCP\n\n**Follow-up plan:**\n• Repeat CRP in 1-2 weeks\n• Echo if symptoms persist or recur\n• Taper NSAIDs only after CRP normalized\n• Continue colchicine for full 3-month course',
+    recommendation: 'Discharge on NSAID + colchicine + PPI. Activity restriction. Follow-up in 1-2 weeks with CRP. Continue colchicine 3 months.',
+    citation: [1, 2, 7],
+    treatment: {
+      firstLine: {
+        drug: 'Ibuprofen + Colchicine',
+        dose: 'Ibuprofen 600mg TID + Colchicine 0.5mg BID',
+        route: 'PO',
+        frequency: 'As above',
+        duration: 'NSAID 1-2 weeks then taper; Colchicine 3 months',
+        notes: 'Add PPI. Confirm CRP normal before NSAID taper. Activity restriction until resolved.',
+      },
+      monitoring: 'Follow-up in 1-2 weeks; CRP to guide NSAID taper; echo if symptoms recur; complete 3-month colchicine course',
+    },
+  },
+
+  {
+    id: 'pericarditis-observation',
+    type: 'result',
+    module: 6,
+    title: 'Observation Unit',
+    body: '**Consider observation for borderline cases:**\n\n• Moderate effusion without tamponade\n• Myopericarditis awaiting echo/cardiac MRI\n• NSAID intolerance needing alternative therapy\n• First-time pericarditis with equivocal high-risk features\n• Social concerns affecting follow-up reliability\n\n**Observation plan:**\n• Serial echos (6-12 hours apart)\n• Telemetry monitoring\n• Initiate anti-inflammatory therapy\n• Cardiology consultation\n• Reassess for discharge vs admission in 12-24 hours',
+    recommendation: 'Observation with serial echo, telemetry, cardiology consult. Reassess in 12-24 hours for discharge vs admission.',
+    citation: [1, 2],
+  },
+
+];
+
+export const PERICARDITIS_MODULE_LABELS = [
+  'Initial Assessment',
+  'High-Risk Evaluation',
+  'Etiology',
+  'Treatment',
+  'Recurrent Pericarditis',
+  'Disposition',
+];
+
+export const PERICARDITIS_CITATIONS: Citation[] = [
+  { num: 1, text: 'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the Diagnosis and Management of Pericardial Diseases. Eur Heart J. 2015;36(42):2921-2964. Updated: 2025 ESC Guidelines. Eur Heart J. 2025;46(40):3952-4044.' },
+  { num: 2, text: 'Chiabrando JG, Bonaventura A, Vecchié A, et al. Management of Acute and Recurrent Pericarditis: JACC State-of-the-Art Review. J Am Coll Cardiol. 2020;75(1):76-92.' },
+  { num: 3, text: 'Imazio M, Brucato A, Cemin R, et al. A Randomized Trial of Colchicine for Acute Pericarditis (ICAP). N Engl J Med. 2013;369(16):1522-1528.' },
+  { num: 4, text: 'Spodick DH. Electrocardiographic Changes in Acute Pericarditis. In: Acute Pericarditis. Grune & Stratton; 1959.' },
+  { num: 5, text: 'Imazio M, Demichelis B, Cecchi E, et al. Cardiac Troponin I in Acute Pericarditis. J Am Coll Cardiol. 2003;42(12):2144-2148.' },
+  { num: 6, text: 'Ristic AD, Imazio M, Adler Y, et al. Triage Strategy for Urgent Management of Cardiac Tamponade: A Position Statement of the ESC Working Group. Eur Heart J. 2014;35(34):2279-2284.' },
+  { num: 7, text: 'Imazio M, Gaita F, LeWinter M. Evaluation and Treatment of Pericarditis: A Systematic Review. JAMA. 2015;314(14):1498-1506.' },
+  { num: 8, text: 'Pelliccia A, Solberg EE, Papadakis M, et al. Recommendations for Participation in Competitive and Leisure Time Sport in Athletes with Cardiomyopathies, Myocarditis, and Pericarditis. Eur J Prev Cardiol. 2019;26(8):819-829.' },
+  { num: 9, text: 'Imazio M, Hoit BD. Post-Cardiac Injury Syndromes: An Emerging Cause of Pericardial Diseases. Int J Cardiol. 2013;168(2):648-652.' },
+  { num: 10, text: 'Mayosi BM, Burgess LJ, Doubell AF. Tuberculous Pericarditis. Circulation. 2005;112(23):3608-3616.' },
+  { num: 11, text: 'Alpert MA, Ravenscraft MD. Pericardial Involvement in End-Stage Renal Disease. Am J Med Sci. 2003;325(4):228-236.' },
+  { num: 12, text: 'Imazio M, Brucato A, Cemin R, et al. Colchicine for Recurrent Pericarditis (CORP): A Randomized Trial. Ann Intern Med. 2011;155(7):409-414.' },
+  { num: 13, text: 'Lazaros G, Imazio M, Brucato A, et al. Recurrent Pericarditis: An Autoimmune Disease? Eur Heart J. 2021;42(13):1332-1343.' },
+  { num: 14, text: 'Klein AL, Imazio M, Cremer P, et al. Phase 3 Trial of Interleukin-1 Trap Rilonacept in Recurrent Pericarditis (RHAPSODY). N Engl J Med. 2021;384(1):31-41.' },
+];

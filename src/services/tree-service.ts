@@ -739,6 +739,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/brugada-syndrome.js');
       return { nodes: m.BRUGADA_SYNDROME_NODES, entryNodeId: 'brugada-start', categoryId: 'cardiology', moduleLabels: m.BRUGADA_SYNDROME_MODULE_LABELS, citations: m.BRUGADA_SYNDROME_CITATIONS, criticalActions: m.BRUGADA_SYNDROME_CRITICAL_ACTIONS };
     },
+    'pericarditis': async () => {
+      const m = await import('../data/trees/pericarditis.js');
+      return { nodes: m.PERICARDITIS_NODES, entryNodeId: 'pericarditis-start', categoryId: 'cardiology', moduleLabels: m.PERICARDITIS_MODULE_LABELS, citations: m.PERICARDITIS_CITATIONS, criticalActions: m.PERICARDITIS_CRITICAL_ACTIONS };
+    },
     'hd-emergencies': async () => {
       const m = await import('../data/trees/hd-emergencies.js');
       return { nodes: m.HD_EMERGENCIES_NODES, entryNodeId: 'hd-start', categoryId: 'critical-care', moduleLabels: m.HD_EMERGENCIES_MODULE_LABELS, citations: m.HD_EMERGENCIES_CITATIONS, criticalActions: m.HD_EMERGENCIES_CRITICAL_ACTIONS };

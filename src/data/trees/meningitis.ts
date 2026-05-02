@@ -29,7 +29,7 @@ export const MENINGITIS_NODES: DecisionNode[] = [
     id: 'mening-start',
     type: 'info',
     module: 1,
-    title: 'Acute Meningitis & Encephalitis',
+    title: 'Meningitis & Encephalitis',
     body: '[Meningitis/Encephalitis Steps Summary](#/info/mening-steps-summary) — quick reference.\n\nInfectious meningitis and encephalitis are life-threatening conditions requiring **time-critical empiric treatment**. Untreated bacterial meningitis approaches **100% mortality**; even with therapy, mortality is **14\u201325%**. [1,3,5]\n\nHerpes simplex encephalitis mortality was **70%** prior to antiviral therapy; now **~9%** with treatment. [7]\n\n\u2022 **Meningitis** = inflammation of meninges and subarachnoid space\n\u2022 **Encephalitis** = inflammation of brain parenchyma itself\n\u2022 Focal neurological deficits indicate brain tissue involvement (encephalitis) [8]\n\n**Key principle:** Empiric antimicrobials must be given **within 1 hour** of suspicion \u2014 do NOT delay for imaging or LP. [1,19]',
     citation: [1, 3, 5, 7, 8, 19],
     next: 'mening-clinical',
