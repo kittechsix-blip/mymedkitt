@@ -17,8 +17,12 @@ export const TYPHOID_FEVER_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Typhoid Fever — Recognition',
-    body: '**Typhoid fever** is a systemic infection caused by *Salmonella enterica* serovar Typhi. Endemic in South Asia, Africa, Latin America, and the Caribbean. [1][2]\n\n**Key Principles:**\n• **Travel history is critical** — 85% of US cases are travelers returning from endemic areas\n• Classic presentation (stepladder fever, rose spots, bradycardia) is **rare now** — present in <12% of contemporary cases\n• **Blood cultures before antibiotics** — gold standard\n• **Avoid fluoroquinolones empirically** — >70% resistance in US cases\n• **XDR typhoid** (Pakistan/Iraq) — resistant to ceftriaxone; use azithromycin or meropenem\n\n**Red flags for complications (week 2-3):**\n• Severe abdominal pain → intestinal perforation\n• GI bleeding → hemorrhage from ulcers\n• Altered mental status → typhoid encephalopathy\n\nHas the patient traveled to an endemic region within the past 60 days?',
+    body: '[Typhoid Fever Steps Summary](#/info/typhoid-steps)\n\n**Typhoid fever** is a systemic infection caused by *Salmonella enterica* serovar Typhi. Endemic in South Asia, Africa, Latin America, and the Caribbean. [1][2]\n\n**Key Principles:**\n• **Travel history is critical** — 85% of US cases are travelers returning from endemic areas\n• Classic presentation (stepladder fever, rose spots, bradycardia) is **rare now** — present in <12% of contemporary cases\n• **Blood cultures before antibiotics** — gold standard\n• **Avoid fluoroquinolones empirically** — >70% resistance in US cases\n• **XDR typhoid** (Pakistan/Iraq) — resistant to ceftriaxone; use azithromycin or meropenem\n\n**Red flags for complications (week 2-3):**\n• Severe abdominal pain → intestinal perforation\n• GI bleeding → hemorrhage from ulcers\n• Altered mental status → typhoid encephalopathy\n\nHas the patient traveled to an endemic region within the past 60 days?',
     citation: [1, 2],
+    calculatorLinks: [
+      { id: 'typhoid-endemic-regions', label: 'Endemic Regions' },
+      { id: 'typhoid-xdr-risk', label: 'XDR Risk Assessment' },
+    ],
     options: [
       {
         label: 'Yes — Pakistan or Iraq',
@@ -164,6 +168,9 @@ export const TYPHOID_FEVER_NODES: DecisionNode[] = [
     title: 'XDR Typhoid Treatment — Azithromycin',
     body: '**For uncomplicated XDR typhoid (Pakistan/Iraq travelers):** [3][4][8]\n\n**First-Line:**\n• **[Azithromycin](#/drug/azithromycin/typhoid)** 1g PO day 1, then 500mg PO daily × 6 days (7 days total)\n• Pediatric: 20mg/kg/day PO daily × 7 days\n\n**Why azithromycin works:**\n• Intracellular concentration exceeds MIC\n• Mean defervescence: 7.1 days\n• Oral bioavailability allows outpatient treatment\n\n**If unable to take PO:**\n• [Azithromycin](#/drug/azithromycin/typhoid) 500mg IV daily, transition to PO when able\n• OR escalate to [Meropenem](#/drug/meropenem/typhoid) if severe\n\n**Monitoring:**\n• Defervescence expected by day 5-7\n• If no improvement by day 7-10: verify susceptibilities, consider escalation\n\n**Emerging concern:**\n• Azithromycin resistance emerging in Pakistan XDR strains\n• Culture susceptibilities critical\n• If azithromycin-resistant: meropenem is only option',
     citation: [3, 4, 8],
+    calculatorLinks: [
+      { id: 'typhoid-antibiotic-dosing', label: 'Antibiotic Dosing' },
+    ],
     treatment: {
       firstLine: {
         drug: 'Azithromycin',
@@ -186,6 +193,9 @@ export const TYPHOID_FEVER_NODES: DecisionNode[] = [
     title: 'MDR Typhoid Treatment — Ceftriaxone or Azithromycin',
     body: '**For uncomplicated MDR typhoid (India, Bangladesh, Africa, Latin America):** [4][8][9]\n\n**First-Line Options:**\n\n**[Ceftriaxone](#/drug/ceftriaxone/typhoid):**\n• Adults: 2g IV once daily × 5-7 days, then transition to oral azithromycin to complete 7-14 days\n• Pediatric: 50-100mg/kg/day IV (max 4g)\n• Mean defervescence: 5-7 days\n\n**OR [Azithromycin](#/drug/azithromycin/typhoid):**\n• Adults: 1g PO day 1, then 500mg PO daily × 6 days (7 days total)\n• Pediatric: 20mg/kg/day PO daily × 7 days\n• Can be used as monotherapy for outpatients\n\n**AVOID:**\n• Fluoroquinolones (ciprofloxacin, levofloxacin) — >70% resistant\n• Ampicillin, chloramphenicol, TMP-SMX — MDR global\n\n**Treatment Duration:**\n• Uncomplicated: 7 days total\n• May need IV→oral stepdown\n\n**If defervescence delayed (>7 days):**\n• Verify susceptibilities from culture\n• Consider switching agents or combination therapy',
     citation: [4, 8, 9],
+    calculatorLinks: [
+      { id: 'typhoid-antibiotic-dosing', label: 'Antibiotic Dosing' },
+    ],
     treatment: {
       firstLine: {
         drug: 'Ceftriaxone',

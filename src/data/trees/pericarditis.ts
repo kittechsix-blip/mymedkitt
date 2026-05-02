@@ -27,8 +27,12 @@ export const PERICARDITIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Pericarditis — Diagnostic Criteria',
-    body: '[Pericarditis Summary](#/info/pericarditis-summary)\n\n**Diagnosis requires ≥2 of 4 criteria:** [1][2]\n\n| Criterion | Sensitivity |\n|-----------|-------------|\n| **Chest pain** — sharp, pleuritic, positional (better sitting forward) | ~85-90% |\n| **Pericardial friction rub** — scratchy, 3-component (best at LLSB, leaning forward) | ~30% |\n| **ECG changes** — diffuse ST elevation with PR depression | ~60% |\n| **Pericardial effusion** — new or worsening on echo | ~60% |\n\n**Supporting findings:**\n• Elevated inflammatory markers (CRP, ESR, WBC)\n• Elevated troponin suggests myopericarditis\n• Recent viral illness, post-MI, post-cardiac surgery',
+    body: '[Pericarditis Steps Summary](#/info/pericarditis-steps)\n\n**Diagnosis requires ≥2 of 4 criteria:** [1][2]\n\n| Criterion | Sensitivity |\n|-----------|-------------|\n| **Chest pain** — sharp, pleuritic, positional (better sitting forward) | ~85-90% |\n| **Pericardial friction rub** — scratchy, 3-component (best at LLSB, leaning forward) | ~30% |\n| **ECG changes** — diffuse ST elevation with PR depression | ~60% |\n| **Pericardial effusion** — new or worsening on echo | ~60% |\n\n**Supporting findings:**\n• Elevated inflammatory markers (CRP, ESR, WBC)\n• Elevated troponin suggests myopericarditis\n• Recent viral illness, post-MI, post-cardiac surgery',
     citation: [1, 2, 3],
+    calculatorLinks: [
+      { id: 'pericarditis-diagnostic', label: 'Diagnostic Criteria' },
+      { id: 'pericarditis-risk', label: 'High-Risk Features' },
+    ],
     options: [
       {
         label: 'Meets ≥2 Criteria — Pericarditis Confirmed',
@@ -311,6 +315,10 @@ export const PERICARDITIS_NODES: DecisionNode[] = [
     title: 'First-Line Treatment',
     body: '**NSAID + Colchicine for ALL acute pericarditis** [1][2][3]\n\n**This combination reduces recurrence from ~30% to ~15%** (COPE, ICAP trials)\n\n**Step 1: Choose NSAID:**\n\n| Drug | Dose | Notes |\n|------|------|-------|\n| [Ibuprofen](#/drug/ibuprofen/pericarditis) | 600mg TID | Most commonly used |\n| [Indomethacin](#/drug/indomethacin/pericarditis) | 25-50mg TID | May be more effective |\n| [Naproxen](#/drug/naproxen/pericarditis) | 500mg BID | Fewer GI effects |\n| [Aspirin](#/drug/aspirin/pericarditis) | 750-1000mg TID | **Preferred post-MI** |\n\n**Duration:** High-dose for 1-2 weeks until symptom resolution + CRP normalization, then taper over 3-4 weeks.\n\n**Step 2: Add Colchicine** (see next node)\n\n**Step 3: GI protection:**\n• PPI while on NSAIDs\n\n**Step 4: Activity restriction:**\n• Avoid strenuous activity until symptom-free AND CRP normal\n• Athletes: minimum 3 months',
     citation: [1, 2, 3],
+    calculatorLinks: [
+      { id: 'pericarditis-nsaid-dose', label: 'NSAID Dosing Guide' },
+      { id: 'colchicine-dosing', label: 'Colchicine Dosing' },
+    ],
     treatment: {
       firstLine: {
         drug: 'Ibuprofen',
