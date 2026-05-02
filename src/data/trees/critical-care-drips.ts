@@ -1,6 +1,6 @@
 // MedKitt - Critical Care Drips
 // Comprehensive ICU/ED medication infusions: vasopressors, inotropes, sedation, analgesia, antihypertensives, endocrine, antiarrhythmics
-// Evidence-based dosing from EMCrit, UpToDate, SCCM 2021 guidelines
+// Evidence-based dosing from EMCrit, UpToDate, SSC 2021 + SSC 2026 guidelines
 // 10 modules: Overview -> Vasopressors -> Inotropes -> Hypertensive Emergency -> Sedation -> Analgesia -> Endocrine -> Antiarrhythmics -> Rate Control -> Quick Reference
 // Pharmacist category consult
 
@@ -8,9 +8,10 @@ import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction, Citation } from '../../services/tree-service.js';
 
 export const CRITICAL_CARE_DRIPS_CRITICAL_ACTIONS: CriticalAction[] = [
-  { text: 'Norepinephrine is FIRST-LINE vasopressor for septic shock (SCCM 2021)', nodeId: 'ccd-norepinephrine' },
+  { text: 'Norepinephrine is FIRST-LINE vasopressor for septic shock (SSC 2021/2026)', nodeId: 'ccd-norepinephrine' },
+  { text: 'MAP target: 65 mmHg (younger) vs 60-65 mmHg (elderly >65 years) per SSC 2026', nodeId: 'ccd-norepinephrine' },
   { text: 'Vasopressin 0.04 U/min is FIXED dose - do NOT titrate', nodeId: 'ccd-vasopressin' },
-  { text: 'Propofol infusion syndrome (PRIS): avoid >50 mcg/kg/min or >4-7 days', nodeId: 'ccd-propofol' },
+  { text: 'Propofol infusion syndrome (PRIS): keep <50 mcg/kg/min (safe threshold; literature 67-83 is higher risk)', nodeId: 'ccd-propofol' },
   { text: 'Aortic dissection: esmolol FIRST (target HR <60, SBP <120), then add vasodilator', nodeId: 'ccd-dissection' },
   { text: 'DKA insulin: do NOT stop when glucose reaches 250 - reduce rate and add dextrose', nodeId: 'ccd-insulin-dka' },
   { text: 'Amiodarone max 2.2g/24h; lidocaine max 4.5 mg/kg (toxicity threshold)', nodeId: 'ccd-amiodarone' },
@@ -64,8 +65,8 @@ export const CRITICAL_CARE_DRIPS_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Vasopressor Selection',
-    body: '**SCCM 2021 Guidelines for Septic Shock:**\n\n**First-Line: Norepinephrine**\n- Alpha-1 dominant + beta-1 moderate\n- Fewer arrhythmias than dopamine\n- Target MAP ≥65 mmHg\n\n**Second-Line Options:**\n- **Vasopressin 0.04 U/min** - catecholamine-sparing, fixed dose\n- **Epinephrine** - if refractory to norepi + vasopressin\n\n**Special Situations:**\n- **Phenylephrine** - pure alpha, use if arrhythmias on norepi\n- **Dopamine** - only if bradycardic hypotension\n\nSelect agent:',
-    citation: [1, 2, 3],
+    body: '**SSC 2021/2026 Guidelines for Septic Shock:**\n\n**First-Line: Norepinephrine**\n- Alpha-1 dominant + beta-1 moderate\n- Fewer arrhythmias than dopamine\n- Target MAP ≥65 mmHg (or 60-65 in elderly >65y per SSC 2026)\n\n**SSC 2026 Updates:**\n- Peripheral vasopressors OK to start (don\'t delay for central access)\n- Septic shock + cardiac dysfunction: norepi OR epi as first-line\n\n**Second-Line Options:**\n- **Vasopressin 0.04 U/min** - catecholamine-sparing, fixed dose\n- **Epinephrine** - if refractory to norepi + vasopressin\n\n**Special Situations:**\n- **Phenylephrine** - pure alpha, use if arrhythmias on norepi\n- **Dopamine** - only if bradycardic hypotension\n\nSelect agent:',
+    citation: [1, 2, 3, 16],
     options: [
       { label: 'Norepinephrine (First-Line)', next: 'ccd-norepinephrine' },
       { label: 'Vasopressin (Adjunct)', next: 'ccd-vasopressin' },
@@ -81,14 +82,14 @@ export const CRITICAL_CARE_DRIPS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Norepinephrine (Levophed)',
-    body: '**FIRST-LINE VASOPRESSOR - SEPTIC SHOCK**\n\n**Mechanism:**\n- Alpha-1 dominant (vasoconstriction)\n- Beta-1 moderate (inotropy)\n- Minimal beta-2 effects\n\n**Dosing:**\n- **Start:** 2-5 mcg/min (0.01-0.03 mcg/kg/min)\n- **Titrate:** +2-5 mcg/min every 5-10 min\n- **Target:** MAP ≥65 mmHg\n- **No absolute max** (refractory shock may need higher)\n\n**Administration:**\n- Central line preferred\n- Peripheral acceptable <48h at <15 mcg/min\n- Typical concentration: 16-128 mcg/mL\n\n**Titration Protocol:**\n- Check BP every 2-3 min during initial titration\n- Once stable, check every 5 min\n- If MAP >65 on high dose, consider adding vasopressin\n\n**Advantages:**\n- Fewer dysrhythmias vs dopamine\n- Better outcomes than dopamine in septic shock',
-    citation: [1, 2, 3],
+    body: '**FIRST-LINE VASOPRESSOR - SEPTIC SHOCK**\n\n**Mechanism:**\n- Alpha-1 dominant (vasoconstriction)\n- Beta-1 moderate (inotropy)\n- Minimal beta-2 effects\n\n**Dosing:**\n- **Start:** 2-5 mcg/min (0.01-0.03 mcg/kg/min)\n- **Titrate:** +2-5 mcg/min every 5-10 min\n- **Target:** MAP ≥65 mmHg (or **60-65 mmHg in elderly >65y** per SSC 2026)\n- **No absolute max** (refractory shock may need higher)\n\n**Administration (SSC 2026):**\n- **Peripheral OK to start** - don\'t delay for central access\n- Peripheral acceptable at <20 mcg/min via antecubital or larger vein\n- Central line preferred for prolonged/high-dose use\n- Typical concentration: 16-128 mcg/mL\n\n**Titration Protocol:**\n- Check BP every 2-3 min during initial titration\n- Once stable, check every 5 min\n- If MAP >65 on high dose, consider adding vasopressin\n\n**Advantages:**\n- Fewer dysrhythmias vs dopamine\n- Better outcomes than dopamine in septic shock',
+    citation: [1, 2, 3, 16],
     options: [
       { label: 'Add Vasopressin (Refractory)', next: 'ccd-vasopressin' },
       { label: 'Switch to Epinephrine', next: 'ccd-epinephrine' },
       { label: 'Back to Vasopressor Selection', next: 'ccd-vasopressor-overview' },
     ],
-    summary: 'Norepi: start 2-5 mcg/min, titrate by 2-5 q5-10min to MAP ≥65; first-line septic shock',
+    summary: 'Norepi: start 2-5 mcg/min, titrate by 2-5 q5-10min to MAP ≥65 (60-65 elderly); first-line septic shock',
   },
 
   {
@@ -399,14 +400,14 @@ export const CRITICAL_CARE_DRIPS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Propofol (Diprivan)',
-    body: '**GABA-A AGONIST - RAPID ON/OFF**\n\n**Dosing:**\n- **Start:** 5 mcg/kg/min\n- **Titrate:** +5 mcg/kg/min q5-10 min to target RASS\n- **Range:** 5-50 mcg/kg/min\n- **MAX:** 50 mcg/kg/min (toxicity risk above)\n- **Onset:** <60 sec\n- **Offset:** 5-15 min\n\n**Advantages:**\n- Rapid wake-up for neuro checks\n- Anticonvulsant properties\n- Anti-inflammatory\n\n**PROPOFOL INFUSION SYNDROME (PRIS):**\n- Risk: >4-7 days OR >65 mcg/kg/min\n- Signs: Severe metabolic acidosis, rhabdo, hyperkalemia, arrhythmias, cardiac collapse\n- Mortality up to 85%\n- **Prevention:** Limit <50 mcg/kg/min, <48-72h duration\n\n**Cautions:**\n- Hypotension (direct myocardial depression)\n- Hypertriglyceridemia (10 kcal/mL lipid)\n- Egg lecithin (egg allergy contraindicated)',
+    body: '**GABA-A AGONIST - RAPID ON/OFF**\n\n**Dosing:**\n- **Start:** 5 mcg/kg/min\n- **Titrate:** +5 mcg/kg/min q5-10 min to target RASS\n- **Range:** 5-50 mcg/kg/min\n- **MAX:** 50 mcg/kg/min (SAFE THRESHOLD)\n- **Onset:** <60 sec\n- **Offset:** 5-15 min\n\n**Advantages:**\n- Rapid wake-up for neuro checks\n- Anticonvulsant properties\n- Anti-inflammatory\n\n**PROPOFOL INFUSION SYNDROME (PRIS):**\n- **Literature threshold:** 67-83 mcg/kg/min\n- **Safe practice threshold:** <50 mcg/kg/min (more conservative)\n- **Duration:** Risk increases >48h; limit to <4-7 days\n- Can occur at lower doses with prolonged use (case reports at 1.3 mg/kg/hr)\n- Signs: Severe metabolic acidosis, rhabdo, hyperkalemia, arrhythmias, cardiac collapse\n- Mortality up to 85%\n- **Prevention:** Stay <50 mcg/kg/min + limit duration <48-72h when possible\n\n**Cautions:**\n- Hypotension (direct myocardial depression)\n- Hypertriglyceridemia (10 kcal/mL lipid)\n- Egg lecithin (egg allergy contraindicated)',
     citation: [8, 9],
     options: [
       { label: 'Switch to Dexmedetomidine', next: 'ccd-dexmedetomidine' },
       { label: 'Switch to Ketamine', next: 'ccd-ketamine' },
       { label: 'Back to Sedation Overview', next: 'ccd-sedation-overview' },
     ],
-    summary: 'Propofol: 5-50 mcg/kg/min; PRIS risk >50 mcg/kg/min or >4-7 days; rapid on/off but hypotension',
+    summary: 'Propofol: 5-50 mcg/kg/min (safe threshold); PRIS risk >48h duration; rapid on/off but hypotension',
   },
 
   {
@@ -680,4 +681,5 @@ export const CRITICAL_CARE_DRIPS_CITATIONS: Citation[] = [
   { num: 13, text: 'Link MS, et al. 2018 AHA Focused Update on ACLS. Circulation 2018;138:e731-e739.' },
   { num: 14, text: 'Kudenchuk PJ, et al. Amiodarone vs Lidocaine in Cardiac Arrest. NEJM 2016;374:1711-1722.' },
   { num: 15, text: 'January CT, et al. 2019 AHA/ACC/HRS AF Guidelines Update. Circulation 2019;140:e125-e151.' },
+  { num: 16, text: 'Evans L, et al. SSC 2026 Surviving Sepsis Campaign Guidelines. Critical Care Medicine 2026.' },
 ];
