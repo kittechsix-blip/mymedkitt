@@ -223,6 +223,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'vt-start',
             },
             {
+                id: 'wide-complex-tachycardia',
+                title: 'Wide Complex Tachycardia',
+                subtitle: 'VT vs SVT Differentiation → Brugada/Vereckei → Treatment → Disposition',
+                categoryId: 'cardiology',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'wct-start',
+            },
+            {
                 id: 'bradycardic-arrest',
                 title: 'Bradycardic Arrest',
                 subtitle: 'Recognition → TCP First → Medications → Causes → TVP / ROSC / TOR',
@@ -669,6 +678,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 20,
                 entryNodeId: 'vt-start',
+            },
+            {
+                id: 'wide-complex-tachycardia',
+                title: 'Wide Complex Tachycardia',
+                subtitle: 'VT vs SVT Differentiation → Brugada/Vereckei → Treatment → Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'wct-start',
             },
             {
                 id: 'post-rosc',

@@ -101,7 +101,57 @@ const TOXIC_ALCOHOLS_STOP: InfoPage = {
   citations: [],
 };
 
+const WIDE_COMPLEX_TACHYCARDIA_STOP: InfoPage = {
+  id: 'wide-complex-tachycardia-stop',
+  title: 'Wide Complex Tachycardia — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT give AV nodal blockers to irregular WCT',
+      body: 'Irregular wide complex tachycardia may be **AFib with WPW**. Adenosine, diltiazem, verapamil, beta-blockers, and digoxin are ALL contraindicated — they block the AV node, forcing all conduction down the accessory pathway → VF. If irregular WCT + rate >200 → assume WPW until proven otherwise.',
+    },
+    {
+      heading: '🛑 Do NOT give calcium channel blockers to ANY WCT',
+      body: 'Verapamil and diltiazem cause **negative inotropy + vasodilation**. In VT, this combination precipitates hemodynamic collapse and can degenerate to VF. Even if you think it\'s SVT with aberrancy, the risk is too high. Use procainamide or cardioversion instead.',
+    },
+    {
+      heading: '🛑 Do NOT give amiodarone or procainamide for Torsades',
+      body: '**Torsades de Pointes (polymorphic VT + long QT) requires MAGNESIUM** — 2-4g IV over 15 minutes. Amiodarone and procainamide both prolong the QT interval, which worsens Torsades and can be lethal. If Torsades recurs → overdrive pacing.',
+    },
+    {
+      heading: '🛑 Do NOT give antiarrhythmics for sodium channel blocker toxicity',
+      body: 'WCT from TCA, diphenhydramine, cocaine, or flecainide needs **sodium bicarbonate** (1-2 mEq/kg IV push), NOT antiarrhythmics. Amiodarone, procainamide, and lidocaine all block sodium channels — you will worsen conduction and may cause asystole.',
+    },
+    {
+      heading: '🛑 Do NOT assume hemodynamic stability rules out VT',
+      body: '**Stable VT is common.** Blood pressure and mental status do NOT differentiate VT from SVT. A patient with wide complex tachycardia, normal blood pressure, and clear mentation can still be in VT — do not let clinical stability falsely reassure you.',
+    },
+    {
+      heading: '🛑 Do NOT discharge first-episode VT from the ED',
+      body: 'ALL patients with VT require admission for monitoring, workup, and cardiology/EP consultation. VT indicates underlying cardiac pathology that needs evaluation. The only exception: established patient with ICD who had appropriate therapy and device interrogation with EP approval.',
+    },
+    {
+      heading: '🛑 Do NOT skip cardioversion if antiarrhythmics fail',
+      body: 'If procainamide or amiodarone doesn\'t convert stable VT, don\'t keep waiting — proceed to **synchronized cardioversion** (100J → 200J → 360J). Delaying definitive treatment risks deterioration. Sedate the patient and cardiovert.',
+    },
+    {
+      heading: '🛑 Do NOT forget to confirm sync mode before shocking',
+      body: 'Unsynchronized shocks delivered during the vulnerable period (T wave) can induce VF. Always confirm **sync mode is enabled** before cardioverting VT. If the defibrillator cannot sync (artifact, variable morphology), switch to unsync but be prepared to defibrillate if VF results.',
+    },
+    {
+      heading: '🛑 Do NOT stop procainamide at the first sign of success',
+      body: 'When procainamide converts VT, stop the bolus but **start a maintenance infusion** (1-4 mg/min). Without maintenance, VT often recurs. Also stop if QRS widens >50% or hypotension develops.',
+    },
+    {
+      heading: '🛑 Do NOT overlook electrolytes',
+      body: 'Hypokalemia and hypomagnesemia are common VT triggers. **Target K+ >4.0 mEq/L and Mg2+ >2.0 mEq/L** in all VT patients. Replacing electrolytes is cheap, safe, and prevents recurrence.',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_12: Record<string, InfoPage> = {
   'vertigo-stop': VERTIGO_STOP,
   'toxic-alcohols-stop': TOXIC_ALCOHOLS_STOP,
+  'wide-complex-tachycardia-stop': WIDE_COMPLEX_TACHYCARDIA_STOP,
 };

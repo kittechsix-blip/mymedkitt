@@ -18037,6 +18037,43 @@ const BRADYCARDIC_ARREST_SUMMARY: InfoPage = {
 // Ventricular Tachycardia — Steps Summary
 // -------------------------------------------------------------------
 
+const WCT_SUMMARY: InfoPage = {
+  id: 'wct-summary',
+  title: 'Wide Complex Tachycardia Summary',
+  subtitle: 'VT vs SVT differentiation — when in doubt, treat as VT',
+  sections: [
+    {
+      heading: '1. The Golden Rule',
+      body: '**Wide + regular = VT until proven otherwise**\n\n• Baseline WCT: 80% is VT\n• Age >35: 85% VT\n• Prior MI: 98% VT\n• Hemodynamic stability does NOT differentiate',
+    },
+    {
+      heading: '2. Special Populations (Treat Differently)',
+      body: '• **Sodium channel blocker OD:** Bicarb 1-2 mEq/kg — NOT antiarrhythmics\n• **Hyperkalemia:** Calcium first → insulin/glucose\n• **WPW + AFib (irregular WCT):** NO AV nodal blockers (adenosine, CCB, BB) — cardiovert or procainamide',
+    },
+    {
+      heading: '3. Unstable WCT',
+      body: '• **Synchronized cardioversion:** 100J → 200J → 360J\n• Sedate if time permits (midazolam, ketamine, etomidate)\n• Confirm sync mode enabled\n• If pulseless → unsync shock 200J',
+    },
+    {
+      heading: '4. Diagnostic Algorithms (Optional)',
+      body: '• **Brugada:** 4-step precordial analysis (98.7% sens, 96.5% spec)\n• **Vereckei aVR:** Single lead analysis (faster)\n• **Pathognomonic VT:** AV dissociation, fusion beats, capture beats\n• **If uncertain → treat as VT**',
+    },
+    {
+      heading: '5. Treatment',
+      body: '• **Stable monomorphic VT:** Procainamide 20-50 mg/min (PROCAMIO > amiodarone)\n• **Torsades (polymorphic + long QT):** Magnesium 2-4g IV — NOT amiodarone\n• **Polymorphic + normal QT:** Treat as ACS, cath lab\n• **If antiarrhythmic fails:** Cardioversion',
+    },
+    {
+      heading: '6. When In Doubt',
+      body: '✅ **VT treatments SAFE for SVT:** Procainamide, cardioversion\n\n❌ **SVT treatments may KILL VT:** Adenosine, CCB, beta-blockers\n\n**Bottom line: If any doubt → procainamide or cardioversion**',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'EB Medicine: Wide Complex Tachycardia in the ED. 2026.' },
+    { num: 2, text: 'Ortiz M, et al. PROCAMIO Trial. Eur Heart J. 2017;38:1329-1335.' },
+    { num: 3, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS VT Guidelines. Circulation. 2018.' },
+  ],
+};
+
 const VT_SUMMARY: InfoPage = {
   id: 'vt-steps-summary',
   title: 'VT Management Steps Summary',
@@ -19110,6 +19147,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pea-steps-summary': PEA_ARREST_SUMMARY,
   'brady-steps-summary': BRADYCARDIC_ARREST_SUMMARY,
   'vt-steps-summary': VT_SUMMARY,
+  'wct-summary': WCT_SUMMARY,
   // Steps Summaries — Cardiology / Critical Care
   'rosc-steps-summary': POST_ROSC_SUMMARY,
   'aortic-summary': AORTIC_ANEURYSM_SUMMARY,

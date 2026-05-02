@@ -795,6 +795,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ventricular-tachycardia.js');
       return { nodes: m.VENTRICULAR_TACHYCARDIA_NODES, entryNodeId: 'vt-start', categoryId: 'emergency-medicine', moduleLabels: m.VENTRICULAR_TACHYCARDIA_MODULE_LABELS, citations: m.VENTRICULAR_TACHYCARDIA_CITATIONS, criticalActions: m.VENTRICULAR_TACHYCARDIA_CRITICAL_ACTIONS };
     },
+    'wide-complex-tachycardia': async () => {
+      const m = await import('../data/trees/wide-complex-tachycardia.js');
+      return { nodes: m.WIDE_COMPLEX_TACHYCARDIA_NODES, entryNodeId: 'wct-start', categoryId: 'cardiology', moduleLabels: m.WIDE_COMPLEX_TACHYCARDIA_MODULE_LABELS, citations: m.WIDE_COMPLEX_TACHYCARDIA_CITATIONS, criticalActions: m.WIDE_COMPLEX_TACHYCARDIA_CRITICAL_ACTIONS };
+    },
     'post-rosc': async () => {
       const m = await import('../data/trees/post-rosc.js');
       return { nodes: m.POST_ROSC_NODES, entryNodeId: 'rosc-start', categoryId: 'emergency-medicine', moduleLabels: m.POST_ROSC_MODULE_LABELS, citations: m.POST_ROSC_CITATIONS, criticalActions: m.POST_ROSC_CRITICAL_ACTIONS };

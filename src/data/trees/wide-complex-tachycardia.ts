@@ -1,0 +1,531 @@
+// MedKitt — Wide Complex Tachycardia (WCT)
+// Diagnostic differentiation: VT vs SVT with aberrancy
+// 6 modules: Initial Assessment → Stability → Diagnostic Criteria → Algorithms → Treatment → Disposition
+// ~28 nodes total.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const WIDE_COMPLEX_TACHYCARDIA_CRITICAL_ACTIONS = [
+  { text: 'Wide & regular = VT until proven otherwise (80% baseline, 98% if prior MI)', nodeId: 'wct-start' },
+  { text: 'Unstable WCT: synchronized cardioversion 100J → 200J → 360J', nodeId: 'wct-unstable-tx' },
+  { text: 'Stable VT: procainamide 20-50 mg/min (superior to amiodarone per PROCAMIO)', nodeId: 'wct-stable-vt-tx' },
+  { text: 'Torsades (polymorphic + long QT): magnesium 2g IV — NOT amiodarone', nodeId: 'wct-torsades' },
+  { text: 'Irregular WCT: may be AFib + WPW — AV nodal blockers CONTRAINDICATED', nodeId: 'wct-irregular' },
+  { text: 'When in doubt, treat as VT — safe even if SVT; AV nodal blockers may kill VT patient', nodeId: 'wct-doubt' },
+];
+
+export const WIDE_COMPLEX_TACHYCARDIA_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'wct-start',
+    type: 'info',
+    module: 1,
+    title: 'Wide Complex Tachycardia',
+    body: '[WCT Decision Summary](#/info/wct-summary)\n\n**Definition:** QRS >120ms + rate >100 bpm\n\n**The Golden Rule:**\n**Wide + regular = VT until proven otherwise**\n\n**Pre-test probability of VT:**\n• Baseline WCT: 80% VT\n• Age >35: 85% VT\n• Structural heart disease: >90% VT\n• History of MI: 98% VT\n\n⚠️ **Hemodynamic stability does NOT differentiate VT from SVT** — stable VT is common and does NOT rule out VT.',
+    citation: [1, 2, 8],
+    next: 'wct-special-check',
+
+    summary: 'WCT = QRS >120ms + rate >100. 80% is VT baseline, 98% if prior MI. Stability does NOT differentiate.',
+    skippable: true,
+  },
+
+  {
+    id: 'wct-special-check',
+    type: 'question',
+    module: 1,
+    title: 'Special Population Screen',
+    body: 'Is this a toxicologic or metabolic cause?\n\n**Suspect if:**\n• Known overdose (TCA, diphenhydramine, cocaine, flecainide)\n• Peaked T waves (hyperkalemia)\n• Known WPW + irregular rhythm\n• QRS widening from baseline',
+    options: [
+      { label: 'Yes — toxicologic/metabolic', description: 'Sodium channel blocker, hyperkalemia, or WPW', next: 'wct-special-branch' },
+      { label: 'No — standard WCT', description: 'Proceed with hemodynamic assessment', next: 'wct-stability' },
+    ],
+
+    summary: 'Screen for special populations: sodium channel blocker OD, hyperkalemia, WPW — different treatment',
+  },
+
+  {
+    id: 'wct-special-branch',
+    type: 'question',
+    module: 1,
+    title: 'Which Special Population?',
+    body: 'Select the suspected etiology:',
+    options: [
+      { label: 'Sodium channel blocker toxicity', description: 'TCA, diphenhydramine, cocaine, flecainide', next: 'wct-sodium-blocker' },
+      { label: 'Hyperkalemia', description: 'Peaked T waves, sine wave, renal failure', next: 'wct-hyperkalemia' },
+      { label: 'WPW + AFib (irregular WCT)', description: 'Pre-excitation with atrial fibrillation', next: 'wct-wpw-afib' },
+    ],
+
+    summary: 'Branch based on suspected special population: sodium channel blocker, hyperK, or WPW+AFib',
+  },
+
+  {
+    id: 'wct-sodium-blocker',
+    type: 'info',
+    module: 1,
+    title: 'Sodium Channel Blocker Toxicity',
+    body: '🛑 **DO NOT give antiarrhythmics** (amiodarone, procainamide, lidocaine)\n— All block sodium channels → may cause asystole\n\n**Treatment:**\n• [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca toxicity) 1-2 mEq/kg IV push\n• May repeat q3-5min until QRS narrows\n• Goal: serum pH 7.50-7.55\n• Intralipid if refractory (local anesthetic toxicity)\n\n**ECG Clues:**\n• Terminal R wave in aVR >3mm\n• R/S ratio >0.7 in aVR\n• QRS >100ms with sinus tachycardia\n\n→ See [TCA Toxidrome](#/tree/tca-toxidrome) for full protocol',
+    citation: [11],
+    next: 'wct-end',
+
+    summary: 'Sodium channel blocker WCT: bicarb 1-2 mEq/kg IV push — NO antiarrhythmics (may cause asystole)',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-hyperkalemia',
+    type: 'info',
+    module: 1,
+    title: 'Hyperkalemic WCT',
+    body: '**Treatment priority: membrane stabilization**\n\n**Calcium (immediate):**\n• Calcium gluconate 3g IV over 3 min\n• OR Calcium chloride 1g IV (central line preferred)\n• May repeat in 5 min if no ECG improvement\n\n**Shift potassium:**\n• Regular insulin 10 units IV + D50 50mL IV\n• Albuterol 10-20mg nebulized\n• Sodium bicarbonate 50-100 mEq IV (if acidemic)\n\n**Eliminate potassium:**\n• Emergent hemodialysis if severe (K >7) or refractory\n• Kayexalate is too slow for emergency\n\n→ See [Potassium](#/tree/potassium) for full protocol',
+    citation: [3],
+    next: 'wct-end',
+
+    summary: 'Hyperkalemic WCT: calcium first (membrane stabilization), then insulin/glucose + albuterol, HD if severe',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-wpw-afib',
+    type: 'info',
+    module: 1,
+    title: 'WPW + AFib (Pre-excited AFib)',
+    body: '🛑 **AV nodal blockers ABSOLUTELY CONTRAINDICATED:**\n• Adenosine\n• Diltiazem / Verapamil\n• Beta-blockers\n• Digoxin\n\n**Why deadly:** Block AV node → all conduction goes down accessory pathway → VF\n\n**ECG Clues:**\n• Irregular WCT\n• Very fast rate (often >200 bpm)\n• Varying QRS width\n• Delta waves visible in some beats\n\n**Treatment:**\n• **Unstable:** Synchronized cardioversion 200J\n• **Stable:** Procainamide 20-50 mg/min IV\n• Alternative: Ibutilide\n\n**Definitive:** EP consult for ablation',
+    citation: [2, 10],
+    next: 'wct-end',
+
+    summary: 'WPW+AFib: NO adenosine, CCB, BB, or digoxin (lethal). Treat with cardioversion or procainamide.',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 2: HEMODYNAMIC STABILITY
+  // =====================================================================
+
+  {
+    id: 'wct-stability',
+    type: 'question',
+    module: 2,
+    title: 'Hemodynamic Stability',
+    body: 'Is the patient hemodynamically unstable?\n\n**Unstable criteria (any):**\n• SBP <90 mmHg\n• Altered mental status\n• Ischemic chest pain\n• Acute pulmonary edema / shock',
+    options: [
+      { label: 'Unstable', description: 'Hypotension, AMS, ischemia, or shock', next: 'wct-unstable-tx', urgency: 'critical' },
+      { label: 'Stable', description: 'Hemodynamically intact', next: 'wct-diagnostic' },
+    ],
+
+    summary: 'Unstable = SBP <90, AMS, ischemia, or shock → immediate cardioversion',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-unstable-tx',
+    type: 'info',
+    module: 2,
+    title: 'Unstable WCT — Cardioversion',
+    body: '**Immediate synchronized cardioversion:**\n• 100J → 200J → 360J (biphasic)\n• Confirm sync mode enabled\n• If sync fails to track → unsync shock\n\n**Sedation (if time permits):**\n• Midazolam 2-5 mg IV, OR\n• Ketamine 1-2 mg/kg IV, OR\n• Etomidate 0.3 mg/kg IV\n\n⚠️ **If deteriorates to pulseless:**\n→ Unsynchronized shock 200J immediately\n→ Begin ACLS arrest protocol\n\n**Post-cardioversion:**\n• 12-lead ECG\n• Electrolytes (K+, Mg2+)\n• Identify trigger\n• Cardiology consult',
+    citation: [2, 8],
+    next: 'wct-disposition',
+
+    summary: 'Unstable WCT: synchronized cardioversion 100J → 200J → 360J. Sedate if time. If pulseless, unsync shock.',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 3: DIAGNOSTIC ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'wct-diagnostic',
+    type: 'question',
+    module: 3,
+    title: 'Pre-test Probability',
+    body: 'Does the patient have high pre-test probability of VT?\n\n**High probability (treat as VT):**\n• Age >35 years (85% VT)\n• History of MI (98% VT)\n• Known structural heart disease\n• Prior VT or has ICD\n• New symptoms began post-MI',
+    options: [
+      { label: 'High probability VT', description: 'Age >35, MI, structural heart, ICD', next: 'wct-assume-vt' },
+      { label: 'Lower probability', description: 'Young, no cardiac history', next: 'wct-prior-ecg' },
+    ],
+
+    summary: 'Age >35, prior MI, structural heart disease = high probability VT (85-98%). Treat as VT.',
+  },
+
+  {
+    id: 'wct-assume-vt',
+    type: 'info',
+    module: 3,
+    title: 'Treating as VT',
+    body: '**High pre-test probability → treat as VT**\n\nThis is the safe approach:\n• VT treatments (procainamide, cardioversion) are safe for SVT\n• SVT treatments (adenosine, CCB) can be lethal for VT\n\n**Proceed to VT treatment without diagnostic delay.**',
+    citation: [1, 5],
+    next: 'wct-vt-morphology',
+
+    summary: 'High pre-test probability: treat as VT. VT treatments safe for SVT; SVT treatments may kill VT patient.',
+  },
+
+  {
+    id: 'wct-prior-ecg',
+    type: 'question',
+    module: 3,
+    title: 'Prior ECG Comparison',
+    body: 'Is a prior ECG available showing the same QRS morphology in sinus rhythm?',
+    options: [
+      { label: 'Yes — identical morphology', description: 'Suggests pre-existing BBB (SVT more likely)', next: 'wct-ecg-match' },
+      { label: 'No match or no prior ECG', description: 'Assume VT', next: 'wct-pathognomonic' },
+    ],
+
+    summary: 'If prior ECG shows same wide QRS in sinus, suggests pre-existing BBB (SVT). Otherwise assume VT.',
+  },
+
+  {
+    id: 'wct-ecg-match',
+    type: 'info',
+    module: 3,
+    title: 'QRS Match — Possible SVT',
+    body: '**Prior ECG shows same wide QRS morphology in sinus rhythm**\n\nThis suggests SVT with pre-existing bundle branch block.\n\n**However:**\n• VT can still occur in patients with BBB\n• If ANY doubt, treat as VT\n• May consider diagnostic adenosine trial (with caution)\n\n**Proceed to diagnostic algorithms or empiric VT treatment.**',
+    citation: [1],
+    next: 'wct-algorithm-choice',
+
+    summary: 'Matching prior QRS suggests SVT+BBB, but VT still possible. Proceed with caution, treat as VT if doubt.',
+  },
+
+  {
+    id: 'wct-pathognomonic',
+    type: 'info',
+    module: 3,
+    title: 'Pathognomonic VT Features',
+    body: '**If ANY of these present → confirms VT:**\n\n**AV dissociation:**\n• P waves at different rate than QRS\n• Classic finding, highly specific\n\n**Fusion beats:**\n• Hybrid complex (sinus + ventricular origin)\n• QRS morphology intermediate between normal and VT\n\n**Capture beats:**\n• Narrow QRS "captured" during wide complex tachycardia\n• Sinus impulse reaches ventricles between VT beats\n\n⚠️ **Absence of these does NOT rule out VT**',
+    citation: [1, 7],
+    next: 'wct-other-features',
+
+    summary: 'Pathognomonic VT: AV dissociation, fusion beats, capture beats. If present = confirmed VT.',
+    images: [{ src: 'images/ecg/av-dissociation.png', alt: 'AV dissociation in VT', caption: 'AV dissociation — P waves march independently of QRS' }],
+  },
+
+  {
+    id: 'wct-other-features',
+    type: 'info',
+    module: 3,
+    title: 'High Specificity VT Features',
+    body: '**Features highly suggestive of VT:**\n\n**QRS duration:**\n• >140ms (RBBB pattern) → favors VT\n• >160ms (LBBB pattern) → favors VT\n\n**Axis:**\n• Extreme axis deviation ("northwest axis")\n• Positive aVR, negative I and aVF\n\n**Concordance:**\n• ALL precordial leads positive (R waves), OR\n• ALL precordial leads negative (S waves)\n\n**QRS onset:**\n• >40ms to first peak\n• Slurred/notched initial deflection',
+    citation: [1, 6, 7],
+    next: 'wct-algorithm-choice',
+
+    summary: 'VT features: QRS >140-160ms, extreme axis, concordance across precordials, slurred QRS onset.',
+  },
+
+  // =====================================================================
+  // MODULE 4: DIAGNOSTIC ALGORITHMS
+  // =====================================================================
+
+  {
+    id: 'wct-algorithm-choice',
+    type: 'question',
+    module: 4,
+    title: 'Diagnostic Algorithm',
+    body: 'Which algorithm would you like to apply?\n\n**Note:** Algorithms help differentiate VT vs SVT but have imperfect accuracy. When in doubt, treat as VT.',
+    options: [
+      { label: 'Brugada Algorithm', description: '4-step precordial analysis (98.7% sens, 96.5% spec)', next: 'wct-brugada' },
+      { label: 'Vereckei aVR Algorithm', description: '4-step single lead aVR (faster, simpler)', next: 'wct-vereckei' },
+      { label: 'Skip — treat as VT', description: 'Proceed directly to VT treatment', next: 'wct-vt-morphology' },
+    ],
+
+    summary: 'Choose Brugada (precordial) or Vereckei (aVR only) algorithm, or skip and treat as VT.',
+  },
+
+  {
+    id: 'wct-brugada',
+    type: 'info',
+    module: 4,
+    title: 'Brugada Algorithm',
+    body: '**Step-by-step (stop if YES at any step = VT):**\n\n**Step 1:** Absence of RS complex in ALL precordial leads (V1-V6)?\n• All monophasic = VT\n\n**Step 2:** RS interval >100ms in any precordial lead?\n• Measure R onset to S nadir\n• >100ms = VT\n\n**Step 3:** AV dissociation present?\n• P waves at different rate = VT\n\n**Step 4:** Morphology criteria (V1 and V6):\n• **RBBB pattern:** Tall left rabbit ear in V1, or QS/rS in V6 = VT\n• **LBBB pattern:** R >30ms in V1, notched S descent, RS >70ms = VT\n\n**If all 4 steps NO → suggests SVT**',
+    citation: [6, 9],
+    next: 'wct-brugada-result',
+
+    summary: 'Brugada: 4 steps — no RS in precordials, RS >100ms, AV dissociation, morphology criteria. Any YES = VT.',
+    images: [{ src: 'images/ecg/brugada-algorithm.png', alt: 'Brugada algorithm flowchart', caption: 'Brugada 4-step algorithm for WCT differentiation' }],
+  },
+
+  {
+    id: 'wct-brugada-result',
+    type: 'question',
+    module: 4,
+    title: 'Brugada Result',
+    body: 'What was the Brugada algorithm result?',
+    options: [
+      { label: 'VT (any step positive)', description: 'Algorithm suggests ventricular tachycardia', next: 'wct-vt-morphology' },
+      { label: 'SVT (all steps negative)', description: 'Algorithm suggests SVT with aberrancy', next: 'wct-svt-consider' },
+      { label: 'Uncertain', description: 'Proceed with VT treatment', next: 'wct-vt-morphology' },
+    ],
+
+    summary: 'Any Brugada step positive = VT. All negative suggests SVT. Uncertain = treat as VT.',
+  },
+
+  {
+    id: 'wct-vereckei',
+    type: 'info',
+    module: 4,
+    title: 'Vereckei aVR Algorithm',
+    body: '**Analyze lead aVR only (faster than Brugada):**\n\n**Step 1:** Initial dominant R wave in aVR?\n• YES = VT\n\n**Step 2:** Initial r or q wave width >40ms?\n• YES = VT\n\n**Step 3:** Notching on initial downstroke of predominantly negative QRS?\n• YES = VT\n\n**Step 4:** Vi/Vt ratio ≤1?\n• Vi = vertical excursion in initial 40ms\n• Vt = vertical excursion in terminal 40ms\n• Ratio ≤1 = VT\n\n**If all 4 steps NO → suggests SVT**\n\n⏱️ Faster than Brugada (36 sec vs 105 sec median)',
+    citation: [7],
+    next: 'wct-vereckei-result',
+
+    summary: 'Vereckei: aVR only — initial R, initial r/q >40ms, notched downstroke, Vi/Vt ≤1. Any YES = VT.',
+    images: [{ src: 'images/ecg/vereckei-avr.png', alt: 'Vereckei aVR algorithm', caption: 'Vereckei aVR algorithm — single lead analysis' }],
+  },
+
+  {
+    id: 'wct-vereckei-result',
+    type: 'question',
+    module: 4,
+    title: 'Vereckei Result',
+    body: 'What was the Vereckei aVR algorithm result?',
+    options: [
+      { label: 'VT (any step positive)', description: 'Algorithm suggests ventricular tachycardia', next: 'wct-vt-morphology' },
+      { label: 'SVT (all steps negative)', description: 'Algorithm suggests SVT with aberrancy', next: 'wct-svt-consider' },
+      { label: 'Uncertain', description: 'Proceed with VT treatment', next: 'wct-vt-morphology' },
+    ],
+
+    summary: 'Any Vereckei step positive = VT. All negative suggests SVT. Uncertain = treat as VT.',
+  },
+
+  // =====================================================================
+  // MODULE 5: TREATMENT
+  // =====================================================================
+
+  {
+    id: 'wct-vt-morphology',
+    type: 'question',
+    module: 5,
+    title: 'VT Morphology',
+    body: 'Is the VT monomorphic or polymorphic?\n\n**Monomorphic:** Same QRS shape beat-to-beat\n**Polymorphic:** Varying QRS shape/axis',
+    options: [
+      { label: 'Monomorphic VT', description: 'Uniform QRS morphology', next: 'wct-stable-vt-tx' },
+      { label: 'Polymorphic VT', description: 'Varying QRS shape', next: 'wct-poly-qtc' },
+    ],
+
+    summary: 'Monomorphic = stable QRS; polymorphic = varying. Polymorphic requires QTc check for Torsades.',
+  },
+
+  {
+    id: 'wct-stable-vt-tx',
+    type: 'info',
+    module: 5,
+    title: 'Stable Monomorphic VT Treatment',
+    body: '**First-line: Procainamide** (PROCAMIO trial — superior to amiodarone)\n• [Procainamide](#/drug/procainamide/vt) 20-50 mg/min IV\n• OR 10 mg/kg over 20 min\n• Max: 17 mg/kg total\n\n🛑 **STOP infusion if:**\n• QRS widens >50% from baseline\n• Hypotension develops\n• Arrhythmia terminates\n\n**PROCAMIO results:** 67% termination vs 38% amiodarone, fewer adverse events (9% vs 41%)\n\n**Alternative: Amiodarone**\n• [Amiodarone](#/drug/amiodarone/vt) 150 mg IV over 10 min\n• Then 1 mg/min × 6h → 0.5 mg/min × 18h\n• May re-bolus 150 mg PRN\n\n**If fails:** Synchronized cardioversion',
+    citation: [5, 8],
+    next: 'wct-vt-refractory',
+
+    summary: 'Stable monomorphic VT: procainamide 20-50 mg/min (PROCAMIO superior to amio). Stop if QRS widens >50%.',
+  },
+
+  {
+    id: 'wct-vt-refractory',
+    type: 'question',
+    module: 5,
+    title: 'Response to Treatment',
+    body: 'Did the VT convert with antiarrhythmic therapy?',
+    options: [
+      { label: 'Yes — converted', description: 'Proceed to post-conversion care', next: 'wct-post-conversion' },
+      { label: 'No — refractory', description: 'Proceed to cardioversion', next: 'wct-cardiovert' },
+    ],
+
+    summary: 'If VT converts with antiarrhythmic, proceed to post-conversion care. If refractory, cardiovert.',
+  },
+
+  {
+    id: 'wct-cardiovert',
+    type: 'info',
+    module: 5,
+    title: 'Cardioversion for Refractory VT',
+    body: '**Synchronized cardioversion:**\n• 100J → 200J → 360J (biphasic)\n• Sedate if patient conscious\n\n**Sedation options:**\n• Midazolam 2-5 mg IV\n• Ketamine 1-2 mg/kg IV\n• Etomidate 0.3 mg/kg IV\n\n⚠️ **Confirm sync mode** — unsynchronized shock may land on T wave and induce VF\n\n**If still refractory:**\n• Consider overdrive pacing\n• EP consult urgently\n• Search for reversible triggers (ischemia, electrolytes)',
+    citation: [2, 8],
+    next: 'wct-post-conversion',
+
+    summary: 'Refractory VT: synchronized cardioversion 100J → 200J → 360J. Sedate. Confirm sync mode.',
+  },
+
+  {
+    id: 'wct-poly-qtc',
+    type: 'question',
+    module: 5,
+    title: 'Polymorphic VT — QTc Check',
+    body: 'What is the baseline QTc (from prior ECG or post-conversion)?\n\n**Prolonged QTc:** >480-500ms\n**Normal QTc:** <460ms (men), <470ms (women)',
+    options: [
+      { label: 'Prolonged QTc (>480ms)', description: 'Torsades de Pointes', next: 'wct-torsades' },
+      { label: 'Normal QTc', description: 'Likely ischemia-driven polymorphic VT', next: 'wct-poly-normal-qt' },
+    ],
+
+    summary: 'Polymorphic VT: check QTc. Prolonged = Torsades (magnesium). Normal = ischemia (treat ACS).',
+  },
+
+  {
+    id: 'wct-torsades',
+    type: 'info',
+    module: 5,
+    title: 'Torsades de Pointes',
+    body: '🛑 **DO NOT give amiodarone or procainamide**\n— They prolong QT → worsen Torsades → may be lethal\n\n**Treatment:**\n• [Magnesium sulfate](#/drug/magnesium-sulfate/torsades) 2-4 g IV over 15 min\n• Can push in arrest\n\n**If recurrent:**\n• Overdrive pacing to 90-110 bpm (shortens QT)\n• Isoproterenol if pacing unavailable (2-10 mcg/min)\n\n**Correct precipitants:**\n• Stop ALL QT-prolonging meds\n• Potassium target >4.5 mEq/L\n• Magnesium target >2.0 mEq/L\n\n→ See [Torsades de Pointes](#/tree/torsades-de-pointes) for full protocol',
+    citation: [3, 8],
+    next: 'wct-disposition',
+
+    summary: 'Torsades: magnesium 2-4g IV. NO amiodarone/procainamide (prolong QT). Overdrive pace if recurrent.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-poly-normal-qt',
+    type: 'info',
+    module: 5,
+    title: 'Polymorphic VT — Normal QTc',
+    body: '**Polymorphic VT with normal QT = likely ischemia**\n\n**Treatment:**\n• Treat as acute coronary syndrome\n• Emergent cardiology consult\n• Cath lab activation\n\n**Antiarrhythmic:**\n• Beta-blockers may suppress catecholamine-driven VT\n• Amiodarone acceptable (QT not prolonged)\n• Lidocaine alternative\n\n**Supportive:**\n• Aggressive electrolyte correction (K+ >4.0, Mg2+ >2.0)\n• Continuous telemetry\n• Prepare for cardioversion if unstable',
+    citation: [8, 10],
+    next: 'wct-disposition',
+
+    summary: 'Polymorphic VT + normal QT = likely ischemia. Treat as ACS, cath lab. Amiodarone OK here.',
+  },
+
+  {
+    id: 'wct-svt-consider',
+    type: 'info',
+    module: 5,
+    title: 'Possible SVT with Aberrancy',
+    body: '**Algorithm suggests SVT — but proceed with caution**\n\n**Before adenosine, confirm:**\n• Regular rhythm (NOT irregular)\n• No pre-excitation / WPW suspected\n• Not polymorphic WCT\n\n⚠️ **If ANY doubt → treat as VT**\n\n**Adenosine trial:**\n• [Adenosine](#/drug/adenosine/svt) 6 mg IV rapid push → 12 mg → 12 mg\n• Follow with 20 mL NS flush\n• Record continuous rhythm strip\n\n**Outcomes:**\n• Converts → confirms SVT\n• Unmasks underlying rhythm → treat accordingly\n• No effect → may still be VT → proceed with VT treatment',
+    citation: [1, 2],
+    next: 'wct-adenosine-result',
+
+    summary: 'If algorithm suggests SVT and regular rhythm: adenosine 6mg → 12mg → 12mg. Any doubt = treat as VT.',
+  },
+
+  {
+    id: 'wct-adenosine-result',
+    type: 'question',
+    module: 5,
+    title: 'Adenosine Response',
+    body: 'What was the response to adenosine?',
+    options: [
+      { label: 'Converted — confirms SVT', description: 'Now in sinus rhythm', next: 'wct-svt-converted' },
+      { label: 'Unmasked AFib/flutter', description: 'Underlying atrial arrhythmia', next: 'wct-svt-converted' },
+      { label: 'No effect', description: 'Likely VT — proceed with VT treatment', next: 'wct-stable-vt-tx' },
+    ],
+
+    summary: 'Adenosine converts = SVT. Unmasks AFib/flutter = underlying atrial arrhythmia. No effect = likely VT.',
+  },
+
+  {
+    id: 'wct-svt-converted',
+    type: 'info',
+    module: 5,
+    title: 'Confirmed SVT',
+    body: '**Rhythm confirmed as SVT with aberrancy**\n\n**For recurrence prevention:**\n• Rate control: diltiazem, metoprolol\n• Rhythm control: discuss with cardiology\n\n**Workup:**\n• 12-lead ECG in sinus\n• Echocardiogram\n• Electrolytes\n• TSH\n\n**Disposition:**\n• May discharge if first episode, hemodynamically stable\n• Cardiology follow-up within 1-2 weeks\n• Return precautions for recurrence, syncope, chest pain',
+    citation: [2],
+    next: 'wct-end',
+
+    summary: 'Confirmed SVT: rate/rhythm control, workup, may discharge if stable with cardiology follow-up.',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'wct-post-conversion',
+    type: 'info',
+    module: 6,
+    title: 'Post-Conversion Care',
+    body: '**Immediate post-conversion checklist:**\n\n• 12-lead ECG (compare to prior)\n• Electrolytes: K+ target >4.0, Mg2+ target >2.0\n• Troponin (ischemic trigger?)\n• BNP if heart failure suspected\n\n**Maintenance antiarrhythmic:**\n• Continue amiodarone infusion if used\n• OR procainamide infusion 1-4 mg/min\n\n**Identify trigger:**\n• Ischemia (most common)\n• Electrolyte abnormality\n• Drug-induced (cocaine, digoxin, QT-prolonging)\n• Structural heart disease\n• Idiopathic (diagnosis of exclusion)',
+    citation: [8, 10],
+    next: 'wct-disposition',
+
+    summary: 'Post-conversion: 12-lead, lytes (K >4, Mg >2), troponin, maintenance antiarrhythmic, identify trigger.',
+  },
+
+  {
+    id: 'wct-disposition',
+    type: 'info',
+    module: 6,
+    title: 'Disposition',
+    body: '**Admit ALL VT patients**\n• ICU or telemetry with continuous monitoring\n• Minimum 48 hours observation\n• Cardiology consult\n\n**EP consultation for:**\n• EF ≤35% (ICD candidate)\n• Survived VT arrest\n• Recurrent VT\n• Consider catheter ablation for monomorphic VT\n\n**Echo required for:**\n• All new VT\n• Assess EF, wall motion, structural disease\n\n🛑 **DO NOT discharge first-episode VT from ED**',
+    citation: [10],
+    next: 'wct-discharge-exception',
+
+    summary: 'Admit ALL VT to ICU/tele. EP consult if EF ≤35%, arrest survivor, recurrent. Echo required.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-discharge-exception',
+    type: 'info',
+    module: 6,
+    title: 'Rare Discharge Exceptions',
+    body: '**May consider discharge ONLY if ALL criteria met:**\n\n• Properly functioning AICD with appropriate therapy\n• Device interrogation completed\n• Cardiology/EP discussion and approval\n• Patient has close follow-up arranged\n\n**OR:**\n\n• Known idiopathic VT (e.g., RVOT VT)\n• Prior documentation of benign pattern\n• Cardiologist approval for outpatient management\n• Reliable patient with clear return precautions\n\n⚠️ **When in doubt, admit**',
+    citation: [10],
+    next: 'wct-end',
+
+    summary: 'Discharge rare: functioning ICD with device interrogation OR known benign idiopathic VT + EP approval.',
+  },
+
+  {
+    id: 'wct-end',
+    type: 'info',
+    module: 6,
+    title: 'WCT Management Complete',
+    body: '**Key Takeaways:**\n\n1. **80% of WCT is VT** — treat as VT when in doubt\n2. **Stability does NOT differentiate** VT from SVT\n3. **Procainamide > amiodarone** for stable VT (PROCAMIO)\n4. **Torsades: magnesium** — NOT amiodarone\n5. **Irregular WCT: avoid AV nodal blockers** (may be WPW)\n6. **Admit all VT** — EP consult for ICD evaluation\n\n[WCT Stop Page](#/info/wide-complex-tachycardia-stop)',
+    citation: [1, 5, 8],
+
+    summary: 'WCT complete. 80% is VT. Procainamide > amio. Torsades = Mg. Irregular WCT = no AV nodal blockers. Admit all.',
+  },
+
+  {
+    id: 'wct-doubt',
+    type: 'info',
+    module: 5,
+    title: 'When In Doubt — Treat as VT',
+    body: '**The safe approach when diagnosis is uncertain:**\n\n✅ **VT treatments are SAFE for SVT:**\n• Procainamide will not harm SVT patient\n• Cardioversion will not harm SVT patient\n• Amiodarone will not harm SVT patient\n\n❌ **SVT treatments may KILL VT patient:**\n• Adenosine: usually ineffective, may degenerate to VF\n• Verapamil/Diltiazem: negative inotropy + vasodilation = collapse\n• Beta-blockers: similar risk\n\n**Bottom line:**\n**If ANY doubt → procainamide or cardioversion**',
+    citation: [1, 2, 5],
+    next: 'wct-stable-vt-tx',
+
+    summary: 'When in doubt = VT. VT treatments safe for SVT. SVT treatments (adenosine, CCB) may kill VT patient.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'wct-irregular',
+    type: 'info',
+    module: 1,
+    title: 'Irregular WCT',
+    body: '**Irregular wide complex tachycardia differential:**\n\n**AFib + WPW (pre-excited AFib):**\n• AV nodal blockers CONTRAINDICATED\n• See [WPW + AFib](#wct-wpw-afib)\n\n**AFib + BBB:**\n• Pre-existing bundle branch block\n• Rate control safe (diltiazem, metoprolol)\n\n**Polymorphic VT:**\n• Varying QRS morphology\n• Often short runs\n• Check QTc for Torsades\n\n**How to differentiate:**\n• Prior ECG showing wide QRS in sinus = BBB\n• Delta waves visible = WPW\n• Very fast rate >200 = suspect WPW\n• When in doubt: avoid AV nodal blockers',
+    citation: [2, 10],
+    next: 'wct-special-branch',
+
+    summary: 'Irregular WCT: AFib+WPW (no AV nodal blockers), AFib+BBB (rate control OK), or polymorphic VT.',
+  },
+
+];
+
+// =====================================================================
+// CITATIONS
+// =====================================================================
+
+export const WIDE_COMPLEX_TACHYCARDIA_MODULE_LABELS = [
+  'Initial Assessment',
+  'Stability',
+  'Diagnostic Assessment',
+  'Diagnostic Algorithms',
+  'Treatment',
+  'Disposition',
+];
+
+export const WIDE_COMPLEX_TACHYCARDIA_CITATIONS: Citation[] = [
+  { num: 1, text: 'EB Medicine: Wide Complex Tachycardia in the Emergency Department. ebmedicine.net' },
+  { num: 2, text: 'ACLS Tachycardia Algorithm 2025. American Heart Association.' },
+  { num: 3, text: 'EMCrit IBCC: Ventricular Arrhythmias and Electrical Storm. emcrit.org' },
+  { num: 4, text: 'Brugada P, et al. Differential diagnosis of regular tachycardia with wide QRS. Circulation. 1991;83:1649-1659.' },
+  { num: 5, text: 'Ortiz M, et al. PROCAMIO Trial: Procainamide vs Amiodarone for Stable WCT. Eur Heart J. 2017;38:1329-1335.' },
+  { num: 6, text: 'LITFL: VT versus SVT. litfl.com' },
+  { num: 7, text: 'Vereckei A, et al. New algorithm for wide QRS complex tachycardia. Eur Heart J. 2007;28:589-600.' },
+  { num: 8, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS VT Guidelines. Circulation. 2018;138:e272-e391.' },
+  { num: 9, text: 'Core EM: Ventricular Tachycardia. coreem.net' },
+  { num: 10, text: 'Issa ZF, et al. Clinical Arrhythmology and Electrophysiology. 3rd ed. Elsevier; 2019.' },
+  { num: 11, text: 'RECAPEM: Sodium Channel Blocker Toxicity. recapem.com' },
+];

@@ -110,6 +110,7 @@ const CROSS_LISTINGS = {
   'pea-arrest':          [{ categoryId: 'cardiology' }],
   'bradycardic-arrest':  [{ categoryId: 'cardiology' }],
   'ventricular-tachycardia': [{ categoryId: 'cardiology' }],
+  'wide-complex-tachycardia': [{ categoryId: 'cardiology' }],
   'post-rosc':           [{ categoryId: 'cardiology' }],
   'refractory-vfvt':     [{ categoryId: 'emergency-medicine' }],
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],

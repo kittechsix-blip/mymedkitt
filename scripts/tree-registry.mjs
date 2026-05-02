@@ -173,6 +173,7 @@ export const TREE_REGISTRY = {
   'pea-arrest':       { prefix: 'PEA_ARREST',          entryNodeId: 'pea-start',          categoryId: 'cardiology' },
   'bradycardic-arrest': { prefix: 'BRADYCARDIC_ARREST', entryNodeId: 'ba-start',         categoryId: 'cardiology' },
   'ventricular-tachycardia': { prefix: 'VENTRICULAR_TACHYCARDIA', entryNodeId: 'vt-start', categoryId: 'cardiology' },
+  'wide-complex-tachycardia': { prefix: 'WIDE_COMPLEX_TACHYCARDIA', entryNodeId: 'wct-start', categoryId: 'cardiology' },
   'post-rosc':        { prefix: 'POST_ROSC',           entryNodeId: 'pr-start',           categoryId: 'cardiology' },
   'asthma-exacerbation': { prefix: 'ASTHMA_EXACERBATION', entryNodeId: 'asthma-start', categoryId: 'critical-care' },
   'adult-uti':        { prefix: 'ADULT_UTI',           entryNodeId: 'au-start',           categoryId: 'em' },
