@@ -510,13 +510,15 @@ export const ADULT_UTI_NODES: DecisionNode[] = [
   title: 'Resistant UTI Pathway',
   body: 'What type of resistant organism is suspected or confirmed?',
   options: [
+    { label: 'Local Antibiogram', description: 'Dell Seton ED resistance data', next: 'uti-local-antibiogram' },
+    { label: 'Single-Dose Aminoglycoside', description: 'No oral options, avoid admission', next: 'uti-aminoglycoside-single' },
     { label: 'ESBL-E (E. coli/Klebsiella)', description: 'Most common resistant gram-negative', next: 'uti-resistant-esbl' },
     { label: 'DTR-Pseudomonas', description: 'Catheter, hospital-acquired', next: 'uti-resistant-pseudomonas' },
     { label: 'VRE', description: 'Vancomycin-resistant Enterococcus', next: 'uti-resistant-vre' },
     { label: 'Sepsis with Resistant UTI', description: 'Empiric broad coverage needed', next: 'uti-resistant-sepsis' },
   ],
 
-  summary: 'Route by organism: ESBL-E (most common), DTR-Pseudomonas (catheter/hospital), VRE, or sepsis (empiric broad)',
+  summary: 'Route by organism: local antibiogram, single-dose aminoglycoside, ESBL-E, DTR-Pseudomonas, VRE, or sepsis',
 },
 
 {
@@ -582,6 +584,30 @@ export const ADULT_UTI_NODES: DecisionNode[] = [
 },
 
 {
+  id: 'uti-aminoglycoside-single',
+  type: 'info',
+  module: 7,
+  title: 'Single-Dose Aminoglycoside',
+  body: '**Single-Dose Aminoglycoside Therapy for UTI:** [16]\n\n**When to Use:**\n• No susceptible oral options available\n• Avoid inpatient admission\n• Adherence concerns (~60% nonadherence in GU infections)\n• ESBL or MDR organism with aminoglycoside susceptibility\n\n**Pharmacology Rationale:**\n• Achieves urinary concentrations up to **100× plasma levels** within 1 hour\n• Maintains therapeutic urinary levels **≥72 hours** after single dose\n• **No increased AKI risk** with one-time dosing (multiple studies)\n\n**Weight Selection:**\n• **>120% IBW** → Use Adjusted Body Weight\n• **≤120% IBW** → Use Actual Body Weight\n\n**Dosing (Single Dose IV/IM):**\n\n**Gentamicin: 5 mg/kg**\n• Round doses >200mg to nearest 40mg\n• EHR has automatic calculator\n\n**Tobramycin: 5 mg/kg**\n• Consider local AST profile (may have better Pseudomonas coverage)\n• Round doses >200mg to nearest 40mg\n\n**Amikacin: 15 mg/kg**\n• Use ONLY if resistance to gentamicin AND tobramycin\n• Round doses >200mg to nearest 50mg\n\n**Example (70kg patient):**\n• Gentamicin: 350mg IV/IM x1\n• Tobramycin: 350mg IV/IM x1\n• Amikacin: 1050mg (round to 1000mg) IV x1\n\n**Discharge Instructions:**\n• Infection treated with single IV/IM antibiotic\n• No oral antibiotics needed\n• Return if: fever, worsening pain, not improving by 72h\n• Follow-up culture results in 48-72h',
+  citation: [16],
+  next: 'uti-resistant-dispo',
+
+  summary: 'Single-dose gentamicin/tobramycin 5mg/kg or amikacin 15mg/kg — maintains urinary levels 72h, no AKI risk, avoids admission',
+},
+
+{
+  id: 'uti-local-antibiogram',
+  type: 'info',
+  module: 7,
+  title: 'Local Antibiogram (Dell Seton)',
+  body: '**Dell Seton ED Antibiogram 2024-2025:** [16]\n\n**E. coli (Urine) Susceptibilities:**\n| Antibiotic | E. coli | ESBL |\n|------------|---------|------|\n| Ampicillin | 48% | — |\n| Augmentin | 79% | 65% |\n| Cefazolin | 94% | — |\n| Ceftriaxone | 99% | — |\n| Ciprofloxacin | 79% | 17% |\n| TMP-SMX | 70% | 35% |\n| **Nitrofurantoin** | **95%** | **93%** |\n\n**MRSA (SSTI) Susceptibilities:**\n| Antibiotic | MSSA | MRSA |\n|------------|------|------|\n| Oxacillin | 100% | — |\n| Clindamycin | 84% | 77% |\n| TMP-SMX | 71% | 71% |\n| **Minocycline** | 91% | **88%** |\n| Doxycycline | 87% | 78% |\n\n**Key Takeaways:**\n\n**1. Uncomplicated UTI:**\n• Nitrofurantoin 95% (first-line)\n• Cipro/TMP-SMX ~70-79% — consider alternatives\n\n**2. ESBL UTI:**\n• Nitrofurantoin 93% — only oral option for uncomplicated\n• Carbapenems for complicated/pyelo\n\n**3. MRSA SSTI:**\n• Minocycline 88% — best oral option\n• Minocycline 200mg x1 (ED), then 100mg BID x5-10d\n\n**4. Resistant UTI Without Oral Options:**\n• Single-dose aminoglycoside (see protocol)',
+  citation: [16],
+  next: 'uti-resistant-pathway',
+
+  summary: 'Dell Seton: nitrofurantoin 95% E.coli (first-line), ESBL 93%; cipro/TMP-SMX only ~70-79%; MRSA: minocycline 88%',
+},
+
+{
   id: 'uti-resistant-dispo',
   type: 'result',
   module: 7,
@@ -607,7 +633,7 @@ export const ADULT_UTI_MODULE_LABELS = [
   'Resistant UTI',
 ];
 
-export const ADULT_UTI_NODE_COUNT = 40;
+export const ADULT_UTI_NODE_COUNT = 42;
 
 // =====================================================================
 // CRITICAL ACTIONS
@@ -625,6 +651,8 @@ export const ADULT_UTI_CRITICAL_ACTIONS = [
   { text: 'ESBL: NO pip-tazo (use carbapenems)', nodeId: 'uti-resistant-esbl' },
   { text: 'VRE: linezolid for upper tract', nodeId: 'uti-resistant-vre' },
   { text: 'Resistant sepsis: vanco + meropenem', nodeId: 'uti-resistant-sepsis' },
+  { text: 'Single-dose aminoglycoside: avoid admission for resistant UTI', nodeId: 'uti-aminoglycoside-single' },
+  { text: 'Dell Seton: nitrofurantoin 95%, cipro 79%, TMP-SMX 70%', nodeId: 'uti-local-antibiogram' },
 ];
 
 // =====================================================================
@@ -691,5 +719,9 @@ export const ADULT_UTI_CITATIONS: Citation[] = [
   {
     num: 15,
     text: 'Heintz BH et al. Treatment of VRE Urinary Tract Infections. Ann Pharmacother 2010;44(12):1930-1939.',
+  },
+  {
+    num: 16,
+    text: 'Dell Seton ED Antibiogram 2024-2025. Randle K, Kim H. Ascension Rx Pharmacy.',
   },
 ];
