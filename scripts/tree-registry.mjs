@@ -214,4 +214,5 @@ export const TREE_REGISTRY = {
   'blood-transfusions': { prefix: 'BLOOD_TRANSFUSIONS', entryNodeId: 'bt-start',          categoryId: 'pharmacist' },
   'mesenteric-ischemia': { prefix: 'MESENTERIC_ISCHEMIA', entryNodeId: 'ami-start',      categoryId: 'gastroenterology' },
   'pericarditis':       { prefix: 'PERICARDITIS',        entryNodeId: 'pericarditis-start', categoryId: 'cardiology' },
+  'typhoid-fever':      { prefix: 'TYPHOID_FEVER',       entryNodeId: 'typhoid-start',      categoryId: 'infectious-disease' },
 };
