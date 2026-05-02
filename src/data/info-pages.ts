@@ -18074,6 +18074,93 @@ const WCT_SUMMARY: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Mesenteric Ischemia — Info Pages
+// -------------------------------------------------------------------
+
+const AMI_SUMMARY: InfoPage = {
+  id: 'ami-summary',
+  title: 'Mesenteric Ischemia Summary',
+  subtitle: 'Time is bowel — early CTA and surgery consult save lives',
+  sections: [
+    {
+      heading: '1. Recognition (Suspect Early)',
+      body: '**Triad:** Severe abdominal pain + Minimal exam findings + Vascular risk factors\n\n• Pain out of proportion to exam (visceral innervation only)\n• Gut emptying (vomiting, diarrhea) — ischemic gut purges\n• AFib (most common embolic source)\n• Age >60 with atherosclerosis, CHF, recent MI',
+    },
+    {
+      heading: '2. Labs (Lactate is LATE)',
+      body: '• **Lactate:** Elevated = already necrotic bowel — do not wait for this\n• **CBC:** Leukocytosis common, hemoconcentration\n• **BMP:** Metabolic acidosis, elevated BUN\n• **D-dimer:** Sensitive but nonspecific\n• **LDH/amylase:** May be elevated but not diagnostic',
+    },
+    {
+      heading: '3. Imaging (CTA is Gold Standard)',
+      body: '• **CTA abdomen/pelvis with IV contrast** — first-line imaging\n• Sensitivity >95% for SMA/SMV occlusion\n• Shows: vessel cutoff, bowel wall thickening, pneumatosis, portal venous gas\n• **Plain films:** Insensitive — only show late findings (thumbprinting, pneumatosis)',
+    },
+    {
+      heading: '4. Resuscitation Bundle',
+      body: '• **NPO** — gut rest\n• **Crystalloid resuscitation** — correct hypovolemia before pressors\n• **NG tube** if distended\n• **Antibiotics:** Pip-tazo 4.5g IV or meropenem 1g IV (translocation risk)\n• **Anticoagulation:** Heparin bolus 80 U/kg, drip 18 U/kg/hr (arterial AMI)',
+    },
+    {
+      heading: '5. Type-Specific Treatment',
+      body: '• **SMA Embolism (40-50%):** Heparin + emergent embolectomy or catheter-directed thrombolysis\n• **SMA Thrombosis:** Heparin + surgical revascularization (bypass)\n• **MVT:** Heparin (may avoid surgery if no peritonitis)\n• **NOMI:** Treat underlying cause, optimize CO, papaverine infusion if available',
+    },
+    {
+      heading: '6. When to Operate',
+      body: '**Immediate surgical exploration if:**\n• Peritoneal signs\n• Pneumatosis or portal venous gas on imaging\n• Hemodynamic instability despite resuscitation\n• Frank bowel necrosis on imaging\n\n**Time is bowel** — every hour of delay = more necrotic bowel = higher mortality',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'EB Medicine: Acute Mesenteric Ischemia. Emergency Medicine Practice. 2024.' },
+    { num: 2, text: 'Clair DG, Beach JM. Mesenteric Ischemia. NEJM. 2016;374:959-968.' },
+    { num: 3, text: 'Bala M, et al. Acute mesenteric ischemia: WSES guidelines. World J Emerg Surg. 2017;12:38.' },
+  ],
+};
+
+const AMI_11AS: InfoPage = {
+  id: 'ami-11as',
+  title: 'AMI Risk Factors — The 11 A\'s',
+  subtitle: 'Mnemonic for mesenteric ischemia risk factors',
+  sections: [
+    {
+      heading: 'The 11 A\'s of Mesenteric Ischemia Risk',
+      body: '**A**trial fibrillation (most common embolic source)\n\n**A**therosclerosis (aortic, mesenteric vessels)\n\n**A**ge >60\n\n**A**cute MI (recent — source of mural thrombus)\n\n**A**ortic aneurysm/dissection\n\n**A**ortic surgery (recent)\n\n**A**bdominal surgery (recent)\n\n**A**rrhythmias (other than AFib)\n\n**A**ngiography (recent — catheter-related embolism)\n\n**A**rterial procedures (recent)\n\n**A**dhesions (postoperative — can cause mechanical obstruction + ischemia)',
+    },
+    {
+      heading: 'Clinical Pearl',
+      body: 'Patients with 3+ of these factors presenting with acute abdominal pain should be presumed to have mesenteric ischemia until CTA proves otherwise. Do NOT wait for lactate or peritoneal signs.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Oldenburg WA, et al. Acute mesenteric ischemia: a clinical review. Arch Intern Med. 2004;164:1054-1062.' },
+  ],
+};
+
+const AMI_CT_FINDINGS: InfoPage = {
+  id: 'ami-ct-findings',
+  title: 'CTA Findings in Mesenteric Ischemia',
+  subtitle: 'What to look for on imaging',
+  sections: [
+    {
+      heading: 'Vascular Findings',
+      body: '• **SMA occlusion/thrombosis** — filling defect or cutoff\n• **SMV thrombosis** — filling defect, enlarged vein with rim enhancement\n• **Aortic atherosclerosis** — calcified plaques at vessel origins\n• **Mesenteric artery stenosis** — narrowing >50% at origin',
+    },
+    {
+      heading: 'Bowel Wall Findings',
+      body: '• **Wall thickening** (>3mm) — early finding\n• **Hypoenhancement** — reduced contrast uptake = ischemia\n• **Hyperenhancement** — reperfusion injury or early ischemia\n• **Paper-thin wall** — late finding, transmural necrosis\n• **Lack of enhancement** — infarcted bowel',
+    },
+    {
+      heading: 'Mesenteric Findings',
+      body: '• **Mesenteric fat stranding** — inflammation around vessels\n• **Mesenteric haziness** — fluid/edema in mesentery\n• **Engorgement of mesenteric veins** — venous congestion',
+    },
+    {
+      heading: 'Late/Ominous Findings',
+      body: '• **Pneumatosis intestinalis** — gas in bowel wall = necrosis\n• **Portal venous gas** — gas in portal system = advanced necrosis\n• **Free air** — perforation\n• **Ascites** — third-spacing from ischemia\n\n⚠️ Pneumatosis + portal venous gas = near-certain mortality if not immediately explored',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Defined M, et al. CT angiography of acute mesenteric ischemia. AJR Am J Roentgenol. 2010;195:102-112.' },
+  ],
+};
+
 const VT_SUMMARY: InfoPage = {
   id: 'vt-steps-summary',
   title: 'VT Management Steps Summary',
@@ -19163,6 +19250,10 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ile-summary': INTRALIPID_SUMMARY,
   // Steps Summaries — Other
   'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
+  // Mesenteric Ischemia
+  'ami-summary': AMI_SUMMARY,
+  'ami-11as': AMI_11AS,
+  'ami-ct-findings': AMI_CT_FINDINGS,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

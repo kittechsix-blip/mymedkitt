@@ -212,4 +212,5 @@ export const TREE_REGISTRY = {
   'svt':              { prefix: 'SVT',                 entryNodeId: 'svt-start',          categoryId: 'cardiology' },
   'critical-care-drips': { prefix: 'CRITICAL_CARE_DRIPS', entryNodeId: 'ccd-start',       categoryId: 'pharmacist' },
   'blood-transfusions': { prefix: 'BLOOD_TRANSFUSIONS', entryNodeId: 'bt-start',          categoryId: 'pharmacist' },
+  'mesenteric-ischemia': { prefix: 'MESENTERIC_ISCHEMIA', entryNodeId: 'ami-start',      categoryId: 'gastroenterology' },
 };

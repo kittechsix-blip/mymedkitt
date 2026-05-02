@@ -144,8 +144,57 @@ const WIDE_COMPLEX_TACHYCARDIA_STOP = {
     ],
     citations: [],
 };
+const MESENTERIC_ISCHEMIA_STOP = {
+    id: 'mesenteric-ischemia-stop',
+    title: 'Mesenteric Ischemia — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT wait for lactate to rise before treating',
+            body: 'Lactate is a LATE finding in mesenteric ischemia. By the time lactate is elevated, bowel may already be necrotic. **Suspect AMI based on clinical presentation** (pain out of proportion, gut emptying, vascular risk factors) — do not wait for confirmatory labs. Early CTA and surgery consult save bowel.',
+        },
+        {
+            heading: '🛑 Do NOT rely on abdominal exam to rule out AMI',
+            body: 'Classic "pain out of proportion to exam" exists because the bowel has VISCERAL innervation only — there is no peritoneal irritation until transmural necrosis occurs. **A benign-appearing abdomen does NOT rule out mesenteric ischemia.** Peritoneal signs are a LATE and ominous finding.',
+        },
+        {
+            heading: '🛑 Do NOT get plain films as initial imaging',
+            body: 'Plain radiographs are insensitive for early AMI. Findings like pneumatosis and portal venous gas indicate **advanced necrosis and near-certain mortality**. Get CTA with IV contrast as first-line imaging — it has >95% sensitivity for SMA/SMV occlusion and shows bowel wall changes.',
+        },
+        {
+            heading: '🛑 Do NOT delay anticoagulation for suspected arterial AMI',
+            body: 'Once arterial mesenteric ischemia is diagnosed or highly suspected, **start IV heparin immediately** (target aPTT 2-2.5x normal). Anticoagulation prevents clot propagation and may improve collateral flow. Do not wait for surgical consultation to initiate heparin.',
+        },
+        {
+            heading: '🛑 Do NOT forget broad-spectrum antibiotics',
+            body: 'Even before perforation, ischemic bowel allows bacterial translocation. **Start piperacillin-tazobactam or carbapenem early.** Do not withhold antibiotics pending imaging — the risk of untreated sepsis from translocation exceeds any downside of empiric coverage.',
+        },
+        {
+            heading: '🛑 Do NOT miss atrial fibrillation as the embolic source',
+            body: 'SMA embolism is the most common cause of acute mesenteric ischemia (40-50%). The overwhelming majority of SMA emboli originate from **left atrial thrombus in AFib**. Always get an ECG. If in sinus rhythm, consider echocardiography to evaluate for other embolic sources.',
+        },
+        {
+            heading: '🛑 Do NOT assume NOMI can be treated expectantly',
+            body: 'Non-occlusive mesenteric ischemia (NOMI) from low-flow states (cardiogenic shock, vasopressors) carries **60-70% mortality**. Treat the underlying cause aggressively, optimize cardiac output, consider vasodilator infusion (papaverine if available), and maintain a low threshold for surgical exploration.',
+        },
+        {
+            heading: '🛑 Do NOT miss chronic mesenteric ischemia (CMI)',
+            body: 'CMI presents with postprandial pain ("intestinal angina"), food fear, and weight loss. These patients have **severely stenotic mesenteric vessels** and are one hemodynamic stress away from acute-on-chronic ischemia. Any patient with CMI and acute worsening should be treated as AMI.',
+        },
+        {
+            heading: '🛑 Do NOT give vasoconstrictors without volume resuscitation',
+            body: 'Hypovolemia + vasopressors = worsened splanchnic ischemia. **Resuscitate with crystalloid first.** If vasopressors are needed, prefer norepinephrine over high-dose vasopressin. Vasopressin directly constricts mesenteric vessels and should be minimized or avoided.',
+        },
+        {
+            heading: '🛑 Do NOT delay surgery for "medical optimization"',
+            body: 'In acute mesenteric ischemia, **time is bowel**. Every hour of ischemia reduces viable bowel and increases mortality. Once perforation or necrosis is suspected, emergent laparotomy is indicated. Damage-control resuscitation happens in the OR, not the ED.',
+        },
+    ],
+    citations: [],
+};
 export const STOP_PAGES_12 = {
     'vertigo-stop': VERTIGO_STOP,
     'toxic-alcohols-stop': TOXIC_ALCOHOLS_STOP,
     'wide-complex-tachycardia-stop': WIDE_COMPLEX_TACHYCARDIA_STOP,
+    'mesenteric-ischemia-stop': MESENTERIC_ISCHEMIA_STOP,
 };
