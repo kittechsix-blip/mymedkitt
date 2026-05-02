@@ -979,6 +979,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/ear-infection.js');
             return { nodes: m.EAR_INFECTION_NODES, entryNodeId: 'ear-start', categoryId: 'emergency-medicine', moduleLabels: m.EAR_INFECTION_MODULE_LABELS, citations: m.EAR_INFECTION_CITATIONS, criticalActions: m.EAR_INFECTION_CRITICAL_ACTIONS };
         },
+        'lower-gi-bleed': async () => {
+            const m = await import('../data/trees/lower-gi-bleed.js');
+            return { nodes: m.LOWER_GI_BLEED_NODES, entryNodeId: 'lgib-start', categoryId: 'gastroenterology', moduleLabels: m.LOWER_GI_BLEED_MODULE_LABELS, citations: m.LOWER_GI_BLEED_CITATIONS, criticalActions: m.LOWER_GI_BLEED_CRITICAL_ACTIONS };
+        },
+        'gi-foreign-body': async () => {
+            const m = await import('../data/trees/gi-foreign-body.js');
+            return { nodes: m.GI_FOREIGN_BODY_NODES, entryNodeId: 'gifb-start', categoryId: 'gastroenterology', moduleLabels: m.GI_FOREIGN_BODY_MODULE_LABELS, citations: m.GI_FOREIGN_BODY_CITATIONS, criticalActions: m.GI_FOREIGN_BODY_CRITICAL_ACTIONS };
+        },
+        'pid': async () => {
+            const m = await import('../data/trees/pid.js');
+            return { nodes: m.PID_NODES, entryNodeId: 'pid-start', categoryId: 'infectious-disease', moduleLabels: m.PID_MODULE_LABELS, citations: m.PID_CITATIONS, criticalActions: m.PID_CRITICAL_ACTIONS };
+        },
+        'hypotension-workup': async () => {
+            const m = await import('../data/trees/hypotension-workup.js');
+            return { nodes: m.HYPOTENSION_WORKUP_NODES, entryNodeId: 'hypo-start', categoryId: 'critical-care', moduleLabels: m.HYPOTENSION_WORKUP_MODULE_LABELS, citations: m.HYPOTENSION_WORKUP_CITATIONS, criticalActions: m.HYPOTENSION_WORKUP_CRITICAL_ACTIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

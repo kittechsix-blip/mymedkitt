@@ -215,4 +215,8 @@ export const TREE_REGISTRY = {
   'mesenteric-ischemia': { prefix: 'MESENTERIC_ISCHEMIA', entryNodeId: 'ami-start',      categoryId: 'gastroenterology' },
   'pericarditis':       { prefix: 'PERICARDITIS',        entryNodeId: 'pericarditis-start', categoryId: 'cardiology' },
   'typhoid-fever':      { prefix: 'TYPHOID_FEVER',       entryNodeId: 'typhoid-start',      categoryId: 'infectious-disease' },
+  'lower-gi-bleed':     { prefix: 'LOWER_GI_BLEED',      entryNodeId: 'lgib-start',         categoryId: 'gastroenterology' },
+  'gi-foreign-body':    { prefix: 'GI_FOREIGN_BODY',     entryNodeId: 'gifb-start',         categoryId: 'gastroenterology' },
+  'pid':                { prefix: 'PID',                 entryNodeId: 'pid-start',          categoryId: 'infectious-disease' },
+  'hypotension-workup': { prefix: 'HYPOTENSION_WORKUP',  entryNodeId: 'hypo-start',         categoryId: 'critical-care' },
 };
