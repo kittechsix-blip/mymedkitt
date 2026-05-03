@@ -19,6 +19,10 @@ export const PERIPHERAL_NEUROPATHY_NODES = [
             { label: 'Uncertain — need more info', description: 'Characterize the neuropathy first', next: 'pn-classification' },
         ],
         citation: [1, 2],
+        calculatorLinks: [
+            { id: 'gbs-fvc-nif', label: 'FVC/NIF Calculator' },
+            { id: 'gbs-variants', label: 'GBS Variants' },
+        ],
     },
     {
         id: 'pn-red-flags',
@@ -97,6 +101,11 @@ export const PERIPHERAL_NEUROPATHY_NODES = [
         title: 'Emergent Workup — Acute Neuropathy',
         body: '**Emergent Evaluation for Acute Neuropathy:**\n\n**Bedside Respiratory Assessment:**\n• **FVC** (Forced Vital Capacity) — most useful\n  - <20 mL/kg or <1 L = high intubation risk\n  - Decline >30% from baseline = concerning\n• **NIF** (Negative Inspiratory Force)\n  - Worse than −30 cmH2O = impending failure\n• Check q4h if GBS suspected\n\n**Lumbar Puncture:**\n• **Classic GBS finding:** Albuminocytologic dissociation\n  - Elevated protein (>45 mg/dL)\n  - Normal cell count (<10 cells)\n• May be normal in first week\n• Also rules out infectious/malignant meningitis\n\n**Labs:**\n• Standard workup PLUS:\n• Anti-ganglioside antibodies (GM1, GD1a, GQ1b)\n• Consider stool for botulinum toxin\n• Lyme serologies in endemic areas\n\n**Imaging:**\n• MRI spine if cord compression suspected\n• CXR (aspiration risk, pulmonary function)\n\n**Consults:**\n• Neurology — emergent\n• ICU if respiratory compromise [2][3][6]',
         citation: [2, 3, 6],
+        calculatorLinks: [
+            { id: 'gbs-fvc-nif', label: 'FVC/NIF Calculator' },
+            { id: 'gbs-lp-interp', label: 'LP Interpreter' },
+            { id: 'gbs-intubation', label: 'Intubation Decision' },
+        ],
         next: 'pn-gbs-pathway',
         safetyLevel: 'critical',
     },
@@ -115,6 +124,11 @@ export const PERIPHERAL_NEUROPATHY_NODES = [
             { label: 'Uncertain', description: 'Need more evaluation', next: 'pn-emergent-workup' },
         ],
         citation: [2, 6],
+        calculatorLinks: [
+            { id: 'gbs-egris', label: 'EGRIS Score' },
+            { id: 'bot-ddx', label: 'Botulism DDx' },
+            { id: 'mg-ice-test', label: 'Ice Test (MG)' },
+        ],
     },
     {
         id: 'pn-mimic-workup',
@@ -133,6 +147,11 @@ export const PERIPHERAL_NEUROPATHY_NODES = [
         body: '**Suspected GBS — Immediate Actions:**\n\n**1. Airway/Respiratory Monitoring:**\n• Serial FVC and NIF q4h minimum\n• Intubation thresholds:\n  - FVC <20 mL/kg or <1 L\n  - NIF worse than −30 cmH2O\n  - Rapid decline (>30% in hours)\n  - Bulbar dysfunction with aspiration risk\n• Early intubation preferred — RSI okay\n\n**2. Autonomic Monitoring:**\n• Continuous cardiac monitoring\n• Watch for HR/BP lability\n• Avoid medications that worsen dysautonomia\n\n**3. Definitive Treatment (neurology-directed):**\n• **IVIG** 0.4 g/kg/day × 5 days, OR\n• **Plasmapheresis** (PLEX) 5 exchanges over 1-2 weeks\n• Equally effective — IVIG more practical in most settings\n• Steroids NOT effective in GBS\n\n**4. Supportive Care:**\n• DVT prophylaxis\n• Pain management (neuropathic pain common)\n• PT/OT early\n\n**Disposition:** ICU admission for respiratory monitoring.\n\n➡️ For detailed GBS management: [GBS Consult](#/tree/guillain-barre) [2][3][6]',
         recommendation: 'Admit to ICU. Serial respiratory monitoring (FVC/NIF q4h). Neurology consult for IVIG or plasmapheresis. Continuous cardiac monitoring for autonomic instability.',
         citation: [2, 3, 6],
+        calculatorLinks: [
+            { id: 'gbs-ivig-plex', label: 'IVIG vs PLEX' },
+            { id: 'gbs-fvc-nif', label: 'FVC/NIF' },
+            { id: 'gbs-intubation', label: 'Intubation Decision' },
+        ],
         safetyLevel: 'critical',
     },
     // =====================================================================
