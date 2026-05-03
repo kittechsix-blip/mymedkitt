@@ -995,6 +995,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/hypotension-workup.js');
             return { nodes: m.HYPOTENSION_WORKUP_NODES, entryNodeId: 'hypo-start', categoryId: 'critical-care', moduleLabels: m.HYPOTENSION_WORKUP_MODULE_LABELS, citations: m.HYPOTENSION_WORKUP_CITATIONS, criticalActions: m.HYPOTENSION_WORKUP_CRITICAL_ACTIONS };
         },
+        'peripheral-neuropathy': async () => {
+            const m = await import('../data/trees/peripheral-neuropathy.js');
+            return { nodes: m.PERIPHERAL_NEUROPATHY_NODES, entryNodeId: 'pn-start', categoryId: 'neurology', moduleLabels: m.PERIPHERAL_NEUROPATHY_MODULE_LABELS, citations: m.PERIPHERAL_NEUROPATHY_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

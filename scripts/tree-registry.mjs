@@ -219,4 +219,5 @@ export const TREE_REGISTRY = {
   'gi-foreign-body':    { prefix: 'GI_FOREIGN_BODY',     entryNodeId: 'gifb-start',         categoryId: 'gastroenterology' },
   'pid':                { prefix: 'PID',                 entryNodeId: 'pid-start',          categoryId: 'infectious-disease' },
   'hypotension-workup': { prefix: 'HYPOTENSION_WORKUP',  entryNodeId: 'hypo-start',         categoryId: 'critical-care' },
+  'peripheral-neuropathy': { prefix: 'PERIPHERAL_NEUROPATHY', entryNodeId: 'pn-start',      categoryId: 'neurology' },
 };

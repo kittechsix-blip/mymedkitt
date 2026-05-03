@@ -18685,6 +18685,24 @@ const ACUTE_PANCREATITIS_SUMMARY: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Peripheral Neuropathy
+// -------------------------------------------------------------------
+
+const PN_STEPS_SUMMARY: InfoPage = {
+  id: 'pn-steps',
+  title: 'Peripheral Neuropathy — Steps',
+  subtitle: 'ED Evaluation Framework',
+  sections: [
+    {
+      body: '**Step 1: [Red Flag Screen](#/node/pn-start)**\n• Acute onset (<4 weeks)?\n• Rapid progression?\n• Motor > sensory?\n• Autonomic symptoms?\n• Asymmetric pattern?\n\n**Step 2: [Classify the Pattern](#/node/pn-classification)**\n• Distribution: focal vs multifocal vs symmetric\n• Fiber type: large vs small vs mixed\n• Tempo: acute vs subacute vs chronic\n\n**Step 3: [Order Workup](#/node/pn-standard-workup)**\n• Tier 1: CBC, CMP, glucose, TSH, B12\n• Tier 2: SPEP, HIV, Hep B/C, ESR/CRP\n• Consider LP if GBS suspected\n\n**Step 4: [Rule Out Mimics](#/node/pn-gbs-pathway)**\n• Cord compression → MRI\n• Botulism → descending, pupils\n• Tick paralysis → find tick\n• Hypokalemia → check K+\n\n**Step 5: [Treat](#/node/pn-treatment)**\n• Gabapentin or pregabalin for pain\n• Correct deficiencies (B12, thiamine)\n• Control glucose\n\n**Step 6: [Disposition](#/node/pn-disposition)**\n• ICU: respiratory risk, GBS\n• Floor: progressive, needs workup\n• Discharge: chronic, stable, follow-up arranged',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Castelli G, et al. Peripheral Neuropathy: Evaluation and Differential Diagnosis. Am Fam Physician. 2020.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Delayed Sequence Intubation
   'dsi-summary': DSI_SUMMARY,
@@ -19254,6 +19272,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ami-summary': AMI_SUMMARY,
   'ami-11as': AMI_11AS,
   'ami-ct-findings': AMI_CT_FINDINGS,
+  // Peripheral Neuropathy
+  'pn-steps': PN_STEPS_SUMMARY,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

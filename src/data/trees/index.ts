@@ -126,6 +126,7 @@ export { LOWER_GI_BLEED_NODES, LOWER_GI_BLEED_MODULE_LABELS, LOWER_GI_BLEED_CITA
 export { GI_FOREIGN_BODY_NODES, GI_FOREIGN_BODY_MODULE_LABELS, GI_FOREIGN_BODY_CITATIONS, GI_FOREIGN_BODY_CRITICAL_ACTIONS } from './gi-foreign-body';
 export { PID_NODES, PID_MODULE_LABELS, PID_CITATIONS, PID_CRITICAL_ACTIONS } from './pid';
 export { HYPOTENSION_WORKUP_NODES, HYPOTENSION_WORKUP_MODULE_LABELS, HYPOTENSION_WORKUP_CITATIONS, HYPOTENSION_WORKUP_CRITICAL_ACTIONS } from './hypotension-workup';
+export { PERIPHERAL_NEUROPATHY_NODES, PERIPHERAL_NEUROPATHY_MODULE_LABELS, PERIPHERAL_NEUROPATHY_CITATIONS, PERIPHERAL_NEUROPATHY_NODE_COUNT } from './peripheral-neuropathy';
 
 // Note: All consult trees are now loaded via tree-service.ts using the flat DecisionNode[] format.
 // The consultRegistry below is kept for backwards compatibility but is not actively used.
