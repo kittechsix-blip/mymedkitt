@@ -1446,6 +1446,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'calcium', label: 'Calcium', icon: '🦴', action: 'jump', target: 'bt-calcium' },
     { id: 'consent', label: 'Consent', icon: '📝', action: 'overlay', target: 'bt-consent' },
   ],
+  'peripheral-neuropathy': [
+    { id: 'fvc-nif', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'gbs-fvc-nif' },
+    { id: 'gbs-variants', label: 'Variants', icon: '🧬', action: 'calculator', target: 'gbs-variants' },
+    { id: 'egris', label: 'EGRIS', icon: '📊', action: 'calculator', target: 'gbs-egris' },
+    { id: 'ivig-plex', label: 'IVIG/PLEX', icon: '💉', action: 'calculator', target: 'gbs-ivig-plex' },
+    { id: 'mimics', label: 'Mimics', icon: '🔍', action: 'jump', target: 'pn-gbs-pathway' },
+  ],
 };
 
 // Stop button appended automatically to every consult
