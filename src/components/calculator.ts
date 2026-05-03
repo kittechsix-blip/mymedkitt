@@ -2474,7 +2474,9 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
     { name: 'chloride', label: 'Chloride (Cl−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
     { name: 'lactate', label: 'Lactate', type: 'number', points: 0, valueIsPoints: true, unit: 'mmol/L', description: 'Elevated? See lactic acidosis differential below' },
     { name: 'albumin', label: 'Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL', description: 'Normal ~4.0. Low albumin masks anion gap' },
-    { name: 'be', label: 'Base Excess', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', allowNegative: true, description: 'From ABG (can be negative, e.g. -12). If unavailable: BE ≈ HCO3 − 24' },
+    { name: 'use-bicarb', label: 'I have HCO3 (not BE)', type: 'toggle', points: 0, description: 'Toggle ON to enter bicarbonate instead of base excess' },
+    { name: 'be', label: 'Base Excess (BE)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', allowNegative: true, description: 'From ABG. Can be negative (e.g., -18)' },
+    { name: 'hco3', label: 'Bicarbonate (HCO3)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', description: 'If entered, BE is calculated as HCO3 − 24' },
   ],
   results: [],
   thresholdNote: 'SIG > 2: unmeasured anions. SIG ≤ 2: explained by Na-Cl, lactate, albumin. SIG < −2: unmeasured cations.',
@@ -2488,7 +2490,13 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
     const cl = values['chloride'] || 0;
     const lactate = values['lactate'] || 0;
     const albumin = values['albumin'] || 0;
-    const be = values['be'] || 0;
+    const useBicarb = values['use-bicarb'] || 0;
+    const beRaw = values['be'] || 0;
+    const hco3 = values['hco3'] || 0;
+
+    // Calculate BE: use HCO3-24 if toggle is on, otherwise use direct BE input
+    const be = useBicarb && hco3 > 0 ? hco3 - 24 : beRaw;
+    const beSource = useBicarb && hco3 > 0 ? `(calculated: ${hco3} − 24 = ${be})` : '(from ABG)';
 
     if (na <= 0 || cl <= 0) {
       return { value: '--', label: 'Enter values', description: 'Enter at minimum Na and Cl to begin analysis.', colorVar: '--color-text-muted' };
@@ -2566,7 +2574,7 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
         `Na−Cl effect: ${na}−${cl}−35 = ${naClEffect > 0 ? '+' : ''}${naClEffect} (${naClLabel})\n` +
         `Lactate effect: 1−${lactate} = ${lactateEffect > 0 ? '+' : ''}${lactateEffect} (${lacLabel})\n` +
         `Albumin effect: 2.5×(4.2−${albumin}) = ${albuminEffect > 0 ? '+' : ''}${albuminEffect} (${albLabel})\n` +
-        `Base Excess: ${be > 0 ? '+' : ''}${be}\n\n` +
+        `Base Excess: ${be > 0 ? '+' : ''}${be} ${beSource}\n\n` +
         `SIG = BE − (Na-Cl effect) − (Lac effect) − (Alb effect)\n` +
         `SIG = ${be} − (${naClEffect > 0 ? '+' : ''}${naClEffect}) − (${lactateEffect > 0 ? '+' : ''}${lactateEffect}) − (${albuminEffect > 0 ? '+' : ''}${albuminEffect}) = ${sig}\n\n` +
         `${sigInterpretation}${lactateDifferential}`,
