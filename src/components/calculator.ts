@@ -2475,7 +2475,6 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
     { name: 'lactate', label: 'Lactate', type: 'number', points: 0, valueIsPoints: true, unit: 'mmol/L', description: 'Elevated? See lactic acidosis differential below' },
     { name: 'albumin', label: 'Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL', description: 'Normal ~4.0. Low albumin masks anion gap' },
     { name: 'be', label: 'Base Excess', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', allowNegative: true, description: 'From ABG (can be negative, e.g. -12). If unavailable: BE ≈ HCO3 − 24' },
-    { name: 'ethanol', label: 'Ethanol Level (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'For osmolar gap context. Does not affect SIG directly' },
   ],
   results: [],
   thresholdNote: 'SIG > 2: unmeasured anions. SIG ≤ 2: explained by Na-Cl, lactate, albumin. SIG < −2: unmeasured cations.',
@@ -2490,7 +2489,6 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
     const lactate = values['lactate'] || 0;
     const albumin = values['albumin'] || 0;
     const be = values['be'] || 0;
-    const ethanol = values['ethanol'] || 0;
 
     if (na <= 0 || cl <= 0) {
       return { value: '--', label: 'Enter values', description: 'Enter at minimum Na and Cl to begin analysis.', colorVar: '--color-text-muted' };
@@ -2500,9 +2498,6 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
     const lactateEffect = 1 - lactate;
     const albuminEffect = albumin > 0 ? Math.round(2.5 * (4.2 - albumin) * 10) / 10 : 0;
     const sig = Math.round((be - naClEffect - lactateEffect - albuminEffect) * 10) / 10;
-
-    // Calculate expected osmolar contribution from ethanol if provided
-    const ethanolOsmContribution = ethanol > 0 ? Math.round(ethanol / 4.6 * 10) / 10 : 0;
 
     let label: string;
     let colorVar: string;
@@ -2564,16 +2559,6 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
         `• Cyanide, hydrogen sulfide`;
     }
 
-    // Ethanol note if provided
-    let ethanolNote = '';
-    if (ethanol > 0) {
-      ethanolNote = `\n\nEthanol ${ethanol} mg/dL contributes ~${ethanolOsmContribution} mOsm/kg to osmolar gap.\n` +
-        `Note: Ethanol does NOT produce anion gap acidosis directly, but:\n` +
-        `• Can cause lactic acidosis (NAD+/NADH shift)\n` +
-        `• Alcoholic ketoacidosis (AKA) produces BHB\n` +
-        `• Masks toxic alcohol ingestion on osmolar gap`;
-    }
-
     return {
       value: `SIG: ${sig}`,
       label,
@@ -2584,7 +2569,7 @@ const STEWART_SIG_CALCULATOR: CalculatorDefinition = {
         `Base Excess: ${be > 0 ? '+' : ''}${be}\n\n` +
         `SIG = BE − (Na-Cl effect) − (Lac effect) − (Alb effect)\n` +
         `SIG = ${be} − (${naClEffect > 0 ? '+' : ''}${naClEffect}) − (${lactateEffect > 0 ? '+' : ''}${lactateEffect}) − (${albuminEffect > 0 ? '+' : ''}${albuminEffect}) = ${sig}\n\n` +
-        `${sigInterpretation}${lactateDifferential}${ethanolNote}`,
+        `${sigInterpretation}${lactateDifferential}`,
       colorVar,
     };
   },
