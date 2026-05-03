@@ -2026,11 +2026,7 @@ const TOX_ALC_WHICH_CALCULATOR = {
         const noAcidosis = values['no-acidosis'] || 0;
         const icuDrip = values['icu-drip'] || 0;
         const lactic = values['lactic'] || 0;
-        // Score each alcohol
-        const methanolScore = visual * 10;
-        const egScore = renal * 8 + hypoca * 8 + crystals * 10;
-        const ipaScore = (ketones && noAcidosis) ? 10 : 0;
-        const pgScore = (icuDrip && lactic) ? 10 : 0;
+        // Decision logic uses raw findings directly (scores removed - unused)
         let likely;
         let color;
         let details;
@@ -2284,15 +2280,17 @@ const STEWART_SIG_CALCULATOR = {
     fields: [
         { name: 'sodium', label: 'Sodium (Na+)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
         { name: 'chloride', label: 'Chloride (Cl−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
-        { name: 'lactate', label: 'Lactate', type: 'number', points: 0, valueIsPoints: true, unit: 'mmol/L' },
-        { name: 'albumin', label: 'Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL' },
-        { name: 'be', label: 'Base Excess (or enter 0)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', description: 'Standard base excess from ABG. If unavailable, calculate as 24.2 − HCO3' },
+        { name: 'lactate', label: 'Lactate', type: 'number', points: 0, valueIsPoints: true, unit: 'mmol/L', description: 'Elevated? See lactic acidosis differential below' },
+        { name: 'albumin', label: 'Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL', description: 'Normal ~4.0. Low albumin masks anion gap' },
+        { name: 'be', label: 'Base Excess', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L', allowNegative: true, description: 'From ABG (can be negative, e.g. -12). If unavailable: BE ≈ HCO3 − 24' },
+        { name: 'ethanol', label: 'Ethanol Level (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'For osmolar gap context. Does not affect SIG directly' },
     ],
     results: [],
-    thresholdNote: 'SIG (Other Ions) > 2: unmeasured anions present. SIG ≤ 2: disturbance explained by Na-Cl, lactate, and albumin. If BE unavailable: use 24.2 − HCO3 as approximate base deficit (enter as negative number).',
+    thresholdNote: 'SIG > 2: unmeasured anions. SIG ≤ 2: explained by Na-Cl, lactate, albumin. SIG < −2: unmeasured cations.',
     citations: [
         'Story DA. Stewart acid-base: a simplified bedside approach. Anesth Analg. 2016;123(2):511-515.',
         'Stewart PA. Independent and dependent variables of acid-base control. Respir Physiol. 1978;33(1):9-26.',
+        'Kraut JA, Madias NE. Lactic acidosis. N Engl J Med. 2014;371(24):2309-2319.',
     ],
     computeResult: (values) => {
         const na = values['sodium'] || 0;
@@ -2300,6 +2298,7 @@ const STEWART_SIG_CALCULATOR = {
         const lactate = values['lactate'] || 0;
         const albumin = values['albumin'] || 0;
         const be = values['be'] || 0;
+        const ethanol = values['ethanol'] || 0;
         if (na <= 0 || cl <= 0) {
             return { value: '--', label: 'Enter values', description: 'Enter at minimum Na and Cl to begin analysis.', colorVar: '--color-text-muted' };
         }
@@ -2307,6 +2306,8 @@ const STEWART_SIG_CALCULATOR = {
         const lactateEffect = 1 - lactate;
         const albuminEffect = albumin > 0 ? Math.round(2.5 * (4.2 - albumin) * 10) / 10 : 0;
         const sig = Math.round((be - naClEffect - lactateEffect - albuminEffect) * 10) / 10;
+        // Calculate expected osmolar contribution from ethanol if provided
+        const ethanolOsmContribution = ethanol > 0 ? Math.round(ethanol / 4.6 * 10) / 10 : 0;
         let label;
         let colorVar;
         let sigInterpretation;
@@ -2318,20 +2319,73 @@ const STEWART_SIG_CALCULATOR = {
         else if (sig > 2) {
             label = 'Unmeasured Anions Present';
             colorVar = '--color-danger';
-            sigInterpretation = 'SIG > 2: unmeasured anions (ketoacids, uremia, toxic alcohols, salicylates, D-lactate). Check BHB and osmolar gap.';
+            sigInterpretation = `SIG > 2: Unmeasured anions detected.\n\n` +
+                `DIFFERENTIAL FOR ELEVATED SIG:\n` +
+                `• Ketoacids (DKA, AKA, starvation) - check BHB\n` +
+                `• Uremia (renal failure) - check BUN/Cr\n` +
+                `• Toxic alcohols (methanol, ethylene glycol) - check osmolar gap\n` +
+                `• Salicylates - check salicylate level\n` +
+                `• D-lactate (short gut, propylene glycol) - standard lactate misses this\n` +
+                `• Pyroglutamic acid (chronic acetaminophen + malnutrition)\n` +
+                `• 5-oxoproline (acetaminophen metabolite)\n\n` +
+                `Next: Check BHB + osmolar gap to narrow differential.`;
         }
         else {
             label = 'Unmeasured Cations';
             colorVar = '--color-warning';
-            sigInterpretation = 'SIG < −2: unmeasured cations (hypercalcemia, hyperMg, myeloma proteins, lithium, bromide interference).';
+            sigInterpretation = `SIG < −2: Unmeasured cations detected.\n\n` +
+                `DIFFERENTIAL FOR NEGATIVE SIG:\n` +
+                `• Hypercalcemia\n` +
+                `• Hypermagnesemia\n` +
+                `• Lithium toxicity\n` +
+                `• Myeloma proteins (paraproteins)\n` +
+                `• Bromide interference (lab artifact)\n` +
+                `• TRIS buffer (post-cardiac surgery)`;
         }
         const naClLabel = naClEffect < 0 ? 'acidosis' : naClEffect > 0 ? 'alkalosis' : 'neutral';
         const lacLabel = lactateEffect < 0 ? 'acidosis' : 'neutral';
         const albLabel = albuminEffect > 0 ? 'alkalosis (hypoalbuminemia)' : albuminEffect < 0 ? 'acidosis (hyperalbuminemia)' : 'neutral';
+        // Build lactic acidosis differential if lactate elevated
+        let lactateDifferential = '';
+        if (lactate > 2) {
+            lactateDifferential = `\n\n━━━━━━━━━━━━━━━━━━━━━━\nLACTIC ACIDOSIS DIFFERENTIAL\n━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `TYPE A (Hypoperfusion):\n` +
+                `• Shock (septic, cardiogenic, hypovolemic)\n` +
+                `• Cardiac arrest / severe hypoxia\n` +
+                `• Mesenteric ischemia\n` +
+                `• Limb ischemia / compartment syndrome\n` +
+                `• Severe anemia / CO poisoning\n\n` +
+                `TYPE B (No Hypoperfusion):\n` +
+                `• Seizures / severe exertion\n` +
+                `• Metformin (esp with renal failure)\n` +
+                `• Propofol infusion syndrome\n` +
+                `• Thiamine deficiency\n` +
+                `• Malignancy (Warburg effect)\n` +
+                `• Linezolid, NRTIs, propylene glycol\n` +
+                `• Liver failure (decreased clearance)\n` +
+                `• Beta-agonists (epinephrine, albuterol)\n` +
+                `• Cyanide, hydrogen sulfide`;
+        }
+        // Ethanol note if provided
+        let ethanolNote = '';
+        if (ethanol > 0) {
+            ethanolNote = `\n\nEthanol ${ethanol} mg/dL contributes ~${ethanolOsmContribution} mOsm/kg to osmolar gap.\n` +
+                `Note: Ethanol does NOT produce anion gap acidosis directly, but:\n` +
+                `• Can cause lactic acidosis (NAD+/NADH shift)\n` +
+                `• Alcoholic ketoacidosis (AKA) produces BHB\n` +
+                `• Masks toxic alcohol ingestion on osmolar gap`;
+        }
         return {
             value: `SIG: ${sig}`,
             label,
-            description: `Na−Cl effect: ${na}−${cl}−35 = ${naClEffect > 0 ? '+' : ''}${naClEffect} (${naClLabel})\nLactate effect: 1−${lactate} = ${lactateEffect > 0 ? '+' : ''}${lactateEffect} (${lacLabel})\nAlbumin effect: 2.5×(4.2−${albumin}) = ${albuminEffect > 0 ? '+' : ''}${albuminEffect} (${albLabel})\nBase Excess: ${be > 0 ? '+' : ''}${be}\n\nSIG (Other Ions) = ${be} − (${naClEffect > 0 ? '+' : ''}${naClEffect}) − (${lactateEffect > 0 ? '+' : ''}${lactateEffect}) − (${albuminEffect > 0 ? '+' : ''}${albuminEffect}) = ${sig}\n\n${sigInterpretation}`,
+            description: `━━━ STEWART DECOMPOSITION ━━━\n` +
+                `Na−Cl effect: ${na}−${cl}−35 = ${naClEffect > 0 ? '+' : ''}${naClEffect} (${naClLabel})\n` +
+                `Lactate effect: 1−${lactate} = ${lactateEffect > 0 ? '+' : ''}${lactateEffect} (${lacLabel})\n` +
+                `Albumin effect: 2.5×(4.2−${albumin}) = ${albuminEffect > 0 ? '+' : ''}${albuminEffect} (${albLabel})\n` +
+                `Base Excess: ${be > 0 ? '+' : ''}${be}\n\n` +
+                `SIG = BE − (Na-Cl effect) − (Lac effect) − (Alb effect)\n` +
+                `SIG = ${be} − (${naClEffect > 0 ? '+' : ''}${naClEffect}) − (${lactateEffect > 0 ? '+' : ''}${lactateEffect}) − (${albuminEffect > 0 ? '+' : ''}${albuminEffect}) = ${sig}\n\n` +
+                `${sigInterpretation}${lactateDifferential}${ethanolNote}`,
             colorVar,
         };
     },
@@ -33451,10 +33505,13 @@ function renderNumberField(container, field, values, onChange) {
     input.className = 'calculator-number-input';
     // Use decimal keyboard for fields that accept fractional values (weight, dose/kg, etc.)
     input.inputMode = field.valueIsPoints ? 'decimal' : 'numeric';
-    input.min = '0';
+    // Allow negative values for fields like base excess
+    if (!field.allowNegative) {
+        input.min = '0';
+    }
     input.max = field.valueIsPoints ? '9999' : '150';
     input.step = field.valueIsPoints ? 'any' : '1';
-    input.placeholder = '0';
+    input.placeholder = field.allowNegative ? '' : '0';
     input.setAttribute('aria-label', field.label);
     input.addEventListener('input', () => {
         const val = field.valueIsPoints ? parseFloat(input.value) : parseInt(input.value, 10);
