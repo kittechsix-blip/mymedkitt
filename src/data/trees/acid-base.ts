@@ -331,7 +331,7 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     module: 3,
     title: 'Mixed: Metabolic + Respiratory Acidosis',
     body: 'The measured pCO2 exceeds the predicted range from Winter\'s formula.\n\n**Both metabolic AND respiratory processes are contributing to acidemia.** This is a particularly dangerous combination — the pH drops further than either process alone would cause.\n\n**Common scenarios:**\n• COPD exacerbation + sepsis\n• Sedation/opioid use + DKA\n• Neuromuscular disease + renal failure\n• Post-arrest (metabolic acidosis + hypoventilation)',
-    recommendation: 'Address both processes urgently. Maximize ventilatory support. Treat the metabolic cause. Consider sodium bicarbonate only if pH < 6.9 with AKI.',
+    recommendation: 'Address both processes urgently. Maximize ventilatory support. Treat the metabolic cause. Consider sodium bicarbonate if pH ≤ 7.20 with AKI (BICAR-ICU criteria).',
     confidence: 'recommended',
     citation: [4, 12, 17],
   },
@@ -581,7 +581,7 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Treatment Considerations',
-    body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17]\n• pH < 6.9 with AKI (BICAR-ICU: NNT 6)\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (unless pH < 6.9)\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
+    body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17]\n• pH ≤ 7.20 with moderate-to-severe AKI (BICAR-ICU: NNT 6 for 28-day mortality)\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**Note:** BICAR-ICU enrolled pH ≤ 7.20 + AKIN 2-3. The pH < 6.9 threshold is ADA guidance for DKA specifically.\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (unless pH < 6.9 per ADA)\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
     calculatorLinks: [
       { id: 'anion-gap', label: 'Anion Gap' },
       { id: 'stewart-sig', label: 'Stewart SID/SIG' },
@@ -589,7 +589,7 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     citation: [1, 2, 3, 12, 13, 17],
     next: 'ab-disposition',
 
-    summary: 'Bicarb for pH<6.9 with AKI, TCA OD, salicylate tox, severe hyperK — NOT routine in DKA or lactic acidosis',
+    summary: 'Bicarb for pH≤7.20 with AKI (BICAR-ICU), TCA OD, salicylate tox, severe hyperK — NOT routine in DKA or lactic acidosis',
     safetyLevel: 'warning',
   },
 
@@ -649,7 +649,7 @@ export const ACID_BASE_CRITICAL_ACTIONS = [
   { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-osmolar-gap' },
   { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-uag' },
   { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <40 = acidosis, >40 = alkalosis', nodeId: 'ab-stewart' },
-  { text: 'Treat underlying cause, NOT the pH (bicarbonate rarely indicated except DKA, severe metabolic acidosis pH <7.1)', nodeId: 'ab-treatment' },
+  { text: 'Treat underlying cause, NOT the pH (bicarbonate indicated if pH ≤7.20 + AKI per BICAR-ICU, or pH <6.9 in DKA)', nodeId: 'ab-treatment' },
   { text: 'VBG sufficient for most ED acid-base assessment (pH 0.04 lower than ABG)', nodeId: 'ab-start' },
   { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed' },
 ];

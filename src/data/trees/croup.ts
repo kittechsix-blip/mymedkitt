@@ -12,7 +12,7 @@ export const CROUP_CRITICAL_ACTIONS = [
   { text: 'Observe minimum 2 hours after last epinephrine dose for rebound stridor', nodeId: 'croup-epi-obs' },
   { text: 'Use ETT 0.5-1.0 size smaller than age-predicted if intubation needed (subglottic narrowing)', nodeId: 'croup-failure-tx' },
   { text: 'Dexamethasone 0.15 mg/kg PO is non-inferior to 0.6 mg/kg dose (Parker RCT 2019)', nodeId: 'croup-mild-tx' },
-  { text: 'Prednisolone 1 mg/kg PO is non-inferior alternative if dexamethasone unavailable', nodeId: 'croup-mild-tx' },
+  { text: 'Prednisolone 1 mg/kg PO: non-inferior symptom relief BUT 29% vs 7% re-presentation rate (use dex if available)', nodeId: 'croup-mild-tx' },
   { text: 'Repeated epinephrine doses may prevent intubation - do NOT limit to single dose', nodeId: 'croup-repeat-epi' },
   { text: 'Humidified air and cool mist have NO evidence of benefit - focus on steroids + epinephrine', nodeId: 'croup-discharge' },
 ];
@@ -79,7 +79,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Mild Croup — Glucocorticoid Only',
-    body: '**Single dose glucocorticoid is standard of care for ALL severities of croup.**\n\n**First-line:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO** (max 16 mg) \u2014 single dose\n\n**Non-inferior alternatives:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.15 mg/kg PO** \u2014 lower dose equally effective [3][6]\n\u2022 [Prednisolone](#/drug/prednisolone) **1 mg/kg PO** \u2014 non-inferior for symptom relief and 7-day outcomes [6]\n\n**If unable to tolerate oral:**\n\u2022 [Budesonide](#/drug/budesonide-neb) **2 mg nebulized** \u2014 effective alternative [5][9]\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM**\n\n**NNT = 7** to prevent one return visit. Reduces return visits/readmissions by ~50%. Safe single-dose profile.',
+    body: '**Single dose glucocorticoid is standard of care for ALL severities of croup.**\n\n**First-line:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO** (max 16 mg) \u2014 single dose\n\n**Non-inferior alternatives:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.15 mg/kg PO** \u2014 lower dose equally effective [3][6]\n\u2022 [Prednisolone](#/drug/prednisolone) **1 mg/kg PO** \u2014 non-inferior symptom relief, BUT higher re-presentation rate (29% vs 7% with dex) [6]\n\n**If unable to tolerate oral:**\n\u2022 [Budesonide](#/drug/budesonide-neb) **2 mg nebulized** \u2014 effective alternative [5][9]\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM**\n\n**NNT = 7** to prevent one return visit. Reduces return visits/readmissions by ~50%. Safe single-dose profile.',
     citation: [1, 2, 3, 5, 6, 8],
     next: 'croup-mild-obs',
   
@@ -325,7 +325,7 @@ export const CROUP_CITATIONS: Citation[] = [
 
 export const CROUP_CLINICAL_NOTES: string[] = [
   'Single-dose [Dexamethasone](#/drug/dexamethasone/pediatric croup) 0.6 mg/kg PO is standard of care for ALL severities of croup \u2014 reduces return visits by ~50% (NNT 7).',
-  'Low-dose [Dexamethasone](#/drug/dexamethasone/pediatric croup) (0.15 mg/kg) and [Prednisolone](#/drug/prednisolone/pediatric croup) (1 mg/kg) are non-inferior alternatives based on a 1,252-patient RCT.',
+  'Low-dose [Dexamethasone](#/drug/dexamethasone/pediatric croup) (0.15 mg/kg) is non-inferior. [Prednisolone](#/drug/prednisolone/pediatric croup) (1 mg/kg) has similar symptom relief BUT higher re-presentation rate (29% vs 7%).',
   'Nebulized epinephrine provides rapid but transient relief \u2014 requires minimum 2-hour observation for potential rebound.',
   'Humidified air and cool mist have NO evidence of benefit. However, 30-minute outdoor cold air exposure (<10\u00b0C) showed benefit in one RCT.',
   'Use ETT 0.5-1.0 size smaller than age-predicted if intubation needed \u2014 subglottic narrowing is the hallmark of croup.',

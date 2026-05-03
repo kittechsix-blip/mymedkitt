@@ -32,7 +32,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Xylazine Toxicity — Initial Assessment',
-    body: '**Xylazine Quick Reference** — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n• Now detected in **>90% of fentanyl supply** in some cities [1][2]\n\n**The epidemic:**\n• 2015: <1% of overdose deaths involved xylazine\n• 2020: 7% nationally, **26% in Philadelphia**\n• 2022: CDC Health Alert Network advisory issued [1]\n\n**Critical point:** Xylazine is **NOT reversed by naloxone** — it is not an opioid. However, **still give naloxone** because 95% of xylazine exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
+    body: '**Xylazine Quick Reference** — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n\n**The epidemic (2025 update):**\n• **MEDETOMIDINE now dominant** in some markets — detected in **72% of Philadelphia samples** (Oct-Dec 2024), while xylazine dropped from 98% to 31% [CDC MMWR April 2025]\n• Medetomidine is **10x more potent** than xylazine — expect more severe sedation and bradycardia\n• Same management principles apply (alpha-2 agonist toxidrome)\n\n**Critical point:** These drugs are **NOT reversed by naloxone** — they are not opioids. However, **still give naloxone** because 95% of exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
@@ -44,7 +44,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
       { label: 'Withdrawal symptoms', description: 'Restless, anxious, tachycardic — recent cessation of use', next: 'xyl-withdrawal' },
     ],
 
-    summary: 'Alpha-2 agonist NOT reversed by naloxone — still give naloxone because 95% involve fentanyl co-ingestion',
+    summary: 'Alpha-2 agonist NOT reversed by naloxone — medetomidine now 72% of Philly supply (10x more potent than xylazine)',
     safetyLevel: 'critical',
   },
   {
@@ -364,11 +364,11 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Xylazine Withdrawal',
-    body: '**Timeline:** Symptoms begin **8-24 hours** after last use\n\n**Tranq vs Opioid Withdrawal Comparison**\n\n**Xylazine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
+    body: '**Timeline:** Symptoms begin **4-6 hours** after last use (faster than opioid withdrawal)\n\n**Tranq vs Opioid Withdrawal Comparison**\n\n**Xylazine/medetomidine withdrawal symptoms (NOT reversed by opioids):**\n• Anxiety, irritability, restlessness, dysphoria\n• Tachycardia, diaphoresis, hypertension\n• **No GI symptoms** (unlike opioid withdrawal)\n\n**Key difference from opioid withdrawal:**\n• Buprenorphine/methadone do NOT treat xylazine withdrawal\n• Must address BOTH if patient uses tranq dope [1][5]',
     citation: [1, 5],
     next: 'xyl-withdrawal-tx',
 
-    summary: 'Symptoms begin 8-24h after last use; no GI symptoms unlike opioid withdrawal; buprenorphine does NOT treat it',
+    summary: 'Symptoms begin 4-6h after last use (faster than opioids); no GI symptoms; buprenorphine does NOT treat it',
   },
   {
     id: 'xyl-withdrawal-comparison',

@@ -283,12 +283,12 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Empiric Antibiotics - MSSA Coverage',
-    body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n[Nafcillin](#/drug/nafcillin/pediatric MSSA osteomyelitis) 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
+    body: '**First-line MSSA regimen:** [1,3]\n\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 40 mg/kg IV q8h (max 6g/day)\n- Excellent MSSA coverage\n- Good bone penetration\n- Low risk of resistance induction\n\n**Alternative:**\n[Nafcillin](#/drug/nafcillin/pediatric MSSA osteomyelitis) 50 mg/kg IV q6h\n- More narrow spectrum\n- Higher rates of phlebitis\n\n**Transition to oral:**\n[Cephalexin](#/drug/cephalexin/osteomyelitis) 25-30 mg/kg PO q8h\n- Excellent bioavailability\n- First-line for oral step-down\n\n**If cultures return MRSA:** Escalate to vancomycin or clindamycin based on sensitivities. [1]',
     citation: [1, 3],
     treatment: {
       firstLine: {
         drug: 'Cefazolin',
-        dose: '33 mg/kg',
+        dose: '40 mg/kg',
         route: 'IV',
         frequency: 'q8h',
         duration: 'Until clinical improvement, then transition to oral',
@@ -311,12 +311,12 @@ export const PEDS_OSTEOMYELITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Empiric Antibiotics - Age <4 Years',
-    body: '***Kingella kingae* considerations:** [5,9]\n\n*K. kingae* is the **most common pathogen** in children 6 months - 4 years in many regions. [5]\n\n**Characteristics:**\n- Fastidious organism - standard cultures often negative\n- Requires PCR or enriched culture techniques\n- Mild clinical presentation (low-grade fever, modest CRP)\n- Excellent prognosis with appropriate treatment [5,9]\n\n**K. kingae antibiotic sensitivities:**\n- Susceptible to: Beta-lactams, aminoglycosides, fluoroquinolones\n- **Resistant to:** Vancomycin, clindamycin [5,9]\n\n**First-line regimen:**\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 33 mg/kg IV q8h\n- Covers both *K. kingae* AND *S. aureus*\n- Do NOT use clindamycin alone in this age group\n\n**Oral step-down:**\n[Amoxicillin-clavulanate](#/drug/amoxicillin-clavulanate/osteomyelitis) or cephalexin',
+    body: '***Kingella kingae* considerations:** [5,9]\n\n*K. kingae* is the **most common pathogen** in children 6 months - 4 years in many regions. [5]\n\n**Characteristics:**\n- Fastidious organism - standard cultures often negative\n- Requires PCR or enriched culture techniques\n- Mild clinical presentation (low-grade fever, modest CRP)\n- Excellent prognosis with appropriate treatment [5,9]\n\n**K. kingae antibiotic sensitivities:**\n- Susceptible to: Beta-lactams, aminoglycosides, fluoroquinolones\n- **Resistant to:** Vancomycin, clindamycin [5,9]\n\n**First-line regimen:**\n[Cefazolin](#/drug/cefazolin/osteomyelitis) 40 mg/kg IV q8h\n- Covers both *K. kingae* AND *S. aureus*\n- Do NOT use clindamycin alone in this age group\n\n**Oral step-down:**\n[Amoxicillin-clavulanate](#/drug/amoxicillin-clavulanate/osteomyelitis) or cephalexin',
     citation: [5, 9],
     treatment: {
       firstLine: {
         drug: 'Cefazolin',
-        dose: '33 mg/kg',
+        dose: '40 mg/kg',
         route: 'IV',
         frequency: 'q8h',
         duration: 'Until improvement, then oral transition',
