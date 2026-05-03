@@ -1825,22 +1825,33 @@ const WINTERS_FORMULA_CALCULATOR = {
     description: "Predicts the expected pCO2 for a given bicarbonate level in metabolic acidosis. Expected pCO2 = 1.5 × [HCO3] + 8 ± 2. Compares actual pCO2 to detect concurrent respiratory disturbances.",
     fields: [
         { name: 'hco3', label: 'Bicarbonate (HCO3−)', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
-        { name: 'pco2', label: 'Actual pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+        { name: 'pco2', label: 'Actual pCO2 (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
     ],
     results: [],
-    thresholdNote: "If actual pCO2 is within the expected range, respiratory compensation is appropriate. If higher → concurrent respiratory acidosis. If lower → concurrent respiratory alkalosis.",
+    thresholdNote: "Enter HCO3 to get expected pCO2. Add actual pCO2 to check for concurrent respiratory disturbance.",
     citations: [
         'Schwartz WB, Relman AS. A critique of the parameters used in the evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.',
     ],
     computeResult: (values) => {
         const hco3 = values['hco3'] || 0;
         const pco2 = values['pco2'] || 0;
-        if (hco3 <= 0 || pco2 <= 0) {
-            return { value: '--', label: 'Enter values', description: 'Enter bicarbonate and actual pCO2.', colorVar: '--color-text-muted' };
+        // Only require HCO3 to show expected range
+        if (hco3 <= 0) {
+            return { value: '--', label: 'Enter HCO3', description: 'Enter bicarbonate to calculate expected pCO2.', colorVar: '--color-text-muted' };
         }
         const expectedPco2 = 1.5 * hco3 + 8;
         const low = Math.round((expectedPco2 - 2) * 10) / 10;
         const high = Math.round((expectedPco2 + 2) * 10) / 10;
+        // If no actual pCO2 entered, just show the expected range
+        if (pco2 <= 0) {
+            return {
+                value: `${low}–${high} mmHg`,
+                label: 'Expected pCO2 Range',
+                description: `**FORMULA:** 1.5 × ${hco3} + 8 ± 2\n\n**EXPECTED PCO2:** ${Math.round(expectedPco2 * 10) / 10} mmHg\n\n**EXPECTED RANGE:** ${low}–${high} mmHg\n\n*Enter actual pCO2 to check for concurrent respiratory disturbance.*`,
+                colorVar: '--color-primary',
+            };
+        }
+        // With actual pCO2, provide interpretation
         let label;
         let colorVar;
         let interpretation;
