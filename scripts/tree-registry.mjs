@@ -220,4 +220,6 @@ export const TREE_REGISTRY = {
   'pid':                { prefix: 'PID',                 entryNodeId: 'pid-start',          categoryId: 'infectious-disease' },
   'hypotension-workup': { prefix: 'HYPOTENSION_WORKUP',  entryNodeId: 'hypo-start',         categoryId: 'critical-care' },
   'peripheral-neuropathy': { prefix: 'PERIPHERAL_NEUROPATHY', entryNodeId: 'pn-start',      categoryId: 'neurology' },
+  'ankle-fractures': { prefix: 'ANKLE_FRACTURES', entryNodeId: 'af-start',           categoryId: 'orthopedics' },
+  'hand-infections': { prefix: 'HAND_INFECTIONS', entryNodeId: 'hi-start',           categoryId: 'orthopedics' },
 };

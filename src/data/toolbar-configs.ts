@@ -1453,6 +1453,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ivig-plex', label: 'IVIG/PLEX', icon: '💉', action: 'calculator', target: 'gbs-ivig-plex' },
     { id: 'mimics', label: 'Mimics', icon: '🔍', action: 'jump', target: 'pn-gbs-pathway' },
   ],
+  'ankle-fractures': [
+    { id: 'ottawa', label: 'Ottawa', icon: '📋', action: 'overlay', target: 'af-steps' },
+    { id: 'weber', label: 'Weber', icon: '🦴', action: 'jump', target: 'af-xray-findings' },
+    { id: 'syndesmosis', label: 'Syndesmosis', icon: '🔗', action: 'jump', target: 'af-stress-test' },
+    { id: 'maisonneuve', label: 'Maisonneuve', icon: '⚠️', action: 'jump', target: 'af-maisonneuve' },
+    { id: 'splint', label: 'Splint', icon: '🩹', action: 'jump', target: 'af-disposition-nonop' },
+  ],
+  'hand-infections': [
+    { id: 'kanavel', label: 'Kanavel', icon: '✋', action: 'jump', target: 'hi-fts' },
+    { id: 'felon', label: 'Felon', icon: '👆', action: 'jump', target: 'hi-felon' },
+    { id: 'fight-bite', label: 'Fight Bite', icon: '👊', action: 'jump', target: 'hi-fight-bite' },
+    { id: 'antibiotics', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'hi-antibiotics' },
+    { id: 'whitlow', label: 'Whitlow', icon: '🦠', action: 'jump', target: 'hi-whitlow' },
+  ],
 };
 
 // Stop button appended automatically to every consult

@@ -1063,6 +1063,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/peripheral-neuropathy.js');
       return { nodes: m.PERIPHERAL_NEUROPATHY_NODES, entryNodeId: 'pn-start', categoryId: 'neurology', moduleLabels: m.PERIPHERAL_NEUROPATHY_MODULE_LABELS, citations: m.PERIPHERAL_NEUROPATHY_CITATIONS };
     },
+    'ankle-fractures': async () => {
+      const m = await import('../data/trees/ankle-fractures.js');
+      return { nodes: m.ANKLE_FRACTURES_NODES, entryNodeId: 'af-start', categoryId: 'orthopedics', moduleLabels: m.ANKLE_FRACTURES_MODULE_LABELS, citations: m.ANKLE_FRACTURES_CITATIONS };
+    },
+    'hand-infections': async () => {
+      const m = await import('../data/trees/hand-infections.js');
+      return { nodes: m.HAND_INFECTIONS_NODES, entryNodeId: 'hi-start', categoryId: 'orthopedics', moduleLabels: m.HAND_INFECTIONS_MODULE_LABELS, citations: m.HAND_INFECTIONS_CITATIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

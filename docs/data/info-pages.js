@@ -17902,6 +17902,40 @@ const ACUTE_PANCREATITIS_SUMMARY = {
 // -------------------------------------------------------------------
 // Peripheral Neuropathy
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// Ankle Fractures
+// -------------------------------------------------------------------
+const AF_STEPS_SUMMARY = {
+    id: 'af-steps',
+    title: 'Ankle Fractures — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Ottawa Ankle Rules](#/node/af-start)**\n• Bone tenderness at posterior 6cm of medial/lateral malleolus?\n• Bone tenderness at base of 5th metatarsal or navicular?\n• Inability to bear weight (4 steps) immediately and in ED?\n→ Any yes = X-ray indicated\n\n**Step 2: [X-Ray Interpretation](#/node/af-xray-findings)**\n• Weber A: Below syndesmosis (stable)\n• Weber B: At syndesmosis level (assess stability)\n• Weber C: Above syndesmosis (unstable)\n• Check for Maisonneuve (proximal fib fracture)\n\n**Step 3: [Assess Syndesmosis](#/node/af-stress-test)**\n• External rotation stress test\n• Medial clear space >4mm = unstable\n• Tibiofibular overlap <10mm = widening\n\n**Step 4: [Disposition](#/node/af-operative)**\n• Operative: Bi/trimalleolar, Weber C, unstable syndesmosis, open, talar shift\n• Non-operative: Weber A, stable Weber B, isolated medial malleolus\n\n**Step 5: [Splinting](#/node/af-disposition-nonop)**\n• Posterior short leg splint\n• Non-weight bearing\n• Ortho follow-up in 5-7 days\n• Return precautions: increasing pain, numbness, color change',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stiell IG, et al. Implementation of the Ottawa Ankle Rules. JAMA. 1994.' },
+        { num: 2, text: 'McConnell T, et al. Ankle Fractures: Weber Classification and Treatment. J Bone Joint Surg. 2017.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Hand Infections
+// -------------------------------------------------------------------
+const HI_STEPS_SUMMARY = {
+    id: 'hi-steps',
+    title: 'Hand Infections — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Identify Infection Type](#/node/hi-start)**\n• Felon: Pulp space abscess, tense fingertip\n• Paronychia: Lateral nail fold infection\n• Flexor tenosynovitis: Kanavel signs\n• Fight bite: MCP wound from punch\n• Deep space: Thenar, midpalmar, web space\n\n**Step 2: [Kanavel Signs (FTS)](#/node/hi-fts)**\n• Fusiform swelling of finger\n• Finger held in flexion\n• Tenderness along flexor sheath\n• Pain with passive extension\n→ 3+ signs = FTS until proven otherwise\n\n**Step 3: [Fight Bite Evaluation](#/node/hi-fight-bite)**\n• X-ray for foreign body, fracture, joint involvement\n• Explore wound at full extension AND flexion\n• Assume joint penetration until proven otherwise\n• Augmentin OR Unasyn for polymicrobial (Eikenella)\n\n**Step 4: [Differentiate from Herpetic Whitlow](#/node/hi-whitlow)**\n• Vesicles with clear fluid → whitlow\n• Do NOT incise (viral, will spread)\n• Treat with antivirals if immunocompromised\n\n**Step 5: [Antibiotics](#/node/hi-antibiotics)**\n• Simple: Keflex or Augmentin\n• MRSA risk: Add TMP-SMX or doxycycline\n• Severe/FTS/Fight bite: IV Unasyn or Zosyn\n\n**Step 6: [Disposition](#/node/hi-operative)**\n• Operative: FTS, fight bite with joint involvement, deep space, failed outpatient\n• Outpatient: Simple felon/paronychia, early cellulitis\n• Hand surgery consult threshold: low',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kennedy CD, et al. Hand Infections. J Hand Surg Am. 2021.' },
+        { num: 2, text: 'Pang HN, et al. Factors affecting the prognosis of pyogenic flexor tenosynovitis. J Bone Joint Surg Am. 2007.' },
+    ],
+};
 const PN_STEPS_SUMMARY = {
     id: 'pn-steps',
     title: 'Peripheral Neuropathy — Steps',
@@ -18486,6 +18520,10 @@ export const INFO_PAGES = {
     'ami-ct-findings': AMI_CT_FINDINGS,
     // Peripheral Neuropathy
     'pn-steps': PN_STEPS_SUMMARY,
+    // Ankle Fractures
+    'af-steps': AF_STEPS_SUMMARY,
+    // Hand Infections
+    'hi-steps': HI_STEPS_SUMMARY,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {
