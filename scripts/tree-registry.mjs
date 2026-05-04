@@ -222,4 +222,6 @@ export const TREE_REGISTRY = {
   'peripheral-neuropathy': { prefix: 'PERIPHERAL_NEUROPATHY', entryNodeId: 'pn-start',      categoryId: 'neurology' },
   'ankle-fractures': { prefix: 'ANKLE_FRACTURES', entryNodeId: 'af-start',           categoryId: 'orthopedics' },
   'hand-infections': { prefix: 'HAND_INFECTIONS', entryNodeId: 'hi-start',           categoryId: 'orthopedics' },
+  'neck-trauma': { prefix: 'NECK_TRAUMA', entryNodeId: 'nt-start',             categoryId: 'trauma-surg' },
+  'major-joint-dislocation': { prefix: 'MAJOR_JOINT_DISLOCATION', entryNodeId: 'mjd-start', categoryId: 'orthopedics' },
 };

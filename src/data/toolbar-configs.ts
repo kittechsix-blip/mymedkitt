@@ -1467,6 +1467,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'antibiotics', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'hi-antibiotics' },
     { id: 'whitlow', label: 'Whitlow', icon: '🦠', action: 'jump', target: 'hi-whitlow' },
   ],
+  'neck-trauma': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'nt-steps' },
+    { id: 'zones', label: 'Zones', icon: '🎯', action: 'jump', target: 'nt-penetrating' },
+    { id: 'hard-signs', label: 'Hard Signs', icon: '🔴', action: 'jump', target: 'nt-hard-signs' },
+    { id: 'bcvi', label: 'BCVI', icon: '🧠', action: 'jump', target: 'nt-bcvi' },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'jump', target: 'nt-airway' },
+  ],
+  'major-joint-dislocation': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'mjd-steps' },
+    { id: 'vascular', label: 'Vascular', icon: '🩸', action: 'jump', target: 'mjd-vascular' },
+    { id: 'hip', label: 'Hip', icon: '🦴', action: 'jump', target: 'mjd-hip-assessment' },
+    { id: 'knee', label: 'Knee', icon: '🦵', action: 'jump', target: 'mjd-knee-assessment' },
+    { id: 'ankle', label: 'Ankle', icon: '🦶', action: 'jump', target: 'mjd-ankle-assessment' },
+  ],
 };
 
 // Stop button appended automatically to every consult

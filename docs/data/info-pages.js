@@ -17949,6 +17949,40 @@ const PN_STEPS_SUMMARY = {
         { num: 1, text: 'Castelli G, et al. Peripheral Neuropathy: Evaluation and Differential Diagnosis. Am Fam Physician. 2020.' },
     ],
 };
+// -------------------------------------------------------------------
+// Neck Trauma
+// -------------------------------------------------------------------
+const NT_STEPS_SUMMARY = {
+    id: 'nt-steps',
+    title: 'Neck Trauma — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Primary Survey](#/node/nt-start)**\n• Airway compromise? Stridor, voice change?\n• Active bleeding or expanding hematoma?\n• Neurologic deficit?\n• Penetrating vs blunt mechanism\n\n**Step 2: [Zone Assessment (Penetrating)](#/node/nt-penetrating)**\n• Zone I: Below cricoid (thoracic outlet)\n• Zone II: Cricoid to mandible angle (most common)\n• Zone III: Above mandible (skull base)\n\n**Step 3: [Hard vs Soft Signs](#/node/nt-hard-signs)**\n• Hard signs = OR immediately\n• Soft signs = CTA workup\n• No signs = CTA for penetrating, selective for blunt\n\n**Step 4: [CTA Interpretation](#/node/nt-cta-results)**\n• Vascular injury → surgery/IR consult\n• Aerodigestive → esophagoscopy/bronchoscopy\n• Negative → observation vs discharge\n\n**Step 5: [BCVI Screening (Blunt)](#/node/nt-bcvi)**\n• Denver/Memphis criteria\n• C-spine fracture, strangulation, high-risk mechanism\n• Antiplatelet if positive\n\n**Step 6: [Disposition](#/node/nt-disposition)**\n• ICU: vascular injury, airway involvement, OR\n• Floor: observation, serial exams\n• Discharge: superficial wound, negative workup',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EAST Practice Management Guidelines: Penetrating Neck Trauma. 2020.' },
+        { num: 2, text: 'Inaba K, et al. WTA Critical Decisions: Penetrating Neck Trauma. J Trauma. 2019.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Major Joint Dislocation
+// -------------------------------------------------------------------
+const MJD_STEPS_SUMMARY = {
+    id: 'mjd-steps',
+    title: 'Major Joint Dislocation — Steps',
+    subtitle: 'ED Evaluation & Reduction',
+    sections: [
+        {
+            body: '**Step 1: [Initial Assessment](#/node/mjd-start)**\n• Document neurovascular status BEFORE reduction\n• Pulses, sensation, motor function\n• Open vs closed injury\n• Associated fractures\n\n**Step 2: [Vascular Check](#/node/mjd-vascular)**\n• Palpate distal pulses\n• Calculate ABI (<0.9 = abnormal)\n• Absent pulse = vascular emergency\n\n**Step 3: Joint-Specific Reduction**\n• [Hip](#/node/mjd-hip-assessment): Allis maneuver, reduce <6h (AVN risk)\n• [Knee](#/node/mjd-knee-assessment): Highest vascular risk (20-40%), serial ABI\n• [Ankle](#/node/mjd-ankle-assessment): Skin tenting = immediate reduction\n\n**Step 4: [Post-Reduction](#/node/mjd-post-reduction)**\n• Immediate pulse check (critical!)\n• Post-reduction X-ray\n• Splint/immobilize\n• Repeat neurovascular exam\n\n**Step 5: [Disposition](#/node/mjd-disposition)**\n• Admit: vascular injury, OR needed, monitoring required\n• Discharge (rare): successful reduction, normal exam, next-day ortho\n\n**Key Times:**\n• Hip: <6h to minimize AVN\n• Knee: Serial ABI x 24-48h even if normal\n• Ankle: Skin tenting = immediate reduction',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. 2019.' },
+        { num: 2, text: 'Mills WJ, et al. Vascular Injuries with Knee Dislocation. Am J Sports Med. 2018.' },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -18524,6 +18558,10 @@ export const INFO_PAGES = {
     'af-steps': AF_STEPS_SUMMARY,
     // Hand Infections
     'hi-steps': HI_STEPS_SUMMARY,
+    // Neck Trauma
+    'nt-steps': NT_STEPS_SUMMARY,
+    // Major Joint Dislocation
+    'mjd-steps': MJD_STEPS_SUMMARY,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

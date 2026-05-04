@@ -1007,6 +1007,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/hand-infections.js');
             return { nodes: m.HAND_INFECTIONS_NODES, entryNodeId: 'hi-start', categoryId: 'orthopedics', moduleLabels: m.HAND_INFECTIONS_MODULE_LABELS, citations: m.HAND_INFECTIONS_CITATIONS };
         },
+        'neck-trauma': async () => {
+            const m = await import('../data/trees/neck-trauma.js');
+            return { nodes: m.NECK_TRAUMA_NODES, entryNodeId: 'nt-start', categoryId: 'trauma-surg', moduleLabels: m.NECK_TRAUMA_MODULE_LABELS, citations: m.NECK_TRAUMA_CITATIONS };
+        },
+        'major-joint-dislocation': async () => {
+            const m = await import('../data/trees/major-joint-dislocation.js');
+            return { nodes: m.MAJOR_JOINT_DISLOCATION_NODES, entryNodeId: 'mjd-start', categoryId: 'orthopedics', moduleLabels: m.MAJOR_JOINT_DISLOCATION_MODULE_LABELS, citations: m.MAJOR_JOINT_DISLOCATION_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
