@@ -10028,6 +10028,152 @@ const DAB_CRIC_STEPS = {
     shareable: true,
 };
 // -------------------------------------------------------------------
+// ED Extubation Protocol
+// -------------------------------------------------------------------
+const EXTUB_STEPS = {
+    id: 'extub-steps',
+    title: 'ED Extubation Protocol',
+    subtitle: 'Steps Summary',
+    sections: [
+        {
+            heading: '1. Confirm Why',
+            body: '• [Why extubate now?](#/node/extub-context)\n• If the original indication has not improved, keep the tube\n• Goals-of-care extubation follows the documented patient-specific plan',
+        },
+        {
+            heading: '2. Hard Stop Screen',
+            body: '• [Hard stop screen](#/node/extub-red-flags)\n• Delay if difficult reintubation risk, shock, severe hypoxemia, paralysis, deep sedation, or incomplete reversal is present',
+        },
+        {
+            heading: '3. Airway Protection',
+            body: '• [Assess airway protection](#/node/extub-airway-protection)\n• Adequate cough, manageable secretions, and adequate mental status are required\n• A passed SBT does not override poor airway protection',
+        },
+        {
+            heading: '4. SBT',
+            body: '• [Run or confirm SBT](#/node/extub-sbt-setup)\n• Pass requires stable vitals, acceptable oxygenation/ventilation, and comfortable work of breathing',
+        },
+        {
+            heading: '5. Risk and Support Plan',
+            body: '• [Assess failure risk](#/node/extub-failure-risk)\n• [Assess stridor risk](#/node/extub-stridor-risk)\n• Choose NIV, HFNC, or standard oxygen before tube removal',
+        },
+        {
+            heading: '6. Remove and Rescue',
+            body: '• [Tube removal](#/node/extub-procedure)\n• [First 30 minutes](#/node/extub-monitoring)\n• Reintubate early for severe or worsening post-extubation failure',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Association for Respiratory Care. AARC Clinical Practice Guideline: Removal of the Endotracheal Tube. Respir Care. 2007;52(1):81-93.' },
+        { num: 2, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(11):1441-1457.' },
+    ],
+};
+const EXTUB_READINESS = {
+    id: 'extub-readiness',
+    title: 'Extubation Readiness Checklist',
+    subtitle: 'Do-NOT criteria, airway protection, and SBT setup',
+    sections: [
+        {
+            heading: 'Do-NOT / Delay Criteria',
+            body: '• Original indication for intubation not improved\n• Predicted difficult reintubation without airway-skilled backup\n• Ongoing shock or escalating vasopressors\n• Severe hypoxemia or high ventilator requirements\n• Persistent severe acidosis or uncontrolled bronchospasm\n• Deep sedation, residual paralysis, or incomplete reversal\n• Poor cough, heavy secretions, vomiting, or aspiration risk\n• Inadequate monitoring, staffing, or rescue equipment',
+        },
+        {
+            heading: 'Airway Protection',
+            body: 'Required bedside checks:\n• Awake enough for airway reflexes or following simple commands\n• Coughs against suction or command\n• Secretions are manageable by bedside suctioning\n• No active emesis or uncontrolled bleeding into airway\n• Reintubation plan is explicit before tube removal',
+        },
+        {
+            heading: 'SBT Setup',
+            body: 'Common options:\n• T-piece\n• CPAP\n• Low pressure support\n\nRun for about 30 minutes when feasible. Fail for distress, diaphoresis, tachypnea, hypoxemia, rising CO2, arrhythmia, hypotension, or worsening mental status.',
+        },
+        {
+            heading: 'Do Not Overweight RSBI',
+            body: 'RSBI can support the assessment, but extubation decisions should not rest on RSBI alone. Combine the SBT result with airway protection, secretion burden, mental status, and rescue feasibility.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(11):1441-1457.' },
+        { num: 2, text: 'Schmidt GA, et al. ATS/ACCP Liberation From Mechanical Ventilation Executive Summary. Am J Respir Crit Care Med. 2017;195(1):115-119.' },
+    ],
+};
+const EXTUB_CUFF_LEAK = {
+    id: 'extub-cuff-leak',
+    title: 'Cuff Leak / Stridor Guide',
+    subtitle: 'Selective testing and airway edema prophylaxis',
+    sections: [
+        {
+            heading: 'Who Needs a Cuff Leak Test?',
+            body: 'Use for patients at increased risk of post-extubation stridor: traumatic or multiple intubation attempts, airway edema, prolonged intubation, large ETT relative to patient, prior failed extubation from stridor, or concerning airway exam.',
+        },
+        {
+            heading: 'Interpretation',
+            body: '• Leak present: lower risk, not zero risk\n• Absent or low leak: increased risk for laryngeal edema and stridor\n• Test quality matters: secretions, tube size, positioning, and ventilator method can affect results',
+        },
+        {
+            heading: 'If Leak Fails',
+            body: 'If extubation is not urgent, delay and give systemic corticosteroids before extubation. If extubation cannot wait, do it with airway-skilled help at bedside, stridor meds ready, and immediate reintubation plan.',
+        },
+        {
+            heading: 'If Stridor Occurs',
+            body: 'Sit upright, oxygen, call airway help, consider nebulized racemic epinephrine and systemic steroid, and prepare to reintubate. Do not rely on transient medication response if obstruction is worsening.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Girard TD, et al. ATS/ACCP Guideline: Cuff Leak Tests and Corticosteroids. Am J Respir Crit Care Med. 2017;195(1):120-133.' },
+        { num: 2, text: 'Kuriyama A, Jackson JL, Kamei J. Cuff Leak Test Systematic Review and Meta-analysis. Crit Care. 2020;24:640.' },
+    ],
+};
+const EXTUB_POST_SUPPORT = {
+    id: 'extub-post-support',
+    title: 'Post-Extubation Support',
+    subtitle: 'NIV, HFNC, and standard oxygen selection',
+    sections: [
+        {
+            heading: 'NIV Favored',
+            body: 'Use when the risk phenotype is hypercapnic or cardiogenic: COPD, obesity hypoventilation, OSA with hypercapnia, CHF/pulmonary edema, or hypercapnia during SBT. Place mask immediately after tube removal.',
+        },
+        {
+            heading: 'HFNC Favored',
+            body: 'Use for high-risk hypoxemic patients who do not clearly need NIV. HFNC provides high FiO2, flow support, dead-space washout, and better tolerance than mask-based support.',
+        },
+        {
+            heading: 'Standard Oxygen',
+            body: 'Reasonable for low-risk patients with minimal oxygen requirement, good cough, low secretion burden, and no major failure-risk features.',
+        },
+        {
+            heading: 'Key Safety Point',
+            body: 'Prophylactic support is different from rescue support. If established post-extubation respiratory failure develops and the patient is severe or worsening, reintubate early.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Rochwerg B, et al. ERS/ATS NIV Guideline. Eur Respir J. 2017;50(2):1602426.' },
+        { num: 2, text: 'Hernandez G, et al. Postextubation HFNC vs NIV in High-Risk Patients. JAMA. 2016;316(15):1565-1574.' },
+    ],
+};
+const EXTUB_FAILURE = {
+    id: 'extub-failure',
+    title: 'Post-Extubation Failure Rescue',
+    subtitle: 'Stridor, respiratory failure, and reintubation triggers',
+    sections: [
+        {
+            heading: 'Stridor',
+            body: 'Treat as upper airway obstruction. Sit upright, oxygen, call airway help, use nebulized racemic epinephrine and systemic steroid as temporizing therapy, and prepare for reintubation if severe or worsening.',
+        },
+        {
+            heading: 'Respiratory Failure',
+            body: 'Red flags: severe work of breathing, fatigue, shock, altered mental status, rising CO2, persistent hypoxemia, aspiration, or inability to clear secretions. These should trigger early reintubation.',
+        },
+        {
+            heading: 'NIV Bridge',
+            body: 'A short NIV bridge can be reasonable only when the phenotype fits, usually COPD or CHF, and improvement is immediate. Reassess in minutes while preparing the airway setup.',
+        },
+        {
+            heading: 'Reintubation Principle',
+            body: 'Do not let noninvasive support delay definitive airway control in severe post-extubation failure. The safest reintubation is before crash physiology develops.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Rochwerg B, et al. ERS/ATS NIV Guideline. Eur Respir J. 2017;50(2):1602426.' },
+        { num: 2, text: 'American Association for Respiratory Care. AARC Clinical Practice Guideline: Removal of the Endotracheal Tube. Respir Care. 2007;52(1):81-93.' },
+    ],
+};
+// -------------------------------------------------------------------
 // VAD Emergency Management
 // -------------------------------------------------------------------
 const VAD_STEPS_SUMMARY = {
@@ -18449,6 +18595,11 @@ export const INFO_PAGES = {
     'dab-lemon-card': DAB_LEMON_CARD,
     'dab-rsi-drugs': DAB_RSI_DRUGS,
     'dab-cric-steps': DAB_CRIC_STEPS,
+    'extub-steps': EXTUB_STEPS,
+    'extub-readiness': EXTUB_READINESS,
+    'extub-cuff-leak': EXTUB_CUFF_LEAK,
+    'extub-post-support': EXTUB_POST_SUPPORT,
+    'extub-failure': EXTUB_FAILURE,
     'vad-steps-summary': VAD_STEPS_SUMMARY,
     'vad-alarm-guide': VAD_ALARM_GUIDE,
     'vad-device-params': VAD_DEVICE_PARAMS,

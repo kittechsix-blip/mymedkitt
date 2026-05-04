@@ -29,6 +29,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'dab-start',
       },
       {
+        id: 'ed-extubation',
+        title: 'ED Extubation Protocol',
+        subtitle: 'Readiness → Airway Protection → SBT → Stridor Risk → Extubate → Rescue',
+        categoryId: 'anesthesia-airway',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'extub-start',
+      },
+      {
         id: 'hop-killers',
         title: 'HOP Killers',
         subtitle: 'High-Risk Intubation | Hypotension • Hypoxia • Acidosis • RV Failure • Metabolic • ICP',

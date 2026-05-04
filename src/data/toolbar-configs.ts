@@ -28,6 +28,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'confirm', label: 'Confirm', icon: '✅', action: 'jump', target: 'dab-confirm' },
     { id: 'cric', label: 'Cric', icon: '🔪', action: 'jump', target: 'dab-cric-technique' },
   ],
+  'ed-extubation': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'extub-steps' },
+    { id: 'ready', label: 'Ready?', icon: '✅', action: 'overlay', target: 'extub-readiness' },
+    { id: 'cuff', label: 'Cuff Leak', icon: '🫁', action: 'overlay', target: 'extub-cuff-leak' },
+    { id: 'support', label: 'Support', icon: '⚙️', action: 'overlay', target: 'extub-post-support' },
+    { id: 'failure', label: 'Failure', icon: '🚨', action: 'overlay', target: 'extub-failure' },
+    { id: 'reintubate', label: 'Reintubate', icon: '🔁', action: 'jump', target: 'extub-reintubate' },
+  ],
   'anaphylaxis': [
     { id: 'criteria', label: 'Criteria', icon: '\u2705', action: 'calculator', target: 'anaphylaxis-criteria' },
     { id: 'epi-calc', label: 'Epi Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'epi-infusion' },

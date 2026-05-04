@@ -203,6 +203,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/difficult-airway-bougie.js');
       return { nodes: m.DIFFICULT_AIRWAY_BOUGIE_NODES, entryNodeId: 'dab-start', categoryId: 'anesthesia-airway', moduleLabels: m.DIFFICULT_AIRWAY_BOUGIE_MODULE_LABELS, citations: m.DIFFICULT_AIRWAY_BOUGIE_CITATIONS, criticalActions: m.DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS };
     },
+    'ed-extubation': async () => {
+      const m = await import('../data/trees/ed-extubation.js');
+      return { nodes: m.ED_EXTUBATION_NODES, entryNodeId: 'extub-start', categoryId: 'anesthesia-airway', moduleLabels: m.ED_EXTUBATION_MODULE_LABELS, citations: m.ED_EXTUBATION_CITATIONS, criticalActions: m.ED_EXTUBATION_CRITICAL_ACTIONS };
+    },
     'pneumothorax': async () => {
       const m = await import('../data/trees/pneumothorax.js');
       return { nodes: m.PNEUMOTHORAX_NODES, entryNodeId: 'pneumothorax-start', categoryId: 'us-rads', moduleLabels: m.PNEUMOTHORAX_MODULE_LABELS, citations: m.PNEUMOTHORAX_CITATIONS, criticalActions: m.PNEUMOTHORAX_CRITICAL_ACTIONS };
