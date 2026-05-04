@@ -224,4 +224,8 @@ export const TREE_REGISTRY = {
   'hand-infections': { prefix: 'HAND_INFECTIONS', entryNodeId: 'hi-start',           categoryId: 'orthopedics' },
   'neck-trauma': { prefix: 'NECK_TRAUMA', entryNodeId: 'nt-start',             categoryId: 'trauma-surg' },
   'major-joint-dislocation': { prefix: 'MAJOR_JOINT_DISLOCATION', entryNodeId: 'mjd-start', categoryId: 'orthopedics' },
+  'altitude-sickness': { prefix: 'ALTITUDE_SICKNESS', entryNodeId: 'alt-start', categoryId: 'emergency-medicine' },
+  'ibd-flare': { prefix: 'IBD_FLARE', entryNodeId: 'ibd-start', categoryId: 'gastroenterology' },
+  'transient-global-amnesia': { prefix: 'TRANSIENT_GLOBAL_AMNESIA', entryNodeId: 'tga-start', categoryId: 'neurology' },
+  'mammalian-bite': { prefix: 'MAMMALIAN_BITE', entryNodeId: 'mb-start', categoryId: 'emergency-medicine' },
 };

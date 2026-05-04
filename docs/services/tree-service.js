@@ -1015,6 +1015,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/major-joint-dislocation.js');
             return { nodes: m.MAJOR_JOINT_DISLOCATION_NODES, entryNodeId: 'mjd-start', categoryId: 'orthopedics', moduleLabels: m.MAJOR_JOINT_DISLOCATION_MODULE_LABELS, citations: m.MAJOR_JOINT_DISLOCATION_CITATIONS };
         },
+        'altitude-sickness': async () => {
+            const m = await import('../data/trees/altitude-sickness.js');
+            return { nodes: m.ALTITUDE_SICKNESS_NODES, entryNodeId: 'alt-start', categoryId: 'em', moduleLabels: m.ALTITUDE_SICKNESS_MODULE_LABELS, citations: m.ALTITUDE_SICKNESS_CITATIONS };
+        },
+        'ibd-flare': async () => {
+            const m = await import('../data/trees/ibd-flare.js');
+            return { nodes: m.IBD_FLARE_NODES, entryNodeId: 'ibd-start', categoryId: 'gastroenterology', moduleLabels: m.IBD_FLARE_MODULE_LABELS, citations: m.IBD_FLARE_CITATIONS };
+        },
+        'transient-global-amnesia': async () => {
+            const m = await import('../data/trees/transient-global-amnesia.js');
+            return { nodes: m.TRANSIENT_GLOBAL_AMNESIA_NODES, entryNodeId: 'tga-start', categoryId: 'neurology', moduleLabels: m.TRANSIENT_GLOBAL_AMNESIA_MODULE_LABELS, citations: m.TRANSIENT_GLOBAL_AMNESIA_CITATIONS };
+        },
+        'mammalian-bite': async () => {
+            const m = await import('../data/trees/mammalian-bite.js');
+            return { nodes: m.MAMMALIAN_BITE_NODES, entryNodeId: 'mb-start', categoryId: 'em', moduleLabels: m.MAMMALIAN_BITE_MODULE_LABELS, citations: m.MAMMALIAN_BITE_CITATIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

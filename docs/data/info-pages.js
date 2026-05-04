@@ -17983,6 +17983,74 @@ const MJD_STEPS_SUMMARY = {
         { num: 2, text: 'Mills WJ, et al. Vascular Injuries with Knee Dislocation. Am J Sports Med. 2018.' },
     ],
 };
+// -------------------------------------------------------------------
+// Altitude Sickness
+// -------------------------------------------------------------------
+const ALT_STEPS_SUMMARY = {
+    id: 'alt-steps',
+    title: 'Altitude Sickness — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Initial Assessment](#/node/alt-start)**\n• Altitude exposure history (current, recent, rate of ascent)\n• Time at altitude, acclimatization attempts\n• Prior altitude illness\n• Risk factors: rapid ascent, sleeping at altitude, exertion\n\n**Step 2: [AMS Assessment](#/node/alt-ams-assessment)**\n• Lake Louise Score (headache + GI/fatigue/dizziness)\n• Score 3-5 = Mild AMS\n• Score 6+ = Moderate-Severe AMS\n• Any ataxia = HACE, not AMS\n\n**Step 3: [HACE Evaluation](#/node/alt-hace)**\n• Ataxia (heel-to-toe walk) or AMS + mental status change\n• Medical emergency — descend immediately\n• Dexamethasone 8mg then 4mg q6h\n\n**Step 4: [HAPE Evaluation](#/node/alt-hape)**\n• Dyspnea at rest, cough, hypoxia\n• Crackles, tachypnea, tachycardia\n• Medical emergency — descend + O2\n• Nifedipine 30mg SR q12h\n\n**Step 5: [Disposition](#/node/alt-disposition)**\n• HACE/HAPE: descent mandatory, consider evacuation\n• Severe AMS: descend, dexamethasone, acetazolamide\n• Mild AMS: stop ascent, symptomatic treatment\n\n**Key Medications:**\n• Acetazolamide 250mg PO BID (acclimatization)\n• Dexamethasone 4mg q6h (HACE, severe AMS)\n• Nifedipine 30mg SR q12h (HAPE)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Luks AM, et al. Wilderness Medical Society Practice Guidelines: Prevention and Treatment of Acute Altitude Illness. 2019.' },
+        { num: 2, text: 'Roach RC, et al. Lake Louise AMS Score Consensus Committee. High Alt Med Biol. 2018.' },
+    ],
+};
+// -------------------------------------------------------------------
+// IBD Flare
+// -------------------------------------------------------------------
+const IBD_STEPS_SUMMARY = {
+    id: 'ibd-steps',
+    title: 'IBD Flare — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Initial Assessment](#/node/ibd-start)**\n• IBD type (UC vs Crohn\'s) and extent\n• Current medications (biologics, steroids, immunomodulators)\n• Prior hospitalizations, surgeries\n• Recent med changes or non-adherence\n• C. diff risk (recent antibiotics, hospitalization)\n\n**Step 2: Severity Assessment**\n• [UC: Truelove-Witts](#/node/ibd-uc-severity)\n• [Crohn\'s](#/node/ibd-crohn-severity)\n• Severe = systemic signs (fever, tachycardia, anemia)\n\n**Step 3: [Complications](#/node/ibd-complications)**\n• [Toxic megacolon](#/node/ibd-toxic-megacolon): >6cm colon + systemic toxicity\n• Perforation: free air, peritonitis\n• Obstruction: Crohn\'s with stricture\n• Abscess: fistulizing Crohn\'s\n\n**Step 4: Workup**\n• CBC, CMP, ESR, CRP\n• Stool: C. diff toxin, culture, O&P\n• Imaging if complication concern\n• Rule out infection before steroids\n\n**Step 5: [Disposition](#/node/ibd-disposition)**\n• Admit: severe flare, complications, failing outpatient therapy\n• Discharge: mild flare, tolerating PO, close GI follow-up\n\n**Key Points:**\n• C. diff common — test before steroids\n• [Biologics](#/node/ibd-biologics): hold if active infection\n• Toxic megacolon: surgery consult STAT',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lichtenstein GR, et al. ACG Clinical Guideline: Management of Crohn\'s Disease in Adults. Am J Gastroenterol. 2018.' },
+        { num: 2, text: 'Rubin DT, et al. ACG Clinical Guideline: Ulcerative Colitis in Adults. Am J Gastroenterol. 2019.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Transient Global Amnesia
+// -------------------------------------------------------------------
+const TGA_STEPS_SUMMARY = {
+    id: 'tga-steps',
+    title: 'Transient Global Amnesia — Steps',
+    subtitle: 'ED Evaluation Framework',
+    sections: [
+        {
+            body: '**Step 1: [Initial Assessment](#/node/tga-start)**\n• Classic: sudden anterograde amnesia, repetitive questioning\n• Personal identity preserved\n• No focal deficits\n• Witness history critical\n• Identify precipitant (exertion, stress, Valsalva, water)\n\n**Step 2: [Hodges & Warlow Criteria](#/node/tga-criteria)**\n• Attack witnessed\n• Clear anterograde amnesia\n• No clouding of consciousness\n• No focal neuro signs\n• No epileptic features\n• No recent head injury\n• Resolves <24 hours\n\n**Step 3: [Rule Out Mimics](#/node/tga-other-mimics)**\n• [Posterior stroke](#/node/tga-stroke-workup): focal signs, >24h, vascular risks\n• [TEP](#/node/tga-tep): <1h, recurrent, upon waking\n• Post-traumatic: recent head injury\n• Toxic/metabolic: hypoglycemia, drugs\n\n**Step 4: [Workup](#/node/tga-workup)**\n• Classic TGA: minimal (glucose, ECG)\n• Atypical: CT, consider MRI/EEG\n• MRI DWI: hippocampal lesions (best at 24-72h)\n\n**Step 5: [Prognosis](#/node/tga-prognosis)**\n• Excellent — complete resolution <24h\n• No increased stroke or dementia risk\n• Recurrence: 2-3%/year\n• Reassurance is key\n\n**Red Flags:**\n• Duration >24h\n• Focal deficits\n• Frequent recurrence\n• Young age (<40)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hodges JR, Warlow CP. The aetiology of transient global amnesia. Brain. 1990.' },
+        { num: 2, text: 'Arena JE, Bhattacharyya KB. Transient Global Amnesia. Lancet Neurol. 2021.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Mammalian Bite
+// -------------------------------------------------------------------
+const MB_STEPS_SUMMARY = {
+    id: 'mb-steps',
+    title: 'Mammalian Bite — Steps',
+    subtitle: 'ED Evaluation & Management',
+    sections: [
+        {
+            body: '**Step 1: [Initial Assessment](#/node/mb-start)**\n• Animal type and circumstances\n• Time since bite\n• Location and depth of wound\n• Tetanus and rabies risk\n• Immunocompromise status\n\n**Step 2: Animal-Specific Risks**\n• Dog: crush + laceration, 20% infection rate\n• [Cat](#/node/mb-cat): deep punctures, 30-50% infection — always Abx\n• [Human](#/node/mb-human): fight bites high risk, Eikenella\n• [Bat](#/node/mb-bat): always assume rabies exposure\n\n**Step 3: [Wound Care](#/node/mb-wound-care)**\n• Copious irrigation (most important step)\n• Debridement of devitalized tissue\n• Face: primary closure OK\n• Hand/puncture: leave open or delayed closure\n\n**Step 4: [Antibiotics](#/node/mb-antibiotics)**\n• Amox-clav 875/125 BID x 3-5 days (prophylaxis) or 7-14 days (infection)\n• Allergy: doxycycline + metronidazole or TMP-SMX + metronidazole\n• ALL cat bites need prophylaxis\n\n**Step 5: [Rabies Assessment](#/node/mb-rabies-assessment)**\n• Domestic dog/cat: 10-day quarantine\n• Wild carnivore/bat: PEP unless tested negative\n• RIG + vaccine series\n\n**Step 6: [Tetanus](#/node/mb-tetanus)**\n• Dirty wound: Td/Tdap if >5 years\n• Unknown/incomplete: TIG + vaccine series\n\n**High-Risk Features:**\n• Cat bites, human bites\n• Hand involvement\n• Puncture wounds\n• Delayed presentation (>12h)\n• Immunocompromise',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stevens DL, et al. IDSA Guidelines: Skin and Soft Tissue Infections. Clin Infect Dis. 2014.' },
+        { num: 2, text: 'CDC. Rabies Post-Exposure Prophylaxis. 2022.' },
+    ],
+};
 export const INFO_PAGES = {
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
@@ -18562,6 +18630,14 @@ export const INFO_PAGES = {
     'nt-steps': NT_STEPS_SUMMARY,
     // Major Joint Dislocation
     'mjd-steps': MJD_STEPS_SUMMARY,
+    // Altitude Sickness
+    'alt-steps': ALT_STEPS_SUMMARY,
+    // IBD Flare
+    'ibd-steps': IBD_STEPS_SUMMARY,
+    // Transient Global Amnesia
+    'tga-steps': TGA_STEPS_SUMMARY,
+    // Mammalian Bite
+    'mb-steps': MB_STEPS_SUMMARY,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

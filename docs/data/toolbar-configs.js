@@ -1467,6 +1467,34 @@ const TOOLBAR_CONFIGS = {
         { id: 'knee', label: 'Knee', icon: '🦵', action: 'jump', target: 'mjd-knee-assessment' },
         { id: 'ankle', label: 'Ankle', icon: '🦶', action: 'jump', target: 'mjd-ankle-assessment' },
     ],
+    'altitude-sickness': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'alt-steps' },
+        { id: 'ams', label: 'AMS', icon: '🏔️', action: 'jump', target: 'alt-ams-assessment' },
+        { id: 'hace', label: 'HACE', icon: '🧠', action: 'jump', target: 'alt-hace' },
+        { id: 'hape', label: 'HAPE', icon: '🫁', action: 'jump', target: 'alt-hape' },
+        { id: 'meds', label: 'Meds', icon: '💊', action: 'jump', target: 'alt-meds' },
+    ],
+    'ibd-flare': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ibd-steps' },
+        { id: 'uc', label: 'UC', icon: '🩸', action: 'jump', target: 'ibd-uc-severity' },
+        { id: 'crohns', label: 'Crohn\'s', icon: '🔄', action: 'jump', target: 'ibd-crohn-severity' },
+        { id: 'toxic', label: 'Toxic Mega', icon: '⚠️', action: 'jump', target: 'ibd-toxic-megacolon' },
+        { id: 'biologics', label: 'Biologics', icon: '💉', action: 'jump', target: 'ibd-biologics' },
+    ],
+    'transient-global-amnesia': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'tga-steps' },
+        { id: 'criteria', label: 'Criteria', icon: '✓', action: 'jump', target: 'tga-criteria' },
+        { id: 'tep', label: 'TEP', icon: '⚡', action: 'jump', target: 'tga-tep' },
+        { id: 'stroke', label: 'Stroke', icon: '🧠', action: 'jump', target: 'tga-stroke-workup' },
+        { id: 'prognosis', label: 'Prognosis', icon: '📊', action: 'jump', target: 'tga-prognosis' },
+    ],
+    'mammalian-bite': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'mb-steps' },
+        { id: 'cat', label: 'Cat', icon: '🐱', action: 'jump', target: 'mb-cat' },
+        { id: 'human', label: 'Human', icon: '👊', action: 'jump', target: 'mb-human' },
+        { id: 'rabies', label: 'Rabies', icon: '🦇', action: 'jump', target: 'mb-rabies-assessment' },
+        { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'mb-antibiotics' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
