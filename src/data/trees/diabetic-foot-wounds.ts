@@ -83,7 +83,13 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       monitoring: 'ICU admission. Serial lactate, CBC, BMP q6h. Repeat OR in 24-48h.',
     },
     next: 'dfw-dispo-admit-icu',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/dfu-nec-fasc.jpg',
+        alt: 'Necrotizing fasciitis of the lower leg with dusky discoloration, bullae, and skin necrosis',
+        caption: 'Necrotizing fasciitis: dusky discoloration, hemorrhagic bullae, pain out of proportion. Surgical emergency — do NOT delay for imaging. (Piotr Smuszkiewicz et al, CC BY 2.0, Wikimedia Commons)',
+      },
+    ],
     summary: 'Necrotizing Fasciitis Management — review key clinical information before proceeding',
   },
 
@@ -107,7 +113,13 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       monitoring: 'Serial exams, lactate q4-6h, glucose control target 140-180 mg/dL',
     },
     next: 'dfw-dispo-admit-icu',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/dfu-wet-gangrene.jpg',
+        alt: 'Wet gangrene of the foot with dark necrotic tissue and surrounding cellulitis',
+        caption: 'Wet gangrene: purulent, foul-smelling necrosis with surrounding cellulitis. Wet gangrene + sepsis = emergent surgical amputation. (CC, Wikimedia Commons)',
+      },
+    ],
     summary: 'Wet Gangrene Management — review key clinical information before proceeding',
   },
 
@@ -130,12 +142,27 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     title: 'Wound Examination',
     body: '**Systematic wound assessment:**\n\n**Location (affects healing):**\n- Forefoot: most common, better prognosis\n- Midfoot: Charcot zone, higher amputation risk\n- Hindfoot/heel: worst prognosis, difficult offloading\n\n**Size:**\n- Measure after debridement\n- Length x width in cm\n- >2 cm² is independent risk factor for osteomyelitis\n\n**Depth (use blunt probe):**\n- Superficial: epidermis/dermis only\n- Deep: tendon, joint capsule, fascia\n- Bone: visible or palpable\n\n**Tissue type:**\n- Granulating (healthy red tissue)\n- Slough (yellow fibrinous tissue)\n- Eschar (black necrotic tissue)\n- Exposed structures (tendon, bone)\n\n**Surrounding skin:**\n- Erythema extent (measure from wound edge)\n- Warmth, induration\n- Maceration\n- Callus (neuropathic pressure point)\n\n**Exudate:**\n- None, serous, serosanguinous, purulent\n- Amount: minimal, moderate, copious\n\n**Neuropathy assessment:**\n- 10g monofilament test (loss = neuropathy)\n- 128 Hz tuning fork (vibration sense)\n- Ankle reflexes [1][7]',
     citation: [1, 7],
-    images: [{ src: 'images/diabetic-foot-wounds/diabetic-foot-ulcer.jpg', alt: 'Diabetic foot ulcer with surrounding callus and erythema', caption: 'Diabetic foot ulcer: neuropathic ulcers typically plantar/pressure points with callus rim — probe-to-bone test if wound depth unclear (Wikimedia Commons, CC BY-SA 3.0)' }],
     calculatorLinks: [
       { id: 'dfw-wagner-pedis', label: 'Wagner/PEDIS Classification' },
     ],
     next: 'dfw-classification',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/diabetic-foot-ulcer.jpg',
+        alt: 'Diabetic foot ulcer with surrounding callus and erythema',
+        caption: 'Diabetic foot ulcer: neuropathic ulcers typically at plantar/pressure points with callus rim — probe-to-bone test if wound depth unclear. (CC BY-SA, Wikimedia Commons)',
+      },
+      {
+        src: 'images/diabetic-foot-wounds/dfu-typical.jpg',
+        alt: 'Diabetic foot ulcer on the plantar surface with surrounding callus',
+        caption: 'Typical neuropathic plantar DFU — punched-out, painless, surrounded by hyperkeratotic callus. (CC, Wikimedia Commons)',
+      },
+      {
+        src: 'images/diabetic-foot-wounds/dfu-neuropathic-heel.jpg',
+        alt: 'Neuropathic heel ulcer in a diabetic patient',
+        caption: 'Neuropathic heel ulcer — high-pressure point, often missed until full-thickness. Always probe to bone. (CC, Wikimedia Commons)',
+      },
+    ],
     summary: 'Wound Examination — review key clinical information before proceeding',
     skippable: true,
   },
@@ -151,7 +178,18 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
       { id: 'dfw-wagner-pedis', label: 'Wagner/PEDIS Classification' },
     ],
     next: 'dfw-infection-intro',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/dfu-wagner1-debridement.jpg',
+        alt: 'Wagner Grade 1 diabetic foot ulcer before and after sharp debridement',
+        caption: 'Wagner Grade 1 ulcer (superficial, no infection) before and after sharp debridement of necrotic tissue and undermined edges. (Dayya 2022, CC BY 4.0, Wikimedia Commons)',
+      },
+      {
+        src: 'images/diabetic-foot-wounds/dfu-toe.png',
+        alt: 'Diabetic toe ulcer demonstrating depth and surrounding tissue compromise',
+        caption: 'Diabetic toe ulcer — small surface area can mask deep tissue extension; always probe and consider Wagner staging. (CC, Wikimedia Commons)',
+      },
+    ],
     summary: 'Wagner classification: grade 0-5 determines management — grade 3+ often requires surgery',
     skippable: true,
   },
@@ -471,7 +509,13 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Charcot neuroarthropathy (CN) is a MEDICAL EMERGENCY that can lead to irreversible deformity.**\n\n**Prevalence:** Up to 13% of diabetics with neuropathy\n\n**CRITICAL FACT: 25% of acute Charcot is MISDIAGNOSED** (as cellulitis, gout, DVT, sprain)\n\n**Average delay to diagnosis: 7 months**\n\n**Risk factors:**\n- Diabetes with peripheral neuropathy (most common)\n- Long-standing diabetes (>10 years)\n- Tight glycemic control (relative)\n- Prior foot surgery or trauma\n- Obesity\n- Renal transplant patients\n\n**Pathophysiology:**\n- Autonomic neuropathy → increased blood flow → bone resorption\n- Sensory neuropathy → continued weight-bearing despite injury\n- Motor neuropathy → abnormal biomechanics\n- Result: Progressive bone destruction, fragmentation, deformity\n\n**Most common location:** Midfoot (tarsometatarsal joints - Lisfranc area) [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-presentation',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/dfu-charcot.jpg',
+        alt: 'Chronic Charcot foot deformity with collapsed midfoot arch and rocker-bottom shape',
+        caption: 'Chronic Charcot foot deformity: collapsed Lisfranc joints producing the classic rocker-bottom foot. Often misdiagnosed as cellulitis early in the active phase. (CC BY-SA, Wikimedia Commons)',
+      },
+    ],
     summary: 'Charcot Foot: A Commonly Missed Diagnosis — review key clinical information before proceeding',
   },
 
@@ -483,7 +527,13 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     body: '**Classic triad of acute Charcot:**\n1. **Unilateral swollen foot/ankle**\n2. **Warmth** (2-8°C difference vs. contralateral)\n3. **Erythema**\n\n**Key distinguishing features from infection:**\n| Feature | Acute Charcot | Osteomyelitis/Cellulitis |\n|---------|---------------|-------------------------|\n| Open wound | Usually ABSENT | Usually PRESENT |\n| Fever | Absent | May be present |\n| WBC | Normal | Often elevated |\n| ESR/CRP | Mildly elevated | Significantly elevated |\n| Pain | Minimal (neuropathy) | Variable |\n| Pulses | Often bounding | Variable |\n\n**Red flags for Charcot:**\n- Diabetic >40 years with neuropathy\n- Red, hot, swollen foot WITHOUT open wound\n- Minimal or no pain despite appearance\n- History of minor or unrecalled trauma\n- Normal systemic vitals and labs\n- Patient walking on affected foot without complaint\n\n**Diagnostic approach:**\n1. Compare temperature to contralateral foot\n2. Weight-bearing X-rays (may be normal early)\n3. MRI if X-ray normal but high clinical suspicion\n4. Labs: CBC, BMP, ESR, CRP (to help r/o infection) [14][15]',
     citation: [14, 15],
     next: 'dfw-charcot-staging',
-  
+    images: [
+      {
+        src: 'images/diabetic-foot-wounds/dfu-charcot-active.jpg',
+        alt: 'Active stage Charcot foot — red, hot, swollen midfoot without open wound',
+        caption: 'Active (Eichenholtz Stage 0/1) Charcot — red, hot, swollen foot without an open wound. 2-8°C warmer than contralateral. Often misread as cellulitis. (CC, Wikimedia Commons)',
+      },
+    ],
     summary: 'Acute Charcot: Clinical Presentation — review key clinical information before proceeding',
   },
 

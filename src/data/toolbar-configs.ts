@@ -1007,6 +1007,9 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'vascular', label: 'Vascular', icon: '🫀', action: 'calculator', target: 'dfw-vascular-interpreter' },
     { id: 'osteo', label: 'Osteo Risk', icon: '🦴', action: 'calculator', target: 'dfw-osteo-probability' },
     { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'calculator', target: 'dfw-abx-selector' },
+    { id: 'nec-fasc', label: 'Nec Fasc', icon: '🚨', action: 'jump', target: 'dfw-nec-fasc' },
+    { id: 'charcot', label: 'Charcot', icon: '🦶', action: 'jump', target: 'dfw-charcot-intro' },
+    { id: 'abx-summary', label: 'Abx Table', icon: '📋', action: 'jump', target: 'dfw-abx-summary' },
   ],
   'pediatric-arthritis': [
     { id: 'peds-arth-kocher', label: 'Kocher', icon: '📊', action: 'calculator', target: 'peds-arth-kocher' },
