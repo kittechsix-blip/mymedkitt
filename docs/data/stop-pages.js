@@ -15,6 +15,7 @@ import { STOP_PAGES_11 } from './stop-pages/batch-11.js';
 import { STOP_PAGES_12 } from './stop-pages/batch-12.js';
 import { STOP_PAGES_13 } from './stop-pages/batch-13.js';
 import { STOP_PAGES_14 } from './stop-pages/batch-14.js';
+import { STOP_PAGES_15 } from './stop-pages/batch-15.js';
 export const STOP_PAGES = {
     ...STOP_PAGES_01,
     ...STOP_PAGES_02,
@@ -30,6 +31,7 @@ export const STOP_PAGES = {
     ...STOP_PAGES_12,
     ...STOP_PAGES_13,
     ...STOP_PAGES_14,
+    ...STOP_PAGES_15,
 };
 export function getAllStopPages() {
     return Object.values(STOP_PAGES);

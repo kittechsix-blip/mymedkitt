@@ -14,6 +14,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'confirm', label: 'Confirm', icon: '✅', action: 'jump', target: 'dab-confirm' },
         { id: 'cric', label: 'Cric', icon: '🔪', action: 'jump', target: 'dab-cric-technique' },
     ],
+    'supraglottic-airway': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'sga-steps' },
+        { id: 'rods', label: 'RODS', icon: '🚩', action: 'overlay', target: 'sga-rods' },
+        { id: 'sizing', label: 'Size', icon: '📏', action: 'overlay', target: 'sga-sizing' },
+        { id: 'insert', label: 'Insert', icon: '🫁', action: 'overlay', target: 'sga-insertion' },
+        { id: 'trouble', label: 'Trouble', icon: '🔧', action: 'overlay', target: 'sga-troubleshoot' },
+    ],
     'ed-extubation': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'extub-steps' },
         { id: 'ready', label: 'Ready?', icon: '✅', action: 'overlay', target: 'extub-readiness' },

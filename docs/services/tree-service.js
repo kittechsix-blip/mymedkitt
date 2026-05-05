@@ -149,6 +149,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/difficult-airway-bougie.js');
             return { nodes: m.DIFFICULT_AIRWAY_BOUGIE_NODES, entryNodeId: 'dab-start', categoryId: 'anesthesia-airway', moduleLabels: m.DIFFICULT_AIRWAY_BOUGIE_MODULE_LABELS, citations: m.DIFFICULT_AIRWAY_BOUGIE_CITATIONS, criticalActions: m.DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS };
         },
+        'supraglottic-airway': async () => {
+            const m = await import('../data/trees/supraglottic-airway.js');
+            return { nodes: m.SUPRAGLOTTIC_AIRWAY_NODES, entryNodeId: 'sga-start', categoryId: 'anesthesia-airway', moduleLabels: m.SUPRAGLOTTIC_AIRWAY_MODULE_LABELS, citations: m.SUPRAGLOTTIC_AIRWAY_CITATIONS, criticalActions: m.SUPRAGLOTTIC_AIRWAY_CRITICAL_ACTIONS };
+        },
         'ed-extubation': async () => {
             const m = await import('../data/trees/ed-extubation.js');
             return { nodes: m.ED_EXTUBATION_NODES, entryNodeId: 'extub-start', categoryId: 'anesthesia-airway', moduleLabels: m.ED_EXTUBATION_MODULE_LABELS, citations: m.ED_EXTUBATION_CITATIONS, criticalActions: m.ED_EXTUBATION_CRITICAL_ACTIONS };

@@ -29,6 +29,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'dab-start',
       },
       {
+        id: 'supraglottic-airway',
+        title: 'Supraglottic Airway',
+        subtitle: 'Indication → RODS → Device/Sizing → Insertion → Troubleshooting → Definitive Plan',
+        categoryId: 'anesthesia-airway',
+        version: '1.0',
+        nodeCount: 22,
+        entryNodeId: 'sga-start',
+      },
+      {
         id: 'ed-extubation',
         title: 'ED Extubation Protocol',
         subtitle: 'Readiness → Airway Protection → SBT → Stridor Risk → Extubate → Rescue',

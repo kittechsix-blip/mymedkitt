@@ -10028,6 +10028,163 @@ const DAB_CRIC_STEPS = {
     shareable: true,
 };
 // -------------------------------------------------------------------
+// Supraglottic Airway
+// -------------------------------------------------------------------
+const SGA_STEPS = {
+    id: 'sga-steps',
+    title: 'Supraglottic Airway Steps',
+    subtitle: 'Rescue oxygenation pathway',
+    image: {
+        src: 'images/supraglottic-airway/lma-igel.jpg',
+        alt: 'Laryngeal mask airway and i-gel supraglottic airway devices',
+        caption: 'LMA Unique and i-gel supraglottic airway devices. CYP3A42D6, CC BY-SA 4.0, Wikimedia Commons.',
+    },
+    sections: [
+        {
+            heading: '1. Declare The Lane',
+            body: '• [Failed intubation / failed BVM](#/node/sga-plan-b-rescue)\n• [Cardiac arrest airway](#/node/sga-primary-arrest)\n• [Bridge while preparing definitive airway](#/node/sga-bridge-oxygenation)',
+        },
+        {
+            heading: '2. Screen RODS',
+            body: '• [Restricted mouth opening](#/node/sga-rods-screen)\n• Obstruction at/below glottis\n• Distorted/disrupted anatomy\n• Stiff lungs or fixed cervical spine',
+        },
+        {
+            heading: '3. Select Device And Size',
+            body: '• Prefer second-generation SGA with gastric drainage\n• [Use i-gel adult sizing](#/node/sga-size-select): 3 = 30-60 kg, 4 = 50-90 kg, 5 = >90 kg\n• Follow package guidance for cuffed LMA devices',
+        },
+        {
+            heading: '4. Insert And Confirm',
+            body: '• Suction ready, EtCO2 attached, oxygen source connected\n• Insert along hard palate until seated\n• Confirm chest rise, EtCO2, SpO2 trend, breath sounds, and leak',
+        },
+        {
+            heading: '5. Decide Endpoint',
+            body: '• If oxygenation restored: [choose definitive plan](#/node/sga-ventilation-adequate)\n• If ventilation fails: [failed SGA pathway](#/node/sga-failed-sga)\n• Failed tube + failed SGA + failed BVM = [CICO](#/node/sga-cico)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ahmad I, et al. DAS 2025 difficult tracheal intubation guideline. Br J Anaesth. 2026;136(1):283-307.' },
+        { num: 2, text: 'American Heart Association. Adult Advanced Life Support Guidelines.' },
+    ],
+    shareable: true,
+};
+const SGA_RODS = {
+    id: 'sga-rods',
+    title: 'RODS Screen',
+    subtitle: 'Difficult supraglottic airway predictors',
+    sections: [
+        {
+            heading: 'R - Restricted Mouth Opening',
+            body: 'Trismus, angioedema, mandibular fracture, wiring, or severe pain may prevent passage of the device. If the mouth cannot accept the SGA, move to BVM/intubation/cric plan.',
+        },
+        {
+            heading: 'O - Obstruction',
+            body: 'An SGA sits above the glottis. It will not bypass laryngeal, subglottic, tracheal, or foreign-body obstruction. Stridor or known distal obstruction should lower confidence.',
+        },
+        {
+            heading: 'D - Disrupted / Distorted Anatomy',
+            body: 'Facial trauma, laryngeal fracture, neck hematoma, tumor, radiation distortion, or surgical anatomy may prevent the mask from seating.',
+        },
+        {
+            heading: 'S - Stiff Lungs / Spine',
+            body: 'ARDS, severe asthma, pulmonary edema, obesity with poor compliance, or fixed cervical position may require pressures above the SGA seal. If pressure is the problem, a better seal may not fix ventilation.',
+        },
+        {
+            heading: 'Clinical Use',
+            body: 'RODS does not forbid rescue SGA in a dying patient. It tells you whether to prepare early for a different rescue path.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Apfelbaum JL, et al. ASA difficult airway guidelines. Anesthesiology. 2022;136(1):31-81.' },
+        { num: 2, text: 'Zhang K, et al. Supraglottic airway devices. Am J Cancer Res. 2024;14(1):16-32.' },
+    ],
+    shareable: true,
+};
+const SGA_SIZING = {
+    id: 'sga-sizing',
+    title: 'SGA Sizing',
+    subtitle: 'Adult i-gel plus general LMA guidance',
+    image: {
+        src: 'images/supraglottic-airway/laryngeal-mask-airway.jpg',
+        alt: 'Size 4 laryngeal mask airway',
+        caption: 'Size 4 laryngeal mask airway. ICUnurses, CC BY-SA 4.0, Wikimedia Commons.',
+    },
+    sections: [
+        {
+            heading: 'i-gel Adult Sizes',
+            body: '| Size | Patient | Weight | Max gastric tube | Max ETT through device |\n|------|---------|--------|------------------|------------------------|\n| 3 | Small adult | 30-60 kg | 12 Fr | 6.0 mm |\n| 4 | Medium adult | 50-90 kg | 12 Fr | 7.0 mm |\n| 5 | Large adult | >90 kg | 14 Fr | 8.0 mm |',
+        },
+        {
+            heading: 'Cuffed LMA Devices',
+            body: 'Use the device package or local airway cart card. Do not overinflate. If leak persists after correct seating and cuff pressure check, change size or device rather than repeatedly reinserting the same setup.',
+        },
+        {
+            heading: 'Weight Overlap',
+            body: 'At i-gel overlaps, use anatomy and ventilation result. A short 88 kg patient may behave differently than a tall 88 kg patient. If seal is poor, reassess position and size.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Intersurgical. i-gel supraglottic airway size guide.' },
+    ],
+    shareable: true,
+};
+const SGA_INSERTION = {
+    id: 'sga-insertion',
+    title: 'SGA Insertion Guide',
+    subtitle: 'Prep, placement, and confirmation',
+    image: {
+        src: 'images/supraglottic-airway/lma-igel.jpg',
+        alt: 'LMA Unique and i-gel supraglottic airway devices',
+        caption: 'Second-generation devices with gastric drainage are preferred when available. CYP3A42D6, CC BY-SA 4.0, Wikimedia Commons.',
+    },
+    sections: [
+        {
+            heading: 'Prep',
+            body: '• Suction on and within reach\n• BVM/PEEP valve attached to oxygen\n• EtCO2 ready before first ventilation\n• Backup SGA size above/below\n• Cric kit visible if this is rescue airway\n• Gastric tube if the device supports drainage',
+        },
+        {
+            heading: 'Placement',
+            body: '• Lubricate posterior surface only\n• Insert along hard palate with gentle continuous pressure\n• Seat until definite resistance\n• For cuffed devices, inflate per manufacturer guidance and check pressure if available\n• Secure once ventilation is confirmed',
+        },
+        {
+            heading: 'Confirmation',
+            body: '• Chest rise\n• EtCO2 waveform or colorimetric change\n• Improving SpO2 trend\n• Bilateral breath sounds\n• Acceptable leak at planned ventilation pressure\n• Gastric insufflation absent/minimal',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Intersurgical. i-gel supraglottic airway size guide.' },
+        { num: 2, text: 'Ahmad I, et al. DAS 2025 difficult tracheal intubation guideline. Br J Anaesth. 2026;136(1):283-307.' },
+    ],
+    shareable: true,
+};
+const SGA_TROUBLESHOOT = {
+    id: 'sga-troubleshoot',
+    title: 'SGA Troubleshooting',
+    subtitle: 'Leak, obstruction, regurgitation, failure',
+    sections: [
+        {
+            heading: 'Leak / Poor Seal',
+            body: '• Re-seat deeper or withdraw slightly\n• Jaw thrust\n• Reposition head/neck if safe\n• Check cuff pressure if cuffed\n• Change size or device\n• Lower inspiratory pressure if clinically acceptable',
+        },
+        {
+            heading: 'Poor Ventilation / High Pressure',
+            body: '• Check circuit and oxygen source\n• Check for biting, laryngospasm, bronchospasm, pulmonary edema, ARDS, or distal obstruction\n• If pressures exceed seal capacity, the SGA may not be the right airway',
+        },
+        {
+            heading: 'Regurgitation / Blood / Vomit',
+            body: '• Suction aggressively\n• Turn if feasible\n• Reassess whether the SGA still ventilates\n• Prepare cuffed tracheal airway if oxygenation allows\n• If oxygenation fails, treat as active failed airway',
+        },
+        {
+            heading: 'Failure Threshold',
+            body: 'Limit to 3 insertion attempts. If SGA and BVM both fail, declare CICO and proceed to emergency front-of-neck access.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ahmad I, et al. DAS 2025 difficult tracheal intubation guideline. Br J Anaesth. 2026;136(1):283-307.' },
+        { num: 2, text: 'Apfelbaum JL, et al. ASA difficult airway guidelines. Anesthesiology. 2022;136(1):31-81.' },
+    ],
+    shareable: true,
+};
+// -------------------------------------------------------------------
 // ED Extubation Protocol
 // -------------------------------------------------------------------
 const EXTUB_STEPS = {
@@ -18735,6 +18892,11 @@ export const INFO_PAGES = {
     'dab-lemon-card': DAB_LEMON_CARD,
     'dab-rsi-drugs': DAB_RSI_DRUGS,
     'dab-cric-steps': DAB_CRIC_STEPS,
+    'sga-steps': SGA_STEPS,
+    'sga-rods': SGA_RODS,
+    'sga-sizing': SGA_SIZING,
+    'sga-insertion': SGA_INSERTION,
+    'sga-troubleshoot': SGA_TROUBLESHOOT,
     'extub-steps': EXTUB_STEPS,
     'extub-readiness': EXTUB_READINESS,
     'extub-cuff-leak': EXTUB_CUFF_LEAK,
