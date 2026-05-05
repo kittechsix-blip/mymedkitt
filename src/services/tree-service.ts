@@ -778,6 +778,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/wrist-injuries.js');
       return { nodes: m.WRIST_INJURIES_NODES, entryNodeId: 'wrist-start', categoryId: 'orthopedics', moduleLabels: m.WRIST_INJURIES_MODULE_LABELS, citations: m.WRIST_INJURIES_CITATIONS };
     },
+    'fingertip-infections': async () => {
+      const m = await import('../data/trees/fingertip-infections.js');
+      return { nodes: m.FTI_NODES, entryNodeId: 'fti-start', categoryId: 'orthopedics', moduleLabels: m.FTI_MODULE_LABELS, citations: m.FTI_CITATIONS, criticalActions: m.FTI_CRITICAL_ACTIONS };
+    },
     'peds-submersion': async () => {
       const m = await import('../data/trees/peds-submersion.js');
       return { nodes: m.PEDS_SUBMERSION_NODES, entryNodeId: 'submersion-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_SUBMERSION_MODULE_LABELS, citations: m.PEDS_SUBMERSION_CITATIONS, criticalActions: m.PEDS_SUBMERSION_CRITICAL_ACTIONS };

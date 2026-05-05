@@ -18992,6 +18992,80 @@ const TGA_STEPS_SUMMARY: InfoPage = {
 // Mammalian Bite
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+// Fingertip Infections (Ortho)
+// -------------------------------------------------------------------
+
+const FTI_STEPS: InfoPage = {
+  id: 'fti-steps',
+  title: 'Fingertip Infections — Steps',
+  subtitle: 'Photo-Recognition ED Workflow',
+  sections: [
+    {
+      body: '**Step 1: [Visual Recognition](#/node/fti-start)**\n• Open the [Photo Atlas](#/info/fti-photo-atlas) and match the patient\u2019s finger\n• Nail fold pus → paronychia\n• Tense throbbing pulp → felon\n• Grouped clear vesicles → herpetic whitlow (do NOT incise)\n• Discoloration under nail → hematoma vs abscess\n\n**Step 2: [Screen for Kanavel](#/info/fti-kanavel)**\n• Any positive sign → flexor tenosynovitis pathway, escalate immediately\n\n**Step 3: Drainage Decisions**\n• [Paronychia](#/node/fti-paronychia-acute) — lift fold, partial nail removal if subungual\n• [Felon](#/node/fti-felon-drainage) — lateral or volar longitudinal; never fishmouth\n• [Subungual hematoma](#/node/fti-trephination) — trephinate by pain, not percentage\n• [Subungual abscess](#/node/fti-subungual-abscess) — lift fold or trephinate\n\n**Step 4: Herpetic Whitlow ([details](#/node/fti-whitlow))**\n• Vesicles = viral; oral antivirals; no I&D\n\n**Step 5: Antibiotics (only if indicated)**\n• Drainage alone often sufficient\n• Cellulitis: Cephalexin or TMP-SMX (MRSA risk)\n\n**Step 6: [Disposition](#/node/fti-disposition-outpatient)**\n• Most fingertip infections: discharge with 48-72 h follow-up\n• Any FTS suspicion: hand surgery + IV antibiotics + admit',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rerucha CM et al. Acute Hand Infections. Am Fam Physician. 2019.' },
+    { num: 2, text: 'Tosti R, Iorio ML. Hand Infections. StatPearls. 2024.' },
+  ],
+};
+
+const FTI_PHOTO_ATLAS: InfoPage = {
+  id: 'fti-photo-atlas',
+  title: 'Fingertip Infection Photo Atlas',
+  subtitle: 'Open-source bedside reference',
+  sections: [
+    {
+      heading: 'Acute Paronychia',
+      body: '![Acute paronychia](images/fingertip-infections/paronychia-acute.jpg)\n\n*Acute paronychia with surrounding cellulitis of the right index finger. Wikimedia Commons, CC BY-SA.*\n\nKey features: erythema and swelling localized to the nail fold, often with fluctuance or visible pus tracking under the cuticle. Most commonly Staph aureus.',
+    },
+    {
+      heading: 'Chronic Paronychia',
+      body: '![Chronic paronychia](images/fingertip-infections/paronychia-chronic.jpg)\n\n*Chronic paronychia with absent cuticle and boggy fold. Wikimedia Commons, CC BY-SA.*\n\nKey features: multiple digits, absent cuticle, boggy non-tender fold, frequent water exposure. Inflammatory not infectious.',
+    },
+    {
+      heading: 'Felon',
+      body: '![Felon](images/fingertip-infections/felon.jpg)\n\n*Felon of the fingertip with characteristic tense pulp swelling. Wikimedia Commons, public domain.*\n\nKey features: tense glove-tight pulp, throbbing pain out of proportion, often after minor puncture. Closed septated compartment.',
+    },
+    {
+      heading: 'Herpetic Whitlow',
+      body: '![Herpetic whitlow](images/fingertip-infections/herpetic-whitlow.jpg)\n\n*Herpetic whitlow in a young child with grouped clear vesicles. Wikimedia Commons, CC BY-SA.*\n\nKey features: grouped clear vesicles, burning prodrome, history of orofacial HSV exposure. **Do not incise.**',
+    },
+    {
+      heading: 'Subungual Hematoma',
+      body: '![Subungual hematoma](images/fingertip-infections/subungual-hematoma.jpg)\n\n*Subungual hematoma of the finger after crush injury. Wikimedia Commons, CC BY-SA.*\n\nKey features: dark red/blue/black under nail, recent trauma, throbbing pressure. Trephinate based on pain.',
+    },
+    {
+      heading: 'Subungual Abscess',
+      body: '![Subungual abscess](images/fingertip-infections/subungual-abscess.jpg)\n\n*Fingertip after eradication of paronychia, demonstrating the appearance of subungual extension. Wikimedia Commons, CC BY-SA.*\n\nKey features: yellow-white pus under nail, no clear trauma, often associated with paronychia. Drain by lifting fold or partial nail removal.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Wikimedia Commons. Open-license clinical photographs. https://commons.wikimedia.org' },
+  ],
+};
+
+const FTI_KANAVEL: InfoPage = {
+  id: 'fti-kanavel',
+  title: 'Kanavel Signs of Flexor Tenosynovitis',
+  subtitle: 'Bedside screen before any fingertip drainage',
+  sections: [
+    {
+      body: '**The four Kanavel signs of pyogenic flexor tenosynovitis** (Allen B. Kanavel, 1912):\n\n1. **Fusiform (sausage) swelling** of the entire digit\n2. **Finger held in slight flexion** at rest\n3. **Tenderness along the flexor tendon sheath** (palmar aspect, from DIP to distal palmar crease)\n4. **Pain with passive extension** of the digit (the most sensitive sign)\n\n**Interpretation:**\n• Any single sign warrants concern\n• 3 of 4 is highly specific for flexor sheath infection\n• Sign #4 (pain with passive extension) appears earliest\n\n**Why it matters here:**\nA fingertip infection that has tracked to the flexor sheath is no longer a bedside problem — flexor sheath drainage requires the OR. Time to treatment correlates with tendon necrosis, stiffness, and amputation risk.',
+    },
+    {
+      heading: 'Action if Positive',
+      body: '1. **Hand surgery consult immediately**\n2. NPO, mark cellulitis border, serial exams\n3. IV vancomycin + piperacillin-tazobactam (or cefepime)\n4. Splint in functional position, elevate\n5. Tetanus update if indicated\n\nDo NOT attempt bedside drainage of the flexor sheath.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kanavel AB. Infections of the Hand. Lea & Febiger; 1912. (Original description.)' },
+    { num: 2, text: 'Pang HN, et al. Factors affecting the prognosis of pyogenic flexor tenosynovitis. J Bone Joint Surg Am. 2007.' },
+    { num: 3, text: 'Draeger RW, Bynum DK Jr. Flexor tendon sheath infections of the hand. J Am Acad Orthop Surg. 2012.' },
+  ],
+};
+
 const MB_STEPS_SUMMARY: InfoPage = {
   id: 'mb-steps',
   title: 'Mammalian Bite — Steps',
@@ -19599,6 +19673,10 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'tga-steps': TGA_STEPS_SUMMARY,
   // Mammalian Bite
   'mb-steps': MB_STEPS_SUMMARY,
+  // Fingertip Infections
+  'fti-steps': FTI_STEPS,
+  'fti-photo-atlas': FTI_PHOTO_ATLAS,
+  'fti-kanavel': FTI_KANAVEL,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

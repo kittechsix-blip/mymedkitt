@@ -132,6 +132,7 @@ export const TREE_REGISTRY = {
   'cvst':             { prefix: 'CVST',                entryNodeId: 'cvst-start',         categoryId: 'neurology' },
   'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'sd-start',     categoryId: 'orthopedics' },
   'wrist-injuries':   { prefix: 'WRIST_INJURIES',      entryNodeId: 'wi-start',           categoryId: 'orthopedics' },
+  'fingertip-infections': { prefix: 'FTI',              entryNodeId: 'fti-start',          categoryId: 'orthopedics' },
   'peds-submersion':  { prefix: 'PEDS_SUBMERSION',     entryNodeId: 'ps-start',           categoryId: 'pediatrics' },
   'brugada-syndrome': { prefix: 'BRUGADA_SYNDROME',    entryNodeId: 'brug-start',         categoryId: 'cardiology' },
   'hd-emergencies':   { prefix: 'HD_EMERGENCIES',      entryNodeId: 'hde-start',          categoryId: 'nephro-rheum-endo' },
