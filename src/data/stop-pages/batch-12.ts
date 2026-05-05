@@ -199,9 +199,51 @@ const MESENTERIC_ISCHEMIA_STOP: InfoPage = {
   citations: [],
 };
 
+const ED_EXTUBATION_STOP: InfoPage = {
+  id: 'ed-extubation-stop',
+  title: 'ED Extubation — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT extubate if the original indication has not improved',
+      body: 'Extubation is elective unless it is part of a documented goals-of-care plan. If the patient still needs invasive ventilation for hypoxemia, hypercapnia, shock, airway protection, procedure safety, or incomplete diagnostic workup, keep the tube and reassess later. [See this node](#/node/extub-context).',
+    },
+    {
+      heading: '🛑 Do NOT extubate a hard-to-regain airway without backup',
+      body: 'Predicted difficult reintubation changes the threshold. If the airway was difficult, anatomy is distorted, edema is likely, or the rescue path is weak, delay extubation or perform it with airway-skilled help, RT, suction, BVM, drugs, and rescue equipment at bedside. [See this node](#/node/extub-red-flags).',
+    },
+    {
+      heading: '🛑 Do NOT let a passed SBT override poor airway protection',
+      body: 'Ventilator mechanics do not prove the patient can protect the airway. Poor cough, heavy secretions, persistent depressed mental status, active vomiting, aspiration risk, or uncontrolled airway bleeding should stop extubation even if the SBT looks acceptable. [See this node](#/node/extub-airway-protection).',
+    },
+    {
+      heading: '🛑 Do NOT extubate through shock or severe physiology',
+      body: 'Ongoing shock, escalating vasopressors, severe hypoxemia, high ventilator needs, persistent severe acidosis, uncontrolled bronchospasm, deep sedation, or residual paralysis should push the plan toward continued ventilation and ICU handoff. [See this node](#/node/extub-defer-icu).',
+    },
+    {
+      heading: '🛑 Do NOT use RSBI as a standalone decision',
+      body: 'RSBI can support the assessment, but it should not drive extubation alone. Use a structured SBT plus bedside assessment of work of breathing, oxygenation, ventilation, hemodynamics, mentation, secretion burden, and rescue feasibility. [See this node](#/node/extub-sbt-setup).',
+    },
+    {
+      heading: '🛑 Do NOT use cuff leak testing as a universal screen',
+      body: 'Cuff leak testing is most useful for patients at high risk of post-extubation stridor. A leak does not guarantee safety, and an absent leak is not a diagnosis, but a failed leak in a high-risk patient should trigger delay and steroid prophylaxis when feasible. [See this node](#/node/extub-cuff-leak-result).',
+    },
+    {
+      heading: '🛑 Do NOT remove the tube before the support device is ready',
+      body: 'Choose NIV, HFNC, or standard oxygen before tube removal. Have the device set up, suction available, BVM connected, airway cart nearby, and reintubation medications/equipment ready. Post-extubation support is part of the procedure, not an afterthought. [See this node](#/node/extub-support-plan).',
+    },
+    {
+      heading: '🛑 Do NOT let rescue NIV delay reintubation in severe failure',
+      body: 'Preventive NIV or HFNC can be appropriate for selected high-risk patients. Established severe or worsening post-extubation failure is different. Poor mentation, shock, exhaustion, severe hypoxemia, aspiration, or inability to protect the airway should trigger early reintubation. [See this node](#/node/extub-reintubate).',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_12: Record<string, InfoPage> = {
   'vertigo-stop': VERTIGO_STOP,
   'toxic-alcohols-stop': TOXIC_ALCOHOLS_STOP,
   'wide-complex-tachycardia-stop': WIDE_COMPLEX_TACHYCARDIA_STOP,
   'mesenteric-ischemia-stop': MESENTERIC_ISCHEMIA_STOP,
+  'ed-extubation-stop': ED_EXTUBATION_STOP,
 };
