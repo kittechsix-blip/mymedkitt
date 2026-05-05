@@ -19,6 +19,12 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Claudex/codex autonomous loop runtime files
+# (collision surface for parallel git ops — see feedback_parallel_session_git_safety)
+.claude/claudex/
+.playwright-cli/
+.playwright-mcp/
+
 # Environment — NEVER commit secrets
 .env
 .env.*
