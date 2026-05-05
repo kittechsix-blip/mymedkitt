@@ -214,9 +214,10 @@ export const NMS_NODES: DecisionNode[] = [
     type: 'result',
     module: 4,
     title: 'ICU Admission',
-    body: '**ICU mandatory for:**\n* Temp >40 degC\n* Severe rigidity\n* Rhabdomyolysis (CK >10,000)\n* Respiratory compromise\n* Renal failure\n* Autonomic instability\n\n**Mortality:** 10-20% even with treatment. Higher if delayed diagnosis.',
+    body: '**ICU mandatory for:** [1][2][6]\n* Temp >40 degC\n* Severe rigidity\n* Rhabdomyolysis (CK >10,000)\n* Respiratory compromise\n* Renal failure\n* Autonomic instability\n\n**Mortality:** 10-20% even with treatment. Higher if delayed diagnosis. [3][7]',
     recommendation: 'ICU admission for severe NMS.',
     confidence: 'definitive',
+    citation: [1, 2, 3, 6, 7],
     summary: 'ICU for severe NMS. Mortality 10-20% with treatment.',
   },
 
@@ -225,9 +226,10 @@ export const NMS_NODES: DecisionNode[] = [
     type: 'result',
     module: 4,
     title: 'Step-down Admission',
-    body: '**Step-down/telemetry for:**\n* Mild-moderate symptoms\n* Stable vitals\n* CK <10,000\n* No respiratory compromise\n\n**Continue:**\n* Bromocriptine\n* Benzos PRN\n* Aggressive hydration\n* Serial CK and renal function\n\n**Duration:** Average hospitalization 7-14 days.',
+    body: '**Step-down/telemetry for:** [1][2][8]\n* Mild-moderate symptoms\n* Stable vitals\n* CK <10,000\n* No respiratory compromise\n\n**Continue:**\n* Bromocriptine\n* Benzos PRN\n* Aggressive hydration\n* Serial CK and renal function\n\n**Duration:** Average hospitalization 7-14 days. [4][8]',
     recommendation: 'Step-down admission for moderate NMS.',
     confidence: 'definitive',
+    citation: [1, 2, 4, 8],
     summary: 'Step-down for moderate. Average stay 7-14 days.',
   },
 
@@ -246,6 +248,9 @@ export const NMS_CITATIONS: Citation[] = [
   { num: 3, text: 'Levenson JL. Neuroleptic Malignant Syndrome. Am J Psychiatry 1985;142:1137-45.' },
   { num: 4, text: 'Rosenberg MR, Green M. Neuroleptic Malignant Syndrome: Review of Response to Therapy. Arch Intern Med 1989;149:1927-31.' },
   { num: 5, text: 'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med 2005;352:1112-20.' },
+  { num: 6, text: 'Caroff SN, Mann SC. Neuroleptic Malignant Syndrome. Med Clin North Am 1993;77:185-202.' },
+  { num: 7, text: 'Modi S, Dharaiya D, Schultz L, Varelas P. Neuroleptic Malignant Syndrome: Complications, Outcomes, and Mortality. Neurocrit Care 2016;24:97-103.' },
+  { num: 8, text: 'Velamoor VR, Norman RM, Caroff SN, Mann SC, Sullivan KA, Antelo RE. Progression of symptoms in neuroleptic malignant syndrome. J Nerv Ment Dis 1994;182:168-73.' },
 ];
 
 export const NMS_NODE_COUNT = NMS_NODES.length;

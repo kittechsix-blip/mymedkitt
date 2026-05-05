@@ -197,8 +197,9 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Alternative Diagnosis',
-    body: '**Serotonin syndrome unlikely** — consider:\n\n• **Anticholinergic toxicity:** Dry, hot, flushed, urinary retention, absent bowel sounds\n• **Sympathomimetic:** Cocaine, amphetamines — similar but no clonus\n• **Sepsis:** Fever, altered mental status — check source\n• **Meningitis/Encephalitis:** Meningismus, CSF analysis\n• **Thyroid storm:** History of hyperthyroidism, check TSH\n• **Heat stroke:** Environmental exposure, dry skin\n• **Malignant hyperthermia:** Anesthesia exposure, extreme rigidity\n\n**Workup:**\n• CBC, BMP, LFTs, CK, lactate\n• TSH, cortisol\n• Urinalysis, blood cultures\n• CT head if altered mental status\n• LP if meningitis concern',
+    body: '**Serotonin syndrome unlikely** — consider: [1][5][7]\n\n• **Anticholinergic toxicity:** Dry, hot, flushed, urinary retention, absent bowel sounds\n• **Sympathomimetic:** Cocaine, amphetamines — similar but no clonus\n• **Sepsis:** Fever, altered mental status — check source\n• **Meningitis/Encephalitis:** Meningismus, CSF analysis\n• **Thyroid storm:** History of hyperthyroidism, check TSH\n• **Heat stroke:** Environmental exposure, dry skin\n• **Malignant hyperthermia:** Anesthesia exposure, extreme rigidity\n\n**Workup:**\n• CBC, BMP, LFTs, CK, lactate\n• TSH, cortisol\n• Urinalysis, blood cultures\n• CT head if altered mental status\n• LP if meningitis concern',
     recommendation: 'Continue workup for alternative etiology.',
+    citation: [1, 5, 7],
   },
 
   // =====================================================================
@@ -325,8 +326,9 @@ export const SEROTONIN_SYNDROME_NODES: DecisionNode[] = [
     type: 'result',
     module: 5,
     title: 'Serotonin Syndrome — Complete',
-    body: '**Summary:**\n\n**Diagnosis:**\n• Hunter Criteria = serotonergic drug + clinical findings\n• Clonus is the hallmark finding\n• Distinguish from NMS (rigidity, slow onset, antipsychotics)\n\n**Treatment:**\n• STOP serotonergic agents\n• Benzodiazepines for agitation\n• Cyproheptadine 12 mg load → 2 mg q2h (max 32 mg/day)\n• Aggressive cooling for hyperthermia\n• Supportive care\n\n**Prognosis:**\n• Most cases resolve in 24-72 hours\n• Excellent outcomes with early recognition\n• Severe cases can be fatal if untreated\n\n**Key Resources:**\n• [Hunter Criteria](#/calculator/hunter-criteria)\n• [SS vs NMS Differentiator](#/calculator/ss-vs-nms)\n• [Serotonergic Drug List](#/calculator/ss-drug-list)\n• [Cyproheptadine Dosing](#/calculator/cyproheptadine-dose)',
+    body: '**Summary:** [1][2][4][7][8]\n\n**Diagnosis:**\n• Hunter Criteria = serotonergic drug + clinical findings\n• Clonus is the hallmark finding\n• Distinguish from NMS (rigidity, slow onset, antipsychotics)\n\n**Treatment:**\n• STOP serotonergic agents\n• Benzodiazepines for agitation\n• Cyproheptadine 12 mg load → 2 mg q2h (max 32 mg/day)\n• Aggressive cooling for hyperthermia\n• Supportive care\n\n**Prognosis:**\n• Most cases resolve in 24-72 hours\n• Excellent outcomes with early recognition\n• Severe cases can be fatal if untreated\n\n**Key Resources:**\n• [Hunter Criteria](#/calculator/hunter-criteria)\n• [SS vs NMS Differentiator](#/calculator/ss-vs-nms)\n• [Serotonergic Drug List](#/calculator/ss-drug-list)\n• [Cyproheptadine Dosing](#/calculator/cyproheptadine-dose)',
     recommendation: 'Management pathway complete. Ensure psychiatry follow-up for medication reconciliation.',
+    citation: [1, 2, 4, 7, 8],
   },
 
 ];
