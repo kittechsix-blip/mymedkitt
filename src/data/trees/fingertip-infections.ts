@@ -61,6 +61,13 @@ export const FTI_NODES: DecisionNode[] = [
     title: 'Acute Paronychia - Bedside Drainage',
     body: '**Decision:** Subungual extension changes the procedure.\n\n**Simple lateral fold abscess** (no pus tracking under nail):\n1. Skin prep, no anesthesia for superficial; digital block if extensive.\n2. Slide a #11 blade or 18g needle **parallel to the nail**, bevel up, between cuticle and nail plate at the point of maximal fluctuance.\n3. Lift the eponychial fold off the nail to release pus. Do NOT incise the nail fold itself - scarring + nail dystrophy.\n4. Express pus, irrigate with saline, loose gauze.\n\n**Subungual extension** (pus visible under nail edge):\n- Remove the **lateral one-quarter of the nail** with a small hemostat. Keep the rest of the nail in place as a biologic dressing.\n- Total nail avulsion only if the entire subungual space is involved.\n\n**After drainage:**\n- Warm soaks TID starting day 2.\n- Dressing change in 24-48 h.\n- Antibiotics usually NOT required after adequate drainage. Add **[Cephalexin](#/drug/cephalexin/skin)** 500 mg QID x 5-7 days only if surrounding cellulitis. **[TMP-SMX](#/drug/tmp-smx/skin)** DS BID if MRSA risk (recurrent abscess, nasal colonization, contact with MRSA).\n- Hand follow-up only if subungual involvement or immunocompromised. [3,4,5]',
     citation: [3, 4, 5],
+    images: [
+      {
+        src: 'images/fingertip-infections/paronychia-acute.jpg',
+        alt: 'Acute paronychia with erythema and pus along the lateral nail fold',
+        caption: 'Acute paronychia: tender, erythematous nail fold with visible pus collection. (CC, Wikimedia Commons)',
+      },
+    ],
     next: 'fti-disposition-outpatient',
   },
 
@@ -84,6 +91,13 @@ export const FTI_NODES: DecisionNode[] = [
     recommendation: 'Chronic paronychia is inflammatory. Topical steroid + dry + glove strategy. No oral antibiotics. Derm referral if refractory.',
     confidence: 'recommended',
     citation: [4, 6],
+    images: [
+      {
+        src: 'images/fingertip-infections/paronychia-chronic.jpg',
+        alt: 'Chronic paronychia with absent cuticle and boggy proximal nail fold',
+        caption: 'Chronic paronychia: absent cuticle, boggy proximal nail fold, often Candida-colonized. (CC, Wikimedia Commons)',
+      },
+    ],
   },
 
   // =====================================================================
@@ -109,6 +123,13 @@ export const FTI_NODES: DecisionNode[] = [
     title: 'Felon - Bedside I&D Technique',
     body: '**Anesthesia:** digital block with **[Lidocaine](#/drug/lidocaine/digital-block)** 1% plain (no epi), 1-2 mL each side at the base of the digit. Allow 5-10 min. Penrose tourniquet at the base for hemostasis.\n\n**Choose the incision based on abscess location:**\n\n**1. Volar longitudinal (preferred for superficial midline pus):**\n- Single midline incision over the point of maximal fluctuance, NOT crossing the DIP flexion crease.\n- Spread with a small hemostat, breaking septa to ensure complete drainage.\n\n**2. Unilateral lateral (preferred for deeper or off-midline pus):**\n- Single longitudinal incision 0.5 cm distal to the DIP crease, parallel to the nail plate, on the **non-pinch side** (ulnar side of thumb/index, radial side of small).\n- Stay dorsal to the digital neurovascular bundle.\n- Extend from lateral nail fold toward the tip; break ALL septa with a hemostat.\n\n**Avoid:**\n- Fishmouth (transverse through-and-through) incision - causes pulp necrosis, unstable pad.\n- Hockey-stick or J-incision - injures the digital nerve.\n- Crossing the DIP crease - flexion contracture.\n\n**After drainage:**\n- Loose iodoform gauze wick, remove at 24-48 h.\n- **[Cephalexin](#/drug/cephalexin/skin)** 500 mg QID x 7-10 days (or **[TMP-SMX](#/drug/tmp-smx/skin)** DS BID if MRSA risk).\n- Warm soaks TID starting day 2; elevate.\n- Hand follow-up at 48-72 h. Get plain film if pain persists past 1 week (osteomyelitis). [2,5]',
     citation: [2, 5],
+    images: [
+      {
+        src: 'images/fingertip-infections/felon.jpg',
+        alt: 'Felon — tense erythematous distal pulp space abscess',
+        caption: 'Felon: tense, glove-tight pulp with throbbing pain. Septated compartments raise pressure rapidly. (CC, Wikimedia Commons)',
+      },
+    ],
     next: 'fti-disposition-outpatient',
   },
 
@@ -133,6 +154,13 @@ export const FTI_NODES: DecisionNode[] = [
     title: 'Herpetic Whitlow - Recognize, Do NOT Incise',
     body: 'See [Photo Atlas - Whitlow](#/info/fti-photo-atlas).\n\n**Recognition:**\n- Grouped **clear vesicles on an erythematous base**, often coalescing.\n- Burning/throbbing pain typically out of proportion to exam early on.\n- Prodrome: tingling 24-48 h before vesicles appear.\n- High-risk groups: dental/respiratory therapy workers, kids who suck thumbs, healthcare workers; HSV-1 > HSV-2.\n- Self-limited 2-4 weeks. Recurrences possible.\n\n**Why it matters:**\n- **DO NOT incise.** Incision causes bacterial superinfection, viremia, and slower healing. This is the most common ED error in fingertip infections.\n- Often misdiagnosed as felon or paronychia early - the **vesicles** are the clue.\n\n**Confirmatory testing (only if diagnosis uncertain):**\n- HSV PCR from de-roofed vesicle fluid (most sensitive).\n- Tzanck smear: multinucleated giant cells (low sensitivity, fast).\n- Viral culture (slow, less commonly available).\n\n**Treatment:**\n- **[Acyclovir](#/drug/acyclovir/herpes-simplex)** 400 mg PO 5x/day x 7-10 days, OR **[Valacyclovir](#/drug/valacyclovir/herpes-simplex)** 1 g PO BID x 7-10 days.\n- Most benefit if started **within 48 h** of vesicle onset.\n- Dry occlusive dressing to prevent autoinoculation/spread to others.\n- Analgesia.\n\n**Suppression** for >=6 recurrences/year: **[Acyclovir](#/drug/acyclovir/herpes-simplex)** 400 mg BID or **[Valacyclovir](#/drug/valacyclovir/herpes-simplex)** 500 mg daily. [7,8]',
     citation: [7, 8],
+    images: [
+      {
+        src: 'images/fingertip-infections/herpetic-whitlow.jpg',
+        alt: 'Herpetic whitlow with grouped clear vesicles on erythematous base',
+        caption: 'Herpetic whitlow: grouped clear vesicles on an erythematous base. DO NOT incise — causes superinfection. (CC, Wikimedia Commons)',
+      },
+    ],
     next: 'fti-disposition-outpatient',
   },
 
@@ -159,6 +187,13 @@ export const FTI_NODES: DecisionNode[] = [
     title: 'Subungual Hematoma - Trephination',
     body: '**Indication:** painful subungual hematoma, regardless of size. Pain relief is dramatic and immediate.\n\n**Old teaching to avoid:** the "drain only if >50% of nail" rule has been **abandoned**. Trephinate based on pain, not percentage. [9]\n\n**Tuft fracture is NOT a contraindication.** Multiple studies and updated guidelines show trephination of a hematoma overlying a closed tuft fracture does not increase infection risk and is preferred over nail removal in stable nail beds. [9,10]\n\n**Technique - electrocautery (preferred):**\n- Hold the cautery tip perpendicular to the nail at the center of the hematoma.\n- Touch lightly; the heated tip melts through in 1-2 seconds. Stop the moment you see blood escape - the cautery cools instantly on contact with liquid.\n- Painless because the nail has no innervation.\n\n**Alternative - heated paperclip / 18g needle twirl:**\n- Heat a paperclip end red-hot or use a sterile 18g needle bevel rotated like a drill.\n- Same endpoint: through-and-through with blood release.\n\n**After drainage:**\n- Apply gentle pressure, dry dressing.\n- Keep dry 24 h, then normal hygiene.\n- Splint distal phalanx if associated tuft fracture (mallet-style splint, ortho follow-up 1-2 weeks).\n- Antibiotics generally not needed even with tuft fracture in healthy patients. Consider if grossly contaminated, immunocompromised, or open laceration of nail bed.\n\n**Nail removal indications** (rare): nail plate avulsed/floppy, nail bed laceration requiring repair (visible disruption through transparent nail), surrounding paronychia. [9,10]',
     citation: [9, 10],
+    images: [
+      {
+        src: 'images/fingertip-infections/subungual-hematoma.jpg',
+        alt: 'Subungual hematoma — dark blood collection visible under the nail plate after trauma',
+        caption: 'Subungual hematoma: dark blood under nail after crush/blunt trauma. Trephinate based on pain, not percentage. (CC, Wikimedia Commons)',
+      },
+    ],
     next: 'fti-disposition-outpatient',
   },
 
@@ -169,6 +204,13 @@ export const FTI_NODES: DecisionNode[] = [
     title: 'Subungual Abscess - Drainage',
     body: '**Often an extension of paronychia** that has tracked under the nail.\n\n**Approach by extent:**\n\n**Lateral edge only:**\n- Digital block with **[Lidocaine](#/drug/lidocaine/digital-block)** 1% plain.\n- Lift the lateral nail fold and slide a hemostat under the nail edge to release pus.\n- If pus persists, remove the **lateral one-quarter** of the nail with a small hemostat.\n\n**Central or under most of the nail:**\n- Trephinate the nail directly over the abscess (electrocautery), allowing decompression - this is often enough.\n- Total nail avulsion only if the entire bed is involved or for poor response.\n\n**Antibiotics after drainage:**\n- **[Cephalexin](#/drug/cephalexin/skin)** 500 mg QID x 5-7 days, OR\n- **[TMP-SMX](#/drug/tmp-smx/skin)** DS BID if MRSA risk.\n\n**Follow-up:** wound check 48-72 h, hand surgery if no improvement. [3,4,5]',
     citation: [3, 4, 5],
+    images: [
+      {
+        src: 'images/fingertip-infections/subungual-abscess.jpg',
+        alt: 'Subungual abscess with yellow-white pus visible under the nail plate',
+        caption: 'Subungual abscess: yellow-white pus under nail, often extending from a paronychia. Drain through nail or fold. (CC, Wikimedia Commons)',
+      },
+    ],
     next: 'fti-disposition-outpatient',
   },
 

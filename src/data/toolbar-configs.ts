@@ -1475,6 +1475,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'antibiotics', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'hi-antibiotics' },
     { id: 'whitlow', label: 'Whitlow', icon: '🦠', action: 'jump', target: 'hi-whitlow' },
   ],
+  'fingertip-infections': [
+    { id: 'photos', label: 'Photo Atlas', icon: '📷', action: 'overlay', target: 'fti-photo-atlas' },
+    { id: 'kanavel', label: 'Kanavel', icon: '✋', action: 'overlay', target: 'fti-kanavel' },
+    { id: 'paronychia', label: 'Paronychia', icon: '👆', action: 'jump', target: 'fti-paronychia' },
+    { id: 'felon', label: 'Felon', icon: '🩸', action: 'jump', target: 'fti-felon-drainage' },
+    { id: 'whitlow', label: 'Whitlow', icon: '🦠', action: 'jump', target: 'fti-whitlow' },
+    { id: 'trephinate', label: 'Trephinate', icon: '💉', action: 'jump', target: 'fti-trephination' },
+  ],
   'neck-trauma': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'nt-steps' },
     { id: 'zones', label: 'Zones', icon: '🎯', action: 'jump', target: 'nt-penetrating' },

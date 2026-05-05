@@ -19015,30 +19015,35 @@ const FTI_PHOTO_ATLAS: InfoPage = {
   id: 'fti-photo-atlas',
   title: 'Fingertip Infection Photo Atlas',
   subtitle: 'Open-source bedside reference',
+  image: {
+    src: 'images/fingertip-infections/paronychia-acute.jpg',
+    alt: 'Acute paronychia of the right index finger with erythema and pus',
+    caption: 'Acute paronychia. (CC BY-SA, Wikimedia Commons) — full atlas below; each clinical pathway also displays its photo inline.',
+  },
   sections: [
     {
       heading: 'Acute Paronychia',
-      body: '![Acute paronychia](images/fingertip-infections/paronychia-acute.jpg)\n\n*Acute paronychia with surrounding cellulitis of the right index finger. Wikimedia Commons, CC BY-SA.*\n\nKey features: erythema and swelling localized to the nail fold, often with fluctuance or visible pus tracking under the cuticle. Most commonly Staph aureus.',
+      body: 'Erythema and swelling localized to the nail fold, often with fluctuance or visible pus tracking under the cuticle. Most commonly Staph aureus.\n\n*Photo displayed inline on the [acute paronychia drainage node](#/node/fti-paronychia-acute).*',
     },
     {
       heading: 'Chronic Paronychia',
-      body: '![Chronic paronychia](images/fingertip-infections/paronychia-chronic.jpg)\n\n*Chronic paronychia with absent cuticle and boggy fold. Wikimedia Commons, CC BY-SA.*\n\nKey features: multiple digits, absent cuticle, boggy non-tender fold, frequent water exposure. Inflammatory not infectious.',
+      body: 'Multiple digits, absent cuticle, boggy non-tender fold, frequent water exposure. Inflammatory not infectious.\n\n*Photo displayed inline on the [chronic paronychia node](#/node/fti-paronychia-chronic).*',
     },
     {
       heading: 'Felon',
-      body: '![Felon](images/fingertip-infections/felon.jpg)\n\n*Felon of the fingertip with characteristic tense pulp swelling. Wikimedia Commons, public domain.*\n\nKey features: tense glove-tight pulp, throbbing pain out of proportion, often after minor puncture. Closed septated compartment.',
+      body: 'Tense glove-tight pulp, throbbing pain out of proportion, often after minor puncture. Closed septated compartment of the distal pulp.\n\n*Photo displayed inline on the [felon I&D node](#/node/fti-felon-drainage).*',
     },
     {
       heading: 'Herpetic Whitlow',
-      body: '![Herpetic whitlow](images/fingertip-infections/herpetic-whitlow.jpg)\n\n*Herpetic whitlow in a young child with grouped clear vesicles. Wikimedia Commons, CC BY-SA.*\n\nKey features: grouped clear vesicles, burning prodrome, history of orofacial HSV exposure. **Do not incise.**',
+      body: 'Grouped clear vesicles on an erythematous base, burning prodrome, history of orofacial HSV exposure. **Do not incise.**\n\n*Photo displayed inline on the [herpetic whitlow node](#/node/fti-whitlow).*',
     },
     {
       heading: 'Subungual Hematoma',
-      body: '![Subungual hematoma](images/fingertip-infections/subungual-hematoma.jpg)\n\n*Subungual hematoma of the finger after crush injury. Wikimedia Commons, CC BY-SA.*\n\nKey features: dark red/blue/black under nail, recent trauma, throbbing pressure. Trephinate based on pain.',
+      body: 'Dark red/blue/black under nail, recent trauma, throbbing pressure. Trephinate based on pain, not percentage.\n\n*Photo displayed inline on the [trephination node](#/node/fti-trephination).*',
     },
     {
       heading: 'Subungual Abscess',
-      body: '![Subungual abscess](images/fingertip-infections/subungual-abscess.jpg)\n\n*Fingertip after eradication of paronychia, demonstrating the appearance of subungual extension. Wikimedia Commons, CC BY-SA.*\n\nKey features: yellow-white pus under nail, no clear trauma, often associated with paronychia. Drain by lifting fold or partial nail removal.',
+      body: 'Yellow-white pus under nail, no clear trauma, often associated with paronychia. Drain by lifting fold or partial nail removal.\n\n*Photo displayed inline on the [subungual abscess node](#/node/fti-subungual-abscess).*',
     },
   ],
   citations: [
