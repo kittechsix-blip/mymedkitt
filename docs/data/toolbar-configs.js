@@ -1503,6 +1503,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'rabies', label: 'Rabies', icon: '🦇', action: 'jump', target: 'mb-rabies-assessment' },
         { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'mb-antibiotics' },
     ],
+    'mesenteric-ischemia': [
+        { id: 'types', label: '4 Types', icon: '🩺', action: 'jump', target: 'ami-types' },
+        { id: 'imaging', label: 'CTA', icon: '📷', action: 'jump', target: 'ami-imaging' },
+        { id: 'resus', label: 'Resus', icon: '💉', action: 'jump', target: 'ami-resus' },
+        { id: 'nomi', label: 'NOMI', icon: '🫀', action: 'jump', target: 'ami-nomi' },
+        { id: 'surgery', label: 'Surgery', icon: '🔪', action: 'jump', target: 'ami-surgery' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

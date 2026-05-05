@@ -813,7 +813,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'mesenteric-ischemia': async () => {
       const m = await import('../data/trees/mesenteric-ischemia.js');
-      return { nodes: m.MESENTERIC_ISCHEMIA_NODES, entryNodeId: 'ami-start', categoryId: 'gastroenterology', moduleLabels: m.MESENTERIC_ISCHEMIA_MODULE_LABELS, citations: m.MESENTERIC_ISCHEMIA_CITATIONS, criticalActions: m.MESENTERIC_ISCHEMIA_CRITICAL_ACTIONS };
+      return { nodes: m.MESENTERIC_ISCHEMIA_NODES, entryNodeId: 'ami-start', categoryId: 'trauma-surg', moduleLabels: m.MESENTERIC_ISCHEMIA_MODULE_LABELS, citations: m.MESENTERIC_ISCHEMIA_CITATIONS, criticalActions: m.MESENTERIC_ISCHEMIA_CRITICAL_ACTIONS };
     },
     'post-rosc': async () => {
       const m = await import('../data/trees/post-rosc.js');

@@ -5,7 +5,7 @@ export const POST_ROSC_CRITICAL_ACTIONS = [
     { text: '12-lead ECG immediately — STEMI → emergent PCI, do not delay', nodeId: 'rosc-stemi' },
     { text: 'MAP ≥65 mmHg — start norepinephrine if hypotensive', nodeId: 'rosc-hemo' },
     { text: 'SpO₂ 94-98% — avoid hyperoxia; PaCO₂ 35-45 — avoid hypocapnia', nodeId: 'rosc-hemo' },
-    { text: 'Prevent fever >37.7°C × 72h for comatose patients', nodeId: 'rosc-ttm-coma' },
+    { text: 'Prevent fever >37.8°C × 72h for comatose patients', nodeId: 'rosc-ttm-coma' },
     { text: 'Continuous EEG monitoring — 20-30% have post-arrest seizures', nodeId: 'rosc-seizure' },
     { text: 'Do NOT prognosticate <72h post-rewarming', nodeId: 'rosc-neuro' },
 ];
@@ -138,7 +138,7 @@ export const POST_ROSC_NODES = [
         type: 'info',
         module: 3,
         title: 'Comatose — Prevent Fever Aggressively',
-        body: '**Comatose after ROSC: prevent fever aggressively.**\n\n**TTM2 Trial (2021):** 33°C vs 37.5°C showed no difference in mortality or neurological outcome.\n\n**Current approach (2023 AHA):**\n• Target **normothermia** — actively prevent fever >37.7°C × 72h\n• Cooling to 32-36°C is acceptable but NOT required\n• Surface cooling devices, IV cold saline bolus, or intravascular cooling\n\n**Anti-shivering protocol:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/ttm) 4g IV (raises shivering threshold)\n• Sedation: propofol or midazolam infusion\n• [Meperidine](#/drug/meperidine/shivering) 25-50mg IV (centrally acting)\n• Neuromuscular blockade if refractory\n\n**Monitor:** Core temp continuously (esophageal or bladder probe). Avoid overcooling.',
+        body: '**Comatose after ROSC: prevent fever aggressively.**\n\n**TTM2 Trial (2021):** 33°C vs 37.5°C showed no difference in mortality or neurological outcome.\n\n**Current approach (2023 AHA):**\n• Target **normothermia** — actively prevent fever >37.8°C × 72h (32-37.5°C for at least 36h per AHA 2025)\n• Cooling to 32-36°C is acceptable but NOT required\n• Surface cooling devices, IV cold saline bolus, or intravascular cooling\n\n**Anti-shivering protocol:**\n• [Magnesium Sulfate](#/drug/magnesium-sulfate/ttm) 4g IV (raises shivering threshold)\n• Sedation: propofol or midazolam infusion\n• [Meperidine](#/drug/meperidine/shivering) 25-50mg IV (centrally acting)\n• Neuromuscular blockade if refractory\n\n**Monitor:** Core temp continuously (esophageal or bladder probe). Avoid overcooling.',
         citation: [2, 3, 4, 10],
         next: 'rosc-neuro',
         summary: 'TTM2: no benefit of cooling to 33C — prevent fever >37.7C x72h, anti-shivering protocol required',
@@ -213,7 +213,7 @@ export const POST_ROSC_MODULE_LABELS = [
 ];
 export const POST_ROSC_CITATIONS = [
     { num: 1, text: 'Callaway CW et al. Part 8: Post-Cardiac Arrest Care. Circulation. 2015;132(18 Suppl 2):S465-S482.' },
-    { num: 2, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+    { num: 2, text: 'AHA Guidelines for CPR and ECC. Part 11: Post-Cardiac Arrest Care. Circulation. 2025.' },
     { num: 3, text: 'Dankiewicz J et al. Hypothermia versus Normothermia after OHCA (TTM2). NEJM. 2021;384:2283-2294.' },
     { num: 4, text: 'Nielsen N et al. Targeted Temperature Management at 33°C versus 36°C (TTM). NEJM. 2013;369:2197-2206.' },
     { num: 5, text: 'Soar J et al. ERC Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },

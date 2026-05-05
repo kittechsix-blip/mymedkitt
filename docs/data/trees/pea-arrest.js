@@ -431,7 +431,7 @@ export const PEA_ARREST_CITATIONS = [
     { num: 2, text: 'Littmann L et al. A Simplified Teaching Tool for PEA. Med Princ Pract. 2014;23(1):1-6.' },
     { num: 3, text: 'Breitkreutz R et al. Focused Echo in Life Support and Periresuscitation. Resuscitation. 2010;81(11):1431-1433.' },
     { num: 4, text: 'Driver BE et al. Identification of Treatable Causes of Cardiac Arrest by Ultrasound. Resuscitation. 2017;120:116-120.' },
-    { num: 5, text: 'Panchal AR et al. 2023 AHA Focused Update on ACLS. Circulation. 2023.' },
+    { num: 5, text: 'AHA Guidelines for CPR and ECC. Part 9: Adult Advanced Life Support. Circulation. 2025.' },
     { num: 6, text: 'Taming the SRU. RUSH Exam in Cardiac Arrest. tamingthesru.com.' },
     { num: 7, text: 'Soar J et al. ERC Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
     { num: 8, text: 'First10EM. PEA Cardiac Arrest — What Works? first10em.com.' },

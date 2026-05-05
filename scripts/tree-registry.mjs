@@ -213,7 +213,7 @@ export const TREE_REGISTRY = {
   'svt':              { prefix: 'SVT',                 entryNodeId: 'svt-start',          categoryId: 'cardiology' },
   'critical-care-drips': { prefix: 'CRITICAL_CARE_DRIPS', entryNodeId: 'ccd-start',       categoryId: 'pharmacist' },
   'blood-transfusions': { prefix: 'BLOOD_TRANSFUSIONS', entryNodeId: 'bt-start',          categoryId: 'pharmacist' },
-  'mesenteric-ischemia': { prefix: 'MESENTERIC_ISCHEMIA', entryNodeId: 'ami-start',      categoryId: 'gastroenterology' },
+  'mesenteric-ischemia': { prefix: 'MESENTERIC_ISCHEMIA', entryNodeId: 'ami-start',      categoryId: 'trauma-surg' },
   'pericarditis':       { prefix: 'PERICARDITIS',        entryNodeId: 'pericarditis-start', categoryId: 'cardiology' },
   'typhoid-fever':      { prefix: 'TYPHOID_FEVER',       entryNodeId: 'typhoid-start',      categoryId: 'infectious-disease' },
   'lower-gi-bleed':     { prefix: 'LOWER_GI_BLEED',      entryNodeId: 'lgib-start',         categoryId: 'gastroenterology' },
