@@ -1530,6 +1530,36 @@ const TOOLBAR_CONFIGS = {
         { id: 'cam', label: 'CAM', icon: '📊', action: 'jump', target: 'mcp-delirium-check' },
         { id: 'workup', label: 'Workup', icon: '🧪', action: 'jump', target: 'mcp-delirium-workup' },
     ],
+    'psych-triage': [
+        { id: 'agitated', label: 'Agitated', icon: '🚨', action: 'jump', target: 'pst-agitated' },
+        { id: 'suicidal', label: 'Suicidal', icon: '💔', action: 'jump', target: 'pst-suicidal' },
+        { id: 'psychotic', label: 'Psychotic', icon: '🌀', action: 'jump', target: 'pst-psychotic' },
+        { id: 'withdrawal', label: 'Withdrawal', icon: '🍷', action: 'jump', target: 'pst-withdrawal' },
+    ],
+    'acute-psychosis': [
+        { id: 'workup', label: 'Workup', icon: '🧪', action: 'jump', target: 'ap-workup' },
+        { id: 'nmda', label: 'Anti-NMDA', icon: '🧠', action: 'jump', target: 'ap-nmda' },
+        { id: 'delirium', label: 'Delirium', icon: '🌫️', action: 'jump', target: 'ap-delirium' },
+        { id: 'treatment', label: 'Rx', icon: '💊', action: 'jump', target: 'ap-treatment' },
+    ],
+    'capacity-assessment': [
+        { id: 'aid4', label: '4 Abilities', icon: '⚖️', action: 'jump', target: 'cap-aid4' },
+        { id: 'questions', label: 'Questions', icon: '🗣️', action: 'jump', target: 'cap-questions' },
+        { id: 'ama', label: 'AMA', icon: '🚪', action: 'jump', target: 'cap-ama' },
+        { id: 'document', label: 'Document', icon: '📝', action: 'jump', target: 'cap-documentation' },
+    ],
+    'catatonia': [
+        { id: 'challenge', label: 'Loraz Test', icon: '💉', action: 'jump', target: 'cat-challenge' },
+        { id: 'avoid-ap', label: 'Avoid AP', icon: '🚫', action: 'jump', target: 'cat-avoid-ap' },
+        { id: 'etiology', label: 'Etiology', icon: '🔍', action: 'jump', target: 'cat-etiology' },
+        { id: 'ect', label: 'ECT', icon: '⚡', action: 'jump', target: 'cat-ect' },
+    ],
+    'nms': [
+        { id: 'halt-meds', label: 'Halt Meds', icon: '⛔', action: 'jump', target: 'nms-stop-agents' },
+        { id: 'dantrolene', label: 'Dantrolene', icon: '💉', action: 'jump', target: 'nms-dantrolene' },
+        { id: 'bromocriptine', label: 'Bromo', icon: '💊', action: 'jump', target: 'nms-bromocriptine' },
+        { id: 'vs-ss', label: 'vs SS', icon: '🔀', action: 'jump', target: 'nms-vs-ss' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
