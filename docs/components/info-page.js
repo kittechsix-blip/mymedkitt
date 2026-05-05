@@ -104,6 +104,23 @@ function scrollToCitation(num) {
         setTimeout(() => target.classList.remove('cite-highlight'), 1500);
     }
 }
+function renderInfoImage(container, image) {
+    const figure = document.createElement('figure');
+    figure.className = 'wizard-image-figure';
+    const img = document.createElement('img');
+    img.src = image.src;
+    img.alt = image.alt;
+    img.className = 'wizard-image';
+    img.loading = 'lazy';
+    figure.appendChild(img);
+    if (image.caption) {
+        const caption = document.createElement('figcaption');
+        caption.className = 'wizard-image-caption';
+        caption.textContent = image.caption;
+        figure.appendChild(caption);
+    }
+    container.appendChild(figure);
+}
 // -------------------------------------------------------------------
 // Pictograph Renderer
 // -------------------------------------------------------------------
@@ -267,6 +284,9 @@ export function showInfoModal(pageId) {
     // Body
     const body = document.createElement('div');
     body.className = 'modal-body info-modal-body';
+    if (page.image) {
+        renderInfoImage(body, page.image);
+    }
     const isStopPage = page.id.endsWith('-stop');
     for (const section of page.sections) {
         let sectionEl;
@@ -305,6 +325,9 @@ export function showInfoModal(pageId) {
             h.className = 'info-page-section-heading';
             h.textContent = section.heading;
             sectionEl.appendChild(h);
+        }
+        if (section.image) {
+            renderInfoImage(sectionEl, section.image);
         }
         if (section.body) {
             const lines = section.body.split('\n');

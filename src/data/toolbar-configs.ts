@@ -1567,6 +1567,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'capacity-assessment': [
     { id: 'aid4', label: '4 Abilities', icon: '⚖️', action: 'jump', target: 'cap-aid4' },
     { id: 'questions', label: 'Questions', icon: '🗣️', action: 'jump', target: 'cap-questions' },
+    { id: 'illness', label: 'Illness', icon: '🩺', action: 'overlay', target: 'cap-illness' },
     { id: 'ama', label: 'AMA', icon: '🚪', action: 'jump', target: 'cap-ama' },
     { id: 'document', label: 'Document', icon: '📝', action: 'jump', target: 'cap-documentation' },
   ],

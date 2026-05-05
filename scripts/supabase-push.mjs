@@ -386,7 +386,15 @@ if (infoPageIds.length > 0) {
   for (const pid of infoPageIds) {
     const page = allInfoPages[pid];
     if (!page) { console.error(`  Info page not found: ${pid}`); continue; }
-    await supaUpsert('info_pages', { id: pid, ...page });
+    await supaUpsert('info_pages', {
+      id: pid,
+      title: page.title,
+      subtitle: page.subtitle || null,
+      sections: page.sections || [],
+      citations: page.citations || [],
+      shareable: page.shareable ?? false,
+      sort_order: 0,
+    });
     console.log(`  Inserted: ${pid}`);
   }
 }

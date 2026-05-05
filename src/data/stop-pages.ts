@@ -17,6 +17,7 @@ import { STOP_PAGES_10 } from './stop-pages/batch-10.js';
 import { STOP_PAGES_11 } from './stop-pages/batch-11.js';
 import { STOP_PAGES_12 } from './stop-pages/batch-12.js';
 import { STOP_PAGES_13 } from './stop-pages/batch-13.js';
+import { STOP_PAGES_14 } from './stop-pages/batch-14.js';
 
 export const STOP_PAGES: Record<string, InfoPage> = {
   ...STOP_PAGES_01,
@@ -32,6 +33,7 @@ export const STOP_PAGES: Record<string, InfoPage> = {
   ...STOP_PAGES_11,
   ...STOP_PAGES_12,
   ...STOP_PAGES_13,
+  ...STOP_PAGES_14,
 };
 
 export function getAllStopPages(): InfoPage[] {

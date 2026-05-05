@@ -126,8 +126,8 @@ export const FTI_NODES: DecisionNode[] = [
     images: [
       {
         src: 'images/fingertip-infections/felon.jpg',
-        alt: 'Felon — tense erythematous distal pulp space abscess',
-        caption: 'Felon: tense, glove-tight pulp with throbbing pain. Septated compartments raise pressure rapidly. (CC, Wikimedia Commons)',
+        alt: 'Felon of the thumb with infection in the distal pulp space',
+        caption: 'Felon / pulp-space infection of the thumb. James Heilman, MD, CC BY-SA 3.0, Wikimedia Commons.',
       },
     ],
     next: 'fti-disposition-outpatient',

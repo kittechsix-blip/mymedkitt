@@ -11,6 +11,7 @@ interface InfoPageRow {
   id: string;
   title: string;
   subtitle: string;
+  image?: InfoPage['image'];
   sections: InfoPage['sections'];
   citations: InfoPage['citations'];
   shareable: boolean;
@@ -30,6 +31,7 @@ function mapRow(row: InfoPageRow): InfoPage {
     id: row.id,
     title: row.title,
     subtitle: row.subtitle,
+    ...(row.image ? { image: row.image } : {}),
     sections: row.sections,
     citations: row.citations,
     ...(row.shareable ? { shareable: true } : {}),
@@ -70,8 +72,31 @@ async function mergeHardcodedInfoPages(): Promise<void> {
   const stopMod = await import('../data/stop-pages.js');
   const hardcoded = [...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()] as InfoPage[];
   for (const page of hardcoded) {
-    if (!infoPageMap.has(page.id)) {
+    const existing = infoPageMap.get(page.id);
+    if (!existing) {
       infoPageMap.set(page.id, page);
+    } else {
+      let changed = false;
+      let merged = existing;
+
+      if (!existing.image && page.image) {
+        merged = { ...merged, image: page.image };
+        changed = true;
+      }
+
+      const sections = existing.sections.map((section, idx) => {
+        const hardcodedSection = page.sections[idx];
+        const hardcodedImage = hardcodedSection?.image;
+        if (!section.image && hardcodedImage) {
+          changed = true;
+          return { ...section, image: hardcodedImage, body: hardcodedSection.body };
+        }
+        return section;
+      });
+
+      if (changed) {
+        infoPageMap.set(page.id, { ...merged, sections });
+      }
     }
   }
 }

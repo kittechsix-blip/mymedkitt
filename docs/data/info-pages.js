@@ -18049,6 +18049,41 @@ const ACUTE_PANCREATITIS_SUMMARY = {
 // Peripheral Neuropathy
 // -------------------------------------------------------------------
 // -------------------------------------------------------------------
+// Capacity Assessment
+// -------------------------------------------------------------------
+const CAP_ILLNESS_TOOL = {
+    id: 'cap-illness',
+    title: 'Illness Appreciation Check',
+    subtitle: 'Capacity bedside tool + MacCAT-T cue',
+    sections: [
+        {
+            heading: 'Use Case',
+            body: 'Use when the key question is whether the patient understands and appreciates the illness driving the specific decision. Capacity is decision-specific, not a global legal competency ruling.',
+        },
+        {
+            heading: 'Ask And Document Verbatim',
+            body: '**Illness / problem:** "What illness or medical problem do you think you have?"\n\n**Concern:** "What are we worried could happen?"\n\n**Recommendation:** "What treatment or test are we recommending?"\n\n**Refusal consequence:** "What could happen if you decline?"\n\n**Personal application:** "How do those risks apply to you personally?"',
+        },
+        {
+            heading: 'Red Flags',
+            body: '• Can repeat the diagnosis but denies it applies to them\n• Explains risks in general terms but not personal consequences\n• Decision is driven by delusion, hallucination, or fixed false belief\n• Reasoning changes dramatically across repeated questioning\n\nExample: "I know you say I have sepsis, but I am not sick and nothing bad can happen to me." That may be an appreciation deficit, not just disagreement.',
+        },
+        {
+            heading: 'MacCAT-T',
+            body: 'May use **MacCAT-T** (MacArthur Competence Assessment Tool for Treatment) when the case is borderline, high-stakes, psychiatric, contested, or medicolegally complex. It structures the same core domains: understanding, appreciation, reasoning, and expressing a choice. It supports clinical judgment but does not replace the treating physician\'s capacity determination.',
+        },
+        {
+            heading: 'Link Back To The Tree',
+            body: 'For the full four-abilities framework, use [4 Abilities](#/node/cap-aid4). For structured questions, use [Assessment Questions](#/node/cap-questions). For charting language, use [Documentation](#/node/cap-documentation).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Appelbaum PS. Clinical practice: Assessment of patients\' competence to consent to treatment. N Engl J Med 2007;357:1834-40.' },
+        { num: 2, text: 'Grisso T, Appelbaum PS. Assessing Competence to Consent to Treatment: A Guide for Physicians and Other Health Professionals. Oxford University Press, 1998.' },
+        { num: 3, text: 'Palmer BW, Harmell AL. Assessment of healthcare decision-making capacity. Arch Clin Neuropsychol 2016;31:530-40.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Ankle Fractures
 // -------------------------------------------------------------------
 const AF_STEPS_SUMMARY = {
@@ -18212,26 +18247,56 @@ const FTI_PHOTO_ATLAS = {
     sections: [
         {
             heading: 'Acute Paronychia',
+            image: {
+                src: 'images/fingertip-infections/paronychia-acute.jpg',
+                alt: 'Acute paronychia with erythema and pus along the lateral nail fold',
+                caption: 'Acute paronychia: tender, erythematous nail fold with visible pus collection. (CC BY-SA, Wikimedia Commons)',
+            },
             body: 'Erythema and swelling localized to the nail fold, often with fluctuance or visible pus tracking under the cuticle. Most commonly Staph aureus.\n\n*Photo displayed inline on the [acute paronychia drainage node](#/node/fti-paronychia-acute).*',
         },
         {
             heading: 'Chronic Paronychia',
+            image: {
+                src: 'images/fingertip-infections/paronychia-chronic.jpg',
+                alt: 'Chronic paronychia with absent cuticle and boggy proximal nail fold',
+                caption: 'Chronic paronychia: absent cuticle, boggy proximal nail fold. (CC BY-SA, Wikimedia Commons)',
+            },
             body: 'Multiple digits, absent cuticle, boggy non-tender fold, frequent water exposure. Inflammatory not infectious.\n\n*Photo displayed inline on the [chronic paronychia node](#/node/fti-paronychia-chronic).*',
         },
         {
             heading: 'Felon',
+            image: {
+                src: 'images/fingertip-infections/felon.jpg',
+                alt: 'Felon of the thumb with infection in the distal pulp space',
+                caption: 'Felon / pulp-space infection of the thumb. James Heilman, MD, CC BY-SA 3.0, Wikimedia Commons.',
+            },
             body: 'Tense glove-tight pulp, throbbing pain out of proportion, often after minor puncture. Closed septated compartment of the distal pulp.\n\n*Photo displayed inline on the [felon I&D node](#/node/fti-felon-drainage).*',
         },
         {
             heading: 'Herpetic Whitlow',
+            image: {
+                src: 'images/fingertip-infections/herpetic-whitlow.jpg',
+                alt: 'Herpetic whitlow with grouped clear vesicles on erythematous base',
+                caption: 'Herpetic whitlow: grouped clear vesicles on an erythematous base. (CC BY-SA, Wikimedia Commons)',
+            },
             body: 'Grouped clear vesicles on an erythematous base, burning prodrome, history of orofacial HSV exposure. **Do not incise.**\n\n*Photo displayed inline on the [herpetic whitlow node](#/node/fti-whitlow).*',
         },
         {
             heading: 'Subungual Hematoma',
+            image: {
+                src: 'images/fingertip-infections/subungual-hematoma.jpg',
+                alt: 'Subungual hematoma with dark blood under the nail plate',
+                caption: 'Subungual hematoma: dark blood under the nail after trauma. (CC BY-SA, Wikimedia Commons)',
+            },
             body: 'Dark red/blue/black under nail, recent trauma, throbbing pressure. Trephinate based on pain, not percentage.\n\n*Photo displayed inline on the [trephination node](#/node/fti-trephination).*',
         },
         {
             heading: 'Subungual Abscess',
+            image: {
+                src: 'images/fingertip-infections/subungual-abscess.jpg',
+                alt: 'Subungual abscess with yellow-white pus visible under the nail plate',
+                caption: 'Subungual abscess: yellow-white pus under the nail, often extending from paronychia. (CC BY-SA, Wikimedia Commons)',
+            },
             body: 'Yellow-white pus under nail, no clear trauma, often associated with paronychia. Drain by lifting fold or partial nail removal.\n\n*Photo displayed inline on the [subungual abscess node](#/node/fti-subungual-abscess).*',
         },
     ],
@@ -18848,6 +18913,8 @@ export const INFO_PAGES = {
     'ami-ct-findings': AMI_CT_FINDINGS,
     // Peripheral Neuropathy
     'pn-steps': PN_STEPS_SUMMARY,
+    // Capacity Assessment
+    'cap-illness': CAP_ILLNESS_TOOL,
     // Ankle Fractures
     'af-steps': AF_STEPS_SUMMARY,
     // Hand Infections

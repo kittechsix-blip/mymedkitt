@@ -3,7 +3,7 @@
 // Data loaded via info-service (Supabase → IndexedDB → hardcoded fallback).
 
 import { getInfoPage } from '../services/info-service.js';
-import type { InfoPage, Pictograph } from '../data/info-pages.js';
+import type { InfoPage, InfoPageImage, Pictograph } from '../data/info-pages.js';
 
 // -------------------------------------------------------------------
 // Body Text with Clickable Footnotes
@@ -108,6 +108,27 @@ function scrollToCitation(num: string): void {
     target.classList.add('cite-highlight');
     setTimeout(() => target.classList.remove('cite-highlight'), 1500);
   }
+}
+
+function renderInfoImage(container: HTMLElement, image: InfoPageImage): void {
+  const figure = document.createElement('figure');
+  figure.className = 'wizard-image-figure';
+
+  const img = document.createElement('img');
+  img.src = image.src;
+  img.alt = image.alt;
+  img.className = 'wizard-image';
+  img.loading = 'lazy';
+  figure.appendChild(img);
+
+  if (image.caption) {
+    const caption = document.createElement('figcaption');
+    caption.className = 'wizard-image-caption';
+    caption.textContent = image.caption;
+    figure.appendChild(caption);
+  }
+
+  container.appendChild(figure);
 }
 
 // -------------------------------------------------------------------
@@ -295,6 +316,10 @@ export function showInfoModal(pageId: string): boolean {
   const body = document.createElement('div');
   body.className = 'modal-body info-modal-body';
 
+  if (page.image) {
+    renderInfoImage(body, page.image);
+  }
+
   const isStopPage = page.id.endsWith('-stop');
 
   for (const section of page.sections) {
@@ -339,6 +364,10 @@ export function showInfoModal(pageId: string): boolean {
       h.className = 'info-page-section-heading';
       h.textContent = section.heading;
       sectionEl.appendChild(h);
+    }
+
+    if (section.image) {
+      renderInfoImage(sectionEl, section.image);
     }
 
     if (section.body) {
